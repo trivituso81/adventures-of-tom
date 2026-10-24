@@ -489,10 +489,9 @@ function drawActor(a) {
     const p=position(a);
     const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
     const bob=Math.round(Math.sin(elapsedTime*3))*1;
-    const d=monsterDef(a),s=a.mscale||1,w=d.sprite[0].length*s,h=d.sprite.length*s;   // mscale: drawn bigger (a story monster)
-    ellipse(cx,base+1,Math.round(w*.47),5*s,'#2f493640');
-    drawSprite(d.sprite,d.pal,cx-Math.round(w/2),base-h+bob,s);
-    if(typeof drawActorExtra==='function') drawActorExtra(a,cx,base-h+bob,w,h);   // engine/story.js: a carried pie tin, a pie-tin crown
+    const d=monsterDef(a),w=d.sprite[0].length,h=d.sprite.length;
+    ellipse(cx,base+1,Math.round(w*.47),5,'#2f493640');
+    drawSprite(d.sprite,d.pal,cx-Math.round(w/2),base-h+bob,1);
     return;
   }
   if(a.isPlayer) { drawSheetActor(a,OW.tom); return; }

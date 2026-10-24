@@ -82,17 +82,12 @@ function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
   followers.push(f);
   if(silent) return;
   sfx.levelChime();
-  // Shared story XP (engine/progress.js b6Sync): say so when they caught up with Tom while at home.
-  const sp=b6SpLeft(m),caught=m.caughtUp; m.caughtUp=0;
-  b6Badge();
-  showToast(m.name+' joins the party!'+(caught?' Caught up to Lv '+m.level+'.':'')+(sp&&b6Stampable(m)?' '+sp+' Stamp Point'+(sp>1?'s':'')+' to spend.':''),caught||sp?3.4:2.6);
+  showToast(m.name+' joins the party!',2.6);
   openDialog(m.name,[RECRUIT_TALK[m.id].yes]);
 }
 
 // ---------- Saving: three named slots plus an autosave, in this browser's storage ----------
 const SAVE_SLOTS=['auto','1','2','3'];
-// Full game saves. The demo (demo/) keeps the original le-save-* keys, so the two never mix.
-const SAVE_PREFIX='aot-save-';
 function saveSnapshot() {
   const flags={};
   for(const [id,map] of Object.entries(worlds)) { flags[id]={}; for(const n of map.npcs) if(n.visitedOnce) flags[id][n.name]=true; }
@@ -100,29 +95,14 @@ function saveSnapshot() {
   const monsters={}; for(const n of allMonsters()) monsters[n.monster]={tier:n.tier,maxHp:n.maxHp};
   return {v:2,when:Date.now(),map:currentMap.id,x:player.x,y:player.y,facing:player.facing,visited:[...visited],allVisited,bag:bag.slice(),coins,time:Math.floor(playTime),
     grump:grump?{tier:grump.tier,maxHp:grump.maxHp}:null,monsters,flags,
-    // party: who is in it (with levels for the save list); members: all eight, in the party or not (F6).
-    party:party.map(m=>({id:m.id,level:m.level,xp:m.xp,hp:m.hp,maxHp:m.maxHp})),
-    members:ALL_MEMBERS().map(b6SaveMember),
-    opts:typeof b7Opts==='function'?b7Opts():null};   // difficulty, battle speed, High-Five (engine/feel.js)
-}
-// SAVE_CACHE holds the latest copy of every slot. Browser storage alone is not enough: Safari can throw it away when
-// the app closes, so engine/cloud-save.js also keeps each slot with the player's Claude account and fills this cache.
-const SAVE_CACHE={};
-function saveRaw(slot) {
-  if(typeof SAVE_CACHE[slot]==='string') return SAVE_CACHE[slot];
-  try { return localStorage.getItem(SAVE_PREFIX+slot); } catch(e) { return null; }
+    party:party.map(m=>({id:m.id,level:m.level,xp:m.xp,next:m.next,wins:m.wins,hp:m.hp,maxHp:m.maxHp,mp:m.mp,maxMp:m.maxMp,power:m.power,base:Object.assign({},m.base),equipment:Object.assign({},m.equipment)}))};
 }
 function saveGame(slot,quiet=false) {
-  let raw;
-  try { raw=JSON.stringify(saveSnapshot()); } catch(e) { if(!quiet) showToast('Could not save here.',2.5); return false; }
-  SAVE_CACHE[slot]=raw;
-  let local=true; try { localStorage.setItem(SAVE_PREFIX+slot,raw); } catch(e) { local=false; }
-  const cloud=typeof cloudPut==='function'&&cloudPut(slot,raw);
-  if(!local&&!cloud) { if(!quiet) showToast('Could not save here.',2.5); return false; }
+  try { localStorage.setItem('le-save-'+slot,JSON.stringify(saveSnapshot())); } catch(e) { if(!quiet) showToast('Could not save here.',2.5); return false; }
   if(!quiet) { sfx.pickup(); showToast(slot==='auto'?'Autosaved.':'Saved to slot '+slot+'.',2); }
   return true;
 }
-function readSave(slot) { try { const raw=saveRaw(slot); return raw?JSON.parse(raw):null; } catch(e) { return null; } }
+function readSave(slot) { try { const raw=localStorage.getItem('le-save-'+slot); return raw?JSON.parse(raw):null; } catch(e) { return null; } }
 function loadGame(slot) {
   const sv=readSave(slot); if(!sv) return false;
   const allMembers={tom:hero,grace,rose,amy,deedee,boppy,tnb,nara};
@@ -130,19 +110,15 @@ function loadGame(slot) {
   for(const m of party.slice()) if(m!==hero&&m!==grace&&m!==rose) recruitLeave(m,true);
   // Grace and Rose stay home while Tom is in Los Angeles; the save says whether they were in the party.
   setGirlsAway(!sv.party.some(p=>p.id==='grace'));
-  // Since F6 every member is saved (sv.members); older saves only had the party.
-  if(sv.members) for(const sm of sv.members) b6LoadMember(allMembers[sm.id],sm);
   for(const pm of sv.party) {
     const m=allMembers[pm.id]; if(!m) continue;
-    if(!sv.members) { Object.assign(m,{level:pm.level,xp:pm.xp,wins:pm.wins||0,hp:pm.hp,maxHp:pm.maxHp}); if(pm.equipment) m.equipment=Object.assign({},pm.equipment); }
+    Object.assign(m,{level:pm.level,xp:pm.xp,next:pm.next,wins:pm.wins,hp:pm.hp,maxHp:pm.maxHp,mp:pm.mp,maxMp:pm.maxMp,power:pm.power});
+    m.base=Object.assign({},pm.base); m.equipment=Object.assign({},pm.equipment);
     if(m!==hero&&m!==grace&&m!==rose&&!inParty(m)) {
       for(const [id,map] of Object.entries(worlds)) { const npc=map.npcs.find(n=>n.name===m.name); if(npc) { recruitJoin(m,npc,true,map); break; } }
     }
   }
-  if(sv.opts&&typeof b7ApplyOpts==='function') b7ApplyOpts(sv.opts);
   bag.length=0; bag.push(...sv.bag);
-  b6AfterLoad(sv);   // old gear to three slots, starter tools, shared XP, stamps (engine/progress.js)
-  if(typeof syncHeroHat==='function') syncHeroHat();
   coins=typeof sv.coins==='number'?sv.coins:25;
   playTime=sv.time||0;
   visited.clear(); for(const id of sv.visited) visited.add(id);
@@ -169,7 +145,7 @@ function saveSummary(sv) {
   return (worlds[sv.map]?worlds[sv.map].name:'Town')+' \u00b7 Lv '+lead.level+' \u00b7 '+sv.party.length+' in party \u00b7 '+(sv.coins!=null?sv.coins+' coins \u00b7 ':'')+d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
 }
 function renderSaves(body) {
-  $('menu-foot').textContent=(typeof cloudOn==='function'&&cloudOn()?'Saves are kept with your Claude account, so closing Safari keeps them.':'Saves live in this browser on this device.')+' Autosave happens at every door and after each battle.';
+  $('menu-foot').textContent='Saves live in this browser on this device. Autosave happens at every door and after each battle.';
   const list=document.createElement('div'); list.className='item-list';
   for(const slot of SAVE_SLOTS) {
     const sv=readSave(slot);

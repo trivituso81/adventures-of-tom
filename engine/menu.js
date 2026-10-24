@@ -1,27 +1,24 @@
 'use strict';
-// engine/menu.js — The pause menu: PARTY, ITEMS, GEAR, STATUS, STAMPS, LOAD, OPTIONS (engine/feel.js), QUIT. (STATUS and STAMPS are drawn by engine/progress.js.)
+// engine/menu.js — The pause menu: STATUS, GEAR, ITEMS, SAVE.
 // Section tabs and character tabs share one tab style. STATUS and GEAR are per character (character row shown);
 // ITEMS and SAVE are party-wide (character row hidden; items pick their target inline).
 // Controls: tap; or arrows/WASD move focus, Enter/A selects, Esc/B goes back, Q/E (L2/R2, R1) switch character.
 // Layout follows the Final Fantasy IV Pixel Remaster menu: command list on the left (with play time and coins
 // under it), the party roster on the right, the location line, then a hint bar with Rotate, Music, Sound, Close.
-const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'stamps',label:'Stamps'},{id:'saves',label:'Load'},{id:'options',label:'Options'},{id:'quit',label:'Quit'}];
-// Saving happens from the SAVE button on the map HUD (openSave), which shows just the save popup.
-const PER_CHAR_TABS=['status','gear','stamps'];
+const MENU_TABS=[{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'saves',label:'Save'},{id:'quit',label:'Quit'},{id:'back',label:'Back'}];
 // Character portraits for the roster. Put an image path per id (e.g. tom:'portraits/tom.png?v=3'); empty shows a placeholder.
 const PORTRAITS={tom:'portraits/tom.png?v=3',amy:'portraits/amy.png?v=3',grace:'portraits/grace.png?v=3',deedee:'portraits/deedee.png?v=4',boppy:'portraits/boppy.png?v=3',nara:'portraits/nara.png?v=3',tnb:'portraits/tnb.png?v=3',rose:'portraits/rose.png?v=3'};
 let playTime=0;
-// Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
-const GEAR_KEYS=STAT_NAMES;
-const STAT_SHORT={hp:'HP',pow:'POW',grit:'GRIT',warmth:'WARM',cool:'COOL',pep:'PEP'};
-// BEST GEAR scoring: stat points (HP counts less, it comes in bigger numbers); charms by their perk (b6PerkScore).
-const GEAR_WEIGHT={hp:.2,pow:1,grit:1,warmth:1,cool:1,pep:1};
+const GEAR_KEYS=STAT_NAMES.concat(['Guard']);
+const STAT_SHORT={Curiosity:'CUR',Charm:'CHA',Pace:'PACE',Luck:'LUCK',Guard:'GUARD'};
+// BEST GEAR scoring. Guard soaks every hit, Curiosity adds damage, Luck adds crits, Pace helps running, Charm is charm.
+const GEAR_WEIGHT={Guard:3,Curiosity:2,Luck:2,Pace:1,Charm:1};
 const ITEM_FILTERS=[{id:'all',label:'ALL'},{id:'heal',label:'HEAL'},{id:'battle',label:'BATTLE'},{id:'gear',label:'GEAR'},{id:'keep',label:'KEEPSAKE'}];
-let menuSaving=false,menuQuit=false,menuItem=null,menuFilter='all',menuConfirm=null,menuConfirmTimer=0,menuKeyNav=false,menuFocusNext=null;
+let menuQuit=false,menuItem=null,menuFilter='all',menuConfirm=null,menuConfirmTimer=0,menuKeyNav=false,menuFocusNext=null;
 menuTab='home';
 
-const gearVal=(it,k)=>!it?0:((it.stats&&it.stats[k])||0);
-const gearScore=it=>!it?0:GEAR_KEYS.reduce((a,k)=>a+gearVal(it,k)*GEAR_WEIGHT[k],0)+b6PerkScore(it.perk);
+const gearVal=(it,k)=>!it?0:(k==='Guard'?(it.def||0):((it.bonus&&it.bonus[k])||0));
+const gearScore=it=>GEAR_KEYS.reduce((a,k)=>a+gearVal(it,k)*GEAR_WEIGHT[k],0);
 const itemCat=it=>it.slot?'gear':(fieldUsable(it)?'heal':(battleUsable(it)?'battle':'keep'));
 const CAT_ORDER={heal:0,battle:1,gear:2,keep:3};
 function gearDiff(m,id,slot) {
@@ -42,7 +39,7 @@ const hasUpgrade=m=>SLOTS.some(s=>bestFor(m,s));
 function gearTotals(m,swapSlot,swapId) {
   const t={};
   for(const k of GEAR_KEYS) {
-    let v=statTotal(m,k);
+    let v=k==='Guard'?defTotal(m):statTotal(m,k);
     if(swapSlot!=null) v+=gearVal(swapId?items[swapId]:null,k)-gearVal(m.equipment[swapSlot]?items[m.equipment[swapSlot]]:null,k);
     t[k]=v;
   }
@@ -56,13 +53,9 @@ function btn(cls,key,html,fn) {
   if(fn) b.addEventListener('click',e=>{ e.stopPropagation(); fn(e); });
   return b;
 }
-// Stat changes as chips; a charm (perk) shows what its perk does instead.
-function diffChips(diffs,cur,it) {
+function diffChips(diffs,cur) {
   const w=el('span','chips-inline');
-  const perk=it&&it.perk?b6PerkText(it.perk):'';
-  if(perk) { const c=el('span','dchip perk'); c.textContent='★ '+perk; w.appendChild(c); }
-  else if(it===null&&cur&&cur.perk) { const c=el('span','dchip down'); c.textContent='No perk'; w.appendChild(c); }
-  if(!diffs.length) { if(!perk&&!(it===null&&cur&&cur.perk)) w.appendChild(el('span','dchip same',cur?'Same stats':'No stats')); return w; }
+  if(!diffs.length) { w.appendChild(el('span','dchip same',cur?'Same stats':'No stats')); return w; }
   for(const [k,v] of diffs) { const c=el('span','dchip '+(v>0?'up':'down')); c.textContent=(v>0?'▲':'▼')+signed(v)+' '+STAT_SHORT[k]; w.appendChild(c); }
   return w;
 }
@@ -70,10 +63,9 @@ function miniPortrait(m) { const c=document.createElement('canvas'); c.width=24;
 function bar(frac,color) { const b=el('span','mbar'); const i=el('i'); i.style.width=Math.max(0,Math.min(100,Math.round(frac*100)))+'%'; if(color) i.style.background=color; b.appendChild(i); return b; }
 
 // ---------- Actions ----------
-// A charm with `hat` shows on Tom's head in town (a color, or the sunhat color for the drawn hats).
 function syncHeroHat() {
-  const it=hero.equipment.Charm&&items[hero.equipment.Charm],h=it&&it.hat;
-  palettes.player.hat=h?(String(h)[0]==='#'?h:'#dac487'):null;
+  const hat=hero.equipment.Head;
+  palettes.player.hat=hat?(hat==='scrap'?'#f5d389':'#dac487'):null;
 }
 function menuWear(m,id) {
   const it=items[id];
@@ -98,7 +90,7 @@ function equipBest(m) {
   if(!put.length) { sfx.nope(); showToast(m.name+' is already wearing the best gear in the pockets.',2.2); return; }
   sfx.equip(); syncHeroHat();
   const after=gearTotals(m);
-  const ch=GEAR_KEYS.map(k=>[k,after[k]-before[k]]).filter(([,v])=>v).map(([k,v])=>signed(v)+' '+STAT_LABEL[k]).join(', ');
+  const ch=GEAR_KEYS.map(k=>[k,after[k]-before[k]]).filter(([,v])=>v).map(([k,v])=>signed(v)+' '+k).join(', ');
   showToast(m.name+' puts on '+put.join(', ')+'.'+(ch?' '+ch+'.':''),3.2);
   menuSlot=null; renderMenu();
 }
@@ -118,22 +110,20 @@ function askConfirm(key) {
 
 // ---------- Render ----------
 function renderMenu() {
-  if(menuSaving) { renderSavePop(); return; }
   if(menuTab!=='home'&&!MENU_TABS.some(t=>t.id===menuTab)) menuTab='home';
   if(menuChar>=party.length) menuChar=0;
   const ae=document.activeElement;
   const keep=menuFocusNext||(menuKeyNav&&ae&&ae.dataset?ae.dataset.k:null);
   menuFocusNext=null;
-  const m=party[menuChar],perChar=PER_CHAR_TABS.includes(menuTab);
+  const m=party[menuChar],perChar=menuTab==='status'||menuTab==='gear';
   const body=$('menu-body'),top=body.scrollTop;
   body.innerHTML='';
 
   // Command list.
   const cmds=$('menu-cmds'); cmds.innerHTML='';
   for(const t of MENU_TABS) {
-    const b=btn('mcmd'+(t.id===menuTab?' active':''),'cmd-'+t.id,t.label,()=>{ if(t.id==='quit') openQuit(); else setMenuTab(t.id); });
-    if(t.id!=='quit') { b.setAttribute('role','tab'); b.setAttribute('aria-selected',t.id===menuTab); }
-    if(t.id==='stamps'&&party.some(b6Stampable)) b.appendChild(el('i','cmd-dot'));   // Stamp Points waiting
+    const b=btn('mcmd'+(t.id===menuTab?' active':''),'cmd-'+t.id,t.label,()=>{ if(t.id==='back') menuBack(true); else if(t.id==='quit') openQuit(); else setMenuTab(t.id); });
+    if(t.id!=='back'&&t.id!=='quit') { b.setAttribute('role','tab'); b.setAttribute('aria-selected',t.id===menuTab); }
     cmds.appendChild(b);
   }
   $('menu-time').textContent=fmtTime(playTime);
@@ -148,25 +138,21 @@ function renderMenu() {
     const copy=el('span','ptab-copy');
     const nm=el('span','ptab-name'); nm.textContent=pm.name.toUpperCase(); copy.appendChild(nm);
     copy.appendChild(bar(pm.hp/pm.maxHp,pm.hp/pm.maxHp<=.25?'#c8553d':null));
-    copy.appendChild(bar(pm.level>=B6.maxLevel?1:pm.xp/B6.xpPerLevel,'#c9a24d'));
+    copy.appendChild(bar(pm.mp/pm.maxMp,'#6c8fd8'));
     b.appendChild(copy);
     if(menuTab==='gear'&&hasUpgrade(pm)) b.appendChild(el('i','up-badge','\u25B2'));
-    if(menuTab==='stamps'&&b6Stampable(pm)) b.appendChild(el('i','up-badge sp','\u2605'));
     pick.appendChild(b);
   });
 
   if(menuTab==='home') renderHome(body);
   else if(menuTab==='status') renderStatusTab(body,m);
   else if(menuTab==='gear') renderGearTab(body,m);
-  else if(menuTab==='stamps') renderStampsTab(body,m);
   else if(menuTab==='items') renderItemsTab(body);
-  else if(menuTab==='options') b7RenderOptions(body);   // engine/feel.js: difficulty, battle speed, High-Five
   else renderSaveTab(body);
   $('menu-foot').hidden=menuTab==='home';
 
   body.scrollTop=top;
   renderQuit();
-  b6Badge();
   if(keep) {
     const f=document.querySelector('#menu [data-k="'+keep+'"]')||document.querySelector('#menu .mcmd.active')||document.querySelector('#menu .mcmd');
     if(f) { f.focus({preventScroll:true}); f.scrollIntoView({block:'nearest'}); }
@@ -203,10 +189,10 @@ function renderHome(body) {
     const st=el('span','r-stats');
     const line=(lbl,val,cls)=>{ const l=el('span','r-line'+(cls?' '+cls:'')); l.appendChild(el('span','r-lbl',lbl)); const v=el('span','r-val'); v.textContent=val; l.appendChild(v); st.appendChild(l); };
     line('HP',p.hp+' / '+p.maxHp,p.hp<=0?'ko':(p.hp/p.maxHp<=.25?'low':''));
+    line('MP',p.mp+' / '+p.maxMp);
     line('Lv.',String(p.level));
-    { const sp=b6SpLeft(p); line('Stamps',sp?sp+' SP':'—',sp&&b6Stampable(p)?'gold':''); }
     row.appendChild(st);
-    const nx=el('span','r-next'); nx.appendChild(el('span','r-lbl','Next level in')); const nv=el('span','r-val'); nv.textContent=p.level>=B6.maxLevel?'MAX':Math.max(0,B6.xpPerLevel-p.xp); nx.appendChild(nv);
+    const nx=el('span','r-next'); nx.appendChild(el('span','r-lbl','Next level in')); const nv=el('span','r-val'); nv.textContent=Math.max(0,p.next-p.xp); nx.appendChild(nv);
     row.appendChild(nx);
     list.appendChild(row);
   });
@@ -236,7 +222,7 @@ addEventListener('resize',()=>{ if(!$('menu').hidden) sizeRoster(); });
 
 function setMenuTab(id) {
   if(menuTab!==id) sfx.tab();
-  menuTab=id; menuSlot=null; menuItem=null; menuConfirm=null; if(typeof b6Sure!=='undefined') b6Sure=null;
+  menuTab=id; menuSlot=null; menuItem=null; menuConfirm=null;
   $('menu-body').scrollTop=0; menuFocusNext=menuKeyNav?'cmd-'+id:null;
   renderMenu();
 }
@@ -247,15 +233,67 @@ function setMenuChar(i) {
   renderMenu();
 }
 function menuCycleChar(d) {
-  if(!PER_CHAR_TABS.includes(menuTab)||party.length<2) return;
+  if(!(menuTab==='status'||menuTab==='gear')||party.length<2) return;
   setMenuChar((menuChar+d+party.length)%party.length);
 }
 
-// STATUS and STAMPS: renderStatusTab and renderStampsTab in engine/progress.js.
+// STATUS: bars, stats, moves.
+function renderStatusTab(body,m) {
+  $('menu-foot').textContent='Green numbers come from what '+m.name+' is wearing. Change gear on the GEAR tab.';
+  const card=el('div','mcard who-card');
+  const land=document.documentElement.classList.contains('landscape');
+  card.appendChild(charPic(m,land?72:88));
+  const vit=el('div','vitals');
+  const hd=el('div','who-head');
+  const tn=el('span','who-title'); tn.textContent=m.title||''; hd.appendChild(tn);
+  const lv=el('span','who-lv'); lv.textContent='LV '+m.level; hd.appendChild(lv);
+  vit.appendChild(hd);
+  card.appendChild(vit);
+  const line=(lbl,cur,max,color,note)=>{
+    const r=el('div','vrow');
+    r.appendChild(el('span','vlbl',lbl));
+    r.appendChild(bar(cur/max,color));
+    const n=el('span','vnum'); n.textContent=cur+' / '+max; r.appendChild(n);
+    vit.appendChild(r);
+  };
+  line('HP',m.hp,m.maxHp,m.hp/m.maxHp<=.25?'#c8553d':null);
+  line('MP',m.mp,m.maxMp,'#6c8fd8');
+  line('XP',m.xp,m.next,'#c9a24d');
+  const note=el('div','stat-note');
+  note.textContent=m.hp<=0?m.name+' is knocked out. A Wake-Up Whistle (ITEMS) or the fountain will help.':
+    (m.hp/m.maxHp<=.25?'Below a quarter. '+m.name+' is kneeling in battle. ':'')+(m.xp<m.next?(m.next-m.xp)+' XP to level '+(m.level+1)+'. ':'')+'Wins: '+m.wins+'.';
+  vit.appendChild(note);
+  body.appendChild(card);
+
+  const notes={Curiosity:'Adds to attack damage.',Charm:'Whether the biscuits respect you.',Pace:'Helps you run from fights.',Luck:'Chance of a critical hit.',Guard:'Soaks damage from every hit.'};
+  const grid=el('div','stat-grid');
+  for(const k of GEAR_KEYS) {
+    const base=k==='Guard'?0:m.base[k],bonus=k==='Guard'?defTotal(m):statBonus(m,k);
+    const c=el('div','stat-cell');
+    c.innerHTML='<div class="slot-label">'+k.toUpperCase()+'</div><div class="stat-value">'+(base+bonus)+(bonus&&k!=='Guard'?'<span class="stat-bonus">+'+bonus+'</span>':'')+'</div><div class="stat-note"></div>';
+    c.querySelector('.stat-note').textContent=notes[k];
+    grid.appendChild(c);
+  }
+  body.appendChild(grid);
+
+  const mv=el('div','mcard');
+  mv.appendChild(el('div','slot-label','MOVES'));
+  const list=el('div','move-list');
+  for(const a of ATTACKS[m.id]||[]) {
+    const locked=a.lvl&&a.lvl>m.level;
+    const r=el('div','move-row'+(locked?' locked':''));
+    const n=el('span','move-name'); n.textContent=locked?'???':a.name; r.appendChild(n);
+    const c=el('span','move-cost'); c.textContent=locked?'LV '+a.lvl:(a.mp?a.mp+' MP':'FREE');
+    if(!locked&&a.mp>m.mp) c.classList.add('short');
+    r.appendChild(c); list.appendChild(r);
+  }
+  mv.appendChild(list);
+  body.appendChild(mv);
+}
 
 // GEAR: stat panel with live preview, BEST GEAR, slots with comparisons.
 function renderGearTab(body,m) {
-  $('menu-foot').textContent='Tool: POW and WARMTH. Outfit: HP, GRIT and COOL. Charm: a perk. ▲ means a better piece is in the pockets.';
+  $('menu-foot').textContent='▲ means a better piece is in the pockets. BEST GEAR counts Guard most, then Curiosity and Luck, then Pace and Charm.';
   const wrap=el('div','gear-wrap');
   const side=el('div','gear-side');
   const panel=el('div','mcard gear-stats'); panel.id='gear-stats';
@@ -282,11 +320,11 @@ function renderGearTab(body,m) {
     const opts=gearOptions(m,slot);
     const row=btn('slot-row'+(open?' open':''),'slot-'+slot,'',()=>{ sfx.tab(); menuSlot=open?null:slot; menuFocusNext=menuKeyNav?(open?'slot-'+slot:(opts[0]?'cand-'+slot+'-'+opts[0]:'slot-'+slot)):null; renderMenu(); });
     row.setAttribute('aria-expanded',open);
-    row.appendChild(el('span','slot-name',SLOT_SHORT[slot]));
+    row.appendChild(el('span','slot-name',slot.toUpperCase()));
     row.appendChild(el('span','item-icon sm',it?it.icon+(it.color?'<i class="swatch" style="background:'+it.color+'"></i>':''):'·'));
     const copy=el('span','item-copy');
     const nm=el('span','item-name'); nm.textContent=it?it.name:'Nothing'; copy.appendChild(nm);
-    const meta=el('span','item-meta'); meta.textContent=it?(bonusText(it)||'No stats. Looks nice.'):(opts.length?opts.length+' in the pockets fit here.':'Open '+SLOT_LABEL[slot]+' slot.'); copy.appendChild(meta);
+    const meta=el('span','item-meta'); meta.textContent=it?(bonusText(it)||'No stats. Looks nice.'):(opts.length?opts.length+' in the pockets fit here.':'Open slot.'); copy.appendChild(meta);
     row.appendChild(copy);
     if(better) row.appendChild(el('span','up-mark','▲'));
     row.appendChild(el('span','chev',open?'▾':'▸'));
@@ -301,7 +339,7 @@ function renderGearTab(body,m) {
       const cc=el('span','item-copy');
       const cn=el('span','item-name'); cn.textContent=o.name+(n>1?' ×'+n:''); cc.appendChild(cn);
       const vs=el('span','item-meta'); vs.textContent=it?'vs '+it.name:'vs nothing'; cc.appendChild(vs);
-      cc.appendChild(diffChips(diffs,it,o));
+      cc.appendChild(diffChips(diffs,it));
       c.appendChild(cc);
       if(oid===better) c.appendChild(el('span','item-tag best','BEST'));
       picker.appendChild(c);
@@ -309,7 +347,7 @@ function renderGearTab(body,m) {
     if(id) {
       const off=btn('item-row cand','off-'+slot,'<span class="item-icon sm">✕</span><span class="item-copy"><span class="item-name">Take it off</span><span class="item-meta">Back to the pockets.</span></span>',()=>menuTakeOff(m,slot));
       off.dataset.prev=''; off.dataset.slot=slot;
-      off.querySelector('.item-copy').appendChild(diffChips(gearDiff(m,null,slot),it,null));
+      off.querySelector('.item-copy').appendChild(diffChips(gearDiff(m,null,slot),it));
       picker.appendChild(off);
     }
     const others=[...new Set(bag.filter(b=>items[b].slot===slot&&!canWear(m,items[b])))];
@@ -333,7 +371,7 @@ function gearPreview(slot,id) {
 
 // ITEMS: filters, stacks, inline targets.
 function renderItemsTab(body) {
-  $('menu-foot').textContent='\u{1FA99} '+coins+' coins. Healing works here; battle items are used from Care & Bag in a fight. Buy and sell at Penny’s Pockets.';
+  $('menu-foot').textContent='\u{1FA99} '+coins+' coins. Healing works here; battle items are used from ITEM in a fight. Buy and sell at Penny’s Pockets.';
   const ids=[...new Set(bag)];
   const count={all:ids.length,heal:0,battle:0,gear:0,keep:0};
   for(const id of ids) count[itemCat(items[id])]++;
@@ -356,7 +394,7 @@ function renderItemsTab(body) {
     const copy=el('span','item-copy');
     const nm=el('span','item-name'); nm.textContent=it.name+(n>1?' ×'+n:''); copy.appendChild(nm);
     const fx=bonusText(it);
-    if(fx||it.slot) { const s=el('span','shop-note '+(cat==='gear'?'up':'fx')); s.textContent=(it.slot?(it.who?memberById(it.who).name+' · ':'')+SLOT_LABEL[it.slot]+(fx?' · ':''):'')+fx.replace('Battle: ',''); copy.appendChild(s); }
+    if(fx||it.slot) { const s=el('span','shop-note '+(cat==='gear'?'up':'fx')); s.textContent=(it.slot?(it.who?memberById(it.who).name+' · ':'')+it.slot+(fx?' · ':''):'')+fx.replace('Battle: ',''); copy.appendChild(s); }
     const d=el('span','item-meta'); d.textContent=it.desc; copy.appendChild(d);
     row.appendChild(copy);
     const act=el('span','shop-actions');
@@ -392,20 +430,20 @@ function targetPicker(id) {
     let tag='',dim=false;
     if(it.slot) {
       const cur=p.equipment[it.slot]?items[p.equipment[it.slot]]:null;
-      const vs=el('span','item-meta'); vs.textContent=cur?'Wears '+cur.name:'No '+SLOT_LABEL[it.slot]; cc.appendChild(vs);
-      cc.appendChild(diffChips(gearDiff(p,id),cur,it));
+      const vs=el('span','item-meta'); vs.textContent=cur?'Wears '+cur.name:'Nothing on '+it.slot.toLowerCase(); cc.appendChild(vs);
+      cc.appendChild(diffChips(gearDiff(p,id),cur));
       if(bestFor(p,it.slot)===id) tag='BEST';
     } else {
-      const cur=p.hp,max=p.maxHp;
+      const mp=!!it.mp,cur=mp?p.mp:p.hp,max=mp?p.maxMp:p.maxHp;
       const r=el('span','vrow tight');
-      r.appendChild(bar(cur/max,cur/max<=.25?'#c8553d':null));
-      const num=el('span','vnum'); num.textContent='HP '+cur+'/'+max; r.appendChild(num);
+      r.appendChild(bar(cur/max,mp?'#6c8fd8':(cur/max<=.25?'#c8553d':null)));
+      const num=el('span','vnum'); num.textContent=(mp?'MP ':'HP ')+cur+'/'+max; r.appendChild(num);
       cc.appendChild(r);
-      if(p.id==='nara'&&it.heal&&!it.dogOk) { tag='WON’T EAT'; dim=true; }
+      if(p.id==='nara'&&(it.heal||it.mp)&&!it.dogOk) { tag='WON’T EAT'; dim=true; }
       else if(it.revive) { tag=p.hp>0?'AWAKE':'+'+Math.ceil(p.maxHp/2)+' HP'; dim=p.hp>0; }
-      else if(p.hp<=0) { tag='KO'; dim=true; }
+      else if(!mp&&p.hp<=0) { tag='KO'; dim=true; }
       else if(cur>=max) { tag='FULL'; dim=true; }
-      else tag='+'+Math.min(it.heal||it.healAll||0,max-cur)+' HP';
+      else tag='+'+Math.min(mp?it.mp:it.heal,max-cur)+(mp?' MP':' HP');
     }
     t.insertBefore(cc,null);
     if(tag) t.appendChild(el('span','item-tag'+(dim?' muted':(tag==='BEST'?' best':'')),tag));
@@ -415,9 +453,9 @@ function targetPicker(id) {
   return box;
 }
 
-// LOAD: loading asks once before acting. (Saving lives in the HUD save popup below.)
+// SAVE: overwrite and load ask once before acting.
 function renderSaveTab(body) {
-  $('menu-foot').textContent=(typeof cloudOn==='function'&&cloudOn()?'Saves are kept with your Claude account, so closing Safari keeps them.':'Saves live in this browser on this device.')+' Save with the disk button on the map. Autosave happens at every door and after each battle.';
+  $('menu-foot').textContent='Saves live in this browser on this device. Autosave happens at every door and after each battle.';
   const list=el('div','item-list single');
   for(const slot of SAVE_SLOTS) {
     const sv=readSave(slot);
@@ -425,6 +463,13 @@ function renderSaveTab(body) {
     row.innerHTML='<div class="item-icon">'+(slot==='auto'?'⏱':'\u{1F4BE}')+'</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
     row.querySelector('.save-name').textContent=slot==='auto'?'Autosave':'Slot '+slot;
     row.querySelector('.save-meta').textContent=saveSummary(sv);
+    if(slot!=='auto') {
+      const k='save-'+slot,sure=menuConfirm===k;
+      row.appendChild(btn('save-btn'+(sure?' sure':''),k,sure?'OVERWRITE?':'SAVE',()=>{
+        if(sv&&!sure) { askConfirm(k); return; }
+        menuConfirm=null; saveGame(slot); sfx.select(); showToast('Saved to slot '+slot+'.',1.6); renderMenu();
+      }));
+    }
     const k='load-'+slot,sure=menuConfirm===k;
     const l=btn('save-btn'+(sure?' sure':''),k,sure?'LOAD IT?':'LOAD',()=>{
       if(!sure) { askConfirm(k); return; }
@@ -436,54 +481,6 @@ function renderSaveTab(body) {
   }
   const hint=el('div','menu-empty small','Loading replaces where you are now. Anything since your last save is lost.');
   body.appendChild(list); body.appendChild(hint);
-}
-
-// SAVE POPUP: opened from the HUD save button. Three slots; overwriting asks once. Closes after saving.
-function openSave(viaKeys) {
-  if(typeof intro!=='undefined'&&intro.active) return;
-  if(menuOpen||(typeof shopOpen!=='undefined'&&shopOpen)) return;
-  menuOpen=true; menuSaving=true;
-  sfx.menuOpen();
-  clearInput();
-  menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false;
-  menuKeyNav=!!viaKeys;
-  menuFocusNext=menuKeyNav?'psave-1':null;
-  $('menu').classList.add('saving');
-  $('menu').hidden=false;
-  renderSavePop();
-}
-function renderSavePop() {
-  const ae=document.activeElement;
-  const keep=menuFocusNext||(menuKeyNav&&ae&&ae.dataset?ae.dataset.k:null);
-  menuFocusNext=null;
-  const old=$('menu-save'); if(old) old.remove();
-  const wrap=el('div','mquit msave'); wrap.id='menu-save';
-  wrap.setAttribute('role','dialog'); wrap.setAttribute('aria-modal','true'); wrap.setAttribute('aria-labelledby','msave-title');
-  wrap.addEventListener('click',e=>{ if(e.target===wrap) closeMenu(); });
-  const box=el('div','mwin mquit-box msave-box');
-  const h=el('div','mquit-title'); h.id='msave-title'; h.textContent='Save your game'; box.appendChild(h);
-  const list=el('div','item-list single');
-  for(const slot of SAVE_SLOTS) {
-    if(slot==='auto') continue;
-    const sv=readSave(slot);
-    const row=el('div','save-row');
-    row.innerHTML='<div class="item-icon">\u{1F4BE}</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
-    row.querySelector('.save-name').textContent='Slot '+slot;
-    row.querySelector('.save-meta').textContent=saveSummary(sv);
-    const k='psave-'+slot,sure=menuConfirm===k;
-    row.appendChild(btn('save-btn'+(sure?' sure':''),k,sure?'OVERWRITE?':'SAVE',()=>{
-      if(sv&&!sure) { askConfirm(k); return; }
-      menuConfirm=null; saveGame(slot); sfx.select(); closeMenu(); showToast('Saved to slot '+slot+'.',1.6);
-    }));
-    list.appendChild(row);
-  }
-  box.appendChild(list);
-  box.appendChild(el('div','mquit-text','Autosave also happens at every door and after each battle. Load from the menu.'));
-  const row=el('div','mquit-btns one');
-  row.appendChild(btn('save-btn mquit-no','psave-close','CLOSE',closeMenu));
-  box.appendChild(row); wrap.appendChild(box);
-  $('menu').appendChild(wrap);
-  if(keep) { const f=document.querySelector('#menu-save [data-k="'+keep+'"]')||document.querySelector('#menu-save button'); if(f) f.focus({preventScroll:true}); }
 }
 
 // QUIT: back to the title screen, after a confirm. Reloading gives a clean start (same as a fresh launch).
@@ -536,7 +533,7 @@ function drawPortrait(m,canvasId='portrait') {
       pc.fillRect(c,r,1,1);
     }
   }
-  const hat=m.equipment.Charm;
+  const hat=m.equipment.Head;
   const fill=(x,y,w,h,col)=>{pc.fillStyle=col;pc.fillRect(x,y,w,h);};
   if(hat==='sunhat'||hat==='scrap') { const col=hat==='scrap'?'#f5d389':'#dac487'; fill(4,1,16,3,col); fill(2,4,20,2,col); fill(4,1,16,1,'#fff3cf'); }
   if(hat==='bcap') { fill(5,1,14,4,'#4a4e57'); fill(3,5,18,2,'#3a3d44'); fill(5,1,14,1,'#6a6f7a'); }
@@ -554,7 +551,7 @@ function openMenu(viaKeys) {
   clearInput();
   menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false;
   menuKeyNav=!!viaKeys;
-  menuFocusNext=menuKeyNav?'cmd-home':null;
+  menuFocusNext=menuKeyNav?'cmd-items':null;
   $('menu').hidden=false;
   $('menu-body').scrollTop=0;
   renderMenu();
@@ -563,10 +560,8 @@ function openMenu(viaKeys) {
 
 function closeMenu() {
   if(!menuOpen) return;
-  menuOpen=false; menuQuit=false; menuSaving=false; menuConfirm=null;
+  menuOpen=false; menuQuit=false;
   const q=$('menu-quit'); if(q) q.remove();
-  const sp=$('menu-save'); if(sp) sp.remove();
-  $('menu').classList.remove('saving');
   sfx.menuClose();
   $('menu').hidden=true;
   canvas.focus();
@@ -574,25 +569,23 @@ function closeMenu() {
 
 // Back: cancel a confirm, close an open slot or item, then close the menu.
 function menuBack(fromCmd) {
-  if(menuSaving) { if(menuConfirm) { menuConfirm=null; renderMenu(); } else closeMenu(); return; }
   if(menuQuit) { closeQuit(); return; }
   if(fromCmd) { menuItem=null; menuSlot=null; menuConfirm=null; }
   if(menuConfirm) { menuConfirm=null; renderMenu(); return; }
-  if(typeof b6Sure!=='undefined'&&b6Sure) { b6Sure=null; renderMenu(); return; }
   if(menuItem) { const id=menuItem; menuItem=null; sfx.tab(); menuFocusNext=menuKeyNav?'use-'+id:null; renderMenu(); return; }
   if(menuSlot) { const s=menuSlot; menuSlot=null; sfx.tab(); menuFocusNext=menuKeyNav?'slot-'+s:null; renderMenu(); return; }
   if(menuTab!=='home') { const t=menuTab; menuTab='home'; sfx.tab(); menuFocusNext=menuKeyNav?'cmd-'+t:null; renderMenu(); return; }
   closeMenu();
 }
 function menuButtons() {
-  const sel=menuSaving?'#menu-save button':menuQuit?'#menu-quit button':'#menu .menu-panel button';
+  const sel=menuQuit?'#menu-quit button':'#menu .menu-panel button';
   return [...document.querySelectorAll(sel)].filter(b=>!b.disabled&&b.offsetParent!==null);
 }
 // Spatial focus: pick the nearest button in the pressed direction.
 function menuMove(dir) {
   menuKeyNav=true;
   const all=menuButtons(),cur=document.activeElement;
-  if(!all.includes(cur)) { const t=menuSaving?all[0]:menuQuit?$('quit-no'):document.querySelector('#menu .mcmd.active')||document.querySelector('#menu .mcmd'); if(t) t.focus(); sfx.move(); return; }
+  if(!all.includes(cur)) { const t=menuQuit?$('quit-no'):document.querySelector('#menu .mcmd.active')||document.querySelector('#menu .mcmd'); if(t) t.focus(); sfx.move(); return; }
   const a=cur.getBoundingClientRect(),cx=a.left+a.width/2,cy=a.top+a.height/2;
   let best=null,bd=Infinity;
   for(const b of all) {

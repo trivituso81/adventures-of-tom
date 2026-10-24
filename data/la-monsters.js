@@ -236,7 +236,7 @@ Object.assign(MONSTERS,{
     vapor:['#2a2430','#463e52','#a9a2c2','#efe6cf'],
     hint:'Lots of HP and thick tar, but it confuses easily. Slow.'},
   bigshake:{id:'bigshake',la:true,coins:45,coinStep:9,name:'The Big Shake',the:'the Big Shake',short:'Big Shake',sprite:SHAKE_SPRITE,pal:SHAKE_PAL,scale:3,eyes:[[11,12],[22,12]],mouth:[14,18],
-    hp:84,hpStep:12,atk:4,xp:36,xpStep:8,level:5,rank:'BOSS',
+    hp:84,hpStep:12,atk:4,xp:36,xpStep:8,level:6,rank:'BOSS',
     regen:4,regenMsg:'The Big Shake settles into the hillside. +4 HP.',
     intro:'The ground rumbles. The hill stands up. It is The Big Shake.',
     attacks:['The Big Shake rumbles under {t}.','The Big Shake drops a boulder near {t}. Then on {t}.','The Big Shake jolts {t} off their feet.'],
@@ -250,4 +250,4 @@ Object.assign(MONSTERS,{
     hint:'The boss of the park. Heals every turn, and Aftershock hits everyone.'}
 });
 // Where each one stands in Griffith Park.
-const LA_MONSTER_SPOTS=[['smoglet',9,16],['tickets',20,15],['coyote',11,8],['gridlock',19,3],['tarblob',5,8],['bigshake',3,3]];   // the Big Shake sits under the Observatory (moved there in chapter 2)
+const LA_MONSTER_SPOTS=[['smoglet',9,16],['tickets',20,15],['coyote',11,8],['gridlock',19,3],['tarblob',5,8],['bigshake',18,11]];

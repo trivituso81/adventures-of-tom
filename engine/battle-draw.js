@@ -2,13 +2,10 @@
 // engine/battle-draw.js — Drawing the battle scene, animations and effects.
 function drawBattle() {
   gfx=fightCtx;
-  const party=battlePartyList();   // the new battle (engine/battle2.js) draws its own party units here
   const t=battle.time;
   gfx.save();
   gfx.scale(3,3);
-  if((B2.active&&B2.labLA)||regionOf(currentMap)==='la') drawLABattleBg(t);
-  else if(typeof drawLEBattleBg==='function'&&drawLEBattleBg(t)) {}   // engine/school-render.js: Elsewhere Elementary
-  else {
+  if(regionOf(currentMap)==='la') drawLABattleBg(t); else {
   rect(0,0,192,108,'#2d5a4c');
   for(let i=0;i<6;i++) rect(0,i*11,192,11,['#3a6f5c','#3f7762','#467f68','#4c876d','#528f72','#589677'][i]);
   rect(0,66,192,42,'#8fb07a');
@@ -27,14 +24,53 @@ function drawBattle() {
   gfx.restore();
   RFX.draw(true);
 
-  b2DrawEnemies(t);
+  // Enemy: sprite at 3x, centered at x=168, standing on y=261. Each monster's rows and palette come from MONSTERS.
+  const def=battle.enemy&&battle.enemy.def||MONSTERS.grump,ER=def.sprite,EP=def.pal,ES=def.scale||3;
+  const ew=ER[0].length*ES,eh=ER.length*ES,eox=48-ew/2,eoy=84-eh; // offsets so any size stands where the Grump did
+  const target=BATTLE_POS[battle.enemyTarget||0];
+  const lungeE=battle.enemyLunge>0?Math.sin(Math.PI*(1-battle.enemyLunge/.6)):0;
+  const bob=Math.round(Math.sin(t*3))*3;
+  const tickled=battle.fx[2].tickle>0;
+  const ex=(battle.enemyWobble>0?Math.round(Math.sin(t*30)*4):0)+120+Math.round(lungeE*(target.x*3-250))+(battle.shakeEnemy>0?rand(-5,5):0)-(battle.enemyKnock>0?Math.round(Math.sin(Math.PI*(1-battle.enemyKnock/.45))*26):0)+(tickled?Math.round(Math.sin(t*28)*3):0);
+  const liftY=battle.lift?(()=>{ const q=battle.lift.t/battle.lift.dur; return q<.7?Math.round(Math.sin(q/.7*Math.PI/2)*120):Math.round(120*(1-(q-.7)/.3)); })():0;
+  battle.liftNow=liftY;
+  const ey=177+bob-Math.round(lungeE*30)+(battle.shakeEnemy>0?rand(-3,3):0)-liftY;
+  if(def._top==null) { def._top=ER.findIndex(r=>r.replace(/\./g,'').length>=6); if(def._top<0) def._top=0; }
+  battle.enemyTop=ey+eoy+def._top*ES; battle.enemyX=ex+48;
+  if(!battle.enemyGone) {
+    const fade=battle.vapor>0?battle.vapor/1.4:1;
+    ellipse(ex+48,264,50*fade,10*fade,'rgba(47,73,54,.3)');
+    const rise=battle.vapor>0?Math.round((1-fade)*45):0;
+    const wobble=battle.vapor>0?Math.round(Math.sin(t*30)*(1-fade)*9):0;
+    if(battle.enemyStunned&&battle.vapor<=0) {
+      // Confused: sways, spiral eyes, stars and question marks circling his head.
+      const sway=Math.sin(t*5)*.14;
+      gfx.save(); gfx.translate(ex+48,ey+56); gfx.rotate(sway);
+      drawSprite(ER,EP,-48+eox,-56+eoy,ES,{flash:battle.flashEnemy>0});
+      const spiral=(sx,sy)=>{ rect(sx-6,sy-6,12,12,'#fff6dc'); rect(sx-5,sy-5,10,10,'#2b3b35'); rect(sx-4,sy-4,8,8,'#fff6dc'); rect(sx-3,sy-3,6,6,'#2b3b35'); rect(sx-2,sy-2,4,4,'#fff6dc'); rect(sx-1,sy-1,2,2,'#2b3b35'); rect(sx-1,sy-5,6,1,'#fff6dc'); rect(sx+3,sy-4,1,7,'#fff6dc'); };
+      for(const [c,r] of def.eyes) spiral(-48+eox+c*ES,-56+eoy+r*ES);
+      const [mc,mr]=def.mouth; rect(-48+eox+mc*ES,-56+eoy+mr*ES,8,6,'#c96a6a'); rect(-48+eox+mc*ES+2,-56+eoy+mr*ES+6,4,3,'#e38a8a');
+      gfx.restore();
+      for(let k=0;k<4;k++) {
+        const a=t*4+k*1.57,sx=ex+48+Math.round(Math.cos(a)*44),sy=ey-2+Math.round(Math.sin(a)*10);
+        if(k%2) label('+',sx,sy,'#ffe08a',3); else label('?',sx,sy,'#fff1cb',3);
+      }
+    } else {
+      drawSprite(ER,EP,ex+wobble+eox,ey-rise+eoy,ES,{flash:battle.flashEnemy>0||(battle.vapor>0&&fade<.85),alpha:fade});
+    }
+  }
+  for(const p of battle.vaporParts) {
+    if(p.delay>0) continue;
+    const a=Math.max(0,Math.min(1,(p.y-30)/180))*(battle.vapor/1.4+.2);
+    gfx.globalAlpha=Math.min(1,a);
+    rect(p.x,p.y,p.size,p.size,p.color);
+    gfx.globalAlpha=1;
+  }
 
   // Party, drawn back to front. Each member lunges toward the enemy on attack.
   // Tom is drawn last while blocking so he stands in front of whoever he is shielding.
   const order=party.map((_,i)=>i);
-  if(battle.block) { const ti=party.findIndex(p=>p.id==='tom'); if(ti>=0) { order.splice(order.indexOf(ti),1); order.push(ti); } }
-  if(battle.v2) b2RideOrder(order,party);   // Rose sits on Tom's shoulders (engine/battle2-traits.js)
-  battle.drawnAt=battle.drawnAt||[];
+  if(battle.block) { order.splice(order.indexOf(0),1); order.push(0); }
   order.forEach(i=>{
     const m=party[i],sp=BATTLE_SPRITES[m.id],pos=BATTLE_POS[i],fx=battle.fx[i];
     activeTint=garmentTint('bt',m.id,memberTopColor(m));
@@ -51,7 +87,7 @@ function drawBattle() {
     const silly=fx.tongue>0&&sp.celeb;
     const sillyStep=Math.floor(t*8)%6;
     const sillyFrame=silly?[sp.celeb,sp.celebFlip,sp.expr,sp.idle,sp.flip,sp.celeb][sillyStep]:null;
-    const guarding=m.id==='tom'&&m.guard&&alive(m)&&!punching;
+    const guarding=m===hero&&m.guard&&alive(m)&&!punching;
     const coaching=fx.coach>0&&sp.celeb,hugging=fx.hug>0&&sp.celeb,grumbling=fx.grumble>0,burpee=fx.burpee>0;
     const coachFrame=coaching?[sp.celeb,sp.expr,sp.celeb,sp.idle][Math.floor(t*6)%4]:null;
     const burpeeFrame=burpee?(Math.floor(t*6)%2?sp.kneel:sp.celeb):null;
@@ -86,7 +122,7 @@ function drawBattle() {
     let cx=pos.x*3-Math.round(lunge*(pos.x*3-250))-Math.round(appr*(pos.x*3-(m.id==='rose'?236:262)))+(fx.shake>0?rand(-5,5):0)+(fx.tongue>0?Math.round(Math.sin(t*22)*2):0)+(dancing?Math.round(Math.sin(t*4.5)*16):0);
     let base=pos.base*3+breathe-Math.round(lunge*12)-hop;
     base+=koSink;
-    if(m.id==='tom'&&battle.block) {
+    if(m===hero&&battle.block) {
       // Slide to a spot just in front of the shielded girl, hold, then slide back.
       const b=battle.block,pr=b.t/b.dur;
       const k=pr<.15?pr/.15:(pr>.82?(1-pr)/.18:1);
@@ -142,11 +178,7 @@ function drawBattle() {
       if(i===battle.actor) battle.actorPos={cx,base,h};
     }
     if(hidden) return;
-    { const rp=b2RidePos(m,i); if(rp) { cx=rp.cx; base=rp.base; noShadow=true; } }
-    // While a move is aimed at enemies away from the old Grump spot, the actor's body follows the same warp as the scene.
-    if(B2.aim&&i===battle.actor) { const wp=b2WarpPt(cx,base); cx=Math.round(wp[0]); base=Math.round(wp[1]); }
     const x=cx-w/2-(punching&&!sp.noShift?sp.scale*3:0),y=base-h;
-    battle.drawnAt[i]={cx,base,h};
     if(!noShadow) ellipse(cx,base+3,w*.55*pathSc,6*pathSc,'rgba(47,73,54,.3)');
     if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
     else if(rot!==0||pathSc!==1||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
@@ -184,7 +216,7 @@ function drawBattle() {
       label(Math.floor(t*6)%2?'!':'!!',cx,y-22,'#ffe08a',3);
       party.forEach((p,j)=>{ if(j===i||!alive(p)) return; const q=BATTLE_POS[j]; const yy=q.base*3-BATTLE_SPRITES[p.id].idle.length*BATTLE_SPRITES[p.id].scale-14-Math.round(Math.abs(Math.sin(t*8+j))*8); label('^',q.x*3,yy,'#ffe08a',3); });
     }
-    if(hugging&&m.id==='deedee') {
+    if(hugging&&m===deedee) {
       for(let k=0;k<7;k++) {
         const ph=(t*1.2+k/7)%1,hx=cx-70+k*24+Math.round(Math.sin(t*5+k)*6),hy=y+10-Math.round(ph*70);
         gfx.globalAlpha=1-ph; label('<3',hx,hy,k%2?'#ff9ac0':'#ffd3e0',2); gfx.globalAlpha=1;
@@ -195,11 +227,11 @@ function drawBattle() {
       label(['UGH','MY STOMACH','TOO FAST'][q],cx,y-20,'#fff1cb',2);
       label('...',172,120-Math.round(Math.abs(Math.sin(t*4))*4),'#fff1cb',3);
     }
-    if(fx.combo>0&&m.id==='tom') {
+    if(fx.combo>0&&m===hero) {
       const seq=['^','^','V','V','<','>','B','A'],shown=Math.min(seq.length,Math.floor((1.3-fx.combo)/.13)+1);
       for(let k=0;k<shown;k++) { const ix=cx-56+k*16,iy=y-30+(k===shown-1?-3:0); rect(ix-6,iy-3,13,13,OUT); rect(ix-5,iy-2,11,11,k===shown-1?'#ffe08a':'#fff1cb'); label(seq[k],ix,iy+1,'#27473d',1); }
     }
-    if(fx.controller>0&&m.id==='tom') {
+    if(fx.controller>0&&m===hero) {
       const gx=x+Math.round(w*.2),gy=y+Math.round(h*.6);
       // Forearms and hands first, so the controller sits in front of them.
       const skin='#e2b59e',skinD='#c59277';
@@ -267,7 +299,6 @@ function drawBattle() {
     activeTint=null;
   });
 
-  gfx.save(); b2WarpCtx();
   if(battle.laser) {
     const L=battle.laser,pr=L.t/L.dur;
     const bx=168,width=pr<.3?Math.round(pr/.3*22):Math.round(22*(1-(pr-.3)/.7));
@@ -310,15 +341,13 @@ function drawBattle() {
     if(reach>=1) for(let k=0;k<9;k++) { const a=k*.7+Hs.t*5,r=14+((Hs.t*60+k*9)%40); rect(ex2+Math.cos(a)*r,ey2-Math.abs(Math.sin(a))*r*.8,4,4,k%2?Hs.light:Hs.color); }
     gfx.globalAlpha=1;
   }
-  gfx.restore();
   RFX.draw(false);
-  b2DrawOverlay(t);
   for(const q of (battle.props||[])) {
     if(q.t<0) continue;
     const u=Math.min(1,q.t/q.dur);
     const fixed=q.kind==='line';
     const px=fixed?q.x0:q.x0+(q.x1-q.x0)*u,py=fixed?q.y0:q.y0+(q.y1-q.y0)*u-(q.arc?Math.sin(u*Math.PI)*q.arc:0);
-    gfx.save(); b2WarpCtx(); gfx.translate(Math.round(px),Math.round(py)); if(q.spin) gfx.rotate(u*Math.PI*3);
+    gfx.save(); gfx.translate(Math.round(px),Math.round(py)); if(q.spin) gfx.rotate(u*Math.PI*3);
     drawProp(q,u);
     gfx.restore();
   }
@@ -328,7 +357,6 @@ function drawBattle() {
     label(tx.txt,tx.x+1,tx.y-Math.round(q*10)+1,'#1b2d27',sc); label(tx.txt,tx.x,tx.y-Math.round(q*10),tx.color,sc);
     gfx.restore(); gfx.globalAlpha=1;
   }
-  gfx.save(); b2WarpCtx();
   if(battle.boop) {
     const B=battle.boop,pr=B.t/B.dur;
     const sc=pr<.15?2+Math.round(pr/.15*3):5,yy=96-Math.round(pr*40);
@@ -351,7 +379,6 @@ function drawBattle() {
     gfx.arc(177,200,42+k*15,-1+k*.3,1.2+k*.3);
     gfx.stroke();
   }
-  gfx.restore();
 
   gfx.save();
   gfx.scale(3,3);
@@ -475,9 +502,7 @@ function choosePath(n) {
 
 function updateNPCs(dt) {
   for(const n of currentMap.npcs) {
-    if(n.held) continue;   // moved by a cutscene (engine/story.js); the scene steps it
     if(n.move&&!advanceMove(n,dt)) continue;
-    if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
 
     if(n.path.length) {
       const next=n.path.shift();
@@ -643,16 +668,10 @@ function koSkin(sp) {
 function drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx) {
   const K=typeof KO_SPRITES!=='undefined'&&KO_SPRITES[m.id];
   if(K&&frame!==sp.idle) {
-    // Traced KO sprite (the family were traced facing right, Nara facing left; mirrored where needed so it faces the enemy like everyone else), on the same ground line; a slow, heavy breath.
+    // Traced KO sprite, standing on the same ground line; a slow, heavy breath.
     const kw=K.rows[0].length*K.scale,kh=K.rows.length*K.scale,bob=Math.floor(t*1.3+i*.7)%2;
-    const rows=K.left||(K.left=m.id==='nara'?K.rows:mirrorRows(K.rows)),kx=Math.round(cx-kw/2),ky=Math.round(base-kh)+bob;
-    drawSprite(rows,K.pal,kx,ky,K.scale,{flash:fx.flash>0});
+    drawSprite(K.rows,K.pal,Math.round(cx-kw/2),Math.round(base-kh)+bob,K.scale,{flash:fx.flash>0});
     koDust(cx,base,koE);
-    // Dizzy stars circle over the head (the head is the top few rows of the sprite).
-    if(!K.head) { let top=0; while(top<rows.length&&!/[^.]/.test(rows[top])) top++; let L=1e9,R=-1;
-      for(let r=top;r<Math.min(rows.length,top+6);r++) for(let c=0;c<rows[r].length;c++) if(rows[r][c]!=='.') { L=Math.min(L,c); R=Math.max(R,c); }
-      K.head={col:(L+R+1)/2,row:top}; }
-    koDizzy(kx+K.head.col*K.scale,ky+K.head.row*K.scale,koE,t,i);
     return;
   }
   const sc=sp.scale,n=frame.length,W=frame[0].length,w=W*sc,h=n*sc;
@@ -709,23 +728,6 @@ function drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx) {
   gfx.drawImage(oc,0,0,oc.width,PAD+pcy+sc*2,-pcx-PAD,-pcy-PAD,oc.width,PAD+pcy+sc*2);
   gfx.restore();
   koDust(cx,base,koE);
-  if(settled) koDizzy(ox+pcx,oy+top*sc+8,koE,t,i);
-}
-// Cartoon dizzy stars: three little pixel stars orbiting a flat ring above the head. The ones behind the head are smaller and dimmer.
-const KO_STAR=['..#..','.###.','#####','.###.','.#.#.'];
-function koDizzy(hx,hy,koE,t,i) {
-  if(koE<.45) return;
-  const fade=Math.min(1,(koE-.45)/.4),cy=hy-11,spin=t*3.2+i*1.3;
-  const stars=[0,1,2].map(k=>{ const a=spin+k*Math.PI*2/3; return {k,x:hx+Math.cos(a)*21,y:cy+Math.sin(a)*6,front:Math.sin(a)}; }).sort((a,b)=>a.front-b.front);
-  gfx.globalAlpha=fade*.35; ellipse(hx,cy,22,6.5,'rgba(255,240,190,.35)'); 
-  for(const st of stars) {
-    const ps=st.front>0?2.6:1.9,tw=(Math.sin(t*9+st.k*2)+1)/2;
-    gfx.globalAlpha=fade*(st.front>0?1:.6);
-    const col=st.k===1?'#fff6c8':'#ffd24a',ox=Math.round(st.x-2.5*ps),oy=Math.round(st.y-2.5*ps);
-    for(let r=0;r<5;r++) for(let c=0;c<5;c++) if(KO_STAR[r][c]==='#') rect(ox+c*ps,oy+r*ps,ps,ps,(r===1&&c===2)?'#ffffff':col);
-    if(tw>.75&&st.front>0) { rect(ox+5*ps+1,oy-2,2,2,'#ffffff'); }
-  }
-  gfx.globalAlpha=1;
 }
 function koDust(cx,base,koE) {
   // Dust puff when they hit the ground.

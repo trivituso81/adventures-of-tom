@@ -1,5 +1,5 @@
 'use strict';
-// engine/gear.js — Equipment colors on sprites. A worn Outfit with a `color` recolors that
+// engine/gear.js — Equipment colors on sprites. A worn Body item with a `color` recolors that
 // character's top (shirt, tee, dress, vest) on the battle sprite, the overworld sprite and the portrait.
 // GARMENT says which palette keys make up the top and which rows it sits on, per sprite set.
 // Rows are for the raw sheet; prepped overworld sets are scaled by their resample factor.
@@ -44,7 +44,7 @@ function garmentTint(kind,id,color,raw=false) {
   return t;
 }
 function memberTopColor(m) {
-  const id=m&&m.equipment&&m.equipment.Outfit;
+  const id=m&&m.equipment&&m.equipment.Body;
   return id&&items[id]&&items[id].color||null;
 }
 // Set while a party member's sprite is being drawn; drawSprite reads it.

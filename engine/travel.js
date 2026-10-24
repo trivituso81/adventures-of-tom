@@ -79,7 +79,7 @@ const TRAVEL_TALK={
 };
 function talkToDriver(n) {
   const inLA=regionOf(currentMap)==='la';
-  const pages=n.visitedOnce?[]:npcLines(n);
+  const pages=n.visitedOnce?[]:n.lines.slice();
   n.visitedOnce=true;
   pages.push(inLA?'Where to? The airport? It is always the airport.'
     :'Where to? Around town, or... the airport? I have waited years for somebody to say airport.');
@@ -122,7 +122,6 @@ function startTrip(n,dir) {
       S.call(()=>{ recruitLeave(f,true); sfx.doorOut(); showToast(tt.toast,3); }),
       S.wait(.6)); }
   }
-  if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
   steps.push(...flightSteps(dir));
   runScene(steps);
 }

@@ -149,10 +149,7 @@ function pressAction() {
     const n=target.value;
     if(n.shopkeeper) { talkToShopkeeper(n); return; }
     if(n.driver) { talkToDriver(n); return; }
-    // What they say comes from their spec (data/maps-*.js): first-visit lines, or a `when` variant for this chapter/flags.
-    if(n.monster&&b7Overlevel(n)) { b7InstantWin(n); return; }   // way stronger: instant win (engine/feel.js)
-    let lines=npcLines(n);
-    if(n.monster) lines=n.lines=monsterLines(n);
+    if(n.monster) n.lines=monsterLines(n);
     if(n.dog) { talkToNara(n); return; }
     if(n.grandma) say('deedee','greet');
     if(n.grandpa) say('boppy','greet');
@@ -160,15 +157,12 @@ function pressAction() {
     if(n.partner) say('tnb','greet',.4);
     // Heart-Traces (engine/story.js): warm family moments the story remembers.
     if(typeof heartTrace==='function') { if(n.grandma) heartTrace('deedee-hug'); if(n.grandpa&&n.visitedOnce) heartTrace('boppy-story'); if(n.partner) heartTrace('tnb-hello'); if(n.mom) heartTrace('amy-hello'); }
-    // Family revisits: one line picked from their `revisit` pool.
-    const again=()=>{ const pool=npcLines(n,'revisit'); return pool.length?pick(pool):null; };
     if(n.grandma) {
       const hurt=party.some(m=>m.hp<m.maxHp);
       for(const m of party) { m.hp=m.maxHp; m.mp=m.maxMp; }
-      const hug=npcLines(n,'hug');
-      lines=n.visitedOnce
-        ? [again(),hurt?hug[0]:hug[1]].filter(Boolean)
-        : lines.concat(hurt&&hug[0]?[hug[0]]:[]);
+      n.lines=n.visitedOnce
+        ? [pick(['The tomatoes are coming in. You are going home with forty.','I baked at five this morning. The neighbors have stopped asking why.','Tommy, is that a bruise? Sit. Eat. Explain.','To the moon and back, girls. The MOON. And BACK.','Boppy says he is not feeling good. Boppy also will not stop fishing.','Grace, Rose, who wants to help Deedee frost something?','Rhubarb crisp is cooling on the counter. Do not touch it. Okay, one corner.','I already did my walk. Boppy did one lap around the recliner.','Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.','Sunday dinner is at five. Five means four thirty.','I just cleaned the floors. Shoes OFF.','A little glass of wine with dinner. Just one. Nurse\'s orders.']),hurt?'Hugs for everyone. There. All better.':'Hugs for everyone, just because. To the moon and back.']
+        : n.lines.concat(hurt?['Hugs for everyone. There. All better.']:[]);
       if(bag.filter(id=>id==='cookie').length<2) n.onClose=()=>grantItem('cookie');
       n.visitedOnce=true;
     }
@@ -176,24 +170,17 @@ function pressAction() {
       kiss={npc:n,start:elapsedTime};
       sfx.kiss();
       if(!n.visitedOnce) n.onClose=()=>grantItem('jacket');
-      else { const l=again(); if(l) lines=[lines[0]||'Well, well, well...',l]; }
+      else n.lines=['Well, well, well...',pick(['Took the longboard down Spring Street this morning. Smooth. There is a crack by Fourth Street I have named.','Threw six mugs this morning. The glaze came out of the kiln like sea glass. Come look before you claim one.','Go on, I will be right here. I am pot-sitive about it.','Horror movie tonight. You pick. You always pick the scary one and then hold my arm the whole time.','Watered your plants on 2nd Ave. The fern asked about you. I said you are fine.','Rode the train to the clay studio. Forty minutes. Best forty minutes of my day. Met a man who knows every line.','The slime? It just needs someone to mold it. I have more of these. You know I do.','Long day on set. Eleven costume changes. One actor lost a shoe. I found it. I always find it.','Be careful out there. I like you un-cracked.'])];
       n.visitedOnce=true;
     }
     if(n.mom) {
-      if(n.visitedOnce) { const l=again(); if(l) lines=[l]; }
+      if(n.visitedOnce) n.lines=[pick(['Race you to the fountain. No? Then I win.','Thirty second-graders and none of them as wild as you two. Which I love.','Rose, where are your shoes? Oh. Good.','Grace, be nice to the slime. Then beat it. Those are the two rules.','Tom, if they come back faster than me, we need to talk.','Justin says hi from work. He wants a full report at dinner.','Did Boppy give you that cap? Do not let him near the pond.'])];
       if(bag.filter(id=>id==='juice').length<2) n.onClose=()=>grantItem('juice');
       n.visitedOnce=true;
     }
     if(n.grandpa) {
       if(!n.visitedOnce) n.onClose=()=>grantItem('bcap');
-      else { const l=again(); if(l) lines=[l]; }
-      n.visitedOnce=true;
-    }
-    // Family and friends who are not party members (kin:true): first visit says `lines`, later visits one `revisit`
-    // line; `trace` is their Heart-Trace id (data/maps-le.js, data/maps-la.js).
-    if(n.kin) {
-      if(n.trace&&typeof heartTrace==='function') heartTrace(n.trace);
-      if(n.visitedOnce) { const l=again(); if(l) lines=[l]; }
+      else n.lines=[pick(['Assistant Deputy Warden at Rikers. All those years, nobody got past me. Except that fish.','At Rikers we did headcounts. Grace, one. Rose, two. Tom, you are dragging.','In college I ran cross country. Champion. Through the woods, up the hills, never breathed hard.','Did I tell you about the championship race? I did? Sit down. I will tell you again.','I am not feeling good. I was fine an hour ago. Then I had a pepper.','Slow down, Tom. Who walks this fast? I was a champion runner and I never walked this fast.','Deedee says I am not allowed near the pond. The pond says otherwise.','Grace, Rose, who is the strongest grandpa? Correct. Now help me up.'])];
       n.visitedOnce=true;
     }
     const rm=n.mom?amy:(n.grandma?deedee:(n.grandpa?boppy:(n.partner?tnb:null)));
@@ -201,17 +188,16 @@ function pressAction() {
       const prev=n.onClose;
       n.onClose=()=>{ if(prev) prev(); offerRecruit(rm,n); };
     }
-    openDialog(n.name,lines,n);
+    openDialog(n.name,n.lines,n);
   } else if(target.kind==='object') {
     const o=target.value;
     if(o.shop) { const pk=currentMap.npcs.find(n=>n.shopkeeper); if(pk) { talkToShopkeeper(pk); return; } }
-    const text=storyVariant(o,'text');
     if((o.kind==='fountain'||o.restore)&&party.some(m=>m.hp<m.maxHp||m.mp<m.maxMp)) {
       for(const m of party) { m.hp=m.maxHp; m.mp=m.maxMp; }
       sfx.fountain();
-      openDialog(o.name,[text,storyVariant(o,'restoreText')||('The spray is freezing. Everyone is completely restored.'+(party.includes(rose)?' Rose is thrilled.':''))]);
+      openDialog(o.name,[o.text,o.restoreText||('The spray is freezing. Everyone is completely restored.'+(party.includes(rose)?' Rose is thrilled.':''))]);
     } else {
-      openDialog(o.name,[text]);
+      openDialog(o.name,[o.text]);
     }
   } else {
     movePlayer(player.facing);
@@ -229,8 +215,6 @@ function update(dt) {
     updateDialog(dt);
     return;
   }
-  // Story triggers (engine/story.js): a cutscene that starts when Tom stands somewhere at the right point in the story.
-  if(!player.move&&typeof storyTriggers==='function'&&storyTriggers()) return;
 
   if(player.move) {
     if(advanceMove(player,dt)) {

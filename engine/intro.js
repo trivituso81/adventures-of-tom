@@ -56,7 +56,7 @@ function confirmNew() {
 function loadMenu() {
   const slots=SAVE_SLOTS.filter(s=>readSave(s));
   if(!slots.length) {
-    openChoice('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
+    openChoice('Load','No saved games on this device yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
     return;
   }
   const nm=s=>s==='auto'?'Autosave':'Slot '+s;
@@ -78,7 +78,7 @@ const S={
   call:fn=>({start(){ fn(); },update(){ return true; }}),
   // voice: one [character, LINES kind] per line, spoken as each line appears (baked clip if there is one, else speech).
   talk:(name,lines,voice)=>({start(){ this.i=-1; openDialog(name,lines); this.speak(); },
-    speak(){ if(!voice||dialog.index===this.i) return; this.i=dialog.index; const v=voice[this.i]; if(v) say(v[0],v[1],v[2]||0,v[3]); },
+    speak(){ if(!voice||dialog.index===this.i) return; this.i=dialog.index; const v=voice[this.i]; if(v) say(v[0],v[1]); },
     update(){ if(!dialog.active) return true; this.speak(); return false; }}),
   // Walk an actor tile by tile through a list of [x,y].
   walk:(a,tiles,dur,onStep)=>({i:0,start(){ this.i=0; this.next(); },
