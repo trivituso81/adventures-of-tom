@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#27473d">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="The Adventures of Tom">
 <link rel="apple-touch-icon" sizes="180x180" href="icon-v4.png">
 <link rel="icon" type="image/png" href="icon-v4.png">
@@ -359,6 +360,10 @@ html.landscape .sp-choice{padding:8px 10px}html.landscape .sp-choice .sp-name{fo
 html.landscape #splash .dialog-footer{margin-top:6px;padding-top:5px}
 html.landscape .sp-choices.grid:has(> :nth-child(9)) .sp-sub{display:none}
 html.landscape #splash-rotate{width:34px;height:34px;top:calc(8px + env(safe-area-inset-top))}
+
+/* Safe areas: full-screen overlays keep clear of the notch, Dynamic Island and home bar */
+#menu,#shop{padding:calc(10px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left))}
+html.landscape #menu,html.landscape #shop{padding:8px}
 </style>
 <style>
 /* A static image remains visible in document previewers that block JavaScript. */
