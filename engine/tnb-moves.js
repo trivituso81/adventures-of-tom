@@ -1,0 +1,628 @@
+'use strict';
+// engine/tnb-moves.js — TNB's attacks, built from his hobbies: pottery, longboarding, horror movies, mass transit, working as a wardrobe runner on film sets.
+// Same shape as tom-moves.js: RECRUIT_MOVES.tnb[key] queues steps and registers scenes (RFX.SC) and props (PROP2).
+// Also holds his special, WARDROBE (he rolls out the wardrobe rack and dresses someone in something fresh and cozy).
+RECRUIT_MOVES.tnb={};
+(function(){
+const SC=RFX.SC,{scene,hold,GX,GY}=RFX;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,rx,ry,c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const env=(u,a=.15,b=.85)=>u<a?u/a:(u>b?(1-u)/(1-b):1);
+const rr=(s,k)=>{ const n=Math.sin((s.seed||1)*12.9898+k*78.233)*43758.5453; return n-Math.floor(n); };
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const poly=(pts,c,o)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); if(o) { gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.stroke(); } gfx.fillStyle=c; gfx.fill(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const bt=(txt,x,y,c,sc,dur=1)=>battle.texts.push({txt,x,y,color:c,sc,t:0,dur});
+const pose=(fx,k,d)=>{ fx.poseK=k; fx.pose=d; };
+const appr=(fx,d)=>{ fx.appr=d; fx.apprDur=d; };
+const path=(fx,dur,fn)=>{ fx.path={t:0,dur,fn}; return fx.path; };
+const hit=E2=>landHit(E2.dmg,E2.crit);
+const part=(E2,n,k)=>landHit(Math.max(1,Math.round(E2.dmg/n)),E2.crit&&k===n-1);
+const pos=()=>battle.actorPos||{cx:519,base:315,h:90};
+const hand=()=>{ const a=battle.actorHand; if(a) return {x:a.n[0]-8,y:a.n[1]-8}; const p=pos(); return {x:p.cx-20,y:p.base-60}; };
+const toss=(kind,x0,y0,x1,y1,delay,dur,arc=60,extra={})=>battle.props.push(Object.assign({kind,x0,y0,x1,y1,arc,spin:true,t:-delay,dur},extra));
+const confuseMaybe=c=>{ if(!battle.missing&&Math.random()<c) { battle.enemyStunned=2; sfx.stun(); return true; } return false; };
+const enemyName=()=>((battle.enemy&&battle.enemy.def&&battle.enemy.def.short)||'Grump').toUpperCase();
+const T=RECRUIT_MOVES.tnb;
+
+// ================= Sounds =================
+const S={
+  ding(){ tone({type:'triangle',f0:1175,dur:.25,vol:.16}); tone({type:'triangle',f0:932,dur:.35,vol:.16,delay:.22}); },
+  horn(){ tone({type:'square',f0:311,dur:.55,vol:.12,filter:1400}); tone({type:'square',f0:370,dur:.55,vol:.1,filter:1400}); },
+  rumble(d=1.4){ noise({dur:d,vol:.16,f0:400,f1:120,type:'lowpass'}); tone({type:'triangle',f0:60,f1:45,dur:d,vol:.18}); },
+  roll(d=1){ noise({dur:d,vol:.1,f0:1800,f1:900,type:'bandpass',q:.7}); },
+  clack(){ noise({dur:.08,vol:.4,f0:3500,f1:900,type:'bandpass',q:1}); tone({type:'square',f0:900,f1:300,dur:.06,vol:.22}); },
+  drone(d=1.6){ tone({type:'sawtooth',f0:55,f1:52,dur:d,vol:.12,filter:300,sweep:'linear'}); tone({type:'sine',f0:110,f1:104,dur:d,vol:.06}); },
+  sting(){ noise({dur:.35,vol:.35,f0:5000,f1:1200,type:'bandpass',q:.6}); tone({type:'sawtooth',f0:1400,f1:1250,dur:.45,vol:.14}); tone({type:'sawtooth',f0:1480,f1:1320,dur:.45,vol:.12}); },
+  walkie(){ noise({dur:.18,vol:.14,f0:2500,f1:2400,type:'bandpass',q:4}); tone({type:'square',f0:1600,dur:.04,vol:.06,delay:.2}); }
+};
+
+// ================= Props =================
+PROP2.tnbmug=(q,u)=>{ const c=q.c||'#5aa6a8'; R(-11,-11,21,22,OUT); R(-9,-9,17,18,c); R(-9,-9,5,18,'rgba(255,255,255,.28)'); gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath(); gfx.arc(11,0,6,-1.3,1.3); gfx.stroke(); gfx.strokeStyle=c; gfx.lineWidth=3; gfx.beginPath(); gfx.arc(11,0,6,-1.3,1.3); gfx.stroke(); R(-9,-9,17,3,'#f4efe0'); };
+
+// ================= Scenes =================
+// The longboard under TNB's feet, wherever he is. s.tilt leans it.
+const board=(x,y,tilt=0)=>{
+  gfx.save(); gfx.translate(x,y); gfx.rotate(tilt);
+  for(const wx of [-24,22]) { E(wx,8,6,6,OUT); E(wx,8,4,4,'#e0402e'); E(wx,8,1.5,1.5,'#ffe08a'); }
+  R(-38,-1,76,9,OUT); R(-36,1,72,5,'#c48a4a'); R(-36,1,72,2,'#2b2a26'); R(-30,5,60,1,'#9a6a36');
+  E(-38,3,4,4.5,OUT); E(38,3,4,4.5,OUT); E(-37,3,2.6,3,'#c48a4a'); E(37,3,2.6,3,'#c48a4a');
+  gfx.restore();
+};
+SC.board=(s,u)=>{
+  const p=pos(); gfx.globalAlpha=u>.96?(1-u)/.04:1;
+  board(p.cx,p.base+2,s.tilt?Math.sin(s.t*6)*.08:0);
+  if(s.lines) for(let k=0;k<4;k++) R(p.cx+44+k*12,p.base-14-k*12,18-k*3,3,'rgba(255,246,220,'+(.6-k*.12)+')');
+};
+// S-shaped carve marks on the ground.
+SC.carvetrail=(s,u)=>{
+  gfx.globalAlpha=env(u,.05,.7)*.75;
+  gfx.strokeStyle='#fff6dc'; gfx.lineWidth=3; gfx.setLineDash([10,8]); gfx.beginPath();
+  const x0=s.x0,x1=s.x1,n=Math.round(lerp(0,40,cl(u/.6)));
+  for(let k=0;k<=n;k++) { const q=k/40,x=lerp(x0,x1,q),y=s.y+Math.sin(q*Math.PI*3)*14; if(k===0) gfx.moveTo(x,y); else gfx.lineTo(x,y); }
+  gfx.stroke(); gfx.setLineDash([]);
+};
+// The steep hill TNB bombs down. Back scene.
+const hillY=x=>{ const q=cl((x-330)/240); return 284-ez(q)*150; };
+SC.bighill=(s,u)=>{
+  gfx.globalAlpha=env(u,.06,.94);
+  gfx.beginPath(); gfx.moveTo(300,324); for(let x=300;x<=580;x+=6) gfx.lineTo(x,hillY(x)); gfx.lineTo(580,324); gfx.closePath();
+  gfx.fillStyle='#7aa860'; gfx.fill(); gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.stroke();
+  gfx.save(); gfx.clip(); for(let k=0;k<10;k++) R(330+k*26,hillY(330+k*26)+14+(k%3)*12,12,3,'#5f8f4c'); gfx.restore();
+  // a road on the slope
+  gfx.strokeStyle='#5e6670'; gfx.lineWidth=10; gfx.beginPath(); for(let x=320;x<=576;x+=6) { const y=hillY(x)+6; if(x===320) gfx.moveTo(x,y); else gfx.lineTo(x,y); } gfx.stroke();
+  gfx.strokeStyle='#ffe08a'; gfx.lineWidth=2; gfx.setLineDash([8,8]); gfx.beginPath(); for(let x=320;x<=576;x+=6) { const y=hillY(x)+6; if(x===320) gfx.moveTo(x,y); else gfx.lineTo(x,y); } gfx.stroke(); gfx.setLineDash([]);
+  // sign at the top
+  const sx=548,sy=hillY(548); R(sx-2,sy-46,4,46,OUT); poly([[sx,sy-62],[sx+16,sy-46],[sx,sy-30],[sx-16,sy-46]],'#ffd166',true);
+  label('!',sx,sy-50,OUT,2);
+};
+// A giant film slate over the monster. s.text is the scene line; the arm snaps shut at s.snap (0..1).
+const slate=(x,y,open,lines)=>{
+  RO(x-62,y,124,74,'#2b2a26');
+  R(x-60,y+2,120,2,'#fff6dc'); R(x-60,y+26,120,2,'#fff6dc'); R(x-60,y+50,120,2,'#fff6dc'); R(x-2,y+28,2,46,'#fff6dc');
+  label(lines[0],x,y+12,'#fff6dc',2); label(lines[1],x-31,y+36,'#fff6dc',1); label(lines[2],x+31,y+36,'#fff6dc',1);
+  label('WARDROBE',x-31,y+60,'#ffe08a',1); label('ROLL 1',x+31,y+60,'#fff6dc',1);
+  // stripes bar, hinged at the left
+  RO(x-62,y-16,124,14,'#fff6dc'); for(let k=0;k<6;k++) poly([[x-60+k*21,y-14],[x-50+k*21,y-14],[x-58+k*21,y-4],[x-68+k*21,y-4]].map(p=>[Math.max(x-60,p[0]),p[1]]),'#2b2a26');
+  gfx.save(); gfx.translate(x-62,y-16); gfx.rotate(-open*.7);
+  R(-2,-16,128,16,OUT); R(0,-14,124,12,'#fff6dc'); for(let k=0;k<6;k++) poly([[4+k*21,-14],[14+k*21,-14],[6+k*21,-2],[-4+k*21,-2]].map(p=>[Math.max(0,p[0]),p[1]]),'#2b2a26');
+  gfx.restore();
+};
+SC.slate=(s,u)=>{
+  const drop=ez(u/.2),y=lerp(-110,s.y||104,drop),snap=s.snap||.6;
+  const open=u<.25?1:(u<snap-.06?1:(u<snap?(snap-u)/.06:0));
+  gfx.globalAlpha=u>.9?(1-u)/.1:1;
+  slate(GX,y,open,s.lines||['SCENE 1','TAKE 1',enemyName()]);
+  if(u>snap&&u<snap+.12) { gfx.globalAlpha=1-(u-snap)/.12; for(let k=0;k<8;k++) { const a=k/8*Math.PI*2; Ln(GX-62+Math.cos(a)*10,y-16+Math.sin(a)*10,GX-62+Math.cos(a)*34,y-16+Math.sin(a)*34,3,'#fff6dc'); } }
+};
+// Film-set dressing: REC dot and a frame, like a monitor.
+SC.monitor=(s,u)=>{
+  gfx.globalAlpha=env(u,.05,.9);
+  gfx.strokeStyle='#fff6dc'; gfx.lineWidth=3;
+  for(const [x,y,dx,dy] of [[60,40,1,1],[516,40,-1,1],[60,280,1,-1],[516,280,-1,-1]]) { gfx.beginPath(); gfx.moveTo(x,y+dy*22); gfx.lineTo(x,y); gfx.lineTo(x+dx*22,y); gfx.stroke(); }
+  if(Math.floor(s.t*2.5)%2===0) E(80,58,6,6,'#e0402e'); label('REC',104,55,'#fff6dc',2);
+  label('00:0'+Math.floor(s.t)+':'+String(Math.floor(s.t*24)%24).padStart(2,'0'),470,55,'#fff6dc',2);
+};
+// The train. Front of the train starts at s.x0 and ends at s.x1. Passes in front of everyone.
+const train=(fx,y,flip)=>{
+  const L=380,H=96;
+  // body
+  gfx.beginPath(); gfx.moveTo(fx,y-H+30); gfx.quadraticCurveTo(fx,y-H,fx+34,y-H); gfx.lineTo(fx+L,y-H); gfx.lineTo(fx+L,y-14); gfx.lineTo(fx,y-14); gfx.closePath();
+  gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#dfe3e6'; gfx.fill();
+  R(fx+2,y-44,L-2,10,'#e0a028'); R(fx+2,y-34,L-2,6,'#c0402e');
+  // windshield and a driver who looks a lot like TNB
+  poly([[fx+6,y-H+30],[fx+30,y-H+8],[fx+56,y-H+8],[fx+56,y-52],[fx+6,y-52]],'#2f4d63',true);
+  E(fx+38,y-64,8,8,'#f7ad7c'); R(fx+30,y-74,16,6,'#795338'); R(fx+32,y-55,14,3,'#213d53');
+  // windows and passengers
+  for(let k=0;k<6;k++) { const wx=fx+72+k*50; RO(wx,y-H+12,36,30,'#9fc8d8'); E(wx+18,y-H+36,7,7,['#2b2a26','#795338','#c9a03e','#525053','#ab7a47','#2b2a26'][k]); R(wx+3,y-H+14,8,26,'rgba(255,255,255,.35)'); }
+  // doors
+  for(const dx of [150,300]) { R(fx+dx-2,y-H+4,24,H-20,OUT); R(fx+dx,y-H+6,20,H-24,'#c9ccd4'); R(fx+dx+9,y-H+6,2,H-24,OUT); }
+  // headlight and destination sign
+  E(fx+10,y-24,6,5,OUT); E(fx+10,y-24,4,3.5,'#fff6c8');
+  RO(fx+64,y-H-14,110,14,'#2b2a26'); label('EXPRESS',fx+119,y-H-10,'#ffd166',2);
+  // wheels and rail
+  for(const wx of [40,90,L-90,L-40]) { E(fx+wx,y-10,13,13,OUT); E(fx+wx,y-10,10,10,'#5e6670'); E(fx+wx,y-10,3,3,'#aeb3ba'); }
+};
+SC.track=(s,u)=>{ gfx.globalAlpha=env(u,.05,.95); R(-10,s.y-2,600,6,OUT); R(-10,s.y-1,600,3,'#aeb3ba'); for(let x=-10;x<590;x+=24) R(x,s.y+4,14,5,'#6b4429'); };
+SC.train=(s,u)=>{
+  const fx=lerp(s.x0||620,s.x1||-460,u),y=s.y||272;
+  train(fx,y);
+  for(let k=0;k<6;k++) R(fx+380+10+k*18,y-90+k*14,30-k*4,3,'rgba(255,246,220,'+(.6-k*.09)+')');
+};
+// The "next stop" sign that drops in before the train.
+SC.stopsign=(s,u)=>{
+  const y=lerp(-50,24,ez(u/.15)); gfx.globalAlpha=u>.85?(1-u)/.15:1;
+  RO(GX-112,y,224,40,'#1d3a8a'); R(GX-108,y+4,216,32,'#284fb4');
+  label('NEXT STOP',GX,y+8,'#fff6dc',2); label(enemyName(),GX,y+22,'#ffd166',2);
+  E(GX+96,y+20,9,9,'#fff6dc'); label('M',GX+96,y+17,'#1d3a8a',1);
+};
+// A headlight coming out of the dark.
+SC.headlight=(s,u)=>{
+  const r=lerp(4,140,u*u),x=lerp(560,420,u),y=212;
+  gfx.globalAlpha=cl(u*1.4); E(x,y,r*1.6,r,'rgba(255,246,200,.25)'); E(x,y,r,r*.7,'rgba(255,246,200,.6)'); E(x,y,r*.4,r*.3,'#ffffff');
+};
+// VHS look: scanlines, static and PLAY.
+SC.vhs=(s,u)=>{
+  gfx.globalAlpha=env(u,.05,.9)*.5;
+  for(let y=0;y<324;y+=4) R(0,y,576,1,'rgba(0,0,0,.6)');
+  gfx.globalAlpha=env(u,.05,.9);
+  for(let k=0;k<26;k++) { const a=rr(s,k+Math.floor(s.t*20)); R(Math.floor(a*576),Math.floor(rr(s,k+40+Math.floor(s.t*20))*324),2+Math.floor(a*6),2,'rgba(255,255,255,.5)'); }
+  label(s.text||'PLAY >',70,30,'#fff6dc',3);
+};
+// Eyes opening in the dark behind the monster.
+SC.eyes=(s,u)=>{
+  const open=cl((u-.1)/.25),blink=Math.floor(s.t*3)%7===6?.1:1,h=7*open*blink;
+  gfx.globalAlpha=env(u,.1,.9);
+  for(const ex of [GX-34,GX+34]) { E(ex,120,16,h+2,'#3a0a0a'); E(ex,120,13,h,'#ffe08a'); E(ex+2,120,3,Math.max(1,h-1),'#2b0a0a'); }
+};
+// The big scary face. Hand-drawn pixel ghoul.
+SC.scare=(s,u)=>{
+  const k=u<.12?lerp(.3,1.15,u/.12):(u<.2?lerp(1.15,1,(u-.12)/.08):1),x=GX,y=150;
+  gfx.globalAlpha=u>.75?(1-u)/.25:1;
+  gfx.save(); gfx.translate(x+(u<.4?(Math.random()-.5)*10:0),y); gfx.scale(k,k);
+  E(0,0,94,104,OUT); E(0,0,90,100,'#d8e4d0'); E(-20,-30,40,30,'#e8f0e0');
+  E(-38,-18,24,28,OUT); E(38,-18,24,28,OUT); E(-38,-14,6,6,'#ff3b3b'); E(38,-14,6,6,'#ff3b3b');
+  poly([[-6,6],[6,6],[0,22]],'#5a6a58');
+  E(0,58,46,30,OUT); for(let j=0;j<7;j++) poly([[-40+j*12,38],[-28+j*12,38],[-34+j*12,56]],'#fff6dc'); for(let j=0;j<6;j++) poly([[-34+j*12,80],[-22+j*12,80],[-28+j*12,64]],'#fff6dc');
+  for(let j=0;j<4;j++) R(-70+j*40,-96+((j%2)*6),6,22,'#a8b8a0');
+  gfx.restore();
+};
+SC.yikes=(s,u)=>{ gfx.globalAlpha=env(u,.1,.75); const b=Math.round(Math.abs(Math.sin(s.t*12))*8); label('!!',GX+64,(battle.enemyTop||170)-26-b,'#ffe08a',4); };
+// Movie bars and rolling credits.
+SC.letterbox=(s,u)=>{ const k=ez(u/.12)*(u>.9?(1-u)/.1:1); R(0,0,576,46*k,'#000'); R(0,324-46*k,576,46*k,'#000'); };
+SC.credits=(s,u)=>{
+  const lines=s.lines,sh=u*(lines.length*34+160);
+  gfx.globalAlpha=u>.85?(1-u)/.15:1;
+  lines.forEach((t,k)=>{ const y=330+k*34-sh; if(y<40||y>290) return; label(t[0],288,y,'#ffd166',1); label(t[1],288,y+10,'#fff6dc',2); });
+};
+// Wardrobe pieces he throws.
+const shirtOn=(c,c2)=>{ gfx.strokeStyle=OUT; gfx.lineWidth=5; gfx.beginPath(); gfx.moveTo(-14,-14); gfx.quadraticCurveTo(0,-30,14,-14); gfx.stroke(); gfx.strokeStyle='#aeb3ba'; gfx.lineWidth=2.5; gfx.stroke(); E(0,-26,3,3,'#aeb3ba'); poly([[-16,-14],[16,-14],[24,-4],[16,0],[14,20],[-14,20],[-16,0],[-24,-4]],c,true); R(-2,-12,4,30,c2); };
+PROP2.shirt=(q,u)=>shirtOn(q.c||'#e0402e',q.c2||'#fff6dc');
+PROP2.tophat=(q,u)=>{ RO(-18,-26,36,26,'#2b2a26'); R(-16,-8,32,5,'#c0402e'); RO(-26,0,52,6,'#2b2a26'); };
+PROP2.boa=(q,u)=>{ for(let k=0;k<9;k++) { const a=k/8*Math.PI; E(Math.cos(a)*26,Math.sin(a)*14-4,8,7,k%2?'#ff8fb8':'#ff6b9a'); } };
+PROP2.bowtie=(q,u)=>{ poly([[0,0],[-18,-10],[-18,10]],'#e0402e',true); poly([[0,0],[18,-10],[18,10]],'#e0402e',true); E(0,0,5,5,OUT); E(0,0,3,3,'#ff8a7a'); };
+// The rolling wardrobe rack, beside TNB.
+SC.rack=(s,u)=>{
+  const tx=s.x||420,ty=s.y||306,x=lerp(640,tx,ez(u/.2));
+  gfx.globalAlpha=u>.92?(1-u)/.08:1;
+  R(x-56,ty-120,4,120,OUT); R(x+52,ty-120,4,120,OUT); R(x-58,ty-122,116,5,OUT); R(x-56,ty-121,112,3,'#aeb3ba');
+  R(x-62,ty-2,124,5,OUT); for(const wx of [-56,54]) { E(wx+x,ty+6,5,5,OUT); E(wx+x,ty+6,3,3,'#5e6670'); }
+  const cs=[['#e0402e','#fff6dc'],['#284fb4','#ffd166'],['#9be39a','#2b2a26'],['#c9b3e6','#fff6dc'],['#ffd166','#e0402e']];
+  cs.forEach((c,k)=>{ gfx.save(); gfx.translate(x-40+k*20,ty-88+Math.sin(s.t*3+k)*1.5); gfx.scale(.8,.8); shirtOn(c[0],c[1]); gfx.restore(); });
+  RO(x-36,ty-150,72,18,'#fff6dc'); label('WARDROBE',x,ty-147,'#284fb4',2);
+};
+// The monster, dressed for its scene: top hat, bow tie, boa.
+SC.dressed=(s,u)=>{
+  const x=battle.enemyX||GX,top=battle.enemyTop||180,k=s.pieces||3;
+  gfx.globalAlpha=u>.9?(1-u)/.1:1;
+  gfx.save(); gfx.translate(x,top-14); if(k>0) { RO(-18,-26,36,26,'#2b2a26'); R(-16,-8,32,5,'#c0402e'); RO(-26,0,52,6,'#2b2a26'); } gfx.restore();
+  gfx.save(); gfx.translate(x,226); if(k>2) for(let j=0;j<9;j++) { const a=j/8*Math.PI; E(Math.cos(a)*40,Math.sin(a)*12+8,8,7,j%2?'#ff8fb8':'#ff6b9a'); } if(k>1) { poly([[0,0],[-18,-10],[-18,10]],'#e0402e',true); poly([[0,0],[18,-10],[18,10]],'#e0402e',true); E(0,0,5,5,OUT); } gfx.restore();
+};
+
+// ================= Moves =================
+// Mug Toss: a second from the shelf. Free.
+T.basic=E2=>{ const {i,m,fx}=E2;
+  enqueue(()=>{ setMessage(pick(['TNB lobs a mug at it. A second. He has plenty.','TNB bonks it with a bowl. Handmade. Food safe.'])); hold(i,'mug',1.3,{}); say(m.id,'basic'); },
+    300,()=>pose(fx,'wind',.35),320,()=>{ pose(fx,'throw',.34); battle.held=null; const h=hand(); toss('mug',h.x,h.y,GX+6,208,0,.65,70); sfx.whoosh(); },320,
+    380,()=>{ sfx.bonk(); sfx.splat(); battle.shakeEnemy=.4; scene('shards',.9,{x:GX+6,y:208,n:12}); scene('crumbs',.8,{x:GX+6,y:208,n:14,c:'#6b4429',sp:90}); scene('burst',.35,{x:GX+10,y:208,c:'#f4efe0'}); bt('CLINK',96,34,'#9fd8ff',3,.8); hit(E2); },
+    720,E2.result,()=>checkEnemy()); };
+
+// Carve: hops on the longboard and carves S-turns straight into the monster.
+T.carve=E2=>{ const {i,m,fx}=E2; const p0=pos();
+  enqueue(()=>{ setMessage('TNB drops his longboard and pushes off. Carve left. Carve right.'); say(m.id,'carve',.2);
+      scene('board',2.0,{}); scene('carvetrail',2.0,{x0:p0.cx,x1:250,y:p0.base+8});
+      b7Later(()=>{ if(battle.active) S.roll(1.0); },150);
+      path(fx,2.0,(q,c)=>{
+        if(q<.55) { const u=q/.55,x=lerp(c.origX,250,u*u*(3-2*u)),wob=Math.sin(u*Math.PI*3); return {cx:x,base:c.origBase-10+wob*14,rot:wob*.12}; }
+        if(q<.68) { const u=(q-.55)/.13; return {cx:250+Math.sin(u*Math.PI)*-14,base:c.origBase-10-Math.sin(u*Math.PI)*30,rot:-u*.3}; }
+        const u=(q-.68)/.32; return {cx:lerp(250,c.origX,u*u*(3-2*u)),base:c.origBase-10-Math.sin(u*Math.PI)*16,rot:0};
+      }); },
+    1150,()=>{ sfx.thud(); battle.slash=.22; battle.enemyKnock=.45; scene('burst',.45,{x:214,y:226}); scene('dust',.6,{x:230,y:262,n:6}); bt('CARVED',96,34,'#ffe08a',3,.9); hit(E2); },
+    950,E2.result+' TNB rolls back, not even out of breath.',()=>checkEnemy()); };
+
+// Quick Change: TNB rolls in the wardrobe rack and dresses the monster for its scene. Three pieces, three hits.
+T.quickchange=E2=>{ const {i,m,fx}=E2; const pieces=['tophat','bowtie','boa'];
+  enqueue(()=>{ setMessage('TNB rolls in the wardrobe rack. The '+enemyName().toLowerCase()+' is needed on set. In costume.'); say(m.id,'quickchange',.2); S.roll(.8); scene('rack',4.0,{back:true,x:470}); },
+    ...pieces.flatMap((kd,k)=>[k===0?800:450,()=>pose(fx,'wind',.25),220,()=>{ pose(fx,'throw',.3); const h=hand(); toss(kd,h.x,h.y,GX,kd==='tophat'?(battle.enemyTop||180)-24:226,0,.5,70); sfx.whoosh(); },
+      500,()=>{ sfx.bonk(); battle.shakeEnemy=.3; scene('burst',.35,{x:GX,y:kd==='tophat'?(battle.enemyTop||180)-14:226,c:'#fff6dc'}); part(E2,3,k); if(k===0) scene('dressed',3.2,{pieces:1}); else battle.scenes.filter(q=>q.kind==='dressed').forEach(q=>q.pieces=k+1); bt(['HAT','BOW TIE','BOA'][k],96,32,'#ffd166',3,.6); }]),
+    400,()=>{ sfx.levelChime(); battle.flashEnemy=.3; scene('flash',.25,{a:.35}); bt('CONTINUITY',96,36,'#ff8fb8',3,1.1); },
+    1100,E2.result+' It looks great. It is furious about it.',()=>checkEnemy()); };
+
+// Next Stop: the express train comes through. TNB is driving.
+T.metro=E2=>{ const {i,m,fx}=E2;
+  enqueue(()=>{ setMessage('TNB checks the schedule. The express is right on time.'); pose(fx,'hip',1.2); say(m.id,'metro',.2); scene('stopsign',2.8,{}); scene('track',2.8,{y:270,back:true}); S.ding(); },
+    900,()=>{ S.horn(); S.rumble(1.8); path(fx,2.0,q=>({hide:q>.05&&q<.95})); scene('train',1.8,{x0:640,x1:-470,y:272}); bt('DING DING',140,22,'#ffd166',2,.8); },
+    720,()=>{ battle.enemyKnock=.45; battle.shakeEnemy=.7; battle.flashEnemy=.3; scene('dust',.8,{x:GX,y:262,n:8,sp:20}); bt('DOORS CLOSING',96,36,'#fff6dc',2,1); sfx.thud(); hit(E2); },
+    1250,()=>{ pose(fx,'celeb',.8); },
+    E2.result+' TNB gives the train a little wave. It waves back.',()=>checkEnemy()); };
+
+// Jump Scare: lights out, VHS hum, eyes in the dark, then BOO. May leave the monster too rattled to act.
+T.jumpscare=E2=>{ const {i,m,fx}=E2; let spooked=false;
+  enqueue(()=>{ setMessage('TNB puts on his favorite horror movie. He has seen it eleven times.'); say(m.id,'jumpscare',.2); scene('dark',3.4,{a:.85,c:'#06060c'}); scene('vhs',3.4,{}); S.drone(2.2); },
+    1100,()=>{ scene('eyes',1.2,{}); },
+    1200,()=>{ S.sting(); scene('flash',.25,{a:.8}); scene('scare',1.3,{}); battle.lift={t:0,dur:.7}; battle.flashEnemy=.4; bt('BOO',132,30,'#ff3b3b',5,1); },
+    350,()=>{ scene('yikes',1.2,{}); battle.shakeEnemy=.8; hit(E2); spooked=confuseMaybe(.45); },
+    800,()=>setMessage(spooked?E2.result+' The '+enemyName().toLowerCase()+' is too scared to move.':E2.result+' TNB was not scared. Not even a little.'),
+    1150,()=>checkEnemy()); };
+
+// Kiln Blast: cone six, straight from the studio.
+T.kiln=E2=>{ const {i,m,fx}=E2;
+  enqueue(()=>{ setMessage('TNB opens the kiln. Cone six. Do not touch the door.'); pose(fx,'aim',3.0); say(m.id,'kiln',.3); scene('kiln',3.0,{}); sfx.slideWhistle(); },
+    900,()=>{ sfx.fireball(); scene('jet',1.5,{x0:298,y0:236,x1:196,y1:226,w:34,grow:.2,cs:['#ff8c3a','#ffd166','#fff6c8','#ffffff']}); scene('flames',1.4,{x:GX,y:262,w:100,h:120,cs:['#ff8c3a','#ffd166','#fff6c8','#ffffff']}); scene('flash',.45,{c:'#fff2c8',a:.5}); },
+    700,()=>{ battle.flashEnemy=.5; battle.shakeEnemy=.7; hit(E2); scene('shards',1.0,{x:GX,y:222,n:14,cs:['#b4573d','#d98f3f','#f4efe0']}); bt('CONE SIX',96,36,'#ffb070',3,1); },
+    900,E2.result+' Fired. Let it cool overnight.',()=>checkEnemy()); };
+
+// Bomb the Hill: a hill appears. TNB rides it. No brakes. Never brakes.
+T.bomb=E2=>{ const {i,m,fx}=E2;
+  enqueue(()=>{ setMessage('A hill appears behind TNB. He has been waiting his whole life for this hill.'); say(m.id,'bomb',.3); scene('bighill',3.4,{back:true}); scene('board',3.4,{});
+      path(fx,3.4,(q,c)=>{
+        if(q<.14) { const u=q/.14; return {cx:lerp(c.origX,552,u),base:lerp(c.origBase,hillY(552),u)-10-Math.sin(u*Math.PI)*60,noShadow:true}; }
+        if(q<.32) return {cx:552,base:hillY(552)-10,rot:Math.sin(c.t*14)*.05,noShadow:true};
+        if(q<.62) { const u=(q-.32)/.3,x=lerp(552,40,u*u); return {cx:x,base:(x>330?hillY(x):284)-10,rot:x>330?-.35*(1-(x-330)/220)-.2:0,noShadow:true}; }
+        if(q<.72) return {hide:true};
+        const u=(q-.72)/.28; return {cx:lerp(640,c.origX,1-Math.pow(1-u,2)),base:c.origBase-10,rot:0};
+      }); },
+    1100,()=>{ bt('NO BRAKES',96,24,'#ffe08a',3,1.2); S.roll(1.2); sfx.slideWhistle(); },
+    700,()=>{ for(let k=0;k<6;k++) scene('dust',.5,{x:300-k*20,y:286,n:3,delay:k*.04}); },
+    150,()=>{ sfx.thud(); sfx.lineClear(); battle.enemyKnock=.45; battle.shakeEnemy=.8; battle.flashEnemy=.4; scene('ring',.7,{x:GX,y:264,r:120}); scene('burst',.5,{x:GX,y:226,r:70,n:14}); scene('dust',.8,{x:GX,y:262,n:8}); bt('BOMBED',96,36,'#ffb070',4,1); hit(E2); },
+    1550,E2.result+' TNB comes back around from the other side. Somehow.',()=>checkEnemy()); };
+
+// That's a Wrap: final take. The last train out of the dark, a rain of mugs, then credits.
+T.wrap=E2=>{ const {i,m,fx}=E2;
+  const credits=[['STARRING','THE '+enemyName()],['DIRECTED BY','TOM'],['WARDROBE','TNB'],['MUGS BY','TNB'],['TRAIN BY','METRO'],['NO MONSTERS WERE','HARMED. MOSTLY.']];
+  enqueue(()=>{ setMessage('TNB checks the call sheet. "Last scene of the day. Everybody in costume. Final take."'); appr(fx,2.6); say(m.id,'wrap',.2); S.walkie(); scene('monitor',2.4,{}); scene('slate',2.2,{snap:.66,lines:['FINAL SCENE','TAKE 99',enemyName()]}); },
+    1450,()=>{ S.clack(); pose(fx,'act',.5); bt('ACTION',96,30,'#ffe08a',4,.8); battle.shakeEnemy=.4; },
+    900,()=>{ scene('dark',2.4,{a:.85,c:'#06060c'}); scene('headlight',1.1,{}); S.drone(1.2); S.horn(); },
+    1000,()=>{ S.rumble(1.4); scene('track',1.6,{y:270,back:true}); scene('train',1.2,{x0:640,x1:-470,y:272}); scene('flash',.3,{c:'#fff6c8',a:.6}); },
+    430,()=>{ battle.enemyKnock=.45; battle.shakeEnemy=.7; sfx.thud(); part(E2,2,0); bt('LAST TRAIN',96,36,'#ffd166',3,.7); },
+    900,()=>{ const cs=['#5aa6a8','#b4573d','#d98f3f','#8aa6a8','#c9b3e6']; for(let k=0;k<9;k++) toss('tnbmug',120+k*12,-30-k*6,GX-30+(k*23)%60,196+(k%3)*12,k*.09,.55,0,{c:cs[k%5]}); sfx.whoosh(); bt('MUG RAIN',96,36,'#9fd8ff',3,.9); },
+    800,()=>{ sfx.bonk(); sfx.splat(); battle.shakeEnemy=.8; battle.flashEnemy=.5; scene('shards',1.0,{x:GX,y:214,n:22}); part(E2,2,1); },
+    500,()=>{ scene('letterbox',4.2,{}); scene('credits',4.2,{lines:credits}); pose(fx,'celeb',1.5); sfx.fanfare(); bt('THAT\'S A WRAP',96,22,'#ffe08a',3,1.6); },
+    1800,()=>{ scene('confetti',1.6,{x0:70,x1:300,n:40}); },
+    2400,E2.result+' That is a wrap on the '+enemyName().toLowerCase()+'. Great work, everybody.',()=>checkEnemy()); };
+
+// ================= Special: WARDROBE =================
+// Rolls out the wardrobe rack and throws a fresh outfit to the chosen member: back up if they were down,
+// otherwise healed and Wardrobe Fresh (E2.apply runs the numbers).
+T.wardrobe=E2=>{ const {i,m,fx}=E2;
+  pose(fx,'hip',1.6); S.roll(.7); say(m.id,'wardrobe');
+  const target=E2.targets[0]||m,ti=target.idx,down=!alive(target);
+  scene('rack',3.2,{back:true,x:470});
+  enqueue(
+    ()=>{ setMessage(m.name+' rolls out the wardrobe rack. "Arms up. New look."'); },
+    1000,()=>{ pose(fx,'throw',.4); const tp=BATTLE_POS[ti]; toss('shirt',400,200,tp.x*3,tp.base*3-60,0,.6,70,{c:'#284fb4',c2:'#ffd166'}); sfx.whoosh(); },
+    650,()=>{
+      E2.apply();
+      scene('glow',.8,{x:BATTLE_POS[ti].x*3,y:BATTLE_POS[ti].base*3-40,c:'#9be39a',a:.35});
+      scene('confetti',.9,{x0:BATTLE_POS[ti].x*3-40,x1:BATTLE_POS[ti].x*3+40,n:14});
+    },
+    down?target.name+' is back up. A fresh outfit can turn anyone’s day around.':target.name+' is Wardrobe Fresh. If they go down, they bounce right back up.',
+    ()=>checkEnemy()
+  );
+};
+})();
+
+// ================= Option 3 Primary kit (phase 4) =================
+// Cards: adventures-of-tom-ability-revamp.md (TNB). Built to the set-piece standard (status.md, "animation quality
+// pass"): every move is 3.5 to 5 s and TNB performs it with his body (walks over, kneels, pushes the rack, rides the
+// board), with the card's props as additions. Timelines are absolute ms at 1x (RFX.ST.play); ['hf',ms] marks the
+// impact so the High-Five window closes on it. All scenes here are drawn in real coordinates (prefix tn_, no warp).
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const poly=(pts,c,o=true)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); if(o) { gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.stroke(); } gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const bt=(txt,x,y,c,sc,dur=1)=>battle.texts.push({txt,x,y,color:c,sc,t:0,dur});
+const T=RECRUIT_MOVES.tnb;
+const CLAY='#c98a5c',CLAYD='#8f5634',SLIP='#ecd2b0',CELA='#9fd8c0',COB='#3f6fc0',CREAM='#fff6dc',GOLD='#ffe08a',PINK='#ff9ac0',STEEL='#aeb3ba',TAPE='#f2c94c',RED='#e0402e',WOOD='#b88848';
+ST.nw('tn_');
+const res=E2=>E2.result?E2.result+' ':'';
+const kindLine=(t,ally)=>t&&t.side==='foe'?t.name+' warms up a little.':ally;
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const foes=E2=>(E2.targets||[]).filter(t=>t.side==='foe');
+const hand=()=>ST.hand();
+const hitAll=(E2,list)=>{ for(const f of list) ST.jolt(f,.4); landHit(100); };
+// Where TNB stands to work on someone: just right of them, facing them (his sprites face left). Himself: his own spot.
+const spotFor=(m,t)=>{ if(!t||t===m) return {x:'home',y:'home',self:true}; const u=ST.unit(t); return {x:u.x+u.w*.5+(t.side==='foe'?34:30),y:u.base+3}; };
+const front=f=>({x:f.x+f.w*.5+52,y:f.base+3});
+const sfxs=k=>{ if(sfx[k]) sfx[k](); };
+const S={ roll(d=1){ noise({dur:d,vol:.1,f0:1800,f1:900,type:'bandpass',q:.7}); },
+  drone(d=1.6){ tone({type:'sawtooth',f0:55,f1:52,dur:d,vol:.12,filter:300,sweep:'linear'}); tone({type:'sine',f0:110,f1:104,dur:d,vol:.06}); },
+  sting(){ noise({dur:.35,vol:.35,f0:5000,f1:1200,type:'bandpass',q:.6}); tone({type:'sawtooth',f0:1400,f1:1250,dur:.45,vol:.14}); } };
+
+// ---------- Props ----------
+const clayCurl=(x,y,r=6,ang=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.strokeStyle=OUT; gfx.lineWidth=5; gfx.beginPath();
+  for(let k=0;k<=20;k++) { const a=k/20*Math.PI*3.2,rr=r*(1-k/26); const px=Math.cos(a)*rr,py=Math.sin(a)*rr; k?gfx.lineTo(px,py):gfx.moveTo(px,py); } gfx.stroke();
+  gfx.strokeStyle=CLAY; gfx.lineWidth=3; gfx.stroke(); gfx.restore(); };
+const tray=(x,y,label='REUSE')=>{ poly([[x-18,y-4],[x+18,y-4],[x+14,y+5],[x-14,y+5]],SLIP); R(x-12,y-2,24,2,CLAYD); label&&labelTxt(label,x,y-16,CREAM,1); };
+const labelTxt=(t,x,y,c,sc)=>label(t,x,y,c,sc);
+// The wardrobe rack with five costumes and a sign.
+const rack=(x,y,sway=0,sign=true,sleeve=null)=>{
+  R(x-48,y-112,4,112,OUT); R(x+44,y-112,4,112,OUT); R(x-50,y-114,100,5,OUT); R(x-48,y-113,96,3,STEEL);
+  R(x-54,y-2,108,5,OUT); for(const wx of [-48,46]) { E(x+wx,y+6,5,5,OUT); E(x+wx,y+6,3,3,'#5e6670'); }
+  const cs=[['#e0402e','#fff6dc'],['#284fb4','#ffd166'],['#9be39a','#2b2a26'],['#c9b3e6','#fff6dc'],['#ffd166','#e0402e']];
+  cs.forEach((c,k)=>{ const sx=x-36+k*18,sy=y-100+Math.sin(sway+k)*1.5; Ln(sx,y-112,sx,sy-2,2,OUT);
+    poly([[sx-9,sy],[sx+9,sy],[sx+11,sy+8],[sx+7,sy+8],[sx+7,sy+40],[sx-7,sy+40],[sx-7,sy+8],[sx-11,sy+8]],c[0]); R(sx-2,sy+2,4,4,c[1]); });
+  if(sign) { RO(x-32,y-138,64,16,CREAM); label('WARDROBE',x,y-133,'#284fb4',1); }
+};
+SC.tn_rack=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const x=st.x+(s.off||-78),y=st.y; gfx.globalAlpha=fin(u,.05)*fade(u,.96); rack(x,y,s.t*3,true); };
+// A stage light beam from the top of the screen onto a spot.
+SC.tn_beam=(s,u)=>{ const a=fin(u,.15)*fade(u,.85)*.35; gfx.globalAlpha=a; gfx.fillStyle='#fff6c8'; gfx.beginPath(); gfx.moveTo(s.x-14,0); gfx.lineTo(s.x+14,0); gfx.lineTo(s.x+60,s.y); gfx.lineTo(s.x-60,s.y); gfx.closePath(); gfx.fill();
+  gfx.globalAlpha=a*1.6; E(s.x,s.y,60,10,'#fff6c8'); };
+// A costume silhouette drops onto someone, then glows.
+SC.tn_costume=(s,u)=>{ const d=ez(u/.35),x=s.x,y=lerp(s.y-170,s.y-s.h*.62,d); gfx.globalAlpha=fade(u,.8);
+  poly([[x-20,y],[x+20,y],[x+26,y+14],[x+16,y+14],[x+16,y+52],[x-16,y+52],[x-16,y+14],[x-26,y+14]],s.c||'#284fb4'); R(x-4,y+4,8,8,s.c2||'#ffd166');
+  if(u>.35) { gfx.globalAlpha=fade(u,.8)*(1-cl((u-.35)/.4)); ring(x,y+26,30+u*30,40+u*30,3,GOLD); } };
+// A crooked collar marker that straightens.
+SC.tn_collar=(s,u)=>{ const a=lerp(.5,0,ez((u-.35)/.3)); gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(a);
+  poly([[-12,0],[0,6],[12,0],[10,-4],[0,1],[-10,-4]],CREAM); gfx.restore(); if(u>.6) label('CONTINUITY',s.x,s.y-22,GOLD,1); };
+// A costume tag over someone (the rack costume they now wear).
+SC.tn_tag=(s,u)=>{ const y=s.y-ez(u/.2)*10; gfx.globalAlpha=fade(u,.8); RO(s.x-26,y-8,52,14,s.c||CREAM); label(s.txt,s.x,y-4,'#2b2a26',1); };
+// Measuring tape: a loop traced around someone, then unzipped like a paper silhouette.
+SC.tn_tape=(s,u)=>{ const cx=s.x,cy=s.cy,rx=s.rx,ry=s.ry,tr=cl(u/s.trace),unz=cl((u-s.unzip)/(1-s.unzip)); gfx.globalAlpha=fade(u,.92);
+  if(unz<=0) { gfx.lineCap='round'; for(const [w,c] of [[7,OUT],[4,TAPE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2*tr); gfx.stroke(); }
+    for(let k=0;k<20*tr;k++) { const a=k/20*Math.PI*2; Ln(cx+Math.cos(a)*rx,cy+Math.sin(a)*ry-2,cx+Math.cos(a)*rx,cy+Math.sin(a)*ry+2,1,'#7a5a10'); } return; }
+  for(const side of [-1,1]) { gfx.save(); gfx.translate(cx+side*unz*30,cy-unz*40); gfx.rotate(side*unz*.8); gfx.globalAlpha=fade(u,.92)*(1-unz);
+    for(const [w,c] of [[7,OUT],[4,TAPE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(0,0,rx,ry,0,side<0?Math.PI*.5:-Math.PI*.5,side<0?Math.PI*1.5:Math.PI*.5); gfx.stroke(); } gfx.restore(); } };
+// A debuff tile falling out of someone.
+SC.tn_debuff=(s,u)=>{ const y=s.y+ez(u/.6)*s.fall,x=s.x+u*16; gfx.globalAlpha=1-cl((u-.6)/.4); gfx.save(); gfx.translate(x,y); gfx.rotate(u*3); RO(-7,-7,14,14,'#8a8fa8'); Ln(-4,-4,4,4,2,'#2b2a26'); Ln(4,-4,-4,4,2,'#2b2a26'); gfx.restore(); };
+// A pocket test: a pocket with a hand popping in and out.
+SC.tn_pocket=(s,u)=>{ const p=Math.abs(Math.sin(u*Math.PI*3)); gfx.globalAlpha=fade(u,.8); RO(s.x-10,s.y-8,20,16,'#5b7fd0'); R(s.x-10,s.y-8,20,4,'#3f5fa8'); E(s.x,s.y-8-p*8,5,5,'#faab7b'); label('POCKETS!',s.x,s.y-30,GOLD,1); };
+// A loose thread by someone's health, then two big safety pins and a warm outline.
+SC.tn_thread=(s,u)=>{ const x=s.x,y=s.y,pin=cl((u-s.pinAt)/.12); gfx.globalAlpha=fade(u,.9);
+  RO(x-22,y-4,36,8,'#2b4a3a'); R(x-20,y-2,26,4,'#9be39a'); const sw=Math.sin(s.t*9)*6*(1-pin);
+  if(pin<1) { gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(x+14,y); gfx.quadraticCurveTo(x+22+sw,y+10,x+18+sw,y+22); gfx.stroke(); if(u<s.pinAt) label('LOOSE',x,y-16,CREAM,1); }
+  if(pin>0) { for(const k of [-1,1]) { const px=x+k*10,py=y+2; gfx.save(); gfx.translate(px,py); gfx.rotate(k*.3); RO(-3,-14,6,22,'#dfe6ee'); EO(0,-14,5,5,'#dfe6ee'); E(0,-14,2,2,'#8a8fa8'); gfx.restore(); } }
+  if(u>s.pinAt) { const q=cl((u-s.pinAt)/.2); gfx.globalAlpha=fade(u,.9)*.9; gfx.strokeStyle='rgba(255,200,120,.9)'; gfx.lineWidth=4; const ox=s.ox,oy=s.oy,w=s.w*(.9+q*.1),h=s.h*(.9+q*.1);
+    gfx.beginPath(); gfx.ellipse(ox,oy,w*.5,h*.5,0,0,Math.PI*2); gfx.stroke(); if(q>.5) label('IN ONE PIECE',ox,oy-h*.5-14,GOLD,1); } };
+// A lost-property box (it slides in), with a claim ticket.
+const lostBox=(x,y)=>{ RO(x-26,y-34,52,34,'#a87a48'); R(x-26,y-34,52,6,'#8a5e32'); RO(x-16,y-26,32,10,CREAM); label('LOST',x,y-24,'#2b2a26',1); };
+SC.tn_box=(s,u)=>{ const inn=ez(u/.1),out=u>s.outAt?ez((u-s.outAt)/(1-s.outAt)):0,x=s.x+(1-inn)*120+out*140; gfx.globalAlpha=1-out; lostBox(x,s.y);
+  if(s.stampAt&&u>s.stampAt) { const q=cl((u-s.stampAt)/.08); gfx.save(); gfx.translate(x,s.y-50); gfx.rotate(-.15); gfx.globalAlpha=(1-out)*q; RO(-26,-8,52,16,'rgba(0,0,0,0)'); gfx.strokeStyle=RED; gfx.lineWidth=3; gfx.strokeRect(-24,-7,48,14); label('FOUND',0,-3,RED,1); gfx.restore(); } };
+SC.tn_ticket=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(h.x-8,h.y-14); gfx.rotate(-.2); RO(-24,-9,48,18,CREAM); R(-24,-9,6,18,'#e8b048'); label('MISSING',3,-6,'#2b2a26',1); label('WARMTH',3,1,RED,1); gfx.restore(); };
+// The scarf: from the box to TNB's hand, then a loop around the recipient; s.st follows TNB.
+SC.tn_scarf=(s,u)=>{ const h=hand(),bx=s.bx,by=s.by-30; let ex=h.x,ey=h.y; const wrap=cl((u-s.wrapAt)/.12),back=s.backAt?cl((u-s.backAt)/(1-s.backAt)):0;
+  if(wrap>0) { ex=lerp(ex,s.tx,wrap); ey=lerp(ey,s.ty,wrap); } if(back>0) { ex=lerp(ex,bx,back); ey=lerp(ey,by,back); }
+  gfx.globalAlpha=1; for(const [w,c] of [[10,OUT],[6,'#e86a8a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(bx,by); gfx.quadraticCurveTo((bx+ex)/2,Math.max(by,ey)+30+Math.sin(s.t*5)*5,ex,ey); gfx.stroke(); }
+  for(let k=1;k<6;k++) { const q=k/6,px=lerp(bx,ex,q),py=lerp(by,ey,q)+Math.sin(q*Math.PI)*(Math.max(by,ey)-Math.min(by,ey)+30)*.5; R(px-1,py-3,3,6,'#ffd0dc'); }
+  if(wrap>=1&&back<.2) { for(const [w,c] of [[9,OUT],[5,'#e86a8a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(s.tx,s.ty,16,6,0,0,Math.PI*2); gfx.stroke(); } } };
+SC.tn_flakes=(s,u)=>{ for(let k=0;k<8;k++) { const q=cl(u*1.3-k*.04),x=s.x-18+k*5+Math.sin(k*2.3+q*4)*6,y=s.y-s.h*.7+q*(s.h*.7); gfx.globalAlpha=1-q; R(x,y,4,4,k%2?'#e8b048':'#ffd27a'); } };
+SC.tn_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||40,s.ry||56,s.c||'#ffd27a'); };
+SC.tn_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); label(s.txt,s.x,s.y-ez(u/.3)*8,s.c||CREAM,s.sc||1); };
+SC.tn_poof=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+s.seed,d=ez(u)*(s.r||28); gfx.globalAlpha=1-u; E(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.6,4*(1-u)+1,4*(1-u)+1,s.c||CLAY); } };
+SC.tn_heart=(s,u)=>{ gfx.globalAlpha=fade(u,.8); heart(s.x,s.y-ez(u)*16,s.r||6,PINK); };
+// Practical Effects: the tiny curtain, the conspicuous string, the cardboard ghost on a spring.
+SC.tn_curtain=(s,u)=>{ const x=s.x,y=s.y,pop=cl((u-s.popAt)/.06),ret=cl((u-s.popAt-.18)/.2); gfx.globalAlpha=fin(u,.05)*fade(u,.92);
+  RO(x-3,y-70,4,70,WOOD); RO(x-22,y-74,42,5,WOOD); const op=pop>0?1-ret*.4:0; R(x-20,y-68,18*(1-op*.7),60,'#7a1a2a'); R(x+2+op*12,y-68,18*(1-op*.7),60,'#7a1a2a'); R(x-20,y-68,40,4,'#a8283a');
+  if(pop>0) { const ext=pop*(1-ret*.6),gx=lerp(x,s.fx,ext),gy=y-40; for(let k=0;k<6;k++) { const zx=lerp(x,gx-16,k/6); Ln(zx,gy+(k%2?-6:6),lerp(x,gx-16,(k+1)/6),gy+(k%2?6:-6),2,STEEL); }
+    gfx.save(); gfx.translate(gx,gy+Math.sin(s.t*20)*ret*3); gfx.scale(1.6,1.6); poly([[-16,18],[-16,-8],[-12,-16],[0,-20],[12,-16],[16,-8],[16,18],[10,12],[4,18],[-2,12],[-8,18]],'#f4efe0'); E(-6,-6,3,4,'#2b2a26'); E(6,-6,3,4,'#2b2a26'); E(0,4,4,3,'#2b2a26'); R(10,-10,4,24,'#c9b48a'); gfx.restore(); } };
+SC.tn_string=(s,u)=>{ const h=hand(),ax=s.x,ay=s.y-60,taut=s.tautAt&&u>s.tautAt,sag=taut?2:22; gfx.globalAlpha=fade(u,.92);
+  gfx.strokeStyle='#fff'; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(ax,ay); gfx.quadraticCurveTo((ax+h.x)/2,(ay+h.y)/2+sag,h.x,h.y); gfx.stroke();
+  const mx=(ax+h.x)/2,my=(ay+h.y)/2+sag*.5; RO(mx-18,my-22,36,12,CREAM); label('STRING',mx,my-19,'#2b2a26',1); Ln(mx,my-10,mx,my-2,2,CREAM); };
+SC.tn_dark=(s,u)=>{ gfx.globalAlpha=fin(u,.15)*fade(u,.85)*(s.a||.45); R(0,0,576,324,'#0a0814'); };
+// Rush-Hour Racks: floor clearance arrows and the long sleeve sweeping a row.
+SC.tn_arrows=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); for(const x of [s.x0,s.x1]) { poly([[x-8,s.y],[x+8,s.y],[x,s.y-12]],GOLD); } Ln(s.x0,s.y+6,s.x1,s.y+6,2,GOLD); label('CLEARANCE',(s.x0+s.x1)/2,s.y+12,GOLD,1); };
+SC.tn_sleeve=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const px=st.x-78-36,py=st.y-104;
+  const sweep=cl((u-s.sweepAt)/s.sweepLen),back=cl((u-s.backAt)/.2),ang=lerp(lerp(-1.45,-.05,ez(sweep)),-1.45,ez(back)),len=lerp(60,Math.max(120,px-s.reach),ez(sweep)*(1-ez(back)));
+  gfx.globalAlpha=fade(u,.96); gfx.save(); gfx.translate(px,py); gfx.rotate(Math.PI+ang); RO(0,-7,len,14,'#e0402e'); for(let k=20;k<len;k+=24) R(k,-7,3,14,'#b02a1e'); RO(len,-9,10,18,CREAM); gfx.restore();
+  if(sweep>.4&&back<.5) { gfx.globalAlpha=1; label('MIND THE SLEEVE GAP',s.lx,s.ly,GOLD,1); } };
+// Clay Pigeon: the bird in his palm, in flight (one flap), and the indignant lump.
+const pigeon=(x,y,flap,lump=0)=>{ if(lump>0) { EO(x,y,9*(1+lump*.2),7,CLAY); Ln(x-6,y-5,x-1,y-3,2,OUT); Ln(x+6,y-5,x+1,y-3,2,OUT); E(x-3,y-1,1.5,1.5,OUT); E(x+3,y-1,1.5,1.5,OUT); return; }
+  EO(x,y,10,7,CLAY); EO(x-9,y-4,5,5,CLAY); poly([[x-14,y-4],[x-19,y-2],[x-14,y-1]],GOLD); E(x-10,y-5,1.5,1.5,OUT); poly([[x+8,y-1],[x+16,y-5],[x+15,y+3]],CLAYD);
+  const w=flap?-12:-2; poly([[x-2,y-3],[x+6,y-3],[x+2,y+w-4]],CLAYD); };
+SC.tn_shape=(s,u)=>{ const h=hand(),x=h.x-4,y=h.y-10; gfx.globalAlpha=fade(u,.97); if(u<.55) { const q=u/.55; EO(x,y,9-q*2,8,CLAY); for(let k=0;k<3;k++) { const a=s.t*8+k*2.1; R(x+Math.cos(a)*14,y+Math.sin(a)*8,2,2,SLIP); } label('SHAPE',x,y-24,CREAM,1); } else pigeon(x,y,false); };
+// Cone Six: the kiln cone indicator (bends, then bows) and the glaze outline.
+SC.tn_cone=(s,u)=>{ const bend=cl((u-s.bendAt)/.25),bow=s.bowAt&&u>s.bowAt?Math.sin(cl((u-s.bowAt)/.25)*Math.PI):0; gfx.globalAlpha=fin(u,.06)*fade(u,.93);
+  RO(s.x-10,s.y-4,20,4,SLIP); gfx.save(); gfx.translate(s.x,s.y-4); gfx.rotate(-bend*1.0-bow*.5); poly([[-5,0],[5,0],[1,-26],[-1,-26]],'#f0d080'); gfx.restore(); if(bend>.5) label('CONE 6',s.x,s.y-44,GOLD,1); };
+SC.tn_glaze=(s,u)=>{ const d=ez(u/.4),x=s.x,y0=s.y-s.h,h=s.h*d; gfx.globalAlpha=fin(u,.05)*fade(u,.8)*.55; gfx.fillStyle=CELA; gfx.beginPath();
+  gfx.moveTo(x-s.w*.5,y0); gfx.lineTo(x+s.w*.5,y0); for(let k=0;k<=8;k++) { const px=x+s.w*.5-k*s.w/8; gfx.lineTo(px,y0+h-(k%2?10:0)*d); } gfx.closePath(); gfx.fill();
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.strokeStyle=COB; gfx.lineWidth=3; gfx.strokeRect(x-s.w*.5,y0,s.w,Math.max(2,h)); if(d>.9) label('GLAZED',x,y0-14,CELA,1); };
+// Curb Appeal: the board under TNB, the painted curb line that peels up and sweeps.
+const board=(x,y,tilt=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); for(const wx of [-24,22]) { E(wx,8,6,6,OUT); E(wx,8,4,4,RED); E(wx,8,1.5,1.5,GOLD); }
+  R(-38,-1,76,9,OUT); R(-36,1,72,5,'#c48a4a'); R(-36,1,72,2,'#2b2a26'); gfx.restore(); };
+SC.tn_board=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=fade(u,.97); board(st.x,st.y+2,Math.sin(s.t*6)*.06); };
+SC.tn_curb=(s,u)=>{ const st=s.st; gfx.globalAlpha=fin(u,.08)*fade(u,.92); const y=s.y,x0=s.x0,x1=s.x1; const px=(st&&st.x!=null&&u>s.peelAt&&u<s.flatAt)?st.x:null;
+  for(let x=x0;x<x1;x+=8) { let lift=0; if(px!=null&&x>px) { const d=x-px; lift=Math.max(0,1-Math.abs(d-70)/90)*70; } const fl=u>s.flatAt?0:1; R(x,y-lift*fl,6,4,(x/8|0)%2?'#f2d24c':'#fff6dc'); }
+  if(u>s.peelAt&&u<s.flatAt) label('CURB APPEAL',(x0+x1)/2,y+12,GOLD,1); if(u>s.flatAt) label('PERFECTLY FLAT',(x0+x1)/2,y+12,CREAM,1); };
+// Fix the Wobble: the rocking platform and the clay wedge.
+SC.tn_platform=(s,u)=>{ const fixed=u>s.fixAt,a=fixed?0:Math.sin(s.t*7)*.07; gfx.globalAlpha=fin(u,.08)*fade(u,.9); gfx.save(); gfx.translate(s.x,s.y+6); gfx.rotate(a);
+  RO(-s.w*.5,-3,s.w,8,'#c9b48a'); R(-s.w*.5,4,8,6,'#8a7a5a'); R(s.w*.5-8,4,8,fixed?6:2,'#8a7a5a'); gfx.restore();
+  const wq=cl((u-s.wedgeAt)/(s.fixAt-s.wedgeAt)); if(u>s.wedgeAt) { const wx=lerp(s.x+s.w*.5+40,s.x+s.w*.5-4,ez(wq)); poly([[wx-6,s.y+16],[wx+6,s.y+16],[wx+6,s.y+10]],CLAY); }
+  if(!fixed&&u>.15) label('WOBBLE',s.x,s.y+24,CREAM,1); if(fixed&&u<s.fixAt+.2) label('CLICK',s.x+s.w*.5,s.y-8,GOLD,2); };
+// Kiln Door Policy: the freestanding kiln doorway, the shield tile, the heat.
+SC.tn_kiln=(s,u)=>{ const x=s.x,y=s.y,close=cl((u-s.closeAt)/.08),open=cl((u-s.openAt)/.08),door=close*(1-open),flash=u>s.closeAt+.08&&u<s.closeAt+.2;
+  gfx.globalAlpha=fin(u,.06)*fade(u,.92); RO(x-26,y-72,52,72,'#6a6a72'); R(x-20,y-64,40,56,flash?'#ffd27a':'#2b2224'); if(flash) { gfx.globalAlpha*=.6; E(x,y-36,40,50,'#ffb04a'); gfx.globalAlpha=fin(u,.06)*fade(u,.92); }
+  R(x-20,y-64,40*door,56,'#8a8a92'); if(door>.5) { R(x-18,y-38,6,4,'#2b2a26'); label('POLICY',x,y-58,GOLD,1); } R(x-30,y-76,60,6,'#4a4a52'); };
+const shieldTile=(x,y,cracked=0)=>{ poly([[x-9,y-10],[x+9,y-10],[x+9,y+2],[x,y+11],[x-9,y+2]],cracked?'#c9b48a':CELA); if(cracked) { Ln(x-6,y-6,x+2,y+4,2,OUT); Ln(x+1,y-9,x-2,y,2,OUT); } };
+SC.tn_tile=(s,u)=>{ const h=hand(); gfx.globalAlpha=1; shieldTile(h.x-6,h.y-6,s.cracked?1:0); if(s.tag) { RO(h.x-50,h.y-34,44,12,CREAM); label('TRY AGAIN',h.x-28,h.y-31,RED,1); Ln(h.x-14,h.y-22,h.x-8,h.y-12,1,CREAM); } };
+SC.tn_heat=(s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.4-k*.1); gfx.globalAlpha=(1-q)*.8; ring(lerp(s.x0,s.x1,q),lerp(s.y0,s.y1,q),10+q*20,14+q*26,3,k%2?'#ffb04a':GOLD); } };
+
+// ---------- Moves ----------
+// Clay Offcut (Basic): a curl of spare clay, flicked; it comes back to the REUSE tray.
+T.clay_offcut=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:600,f:'run'},{t:1050,x:420,f:'wind'},{t:1350,f:'throw'},{t:1750,f:'idle'},{t:2200,f:'spread'},{t:2750,hop:8,f:'celeb'},{t:2950,f:'runR'},{t:3550,x:'home',y:'home',f:'idle'}]);
+  let curlOn=true;
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB notices one little curl of spare clay on his thumb.'); say(m.id,'clay_offcut'); ST.draw(()=>{ if(!curlOn) return; const h=hand(); clayCurl(h.x-4,h.y-12,9,battle.time*2); },1.4); }],
+    [1350,()=>{ curlOn=false; const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>clayCurl(x,y,10,u*12),h.x,h.y-10,F.x+10,F.mid,.45,70); }],
+    ['hf',1800],
+    [1800,()=>{ sfx.bonk(); ST.jolt(f); scene('tn_poof',.5,{x:F.x+10,y:F.mid,c:CLAY}); scene('tn_text',.9,{x:F.x+62,y:F.top-2,txt:'BONK NOT',c:GOLD,sc:2,y:F.top-34}); landHit(100); }],
+    [1900,()=>{ const h=hand(); ST.fly((x,y,u)=>clayCurl(x,y,6,u*8),F.x+10,F.mid,h.x-6,h.y,.5,60); }],
+    [2200,()=>{ ST.draw(()=>{ const h=hand(); tray(h.x-8,h.y+2); },.75); }],
+    [2450,()=>{ sfx.ding(); }],
+    [3650,'end',res(E2)+'The offcut has found a second career.']]); };
+
+// WARDROBE (Signature, Primary animation): out for the rack, roll it into the light, the next costume drops on, collar fixed.
+T.wardrobeShow=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t),self=t===m;
+  const sx=self?null:H.x+108,stop={x:self?'home':sx,y:self?'home':H.base+4};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'runR'},{t:500,x:650,f:'runR',hide:true},{t:800,x:720,y:stop.y,f:'run'},{t:1800,x:stop.x,y:stop.y,f:'idle'},{t:2400,f:'run'},
+    {t:2700,x:self?'home':H.x+50,f:'act'},{t:3150,f:'celeb',hop:6},{t:3350,f:'runR'},{t:4000,x:700,f:'run',hide:true},{t:4300,x:620,f:'run'},{t:4800,x:'home',y:'home',f:'idle'}]);
+  const park=self?BATTLE_POS[m.idx].x*3:sx,rackSt={get x(){ return st.seg>=8?null:(st.seg<=2?st.x:Math.max(park,st.x)); },get y(){ return st.y; }};
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB heads off for the wardrobe rack.'); say(m.id,'wardrobe'); sfxs('whoosh'); }],
+    [800,()=>{ scene('tn_rack',3.2,{st:rackSt,off:self?-82:-78,back:true}); S.roll(1); }],
+    [1500,()=>{ scene('tn_beam',2.6,{x:H.x,y:H.base}); setMessage(down?t.name+' is down. The next scene still needs them.':'Stage lights up. The next scene still needs '+t.name+'.'); }],
+    [1900,()=>{ const r=B2_RACK[t.rack||0]||B2_RACK[0]; scene('tn_costume',1.3,{x:H.x,y:H.base,h:H.h,c:r.c,c2:r.c2}); sfxs('whoosh'); }],
+    ['hf',2350],
+    [2350,()=>{ E2.apply(); sfx.heal(); scene('tn_glow',.9,{x:H.x,y:H.mid,c:'#9be39a'}); const cur=B2_RACK.find(r=>t.st&&t.st[r.id]); if(cur) scene('tn_tag',1.6,{x:H.x,y:H.top-6,txt:cur.tag,c:cur.c}); }],
+    [2750,()=>{ scene('tn_collar',1.0,{x:H.x+(self?-6:0),y:H.top+26}); }],
+    [3200,()=>{ sfx.ding(); }],
+    [4900,'end',down?t.name+' is back up. A fresh outfit can turn anyone’s day around.':t.name+' is Wardrobe Fresh. If they go down, they bounce right back up.']]); };
+// The legacy WARDROBE stays for the legacy kit; the Option 3 version plays the new show.
+{ const legacy=T.wardrobe; T.wardrobe=E2=>(E2.act&&E2.act.o3&&T.wardrobeShow)?T.wardrobeShow(E2):legacy(E2); }
+
+// Quick Change (A1): a lap with the measuring tape, the loop unzips, a debuff falls out, new pockets.
+T.quick_change=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe';
+  const rx=H.w*.5+30,ry=16,cx=sp.self?null:H.x;
+  const lap=sp.self?{t:700,f:'idle',rot:u=>Math.sin(u*Math.PI*2)*.15}:{t:700,f:u=>Math.sin(u*Math.PI*2)>0?'run':'runR',dx:u=>(H.x+Math.cos(u*Math.PI*2)*rx)-(H.x+rx),dy:u=>Math.sin(u*Math.PI*2)*ry,x:H.x+rx,y:H.base+3};
+  const K=sp.self?[{t:0,x:'home',y:'home',f:'aim'},lap,{t:1550,f:'aim'},{t:2100,f:'celeb'},{t:2700,f:'idle'},{t:3300,x:'home',y:'home'}]
+    :[{t:0,x:'home',y:'home',f:'run'},{t:700,x:H.x+rx,y:H.base+3},lap,{t:1550,x:sp.x,y:sp.y,f:'aim'},{t:2100,f:'celeb'},{t:2650,f:'runR'},{t:3300,x:'home',y:'home',f:'idle'}];
+  K[1].x=K[1].x??H.x+rx; ST.keys(fx,K);
+  const loopX=sp.self?BATTLE_POS[m.idx].x*3:H.x,loopY=(sp.self?BATTLE_POS[m.idx].base*3:H.base)-H.h*.45;
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB pulls out a measuring tape. One loop, very fast.'); say(m.id,'quick_change'); }],
+    [700,()=>{ scene('tn_tape',1.6,{x:loopX,cy:loopY,rx:H.w*.5+18,ry:H.h*.55,trace:.5,unzip:.65}); sfx.whoosh(); }],
+    ['hf',1750],
+    [1750,()=>{ sfx.ding(); E2.apply(); scene('tn_debuff',1.0,{x:H.x+10,y:H.mid,fall:H.base-H.mid}); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#c9b3e6'});
+      if(!foe) { const cur=B2_RACK.find(r=>t.st&&t.st[r.id]); if(cur) scene('tn_tag',1.6,{x:H.x,y:H.top-8,txt:cur.tag,c:cur.c}); } }],
+    [2150,()=>{ scene('tn_pocket',1.1,{x:H.x-14,y:H.mid+10}); if(!foe&&t!==m) battle.fx[t.idx].hop=.4; else if(foe) ST.jolt(t,.2); }],
+    [3400,'end',kindLine(t,'Same person, better pockets. The pockets were the important part.')]]); };
+
+// Continuity Pins (A2): kneels by the loose thread, two big safety pins, a warm outline; a little heart for Tom.
+T.continuity_pins=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p)),foe=t.side==='foe';
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'kneel'},{t:1350,f:'aim'},{t:1900,f:'aim'},{t:2150,f:'celeb',hop:6},{t:2700,f:sp.self?'idle':'runR'},{t:3400,x:'home',y:'home',f:'idle'}]);
+  const tx=H.x+(foe?0:-4),ty=H.top-4;
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB spots a loose thread. He always spots the loose thread.'); say(m.id,'continuity_pins'); scene('tn_thread',2.6,{x:tx,y:ty,pinAt:.62,ox:H.x,oy:H.mid,w:H.w*.9,h:H.h*.95}); }],
+    [1400,()=>{ const h=hand(); for(const k of [0,1]) ST.fly((x,y)=>{ RO(x-3,y-12,6,20,'#dfe6ee'); EO(x,y-12,5,5,'#dfe6ee'); },h.x,h.y,tx+(k?10:-10),ty+2,.35,40,k*.08,{spin:1}); sfx.whoosh(); }],
+    ['hf',1900],
+    [1900,()=>{ sfx.ding(); E2.apply(); sfx.heal(); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#ffd27a'}); if(foe) ST.jolt(t,.15); }],
+    [2250,()=>{ if(tom&&!foe&&t!==tom) { const a=ST.unit(m),b=ST.unit(tom); ST.fly((x,y)=>heart(x,y,6,PINK),(battle.actorPos||{cx:a.x}).cx-10,a.top+20,b.x,b.top+10,.6,40); }
+      else if(tom&&!foe) scene('tn_heart',1,{x:H.x,y:H.top-6}); }],
+    [2850,()=>{ if(tom&&!foe&&t!==tom) { battle.fx[tom.idx].hop=.35; sfxs('kiss'); } }],
+    [3500,'end',kindLine(t,'TNB checks the person before the costume.')]]); };
+
+// Lost-and-Found Warmth (A3): claim ticket, a rummage through the lost-property box, a very long scarf, FOUND.
+T.lost_found_warmth=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),me=ST.unit(m),bx=me.x-74,by=me.base+2,foe=t.side==='foe';
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:800,f:'kneel',dx:(u,tt)=>Math.sin(tt*18)*3},{t:1550,f:'throw'},{t:1700,f:sp.self?'throw':'run'},{t:2400,x:sp.self?'home':sp.x,y:sp.self?'home':sp.y,f:'act'},
+    {t:2900,f:sp.self?'idle':'runR'},{t:3500,x:'home',y:'home',f:'act'},{t:4000,f:'celeb'},{t:4400,f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB checks a claim ticket. It says MISSING WARMTH.'); say(m.id,'lost_found_warmth'); scene('tn_ticket',.9,{}); scene('tn_box',4.4,{x:bx,y:by,outAt:.9,stampAt:.82}); }],
+    [850,()=>{ const items=[(x,y)=>{ RO(x-5,y-8,10,16,'#7a8ca0'); },(x,y)=>{ EO(x,y,7,5,'#e0402e'); },(x,y)=>{ Ln(x-10,y,x+10,y,3,'#2b2a26'); poly([[x-10,y],[x,y-10],[x+10,y]],'#5b7fd0'); }];
+      items.forEach((d,k)=>ST.fly(d,bx,by-30,bx+40+k*30,by-10-k*6,.5,60,k*.2,{spin:1})); setMessage('A sock. One glove. An umbrella. Not those.'); sfxs('select'); }],
+    [1550,()=>{ scene('tn_scarf',2.8,{bx,by,tx:H.x,ty:H.top+30,wrapAt:.36,backAt:.68}); sfx.whoosh(); }],
+    ['hf',2600],
+    [2600,()=>{ E2.apply(); sfx.heal(); scene('tn_flakes',1.0,{x:H.x,y:H.base,h:H.h}); scene('tn_glow',.9,{x:H.x,y:H.mid,c:'#ffb0c0'}); if(!foe&&t!==m) battle.fx[t.idx].hop=.35; if(foe) ST.jolt(t,.15); }],
+    [3700,()=>{ sfx.select(); }],
+    [4500,'end',kindLine(t,'The missing warmth has been turned in.')]]); };
+
+// Practical Effects (A4): lights down, a tiny curtain, a very visible string, a cardboard ghost on a spring. BOO.
+T.practical_effects=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),cx=F.x+F.w*.5+26,cy=F.base;
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:cx+44,y:cy+3,f:'act'},{t:1150,f:'walk'},{t:1800,x:400,y:'home',f:'kneel'},{t:2250,f:'throw',dx:8,rot:.12},{t:2650,f:'hip'},{t:3200,f:'runR'},{t:3900,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB dims the lights and sets a tiny curtain next to '+f.name+'.'); say(m.id,'practical_effects'); scene('tn_dark',3.9,{a:.5}); S.drone(2.2); }],
+    [700,()=>{ scene('tn_curtain',3.2,{x:cx,y:cy,fx:F.x+14,popAt:(2250-700)/3200}); sfxs('select'); }],
+    [1150,()=>{ scene('tn_string',1.8,{x:cx,y:cy,tautAt:(1800-1150)/1800}); setMessage('The pull-string is very visible. That is part of the charm.'); }],
+    ['hf',2350],
+    [2250,()=>{ S.sting(); }],
+    [2350,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('tn_text',1.1,{x:F.x+62,y:F.top-2,txt:'BOO!',c:'#ff6b6b',sc:3}); landHit(100); }],
+    [2700,()=>{ scene('tn_text',1.2,{x:BATTLE_POS[m.idx].x*3-120,y:BATTLE_POS[m.idx].base*3-150,txt:'NICE STRING',c:GOLD,sc:1}); }],
+    [4000,'end',res(E2)+'The enemy saw the string and jumped anyway.']]); };
+
+// Rush-Hour Racks (A5): wheels a rack in, floor arrows say it fits, one extremely long sleeve sweeps the row.
+T.rush_hour_racks=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),stopX=Math.min(560,G.x1+170),stopY=Math.min(312,G.base+10);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'runR'},{t:400,x:650,f:'runR',hide:true},{t:600,x:740,y:stopY,f:'run'},{t:1500,x:stopX,y:stopY,f:'idle'},{t:1600,f:'wind'},{t:2000,f:'throw'},{t:2500,f:'act'},{t:3000,f:'runR'},
+    {t:3700,x:720,f:'run',hide:true},{t:3900,x:640,y:'home',f:'run'},{t:4400,x:'home',y:'home',f:'idle'}]);
+  const rackSt={get x(){ return st.seg>=8?null:st.x; },get y(){ return st.y; }};
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB wheels in a costume rack. One sleeve is extremely long.'); say(m.id,'rush_hour_racks'); }],
+    [600,()=>{ scene('tn_rack',3.2,{st:rackSt,back:true}); scene('tn_sleeve',3.2,{st:rackSt,sweepAt:(2000-600)/3200,sweepLen:.12,backAt:(2550-600)/3200,reach:G.x0-10,lx:G.x,ly:G.top-26}); S.roll(.9); }],
+    [1100,()=>{ scene('tn_arrows',1.4,{x0:G.x0,x1:G.x1,y:G.base+16}); }],
+    [2000,()=>{ sfx.whoosh(); }],
+    ['hf',2300],
+    [2300,()=>{ sfx.thud(); hitAll(E2,list); battle.enemyKnock=.45; }],
+    [2600,()=>{ setMessage('He folds the sleeve over the rail like he expected this.'); }],
+    [4500,'end',res(E2)+'The rack is wider than its travel clearance.']]); };
+
+// Clay Pigeon, Literally (B1): shapes a little clay bird, throws it, one flap, bonk; it comes back as an indignant lump.
+T.clay_pigeon=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:1000,f:'run'},{t:1400,x:440,f:'wind'},{t:1650,f:'throw'},{t:2100,f:'idle'},{t:2600,f:'aim'},{t:3200,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB shapes a tiny bird out of soft clay.'); say(m.id,'clay_pigeon'); scene('tn_shape',1.65,{}); }],
+    [1650,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>pigeon(x,y,u>.4&&u<.55),h.x,h.y-10,F.x+8,F.mid,.55,80); }],
+    ['hf',2200],
+    [2200,()=>{ sfx.bonk(); ST.jolt(f); scene('tn_poof',.5,{x:F.x+8,y:F.mid}); scene('tn_text',.9,{x:F.x+62,y:F.top-2,txt:'COO',c:GOLD,sc:2}); landHit(100); }],
+    [2250,()=>{ const h0=hand(); ST.fly((x,y,u)=>pigeon(x,y,false,u),F.x+8,F.mid,h0.x-30,h0.y-14,.45,50); }],
+    [2700,()=>{ ST.draw(()=>{ const h=hand(); pigeon(h.x-4,h.y-12,false,1); label('HMPH',h.x-4,h.y-34,CREAM,1); },.6); }],
+    [3900,'end',res(E2)+'The craftsmanship is better than the joke.']]); };
+
+// Cone Six, Please (B2): sets a kiln cone by the friend, conducts a glaze over them, the cone bends and bows.
+T.cone_six=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',conX=H.x+(foe?H.w*.5+8:20);
+  const back=c=>(sp.self?c.origX:sp.x)+22;
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'kneel'},{t:1250,f:'walk'},{t:1500,x:back,f:'spread'},{t:2350,f:'idle'},{t:2450,f:'idle',rot:u=>-Math.sin(u*Math.PI)*.25},{t:2900,f:sp.self?'idle':'runR'},{t:3550,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB sets down a tiny kiln cone. Cone six. Precisely.'); say(m.id,'cone_six'); }],
+    [750,()=>{ scene('tn_cone',2.9,{x:conX,y:H.base+2,bendAt:(1700-750)/2900,bowAt:(2450-750)/2900}); sfxs('select'); }],
+    [1500,()=>{ scene('tn_glaze',1.6,{x:H.x,y:H.base,w:H.w*.85,h:H.h}); }],
+    ['hf',2300],
+    [2300,()=>{ E2.apply(); sfx.heal(); scene('tn_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('tn_glow',.9,{x:H.x,y:H.mid,c:'#ffb070'}); if(foe) ST.jolt(t,.15); else if(t!==m) battle.fx[t.idx].hop=.3; }],
+    [2500,()=>{ setMessage('The cone takes a tiny bow. So does TNB.'); }],
+    [3650,'end',kindLine(t,'The warmth has been professionally considered.')]]); };
+
+// Curb Appeal (B3): drops the board, finds the curb line, carves it; the line peels up and sweeps the row, then lies flat.
+T.curb_appeal=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),cy=Math.min(308,G.base+10),x0=G.x0-30,x1=G.x1+70;
+  const wob=(u,tt)=>Math.sin(u*Math.PI*3)*8;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:-.08},{t:500,x:440,f:'idle',rot:-.1},{t:1100,x:x1+30,y:cy-6,f:'idle',dy:wob,rot:u=>Math.sin(u*Math.PI*3)*.08},
+    {t:2300,x:x0-20,y:cy-6,f:'idle',rot:-.12},{t:2600,f:'flip',rot:u=>u*Math.PI*2,hop:30},{t:2900,x:x0-20,f:'flip'},{t:3900,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB drops his board and finds a curb with opinions.'); say(m.id,'curb_appeal'); scene('tn_board',3.95,{st}); scene('tn_curb',3.6,{st,y:cy,x0,x1,peelAt:1100/3600,flatAt:2450/3600}); S.roll(2.2); }],
+    [1150,()=>{ sfx.whoosh(); }],
+    ['hf',1800],
+    [1800,()=>{ sfx.thud(); hitAll(E2,list); }],
+    [2600,()=>{ sfx.select(); }],
+    [4000,'end',res(E2)+'The line was beautiful and inconvenient.']]); };
+
+// Fix the Wobble (B4): the friend's little platform rocks; TNB kneels, slides a clay wedge in, click. Pockets the spare.
+T.fix_wobble=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m,tf=!foe&&!self?battle.fx[t.idx]:null;
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:sp.x,y:sp.y,f:'kneel'},{t:1900,f:'kneel'},{t:2050,f:'celeb',hop:6},{t:2450,f:'hip'},{t:2750,f:self?'idle':'runR'},{t:3400,x:'home',y:'home',f:'idle'}]);
+  if(tf) tf.path={t:0,dur:1.9,fn:(q,c)=>({rot:Math.sin(c.t*7)*.07})};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Something is wobbling. TNB can tell from across the room.'); say(m.id,'fix_wobble'); scene('tn_platform',2.9,{x:H.x,y:H.base,w:Math.max(56,H.w*.8),wedgeAt:1300/2900,fixAt:1900/2900}); }],
+    [900,()=>{ scene('tn_text',1,{x:H.x+H.w*.5,y:H.base-6,txt:'SHORT CORNER',c:CREAM}); }],
+    [1300,()=>{ sfxs('select'); }],
+    ['hf',1900],
+    [1900,()=>{ sfx.ding(); E2.apply(); sfx.heal(); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#9be39a'}); if(foe) ST.jolt(t,.15); }],
+    [2100,()=>{ if(tf) tf.hop=.35; }],
+    [2500,()=>{ scene('tn_text',.9,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3-140,txt:'SPARE',c:CREAM}); }],
+    [3500,'end',kindLine(t,'The repair is smaller than the relief.')]]); };
+
+// Kiln Door Policy (B5): a freestanding kiln door; he takes the enemy's shield off it like a test tile, fires it, TRY AGAIN.
+T.kiln_door_policy=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),kx=F.x+F.w*.5+56,ky=F.base+2;
+  let tile=null;
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:kx+64,y:ky+1,f:'aim'},{t:1500,f:'throw'},{t:1800,f:'act'},{t:2150,x:kx+54,f:'idle'},{t:2450,f:'aim'},{t:3300,f:'throw'},{t:3600,f:'runR'},{t:4200,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('TNB sets up a small kiln door. It has a policy.'); say(m.id,'kiln_door_policy'); scene('tn_kiln',4.0,{x:kx,y:ky,closeAt:1800/4000,openAt:2450/4000}); }],
+    [750,()=>{ const h=hand(); ST.fly((x,y)=>shieldTile(x,y),F.x,F.top+10,h.x-6,h.y-6,.45,50); setMessage('The shield comes off like a test tile.'); sfxs('select'); }],
+    [1200,()=>{ tile=scene('tn_tile',.3,{}); }],
+    [1500,()=>{ const h=hand(); ST.fly((x,y)=>shieldTile(x,y),h.x-6,h.y-6,kx,ky-36,.3,30); sfx.whoosh(); }],
+    [1800,()=>{ sfx.thud(); }],
+    ['hf',2150],
+    [2150,()=>{ sfx.fireball&&sfx.fireball(); scene('tn_heat',.6,{x0:kx-20,y0:ky-36,x1:F.x,y1:F.mid}); }],
+    [2400,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('tn_poof',.6,{x:F.x,y:F.top+10,c:CELA,n:10}); scene('tn_text',1,{x:F.x+62,y:F.top-2,txt:'CRACK',c:CELA,sc:2}); landHit(100); }],
+    [2600,()=>{ const h=hand(); ST.fly((x,y)=>shieldTile(x,y,1),kx,ky-36,h.x-6,h.y-6,.3,30); }],
+    [2900,()=>{ scene('tn_tile',.45,{cracked:true,tag:true}); }],
+    [3350,()=>{ const h=hand(); ST.fly((x,y)=>shieldTile(x,y,1),h.x-6,h.y-6,620,h.y+40,.5,80,0,{spin:2}); sfx.whoosh(); }],
+    [4300,'end',res(E2)+'The glaze stays. The shield does not.']]); };
+})();
