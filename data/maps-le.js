@@ -1,5 +1,5 @@
 'use strict';
-// data/maps-le.js — Little Elsewhere as content: buildings, people's colors, the three outdoor areas and every room.
+// data/maps-le.js — Long Island as content: buildings, people's colors, the three outdoor areas and every room.
 // Built into maps by engine/world.js (buildArea, makeRoom). Loaded before engine/world.js. LA lives in data/maps-la.js.
 //
 // AREA SPEC (outdoor map). Steps are applied in this order, so later steps win on the same tile:
@@ -45,7 +45,7 @@ const LE_PALETTES={
   penny:{skin:'#e7b48f',hair:'#b8452f',shirt:'#e2b04a',pants:'#5d5a70',hat:null},
   sal:{skin:'#c99372',hair:'#3e3433',shirt:'#e7b73e',pants:'#3c3f4c',hat:'#2c2c33'},
   reel:{skin:'#d9a27e',hair:'#9a9488',shirt:'#5f7d5a',pants:'#5a5048',hat:'#c9a85a'},
-  // Chapter 5: Elsewhere Elementary.
+  // Chapter 5: Long Island Elementary.
   pruitt:{skin:'#e3b28e',hair:'#cfc8bc',shirt:'#4a5a8a',pants:'#3b3f4c',hat:null},
   kowalski:{skin:'#f0c8a8',hair:'#c9853a',shirt:'#d65a8a',pants:'#4a4f68',hat:null},
   ike:{skin:'#b88a6a',hair:'#e8e4dc',shirt:'#8a6a48',pants:'#5a5048',hat:'#4a5a3a'},
@@ -62,7 +62,7 @@ const LE_HOUSES=[
   {id:'post',area:'town',name:'Snail Mail',label:'POST',x:2,y:14,w:5,h:5,roof:'#618697',light:'#83a7b2',wall:'#ebdcc0'},
   {id:'tea',area:'town',name:'Kettle Cottage',label:'KETTLE',x:9,y:14,w:5,h:5,roof:'#b28d4e',light:'#d1b26c',wall:'#e8c3ac'},
   {id:'observatory',area:'town',name:'Moon Club',label:'MOON',x:16,y:14,w:5,h:5,roof:'#657898',light:'#8b9cba',wall:'#d6d9d4'},
-  {id:'taxi',area:'town',name:'Elsewhere Taxi Co.',label:'TAXI',x:23,y:14,w:5,h:5,roof:'#d9a43a',light:'#f2c75a',wall:'#efe4cb',taxi:true},
+  {id:'taxi',area:'town',name:'Long Island Taxi Co.',label:'TAXI',x:23,y:14,w:5,h:5,roof:'#d9a43a',light:'#f2c75a',wall:'#efe4cb',taxi:true},
   {id:'shop',area:'town',name:"Penny's Pockets",label:'SHOP',x:23,y:3,w:5,h:5,roof:'#b9483f',light:'#d9675b',wall:'#f3e3bf',shop:true},
   {id:'amyhouse',area:'row',x:9,y:4,name:"Amy's House",label:'GREGORI',w:5,h:5,roof:'#c0707e',light:'#dc9aa5',wall:'#f0e2d6'},
   {id:'grands',area:'row',x:16,y:4,name:"Deedee and Boppy's House",label:'RIVITUSO',w:5,h:5,roof:'#8d7b63',light:'#b59e82',wall:'#ead9b8'}
@@ -98,7 +98,7 @@ function planSchool(plan) {
 const LE_AREAS=[
   {id:'town',name:'The Square',w:30,h:26,
     tag:'Eight doors, one fountain, one place that sells things.',
-    eyebrow:'LITTLE ELSEWHERE / THE SQUARE',
+    eyebrow:'LONG ISLAND / THE SQUARE',
     hint:"Shops up here, Penny's Pockets to the east. Family south. Trouble north.",
     spawn:{x:11,y:10},
     paths:[[2,9,29,10],[2,20,27,21],[7,0,8,21],[14,9,15,25],[9,9,13,12]],
@@ -109,10 +109,10 @@ const LE_AREAS=[
     // Chapter 1: a fallen branch closes the way north until Deedee's crisp is stolen (engine/story.js storyGate).
     gates:[{at:[[7,0],[8,0]],cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
       lines:['A big branch has fallen across the path to Grump Hollow.','Grace pulls on Tom’s sleeve. "Crisp first, Tata. Monsters later."']},
-      // The path east to Elsewhere Elementary (chapter 5) is locked until conference night.
+      // The path east to Long Island Elementary (chapter 5) is locked until conference night.
       {at:[[29,9],[29,10]],look:'schoolgate',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
-        lines:['The path east goes to Elsewhere Elementary. The gate is locked.','A sign on it: NO SCHOOL TODAY. Grace says it is the best sign in the whole town.'],
-        when:[{chapter:5,lines:['The path east goes to Elsewhere Elementary. The gate is locked.','Amy has the key. Amy has every key.']}]}],
+        lines:['The path east goes to Long Island Elementary. The gate is locked.','A sign on it: NO SCHOOL TODAY. Grace says it is the best sign in the whole town.'],
+        when:[{chapter:5,lines:['The path east goes to Long Island Elementary. The gate is locked.','Amy has the key. Amy has every key.']}]}],
     objects:[
       {kind:'tree',at:[[1,2],[14,2],[21,2],[22,4],[1,6],[14,7],[22,7],[2,11],[5,12],
         [17,11],[19,12],[21,11],[20,13],[1,15],[14,18],[21,16],[1,21],[6,22],[17,22],[20,22],[3,23],[10,23],[19,23],[12,24],
@@ -129,7 +129,7 @@ const LE_AREAS=[
       ['sign',22,11,1,1,'Shop sign',"PENNY'S POCKETS. Gear for the whole family. Snacks for fights. We buy almost anything.",{shopSign:true}],
       ['taxi',26,19,2,1,'Cab 7','The only cab in town. The meter is still running. Tom is choosing not to look at it.'],
       ['planter',27,8,1,1,'Shop flowers','A pot of marigolds with a price tag on it. Not for sale. Penny checked.'],
-      ['sign',28,8,1,1,'East signpost','ELSEWHERE ELEMENTARY, this way. Home of the Fighting Snails. Go Snails.']],
+      ['sign',28,8,1,1,'East signpost','LONG ISLAND ELEMENTARY, this way. Home of the Fighting Snails. Go Snails.']],
     npcs:[
       {name:'Pip',x:3,y:10,look:'pip',lines:[
         "I'm taking my pet rock for a walk.",
@@ -149,7 +149,7 @@ const LE_AREAS=[
 
   {id:'row',name:'Rivituso Row',w:24,h:22,
     tag:"Two houses. One family. Cookies at Deedee's.",
-    eyebrow:'LITTLE ELSEWHERE / RIVITUSO ROW',
+    eyebrow:'LONG ISLAND / RIVITUSO ROW',
     hint:'Home. Knock on any door. Someone will feed you.',
     spawn:{x:14,y:2},
     paths:[[14,0,15,11],[2,10,21,11],[7,10,8,19],[2,18,21,19],[14,11,15,21]],
@@ -190,7 +190,7 @@ const LE_AREAS=[
 
   {id:'hollow',name:'Grump Hollow',w:24,h:22,
     tag:'Soggy. Smelly. Six things are watching from the pond.',
-    eyebrow:'LITTLE ELSEWHERE / GRUMP HOLLOW',
+    eyebrow:'LONG ISLAND / GRUMP HOLLOW',
     hint:'Monsters live here. Mudling is easy. The Big One is not.',
     spawn:{x:7,y:19},
     wild:true,
@@ -222,7 +222,7 @@ const LE_AREAS=[
   // ---------- Chapter 3: Cattail Pier (south of Rivituso Row) and the Whispering Marsh (west of the pier) ----------
   planMerge({id:'pier',name:'Cattail Pier',w:24,h:22,
     tag:'One pier, one bait shack, one fish that nobody has ever caught.',
-    eyebrow:'LITTLE ELSEWHERE / CATTAIL PIER',
+    eyebrow:'LONG ISLAND / CATTAIL PIER',
     hint:'Boppy fishes at the end of the pier. The marsh is west.',
     spawn:{x:11,y:1},
     border:{kind:'tree',open:[[11,0],[12,0],[0,5],[0,6]]},
@@ -266,7 +266,7 @@ const LE_AREAS=[
       {kind:'tree',at:[[4,1],[19,1],[7,7],[20,7],[2,3],[21,3]]}]}),
   planMerge({id:'reeds',name:'Whispering Marsh',w:26,h:23,
     tag:'Boardwalks, cattails, and reeds that whisper. Mostly nonsense.',
-    eyebrow:'LITTLE ELSEWHERE / WHISPERING MARSH',
+    eyebrow:'LONG ISLAND / WHISPERING MARSH',
     hint:'Monsters live here. Iron-Gill went deeper in, toward the old reeds.',
     spawn:{x:24,y:15},
     wild:true,
@@ -307,7 +307,7 @@ const LE_AREAS=[
   // above it, where Old Iron-Gill lives. The spillway drains in data/scenes.js (ch3DrainSpillway).
   planMerge({id:'sundial',name:'Sundial Hollow',w:22,h:20,
     tag:'A sundial that tells the wrong time, and a pool nobody has seen the bottom of.',
-    eyebrow:'LITTLE ELSEWHERE / SUNDIAL HOLLOW',
+    eyebrow:'LONG ISLAND / SUNDIAL HOLLOW',
     hint:'The sundial is in the middle. The Deep Pool is past the spillway, at the top.',
     spawn:{x:10,y:18},
     wild:true,
@@ -344,15 +344,15 @@ const LE_AREAS=[
       {kind:'tree',at:[[1,12],[20,12],[5,18],[16,18],[19,15]]}]}),
 ];
 
-// ---------- Chapter 5: Elsewhere Elementary, east of the Square (conference night) ----------
+// ---------- Chapter 5: Long Island Elementary, east of the Square (conference night) ----------
 // The schoolyard (front doors at the top, a parking lot, a playground), the school (a hallway with the Art room, the
 // Music room and the Gym up top, the staff room bottom left, three hallway clocks) and the Cafetorium (east end).
 // The Cafetorium doors open once the three clocks say 7:00 (data/scenes.js ch5OpenCafe).
 const CH5_ON={chapter:5,notFlag:'ch5-done'},CH5_DONE={from:5,flag:'ch5-done'};
 LE_AREAS.push(
-  {id:'schoolyard',name:'Elsewhere Elementary',w:24,h:18,ground:'schoolyard',
+  {id:'schoolyard',name:'Long Island Elementary',w:24,h:18,ground:'schoolyard',
     tag:'One school, one flagpole, one sign that says TONIGHT.',
-    eyebrow:'LITTLE ELSEWHERE / ELSEWHERE ELEMENTARY',
+    eyebrow:'LONG ISLAND / LONG ISLAND ELEMENTARY',
     hint:'The front doors are at the top. The Square is back west.',
     spawn:{x:1,y:8},
     paths:[[0,8,13,9],[11,3,12,9],[1,3,22,3]],
@@ -360,11 +360,11 @@ LE_AREAS.push(
     border:{kind:'tree',open:[[0,8],[0,9],[11,0],[12,0]]},
     exits:[[0,8,'town',28,9,'left'],[0,9,'town',28,10,'left'],[11,0,'school',13,16,'up','entry'],[12,0,'school',14,16,'up','entry']],
     objects:[
-      ['schoolwing',1,1,10,2,'Elsewhere Elementary','A brick school with tall windows. Most of them are dark. One of them keeps flickering.',{side:'left'}],
-      ['schoolwing',13,1,10,2,'Elsewhere Elementary','Paper snowflakes in every window. It is not winter. Nobody has taken them down since 2019.',{side:'right'}],
+      ['schoolwing',1,1,10,2,'Long Island Elementary','A brick school with tall windows. Most of them are dark. One of them keeps flickering.',{side:'left'}],
+      ['schoolwing',13,1,10,2,'Long Island Elementary','Paper snowflakes in every window. It is not winter. Nobody has taken them down since 2019.',{side:'right'}],
       ['flagpole',8,5,1,1,'Flagpole','The flag is down for the night. The rope clinks against the pole. Clink. Clink.'],
-      ['marquee',14,5,3,1,'School sign','ELSEWHERE ELEMENTARY. TONIGHT: PARENT-TEACHER CONFERENCES, 7:00. BRING A PENCIL. BRING PATIENCE.',
-        {when:[{...CH5_DONE,text:'ELSEWHERE ELEMENTARY. THANK YOU PARENTS! SEE YOU AT FIELD DAY. Somebody added: GO SNAILS.'}]}],
+      ['marquee',14,5,3,1,'School sign','LONG ISLAND ELEMENTARY. TONIGHT: PARENT-TEACHER CONFERENCES, 7:00. BRING A PENCIL. BRING PATIENCE.',
+        {when:[{...CH5_DONE,text:'LONG ISLAND ELEMENTARY. THANK YOU PARENTS! SEE YOU AT FIELD DAY. Somebody added: GO SNAILS.'}]}],
       ['bikerack',2,5,2,1,'Bike rack','One bike, no wheels. It has been here since the fourth grade. Whose fourth grade, nobody knows.'],
       ['bench',4,6,2,1,'Pickup bench','Where kids wait for a ride. Somebody carved: MOM IS LATE AGAIN. Under it: NO SHE IS NOT. That one is Amy’s.'],
       ['swings',15,9,3,1,'Swings','Three swings. The middle one squeaks. The middle one is everybody’s favorite.'],
@@ -373,17 +373,17 @@ LE_AREAS.push(
       ['car',2,12,2,1,'Minivan','A minivan with a 26.2 sticker. And a 13.1. And a 5K. It is Amy’s.'],
       ['car',6,12,2,1,'Hatchback','A hatchback full of folding chairs. Somebody here is on the PTA.',{col:'#5a8a6a'}],
       ['car',2,15,2,1,'Sedan','A sedan with a GOLD STAR PARENT sticker. The star is peeling.',{col:'#8a8f98'}],
-      ['sign',13,7,1,1,'Front walk sign','ELSEWHERE ELEMENTARY. Home of the Fighting Snails. Visitors, please sign in. Snails, please slow down.'],
+      ['sign',13,7,1,1,'Front walk sign','LONG ISLAND ELEMENTARY. Home of the Fighting Snails. Visitors, please sign in. Snails, please slow down.'],
       {kind:'tree',at:[[5,5],[19,5],[22,5],[11,12],[12,15],[13,13],[23,16]]}],
     npcs:[
-      {name:'Principal Pruitt',x:13,y:4,look:'pruitt',roam:0,lines:['Principal Pruitt. Thirty-one years at Elsewhere Elementary. I have seen everything. Not tonight, though. Tonight is new.'],
+      {name:'Principal Pruitt',x:13,y:4,look:'pruitt',roam:0,lines:['Principal Pruitt. Thirty-one years at Long Island Elementary. I have seen everything. Not tonight, though. Tonight is new.'],
         when:[{...CH5_DONE,lines:['Thirty parents. Zero tears. One very well-behaved pen. Best conference night in thirty-one years.','Come to Field Day, Tom. Amy runs the relay. Amy always runs the relay.']},
               {...CH5_ON,flag:'ch5-pruitt',lines:['Conferences start at seven. SEVEN. The bells say otherwise. The bells are wrong.','Clear the rooms, set the hallway clocks to seven, and the Cafetorium will open. I hope.']}]},
       {name:'Mr. Delgado',x:8,y:13,look:'delgado',roam:0,lines:['I am Marco’s dad. Marco says Mrs. Gregori is the toughest teacher in the whole school.','Marco also says she is his favorite. Please do not tell Marco I told you.'],
         when:[{...CH5_DONE,lines:['Marco is reading at a third-grade level! Mrs. Gregori showed me the chart. There was a chart!','I cried a little. In the minivan. Do not tell Marco.']}]}]},
-  planMerge({id:'school',name:'Elsewhere Elementary',w:30,h:18,ground:'school',
+  planMerge({id:'school',name:'Long Island Elementary',w:30,h:18,ground:'school',
     tag:'Art, Music, a gym, a staff room, and every clock wrong.',
-    eyebrow:'LITTLE ELSEWHERE / ELSEWHERE ELEMENTARY / HALLWAY',
+    eyebrow:'LONG ISLAND / LONG ISLAND ELEMENTARY / HALLWAY',
     hint:'Art, Music and the Gym are up top. The staff room is bottom left. The Cafetorium is at the east end.',
     spawn:{x:13,y:16},
     wild:true,
@@ -452,7 +452,7 @@ LE_AREAS.push(
       ['staffcouch',8,16,3,1,'Staff couch','The couch where teachers go to close their eyes for one minute. It has been one minute since 1987.']]}),
   planMerge({id:'cafetorium',name:'The Cafetorium',w:20,h:14,ground:'cafe',
     tag:'Half cafeteria, half auditorium. Twice the room, half the chairs.',
-    eyebrow:'LITTLE ELSEWHERE / ELSEWHERE ELEMENTARY / CAFETORIUM',
+    eyebrow:'LONG ISLAND / LONG ISLAND ELEMENTARY / CAFETORIUM',
     hint:'The stage is at the top. Something is grading up there.',
     spawn:{x:1,y:6},
     exits:[[0,6,'school',28,9,'left','cafefloor'],[0,7,'school',28,10,'left','cafefloor']],
@@ -506,7 +506,7 @@ const CH7_ON={chapter:7,notFlag:'ch7-done'},CH7_DONE={from:7,flag:'ch7-done'};
 LE_AREAS.push(
   planMerge({id:'stacks',name:'The Stacks',w:30,h:22,ground:'stacks',
     tag:'Under the Hush Library. Miles of shelves, and every book is whispering.',
-    eyebrow:'LITTLE ELSEWHERE / THE HUSH LIBRARY / THE STACKS',
+    eyebrow:'LONG ISLAND / THE HUSH LIBRARY / THE STACKS',
     hint:'Fiction top left, Nonfiction top right, Picture Books at the bottom. The Reading Room is at the top.',
     spawn:{x:1,y:10},
     wild:true,
@@ -551,7 +551,7 @@ LE_AREAS.push(
         {when:[{...CH7_DONE,text:'A little puppet theater. The puppets are quiet now. One of them waves at Rose.'}]}]]}),
   planMerge({id:'readroom',name:'The Reading Room',w:20,h:14,ground:'readroom',
     tag:'The oldest room in the library. Green lamps, long tables, and one very old book.',
-    eyebrow:'LITTLE ELSEWHERE / THE HUSH LIBRARY / THE READING ROOM',
+    eyebrow:'LONG ISLAND / THE HUSH LIBRARY / THE READING ROOM',
     hint:'The dais is at the top. Something up there is turning its own pages.',
     spawn:{x:9,y:12},
     exits:[[9,13,'stacks',14,2,'down','readwood'],[10,13,'stacks',15,2,'down','readwood']],
@@ -603,7 +603,7 @@ const CH9_ON={chapter:9,notFlag:'ch9-done'},CH9_DONE={from:9,flag:'ch9-done'};
 LE_AREAS.push(
   planMerge({id:'moonclub',name:'The Moon Club',w:30,h:22,ground:'club',
     tag:'Up the stairs behind the telescope. Velvet, marble, and a lot of dust since 1971.',
-    eyebrow:'LITTLE ELSEWHERE / THE MOON CLUB',
+    eyebrow:'LONG ISLAND / THE MOON CLUB',
     hint:'Coat Check top left, Card Room top right, Ballroom at the bottom. The Dome is at the top.',
     spawn:{x:1,y:10},
     wild:true,
@@ -650,14 +650,14 @@ LE_AREAS.push(
       ['clubbar',17,1,3,1,'The bar','A long brass bar. One dusty bottle of wine, 1971. Deedee: \"Just looking. For now.\"'],
       ['clubchair',27,3,1,1,'Velvet chair','A velvet chair. Somebody left a monocle on it. It is the Stuffed Shirt’s. He looks for it constantly.'],
       ['jukebox',20,14,1,1,'Jukebox','A big glowing jukebox. Every record is a slow dance.',{jukebox:true}],
-      ['clubpiano',9,13,2,1,'Piano','A white piano. Somebody has left sheet music on it called MOON OVER ELSEWHERE.'],
+      ['clubpiano',9,13,2,1,'Piano','A white piano. Somebody has left sheet music on it called MOON OVER LONG ISLAND.'],
       ['clubpalm',8,19,1,1,'Potted palm','A silk palm in the corner. Even the palm is a wallflower here.'],
       ['clubpalm',21,19,1,1,'Potted palm','A silk palm. Somebody hung a tiny paper moon on it.'],
       ['mirrorframe',14,19,2,1,'Big gold frame','A huge gold frame on the wall. Empty. Something very big and very shiny hung here once.',
         {when:[{flag:'ch9-ball',text:'A huge gold frame on the wall. Empty. Its mirror is out in the hall now, doing something useful.'}]}]]}),
   planMerge({id:'dome',name:'The Dome',w:20,h:14,ground:'dome',
     tag:'The top of the Moon Club. A glass dome, a bandstand, and one very shiny ball.',
-    eyebrow:'LITTLE ELSEWHERE / THE MOON CLUB / THE DOME',
+    eyebrow:'LONG ISLAND / THE MOON CLUB / THE DOME',
     hint:'The bandstand is at the top. Something up there is very, very bright.',
     spawn:{x:9,y:12},
     exits:[[9,13,'moonclub',14,2,'down','domefloor'],[10,13,'moonclub',15,2,'down','domefloor']],
@@ -686,7 +686,7 @@ LE_AREAS.push(
         {when:[{flag:'ch9-clear',text:'A brass telescope pointed up through the glass. Through it: the moon, round and silver and back where it belongs.'}]}]]})
 );
 
-// ---------- Chapter 10: Terminal Zero (Elsewhere Regional, closed since 1989) and Gate Zero ----------
+// ---------- Chapter 10: Terminal Zero (Long Island Regional, closed since 1989) and Gate Zero ----------
 // Terminal Zero (ground 'term'): Security top left, Baggage Claim top right, the Lounge bottom left, Check-In bottom
 // right (the curb doors at the bottom go back to the Square), a concourse across the middle with a moving walkway, and
 // the Gate Zero doors at the top under the gate clock (they open when the clock has its hands and the coins are in:
@@ -706,8 +706,8 @@ const TERM_HANDS=[{h:'hour',fight:'ch10-sec',from:'Security'},{h:'minute',fight:
 const CH10_ON={chapter:10,notFlag:'ch10-done'},CH10_DONE={from:10,flag:'ch10-done'},CH10_CLEAR={from:10,flag:'ch10-clear'};
 LE_AREAS.push(
   planMerge({id:'terminal',name:'Terminal Zero',w:30,h:22,ground:'term',
-    tag:'Elsewhere Regional, the door nobody uses. Closed since 1989. The lights came on last night.',
-    eyebrow:'LITTLE ELSEWHERE / ELSEWHERE REGIONAL / TERMINAL ZERO',
+    tag:'Long Island Regional, the door nobody uses. Closed since 1989. The lights came on last night.',
+    eyebrow:'LONG ISLAND / LONG ISLAND REGIONAL / TERMINAL ZERO',
     hint:'Security top left, Baggage Claim top right, the Lounge bottom left. Gate Zero is at the top.',
     spawn:{x:21,y:20},
     wild:true,
@@ -749,11 +749,11 @@ LE_AREAS.push(
       ['bagcart',27,2,1,1,'Luggage cart','A luggage cart with one sticky wheel. Grace wants to ride it. Amy says no. Amy rides it.'],
       ['lostfound',25,6,3,1,'Lost and found','LOST AND FOUND. A single glove, a paperback from 1989, and a lot of umbrellas.'],
       ['fids',9,9,3,1,'Departure board','DEPARTURES. Every flight: 12:00. Every gate: 0. Every status: NOW BOARDING.',
-        {when:[{...CH10_CLEAR,text:'DEPARTURES. FLIGHT 0, TO ELSEWHERE: DEPARTED. NEXT: FLIGHT 00. GATE: TO BE ANNOUNCED.'}]}],
+        {when:[{...CH10_CLEAR,text:'DEPARTURES. FLIGHT 0, TO NOWHERE: DEPARTED. NEXT: FLIGHT 00. GATE: TO BE ANNOUNCED.'}]}],
       ['termplant',12,11,1,1,'Plant','A plastic ficus. It has been waiting for a flight longer than anyone.'],
       ['termplant',17,9,1,1,'Plant','Another plastic ficus. Somebody put a tiny boarding pass in its pot.'],
       ['termbench',3,11,2,1,'Gate bench','A row of seats bolted together. The armrests are all down.'],
-      ['termbench',25,11,2,1,'Gate bench','A row of seats. Somebody left a newspaper: MAY 1989. ELSEWHERE REGIONAL ADDS A FIFTH GATE.'],
+      ['termbench',25,11,2,1,'Gate bench','A row of seats. Somebody left a newspaper: MAY 1989. LONG ISLAND REGIONAL ADDS A FIFTH GATE.'],
       ['loungechair',2,14,1,1,'Lounge chair','A big leather chair. Tom sits for one second. Tom knows good seating.'],
       ['loungechair',4,14,1,1,'Lounge chair','A leather chair. It reclines. Rose finds out. Rose finds out again.'],
       ['loungechair',2,17,1,1,'Lounge chair','A leather chair. Somebody left a sleep mask on it. Probably a Jet Lag.'],
@@ -766,7 +766,7 @@ LE_AREAS.push(
       ['termplant',28,13,1,1,'Plant','A plastic ficus. Rose names it Kevin.']]}),
   planMerge({id:'gatezero',name:'Gate Zero',w:20,h:14,ground:'gate',
     tag:'The fifth gate. One podium, one jet bridge, one plane that has waited since 1989.',
-    eyebrow:'LITTLE ELSEWHERE / TERMINAL ZERO / GATE ZERO',
+    eyebrow:'LONG ISLAND / TERMINAL ZERO / GATE ZERO',
     hint:'The podium is at the top, under the board. The jet bridge door is next to it.',
     spawn:{x:9,y:12},
     exits:[[9,13,'terminal',13,2,'down','gatecarpet'],[10,13,'terminal',14,2,'down','gatecarpet']],
@@ -787,8 +787,8 @@ LE_AREAS.push(
       'WggggggggggggggggggW',
       'WWWWWWWWWggWWWWWWWWW']),
     {objects:[
-      ['gatepodium',4,2,2,1,'Gate podium','GATE 0. FLIGHT 0. TO: ELSEWHERE. DEPARTS: 12:00. A sticky note on the counter: BACK IN FIVE MINUTES. It is dated 1989.',
-        {when:[{...CH10_CLEAR,text:'GATE 0. A new card on the counter, in gold ink: THANK YOU FOR FLYING ELSEWHERE. YOUR LAYOVER WILL BE ANNOUNCED. And a little clock.'}]}],
+      ['gatepodium',4,2,2,1,'Gate podium','GATE 0. FLIGHT 0. TO: NOWHERE. DEPARTS: 12:00. A sticky note on the counter: BACK IN FIVE MINUTES. It is dated 1989.',
+        {when:[{...CH10_CLEAR,text:'GATE 0. A new card on the counter, in gold ink: THANK YOU FOR FLYING NOWHERE. YOUR LAYOVER WILL BE ANNOUNCED. And a little clock.'}]}],
       ['jetdoor',14,1,2,1,'Jet bridge door','The door to the jet bridge. Through the little window: a plane, lights on, engines quiet. Waiting.',
         {when:[{...CH10_CLEAR,text:'The door to the jet bridge. Through the little window: nothing. The plane is gone. The jet bridge is still swaying a little.'}]}],
       ['gateseats',2,6,4,1,'Gate seats','Four seats in a row, facing the window. Perfect for watching planes. There is one plane.'],
@@ -914,7 +914,7 @@ const LE_ROOMS=[
     rug:[3,5,5,2],
     npcs:[
       {name:'Sal',x:5,y:5,look:'sal',driver:true,lines:[
-        'Elsewhere Taxi. We go anywhere in town. Town is small, so mostly here.',
+        'Long Island Taxi. We go anywhere in town. Town is small, so mostly here.',
         'I have one cab. It is cab seven. Cabs one through six are a dream I am working on.',
         'You just rode with me. You tipped in sourdough starter. Odd. Generous.']}],
     objects:[
@@ -992,7 +992,7 @@ const LE_ROOMS=[
       {name:'Aunt Ellie',x:6,y:3,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,lines:[
         'Tom. Stand up straight. There. Now you look like someone I am related to.',
         'Yes, Deedee has an aunt. Yes, I am older. No, you may not ask by how much.',
-        'I have been to Paris eleven times. Little Elsewhere is charming. Like a hat you wear once.'],
+        'I have been to Paris eleven times. Long Island is charming. Like a hat you wear once.'],
         when:[{...CH9_ON,flag:'ch9-letter',lines:['The girls and I are playing cards. I am winning. I am also cheating. They are learning a great deal.','Go. Dance. Somebody in this family should get to finish a party at the Moon Club.']},
               {...CH9_DONE,lines:['My coat. Ticket seven. I left it at the last dance and never went back for it.','I had a date with a man who turned out to be a disappointment. The coat was not. Keep it warm for me.']}],
         revisit:[

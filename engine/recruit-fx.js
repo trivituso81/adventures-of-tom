@@ -33,7 +33,7 @@ RFX.draw=back=>{
   for(const s of battle.scenes) {
     if(s.t<0||!!s.back!==!!back) continue;
     const f=SC[s.kind]; if(!f) continue;
-    gfx.save(); f(s,cl(s.t/s.dur),s.t); gfx.restore(); gfx.globalAlpha=1;
+    gfx.save(); if(typeof B2!=='undefined'&&B2.aim&&!B2_NOWARP.has(s.kind)) b2WarpCtx(); f(s,cl(s.t/s.dur),s.t); gfx.restore(); gfx.globalAlpha=1;
   }
 };
 

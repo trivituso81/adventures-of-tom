@@ -1,6 +1,6 @@
 'use strict';
 // data/npc-sprites.js — Overworld sprite sheets for family and friends who are not party members: Olivia, Michael
-// (holding Lachlan and Isla), Justin, Aunt Ellie (Little Elsewhere) and Boomie (Downtown LA). Traced from Tom's sheets.
+// (holding Lachlan and Isla), Justin, Aunt Ellie (Long Island) and Boomie (Downtown LA). Traced from Tom's sheets.
 // Same format as data/overworld-sprites.js (down/up/side: stand, stride, stride). Loads after data/recruit-sprites.js (OW).
 // Use on a map npc with sheet:'<id>'.
 const OLIVIA_OW={pal:{"a":"#fab177","b":"#7c4f2f","c":"#142d48","d":"#1a1416","e":"#be824f","f":"#cccac8","g":"#f1945d","h":"#29537b","i":"#6d6a69","j":"#663c25","k":"#ba463f","l":"#d89a61","m":"#da5059","n":"#936039","o":"#1d3f63","p":"#a86f43","q":"#9f9d9d","r":"#151416","s":"#ef706e","t":"#f2f0ed","u":"#472315","v":"#d97245","w":"#93362e"},

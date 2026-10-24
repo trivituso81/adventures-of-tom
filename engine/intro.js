@@ -1,6 +1,6 @@
 'use strict';
 // engine/intro.js — Title prompt (START NEW / LOAD) and the opening scene.
-// Opening: Tom steps out of Elsewhere Taxi Co. alone, Grace and Rose run in and jump on him for a hug,
+// Opening: Tom steps out of Long Island Taxi Co. alone, Grace and Rose run in and jump on him for a hug,
 // Rose climbs onto his shoulders, Grace shows off her gold soup dumpling squishy, then they join the party.
 // The scene is a list of steps; each step has start() and update(dt) that returns true when done.
 const intro={active:false,phase:'',steps:[],cur:null,fade:0,hearts:[],bubble:null,squishy:null,showcase:null,t:0,noGo:[]};
@@ -41,7 +41,7 @@ function startTitle(next) {
 }
 function titleMenu() {
   if(typeof splashReturn==='function'&&splashReturn()) return;
-  openChoice('Adventures of Tom','Start a new adventure, or load a saved one?',[
+  openChoice('The Adventures of Tom','Start a new adventure, or load a saved one?',[
     {label:'START NEW',fn:confirmNew},
     {label:'LOAD',fn:loadMenu}
   ]);
@@ -56,7 +56,7 @@ function confirmNew() {
 function loadMenu() {
   const slots=SAVE_SLOTS.filter(s=>readSave(s));
   if(!slots.length) {
-    openChoice('Load','No saved games on this device yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
+    openChoice('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
     return;
   }
   const nm=s=>s==='auto'?'Autosave':'Slot '+s;
@@ -78,7 +78,7 @@ const S={
   call:fn=>({start(){ fn(); },update(){ return true; }}),
   // voice: one [character, LINES kind] per line, spoken as each line appears (baked clip if there is one, else speech).
   talk:(name,lines,voice)=>({start(){ this.i=-1; openDialog(name,lines); this.speak(); },
-    speak(){ if(!voice||dialog.index===this.i) return; this.i=dialog.index; const v=voice[this.i]; if(v) say(v[0],v[1]); },
+    speak(){ if(!voice||dialog.index===this.i) return; this.i=dialog.index; const v=voice[this.i]; if(v) say(v[0],v[1],v[2]||0,v[3]); },
     update(){ if(!dialog.active) return true; this.speak(); return false; }}),
   // Walk an actor tile by tile through a list of [x,y].
   walk:(a,tiles,dur,onStep)=>({i:0,start(){ this.i=0; this.next(); },

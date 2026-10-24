@@ -17,13 +17,12 @@ function pollGamepad() {
   if(splash.active) { input.padDir=null; splashPad(dir,dirEdge,A,B); return; }
   if(battle.active) {
     input.padDir=null;
-    if(battle.state!=='command') return;
-    const cmds=[...document.querySelectorAll('.battle-cmd')]; if(!cmds.length) return;
-    if(dirEdge&&dir) { battle.sel=(battle.sel+(back?cmds.length-1:1))%cmds.length; highlightCommand(); sfx.move(); }
-    if(A) cmds[battle.sel].click();
-    if(B) { const bk=cmds.find(c=>c.textContent==='BACK'); if(bk) bk.click(); }
+    b2Pad(dir,dirEdge,A,B);
+    if(R1) b7ToggleSpeed(); if(Y) b7ToggleAuto();   // engine/feel.js: 1x / 2x and Smart Repeat
     return;
   }
+  // Cutscenes: B toggles FAST, Start or Select skips (engine/skip.js).
+  if(cutsceneOn()&&(B||START||SEL)) { input.padDir=null; if(B) cutFF(); else cutSkip(); return; }
   if(shopOpen) { input.padDir=null; if(B||START||Y) closeShop(); else if(dirEdge&&(dir==='left'||dir==='right')) shopCycle(dir==='right'?1:-1); return; }
   if(menuOpen) { input.padDir=null; menuPad({dir,dirEdge,A,B,START,Y,prev:L2,next:R1||R2}); return; }
   if(dialog.active) {
@@ -44,7 +43,7 @@ function frame(now) {
   if(!intro.active&&!splash.active) playTime+=dt;
   pollGamepad();
   if(battle.active) {
-    updateBattle(dt);
+    updateBattle(dt*b7Speed());   // 2x battle speed (engine/feel.js)
     drawBattle();
   } else {
     update(dt);
@@ -52,10 +51,11 @@ function frame(now) {
     draw(elapsedTime);
     updateUI(now);
   }
+  refreshCutUI();
   document.documentElement.classList.add('js-running');
   requestAnimationFrame(frame);
 }
 
-window.__LE={intro,splash,startSplash,splashPick,startTitle,beginOpening,get coins(){return coins;},set coins(v){coins=v;},openShop,closeShop,items,party,battle,bag,sfx,say,sound,town,player,followers,startBattle,openDialog,toggleLayout,layout,RECRUITS,recruitJoin,recruitLeave,offerRecruit,dialog,pickChoice,saveGame,loadGame,readSave,cmdAttack,cmdPep,cmdHug,cmdGrumble,ATTACKS,BATTLE_SPRITES,get map(){return currentMap;},worlds,findGrump,findMonster,allMonsters,MONSTERS,go:(id)=>{ const m=worlds[id]; if(!m) return false; currentMap=m; player.x=m.spawn.x; player.y=m.spawn.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; return true; },refresh:()=>refreshBattleStatus()};
+window.__LE={intro,splash,startSplash,splashPick,startTitle,beginOpening,get coins(){return coins;},set coins(v){coins=v;},openShop,closeShop,items,party,battle,bag,sfx,say,sound,town,player,followers,startBattle,openDialog,toggleLayout,layout,RECRUITS,recruitJoin,recruitLeave,offerRecruit,dialog,pickChoice,saveGame,loadGame,readSave,ATTACKS,B2,B2_SKILLS,B2_FOES,b2Start,b2Lab,b2Do,b2Dir,b2A,b2Back,b2Forecast,b2Damage,b2TargetOptions,B2_LAB,BATTLE_SPRITES,get map(){return currentMap;},worlds,findGrump,findMonster,allMonsters,MONSTERS,go:(id)=>{ const m=worlds[id]; if(!m) return false; currentMap=m; player.x=m.spawn.x; player.y=m.spawn.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; return true; },refresh:()=>b2Render()};
 requestAnimationFrame(frame);
 startSplash();

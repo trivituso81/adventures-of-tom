@@ -8,7 +8,7 @@
 //      decline  per recruit, what they say instead of the join offer when the rules keep them out
 // 3. Cutscene scripts: a scene is a list of plain steps (see SCENE_OPS below), compiled to the intro step system and run
 //    with playScene(script). Scripts live in data/scenes.js. Any object with start() and update() also works as a step.
-// 4. Save v3: saves carry {story}. Older saves (v1, v2) are migrated when read.
+// 4. Save v4: saves carry {story}. Older saves (v1, v2) are migrated when read; v3 Stampcards in engine/progress.js.
 // Loaded after engine/nara.js, before data/scenes.js and engine/splash.js.
 
 // ---------- 1. Story state ----------
@@ -29,22 +29,85 @@ function heartTrace(id) {
 // ---------- 2. Chapters and party rules ----------
 const TOWN_HOMES={grace:'le',rose:'le',amy:'le',deedee:'le',boppy:'le',tnb:'la',nara:'la'};
 const DEFAULT_RULES={lock:['tom','grace','rose'],force:[],bar:[],allow:null,homes:TOWN_HOMES,decline:{}};
-// Chapter 0 is the demo (Little Elsewhere and Los Angeles, free play). Chapters 1 to 20 follow the story bible;
+// Chapter 0 is the demo (Long Island and Los Angeles, free play). Chapters 1 to 20 follow the story bible;
 // each chapter session (C1 to C20) fills in its rules and scenes.
 const CHAPTERS=[
   {n:0,title:'Demo',party:{}},
   {n:1,title:'The Soup Dumpling Protocol',party:{allow:['deedee'],
     decline:{amy:'Thirty spelling tests and a 5K in the morning. Take your mother. She has more energy than all of us.',
-             boppy:'Not today. My stomach is doing something. Take Deedee. She already has her shoes on.'}}},
-  {n:2,title:'Smog on 2nd Avenue',party:{lock:['tom'],allow:['tnb','nara']}},
-  {n:3,title:'Paces & Peppers',party:{allow:['boppy']}},
-  {n:4,title:'Backlot Bedlam',party:{lock:['tom'],allow:['tnb','nara']}},
-  {n:5,title:'Parent-Teacher Conference of Doom',party:{allow:['amy']}},
-  {n:6,title:'The Great Squirrel Conspiracy',party:{lock:['tom'],allow:['tnb','nara']}},
-  {n:7,title:'The Whispering Stacks'},
-  {n:8,title:'Feast on Jefferson Park',party:{lock:['tom'],allow:['tnb','nara']}},
-  {n:9,title:'The Moon Club Invitation'},
-  {n:10,title:'Boarding Group Zero'},
+             boppy:'Not today. My stomach is doing something. Take Deedee. She already has her shoes on.'}},
+    // No flights in chapter 1 (chapter 2 opens with the flight to LA).
+    // After the chapter, the brakes are in: Sal's airport run starts chapter 2 (storyTripSteps).
+    noFlight:()=>flag('ch1-done')?null
+      :{lines:['Cab seven needs new brakes. She is parked until the part comes in.','Besides, you just got here. Go see your mother. She made crisp.']}},
+  {n:2,title:'Smog on 2nd Avenue',party:{lock:['tom'],allow:['tnb','nara'],
+    decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
+    // Sol stays put until the smog is gone; after the chapter, his airport run starts chapter 3 (storyTripSteps).
+    noFlight:()=>flag('ch2-done')?null
+      :{lines:['Airport? You JUST landed. The smog has me grounded anyway. I cannot see the freeway.','Go find your boyfriend. He called here twice asking if you landed.']}},
+  {n:3,title:'Paces & Peppers',party:{allow:['boppy'],
+    decline:{amy:'Thirty science fair projects to grade. Thirty. Take Dad fishing. He has been asking since you landed.',
+             deedee:'Not this time, honey. I have three pies in and Boppy needs somebody to go fishing with. Take the girls.'}},
+    // No flights once Tom is home for chapter 3 (the marsh comes first). After the chapter, Sal's airport run starts
+    // chapter 4 (storyTripSteps).
+    noFlight:()=>flag('ch3-done')?null
+      :{lines:['Airport? You just got here. Your father has called the depot four times asking if you landed.','Something about a fish. He sounded very serious about the fish.']}},
+  // Chapter 4: TNB's shoot at Sunset Gold Studios. TNB joins at the cab stand and is locked in by the scene (override);
+  // Nara joins on Tom's porch in Jefferson Park. Sol stays put until the shoot wraps.
+  {n:4,title:'Backlot Bedlam',party:{lock:['tom'],allow:['tnb','nara'],
+    decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
+    // After the wrap, Sol's airport run starts chapter 5 (storyTripSteps).
+    noFlight:()=>flag('ch4-done')?null
+      :{lines:['Airport? You JUST landed. Your young man is on a shoot. Go watch him be important.','The studio lot is at the east end of the boulevard. Big gate. Grumpy guard.']}},
+  // Chapter 5: conference night at Long Island Elementary. Amy joins in the Square and is locked in by the scene (override).
+  // Deedee bakes, Boppy rests. No flights until the conferences are over.
+  {n:5,title:'Parent-Teacher Conference of Doom',party:{allow:['amy'],
+    decline:{deedee:'Not tonight, honey. I made a plate for the teachers. Somebody has to keep Boppy away from it.',
+             boppy:'A school? At night? My stomach says no. My knees say absolutely not.'}},
+    // After the parking lot, Sal's airport run starts chapter 6 (storyTripSteps).
+    noFlight:()=>flag('ch5-done')?null
+      :{lines:['Airport? On conference night? Your sister would find me. She would find me on foot. Fast.','Long Island Elementary is east of the Square. Follow the clipboard.']}},
+  // Chapter 6: squirrels in Jefferson Park. TNB joins in Tom's kitchen and is locked in by the scene (override); Nara
+  // joins on 2nd Ave. Sol stays put until Bready Mercury is home.
+  {n:6,title:'The Great Squirrel Conspiracy',party:{lock:['tom'],allow:['tnb','nara'],
+    decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
+    // After Bready Mercury is home, Sol's airport run starts chapter 7 (storyTripSteps).
+    noFlight:()=>flag('ch6-done')?null
+      :{lines:['Airport? You JUST landed. Your young man called the depot. Something about your bread.','He said, and I quote, "tell him it is a bread emergency." I did not know bread could have those.']}},
+  // Chapter 7: the Hush Library is whispering. Tom, Grace and Rose go down into the Stacks; everybody else is busy.
+  // No flights until the library is quiet again.
+  {n:7,title:'The Whispering Stacks',party:{allow:[],
+    decline:{amy:'Report cards. Thirty of them. Take the girls. They both have library cards. I made sure.',
+             deedee:'Not today, honey. Book club at four. We are reading the same book as last month. Nobody finished it.',
+             boppy:'A library? I read a book once. 1974. It was about fish. It was not accurate.'}},
+    noFlight:()=>flag('ch7-done')
+      ?null
+      :{lines:['Airport? You just got here. Your niece called the depot. From her mother’s phone.','She said, and I quote, "tell Tata the library is being WEIRD." She hung up before I could ask how.']}},
+  // Chapter 8: the 2nd Ave potluck goes cold. TNB joins on 2nd Ave and is locked in by the scene (override); Olivia
+  // hands over Nara. Sol stays put until the feast.
+  {n:8,title:'Feast on Jefferson Park',party:{lock:['tom'],allow:['tnb','nara'],
+    decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
+    noFlight:()=>flag('ch8-done')
+      ?null
+      :{lines:['Airport? You JUST landed. Your young man said, and I quote, "forty loaves, babe."','I do not know what that means. It sounded serious.']}},
+  // Chapter 9: the Moon Club. Deedee and Boppy join at the Rivituso house and are locked in by the scene (override);
+  // Grace and Rose stay with Aunt Ellie; Amy is grading. No flights until the moon is back.
+  {n:9,title:'The Moon Club Invitation',party:{allow:['deedee','boppy'],
+    decline:{amy:'Report cards AND a 10K on Saturday. Go. Take Mom and Dad. Make Dad wear the tie.',
+             deedee:'Not yet, honey. I am still deciding on earrings. Come back with the invitation.',
+             boppy:'Not yet. I am still looking for the tie. I have one tie.'}},
+    // After the moon is back, Sal's ride to Terminal Zero starts chapter 10 (data/scenes.js wraps talkToDriver).
+    noFlight:()=>flag('ch9-done')
+      ?null
+      :{lines:['Airport? You just got here. Your mother called the depot. Three times. Something about a letter.','She said, and I quote, "tell him it has a SEAL."']}},
+  // Chapter 10 (the Part 1 finale): every clock on Long Island stopped at midnight. Sal drives Tom, the girls and
+  // Amy (she joins at the cab, locked in by the scene) to Terminal Zero at Long Island Regional. Sal only goes to Terminal
+  // Zero until the clocks start again (data/scenes.js talkToDriver).
+  {n:10,title:'Boarding Group Zero',party:{allow:['amy'],
+    decline:{deedee:'Not this time, honey. Somebody has to start Sunday dinner. Every clock in my kitchen says midnight and the roast does not care.',
+             boppy:'An airport? At midnight? I am still recovering from the tie.'}},
+    noFlight:()=>flag('ch10-done')?null
+      :{lines:['Airport? Every clock in town says midnight. The planes are not going anywhere.','Terminal Zero, though. Terminal Zero is open.']}},
   {n:11,title:'The Layover Between Worlds'},
   {n:12,title:'Welcome to Jefferson Park, Girls'},
   {n:13,title:'The Subway Beneath the Sea of Clouds'},
@@ -108,7 +171,7 @@ function applyPartyRules() {
   if(typeof menuChar!=='undefined'&&menuChar>=party.length) menuChar=0;
 }
 function setChapter(n,{apply=true}={}) {
-  STORY.chapter=n; STORY.override=null;
+  STORY.chapter=n; STORY.override=null; delete STORY.flags.goal;
   if(apply) applyPartyRules();
 }
 
@@ -140,7 +203,7 @@ offerRecruit=function(m,npc) {
 //   {hop:actor,from:[x,y],to:[x,y],time:.5,arc:20,lift:[0,28]}
 //   {show:actor} {hide:actor}                  {fade:'out'|'in',time:.6}
 //   {flag:'name',value:true}                   {chapter:n}                         {card:n}  (chapter title card)
-//   {battle:'monsterId'}  waits for the fight to end; sets flag 'battle:<id>' to 'win' or 'lose'
+//   {battle:'monsterId'}  waits for the fight to end; sets flag 'battle:<id>' to 'win' or 'lose' (also a map monster, or a function returning one)
 //   {give:'itemId'}  {join:'deedee'}  {leave:'amy'}  {party:{lock,force,bar,allow,homes}} (chapter override, null clears)
 //   {trace:'id'}  (Heart-Trace)  {toast:'text',time}  {sfx:'name'}  {say:[id,kind]}  {save:true}  (autosave)
 //   {noGo:[x0,y0,x1,y1]}  keeps villagers out of that box until the scene ends
@@ -160,9 +223,9 @@ const SCENE_OPS={
   call:o=>S.call(o.call),
   step:o=>o.step,
   talk:o=>S.talk(o.talk,Array.isArray(o.lines)?o.lines:[o.lines],o.voice),
-  walk:o=>lazy(()=>S.walk(sceneActor(o.walk),scenePos(o.to),o.speed||.3,o.onStep)),
+  walk:o=>lazy(()=>{ const a=sceneActor(o.walk); storyHold(a); return S.walk(a,scenePos(o.to),o.speed||.3,o.onStep); }),
   face:o=>S.call(()=>{ const a=sceneActor(o.face); if(a) a.facing=o.dir; }),
-  place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
+  place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
   show:o=>S.call(()=>{ const a=sceneActor(o.show); if(a) a.hidden=false; }),
   hide:o=>S.call(()=>{ const a=sceneActor(o.hide); if(a) a.hidden=true; }),
@@ -171,22 +234,30 @@ const SCENE_OPS={
       if(u>=1&&o.fade==='in') intro.fadeLock=false; return u>=1; }}),
   flag:o=>S.call(()=>setFlag(o.flag,o.value===undefined?true:o.value)),
   chapter:o=>S.call(()=>setChapter(o.chapter)),
-  card:o=>({t:0,start(){ this.t=0; intro.card={n:o.card,t:0}; sfx.levelChime&&sfx.levelChime(); },
+  partCard:o=>({t:0,start(){ this.t=0; intro.card={part:o.partCard,title:o.title,t:0,done:!!o.done}; sfx.levelChime&&sfx.levelChime(); },
     update(dt){ this.t+=dt; intro.card.t=this.t; if(this.t>=(o.time||3)) { intro.card=null; return true; } return false; }}),
-  battle:o=>({start(){ this.m=typeof o.battle==='object'?o.battle:findMonster(o.battle); this.go=false; if(this.m) { startBattle(this.m); this.go=true; } },
+  partClear:o=>S.call(()=>savePartClear()),
+  card:o=>({t:0,start(){ this.t=0; intro.card={n:o.card,t:0,done:!!o.done}; sfx.levelChime&&sfx.levelChime(); },
+    update(dt){ this.t+=dt; intro.card.t=this.t; if(this.t>=(o.time||3)) { intro.card=null; return true; } return false; }}),
+  battle:o=>({start(){ this.m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle); this.go=false; if(this.m) { startBattle(this.m,{tut:o.tut,level:o.level}); this.go=true; } },
     update(){ if(!this.go) return true; if(battle.active) return false;
-      setFlag('battle:'+(this.m.monster||o.battle),battle.enemy&&battle.enemy.hp<=0?'win':'lose'); return true; }}),
+      setFlag('battle:'+(this.m.monster||o.battle),B2.result==='win'?'win':'lose'); return true; }}),
   give:o=>S.call(()=>grantItem(o.give)),
   join:o=>S.call(()=>{ const m=MEMBERS()[o.join]; if(m) forceJoin(m,!!o.quiet); }),
   leave:o=>S.call(()=>{ const m=MEMBERS()[o.leave]; if(m) forceLeave(m,o.quiet!==false); }),
   party:o=>S.call(()=>{ STORY.override=o.party; applyPartyRules(); }),
   trace:o=>S.call(()=>heartTrace(o.trace)),
-  toast:o=>S.call(()=>showToast(o.toast,o.time||3)),
+  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { setFlag('goal',o.toast.slice(6)); refreshObjective(); } showToast(o.toast,o.time||3); }),
   sfx:o=>S.call(()=>{ const f=sfx[o.sfx]; if(f) f(); }),
   say:o=>S.call(()=>say(o.say[0],o.say[1],o.say[2])),
   save:o=>S.call(()=>saveGame('auto',true)),
   noGo:o=>S.call(()=>{ const [x0,y0,x1,y1]=scenePos(o.noGo),map=currentMap;
     for(let y=y0;y<=y1;y++) for(let x=x0;x<=x1;x++) { const k=key(x,y); if(!map.npcNoGo.has(k)) { map.npcNoGo.add(k); intro.noGo.push({map,k}); } } }),
+  spawn:o=>S.call(()=>storySpawn(o.spawn)),
+  despawn:o=>S.call(()=>storyDespawn(o.despawn)),
+  hold:o=>S.call(()=>{ for(const a of [].concat(o.hold)) { const n=sceneActor(a); if(n) storyHold(n); } }),
+  heal:o=>S.call(()=>{ for(const m of party) m.hp=m.maxHp; if(typeof b6Badge==='function') b6Badge(); }),
+  hearts:o=>S.call(()=>{ const a=sceneActor(o.hearts)||player; for(let k=0;k<6;k++) setTimeout(()=>intro.hearts.push({x:a.x+.5+(Math.random()-.5),y:a.y-.6,t:0}),k*140); }),
   all:o=>S.all(...compileScene(o.all)),
   seq:o=>S.seq(...compileScene(o.seq)),
   if:o=>lazy(()=>{ const ok=typeof o.if==='function'?o.if():!!flag(o.if); return S.seq(...compileScene((ok?o.then:o.else)||[])); })
@@ -215,14 +286,14 @@ const LE_drawIntroScreen_story=drawIntroScreen;
 drawIntroScreen=function(time) {
   LE_drawIntroScreen_story(time);
   const c=intro.card; if(!c) return;
-  const info=chapterInfo(c.n),a=Math.min(1,c.t/.4,Math.max(0,(3-c.t)/.4));
+  const info=c.part?{title:c.title||PARTS[c.part].sub}:chapterInfo(c.n),a=Math.min(1,c.t/.4,Math.max(0,(3-c.t)/.4));
   gfx.globalAlpha=a*.85; rect(0,0,W,H,'#14201c'); gfx.globalAlpha=a;
   const cy=Math.round(H*.42),big=Math.max(2,Math.min(4,Math.floor(W/90)));
   const words=info.title.toUpperCase().split(' '),lines=[];
   let cur=''; const maxCh=Math.floor((W-24)/(4*big));
   for(const w of words) { if((cur+' '+w).trim().length>maxCh) { lines.push(cur); cur=w; } else cur=(cur+' '+w).trim(); }
   if(cur) lines.push(cur);
-  const head=c.n?'CHAPTER '+c.n:'DEMO';
+  const head=c.part?'PART '+c.part+(c.done?' COMPLETE':''):c.done?'CHAPTER '+c.n+' COMPLETE':(c.n?'CHAPTER '+c.n:'DEMO');
   label(head,W/2+1,cy-12*big+1,'#1b2d27',big-1||1); label(head,W/2,cy-12*big,'#ffd968',big-1||1);
   rect(W/2-40,cy-4*big,80,1,'#ffd968');
   lines.forEach((l,i)=>{ const y=cy+i*8*big; label(l,W/2+1,y+1,'#1b2d27',big); label(l,W/2,y,'#fff1cb',big); });
@@ -246,7 +317,7 @@ const LE_readSave_story=readSave;
 readSave=function(slot) { return migrateSave(LE_readSave_story(slot)); };
 const LE_saveSnapshot_story=saveSnapshot;
 saveSnapshot=function() {
-  const s=LE_saveSnapshot_story(); s.v=3;
+  const s=LE_saveSnapshot_story(); s.v=4;   // v4: Option 3 Stampcards (engine/progress.js b6AfterLoad migrates older ones)
   s.story={mode:STORY.mode,chapter:STORY.chapter,flags:Object.assign({},STORY.flags),traces:STORY.traces,traceLog:Object.assign({},STORY.traceLog),override:STORY.override};
   return s;
 };
@@ -261,8 +332,316 @@ loadGame=function(slot) {
   return ok;
 };
 // A new game starts the story fresh.
-const LE_beginOpening_story=beginOpening;
-beginOpening=function() { resetStory('demo',0); return LE_beginOpening_story.apply(this,arguments); };
+// START NEW in the full game begins chapter 1: its title card, then the opening.
+beginOpening=function() {
+  resetStory('full',1);
+  intro.phase='scene';
+  playScene(()=>[{card:1,time:3.2},...SCENES.opening()],{fade:.7});
+};
+
+// ---------- 5. Running a chapter (C1): triggers, gates, cutscene actors, story fights ----------
+// Content lives in data/scenes.js: TRIGGERS (when a scene starts), TUTORIALS (tips during a story fight), STORY_WORLD
+// (rules that move things on the map for the story) and STORY_PROPS (small sprites an actor can carry or wear).
+// A trigger: {id, map, at:[x0,y0,x1,y1] (optional; Tom must stand inside), when:{storyMatch conditions}, scene}.
+// The scene must set a flag that stops its own trigger. Checked while Tom stands still and nothing else is going on.
+function storyTriggers() {
+  if(STORY.mode!=='full'||intro.active||transition||typeof TRIGGERS==='undefined') return false;
+  storyWorld();
+  for(const t of TRIGGERS) {
+    if(t.map&&t.map!==currentMap.id) continue;
+    if(t.at&&(player.x<t.at[0]||player.y<t.at[1]||player.x>t.at[2]||player.y>t.at[3])) continue;
+    if(!storyMatch(t.when||{})) continue;
+    player.move=null; queuedAction=false;
+    playScene(t.scene);
+    return true;
+  }
+  return false;
+}
+// Map rules for the story (data/scenes.js STORY_WORLD): run every frame outside cutscenes and right after a map change.
+function storyWorld() { if(STORY.mode==='full'&&typeof STORY_WORLD!=='undefined') for(const f of STORY_WORLD) f(); }
+
+// Gates: an area spec can carry gates:[{at:[[x,y],...], cond, name, lines}] that close an exit while `cond` matches (storyMatch conditions).
+// Tom steps back and gets the gate's lines; a fallen branch is drawn across the opening.
+function storyGate(map,x,y) {
+  if(STORY.mode!=='full') return null;
+  for(const g of (map.spec&&map.spec.gates)||[]) if(g.at.some(([a,b])=>a===x&&b===y)&&storyMatch(g.cond||{})) return g;
+  return null;
+}
+const LE_beginTransition_story=beginTransition;
+beginTransition=function(portal) {
+  if(portal.kind==='edge') {
+    const g=storyGate(currentMap,player.x,player.y);
+    if(g) {
+      const d=DIR[player.facing]; player.x-=d.x; player.y-=d.y; player.move=null; placeFollowers();
+      sfx.bump(); openDialog(g.name,npcLines(g)); return;
+    }
+  }
+  return LE_beginTransition_story(portal);
+};
+
+// Cutscene actors. Walking or placing an NPC holds it (it stops wandering) until the scene ends.
+function storyHold(n) {
+  if(!n||n===player||n.kid||followers.includes(n)||n.held) return;
+  n.held=true; n.path=[]; n.move=null; n.heldFrom={x:n.x,y:n.y}; (intro.held=intro.held||[]).push(n);
+}
+// A temporary actor for a scene: {name, at:[x,y], monster (its sprite), mscale, carry, dir}. Removed by despawn.
+function storySpawn(o) {
+  const [x,y]=scenePos(o.at);
+  const a=actor(o.name,x,y,o.look||'moss',[]);
+  Object.assign(a,{monster:o.monster||null,mscale:o.mscale||1,carry:o.carry||null,scripted:true,tier:0,maxHp:1,defeatedUntil:0,roam:0,facing:o.dir||'down'});
+  currentMap.npcs.push(a); storyHold(a);
+  return a;
+}
+function storyDespawn(name) { for(const m of Object.values(worlds)) m.npcs=m.npcs.filter(n=>!(n.scripted&&n.name===name)); }
+const LE_endIntro_story=endIntro;
+endIntro=function() {
+  // Map monsters a scene walked out go back to their spots (so they never block a path afterwards).
+  for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
+  intro.held=[];
+  LE_endIntro_story();
+  placeFollowers();
+};
+// Story monsters (scripted) never wander or engage; STORY_HOLD (data/scenes.js) can keep a whole map still.
+const LE_b7MonsterTick_story=b7MonsterTick;
+b7MonsterTick=function(n,dt) {
+  if(n.scripted||(STORY.mode==='full'&&typeof STORY_HOLD==='function'&&STORY_HOLD(n))) { n.chasing=false; n.alert=0; return; }
+  return LE_b7MonsterTick_story(n,dt);
+};
+// Drawing: props an actor carries or wears (STORY_PROPS), and gate branches.
+function drawActorExtra(a,cx,top,w,h) {
+  if(typeof STORY_PROPS==='undefined') return;
+  const P=a.carry&&STORY_PROPS[a.carry]; if(P) P(cx,top+Math.round(h*.62),a);   // held in front of its belly
+  const c=typeof STORY_CROWN==='function'?STORY_CROWN(a):null; if(c&&STORY_PROPS[c]) STORY_PROPS[c](cx,top+3,a,true);
+}
+const LE_b7DrawMapFx_story=b7DrawMapFx;
+b7DrawMapFx=function(time) {
+  LE_b7DrawMapFx_story(time);
+  for(const g of (currentMap.spec&&currentMap.spec.gates)||[]) {
+    if(!storyMatch(g.cond||{})||STORY.mode!=='full') continue;
+    const xs=g.at.map(p=>p[0]),ys=g.at.map(p=>p[1]),x0=Math.min(...xs)*T-6,x1=(Math.max(...xs)+1)*T+6,y=(Math.min(...ys)+.62+(g.dy||0))*T;   // dy: draw it lower (so a top-edge gate is not under the HUD)
+    if(g.look==='schoolgate') {   // a chain-link school gate across an east or west edge opening
+      const gx=Math.min(...xs)*T+T-8,y0=Math.min(...ys)*T-4,y1=(Math.max(...ys)+1)*T+2;
+      rect(gx-2,y0-10,6,y1-y0+10,'#2b2a26'); rect(gx-1,y0-9,4,y1-y0+8,'#8a8f98');
+      for(let yy=y0;yy<y1;yy+=6) { rect(gx-6,yy,12,1,'#a9adb5'); }
+      rect(gx-9,y0+(y1-y0)/2-6,18,12,'#2b2a26'); rect(gx-8,y0+(y1-y0)/2-5,16,10,'#f4f0e6'); rect(gx-6,y0+(y1-y0)/2-2,12,2,'#d94a3a');
+      continue;
+    }
+    if(g.look==='barrier') {   // a sawhorse road barrier with orange and white stripes (LA)
+      rect(x0+2,y-2,3,10,'#2b2a26'); rect(x1-5,y-2,3,10,'#2b2a26');
+      rect(x0,y-7,x1-x0,8,'#2b2a26');
+      for(let x=x0+1;x<x1-1;x+=6) rect(x,y-6,Math.min(3,x1-1-x),6,'#f08a3a');
+      for(let x=x0+4;x<x1-1;x+=6) rect(x,y-6,Math.min(3,x1-1-x),6,'#fff1cb');
+      rect(x0+4,y-12,6,5,'#2b2a26'); rect(x0+5,y-11,4,3,Math.floor(time*2)%2?'#ffd166':'#c8553d');
+      continue;
+    }
+    rect(x0,y-7,x1-x0,14,'#2b1d12'); rect(x0+2,y-5,x1-x0-4,10,'#7a5536'); rect(x0+2,y-5,x1-x0-4,3,'#9a7048');
+    for(let k=0;k<3;k++) { const bx=x0+14+k*(x1-x0-28)/2; rect(bx,y-12,3,8,'#5a3b22'); ellipse(bx+2,y-14,7,5,'#4f7d45'); ellipse(bx+5,y-16,4,3,'#6fa04e'); }
+    rect(x0-2,y-4,4,8,'#c9a27a'); rect(x1-2,y-4,4,8,'#c9a27a');
+  }
+  // Story map effects (data/scenes.js STORY_MAPFX): smog, trances, pipes. Drawn in map coordinates over everything.
+  if(STORY.mode==='full'&&typeof STORY_MAPFX!=='undefined') for(const f of STORY_MAPFX) f(time);
+};
+
+// Sal does not drive to the airport while a chapter keeps Tom in town (CHAPTERS[n].noFlight: lines, or a function).
+const LE_talkToDriver_story=talkToDriver;
+talkToDriver=function(n) {
+  const c=chapterInfo();
+  if(STORY.mode==='full'&&c.noFlight) { const r=typeof c.noFlight==='function'?c.noFlight():c.noFlight; if(r) { openDialog(n.name,r.lines,n); if(r.toast) n.onClose=()=>showToast(r.toast,4.5); return; } }
+  // Chapter 1 is over: the brakes came in, and Sal says so before the usual airport offer.
+  if(STORY.mode==='full'&&STORY.chapter===1&&flag('ch1-done')&&!flag('ch2-sal')) {
+    setFlag('ch2-sal'); n.visitedOnce=true;
+    openDialog(n.name,['Good news! The brakes came in. From the next town, like I said. Long trip for a brake.','Cab seven is back. Which means... the AIRPORT is back.'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 2 is over: the freeways reopened, and Sol says so before the usual airport offer.
+  if(STORY.mode==='full'&&STORY.chapter===2&&flag('ch2-done')&&!flag('ch3-sol')) {
+    setFlag('ch3-sol'); n.visitedOnce=true;
+    openDialog(n.name,['They finished the 105! Two years early. Nobody knows what to do with themselves.','Which means I can get you to LAX in twenty minutes. Or two hours. It is LA. But the AIRPORT is back.'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 3 is over: Sal says so before the usual airport offer (the flight starts chapter 4).
+  if(STORY.mode==='full'&&STORY.chapter===3&&flag('ch3-done')&&!flag('ch4-sal')) {
+    setFlag('ch4-sal'); n.visitedOnce=true;
+    openDialog(n.name,['Cab seven had her oil changed. She feels like a new cab. She wants to go somewhere.','Your young man called the depot. He has a big shoot in Los Angeles. He said, and I quote, "tell him to come watch me be important."'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 4 is over: Sol says so before the usual airport offer (the flight starts chapter 5).
+  if(STORY.mode==='full'&&STORY.chapter===4&&flag('ch4-done')&&!flag('ch5-sol')) {
+    setFlag('ch5-sol'); n.visitedOnce=true;
+    openDialog(n.name,['Your sister called the depot. Long distance. From Long Island. To a cab company.','She said, and I quote, "Conference night. Thursday. Tell him to bring snacks." She hung up before I could say goodbye.'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 5 is over: Sal says so before the usual airport offer (the flight starts chapter 6).
+  if(STORY.mode==='full'&&STORY.chapter===5&&flag('ch5-done')&&!flag('ch6-sal')) {
+    setFlag('ch6-sal'); n.visitedOnce=true;
+    openDialog(n.name,['Cab seven slept for two days after conference night. She is herself again.','Your young man called the depot from Los Angeles. Something about squirrels. He sounded very serious about the squirrels.'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 6 is over: Sol says so before the usual airport offer (the flight starts chapter 7).
+  if(STORY.mode==='full'&&STORY.chapter===6&&flag('ch6-done')&&!flag('ch7-sol')) {
+    setFlag('ch7-sol'); n.visitedOnce=true;
+    openDialog(n.name,['The 110 is open again. The squirrels let it go. I do not ask questions.','Your niece called the depot. Long distance. Something about a library. She sounded very serious about the library.'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 7 is over: Sal says so before the usual airport offer (the flight starts chapter 8).
+  if(STORY.mode==='full'&&STORY.chapter===7&&flag('ch7-done')&&!flag('ch8-sal')) {
+    setFlag('ch8-sal'); n.visitedOnce=true;
+    openDialog(n.name,['Cab seven has four new tires. She is so proud. She keeps looking at them.','Your young man called the depot. Something about a potluck. He said, and I quote, "bring the starter."'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  // Chapter 8 is over: Sol says so before the usual airport offer (the flight starts chapter 9).
+  if(STORY.mode==='full'&&STORY.chapter===8&&flag('ch8-done')&&!flag('ch9-sol')) {
+    setFlag('ch9-sol'); n.visitedOnce=true;
+    openDialog(n.name,['Cab 8 is detailed. She is gleaming. She wants to go somewhere fancy.','Your mother called the depot. Long distance. She said, and I quote, "tell Tommy the letter has a SEAL."'],n);
+    n.onClose=()=>LE_talkToDriver_story(n); return;
+  }
+  return LE_talkToDriver_story(n);
+};
+// Steps added to the airport run right before the flight (engine/travel.js startTrip). Leaving Long Island after
+// chapter 1 starts chapter 2: the chapter card plays before takeoff.
+function storyTripSteps(dir) {
+  if(STORY.mode!=='full') return [];
+  if(STORY.chapter===1&&flag('ch1-done')&&dir==='west') return compileScene([{chapter:2},{card:2,time:3.2}]);
+  if(STORY.chapter===2&&flag('ch2-done')&&dir==='east') return compileScene([{chapter:3},{card:3,time:3.2}]);
+  if(STORY.chapter===3&&flag('ch3-done')&&dir==='west') return compileScene([{chapter:4},{card:4,time:3.2}]);
+  if(STORY.chapter===4&&flag('ch4-done')&&dir==='east') return compileScene([{chapter:5},{card:5,time:3.2}]);
+  if(STORY.chapter===5&&flag('ch5-done')&&dir==='west') return compileScene([{chapter:6},{card:6,time:3.2}]);
+  if(STORY.chapter===6&&flag('ch6-done')&&dir==='east') return compileScene([{chapter:7},{card:7,time:3.2}]);
+  if(STORY.chapter===7&&flag('ch7-done')&&dir==='west') return compileScene([{chapter:8},{card:8,time:3.2}]);
+  if(STORY.chapter===8&&flag('ch8-done')&&dir==='east') return compileScene([{chapter:9},{card:9,time:3.2}]);
+  return [];
+}
+// After any boss fight in the full game the story remembers the result (battle:<id> 'win' or 'lose'), so a retry
+// started by pressing A on the boss counts the same as the scripted one.
+const LE_b2End_story=b2End;
+b2End=function(result) {
+  const npc=B2.cfg&&B2.cfg.npc;
+  LE_b2End_story(result);
+  if(npc&&npc.monster&&STORY.mode==='full'&&b7IsBoss(npc)) setFlag('battle:'+npc.monster,result==='win'?'win':'lose');
+};
+
+// Story fights with tips (TUTORIALS in data/scenes.js). A tip: {id, who (member id, a list, or '*'), when(unit) optional, dir ('up',
+// 'right','down','left': the command it points at), care (Care & Bag row to light), text}. One tip per turn, each once;
+// it shows in the message line with the same gold glow Rose Mode uses. A tutorial's setup() runs when the fight starts.
+const LE_b2Start_story=b2Start;
+b2Start=function(cfg) {
+  B2.tut=cfg.tut&&typeof TUTORIALS!=='undefined'&&TUTORIALS[cfg.tut]?{key:cfg.tut,done:{},cur:null}:null;
+  LE_b2Start_story(cfg);
+  if(B2.tut&&TUTORIALS[B2.tut.key].setup) TUTORIALS[B2.tut.key].setup();
+};
+function b2TutTip() {
+  const T0=B2.tut; if(!T0||!B2.active||battle.state!=='command'||!B2.actor||B2.actor.side!=='party') return null;
+  if(T0.cur&&T0.cur.round===B2.round) return T0.cur.tip;
+  if(T0.cur) { T0.done[T0.cur.tip.id]=1; T0.cur=null; }
+  const u=B2.actor;
+  const tip=TUTORIALS[T0.key].tips.find(t=>!T0.done[t.id]&&(t.who==='*'||[].concat(t.who).includes(u.id))&&(!t.when||t.when(u)));
+  if(!tip) return null;
+  T0.cur={tip,round:B2.round};
+  return tip;
+}
+const LE_b7AfterRender_story=b7AfterRender;
+b7AfterRender=function() {
+  LE_b7AfterRender_story();
+  const tip=b2TutTip(); if(!tip) return;
+  const box=$('b2-cmd'); if(!box) return;
+  const glow=sel=>{ box.querySelectorAll('.rec').forEach(e=>e.classList.remove('rec')); const b=box.querySelector(sel); if(b) b.classList.add('rec'); };
+  if(B2.ui==='cross') { b2Msg('★ '+tip.text); if(tip.dir) glow('.b2-x[data-d="'+tip.dir+'"]'); }
+  else if(B2.ui==='care'&&tip.dir==='down'&&tip.care!=null) glow('.b2-btn[data-i="'+tip.care+'"]');
+  else if(B2.ui==='tombo'&&tip.dir==='left') glow('.b2-btn[data-i="0"]');
+};
 
 // Debug handle for tests.
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{STORY,CHAPTERS,SCENES:typeof SCENES!=='undefined'?SCENES:null,playScene,compileScene,setFlag,flag,setChapter,heartTrace,partyRules,canBeHere,canLeave,applyPartyRules,migrateSave,beginOpening}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{storyTriggers,storyTripSteps,TRIGGERS:typeof TRIGGERS!=='undefined'?TRIGGERS:null,TUTORIALS:typeof TUTORIALS!=='undefined'?TUTORIALS:null,STORY,CHAPTERS,SCENES:typeof SCENES!=='undefined'?SCENES:null,playScene,compileScene,setFlag,flag,setChapter,heartTrace,partyRules,canBeHere,canLeave,applyPartyRules,migrateSave,beginOpening}); });
+
+// ---------- 6. Parts: one game in two halves ----------
+// Part 1 is Act I (chapters 1 to 10). Part 2 is Acts II and III (chapters 11 to 20). Both are on the title screen.
+// The last scene of chapter 10 ends with {partCard:1, done:true} and {partClear:true}: that saves Part 1 clear data
+// (its own record, aot-save-clear-1 to 3, oldest replaced when all three are used; never shown in the save menu)
+// plus the autosave. PART 2 unlocks once any clear data exists. Starting Part 2 loads the clear data (levels, XP,
+// Stamp Points and stamps, gear, bag, coins, flags, Heart-Traces, Kindness scrapbook: everything a save keeps),
+// moves to chapter 11, places Tom at CHAPTERS[11].start {map,x,y} if set, and plays SCENES.part2Open if it exists.
+const PARTS=[null,{n:1,from:1,to:10,sub:'Chapters 1 to 10'},{n:2,from:11,to:20,sub:'Chapters 11 to 20'}];
+const partOf=ch=>ch>=PARTS[2].from?2:1;
+const CLEAR_SLOTS=['clear-1','clear-2','clear-3'];
+const isPartClear=sv=>!!(sv&&sv.story&&sv.story.flags&&sv.story.flags['part1-clear']);
+function partClearSlots() { return CLEAR_SLOTS.filter(s=>isPartClear(readSave(s))); }
+function savePartClear() {
+  setFlag('part1-clear');
+  const used=CLEAR_SLOTS.filter(s=>readSave(s));
+  const slot=CLEAR_SLOTS.find(s=>!readSave(s))||used.sort((a,b)=>(readSave(a).when||0)-(readSave(b).when||0))[0];
+  saveGame(slot,true); saveGame('auto',true);
+  showToast('Part 1 clear data saved. Part 2 is open on the title screen.',4);
+  return slot;
+}
+function partClearSummary(sv) {
+  if(!sv) return 'Empty';
+  const lead=(sv.party||[])[0]||{},d=new Date(sv.when),h=Math.floor((sv.time||0)/3600),m=Math.floor((sv.time||0)%3600/60);
+  return 'Lv '+(lead.level||1)+' \u00b7 '+(sv.coins||0)+' coins \u00b7 '+h+'h '+String(m).padStart(2,'0')+'m \u00b7 '+d.toLocaleDateString();
+}
+function confirmPart2(slot) {
+  if(!readSave('auto')) { beginPart2(slot); return; }
+  openChoice('Part 2','Part 2 starts from this clear data. It replaces the autosave once it begins. Slots 1 to 3 and the clear data are kept.',[
+    {label:'START PART 2',fn:()=>beginPart2(slot)},
+    {label:'BACK',fn:titleMenu}
+  ]);
+}
+function beginPart2(slot) {
+  endIntro();
+  if(!loadGame(slot)) { titleMenu(); return; }
+  STORY.mode='full'; setFlag('part2-start'); setChapter(PARTS[2].from);
+  const st=chapterInfo(PARTS[2].from).start;
+  if(st&&worlds[st.map]) { currentMap=worlds[st.map]; player.x=st.x; player.y=st.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; }
+  playScene(()=>[{partCard:2,time:3},{card:PARTS[2].from,time:3.2},...(SCENES.part2Open?SCENES.part2Open():[]),
+    {toast:'Everything from Part 1 carried over: levels, Stamp Points, gear, items and coins.',time:3.5},{save:true}],{fade:.7});
+}
+// Save lists say which Part and chapter a full-game save is in.
+const LE_saveSummary_story=saveSummary;
+saveSummary=function(sv) {
+  const base=LE_saveSummary_story(sv);
+  if(!sv||!sv.story||sv.story.mode!=='full'||!sv.story.chapter) return base;
+  return 'Part '+partOf(sv.story.chapter)+' \u00b7 Ch '+sv.story.chapter+' \u00b7 '+base;
+};
+
+
+// ---------- Objective: tap the location label on the HUD to see what to do next ----------
+// The current goal is the latest "Goal: ..." toast a scene showed, kept in STORY.flags.goal (so it saves with the game).
+function currentObjective() {
+  if(STORY.mode!=='full') {
+    const dc=typeof doorCount==='function'&&currentMap?doorCount(regionOf(currentMap)):null;
+    return {head:'Demo',text:'Free play. Explore Long Island and Los Angeles, meet everyone, and take on the monsters.'+(dc?' Doors visited here: '+dc.seen+' of '+dc.total+'.':'')};
+  }
+  const c=chapterInfo(),head='Chapter '+c.n+': '+c.title;
+  if(flag('ch'+c.n+'-done')===true) {
+    if(c.n===1&&!flag('ch2-sal')) return {head,text:'Chapter complete. Talk to Sal at the taxi stand to keep going.'};
+    if(c.n===2) return {head,text:'Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home and keep going.'};
+    if(c.n===3) return {head,text:'Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 4.'};
+    if(c.n===4) return {head,text:'Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 5.'};
+    if(c.n===7) return {head,text:'Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 8.'};
+    if(c.n===8) return {head,text:'Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 9.'};
+    if(c.n===9) return {head,text:'Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) for chapter 10.'};
+    if(c.n===10) return {head,text:'Part 1 complete! PART 2 is open on the title screen. Its chapters are still being built. Explore as much as you like.'};
+    return {head,text:'Chapter complete. The next chapter is still being built. Explore as much as you like.'};
+  }
+  return {head,text:flag('goal')||'Look around. The story will find you.'};
+}
+let objectiveOpen=false,objectiveTimer=0;
+function refreshObjective() {
+  const box=document.getElementById('objective'); if(!box) return;
+  const o=currentObjective();
+  box.querySelector('.obj-head').textContent=o.head;
+  box.querySelector('.obj-text').textContent=o.text;
+}
+function toggleObjective(open=!objectiveOpen) {
+  objectiveOpen=open; clearTimeout(objectiveTimer);
+  const brand=document.querySelector('#hud .brand'); if(!brand) return;
+  if(open) refreshObjective();
+  brand.classList.toggle('open',open); brand.setAttribute('aria-expanded',open);
+  document.getElementById('objective').hidden=!open;
+  if(open) { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); objectiveTimer=setTimeout(()=>toggleObjective(false),12000); }
+}
+(function wireObjective() {
+  const brand=document.querySelector('#hud .brand'); if(!brand) return;
+  brand.setAttribute('role','button'); brand.setAttribute('tabindex','0'); brand.setAttribute('aria-expanded','false');
+  brand.setAttribute('aria-label','Location. Tap to see your next objective');
+  brand.addEventListener('click',e=>{ e.stopPropagation(); toggleObjective(); });
+})();

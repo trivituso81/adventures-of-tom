@@ -1,9 +1,8 @@
 'use strict';
-// DEMO BUILD (frozen 2026-10-19). Never edit files under demo/. Opened from the main title screen's DEMO button;
-// it starts on START NEW / LOAD / BACK, and BACK returns to the main title screen.
 // engine/splash.js — Launch screen before the title card: a dusk sky over the hills (no village),
-// the whole cast lined up for a group photo, and a choice between DEMO and FULL GAME (locked for now).
-// DEMO swaps the panel to START NEW / LOAD / BACK on this same screen; picking one fades into the town title card (startTitle).
+// the whole cast lined up for a group photo, and a choice of PART 1, PART 2, DEMO and BATTLE LAB.
+// DEMO opens the frozen demo build in demo/ (same tab). PART 1 swaps the panel to START NEW / LOAD / BACK; PART 2 is locked
+// (dashed, shakes) until Part 1 clear data exists, then lists the clear data to continue from. Picking fades into the town.
 // Fun bits: a "wave" of hops left to right with a STARRING caption, Rose bouncing on Tom's shoulders,
 // Tom tossing Nara's tennis ball and Nara fetching it, hearts between Tom and TNB, fireflies, stars.
 const splash={active:false,t:0,sel:0,c:null,g:null,stars:[],flies:[],hearts:[],name:'',nameT:0,cycle:0,
@@ -21,6 +20,7 @@ const SPLASH_CAST=[
   {id:'amy',name:'AMY',row:1,fx:.87}
 ];
 const SPLASH_HOP=.42,SPLASH_STEP=.3;
+let FULL_GAME_OPEN=true;   // opened in C1 (2026-10-20): chapter 1 is playable
 
 function startSplash() {
   const el=$('splash');
@@ -34,7 +34,7 @@ function startSplash() {
   splash.flies=[]; for(let i=0;i<9;i++) splash.flies.push({x:rnd(),y:rnd(),p:rnd()*6.28,s:.4+rnd()*.5});
   el.hidden=false; el.classList.remove('out');
   splashMark();
-  splashSetMode('start');
+  splashSetMode('launch');
   if(!splash.wired) {
     splash.wired=true;
     const box=el.querySelector('.sp-choices');
@@ -46,12 +46,24 @@ function startSplash() {
   requestAnimationFrame(splashFrame);
 }
 
-// Panel modes. launch: DEMO / FULL GAME. start (after DEMO): START NEW / LOAD / BACK, still over the cast.
+// Panel modes. launch: PART 1 / PART 2 / DEMO / BATTLE LAB (2x2). start (PART 1): START NEW / LOAD / BACK.
+// part2 (PART 2): one choice per Part 1 clear data, LOAD, BACK. The game is one story in two Parts (engine/story.js PARTS):
+// Part 2 stays locked until this device has Part 1 clear data, and starts from it with everything carried over.
 const SPLASH_MODES={
-  launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',choices:()=>[
-    {name:'DEMO',sub:'Little Elsewhere and Los Angeles. Play now.'},
-    {name:'FULL GAME',sub:'Coming soon. Still being built.',cls:'locked'}]},
-  start:{tab:'Demo',cue:'A / Enter to pick. B / Esc to go back',choices:()=>{
+  launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',choices:()=>{
+    const clr=partClearSlots().length;
+    return [
+      FULL_GAME_OPEN?{name:'PART 1',sub:'Chapters 1 to 10. Start here.'}:{name:'PART 1',sub:'Coming soon. Still being built.',cls:'locked'},
+      clr?{name:'PART 2',sub:'Chapters 11 to 20. Continue from your Part 1 clear data.'}:{name:'PART 2',sub:'Chapters 11 to 20. Finish Part 1 to unlock.',cls:'locked'},
+      {name:'DEMO',sub:'The original Long Island and Los Angeles.'},
+      {name:'BATTLE LAB',sub:'Try every move and Tombo.'}]; }},
+  part2:{tab:'Part 2',cue:'Pick the clear data to continue from. B / Esc to go back',choices:()=>[
+    ...partClearSlots().map((s,i)=>({name:'CLEAR DATA '+(i+1),sub:partClearSummary(readSave(s)),slot:s})),
+    {name:'LOAD',sub:'Continue a Part 2 save.'},
+    {name:'BACK',sub:'',cls:'back'}]},
+  // Test fights for the new battle (engine/battle2.js, B2_LAB in data/battle2-data.js). Remove when the full game opens.
+  lab:{tab:'Battle Lab',cue:'A / Enter to fight. B / Esc to go back',choices:()=>[...B2_LAB.map(L=>({name:L.name,sub:L.sub})),{name:'BACK',sub:'',cls:'back'}]},
+  start:{tab:'Part 1',cue:'A / Enter to pick. B / Esc to go back',choices:()=>{
     const n=SAVE_SLOTS.filter(k=>readSave(k)).length;
     return [{name:'START NEW',sub:'Begin with the opening scene.'},
       {name:'LOAD',sub:n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.'},
@@ -62,34 +74,68 @@ function splashSetMode(mode) {
   const M=SPLASH_MODES[mode],el=$('splash');
   el.querySelector('.sp-tab').textContent=M.tab;
   $('sp-cue').textContent=M.cue;
-  el.querySelector('.sp-choices').innerHTML=M.choices().map((c,i)=>
+  const list=M.choices(); splash.list=list; el.querySelector('.sp-choices').classList.toggle('grid',list.length>3);
+  el.querySelector('.sp-choices').innerHTML=list.map((c,i)=>
     '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+'</span>'+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
   splashMark();
 }
 function splashMark() {
   document.querySelectorAll('#splash .sp-choice').forEach(b=>b.classList.toggle('sel',Number(b.dataset.i)===splash.sel));
 }
-function splashMove(d) {
-  const n=document.querySelectorAll('#splash .sp-choice').length||2; splash.sel=(splash.sel+d+n)%n; sfx.move(); splashMark();
+// In the 2x2 grid, up and down move a whole row (dir is the pressed direction; d is -1 or 1).
+function splashMove(d,dir) {
+  const n=document.querySelectorAll('#splash .sp-choice').length||2;
+  const grid=document.querySelector('#splash .sp-choices.grid')&&n===4&&(dir==='up'||dir==='down');
+  splash.sel=(splash.sel+d*(grid?2:1)+n)%n; sfx.move(); splashMark();
 }
 function splashPick(i) {
   if(!splash.active) return;
   splash.sel=i; splashMark();
   if(splash.mode==='start') {
     if(i===2) { splashBack(); return; }
-    sfx.select(); splashLeave(i===0?confirmNew:loadMenu);
+    sfx.select(); splash.ret='start'; splashLeave(i===0?confirmNew:loadMenu);
     return;
   }
-  if(i===1) {
+  if(splash.mode==='part2') {
+    const c=(splash.list||[])[i]; if(!c) return;
+    if(c.cls==='back') { splashBack(); return; }
+    sfx.select(); splash.ret='part2'; splashLeave(c.slot?()=>confirmPart2(c.slot):loadMenu);
+    return;
+  }
+  if(splash.mode==='lab') {
+    if(i>=B2_LAB.length) { splashBack(); return; }
+    sfx.select(); unlockAudio(); splash.active=false;
+    const el=$('splash'); el.classList.add('out');
+    setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
+    b2Lab(i);
+    return;
+  }
+  if(i===2) { openDemo(); return; }
+  if(i===3) { sfx.select(); splashSetMode('lab'); return; }
+  const locked=i===0?!FULL_GAME_OPEN:!partClearSlots().length;
+  if(locked) {
     sfx.nope(); splash.shakeT=.4;
-    const b=document.querySelector('#splash .sp-choice[data-i="1"]');
+    const b=document.querySelector('#splash .sp-choice[data-i="'+i+'"]');
     if(b) { b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); }
-    $('sp-cue').textContent='The full game is still being built. Try the Demo!';
+    $('sp-cue').textContent=i===0?'Part 1 is still being built. Try the Demo!':'Finish Part 1 to unlock Part 2.';
     return;
   }
-  sfx.select(); splashSetMode('start');
+  sfx.select(); splashSetMode(i===0?'start':'part2');
 }
-function splashBack() { if(splash.mode==='start') { sfx.move(); splash.active=false; $('splash').classList.add('out'); setTimeout(()=>{ location.href=new URL('../',location.href).href; },250); } }
+// The demo is its own frozen copy of the game in demo/, with its own saves (the le-save-* keys).
+function openDemo() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('demo/index.html',location.href).href; },250);
+}
+function splashBack() { if(splash.mode==='start'||splash.mode==='lab'||splash.mode==='part2') { sfx.move(); splashSetMode('launch'); } }
+// After a Battle Lab fight: back to the title screen on the lab list.
+function splashToLab() {
+  const el=$('splash'); if(!el) return;
+  el.hidden=false; el.classList.remove('out');
+  splash.active=true; splashSetMode('lab');
+  splash.last=performance.now(); requestAnimationFrame(splashFrame);
+}
 // Fade the title screen out over the town and run next (confirmNew or loadMenu) there.
 function splashLeave(next) {
   splash.active=false;
@@ -101,14 +147,14 @@ function splashLeave(next) {
 function splashReturn() {
   const el=$('splash'); if(!el) return false;
   el.hidden=false; el.classList.remove('out');
-  splash.active=true; splashSetMode('start');
+  splash.active=true; splashSetMode(splash.ret==='part2'&&partClearSlots().length?'part2':'start');
   splash.last=performance.now(); requestAnimationFrame(splashFrame);
   return true;
 }
 // Gamepad: called from pollGamepad while the splash is up.
 function splashPad(dir,dirEdge,A,B) {
   if(!splash.active) return;
-  if(dirEdge&&dir) splashMove(dir==='up'||dir==='left'?-1:1);
+  if(dirEdge&&dir) splashMove(dir==='up'||dir==='left'?-1:1,dir);
   if(A) splashPick(splash.sel);
   else if(B) splashBack();
 }
@@ -119,8 +165,10 @@ window.addEventListener('keydown',e=>{
   unlockAudio();
   if(e.repeat) return;
   const c=e.code;
-  if(c==='ArrowUp'||c==='ArrowLeft'||c==='KeyW'||c==='KeyA') { e.preventDefault(); splashMove(-1); }
-  else if(c==='ArrowDown'||c==='ArrowRight'||c==='KeyS'||c==='KeyD') { e.preventDefault(); splashMove(1); }
+  if(c==='ArrowUp'||c==='KeyW') { e.preventDefault(); splashMove(-1,'up'); }
+  else if(c==='ArrowLeft'||c==='KeyA') { e.preventDefault(); splashMove(-1,'left'); }
+  else if(c==='ArrowDown'||c==='KeyS') { e.preventDefault(); splashMove(1,'down'); }
+  else if(c==='ArrowRight'||c==='KeyD') { e.preventDefault(); splashMove(1,'right'); }
   else if(c==='Enter'||c==='Space') { e.preventDefault(); splashPick(splash.sel); }
   else if(c==='Escape'||c==='Backspace') { e.preventDefault(); splashBack(); }
 },true);
@@ -326,10 +374,10 @@ function splashBall(x,y,S) {
   ellipse(x,y,r+1,r+1,'#2b2a26'); ellipse(x,y,r,r,'#c8e04a'); rect(x-r+1,y-1,r*2-2,Math.max(1,Math.round(S/2)),'#f4fbd0');
 }
 
-// ---------- Game logo: ADVENTURES OF / TOM ----------
+// ---------- Game logo: THE ADVENTURES OF / TOM ----------
 // Shared by the launch screen and the title card. Big chunky serif letters in the style of SNES JRPG logos:
 // gold gradient faces, a bevel, a dark 3D extrude and outline, a light sweep, slow gold rays behind,
-// a red ribbon with ADVENTURES OF, and a little heart (the family) beating inside the O.
+// a red ribbon with THE ADVENTURES OF, and a little heart (the family) beating inside the O.
 const LOGO_GLYPHS={
   T:['###########','###########','##.#####.##','...#####...','...#####...','...#####...','...#####...','...#####...','...#####...','..#######..','..#######..'],
   O:['...#####...','.#########.','####...####','###.....###','###.....###','###.....###','###.....###','###.....###','####...####','.#########.','...#####...'],
@@ -355,8 +403,8 @@ function logoUnit(maxW,maxH) { if(!logoMask) buildLogoMask(); return Math.max(2,
 function drawGameLogo(cx,y,P,time,beat) {
   if(!logoMask) buildLogoMask();
   const M=logoMask,o=Math.max(2,Math.round(P/2)),depth=Math.max(2,Math.round(P*.7));
-  // Ribbon with ADVENTURES OF.
-  const r=Math.max(2,Math.round(P*.38)),txt='ADVENTURES OF',tw=(txt.length*4-1)*r,padX=r*4,rh=r*5+r*4;
+  // Ribbon with THE ADVENTURES OF.
+  const r=Math.max(2,Math.round(P*.38)),txt='THE ADVENTURES OF',tw=(txt.length*4-1)*r,padX=r*4,rh=r*5+r*4;
   const rw=tw+padX*2,rx=Math.round(cx-rw/2),ry=Math.round(y);
   const tail=r*4,fold=r*2;
   // Tails (behind), then the band.

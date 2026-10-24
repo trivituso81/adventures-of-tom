@@ -42,8 +42,10 @@ function b2MoveName(key) {
   const s=[kit.basic,kit.special,...kit.skills,...(kit.o3||[])].find(x=>x&&x.key===k);
   return s?s.name:key;
 }
+// Option 3 signatures whose doc key differs from the legacy key: kindness values and liked lists use the legacy key.
+const B8_SIG_LEGACY={'deedee.moon_back':'deedee.hug','nara.puppy_eyes':'nara.puppy','amy.pep_talk':'amy.pep'};
 function b2Kindness(M) {
-  const key=M.act.tombo?'tombo.'+M.act.id:M.u.id+'.'+M.act.key;
+  const key0=M.act.tombo?'tombo.'+M.act.id:M.u.id+'.'+M.act.key,key=B8_SIG_LEGACY[key0]||key0;
   const V=M.act.tombo?M.act.kindV:B2_KIND[key]; if(!V) return;
   const foeT=M.targets.filter(t=>t.side==='foe'&&b2Alive(t));
   const ally=['ally','allyko','party','self'].includes(M.act.target);
@@ -89,7 +91,7 @@ function b2InspectText(f) {
   const here=new Set(B2.party.filter(b2Alive).map(p=>p.id));
   // A move and its Option 3 stand-in (B8_LIKE_ALIAS) show once, by the name of whichever one is in that member's kit.
   const likes=[...new Set(f.likes.filter(k=>here.has(k.split('.')[0])).map(b8LikeShown).filter(Boolean))].map(b2MoveName);
-  const weak=f.revealed?(f.weak.length?f.weak.map(e=>B2_ELEMS[e].name).join(', '):'nothing'):'??? (Five-Minute Review or Red Pen)';
+  const weak=f.revealed?(f.weak.length?f.weak.map(e=>B2_ELEMS[e].name).join(', '):'nothing'):'??? (Flashcard Flurry or Red Pen)';
   return f.name+': '+f.grumpy+' Cheer it up with '+(likes.length?likes.join(', '):'nobody here, sadly')+'. Weak to '+weak+'.'+(f.mirror?' MIRROR SIDE: '+B2_ELEMS[f.mirror].name+' (those hits bounce back).':'');
 }
 

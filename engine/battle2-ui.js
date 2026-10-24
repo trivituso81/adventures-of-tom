@@ -100,7 +100,11 @@ function b2DrawEnemies(t) {
     if(!dying) ellipse(f.px,f.py+2,w*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
     const flash=f.flash>0||(dying&&q>.1)||(aimed&&battle.flashEnemy>0);
     const sway=(f.st.goofed||f.st.staggered)&&!dying?Math.sin(t*5+f.idx)*.14:0;
-    if(sway) { gfx.save(); gfx.translate(x+w/2,y+h); gfx.rotate(sway); drawSprite(R,P,-w/2,-h,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
+    // A set piece can spin a monster about its middle and shift it (f.spin, f.ox, f.oy). They count only while the
+    // scene keeps refreshing f.spinAt, so a skipped or cut-off move never leaves a monster upside down.
+    const spun=f.spinAt&&performance.now()-f.spinAt<150&&!dying;
+    if(spun) { gfx.save(); gfx.translate(x+w/2+(f.ox||0),y+h/2+(f.oy||0)); gfx.rotate((f.spin||0)+sway); drawSprite(R,P,-w/2,-h/2,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
+    else if(sway) { gfx.save(); gfx.translate(x+w/2,y+h); gfx.rotate(sway); drawSprite(R,P,-w/2,-h,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
     else drawSprite(R,P,x,y,sc,{flash,alpha:(1-q)*spawn});
     if(dying) continue;
     const top=y+(f.def._top||0)*sc;

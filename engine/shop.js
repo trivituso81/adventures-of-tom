@@ -34,7 +34,7 @@ const PENNY={
   keep:['I could never. That is a family thing.','Not for sale. Some things are priceless.','Put that back in your pocket. It is special.']
 };
 let shopOpen=false,shopMode='buy',shopTab='tom',shopNote='';
-// The shopkeeper's lines: Penny in Little Elsewhere, her cousin Nickel in Los Angeles (npc.shopLines).
+// The shopkeeper's lines: Penny on Long Island, her cousin Nickel in Los Angeles (npc.shopLines).
 let SHOPK=null;
 
 function talkToShopkeeper(n) {
@@ -83,15 +83,15 @@ function shopCycle(d) {
 const countInBag=id=>bag.filter(b=>b===id).length;
 const wornBy=id=>Object.values(RECRUITS).concat([hero,grace,rose]).find(m=>Object.values(m.equipment).includes(id));
 
-// "vs Sunny Shirt: +1 Pace, -1 Charm" for a piece of gear against what that person wears in the same slot.
+// "vs Sunny Shirt: +2 HP, -1 COOL" for a piece of gear against what that person wears in the same slot (charms: the perk).
 function compareText(m,item) {
   const curId=m.equipment[item.slot],cur=curId?items[curId]:null;
-  const keys=STAT_NAMES.concat(['Guard']);
-  const val=(it,k)=>!it?0:(k==='Guard'?(it.def||0):((it.bonus&&it.bonus[k])||0));
-  const diffs=keys.map(k=>[k,val(item,k)-val(cur,k)]).filter(([,v])=>v);
+  if(item.slot==='Charm') return {text:(cur?'vs '+cur.name+': ':'Open charm slot: ')+(b6PerkText(item.perk)||'no perk'),up:b6PerkScore(item.perk)-(cur?b6PerkScore(cur.perk):0)};
+  const val=(it,k)=>!it?0:((it.stats&&it.stats[k])||0);
+  const diffs=STAT_NAMES.map(k=>[k,val(item,k)-val(cur,k)]).filter(([,v])=>v);
   if(!diffs.length) return {text:cur?'Same stats as '+cur.name+'.':'',up:0};
-  const up=diffs.reduce((a,[,v])=>a+v,0);
-  return {text:(cur?'vs '+cur.name+': ':'Open slot: ')+diffs.map(([k,v])=>(v>0?'+':'')+v+' '+k).join(', '),up};
+  const up=diffs.reduce((a,[k,v])=>a+v*(k==='hp'?.2:1),0);
+  return {text:(cur?'vs '+cur.name+': ':'Open slot: ')+diffs.map(([k,v])=>(v>0?'+':'')+v+' '+STAT_LABEL[k]).join(', '),up};
 }
 
 function shopButton(text,cls,fn) {
@@ -175,7 +175,7 @@ function renderShop() {
     for(const id of ids) {
       const it=items[id],v=sellValue(it),n=countInBag(id);
       const bits=[];
-      if(it.slot) bits.push((it.who?memberById(it.who).name+' · ':'')+it.slot);
+      if(it.slot) bits.push((it.who?memberById(it.who).name+' · ':'')+SLOT_LABEL[it.slot]);
       const fx=bonusText(it); if(fx) bits.push(fx);
       list.appendChild(shopRow(id,{meta:(n>1?'x'+n+' in pockets. ':'')+(bits.join(' · ')||it.desc),
         buttons:[v?shopButton('SELL \u{1FA99}'+v,'sell',()=>sellItem(id)):shopButton('KEEP','keep',()=>sellItem(id))]}));
@@ -188,7 +188,7 @@ function renderShop() {
   const tab=SHOP_TABS.find(t=>t.id===shopTab);
   if(tab.cat) {
     head.hidden=true; icon.hidden=false; icon.textContent=shopTab==='healing'?'\u{1FA79}':'\u{1F388}';
-    $('shop-subtitle').textContent=shopTab==='healing'?'HEALING · HP, MP AND WAKE-UPS':'BATTLE ITEMS · USE FROM ITEM IN A FIGHT';
+    $('shop-subtitle').textContent=shopTab==='healing'?'HEALING · HP, VP AND WAKE-UPS':'BATTLE ITEMS · USE FROM THE SNACK BAG IN A FIGHT';
     for(const id of SHOP_STOCK[shopTab]) {
       const it=items[id],n=countInBag(id),afford=coins>=it.price;
       list.appendChild(shopRow(id,{meta:it.desc,note:effectText(it).replace('Battle: ','')+(n?' · '+n+' in pockets':''),noteCls:'fx',
@@ -208,7 +208,7 @@ function renderShop() {
       else if(inBag) buttons.push(shopButton('WEAR','wear',()=>wearItem(m,id)));
       else if(owner) tag=owner.name.toUpperCase()+' HAS IT';
       else buttons.push(shopButton('\u{1FA99}'+it.price,'buy'+(afford?'':' poor'),()=>buyItem(id)));
-      list.appendChild(shopRow(id,{meta:it.slot.toUpperCase()+' · '+bonusText(it)+'. '+it.desc,
+      list.appendChild(shopRow(id,{meta:SLOT_LABEL[it.slot].toUpperCase()+' · '+bonusText(it)+'. '+it.desc,
         note:owner===m?'':c.text,noteCls:c.up>0?'up':(c.up<0?'down':''),buttons,tag}));
     }
   }

@@ -1,7 +1,7 @@
 'use strict';
-// engine/travel.js — Flying between Little Elsewhere and Los Angeles.
-// Talk to Sal (Elsewhere Taxi Co.) or Sol (Angel City Cab Co.) and pick the airport. Each town keeps its own recruits: Grace, Rose, Amy, Deedee
-// and Boppy stay in Little Elsewhere (the girls wait in the Gregori house and run to meet Tom when he lands back home. TNB and Nara stay in Los Angeles.
+// engine/travel.js — Flying between Long Island and Los Angeles.
+// Talk to Sal (Long Island Taxi Co.) or Sol (Angel City Cab Co.) and pick the airport. Each town keeps its own recruits: Grace, Rose, Amy, Deedee
+// and Boppy stay on Long Island (the girls wait in the Gregori house and run to meet Tom when he lands back home. TNB and Nara stay in Los Angeles.
 // The flight is a cutscene on the intro step system: takeoff, a plane crossing a map of the US, landing.
 
 // ---------- LA villagers ----------
@@ -79,7 +79,7 @@ const TRAVEL_TALK={
 };
 function talkToDriver(n) {
   const inLA=regionOf(currentMap)==='la';
-  const pages=n.visitedOnce?[]:n.lines.slice();
+  const pages=n.visitedOnce?[]:npcLines(n);
   n.visitedOnce=true;
   pages.push(inLA?'Where to? The airport? It is always the airport.'
     :'Where to? Around town, or... the airport? I have waited years for somebody to say airport.');
@@ -122,6 +122,7 @@ function startTrip(n,dir) {
       S.call(()=>{ recruitLeave(f,true); sfx.doorOut(); showToast(tt.toast,3); }),
       S.wait(.6)); }
   }
+  if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
   steps.push(...flightSteps(dir));
   runScene(steps);
 }
@@ -186,7 +187,7 @@ function arriveLA() {
     })
   ];
 }
-// Back in Little Elsewhere: Tom steps out of the taxi depot and the girls come running.
+// Back on Long Island: Tom steps out of the taxi depot and the girls come running.
 function arriveHome() {
   const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
   const welcome=[];
@@ -202,7 +203,7 @@ function arriveHome() {
     S.wait(.6),
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[dx,dy+1],[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
-    S.talk('Tom',['Little Elsewhere. Nice and quiet. For about four more seconds.']),
+    S.talk('Tom',['Long Island. Nice and quiet. For about four more seconds.']),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
     S.wait(.6),
     S.call(()=>{ player.facing='left';
@@ -342,7 +343,7 @@ function drawFlight(time) {
   if(a>0) { gfx.globalAlpha=Math.min(1,a); rect(0,0,W,H,'#141c1a'); gfx.globalAlpha=1; }
 }
 
-// Takeoff and landing, seen from the side. Little Elsewhere is green and leafy; LA is palms and a sunset.
+// Takeoff and landing, seen from the side. Long Island is green and leafy; LA is palms and a sunset.
 function drawFlightSide(F,time) {
   const land=F.mode==='landing',west=F.dir==='west';
   const inLA=(F.mode==='takeoff')!==west; // taking off from LA when flying east, landing in LA when flying west
@@ -369,7 +370,7 @@ function drawFlightSide(F,time) {
     polygon([[hx,gy],[hx+20*S,gy-18*S],[hx+44*S,gy]],hill);
     polygon([[hx+24*S,gy],[hx+40*S,gy-11*S],[hx+60*S,gy]],hill2);
   }
-  // Skyline (LA) or rooftops and trees (Little Elsewhere), moving at mid speed.
+  // Skyline (LA) or rooftops and trees (Long Island), moving at mid speed.
   for(let i=-1;i<W/(16*S)+2;i++) {
     const n=hash(i,inLA?3:5),bx=((i*16*S+drift*.45)%(W+32*S)+W+32*S)%(W+32*S)-16*S;
     if(inLA) {
@@ -416,7 +417,7 @@ function drawFlightSide(F,time) {
   if((!land&&t<1.8)||(land&&t>2.4)) for(const dx of [-8,6]) { rect(px+facing*dx*S-S,py+6*S,2*S,2*S,'#1d2430'); }
   if(land&&t>2.5&&t<3.3) { const q=(t-2.5)/.8; gfx.globalAlpha=1-q; ellipse(px-facing*10*S-facing*q*14*S,ground-2*S,(4+q*6)*S,(2+q*2)*S,'#e8e2d6'); gfx.globalAlpha=1; }
   // Caption.
-  const cap=land?(inLA?'LOS ANGELES':'LITTLE ELSEWHERE'):(inLA?'LEAVING LOS ANGELES':'LEAVING LITTLE ELSEWHERE');
+  const cap=land?(inLA?'LOS ANGELES':'LONG ISLAND'):(inLA?'LEAVING LOS ANGELES':'LEAVING LONG ISLAND');
   const ls=Math.max(2,Math.round(S*.7));
   label(cap,W/2+1,B.oy+6*S+1,'#1b2d27',ls); label(cap,W/2,B.oy+6*S,'#fff1cb',ls);
 }
@@ -439,7 +440,7 @@ function drawFlightMap(F,time) {
   star(SPOT.le,'#ffd968'); star(SPOT.la,'#f28a6a');
   const ls=Math.max(1,Math.round(S/2)),[lx,ly]=V(SPOT.le),[ax,ay]=V(SPOT.la);
   const tag=(txt,x,y)=>{ const w=(txt.length*4-1)*ls,cx=clamp(x,w/2+4,W-w/2-4); rect(cx-w/2-3,y-2,w+6,5*ls+4,'#1d2430cc'); label(txt,cx,y,'#fff1cb',ls); };
-  tag('LITTLE ELSEWHERE',lx-6*S,ly+4*S); tag('LOS ANGELES',ax+4*S,ay+4*S);
+  tag('LONG ISLAND',lx-6*S,ly+4*S); tag('LOS ANGELES',ax+4*S,ay+4*S);
   // Clouds (with shadows) drifting east.
   for(let i=0;i<5;i++) {
     const n=hash(i,77),cx=((n%MAP_W)+time*(3+i))%(MAP_W+40)-20,cy=18+(n>>>8)%64;
@@ -454,7 +455,7 @@ function drawFlightMap(F,time) {
   drawRotated(img,px,py,ps,c.ang);
   // Header and time left.
   const hs=Math.max(1,Math.round(S*.75));
-  const route=west?'LITTLE ELSEWHERE > LOS ANGELES':'LOS ANGELES > LITTLE ELSEWHERE';
+  const route=west?'LONG ISLAND > LOS ANGELES':'LOS ANGELES > LONG ISLAND';
   label(route,W/2+1,B.oy-2*hs+1,'#1d2430',hs); label(route,W/2,B.oy-2*hs,'#fff1cb',hs);
   const left=Math.max(0,Math.round((1-e)*360)),hh=Math.floor(left/60),mm=left%60;
   const tl=left?hh+'H '+String(mm).padStart(2,'0')+'M TO GO':'ARRIVING';

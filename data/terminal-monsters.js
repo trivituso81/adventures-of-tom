@@ -1,5 +1,5 @@
 'use strict';
-// data/terminal-monsters.js — Chapter 10 monsters (Boarding Group Zero): Terminal Zero at Elsewhere Regional, closed
+// data/terminal-monsters.js — Chapter 10 monsters (Boarding Group Zero): Terminal Zero at Long Island Regional, closed
 // since 1989, and Gate Zero. Same shape as data/monsters.js. Travel annoyances turned Friction Sprites.
 // Easiest to hardest: Carry-On (an overstuffed roller bag; roams in pairs, will not fit anywhere), Jet Lag (a sleepy
 // little cloud in an eye mask; makes people Drowsy), The Long Line (Security; a LINE STARTS HERE sign that has not moved
@@ -179,7 +179,7 @@ Object.assign(MONSTERS,{
     rest:['...round and round. Round and round.','Somebody will come. Somebody always comes.'],
     talk:['I have gone round this carousel since 1989. Every bag got picked up. Not me.','I have sixty stickers. I have been everywhere. Nobody came to get me.'],
     again:['Round and round! Round two!','Round {n}. Round and round.'],
-    drop:{id:'bagtag',chance:1,once:true,msg:'The Unclaimed gave you its old luggage tag. Somebody wrote ELSEWHERE on it in 1989. It went in a pocket.'},
+    drop:{id:'bagtag',chance:1,once:true,msg:'The Unclaimed gave you its old luggage tag. Somebody wrote LONG ISLAND on it in 1989. It went in a pocket.'},
     vapor:['#8a6a42','#e86a5a','#6ab0e8','#e8c84a'],
     hint:'Heavy. It shrugs off Kinetic and steals VP. Splash and Cozy get through the hard shell.'},
   armresthog:{id:'armresthog',coins:19,coinStep:4,name:'The Armrest Hog',the:'the Armrest Hog',short:'Armrest Hog',sprite:HOG_SPRITE,pal:HOG_PAL,scale:3,eyes:[[5,6],[15,6]],mouth:[10,11],
@@ -195,8 +195,8 @@ Object.assign(MONSTERS,{
     vapor:['#f4b0c4','#e88aa8','#5a4aa8','#8a7ad0'],
     hint:'Hogs everything. It takes POW away and flops on everyone every third turn. Chatter and Sparkle get it to scoot over; it shrugs off Cozy.'},
   // The Last Call: the chapter 10 boss. Gate Zero's split-flap departure board. Flight 0 was due out at midnight in
-  // 1989 and never boarded; she has been calling it ever since, and tonight she stopped every clock in Little
-  // Elsewhere at midnight so the flight could never be late. She hangs over the podium (hidden until the boss scene).
+  // 1989 and never boarded; she has been calling it ever since, and tonight she stopped every clock on Long
+  // Island at midnight so the flight could never be late. She hangs over the podium (hidden until the boss scene).
   lastcall:{id:'lastcall',coins:76,coinStep:10,name:'The Last Call',the:'the Last Call',short:'Last Call',sprite:CALL_SPRITE,pal:CALL_PAL,scale:4,eyes:[[6,13],[18,13]],mouth:[12,16],
     hp:132,hpStep:12,atk:4,xp:56,xpStep:8,level:13,rank:'BOSS',
     intro:'Every flap on the board spins at once. DING. \"This is the LAST CALL for Flight Zero.\"',

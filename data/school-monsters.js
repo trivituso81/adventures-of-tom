@@ -1,5 +1,5 @@
 'use strict';
-// data/school-monsters.js — Chapter 5 monsters (Parent-Teacher Conference of Doom): Elsewhere Elementary at night.
+// data/school-monsters.js — Chapter 5 monsters (Parent-Teacher Conference of Doom): Long Island Elementary at night.
 // Same shape as data/monsters.js. School-night annoyances turned Friction Sprites. Easiest to hardest: Pop Quiz (roams
 // the hallway, comes in pairs, makes people dizzy), Tardy Bell (makes people Tardy: PEP down), Glitter Glue (Glues
 // people: PEP down; shrugs off Sparkle), Dodgeball Dread (bouncy, dodges a lot). The Red Pen is the chapter 5 boss.

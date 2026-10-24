@@ -39,7 +39,7 @@ const drumBar={
 };
 const bars=(s,n)=>Array(n).fill(s).join(' ');
 
-// ---------- The Little Elsewhere town theme ----------
+// ---------- The Long Island town theme ----------
 // F major, 104 BPM, light shuffle. A (flute, sparse) / A' (full band) / B (reed, strings, bells) / A'' (flute and bells).
 {
   const A=['F','C/E','Dm','Bb','F','C','Bb','C'];
@@ -50,7 +50,7 @@ const bars=(s,n)=>Array(n).fill(s).join(' ');
   const melB='F5/6 D5/2 Bb4/8 | E5/6 C5/2 G4/8 | A4/4 C5/4 E5/4 A5/4 | F5/6 E5/2 D5/8 | D5/4 G5/4 F5/4 D5/4 | E5/4 C5/4 A4/8 | Bb4/4 D5/4 F5/6 E5/2 | D5/6 E5/2 C5/8';
   const m=s=>s.replace(/\|/g,' ');
   const all=[...A,...A2,...B,...A2];
-  defineSong('town',{name:'Little Elsewhere',bpm:104,bars:32,swing:.28,echo:{time:.26,fb:.34,wet:.3},channels:{
+  defineSong('town',{name:'Long Island',bpm:104,bars:32,swing:.28,echo:{time:.26,fb:.34,wet:.3},channels:{
     flute:{inst:'flute',pan:0,send:.35,notes:songTrack(m(melA),m(melA2head)+' -/8 C5/2 D5/2 E5/4',rest(8),m(melA2head)+' -/12 C5/4')},
     reed:{inst:'reed',pan:.05,send:.3,notes:songTrack(rest(16),m(melB),rest(8))},
     harp:{inst:'harp',pan:-.3,send:.28,vel:.8,legato:2,notes:songTrack('v.75 '+songParts.arp(A),'v.85 '+songParts.arp(A2),'v.8 '+songParts.arp(B,[0,2,4,2,1,3,2,1]),'v.85 '+songParts.arp(A2))},

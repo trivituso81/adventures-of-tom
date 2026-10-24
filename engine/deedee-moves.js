@@ -30,7 +30,7 @@ const head=()=>{ const m=battle.actorMouth; if(m) return {x:m.x+4,y:m.y-34}; con
 const toss=(kind,x0,y0,x1,y1,delay,dur,arc=60,extra={})=>battle.props.push(Object.assign({kind,x0,y0,x1,y1,arc,spin:true,t:-delay,dur},extra));
 const confuseMaybe=c=>{ if(!battle.missing&&Math.random()<c) { battle.enemyStunned=2; sfx.stun(); return true; } return false; };
 const enemyName=()=>((battle.enemy&&battle.enemy.def&&battle.enemy.def.short)||'Grump');
-const later=(ms,f)=>setTimeout(()=>{ if(battle.active) f(); },ms);
+const later=(ms,f)=>b7Later(()=>{ if(battle.active) f(); },ms);
 const D=RECRUIT_MOVES.deedee;
 const homeOf=i=>({cx:BATTLE_POS[i].x*3,base:BATTLE_POS[i].base*3});
 
@@ -383,25 +383,497 @@ D.moonshot=E2=>{ const {i,m,fx}=E2; const DUR=4.6,MX=466,MY=28;
     600,E2.result+' To the moon. And back. And right onto the '+enemyName().toLowerCase()+'.',()=>checkEnemy()); };
 
 // ================= Special: MOON & BACK =================
-// A crescent moon rises, hearts fly from Deedee to everyone, everyone gets +5 HP and +2 MP. And a hug.
-const deedeeHug=function() {
-  busy();
-  const i=battle.actor,m=party[i],fx=battle.fx[i];
-  fx.hug=2.6;
-  sfx.heal();
-  say(m.id,'hug');
+// A crescent moon rises, hearts fly from Deedee to everyone, and the group hug heals (E2.apply runs the numbers).
+D.hug=E2=>{ const {i,m,fx}=E2;
+  if(E2.act&&E2.act.o3&&D.hugShow) return D.hugShow(E2);   // Option 3 Primary animation (second IIFE below)
+  fx.hug=2.6; sfx.heal(); say(m.id,'hug');
   scene('dcrescent',3.6,{back:true});
+  const team=battlePartyList();
   enqueue(
     ()=>{ setMessage(m.name+' opens her arms. "To the moon and back. Everybody in."'); bt('TO THE MOON AND BACK',96,22,'#ffe08a',2,1.6); },
-    700,()=>{ const h=homeOf(i); party.forEach((p,j)=>{ if(!alive(p)||j===i) return; const q=BATTLE_POS[j]; toss('dheart',h.cx-10,h.base-90,q.x*3,q.base*3-70,j*.08,.55,60,{spin:false,r:10}); }); S.smooch(); },
+    700,()=>{ const h=homeOf(i); team.forEach((p,j)=>{ if(!alive(p)||j===i) return; const q=BATTLE_POS[j]; toss('dheart',h.cx-10,h.base-90,q.x*3,q.base*3-70,j*.08,.55,60,{spin:false,r:10}); }); S.smooch(); },
     700,()=>{
-      party.forEach((p,j)=>{ if(!alive(p)) return; const h=Math.min(5,p.maxHp-p.hp),q=Math.min(2,p.maxMp-p.mp); p.hp+=h; p.mp+=q; pop('+'+h,BATTLE_POS[j].x,BATTLE_POS[j].base-34,'#9be39a');
-        scene('glow',.9,{x:BATTLE_POS[j].x*3,y:BATTLE_POS[j].base*3-40,rx:40,ry:56,c:'#ff9ac0',a:.35}); });
-      sfx.fountain(); refreshBattleStatus();
+      E2.apply();
+      team.forEach((p,j)=>{ if(!alive(p)) return; scene('glow',.9,{x:BATTLE_POS[j].x*3,y:BATTLE_POS[j].base*3-40,rx:40,ry:56,c:'#ff9ac0',a:.35}); });
+      sfx.fountain();
     },
-    'Everyone gets +5 HP and +2 MP. And a hug. And a kiss on the head.',
-    ()=>afterAction()
+    'Everyone is healed and Tucked In. And a kiss on the head.',
+    ()=>checkEnemy()
   );
 };
-cmdHug=deedeeHug; CMD_FN.hug=deedeeHug;
+})();
+
+// ================= Option 3 Primary kit (phase 3d) =================
+// Cards: adventures-of-tom-ability-revamp.md (Deedee). Same beat plan as the other kits: beat 1 setup (0.5 s), beat 2
+// impact about 1.05 s in (inside the High-Five window, engine/feel.js B7_HF), beat 3 the small joke.
+// Scenes drawn at real unit positions are in B2_NOWARP so the aim warp does not move them twice.
+(function(){
+const SC=RFX.SC,{scene,GX,GY}=RFX;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,rx,ry,c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const env=(u,a=.15,b=.85)=>u<a?u/a:(u>b?(1-u)/(1-b):1);
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const bt=(txt,x,y,c,sc,dur=1)=>battle.texts.push({txt,x,y,color:c,sc,t:0,dur});
+const hit=E2=>landHit(E2.dmg,E2.crit);
+const gpos=()=>battle.actorPos||{cx:519,base:315,h:120};
+const hand=()=>{ const a=battle.actorHand; if(a) return {x:a.n[0]-8,y:a.n[1]-8}; const p=gpos(); return {x:p.cx-20,y:p.base-60}; };
+const toss=(kind,x0,y0,x1,y1,delay,dur,arc=60,extra={})=>battle.props.push(Object.assign({kind,x0,y0,x1,y1,arc,spin:true,t:-delay,dur},extra));
+const pose=(fx,k,d)=>{ fx.poseK=k; fx.pose=d; };
+const home=u=>{ if(u.side==='foe') { const p=b2FoeCanvasPos(u); return {x:p.x,base:p.y,h:p.h}; } const q=BATTLE_POS[u.idx],sp=BATTLE_SPRITES[u.id]; return {x:q.x*3,base:q.base*3,h:sp?sp.idle.length*sp.scale:90}; };
+const top=()=>battle.enemyTop||150;
+const res=E2=>E2.result?E2.result+' ':'';
+const kindLine=(t,ally)=>t&&t.side==='foe'?t.name+' warms up a little.':ally;
+const foesOf=E2=>(E2.targets||[]).filter(t=>t.side==='foe');
+const box=list=>{ const P=list.map(f=>b2FoeCanvasPos(f)); if(!P.length) return {x0:GX-40,x1:GX+40,y0:GY-50,y1:GY+40};
+  return {x0:Math.min(...P.map(p=>p.x-p.w/2)),x1:Math.max(...P.map(p=>p.x+p.w/2)),y0:Math.min(...P.map(p=>p.y-p.h)),y1:Math.max(...P.map(p=>p.y))}; };
+const steam=(x,y,u,n=4,c='#fff6dc')=>{ for(let k=0;k<n;k++) { const q=(u*1.3+k*.23)%1; gfx.globalAlpha*=1-q; E(x-12+k*8+Math.sin(q*6+k)*4,y-q*34,4+q*3,4+q*3,c); gfx.globalAlpha/= (1-q)||1; } };
+const CREAM='#fff8e8',GOLD='#ffe08a',ROSE='#ff9ac0',APRON='#f6e6c4',WOOD='#b88848',TEAL='#7fcfc0',BLUE='#9fc4f0',CRUST='#d9a05a',RED='#e0402e';
+const D=RECRUIT_MOVES.deedee;
+const IMPACT=550;   // ms after beat 2 starts (beat 1 is 500)
+const UI=1.05/1.8;  // where the impact sits in a 1.8 s scene started on beat 1
+const NW_LIST=[];
+const nowarp=(...k)=>NW_LIST.push(...k);
+const NW=()=>{ if(typeof B2_NOWARP!=='undefined') for(const x of NW_LIST) B2_NOWARP.add(x); };
+nowarp('d_towel','d_moonline','d_badge','d_pulse','d_cornerpan','d_dishout','d_nottoday','d_bowl','d_mitts','d_mittwave','d_sightsee','d_nozzle','d_shower',
+  'd_window','d_spoon','d_breathring');
+
+// ---------- Scenes ----------
+// Dish-Towel Flick: a tiny dark pixel on the target, a towel snaps from her hand, then folds into a precise square.
+SC.d_pixel=(s,u)=>{ const x=GX+10,y=GY-30; gfx.globalAlpha=fade(u,.9); if(u<.9) { R(x-3,y-3,6,6,'#2b2a26'); if(u>.3) { ring(x,y,10+Math.sin(s.t*8)*2,10+Math.sin(s.t*8)*2,2,CREAM); label('SPOT',x,y-20,CREAM,1); } } };
+SC.d_towel=(s,u)=>{ const p=hand(),x=p.x,y=p.y-6,snap=u<UI-.04?0:ez((u-UI+.04)/.1),back=u>UI+.1?ez((u-UI+.1)/.2):0,fold=u>.8?ez((u-.8)/.15):0; gfx.globalAlpha=fade(u,.95);
+  if(fold>0) { const w=22-fold*8; RO(x-w/2,y-6,w,12,CREAM); R(x-w/2+3,y-3,w-6,2,BLUE); R(x-w/2+3,y+1,w-6,2,BLUE); if(fold>.9) label('SQUARE',x,y-22,CREAM,1); return; }
+  const len=lerp(28,96,snap)*(1-back*.7),ang=lerp(.6,-.1,snap); gfx.save(); gfx.translate(x,y); gfx.rotate(ang);
+  gfx.beginPath(); gfx.moveTo(0,-7); gfx.quadraticCurveTo(len*.5,-7-Math.sin(snap*Math.PI)*14,len,-4); gfx.lineTo(len,6); gfx.quadraticCurveTo(len*.5,8-Math.sin(snap*Math.PI)*14,0,7); gfx.closePath();
+  gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CREAM; gfx.fill(); for(let k=1;k<4;k++) Ln(len*k/4,-6,len*k/4,6,2,BLUE); gfx.restore();
+  if(snap>.9&&back<.3) label('SNAP',x+len*.9,y-22,GOLD,2); };
+
+// MOON & BACK: a measuring line stretches from her toward a small moon, loops back into a heart around the party, and runs out of numbers.
+SC.d_moonline=(s,u)=>{ const p=gpos(),x0=p.cx-30,y0=p.base-p.h*.6,mx=120,my=70,go=ez(cl(u/(UI-.05))),back=u<UI?0:ez((u-UI)/.25); gfx.globalAlpha=fade(u,.92);
+  EO(mx,my,16,16,'#fff1b0'); E(mx+6,my-2,12,12,'#1b1a2e'); gfx.globalAlpha*=.9; E(mx+6,my-2,12,12,'rgba(27,26,46,0)'); gfx.globalAlpha=fade(u,.92);
+  const ex=lerp(x0,mx+18,go),ey=lerp(y0,my+8,go); Ln(x0,y0,ex,ey,5,OUT); Ln(x0,y0,ex,ey,3,GOLD);
+  const n=Math.floor(go*9); for(let k=1;k<=n;k++) { const q=k/9,lx=lerp(x0,mx+18,q),ly=lerp(y0,my+8,q); Ln(lx,ly-5,lx,ly+5,2,OUT); if(k%3===0) label(''+(k*100000),lx,ly-16,CREAM,1); }
+  if(back>0) { const P=b2LiveParty().map(q=>home(q)),cx=P.reduce((a,b)=>a+b.x,0)/(P.length||1),cy=P.reduce((a,b)=>a+b.base-b.h*.5,0)/(P.length||1),r=lerp(0,70,back);
+    gfx.globalAlpha=fade(u,.92)*.9; gfx.strokeStyle=OUT; gfx.lineWidth=7; heartPath(cx,cy,r); gfx.stroke(); gfx.strokeStyle=ROSE; gfx.lineWidth=4; heartPath(cx,cy,r); gfx.stroke(); }
+  if(u>.84) { gfx.globalAlpha=fade(u,.92); label('...AND BACK',mx+60,my-8,GOLD,1); } };
+function heartPath(x,y,r) { gfx.beginPath(); for(let k=0;k<=36;k++) { const a=k/36*Math.PI*2,hx=16*Math.pow(Math.sin(a),3),hy=-(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a)); const px=x+hx*r/16,py=y+hy*r/16; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.closePath(); }
+
+// Registered Nut, Reporting: a nurse badge with NUT on a sticker by her; a pulse icon by the recipient straightens; a debuff sticker peels away.
+SC.d_badge=(s,u)=>{ const p=gpos(),x=p.cx+26,y=p.base-p.h*.62,tilt=lerp(.3,0,ez(u/.3)); gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); RO(-20,-10,40,20,CREAM); R(-20,-10,40,5,BLUE); label('RN',-8,-1,'#2b2a26',1); R(-2,-4,20,10,GOLD); label('NUT',8,-1,'#7a1a14',1); gfx.restore(); };
+SC.d_pulse=(s,u)=>{ const x=s.x+(s.foe?44:-44),y=s.y-s.h*.5,w=56,fix=cl((u-UI+.08)/.16); gfx.globalAlpha=fade(u,.9); RO(x-w/2,y-16,w,32,'#1b2a2e');
+  gfx.strokeStyle='#8ef0a0'; gfx.lineWidth=2; gfx.beginPath(); for(let k=0;k<=28;k++) { const q=k/28,px=x-w/2+4+q*(w-8),ph=(q*4+s.t*1.5)%1; let py;
+    if(fix<1) py=y+Math.sin(q*40+s.t*20)*lerp(10,0,fix)*(k%3?1:.3); else py=y-(ph<.1?ph*120:ph<.2?(.2-ph)*120:0)*.7; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.stroke();
+  if(fix>.95) label('OK',x+w/2-10,y-26,'#8ef0a0',1);
+  if(u>UI+.1) { const q=ez((u-UI-.1)/.25),sx=s.x+(s.foe?-1:1)*(14+q*34),sy=s.y-s.h*.8-q*14; gfx.globalAlpha=fade(u,.9)*(1-q); gfx.save(); gfx.translate(sx,sy); gfx.rotate(q*1.2); RO(-8,-6,16,12,'#9aa3c8'); Ln(-4,0,4,0,2,'#2b2a26'); gfx.restore(); } };
+
+// Corner-Piece Privilege: a crisp pan angled to show one golden corner; the corner lifts onto a dish and the empty corner folds into a new one.
+SC.d_cornerpan=(s,u)=>{ const p=hand(),x=p.x-16,y=p.y+6,lift=u<UI-.06?0:ez((u-UI+.06)/.14),regrow=u>UI+.14?ez((u-UI+.14-.2)/.2):0; gfx.globalAlpha=fade(u,.92);
+  gfx.save(); gfx.translate(x,y); gfx.rotate(-.12); RO(-30,-12,60,24,'#c9c2b8'); R(-27,-9,54,18,CRUST); for(let k=0;k<6;k++) R(-24+k*9,-6+(k%2)*8,5,4,'#b0683a');
+  const cw=14*(1-lift)+14*regrow; R(13,-9,cw,cw,'#f0b860'); if(u<UI-.06) { label('CORNER',22,-20,GOLD,1); } if(regrow>.9) label('AGAIN?',22,-20,GOLD,1); gfx.restore(); };
+SC.d_dishout=(s,u)=>{ const x=s.x+(s.foe?40:-40),y=s.y-s.h*.4,g=ez(u/.2); gfx.globalAlpha=fade(u,.85); EO(x,y+6,16*g,6*g,CREAM); R(x-7*g,y-4,14*g,10,CRUST); R(x-7*g,y-6,14*g,4,'#f0b860'); steam(x,y-6,u,3); if(u>.5) heart(x,y-26,4,'#ff6b9a'); };
+
+// Pepper-Free Plate: a pepper jar slid behind a NOT TODAY card; a warm bread bowl by the recipient, steam loosening amber; Boppy's plain portion.
+SC.d_nottoday=(s,u)=>{ const p=gpos(),x=p.cx-54,y=p.base-p.h*.4,slide=ez(u/.3); gfx.globalAlpha=fade(u,.9); RO(x-7+slide*10,y-14,14,22,'#e86040'); R(x-5+slide*10,y-16,10,4,'#2b2a26'); for(let k=0;k<3;k++) R(x-4+slide*10+k*3,y-8+k*4,2,2,'#f6c060');
+  RO(x-16,y-10,30*slide+.1,18,CREAM); if(slide>.8) { label('NOT',x-1,y-6,RED,1); label('TODAY',x-1,y+2,RED,1); } };
+SC.d_bowl=(s,u)=>{ const x=s.x+(s.foe?44:-44),y=s.y-s.h*.35,g=ez(u/.2); gfx.globalAlpha=fade(u,.88); EO(x,y+4,16*g,8*g,CRUST); E(x,y-2,13*g,5*g,'#f6e2b8'); E(x,y-2,9*g,3*g,'#f0b860'); steam(x,y-4,u,4,'#ffd9a0');
+  if(u>UI-.02&&u<UI+.3) { const q=(u-UI+.02)/.32; gfx.globalAlpha=fade(u,.88)*(1-q); for(let k=0;k<5;k++) R(s.x-16+k*8,s.y-s.h*.6+q*50+(k%2)*8,4,4,'#e8b048'); } };
+SC.d_plainportion=(s,u)=>{ const x=s.x-30,y=s.y-s.h*.4,g=ez(u/.25); gfx.globalAlpha=fade(u,.85); EO(x,y+4,12*g,5*g,CREAM); R(x-5*g,y-2,10*g,6,'#f6e2b8'); if(u>.4) label('PLAIN',x,y-18,CREAM,1); };
+
+// Rolling-Pin Rounds: the raised wind-up icon inspected like uneven dough; one rolling-pin pass flattens it with a dough-colored bonk.
+SC.d_pin=(s,u)=>{ const x=GX,y=top()-26,go=ez(cl((u-.25)/(UI-.25))),px=lerp(x-70,x+70,go),flat=cl((u-UI+.04)/.12); gfx.globalAlpha=fade(u,.9);
+  if(flat<1) { const h=lerp(22,4,flat); EO(x,y+22-h,18,h,'#f0d8b0'); if(u<.25) label('UNEVEN',x,y-16,CREAM,1); } else { EO(x,y+20,26,3,'#f0d8b0'); if(u>UI+.2) label('FLAT',x,y-12,GOLD,2); }
+  if(u>.25&&u<UI+.16) { gfx.save(); gfx.translate(px,y-6); gfx.rotate(go*6); RO(-20,-6,40,12,WOOD); RO(-30,-3,10,6,'#8a5a30'); RO(20,-3,10,6,'#8a5a30'); gfx.restore(); } };
+
+// Oven Mitt Ultimatum: two disproportionately fluffy mitts go on; one clap sends a warm rectangular pressure wave over the row; mitts hung up.
+SC.d_mitts=(s,u)=>{ const p=hand(),on=ez(u/.3),clap=u>UI-.06&&u<UI+.08?Math.sin(cl((u-UI+.06)/.14)*Math.PI):0,gap=lerp(26,2,clap),hang=u>.82?ez((u-.82)/.15):0; gfx.globalAlpha=fade(u,.95);
+  const mitt=(x,y,f)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(f,1); EO(0,0,15*on,19*on,'#f0a0a0'); EO(-12*on,-8*on,6*on,8*on,'#f0a0a0'); R(-10*on,10*on,20*on,6*on,CREAM); for(let k=0;k<4;k++) E(-9*on+k*6*on,-2*on,2,2,'#ffd0d0'); gfx.restore(); };
+  const y=p.y-10-hang*40,x=p.x+hang*30; mitt(x-gap,y,1); mitt(x+gap,y,-1); if(hang>.9) Ln(x-30,y-24,x+30,y-24,2,WOOD); if(u<.3) label('FLUFFY',p.x,p.y-44,CREAM,1); };
+SC.d_mittwave=(s,u)=>{ const B=box(s.foes||[]),q=ez(u/.5),cx=(B.x0+B.x1)/2,cy=(B.y0+B.y1)/2,w=(B.x1-B.x0)/2+16*q,h=(B.y1-B.y0)/2+10*q; gfx.globalAlpha=fade(u,.6)*(1-q*.6);
+  gfx.strokeStyle='rgba(255,180,90,.9)'; gfx.lineWidth=6; gfx.strokeRect(cx-w,cy-h,w*2,h*2); gfx.globalAlpha*=.3; R(cx-w,cy-h,w*2,h*2,'#ffb45a'); if(u>.2&&u<.7) { gfx.globalAlpha=fade(u,.6); label('ENOUGH',cx,B.y0-26,GOLD,2); } };
+
+// Brisk Means Brisk: a perfectly respectable walking posture, an air-thump through the enemy, a tiny SIGHTSEEING sign spinning in her wake.
+SC.d_airthump=(s,u)=>{ const x=GX,y=GY-20,q=ez(u/.4); gfx.globalAlpha=fade(u,.7)*(1-q*.5); for(let k=0;k<3;k++) ring(x-10+k*6,y,8+q*22+k*4,14+q*26+k*4,2,CREAM); if(u>.3) label('WHUMP',x,y-50,CREAM,2); };
+SC.d_sightsee=(s,u)=>{ const p=gpos(),x=p.cx+34,y=p.base-14,g=ez(u/.2),rot=u*7; gfx.globalAlpha=fade(u,.85); RO(x-1,y-6,2,22,WOOD); gfx.save(); gfx.translate(x,y-10); gfx.scale(Math.cos(rot)*g,g); RO(-30,-8,60,16,CREAM); if(Math.abs(Math.cos(rot))>.4) label('SIGHTSEEING',0,-2,'#2b2a26',1); gfx.restore(); };
+
+// Garden Shower: a nozzle labeled GENTLE checked twice; a wide dotted shower sweeps once across the row, tipping the targets like stems.
+SC.d_nozzle=(s,u)=>{ const p=hand(),x=p.x-6,y=p.y-4; gfx.globalAlpha=fade(u,.9); RO(x-8,y-6,22,12,'#5fa05a'); RO(x+14,y-4,8,8,'#9aa3c8'); R(x-14,y-2,6,4,'#5fa05a');
+  RO(x-24,y-28,48,14,CREAM); label('GENTLE',x,y-24,'#2f6b3a',1); if((u<.3)||(u>.8)) label('CHECK',x,y-40,CREAM,1); };
+SC.d_shower=(s,u)=>{ const B=box(s.foes||[]),p=gpos(),q=ez(u/.6); gfx.globalAlpha=fade(u,.8);
+  for(let k=0;k<22;k++) { const f=k/22,x=lerp(p.cx-10,lerp(B.x0-10,B.x1+10,f),q),y=lerp(p.base-p.h*.5,B.y0-20+((f*7+s.t*2)%1)*40,q); if(q>f*.6) E(x,y,3,4,BLUE); }
+  if(u>.5) { gfx.globalAlpha=fade(u,.8)*.6; for(const f of (s.foes||[])) { const c=b2FoeCanvasPos(f); E(c.x,c.y,c.w*.45,5,'#6aa8e0'); } } };
+
+// Windows Open: a freestanding window frame beside the party unlatches; curtains billow in while dark thought icons and amber flakes drift out.
+SC.d_window=(s,u)=>{ const P=b2LiveParty().map(q=>home(q)),x=Math.min(...P.map(q=>q.x))-70,y=(P.reduce((a,b)=>a+b.base-b.h*.6,0)/(P.length||1)),open=ez(cl((u-.3)/.3)),bil=Math.sin(s.t*3)*.5+.5; gfx.globalAlpha=fade(u,.92);
+  RO(x-28,y-36,56,72,WOOD); R(x-24,y-32,48,64,'#bfe4ff'); R(x-2,y-32,4,64,WOOD); R(x-24,y-2,48,4,WOOD);
+  if(open>0) { const cw=14+bil*10*open; gfx.beginPath(); gfx.moveTo(x-26,y-34); gfx.quadraticCurveTo(x-26+cw*open*2,y,x-26,y+34); gfx.lineTo(x-26+8,y+34); gfx.quadraticCurveTo(x-26+8+cw*open*2.4,y,x-26+8,y-34); gfx.closePath(); gfx.fillStyle=ROSE; gfx.fill();
+    gfx.beginPath(); gfx.moveTo(x+26,y-34); gfx.quadraticCurveTo(x+26+cw*open*2,y,x+26,y+34); gfx.lineTo(x+26-8,y+34); gfx.quadraticCurveTo(x+26-8+cw*open*2.4,y,x+26-8,y-34); gfx.closePath(); gfx.fillStyle=ROSE; gfx.fill(); }
+  if(u<.3) label('LATCH',x,y-50,CREAM,1); if(open>.95&&u>UI) { for(let k=0;k<4;k++) { const q=cl((u-UI-k*.04)/.3); gfx.globalAlpha=fade(u,.92)*(1-q); const ix=x-40-q*50,iy=y-20+k*12-q*10; if(k%2) { RO(ix-6,iy-6,12,12,'#4a4a60'); } else R(ix-3,iy-3,6,6,'#e8b048'); } gfx.globalAlpha=fade(u,.92); label('FRESH START',x,y+52,ROSE,1); }
+  if(u>.85) { heart(x,y-46,6,'#ff6b9a'); } };
+
+// Spotless Record: a tarnished spoon reflects the target's buff; one polish gathers it into a bright spot; the shine moves to her apron.
+SC.d_spoon=(s,u)=>{ const p=hand(),x=p.x-4,y=p.y-24,pol=u>UI-.1&&u<UI+.05?Math.sin(cl((u-UI+.1)/.15)*Math.PI*3):0,bright=u>UI?ez((u-UI)/.12):0; gfx.globalAlpha=fade(u,.92);
+  gfx.save(); gfx.translate(x,y); gfx.rotate(-.4); RO(-3,0,6,34,bright?'#dde8f0':'#8a8a90'); EO(0,-8,10,13,bright?'#eef6ff':'#9a9aa0'); if(bright) { E(-3,-11,3,4,CREAM); } else E(2,-6,4,5,'#5f5f66'); gfx.restore();
+  if(pol) { Ln(x-12+pol*6,y-16,x+6+pol*6,y-24,3,CREAM); } if(u>.2&&u<UI) label('TARNISHED',x,y-34,CREAM,1); if(bright>.9&&u>UI+.25) { const ax=p.x+20,ay=p.y+14; for(let k=0;k<3;k++) { const a=s.t*4+k*2.1; Ln(ax+Math.cos(a)*6,ay+Math.sin(a)*6,ax+Math.cos(a)*11,ay+Math.sin(a)*11,2,CREAM); } label('SHINE',ax,ay-18,GOLD,1); } };
+SC.d_reflect=(s,u)=>{ const x=GX+40,y=top()-10,q=u<.5?1:1-ez((u-.5)/.4); gfx.globalAlpha=fade(u,.9)*q; EO(x,y,10,10,GOLD); for(let k=0;k<6;k++) { const a=s.t*5+k*Math.PI/3; Ln(x+Math.cos(a)*13,y+Math.sin(a)*13,x+Math.cos(a)*18,y+Math.sin(a)*18,2,GOLD); } };
+
+// Take a Breather: one finger beside a small warm breathing circle that expands once and settles; a hand pat and a heart.
+SC.d_breathring=(s,u)=>{ const x=s.x+(s.foe?44:-44),y=s.y-s.h*.6,ph=u<UI?ez(u/UI):1-ez((u-UI)/.3)*.5,r=10+ph*18; gfx.globalAlpha=fade(u,.9);
+  E(x,y,r,r,'rgba(255,200,90,.22)'); ring(x,y,r,r,3,'#ffb45a'); label(u<UI?'IN':'OUT',x,y-3,'#ffb45a',1);
+  const p=hand(); RO(p.x-2,p.y-26,4,16,'#f6d4b8'); EO(p.x,p.y-10,6,6,'#f6d4b8'); label('ONE',p.x,p.y-38,CREAM,1);
+  if(u>.78) heart(s.x,s.y-s.h-10,5,'#ff6b9a'); };
+
+// ---------- Moves ----------
+D.dish_towel_flick=E2=>{ const {fx}=E2;
+  enqueue(()=>{ setMessage('Deedee notices a spot. Nobody else noticed a spot.'); say('deedee','dish_towel_flick'); scene('d_pixel',1.0,{}); scene('d_towel',1.9,{}); pose(fx,'expr',.5); },
+    500,()=>{ sfx.whoosh(); },
+    IMPACT,()=>{ pose(fx,'act',.4); sfx.bonk(); battle.shakeEnemy=.3; hit(E2); },
+    350,()=>{ pose(fx,'celeb',.6); sfx.select(); },
+    400,res(E2)+'The spot has been dealt with.',()=>checkEnemy()); };
+D.hugShow=E2=>{ const {m,fx}=E2;
+  enqueue(()=>{ setMessage('Deedee opens her arms. A measuring line heads for the moon.'); say('deedee','moon_back'); scene('d_moonline',1.9,{}); pose(fx,'celeb',1.0); sfx.charge(); },
+    500,()=>{ fx.hug=1.3; const h=home(m); for(const p of b2LiveParty()) { if(p===m) continue; const q=home(p); toss('dheart',h.x-10,h.base-h.h*.7,q.x,q.base-q.h*.6,0,.5,60,{spin:false,r:9}); } sfx.kiss&&sfx.kiss(); },
+    IMPACT,()=>{ E2.apply(); for(const p of b2LiveParty()) scene('glow',.9,{x:home(p).x,y:home(p).base-40,rx:40,ry:56,c:'#ff9ac0',a:.35}); sfx.fountain(); bt('TO THE MOON',96,22,GOLD,2,1.2); },
+    500,()=>{ for(const p of b2LiveParty()) if(p!==m) battle.fx[p.idx].hop=.3; sfx.heal(); },
+    300,'There is no shortened version of this love. Everyone is Tucked In.',()=>checkEnemy()); };
+D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
+  enqueue(()=>{ setMessage('Deedee straightens her badge. The sticker says NUT.'); say('deedee','registered_nut'); scene('d_badge',1.0,{}); pose(fx,'expr',.9); },
+    500,()=>{ scene('d_pulse',1.4,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); sfx.beep&&sfx.beep(); },
+    IMPACT,()=>{ E2.apply(); sfx.heal(); },
+    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
+    300,kindLine(t,'The bedside manner is brisk and affectionate.'),()=>checkEnemy()); };
+D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
+  enqueue(()=>{ setMessage('Deedee angles the pan. One corner is clearly the best corner.'); say('deedee','corner_piece'); scene('d_cornerpan',1.9,{}); pose(fx,'expr',1.0); },
+    500,()=>{ sfx.whoosh(); },
+    IMPACT,()=>{ scene('d_dishout',1.1,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); E2.apply(); sfx.heal(); },
+    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
+    300,kindLine(t,'Somehow everybody is her favorite.'),()=>checkEnemy()); };
+D.pepper_free_plate=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t),bop=B2.party.find(p=>p.id==='boppy'&&b2Alive(p));
+  enqueue(()=>{ setMessage('The pepper jar goes behind a small card. The card says NOT TODAY.'); say('deedee','pepper_free_plate'); scene('d_nottoday',1.0,{}); pose(fx,'expr',.9); },
+    500,()=>{ scene('d_bowl',1.4,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); sfx.whoosh(); },
+    IMPACT,()=>{ E2.apply(); sfx.heal(); },
+    500,()=>{ if(bop&&t.side!=='foe') { const b=home(bop); scene('d_plainportion',1.0,{x:b.x,y:b.base,h:b.h}); } pose(fx,'celeb',.5); sfx.ding(); },
+    300,kindLine(t,'The recipe has been adjusted without a fuss.'),()=>checkEnemy()); };
+D.rolling_pin_rounds=E2=>{ const {fx}=E2;
+  enqueue(()=>{ setMessage('Deedee inspects the wind-up. Uneven. Needs a pass.'); say('deedee','rolling_pin_rounds'); scene('d_pin',1.9,{}); pose(fx,'expr',.5); },
+    500,()=>{ pose(fx,'act',.7); sfx.whoosh(); },
+    IMPACT,()=>{ sfx.thud(); sfx.bonk(); battle.enemyKnock=.3; battle.shakeEnemy=.45; hit(E2); },
+    500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
+    300,res(E2)+'The dangerous bit is now much flatter.',()=>checkEnemy()); };
+D.oven_mitt_ultimatum=E2=>{ const {fx}=E2;
+  enqueue(()=>{ setMessage('Deedee puts on the serious mitts. Slowly.'); say('deedee','oven_mitt_ultimatum'); scene('d_mitts',1.9,{}); pose(fx,'expr',.6); },
+    500,()=>{ sfx.charge(); },
+    IMPACT,()=>{ scene('d_mittwave',.8,{foes:foesOf(E2)}); sfx.thud(); sfx.bonk(); battle.flashEnemy=.3; battle.shakeEnemy=.5; hit(E2); },
+    500,()=>{ pose(fx,'celeb',.5); },
+    300,res(E2)+'Deedee has used the serious mitts.',()=>checkEnemy()); };
+D.brisk_means_brisk=E2=>{ const {fx}=E2;
+  enqueue(()=>{ setMessage('Deedee sets off. Respectable posture. Arms moving.'); say('deedee','brisk_means_brisk'); pose(fx,'act',.5); fx.appr=1.0; fx.apprDur=1.0; sfx.run&&sfx.run(); },
+    500,()=>{ sfx.whoosh(); },
+    IMPACT,()=>{ scene('d_airthump',.8,{}); sfx.bonk(); battle.shakeEnemy=.35; battle.enemyKnock=.2; hit(E2); },
+    400,()=>{ scene('d_sightsee',1.1,{}); pose(fx,'celeb',.5); sfx.select(); },
+    400,res(E2)+'The stroll has become an event.',()=>checkEnemy()); };
+D.garden_shower=E2=>{ const {fx}=E2;
+  enqueue(()=>{ setMessage('Deedee checks the nozzle. GENTLE. Good.'); say('deedee','garden_shower'); scene('d_nozzle',1.9,{}); pose(fx,'expr',.6); },
+    500,()=>{ scene('d_shower',1.2,{foes:foesOf(E2)}); sfx.spray?sfx.spray():sfx.vapor(); },
+    IMPACT,()=>{ sfx.splat(); battle.shakeEnemy=.3; battle.enemyWobble=.4; hit(E2); },
+    500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
+    300,res(E2)+'The watering schedule was ambitious.',()=>checkEnemy()); };
+D.windows_open=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty());
+  enqueue(()=>{ setMessage('Deedee unlatches a window that was not there a moment ago.'); say('deedee','windows_open'); scene('d_window',1.9,{}); pose(fx,'act',.6); sfx.doorIn&&sfx.doorIn(); },
+    500,()=>{ sfx.whoosh(); },
+    IMPACT,()=>{ E2.apply(); for(const u of who) scene('glow',.9,{x:home(u).x,y:home(u).base-40,rx:36,ry:50,c:'#9fd8ff',a:.3}); sfx.ding(); },
+    500,()=>{ for(const u of who) if(u.side==='party'&&u!==m) battle.fx[u.idx].hop=.25; pose(fx,'celeb',.5); },
+    300,who.some(u=>u.side==='foe')?kindLine(who.find(u=>u.side==='foe')):'The stale mood goes out first.',()=>checkEnemy()); };
+D.spotless_record=E2=>{ const {fx}=E2;
+  enqueue(()=>{ setMessage('Deedee holds up a spoon. The shine on that enemy is just surface.'); say('deedee','spotless_record'); scene('d_spoon',1.9,{}); scene('d_reflect',1.1,{}); pose(fx,'expr',.6); },
+    500,()=>{ pose(fx,'act',.6); sfx.whoosh(); },
+    IMPACT,()=>{ sfx.ding(); sfx.bonk(); battle.flashEnemy=.3; battle.shakeEnemy=.35; hit(E2); },
+    500,()=>{ pose(fx,'celeb',.5); sfx.levelChime(); },
+    300,res(E2)+'The shine has found a cleaner home.',()=>checkEnemy()); };
+D.take_a_breather=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
+  enqueue(()=>{ setMessage('Deedee holds up one finger. One breath. Together.'); say('deedee','take_a_breather'); scene('d_breathring',1.8,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); pose(fx,'expr',1.0); },
+    500,()=>{ sfx.vapor&&sfx.vapor(); },
+    IMPACT,()=>{ E2.apply(); sfx.heal(); },
+    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
+    300,kindLine(t,'Deedee makes a little space to breathe.'),()=>checkEnemy()); };
+D.moon_back=E2=>D.hugShow(E2);   // the Option 3 signature key (data/abilities.js); the legacy key stays 'hug'
+// Every move registers the unwarped scenes first (see NW above).
+for(const k of ['dish_towel_flick','hugShow','moon_back','registered_nut','corner_piece','pepper_free_plate','rolling_pin_rounds','oven_mitt_ultimatum',
+  'brisk_means_brisk','garden_shower','windows_open','spotless_record','take_a_breather']) { const f=D[k]; D[k]=E2=>{ NW(); return f(E2); }; }
+})();
+
+// ================= Option 3 set pieces (animation quality pass, 2026-10-24) =================
+// Replaces the phase-3d animations above (1.6 s beats from her stance) with 3.5 to 5 s set pieces on engine/stage.js,
+// the standard TNB's and Nara's moves use: Deedee power-walks over, nurses, bakes, waters and tidies, then goes home.
+// Timelines are absolute ms at 1x (RFX.ST.play); ['hf',ms] marks the impact. Scenes are real coordinates, prefix dd_.
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heartPath=(x,y,r)=>{ gfx.beginPath(); for(let k=0;k<=36;k++) { const a=k/36*Math.PI*2,hx=16*Math.pow(Math.sin(a),3),hy=-(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a)); const px=x+hx*r/16,py=y+hy*r/16; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.closePath(); };
+const steam=(x,y,t,n=4,c='#fff6dc')=>{ const a0=gfx.globalAlpha; for(let k=0;k<n;k++) { const q=(t*1.1+k*.23)%1; gfx.globalAlpha=a0*(1-q); E(x-12+k*8+Math.sin(q*6+k)*4,y-q*34,4+q*3,4+q*3,c); } gfx.globalAlpha=a0; };
+const D=RECRUIT_MOVES.deedee;
+const CREAM='#fff8e8',GOLD='#ffe08a',ROSE='#ff9ac0',WOOD='#b88848',BLUE='#9fc4f0',CRUST='#d9a05a',RED='#e0402e',GREEN='#8ef0a0',SKIN='#f6d4b8';
+ST.nw('dd_');
+const res=E2=>E2.result?E2.result+' ':'';
+const kindLine=(t,ally)=>t&&t.side==='foe'?t.name+' warms up a little.':ally;
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const foes=E2=>(E2.targets||[]).filter(t=>t.side==='foe');
+const front=(F,gap=34)=>({x:Math.min(560,F.x+F.w*.5+gap),y:Math.min(316,F.base+3)});
+const rowSpot=(Gp,gap=56)=>({x:Math.min(552,Gp.x1+gap),y:Math.min(316,Gp.base+6)});
+const spotFor=(m,t,gap=30)=>{ const me=ST.unit(m); if(!t||t===m) return {x:me.x,y:me.base,self:true}; const u=ST.unit(t); return {x:Math.min(560,u.x+u.w*.5+gap),y:Math.min(316,u.base+3)}; };
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const DSP=()=>BATTLE_SPRITES.deedee,DH=()=>DSP().idle.length*DSP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-DH()*(st.sc||1)*.72+dy});   // her sprite has blank rows above the head
+const all=list=>{ for(const f of list) ST.jolt(f,.4); };
+const hopOf=u=>{ if(u&&u.side==='party') battle.fx[u.idx].hop=.35; else if(u) ST.jolt(u,.15); };
+const back=(x,me)=>x<me.x?'walkR':'walk';
+const brisk=(u,tt)=>Math.sin(tt*14)>0?'run':'walk';   // arms pumping
+
+// ---------- Shared scenes ----------
+SC.dd_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
+SC.dd_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||38,s.ry||52,s.c||GOLD); };
+SC.dd_heart=(s,u)=>{ gfx.globalAlpha=fade(u,.75); heart(s.x,s.y-ez(u)*18,s.r||6,'#ff6b9a'); };
+SC.dd_flakes=(s,u)=>{ for(let k=0;k<8;k++) { const q=cl(u*1.3-k*.04),x=s.x-18+k*5+Math.sin(k*2.3+q*4)*6,y=s.y-s.h*.7+q*(s.h*.7); gfx.globalAlpha=1-q; R(x,y,4,4,k%2?'#e8b048':'#ffd27a'); } };
+SC.dd_poof=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+s.seed,d=ez(u)*(s.r||26); gfx.globalAlpha=1-u; E(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.6,4*(1-u)+1,4*(1-u)+1,s.c||CREAM); } };
+
+// ---------- Dish-Towel Flick ----------
+SC.dd_spot=(s,u)=>{ const ms=s.t*1000; if(ms>s.gone) return; gfx.globalAlpha=1; R(s.x-3,s.y-3,6,6,'#2b2a26'); if(ms>s.seen) { ring(s.x,s.y,10+Math.sin(s.t*8)*2,10+Math.sin(s.t*8)*2,2,CREAM); label('SPOT',s.x,s.y-20,CREAM,1); } };
+SC.dd_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.globalAlpha=fade(u,.96);
+  if(ms>P.fold) { const f=ez((ms-P.fold)/350),w=26-f*12; RO(x-w/2,y-6,w,12,CREAM); R(x-w/2+3,y-3,w-6,2,BLUE); R(x-w/2+3,y+1,w-6,2,BLUE); if(f>.9) label('SQUARE',x,y-22,CREAM,1); return; }
+  const snap=ms<P.snap-100?0:Math.sin(cl((ms-P.snap+100)/350)*Math.PI),len=lerp(28,110,snap),ang=lerp(.9,-.05,snap); gfx.save(); gfx.translate(x,y); gfx.rotate(Math.PI-ang);
+  gfx.beginPath(); gfx.moveTo(0,-7); gfx.quadraticCurveTo(len*.5,-7-snap*14,len,-4); gfx.lineTo(len,6); gfx.quadraticCurveTo(len*.5,8-snap*14,0,7); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CREAM; gfx.fill();
+  for(let k=1;k<4;k++) Ln(len*k/4,-6,len*k/4,6,2,BLUE); gfx.restore(); if(snap>.8) label('SNAP',x-len*.8,y-24,GOLD,2); };
+D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'throw',dx:-8},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee power-walks over. She has seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dd_towel',3.0,{plan:{snap:1850,fold:2150}}); }],
+    [1500,()=>{ sfx.whoosh(); }],
+    ['hf',1850],
+    [1850,()=>{ sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('dd_poof',.5,{x:F.x+8,y:F.mid-8,c:BLUE,n:8}); }],
+    [2150,()=>{ sfx.select(); setMessage('She folds the towel into a precise square.'); }],
+    [4000,'end',res(E2)+'The spot has been dealt with.']]); };
+
+// ---------- MOON & BACK ----------
+SC.dd_moon=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),mx=110,my=60,go=ez((ms-P.go)/(P.top-P.go)),bk=ez((ms-P.top)/(P.heart-P.top)); gfx.globalAlpha=fade(u,.94);
+  EO(mx,my,16,16,'#fff1b0'); E(mx+6,my-2,12,12,'#1b1a2e');
+  const x0=P.x0??h.x,y0=P.y0??h.y; if(ms>P.go&&ms<P.heart+300) { const ex=lerp(x0,mx+18,go),ey=lerp(y0,my+8,go); Ln(x0,y0,ex,ey,5,OUT); Ln(x0,y0,ex,ey,3,GOLD);
+    const n=Math.floor(go*9); for(let k=1;k<=n;k++) { const q=k/9,lx=lerp(x0,mx+18,q),ly=lerp(y0,my+8,q); Ln(lx,ly-5,lx,ly+5,2,OUT); if(k%3===0) label(''+(k*100000),lx,ly-16,CREAM,1); }
+    if(bk>0) { Ln(mx+18,my+8,lerp(mx+18,P.cx,bk),lerp(my+8,P.cy,bk),5,OUT); Ln(mx+18,my+8,lerp(mx+18,P.cx,bk),lerp(my+8,P.cy,bk),3,ROSE); } }
+  if(ms>P.top&&ms<P.top+900) label('TO THE MOON',mx+70,my-6,GOLD,1);
+  if(ms>P.heart) { const r=lerp(0,P.r,ez((ms-P.heart)/350)); for(const [w,c] of [[7,OUT],[4,ROSE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; heartPath(P.cx,P.cy,r); gfx.stroke(); } if(ms>P.heart+300) label('...AND BACK',P.cx,P.cy-P.r-20,GOLD,2); } };
+D.hugShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
+  const cx=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length),cy=Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length),px=cx-20,py=Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+18);
+  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:'spread'},{t:900,f:'celeb'},{t:1700,f:'spread'}];
+  let t=1800; const visits=[];
+  for(const o of others) { const q=ST.unit(o),x=Math.min(560,q.x+q.w*.5+18),y=Math.min(316,q.base+3); K.push({t,f:'run'}); t+=380; K.push({t,x,y,f:'spread',dx:(u,tt)=>Math.sin(tt*20)*1.5}); visits.push([t,o]); t+=260; }
+  const heartAt=t; K.push({t,f:'celeb',hop:10},{t:t+400,f:'walk'},{t:t+1000,x:'home',y:'home',f:'idle'});
+  ST.keys(fx,K);
+  const plan={go:900,top:1600,heart:heartAt-500,cx,cy,r:Math.max(70,(Math.max(...U.map(q=>q.x))-Math.min(...U.map(q=>q.x)))*.7+30),x0:px-20,y0:py-DH()*.8};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee walks into the middle of everyone and opens her arms.'); say(m.id,'moon_back'); scene('dd_moon',(heartAt+1200)/1000,{plan}); }],
+    [900,()=>{ sfx.charge(); setMessage('A measuring line heads for the moon. And keeps going.'); }],
+    [1700,()=>{ setMessage('Then it comes all the way back. One hug each.'); }],
+    ...visits.map(([ms,o])=>[ms,()=>{ const q=ST.unit(o); scene('dd_heart',.9,{x:q.x,y:q.top-4}); battle.fx[o.idx].hop=.3; sfx.kiss?sfx.kiss():sfx.select(); }]),
+    ['hf',heartAt],
+    [heartAt,()=>{ E2.apply(); for(const p of party) { const q=ST.unit(p); scene('dd_glow',.9,{x:q.x,y:q.mid,c:ROSE}); } sfx.fountain?sfx.fountain():sfx.heal(); sfx.heal(); }],
+    [heartAt+1100,'end','There is no shortened version of this love. Everyone is Tucked In.']]); };
+D.moon_back=E2=>D.hugShow(E2);
+
+// ---------- Registered Nut, Reporting ----------
+SC.dd_badge=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,x=st.x+4,y=st.y-DH()*.40,tilt=lerp(.35,0,ez((ms-s.fix)/300)); gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(.8,.8);
+  RO(-20,-10,40,20,CREAM); R(-20,-10,40,5,BLUE); label('RN',-8,-1,'#2b2a26',1); R(-2,-4,20,10,GOLD); label('NUT',8,-1,'#7a1a14',1); gfx.restore(); };
+SC.dd_pulse=(s,u)=>{ const ms=s.t*1000,x=s.x,y=s.y,w=56,fix=cl((ms-s.fixAt)/300); gfx.globalAlpha=fade(u,.9); RO(x-w/2,y-16,w,32,'#1b2a2e');
+  gfx.strokeStyle=GREEN; gfx.lineWidth=2; gfx.beginPath(); for(let k=0;k<=28;k++) { const q=k/28,px=x-w/2+4+q*(w-8),ph=(q*4+s.t*1.5)%1; let py; if(fix<1) py=y+Math.sin(q*40+s.t*20)*lerp(10,0,fix)*(k%3?1:.3); else py=y-(ph<.1?ph*120:ph<.2?(.2-ph)*120:0)*.7; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.stroke();
+  if(fix>.95) label('OK',x+w/2-10,y-26,GREEN,2); };
+D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m);
+  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:600,f:'aim'},{t:1900,f:'act'},{t:2400,f:'throw'},{t:2800,f:'celeb',hop:8},{t:3200,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1100,f:'aim',dx:u=>-ez(u)*6},{t:1900,f:'act',dx:-6},{t:2400,f:'throw'},{t:2800,f:'celeb',hop:8},{t:3100,f:back(sp.x,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}];
+  const st=ST.keys(fx,K),end=self?3300:4100;
+  ST.play(E2,[
+    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); scene('dd_badge',(end-200)/1000,{st,fix:self?300:900}); }],
+    [self?600:1100,()=>{ setMessage('She takes a wrist and checks the pulse. The badge sticker says NUT.'); scene('dd_pulse',1.9,{x:H.x+(self?-60:-50),y:H.top-12,fixAt:self?1300:800}); sfx.beep&&sfx.beep(); }],
+    ['hf',1900],
+    [1900,()=>{ E2.apply(); sfx.heal(); scene('dd_glow',.9,{x:H.x,y:H.mid,c:GREEN}); hopOf(t!==m?t:null); }],
+    [2400,()=>{ const h=hand(); ST.fly((x,y,uu)=>{ gfx.rotate(uu*5); RO(-8,-6,16,12,'#9aa3c8'); Ln(-4,0,4,0,2,'#2b2a26'); },H.x,H.top+14,h.x+120,h.y-60,.6,40); sfx.whoosh(); setMessage('She peels the unhelpful sticker off and pats a hand.'); }],
+    [end,'end',kindLine(t,'The bedside manner is brisk and affectionate.')]]); };
+
+// ---------- Corner-Piece Privilege ----------
+const pan=(x,y,lift,regrow,rot=-.12)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); RO(-30,-12,60,24,'#c9c2b8'); R(-27,-9,54,18,CRUST); for(let k=0;k<6;k++) R(-24+k*9,-6+(k%2)*8,5,4,'#b0683a');
+  const cw=14*(1-lift)+14*regrow; R(13,-9,cw,cw,'#f0b860'); gfx.restore(); };
+SC.dd_pan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),lift=ez((ms-P.lift)/250),regrow=ez((ms-P.regrow)/400); gfx.globalAlpha=fade(u,.96); pan(h.x-18,h.y+4,lift,regrow,ms>P.angle&&ms<P.lift?-.5:-.12);
+  if(ms>P.angle&&ms<P.lift) label('CORNER',h.x-6,h.y-26,GOLD,1); if(regrow>.9) label('AGAIN',h.x-6,h.y-26,GOLD,1); };
+SC.dd_dish=(s,u)=>{ const g=ez(u/.2); gfx.globalAlpha=fade(u,.85); EO(s.x,s.y+6,16*g,6*g,CREAM); R(s.x-7*g,s.y-4,14*g,10,CRUST); R(s.x-7*g,s.y-6,14*g,4,'#f0b860'); steam(s.x,s.y-6,s.t,3); if(u>.4) heart(s.x,s.y-26,4,'#ff6b9a'); };
+D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,26),self=t===m,me=ST.unit(m);
+  const K=self?[{t:0,x:'home',y:'home',f:'aim'},{t:900,f:'act'},{t:1500,f:'throw'},{t:1900,f:'hip'},{t:2600,f:'celeb',hop:8},{t:3100,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'aim'},{t:1300,f:'act',dx:u=>-ez(u)*8},{t:1800,f:'throw',dx:-8},{t:2200,f:'hip'},{t:2700,f:'celeb',hop:8},{t:3000,f:back(sp.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}];
+  ST.keys(fx,K); const lift=self?1000:1500,end=self?3200:4000;
+  ST.play(E2,[
+    [0,()=>{ setMessage(self?'Deedee angles the crisp pan. One corner is clearly the best corner.':'Deedee carries the rhubarb crisp over to '+t.name+'.'); say(m.id,'corner_piece'); scene('dd_pan',(end-300)/1000,{plan:{angle:self?200:950,lift,regrow:lift+500}}); }],
+    [lift,()=>{ sfx.whoosh(); setMessage('She lifts the golden corner onto a dish.'); const h=hand(); ST.fly((x,y)=>{ R(x-7,y-6,14,12,'#f0b860'); },h.x-4,h.y-4,H.x+(self?-26:6),H.mid,.35,30); }],
+    ['hf',lift+400],
+    [lift+400,()=>{ E2.apply(); sfx.heal(); scene('dd_dish',1.3,{x:H.x+(self?-26:6),y:H.mid}); hopOf(t!==m?t:null); }],
+    [lift+600,()=>{ setMessage('The empty corner folds into a fresh golden one. Again.'); const h=hand(); ST.fly((x,y)=>{ R(x-2,y-2,4,4,CRUST); },h.x,h.y,h.x+30,h.y-60,.5,20); }],
+    [end,'end',kindLine(t,'Somehow everybody is her favorite.')]]); };
+
+// ---------- Pepper-Free Plate ----------
+SC.dd_nottoday=(s,u)=>{ const ms=s.t*1000,x=s.x,y=s.y,slide=ez((ms-s.at)/300); gfx.globalAlpha=fin(u,.05)*fade(u,.9); RO(x-7+slide*12,y-14,14,22,'#e86040'); R(x-5+slide*12,y-16,10,4,'#2b2a26'); for(let k=0;k<3;k++) R(x-4+slide*12+k*3,y-8+k*4,2,2,'#f6c060');
+  RO(x-16,y-12,30*slide+.1,20,CREAM); if(slide>.8) { label('NOT',x-1,y-8,RED,1); label('TODAY',x-1,y,RED,1); } };
+SC.dd_bowl=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y; if(ms<P.set) { const h=hand(); x=h.x-6; y=h.y; } else { x=P.x; y=P.y; } gfx.globalAlpha=fade(u,.94);
+  EO(x,y+4,16,8,CRUST); E(x,y-2,13,5,'#f6e2b8'); E(x,y-2,9,3,'#f0b860'); steam(x,y-4,s.t,4,'#ffd9a0'); };
+SC.dd_plain=(s,u)=>{ const g=ez(u/.25); gfx.globalAlpha=fade(u,.85); EO(s.x,s.y+4,12*g,5*g,CREAM); R(s.x-5*g,s.y-2,10*g,6,'#f6e2b8'); if(u>.3) label('PLAIN',s.x,s.y-18,CREAM,1); };
+D.pepper_free_plate=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,26),self=t===m,me=ST.unit(m),bop=t.side!=='foe'&&B2.party.find(p=>p.id==='boppy'&&b2Alive(p)&&p!==t),BU=bop?ST.unit(bop):null;
+  const K=[{t:0,x:'home',y:'home',f:'kneel'},{t:700,f:'act',dx:-6},{t:1000,f:'idle'}];
+  if(self) K.push({t:1200,f:'aim'},{t:2200,f:'hip'});
+  else K.push({t:1150,f:'walk',hop:3,hn:6},{t:1900,x:sp.x,y:sp.y,f:'aim',dx:u=>-ez(u)*8},{t:2400,f:'hip'});
+  let t0=self?2600:2800,end;
+  if(BU) { K.push({t:t0,f:BU.x+BU.w*.5+22<(self?me.x:sp.x)?'walk':'walkR'},{t:t0+700,x:Math.min(560,BU.x+BU.w*.5+22),y:Math.min(316,BU.base+3),f:'aim'},{t:t0+1100,f:'celeb',hop:8},{t:t0+1400,f:'walk'},{t:t0+2100,x:'home',y:'home',f:'idle'}); end=t0+2200; }
+  else { K.push({t:t0,f:self?'celeb':back(sp.x,me),hop:3,hn:6},{t:t0+800,x:'home',y:'home',f:'idle'}); end=t0+900; }
+  ST.keys(fx,K);
+  const plan={set:self?1200:1900,x:H.x+(self?-40:4),y:H.mid+6},hit=self?1600:2300;
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee kneels and slides the pepper jar behind a small card.'); say(m.id,'pepper_free_plate'); scene('dd_nottoday',2.4,{x:me.x-60,y:me.base-24,at:600}); scene('dd_bowl',(end-200)/1000,{plan}); }],
+    [self?1200:1150,()=>{ setMessage(self?'A warm baked bread bowl. For her, this time.':'She carries a warm bread bowl over to '+t.name+'. No peppers.'); }],
+    ['hf',hit],
+    [hit,()=>{ E2.apply(); sfx.heal(); scene('dd_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('dd_glow',.9,{x:H.x,y:H.mid,c:'#ffd9a0'}); hopOf(t!==m?t:null); }],
+    ...(BU?[[t0+700,()=>{ scene('dd_plain',1.2,{x:BU.x-26,y:BU.mid}); battle.fx[bop.idx].hop=.3; sfx.ding(); setMessage('Boppy gets a small plain portion. And a look.'); }]]:[]),
+    [end,'end',kindLine(t,'The recipe has been adjusted without a fuss.')]]); };
+
+// ---------- Rolling-Pin Rounds ----------
+SC.dd_wind=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y,flat=cl((ms-P.hit+80)/160),flip=ez((ms-P.flip)/300); gfx.globalAlpha=fade(u,.9);
+  if(ms<P.flip) { if(flat<1) { const h=lerp(22,4,flat); EO(x,y+22-h,18,h,'#f0d8b0'); if(ms<P.hit-500) label('UNEVEN',x,y-16,CREAM,1); } else { EO(x,y+20,26,3,'#f0d8b0'); label('FLAT',x,y-12,GOLD,2); } return; }
+  const h=ST.cur?hand():{x,y},fx2=lerp(x,h.x-40,flip),fy=lerp(y+20,h.y-10,flip); gfx.save(); gfx.translate(fx2,fy); gfx.scale(1,Math.cos(flip*Math.PI)); EO(0,0,26,3,'#f0d8b0'); gfx.restore(); };
+SC.dd_pin=(s,u)=>{ const ms=s.t*1000,h=hand(); if(ms>s.put) return; gfx.globalAlpha=1; gfx.save(); gfx.translate(h.x-6,h.y-4); gfx.rotate(ms>s.roll0&&ms<s.roll1?(ms-s.roll0)/60:0); RO(-20,-6,40,12,WOOD); RO(-30,-3,10,6,'#8a5a30'); RO(20,-3,10,6,'#8a5a30'); gfx.restore(); };
+D.rolling_pin_rounds=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m),across=Math.max(30,F.x-F.w*.5+10);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim',dx:u=>-Math.sin(u*Math.PI)*6},{t:1500,f:'wind'},{t:1650,x:p.x,f:'act'},{t:2150,x:across+50,f:'act'},{t:2450,f:'aim'},{t:2850,f:'hip'},{t:3150,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
+  const plan={x:F.x,y:F.top-30,hit:2050,flip:2450};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee marches over with a rolling pin. The wind-up is uneven.'); say(m.id,'rolling_pin_rounds'); scene('dd_wind',3.4,{plan}); scene('dd_pin',3.0,{roll0:1650,roll1:2150,put:2900}); }],
+    [900,()=>{ setMessage('She inspects it like a patch of pastry.'); }],
+    [1650,()=>{ sfx.whoosh(); }],
+    ['hf',2050],
+    [2050,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.45); landHit(100); }],
+    [2450,()=>{ setMessage('She turns it over, checks it, and sets it aside.'); sfx.select(); }],
+    [4200,'end',res(E2)+'The dangerous bit is now much flatter.']]); };
+
+// ---------- Oven Mitt Ultimatum ----------
+SC.dd_mitts=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),on=ez((ms-P.on)/600),clap=ms>P.clap-80&&ms<P.clap+160?Math.sin(cl((ms-P.clap+80)/240)*Math.PI):0,hang=ez((ms-P.hang)/350);
+  if(ms<P.on) return; gfx.globalAlpha=fade(u,.96);
+  const mitt=(x,y,f)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(f*on,on); EO(0,0,15,19,'#f0a0a0'); EO(-12,-8,6,8,'#f0a0a0'); R(-10,10,20,6,CREAM); for(let k=0;k<4;k++) E(-9+k*6,-2,2,2,'#ffd0d0'); gfx.restore(); };
+  const gap=lerp(24,3,clap),x=h.x+hang*40,y=h.y-12-hang*30; mitt(x-gap,y,1); mitt(x+gap,y,-1); if(hang>.9) Ln(x-30,y-24,x+30,y-24,2,WOOD); if(ms<P.on+700) label('FLUFFY',h.x,h.y-46,CREAM,1); };
+SC.dd_wave=(s,u)=>{ const B=s.G,q=ez(u/.5),w=(B.x1-B.x0)/2+16*q,h=(B.base-B.top)/2+10*q,cx=(B.x0+B.x1)/2,cy=(B.top+B.base)/2; gfx.globalAlpha=fade(u,.6)*(1-q*.6);
+  gfx.strokeStyle='rgba(255,180,90,.9)'; gfx.lineWidth=6; gfx.strokeRect(cx-w,cy-h,w*2,h*2); gfx.globalAlpha*=.3; R(cx-w,cy-h,w*2,h*2,'#ffb45a'); if(u>.2&&u<.7) { gfx.globalAlpha=fade(u,.6); label('ENOUGH',cx,B.top-26,GOLD,2); } };
+D.oven_mitt_ultimatum=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,60),me=ST.unit(m);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'kneel'},{t:1000,f:'act',dx:(u,tt)=>Math.sin(tt*6)*2},{t:1700,f:'celeb'},{t:2150,f:'clap'},{t:2500,f:'hip'},{t:2900,f:'spread'},{t:3250,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
+  const plan={on:1000,clap:2150,hang:2900};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee walks up to them and slowly puts on two very fluffy oven mitts.'); say(m.id,'oven_mitt_ultimatum'); scene('dd_mitts',3.4,{plan}); }],
+    [1700,()=>{ sfx.charge(); setMessage('The fluffy mitts go up.'); }],
+    ['hf',2150],
+    [2150,()=>{ sfx.thud(); sfx.bonk(); scene('dd_wave',.9,{G:Gp}); all(list); landHit(100); }],
+    [2900,()=>{ sfx.select(); setMessage('She hangs the mitts up neatly. The enemies look chastened.'); }],
+    [4200,'end',res(E2)+'Deedee has used the serious mitts.']]); };
+
+// ---------- Brisk Means Brisk ----------
+SC.dd_thump=(s,u)=>{ const q=ez(u/.4); gfx.globalAlpha=fade(u,.7)*(1-q*.5); for(let k=0;k<3;k++) ring(s.x-10+k*6,s.y,8+q*22+k*4,14+q*26+k*4,2,CREAM); if(u>.25) label('WHUMP',s.x,s.y-50,CREAM,2); };
+SC.dd_sign=(s,u)=>{ const g=ez(u/.15),rot=s.t*7; gfx.globalAlpha=fade(u,.85); const y=s.y-Math.sin(u*Math.PI)*20; RO(s.x-1,y-6,2,22,WOOD); gfx.save(); gfx.translate(s.x,y-10); gfx.scale(Math.cos(rot)*g,g); RO(-30,-8,60,16,CREAM); if(Math.abs(Math.cos(rot))>.4) label('SIGHTSEEING',0,-2,'#2b2a26',1); gfx.restore(); };
+SC.dd_speed=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; if(ms<s.from||ms>s.to) return; gfx.globalAlpha=.6; const dir=s.dir(ms); for(let k=0;k<4;k++) R(st.x+dir*(26+k*9),st.y-DH()*.6+k*9,12-k*2,2,'rgba(255,246,220,.7)'); };
+D.brisk_means_brisk=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),far=Math.max(24,F.x-F.w*.5-36),fy=Math.min(316,F.base+4),ret=Math.min(316,F.base+18);
+  const passAt=Math.round(1400*(me.x-F.x)/(me.x-far));
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:250,f:brisk,ease:'lin'},{t:1650,x:far,y:fy,f:'flip'},{t:1900,f:(u,tt)=>Math.sin(tt*14)>0?'runR':'walkR',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3500,x:'home',y:'home',f:'idle'},{t:3700,f:'hip'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee sets off. Perfectly respectable posture. Arms moving.'); say(m.id,'brisk_means_brisk'); scene('dd_speed',3.6,{st,from:250,to:3500,dir:ms=>ms<1650?1:-1}); }],
+    [250,()=>{ sfx.run&&sfx.run(); }],
+    ['hf',250+passAt],
+    [250+passAt,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('dd_thump',.8,{x:F.x,y:F.mid}); }],
+    [500+passAt,()=>{ scene('dd_sign',1.4,{x:F.x+14,y:F.base}); setMessage('Straight through. A tiny SIGHTSEEING sign spins in her wake.'); sfx.select(); }],
+    [1650,()=>{ setMessage('She turns at the far end and keeps walking. Brisk means brisk.'); }],
+    [3900,'end',res(E2)+'The stroll has become an event.']]); };
+
+// ---------- Garden Shower ----------
+SC.dd_nozzle=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-6,y=h.y-2; gfx.globalAlpha=fade(u,.94); RO(x-8,y-6,22,12,'#5fa05a'); RO(x+14,y-4,8,8,'#9aa3c8'); R(x-14,y-2,6,4,'#5fa05a');
+  if(ms<s.spray0||ms>s.spray1) { RO(x-24,y-30,48,14,CREAM); label('GENTLE',x,y-26,'#2f6b3a',1); if(ms>s.spray1) label('GOOD',x,y-42,CREAM,1); } };
+SC.dd_spray=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms<P.s0||ms>P.s1) return; const q=(ms-P.s0)/(P.s1-P.s0),tx=lerp(P.x1+10,P.x0-10,q); gfx.globalAlpha=.9;
+  for(let k=0;k<26;k++) { const f=k/26,x=lerp(h.x-14,tx+Math.sin(f*9+s.t*20)*10,f),y=lerp(h.y-4,P.y0-10+f*30,f)-Math.sin(f*Math.PI)*40+((f*7+s.t*3)%1)*12; E(x,y,3,4,BLUE); }
+  for(const p of P.list) if(Math.abs(p.x-tx)<p.w*.6) { gfx.globalAlpha=.6; E(p.x,p.base,p.w*.45,5,'#6aa8e0'); } };
+D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,70),me=ST.unit(m);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim'},{t:1500,f:'aim',dx:u=>-Math.sin(u*Math.PI)*14,dy:u=>Math.sin(u*Math.PI*2)*3},{t:2700,f:'hip'},{t:3150,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
+  const plan={s0:1500,s1:2700,x0:Gp.x0,x1:Gp.x1,y0:Gp.top,list:list.map(f=>ST.foe(f))},hit=2100;
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee walks over with the garden hose. She checks the nozzle. GENTLE. Good.'); say(m.id,'garden_shower'); scene('dd_nozzle',3.2,{spray0:1500,spray1:2700}); scene('dd_spray',3.0,{plan}); }],
+    [1500,()=>{ sfx.spray?sfx.spray():sfx.vapor&&sfx.vapor(); b7Later(()=>sfx.spray&&sfx.spray(),400); b7Later(()=>sfx.spray&&sfx.spray(),800); setMessage('One wide, thorough sweep.'); }],
+    ['hf',hit],
+    [hit,()=>{ sfx.splat(); all(list); landHit(100); }],
+    [2700,()=>{ setMessage('She checks the nozzle again. Very gentle.'); }],
+    [4200,'end',res(E2)+'The watering schedule was ambitious.']]); };
+
+// ---------- Windows Open ----------
+SC.dd_window=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y,carry=ms<P.set; if(carry) { const h=hand(); x=h.x-20; y=h.y-30; }
+  const sc=carry?.55:1,open=ez((ms-P.open)/400),bil=Math.sin(s.t*3)*.5+.5; gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  RO(-28,-36,56,72,WOOD); R(-24,-32,48,64,'#bfe4ff'); R(-2,-32,4,64,WOOD); R(-24,-2,48,4,WOOD);
+  if(open>0) for(const sd of [-1,1]) { const cw=14+bil*10*open,bx=sd*26; gfx.beginPath(); gfx.moveTo(bx,-34); gfx.quadraticCurveTo(bx+cw*open*2,0,bx,34); gfx.lineTo(bx-sd*8,34); gfx.quadraticCurveTo(bx-sd*8+cw*open*2.4,0,bx-sd*8,-34); gfx.closePath(); gfx.fillStyle=ROSE; gfx.fill(); }
+  gfx.restore(); if(!carry&&ms<P.open) label('LATCH',x,y-50,CREAM,1);
+  if(ms>P.out) { for(let k=0;k<5;k++) { const q=cl((ms-P.out-k*120)/700); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; const ix=lerp(P.from[k%P.from.length].x,x+30,ez(q))+q*60,iy=lerp(P.from[k%P.from.length].y,y-10,ez(q))-q*30; if(k%2) RO(ix-6,iy-6,12,12,'#4a4a60'); else R(ix-3,iy-3,6,6,'#e8b048'); } }
+  if(ms>P.heart) { gfx.globalAlpha=fade(u,.94); heart(x,y-50,7,'#ff6b9a'); label('FRESH START',x,y+50,ROSE,1); } };
+D.windows_open=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),U=who.map(u=>ST.unit(u)),me=ST.unit(m);
+  const wx=foe?front(U[0],60).x:Math.max(80,Math.min(...U.map(q=>q.x))-70),wy=(foe?U[0].mid:Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length));
+  const sx=Math.min(560,wx+44),sy=foe?front(U[0],60).y:Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+10);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:1000,x:sx,y:sy,f:'kneel'},{t:1300,f:'act',dx:-6},{t:1700,f:(u,tt)=>Math.floor(tt*8)%2?'wind':'throw'},{t:2700,f:'spread'},{t:3100,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
+  const plan={set:1000,open:1350,out:1750,heart:2500,x:wx,y:wy,from:U.map(q=>({x:q.x,y:q.mid}))};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee carries over a freestanding window and sets it down beside everyone.'); say(m.id,'windows_open'); scene('dd_window',3.8,{plan}); }],
+    [1350,()=>{ sfx.doorIn?sfx.doorIn():sfx.select(); sfx.whoosh(); setMessage('She unlatches it. Warm air in. She shoos the stale mood out with her apron.'); }],
+    ['hf',2100],
+    [2100,()=>{ E2.apply(); for(const u of who) { const q=ST.unit(u); scene('dd_glow',.9,{x:q.x,y:q.mid,c:'#9fd8ff'}); hopOf(u!==m?u:null); } sfx.ding(); }],
+    [4200,'end',foe?kindLine(foe):'The stale mood goes out first.']]); };
+
+// ---------- Spotless Record ----------
+SC.dd_spoon=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x-4,y=h.y-24,pol=ms>P.p0&&ms<P.p1?Math.sin((ms-P.p0)/40):0,bright=ez((ms-P.p1)/200); gfx.globalAlpha=fade(u,.94);
+  gfx.save(); gfx.translate(x,y); gfx.rotate(-.4); RO(-3,0,6,34,bright?'#dde8f0':'#8a8a90'); EO(0,-8,10,13,bright?'#eef6ff':'#9a9aa0'); if(bright) E(-3,-11,3,4,CREAM); else { E(2,-6,4,5,'#5f5f66'); if(ms<P.p0+200) { EO(1,-8,4,4,GOLD); } } gfx.restore();
+  if(pol) Ln(x-12+pol*6,y-16,x+6+pol*6,y-24,3,CREAM); if(ms<P.p0) label('TARNISHED',x,y-34,CREAM,1); };
+SC.dd_buffshine=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.fx,y=P.fy; if(ms>P.p1) { const st=s.st,q=ez((ms-P.p1)/400); if(st&&st.x!=null) { x=lerp(P.fx,st.x+6,q); y=lerp(P.fy,st.y-DH()*.36,q)-Math.sin(q*Math.PI)*30; } } gfx.globalAlpha=fade(u,.94);
+  EO(x,y,8,8,GOLD); for(let k=0;k<6;k++) { const a=s.t*5+k*Math.PI/3; Ln(x+Math.cos(a)*11,y+Math.sin(a)*11,x+Math.cos(a)*15,y+Math.sin(a)*15,2,GOLD); } if(ms>P.p1+450) label('SHINE',x,y-22,GOLD,1); };
+D.spotless_record=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim'},{t:1400,f:(u,tt)=>Math.floor(tt*14)%2?'act':'wind',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2200,f:'act',dx:-8},{t:2500,f:'hip'},{t:3000,f:'aim'},{t:3300,f:back(p.x,me),hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
+  const plan={p0:1400,p1:2200,fx:F.x+F.w*.3,fy:F.top-10};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Deedee walks up with a serving spoon. The shine on that enemy is just surface.'); say(m.id,'spotless_record'); scene('dd_spoon',3.3,{plan}); scene('dd_buffshine',3.4,{st,plan}); }],
+    [1400,()=>{ setMessage('One brisk polish. Then another. Then several.'); for(let k=0;k<5;k++) b7Later(()=>sfx.whoosh(),k*150); }],
+    ['hf',2200],
+    [2200,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.4); landHit(100); }],
+    [2500,()=>{ sfx.levelChime(); setMessage('The shine moves onto her apron. She checks her reflection.'); }],
+    [4300,'end',res(E2)+'The shine has found a cleaner home.']]); };
+
+// ---------- Take a Breather ----------
+SC.dd_breath=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.in-250) return; const ph=ms<P.in?0:(ms<P.peak?ez((ms-P.in)/(P.peak-P.in)):1-ez((ms-P.peak)/(P.out-P.peak))*.7),r=10+ph*22; gfx.globalAlpha=fade(u,.9);
+  E(P.x,P.y,r,r,'rgba(255,200,90,.22)'); ring(P.x,P.y,r,r,3,'#ffb45a'); label(ms<P.peak?'IN':'OUT',P.x,P.y-3,'#ffb45a',2);
+  if(ms>P.in-200&&ms<P.out) { const h=hand(); RO(h.x-2,h.y-24,4,16,SKIN); EO(h.x,h.y-8,6,6,SKIN); label('ONE',h.x,h.y-38,CREAM,1); } };
+D.take_a_breather=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,24),self=t===m,me=ST.unit(m);
+  const breathe=u=>1+Math.sin(cl(u)*Math.PI)*.06;
+  const K=self?[{t:0,x:'home',y:'home',f:'sit'},{t:600,f:'aim'},{t:1200,f:'sit',sc:breathe},{t:2600,f:'act'},{t:2900,f:'celeb',hop:8},{t:3300,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'sit'},{t:1100,f:'aim'},{t:1500,f:'sit',sc:breathe},{t:2800,f:'act',dx:-6},{t:3100,f:'idle'},{t:3300,f:back(sp.x,me),hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}];
+  ST.keys(fx,K);
+  const plan={x:H.x+(self?-50:-40),y:H.top-14,in:self?1200:1500,peak:self?1900:2200,out:self?2600:2900},end=self?3400:4300,hit=plan.peak+150;
+  ST.play(E2,[
+    [0,()=>{ setMessage(self?'Deedee sits down for one proper breath.':'Deedee sits down next to '+t.name+' and holds up one finger.'); say(m.id,'take_a_breather'); scene('dd_breath',(plan.out+300)/1000,{plan}); }],
+    [plan.in,()=>{ setMessage('In. Slowly. She breathes with them.'); sfx.vapor&&sfx.vapor(); }],
+    ['hf',hit],
+    [hit,()=>{ E2.apply(); sfx.heal(); scene('dd_glow',.9,{x:H.x,y:H.mid,c:'#ffd27a'}); hopOf(t!==m?t:null); }],
+    [plan.out-100,()=>{ scene('dd_heart',1,{x:H.x,y:H.top-6}); sfx.ding(); }],
+    [end,'end',kindLine(t,'Deedee makes a little space to breathe.')]]); };
 })();

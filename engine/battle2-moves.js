@@ -48,7 +48,7 @@ RM.grace.dance=E2=>{ const {m,fx}=E2;
     900,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p,'#ffe27a'); bt('DANCE BREAK',96,24,'#ffe08a',3,1.2); },
     'Everyone standing feels better.',()=>checkEnemy());
 };
-// Rose: SILLY. Raspberry, boings, and the enemy is Goofed (bosses drop what they are holding).
+// Rose: RASPBERRY (key silly; shown as SILLY before the 2026-10-24 move review). Raspberry, boings, and the enemy is Goofed (bosses drop what they are holding).
 RM.rose.silly=E2=>{ const {m,fx}=E2,t=E2.targets[0];
   if(E2.act&&E2.act.o3&&RM.rose.sillyShow) return RM.rose.sillyShow(E2);   // Option 3 Primary animation (rose-moves.js)
   fx.tongue=2.2; sfx.raspberry(); sfx.slideWhistle();
@@ -61,6 +61,7 @@ RM.rose.silly=E2=>{ const {m,fx}=E2,t=E2.targets[0];
 };
 // Amy: PEP TALK. Everyone else is Pumped Up.
 RM.amy.pep=E2=>{ const {m,fx}=E2;
+  if(E2.act&&E2.act.o3&&RM.amy.pepShow) return RM.amy.pepShow(E2);   // Option 3 Primary animation (amy-moves.js)
   fx.coach=1.7; sfx.dance(); say(m.id,'pep');
   enqueue(()=>{ setMessage(m.name+' claps twice. "Thirty seconds! Give me everything!"'); },
     900,()=>{ E2.apply(); sfx.levelUp(); },
@@ -68,13 +69,14 @@ RM.amy.pep=E2=>{ const {m,fx}=E2;
 };
 // Boppy: GRUMBLE. Sits down and complains; a row of enemies feels terrible and goes after him.
 RM.boppy.grumble=E2=>{ const {m,fx}=E2;
+  if(E2.act&&E2.act.o3&&RM.boppy.grumbleShow) return RM.boppy.grumbleShow(E2);   // Option 3 Primary animation (boppy-moves.js)
   fx.grumble=1.9; sfx.sulk(); say(m.id,'grumble');
   enqueue(()=>{ setMessage(m.name+' sits down. "I am not feeling good. It is the stomach. And everybody walks too FAST."'); },
     1200,()=>{ E2.apply(); sfx.stun(); bt('...',52,34,'#fff1cb',3,1); },
     'They feel awful about it. They hit softer, and they glare at Boppy.',()=>checkEnemy());
 };
 // Rose's basic: Boop. (The old battle did this one inline.)
-RM.rose.boop=E2=>{ const {m,fx}=E2;
+RM.rose.boop=E2=>{ if(E2.act&&E2.act.o3&&RM.rose.boopShow) return RM.rose.boopShow(E2); const {m,fx}=E2;
   enqueue(()=>{ setMessage('Rose walks right up to it.'); fx.appr=1.6; fx.apprDur=1.6; say('rose','boop',.45); },
     520,()=>{ fx.poke=.7; battle.boop={t:0,dur:1.1}; sfx.boop?sfx.boop():sfx.bonk(); },180,()=>landHit(100),750,'Boop. '+E2.result,()=>checkEnemy());
 };

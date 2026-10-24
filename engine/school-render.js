@@ -1,5 +1,5 @@
 'use strict';
-// engine/school-render.js — The look of chapter 5's Elsewhere Elementary: the schoolyard (ground 'schoolyard': sidewalk
+// engine/school-render.js — The look of chapter 5's Long Island Elementary: the schoolyard (ground 'schoolyard': sidewalk
 // 'path', 'asphalt', 'hopscotch', the front 'entry'), the school (ground 'school': 'lino', 'artfloor', 'carpet',
 // 'gymwood', 'staffrug', walls 'swall' that show a painted face when there is floor below them, dark 'void') and the
 // Cafetorium (ground 'cafe': 'cafefloor', 'stagewood'). Props: schoolwing, flagpole, marquee, bikerack, swings, slide,
@@ -38,7 +38,7 @@ drawOutdoorTile=function(x,y,type,time) {
       if(n%7===0) rect(px+10,py+14,3,2,'#b4af9f');
       return;
     }
-    return LE_drawOutdoorTile(x,y,type,time);   // grass, as in the rest of Little Elsewhere (engine/la-render.js keeps the original)
+    return LE_drawOutdoorTile(x,y,type,time);   // grass, as in the rest of Long Island (engine/la-render.js keeps the original)
   }
   if(type==='void') { rect(px,py,T,T,'#141821'); return; }
   if(type==='swall') {
@@ -107,7 +107,7 @@ drawObject=function(o,time) {
         const lit=hash(o.x+k,r)%3===0; rect(wx,wy,22,18,OUT); rect(wx+1,wy+1,20,16,lit?'#f6d27a':'#2a3a5a'); rect(wx+10,wy+1,2,16,OUT); rect(wx+1,wy+8,20,2,OUT);
         if(!lit) rect(wx+4,wy+3,3,2,'#4a5a7a');
         if(o.side==='right'&&r===0) { rect(wx+4,wy+3,4,4,'#f4f0e6'); rect(wx+14,wy+10,4,4,'#f4f0e6'); } }   // paper snowflakes
-      if(o.side==='left') { rect(x+w-4,top,4,b-top,'#d9cbb0'); schSign('ELSEWHERE',x+w-38,top+2,'#d9cbb0','#5a2a1a',1); }
+      if(o.side==='left') { rect(x+w-4,top,4,b-top,'#d9cbb0'); schSign('LONG ISLAND',x+w-38,top+2,'#d9cbb0','#5a2a1a',1); }
       else { rect(x,top,4,b-top,'#d9cbb0'); schSign('ELEMENTARY',x+40,top+2,'#d9cbb0','#5a2a1a',1); }
       return;
     }
@@ -323,7 +323,7 @@ drawObject=function(o,time) {
       return;
     }
   }
-  return LE_drawObject(o,time);   // trees, signs, benches: the Little Elsewhere originals (engine/la-render.js keeps them)
+  return LE_drawObject(o,time);   // trees, signs, benches: the Long Island originals (engine/la-render.js keeps them)
 };
 
 // ---------- Minimap ----------

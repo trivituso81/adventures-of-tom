@@ -429,7 +429,7 @@ function b2Effect(u,M,f) {
     case 'coins': { const n=rand(f[1],f[2]); B2.coinsWon+=n; const t=M.primary; if(t&&t.side==='foe') { const p=b2FoePoint(t); pop('+'+n,p.x+8,p.y-6,'#ffd24a'); } sfx.coin&&sfx.coin(); } break;
     case 'reveal': for(const t of who(f[1])) if(!t.revealed) { t.revealed=true; const p=b2FoePoint(t); battle.texts.push({txt:t.weak.length?'WEAK: '+t.weak.map(e=>B2_ELEMS[e].name).join(' '):'NO WEAKNESS',x:p.x,y:p.y-20,color:'#ffe08a',sc:1,t:0,dur:1.6}); } break;
     case 'row': for(const t of who(f[2])) b2MoveRow(t,f[1]); break;
-    case 'shieldBreak': for(const t of who(f[1])) if(t.shield) b2BreakShield(t,'The kiln melts the shield!'); break;
+    case 'shieldBreak': for(const t of who(f[1])) if(t.shield) b2BreakShield(t,f[2]||'The kiln melts the shield!'); break;   // f[2]: the move's own message
     case 'interrupt': for(const t of who(f[1])) if(t.intent&&t.intent.kind!=='lock') { t.intent=null; t.shield=null; const p=b2FoePoint(t); battle.texts.push({txt:'INTERRUPTED',x:p.x,y:p.y-20,color:'#9be39a',sc:1,t:0,dur:1.2}); sfx.stun(); } break;
     case 'steal': for(const t of who(f[1])) { const k=Object.keys(t.st).find(k=>B2_STATUS[k]&&B2_STATUS[k].buff&&k!=='pietin'); if(k) { const s=t.st[k]; delete t.st[k]; if(B2_STATUS[k].mod) u.st[k]={turns:3,amt:s.amt}; const p=b2FoePoint(t); battle.texts.push({txt:'STOLE '+B2_STATUS[k].short,x:p.x,y:p.y-20,color:'#ffe08a',sc:1,t:0,dur:1.2}); } } break;
     case 'randbuff': { const k=pick(['powup','gritup','pepup']); for(const t of who(f[2])) b2AddStatus(t,k,f[1],{by:u}); } break;

@@ -683,24 +683,7 @@ function drawSprite(rows,pal,x,y,scale,opts={}) {
   gfx.globalAlpha=prevAlpha;
 }
 
-function startVapor() {
-  battle.vapor=1.4;
-  battle.vaporParts=[];
-  for(let i=0;i<40;i++) {
-    battle.vaporParts.push({
-      x:132+Math.random()*72,y:186+Math.random()*66,
-      vx:(Math.random()-.5)*40,vy:-27-Math.random()*60,
-      size:3+Math.floor(Math.random()*4),delay:Math.random()*.5,
-      color:pick((battle.enemy&&battle.enemy.def&&battle.enemy.def.vapor)||['#bfe8d4','#9dd0b8','#e8fff2','#6aa08a','#ffffff'])
-    });
-  }
-}
-
-function setMessage(text,blink=false) {
-  if(typeof enemyText==='function') text=enemyText(text);
-  $('battle-msg').textContent=text;
-  $('battle-msg').classList.toggle('blink',blink);
-}
+function setMessage(text) { b2Msg(text); }
 
 function clearBattleQueue() {
   battle.queue.length=0;
@@ -720,44 +703,12 @@ function nextStep() {
   battle.busy=true;
   if(typeof s==='string') {
     setMessage(s);
-    battle.timer=setTimeout(nextStep,1150);
+    battle.timer=setTimeout(nextStep,1150/b7Speed());
   } else if(typeof s==='number') {
-    battle.timer=setTimeout(nextStep,s);
+    battle.timer=setTimeout(nextStep,s/b7Speed());
   } else {
     s();
     nextStep();
-  }
-}
-
-function buildStatus() {
-  const box=$('battle-status');
-  box.innerHTML='';
-  const e=battle.enemy;
-  const mk=(id,cls)=>{
-    const d=document.createElement('div');
-    d.className='combatant '+cls;
-    d.innerHTML='<div class="name"><span class="who"></span><span class="hpnum"></span></div><div class="hp"><i></i></div>';
-    d.dataset.id=id;
-    box.appendChild(d);
-  };
-  mk('enemy','enemy');
-  party.forEach((m,i)=>mk(String(i),'member'));
-  refreshBattleStatus();
-}
-
-function refreshBattleStatus() {
-  const e=battle.enemy;
-  for(const d of document.querySelectorAll('#battle-status .combatant')) {
-    const isEnemy=d.dataset.id==='enemy';
-    const m=isEnemy?null:party[Number(d.dataset.id)];
-    const hp=isEnemy?e.hp:m.hp,max=isEnemy?e.maxHp:m.maxHp;
-    d.querySelector('.who').textContent=(isEnemy?e.name:m.name)+' Lv'+(isEnemy?e.level:m.level)+(isEnemy&&e.def?' \u00b7 '+e.def.rank:'');
-    d.querySelector('.hpnum').textContent=isEnemy?(Math.max(0,hp)+' / '+max):('HP '+Math.max(0,hp)+'/'+max+'  MP '+m.mp+'/'+m.maxMp);
-    const ratio=Math.max(0,hp)/max,bar=d.querySelector('.hp i');
-    bar.style.width=Math.round(ratio*100)+'%';
-    bar.className=ratio<=.25?'crit':ratio<=.5?'low':'';
-    d.classList.toggle('ko',!isEnemy&&hp<=0);
-    d.classList.toggle('turn',!isEnemy&&battle.state==='command'&&Number(d.dataset.id)===battle.actor);
   }
 }
 

@@ -64,6 +64,7 @@ function draw(time) {
       gfx.globalAlpha=1;
     }
   }
+  b7DrawMapFx(time);   // engine/feel.js: monster alerts, sleepy Zs, the instant-win confetti pop
   ctx.restore();
 
   if(transition)
@@ -278,14 +279,7 @@ const keyboard={
 };
 
 window.addEventListener('keydown',e=>{
-  if(battle.active) {
-    const cmds=[...document.querySelectorAll('.battle-cmd')];
-    if(battle.state!=='command'||!cmds.length) return;
-    if(e.code==='ArrowUp'||e.code==='ArrowLeft'||e.code==='KeyW'||e.code==='KeyA') { e.preventDefault(); battle.sel=(battle.sel+cmds.length-1)%cmds.length; highlightCommand(); sfx.move(); }
-    else if(e.code==='ArrowDown'||e.code==='ArrowRight'||e.code==='KeyS'||e.code==='KeyD') { e.preventDefault(); battle.sel=(battle.sel+1)%cmds.length; highlightCommand(); sfx.move(); }
-    else if((e.code==='Enter'||e.code==='Space')&&!e.repeat) { e.preventDefault(); cmds[battle.sel].click(); }
-    return;
-  }
+  if(battle.active) { b2Key(e); return; }
   if(e.code==='KeyL'&&!e.repeat) { toggleLayout(); return; }
   if(shopOpen) {
     if(e.code==='Escape'||e.code==='KeyM') { e.preventDefault(); closeShop(); }
@@ -368,7 +362,7 @@ document.addEventListener('visibilitychange',()=>{
 });
 
 window.addEventListener('resize',applyLayout);
-$('rotate-hud').addEventListener('click',toggleLayout);
+$('save-hud').addEventListener('click',()=>{ if(!dialog.active&&!transition) openSave(); });
 $('rotate-menu').addEventListener('click',toggleLayout);
 applyLayout();
 if('ResizeObserver' in window)

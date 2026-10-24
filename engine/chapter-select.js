@@ -7,7 +7,7 @@
 //   items   every {give} from the earlier chapters' scenes goes in the bag (quietly)
 //   levels  everyone set to CHSEL_LEVEL[n] with Auto-Stamp, full HP; coins scale with the chapter
 //   place   LA chapters (2, 4, 6, 8) arrive at the Angel City cab stand; home chapters (3, 5, 7, 9) arrive at the
-//           Elsewhere taxi depot with the girls running in; chapter 10 plays Sal's ride (SCENES.ch10Start)
+//           Long Island taxi depot with the girls running in; chapter 10 plays Sal's ride (SCENES.ch10Start)
 // It is an approximation of a real playthrough (good for testing a chapter, not for balance).
 // Remove by setting CHAPTER_SELECT=false (or dropping this file from index.html) when the full game ships.
 // Loaded after engine/skip.js, before engine/main.js.
