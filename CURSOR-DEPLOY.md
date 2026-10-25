@@ -1,16 +1,3 @@
-# Step 0: rejoin the zip (do this first)
-
-Tom downloaded 7 files: adventures-of-tom-2026-10-25.zip.part0 through .part6, plus this file. Put them all in one folder, then run:
-
-- macOS or Linux: `cat adventures-of-tom-2026-10-25.zip.part0 adventures-of-tom-2026-10-25.zip.part1 adventures-of-tom-2026-10-25.zip.part2 adventures-of-tom-2026-10-25.zip.part3 adventures-of-tom-2026-10-25.zip.part4 adventures-of-tom-2026-10-25.zip.part5 adventures-of-tom-2026-10-25.zip.part6 > adventures-of-tom-2026-10-25.zip`
-- Windows (cmd): `copy /b adventures-of-tom-2026-10-25.zip.part0+adventures-of-tom-2026-10-25.zip.part1+adventures-of-tom-2026-10-25.zip.part2+adventures-of-tom-2026-10-25.zip.part3+adventures-of-tom-2026-10-25.zip.part4+adventures-of-tom-2026-10-25.zip.part5+adventures-of-tom-2026-10-25.zip.part6 adventures-of-tom-2026-10-25.zip`
-
-Check the result before unzipping. It must be 26457442 bytes with SHA-256
-`9e83bacb514747139353229e4fed46ad5993c25aa018ba5fac7275cb290c9267`
-(macOS: `shasum -a 256 adventures-of-tom-2026-10-25.zip`). If it does not match, a part is missing or a browser renamed one (for example added "(1)"); ask Tom to re-download that part.
-
-Unzip it into a folder named `adventures-of-tom` (if that folder or repo already exists from an earlier deploy, replace its files, keep `.git`). That folder is the site. Do not commit the .part files or the .zip.
-
 # The Adventures of Tom: deploy brief for Cursor
 
 You are deploying a finished static web game. Do not change any game code. Your only job is to put these files online and give Tom one URL he can add to his iPhone home screen.

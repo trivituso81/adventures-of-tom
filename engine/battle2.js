@@ -592,7 +592,7 @@ function b2FoeTurn(e) {
   if(e.boss) e.steady=lost;
   if(e.st.staggered) { delete e.st.staggered; e.intent=null; e.shield=null; if(e.boss) e.step='C'; enqueue(()=>{ b2Msg(N+' is still STAGGERED. It cannot move!'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
   if(e.st.stunned) { delete e.st.stunned; enqueue(()=>{ b2Msg(N+' is still seeing stars. It loses its turn.'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
-  if(e.st.smitten) { delete e.st.smitten; enqueue(()=>{ b2Msg(N+' looks at Nara. Nara looks back. It cannot do it.'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
+  if(e.st.smitten) { const by=e.st.smitten.by; delete e.st.smitten; enqueue(()=>{ b2Msg(by&&by.id&&by.id!=='nara'?N+' is still thinking about '+by.name+'. It cannot bring itself to fight.':N+' looks at Nara. Nara looks back. It cannot do it.'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
   if(e.st.goofed) {
     delete e.st.goofed;
     const coins=Math.random()<.5;
@@ -855,7 +855,7 @@ const B2_DIRECTOR={
   open2:'Every third turn it calls CUT! (the next person on the turn ribbon loses their turn) or Take Two (it heals). It shows on the ribbon first.',
   phase:N=>N+' screams FROM THE TOP! The whole set shakes.',
   adds:n=>n>1?'Two Extra Extras shuffle onto the set!':'An Extra Extra shuffles onto the set!',
-  brace:(N,e)=>N+' takes a deep breath for THAT’S A WRAP next turn! Break its guard: Glaze & Bake (or any Tombo), or '+e.shield.need+' Cozy hits.',
+  brace:(N,e)=>N+' takes a deep breath for THAT’S A WRAP next turn! Break its guard: Popcorn Jump (or any Tombo), or '+e.shield.need+' Cozy hits.',
   cutWarn:'"Quiet on set!" CUT! is coming next turn. Whoever is next on the ribbon loses their turn. WARDROBE makes them Fresh.',
   healWarn:'"Again! Take two!" It will heal itself next turn. Hit it hard now.'
 };

@@ -153,24 +153,24 @@ const B2_SKILLS={
         desc:'Step in front of an ally for 2 turns. Hits aimed at them go to Tom, 40% softer.'},
       {key:'starter_splash',name:'Starter Splash',vp:2,elem:['splash'],stat:'warmth',mult:1.35,target:'enemy',weight:'quick',o3:true,
         fx:[['ctq',.10,'t']],desc:'Bready Mercury burps a wave of bubbly starter across the row; it crashes on one enemy. Pushes its next turn back a little.'},
-      {key:'crumb_shot',name:'Crumb Shot',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.30,.4,'t'],['cure','amber','t']],desc:'Tom slices a warm boule; the steam heals an ally 30% and clears Amber-Stuck. Kind on a monster.'},
-      {key:'mint_unboxing',name:'Mint Unboxing',vp:4,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:25,
-        fx:[['heal',.18,.4,'party'],['crust',1,'deedee']],desc:'A brand-new gadget, unboxed with great care. The joy heals the party 18%. Deedee adds a Warm Crust. Kind on a monster.'},
+      {key:'sourdough_snob',name:'Sourdough Snob',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
+        fx:[['heal',.30,.4,'t'],['cure','amber','t']],desc:'Tom feeds an ally warm bread during an unsolicited lecture on wild yeast. Heals 30% and clears Amber-Stuck. Kind on a monster.'},
+      {key:'overpriced_gadget',name:'Overpriced Gadget',vp:4,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:25,
+        fx:[['heal',.18,.4,'party'],['crust',1,'deedee']],desc:'A ridiculously expensive gadget. Pure retail therapy heals the party 18%. Deedee adds a Warm Crust. Kind on a monster.'},
       {key:'noise_canceling',name:'Noise-Canceling',vp:4,elem:['sparkle'],stat:'warmth',mult:1.8,target:'enemy',weight:'standard',o3:true,
         fx:[['interrupt','t']],desc:'Tom puts on his flight headphones and the noise stops. Hits one enemy and cancels its wind-up.'},
-      {key:'window_seat',name:'Window Seat',vp:5,elem:['cozy'],stat:'warmth',mult:1.5,target:'row',weight:'heavy',o3:true,
-        fx:[['st','guard',1,'lowest']],desc:'A giant first-class window shade slams down on a row. The most hurt friend is Guarded (half damage) for 1 turn.'},
+      {key:'seat_1a',name:'Seat 1A, Peasants',vp:5,elem:['cozy'],stat:'warmth',mult:1.5,target:'row',weight:'heavy',o3:true,
+        fx:[['st','guard',1,'lowest']],desc:'A Delta One privacy door slams shut on a row and the shade comes down. The most hurt friend is tucked in: Guarded (half damage) for 1 turn.'},
       {key:'flashcard_flurry',name:'Flashcard Flurry',vp:2,elem:['chatter'],target:'enemy',weight:'quick',o3:true,kindFoe:25,
         fx:[['reveal','t'],['ctq',.20,'t']],desc:'Flashcards fly at every enemy. Shows one enemy\'s weakness, delays its turn and warms it up.'},
       {key:'konami_code',name:'Konami Code',vp:3,elem:['kinetic'],stat:'pow',mult:1.3,target:'row',weight:'standard',o3:true,
         fx:[['ctq',.15,'t']],desc:'Up, up, down, down, left, right, left, right, B, A. Each arrow slams the row; 30 LIVES. Hits a row and delays them.'},
-      {key:'save_sandwich',name:'Save Point Sandwich',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.30,.4,'t'],['vp',1,'t']],desc:'Save first, sandwich second. Heals an ally 30% and gives +1 VP. Kind on a monster.'},
+      {key:'skincare_10',name:'10-Step Skincare',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
+        fx:[['heal',.30,.4,'t'],['vp',1,'t']],desc:'Tom pauses the battle for skincare. A red-light LED mask heals an ally 30% and gives +1 VP. Kind on a monster.'},
       {key:'kanji_strike',name:'Kanji Strike',vp:4,elem:['sparkle'],stat:'warmth',mult:2,target:'enemy',weight:'standard',o3:true,
         debuffBonus:.35,desc:'A giant glowing brushstroke. +35% if the target has a debuff.'},
-      {key:'patch_notes',name:'Patch Notes',vp:6,elem:['sparkle'],stat:'warmth',mult:1.1,target:'all',weight:'heavy',o3:true,
-        fx:[['interrupt','t']],desc:'A very firm update. Hits every enemy and cancels their wind-ups.'},
+      {key:'know_it_all',name:'Know-It-All',vp:6,elem:['sparkle'],stat:'warmth',mult:1.1,target:'all',weight:'heavy',o3:true,
+        fx:[['interrupt','t']],desc:'Ummm... actually. Big red FACT CHECK stamps hit every enemy and cancel their wind-ups.'},
       // Ultimates (phase 5a). Primary versions come from Option 2 (option3-implementation-brief.md core rule 2); the card's
       // "refill self" on Boarding Group Zero is held to the brief's VP cap (+3).
       {key:'delta_ult',name:'Boarding Group Zero',vp:8,elem:['cozy'],stat:'hybrid',mult:3.4,target:'all',weight:'heavy',o3:true,
@@ -227,7 +227,15 @@ const B2_SKILLS={
       {key:'split_leap',name:'Split Leap',vp:4,elem:['kinetic'],stat:'pow',mult:1.8,target:'enemy',weight:'standard',o3:true,
         fx:[['interrupt','t'],['st','guard',1,'lowest']],desc:'A split leap across the whole row. Kicks one enemy, cancels its wind-up, and the most hurt friend is Guarded for 1 turn.'},
       {key:'chalk_up',name:'Chalk Up',vp:5,elem:['sparkle'],stat:'pow',mult:1.6,target:'row',weight:'standard',crit:.25,o3:true,
-        desc:'Chalk clap, then a tumbling pass under the spotlight across a row. Hits them with +25% crit chance.'}
+        desc:'Chalk clap, then a tumbling pass under the spotlight across a row. Hits them with +25% crit chance.'},
+      // Ultimates (phase 5b). Primary versions come from Option 2 (option3-implementation-brief.md core rule 2). Ten Million
+      // Subscribers' kindFoe is dropped: an all-enemies move has no kind branch in b2TargetOptions.
+      {key:'viral_ult',name:'Ten Million Subscribers',vp:7,elem:['sparkle'],stat:'warmth',mult:3.2,target:'all',weight:'heavy',o3:true,
+        fx:[['heal',.5,.4,'party'],['st','glitter_nails',3,'party'],['trend','lock',2]],
+        desc:'Ultimate. A pretend livestream hits ten million. A rainbow hits every enemy; the party heals 50%, gets Glitter Nails, and her Trending locks at x1.5.'},
+      {key:'olympic_ult',name:'Diamond Leotard Finale',vp:8,elem:['kinetic'],stat:'hybrid',mult:3.9,target:'enemy',weight:'heavy',crit:1,o3:true,
+        fx:[['shieldBreak','t','She sticks the landing! The shield shatters!'],['ct',-1,'others']],
+        desc:'Ultimate. A championship floor routine lands on one enemy: always a critical hit, breaks its shield, and everyone else goes to the front of the line.'}
     ]},
   rose:{
     basic:{key:'boop',name:'Boop',elem:['kinetic'],stat:'pow',mult:.9,target:'enemy',weight:'standard',fx:[['ct',.12,'t']],
@@ -277,7 +285,15 @@ const B2_SKILLS={
       {key:'lamby_boomerang',name:'Lamby Boomerang',vp:5,elem:['sparkle'],stat:'warmth',mult:1.6,target:'row',weight:'standard',o3:true,
         fx:[['st','cool_down',2,'t']],desc:'Rose swings Lamby on her ribbon and lets go. He flies down the row and comes back. Lowers COOL 25% for 2 turns.'},
       {key:'pillow_fort',name:'Pillow Fort',vp:5,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:30,
-        fx:[['st','guard',1,'party'],['cure','amber','party'],['heal',.10,0,'tom']],desc:'Cushions and a big blanket over everyone. Guards the party for 1 turn, clears Amber-Stuck, and Tom gets a small heal. Kind on a monster.'}
+        fx:[['st','guard',1,'party'],['cure','amber','party'],['heal',.10,0,'tom']],desc:'Cushions and a big blanket over everyone. Guards the party for 1 turn, clears Amber-Stuck, and Tom gets a small heal. Kind on a monster.'},
+      // Ultimates (phase 5b). Primary versions from Option 2. Tea Party's kindFoe is dropped (all enemies has no kind branch).
+      // Shoulder Mecha uses the brief's tuned row (Miles capped at +1 per action).
+      {key:'teaparty_ult',name:'Tea Party with Lamby',vp:7,elem:['sparkle'],stat:'warmth',mult:3.3,target:'all',weight:'heavy',o3:true,
+        fx:[['goof',1,'t'],['heal',.40,.4,'party'],['cure','debuff','party']],
+        desc:'Ultimate. Every enemy sits down at a tiny tea table with Lamby. Pinkies up! A rainbow tea geyser hits them all and Goofs them; the party heals 40% and loses its debuffs.'},
+      {key:'mecha_ult',name:'Operation Shoulder Mecha',vp:8,elem:['kinetic'],stat:'hybrid',mult:4.0,target:'all',weight:'heavy',o3:true,
+        fx:[['mount'],['st','stunned',1,'t'],['mile',1]],
+        desc:'Ultimate. Rose rides Tom and they turn into a cardboard-box robot. A rainbow crayon laser hits every enemy and Stuns them; Rose stays on his shoulders and Tom gets +1 Upgrade Mile.'}
     ]},
   amy:{
     basic:{key:'basic',name:'Sprint Tackle',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
@@ -327,7 +343,15 @@ const B2_SKILLS={
       {key:'false_start',name:'False Start',vp:4,elem:['kinetic'],stat:'pow',mult:1.7,target:'enemy',weight:'quick',o3:true,
         fx:[['interrupt','t'],['ctq',.15,'t']],desc:'Catch one enemy leaning too early. Hits it, cancels its wind-up, and delays its turn.'},
       {key:'negative_split',name:'Negative Split',vp:5,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:25,
-        fx:[['st','pep_up',2,'party'],['cure','amber','party']],desc:'Easy first half, faster second half. The party gets PEP +25% for 2 turns and loses Amber-Stuck. Kind on a monster.'}
+        fx:[['st','pep_up',2,'party'],['cure','amber','party']],desc:'Easy first half, faster second half. The party gets PEP +25% for 2 turns and loses Amber-Stuck. Kind on a monster.'},
+      // Ultimates (phase 5b). Primary versions from Option 2. See Me is the registry's see_me (B8_ST_ALIAS seeme: they take
+      // double damage for 2 turns). Boston Qualifier pulls the party forward 50% (the card's words; the table's +0.5 sign).
+      {key:'detention_ult',name:'Detention Forever',vp:8,elem:['chatter'],stat:'hybrid',mult:3.5,target:'all',weight:'heavy',o3:true,
+        fx:[['st','see_me',2,'t'],['ct',.6,'t'],['vp',3,'party']],
+        desc:'Ultimate. The last bell rings and every enemy gets detention. Hits them all, marks them See Me (double damage for 2 turns), knocks their turns back 60%, and the party gets 3 VP.'},
+      {key:'marathon_ult',name:'Boston Qualifier',vp:8,elem:['kinetic'],stat:'pow',mult:3.8,target:'all',weight:'heavy',o3:true,
+        fx:[['st','personal_best',3,'party'],['cure','debuff','party'],['ct',-.5,'party']],
+        desc:'Ultimate. Amy leads the whole family over the Mile 26.2 finish line, straight through every enemy. Huge hit on all of them; the party loses its debuffs, gets Personal Best for 3 turns, and moves up 50%.'}
     ]},
   deedee:{
     basic:{key:'basic',name:'Spit Shine',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
@@ -353,7 +377,8 @@ const B2_SKILLS={
     // Option 3 Primary kit (phase 3d). Cards: adventures-of-tom-ability-revamp.md (Deedee). MOON & BACK (sig:true) keeps
     // its legacy resolver; only the animation is new (RECRUIT_MOVES.deedee.moon_back, engine/deedee-moves.js). LINES.deedee.moon_back repeats the 'hug' lines, so the baked clips play.
     // baking:true marks the actions whose crust op is the baking token event (trait integration note on her card).
-    o3:[
+    o3:[   // Move review (2026-10-24): A3 Wet Floor!, A4 Wine O'Clock (key wine), B3 Rise and Shine, B4 Beanie Master, B5 Grandma Squeeze.
+      // Same numbers as the slots they replace. Animations: the "Move review rebuilds" IIFE at the end of engine/deedee-moves.js.
       {key:'dish_towel_flick',name:'Dish-Towel Flick',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
         desc:'Flick one enemy with a clean dish towel. Free, and gives +1 VP.'},
       {key:'moon_back',sig:true,name:'MOON & BACK',vp:4,elem:['cozy'],target:'party',weight:'standard',kind:'signature',o3:true,fx:[['heal',.4,1.5,'party'],['st','tucked',3,'party']],
@@ -362,22 +387,31 @@ const B2_SKILLS={
         fx:[['heal',.35,.4,'t'],['cure','one','t']],desc:'A proper check-up from a very energetic nurse. Heals a friend 35% and removes one debuff. Kind on a monster.'},
       {key:'corner_piece',name:'Corner-Piece Privilege',vp:4,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:35,baking:true,
         fx:[['heal',.45,.4,'t'],['crust',1]],desc:'The best corner of homemade rhubarb crisp. Heals a friend 45% and adds one Warm Crust. Kind on a monster.'},
-      {key:'pepper_free_plate',name:'Pepper-Free Plate',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,baking:true,
-        fx:[['heal',.25,.4,'t'],['cure','amber','t'],['crust',1],['heal',.10,0,'boppy']],desc:'A warm bread bowl without peppers. Heals a friend 25%, clears Amber-Stuck, adds a Warm Crust. Boppy gets extra care. Kind on a monster.'},
-      {key:'rolling_pin_rounds',name:'Rolling-Pin Rounds',vp:4,elem:['kinetic'],stat:'pow',mult:1.8,target:'enemy',weight:'standard',o3:true,
-        fx:[['interrupt','t']],desc:'A quick round with the rolling pin. Hits one enemy and cancels its wind-up.'},
+      {key:'wet_floor',name:'Wet Floor!',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,baking:true,
+        fx:[['heal',.25,.4,'t'],['cure','amber','t'],['crust',1],['heal',.10,0,'boppy']],desc:'She mops around a friend: the sticky stuff comes right up. Heals 25%, clears Amber-Stuck, adds a Warm Crust. Boppy gets extra care. Somebody always slips. Kind on a monster.'},
+      {key:'wine',name:'Wine O’Clock',vp:4,elem:['kinetic'],stat:'pow',mult:1.8,target:'enemy',weight:'standard',o3:true,
+        fx:[['interrupt','t']],desc:'Ting, ting, ting: a toast. Every monster freezes to listen. Hits one enemy and cancels its wind-up.'},
       {key:'oven_mitt_ultimatum',name:'Oven Mitt Ultimatum',vp:5,elem:['cozy'],stat:'warmth',mult:1.6,target:'row',weight:'standard',o3:true,
         fx:[['st','grumbled',2,'t']],desc:'Clap the oven mitts once. Hits a row and lowers its POW and WARMTH 30% for 2 turns.'},
       {key:'brisk_means_brisk',name:'Brisk Means Brisk',vp:2,elem:['kinetic'],stat:'pow',mult:1.5,target:'enemy',weight:'quick',o3:true,
         desc:'One very brisk pass through an enemy. Deedee acts again soon.'},
       {key:'garden_shower',name:'Garden Shower',vp:3,elem:['splash'],stat:'warmth',mult:1.2,target:'row',weight:'standard',o3:true,
         fx:[['ctq',.15,'t']],desc:'Water an enemy row rather thoroughly. Hits them and delays their next turns.'},
-      {key:'windows_open',name:'Windows Open',vp:4,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:25,
-        fx:[['cure','mental','party'],['cure','amber','party'],['st','cool_up',2,'party']],desc:'Let warm fresh air in. Clears mental debuffs and Amber-Stuck, and the party gets COOL +25% for 2 turns. Kind on a monster.'},
-      {key:'spotless_record',name:'Spotless Record',vp:4,elem:['sparkle'],stat:'warmth',mult:1.8,target:'enemy',weight:'standard',o3:true,
-        fx:[['steal','t']],desc:'Polish the shine off one enemy. Hits it and keeps one of its buffs.'},
-      {key:'take_a_breather',name:'Take a Breather',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.25,.4,'t'],['vp',2,'t']],desc:'Help a friend take one proper breath. Heals 25% and restores 2 VP. Kind on a monster.'}
+      {key:'rise_and_shine',name:'Rise and Shine',vp:4,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:25,
+        fx:[['cure','mental','party'],['cure','amber','party'],['st','cool_up',2,'party']],desc:'She yanks the shades open. Monsters squint; friends wake up. Clears mental debuffs and Amber-Stuck, and the party gets COOL +25% for 2 turns. Kind on a monster.'},
+      {key:'beanie_master',name:'Beanie Master',vp:4,elem:['sparkle'],stat:'warmth',mult:1.8,target:'enemy',weight:'standard',o3:true,
+        fx:[['steal','t']],desc:'There were beans at lunch. A big green cloud: hits one enemy and its buff blows over to her.'},
+      {key:'grandma_squeeze',name:'Grandma Squeeze',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
+        fx:[['heal',.25,.4,'t'],['vp',2,'t']],desc:'One big squeezy hug and a lipstick kiss. Heals 25% and restores 2 VP. Kind on a monster.'},
+      // Ultimates (phase 5b). Primary versions from Option 2 (Deedee's Kit Table). All-enemies moves have no kind branch,
+      // so kindFoe is dropped. Caps: party heal 60%, revive 50%. Animations: the "Option 3 Ultimates" IIFE at the end of
+      // engine/deedee-moves.js (revived friends also get Tucked In there, since ops skip a friend revived by the same move).
+      {key:'sunday_ult',name:'Sunday Roast Spread',vp:8,elem:['cozy'],stat:'warmth',mult:3.2,target:'all',weight:'heavy',o3:true,baking:true,
+        fx:[['heal',.60,.4,'party'],['cure','debuff','party'],['crust',3],['tray',3]],
+        desc:'Ultimate. The dinner bell rings, a kitchen whirlwind hits every enemy, and the family sits down to Sunday dinner. Heals the party 60%, clears their debuffs, and fills the tray with 3 Hot Dishes.'},
+      {key:'moon_ult',name:'To the Moon and Back',vp:8,elem:['sparkle'],stat:'warmth',mult:3.7,target:'all',weight:'heavy',o3:true,
+        fx:[['revive',.50,'party'],['st','tucked_in',3,'party'],['smit',1,'t']],
+        desc:'Ultimate. A golden heart flies round the full moon and comes back down as starlight on every enemy. Revives fallen friends at 50%, Tucks In the party for 3 turns, and every enemy may go Smitten.'}
     ]},
   boppy:{
     basic:{key:'basic',name:'Cap Swat',elem:['kinetic'],stat:'pow',mult:1.1,target:'enemy',weight:'standard',
@@ -406,8 +440,8 @@ const B2_SKILLS={
     // legacy resolver; only the animation is new (RECRUIT_MOVES.boppy.grumbleShow, engine/boppy-moves.js). Same key on both.
     // pepper:true marks the actions whose burn op is the pepper event (trait integration note on his card).
     o3:[
-      {key:'cap_check',name:'Cap Check',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
-        desc:'Check one enemy with the brim of a cap. Free, and gives +1 VP.'},
+      {key:'cap_swat',name:'Cap Swat',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
+        desc:'Cap off, and he swats one enemy like a mosquito. Free, and gives +1 VP.'},
       {key:'grumble',sig:true,name:'GRUMBLE',vp:2,elem:['chatter'],target:'row',weight:'standard',kind:'signature',o3:true,fx:[['st','grumbled',3,'t'],['st','brace',1,'self']],
         desc:'Grumble at an enemy row. It hits 30% softer and goes after Boppy, who guards.'},
       {key:'patient_angler',name:'Patient Angler',vp:2,elem:['splash'],stat:'pow',mult:1.4,target:'enemy',weight:'standard',o3:true,
@@ -416,20 +450,29 @@ const B2_SKILLS={
         fx:[['heal',.30,.4,'t'],['st','guard',1,'t'],['st','guard',1,'deedee']],desc:'Reserve the best seat for a friend. Heals 30% and guards them; Deedee gets cover too. Kind on a monster.'},
       {key:'headcount_again',name:'Headcount, Again',vp:3,elem:['chatter'],target:'row',weight:'standard',o3:true,kindFoe:25,
         fx:[['reveal','t'],['ctq',.20,'t']],desc:'Count an enemy row twice. Shows their weaknesses, delays their turns, and warms them up.'},
-      {key:'closing_time',name:'Closing Time',vp:4,elem:['kinetic'],stat:'pow',mult:1.8,target:'enemy',weight:'standard',o3:true,
-        fx:[['interrupt','t'],['st','hooked',1,'t']],desc:'Close a padded rail on a dangerous plan. Hits one enemy, cancels its wind-up, and it cannot dodge.'},
+      {key:'lockdown',name:'Lockdown',vp:4,elem:['kinetic'],stat:'pow',mult:1.8,target:'enemy',weight:'standard',o3:true,
+        fx:[['interrupt','t'],['st','hooked',1,'t']],desc:'Cell bars slam down around one enemy. Hits it, cancels its wind-up, and it cannot dodge.'},
       {key:'everybody_waits',name:'Everybody Waits',vp:5,elem:['chatter'],target:'party',weight:'standard',o3:true,kindFoe:25,
         fx:[['st','nobody_gets_past',2,'party']],desc:'Ask the whole world to wait a moment. The party takes 40% less damage for 2 turns. Kind on a monster.'},
-      {key:'sensible_pepper',name:'One Pepper, Sensible Size',vp:2,elem:['cozy'],stat:'pow',mult:1.4,target:'enemy',weight:'standard',o3:true,pepper:true,
-        fx:[['burn',1]],desc:'Try one supposedly sensible pepper. Hits one enemy and +1 Heartburn.'},
+      {key:'pepper_breath',name:'Pepper Breath',vp:2,elem:['cozy'],stat:'pow',mult:1.4,target:'enemy',weight:'standard',o3:true,pepper:true,
+        fx:[['burn',1]],desc:'One homegrown cayenne, then a cone of pepper fire. Hits one enemy and +1 Heartburn.'},
       {key:'seeds_of_trouble',name:'Seeds of Trouble',vp:4,elem:['cozy'],stat:'pow',mult:1.4,target:'row',weight:'standard',o3:true,pepper:true,
         fx:[['burn',1]],desc:'Tap a pepper seed packet across a row. Hits the row and +1 Heartburn.'},
       {key:'mild_for_company',name:'Mild for Company',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,pepper:true,
         fx:[['heal',.25,.4,'t'],['cure','amber','t'],['burn',1]],desc:'A genuinely mild pepper broth. Heals a friend 25%, clears Amber-Stuck, and +1 Heartburn. Kind on a monster.'},
       {key:'nineteen_seventy',name:'In Nineteen Seventy',vp:4,elem:['chatter'],target:'all',weight:'heavy',o3:true,kindFoe:25,
         fx:[['ctq',.20,'t']],desc:'Begin the college story in its proper year. Delays every enemy and gently cheers them up.'},
-      {key:'jar_lid_negotiations',name:'Jar-Lid Negotiations',vp:5,elem:['kinetic'],stat:'pow',mult:1.6,target:'splash',weight:'heavy',o3:true,
-        fx:[['shieldBreak','t'],['st','guard',1,'self']],desc:'Make a stuck lid reconsider. Hits one enemy and its neighbors, breaks its shield, and Boppy guards.'}
+      {key:'five_alarm_jar',name:'Five-Alarm Jar',vp:5,elem:['kinetic'],stat:'pow',mult:1.6,target:'splash',weight:'heavy',o3:true,
+        fx:[['shieldBreak','t'],['st','guard',1,'self']],desc:'His pickled ghost peppers set off the fire alarm. Hits one enemy and its neighbors, breaks its shield, and Boppy guards.'},
+      // Ultimates (phase 5b). Primary versions from Option 2 (Boppy's Kit Table). Nobody Gets Past is the registry's shield
+      // (40% less damage); turns knocked back 80% is a positive ct (as Amy's detention_ult). Animations: the "Option 3
+      // Ultimates" IIFE at the end of engine/boppy-moves.js (prefix b5_).
+      {key:'fish_ult',name:'The One That Got Away',vp:8,elem:['splash'],stat:'pow',mult:3.6,target:'all',weight:'heavy',o3:true,
+        fx:[['st','nobody_gets_past',2,'party'],['steal','t'],['st','stunned',1,'t']],
+        desc:'Ultimate. Boppy reels in the legendary catfish, and it gets bigger every time he tells it. It belly-flops on every enemy: steals a buff from each, Stuns them, and the party takes 40% less damage for 2 turns.'},
+      {key:'xc_ult',name:'Van Cortlandt Park \'70',vp:8,elem:['kinetic'],stat:'pow',mult:3.9,target:'all',weight:'heavy',o3:true,
+        fx:[['burn',3],['ct',.8,'t'],['st','personal_best',2,'self']],
+        desc:'Ultimate. Back to the 1970 cross-country race, in sepia. Boppy laps every enemy three times and breaks the tape: huge hit on all of them, their turns knocked back 80%, Heartburn maxed, and Personal Best for 2 turns.'}
     ]},
   tnb:{
     basic:{key:'basic',name:'Mug Toss',elem:['kinetic'],stat:'warmth',mult:1,target:'enemy',weight:'standard',
@@ -456,22 +499,22 @@ const B2_SKILLS={
     // legacy resolver; only the animation is new (RECRUIT_MOVES.tnb.wardrobeShow, engine/tnb-moves.js). Quick Change
     // and WARDROBE advance the costume rack; nothing else does.
     o3:[
-      {key:'clay_offcut',name:'Clay Offcut',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
-        desc:'Flick one harmless clay curl at an enemy. Free, and gives +1 VP.'},
+      {key:'mug_toss',name:'Mug Toss',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
+        desc:'A slightly crooked test mug, lobbed at an enemy. Free, and gives +1 VP.'},
       {key:'wardrobe',sig:true,name:'WARDROBE',vp:4,elem:['sparkle'],target:'allyko',weight:'standard',kind:'signature',o3:true,fx:[['revive',.6,'t'],['heal',.5,0,'t'],['st','fresh',3,'t'],['rack','t']],
         desc:'Help a friend recover and find their next costume. Revives a fallen ally at 60%, or heals 50%, with a one-time auto-revive and the next costume on the rack.'},
       {key:'quick_change',name:'Quick Change',vp:2,elem:['sparkle'],target:'ally',weight:'quick',o3:true,kindFoe:25,
         fx:[['cure','one','t'],['rack','t']],desc:'Clear one debuff and dress a friend in the next rack costume. Kind on a monster.'},
       {key:'continuity_pins',name:'Continuity Pins',vp:3,elem:['sparkle'],target:'ally',weight:'standard',o3:true,kindFoe:30,
         fx:[['heal',.25,.4,'t'],['st','guard',1,'t'],['heal',.10,0,'tom']],desc:'Pin a friend safely back together. Heals 25% and Guards them for 1 turn; Tom gets a small extra check. Kind on a monster.'},
-      {key:'lost_found_warmth',name:'Lost-and-Found Warmth',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:25,
-        fx:[['heal',.20,.4,'t'],['cure','amber','t']],desc:'A warm scarf from the lost-and-found. Heals a friend 20% and clears Amber-Stuck. Kind on a monster.'},
-      {key:'practical_effects',name:'Practical Effects',vp:4,elem:['sparkle'],stat:'warmth',mult:1.6,target:'enemy',weight:'standard',o3:true,
-        fx:[['interrupt','t']],desc:'A clearly fake horror effect at exactly the right moment. Hits one enemy and cancels its wind-up.'},
+      {key:'metro_tap',name:'Metro Tap Card',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:25,
+        fx:[['heal',.20,.4,'t'],['cure','amber','t']],desc:'He taps his Metro card and a light-rail train stops right at a friend. Heals 20% and clears Amber-Stuck. Kind on a monster.'},
+      {key:'slasher_scare',name:'Slasher Jump Scare',vp:4,elem:['sparkle'],stat:'warmth',mult:1.6,target:'enemy',weight:'standard',o3:true,
+        fx:[['interrupt','t']],desc:'Lights out. A masked slasher lunges from behind the enemy. Hits one enemy and cancels its wind-up.'},
       {key:'rush_hour_racks',name:'Rush-Hour Racks',vp:5,elem:['kinetic'],stat:'pow',mult:1.5,target:'row',weight:'standard',o3:true,
         fx:[['st','grit_down',2,'t']],desc:'Steer a crowded costume rack through a row. Hits them and lowers GRIT 25% for 2 turns.'},
-      {key:'clay_pigeon',name:'Clay Pigeon, Literally',vp:2,elem:['kinetic'],stat:'hybrid',mult:1.4,target:'enemy',weight:'quick',crit:.15,o3:true,
-        desc:'Throw a tiny bird made of soft clay. Hits one enemy with +15% crit chance.'},
+      {key:'dadjoke_pottery',name:'Dad-Joke Pottery',vp:2,elem:['kinetic'],stat:'hybrid',mult:1.4,target:'enemy',weight:'quick',crit:.15,o3:true,
+        desc:'A heavy wet terracotta pigeon, then the pun. Hits one enemy with +15% crit chance (the pun does the psychic damage).'},
       {key:'cone_six',name:'Cone Six, Please',vp:4,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:25,
         fx:[['heal',.25,.4,'t'],['cure','amber','t'],['st','kiln_glow',2,'t']],desc:'A careful warming glaze. Heals a friend 25%, clears Amber-Stuck, and WARMTH and COOL +25% for 2 turns. Kind on a monster.'},
       {key:'curb_appeal',name:'Curb Appeal',vp:4,elem:['kinetic'],stat:'pow',mult:1.4,target:'row',weight:'quick',o3:true,
@@ -479,12 +522,21 @@ const B2_SKILLS={
       {key:'fix_wobble',name:'Fix the Wobble',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
         fx:[['heal',.20,.4,'t'],['vp',2,'t']],desc:'Find the little thing making a friend unsteady. Heals 20% and restores 2 VP. Kind on a monster.'},
       {key:'kiln_door_policy',name:'Kiln Door Policy',vp:6,elem:['cozy'],stat:'warmth',mult:1.9,target:'enemy',weight:'heavy',o3:true,
-        fx:[['shieldBreak','t'],['interrupt','t']],desc:'Close the kiln door on a bad idea. Hits one enemy, breaks its shield and cancels its wind-up.'}
+        fx:[['shieldBreak','t'],['interrupt','t']],desc:'Close the kiln door on a bad idea. Hits one enemy, breaks its shield and cancels its wind-up.'},
+      // Ultimates (phase 5b). Primary versions from Option 2 (TNB's Kit Table). rack on the party dresses each friend in the
+      // next costume on the Quick-Change Rack; Wardrobe Fresh is the registry's 'fresh'; Tom's turn up 50% is a negative ct on
+      // the member id (as Nara's Lonely Howl). Animations: the "Option 3 Ultimates" IIFE at the end of engine/tnb-moves.js (t5_).
+      {key:'wrap_ult',name:'That\'s a Wrap!',vp:8,elem:['sparkle'],stat:'warmth',mult:3.5,target:'all',weight:'heavy',o3:true,
+        fx:[['heal',.4,.4,'party'],['rack','party'],['st','wardrobe_fresh',2,'party']],
+        desc:'Ultimate. The walkie calls the wrap. TNB pushes the wardrobe racks through the family (heals 40%, a fresh costume each, Wardrobe Fresh for 2 turns), then the crew strikes the set onto every enemy.'},
+      {key:'hillbomb_ult',name:'Baxter Street Bomb',vp:8,elem:['kinetic'],stat:'hybrid',mult:3.9,target:'all',weight:'heavy',o3:true,
+        fx:[['st','evasive',3,'self'],['st','staggered',1,'t'],['ct',-.5,'tom']],
+        desc:'Ultimate. TNB bombs down Baxter Street, lobbing seconds mugs on the way, and Bert-slides through every enemy: huge hit on all and Stagger, TNB is Evasive for 3 turns, and Tom\'s turn comes up 50% sooner.'}
     ]},
   nara:{
     basic:{key:'basic',name:'Jump Up',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',fx:[['coins',5,15]],
       desc:'Muddy paws. Free, +1 VP, and she steals a few coins.'},
-    special:{key:'puppy',name:'PUPPY EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',fx:[['smit',1,'t']],
+    special:{key:'puppy',name:'HUMAN EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',fx:[['smit',1,'t']],
       desc:'The head tilt. The enemy is Smitten and skips its next turn (bosses: 45%).'},
     skills:[
       {key:'fetch',name:'Fetch',vp:2,elem:['kinetic'],stat:'pow',mult:1.6,target:'enemy',weight:'standard',critAfterTom:true,
@@ -502,34 +554,43 @@ const B2_SKILLS={
       {key:'howl',name:'Lonely Howl',vp:4,elem:['chatter'],target:'all',weight:'standard',fx:[['st','cooldown',3,'t',.3],['ct',-2,'tom']],
         desc:'A pack howl. Enemy COOL -30%, and Tom (or TNB) jumps to the front of the ribbon.'}
     ],
-    // Option 3 Primary kit (phase 4). Cards: adventures-of-tom-ability-revamp.md (Nara). PUPPY EYES (sig:true) keeps its
+    // Option 3 Primary kit (phase 4). Cards: adventures-of-tom-ability-revamp.md (Nara). HUMAN EYES (sig:true, renamed from PUPPY EYES) keeps its
     // legacy resolver (smit). Signature key: the doc names it puppy_eyes (legacy key puppy), so RECRUIT_MOVES.nara.puppy_eyes
     // and LINES.nara.puppy_eyes exist (same words as puppy, so its baked clips play). Nara never speaks words.
     o3:[
-      {key:'happy_hip_check',name:'Happy Hip Check',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'quick',o3:true,fx:[['coins',5,15]],
-        desc:'Bump one enemy with an enthusiastic hip. Free, +1 VP, and she shakes loose a few coins.'},
-      {key:'puppy_eyes',sig:true,name:'PUPPY EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',o3:true,fx:[['smit',1,'t']],
-        desc:'Give one enemy the full look. A regular enemy is Smitten and skips its next turn (bosses: 45%).'},
-      {key:'ball_please',name:'Ball, Please',vp:2,elem:['kinetic'],stat:'pow',mult:1.5,target:'enemy',weight:'quick',critAfterTom:true,o3:true,
-        desc:'Bank a tennis ball into one enemy. Always crits if Tom acted right before Nara.'},
-      {key:'five_second_zoomies',name:'Five-Second Zoomies',vp:4,elem:['kinetic'],stat:'pow',mult:.4,hits:4,target:'multi',weight:'quick',o3:true,
-        fx:[['st','pep_up',2,'self',.20]],desc:'Four inconvenient places, very quickly. Four random hits, and her PEP +20% for 2 turns.'},
-      {key:'trade_you',name:'Trade You',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.25,.4,'t'],['cure','amber','t']],desc:'Offer a precious piece of chicken jerky. Heals a friend 25% and clears Amber-Stuck. Kind on a monster.'},
-      {key:'keepaway_rules',name:'Keep-Away Rules',vp:4,elem:['kinetic'],stat:'pow',mult:1.6,target:'enemy',weight:'standard',o3:true,
-        fx:[['steal','t'],['interrupt','t']],desc:'Take a dangerous toy out of circulation. Hits, cancels its wind-up and steals one buff.'},
-      {key:'no_ball_left',name:'No Ball Left Behind',vp:5,elem:['kinetic'],stat:'pow',mult:1.5,target:'row',weight:'standard',o3:true,
-        fx:[['st','hooked',2,'t']],desc:'Check under the whole enemy row. Hits them and stops their dodging for 2 turns.'},
-      {key:'paw_on_shoe',name:'Paw on Your Shoe',vp:2,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.25,.4,'t'],['cure','mental','t']],desc:'One reassuring paw on a friend\'s shoe. Heals 25% and clears mental debuffs. Kind on a monster.'},
+      {key:'jump_up',name:'Jump Up',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'quick',o3:true,fx:[['coins',5,15]],
+        desc:'Both front paws, right on it. Her worst habit. Free, +1 VP, and she shakes loose a few coins.'},
+      {key:'puppy_eyes',sig:true,name:'HUMAN EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',o3:true,fx:[['smit',1,'t']],
+        desc:'Her eyes look eerily human. A regular enemy is Smitten and skips its next turn (bosses: 45%).'},
+      {key:'tennis_ball_fetch',name:'Tennis Ball Fetch',vp:2,elem:['kinetic'],stat:'pow',mult:1.5,target:'enemy',weight:'quick',critAfterTom:true,o3:true,
+        desc:'She rockets after the ball, straight through one enemy. Always crits if Tom acted right before Nara.'},
+      {key:'dont_leave_me',name:'Don\'t Leave Me!',vp:4,elem:['kinetic'],stat:'pow',mult:.4,hits:4,target:'multi',weight:'quick',o3:true,
+        fx:[['st','pep_up',2,'self',.20]],desc:'Somebody steps away. AWOOOO, then frantic laps. Four random hits, and her PEP +20% for 2 turns.'},
+      {key:'just_one_bite',name:'Just One Bite?',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
+        fx:[['heal',.25,.4,'t'],['cure','amber','t']],desc:'Drool, head tilt, paw tap. The friend shares. Heals a friend 25% and clears Amber-Stuck. Kind on a monster.'},
+      {key:'counter_surfer',name:'Counter Surfer',vp:4,elem:['kinetic'],stat:'pow',mult:1.6,target:'enemy',weight:'standard',o3:true,
+        fx:[['steal','t'],['interrupt','t']],desc:'Paws on the counter; she snatches its snack and runs. Hits, cancels its wind-up and steals one buff.'},
+      {key:'stranger_alert',name:'Stranger Alert',vp:5,elem:['kinetic'],stat:'pow',mult:1.5,target:'row',weight:'standard',o3:true,
+        fx:[['st','hooked',2,'t']],desc:'Strangers on her street. Bark bark bark: the row freezes. Hits them and stops their dodging for 2 turns.'},
+      {key:'doodle_fluff',name:'Doodle Fluff',vp:2,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
+        fx:[['heal',.25,.4,'t'],['cure','mental','t']],desc:'A huge shake of curls, then she flops on a friend like a warm blanket. Heals 25% and clears mental debuffs. Kind on a monster.'},
       {key:'shake_everyone',name:'Shake It Off, Everyone',vp:4,elem:['splash'],target:'party',weight:'standard',o3:true,kindFoe:25,
         fx:[['heal',.15,.4,'party'],['cure','one','party']],desc:'A slightly damp reset. The party heals 15% and each friend loses one debuff. Kind on a monster.'},
       {key:'not_leaving',name:'Not Leaving',vp:5,elem:['cozy'],target:'allyko',weight:'heavy',o3:true,
         fx:[['revive',.25,'t'],['ift','tom',[['cure','debuff','t']],[]]],desc:'Stay with a fallen friend until they get up at 25% HP. Tom also loses all his debuffs.'},
-      {key:'puddle_geography',name:'Puddle Geography',vp:3,elem:['splash'],stat:'pow',mult:1.3,target:'front',weight:'standard',o3:true,
-        fx:[['ctq',.20,'t']],desc:'One tiny excited puddle. The front row takes a ridiculous detour and loses time.'},
+      {key:'happy_puddle',name:'Happy Puddle',vp:3,elem:['splash'],stat:'pow',mult:1.3,target:'front',weight:'standard',o3:true,
+        fx:[['ctq',.20,'t']],desc:'She is SO excited. A happy puddle; the front row slips and loses time.'},
       {key:'food_inspector',name:'Family Food Inspector',vp:5,elem:['cozy'],target:'party',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.18,.4,'party'],['cure','amber','party']],desc:'Approve the homemade meal. The party heals 18% and clears Amber-Stuck. Kind on a monster.'}
+        fx:[['heal',.18,.4,'party'],['cure','amber','party']],desc:'Approve the homemade meal. The party heals 18% and clears Amber-Stuck. Kind on a monster.'},
+      // Ultimates (phase 5b). Primary versions from Option 2 (Nara's Kit Table). kindFoe dropped on The Unsent Scent (all-enemies
+      // moves have no kind branch); its revive is capped at 50% (B8_FX.cap) and only for Tom (skipped if he is not in the party).
+      // Animations: the "Option 3 Ultimates" IIFE at the end of engine/nara.js (nu_).
+      {key:'squirrel_ult',name:'CHAIRMAN CHEEKS!',vp:7,elem:['kinetic'],stat:'pow',mult:3.7,target:'all',weight:'heavy',o3:true,
+        fx:[['shieldBreak','t','Chairman Cheeks runs right through the shield. So does Nara!'],['st','staggered',1,'t'],['st','pep_up',3,'party']],
+        desc:'Ultimate. Chairman Cheeks, the smug squirrel, shows up behind the enemies. Nara chases him five laps through all of them: huge hit on all, breaks shields and Staggers them, and the party gets PEP Up for 3 turns.'},
+      {key:'pack_ult',name:'The Unsent Scent',vp:8,elem:['cozy'],stat:'hybrid',mult:3.8,target:'all',weight:'heavy',o3:true,
+        fx:[['revive',.5,'tom'],['heal',.45,.4,'party'],['scent',3,'t']],
+        desc:'Ultimate. Alone in the grey, Nara catches one golden crumb of home and follows the scent through every enemy (huge hit on all, Tracked Scent for 3 turns) into Tom\'s arms: Tom gets back up at 50% if he was down, and the party heals 45%.'}
     ]}
 };
 function b2Kit(id) { return B2_SKILLS[id]||B2_SKILLS.tom; }
@@ -627,7 +688,7 @@ const B2_FOES={
           {name:'Card Toss',stat:'pow',mult:.8,elem:'kinetic',target:'all',every:3,msg:'{e} throws every card it has! Paper cuts for everyone!'}]},
   // The Director's Cut (chapter 4 boss, engine/battle2.js B2_DIRECTOR): every third turn it telegraphs CUT! (the next
   // person on the turn ribbon loses their turn) or Take Two (it heals itself), taking turns. Below half HP two Extra
-  // Extras walk on and it braces behind a shield for That's a Wrap on everyone (Glaze & Bake or any Tombo breaks it;
+  // Extras walk on and it braces behind a shield for That's a Wrap on everyone (Popcorn Jump or any Tombo breaks it;
   // so do 3 Cozy hits). Un-Grump route: GREAT TAKE! (▼ Care & Bag) three times.
   directorscut:{level:7,hp:760,pow:22,grit:15,warmth:16,cool:13,pep:11,weak:['sparkle','cozy'],resist:['chatter'],step:4,boss:'directorscut',noRun:true,
     praise:{label:'GREAT TAKE!',sub:'Free · tell it what it never hears',need:3,
@@ -910,7 +971,7 @@ const B2_MARSH_LIKES=['boppy.grumble','boppy.trackstar','boppy.recliner','rose.s
 const B2_SET_LIKES=['tnb.wardrobe','tnb.quickchange','tnb.metro','nara.puppy','tom.starter'];
 // Long Island Elementary (chapter 5) is Amy's turf: a good pep talk goes a long way with school stuff.
 const B2_SCHOOL_LIKES=['amy.pep','amy.pb','grace.dance','rose.silly','grace.squishy'];
-// Old Oak Park (chapter 6): the squirrels' crew. Nara's puppy eyes and TNB's charm go a long way; so does bread.
+// Old Oak Park (chapter 6): the squirrels' crew. Nara's human eyes and TNB's charm go a long way; so does bread.
 const B2_OAK_LIKES=['nara.puppy','tnb.metro','tnb.wardrobe','tom.starter','tnb.quickchange'];
 // The Stacks (chapter 7): old books like to be read, and like a good show. Grace's channel goes over very well.
 const B2_STACKS_LIKES=['grace.subscribe','grace.dance','grace.squishy','rose.silly','rose.peekaboo'];
@@ -991,24 +1052,24 @@ const B2_HEART={cap:100,basic:5,care:15,weak:15,hurt:10,calm:20,boss:25};
 // Fields like a skill (elem, stat, mult, target, fx) plus partner, tier, cost, kindV (Warmth to the enemies it targets
 // or, for party Tombos, to every enemy), and the animation in B2_TOMBO_ANIM (engine/battle2-kind.js).
 const B2_TOMBOS=[
-  {id:'grace1',partner:'grace',tier:1,cost:25,flag:'tombo:grace1',name:'Dumpling Unboxed',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
+  {id:'grace1',partner:'grace',tier:1,cost:25,flag:'tombo:grace1',name:'Hi Guys, Welcome Back!',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
     fx:[['heal',.35,0,'party'],['cure','debuff','party']],
-    desc:'Tom unboxes, Grace squeezes the gold dumpling. The party heals 35% and loses its debuffs, and every enemy warms up.'},
-  {id:'rose1',partner:'rose',tier:1,cost:25,flag:'tombo:rose1',name:'Double-Decker Boop',elem:['kinetic'],stat:'pow',mult:2.2,target:'enemy',weight:'standard',
+    desc:'Grace films a video on Tom’s phone; his thumb is in the shot. Her gold dumpling floats up and lands on the monsters, giant. The party heals 35% and loses its debuffs, and every enemy warms up.'},
+  {id:'rose1',partner:'rose',tier:1,cost:25,flag:'tombo:rose1',name:'Double-Decker Airplane',elem:['kinetic'],stat:'pow',mult:2.2,target:'enemy',weight:'standard',
     fx:[['st','stunned',1,'t'],['mount']],
-    desc:'Rose rides Tom into battle and boops it from the top. A big Kinetic hit, it sees stars (loses its next turn), and Rose stays up on Tom’s shoulders.'},
-  {id:'deedee1',partner:'deedee',tier:1,cost:25,flag:'tombo:deedee1',name:'Sourdough & Rhubarb',elem:['cozy'],target:'party',weight:'standard',
-    fx:[['heal',.65,0,'party'],['cure','amber','party'],['crust',2]],
-    desc:'Tom bakes a loaf, Deedee serves rhubarb crisp and a group hug. The party heals 65%, Amber melts away, and 2 Warm Crusts go on the tray.'},
-  {id:'tnb1',partner:'tnb',tier:1,cost:25,flag:'tombo:tnb1',name:'Glaze & Bake',elem:['cozy'],stat:'hybrid',mult:2.4,target:'all',weight:'standard',
+    desc:'Rose rides Tom’s shoulders and they fly a loop through the monsters like a biplane, then she leans down and boops its nose. A big Kinetic hit, it sees stars (loses its next turn), and Rose stays up on Tom’s shoulders.'},
+  {id:'deedee1',partner:'deedee',tier:1,cost:25,flag:'tombo:deedee1',name:'Wine and Gossip',elem:['cozy'],target:'party',weight:'standard',
+    fx:[['heal',.60,0,'party'],['cure','amber','party'],['crust',2]],
+    desc:'Tom and Deedee gossip about the monster over a glass of wine until it shrinks with embarrassment, then Deedee brings out the crisp. The party heals 60%, Amber melts away, and 2 Warm Crusts go on the tray.'},
+  {id:'tnb1',partner:'tnb',tier:1,cost:25,flag:'tombo:tnb1',name:'Popcorn Jump',elem:['cozy'],stat:'hybrid',mult:2.4,target:'all',weight:'standard',
     fx:[['st','kilnglow',3,'party']],
-    desc:'Tom preheats the Dutch oven, TNB carves in on his longboard and opens the kiln. A big Cozy hit on every enemy, and the party glows: WARMTH and COOL +25% for 3 turns.'},
-  {id:'nara1',partner:'nara',tier:1,cost:25,flag:'tombo:nara1',name:'Boule Fetch',elem:['kinetic'],stat:'pow',mult:2.3,target:'enemy',weight:'standard',crit:1,
-    fx:[['take','t'],['heal',.3,0,'partner']],
-    desc:'Tom throws a golden sourdough boule, Nara chases it right through the enemy. A sure critical Kinetic hit, she steals its item (or coins), and she heals 30%.'},
-  {id:'boppy1',partner:'boppy',tier:1,cost:25,flag:'tombo:boppy1',name:'Quiet on the Pier',elem:['splash'],stat:'pow',mult:2.1,target:'all',weight:'standard',
+    desc:'Movie night. The slasher jumps out, so does Tom, and the giant popcorn bowl rains on every enemy. A big Cozy hit on every enemy; TNB laughs and kisses him, and the party glows: WARMTH and COOL +25% for 3 turns.'},
+  {id:'nara1',partner:'nara',tier:1,cost:25,flag:'tombo:nara1',name:'Sit. Paw. Treat.',elem:['kinetic'],stat:'pow',mult:2.3,target:'enemy',weight:'standard',crit:1,
+    fx:[['scent',3,'t'],['heal',.2,0,'tom'],['heal',.2,0,'partner']],
+    desc:'Tom holds up a treat. Nara sits, then gives him her paw so hard a giant paw slams down on the enemy. A sure critical Kinetic hit, the enemy is marked with her scent (Tracked Scent for 3 turns), and Tom and Nara each heal 20%.'},
+  {id:'boppy1',partner:'boppy',tier:1,cost:25,flag:'tombo:boppy1',name:'You Hold the Net',elem:['splash'],stat:'pow',mult:2.1,target:'all',weight:'standard',
     fx:[['row','front','t'],['st','grumbled',3,'t']],
-    desc:'Tom holds the tackle box and shushes everybody; Boppy casts and grumbles. A Splash hit on every enemy, the back row gets reeled to the front, and they all hit 30% softer for 3 turns.'},
+    desc:'Tom holds the net, Boppy fishes, and they scoop every enemy out of the water in one huge net and dump them on the pier. A Splash hit on every enemy, the back row lands in the front, and they all hit 30% softer for 3 turns.'},
   {id:'amy1',partner:'amy',tier:1,cost:25,flag:'tombo:amy1',name:'On Your Marks',elem:['kinetic','sparkle'],stat:'pow',mult:2.2,target:'all',weight:'standard',
     fx:[['st','pepup',3,'party']],
     desc:'Tom holds up his stopwatch, Amy runs straight through every enemy. A Kinetic and Sparkle hit on all of them, and the party is faster (PEP +30%) for 3 turns.'}

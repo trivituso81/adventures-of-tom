@@ -69,7 +69,7 @@ function endIntro() {
   for(const k of intro.noGo) { if(typeof k==='string') town.npcNoGo.delete(k); else k.map.npcNoGo.delete(k.k); }
   intro.noGo=[]; intro.fadeLock=false; intro.card=null;
   player.hidden=false; player.scr=null; player.lift=0;
-  for(const f of followers) { f.hidden=false; f.scr=null; f.lift=0; f.depthBias=0; f.noShadow=false; }
+  for(const f of followers) { f.hidden=false; f.scr=null; f.lift=0; f.depthBias=0; f.noShadow=false; f.seat=false; }
 }
 
 // ---------- Step helpers ----------

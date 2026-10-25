@@ -76,6 +76,7 @@ function drawBattle() {
       frame=koE<.16?sp.idle:koFrame(sp);
       koSink=koE<.16?Math.round(koE/.16*8):-Math.round(Math.max(0,Math.sin(Math.min(1,(koE-.16)/.3)*Math.PI))*5);
     }
+    if(!down&&battle.v2&&roseSeatBattle(m,i,frame,sp,fx,hurt,t)) { activeTint=null; return; }   // sitting on Tom (engine/rose-ride.js)
     const w=frame[0].length*sp.scale,h=frame.length*sp.scale;
     let hop=cheering?Math.round(Math.abs(Math.sin(t*8))*20):dancing?Math.round(Math.abs(Math.sin(t*9))*16):(twirling?Math.round(Math.abs(Math.sin(t*9))*10):(silly?Math.round(Math.abs(Math.sin(t*10))*22):0));
     if(coaching) hop=Math.round(Math.abs(Math.sin(t*7))*14);
@@ -142,11 +143,12 @@ function drawBattle() {
       if(i===battle.actor) battle.actorPos={cx,base,h};
     }
     if(hidden) return;
+    if(battle.v2&&m.id==='rose'&&fx.path&&!rot&&!down&&roseSeatNear(...(B2.aim&&i===battle.actor?b2WarpPt(cx,base):[cx,base]))&&roseSeatBattle(m,i,frameOverride||frame,sp,fx,hurt,t,true)) { activeTint=null; return; }
     { const rp=b2RidePos(m,i); if(rp) { cx=rp.cx; base=rp.base; noShadow=true; } }
     // While a move is aimed at enemies away from the old Grump spot, the actor's body follows the same warp as the scene.
     if(B2.aim&&i===battle.actor) { const wp=b2WarpPt(cx,base); cx=Math.round(wp[0]); base=Math.round(wp[1]); }
     const x=cx-w/2-(punching&&!sp.noShift?sp.scale*3:0),y=base-h;
-    battle.drawnAt[i]={cx,base,h};
+    battle.drawnAt[i]={cx,base,h,x,w};
     if(!noShadow) ellipse(cx,base+3,w*.55*pathSc,6*pathSc,'rgba(47,73,54,.3)');
     if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
     else if(rot!==0||pathSc!==1||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
@@ -179,6 +181,7 @@ function drawBattle() {
       activeKneelCut=0;
       if(sp.handAt) RFX.postParty(i,sp,fr3,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0));
     }
+    if(battle.v2) roseSeatFront(m);   // Rose's shoes on Tom's shoulders
     if(coaching) {
       // Whistle sparks over the coach, and little arrows over everyone she is firing up.
       label(Math.floor(t*6)%2?'!':'!!',cx,y-22,'#ffe08a',3);

@@ -372,7 +372,10 @@ html.landscape #menu,html.landscape #shop{padding:8px}
 #preview-note{position:absolute;z-index:10;left:50%;top:45%;transform:translate(-50%,-50%);width:min(85%,460px);padding:18px 20px;background:#fff5dff5;border:2px solid #5c735b;border-radius:15px;box-shadow:0 5px 0 #203a32a8;text-align:center;color:#344d3c;pointer-events:none;font-family:system-ui,sans-serif}
 #preview-note strong{display:block;font-size:18px;margin-bottom:8px}
 #preview-note span{display:block;font-size:13px;line-height:1.55}
-.js-running #preview-note{display:none}
+.js-on #preview-note{display:none}
+html.js-stuck #preview-note{display:block}
+#preview-note{pointer-events:auto;cursor:pointer;text-decoration:none}
+#preview-note em{display:inline-block;margin-top:10px;padding:7px 14px;border-radius:6px;background:#f0c75a;color:#1a1e26;font-style:normal;font-weight:800;letter-spacing:1px;font-size:12px}
 @media(max-width:500px){#preview-note{top:48%;width:82%;padding:15px}#preview-note strong{font-size:16px}#preview-note span{font-size:12px}}
 </style>
 <style id="theme-slate">
@@ -781,13 +784,24 @@ html.landscape .msave-box .save-row{padding:5px 9px}
 html.landscape .msave-box .mquit-title{font-size:15px}
 html.landscape .msave-box .mquit-btns .save-btn{padding:8px}
 html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-bottom:4px}
+/* Dialogue portraits: party members show their face beside the text (engine/overworld.js setDialogPortrait).
+   64px art drawn at 4/3 so each art pixel is exactly 4 screen pixels on a 3x iPhone (3 in landscape). */
+#dialog-portrait{position:absolute;left:22px;top:26px;width:calc(64px * 4 / 3 + 4px);height:calc(64px * 4 / 3 + 4px);border:2px solid var(--edge);border-radius:4px;background:var(--w-deep);box-shadow:0 0 0 2px var(--edge-ink);overflow:hidden;pointer-events:none}
+#dialog-portrait img{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+#dialog.has-portrait #dialog-text,#dialog.has-portrait #dialog-choices{margin-left:calc(64px * 4 / 3 + 18px)}
+#dialog.has-portrait #dialog-text{min-height:calc(64px * 4 / 3 + 4px)}
+@media(max-width:600px){#dialog-portrait{left:18px;top:24px}}
+html.landscape #dialog-portrait{left:calc(16px + env(safe-area-inset-left));top:18px;width:68px;height:68px}
+html.landscape #dialog.has-portrait #dialog-text,html.landscape #dialog.has-portrait #dialog-choices{margin-left:80px}
+html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 </style>
+<script>(function(){var d=document.documentElement;d.classList.add('js-on');setTimeout(function(){if(!d.classList.contains('js-running'))d.classList.add('js-stuck');},12000);document.addEventListener('click',function(e){var n=e.target.closest&&e.target.closest('#preview-note');if(n){e.preventDefault();location.reload();}});})();</script>
 </head>
 <body>
 <div id="stage">
 <main id="game" aria-label="The Adventures of Tom, a family JRPG">
   <canvas id="world" tabindex="0" aria-label="Town game. Use arrow keys to move and Enter to interact."></canvas>
-  <div id="preview-note" role="note"><strong>Preview only — tap to play in a browser</strong><span>This file viewer does not run interactive games. Use Share / Open in Safari if available, or publish this HTML as a webpage to play.</span></div>
+  <a id="preview-note" role="alert" href="https://claude.ai/artifact/HzHh5DBHsbnyNrAvEFZ4V1" target="_top"><strong>The game did not load</strong><span>Some game files could not be fetched. This usually means the Home Screen shortcut points at an old, expired copy of the page. Tap to try again. If it keeps happening, open the game from its claude.ai link and add it to your Home Screen again.</span><em>TRY AGAIN</em></a>
   <header id="hud">
     <div class="brand"><div class="brand-mark" aria-hidden="true">&#10047;</div><div class="brand-copy"><div class="eyebrow" id="eyebrow">LONG ISLAND / THE SQUARE</div><h1 id="area-name">The Square</h1><div id="objective" hidden><div class="obj-head"></div><div class="obj-text"></div></div></div><span class="brand-chev" aria-hidden="true">&#9662;</span></div>
     <div class="progress" aria-label="Buildings visited"><div id="visitCount">0 / 10</div><div class="progress-label">DOORS</div></div>
@@ -810,7 +824,7 @@ html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-b
     <div id="desktop-help">ARROWS / WASD TO WANDER &nbsp; &middot; &nbsp; ENTER TO CHAT &nbsp; &middot; &nbsp; M FOR MENU</div>
   </div>
   <section id="dialog" role="dialog" aria-labelledby="speaker" hidden>
-    <div id="speaker"></div><div id="dialog-text"></div>
+    <div id="speaker"></div><div id="dialog-portrait" aria-hidden="true" hidden><img alt=""></div><div id="dialog-text"></div>
     <div id="dialog-choices" hidden></div>
     <div class="dialog-footer"><span id="dialog-cue">Tap here or press A / Enter</span><span><span id="dialog-page"></span><span class="continue-arrow" aria-hidden="true">&#9662;</span></span></div>
   </section>
@@ -901,6 +915,13 @@ html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-b
 <script src="engine/audio.js"></script>
 <script src="data/lines.js"></script>
 <script src="data/voice-clips.js"></script>
+<script src="data/voice/tom.js"></script>
+<script src="data/voice/grace.js"></script>
+<script src="data/voice/rose.js"></script>
+<script src="data/voice/amy.js"></script>
+<script src="data/voice/deedee.js"></script>
+<script src="data/voice/boppy.js"></script>
+<script src="data/voice/tnb.js"></script>
 <script src="engine/speech.js"></script>
 <script src="engine/battle-state.js"></script>
 <script src="data/battle-sprites.js"></script>
@@ -925,6 +946,8 @@ html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-b
 <script src="engine/battle2-moves.js"></script>
 <script src="engine/battle2-kind.js"></script>
 <script src="engine/battle2-traits.js"></script>
+<script src="data/rose-ride.js"></script>
+<script src="engine/rose-ride.js"></script>
 <script src="engine/battle2-effects.js"></script>
 <script src="engine/progress.js"></script>
 <script src="engine/feel.js"></script>
@@ -965,3 +988,19 @@ html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-b
 <script src="data/songs.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

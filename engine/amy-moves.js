@@ -557,3 +557,398 @@ A.negative_split=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
     [hit,()=>{ E2.apply(); sfx.heal(); sfx.levelUp(); scene('av_big',1.3,{x:plan.lx,y:plan.ly-30,txt:'NEGATIVE SPLIT!',c:MINT,sc:3}); for(const q of who) { const P=ST.unit(q); scene('av_glow',.9,{x:P.x,y:P.mid,c:'#ffb45a'}); hopOf(q!==m?q:null); } }],
     [4300,'end',foe?kindLine(foe):'Faster in the second half. The party picks up the pace.']]); };
 })();
+
+// ================= Option 3 Ultimates (phase 5b, 2026-10-24) =================
+// Amy's two Primary Ultimates (Option 2 cards, option3-implementation-brief.md core rule 2), held to the move review rules:
+// Amy for real. Detention Forever (A6): the last bell rings, a chalkboard slams down behind every enemy, she stands at a
+// podium and taps her pointer three times, the wall clock is about to hit 3:00 and she winds it back an hour (ONE MORE HOUR),
+// giant chalk writes I WILL NOT CAUSE FRICTION for them, SEE ME, and the board blows apart in erasers, chalk dust and red-pen
+// report cards; every enemy is circled in red ink and the apple on her podium pops into +3 VP for the party. Boston Qualifier
+// (B6): a blue-and-yellow FINISH arch and crowd barriers at the far side, Amy checks her watch, KICK NOW!, the whole family
+// sprints with her straight through the enemies (they spin like bowling pins), she breaks the tape with her chest, confetti
+// cannons, and everyone jogs home wrapped in foil finisher blankets. Scenes prefix a5_ (no warp). BAR=24 letterbox and inBox().
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const PO=(pts,c,o=2)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); if(o) { gfx.strokeStyle=OUT; gfx.lineWidth=o; gfx.lineJoin='round'; gfx.stroke(); } };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const star=(x,y,r,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.beginPath(); for(let k=0;k<10;k++) { const a=k*Math.PI/5-Math.PI/2,q=k%2?r*.45:r; gfx.lineTo(Math.cos(a)*q,Math.sin(a)*q); } gfx.closePath();
+  gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=2; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); gfx.restore(); };
+const A=RECRUIT_MOVES.amy;
+const CREAM='#fff8e8',GOLD='#ffe08a',GOLD2='#ffc23a',RED='#e0402e',PEN='#d8343a',SKY='#9fd8ff',MINT='#8ef0a0',VPB='#86a9ff';
+const BOARD='#2f5a3e',BOARD2='#3c6e4c',WOOD='#9a6a3a',WOOD2='#c48a4a',WOOD3='#6e4824',BRASS='#e0b040',BRASS2='#fff0a0',CHALK='#f2f2ea';
+const BLUE='#1f4fae',YEL='#ffd23a',FOIL='#d8dee8',FOIL2='#ffffff',FOIL3='#a8b2c2';
+const CONF=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff','#ffffff'];
+ST.nw('a5_');
+if(!sfx.schoolBell) sfx.schoolBell=()=>{ for(let k=0;k<14;k++) tone({type:'square',f0:k%2?1180:1260,dur:.05,vol:.07,delay:k*.055,filter:3000}); };
+if(!sfx.chalk) sfx.chalk=()=>{ noise({dur:.09,vol:.12,f0:5200,f1:3600,type:'bandpass',q:2}); };
+const res=E2=>E2.result?E2.result+' ':'';
+const foesOf=E2=>{ const l=(E2.targets||[]).filter(t=>t.side==='foe'); return l.length?l:b2LiveFoes(); };
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const ASP=()=>BATTLE_SPRITES.amy,AH=()=>ASP().idle.length*ASP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-AH()*(st.sc||1)*.74+dy});
+const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+const BAR=24;
+SC.a5_bars=(s,u)=>{ const k=ez(u/.08)*(u>.93?(1-u)/.07:1); R(0,0,576,BAR*k,'#000'); R(0,324-BAR*k,576,BAR*k,'#000'); };
+const inBox=fn=>(s,u)=>{ gfx.save(); gfx.beginPath(); gfx.rect(0,BAR,576,324-BAR*2); gfx.clip(); fn(s,u); gfx.restore(); };
+SC.a5_big=inBox((s,u)=>{ const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
+  let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-34); x=p.x; y=p.y; }
+  x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+BAR+16,y);
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||GOLD,sc); gfx.restore(); gfx.globalAlpha=1; });
+SC.a5_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.6); R(0,0,576,324,s.c||'#ffffff'); gfx.globalAlpha=1; };
+SC.a5_burst=(s,u)=>{ const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5);
+  star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||CREAM),u*4+k); } gfx.globalAlpha=1; };
+SC.a5_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||36,s.ry||50,s.c||GOLD); gfx.globalAlpha=1; };
+// A party member who is not the actor, moved on its own path: fn(ms) returns {x,y} offsets from home, frame and rot.
+// 'run'/'runR' resolve to the run cycle (left- or right-facing).
+const jog=(u,dur,fn)=>{ if(!u||u.side!=='party') return; const fx=battle.fx[u.idx]; fx.path={t:0,dur:dur/1000,fn:(q,c)=>{ const r=fn(q*dur,c.t)||{};
+  let fr=null; if(r.frame==='run'||r.frame==='runR') { const a=r.frame==='run'?c.sp.run:c.sp.runFlip; fr=a?a[Math.floor(c.t*12)%2]:c.sp.idle; } else if(r.frame) fr=c.sp[r.frame]||c.sp.idle;
+  const [wx,wy]=ST.unwarp(c.origX+(r.dx||0),c.origBase+(r.dy||0)); return {cx:wx,base:wy,rot:r.rot||0,frame:fr}; }}; };
+
+// ---------- Detention Forever (A6) ----------
+// P: the plan. Board behind the enemies (back layer); the podium, pointer, clock writing and the blast in front.
+const bellDraw=(x,y,shake)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(Math.sin(shake*60)*.18*(shake>0?1:0));
+  RO(-3,-22,6,10,WOOD3); EO(0,0,16,15,BRASS); E(-5,-5,6,5,BRASS2); EO(0,2,4,4,'#8a6a2a'); RO(-9,12,18,4,WOOD3); gfx.restore(); };
+SC.a5_bell=inBox((s,u)=>{ const ring_=u<.75?1:0; bellDraw(s.x,s.y,ring_?s.t:0);
+  if(ring_) for(let k=0;k<3;k++) { const q=((s.t*3)+k/3)%1; gfx.globalAlpha=(1-q)*.8; gfx.strokeStyle=GOLD; gfx.lineWidth=3;
+    for(const sd of [-1,1]) { gfx.beginPath(); gfx.arc(s.x,s.y,20+q*30,sd<0?Math.PI*.75:-Math.PI*.25,sd<0?Math.PI*1.25:Math.PI*.25); gfx.stroke(); } } gfx.globalAlpha=1; });
+SC.a5_board=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0,B=P.B; if(ms<P.drop) return; if(ms>P.boom+80) return;
+  const q=ms<P.drop+220?ez((ms-P.drop)/220):1,dy=(1-q)*-(B.y1+10),bob=ms<P.drop+420&&ms>P.drop+220?Math.sin((ms-P.drop-220)/200*Math.PI)*4:0;
+  const x0=B.x0,x1=B.x1,y0=B.y0+dy+bob,y1=B.y1+dy+bob;
+  RO(x0-6,y0-6,x1-x0+12,y1-y0+12,WOOD); R(x0-6,y0-6,x1-x0+12,3,WOOD2); RO(x0,y0,x1-x0,y1-y0,BOARD);
+  gfx.globalAlpha=.25; for(let k=0;k<5;k++) R(x0+10+k*((x1-x0)/5),y0+6+((k*13)%20),26,3,'#ffffff'); gfx.globalAlpha=1;
+  RO(x0+8,y1+2,x1-x0-16,5,WOOD2); R(x0+30,y1-1,14,4,CHALK); R(x0+60,y1-2,18,6,'#e8dcc8'); });
+// The podium in front of Amy (she stands behind it), with an apple on top that pops into blue VP sparkles.
+SC.a5_podium=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0,g=ez((ms-P.podium)/220); if(g<=0) return; const x=P.px,y=P.py,h=56*g;
+  gfx.globalAlpha=fade(u,.94);
+  PO([[x-22,y],[x+22,y],[x+17,y-h],[x-17,y-h]],WOOD); R(x-16,y-h+8,32,3,WOOD3); R(x-2,y-h+14,4,h-20,WOOD2);
+  PO([[x-27,y-h],[x+27,y-h],[x+24,y-h-8],[x-24,y-h-8]],WOOD2);
+  if(g>=1&&ms<P.apple) { EO(x-12,y-h-14,7,6,'#e03a2e'); E(x-14,y-h-16,2.5,2,'#ff9a8a'); R(x-12,y-h-23,2,5,WOOD3); E(x-8,y-h-22,4,2,'#6fae5a'); }
+  gfx.globalAlpha=1; };
+// The pointer stick in her hand: up, then three taps on the podium, then pointed at the clock, then at them.
+SC.a5_pointer=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0; if(ms<P.tap0-150||ms>P.pointEnd) return; const h=hand(),L=74; let a;
+  const tapK=P.taps.findIndex(t=>ms>=t-160&&ms<t+120);
+  // angles run past PI so the stick swings through the left: raised 3.98 (up-left), tap 2.95 (down-left onto the podium)
+  if(ms<P.clockPoint) { if(tapK>=0) { const t=P.taps[tapK],q=ms<t?1-(t-ms)/160:1-(ms-t)/120; a=lerp(3.98,2.95,1-q); } else a=3.98; }
+  else if(ms<P.see) { a=Math.atan2(P.clock.y-h.y,P.clock.x-h.x)+Math.sin(ms/120)*.04; if(a<0) a+=Math.PI*2; }
+  else a=Math.PI+.12+Math.sin(ms/90)*.05;
+  const tx=h.x+Math.cos(a)*L,ty=h.y+Math.sin(a)*L; LnO(h.x,h.y,tx,ty,3,'#c8a070'); E(tx,ty,2.5,2.5,RED);
+  P.taps.forEach(t=>{ const q=(ms-t)/420; if(q<0||q>1) return; gfx.globalAlpha=1-q; bigWord('TAP',P.px-8,P.py-82-q*14,CREAM,2); gfx.globalAlpha=1; }); };
+// The wall clock: 2:59, about to hit 3:00. Then it spins backward an hour to 2:00.
+SC.a5_clock=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0,C=P.clock; if(ms>P.boom+80) return; const g=ez((ms-P.drop-150)/200); if(g<=0) return;
+  const r=17*g; EO(C.x,C.y,r,r,CREAM); ring(C.x,C.y,r-2,r-2,1.5,'#9aa3a8'); for(let k=0;k<12;k++) { const a=k/12*Math.PI*2; R(C.x+Math.cos(a)*(r-5)-1,C.y+Math.sin(a)*(r-5)-1,2,2,OUT); }
+  // minutes past 2:00 (59 = 2:59). Ticks to 59.8, then spins back 60 minutes.
+  let m=59; if(ms>P.spin0) { const q=ez((ms-P.spin0)/(P.spin1-P.spin0)); m=lerp(59.6,0,q); } else if(ms>P.clockPoint) m=lerp(59,59.6,ez((ms-P.clockPoint)/300));
+  const ma=m/60*Math.PI*2-Math.PI/2,ha=(2+m/60)/12*Math.PI*2-Math.PI/2;
+  LnO(C.x,C.y,C.x+Math.cos(ha)*r*.5,C.y+Math.sin(ha)*r*.5,2,OUT); Ln(C.x,C.y,C.x+Math.cos(ma)*r*.8,C.y+Math.sin(ma)*r*.8,2,RED); E(C.x,C.y,2,2,OUT);
+  if(ms>P.spin0&&ms<P.spin1) for(let k=0;k<3;k++) { gfx.globalAlpha=.6-k*.18; gfx.strokeStyle=SKY; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(C.x,C.y,r+5+k*4,ma,ma+1.2); gfx.stroke(); }
+  gfx.globalAlpha=1;
+  if(ms>P.clockPoint&&ms<P.spin0) bigWord('2:59',C.x,C.y+r+6,CREAM,2);
+  if(ms>P.spin1&&ms<P.spin1+1500) { const q=(ms-P.spin1)/1500; gfx.globalAlpha=fade(q,.8); bigWord('2:00',C.x,C.y+r+6,SKY,2); gfx.globalAlpha=1; } });
+// Chalk writing lines on the board, three rows, each with its own giant chalk stick at the cursor.
+const LINE='I WILL NOT CAUSE FRICTION';
+SC.a5_lines=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0,B=P.B; if(ms<P.write0||ms>P.boom+80) return; const sc=P.lsc,cw=4*sc,n=LINE.length;
+  for(let r=0;r<3;r++) { const t0=P.write0+r*150,q=cl((ms-t0)/P.writeDur); if(q<=0) continue; const k=Math.floor(q*n),txt=LINE.slice(0,k);
+    const y=B.y0+12+r*(sc*5+8),x0=B.lx; if(txt) { gfx.globalAlpha=.92; label(txt,x0+((txt.length*4-1)*sc)/2,y,CHALK,sc); gfx.globalAlpha=1; }
+    if(q<1) { const cx=x0+k*cw+2,cy=y+sc*2+Math.sin(ms/40+r)*1.5; gfx.save(); gfx.translate(cx,cy); gfx.rotate(-.6); RO(-3,-16,7,24,CHALK); R(-3,-16,7,4,'#ffd0d0'); gfx.restore();
+      gfx.globalAlpha=.6; E(cx+2,cy+8,3,2,CHALK); gfx.globalAlpha=1; } } });
+// The blast: chalk dust clouds, felt erasers and red-pen report cards flying out of where the board was.
+SC.a5_blast=inBox((s,u)=>{ const B=s.B,cx=(B.x0+B.x1)/2,cy=(B.y0+B.y1)/2,W=B.x1-B.x0;
+  for(let k=0;k<14;k++) { const a=k/14*Math.PI*2+.3,d=ez(u)*(60+(k%4)*18); gfx.globalAlpha=(1-u)*.8; E(cx+Math.cos(a)*d*W/180,cy+Math.sin(a)*d*.6,14*(1-u*.4)+4,10*(1-u*.4)+3,'#eef0ea'); }
+  for(let k=0;k<10;k++) { const a=-Math.PI*.95+k/9*Math.PI*1.1+((k*37)%10)/40,sp=150+(k%3)*50,x=cx+Math.cos(a)*sp*u*W/180,y=cy+Math.sin(a)*sp*u+u*u*160,rot=u*(6+k)*(k%2?1:-1);
+    gfx.globalAlpha=fade(u,.75); gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
+    if(k%2) { RO(-11,-5,22,10,'#3a4a8a'); R(-11,1,22,4,'#e8dcc4'); }
+    else { RO(-10,-13,20,26,CREAM); label('F',0,-9,PEN,2); R(-6,4,12,1,'#9fc4f0'); R(-6,7,10,1,'#9fc4f0'); }
+    gfx.restore(); }
+  for(let k=0;k<8;k++) { const a=k/8*Math.PI*2+1,d=ez(u)*90; gfx.globalAlpha=(1-u)*.9; E(cx+Math.cos(a)*d*1.3,cy+Math.sin(a)*d*.8,5,4,PEN); }
+  gfx.globalAlpha=1; });
+// Red ink circles round every enemy (the engine pops SEE ME itself).
+SC.a5_seeme=inBox((s,u)=>{ s.list.forEach((F,k)=>{ const q=ez((u*1.2-k*.08)/.3); if(q<=0) return; gfx.globalAlpha=fade(u,.8);
+  gfx.strokeStyle=PEN; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(F.x,F.mid,F.w*.62,F.h*.62,-.12,-1.3,-1.3+q*Math.PI*2.1); gfx.stroke();
+}); gfx.globalAlpha=1; });
+// The apple bursts into blue sparkles that fly to everyone (the +3 VP).
+SC.a5_vp=(s,u)=>{ for(const q of s.to) for(let k=0;k<5;k++) { const v=cl(u*1.3-k*.06); if(v<=0||v>=1) continue; const x=lerp(s.x,q.x+(k-2)*6,ez(v)),y=lerp(s.y,q.top+10,ez(v))-Math.sin(v*Math.PI)*50;
+  gfx.globalAlpha=1-v*.4; star(x,y,4+(k%2)*2,k%2?'#ffffff':VPB,v*6+k); } gfx.globalAlpha=1;
+  if(u<.3) { gfx.globalAlpha=1-u/.3; for(let k=0;k<8;k++) { const a=k/8*Math.PI*2,d=u/.3*22; E(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,3,3,k%2?'#e03a2e':'#ff9a8a'); } gfx.globalAlpha=1; } };
+A.detention_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2LiveParty(),me=ST.unit(m);
+  // the board: behind the enemies, at least wide enough for the lines at 2x
+  let x0=Math.max(10,Math.round(Gp.x0-24)),x1=Math.min(340,Math.round(Gp.x1+24)); if(x1-x0<224) { const c=(x0+x1)/2; x0=Math.max(10,Math.round(c-112)); x1=Math.min(340,x0+224); }
+  const lsc=x1-x0>=214?2:1,B={x0,x1,y0:BAR+8,y1:Math.max(BAR+110,Math.round(Gp.base-26)),lx:x0+8};
+  const spot={x:Math.min(548,Math.round(Gp.x1+78)),y:Math.min(310,Math.round(Gp.base+8))};
+  const P={t0:0,B,lsc,drop:250,podium:650,tap0:1100,taps:[1100,1300,1500],clockPoint:1700,spin0:1950,spin1:2400,write0:2450,writeDur:900,see:3650,pointEnd:4000,boom:4000,apple:4500,
+    clock:{x:Math.min(x1+26,372),y:BAR+30},px:spot.x-30,py:spot.y};
+  const bell={x:Math.min(P.clock.x+40,420),y:BAR+28};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:spot.x<me.x?'run':'runR'},{t:650,x:spot.x,y:spot.y,f:'hip'},{t:1000,f:'aim'},{t:1700,f:'aim',dx:(u,tt)=>Math.sin(tt*10)*1.5},
+    {t:2450,f:'hip'},{t:3650,f:'aim',dx:u=>-ez(u)*6},{t:4000,f:'celeb2',hop:6},{t:4500,f:'clap'},{t:5100,f:'hip'},{t:5500,f:spot.x<me.x?'runR':'run'},{t:6200,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ scene('a5_bars',6.6,{}); scene('a5_bell',1.4,{x:bell.x,y:bell.y}); sfx.schoolBell(); b7Later(()=>sfx.schoolBell(),800); say(m.id,'detention_ult');
+      scene('a5_big',1,{x:bell.x,y:bell.y+48,txt:'RRRRING!',c:BRASS2,sc:3}); setMessage('The last bell of the day rings. Nobody is going home.'); }],
+    [250,()=>{ scene('a5_board',4.0,{plan:P,t0:250,back:true}); scene('a5_clock',3.85,{plan:P,t0:250}); scene('a5_lines',3.85,{plan:P,t0:250}); }],
+    [470,()=>{ (sfx.clang||sfx.thud)(); sfx.thud(); for(const f of list) ST.jolt(f,.3); setMessage('A chalkboard slams down behind every one of them.'); }],
+    [650,()=>{ scene('a5_podium',5.0,{plan:P,t0:650}); scene('a5_pointer',3.4,{plan:P,t0:650}); sfx.thud(); }],
+    [1100,()=>{ (sfx.click||sfx.select)(); setMessage('Amy taps her pointer. Three times. Eyes up here.'); }],[1300,()=>(sfx.click||sfx.select)()],[1500,()=>(sfx.click||sfx.select)()],
+    [1700,()=>{ setMessage('The clock is about to hit 3:00. Freedom.'); (sfx.ting||sfx.ding)(); }],
+    [1950,()=>{ sfx.whoosh(); setMessage('She winds it back an hour.'); }],
+    [2400,()=>{ scene('a5_big',1.1,{x:P.clock.x,y:P.clock.y+70,txt:'ONE MORE HOUR',c:SKY,sc:2}); sfx.stun(); }],
+    [2450,()=>{ setMessage('Giant chalk writes their lines for them.'); for(let k=0;k<8;k++) b7Later(()=>sfx.chalk(),k*130); }],
+    [3650,()=>{ scene('a5_big',.9,{st,txt:'SEE ME.',c:'#ff6a60',sc:3}); sfx.select(); }],
+    ['hf',4000],
+    [4000,()=>{ sfx.thud(); sfx.bonk(); (sfx.clang||sfx.thud)(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('a5_flash',.35,{a:.55}); scene('a5_blast',1.2,{B});
+      scene('a5_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'DETENTION!',c:GOLD,sc:4}); setMessage('The whole board blows apart. Erasers. Chalk dust. Report cards.'); }],
+    [4500,()=>{ E2.apply(); sfx.ding(); sfx.levelUp(); scene('a5_seeme',1.7,{list:list.map(f=>ST.foe(f))});
+      scene('a5_vp',1.2,{x:P.px-12,y:P.py-70,to:party.map(p=>ST.unit(p))}); for(const p of party) { const q=ST.unit(p); scene('a5_glow',1,{x:q.x,y:q.mid,c:VPB}); } }],
+    [5100,()=>{ scene('a5_big',1.1,{st,txt:'NOBODY LEAVES.',c:CREAM,sc:2}); setMessage('Every one of them has to see her after class.'); }],
+    [6400,'end',()=>res(E2)+'Detention for everyone. She already has the paperwork.']]); };
+
+// ---------- Boston Qualifier (B6) ----------
+// The FINISH arch and crowd barriers (back layer), the tape (front), the stopwatch, speed lines, bowling-pin tumbles,
+// confetti cannons and foil finisher blankets.
+SC.a5_arch=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000,g=ez(ms/300),out=u>.94?(1-u)/.06:1,ax=P.ax,gy=P.gy,top=BAR+10,hw=44;
+  gfx.globalAlpha=out;
+  // crowd barriers along the back with heads bobbing and two signs
+  const by=P.cy; for(let x=-10;x<586;x+=8) { const k=(x/8)|0,bob=Math.abs(Math.sin(ms/180+k*1.7))*(ms>P.cheer?5:2); E(x+4,by-8-bob-(k%3)*2,4,4.5,['#f0c8a8','#c8946a','#8a5a3a','#f4d8b8'][k%4]); R(x+1,by-4-bob-(k%3)*2,7,8,CONF[k%6]); }
+  for(let x=-10;x<586;x+=40) { RO(x,by,36,10,BLUE); R(x+2,by+2,32,2,'#5c88e0'); R(x+4,by+12,3,10,OUT); R(x+29,by+12,3,10,OUT); }
+  for(const [sx,txt] of [[P.sign1,'GO AMY!'],[P.sign2,'26.2']]) { const bob=Math.abs(Math.sin(ms/200+sx))*6; R(sx-1,by-34-bob,3,24,OUT); RO(sx-22,by-50-bob,44,18,CREAM); label(txt,sx,by-46-bob,BLUE,1); }
+  // the arch
+  const y1=gy,h=(y1-top)*g;
+  for(const px of [ax-hw,ax+hw]) { RO(px-5,y1-h,10,h,BLUE); R(px-5,y1-h,3,h,'#5c88e0'); }
+  if(g>.5) { const yb=y1-h; RO(ax-hw-10,yb,hw*2+20,22,BLUE); R(ax-hw-8,yb+2,hw*2+16,3,YEL); R(ax-hw-8,yb+17,hw*2+16,3,YEL); bigWord('FINISH',ax,yb+6,YEL,2);
+    RO(ax-24,yb+24,48,12,'#111'); const clk=Math.min(ms,P.tape)/1000; label('2:'+String(59).padStart(2,'0')+':'+String(Math.floor(50+clk*2)%60).padStart(2,'0'),ax,yb+27,'#ff5a4a',1); }
+  gfx.globalAlpha=1; });
+// The finish tape across the arch at chest height; snaps in two at P.tape and the halves flutter down.
+SC.a5_tape=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000,ax=P.ax,hw=44,y=P.gy-P.chest; if(ms<300) return;
+  if(ms<P.tape) { gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath(); gfx.moveTo(ax-hw,y); gfx.quadraticCurveTo(ax,y+4+Math.sin(ms/150)*2,ax+hw,y); gfx.stroke(); gfx.strokeStyle=YEL; gfx.lineWidth=3; gfx.stroke(); return; }
+  const q=cl((ms-P.tape)/700); for(const sd of [-1,1]) { const px=ax+sd*hw; gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath(); gfx.moveTo(px,y);
+    const ex=px-sd*hw*(1-q*.4),ey=y+q*40+Math.sin(ms/70+sd)*4*(1-q); gfx.quadraticCurveTo(px-sd*hw*.5,y+q*30-8*(1-q),ex,ey); gfx.stroke(); gfx.strokeStyle=YEL; gfx.lineWidth=3; gfx.stroke(); } });
+// The stopwatch in her hand while she checks it.
+SC.a5_watch=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.85); EO(h.x-8,h.y-16,11,11,'#e8e4dc'); R(h.x-10,h.y-31,5,4,OUT); ring(h.x-8,h.y-16,8,8,1.5,'#9aa3a8');
+  const a=s.t*8; Ln(h.x-8,h.y-16,h.x-8+Math.cos(a)*7,h.y-16+Math.sin(a)*7,2,RED); gfx.globalAlpha=1; };
+// Speed lines trailing the pack while they sprint (to the right of the runners).
+SC.a5_speed=(s,u)=>{ const P=s.plan,st=P.st; if(st.x==null) return; const k=fin(u,.1)*fade(u,.75);
+  for(let j=0;j<16;j++) { const y=P.y0+((j*29)%(P.y1-P.y0)),x=st.x+40+((j*53)%140)+((s.t*500+j*37)%60); gfx.globalAlpha=k*(.35+(j%3)*.15); Ln(x,y,x+40+(j%4)*16,y,2+(j%2),j%2?'#ffffff':CREAM); } gfx.globalAlpha=1; };
+// Monsters spin like bowling pins as the front of the pack passes them.
+SC.a5_bowl=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0; for(const b of P.pins) { if(ms<b.t) continue; const q=(ms-b.t)/750; if(q>=1) continue;
+  lift(b.f,-Math.sin(q*Math.PI)*(40+b.k*6),q*Math.PI*2*(b.k%2?-1:1),-Math.sin(q*Math.PI)*14); } };
+// Confetti cannons from both arch posts.
+SC.a5_confetti=inBox((s,u)=>{ for(const sd of [-1,1]) { const ox=s.ax+sd*44,oy=s.gy-90; for(let k=0;k<26;k++) { const a=-Math.PI/2+sd*(.15+((k*37)%10)/22),sp=220+(k%5)*40,t=s.t;
+  const x=ox+Math.cos(a)*sp*t*(1-t*.3),y=oy+Math.sin(a)*sp*t+t*t*260; gfx.globalAlpha=fade(u,.7); gfx.save(); gfx.translate(x,y); gfx.rotate(t*8+k); R(-3,-2,6,4,CONF[k%7]); gfx.restore(); } } gfx.globalAlpha=1; });
+// Foil finisher blankets round everyone's shoulders: the back of the blanket behind the body (back layer), two front flaps
+// in front, open down the middle so the face and front still show. SHF: shoulder height as a fraction of the visible body
+// (chibi heads for Tom, Grace and Rose; the recruit rigs are adult proportions and have blank rows above the head).
+const SHF={tom:.5,grace:.52,rose:.5,amy:.66,deedee:.66,boppy:.66,tnb:.66,nara:.55};
+const foilBox=(q,id,g)=>{ const sp=BATTLE_SPRITES[id],rows=sp?sp.idle:[],k=rows.findIndex(r=>/[^.]/.test(r)),vis=q.h-Math.max(0,k)*(sp?sp.scale:2);
+  const sh=q.base-vis*(SHF[id]||.6),bot=q.base-vis*.14; return {x:q.x+vis*.02,sh,bot,sw:vis*.38*g+2,bw:vis*.56*g+2}; };
+SC.a5_foilB=(s,u)=>{ const g=ez(u/.12); for(const [q,id] of s.list) { const b=foilBox(q,id,g); gfx.globalAlpha=fade(u,.9);
+  PO([[b.x-b.sw*.5,b.sh],[b.x+b.sw*.5,b.sh],[b.x+b.bw*.5,b.bot],[b.x-b.bw*.5,b.bot]],FOIL3); } gfx.globalAlpha=1; };
+SC.a5_foil=(s,u)=>{ const g=ez(u/.12); for(const [q,id] of s.list) { const b=foilBox(q,id,g),sh=Math.sin(s.t*7+b.x)*.5+.5; gfx.globalAlpha=fade(u,.9);
+  for(const sd of [-1,1]) { const o0=b.x+sd*b.sw*.5,o1=b.x+sd*b.bw*.5,i0=b.x+sd*b.sw*.2,i1=b.x+sd*b.bw*.3;
+    PO([[o0,b.sh],[i0,b.sh+2],[i1,b.bot],[o1,b.bot]],FOIL);
+    gfx.globalAlpha=fade(u,.9)*(.4+.6*(sd<0?sh:1-sh)); PO([[lerp(o0,i0,.35),b.sh+3],[lerp(o0,i0,.6),b.sh+3],[lerp(o1,i1,.6),b.bot-3],[lerp(o1,i1,.3),b.bot-3]],FOIL2,0); gfx.globalAlpha=fade(u,.9); }
+  RO(b.x-b.sw*.5,b.sh-2,b.sw,3,GOLD2); } gfx.globalAlpha=1; };
+A.marathon_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2LiveParty(),me=ST.unit(m),others=party.filter(p=>p!==m);
+  const U=party.map(p=>ST.unit(p)),minX=Math.min(...U.map(q=>q.x)),ly=Math.min(306,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length));
+  const ax=Math.max(62,Math.min(100,Math.round(Gp.x0-6))),lead={x:Math.round(minX-46),y:ly},finish=ax-6;
+  const RUN0=2300,RUN1=3300,dx=finish-lead.x,tape=RUN1-40;
+  const P={ax,gy:ly,chest:Math.round(AH()*.58),cy:Math.max(BAR+70,Math.min(132,Math.round(Gp.top-10))),sign1:Math.round(lead.x-8),sign2:Math.round((lead.x+560)/2+30),cheer:RUN0,tape,t0:0,st:null,y0:Gp.top,y1:ly};
+  const at=x=>RUN0+cl((lead.x-x)/(lead.x-finish))*(RUN1-RUN0);
+  P.pins=list.map((f,k)=>{ const F=ST.foe(f); return {f,k,t:at(F.x+F.w*.25)}; });
+  const hit=Math.round(at(Gp.x));
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:lead.x<me.x?'run':'runR'},{t:700,x:lead.x,y:lead.y,f:'aim'},{t:1300,f:'celeb2',hop:10},{t:1700,f:'run',dx:(u,tt)=>Math.sin(tt*14)*1.5,dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*4},
+    {t:RUN0,f:'run',ease:'lin'},{t:RUN1,x:finish,y:lead.y,f:'celeb',hop:16},{t:3700,f:'celeb',hop:6},{t:3800,f:'runR'},{t:4700,x:'home',y:'home',f:'celeb',hop:10},{t:5300,f:'clap'},{t:6000,f:'idle'}]);
+  P.st=st;
+  // everyone else: jog in place on KICK NOW!, then the same sprint (same distance), then jog home
+  for(const p of others) { const k=p.idx; jog(p,4700,(ms,tt)=>{
+    if(ms<1700) return {};
+    if(ms<RUN0) return {frame:'run',dx:Math.sin(tt*14+k)*1.5,dy:-Math.abs(Math.sin(tt*14+k))*4};
+    if(ms<RUN1) { const q=(ms-RUN0)/(RUN1-RUN0); return {frame:'run',dx:dx*q,dy:-Math.abs(Math.sin(tt*16+k))*3}; }
+    if(ms<3800) return {dx,frame:'celeb',dy:-Math.abs(Math.sin((ms-RUN1)/500*Math.PI))*10};
+    const q=ez((ms-3800)/900); return {frame:q<1?'runR':null,dx:dx*(1-q),dy:-Math.abs(Math.sin(tt*12+k))*3*(1-q)}; }); }
+  ST.play(E2,[
+    [0,()=>{ scene('a5_bars',6.6,{}); scene('a5_arch',6.5,{plan:P,back:true}); scene('a5_tape',4.4,{plan:P}); (sfx.cheer||sfx.whoosh)(); say(m.id,'marathon_ult');
+      setMessage('Mile 26. A finish line pops up on the far side. The crowd goes wild.'); }],
+    [700,()=>{ scene('a5_watch',.9,{}); (sfx.ting||sfx.select)(); scene('a5_big',1,{x:ax,y:BAR+80,txt:'MILE 26.2',c:YEL,sc:3}); setMessage('Amy checks her watch. She can still make her qualifying time.'); }],
+    [1300,()=>{ scene('a5_big',1,{st,txt:'KICK NOW!',c:GOLD,sc:3}); sfx.select(); setMessage('KICK NOW! The whole family lines up behind her.'); }],
+    [RUN0,()=>{ sfx.fanfare(); (sfx.cheer||sfx.whoosh)(); sfx.run(); scene('a5_speed',(RUN1-RUN0+200)/1000,{plan:P}); scene('a5_bowl',2.0,{plan:Object.assign({},P,{t0:RUN0})});
+      setMessage('They sprint. Straight through the middle of the enemies.'); }],
+    ...P.pins.map(b=>[Math.round(b.t),()=>{ sfx.bonk(); }]),
+    ['hf',hit],
+    [hit,()=>{ sfx.thud(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('a5_flash',.3,{a:.4}); }],
+    [tape,()=>{ sfx.fanfare(); (sfx.cheer||sfx.ding)(); sfx.bonk(); scene('a5_confetti',1.6,{ax,gy:ly}); scene('a5_flash',.3,{a:.4,c:YEL});
+      scene('a5_big',1.4,{x:Math.max(140,ax+60),y:Gp.top-74,txt:'BOSTON QUALIFIER!',c:YEL,sc:3}); setMessage('Amy breaks the tape with her chest. Boston Qualifier!'); }],
+    [3800,()=>{ setMessage('Everybody jogs it out. Hands on heads. Breathe.'); }],
+    [4700,()=>{ E2.apply(); sfx.heal(); sfx.levelUp(); const FL=party.map(p=>[ST.unit(p),p.id]); scene('a5_foilB',1.7,{list:FL,back:true}); scene('a5_foil',1.7,{list:FL}); for(const p of party) { const q=ST.unit(p); scene('a5_glow',1,{x:q.x,y:q.mid,c:GOLD}); } }],
+    [5300,()=>{ scene('a5_big',1,{st,txt:'WE QUALIFIED!',c:GOLD,sc:2}); setMessage('Foil blankets for the whole family. Personal bests all round.'); }],
+    [6400,'end',()=>res(E2)+'She is already signing everyone up for next year.']]); };
+})();
+
+// ================= Polish pass (2026-10-24, claude/move-review.md) =================
+// Hot Lunch Tray: a bigger tray with tall rising steam. Inside Voices!: the whole screen flickers dark and light. Pop Quiz:
+// a thick packet that slams down, PENCILS DOWN. Burpee Blitz: a burpee counter and a big final jump. Oat Milk, Please:
+// bigger pizza and carton and a huge NO THANKS. False Start: big starting blocks and a big red flag. Negative Split: a
+// stopwatch on screen and speed lines in the second half. Same numbers, same beats. Overrides SC.av_lunch, SC.av_lights,
+// SC.av_packet, SC.av_dairy, SC.av_latte, SC.av_start, SC.av_flag, SC.av_watch, A.pop_quiz, A.burpee_blitz and
+// A.oat_milk_please. Scenes prefix ap_.
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const poly=(pts,c)=>{ gfx.beginPath(); pts.forEach(([x,y],k)=>k?gfx.lineTo(x,y):gfx.moveTo(x,y)); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.lineJoin='round'; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
+const A=RECRUIT_MOVES.amy;
+const CREAM='#fff8e8',GOLD='#ffe08a',RED='#e0402e',PEN='#d8343a',MINT='#8ef0a0',TRAY='#e8a04a',SOUP='#e8913a';
+ST.nw('ap_');
+const res=E2=>E2.result?E2.result+' ':'';
+const kindLine=(t,ally)=>t&&t.side==='foe'?t.name+' warms up a little.':ally;
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const front=(F,gap=34)=>({x:Math.min(560,F.x+F.w*.5+gap),y:Math.min(316,F.base+3)});
+const spotFor=(m,t,gap=30)=>{ const me=ST.unit(m); if(!t||t===m) return {x:me.x,y:me.base,self:true}; const u=ST.unit(t); return {x:Math.min(560,u.x+u.w*.5+gap),y:Math.min(316,u.base+3)}; };
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const ASP=()=>BATTLE_SPRITES.amy,AH=()=>ASP().idle.length*ASP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-AH()*(st.sc||1)*.74+dy});
+const hopOf=u=>{ if(u&&u.side==='party') battle.fx[u.idx].hop=.35; else if(u) ST.jolt(u,.15); };
+const back=(x,me)=>x<me.x?'runR':'run';
+const go=(x,me)=>x<me.x?'run':'runR';
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+
+// ---------- Hot Lunch Tray: bigger tray, tall rising steam ----------
+const tray=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  poly([[-30,-6],[30,-6],[34,6],[-34,6]],TRAY); R(-26,-4,20,8,'#d88a3a'); R(4,-4,22,8,'#d88a3a');
+  EO(-15,-6,11,5,CREAM); E(-15,-7,8,3,SOUP); EO(15,-6,6,4,'#d8a060'); EO(26,-10,4,4,'#e04040'); R(25,-16,2,4,'#5a3a1a'); gfx.restore(); };
+const steam=(x,y,t,h,w)=>{ for(let k=0;k<3;k++) { const q=(t*.9+k/3)%1; gfx.globalAlpha*=1; const a0=gfx.globalAlpha;
+    for(const [lw,c,al] of [[w+4,'#c8d0d8',.35],[w,'#ffffff',.9]]) { gfx.globalAlpha=a0*al*Math.sin(Math.max(.05,1-q)*Math.PI*.5); gfx.strokeStyle=c; gfx.lineWidth=lw; gfx.lineCap='round'; gfx.beginPath();
+      for(let j=0;j<12;j++) { const yy=y-j*h/12-q*h*.35,xx=x+(k-1)*w*2.2+Math.sin(j*.7+t*5+k*2)*w*1.1; j?gfx.lineTo(xx,yy):gfx.moveTo(xx,yy); } gfx.stroke(); } gfx.globalAlpha=a0; } };
+SC.av_lunch=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.94); let x,y,sc=1.6;
+  if(ms<P.give) { const h=hand(); x=h.x-12; y=h.y-4; } else { const q=ez((ms-P.give)/300),h=hand(); x=lerp(h.x-12,P.x,q); y=lerp(h.y-4,P.y,q); sc=lerp(1.6,2.3,q); }
+  const a0=gfx.globalAlpha; steam(x-15*sc,y-10*sc,s.t,28*sc+20,3+sc*1.6); gfx.globalAlpha=a0; tray(x,y,sc);
+  if(ms>P.give+300&&ms<P.give+1600) { gfx.globalAlpha=a0; bigWord('HOT',Math.max(30,x-58*sc/1.6),y-22,'#ffb45a',3); } };
+
+// ---------- Inside Voices!: the whole screen flickers ----------
+SC.av_lights=(s,u)=>{ const ms=s.t*1000,P=s.plan,fl=P.flicks; const k=fl.find(([a,b])=>ms>=a&&ms<b);
+  if(k) { const d=ms-k[0]; gfx.globalAlpha=d<100?(Math.floor(d/33)%2?.45:.95):.93-Math.sin(ms/40)*.03; R(0,0,576,324,'#04050b'); }
+  else for(const [a,b] of fl) { const d=ms-b; if(d>=0&&d<260) { gfx.globalAlpha=(1-d/260)*.6*(Math.floor(d/40)%2?.6:1); R(0,0,576,324,'#fffbe8'); } }
+  const off=!!k,x=Math.max(40,P.sx-96),y=Math.max(56,P.sy-AH()*.15-40); gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.scale(2.5,2.5); RO(-14,-20,28,40,'#f4f0e6'); R(-4,-12,8,24,'#c9c2b8'); RO(-4,off?0:-12,8,12,'#ffffff'); gfx.restore();
+  if(ms<fl[fl.length-1][1]+300&&ms>fl[0][0]-100) bigWord(off?'OFF':'ON',Math.min(548,x+66),Math.max(20,y-10),off?'#9aa3a8':GOLD,3); };
+
+// ---------- Pop Quiz: a thick packet slams down, PENCILS DOWN ----------
+const PK=P=>({w:Math.round(P.w*1.25),h:Math.round(P.h*1.2)});
+SC.av_packet=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; if(ms<P.drop) return; const {w,h}=PK(P);
+  const q=cl((ms-P.drop)/(P.hit-P.drop)),rest=F.top-h*.3,y=ms<P.hit?lerp(-h*1.2,rest,q*q):rest+Math.min(8,(ms-P.hit)*.03),sq=ms>P.hit?Math.max(0,1-(ms-P.hit)/220)*.3:0;
+  gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(F.x,y+h/2); gfx.rotate(-.06); gfx.scale(1+sq,1-sq);
+  for(let k=9;k>=1;k--) RO(-w/2+k*2.5,-h/2+k*3,w,h,k%2?'#e8e2d4':'#f4efe2');
+  RO(-w/2,-h/2,w,h,CREAM); RO(-12,-h/2-8,24,14,'#2b2a26'); R(-8,-h/2-14,16,8,'#9aa3a8');
+  bigWord('POP QUIZ',0,-h/2+12,PEN,3); label('50 PAGES',0,-h/2+34,'#5a5a60',2);
+  for(let k=0;k<5;k++) { const yy=-h/2+52+k*(h-62)/5; RO(-w/2+12,yy,7,7,CREAM); R(-w/2+26,yy+2,w-40,2,'#9aa3a8'); } gfx.restore();
+  if(ms>P.hit&&ms<P.hit+380) { const z=(ms-P.hit)/380; gfx.globalAlpha=1-z; for(let k=0;k<10;k++) { const a=Math.PI+k/9*Math.PI,d=w*.6+z*40; Ln(F.x+Math.cos(a)*d,F.base+Math.sin(a)*d*.35,F.x+Math.cos(a)*(d+20),F.base+Math.sin(a)*(d+20)*.35,4,CREAM); } } };
+A.pop_quiz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
+  const girls=['grace','rose'].map(id=>B2.party.find(q=>q.id===id&&b2Alive(q))).filter(Boolean);
+  const plan={drop:1300,hit:1750,F,w:Math.round(cl(F.w*1.15,80,130)),h:Math.round(cl(F.w*1.4,96,150))},top=F.top-PK(plan).h*.3;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'celeb2'},{t:1100,f:'celeb',hop:16},{t:1500,f:'throw',dx:-8},{t:2100,f:'hip'},{t:2900,f:'clap'},{t:3200,f:back(p.x,me)},{t:3900,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Amy sprints over. Clear your desks.'); say(m.id,'pop_quiz'); scene('av_packet',3.2,{plan}); }],
+    [800,()=>{ scene('av_big',1.0,{st,txt:'POP QUIZ!',c:GOLD,sc:3}); sfx.jumpWhistle?sfx.jumpWhistle():sfx.whoosh(); }],
+    [1300,()=>{ sfx.slideWhistle?sfx.slideWhistle():sfx.whoosh(); setMessage('A very, very thick test packet drops out of the sky.'); }],
+    ['hf',plan.hit],
+    [plan.hit,()=>{ sfx.thud(); sfx.thud(); sfx.bonk(); ST.jolt(f,.7); landHit(100); scene('av_flash',.18,{a:.45}); scene('av_dust',.7,{x:F.x,y:F.base,r:70,n:14}); scene('av_pencils',.9,{x:F.x,y:F.top}); }],
+    [plan.hit+250,()=>{ sfx.ding(); scene('av_big',1.5,{x:F.x,y:Math.min(F.top-74,top-14),txt:'PENCILS DOWN!',c:CREAM,sc:3}); setMessage('PENCILS DOWN.'); }],
+    [2700,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('av_hearts',1,{x:q.x,y:q.top}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It did not study.'); }],
+    [4000,'end',res(E2)+'Pencils down.']]); };
+
+// ---------- Burpee Blitz: a counter and a big final jump ----------
+const PL=()=>AH()*.42;
+SC.ap_count=(s,u)=>{ const ms=s.t*1000,P=s.plan,n=P.marks.filter(([t0])=>ms>=t0).length; if(!n&&ms<P.show) return;
+  const last=P.marks[n-1],pop=last?Math.max(0,1-(ms-last[0])/240):0,x=P.x,y=P.y,fin2=n>=P.marks.length;
+  gfx.globalAlpha=fin(u,.04)*fade(u,.88); gfx.save(); gfx.translate(x,y); gfx.scale(1+pop*.3,1+pop*.3);
+  RO(-50,-36,100,70,fin2?'#3a2a08':'#1c2230'); R(-46,-32,92,4,'#ffffff22'); label('BURPEES',0,-28,'#9db1cc',2);
+  bigWord(String(n),0,-12,fin2?GOLD:CREAM,6); gfx.restore(); };
+SC.ap_leap=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=fade(u,.6)*.85; for(let k=0;k<6;k++) { const x=st.x-24+k*10,y0=st.y+8+(k%2)*10; Ln(x,y0,x,y0+30+(k%3)*12,3,k%2?CREAM:GOLD); } };
+A.burpee_blitz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,52),k=front(F,10),me=ST.unit(m);
+  const K=[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:700,x:p.x,y:p.y,f:'idle'}]; let t=800; const marks=[];
+  for(let i=0;i<3;i++) { K.push({t,f:'kneel'},{t:t+160,f:'kneel',rot:-1.5,dy:PL(),dx:-8},{t:t+380,f:'kneel'},{t:t+520,f:'celeb',hop:24}); marks.push([t+520,String(i+1)]); t+=720; }
+  const leap=t; marks.push([leap+200,'4']);
+  K.push({t,f:'kneel',dy:u=>ez(u)*8},{t:t+200,f:'act',hop:110,dx:u=>-ez(u)*6},{t:t+700,x:k.x,y:k.y,f:'celeb',hop:10},{t:t+1100,f:back(k.x,me)},{t:t+1800,x:'home',y:'home',f:'idle'});
+  const st=ST.keys(fx,K),hit=leap+450,bx=Math.min(522,Math.max(54,p.x+104)),by=44;
+  ST.play(E2,[
+    [0,()=>{ setMessage('Amy drops right in front of it. Burpees. She is counting.'); say(m.id,'burpee_blitz'); scene('ap_count',(leap+1300)/1000,{plan:{marks,show:700,x:bx,y:by}}); }],
+    ...marks.slice(0,3).map(([ms])=>[ms,()=>{ sfx.thud(); sfx.select(); scene('av_dust',.4,{x:st.x||p.x,y:p.y,r:22,n:6}); }]),
+    [leap,()=>{ setMessage('Number four does not come back down where it started.'); sfx.whoosh(); }],
+    [leap+200,()=>{ (sfx.jumpWhistle||sfx.whoosh)(); scene('ap_leap',.5,{st}); scene('av_dust',.6,{x:p.x,y:p.y,r:34,n:10}); }],
+    ['hf',hit],
+    [hit,()=>{ sfx.bonk(); sfx.ding(); ST.jolt(f,.65); landHit(100); scene('av_big',1.1,{x:F.x,y:F.top-74,txt:'BURPEE!',c:GOLD,sc:5}); scene('av_burst',.7,{x:F.x+F.w*.3,y:F.mid,n:10,r:56}); }],
+    [leap+1900,'end',res(E2)+'She is not even out of breath. She says.']]); };
+
+// ---------- Oat Milk, Please: bigger pizza and carton, a huge NO THANKS ----------
+const DS=1.8;
+const pizza=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(DS,DS); poly([[-22,-16],[22,-16],[0,26]],'#ffd24a'); R(-24,-20,48,8,OUT); R(-22,-18,44,5,'#c8843a'); E(-6,-4,4,3,'#ffb030'); E(7,2,3,3,'#ffb030');
+  E(-6,-8,2,3,OUT); E(5,-8,2,3,OUT); gfx.restore(); };
+const carton=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(DS,DS); RO(-14,-14,28,34,'#ffffff'); poly([[-14,-14],[0,-26],[14,-14]],'#f4f4f4'); R(-14,-2,28,10,'#4f86d8'); label('MILK',0,0,'#ffffff',1); E(-6,-9,2,3,OUT); E(5,-9,2,3,OUT); gfx.restore(); };
+const latte=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); poly([[-11,-18],[11,-18],[8,18],[-8,18]],'#d8b48a'); R(-12,-24,24,7,OUT); R(-11,-23,22,5,'#ffffff'); R(3,-38,3,15,'#7ac06a');
+  R(-10,-4,20,10,'#5a3a2a'); label('OAT',0,-2,CREAM,1); gfx.restore(); };
+SC.av_dairy=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.roll) return; gfx.globalAlpha=1;
+  const inQ=ez((ms-P.roll)/600),outQ=ez((ms-P.away)/500),off=-160;
+  [[pizza,P.x-112,0],[carton,P.x-38,1]].forEach(([draw,x0,k])=>{ const x=lerp(x0+off,x0,inQ)+lerp(0,off-90,outQ),y=P.y-40-Math.abs(Math.sin((ms/1000)*9+k))*10; draw(x,y,ms<P.away?Math.sin(ms/90+k)*.25:-(ms-P.away)/80);
+    if(ms>P.no&&ms<P.away+300) { const q=ez((ms-P.no)/200); gfx.save(); gfx.translate(x,y-6); gfx.scale(q*1.6,q*1.6); LnO(-16,-16,16,16,5,RED); LnO(16,-16,-16,16,5,RED); gfx.restore(); } }); };
+SC.av_latte=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.done) return; gfx.globalAlpha=1; let x,y,sc=1.6;
+  if(ms<P.give) { const h=hand(); x=h.x-8; y=h.y-18; } else { const q=ez((ms-P.give)/300),h=hand(); x=lerp(h.x-8,P.tx,q); y=lerp(h.y-18,P.ty,q); sc=lerp(1.6,2.2,q); }
+  if(ms>P.show) latte(x,y,sc); };
+A.oat_milk_please=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
+  const sx=self?me.x:sp.x,sy=self?me.base:sp.y,end=self?4000:4500;
+  const K=self?[{t:0,x:'home',y:'home',f:'idle'}]:[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:800,x:sp.x,y:sp.y,f:'idle'}];
+  K.push({t:1500,f:'hip'},{t:1700,f:'spread',dx:(u,tt)=>Math.sin(tt*18)*3},{t:2600,f:'aim'},{t:2900,f:'throw',dx:-6},{t:3300,f:'celeb',hop:8},{t:3700,f:self?'idle':back(sx,me)});
+  if(!self) K.push({t:4400,x:'home',y:'home',f:'idle'}); else K.push({t:4000,f:'idle'});
+  ST.keys(fx,K);
+  const plan={roll:900,no:1700,away:2300,x:sx-20,y:sy},lp={show:2500,give:2900,done:end-200,tx:self?me.x-26:H.x+H.w*.15,ty:self?me.base-50:H.mid};
+  ST.play(E2,[
+    [0,()=>{ setMessage(self?'Amy reaches for something to drink.':'Amy jogs over to '+t.name+' with a drink.'); say(m.id,'oat_milk_please'); scene('av_dairy',2.9,{plan}); scene('av_latte',end/1000,{plan:lp}); }],
+    [900,()=>{ sfx.boing?sfx.boing():sfx.select(); setMessage('A cheese pizza and a milk carton roll right up to her.'); }],
+    [1700,()=>{ sfx.nope?sfx.nope():sfx.select(); scene('av_flash',.15,{a:.3,c:'#ff6a60'}); scene('av_big',1.1,{x:sx-70,y:Math.max(46,sy-AH()-52),txt:'NO THANKS!',c:'#ff6a60',sc:5,rot:-.05}); setMessage('She waves them off. Firmly. Very firmly.'); }],
+    [2300,()=>{ sfx.whoosh(); }],
+    [2500,()=>{ setMessage('Out comes her oat milk latte instead.'); }],
+    ['hf',3200],
+    [3200,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0'}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
+    [end,'end',kindLine(t,'Dairy-free and delicious. She was right.')]]); };
+
+// ---------- False Start: big blocks, big red flag ----------
+const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
+SC.av_start=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; if(ms<P.on) return; const g=ez((ms-P.on)/250); gfx.globalAlpha=fade(u,.94);
+  const lx=F.x-F.w*.5-30,lw=F.w+80,by=F.base; RO(lx,by+2,lw*g,14,'#ffffff'); if(g>.9) bigWord('START',lx+lw/2,by+22,CREAM,3);
+  gfx.save(); gfx.translate(F.x-F.w*.5-6,by+2); gfx.scale(-g*3.4,g*3.4); poly([[-10,0],[-10,-8],[0,-2],[0,0]],'#d84a3a'); poly([[2,0],[2,-10],[12,-3],[12,0]],'#d84a3a'); R(-12,0,26,3,'#9aa3a8'); gfx.restore();
+  if(ms>P.lean&&ms<P.hit) lift(P.f,0,-.25*ez((ms-P.lean)/200),-10*ez((ms-P.lean)/200));
+  if(ms>P.hit&&ms<P.hit+900) { const q=ez((ms-P.hit)/400); lift(P.f,0,lerp(-.25,0,q),lerp(-10,22,q)*(1-ez((ms-P.hit-500)/400))); } };
+SC.av_flag=(s,u)=>{ const h=hand(),t=s.t; gfx.globalAlpha=fade(u,.9); const px=h.x-4,top=h.y-104; RO(px-2,top,4,102,'#c9c2b8'); EO(px,top-2,4,4,GOLD);
+  const pts=[]; for(let k=0;k<=8;k++) { const x=px-k*9,w=Math.sin(t*14-k*.8)*4*(k/8); pts.push([x,top+4+w]); } for(let k=8;k>=0;k--) { const x=px-k*9,w=Math.sin(t*14-k*.8)*4*(k/8); pts.push([x,top+46+w]); }
+  poly(pts,RED); gfx.globalAlpha*=.35; R(px-60,top+10,50,6,'#ffffff'); };
+
+// ---------- Negative Split: stopwatch on screen, speed lines ----------
+SC.av_watch=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=P.st; if(st.x==null) return;
+  if(P.y0==null) { const U=b2LiveParty().map(q=>ST.unit(q)); P.y0=Math.max(80,Math.min(...U.map(q=>q.top))-10); P.y1=Math.min(318,Math.max(...U.map(q=>q.base))+6); }
+  const cx=288,cy=52,r=30,g=ez(ms/250)*(1-ez((ms-3300)/300)); if(g>0) { gfx.globalAlpha=g; gfx.save(); gfx.translate(cx,cy); gfx.scale(g,g);
+    RO(-6,-r-14,12,10,'#9aa3a8'); RO(-3,-r-6,6,6,'#9aa3a8'); EO(0,0,r+4,r+4,'#c9c2b8'); EO(0,0,r-2,r-2,'#fffbe8');
+    for(let k=0;k<12;k++) { const a=k/12*Math.PI*2; Ln(Math.cos(a)*(r-8),Math.sin(a)*(r-8),Math.cos(a)*(r-4),Math.sin(a)*(r-4),2,OUT); }
+    const fast=ms>P.fast,sec=ms<P.fast?ms/1000*1.1:(P.fast/1000*1.1+(ms-P.fast)/1000*4.4),a=-Math.PI/2+sec*Math.PI*2;
+    Ln(0,0,Math.cos(a)*(r-6),Math.sin(a)*(r-6),3,fast?RED:OUT); E(0,0,3,3,OUT); gfx.restore();
+    const tot=ms<P.fast?ms/P.fast*252:252+cl((ms-P.fast)/(P.fastEnd-P.fast))*238,mm=Math.floor(tot/60),ss=Math.floor(tot%60);
+    bigWord(mm+':'+String(ss).padStart(2,'0'),cx+r+42,cy-6,fast?MINT:CREAM,3); bigWord(fast?'2ND HALF':'1ST HALF',cx-r-48,cy-4,fast?MINT:'#9db1cc',2); }
+  if(ms<P.go+400) { const h=hand(); gfx.globalAlpha=1; EO(h.x-6,h.y-14,10,10,'#e8e4dc'); R(h.x-8,h.y-28,5,4,OUT); const a=ms/300; Ln(h.x-6,h.y-14,h.x-6+Math.cos(a)*7,h.y-14+Math.sin(a)*7,2,OUT); }
+  P.splits.forEach(([t0,txt,c])=>{ const q=(ms-t0)/1300; if(q<0||q>1) return; gfx.globalAlpha=1-q*q; bigWord(txt,P.lx,P.ly-q*10,c,2); });
+  if(ms>P.fast&&ms<P.fastEnd+250) { const a=ez((ms-P.fast)/150)*(1-ez((ms-P.fastEnd)/250)); for(let k=0;k<22;k++) { const q=((ms/260)+k*.137)%1,y=P.y0+((k*53)%100)/100*(P.y1-P.y0),x=lerp(620,-80,q),L=50+((k*31)%5)*20;
+      gfx.globalAlpha=a*.75; Ln(x,y,x+L,y,k%3?3:5,k%4?CREAM:MINT); }
+    gfx.globalAlpha=a*.9; for(let k=0;k<5;k++) Ln(st.x-18-k*4,st.y-24-k*12,st.x-70-k*12,st.y-24-k*12,4,CREAM); } };
+})();
