@@ -795,20 +795,20 @@ SC.gv_glitter=(s,u)=>{ for(let k=0;k<26;k++) { const a=k*2.4,d=ez(u)*(s.r||70)*(
 SC.gv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 
 // ---------- Cartwheel (basic) ----------
-// Two cartwheels in, then a third cartwheel straight into a kick. Big HI-YAH, a sparkle trail, WATCH MY TOES.
+// Two cartwheels in, then a third cartwheel straight into a kick. Big HI-YAH, a sparkle trail, TA-DA!
 SC.gv_trail=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; if(ms>(s.to||1e9)) return; (s.pts=s.pts||[]).push([st.x,st.y-GH()*.5,s.t]);
   for(const [x,y,t0] of s.pts) { const a=1-(s.t-t0)/.5; if(a<=0) continue; gfx.globalAlpha=a; star(x+Math.sin(t0*40)*12,y+Math.cos(t0*33)*16,2+a*4,CONF[Math.floor(t0*20)%4]); } };
 G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,58),k=front(F,14);
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:wheel(2),hop:22,hn:2,ns:true},{t:950,x:p.x,y:p.y,f:'celeb'},{t:1250,f:'expr'},
     {t:1450,f:'idle',rot:wheel(1),hop:26,ns:true},{t:1850,x:k.x,y:k.y,f:'act',dx:u=>-ez(u/.3)*8},{t:2150,f:'celeb',hop:12},{t:2650,f:'runR'},{t:3350,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Grace cartwheels in. Twice. Pointed toes the whole way.'); say(m.id,'cartwheel'); scene('gv_trail',2.0,{st,to:1900}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),450); }],
+    [0,()=>{ setMessage('Grace cartwheels in. Twice. Showing off the whole way.'); say(m.id,'cartwheel'); scene('gv_trail',2.0,{st,to:1900}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),450); }],
     [1250,()=>{ setMessage('One more. Straight at it.'); }],
     [1450,()=>{ sfx.whoosh(); }],
     ['hf',1800],
     [1800,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gv_big',1,{x:F.x,y:F.top-74,txt:'HI-YAH!',c:PINK,sc:4}); scene('gv_burst',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:40}); }],
-    [2150,()=>{ scene('gv_text',1,{st,txt:'WATCH MY TOES',c:PINK2}); sfx.ding(); }],
-    [3450,'end',res(E2)+'The toes were extremely pointed.']]); };
+    [2150,()=>{ scene('gv_text',1,{st,txt:'TA-DA!',c:PINK2}); sfx.ding(); }],
+    [3450,'end',res(E2)+'She sticks the landing and takes a bow.']]); };
 { const legacy=G.cartwheel; G.cartwheel=E2=>(E2.act&&E2.act.o3?G.cartwheelShow(E2):legacy(E2)); }
 
 // ---------- DANCE (signature) ----------
@@ -1054,4 +1054,262 @@ G.chalk_up=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,46
     [2700,()=>{ sfx.bonk(); sfx.ding(); all(list); landHit(33); scene('gv_prints',1.6,{L:list}); }],
     [3400,()=>{ scene('gr_beam',1.0,{x:c.x,y:c.y,w:32}); scene('gv_big',1,{x:c.x-30,y:c.y-GH()-50,txt:'STUCK IT',c:GOLD,sc:3}); sfx.ding(); }],
     [4500,'end',res(E2)+'Chalk handprints everywhere. That is how you know it was good.']]); };
+})();
+
+// ================= Option 3 Ultimates (phase 5b, 2026-10-24) =================
+// Grace's two Primary Ultimates (Option 2 cards, option3-implementation-brief.md core rule 2), held to the move review rules:
+// a nine-year-old doing it for real. Ten Million Subscribers (A6): a pretend livestream with her hairbrush mic, the viewer
+// count spins from 3 (her family) to 10000000, a homemade tinfoil Diamond Play Button drops in on a string, she holds it up and
+// it throws a rainbow across every enemy; golden confetti heals the party. Diamond Leotard Finale (B6): the floor turns into a
+// blue spring floor, sequins, corner salute, a sprint on the diagonal, a triple twist straight off the top of the screen and a
+// meteor landing on the target (shield break, sure crit); the other monsters hold up 10.0 cards. Scenes prefix g5_ (no warp).
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const PO=(pts,c,o=2)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); if(o) { gfx.strokeStyle=OUT; gfx.lineWidth=o; gfx.lineJoin='round'; gfx.stroke(); } };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const G=RECRUIT_MOVES.grace,star=RFX.gStar;
+const PINK='#ff7fb3',PINK2='#ffc1dc',PURP='#b48fe0',GOLD='#ffe08a',CREAM='#fff8e8',RED='#e8402e',MINT='#9be39a',SKYC='#9fe8ff',FOIL='#d8dde6',FOILD='#9aa2b0',MAT='#2f5fd0',MATD='#244bb0';
+const RAINBOW=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff'];
+const CONF=[PINK,PURP,GOLD,SKYC,MINT,'#ffb45a'];
+ST.nw('g5_');
+const res=E2=>E2.result?E2.result+' ':'';
+const foesOf=E2=>{ const l=(E2.targets||[]).filter(t=>t.side==='foe'); return l.length?l:b2LiveFoes(); };
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const GSP=()=>BATTLE_SPRITES.grace,GH=()=>GSP().idle.length*GSP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-GH()*(st.sc||1)*.84+dy});
+const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+if(!sfx.cheer) sfx.cheer=()=>{ noise({dur:1.3,vol:.16,f0:700,f1:1500,type:'bandpass',q:.5}); noise({dur:1.0,vol:.1,f0:1800,f1:2600,type:'bandpass',q:.8,delay:.15}); };
+if(!sfx.fanfare) sfx.fanfare=()=>{ [523,659,784,1047].forEach((f,k)=>tone({type:'square',f0:f,dur:k===3?.5:.14,vol:.08,delay:k*.12,filter:2400})); };
+if(!sfx.floorMusic) sfx.floorMusic=()=>{ [659,784,988,784,1175,988,1319].forEach((f,k)=>tone({type:'triangle',f0:f,dur:.22,vol:.1,delay:k*.16})); };
+// Thin letterbox bars (24 px, so the party's feet stay in shot). Scenes that would spill over them draw clipped (inBox).
+const BAR=24;
+SC.g5_bars=(s,u)=>{ const k=ez(u/.08)*(u>.93?(1-u)/.07:1); R(0,0,576,BAR*k,'#000'); R(0,324-BAR*k,576,BAR*k,'#000'); };
+const inBox=fn=>(s,u)=>{ gfx.save(); gfx.beginPath(); gfx.rect(0,BAR,576,324-BAR*2); gfx.clip(); fn(s,u); gfx.restore(); };
+SC.g5_big=(s,u)=>{ const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
+  const x=Math.max(w/2+8,Math.min(568-w/2,s.x)),y=Math.max(sc*5+BAR+16,s.y);
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||PINK,sc); gfx.restore(); };
+SC.g5_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-26); x=p.x; y=p.y; }
+  const sc=s.sc||2,w=(s.txt.length*4-1)*sc; x=Math.max(w/2+6,Math.min(570-w/2,x)); bigWord(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,sc); };
+
+// ---------- Ten Million Subscribers (A6) ----------
+const brush=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); RO(-3,0,6,26,PURP); EO(0,-8,11,12,PINK2); for(let k=0;k<4;k++) for(let j=0;j<3;j++) E(-6+k*4,-14+j*5,1.2,1.2,'#7a4a8a'); gfx.restore(); };
+SC.g5_brush=(s,u)=>{ const ms=s.t*1000; if(ms>s.to) return; const h=hand(); gfx.globalAlpha=1; brush(h.x-4,h.y-6,-.4); };
+// The pretend livestream: a phone frame round the stage, LIVE, and a viewer count that sits at 3 and then goes up a lot.
+const viewers=(ms,P)=>{ if(ms<P.c0) return 3; if(ms>=P.c1) return 10000000; const q=(ms-P.c0)/(P.c1-P.c0); return Math.round(3*Math.pow(10000000/3,q*q)); };
+SC.g5_live=inBox((s,u)=>{ const ms=s.t*1000,P=s.plan,g=ez(ms/300),off=ms>P.off?ez((ms-P.off)/300):0,k=g*(1-off); if(k<=0) return;
+  const x0=lerp(288,12,k),x1=lerp(288,564,k),y0=lerp(162,BAR+8,k),y1=lerp(162,324-BAR-8,k); gfx.globalAlpha=1;
+  gfx.strokeStyle=OUT; gfx.lineWidth=7; gfx.strokeRect(x0,y0,x1-x0,y1-y0); gfx.strokeStyle=CREAM; gfx.lineWidth=3; gfx.setLineDash([10,7]); gfx.strokeRect(x0,y0,x1-x0,y1-y0); gfx.setLineDash([]);
+  for(const [cx,cy,sx,sy] of [[x0,y0,1,1],[x1,y0,-1,1],[x0,y1,1,-1],[x1,y1,-1,-1]]) { Ln(cx,cy,cx+sx*18,cy,5,GOLD); Ln(cx,cy,cx,cy+sy*18,5,GOLD); }
+  if(k<1) return;
+  RO(x0+10,y0+10,44,16,RED); if(Math.floor(ms/400)%2) E(x0+18,y0+18,3,3,CREAM); label('LIVE',x0+36,y0+15,CREAM,2);
+  const n=viewers(ms,P),txt=String(n),w=(txt.length*4-1)*2;
+  RO(x1-w-22,y0+10,w+12,30,'rgba(20,20,40,.85)'); label('VIEWERS',x1-16-w/2,y0+12,PINK2,1); label(txt,x1-16-w/2,y0+22,ms>=P.c1?GOLD:CREAM,2);
+  // little hearts floating up the right edge, faster once it blows up
+  const rate=ms>P.c0?3:1; for(let j=0;j<6;j++) { const q=((s.t*.5*rate)+j/6)%1; gfx.globalAlpha=1-q; heart(x1-24+Math.sin(q*9+j)*8,y1-14-q*120,5+(j%2)*2,j%3?PINK:'#ff5a7a'); }
+  gfx.globalAlpha=1; });
+// The homemade Diamond Play Button: a cardboard square wrapped in tinfoil, a glitter-glue diamond, DIAMOND in marker.
+const plaque=(x,y,t,k=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(k,k);
+  RO(-26,-30,52,60,FOIL); for(let j=0;j<6;j++) Ln(-22+j*9,-26+((j*7)%9),-18+j*8,22-((j*5)%11),1,FOILD);
+  R(-26,-30,52,6,'#f2f5fa');
+  PO([[0,-20],[16,-4],[0,14],[-16,-4]],'#bff0ff',2); PO([[0,-20],[16,-4],[0,-4]],'#ffffff',0); PO([[-16,-4],[0,14],[0,-4]],'#7fd0ec',0);
+  PO([[-4,-9],[6,-4],[-4,1]],'#ffffff',0);
+  label('DIAMOND',0,19,'#5a3a8a',1);
+  for(let j=0;j<5;j++) { const q=(t*1.6+j*.37)%1; gfx.globalAlpha=Math.sin(q*Math.PI); star(-20+((j*19)%40),-24+((j*23)%46),2+q*2.5,j%2?'#ffffff':GOLD); }
+  gfx.globalAlpha=1; gfx.restore(); };
+SC.g5_plaque=inBox((s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.hx,y=P.hy,k=1;
+  if(ms<P.land) { const q=cl(ms/P.land); y=lerp(-40,P.hy,ez(q)); }
+  else if(ms<P.grab) { y=P.hy+Math.sin((ms-P.land)/1000*9)*4*Math.max(0,1-(ms-P.land)/500); }
+  if(ms<P.grab) { gfx.globalAlpha=1; Ln(x,0,x,y-30,2,'#f2f5fa'); }
+  else { const st=s.st,p=head(st,-52),q=ez((ms-P.grab)/220); x=lerp(P.hx,p.x,q); y=lerp(P.hy,p.y,q); k=lerp(1,1.15,q); }
+  if(ms>P.beam0&&ms<P.beam1) { gfx.globalAlpha=.5+.3*Math.sin(s.t*30); E(x,y-4,40,40,'#ffffff'); }
+  s.x=x; s.y=y; gfx.globalAlpha=fade(u,.94); plaque(x,y,s.t,1.4*k); gfx.globalAlpha=1; });
+// The rainbow: from the plaque to every enemy, six bands that wobble.
+SC.g5_prism=(s,u)=>{ const P=s.plan,src=P.src(); if(!src) return; const g=ez(u/.2)*fade(u,.75),Gp=P.Gp;
+  const xe=Gp.x0-30,ya=Gp.top-30,yb=Gp.base+10,n=6;
+  for(let k=0;k<n;k++) { const w0=lerp(ya,yb,k/n)+Math.sin(s.t*8+k)*4,w1=lerp(ya,yb,(k+1)/n)+Math.sin(s.t*8+k+1)*4;
+    gfx.globalAlpha=g*.75; PO([[src.x,src.y-4+k-3],[lerp(src.x,xe,g),lerp(src.y,w0,g)],[lerp(src.x,xe,g),lerp(src.y,w1,g)]],RAINBOW[k],0); }
+  gfx.globalAlpha=g*.6; PO([[src.x,src.y-4],[lerp(src.x,xe,g),lerp(src.y,(ya+yb)/2-8,g)],[lerp(src.x,xe,g),lerp(src.y,(ya+yb)/2+8,g)]],'#ffffff',0);
+  gfx.globalAlpha=1; };
+// LIKE thumbs and hearts scroll up the whole screen.
+const thumb=(x,y)=>{ EO(x,y,11,11,'#4f86d8'); R(x-6,y-1,9,8,'#ffffff'); R(x-3,y-8,4,8,'#ffffff'); R(x-8,y,3,7,'#ffffff'); };
+SC.g5_storm=inBox((s,u)=>{ const n=s.n||34; for(let k=0;k<n;k++) { const sp=.7+((k*37)%10)/14,x=(k*71+13)%560+8+Math.sin(s.t*2+k)*10,y=340-((s.t*sp*220)+(k*53)%200)%380;
+  gfx.globalAlpha=fin(u,.06)*fade(u,.8); if(k%3===0) thumb(x,y); else if(k%3===1) heart(x,y,6+(k%2)*2,k%2?PINK:'#ff5a7a'); else bigWord('LIKE',x,y,CREAM,2); } gfx.globalAlpha=1; });
+SC.g5_gold=inBox((s,u)=>{ for(let k=0;k<70;k++) { const sp=.6+((k*37)%10)/12,x=(k*97+29)%576+Math.sin(s.t*3+k)*14,y=-10+((s.t*sp*170)+(k*53)%120)%340;
+  gfx.globalAlpha=fin(u,.05)*fade(u,.85); gfx.save(); gfx.translate(x,y); gfx.rotate(s.t*6+k); R(-3,-2,6,4,k%4?GOLD:'#fff2b8'); gfx.restore(); } gfx.globalAlpha=1; });
+SC.g5_kiss=(s,u)=>{ gfx.globalAlpha=fade(u,.6); heart(lerp(s.x,s.x-120,ez(u)),s.y-Math.sin(u*Math.PI)*30,6+u*10,'#ff5a7a'); gfx.globalAlpha=1; };
+SC.g5_prism=inBox(SC.g5_prism);
+G.viral_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),party=b2LiveParty();
+  const floor=Math.min(272,me.base-6),cx=Math.round(Math.max(Gp.x1+64,Math.min(me.x-110,Gp.x1+84)));
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:cx,y:floor,f:'act'},{t:900,f:'celeb',hop:12,hn:2},{t:1500,f:'act'},
+    {t:2300,f:'expr',dx:u=>Math.sin(u*Math.PI*6)*2*(1-u)},{t:3000,f:'celeb',hop:16},{t:3200,f:'celeb',dy:(u,tt)=>-Math.abs(Math.sin(tt*6))*3},
+    {t:4500,f:'celeb',hop:10,hn:2},{t:5100,f:'act'},{t:5450,f:'runR'},{t:6100,x:'home',y:'home',f:'idle'}]);
+  const lp={c0:1300,c1:2250,off:5600};
+  const pp={land:550,grab:700,beam0:1000,beam1:2100,hx:cx-6,hy:Math.round(floor-GH()-70)};
+  let pl=null;
+  ST.play(E2,[
+    [0,()=>{ scene('g5_bars',6.2,{}); setMessage('Grace grabs her hairbrush. It is a microphone now. She is going LIVE.'); say(m.id,'viral_ult'); scene('g5_brush',6.2,{to:3000}); }],
+    [650,()=>{ scene('g5_live',6.1,{plan:lp}); sfx.click&&sfx.click(); b7Later(()=>sfx.ding(),150); }],
+    [900,()=>{ scene('g5_big',1.1,{x:cx,y:floor-GH()-40,txt:'HI GUYS!',c:PINK,sc:3}); setMessage('Viewers: 3. Her whole family.'); }],
+    [1300,()=>{ setMessage('Then the count starts going up. And UP.'); for(let k=0;k<8;k++) b7Later(()=>sfx.click&&sfx.click(),k*110); }],
+    [2250,()=>{ sfx.cheer(); sfx.fanfare(); scene('g5_big',1.3,{x:288,y:120,txt:'10 MILLION!',c:GOLD,sc:5}); setMessage('TEN MILLION SUBSCRIBERS!'); }],
+    [2300,()=>{ pl=scene('g5_plaque',2.85,{plan:pp,st}); sfx.whoosh(); }],
+    [2900,()=>{ setMessage('A Diamond Play Button drops in on a string. Tinfoil. Glitter glue. Perfect.'); sfx.ding(); }],
+    [3300,()=>{ scene('g5_prism',1.5,{plan:{Gp,src:()=>pl&&pl.x!=null?{x:pl.x,y:pl.y}:null}}); scene('g5_storm',2.4,{}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),200); setMessage('She holds it up. It catches the light.'); }],
+    ['hf',3900],
+    [3900,()=>{ sfx.bonk(); sfx.ding(); for(const f of list) { const F=ST.foe(f); ST.jolt(f,.5); scene('gv_burst',.7,{x:F.x,y:F.mid,n:10,r:46,c:PINK,c2:SKYC}); } landHit(100); scene('flash',.3,{a:.45});
+      scene('g5_big',1.1,{x:Gp.x,y:Gp.top-74,txt:'SPARKLE!',c:SKYC,sc:4}); }],
+    [4500,()=>{ E2.apply(); sfx.heal(); sfx.cheer(); scene('g5_gold',1.6,{}); for(const p of party) { const q=ST.unit(p); scene('gv_glitter',.9,{x:q.x,y:q.mid,r:40}); }
+    }],
+    [5100,()=>{ scene('g5_kiss',.9,{x:cx-10,y:floor-GH()*.7}); setMessage('She blows a kiss to the camera. Bye guys!'); }],
+    [5350,()=>{ scene('g5_big',.9,{x:cx,y:floor-GH()-30,txt:'BYE GUYS!',c:PINK2,sc:3}); }],
+    [6200,'end',()=>res(E2)+'Ten million subscribers. Most of them are family. It still counts.']]); };
+
+// ---------- Diamond Leotard Finale (B6) ----------
+// The floor (drawn behind everyone): a royal-blue spring floor with a white boundary line, wiping in from the right.
+SC.g5_floor=(s,u)=>{ const ms=s.t*1000,k=ez(ms/450)*(u>.92?(1-u)/.08:1); if(k<=0) return; gfx.save(); gfx.globalAlpha=1;
+  const y0=172,clipX=lerp(600,-30,ez(ms/450)); gfx.beginPath(); gfx.rect(clipX,0,640,324); gfx.clip(); gfx.globalAlpha=u>.92?(1-u)/.08:1;
+  PO([[30,y0],[546,y0],[600,324],[-24,324]],MAT,0);
+  for(let j=0;j<9;j++) { const xa=lerp(30,546,j/8),xb=lerp(-24,600,j/8); Ln(xa,y0,xb,324,2,MATD); }
+  for(let j=1;j<4;j++) { const y=lerp(y0,324,j/4); Ln(lerp(30,-24,j/4),y,lerp(546,600,j/4),y,1,MATD); }
+  gfx.strokeStyle='#ffffff'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(50,y0+8); gfx.lineTo(526,y0+8); gfx.lineTo(572,316); gfx.lineTo(4,316); gfx.closePath(); gfx.stroke();
+  gfx.restore(); };
+// Sequins all over her (the diamond leotard): twinkling glints on her body, wherever the path takes her.
+SC.g5_sequins=(s,u)=>{ const st=s.st; if(!st||st.x==null||st.y<-20) return; const h=GH()*(st.sc||1);
+  for(let j=0;j<7;j++) { const q=(s.t*2.2+j*.31)%1,x=st.x-8+((j*7)%16),y=st.y-h*(.25+((j*11)%30)/100); gfx.globalAlpha=Math.sin(q*Math.PI)*fade(u,.9); star(x,y,1.5+q*2.5,j%2?'#ffffff':SKYC); }
+  gfx.globalAlpha=1; };
+SC.g5_poof=(s,u)=>{ for(let k=0;k<14;k++) { const a=k/14*Math.PI*2,d=ez(u)*(s.r||40); gfx.globalAlpha=1-u; star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.8,4*(1-u)+2,k%2?SKYC:'#ffffff'); }
+  if(u<.4) { gfx.globalAlpha=(1-u/.4)*.7; E(s.x,s.y,30,40,'#ffffff'); } gfx.globalAlpha=1; };
+// A vortex of gold and pink stars that spins round her while she twists up and off the top of the screen.
+SC.g5_vortex=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const cy=Math.max(-10,st.y-GH()*.5);
+  for(let k=0;k<12;k++) { const a=s.t*9+k/12*Math.PI*2,r=26+(k%3)*10; gfx.globalAlpha=fade(u,.8); star(st.x+Math.cos(a)*r,cy+Math.sin(a)*r*.45+(k%4-2)*14,3+(k%2)*2,k%2?PINK:GOLD); }
+  (s.pts=s.pts||[]).push([st.x,cy,s.t]); for(const [x,y,t0] of s.pts) { const a=1-(s.t-t0)/.45; if(a<=0) continue; gfx.globalAlpha=a*.7; E(x,y,8*a+2,8*a+2,k5(t0)); }
+  gfx.globalAlpha=1; };
+const k5=t=>RAINBOW[Math.floor(t*14)%6];
+// The meteor: a streak behind her on the way down.
+SC.g5_meteor=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const cy=st.y-GH()*.5;
+  for(let k=0;k<5;k++) { gfx.globalAlpha=(1-k/5)*.6*fade(u,.8); E(st.x+k*3,cy-k*26,16-k*2,22-k*2,k%2?PINK:GOLD); } gfx.globalAlpha=1; };
+SC.g5_shock=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.3-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; ring(s.x,s.y,10+q*120,4+q*30,4,k%2?GOLD:'#ffffff'); } gfx.globalAlpha=1; };
+SC.g5_score=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.12)); gfx.globalAlpha=fade(u,.82); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(s.rot||0); gfx.scale(g,g);
+  R(-3,16,6,24,OUT); R(-2,16,4,23,'#8a5a30'); R(-28,-20,56,40,OUT); R(-26,-18,52,36,CREAM); R(-26,-18,52,7,s.c||PINK); label('10.0',0,-5,'#2b2a26',3); gfx.restore(); gfx.globalAlpha=1; };
+// The diamond leotard: her lavender top swaps to icy sequin colors for the routine (palette letters of GRACE_BT), then back.
+const LEO={s:'#4fbfee',v:'#8fdcff',x:'#c4efff',y:'#eafcff',n:'#2f96c8',j:'#1f6a9a'};let leoWas=null;
+const leotard=on=>{ const pal=BATTLE_SPRITES.grace&&BATTLE_SPRITES.grace.pal; if(!pal) return;
+  if(on&&!leoWas) { leoWas={}; for(const k in LEO) { leoWas[k]=pal[k]; pal[k]=LEO[k]; } }
+  else if(!on&&leoWas) { for(const k in leoWas) pal[k]=leoWas[k]; leoWas=null; } };
+G.olympic_ult=E2=>{ const {m,fx}=E2,f=foesOf(E2)[0],F=ST.unit(f),me=ST.unit(m),judges=b2LiveFoes().filter(x=>x!==f),party=b2LiveParty(),others=party.filter(p=>p!==m);
+  const corner={x:536,y:194},launch={x:Math.min(520,F.x+F.w*.5+120),y:Math.min(312,F.base+6)},land={x:Math.min(548,F.x+F.w*.5+34),y:Math.min(314,F.base+3)};
+  const tw=n=>u=>-ez(u)*Math.PI*2*n;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walkR'},{t:650,x:corner.x,y:corner.y,f:'idle'},{t:700,f:(u,tt)=>Math.floor(tt*16)%2?'idle':'flip',sc:u=>1+Math.sin(u*Math.PI)*.15},
+    {t:1150,f:'celeb'},{t:1650,f:'idle',dy:u=>Math.sin(u*Math.PI)*-3},{t:1850,f:'run',ease:'in'},{t:2550,x:launch.x,y:launch.y,f:'kneel'},
+    {t:2700,f:'idle',rot:tw(3),ease:'in',ns:true},{t:3250,x:launch.x-30,y:-90,f:'idle',hide:true,ns:true},
+    {t:3500,x:land.x+60,y:-120,f:'idle',rot:u=>-Math.PI*.15,ease:'in',ns:true},{t:3800,x:land.x,y:land.y,f:'kneel'},{t:4000,f:'celeb',sc:1.12},
+    {t:5100,f:'runR'},{t:5900,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ scene('g5_bars',6.0,{}); scene('g5_floor',5.8,{back:true}); setMessage('The whole floor turns into a championship spring floor.'); say(m.id,'olympic_ult'); sfx.floorMusic(); }],
+    [700,()=>{ scene('g5_poof',.8,{x:corner.x,y:corner.y-GH()*.5}); scene('g5_sequins',5.2,{st}); leotard(true); sfx.spin&&sfx.spin(); setMessage('Grace twirls into her diamond leotard. Sequins. So many sequins.'); }],
+    [1150,()=>{ scene('g5_text',1,{st,txt:'ARMS UP!',c:PINK2}); sfx.ding(); setMessage('Corner of the mat. She salutes the judges.'); }],
+    [1300,()=>{ judges.forEach((j,k)=>{ const J=ST.foe(j); b7Later(()=>{ scene('g5_score',2.2,{x:J.x+6,y:J.top-34,rot:(k%2?-.1:.1),c:CONF[k%CONF.length]}); lift(j,-6,0,0); },k*160); }); if(judges.length) setMessage('The other monsters are the judges now. They were not asked.'); }],
+    [1650,()=>{ setMessage('Deep breath.'); }],
+    [1850,()=>{ sfx.whoosh(); setMessage('She sprints the diagonal!'); }],
+    [2700,()=>{ scene('g5_vortex',.6,{st}); sfx.jumpWhistle&&sfx.jumpWhistle(); sfx.whoosh(); b7Later(()=>sfx.whoosh(),180); setMessage('Triple twist! Straight up! Off the top of the screen!'); }],
+    [3250,()=>{ scene('g5_big',.5,{x:launch.x-30,y:84,txt:'...',c:CREAM,sc:4}); }],
+    [3500,()=>{ scene('g5_meteor',.32,{st}); sfx.whoosh(); }],
+    ['hf',3800],
+    [3800,()=>{ sfx.thud(); sfx.bonk(); sfx.stun&&sfx.stun(); ST.jolt(f,.7); lift(f,-14,.25,-10); landHit(100); E2.apply(); scene('flash',.35,{a:.6}); scene('g5_shock',.8,{x:F.x,y:F.base});
+      scene('gv_burst',.8,{x:F.x,y:F.mid,n:12,r:56,c:GOLD,c2:PINK}); scene('g5_big',1.2,{x:F.x,y:F.top-104,txt:'PERFECT 10!',c:GOLD,sc:4}); }],
+    [4000,()=>{ sfx.cheer(); sfx.fanfare(); scene('g5_text',1.1,{st,txt:'STUCK IT!',c:PINK2}); }],
+    [4300,()=>{ const pts=[F.x-40,F.x+10,F.x+60]; pts.forEach((x,k)=>b7Later(()=>{ scene('g5_score',1.6,{x,y:Math.max(70,F.top-24-(k===1?16:0)),rot:(k-1)*.12,c:CONF[k]}); sfx.ding(); },k*150));
+      others.forEach((p,k)=>{ battle.fx[p.idx].hop=.4; const q=ST.unit(p); scene('g5_text',.9,{x:q.x,y:q.top-10,txt:'GO!',c:MINT,sc:2}); }); if(others.length) setMessage('Everyone else rushes to the front of the line.'); }],
+    [5900,()=>leotard(false)],
+    [6000,'end',()=>{ leotard(false); return res(E2)+'Tens across the board. The judges were the monsters. They had no choice.'; }]]); };
+})();
+
+// ================= Polish pass (2026-10-24, claude/move-review.md) =================
+// Glitter Nails: a big sparkly bottle, and a big glittering hand on each friend. Like and Subscribe: the SUBSCRIBE button
+// is huge and its shadow grows before it bonks. Dumpling Drop: fewer, bigger squishies that squash and bounce. Split
+// Leap: a slow-motion freeze at the top of the split. Same numbers, same beats. Overrides SC.gv_bottle, SC.gv_bignail,
+// SC.gv_subbtn, SC.gv_rain and G.split_leap. Scenes prefix gp_.
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const G=RECRUIT_MOVES.grace,star=RFX.gStar,dumpling=RFX.gDumpling;
+const PINK='#ff7fb3',PINK2='#ffc1dc',PURP='#b48fe0',GOLD='#ffe08a',CREAM='#fff8e8',RED='#e8402e',MINT='#9be39a',SKYC='#9fe8ff',SKIN='#f6d4b8';
+const CONF=[PINK,PURP,GOLD,SKYC,MINT,'#ffb45a'];
+ST.nw('gp_');
+const res=E2=>E2.result?E2.result+' ':'';
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const GSP=()=>BATTLE_SPRITES.grace,GH=()=>GSP().idle.length*GSP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-GH()*(st.sc||1)*.84+dy});
+const lowest=()=>b2LiveParty().slice().sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0];
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+const S=k=>{ if(sfx[k]) sfx[k](); };
+
+// ---------- Glitter Nails: big bottle, glittering hands ----------
+const bottle=(x,y,a,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(sc,sc); R(-11,-6,22,30,OUT); R(-9,-4,18,26,PINK); R(-6,0,4,18,'#ffd0e6'); for(let k=0;k<6;k++) R(-6+(k%3)*5,4+Math.floor(k/3)*9,2,2,k%2?GOLD:CREAM);
+  R(-6,-24,12,20,OUT); R(-4,-22,8,16,'#2b2a26'); R(-3,-21,2,12,'#5a5a60'); gfx.restore(); };
+SC.gv_bottle=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.95); const x=h.x-8,y=h.y-14; bottle(x,y,-.3+Math.sin(s.t*12)*.15,2);
+  for(let k=0;k<5;k++) { const a=s.t*4+k*1.26,r=34+Math.sin(s.t*6+k)*4; star(x+Math.cos(a)*r,y-4+Math.sin(a)*r*.7,3+Math.sin(s.t*9+k)*1.5,CONF[k%CONF.length]); } };
+const glitterHand=(x,y,sc,c,t)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  EO(0,6,10,9,SKIN); for(const [fx,fy,h] of [[-8,-2,10],[-3,-6,13],[2,-6,14],[7,-4,12]]) { RO(fx-2,fy-h,5,h+6,SKIN); E(fx+.5,fy-h+2,2.6,3,c); E(fx-.4,fy-h+1,.9,1.2,'#ffffff'); }
+  RO(9,2,7,5,SKIN); E(14,3,2.4,2.2,c); gfx.restore(); };
+SC.gv_bignail=(s,u)=>{ const g=u<.15?ez(u/.15)*1.3:lerp(1.3,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.82); glitterHand(s.x,s.y,2.2*g,s.c||PINK,s.t);
+  for(let k=0;k<8;k++) { const q=((s.t*1.4)+k/8)%1,a=k*.8; gfx.globalAlpha=fade(u,.82)*Math.sin(q*Math.PI); star(s.x+Math.cos(a)*(22+q*22),s.y-10+Math.sin(a)*(18+q*14)-q*12,2+Math.sin(q*Math.PI)*4,CONF[k%CONF.length]); } };
+
+// ---------- Like and Subscribe: a huge button ----------
+SC.gv_subbtn=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=ST.unit(s.f),w=230,h0=66; let y,sq=1; const done=ms>P.hit+200,land=F.top-h0*.5+4;
+  if(ms<P.hit) { const q=ms/P.hit; y=lerp(-80,land,q*q); gfx.globalAlpha=.25+q*.3; E(F.x,F.base+2,w*.25+q*w*.25,10,'#000000'); } else { const q=cl((ms-P.hit)/450); y=land-Math.sin(q*Math.PI)*22; sq=ms<P.hit+140?.72:1; }
+  const h=h0*sq,x=F.x; gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(x,y); R(-w/2-4,-h/2-4,w+8,h+8,OUT); R(-w/2,-h/2,w,h,done?'#9aa0aa':RED); R(-w/2,-h/2,w,8,done?'#c0c6d0':'#ff7a6a'); R(-w/2,h/2-6,w,6,done?'#80868f':'#b02a1e');
+  label(done?'SUBSCRIBED':'SUBSCRIBE',18,-8,CREAM,3); gfx.beginPath(); gfx.moveTo(-w/2+16,-14); gfx.lineTo(-w/2+16,14); gfx.lineTo(-w/2+38,0); gfx.closePath(); gfx.fillStyle=CREAM; gfx.fill(); gfx.restore();
+  if(done) { const r=Math.sin(ms/50)*.45*(1-cl((ms-P.hit-200)/900)),bx=x+w/2+26,by=y-10; gfx.save(); gfx.translate(bx,by); gfx.rotate(r); gfx.scale(1.8,1.8); EO(0,0,9,10,GOLD); R(-11,6,22,4,OUT); R(-10,6,20,3,GOLD); E(0,12,3,3,OUT); gfx.restore(); } };
+
+// ---------- Dumpling Drop: fewer, bigger squishies that bounce ----------
+SC.gv_rain=(s,u)=>{ const ms=s.t*1000,L=s.L,n=6; for(let k=0;k<n;k++) { const f=L[k%L.length],F=ST.unit(f),t0=k*120,q=(ms-t0)/520; if(q<0) continue;
+    const hx=F.x+((k*23)%24-12),hy=F.top-6; let x,y,rot=0,sqx=1,sqy=1;
+    if(q<1) { x=hx+(1-q)*((k*13)%40-20); y=lerp(-60,hy,q*q); rot=q*.6; }
+    else { const b=q-1,dir=k%2?1:-1; if(b<.18) { const z=Math.sin(b/.18*Math.PI); sqx=1+z*.45; sqy=1-z*.4; x=hx; y=hy+z*6; }
+      else { const c=b-.18; x=hx+dir*c*110; y=hy-Math.sin(Math.min(1,c*1.1)*Math.PI)*70+Math.max(0,c-.9)*260; rot=c*5*dir; if(c>1.9) continue; } }
+    gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(rot*.3); gfx.scale(sqx,sqy); const C=[null,'#ffc1dc','#c9a6f0','#9fe8ff','#9be39a','#ffd88a'][k%6];
+    if(!C) dumpling(0,0,0,.95); else { EO(0,0,26,22,C); E(-9,-6,3,3,OUT); E(9,-6,3,3,OUT); E(-14,2,4,2.5,'#ff9ac0'); E(14,2,4,2.5,'#ff9ac0'); gfx.beginPath(); gfx.arc(0,2,5,.2,Math.PI-.2); gfx.strokeStyle=OUT; gfx.lineWidth=2.5; gfx.stroke(); E(-8,-12,5,3,'#ffffffaa'); }
+    gfx.restore(); if(q>=1&&q<1.2) { gfx.globalAlpha=1-(q-1)/.2; bigWord('SQUISH',hx,hy-34,PINK2,2); } } };
+
+// ---------- Split Leap: a slow-motion freeze at the top ----------
+SC.gp_slow=(s,u)=>{ const ms=s.t*1000,a=ez(ms/150)*(ms>s.len-150?ez((s.len-ms)/150):1); if(a<=0) return; const st=s.st;
+  gfx.globalAlpha=a*.32; R(0,0,576,324,'#2a2060'); gfx.globalAlpha=a; R(0,0,576,18,'#0b0a12'); R(0,306,576,18,'#0b0a12');
+  bigWord('SLOW-MO',288,26,PINK2,3); if(st&&st.x!=null) { const y=st.y-GH()*.55; for(let k=0;k<7;k++) { const q=((ms/700)+k/7)%1,a2=k*.9; gfx.globalAlpha=a*Math.sin(q*Math.PI); star(st.x+Math.cos(a2)*(40+q*20),y+Math.sin(a2)*(30+q*10),3+Math.sin(q*Math.PI)*4,CONF[k%CONF.length]); }
+    gfx.globalAlpha=a*.85; for(let k=1;k<5;k++) Ln(st.x+18+k*16,y-16+k*6,st.x+40+k*16,y-16+k*6,3,k%2?PINK2:CREAM); } };
+G.split_leap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),list=b2LiveFoes(),Gp=ST.group(list.length?list:[f]),F=ST.unit(f),me=ST.unit(m),L=lowest(),LU=L?ST.unit(L):null;
+  const start={x:Math.min(552,Gp.x1+60),y:Math.min(314,Gp.base+6)},far={x:Math.max(26,Gp.x0-34),y:Math.min(314,Gp.base+6)},topY=Math.max(70,F.top-24),ax=F.x+18;
+  const up=900,apex=1350,go2=2250,land=2700,hit=2350;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:start.x,y:start.y,f:'run'},{t:up,f:'act',sc:1.15,ease:'out',ns:true},{t:apex,x:ax,y:topY,f:'act',sc:1.3,dx:u=>-u*8,dy:u=>-Math.sin(u*Math.PI)*3,ease:'lin',ns:true},
+    {t:go2,x:ax-8,y:topY,f:'act',sc:1.15,ease:'in',ns:true},{t:land,x:far.x,y:far.y,f:'celeb',hop:10},{t:land+350,f:'flip'},{t:land+650,f:'runR'},{t:land+1650,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Grace takes a running start.'); say(m.id,'split_leap'); scene('gv_leap',(land+100)/1000,{st,from:up,to:land}); }],
+    [up,()=>{ S('jumpWhistle'); setMessage('A split leap over the whole row.'); }],
+    [apex,()=>{ S('click'); scene('gp_slow',(go2-apex)/1000,{st,len:go2-apex}); scene('gv_big',(go2-apex)/1000,{x:288,y:310,txt:'SPLIT LEAP!',c:PINK,sc:3}); setMessage('She freezes at the top. Perfect split. Hold it. Hold it.'); }],
+    ['hf',hit],
+    [hit,()=>{ S('bonk'); ST.jolt(f,.55); landHit(100); scene('gv_burst',.6,{x:F.x,y:F.top,n:8,r:40}); }],
+    [land,()=>{ S('thud'); E2.apply(); if(LU) { scene('gr_heart',1.1,{x:LU.x,y:LU.top-8,r:8}); scene('gv_text',1,{x:LU.x,y:LU.top-24,txt:'GUARDED',c:SKYC,sc:1}); } }],
+    [land+350,()=>{ scene('gv_text',.8,{st,txt:'TA-DA',c:GOLD}); S('ding'); }],
+    [land+1750,'end',res(E2)+'Clean over the top. Not one toe touched them. Well, one did.']]); };
 })();

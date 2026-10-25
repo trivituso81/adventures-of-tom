@@ -8,8 +8,8 @@
 const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'stamps',label:'Stamps'},{id:'saves',label:'Load'},{id:'options',label:'Options'},{id:'quit',label:'Quit'}];
 // Saving happens from the SAVE button on the map HUD (openSave), which shows just the save popup.
 const PER_CHAR_TABS=['status','gear','stamps'];
-// Character portraits for the roster. Put an image path per id (e.g. tom:'portraits/tom.png?v=3'); empty shows a placeholder.
-const PORTRAITS={tom:'portraits/tom.png?v=3',amy:'portraits/amy.png?v=3',grace:'portraits/grace.png?v=3',deedee:'portraits/deedee.png?v=4',boppy:'portraits/boppy.png?v=3',nara:'portraits/nara.png?v=3',tnb:'portraits/tnb.png?v=3',rose:'portraits/rose.png?v=3'};
+// Character portraits for the roster. Put an image path per id (e.g. tom:'portraits/tom.png?v=4'); empty shows a placeholder.
+const PORTRAITS={tom:'portraits/tom.png?v=4',amy:'portraits/amy.png?v=3',grace:'portraits/grace.png?v=3',deedee:'portraits/deedee.png?v=4',boppy:'portraits/boppy.png?v=3',nara:'portraits/nara.png?v=3',tnb:'portraits/tnb.png?v=3',rose:'portraits/rose.png?v=3'};
 let playTime=0;
 // Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
 const GEAR_KEYS=STAT_NAMES;

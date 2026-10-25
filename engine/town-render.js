@@ -15,6 +15,7 @@ function walkPhase(a) {
   return clamp(a.move.elapsed/a.move.duration,0,1);
 }
 function drawSheetActor(a,set) {
+  if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
   const p=position(a);
   const cx=Math.round((p.x+.5)*T)+kissLean(a),base=Math.round((p.y+1)*T-2)-Math.round(a.lift||0);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
@@ -24,7 +25,11 @@ function drawSheetActor(a,set) {
   if(!a.noShadow) ellipse(cx,base+1+Math.round(a.lift||0),Math.round(w*.45),4,'#2f493640');
   const m=a.isPlayer?hero:a.member;
   activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
+  const rider=a.isPlayer?roseRider():null;
+  if(rider) drawOwRider(rider,a.facing,cx,base-h,true);
+  activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
   drawSprite(fr,set.pal,cx-Math.floor(w/2),base-h,1);
+  if(rider) drawOwRider(rider,a.facing,cx,base-h,false);
   activeTint=null;
 }
 

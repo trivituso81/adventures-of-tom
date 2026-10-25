@@ -12,6 +12,19 @@ function loadDialogLine() {
   $('announcer').textContent=dialog.name+': '+dialog.lines[dialog.index];
 }
 
+// Party members show their portrait beside the text (images from PORTRAITS in engine/menu.js); everyone else gets the
+// plain box. Keyed by the speaker name exactly as scenes and NPCs pass it, lowercased.
+const DIALOG_PORTRAIT_IDS={tom:'tom',grace:'grace',rose:'rose',amy:'amy',deedee:'deedee',boppy:'boppy',tnb:'tnb',nara:'nara'};
+for(const id of Object.values(DIALOG_PORTRAIT_IDS)) if(PORTRAITS[id]) new Image().src=PORTRAITS[id];   // preload so the face never pops in late
+function setDialogPortrait(name) {
+  const box=$('dialog-portrait'); if(!box) return;
+  const id=DIALOG_PORTRAIT_IDS[String(name||'').trim().toLowerCase()], src=id&&PORTRAITS[id];
+  const img=box.querySelector('img');
+  if(src) { if(img.getAttribute('src')!==src) img.src=src; img.alt=''; }
+  box.hidden=!src;
+  $('dialog').classList.toggle('has-portrait',!!src);
+}
+
 function openDialog(name,lines,npc=null) {
   dialog.active=true;
   dialog.name=name;
@@ -27,6 +40,7 @@ function openDialog(name,lines,npc=null) {
   }
 
   $('speaker').textContent=name;
+  setDialogPortrait(name);
   $('dialog').hidden=false;
   $('hint').hidden=true;
   dialog.seed=hash(name.length,name.charCodeAt(0));

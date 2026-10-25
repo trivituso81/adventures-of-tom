@@ -32,7 +32,7 @@ const B6_XP={mudling:12,skeeter:24,grump:26,toad:30,log:34,bigone:100,
 const B6_TRAITS={
   tom:{name:'Diamond Medallion',text:'DEFEND on an ally or any Tombo earns an Upgrade Mile (max 3). At 3 Miles his next skill is free and he goes again right away.'},
   grace:{name:'Trending Meter',text:'Each move different from her last one trends higher (x1.0, x1.2, x1.5). Boosts her heals and critical hits. Repeating a move resets it.'},
-  rose:{name:'Shoulder Ride',text:'Lamby Launch, Piggyback Pounce and Double-Decker Boop end with her up on Tom’s shoulders for 3 turns. Tom takes her hits, and her skills hit twice.'},
+  rose:{name:'Shoulder Ride',text:'Lamby Launch, Piggyback Pounce and Double-Decker Airplane end with her up on Tom’s shoulders for 3 turns. Tom takes her hits, and her skills hit twice.'},
   amy:{name:'Pace Setter',text:'Every action she takes speeds up the whole party (+5% PEP each, up to +25%). A knockout resets it.'},
   deedee:{name:'Warm Crust Tokens',text:'Rhubarb Crisp and Sunday Dinner put Warm Crusts on the tray (max 3). Anyone can eat one as a free action to heal 20%. Even Nara.'},
   boppy:{name:'Heartburn',text:'Peppers and hits he takes while guarding add Heartburn. At 3 his next attack or GRUMBLE lets out the Warden’s Counter-Roar and stuns whoever hit him.'},

@@ -339,10 +339,11 @@ function splashScene(W,H,panelH,time) {
   {
     const cx=X(tom.fx),lift=hopY(tom);
     shadow(cx,frontFy,OW.tom.down[0][0].length,lift);
-    // Rose: feet at Tom's shoulders, drawn behind him; she bounces on her own turn and a little all the time.
-    const rl=lift+28*S+hopY(rose)+(Math.floor(time*3)%2)*S;
-    drawOne(OW.rose,rose.hopT>=0?1:0,cx,frontFy,rl);
+    // Rose sits on Tom's shoulders (engine/rose-ride.js); she bounces on her own turn and a little all the time.
+    const tf=OW.tom.down[tom.hopT>=0?2:0],top=frontFy-tf.length*S-lift,rb=hopY(rose)+(Math.floor(time*3)%2)*S;
+    roseRide('ow_down','back',cx,top-rb,S);
     drawOne(OW.tom,tom.hopT>=0?2:0,cx,frontFy,lift);
+    roseRide('ow_down','front',cx,top-Math.min(rb,S),S);
     L.pos.tom={x:cx,y:frontFy-lift};
   }
   // Nara: idle at her spot, or running for the ball.

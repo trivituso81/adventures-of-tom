@@ -6,7 +6,7 @@
 //          skill costs 0 VP and is instant (he goes again right away).
 //   Grace  Trending Meter: a different move than her last one raises it (x1, x1.2, x1.5 on her heals and crits);
 //          the same move twice in a row resets it.
-//   Rose   Shoulder Ride: Lamby Launch, Piggyback Pounce and Double-Decker Boop end with her on Tom's shoulders for
+//   Rose   Shoulder Ride: Lamby Launch, Piggyback Pounce and Double-Decker Airplane end with her on Tom's shoulders for
 //          3 turns. Tom takes single hits aimed at her (40% softer) and her skills hit a second time at 40%.
 //   Amy    Pace Setter: every turn she acts without being knocked out adds a Cadence stack: +5% PEP for the whole
 //          party, up to +25%. A knockout resets it.
@@ -78,11 +78,13 @@ function b2RidePos(m,i) {
   const a=d||{cx:q.x*3,base:q.base*3,h:sp.idle.length*sp.scale};
   return {cx:a.cx+2,base:a.base-a.h+20+Math.round(Math.abs(Math.sin(battle.time*3))*2)};
 }
-// Rose is drawn after Tom while she rides him.
+// Rose is drawn just before Tom while she rides him (her body behind his head); her shoes go on after him
+// (engine/rose-ride.js).
 function b2RideOrder(order,party) {
-  const r=party.findIndex(p=>p.id==='rose');
-  if(r<0||!b2Riding(party[r])) return;
-  order.splice(order.indexOf(r),1); order.push(r);
+  const last=battle._seatLast; battle._seat=null; battle._seatLast=false;
+  const r=party.findIndex(p=>p.id==='rose'),ti=party.findIndex(p=>p.id==='tom');
+  if(r<0||ti<0||!(b2Riding(party[r])||last)) return;
+  order.splice(order.indexOf(r),1); order.splice(order.indexOf(ti),0,r);
 }
 
 // ---------- Amy: Pace Setter ----------

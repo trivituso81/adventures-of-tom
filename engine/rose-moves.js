@@ -1081,3 +1081,368 @@ Rm.pillow_fort=E2=>{ const {m,fx}=E2,who=(E2.targets&&E2.targets.length?E2.targe
     [3100,()=>{ sfx.giggle(); scene('ro_text',.9,{st,txt:'NO MONSTERS',c:PINK,sc:2}); }],
     [4300,'end',foe?kindLine(foe):'Nobody gets in without the password. The password is Lamby.']]); };
 })();
+
+// ================= Option 3 Ultimates (phase 5b, 2026-10-24) =================
+// Rose's two Primary Ultimates (Option 2 cards, option3-implementation-brief.md core rule 2), held to the move review rules:
+// a six-year-old doing it for real. Tea Party with Lamby (A6): a long kids' table with a lacy pink cloth rolls out under the
+// enemies, tiny pink chairs pop up, Lamby sits at the head in a bow tie, Rose pours invisible tea from a big plastic teapot,
+// DRINK UP!, every monster lifts a toy cup with its pinky out, and the pretend tea goes off like rainbow fireworks that launch
+// the table. Operation Shoulder Mecha (B6): she climbs onto Tom's shoulders, taped-up cardboard boxes dock onto him (chest box
+// with a crayon TA-TA 01), a box visor drops over her head, crayon crosshairs lock every enemy, she pulls two paper-towel-tube
+// levers and the chest fires a rainbow glitter laser plus a cardboard rocket fist; the boxes fall off and she stays up top.
+// Scenes prefix r5_ (no warp). BAR=24 thin letterbox and inBox() clipping, as in Grace's fifth IIFE.
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const PO=(pts,c,o=2)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); if(o) { gfx.strokeStyle=OUT; gfx.lineWidth=o; gfx.lineJoin='round'; gfx.stroke(); } };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const star=(x,y,r,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.beginPath(); for(let k=0;k<10;k++) { const a=k*Math.PI/5-Math.PI/2,q=k%2?r*.45:r; gfx.lineTo(Math.cos(a)*q,Math.sin(a)*q); } gfx.closePath();
+  gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=2; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); gfx.restore(); };
+const Rm=RECRUIT_MOVES.rose;
+const PINK='#ffb3cf',PINK2='#ff7fb3',HOT='#ff5a9a',GOLD='#ffe08a',CREAM='#fff8e8',PURP='#c9a6f0',SKY='#9fd8ff',MINT='#9be39a',RED='#e0402e';
+const BOX='#c9995a',BOXD='#a97a3e',BOXL='#e2bb80',TAPE='#efe0a8';
+const RAINBOW=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff'];
+ST.nw('r5_');
+const res=E2=>E2.result?E2.result+' ':'';
+const foesOf=E2=>{ const l=(E2.targets||[]).filter(t=>t.side==='foe'); return l.length?l:b2LiveFoes(); };
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const plush=(x,y,sc,o)=>RFX.plush(x,y,sc,o||{});
+const RSP=()=>BATTLE_SPRITES.rose,RH=()=>RSP().idle.length*RSP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-RH()*(st.sc||1)*.84+dy});
+const tomUp=()=>B2.party.find(p=>p.id==='tom'&&b2Alive(p));
+const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+// Where a monster's mouth is (data/monsters.js mouth pixel), for the toy cups.
+const mouthOf=f=>{ const F=ST.unit(f),d=f.def||MONSTERS[f.id]||{},S=d.sprite;
+  if(!S||!d.mouth) return {x:F.x-F.w*.2,y:F.top+F.h*.55};
+  const W=S[0].length,H=S.length; return {x:F.x-F.w/2+F.w*(d.mouth[0]+.5)/W,y:F.top+F.h*(d.mouth[1]+.5)/H}; };
+const BAR=24;
+SC.r5_bars=(s,u)=>{ const k=ez(u/.08)*(u>.93?(1-u)/.07:1); R(0,0,576,BAR*k,'#000'); R(0,324-BAR*k,576,BAR*k,'#000'); };
+const inBox=fn=>(s,u)=>{ gfx.save(); gfx.beginPath(); gfx.rect(0,BAR,576,324-BAR*2); gfx.clip(); fn(s,u); gfx.restore(); };
+SC.r5_big=inBox((s,u)=>{ const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
+  let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-34); x=p.x; y=p.y; }
+  x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+BAR+16,y);
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||PINK,sc); gfx.restore(); gfx.globalAlpha=1; });
+SC.r5_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.6); R(0,0,576,324,s.c||'#ffffff'); gfx.globalAlpha=1; };
+SC.r5_burst=(s,u)=>{ const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5);
+  star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||PINK),u*4+k); } gfx.globalAlpha=1; };
+SC.r5_hearts=(s,u)=>{ for(let k=0;k<(s.n||6);k++) { const a=-Math.PI/2+(k-(s.n||6)/2+.5)*.45,d=ez(u)*(s.r||46); gfx.globalAlpha=fade(u,.6); heart(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,(s.sz||7)*(1-u*.3),k%2?'#ff6b9a':PINK2); } gfx.globalAlpha=1; };
+SC.r5_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||36,s.ry||50,s.c||GOLD); gfx.globalAlpha=1; };
+
+// ---------- Tea Party with Lamby (A6) ----------
+// Every enemy gets its own little kids' table with a lacy pink cloth and a tiny pink chair to perch on. Lamby sits on his
+// own chair at the head of the party in a red bow tie. Rose walks round with a big plastic teapot pouring invisible tea into
+// a toy cup at every place, claps DRINK UP!, every monster lifts its cup with the pinky out, and the pretend tea goes off
+// like rainbow fireworks that launch the tables. P: the plan (timings in absolute ms, places).
+const teacup=(x,y,sc=1,pinky=false)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  EO(0,4,9,2.5,CREAM); PO([[-7,-6],[7,-6],[5,3],[-5,3]],'#ffffff',2); R(-6,-4,12,2,PINK2); heart(0,-.5,1.6,PINK2);
+  gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.beginPath(); gfx.arc(8,-2,3.5,-1.3,1.3); gfx.stroke(); gfx.strokeStyle='#ffffff'; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(8,-2,3.5,-1.3,1.3); gfx.stroke();
+  if(pinky) { LnO(10,-5,13,-11,2,'#f0c8a8'); EO(13,-11,1.4,1.4,'#f0c8a8'); } gfx.restore(); };
+// The big pink plastic teapot: lid knob, spout (left), handle, a white heart.
+const teapot=(x,y,sc,tilt)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(sc,sc);
+  gfx.strokeStyle=OUT; gfx.lineWidth=5; gfx.beginPath(); gfx.arc(9,-1,6,-1.4,1.4); gfx.stroke(); gfx.strokeStyle=PINK2; gfx.lineWidth=2.5; gfx.beginPath(); gfx.arc(9,-1,6,-1.4,1.4); gfx.stroke();
+  PO([[-8,-2],[-17,-10],[-19,-9],[-11,3]],PINK2,2);
+  EO(0,0,11,9,PINK2); E(-3,-3,5,3,'#ffd0e4'); RO(-7,-11,14,3,HOT); EO(0,-13,2.5,2,HOT); heart(2,2,3,'#ffffff'); gfx.restore(); };
+// A tiny pink chair (seat, back, legs). sd: which side the back is on.
+const chair=(x,y,sc=1,sd=-1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  for(const lx of [-9,7]) { R(lx-1,-2,5,14,OUT); R(lx,-1,3,12,HOT); } R(sd*11-2,-24,6,24,OUT); R(sd*11-1,-23,4,22,HOT); RO(sd*11-5,-26,12,5,PINK2); RO(-12,-6,24,5,PINK2); gfx.restore(); };
+// One place: a little table in front of the enemy (cloth, scallops, dots), its chair, and the cup once it is poured.
+SC.r5_tables=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+(s.t0||0); gfx.globalAlpha=1;
+  for(const c of P.places) { const g=ms>c.at?ez((ms-c.at)/260):0; if(g<=0) continue;
+    const up=ms>P.boom?ez((ms-P.boom-c.k*60)/650):0,dy=-up*380,rot=up*(c.k%2?.6:-.6);
+    // the chair under the monster's back half (the monster perches on it)
+    if(!up) chair(c.chx,c.chy+(1-ez((ms-c.at)/200))*20,1,-1);
+    const x0=c.x0,x1=lerp(c.x0+8,c.x1,g),y=c.y+dy;
+    gfx.save(); gfx.translate((x0+x1)/2,y); gfx.rotate(rot); gfx.translate(-(x0+x1)/2,-y);
+    for(const lx of [x0+6,x1-8]) { R(lx-3,y,6,16,OUT); R(lx-2,y,4,15,'#f0e2d2'); }
+    RO(x0,y-5,x1-x0,6,'#f6ead8');
+    R(x0-2,y,x1-x0+4,10,OUT); R(x0,y,x1-x0,9,PINK);
+    for(let x=x0;x<x1-4;x+=10) { E(x+5,y+9,6,4.5,OUT); E(x+5,y+9,5,3.5,PINK); E(x+5,y+10,1.6,1.2,'#ffffff'); }
+    for(let x=x0+5;x<x1-3;x+=9) E(x,y+4,1.3,1.3,'#ffffff');
+    if(ms>c.pour&&!(ms>P.drink+c.k*90)) teacup(c.cx,y-9,1.5);
+    if(up) teacup(c.cx,y-9,1.5);
+    gfx.restore(); } });
+// Raised cups: they float up to each enemy's mouth with the pinky out, and wobble as it sips.
+SC.r5_sip=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.drink; if(ms>P.boom) return; for(const c of P.places) { const q=ez((ms-P.drink-c.k*90)/400); if(q<=0) continue;
+  const x=lerp(c.cx,c.mx+12,q),y=lerp(c.y-9,c.my+4,q)+Math.sin(ms/150+c.k)*1.5*q; teacup(x,y,1.7,q>.5);
+  if(q>=1&&Math.floor(ms/260+c.k)%2) label('SIP',c.mx+34,c.my-22,PINK2,2); } });
+// The teapot in her hand, tilted while she pours; invisible tea is a little trickle of sparkles.
+SC.r5_pot=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.potUp; if(ms>P.potDown) return; const h=hand(),pouring=P.places.find(c=>ms>c.pour0&&ms<c.pour);
+  const tilt=pouring?.8+Math.sin(ms/140)*.1:.1,x=h.x-14,y=h.y+4; teapot(x,y,1.7,-tilt);
+  if(pouring) { const sx=x-30,sy=y+4; for(let k=0;k<7;k++) { const q=((ms/280)+k/7)%1; gfx.globalAlpha=1-q; star(sx-q*6+Math.sin(k*2)*3,sy+q*26,2+q*1.5,k%2?'#ffffff':SKY,q*4); } gfx.globalAlpha=1; } };
+// Lamby: carried in, sitting on his own chair at the head of the party in a red bow tie, then carried home.
+SC.r5_lamby=(s,u)=>{ const P=s.plan,ms=s.t*1000; let x,y,sc=1.1,rot=.25; const seated=ms>=P.seat&&ms<=P.pick;
+  if(seated) chair(P.lx+4,P.ly+16,1.05,1);
+  if(!seated) { const h=hand(); x=h.x+2; y=h.y+6; if(ms>P.pick) { const q=ez((ms-P.pick)/200); x=lerp(P.lx,h.x+2,q); y=lerp(P.ly,h.y+6,q); sc=lerp(1.35,1.1,q); } }
+  else { const q=ez((ms-P.seat)/200),h=hand(); x=lerp(h.x+2,P.lx,q); y=lerp(h.y+6,P.ly,q); sc=lerp(1.1,1.35,q); rot=lerp(.25,0,q); }
+  if(seated&&ms>P.clap&&ms<P.clap+700) rot=Math.sin((ms-P.clap)/60)*.12;
+  if(seated&&ms>P.boom&&ms<P.boom+900) y-=Math.abs(Math.sin((ms-P.boom)/120))*8;
+  plush(x,y,sc,{pose:'held',rot});
+  if(seated) { const bx=x-12*sc+9,by=y+4*sc; PO([[bx,by],[bx-7,by-5],[bx-7,by+5]],RED,1.5); PO([[bx,by],[bx+7,by-5],[bx+7,by+5]],RED,1.5); EO(bx,by,2,2,'#ff8a7a'); } };
+// The geyser: each cup becomes a column of rainbow sparkle fireworks with hearts.
+SC.r5_geyser=inBox((s,u)=>{ for(const c of s.places) { const h=ez(u/.3)*200,x=c.mx+12;
+  for(let k=0;k<6;k++) { gfx.globalAlpha=.75*fade(u,.6); R(x-12+k*4,c.my-h+k*3,4,h,RAINBOW[k]); }
+  for(let k=0;k<12;k++) { const q=cl(u*1.6-k*.05); if(q<=0||q>=1) continue; const a=k/12*Math.PI*2+c.k,d=q*80; gfx.globalAlpha=1-q;
+    star(x+Math.cos(a)*d,c.my-h*.8+Math.sin(a)*d*.7,6*(1-q)+2,RAINBOW[k%6],q*5); if(k%3===0) heart(x+Math.cos(a+1)*d*.6,c.my-h*.6+Math.sin(a+1)*d*.5,6,'#ff6b9a'); } }
+  gfx.globalAlpha=1; });
+// Confetti hearts over the party when the tea refreshes everyone.
+SC.r5_refresh=inBox((s,u)=>{ for(let k=0;k<40;k++) { const sp=.6+((k*37)%10)/12,x=s.x0+((k*97+29)%(s.x1-s.x0))+Math.sin(s.t*3+k)*10,y=BAR-10+((s.t*sp*160)+(k*53)%110)%300;
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); if(k%3) heart(x,y,4+(k%2)*2,k%2?PINK:'#ff6b9a'); else star(x,y,3,GOLD,s.t*5+k); } gfx.globalAlpha=1; });
+// Enemies perch on their tiny chairs (raised a little, tipped back), wobble while sipping, and are launched at the boom.
+SC.r5_sit=(s,u)=>{ const P=s.plan,ms=s.t*1000+(s.t0||0); for(const c of P.places) { const f=c.f;
+  if(ms>P.boom) { const q=(ms-P.boom)/1000; lift(f,-Math.max(0,Math.sin(Math.min(1,q*1.4)*Math.PI))*44,Math.sin(q*12)*.12*(1-q)); continue; }
+  const g=ms>c.at+150?ez((ms-c.at-150)/200):0,sip=ms>P.drink?Math.sin((ms-P.drink)/170+c.k)*.05:0; lift(f,-g*8,-g*.06+sip); } };
+Rm.teaparty_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2LiveParty(),me=ST.unit(m);
+  const order=list.slice().sort((a,b)=>ST.foe(b).x-ST.foe(a).x||ST.foe(a).base-ST.foe(b).base);
+  const n=order.length,per=Math.min(520,1300/Math.max(1,n)),S0=1150;
+  const places=order.map((f,k)=>{ const F=ST.foe(f),M=mouthOf(f),y=Math.min(286,F.base-6),at0=S0+k*per;
+    return {f,k,x0:F.x-F.w*.5-6,x1:F.x+F.w*.5+12,y,cx:F.x+F.w*.5-6,chx:F.x-F.w*.5,chy:Math.min(290,F.base+4),mx:M.x,my:M.y,top:F.top,
+      at:300+k*170,pour0:at0+per*.45,pour:at0+per-60,arrive:at0+per*.4,depart:at0,spot:{x:Math.min(548,F.x+F.w*.5+34),y:Math.min(292,F.base+4)}}; });
+  const head={x:Math.min(310,Math.round(Gp.x1+100)),y:Math.min(286,Math.round(Gp.base-24))};
+  const P={places,drink:2900,boom:3900,potUp:1050,potDown:2550,seat:850,pick:5000,clap:2650,lx:head.x-50,ly:head.y-18};
+  const K=[{t:0,x:'home',y:'home',f:'run'},{t:650,x:head.x,y:head.y,f:'idle'},{t:850,f:'act',dx:u=>ez(u)*4},{t:1050,f:'idle'}];
+  for(const c of places) K.push({t:c.depart,f:'walk',hop:4,hn:3},{t:c.arrive,x:c.spot.x,y:c.spot.y,f:'act',dx:(u,tt)=>-Math.sin(tt*6)*3,dy:(u,tt)=>-Math.abs(Math.sin(tt*6))*2});
+  K.push({t:S0+n*per,f:'walkR',hop:4,hn:3},{t:2600,x:head.x,y:head.y,f:'idle'},{t:2650,f:'celeb',hop:14,hn:2},
+    {t:3100,f:'expr',dy:(u,tt)=>-Math.abs(Math.sin(tt*7))*3},{t:3900,f:'celeb',hop:18},{t:4400,f:'celeb',hop:10,hn:2},{t:5000,f:'act'},{t:5300,f:'runR',hop:4,hn:4},{t:6100,x:'home',y:'home',f:'idle'});
+  const st=ST.keys(fx,K);
+  ST.play(E2,[
+    [0,()=>{ scene('r5_bars',6.4,{}); setMessage('Rose is having a tea party. Everyone is invited. Everyone HAS to come.'); say(m.id,'teaparty_ult'); sfx.ding(); scene('r5_lamby',6.1,{plan:P}); }],
+    [300,()=>{ scene('r5_tables',5.9,{plan:P,t0:300}); scene('r5_sit',4.6,{plan:P,t0:300}); sfx.whoosh(); places.forEach(c=>b7Later(()=>sfx.boing(),c.at-300+150)); }],
+    [450,()=>{ setMessage('Little lacy tables roll out. Tiny pink chairs pop up under every enemy.'); }],
+    [850,()=>{ sfx.baa(); scene('r5_big',1,{x:P.lx,y:P.ly-36,txt:'BOW TIE',c:CREAM,sc:2}); setMessage('Lamby sits at the head of the table. He is wearing a bow tie.'); }],
+    [1050,()=>{ scene('r5_pot',1.5,{plan:P}); sfx.select(); }],
+    [S0,()=>{ setMessage('Rose pours everybody tea. It is invisible. It is VERY hot.'); places.forEach(c=>b7Later(()=>{ sfx.ting?sfx.ting():sfx.ding(); },c.pour0-S0+120)); }],
+    [Math.round(places[0]?places[0].pour0:S0),()=>{ const c=places[0]; if(c) scene('r5_big',1.2,{x:c.cx,y:c.top-30,txt:'INVISIBLE TEA',c:SKY,sc:2}); }],
+    [2650,()=>{ sfx.dance&&sfx.dance(); scene('r5_big',1.1,{st,txt:'DRINK UP!',c:PINK2,sc:3}); setMessage('Rose claps. DRINK UP!'); }],
+    [2900,()=>{ scene('r5_sip',1.0,{plan:P}); setMessage('Every enemy lifts a tiny cup. Pinkies up.'); places.forEach(c=>b7Later(()=>sfx.ting?sfx.ting():sfx.select(),c.k*90+400)); }],
+    [3050,()=>{ scene('r5_big',.85,{x:Gp.x,y:Gp.top-58,txt:'PINKIES UP!',c:CREAM,sc:3}); }],
+    ['hf',3900],
+    [3900,()=>{ sfx.whoosh(); sfx.fanfare&&sfx.fanfare(); sfx.bonk(); for(const f of list) ST.jolt(f,.5); landHit(100); scene('r5_flash',.35,{a:.5});
+      scene('r5_geyser',1.4,{places}); for(const c of places) scene('r5_burst',.8,{x:c.mx+12,y:c.my,n:10,r:50,c:PINK2,c2:SKY,seed:c.k});
+      scene('r5_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'TEA PARTY!',c:GOLD,sc:4}); setMessage('The pretend tea goes off like fireworks!'); }],
+    [4400,()=>{ E2.apply(); sfx.heal(); scene('r5_refresh',1.4,{x0:300,x1:570}); for(const p of party) { const q=ST.unit(p); scene('r5_glow',1,{x:q.x,y:q.mid,c:PINK}); scene('r5_hearts',1,{x:q.x,y:q.top+6,n:5,r:40,sz:6}); } }],
+    [5000,()=>{ sfx.baa(); scene('r5_big',.9,{st,txt:'THANK YOU!',c:PINK,sc:2}); }],
+    [6300,'end',()=>res(E2)+'Best tea party ever. Lamby says everyone had lovely manners.']]); };
+
+// ---------- Operation Shoulder Mecha (B6) ----------
+// The base of the mecha: Tom as he is drawn this frame (Rose on his shoulders), or Rose herself if he is down.
+const baseOf=(tom,st)=>{ if(tom) { const d=battle.drawnAt&&battle.drawnAt[tom.idx],q=BATTLE_POS[tom.idx],sp=BATTLE_SPRITES.tom,h=sp.idle.length*sp.scale,w=sp.idle[0].length*sp.scale;
+    const a=d||{cx:q.x*3,base:q.base*3,h}; return {x:a.cx,base:a.base,h:a.h||h,w}; }
+  return {x:st&&st.x!=null?st.x:ST.unit(B2.party.find(p=>p.id==='rose')).x,base:st&&st.y!=null?st.y:300,h:RH(),w:RSP().idle[0].length*RSP().scale}; };
+const ride=tom=>{ const b=baseOf(tom); return {x:b.x+2,y:b.base-b.h+20}; };
+// Diagonal anime speed lines behind everyone.
+SC.r5_speed=(s,u)=>{ const k=fin(u,.1)*fade(u,.7); for(let j=0;j<26;j++) { const q=((s.t*2.6)+j*.137)%1,x=-120+((j*83)%820)-q*260,y=-40+((j*47)%400)+q*130;
+  gfx.globalAlpha=k*(.25+(j%3)*.12); Ln(x,y,x+90+(j%4)*30,y-45-(j%4)*15,2+(j%3),j%2?'#ffffff':PINK); } gfx.globalAlpha=1; };
+// One cardboard box with tape and crayon. w,h: size; o: {txt, arrow, scrib}
+const box=(x,y,w,h,o={})=>{ RO(x-w/2,y-h/2,w,h,BOX); R(x-w/2,y-h/2,w,3,BOXL); R(x-w/2,y+h/2-3,w,3,BOXD); R(x-3,y-h/2,6,h,TAPE);
+  if(o.arrow) { Ln(x+w/2-7,y+h/2-4,x+w/2-7,y-h/2+6,1.5,'#5a3a1a'); Ln(x+w/2-10,y-h/2+9,x+w/2-7,y-h/2+6,1.5,'#5a3a1a'); Ln(x+w/2-4,y-h/2+9,x+w/2-7,y-h/2+6,1.5,'#5a3a1a'); }
+  if(o.scrib) for(let k=0;k<3;k++) Ln(x-w/2+5,y-h/2+6+k*4,x-w/2+5+w*.25,y-h/2+5+k*4,1.5,['#3a7ad8','#2fa84a','#e0402e'][k]); };
+// The armor plan: pieces fly in from off-screen to docking spots on the base, then fall off at P.off.
+SC.r5_armor=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0,b=baseOf(P.tom,P.st),H=b.h,W=b.w,sm=P.tom?1:.7;
+  const spots=[{k:'legF',x:b.x+W*.18,y:b.base-H*.12,w:20*sm,h:24*sm,from:[620,260]},{k:'legB',x:b.x-W*.18,y:b.base-H*.12,w:20*sm,h:24*sm,from:[-60,300]},
+    {k:'armB',x:b.x-W*.46,y:b.base-H*.42,w:18*sm,h:30*sm,from:[-60,60]},{k:'chest',x:b.x,y:b.base-H*.42,w:44*sm,h:36*sm,from:[300,-60],chest:true},{k:'armF',x:b.x+W*.46,y:b.base-H*.42,w:18*sm,h:30*sm,from:[640,80]}];
+  spots.forEach((p,i)=>{ const at=P.dock0+i*P.step; if(ms<at-300) return; let x,y,rot=0;
+    if(ms<at) { const q=ez(1-(at-ms)/300); x=lerp(p.from[0],p.x,q); y=lerp(p.from[1],p.y,q); rot=(1-q)*3; }
+    else if(ms>P.off+i*70) { const q=(ms-P.off-i*70)/700; if(q>1.2) return; x=p.x+(i-2)*q*34; y=p.y+q*q*160-Math.sin(Math.min(1,q)*Math.PI)*30; rot=q*(i%2?4:-4); }
+    else { x=p.x; y=p.y+(ms<at+120?-Math.sin((ms-at)/120*Math.PI)*4:0); }
+    gfx.save(); gfx.translate(x,y); gfx.rotate(rot); box(0,0,p.w,p.h,{arrow:p.k==='armF'||p.k==='legB',scrib:!p.chest});
+    if(p.chest) { const gl=ms>P.charge0&&ms<P.off?.5+.5*Math.sin(ms/60):0; if(gl) { gfx.globalAlpha=gl*.8; E(0,2,16*sm,12*sm,'#ffffff'); gfx.globalAlpha=1; }
+      EO(0,2,10*sm,9*sm,ms>P.charge0&&ms<P.off?GOLD:'#ffe8b0'); star(0,2,6*sm,ms>P.charge0&&ms<P.off?'#ffffff':PINK2);
+      label('TA-TA 01',0,-p.h/2+5,'#3a5ad8',1);
+      for(const sd of [-1,1]) { EO(sd*16*sm,10*sm,3.5*sm,3.5*sm,sd<0?'#e0402e':'#2fa84a'); Ln(sd*16*sm,10*sm,sd*16*sm+2,7*sm,1.5,OUT); } }
+    gfx.restore(); });
+  // the box visor on Rose's head: a cereal-size box with a crayon crosshair window
+  if(ms>P.visor&&ms<P.off+300) { const r=P.st&&P.st.x!=null?head(P.st,4):{x:b.x,y:b.base-H}; const q=ez((ms-P.visor)/200),dy=(1-q)*-40,fall=ms>P.off?(ms-P.off)/300:0;
+    gfx.save(); gfx.translate(r.x,r.y+dy+fall*fall*60); gfx.rotate(fall*2); box(0,0,28,24,{}); RO(-11,-4,22,11,'#1c2448'); ring(0,1,5,5,1.5,'#ff5a5a'); Ln(-9,1,9,1,1,'#ff5a5a'); Ln(0,-4,0,7,1,'#ff5a5a');
+      if(ms>P.lock&&ms<P.fire) { gfx.globalAlpha=.5+.5*Math.sin(ms/50); E(0,1,3,3,'#ff5a5a'); gfx.globalAlpha=1; } gfx.restore(); }
+  // the paper-towel-tube levers, one in each of Rose's hands, pulled down while it charges
+  if(ms>P.charge0-200&&ms<P.off) { const r=P.st&&P.st.x!=null?head(P.st,0):{x:b.x,y:b.base-H}; const pull=ms>P.charge0?ez((ms-P.charge0)/250):0;
+    for(const sd of [-1,1]) { const bx=r.x+sd*22,by=r.y+18; const a=-Math.PI/2+sd*(.5+pull*.7); LnO(bx,by,bx+Math.cos(a)*24,by+Math.sin(a)*24,6,'#f4ecdc'); EO(bx+Math.cos(a)*24,by+Math.sin(a)*24,4,4,sd<0?'#e0402e':'#3a7ad8'); } }
+  });
+// Crayon crosshairs on every enemy (scribbly red circles).
+SC.r5_lock=inBox((s,u)=>{ for(const F of s.list) { const q=ez(u/.15),r=lerp(70,Math.max(26,F.w*.45),q),a=s.t*2;
+  gfx.globalAlpha=fade(u,.85); for(let k=0;k<2;k++) ring(F.x+Math.sin(a+k)*1.5,F.mid+Math.cos(a+k)*1.5,r+k*3,r*.85+k*2,2.5,'#ff3a3a');
+  Ln(F.x-r-8,F.mid,F.x-r+10,F.mid,2.5,'#ff3a3a'); Ln(F.x+r-10,F.mid,F.x+r+8,F.mid,2.5,'#ff3a3a'); Ln(F.x,F.mid-r-8,F.x,F.mid-r+10,2.5,'#ff3a3a'); Ln(F.x,F.mid+r-10,F.x,F.mid+r+8,2.5,'#ff3a3a'); } gfx.globalAlpha=1; });
+// Charge: rainbow rings shrinking into the chest emblem.
+SC.r5_charge=(s,u)=>{ const P=s.plan,b=baseOf(P.tom,P.st),c={x:b.x,y:b.base-b.h*.42+2}; for(let k=0;k<4;k++) { const q=((s.t*1.8)+k/4)%1; gfx.globalAlpha=q*.9; ring(c.x,c.y,(1-q)*70+6,(1-q)*60+5,3,RAINBOW[k%6]); }
+  gfx.globalAlpha=1; };
+// The glitter laser: six rainbow bands from the chest emblem across every enemy, with glitter; and a rocket fist.
+SC.r5_laser=inBox((s,u)=>{ const P=s.plan,b=baseOf(P.tom,P.st),c={x:b.x-6,y:b.base-b.h*.42+2},Gp=P.Gp,g=ez(u/.12)*fade(u,.7),xe=-20;
+  const ya=Gp.top-6,yb=Gp.base-6;
+  for(let k=0;k<6;k++) { const w0=lerp(ya,yb,k/6)+Math.sin(s.t*20+k)*3,w1=lerp(ya,yb,(k+1)/6)+Math.sin(s.t*20+k+1)*3; gfx.globalAlpha=g*.85;
+    PO([[c.x,c.y-9+k*3],[lerp(c.x,xe,g),lerp(c.y,w0,g)],[lerp(c.x,xe,g),lerp(c.y,w1,g)],[c.x,c.y-6+k*3]],RAINBOW[k],0); }
+  gfx.globalAlpha=g*.7; PO([[c.x,c.y-3],[lerp(c.x,xe,g),lerp(c.y,(ya+yb)/2-10,g)],[lerp(c.x,xe,g),lerp(c.y,(ya+yb)/2+10,g)],[c.x,c.y+3]],'#ffffff',0);
+  for(let k=0;k<26;k++) { const q=((s.t*2.4)+k/26)%1,x=lerp(c.x,xe,q),y=lerp(c.y,lerp(ya,yb,(k*7%26)/26),q); gfx.globalAlpha=g*(1-q*.5); star(x,y,2+(k%3),k%2?'#ffffff':GOLD,k); }
+  gfx.globalAlpha=1; EO(c.x,c.y,10+Math.sin(s.t*40)*2,10,'#ffffff'); });
+SC.r5_fist=inBox((s,u)=>{ const x=lerp(s.x0,-60,ez(u)),y=s.y+Math.sin(u*Math.PI*3)*6; for(let k=0;k<4;k++) { gfx.globalAlpha=.7-k*.15; E(x+36+k*16,y,15-k*3,10-k*2,k%2?'#ffb04a':'#ff5a3a'); }
+  gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.scale(1.6,1.6); box(0,0,30,24,{scrib:true}); for(let k=0;k<3;k++) RO(-17,-9+k*7,6,5,BOXL); gfx.restore(); });
+SC.r5_stars=(s,u)=>{ for(const F of s.list) { for(let k=0;k<4;k++) { const a=s.t*5+k/4*Math.PI*2; gfx.globalAlpha=fade(u,.75); star(F.x+Math.cos(a)*F.w*.35,F.top-8+Math.sin(a)*6,5,k%2?GOLD:'#ffffff',a); } } gfx.globalAlpha=1; };
+Rm.mecha_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),tom=tomUp(),me=ST.unit(m);
+  const TU=tom?ST.unit(tom):null,perch=()=>tom?ride(tom):{x:me.x,y:me.base};
+  const K=[{t:0,x:'home',y:'home',f:tom?'run':'idle'}];
+  if(tom) K.push({t:550,x:TU.x+28,y:TU.base+3,f:'celeb',hop:46,ns:true},{t:900,x:()=>perch().x,y:()=>perch().y,f:'celeb',ns:true});
+  else K.push({t:550,f:'celeb',hop:14},{t:900,f:'idle'});
+  const sit=Object.assign({ns:!!tom},{x:()=>perch().x,y:()=>perch().y});
+  K.push(Object.assign({t:1000,f:'expr',dy:(u,tt)=>-Math.abs(Math.sin(tt*8))*2},sit),Object.assign({t:2400,f:'act',dy:(u,tt)=>-Math.abs(Math.sin(tt*12))*1.5},sit),
+    Object.assign({t:3500,f:'celeb',hop:12},sit),Object.assign({t:4100,f:'celeb',dy:(u,tt)=>-Math.abs(Math.sin(tt*6))*3},sit),Object.assign({t:5000,f:'celeb',hop:8,hn:2},sit),
+    Object.assign({t:5600,f:'idle'},sit),Object.assign({t:7000,f:'idle'},sit));
+  if(!tom) { K.splice(K.length-1,1,{t:6000,x:'home',y:'home',f:'idle'}); }
+  const st=ST.keys(fx,K);
+  const P={tom,st,t0:0,dock0:1050,step:190,visor:2050,lock:2300,charge0:2700,fire:3500,off:4800,Gp};
+  const bounce=k=>{ if(tom) battle.fx[tom.idx].hop=k; };
+  ST.play(E2,[
+    [0,()=>{ scene('r5_bars',6.2,{}); scene('r5_speed',2.2,{back:true}); setMessage(tom?'Rose scrambles up onto Tom\'s shoulders. Operation Shoulder Mecha!':'Tom is down. Rose builds the mecha around herself.'); say(m.id,'mecha_ult'); sfx.siren&&sfx.siren(); }],
+    [900,()=>{ bounce(.3); scene('r5_armor',5.0,{plan:Object.assign({},P,{t0:900})}); sfx.select(); }],
+    [1050,()=>{ for(let i=0;i<5;i++) b7Later(()=>{ sfx.chunk?sfx.chunk():sfx.thud(); bounce(.15); },i*190); setMessage('Cardboard boxes fly in and snap on. Tape. Crayon. Robot.'); }],
+    [1950,()=>{ scene('r5_big',1.1,{x:300,y:BAR+40,txt:'DOCKING COMPLETE!',c:GOLD,sc:3}); sfx.ding(); }],
+    [2050,()=>{ sfx.thud(); setMessage('Rose pulls down her visor. It is a cereal box.'); }],
+    [2300,()=>{ scene('r5_lock',1.4,{list:list.map(f=>ST.foe(f))}); sfx.beep?sfx.beep():sfx.select(); b7Later(()=>sfx.beep?sfx.beep():sfx.select(),180);
+      scene('r5_big',1.2,{x:Gp.x+30,y:Gp.top-58,txt:'TARGET LOCKED: BAD GUYS',c:'#ff6a5a',sc:2}); }],
+    [2700,()=>{ scene('r5_charge',.8,{plan:P}); sfx.charge(); setMessage('She pulls both levers. The chest starts to glow.'); }],
+    [3100,()=>{ if(tom) scene('r5_big',.6,{x:baseOf(tom).x,y:baseOf(tom).base-baseOf(tom).h-46,txt:'BEEP BOOP',c:SKY,sc:2}); }],
+    ['hf',3500],
+    [3500,()=>{ sfx.laser(); sfx.whoosh(); scene('r5_laser',1.0,{plan:P}); const b=baseOf(tom,st); scene('r5_fist',.7,{x0:b.x-30,y:b.base-b.h*.5});
+      for(const f of list) ST.jolt(f,.6); landHit(100); scene('r5_flash',.35,{a:.55}); bounce(.4);
+      scene('r5_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'GLITTER LASER!',c:PINK2,sc:4}); setMessage('GLITTER LASER! And a cardboard rocket punch!'); }],
+    [3750,()=>{ sfx.bonk(); for(const f of list) { const F=ST.foe(f); scene('r5_burst',.7,{x:F.x,y:F.mid,n:10,r:50,c:PINK,c2:SKY}); } }],
+    [4300,()=>{ E2.apply(); sfx.stun&&sfx.stun(); scene('r5_stars',1.4,{list:list.map(f=>ST.foe(f))}); }],
+    [5000,()=>{ scene('r5_big',.9,{st,txt:'WE DID IT!',c:PINK,sc:2}); sfx.ding(); }],
+    [4800,()=>{ for(let i=0;i<5;i++) b7Later(()=>sfx.thud(),i*90+400); setMessage(tom?'The boxes fall off. Rose stays up top. Obviously.':'The boxes fall off. Mecha Rose powers down.'); }],
+    [6100,'end',()=>res(E2)+(tom?'Mecha Tom Zero. Made of boxes. Piloted by a six-year-old.':'Mecha Rose. Made of boxes. Still counts.')]]); };
+})();
+
+// ================= Polish pass (2026-10-24, claude/move-review.md) =================
+// RASPBERRY: a big wobbly raspberry spray right across the screen, with a giant wobbly PBBBBT. Dress-Up Tiara: a giant
+// tiara that drops onto the monster's head and lands with a CLINK. Lamby Hug: a bigger Lamby squish with a fountain of
+// hearts. Lamby Boomerang: a bigger spinning Lamby with a real ribbon trail. Same numbers, same beats. Overrides
+// RM.rose.sillyShow, RM.rose.dress_up_tiara, SC.rv_tiara, SC.rv_hug and SC.rv_boomer. Scenes prefix rp_.
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heartO=(x,y,r,c)=>{ heart(x,y,r+2,OUT); heart(x,y,r,c); };
+const star=(x,y,r,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.beginPath(); for(let k=0;k<10;k++) { const a=k*Math.PI/5-Math.PI/2,q=k%2?r*.45:r; gfx.lineTo(Math.cos(a)*q,Math.sin(a)*q); } gfx.closePath();
+  gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=3; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); gfx.restore(); };
+const Rm=RECRUIT_MOVES.rose;
+const PINK='#ffb3cf',PINK2='#ff7fb3',GOLD='#ffe08a',CREAM='#fff8e8',SPIT='#ff8aa8',SPIT2='#ffd0de';
+ST.nw('rp_');
+const res=E2=>E2.result?E2.result+' ':'';
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const front=(F,gap=26)=>({x:Math.min(560,F.x+F.w*.5+gap),y:Math.min(314,F.base+3)});
+const plush=(x,y,sc,o)=>RFX.plush(x,y,sc,o||{});
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const RSP=()=>BATTLE_SPRITES.rose,RH=()=>RSP().idle.length*RSP().scale,RW=()=>RSP().idle[0].length*RSP().scale;
+const lieDy=()=>RH()*.5-RW()*.5+2;
+const head=(st,dy=0)=>({x:st.x,y:st.y-RH()*(st.sc||1)*.84+dy});
+const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+
+// ---------- RASPBERRY: a wobbly spray across the screen ----------
+// s.mx,s.my = Rose's mouth when she blows; the spray runs left past the monster to the edge of the screen.
+SC.rp_spray=(s,u)=>{ const ms=s.t*1000,mx=s.mx,my=s.my,reach=ez(ms/320),x1=lerp(mx,-30,reach),F=s.F; gfx.globalAlpha=fade(u,.78);
+  const yAt=(x,b)=>{ const d=mx-x; return my+d*.16*b+Math.sin(d/20-ms/38+b*1.7)*(3+d*.05); };
+  for(const [b,w,c] of [[-1,9,SPIT2],[1,9,SPIT2],[0,13,SPIT]]) { gfx.lineJoin='round'; gfx.lineCap='round';
+    for(const [ww,cc] of [[w+5,OUT],[w,c]]) { gfx.strokeStyle=cc; gfx.lineWidth=ww; gfx.beginPath(); for(let x=mx;x>=x1;x-=6) { const y=yAt(x,b); if(x===mx) gfx.moveTo(x,y); else gfx.lineTo(x,y); } gfx.stroke(); } }
+  for(let k=0;k<30;k++) { const q=((ms/520)+k*.137)%1,d=(mx+30)*q; if(mx-d<x1) continue; const b=((k*37)%21)/10-1,x=mx-d,y=yAt(x,b*1.4)+((k*13)%9-4),r=2+((k*7)%5)+q*2;
+    E(x,y,r+1.5,r+1.5,OUT); E(x,y,r,r,k%3?SPIT:'#ffffff'); }
+  if(F&&ms>260) for(let k=0;k<7;k++) { const q=((ms-260)/700+k*.21)%1,x=F.x-F.w*.35+((k*29)%70)/100*F.w,y=F.top+F.h*.2+q*F.h*.6; gfx.globalAlpha=fade(u,.78)*(1-q*.6); E(x,y,4,5+q*3,SPIT); } };
+// A giant wobbly PBBBBT, one letter at a time.
+SC.rp_pbbt=(s,u)=>{ const ms=s.t*1000,txt=s.txt||'PBBBBBT!',sc=s.sc||5,n=txt.length,w=n*4*sc,pop=u<.1?ez(u/.1)*1.25:lerp(1.25,1,cl((u-.1)/.12));
+  const x0=Math.max(8,Math.min(568-w*pop,s.x-w*pop/2)); gfx.globalAlpha=fin(u,.05)*fade(u,.75);
+  for(let k=0;k<n;k++) { const x=x0+(k*4*sc+1.5*sc)*pop,y=s.y+Math.sin(ms/55+k*.9)*6,a=Math.sin(ms/70+k*1.3)*.18; gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(pop,pop); bigWord(txt[k],0,-sc*2.5,k%2?PINK2:SPIT2,sc); gfx.restore(); } };
+Rm.sillyShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),cx=Math.min(470,F.x+F.w*.5+96),cy=Math.min(312,F.base+6),lie=lieDy();
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:5},{t:900,x:cx,y:cy,f:'idle'},{t:1100,f:'expr',sc:u=>1+ez(u)*.16},{t:1800,f:'celeb',sc:u=>1.16-ez(u)*.16,dx:(u,tt)=>Math.sin(tt*45)*2},
+    {t:2650,f:'idle',rot:u=>-ez(u/.3)*1.45,dy:(u,tt)=>ez(u/.3)*lie-Math.abs(Math.sin(tt*16))*3},{t:3350,f:'celeb',hop:22},{t:3650,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Rose walks to centre stage and takes an extravagantly serious breath.'); say(m.id,'silly'); }],
+    [1100,()=>{ scene('ro_breath',.8,{st}); sfx.charge(); }],
+    [1800,()=>{ sfx.raspberry(); b7Later(()=>sfx.raspberry(),380); b7Later(()=>sfx.raspberry(),760); if(sfx.spray) sfx.spray(); const p=head(st,12);
+      scene('rp_spray',1.15,{mx:p.x-14,my:p.y,F}); scene('rp_pbbt',1.25,{x:(p.x+F.x)/2-10,y:Math.max(34,F.top-86),sc:5}); }],
+    ['hf',2350],
+    [2350,()=>{ E2.apply(); sfx.boing(); ST.jolt(t,.6); scene('ro_goof',1.6,{x:F.x,y:F.top}); scene('ro_poof',.5,{x:F.x,y:F.mid,c:SPIT,n:12,r:34}); }],
+    [2650,()=>{ sfx.giggle(); setMessage('Rose has made an excellent point. She falls over laughing at it.'); }],
+    [3000,()=>{ sfx.giggle(); }],
+    [4400,'end',()=>t&&t.st.goofed?'Rose has made an excellent point. Goofed!':(t?cap(t.def.the)+' is unmoved. Mostly.':'Pbbbt.')]]); };
+
+// ---------- Dress-Up Tiara: a giant tiara that lands with a CLINK ----------
+const TSC=2.2;
+SC.rv_tiara=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=ST.unit(s.f),sit=F.top+16-14*TSC; let x,y,sc,tilt,sy=1;
+  if(ms<P.toss) { const p=head(s.st,-30); x=p.x-4; y=p.y+Math.sin(ms/120)*3; sc=1.15; tilt=Math.sin(ms/200)*.14; }
+  else if(ms<P.on) { const q=(ms-P.toss)/(P.on-P.toss),p=head(s.st,-30); x=lerp(p.x-4,F.x,ez(q)); y=lerp(p.y,sit,q*q)-Math.sin(q*Math.PI)*70; sc=lerp(1.15,TSC,ez(q)); tilt=ez(q)*6.28; }
+  else { const d=ms-P.on,b=Math.abs(Math.sin(d/90))*14*Math.exp(-d/220); x=F.x+(s.f.ox||0); y=sit+(s.f.oy||0)-b; sc=TSC; tilt=(s.f.spin||0)+Math.sin(d/70)*.12*Math.exp(-d/300); sy=d<110?.82:1; }
+  gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(sc,sc*sy); PROP2.tiara({},0); gfx.restore();
+  if(ms>P.on) for(let k=0;k<5;k++) { const tw=(Math.sin(ms/150+k*2)+1)/2; star(x-60+k*30,y-46-(k%2)*14,4+tw*6,k%2?GOLD:CREAM,ms/300+k); } };
+SC.rp_clink=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.5-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; gfx.strokeStyle=k%2?GOLD:CREAM; gfx.lineWidth=5*(1-q)+1;
+  gfx.beginPath(); gfx.ellipse(s.x,s.y,10+q*90,5+q*28,0,0,Math.PI*2); gfx.stroke(); }
+  gfx.globalAlpha=fade(u,.5); for(let k=0;k<8;k++) { const a=k/8*Math.PI*2,d=20+ez(u)*50; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.5,s.x+Math.cos(a)*(d+14),s.y+Math.sin(a)*(d+14)*.5,3,k%2?GOLD:CREAM); } };
+Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,24),plan={toss:1500,on:1750},sit=F.top+16-14*TSC;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:9,hn:6},{t:1100,x:p.x,y:p.y,f:'expr'},{t:1300,f:'celeb',hop:46},{t:1800,f:'idle'},{t:2000,f:'act'},
+    {t:2700,f:'celeb',hop:10,hn:2},{t:3200,f:'walkR',hop:6,hn:5},{t:4200,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Rose skips over with the biggest tiara in the dress-up box. It is bigger than her head.'); say(m.id,'dress_up_tiara'); scene('rv_tiara',4.3,{st,f,plan}); }],
+    [1300,()=>{ sfx.jumpWhistle(); }],
+    ['hf',plan.on],
+    [plan.on,()=>{ (sfx.ting?sfx.ting():sfx.ding()); sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('rp_clink',.8,{x:F.x,y:sit+14*TSC});
+      scene('rv_big',.9,{x:F.x+F.w*.5+78,y:F.top+4,txt:'CLINK!',c:CREAM,sc:3,rot:.1}); }],
+    [plan.on+260,()=>{ (sfx.ting?sfx.ting():sfx.ding()); scene('rv_burst',.8,{x:F.x,y:sit,n:12,r:70,c:GOLD,c2:PINK,sz:9}); }],
+    [plan.on+500,()=>{ scene('rv_big',.8,{x:F.x,y:F.top-100,txt:'CROWNED!',c:GOLD,sc:3}); sfx.ding(); }],
+    [2000,()=>{ scene('rv_preen',1.7,{f}); setMessage(cap(f.def?f.def.the:f.name)+' looks at itself. And looks. And looks.'); }],
+    [3050,()=>{ scene('rv_big',1.1,{x:F.x,y:F.top-100,txt:'SO PRETTY',c:PINK,sc:3}); sfx.giggle(); }],
+    [4300,'end',res(E2)+'It is too busy admiring its tiara to stand up straight.']]); };
+
+// ---------- Lamby Hug: bigger squish, a fountain of hearts ----------
+SC.rv_hug=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=1.45,rot=.3,sx=1,sy=1;
+  if(ms<P.press||ms>P.back) { const h=hand(); x=h.x-2; y=h.y+2; }
+  else { const q=ez((ms-P.press)/220),sq=ms<P.back-150?Math.abs(Math.sin((ms-P.press)/150))*.3:0; x=lerp(hand().x-2,P.tx,q); y=lerp(hand().y+2,P.ty,q); sc=lerp(1.45,2.05,q); rot=lerp(.3,-.08,q); sx=1+sq; sy=1-sq*.85; }
+  if(ms>P.press+150&&ms<P.back+500) for(let k=0;k<10;k++) { const q=((ms-P.press-150)/950+k/10)%1,hx=P.tx+Math.sin(k*2.3+q*5)*(26+q*20),hy=P.ty-30-q*90; if(ms>P.back&&q<.1) continue;
+    gfx.globalAlpha=Math.sin(q*Math.PI)*(ms>P.back?cl(1-(ms-P.back)/500):1); heartO(hx,hy,5+Math.sin(q*Math.PI)*6,k%2?'#ff6b9a':PINK2); }
+  gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.scale(sx,sy); plush(0,0,sc,{pose:'held',rot}); gfx.restore();
+  if(ms>P.press+150&&ms<P.back-100) { const sq=Math.abs(Math.sin((ms-P.press)/150)); bigWord('SQUISH',Math.max(44,P.tx-96),P.ty-8-sq*6,PINK2,3); } };
+
+// ---------- Lamby Boomerang: bigger spinning Lamby, ribbon trail ----------
+SC.rv_boomer=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); let x,y,rot=0,sc=1.5,pose='held';
+  const cx=(P.x0+P.lx)/2,rx=(P.lx-P.x0)/2,at=q=>{ const a=q*Math.PI*2; return [cx+Math.cos(a)*rx,P.y-Math.sin(a)*P.ry]; };
+  if(ms<P.swing) { x=h.x-4; y=h.y+2; sc=1.3; rot=.3; }
+  else if(ms<P.go) { const a=(ms-P.swing)/1000*14,p=head(s.st,-10); x=p.x+Math.cos(a)*44; y=p.y-14+Math.sin(a)*16; rot=a; pose='fly'; LnO(h.x,h.y,x,y,3,PINK2);
+    for(let k=1;k<6;k++) { const aa=a-k*.28; gfx.globalAlpha=.55-k*.09; Ln(p.x+Math.cos(aa)*44,p.y-14+Math.sin(aa)*16,p.x+Math.cos(aa+.28)*44,p.y-14+Math.sin(aa+.28)*16,7-k,PINK2); } gfx.globalAlpha=1; }
+  else if(ms<P.back) { const q=(ms-P.go)/(P.back-P.go); [x,y]=at(q); rot=q*24; sc=2.3; pose='fly';
+    const N=18,pts=[]; for(let k=0;k<=N;k++) { const qq=q-k*.016; if(qq<0) break; const [px,py]=at(qq),wv=Math.sin(qq*40-ms/60)*(3+k*.6); pts.push([px,py+wv]); }
+    for(const pass of [0,1]) for(let k=pts.length-1;k>0;k--) { gfx.globalAlpha=1-k/(N*1.5); const w=Math.max(4,15-k*.55);
+      if(pass) Ln(pts[k][0],pts[k][1],pts[k-1][0],pts[k-1][1],w,k%4<2?'#ff5f9e':PINK); else Ln(pts[k][0],pts[k][1],pts[k-1][0],pts[k-1][1],w+5,OUT); }
+    gfx.globalAlpha=.7; for(let k=0;k<3;k++) { const qq=q-.05-k*.03; if(qq<0) continue; const [px,py]=at(qq); Ln(px-10,py-26+k*20,px+12,py-26+k*20,2,CREAM); } }
+  else { const d=ms-P.back; x=h.x-4; y=h.y+2; sc=lerp(1.8,1.3,cl(d/300)); rot=.2; }
+  gfx.globalAlpha=1; plush(x,y,sc,{pose,rot}); };
+const kindLine=(t,ally)=>t&&t.side==='foe'?t.name+' warms up a little.':ally;
+const spotFor=(m,t,gap=24)=>{ const me=ST.unit(m); if(!t||t===m) return {x:me.x,y:me.base,self:true}; const u=ST.unit(t); return {x:Math.min(560,u.x+u.w*.5+gap),y:u.base+3}; };
+const hopOf=u=>{ if(u&&u.side==='party') battle.fx[u.idx].hop=.35; else if(u) ST.jolt(u,.15); };
+Rm.lamby_hug=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,20),self=t===m;
+  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:600,f:'expr'},{t:1200,f:'act',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2500,f:'celeb',hop:10},{t:2900,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'walk',hop:5,hn:6},{t:1100,x:sp.x,y:sp.y,f:'expr'},{t:1400,f:'act',dx:u=>-ez(u)*8},{t:2500,f:'celeb',hop:10},{t:2900,f:'walkR',hop:4,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
+  const st=ST.keys(fx,K),press=self?1200:1400,end=self?3400:4000;
+  const plan={press,back:2500,tx:self?H.x-6:H.x+4,ty:self?H.mid+2:H.mid};
+  ST.play(E2,[
+    [0,()=>{ setMessage(self?'Rose gives Lamby the biggest squeeze. Lamby squeezes back. Probably.':'Rose carries Lamby over to '+t.name+'. Lamby has hugs to give.'); say(m.id,'lamby_hug'); scene('rv_hug',end/1000,{plan}); }],
+    [press,()=>{ sfx.boing(); }],
+    ['hf',press+300],
+    [press+300,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:PINK}); scene('rv_hearts',1.1,{x:H.x,y:H.top+6,n:9,r:64,sz:10}); hopOf(t!==m?t:null); }],
+    [press+700,()=>{ scene('rv_big',1,{x:H.x,y:H.top-80,txt:'SQUEEZE',c:PINK,sc:3}); sfx.ding(); }],
+    [end,'end',kindLine(t,'Lamby hugs are proven to work. Rose proved it.')]]); };
+})();
