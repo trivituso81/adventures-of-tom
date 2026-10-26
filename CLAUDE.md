@@ -1,6 +1,6 @@
-# AGENTS.md: The Adventures of Tom
+# CLAUDE.md: The Adventures of Tom
 
-Read this first. It is the working agreement for any AI agent (Cursor or otherwise) in this repo.
+Read this first. It is the working agreement for Claude in this repo. Claude runs this repo end to end for Tom.
 
 ## What this is
 
@@ -27,7 +27,7 @@ Tom is a product director. He designs and directs; he does **not** code and does
 5. **Changing a spoken line silences it.** Baked clips play only when the clip text exactly matches the line in `data/lines.js` or the dialogue text. If you reword a line, say so; it needs a re-bake. Prefer not to reword spoken lines unless asked.
 6. **Canon is in `docs/CANON.md`.** Characters, voice and tone, and what is decided. Read it before writing any dialogue, move or scene.
 7. **Reuse the battle animation primitives** before inventing new systems (`docs/BATTLE_SYSTEM.md`).
-8. **The live game is a Claude artifact; this repo is a working copy.** Read `docs/WORKFLOW.md` before you change anything that Tom will expect to see on his phone.
+8. **This repo is the source of truth for all code.** The live game is a claude.ai artifact that Tom plays from his phone; publish to it after every change. Read `docs/WORKFLOW.md` for the exact routine.
 
 ## How to work
 

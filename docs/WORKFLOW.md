@@ -1,33 +1,37 @@
-# Workflow: how this repo relates to the live game
+# Workflow: Claude runs this repo
 
-## The facts
+## Roles
 
-- Tom plays the game from an iPhone home-screen shortcut that points at a claude.ai **artifact** link. That artifact is the live game and, today, the canonical copy. It also holds the baked voices, which are not in this repo.
-- This repo is a **working copy of the source** (everything except voice audio and the frozen `demo/` folder). It was exported from artifact version `1792983007-0e46` (v252) on 25 Oct 2026.
-- Tom also keeps a GitHub Pages copy at `trivituso81/adventures-of-tom`. A GitHub Pages build of this repo is silent (no voices) and saves to the browser only.
+- **Tom** directs and plays. He does not code, review code, or run commands.
+- **Claude** does everything else: edits, tests, commits, pushes, publishes.
 
-## The rule that prevents lost work
+## Where things live
 
-Two copies can drift. Until Tom says this repo is the new source of truth:
+| Thing | Home |
+|---|---|
+| All code and docs | This repo, branch `main` (source of truth) |
+| The playable game Tom opens on his phone | A claude.ai artifact, link `https://claude.ai/artifact/HzHh5DBHsbnyNrAvEFZ4V1`. The link must never change. |
+| Baked voice audio (about 170 MB) | The artifact only. The repo holds an older partial snapshot of the per-character files and none of the dialogue clips. |
+| Session handoff | The Project doc `claude/next.md` |
 
-1. Work on a branch, never directly on `main`.
-2. Keep every commit small and about one thing, with a message Tom can read ("Rebuild Grace's Cartwheel: two wheels, new poses").
-3. When you finish, list the **exact files you changed** in your summary. Those are the files that must be carried back into the live artifact.
-4. Do not reformat, reorder or rename files you are not changing. Whole-file formatting changes make carrying changes back impossible.
-5. Never change a spoken line without recording it (see `docs/VOICE.md`).
+## Routine for every change
 
-## How Tom checks your work
+1. Clone the repo (shallow). Read `claude/next.md` in the Project, then only the files the task needs.
+2. Make the change. Small commits, one subject each, readable messages.
+3. `python3 tools/smoke.py` must exit 0; for a move, `python3 tools/kit_test.py <id> --only=<key> --speed2`. Look at the screenshots in `tools/shots/` (git-ignored), portrait and landscape.
+4. Push to `main`.
+5. Publish to the artifact: pass the SAME link as `url`, `index.html` as the page, and only the changed non-voice files in `files`. Files not passed are kept. Re-list the artifact files first in case another session published.
+6. Tell Tom in a few sentences what changed and what to look for on his phone.
+7. Rewrite `claude/next.md` (under 40 lines) before ending.
 
-- On his phone, from a GitHub Pages or preview URL of your branch if one exists. If none exists, he will be sent a link from the live artifact after the changes are carried back.
-- He reports what he sees in plain words ("the cartwheel looks like a wheel now", "Rose is hidden behind Tom"). Treat each report as a bug report; reproduce it with `tools/kit_test.py` or `tools/smoke.py` before fixing.
+## Voice files
+
+Never edit, regenerate or publish `data/voice-clips.js` or `data/voice/*.js` from the repo. They change only when Tom sends a `voices.json`, merged from the live artifact copies (see the Project doc `claude/voice-baking.md`). Reworded spoken lines silence their clips; log them in `docs/CHANGES.md` under "Lines to bake".
 
 ## Definition of done
 
-- `python3 tools/smoke.py` exits 0 and you looked at the screenshots in `tools/shots/` (they are git-ignored).
-- For a move or scene you changed: `kit_test.py` for that character, frames looked at, portrait and landscape.
-- No new console errors. No change to save format without a migration.
-- Summary to Tom: what changed, what to look for on the phone, files changed. Three to six sentences, table if it helps.
+Smoke test passes, screenshots looked at, pushed to `main`, published to the artifact, no new console errors, no save-format change without a migration, and a short plain summary for Tom.
 
 ## Change log
 
-Keep a running log in `docs/CHANGES.md`, newest first: date, one line per change, files touched, and a "Lines to bake" list for any new or reworded spoken line.
+`docs/CHANGES.md`, newest first.

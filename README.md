@@ -2,7 +2,7 @@
 
 A 16-bit JRPG starring Tom's real family. Plain browser JavaScript, no build step. Chapters 1 to 10 are built.
 
-This repo is the source of the game (everything except the baked voice audio). If you are an AI agent, start with [`AGENTS.md`](AGENTS.md).
+This repo is the source of the game (everything except the baked voice audio). If you are Claude, start with [`CLAUDE.md`](CLAUDE.md).
 
 ## Run it
 
@@ -19,7 +19,7 @@ The game must be served over http; opening `index.html` directly will not work. 
 
 | File | What it is |
 |---|---|
-| [`AGENTS.md`](AGENTS.md) | Working agreement, hard rules, where things live |
+| [`CLAUDE.md`](CLAUDE.md) | Working agreement, hard rules, where things live |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Load order, content model, saves, hosting |
 | [`docs/CANON.md`](docs/CANON.md) | Cast, voice and tone, decided facts |
 | [`docs/BATTLE_SYSTEM.md`](docs/BATTLE_SYSTEM.md) | Battle rules, animation primitives, gotchas |
