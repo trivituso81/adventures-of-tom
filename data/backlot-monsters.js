@@ -158,7 +158,7 @@ Object.assign(MONSTERS,{
     again:['Bzzz. I am back in frame.','Round {n}. I can hear you breathing.'],
     drop:{id:'windsock',chance:1,once:true,msg:'The moth left its fuzzy windscreen behind. It went in a pocket.'},
     vapor:['#d9d4c8','#8a8478','#9aa3a8','#ffffff'],
-    hint:'Swoops in and Silences people (no ▶ Skills for a while).'},
+    hint:'Swoops in and Silences people (only the free basic move under ▲ Skills works for a while).'},
   clapper:{id:'clapper',la:true,coins:12,coinStep:3,name:'Clapper Snapper',the:'the Clapper Snapper',short:'Clapper',sprite:CLAPPER_SPRITE,pal:CLAPPER_PAL,scale:3,eyes:[[3,11],[17,11]],mouth:[10,5],
     hp:22,hpStep:4,atk:2,xp:12,xpStep:3,level:5,rank:'TRICKY',
     intro:'A Clapper Snapper claps itself into the scene! It is already moving.',
@@ -195,7 +195,7 @@ Object.assign(MONSTERS,{
     again:['New cards. Same feelings.','Round {n}. This card says ROUND {n}.'],
     drop:{id:'cuecards',chance:1,once:true,msg:'The crab left a stack of cue cards. One says YOU ARE DOING GREAT. It went in a pocket.'},
     vapor:['#e2593a','#fbf6e8','#f4956a','#2c2c33'],
-    hint:'Armored. What it really wants is a compliment (▼ Care & Bag).'},
+    hint:'Armored. What it really wants is a compliment (▼ Bag).'},
   // The Director's Cut: the chapter 4 boss. The director's old megaphone, gone grumpy after one too many bad takes.
   // It sits on TNB's missing rack in the stage set on Soundstage 7 (hidden until the boss scene, data/scenes.js).
   directorscut:{id:'directorscut',la:true,coins:55,coinStep:9,name:'The Director’s Cut',the:'the Director’s Cut',short:'Director',sprite:DIRECTOR_SPRITE,pal:DIRECTOR_PAL,scale:3,eyes:[[16,10],[24,10]],mouth:[21,13],

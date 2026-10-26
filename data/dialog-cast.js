@@ -19,7 +19,7 @@ const DIALOG_CAST={
     'Mr. Washington':'washington','Miss Odette':'odette','Doña Carmen':'carmen',Boomie:'boomie',Olivia:'olivia',Michael:'michael',
     'Mrs. Alvarez':'carmen',Kenji:'kenji',Marisol:'la_woman',Yesenia:'la_woman',Tony:'michael',Kevin:'bean',Mateo:'bean',
     Daisy:'rose',Sofi:'rose',Skye:'bun',Chet:'bean',Wes:'page',Bev:'pip',Juniper:'luna',Sage:'fern',Priya:'dot',
-    Marguerite:'oolong',Dolores:'ellie',Dash:'moss',Nickel:'penny',Sol:'sal',Larry:'gus','Don Beto':'moss',Claudia:'luna',
+    Marguerite:'oolong',Dolores:'dolores',Dash:'moss',Nickel:'penny',Sol:'sal',Larry:'gus','Don Beto':'moss',Claudia:'luna',
     Jordan:'kit',Ryan:'bean',Sam:'pip',Dakota:'dot',
     Smoglet:'mudling','Ticket Flurry':'skeeter','Canyon Coyote':'grump',Gridlock:'grump','Tar Pit Blob':'mudling','The Big Shake':'bigone',
     // Chapter 3 (the marsh)
@@ -178,9 +178,12 @@ const DIALOG_CAST={
       desc:'A man in his fifties with a thick Long Island New York accent, a slightly nasal, raspy, fast and friendly voice. Chatty taxi driver, warm and a little dramatic, proud of his one cab. Clean studio recording.',
       sample:'Long Island Taxi. We go anywhere in town. Town is small, so mostly here. I have one cab. It is cab seven. Cabs one through six are a dream I am working on. Where to? Around town, or the airport? I have waited years for somebody to say airport.'},
     justin:{name:'Justin',type:'Family friend: handy dad',stability:.5,
-      desc:'A man in his early forties with an easygoing, friendly voice, Long Island born with a slight country twang. Goofy proud dad, handyman, sports fan, relaxed and warm, quick to laugh. Clean studio recording.',
+      desc:'A man in his early forties with an easygoing, friendly voice and a Long Island New York accent. Goofy proud dad, handyman, sports fan, relaxed and warm, quick to laugh. Clean studio recording.',
       sample:'Tom. Hey. Hold this. No, the other end. Do not touch the copper. Rewiring the hallway. Amy wanted a dimmer, so Amy gets a dimmer. Big game tonight, too. If you hear yelling, that is me. If you hear crying, that is also me.'},
     ellie:{name:'Aunt Ellie',type:'Family: glamorous great-aunt',stability:.5,
+      desc:'A very elderly woman in her nineties with a grand, theatrical, sharp-witted voice and an old-school Long Island New York accent. Dry, imperious and glamorous, slow deliberate delivery, every line a bon mot. Clean studio recording.',
+      sample:'Tom. Stand up straight. There. Now you look like someone I am related to. I have been to Paris eleven times, darling. Long Island is charming, like a hat you wear once. Never apologize for being early, dressing up, or leaving a bad party.'},
+    dolores:{name:'Dolores',type:'Neighbor: Starlite projectionist (the old Aunt Ellie voice)',stability:.5,
       desc:'A very elderly woman in her nineties with a grand, theatrical, sharp-witted voice and a refined mid-Atlantic accent. Dry, imperious and glamorous, slow deliberate delivery, every line a bon mot. Clean studio recording.',
       sample:'Tom. Stand up straight. There. Now you look like someone I am related to. I have been to Paris eleven times, darling. Long Island is charming, like a hat you wear once. Never apologize for being early, dressing up, or leaving a bad party.'},
     // ---- Chapter 2 (Los Angeles) ----

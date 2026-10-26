@@ -1,6 +1,7 @@
 'use strict';
 // engine/battle2-ui.js — The new battle's screen (F3): turn ribbon, party cards with HP and VP, the one-thumb
-// command cross (Up basic, Right skills, Left Tombo, Down care and bag), skill grid, targeting, keyboard and
+// command cross (Up skills with the free basic move first, Right the signature move, Left Tombo, Down bag), skill grid
+// with role tags (DAMAGE, HEAL, BUFF, DEBUFF) and element tags, targeting, keyboard and
 // gamepad input, and the enemy formation drawn on the battle canvas. Logic lives in engine/battle2.js.
 
 // ---------- Screen on and off ----------
@@ -15,7 +16,7 @@ function b2Open(mode,sel) {
   B2.ui=mode; battle.state='command';
   const u=B2.actor;
   if(sel!=null) B2.sel=sel;
-  else if(mode==='skills') B2.sel=b7RecSkill(u,Math.max(0,u.kit.skills.indexOf(B2.lastSkill[u.id])));   // Rose Mode starts on the tip
+  else if(mode==='skills') B2.sel=b7RecSkill(u,Math.max(0,b2SkillRows(u).indexOf(B2.lastSkill[u.id])));   // last move used; Rose Mode starts on the tip
   else B2.sel=0;
   b2Render();
   if(mode==='cross') b7AutoTurn();   // Smart Repeat (engine/feel.js)
@@ -269,9 +270,8 @@ function b2Portrait(id) { return (typeof PORTRAITS!=='undefined'&&PORTRAITS[id])
 // The weight to preview on the ribbon for what the cursor is on right now.
 function b2PreviewWeight() {
   const u=B2.actor; if(!u||battle.state!=='command') return null;
-  if(B2.ui==='skills') { const s=u.kit.skills[B2.sel]; return s?(b2Diamond(u,s)?'instant':s.weight):null; }
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; return s?(b2Diamond(u,s)?'instant':s.weight||'standard'):null; }
   if(B2.ui==='target') return B2.pending?(b2Diamond(u,B2.pending)?'instant':B2.pending.weight||'standard'):null;
-  if(B2.ui==='care'&&B2.sel===0&&u.kit.special) return u.kit.special.weight;
   if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; return r?r.T.weight:'standard'; }
   return 'standard';
 }
@@ -318,39 +318,83 @@ function b2HeartRow() {
     return '<svg viewBox="0 0 14 13" class="'+(f>=1?'full':'')+'"><defs><clipPath id="b2hc'+k+'"><rect x="0" y="0" width="'+(14*f).toFixed(2)+'" height="13"/></clipPath></defs>'+
       '<path d="'+P+'" fill="#3a2230" stroke="#0b0d12" stroke-width="1.2"/><path d="'+P+'" fill="#ff7aa8" clip-path="url(#b2hc'+k+')"/></svg>'; }).join('');
   // Deedee's Warm Crust Tokens sit on the shared tray (engine/battle2-traits.js).
-  const n=B2.crust||0,tray=n||B2.party.some(p=>p.id==='deedee')?'<span class="b2-tray" title="Warm Crust Tokens: eat one from Care &amp; Bag, free">'+'<i class="on hot"></i>'.repeat(Math.min(n,B2.hot||0))+'<i class="on"></i>'.repeat(n-Math.min(n,B2.hot||0))+'<i></i>'.repeat(B2_TRAIT.crustMax-n)+'</span>':'';
+  const n=B2.crust||0,tray=n||B2.party.some(p=>p.id==='deedee')?'<span class="b2-tray" title="Warm Crust Tokens: eat one from the ▼ Bag, free">'+'<i class="on hot"></i>'.repeat(Math.min(n,B2.hot||0))+'<i class="on"></i>'.repeat(n-Math.min(n,B2.hot||0))+'<i></i>'.repeat(B2_TRAIT.crustMax-n)+'</span>':'';
   return '<div class="b2-heart" aria-label="HEART '+Math.floor(H)+' percent"><span class="lbl">HEART</span><span class="hts">'+hearts+'</span>'+tray+'<b>'+Math.floor(H)+'%</b></div>';
 }
-function b2ElemChip(els) { return (els||[]).map(e=>'<span class="b2-el" style="background:'+B2_ELEMS[e].color+'">'+B2_ELEMS[e].name.toUpperCase()+'</span>').join(''); }
+function b2ElemChip(els) { return (els||[]).map(e=>'<span class="b2-el" style="color:'+B2_ELEMS[e].color+'">'+B2_ELEMS[e].name.toUpperCase()+'</span>').join(''); }
+// ---------- What a move does: role tags ----------
+// Worked out from the move data, so new moves are tagged for free. DAMAGE: it hits. HEAL: HP back, revives or cures an
+// ally. BUFF: makes an ally stronger, faster, guarded, or gives VP. DEBUFF: weakens, slows, stops or confuses an enemy.
+// An act can set roles:['heal',...] to override. Elements (Kinetic, Cozy...) are what KIND of thing a move is; monsters
+// weak to an element take +50% from it (B2_WEAK), and resist it at half.
+const B2_ROLES={dmg:{name:'DAMAGE',tag:'DMG',color:'#ff8c7a'},heal:{name:'HEAL',tag:'HEAL',color:'#7fe39a'},buff:{name:'BUFF',tag:'BUFF',color:'#8ec8ff'},debuff:{name:'DEBUFF',tag:'DEBUFF',color:'#e0a8ff'}};
+const B2_ELEM_WHAT={kinetic:'body moves: kicks, flips, bonks and throws',cozy:'warm, homey comfort: food, hugs, blankets',splash:'water and wet things',
+  sparkle:'shiny, showy, glam things',chatter:'talking, words and noise',amber:'sticky golden sap'};
+const B2_FOE_TGT=['enemy','row','splash','front','all','multi'];
+const B2_ALLY_WHO=['party','self','others','lowest','slowest','partner','both','ally'];
+function b2Roles(a) {
+  if(!a) return [];
+  if(a.roles) return a.roles;
+  if(a._roles) return a._roles;
+  const r=new Set(),foeT=B2_FOE_TGT.includes(a.target);
+  if(a.stat&&a.mult) r.add('dmg');
+  if(a.kind==='defend') r.add('buff');
+  const scan=list=>{ for(const f of (list||[])) {
+    const op=f[0];
+    if(op==='ifup'||op==='ift') { scan(f[2]); continue; }
+    // Who it lands on: the last word in the effect ('t' means the move's own targets).
+    const w=f.slice(op==='st'?2:1).filter(x=>typeof x==='string').pop()||'t';
+    const party=typeof B2!=='undefined'&&B2.party?B2.party.map(p=>p.id):[];
+    const onAlly=w==='t'?!foeT:(B2_ALLY_WHO.includes(w)||party.includes(w)||['tom','grace','rose','amy','deedee','boppy','tnb','nara'].includes(w));
+    if(op==='heal'||op==='revive'||op==='cure'||op==='cont') { if(onAlly) r.add('heal'); }
+    else if(op==='st') {
+      const ids=typeof b8StId==='function'?b8StId(f[1]):[f[1]],S=B2_STATUS[ids[0]]||B2_STATUS[f[1]]||{};
+      if(S.debuff) { if(!onAlly) r.add('debuff'); } else if(onAlly) r.add('buff');
+    }
+    else if(['vp','refill','rack','randbuff','pep','closeup'].includes(op)) { if(onAlly) r.add('buff'); }
+    else if(op==='ct') r.add(onAlly?'buff':'debuff');
+    else if(['goof','smit','ctq','interrupt','steal','shieldBreak','scent','take'].includes(op)) { if(!onAlly) r.add('debuff'); else if(op==='ctq'&&f[1]<0) r.add('buff'); }
+  } };
+  scan(a.fx);
+  const out=['dmg','heal','buff','debuff'].filter(k=>r.has(k));
+  try { Object.defineProperty(a,'_roles',{value:out,enumerable:false}); } catch(e) {}
+  return out;
+}
+function b2RoleChip(a) { return b2Roles(a).map(k=>'<span class="b2-role" style="background:'+B2_ROLES[k].color+'">'+B2_ROLES[k].tag+'</span>').join(''); }
+function b2RoleWords(a) { const r=b2Roles(a).map(k=>B2_ROLES[k].name); return r.length?r.join(' + '):'SPECIAL'; }
+function b2ElemNote(a) {
+  const e=(a&&a.elem)||[]; if(!e.length) return '';
+  return ' '+e.map(k=>B2_ELEMS[k].name+' = '+B2_ELEM_WHAT[k]).join('; ')+'. Monsters weak to '+(e.length>1?'either':'it')+' take +50%.';
+}
+// The ▲ Skills list: the free basic move first, then every skill.
+function b2SkillRows(u) { return u&&u.kit?[u.kit.basic,...u.kit.skills].filter(Boolean):[]; }
+function b2CostTag(u,s) { if(s===u.kit.basic) return '<b class="b2-gain">+1 VP</b>'; return b2Diamond(u,s)?'<b class="b2-free">FREE</b>':b2Cost(u,s)+' VP'; }
 function b2RenderCmd() {
   const box=$('b2-cmd'),low=$('b2-low'),u=B2.actor; if(!box) return;
   const cmdOn=battle.state==='command';
   if(!cmdOn||B2.ui==='cross'||B2.ui==='busy'||!u||u.side!=='party') {
     const pu=u&&u.side==='party'?u:B2.party[0],k=pu.kit,off=!cmdOn?' off':'';
-    const img=b2Portrait(pu.id);
+    const img=b2Portrait(pu.id),sp=k.special;
     box.innerHTML='<div class="b2-cross">'+
-      '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar">▲</span>'+b2Esc(k.basic.name.toUpperCase())+'<small>+1 VP</small></button>'+
+      '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar">▲</span>SKILLS<small>'+pu.vp+' VP</small></button>'+
       '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar">◀</span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
-      '<button type="button" class="b2-x right'+(k.skills.length?off:' off')+'" data-d="right"><span class="ar">▶</span>SKILLS<small>'+(pu.vp)+' VP</small></button>'+
-      '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar">▼</span>CARE &amp; BAG</button></div>';
+      '<button type="button" class="b2-x right'+(sp&&!(cmdOn&&pu.vp<b2Cost(pu,sp))?off:' off')+'" data-d="right"><span class="ar">▶</span>'+(sp?b2Esc(sp.name):'SPECIAL')+'<small>'+(sp?(b2Diamond(pu,sp)?'FREE':b2Cost(pu,sp)+' VP')+' · '+b2RoleWords(sp):'NONE')+'</small></button>'+
+      '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar">▼</span>BAG<small>'+B2.bag.length+' items</small></button></div>';
     return;
   }
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>BACK</span><em>B / Esc</em></button>';
   if(B2.ui==='skills') {
-    box.innerHTML='<div class="b2-grid">'+u.kit.skills.map((s,i)=>{ const c=b2Cost(u,s),free=b2Diamond(u,s);
-      return '<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(s.name.toUpperCase())+'</span><em>'+b2ElemChip(s.elem)+(free?'<b class="b2-free">FREE</b>':c+' VP')+'</em></button>'; }).join('')+back+'</div>';
-  } else if(B2.ui==='care') {
-    const rows=b2CareRows(u);
-    box.innerHTML='<div class="b2-list">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.name)+'</span><em>'+b2Esc(r.sub)+'</em></button>').join('')+back+'</div>';
+    box.innerHTML='<div class="b2-grid">'+b2SkillRows(u).map((s,i)=>{ const c=b2Cost(u,s);
+      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span>'+b2Esc(s.name.toUpperCase())+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div><em>'+b2RoleChip(s)+b2ElemChip(s.elem)+'</em></button>'; }).join('')+back+'</div>';
   } else if(B2.ui==='bag') {
-    const rows=b2BagRows();
-    box.innerHTML='<div class="b2-grid">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(r.it.icon+' '+r.it.name.toUpperCase())+'</span><em>'+b2Esc(r.sub)+' · x'+r.n+'</em></button>').join(''):'<p class="b2-empty">Nothing useful in the pockets.</p>')+back+'</div>';
+    const rows=b2BagList(u);
+    box.innerHTML='<div class="b2-grid">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.name)+'</span><em>'+(r.role?'<span class="b2-role" style="background:'+B2_ROLES[r.role].color+'">'+B2_ROLES[r.role].tag+'</span>':'')+b2Esc(r.sub)+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='tombo') {
     // Only Tombos the HEART meter can pay for; each shows the face of who the actor teams up with.
     const rows=b2TomboRows(u);
     const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
-    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span>'+b2Esc(r.T.name.toUpperCase())+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART · '+b2ElemChip(r.T.elem)+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
+    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span>'+b2Esc(r.T.name.toUpperCase())+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART · '+b2RoleChip(r.T)+b2ElemChip(r.T.elem)+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
   } else if(B2.ui==='inspect') {
     box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='target') {
@@ -360,18 +404,19 @@ function b2RenderCmd() {
   }
 }
 function b2TomboEmpty(u) { return b2TomboRows(u,true).length?'Not enough HEART for a Tombo yet. The meter is at '+Math.floor(B2.heart)+'%.':'No Tombos yet. They unlock as the story goes.'; }
-function b2CareRows(u) {
+// The ▼ Bag: the kind word a monster wants (COMPLIMENT, GREAT TAKE!...), Deedee's Warm Crust, every pocket item, then RUN.
+function b2BagList(u) {
   const rows=[];
-  if(u.kit.special) rows.push({name:u.kit.special.name,sub:u.kit.special.vp+' VP · signature',act:u.kit.special,no:u.vp<u.kit.special.vp});
   // COMPLIMENT / GREAT TAKE! when a monster here wants one (B2_FOES praise, engine/battle2.js b2PraiseSteps).
   const pf=b2LiveFoes().find(f=>f.D.praise);
   if(pf) rows.push({name:pf.D.praise.label,sub:pf.D.praise.sub,praise:true});
-  if(B2.crust) rows.push({name:B2.hot?'HOT DISH':'WARM CRUST',sub:u.ateCrust?'Already had one this turn':'Free · '+B2.crust+' on the tray'+(B2.hot?' · heals more, cures one':''),crust:true,no:!!u.ateCrust});
+  if(B2.crust) rows.push({name:B2.hot?'HOT DISH':'WARM CRUST',role:'heal',sub:u.ateCrust?'Already had one this turn':'Free · '+B2.crust+' on the tray'+(B2.hot?' · heals more, cures one':''),crust:true,no:!!u.ateCrust});
   const lock=b7SnackLock(u);   // Director Mode: one snack per round
-  rows.push({name:'SNACK BAG',sub:lock||B2.bag.length+' things in the pockets',bag:true,no:!!lock});
+  for(const r of b2BagRows()) rows.push({name:r.it.icon+' '+r.it.name.toUpperCase(),role:b2ItemRole(r.it),sub:r.sub+' · x'+r.n,item:r,lock,no:!!lock});
   rows.push({name:'RUN',sub:'Back away slowly',run:true});
   return rows;
 }
+const b2ItemRole=it=>it.dmg?'dmg':it.confuse||it.atkDown?'debuff':it.pep||it.vp?'buff':'heal';
 const b2ItemOk=it=>!!(it.heal||it.healAll||it.revive||it.dmg||it.confuse||it.atkDown||it.pep||it.vp);
 function b2ItemSub(it) {
   return it.dmg?it.dmg+' damage':it.healAll?'Everyone +'+it.healAll+' HP':it.revive?'Revive at half HP':it.confuse?'Goofs an enemy':it.atkDown?'Enemy POW -25%':it.pep?'Everyone Pumped Up':it.vp?'+'+it.vp+' VP':'+'+it.heal+' HP';
@@ -391,11 +436,10 @@ function b2Render() {
 function b2Info() {
   if(battle.state!=='command'||!B2.actor) return;
   const u=B2.actor;
-  if(B2.ui==='skills') { const s=u.kit.skills[B2.sel]; if(s) b2Msg(s.name+(b2Diamond(u,s)?' (FREE and instant: Diamond Medallion). ':' ('+s.vp+' VP). ')+s.desc); }
-  else if(B2.ui==='care') { const r=b2CareRows(u)[B2.sel]; if(r&&r.act) b2Msg(r.act.desc); else if(r&&r.crust) b2Msg(u.id==='nara'?'Warm Crust. Homemade, so Nara will eat it: heals 40% and POW +30%. Free; her turn goes on.':'Warm Crust from Deedee’s tray. Heals 20%. Free; the turn goes on. One per turn.'); else if(r&&r.bag) b2Msg('Snacks and throwables from the shared pockets.'); else if(r&&r.praise) { const f=b2LiveFoes().find(x=>x.D.praise); b2Msg(f&&f.D.praise.need?r.name+' Free. Tell '+f.def.the+' what it never hears. '+(f.takes||0)+' of '+f.D.praise.need+' so far.':r.name+' Free. Say something nice. It counts as a favorite kind move.'); } else if(r) b2Msg('Leave this fight.'); }
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; if(s) b2Msg(s.name+' ('+(s===u.kit.basic?'free, +1 VP':b2Diamond(u,s)?'FREE and instant: Diamond Medallion':b2Cost(u,s)+' VP')+'). '+b2RoleWords(s)+'. '+s.desc+b2ElemNote(s)); }
+  else if(B2.ui==='bag') { const r=b2BagList(u)[B2.sel]; if(r&&r.item) b2Msg(r.lock||r.item.it.name+'. '+r.item.it.desc); else if(r&&r.crust) b2Msg(u.id==='nara'?'Warm Crust. Homemade, so Nara will eat it: heals 40% and POW +30%. Free; her turn goes on.':'Warm Crust from Deedee’s tray. Heals 20%. Free; the turn goes on. One per turn.'); else if(r&&r.praise) { const f=b2LiveFoes().find(x=>x.D.praise); b2Msg(f&&f.D.praise.need?r.name+' Free. Tell '+f.def.the+' what it never hears. '+(f.takes||0)+' of '+f.D.praise.need+' so far.':r.name+' Free. Say something nice. It counts as a favorite kind move.'); } else if(r) b2Msg('Leave this fight.'); }
   else if(B2.ui==='target') b2Msg((B2.pending&&B2.pending.name?B2.pending.name+': ':'')+'pick a target. A to confirm, B to go back.');
-  else if(B2.ui==='bag') { const r=b2BagRows()[B2.sel]; if(r) b2Msg(r.it.name+'. '+r.it.desc); }
-  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.T.name+' ('+r.T.cost+'% HEART). '+(r.why||r.T.desc)); else b2Msg(b2TomboRows(u,true).length?b2TomboEmpty(u):'Tombos are Tom plus one partner. They unlock as the story goes.'); }
+  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.T.name+' ('+r.T.cost+'% HEART). '+(r.why||b2RoleWords(r.T)+'. '+r.T.desc+b2ElemNote(r.T))); else b2Msg(b2TomboRows(u,true).length?b2TomboEmpty(u):'Tombos are Tom plus one partner. They unlock as the story goes.'); }
   else if(B2.ui==='inspect') { const f=b2LiveFoes()[B2.sel]; if(f) b2Msg(b2InspectText(f)); }
   else if(B2.ui==='cross') {
     // A boss winding up gets top billing, so the hint is there when it matters.
@@ -411,7 +455,7 @@ function b2Info() {
     else if(boss) b2Msg(cap(boss.def.the)+' will hit everyone next.'+(boss.shield?' Break its guard: '+(boss.shield.need-boss.shield.hits)+' more '+boss.shield.elems.map(e=>B2_ELEMS[e].name).join(' or ')+' hits.':' Heal up or GRUMBLE.'));
     else if(b2LiveFoes().some(f=>f.call&&b2Alive(f.call)&&f.call.st.boarding)) { const c=b2LiveFoes().find(f=>f.call).call; b2Msg('NOW BOARDING: '+c.name+'. '+(c===u?'You are called: anything you do now boards you (+2 VP).':c.name+' must act before the Last Call’s next turn, or the gate closes on them.'+(u.id==='tom'?' DEFEND them to walk them on.':''))); }
     else if(b2LiveFoes().some(f=>f.mirror)) { const m=b2LiveFoes().find(f=>f.mirror); b2Msg(u.name+'’s turn. MIRROR SIDE: '+B2_ELEMS[m.mirror].name.toUpperCase()+'. Those hits bounce back; anything else gets through.'); }
-    else b2Msg(u.name+'’s turn. ▲ '+u.kit.basic.name+'  ▶ Skills  ◀ Tombo  ▼ Care & Bag  B Inspect'+b2TraitHint(u));
+    else b2Msg(u.name+'’s turn. ▲ Skills  ▶ '+(u.kit.special?u.kit.special.name:'Special')+'  ◀ Tombo  ▼ Bag  B Inspect'+b2TraitHint(u));
   }
 }
 
@@ -419,11 +463,11 @@ function b2Info() {
 function b2Choose(act) {
   const u=B2.actor;
   if(b2Cost(u,act)>u.vp) { sfx.nope(); b2Msg('Not enough VP. '+act.name+' costs '+act.vp+'; '+u.name+' has '+u.vp+'.'); return; }
-  if(b2Shushed(u,act)) { sfx.nope(); b2Msg(u.st.silenced&&u.kit.skills.includes(act)?u.name+' is Silenced: no skills for now. ▲ basic moves and ▼ Care & Bag still work.':u.name+' is Shushed and cannot use Chatter moves right now.'); return; }
+  if(b2Shushed(u,act)) { sfx.nope(); b2Msg(u.st.silenced&&u.kit.skills.includes(act)?u.name+' is Silenced: no skills for now. Only the free basic move works under ▲ Skills; ▶ '+(u.kit.special?u.kit.special.name:'the special')+' and ▼ Bag still work.':u.name+' is Shushed and cannot use Chatter moves right now.'); return; }
   const opts=b2TargetOptions(act,u);
   if(!opts.length) { sfx.nope(); b2Msg('Nobody to use that on.'); return; }
   sfx.select();
-  if(u.kit.skills.includes(act)) B2.lastSkill[u.id]=act;
+  if(act===u.kit.basic||u.kit.skills.includes(act)) B2.lastSkill[u.id]=act;
   if(opts.length===1) { b2Do(act,opts[0]); return; }
   B2.pending=act; B2.opts=opts; B2.prevUi=B2.ui; B2.prevSel=B2.sel;
   let s=0; if(!opts[0].ally&&B2.lastTarget) { const k=opts.findIndex(o=>o.targets.includes(B2.lastTarget)); if(k>=0) s=k; }
@@ -431,29 +475,34 @@ function b2Choose(act) {
 }
 function b2Cross(d) {
   const u=B2.actor;
-  if(d==='up') b2Choose(u.kit.basic);
-  else if(d==='right') { if(!u.kit.skills.length) { sfx.nope(); return; } sfx.select(); b2Open('skills'); }
+  if(d==='up') { sfx.select(); b2Open('skills'); }
+  else if(d==='right') { if(!u.kit.special) { sfx.nope(); return; } b2Choose(u.kit.special); }
   else if(d==='left') { sfx.select(); b2Open('tombo'); }
-  else if(d==='down') { sfx.select(); b2Open('care'); }
+  else if(d==='down') { sfx.select(); b2Open('bag'); }
 }
 function b2Pick(i) {
   const u=B2.actor;
-  if(B2.ui==='skills') { const s=u.kit.skills[i]; if(s) { B2.sel=i; b2Choose(s); } }
-  else if(B2.ui==='care') {
-    const r=b2CareRows(u)[i]; if(!r) return;
-    if(r.act) b2Choose(r.act);
-    else if(r.crust) b2EatCrust(u);
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[i]; if(s) { B2.sel=i; b2Choose(s); } }
+  else if(B2.ui==='bag') {
+    const r=b2BagList(u)[i]; if(!r) return;
+    B2.sel=i;
+    if(r.crust) b2EatCrust(u);
     else if(r.praise) {
       const opts=b2LiveFoes().filter(f=>f.D.praise).map(f=>({label:f.name,targets:[f],primary:f}));
       if(!opts.length) { sfx.nope(); return; }
       const act={praise:true,name:r.name,weight:'standard'}; sfx.select();
       if(opts.length===1) { b2Do(act,opts[0]); return; }
-      B2.pending=act; B2.opts=opts; B2.prevUi='care'; B2.prevSel=i; b2Open('target',0);
+      B2.pending=act; B2.opts=opts; B2.prevUi='bag'; B2.prevSel=i; b2Open('target',0);
     }
-    else if(r.bag) { if(r.no) { sfx.nope(); b2Msg(r.sub); return; } sfx.select(); b2Open('bag'); }
     else if(r.run) { sfx.select(); b2Do({run:true,weight:'standard'},null); }
-  } else if(B2.ui==='bag') {
-    const r=b2BagRows()[i]; if(!r) return;
+    else if(r.item) { if(r.lock) { sfx.nope(); b2Msg(r.lock); return; } b2UseItem(r.item,i); }
+  } else if(B2.ui==='tombo') {
+    b2PickTombo(u,i);
+  } else if(B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
+  else if(B2.ui==='target') { const o=B2.opts[i]; if(o) { sfx.select(); b2Do(B2.pending,o); } }
+}
+function b2UseItem(r,i) {
+  {
     const it=r.it,act={item:r.id,name:it.name,weight:'standard'};
     let opts;
     if(it.revive) opts=B2.party.filter(p=>p.hp<=0).map(p=>({label:p.name,targets:[p],primary:p,ally:true}));
@@ -465,7 +514,10 @@ function b2Pick(i) {
     sfx.select(); B2.pending=act; B2.opts=opts; B2.prevUi='bag'; B2.prevSel=i;
     if(opts.length===1) { b2Do(act,opts[0]); return; }
     b2Open('target',0);
-  } else if(B2.ui==='tombo') {
+  }
+}
+function b2PickTombo(u,i) {
+  {
     const r=b2TomboRows(u)[i]; if(!r) return;
     B2.sel=i;
     if(r.why) { sfx.nope(); b2Msg(r.T.name+': '+r.why); return; }
@@ -476,8 +528,7 @@ function b2Pick(i) {
     B2.pending=r.T; B2.opts=opts; B2.prevUi='tombo'; B2.prevSel=i;
     let s=0; if(B2.lastTarget) { const k=opts.findIndex(o=>o.targets.includes(B2.lastTarget)); if(k>=0) s=k; }
     b2Open('target',s);
-  } else if(B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
-  else if(B2.ui==='target') { const o=B2.opts[i]; if(o) { sfx.select(); b2Do(B2.pending,o); } }
+  }
 }
 // Inspect (B on the command cross, or tap the portrait in the middle): what makes each enemy grumpy and how to cheer it up.
 function b2Inspect() {
@@ -487,12 +538,11 @@ function b2Inspect() {
 function b2Back() {
   if(battle.state!=='command') { b7Tap(true); return; }
   if(B2.ui==='cross') { b2Inspect(); }
-  else if(B2.ui==='skills'||B2.ui==='care'||B2.ui==='tombo'||B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
-  else if(B2.ui==='bag') { sfx.move(); b2Open('care',b2CareRows(B2.actor).findIndex(r=>r.bag)); }
+  else if(B2.ui==='skills'||B2.ui==='bag'||B2.ui==='tombo'||B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
   else if(B2.ui==='target') { sfx.move(); const p=B2.prevUi||'cross'; B2.pending=null; b2Open(p,B2.prevSel||0); }
 }
 function b2Move(d) {
-  const n=B2.ui==='skills'?B2.actor.kit.skills.length:B2.ui==='care'?b2CareRows(B2.actor).length:B2.ui==='bag'?b2BagRows().length:
+  const n=B2.ui==='skills'?b2SkillRows(B2.actor).length:B2.ui==='bag'?b2BagList(B2.actor).length:
     B2.ui==='tombo'?b2TomboRows(B2.actor).length:B2.ui==='inspect'?b2LiveFoes().length:B2.opts.length;
   if(!n) return;
   const grid=B2.ui==='skills'||B2.ui==='bag';
@@ -507,6 +557,14 @@ function b2Hover(i) {
   B2.sel=i;
   document.querySelectorAll('#b2-cmd .b2-btn[data-i]').forEach(b=>b.classList.toggle('sel',Number(b.dataset.i)===i));
   b2RenderRibbon(); b2RenderParty(); b2Info();
+}
+
+// Touch preview: on a phone the first tap on a row only highlights it and shows what it does; a tap on the
+// highlighted row uses it. (D-pad, keys, gamepad and mouse hover already preview by moving the cursor.)
+const B2_PREVIEW_LISTS=['skills','bag','tombo'];
+function b2Preview(i) {
+  sfx.move(); b2Hover(i);
+  const el=$('b2-msg'); if(el) el.textContent=el.textContent.replace(/\s*$/,'')+' Tap again to use.';
 }
 
 // ---------- Input: touch, keyboard, gamepad ----------
@@ -539,13 +597,19 @@ function b2Pad(dir,dirEdge,A,B) {
     const x=e.target.closest('.b2-x'); if(x) { b2Cross(x.dataset.d); return; }
     if(e.target.closest('[data-insp]')) { if(B2.ui==='cross') b2Inspect(); return; }
     const bk=e.target.closest('[data-back]'); if(bk) { b2Back(); return; }
-    const b=e.target.closest('.b2-btn'); if(b&&b.dataset.i!=null) { b2Pick(Number(b.dataset.i)); return; }
+    const b=e.target.closest('.b2-btn');
+    if(b&&b.dataset.i!=null) {
+      const i=Number(b.dataset.i);
+      if(B2.ptr&&B2.ptr!=='mouse'&&B2_PREVIEW_LISTS.includes(B2.ui)&&i!==B2.sel) { b2Preview(i); return; }
+      b2Pick(i); return;
+    }
     // Tap a party card to target that ally.
     const pc=e.target.closest('.b2-pc');
     if(pc&&B2.ui==='target') { const u=B2.party[Number(pc.dataset.i)],k=B2.opts.findIndex(o=>o.targets.length===1&&o.targets[0]===u); if(k>=0) b2Pick(k); }
   });
+  ui.addEventListener('pointerdown',e=>{ B2.ptr=e.pointerType||'touch'; },true);
   ui.addEventListener('pointerover',e=>{
-    if(!B2.active||battle.state!=='command') return;
+    if(!B2.active||battle.state!=='command'||e.pointerType!=='mouse') return;   // touch: the tap itself previews
     const b=e.target.closest('.b2-btn'); if(b&&b.dataset.i!=null&&Number(b.dataset.i)!==B2.sel) b2Hover(Number(b.dataset.i));
   });
 })();

@@ -351,7 +351,7 @@ menuButton.addEventListener('touchend',e=>{
 menuButton.addEventListener('click',()=>{
   if(performance.now()-lastTouchTime>500&&!dialog.active&&!transition) openMenu();
 });
-$('menu-close').addEventListener('click',closeMenu);
+$('menu-back').addEventListener('click',()=>menuBack());
 $('sound-toggle').addEventListener('click',()=>{ setSound(!sound.enabled); if(sound.enabled) sfx.select(); });
 setSound(sound.enabled);
 $('menu').addEventListener('click',e=>{ if(e.target===$('menu')) closeMenu(); });

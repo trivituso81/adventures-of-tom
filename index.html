@@ -581,7 +581,7 @@ html.landscape #splash-panel{border-radius:8px 8px 0 0}
 .b2-int.all{background:#ffb070}.b2-int.stg{background:#ffe27a}
 .b2-int s{text-decoration:none;margin-left:2px;padding:0 2px;border-radius:2px;background:#ffe27a}
 .b2-cmd{justify-content:flex-start}.b2-cmd>.b2-grid,.b2-cmd>.b2-list,.b2-cmd>.b2-cross{margin-top:auto;margin-bottom:auto}
-html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.landscape .b2-el{font-size:7.5px;padding:1px 3px}
+html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.landscape .b2-el{font-size:7.5px;padding:0 2px}html.landscape .b2-role{font-size:7.5px;padding:1px 3px}
 .b2-ui{flex:1;display:flex;flex-direction:column;gap:6px;width:100%;max-width:960px;margin:0 auto;padding:8px 10px calc(10px + env(safe-area-inset-bottom));min-height:0}
 .b2-msg{padding:7px 11px;font-size:13px;line-height:1.35;min-height:42px}
 .b2-low{flex:1;display:flex;flex-direction:column;gap:6px;min-height:0}
@@ -625,7 +625,10 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-tbt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
 html.landscape .b2-tbp img,html.landscape .b2-tbp .b2-ph{width:28px;height:28px}html.landscape .b2-btn.b2-tb{gap:7px}
 .b2-back{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center;padding:6px 9px}
-.b2-el{display:inline-block;padding:1px 4px;border-radius:3px;font-size:8.5px;font-weight:800;letter-spacing:.4px;color:#1a1e26}
+.b2-el{display:inline-block;padding:0 3px;border-radius:3px;font-size:8.5px;font-weight:800;letter-spacing:.4px;border:1px solid currentColor;background:#0006;line-height:11px}
+.b2-role{display:inline-block;padding:1px 4px;border-radius:3px;font-size:8.5px;font-weight:900;letter-spacing:.4px;color:#151820;line-height:11px}
+.b2-top{display:flex;align-items:baseline;gap:6px;width:100%}.b2-cost{font-style:normal;font-size:10px;color:var(--ink-dim);margin-left:auto;white-space:nowrap}html.landscape .b2-x small{font-size:8px}.b2-gain{color:#9be39a;font-weight:800}
+.b2-btn em{width:100%}.b2-btn.b2-basic{border-color:#ffd24a55}
 .b2-empty{grid-column:1/-1;margin:6px 2px;font-size:12px;color:var(--ink-dim)}
 /* F5: HEART meter, Inspect button, Warmth */
 .b2-heart{grid-column:1/-1;display:flex;align-items:center;gap:6px;padding:1px 3px 3px;border-bottom:1px solid #ffffff14;margin-bottom:1px}
@@ -686,6 +689,13 @@ html.landscape .b7-cbox{width:min(460px,100%);padding:9px 12px}html.landscape .b
 .b7-orow{display:flex;gap:6px;margin:7px 0 6px}
 .b7-orow .save-btn{flex:1;padding:10px 6px;font-size:11px}
 .save-btn.b7-opt.on{background:var(--sel);border-color:var(--edge);color:#fff}
+.b7-orow.b7-vrow{align-items:center}
+.b7-orow .save-btn.b7-vbtn{flex:none;width:40px;padding:8px 0;font-size:16px;line-height:1}
+.b7-orow .save-btn.b7-vbtn.dim{opacity:.35}
+.b7-vbar{flex:1;display:flex;gap:3px;height:22px;align-items:stretch}
+.b7-vpip{flex:1;border-radius:3px;border:2px solid #ffffff30;background:#0004;cursor:pointer}
+.b7-vpip.on{background:var(--sel);border-color:var(--edge)}
+.b7-vnum{flex:none;width:20px;text-align:center;font-size:13px;font-weight:700}
 
 /* Preview note */
 #preview-note{background:var(--w-flat);border:2px solid var(--edge);color:var(--ink);box-shadow:var(--bevel)}
@@ -801,6 +811,23 @@ html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-b
 html.landscape #dialog-portrait{left:calc(16px + env(safe-area-inset-left));top:18px;width:68px;height:68px}
 html.landscape #dialog.has-portrait #dialog-text,html.landscape #dialog.has-portrait #dialog-choices{margin-left:80px}
 html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
+/* Portrait phone: the box hugs its content (portrait face sits above the footer line); the touch controls hide while it is open. */
+html:not(.landscape) #dialog{min-height:0}
+html:not(.landscape) #dialog-text{min-height:calc(64px * 4 / 3 + 4px)}
+main:has(#dialog:not([hidden])) #controls{visibility:hidden}
+
+/* Back frame under the menu commands */
+.mside-top{display:grid;gap:8px;min-height:0}
+.mback-win{padding:5px}
+.mback{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 4px;border:none;border-radius:4px;background:none;color:var(--ink,#324235);font-size:20px;font-weight:800;letter-spacing:.3px;text-shadow:0 1px 0 #0008}
+.mback b{font-size:26px;line-height:1;color:var(--gold,#c9a24d)}
+.mback:active,.mback:focus-visible{background:var(--sel,#f3e6c6);color:#fff}
+@media(max-width:600px){.mback{font-size:18px;gap:5px;padding:8px 2px}.mback b{font-size:23px}}
+html.landscape .mside,html.landscape .mside-top{gap:6px}
+html.landscape .mcmds-win{min-height:0;overflow-y:auto}
+html.landscape .mcmds{padding:4px 6px}html.landscape .mcmd{padding:4px 6px 4px 24px}
+html.landscape .mback-win{padding:3px}html.landscape .mback{font-size:18px;padding:3px 4px}html.landscape .mback b{font-size:22px}
+html.landscape .mpurse{padding:5px 10px;gap:3px}html.landscape .mp-row{padding-bottom:3px}
 </style>
 <script>(function(){var d=document.documentElement;d.classList.add('js-on');setTimeout(function(){if(!d.classList.contains('js-running'))d.classList.add('js-stuck');},12000);document.addEventListener('click',function(e){var n=e.target.closest&&e.target.closest('#preview-note');if(n){e.preventDefault();location.reload();}});})();</script>
 </head>
@@ -863,7 +890,10 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
   <div class="menu-panel" id="menu-panel" tabindex="-1">
     <h2 id="menu-name" class="sr-only">Menu</h2>
     <div class="mside">
-      <div class="mwin mcmds-win"><div id="menu-cmds" class="mcmds" role="tablist" aria-label="Menu"></div></div>
+      <div class="mside-top">
+        <div class="mwin mcmds-win"><div id="menu-cmds" class="mcmds" role="tablist" aria-label="Menu"></div></div>
+        <div class="mwin mback-win"><button id="menu-back" class="mback" type="button" aria-label="Back"><b>&#8592;</b><span>Back</span></button></div>
+      </div>
       <div class="mwin mpurse">
         <div class="mp-row"><span class="mp-lbl">Time</span><b id="menu-time">0:00</b></div>
         <div class="mp-row"><span class="mp-lbl">Coins</span><b id="menu-coins">0</b></div>
@@ -879,7 +909,6 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
       <span class="hint"><button id="rotate-menu" class="key" type="button" aria-label="Switch between portrait and landscape">&#8635;</button><span>Rotate</span></span>
       <span class="hint"><button id="music-toggle" class="key" type="button" aria-label="Music on. Tap to turn off">&#9835;</button><span>Music</span></span>
       <span class="hint"><button id="sound-toggle" class="key" type="button" aria-label="Sound on. Tap to mute">&#128266;</button><span>Sound</span></span>
-      <span class="hint"><button id="menu-close" class="key" type="button" aria-label="Close menu">&#10005;</button><span>Close</span></span>
     </div>
   </div>
 </div>
@@ -937,6 +966,7 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 <script src="engine/battle-draw.js"></script>
 <script src="engine/recruit-fx.js"></script>
 <script src="engine/stage.js"></script>
+<script src="data/grace-wheel.js"></script>
 <script src="engine/recruit-moves.js"></script>
 <script src="engine/tom-moves.js"></script>
 <script src="engine/grace-moves.js"></script>
@@ -997,50 +1027,6 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 <script src="data/songs.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

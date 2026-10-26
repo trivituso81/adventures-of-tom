@@ -242,7 +242,7 @@ SCENES.ch2Loft=[
   {trace:'tnb-hello'},
   {talk:'TNB',lines:['My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I am all yours.',
     'Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.']},
-  {talk:'Tom',lines:['We will look. After I check on 2nd Ave. My starter has been alone for a week.']},
+  {talk:'Tom',lines:['All yours. I like that. We will look, together. One quick stop first. My starter has been alone for a week.']},
   {join:'tnb'},
   {wait:2.6},
   {toast:'Goal: home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468.',time:4.5}
@@ -274,8 +274,8 @@ SCENES.ch2Starter=[
   {talk:'Tom',lines:['Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles. Proud of you.']},
   {trace:'starter'}, {hearts:'tom'},
   {talk:'TNB',lines:['You talk to that jar more than you talk to me.']},
-  {talk:'Tom',lines:['The jar never leaves wet towels on the bed.']},
-  {talk:'TNB',lines:['Fair. Very fair.']},
+  {talk:'Tom',lines:['The jar never leaves wet towels on the bed.','...The jar also never steamed my shirts for my flight. You win.']},
+  {talk:'TNB',lines:['I will take it.']},
   {call:()=>sfx.whine&&sfx.whine()},
   {talk:'Nara',lines:['Nara is at the front window, whining. Her tail is down.']},
   {talk:'TNB',lines:['Babe. Look outside. Is the street... purple?']},
@@ -365,7 +365,7 @@ SCENES.ch2Coyote=[
   {heal:true},
   {talk:'TNB',lines:['Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?']},
   {call:()=>{ const t=sceneActor('tnb'); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }},
-  {talk:'Tom',lines:['Ready. The Observatory is up at the top left. Follow the purple.']},
+  {talk:'Tom',lines:['Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.']},
   {toast:'Goal: the Observatory, top left of the park. The park’s monsters are awake now.',time:5}
 ];
 // 9. The Observatory: the hill stands up. Boss fight.
@@ -528,16 +528,16 @@ const STORY_MAPFX=[
   }
 ];
 
-// Tips for the three tutorial fights (engine/story.js b2TutTip). ▲ basic, ▶ skills, ◀ Tombo, ▼ Care & Bag, B Inspect.
+// Tips for the three tutorial fights (engine/story.js b2TutTip). ▲ Skills (basic move first), ▶ signature move, ◀ Tombo, ▼ Bag, B Inspect.
 const TUTORIALS={
   basics:{tips:[
-    {id:'tom',who:'tom',dir:'up',text:'Tom’s turn. Tap ▲ (or press A) for his free basic move, Button Mash. Basic moves also earn 1 VP.'},
-    {id:'grace',who:'grace',dir:'up',text:'See the pink bar under each Mudling? That is Warmth. Kind moves fill it, and a full bar sends a monster home happy. ▲ Cartwheel for now.'},
-    {id:'rose',who:'rose',dir:'down',care:0,text:'Rose’s RASPBERRY is under ▼ Care & Bag. A Goofed monster loses its next turn, and Mudlings love a raspberry (lots of Warmth).'},
+    {id:'tom',who:'tom',dir:'up',text:'Tom’s turn. Tap ▲ Skills (or press A). His free basic move, Button Mash, is first; basic moves also earn 1 VP.'},
+    {id:'grace',who:'grace',dir:'up',text:'See the pink bar under each Mudling? That is Warmth. Kind moves fill it, and a full bar sends a monster home happy. ▲ Skills, then Cartwheel, for now.'},
+    {id:'rose',who:'rose',dir:'right',text:'Rose’s RASPBERRY is the ▶ button. A Goofed monster loses its next turn, and Mudlings love a raspberry (lots of Warmth).'},
     {id:'deedee',who:'deedee',text:'B, or tapping the portrait in the middle, Inspects a monster: why it is grumpy, what it likes, and what it is weak to.'},
     {id:'vp',who:'tom',text:'VP is the blue pips on each card: +2 every turn, +1 for a basic move. Skills learned with Stamp Points cost VP.'}]},
   dance:{tips:[
-    {id:'dance',who:'grace',dir:'down',care:0,when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.85),text:'Everybody is itchy. Grace’s DANCE (▼ Care & Bag) heals the whole party.'},
+    {id:'dance',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.85),text:'Everybody is itchy. Grace’s DANCE (▶) heals the whole party.'},
     {id:'heart',who:'tom',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'The HEART meter (the pink hearts) is a quarter full. ◀ TOMBO: Tom teams up with a partner for a big combo.'},
     {id:'heart2',who:'rose',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'Rose can start a Tombo too. ◀ TOMBO: Double-Decker Airplane.'}]},
   defend:{
@@ -548,20 +548,20 @@ const TUTORIALS={
       g.ct=Math.max(...B2.party.map(p=>p.ct))+40;
     },
     tips:[
-      {id:'defend',who:'tom',dir:'down',care:0,when:()=>B2.foes.some(f=>f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&!f.intent.target.st.guarded),
-        text:'The Pond Grump has locked onto Rose (the red LOCK). ▼ Care & Bag, then DEFEND, then Rose: Tom steps in front and takes it.'},
-      {id:'hug',who:'deedee',dir:'down',care:0,when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.9),text:'Deedee’s MOON & BACK (▼ Care & Bag) hugs everyone: a heal now, and Tucked In heals a little more each turn.'}]},
+      {id:'defend',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&!f.intent.target.st.guarded),
+        text:'The Pond Grump has locked onto Rose (the red LOCK). ▶ DEFEND, then Rose: Tom steps in front and takes it.'},
+      {id:'hug',who:'deedee',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.9),text:'Deedee’s MOON & BACK (▶) hugs everyone: a heal now, and Tucked In heals a little more each turn.'}]},
   // The boss: a few reminders, only when they matter.
   bigone:{tips:[
-    {id:'tin',who:'rose',dir:'down',care:0,when:()=>B2.foes.some(f=>f.st.pietin&&b2Alive(f)),text:'That pie tin is a helmet (GRIT +50%). Make The Big One laugh: Rose’s RASPBERRY (▼) knocks it right off.'},
+    {id:'tin',who:'rose',dir:'right',when:()=>B2.foes.some(f=>f.st.pietin&&b2Alive(f)),text:'That pie tin is a helmet (GRIT +50%). Make The Big One laugh: Rose’s RASPBERRY (▶) knocks it right off.'},
     {id:'shield',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'A shield! Two Sparkle or Chatter hits crack it before the Belly-Flop. RASPBERRY counts, and any Tombo breaks it at once.'},
     {id:'tombo',who:'tom',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ◀ TOMBO: Wine and Gossip heals everyone a lot; Double-Decker Airplane hits hard and stuns.'}]},
   // Chapter 2 (Los Angeles): the new crew's signatures and their Tombos.
   ch2lawn:{
     setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
     tips:[
-      {id:'wardrobe',who:'tnb',dir:'down',care:0,when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.8),text:'TNB’s WARDROBE (▼ Care & Bag) heals one person a lot, dresses them in the next costume on his rack, and gets them back up if they are knocked out.'},
-      {id:'puppy',who:'nara',dir:'down',care:0,text:'Nara’s HUMAN EYES (▼ Care & Bag): the monster is Smitten and skips its next turn. Its Warmth bar fills too.'},
+      {id:'wardrobe',who:'tnb',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.8),text:'TNB’s WARDROBE (▶) heals one person a lot, dresses them in the next costume on his rack, and gets them back up if they are knocked out.'},
+      {id:'puppy',who:'nara',dir:'right',text:'Nara’s HUMAN EYES (▶): the monster is Smitten and skips its next turn. Its Warmth bar fills too.'},
       {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Tom and TNB rain popcorn on every enemy at once, and the whole party glows.'},
       {id:'fetch',who:['tom','nara'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='nara1'&&!r.why),text:'◀ TOMBO: Sit. Paw. Treat. Always a critical hit, and Nara marks the monster with her scent.'}]},
   ch2flurry:{tips:[
@@ -575,9 +575,9 @@ const TUTORIALS={
       c.ct=Math.max(...B2.party.map(p=>p.ct))+40;
     },
     tips:[
-      {id:'defend',who:'tom',dir:'down',care:0,when:()=>B2.foes.some(f=>f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&!f.intent.target.st.guarded),
-        text:'The coyote locked onto Nara (the red LOCK). ▼ Care & Bag, DEFEND, then Nara: Tom takes the hit for her.'},
-      {id:'wardrobe2',who:'tnb',dir:'down',care:0,when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.6),text:'Someone is hurting. WARDROBE heals half and adds a costume.'}]},
+      {id:'defend',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&!f.intent.target.st.guarded),
+        text:'The coyote locked onto Nara (the red LOCK). ▶ DEFEND, then Nara: Tom takes the hit for her.'},
+      {id:'wardrobe2',who:'tnb',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.6),text:'Someone is hurting. WARDROBE heals half and adds a costume.'}]},
   bigshake:{tips:[
     {id:'after',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'&&!f.shield),text:'An Aftershock is coming (!! on the turn ribbon). It hits everyone. Save WARDROBE and HEART for right after.'},
     {id:'clog',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'The pipes are clogged! 2 Splash or Sparkle hits break the clog before the Big Rumble. HUMAN EYES is Sparkle. Any Tombo breaks it at once.'},
@@ -961,22 +961,22 @@ TUTORIALS.ch3snag={tips:[
   {id:'goof',who:'*',text:'The Snag is slow and sleepy. Rose’s RASPBERRY goofs it easily, and Cozy hits work best. B Inspects it.'}]};
 TUTORIALS.irongill={tips:[
   {id:'inspect',who:'*',text:'Old Iron-Gill is weak to Kinetic and Sparkle. His favorite kind moves: Boppy’s GRUMBLE and his 1970 story.'},
-  {id:'belch',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'&&!f.shield),text:'PEPPER BELCH next turn hits everyone (see the turn ribbon). Heal right after it: Grace’s DANCE, or ▼ Care & Bag.'},
+  {id:'belch',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'&&!f.shield),text:'PEPPER BELCH next turn hits everyone (see the turn ribbon). Heal right after it: Grace’s DANCE (▶) or a snack from the ▼ Bag.'},
   {id:'dive',who:['tom','boppy'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>r.T.id==='boppy1'&&!r.why),text:'He is diving! ◀ TOMBO: You Hold the Net breaks his guard in one go.'},
   {id:'dive2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'He is diving for a DEEP DIVE. Break his guard first: 2 Splash or Kinetic hits, or any Tombo.'}]};
 // Tips for the two marsh fights.
 TUTORIALS.ch3sock={
   setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
   tips:[
-    {id:'grumble',who:'boppy',dir:'down',care:0,text:'Boppy’s GRUMBLE (▼ Care & Bag): he complains about his stomach. A whole row hits 30% softer and goes after Boppy, who guards. The marsh LOVES a good grumble (lots of Warmth).'},
+    {id:'grumble',who:'boppy',dir:'right',text:'Boppy’s GRUMBLE (▶): he complains about his stomach. A whole row hits 30% softer and goes after Boppy, who guards. The marsh LOVES a good grumble (lots of Warmth).'},
     {id:'inspect',who:'*',text:'Socks are weak to Cozy and Sparkle, and shrug off Splash. B, or the portrait in the middle, Inspects one.'},
     {id:'tombo',who:['tom','boppy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='boppy1'&&!r.why),text:'◀ TOMBO: You Hold the Net. Tom holds the net, Boppy scoops up everybody. It hits every enemy and they all go soft.'}]};
 TUTORIALS.ch3tangle={
   // Boppy already has a little heartburn from that pickled pepper he almost ate.
   setup() { const b=B2.party.find(p=>p.id==='boppy'); if(b) { b.burn=Math.max(b.burn||0,2); } b2Render(); },
   tips:[
-    {id:'burn',who:'boppy',dir:'down',care:0,when:u=>(u.burn||0)<3,text:'See the ●●○ on Boppy’s card? That is his Heartburn. GRUMBLE, then every hit he takes while guarding adds a pip. At 3, watch out.'},
-    {id:'roar',who:'boppy',dir:'up',when:u=>(u.burn||0)>=3,text:'HEARTBURN! Boppy’s next attack lets out the Warden’s Counter-Roar: whoever hit him last loses its turn. ▲ Cap Swat.'},
+    {id:'burn',who:'boppy',dir:'right',when:u=>(u.burn||0)<3,text:'See the ●●○ on Boppy’s card? That is his Heartburn. GRUMBLE, then every hit he takes while guarding adds a pip. At 3, watch out.'},
+    {id:'roar',who:'boppy',dir:'up',when:u=>(u.burn||0)>=3,text:'HEARTBURN! Boppy’s next attack lets out the Warden’s Counter-Roar: whoever hit him last loses its turn. ▲ Skills, Cap Swat.'},
     {id:'slow',who:'*',when:()=>b2LiveParty().some(p=>p.st&&p.st.slow),text:'Slowed: that one acts later on the turn ribbon for a while. Grace’s DANCE heals everybody in the meantime.'}]};
 
 // ======================================================================================================
@@ -1015,7 +1015,7 @@ SCENES.ch4Arrive=[
   {trace:'tnb-hello4'}, {hearts:'tom'},
   {talk:'TNB',lines:['Big shoot today. BACKLOT BEDLAM. Car chases, a saloon, a fake New York. I have forty costumes on one rack, and every single one is steamed.',
     'Also, Olivia dropped Nara at your place again. Family trip to the desert. She has been howling at your front door since nine.']},
-  {talk:'Tom',lines:['Then we get Nara. Then I watch you be very important.']},
+  {talk:'Tom',lines:['Then we get Nara. Then I watch you be very important. I am not joking.']},
   {talk:'TNB',lines:['Very, very important. I have a lanyard.']},
   {party:{lock:['tom','tnb']}},
   {toast:'Goal: pick up Nara at Tom’s house (3468) in Jefferson Park, south of Downtown.',time:4.5}
@@ -1202,6 +1202,7 @@ SCENES.ch4End=[
   {give:'n_steamer'},
   {toast:'TNB gets a new Signature Tool: the Golden Garment Steamer (POW +4, WARMTH +7). Equip it in the menu.',time:4.5},
   {talk:'TNB',lines:['I am going to cry. I am not going to cry. I am a professional. I am crying a little.']},
+  {talk:'Tom',lines:['You are a professional. A crying professional. I am so proud of you.']},
   {talk:'Dana',lines:['And crew jackets. Wrap Party Jackets. Only the crew gets one. You are crew now. Even the dog.']},
   {give:'wrapjacket'},
   {toast:'New outfit: the Wrap Party Jacket. Purple satin. Anyone can wear it.',time:4},
@@ -1209,7 +1210,7 @@ SCENES.ch4End=[
   {talk:'Tom',lines:['...','I flew three thousand miles for that pun.']},
   {talk:'TNB',lines:['Worth it?']},
   ch4Kiss(),
-  {talk:'Tom',lines:['Worth it. But for the record? That was a CLOSED set!']},
+  {talk:'Tom',lines:['Worth it. Every mile. But for the record? That was a CLOSED set!']},
   {talk:'Nara',lines:['Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.']},
   {call:()=>{ if(typeof naraPuddle==='function') { const n=sceneActor('nara'); if(n) naraPuddle(currentMap,n.x,n.y); } }},
   {trace:'ch4-wrap'}, {hearts:'tom'},
@@ -1325,17 +1326,17 @@ STORY_MAPFX.push(time=>{
 TUTORIALS.ch4crab={
   setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
   tips:[
-    {id:'praise',who:'*',dir:'down',care:1,text:'The crab is armored, but it really wants a compliment. ▼ Care & Bag, then COMPLIMENT. It is free and fills its Warmth bar fast.'},
+    {id:'praise',who:'*',dir:'down',care:1,text:'The crab is armored, but it really wants a compliment. ▼ Bag, then COMPLIMENT. It is free and fills its Warmth bar fast.'},
     {id:'inspect',who:'*',text:'Kinetic hits bounce off its shell. Splash and Chatter work. B Inspects it.'}]};
 TUTORIALS.ch4clapper={tips:[
   {id:'first',who:'*',text:'The Clapper Snapper always goes first, and it is fast. Watch the turn ribbon: it shows up a lot.'},
   {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Cozy, on every enemy. Clappers hate Cozy.'}]};
 TUTORIALS.ch4moth={tips:[
-  {id:'silence',who:'*',when:u=>!!u.st.silenced,text:'Silenced (MUTED): no ▶ Skills for a couple of turns. ▲ basic moves, ▼ Care & Bag and ◀ Tombos still work.'},
+  {id:'silence',who:'*',when:u=>!!u.st.silenced,text:'Silenced (MUTED): only the free basic move under ▲ Skills works for a couple of turns. ▶ signature moves, ▼ Bag and ◀ Tombos still work.'},
   {id:'moth',who:'*',text:'The moth is weak to Splash and Kinetic. Nara’s ▲ Jump Up is Kinetic.'}]};
 TUTORIALS.directorscut={tips:[
   {id:'cut',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='cut'),text:'CUT! is coming (on the ribbon). Whoever is next loses their turn. TNB’s WARDROBE makes them Fresh: CUT! cannot touch them.'},
-  {id:'take',who:'*',dir:'down',care:1,text:'It has never once heard "great take." ▼ Care & Bag, GREAT TAKE! Say it three times and it gives up happy. Anyone can say it.'},
+  {id:'take',who:'*',dir:'down',care:1,text:'It has never once heard "great take." ▼ Bag, GREAT TAKE! Say it three times and it gives up happy. Anyone can say it.'},
   {id:'heal',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='heal'),text:'Take Two is coming: it will heal itself. Hit it hard now.'},
   {id:'wrap',who:['tom','tnb'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'It is bracing for THAT’S A WRAP. ◀ TOMBO: Popcorn Jump smashes the guard in one go.'},
   {id:'wrap2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'It is bracing for THAT’S A WRAP on everyone. Break its guard: any Tombo, or 3 Cozy hits (TNB’s Kiln Door Policy breaks it at once).'}]};
@@ -1678,21 +1679,21 @@ STORY_MAPFX.push(time=>{
 TUTORIALS.ch5bell={
   setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
   tips:[
-    {id:'pep',who:'amy',dir:'down',care:0,text:'Amy’s PEP TALK (▼ Care & Bag): everyone else’s next attack or heal is +50%. School monsters love a pep talk, too (lots of Warmth).'},
+    {id:'pep',who:'amy',dir:'right',text:'Amy’s PEP TALK (▶): everyone else’s next attack or heal is +50%. School monsters love a pep talk, too (lots of Warmth).'},
     {id:'tardy',who:'*',when:()=>b2LiveParty().some(p=>p.st.tardy),text:'Tardy: PEP -35%, so that person acts later on the turn ribbon. It wears off in a turn or two.'},
     {id:'tombo',who:['tom','amy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='amy1'&&!r.why),text:'◀ TOMBO: I Called It! Tom and Amy fight over the same monster, bump every enemy, and the party speeds up.'}]};
 TUTORIALS.ch5glue={tips:[
   {id:'inspect',who:'*',text:'Glitter Glue shrugs off Sparkle. Splash and Kinetic work. B Inspects it.'},
-  {id:'glued',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.st.glued),text:'Someone is Glued (PEP down). Grace’s Squishy Squeeze (▶ Skills) heals them and unsticks it.'}]};
+  {id:'glued',who:'grace',dir:'up',when:()=>b2LiveParty().some(p=>p.st.glued),text:'Someone is Glued (PEP down). Grace’s Squishy Squeeze (▲ Skills) heals them and unsticks it.'}]};
 TUTORIALS.ch5dodge={tips:[
   {id:'pace',who:'amy',text:'See PACE on Amy’s card? Pace Setter: every turn Amy acts, the whole party gets a little faster. Keep her moving.'},
   {id:'dodge',who:'*',text:'The Dread dodges a lot of single hits. Hits on everyone never miss, like the Tombo I Called It!'}]};
 TUTORIALS.redpen={tips:[
-  {id:'seeme',who:'tom',dir:'down',care:0,when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&f.intent.target.id!=='tom'&&!f.intent.target.st.guarded),
-    text:'SEE ME is coming (the red LOCK). ▼ Care & Bag, DEFEND, then whoever it is after: Tom takes the mark instead.'},
-  {id:'marked',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.st.seeme),text:'Someone is marked SEE ME: double damage, and the pen keeps going after them. Grace’s Squishy Squeeze (▶) clears it.'},
-  {id:'praise',who:'*',dir:'down',care:1,text:'It grades everyone, and nobody ever grades it back. ▼ Care & Bag, NICE HANDWRITING. Three times and it gives up happy.'},
-  {id:'final',who:'amy',dir:'right',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&u.kit.skills.some(s=>['quiz','eyes_up_front','inside_voices','false_start'].includes(s.key)),text:'FINAL GRADE on everyone next turn! Amy’s Eyes Up Front or False Start (▶) breaks the wind-up outright.'},
+  {id:'seeme',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&f.intent.target.id!=='tom'&&!f.intent.target.st.guarded),
+    text:'SEE ME is coming (the red LOCK). ▶ DEFEND, then whoever it is after: Tom takes the mark instead.'},
+  {id:'marked',who:'grace',dir:'up',when:()=>b2LiveParty().some(p=>p.st.seeme),text:'Someone is marked SEE ME: double damage, and the pen keeps going after them. Grace’s Squishy Squeeze (▲ Skills) clears it.'},
+  {id:'praise',who:'*',dir:'down',care:1,text:'It grades everyone, and nobody ever grades it back. ▼ Bag, NICE HANDWRITING. Three times and it gives up happy.'},
+  {id:'final',who:'amy',dir:'up',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&u.kit.skills.some(s=>['quiz','eyes_up_front','inside_voices','false_start'].includes(s.key)),text:'FINAL GRADE on everyone next turn! Amy’s Eyes Up Front or False Start (▲ Skills) breaks the wind-up outright.'},
   {id:'final2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'FINAL GRADE is coming. Break its guard: 2 Splash or Sparkle hits, or any Tombo.'}]};
 
 // Away: map npcs with `away` (a list of story conditions, data/maps-*.js) leave their map while any condition matches,
@@ -1747,7 +1748,7 @@ SCENES.ch6Kitchen=[
   {place:'tnb',at:[13,26],dir:'left'}, {show:'tnb'},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
-  {talk:'TNB',lines:['Okay. Hi. Love you. Do not panic. Look at the island.']},
+  {talk:'TNB',lines:['Okay. Hi. Missed you. Do not panic. Look at the island.']},
   {face:'tom',dir:'up'},
   {talk:'Tom',lines:['...Where is Bready Mercury.']},
   {talk:'TNB',lines:['That is the thing. I came over to feed him, like you asked. The jar was gone. The window was open.','And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.']},
@@ -1777,7 +1778,7 @@ SCENES.ch6Nara=[
   {talk:'Olivia',lines:['That. All night. And it is not just us. Lachlan’s toy truck is gone. Mr. Washington’s reading glasses. Marisol says every tennis ball on the block.']},
   {talk:'Michael',lines:['I found my car keys in the gutter. With three peanuts. Arranged in a triangle.']},
   {talk:'TNB',lines:['A triangle. Babe. A triangle is a SYMBOL.']},
-  {talk:'Tom',lines:['TNB has seen a lot of movies.']},
+  {talk:'Tom',lines:['TNB has seen a lot of movies.','...He is usually right about this stuff.']},
   {talk:'Olivia',lines:['Bernadette from the Neighborhood Watch says it is squirrels. She has a clipboard about it. She is in Old Oak Park, at the south end of 2nd Ave.']},
   {join:'nara'},
   {talk:'Tom',lines:['Nara. Want to go for a walk?']},
@@ -2146,14 +2147,14 @@ TUTORIALS.ch6gallery={
     {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Cozy, on every enemy.'}]};
 TUTORIALS.ch6spy={tips:[
   {id:'dodge',who:'*',text:'The Twig Spy dodges a lot of single hits. Hits on everyone never miss, like Popcorn Jump.'},
-  {id:'spotted',who:'*',when:()=>b2LiveParty().some(p=>p.st.spotted),text:'Spotted: that person takes 35% more damage for a while. Tom can DEFEND them (▼ Care & Bag).'}]};
+  {id:'spotted',who:'*',when:()=>b2LiveParty().some(p=>p.st.spotted),text:'Spotted: that person takes 35% more damage for a while. Tom can DEFEND them (▶).'}]};
 TUTORIALS.ch6stuffer={tips:[
   {id:'vp',who:'*',text:'The Cheek Stuffer is tough and steals VP. Splash and Chatter work; it shrugs off Kinetic. Tom’s Starter Splash is Splash.'},
-  {id:'kind',who:'nara',dir:'right',text:'Squirrel crews love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
+  {id:'kind',who:'nara',dir:'up',text:'Squirrel crews love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
 TUTORIALS.chairman={tips:[
   {id:'cache',who:'nara',when:()=>B2.foes.some(f=>f.D.inert&&b2Alive(f)),text:'An Acorn Cache! Nara digs it up for DOUBLE damage. Break it before the Chairman eats it and heals.'},
   {id:'cache2',who:'*',when:()=>B2.foes.some(f=>f.D.inert&&b2Alive(f)),text:'DIG UP is coming: break the Acorn Cache (back row) before the Chairman’s next turn, or it eats it and heals.'},
-  {id:'share',who:'*',dir:'down',care:1,text:'Nobody has ever shared with it. ▼ Care & Bag, SHARE A SNACK. Three times and it gives up happy. Anyone can do it.'},
+  {id:'share',who:'*',dir:'down',care:1,text:'Nobody has ever shared with it. ▼ Bag, SHARE A SNACK. Three times and it gives up happy. Anyone can do it.'},
   {id:'stash',who:['tom','tnb'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'THE BIG STASH is coming. Any ◀ TOMBO smashes its guard in one go.'},
   {id:'stash2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'THE BIG STASH on everyone next turn! Break its guard: 2 Kinetic or Splash hits, or any Tombo.'}]};
 
@@ -2378,7 +2379,7 @@ SCENES.ch7End=[
   {talk:'Rose',lines:['It is itchy. I love it.']},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
   {talk:'Tom',lines:['A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You are on bread. For forty people.\"',
-    '\"I said yes for you. Love you. Bring the starter.\"']},
+    '\"I said yes for you. You are welcome. Bring the starter.\"']},
   {talk:'Grace',lines:['Forty people? Tata. That is a FEAST.']},
   {talk:'Tom',lines:['...Bready Mercury is going to need a bigger jar.']},
   {trace:'ch7-wrap'}, {hearts:'grace'}, {call:()=>sfx.levelChime()},
@@ -2500,18 +2501,18 @@ TUTORIALS.ch7cliff={
   tips:[
     {id:'weak',who:'*',text:'The Cliffhanger is weak to Cozy and Chatter, and shrugs off Kinetic. Rose’s RASPBERRY and Tom’s Flashcard Flurry are Chatter.'},
     {id:'shushed',who:'*',when:()=>b2LiveParty().some(p=>p.st.shushed),text:'Shushed: no Chatter moves (and no Tombos) for a turn or two. Basic moves and other skills still work.'},
-    {id:'kind',who:'grace',dir:'right',text:'Library books love a good show. Grace’s Welcome Back to My Channel and DANCE warm them up fast.'}]};
+    {id:'kind',who:'grace',dir:'up',text:'Library books love a good show. Grace’s Welcome Back to My Channel and DANCE warm them up fast.'}]};
 TUTORIALS.ch7know={tips:[
   {id:'grit',who:'*',when:()=>b2LiveParty().some(p=>p.st.gritdown),text:'GRIT Down: that person takes more from hits. Grace’s Squishy Squeeze (▶) clears it.'},
   {id:'weak',who:'*',text:'The Know-It-All is weak to Chatter and Sparkle, and shrugs off Cozy. B Inspects it.'}]};
 TUTORIALS.ch7pop={tips:[
   {id:'dodge',who:'*',text:'Pop-Up Panic folds flat and dodges a lot of single hits. Hits on everyone never miss.'},
-  {id:'weak',who:'rose',dir:'right',text:'It is weak to Kinetic and Sparkle. Rose’s Lamby Launch is Kinetic. Scare it back.'}]};
+  {id:'weak',who:'rose',dir:'up',text:'It is weak to Kinetic and Sparkle. Rose’s Lamby Launch is Kinetic. Scare it back.'}]};
 TUTORIALS.unread={tips:[
   {id:'chapter',who:'*',text:'The Unread is reading one chapter at a time. The message says which genre, and what works on it. B Inspects it too.'},
   {id:'page',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='page'),text:'PAGE TURN is coming: next turn its weak spot changes. Spend big skills now, while you know the weak spot.'},
-  {id:'read',who:'*',dir:'down',care:1,text:'Nobody has ever read it. ▼ Care & Bag, READ ALOUD. Three times and it gives up happy. Anyone can do it.'},
-  {id:'shushed',who:'grace',dir:'right',when:u=>b2LiveParty().some(p=>p.st.shushed)&&u.kit.skills.some(s=>s.key==='squishy'||s.key==='dumpling_consult'||s.key==='squishy_squeeze'),text:'Shushed! Grace’s Squishy Squeeze (▶) clears it, so Chatter moves and Tombos come back.'},
+  {id:'read',who:'*',dir:'down',care:1,text:'Nobody has ever read it. ▼ Bag, READ ALOUD. Three times and it gives up happy. Anyone can do it.'},
+  {id:'shushed',who:'grace',dir:'up',when:u=>b2LiveParty().some(p=>p.st.shushed)&&u.kit.skills.some(s=>s.key==='squishy'||s.key==='dumpling_consult'||s.key==='squishy_squeeze'),text:'Shushed! Grace’s Squishy Squeeze (▲ Skills) clears it, so Chatter moves and Tombos come back.'},
   {id:'end',who:['tom','grace','rose'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'THE END is coming. Any ◀ TOMBO smashes its guard in one go.'},
   {id:'end2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'THE END on everyone next turn! Break its guard: 2 Sparkle or Cozy hits, or any Tombo.'}]};
 
@@ -2566,7 +2567,7 @@ SCENES.ch8Block=[
   {place:'tnb',at:[13,20],dir:'left'}, {show:'tnb'},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
-  {talk:'TNB',lines:['Hi. Love you. Do not panic. Touch your stove.']},
+  {talk:'TNB',lines:['Hi. Missed you. Do not panic. Touch your stove.']},
   {talk:'Tom',lines:['...I have not been home yet.']},
   {talk:'TNB',lines:['Right. Well, it is cold. Everybody’s is cold. I tried to light yours. The flame LEANED, babe. Sideways. Toward the boulevard. Like it wanted to leave.']},
   {trace:'tnb-hello8'}, {hearts:'tom'},
@@ -2591,7 +2592,7 @@ SCENES.ch8Block=[
 SCENES.ch8Barn=[
   {flag:'ch8-barn',value:'pending'},
   {talk:'TNB',lines:['Oh. Oh, babe. Look at it. The tracks are still in the floor. The time clock. The crew bench. I am going to cry a little.']},
-  {talk:'Tom',lines:['It is freezing in here. It is seventy-four degrees outside.']},
+  {talk:'Tom',lines:['It is beautiful. It is also freezing. It is seventy-four degrees outside.']},
   {talk:'Nara',lines:['Nara watches a little blue flame drift past her nose, along the floor, toward the back. Then another one. Then another.']},
   {talk:'Tom',lines:['Those are pilot lights. The whole block’s pilot lights. Something down here is collecting them.']},
   {talk:'TNB',lines:['And some of them got stuck. Look. The Paint Shop, the Machine Shop, the Lunchroom. Something in each one is hogging one.']},
@@ -2669,7 +2670,7 @@ SCENES.ch8Motor=[
   {talk:'Turntable motor',lines:['FWOOMP. Three little blue flames catch under the boiler. The needle on the gauge creeps up. The pipes start to tick.']},
   {call:()=>sfx.levelChime()},
   {talk:'TNB',lines:['Steam. We have STEAM, babe. I fixed a hundred-year-old turntable motor. I am going to put this on my resume.']},
-  {talk:'Tom',lines:['Under wardrobe?']},
+  {talk:'Tom',lines:['Put it at the top. New section.']},
   {talk:'TNB',lines:['Under hero.']},
   {trace:'tnb-motor'}, {hearts:'tnb'},
   {toast:'Goal: pull the turntable lever (top of the corridor). Track 4 goes to the Boiler Room.',time:5}
@@ -2753,7 +2754,7 @@ SCENES.ch8End=[
   {talk:'TNB',lines:['You know what tonight was, babe? Toast.']},
   {talk:'Tom',lines:['...']},
   {talk:'TNB',lines:['Because the bread. And we are TOASTING. It works on two levels.']},
-  {talk:'Tom',lines:['It works on one level. Barely.']},
+  {talk:'Tom',lines:['It works on one level. Barely.','...I love that level.']},
   ch4Kiss(),
   {trace:'ch8-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
@@ -2900,11 +2901,11 @@ TUTORIALS.ch8draft={tips:[
   {id:'dodge',who:'*',text:'The Draft dodges a lot of single hits. Hits on everyone never miss, like Popcorn Jump. It is weak to Cozy and Sparkle.'}]};
 TUTORIALS.ch8picky={tips:[
   {id:'vp',who:'*',text:'The Picky Eater is tough and steals VP. Chatter and Splash work; it shrugs off Kinetic. Tom’s Starter Splash is Splash.'},
-  {id:'kind',who:'nara',dir:'right',text:'Car Barn things love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
+  {id:'kind',who:'nara',dir:'up',text:'Car Barn things love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
 TUTORIALS.ironbelly={tips:[
   {id:'heat',who:'*',text:'Old Ironbelly heats up every turn: WARM, HOT, HOTTER, BROIL. At BROIL she hits everyone. Splash cools her one step; Cozy stokes her up.'},
   {id:'broil',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='broil'),text:'BROIL is coming! One Splash hit calls it off: Tom’s Starter Splash or Nara’s Happy Puddle.'},
-  {id:'bake',who:'*',dir:'down',care:1,text:'Nobody has baked in her since 1963. ▼ Care & Bag, BAKE SOMETHING. It also cools her a step. Three times and she gives up happy.'},
+  {id:'bake',who:'*',dir:'down',care:1,text:'Nobody has baked in her since 1963. ▼ Bag, BAKE SOMETHING. It also cools her a step. Three times and she gives up happy.'},
   {id:'furnace',who:['tom','tnb','nara'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'FULL FURNACE is coming. Any ◀ TOMBO smashes her guard in one go.'},
   {id:'furnace2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'FULL FURNACE on everyone next turn! Break her guard: 2 Splash or Kinetic hits, or any Tombo.'}]};
 
@@ -3311,12 +3312,12 @@ TUTORIALS.ch9cards={tips:[
   {id:'tombo',who:['tom','boppy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='boppy1'&&!r.why),text:'◀ TOMBO: You Hold the Net. Splash on every enemy, and they all hit softer.'}]};
 TUTORIALS.ch9ball={tips:[
   {id:'dodge',who:'*',text:'The Wallflower dodges a lot of single hits. Hits on everyone never miss, like Deedee’s To the Moon & Back.'},
-  {id:'kind',who:'deedee',dir:'down',care:0,text:'Moon Club things love Deedee’s MOON & BACK (▼ Care & Bag). A full Warmth bar sends it home happy.'}]};
+  {id:'kind',who:'deedee',dir:'right',text:'Moon Club things love Deedee’s MOON & BACK (▶). A full Warmth bar sends it home happy.'}]};
 TUTORIALS.mirrorball={tips:[
   {id:'mirror',who:'*',text:'MIRROR SIDE: hits of that element bounce back at whoever used it. She turns a new side every turn. The message says which. Tombos never bounce.'},
-  {id:'solo',who:'tom',dir:'down',care:0,when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&f.intent.target.id!=='tom'&&!f.intent.target.st.guarded),
-    text:'SPOTLIGHT: a SOLO is coming for someone. ▼ Care & Bag, DEFEND, then pick them: Tom takes it instead.'},
-  {id:'dance',who:'*',dir:'down',care:1,text:'Nobody has asked her to dance since 1971. ▼ Care & Bag, ASK HER TO DANCE. Three times and she gives up happy.'},
+  {id:'solo',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&f.intent.target.id!=='tom'&&!f.intent.target.st.guarded),
+    text:'SPOTLIGHT: a SOLO is coming for someone. ▶ DEFEND, then pick them: Tom takes it instead.'},
+  {id:'dance',who:'*',dir:'down',care:1,text:'Nobody has asked her to dance since 1971. ▼ Bag, ASK HER TO DANCE. Three times and she gives up happy.'},
   {id:'last',who:['tom','deedee','boppy'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'LAST DANCE is coming. Any ◀ TOMBO smashes her guard in one go.'},
   {id:'last2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'LAST DANCE on everyone next turn! Break her guard: 2 Chatter or Kinetic hits, or any Tombo.'}]};
 
@@ -3713,15 +3714,15 @@ TUTORIALS.ch10sec={
     {id:'tombo',who:['tom','amy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='amy1'&&!r.why),text:'◀ TOMBO: I Called It! A hit on every enemy, and the party gets faster.'}]};
 TUTORIALS.ch10bag={tips:[
   {id:'shell',who:'*',text:'The Unclaimed has a hard shell: it shrugs off Kinetic. Splash and Cozy get through. Tom’s Starter Splash and Grace’s Welcome Back to My Channel work.'},
-  {id:'kind',who:'amy',dir:'right',text:'Terminal things love Amy’s PEP TALK and Rose’s RASPBERRY. A full Warmth bar sends them home happy.'}]};
+  {id:'kind',who:'amy',dir:'up',text:'Terminal things love Amy’s PEP TALK and Rose’s RASPBERRY. A full Warmth bar sends them home happy.'}]};
 TUTORIALS.ch10lounge={tips:[
   {id:'hog',who:'*',text:'The Armrest Hog lowers POW and shrugs off Cozy. Chatter and Sparkle get it to scoot over.'},
   {id:'tombo',who:['tom','rose'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='rose1'&&!r.why),text:'◀ TOMBO: Double-Decker Airplane. A big hit, and it sees stars and loses its next turn.'}]};
 TUTORIALS.lastcall={tips:[
   {id:'call',who:'*',text:'NOW BOARDING: each turn she calls someone (gold BOARDING tag). They must act before her next turn, or the gate closes on them and they lose a turn.'},
-  {id:'escort',who:'tom',dir:'down',care:0,when:()=>B2.foes.some(f=>f.call&&b2Alive(f.call)&&f.call.id!=='tom'&&f.call.st.boarding&&!f.call.st.guarded),
-    text:'Called someone slow? ▼ Care & Bag, DEFEND, then pick them: Tom walks them onto the plane.'},
-  {id:'answer',who:'*',dir:'down',care:1,text:'Nobody has answered her since 1989. ▼ Care & Bag, ANSWER THE CALL. Three times and she gives up happy.'},
+  {id:'escort',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.call&&b2Alive(f.call)&&f.call.id!=='tom'&&f.call.st.boarding&&!f.call.st.guarded),
+    text:'Called someone slow? ▶ DEFEND, then pick them: Tom walks them onto the plane.'},
+  {id:'answer',who:'*',dir:'down',care:1,text:'Nobody has answered her since 1989. ▼ Bag, ANSWER THE CALL. Three times and she gives up happy.'},
   {id:'final',who:['tom','grace','rose','amy'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'FINAL BOARDING is coming. Any ◀ TOMBO smashes her guard in one go.'},
   {id:'final2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'FINAL BOARDING on everyone next turn! Break her guard: 2 Kinetic or Sparkle hits, or any Tombo.'}]};
 

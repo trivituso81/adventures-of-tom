@@ -795,19 +795,59 @@ SC.gv_glitter=(s,u)=>{ for(let k=0;k<26;k++) { const a=k*2.4,d=ez(u)*(s.r||70)*(
 SC.gv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 
 // ---------- Cartwheel (basic) ----------
-// Two cartwheels in, then a third cartwheel straight into a kick. Big HI-YAH, a sparkle trail, TA-DA!
-SC.gv_trail=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; if(ms>(s.to||1e9)) return; (s.pts=s.pts||[]).push([st.x,st.y-GH()*.5,s.t]);
-  for(const [x,y,t0] of s.pts) { const a=1-(s.t-t0)/.5; if(a<=0) continue; gfx.globalAlpha=a; star(x+Math.sin(t0*40)*12,y+Math.cos(t0*33)*16,2+a*4,CONF[Math.floor(t0*20)%4]); } };
-G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,58),k=front(F,14);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:wheel(2),hop:22,hn:2,ns:true},{t:950,x:p.x,y:p.y,f:'celeb'},{t:1250,f:'expr'},
-    {t:1450,f:'idle',rot:wheel(1),hop:26,ns:true},{t:1850,x:k.x,y:k.y,f:'act',dx:u=>-ez(u/.3)*8},{t:2150,f:'celeb',hop:12},{t:2650,f:'runR'},{t:3350,x:'home',y:'home',f:'idle'}]);
+// Rebuilt 2026-10-25 from docs/reference/cartwheel-preview.html. A lunge with arms straight up, then two real cartwheels:
+// her body rolls over whichever hand or foot is on the floor (left hand, right hand, right foot, left foot), upside down
+// in a star, easing in on the first wheel and out on the second. She lands facing the monster, kicks (impact 1800),
+// TA-DA! with one hop, and hops home. Poses come from data/grace-wheel.js (hip-centred frames, rotated about the hip).
+SC.gv_dust=(s,u)=>{ gfx.globalAlpha=(1-u)*.9; for(const dx of [-8,0,8]) E(s.x+dx*(1+u*1.5),s.y-2-u*8,3+u*4,2+u*3,'#e8e2d6'); };
+SC.gv_shadow=(s,u)=>{ const st=s.st; if(!st||st.x==null||st.gy==null) return; const lift=Math.max(0,st.gy-st.foot); gfx.globalAlpha=.28*Math.max(.35,1-lift/60); E(st.x,st.gy+4,20-Math.min(10,lift/6),4,'#2f4936'); };
+G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),W=GRACE_WHEEL,P=W.P,S=W.scale,HC=W.C*S;
+  const sp=GSP(),D=Math.PI/180;
+  // Rolling table (sprite pixels): two wheels, hip path and which limb is planted, the planted limb never sliding.
+  const NS=600,WH=2,pose=p=>p<.12?W.blend('lunge','star',p/.12,3):(p>.86?W.blend('star','land',(p-.86)/.14,3):{q:P.star,key:'star'});
+  const TB=[]; { let x=0,c=-1;
+    for(let i=0;i<=NS;i++) { const p=i/NS,b=pose(p),th=(b.q.lean||0)*D-WH*2*Math.PI*p,e=W.tips(b.q,th);
+      if(c>=0) { const pr=TB[i-1]; x=pr.x+pr.e[c][0]-e[c][0]; }
+      let mx=-1e9,mi=0; e.forEach((v,k)=>{ if(v[1]>mx) { mx=v[1]; mi=k; } }); c=mi; TB.push({x,low:W.low(b.q,th),th,b,e,c}); } }
+  // Where she lands: the kick reaches the monster's front edge. The roll is squeezed to fit the gap (it is a little longer
+  // than most gaps), so the planted hand or foot drifts a touch instead of the body overshooting.
+  const kickReach=-Math.min(...W.tips(P.kick,P.kick.lean*D).map(v=>v[0]))*S;
+  const KX=Math.min(me.x-60,F.x+F.w*.5-2+kickReach),LX=KX+10,GY=Math.min(314,F.base+3),HX=me.x,HY=me.base;
+  const DIST=-TB[NS].x*S,K=Math.max(.35,Math.min(1.15,(HX-LX)/DIST));
+  const st={x:null,y:null,frame:null,fx,gy:HY,foot:HY}; ST.cur=st;
+  const puffs=[],bursts=[.25,.75];
+  let lastC=-1,lastP=0,landed=false;
+  const hipFor=(q,th,gy,hop=0)=>gy-W.low(q,th)*S-hop;
+  // Hip position, rotation and frame for any moment of the move (ms at 1x).
+  const at=ms=>{
+    if(ms<250) { const b=W.blend('stand','lunge',ms/250,2),th=b.q.lean*D; return {x:HX,gy:HY,th,fr:W.frame(b.q,b.key),y:hipFor(b.q,th,HY)}; }
+    if(ms<1500) { const u=(ms-250)/1250,p=lerp(u,ez(u),.6),i=Math.round(p*NS),r=TB[i],gy=lerp(HY,GY,ez(p));
+      return {x:HX+r.x*S*K,gy,th:r.th,fr:W.frame(r.b.q,r.b.key),y:gy-r.low*S,p,r}; }
+    if(ms<1650) { const q=P.land; return {x:LX,gy:GY,th:0,fr:W.frame('land'),y:hipFor(q,0,GY)}; }
+    if(ms<1800) { const u=ez((ms-1650)/150),b=u<.5?{q:P.chamber,key:'chamber'}:{q:P.kick,key:'kick'},th=b.q.lean*D*u; return {x:lerp(LX,KX,u),gy:GY,th,fr:W.frame(b.q,b.key),y:hipFor(b.q,th,GY)}; }
+    if(ms<1950) { const th=P.kick.lean*D; return {x:KX,gy:GY,th,fr:W.frame('kick'),y:hipFor(P.kick,th,GY)}; }
+    if(ms<2100) { const u=(ms-1950)/150,b=u<.5?{q:P.chamber,key:'chamber'}:{q:P.sstand,key:'sstand'},th=b.q.lean*D*(1-u); return {x:KX,gy:GY,th,fr:W.frame(b.q,b.key),y:hipFor(b.q,th,GY)}; }
+    if(ms<2900) { const u=(ms-2100)/800,hop=u<.35?Math.sin(u/.35*Math.PI)*14:0; return {x:KX,gy:GY,th:0,fr:sp.celeb,std:1,y:GY-hop}; }
+    const u=cl((ms-2900)/600),hop=Math.abs(Math.sin(u*Math.PI*3))*14,gy=lerp(GY,HY,u); return {x:lerp(KX,HX,u),gy,th:0,fr:sp.flip,std:1,y:gy-hop}; };
+  fx.path={t:0,dur:3.5,st:true,fn:(q,c)=>{ const ms=q*3500,s=at(ms);
+    st.x=s.x; st.gy=s.gy; st.frame=s.fr; st.sp=sp; st.sc=1;
+    if(s.std) { st.y=s.y; st.foot=s.y; const [wx,wy]=ST.unwarp(s.x,s.y); return {cx:wx,base:wy,frame:s.fr,rot:0,noShadow:true}; }
+    st.y=s.y+(s.std?0:0); st.hip=s.y; st.foot=s.y+W.low(P.stand,0)*S;
+    if(s.r) { const r=s.r;   // dust where a new hand or foot touches down, a sparkle burst each time she is upside down
+      if(r.c!==lastC&&lastC!==-1) { const e=W.rot(r.e[r.c],0); puffs.push([s.x+e[0]*S,s.gy]); } lastC=r.c;
+      for(const k of bursts) if(lastP<k&&s.p>=k) { const v=W.rot([0,-W.TL*.6],r.th); scene('gv_burst',.5,{x:s.x+v[0]*S,y:s.y+v[1]*S,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }
+      lastP=s.p; st.foot=s.y+r.low*S; }
+    while(puffs.length) { const [px,py]=puffs.shift(); scene('gv_dust',.32,{x:px,y:py}); sfx.step(); }
+    if(ms>=1500&&!landed) { landed=true; scene('gv_dust',.32,{x:LX-10,y:GY}); scene('gv_dust',.32,{x:LX+10,y:GY}); sfx.bump(); }
+    const [wx,wy]=ST.unwarp(s.x,s.y+HC);
+    return {cx:wx,base:wy,frame:s.fr,rot:s.th,noShadow:true}; }};
+  scene('gv_shadow',3.5,{st});
   ST.play(E2,[
-    [0,()=>{ setMessage('Grace cartwheels in. Twice. Showing off the whole way.'); say(m.id,'cartwheel'); scene('gv_trail',2.0,{st,to:1900}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),450); }],
-    [1250,()=>{ setMessage('One more. Straight at it.'); }],
-    [1450,()=>{ sfx.whoosh(); }],
+    [0,()=>{ setMessage('Grace cartwheels in. Twice. Showing off the whole way.'); say(m.id,'cartwheel'); }],
+    [250,()=>{ sfx.whoosh(); }],
     ['hf',1800],
-    [1800,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gv_big',1,{x:F.x,y:F.top-74,txt:'HI-YAH!',c:PINK,sc:4}); scene('gv_burst',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:40}); }],
-    [2150,()=>{ scene('gv_text',1,{st,txt:'TA-DA!',c:PINK2}); sfx.ding(); }],
+    [1800,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gv_big',.3,{x:F.x,y:F.top-74,txt:'HI-YAH!',c:PINK,sc:4}); scene('gv_burst',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:40}); }],
+    [2100,()=>{ scene('gv_big',.8,{st,txt:'TA-DA!',c:PINK2,sc:3}); sfx.ding(); }],
     [3450,'end',res(E2)+'She sticks the landing and takes a bow.']]); };
 { const legacy=G.cartwheel; G.cartwheel=E2=>(E2.act&&E2.act.o3?G.cartwheelShow(E2):legacy(E2)); }
 

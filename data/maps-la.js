@@ -921,9 +921,9 @@ const LA_ROOMS=[
           'Long day on set. Eleven costume changes. One actor lost a shoe. I found it. I always find it.',
           'Be careful out there. I like you un-cracked.']}],
     objects:[
-      ['oven',1,1,2,2,'The kiln','Cone six, firing tonight. A sign on it: DO NOT OPEN. VERY HOT. LOVE YOU.'],
+      ['oven',1,1,2,2,'The kiln','Cone six, firing tonight. A sign on it: DO NOT OPEN. VERY HOT. SO ARE YOU.'],
       ['rack',4,1,3,1,'Garment rack',"Bagged costumes for tomorrow's shoot, tagged by scene. One bag just says: SHOE BACKUP."],
-      ['shelf',8,1,3,1,'Pottery shelf','Mugs in sunset colors. TNB says LA light changes the glaze. Tom says that is not how glaze works. TNB says it is now.'],
+      ['shelf',8,1,3,1,'Pottery shelf','Mugs in sunset colors. TNB says LA light changes the glaze. Tom has no idea how glaze works. He believes him completely.'],
       ['wheel',2,6,1,1,'Pottery wheel','Still a little clay on it. Centered. Everything starts with centering.'],
       ['boardwall',8,6,3,1,'Longboard wall','Three longboards and a Metro map with every line he has ridden circled. Every line is circled.'],
       ['couch',1,8,3,1,'Horror couch','Facing a projector screen. The last movie paused mid-scream. Tom will not ask which one.']]},

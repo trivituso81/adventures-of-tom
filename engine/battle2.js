@@ -1273,7 +1273,7 @@ const B2_CHEEKS_LINES={tom:['Here. Sourdough. I made it. You can have the heel. 
   tnb:['Want half my granola bar? It is the good kind. With the chocolate.','Here, buddy. I always pack two. One for me, one for whoever is having a bad day.'],
   nara:['Nara looks at her chicken jerky. Looks at the squirrel. Nara drops the jerky at its feet. This is the biggest thing she has ever done.','Nara nudges her own treat across the branch with her nose. Very slowly. Very brave.'],
   _:['Here. Have some.']};
-// COMPLIMENT and GREAT TAKE! (▼ Care & Bag, only against monsters that want one: B2_FOES praise). Free, standard speed.
+// COMPLIMENT and GREAT TAKE! (▼ Bag, only against monsters that want one: B2_FOES praise). Free, standard speed.
 // praise.share: Warmth as a share of the goal (halved each time the same person says it again). praise.need: that many
 // kind words Un-Grump it outright (the Director's Cut: three GREAT TAKEs).
 const B2_PRAISE_LINES={

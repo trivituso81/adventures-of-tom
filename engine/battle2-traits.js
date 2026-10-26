@@ -11,7 +11,7 @@
 //   Amy    Pace Setter: every turn she acts without being knocked out adds a Cadence stack: +5% PEP for the whole
 //          party, up to +25%. A knockout resets it.
 //   Deedee Warm Crust Tokens: Rhubarb Crisp (1), Sunday Dinner (3) and Sourdough & Rhubarb (2) put crusts on the
-//          shared tray (max 3). Anyone can eat one from Care & Bag as a free action, once per turn: heal 20%
+//          shared tray (max 3). Anyone can eat one from the ▼ Bag as a free action, once per turn: heal 20%
 //          (Nara loves homemade food: 40% and POW +30%).
 //   Boppy  Heartburn: +1 pip when he is hit while guarding, or eats a pepper (Pepper Breath, Hot Pepper). At 3 pips
 //          his next attack or GRUMBLE lets out the Warden's Counter-Roar: whoever last hit him is stunned.
@@ -223,7 +223,7 @@ function b2TraitBadge(u) {
     case 'grace': { const m=T.trend[u.trend||0]; return {txt:'x'+m.toFixed(1),on:(u.trend||0)>0,title:'Trending Meter: x'+m+' on heals and crits. Use a different move each turn to climb; repeating resets it.'}; }
     case 'rose': return b2Riding(u)?{txt:'RIDE '+Math.min(T.ride-1,u.st.shoulder.turns),on:true,title:'Shoulder Ride: Tom takes hits for Rose, and her skills hit twice.'}:{txt:'',title:''};
     case 'amy': return {txt:'PACE '+(u.cadence||0),on:(u.cadence||0)>0,title:'Pace Setter: +'+Math.round((u.cadence||0)*T.cadence*100)+'% PEP for the whole party. Grows each turn Amy acts; resets if she is knocked out.'};
-    case 'deedee': { const n=B2.crust||0,h=Math.min(n,B2.hot||0); return {txt:'◉'.repeat(h)+'●'.repeat(n-h)+'○'.repeat(T.crustMax-n),on:n>0,cls:'cr',title:'Warm Crust Tokens on the tray: '+n+(h?' ('+h+' Hot Dish)':'')+'. Anyone can eat one from Care & Bag (free, heals 20%; a Hot Dish heals 30% and cures one debuff).'}; }
+    case 'deedee': { const n=B2.crust||0,h=Math.min(n,B2.hot||0); return {txt:'◉'.repeat(h)+'●'.repeat(n-h)+'○'.repeat(T.crustMax-n),on:n>0,cls:'cr',title:'Warm Crust Tokens on the tray: '+n+(h?' ('+h+' Hot Dish)':'')+'. Anyone can eat one from the ▼ Bag (free, heals 20%; a Hot Dish heals 30% and cures one debuff).'}; }
     case 'boppy': { const n=u.burn||0; return {txt:'●'.repeat(n)+'○'.repeat(T.burnMax-n),on:n>=T.burnMax,cls:'hb',title:'Heartburn: '+n+' of '+T.burnMax+'. At '+T.burnMax+', his next attack or GRUMBLE lets out a Counter-Roar. Ghost Pepper burns it for damage.'}; }
     case 'tnb': { const C=b2NextCostume(); return {txt:C.tag,on:true,cls:'rk',title:'Quick-Change Rack: next costume is '+C.name+' ('+C.does+').'}; }
     case 'nara': { const t=b2Tom(),on=!!(t&&!b2Alive(t)); return {txt:on?'FRANTIC':'',on,title:'Frantic: POW +50% and PEP +30% while Tom is knocked out.'}; }

@@ -175,10 +175,11 @@ function setChapter(n,{apply=true}={}) {
   if(apply) applyPartyRules();
 }
 
-// Recruiting asks the rules first. Members the chapter keeps out decline; only unlocked members are offered as swaps.
+// Recruiting asks the rules first. Members the chapter keeps out say nothing extra (Tom, 26 Oct: no decline lines;
+// their normal talk already played). Only unlocked members are offered as swaps.
 offerRecruit=function(m,npc) {
   const t=RECRUIT_TALK[m.id];
-  if(!canBeHere(m)) { openDialog(npc.name,[declineLine(m)],npc); return; }
+  if(!canBeHere(m)) return;
   const join=LINES[m.id]&&LINES[m.id].join?pick(LINES[m.id].join):null;
   if(join) say(m.id,'join',.15,join);
   openChoice(npc.name,join?[join,t.ask]:t.ask,[
@@ -521,7 +522,8 @@ b2End=function(result) {
 };
 
 // Story fights with tips (TUTORIALS in data/scenes.js). A tip: {id, who (member id, a list, or '*'), when(unit) optional, dir ('up',
-// 'right','down','left': the command it points at), care (Care & Bag row to light), text}. One tip per turn, each once;
+// 'right','down','left': the command it points at; ▲ Skills, ▶ signature, ◀ Tombo, ▼ Bag), care (1: light the Bag's
+// COMPLIMENT-style row), text}. One tip per turn, each once;
 // it shows in the message line with the same gold glow Rose Mode uses. A tutorial's setup() runs when the fight starts.
 const LE_b2Start_story=b2Start;
 b2Start=function(cfg) {
@@ -546,7 +548,7 @@ b7AfterRender=function() {
   const box=$('b2-cmd'); if(!box) return;
   const glow=sel=>{ box.querySelectorAll('.rec').forEach(e=>e.classList.remove('rec')); const b=box.querySelector(sel); if(b) b.classList.add('rec'); };
   if(B2.ui==='cross') { b2Msg('★ '+tip.text); if(tip.dir) glow('.b2-x[data-d="'+tip.dir+'"]'); }
-  else if(B2.ui==='care'&&tip.dir==='down'&&tip.care!=null) glow('.b2-btn[data-i="'+tip.care+'"]');
+  else if(B2.ui==='bag'&&tip.dir==='down'&&tip.care!=null) { const k=b2BagList(B2.actor).findIndex(r=>r.praise); if(k>=0) glow('.b2-btn[data-i="'+k+'"]'); }
   else if(B2.ui==='tombo'&&tip.dir==='left') glow('.b2-btn[data-i="0"]');
 };
 

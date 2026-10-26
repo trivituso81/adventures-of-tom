@@ -192,7 +192,7 @@ function musicEngine() {
   if(music.eng) return music.eng;
   const c=sound.ctx; if(!c) return null;
   const duck=c.createGain(),vol=c.createGain();
-  vol.gain.value=.31; duck.connect(vol); vol.connect(sound.master);
+  vol.gain.value=.31; duck.connect(vol); vol.connect(sound.musicBus||sound.master);
   music.eng=makeMusicEngine(c,duck); music.eng.duck=duck;
   return music.eng;
 }

@@ -43,13 +43,15 @@ function b7Later(fn,ms) { return setTimeout(fn,(ms||0)/b7Speed()); }
 function b7SetDiff(id) { if(!B7_DIFF[id]) return; B7.diff=id; b7Save(); }
 // Options also ride along in every save (engine/followers.js): Safari can wipe this frame's browser storage when the
 // app closes, which used to put the game back on Grace Mode at every launch. Loading a save brings them back.
-const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,autoSpend:B7.autoSpend!==false});
+const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,autoSpend:B7.autoSpend!==false,volMusic:sound.vol.music,volFx:sound.vol.fx});
 function b7ApplyOpts(o) {
   if(!o) return;
   if(B7_DIFF[o.diff]) B7.diff=o.diff;
   if(o.speed===1||o.speed===2) B7.speed=o.speed;
   if(typeof o.hf==='boolean') B7.hf=o.hf;
   if(typeof o.autoSpend==='boolean') B7.autoSpend=o.autoSpend;
+  if(o.volMusic>=1&&o.volMusic<=10) setVolume('music',o.volMusic);
+  if(o.volFx>=1&&o.volFx<=10) setVolume('fx',o.volFx);
   b7Save();
 }
 function b7ToggleSpeed() { B7.speed=B7.speed===2?1:2; b7Save(); sfx.select(); b7SyncTools(); if(B2.active) b2Msg('Battle speed '+B7.speed+'x.'); }
@@ -201,10 +203,13 @@ function b7Recommend(u) {
 }
 function b7RecFor(u) {
   if(!b7Diff().recommend||!u||u.side!=='party') return null;
-  if(!B7.rec||B7.rec.u!==u||B7.rec.round!==B2.round) B7.rec={u,round:B2.round,r:b7Recommend(u)};
+  // b7Recommend speaks the old layout (up basic, right skill i, down signature); map it onto the new cross:
+  // ▲ Skills (basic is row 0, skill i is row i+1), ▶ the signature.
+  if(!B7.rec||B7.rec.u!==u||B7.rec.round!==B2.round) { const r=b7Recommend(u);
+    B7.rec={u,round:B2.round,r:!r?r:r.dir==='down'?{...r,dir:'right',i:0}:r.dir==='right'?{...r,dir:'up',i:r.i+1}:r.dir==='up'?{...r,i:0}:r}; }
   return B7.rec.r;
 }
-function b7RecSkill(u,def) { const r=b7RecFor(u); return r&&r.dir==='right'?r.i:def; }
+function b7RecSkill(u,def) { const r=b7RecFor(u); return r&&r.dir==='up'?r.i:def; }
 function b7AfterRender() {
   b7SyncTools();
   const box=$('b2-cmd'); if(!box) return;
@@ -217,7 +222,7 @@ function b7AfterRender() {
     const boss=b2LiveFoes().find(f=>f.intent||f.st.staggered);
     if(!boss||/lock|shield|pie/.test(r.why)) b2Msg('★ Try '+r.name+'. '+r.why);
     else { const el=$('b2-msg'); if(el&&el.textContent.indexOf('★')<0) el.textContent+=' ★ Try '+r.name+'.'; }
-  } else if((B2.ui==='skills'&&r.dir==='right')||(B2.ui==='care'&&r.dir==='down')||(B2.ui==='tombo'&&r.dir==='left')) {
+  } else if((B2.ui==='skills'&&r.dir==='up')||(B2.ui==='tombo'&&r.dir==='left')) {
     const b=box.querySelector('.b2-btn[data-i="'+r.i+'"]'); if(b) b.classList.add('rec');
   }
 }
@@ -406,6 +411,22 @@ function b7RenderOptions(body) {
   $('menu-foot').textContent='Options are saved with your game, so they come back after Safari closes. Change them any time.';
   const opt=(key,label,on,fn)=>{ const b=btn('save-btn b7-opt'+(on?' on':''),key,label,()=>{ fn(); sfx.select(); if(typeof saveGame==='function') saveGame('auto',true); menuFocusNext=key; renderMenu(); }); b.setAttribute('aria-pressed',on); return b; };
   const card=(title,note)=>{ const c=el('div','mcard b7-ocard'); c.appendChild(el('div','slot-label',title)); const r=el('div','b7-orow'); c.appendChild(r); if(note!=null) { const n=el('div','stat-note'); n.textContent=note; c.appendChild(n); } body.appendChild(c); return r; };
+  // SOUND: two 1 to 10 levels. Minus and plus are buttons (D-pad and A reach them); tapping a pip jumps to that level.
+  const vol=(kind,title,note)=>{
+    const r=card(title,note); r.classList.add('b7-vrow');
+    const step=d=>{ setVolume(kind,sound.vol[kind]+d); };
+    const after=key=>{ sfx.select(); if(typeof saveGame==='function') saveGame('auto',true); menuFocusNext=key; renderMenu(); };
+    const minus=btn('save-btn b7-opt b7-vbtn','vol-'+kind+'-dn','&minus;',()=>{ step(-1); after('vol-'+kind+'-dn'); });
+    const plus=btn('save-btn b7-opt b7-vbtn','vol-'+kind+'-up','+',()=>{ step(1); after('vol-'+kind+'-up'); });
+    minus.setAttribute('aria-label',title+' down'); plus.setAttribute('aria-label',title+' up');
+    if(sound.vol[kind]<=1) minus.classList.add('dim'); if(sound.vol[kind]>=10) plus.classList.add('dim');
+    const bar=el('div','b7-vbar'); bar.setAttribute('role','img'); bar.setAttribute('aria-label',title+' level '+sound.vol[kind]+' of 10');
+    for(let i=1;i<=10;i++) { const p=el('span','b7-vpip'+(i<=sound.vol[kind]?' on':'')); p.addEventListener('click',e=>{ e.stopPropagation(); setVolume(kind,i); after(null); }); bar.appendChild(p); }
+    const num=el('div','b7-vnum',String(sound.vol[kind]));
+    r.appendChild(minus); r.appendChild(bar); r.appendChild(num); r.appendChild(plus);
+  };
+  vol('music','MUSIC VOLUME','1 is a whisper, 10 is full.'+(music.on?'':' Music is switched off; the music button below turns it back on.'));
+  vol('fx','EFFECTS AND VOICES VOLUME','Sound effects, battle shouts and story voices.'+(sound.enabled?'':' Sound is muted; the sound button below turns it back on.'));
   const D=b7Diff();
   const r1=card('DIFFICULTY',D.sub+'. '+D.text);
   for(const id of ['rose','grace','director']) r1.appendChild(opt('opt-'+id,B7_DIFF[id].name.replace(' MODE',''),B7.diff===id,()=>b7SetDiff(id)));

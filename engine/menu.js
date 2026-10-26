@@ -333,7 +333,7 @@ function gearPreview(slot,id) {
 
 // ITEMS: filters, stacks, inline targets.
 function renderItemsTab(body) {
-  $('menu-foot').textContent='\u{1FA99} '+coins+' coins. Healing works here; battle items are used from Care & Bag in a fight. Buy and sell at Penny’s Pockets.';
+  $('menu-foot').textContent='\u{1FA99} '+coins+' coins. Healing works here; battle items are used from the ▼ Bag in a fight. Buy and sell at Penny’s Pockets.';
   const ids=[...new Set(bag)];
   const count={all:ids.length,heal:0,battle:0,gear:0,keep:0};
   for(const id of ids) count[itemCat(items[id])]++;
@@ -417,7 +417,7 @@ function targetPicker(id) {
 
 // LOAD: loading asks once before acting. (Saving lives in the HUD save popup below.)
 function renderSaveTab(body) {
-  $('menu-foot').textContent=(typeof cloudOn==='function'&&cloudOn()?'Saves are kept with your Claude account, so closing Safari keeps them.':'Saves live in this browser on this device.')+' Save with the disk button on the map. Autosave happens at every door and after each battle.';
+  $('menu-foot').textContent=(typeof cloudAccountLine==='function'?cloudAccountLine():'Saves live in this browser on this device.')+' Save with the disk button on the map. Autosave happens at every door and after each battle.';
   const list=el('div','item-list single');
   for(const slot of SAVE_SLOTS) {
     const sv=readSave(slot);
@@ -478,6 +478,7 @@ function renderSavePop() {
     list.appendChild(row);
   }
   box.appendChild(list);
+  if(typeof cloudAccountLine==='function') { const acct=el('div','mquit-text macct'+(cloudOn()?' on':''),cloudAccountLine()); acct.id='msave-acct'; box.appendChild(acct); }
   box.appendChild(el('div','mquit-text','Autosave also happens at every door and after each battle. Load from the menu.'));
   const row=el('div','mquit-btns one');
   row.appendChild(btn('save-btn mquit-no','psave-close','CLOSE',closeMenu));

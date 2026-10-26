@@ -46,7 +46,7 @@ function say(id,kind,delay=0,only=null) {
     if('speechSynthesis'in window) {
       try {
         const u=new SpeechSynthesisUtterance(line);
-        u.pitch=v.pitch; u.rate=v.rate; u.volume=1;
+        u.pitch=v.pitch; u.rate=v.rate; u.volume=volGain(sound.vol.fx);
         const voice=pickVoice(id);
         if(voice) u.voice=voice;
         speechSynthesis.speak(u);

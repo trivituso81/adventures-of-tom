@@ -66,7 +66,7 @@ const SPLASH_MODES={
   start:{tab:'Part 1',cue:'A / Enter to pick. B / Esc to go back',choices:()=>{
     const n=SAVE_SLOTS.filter(k=>readSave(k)).length;
     return [{name:'START NEW',sub:'Begin with the opening scene.'},
-      {name:'LOAD',sub:n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.'},
+      {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():'')},
       {name:'BACK',sub:'',cls:'back'}]; }}
 };
 function splashSetMode(mode) {
