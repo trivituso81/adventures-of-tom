@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Adventures of Tom</title>
+<meta name="apple-mobile-web-app-title" content="The Adventures of Tom">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1c1b3a">
+<script>
+// Home-screen launcher for the game. The game itself lives at a claude.ai link,
+// and iOS takes a home-screen icon from the page you add, so this page carries the icon.
+// Opened with ?go (as it is from the home screen), it sends you straight to the game.
+var GAME = "https://claude.ai/artifact/HzHh5DBHsbnyNrAvEFZ4V1";
+if (/[?&]go\b/.test(location.search)) { location.replace(GAME); }
+else { try { history.replaceState(null, "", location.pathname + "?go=1"); } catch (e) {} }
+</script>
+<style>
+:root{--sky1:#1c1b3a;--sky2:#4a3a6b;--glow:#f0b27a;--text:#fff7ea;--dim:#d9cfe6;--btn:#f0c75a;--btnText:#2a2140}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{min-height:100vh;background:linear-gradient(var(--sky1),var(--sky2) 60%,var(--glow));color:var(--text);
+  font:16px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column;align-items:center;
+  padding:max(40px,env(safe-area-inset-top)) 16px 32px;text-align:center}
+img{width:160px;height:160px;border-radius:36px;image-rendering:pixelated;box-shadow:0 8px 30px #0006}
+h1{font-size:24px;margin:22px 0 6px}
+p{margin:6px 0;color:var(--dim);max-width:340px}
+a.play{display:inline-block;margin:22px 0;padding:14px 34px;border-radius:12px;background:var(--btn);color:var(--btnText);
+  font-weight:700;text-decoration:none;font-size:18px}
+ol{text-align:left;max-width:340px;color:var(--dim);padding-left:22px;margin:4px 0}
+li{margin:4px 0}
+b{color:var(--text)}
+</style>
+</head>
+<body>
+<img src="apple-touch-icon.png" alt="Tom, Grace and Rose at dusk">
+<h1>The Adventures of Tom</h1>
+<a class="play" href="https://claude.ai/artifact/HzHh5DBHsbnyNrAvEFZ4V1">Play</a>
+<p><b>Put it on your Home Screen</b></p>
+<ol>
+<li>Tap the Share button.</li>
+<li>Tap <b>Add to Home Screen</b>.</li>
+<li>Turn <b>Open as Web App</b> off, so the game opens in Safari where you are signed in to Claude.</li>
+<li>Tap <b>Add</b>.</li>
+</ol>
+</body>
+</html>
