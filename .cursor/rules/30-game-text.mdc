@@ -1,0 +1,15 @@
+---
+description: Rules for dialogue, lines, scenes, monsters and any text a player reads or hears
+globs: data/lines.js,data/scenes.js,data/dialog-cast.js,data/maps-*.js,data/*-monsters.js,data/monsters.js
+alwaysApply: false
+---
+
+Read `docs/CANON.md` first.
+
+- No em dashes. Short, warm, funny. The joke comes from the character.
+- The girls say "Tata" in speech only; every interface and system message says "Tom".
+- Nara never speaks words, only barks, whines and sniffs.
+- Boppy: stomach, back, people walking too fast. Justin: always at work, mention lightly.
+- Never write that Tom or Amy is the "older" or "younger" sibling.
+- Changing an existing spoken line silences its baked clip. Do not reword unless asked; if you do, log old and new text in `docs/CHANGES.md`.
+- Use `SCENE_OPS` steps (see `engine/story.js`) for cutscenes; extend data before adding engine code.

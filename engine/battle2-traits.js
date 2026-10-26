@@ -66,7 +66,7 @@ function b2Mount() {
   const was=!!r.st.shoulder;
   r.st.shoulder={turns:B2_TRAIT.ride};
   battle.fx[r.idx].hop=.3;
-  if(!was) { b2PopParty(r,'SHOULDER RIDE','#ffb3cf',-30); say('rose','intro3',.15); }
+  if(!was) b2PopParty(r,'SHOULDER RIDE','#ffb3cf',-30);
 }
 // Where Rose sits while riding: on Tom's shoulders, as Tom is drawn this frame. engine/battle-draw.js asks.
 function b2RidePos(m,i) {
@@ -122,7 +122,7 @@ function b2Burn(u,n) {
   if(!u||u.id!=='boppy'||u.side!=='party'||!b2Alive(u)) return;
   const was=u.burn||0; u.burn=Math.min(B2_TRAIT.burnMax,was+n);
   if(u.burn===was) return;
-  b2PopParty(u,u.burn>=B2_TRAIT.burnMax?'HEARTBURN!':'BURN +1','#ff8c3a',-22);
+  b2PopParty(u,u.burn>=B2_TRAIT.burnMax?'HEARTBURN!':'BURN +'+(u.burn-was),'#ff8c3a',-22);
 }
 // Called with every hit on a party member.
 function b2TraitHit(e,t) {

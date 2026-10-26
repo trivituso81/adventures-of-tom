@@ -7,14 +7,16 @@
 
 const B7_DIFF={
   rose:{id:'rose',name:'ROSE MODE',sub:'Story and kid assist',
-    text:'Monsters hit 40% softer. High-Fives always land. A gold glow shows a good move each turn. If everyone gets knocked out, Deedee tosses in a Rhubarb Pie and everyone gets back up (once a fight).',
-    taken:.6,autoHf:true,recommend:true,pie:true},
+    text:'Monsters hit half as hard and have 25% less HP. High-Fives always land. A gold glow shows a good move each turn. If everyone gets knocked out, Deedee tosses in a Rhubarb Pie and everyone gets back up (once a fight).',
+    taken:.5,foeHp:.75,autoHf:true,recommend:true,pie:true},
   grace:{id:'grace',name:'GRACE MODE',sub:'Classic, the standard game',
     text:'The game as designed: monsters at full strength, boss shields as written, snacks whenever you like.'},
   director:{id:'director',name:'DIRECTOR MODE',sub:'Tactical challenge',
-    text:'Monsters are 25% stronger and faster. Boss shields need one more hit, and a Tombo counts as one hit instead of breaking them. One snack per round.',
-    foeMult:1.25,shieldPlus:1,tomboHit:true,snackRound:true}
+    text:'Monsters hit 60% harder, have 30% more HP and take turns 25% more often. Boss shields need one more hit, and a Tombo counts as one hit instead of breaking them. One snack per round.',
+    taken:1.6,foeHp:1.3,foeSpeed:1.25,shieldPlus:1,tomboHit:true,snackRound:true}
 };
+// Every mode multiplies the finished numbers (damage taken, monster HP, monster turn speed), so the gap between modes is
+// the same size in every chapter. (It used to scale monster POW, which the damage formula mostly cancelled out.)
 const B7_HF={mult:1.15,heart:5,open:.5,len:.6};               // the High-Five window, in battle seconds after a move starts
 const B7_MON={radius:2,leash:5,sight:4,chaseStep:.3,wanderStep:.62,over:5};
 const B7={diff:'grace',speed:1,hf:true,auto:false,last:{},rec:null,hfWin:null,autoTimer:0,card:null,cardTimers:[],mapFx:[],noEngage:0,lastMap:null};
@@ -34,7 +36,8 @@ function b7Save() {
 const b7Diff=()=>B7_DIFF[B7.diff]||B7_DIFF.grace;
 const b7Speed=()=>battle.active?B7.speed:1;
 const b7Taken=()=>b7Diff().taken||1;
-const b7FoeMult=()=>b7Diff().foeMult||1;
+const b7FoeHp=()=>b7Diff().foeHp||1;
+const b7FoeSpeed=()=>b7Diff().foeSpeed||1;
 // Timers inside move animations follow the battle speed.
 function b7Later(fn,ms) { return setTimeout(fn,(ms||0)/b7Speed()); }
 function b7SetDiff(id) { if(!B7_DIFF[id]) return; B7.diff=id; b7Save(); }

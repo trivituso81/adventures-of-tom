@@ -377,33 +377,34 @@ const B8_KITS={
 };
 // Old saves: the old Stampcard paths in order (null = a passive, refunded). Each old move goes to the slot it plays in.
 const B8_LEGACY={'tom': [['starter', 'dutch', 'unbox', 'delta'], ['flashcard', 'kanji', null, 'finalboss']], 'grace': [['squishy', 'polish', 'runway', 'subscribe'], ['dancebattle', 'beam', null, 'perfect10']], 'rose': [['peekaboo', 'twirl', 'dressup', 'bedtime'], ['lamby', 'pounce', null, 'stampede']], 'amy': [['redpen', 'quiz', null, 'pb'], ['burpee', 'hills', 'marathon', 'finish']], 'deedee': [['nurse', 'crisp', 'mop', 'dinner'], ['walk', 'wine', null, 'moonshot']], 'boppy': [['cast', 'recliner', 'bigcatch', 'gotaway'], ['pepper', 'hotpepper', 'trackstar', 'ghost']], 'tnb': [['quickchange', 'metro', 'jumpscare', 'wrap'], ['carve', 'kiln', null, 'bomb']], 'nara': [['fetch', 'zoomies', 'tug', 'squirrel'], ['puddle', 'shake', null, 'howl']]};
-// Tombos and Family Finishes: p (Primary) and r (Director's Cut). id matches B2_TOMBOS ids where built (grace1...).
+// Tombos and Family Finishes: p (Primary) and r (Director's Cut). id matches B2_TOMBOS ids where built (grace1...); a built
+// Director's Cut is the B2_TOMBOS row id+'_dc'. r names follow claude/tombo-review.md (Director's Cut rows).
 // The Director's Cut opens when the tier is story-unlocked (flag) and every participant is level 30 (b8DcOpen).
 const B8_COMBOS=[
-  {id:'grace1',flag:'tombo:grace1',who:['tom', 'grace'],barrier:null,p:{key:'tombo_grace_review',name:"Hi Guys, Welcome Back!",src:1},r:{key:'dc_tb_grace_1',name:"Unboxing Collab Live",src:2}},
-  {id:'grace2',flag:'tombo:grace2',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_2',name:"Uncle Spotter Toss",src:2},r:{key:'dc_tombo_grace_spotter',name:"Trust the Spotter",src:1}},
-  {id:'grace3',flag:'tombo:grace3',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_3',name:"The Golden Dumpling Wish",src:2},r:{key:'dc_tombo_grace_no_props',name:"No Props Needed",src:1}},
-  {id:'rose1',flag:'tombo:rose1',who:['tom', 'rose'],barrier:null,p:{key:'tb_rose_1',name:"Double-Decker Airplane",src:2},r:{key:'dc_tombo_rose_clouds',name:"Cloud Shape Safari",src:1}},
-  {id:'rose2',flag:'tombo:rose2',who:['tom', 'rose'],barrier:null,p:{key:'tombo_rose_customs',name:"Blanket Customs",src:1},r:{key:'dc_tb_rose_2',name:"First-Class Stowaway",src:2}},
-  {id:'rose3',flag:'tombo:rose3',who:['tom', 'rose'],barrier:null,p:{key:'tb_rose_3',name:"Headphones in the Dark",src:2},r:{key:'dc_tombo_rose_headphones',name:"Left Ear, Right Here",src:1}},
-  {id:'amy1',flag:'tombo:amy1',who:['tom', 'amy'],barrier:null,p:{key:'tb_amy_1',name:"Red-Pen Study Blitz",src:2},r:{key:'dc_tombo_amy_dismissal',name:"Two-Person Dismissal",src:1}},
-  {id:'amy2',flag:'tombo:amy2',who:['tom', 'amy'],barrier:null,p:{key:'tombo_amy_other_bag',name:"Carry the Other Bag",src:1},r:{key:'dc_tb_amy_2',name:"Turbulence on the Wing",src:2}},
-  {id:'amy3',flag:'tombo:amy3',who:['tom', 'amy'],barrier:null,p:{key:'tb_amy_3',name:"Sixty-Story Sibling Pace",src:2},r:{key:'dc_tombo_amy_landings',name:"One Landing at a Time",src:1}},
+  {id:'grace1',flag:'tombo:grace1',who:['tom', 'grace'],barrier:null,p:{key:'tombo_grace_review',name:"Hi Guys, Welcome Back!",src:1},r:{key:'dc_tb_grace_1',name:"Smash That Like Button",src:2}},
+  {id:'grace2',flag:'tombo:grace2',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_2',name:"Uncle Spotter Toss",src:2},r:{key:'dc_tombo_grace_spotter',name:"Judge Grace",src:1}},
+  {id:'grace3',flag:'tombo:grace3',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_3',name:"The Golden Dumpling Wish",src:2},r:{key:'dc_tombo_grace_no_props',name:"Shadow Squishy",src:1}},
+  {id:'rose1',flag:'tombo:rose1',who:['tom', 'rose'],barrier:null,p:{key:'tb_rose_1',name:"Double-Decker Airplane",src:2},r:{key:'dc_tombo_rose_clouds',name:"That Cloud Is Lamby",src:1}},
+  {id:'rose2',flag:'tombo:rose2',who:['tom', 'rose'],barrier:null,p:{key:'tombo_rose_customs',name:"Seat 1A Stowaway",src:1},r:{key:'dc_tb_rose_2',name:"Princess and Her Bodyguard",src:2}},
+  {id:'rose3',flag:'tombo:rose3',who:['tom', 'rose'],barrier:null,p:{key:'tb_rose_3',name:"Headphones in the Dark",src:2},r:{key:'dc_tombo_rose_headphones',name:"Lamby Night-Light",src:1}},
+  {id:'amy1',flag:'tombo:amy1',who:['tom', 'amy'],barrier:null,p:{key:'tb_amy_1',name:"I Called It!",src:2},r:{key:'dc_tombo_amy_dismissal',name:"Field Day",src:1}},
+  {id:'amy2',flag:'tombo:amy2',who:['tom', 'amy'],barrier:null,p:{key:'tombo_amy_other_bag',name:"Wing Walk",src:1},r:{key:'dc_tb_amy_2',name:"Spot Me, Tom",src:2}},
+  {id:'amy3',flag:'tombo:amy3',who:['tom', 'amy'],barrier:null,p:{key:'tb_amy_3',name:"Sixty-Story Sibling Pace",src:2},r:{key:'dc_tombo_amy_landings',name:"Elevator Cheat",src:1}},
   {id:'deedee1',flag:'tombo:deedee1',who:['tom', 'deedee'],barrier:null,p:{key:'tb_deedee_1',name:"Wine and Gossip",src:2},r:{key:'dc_tombo_deedee_clean',name:"Clean As You Go",src:1}},
-  {id:'deedee2',flag:'tombo:deedee2',who:['tom', 'deedee'],barrier:null,p:{key:'tombo_deedee_recipe',name:"Recipe in the Margins",src:1},r:{key:'dc_tb_deedee_2',name:"Library Vault Lantern",src:2}},
-  {id:'deedee3',flag:'tombo:deedee3',who:['tom', 'deedee'],barrier:null,p:{key:'tombo_deedee_open_door',name:"The Door Stays Open",src:1},r:{key:'dc_tb_deedee_3',name:"Feast on Jefferson Park",src:2}},
+  {id:'deedee2',flag:'tombo:deedee2',who:['tom', 'deedee'],barrier:null,p:{key:'tombo_deedee_recipe',name:"Pick the Rhubarb",src:1},r:{key:'dc_tb_deedee_2',name:"Library Vault Lantern",src:2}},
+  {id:'deedee3',flag:'tombo:deedee3',who:['tom', 'deedee'],barrier:null,p:{key:'tombo_deedee_open_door',name:"Tom Cooks for Mom",src:1},r:{key:'dc_tb_deedee_3',name:"Feast on Jefferson Park",src:2}},
   {id:'boppy1',flag:'tombo:boppy1',who:['tom', 'boppy'],barrier:null,p:{key:'tombo_boppy_net',name:"You Hold the Net",src:1},r:{key:'dc_tb_boppy_1',name:"Quiet on Cattail Pier",src:2}},
-  {id:'boppy2',flag:'tombo:boppy2',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_2',name:"Nobody Gets Past Us",src:2},r:{key:'dc_tombo_boppy_untangle',name:"Untangle the Line",src:1}},
-  {id:'boppy3',flag:'tombo:boppy3',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_3',name:"The Pepper-Broth Sneeze",src:2},r:{key:'dc_tombo_boppy_taste',name:"One Tiny Taste",src:1}},
+  {id:'boppy2',flag:'tombo:boppy2',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_2',name:"Nobody Gets Past Us",src:2},r:{key:'dc_tombo_boppy_untangle',name:"Bird's Nest",src:1}},
+  {id:'boppy3',flag:'tombo:boppy3',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_3',name:"The Pepper-Broth Sneeze",src:2},r:{key:'dc_tombo_boppy_taste',name:"Pepper Contest",src:1}},
   {id:'tnb1',flag:'tombo:tnb1',who:['tom', 'tnb'],barrier:null,p:{key:'tombo_tnb_commentary',name:"Popcorn Jump",src:1},r:{key:'dc_tb_tnb_1',name:"2nd Ave Window Wash",src:2}},
-  {id:'tnb2',flag:'tombo:tnb2',who:['tom', 'tnb'],barrier:null,p:{key:'tb_tnb_2',name:"Red Line Transfer",src:2},r:{key:'dc_tombo_tnb_transfer',name:"Transfer Together",src:1}},
-  {id:'tnb3',flag:'tombo:tnb3',who:['tom', 'tnb'],barrier:'distance',p:{key:'tb_tnb_3',name:"Cone Six Across the Miles",src:2},r:{key:'dc_tombo_tnb_two_coasts',name:"One Cup, Two Coasts",src:1}},
-  {id:'nara1',flag:'tombo:nara1',who:['tom', 'nara'],barrier:null,p:{key:'tb_nara_1',name:"Sit. Paw. Treat.",src:2},r:{key:'dc_tombo_nara_which_hand',name:"Which Hand?",src:1}},
-  {id:'nara2',flag:'tombo:nara2',who:['tom', 'nara'],barrier:null,p:{key:'tombo_nara_detour',name:"Walkies Detour",src:1},r:{key:'dc_tb_nara_2',name:"Gopher Hole Express",src:2}},
-  {id:'nara3',flag:'tombo:nara3',who:['tom', 'nara'],barrier:'fear',p:{key:'tb_nara_3',name:"The Dog Who Remembered",src:2},r:{key:'dc_tombo_nara_there',name:"I Know You're There",src:1}},
-  {id:'ff1',flag:'tombo:ff1',who:['tom', 'grace', 'rose', 'amy', 'deedee', 'boppy', 'tnb', 'nara'],barrier:null,p:{key:'family_four_corners',name:"Four Corners, One Sheet",src:1},r:{key:'dc_ff_la_home',name:"Welcome to Jefferson Park",src:2}},
-  {id:'ff2',flag:'tombo:ff2',who:['amy', 'grace', 'rose'],barrier:'exhaustion',p:{key:'ff_mom_girls',name:"She Carries the Load",src:2},r:{key:'dc_family_shared_load',name:"No One Carries It All",src:1}},
-  {id:'ff3',flag:'tombo:ff3',who:['deedee', 'boppy', 'tom'],barrier:'aging',p:{key:'ff_grandparents',name:"Fifty-One Years & Counting",src:2},r:{key:'dc_family_pencil_us_in',name:"Pencil Us In",src:1}},
+  {id:'tnb2',flag:'tombo:tnb2',who:['tom', 'tnb'],barrier:null,p:{key:'tb_tnb_2',name:"Red Line Transfer",src:2},r:{key:'dc_tombo_tnb_transfer',name:"Last Train Home",src:1}},
+  {id:'tnb3',flag:'tombo:tnb3',who:['tom', 'tnb'],barrier:'distance',p:{key:'tb_tnb_3',name:"Cone Six Across the Miles",src:2},r:{key:'dc_tombo_tnb_two_coasts',name:"Golden Repair",src:1}},
+  {id:'nara1',flag:'tombo:nara1',who:['tom', 'nara'],barrier:null,p:{key:'tb_nara_1',name:"Sit. Paw. Treat.",src:2},r:{key:'dc_tombo_nara_which_hand',name:"Puzzle Toy",src:1}},
+  {id:'nara2',flag:'tombo:nara2',who:['tom', 'nara'],barrier:null,p:{key:'tombo_nara_detour',name:"Tug of War",src:1},r:{key:'dc_tb_nara_2',name:"Nara, No!",src:2}},
+  {id:'nara3',flag:'tombo:nara3',who:['tom', 'nara'],barrier:'fear',p:{key:'tb_nara_3',name:"Cuddle",src:2},r:{key:'dc_tombo_nara_there',name:"Under the Table",src:1}},
+  {id:'ff1',flag:'tombo:ff1',who:['tom', 'tnb', 'grace', 'rose'],barrier:null,p:{key:'family_four_corners',name:"Sleepover at Tom's",src:1},r:{key:'dc_ff_la_home',name:"Pottery Lesson",src:2}},
+  {id:'ff2',flag:'tombo:ff2',who:['amy', 'grace', 'rose'],barrier:'exhaustion',p:{key:'ff_mom_girls',name:"Run With Us, Mommy!",src:2},r:{key:'dc_family_shared_load',name:"Breakfast in Bed",src:1}},
+  {id:'ff3',flag:'tombo:ff3',who:['deedee', 'boppy', 'tom'],barrier:'aging',p:{key:'ff_grandparents',name:"Fifty-One Years & Counting",src:2},r:{key:'dc_family_pencil_us_in',name:"The Family Walk",src:1}},
   {id:'ff4',flag:'tombo:ff4',who:['tom', 'grace', 'rose', 'amy', 'deedee', 'boppy', 'tnb', 'nara'],barrier:null,p:{key:'family_extra_place',name:"The Extra Place",src:1},r:{key:'dc_ff_all_eight',name:"The Eight-Seat Dinner Table",src:2}},
 ];
 

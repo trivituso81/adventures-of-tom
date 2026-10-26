@@ -222,7 +222,7 @@ function b2DrawFx(e,t) {
     // TOMBO! banner across the top of the stage.
     const inn=Math.min(1,e.t/.22),out=u>.8?(1-u)/.2:1,x=Math.round(-576*(1-inn)),y=46;
     gfx.globalAlpha=out; rect(x,y-22,576,46,'rgba(11,13,18,.72)'); rect(x,y-24,576,2,'#ffe08a'); rect(x,y+24,576,2,'#ffe08a');
-    label('TOMBO!',x+288+2,y-16+2,'#1b2d27',4); label('TOMBO!',x+288,y-16,Math.floor(e.t*10)%2?'#ffe08a':'#ff9ac0',4);
+    { const hd=e.head||'TOMBO!'; label(hd,x+288+2,y-16+2,'#1b2d27',4); label(hd,x+288,y-16,Math.floor(e.t*10)%2?'#ffe08a':'#ff9ac0',4); }
     label(e.name.toUpperCase(),x+288,y+8,'#fff1cb',2); gfx.globalAlpha=1;
   } else if(e.kind==='flash') {
     gfx.globalAlpha=(1-u)*.7; rect(0,0,576,324,e.color); gfx.globalAlpha=1;
@@ -330,7 +330,7 @@ function b2RenderCmd() {
     const img=b2Portrait(pu.id);
     box.innerHTML='<div class="b2-cross">'+
       '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar">▲</span>'+b2Esc(k.basic.name.toUpperCase())+'<small>+1 VP</small></button>'+
-      '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar">◀</span>TOMBO<small>'+(b2TomboRows(pu).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
+      '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar">◀</span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
       '<button type="button" class="b2-x right'+(k.skills.length?off:' off')+'" data-d="right"><span class="ar">▶</span>SKILLS<small>'+(pu.vp)+' VP</small></button>'+
       '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar">▼</span>CARE &amp; BAG</button></div>';
@@ -347,8 +347,10 @@ function b2RenderCmd() {
     const rows=b2BagRows();
     box.innerHTML='<div class="b2-grid">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(r.it.icon+' '+r.it.name.toUpperCase())+'</span><em>'+b2Esc(r.sub)+' · x'+r.n+'</em></button>').join(''):'<p class="b2-empty">Nothing useful in the pockets.</p>')+back+'</div>';
   } else if(B2.ui==='tombo') {
+    // Only Tombos the HEART meter can pay for; each shows the face of who the actor teams up with.
     const rows=b2TomboRows(u);
-    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.T.name.toUpperCase())+'</span><em>TOM + '+b2Esc(r.pt.name.toUpperCase())+' · '+r.T.cost+'% HEART · '+b2ElemChip(r.T.elem)+'</em></button>').join(''):'<p class="b2-empty">No Tombos yet. They unlock as the story goes.</p>')+back+'</div>';
+    const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
+    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span>'+b2Esc(r.T.name.toUpperCase())+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART · '+b2ElemChip(r.T.elem)+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
   } else if(B2.ui==='inspect') {
     box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='target') {
@@ -357,6 +359,7 @@ function b2RenderCmd() {
       return '<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+sub+'</em></button>'; }).join('')+back+'</div>';
   }
 }
+function b2TomboEmpty(u) { return b2TomboRows(u,true).length?'Not enough HEART for a Tombo yet. The meter is at '+Math.floor(B2.heart)+'%.':'No Tombos yet. They unlock as the story goes.'; }
 function b2CareRows(u) {
   const rows=[];
   if(u.kit.special) rows.push({name:u.kit.special.name,sub:u.kit.special.vp+' VP · signature',act:u.kit.special,no:u.vp<u.kit.special.vp});
@@ -392,7 +395,7 @@ function b2Info() {
   else if(B2.ui==='care') { const r=b2CareRows(u)[B2.sel]; if(r&&r.act) b2Msg(r.act.desc); else if(r&&r.crust) b2Msg(u.id==='nara'?'Warm Crust. Homemade, so Nara will eat it: heals 40% and POW +30%. Free; her turn goes on.':'Warm Crust from Deedee’s tray. Heals 20%. Free; the turn goes on. One per turn.'); else if(r&&r.bag) b2Msg('Snacks and throwables from the shared pockets.'); else if(r&&r.praise) { const f=b2LiveFoes().find(x=>x.D.praise); b2Msg(f&&f.D.praise.need?r.name+' Free. Tell '+f.def.the+' what it never hears. '+(f.takes||0)+' of '+f.D.praise.need+' so far.':r.name+' Free. Say something nice. It counts as a favorite kind move.'); } else if(r) b2Msg('Leave this fight.'); }
   else if(B2.ui==='target') b2Msg((B2.pending&&B2.pending.name?B2.pending.name+': ':'')+'pick a target. A to confirm, B to go back.');
   else if(B2.ui==='bag') { const r=b2BagRows()[B2.sel]; if(r) b2Msg(r.it.name+'. '+r.it.desc); }
-  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.T.name+' ('+r.T.cost+'% HEART). '+(r.why||r.T.desc)); else b2Msg('Tombos are Tom plus one partner. They unlock as the story goes.'); }
+  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.T.name+' ('+r.T.cost+'% HEART). '+(r.why||r.T.desc)); else b2Msg(b2TomboRows(u,true).length?b2TomboEmpty(u):'Tombos are Tom plus one partner. They unlock as the story goes.'); }
   else if(B2.ui==='inspect') { const f=b2LiveFoes()[B2.sel]; if(f) b2Msg(b2InspectText(f)); }
   else if(B2.ui==='cross') {
     // A boss winding up gets top billing, so the hint is there when it matters.

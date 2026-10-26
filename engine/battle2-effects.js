@@ -23,7 +23,9 @@ Object.assign(B2_STATUS,{
   continuity:{name:'Continuity',short:'SNAPSHOT',color:'#c9b3e6',buff:true,perm:true},
   coolup:    {name:'COOL Up',short:'COOL+',color:'#9fd8ff',buff:true,mod:{cool:.25}},
   pepdown:   {name:'PEP Down',short:'PEP-',color:'#9fd0ff',debuff:true,mod:{pep:-.25}},
-  warmdown:  {name:'WARMTH Down',short:'WARM-',color:'#f3a08c',debuff:true,mod:{warmth:-.25}}
+  warmdown:  {name:'WARMTH Down',short:'WARM-',color:'#f3a08c',debuff:true,mod:{warmth:-.25}},
+  // Fearless (Cuddle, nara3): new debuffs bounce off, like Wardrobe Fresh but without its revive.
+  fearless:  {name:'Fearless',short:'FEARLESS',color:'#ffe08a',buff:true,immune:true}
 });
 // A status name from either source doc: [engine id, default strength or undefined].
 function b8StId(name) { return B8_ST_ALIAS[name]||[name]; }

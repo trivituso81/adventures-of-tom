@@ -359,9 +359,9 @@ function drawBattle() {
   gfx.save();
   gfx.scale(3,3);
   for(const p of battle.pops) {
-    const y=p.y-Math.round(p.t*18);
-    label(p.text,p.x+1,y+1,'#1b2d27');
-    label(p.text,p.x,y,p.color);
+    const y=p.y-Math.round(p.t*18),w=String(p.text).length*4-1,x=Math.max(w/2+1,Math.min(191-w/2,p.x));   // kept on screen
+    label(p.text,x+1,y+1,'#1b2d27');
+    label(p.text,x,y,p.color);
   }
   gfx.restore();
   gfx=ctx;

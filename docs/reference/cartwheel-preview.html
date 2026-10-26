@@ -1,0 +1,101 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cartwheel Preview</title>
+<style>
+body{margin:0;background:#14121c;color:#f4eefa;font:15px -apple-system,system-ui,sans-serif;padding:16px}
+canvas{width:100%;max-width:720px;image-rendering:pixelated;display:block;margin:0 auto;border-radius:6px}
+.row{display:flex;gap:8px;justify-content:center;margin:12px 0;flex-wrap:wrap}
+button{background:#2a2538;color:#f4eefa;border:0;border-radius:8px;padding:10px 14px;font-size:15px}
+button.on{background:#ff7fb3;color:#14121c}
+#beat{text-align:center;font-weight:600;min-height:1.4em;margin-top:10px}
+p{color:#a99fbf;max-width:720px;margin:8px auto;font-size:13px}
+</style></head><body>
+<canvas id="c" width="288" height="162"></canvas>
+<div id="beat"></div>
+<div class="row"><button id="pp">Pause</button><button id="s1" class="on">1x</button><button id="s4">0.25x</button></div>
+<p>Motion preview only. The stand-in figure shows timing, limb positions and where hands and feet touch down. The real build draws Grace's own pixel art in these poses.</p>
+<script>
+const cv=document.getElementById('c'),g=cv.getContext('2d');
+const W=288,H=162,GR=136,TL=11,AL=17,LL=15,HR=5,D=Math.PI/180;
+const OUT='#040404',SKIN='#fcae7b',HAIR='#563424',TOP='#d3bfe8',LEG='#323b4b',SHOE='#ff7fb3',PINK='#ff7fb3',GOLD='#ffe08a',CREAM='#fff8e8';
+const P={
+ stand:{lA:-5,lB:5,aA:-14,aB:14,lean:0},
+ lunge:{lA:-34,lB:12,aA:-168,aB:168,lean:-12},
+ star:{lA:-42,lB:42,aA:-155,aB:155,lean:0},
+ land:{lA:-12,lB:12,aA:-170,aB:170,lean:0},
+ kick:{lA:-95,lB:4,aA:-115,aB:100,lean:16},
+ celeb:{lA:-7,lB:7,aA:-140,aB:140,lean:0}};
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t,ez=u=>{u=cl(u);return u*u*(3-2*u)};
+const mix=(A,B,t)=>{const o={};for(const k in A)o[k]=lerp(A[k],B[k],t);return o};
+const rot=(v,th)=>{const c=Math.cos(th),s=Math.sin(th);return [v[0]*c-v[1]*s,v[0]*s+v[1]*c]};
+const lv=(a,L)=>[Math.sin(a*D)*L,Math.cos(a*D)*L];
+function skel(q,th){const sh=[0,-TL],a=lv(q.aA,AL),b=lv(q.aB,AL);
+ const s={hip:[0,0],sh,fA:lv(q.lA,LL),fB:lv(q.lB,LL),hA:[a[0],a[1]-TL],hB:[b[0],b[1]-TL],head:[0,-TL-HR]};
+ for(const k in s)s[k]=rot(s[k],th);return s}
+const exts=(q,th)=>{const s=skel(q,th);return [s.hA,s.hB,s.fA,s.fB]};
+const lowY=(q,th)=>Math.max(...exts(q,th).map(v=>v[1]));
+// Two cartwheels, pivoting on whichever hand or foot is on the ground
+const WH=2,NS=2400;
+function wPose(p){if(p<.12)return mix(P.lunge,P.star,ez(p/.12));if(p>.86)return mix(P.star,P.land,ez((p-.86)/.14));return P.star}
+const wTh=p=>wPose(p).lean*D-WH*2*Math.PI*p;
+const TB=[];{let x=0,c=-1;for(let i=0;i<=NS;i++){const p=i/NS,q=wPose(p),th=wTh(p),e=exts(q,th);
+ if(c>=0){const pr=TB[i-1];x=pr.x+pr.e[c][0]-e[c][0]}
+ let m=-1e9,mi=0;e.forEach((v,k)=>{if(v[1]>m){m=v[1];mi=k}});c=mi;TB.push({x,y:GR-m,th,q,e,c})}}
+const DIST=-TB[NS].x,HOME=Math.min(268,DIST+80),LX=HOME-DIST,KX=LX-5,GX=KX-31;
+// Timeline (ms at 1x). Impact at 1800, same as the live move.
+const END=4300;
+function state(t){let q,th,x,hop=0,beat;
+ if(t<250){q=mix(P.stand,P.lunge,ez(t/250));th=q.lean*D;x=HOME;beat='1  Lunge, arms up'}
+ else if(t<1500){const u=(t-250)/1250,p=lerp(u,ez(u),.6),r=TB[Math.round(p*NS)];
+  return {x:HOME+r.x,y:r.y,q:r.q,th:r.th,c:r.c,e:r.e,p,beat:'2  Two cartwheels: hand, hand, foot, foot'}}
+ else if(t<1650){q=P.land;th=0;x=LX;beat='3  Lands facing it'}
+ else if(t<1800){const u=ez((t-1650)/150);q=mix(P.land,P.kick,u);th=q.lean*D;x=lerp(LX,KX,u);beat='3  Kick (impact at 1.8 s)'}
+ else if(t<2100){const u=ez((t-1950)/150);q=mix(P.kick,P.land,u);th=q.lean*D;x=KX;beat='3  Kick (impact at 1.8 s)'}
+ else if(t<2900){const u=(t-2100)/800;q=mix(P.land,P.celeb,ez(u*4));th=0;x=KX;hop=u<.35?Math.sin(u/.35*Math.PI)*7:0;beat='4  TA-DA!'}
+ else if(t<3500){const u=(t-2900)/600;q=P.stand;th=0;x=lerp(KX,HOME,u);hop=Math.abs(Math.sin(u*Math.PI*3))*7;beat='5  Hops home'}
+ else{q=P.stand;th=0;x=HOME;beat='(loop)'}
+ return {x,y:GR-lowY(q,th)-hop,q,th,beat}}
+// Effects
+let fx=[],lastC=-1,lastP=0,hitT=-1;
+const puff=(x,y)=>fx.push({k:'dust',x,y,t0:T});
+const burst=(x,y,c)=>fx.push({k:'burst',x,y,t0:T,c});
+function seg(a,b,w,c){g.strokeStyle=c;g.lineWidth=w;g.lineCap='round';g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke()}
+function circ(x,y,r,c){g.fillStyle=c;g.beginPath();g.arc(x,y,r,0,7);g.fill()}
+function star(x,y,r,c){g.fillStyle=c;g.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,rr=i%2?r*.4:r;g.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}g.fill()}
+function text(s,x,y,c,sz){g.font='bold '+sz+'px monospace';g.textAlign='center';g.lineWidth=3;g.strokeStyle=OUT;g.strokeText(s,x,y);g.fillStyle=c;g.fillText(s,x,y)}
+function fig(S){const s=skel(S.q,S.th),o=[S.x,S.y],A=v=>[o[0]+v[0],o[1]+v[1]];
+ const hip=A(s.hip),sh=A(s.sh),fa=A(s.fA),fb=A(s.fB),ha=A(s.hA),hb=A(s.hB),hd=A(s.head);
+ g.globalAlpha=.3;g.fillStyle='#000';g.beginPath();g.ellipse(S.x,GR+1,10,2,0,0,7);g.fill();g.globalAlpha=1;
+ for(const [a,b] of [[hip,fa],[hip,fb],[sh,ha],[sh,hb]])seg(a,b,5,OUT);seg(hip,sh,9,OUT);circ(hd[0],hd[1],HR+1,OUT);
+ seg(hip,fa,3,LEG);seg(hip,fb,3,LEG);circ(fa[0],fa[1],2,SHOE);circ(fb[0],fb[1],2,SHOE);
+ seg(hip,sh,7,TOP);seg(sh,ha,3,SKIN);seg(sh,hb,3,SKIN);
+ const up=rot([0,-1],S.th),rt=rot([1,0],S.th);
+ circ(hd[0],hd[1],HR,HAIR);circ(hd[0]-up[0]*1.3,hd[1]-up[1]*1.3,HR-1.2,SKIN);
+ circ(hd[0]+up[0]*4+rt[0]*3,hd[1]+up[1]*4+rt[1]*3,2.2,HAIR);
+ g.fillStyle=OUT;for(const sx of [-1.6,1.6]){const ex=hd[0]+rt[0]*sx-up[0]*.6,ey=hd[1]+rt[1]*sx-up[1]*.6;g.fillRect(Math.round(ex),Math.round(ey),1,1)}}
+function grump(t){const sh=hitT>=0&&T-hitT<300?Math.sin((T-hitT)/18)*3*(1-(T-hitT)/300):0,x=GX+sh,y=GR-14;
+ g.globalAlpha=.3;g.fillStyle='#000';g.beginPath();g.ellipse(GX,GR+1,16,3,0,0,7);g.fill();g.globalAlpha=1;
+ g.fillStyle=OUT;g.beginPath();g.ellipse(x,y,19,16,0,0,7);g.fill();g.fillStyle=hitT>=0&&T-hitT<120?'#fff':'#6aa84f';g.beginPath();g.ellipse(x,y,17,14,0,0,7);g.fill();
+ for(const ex of [-5,6]){circ(x+ex,y-3,3.5,'#fff');circ(x+ex+1.5,y-3,1.6,OUT)}seg([x-9,y-9],[x-2,y-7],2,OUT);seg([x+3,y-7],[x+10,y-9],2,OUT);seg([x-4,y+6],[x+5,y+6],2,OUT)}
+let T=0,spd=1,run=true,prev=performance.now();
+function frame(now){const dt=Math.min(50,now-prev);prev=now;if(run)T+=dt*spd;
+ if(T>=END){T=0;fx=[];lastC=-1;lastP=0;hitT=-1}
+ const S=state(T);document.getElementById('beat').textContent=S.beat;
+ if(S.c!=null){if(S.c!==lastC&&lastC!==-1)puff(S.x+S.e[S.c][0],S.y+S.e[S.c][1]);lastC=S.c;
+  for(const k of [.25,.75])if(lastP<k&&S.p>=k){const c=rot([0,-TL*.6],S.th);burst(S.x+c[0],S.y+c[1],GOLD)}lastP=S.p}
+ if(T>=1500&&lastC!==-2){puff(LX-5,GR);puff(LX+5,GR);lastC=-2}
+ if(T>=1800&&hitT<0){hitT=T;burst(GX+8,GR-16,PINK)}
+ const sky=g.createLinearGradient(0,0,0,GR);sky.addColorStop(0,'#7cc4ec');sky.addColorStop(1,'#cdeefb');g.fillStyle=sky;g.fillRect(0,0,W,GR);
+ g.fillStyle='#5f9e4f';g.fillRect(0,GR,W,H-GR);g.fillStyle='#4a7f3d';g.fillRect(0,GR,W,2);
+ grump(T);fig(S);
+ fx=fx.filter(f=>{const a=(T-f.t0)/(f.k==='dust'?320:500);if(a>1||a<0)return false;g.globalAlpha=1-a;
+  if(f.k==='dust')for(const dx of [-4,0,4])circ(f.x+dx*(1+a*1.5),f.y-1-a*4,1.5+a*2,'#e8e2d6');
+  else for(let i=0;i<8;i++){const an=i*Math.PI/4,d=ez(a)*22;star(f.x+Math.cos(an)*d,f.y+Math.sin(an)*d*.75,3.5*(1-a*.5),i%2?f.c:CREAM)}
+  g.globalAlpha=1;return true});
+ if(hitT>=0&&T-hitT<300){g.globalAlpha=T-hitT>200?(300-(T-hitT))/100:1;text('HI-YAH!',Math.max(30,GX+10),GR-44-Math.min(1,(T-hitT)/200)*4,PINK,14);g.globalAlpha=1}
+ if(T>=2100&&T<2900)text('TA-DA!',S.x,S.y-40,CREAM,11);
+ requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+const b1=document.getElementById('s1'),b4=document.getElementById('s4'),pp=document.getElementById('pp');
+b1.onclick=()=>{spd=1;b1.className='on';b4.className=''};b4.onclick=()=>{spd=.25;b4.className='on';b1.className=''};
+pp.onclick=()=>{run=!run;pp.textContent=run?'Pause':'Play'};
+</script></body></html>

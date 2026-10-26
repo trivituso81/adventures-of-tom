@@ -1376,7 +1376,7 @@ SCENES.ch5Arrive=[
   {trace:'amy-coffee'}, {hearts:'tom'},
   {flag:'tombo:amy1'},
   {party:{lock:['tom','grace','rose','amy']}},
-  {toast:'New Tombo: On Your Marks (Tom + Amy). In battle, ◀ TOMBO.',time:3.5},
+  {toast:'New Tombo: I Called It! (Tom + Amy). In battle, ◀ TOMBO.',time:3.5},
   {wait:3.7},
   {toast:'Goal: Long Island Elementary, through the gate at the east end of the Square.',time:4.5}
 ];
@@ -1487,6 +1487,9 @@ SCENES.ch5Clocks=[
     'Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.']},
   {talk:'Amy',lines:['The footprints go in there. The sign-up sheet is in there.']},
   {talk:'Grace',lines:['And the something.']},
+  {flag:'tombo:grace2'},   // Uncle Spotter Toss unlocks here (chapter 5: the school is clear)
+  {toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2},
+  {wait:3.4},
   {toast:'Goal: the Cafetorium, at the east end of the hall.',time:4.5}
 ];
 // 7. The Cafetorium: The Red Pen, grading the sign-up sheet on the stage. Boss fight.
@@ -1677,13 +1680,13 @@ TUTORIALS.ch5bell={
   tips:[
     {id:'pep',who:'amy',dir:'down',care:0,text:'Amy’s PEP TALK (▼ Care & Bag): everyone else’s next attack or heal is +50%. School monsters love a pep talk, too (lots of Warmth).'},
     {id:'tardy',who:'*',when:()=>b2LiveParty().some(p=>p.st.tardy),text:'Tardy: PEP -35%, so that person acts later on the turn ribbon. It wears off in a turn or two.'},
-    {id:'tombo',who:['tom','amy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='amy1'&&!r.why),text:'◀ TOMBO: On Your Marks. Tom runs the stopwatch, Amy runs through every enemy, and the party speeds up.'}]};
+    {id:'tombo',who:['tom','amy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='amy1'&&!r.why),text:'◀ TOMBO: I Called It! Tom and Amy fight over the same monster, bump every enemy, and the party speeds up.'}]};
 TUTORIALS.ch5glue={tips:[
   {id:'inspect',who:'*',text:'Glitter Glue shrugs off Sparkle. Splash and Kinetic work. B Inspects it.'},
   {id:'glued',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.st.glued),text:'Someone is Glued (PEP down). Grace’s Squishy Squeeze (▶ Skills) heals them and unsticks it.'}]};
 TUTORIALS.ch5dodge={tips:[
   {id:'pace',who:'amy',text:'See PACE on Amy’s card? Pace Setter: every turn Amy acts, the whole party gets a little faster. Keep her moving.'},
-  {id:'dodge',who:'*',text:'The Dread dodges a lot of single hits. Hits on everyone never miss, like the Tombo On Your Marks.'}]};
+  {id:'dodge',who:'*',text:'The Dread dodges a lot of single hits. Hits on everyone never miss, like the Tombo I Called It!'}]};
 TUTORIALS.redpen={tips:[
   {id:'seeme',who:'tom',dir:'down',care:0,when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&f.intent.target.id!=='tom'&&!f.intent.target.st.guarded),
     text:'SEE ME is coming (the red LOCK). ▼ Care & Bag, DEFEND, then whoever it is after: Tom takes the mark instead.'},
@@ -1757,6 +1760,9 @@ SCENES.ch6Kitchen=[
   {talk:'Tom',lines:['Nara is scared of the vacuum. Nara does not growl at trees.']},
   {talk:'TNB',lines:['Exactly. Something is going on out there.']},
   {party:{lock:['tom','tnb']}},
+  {flag:'tombo:tnb2'},   // Red Line Transfer unlocks here (chapter 6)
+  {toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2},
+  {wait:3.4},
   {toast:'Goal: out to 2nd Ave. Find Olivia, Michael and Nara.',time:4.5}
 ];
 // 3. 2nd Ave: Olivia hands over Nara. The whole block is missing things.
@@ -1777,6 +1783,9 @@ SCENES.ch6Nara=[
   {talk:'Tom',lines:['Nara. Want to go for a walk?']},
   {talk:'Nara',lines:['Nara knows the word WALK. She has always known the word walk. She is already at the end of the street.']},
   {talk:'Olivia',lines:['Bring her back tired! Please! Michael, can you grab Isla? She is licking the mailbox.']},
+  {flag:'tombo:nara2'},   // Tug of War unlocks here (chapter 6)
+  {toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2},
+  {wait:3.4},
   {toast:'Goal: Old Oak Park, through the south end of 2nd Ave.',time:4.5}
 ];
 // 4. Old Oak Park: Bernadette's briefing. Three lookouts, three fresh holes, one tree.
@@ -2374,8 +2383,11 @@ SCENES.ch7End=[
   {talk:'Tom',lines:['...Bready Mercury is going to need a bigger jar.']},
   {trace:'ch7-wrap'}, {hearts:'grace'}, {call:()=>sfx.levelChime()},
   {party:null},
+  {flag:'tombo:deedee2'},   // Pick the Rhubarb unlocks here (chapter 7)
   {fade:'out',time:.8}, {card:7,done:true,time:3.4}, {flag:'ch7-done'}, {fade:'in',time:.8},
   {save:true},
+  {toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2},
+  {wait:3.4},
   {toast:'Chapter 7 complete! Chapter 8 is still being built. Long Island is yours to explore.',time:6}
 ];
 TRIGGERS.push(
@@ -3378,6 +3390,9 @@ SCENES.ch10Term=[
   {talk:'Tom',lines:['Every board says midnight. Every gate says zero. And somebody dusted the plants.','Stay close, everybody. Shoes on. Liquids in a bag.']},
   {trace:'girls-terminal'}, {hearts:'grace'},
   {flag:'ch10-term'},
+  {flag:'tombo:rose2'}, {flag:'tombo:amy2'},   // Seat 1A Stowaway and Wing Walk unlock here (chapter 10)
+  {toast:'New Tombos: Seat 1A Stowaway (Rose) and Wing Walk (Amy). 50% HEART each.',time:3.6},
+  {wait:3.8},
   {toast:'Goal: find the gate clock’s three hands. Security (top left), Baggage Claim (top right), the Lounge (bottom left).',time:5.5},
   {wait:5.7},
   {toast:'Tip: there is a photo booth by the curb doors. There is a quarter on the seat.',time:4}
@@ -3695,7 +3710,7 @@ TUTORIALS.ch10sec={
   tips:[
     {id:'weak',who:'*',text:'The Long Line is weak to Kinetic and Sparkle, and shrugs off Chatter. Amy’s Kettlebell Swing and Grace’s Cartwheel are Kinetic.'},
     {id:'slow',who:'*',when:()=>b2LiveParty().some(p=>p.st.slow),text:'Slowed: PEP down, so that person comes round less often. Watch the turn ribbon.'},
-    {id:'tombo',who:['tom','amy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='amy1'&&!r.why),text:'◀ TOMBO: On Your Marks. A hit on every enemy, and the party gets faster.'}]};
+    {id:'tombo',who:['tom','amy'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='amy1'&&!r.why),text:'◀ TOMBO: I Called It! A hit on every enemy, and the party gets faster.'}]};
 TUTORIALS.ch10bag={tips:[
   {id:'shell',who:'*',text:'The Unclaimed has a hard shell: it shrugs off Kinetic. Splash and Cozy get through. Tom’s Starter Splash and Grace’s Welcome Back to My Channel work.'},
   {id:'kind',who:'amy',dir:'right',text:'Terminal things love Amy’s PEP TALK and Rose’s RASPBERRY. A full Warmth bar sends them home happy.'}]};

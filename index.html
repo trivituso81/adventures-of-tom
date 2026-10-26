@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -617,6 +618,12 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-btn em{font-size:10px;font-style:normal;color:var(--ink-dim);display:flex;align-items:center;flex-wrap:wrap;gap:3px}
 .b2-btn.sel{background:var(--sel);border-color:var(--edge);color:#fff}
 .b2-btn.no{opacity:.42}
+.b2-btn.b2-tb{flex-direction:row;align-items:center;gap:9px}
+.b2-tbp{display:flex;flex:none;font-style:normal}
+.b2-tbp img,.b2-tbp .b2-ph{width:36px;height:36px;image-rendering:pixelated;border-radius:3px;background:var(--raise);box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px #ff9ac0aa}
+.b2-tbp>*+*{margin-left:-9px}
+.b2-tbt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+html.landscape .b2-tbp img,html.landscape .b2-tbp .b2-ph{width:28px;height:28px}html.landscape .b2-btn.b2-tb{gap:7px}
 .b2-back{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center;padding:6px 9px}
 .b2-el{display:inline-block;padding:1px 4px;border-radius:3px;font-size:8.5px;font-weight:800;letter-spacing:.4px;color:#1a1e26}
 .b2-empty{grid-column:1/-1;margin:6px 2px;font-size:12px;color:var(--ink-dim)}
@@ -983,6 +990,8 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js"></script>
+<script src="data/dialog-cast.js"></script>
+<script src="engine/dialog-voice.js"></script>
 <script src="engine/main.js"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
@@ -1004,3 +1013,35 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

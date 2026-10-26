@@ -1,0 +1,38 @@
+# Canon: cast, tone, decided facts
+
+Read before writing any dialogue, move, scene, monster or joke. If a request conflicts with this file, say so and follow this file unless Tom says otherwise.
+
+## The family (party and friends)
+
+| Who | Real-life basis | Voice and traits | Special |
+|---|---|---|---|
+| **Tom** (player, "Uncle") | Tom | Dry, calm. Video games, sourdough, Japanese study, gadgets, Delta One flying, skincare. Exclamations are emphatic ("That was UNCALLED for!"). | DEFEND: bodyguard stance, steps in front of whoever is attacked, says "No touching, please." |
+| **Grace** (9) | Tom's niece | Bright and bossy. Gymnastics, dance, YouTube, nail polish, squishies, fashion. | DANCE (party heal) |
+| **Rose** (6) | Tom's niece | Silly. Her gingham dress, Lamby (plush lamb), jumping on people, scaring them. Boop is her free move and Tom loves it. Sits on Tom's shoulders. | SILLY / RASPBERRY (confuses enemy) |
+| **Amy** | Tom's sister, the girls' mom | Teacher, runner, fiercely competitive, loves her daughters. Fitness and classroom attacks. Husband Justin is always at work: mention lightly, never hammer it. | PEP TALK (next hit +50%) |
+| **Deedee** | Tom's mother | Retired registered nurse (Tom calls her a "registered nut"), bakes, gardens, energetic, says "to the moon and back". | MOON & BACK (group hug heal) |
+| **Boppy** | Tom's father | Fishing, spicy peppers, recliner. Always complaining about an ache. Canon complaints: his stomach, his back, people walking too fast. Thick New York accent, deep voice. | GRUMBLE (enemy attack down, he guards) |
+| **TNB** (Tom B) | Tom's boyfriend | Chill, easy-going, crafty. Pottery, longboarding, horror movies, mass transit, fixes things, pun humor. Wardrobe runner on film sets (his chair says WARDROBE). Talks about Tom, pottery, fixing things; rarely about Tom's family. He and Tom kiss with a heart when they greet. | WARDROBE |
+| **Nara** | Cousin Olivia's Labradoodle (Olivia and Michael's kids: Lachlan 4, Isla 1) | Barks and whines only. Never speaks a word. Arch-nemesis: Chairman Cheeks, a smug squirrel in a top hat and monocle (Old Oak Park). | HUMAN EYES |
+
+Other canon: Michael and Justin are the same height, about 10% taller than the other adults. Tom and Amy's birth order is not on record: never write "older" or "younger" sibling. Party: Tom, Grace and Rose always; one of Amy, Deedee, Boppy (and later TNB, Nara by chapter rules) fills the other slots. Per-chapter rules are in `CHAPTERS` in `engine/story.js`.
+
+## Voice and tone rules
+
+- The girls call Tom **"Tata"** (both syllables stressed equally) in **speech only**. Written as "Ta-Ta" in on-screen text, spelled "Tah Tah" in voice-bake scripts. Every menu, interface and system message says **Tom**.
+- Dialogue is short, warm and funny. Jokes come from the character, not from randomness.
+- **No em dashes anywhere in game text.**
+- Abilities must come from each character's real interests and personality. Tom rejected a "heel click" for 9-year-old Grace because no 9-year-old would do or know it. If a move is a clever adult idea a real kid would not have, it is wrong.
+- Every attack has its own spoken line that references that move (`data/lines.js`, keyed by character and move key). Keep that pattern for new moves.
+- Moral of the whole game: kindness and love always destroy evil and hatred. Monsters are "Friction Sprites": ordinary annoyances turned monster, and you win by being kind to them as much as by hitting them (the HEART and warmth systems).
+- Tombos are unique two-character abilities where Tom joins a character's own activity. They are not mashups of existing moves.
+
+## Decided (Tom, Oct 2026)
+
+- Title: **The Adventures of Tom**. Hometown: Long Island (formerly "Little Elsewhere").
+- Three-area town structure: residential, commercial, monster area, reached through openings at screen edges.
+- Story vision: about 40 hours, classic SNES JRPG structure with a sudden modern twist, shocking twists, extreme tragedy later undone, betrayal, growing love and bonds. Characters come and go from the party like Final Fantasy IV.
+- The game splits into two Parts, both on the title screen. Part 2 is greyed out until Part 1 is complete and starts only from a Part 1 end-game save with everything carried over.
+- The original game is kept as a frozen **demo**; the new build is the **full game**.
+- Voice: ElevenLabs v4. Tom runs all voice baking himself, once all ability updates are done. Do not build voice bakers or ask him to bake mid-stream.
+- Loved: Rose's original Boop. Disliked: its replacement "Tiny Tap". Do not revive Tiny Tap.

@@ -25,9 +25,8 @@ function b2FoeUnit(id,row,i,lvl) {
   const u={side:'foe',id,def,D,name:def.name,lvl:L,idx:i,row,st:{},turns:0,acts:D.acts,weak:D.weak,resist:D.resist,
     shake:0,flash:0,lunge:0,dying:-1,dead:false,parts:[],boss:D.boss||null,phase:1,intent:null,shield:null,step:0};
   for(const k of B2_STAT_KEYS) u[k]=D[k]+up*(k==='hp'?D.step*6:D.step);
-  u.maxHp=u.hp;
-  // Director Mode (engine/feel.js): monsters hit harder and move faster.
-  const fm=b7FoeMult(); if(fm!==1) for(const k of ['pow','warmth','pep']) u[k]=Math.round(u[k]*fm);
+  // Difficulty (engine/feel.js): Rose Mode monsters have less HP, Director Mode more.
+  u.hp=Math.max(1,Math.round(u.hp*b7FoeHp())); u.maxHp=u.hp;
   // Kindness (engine/battle2-kind.js): the pink Warmth bar.
   const G=b2Grump(id); u.warm=0; u.warmGoal=Math.round(G.goal*(1+Math.max(0,L-D.level)*B2_KIND_GOAL_STEP)); u.likes=b8Likes(G.likes); u.grumpy=G.grumpy; u.kindLog={};
   for(const s of (D.start||[])) u.st[s[0]]={turns:s[1]};
@@ -47,7 +46,7 @@ function b2Eff(u,k) {
   return Math.max(1,u[k]*Math.max(.2,m));
 }
 function b2Pep(u) { return b2Eff(u,'pep'); }
-function b2Delay(u,weight) { return Math.floor(1200/(b2Pep(u)+30)*(B2_WEIGHT[weight]||weight||1)); }
+function b2Delay(u,weight) { return Math.floor(1200/(b2Pep(u)+30)*(B2_WEIGHT[weight]||weight||1)/(u.side==='foe'?b7FoeSpeed():1)); }   // Director: monsters act more often
 const b2HasDebuff=u=>Object.keys(u.st).some(k=>B2_STATUS[k]&&B2_STATUS[k].debuff);
 const b2Sum=(u,key)=>{ let s=0; for(const id in u.st) { const d=B2_STATUS[id]; if(d&&d[key]) s+=d[key]; } return s; };
 // drawBattle draws whatever this returns as the party.
@@ -435,7 +434,7 @@ function b2Effect(u,M,f) {
     case 'randbuff': { const k=pick(['powup','gritup','pepup']); for(const t of who(f[2])) b2AddStatus(t,k,f[1],{by:u}); } break;
     // Traits (engine/battle2-traits.js)
     case 'crust': if(!f[2]||(b2Partner(f[2])&&b2Alive(b2Partner(f[2])))) b2AddCrust(f[1]); break;   // f[2]: only if that member is up
-    case 'burn': b2Burn(u,f[1]); break;
+    case 'burn': b2Burn(f[2]?b2Partner(f[2]):u,f[1]); break;   // f[2]: whose Heartburn (a Tombo's actor is the pair)
     case 'rack': for(const t of who(f[1])) b2Rack(u,t); break;
     case 'take': for(const t of who(f[1])) b2Take(u,t); break;
     case 'mount': b2Mount(); break;
@@ -449,6 +448,7 @@ function b2AddStatus(t,id,turns,o) {
   const d=B2_STATUS[id]; if(!d) return;
   if(B2_SKIPS.includes(id)&&b2BossSteady(t)) { b2PopUnit(t,'STEADY','#cfd8d6',-16); return; }
   if(d.debuff&&t.st.fresh) { b2PopUnit(t,'FRESH','#9fd8ff',-16); return; }
+  if(d.debuff&&t.st.fearless) { b2PopUnit(t,'FEARLESS','#ffe08a',-16); return; }
   if(t.perk&&t.perk.immune.includes(id)) { b2PopUnit(t,'IMMUNE','#9fd8ff',-16); return; }
   if(!b8StatusOk(t,id)) return;   // Close-Up and See Me
   const cur=t.st[id];
@@ -647,7 +647,7 @@ function b2FoeAct(e,act,forced,next) {
 function b2HitParty(e,act,t,extra,coveredFor) {
   if(!b2Alive(t)) return;
   const r=b2Damage(e,act,t); b8Landed(t);
-  const dmg=Math.max(1,Math.round(r.dmg*(extra||1)*b7Taken()));   // Rose Mode: -40%
+  const dmg=Math.max(1,Math.round(r.dmg*(extra||1)*b7Taken()));   // Rose Mode x0.5, Director Mode x1.6
   t.hp=Math.max(0,t.hp-dmg); B2.hurtNow=true;
   const fx=battle.fx[t.idx]; fx.shake=.35; fx.flash=.2;
   const q=coveredFor?BATTLE_POS[coveredFor.idx]:BATTLE_POS[t.idx];

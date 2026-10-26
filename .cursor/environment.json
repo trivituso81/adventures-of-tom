@@ -1,0 +1,6 @@
+{
+  "install": "pip install playwright pillow && python3 -m playwright install --with-deps chromium",
+  "terminals": [
+    { "name": "game server", "command": "python3 tools/serve.py 8000" }
+  ]
+}

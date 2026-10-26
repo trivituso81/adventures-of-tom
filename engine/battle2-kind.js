@@ -97,25 +97,49 @@ function b2InspectText(f) {
 
 // ---------- Tombos ----------
 for(const T of B2_TOMBOS) T.tombo=true;
-const b2TomboOpen=T=>B2.tombos==='all'||(typeof STORY!=='undefined'&&!!STORY.flags[T.flag]);
+// A Director's Cut (T.dc) also needs every participant at level 30 (b8DcOpen, engine/progress.js).
+const b2TomboOpen=T=>B2.tombos==='all'||(typeof STORY!=='undefined'&&!!STORY.flags[T.flag]&&
+  (!T.dc||(typeof b8DcOpen==='function'&&b8DcOpen(B8_COMBOS.find(c=>c.id===T.dc)))));
 // What the current actor could pick: unlocked Tombos whose partner is in this fight.
-function b2TomboRows(u) {
+// Family Finishes (rows with `who`): the members taking part, or null when one of them is not in this fight.
+function b2FinishMembers(T) {
+  if(T.who==='all') return B2.party.length>=3?B2.party.slice():null;
+  const m=T.who.map(id=>B2.party.find(p=>p.id===id));
+  return m.every(Boolean)?m:null;
+}
+// The menu (all falsy) hides rows the HEART meter cannot pay for yet; all=true keeps them (to tell NONE YET from
+// not enough HEART). Rows the actor is not part of are left out. Each row's `with` is who to show portraits of: the
+// actor's partner(s) in that Tombo.
+function b2TomboRows(u,all) {
   const tom=b2Tom(),rows=[];
   for(const T of B2_TOMBOS) {
     if(!b2TomboOpen(T)) continue;
+    if(!all&&B2.heart<T.cost) continue;
+    if(T.who) {
+      const mem=b2FinishMembers(T); if(!mem) continue;
+      if(!mem.includes(u)) continue;   // only the members see a Family Finish
+      const down=mem.find(p=>!b2Alive(p));
+      let why='';
+      if(down) why=down.name+' is knocked out.';
+      else if(mem.some(p=>p.st.shushed)) why='Shushed. No Tombos for now.';
+      else if(B2.heart<T.cost) why='Needs '+T.cost+'% HEART. The meter is at '+Math.floor(B2.heart)+'%.';
+      rows.push({T,mem,with:mem.filter(p=>p!==u),label:'FAMILY · '+mem.map(p=>p.name.toUpperCase()).join(' + '),why});
+      continue;
+    }
     const pt=B2.party.find(p=>p.id===T.partner); if(!pt||!tom) continue;
+    if(u!==tom&&u!==pt) continue;   // only Tom and the partner see their Tombo
     let why='';
-    if(u!==tom&&u!==pt) why='Only Tom or '+pt.name+' can start it.';
-    else if(!b2Alive(tom)) why='Tom is knocked out.';
+    if(!b2Alive(tom)) why='Tom is knocked out.';
     else if(!b2Alive(pt)) why=pt.name+' is knocked out.';
     else if(tom.st.shushed||pt.st.shushed) why='Shushed. No Tombos for now.';
     else if(B2.heart<T.cost) why='Needs '+T.cost+'% HEART. The meter is at '+Math.floor(B2.heart)+'%.';
-    rows.push({T,pt,why});
+    rows.push({T,pt,with:[u===tom?pt:tom],label:(T.dc?'DIRECTOR’S CUT · ':'')+'TOM + '+pt.name.toUpperCase(),why});
   }
   return rows;
 }
 const b2TomboReady=u=>b2TomboRows(u).some(r=>!r.why);
 function b2RunTombo(u,act,opt) {
+  if(act.who) { b2RunFinish(u,act,opt); return; }
   const tom=b2Tom(),pt=B2.party.find(p=>p.id===act.partner);
   b2Heart(-act.cost); b2AddMile(1); b2Render();   // every Tombo earns Tom an Upgrade Mile
   // The pair hits with their average strength.
@@ -125,11 +149,31 @@ function b2RunTombo(u,act,opt) {
   const M=b2BeginMove(combo,act,opt||{targets:[]});
   M.tom=tom; M.pt=pt; M.miles=1;   // its Upgrade Mile counts toward the one-per-action cap
   const E={tom,pt,fxT:battle.fx[tom.idx],fxP:battle.fx[pt.idx],M,act,targets:M.targets,result:M.result,apply:()=>b2ApplyFx()};
-  b2Fx({kind:'banner',name:act.name,t:0,dur:1.8});
+  b2Fx({kind:'banner',name:act.name,head:act.dc?"DIRECTOR'S CUT!":'TOMBO!',t:0,dur:1.8});
   sfx.levelUp();
   const fn=B2_TOMBO_ANIM[act.id];
   try { if(fn) fn(E); else b2TomboPlain(E); }
   catch(err) { console.error('tombo '+act.id,err); clearBattleQueue(); b2TomboPlain(E); }
+}
+// A Family Finish: everyone taking part hits with the group's average strength. Its animation gets
+// E={tom (or null),mem,fx (each member's battle.fx, same order),M,act,targets,result,apply}.
+function b2RunFinish(u,act,opt) {
+  const mem=b2FinishMembers(act)||[u],tom=mem.find(p=>p.id==='tom')||null,lead=tom||u;
+  b2Heart(-act.cost); if(tom) b2AddMile(1); b2Render();   // the Upgrade Mile only when Tom takes part
+  const names=mem.map(p=>p.name),combo={side:'party',id:'tombo',name:names.slice(0,-1).join(', ')+' and '+names[names.length-1],st:{},kit:{},idx:lead.idx,lvl:lead.lvl};
+  for(const k of B2_STAT_KEYS) combo[k]=mem.reduce((a,p)=>a+b2Eff(p,k),0)/mem.length;
+  battle.actor=lead.idx;
+  const M=b2BeginMove(combo,act,opt||{targets:[]});
+  M.members=mem; M.tom=lead; M.pt=null; if(tom) M.miles=1;
+  const E={tom,mem,fx:mem.map(p=>battle.fx[p.idx]),M,act,targets:M.targets,result:M.result,apply:()=>b2ApplyFx()};
+  b2Fx({kind:'banner',name:act.name,head:'FAMILY FINISH!',t:0,dur:1.8});
+  sfx.levelUp();
+  const fn=B2_TOMBO_ANIM[act.id];
+  try { if(fn) fn(E); else b2FinishPlain(E); }
+  catch(err) { console.error('finish '+act.id,err); clearBattleQueue(); for(const f of E.fx) f.path=null; b2FinishPlain(E); }
+}
+function b2FinishPlain(E) {
+  enqueue(()=>{ setMessage('FAMILY FINISH! '+E.act.name+'!'); for(const f of E.fx) f.hop=.4; },700,()=>{ landHit(100); E.apply(); },700,E.result||E.act.desc,()=>checkEnemy());
 }
 function b2TomboPlain(E) {
   enqueue(()=>{ setMessage('TOMBO! '+E.act.name+'!'); E.fxT.hop=.4; E.fxP.hop=.4; },700,()=>{ landHit(100); E.apply(); },700,E.result||E.act.desc,()=>checkEnemy());
@@ -151,18 +195,7 @@ const heartsToFoes=from=>{ const h=home(from); b2LiveFoes().forEach((f,k)=>{ con
 
 // nara1 (Sit. Paw. Treat.) and boppy1 (You Hold the Net) are in the Task T section below.
 
-// Tom + Amy, tier 1: On Your Marks (chapter 5). Tom holds up his stopwatch and counts her in; Amy runs straight
-// through every enemy and breaks the tape. A hit on all of them, and the whole party picks up the pace.
-B2_TOMBO_ANIM.amy1=E=>{ const {tom,pt,fxT,fxP}=E,n=Math.max(1,b2LiveFoes().length);
-  enqueue(()=>{ setMessage('TOMBO! Tom holds up his stopwatch. Amy is already in the blocks.'); say('tom','tomboamy'); fxT.punch=.5; scene('stopwatch',3.4,{x:GX,y:58}); sfx.charge(); },
-    700,()=>{ bt('ON YOUR MARKS',96,26,'#fff1cb',2,.7); sfx.ding(); },
-    700,()=>{ bt('GET SET',96,26,'#ffe08a',3,.7); sfx.ding(); },
-    700,()=>{ bt('GO!',96,26,'#9be39a',4,.8); sfx.jumpWhistle&&sfx.jumpWhistle(); say('amy','tombo',.1);
-      fxP.run=1.8; fxP.runDur=1.8; fxP.runPasses=Math.min(3,n); sfx.run(); scene('finishline',2.2,{snap:.6}); },
-    ...Array.from({length:Math.min(3,n)},(_,k)=>[k===0?420:520,()=>{ battle.slash=.2; sfx.slash(); battle.shakeEnemy=.4; scene('dust',.5,{x:GX,y:262,n:5}); landHit(Math.round(100/Math.min(3,n))); }]).flat(),
-    600,()=>{ sfx.fanfare(); scene('confetti',1.5,{x0:80,x1:290,n:36}); E.apply(); for(const p of b2LiveParty()) glowOn(p,'#9be39a'); bt('NEW RECORD',96,36,'#ffe08a',3,1.1); },
-    1000,(E.result||'')+' Tom stops the clock. A new family record. The whole party feels faster.',()=>checkEnemy());
-};
+// amy1 (I Called It!) is in the Task T section below.
 })();
 
 // ================= Task T: tier-1 Primary Tombos (tombo-review.md, approved 24 Oct 2026) =================
@@ -744,5 +777,3543 @@ B2_TOMBO_ANIM.boppy1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.apply,()=>{ E2.apply(); }],
     [P.grum,()=>{ fxP.grumble=1.6; S('sulk'); word('HMPH.',Bp.x-30,Bp.top-24,CREAM,3,.9); }],
     [P.end,'end',()=>{ for(const o of S0) { o.f.fsc=0; o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Boppy says it was bigger in the water.'; }]]);
+};
+
+// ---------- I Called It! (Tom + Amy, tier 1) ----------
+// Brother and sister both lunge for the same monster and bicker like kids. They shove each other back and forth, and
+// every shove sends the other one stumbling into a monster (one bump per live monster). Amy declares herself the
+// winner. Effects unchanged: Kinetic and Sparkle hit on every enemy, PEP Up for the party (3 turns).
+B2_TOMBO_ANIM.amy1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),A=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length);
+  const tsp=BATTLE_SPRITES.tom,asp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,AH=asp.idle.length*asp.scale;
+  const by=Math.min(312,Math.max(T.base,GR.base)+8),Lx=cl(GR.x1+48,150,400),Rx=Lx+88;
+  const B0=1300,BP=700,E0=B0+n*BP,P={run:650,mine:700,mine2:950,jos:1050,win:E0+100,apply:E0+450,tline:E0+1800,home:E0+2400,end:E0+3100};
+  const share=Array.from({length:n},(_,k)=>Math.floor(100/n)+(k<100%n?1:0));
+  // where the shoved one lands against monster k
+  const hitAt=k=>{ const f=tgts[k]; if(!f) return {x:Lx-60,y:by}; const q=ST.foe(f); return {x:q.x+q.w*.32+18,y:Math.min(by,q.base+6)}; };
+  const amyEnd=n%2?'L':'R';
+  const sT={x:T.x,b:T.base,f:tsp.idle},sA={x:A.x,b:A.base,f:asp.idle};
+  // One body's pose at ms. who: 'tom' or 'amy'. Slots: L (left, shoved) and R (right, shoving).
+  const body=(who,ms,c)=>{ const sp=c.sp,isA=who==='amy',start=isA?Rx:Lx; let x=start,y=by,f=sp.idle,rot=0;
+    if(ms<P.run) { const k=ez(ms/P.run); return {x:lerp(c.origX,start,k),y:lerp(c.origBase,by,k),f:runFr(sp,c.t,-1),rot:0}; }
+    if(ms<B0) { f=isA?(ms<P.jos?sp.aim:sp.hip):(ms<P.jos?sp.act:sp.idle);
+      if(ms>P.jos) { const w=Math.abs(Math.sin((ms-P.jos)/45)); x+=isA?-w*7:w*7; }
+      return {x,y,f,rot}; }
+    if(ms<E0) { const k=Math.floor((ms-B0)/BP),q=ms-B0-k*BP,shover=(k%2===0)===isA;
+      if(shover) { // on the right: wind up, shove, follow through into the left slot
+        if(q<150) { x=Rx+ez(q/150)*5; f=isA?sp.wind:sp.idle; }
+        else if(q<420) { x=lerp(Rx+5,Lx,ez(seg(q,150,420))); f=sp.act; }
+        else { x=Lx; f=isA?sp.hip:sp.idle; }
+      } else { const h=hitAt(k); // on the left: shoved into monster k, bounce, hop back to the right slot
+        if(q<150) { x=Lx; f=isA?sp.idle:sp.idle; }
+        else if(q<360) { const u=seg(q,150,360); x=lerp(Lx,h.x,ez(u)); y=lerp(by,h.y,u)-Math.sin(u*Math.PI)*18; f=isA?sp.spread:sp.expr; rot=.3*u; }
+        else if(q<440) { x=h.x+Math.sin(seg(q,360,440)*Math.PI)*6; y=h.y; f=isA?sp.spread:sp.expr; rot=.3; }
+        else if(q<680) { const u=ez(seg(q,440,680)); x=lerp(h.x,Rx,u); y=lerp(h.y,by,u)-Math.sin(u*Math.PI)*26; f=runFr(sp,c.t,1); rot=.3*(1-u); }
+        else { x=Rx; f=sp.idle; } }
+      return {x,y,f,rot}; }
+    const slot=(isA?amyEnd:(amyEnd==='L'?'R':'L'))==='L'?Lx:Rx;
+    if(ms<P.home) { x=slot;
+      if(isA) { f=ms>P.win?sp.celeb:sp.idle; if(ms>P.win&&ms<P.win+700) y-=Math.abs(Math.sin(seg(ms,P.win,P.win+700)*Math.PI*2))*16; }
+      else f=slot===Lx?(ms>P.tline&&ms<P.tline+900?mirrorRowsCached(sp,'act'):sp.flip):sp.idle;   // faces Amy, deadpan
+      return {x,y,f,rot}; }
+    const k=ez(seg(ms,P.home,P.home+600)); return {x:lerp(slot,c.origX,k),y:lerp(by,c.origBase,k),f:k<1?runFr(sp,c.t,1):sp.idle,rot:0}; };
+  pathOf(fxT,P.end,(ms,c)=>{ const o=body('tom',ms,c); sT.x=o.x; sT.b=o.y; sT.f=o.f; return {cx:o.x,base:o.y,frame:o.f,rot:o.rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const o=body('amy',ms,c); sA.x=o.x; sA.b=o.y; sA.f=o.f; return {cx:o.x,base:o.y,frame:o.f,rot:o.rot}; });
+  // Anger veins over both heads while they bicker, and the dibs finger on the first monster.
+  const vein=(x,y,s)=>{ for(const [dx,dy,r] of [[-1,-1,0],[1,-1,1.57],[1,1,3.14],[-1,1,4.71]]) { gfx.save(); gfx.translate(x+dx*s*1.6,y+dy*s*1.6); gfx.rotate(r);
+    gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.beginPath(); gfx.arc(-s,-s,s,0,Math.PI/2); gfx.stroke(); gfx.strokeStyle=RED; gfx.lineWidth=2; gfx.stroke(); gfx.restore(); } };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    if(ms>P.jos&&ms<E0+200) { const pulse=1+Math.sin(ms/70)*.15;
+      vein(sT.x+14,sT.b-TH-6,4*pulse); vein(sA.x+12,sA.b-AH+10,4*pulse); }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Tom and Amy both lunge for the same monster.'); B2.aim=null; S('whoosh'); }],
+    [P.mine,()=>{ word('MINE!',Lx-10,by-TH-26,CREAM,4,.55); S('bump'); }],
+    [P.mine2,()=>{ word('MINE!!',Rx+16,by-AH-30,PINK,4,.55); S('bump'); }],
+    [P.jos,()=>{ setMessage('They bicker like they are kids again.'); S('squeak'); }],
+    ['hf',B0+360]];
+  for(let k=0;k<n;k++) { const t0=B0+k*BP,amyShoves=k%2===0,h=hitAt(k),f=tgts[k],q=f?ST.foe(f):{x:h.x-30,top:h.y-90,base:h.y};
+    steps.push([t0+150,()=>{ S('whoosh'); word(amyShoves?'MOVE!':'QUIT IT!',Rx+6,by-(amyShoves?AH:TH)-24,amyShoves?PINK:CREAM,3,.6);
+      if(k===0) setMessage('Amy shoves Tom. Tom bumps a monster.'); else if(k===1) setMessage('Tom shoves back. Amy bumps another one.'); }]);
+    steps.push([t0+360,()=>{ S('bonk'); S('thud'); if(f) ST.jolt(f,.4); battle.shakeEnemy=.4; scene('dust',.5,{x:h.x-14,y:h.y,n:6,sp:30,up:10});
+      scene('tb_rings',.6,{x:q.x,y:q.base-q.h*.5,r:46,c:CREAM,w:3}); word(['BONK!','OOF!','BUMP!','THUD!'][k],q.x+16,Math.max(60,q.top-82),GOLD,4,.7); landHit(share[k]); }]); }
+  steps.push(
+    [P.win,()=>{ word('I CALLED IT!',(Lx+Rx)/2-20,Math.max(70,by-AH-60),GOLD,6,1.7); S('fanfare'); scene('confetti',1.5,{x0:Lx-120,x1:Rx+80,n:36});
+      say('amy','tombo'); setMessage('Amy declares herself the winner. Nobody voted.'); }],
+    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); }],
+    [P.tline,()=>{ say('tom','tomboamy'); setMessage('Tom has heard this before.'); }],
+    [P.end,'end',()=>(E2.result||'')+' Amy is counting it as a win. The whole party picks up the pace.']);
+  ST.play(E2,steps);
+};
+
+// ================= Task T: tier-2 Primary Tombos =================
+// ---------- Uncle Spotter Toss (Tom + Grace, tier 2) ----------
+// A blue gym mat rolls out. Coach Tom chalks up and laces his fingers into a stirrup. Grace counts it in, two steps,
+// onto his hands, and he heaves her straight out of the top of the screen. A twinkle way up high, then she drops like a
+// shooting star, two flips, feet first onto the monster. She bounces back to Tom for a high five and sticks the landing.
+// Effects: a sure critical Kinetic hit that splashes the neighbors; Tom gets Choreographed (1 VP, a quicker next turn).
+SC.tb_mat=(s,u)=>{ const ms=s.t*1000,k=ez(ms/450)*(ms>s.off?1-ez((ms-s.off)/300):1); if(k<=0) return;
+  const w=s.w*k,x=s.x1-w,y=s.y,h=16;
+  RO(x,y-h/2,w,h,'#3c6cc8'); R(x,y-h/2,w,3,'#6a96e8'); for(let j=1;j<5;j++) R(x+w*j/5-1,y-h/2,2,h,'#2a4c96');
+  if(k<1) EO(x,y,9,10,'#3c6cc8'); };
+B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list);
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
+  const sx=cl(F.x+F.w/2+78,170,T.x),sb=cl(Math.max(T.base,F.base)+4,200,312),ux=sx+112;   // Tom's spot, Grace's run-up
+  const hands={x:sx-30,y:sb-TH*.34},onTop={x:F.x+4,y:F.top+10},meet={x:sx-40,y:sb};
+  const P={walk:650,clap:700,cup:950,go1:1150,go2:1350,step:1550,up:1750,gone:2250,drop:2800,hit:3300,back:3800,five:3850,apply:3950,
+    tline:4350,home:5050,end:5750};
+  const sT={x:T.x,b:T.base},sG={x:G.x,b:G.base,rot:0,trail:false};
+  // Tom: walks to his spot, claps chalk, makes the stirrup, heaves (arms up), high fives, walks home.
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=sx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,sx,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.up) { f=ms>P.clap&&ms<P.clap+160?sp.celeb:(ms>P.cup?sp.act:sp.idle); if(ms>P.step&&ms<P.up) y+=Math.sin(seg(ms,P.step,P.up)*Math.PI)*4; }
+    else if(ms<P.gone+200) { f=sp.celeb; y-=Math.sin(seg(ms,P.up,P.up+260)*Math.PI)*8; }
+    else if(ms<P.home) { f=ms>P.five-80&&ms<P.five+500?sp.celeb:(ms>P.drop-200&&ms<P.hit+200?sp.expr:sp.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(sx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  // Grace: run-up spot, two steps, onto the hands, launched, gone, the drop (two flips), the bounce, the high five.
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=ux,y=sb,f=sp.idle,rot=0,hide=false; sG.trail=false;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,ux,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.go1) { f=sp.idle; }
+    else if(ms<P.step) { const k=seg(ms,P.go1,P.step),n=k<.5?k*2:(k-.5)*2,leg=k<.5?0:1;
+      x=lerp(ux,sx+34,ez(k)); y=sb-Math.sin(n*Math.PI)*(leg?30:14); f=sp.act; }
+    else if(ms<P.up) { const k=ez(seg(ms,P.step,P.step+120)); x=lerp(sx+34,hands.x+4,k); y=lerp(sb,hands.y+6,k)-Math.sin(k*Math.PI)*20; f=sp.celeb; }
+    else if(ms<P.gone) { const k=seg(ms,P.up,P.gone),e=1-(1-k)*(1-k); x=lerp(hands.x+4,onTop.x+30,e); y=lerp(hands.y+6,-GH-40,e); rot=-k*Math.PI*2; f=sp.celeb; sG.trail=true; }
+    else if(ms<P.drop) { hide=true; x=onTop.x; y=-GH-40; }
+    else if(ms<P.hit) { const k=seg(ms,P.drop,P.hit),e=k*k; x=lerp(onTop.x+18,onTop.x,k); y=lerp(-GH-30,onTop.y,e); rot=-ez(k)*Math.PI*4; f=sp.celeb; sG.trail=true; }
+    else if(ms<P.hit+140) { x=onTop.x; y=onTop.y+Math.sin(seg(ms,P.hit,P.hit+140)*Math.PI)*6; f=sp.celebFlip||sp.celeb; }
+    else if(ms<P.back) { const k=seg(ms,P.hit+140,P.back); x=lerp(onTop.x,meet.x,ez(k)); y=lerp(onTop.y,meet.y,k)-Math.sin(k*Math.PI)*70; rot=k*Math.PI*2; f=sp.celeb; }
+    else if(ms<P.home) { x=meet.x; y=meet.y; f=sp.celebFlip||sp.flip; if(ms>P.five+400) f=ms>P.tline?sp.flip:(sp.celebFlip||sp.flip); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(meet.x,c.origX,k); y=lerp(meet.y,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sG.x=x; sG.b=y; sG.rot=rot; return {cx:x,base:y,frame:f,rot,hide,noShadow:ms>P.step&&ms<P.back}; });
+  scene('tb_mat',P.end/1000,{back:true,x1:sx+150,w:Math.max(200,sx+150-F.x+F.w/2+20),y:sb+4,off:P.home});
+  // Front layer: chalk puffs, the stirrup hands, the star trail, the twinkle up high.
+  const trail=[];
+  scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
+    const chalk=(t0,x,y,r)=>{ const k=seg(ms,t0,t0+600); if(k<=0||k>=1) return; gfx.globalAlpha=(1-k)*.85;
+      for(let j=0;j<6;j++) { const a=j/6*Math.PI*2+k; E(x+Math.cos(a)*r*k,y+Math.sin(a)*r*.6*k-k*10,6+k*8,5+k*6,'#f4f4f0'); } gfx.globalAlpha=1; };
+    chalk(P.clap,sT.x-6,sT.b-TH*.62,26); chalk(P.up,hands.x,hands.y,40);
+    if(ms>P.cup&&ms<P.up+120) { const h={x:sT.x-26,y:sT.b-TH*.34};
+      EO(h.x,h.y,11,6,SKIN); for(let j=-1;j<=1;j++) Ln(h.x+j*5,h.y-5,h.x+j*5,h.y+2,1.5,SKIN2); }
+    if(sG.trail) trail.push({t:ms,x:sG.x,y:sG.b-GH*.5});
+    while(trail.length&&ms-trail[0].t>420) trail.shift();
+    for(let i=1;i<trail.length;i++) { const a=trail[i-1],b=trail[i]; if(Math.abs(a.y-b.y)>200) continue; const q=1-(ms-b.t)/420;
+      gfx.globalAlpha=Math.max(0,q)*.85; Ln(a.x,a.y,b.x,b.y,4+q*10,GOLD); Ln(a.x,a.y,b.x,b.y,2+q*4,'#ffffff'); }
+    gfx.globalAlpha=1;
+    if(ms>P.gone&&ms<P.drop) { const k=seg(ms,P.gone,P.drop),tw=1+Math.sin(ms/60)*.35; star(onTop.x+18,26,7*tw*Math.sin(k*Math.PI)+2,'#fffbe6'); }
+  }});
+  const hit=()=>{ S('thud'); S('bonk'); battle.shakeEnemy=.8; battle.flashEnemy=.3;
+    for(const f of list) ST.jolt(f,f===tgt?.7:.35);
+    scene('tb_rings',.8,{x:F.x,y:F.mid,r:90,c:GOLD,w:4}); scene('dust',.6,{x:F.x,y:F.base,n:8,sp:30,up:10});
+    word('BAM!',F.x,Math.max(70,F.top-60),GOLD,6,1); for(let k=0;k<6;k++) { const a=k/6*Math.PI*2; battle.props.push({kind:'dheart',x0:F.x,y0:F.top,x1:F.x+Math.cos(a)*60,y1:F.top+Math.sin(a)*36,arc:10,spin:false,r:5,t:0,dur:.5}); }
+    landHit(100); };
+  ST.play(E2,[
+    [0,()=>{ setMessage('TOMBO! Coach Tom is spotting Grace.'); B2.aim=null; S('whoosh'); }],
+    [P.clap,()=>{ S(sfx.clap?'clap':'bump'); word('CHALK UP',sx-20,Math.max(80,sb-TH-24),CREAM,3,.7); }],
+    [P.cup,()=>{ say('grace','tombo2'); setMessage('Grace counts it in. Two steps and UP.'); }],
+    [P.go1,()=>{ S('step'); word('ONE!',ux-10,sb-GH-30,PINK,3,.45); }],
+    [P.go2,()=>{ S('step'); word('TWO!',sx+50,sb-GH-34,PINK,3,.45); }],
+    [P.step,()=>{ S('bump'); }],
+    [P.up,()=>{ S('jumpWhistle'); S('whoosh'); word('UP!',sx-30,Math.max(70,sb-TH-50),GOLD,6,.9); setMessage('Tom heaves her straight up. Way up.'); }],
+    [P.gone+200,'Higher than the gym ceiling...'],
+    [P.drop,()=>{ S('slideWhistle'); setMessage('...and here she comes. Two flips. Feet first.'); }],
+    [P.hit,hit],
+    ['hf',P.hit],
+    [P.five,()=>{ S(sfx.clap?'clap':'bonk'); S('ding'); word('HIGH FIVE!',meet.x-14,Math.max(70,sb-TH-40),CREAM,4,1);
+      scene('tb_rings',.6,{x:meet.x+20,y:sb-TH*.95,r:40,c:CREAM,w:3}); scene('confetti',1.4,{x0:meet.x-120,x1:meet.x+120,n:26}); }],
+    [P.apply,()=>{ E2.apply(); scene('glow',.9,{x:sT.x,y:sT.b-TH*.5,rx:38,ry:52,c:GOLD,a:.35}); }],
+    [P.tline,()=>{ say('tom','tombograce2'); word('STUCK IT',meet.x-10,Math.max(70,sb-GH-60),GOLD,4,1.1); setMessage('She stuck it. Tom takes full credit.'); }],
+    [P.end,'end',()=>(E2.result||'')+' Grace stuck the landing.']]);
+};
+// ---------- Red Line Transfer (Tom + TNB, tier 2) ----------
+// The stage goes underground: subway tiles, rails and a red METRO sign. A silver Red Line train pulls in behind the
+// party. Tom climbs into the front cab (conductor sunglasses), TNB hops up and surfs the roof on his longboard, tossing
+// gold transfer cards to everyone. Tom blows the horn and the train barrels through every monster. Effects: a Kinetic
+// hit on every enemy (Staggered), the party jumps to the front of the line and is Evasive for 2 turns.
+// The train is drawn twice: whole in the back layer, and again in the front layer clipped left of the gap between the
+// monsters and the party, so it passes in front of the monsters and behind the party without a visible seam.
+const SILVER='#c9ced8',SILVER2='#9aa1ae',METRO_RED='#d8323a';
+const transferCard=(x,y,a,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(s,s);
+  RO(-13,-8,26,16,GOLD); R(-11,-6,22,3,'#fff4c0'); R(-13,2,26,3,'#c9a23a'); label('TAP',0,-3,'#7a4a10',1); gfx.restore(); };
+const longboard=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a);
+  RO(-34,-4,68,6,'#c9783a'); R(-30,-4,60,2,'#e8a060'); for(const wx of [-22,22]) { EO(wx,5,3.5,3.5,'#f4e04a'); } gfx.restore(); };
+B2_TOMBO_ANIM.tnb2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),N=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale;
+  const px0=Math.min(...party.map(p=>{ const q=ST.unit(p); return q.x-q.w*.32; }));
+  const gapX=cl((GR.x1+px0)/2,GR.x1+6,px0-6);                  // the seam between the two layers
+  const yR=306,carH=136,roof=yR-carH,L=470;                    // rails, car height, roof line, train length
+  const xS=gapX-8,boardX=xS+212;                               // where the nose stops; TNB's spot on the roof
+  const P={arrive0:350,arrive:1350,board:1450,aboard:1900,card:2050,tline:2650,honk:2950,go:3250,out:4250,dark:4300,back:4500,glow:5000,end:5900};
+  const goDur=P.out-P.go,travel=xS+L+60;
+  const noseAt=ms=>ms<P.arrive0?640:(ms<P.arrive?lerp(640,xS,1-Math.pow(1-seg(ms,P.arrive0,P.arrive),2)):(ms<P.go?xS:xS-travel*Math.pow(seg(ms,P.go,P.out),2)));
+  // When the nose reaches each monster (right edge first).
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  for(const o of order) { const need=cl((xS-(o.q.x+o.q.w*.3))/travel,0,1); o.t=Math.round(P.go+Math.sqrt(need)*goDur); }
+  const sT={hide:false};
+  // Tom: walks to the cab door and climbs in (hidden: the cab draws him), back home with a hop at the end.
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp,dx=xS+70;
+    if(ms<P.board) return {cx:c.origX,base:c.origBase,frame:ms>P.arrive0&&ms<P.arrive?sp.expr:sp.idle};
+    if(ms<P.aboard) { const k=ez(seg(ms,P.board,P.aboard)); return {cx:lerp(c.origX,dx,k),base:lerp(c.origBase,yR-20,k)-Math.sin(k*Math.PI)*30,frame:k<1?runFr(sp,c.t,-1):sp.idle}; }
+    if(ms<P.back) { sT.hide=true; return {cx:dx,base:yR,frame:sp.idle,hide:true}; }
+    sT.hide=false; const k=seg(ms,P.back,P.back+300); return {cx:c.origX,base:c.origBase-Math.sin(k*Math.PI)*22,frame:k<1?sp.celeb:sp.idle}; });
+  // TNB: hops onto the roof, faces the party to toss the transfers, then surfs (facing left) as the train leaves.
+  const sN={x:N.x,b:N.base,f:nsp.idle};
+  const throwR=nsp.throw?mirrorRowsCached(nsp,'throw'):nsp.flip;
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=boardX,y=roof-8,f=sp.flip,rot=0;
+    if(ms<P.board) { x=c.origX; y=c.origBase; f=sp.idle; }
+    else if(ms<P.aboard) { const k=ez(seg(ms,P.board,P.aboard)); x=lerp(c.origX,boardX,k); y=lerp(c.origBase,roof-8,k)-Math.sin(k*Math.PI)*70; f=sp.celeb; }
+    else if(ms<P.honk) { const k=(ms-P.card)/180; f=ms>P.card&&ms<P.card+party.length*180?(Math.floor(k)%2?throwR:sp.flip):sp.flip; }
+    else if(ms<P.back) { const n=noseAt(ms); x=boardX+(n-xS); f=sp.act||sp.idle; rot=ms>P.go?.08+Math.sin(ms/70)*.04:0; y=roof-8-(ms>P.go?Math.abs(Math.sin(ms/90))*3:0); }
+    else { const k=seg(ms,P.back,P.back+300); x=c.origX; y=c.origBase-Math.sin(k*Math.PI)*22; f=k<1?sp.celeb:sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.board&&ms<P.back}; });
+  const tunK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.dark,P.dark+450)));
+  // The tunnel: dark overlay, a band of white subway tiles, the METRO sign, the rails, light streaks when moving.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=tunK(ms); if(k<=0) return;
+    gfx.globalAlpha=k*.78; R(0,0,576,324,'#14121c'); gfx.globalAlpha=k;
+    const ty0=roof-40,ty1=yR-28; R(0,ty0,576,ty1-ty0,'#d8dcd4');
+    for(let y=ty0;y<ty1;y+=10) R(0,y,576,1,'#a8aca4'); for(let y=ty0,r=0;y<ty1;y+=10,r++) for(let x=(r%2)*10;x<576;x+=20) R(x,y,1,10,'#a8aca4');
+    R(0,ty0,576,4,'#5a5e66'); R(0,ty0+40,576,8,METRO_RED); R(0,ty1-4,576,4,'#5a5e66');
+    const sx=cl(gapX-50,70,360),sy=Math.max(18,ty0-58); RO(sx-62,sy,124,34,METRO_RED); R(sx-60,sy+2,120,4,'#f06a70');
+    EO(sx-44,sy+17,11,11,'#ffffff'); label('M',sx-44,sy+12,METRO_RED,2); bigWord('METRO',sx+12,sy+10,'#ffffff',3);
+    for(let x=sx-40;x<=sx+40;x+=80) Ln(x,sy,x,Math.max(0,sy-20),2,'#5a5e66');
+    R(0,yR-2,576,22,'#2a2830'); for(let x=-((ms*.6)%28);x<576;x+=28) R(x,yR+2,14,10,'#4a3a2e');
+    for(const ry of [yR+2,yR+12]) { R(0,ry-2,576,4,OUT); R(0,ry-2,576,2,'#b8bcc4'); }
+    if(ms>P.go&&ms<P.out+100) { const q=seg(ms,P.go,P.out); for(let j=0;j<7;j++) { const y=ty0+12+j*((ty1-ty0-20)/6),x=(j*137+ms*(.4+q*1.6))%700-60;
+      gfx.globalAlpha=k*.7; Ln(x,y,x+60+q*90,y,3,'#fff6dc'); } gfx.globalAlpha=k; }
+    gfx.globalAlpha=1; }});
+  // The train itself, nose at xn (facing left). Tom rides in the cab window.
+  const train=(xn,ms)=>{ const top=roof,bot=yR-4;
+    // headlight beams ahead of the nose
+    if(ms<P.out) { gfx.globalAlpha=.16; gfx.beginPath(); gfx.moveTo(xn+4,bot-30); gfx.lineTo(xn-220,bot-70); gfx.lineTo(xn-220,bot+14); gfx.lineTo(xn+4,bot-16); gfx.closePath(); gfx.fillStyle='#fff6c0'; gfx.fill(); gfx.globalAlpha=1; }
+    // body
+    gfx.beginPath(); gfx.moveTo(xn+30,top); gfx.lineTo(xn+L,top); gfx.lineTo(xn+L,bot); gfx.lineTo(xn,bot); gfx.lineTo(xn,top+46); gfx.quadraticCurveTo(xn+2,top+4,xn+30,top); gfx.closePath();
+    gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.lineJoin='round'; gfx.stroke(); gfx.fillStyle=SILVER; gfx.fill();
+    gfx.save(); gfx.clip();
+    R(xn,top,L,10,'#e4e8ee'); R(xn,bot-34,L,26,SILVER2); R(xn,bot-46,L,10,METRO_RED); R(xn,bot-36,L,2,'#f06a70');
+    for(let x=xn+150;x<xn+L;x+=120) R(x,top,2,bot-top,'#7a808c');
+    gfx.restore();
+    // cab window with Tom (sunglasses), the horn cord
+    const wx=xn+16,wy=top+14,ww=78,wh=60;
+    RO(wx,wy,ww,wh,'#7ab4d8'); gfx.save(); gfx.beginPath(); gfx.rect(wx,wy,ww,wh); gfx.clip();
+    if(sT.hide) { const fr=ms>P.honk-60&&ms<P.honk+500?tsp.celeb:tsp.idle,tx=wx+ww/2-TW/2+6,ty=wy+8; drawSprite(fr,tsp.pal,tx,ty,tsp.scale);
+      const sc=tsp.scale,ey=ty+12*sc; R(tx+7*sc,ey-1.2*sc,11*sc,2.6*sc,'#14141a'); R(tx+8*sc,ey-1*sc,3*sc,.8*sc,'#6a7a9a'); R(tx+14*sc,ey-1*sc,3*sc,.8*sc,'#6a7a9a'); }
+    const pull=ms>P.honk&&ms<P.honk+400?Math.abs(Math.sin(seg(ms,P.honk,P.honk+400)*Math.PI*2))*10:0;
+    Ln(wx+ww-14,wy,wx+ww-14,wy+20+pull,2,'#e8e4d8'); EO(wx+ww-14,wy+22+pull,2.5,2.5,'#e8e4d8');
+    gfx.globalAlpha=.35; R(wx,wy,ww,8,'#ffffff'); gfx.globalAlpha=1; gfx.restore();
+    // side windows and doors
+    for(let x=xn+130,j=0;x<xn+L-40;x+=120,j++) { RO(x-44,top+18,40,38,'#5a7a9a'); R(x-42,top+20,36,6,'#8ab0d0');
+      RO(x+6,top+16,34,bot-top-52,'#b8bec8'); Ln(x+23,top+16,x+23,bot-36,2,OUT); R(x+6,top+16,34,3,'#f4e04a'); }
+    label('RED LINE',xn+L-80,bot-44,'#ffffff',1);
+    EO(xn+10,bot-22,5,5,'#fff6c0'); EO(xn+26,bot-22,5,5,'#fff6c0'); RO(xn+46,bot-14,26,6,'#3a3e46');
+    // bogies
+    for(const bx of [xn+70,xn+L-80]) { RO(bx-34,bot-4,68,10,'#2a2c32'); for(const wx2 of [bx-20,bx+20]) { EO(wx2,bot+6,8,8,'#3a3c44'); E(wx2,bot+6,3,3,'#8a8e98'); } }
+    // roof vents and a pantograph-free subway roof
+    for(let x=xn+120;x<xn+L-30;x+=120) RO(x,top-6,40,6,'#8a909c');
+    // braking sparks
+    if(ms>P.arrive-500&&ms<P.arrive) for(let j=0;j<6;j++) { const q=(ms/90+j/6)%1; gfx.globalAlpha=1-q; E(xn+70+(j%2?20:-20)+q*30,bot+12-q*10,2,2,j%2?'#ffe08a':'#ffffff'); }
+    gfx.globalAlpha=1; };
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const n=noseAt(ms); if(n>600||n<-L-20) return; train(n,ms); }});
+  // Front layer: the train again, left of the gap only; the longboard; the cards; speed lines.
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const n=noseAt(ms);
+    if(n<=600&&n>=-L-20&&n<gapX) { gfx.save(); gfx.beginPath(); gfx.rect(-10,0,gapX+10,324); gfx.clip(); train(n,ms); gfx.restore(); }
+    if(ms>P.aboard-80&&ms<P.back) longboard(sN.x,sN.b+5,ms>P.go?.08+Math.sin(ms/70)*.04:0);
+    if(ms>P.go&&ms<P.out) { gfx.globalAlpha=.8; for(let j=0;j<5;j++) { const y=roof-10+j*28,x=n+L+20+((ms*.9+j*53)%120); Ln(x,y,x+70,y,3,'#ffffff'); } gfx.globalAlpha=1; }
+    // monsters flung after the hit
+    for(const o of order) { const f=o.f,k=seg(ms,o.t,o.t+800);
+      if(k>0&&k<1) { f.oy=-Math.sin(k*Math.PI)*70; f.ox=-k*24*(1-k); f.spin=k*Math.PI*2; f.spinAt=performance.now(); }
+      else if(k>=1&&o.t&&!o.done) { o.done=true; f.oy=0; f.ox=0; f.spin=0; } }
+  }});
+  // The transfer cards: one per party member, out of TNB's hand.
+  const cards=()=>party.forEach((p,i)=>{ const q=p===tom?{x:xS+60,mid:roof+40}:ST.unit(p),h={x:sN.x+18,y:sN.b-100};
+    ST.fly((x,y,uu)=>transferCard(x,y,uu*Math.PI*4,1.6),h.x,h.y,q.x,q.mid,.45,50,i*.18);
+  });
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! TNB and Tom take the subway. Red Line, express.'); B2.aim=null; S('rumble'); }],
+    [P.arrive-600,()=>{ S('brakes'); }],
+    [P.arrive,()=>{ S('chime2'); word('DING DONG',xS+330,roof-30,CREAM,3,.8); }],
+    [P.board,()=>{ setMessage('Tom climbs into the front cab. TNB climbs onto the roof.'); S('jumpWhistle'); }],
+    [P.aboard,()=>{ S('bump'); }],
+    [P.card-150,()=>{ say('tnb','tombo2'); }],
+    [P.card,()=>{ setMessage('TNB hands everyone a gold transfer.'); cards(); }],
+    [P.card+450,()=>{ S('ting'); for(const p of party) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.tline,()=>{ say('tom','tombotnb2'); setMessage('Tom puts on his conductor sunglasses.'); }],
+    [P.honk,()=>{ S('toot'); word('HONK HONK!',xS+50,roof-26,GOLD,4,.9); }],
+    [P.honk+220,()=>{ S('toot'); }],
+    [P.go,()=>{ S('jet'); S('rumble'); setMessage('Express service. No stops. Right through the monsters.'); }],
+  ];
+  order.forEach((o,i)=>steps.push([o.t,()=>{ S('crash'); S('bonk'); battle.shakeEnemy=.7; battle.flashEnemy=.25; ST.jolt(o.f,.7);
+    scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:70,c:CREAM,w:4}); if(i===0) word('WHAM!',o.q.x,Math.max(70,roof-30),GOLD,6,1); landHit(100/order.length); }]));
+  steps.push(['hf',order.length?order[0].t:P.go+300]);
+  steps.push([P.dark,()=>{ word('NEXT STOP: HOME',288,72,CREAM,4,.95); }]);
+  steps.push([P.back,()=>{ S('ding'); for(const p of party) glowOn(p); }]);
+  steps.push([P.glow,()=>{ E2.apply(); S('heal'); }]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.oy=0; o.f.ox=0; o.f.spin=0; } return (E2.result||'')+' Everybody has a transfer. Next train is theirs.'; }]);
+  ST.play(E2,steps);
+};
+
+// ---------- Tug of War (Tom + Nara, tier 2) ----------
+// Tom and Nara tug a big knotted rope toy, growling and shaking. Tom pulls back politely; Nara pulls back with all
+// forty pounds, wins, and Tom flies right over her into the monster, still holding the rope. Effects: a big Kinetic hit
+// on one enemy that steals its buffs and lowers its GRIT for 3 turns. Nara stands between the monster and Tom, facing him.
+// A braided rope from a to b with a sag; red, white and blue stripes, knots at both ends.
+const rope=(ax,ay,bx,by,sag,t)=>{ const mx=(ax+bx)/2,my=(ay+by)/2+sag;
+  const pth=()=>{ gfx.beginPath(); gfx.moveTo(ax,ay); gfx.quadraticCurveTo(mx,my,bx,by); };
+  gfx.lineCap='round'; pth(); gfx.lineWidth=10; gfx.strokeStyle=OUT; gfx.stroke();
+  pth(); gfx.lineWidth=6; gfx.strokeStyle='#f4f0e6'; gfx.stroke();
+  gfx.setLineDash([7,7]); gfx.lineDashOffset=-t*20; pth(); gfx.strokeStyle='#d8323a'; gfx.stroke();
+  gfx.lineDashOffset=-t*20+7; gfx.setLineDash([7,21]); pth(); gfx.strokeStyle='#3c6cc8'; gfx.stroke(); gfx.setLineDash([]);
+  for(const [x,y] of [[ax,ay],[bx,by]]) { EO(x,y,7,7,'#d8323a'); E(x-2,y-2,3,2,'#f4f0e6'); } };
+B2_TOMBO_ANIM.nara2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),N=ST.unit(pt),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt);
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const fr=F.x+F.w/2,nb=cl(F.base+8,220,312),nx=cl(fr+110,140,450),tx=Math.min(nx+115,552);
+  const land={x:fr-12,b:F.base-F.h*.18};   // Tom's cx at the hit is land.x+30: smacked into its right side
+  const P={walk:650,grab:750,tug:900,tline:1500,yank:2350,fly:2550,hit:3000,slide:3150,stand:3600,steal:3300,apply:3700,win:3750,home:4450,end:5200};
+  const tug=ms=>ms>P.tug&&ms<P.yank?Math.sin((ms-P.tug)/170)*6:0;          // the back-and-forth
+  const sT={x:T.x,b:T.base,f:tsp.idle,rot:0},sN={x:N.x,b:N.base,f:nsp.idle,rot:0};
+  const nR=k=>nsp[k]?mirrorRowsCached(nsp,k):nsp.flip;
+  // Tom: to his end of the rope (facing left), leans back politely, gets yanked over Nara into the monster, slides down.
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=nb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,nb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.yank) { x=tx+4+tug(ms); rot=.1; f=sp.act; }
+    else if(ms<P.fly) { const k=seg(ms,P.yank,P.fly); x=tx-k*14; rot=lerp(.1,-.25,k); f=sp.expr; }
+    else if(ms<P.hit) { const k=seg(ms,P.fly,P.hit); x=lerp(tx-14,land.x+30,k); y=lerp(nb,land.b,k)-Math.sin(k*Math.PI)*95; rot=-k*Math.PI*2-.4*k; f=sp.celeb; }
+    else if(ms<P.stand) { const k=seg(ms,P.slide,P.stand); x=land.x+30+k*8; y=lerp(land.b,nb,ez(k)); rot=lerp(-.4,0,k); f=sp.kneel||sp.idle; }
+    else if(ms<P.home) { x=land.x+38; y=nb; f=ms>P.win+200?sp.flip:sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(land.x+38,c.origX,k); y=lerp(nb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; sT.rot=rot; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.fly&&ms<P.stand}; });
+  // Nara: trots to her spot, turns to face Tom, chomps the rope, shakes and growls, the big yank, then the victory prance.
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nx,y=nb,f=sp.flip,rot=0;
+    if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,nx,k); y=lerp(c.origBase,nb,k)-Math.abs(Math.sin(c.t*16))*4; f=runFr(sp,c.t,-1); }
+    else if(ms<P.yank) { x=nx-2+tug(ms)*.5; rot=ms>P.tug?Math.sin(ms/45)*.09:0; f=nR('aim'); }
+    else if(ms<P.hit) { const k=seg(ms,P.yank,P.yank+200); const back=1-ez(seg(ms,P.fly+100,P.hit)); x=nx-ez(k)*16*back; y=nb+ez(k)*3*back; rot=-.14*ez(k)*back; f=nR('wind'); }
+    else if(ms<P.win) { f=sp.flip; }
+    else if(ms<P.home) { const k=seg(ms,P.win,P.home); x=nx; y=nb-Math.abs(Math.sin(k*Math.PI*3))*14; f=sp.celebFlip||sp.flip; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(nx,c.origX,k); y=lerp(nb,c.origBase,k)-(k<1?Math.abs(Math.sin(c.t*16))*4:0); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; sN.rot=rot; return {cx:x,base:y,frame:f,rot}; });
+  const mouth=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,1); return {x:h.x+4,y:h.y-4}; };
+  const tomHand=()=>{ const H=TH,r=sT.rot,dx=-TH*.22,dy=-H*.52; return {x:sT.x+dx*Math.cos(r)-dy*Math.sin(r),y:sT.b+dx*Math.sin(r)+dy*Math.cos(r)}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the rope: taut while they tug, trailing behind Tom in flight, dropped at Nara's feet after
+    if(ms>P.grab&&ms<P.win) { const m=mouth(),h=tomHand(),taut=ms>P.tug&&ms<P.hit;
+      rope(m.x,m.y,h.x,h.y,taut?6+Math.sin(ms/60)*2:28,ms/1000); }
+    else if(ms>=P.win&&ms<P.home) { const m=mouth(); rope(m.x,m.y,m.x+30,nb-4,10,0); }
+    if(ms>P.grab&&ms<P.grab+300) { const m=mouth(),k=seg(ms,P.grab,P.grab+300); gfx.globalAlpha=1-k; ring(m.x,m.y,10+k*20,8+k*14,3,CREAM); gfx.globalAlpha=1; }
+    // strain lines while tugging
+    if(ms>P.tug&&ms<P.yank) { gfx.globalAlpha=.85; for(let j=0;j<3;j++) { const ox=sN.x-NH*.42-4-j*7,oy=sN.b-NH*.55+j*9+Math.sin(ms/50+j)*2; Ln(ox,oy,ox-10,oy,3,CREAM); } gfx.globalAlpha=1; }
+    // squash the monster for a moment on the hit
+    if(ms>P.hit&&ms<P.hit+260) { tgt.spin=0; tgt.ox=-10*Math.sin(seg(ms,P.hit,P.hit+260)*Math.PI); tgt.fsc=.86; tgt.oy=F.h/2*.14; tgt.spinAt=performance.now(); }
+    else if(tgt.fsc) { tgt.fsc=0; tgt.oy=0; tgt.ox=0; }
+    // a speed trail behind Tom in flight
+    if(ms>P.fly&&ms<P.hit) { const k=seg(ms,P.fly,P.hit); for(let j=1;j<5;j++) { gfx.globalAlpha=.5-j*.1; const kk=Math.max(0,k-j*.05),x=lerp(tx-14,land.x+30,kk),y=lerp(nb,land.b,kk)-Math.sin(kk*Math.PI)*95-TH*.5; E(x,y,10-j,10-j,CREAM); } gfx.globalAlpha=1; }
+  }});
+  // Its buffs: three sparkles fly from the monster to Nara.
+  const steal=()=>{ for(let j=0;j<3;j++) ST.fly((x,y)=>{ star(x,y,7,j%2?'#aef0ff':GOLD); },F.x-10+j*10,F.top+10,nx,nb-NH-6,.5,40,j*.12); };
+  ST.play(E2,[
+    [0,()=>{ setMessage('TOMBO! Tug of war. Tom versus Nara.'); B2.aim=null; S('click'); }],
+    [P.grab,()=>{ S('crunch'); word('CHOMP',nx,nb-NH-30,CREAM,3,.6); }],
+    [P.tug,()=>{ say('nara','tombo2'); S('bark'); word('GRRRR!',nx-10,nb-NH-40,PINK,4,1); setMessage('Nara growls and shakes. Tom pulls back politely.'); }],
+    [P.tline,()=>{ say('tom','tombonara2'); }],
+    [P.yank,()=>{ S('whoosh'); word('YANK!',(nx+tx)/2,nb-NH-60,GOLD,5,.8); setMessage('Nara pulls with all forty pounds.'); }],
+    [P.fly,()=>{ S('slideWhistle'); }],
+    [P.hit,()=>{ S('thud'); S('bonk'); battle.shakeEnemy=.8; battle.flashEnemy=.3; ST.jolt(tgt,.8);
+      scene('tb_rings',.7,{x:land.x,y:land.b-TH*.5,r:80,c:CREAM,w:4}); scene('dust',.6,{x:F.x,y:F.base,n:8,sp:30,up:10});
+      word('THWUMP!',F.x,Math.max(64,F.top-90),GOLD,6,.75); landHit(100); }],
+    ['hf',P.hit],
+    [P.hit+400,'Tom is still holding the rope.'],
+    [P.steal,()=>{ steal(); S('pickup'); }],
+    [P.apply,()=>{ E2.apply(); }],
+    [P.win,()=>{ S('bark'); S('cheer'); word('WINNER!',nx+30,Math.max(64,nb-NH-70),GOLD,4,1); setMessage('Nara wins. She takes its buffs, too.'); }],
+    [P.end,'end',()=>{ if(tgt.fsc) { tgt.fsc=0; tgt.oy=0; tgt.ox=0; } return (E2.result||'')+' Nara is very proud. Tom says he let her win.'; }]]);
+};
+
+// ---------- Pick the Rhubarb (Tom + Deedee, tier 2) ----------
+// Deedee puts Tom to work in her garden. He pulls a giant rhubarb stalk; it will not come out. Deedee grabs him from
+// behind and they both pull, tug-of-war style. The ROOT is the monster: a giant rhubarb root bursts out of the ground
+// under them and every monster pops up, roots and all. Tom and Deedee land on their bottoms; Deedee bakes the stalk
+// into Warm Crusts and two crust tins land on the tray. Effects: a Sparkle hit on every enemy (Shushed 2), the party
+// loses its debuffs and gets COOL +25% for 3 turns, 2 Warm Crusts.
+const LEAF='#4f9a3a',LEAF2='#2f6a2a',STALK='#d8325a',STALK2='#ff7a9a',DIRT='#7a5232',DIRT2='#5a3a22',ROOT='#a8784a',ROOT2='#7a5232';
+// A rhubarb stalk from its base (bx,by) through the hand (hx,hy) to a big leaf past it. s: leaf size.
+const rhubarb=(bx,by,hx,hy,s=1,t=0)=>{ const dx=hx-bx,dy=hy-by,L=Math.hypot(dx,dy)||1,tx=hx+dx/L*30*s,ty=hy+dy/L*30*s;
+  const pth=()=>{ gfx.beginPath(); gfx.moveTo(bx,by); gfx.quadraticCurveTo(hx,hy,tx,ty); };
+  gfx.lineCap='round'; pth(); gfx.lineWidth=13*s; gfx.strokeStyle=OUT; gfx.stroke(); pth(); gfx.lineWidth=9*s; gfx.strokeStyle=STALK; gfx.stroke();
+  gfx.save(); gfx.translate(2*s,-1*s); pth(); gfx.lineWidth=3*s; gfx.strokeStyle=STALK2; gfx.stroke(); gfx.restore();
+  const a=Math.atan2(ty-hy,tx-hx); gfx.save(); gfx.translate(tx,ty); gfx.rotate(a+Math.sin(t*7)*.08);
+  for(const [ox,oy,rx,ry] of [[18,0,26,20],[8,-14,16,12],[8,14,16,12],[34,-8,12,10],[34,8,12,10]]) E(ox*s,oy*s,(rx+2)*s,(ry+2)*s,OUT);
+  for(const [ox,oy,rx,ry] of [[18,0,26,20],[8,-14,16,12],[8,14,16,12],[34,-8,12,10],[34,8,12,10]]) E(ox*s,oy*s,rx*s,ry*s,LEAF);
+  E(14*s,-6*s,12*s,6*s,'#7ac45a'); Ln(0,0,42*s,0,2*s,LEAF2); for(const k of [-1,1]) { Ln(12*s,0,24*s,k*12*s,1.5*s,LEAF2); Ln(26*s,0,36*s,k*10*s,1.5*s,LEAF2); }
+  gfx.restore(); };
+// A few dangling root hairs from (x,y), length l, swaying with t.
+const rootHairs=(x,y,w,l,t)=>{ for(let j=0;j<5;j++) { const ox=x+(j-2)*w*.2,sw=Math.sin(t*8+j)*4,len=l*(.6+(j%3)*.25);
+  for(const [c,lw] of [[OUT,5],[ROOT,2.6]]) { gfx.strokeStyle=c; gfx.lineWidth=lw; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(ox,y); gfx.quadraticCurveTo(ox+sw+(j-2)*3,y+len*.5,ox+sw*1.6+(j-2)*5,y+len); gfx.stroke(); } } };
+// A pie tin with a golden lattice crust.
+const crustTin=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); EO(0,4,16,6,'#b8bec8'); E(0,4,13,4.4,'#8a909c');
+  EO(0,0,14,6,'#e8b060'); for(let j=-1;j<=1;j++) { Ln(j*7,-4,j*7,4,2,'#c07a30'); Ln(-11,j*2.6,11,j*2.6,1.6,'#c07a30'); } E(-5,-2,4,1.4,'#ffe0a0'); gfx.restore(); };
+B2_TOMBO_ANIM.deedee2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),D=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
+  const gb=cl(GR.base+10,250,306),sx=cl(GR.x1+64,150,T.x-110),tx=sx+24,dx=tx+44,dsup=Math.min(tx+84,546);   // stalk, Tom, Deedee
+  const tray={x:tx+70,y:Math.min(gb+12,314)};
+  const P={walk:700,point:800,grab:1000,stuck:1400,tline:1500,step:1900,behind:2200,dline:2250,heave:2500,ho:2950,rumble:2700,yank:3400,sit:3700,
+    up:4300,bake:4450,tin1:4800,tin2:4950,apply:5200,home:5500,end:6300};
+  const tug=ms=>ms>P.grab&&ms<P.yank?(ms<P.behind?Math.sin((ms-P.grab)/90)*2:Math.sin((ms-P.behind)/150)*6):0;
+  const lean=ms=>ms>P.grab&&ms<P.yank?(ms<P.behind?.1:.16):0;
+  const sT={x:T.x,b:T.base,rot:0},sD={x:D.x,b:D.base,f:dsp.idle};
+  // Tom: walks to the stalk (facing left), grabs it and pulls, Deedee joins, the yank throws him back onto his bottom.
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=gb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.yank) { f=ms>P.grab?sp.act:sp.idle; x=tx+tug(ms); rot=lean(ms); if(ms>P.stuck&&ms<P.stuck+300) f=sp.expr; }
+    else if(ms<P.sit) { const k=seg(ms,P.yank,P.sit); x=tx+ez(k)*34; y=gb-Math.sin(k*Math.PI)*22; rot=lerp(.16,.5,k); f=sp.expr; }
+    else if(ms<P.up) { x=tx+34; y=gb+4; rot=ms<P.sit+120?.5*(1-seg(ms,P.sit,P.sit+120)):0; f=sp.kneel||sp.idle; }
+    else if(ms<P.home) { x=tx+34; f=ms>P.tin2&&ms<P.apply+300?sp.celeb:sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx+34,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.rot=rot; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.yank&&ms<P.sit}; });
+  // Deedee: walks in, points at the garden, hands on hips, steps in behind Tom, pulls, lands sitting, bakes, tosses tins.
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dsup,y=gb,f=sp.idle,rot=0;
+    if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,dsup,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.step) { f=ms<P.point+500?(sp.spread||sp.idle):(sp.hip||sp.idle); }
+    else if(ms<P.behind) { const k=ez(seg(ms,P.step,P.behind)); x=lerp(dsup,dx,k); y=gb-Math.sin(k*Math.PI)*6; f=runFr(sp,c.t,-1); }
+    else if(ms<P.yank) { x=dx+tug(ms)*1.1; rot=lean(ms); f=sp.act||sp.idle; }
+    else if(ms<P.sit) { const k=seg(ms,P.yank,P.sit); x=dx+ez(k)*58; y=gb-Math.sin(k*Math.PI)*18; rot=lerp(.16,.4,k); f=sp.act||sp.idle; }
+    else if(ms<P.up) { x=dx+58; y=gb+2; f=sp.sit||sp.kneel||sp.idle; }
+    else if(ms<P.home) { x=dx+58; f=ms<P.bake+250?(sp.celeb||sp.idle):(ms>P.tin1-200&&ms<P.tin2+150?(Math.floor((ms-P.tin1+200)/150)%2?sp.throw:sp.wind)||sp.idle:(ms>P.apply?(sp.celeb||sp.idle):(sp.clap||sp.idle))); }
+    else { const k=ez(seg(ms,P.home+60,P.home+700)); x=lerp(dx+58,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sD.x=x; sD.b=y; sD.f=f; return {cx:x,base:y,frame:f,rot}; });
+  const tomHand=()=>{ const r=sT.rot,ddx=-TH*.27,ddy=-TH*.5; return {x:sT.x+ddx*Math.cos(r)-ddy*Math.sin(r),y:sT.b+ddx*Math.sin(r)+ddy*Math.cos(r)}; };
+  // When each monster pops (nearest the stalk first) and comes back down.
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  order.forEach((o,i)=>{ o.t=P.yank+60+i*110; });
+  const popK=(o,ms)=>seg(ms,o.t,o.t+900),popY=k=>-Math.sin(k*Math.PI)*58;
+  const gardenK=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.home+500)));
+  const rootX0=Math.max(8,GR.x0-50),rootY=Math.max(gb,GR.base)+6;
+  // Back layer: the garden bed (soil, furrows, little sprouts) and, after the yank, the giant root humping up under them.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=gardenK(ms); if(k<=0) return; gfx.globalAlpha=k;
+    const x0=rootX0-20,x1=Math.min(dsup+40,576),y0=gb-8;
+    R(x0,y0,x1-x0,22,DIRT); R(x0,y0,x1-x0,3,'#9a6a42'); for(let x=x0+6;x<x1;x+=18) { R(x,y0+8,10,2,DIRT2); R(x+8,y0+15,8,2,DIRT2); }
+    for(let x=x0+30;x<x1-20;x+=58) if(Math.abs(x-sx)>30) { const sw=Math.sin(ms/400+x)*.1; gfx.save(); gfx.translate(x,y0); gfx.rotate(sw); EO(-5,-6,6,4,LEAF); EO(5,-8,6,4,LEAF); Ln(0,0,0,-6,2,LEAF2); gfx.restore(); }
+    // the stalk in the ground before the yank
+    if(ms<P.yank) { const h=ms>P.grab?tomHand():{x:sx+4,y:gb-58}; rhubarb(sx,gb,h.x,h.y,1.15,ms/1000);
+      if(ms>P.rumble) for(let j=0;j<6;j++) { const q=(ms/220+j/6)%1; gfx.globalAlpha=k*(1-q); E(rootX0+30+j*((sx-rootX0)/6),rootY-6-q*14,2.5,2,DIRT2); } gfx.globalAlpha=k; }
+    // the root: a fat gnarled tuber running from the stalk's hole under every monster, humping up out of the dirt
+    if(ms>P.yank-40&&ms<P.up+400) { const kk=ez(seg(ms,P.yank-40,P.yank+260)),hump=kk*(1-ez(seg(ms,P.up,P.up+400))*.8);
+      gfx.globalAlpha=k*Math.min(1,kk*3); const cx=(sx+rootX0)/2,cy=rootY+30-hump*86;
+      const pth=()=>{ gfx.beginPath(); gfx.moveTo(sx,gb+2); gfx.quadraticCurveTo(cx,cy,rootX0,rootY+4); };
+      gfx.lineCap='round'; pth(); gfx.lineWidth=26; gfx.strokeStyle=OUT; gfx.stroke(); pth(); gfx.lineWidth=20; gfx.strokeStyle=ROOT; gfx.stroke();
+      gfx.save(); gfx.translate(0,-5); pth(); gfx.lineWidth=5; gfx.strokeStyle='#c89a62'; gfx.stroke(); gfx.restore();
+      for(let j=1;j<7;j++) { const q=j/7,bx=(1-q)*(1-q)*sx+2*(1-q)*q*cx+q*q*rootX0,by=(1-q)*(1-q)*(gb+2)+2*(1-q)*q*cy+q*q*(rootY+4);
+        Ln(bx-4,by-2,bx+4,by+2,2,ROOT2); rootHairs(bx,by+8,20,14+(j%2)*8,ms/1000+j); }
+      gfx.globalAlpha=k; }
+    gfx.globalAlpha=1; }});
+  // Front layer: the stalk in Tom's hands after the yank (roots dangling), the oven puff, the tray and the tins,
+  // the dangling roots under every popped monster.
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    if(ms>=P.yank&&ms<P.bake) { const h=tomHand(); rhubarb(h.x+20,h.y+30,h.x,h.y,1.15,ms/1000); rootHairs(h.x+20,h.y+32,14,14,ms/1000); }
+    for(const o of order) { const k=popK(o,ms),f=o.f;
+      if(k>0&&k<1) { f.oy=popY(k); f.ox=0; f.spin=Math.sin(k*Math.PI*3)*.12; f.spinAt=performance.now(); rootHairs(o.q.x,o.q.base+f.oy-2,o.q.w*.7,22,ms/1000); }
+      else if(k>=1&&!o.done) { o.done=true; f.oy=0; f.ox=0; f.spin=0; } }
+    if(ms>P.bake&&ms<P.bake+700) { const k=seg(ms,P.bake,P.bake+700),bx=sD.x-6,by=sD.b-DH*.9;
+      gfx.globalAlpha=1-k; for(let j=0;j<7;j++) { const a=j/7*Math.PI*2; E(bx+Math.cos(a)*30*k,by+Math.sin(a)*18*k-k*16,10+k*8,8+k*6,j%2?'#f4f0e6':'#e8dcc8'); } gfx.globalAlpha=1; }
+    const tk=ms<P.home?ez(seg(ms,P.tin1-300,P.tin1)):1-ez(seg(ms,P.home,P.home+400));
+    if(tk>0) { gfx.globalAlpha=tk; RO(tray.x-32,tray.y-4,64,8,'#c9ced8'); R(tray.x-30,tray.y-4,60,2,'#eef0f4');
+      if(ms>P.tin1+450) crustTin(tray.x-14,tray.y-8,1); if(ms>P.tin2+450) crustTin(tray.x+14,tray.y-8,1);
+      if(ms>P.tin2+450) for(let j=0;j<3;j++) { const q=(ms/700+j/3)%1; gfx.globalAlpha=tk*(1-q)*.7; Ln(tray.x-20+j*20,tray.y-18-q*16,tray.x-18+j*20+Math.sin(q*6)*3,tray.y-26-q*16,2,'#ffffff'); }
+      gfx.globalAlpha=1; }
+  }});
+  const pop=(o,i)=>{ S('pop'); S('bonk'); ST.jolt(o.f,.6); battle.shakeEnemy=.6;
+    scene('dust',.7,{x:o.q.x,y:o.q.base,n:9,sp:34,up:16});
+    for(let j=0;j<3;j++) ST.fly((x,y)=>{ EO(x,y,4,3,DIRT); },o.q.x+(j-1)*10,o.q.base,o.q.x+(j-1)*46,o.q.base+6,.55,50+j*14);
+    landHit(100/order.length); };
+  const tin=(x1)=>{ const h=handPt(dsp,dsp.throw||dsp.idle,sD.x,sD.b,-1); ST.fly((x,y)=>crustTin(x,y,1.2),h.x,h.y,x1,tray.y-8,.45,46,0,{spin:.5}); S('whoosh'); };
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Deedee puts Tom to work in her garden.'); B2.aim=null; S('click'); }],
+    [P.point,()=>{ word('THAT ONE',sx+10,gb-110,CREAM,3,.8); S('pickup'); }],
+    [P.grab,()=>{ S('creak'); setMessage('Tom grabs the rhubarb and pulls. Nothing.'); }],
+    [P.stuck,()=>{ word('STUCK!',sx+6,gb-118,RED,4,.8); S('boing'); }],
+    [P.tline,()=>{ say('tom','tombodeedee2'); }],
+    [P.dline,()=>{ say('deedee','tombo2'); setMessage('Deedee grabs Tom from behind. They BOTH pull.'); }],
+    [P.heave,()=>{ word('HEAVE!',dx-10,gb-DH-36,GOLD,4,.6); S('squeak'); }],
+    [P.rumble,()=>{ S('rumble'); battle.shakeEnemy=.3; for(const f of list) ST.jolt(f,.2); }],
+    [P.ho,()=>{ word('HO!!',dx+10,gb-DH-40,GOLD,5,.6); S('squeak'); battle.shakeEnemy=.45; }],
+    [P.yank,()=>{ S('crash'); S('whoosh'); word('ROOTS AND ALL!',cl((sx+rootX0)/2,150,420),Math.max(70,GR.top-70),GOLD,4,1.2);
+      setMessage('The root is the monster! A giant rhubarb root bursts out of the ground.'); }],
+    [P.sit,()=>{ S('thud'); scene('dust',.5,{x:tx+34,y:gb+4,n:6,sp:18,up:8}); scene('dust',.5,{x:dx+58,y:gb+2,n:6,sp:18,up:8}); }],
+    [P.up,()=>{ setMessage('Deedee takes the stalk. She knows exactly what to do with it.'); }],
+    [P.bake,()=>{ S('flame'); word('BAKE!',sD.x-10,Math.max(70,gb-DH-46),CREAM,4,.8); }],
+    [P.tin1,()=>tin(tray.x-14)],
+    [P.tin1+450,()=>{ S('ting'); }],
+    [P.tin2,()=>tin(tray.x+14)],
+    [P.tin2+450,()=>{ S('ting'); scene('tb_rings',.6,{x:tray.x,y:tray.y-8,r:40,c:GOLD,w:3}); }],
+    [P.apply,()=>{ E2.apply(); S('heal');
+      for(const p of party) { if(p===tom) scene('glow',.9,{x:sT.x,y:sT.b-TH*.5,rx:38,ry:52,c:'#aef0ff',a:.35}); else if(p===pt) scene('glow',.9,{x:sD.x,y:sD.b-DH*.5,rx:38,ry:52,c:'#aef0ff',a:.35}); else glowOn(p); } }],
+  ];
+  order.forEach((o,i)=>steps.push([o.t+150,()=>pop(o,i)]));
+  steps.push(['hf',order.length?order[0].t+150:P.yank+200]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.oy=0; o.f.ox=0; o.f.spin=0; } return (E2.result||'')+' Rhubarb crust for everybody. Tom did most of the pulling, he says.'; }]);
+  ST.play(E2,steps);
+};
+
+// ---------- Seat 1A Stowaway (Tom + Rose, tier 2) ----------
+// Rose dives into Tom's carry-on. He wheels it right up to the monsters, very casually, a blanket over a lump with two
+// little sneakers sticking out. The monsters lean in. BOO!! Rose pops out with Lamby held high and blows a giant
+// raspberry; every monster jumps out of its skin and goofs. She snatches their buffs, then rides the carry-on home.
+// Effects: a Cozy hit on every enemy; they are Goofed and lose a buff each; Tom and Rose are Evasive for 2 turns.
+const CASE='#2f5a8a',CASE2='#4a7cb0',CASE3='#1f3e64',BLANK='#ff9ac0',BLANK2='#e86a9a',SHOE='#ff6aa0';
+// The carry-on: body bottom-centre at (x,by); the handle runs from its top right corner to (hx,hy). lump: 0..1 blanket
+// and sneakers on top; wig: the lump's wiggle.
+const carryOn=(x,by,hx,hy,lump,wig,t)=>{ const w=64,h=46,b=by-6,top=b-h;
+  if(hx!=null) { Ln(x+w/2-6,top+4,hx,hy,6,OUT); Ln(x+w/2-6,top+4,hx,hy,3,'#9aa1ae'); RO(hx-5,hy-3,10,6,'#3a3e46'); }
+  for(const wx of [x-w/2+10,x+w/2-10]) { const sp=t*14; EO(wx,b+2,5,5,'#2a2c32'); Ln(wx,b+2,wx+Math.cos(sp)*3,b+2+Math.sin(sp)*3,1.5,'#8a8e98'); }
+  RO(x-w/2,top,w,h,CASE); R(x-w/2,top,w,4,CASE2); for(const dx of [-16,0,16]) R(x+dx-1,top+6,2,h-10,CASE3);
+  RO(x-12,top-6,24,5,'#3a3e46'); RO(x+w/2-20,top+12,10,14,'#f4e6c8'); label('1A',x+w/2-15,top+16,'#d8323a',1);
+  if(lump<=0) return;
+  gfx.save(); gfx.globalAlpha=lump; const ly=top-2,s=1+Math.sin(wig)*.06;
+  // two sneakers sticking out of the left end (toward the monsters)
+  for(const [dx,dy] of [[0,-6],[-6,6]]) { const sx=x-w/2-8+dx+Math.sin(wig*1.3)*3,sy=ly-8+dy; EO(sx,sy,10,6,SHOE); R(sx-9,sy+3,18,3,'#ffffff'); E(sx-4,sy-2,3,2,'#ffffff'); }
+  gfx.save(); gfx.translate(x,ly); gfx.scale(1,s); EO(0,-14,w/2+2,18,BLANK); for(let j=-2;j<=2;j++) { R(j*12-1,-30,2,18,BLANK2); }
+  R(-w/2,-6,w+4,4,BLANK2); E(-10,-22,12,5,'#ffc8dc'); gfx.restore(); gfx.restore(); };
+B2_TOMBO_ANIM.rose2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),Ro=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
+  const tsp=BATTLE_SPRITES.tom,rsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,RH=rsp.idle.length*rsp.scale,RW=rsp.idle[0].length*rsp.scale;
+  const gb=cl(GR.base+8,240,310),cx=cl(GR.x1+70,140,T.x-120),cx0=T.x-58,top=b=>b-52;   // the case stops at cx; starts left of Tom
+  const P={run:550,hop:800,roll0:950,roll1:2050,tline:2150,lean0:2450,lean1:3250,wig:2900,boo:3350,apex:3580,land:3820,rasp:3950,rasp1:4450,
+    steal:4500,apply:4850,home0:5100,home1:5900,end:6500};
+  const caseAt=ms=>ms<P.roll0?{x:cx0,b:T.base}:(ms<P.roll1?(k=>({x:lerp(cx0,cx,k),b:lerp(T.base,gb,k)}))(ez(seg(ms,P.roll0,P.roll1))):
+    (ms<P.home0?{x:cx,b:gb}:(k=>({x:lerp(cx,cx0,k),b:lerp(gb,T.base,k)}))(ez(seg(ms,P.home0,P.home1)))));
+  const rolling=ms=>(ms>P.roll0&&ms<P.roll1)||(ms>P.home0&&ms<P.home1);
+  const sT={x:T.x,b:T.base},sR={x:Ro.x,b:Ro.base,f:rsp.idle,hide:false};
+  // Tom: holds the handle; wheels the case to the monsters (whistling, very casual), and back home with Rose on top.
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp,C=caseAt(ms); let x=C.x+58,y=C.b,f=sp.idle;
+    if(ms<P.roll0) { x=c.origX; y=c.origBase; }
+    else if(ms<P.roll1) f=runFr(sp,c.t*.7,-1);
+    else if(ms<P.home0) f=ms>P.boo&&ms<P.boo+500?sp.expr:(ms>P.land+200?sp.celeb:sp.idle);
+    else if(ms<P.home1) { f=runFr(sp,c.t*.7,1); }
+    else { x=c.origX; y=c.origBase; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  const hand=()=>({x:sT.x-TH*.27,y:sT.b-TH*.5});
+  // Rose: runs to the case, dives in (hidden), BOO!! pops out sky-high with Lamby, lands on the case, raspberry, rides home.
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,C=caseAt(ms); let x=C.x,y=top(C.b),f=sp.celeb,hide=false;
+    if(ms<P.run) { const k=ez(ms/P.run); x=lerp(c.origX,cx0+30,k); y=lerp(c.origBase,T.base,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.hop) { const k=seg(ms,P.run,P.hop); x=lerp(cx0+30,cx0,k); y=lerp(T.base,top(T.base),k)-Math.sin(k*Math.PI)*50; f=sp.celeb; }
+    else if(ms<P.boo) { hide=true; }
+    else if(ms<P.land) { const k=seg(ms,P.boo,P.land); y=top(C.b)-Math.sin(k*Math.PI)*100; f=sp.celeb; }
+    else if(ms<P.home0) { f=ms>P.rasp&&ms<P.rasp1?(sp.expr||sp.act):(ms>P.steal?sp.celeb:sp.idle); }
+    else if(ms<P.home1) { y-=Math.abs(Math.sin(ms/110))*4; f=sp.celebFlip||sp.flip; }
+    else { const k=ez(seg(ms,P.home1,P.home1+500)); x=lerp(C.x,c.origX,k); y=lerp(top(C.b),c.origBase,k)-Math.sin(k*Math.PI)*40; f=k<1?sp.celeb:sp.idle; }
+    sR.x=x; sR.b=y; sR.f=f; sR.hide=hide; return {cx:x,base:y,frame:f,hide,noShadow:ms>P.run&&ms<P.home1+400}; });
+  const mouth=()=>{ const sc=rsp.scale,m=rsp.mouth||{col:9,row:16}; return {x:sR.x-RW/2+m.col*sc,y:sR.b-RH+m.row*sc}; };
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  order.forEach((o,i)=>{ o.t=P.boo+90+i*70; });
+  const caseK=ms=>ez(seg(ms,0,300))*(1-ez(seg(ms,P.home1,P.home1+400)));
+  // The carry-on (behind the bodies, so Rose stands on it) ...
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=caseK(ms); if(k<=0) return; const C=caseAt(ms),h=hand();
+    const lump=ms<P.hop?0:(ms<P.boo?1:0),wig=ms>P.wig&&ms<P.boo?ms/45:(ms>P.lean0?ms/300:0);
+    gfx.globalAlpha=k; carryOn(C.x,C.b,ms>P.roll0-100&&ms<P.home1?h.x:null,h.y,lump,wig,rolling(ms)?ms/1000:0); gfx.globalAlpha=1; }});
+  // ... and in front: Lamby, the raspberry, the leaning and goofing monsters, the dizzy stars.
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the hop in: a little puff where she vanished
+    if(ms>P.hop&&ms<P.hop+400) { const k=seg(ms,P.hop,P.hop+400); gfx.globalAlpha=1-k; for(let j=0;j<5;j++) { const a=j/5*Math.PI*2; E(cx0+Math.cos(a)*20*k,top(T.base)-14+Math.sin(a)*10*k,6,5,CREAM); } gfx.globalAlpha=1; }
+    // Lamby, held high once she pops out
+    if(ms>P.boo&&ms<P.home1+400) { const lx=sR.x-RW*.42,ly=sR.b-RH-6,w=Math.sin(ms/120)*.12;
+      gfx.save(); gfx.translate(lx,ly); gfx.rotate(-.2+w); gfx.scale(.85,.85); PROP2.lamby({flip:false},0); gfx.restore(); }
+    // the raspberry: a fat tongue and a spray of pink droplets across to the monsters
+    if(ms>P.rasp&&ms<P.rasp1) { const m=mouth(),k=seg(ms,P.rasp,P.rasp1),wob=Math.sin(ms/30)*2;
+      EO(m.x-5,m.y+2+wob*.5,6,4,'#ff6a8a'); Ln(m.x-8,m.y+2,m.x-2,m.y+2,1.2,'#d64a74');
+      for(let j=0;j<14;j++) { const q=(k*1.6+j/14)%1,yy=m.y-6+Math.sin(j*2.1)*30*q+wob,xx=lerp(m.x-10,GR.x0+20,q); gfx.globalAlpha=1-q*.6; EO(xx,yy,3+q*4,2+q*3,j%3?'#ff8aa8':'#ffd0dc'); }
+      gfx.globalAlpha=1; }
+    for(const o of order) { const f=o.f,q=o.q;
+      if(ms>P.lean0&&ms<o.t) { const k=ez(seg(ms,P.lean0,P.lean1)); f.ox=k*14; f.oy=k*2; f.spin=0; f.spinAt=performance.now(); }
+      else if(ms>=o.t&&ms<P.end-100) { const k=seg(ms,o.t,o.t+600); f.ox=lerp(14,-16,ez(k)); f.oy=-Math.sin(k*Math.PI)*46; f.spin=k<1?-Math.sin(k*Math.PI)*.4:Math.sin(ms/160)*.08; f.spinAt=performance.now();
+        if(k>=1) for(let j=0;j<3;j++) { const a=ms/300+j*2.1; star(q.x+f.ox+Math.cos(a)*q.w*.35,q.top+4+Math.sin(a)*6,4,j%2?GOLD:'#fffbe6'); } } }
+  }});
+  const steal=()=>order.forEach((o,i)=>{ ST.fly((x,y)=>{ star(x,y,7,i%2?'#aef0ff':GOLD); },o.q.x,o.q.top+10,sR.x,sR.b-RH*.6,.5,50,i*.1); });
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Tom packs his carry-on. Rose has a plan.'); B2.aim=null; S('click'); }],
+    [P.hop,()=>{ S('pop'); }],
+    [P.roll0,()=>{ S('creak'); setMessage('Tom wheels his carry-on right up to the monsters. There is a lump under the blanket.'); }],
+    [P.tline,()=>{ say('tom','tomborose2'); }],
+    [P.lean0,()=>{ order.forEach((o,i)=>word('?',o.q.x+10,o.q.top-16,CREAM,4,.9)); setMessage('The monsters lean in. Two little sneakers wiggle.'); S('squeak'); }],
+    [P.wig,()=>{ S('giggle'); }],
+    [P.boo,()=>{ say('rose','tombo2'); S('boo'); S('boing'); battle.shakeEnemy=.6;
+      word('BOO!!',cl(cx,80,500),Math.max(66,top(gb)-RH-110),PINK,7,.95); setMessage('BOO!! Rose pops out with Lamby!');
+      ST.fly((x,y,uu)=>{ gfx.globalAlpha=1-uu; EO(x,y,26,10,BLANK); R(x-20,y-2,40,3,BLANK2); gfx.globalAlpha=1; },cx,top(gb)-14,cx+90,-30,.7,30,0,{spin:.6}); }],
+    [P.rasp,()=>{ S('raspberry'); word('PBBBT!',cl((GR.x0+GR.x1)/2,90,480),Math.max(66,GR.top-40),PINK,5,.9); setMessage('...and a GIANT raspberry.'); }],
+    [P.rasp+420,()=>{ S('raspberry'); }],
+    [P.steal,()=>{ steal(); S('pickup'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); scene('glow',.9,{x:sT.x,y:sT.b-TH*.5,rx:38,ry:52,c:'#d8f0ff',a:.35}); scene('glow',.9,{x:sR.x,y:sR.b-RH*.5,rx:28,ry:40,c:'#d8f0ff',a:.35}); }],
+    [P.home0,()=>{ S('creak'); }],
+  ];
+  order.forEach((o,i)=>steps.push([o.t,()=>{ S('bonk'); ST.jolt(o.f,.6); scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:50,c:PINK,w:3}); landHit(100/order.length); }]));
+  steps.push(['hf',order.length?order[0].t:P.boo+100]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.oy=0; o.f.ox=0; o.f.spin=0; } return (E2.result||'')+' Rose was under there the whole time.'; }]);
+  ST.play(E2,steps);
+};
+// ---------- Wing Walk (Tom + Amy, tier 2) ----------
+// The stage turns into the top of a plane over the clouds. Tom stays in his lie-flat Seat 1A, eye mask on, and holds
+// Amy's safety rope out the window. Amy sprints down the wing into the wind calling split times and kicks every monster
+// off the end. At the wingtip the rope goes taut and Tom reels her back in without sitting up. The monsters blow back in
+// at the back of the line. Effects unchanged: Kinetic hit on every enemy, back row, they lose time, PEP Up for the party.
+const SKY='#8fd0f4',SKY2='#d6efff',HULL='#eef2f6',HULL2='#c9d2e0',NAVY2='#1d3a8a',WINGC='#b8bec8',WINGC2='#8e96a4',SKINT='#e9b48a';
+B2_TOMBO_ANIM.amy2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),A=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,asp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,AH=asp.idle.length*asp.scale;
+  const others=party.filter(p=>p!==tom&&p!==pt).map(p=>ST.unit(p));
+  const fx0=cl(Math.min(T.x,A.x,...others.map(o=>o.x))-48,GR.x1+70,470);   // where the fuselage starts (the wing root)
+  const wBack=cl(Math.min(...(GR.list||[{base:200}]).map(q=>q.base))-10,120,280),wY=cl(GR.base+6,230,312),tipX=Math.max(14,Math.min(GR.x0-24,60)),rootX=fx0-14;
+  const podX=Math.min(fx0+84,500),podY=cl(Math.min(...party.map(p=>ST.unit(p).top))-6,128,190),lieSc=.72,lieB=podY-22+TH*lieSc/2;
+  // Amy's run: root, then a kick at each monster from nearest to farthest, then the wingtip.
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  const GO=1900,SPD=.42,KICK=260; let t=GO,x=rootX; const legs=[];
+  order.forEach(o=>{ const kx=Math.max(tipX+30,o.q.x+o.q.w*.42+12),d=Math.max(0,x-kx),dur=Math.max(220,d/SPD); legs.push({t0:t,t1:t+dur,x0:x,x1:kx}); t+=dur; o.t=t; o.kx=kx; legs.push({t0:t,t1:t+KICK,x0:kx,x1:kx,kick:true}); t+=KICK; x=kx; });
+  { const d=Math.max(0,x-tipX-8),dur=Math.max(200,d/SPD); legs.push({t0:t,t1:t+dur,x0:x,x1:tipX+8}); t+=dur; }
+  const P={lie:520,aline:1000,tline:1450,go:GO,tip:t,yank:t+450,land:t+1150,pr:t+1250,apply:t+300,ret:t+600,home:t+1900,end:t+2700,skyOff:t+2200};
+  P.ret1=P.ret+800;
+  const sT={x:T.x,b:T.base},sA={x:A.x,b:A.base,f:asp.idle,rot:0};
+  // Tom: walks into his pod and lies flat (head toward home), then gets up at the end.
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
+    if(ms<P.lie) { const k=ez(seg(ms,0,P.lie-40)); return {cx:lerp(c.origX,podX+8,k),base:lerp(c.origBase,podY,k)-Math.sin(k*Math.PI)*40,frame:sp.celeb,noShadow:k>.3}; }
+    if(ms<P.home) return {cx:podX+8,base:lieB,frame:sp.idle,rot:Math.PI/2,sc:lieSc,noShadow:true};
+    const k=ez(seg(ms,P.home,P.home+500)); return {cx:lerp(podX+8,c.origX,k),base:lerp(podY,c.origBase,k)-Math.sin(k*Math.PI)*40,frame:k<1?sp.celeb:sp.idle,noShadow:k<.7}; });
+  // Amy: jogs to the wing root, stretches, sprints and kicks, teeters at the tip, gets reeled back, celebrates, home.
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=rootX,y=wY,f=sp.flip||sp.idle,rot=0;
+    if(ms<700) { const k=ez(ms/700); x=lerp(c.origX,rootX,k); y=lerp(c.origBase,wY,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.go) { f=ms<1300?sp.aim:(ms<1650?sp.hip:sp.wind); if(ms>1650) x+=Math.sin(ms/40)*1.5; }
+    else if(ms<P.tip) { const L=legs.find(l=>ms<l.t1)||legs[legs.length-1],k=seg(ms,L.t0,L.t1);
+      if(L.kick) { x=L.x0; f=k<.7?sp.act:sp.wind; y-=Math.sin(k*Math.PI)*10; rot=-.08*Math.sin(k*Math.PI); }
+      else { x=lerp(L.x0,L.x1,k); f=runFr(sp,c.t*1.3,-1); y-=Math.abs(Math.sin(c.t*18))*4; rot=-.12; } }
+    else if(ms<P.yank) { x=tipX+8; f=sp.spread; rot=Math.sin(ms/55)*.22; }
+    else if(ms<P.land) { const k=seg(ms,P.yank,P.land); x=lerp(tipX+8,rootX,ez(k)); y=wY-Math.sin(k*Math.PI)*90; f=sp.spread; rot=-k*Math.PI*2; }
+    else if(ms<P.home) { x=rootX; f=sp.celeb; if(ms<P.land+600) y-=Math.abs(Math.sin(seg(ms,P.land,P.land+600)*Math.PI*2))*14; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(rootX,c.origX,k); y=lerp(wY,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sA.x=x; sA.b=y; sA.f=f; sA.rot=rot; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.yank&&ms<P.land}; });
+  const skyK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.skyOff,P.end-80)));
+  // Behind everyone: sky, streaming clouds, the fuselage with its windows, the wing under the monsters, the pod's bed.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=skyK(ms); if(k<=0) return; gfx.globalAlpha=k;
+    const g=gfx.createLinearGradient(0,0,0,324); g.addColorStop(0,SKY); g.addColorStop(1,SKY2); gfx.fillStyle=g; gfx.fillRect(0,0,576,324);
+    for(let j=0;j<9;j++) { const yy=30+j*31,sp=.5+(j%3)*.35,xx=((j*97+ms*sp)%760)-120; E(xx,yy,34+(j%2)*18,9+(j%3)*3,'#ffffff'); E(xx-24,yy+3,20,7,'#ffffff'); }
+    gfx.globalAlpha=k*.6; for(let j=0;j<12;j++) { const yy=20+j*25,xx=((j*61+ms*1.4)%700)-80; Ln(xx,yy,xx+36,yy,2,'#ffffff'); } gfx.globalAlpha=k;
+    // fuselage
+    R(fx0-4,52,600-fx0,272,OUT); R(fx0,56,600-fx0,268,HULL); E(fx0+2,190,10,134,HULL); R(fx0,214,600-fx0,8,NAVY2); R(fx0,226,600-fx0,3,'#d8323a');
+    for(let wx=fx0+26;wx<576;wx+=42) { if(wx>podX-90&&wx<podX+70) continue; RO(wx,96,22,30,'#3a5a8a'); R(wx+3,99,7,24,'#9fd0f0'); }
+    // the big window of Seat 1A, the cabin behind it
+    RO(podX-66,podY-82,132,90,'#3a5a8a'); R(podX-62,podY-78,124,82,'#f4ecd8'); R(podX-62,podY-78,124,10,'#e2d6bc'); R(podX-62,podY-4,124,8,'#c9b896');
+    if(podY-82>84) label('GROUP ZERO',Math.min(520,fx0+120),70,NAVY2,2);
+    // the wing: a wide grey deck under every monster, root at the fuselage, winglet at the tip
+    const wB=wBack,F0=wY+16;
+    gfx.fillStyle=OUT; gfx.beginPath(); gfx.moveTo(tipX-4,wY+10); gfx.lineTo(tipX+46,wB-4); gfx.lineTo(fx0+4,wB-14); gfx.lineTo(fx0+4,F0+4); gfx.closePath(); gfx.fill();
+    gfx.fillStyle=WINGC; gfx.beginPath(); gfx.moveTo(tipX,wY+7); gfx.lineTo(tipX+48,wB); gfx.lineTo(fx0,wB-10); gfx.lineTo(fx0,F0); gfx.closePath(); gfx.fill();
+    gfx.fillStyle=WINGC2; gfx.beginPath(); gfx.moveTo(tipX,wY+7); gfx.lineTo(fx0,F0); gfx.lineTo(fx0,F0-5); gfx.lineTo(tipX+6,wY+3); gfx.closePath(); gfx.fill();
+    for(let j=1;j<4;j++) { const q=j/4; Ln(lerp(tipX+48,fx0,q),lerp(wB,wB-10,q),lerp(tipX,fx0,q),lerp(wY+7,F0,q),1.5,'#a2a9b4'); }
+    RO(tipX+40,wB-40,8,40,WINGC); R(tipX+41,wB-39,3,12,'#d8323a');
+    label('NO STEP',lerp(tipX+48,fx0,.82),lerp(lerp(wB,wB-10,.82),F0,.55)-6,'#8a2a2a',2);
+    // the pod by the window
+    RO(podX-54,podY-14,108,12,NAVY2); R(podX-52,podY-2,104,10,'#14204a'); R(podX-50,podY-12,100,4,'#3a5aa8'); RO(podX+40,podY-40,12,28,NAVY2);
+    gfx.globalAlpha=1; }});
+  // Where each monster is: kicked off the wingtip, gone, then blown back in at the back of the line.
+  const foeAt=(o,ms)=>{ if(ms<o.t) return null;
+    if(ms<o.t+800) { const k=seg(ms,o.t,o.t+800); return {x:lerp(o.q.x,-90,ez(k)),b:o.q.base-Math.sin(k*Math.PI)*90-k*30,spin:-k*Math.PI*3}; }
+    if(ms<P.ret) return {x:-200,b:o.q.base,spin:0};
+    const cur=ST.foe(o.f),k=ez(seg(ms,P.ret,P.ret1)); return {x:lerp(-90,cur.x,k),b:lerp(cur.base-60,cur.base,k)-Math.sin(k*Math.PI)*20,spin:(1-k)*Math.PI*2,done:k>=1}; };
+  const rope=(x0,y0,x1,y1,taut)=>{ const mx=(x0+x1)/2,my=Math.max(y0,y1)+(taut?0:36); gfx.lineCap='round';
+    for(const [w,c] of [[5,OUT],[2.5,'#e8d27a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.quadraticCurveTo(mx,my,x1,y1); gfx.stroke(); } };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    for(const o of order) { const p=foeAt(o,ms); if(!p) continue; const cur=ST.foe(o.f);
+      if(p.done) { o.f.ox=0; o.f.oy=0; o.f.spin=0; continue; }
+      o.f.ox=p.x-cur.x; o.f.oy=p.b-cur.base; o.f.spin=p.spin; o.f.spinAt=performance.now(); }
+    if(ms>P.lie&&ms<P.home) { const x=podX,y=podY;
+      RO(x-52,y-50,70,36,'#eef2f6'); R(x-52,y-50,70,4,'#c9d2e0'); for(let j=0;j<3;j++) R(x-44+j*20,y-30,8,2,'#c9d2e0');
+      R(x-52,y-18,104,16,NAVY2); R(x-52,y-6,104,4,'#3a5aa8'); RO(x+18,y-31,16,6,NAVY2);
+      // his arm out of the duvet, holding the rope, and the rope out to Amy
+      const reel=ms>P.yank&&ms<P.land?Math.sin(seg(ms,P.yank,P.land)*Math.PI*6)*5:0,hx=x-20-reel,hy=y-64;
+      if(ms>900) { const ax=sA.x+4,ay=sA.b-AH*.5; rope(hx,hy,ax,ay,ms>P.tip-200&&ms<P.land); EO(ax,ay,3,3,'#e8d27a'); }
+      Ln(x-6,y-44,hx,hy,7,OUT); Ln(x-6,y-44,hx,hy,4,SKINT); EO(hx,hy,4,4,SKINT);
+      for(let j=0;j<3;j++) { const q=((ms/1250+j/3)%1); gfx.globalAlpha=1-q; label('Z',x+30+q*24+j*2,y-56-q*30,CREAM,1+(j===2?1:0)); } gfx.globalAlpha=1; }
+    // wind lines off Amy while she sprints
+    if(ms>P.go&&ms<P.tip) { gfx.globalAlpha=.85; for(let j=0;j<3;j++) { const yy=sA.b-AH*(.3+j*.22),xx=sA.x+16+((ms/3+j*17)%30); Ln(xx,yy,xx+22,yy,2.5,'#ffffff'); } gfx.globalAlpha=1; }
+  }});
+  const split=ms=>{ const s=(ms-P.go)/1000; return '0:'+(s<10?'0':'')+s.toFixed(1); };
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Wing Walk. Somewhere above the clouds.'); B2.aim=null; S('jet'); }],
+    [P.lie,()=>{ S('ding'); setMessage('Tom takes Seat 1A. Lie flat. Eye mask on.'); }],
+    [800,()=>{ word('LIE FLAT',podX,podY+22,CREAM,2,1); }],
+    [P.aline,()=>{ say('amy','tombo2'); setMessage('Amy ties the safety rope on and hands Tom the other end.'); }],
+    [P.tline,()=>{ say('tom','tomboamy2'); }],
+    [P.go,()=>{ S('whoosh'); word('GO!',rootX-20,wY-AH-30,GOLD,5,.8); setMessage('Amy sprints down the wing. Into the wind.'); }],
+    [P.tip,()=>{ S('squeak'); word('!!',tipX+20,wY-AH-26,RED,5,.6); setMessage('End of the wing. The rope goes tight.'); }],
+    [P.apply,()=>{ E2.apply(); }],
+    [P.yank,()=>{ S('reel'); S('whoosh'); setMessage('Tom reels her in. He does not sit up.'); }],
+    [P.land,()=>{ S('thud'); scene('dust',.5,{x:rootX,y:wY,n:6,sp:20,up:8}); }],
+    [P.pr,()=>{ word('NEW PR!',cl(rootX-40,90,480),Math.max(70,wY-AH-50),GOLD,5,1.3); S('fanfare'); for(const p of party) glowOn(p); }],
+    [P.ret,()=>{ S('whoosh'); setMessage('The monsters blow back in. At the back of the line.'); }],
+    [P.home,()=>{ S('creak'); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); S('thud'); ST.jolt(o.f,.6); battle.shakeEnemy=.5; scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:50,c:CREAM,w:3});
+      word(['KICK!','WHAM!','BOOT!','KICK!!'][i%4],o.q.x,Math.max(60,o.q.top-40),GOLD,4,.7); word('SPLIT '+split(o.t),cl(o.kx+30,80,500),Math.min(316,wY+34),'#ffffff',2,.9);
+      landHit(Math.floor(100/order.length)+(i<100%order.length?1:0)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.go+300]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Amy says the wind was against her. She still set a record.'; }]);
+  ST.play(E2,steps);
+};
+
+// ---------- Nobody Gets Past Us (Tom + Boppy, tier 2) ----------
+// Father and son walk to the front and stand shoulder to shoulder. Boppy jangles a ring of keys and a jail-cell door
+// with bars slams down in front of the family, Rikers style. Every monster charges and bonks into the bars. Boppy's
+// back hurts. Effects unchanged: Chatter hit on every enemy that stops their wind-ups; the party is Shielded 3 turns.
+const STEEL='#7a828e',STEEL2='#a8b0bc',STEEL3='#4f5660';
+B2_TOMBO_ANIM.boppy2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),Bp=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale;
+  const dW=74,dL=cl(GR.x1+16,110,Math.min(T.x,Bp.x)-170),dR=dL+dW,by=cl(Math.max(GR.base,T.base-10)+6,240,312),dTop=Math.max(26,Math.min(GR.top,by-TH)-70);
+  const bx=dR+32,tx=dR+84;
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  const B0=2500,BP=480;
+  order.forEach((o,i)=>{ o.c0=B0+i*BP; o.t=o.c0+320; o.dx=Math.max(0,dL-6-(o.q.x+o.q.w/2)); });
+  const E0=order.length?order[order.length-1].t+300:B0+300;
+  const P={walk:700,bline:950,keys:1500,drop:1750,slam:2000,back:E0+150,apply:E0+500,tline:E0+1100,lift:E0+1900,home:E0+2300,end:E0+3000};
+  const sT={x:T.x,b:T.base},sB={x:Bp.x,b:Bp.base,f:bsp.idle};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { f=ms>P.slam&&ms<P.slam+300?sp.expr:(ms>P.tline&&ms<P.tline+900?sp.act:sp.idle); if(ms>P.slam&&ms<P.slam+200) y-=Math.sin(seg(ms,P.slam,P.slam+200)*Math.PI)*8; }
+    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=bx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,bx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) {
+      if(ms<P.keys) f=sp.hip; else if(ms<P.slam+200) f=sp.throw||sp.act; else if(ms<P.back) f=ms>B0?sp.expr:sp.idle;
+      else if(ms<P.back+700) f=sp.kneel||sp.idle; else f=sp.hip; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(bx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sB.x=x; sB.b=y; sB.f=f; return {cx:x,base:y,frame:f}; });
+  // The door: drops from the top, slams, rattles on each bonk, lifts away at the end.
+  let rattle=0;
+  const doorY=ms=>{ if(ms<P.drop) return null; const H=by-dTop;
+    if(ms<P.slam) return dTop-H+H*Math.pow(seg(ms,P.drop,P.slam),2.2);
+    if(ms<P.lift) return dTop+(ms<P.slam+180?-Math.sin(seg(ms,P.slam,P.slam+180)*Math.PI)*8:0);
+    return dTop-(by-dTop+40)*ez(seg(ms,P.lift,P.lift+400)); };
+  const door=(top,ms)=>{ const h=by-dTop,wob=rattle>0?Math.sin(ms/18)*rattle*3:0,x0=dL+wob;
+    gfx.globalAlpha=.35*cl(1-(dTop-top)/80); E(dL+dW/2,by+3,dW*.7,6,'#000000'); gfx.globalAlpha=1;
+    RO(x0,top,dW,8,STEEL); RO(x0,top+h-10,dW,8,STEEL); RO(x0,top+h*.45,dW,6,STEEL);
+    for(let j=0;j<6;j++) { const bx2=x0+4+j*(dW-8)/5; R(bx2-3,top,6,h,OUT); R(bx2-2,top,4,h,STEEL2); R(bx2-2,top,1.5,h,'#d8dee6'); }
+    RO(x0-6,top-4,8,h+4,STEEL3); RO(x0+dW-2,top-4,8,h+4,STEEL3);
+    RO(x0+dW-22,top+h*.45-14,18,24,STEEL3); E(x0+dW-13,top+h*.45-4,3,3,OUT); R(x0+dW-14,top+h*.45-3,2,6,OUT);
+    RO(x0+6,top+12,dW-12,12,'#e8e0c8'); label('CELL R',x0+dW/2,top+15,'#3a2a22',1); };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    if(rattle>0) rattle=Math.max(0,rattle-.04);
+    // the monsters charge and bonk into the bars, then sit there seeing stars
+    for(const o of order) { const f=o.f; if(ms<o.c0||ms>P.end-80) continue;
+      if(ms<o.t) { const k=seg(ms,o.c0,o.t); f.ox=o.dx*k*k; f.oy=-Math.abs(Math.sin(k*Math.PI*3))*6; f.spin=-.15; }
+      else if(ms<o.t+400) { const k=seg(ms,o.t,o.t+400); f.ox=lerp(o.dx,o.dx*.4,ez(k)); f.oy=-Math.sin(k*Math.PI)*24; f.spin=.4*Math.sin(k*Math.PI); }
+      else if(ms<P.lift) { f.ox=o.dx*.4; f.oy=0; f.spin=Math.sin(ms/150)*.08;
+        for(let j=0;j<3;j++) { const a=ms/280+j*2.1; star(o.q.x+f.ox+Math.cos(a)*o.q.w*.32,o.q.top+6+Math.sin(a)*6,4,j%2?GOLD:'#fffbe6'); } }
+      else { const k=ez(seg(ms,P.lift,P.home)); f.ox=o.dx*.4*(1-k); f.oy=0; f.spin=0; }
+      f.spinAt=performance.now(); }
+    const y=doorY(ms); if(y!=null&&y>-400) door(y,ms);
+    // Boppy's key ring
+    if(ms>P.keys-200&&ms<P.slam+400) { const h=handPt(bsp,sB.f,sB.x,sB.b,-1),sw=Math.sin(ms/50)*.5;
+      gfx.save(); gfx.translate(h.x,h.y); gfx.rotate(sw); ring(0,6,6,6,3,OUT); ring(0,6,6,6,1.5,'#c9a23a');
+      for(let j=0;j<3;j++) { const a=-.6+j*.6; gfx.save(); gfx.translate(Math.sin(a)*6,12+Math.cos(a)*4); gfx.rotate(a); RO(-1.5,0,3,10,'#d8c06a'); gfx.restore(); } gfx.restore(); }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Boppy and Tom walk up front. Shoulder to shoulder.'); B2.aim=null; S('step'); }],
+    [P.bline,()=>{ say('boppy','tombo2'); }],
+    [P.keys,()=>{ S('jangle'); word('JANGLE',bx-6,by-BH-28,CREAM,2,.7); setMessage('Boppy pulls out his keys. He knows exactly which one.'); }],
+    [P.drop,()=>{ S('whoosh'); }],
+    [P.slam,()=>{ S('clang'); S('thud'); battle.shakeEnemy=.6; rattle=1; scene('dust',.6,{x:dL+dW/2,y:by+2,n:10,sp:40,up:10});
+      word('CLANG!',dL+dW/2,Math.max(60,dTop-14),'#ffffff',6,1.1); setMessage('A jail-cell door slams down in front of the family.'); }],
+    [B0-150,()=>{ setMessage('The monsters charge. They do not read the sign.'); }],
+    [P.back,()=>{ S('sulk'); word('MY BACK.',bx-10,by-BH-24,CREAM,3,1); setMessage('Boppy’s back is acting up. The door is fine.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); scene('glow',.9,{x:sT.x,y:sT.b-TH*.5,rx:38,ry:52,c:'#aef0ff',a:.35}); scene('glow',.9,{x:sB.x,y:sB.b-BH*.5,rx:38,ry:52,c:'#aef0ff',a:.35});
+      for(const p of party) if(p!==tom&&p!==pt) scene('glow',.9,{x:ST.unit(p).x,y:ST.unit(p).mid,rx:38,ry:52,c:'#aef0ff',a:.35}); }],
+    [P.tline,()=>{ say('tom','tomboboppy2'); }],
+    [P.lift,()=>{ S('jangle'); S('creak'); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('clang'); S('bonk'); ST.jolt(o.f,.6); rattle=1; battle.shakeEnemy=.4;
+      scene('tb_rings',.5,{x:dL,y:o.q.mid,r:36,c:'#ffffff',w:3}); word(['BONK!','CLANK!','DOINK!','BONK!!'][i%4],o.q.x+o.dx,Math.max(60,o.q.top-40),GOLD,4,.7);
+      landHit(Math.floor(100/order.length)+(i<100%order.length?1:0)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.slam]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Nobody got past them.'; }]);
+  ST.play(E2,steps);
+};
+
+// ================= Task T: tier-3 Primary Tombos =================
+// 75% HEART, the biggest team-ups. Letterbox bars (front layer, alpha reset first: the letterbox gotcha) and a dimmed
+// stage behind everyone set them apart from tiers 1 and 2.
+const BARH=22;
+const bars=k=>{ if(k<=0) return; gfx.globalAlpha=1; const h=BARH*k; R(0,0,576,h,'#05060a'); R(0,324-h,576,h,'#05060a'); };
+const dim=(k,c,a)=>{ if(k<=0) return; gfx.globalAlpha=k*a; R(0,0,576,324,c); gfx.globalAlpha=1; };
+// The gold dumpling as a see-through memory: the squishy's pixel art (SQUISHY, engine/intro.js), washed pale gold, drawn
+// once to its own canvas so it can fade as one piece.
+let ghostImg=null;
+const ghostDumpling=()=>{ if(ghostImg) return ghostImg; const rows=SQUISHY,w=rows[0].length,h=rows.length,P=3,c=document.createElement('canvas');
+  c.width=w*P; c.height=h*P; const g=c.getContext('2d'),mix=(a,b,t)=>{ const p=x=>parseInt(x,16),A=a.slice(1),B=b.slice(1),o=[0,2,4].map(i=>Math.round(lerp(p(A.substr(i,2)),p(B.substr(i,2)),t)));
+    return 'rgb('+o.join(',')+')'; };
+  for(let r=0;r<h;r++) for(let q=0;q<w;q++) { const ch=rows[r][q]; if(ch==='.') continue; g.fillStyle=mix(SQUISHY_PAL[ch],'#fff4c0',ch==='o'?.2:.35); g.fillRect(q*P,r*P,P,P); }
+  return ghostImg=c; };
+// x,y: its middle. a: opacity. sq: squash (0 round, + flat). Glints and a soft halo are drawn live.
+const memory=(x,y,sc,a,sq=0)=>{ if(a<=0) return; const img=ghostDumpling(),sx=sc*(1+sq*.5),sy=sc*(1-sq*.45),w=img.width*sx,h=img.height*sy,t=performance.now()/1000;
+  gfx.globalAlpha=a*.28; E(x,y,w*.7,h*.75,GOLD); gfx.globalAlpha=a*.18; E(x,y,w*.95,h,'#fff4c0');
+  gfx.globalAlpha=a*(.78+.08*Math.sin(t*4)); const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=false; gfx.drawImage(img,x-w/2,y-h/2,w,h); gfx.imageSmoothingEnabled=sm;
+  for(let k=0;k<4;k++) { const ph=(t*1.2+k/4)%1; gfx.globalAlpha=a*(1-Math.abs(ph-.5)*2); star(x+[-.32,.3,.05,-.1][k]*w,y+[-.2,-.1,-.42,.25][k]*h,2+ph*4*Math.min(2,sc),k%2?'#aef0ff':'#fffbe6'); }
+  gfx.globalAlpha=1; };
+
+// ---------- The Golden Dumpling Wish (Tom + Grace, tier 3) ----------
+// Twilight. Grace holds a glowing memory of her gold dumpling to her heart, then puts it into Tom's hands; a pillar of
+// gold light goes up. The memory floats up, grows giant, and bounces happily across every monster, then bursts into
+// diamond sparkles that rain on the family. Grace hugs Tom. Effects: Sparkle hit on every enemy (warms them), fallen
+// friends up at 50%, party heals 60% and loses its debuffs, Grace's Trending locks for 3 turns.
+B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+30,gx=mx-30;
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  const B0=3800,BP=340;
+  order.forEach((o,i)=>{ o.t=B0+i*BP; });
+  const burst=(order.length?order[order.length-1].t:B0)+320;
+  const P={walk:650,gline:800,offer:1700,meet:2000,tline:2500,rise:3000,top:3700,burst,apply:burst+120,hug:burst+500,home:burst+1300,end:burst+2000};
+  const sky={x:GR.x,y:Math.max(64,GR.top-70)};
+  const sT={x:T.x,b:T.base,f:tsp.idle},sG={x:gx,b:by,f:gsp.flip};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { f=ms>P.offer+200&&ms<P.rise+300?sp.act:(ms>P.hug?sp.celeb:sp.idle); if(ms>P.hug&&ms<P.hug+500) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+500)*Math.PI*2))*8; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,actR=sp.act?mirrorRowsCached(sp,'act'):sp.flip; let x=gx,y=by,f=sp.flip;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.hug) { f=ms>P.offer&&ms<P.rise+300?actR:sp.flip; if(ms>P.top&&ms<P.burst) f=sp.celebFlip||sp.flip; }
+    else if(ms<P.home) { const k=ez(seg(ms,P.hug,P.hug+300)); x=lerp(gx,tx-20,k); f=sp.celebFlip||sp.flip; if(ms<P.hug+600) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+600)*Math.PI*2))*10; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx-20,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sG.x=x; sG.b=y; sG.f=f; return {cx:x,base:y,frame:f}; });
+  const shade=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  // Behind everyone: twilight and a few stars.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=shade(ms); if(k<=0) return; dim(k,'#1a1640',.62);
+    for(let j=0;j<14;j++) { const tw=.5+.5*Math.sin(ms/300+j*1.7); gfx.globalAlpha=k*tw; star((j*83+31)%560+8,18+(j*47)%120,2+(j%3),j%2?'#fffbe6':GOLD); } gfx.globalAlpha=1; }});
+  // Where the memory is at any moment (null when not shown), and its squash.
+  const gh=()=>handPt(gsp,sG.f,sG.x,sG.b,1),th=()=>handPt(tsp,sT.f,sT.x,sT.b,-1);
+  const memAt=ms=>{ if(ms<P.walk+100||ms>P.burst) return null;
+    const a=ez(seg(ms,P.walk+100,P.walk+500));
+    if(ms<P.offer) { const h=gh(); return {x:h.x+4,y:h.y-6,sc:.7,a,sq:0}; }
+    if(ms<P.rise) { const h=gh(),t2=th(),k=ez(seg(ms,P.offer,P.meet)),x=lerp(h.x+4,(h.x+t2.x)/2,k),y=lerp(h.y-4,Math.min(h.y,t2.y)-6,k); return {x,y,sc:.7+.06*Math.sin(ms/120),a,sq:0}; }
+    const h0={x:(gh().x+th().x)/2,y:Math.min(gh().y,th().y)-6};
+    if(ms<P.top) { const k=seg(ms,P.rise,P.top),e=ez(k); return {x:lerp(h0.x,sky.x,e),y:lerp(h0.y,sky.y,e)+Math.sin(k*8)*4,sc:lerp(.7,2.2,e),a:1,sq:0}; }
+    // bounces: from the sky (or the last monster) to the top of each monster in turn, a squash at each landing
+    let px=sky.x,py=sky.y,t0=P.top;
+    for(const o of order) { const ly=o.q.top-16;
+      if(ms<o.t) { const k=seg(ms,t0,o.t); return {x:lerp(px,o.q.x,k),y:lerp(py,ly,k)-Math.sin(k*Math.PI)*70,sc:2.2,a:1,sq:k>.85?(k-.85)/.15*.5:0}; }
+      px=o.q.x; py=ly; t0=o.t; }
+    const k=seg(ms,t0,P.burst); return {x:lerp(px,GR.x,k),y:lerp(py,sky.y+10,ez(k))-Math.sin(k*Math.PI)*40,sc:2.2+k*.6,a:1,sq:k<.2?.5*(1-k/.2):0}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the pillar of gold light where their hands meet
+    if(ms>P.meet&&ms<P.rise+500) { const k=ez(seg(ms,P.meet,P.meet+250))*(1-ez(seg(ms,P.rise,P.rise+500))),h=th(),g2=gh(),x=(h.x+g2.x)/2,y=Math.min(h.y,g2.y);
+      const w=18+6*Math.sin(ms/70); gfx.globalAlpha=.35*k; R(x-w,0,w*2,y,'#ffe9a0'); gfx.globalAlpha=.6*k; R(x-w*.45,0,w*.9,y,'#fffbe6'); gfx.globalAlpha=1;
+      for(let j=0;j<5;j++) { const q=(ms/600+j/5)%1; gfx.globalAlpha=k*(1-q); star(x+Math.sin(j*2.1+ms/300)*w,y-q*y,2+j%3,j%2?GOLD:'#fffbe6'); } gfx.globalAlpha=1; }
+    const m=memAt(ms); if(m) memory(m.x,m.y,m.sc,m.a,m.sq);
+    // after the burst: diamond sparkles rain from the sky over the whole family
+    if(ms>P.burst&&ms<P.home+400) { const k=seg(ms,P.burst,P.home+400);
+      for(let j=0;j<30;j++) { const a=(j*0.618)%1,x0=sky.x,x1=lerp(GR.x0,560,a),q=cl(k*1.4-(j%6)*.06); if(q<=0||q>=1) continue;
+        gfx.globalAlpha=q>.8?(1-q)/.2:1; star(lerp(x0,x1,q),lerp(sky.y,300,q*q)+Math.sin(j+ms/200)*4,2+(j%3)*1.5,j%3===0?'#aef0ff':(j%3===1?GOLD:'#fffbe6')); } gfx.globalAlpha=1; }
+    // hearts over the side hug
+    if(ms>P.hug+200&&ms<P.home) for(let j=0;j<3;j++) { const q=((ms-P.hug)/900+j/3)%1; gfx.globalAlpha=1-q; heart(sT.x-12+j*10,sT.b-TH-8-q*30,4+j%2*2,PINK); }
+    gfx.globalAlpha=1; bars(ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.end-100)))); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! The Golden Dumpling Wish.'); B2.aim=null; S('levelChime'); }],
+    [P.walk+100,()=>{ S('heal'); setMessage('Grace holds a glowing memory of her gold dumpling close.'); }],
+    [P.gline,()=>{ say('grace','tombo3'); }],
+    [P.offer,()=>{ setMessage('She puts it into Tom’s hands.'); }],
+    [P.meet,()=>{ S('chime2'); S('fanfare'); word('WISH',(gx+tx)/2,Math.max(60,by-GH-70),GOLD,4,1); }],
+    [P.tline,()=>{ say('tom','tombograce3'); }],
+    [P.rise,()=>{ S('slideWhistle'); setMessage('The wish floats up. It grows. It glows.'); }],
+    [P.burst,()=>{ S('levelChime'); S('fanfare'); scene('tb_rings',.9,{x:GR.x,y:sky.y+10,r:120,c:GOLD,w:4}); word('SHINE!',GR.x,Math.max(56,sky.y-50),GOLD,6,1.2); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sG.x,mid:sG.b-GH*.5}:ST.unit(p)); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+    [P.hug,()=>{ S('kiss'); setMessage('Grace gives Tom a big hug. He hugs back.'); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('boing'); ST.jolt(o.f,.6); battle.shakeEnemy=.4; scene('tb_rings',.6,{x:o.q.x,y:o.q.top,r:44,c:GOLD,w:3});
+      word(['BOING!','BOP!','BOUNCE!','BOING!!'][i%4],o.q.x,i%2?66:40,'#fffbe6',4,.4);
+      landHit(Math.floor(100/order.length)+(i<100%order.length?1:0)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.burst]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' The memory of the dumpling was enough. It always is.']);
+  ST.play(E2,steps);
+};
+
+// ---------- Headphones in the Dark (Tom + Rose, tier 3) ----------
+// The stage goes dark except for Rose, wearing Tom's big silver headphones; little notes float out of them. A gold sound
+// ribbon reaches across the dark to Tom, who follows it to her and lifts her onto his shoulders. They press PLAY: the
+// dark lifts as a gold sound wave sweeps the stage, and giant 8-bit notes rain down and pin every monster in place.
+// Effects: Chatter hit on every enemy (they lose time and warm up), party heals 50%, Rose rides on Tom's shoulders.
+let darkC=null;
+const NOTE=['...##.','...#.#','...#..','...#..','...#..','.###..','####..','.##...'];
+const note8=(x,y,u,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
+  for(const pass of [0,1]) for(let r=0;r<NOTE.length;r++) for(let q=0;q<6;q++) if(NOTE[r][q]==='#') {
+    const X=(q-3)*u,Y=(r-8)*u; if(pass===0) R(X-1.5,Y-1.5,u+3,u+3,OUT); else R(X,Y,u,u,(r>=5&&q===1&&r===6)?'#ffffff':c); }
+  gfx.restore(); };
+B2_TOMBO_ANIM.rose3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,rsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,RH=rsp.idle.length*rsp.scale;
+  const pMin=Math.min(...party.map(p=>ST.unit(p).x));
+  const rx=cl((GR.x1+pMin)/2-10,GR.x1+44,Math.max(GR.x1+44,pMin-70)),rb=cl(GR.base+4,236,304),tx=rx+30;
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  const N0=4300,NP=280;
+  order.forEach((o,i)=>{ o.t=N0+i*NP; });
+  const last=order.length?order[order.length-1].t:N0;
+  const P={walk:700,rline:900,ribbon:1800,go:2100,arrive:2800,lift:3000,seat:3400,tline:3500,play:3900,light:4400,apply:last+250,clear:last+450,home:last+1300,end:last+2000};
+  const sT={x:T.x,b:T.base,f:tsp.idle},sR={x:rx,b:rb,f:rsp.idle};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
+    if(ms<P.go) { f=ms>P.ribbon+150?sp.expr:sp.idle; }
+    else if(ms<P.arrive) { const k=ez(seg(ms,P.go,P.arrive)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,rb,k); f=k<1?runFr(sp,c.t*.8,-1):sp.idle; }
+    else if(ms<P.home) { x=tx; y=rb; f=ms<P.seat?sp.act:(ms>P.play&&ms<P.play+500?sp.celeb:(ms>P.clear&&ms<P.clear+700?sp.celeb:sp.idle)); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(rb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  // Rose: walks into the middle of the dark, listens, then hops up onto Tom's shoulders and stays there (she sits: a path
+  // parked on the riding spot is drawn seated, engine/rose-ride.js roseSeatNear).
+  const seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=rb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,rx,k); y=lerp(c.origBase,rb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.lift) { f=ms>P.ribbon&&ms<P.arrive?sp.flip:sp.idle; if(ms>P.rline&&ms<P.rline+400) y-=Math.abs(Math.sin(seg(ms,P.rline,P.rline+400)*Math.PI*2))*6; }
+    else if(ms<P.seat) { const k=seg(ms,P.lift,P.seat),s=seatPt(); x=lerp(rx,s.x,ez(k)); y=lerp(rb,s.y,ez(k))-Math.sin(k*Math.PI)*40; f=sp.celeb; }
+    else { const s=seatPt(); x=s.x; y=s.y; f=sp.idle; }
+    sR.x=x; sR.b=y; sR.f=f; return {cx:x,base:y,frame:f}; });
+  const darkK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.play,P.light)));
+  // Rose's headphones: a silver band over her head and two glowing cups (drawn on her seat once she is up).
+  // cx,cy: the middle of her head at ear height; r: half the head's width.
+  const phones=(cx,cy,r,a)=>{ if(a<=0) return; gfx.globalAlpha=a; gfx.lineCap='round';
+    for(const [w,c] of [[6,OUT],[3,'#c9d2e0']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.arc(cx,cy,r,Math.PI*1.08,Math.PI*1.92); gfx.stroke(); }
+    const pulse=.5+.5*Math.sin(performance.now()/140);
+    for(const [dx,c] of [[-r,'#ff9ac0'],[r,'#8fd0ff']]) { gfx.globalAlpha=a; EO(cx+dx,cy+2,4.5,6,'#5a6270'); gfx.globalAlpha=a*(.6+.4*pulse); E(cx+dx,cy+2,2.6,3.8,c); } gfx.globalAlpha=1; };
+  const RS=rsp.scale,RIDE=ROSE_RIDE.bt_idle;
+  // The dark (front layer): drawn on its own canvas with soft holes for the light around Rose and, later, Tom.
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    const seated=ms>=P.seat,rTop=seated?sR.b-20-RIDE.ay*RS:sR.b-RH;
+    // little notes floating out of the headphones
+    if(ms>P.walk&&ms<P.light+300) for(let j=0;j<4;j++) { const q=((ms-P.walk)/1100+j/4)%1; gfx.globalAlpha=(1-q)*(ms>P.play?1-seg(ms,P.play,P.light+300):1);
+      note8(sR.x+(j%2?18:-18)+Math.sin(q*6+j)*8,rTop-q*50,2,j%2?'#8fd0ff':PINK,Math.sin(q*4)*.3); }
+    gfx.globalAlpha=1;
+    const k=darkK(ms);
+    if(k>0) { if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
+      const g=darkC.getContext('2d'); g.globalCompositeOperation='source-over'; g.clearRect(0,0,576,324); g.fillStyle='#050610'; g.fillRect(0,0,576,324);
+      g.globalCompositeOperation='destination-out';
+      const hole=(x,y,r)=>{ const gr=g.createRadialGradient(x,y,r*.35,x,y,r); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.beginPath(); g.arc(x,y,r,0,Math.PI*2); g.fill(); };
+      hole(sR.x,sR.b-RH*.5,62);
+      if(ms>P.ribbon) { const r=62*ez(seg(ms,P.ribbon,P.ribbon+500)); hole(sT.x,sT.b-TH*.5,r+8); }
+      g.globalCompositeOperation='source-over';
+      gfx.globalAlpha=.9*k; gfx.drawImage(darkC,0,0); gfx.globalAlpha=1; }
+    // the gold sound ribbon from her headphones to Tom, over the dark
+    if(ms>P.ribbon&&ms<P.light) { const a=ez(seg(ms,P.ribbon,P.ribbon+400))*(1-seg(ms,P.play,P.light)),x0=sR.x,y0=rTop+8,x1=sT.x,y1=sT.b-TH*.6,n=24;
+      for(const [w,c,al] of [[7,'#ffe9a0',.35],[3,GOLD,1]]) { gfx.globalAlpha=a*al; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath();
+        for(let j=0;j<=n;j++) { const q=j/n,x=lerp(x0,x1,q),y=lerp(y0,y1,q)+Math.sin(q*Math.PI*6-ms/90)*6*Math.sin(q*Math.PI); j?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); }
+      gfx.globalAlpha=1; }
+    if(seated) phones(sR.x-4,rTop+9*RS,8.5*RS,1-seg(ms,P.home+300,P.end-150)); else phones(sR.x+1,rTop+RH*.2,RH*.17,1);
+    // PLAY: a gold stereo wave sweeps left across the stage
+    if(ms>P.play&&ms<P.light+500) { const q=seg(ms,P.play,P.light+500);
+      for(let j=0;j<4;j++) { const p=cl(q*1.3-j*.12); if(p<=0||p>=1) continue; gfx.globalAlpha=(1-p)*.8; gfx.strokeStyle=j%2?'#ffe9a0':GOLD; gfx.lineWidth=5;
+        gfx.beginPath(); gfx.ellipse(sT.x,sT.b-TH*.6,20+p*520,40+p*160,0,Math.PI*.55,Math.PI*1.45); gfx.stroke(); } gfx.globalAlpha=1; }
+    // giant 8-bit notes rain on every monster and pin it, then fade at the end
+    for(const o of order) for(let j=0;j<3;j++) { const t0=o.t+[-180,0,-90][j]; if(ms<t0-500) continue;
+      const lx=o.q.x+[-.42,0,.42][j]*o.q.w,ly=j===1?o.q.top-4:o.q.base+2,k2=seg(ms,t0-500,t0),y=lerp(-40,ly,k2*k2),out=1-ez(seg(ms,P.home,P.end-100));
+      if(out<=0) continue; gfx.globalAlpha=out; note8(lx,y,j===1?6:5,[PINK,GOLD,'#8fd0ff'][(j+o.t/NP)%3|0],k2<1?Math.sin(ms/80+j)*.2:(j-1)*.25); gfx.globalAlpha=1;
+      if(k2>=1&&ms<t0+250) { gfx.globalAlpha=1-seg(ms,t0,t0+250); ring(lx,ly,8+seg(ms,t0,t0+250)*20,4+seg(ms,t0,t0+250)*8,3,CREAM); gfx.globalAlpha=1; } }
+    bars(ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.end-100)))); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Headphones in the Dark.'); B2.aim=null; S('stun'); }],
+    [P.walk,()=>{ setMessage('Rose wears Tom’s big headphones. She can hear his song.'); }],
+    [P.rline,()=>{ say('rose','tombo3'); S('giggle'); }],
+    [P.ribbon,()=>{ S('levelChime'); setMessage('The song reaches across the dark, all the way to Tom.'); }],
+    [P.go,()=>{ S('step'); }],
+    [P.lift,()=>{ S('boing'); setMessage('Tom follows it to her and lifts her up.'); }],
+    [P.tline,()=>{ say('tom','tomborose3'); }],
+    [P.play,()=>{ S('chime2'); S('fanfare'); word('PLAY',(rx+tx)/2,Math.max(60,rb-TH-60),GOLD,5,.9); setMessage('They press PLAY. Together.'); }],
+    [P.light,()=>{ S('whoosh'); setMessage('Giant notes rain down and pin every monster in place.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sT.x,mid:sT.b-TH}:ST.unit(p)); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+    [P.clear,()=>{ word('LEVEL CLEAR!',GR.x,40,GOLD,4,1.3); S('fanfare'); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); S('thud'); ST.jolt(o.f,.6); battle.shakeEnemy=.4;
+      landHit(Math.floor(100/order.length)+(i<100%order.length?1:0)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.light]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Best co-op partner in the world. Level clear.']);
+  ST.play(E2,steps);
+};
+// ---------- Sixty-Story Sibling Pace (Tom + Amy, tier 3) ----------
+// A blue glass tower rises behind the monster. Tom and Amy start their watches in the same second and race straight up
+// its face, side by side; every ten floors one of them punches out a glass pane that rockets down onto the monster
+// (10F, 30F, 50F Tom; 20F, 40F Amy). At 60F ROOFTOP they fist-bump against the sun and dive off together for the sixth
+// hit. Effects: six sure critical Kinetic hits on one enemy (5 x 12 + 40 = 100), Personal Best for the party.
+const glassPane=(x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  RO(-9,-6,18,12,'#5aa8d8'); R(-9,-6,18,4,'#9ed8f6'); Ln(-5,4,3,-4,2,'#e8f8ff'); gfx.restore(); };
+const shards=(x,y,k,n=8)=>{ if(k<=0||k>=1) return; gfx.globalAlpha=1-k;
+  for(let j=0;j<n;j++) { const a=j/n*Math.PI*2+j,r=6+k*38; gfx.save(); gfx.translate(x+Math.cos(a)*r,y+Math.sin(a)*r*.7+k*k*16); gfx.rotate(a+k*6);
+    gfx.fillStyle=j%2?'#bfe8ff':'#ffffff'; gfx.beginPath(); gfx.moveTo(0,-4); gfx.lineTo(3,3); gfx.lineTo(-3,2); gfx.closePath(); gfx.fill(); gfx.restore(); }
+  gfx.globalAlpha=1; };
+B2_TOMBO_ANIM.amy3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const tgt=(E2.targets||[]).find(t=>t&&t.side==='foe')||b2LiveFoes()[0];
+  const q=ST.foe(tgt),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,asp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,AH=asp.idle.length*asp.scale;
+  const gb=cl(q.base,230,300),laneA=cl(q.x+q.w/2+30,140,450),laneT=laneA+46,roofY=112;
+  const tx0=q.x-q.w/2-18,tx1=laneT+30,mid=(laneA+laneT)/2;
+  const HIT=[2600,2950,3300,3650,4000],FL=['10F!','20F!','30F!','40F!','50F!'],WHO=['t','a','t','a','t'];
+  const P={walk:700,aline:1000,click:1700,go:2200,tline:2450,top:4300,bump:4550,dive:4950,hit:5400,land:5900,home:6400,end:7100};
+  const climbK=ms=>seg(ms,P.go,P.top),scAt=ms=>ms<P.go?1:(ms<P.dive?lerp(1,.62,ez(climbK(ms))):lerp(.62,1,ez(seg(ms,P.dive,P.hit))));
+  // the climbers' feet height on the wall, with a surge for whoever is punching out a pane
+  const wallY=(ms,who)=>{ let y=lerp(gb,roofY,ez(climbK(ms)));
+    HIT.forEach((h,i)=>{ if(WHO[i]===who) y-=Math.sin(seg(ms,h-180,h+260)*Math.PI)*14; }); return y; };
+  const punching=(ms,who)=>HIT.some((h,i)=>WHO[i]===who&&ms>h-120&&ms<h+160);
+  const sT={x:ST.unit(tom).x,b:gb,s:1},sA={x:laneA,b:gb,s:1};
+  const dive=(ms,x0,x1)=>{ const k=seg(ms,P.dive,P.hit),e=k*k; return {x:lerp(x0,x1,e),y:lerp(roofY,q.top+30,e)-Math.sin(k*Math.PI)*30,rot:-ez(k*1.4)*Math.PI*.75}; };
+  const after=(ms,xs)=>{ const k=seg(ms,P.hit,P.land); return {x:lerp(q.x+xs*.3,xs,ez(k)),y:lerp(q.top+30,gb,k)-Math.sin(k*Math.PI)*60}; };
+  const body=(fx,who,lane,sp,S0)=>pathOf(fx,P.end,(ms,c)=>{ let x=lane,y=gb,f=sp.idle,rot=0,sc=scAt(ms);
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,lane,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.go) { f=ms>P.click-150&&ms<P.click+300?(sp.aim||sp.act):sp.idle; if(who==='a'&&ms>P.aline&&ms<P.aline+500) y-=Math.abs(Math.sin(seg(ms,P.aline,P.aline+500)*Math.PI*2))*6; }
+    else if(ms<P.top) { y=wallY(ms,who); x=lane+Math.sin(ms/90+(who==='a'?1.5:0))*2; f=punching(ms,who)?sp.act:runFr(sp,c.t*1.3,-1); }
+    else if(ms<P.dive) { const k=ez(seg(ms,P.top,P.bump)); y=roofY; x=lerp(lane,mid+(who==='a'?-13:13),k);
+      f=ms>P.bump-100&&ms<P.dive-80?(who==='a'?mirrorRowsCached(sp,'act'):sp.act):(who==='a'?(sp.celebFlip||sp.flip):sp.celeb); }
+    else if(ms<P.hit) { const d=dive(ms,mid+(who==='a'?-13:13),q.x+(who==='a'?-14:14)); x=d.x; y=d.y; rot=d.rot; f=sp.act; }
+    else if(ms<P.land) { const a2=after(ms,lane); x=a2.x; y=a2.y; f=sp.celeb; rot=0; sc=1; }
+    else if(ms<P.home) { f=ms<P.land+500?sp.celeb:sp.idle; if(ms<P.land+500) y-=Math.abs(Math.sin(seg(ms,P.land,P.land+500)*Math.PI*2))*7; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(lane,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    S0.x=x; S0.b=y; S0.s=sc; S0.f=f; return {cx:x,base:y,frame:f,rot,sc,noShadow:ms>P.go&&ms<P.land}; });
+  body(fxT,'t',laneT,tsp,sT); body(fxP,'a',laneA,asp,sA);
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  const towerK=ms=>ez(seg(ms,150,1000))*(1-ez(seg(ms,P.hit+200,P.home+300)));
+  // Behind everyone: dusk, the sun over the roof, the tower (its windows stream down while they climb).
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#1c2a4a',.55);
+    const tk=towerK(ms); if(tk<=0) return;
+    if(ms>P.top-300) { const sk=ez(seg(ms,P.top-300,P.top+300))*tk; gfx.globalAlpha=sk*.35; E(mid,roofY-26,70,70,'#ffd27a'); gfx.globalAlpha=sk; EO(mid,roofY-26,26,26,'#ffcf5a'); E(mid-6,roofY-32,10,8,'#fff2b0'); gfx.globalAlpha=1; }
+    const top=lerp(gb+4,roofY,tk),w=tx1-tx0;
+    gfx.save(); gfx.beginPath(); gfx.rect(tx0-4,top-4,w+8,gb+8-top); gfx.clip();
+    R(tx0-3,top-3,w+6,gb+7-top,OUT); R(tx0,top,w,gb+4-top,'#2c5f8a');
+    const scroll=ms>P.go&&ms<P.top+200?((ms-P.go)*.22)%18:0;
+    for(let y=top+4-18+scroll;y<gb+4;y+=18) { if(y<top) continue; for(let x=tx0+5;x<tx1-8;x+=14) { R(x,y,10,12,'#4f90c0'); R(x,y,10,3,'#8fd0f2'); } }
+    gfx.globalAlpha=.25; R(tx0+w*.18,top,8,gb+4-top,'#ffffff'); gfx.globalAlpha=1;
+    R(tx0-5,top-2,w+10,5,'#1b3a58');
+    gfx.restore();
+    // the floor counter on the roof edge
+    const fl=ms<P.go?1:Math.min(60,Math.round(lerp(1,60,ez(climbK(ms)))));
+    if(tk>.6) label((fl<10?'0':'')+fl+'F',tx0+18,Math.max(top+6,roofY+6),'#fff6dc',2);
+    gfx.globalAlpha=1; }});
+  const paneAt=(i,ms)=>{ const h=HIT[i],k=seg(ms,h-40,h+220); if(k<=0||k>=1) return null; const S0=WHO[i]==='t'?sT:sA,x0=S0.x-14*S0.s,y0=S0.b-(WHO[i]==='t'?TH:AH)*S0.s*.55;
+    return {x:lerp(x0,q.x,k*k),y:lerp(y0,q.mid,k*k),s:1.3-k*.3,rot:k*9}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // stopwatches clicking
+    if(ms>P.click-100&&ms<P.click+500) { const a=1-seg(ms,P.click+200,P.click+500); gfx.globalAlpha=a;
+      for(const S0 of [sT,sA]) { const x=S0.x,y=S0.b-(S0===sT?TH:AH)-14; EO(x,y,7,7,'#e8e4dc'); Ln(x,y,x+Math.cos(ms/60)*5,y+Math.sin(ms/60)*5,2,RED); R(x-2,y-11,4,3,OUT); } gfx.globalAlpha=1; }
+    // speed lines under the climbers
+    if(ms>P.go&&ms<P.top) for(const S0 of [sT,sA]) for(let j=0;j<4;j++) { const q2=((ms/160)+j/4)%1; gfx.globalAlpha=.7*(1-q2); Ln(S0.x-8+j*5,S0.b+8+q2*30,S0.x-8+j*5,S0.b+20+q2*30,2,'#dff0fa'); }
+    gfx.globalAlpha=1;
+    for(let i=0;i<5;i++) { const p=paneAt(i,ms); if(p) glassPane(p.x,p.y,p.s,p.rot); shards(q.x,q.mid,seg(ms,HIT[i]+220,HIT[i]+700)); }
+    // cloud puffs bursting at the roof
+    if(ms>P.top-100&&ms<P.top+700) { const k2=seg(ms,P.top-100,P.top+700); gfx.globalAlpha=1-k2; for(let j=0;j<6;j++) { const a=j/6*Math.PI*2; EO(mid+Math.cos(a)*(20+k2*60),roofY-10+Math.sin(a)*(8+k2*16),10+k2*6,7+k2*4,'#f4f6fa'); } gfx.globalAlpha=1; }
+    // the fist bump: a burst of light where the fists meet
+    if(ms>P.bump&&ms<P.bump+500) { const k2=seg(ms,P.bump,P.bump+500),y=roofY-AH*.62*.6; gfx.globalAlpha=1-k2; ring(mid,y,6+k2*30,4+k2*20,3,GOLD); star(mid,y,4+k2*6,'#fffbe6'); gfx.globalAlpha=1; }
+    // dive streaks
+    if(ms>P.dive&&ms<P.hit) for(const S0 of [sT,sA]) { gfx.globalAlpha=.6; Ln(S0.x,S0.b-40,S0.x+18,S0.b-110,4,'#dff0fa'); gfx.globalAlpha=1; }
+    // the landing: a big shatter
+    if(ms>P.hit) shards(q.x,q.mid,seg(ms,P.hit,P.hit+900),16);
+    if(ms>P.hit&&ms<P.hit+320) { tgt.spin=0; tgt.ox=0; tgt.fsc=.78; tgt.oy=q.h/2*.22; tgt.spinAt=performance.now(); }
+    else if(ms>P.hit&&tgt.fsc) { tgt.fsc=0; tgt.oy=0; }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Sixty-Story Sibling Pace.'); B2.aim=null; S('levelChime'); }],
+    [300,()=>{ S('rumble'); setMessage('A glass tower rises behind '+(tgt.the||tgt.name)+'. Sixty floors.'); }],
+    [P.aline,()=>{ say('amy','tombo3'); }],
+    [P.click,()=>{ S('ding'); setMessage('They start their watches. Same second.'); }],
+    [P.go,()=>{ S('whoosh'); word('GO!',mid,40,GOLD,4,.6); setMessage('They race straight up the glass.'); }],
+    [P.tline,()=>{ say('tom','tomboamy3'); }],
+    [P.top,()=>{ S('fanfare'); setMessage('Sixtieth floor. Neck and neck.'); }],
+    [P.top+300,()=>{ word('60F ROOFTOP!',q.x,40,GOLD,3,1); }],
+    [P.bump,()=>{ S(sfx.clap?'clap':'bump'); S('chime2'); }],
+    [P.dive,()=>{ S('slideWhistle'); setMessage('They dive off the roof. Together.'); }],
+    [P.hit,()=>{ S('crash'); S('bang'); ST.jolt(tgt,.9); battle.shakeEnemy=.7; scene('tb_rings',.8,{x:q.x,y:q.mid,r:90,c:'#dff0fa',w:4});
+      word('CRASH!',q.x,Math.max(56,q.top-70),'#dff0fa',6,1); landHit(40); }],
+    [P.land,()=>{ S('step'); }],
+  ];
+  HIT.forEach((h,i)=>{ steps.push([h,()=>{ S('whoosh'); }]); steps.push([h+220,()=>{ S('crash'); S('bonk'); ST.jolt(tgt,.5); battle.shakeEnemy=.35; word(FL[i],q.x,i%2?66:40,i%2?'#ffb0a0':'#dff0fa',4,i===4?.3:.4); landHit(12); }]); });
+  steps.push(['hf',P.hit]);
+  steps.push([P.end,'end',()=>{ tgt.ox=0; tgt.oy=0; tgt.fsc=0; tgt.spin=0; return (E2.result||'')+' A dead heat. They will argue about it for years.'; }]);
+  ST.play(E2,steps);
+};
+
+// ---------- Tom Cooks for Mom (Tom + Deedee, tier 3) ----------
+// For once Tom cooks for his mom. Deedee has gone stone grey; Tom waves his best sourdough under her nose and the smell
+// cracks her free. She takes a bite, says it needs salt, and starts cleaning his kitchen so hard she sweeps every monster
+// off the stage. Effects: Cozy hit on every enemy (warms them), party heals 60%, Tucked In 3, crust 3, tray 3.
+const stonePal=new Map();
+const stoneOf=sp=>{ if(stonePal.has(sp.pal)) return stonePal.get(sp.pal); const o={};
+  for(const k in sp.pal) { const c=sp.pal[k]; if(typeof c!=='string'||c[0]!=='#'||c.length<7) { o[k]=c; continue; }
+    const r=parseInt(c.substr(1,2),16),g=parseInt(c.substr(3,2),16),b=parseInt(c.substr(5,2),16),l=Math.round(60+(r*.3+g*.59+b*.11)*.62);
+    o[k]='rgb('+l+','+l+','+(l+6)+')'; }
+  stonePal.set(sp.pal,o); return o; };
+const boule=(x,y,s,bite)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s);
+  if(bite) { gfx.beginPath(); gfx.rect(-20,-20,40,40); gfx.arc(-12,-7,6.5,0,Math.PI*2); gfx.clip('evenodd'); }
+  EO(0,0,13,9.5,'#b8742e'); E(-2,-2.5,9,5.5,'#d89a52'); E(-4,-4,4,2,'#f0c88a');
+  gfx.strokeStyle='#7a4418'; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(-1,9,10,-Math.PI*.82,-Math.PI*.5); gfx.stroke(); gfx.beginPath(); gfx.arc(3,8,10,-Math.PI*.6,-Math.PI*.3); gfx.stroke();
+  gfx.fillStyle='#fff6e8'; for(const [a,b2] of [[-6,-5],[4,-6],[7,-2]]) gfx.fillRect(a,b2,1.5,1.5);
+  gfx.restore(); };
+const towel=(x,y,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); RO(-4,-3,22,10,'#f4f0e6'); R(-4,0,22,2,'#5a8ad0'); R(-4,4,22,2,'#5a8ad0'); gfx.restore(); };
+B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale,DW=dsp.idle[0].length*dsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+18,dx=mx-42;
+  const SW0=4600,SPD=.6;
+  const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  order.forEach((o,i)=>{ o.t=Math.round(SW0+Math.max(120,dx-o.q.x)/SPD+i*20); });
+  const swEnd=SW0+(dx+70)/SPD,last=order.length?order[order.length-1].t:SW0+300;
+  const P={walk:650,stone0:750,stone1:1250,loaf:1500,tline:1700,crack:2900,burst:3400,bite:3750,dline:4050,sw0:SW0,swEnd,back:swEnd+150,backIn:swEnd+650,
+    apply:Math.max(last+150,swEnd+750),ret:swEnd+450,retIn:swEnd+1000,home:swEnd+1350,end:swEnd+2050};
+  const stoneK=ms=>ez(seg(ms,P.stone0,P.stone1))*(ms<P.burst?1:0);
+  const sT={x:T.x,b:by,f:tsp.idle},sD={x:dx,b:by,f:dsp.flip};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { f=ms>P.loaf&&ms<P.bite+150?sp.act:(ms>P.sw0&&ms<P.backIn?sp.expr:(ms>=P.backIn&&ms<P.backIn+700?sp.celeb:sp.idle));
+      if(ms>P.backIn&&ms<P.backIn+500) y-=Math.abs(Math.sin(seg(ms,P.backIn,P.backIn+500)*Math.PI*2))*7; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dx,y=by,f=sp.flip,hide=false;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,dx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.burst) { f=sp.flip; hide=ms>P.stone0; }
+    else if(ms<P.sw0) { if(ms<P.burst+400) { f=sp.celebFlip||sp.flip; y-=Math.sin(seg(ms,P.burst,P.burst+400)*Math.PI)*16; }
+      else f=ms>P.dline-100?mirrorRowsCached(sp,'hip'):(ms>P.bite-100?mirrorRowsCached(sp,'act'):sp.flip); }
+    else if(ms<P.swEnd) { x=lerp(dx,-70,seg(ms,P.sw0,P.swEnd)); f=runFr(sp,c.t*1.6,-1); y=by-Math.abs(Math.sin(ms/70))*4; }
+    else if(ms<P.back) { x=-70; hide=true; }
+    else if(ms<P.backIn) { const k=ez(seg(ms,P.back,P.backIn)); x=lerp(-70,dx,k); f=runFr(sp,c.t*1.6,1); }
+    else if(ms<P.home) { f=ms<P.backIn+600?(sp.celebFlip||sp.flip):sp.flip; if(ms<P.backIn+600) y-=Math.abs(Math.sin(seg(ms,P.backIn,P.backIn+600)*Math.PI*2))*8; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(dx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sD.x=x; sD.b=y; sD.f=f; return {cx:x,base:y,frame:f,hide}; });
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  // Behind everyone: Tom's kitchen in warm evening light, a counter behind the pair.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#2a1408',.62);
+    gfx.globalAlpha=k; const cy=by-TH-6,cx0=dx-60,cw=tx-dx+120; RO(cx0,cy,cw,TH*.55,'#8a5a3a'); R(cx0,cy,cw,6,'#e8dcc4'); R(cx0+10,cy+14,cw-20,3,'#6a4028');
+    gfx.globalAlpha=1; }});
+  const nose=()=>({x:sD.x+DW*.18,y:sD.b-DH*.72});
+  const loafAt=ms=>{ if(ms<P.loaf||ms>P.dline+300) return null; const h=handPt(tsp,sT.f,sT.x,sT.b,-1),n=nose();
+    if(ms<P.tline+200) { const k=ez(seg(ms,P.loaf,P.loaf+250)); return {x:h.x-4,y:h.y-4-(1-k)*20,s:k,b:false}; }
+    if(ms<P.bite) { const k=ez(seg(ms,P.tline+200,P.tline+700)); return {x:lerp(h.x-4,n.x+16,k)+Math.sin(ms/110)*6*k,y:lerp(h.y-4,n.y+4,k)+Math.cos(ms/150)*3*k,s:1,b:false}; }
+    const k=seg(ms,P.dline,P.dline+300); return {x:n.x+16,y:n.y+4+k*30,s:1-k,b:true}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // Deedee as stone (her real body is hidden while she is grey)
+    if(ms>P.stone0&&ms<P.burst) { const k=stoneK(ms),fr=dsp.flip,x=sD.x-DW/2,y=sD.b-DH;
+      drawSprite(fr,dsp.pal,x,y,dsp.scale,{alpha:1}); drawSprite(fr,stoneOf(dsp),x,y,dsp.scale,{alpha:k});
+      if(ms>P.crack) { const c2=ez(seg(ms,P.crack,P.burst-80)); gfx.strokeStyle='#2a2a30'; gfx.lineWidth=2; gfx.lineCap='round';
+        const cx=sD.x,top=y; gfx.beginPath(); gfx.moveTo(cx-4,top+6); gfx.lineTo(cx-4+6*c2,top+6+22*c2); gfx.lineTo(cx-6*c2,top+6+44*c2); gfx.lineTo(cx+8*c2,top+6+70*c2);
+        gfx.moveTo(cx+10,top+30); gfx.lineTo(cx+10-12*c2,top+30+18*c2); gfx.stroke(); } }
+    if(ms>P.burst&&ms<P.burst+700) { const k=seg(ms,P.burst,P.burst+700); gfx.globalAlpha=1-k;
+      for(let j=0;j<10;j++) { const a=j*.63+.4,r=10+k*60; R(sD.x+Math.cos(a)*r,sD.b-DH*.5+Math.sin(a)*r*.8+k*k*30,5,4,j%2?'#9a9aa2':'#c4c4cc'); } gfx.globalAlpha=1; }
+    // the sourdough, its smell drifting to her nose
+    const L=loafAt(ms); if(L&&L.s>0) { boule(L.x,L.y,L.s,L.b);
+      if(ms>P.tline+300&&ms<P.burst+200) for(let j=0;j<3;j++) { const q2=((ms/700)+j/3)%1,n=nose(); gfx.globalAlpha=(1-q2)*.8; gfx.strokeStyle='#fff6dc'; gfx.lineWidth=2; gfx.beginPath();
+        for(let s=0;s<=8;s++) { const t2=s/8,x=lerp(L.x,n.x,q2*t2+0.1)+Math.sin(t2*6+ms/120+j)*4,y=lerp(L.y-10,n.y,q2*t2+.1)-t2*6; s?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); } gfx.globalAlpha=1; }
+    if(ms>P.bite&&ms<P.bite+500) { const k=seg(ms,P.bite,P.bite+500),n=nose(); gfx.globalAlpha=1-k; for(let j=0;j<5;j++) R(n.x+8+j*3,n.y+8+k*24+j%2*4,2,2,'#d89a52'); gfx.globalAlpha=1; }
+    // the cleaning frenzy: towel flicking, soap bubbles and shine in her wake
+    if(ms>P.sw0&&ms<P.backIn+300) { towel(sD.x-12,sD.b-DH*.55,Math.sin(ms/45)*.9);
+      for(let j=0;j<12;j++) { const age=((ms-P.sw0)/1000-j*.06); if(age<0) continue; const bx=lerp(dx,-70,cl((ms-P.sw0-j*60)/(P.swEnd-P.sw0)));
+        const a=1-cl((ms-P.sw0)/1000-j*.08); if(a<=0) continue; gfx.globalAlpha=a*.85; ring(bx+(j%3-1)*8,sD.b-10-(j%4)*14-age*10,3+j%3,3+j%3,1.5,'#cfeeff'); }
+      gfx.globalAlpha=1; }
+    // the monsters get swept off the left edge, then slide back in after the hit
+    for(const o of order) { if(o.f.dead) continue; const f=o.f,out=-(o.q.x+o.q.w/2+40);
+      if(ms>o.t&&ms<P.retIn+50) { let ox;
+        if(ms<P.ret) { const k=ez(seg(ms,o.t,o.t+420)); ox=out*k; f.spin=-seg(ms,o.t,o.t+420)*Math.PI*1.5; f.oy=-Math.sin(seg(ms,o.t,o.t+420)*Math.PI)*24; }
+        else { const k=ez(seg(ms,P.ret,P.retIn)); ox=out*(1-k); f.spin=0; f.oy=0; }
+        f.ox=ox; f.spinAt=performance.now(); } }
+    // sparkle shine across the clean floor when she comes back
+    if(ms>P.backIn-200&&ms<P.backIn+800) { const k=seg(ms,P.backIn-200,P.backIn+800); for(let j=0;j<8;j++) { const q2=cl(k*1.4-j*.06); gfx.globalAlpha=Math.sin(q2*Math.PI); star(40+j*70,by+4-(j%3)*30,3+j%3*2,j%2?'#fffbe6':'#cfeeff'); } gfx.globalAlpha=1; }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Tom Cooks for Mom.'); B2.aim=null; S('levelChime'); }],
+    [P.stone0,()=>{ S('stun'); setMessage('Deedee has gone stone grey.'); }],
+    [P.loaf,()=>{ S('chime2'); setMessage('For once, Tom cooks for his mom. His best sourdough.'); }],
+    [P.tline,()=>{ say('tom','tombodeedee3'); }],
+    [P.crack,()=>{ S('creak'); }],
+    [P.burst,()=>{ S('bang'); S('heal'); word('CRACK!',sD.x,Math.max(56,by-DH-60),'#fff6dc',5,.5); scene('tb_rings',.7,{x:sD.x,y:by-DH*.5,r:60,c:GOLD,w:3}); setMessage('The smell cracks her free!'); }],
+    [P.bite,()=>{ S('bonk'); word('CHOMP',nose().x+10,Math.max(56,nose().y-40),'#ffd27a',3,.6); }],
+    [P.dline,()=>{ say('deedee','tombo3'); }],
+    [P.sw0,()=>{ S('whoosh'); setMessage('She cleans his whole kitchen. The monsters too.'); }],
+    [P.back,()=>{ S('whoosh'); }],
+    [P.backIn,()=>{ S('fanfare'); word('SPARKLING!',Math.max(110,GR.x),66,'#cfeeff',4,1.1); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sD.x,mid:sD.b-DH*.5}:ST.unit(p)); scene('glow',1,{x:q2.x,y:q2.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+    [P.ret,()=>{ S('step'); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('slideWhistle'); o.f.shake=Math.max(o.f.shake||0,.4); battle.shakeEnemy=.35;
+      word(['SCRUB!','WIPE!','POLISH!','SCOUR!'][i%4],Math.max(60,o.q.x),i%2?66:40,'#cfeeff',4,.4);
+      landHit(Math.floor(100/order.length)+(i<100%order.length?1:0)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.sw0]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' It did need salt. A little.'; }]);
+  ST.play(E2,steps);
+};
+// ---------- shared by boppy3, tnb3, nara3 ----------
+// Draw one frame of a sprite by hand at a body spot (cx, feet at b), any palette, alpha and scale.
+const drawAt=(sp,fr,x,b,pal,a=1,sc)=>{ const s=sc||sp.scale,w=fr[0].length*s,h=fr.length*s; drawSprite(fr,pal||sp.pal,x-w/2,b-h,s,{alpha:a}); };
+const tintPal=new Map();
+const tintOf=(sp,hex,amt)=>{ const key=sp.pal+'|'+hex+'|'+amt; if(tintPal.has(key)) return tintPal.get(key); const o={},T2=[1,3,5].map(i=>parseInt(hex.substr(i,2),16));
+  for(const k in sp.pal) { const c=sp.pal[k]; if(typeof c!=='string'||c[0]!=='#'||c.length<7) { o[k]=c; continue; }
+    const v=[1,3,5].map((i,j)=>Math.round(lerp(parseInt(c.substr(i,2),16),T2[j],amt))); o[k]='rgb('+v.join(',')+')'; }
+  tintPal.set(key,o); return o; };
+const order3=list=>list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+const split100=(i,n)=>Math.floor(100/n)+(i<100%n?1:0);
+
+// ---------- The Pepper-Broth Sneeze (Tom + Boppy, tier 3) ----------
+// Boppy has gone stone grey. Tom wafts a bowl of extra-cayenne broth under his nose; the stone glows orange from his
+// stomach up and cracks off. Boppy goes red, inhales (AH... AHHH...), Tom opens an umbrella and ducks behind it, and
+// Boppy sneezes a cone of pepper fire across every monster. Effects: biggest Cozy hit on every enemy, they see stars
+// (Stunned 1), Amber melts off the party, Boppy's Heartburn +3.
+const brothBowl=(x,y,s)=>{ if(s<=0) return; gfx.save(); gfx.translate(x,y); gfx.scale(s,s);
+  gfx.beginPath(); gfx.ellipse(0,0,15,13,0,0,Math.PI); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#f0e6d4'; gfx.fill();
+  R(-9,6,18,3,'#3a7ac0'); EO(0,0,15,4,'#c8381a'); E(-4,-1,6,1.6,'#ff7a3a'); E(5,0,1.6,1.2,'#3a8a3a'); E(-8,1,1.4,1,'#ffd040'); gfx.restore(); };
+const umbrella=(x,y,k,rot)=>{ if(k<=0) return; gfx.save(); gfx.translate(x,y); gfx.rotate(rot); const r=30*k;
+  Ln(0,0,0,26,4,OUT); Ln(0,0,0,26,2,'#6a4a2a'); Ln(0,26,-5,30,4,OUT);
+  for(let j=0;j<6;j++) { const a0=Math.PI+j*Math.PI/6,a1=a0+Math.PI/6; gfx.beginPath(); gfx.moveTo(0,0); gfx.arc(0,0,r,a0,a1); gfx.closePath();
+    gfx.fillStyle=j%2?CREAM:RED; gfx.fill(); gfx.lineWidth=2; gfx.strokeStyle=OUT; gfx.stroke(); }
+  gfx.restore(); };
+B2_TOMBO_ANIM.boppy3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale,BW=bsp.idle[0].length*bsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+36,bx=mx-40;
+  const SN=4500,order=order3(list);
+  order.forEach((o,i)=>{ o.t=SN+160+Math.max(0,bx-o.q.x)*.5+i*40; });
+  const last=order.length?order[order.length-1].t:SN+300;
+  const P={walk:650,stone0:750,stone1:1150,bowl:1300,tline:1450,crack:2500,burst:3100,bline:3250,ah1:3400,ah2:3900,umb:3650,sneeze:SN,fireEnd:last+450,
+    apply:last+300,relief:last+600,home:last+1300,end:last+2000};
+  const stoneK=ms=>ez(seg(ms,P.stone0,P.stone1));
+  const sT={x:T.x,b:by,f:tsp.idle},sB={x:bx,b:by,f:bsp.flip,rot:0};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { f=ms>P.bowl&&ms<P.umb?sp.act:(ms>=P.umb&&ms<P.fireEnd?sp.kneel:(ms>=P.fireEnd&&ms<P.fireEnd+600?sp.celeb:sp.idle)); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=bx,y=by,f=sp.flip,hide=false,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,bx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.burst) { hide=ms>P.stone0; }
+    else if(ms<P.sneeze) { if(ms<P.burst+350) { f=sp.celebFlip||sp.flip; y-=Math.sin(seg(ms,P.burst,P.burst+350)*Math.PI)*14; }
+      else { f=sp.flip; rot=-.2*ez(seg(ms,P.ah1,P.sneeze-80)); } }
+    else if(ms<P.fireEnd) { f=sp.act; rot=-.14+Math.sin(ms/30)*.03; x=bx+Math.min(8,(ms-P.sneeze)*.08); }
+    else if(ms<P.home) { x=bx+8; f=ms<P.home-150?sp.hip:sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(bx+8,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sB.x=x; sB.b=y; sB.f=f; sB.rot=rot; return {cx:x,base:y,frame:f,hide,rot}; });
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  // Behind everyone: Boppy's kitchen in the evening, the window red with pepper light once he sneezes.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#24100a',.6);
+    if(ms>P.sneeze&&ms<P.fireEnd+400) { const f2=Math.sin(seg(ms,P.sneeze,P.fireEnd+400)*Math.PI); gfx.globalAlpha=f2*.35; R(0,0,576,324,'#ff5a1a'); gfx.globalAlpha=1; } }});
+  const noseR=()=>({x:sB.x+BW*.2,y:sB.b-BH*.72}),noseL=()=>({x:sB.x-BW*.24,y:sB.b-BH*.7});
+  const bowlAt=ms=>{ if(ms<P.bowl||ms>P.umb+200) return null; const h=handPt(tsp,sT.f,sT.x,sT.b,-1),n=noseR();
+    if(ms<P.tline+300) { const k=ez(seg(ms,P.bowl,P.bowl+250)); return {x:h.x-6,y:h.y-(1-k)*16,s:k}; }
+    if(ms<P.umb) { const k=ez(seg(ms,P.tline+300,P.tline+800)); return {x:lerp(h.x-6,n.x+18,k)+Math.sin(ms/120)*7*k,y:lerp(h.y,n.y+10,k)+Math.cos(ms/160)*3*k,s:1}; }
+    const k=seg(ms,P.umb,P.umb+200); return {x:n.x+18+k*30,y:n.y+10+k*40,s:1-k}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // Boppy as stone, then glowing orange cracks climbing from his stomach to his head
+    if(ms>P.stone0&&ms<P.burst) { const fr=bsp.flip; drawAt(bsp,fr,sB.x,sB.b,bsp.pal,1); drawAt(bsp,fr,sB.x,sB.b,stoneOf(bsp),stoneK(ms));
+      if(ms>P.crack) { const c2=ez(seg(ms,P.crack,P.burst-60)),top=sB.b-BH,cx=sB.x,yb=top+BH*.62;
+        for(const [w,c,a] of [[7,'#ff7a1a',.35],[3,'#ffb84a',1]]) { gfx.globalAlpha=a; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath();
+          gfx.moveTo(cx-2,yb); gfx.lineTo(cx+6,yb-BH*.18*c2); gfx.lineTo(cx-4,yb-BH*.36*c2); gfx.lineTo(cx+4,yb-BH*.52*c2);
+          gfx.moveTo(cx-10,yb+4); gfx.lineTo(cx-14,yb-BH*.14*c2); gfx.moveTo(cx+12,yb+2); gfx.lineTo(cx+16,yb-BH*.2*c2); gfx.stroke(); }
+        gfx.globalAlpha=.3*c2; E(cx,yb,BW*.35,BH*.2,'#ff8a2a'); gfx.globalAlpha=1; } }
+    if(ms>P.burst&&ms<P.burst+700) { const k=seg(ms,P.burst,P.burst+700); gfx.globalAlpha=1-k;
+      for(let j=0;j<10;j++) { const a=j*.63+.4,r=10+k*60; R(sB.x+Math.cos(a)*r,sB.b-BH*.5+Math.sin(a)*r*.8+k*k*30,5,4,j%2?'#9a9aa2':'#ffb84a'); } gfx.globalAlpha=1; }
+    // his face goes red from the chin up while he winds up the sneeze
+    if(ms>P.burst+200&&ms<P.fireEnd+300) { const k=ez(seg(ms,P.burst+200,P.sneeze-200))*(1-seg(ms,P.fireEnd-100,P.fireEnd+300)),top=sB.b-BH;
+      if(k>0) { gfx.save(); gfx.beginPath(); gfx.rect(0,top,576,BH*.36); gfx.clip(); gfx.translate(sB.x,sB.b-BH/2); gfx.rotate(sB.rot); gfx.translate(-sB.x,-(sB.b-BH/2));
+        drawAt(bsp,sB.f,sB.x,sB.b,tintOf(bsp,'#ff2a1a',.55),k); gfx.restore(); }
+      // steam out of his ears
+      if(ms<P.sneeze) for(let j=0;j<4;j++) { const q2=((ms/400)+j/4)%1; gfx.globalAlpha=(1-q2)*.8; E(sB.x+(j%2?BW*.28:-BW*.28)+(j%2?q2*10:-q2*10),top+BH*.22-q2*26,3+q2*4,3+q2*4,'#f4f0e6'); } gfx.globalAlpha=1; }
+    // the broth and its spicy steam drifting to his nose
+    const bw=bowlAt(ms); if(bw&&bw.s>0) { brothBowl(bw.x,bw.y,bw.s);
+      if(ms>P.tline+400&&ms<P.burst+300) for(let j=0;j<3;j++) { const q2=((ms/650)+j/3)%1,n=noseR(); gfx.globalAlpha=(1-q2)*.85; gfx.strokeStyle=j%2?'#ff9a4a':'#ffd0a0'; gfx.lineWidth=2.5; gfx.beginPath();
+        for(let s=0;s<=8;s++) { const t2=s/8,x=lerp(bw.x,n.x,q2*t2+.1)+Math.sin(t2*6+ms/110+j)*4,y=lerp(bw.y-8,n.y,q2*t2+.1)-t2*8; s?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); } gfx.globalAlpha=1; }
+    // Tom's umbrella, held out toward his dad
+    umbrella(sT.x-20,sT.b-TH*.55,ez(seg(ms,P.umb,P.umb+250))*(1-ez(seg(ms,P.fireEnd,P.fireEnd+250))),-Math.PI/2-.15+Math.sin(ms/40)*(ms>P.sneeze&&ms<P.fireEnd?.05:0));
+    // THE SNEEZE: a cone of pepper fire from his nose across the whole monster side
+    if(ms>P.sneeze&&ms<P.fireEnd) { const n=noseL(),gr=ez(seg(ms,P.sneeze,P.sneeze+260)),fo=1-seg(ms,P.fireEnd-250,P.fireEnd),len=(n.x+30)*gr,fl=Math.sin(ms/25);
+      for(const [sp2,c,a] of [[1,'#ff4a12',.75],[.7,'#ff9a2a',.9],[.38,'#fff2a0',1]]) { gfx.globalAlpha=a*fo; gfx.fillStyle=c; gfx.beginPath(); gfx.moveTo(n.x,n.y);
+        const hw=(110+fl*8)*sp2*gr; gfx.quadraticCurveTo(n.x-len*.5,n.y-hw*.9,n.x-len,n.y-hw); gfx.lineTo(n.x-len,n.y+hw*.8); gfx.quadraticCurveTo(n.x-len*.5,n.y+hw*.7,n.x,n.y); gfx.fill(); }
+      for(let j=0;j<10;j++) { const q2=((ms-P.sneeze)/500+j/10)%1; gfx.globalAlpha=fo*(1-q2); EO(n.x-q2*len,n.y+Math.sin(j*2.4)*q2*80,4+q2*9,4+q2*7,j%2?'#ffb02a':'#ff6a1a'); }
+      gfx.globalAlpha=1; }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! The Pepper-Broth Sneeze.'); B2.aim=null; S('levelChime'); }],
+    [P.stone0,()=>{ S('stun'); setMessage('Boppy has gone stone grey.'); }],
+    [P.bowl,()=>{ S('chime2'); setMessage('Tom brings a bowl of broth. Extra cayenne.'); }],
+    [P.tline,()=>{ say('tom','tomboboppy3'); }],
+    [P.crack,()=>{ S('creak'); S('flame'); setMessage('The stone glows orange. From the stomach up.'); }],
+    [P.burst,()=>{ S('bang'); word('CRACK!',sB.x,Math.max(56,by-BH-60),'#ffb84a',5,.5); scene('tb_rings',.7,{x:sB.x,y:by-BH*.5,r:60,c:'#ffb84a',w:3}); }],
+    [P.bline,()=>{ say('boppy','tombo3'); }],
+    [P.ah1,()=>{ word('AH...',GR.x,40,'#ffd0a0',3,.5); }],
+    [P.umb,()=>{ S('whoosh'); setMessage('Tom opens an umbrella and ducks.'); }],
+    [P.ah2,()=>{ word('AHHH...',GR.x,66,'#ffb07a',4,.5); }],
+    [P.sneeze,()=>{ S('flame'); S('crash'); S('rumble'); battle.shakeEnemy=.8; word('ACHOOO!',GR.x,52,'#ff7a2a',6,1.1); setMessage('ACHOOOO!! Pepper fire across the whole stage!'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sB.x,mid:sB.b-BH*.5}:ST.unit(p)); scene('glow',1,{x:q2.x,y:q2.mid,rx:38,ry:52,c:'#ffb84a',a:.35}); } }],
+    [P.relief,()=>{ S('fanfare'); setMessage('Boppy pats his stomach. Cleared right out.'); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); ST.jolt(o.f,.6); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:46,c:'#ffb02a',w:3}); landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.sneeze]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Good for the sinuses.']);
+  ST.play(E2,steps);
+};
+
+// ---------- Cone Six Across the Miles (Tom + TNB, tier 3) ----------
+// The stage splits: LA on TNB's side, New York on Tom's, a cold blue wall between them that reads 2475 MILES. TNB holds
+// the first cup he ever threw, glowing from the kiln; Tom holds the matching one with his coffee. A gold thread runs
+// between the cups, through the wall. They walk toward each other, the miles count down to zero as the map folds,
+// the wall shatters, the cups CLINK and they kiss. A Cone Six heat wave rolls over every monster. Effects: Cozy hit
+// on every enemy; the party heals 60%, everyone gets a fresh costume, continuity 2.
+const mug=(x,y,glow,steam,ms)=>{ if(glow>0) { gfx.globalAlpha=glow*(.35+.15*Math.sin(ms/90)); E(x,y,16,16,'#ff8a2a'); gfx.globalAlpha=1; }
+  RO(x-6,y-7,12,13,'#c8b49a'); R(x-6,y-7,12,3,'#7aa8b8'); for(const [a,b2] of [[-3,0],[2,2],[-1,4],[3,-2]]) R(x+a,y+b2,1.5,1.5,'#6a5a48');
+  ring(x+8,y-1,3.5,4,3,OUT); ring(x+8,y-1,3.5,4,1.5,'#c8b49a');
+  if(steam) for(let j=0;j<2;j++) { const q2=((ms/700)+j/2)%1; gfx.globalAlpha=(1-q2)*.8; E(x-2+j*4+Math.sin(q2*6)*2,y-10-q2*14,2+q2*2,2+q2*2,'#f4f0e6'); } gfx.globalAlpha=1; };
+B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),lx=mx-52,rx=mx+52,ml=mx-15,mr=mx+15;
+  const FL=4700,order=order3(list);
+  order.forEach((o,i)=>{ o.t=FL+200+Math.max(0,mx-o.q.x)*.6+i*40; });
+  const last=order.length?order[order.length-1].t:FL+300;
+  const P={walk:700,mugs:1100,nline:1300,thread:2000,tline:2600,step0:3300,step1:3950,fold0:3300,fold1:3950,clink:3950,kiss:4250,flare:FL,
+    apply:last+250,home:last+1200,end:last+1900};
+  const sT={x:T.x,b:by,f:tsp.idle},sN={x:lx,b:by,f:nsp.flip};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,rx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.step0) { f=ms>P.tline-200&&ms<P.step0?sp.act:sp.idle; }
+    else if(ms<P.home) { const k=ez(seg(ms,P.step0,P.step1)); x=lerp(rx,mr,k); f=k<1?runFr(sp,c.t*.7,-1):(ms>P.flare&&ms<P.flare+700?sp.celeb:sp.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(mr,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,actR=mirrorRowsCached(sp,'act'); let x=lx,y=by,f=sp.flip;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,lx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.step0) { f=ms>P.nline-100&&ms<P.step0?actR:sp.flip; }
+    else if(ms<P.home) { const k=ez(seg(ms,P.step0,P.step1)); x=lerp(lx,ml,k); f=k<1?runFr(sp,c.t*.7,1):(ms>P.flare&&ms<P.flare+700?(sp.celebFlip||sp.flip):sp.flip); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(ml,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f}; });
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  const fold=ms=>ez(seg(ms,P.fold0,P.fold1));
+  // Behind everyone: night, LA warm on the left, New York cool on the right; a palm and a skyline that slide together
+  // as the map folds, with a crease shadow down the middle.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#0e1426',.6);
+    const fk=fold(ms),wk=ms<P.clink?1:0;
+    gfx.globalAlpha=k*.22*(1-fk); R(0,0,mx,324,'#ff9a5a'); R(mx,0,576-mx,324,'#6aa8ff'); gfx.globalAlpha=1;
+    gfx.globalAlpha=k*ez(seg(ms,300,900))*(1-seg(ms,P.clink,P.clink+400)); const pX=lerp(lx-40,mx-26,fk),sX=lerp(rx+34,mx+20,fk),gy=by-TH-8;
+    // palm
+    Ln(pX,gy+70,pX+4,gy,4,OUT); Ln(pX,gy+70,pX+4,gy,2,'#8a5a30');
+    for(let j=0;j<5;j++) { const a=-Math.PI*.95+j*Math.PI*.22; Ln(pX+4,gy,pX+4+Math.cos(a)*18,gy+Math.sin(a)*10+6,4,'#2a6a3a'); }
+    // skyline
+    for(const [dx,w,h] of [[-8,10,46],[4,12,62],[18,9,38]]) { RO(sX+dx,gy+70-h,w,h,'#3a4a6a'); for(let yy=gy+74-h;yy<gy+66;yy+=8) R(sX+dx+3,yy,3,3,'#ffe08a'); }
+    gfx.globalAlpha=1;
+    if(fk>0&&fk<1) { gfx.globalAlpha=Math.sin(fk*Math.PI)*.5*k; R(mx-6-fk*20,0,12+fk*40,324,'#000000'); gfx.globalAlpha=1; } }});
+  const mugT=()=>{ const h=handPt(tsp,sT.f,sT.x,sT.b,-1); return {x:h.x-4,y:h.y-6}; },mugN=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,1); return {x:h.x+2,y:h.y-6}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms);
+    // labels: LA and NY at the top, the miles count over the wall
+    if(k>0&&ms>1600&&ms<P.clink+300) { const fk=fold(ms),a=k*ez(seg(ms,1600,2000))*(1-seg(ms,P.clink,P.clink+300)); gfx.globalAlpha=a;
+      bigWord('LA',lerp(lx,mx-24,fk),46,'#ffb07a',3); bigWord('NY',lerp(rx,mx+24,fk),46,'#9fd0ff',3);
+      const miles=Math.round(2475*(1-fk)); bigWord(miles+' MILES',mx,72,'#dff0fa',2); gfx.globalAlpha=1; }
+    // the cold wall between them
+    if(ms<P.clink) { const a=ez(seg(ms,300,900))*k; gfx.globalAlpha=a*.35; R(mx-9,BARH,18,by+6-BARH,'#6ac8ff'); gfx.globalAlpha=a*.85; R(mx-2,BARH,4,by+6-BARH,'#dff6ff');
+      for(let j=0;j<6;j++) { const yy=BARH+((ms/8+j*47)%(by-BARH)); gfx.globalAlpha=a*.6; R(mx-8,yy,16,2,'#bfeaff'); } gfx.globalAlpha=1; }
+    // the wall shatters into gold
+    if(ms>P.clink&&ms<P.clink+900) { const q2=seg(ms,P.clink,P.clink+900); gfx.globalAlpha=1-q2;
+      for(let j=0;j<22;j++) { const yy=BARH+j/22*(by-BARH),dir=j%2?1:-1,dx=dir*(10+q2*(60+j*4)); gfx.save(); gfx.translate(mx+dx,yy+q2*q2*60); gfx.rotate(q2*8+j);
+        gfx.fillStyle=j%3?GOLD:'#bfeaff'; gfx.beginPath(); gfx.moveTo(0,-5); gfx.lineTo(4,4); gfx.lineTo(-4,3); gfx.closePath(); gfx.fill(); gfx.restore(); } gfx.globalAlpha=1; }
+    // the cups
+    if(ms>P.mugs&&ms<P.home+200) { const a=ez(seg(ms,P.mugs,P.mugs+250))*(1-seg(ms,P.home-100,P.home+200)); gfx.globalAlpha=a;
+      const mT=mugT(),mN=mugN(); mug(mN.x,mN.y,ms<P.flare+600?1:0,false,ms); mug(mT.x,mT.y,0,true,ms); gfx.globalAlpha=1;
+      // the gold thread between them, straight through the wall
+      if(ms>P.thread&&ms<P.clink) { const ta=ez(seg(ms,P.thread,P.thread+400)),n=24;
+        for(const [w,c,al] of [[6,'#ffe9a0',.35],[2.5,GOLD,1]]) { gfx.globalAlpha=ta*al; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath();
+          for(let j=0;j<=n;j++) { const q2=j/n,x=lerp(mN.x,mT.x,q2),y=lerp(mN.y-6,mT.y-6,q2)+Math.sin(q2*Math.PI*5-ms/100)*4*Math.sin(q2*Math.PI); j?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); } gfx.globalAlpha=1; } }
+    // clink sparkle and the kiss heart
+    if(ms>P.clink&&ms<P.clink+500) { const q2=seg(ms,P.clink,P.clink+500),y=(mugT().y+mugN().y)/2-6; gfx.globalAlpha=1-q2; ring(mx,y,6+q2*26,4+q2*18,3,GOLD); star(mx,y,4+q2*6,'#fffbe6'); gfx.globalAlpha=1; }
+    if(ms>P.kiss&&ms<P.kiss+1100) { const q2=seg(ms,P.kiss,P.kiss+1100); gfx.globalAlpha=q2>.8?(1-q2)/.2:1; heart(mx,by-Math.max(TH,NH)-12-q2*30,7+Math.sin(q2*Math.PI)*4,PINK); gfx.globalAlpha=1; }
+    // the Cone Six heat wave rolling left over the monsters
+    if(ms>P.flare&&ms<last+600) { const q=seg(ms,P.flare,last+600);
+      for(let j=0;j<4;j++) { const p=cl(q*1.25-j*.1); if(p<=0||p>=1) continue; gfx.globalAlpha=(1-p)*.85; gfx.strokeStyle=['#fff2c0','#ffb84a','#ff7a2a','#ffd88a'][j]; gfx.lineWidth=6;
+        gfx.beginPath(); gfx.ellipse(mx,by-50,20+p*mx,40+p*150,0,Math.PI*.55,Math.PI*1.45); gfx.stroke(); }
+      gfx.globalAlpha=.18*Math.sin(q*Math.PI); R(0,0,mx,324,'#ff9a3a'); gfx.globalAlpha=1; }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Cone Six Across the Miles.'); B2.aim=null; S('levelChime'); }],
+    [400,()=>{ S('stun'); setMessage('LA on one side. New York on the other. 2475 miles between.'); }],
+    [P.mugs,()=>{ S('ding'); setMessage('TNB holds the first cup he ever threw. Tom holds its match.'); }],
+    [P.nline,()=>{ say('tnb','tombo3'); }],
+    [P.thread,()=>{ S('chime2'); setMessage('A gold thread runs between the cups, right through the wall.'); }],
+    [P.tline,()=>{ say('tom','tombotnb3'); }],
+    [P.step0,()=>{ S('step'); setMessage('They walk toward each other. The map folds in half.'); }],
+    [P.clink,()=>{ S('ding'); S('crash'); word('CLINK!',mx,Math.max(56,by-Math.max(TH,NH)-50),GOLD,4,.7); }],
+    [P.kiss,()=>{ S('kiss'); }],
+    [P.flare,()=>{ S('flame'); S('whoosh'); word('CONE SIX!',GR.x,40,'#ffb84a',4,1); setMessage('A Cone Six heat wave rolls over every monster.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sN.x,mid:sN.b-NH*.5}:ST.unit(p)); scene('glow',1,{x:q2.x,y:q2.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('thud'); ST.jolt(o.f,.55); battle.shakeEnemy=.35; landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.flare]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Zero miles. Right here.']);
+  ST.play(E2,steps);
+};
+
+// ---------- Cuddle (Tom + Nara, tier 3) ----------
+// The dark closes in. Tom kneels in it, alone, grey and flickering. Far off, Nara puts her nose down and follows his
+// scent along a gold trail, finds him, and climbs into his lap. He wraps his arms around her; his color comes back,
+// the warmth spreads, gold cracks run through the dark, and it shatters into color across every monster.
+// Effects: Sparkle hit on every enemy (warms them), the party loses its debuffs and is Fearless for 2 turns.
+B2_TOMBO_ANIM.nara3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),N0=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),tx=cl(GR.x1+130,GR.x1+100,450),lapX=tx-24,LS=.8;
+  const SH=4900,order=order3(list);
+  order.forEach((o,i)=>{ o.t=SH+200+Math.max(0,tx-o.q.x)*.5+i*40; });
+  const last=order.length?order[order.length-1].t:SH+300;
+  const P={walk:800,ghost0:900,ghost1:1500,sniff:1700,run:2000,arrive:3000,climb:3000,seat:3350,nline:3250,warm0:3350,warm1:3900,tline:3600,crack0:4300,shatter:SH,
+    apply:last+250,hop:SH+100,home:last+1300,end:last+2000};
+  const sT={x:T.x,b:by},sN={x:N0.x,b:N0.base,f:nsp.idle};
+  const hideT=ms=>ms>P.ghost0&&ms<P.shatter,hideN=ms=>ms>P.seat-20&&ms<P.shatter;
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.kneel;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t*.6,-1); }
+    else if(ms<P.home) { f=ms<P.shatter+200?sp.kneel:(ms<P.shatter+900?sp.celeb:sp.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f,hide:hideT(ms)}; });
+  const beside=tx-56;
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
+    if(ms<P.run) { f=ms>P.sniff?(Math.floor(ms/180)%2?sp.idle:sp.idle2||sp.idle):sp.idle; if(ms>P.sniff) y+=2; }
+    else if(ms<P.climb) { const k=seg(ms,P.run,P.arrive); x=lerp(c.origX,lapX+6,k); y=lerp(c.origBase,by,k)+2; f=runFr(sp,c.t*.9,-1); }
+    else if(ms<P.seat) { const k=seg(ms,P.climb,P.seat); x=lerp(lapX+6,lapX,k); y=by-Math.sin(k*Math.PI)*22; f=sp.celeb; }
+    else if(ms<P.shatter) { x=lapX; y=by; f=sp.sit; }
+    else if(ms<P.home) { const k=ez(seg(ms,P.hop,P.hop+450)); x=lerp(lapX,beside,k); y=by-Math.sin(k*Math.PI)*30; f=ms<P.hop+900?sp.celeb:sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(beside,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f,hide:hideN(ms)}; });
+  const darkK=ms=>ez(seg(ms,0,500));
+  const warm=ms=>ez(seg(ms,P.warm0,P.crack0+400));
+  const lap=()=>({x:sT.x-8,y:sT.b-TH*.35});
+  const rays=[...Array(9)].map((_,j)=>{ const a=j/9*Math.PI*2+.3; return [0,1,2,3].map(s2=>({a:a+(s2%2?.18:-.14)*(s2?1:0),r:s2})); });
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    const L=lap();
+    // the gold scent trail along the floor, from Nara's spot to Tom
+    if(ms>P.sniff&&ms<P.seat+400) { const a=ez(seg(ms,P.sniff,P.sniff+400))*(1-seg(ms,P.seat,P.seat+400)),n=20,x0=N0.x,x1=sT.x;
+      for(const [w,c,al] of [[6,'#ffe9a0',.3],[2.5,GOLD,.9]]) { gfx.globalAlpha=a*al; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath();
+        for(let j=0;j<=n;j++) { const q2=j/n,x=lerp(x0,x1,q2),y=lerp(N0.base-6,by-6,q2)+Math.sin(q2*Math.PI*4+ms/150)*3; j?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); }
+      gfx.globalAlpha=1; }
+    // the dark (with violet static) and its holes of light
+    const dk=darkK(ms)*(ms<P.shatter?1:1-ez(seg(ms,P.shatter,P.shatter+450)));
+    if(dk>0) { if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
+      const g=darkC.getContext('2d'); g.globalCompositeOperation='source-over'; g.clearRect(0,0,576,324); g.fillStyle='#0a0616'; g.fillRect(0,0,576,324);
+      for(let j=0;j<40;j++) { const r=Math.sin(j*91.7+Math.floor(ms/70)*13.3)*.5+.5,r2=Math.sin(j*37.1+Math.floor(ms/70)*7.9)*.5+.5; g.fillStyle=j%3?'#2a1a4a':'#4a2a7a'; g.fillRect(r*576,r2*324,8+j%5*4,2); }
+      g.globalCompositeOperation='destination-out';
+      const hole=(x,y,r,a)=>{ const gr=g.createRadialGradient(x,y,r*.3,x,y,r); gr.addColorStop(0,'rgba(0,0,0,'+a+')'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.beginPath(); g.arc(x,y,r,0,Math.PI*2); g.fill(); };
+      hole(sT.x,sT.b-TH*.45,lerp(46,190,warm(ms)),lerp(.45,1,warm(ms)));
+      if(ms<P.seat) hole(sN.x,sN.b-NH*.45,58,ms>P.sniff?1:.6);
+      g.globalCompositeOperation='source-over';
+      gfx.globalAlpha=.94*dk; gfx.drawImage(darkC,0,0); gfx.globalAlpha=1; }
+    // the warm glow around the two of them
+    const wk=warm(ms)*(1-ez(seg(ms,P.shatter+200,P.home)));
+    if(wk>0) { gfx.globalAlpha=wk*.35; E(L.x,L.y,60+wk*30,50+wk*24,'#ffcf7a'); gfx.globalAlpha=wk*.25; E(L.x,L.y,30+wk*20,26+wk*16,'#fff2c0'); gfx.globalAlpha=1; }
+    // Tom, drawn over the dark: grey and flickering, then his color coming back
+    if(hideT(ms)) { const fr=tsp.kneel,gk=ez(seg(ms,P.ghost0,P.ghost1)),ck=ez(seg(ms,P.warm0,P.warm1)),fl=.5+.2*Math.sin(ms/55)+.12*Math.sin(ms/23);
+      drawAt(tsp,fr,sT.x,sT.b,tsp.pal,ck+(1-gk)*(1-ck));
+      drawAt(tsp,fr,sT.x,sT.b,tintOf(tsp,'#4a4270',.55),gk*(1-ck)*fl); }
+    // Nara in his lap, smaller and in front, with his arms around her
+    if(hideN(ms)) { const fr=nsp.sit,nh=fr.length*nsp.scale*LS,nw=fr[0].length*nsp.scale*LS,nb=sT.b+2;
+      gfx.globalAlpha=.55; E(lapX,nb-nh*.5,nw*.62,nh*.6,'#ffe2a0'); gfx.globalAlpha=1;
+      const rim=tintOf(nsp,'#fff2c8',1); for(const [ox,oy] of [[-2,0],[2,0],[0,-2],[0,2]]) drawAt(nsp,fr,lapX+ox,nb+oy,rim,.9,nsp.scale*LS);
+      drawAt(nsp,fr,lapX,nb,nsp.pal,1,nsp.scale*LS);
+      // hearts and a little huff of breath
+      if(ms>P.seat+300) for(let j=0;j<3;j++) { const q2=((ms-P.seat)/1000+j/3)%1; gfx.globalAlpha=(1-q2)*Math.min(1,wk+.3); heart(lapX-10+j*12,nb-nh-14-q2*30,4+j%2*2,PINK); } gfx.globalAlpha=1; }
+    // gold cracks running out through the dark from the two of them
+    if(ms>P.crack0&&ms<P.shatter) { const ck=ez(seg(ms,P.crack0,P.shatter-60));
+      for(const [w,c,al] of [[6,'#ffe9a0',.35],[2.5,GOLD,1]]) { gfx.globalAlpha=al; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round';
+        for(const ray of rays) { gfx.beginPath(); gfx.moveTo(L.x+Math.cos(ray[0].a)*44,L.y+Math.sin(ray[0].a)*26); let px=L.x,py=L.y;
+          for(const pt2 of ray) { const len=(70+pt2.r*90)*ck; const nx=L.x+Math.cos(pt2.a)*len*1.4,ny=L.y+Math.sin(pt2.a)*len*.75; gfx.lineTo(nx,ny); px=nx; py=ny; } gfx.stroke(); } }
+      gfx.globalAlpha=1; }
+    // the shatter: dark shards fly out and rainbow rings of color sweep across the stage
+    if(ms>P.shatter&&ms<P.shatter+1100) { const q2=seg(ms,P.shatter,P.shatter+1100);
+      gfx.globalAlpha=1-q2; for(let j=0;j<26;j++) { const a=j/26*Math.PI*2+j*.4,r=20+q2*(260+j%5*40); gfx.save(); gfx.translate(L.x+Math.cos(a)*r*1.3,L.y+Math.sin(a)*r*.7+q2*q2*40); gfx.rotate(a+q2*7);
+        gfx.fillStyle=j%3?'#1a1030':'#4a2a7a'; gfx.beginPath(); gfx.moveTo(0,-9); gfx.lineTo(8,6); gfx.lineTo(-7,5); gfx.closePath(); gfx.fill(); gfx.restore(); }
+      ['#ff7a8a','#ffd04a','#7ae08a','#6ac8ff','#c08aff'].forEach((c,j)=>{ const p=cl(q2*1.3-j*.08); if(p<=0||p>=1) return; gfx.globalAlpha=(1-p)*.9; ring(L.x,L.y,20+p*520,14+p*300,6,c); });
+      gfx.globalAlpha=1; }
+    bars(ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.end-100)))); }});
+  const steps=[
+    [0,()=>{ setMessage('TOMBO! Cuddle.'); B2.aim=null; S('stun'); }],
+    [P.ghost0,()=>{ S('creak'); setMessage('The dark closes in. Tom is alone in it, and fading.'); }],
+    [P.sniff,()=>{ S('sniff'); setMessage('Far away, Nara puts her nose down. She knows that smell.'); word('SNFF SNFF',N0.x,Math.max(56,N0.base-NH-40),GOLD,3,.7); }],
+    [P.run,()=>{ S('bark'); }],
+    [P.climb,()=>{ S('boing'); setMessage('She finds him, and climbs right into his lap.'); }],
+    [P.nline,()=>{ say('nara','tombo3'); }],
+    [P.tline,()=>{ say('tom','tombonara3'); }],
+    [P.warm0+200,()=>{ S('heal'); }],
+    [P.crack0,()=>{ S('creak'); S('levelChime'); setMessage('The warmth spreads. The dark starts to crack.'); }],
+    [P.shatter,()=>{ S('crash'); S('fanfare'); battle.shakeEnemy=.6; word('COLOR!',GR.x,52,'#fffbe6',6,1.1); setMessage('The dark shatters into color!'); }],
+    [P.hop,()=>{ S('bark'); }],
+    [P.apply,()=>{ E2.apply(); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sN.x,mid:sN.b-NH*.5}:ST.unit(p)); scene('glow',1,{x:q2.x,y:q2.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); ST.jolt(o.f,.55); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:['#ff7a8a','#ffd04a','#7ae08a','#6ac8ff'][i%4],w:3}); landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.shatter]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' She found him. She always will.']);
+  ST.play(E2,steps);
+};
+
+// ================= Family Finishes (tombo-review.md "Family Finishes"; 3 or 4 members, 75% HEART) =================
+// E2.mem is everyone taking part, E2.fx their battle.fx in the same order. Every body starts from where it was last
+// drawn (Rose may be on Tom's shoulders) and walks home at the end.
+const startOf=u=>{ const d=battle.drawnAt&&battle.drawnAt[u.idx],h=ST.unit(u); return d?{x:d.cx,b:d.base}:{x:h.x,b:h.base}; };
+const ffHop=(ms,a,b)=>ms>a&&ms<b?-Math.abs(Math.sin(ms/75))*6:0;   // a little bounce while gliding (Tom, Grace, Rose have no run frames)
+
+// ---------- Sleepover at Tom's (Family Finish 1: Tom, TNB, Grace, Rose) ----------
+// The girls' first night at Tom and TNB's. Rose builds a blanket fort, Grace starts a dance party in it, Tom hands
+// out snacks, TNB tells a scary story with a flashlight. The fort grows into a castle and topples onto the monsters.
+// Effects: Sparkle hit on every enemy (warms them), party heals 60%, fresh costumes, Rose rides Tom, Trending locks 2.
+const snackBag=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); RO(-6,-6,12,13,'#e0402e'); R(-3,-6,3,13,CREAM); R(3,-6,2,13,CREAM);
+  for(const [a,b2] of [[-4,-8],[1,-10],[4,-8],[-1,-7]]) popcorn(a,b2,2.6); gfx.restore(); };
+// The fort: a quilt wall over two chairs with a lit doorway. k 0..1 grows it into a castle (crenellations, three
+// turrets with flags, H tall). Drawn about its left bottom corner (px,by), rotated by rot, squashed across by sq.
+const fortCastle=(px,by,W,H,o)=>{ const k=o.k||0,ms=o.ms||0,sq=o.sq==null?1:o.sq,wh=lerp(100,H*.7,k),th=lerp(100,H,k);
+  gfx.save(); gfx.translate(px,by); gfx.rotate(o.rot||0); gfx.scale(sq,1);
+  if(k<.6) { gfx.globalAlpha*=1; for(const x of [8,W-8]) { RO(x-3,-wh-26,6,wh+26,'#8a5a30'); R(x-9,-wh*.55,18,4,'#6a4220'); } }
+  gfx.beginPath(); gfx.moveTo(0,0); gfx.lineTo(0,-wh);
+  if(k<.3) gfx.quadraticCurveTo(W/2,-wh+22*(1-k/.3),W,-wh);
+  else { const n=11,cw=W/n,ck=cl((k-.3)/.3); for(let j=0;j<n;j++) { const up=j%2?-wh:-wh-12*ck; gfx.lineTo(j*cw,up); gfx.lineTo((j+1)*cw,up); } }
+  gfx.lineTo(W,0); gfx.closePath(); gfx.fillStyle='#5a7ac8'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
+  gfx.save(); gfx.clip(); for(let r=0;r<14;r++) for(let q=0;q<10;q++) { if((r+q)%3) continue; R(q*W/10+3,-r*28-24,W/10-6,20,['#e88aa8','#ffd27a','#8ad0a8'][(r*2+q)%3]); } gfx.restore();
+  // the lit doorway (everyone stands in front of it, so they read as inside)
+  const dw=W-56,dh=96; gfx.beginPath(); gfx.moveTo(28,0); gfx.lineTo(28,-dh+20); gfx.quadraticCurveTo(28,-dh,48,-dh); gfx.lineTo(28+dw-20,-dh); gfx.quadraticCurveTo(28+dw,-dh,28+dw,-dh+20); gfx.lineTo(28+dw,0); gfx.closePath();
+  gfx.fillStyle='#3a2a50'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
+  if(o.disco>0) { gfx.save(); gfx.clip(); for(let j=0;j<6;j++) { const a=ms/400+j*1.05; gfx.globalAlpha=o.disco*.5; E(28+dw/2+Math.cos(a)*dw*.4,-dh/2+Math.sin(a*1.3)*dh*.35,16,10,['#ff7a8a','#ffd04a','#7ae08a','#6ac8ff','#c08aff','#ff9ac0'][j]); } gfx.restore(); gfx.globalAlpha=1; }
+  // fairy lights along the top
+  for(let j=0;j<=14;j++) { const on=(Math.floor(ms/300)+j)%3; E(j*W/14,-wh-3+Math.sin(j*1.7)*3,2.6,2.6,on?['#ffd04a','#ff9ac0','#9fd8ff'][j%3]:'#7a6a5a'); }
+  // Rose's sign
+  RO(W/2-30,-dh-22,60,14,'#c89a5a'); label('NO GROWN-UPS',W/2,-dh-18,'#3a2a1a',1);
+  // turrets with pennants
+  if(k>.25) { const tk=ez(cl((k-.25)/.55));
+    for(const [tx,c,f] of [[16,'#e88aa8',.88],[W/2,'#ffd27a',1],[W-16,'#8ad0a8',.88]]) { const tt=lerp(wh,th,tk)*f;
+      RO(tx-16,-tt,32,tt,'#6a8ad8'); for(let y=-tt+16;y<-dh-30;y+=30) R(tx-4,y,8,11,'#2a2244');
+      gfx.beginPath(); gfx.moveTo(tx-20,-tt); gfx.lineTo(tx,-tt-30*tk); gfx.lineTo(tx+20,-tt); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
+      const fy=-tt-30*tk; Ln(tx,fy,tx,fy-16*tk,2,OUT); gfx.fillStyle=c; gfx.beginPath(); gfx.moveTo(tx,fy-16*tk); gfx.lineTo(tx+13*tk+Math.sin(ms/110)*2,fy-12*tk); gfx.lineTo(tx,fy-8*tk); gfx.closePath(); gfx.fill(); } }
+  gfx.restore(); };
+B2_TOMBO_ANIM.ff1=E2=>{ B2.aim=null;
+  const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),tom=by0('tom'),tnb=by0('tnb'),gr=by0('grace'),ro=by0('rose');
+  const fxOf=u=>E2.fx[mem.indexOf(u)],list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty(),T=ST.unit(tom);
+  const SP=id=>BATTLE_SPRITES[id],Hof=id=>SP(id).idle.length*SP(id).scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,296),fc=cl(GR.x1+170,GR.x1+140,450),W=220,px=fc-104,H=cl(px-GR.x0+10,170,300);
+  const spot={rose:{x:fc-62,b:by+8},grace:{x:fc-18,b:by+4},tnb:{x:fc+30,b:by},tom:{x:fc+80,b:by-4}};
+  const T0=5400,T1=6000,TH0=Math.PI/2;
+  // each monster is hit when the falling castle reaches its head
+  const order=order3(list).map(o=>{ const d=Math.max(4,px-o.q.x),th=Math.atan(d/Math.max(30,o.q.h*.8)); o.t=T0+Math.sqrt(th/TH0)*(T1-T0); return o; }).sort((a,b)=>a.t-b.t);
+  const last=order.length?order[order.length-1].t:T1;
+  const P={walk:800,build0:850,build1:1750,rline:1450,dance0:2000,dance1:2950,snack0:2200,story0:3050,nline:3200,eek:4150,story1:4350,grow0:4400,grow1:5100,wob:5100,
+    top0:T0,top1:T1,apply:last+250,fade:last+500,home:last+1000,end:last+1800};
+  const st={};
+  const body=(u,fn)=>{ const s0=startOf(u),s2=st[u.id]={x:s0.x,b:s0.b,f:SP(u.id).idle};
+    pathOf(fxOf(u),P.end,(ms,c)=>{ const sp=c.sp,o=spot[u.id]; let x=o.x,y=o.b,f=sp.idle;
+      if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(s0.x,o.x,k); y=lerp(s0.b,o.b,k)+ffHop(ms,0,P.walk); f=runFr(sp,c.t,-1); }
+      else if(ms<P.home) { const r=fn(ms,sp); if(r) { f=r.f||f; y+=r.dy||0; } }
+      else { const H2=u===ro&&b2Alive(tom)&&battle.drawnAt[tom.idx]?(d=>({x:d.cx+2,b:d.base-d.h+20}))(battle.drawnAt[tom.idx]):{x:c.origX,b:c.origBase};
+        const k=ez(seg(ms,P.home,P.home+700)); x=lerp(o.x,H2.x,k); y=lerp(o.b,H2.b,k)+ffHop(ms,P.home,P.home+700); f=k<1?runFr(sp,c.t,1):sp.idle; }
+      s2.x=x; s2.b=y; s2.f=f; return {cx:x,base:y,frame:f}; }); };
+  const scared=ms=>ms>P.eek&&ms<P.eek+500?-Math.sin(seg(ms,P.eek,P.eek+500)*Math.PI)*26:0;
+  const cheer=ms=>ms>T1&&ms<P.home;
+  body(ro,(ms,sp)=>{ if(ms>P.build0&&ms<P.build1) return {f:Math.floor(ms/200)%2?sp.act:sp.celeb,dy:-Math.abs(Math.sin(ms/110))*8};
+    if(ms>P.dance0&&ms<P.dance1) return {f:sp.celeb,dy:-Math.abs(Math.sin(ms/140))*12};
+    if(ms>P.eek&&ms<P.eek+500) return {f:sp.celeb,dy:scared(ms)}; if(cheer(ms)) return {f:sp.celeb}; return null; });
+  body(gr,(ms,sp)=>{ if(ms>P.dance0&&ms<P.dance1) return {f:Math.floor(ms/220)%2?(sp.celebFlip||sp.celeb):sp.celeb,dy:-Math.abs(Math.sin(ms/110))*14};
+    if(ms>P.eek&&ms<P.eek+500) return {f:sp.celeb,dy:scared(ms)*.8}; if(cheer(ms)) return {f:sp.celebFlip||sp.celeb}; return null; });
+  body(tnb,(ms,sp)=>{ if(ms>P.story0&&ms<P.story1) return {f:sp.clap||sp.idle}; if(cheer(ms)) return {f:sp.celeb}; return null; });
+  body(tom,(ms,sp)=>{ if(ms>P.snack0&&ms<P.snack0+900) return {f:sp.act}; if(ms>P.eek&&ms<P.eek+500) return {f:sp.celeb}; if(cheer(ms)) return {f:sp.celeb}; return null; });
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  const grow=ms=>ez(seg(ms,P.grow0,P.grow1)),build=ms=>ez(seg(ms,P.build0,P.build1));
+  const wob=ms=>ms>P.wob&&ms<T0?Math.sin(ms/45)*.025*seg(ms,P.wob,T0):0;
+  const fall=ms=>TH0*Math.pow(seg(ms,T0,T1),2);
+  const disco=ms=>ms>P.dance0&&ms<P.dance1+300?Math.min(1,seg(ms,P.dance0,P.dance0+200))*(1-seg(ms,P.dance1,P.dance1+300)):0;
+  const fortA=ms=>1-seg(ms,P.fade,P.home);
+  // Behind everyone: a cozy living room at night, and the fort while it stands.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#1a1430',.55);
+    if(ms<T0) { const b=build(ms); if(b<=0) return;
+      // pieces fly in: the fort fades and drops into place while it is being built
+      gfx.globalAlpha=b; gfx.save(); gfx.translate(0,-(1-b)*40); fortCastle(px,by,W,H,{k:grow(ms),rot:wob(ms),ms,disco:disco(ms)}); gfx.restore(); gfx.globalAlpha=1; } }});
+  const tnbChin=()=>{ const s2=st.tnb; return {x:s2.x-4,y:s2.b-Hof(tnb.id)*.66}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // pillows and cushions flying into place while Rose builds
+    if(ms>P.build0&&ms<P.build1) for(let j=0;j<5;j++) { const q2=seg(ms,P.build0+j*150,P.build0+j*150+450); if(q2<=0||q2>=1) continue;
+      const x=lerp(px+W+40,px+20+j*45,q2),y=lerp(by-160,by-110,q2)-Math.sin(q2*Math.PI)*40; gfx.save(); gfx.translate(x,y); gfx.rotate(q2*6);
+      RO(-14,-9,28,18,['#e88aa8','#ffd27a','#8ad0a8','#9fb8ff','#ffb07a'][j]); E(-8,-3,3,2,CREAM); gfx.restore(); }
+    // the story: lights out, one flashlight under TNB's chin
+    if(ms>P.story0&&ms<P.story1+200) { const dk=Math.min(1,seg(ms,P.story0,P.story0+250))*(1-seg(ms,P.story1,P.story1+200)),c=tnbChin();
+      if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
+      const g=darkC.getContext('2d'); g.globalCompositeOperation='source-over'; g.clearRect(0,0,576,324); g.fillStyle='#07040e'; g.fillRect(0,0,576,324);
+      g.globalCompositeOperation='destination-out'; const fl=.85+.15*Math.sin(ms/37);
+      g.fillStyle='rgba(0,0,0,'+(.8*fl)+')'; g.beginPath(); g.moveTo(c.x,c.y+4); g.lineTo(c.x-24,c.y-58); g.lineTo(c.x+24,c.y-58); g.closePath(); g.fill();
+      const gr2=g.createRadialGradient(c.x,c.y-22,6,c.x,c.y-22,40); gr2.addColorStop(0,'rgba(0,0,0,1)'); gr2.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr2; g.beginPath(); g.arc(c.x,c.y-22,40,0,Math.PI*2); g.fill();
+      g.globalCompositeOperation='source-over'; gfx.globalAlpha=.9*dk; gfx.drawImage(darkC,0,0);
+      gfx.globalAlpha=dk*.25*fl; gfx.fillStyle='#ffe9a0'; gfx.beginPath(); gfx.moveTo(c.x,c.y+4); gfx.lineTo(c.x-24,c.y-58); gfx.lineTo(c.x+24,c.y-58); gfx.closePath(); gfx.fill();
+      gfx.globalAlpha=dk; RO(c.x-3,c.y,6,12,'#3a3a44'); E(c.x,c.y,4,2,'#fff2a0'); gfx.globalAlpha=1; }
+    // the castle topples onto the monsters, squashing flat like a big soft heap
+    if(ms>=T0&&ms<P.home) { const th=fall(ms),sq=lerp(1,.38,seg(ms,T0,T1)),bounce=ms>T1?Math.sin(seg(ms,T1,T1+260)*Math.PI)*.04:0;
+      gfx.globalAlpha=fortA(ms); fortCastle(px,by,W,H,{k:1,rot:-th+bounce,sq,ms}); gfx.globalAlpha=1;
+      if(ms>T1&&ms<T1+900) { const q2=seg(ms,T1,T1+900); gfx.globalAlpha=1-q2;
+        for(let j=0;j<16;j++) { const x=lerp(px-H,px,j/15),y=by-60-q2*(40+(j%4)*20); gfx.save(); gfx.translate(x+Math.sin(j*3+q2*6)*8,y); gfx.rotate(j+q2*3); E(0,0,5,2,'#fffaf0'); gfx.restore(); } gfx.globalAlpha=1; } }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('FAMILY FINISH! Sleepover at Tom’s.'); B2.aim=null; S('levelChime'); }],
+    [P.build0,()=>{ S('whoosh'); setMessage('Rose builds a blanket fort. Every pillow in the house.'); }],
+    [P.rline,()=>{ say('rose','ff1'); }],
+    [P.dance0,()=>{ S('fanfare'); word('DANCE PARTY!',fc,40,'#ff9ac0',4,.9); setMessage('Grace starts a dance party in the fort.'); }],
+    [P.snack0,()=>{ S('whoosh'); setMessage('Tom hands out snacks. Popcorn for everyone.');
+      const h=handPt(SP('tom'),SP('tom').act,spot.tom.x,spot.tom.b,-1);
+      [ro,gr,tnb].forEach((m,j)=>{ const o=spot[m.id]; ST.fly((x,y)=>snackBag(x,y,1),h.x,h.y,o.x+4,o.b-Hof(m.id)*.5,.45,40,j*.18); }); }],
+    [P.story0,()=>{ S('stun'); setMessage('TNB turns off the lights and clicks on a flashlight.'); }],
+    [P.nline,()=>{ say('tnb','ff1'); }],
+    [P.eek-150,()=>{ S('creak'); }],
+    [P.eek,()=>{ S('boo'); word('EEK!',spot.grace.x,66,'#fffbe6',4,.5); }],
+    [P.grow0,()=>{ S('rumble'); setMessage('The fort keeps growing. It is a castle now.'); }],
+    [P.wob,()=>{ S('creak'); }],
+    [T0,()=>{ S('slideWhistle'); setMessage('And it topples right onto the monsters!'); }],
+    [T1,()=>{ S('crash'); battle.shakeEnemy=.7; word('FLUMP!',GR.x,52,'#fffbe6',6,1); }],
+    [P.apply,()=>{ E2.apply(); for(const p of party) { const s2=st[p.id]&&mem.includes(p)?{x:st[p.id].x,mid:st[p.id].b-Hof(p.id)*.5}:ST.unit(p); scene('glow',1,{x:s2.x,y:s2.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('thud'); ST.jolt(o.f,.55); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:CREAM,w:3}); landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:T1]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Lights out at nine. Maybe ten.']);
+  ST.play(E2,steps);
+};
+
+// ---------- Run With Us, Mommy! (Family Finish 2: Amy, Grace, Rose; no Tom) ----------
+// A grey wall of ticking clocks rises; its chains and a stack of ungraded papers force Amy to one knee. Grace runs in,
+// sticks a gold star on her and counts her in (5 6 7 8); Rose ties her pink ribbon on Mom's wrist and hands her Lamby.
+// The girls take Mom's hands and pull her up, and the three of them sprint right through the wall (the chains turn into
+// yellow finish tape) and on through every monster. Effects: Kinetic hit on every enemy; the party loses its debuffs,
+// gets 3 VP and Personal Best for 3 turns, and moves up the line.
+const chainLine=(x0,y0,x1,y1,sag,c,k=1)=>{ const n=Math.max(3,Math.floor(Math.hypot(x1-x0,y1-y0)/7*k));
+  for(let j=0;j<n;j++) { const q=j/(Math.max(1,Math.hypot(x1-x0,y1-y0)/7)),x=lerp(x0,x1,q),y=lerp(y0,y1,q)+Math.sin(q*Math.PI)*sag; if(q>1) break;
+    E(x,y,j%2?4.5:3.2,j%2?2.6:3.6,OUT); E(x,y,j%2?3.2:2,j%2?1.4:2.4,c); } };
+const clockFace=(x,y,r,ms,sp)=>{ EO(x,y,r,r,'#f4f0e6'); const a=ms/sp,b=ms/(sp*12); Ln(x,y,x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8,2,OUT); Ln(x,y,x+Math.cos(b)*r*.5,y+Math.sin(b)*r*.5,3,OUT); E(x,y,1.6,1.6,RED); };
+const paperStack=(x,y,n,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); for(let j=0;j<n;j++) { RO(-13+j%2*2,-j*4,26,4,'#fbf8ee'); } R(-8,-n*4+1,10,1.5,RED); gfx.restore(); };
+B2_TOMBO_ANIM.ff2=E2=>{ B2.aim=null;
+  const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),amy=by0('amy'),gr=by0('grace'),ro=by0('rose');
+  const fxOf=u=>E2.fx[mem.indexOf(u)],list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty(),A=ST.unit(amy);
+  const SP=id=>BATTLE_SPRITES[id],Hof=id=>SP(id).idle.length*SP(id).scale,asp=SP(amy.id);
+  const by=cl(Math.max(GR.base,A.base-12),236,296),ax=cl(GR.x1+150,GR.x1+120,460),wx=ax-78,WH=170,gx=ax+40,rx=ax-34;
+  const SPR=5000,V=.42,xL=Math.max(30,GR.x0-24),smash=SPR+(ax-(wx+22))/V,TL=SPR+(ax-xL)/V;
+  const order=order3(list).map(o=>{ o.t=SPR+Math.max(0,ax-o.q.x)/V; return o; }).sort((a,b)=>a.t-b.t);
+  const last=order.length?order[order.length-1].t:smash+200;
+  const P={walk:700,wall0:250,wall1:750,chain0:850,chain1:1150,paper0:1050,paper1:1350,kneel:1250,girls0:1800,girls1:2300,star0:2400,star1:2650,
+    count:2700,rib0:2700,rib1:3050,rline:3300,pull:3900,stand:4150,aline:4250,sprint:SPR,smash,turn:TL,home:TL+80};
+  const st={};
+  const retDur=u=>Math.max(500,Math.abs(ST.unit(u).x-xL)/.62);
+  P.apply=P.home+Math.max(...[amy,gr,ro].map(retDur))+60; P.end=P.apply+800;   // effects land once everyone is home
+  const runBack=(ms,c,u,dx,dy)=>{ const k=ez(seg(ms,P.home,P.home+retDur(u))); return {x:lerp(xL+dx,c.origX,k),y:lerp(by+dy,c.origBase,k)+ffHop(ms,P.home,P.home+retDur(u)),f:k<1?runFr(c.sp,c.t,1):c.sp.idle}; };
+  const sprintX=ms=>Math.max(xL,ax-(ms-SPR)*V);
+  // Amy
+  { const s0=startOf(amy),s2=st.amy={x:s0.x,b:s0.b,f:asp.idle};
+    pathOf(fxOf(amy),P.end,(ms,c)=>{ const sp=c.sp; let x=ax,y=by,f=sp.idle;
+      if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(s0.x,ax,k); y=lerp(s0.b,by,k); f=runFr(sp,c.t,-1); }
+      else if(ms<P.kneel) f=sp.idle;
+      else if(ms<P.stand) f=sp.kneel;
+      else if(ms<SPR) f=ms<P.stand+400?sp.celeb:sp.idle;
+      else if(ms<P.home) { x=sprintX(ms); f=runFr(sp,c.t*1.3,-1); y=by-Math.abs(Math.sin(ms/60))*3; }
+      else { const r=runBack(ms,c,amy,0,0); x=r.x; y=r.y; f=r.f; }
+      s2.x=x; s2.b=y; s2.f=f; return {cx:x,base:y,frame:f}; }); }
+  // the girls: run in, help, then sprint at Mom's sides (Grace a little behind, Rose a little in front)
+  const girl=(u,spot,face,dx,dy,actK)=>{ const s0=startOf(u),s2=st[u.id]={x:s0.x,b:s0.b,f:SP(u.id).idle};
+    pathOf(fxOf(u),P.end,(ms,c)=>{ const sp=c.sp,fr=face>0?sp.flip:sp.idle; let x=s0.x,y=s0.b,f=sp.idle;
+      if(ms<P.girls0) {}
+      else if(ms<P.girls1) { const k=ez(seg(ms,P.girls0,P.girls1)); x=lerp(s0.x,spot.x,k); y=lerp(s0.b,spot.b,k)+ffHop(ms,P.girls0,P.girls1); f=runFr(sp,c.t,spot.x>s0.x?1:-1); }
+      else if(ms<SPR) { x=spot.x; y=spot.b; f=fr;
+        if(ms>actK[0]&&ms<actK[1]) f=face>0?mirrorRowsCached(sp,'act'):sp.act;
+        if(ms>P.pull&&ms<P.stand+200) { f=face>0?mirrorRowsCached(sp,'act'):sp.act; x+=face>0?-Math.sin(seg(ms,P.pull,P.stand)*Math.PI)*4:Math.sin(seg(ms,P.pull,P.stand)*Math.PI)*4; }
+        if(ms>P.stand&&ms<P.stand+400) { f=sp.celeb; y-=Math.sin(seg(ms,P.stand,P.stand+400)*Math.PI)*14; } }
+      else if(ms<P.home) { const k=ez(seg(ms,SPR,SPR+220)); x=lerp(spot.x,sprintX(ms)+dx,k); y=lerp(spot.b,by+dy,k)-Math.abs(Math.sin(ms/55))*5; f=sp.run?runFr(sp,c.t*1.3,-1):sp.act; }
+      else { const r=runBack(ms,c,u,dx,dy); x=r.x; y=r.y; f=r.f; }
+      s2.x=x; s2.b=y; s2.f=f; return {cx:x,base:y,frame:f}; }); };
+  girl(gr,{x:gx,b:by-6},-1,14,-9,[P.star0,P.star1]);
+  girl(ro,{x:rx,b:by+6},1,-12,8,[P.rib0,P.rib1]);
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  const aTop=()=>st.amy.b-st.amy.f.length*asp.scale,aH=()=>st.amy.f.length*asp.scale;
+  const shoulder=s=>({x:st.amy.x+s*9,y:aTop()+aH()*.36});
+  const head=()=>({x:st.amy.x-3,y:aTop()+aH()*.12});
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#1a1e26',.55);
+    // dawn light once the wall breaks
+    if(ms>P.smash) { gfx.globalAlpha=.22*Math.sin(seg(ms,P.smash,P.end)*Math.PI)*k; R(0,0,576,324,'#ffd27a'); gfx.globalAlpha=1; } }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the wall of clocks: rises from the floor, shatters when they run through it
+    if(ms>P.wall0&&ms<P.smash) { const rk=ez(seg(ms,P.wall0,P.wall1)),top=by-WH*rk; gfx.save(); gfx.beginPath(); gfx.rect(wx-40,0,80,by+4); gfx.clip();
+      RO(wx-22,top,44,WH,'#6a6e78'); for(let y=top+10;y<by-6;y+=22) { R(wx-20,y,40,2,'#585c66'); E(wx-16,y+6,1.6,1.6,'#8a8e98'); E(wx+16,y+6,1.6,1.6,'#8a8e98'); }
+      clockFace(wx,top+28,11,ms,120); clockFace(wx-4,top+78,9,ms,90); clockFace(wx+3,top+124,10,ms,150);
+      gfx.save(); gfx.translate(wx+8,top+52); gfx.rotate(.2); RO(-8,-6,16,12,'#fbf8ee'); R(-5,-2,10,1.2,RED); gfx.restore();
+      if(ms>P.pull) { const ck=seg(ms,P.pull,P.smash); gfx.strokeStyle='#2a2c32'; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(wx+4,top+20); gfx.lineTo(wx-6,top+60*ck+20); gfx.lineTo(wx+8,top+120*ck+30); gfx.stroke(); }
+      gfx.restore(); }
+    if(ms>P.smash&&ms<P.smash+900) { const q2=seg(ms,P.smash,P.smash+900); gfx.globalAlpha=1-q2;
+      for(let j=0;j<16;j++) { const yy=by-WH+j/16*WH,dir=j%2?-1:1,dx=dir*(8+q2*(40+j*5))-q2*60; gfx.save(); gfx.translate(wx+dx,yy+q2*q2*70); gfx.rotate(q2*7+j); R(-7,-5,14,10,j%4?'#6a6e78':'#f4f0e6'); gfx.restore(); } gfx.globalAlpha=1; }
+    // chains from the wall over Amy's shoulders until the smash; then the two ends turn into yellow finish tape
+    if(ms>P.chain0&&ms<P.smash) { const ck=ez(seg(ms,P.chain0,P.chain1)),top=by-WH,lift=ms>P.stand?-6:0;
+      for(const [y0,s] of [[top+58,-1],[top+104,1]]) { const e=shoulder(s); chainLine(wx+20,y0,lerp(wx+20,e.x,ck),lerp(y0,e.y+lift,ck),10,'#9aa0aa',ck); } }
+    if(ms>P.smash&&ms<P.home+400) { const a=1-seg(ms,P.home,P.home+400),c=shoulder(0);
+      for(const s of [-1,1]) { gfx.globalAlpha=a; gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath();
+        for(let j=0;j<=12;j++) { const q=j/12,x=c.x+8+q*70,y=c.y+s*6+Math.sin(q*9-ms/50+s)*6*q; j?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke();
+        gfx.strokeStyle='#ffe04a'; gfx.lineWidth=3.5; gfx.stroke(); } gfx.globalAlpha=1; }
+    // the stack of ungraded papers on her back; it slides off when she stands
+    if(ms>P.paper0&&ms<P.stand+500) { const fk=ez(seg(ms,P.paper0,P.paper1)),off=seg(ms,P.stand,P.stand+500),s=shoulder(1);
+      gfx.globalAlpha=1-off; paperStack(s.x+off*30,lerp(s.y-90,s.y-2,fk)+off*off*40,7,off*1.2); gfx.globalAlpha=1; }
+    // Grace's gold star: flies to Mom's forehead and stays
+    if(ms>P.star0) { const h=head(); let x=h.x,y=h.y,a=1-seg(ms,P.home,P.home+500);
+      if(ms<P.star1) { const g=handPt(SP(gr.id),SP(gr.id).act,gx,by-6,-1),q=ez(seg(ms,P.star0,P.star1)); x=lerp(g.x,h.x,q); y=lerp(g.y,h.y,q)-Math.sin(q*Math.PI)*30; }
+      if(a>0) { gfx.globalAlpha=a; star(x,y,7,GOLD); gfx.globalAlpha=1; } }
+    // Rose's ribbon on Mom's wrist, and Lamby in her hand
+    if(ms>P.rib0&&ms<P.home+400) { const hA=handPt(asp,st.amy.f,st.amy.x,st.amy.b,-1),a=1-seg(ms,P.home,P.home+400),q=ez(seg(ms,P.rib0,P.rib1));
+      gfx.globalAlpha=a;
+      if(ms<P.rib1) { const hR=handPt(SP(ro.id),mirrorRowsCached(SP(ro.id),'act'),rx,by+6,1); gfx.strokeStyle='#ff7ab0'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(hR.x,hR.y);
+        gfx.quadraticCurveTo((hR.x+hA.x)/2,Math.min(hR.y,hA.y)-16+Math.sin(ms/60)*4,lerp(hR.x,hA.x,q),lerp(hR.y,hA.y,q)); gfx.stroke(); }
+      else { EO(hA.x-4,hA.y,3,2.4,'#ff7ab0'); EO(hA.x+4,hA.y,3,2.4,'#ff7ab0'); E(hA.x,hA.y,1.6,1.6,'#d84a8a');
+        gfx.save(); gfx.translate(hA.x-6,hA.y-10); gfx.scale(.45,.45); PROP2.lamby({flip:false},0); gfx.restore(); }
+      gfx.globalAlpha=1; }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('FAMILY FINISH! Run With Us, Mommy!'); B2.aim=null; S('levelChime'); }],
+    [P.wall0,()=>{ S('rumble'); }],
+    [P.chain0,()=>{ S('jangle'); setMessage('A grey wall of clocks rises. Everything lands on Amy at once.'); }],
+    [P.kneel,()=>{ S('thud'); }],
+    [1700,()=>{ word('EXHAUSTION',wx,40,'#b8bcc8',3,1.2); }],
+    [P.girls0,()=>{ S('step'); setMessage('Grace and Rose run to their mom.'); }],
+    [P.star1,()=>{ S('ding'); setMessage('Grace sticks a gold star on her and counts her in.'); }],
+    ...['5','6','7','8!'].map((t,i)=>[P.count+i*160,()=>{ S('clap'); word(t,ax-60+i*40,46,'#ffe08a',4,.45); }]),
+    [P.rib1,()=>{ S('chime2'); setMessage('Rose ties her ribbon on Mom’s wrist and hands her Lamby.'); }],
+    [P.rline,()=>{ say('rose','ff2'); }],
+    [P.pull,()=>{ S('whoosh'); setMessage('They each take one of Mom’s hands, and pull.'); }],
+    [P.stand,()=>{ S('levelChime'); }],
+    [P.aline,()=>{ say('amy','ff2'); }],
+    [SPR,()=>{ S('whoosh'); setMessage('Three across. Nobody stops them.'); }],
+    [P.smash,()=>{ S('crash'); S('fanfare'); battle.shakeEnemy=.6; word('FINISH LINE!',Math.max(120,GR.x),52,'#ffe04a',5,1.1); }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); ST.jolt(o.f,.6); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:'#ffe04a',w:3}); landHit(split100(i,order.length)); }]); });
+  steps.push([P.apply,()=>{ E2.apply(); for(const p of party) { const s2=st[p.id]&&mem.includes(p)?{x:st[p.id].x,mid:st[p.id].b-Hof(p.id)*.5}:ST.unit(p); scene('glow',1,{x:s2.x,y:s2.mid,rx:38,ry:52,c:GOLD,a:.4}); } }]);
+  steps.push(['hf',order.length?order[0].t:P.smash]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Personal best. All three of them.']);
+  ST.play(E2,steps);
+};
+// ---------- Fifty-One Years & Counting (Family Finish 3: Deedee, Boppy, Tom) ----------
+// A cold amber hourglass rises and the sand starts turning Deedee and Boppy to stone. Boppy takes her hand and the grey
+// falls away. A golden film reel spins around them: young Boppy and Nurse Deedee dancing, who turn into today's selves.
+// Tom frames their picture behind them. They swing their joined hands forward and a gold wedding-ring shockwave
+// shatters the hourglass into roses and hot peppers over the monsters. Effects: Cozy hit on every enemy (warms them);
+// fallen friends get up at 50%, the party heals 60% and is Tucked In and Shielded for 3 turns.
+const flower=(x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  E(5,4,4,2,'#3a8a3a'); EO(0,0,5,5,'#d8304a'); E(0,0,3.2,3.2,'#a81e36'); E(-1,-1,1.4,1.4,'#f05a6a'); gfx.restore(); };
+const pepper=(x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  gfx.beginPath(); gfx.moveTo(-8,0); gfx.quadraticCurveTo(-2,-5,6,-3); gfx.quadraticCurveTo(9,0,6,2); gfx.quadraticCurveTo(-2,4,-8,0); gfx.closePath();
+  gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#e0302a'; gfx.fill(); E(-2,-1.6,3,.9,'#ff8a6a');
+  Ln(6,-1,10,-5,2.6,'#3a8a3a'); gfx.restore(); };
+// A burst of roses and peppers from (x,y) toward dx, k 0..1 (seeded, so every frame draws the same flight).
+const bloom=(x,y,k,n,dx,spread)=>{ if(k<=0||k>=1) return; gfx.globalAlpha=k>.8?(1-k)/.2:1;
+  for(let j=0;j<n;j++) { const a=(j*2.399)%(Math.PI*2),sp2=.5+((j*37)%10)/10,vx=dx+Math.cos(a)*spread*sp2,vy=-70-((j*53)%40)+Math.sin(a)*20;
+    const px=x+vx*k,py=y+vy*k+150*k*k,r=j*1.3+k*8*(j%2?1:-1);
+    (j%2?pepper:flower)(px,py,1.1,r); } gfx.globalAlpha=1; };
+// The amber hourglass wall: wooden caps, two glass bulbs, sand running from the top into a pile.
+const hourglass=(x,b,H,ms,sand)=>{ const w=50,top=b-H,mid=b-H/2;
+  gfx.save(); gfx.globalAlpha*=.92;
+  const shape=()=>{ gfx.beginPath(); gfx.moveTo(x-w/2+4,top+12); gfx.lineTo(x+w/2-4,top+12); gfx.quadraticCurveTo(x+w/2-2,mid-24,x+4,mid); gfx.quadraticCurveTo(x+w/2-2,mid+24,x+w/2-4,b-12);
+    gfx.lineTo(x-w/2+4,b-12); gfx.quadraticCurveTo(x-w/2+2,mid+24,x-4,mid); gfx.quadraticCurveTo(x-w/2+2,mid-24,x-w/2+4,top+12); gfx.closePath(); };
+  E(x,mid,w*.9,H*.55,'rgba(255,170,60,.12)');
+  shape(); gfx.fillStyle='rgba(255,196,110,.5)'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
+  gfx.save(); shape(); gfx.clip();
+  const tl=lerp(H/2-26,6,sand); R(x-w/2,mid-tl-2,w,tl,'#d88a2a');   // the top sand going down
+  const bl=lerp(4,H/2-30,sand); gfx.fillStyle='#d88a2a'; gfx.beginPath(); gfx.moveTo(x-w/2,b-12); gfx.lineTo(x,b-12-bl); gfx.lineTo(x+w/2,b-12); gfx.closePath(); gfx.fill();
+  if(sand<1) { R(x-1,mid,2,H/2-12-bl,'#f0a84a'); for(let j=0;j<4;j++) E(x+Math.sin(ms/40+j)*1.5,mid+((ms/3+j*17)%(H/2-14-bl)),1.2,1.2,'#ffd08a'); }
+  R(x-w/2+8,top+16,4,H-36,'rgba(255,255,255,.35)'); gfx.restore();
+  for(const y of [top,b-12]) { RO(x-w/2-4,y,w+8,12,'#8a5a30'); R(x-w/2-4,y+2,w+8,3,'#a8743e'); }
+  for(const s of [-1,1]) RO(x+s*(w/2+1)-3,top+12,6,H-24,'#6a4220');
+  gfx.restore(); };
+B2_TOMBO_ANIM.ff3=E2=>{ B2.aim=null;
+  const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),dee=by0('deedee'),bop=by0('boppy'),tom=by0('tom');
+  const fxOf=u=>E2.fx[mem.indexOf(u)],list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty(),D=ST.unit(dee);
+  const SP=id=>BATTLE_SPRITES[id],Hof=id=>SP(id).idle.length*SP(id).scale,dsp=SP('deedee'),bsp=SP('boppy');
+  const by=cl(Math.max(GR.base,D.base-12),236,296),fc=cl(GR.x1+175,GR.x1+145,450),wx=Math.max(GR.x1+28,fc-100),WH=170;
+  const spot={boppy:{x:fc-30,b:by+4},deedee:{x:fc+16,b:by+4},tom:{x:fc+72,b:by-8}};
+  const sepia=sp=>tintOf(sp,'#a8804a',.72);
+  const V=.55,launchX=fc-44,LA=5450,wallHit=LA+(launchX-wx)/V;
+  const order=order3(list).map(o=>{ o.t=LA+Math.max(0,launchX-o.q.x)/V; return o; }).sort((a,b)=>a.t-b.t);
+  const last=order.length?order[order.length-1].t:wallHit+200;
+  const P={walk:800,wall0:300,wall1:900,grey0:950,grey1:1750,clasp:1950,hands:2150,dline:2300,reel0:2700,reel1:3000,dance1:4300,bline:3900,
+    morph1:4900,reelOut:5000,frame0:4500,frame1:4800,swing:5250,launch:LA,wallHit,apply:last+300,home:last+700,end:last+1500};
+  const st={};
+  const body=(u,fn)=>{ const s0=startOf(u),s2=st[u.id]={x:s0.x,b:s0.b,f:SP(u.id).idle};
+    pathOf(fxOf(u),P.end,(ms,c)=>{ const sp=c.sp,o=spot[u.id]; let x=o.x,y=o.b,f=sp.idle;
+      if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(s0.x,o.x,k); y=lerp(s0.b,o.b,k)+ffHop(ms,0,P.walk); f=runFr(sp,c.t,o.x>s0.x?1:-1); if(o.x>s0.x&&!sp.runFlip) f=sp.flip; }
+      else if(ms<P.home) { const r=fn(ms,sp); if(r) { f=r.f||f; y+=r.dy||0; x+=r.dx||0; } }
+      else { const H2={x:c.origX,b:c.origBase},k=ez(seg(ms,P.home,P.home+700)); x=lerp(o.x,H2.x,k); y=lerp(o.b,H2.b,k)+ffHop(ms,P.home,P.home+700); f=k<1?runFr(sp,c.t,H2.x>o.x?1:-1):sp.idle; }
+      s2.x=x; s2.b=y; s2.f=f; return {cx:x,base:y,frame:f}; }); };
+  const cheer=ms=>ms>last+100&&ms<P.home;
+  const lean=ms=>ms>P.clasp&&ms<P.swing?ez(seg(ms,P.clasp,P.hands))*4:0;
+  body(bop,(ms,sp)=>{ if(ms>P.swing&&ms<P.swing+900) return {f:sp.act,dx:-3}; if(cheer(ms)) return {f:sp.celeb};
+    if(ms>P.clasp&&ms<P.swing) return {f:sp.flip,dx:lean(ms)}; return null; });
+  body(dee,(ms,sp)=>{ if(ms>P.swing&&ms<P.swing+900) return {f:sp.act,dx:-3}; if(cheer(ms)) return {f:sp.celeb2||sp.celeb};
+    if(ms>P.clasp&&ms<P.swing) return {f:sp.idle,dx:-lean(ms)}; return null; });
+  if(tom) body(tom,(ms,sp)=>{ if(ms>P.frame0&&ms<last+100) return {f:sp.act}; if(cheer(ms)) return {f:sp.celeb}; return null; });
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  const stoneK=ms=>.8*ez(seg(ms,P.grey0,P.grey1))*(1-ez(seg(ms,P.hands,P.hands+550)));
+  const sandK=ms=>seg(ms,P.wall1,P.wallHit);
+  const reelA=ms=>Math.min(1,seg(ms,P.reel0,P.reel1))*(1-seg(ms,P.reelOut,P.reelOut+300));
+  const morph=ms=>ez(seg(ms,P.dance1,P.morph1));
+  const frameK=ms=>ms<P.frame0?0:(ms<P.frame1?ez(seg(ms,P.frame0,P.frame1)):1)*(1-seg(ms,P.home,P.home+400));
+  const Hmax=Math.max(Hof('deedee'),Hof('boppy')),fx0=spot.boppy.x-36,fx1=spot.deedee.x+32,fy0=by-Hmax-18,fy1=by+10;
+  const cx=(spot.boppy.x+spot.deedee.x)/2;
+  // Behind everyone: warm evening, the picture frame, the back half of the film ring.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#2a1a10',.45);
+    if(ms>P.hands) { gfx.globalAlpha=.18*k*(1-seg(ms,P.home,P.end)); E(cx,by-50,130,90,'#ffcf7a'); gfx.globalAlpha=1; }
+    const fk=frameK(ms); if(fk>0) { const mx=(fx0+fx1)/2,my=(fy0+fy1)/2,w=(fx1-fx0)*lerp(.6,1,fk),h=(fy1-fy0)*lerp(.6,1,fk);
+      gfx.globalAlpha=fk; gfx.lineJoin='miter';
+      gfx.strokeStyle=OUT; gfx.lineWidth=14; gfx.strokeRect(mx-w/2,my-h/2,w,h);
+      gfx.strokeStyle='#d8a838'; gfx.lineWidth=9; gfx.strokeRect(mx-w/2,my-h/2,w,h);
+      gfx.strokeStyle='#ffe08a'; gfx.lineWidth=2; gfx.strokeRect(mx-w/2-2,my-h/2-2,w+4,h+4);
+      for(const [px2,py2] of [[mx-w/2,my-h/2],[mx+w/2,my-h/2],[mx-w/2,my+h/2],[mx+w/2,my+h/2]]) EO(px2,py2,6,6,'#ffd04a');
+      gfx.globalAlpha=1; }
+  }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the hourglass rises, its sand runs, and the ring shatters it
+    if(ms>P.wall0&&ms<P.wallHit) { const rk=ez(seg(ms,P.wall0,P.wall1)); gfx.save(); gfx.beginPath(); gfx.rect(wx-50,0,100,by+6); gfx.clip();
+      gfx.translate(0,(1-rk)*WH); hourglass(wx,by+4,WH,ms,sandK(ms)); gfx.restore(); }
+    if(ms>P.wallHit&&ms<P.wallHit+900) { const q2=seg(ms,P.wallHit,P.wallHit+900); gfx.globalAlpha=1-q2;
+      for(let j=0;j<18;j++) { const yy=by-WH+j/18*WH,dir=j%2?-1:1,dx=dir*(6+q2*(30+j*4))-q2*70; gfx.save(); gfx.translate(wx+dx,yy+q2*q2*80); gfx.rotate(q2*8+j);
+        gfx.fillStyle=j%3?'rgba(255,190,100,.9)':'#8a5a30'; gfx.beginPath(); gfx.moveTo(0,-6); gfx.lineTo(5,4); gfx.lineTo(-5,3); gfx.closePath(); gfx.fill(); gfx.restore(); } gfx.globalAlpha=1; }
+    bloom(wx,by-WH*.6,seg(ms,P.wallHit,P.wallHit+1400),22,-150,60);
+    for(const o of order) bloom(o.q.x,o.q.top,seg(ms,o.t,o.t+1100),8,-20,50);
+    // the sand turns them to stone, until Boppy takes her hand
+    const sk=stoneK(ms); if(sk>0) for(const [id,sp] of [['boppy',bsp],['deedee',dsp]]) { const s3=st[id]; if(s3) drawAt(sp,s3.f,s3.x,s3.b,stoneOf(sp),sk); }
+    // their joined hands, with a little heart
+    if(ms>P.hands&&ms<P.swing) { const hx=(st.boppy.x+st.deedee.x)/2,hy=st.boppy.b-Hof('boppy')*.42; EO(hx-3,hy,4.5,3.6,SKIN); EO(hx+3,hy+1,4.5,3.6,SKIN2); E(hx+1,hy-2,1.6,1.2,GOLD);
+      const q=seg(ms,P.hands,P.hands+1000); if(q<1) { gfx.globalAlpha=fade(q,.6); heart(hx,hy-20-q*30,lerp(5,12,ez(q*3)),PINK); gfx.globalAlpha=1; } }
+    // the front half of the film ring, and the picture inside the reel: young Boppy and Nurse Deedee dancing
+    const ra=reelA(ms);
+    if(ra>0) { const W2=132,H2=104,sx=cl(cx,W2/2+26,550-W2/2),sy=36,m=morph(ms),gk=ez(seg(ms,P.reel0,P.reel1));
+      gfx.save(); gfx.globalAlpha=ra; gfx.translate(sx,sy+H2/2); gfx.scale(gk,gk); gfx.translate(-sx,-(sy+H2/2));
+      RO(sx-W2/2-6,sy-10,W2+12,H2+20,'#2a1e14');
+      for(const s4 of [-1,1]) { const rx2=sx+s4*(W2/2+4),ry2=sy+H2/2; EO(rx2,ry2,15,15,'#3a2a1a'); E(rx2,ry2,11,11,'#c9a23a'); E(rx2,ry2,3,3,'#3a2a1a');
+        for(let j=0;j<3;j++) { const a2=ms/(s4>0?160:-160)+j*2.09; E(rx2+Math.cos(a2)*6.5,ry2+Math.sin(a2)*6.5,3,3,'#3a2a1a'); } }
+      for(let j=0;j<10;j++) { const hx=sx-W2/2+((j*16-ms/12)%(W2+8)+W2+8)%(W2+8)-2; R(hx,sy-7,6,4,'#e8c27a'); R(hx,sy+H2+3,6,4,'#e8c27a'); }
+      gfx.save(); gfx.beginPath(); gfx.rect(sx-W2/2,sy,W2,H2); gfx.clip();
+      R(sx-W2/2,sy,W2,H2,m<1?'#c89a62':'#c89a62'); if(m>0) { gfx.globalAlpha=ra*m; R(sx-W2/2,sy,W2,H2,'#6a8ac8'); R(sx-W2/2,sy+H2-16,W2,16,'#5aa05a'); gfx.globalAlpha=ra; }
+      const a=ms/420,sc=1.05,fb=sy+H2-6,bx=sx+Math.cos(a)*26,dx2=sx-Math.cos(a)*26,beat=Math.floor(ms/260)%2;
+      const pair=[[bsp,beat?bsp.celeb:bsp.flip,bx,Math.sin(a)],[dsp,beat?(dsp.celeb2||dsp.celeb):dsp.celeb,dx2,-Math.sin(a)]].sort((p,q)=>p[3]-q[3]);
+      for(const [sp,fr,x,z] of pair) { const yb=fb-Math.abs(Math.sin(ms/130+x))*3+z*3;
+        drawAt(sp,fr,x,yb,sp.pal,ra,sc); if(m<1) drawAt(sp,fr,x,yb,sepia(sp),ra*(1-m),sc);
+        if(sp===dsp&&m<1) { const top=yb-fr.length*sc; gfx.globalAlpha=ra*(1-m); RO(x-6,top+1,11,5,'#fbf8ee'); R(x-1,top+1,2,5,RED); R(x-3,top+2.5,6,2,RED); gfx.globalAlpha=ra; } }
+      if(m<1) for(let j=0;j<14;j++) { gfx.globalAlpha=ra*(1-m)*.35; R(sx-W2/2+((j*53+ms*.7)%W2),sy+((j*31+ms*.3)%H2),1.5,1.5,'#3a2a1a'); }
+      gfx.restore(); gfx.restore(); gfx.globalAlpha=1; }
+    // Tom's camera flash when the picture is framed
+    if(ms>P.frame1&&ms<P.frame1+260) { gfx.globalAlpha=.55*(1-seg(ms,P.frame1,P.frame1+260)); R(fx0,fy0,fx1-fx0,fy1-fy0,'#ffffff'); gfx.globalAlpha=1; }
+    // the gold wedding-ring shockwave
+    if(ms>P.launch&&ms<last+500) { const x=launchX-(ms-P.launch)*V,y=by-56; if(x>-40) {
+      for(let j=3;j>=1;j--) { gfx.globalAlpha=.25/j; ring(x+j*26,y,10+j*3,52+j*6,4,GOLD); }
+      gfx.globalAlpha=.3; E(x,y,30,70,'#ffd04a'); gfx.globalAlpha=1;
+      ring(x,y,16,62,12,OUT); ring(x,y,16,62,8,'#e8b830'); ring(x-2,y,14,60,2,'#fff2b0');
+      const dy=y-64; gfx.save(); gfx.translate(x,dy); gfx.rotate(Math.PI/4); RO(-6,-6,12,12,'#cfefff'); R(-6,-6,6,6,'#ffffff'); gfx.restore();
+      star(x+Math.sin(ms/60)*4,dy-12,5,'#ffffff'); } }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('FAMILY FINISH! Fifty-One Years & Counting.'); B2.aim=null; S('levelChime'); }],
+    [P.wall0,()=>{ S('rumble'); setMessage('A cold amber hourglass rises. The sand starts to fall.'); }],
+    [P.grey0,()=>{ S('creak'); setMessage('Deedee and Boppy start turning to stone.'); }],
+    [1750,()=>{ word('AGING',wx,40,'#e8a848',3,1.2); }],
+    [P.clasp,()=>{ S('chime2'); setMessage('Boppy reaches over and takes Deedee’s hand.'); }],
+    [P.hands,()=>{ S('ding'); }],
+    [P.dline,()=>{ say('deedee','ff3'); }],
+    [P.reel0,()=>{ S('reel'); setMessage('A golden film reel spins around them. Young Boppy and Nurse Deedee, dancing.'); }],
+    [P.bline,()=>{ say('boppy','ff3'); }],
+    [P.dance1,()=>{ S('levelChime'); }],
+    [P.frame0,()=>{ if(tom) setMessage('Tom frames their picture.'); }],
+    [P.frame1,()=>{ S('ding'); word('51 YEARS!',cx,40,GOLD,4,1); }],
+    [P.swing,()=>{ S('whoosh'); setMessage('They swing their joined hands forward.'); }],
+    [P.launch,()=>{ S('fanfare'); }],
+    [P.wallHit,()=>{ S('crash'); battle.shakeEnemy=.6; word('ROSES & PEPPERS!',Math.max(140,GR.x),66,'#ff8a8a',4,1.1); }],
+    [P.apply,()=>{ E2.apply(); for(const p of party) { const s2=st[p.id]&&mem.includes(p)?{x:st[p.id].x,mid:st[p.id].b-Hof(p.id)*.5}:ST.unit(p); scene('glow',1,{x:s2.x,y:s2.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+  ];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('thud'); ST.jolt(o.f,.55); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:GOLD,w:3}); landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.wallHit]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Fifty-one years. Still counting.']);
+  ST.play(E2,steps);
+};
+
+// ---------- The Extra Place (Family Finish 4: the whole party, 3 or more) ----------
+// Everyone sits down at one long family table under string lights. Tom sets one extra place at the end, and the
+// nearest monster shuffles over and sits down. Everyone raises a glass (the monster too); the CLINK is a shockwave
+// across the whole stage. Nara, if she is here, begs under the table. Effects: Sparkle and Cozy hit on every enemy
+// (warms them); fallen friends get up at 50%, the party heals 60%, loses its debuffs and refills its VP.
+B2_TOMBO_ANIM.ff4=E2=>{ B2.aim=null;
+  const mem=E2.mem,tom=mem.find(p=>p.id==='tom'),gr=mem.find(p=>p.id==='grace'),nara=mem.find(p=>p.id==='nara'&&b2Alive(p));
+  const list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty(),SP=id=>BATTLE_SPRITES[id],Hof=id=>SP(id).idle.length*SP(id).scale;
+  const seated=mem.filter(p=>p.id!=='nara'&&b2Alive(p)).sort((a,b)=>(a.id==='tom'?-1:0)-(b.id==='tom'?-1:0));
+  const n=seated.length,by=cl(Math.max(GR.base,ST.unit(seated[0]).base-12),236,296),tR=560;
+  const tL=Math.min(GR.x1+26,tR-110-Math.max(0,n-1)*60),tTop=by-36,tBot=by+10;
+  const seatX=i=>n<2?(tL+tR)/2+30:lerp(tL+92,tR-34,i/(n-1)),spot={};
+  seated.forEach((p,i)=>{ spot[p.id]={x:seatX(i),b:by-6}; });
+  const gx=tL+30,ord=order3(list),guest=ord.length?ord[0]:null;
+  const ux=n>1?(seatX(0)+seatX(1))/2:tL+70;   // Nara's spot under the table, between the first two chairs
+  const P={walk:900,table0:650,table1:1150,place:1350,tline:1550,sit0:2250,sit1:3000,raise:3350,gline:3450,clink:4650};
+  const cx=(tL+tR)/2,cy=tTop-30,RV=.8;
+  const hits=ord.map(o=>{ const q=o===guest?{x:gx,y:tTop+2-guest.q.h*.5}:{x:o.q.x,y:o.q.mid}; o.t=P.clink+Math.hypot(q.x-cx,q.y-cy)/RV; o.hx=q.x; o.hy=q.y; return o; }).sort((a,b)=>a.t-b.t);
+  const last=hits.length?hits[hits.length-1].t:P.clink+300;
+  P.apply=last+300; P.home=Math.max(last+650,P.clink+1300); P.end=P.home+1000;
+  const st={};
+  const kidCup=p=>p.id==='grace'||p.id==='rose';
+  for(const p of seated.concat(nara?[nara]:[])) { const s0=startOf(p),isN=p===nara,o=isN?{x:ux,b:by+12}:spot[p.id],s2=st[p.id]={x:s0.x,b:s0.b,f:SP(p.id).idle,hide:false};
+    pathOf(E2.fx[mem.indexOf(p)],P.end,(ms,c)=>{ const sp=c.sp; let x=o.x,y=o.b,f=sp.idle,hide=false;
+      if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(s0.x,o.x,k); y=lerp(s0.b,o.b,k)+ffHop(ms,0,P.walk); f=runFr(sp,c.t,o.x>s0.x?1:-1); }
+      else if(ms<P.home) { if(isN) { hide=true; }
+        else if(p===tom&&ms>P.place-150&&ms<P.place+450) f=sp.act;
+        else if(ms>P.raise&&ms<P.clink+700) { f=sp.celeb; if(ms>P.clink-120&&ms<P.clink+120) y-=4; }
+        else if(ms>P.clink+700) { f=sp.celeb; y-=Math.abs(Math.sin(ms/140+o.x))*6; } }
+      else { const k=ez(seg(ms,P.home,P.home+700)); x=lerp(o.x,c.origX,k); y=lerp(o.b,c.origBase,k)+ffHop(ms,P.home,P.home+700); f=k<1?runFr(sp,c.t,c.origX>o.x?1:-1):sp.idle; }
+      s2.x=x; s2.b=y; s2.f=f; s2.hide=hide; return {cx:x,base:y,frame:f,hide}; }); }
+  const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
+  const tableK=ms=>ez(seg(ms,P.table0,P.table1))*(1-ez(seg(ms,P.home,P.home+500)));
+  const placeK=ms=>ez(seg(ms,P.place,P.place+300));
+  const sitK=ms=>ez(seg(ms,P.sit0,P.sit1));
+  // Behind everyone: evening, string lights, chair backs.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#1e1428',.5);
+    gfx.globalAlpha=k; for(let j=0;j<3;j++) { const x0=j*200-20,x1=x0+230; gfx.strokeStyle='#3a3020'; gfx.lineWidth=1.5; gfx.beginPath(); gfx.moveTo(x0,30); gfx.quadraticCurveTo((x0+x1)/2,62,x1,30); gfx.stroke();
+      for(let q=1;q<8;q++) { const t=q/8,x=lerp(x0,x1,t),y=30+64*t*(1-t)*.5*2; E(x,y+3,3,3.4,(Math.floor(ms/350)+q+j)%4?['#ffd04a','#ff9ac0','#9fd8ff','#ffb07a'][(q+j)%4]:'#7a6a5a'); } }
+    const tk=tableK(ms); if(tk>0) { gfx.globalAlpha=tk;
+      const chair=x=>{ RO(x-14,tTop-50,4,52,'#7a4a24'); RO(x+10,tTop-50,4,52,'#7a4a24'); RO(x-14,tTop-50,28,8,'#8a5a30'); RO(x-14,tTop-34,28,5,'#8a5a30'); };
+      for(const p of seated) chair(spot[p.id].x); if(placeK(ms)>0) { gfx.globalAlpha=tk*placeK(ms); chair(gx); } }
+    gfx.globalAlpha=1; }});
+  // In front: the table and everything on it, Nara under it, the glasses, the CLINK.
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the guest monster shuffles over and sits at the extra place
+    if(guest&&!guest.f.dead) { const f=guest.f,q=guest.q; let ox=0,oy=0;
+      if(ms>P.sit0&&ms<P.home+600) { const k=ms<P.home?sitK(ms):1-ez(seg(ms,P.home,P.home+600)); ox=(gx-q.x)*k; oy=(tTop+2-q.base)*k-(ms<P.sit1&&ms>P.sit0?Math.abs(Math.sin(ms/90))*8:0); }
+      f.ox=ox; f.oy=oy; f.spin=0; f.spinAt=performance.now(); }
+    const tk=tableK(ms); if(tk>0) { gfx.save(); gfx.globalAlpha=tk; gfx.translate(0,(1-tk)*-60);
+      // tabletop and cloth, with a lifted hem in the middle for Nara
+      RO(tL,tTop-6,tR-tL,10,'#f4ecd8'); R(tL,tTop-4,tR-tL,3,'#fffaf0');
+      gfx.beginPath(); gfx.moveTo(tL,tTop+4); gfx.lineTo(tR,tTop+4); gfx.lineTo(tR,tBot); 
+      if(nara) { gfx.lineTo(ux+30,tBot); gfx.quadraticCurveTo(ux+30,tTop+14,ux,tTop+14); gfx.quadraticCurveTo(ux-30,tTop+14,ux-30,tBot); }
+      gfx.lineTo(tL,tBot); gfx.closePath(); gfx.fillStyle='#c84a4a'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
+      gfx.save(); gfx.clip(); for(let x=tL;x<tR;x+=18) R(x,tTop+4,9,tBot-tTop,'#e8e0cc'); for(let y=tTop+10;y<tBot;y+=14) { gfx.globalAlpha=tk*.35; R(tL,y,tR-tL,6,'#ffffff'); gfx.globalAlpha=tk; } gfx.restore();
+      if(nara) { gfx.fillStyle='#1a1420'; gfx.beginPath(); gfx.moveTo(ux+27,tBot); gfx.quadraticCurveTo(ux+27,tTop+17,ux,tTop+17); gfx.quadraticCurveTo(ux-27,tTop+17,ux-27,tBot); gfx.closePath(); gfx.fill(); }
+      // plates, the bread and the crisp, a candle
+      for(const p of seated) { const x=spot[p.id].x; EO(x-14,tTop-3,9,2.6,'#ffffff'); E(x-14,tTop-3,5,1.4,'#e8e0cc'); }
+      boule(cx-10,tTop-10,.8,false); crustTin(cx+40,tTop-8,.7); RO(cx+14,tTop-26,4,20,'#fbf8ee'); E(cx+16,tTop-30+Math.sin(ms/80),2.4,4,'#ffb04a'); E(cx+16,tTop-29,1.2,2,'#fff2a0');
+      // the extra place: a plate, a cup and a little card
+      const pk=placeK(ms); if(pk>0) { gfx.globalAlpha=tk*pk; EO(gx+14,tTop-3,9,2.6,'#ffffff'); E(gx+14,tTop-3,5,1.4,'#e8e0cc'); RO(gx+28,tTop-18,10,10,'#fbf8ee'); label('GUEST',gx+33,tTop-16,'#8a3a3a',1);
+        if(ms<P.place+700) { const q=seg(ms,P.place,P.place+700); gfx.globalAlpha=tk*(1-q); for(let j=0;j<5;j++) star(gx+14+Math.cos(j*1.26)*q*24,tTop-10+Math.sin(j*1.26)*q*16,4,GOLD); }
+        gfx.globalAlpha=tk; }
+      gfx.restore(); gfx.globalAlpha=1; }
+    // Nara under the table, begging (a cream rim so her black fur reads on the dark)
+    if(nara&&st.nara&&st.nara.hide) { const sp=SP('nara'),fr=sp.sit||sp.idle,x=ux,b=tBot+2+Math.sin(ms/160)*1.5,cream=tintOf(sp,'#fff2c8',1);
+      for(const [ox,oy] of [[-1,0],[1,0],[0,-1],[0,1]]) drawAt(sp,fr,x+ox,b+oy,cream,1,sp.scale*.8); drawAt(sp,fr,x,b,sp.pal,1,sp.scale*.8);
+      if(ms>P.sit1&&ms<P.home) { const q=((ms-P.sit1)%1400)/1400; gfx.globalAlpha=fade(q,.6); heart(x+12,b-fr.length*sp.scale*.8-6-q*20,5,PINK); gfx.globalAlpha=1; } }
+    // the glasses, raised from the raise to the clink
+    if(ms>P.raise&&ms<P.home) { const lift=ez(seg(ms,P.raise,P.raise+300)),tilt=ms>P.clink-200&&ms<P.clink+150?.35:0;
+      for(const p of seated) { const s3=st[p.id]; if(!s3||!s3.f) continue; const h=handPt(SP(p.id),s3.f,s3.x,s3.b,-1);
+        gfx.globalAlpha=lift; if(kidCup(p)) { gfx.save(); gfx.translate(h.x,h.y-6); gfx.rotate(-tilt); RO(-5,-6,10,11,'#fbf8ee'); R(-4,-5,8,3,'#f4f0e6'); gfx.restore(); } else glass(h.x,h.y-6,-tilt); }
+      if(guest&&!guest.f.dead) { glass(gx-22,tTop+2-guest.q.h*.5,-tilt); }
+      gfx.globalAlpha=1;
+      if(ms>P.clink-60&&ms<P.clink+300) for(const p of seated) { const s3=st[p.id],h=handPt(SP(p.id),s3.f,s3.x,s3.b,-1); star(h.x,h.y-14,lerp(10,2,seg(ms,P.clink-60,P.clink+300)),'#ffffff'); } }
+    // the CLINK: a flash and a shockwave that rolls across the whole stage
+    if(ms>P.clink&&ms<P.clink+1500) { const q=ms-P.clink,r=q*RV;
+      if(q<220) { gfx.globalAlpha=.6*(1-q/220); R(0,0,576,324,'#fffbe6'); }
+      for(let j=0;j<3;j++) { const rr=r-j*50; if(rr<=0) continue; gfx.globalAlpha=Math.max(0,1-rr/720)*(j?.5:.9); ring(cx,cy,rr,rr*.62,j?3:6,j?GOLD:'#fffbe6'); }
+      gfx.globalAlpha=1; }
+    // hearts drift up over the monsters once they are warmed
+    if(ms>P.clink+300&&ms<P.home) for(const o of hits) { const q=((ms-o.t)%1600)/1600; if(ms<o.t) continue; gfx.globalAlpha=fade(q,.6); heart(o.hx+Math.sin(ms/300+o.hx)*6,o.hy-30-q*30,6,PINK); gfx.globalAlpha=1; }
+    gfx.globalAlpha=1; bars(show(ms)); }});
+  const steps=[
+    [0,()=>{ setMessage('FAMILY FINISH! The Extra Place.'); B2.aim=null; S('levelChime'); }],
+    [P.table0,()=>{ S('whoosh'); setMessage('Everybody pulls up a chair at one long family table.'); }],
+    [P.place,()=>{ S('ding'); setMessage((tom?'Tom':seated[0].name)+' sets one extra place at the end.'); }],
+    [P.tline,()=>{ if(tom) say('tom','ff4'); }],
+    [P.sit0,()=>{ S('step'); setMessage(guest?'The monster looks around... and sits down.':'Nobody is left to sit down.'); }],
+    [P.sit1,()=>{ S('boing'); }],
+    [P.raise,()=>{ S('chime2'); setMessage('Everyone raises a glass. The monster too.'+(nara?' Nara begs under the table.':'')); if(nara) S('whine'); }],
+    [P.gline,()=>{ if(gr&&b2Alive(gr)) say('grace','ff4'); }],
+    [P.clink,()=>{ S('ding'); S('crash'); S('fanfare'); battle.shakeEnemy=.8; word('CLINK!',cx,52,'#fffbe6',7,1.1); }],
+    [P.apply,()=>{ E2.apply(); for(const p of party) { const s3=st[p.id]&&!st[p.id].hide?{x:st[p.id].x,mid:st[p.id].b-Hof(p.id)*.5}:ST.unit(p); scene('glow',1,{x:s3.x,y:s3.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+  ];
+  hits.forEach((o,i)=>{ steps.push([o.t,()=>{ S('thud'); ST.jolt(o.f,.5); scene('tb_rings',.5,{x:o.hx,y:o.hy,r:44,c:GOLD,w:3}); landHit(split100(i,hits.length)); }]); });
+  steps.push(['hf',hits.length?hits[0].t:P.clink]);
+  steps.push([P.end,'end',()=>{ if(guest) { guest.f.ox=0; guest.f.oy=0; guest.f.spin=0; } return (E2.result||'')+' There is always room for one more.'; }]);
+  ST.play(E2,steps);
+};
+// ================= Director's Cuts (tombo-review.md DC column) =================
+// A Director's Cut is its own row in the Tombo menu, right under its Primary (B2_TOMBOS id+'_dc', label DIRECTOR'S CUT,
+// banner DIRECTOR'S CUT!). It opens with the Primary's story flag once Tom and the partner are level 30 (b8DcOpen).
+// ---------- Smash That Like Button (Tom + Grace, Director's Cut of tier 1) ----------
+// Grace makes Tom say the outro with her. A giant red LIKE button drops out of the sky in front of Tom; he raises both
+// hands and smashes it like a boss button. A giant thumbs-up shoots out of it and slams flat onto the target row.
+// Effects: Sparkle hit on one row (warms it, shows weak spots), Glitter Nails for the party, Grace's Trending +1.
+const rr=(x,y,w,h,r,c,o=2)=>{ const p=(x0,y0,w0,h0,r0)=>{ gfx.beginPath(); gfx.moveTo(x0+r0,y0); gfx.arcTo(x0+w0,y0,x0+w0,y0+h0,r0); gfx.arcTo(x0+w0,y0+h0,x0,y0+h0,r0); gfx.arcTo(x0,y0+h0,x0,y0,r0); gfx.arcTo(x0,y0,x0+w0,y0,r0); gfx.closePath(); };
+  if(o) { p(x-o,y-o,w+o*2,h+o*2,r+o); gfx.fillStyle=OUT; gfx.fill(); } p(x,y,w,h,r); gfx.fillStyle=c; gfx.fill(); };
+// A thumbs-up on a round red badge, about 56 px across at s=1, centred on x,y. sq squashes it flat (0..1).
+const thumbsUp=(x,y,s,rot=0,sq=0,badge=true)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s*(1+sq*.4),s*(1-sq*.55));
+  if(badge) { E(0,0,28,28,OUT); E(0,0,26,26,RED); E(-8,-10,12,8,'#ff7a5e'); }
+  rr(-19,-2,7,20,2,'#3c6cc8',1.5);                                  // cuff
+  rr(-12,-4,24,22,6,'#fffbf2',1.5);                                 // fist
+  for(const y2 of [3,9,14]) Ln(4,y2,12,y2,1.6,'#c9b8a0');            // finger creases
+  gfx.save(); gfx.translate(-6,-4); gfx.rotate(-.12); rr(-4,-17,9,19,4.5,'#fffbf2',1.5); gfx.restore();   // thumb up
+  E(-3,-1,5,3,'#ffffff'); gfx.restore(); };
+// The arcade-style LIKE button: base bottom at by. press 0..1 squashes the dome; glow pulses a ring when it is ready.
+const likeBtn=(x,by,press,glow)=>{ const h=26*(1-press*.62);
+  if(glow>0) { gfx.globalAlpha=glow*(.35+.25*Math.sin(performance.now()/120)); E(x,by-20,48,30,GOLD); gfx.globalAlpha=1; }
+  EO(x,by-18,31,h,RED); E(x-10,by-18-h*.55,10,Math.max(1,h*.22),'#ff8a6a');
+  thumbsUp(x+1,by-18-h*.55,.32*(1-press*.4),0,press*.5,false);
+  RO(x-37,by-19,74,19,'#2c2a36'); R(x-37,by-19,74,3,'#4a4656'); label('LIKE',x,by-13,CREAM,2); };
+B2_TOMBO_ANIM.grace1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),row=(E2.targets||[]).filter(t=>t.side==='foe'&&b2Alive(t)),tg=row.length?row:list,GR=ST.group(list),RW=ST.group(tg);
+  const tsp=BATTLE_SPRITES.tom,TH=tsp.idle.length*tsp.scale;
+  const tx=cl(GR.x1+190,GR.x1+150,520),sb=cl(GR.base+6,236,300),bx=tx-40,gx=tx-112;
+  const P={walk:650,gline:850,drop:1900,land:2250,up:2500,tline:2600,smash:3450,launch:3500,peak:3950,slam:4300,apply:4650,home:5350,end:6050};
+  const SL=2.3,BR=28*SL,land={x:cl(RW.x,BR+8,568-BR),y:cl(Math.max((RW.top+RW.base)/2,RW.base-BR*1.1),BR+30,300)},peak={x:lerp(bx,land.x,.45),y:44};
+  const sT={x:0,b:0},sG={x:0,b:0};
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { const hop=ms>P.gline-50&&ms<P.gline+350?Math.sin(seg(ms,P.gline-50,P.gline+350)*Math.PI)*14:(ms>P.slam&&ms<P.slam+400?Math.sin(seg(ms,P.slam,P.slam+400)*Math.PI)*12:0);
+      y-=hop; f=hop>0?sp.celeb:(ms>P.drop&&ms<P.smash?(sp.flip):sp.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(gx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+600); f=k<1?sp.flip:sp.idle; }
+    sG.x=x; sG.b=y; return {cx:x,base:y,frame:f}; });
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms>P.up&&ms<P.smash) { f=sp.celeb; y-=Math.min(1,seg(ms,P.up,P.up+200))*6+Math.abs(Math.sin(ms/160))*2; }
+      else if(ms>=P.smash&&ms<P.smash+650) { f=sp.act; y+=6*(1-seg(ms,P.smash+250,P.smash+650)); }
+      else if(ms>P.slam+100&&ms<P.slam+800) f=sp.celeb; }
+    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+600); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  const flat=(ms,f,q)=>{ const k=ms<P.slam+120?seg(ms,P.slam,P.slam+120):1-ez(seg(ms,P.slam+450,P.slam+900)),s=1-.24*k;
+    f.spin=0; f.ox=0; f.fsc=s; f.oy=q.h/2*(1-s); f.spinAt=performance.now(); };
+  scene('tb_rec',P.home/1000+.2,{plan:{th0:1e9,th1:1e9+300,pk0:1e9,pk1:1e9+100,off:P.home-300}});
+  scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
+    // the button: falls, sits glowing, gets smashed, sinks away at the end
+    if(ms>P.drop&&ms<P.home+400) { const k=seg(ms,P.drop,P.land),by=ms<P.land?lerp(-60,sb,k*k):sb+(ms>P.home?ez(seg(ms,P.home,P.home+400))*40:0);
+      const press=ms>P.smash?Math.pow(Math.sin(seg(ms,P.smash,P.smash+500)*Math.PI),.6)*(ms<P.smash+250?1:1):0;
+      const a=ms>P.home?1-seg(ms,P.home,P.home+400):1; gfx.globalAlpha=a;
+      likeBtn(bx,by,ms>P.smash&&ms<P.smash+250?seg(ms,P.smash,P.smash+120):press,ms>P.land+100&&ms<P.smash?1:0);
+      // both fists on the dome for the smash
+      if(ms>P.smash&&ms<P.smash+420) { const dy=sb-18-26*(1-.62*seg(ms,P.smash,P.smash+120)); for(const dx of [-11,9]) EO(bx+dx,dy-3,7,6,'#f0b892'); }
+      gfx.globalAlpha=1; }
+    // the giant thumbs-up: out of the button, up over the stage, down flat on the row
+    if(ms>P.launch&&ms<P.end-100) {
+      if(ms<P.peak) { const k=seg(ms,P.launch,P.peak),e=1-(1-k)*(1-k); thumbsUp(lerp(bx,peak.x,e),lerp(sb-40,peak.y,e),lerp(.4,SL*.85,e),-.4+k*.4); }
+      else if(ms<P.slam) { const k=seg(ms,P.peak,P.slam),e=k*k; thumbsUp(lerp(peak.x,land.x,e),lerp(peak.y,land.y,e),lerp(SL*.85,SL,e),.1*(1-k)); }
+      else { const q=seg(ms,P.slam,P.end-100),sq=ms<P.slam+120?seg(ms,P.slam,P.slam+120):1-ez(seg(ms,P.slam+300,P.slam+700));
+        gfx.globalAlpha=q>.75?(1-q)/.25:1; thumbsUp(land.x,land.y+sq*BR*.45,SL,0,sq*.9); gfx.globalAlpha=1; } }
+    // the row gets flattened, then pops back
+    if(ms>P.slam&&ms<P.slam+900) for(const f of tg) flat(ms,f,ST.foe(f));
+    // a like counter under the REC frame once it lands
+    if(ms>P.slam&&ms<P.home) { const k=ez(seg(ms,P.slam,P.slam+600)),n=Math.round(k*1000); gfx.globalAlpha=1-seg(ms,P.home-300,P.home);
+      thumbsUp(472,74,.3,0,0,true); label((n>=1000?'1M':n+'K')+' LIKES',520,70,'#ffffff',2); gfx.globalAlpha=1; }
+  }});
+  const hits=tg.map(f=>({f,q:ST.foe(f)}));
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Grace is finishing her video. Tom has to do the outro with her.'); B2.aim=null; S('click'); }],
+    [400,()=>{ S('beep'); }],
+    [P.gline,()=>{ say('grace','dc1'); word('OUTRO!',gx,Math.max(96,sb-TH-46),PINK,4,1.1); S('cheer'); }],
+    [1500,'Grace points at the sky. Tom looks up.'],
+    [P.drop,()=>{ setMessage('A giant LIKE button drops out of the sky.'); S('whoosh'); }],
+    [P.land,()=>{ S('thud'); S('clang'); scene('dust',.6,{x:bx,y:sb+2,n:7,sp:18,up:10}); }],
+    [P.up,()=>{ S('levelChime'); setMessage('Tom raises both hands. This is a boss button.'); }],
+    [P.tline,()=>{ say('tom','dcgrace1'); }],
+    [P.smash,()=>{ S('bang'); S('ding'); battle.flashEnemy=.2; scene('tb_rings',.6,{x:bx,y:sb-24,r:60,c:GOLD,w:4}); word('SMASH!',bx,Math.max(90,sb-TH-40),GOLD,5,.8); }],
+    [P.launch,()=>{ S('slideWhistle'); }],
+    [P.slam,()=>{ S('crash'); S('thud'); battle.shakeEnemy=.7; word('LIKED!',land.x,40,'#fffbe6',5,1.1); scene('tb_rings',.8,{x:land.x,y:RW.base,r:120,c:'#ffffff',w:4});
+      hits.forEach(({f,q},k)=>{ ST.jolt(f,.6); for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:q.x,y0:q.mid,x1:q.x+(j-1)*26,y1:q.top-34,arc:20,spin:false,r:7,t:-(k*.08+j*.1),dur:.7}); });
+      landHit(100); }],
+    ['hf',P.slam],
+    [P.slam+250,()=>{ S('fanfare'); scene('confetti',1.4,{x0:GR.x0,x1:576,n:30}); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sG.x,y:sG.b-50}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:GOLD,a:.35});
+      for(const p of b2LiveParty()) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.end,'end',()=>{ for(const f of tg) { f.fsc=0; f.oy=0; f.ox=0; f.spin=0; } return (E2.result||'')+' Like and subscribe.'; }]];
+  ST.play(E2,steps);
+};
+
+// ---------- That Cloud Is Lamby (Tom + Rose, Director's Cut of tier 1) ----------
+// Rose rides Tom's shoulders and they look at the clouds. Tom says the big one is clearly a sourdough loaf; Rose says it is
+// Lamby with Tom's hair. The cloud agrees with Rose: it puffs into a giant fluffy Lamby, hair and all, floats down and
+// sits on the monster. Effects (no damage): it warms up, its wind-up is cancelled, its next turn comes later, and Rose
+// stays up on Tom's shoulders.
+const TOMHAIR='#3b2618';
+// Tom's hair on Lamby: a dark brown cap and a front swoop, in plush coordinates (plush faces left, head at -12,-6).
+const lambyHair=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  E(-11,-12.5,11.6,6.4,OUT); E(-11,-12.5,10.2,5.2,TOMHAIR);
+  gfx.beginPath(); gfx.moveTo(-21.5,-12); gfx.quadraticCurveTo(-25.5,-4.5,-18.5,-5.5); gfx.lineTo(-14,-11); gfx.closePath(); gfx.lineWidth=1.4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=TOMHAIR; gfx.fill();
+  E(-8,-15,4.5,1.5,'#6a4a32'); gfx.restore(); };
+const CLOUDP=[[-56,10,20],[-30,-4,28],[0,-14,32],[34,-4,27],[58,10,19],[-12,12,26],[24,13,24],[-42,17,18],[46,17,16]];
+const LAMBP=[[-17,-9,9],[-4,-6,10],[8,-4,9],[14,4,8],[2,8,9],[-10,6,8],[-22,-1,7],[18,-6,6],[-13,-17,6]];
+B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list);
+  const tsp=BATTLE_SPRITES.tom,TH=tsp.idle.length*tsp.scale,RS=BATTLE_SPRITES.rose.scale,RIDE=ROSE_RIDE.bt_idle;
+  const tx=cl(GR.x1+140,GR.x1+110,500),sb=cl(GR.base+4,236,300);
+  const P={hop:500,walk:520,arrive:1150,cloud:1100,still:1800,tline:1650,tb0:1650,tb1:2800,rline:2850,rb0:2850,rb1:3950,morph:3900,morphEnd:4550,word:4400,fall:4650,sit:5050,apply:5200,puff:5750,puffEnd:6250,home:5850,end:6650};
+  const LS=3.3,sky={x:cl(F.x,90,480),y:Math.max(78,F.top-82)},seat={x:F.x+4,y:Math.max(70,F.top+F.h*.38-17*LS)};
+  const sT={x:0,b:0},seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
+  const st0=startOf(pt);
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle;
+    if(ms<P.walk) { x=c.origX; y=c.origBase; }
+    else if(ms<P.arrive) { const k=ez(seg(ms,P.walk,P.arrive)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,P.walk,P.arrive); }
+    else if(ms<P.home) { f=ms>P.tline-80&&ms<P.tb1?sp.act:(ms>P.sit&&ms<P.sit+600?sp.celeb:(ms>P.rline&&ms<P.morph?sp.expr:sp.idle)); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  // Rose hops up from wherever she is and sits on his shoulders for the rest (a path parked on the riding spot is seated).
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,s=seatPt();
+    if(ms<P.hop) { const k=seg(ms,0,P.hop); return {cx:lerp(st0.x,s.x,ez(k)),base:lerp(st0.b,s.y,ez(k))-Math.sin(k*Math.PI)*50,frame:sp.celeb,noShadow:true}; }
+    const bob=ms>P.rline&&ms<P.rline+500?-Math.abs(Math.sin(seg(ms,P.rline,P.rline+500)*Math.PI*2))*5:(ms>P.sit&&ms<P.sit+500?-Math.abs(Math.sin(seg(ms,P.sit,P.sit+500)*Math.PI*2))*5:0);
+    return {cx:s.x,base:s.y+bob,frame:sp.idle,noShadow:true}; });
+  const puff=(x,y,r,a)=>{ if(a<=0||r<=0) return; gfx.globalAlpha=a; E(x,y+3,r+2,r*.82+2,'#b8c6dc'); E(x,y,r,r*.82,'#ffffff'); E(x-r*.25,y-r*.3,r*.45,r*.28,'#ffffff'); gfx.globalAlpha=1; };
+  const cloudAt=(cx,cy,m,a)=>{ // m: 0 = cloud, 1 = puffs hugging Lamby's outline
+    for(const [i,[px,py,r]] of CLOUDP.entries()) { const L=LAMBP[i],x=lerp(px,L[0]*LS,ez(m)),y=lerp(py,L[1]*LS,ez(m)),rad=lerp(r,L[2]*LS*.75,ez(m));
+      E(cx+x,cy+y+6,rad*.9,rad*.5,'rgba(150,170,200,'+(a*.18*(1-m))+')'); puff(cx+x,cy+y,rad,a*(1-m*.7)); } };
+  scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
+    // soft sky tint so the cloud reads
+    const sk=ez(seg(ms,P.cloud-200,P.cloud+400))*(1-ez(seg(ms,P.puff,P.puffEnd)));
+    if(sk>0) { const gr=gfx.createLinearGradient(0,0,0,190); gr.addColorStop(0,'rgba(143,208,255,.3)'); gr.addColorStop(1,'rgba(143,208,255,0)'); gfx.globalAlpha=sk; gfx.fillStyle=gr; gfx.fillRect(0,0,576,190); gfx.globalAlpha=1; }
+    // where the cloud / Lamby is
+    let cx=sky.x,cy=sky.y,m=0,la=0,lsc=LS,pose='held',rot=0,a=1;
+    if(ms<P.still) { const k=ez(seg(ms,P.cloud,P.still)); cx=lerp(sky.x+280,sky.x,k); a=seg(ms,P.cloud,P.cloud+300); cy+=Math.sin(ms/500)*3; }
+    else if(ms<P.morph) cy+=Math.sin(ms/500)*3;
+    else if(ms<P.fall) { m=seg(ms,P.morph,P.morphEnd); la=ez(seg(ms,P.morph+150,P.morphEnd)); rot=Math.sin(ms/260)*.05; }
+    else if(ms<P.sit) { const k=seg(ms,P.fall,P.sit); m=1; la=1; cx=lerp(sky.x,seat.x,ez(k)); cy=lerp(sky.y,seat.y,k*k); rot=-.08*Math.sin(k*Math.PI); }
+    else { m=1; la=1; cx=seat.x; cy=seat.y; const q=seg(ms,P.sit,P.sit+300); lsc=LS*(1+(q<1?Math.sin(q*Math.PI)*.08:0)); rot=Math.sin(ms/300)*.04;
+      if(ms>P.puff) { const k=seg(ms,P.puff,P.puffEnd); la=1-k; m=1-k; cy-=k*50; a=1-k; } }
+    if(ms>P.cloud&&ms<P.puffEnd) {
+      if(la<1||ms>P.puff) cloudAt(cx,cy,m,a*(ms>P.puff?1:1));
+      if(la>0) { gfx.globalAlpha=la; RFX.plush(cx,cy,lsc,{pose,rot}); gfx.save(); gfx.translate(cx,cy); gfx.rotate(rot); lambyHair(0,0,lsc); gfx.restore(); gfx.globalAlpha=1;
+        // a fluffy cloud rim still hugging it
+        if(ms<P.puff) for(const [i,L] of LAMBP.entries()) if(i%3===0) puff(cx+L[0]*lsc,cy+L[1]*lsc+4,L[2]*lsc*.45,la*.35); }
+      // the monster squashes a little while Lamby sits on it
+      if(ms>P.sit&&ms<P.puff+250) { const k=ms<P.sit+120?seg(ms,P.sit,P.sit+120):1-ez(seg(ms,P.puff,P.puff+250)),sc2=1-.16*k;
+        tgt.spin=0; tgt.ox=0; tgt.fsc=sc2; tgt.oy=F.h/2*(1-sc2); tgt.spinAt=performance.now(); } }
+    // the two thought bubbles
+    const s0=seatPt(),rHead={x:s0.x-2,y:s0.y-20-RIDE.ay*RS};
+    if(ms>P.tb0&&ms<P.tb1) { const k=ms<P.tb1-200?seg(ms,P.tb0,P.tb0+250):1-seg(ms,P.tb1-200,P.tb1);
+      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250),126,82,sT.x-16,sb-TH+14,k,()=>{ boule(0,4,3.1,false); }); }
+    if(ms>P.rb0&&ms<P.rb1) { const k=ms<P.rb1-200?seg(ms,P.rb0,P.rb0+250):1-seg(ms,P.rb1-200,P.rb1);
+      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ RFX.plush(4,8,1.75,{pose:'held'}); lambyHair(4,8,1.75); }); }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Rose climbs up on Tom’s shoulders. Cloud safari.'); B2.aim=null; S('boing'); }],
+    [P.walk,()=>{ S('step'); }],
+    [P.cloud,()=>{ setMessage('A big fluffy cloud drifts over the monsters.'); S('whoosh'); }],
+    [P.tline,()=>{ say('tom','dcrose1'); }],
+    [P.tline+400,'Tom has an opinion about the cloud.'],
+    [P.rline,()=>{ say('rose','dc1'); S('giggle'); }],
+    [P.rline+400,'Rose has a different opinion.'],
+    [P.morph,()=>{ setMessage('The cloud agrees with Rose.'); S('chime2'); }],
+    [P.word,()=>{ word("IT'S LAMBY!",sky.x,40,PINK,4,.7); S('levelChime'); }],
+    [P.fall,()=>{ S('slideWhistle'); setMessage('Giant cloud Lamby floats down... and sits on the monster.'); }],
+    [P.sit,()=>{ S('thud'); S('squeak'); ST.jolt(tgt,.5); battle.shakeEnemy=.4; word('FLUMP!',sky.x,66,'#fffbe6',4,.8); scene('tb_rings',.6,{x:F.x,y:F.base,r:70,c:'#ffffff',w:3});
+      for(let k=0;k<6;k++) { const an=k/6*Math.PI*2; battle.props.push({kind:'dheart',x0:F.x,y0:F.mid,x1:F.x+Math.cos(an)*54,y1:F.mid+Math.sin(an)*34-20,arc:10,spin:false,r:6,t:-k*.04,dur:.7}); }
+      landHit(100); }],
+    ['hf',P.sit],
+    [P.apply,()=>{ E2.apply(); S('heal'); }],
+    [P.sit+500,()=>{ S('giggle'); }],
+    [P.puff,()=>{ S('whoosh'); }],
+    [P.end,'end',()=>{ tgt.fsc=0; tgt.oy=0; tgt.ox=0; tgt.spin=0; return (E2.result||'')+' Rose was right. Rose is always right about clouds.'; }]];
+  ST.play(E2,steps);
+};
+// ---------- Field Day (Tom + Amy, Director's Cut of tier 1) ----------
+// Amy blows the whistle for field day. Chalk lanes on the grass. Tom gets the egg-and-spoon race and walks it very, very
+// carefully. Amy sprints past in the next lane, bumps him, and the egg flies off the spoon into the monster's face.
+// Effects (no damage): every enemy warms up, the party gets 2 VP, Amy shakes off one debuff.
+const egg=(x,y,s,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); E(0,0,6.5*s+1.6,8.5*s+1.6,OUT); E(0,0,6.5*s,8.5*s,'#fffaf0'); E(-2*s,-3*s,2*s,2.6*s,'#ffffff'); gfx.restore(); };
+const spoon=(x,y,rot,full)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
+  Ln(0,0,30,0,4.5,OUT); Ln(0,0,30,0,2.2,'#c8ccd4'); E(-9,-1,11,5.5,OUT); E(-9,-1,9,4,'#dfe3ea'); E(-11,-2.5,4,1.6,'#ffffff');
+  if(full) egg(-9,-9,1,0); gfx.restore(); };
+const whistle=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); RO(-9,-3,12,7,'#c8ccd4'); EO(4,1,5,5,'#c8ccd4'); E(4,1,2,2,'#5a5e68'); R(-9,-3,12,2,'#ffffff'); gfx.restore(); };
+const splat=(x,y,k,a)=>{ if(k<=0||a<=0) return; gfx.globalAlpha=a; const r=22*ez(k);
+  for(const [dx,dy,rr2] of [[0,0,1],[-14,-6,.55],[13,-8,.5],[-10,11,.5],[15,9,.45],[0,-15,.4]]) E(x+dx*k,y+dy*k,r*rr2+2,r*rr2*.85+2,OUT);
+  for(const [dx,dy,rr2] of [[0,0,1],[-14,-6,.55],[13,-8,.5],[-10,11,.5],[15,9,.45],[0,-15,.4]]) E(x+dx*k,y+dy*k,r*rr2,r*rr2*.85,'#fffaf0');
+  EO(x+2,y+1,r*.42,r*.38,'#ffc23a'); E(x-1,y-2,r*.14,r*.11,'#fff3c0');
+  for(const [dx,len] of [[-9,18],[6,26],[14,12]]) { const l=len*cl(k*1.4-.4); if(l>0) { Ln(x+dx,y+r*.5,x+dx,y+r*.5+l,4.5,OUT); Ln(x+dx,y+r*.5,x+dx,y+r*.5+l,2.5,'#fffaf0'); } }
+  gfx.globalAlpha=1; };
+B2_TOMBO_ANIM.amy1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),o3=order3(list),tgt=o3.length?o3[0].f:list[0],F=ST.foe(tgt),GR=ST.group(list);
+  const tsp=BATTLE_SPRITES.tom,asp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,AH=asp.idle.length*asp.scale;
+  const sb=cl(GR.base+2,232,292),ab=sb+14,tx0=cl(GR.x1+210,GR.x1+170,520),tx1=tx0-46,ax0=tx0+60,fin=cl(GR.x1+72,150,480);
+  const P={walk:650,tweet:800,aline:950,go:1900,tline:2500,run:3350,bump:3700,fly:3700,splat:4150,tape:4250,apply:4900,home:5600,end:6300};
+  const bumpX=tx0-((P.bump-P.go)/(P.run+1400-P.go))*46;
+  const face={x:F.x,y:F.top+F.h*.32};
+  const sT={x:tx0,b:sb,f:tsp.idle},sA={x:ax0,b:ab};
+  const tomX=ms=>ms<P.go?tx0:lerp(tx0,tx1,seg(ms,P.go,P.home));
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx0,y=sb,f=sp.act,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx0,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); f=sp.idle; }
+    else if(ms<P.home) { x=tomX(ms);
+      if(ms>P.go&&ms<P.bump) y-=Math.abs(Math.sin((ms-P.go)/260))*2;   // tiny, careful steps
+      if(ms>=P.bump&&ms<P.bump+500) { const k=seg(ms,P.bump,P.bump+500); f=sp.expr; rot=-.25*Math.sin(k*Math.PI); x-=Math.sin(k*Math.PI)*10; }
+      else if(ms>=P.bump+500) f=ms>P.splat+200&&ms<P.apply?sp.kneel:sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx1,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=ax0,y=ab,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,ax0,k); y=lerp(c.origBase,ab,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.run) { f=ms>P.tweet&&ms<P.go+300?sp.celeb2:(ms>P.go+300?sp.wind:sp.idle); }
+    else if(ms<P.tape) { const k=seg(ms,P.run,P.tape); x=lerp(ax0,fin,k); f=runFr(sp,c.t*1.6,-1); y-=Math.abs(Math.sin(ms/70))*3; }
+    else if(ms<P.home) { x=fin-Math.min(1,seg(ms,P.tape,P.tape+250))*8; f=sp.celeb; if(ms<P.tape+700) y-=Math.abs(Math.sin(seg(ms,P.tape,P.tape+700)*Math.PI*2))*14; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(fin-8,c.origX,k); y=lerp(ab,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sA.x=x; sA.b=y; return {cx:x,base:y,frame:f}; });
+  const hand=()=>handPt(tsp,tsp.act,sT.x,sT.b,-1);
+  // field-day lanes, bunting and the finish tape (back layer, behind everyone)
+  scene('tb_draw',P.end/1000,{back:true,draw:(s,u,ms)=>{ const k=ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.home+500))); if(k<=0) return;
+    gfx.globalAlpha=k*.28; R(0,sb-26,576,ab-sb+40,'#7ac85a'); gfx.globalAlpha=k*.85;
+    for(const y of [sb-22,sb+5,ab+12]) { R(0,y,576,3,'#fffaf0'); }
+    R(tx0+18,sb-22,4,ab+15-(sb-22),'#fffaf0'); label('START',tx0+20,sb-34,'#fffaf0',2);
+    for(let i=0;i<14;i++) { const x=i*44+((ms/40)%44),y=30+Math.sin(i*1.3)*3; gfx.beginPath(); gfx.moveTo(x,y); gfx.lineTo(x+22,y+2); gfx.lineTo(x+11,y+18); gfx.closePath(); gfx.fillStyle=['#e0402e','#ffe08a','#5a8ad0','#7ac85a'][i%4]; gfx.fill(); }
+    Ln(0,30,576,32,2,OUT);
+    gfx.globalAlpha=1; }});
+  // the tape at the finish, the spoon and egg, the whistle, the splat (front layer)
+  scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
+    // finish tape: two posts, a tape that snaps when Amy breaks it
+    const fk=ez(seg(ms,P.walk,P.walk+300))*(1-ez(seg(ms,P.home,P.home+400)));
+    if(fk>0) { gfx.globalAlpha=fk; const px=fin-16; RO(px-2,ab-62,4,62,'#fffaf0'); RO(px-2,sb-74,4,40,'#fffaf0');
+      if(ms<P.tape) { Ln(px,sb-60,px,ab-38,4,RED); }
+      else { const q=ez(seg(ms,P.tape,P.tape+400)); Ln(px,sb-60,px-20*q,sb-40+q*20,4,RED); Ln(px,ab-38,px-24*q,ab-52+q*10,4,RED); }
+      label('FINISH',px,sb-86,'#fffaf0',2); gfx.globalAlpha=1; }
+    // the whistle at Amy's mouth while she blows it
+    if(ms>P.tweet-100&&ms<P.go+250) { const q=Math.sin(ms/40)*1; whistle(sA.x-AH*.22+q,sA.b-AH*.73,1.1); }
+    // spoon in Tom's hand, the egg wobbling on it
+    if(ms>P.walk&&ms<P.home) { const h=hand(),wob=ms<P.bump?Math.sin(ms/110)*.12+Math.sin(ms/47)*.05:0,rot=ms>=P.bump&&ms<P.bump+500?-.6*Math.sin(seg(ms,P.bump,P.bump+500)*Math.PI):wob;
+      spoon(h.x+2,h.y+2,rot,ms<P.fly);
+      if(ms>P.go&&ms<P.bump) { const sw=(Math.floor(ms/300)%2)?1:0; E(sT.x+14,sT.b-TH+16+sw*3,2.4,3.6,'#9fd8ff'); }   // a sweat drop
+    }
+    // the egg flies in an arc into the monster's face, and splats
+    if(ms>=P.fly&&ms<P.splat) { const h=hand(),k=seg(ms,P.fly,P.splat); egg(lerp(h.x-7,face.x,k),lerp(h.y-7,face.y,k)-Math.sin(k*Math.PI)*90,1.6,k*Math.PI*5); }
+    if(ms>=P.splat&&ms<P.end-50) { splat(face.x,face.y,seg(ms,P.splat,P.splat+180),1-seg(ms,P.end-500,P.end-50));
+      if(ms<P.splat+500) for(let j=0;j<5;j++) { const q=seg(ms,P.splat,P.splat+500),an=-.6-j*.5; E(face.x+Math.cos(an)*q*50,face.y+Math.sin(an)*q*40+q*q*30,3,2,'#fffaf0'); } }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Coach Amy has a whistle. It is field day.'); B2.aim=null; S('click'); }],
+    [P.tweet,()=>{ S('toot'); word('TWEET!',ax0+10,Math.max(80,ab-AH-40),CREAM,4,.7); }],
+    [P.aline,()=>{ say('amy','dc1'); }],
+    [P.go-200,'Tom draws the egg-and-spoon race.'],
+    [P.go,()=>{ word('GO!',ax0-40,40,GOLD,5,.8); S('ding'); }],
+    [P.tline,()=>{ say('tom','dcamy1'); setMessage('Tom walks it very, very carefully.'); }],
+    [P.run,()=>{ S('whoosh'); setMessage('Amy is not walking. Amy is sprinting.'); }],
+    [P.bump,()=>{ S('bump'); S('boing'); word('BUMP!',bumpX,Math.max(90,sb-TH-40),PINK,4,.6); }],
+    [P.fly+150,()=>{ S('slideWhistle'); }],
+    [P.splat,()=>{ S('squeak'); S('thud'); ST.jolt(tgt,.5); battle.shakeEnemy=.4; word('SPLAT!',face.x,40,'#ffd24a',5,.9);
+      for(let k=0;k<5;k++) battle.props.push({kind:'dheart',x0:F.x,y0:F.mid,x1:F.x+(k-2)*24,y1:F.top-30,arc:14,spin:false,r:6,t:-k*.06,dur:.7});
+      landHit(100); }],
+    ['hf',P.splat],
+    [P.tape,()=>{ S('fanfare'); word('1ST!',fin,Math.max(96,ab-AH-44),GOLD,5,1.1); scene('confetti',1.3,{x0:fin-90,x1:fin+90,n:26}); }],
+    [P.tape+300,'Amy wins. The egg does not.'],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sA.x,y:sA.b-AH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:GOLD,a:.35});
+      for(const p of b2LiveParty()) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.end,'end',()=>(E2.result||'')+' Amy is still doing a victory lap.']];
+  ST.play(E2,steps);
+};
+
+// ---------- Clean As You Go (Tom + Deedee, Director's Cut of tier 1) ----------
+// Deedee washes at the sink and hands each clean plate to Tom, who dries and stacks. She goes faster and faster; he cannot
+// keep up, and the tower of clean plates in his arms grows to the ceiling, sways and topples onto the monster.
+// Effects (no damage): every enemy warms up, the party heals 25%, every friend shakes off one debuff.
+const plateEdge=(x,y,s=1)=>{ E(x,y,17*s+1.5,4*s+1.5,OUT); E(x,y,17*s,4*s,'#fbfbf6'); E(x,y-1,13*s,2*s,'#dfe8f4'); R(x-17*s,y,34*s,1,'#5a8ad0'); };
+const plateFace=(x,y,rot,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); E(0,0,12*s+1.5,12*s+1.5,OUT); E(0,0,12*s,12*s,'#fbfbf6'); ring(0,0,8*s,8*s,1.5,'#5a8ad0'); E(-4*s,-4*s,2.5*s,1.6*s,'#ffffff'); gfx.restore(); };
+B2_TOMBO_ANIM.deedee1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),o3=order3(list),tgt=o3.length?o3[0].f:list[0],F=ST.foe(tgt),GR=ST.group(list);
+  const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
+  const sb=cl(GR.base+6,236,300),tx=cl(GR.x1+92,GR.x1+80,440),dx=tx+80;
+  const P={walk:650,wash:800,dline:1700,tline:3000,top:4100,sway:4100,fall:4650,crash:5050,apply:5450,home:5950,end:6700};
+  // plate hand-off times: the gap shrinks from 420 ms to 90 ms
+  const hand=[]; for(let t=P.wash+100,g=420;t<P.top-250;t+=g,g=Math.max(90,g*.84)) hand.push(t);
+  const FLY=260,N=hand.length,PL=6,chest={x:tx-6,y:sb-TH*.42};
+  const nOn=ms=>{ let n=0; for(const t of hand) if(ms>=t+FLY) n++; return n; };
+  const sT={x:tx,b:sb},sD={x:dx,b:sb};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.flip,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); f=sp.idle; }
+    else if(ms<P.home) { const n=nOn(ms);
+      if(ms<P.fall) { rot=Math.min(.12,n*.004)*(ms>P.sway?1+Math.sin(ms/90)*.6:1); x+=Math.sin(ms/(ms>P.sway?90:170))*(n>12?2:1); f=n>6?sp.expr:sp.flip; }
+      else if(ms<P.crash+300) f=sp.act;
+      else f=ms<P.apply?sp.kneel:sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,dx,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.top) { const g=hand.find(t=>t>ms-160&&t<=ms+60); f=g!=null?sp.throw:(Math.floor(ms/(ms>P.dline?70:140))%2?sp.act:sp.wind); }
+    else if(ms<P.home) f=ms<P.crash?sp.spread:sp.hip;
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(dx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sD.x=x; sD.b=y; return {cx:x,base:y,frame:f}; });
+  // the counter behind them
+  scene('tb_draw',P.end/1000,{back:true,draw:(s,u,ms)=>{ const k=ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.home+500))); if(k<=0) return;
+    gfx.globalAlpha=k*.9; const top=sb-DH*.5;
+    for(let i=0;i<7;i++) for(let j=0;j<3;j++) RO(dx-90+i*30+(j%2)*15,top-74+j*18,26,14,'#e8f0f4');   // tile splashback
+    gfx.globalAlpha=1; }});
+  // the sink, the stack, the flying plates, the toppling tower
+  scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
+    const k=ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.home+500)));
+    if(k>0) { gfx.globalAlpha=k; const y0=sb-DH*.3,sx=dx-34; RO(sx-24,y0,48,22,'#c8ccd4'); R(sx-20,y0+4,40,4,'#5a5e68');
+      for(let i=0;i<4;i++) { const bx=sx-16+i*10+Math.sin(ms/200+i)*2,by2=y0-2-Math.abs(Math.sin(ms/260+i*1.7))*(ms>P.dline?10:5); EO(bx,by2,4+(i%2),4+(i%2),'#ffffff'); }
+      RO(sx+16,y0-24,4,22,'#c8ccd4'); RO(sx+4,y0-26,16,4,'#c8ccd4');   // tap
+      gfx.globalAlpha=1; }
+    const n=nOn(ms),base={x:sT.x+12,y:sT.b-TH*.36};
+    if(ms<P.fall) { // the stack in Tom's arms, swaying more as it grows
+      const sway=ms>P.sway?Math.sin(ms/110)*.09*seg(ms,P.sway,P.sway+300):Math.sin(ms/300)*.01*n;
+      gfx.save(); gfx.translate(base.x,base.y); gfx.rotate(sway); for(let i=0;i<n;i++) plateEdge(Math.sin(i*1.7)*1.5,-i*PL); gfx.restore();
+      if(ms>P.walk&&ms<P.top) towel(sT.x-4+Math.sin(ms/60)*4,sT.b-TH*.3,-.3); }
+    else { // it topples left about its foot and lands on the monster
+      const q=seg(ms,P.fall,P.crash),ang=-q*q*1.45;
+      if(ms<P.crash) { gfx.save(); gfx.translate(base.x,base.y); gfx.rotate(ang); for(let i=0;i<n;i++) plateEdge(Math.sin(i*1.7)*1.5*(1+q*4)-i*q*q*1.2,-i*PL*(1+q*.05)); gfx.restore(); }
+      else if(ms<P.crash+900) { const w=seg(ms,P.crash,P.crash+900); // plates scatter off the monster and spin away
+        for(let i=0;i<Math.min(n,18);i++) { const a=i*2.39,sp2=60+(i%5)*22; plateFace(F.x+Math.cos(a)*sp2*w,F.mid-30+Math.sin(a)*sp2*w*.6-Math.sin(w*Math.PI)*40+w*w*60,w*8+i,.85); }
+        gfx.globalAlpha=1-w; for(let i=0;i<6;i++) plateEdge(F.x-20+i*8,F.top-6-i*5,.9); gfx.globalAlpha=1; } }
+    // plates in flight from Deedee's hands to the top of the stack
+    for(const t of hand) if(ms>=t&&ms<t+FLY) { const q=(ms-t)/FLY,ty2=base.y-nOn(t)*PL; plateFace(lerp(sD.x-26,base.x,q),lerp(sD.b-DH*.55,ty2,q)-Math.sin(q*Math.PI)*40,q*Math.PI*3,.8); }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Deedee is at the sink. Tom has a dish towel.'); B2.aim=null; S('click'); }],
+    [P.wash,()=>{ S('reel'); setMessage('She washes. He dries. She washes faster.'); }],
+    [P.dline,()=>{ say('deedee','dc1'); word('FASTER!',dx,Math.max(90,sb-DH-40),PINK,4,.8); }],
+    [P.tline,()=>{ say('tom','dcdeedee1'); setMessage('The stack is taller than Tom.'); }],
+    [P.sway,()=>{ word('UH OH.',tx,40,CREAM,4,.8); S('creak'); }],
+    [P.fall,()=>{ S('slideWhistle'); setMessage('TIMBER. The tower of clean plates tips over.'); }],
+    [P.crash,()=>{ S('crash'); S('clang'); ST.jolt(tgt,.6); battle.shakeEnemy=.7; word('CRASH!',F.x,66,'#fffbe6',5,.9); scene('tb_rings',.6,{x:F.x,y:F.base,r:90,c:'#ffffff',w:3});
+      for(let k=0;k<5;k++) battle.props.push({kind:'dheart',x0:F.x,y0:F.mid,x1:F.x+(k-2)*26,y1:F.top-34,arc:14,spin:false,r:6,t:-k*.06,dur:.7});
+      landHit(100); }],
+    ['hf',P.crash],
+    [P.crash+400,()=>{ S('ding'); word('SPOTLESS!',dx,40,GOLD,4,1); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sD.x,y:sD.b-DH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:GOLD,a:.35});
+      for(const p of b2LiveParty()) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.end,'end',()=>(E2.result||'')+' Every plate is clean. Most of them are on the monster.']];
+  ST.play(E2,steps);
+};
+// ---------- Quiet on Cattail Pier (Tom + Boppy, Director's Cut of tier 1) ----------
+// Father and son on Cattail Pier: Boppy in his folding camp chair, Tom beside him with the green tackle box. Tom baits the
+// hook with a glowing bit of sourdough crust; Boppy shushes him. Tom points at the ripples behind the reeds. Boppy stands
+// and whips one huge cast over every monster; the line drapes across all of them; Tom grabs the rod too and they heave
+// backward together: YANK! The back row is reeled into the front. Boppy's back has a few words to say about it.
+// Effects: Splash hit on every enemy, back row to the front, Hooked for 2 turns, Boppy +2 Heartburn.
+const CANVAS='#3f7a4a',CANVAS2='#5a9a62',ALU='#b8c0c8';
+// A folding camp chair seen from the side, facing left: seat at b-sh, back on the right.
+// legs:false draws only the seat and back (back layer); legs:'front' only the near X of legs (front layer).
+const campChair=(x,b,sh,bh,part)=>{ const X=(c,w)=>{ Ln(x-20,b,x+20,b-sh,w,c); Ln(x+20,b,x-20,b-sh,w,c); };
+  if(part!=='front') { Ln(x+18,b-sh,x+30,b-bh,5,OUT); Ln(x+18,b-sh,x+30,b-bh,2.5,ALU);
+    gfx.beginPath(); gfx.moveTo(x+15,b-sh-4); gfx.lineTo(x+25,b-bh+2); gfx.lineTo(x+35,b-bh+6); gfx.lineTo(x+26,b-sh-4); gfx.closePath(); gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CANVAS; gfx.fill();
+    X(OUT,5); X('#8a929a',2.5); RO(x-22,b-sh-4,44,6,CANVAS); R(x-22,b-sh-4,44,2,CANVAS2); }
+  if(part==='front') { X(OUT,4.5); X(ALU,2.2); } };
+const tackleBox=(x,b,open)=>{ RO(x-16,b-14,32,14,'#3a8a4a'); R(x-16,b-14,32,3,'#5aaa62'); RO(x-4,b-18,8,3,'#2a5a32');
+  if(open) { gfx.save(); gfx.translate(x+16,b-14); gfx.rotate(1.2); RO(-32,-4,32,4,'#3a8a4a'); gfx.restore();
+    for(const [dx,c] of [[-10,'#e0402e'],[-3,'#ffe08a'],[4,'#5ac8ff'],[11,'#ff9ac0']]) E(x+dx,b-15,2.6,2,c); } };
+const cattail=(x,b,h,sw)=>{ const tx=x+sw; gfx.lineCap='round'; Ln(x,b,tx,b-h,3.5,OUT); Ln(x,b,tx,b-h,1.8,'#5a8a3a');
+  EO(tx,b-h+8,3,9,'#7a4a24'); Ln(tx,b-h-1,tx+sw*.2,b-h-8,1.5,'#5a8a3a');
+  gfx.strokeStyle='#4a7a32'; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(x,b); gfx.quadraticCurveTo(x-8,b-h*.4,x-14+sw,b-h*.55); gfx.stroke(); };
+B2_TOMBO_ANIM.boppy1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list);
+  const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale;
+  const PL=cl(GR.x1+14,150,300),bx=cl(GR.x1+112,GR.x1+92,452),tx=bx+88,gx=bx+36,sb=cl(GR.base+4,236,300);
+  const wTop=cl(GR.top+GR.list.reduce((m,q)=>Math.min(m,q.h),99)*.3,120,230);
+  const P={walk:700,lure0:1000,lure1:1450,bline:1150,rip:1950,tline:2150,stand:3000,back:3150,fwd:3320,rel:3420,land:3850,taut:4050,grab:4050,grip:4350,yank:4500,slack:5150,ache:5000,home:5700,end:6400};
+  const S0=list.map(f=>({f,q:ST.foe(f)}));
+  const sT={x:tx,b:sb,f:tsp.idle},sB={x:bx,b:sb,f:bsp.idle,rot:0};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms>P.lure0&&ms<P.lure1) f=sp.act;
+      else if(ms>P.tline-60&&ms<P.stand-100) { f=sp.act; y-=Math.abs(Math.sin((ms-P.tline)/140))*2; }
+      if(ms>=P.grab) { const k=ez(seg(ms,P.grab,P.grip)); x=lerp(tx,gx,k); y+=ffHop(ms,P.grab,P.grip); f=sp.act;
+        if(ms>P.yank&&ms<P.yank+420) { const q=seg(ms,P.yank,P.yank+420); rot=.22*Math.sin(q*Math.PI); x+=Math.sin(q*Math.PI)*8; }
+        if(ms>P.yank+420) f=ms<P.slack?sp.celeb:sp.idle; } }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(gx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=bx,y=sb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,bx,k); y=lerp(c.origBase,sb,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
+    else if(ms<P.home) {
+      if(ms<P.stand) f=sp.sit||sp.idle;
+      else if(ms<P.back) f=sp.idle;
+      else if(ms<P.fwd) f=sp.wind||sp.idle;
+      else if(ms<P.land) f=sp.throw||sp.act;
+      else if(ms<P.yank) f=ms>P.taut?(sp.wind||sp.act):sp.act;
+      else if(ms<P.yank+420) { const q=seg(ms,P.yank,P.yank+420); f=sp.wind||sp.act; rot=.2*Math.sin(q*Math.PI); x+=Math.sin(q*Math.PI)*8; }
+      else if(ms<P.ache) f=sp.celeb||sp.idle;
+      else f=ms<P.ache+600?(sp.kneel||sp.idle):(sp.hip||sp.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(bx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sB.x=x; sB.b=y; sB.f=f; sB.rot=rot; return {cx:x,base:y,frame:f,rot}; });
+  const setK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-150)));
+  // Behind everyone: the lake under the monsters, reeds behind them, the pier and the camp chair under the pair.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=setK(ms); if(k<=0) return; gfx.globalAlpha=k;
+    gfx.fillStyle=WATER; gfx.beginPath(); gfx.moveTo(0,wTop); for(let x=0;x<=PL;x+=12) gfx.lineTo(x,wTop+Math.sin(x/20+ms/300)*3); gfx.lineTo(PL,324); gfx.lineTo(0,324); gfx.closePath(); gfx.fill();
+    for(let j=0;j<7;j++) { const yy=wTop+18+j*16,xx=((j*53+ms/26)%(PL+40))-20; Ln(xx,yy,xx+26,yy,2,WATER2); }
+    Ln(0,wTop+1,PL,wTop+1,2,FOAM);
+    for(let i=0;i<9;i++) { const x=12+i*((PL-30)/8),h=46+((i*37)%30); cattail(x,wTop+6+(i%3)*4,h,Math.sin(ms/600+i)*3); }
+    const pt0=Math.min(sb-26,Math.max(wTop+14,sb-60));
+    R(PL-2,pt0,580-PL,330-pt0,OUT); R(PL,pt0+2,580-PL,330-pt0,PLANK);
+    for(let yy=pt0+16;yy<324;yy+=16) R(PL,yy,580-PL,2,PLANK2);
+    for(const yy of [pt0+30,pt0+86]) RO(PL-12,yy,12,330-yy,'#6a4a2a');
+    // the chair: Boppy sits in it, then stands up in front of it
+    campChair(bx+12,sb,Math.round(BH*.3),Math.round(BH*.7));
+    gfx.globalAlpha=1; }});
+  const tipOf=ms=>{ const h=handPt(bsp,sB.f,sB.x,sB.b,-1);
+    let a=1.15;
+    if(ms>P.back&&ms<P.fwd) a=lerp(1.15,2.35,ez(seg(ms,P.back,P.fwd)));
+    else if(ms>=P.fwd&&ms<P.land) a=lerp(2.35,.32,ez(seg(ms,P.fwd,P.fwd+180)));
+    else if(ms>=P.land&&ms<P.yank) a=lerp(.32,.55,seg(ms,P.taut,P.yank));
+    else if(ms>=P.yank&&ms<P.slack) a=lerp(.55,1.05,ez(seg(ms,P.yank,P.yank+300)));
+    else if(ms>=P.slack) a=1.15;
+    a+=sB.rot; const L=112; return {h,x:h.x-Math.cos(a)*L,y:h.y-Math.sin(a)*L,a}; };
+  const hookAt=()=>{ const o=S0.reduce((m,o2)=>o2.q.x<m.q.x?o2:m,S0[0]); return {x:o.q.x-o.q.w/2-16+(o.f.ox||0),y:o.q.base-4+(o.f.oy||0)}; };
+  let rel=null;
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=setK(ms);
+    // reeds in front of the water's edge (the monsters really are behind them) and wading ripples
+    if(k>0) { gfx.globalAlpha=k; for(let i=0;i<4;i++) cattail(PL-40+i*9,Math.min(324,GR.base+20)+(i%2)*3,64+i*7,Math.sin(ms/500+i*1.3)*3);
+      for(const o of S0) { const q=ST.foe(o.f),x=q.x+(o.f.ox||0),r=q.w*.42+Math.sin(ms/200+q.x)*2; ring(x,q.base-3,r,6,3,FOAM); }
+      gfx.globalAlpha=1; }
+    // ripples behind the reeds where Tom points
+    if(ms>P.rip&&ms<P.stand) { const back=S0.slice().sort((a,b)=>a.q.x-b.q.x).slice(0,Math.max(1,Math.ceil(S0.length/2)));
+      for(const o of back) for(let j=0;j<2;j++) { const q=((ms-P.rip)/900+j*.5)%1; gfx.globalAlpha=(1-q)*.9; ring(o.q.x,o.q.base-2,10+q*40,4+q*12,2.5,'#ffffff'); } gfx.globalAlpha=1; }
+    // the near legs of the camp chair (while Boppy sits) and the tackle box between them
+    if(k>0&&ms<P.stand+200) { gfx.globalAlpha=k*(1-seg(ms,P.stand,P.stand+200)*.6); campChair(bx+12,sb,Math.round(BH*.3),Math.round(BH*.7),'front'); gfx.globalAlpha=1; }
+    if(ms>P.walk-100&&ms<P.home) { gfx.globalAlpha=fin(seg(ms,P.walk-100,P.walk+100),.5); tackleBox(tx-42,sb+4,ms>P.lure0-200); gfx.globalAlpha=1; }
+    // the rod (only between the walk and home)
+    if(ms>P.walk&&ms<P.home) { const t=tipOf(ms),h=t.h,bend=ms>P.taut&&ms<P.slack?(ms<P.yank?.5:.9):0;
+      gfx.lineCap='round'; gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath(); gfx.moveTo(h.x,h.y);
+      gfx.quadraticCurveTo((h.x+t.x)/2+bend*10,(h.y+t.y)/2-bend*20,t.x,t.y+bend*16); gfx.stroke(); gfx.strokeStyle=ROD; gfx.lineWidth=3; gfx.stroke();
+      EO(h.x+4,h.y-3,4,4,'#9aa0a8');
+      const tip={x:t.x,y:t.y+bend*16};
+      // Tom's fists on the rod for the heave
+      if(ms>P.grip-80&&ms<P.slack) { const g=seg(ms,P.grip-80,P.grip); for(const f2 of [.32,.5]) EO(lerp(h.x,tip.x,f2)+(1-g)*30,lerp(h.y,tip.y,f2)-bend*8,5.5,5,SKIN); }
+      // the lure: Tom clips it on, it hangs at the tip until the cast
+      if(ms>P.lure0&&ms<P.rel) { const th=handPt(tsp,tsp.act,sT.x,sT.b,-1),q=ez(seg(ms,P.lure0,P.lure1));
+        const lx=ms<P.lure1?lerp(th.x,tip.x,q):tip.x+Math.sin(ms/260)*2,ly=ms<P.lure1?lerp(th.y,tip.y+14,q)-Math.sin(q*Math.PI)*20:tip.y+16;
+        if(ms>P.lure1) { Ln(tip.x,tip.y,lx,ly-5,1.5,'#eef4f6'); }
+        gfx.globalAlpha=.35+.2*Math.sin(ms/120); E(lx,ly,12,12,GOLD); gfx.globalAlpha=1; boule(lx,ly,.55,true); }
+      // the cast: the hook flies in one big arc over every monster
+      if(ms>=P.rel&&ms<P.land) { if(!rel) rel={x:tip.x,y:tip.y}; const hk=hookAt(),q=seg(ms,P.rel,P.land),hx=lerp(rel.x,hk.x,q),hy=lerp(rel.y,hk.y,q)-Math.sin(q*Math.PI)*150;
+        gfx.strokeStyle='#eef4f6'; gfx.lineWidth=1.8; gfx.beginPath(); gfx.moveTo(tip.x,tip.y); gfx.quadraticCurveTo((tip.x+hx)/2,Math.min(tip.y,hy)-30,hx,hy); gfx.stroke();
+        gfx.globalAlpha=.4; E(hx,hy,10,10,GOLD); gfx.globalAlpha=1; boule(hx,hy,.55,true); }
+      // the line lies over every monster's head, from the tip to the hook beyond the back row
+      if(ms>=P.land&&ms<P.slack+300) { const pts=[tip].concat(o3.map(o=>{ const q=ST.foe(o.f); return {x:q.x+(o.f.ox||0),y:q.top+(o.f.oy||0)+4}; })),hk=hookAt(); pts.push(hk);
+        const sag=ms<P.taut?20:(ms<P.slack?3:30*seg(ms,P.slack,P.slack+300)),a=ms>P.slack?1-seg(ms,P.slack,P.slack+300):1;
+        gfx.globalAlpha=a; for(const [w,c] of [[3.5,'#2a3a4a'],[1.8,'#eef4f6']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(pts[0].x,pts[0].y);
+          for(let i=1;i<pts.length;i++) { const p0=pts[i-1],p1=pts[i]; gfx.quadraticCurveTo((p0.x+p1.x)/2,Math.max(p0.y,p1.y)+sag,p1.x,p1.y); } gfx.stroke(); }
+        boule(hk.x,hk.y,.55,true); gfx.globalAlpha=1; } }
+    // the monsters: tugged while the line is taut, then reeled forward into their new spots
+    for(const o of S0) { const cur=ST.foe(o.f);
+      if(ms>P.taut&&ms<P.yank) { o.f.ox=3+Math.sin(ms/45+o.q.x)*2; o.f.oy=0; o.f.fsc=0; o.f.spin=Math.sin(ms/60+o.q.x)*.06; o.f.spinAt=performance.now(); }
+      else if(ms>=P.yank&&ms<P.yank+700) { const q=ez(seg(ms,P.yank,P.yank+520)); o.f.ox=(o.q.x-cur.x)*(1-q)+Math.sin(seg(ms,P.yank,P.yank+700)*Math.PI)*10; o.f.oy=(o.q.base-cur.base)*(1-q)-Math.sin(q*Math.PI)*14;
+        o.f.fsc=0; o.f.spin=.25*Math.sin(q*Math.PI); o.f.spinAt=performance.now(); } }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Cattail Pier. Two camp chairs. One very serious fisherman.'); B2.aim=null; S('click'); }],
+    [P.walk,()=>{ S('creak'); }],
+    [P.lure0,()=>{ S('click'); setMessage('Tom baits the hook with a piece of sourdough crust.'); }],
+    [P.bline,()=>{ say('boppy','dc1'); word('SHHH!',bx-6,Math.max(80,sb-BH-34),CREAM,3,.9); }],
+    [P.rip,()=>{ S('splash'); setMessage('Ripples. Behind the reeds.'); }],
+    [P.tline,()=>{ say('tom','dcboppy1'); }],
+    [P.stand,()=>{ S('creak'); setMessage('Boppy stands up. He mutters. He winds up.'); }],
+    [P.fwd,()=>{ S('whoosh'); S('reel'); word('ZIIIP!',GR.x+20,40,'#eef4f6',4,.8); }],
+    [P.land,()=>{ S('splash'); scene('splashw',.9,{x:GR.x,y:GR.base,n:16,sp:110}); for(const o of S0) ST.jolt(o.f,.3); word('SPLASH!',GR.x,66,'#9fe8ff',4,.5); setMessage('One cast. The line lands over EVERY monster.'); }],
+    [P.taut,()=>{ S('charge'); }],
+    [P.grab,()=>{ setMessage('Tom grabs the rod too.'); }],
+    [P.yank,()=>{ S('crash'); S('splash'); battle.shakeEnemy=.8; scene('splashw',.9,{x:GR.x,y:GR.base,n:18,sp:130}); word('YANK!',GR.x,40,GOLD,5,1);
+      scene('tb_rings',.7,{x:GR.x,y:GR.base,r:110,c:FOAM,w:3}); setMessage('They heave together. The whole school comes forward.'); landHit(100); E2.apply(); }],
+    ['hf',P.yank],
+    [P.ache,()=>{ S('sulk'); word('MY BACK.',bx-10,Math.max(80,sb-BH-30),CREAM,3,1); }],
+    [P.slack,()=>{ S('reel'); }],
+    [P.end,'end',()=>{ for(const o of S0) { o.f.fsc=0; o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Boppy says nobody talked, so it worked.'; }]];
+  ST.play(E2,steps);
+};
+
+// ---------- 2nd Ave Window Wash (Tom + TNB, Director's Cut of tier 1) ----------
+// Grey smog rolls down 2nd Ave. Tom unboxes a sleek white turbo fan and blows the haze onto the monsters. TNB carves a
+// half-circle around him on his longboard with the garden hose, spraying a rainbow over the party (washing the debuffs off),
+// kisses Tom on the pass-by (a fresh outfit from the rack), then turns the hose on the monsters: a soapy wave rolls over
+// every one of them. Effects: Splash hit on every enemy (kind: they warm up), COOL Down 2 turns, party cured, rack Tom.
+const HOSE='#3fa04a',HOSE2='#6ac86a',RAIN=['#ff6a6a','#ffb84a','#ffe84a','#6ae07a','#5ac8ff','#a88aff'];
+const turboFan=(x,b,spin,rise=1)=>{ const cy=b-44*rise,r=20;
+  RO(x-14,b-4,28,4,'#e8ecf0'); RO(x-2,cy+r-2,4,b-4-(cy+r-2),'#dfe3ea');
+  E(x,cy,r+3,r+3,OUT); E(x,cy,r+1,r+1,'#f4f6f8'); E(x,cy,r-3,r-3,'#c9d6e2');
+  for(let k=0;k<3;k++) { gfx.save(); gfx.translate(x,cy); gfx.rotate(spin+k*2.094); E(0,-8,5.5,9.5,OUT); E(0,-8,4,8,'#ffffff'); gfx.restore(); }
+  EO(x,cy,3.5,3.5,'#5a6a7a'); ring(x,cy,r-3,r-3,1,'#9aa8b8'); for(let k=0;k<8;k++) { const a=k*Math.PI/4; Ln(x+Math.cos(a)*6,cy+Math.sin(a)*6,x+Math.cos(a)*(r-1),cy+Math.sin(a)*(r-1),1,'#9aa8b8'); } };
+const fanBox=(x,b,open)=>{ RO(x-20,b-26,40,26,'#c9a06a'); R(x-20,b-26,40,4,'#dfb880'); R(x-3,b-26,6,26,'#e8d8b0'); label('TURBO',x,b-14,'#7a5a30',1);
+  if(open>0) for(const s of [-1,1]) { gfx.save(); gfx.translate(x+s*20,b-26); gfx.rotate(s*open*1.9); RO(s>0?-20:0,-3,20,3,'#c9a06a'); gfx.restore(); } };
+const smog=(x,y,r,a)=>{ if(a<=0) return; gfx.globalAlpha=a; E(x,y+2,r+2,r*.7+2,'#5a5e66'); E(x,y,r,r*.7,'#8a8f98'); E(x-r*.3,y-r*.25,r*.45,r*.3,'#a4a9b2'); gfx.globalAlpha=1; };
+B2_TOMBO_ANIM.tnb1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),order=order3(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const tx=cl(GR.x1+160,GR.x1+136,460),sb=cl(GR.base+4,236,296),fx=tx-50,fb=sb-14,nx0=tx+84,nb=sb+6,kx=tx-52,x0=tx-100,wb=Math.min(320,GR.base+18);
+  const P={walk:650,box:500,boxLand:780,open:900,rise:900,fan:1150,nline:1700,carve:2350,carveEnd:3550,kiss:3850,blast:4150,wave:4300,waveEnd:5000,shine:5050,tline:5150,home:5700,end:6450};
+  const wf=ms=>lerp(x0,-180,seg(ms,P.wave,P.waveEnd));
+  order.forEach(o=>{ o.t=Math.round(P.wave+cl((x0-(o.q.x+o.q.w*.3))/(x0+180))*(P.waveEnd-P.wave)); });
+  const sT={x:tx,b:sb,f:tsp.idle},sN={x:nx0,b:nb,f:nsp.idle,board:false,tilt:0};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { if(ms>P.boxLand&&ms<P.fan+100) f=sp.kneel; else if(ms>P.tline-80&&ms<P.home-100) f=sp.celeb; else if(ms>P.kiss-150&&ms<P.kiss+300) y-=3; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nx0,y=nb,f=sp.idle,rot=0,board=false;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,nx0,k); y=lerp(c.origBase,nb,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
+    else if(ms<P.carve) { f=ms>P.nline-60&&ms<P.nline+900?sp.act:sp.idle; if(ms>P.carve-200) { board=true; y-=6*seg(ms,P.carve-200,P.carve); } }
+    else if(ms<P.carveEnd) { const q=ez(seg(ms,P.carve,P.carveEnd)),th=q*Math.PI; x=tx+(Math.cos(th)>0?84:66)*Math.cos(th); y=nb+28*Math.sin(th)-6; f=sp.aim||sp.act; rot=-.12*Math.sin(th); board=true; }
+    else if(ms<P.kiss) { const q=ez(seg(ms,P.carveEnd,P.kiss-60)); x=lerp(tx-66,kx,q); y=lerp(nb-6,sb+4,q); f=sp.flip; board=q<1; }
+    else if(ms<P.blast) { x=kx; y=sb+4; f=sp.flip; if(ms<P.kiss+250) x+=Math.sin(seg(ms,P.kiss,P.kiss+250)*Math.PI)*8; }
+    else if(ms<P.home) { x=kx; y=sb+4; f=ms<P.waveEnd?(sp.act):(ms>P.shine?sp.celeb2||sp.celeb:sp.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(kx,c.origX,k); y=lerp(sb+4,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; sN.board=board; sN.tilt=rot; return {cx:x,base:y,frame:f,rot,noShadow:board}; });
+  const setK=ms=>ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.home+500)));
+  // Behind everyone: a dull grey 2nd Ave sky that brightens after the wash, and the fan.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=setK(ms); if(k<=0) return;
+    const grey=1-ez(seg(ms,P.wave+300,P.shine+300));
+    gfx.globalAlpha=k*.32*grey; R(0,0,576,324,'#5a5e66'); gfx.globalAlpha=1;
+    if(ms>P.rise) { const r=ez(seg(ms,P.rise,P.fan)),spin=ms>P.fan?Math.pow((ms-P.fan)/1000,1.4)*40:0; gfx.globalAlpha=k; turboFan(fx,fb,spin,.4+.6*r); gfx.globalAlpha=1; }
+  }});
+  const rnd=(i,j)=>{ const v=Math.sin(i*127.1+j*311.7)*43758.5453; return v-Math.floor(v); };
+  const puffs=[]; for(let i=0;i<16;i++) puffs.push({x0:20+rnd(i,1)*540,y0:70+rnd(i,2)*190,r:20+rnd(i,3)*16,tx:GR.x0+rnd(i,4)*GR.w,ty:GR.top+rnd(i,5)*(GR.base-GR.top),ph:rnd(i,6)*6});
+  const nozzle=()=>handPt(nsp,sN.f,sN.x,sN.b,sN.f===nsp.flip?1:-1);
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=setK(ms);
+    // the box drops in front of Tom, opens, the fan rises out of it (the fan itself is in the back layer)
+    if(ms>P.box&&ms<P.fan+500) { const q=seg(ms,P.box,P.boxLand),by=ms<P.boxLand?lerp(-40,fb+4,q*q):fb+4+ez(seg(ms,P.fan,P.fan+500))*40;
+      gfx.globalAlpha=ms>P.fan?1-seg(ms,P.fan,P.fan+500):1; fanBox(fx,by,ez(seg(ms,P.open,P.open+200))); gfx.globalAlpha=1; }
+    // wind from the fan
+    if(ms>P.fan&&ms<P.waveEnd) { const a=ez(seg(ms,P.fan,P.fan+300))*(1-seg(ms,P.wave,P.waveEnd));
+      gfx.globalAlpha=a*.55; for(let j=0;j<7;j++) { const yy=fb-44+(j-3)*11,d=((ms*.45+j*41)%240); Ln(fx-26-d,yy,fx-50-d,yy,2,'#ffffff'); } gfx.globalAlpha=1; }
+    // the hose: from TNB's hand down to the street and off to the right
+    if(ms>P.walk-200&&ms<P.home+200) { const h=nozzle(),a=fin(seg(ms,P.walk-200,P.walk),.5)*(ms>P.home?1-seg(ms,P.home,P.home+200):1); gfx.globalAlpha=a;
+      for(const [w,c] of [[6,OUT],[3.5,HOSE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(h.x,h.y); gfx.quadraticCurveTo(h.x+24,sN.b+8,h.x+70,sN.b+4); gfx.quadraticCurveTo(h.x+150,sN.b,600,sb+18); gfx.stroke(); }
+      EO(h.x,h.y,3.5,3,'#c9a23a'); gfx.globalAlpha=1; }
+    // TNB's longboard under his feet
+    if(sN.board) longboard(sN.x,sN.b+4,sN.tilt);
+    // the rainbow spray over the party while he carves
+    if(ms>P.carve&&ms<P.carveEnd+150) { const h=nozzle(),others=party.filter(p=>p!==pt),a=fin(seg(ms,P.carve,P.carve+200),.5)*(1-seg(ms,P.carveEnd,P.carveEnd+150));
+      const PX=others.reduce((m,p)=>m+(p===tom?sT.x:ST.unit(p).x),0)/Math.max(1,others.length),PT=Math.min(...others.map(p=>p===tom?sT.b-TH:ST.unit(p).top))-12;
+      gfx.globalAlpha=a*.32; RAIN.forEach((c,i)=>{ gfx.strokeStyle=c; gfx.lineWidth=4; gfx.beginPath(); gfx.moveTo(h.x,h.y); gfx.quadraticCurveTo((h.x+PX)/2,Math.min(h.y,PT)-110+i*5,PX+40-i*8,PT+i*4); gfx.stroke(); });
+      gfx.globalAlpha=a; for(let j=0;j<14;j++) { const q=((ms/520)+j/14)%1,cx2=(h.x+PX)/2,cy2=Math.min(h.y,PT)-110,bx=lerp(lerp(h.x,cx2,q),lerp(cx2,PX+20,q),q),by=lerp(lerp(h.y,cy2,q),lerp(cy2,PT,q),q); E(bx,by,2.2,3,'#9fe8ff'); }
+      for(const p of others) { const q2=p===tom?{x:sT.x,top:sT.b-TH,base:sT.b}:ST.unit(p); for(let j=0;j<5;j++) { const qq=((ms/400)+j/5+p.idx*.13)%1; E(q2.x-18+j*9,lerp(q2.top-6,q2.base-30,qq),1.8,3,'#bfefff'); } }
+      gfx.globalAlpha=1; }
+    // smog: everywhere, then blown onto the monsters, then washed away by the wave
+    if(k>0&&ms<P.waveEnd+400) { const kF=ez(seg(ms,P.fan,P.fan+1100));
+      for(const p of puffs) { let x=lerp(p.x0+Math.sin(ms/900+p.ph)*10,p.tx,kF),y=lerp(p.y0,p.ty,kF)+Math.sin(ms/700+p.ph)*4,a=.5*k;
+        if(ms>P.wave) { const w=wf(ms); if(w<x+30) { const q=cl((x+30-w)/120); x-=q*60; y-=q*20; a*=1-q; } }
+        smog(x,y,p.r,a); } }
+    // the water jet from the nozzle that starts the wave
+    if(ms>P.blast&&ms<P.wave+250) { const h=nozzle(),q=ez(seg(ms,P.blast,P.wave)),ex=lerp(h.x,x0,q),ey=lerp(h.y,wb-30,q),a=1-seg(ms,P.wave,P.wave+250);
+      gfx.globalAlpha=a; for(const [w,c] of [[9,'#3a8ac0'],[5,'#9fe8ff'],[2,'#ffffff']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(h.x,h.y); gfx.quadraticCurveTo((h.x+ex)/2,Math.min(h.y,ey)-26,ex,ey); gfx.stroke(); } gfx.globalAlpha=1; }
+    // the soapy wave rolling left over every monster (clipped so it never covers the party)
+    if(ms>P.wave&&ms<P.waveEnd+300) { const w=wf(ms),H=165*ez(seg(ms,P.wave,P.wave+220))*(ms>P.waveEnd?1-seg(ms,P.waveEnd,P.waveEnd+300):1);
+      gfx.save(); gfx.beginPath(); gfx.rect(0,0,x0+8,324); gfx.clip();
+      gfx.beginPath(); gfx.moveTo(w,wb); gfx.quadraticCurveTo(w-6,wb-H*.6,w+8,wb-H); gfx.quadraticCurveTo(w-18,wb-H+4,w-22,wb-H+24); gfx.quadraticCurveTo(w+10,wb-H-10,w+46,wb-H*.9);
+      gfx.quadraticCurveTo(w+150,wb-H*.55,w+240,wb-H*.1); gfx.lineTo(w+260,wb+6); gfx.lineTo(w,wb+6); gfx.closePath();
+      gfx.globalAlpha=.78; gfx.fillStyle='#5ec8ff'; gfx.fill(); gfx.globalAlpha=1; gfx.lineWidth=3; gfx.strokeStyle='#2a7ab0'; gfx.stroke();
+      gfx.strokeStyle='#ffffff'; gfx.lineWidth=5; gfx.beginPath(); gfx.moveTo(w-20,wb-H+22); gfx.quadraticCurveTo(w-16,wb-H,w+8,wb-H); gfx.quadraticCurveTo(w+40,wb-H-4,w+60,wb-H*.88); gfx.stroke();
+      for(let j=0;j<16;j++) { const bx2=w+8+((j*29+ms*.05)%200),by2=wb-H*.2-rnd(j,9)*H*.7*(1-(bx2-w)/260); EO(bx2,by2,2.5+rnd(j,3)*3,2.5+rnd(j,3)*3,'#eaf8ff'); }
+      gfx.restore();
+      // foam where the jet feeds the wave, hiding the clip edge
+      if(ms<P.waveEnd) for(let j=0;j<6;j++) { const fy=wb-8-j*Math.min(H,90)/6,r=7+Math.sin(ms/60+j)*2; EO(x0+4,fy,r,r*.8,'#f4fbff'); } }
+    // the kiss
+    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100),hx=(sT.x+sN.x)/2,hy=Math.min(sT.b-TH,sN.b-NH)-12-q*30; gfx.globalAlpha=fade(q,.7); heart(hx,hy,lerp(8,18,ez(q*3)),PINK); gfx.globalAlpha=1; }
+    // squeaky clean: a shine sweeps across the glass and the street glints
+    if(ms>P.shine&&ms<P.shine+900) { const q=seg(ms,P.shine,P.shine+700),sx=lerp(-120,700,q); gfx.globalAlpha=.28*(1-seg(ms,P.shine+600,P.shine+900));
+      gfx.fillStyle='#ffffff'; gfx.beginPath(); gfx.moveTo(sx,0); gfx.lineTo(sx+60,0); gfx.lineTo(sx-40,324); gfx.lineTo(sx-100,324); gfx.closePath(); gfx.fill(); gfx.globalAlpha=1;
+      for(let j=0;j<7;j++) { const t0=j*90,qq=seg(ms,P.shine+t0,P.shine+t0+400); if(qq>0&&qq<1) { gfx.globalAlpha=Math.sin(qq*Math.PI); star(30+rnd(j,7)*(x0-20),60+rnd(j,8)*170,4+Math.sin(qq*Math.PI)*6,'#ffffff'); gfx.globalAlpha=1; } } }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Smog rolls down 2nd Ave. Nobody can see a thing.'); B2.aim=null; S('whoosh'); }],
+    [P.boxLand,()=>{ S('thud'); }],
+    [P.open,()=>{ S('click'); setMessage('Tom unboxes a turbo fan. Of course he does.'); }],
+    [P.fan,()=>{ S('whoosh'); word('WHIRRR!',fx,Math.max(80,fb-90),CREAM,3,.9); setMessage('He blows the smog right onto the monsters.'); }],
+    [P.nline,()=>{ say('tnb','dc1'); }],
+    [P.carve,()=>{ S('whoosh'); setMessage('TNB carves around him on his longboard, garden hose in hand.'); }],
+    [P.carve+500,()=>{ S('splash'); }],
+    [P.carve+700,'A rainbow washes the whole party clean.'],
+    [P.kiss,()=>{ S('kiss'); E2.apply(); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sN.x,mid:sN.b-NH*.5}:ST.unit(p)); scene('glow',.9,{x:q2.x,y:q2.mid,rx:38,ry:52,c:'#9fe8ff',a:.35}); }
+      setMessage('A kiss on the pass-by. And a fresh outfit from the rack.'); }],
+    [P.blast,()=>{ S('splash'); setMessage('Then TNB turns the hose on the monsters.'); }],
+    [P.wave,()=>{ S('crash'); S('splash'); battle.shakeEnemy=.6; word('SPLOOSH!',GR.x,40,'#9fe8ff',5,.7); }],
+    [P.shine,()=>{ S('ding'); S('squeak'); word('SQUEAKY CLEAN!',288,66,'#ffffff',3,1.1); }],
+    [P.tline,()=>{ say('tom','dctnb1'); }]];
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('splat'); ST.jolt(o.f,.55); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:'#bfefff',w:3});
+    for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*24,y1:o.q.top-30,arc:14,spin:false,r:6,t:-j*.06,dur:.7});
+    landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.wave]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' 2nd Ave has never looked cleaner.']);
+  ST.play(E2,steps);
+};
+// ---------- Puzzle Toy (Tom + Nara, Director's Cut of tier 1) ----------
+// Tom kneels and slides a wooden puzzle toy over to Nara. She sniffs each lid, flips it and eats the treat (on the second
+// she tries her paw first: BONK). The last hole is empty. She sniffs the air, follows a gold scent trail to the monster,
+// noses under it and flips it right over: the last treat was under it. Effect: a Kinetic hit on one enemy and she grabs
+// what it holds (b2Take: its drop item, or coins).
+const WOOD='#c98a4a',WOOD2='#9a6232',WOOD3='#e8b07a',LIDC=['#3fb8a8','#f08a3a','#e86a9a'];
+// The toy: a rounded wooden board, base at b, three holes with colored lids. lids[i] = {open 0..1, treat, pop 0..1}.
+const puzzleToy=(cx,b,lids,sh=0)=>{ const x=cx+sh,W=136,H=24,y=b-H;
+  rr(x-W/2,y,W,H,8,WOOD,2); R(x-W/2+8,y+3,W-16,3,WOOD3); R(x-W/2+6,b-7,W-12,3,WOOD2);
+  for(const dx of [-60,60]) EO(x+dx,b-12,3,3,WOOD2);
+  lids.forEach((l,i)=>{ const lx=x-44+i*44,ly=y+9,o=ez(l.open);
+    E(lx,ly,15,6.5,OUT); E(lx,ly,13,5,'#4a2a12');
+    if(o>0) { EO(lx,ly-6-o*10,13,lerp(5,12,o),LIDC[i]); E(lx-4,ly-9-o*12,4,lerp(1.5,4,o),'#ffffff'); }
+    if(l.treat) treat(lx,ly-2-l.pop*16,.9,0);
+    if(o<=0) { EO(lx,ly-3,14,6,LIDC[i]); E(lx-5,ly-5,5,2,'#ffffff'); } }); };
+B2_TOMBO_ANIM.nara1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt);
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES.nara,TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const tx=cl(GR.x1+200,GR.x1+170,512),sb=cl(GR.base+4,236,300),px=tx-122,tb=sb+10,nb=sb+2;
+  const AIM=nsp.aim||nsp.idle,mo=handPt(nsp,AIM,0,0,-1),lidX=i=>px-44+i*44,atLid=i=>lidX(i)-mo.x;
+  const nf=F.x+F.w/2+4-mo.x,back=tx-58;
+  const P={walk:800,kneel:650,slide:760,slid:1060,tline:1150,
+    s2:1150,o2:1500,e2:1760,m1:1820,paw:2000,bonk:2200,s1:2380,o1:2600,e1:2860,m0:2920,s0:3120,o0:3360,huh:3520,
+    nline:3620,trail:3700,trailEnd:4100,run:4120,arrive:4520,nose:4560,flip:4760,flipEnd:5060,grab:5180,carry:5320,sat:5880,
+    upright:5700,uprightEnd:6000,home:6200,end:6900};
+  const lids=[0,1,2].map(i=>({open:0,treat:i>0,pop:0})),opens={2:[P.o2,P.e2],1:[P.o1,P.e1],0:[P.o0,null]};
+  const sT={x:tx,b:sb,f:tsp.idle},sN={x:atLid(2),b:nb,f:AIM,dir:-1,mouthTreat:false};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle;
+    if(ms<P.walk&&ms<P.kneel) { const k=ez(ms/P.kneel); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.kneel); }
+    else if(ms<P.home) { if(ms<P.slid+60) f=sp.kneel; else if(ms<P.e1&&ms>P.tline-60) f=ms>P.bonk&&ms<P.bonk+500?sp.expr:sp.act; else if(ms>P.grab&&ms<P.home-80) f=sp.celeb; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=atLid(2),y=nb,f=AIM,dir=-1,rot=0;
+    const glide=(a,b,x0,x1)=>{ const k=ez(seg(ms,a,b)); x=lerp(x0,x1,k); y=nb-Math.abs(Math.sin(seg(ms,a,b)*Math.PI))*5; f=k<1?runFr(sp,c.t,x1>x0?1:-1):AIM; dir=x1>x0?1:-1; };
+    const sniff=a=>{ f=AIM; y=nb+Math.abs(Math.sin((ms-a)/70))*2; };
+    if(ms<P.walk) { const k=ez(ms/P.walk),d=atLid(2)>c.origX?1:-1; x=lerp(c.origX,atLid(2),k); y=lerp(c.origBase,nb,k)-Math.abs(Math.sin(c.t*16))*4; f=k<1?runFr(sp,c.t,d):AIM; }
+    else if(ms<P.m1) sniff(P.s2);
+    else if(ms<P.paw) glide(P.m1,P.paw-20,atLid(2),atLid(1));
+    else if(ms<P.s1) { x=atLid(1); f=sp.act; if(ms>P.bonk-120&&ms<P.bonk) y=nb-4; }
+    else if(ms<P.m0) { x=atLid(1); sniff(P.s1); }
+    else if(ms<P.s0) glide(P.m0,P.s0-20,atLid(1),atLid(0));
+    else if(ms<P.nline) { x=atLid(0); if(ms<P.huh) sniff(P.s0); else f=sp.idle; }
+    else if(ms<P.run) { x=atLid(0); f=AIM; y=nb-Math.abs(Math.sin((ms-P.nline)/90))*3; }
+    else if(ms<P.arrive) { const k=ez(seg(ms,P.run,P.arrive)); x=lerp(atLid(0),nf,k); y=lerp(nb,F.base,k)-Math.abs(Math.sin(c.t*16))*4; f=k<1?runFr(sp,c.t,-1):AIM; }
+    else if(ms<P.grab) { x=nf; y=F.base; f=AIM; if(ms>P.nose&&ms<P.flip+80) x-=6*Math.sin(seg(ms,P.nose,P.flip+80)*Math.PI); if(ms>P.flip&&ms<P.flip+260) y-=Math.sin(seg(ms,P.flip,P.flip+260)*Math.PI)*10; }
+    else if(ms<P.carry) { x=nf-4; y=F.base; f=AIM; }
+    else if(ms<P.sat) { const k=ez(seg(ms,P.carry,P.sat)); x=lerp(nf-4,back,k); y=lerp(F.base,nb,k)-Math.abs(Math.sin(c.t*16))*4; f=k<1?runFr(sp,c.t,1):(sp.flip); dir=1; }
+    else if(ms<P.home) { x=back; y=nb; f=ms<P.home-300?(sp.celebFlip||sp.flip):sp.flip; dir=1; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(back,c.origX,k); y=lerp(nb,c.origBase,k)-(k<1?Math.abs(Math.sin(c.t*16))*4:0); f=k<1?runFr(sp,c.t,c.origX>back?1:-1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; sN.dir=dir; return {cx:x,base:y,frame:f,rot}; });
+  const mouth=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,sN.dir); return {x:h.x,y:h.y}; };
+  const rnd=(i,j)=>{ const v=Math.sin(i*127.1+j*311.7)*43758.5453; return v-Math.floor(v); };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    const k=ez(seg(ms,P.slide-100,P.slide+100))*(1-ez(seg(ms,P.home,P.home+400)));
+    // the toy slides from Tom's hands across the floor to Nara, then she works the lids
+    for(const i of [2,1,0]) { const [o,e]=opens[i],l=lids[i]; l.open=ms>o?seg(ms,o,o+150):0;
+      if(l.treat!==false&&i>0) { l.pop=ms>o+100?seg(ms,o+100,o+250):0; l.treat=!(e&&ms>e); } }
+    if(k>0) { const x=ms<P.slid?lerp(tx-36,px,ez(seg(ms,P.slide,P.slid))):px,sh=ms>P.bonk&&ms<P.bonk+260?Math.sin((ms-P.bonk)/22)*4*(1-seg(ms,P.bonk,P.bonk+260)):0;
+      gfx.globalAlpha=k; puzzleToy(x,tb,lids.map(l=>({open:l.open,treat:l.treat,pop:l.pop})),sh); gfx.globalAlpha=1; }
+    // crumbs and a gold sparkle each time she finds one
+    for(const [i,e] of [[2,P.e2],[1,P.e1]]) { const q=seg(ms,e,e+500); if(q>0&&q<1) { gfx.globalAlpha=1-q; for(let j=0;j<5;j++) E(lidX(i)+(j-2)*7,tb-30-q*20+rnd(i,j)*8,2,2,'#d9a35a'); star(lidX(i),tb-44-q*16,5,'#fffbe6'); gfx.globalAlpha=1; } }
+    // the scent trail: a gold wisp along the floor from the empty hole to under the monster, with a glint there
+    if(ms>P.trail&&ms<P.flip+200) { const q=ez(seg(ms,P.trail,P.trailEnd)),a=ms>P.flip?1-seg(ms,P.flip,P.flip+200):1,x0=lidX(0),y0=tb-14,x1=F.x,y1=F.base-6;
+      gfx.globalAlpha=a*.85; gfx.strokeStyle=GOLD; gfx.lineWidth=4; gfx.lineCap='round'; gfx.beginPath();
+      for(let j=0;j<=40*q;j++) { const t=j/40,xx=lerp(x0,x1,t),yy=lerp(y0,y1,t)-Math.sin(t*Math.PI)*24+Math.sin(t*18-ms/120)*5; j?gfx.lineTo(xx,yy):gfx.moveTo(xx,yy); } gfx.stroke();
+      for(let j=0;j<4;j++) { const t=((ms/700)+j/4)%1; if(t<q) { gfx.globalAlpha=a*(1-t)*.9; star(lerp(x0,x1,t),lerp(y0,y1,t)-Math.sin(t*Math.PI)*24-6,3,'#fffbe6'); } }
+      gfx.globalAlpha=a; if(q>.9) star(F.x,F.base-6,4+Math.sin(ms/70)*2.5,'#fffbe6'); gfx.globalAlpha=1; }
+    // the monster: nosed, then flipped right over (spin to upside down, a hop), then it rolls back up
+    if(ms>P.flip&&ms<P.uprightEnd) { let sp2=Math.PI,oy=0;
+      if(ms<P.flipEnd) { const q=seg(ms,P.flip,P.flipEnd); sp2=ez(q)*Math.PI; oy=-Math.sin(q*Math.PI)*58; }
+      else if(ms>P.upright) { const q=seg(ms,P.upright,P.uprightEnd); sp2=Math.PI+ez(q)*Math.PI; oy=-Math.sin(q*Math.PI)*16; }
+      else oy=Math.sin((ms-P.flipEnd)/90)*1.5;
+      tgt.spin=sp2; tgt.oy=oy; tgt.ox=0; tgt.fsc=0; tgt.spinAt=performance.now(); }
+    // the last treat, found where the monster stood; she picks it up and carries it back
+    if(ms>P.flip+120&&ms<P.grab) { const q=seg(ms,P.flip+120,P.flip+320); gfx.globalAlpha=.35+.2*Math.sin(ms/90); E(F.x,F.base-8,22,14,GOLD); gfx.globalAlpha=1; treat(F.x,F.base-8-Math.sin(q*Math.PI)*20,1.7,0); }
+    else if(ms>=P.grab&&ms<P.home) { const m=mouth(); treat(m.x+sN.dir*2,m.y+2,1.3,-.2*sN.dir); }
+    if(ms>P.sat&&ms<P.sat+1000) { const q=seg(ms,P.sat,P.sat+1000); gfx.globalAlpha=fade(q,.7); heart((sT.x+sN.x)/2,Math.min(sT.b-TH,sN.b-NH)-10-q*26,lerp(7,15,ez(q*3)),PINK); gfx.globalAlpha=1; }
+  }});
+  ST.play(E2,[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Tom brings out the puzzle toy. Nara knows this one too.'); B2.aim=null; S('click'); }],
+    [P.slide,()=>{ S('step'); }],
+    [P.tline,()=>{ say('tom','dcnara1'); }],
+    [P.s2,()=>{ S('sniff'); word('SNFF',atLid(2),Math.max(80,nb-NH-26),CREAM,3,.6); }],
+    [P.o2,()=>{ S('click'); }],
+    [P.e2,()=>{ S('crunch'); setMessage('One lid. One treat. Very good.'); }],
+    [P.bonk,()=>{ S('bonk'); word('BONK',lidX(1),Math.max(80,tb-70),'#ffd2a0',3,.6); setMessage('She tries the paw. Tom said not the paw.'); }],
+    [P.o1,()=>{ S('click'); }],
+    [P.e1,()=>{ S('crunch'); }],
+    [P.o0,()=>{ S('click'); }],
+    [P.huh,()=>{ S('whine'); word('?',sN.x,Math.max(80,nb-NH-24),GOLD,5,.9); setMessage('The last hole is empty.'); }],
+    [P.nline,()=>{ say('nara','dc1'); S('sniff'); }],
+    [P.trail,()=>{ setMessage('She has caught the scent. It goes right under the monster.'); }],
+    [P.run,()=>{ S('whoosh'); }],
+    [P.flip,()=>{ S('boing'); S('thud'); battle.shakeEnemy=.7; battle.flashEnemy=.25; scene('tb_rings',.8,{x:F.x,y:F.base,r:80,c:GOLD,w:4});
+      scene('dust',.6,{x:F.x,y:F.base+2,n:8,sp:34,up:12}); word('FLIP!',F.x,40,GOLD,5,1); landHit(100); E2.apply(); setMessage('She flips the monster right over. The last treat was under it.'); }],
+    ['hf',P.flip],
+    [P.grab,()=>{ S('bark'); }],
+    [P.grab+600,()=>{ S('crunch'); }],
+    [P.upright,()=>{ S('bump'); }],
+    [P.end,'end',()=>{ tgt.spin=0; tgt.oy=0; tgt.ox=0; tgt.fsc=0; return (E2.result||'')+' Nose: 4. Puzzle toy: 0.'; }]]);
+};
+
+// ---------- Judge Grace (Tom + Grace, Director's Cut of tier 2) ----------
+// On a blue gym mat Grace sits at a little judges' desk and makes Tom try a cartwheel. It is terrible: he tips, wobbles
+// and flops flat. She holds up a scorecard: 2. The monsters laugh so hard they forget to defend. Tom demands a recount;
+// Grace hops over the desk, cartwheels twice (the second one right over Tom) and flip-kicks the row in the face, then
+// holds up a 10. Effects: a Kinetic hit on one row (crit +25%), Hooked (cannot dodge) for 2 turns.
+const scoreCard=(x,y,num,s=1,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  RO(-1.5,0,3,26,'#c9a06a'); rr(-17,-30,34,32,4,'#fffbf2',2); R(-15,-28,30,4,num==='10'?'#ffd84a':'#e8e0d0');
+  bigWord(num,0,-20,num==='10'?'#e8a020':RED,num==='10'?3:4); gfx.restore(); };
+const judgeDesk=(x,b,w=60,h=30)=>{ RO(x-w/2,b-h,w,h,'#5a6ab8'); R(x-w/2,b-h,w,4,'#8a9ae0'); RO(x-w/2-4,b-h-5,w+8,6,'#f4f0e6'); label('JUDGE',x,b-h+12,CREAM,1); };
+B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),tl=(E2.targets||[]).filter(t=>t.side==='foe'),row=tl.length?tl:[list[0]];
+  const front=row.reduce((m,f)=>ST.foe(f).x>ST.foe(m).x?f:m,row[0]),F=ST.foe(front);
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
+  const tx=cl(GR.x1+150,GR.x1+124,448),sb=cl(GR.base+4,236,300),gx=Math.min(548,tx+104),lie=tx-48,c1=tx+30,c2=F.x+F.w/2+44,lx=tx+16;
+  const kick={x:F.x+F.w*.18,b:F.top+F.h*.52+GH*.5};
+  const P={walk:650,try0:850,tip:1100,fall:1700,flop:1900,card:2150,gline:2250,laugh:3050,tline:3600,hop:4250,cw1:4400,cw2:4820,leap:5240,hit:5480,land:5900,ten:5980,up:5700,clap:6150,home:6600,end:7250};
+  const sT={x:tx,b:sb,f:tsp.idle,rot:0},sG={x:gx,b:sb,f:gsp.idle};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms<P.tip) { f=ms>P.try0?sp.celeb:sp.idle; if(ms>P.try0) y-=Math.sin(seg(ms,P.try0,P.tip)*Math.PI)*4; }
+      else if(ms<P.fall) { const q=seg(ms,P.tip,P.fall); f=sp.act; rot=-ez(q)*1.15+Math.sin(ms/55)*.12*q; x=lerp(tx,tx-30,ez(q)); y-=Math.sin(q*Math.PI)*8; }
+      else if(ms<P.tline-100) { const q=ez(seg(ms,P.fall,P.flop)); f=sp.act; rot=lerp(-1.15,-Math.PI/2,q); x=lerp(tx-30,lie,q); y+=(TH/2-16)*q; if(ms>P.flop&&ms<P.flop+220) y-=Math.sin(seg(ms,P.flop,P.flop+220)*Math.PI)*5; }
+      else if(ms<P.up) { f=sp.kneel; x=lie; }
+      else { const q=ez(seg(ms,P.up,P.up+300)); x=lie; f=ms>P.clap?(Math.floor((ms-P.clap)/160)%2?sp.celeb:sp.idle):sp.idle; if(ms>P.clap+640) f=sp.celeb; } }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(lie,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; sT.rot=rot; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=sb,f=sp.idle,rot=0;
+    const wheel=(a,b,x0,x1,h)=>{ const q=seg(ms,a,b); x=lerp(x0,x1,q); y=sb-Math.sin(q*Math.PI)*h; rot=-q*Math.PI*2; f=sp.celeb; };
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.hop) { f=ms>P.card&&ms<P.hop-150?sp.celeb:(ms>P.laugh+300?sp.expr:sp.idle); }
+    else if(ms<P.cw1) { const q=seg(ms,P.hop,P.cw1); x=lerp(gx,gx-22,q); y=sb-Math.sin(q*Math.PI)*40; f=sp.celeb; }
+    else if(ms<P.cw2) wheel(P.cw1,P.cw2,gx-22,c1,16);
+    else if(ms<P.leap) wheel(P.cw2,P.leap,c1,c2,58);
+    else if(ms<P.hit) { const q=seg(ms,P.leap,P.hit); x=lerp(c2,kick.x+GH*.3,ez(q)); y=lerp(sb,kick.b,q)-Math.sin(q*Math.PI)*40; rot=q<.8?-ez(q/.8)*Math.PI*2:0; f=q<.8?sp.celeb:sp.act; }
+    else if(ms<P.hit+120) { x=kick.x+GH*.3; y=kick.b; f=sp.act; }
+    else if(ms<P.land) { const q=seg(ms,P.hit+120,P.land); x=lerp(kick.x+GH*.3,lx,ez(q)); y=lerp(kick.b,sb,q)-Math.sin(q*Math.PI)*70; rot=q*Math.PI*2; f=sp.celeb; }
+    else if(ms<P.home) { x=lx; f=sp.celeb; if(ms<P.land+140) y+=Math.sin(seg(ms,P.land,P.land+140)*Math.PI)*4; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(lx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sG.x=x; sG.b=y; sG.f=f; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.hop&&ms<P.land}; });
+  scene('tb_mat',P.end/1000,{back:true,x1:Math.min(572,gx+48),w:Math.max(220,Math.min(572,gx+48)-(F.x+F.w/2)+10),y:sb+4,off:P.home});
+  const setK=ms=>ez(seg(ms,P.walk-200,P.walk+100))*(1-ez(seg(ms,P.hop-40,P.hop+160)));
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    // the judges' desk in front of Grace's legs, until she hops over it (it tips away)
+    const dk=ez(seg(ms,P.walk-250,P.walk+50)); if(dk>0&&ms<P.cw2) { const a=ms>P.hop?1-seg(ms,P.hop,P.cw2):1; gfx.globalAlpha=a; judgeDesk(gx,sb+8); gfx.globalAlpha=1; }
+    // the scorecard: 2 held high over her head, then 10 after the kick
+    const card=(num,t0,t1)=>{ const q=seg(ms,t0,t0+200),out=1-seg(ms,t1-200,t1); if(q<=0||out<=0) return;
+      gfx.globalAlpha=out; scoreCard(sG.x+4,sG.b-GH-6-ez(q)*14,num,1.25*(.6+.4*ez(q)),Math.sin(ms/150)*.06); gfx.globalAlpha=1; };
+    card('2',P.card,P.hop-120); card('10',P.ten,P.home);
+    // the try: wind lines and stars over Tom's head after the flop
+    if(ms>P.flop&&ms<P.tline) { for(let j=0;j<3;j++) { const a=ms/300+j*2.1; star(lie-TH*.32+Math.cos(a)*14,sb-26+Math.sin(a)*5,3.5,'#fffbe6'); } }
+    // the monsters laugh: little shakes and tears
+    if(ms>P.laugh&&ms<P.hop+300) { for(const f of list) { const q=ST.foe(f); f.spin=Math.sin(ms/50+q.x)*.07; f.oy=-Math.abs(Math.sin(ms/70+q.x))*3; f.spinAt=performance.now();
+        const t2=((ms-P.laugh)/500+q.x*.01)%1; gfx.globalAlpha=1-t2; E(q.x-q.w*.25-t2*10,q.top+q.h*.35+t2*20,2.2,3,'#9fe8ff'); E(q.x+q.w*.25+t2*10,q.top+q.h*.35+t2*20,2.2,3,'#9fe8ff'); gfx.globalAlpha=1; } }
+    else if(ms>=P.hop+300&&ms<P.hop+400) for(const f of list) { f.spin=0; f.oy=0; }
+  }});
+  ST.play(E2,[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Judge Grace is in session. Tom is up first.'); B2.aim=null; S('whoosh'); }],
+    [P.try0,()=>{ setMessage('Tom attempts a cartwheel.'); }],
+    [P.tip,()=>{ S('creak'); }],
+    [P.flop,()=>{ S('thud'); word('FLOP.',lie,Math.max(80,sb-TH-10),CREAM,4,.9); setMessage('It is not a cartwheel. It is a tip-over.'); }],
+    [P.card,()=>{ S('ding'); }],
+    [P.gline,()=>{ say('grace','dc2'); }],
+    [P.laugh,()=>{ S('giggle'); word('HA HA HA!',GR.x,40,'#ffffff',4,1); setMessage('The monsters laugh so hard they forget to defend.'); }],
+    [P.laugh+700,()=>{ word('LOL',GR.x,66,'#ffd2a0',3,.7); }],
+    [P.tline,()=>{ say('tom','dcgrace2'); }],
+    [P.hop,()=>{ S('boing'); setMessage('Grace shows him how it is done.'); }],
+    [P.cw1,()=>{ S('whoosh'); }],
+    [P.cw2,()=>{ S('whoosh'); word('OVER!',tx,Math.max(70,sb-TH-60),PINK,3,.6); }],
+    [P.hit,()=>{ S('thud'); S('bonk'); battle.shakeEnemy=.8; battle.flashEnemy=.3; for(const f of row) ST.jolt(f,f===front?.7:.45);
+      scene('tb_rings',.8,{x:kick.x,y:F.top+F.h*.45,r:80,c:GOLD,w:4}); word('FLIP KICK!',F.x,40,GOLD,4,1); landHit(100); E2.apply(); }],
+    ['hf',P.hit],
+    [P.ten,()=>{ S('fanfare'); scene('confetti',1.4,{x0:lx-120,x1:lx+120,n:26}); setMessage('A perfect 10. Judge Grace scores herself, obviously.'); }],
+    [P.clap,()=>{ S(sfx.clap?'clap':'bump'); }],
+    [P.end,'end',()=>{ for(const f of list) { f.spin=0; f.oy=0; } return (E2.result||'')+' Tom is appealing the score.'; }]]);
+};
+// ---------- Princess and Her Bodyguard (Tom + Rose, Director's Cut of tier 2) ----------
+// Rose in full princess dress-up (tiara, Lamby as her scepter); Tom in sunglasses and an earpiece as her royal bodyguard.
+// A red carpet rolls out toward the monsters. He steps in front of her and holds them back (DEFEND); she processes down
+// the carpet and knights each monster with Lamby, tap tap, and each one bows and backs out of her way. Then she climbs
+// up on his shoulders. Effects (no damage): every enemy warms up, the party turns Evasive for 2 turns, Rose shakes off
+// mind troubles, and she rides home on Tom's shoulders.
+// Tom's sunglasses and earpiece, drawn over his drawn body. Sprite pixel spots (scale 2.6): facing left (idle, act, expr)
+// lens cols 8.6-16.6 rows 10.6-13.4, ear col 21.5 row 11.6; front (celeb) two lenses; facing right (flip) mirrored.
+const shades=(sp,fk,x,b)=>{ const sc=sp.scale,W=sp.idle[0].length*sc,H=sp.idle.length*sc,px=c=>x-W/2+c*sc,py=r=>b-H+r*sc;
+  const lens=(c0,c1,r0,r1)=>{ rr(px(c0),py(r0),(c1-c0)*sc,(r1-r0)*sc,3,'#14161c',1.5); R(px(c0)+3,py(r0)+2,Math.max(2,(c1-c0)*sc*.3),2,'#6a7488'); };
+  const bud=(c,r,dir)=>{ EO(px(c),py(r),2.6,2.6,'#2a2c34'); gfx.lineWidth=1.4; gfx.strokeStyle='#d8dce4'; gfx.beginPath(); gfx.moveTo(px(c),py(r)+2);
+    for(let k=1;k<=5;k++) gfx.lineTo(px(c)+dir*(k%2?2.4:-.6),py(r)+2+k*3.4); gfx.stroke(); };
+  if(fk==='celeb') { lens(12.4,16.8,9.4,12.2); lens(19.3,23.6,9.4,12.2); R(px(16.8),py(10.2),px(19.3)-px(16.8),2,'#14161c'); return; }
+  if(fk==='flip') { lens(12.4,20.4,10.6,13.4); Ln(px(12.4),py(11.4),px(7.8),py(11.4),2,'#14161c'); bud(7.5,11.8,1); return; }
+  if(fk==='kneel') return;
+  lens(8.6,16.6,10.6,13.4); Ln(px(16.6),py(11.4),px(21.2),py(11.4),2,'#14161c'); bud(21.5,11.8,-1); };
+const carpet=(x0,x1,y,k)=>{ if(k<=0) return; const xa=lerp(x1,x0,ez(k)); R(xa,y-9,x1-xa,18,'#a8203a'); R(xa,y-9,x1-xa,3,'#ffd166'); R(xa,y+6,x1-xa,3,'#ffd166');
+  if(k<1) { EO(xa,y,7,11,'#a8203a'); E(xa,y,3,6,'#7a1428'); } };
+B2_TOMBO_ANIM.rose2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list);
+  const tsp=BATTLE_SPRITES.tom,rsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,RH=rsp.idle.length*rsp.scale,RW=rsp.idle[0].length*rsp.scale;
+  const sb=cl(GR.base+8,240,300),tx=cl(GR.x1+120,GR.x1+96,440),rx=Math.min(548,tx+62),gx=tx-46;
+  const K=640,n=o3.length;
+  const P={walk:650,tiara:700,rug0:750,rug1:1350,rline:1450,lean:2150,tline:2350,guard:2550,back:3000,kn:3400};
+  P.done=P.kn+n*K; P.turn=P.done+150; P.apply=P.done+450; P.hop=P.done+650; P.seat=P.hop+500; P.home=P.seat+150; P.end=P.home+700;
+  // each monster: Rose stops at its right edge, taps it twice with Lamby, it bows and backs off
+  o3.forEach((o,i)=>{ o.t=P.kn+i*K; o.stop={x:Math.min(rx,o.q.x+o.q.w/2+RW*.42),b:cl(o.q.base+4,sb-40,sb+10)}; });
+  const sT={x:tx,b:sb,f:tsp.idle,fk:'idle'},sR={x:rx,b:sb,f:rsp.idle,fk:'idle',swing:0};
+  const seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
+  const roseAt=ms=>{ // where Rose walks during the knighting
+    let x=rx,b=sb; for(const o of o3) { if(ms<o.t) break; const q=ez(seg(ms,o.t,o.t+260)); const p0={x,b}; x=lerp(p0.x,o.stop.x,q); b=lerp(p0.b,o.stop.b,q); }
+    if(ms>P.done) { const q=ez(seg(ms,P.done,P.done+300)); x=lerp(x,gx-34,q); b=lerp(b,sb,q); } return {x,b}; };
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,fk='idle';
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms<P.guard) { fk=ms>P.tline-150&&ms<P.tline+500?'act':'idle'; }
+      else if(ms<P.kn) { const q=ez(seg(ms,P.guard,P.guard+350)); x=lerp(tx,gx,q); fk=ms<P.back+250?'act':'idle'; }
+      else if(ms<P.done+300) { const r=roseAt(ms); x=Math.max(gx-20,Math.min(gx,r.x+58)); fk=(Math.floor(ms/700)%2)?'idle':'act'; }
+      else x=gx; if(ms>P.done+300&&ms<P.hop) fk='kneel'; if(ms>P.seat) fk='celeb'; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(gx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); fk=k<1?'flip':'idle'; }
+    const f=sp[fk]; sT.x=x; sT.b=y; sT.f=f; sT.fk=fk; return {cx:x,base:y,frame:f}; });
+  const st0=startOf(pt);
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=sb,fk='idle',ns=false;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(st0.x,rx,k); y=lerp(st0.b,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.kn) { if(ms>P.rline-80&&ms<P.rline+600) { fk='celeb'; y-=Math.abs(Math.sin(seg(ms,P.rline,P.rline+600)*Math.PI*2))*10; } }
+    else if(ms<P.hop) { const r=roseAt(ms); x=r.x; y=r.b; let moving=false; for(const o of o3) if(ms>o.t&&ms<o.t+260) moving=true; if(ms>P.done&&ms<P.done+300) moving=true;
+      y+=moving?-Math.abs(Math.sin(ms/75))*5:0; fk=ms>P.turn?'flip':(moving?'idle':'act'); }
+    else { const s=seatPt(),k=seg(ms,P.hop,P.seat);
+      if(k<1) { x=lerp(gx-34,s.x,ez(k)); y=lerp(sb,s.y,ez(k))-Math.sin(k*Math.PI)*60; fk='celeb'; ns=true; }
+      else { x=s.x; y=s.y; fk='idle'; ns=true; } }
+    const f=sp[fk]; sR.x=x; sR.b=y; sR.f=f; sR.fk=fk; return {cx:x,base:y,frame:f,noShadow:ns}; });
+  // Lamby's swing: 0 held up, 1 tapping down onto the monster
+  const swing=ms=>{ for(const o of o3) { const a=o.t+300; if(ms>a&&ms<a+300) { const q=seg(ms,a,a+300); return Math.abs(Math.sin(q*Math.PI*2)); } } return 0; };
+  const bowK=(o,ms)=>{ const a=o.t+560; return ez(seg(ms,a,a+260))*(1-ez(seg(ms,P.home,P.end-80))); };
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=seg(ms,P.rug0,P.rug1)*(1-ez(seg(ms,P.home,P.home+500)));
+    gfx.globalAlpha=Math.min(1,k*3)*(ms>P.home?1-seg(ms,P.home,P.home+500):1); carpet(Math.max(8,GR.x0-30),Math.min(576,rx+40),sb+2,Math.min(1,seg(ms,P.rug0,P.rug1)));
+    gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    const d=battle.drawnAt&&battle.drawnAt[tom.idx];
+    // Tom's sunglasses and earpiece
+    if(ms>200&&d) { gfx.globalAlpha=ez(seg(ms,200,450)); shades(tsp,sT.fk,d.cx,d.base); gfx.globalAlpha=1; }
+    // the earpiece crackle while he talks into it
+    if(ms>P.tline-150&&ms<P.tline+500&&d) { const q=seg(ms,P.tline-150,P.tline+500); for(let j=0;j<3;j++) { gfx.globalAlpha=(1-q)*.8; ring(d.cx+24,d.base-TH*.68,5+j*5+q*6,4+j*4+q*5,1.5,'#9fd8ff'); } gfx.globalAlpha=1; }
+    // Rose's tiara (drops onto her head) and Lamby the scepter
+    const rd=battle.drawnAt&&battle.drawnAt[pt.idx],rX=rd?rd.cx:sR.x,rB=rd?rd.base:sR.b,flip=sR.fk==='flip';
+    if(ms>P.tiara-300) { const q=ez(seg(ms,P.tiara-300,P.tiara)),top=rd&&rd.h?rB-rd.h:rB-RH,hx=rX+(flip?2:-2),hy=top+9-(1-q)*40;
+      gfx.globalAlpha=q; gfx.save(); gfx.translate(hx,hy); gfx.scale(.42,.42); PROP2.tiara({},0); gfx.restore(); gfx.globalAlpha=1;
+      if(ms>P.tiara&&ms<P.tiara+500) { const g=seg(ms,P.tiara,P.tiara+500); for(let j=0;j<4;j++) { const a=j*1.57+g*2; star(hx+Math.cos(a)*16*g,hy-4+Math.sin(a)*10*g,3.5*(1-g)+1,GOLD); } } }
+    if(ms>P.walk&&ms<P.hop) { const sw=swing(ms),dir=flip?1:-1,hx=rX+dir*RW*.34,hy=rB-RH*.55,ang=lerp(-.5,1.25,sw)*dir,L=22+sw*10;
+      const lx=hx+Math.sin(ang)*L*.2+dir*sw*16,ly=hy-L*Math.cos(ang*.6)+sw*14;
+      Ln(hx,hy,lx,ly+6,3,OUT); Ln(hx,hy,lx,ly+6,1.6,'#ffd166');
+      gfx.save(); gfx.translate(lx,ly); gfx.rotate(dir*sw*.6+(flip?0:0)); gfx.scale(.42,.42); PROP2.lamby({flip:flip},0); gfx.restore(); }
+    // the monsters: lean in curious, lean back when Tom steps in, then bow and back out of her way
+    for(const o of o3) { const f=o.f,q=o.q; let ox=0,oy=0,sp=0;
+      if(ms>P.lean&&ms<P.back) { const k=ez(seg(ms,P.lean,P.lean+400)); ox=k*12; }
+      else if(ms>=P.back&&ms<o.t+560) { const k=ez(seg(ms,P.back,P.back+300)); ox=lerp(12,-8,k); }
+      const b=bowK(o,ms); if(ms>=o.t+560) { ox=-8-b*22; sp=b*.45; oy=b*6; }
+      if(ms>P.lean&&ms<P.end-80) { f.ox=ox; f.oy=oy; f.spin=sp; f.spinAt=performance.now(); }
+      if(ms>o.t+560&&ms<o.t+560+900) { const g=seg(ms,o.t+560,o.t+1460); for(let j=0;j<5;j++) { const a=j/5*Math.PI*2+g*3; star(q.x+ox+Math.cos(a)*q.w*.45*g+4,q.top+q.h*.3+Math.sin(a)*q.h*.35*g,3.5*(1-g)+1,j%2?GOLD:'#fffbe6'); } } }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Princess Rose is out for a royal walk.'); B2.aim=null; S('click'); }],
+    [P.tiara,()=>{ S('ding'); S('chime2'); }],
+    [P.rug0,()=>{ S('whoosh'); setMessage('A red carpet rolls out. Her royal bodyguard is in sunglasses.'); }],
+    [P.rline,()=>{ say('rose','dc2'); }],
+    [P.lean,()=>{ o3.forEach(o=>word('?',o.q.x+10,o.q.top-16,CREAM,4,.8)); S('squeak'); setMessage('The monsters lean in for a closer look.'); }],
+    [P.tline,()=>{ say('tom','dcrose2'); S('click'); }],
+    [P.guard,()=>{ S('step'); word('DEFEND',gx,40,'#9fd8ff',4,.9); setMessage('Tom steps in front of the princess. The monsters back up.'); }],
+    [P.kn-150,'She knights every monster with Lamby.'],
+    [P.done+200,()=>{ setMessage('Every monster bows out of her way.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sR.x,y:sR.b-RH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:36,ry:50,c:'#d8f0ff',a:.35});
+      for(const p of b2LiveParty()) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.hop,()=>{ S('boing'); }],
+    [P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' The princess rides home.'; }]];
+  o3.forEach((o,i)=>{ steps.push([o.t+300,()=>{ S('boop'); }],[o.t+450,()=>{ S('boop'); }],
+    [o.t+560,()=>{ S('chime2'); ST.jolt(o.f,.3); scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:46,c:GOLD,w:3}); if(i===0) word('KNIGHTED!',o.q.x,40,GOLD,4,.9); else word('BOW!',o.q.x,i%2?66:40,PINK,4,.6);
+      for(let k=0;k<4;k++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(k-1.5)*20,y1:o.q.top-26,arc:12,spin:false,r:6,t:-k*.05,dur:.7});
+      if(i===n-1) landHit(100); }]); });   // a kind Tombo's first landHit lands everything: only the last knighting calls it
+  steps.push(['hf',o3.length?o3[0].t+560:P.kn]);
+  ST.play(E2,steps);
+};
+
+// ---------- Spot Me, Tom (Tom + Amy, Director's Cut of tier 2) ----------
+// Gym floor. Amy rolls Tom her big kettlebell and yells the reps. Swing one is fine, swing two is wobbly, swing three goes
+// all the way up... and Tom lets go. Gravity takes it in a long arc onto the front monster. CLANG. Amy stares; then it is a
+// water break. Effects (no damage): Tom and Amy refill their VP, and the party Guards (half damage) for 1 turn.
+const kbell=(x,y,s=1,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  ring(0,-17,9.5,9,8,OUT); ring(0,-17,9.5,9,4.5,'#4a505c'); EO(0,0,16,15,'#3a3f4a'); E(-6,-6,5,4,'#6a7280'); E(5,8,8,3,'#2a2e36');
+  label('50',1,-2,CREAM,1); gfx.restore(); };
+B2_TOMBO_ANIM.amy2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),o3=order3(list),tgt=o3.length?o3[0].f:list[0],F=ST.foe(tgt),GR=ST.group(list);
+  const tsp=BATTLE_SPRITES.tom,asp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,AH=asp.idle.length*asp.scale;
+  const sb=cl(GR.base+6,236,300),tx=cl(GR.x1+150,GR.x1+124,448),ax=Math.min(548,tx+92);
+  const P={walk:650,roll:700,rolled:1150,grab:1250,aline:1350,r1:2000,r2:2650,r3:3350,top:3850,tline:3900,let:4400,peak:4750,land:5150,stare:5350,apply:5800,home:6300,end:7000};
+  const sT={x:tx,b:sb,fk:'idle'},sA={x:ax,b:sb};
+  const piv=()=>({x:sT.x-6,y:sT.b-TH*.5});
+  // the swing angle: 0 hangs down between his knees, PI/2 straight out in front, PI straight up
+  const ang=ms=>{ const rep=(a,b,top)=>{ const q=seg(ms,a,b); return Math.sin(q*Math.PI)*top; };
+    if(ms<P.grab) return 0; if(ms<P.r1) return .15*Math.sin((ms-P.grab)/200);
+    if(ms<P.r2) return rep(P.r1,P.r2,1.5); if(ms<P.r3) return rep(P.r2,P.r3,1.25)+Math.sin(ms/45)*.06;
+    if(ms<P.top) return ez(seg(ms,P.r3,P.top))*2.95; return 2.95+Math.sin(ms/40)*.12*seg(ms,P.top,P.let); };
+  const low=ms=>ms>=P.grab&&ms<P.let&&ang(ms)<.55;
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,fk='idle',rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms>=P.grab&&ms<P.let) { fk=low(ms)?'kneel':(ms>P.top?'celeb':'act'); if(ms>P.top) rot=Math.sin(ms/50)*.06; }
+      else if(ms>=P.let&&ms<P.land+200) fk='celeb';
+      else if(ms>=P.land+200&&ms<P.apply) fk='kneel';
+      else if(ms>=P.apply) fk='idle'; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); fk=k<1?'flip':'idle'; }
+    sT.x=x; sT.b=y; sT.fk=fk; return {cx:x,base:y,frame:sp[fk],rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=ax,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,ax,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) {
+      if(ms<P.rolled) f=sp.throw;
+      else if(ms<P.aline+900) f=(Math.floor(ms/260)%2)?sp.act:sp.clap;
+      else if(ms<P.tline) { const r=[P.r1,P.r2,P.r3].some(t=>ms>t+250&&ms<t+600); f=r?sp.act:sp.clap; }
+      else if(ms<P.stare) f=sp.hip;
+      else if(ms<P.apply) f=sp.expr;
+      else f=sp.celeb2; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(ax,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sA.x=x; sA.b=y; return {cx:x,base:y,frame:f}; });
+  // the kettlebell's spot: rolled from Amy, swung on Tom's arm, then flying, then on the monster's head
+  const head={x:F.x,y:F.top+4};
+  const bell=ms=>{ if(ms<P.roll) return null;
+    if(ms<P.rolled) { const q=ez(seg(ms,P.roll,P.rolled)); return {x:lerp(ax-30,tx-14,q),y:sb-14,rot:-q*6}; }
+    if(ms<P.grab) return {x:tx-14,y:sb-14,rot:0};
+    const p=piv();
+    if(ms<P.let) { const a=ang(ms),L=TH*.34; return {x:p.x-Math.sin(a)*L,y:p.y+Math.cos(a)*L,rot:-a,arm:p}; }
+    const p0={x:p.x-Math.sin(2.95)*TH*.34,y:p.y+Math.cos(2.95)*TH*.34};
+    if(ms<P.land) { const q=seg(ms,P.let,P.land),top=Math.min(40,p0.y-60); const x=lerp(p0.x,head.x,q),y=q<.4?lerp(p0.y,top,ez(q/.4)):lerp(top,head.y-14,Math.pow((q-.4)/.6,2));
+      return {x,y,rot:q*Math.PI*3}; }
+    return {x:head.x,y:head.y-14,rot:.25}; };
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=ez(seg(ms,0,350))*(1-ez(seg(ms,P.home,P.home+500))); if(k<=0) return;
+    const x0=tx-70,x1=Math.min(576,ax+50); gfx.globalAlpha=k*.9; R(x0,sb-16,x1-x0,26,'#3a3e46'); R(x0,sb-16,x1-x0,3,'#ffd166'); R(x0,sb+7,x1-x0,3,'#ffd166');
+    for(let x=x0+30;x<x1;x+=44) R(x,sb-13,2,20,'#4a4f58'); gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const B=bell(ms); if(!B) return;
+    kbell(B.x,B.y,1.3,ms<P.let?0:B.rot);
+    // sweat while he swings
+    if(ms>P.r2&&ms<P.land) { const d=battle.drawnAt&&battle.drawnAt[tom.idx]; if(d) for(let j=0;j<2;j++) { const q=((ms/420)+j*.5)%1; gfx.globalAlpha=1-q; E(d.cx+16+j*8,d.base-TH*.8+q*24,2.4,3.4,'#9fd8ff'); } gfx.globalAlpha=1; }
+    // the monster squashed under it, stars going round
+    if(ms>P.land) { const q=seg(ms,P.land,P.land+140),sc2=ms<P.land+140?1-.28*q:(ms<P.home?.72+.04*Math.sin(ms/90):lerp(.72,1,ez(seg(ms,P.home,P.end-80))));
+      tgt.fsc=sc2; tgt.oy=F.h/2*(1-sc2); tgt.spin=0; tgt.spinAt=performance.now();
+      for(let j=0;j<3;j++) { const a=ms/260+j*2.1; star(head.x+Math.cos(a)*F.w*.4,F.top+F.h*(1-sc2)-24+Math.sin(a)*6,4,j%2?GOLD:'#fffbe6'); } }
+  }});
+  const repWord=(txt,c)=>word(txt,ax-6,Math.max(80,sb-AH-30),c,4,.6);
+  ST.play(E2,[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Coach Amy has a workout. Tom is doing it.'); B2.aim=null; S('click'); }],
+    [P.roll,()=>{ S('rumble'); }],
+    [P.rolled,()=>{ S('thud'); setMessage('Amy rolls him her big kettlebell. Fifty pounds.'); }],
+    [P.aline,()=>{ say('amy','dc2'); }],
+    [P.r1+300,()=>{ S('whoosh'); repWord('ONE!',GOLD); }],
+    [P.r2+300,()=>{ S('whoosh'); repWord('TWO!',GOLD); setMessage('Rep two. Less good.'); }],
+    [P.r3+300,()=>{ S('whoosh'); repWord('THREE!',PINK); setMessage('Rep three goes all the way up. And it stays up.'); }],
+    [P.tline,()=>{ say('tom','dcamy2'); }],
+    [P.let,()=>{ S('slideWhistle'); word('NOPE.',tx,40,CREAM,4,.8); }],
+    [P.land,()=>{ S('clang'); S('thud'); ST.jolt(tgt,.5); battle.shakeEnemy=.6; word('CLANG!',F.x,66,'#dfe6f2',5,.9); scene('tb_rings',.6,{x:F.x,y:F.top+10,r:60,c:'#dfe6f2',w:3});   // no landHit: no damage, no kindness; effects wait for the water break
+      setMessage('Gravity drops it right on the monster. It is too busy holding a kettlebell to attack.'); }],
+    ['hf',P.land],
+    [P.stare,()=>{ S('creak'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); setMessage('Fine. Water break. Everybody hydrate.'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sA.x,y:sA.b-AH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:'#86a9ff',a:.35});
+      for(const p of b2LiveParty()) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.end,'end',()=>{ tgt.fsc=0; tgt.oy=0; tgt.ox=0; tgt.spin=0; return (E2.result||'')+' Amy is logging it as two reps.'; }]]);
+};
+// ---------- Library Vault Lantern (Tom + Deedee, Director's Cut of tier 2) ----------
+// The library vault, dark and dusty. Tom holds up an old brass lantern; Deedee pulls out her hankie and polishes it, faster
+// and faster, until it shines, blazes, and turns into a whole lighthouse. Tom just holds it. The beam turns once across the
+// monsters (they warm up in the light) and once across the family (Tucked In; two Warm Crusts come out warm). Then it shrinks
+// back to a lantern and the vault lights up. Effects (no damage): every enemy warms up, the party is Tucked In for 3 turns,
+// 2 Warm Crusts.
+const BRASS='#e0b040',BRASS2='#a8782a',TARN='#7a7458',TARN2='#4a4636';
+// An old brass lantern hanging from its handle at (x,y); s scale; shine 0..1 (tarnish to gleam); lit 0..1 (the flame).
+const lantern=(x,y,s,shine,lit)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s);
+  if(lit>0) { gfx.globalAlpha=Math.min(1,lit)*.45; E(0,26,20+lit*14,20+lit*14,GOLD); gfx.globalAlpha=1; }
+  const metal=(c,c2)=>{ ring(0,4,6,5,2.2,c); R(-10,8,20,4,c); R(-11,34,22,7,c); R(-9,12,2,22,c2); R(7,12,2,22,c2); R(-1,12,2,22,c2); };
+  ring(0,4,6,5,4.5,OUT); RO(-10,8,20,4,TARN); RO(-11,34,22,7,TARN);
+  RO(-8,12,16,22,lit>0?'#fff2c0':'#4a5656');
+  if(lit>0) { E(0,25,3+lit*2,5+lit*3,'#ffa83a'); E(0,26,1.6,3+lit,'#fffbe6'); } else E(0,26,1.6,2.4,'#c86a2a');
+  metal(TARN,TARN2); if(shine>0) { gfx.globalAlpha=Math.min(1,shine); metal(BRASS,BRASS2); gfx.globalAlpha=1; }
+  if(shine>.3) { gfx.globalAlpha=shine; R(-8,35,4,2,'#fff6c0'); R(-7,9,3,2,'#fff6c0'); gfx.globalAlpha=1; }
+  gfx.restore(); };
+// A red and white lighthouse standing on b, lamp room at the top yT (lamp centre yT-17). lit 0..1.
+const lighthouse=(x,b,yT,lit)=>{ const wb=42,wt=26,H=b-yT; if(H<8) return;
+  gfx.beginPath(); gfx.moveTo(x-wb/2-2,b); gfx.lineTo(x-wt/2-2,yT-2); gfx.lineTo(x+wt/2+2,yT-2); gfx.lineTo(x+wb/2+2,b); gfx.closePath(); gfx.fillStyle=OUT; gfx.fill();
+  const n=Math.max(2,Math.round(H/28)),wAt=y=>lerp(wb,wt,(b-y)/H);
+  for(let i=0;i<n;i++) { const y0=b-H*i/n,y1=b-H*(i+1)/n,w0=wAt(y0),w1=wAt(y1);
+    gfx.beginPath(); gfx.moveTo(x-w0/2,y0); gfx.lineTo(x-w1/2,y1); gfx.lineTo(x+w1/2,y1); gfx.lineTo(x+w0/2,y0); gfx.closePath(); gfx.fillStyle=i%2?'#f4f0e6':'#c8323a'; gfx.fill(); }
+  gfx.globalAlpha=.25; gfx.beginPath(); gfx.moveTo(x+4,b); gfx.lineTo(x+3,yT); gfx.lineTo(x+wt/2,yT); gfx.lineTo(x+wb/2,b); gfx.closePath(); gfx.fillStyle='#000'; gfx.fill(); gfx.globalAlpha=1;
+  if(H>40) RO(x-5,b-16,10,16,'#3a2a22');
+  RO(x-wt/2-8,yT-5,wt+16,5,'#2a2c34');
+  if(lit>0) { gfx.globalAlpha=Math.min(1,lit)*.5; E(x,yT-17,30+lit*16,26+lit*14,GOLD); gfx.globalAlpha=1; }
+  RO(x-wt/2+2,yT-30,wt-4,25,lit>0?'#fff2c0':'#4a5656'); for(const dx of [-5,5]) R(x+dx-1,yT-30,2,25,'#2a2c34');
+  if(lit>0) { E(x,yT-17,8,8,'#fffbe6'); }
+  gfx.beginPath(); gfx.moveTo(x-wt/2-3,yT-29); gfx.lineTo(x,yT-48); gfx.lineTo(x+wt/2+3,yT-29); gfx.closePath(); gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#c8323a'; gfx.fill();
+  EO(x,yT-50,3,3,'#2a2c34'); };
+B2_TOMBO_ANIM.deedee2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale,actR=mirrorRowsCached(tsp,'act');
+  const sb=cl(GR.base+6,236,300),tx=cl(GR.x1+120,GR.x1+96,430);
+  const th=handPt(tsp,actR,tx,sb,1),dh=handPt(dsp,dsp.act,0,sb,-1),hy=Math.round((th.y+dh.y)/2);
+  const lx=th.x+6,dx=Math.min(548,lx+18-dh.x),yT=84;
+  const P={walk:650,lift:700,hank:950,pol0:1050,dline:1250,flare:2900,grow1:3350,tline:3500,beam0:4100,beam1:4900,beam2:4950,beam3:5750,apply:5250,shrink:5800,lift2:5950,home:6300,end:7000};
+  // polish: 0..1, how far along the polishing is; the rub gets faster as it goes
+  const polK=ms=>ez(seg(ms,P.pol0,P.flare));
+  const rubPh=ms=>{ if(ms<P.pol0||ms>P.flare) return 0; const t=ms-P.pol0; return t/lerp(230,70,polK(ms))*Math.PI; };
+  const growK=ms=>ez(seg(ms,P.flare,P.grow1))*(1-ez(seg(ms,P.shrink,P.shrink+400)));
+  const sT={x:tx,b:sb},sD={x:dx,b:sb};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); f=sp.flip; }
+    else if(ms<P.home) { f=ms>P.lift&&ms<P.shrink+400?actR:sp.flip;
+      if(ms>P.flare&&ms<P.grow1+300) rot=Math.sin(ms/45)*.05*(1-seg(ms,P.grow1,P.grow1+300));
+      if(ms>P.tline&&ms<P.tline+500) y-=Math.abs(Math.sin((ms-P.tline)/120))*3; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,dx,k); y=lerp(c.origBase,sb,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
+    else if(ms<P.home) {
+      if(ms<P.hank) f=sp.idle; else if(ms<P.pol0) f=sp.hip||sp.idle;
+      else if(ms<P.flare) f=Math.sin(rubPh(ms))>0?sp.act:(sp.aim||sp.act);
+      else if(ms<P.tline) f=sp.celeb||sp.idle;
+      else if(ms<P.apply) f=sp.hip||sp.idle;
+      else f=sp.celeb2||sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(dx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sD.x=x; sD.b=y; return {cx:x,base:y,frame:f}; });
+  const darkK=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.lift2,P.lift2+450)));
+  const lampAt=ms=>{ const g=growK(ms); return {x:lx,y:lerp(hy+26,yT-17,g)}; };
+  // the beam: dir -1 sweeps the monsters, +1 the family; q 0..1..0 its reach
+  const beamOf=ms=>{ if(ms>P.beam0&&ms<P.beam1) return {dir:-1,q:Math.sin(seg(ms,P.beam0,P.beam1)*Math.PI)};
+    if(ms>P.beam2&&ms<P.beam3) return {dir:1,q:Math.sin(seg(ms,P.beam2,P.beam3)*Math.PI)}; return null; };
+  const beamPoly=(ms,L)=>{ const B=beamOf(ms); if(!B||B.q<=0) return null; const far=B.dir<0?L.x-B.q*(L.x+60):L.x+B.q*(640-L.x);
+    const top=B.dir<0?Math.min(GR.top-30,L.y):Math.min(sb-TH-30,L.y),bot=B.dir<0?GR.base+30:330; return {pts:[[L.x,L.y-5],[far,top],[far,bot],[L.x,L.y+5]],far,q:B.q}; };
+  // the vault: stone wall with arches full of books, flagstone floor (back layer, fades with the dark)
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=darkK(ms); if(k<=0) return; gfx.globalAlpha=k;
+    R(0,0,576,324,'#2e2a36'); const fy=Math.min(GR.top+30,200);
+    for(let i=0;i<5;i++) { const ax=20+i*120,aw=96,top=36;
+      R(ax-6,top-6,aw+12,fy-top+6,'#3c3846'); R(ax,top+24,aw,fy-top-24,'#1e1a24'); E(ax+aw/2,top+26,aw/2,28,'#1e1a24');
+      for(let r=0;r<4;r++) { const yy=top+34+r*((fy-top-40)/4); R(ax+4,yy+((fy-top-40)/4)-4,aw-8,4,'#5a4636');
+        for(let b=0;b<11;b++) { const bw=6+((i*7+r*3+b*5)%4),bh=12+((i+r+b)%3)*3; R(ax+6+b*8,yy+((fy-top-40)/4)-4-bh,bw,bh,['#7a3a3a','#3a5a7a','#5a6a3a','#8a6a3a','#5a3a6a'][(i+r*2+b)%5]); } } }
+    R(0,fy,576,324-fy,'#2a2630'); for(let yy=fy+18;yy<324;yy+=22) R(0,yy,576,2,'#221e28');
+    for(let yy=fy,j=0;yy<324;yy+=22,j++) for(let xx=(j%2)*30;xx<576;xx+=60) R(xx,yy,2,22,'#221e28');
+    // the lighthouse stands behind Tom's hand
+    const g=growK(ms); gfx.globalAlpha=1;
+    if(g>0) { const L=lampAt(ms); lighthouse(lx,sb+2,L.y+17,ms>P.flare?1:0); }
+    gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=darkK(ms),pk=polK(ms),g=growK(ms),L=lampAt(ms),bp=beamPoly(ms,L);
+    // the dark, with soft holes: the lantern's light, the tower, and the beam
+    if(k>0) { if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
+      const c2=darkC.getContext('2d'); c2.globalCompositeOperation='source-over'; c2.clearRect(0,0,576,324); c2.fillStyle='#06050c'; c2.fillRect(0,0,576,324);
+      c2.globalCompositeOperation='destination-out';
+      const hole=(x,y,r,a=1)=>{ const gr=c2.createRadialGradient(x,y,r*.3,x,y,r); gr.addColorStop(0,'rgba(0,0,0,'+a+')'); gr.addColorStop(1,'rgba(0,0,0,0)'); c2.fillStyle=gr; c2.beginPath(); c2.arc(x,y,r,0,Math.PI*2); c2.fill(); };
+      if(ms>P.lift-200) hole(L.x,L.y,lerp(40,110,pk)+g*40+Math.sin(ms/90)*3*pk);
+      if(g>0) { hole(L.x,(L.y+sb)/2,60+g*30,.8); hole(L.x,L.y,90*g+30); }
+      if(bp) { c2.fillStyle='rgba(0,0,0,'+(.85*bp.q)+')'; c2.beginPath(); c2.moveTo(bp.pts[0][0],bp.pts[0][1]); for(const q of bp.pts.slice(1)) c2.lineTo(q[0],q[1]); c2.closePath(); c2.fill(); }
+      c2.globalCompositeOperation='source-over'; gfx.globalAlpha=.88*k; gfx.drawImage(darkC,0,0); gfx.globalAlpha=1; }
+    // the beam itself, over the dark
+    if(bp) { const gr=gfx.createLinearGradient(L.x,L.y,bp.far,L.y); gr.addColorStop(0,'rgba(255,240,180,.75)'); gr.addColorStop(1,'rgba(255,224,138,0)');
+      gfx.globalAlpha=bp.q; gfx.fillStyle=gr; gfx.beginPath(); gfx.moveTo(bp.pts[0][0],bp.pts[0][1]); for(const q of bp.pts.slice(1)) gfx.lineTo(q[0],q[1]); gfx.closePath(); gfx.fill(); gfx.globalAlpha=1; }
+    // the lamp room glows over the dark once it is a lighthouse; before that, the lantern in Tom's hand
+    if(g>0&&ms>P.flare) { gfx.save(); gfx.beginPath(); gfx.rect(0,0,576,L.y+6); gfx.clip(); gfx.globalAlpha=Math.min(1,g*1.5); lighthouse(lx,sb+2,L.y+17,1); gfx.restore(); gfx.globalAlpha=1; }   // only the lamp room over the dark
+    const ls=1+pk*.45; if(ms>P.lift-150&&ms<P.home+250&&g<.6) { gfx.globalAlpha=(1-g/.6)*(1-seg(ms,P.home,P.home+250)); const lift=ez(seg(ms,P.lift-150,P.lift+150));
+      lantern(L.x+(sT.x-tx),L.y+(sT.b-sb)-26*ls-(1-lift)*6,ls,pk*1.4,ms<P.pol0?.15:Math.max(.2,pk)); gfx.globalAlpha=1; }
+    // the hankie going round and round, and the sparkles it leaves
+    if(ms>P.hank&&ms<P.flare) { const a=rubPh(ms),hx=L.x+Math.cos(a)*9*ls,hy2=L.y-10*ls+Math.sin(a)*6*ls;
+      gfx.save(); gfx.translate(hx,hy2); gfx.rotate(Math.sin(a)*.5); RO(-5,-4,10,8,'#fff6f4'); R(-5,-1,10,2,PINK); gfx.restore();
+      for(let j=0;j<Math.round(2+pk*5);j++) { const q=((ms/300)+j*.37)%1,an=j*2.4+ms/500; gfx.globalAlpha=(1-q)*pk; star(L.x+Math.cos(an)*(14+q*30)*ls,L.y-14*ls+Math.sin(an)*(10+q*24)*ls,2+q*3,j%2?GOLD:'#fffbe6'); }
+      gfx.globalAlpha=1; }
+    // the flare as it turns into a lighthouse
+    if(ms>P.flare-80&&ms<P.flare+400) { const q=seg(ms,P.flare-80,P.flare+400); gfx.globalAlpha=(1-q)*.8; R(0,0,576,324,'#fffbe6'); gfx.globalAlpha=1; }
+    // two Warm Crusts, warm from the light, at Deedee's feet
+    if(ms>P.apply&&ms<P.home+300) { const q=ez(seg(ms,P.apply,P.apply+300)),a=1-seg(ms,P.home,P.home+300);
+      for(const [ox,j] of [[-28,0],[26,1]]) { const cx=sD.x+ox,cy=sb+4-q*8-Math.sin(ms/200+j)*2; gfx.globalAlpha=a*.4; E(cx,cy,18,10,GOLD); gfx.globalAlpha=a; crustTin(cx,cy,1.1);
+        for(let w=0;w<2;w++) { const sq=((ms/700)+w*.5+j*.25)%1; gfx.globalAlpha=a*(1-sq)*.7; E(cx-4+w*8+Math.sin(sq*6)*3,cy-10-sq*18,2.5,3.5,'#fffbe6'); } }
+      gfx.globalAlpha=1; }
+  }});
+  const passAt=(x,dir)=>{ const Lx=lx; if(dir<0) { const q=cl((Lx-x)/(Lx+60),0,1); return P.beam0+Math.asin(q)/Math.PI*(P.beam1-P.beam0); }
+    const q=cl((x-Lx)/(640-Lx),0,1); return P.beam2+Math.asin(q)/Math.PI*(P.beam3-P.beam2); };
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! The library vault. Dark, dusty, and one old brass lantern.'); B2.aim=null; S('creak'); }],
+    [P.lift,()=>{ S('click'); setMessage('Tom holds it up. It barely glows.'); }],
+    [P.hank,()=>{ S('whoosh'); setMessage('Deedee pulls out her hankie.'); }],
+    [P.dline,()=>{ say('deedee','dc2'); }],
+    [1700,()=>{ S('squeak'); word('SQUEAK!',lx,Math.max(70,hy-70),CREAM,3,.6); }],
+    [2200,()=>{ S('squeak'); setMessage('Faster. FASTER.'); }],
+    [2500,()=>{ S('squeak'); S('chime2'); word('SHINE!',lx,Math.max(70,hy-80),GOLD,4,.6); }],
+    [P.flare,()=>{ S('chime2'); S('rumble'); battle.shakeEnemy=.4; setMessage('It shines so bright it turns into a lighthouse.'); }],
+    [P.grow1,()=>{ S('ding'); word('LIGHTHOUSE!',Math.min(GR.x,lx-140),40,GOLD,4,1); }],
+    [P.tline,()=>{ say('tom','dcdeedee2'); }],
+    [P.beam0,()=>{ S('whoosh'); setMessage('The beam turns. Every monster warms up in the light.'); }],
+    [P.beam2,()=>{ S('whoosh'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); setMessage('The light lands on the family. Everybody feels tucked in. Two crusts come out warm.');
+      for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sD.x,y:sD.b-DH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:'#ffd6a0',a:.35});
+      for(const p of party) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.shrink,()=>{ S('slideWhistle'); }],
+    [P.lift2,()=>{ setMessage('Back to a lantern. A very, very shiny lantern.'); }],
+    [P.end,'end',()=>(E2.result||'')+' Deedee says now it is clean.']];
+  o3.slice().sort((a,b)=>b.q.x-a.q.x).forEach((o,i,arr)=>{ const t=passAt(o.q.x,-1);
+    steps.push([t,()=>{ S('chime2'); ST.jolt(o.f,.2); scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:GOLD,w:3});
+      for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*18,y1:o.q.top-24,arc:10,spin:false,r:6,t:-j*.05,dur:.7});
+      if(i===arr.length-1) landHit(100); }]); });   // kind Tombo: the first landHit lands everything, so only the last one calls it
+  steps.push(['hf',o3.length?passAt(Math.min(...o3.map(o=>o.q.x)),-1):P.beam0+300]);
+  ST.play(E2,steps);
+};
+
+// ---------- Bird's Nest (Tom + Boppy, Director's Cut of tier 2) ----------
+// Cattail Pier. Tom casts Boppy's rod and the reel explodes into a giant bird's nest of tangled line. Boppy grumbles and
+// tries to fix it; every tug makes it worse and bigger, and he has to back off further each time. Tom says he improved it.
+// The giant tangle rolls off the rod and wraps the monster up like a net. Effects: a big Splash hit on one enemy (shield
+// break, automatic for every Tombo) that steals a buff.
+// A tangle of fishing line: loops around (x,y), radii rx,ry; seeded so it keeps its shape while it grows.
+const nest=(x,y,rx,ry,t,seed=1,a=1)=>{ const n=Math.round(7+Math.min(rx,ry)/3.2); gfx.globalAlpha=a;
+  const rnd=i=>{ const v=Math.sin(i*12.9898+seed*78.233)*43758.5453; return v-Math.floor(v); };
+  for(const [w,c] of [[3.4,'#2a3a4a'],[1.6,'#eef4f6']]) { gfx.strokeStyle=c; gfx.lineWidth=w;
+    for(let i=0;i<n;i++) { const ox=(rnd(i)-.5)*rx*.5,oy=(rnd(i+50)-.5)*ry*.5,r1=rx*(.45+rnd(i+100)*.55),r2=ry*(.3+rnd(i+150)*.6),rot=rnd(i+200)*Math.PI+Math.sin(t*3+i)*.06;
+      gfx.beginPath(); gfx.ellipse(x+ox,y+oy,Math.max(.5,r1),Math.max(.5,r2),rot,0,Math.PI*2); gfx.stroke(); } }
+  gfx.globalAlpha=1; };
+B2_TOMBO_ANIM.boppy2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),tgt=(E2.targets||[]).find(t=>t.side==='foe'&&b2Alive(t))||list[0],F=ST.foe(tgt);
+  const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale,BW=bsp.idle[0].length*bsp.scale,actB=mirrorRowsCached(bsp,'act');
+  const sb=cl(GR.base+4,236,300),tx=cl(GR.x1+190,GR.x1+150,530),PL=cl(GR.x1+20,150,320);
+  const th=handPt(tsp,tsp.act,tx,sb,-1),wTop=cl(GR.top+20,120,230);
+  const P={walk:650,back:800,cast:1000,boom:1150,bline:1600,tug1:2250,tug2:2850,tug3:3450,tline:4000,roll:4550,wrap:5050,hit:5250,home:6000,end:6700};
+  // the tangle's size: pops out at the cast, grows with every tug
+  const rOf=ms=>{ let r=0; if(ms>P.boom) r=16*ez(seg(ms,P.boom,P.boom+200));
+    for(const [t,r2] of [[P.tug1,26],[P.tug2,38],[P.tug3,52]]) if(ms>t) r=lerp(r,r2,ez(seg(ms,t,t+220))); return r; };
+  const hold=ms=>{ const r=rOf(ms); return {x:th.x-8-r*.55,y:th.y+6-r*.25}; };
+  const bMin=PL+BW*.5+4,bxAt=ms=>{ const h=hold(ms),r=rOf(ms); return Math.max(bMin,h.x-r-BW*.42); };
+  const sT={x:tx,b:sb,f:tsp.idle},sB={x:tx-110,b:sb};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms<P.back) f=sp.act; else if(ms<P.cast) { f=sp.flip; rot=.12; } else if(ms<P.boom+150) f=sp.act;
+      else if(ms<P.bline+700) f=sp.expr; else if(ms<P.tline) f=sp.act;
+      else if(ms<P.roll) { f=sp.celeb; y-=Math.abs(Math.sin((ms-P.tline)/130))*3; } else if(ms<P.hit+300) f=sp.act; else f=sp.celeb; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=sB.x,y=sb,f=sp.idle,rot=0;
+    const bx0=Math.max(bMin,tx-110);
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,bx0,k); y=lerp(c.origBase,sb,k); f=k<1?runFr(sp,c.t,-1):sp.flip; }
+    else if(ms<P.home) {
+      if(ms<P.boom) { x=bx0; f=sp.flip; }
+      else if(ms<P.bline+800) { x=bx0; f=ms<P.bline?(sp.expr||sp.flip):(sp.hip||sp.flip); }
+      else if(ms<P.tline) { const want=Math.min(bx0,bxAt(ms)); const k=ez(seg(ms,P.bline+800,P.tug1)); x=lerp(bx0,want,ms<P.tug1?k:1); f=actB;
+        for(const t of [P.tug1,P.tug2,P.tug3]) if(ms>t-120&&ms<t+260) { const q=seg(ms,t-120,t+260); x-=Math.sin(q*Math.PI)*10; rot=-.18*Math.sin(q*Math.PI); }
+        if(ms>P.tug1+260) for(const t of [P.tug2,P.tug3]) if(ms>t+260&&ms<t+420) f=sp.flip; }
+      else if(ms<P.roll) { x=Math.min(bx0,bxAt(P.tline))-6; f=sp.hip||sp.flip; }
+      else { x=Math.min(bx0,bxAt(P.tline))-6; f=ms<P.hit?(sp.flip):(ms<P.hit+500?(sp.celebFlip||sp.flip):(sp.hip||sp.flip)); } }
+    else { const x0=Math.min(bx0,bxAt(P.tline))-6,k=ez(seg(ms,P.home,P.home+650)); x=lerp(x0,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sB.x=x; sB.b=y; return {cx:x,base:y,frame:f,rot}; });
+  const setK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-150)));
+  // the lake under the monsters, reeds, the pier under the pair
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=setK(ms); if(k<=0) return; gfx.globalAlpha=k;
+    gfx.fillStyle=WATER; gfx.beginPath(); gfx.moveTo(0,wTop); for(let x=0;x<=PL;x+=12) gfx.lineTo(x,wTop+Math.sin(x/20+ms/300)*3); gfx.lineTo(PL,324); gfx.lineTo(0,324); gfx.closePath(); gfx.fill();
+    for(let j=0;j<7;j++) { const yy=wTop+18+j*16,xx=((j*53+ms/26)%(PL+40))-20; Ln(xx,yy,xx+26,yy,2,WATER2); }
+    Ln(0,wTop+1,PL,wTop+1,2,FOAM);
+    for(let i=0;i<8;i++) { const x=12+i*((PL-30)/7),h=44+((i*37)%30); cattail(x,wTop+6+(i%3)*4,h,Math.sin(ms/600+i)*3); }
+    const p0=Math.min(sb-26,Math.max(wTop+14,sb-60));
+    R(PL-2,p0,580-PL,330-p0,OUT); R(PL,p0+2,580-PL,330-p0,PLANK); for(let yy=p0+16;yy<324;yy+=16) R(PL,yy,580-PL,2,PLANK2);
+    for(const yy of [p0+30,p0+86]) RO(PL-12,yy,12,330-yy,'#6a4a2a');
+    gfx.globalAlpha=1; }});
+  // the tangle's path once it rolls off the rod: arcs over to the monster and wraps it
+  const wrapAt=ms=>{ const h=hold(P.roll),q=seg(ms,P.roll,P.wrap),c={x:F.x,y:F.top+F.h*.5};
+    return {x:lerp(h.x,c.x,ez(q)),y:lerp(h.y,c.y,q)-Math.sin(q*Math.PI)*90,r:lerp(52,Math.max(F.w,F.h)*.62,ez(q)),rot:q*Math.PI*4}; };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=setK(ms);
+    if(k>0) { gfx.globalAlpha=k; for(const f of list) { const q=ST.foe(f),x=q.x+(f.ox||0); ring(x,q.base-3,q.w*.42+Math.sin(ms/200+q.x)*2,6,3,FOAM); } gfx.globalAlpha=1; }
+    // the rod in Tom's hand (until the tangle rolls off)
+    const d=battle.drawnAt&&battle.drawnAt[tom.idx];
+    if(ms>P.walk-100&&ms<P.home) { const h=d?handPt(tsp,sT.f,d.cx,d.base,-1):th;
+      let a=1.05; if(ms>P.walk&&ms<P.back) a=lerp(1.05,2.2,ez(seg(ms,P.walk,P.back))); else if(ms>=P.back&&ms<P.cast) a=2.2; else if(ms>=P.cast&&ms<P.boom) a=lerp(2.2,.5,ez(seg(ms,P.cast,P.boom)));
+      else if(ms>=P.boom&&ms<P.roll) a=.75+[P.tug1,P.tug2,P.tug3].reduce((m,t)=>m+(ms>t-120&&ms<t+260?-.25*Math.sin(seg(ms,t-120,t+260)*Math.PI):0),0);
+      const Lr=96,tip={x:h.x-Math.cos(a)*Lr,y:h.y-Math.sin(a)*Lr};
+      gfx.lineCap='round'; for(const [w,c] of [[6,OUT],[3,ROD]]) Ln(h.x,h.y,tip.x,tip.y,w,c); EO(h.x-6,h.y+2,4,4,'#9aa0a8');
+      // the line: out to the water on the cast; a mess into the tangle after the boom
+      const r=rOf(ms),T=ms<P.roll?hold(ms):wrapAt(ms);
+      if(ms>P.cast&&ms<P.boom) { const q=seg(ms,P.cast,P.boom); Ln(tip.x,tip.y,lerp(tip.x,PL-60,q),lerp(tip.y,wTop+10,q)-Math.sin(q*Math.PI)*40,1.6,'#eef4f6'); }
+      if(ms>=P.boom&&ms<P.wrap) { gfx.strokeStyle='#eef4f6'; gfx.lineWidth=1.6; gfx.beginPath(); gfx.moveTo(tip.x,tip.y); gfx.quadraticCurveTo(tip.x-20,tip.y+30,T.x,T.y-(ms<P.roll?r*.6:0)); gfx.stroke();
+        gfx.beginPath(); gfx.moveTo(h.x-6,h.y+2); gfx.quadraticCurveTo(h.x-10,h.y+20,T.x+(ms<P.roll?r*.5:0),T.y); gfx.stroke(); } }
+    // the bird's nest
+    if(ms>P.boom&&ms<P.roll) { const H=hold(ms),r=rOf(ms),jig=[P.tug1,P.tug2,P.tug3].some(t=>ms>t&&ms<t+260)?Math.sin(ms/30)*3:0; nest(H.x+jig,H.y,r,r*.82,ms/1000,3); }
+    if(ms>=P.roll&&ms<P.wrap) { const W=wrapAt(ms); gfx.save(); gfx.translate(W.x,W.y); gfx.rotate(W.rot); nest(0,0,W.r,W.r*.82,ms/1000,3); gfx.restore(); }
+    // wrapped: the net of line over the monster, tight, wriggling
+    if(ms>=P.wrap&&ms<P.end-80) { const a=1-seg(ms,P.home+200,P.end-80),sq=ms<P.hit?1:1-.08*Math.abs(Math.sin((ms-P.hit)/90))*(1-seg(ms,P.hit,P.home));
+      tgt.fsc=ms<P.home?.9+.02*Math.sin(ms/70):lerp(.9,1,seg(ms,P.home,P.end-80)); tgt.oy=F.h/2*(1-tgt.fsc); tgt.spin=ms<P.home?Math.sin(ms/80)*.05:0; tgt.spinAt=performance.now();
+      nest(F.x,F.top+F.h*.52+tgt.oy,F.w*.6*sq,F.h*.58*sq,ms/1000,3,a); }
+  }});
+  ST.play(E2,[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Cattail Pier. Boppy lets Tom use his good rod. Once.'); B2.aim=null; S('click'); }],
+    [P.cast,()=>{ S('whoosh'); S('reel'); }],
+    [P.boom,()=>{ S('boing'); S('crash'); word('SPROING!',th.x-30,40,'#eef4f6',4,.8); setMessage('The reel explodes into a giant bird’s nest.'); }],
+    [P.bline,()=>{ say('boppy','dc2'); }],
+    [P.tug1,()=>{ S('squeak'); setMessage('Boppy tries to fix it. It gets worse.'); }],
+    [P.tug2,()=>{ S('squeak'); S('sulk'); word('WORSE.',bxAt(P.tug2),Math.max(80,sb-BH-30),CREAM,3,.6); setMessage('Bigger. Much worse.'); }],
+    [P.tug3,()=>{ S('squeak'); word('WORSER.',bxAt(P.tug3),Math.max(80,sb-BH-30),CREAM,3,.6); setMessage('It is the size of a beach ball now.'); }],
+    [P.tline,()=>{ say('tom','dcboppy2'); }],
+    [P.roll,()=>{ S('whoosh'); setMessage('The whole tangle rolls off the rod.'); }],
+    [P.wrap,()=>{ S('reel'); S('thud'); ST.jolt(tgt,.4); }],
+    [P.hit,()=>{ S('splash'); S('bonk'); battle.shakeEnemy=.6; word('WRAPPED!',F.x,40,GOLD,4,.9); scene('tb_rings',.6,{x:F.x,y:F.mid,r:56,c:FOAM,w:3});
+      setMessage('It wraps the monster up like a net.'); landHit(100); E2.apply(); }],
+    ['hf',P.hit],
+    [P.hit+700,()=>{ S('sulk'); }],
+    [P.end,'end',()=>{ tgt.fsc=0; tgt.oy=0; tgt.ox=0; tgt.spin=0; return (E2.result||'')+' Boppy says that was his good reel.'; }]]);
+};
+// ---------- Last Train Home (Tom + TNB, Director's Cut of tier 2) ----------
+// A subway platform. The last train home is in, and the doors are closing. Tom and TNB sprint for it; TNB gets there
+// first and jams his longboard in the doors, then crouches so Tom can dive over him and through. TNB yanks the board and
+// hops in, and the doors slam shut on the monsters trying to squeeze on after them. The train pulls out with the two of
+// them waving in the windows (a kiss and a heart), and they are home. Effects (no damage): every enemy warms up, the
+// party loses its debuffs, and Tom and TNB get a quicker next turn.
+const DOORC='#b8bec8';
+B2_TOMBO_ANIM.tnb2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,NW=nsp.idle[0].length*nsp.scale;
+  const sb=cl(GR.base+4,236,300),fl=sb-6,top=fl-160,dX=cl(GR.x1+56,GR.x1+44,460);
+  const L=660,xS=dX-(L-90),travel=dX+130,nX=dX+34,tTo=dX+88;
+  const P={close0:1300,run0:1200,jam:1900,nline:2000,tline:2500,crouch:2850,tarr:3000,dive:3150,inn:3500,pull:3750,hop:3800,hopEnd:4000,slam:4150,
+    lunge:3800,kiss:4450,go:4700,out:5600,dark:5450,home:5800,apply:6000,end:6700};
+  // the doors: open, closing, stopped by the board (shoving at it), bounced open by Tom's dive, then SLAM
+  const gapOf=ms=>{ if(ms<P.close0) return 50; if(ms<P.jam) return lerp(50,14,ez(seg(ms,P.close0,P.jam)));
+    if(ms<P.hopEnd) { let g=14; if(ms<P.dive) g-=2*Math.abs(Math.sin((ms-P.jam)/140)); if(ms>P.dive&&ms<P.dive+500) g+=18*Math.sin(seg(ms,P.dive,P.dive+500)*Math.PI); return g; }
+    return lerp(14,0,Math.pow(seg(ms,P.hopEnd,P.slam),2)); };
+  const offOf=ms=>ms<P.go?0:-travel*Math.pow(seg(ms,P.go,P.out),2);
+  const sT={x:tTo,b:sb,f:tsp.idle,hide:false},sN={x:nX,b:sb+4,f:nsp.idle,hide:false};
+  // Tom: jogs over (slowly, sweating), pants, dives head first through the doors, and is inside until he is home
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle,rot=0,hide=false;
+    if(ms<P.run0) f=ms>P.close0-200?sp.expr:sp.idle;
+    else if(ms<P.tarr) { const k=seg(ms,P.run0,P.tarr); x=lerp(c.origX,tTo,k); y=lerp(c.origBase,sb,k)+ffHop(ms,P.run0,P.tarr)*1.4; f=sp.act; }
+    else if(ms<P.dive) { x=tTo; y=sb+Math.abs(Math.sin((ms-P.tarr)/110))*2; f=sp.expr; }
+    else if(ms<P.inn) { const k=seg(ms,P.dive,P.inn); x=lerp(tTo,dX-6,ez(k)); y=lerp(sb,fl-20,k)-Math.sin(k*Math.PI)*56; rot=-Math.PI/2*ez(Math.min(1,k*1.7)); f=sp.celeb; }
+    else if(ms<P.home) hide=true;
+    else { const k=seg(ms,P.home,P.home+320); y=c.origBase-Math.sin(k*Math.PI)*22; f=k<1?sp.celeb:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; sT.hide=hide; return {cx:x,base:y,frame:f,rot,hide,noShadow:hide||(ms>P.dive&&ms<P.inn)}; });
+  // TNB: sprints to the doors, jams the board, crouches for Tom, yanks the board and hops in after him
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nX,y=sb+4,f=sp.act||sp.idle,hide=false;
+    if(ms<P.run0) { x=c.origX; y=c.origBase; f=ms>P.close0-200?(sp.expr||sp.idle):sp.idle; }
+    else if(ms<P.jam-150) { const k=ez(seg(ms,P.run0,P.jam-150)); x=lerp(c.origX,nX,k); y=lerp(c.origBase,sb+4,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
+    else if(ms<P.crouch) f=ms<P.jam?(sp.throw||sp.act):sp.act;
+    else if(ms<P.pull) f=sp.kneel||sp.act;
+    else if(ms<P.hop) f=sp.act;
+    else if(ms<P.hopEnd) { const k=seg(ms,P.hop,P.hopEnd); x=lerp(nX,dX+2,k); y=sb+4-Math.sin(k*Math.PI)*30; f=sp.celeb||sp.idle; }
+    else if(ms<P.home) hide=true;
+    else { const k=seg(ms,P.home,P.home+320); x=c.origX; y=c.origBase-Math.sin(k*Math.PI)*22; f=k<1?(sp.celeb||sp.idle):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; sN.hide=hide; return {cx:x,base:y,frame:f,hide,noShadow:hide}; });
+  const tunK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.dark,P.dark+450)));
+  // a window on the car with someone looking out of it (sprite clipped to the glass)
+  const win=(x,y,w,h,who,ms)=>{ RO(x,y,w,h,'#5a7a9a'); R(x+2,y+2,w-4,6,'#8ab0d0');
+    if(who) { const sp=who==='tom'?tsp:nsp,fr=(Math.floor(ms/260)%2)?(sp.celeb||sp.idle):sp.idle,sw=fr[0].length*sp.scale;
+      gfx.save(); gfx.beginPath(); gfx.rect(x,y,w,h); gfx.clip(); drawSprite(fr,sp.pal,x+w/2-sw/2,y+6,sp.scale); gfx.restore(); }
+    gfx.globalAlpha=.3; R(x,y,w,7,'#ffffff'); gfx.globalAlpha=1; };
+  // the car (side view, facing left), door centre at dX+off
+  const car=(off,ms)=>{ const x0=xS+off,x1=x0+L,dx=dX+off,bot=fl+16,g=gapOf(ms);
+    gfx.beginPath(); gfx.moveTo(x0+30,top); gfx.lineTo(x1,top); gfx.lineTo(x1,bot); gfx.lineTo(x0,bot); gfx.lineTo(x0,top+46); gfx.quadraticCurveTo(x0+2,top+4,x0+30,top); gfx.closePath();
+    gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.lineJoin='round'; gfx.stroke(); gfx.fillStyle=SILVER; gfx.fill();
+    gfx.save(); gfx.clip(); R(x0,top,L,10,'#e4e8ee'); R(x0,fl-40,L,10,METRO_RED); R(x0,fl-30,L,2,'#f06a70'); R(x0,fl-28,L,44,SILVER2);
+    for(let x=dx-210;x>x0;x-=190) R(x,top,2,bot-top,'#7a808c'); gfx.restore();
+    for(let x=x0+120;x<x1-30;x+=120) RO(x,top-6,40,6,'#8a909c');
+    // windows: TNB and Tom wave from the two nearest the door once they are on
+    const on=ms>P.slam;
+    win(dx-176,top+22,54,46,on?'tnb':null,ms); win(dx-110,top+22,54,46,on?'tom':null,ms);
+    for(let x=dx-260;x>x0+20;x-=80) win(x,top+22,54,46,null,ms);
+    label('LAST TRAIN',dx-140,fl-38,'#ffffff',1);
+    // the doorway: lit inside, then the two panels
+    RO(dx-27,top+14,54,fl-top-14,'#e8dcae'); R(dx-25,top+16,50,12,'#fff4c8'); Ln(dx-14,top+30,dx-14,fl-6,2,'#9aa1ae'); Ln(dx+14,top+30,dx+14,fl-6,2,'#9aa1ae');
+    for(const s of [-1,1]) { const inner=dx+s*g/2,outer=dx+s*25,a=Math.min(inner,outer),w=Math.abs(outer-inner); if(w<1) continue;
+      R(a,top+14,w,fl-top-14,DOORC); R(a,top+14,w,3,'#f4e04a');
+      const wx=s<0?a+3:a+w-17; if(w>18) { RO(wx,top+28,14,40,'#5a7a9a'); R(wx,top+28,14,5,'#8ab0d0'); } }
+    Ln(dx-g/2,top+14,dx-g/2,fl,2,OUT); Ln(dx+g/2,top+14,dx+g/2,fl,2,OUT);
+    gfx.strokeStyle=OUT; gfx.lineWidth=3; gfx.strokeRect(dx-27,top+14,54,fl-top-14);
+    // a door light: red while closing
+    const blink=ms>P.close0&&ms<P.slam+200&&Math.floor(ms/180)%2; EO(dx,top+6,4,4,blink?'#ff4a4a':'#7a2a2a'); };
+  // back layer: tunnel wall with subway tiles and the METRO sign, the car, then the platform in front of it
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=tunK(ms); if(k<=0) return;
+    gfx.globalAlpha=k*.8; R(0,0,576,324,'#14121c'); gfx.globalAlpha=k;
+    const ty0=Math.max(8,top-40),ty1=fl; R(0,ty0,576,ty1-ty0,'#d8dcd4');
+    for(let y=ty0;y<ty1;y+=10) R(0,y,576,1,'#a8aca4'); for(let y=ty0,r=0;y<ty1;y+=10,r++) for(let x=(r%2)*10;x<576;x+=20) R(x,y,1,10,'#a8aca4');
+    R(0,ty0,576,4,'#5a5e66'); R(0,ty0+30,576,8,METRO_RED);
+    const sx=cl(GR.x0+40,80,300),sy=Math.max(10,ty0-44); RO(sx-62,sy,124,30,METRO_RED); R(sx-60,sy+2,120,4,'#f06a70');
+    EO(sx-44,sy+15,10,10,'#ffffff'); label('M',sx-44,sy+11,METRO_RED,2); label('METRO',sx+12,sy+10,'#ffffff',2);
+    const off=offOf(ms); if(xS+off+L>-10) car(off,ms);
+    R(0,fl,576,324-fl,'#8a8e96'); for(let x=0;x<576;x+=48) R(x,fl+10,2,324-fl,'#7a7e86');
+    R(0,fl,576,7,'#f4d03a'); for(let x=3;x<576;x+=8) R(x,fl+2,3,3,'#c8a42a'); R(0,fl+7,576,2,OUT);
+    gfx.globalAlpha=1; }});
+  // front layer: the longboard in the doors, Tom's sweat, the kiss heart, the monsters' lunge and bonk, speed lines
+  const shift=o3.map(o=>cl(dX-30-(o.q.x+o.q.w*.42),0,80));
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    if(ms>P.jam-150&&ms<P.pull) { const k=ez(seg(ms,P.jam-150,P.jam)),h=handPt(nsp,nsp.throw||nsp.act,nX,sb+4,-1);
+      longboard(lerp(h.x,dX,k),lerp(h.y,fl-64,k),lerp(.2,Math.PI/2,k)+(ms>P.jam&&ms<P.dive?Math.sin(ms/45)*.03:0)); }
+    else if(ms>=P.pull&&ms<P.hopEnd&&!sN.hide) { const h=handPt(nsp,sN.f,sN.x,sN.b,-1); longboard(h.x+6,h.y-4,-.3); }
+    if(ms>P.run0+300&&ms<P.dive) for(let j=0;j<2;j++) { const q=((ms/380)+j*.5)%1; gfx.globalAlpha=1-q; E(sT.x+14+j*9,sT.b-TH*.82+q*26,2.4,3.4,'#9fd8ff'); }
+    gfx.globalAlpha=1;
+    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100),hx=dX-115+offOf(ms); gfx.globalAlpha=fade(q,.7); heart(hx,top+10-q*30,lerp(6,13,ez(q*3)),PINK); gfx.globalAlpha=1; }
+    if(ms>P.go&&ms<P.out) { gfx.globalAlpha=.7; for(let j=0;j<5;j++) { const y=top+14+j*26,x=xS+offOf(ms)+L+20+((ms*.9+j*53)%110); Ln(x,y,x+60,y,3,'#ffffff'); } gfx.globalAlpha=1; }
+    // the monsters rush the doors, get the doors slammed in their faces, and bounce back
+    o3.forEach((o,i)=>{ const f=o.f,L2=ez(seg(ms,P.lunge+i*60,P.slam)),B=ez(seg(ms,P.slam+250,P.slam+750)); if(ms<P.lunge||ms>P.end-60) return;
+      const sq=ms>P.slam&&ms<P.slam+220?1-.14*Math.sin(seg(ms,P.slam,P.slam+220)*Math.PI):1;
+      f.ox=shift[i]*L2*(1-B)-(ms>P.slam&&ms<P.slam+250?6*Math.sin(seg(ms,P.slam,P.slam+250)*Math.PI):0);
+      f.oy=-Math.abs(Math.sin(L2*Math.PI*2))*8*(1-B)+o.q.h/2*(1-sq); f.fsc=sq<1?sq:0; f.spin=0; f.spinAt=performance.now();
+      if(ms>P.slam&&ms<P.slam+1000) for(let j=0;j<3;j++) { const a=ms/240+j*2.1; star(o.q.x+f.ox+Math.cos(a)*o.q.w*.36,o.q.top-10+Math.sin(a)*5,4,j%2?GOLD:'#fffbe6'); } });
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! The last train home. It is already here.'); B2.aim=null; S('rumble'); }],
+    [1150,()=>{ S('chime2'); word('DING DONG',dX-40,Math.max(80,top-16),CREAM,3,.8); }],
+    [P.close0,()=>{ S('creak'); setMessage('Stand clear of the closing doors.'); }],
+    [P.run0+100,()=>{ S('whoosh'); }],
+    [P.jam,()=>{ S('clang'); S('bump'); word('CLUNK!',dX,Math.max(80,top-16),'#dfe6f2',4,.6); setMessage('TNB jams his longboard in the doors.'); }],
+    [P.nline,()=>{ say('tnb','dc2'); }],
+    [P.jam+500,()=>{ S('bump'); }],[P.jam+900,()=>{ S('bump'); }],
+    [P.tline,()=>{ say('tom','dctnb2'); setMessage('Tom is coming. At his own pace.'); }],
+    [P.crouch,()=>{ setMessage('TNB ducks. Tom goes for it.'); }],
+    [P.dive,()=>{ S('slideWhistle'); word('DIVE!',dX+40,40,GOLD,5,.8); }],
+    [P.inn,()=>{ S('thud'); }],
+    [P.pull,()=>{ S('whoosh'); }],
+    [P.hopEnd,()=>{ S('jumpWhistle'); }]];
+  steps.push([P.slam,()=>{ S('crash'); S('clang'); battle.shakeEnemy=.6; word('SLAM!',dX,66,'#dfe6f2',5,.9); scene('tb_rings',.6,{x:dX,y:fl-70,r:60,c:'#dfe6f2',w:3});
+    setMessage('The doors slam shut on the monsters. They wanted that train too.');
+    for(const o of o3) { ST.jolt(o.f,.3); for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*18,y1:o.q.top-24,arc:10,spin:false,r:6,t:-j*.05,dur:.7}); }
+  }]);   // the warmth and the fx land together once the pair is home (a kind Tombo's first landHit lands everything)
+  steps.push(['hf',P.slam]);
+  steps.push([P.kiss,()=>{ S('kiss'); setMessage('They made it. A kiss in the window.'); }]);
+  steps.push([P.go,()=>{ S('toot'); S('rumble'); }]);
+  steps.push([P.dark,()=>{ word('NEXT STOP: HOME',288,72,CREAM,3,.95); }]);
+  steps.push([P.home,()=>{ S('ding'); }]);
+  steps.push([P.apply,()=>{ landHit(100); E2.apply(); S('heal'); S('chime2'); setMessage('Home. The monsters cool right off, and everybody shakes off the day.');
+    for(const o of o3) scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:PINK,w:3});
+    for(const p of party) { const q2=ST.unit(p); scene('glow',.9,{x:q2.x,y:q2.mid,rx:38,ry:52,c:'#ffd6a0',a:.35}); } }]);
+  steps.push([P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.fsc=0; o.f.spin=0; } return (E2.result||'')+' Tom says he did not run. He hurried.'; }]);
+  ST.play(E2,steps);
+};
+// ---------- Nara, No! (Tom + Nara, Director's Cut of tier 2) ----------
+// Zoomies. Nara play-bows, then tears around the room in two big laps, bowling through every monster, while Tom stands
+// in the middle saying "Nara, no" each time she goes by. She stops, sits at his feet, and looks extremely proud. Effects:
+// a Kinetic hit on every enemy (the first lap does the damage) that stops their wind-ups.
+B2_TOMBO_ANIM.nara2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list);
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const sb=cl(GR.base+4,236,300),tx=cl(GR.x1+150,GR.x1+120,470);
+  const bases=o3.map(o=>o.q.base),yB=cl(Math.max(sb,...bases)+12,240,316),yT=cl(Math.min(...bases)-8,150,yB-50);
+  const xL=Math.max(28,GR.x0-40),xR=Math.min(556,tx+74),cx=(xL+xR)/2,rx=(xR-xL)/2,cy=(yT+yB)/2,ry=(yB-yT)/2;
+  const P={walk:650,bow:750,nline:900,z0:1700,tline:1900,z1:4700,sit:5050,pet:5350,good:5450,home:5950,end:6650};
+  const th0=Math.PI/2-.55,LAPS=2,thOf=ms=>th0+LAPS*Math.PI*2*ez(seg(ms,P.z0,P.z1));
+  const ptOf=th=>({x:cx+rx*Math.cos(th),y:cy+ry*Math.sin(th)});
+  const start=ptOf(th0),sitX=tx-46;
+  // when she runs past each monster (on the leg nearest its feet) and past Tom, sampled along the laps
+  const hits=[],toms=[]; { let prev=ptOf(thOf(P.z0));
+    for(let ms=P.z0+5;ms<=P.z1;ms+=5) { const th=thOf(ms),p=ptOf(th),down=Math.sin(th)>0;
+      o3.forEach((o,i)=>{ const low=o.q.base>=cy; if(low!==down) return; if((prev.x-o.q.x)*(p.x-o.q.x)<=0&&prev.x!==p.x) hits.push({t:ms,o,i,dir:p.x<prev.x?-1:1}); });
+      if((prev.x-tx)*(p.x-tx)<=0&&prev.x!==p.x&&ms>P.z0+200) toms.push({t:ms,down});
+      prev=p; } }
+  const lapEnd=P.z0+(P.z1-P.z0)/2,first=hits.filter(h=>h.t<lapEnd);
+  const sT={x:tx,b:sb},sN={x:start.x,b:start.y,dir:-1};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      const nearPass=toms.some(p=>ms>p.t-150&&ms<p.t+450);
+      if(ms<P.z0) f=sp.idle;
+      else if(ms<P.z1) { f=sN.x>tx+4?sp.flip:sp.idle; if(nearPass) f=sp.act; }
+      else if(ms<P.sit) f=sp.expr;
+      else if(ms<P.pet) f=sp.idle;
+      else if(ms<P.home-200) f=sp.kneel; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=start.x,y=start.y,f=sp.idle,rot=0,dir=-1;
+    if(ms<P.walk) { const k=ez(ms/P.walk),d=start.x>c.origX?1:-1; x=lerp(c.origX,start.x,k); y=lerp(c.origBase,start.y,k)-Math.abs(Math.sin(c.t*16))*4; f=k<1?runFr(sp,c.t,d):sp.idle; dir=d; }
+    else if(ms<P.z0) { f=ms>P.bow?(sp.wind||sp.aim||sp.idle):sp.idle; rot=ms>P.bow?Math.sin(ms/55)*.08:0; y=start.y+(ms>P.bow?Math.abs(Math.sin(ms/110))*2:0); }
+    else if(ms<P.z1) { const th=thOf(ms),p=ptOf(th),dx=-Math.sin(th); dir=dx<0?-1:1; x=p.x; y=p.y-Math.abs(Math.sin(c.t*20))*5; f=runFr(sp,c.t*1.6,dir); rot=dir*.08; }
+    else if(ms<P.sit) { const k=ez(seg(ms,P.z1,P.sit)); x=lerp(start.x,sitX,k); y=lerp(start.y,sb+4,k)-Math.abs(Math.sin(c.t*16))*3; dir=sitX>start.x?1:-1; f=k<1?runFr(sp,c.t,dir):(sp.sit||sp.idle); }
+    else if(ms<P.home) { x=sitX; y=sb+4-(ms<P.sit+500?Math.abs(Math.sin((ms-P.sit)/90))*4:0); f=sp.sit||sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)),d=c.origX>sitX?1:-1; x=lerp(sitX,c.origX,k); y=lerp(sb+4,c.origBase,k)-(k<1?Math.abs(Math.sin(c.t*16))*4:0); f=k<1?runFr(sp,c.t,d):sp.idle; dir=d; }
+    sN.x=x; sN.b=y; sN.dir=dir; return {cx:x,base:y,frame:f,rot}; });
+  // dust, speed lines, the bowled monsters, the proud little sparkle
+  const trail=[];
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    if(ms>P.z0&&ms<P.z1+100) { trail.push({x:sN.x,y:sN.b,t:ms}); while(trail.length&&ms-trail[0].t>380) trail.shift();
+      for(const d of trail) { const q=(ms-d.t)/380; gfx.globalAlpha=(1-q)*.55; E(d.x-sN.dir*6,d.y-3-q*8,4+q*8,3+q*5,'#d8cbb0'); }
+      gfx.globalAlpha=.75; for(let j=0;j<3;j++) { const yy=sN.b-NH*.3-j*10,xx=sN.x-sN.dir*(NH*.45+8+j*5); Ln(xx,yy,xx-sN.dir*(18+j*6),yy,3,CREAM); } gfx.globalAlpha=1; }
+    for(const o of o3) { const f=o.f,h=hits.filter(h=>h.o===o&&ms>=h.t&&ms<h.t+640).pop();
+      if(h) { const k=seg(ms,h.t,h.t+640); f.oy=-Math.sin(k*Math.PI)*46; f.ox=h.dir*Math.sin(k*Math.PI)*18; f.spin=h.dir*-k*Math.PI*2; f.spinAt=performance.now(); }
+      else if(f.spin||f.oy||f.ox) { f.spin=0; f.oy=0; f.ox=0; } }
+    if(ms>P.sit&&ms<P.home) { const q=((ms-P.sit)/600)%1; gfx.globalAlpha=1-q; star(sitX+18,sb+4-NH-4-q*10,3+q*2,GOLD); star(sitX-16,sb+4-NH+4-q*12,2.5+q*2,'#fffbe6'); gfx.globalAlpha=1; }
+    if(ms>P.pet&&ms<P.pet+1100) { const q=seg(ms,P.pet,P.pet+1100); gfx.globalAlpha=fade(q,.7); heart((sT.x+sitX)/2,Math.min(sT.b-TH*.7,sb+4-NH)-10-q*26,lerp(7,14,ez(q*3)),PINK); gfx.globalAlpha=1; }
+  }});
+  const NO=['NARA, NO.','NARA.','NO.','NARA!'];
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Nara has a look in her eye.'); B2.aim=null; S('click'); }],
+    [P.bow,()=>{ S('bark'); setMessage('Butt up. Tail going. Uh oh.'); }],
+    [P.nline,()=>{ say('nara','dc2'); }],
+    [P.z0,()=>{ S('whoosh'); S('bark'); word('ZOOMIES!',GR.x,40,GOLD,5,1); setMessage('ZOOMIES. She tears around the room.'); }],
+    [P.tline,()=>{ say('tom','dcnara2'); }],
+    [P.z1,()=>{ S('brakes'); }],
+    [P.sit,()=>{ S('bark'); E2.apply(); setMessage('She stops. She sits. She is extremely proud of herself.'); }],
+    [P.good,()=>{ S('chime2'); word('GOOD GIRL.',(sT.x+sitX)/2,Math.max(80,sb-TH-34),PINK,3,.9); }],
+    [P.end,'end',()=>{ for(const o of o3) { o.f.spin=0; o.f.oy=0; o.f.ox=0; } return (E2.result||'')+' Tom says that was a no. Nara heard a yes.'; }]];
+  toms.slice(0,NO.length).forEach((p,i)=>steps.push([p.t,()=>{ word(NO[i],tx,i%2?Math.max(80,sb-TH-40):Math.max(96,sb-TH-24),CREAM,3,.55); }]));
+  hits.forEach(h=>steps.push([h.t,()=>{ S('bonk'); S('whoosh'); ST.jolt(h.o.f,.5); scene('dust',.5,{x:h.o.q.x,y:h.o.q.base,n:6,sp:30,up:10});
+    if(first.includes(h)) { battle.shakeEnemy=.5; landHit(split100(first.indexOf(h),first.length)); } }]));
+  steps.push(['hf',first.length?first[0].t:P.z0+300]);
+  ST.play(E2,steps);
+};
+// ---------- Shadow Squishy (Tom + Grace, Director's Cut of tier 3) ----------
+// Lights out. Tom clicks on a little reading lamp and makes a shadow bunny on the wall above the monsters: floppy ears,
+// one of them bent, very modern. Grace says no, like THIS, and fixes it into a perfect shadow dumpling (its eyes and smile
+// are light shining through). The lamp light spreads across the whole wall and the shadow dumpling grows with it; the
+// monster under it panics and ducks, and the giant shadow squishes down on it. Effects: a Sparkle hit on one enemy (it
+// warms up) and a Close-Up on it (the next damaging hit counts double).
+let shadowImg=null;
+const shadowSq=()=>{ if(shadowImg) return shadowImg; const rows=SQUISHY,w=rows[0].length,h=rows.length,P=4,c=document.createElement('canvas');
+  c.width=w*P; c.height=h*P; const g=c.getContext('2d');
+  for(let r=0;r<h;r++) for(let q=0;q<w;q++) { const ch=rows[r][q]; if(ch==='.'||ch==='e'||ch==='m') continue; g.fillStyle='#1c1428'; g.fillRect(q*P,r*P,P,P); }
+  return shadowImg=c; };
+const SHADE='#1c1428',LAMPLIT='#fff1cb';
+// Tom's shadow bunny, facing left, head at x,y. wob: ear flop. Wrist and arm trail off to the lower right.
+const shBunny=(x,y,s,wob,a)=>{ if(a<=0) return; gfx.save(); gfx.translate(x,y); gfx.scale(s,s); gfx.globalAlpha=a; gfx.fillStyle=SHADE;
+  gfx.beginPath(); gfx.moveTo(6,8); gfx.lineTo(18,0); gfx.lineTo(110,92); gfx.lineTo(70,110); gfx.closePath(); gfx.fill();
+  E(0,0,21,15,SHADE); E(-17,4,10,7.5,SHADE);
+  gfx.save(); gfx.translate(2,-10); gfx.rotate(-.32+wob*.25); E(0,-15,6,17,SHADE); gfx.restore();
+  gfx.save(); gfx.translate(12,-9); gfx.rotate(.4); E(0,-8,5.5,10,SHADE); gfx.translate(0,-16); gfx.rotate(1.25+wob); E(0,-6,5,8,SHADE); gfx.restore();
+  E(-8,-3,2.2,2,LAMPLIT); gfx.restore(); gfx.globalAlpha=1; };
+// the reading lamp on the floor, its shade tipped up and to the left. Returns where the light comes out.
+const readLamp=(x0,b0,on)=>{ gfx.save(); gfx.translate(x0,b0); gfx.scale(1.35,1.35); const x=0,b=0; E(x,b-2,14,4,OUT); E(x,b-3,12,3,'#5a6270'); Ln(x,b-4,x+4,b-30,5,OUT); Ln(x,b-4,x+4,b-30,2.5,'#8a92a0');
+  gfx.save(); gfx.translate(x+4,b-32); gfx.rotate(-.7); gfx.beginPath(); gfx.moveTo(-4,-6); gfx.lineTo(-18,-12); gfx.lineTo(-18,12); gfx.lineTo(-4,6); gfx.closePath();
+  gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#3c7a6a'; gfx.fill(); if(on) { gfx.globalAlpha=.9; E(-18,0,3,11,LAMPLIT); gfx.globalAlpha=1; } gfx.restore(); gfx.restore();
+  return {x:x0+(4-18*Math.cos(.7))*1.35,y:b0+(-32+18*Math.sin(.7))*1.35}; };
+B2_TOMBO_ANIM.grace3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
+  const by=cl(Math.max(GR.base,ST.unit(tom).base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+30,gx=mx-30,lx=tx+44;
+  const P={walk:650,lamp:800,bunny:1200,bunnyUp:1500,ghop:1950,gline:2100,fix:2600,morph:2700,morphEnd:3150,tline:3300,grow:3900,grown:4700,panic:4300,hide:4850,
+    boo:5250,apply:5450,lights:5650,home:6050,end:6750};
+  // the lit patch on the wall: small over the monsters, then the whole wall
+  const W0={x:cl(GR.x,110,430),y:cl(GR.top-34,70,150)},W1={x:288,y:150};
+  const patch=ms=>{ const on=ez(seg(ms,P.lamp,P.lamp+250)),k=ez(seg(ms,P.grow,P.grown)); return {x:lerp(W0.x,W1.x,k),y:lerp(W0.y,W1.y,k),rx:lerp(84,460,k)*on,ry:lerp(60,300,k)*on}; };
+  // the shadow dumpling: centre, scale, squash
+  const D0={x:W0.x-8,y:W0.y+4,s:1.3},D1={x:cl(F.x,150,430),y:cl(F.top-46,100,160),s:3.4};
+  const dumpAt=ms=>{ const k=ez(seg(ms,P.grow,P.grown)); let x=lerp(D0.x,D1.x,k),y=lerp(D0.y,D1.y,k),s=lerp(D0.s,D1.s,k),sq=0;
+    if(ms<P.morphEnd) { const q=seg(ms,P.morph,P.morphEnd); s*=lerp(.6,1,ez(q)); sq=.35*Math.sin(q*Math.PI); }
+    if(ms>P.panic&&ms<P.boo) y-=Math.sin(seg(ms,P.panic,P.boo)*Math.PI)*10;   // it rears up a little
+    if(ms>P.boo&&ms<P.boo+500) { const q=seg(ms,P.boo,P.boo+500); sq=.45*Math.sin(q*Math.PI)*(1-q*.5); y+=18*Math.sin(q*Math.PI); s*=1+.1*Math.sin(q*Math.PI); }
+    if(ms>P.lights) { const q=ez(seg(ms,P.lights,P.home)); s*=1-q*.4; }
+    return {x,y,s,sq}; };
+  const sT={x:tx,b:by},sG={x:gx,b:by};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { f=ms>P.bunny&&ms<P.fix?sp.act:(ms>=P.fix&&ms<P.tline+700?sp.expr:(ms>P.boo&&ms<P.boo+700?sp.celeb:sp.idle));
+      if(ms>P.boo&&ms<P.boo+700) y-=Math.abs(Math.sin(seg(ms,P.boo,P.boo+700)*Math.PI*2))*6; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) {
+      if(ms>P.bunnyUp&&ms<P.ghop) f=sp.flip;                                     // she turns to look at Tom's bunny
+      else if(ms>=P.ghop&&ms<P.fix) { f=sp.celeb; y-=Math.sin(seg(ms,P.ghop,P.fix)*Math.PI)*12; }
+      else if(ms>=P.fix&&ms<P.grown) f=sp.act;
+      else if(ms>P.boo&&ms<P.boo+800) { f=sp.celeb; y-=Math.abs(Math.sin(seg(ms,P.boo,P.boo+800)*Math.PI*2))*10; } }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(gx,c.origX,k); y=lerp(by,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sG.x=x; sG.b=y; return {cx:x,base:y,frame:f}; });
+  const darkK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.lights,P.home)));
+  // back layer: a dim wall, the warm lamp patch, and the shadows (clipped to the light: no light, no shadow)
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=darkK(ms); if(k<=0) return; dim(k,'#241c34',.6);
+    const p=patch(ms); if(p.rx<=1) return;
+    gfx.save(); gfx.translate(p.x,p.y); gfx.scale(1,p.ry/p.rx); const gr=gfx.createRadialGradient(0,0,p.rx*.55,0,0,p.rx);
+    gr.addColorStop(0,'rgba(255,241,203,'+(.92*k)+')'); gr.addColorStop(1,'rgba(255,241,203,0)'); gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(0,0,p.rx,0,Math.PI*2); gfx.fill(); gfx.restore();
+    gfx.save(); gfx.beginPath(); gfx.ellipse(p.x,p.y,p.rx*.98,p.ry*.98,0,0,Math.PI*2); gfx.clip();
+    // Tom's bunny: wobbly, then it fades as Grace's dumpling takes over
+    if(ms>P.bunny&&ms<P.morphEnd) { const a=ez(seg(ms,P.bunny,P.bunny+250))*(1-seg(ms,P.morph,P.morphEnd))*k,bob=Math.sin(ms/160)*2;
+      shBunny(W0.x+10,W0.y+6+bob,1.25,Math.sin(ms/220)*.5,a*.92); }
+    if(ms>P.morph) { const d=dumpAt(ms),img=shadowSq(),w=img.width*d.s*(1+d.sq*.5),h=img.height*d.s*(1-d.sq*.45),a=ez(seg(ms,P.morph,P.morph+250))*k*(ms>P.lights?1-seg(ms,P.lights,P.home):1);
+      gfx.globalAlpha=a*.92; const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=false; gfx.drawImage(img,d.x-w/2,d.y-h/2,w,h); gfx.imageSmoothingEnabled=sm;
+      // two hand shapes under it (Grace's fingers made it), trailing to the lower right like the bunny's wrist
+      const wa=1-ez(seg(ms,P.grow,P.grow+500)); if(wa>0) { gfx.globalAlpha=a*.92*wa; gfx.fillStyle=SHADE; gfx.beginPath(); gfx.moveTo(d.x+w*.2,d.y+h*.4); gfx.lineTo(d.x+w*.34,d.y+h*.34); gfx.lineTo(d.x+w*.34+300,d.y+h*.34+250); gfx.lineTo(d.x+w*.2+250,d.y+h*.4+300); gfx.closePath(); gfx.fill(); }
+      gfx.globalAlpha=1; }
+    gfx.restore(); }});
+  // front layer: the dark with soft holes, the lamp, its beam, sparkles, the monster panicking
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=darkK(ms),p=patch(ms);
+    if(k>0) { if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
+      const g=darkC.getContext('2d'); g.globalCompositeOperation='source-over'; g.clearRect(0,0,576,324); g.fillStyle='#07060f'; g.fillRect(0,0,576,324);
+      g.globalCompositeOperation='destination-out';
+      const hole=(x,y,rx,ry)=>{ if(rx<=1) return; g.save(); g.translate(x,y); g.scale(1,ry/rx); const gr=g.createRadialGradient(0,0,rx*.4,0,0,rx); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.beginPath(); g.arc(0,0,rx,0,Math.PI*2); g.fill(); g.restore(); };
+      hole(p.x,p.y,p.rx*1.15,p.ry*1.2); hole((sT.x+sG.x)/2+10,by-40,92*ez(seg(ms,0,300))+Math.max(0,p.rx-84)*.2,70);
+      if(ms>P.lamp) hole(lx,by-30,40,34);
+      g.globalCompositeOperation='source-over'; gfx.globalAlpha=.88*k; gfx.drawImage(darkC,0,0); gfx.globalAlpha=1; }
+    if(ms<P.home+300) { const a=ms>P.home?1-seg(ms,P.home,P.home+300):1; gfx.globalAlpha=a*ez(seg(ms,P.walk-100,P.walk+200));
+      const head=readLamp(lx,by,ms>P.lamp&&ms<P.lights);
+      // the beam: from the lamp head to the lit patch
+      if(ms>P.lamp&&ms<P.lights&&p.rx>1) { gfx.globalAlpha=a*.13*k; gfx.fillStyle=LAMPLIT; gfx.beginPath(); gfx.moveTo(head.x,head.y-5); gfx.lineTo(p.x+p.rx*.15,p.y-p.ry*.9); gfx.lineTo(p.x+p.rx*.15,p.y+p.ry*.9); gfx.lineTo(head.x,head.y+5); gfx.closePath(); gfx.fill(); }
+      gfx.globalAlpha=1; }
+    // sparkles when the dumpling comes out perfect
+    if(ms>P.morphEnd-100&&ms<P.morphEnd+700) { const q=seg(ms,P.morphEnd-100,P.morphEnd+700),d=dumpAt(ms);
+      for(let j=0;j<6;j++) { const an=j/6*Math.PI*2+q; gfx.globalAlpha=1-q; star(d.x+Math.cos(an)*(30+q*30),d.y+Math.sin(an)*(22+q*22),2+(j%3),j%2?GOLD:'#fffbe6'); } gfx.globalAlpha=1; }
+    // the monster: shakes, sweats, ducks and scoots away from the shadow, then pulls itself together
+    if(ms>P.panic&&ms<P.home+300) { let ox=0,s=1,spin=0;
+      if(ms<P.hide) { ox=Math.sin(ms/22)*3*seg(ms,P.panic,P.panic+150);
+        for(let j=0;j<2;j++) { const q=((ms-P.panic)/420+j*.5)%1; gfx.globalAlpha=1-q; E(F.x+(j?F.w*.32:-F.w*.3),F.top+6+q*18,2.6,3.8,'#9fd8ff'); } gfx.globalAlpha=1; }
+      else if(ms<P.lights) { const q=ez(seg(ms,P.hide,P.hide+180)); s=1-.3*q; ox=-16*q+Math.sin(ms/30)*1.5; spin=-.12*q; }
+      else { const q=ez(seg(ms,P.lights,P.home+300)); s=.7+.3*q; ox=-16*(1-q); spin=-.12*(1-q); }
+      tgt.ox=ox; tgt.fsc=s<1?s:0; tgt.oy=F.h/2*(1-s); tgt.spin=spin; tgt.spinAt=performance.now(); }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Lights out. Tom has a lamp and an idea.'); B2.aim=null; S('click'); }],
+    [P.lamp,()=>{ S('click'); S('chime2'); }],
+    [P.bunny,()=>{ setMessage('Tom makes a shadow bunny on the wall. It is... a bunny.'); }],
+    [P.bunnyUp,()=>{ S('boing'); word('BUNNY?',sT.x,Math.max(84,by-TH-30),CREAM,3,.8); }],
+    [P.gline,()=>{ say('grace','dc3'); }],
+    [P.fix,()=>{ setMessage('Grace takes over. Fingers here. Thumbs there.'); S('whoosh'); }],
+    [P.morphEnd,()=>{ S('levelChime'); word('PERFECT!',D0.x,40,GOLD,4,.9); setMessage('A perfect shadow dumpling.'); }],
+    [P.tline,()=>{ say('tom','dcgrace3'); }],
+    [P.grow,()=>{ S('slideWhistle'); setMessage('The light spreads. The squishy grows across the whole wall.'); }],
+    [P.panic,()=>{ S('stun'); word('!',F.x,Math.max(60,F.top-20),'#ffffff',5,.6); }],
+    [P.hide,()=>{ S('squeak'); word('EEK!',F.x,66,'#fffbe6',4,.35); setMessage('The monster panics and hides. From a squishy.'); }],
+    [P.boo,()=>{ S('boing'); S('ding'); battle.shakeEnemy=.5; ST.jolt(tgt,.5); word('SQUISH!',D1.x,40,GOLD,5,.9); scene('tb_rings',.7,{x:F.x,y:F.mid,r:70,c:GOLD,w:4});
+      for(let j=0;j<5;j++) battle.props.push({kind:'dheart',x0:F.x,y0:F.mid,x1:F.x+(j-2)*22,y1:F.top-30,arc:14,spin:false,r:6,t:-j*.06,dur:.7});
+      landHit(100); }],
+    ['hf',P.boo],
+    [P.apply,()=>{ E2.apply(); S('heal'); setMessage('Close-up on the monster. The next big hit counts double.'); }],
+    [P.lights,()=>{ S('click'); }],
+    [P.end,'end',()=>{ tgt.ox=0; tgt.fsc=0; tgt.oy=0; tgt.spin=0; return (E2.result||'')+' Tom says his bunny was ahead of its time.'; }]];
+  ST.play(E2,steps);
+};
+// ---------- Lamby Night-Light (Tom + Rose, Director's Cut of tier 3) ----------
+// Bedtime, and the lights are out. Rose huddles with Lamby in the only patch of light; glowing monster eyes blink in the
+// dark. She says Lamby is not scared. Tom comes over, lifts her onto his shoulders, and holds Lamby up like a night-light.
+// Lamby glows brighter and brighter until the dark runs away, and every monster runs with it as the light reaches it.
+// They creep back in, all warm and sheepish. Effects (no damage): every enemy warms up, loses its wind-up and its next
+// turn comes later; the party's mental debuffs clear; Rose stays on Tom's shoulders.
+B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty(),o3=order3(list);
+  const tsp=BATTLE_SPRITES.tom,rsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,RH=rsp.idle.length*rsp.scale;
+  const pMin=Math.min(...party.map(p=>ST.unit(p).x));
+  const rx=cl((GR.x1+pMin)/2-10,GR.x1+44,Math.max(GR.x1+44,pMin-70)),rb=cl(GR.base+4,236,304),tx=rx+30;
+  const hand=handPt(tsp,tsp.act,tx,rb,-1),LF={x:hand.x-4,y:hand.y-20};     // where Tom holds Lamby up
+  const G0=3600,G1=4900,lr=ms=>50+700*Math.pow(seg(ms,G0,G1),2);
+  // each monster runs off when the light reaches it
+  o3.forEach(o=>{ const d=Math.hypot(o.q.x-LF.x,o.q.mid-LF.y); o.t=Math.round(G0+Math.sqrt(cl((d-50)/700))*(G1-G0)); });
+  const lastFlee=Math.max(G0+600,...o3.map(o=>o.t));
+  const P={walk:700,eyes:950,rline:1200,tgo:2000,tarr:2700,lift:2850,seat:3250,hold:3350,tline:3500,glow:4150,back:lastFlee+650,backEnd:lastFlee+1250,
+    apply:lastFlee+1450,home:lastFlee+2150,end:lastFlee+2850};
+  const sT={x:T.x,b:T.base},sR={x:rx,b:rb};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
+    if(ms<P.tgo) f=ms>P.rline+300?sp.expr:sp.idle;
+    else if(ms<P.tarr) { const k=ez(seg(ms,P.tgo,P.tarr)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,rb,k)+ffHop(ms,P.tgo,P.tarr); }
+    else if(ms<P.home) { x=tx; y=rb; f=ms<P.lift+150?sp.kneel:(ms<P.hold?sp.idle:(ms<P.backEnd?sp.act:(ms<P.backEnd+500?sp.celeb:sp.idle))); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(rb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
+  // Rose: walks into the dark, huddles (shivering), then hops onto Tom's shoulders and stays seated (riding spot)
+  const seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=rb,f=sp.kneel;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,rx,k); y=lerp(c.origBase,rb,k)+ffHop(ms,0,P.walk); f=k<1?sp.idle:sp.kneel; }
+    else if(ms<P.lift) { x=rx+Math.sin(ms/28)*1.2*(ms<P.tarr?1:.3); f=ms>P.rline&&ms<P.rline+900?sp.act:sp.kneel; }
+    else if(ms<P.seat) { const k=seg(ms,P.lift,P.seat),s=seatPt(); x=lerp(rx,s.x,ez(k)); y=lerp(rb,s.y,ez(k))-Math.sin(k*Math.PI)*40; f=sp.celeb; }
+    else { const s=seatPt(); x=s.x; y=s.y; f=sp.idle; }
+    sR.x=x; sR.b=y; return {cx:x,base:y,frame:f,noShadow:ms>=P.lift}; });
+  const darkK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,G1-250,G1+350)));
+  const warmK=ms=>ez(seg(ms,G0+400,G1))*(1-ez(seg(ms,P.apply,P.end-100)));
+  // Lamby: in Rose's arms, handed up to Tom, held high and glowing, then back to Rose on his shoulders
+  const glowK=ms=>ez(seg(ms,G0,G1))*(1-ez(seg(ms,P.backEnd,P.home)));
+  const lamAt=ms=>{ const chest={x:sR.x-9,y:sR.b-RH*.4};
+    if(ms<P.lift) return {x:chest.x,y:chest.y,sc:.7};
+    if(ms<P.hold+250) { const k=seg(ms,P.lift,P.hold+250); return {x:lerp(rx-9,LF.x,ez(k)),y:lerp(rb-RH*.4,LF.y,ez(k))-Math.sin(k*Math.PI)*30,sc:lerp(.7,.95,k)}; }
+    const g=ez(seg(ms,G0,G1));
+    if(ms<P.backEnd) return {x:LF.x,y:LF.y-g*10+Math.sin(ms/300)*2,sc:.95+g*.55};
+    const s=seatPt(),k=ez(seg(ms,P.backEnd,P.home)); return {x:lerp(LF.x,s.x-12,k),y:lerp(LF.y-10,s.y-6,k),sc:lerp(1.5,.6,k)}; };
+  // back layer: bedtime sky (moon and stars) under the dark, then a warm lamp-glow wash
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=darkK(ms);
+    if(k>0) { dim(k,'#0a1030',.55); gfx.globalAlpha=k; E(520,56,16,16,'#fff4c8'); E(527,51,14,14,'#0a1030'); 
+      for(let j=0;j<12;j++) { const tw=.5+.5*Math.sin(ms/350+j*1.9); gfx.globalAlpha=k*tw; star((j*97+23)%540+12,30+(j*53)%90,1.5+(j%3),'#fffbe6'); } gfx.globalAlpha=1; }
+    const w=warmK(ms); if(w>0) dim(w,'#ffd98a',.18); }});
+  // front layer: the dark with soft holes, glowing eyes in it, Lamby and its light, the fleeing shadow wisps
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=darkK(ms),L=lamAt(ms),g=glowK(ms),R0=lr(ms);
+    if(k>0) { if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
+      const c=darkC.getContext('2d'); c.globalCompositeOperation='source-over'; c.clearRect(0,0,576,324); c.fillStyle='#04050d'; c.fillRect(0,0,576,324);
+      c.globalCompositeOperation='destination-out';
+      const hole=(x,y,r)=>{ if(r<=1) return; const gr=c.createRadialGradient(x,y,r*.35,x,y,r); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)'); c.fillStyle=gr; c.beginPath(); c.arc(x,y,r,0,Math.PI*2); c.fill(); };
+      hole(sR.x,Math.min(sR.b-RH*.4,rb-RH*.4),ms<P.lift?48:30);                         // the little patch of light Rose is in
+      if(ms>P.tgo-300) hole(sT.x,sT.b-TH*.5,46*ez(seg(ms,P.tgo-300,P.tgo+200)));
+      if(ms>G0-200) hole(L.x,L.y,R0);
+      c.globalCompositeOperation='source-over'; gfx.globalAlpha=.93*k; gfx.drawImage(darkC,0,0); gfx.globalAlpha=1; }
+    // monster eyes in the dark: blinking, until the light finds them (then wide, then gone with the monster)
+    if(ms>P.eyes&&ms<G1+200) for(const o of o3) { const ex=o.q.x,ey=o.q.top+o.q.h*.32,dw=o.q.w*.15,d=Math.hypot(ex-L.x,ey-L.y);
+      if(ms>G0-200&&d<R0*.7) continue; const blink=((ms+o.q.x*7)%2300)<120,a=ez(seg(ms,P.eyes,P.eyes+300))*k;
+      if(a<=0) continue; gfx.globalAlpha=a; for(const s of [-1,1]) { if(blink) Ln(ex+s*dw-3,ey,ex+s*dw+3,ey,2,'#ffe36a'); else { E(ex+s*dw,ey,4,3,'#ffe36a'); E(ex+s*dw-1,ey,1.5,1.8,'#04050d'); } } gfx.globalAlpha=1; }
+    // Lamby and its light
+    if(ms<P.end-100) { const a=ms>P.end-300?seg(P.end-100-ms,0,200):1;
+      if(g>0) { const r=18+g*70; gfx.save(); gfx.translate(L.x,L.y); const gr=gfx.createRadialGradient(0,0,0,0,0,r); gr.addColorStop(0,'rgba(255,240,180,'+(.75*g*a)+')'); gr.addColorStop(1,'rgba(255,240,180,0)'); gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(0,0,r,0,Math.PI*2); gfx.fill();
+        gfx.globalAlpha=g*.55*a; for(let j=0;j<10;j++) { const an=j/10*Math.PI*2+ms/900,r0=20+g*10,r1=r0+16+g*42+Math.sin(ms/120+j)*5; Ln(Math.cos(an)*r0,Math.sin(an)*r0,Math.cos(an)*r1,Math.sin(an)*r1,2.5,GOLD); } gfx.restore(); gfx.globalAlpha=1; }
+      gfx.globalAlpha=a; RFX.plush(L.x,L.y,L.sc,{pose:'held',glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; }
+    // the dark runs away: a few shadow wisps with eyes scurry off to the left once the light grows
+    if(ms>G0+300&&ms<G1+700) for(let j=0;j<5;j++) { const q=seg(ms,G0+300+j*120,G1+300+j*80); if(q<=0||q>=1) continue;
+      const y=90+j*38,x=lerp(Math.min(560,L.x-80-j*10),-60,ez(q)); gfx.globalAlpha=(1-q)*.9; E(x,y,22,13,'#0c0d1a'); E(x+16,y+4,10,7,'#0c0d1a');
+      E(x-8,y-3,3,2.2,'#ffe36a'); E(x+2,y-3,3,2.2,'#ffe36a'); gfx.globalAlpha=1; }
+    // the monsters run left when the light reaches them, then creep back in
+    for(const o of o3) { const f=o.f; if(ms<o.t||ms>P.end-60) continue;
+      let ox=0,oy=0,spin=0;
+      if(ms<P.back) { const q=seg(ms,o.t,o.t+500); ox=-140*ez(q); oy=-Math.abs(Math.sin(q*Math.PI*3))*14*(1-q*.5); spin=.15*Math.sin(q*Math.PI*3); }
+      else { const q=ez(seg(ms,P.back,P.backEnd)); ox=-140*(1-q); oy=-Math.abs(Math.sin(q*Math.PI*4))*5*(1-q); spin=-.06*(1-q); }
+      f.ox=ox; f.oy=oy; f.spin=spin; f.spinAt=performance.now(); }
+  }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Bedtime. The lights go out.'); B2.aim=null; S('click'); }],
+    [P.eyes,()=>{ S('creak'); setMessage('Something blinks in the dark. Several somethings.'); }],
+    [P.rline,()=>{ say('rose','dc3'); }],
+    [P.tgo,()=>{ S('step'); setMessage('Tom comes over and scoops her up.'); }],
+    [P.lift,()=>{ S('boing'); }],
+    [P.hold,()=>{ S('chime2'); setMessage('Tom holds Lamby up like a night-light.'); }],
+    [P.tline,()=>{ say('tom','dcrose3'); }],
+    [G0,()=>{ S('levelChime'); }],
+    [P.glow,()=>{ S('fanfare'); word('GLOW!',LF.x,40,GOLD,5,.9); setMessage('Lamby glows brighter. And brighter.'); }],
+    [G1-150,()=>{ word('SHOO!',GR.x,66,'#fffbe6',4,.7); setMessage('The dark runs away, and the monsters run with it.'); }],
+    [P.back,()=>{ S('step'); setMessage('They creep back in. It is much less scary with the light on.'); }],
+    [P.backEnd,()=>{ S('chime2'); for(const o of o3) { scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:PINK,w:3}); for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*18,y1:o.q.top-26,arc:10,spin:false,r:6,t:-j*.06,dur:.7}); }
+      landHit(100); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sT.x,mid:sT.b-TH}:ST.unit(p)); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+    ['hf',o3.length?Math.min(...o3.map(o=>o.t)):G1],
+    [P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Lamby is very brave. Lamby says goodnight.'; }]];
+  o3.forEach(o=>steps.push([o.t,()=>{ S('whoosh'); S('squeak'); }]));
+  ST.play(E2,steps);
 };
 })();
