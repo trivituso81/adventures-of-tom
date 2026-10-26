@@ -11,7 +11,8 @@
 |---|---|
 | All code and docs | This repo, branch `main` (source of truth) |
 | The playable game Tom opens on his phone | A claude.ai artifact, link `https://claude.ai/artifact/HzHh5DBHsbnyNrAvEFZ4V1`. The link must never change. |
-| Baked voice audio (about 170 MB) | The artifact only. The repo holds an older partial snapshot of the per-character files and none of the dialogue clips. |
+| Baked voice audio (about 170 MB) | Both the repo and the artifact (identical, v252). |
+| Playable on GitHub Pages | https://trivituso81.github.io/adventures-of-tom/ (serves `main`, voiced) |
 | Session handoff | The Project doc `claude/next.md` |
 
 ## Routine for every change
@@ -20,13 +21,13 @@
 2. Make the change. Small commits, one subject each, readable messages.
 3. `python3 tools/smoke.py` must exit 0; for a move, `python3 tools/kit_test.py <id> --only=<key> --speed2`. Look at the screenshots in `tools/shots/` (git-ignored), portrait and landscape.
 4. Push to `main`.
-5. Publish to the artifact: pass the SAME link as `url`, `index.html` as the page, and only the changed non-voice files in `files`. Files not passed are kept. Re-list the artifact files first in case another session published.
+5. GitHub Pages updates itself from `main` within a minute or two. Then publish to the artifact: pass the SAME link as `url`, `index.html` as the page, and only the changed non-voice files in `files`. Files not passed are kept. Re-list the artifact files first in case another session published.
 6. Tell Tom in a few sentences what changed and what to look for on his phone.
 7. Rewrite `claude/next.md` (under 40 lines) before ending.
 
 ## Voice files
 
-Never edit, regenerate or publish `data/voice-clips.js` or `data/voice/*.js` from the repo. They change only when Tom sends a `voices.json`, merged from the live artifact copies (see the Project doc `claude/voice-baking.md`). Reworded spoken lines silence their clips; log them in `docs/CHANGES.md` under "Lines to bake".
+Identical in the repo and the artifact. Never edit them by hand. Merge a `voices.json` only when Tom sends one (Project doc `claude/voice-baking.md`), commit to `main`, and publish the same voice files to the artifact. Reworded spoken lines silence their clips; log them in `docs/CHANGES.md` under "Lines to bake".
 
 ## Definition of done
 

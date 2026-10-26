@@ -1,14 +1,12 @@
 # Voice
 
-## What is and is not in this repo
+## What is in this repo
 
-The live game has about 170 MB of baked ElevenLabs audio, stored as base64 inside JavaScript files. This repo holds only an **older partial snapshot** of the per-character files (`data/voice-clips.js`, `data/voice/<character>.js`, from before v252). Newer lines, and all dialogue-box clips (`data/voice/dialog-ch*.js`), are missing, so those lines are silent here. In a fresh checkout without any voice files, these stubs would make the game boot silent:
+The repo now holds the **full live voice audio** (about 170 MB, exported from artifact version `1792983007-0e46`, v252): `data/voice-clips.js` (settings and Nara's barks), `data/voice/<tom|grace|rose|amy|deedee|boppy|tnb>.js`, and `data/voice/dialog-ch1.js` to `dialog-ch10.js` (1903 dialogue clips). GitHub Pages serves them, so the game is fully voiced at https://trivituso81.github.io/adventures-of-tom/.
 
-- `data/voice-clips.js` is `const VOICE_CLIPS={clips:{}};`
-- `data/voice/<tom|grace|rose|amy|deedee|boppy|tnb>.js` are empty files.
-- The ten chapter dialogue files `data/voice/dialog-ch1.js` to `dialog-ch10.js` are simply absent. `engine/dialog-voice.js` loads them after startup and skips a missing file quietly.
+**Never hand-edit, regenerate or replace these files.** They change only when Tom sends a `voices.json` and asks for a merge (rules in the Project doc `claude/voice-baking.md`); then commit the merged files to `main` and publish them to the artifact in the same session so the two stay identical.
 
-**Never replace, regenerate or hand-edit the voice files, and never add new audio,** unless Tom sends a `voices.json` and asks for a merge. The live audio stays in the claude.ai artifact.
+Test runs are slow with the real audio loaded. For quick tests copy the repo to a scratch folder, replace `data/voice-clips.js` with `const VOICE_CLIPS={clips:{}};` and empty `data/voice/*.js`, and point `BUILD` at it.
 
 ## How a spoken line works
 
