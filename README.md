@@ -24,7 +24,7 @@ The game must be served over http; opening `index.html` directly will not work. 
 | [`docs/CANON.md`](docs/CANON.md) | Cast, voice and tone, decided facts |
 | [`docs/BATTLE_SYSTEM.md`](docs/BATTLE_SYSTEM.md) | Battle rules, animation primitives, gotchas |
 | [`docs/MOVE_KEYS.md`](docs/MOVE_KEYS.md) | Every character's current move keys |
-| [`docs/VOICE.md`](docs/VOICE.md) | What the voice stubs are, how spoken lines work |
+| [`docs/VOICE.md`](docs/VOICE.md) | What voice files the repo holds, how spoken lines work |
 | [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | How this repo relates to the live game |
 | [`docs/NEXT_TASKS.md`](docs/NEXT_TASKS.md) | The approved next builds |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Tom's vision |
