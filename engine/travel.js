@@ -77,6 +77,50 @@ const TRAVEL_TALK={
   boppy:{stay:['Six hours in a seat? My stomach says no. I say no. We agree for once.','Go on. The recliner and I will hold down the fort.'],toast:'Boppy shuffles home to the recliner.'},
   nara:{stay:['Nara stops at the curb. She looks at the cab. She looks at Tom.','Tom kneels down. "I will be back. I promise. You keep 2nd Ave safe."','Nara licks his whole face. Then she trots back to 2nd Ave to wait at the corner.'],toast:'Nara heads back to 2nd Ave. She will be waiting.',narrate:true}
 };
+// Story departures: each chapter's airport run has its own goodbyes (Tom, 26 Oct: no repeats). Keyed by the chapter the
+// flight starts. Any part left out (or demo mode) uses the lines above and in startTrip. Chapters 2 and 3 use the defaults.
+// driver, grace, rose, tom: the girls' goodbye on a westbound run (Sal speaks first). sol: Sol's one line eastbound.
+// tnb + tnbToast, and stay[id] {stay,toast,narrate}: recruits heading home. flight: Tom's two pages in the air.
+const DEPARTURES={
+  4:{driver:['Los Angeles again? Cab seven loves this run. She hums the whole way.',"The girls stay home. Amy's rule. I do not argue with Amy."],
+     grace:['Tata, you HAVE to be back for my meet. I already told everybody you are coming.'],
+     rose:['My tooth is loose. Look. LOOK. Tata, you are not looking.'],
+     tom:['I will be at the meet. Front row. I will make a sign.','Rose, that is a very good tooth. Guard it with your life.'],
+     stay:{boppy:{stay:['Los Angeles again? My back just got home from the marsh.','Go. If you see a pepper out there, bring it back. I will judge it.'],toast:'Boppy heads home. The recliner missed him.'}},
+     flight:['Lie flat, warm nuts, and absolutely no fish.','...Boppy would hate it up here.']},
+  5:{sol:'Airport. Your young man fixed my visor. He made me promise to drive careful. So I am going the speed limit. Everybody hates it.',
+     tnb:['That is a wrap, babe. I have a five a.m. call and forty capes to steam.','Go survive conference night. Bring snacks. I packed you snacks. Check your bag.'],
+     tnbToast:'TNB heads back to the lot. Forty capes will not steam themselves.',
+     stay:{nara:{stay:['Nara sits down on Tom’s feet. If he cannot move, he cannot leave.','Tom wiggles free. "A week. Maybe two. You guard the porch."','Nara lets out the biggest sigh a dog has ever sighed. Then she trots home.'],toast:'Nara heads back to 2nd Ave. Dramatically.',narrate:true}},
+     flight:['Six hours. Then conference night. My sister has a clipboard.','I am not scared. I am PREPARED. Those are different.']},
+  6:{driver:['Back to Los Angeles. Your sister gave me a gold star for using my blinker.','The girls stay home. School night. It is always a school night.'],
+     grace:['Tata, Mom says I am in charge while you are gone. Of Rose.'],
+     rose:['She is NOT in charge of me. Tata, tell her. TELL her.'],
+     tom:['Nobody is in charge of anybody. Your mom is in charge of everybody.','That is how it has always worked. Trust me. I was there.'],
+     stay:{amy:{stay:['I survived conference night. I can survive you leaving.','Text me when you land. I am timing the flight. Do not lose.'],toast:'Amy runs home. She is timing that too.'}},
+     flight:['Delta One. Nobody is grading me up here.','The flight attendant asked what I wanted. I said a nap. She laughed. I was SERIOUS.']},
+  7:{sol:'LAX. I am taking the long way. There are squirrels on the short way.',
+     tnb:['Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence.','Go. I will feed the starter. Twice a day, room temperature, no squirrels. I wrote it down.'],
+     tnbToast:'TNB stays in LA. Bready Mercury is in good hands.',
+     stay:{nara:{stay:['Nara spots a squirrel across the street. She looks at the squirrel. She looks at Tom.','She picks Tom. She leans on his legs for one long minute.','Then she picks the squirrel. Fair enough.'],toast:'Nara heads back to 2nd Ave. The squirrel situation is ongoing.',narrate:true}},
+     flight:['Somewhere down there, a squirrel is plotting.','Not my problem. For six whole hours.']},
+  8:{driver:['Los Angeles again? I am starting to think you live there.','The girls stay home. School tomorrow. Library books are due.'],
+     grace:['Tata, I checked out a book about Los Angeles. Now I will know where you are. Every minute.'],
+     rose:['I checked out a book about a pig. It is not about Los Angeles. It is better.'],
+     tom:['Both excellent choices. Return them on time.','That library has had enough excitement for one year.'],
+     flight:['Six hours of quiet. The library would be proud.','...I already miss Rose shushing everybody at full volume.']},
+  9:{sol:'Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.',
+     tnb:['Forty loaves, zero leftovers. Not bad for two guys and one oven.','Go open your fancy letter. Wear the blue shirt. I fixed the button. You are welcome.'],
+     tnbToast:'TNB stays in LA. Somebody has to wash forty bread pans.',
+     stay:{nara:{stay:['Nara is still full from the potluck. She lifts one paw. That is all she can manage.','Tom shakes it. "Deal. Back soon."','Nara lets out one very satisfied burp. Then she waddles home.'],toast:'Nara heads back to 2nd Ave. Slowly. Very full.',narrate:true}},
+     flight:['A letter with a seal. Nobody sends a seal for good news.','Or do they? Six hours to think about it. Great.']}
+};
+// The departure for this airport run: the chapter it starts, if the current one is done (full story only).
+function departureNow() {
+  if(typeof STORY==='undefined'||STORY.mode!=='full'||!flag('ch'+STORY.chapter+'-done')) return {};
+  return DEPARTURES[STORY.chapter+1]||{};
+}
+
 function talkToDriver(n) {
   const inLA=regionOf(currentMap)==='la';
   const pages=n.visitedOnce?[]:npcLines(n);
@@ -95,35 +139,35 @@ function runScene(steps) {
 }
 
 function startTrip(n,dir) {
-  const steps=[];
+  const steps=[],d=departureNow();
   if(dir==='west') {
     if(!girlsAway()&&memberHome('grace')!=='any') steps.push(
-      S.talk('Sal',['Los Angeles? You got it. Flights leave whenever I get there.',"One thing. The girls stay home. Amy's rule. No flying on a school night."]),
-      S.talk('Grace',['Tata, you are leaving AGAIN? You JUST got here!']),
-      S.talk('Rose',['Bring me back a palm tree. A small one. For my room.']),
-      S.talk('Tom',['I will be back before you know it. Go home and listen to your mom.','Rose, I will see what I can do about the palm tree.']),
+      S.talk('Sal',d.driver||['Los Angeles? You got it. Flights leave whenever I get there.',"One thing. The girls stay home. Amy's rule. No flying on a school night."]),
+      S.talk('Grace',d.grace||['Tata, you are leaving AGAIN? You JUST got here!']),
+      S.talk('Rose',d.rose||['Bring me back a palm tree. A small one. For my room.']),
+      S.talk('Tom',d.tom||['I will be back before you know it. Go home and listen to your mom.','Rose, I will see what I can do about the palm tree.']),
       S.call(()=>{ setGirlsAway(true); sfx.doorOut(); showToast('Grace and Rose head home to the Gregori house.',3); }),
       S.wait(.9)
     );
     else steps.push(S.talk('Sal',['Los Angeles? You got it. Buckle up.']));
   } else {
-    steps.push(S.talk('Sol',['Airport. Love it. We will be there in twenty minutes. Or two hours. Nobody knows.']));
+    steps.push(S.talk('Sol',[d.sol||'Airport. Love it. We will be there in twenty minutes. Or two hours. Nobody knows.']));
   }
   const dest=dir==='west'?'la':'le';
   for(const f of extras()) {
     const home=memberHome(f.id); if(home==='any'||home===dest) continue;   // party rules (engine/story.js) say who lives where
     if(f===tnb) steps.push(
-      S.talk('TNB',['Well, well... this is where I get off. Glaze firing tomorrow, call time at five, and somebody has to water your plants.','Go. Hug the girls for me. I will be right here, pot-sitive.']),
-      S.call(()=>{ const tf=followers.find(x=>x.member===tnb); if(tf) { kiss={npc:tf,start:elapsedTime}; sfx.kiss(); } recruitLeave(tnb,true); showToast('TNB stays in LA. Pottery, a shoot, and Tom\u2019s plants.',3.2); }),
+      S.talk('TNB',d.tnb||['Well, well... this is where I get off. Glaze firing tomorrow, call time at five, and somebody has to water your plants.','Go. Hug the girls for me. I will be right here, pot-sitive.']),
+      S.call(()=>{ const tf=followers.find(x=>x.member===tnb); if(tf) { kiss={npc:tf,start:elapsedTime}; sfx.kiss(); } recruitLeave(tnb,true); showToast(d.tnbToast||'TNB stays in LA. Pottery, a shoot, and Tom\u2019s plants.',3.2); }),
       S.wait(.8));
-    else if(TRAVEL_TALK[f.id]) { const tt=TRAVEL_TALK[f.id]; steps.push(
+    else if(TRAVEL_TALK[f.id]) { const tt=(d.stay&&d.stay[f.id])||TRAVEL_TALK[f.id]; steps.push(
       S.call(()=>{ if(f===nara) { sfx.whine&&sfx.whine(); } }),
       S.talk(tt.narrate?'Nara':f.name,tt.stay),
       S.call(()=>{ recruitLeave(f,true); sfx.doorOut(); showToast(tt.toast,3); }),
       S.wait(.6)); }
   }
   if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
-  steps.push(...flightSteps(dir));
+  steps.push(...flightSteps(dir,d.flight));
   runScene(steps);
 }
 
@@ -145,15 +189,15 @@ function flightSound(mode,dir) {
     tone({type:'sine',f0:1200,f1:500,dur:.25,vol:.06,delay:2.3});
   }
 }
-function flightSteps(dir) {
+function flightSteps(dir,talk) {
   const west=dir==='west';
   return [
     S.call(()=>{ intro.flight={dir,mode:'board',t:0}; $('area-name').textContent='In flight'; $('eyebrow').textContent='DELTA ONE / SEAT 1A'; }),
     flightPhase('takeoff',4),
     S.all(flightPhase('map',8),
-      S.seq(S.wait(1.6),S.talk('Tom',west
+      S.seq(S.wait(1.6),S.talk('Tom',talk||(west
         ?['Delta One. Lie flat. Six whole hours where nobody asks me for a piggyback.','...I already miss the piggybacks.']
-        :['Six hours. Then two small people will jump on me at full speed.','Worth it.']))),
+        :['Six hours. Then two small people will jump on me at full speed.','Worth it.'])))),
     flightPhase('landing',4.2),
     S.call(()=>{ intro.flight=null; }),
     ...(west?arriveLA():arriveHome())

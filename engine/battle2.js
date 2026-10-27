@@ -115,6 +115,7 @@ function b2End(result) {
   if(typeof renderMenu==='function') renderMenu();
   b7AfterBattle(result);   // engine/feel.js: a short breather before map monsters can engage again
   if(B2.onEnd) B2.onEnd(result);
+  if(B2.cfg&&B2.cfg.npc&&typeof saveGame==='function') saveGame('auto',true);   // quiet autosave after every real fight: win, lose or run (Battle Lab fights have no npc)
 }
 
 // ---------- Turn order ----------
@@ -1356,7 +1357,7 @@ function b2Win() {
   if(nara) steps.push(()=>{ battle.fx[nara.idx].cheer=1.6; if(w!==nara) say('nara','win'); if(typeof RFX!=='undefined') RFX.scene('naraPuddle',3.2,{i:nara.idx}); sfx.splat&&sfx.splat(); },900);
   if(B2.cfg.npc) {
     steps.push(()=>{ const R=b2RewardsData(); R.title=kind?'KINDNESS VICTORY':'VICTORY'; R.line=line; R.puddle=!!nara;
-      b7ShowCard(R,()=>{ b2WriteBack(); b2End('win'); if(typeof saveGame==='function') saveGame('auto',true); }); });
+      b7ShowCard(R,()=>{ b2WriteBack(); b2End('win'); }); });
     enqueue(...steps);
     return;
   }

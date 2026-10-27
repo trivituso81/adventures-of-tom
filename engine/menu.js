@@ -234,8 +234,10 @@ function sizeRoster() {
 }
 addEventListener('resize',()=>{ if(!$('menu').hidden) sizeRoster(); });
 
+// Leaving the Stampcard (another tab, Back, or closing the menu) autosaves quietly, so new stamps are never lost.
+function menuLeaveStamps() { if(menuTab==='stamps'&&typeof saveGame==='function') saveGame('auto',true); }
 function setMenuTab(id) {
-  if(menuTab!==id) sfx.tab();
+  if(menuTab!==id) { sfx.tab(); menuLeaveStamps(); }
   menuTab=id; menuSlot=null; menuItem=null; menuConfirm=null; if(typeof b6Sure!=='undefined') b6Sure=null;
   $('menu-body').scrollTop=0; menuFocusNext=menuKeyNav?'cmd-'+id:null;
   renderMenu();
@@ -564,6 +566,7 @@ function openMenu(viaKeys) {
 
 function closeMenu() {
   if(!menuOpen) return;
+  menuLeaveStamps();
   menuOpen=false; menuQuit=false; menuSaving=false; menuConfirm=null;
   const q=$('menu-quit'); if(q) q.remove();
   const sp=$('menu-save'); if(sp) sp.remove();
@@ -582,7 +585,7 @@ function menuBack(fromCmd) {
   if(typeof b6Sure!=='undefined'&&b6Sure) { b6Sure=null; renderMenu(); return; }
   if(menuItem) { const id=menuItem; menuItem=null; sfx.tab(); menuFocusNext=menuKeyNav?'use-'+id:null; renderMenu(); return; }
   if(menuSlot) { const s=menuSlot; menuSlot=null; sfx.tab(); menuFocusNext=menuKeyNav?'slot-'+s:null; renderMenu(); return; }
-  if(menuTab!=='home') { const t=menuTab; menuTab='home'; sfx.tab(); menuFocusNext=menuKeyNav?'cmd-'+t:null; renderMenu(); return; }
+  if(menuTab!=='home') { const t=menuTab; menuLeaveStamps(); menuTab='home'; sfx.tab(); menuFocusNext=menuKeyNav?'cmd-'+t:null; renderMenu(); return; }
   closeMenu();
 }
 function menuButtons() {

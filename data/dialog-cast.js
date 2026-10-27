@@ -7,7 +7,7 @@
 // Baked clips live in DIALOG_CLIPS (one file per chapter, DIALOG_CAST.files, loaded after startup by engine/dialog-voice.js).
 // A line is spoken only if its exact text has a clip for that speaker's voice. Objects and signs stay silent.
 const DIALOG_CAST={
-  files:['data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js'],
+  files:['data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js'],
   speakers:{
     Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Deedee:'deedee',Boppy:'boppy',TNB:'tnb',
     Pip:'pip',Moss:'moss',Dot:'dot',Gus:'gus',Bean:'bean',Bun:'bun',Page:'page',Fern:'fern',Kit:'kit',Oolong:'oolong',
@@ -24,6 +24,8 @@ const DIALOG_CAST={
     Smoglet:'mudling','Ticket Flurry':'skeeter','Canyon Coyote':'grump',Gridlock:'grump','Tar Pit Blob':'mudling','The Big Shake':'bigone',
     // Chapter 3 (the marsh)
     Reel:'gus','Soggy Sock':'mudling',Bobber:'toad',Tangle:'grump',Snag:'log','Old Iron-Gill':'bigone',
+    // Bonus chapter Nine Scoops (chapter 21, data/bonus-nine-scoops.js): Mr. Pistachio and Brain Freeze get their own voices; the small monsters reuse pond voices.
+    'Mr. Pistachio':'pistachio','Brain Freeze':'brainfreeze','Sprinkle Gremlin':'skeeter','Sprinkle Gremlin B':'skeeter','Slushie Slug':'mudling','Cone Head':'toad','Cone Head B':'toad',
     // Chapters 4 to 10: walk-ons share a voice by type, told apart by speakerFx; monsters reuse the pond monster voices
     'Ray':'moss',
     'Kiki':'dot',
@@ -132,6 +134,7 @@ const DIALOG_CAST={
     'The Armrest Hog':'hog',
     'Carry-On':'carryon',
     'Jet Lag':'jetlag',
+    'Sprinkle Gremlin':'tiny','Sprinkle Gremlin B':'tiny','Slushie Slug':'tarblob','Cone Head':'bobber','Cone Head B':'bobber',
     Reel:'lower',Kevin:'higher',Sol:'sol','Don Beto':'older',Ryan:'lower',Jordan:'lower',Claudia:'lower',Dakota:'lower',Sam:'higher',Mateo:'toddler',
     Sofi:'little',Smoglet:'smoglet','Ticket Flurry':'tickets','Canyon Coyote':'coyote',Gridlock:'gridlock','Tar Pit Blob':'tarblob',
     'The Big Shake':'bigshake','Soggy Sock':'soggysock',Bobber:'bobber',Tangle:'tangle',Snag:'snag','Old Iron-Gill':'irongill'},
@@ -243,6 +246,13 @@ const DIALOG_CAST={
     log:{name:'Log Lump',type:'Monster: sleepy log',stability:0,fx:'log',
       desc:'A sleepy cartoon log creature, very slow, deep, woody and drowsy voice, yawning between words, mumbly and content. Animated character voice.',
       sample:'Hmmmm. I was a tree. Now I am a nap with a face. I rolled over. That is my whole warm-up. Bark is up. Zzz. Five more years. Moss is growing on me. I am letting it. Hmmmm.'},
+    // Nine Scoops (bonus chapter)
+    pistachio:{name:'Mr. Pistachio',type:'Townsfolk: ice cream shop owner',stability:.5,
+      desc:'A man in his late fifties with a warm, hearty Long Island New York accent, an ice cream shop owner who loves his regulars, booming friendly laugh, talks with his hands, a little dramatic about his scoops. Clean studio recording.',
+      sample:'Welcome to Sprinkle Street Creamery! Nine scoops, dairy free, black and white cookie on top. I made it myself. Pfff, thank you. I could see my own eyebrows in there. It was Brain Freeze. A walking chest freezer.'},
+    brainfreeze:{name:'Brain Freeze',type:'Monster boss: sulky chest freezer',stability:0,
+      desc:'A cartoon villain who is a walking chest freezer: a flat, cold, humming monotone with a slight metallic buzz, deadpan and sulky, slow and heavy, with a lonely sadness underneath that cracks through when he is surprised. Animated character voice.',
+      sample:'Nine scoops. Nine candles. Nine years. All of it melts. Not in here. Nothing melts in here. Nothing changes. Nobody came to my birthday. So nobody gets one. Is there cake? I will bring the ice. I am mostly ice.'},
     bigone:{name:'The Big One',type:'Monster boss: giant pond fish',stability:0,fx:'bigone',
       desc:'An enormous ancient cartoon pond fish, huge slow booming bass voice with gurgling bubbles, pompous and boastful but childlike and easily delighted underneath. Animated character voice.',
       sample:'Glub. So you are the ones Boppy keeps talking about. I have been in this pond since nineteen ninety four. I have never been caught. I will never be caught. Is that a pie? For me? It fits. I am a king now. Glub.'}

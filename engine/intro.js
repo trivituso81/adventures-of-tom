@@ -212,7 +212,7 @@ function updateIntro(dt) {
 
 // World-space extras: the shout bubble, hearts, and the squishy over Grace's head.
 function drawIntroWorld(time) {
-  const {g}=IA();
+  const {g,r}=IA();
   if(intro.stretch) drawStretch(time);
   if(intro.bubble) {
     const sc=2,txt=intro.bubble.text,w=txt.length*4*sc+12;
@@ -227,12 +227,14 @@ function drawIntroWorld(time) {
     drawHeart(Math.round(hh.x*T),Math.round(hh.y*T-hh.t*30),1+(hh.t<.3?1:0));
     gfx.globalAlpha=1;
   }
-  if(intro.squishy&&!g.hidden) {
-    const p=position(g),u=Math.min(1,intro.squishy.t/.35);
-    const fr=OW.grace.down[0],gh=fr.length;
+  // The squishy over a girl's head: Grace's dumpling by default; a scene may pass its own {sprite, pal, who:'rose'} (Nine Scoops).
+  const sqA=intro.squishy&&intro.squishy.who==='rose'?r:g;
+  if(intro.squishy&&sqA&&!sqA.hidden) {
+    const p=position(sqA),u=Math.min(1,intro.squishy.t/.35),SQ=intro.squishy.sprite||SQUISHY,SP=intro.squishy.pal||SQUISHY_PAL;
+    const fr=OW[sqA===r?'rose':'grace'].down[0],gh=fr.length;
     const cx=Math.round((p.x+.5)*T),top=Math.round((p.y+1)*T-2-gh-6-u*8+Math.sin(time*4)*1.5);
-    drawSprite(SQUISHY,SQUISHY_PAL,cx-9,top-SQUISHY.length,1);
-    sparkles(cx,top-7,14,time,1);
+    drawSprite(SQ,SP,cx-Math.round(SQ[0].length/2),top-SQ.length,1);
+    if(!intro.squishy.plain) sparkles(cx,top-7,14,time,1);
   }
 }
 function sparkles(cx,cy,r,time,sc) {
@@ -264,12 +266,11 @@ function drawIntroScreen(time) {
     for(let k=0;k<8;k++) { gfx.rotate(Math.PI/4); gfx.fillStyle='#ffe08a'; gfx.beginPath(); gfx.moveTo(0,0); gfx.lineTo(-10,-W); gfx.lineTo(10,-W); gfx.fill(); }
     gfx.restore(); gfx.globalAlpha=1;
     const s=Math.max(1,Math.round(sc*ease(u))),bob=Math.round(Math.sin(time*3)*3);
-    // Squish: it gets a little wider and shorter on a slow pulse.
-    drawSprite(SQUISHY,SQUISHY_PAL,cx-Math.round(9*s),cy-Math.round(7*s)+bob,s);
+    // Squish: it gets a little wider and shorter on a slow pulse. A scene may show its own {sprite, pal, lines} (Nine Scoops).
+    const SQ=intro.showcase.sprite||SQUISHY,SP=intro.showcase.pal||SQUISHY_PAL,L2=intro.showcase.lines||['SPARKLING DIAMOND GOLD','SOUP DUMPLING SQUISHY'];
+    const hw=SQ[0].length/2,hh=SQ.length/2;
+    drawSprite(SQ,SP,cx-Math.round(hw*s),cy-Math.round(hh*s)+bob,s);
     sparkles(cx,cy+bob,13*s,time,Math.max(1,Math.round(s/2)));
-    if(u>=1) {
-      label('SPARKLING DIAMOND GOLD',cx+1,cy+8*s+14,'#1b2d27',2); label('SPARKLING DIAMOND GOLD',cx,cy+8*s+13,'#ffd968',2);
-      label('SOUP DUMPLING SQUISHY',cx+1,cy+8*s+29,'#1b2d27',2); label('SOUP DUMPLING SQUISHY',cx,cy+8*s+28,'#ffd968',2);
-    }
+    if(u>=1) L2.forEach((l,i)=>{ label(l,cx+1,cy+Math.round(hh*s)+14+i*15,'#1b2d27',2); label(l,cx,cy+Math.round(hh*s)+13+i*15,'#ffd968',2); });
   }
 }

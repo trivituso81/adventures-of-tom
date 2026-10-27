@@ -46,7 +46,7 @@ function startSplash() {
   requestAnimationFrame(splashFrame);
 }
 
-// Panel modes. launch: PART 1 / PART 2 / DEMO / BATTLE LAB (2x2). start (PART 1): START NEW / LOAD / BACK.
+// Panel modes. launch: PART 1 / PART 2 / BONUS / DEMO / BATTLE LAB (a 2-column grid). start (PART 1): START NEW / LOAD / BACK.
 // part2 (PART 2): one choice per Part 1 clear data, LOAD, BACK. The game is one story in two Parts (engine/story.js PARTS):
 // Part 2 stays locked until this device has Part 1 clear data, and starts from it with everything carried over.
 const SPLASH_MODES={
@@ -55,8 +55,15 @@ const SPLASH_MODES={
     return [
       FULL_GAME_OPEN?{name:'PART 1',sub:'Chapters 1 to 10. Start here.'}:{name:'PART 1',sub:'Coming soon. Still being built.',cls:'locked'},
       clr?{name:'PART 2',sub:'Chapters 11 to 20. Continue from your Part 1 clear data.'}:{name:'PART 2',sub:'Chapters 11 to 20. Finish Part 1 to unlock.',cls:'locked'},
+      {name:'BONUS',sub:'Nine Scoops: Grace’s 9th birthday. Tom, Grace and Rose.'},
       {name:'DEMO',sub:'The original Long Island and Los Angeles.'},
       {name:'BATTLE LAB',sub:'Try every move and Tombo.'}]; }},
+  // Bonus chapters (data/bonus-nine-scoops.js): standalone, no Part 1 or Part 2 save needed. One entry per chapter, then LOAD and BACK.
+  bonus:{tab:'Bonus Chapter',cue:'A / Enter to pick. B / Esc to go back',choices:()=>{
+    const n=SAVE_SLOTS.filter(k=>readSave(k)).length;
+    return [{name:'NINE SCOOPS',sub:'Grace’s 9th birthday on Long Island. Tom, Grace and Rose. About 40 minutes.'},
+      {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')},
+      {name:'BACK',sub:'',cls:'back'}]; }},
   part2:{tab:'Part 2',cue:'Pick the clear data to continue from. B / Esc to go back',choices:()=>[
     ...partClearSlots().map((s,i)=>({name:'CLEAR DATA '+(i+1),sub:partClearSummary(readSave(s)),slot:s})),
     {name:'LOAD',sub:'Continue a Part 2 save.'},
@@ -85,8 +92,10 @@ function splashMark() {
 // In the 2x2 grid, up and down move a whole row (dir is the pressed direction; d is -1 or 1).
 function splashMove(d,dir) {
   const n=document.querySelectorAll('#splash .sp-choice').length||2;
-  const grid=document.querySelector('#splash .sp-choices.grid')&&n===4&&(dir==='up'||dir==='down');
-  splash.sel=(splash.sel+d*(grid?2:1)+n)%n; sfx.move(); splashMark();
+  const grid=document.querySelector('#splash .sp-choices.grid')&&(dir==='up'||dir==='down');
+  if(grid) { let s=splash.sel+d*2; if(s<0) s=n-1; else if(s>=n) s=0; splash.sel=s; }
+  else splash.sel=(splash.sel+d+n)%n;
+  sfx.move(); splashMark();
 }
 function splashPick(i) {
   if(!splash.active) return;
@@ -110,8 +119,14 @@ function splashPick(i) {
     b2Lab(i);
     return;
   }
-  if(i===2) { openDemo(); return; }
-  if(i===3) { sfx.select(); splashSetMode('lab'); return; }
+  if(splash.mode==='bonus') {
+    if(i===2) { splashBack(); return; }
+    sfx.select(); splash.ret='bonus'; splashLeave(i===0?(typeof confirmBonus==='function'?confirmBonus:confirmNew):loadMenu);
+    return;
+  }
+  if(i===2) { sfx.select(); splashSetMode('bonus'); return; }
+  if(i===3) { openDemo(); return; }
+  if(i===4) { sfx.select(); splashSetMode('lab'); return; }
   const locked=i===0?!FULL_GAME_OPEN:!partClearSlots().length;
   if(locked) {
     sfx.nope(); splash.shakeT=.4;
@@ -128,7 +143,7 @@ function openDemo() {
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('demo/index.html',location.href).href; },250);
 }
-function splashBack() { if(splash.mode==='start'||splash.mode==='lab'||splash.mode==='part2') { sfx.move(); splashSetMode('launch'); } }
+function splashBack() { if(splash.mode==='start'||splash.mode==='lab'||splash.mode==='part2'||splash.mode==='bonus') { sfx.move(); splashSetMode('launch'); } }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {
   const el=$('splash'); if(!el) return;
@@ -147,7 +162,7 @@ function splashLeave(next) {
 function splashReturn() {
   const el=$('splash'); if(!el) return false;
   el.hidden=false; el.classList.remove('out');
-  splash.active=true; splashSetMode(splash.ret==='part2'&&partClearSlots().length?'part2':'start');
+  splash.active=true; splashSetMode(splash.ret==='part2'&&partClearSlots().length?'part2':splash.ret==='bonus'?'bonus':'start');
   splash.last=performance.now(); requestAnimationFrame(splashFrame);
   return true;
 }

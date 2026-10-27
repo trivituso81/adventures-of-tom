@@ -294,7 +294,7 @@ drawIntroScreen=function(time) {
   let cur=''; const maxCh=Math.floor((W-24)/(4*big));
   for(const w of words) { if((cur+' '+w).trim().length>maxCh) { lines.push(cur); cur=w; } else cur=(cur+' '+w).trim(); }
   if(cur) lines.push(cur);
-  const head=c.part?'PART '+c.part+(c.done?' COMPLETE':''):c.done?'CHAPTER '+c.n+' COMPLETE':(c.n?'CHAPTER '+c.n:'DEMO');
+  const head=c.part?'PART '+c.part+(c.done?' COMPLETE':''):info.bonus?'BONUS CHAPTER'+(c.done?' COMPLETE':''):c.done?'CHAPTER '+c.n+' COMPLETE':(c.n?'CHAPTER '+c.n:'DEMO');
   label(head,W/2+1,cy-12*big+1,'#1b2d27',big-1||1); label(head,W/2,cy-12*big,'#ffd968',big-1||1);
   rect(W/2-40,cy-4*big,80,1,'#ffd968');
   lines.forEach((l,i)=>{ const y=cy+i*8*big; label(l,W/2+1,y+1,'#1b2d27',big); label(l,W/2,y,'#fff1cb',big); });
@@ -601,6 +601,7 @@ const LE_saveSummary_story=saveSummary;
 saveSummary=function(sv) {
   const base=LE_saveSummary_story(sv);
   if(!sv||!sv.story||sv.story.mode!=='full'||!sv.story.chapter) return base;
+  if(CHAPTERS[sv.story.chapter]&&CHAPTERS[sv.story.chapter].bonus) return 'Bonus \u00b7 '+CHAPTERS[sv.story.chapter].title+' \u00b7 '+base;
   return 'Part '+partOf(sv.story.chapter)+' \u00b7 Ch '+sv.story.chapter+' \u00b7 '+base;
 };
 

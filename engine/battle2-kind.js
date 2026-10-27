@@ -123,7 +123,7 @@ function b2TomboRows(u,all) {
       if(down) why=down.name+' is knocked out.';
       else if(mem.some(p=>p.st.shushed)) why='Shushed. No Tombos for now.';
       else if(B2.heart<T.cost) why='Needs '+T.cost+'% HEART. The meter is at '+Math.floor(B2.heart)+'%.';
-      rows.push({T,mem,with:mem.filter(p=>p!==u),label:'FAMILY · '+mem.map(p=>p.name.toUpperCase()).join(' + '),why});
+      rows.push({T,mem,with:mem.filter(p=>p!==u),label:(T.dc?'DIRECTOR’S CUT · ':'')+'FAMILY · '+mem.map(p=>p.name.toUpperCase()).join(' + '),why});
       continue;
     }
     const pt=B2.party.find(p=>p.id===T.partner); if(!pt||!tom) continue;
@@ -166,14 +166,14 @@ function b2RunFinish(u,act,opt) {
   const M=b2BeginMove(combo,act,opt||{targets:[]});
   M.members=mem; M.tom=lead; M.pt=null; if(tom) M.miles=1;
   const E={tom,mem,fx:mem.map(p=>battle.fx[p.idx]),M,act,targets:M.targets,result:M.result,apply:()=>b2ApplyFx()};
-  b2Fx({kind:'banner',name:act.name,head:'FAMILY FINISH!',t:0,dur:1.8});
+  b2Fx({kind:'banner',name:act.name,head:act.dc?"DIRECTOR'S CUT!":'FAMILY FINISH!',t:0,dur:1.8});
   sfx.levelUp();
   const fn=B2_TOMBO_ANIM[act.id];
   try { if(fn) fn(E); else b2FinishPlain(E); }
   catch(err) { console.error('finish '+act.id,err); clearBattleQueue(); for(const f of E.fx) f.path=null; b2FinishPlain(E); }
 }
 function b2FinishPlain(E) {
-  enqueue(()=>{ setMessage('FAMILY FINISH! '+E.act.name+'!'); for(const f of E.fx) f.hop=.4; },700,()=>{ landHit(100); E.apply(); },700,E.result||E.act.desc,()=>checkEnemy());
+  enqueue(()=>{ setMessage((E.act.dc?"DIRECTOR'S CUT! ":'FAMILY FINISH! ')+E.act.name+'!'); for(const f of E.fx) f.hop=.4; },700,()=>{ landHit(100); E.apply(); },700,E.result||E.act.desc,()=>checkEnemy());
 }
 function b2TomboPlain(E) {
   enqueue(()=>{ setMessage('TOMBO! '+E.act.name+'!'); E.fxT.hop=.4; E.fxP.hop=.4; },700,()=>{ landHit(100); E.apply(); },700,E.result||E.act.desc,()=>checkEnemy());
@@ -1940,10 +1940,10 @@ B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // Draw one frame of a sprite by hand at a body spot (cx, feet at b), any palette, alpha and scale.
 const drawAt=(sp,fr,x,b,pal,a=1,sc)=>{ const s=sc||sp.scale,w=fr[0].length*s,h=fr.length*s; drawSprite(fr,pal||sp.pal,x-w/2,b-h,s,{alpha:a}); };
 const tintPal=new Map();
-const tintOf=(sp,hex,amt)=>{ const key=sp.pal+'|'+hex+'|'+amt; if(tintPal.has(key)) return tintPal.get(key); const o={},T2=[1,3,5].map(i=>parseInt(hex.substr(i,2),16));
+const tintOf=(sp,hex,amt)=>{ let m=tintPal.get(sp.pal); if(!m) tintPal.set(sp.pal,m=new Map()); const key=hex+'|'+amt; if(m.has(key)) return m.get(key); const o={},T2=[1,3,5].map(i=>parseInt(hex.substr(i,2),16));
   for(const k in sp.pal) { const c=sp.pal[k]; if(typeof c!=='string'||c[0]!=='#'||c.length<7) { o[k]=c; continue; }
     const v=[1,3,5].map((i,j)=>Math.round(lerp(parseInt(c.substr(i,2),16),T2[j],amt))); o[k]='rgb('+v.join(',')+')'; }
-  tintPal.set(key,o); return o; };
+  m.set(key,o); return o; };   // keyed per palette object (a string key made every palette '[object Object]')
 const order3=list=>list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
 const split100=(i,n)=>Math.floor(100/n)+(i<100%n?1:0);
 
@@ -4314,6 +4314,848 @@ B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     ['hf',o3.length?Math.min(...o3.map(o=>o.t)):G1],
     [P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Lamby is very brave. Lamby says goodnight.'; }]];
   o3.forEach(o=>steps.push([o.t,()=>{ S('whoosh'); S('squeak'); }]));
+  ST.play(E2,steps);
+};
+// ---------- Elevator Cheat (Tom + Amy, Director's Cut of tier 3) ----------
+// Same glass tower, inside this time: a cutaway with a zigzag stairwell on the left and a glass elevator on the right. Both
+// walk toward it (shrinking into the distance). Amy starts her stopwatch and sprints up the stairs; Tom presses the button
+// and rides up calmly with elevator music. Amy is on the roof first. DING: the doors open and Tom steps out, rested. Amy
+// holds up the stopwatch, yells, and stomps three times; a crack runs along the roof ledge over the monsters and it caves in
+// on them. Effects (no damage, no kindness, like Spot Me): the party's next turns come sooner, PEP +30% for 2 turns, Amber melts.
+const stopwatch=(x,y,s,txt)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s);
+  R(-2,-12,4,3,OUT); R(-1,-10,2,3,'#c8ccd4'); R(5,-9,3,3,OUT); EO(0,0,9,9,'#e8e4dc'); E(0,0,7,7,'#fbfaf4');
+  if(txt) { R(-7,-2,14,6,'#1c2430'); label(txt,0,0,'#9be39a',1); } else Ln(0,0,4,-4,1.5,RED);
+  gfx.restore(); };
+const angerVein=(x,y,s)=>{ gfx.strokeStyle=RED; gfx.lineWidth=2; gfx.lineCap='round';
+  for(const [dx,dy,a0] of [[-1,-1,0],[1,-1,Math.PI*.5],[1,1,Math.PI],[-1,1,Math.PI*1.5]]) { gfx.beginPath(); gfx.arc(x+dx*s,y+dy*s,s*.9,a0,a0+Math.PI*.5); gfx.stroke(); } };
+B2_TOMBO_ANIM.amy3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,asp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,AH=asp.idle.length*asp.scale,K=.5;
+  const wx=cl(GR.x1+84,GR.x1+70,400),gb=cl(GR.base-34,236,284),roofY=118,ex0=wx-52,ex1=wx+52,fh=(gb-roofY)/3;
+  const xL=Math.max(10,GR.x0-18),cw=40,ch=Math.round(TH*K+12),carX=wx+27,ax=wx-30,txR=wx+12;
+  const P={walk:800,click:900,btn:950,tline:1000,open0:1100,go:1300,inn:1350,close0:1650,ride0:1950,atop:3300,ride1:4000,open1:4050,out:4250,
+    aline:4500,s1:5150,s2:5400,s3:5650,cave:5700,apply:6500,home:6900,end:7600};
+  const land=o3.map((o,i)=>P.cave+i*70+330);
+  const fy=i=>gb-i*fh;                                     // stairwell floor i (0 ground .. 3 roof)
+  const climbK=ms=>seg(ms,P.go,P.atop);
+  const carY=ms=>lerp(gb,roofY,ez(seg(ms,P.ride0,P.ride1)));
+  const doorK=ms=>ms<P.close0?ez(seg(ms,P.open0,P.open0+220)):(ms<P.open1?1-ez(seg(ms,P.close0,P.close0+250)):ez(seg(ms,P.open1,P.open1+220)));
+  const sT={x:0,b:gb,s:1},sA={x:0,b:gb,s:1};
+  // Amy: walks to the stair door (shrinking), sprints the three flights, waits on the roof, yells and stomps, hops home
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=ax,y=gb,f=sp.idle,sc=K;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,wx-40,k); y=lerp(c.origBase,gb,k); sc=lerp(1,K,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.go) { x=wx-40; f=ms>P.click-60?sp.aim:sp.idle; }
+    else if(ms<P.atop) { const q=climbK(ms)*3,i=Math.min(2,Math.floor(q)),u=q-i,l=wx-44,r=wx-12,dir=i%2?-1:1;
+      x=i%2?lerp(r,l,u):lerp(l,r,u); y=lerp(fy(i),fy(i+1),u); f=runFr(sp,c.t*1.4,dir); }
+    else if(ms<P.home) { const k=ez(seg(ms,P.atop,P.atop+300)); x=lerp(wx-12,ax,k); y=roofY;
+      const st=[P.s1,P.s2,P.s3].find(t=>ms>t-170&&ms<t+120);
+      if(st) { const u=seg(ms,st-170,st); y=roofY-(ms<st?Math.sin(u*Math.PI*.5)*10:0); f=ms<st?mirrorRowsCached(sp,'act'):(sp.kneel); }
+      else if(ms<P.out) { f=mirrorRowsCached(sp,'hip'); y-=ms>P.atop+400&&(Math.floor(ms/180)%2)?1.5:0; }
+      else if(ms<P.aline) f=mirrorRowsCached(sp,'aim');
+      else if(ms<P.cave+300) f=(Math.floor((ms-P.aline)/320)%2)?mirrorRowsCached(sp,'expr'):mirrorRowsCached(sp,'act');
+      else f=mirrorRowsCached(sp,'hip'); }
+    else { const k=ez(seg(ms,P.home,P.home+700)); x=lerp(ax,c.origX,k); y=lerp(roofY,c.origBase,k)-Math.sin(k*Math.PI)*30; sc=lerp(K,1,k); f=k<1?sp.celeb:sp.idle; }
+    sA.x=x; sA.b=y; sA.s=sc; return {cx:x,base:y,frame:f,sc,noShadow:ms>P.walk-200&&ms<P.home+600}; });
+  // Tom: walks to the elevator (shrinking), presses the button, rides up in the glass car, steps out onto the roof
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=carX,y=gb,fk='idle',sc=K;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,wx+46,k); y=lerp(c.origBase,gb,k)+ffHop(ms,0,P.walk); sc=lerp(1,K,k); }
+    else if(ms<P.inn) { x=wx+46; fk=ms>P.btn-60&&ms<P.btn+250?'act':'idle'; }
+    else if(ms<P.out) { x=lerp(wx+46,carX,ez(seg(ms,P.inn,P.inn+250))); y=ms<P.ride0?gb:carY(ms); if(ms>P.ride0&&ms<P.ride1) y-=Math.abs(Math.sin(ms/260))*1.2; fk=ms>P.open1?'celeb':'idle'; }
+    else if(ms<P.home) { x=lerp(carX,txR,ez(seg(ms,P.out,P.out+300))); y=roofY; fk=ms<P.aline?'celeb':(ms<P.apply?'expr':'idle'); }
+    else { const k=ez(seg(ms,P.home,P.home+700)); x=lerp(txR,c.origX,k); y=lerp(roofY,c.origBase,k)-Math.sin(k*Math.PI)*30; sc=lerp(K,1,k); fk=k<1?'celeb':'idle'; }
+    sT.x=x; sT.b=y; sT.s=sc; return {cx:x,base:y,frame:sp[fk],sc,noShadow:ms>P.walk-200&&ms<P.home+600}; });
+  const show=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-100)));
+  const towerK=ms=>ez(seg(ms,150,850))*(1-ez(seg(ms,P.home,P.home+600)));
+  const intact=ms=>ms<P.cave;
+  // Behind everyone: dusk; the tower cutaway (stairwell, glass shaft, the elevator car), the roof and its ledge over the monsters
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#1c2a4a',.5);
+    const tk=towerK(ms); if(tk<=0) return; const top=lerp(gb+6,roofY-ch-8,tk);
+    gfx.save(); gfx.beginPath(); gfx.rect(0,top-10,576,gb+16-top); gfx.clip();
+    R(ex0-3,roofY-3,ex1-ex0+6,gb+7-roofY,OUT); R(ex0,roofY,50,gb+4-roofY,'#33597d'); R(wx+2,roofY,ex1-wx-2,gb+4-roofY,'#24486a'); R(wx-2,roofY,4,gb+4-roofY,'#1b3a58');
+    for(let i=1;i<3;i++) R(ex0,fy(i)-2,50,4,'#1b3a58');
+    for(let i=0;i<3;i++) { const l=wx-46,r=wx-8,y0=fy(i),y1=fy(i+1),a={x:i%2?r:l,y:y0},b={x:i%2?l:r,y:y1};
+      Ln(a.x,a.y,b.x,b.y,4,'#c8b07a'); for(let j=1;j<6;j++) { const q=j/6; R(lerp(a.x,b.x,q)-2,lerp(a.y,b.y,q)-3,4,2,'#e8d4a0'); } }
+    for(const xr of [wx+6,ex1-4]) R(xr-1,roofY-ch-6,2,gb+10-roofY+ch,'#8aa4bc');
+    // the machine hut on the roof over the shaft
+    R(wx+2,roofY-ch-8,ex1-wx,ch+8,'#1b3a58'); R(wx+5,roofY-ch-5,ex1-wx-6,ch+5,'#2a4e70');
+    // the roof, and the ledge that reaches out over the monsters until it caves in
+    RO(ex0-4,roofY-4,ex1-ex0+8,6,'#5a6a7a');
+    if(intact(ms)&&tk>.95) { RO(xL,roofY-4,ex0-4-xL,8,'#6c7a88'); R(xL,roofY-4,ex0-4-xL,2,'#9aa8b6'); for(let x=xL+16;x<ex0-8;x+=34) R(x,roofY+4,4,8,'#5a6a7a'); }
+    // the car (cable up to the hut), lit inside
+    const cy=ms<P.ride0?gb:(ms<P.out?carY(ms):roofY); Ln(carX,roofY-ch-6,carX,cy-ch,1.5,'#cfd8e2');
+    RO(carX-cw/2,cy-ch,cw,ch,'#cfd6de'); R(carX-cw/2+3,cy-ch+3,cw-6,ch-5,'#f6f0dc'); R(carX-cw/2+3,cy-ch+3,cw-6,3,'#fffbe6');
+    gfx.restore();
+    // floor counters: Amy's over the stairwell, Tom's over the hut
+    if(tk>.6) { const fa=ms<P.go?1:Math.min(60,Math.round(lerp(1,60,climbK(ms)))),ft=ms<P.ride0?1:Math.min(60,Math.round(lerp(1,60,ez(seg(ms,P.ride0,P.ride1)))));
+      label((fa<10?'0':'')+fa+'F',wx-27,Math.min(gb-12,roofY+10),fa>=60?GOLD:'#fff6dc',2); label((ft<10?'0':'')+ft+'F',carX,roofY-ch-1,ft>=60?GOLD:'#fff6dc',1); }
+    gfx.globalAlpha=1; }});
+  // In front: the glass doors, the call button, music notes, the stopwatch, the crack, the falling roof and the squashed monsters
+  const slabs=o3.map((o,i)=>({o,w:Math.min(54,o.q.w*.85),x:o.q.x,t:P.cave+i*70,land:land[i],rot:(i%2?.12:-.1)}));
+  const bits=[0,1,2,3,4].map(j=>({x:lerp(xL+10,ex0-12,j/4),t:P.cave+30+j*45,w:10+j%3*5,sp:(j%2?1:-1)*(3+j)}));
+  const floorY=Math.max(GR.base,gb)+2;
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    // the glass doors on the car
+    if(ms>P.walk-100&&ms<P.home+200) { const cy=ms<P.ride0?gb:(ms<P.out?carY(ms):roofY),d=doorK(ms)*(cw/2-3),a=towerK(ms);
+      gfx.save(); gfx.beginPath(); gfx.rect(carX-cw/2,cy-ch,cw,ch); gfx.clip(); gfx.globalAlpha=a;
+      for(const s of [-1,1]) { const x0=s<0?carX-cw/2-d:carX+d; gfx.globalAlpha=a*.32; R(x0,cy-ch,cw/2,ch,'#9fd8ff'); gfx.globalAlpha=a; R(x0+(s<0?cw/2-2:0),cy-ch,2,ch,'#8a96a4'); R(x0+4,cy-ch+6,2,ch-14,'#e8f8ff'); }
+      gfx.restore(); gfx.globalAlpha=1; }
+    // the call button by the elevator
+    if(ms>P.walk-100&&ms<P.ride0) { const lit=ms>P.btn; RO(ex1+4,gb-34,8,12,'#2a2e36'); E(ex1+8,gb-28,2.5,2.5,lit?'#ffd166':'#6a707a'); }
+    // elevator music from the car while it rides
+    if(ms>P.ride0&&ms<P.ride1+300) for(let j=0;j<3;j++) { const q=((ms-P.ride0)/900+j/3)%1,cy=carY(ms); gfx.globalAlpha=Math.sin(q*Math.PI)*.95;
+      note8(carX+18+Math.sin(q*6+j)*6,cy-ch-6-q*30,2,[PINK,GOLD,'#8fd0ff'][j],Math.sin(ms/200+j)*.3); } gfx.globalAlpha=1;
+    // speed lines under Amy on the stairs
+    if(ms>P.go&&ms<P.atop) for(let j=0;j<3;j++) { const q2=((ms/140)+j/3)%1; gfx.globalAlpha=.7*(1-q2); Ln(sA.x-6+j*5,sA.b+2+q2*12,sA.x-6+j*5,sA.b+8+q2*12,2,'#dff0fa'); } gfx.globalAlpha=1;
+    // the stopwatch: clicked at the start, held up on the roof
+    if(ms>P.click&&ms<P.go+200) stopwatch(sA.x-14,sA.b-AH*K*.6,.9,null);
+    if(ms>P.out+350&&ms<P.cave+500) { const s=ez(seg(ms,P.out+350,P.out+600)); stopwatch(sA.x+14,sA.b-AH*K*.95-6,1.5*s,'0:58'); }
+    // her anger vein while she yells and stomps
+    if(ms>P.aline+200&&ms<P.cave+500) { gfx.globalAlpha=.6+.4*Math.sin(ms/90); angerVein(sA.x+4,sA.b-AH*K-6,3.2); gfx.globalAlpha=1; }
+    // the crack runs from her feet along the ledge, a third of the way per stomp
+    if(ms>P.s1&&intact(ms)) { const n=ms>P.s3?3:(ms>P.s2?2:1),len=(ax-xL)*n/3,x1=ax-len; gfx.strokeStyle='#1a1e24'; gfx.lineWidth=2.5; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(ax,roofY-3);
+      for(let x=ax-8,j=0;x>=x1;x-=10,j++) gfx.lineTo(x,roofY-2+(j%2?4:-1)); gfx.stroke(); }
+    // the ledge caves in: one slab per monster lands on its head (they stay there, squashed, until home); small bits fall past
+    for(const sl of slabs) { if(ms<sl.t||sl.o.f.dead) continue; const q=sl.o.q,top=q.top-6;
+      let y,rot; if(ms<sl.land) { const p=seg(ms,sl.t,sl.land); y=lerp(roofY,top,p*p); rot=sl.rot*p*2; } else { y=top+(1-cl((ms-sl.land)/120))*-4; rot=sl.rot; }
+      const a=1-ez(seg(ms,P.home,P.home+400)); if(a<=0) continue; gfx.globalAlpha=a; gfx.save(); gfx.translate(sl.x,y); gfx.rotate(rot); RO(-sl.w/2,-6,sl.w,10,'#6c7a88'); R(-sl.w/2,-6,sl.w,2,'#9aa8b6'); R(-sl.w/2+6,-2,sl.w*.3,1.5,'#4a5664'); gfx.restore();
+      if(ms>sl.land) { const sc2=ms<P.home?.8+.03*Math.sin(ms/90):lerp(.8,1,ez(seg(ms,P.home,P.home+400))); sl.o.f.fsc=sc2; sl.o.f.oy=q.h/2*(1-sc2); sl.o.f.spin=0; sl.o.f.spinAt=performance.now();
+        if(ms<P.home) for(let j=0;j<3;j++) { const an=ms/260+j*2.1; star(sl.x+Math.cos(an)*q.w*.4,top-14+Math.sin(an)*5,3.5,j%2?GOLD:'#fffbe6'); }
+        if(ms<sl.land+500) { const d=seg(ms,sl.land,sl.land+500); gfx.globalAlpha=(1-d)*.6; for(let j=0;j<5;j++) E(sl.x+(j-2)*sl.w*.28*(1+d),top+2-d*8,3+d*4,2.5+d*2,'#9aa2ac'); } }
+      gfx.globalAlpha=1; }
+    for(const b of bits) { if(ms<b.t||ms>b.t+700) continue; const p=seg(ms,b.t,b.t+500),y=lerp(roofY,floorY,p*p); gfx.globalAlpha=1-seg(ms,b.t+450,b.t+700);
+      gfx.save(); gfx.translate(b.x+b.sp*p*6,y); gfx.rotate(p*b.sp); RO(-b.w/2,-3,b.w,6,'#6c7a88'); gfx.restore(); gfx.globalAlpha=1; }
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Same tower. Inside, this time.'); B2.aim=null; S('click'); }],
+    [300,()=>{ S('rumble'); }],
+    [P.click,()=>{ S('click'); setMessage('Amy takes the stairs. Tom finds a button.'); }],
+    [P.btn,()=>{ S('ding'); }],
+    [P.tline,()=>{ say('tom','dcamy3'); }],
+    [P.go,()=>{ S('whoosh'); word('GO!',wx-27,gb-AH*K-24,GOLD,4,.6); }],
+    [P.close0,()=>{ S('step'); }],
+    [P.ride0,()=>{ S('chime2'); setMessage('Sixty floors of stairs. Sixty floors of elevator music.'); }],
+    [P.atop,()=>{ S('fanfare'); word('1ST!',ax,40,GOLD,4,.8); setMessage('Amy is on the roof first. Of course she is.'); }],
+    [P.ride1,()=>{ S('ding'); word('DING!',carX+6,66,'#fff6dc',4,.45); }],
+    [P.out,()=>{ setMessage('Tom steps out. Rested. Amy holds up her stopwatch.'); S('click'); }],
+    [P.aline,()=>{ say('amy','dc3'); }],
+    [P.cave,()=>{ S('crash'); S('rumble'); battle.shakeEnemy=.5; word('CRUNCH!',Math.max(80,GR.x),40,'#dfe6f2',5,.9); setMessage('She stomps so hard the roof caves in. Right on the monsters.'); }],
+    ['hf',land.length?land[0]:P.cave],
+    [P.apply,()=>{ E2.apply(); S('heal'); setMessage('Everyone hurries up. Amy is still timing them.');
+      for(const S0 of [sT,sA]) scene('glow',.9,{x:S0.x,y:S0.b-(S0===sT?TH:AH)*S0.s*.45,rx:38*S0.s+8,ry:52*S0.s+8,c:'#9be39a',a:.35});
+      for(const p of party) if(p!==tom&&p!==pt) glowOn(p); }],
+    [P.home,()=>{ S('boing'); }],
+    [P.end,'end',()=>{ for(const o of o3) { o.f.fsc=0; o.f.oy=0; o.f.ox=0; o.f.spin=0; } return (E2.result||'')+' Amy is filing a complaint with the building.'; }]];
+  [P.s1,P.s2,P.s3].forEach((t,i)=>steps.push([t,()=>{ S('thud'); battle.shakeEnemy=.2+i*.1; if(i<2) word('STOMP!',lerp(ax,xL,(i+.5)/3),i?66:40,CREAM,4,.35); }]));   // the third stomp is the CRUNCH
+  slabs.forEach(sl=>steps.push([sl.land,()=>{ S('thud'); S('bonk'); ST.jolt(sl.o.f,.4); scene('tb_rings',.6,{x:sl.x,y:sl.o.q.top,r:46,c:'#dfe6f2',w:3}); }]));
+  ST.play(E2,steps);
+};
+
+// ---------- Feast on Jefferson Park (Tom + Deedee, Director's Cut of tier 3) ----------
+// Block party on Jefferson Park at dusk. String lights blink on across the sky, a long party table drops in, and the
+// neighbors' dishes fly in one after another (sourdough, gumbo, pupusas, rhubarb crisp). Tom sets each one down neatly;
+// Deedee immediately moves every dish somewhere else, then wipes the table so hard the plates jump. Tom tells her to sit;
+// she sits for exactly one beat, pops up and straightens the gumbo again. Then the smell of the feast rolls left over every
+// monster (they warm right up, hearts). Effects (no damage): fallen friends up at 35%, party heals 60% and loses its
+// debuffs, 3 Warm Crusts.
+const gumboPot=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); R(-16,-9,5,3,OUT); R(11,-9,5,3,OUT);
+  gfx.beginPath(); gfx.ellipse(0,-6,13,12,0,0,Math.PI); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#3a3f4a'; gfx.fill();
+  EO(0,-6,13,3.5,'#8a4a1e'); E(-4,-7,3,1.2,'#c87a3a'); E(4,-6,2,1,'#3a8a3a'); E(-1,-5,1.6,1,'#f0d070'); gfx.restore(); };
+const pupusaPlate=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); EO(0,-2,14,4,'#f4f0e6');
+  for(const [dx,dy] of [[-5,-4],[5,-4],[0,-7]]) { EO(dx,dy,5.5,2.4,'#e8c48a'); R(dx-2,dy-1,1.5,1.5,'#9a6a3a'); R(dx+2,dy,1.5,1.5,'#9a6a3a'); }
+  E(9,-4,3,1.5,'#9ad06a'); gfx.restore(); };
+const crispPan=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); RO(-13,-9,26,9,'#b8bec8');
+  R(-11,-8,22,6,'#c84a5a'); for(let j=0;j<7;j++) R(-10+j*3,-9+(j%2),2.5,2,'#e8c070'); R(-6,-6,2,2,'#ff8a9a'); gfx.restore(); };
+const breadDish=(x,y,s=1)=>boule(x,y-8*s,.85*s,false);
+const DISHES=[breadDish,gumboPot,pupusaPlate,crispPan];
+const stringLights=(ms,t0,k)=>{ if(k<=0) return; const W=596;
+  for(const [y0,sag,ph] of [[26,26,0],[30,40,.5]]) { gfx.globalAlpha=k; gfx.strokeStyle='#2a2430'; gfx.lineWidth=1.5; gfx.beginPath();
+    for(let x=-10;x<=W;x+=12) { const y=y0+sag*Math.sin(Math.PI*cl((x+10)/W)); x>-10?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke();
+    for(let j=0;j<16;j++) { const x=-10+(j+ph)*W/16,y=y0+sag*Math.sin(Math.PI*cl((x+10)/W))+3,on=ms>t0+j*55;
+      if(on) { gfx.globalAlpha=k*(.28+.08*Math.sin(ms/200+j)); E(x,y+2,8,8,'#ffd27a'); gfx.globalAlpha=k; }
+      E(x,y+2,2.6,3.2,on?['#ffd27a','#ffb0a0','#fff2c0','#9fe0c0'][j%4]:'#5a5060'); } }
+  gfx.globalAlpha=1; };
+B2_TOMBO_ANIM.deedee3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
+  const fc=cl(GR.x1+110,GR.x1+90,420),by=cl(Math.max(GR.base-16,T.base+20),236,292),dx=fc-40,tx=fc+40;
+  const tL=fc-78,tR=fc+70,tY=Math.round(by-TH*.42),SL=[fc-52,fc-18,fc+16,fc+50];
+  const W0=5500,W1=6200;                                    // the smell of the feast rolls left from the table
+  o3.forEach(o=>{ o.t=Math.round(W0+cl((tL-o.q.x)/(tL-10))*(W1-W0)); });
+  const lastW=o3.length?Math.max(...o3.map(o=>o.t)):W0+400;
+  const P={lights:250,table:450,walk:700,d0:800,dGap:220,rear0:1700,dline:1600,wipe0:2800,wipe1:3700,tline:3900,sit:4500,pop:5000,fix:5150,
+    w0:W0,apply:Math.max(lastW+400,W1+250),home:Math.max(lastW+800,W1+650),end:Math.max(lastW+1500,W1+1350)};
+  // dish i: thrown in from the upper right into slot i; then Deedee moves it to slot PERM[i] (hop); the wipe lifts each in turn
+  const PERM=[2,0,3,1],REAR=[0,1,2,3].map(i=>P.rear0+i*200);
+  const dishAt=(i,ms)=>{ const t0=P.d0+i*P.dGap; if(ms<t0) return null;
+    if(ms<t0+380) { const q=seg(ms,t0,t0+380); return {x:lerp(600,SL[i],q),y:lerp(70,tY,q*q)-Math.sin(q*Math.PI)*40,s:1}; }
+    let x=SL[i],y=tY; const r=REAR[i];
+    if(ms>r) { const q=ez(seg(ms,r,r+260)); x=lerp(SL[i],SL[PERM[i]],q); y-=Math.sin(seg(ms,r,r+260)*Math.PI)*22; }
+    if(i===1&&ms>P.fix) { const q=ez(seg(ms,P.fix,P.fix+260)); x=lerp(SL[PERM[i]],(SL[1]+SL[2])/2,q); y-=Math.sin(seg(ms,P.fix,P.fix+260)*Math.PI)*16; }
+    if(ms>P.wipe0&&ms<P.wipe1) { const tw=towelX(ms); if(Math.abs(tw-x)<16) y-=(16-Math.abs(tw-x))*.8; }
+    return {x,y,s:1}; };
+  // the towel sweeps along the table, back and forth
+  const towelX=ms=>{ const q=seg(ms,P.wipe0,P.wipe1)*3; return lerp(tL+12,tR-10,q%2<1?q%1:1-q%1); };
+  const sT={x:T.x,b:T.base},sD={x:dx,b:by};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,fk='idle';
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { fk=ms>P.d0+100&&ms<P.d0+4*P.dGap+250?'act':(ms>P.rear0&&ms<P.wipe1?'expr':(ms>P.tline&&ms<P.tline+700?'act':(ms>P.pop&&ms<W0?'expr':(ms>=W0&&ms<P.apply+400?'celeb':'idle')))); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k)+ffHop(ms,P.home,P.home+650); fk=k<1?'flip':'idle'; }
+    sT.x=x; sT.b=y; return {cx:x,base:y,frame:sp[fk]}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dx,y=by,f=sp.flip;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,dx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) {
+      if(ms>P.rear0-100&&ms<P.rear0+900) f=(Math.floor(ms/200)%2)?mirrorRowsCached(sp,'act'):sp.flip;
+      else if(ms>P.wipe0&&ms<P.wipe1) { f=mirrorRowsCached(sp,'act'); x=dx+Math.sin(ms/70)*3; }
+      else if(ms>P.sit&&ms<P.pop) f=sp.sit||sp.kneel;
+      else if(ms>=P.pop&&ms<P.pop+300) { f=sp.celebFlip||sp.flip; y-=Math.sin(seg(ms,P.pop,P.pop+300)*Math.PI)*16; }
+      else if(ms>=P.fix-50&&ms<P.fix+350) f=mirrorRowsCached(sp,'act');
+      else if(ms>=W0&&ms<P.apply+400) f=sp.celebFlip||sp.flip;
+      else f=ms>P.tline?mirrorRowsCached(sp,'hip'):sp.flip; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(dx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sD.x=x; sD.b=y; return {cx:x,base:y,frame:f}; });
+  const show=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-100)));
+  const tableK=ms=>ez(seg(ms,P.table,P.table+350))*(1-ez(seg(ms,P.home,P.home+500)));
+  // Behind everyone: dusk over the park, a warm horizon, string lights blinking on one by one
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#2a1840',.5);
+    gfx.globalAlpha=k*.35; R(0,by-70,576,90,'#ff9a5a'); gfx.globalAlpha=1;
+    const w=ez(seg(ms,W0,W1))*(1-ez(seg(ms,P.apply,P.end-100))); if(w>0) dim(w,'#ffd98a',.16);
+    stringLights(ms,P.lights,k); }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    // the party table: a sunny cloth with white dots, dropped in from above; the cloth hides the pair's legs
+    const tk=tableK(ms); if(tk>0) { const yo=(1-tk)*-60; gfx.globalAlpha=Math.min(1,tk*1.5);
+      RO(tL,tY+yo,tR-tL,by-2-tY,'#f2c94c'); R(tL,tY+yo,tR-tL,4,'#fff2c0');
+      for(let x=tL+8,j=0;x<tR-4;x+=14,j++) for(let y=tY+yo+12+(j%2)*7;y<by-6+yo;y+=14) E(x,y,1.8,1.8,'#fff6dc');
+      for(let x=tL;x<tR;x+=10) E(x+5,by-2+yo,5,2.5,'#f2c94c');
+      gfx.globalAlpha=1; }
+    // the dishes, with steam
+    for(let i=0;i<4;i++) { const d=dishAt(i,ms); if(!d||ms>P.home+500) continue; gfx.globalAlpha=1-seg(ms,P.home,P.home+500); DISHES[i](d.x,d.y,d.s*1.2);
+      if(ms>P.d0+i*P.dGap+380) for(let j=0;j<2;j++) { const q=((ms/800)+j/2+i*.3)%1; gfx.globalAlpha=(1-q)*.7*(1-seg(ms,P.home,P.home+500)); gfx.strokeStyle='#fff6dc'; gfx.lineWidth=1.5; gfx.beginPath();
+        for(let s=0;s<=5;s++) { const yy=d.y-14-q*26-s*3,xx=d.x+(j?4:-4)+Math.sin(s+ms/150+i)*2.5; s?gfx.lineTo(xx,yy):gfx.moveTo(xx,yy); } gfx.stroke(); }
+      gfx.globalAlpha=1; }
+    // the towel: in her hand, sweeping the table; sparkles where it has been
+    if(ms>P.wipe0-150&&ms<P.wipe1+150) { const x=ms<P.wipe0?sD.x+18:(ms>P.wipe1?sD.x+18:towelX(ms)); towel(x-9,tY-6,Math.sin(ms/60)*.35);
+      if(ms>P.wipe0) for(let j=0;j<4;j++) { const q=((ms/300)+j/4)%1; gfx.globalAlpha=Math.sin(q*Math.PI); star(lerp(tL+10,tR-10,(j*.27+ms/2400)%1),tY-3,2.5,'#fffbe6'); } gfx.globalAlpha=1; }
+    // the smell of the feast: warm golden ribbons rolling left over the monsters, with little food bits riding them
+    if(ms>W0-150&&ms<P.apply+300) { const q=seg(ms,W0-150,W1),fade=1-seg(ms,W1,P.apply+300);
+      for(let j=0;j<4;j++) { const yb=tY-20-j*26+Math.sin(j*1.7)*6,xr=tL-4,xl=lerp(xr,-20,ez(q));
+        gfx.globalAlpha=fade*.75; for(const [w,c] of [[7,'#ffe9a0'],[3,GOLD]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath();
+          for(let x=xr,s=0;x>=xl;x-=8,s++) { const y=yb+Math.sin(x/26+ms/160+j)*7; s?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); }
+        gfx.globalAlpha=fade; const fx2=xl+10,fy2=yb+Math.sin(fx2/26+ms/160+j)*7; if(j===0) breadDish(fx2,fy2+8,.5); else if(j===2) E(fx2,fy2,4,2,'#e8c48a'); else star(fx2,fy2,3,'#fffbe6'); }
+      gfx.globalAlpha=1; }
+    // the monsters lean toward the smell as it reaches them
+    for(const o of o3) { const f=o.f; if(ms<o.t-200||ms>P.end-60) continue; const lean=ez(seg(ms,o.t-200,o.t+200))*(1-ez(seg(ms,P.apply,P.home)));
+      f.ox=lean*10; f.oy=-Math.abs(Math.sin(seg(ms,o.t,o.t+600)*Math.PI*2))*6; f.spin=-lean*.08; f.spinAt=performance.now(); }
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Block party on Jefferson Park.'); B2.aim=null; S('click'); }],
+    [P.lights,()=>{ S('chime2'); }],
+    [P.table,()=>{ S('thud'); setMessage('The string lights come on. The neighbors bring everything.'); }],
+    [P.dline,()=>{ say('deedee','dc3'); }],
+    [P.rear0,()=>{ S('whoosh'); setMessage('Tom sets every dish down just so. Deedee moves every dish.'); }],
+    [P.wipe0,()=>{ S('squeak'); word('WIPE!',(tL+tR)/2,Math.max(60,tY-DH-30),'#cfeeff',4,.6); }],
+    [P.tline,()=>{ say('tom','dcdeedee3'); }],
+    [P.sit,()=>{ S('creak'); setMessage('Deedee sits down. For one second.'); }],
+    [P.pop,()=>{ S('boing'); word('NOPE.',sD.x,Math.max(60,by-DH-40),CREAM,4,.6); }],
+    [P.fix,()=>{ S('ding'); }],
+    [W0,()=>{ S('levelChime'); word('FEAST!',(tL+tR)/2,40,GOLD,5,1); setMessage('The smell of the feast rolls over every monster.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); setMessage('Everybody eats. Deedee does the dishes.'); for(const p of party) { const q=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sD.x,mid:sD.b-DH*.5}:ST.unit(p)); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
+    ['hf',o3.length?Math.min(...o3.map(o=>o.t)):W0],
+    [P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Deedee is already doing the dishes.'; }]];
+  for(let i=0;i<4;i++) steps.push([P.d0+i*P.dGap+380,()=>{ S('thud'); }]);
+  REAR.forEach(t=>steps.push([t,()=>{ S('step'); }]));
+  o3.forEach((o,i)=>steps.push([o.t,()=>{ S('chime2'); ST.jolt(o.f,.25); scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:PINK,w:3}); word('YUM!',o.q.x,i%2?66:40,PINK,4,.4);
+    for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*18,y1:o.q.top-26,arc:10,spin:false,r:6,t:-j*.06,dur:.7});
+    if(o.t===lastW&&o3.indexOf(o)===o3.findIndex(x=>x.t===lastW)) landHit(100); }]));   // a kind Tombo's first landHit lands everything: only the last one calls it
+  if(!o3.length) steps.push([W1,()=>landHit(100)]);
+  ST.play(E2,steps);
+};
+// ---------- Pepper Contest (Tom + Boppy, Director's Cut of tier 3) ----------
+// Father and son face off over a little table and a bowl of hot peppers, one round after another: red, orange, green,
+// then a glowing black one. Tom goes redder every round and sweats a puddle; Boppy stays calm and says that one was mild.
+// Then Boppy's stomach rumbles. Tom hops in behind him, both lean back, and they breathe fire at the same time across the
+// row. Effects: big Cozy hit on a row (GRIT down 3 turns, one buff stolen from each), Boppy's Heartburn +1.
+const PEPC=[['#e0302a','#ff8a6a'],['#f08a1a','#ffc070'],['#3aa040','#9ae07a'],['#2a1830','#b07ae0']];
+const hotPepper=(x,y,s,rot,i)=>{ const [c,h]=PEPC[i]; gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  if(i===3) { const a0=gfx.globalAlpha; gfx.globalAlpha=a0*(.35+.15*Math.sin(performance.now()/90)); E(0,0,13,9,'#c08aff'); gfx.globalAlpha=a0; }
+  gfx.beginPath(); gfx.moveTo(-8,0); gfx.quadraticCurveTo(-2,-5,6,-3); gfx.quadraticCurveTo(9,0,6,2); gfx.quadraticCurveTo(-2,4,-8,0); gfx.closePath();
+  gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); E(-2,-1.6,3,.9,h);
+  Ln(6,-1,10,-5,2.6,'#3a8a3a'); gfx.restore(); };
+// pepper j in the bowl (j 0 at the bottom); it belongs to round floor((7-j)/2), so the top two go first
+const FLUSH=new Map();   // per palette: only the skin colors, pushed to red (everything else transparent)
+const PEPB=[[-6,-5,-.5],[5,-5,.6],[0,-7,.2],[-8,-9,-.2],[7,-9,.8],[-2,-11,-.6],[4,-13,.3],[-5,-14,.1]];
+B2_TOMBO_ANIM.boppy3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),row=(E2.targets||[]).filter(t=>t.side==='foe'&&b2Alive(t)),tg=row.length?row:list,RW=ST.group(tg),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,BH=bsp.idle.length*bsp.scale,BW=bsp.idle[0].length*bsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+44,bx=mx-44,tY=Math.round(by-TH*.4);
+  const fbx=bx-10,ftx=bx+10,fty=by-12;                     // the fire: Boppy steps left, Tom hops in just behind him
+  const R0=900,RG=560,FI=5250,order=tg.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
+  order.forEach((o,i)=>{ o.t=Math.round(FI+160+Math.max(0,fbx-o.q.x)*.45+i*40); });
+  const last=order.length?order[order.length-1].t:FI+300;
+  const rT=i=>R0+i*RG;                                       // round i: Boppy bites at rT(i), Tom 160 ms later
+  const P={walk:650,bline:R0+RG+300,tline:R0+3*RG+560,rumb:4300,hop0:4550,hop1:4900,inh:4900,fire:FI,fireEnd:last+450,
+    apply:last+300,relief:last+650,home:last+1300,end:last+2000};
+  const taken=ms=>{ let n=0; for(let i=0;i<4;i++) if(ms>rT(i)-40) n++; return n; };
+  const redT=ms=>{ let k=0; for(let i=0;i<4;i++) k+=ez(seg(ms,rT(i)+380,rT(i)+620))*.25; return k*(1-seg(ms,P.fireEnd,P.fireEnd+600)); };
+  const redB=ms=>ez(seg(ms,P.rumb,P.inh))*(1-seg(ms,P.fireEnd,P.fireEnd+600));
+  const sT={x:T.x,b:by,f:tsp.idle,rot:0},sB={x:bx,b:by,f:bsp.flip,rot:0};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { const bite=[0,1,2,3].some(i=>ms>rT(i)+120&&ms<rT(i)+420),eat=taken(ms-160);
+      if(ms<P.hop0) { f=bite||(ms>P.tline-80&&ms<P.tline+500)?sp.act:(eat>=2?sp.expr:sp.idle); if(eat>=3&&!bite) x=tx+Math.sin(ms/45)*1.2; }
+      else if(ms<P.hop1) { const k=ez(seg(ms,P.hop0,P.hop1)); x=lerp(tx,ftx,k); y=lerp(by,fty,k)-Math.sin(k*Math.PI)*30; f=sp.celeb; }
+      else { x=ftx; y=fty; if(ms<P.fire) { rot=.2*ez(seg(ms,P.inh,P.fire-60)); } else if(ms<P.fireEnd) { f=sp.act; rot=-.1+Math.sin(ms/30)*.02; } else f=ms<P.relief+600?sp.expr:sp.idle; } }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(ftx,c.origX,k); y=lerp(fty,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; sT.rot=rot; return {cx:x,base:y,frame:f,rot}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,actR=mirrorRowsCached(sp,'act'),hipR=mirrorRowsCached(sp,'hip'); let x=bx,y=by,f=sp.flip,rot=0;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,bx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { const bite=[0,1,2,3].some(i=>ms>rT(i)-40&&ms<rT(i)+260);
+      if(ms<P.rumb) f=bite?actR:(ms>P.bline-60&&ms<P.bline+900?hipR:sp.flip);
+      else if(ms<P.hop0) { f=hipR; x=bx+Math.sin(ms/28)*1.6; }
+      else if(ms<P.inh) { const k=ez(seg(ms,P.hop0,P.hop0+250)); x=lerp(bx,fbx,k); f=sp.idle; }
+      else { x=fbx; if(ms<P.fire) { f=sp.idle; rot=.18*ez(seg(ms,P.inh,P.fire-60)); } else if(ms<P.fireEnd) { f=sp.act; rot=-.12+Math.sin(ms/30)*.03; } else f=ms<P.relief+600?sp.hip:sp.idle; } }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(fbx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sB.x=x; sB.b=y; sB.f=f; sB.rot=rot; return {cx:x,base:y,frame:f,rot}; });
+  const show=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-100)));
+  const tabIn=ms=>ez(seg(ms,P.walk-250,P.walk+120)),tabK=ms=>tabIn(ms)*(1-ez(seg(ms,P.hop0,P.hop0+300)));
+  const bowlTop=()=>({x:mx,y:tY-16});
+  const mouthBR=()=>({x:sB.x+BW*.2,y:sB.b-BH*.72}),mouthBL=()=>({x:sB.x-BW*.24,y:sB.b-BH*.7}),mouthT=()=>({x:sT.x-TW*.22,y:sT.b-TH*.7});
+  const sweatK=ms=>ez(seg(ms,rT(1)+380,P.tline+300))*(1-ez(seg(ms,P.home,P.home+500)));
+  // Behind everyone: a warm kitchen evening, a lamp over the table, Tom's sweat puddle; the room flushes orange at the fire.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#24100a',.55);
+    gfx.globalAlpha=k*.16*tabK(ms); E(mx,tY-26,90,56,'#ffb060'); gfx.globalAlpha=1;
+    const pk=sweatK(ms); if(pk>0) { const r=6+30*pk; gfx.globalAlpha=.8; E(tx,by+3,r,r*.22,'#5aa8d8'); E(tx-r*.2,by+2,r*.5,r*.08,'#bfe8ff'); gfx.globalAlpha=1; }
+    if(ms>P.fire&&ms<P.fireEnd+400) { gfx.globalAlpha=Math.sin(seg(ms,P.fire,P.fireEnd+400)*Math.PI)*.35; R(0,0,576,324,'#ff5a1a'); gfx.globalAlpha=1; } }});
+  const faceRed=(sp,S0,H,k)=>{ if(k<=0.01) return;
+    let fl=FLUSH.get(sp.pal); if(!fl) { fl={}; for(const q in sp.pal) { const c=sp.pal[q]; fl[q]='rgba(0,0,0,0)'; if(typeof c!=='string'||c[0]!=='#'||c.length<7) continue;
+      const [r,g,b]=[1,3,5].map(i=>parseInt(c.substr(i,2),16)); if(r>=150&&g/r>.45&&g/r<.88&&b/r>.3&&b<g) fl[q]='rgb('+Math.round(lerp(r,255,.35))+','+Math.round(g*.42)+','+Math.round(b*.38)+')'; } FLUSH.set(sp.pal,fl); } gfx.save(); gfx.translate(S0.x,S0.b-H/2); gfx.rotate(S0.rot||0); gfx.translate(-S0.x,-(S0.b-H/2));
+    gfx.beginPath(); gfx.rect(0,S0.b-H-4,576,H*.4+4); gfx.clip(); drawAt(sp,S0.f,S0.x,S0.b,fl,k); gfx.restore(); };
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    // the little round table and the bowl of peppers (slides away when they get up for the fire)
+    const tk=tabK(ms); if(tk>0) { const yo=(1-tabIn(ms))*-50; gfx.globalAlpha=Math.min(1,tk*1.4);
+      RO(mx-3,tY+yo+2,6,by-tY-6,'#6a4428'); EO(mx,by-3+yo,15,3,'#6a4428'); EO(mx,tY+yo,30,6,'#8a5a30'); E(mx,tY+yo-1.5,26,3.5,'#a8723e');
+      const n=8-2*taken(ms); for(let j=0;j<n;j++) { const [px,py,pr]=PEPB[j]; hotPepper(mx+px,tY+yo-6+py,.85,pr,Math.floor((7-j)/2)); }
+      gfx.beginPath(); gfx.ellipse(mx,tY+yo-6,14,11,0,0,Math.PI); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#f4f0e6'; gfx.fill();
+      R(mx-10,tY+yo-1,20,2.5,'#3a7ac0'); gfx.globalAlpha=1; }
+    // each round: two peppers fly from the bowl to two mouths, crunch
+    for(let i=0;i<4;i++) for(const [t0,who] of [[rT(i),'b'],[rT(i)+160,'t']]) {
+      const m=who==='b'?mouthBR():mouthT(),b0=bowlTop();
+      if(ms>t0&&ms<t0+220) { const q=seg(ms,t0,t0+220); hotPepper(lerp(b0.x,m.x,q),lerp(b0.y,m.y,q)-Math.sin(q*Math.PI)*22,1.1,(who==='b'?1:-1)*q*2.5,i); }
+      else if(ms>t0+220&&ms<t0+520) { const q=seg(ms,t0+220,t0+520); gfx.globalAlpha=1-q;
+        for(let j=0;j<4;j++) R(m.x+(j-1.5)*4+(j%2?q*6:-q*6),m.y+q*q*18-j%2*3,2,2,PEPC[i][j%2]); gfx.globalAlpha=1; } }
+    // Tom goes redder every round (and Boppy when his stomach turns)
+    faceRed(tsp,sT,TH,redT(ms)); faceRed(bsp,sB,BH,redB(ms));
+    // sweat flying off Tom's head, more every round
+    const sk=sweatK(ms); if(sk>0&&ms<P.hop0) { const n=2+Math.floor(sk*5),top=sT.b-TH;
+      for(let j=0;j<n;j++) { const q=((ms/520)+j/n)%1,side=j%2?1:-1; gfx.globalAlpha=(1-q)*.95;
+        const x=sT.x+side*(6+q*34),y=top+10-Math.sin(q*Math.PI)*16+q*q*26; E(x,y,2.6,3.4,'#7ac8f0'); E(x-.8,y-1,1,1.2,'#ffffff'); } gfx.globalAlpha=1; }
+    // steam from his ears once he is very red
+    if(redT(ms)>.6&&ms<P.fire) { const top=sT.b-TH; for(let j=0;j<4;j++) { const q=((ms/400)+j/4)%1; gfx.globalAlpha=(1-q)*.8;
+      E(sT.x+(j%2?TW*.26:-TW*.26)+(j%2?q*10:-q*10),top+TH*.24-q*24,3+q*4,3+q*4,'#f4f0e6'); } gfx.globalAlpha=1; }
+    // Boppy's stomach rumbling
+    if(ms>P.rumb&&ms<P.inh) { const a=1-seg(ms,P.inh-200,P.inh),cy=sB.b-BH*.42; gfx.globalAlpha=a; gfx.strokeStyle='#ffd0a0'; gfx.lineWidth=2;
+      for(let j=0;j<3;j++) { const r=12+j*7+((ms/60)%7); gfx.beginPath(); gfx.arc(sB.x+4,cy,r,-.5,.5); gfx.stroke(); gfx.beginPath(); gfx.arc(sB.x+4,cy,r,Math.PI-.5,Math.PI+.5); gfx.stroke(); } gfx.globalAlpha=1; }
+    // THE FIRE: two cones of pepper breath, one from each of them, across the row
+    if(ms>P.fire&&ms<P.fireEnd) { const gr=ez(seg(ms,P.fire,P.fire+240)),fo=1-seg(ms,P.fireEnd-250,P.fireEnd),fl=Math.sin(ms/25);
+      for(const [m,sz] of [[mouthT(),.8],[mouthBL(),1]]) { const len=Math.max(40,m.x-(RW.x0-36))*gr;
+        for(const [sp2,c,a] of [[1,'#ff4a12',.7],[.68,'#ff9a2a',.9],[.36,'#fff2a0',1]]) { gfx.globalAlpha=a*fo; gfx.fillStyle=c; gfx.beginPath(); gfx.moveTo(m.x,m.y);
+          const hw=(64+fl*6)*sp2*gr*sz; gfx.quadraticCurveTo(m.x-len*.5,m.y-hw*.8,m.x-len,m.y-hw); gfx.lineTo(m.x-len,m.y+hw*.8); gfx.quadraticCurveTo(m.x-len*.5,m.y+hw*.6,m.x,m.y); gfx.fill(); }
+        for(let j=0;j<7;j++) { const q=((ms-P.fire)/480+j/7)%1; gfx.globalAlpha=fo*(1-q); EO(m.x-q*len,m.y+Math.sin(j*2.4)*q*46*sz,3+q*7,3+q*5,j%2?'#ffb02a':'#ff6a1a'); } }
+      gfx.globalAlpha=1; }
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Father and son. One bowl of hot peppers.'); B2.aim=null; S('click'); }],
+    [R0,()=>{ setMessage('Round after round. Nobody blinks.'); }],
+    [P.bline,()=>{ say('boppy','dc3'); }],
+    [P.tline,()=>{ say('tom','dcboppy3'); }],
+    [P.rumb,()=>{ S('rumble'); word('RUMBLE...',sB.x,Math.max(60,by-BH-40),'#ffd0a0',3,.8); setMessage('Then Boppy’s stomach rumbles.'); }],
+    [P.hop0,()=>{ S('boing'); }],
+    [P.inh,()=>{ S('whoosh'); setMessage('They both lean back...'); }],
+    [P.fire,()=>{ S('flame'); S('crash'); S('rumble'); battle.shakeEnemy=.7; word('FWOOOSH!',Math.max(90,RW.x),52,'#ff7a2a',5,1.1); setMessage('Double pepper breath! Right across the row!'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sB.x,mid:sB.b-BH*.5}:ST.unit(p)); scene('glow',1,{x:q2.x,y:q2.mid,rx:38,ry:52,c:'#ffb84a',a:.35}); } }],
+    [P.relief,()=>{ S('fanfare'); setMessage('Boppy calls it a tie. Tom calls for milk.'); }],
+    [P.relief+500,()=>{ word('TIE.',(sT.x+sB.x)/2,Math.max(56,by-Math.max(TH,BH)-60),CREAM,4,.8); }],
+  ];
+  for(let i=0;i<4;i++) { steps.push([rT(i)+20,()=>{ S('bonk'); }]); steps.push([rT(i)+180,()=>{ S('bonk'); if(i>0) S('flame'); }]);
+    steps.push([rT(i)+420,()=>{ word(['HOT.','HOTTER.','HOTTEST.','HELP.'][i],tx,Math.max(60,by-TH-34),['#ffd04a','#ffb03a','#ff7a2a','#ff4a3a'][i],3,.45); }]); }
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); ST.jolt(o.f,.6); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:46,c:'#ffb02a',w:3}); landHit(split100(i,order.length)); }]); });
+  steps.push(['hf',order.length?order[0].t:P.fire]);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Tom still cannot feel his face.']);
+  ST.play(E2,steps);
+};
+
+// ---------- Golden Repair (Tom + TNB, Director's Cut of tier 3) ----------
+// The pottery studio after hours. TNB hands Tom a cup; it slips and breaks on the floor in three pieces. Tom kneels, gathers
+// them and holds them out. TNB says broken is fine and mends it with gold, the Japanese way (kintsugi), brushing gold into
+// every crack. The mended cup rises and grows, its gold seams blaze, and three gold beams shoot from the seams into the
+// monster, leaving gold seams on it too. A gold glow settles over the family, and TNB kisses Tom.
+// Effects: big Sparkle hit on one enemy; the party Guards (half damage) for 2 turns and Amber melts off.
+const CUPC='#c8b49a',CUPG='#7aa8b8',KGOLD='#f2b81a';
+const CRK_A=[[-1,-11],[1,-5],[-2,-1],[1,3],[0,10]],CRK_B=[[-2,-1],[3,0],[6,-3],[14,-1]];
+const polyPart=(pts,k)=>{ if(k<=0) return null; let L=0; const seg2=[]; for(let i=1;i<pts.length;i++) { const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]); seg2.push(d); L+=d; }
+  let left=L*k; gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); let end=pts[0];
+  for(let i=1;i<pts.length&&left>0;i++) { const d=seg2[i-1],u=Math.min(1,left/d); end=[lerp(pts[i-1][0],pts[i][0],u),lerp(pts[i-1][1],pts[i][1],u)]; gfx.lineTo(end[0],end[1]); left-=d; }
+  return end; };
+// The cup at x,y (its middle), scale s, turned rot. split pushes the three pieces apart (0 = whole); seam 0..1 paints the
+// gold along the cracks (A first, then B); glow 0..1 makes the gold blaze. Returns the brush tip spot (local coords).
+const kCup=(x,y,s,rot,split,seam,glow)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  const body=()=>{ const sh=()=>{ gfx.beginPath(); gfx.moveTo(-11,-7); gfx.bezierCurveTo(-11,2,-7,6,-4,6); gfx.lineTo(4,6); gfx.bezierCurveTo(7,6,11,2,11,-7); gfx.closePath(); };
+    RO(-5,5,10,3,'#a8927a'); sh(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CUPC; gfx.fill();
+    gfx.save(); sh(); gfx.clip(); R(-12,-8,24,6,CUPG); for(const [dx,h2] of [[-7,3],[-2,4.5],[4,3.5],[8,2.5]]) E(dx,-2,1.4,h2,CUPG); for(const [a,b2] of [[-6,2],[3,3],[-2,4],[6,0]]) R(a,b2,1.2,1.2,'#8a7258'); gfx.restore();
+    E(0,-7,11.5,3.4,OUT); E(0,-7,10,2.2,'#4a3a2e'); E(-3,-7.5,4,.8,'#6a5a48'); };
+  const A=CRK_A,B=CRK_B;
+  const piece=(path,dx,dy,r)=>{ gfx.save(); gfx.translate(dx*split,dy*split); gfx.rotate(r*split); gfx.beginPath(); path(); gfx.clip(); body(); gfx.restore(); };
+  piece(()=>{ gfx.moveTo(-16,-12); for(const p of A) gfx.lineTo(p[0],p[1]); gfx.lineTo(-16,12); gfx.closePath(); },-6,2,-.35);
+  piece(()=>{ gfx.moveTo(A[0][0],A[0][1]); gfx.lineTo(18,-12); gfx.lineTo(18,0); for(let i=B.length-2;i>=0;i--) gfx.lineTo(B[i][0],B[i][1]); gfx.lineTo(A[1][0],A[1][1]); gfx.closePath(); },6,-5,.45);
+  piece(()=>{ gfx.moveTo(B[0][0],B[0][1]); for(let i=1;i<B.length;i++) gfx.lineTo(B[i][0],B[i][1]); gfx.lineTo(18,12); gfx.lineTo(A[4][0],A[4][1]); gfx.lineTo(A[3][0],A[3][1]); gfx.closePath(); },5,4,.2);
+  let tip=null;
+  if(seam>0&&split<.05) { gfx.save(); gfx.beginPath(); gfx.rect(-12,-10,27,20); gfx.clip(); gfx.lineCap='round'; gfx.lineJoin='round';
+    const ka=cl(seam/.6),kb=cl((seam-.6)/.4);
+    for(const [w,c,al] of [[3.6,'#ffe9a0',.2+glow*.4],[1.5,KGOLD,1],[.6,'#fff6c0',.9]]) { const a0=gfx.globalAlpha; gfx.globalAlpha=a0*al; gfx.strokeStyle=c; gfx.lineWidth=w*(1+glow*.2);
+      const ea=polyPart(A,ka); if(ea) gfx.stroke(); if(ea) tip=ea; const eb=polyPart(B,kb); if(eb) { gfx.stroke(); tip=eb; } gfx.globalAlpha=a0; }
+    gfx.restore(); }
+  gfx.restore(); return tip; };
+B2_TOMBO_ANIM.tnb3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),tgt=(E2.targets||[]).find(t=>t.side==='foe'&&b2Alive(t))||list[0],F=ST.foe(tgt),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+40,nx=mx-40,nx2=mx-20;
+  const P={walk:700,hand:900,slip:1300,crack:1500,kneel:1800,lift:2150,held:2400,nline:2450,step:2800,join:2950,joined:3300,seam1:3900,tline:3700,
+    rise:4500,big:5000,beam:5200,hit:5450,apply:5950,back:5900,kiss:6350,home:6800,end:7500};
+  const sT={x:T.x,b:by,f:tsp.idle},sN={x:nx,b:by,f:nsp.flip};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { f=ms>P.crack&&ms<P.crack+250?sp.expr:(ms>P.kneel&&ms<P.lift+150?sp.kneel:(ms>P.lift+150&&ms<P.rise?sp.act:(ms>P.hit&&ms<P.hit+800?sp.celeb:sp.idle))); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,actR=mirrorRowsCached(sp,'act'),aimR=mirrorRowsCached(sp,'aim'); let x=nx,y=by,f=sp.flip;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,nx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { x=ms<P.step?nx:lerp(nx,nx2,ez(seg(ms,P.step,P.join)));
+      if(ms>P.hand-150&&ms<P.slip) f=actR;
+      else if(ms>P.crack&&ms<P.crack+300) f=sp.expr?mirrorRowsCached(sp,'expr'):sp.flip;
+      else if(ms>P.join&&ms<P.seam1+100) f=Math.floor(ms/180)%2?aimR:actR;
+      else if(ms>P.beam-100&&ms<P.hit+800) f=ms<P.hit?sp.act:sp.celeb;
+      else f=sp.flip; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(nx2,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f}; });
+  const show=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-100)));
+  const floorP={x:mx,y:by-12},high={x:mx,y:112},HS=2.2,BS=5.2;
+  // where the cup is, how big, how broken: {x,y,s,rot,split,seam,glow}
+  const cupAt=ms=>{ if(ms<P.hand) return null;
+    const hN=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,1); return {x:h.x+8,y:h.y}; },hT=()=>{ const h=handPt(tsp,tsp.act,sT.x,sT.b,-1); return {x:h.x-10,y:h.y+2}; };
+    if(ms<P.slip) { const h=hN(),k=ez(seg(ms,P.hand,P.hand+200)); return {x:h.x,y:h.y,s:HS*k,rot:0,split:0,seam:0,glow:0}; }
+    if(ms<P.crack) { const q=seg(ms,P.slip,P.crack),h=hN(); return {x:lerp(h.x,floorP.x,q),y:lerp(h.y,floorP.y,q*q),s:HS,rot:q*2.2,split:0,seam:0,glow:0}; }
+    if(ms<P.lift) { const q=ez(seg(ms,P.crack,P.crack+250)); return {x:floorP.x,y:floorP.y+2*q,s:HS,rot:Math.PI*.7+q*.3,split:1.8*q,seam:0,glow:0}; }
+    if(ms<P.held) { const q=ez(seg(ms,P.lift,P.held)),h=hT(); return {x:lerp(floorP.x,h.x,q),y:lerp(floorP.y+2,h.y,q),s:HS,rot:lerp(Math.PI,Math.PI*2,q),split:lerp(1.8,.6,q),seam:0,glow:0}; }
+    if(ms<P.rise) { const h=hT(),sp2=.6*(1-ez(seg(ms,P.join,P.joined))),sm=seg(ms,P.joined-100,P.seam1); return {x:h.x,y:h.y,s:HS,rot:0,split:sp2,seam:sm,glow:ms>P.seam1?.25+.15*Math.sin(ms/120):0}; }
+    if(ms<P.back) { const q=ez(seg(ms,P.rise,P.big)),h=hT(); return {x:lerp(h.x,high.x,q),y:lerp(h.y,high.y,q)+Math.sin(ms/220)*3*q,s:lerp(HS,BS,q),rot:Math.sin(ms/300)*.06*q,split:0,seam:1,glow:ms<P.hit?q:1-seg(ms,P.hit,P.back)*.6}; }
+    const q=ez(seg(ms,P.back,P.back+450)),h=hN(); if(q>=1) return null; return {x:lerp(high.x,h.x,q),y:lerp(high.y,h.y,q),s:lerp(BS,1.4,q),rot:0,split:0,seam:1,glow:.4*(1-q)}; };
+  // the seams in world space (for the beams): the cup's local crack points, scaled and moved
+  const seamPts=c=>[[1,-5],[1,3],[6,-3]].map(([a,b2])=>({x:c.x+a*c.s,y:c.y+b2*c.s}));
+  const beamEnd=[{x:F.x+F.w*.15,y:F.mid-F.h*.2},{x:F.x-F.w*.15,y:F.mid+F.h*.15},{x:F.x+F.w*.05,y:F.mid}];
+  // Behind everyone: the studio at night under a warm work lamp, a shelf of pots behind the pair.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#10141e',.55);
+    gfx.globalAlpha=k*.22; E(mx,by-60,110,80,'#ffcf8a'); gfx.globalAlpha=k;
+    const sy=Math.round(by-TH-20); RO(mx-70,sy,140,5,'#7a5a3a');
+    for(const [dx,h,c] of [[-58,16,'#b85a3a'],[-36,22,'#7aa8b8'],[-12,13,'#e8dcc4'],[12,20,'#5a6a4a'],[38,15,'#c8b49a'],[58,18,'#a85a7a']]) { RO(mx+dx-6,sy-h,12,h,c); R(mx+dx-6,sy-h,12,2,'#ffffff40'); }
+    gfx.globalAlpha=1;
+    if(ms>P.hit&&ms<P.hit+700) { gfx.globalAlpha=Math.sin(seg(ms,P.hit,P.hit+700)*Math.PI)*.25; R(0,0,576,324,GOLD); gfx.globalAlpha=1; } }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    const c=cupAt(ms); let tip=null;
+    if(c&&c.s>0) { gfx.globalAlpha=Math.min(1,k*1.5);
+      if(c.glow>.05) { gfx.globalAlpha=c.glow*(.3+.1*Math.sin(ms/90)); E(c.x,c.y,c.s*15,c.s*11,'#ffd86a'); gfx.globalAlpha=1; }
+      const t0=kCup(c.x,c.y,c.s,c.rot,c.split,c.seam,c.glow); if(t0) tip={x:c.x+t0[0]*c.s,y:c.y+t0[1]*c.s};
+      gfx.globalAlpha=1; }
+    // a tiny dust puff where it broke
+    if(ms>P.crack&&ms<P.crack+500) { const q=seg(ms,P.crack,P.crack+500); gfx.globalAlpha=(1-q)*.6; for(let j=0;j<5;j++) E(floorP.x+(j-2)*8*(1+q),floorP.y+6-q*8,3+q*3,2+q*2,'#c8beb0'); gfx.globalAlpha=1; }
+    // TNB's brush: from his hand to the seam he is painting, a gold drop on the tip
+    if(ms>P.join&&ms<P.seam1+150) { const h=handPt(nsp,sN.f,sN.x,sN.b,1),to=tip||(c?{x:c.x-4,y:c.y-6}:h),a=ez(seg(ms,P.join,P.join+150))*(1-seg(ms,P.seam1,P.seam1+150));
+      gfx.globalAlpha=a; Ln(h.x,h.y,to.x-3,to.y+1,4,OUT); Ln(h.x,h.y,to.x-3,to.y+1,2,'#a8723e'); E(to.x-1,to.y,2.6,2.2,KGOLD); E(to.x-1.6,to.y-.6,.9,.8,'#fff6c0');
+      if(tip) for(let j=0;j<3;j++) { const q=((ms/260)+j/3)%1; gfx.globalAlpha=a*(1-q); star(tip.x+Math.cos(j*2.1)*q*10,tip.y-q*10,2+q,'#fffbe6'); } gfx.globalAlpha=1; }
+    // three gold beams from the seams into the monster
+    if(c&&ms>P.beam&&ms<P.hit+350) { const q=ez(seg(ms,P.beam,P.hit)),fo=1-seg(ms,P.hit+100,P.hit+350),sp3=seamPts(c);
+      sp3.forEach((s0,j)=>{ const e=beamEnd[j],n=10;
+        for(const [w,col,al] of [[9,'#ffe9a0',.35],[3.5,KGOLD,1],[1.4,'#fffbe6',1]]) { gfx.globalAlpha=al*fo; gfx.strokeStyle=col; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(s0.x,s0.y);
+          for(let i=1;i<=n;i++) { const u2=i/n; if(u2>q) break; const zz=(i%2?1:-1)*(i<n?9:0)*Math.sin(u2*Math.PI); gfx.lineTo(lerp(s0.x,e.x,u2)+zz*.4,lerp(s0.y,e.y,u2)+zz); } gfx.stroke(); } });
+      gfx.globalAlpha=1; }
+    // the monster gets mended too: gold seams across it that glow, then fade
+    if(ms>P.hit&&ms<P.hit+1300) { const q=seg(ms,P.hit,P.hit+1300),a=q<.15?q/.15:1-seg(q,.6,1); gfx.save(); gfx.globalAlpha=a; gfx.lineCap='round'; gfx.lineJoin='round';
+      for(const [w,col] of [[5,'#ffe9a0'],[2,KGOLD]]) { gfx.strokeStyle=col; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(F.x-F.w*.35,F.top+F.h*.25); gfx.lineTo(F.x-F.w*.1,F.mid-4); gfx.lineTo(F.x+F.w*.05,F.mid+2); gfx.lineTo(F.x+F.w*.3,F.mid+F.h*.3);
+        gfx.moveTo(F.x+F.w*.05,F.mid+2); gfx.lineTo(F.x+F.w*.2,F.top+F.h*.2); gfx.stroke(); } gfx.restore();
+      if(q<.5) { const r=q*2; gfx.globalAlpha=1-r; for(let j=0;j<10;j++) { const an=j*.63; star(F.x+Math.cos(an)*r*70,F.mid+Math.sin(an)*r*46,3+r*3,j%2?GOLD:'#fffbe6'); } ring(F.x,F.mid,10+r*80,8+r*52,4,GOLD); gfx.globalAlpha=1; } }
+    // the kiss
+    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100); gfx.globalAlpha=q>.8?(1-q)/.2:1; heart((sT.x+sN.x)/2,by-Math.max(TH,NH)-12-q*30,7+Math.sin(q*Math.PI)*4,PINK); gfx.globalAlpha=1; }
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! The pottery studio, after hours.'); B2.aim=null; S('click'); }],
+    [P.hand,()=>{ S('ding'); setMessage('TNB hands Tom his favorite cup.'); }],
+    [P.slip,()=>{ S('whoosh'); }],
+    [P.crack,()=>{ S('crash'); word('CRACK!',mx,Math.max(60,by-Math.max(TH,NH)-40),CREAM,4,.6); setMessage('It slips. Three pieces.'); }],
+    [P.kneel,()=>{ S('step'); setMessage('Tom gathers every piece.'); }],
+    [P.nline,()=>{ say('tnb','dc3'); }],
+    [P.join,()=>{ S('chime2'); setMessage('TNB mends it with gold, the Japanese way: kintsugi.'); }],
+    [P.tline,()=>{ say('tom','dctnb3'); }],
+    [P.rise,()=>{ S('levelChime'); setMessage('The gold seams start to glow.'); }],
+    [P.big,()=>{ word('GOLDEN!',mx,40,GOLD,5,.9); }],
+    [P.beam,()=>{ S('whoosh'); S('chime2'); }],
+    [P.hit,()=>{ S('crash'); S('bang'); battle.shakeEnemy=.6; ST.jolt(tgt,.7); scene('tb_rings',.7,{x:F.x,y:F.mid,r:70,c:GOLD,w:4}); word('MENDED!',F.x,66,'#fffbe6',4,.9); landHit(100); }],
+    ['hf',P.hit],
+    [P.apply,()=>{ E2.apply(); S('heal'); setMessage('A gold glow settles over the family.');
+      for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sN.x,mid:sN.b-NH*.5}:ST.unit(p)); scene('glow',1.1,{x:q2.x,y:q2.mid,rx:40,ry:54,c:GOLD,a:.45}); } }],
+    [P.kiss,()=>{ S('kiss'); }],
+    [P.end,'end',()=>(E2.result||'')+' Now it is theirs.']];
+  ST.play(E2,steps);
+};
+
+// ---------- Under the Table (Tom + Nara, Director's Cut of tier 3) ----------
+// Family dinner. Nara is under the table. Tom tells her to keep it quiet and sneaks her three bits of his sourdough; her
+// head pops out from under the tablecloth for each one. She gets so excited the whole table jiggles, then she pops straight
+// up under the cloth: it flies off the table (the plates do not move), sails over the room and lands on every monster like
+// a net. Nara lands beside the table and sits, very proud; Tom slips her one more bit.
+// Effects: huge Sparkle hit on every enemy; they are Hooked (no dodging) for 2 turns.
+const clothPath=(c,ms)=>{ const {x0,x1,yT,yB,peak,flare,wave}=c; gfx.beginPath(); gfx.moveTo(x0,yT); gfx.quadraticCurveTo((x0+x1)/2,yT-peak,x1,yT);
+  gfx.lineTo(x1+flare,yB); const n=Math.max(4,Math.round((x1-x0+flare*2)/10));
+  for(let i=1;i<=n;i++) { const u2=i/n,x=lerp(x1+flare,x0-flare,u2),y=yB+Math.sin(u2*Math.PI*n*.5+ms/(wave>2?60:140))*wave; gfx.lineTo(x,y); }
+  gfx.closePath(); };
+const cloth=(c,ms,a=1)=>{ if(a<=0) return; gfx.save(); gfx.globalAlpha=a; clothPath(c,ms); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#fffaf0'; gfx.fill(); gfx.clip();
+  gfx.globalAlpha=a*.42; gfx.fillStyle='#d83a3a'; const L=Math.min(c.x0,c.x0-c.flare)-2,Rr=c.x1+c.flare+2,T0=c.yT-c.peak-2;
+  for(let x=L+4;x<Rr;x+=12) gfx.fillRect(x,T0,5,c.yB+c.wave+4-T0); for(let y=T0+4;y<c.yB+c.wave+4;y+=12) gfx.fillRect(L,y,Rr-L,5);
+  gfx.restore(); };
+const lerpC=(a,b,q)=>{ const o={}; for(const k in a) o[k]=lerp(a[k],b[k],q); return o; };
+B2_TOMBO_ANIM.nara3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
+  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),party=b2LiveParty();
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale,NW=nsp.idle[0].length*nsp.scale;
+  const fc=cl(GR.x1+120,GR.x1+100,430),by=cl(Math.max(GR.base-16,T.base+20),236,292),tL=fc-50,tR=fc+80,tY=Math.round(by-TH*.42);
+  const tx=tL+30,tby=by-6,nUnder=tL+NW*.62,nPeek=tL+NW*.08,nOut=tL-NW*.55,nMid=fc+18,nLand=tL-NW*.5;
+  const BITS=[1900,2500,3100];
+  const P={table:300,walk:700,run:900,tline:1000,nline:3500,wig0:3550,pop:4100,apex:4380,land:4700,fly:4380,drape:4950,hit:5100,apply:5750,treat:6050,
+    home:6700,end:7400};
+  const hitT=o3.map((o,i)=>P.hit+i*70);
+  const sT={x:T.x,b:tby,f:tsp.idle},sN={x:0,b:by,f:nsp.idle};
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=tby,f=sp.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,tby,k)+ffHop(ms,0,P.walk); }
+    else if(ms<P.home) { const give=BITS.some(t=>ms>t-150&&ms<t+260)||(ms>P.treat-150&&ms<P.treat+260);
+      f=give||(ms>P.tline-50&&ms<P.tline+700)?sp.act:(ms>P.wig0&&ms<P.drape?sp.expr:(ms>P.hit&&ms<P.hit+800?sp.celeb:sp.idle)); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(tby,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  const peekK=ms=>{ let k=0; for(const t of BITS) k=Math.max(k,ez(seg(ms,t-200,t-50))*(1-ez(seg(ms,t+400,t+600)))); return k; };
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nUnder,y=by,f=sp.idle,rot=0;
+    if(ms<P.run) { const k=ez(seg(ms,0,P.run)); x=lerp(c.origX,nOut,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.wig0) { const pk=peekK(ms); x=lerp(lerp(nOut,nUnder,ez(seg(ms,P.run,P.run+300))),nPeek,pk); if(ms<P.run+300) f=runFr(sp,c.t,1); f=pk>.5&&BITS.some(t=>ms>t+150&&ms<t+400)?sp.celeb:(pk>.1?sp.aim:sp.idle); }
+    else if(ms<P.pop) { const k=ez(seg(ms,P.wig0,P.wig0+300)); x=lerp(nUnder,nMid,k)+Math.sin(ms/40)*2; f=runFr(sp,c.t,-1); }
+    else if(ms<P.apex) { const q=seg(ms,P.pop,P.apex); x=nMid; y=by-(by-tY+46)*(1-(1-q)*(1-q)); f=sp.celeb; }
+    else if(ms<P.land) { const q=seg(ms,P.apex,P.land); x=lerp(nMid,nLand,q); y=lerp(tY-46,by+4,q*q); f=sp.celeb; }
+    else if(ms<P.home) { x=nLand; y=by+4; f=sp.sit||sp.idle; if(ms>P.treat+150&&ms<P.treat+500) y-=Math.sin(seg(ms,P.treat+150,P.treat+500)*Math.PI)*12; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(nLand,c.origX,k); y=lerp(by+4,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f,rot,hide:(ms>P.run&&ms<P.pop)||(ms>=P.land&&ms<P.home)}; });
+  const show=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-100)));
+  const tIn=ms=>ez(seg(ms,P.table,P.table+350)),tOut=ms=>1-ez(seg(ms,P.home,P.home+450));
+  const jig=ms=>ms>P.wig0&&ms<P.pop?Math.sin(ms/34)*2.2*seg(ms,P.wig0,P.wig0+250):0;
+  const C_TABLE=ms=>({x0:tL-4,x1:tR+4,yT:tY-1,yB:by+3,peak:0,flare:3,wave:ms>P.wig0&&ms<P.pop?2.2:.6});
+  const C_SHEET=()=>({x0:sN.x-24,x1:sN.x+24,yT:sN.b-NH*.85,yB:sN.b-4,peak:18,flare:12,wave:2.5});
+  const W=Math.max(120,GR.x1-GR.x0+44),gx=(GR.x0+GR.x1)/2;
+  const C_FLAT=q=>{ const cx=lerp(nMid,gx,q),w=lerp(52,W,ez(q)),yT=lerp(tY-60,GR.top-16,q)-Math.sin(q*Math.PI)*46; return {x0:cx-w/2,x1:cx+w/2,yT,yB:yT+lerp(30,22,Math.sin(q*Math.PI)),peak:lerp(18,6,q),flare:lerp(12,4,q),wave:4}; };
+  const C_DRAPE=ms=>{ const yT=GR.top-14+Math.sin(seg(ms,P.drape,P.drape+400)*Math.PI*2)*(1-seg(ms,P.drape,P.drape+400))*6; return {x0:gx-W/2,x1:gx+W/2,yT,yB:GR.base+6,peak:10,flare:8,wave:1.5}; };
+  let sheet0=null;
+  const clothAt=ms=>{
+    if(ms<P.pop) return C_TABLE(ms);
+    if(ms>=P.apex&&!sheet0) sheet0=C_SHEET();
+    if(ms<P.apex) return lerpC(C_TABLE(ms),C_SHEET(),ez(seg(ms,P.pop,P.pop+180)));
+    if(ms<P.drape) return lerpC(sheet0||C_SHEET(),C_FLAT(seg(ms,P.fly,P.drape)),ez(seg(ms,P.apex,P.apex+200)));
+    const D=C_DRAPE(ms); if(ms<P.drape+200) { const F0=C_FLAT(1); return lerpC(F0,D,ez(seg(ms,P.drape,P.drape+200))); } return D; };
+  // bit i: from Tom's hand down to Nara's mouth as she peeks out
+  const bitAt=(t,ms,toX,toY)=>{ if(ms<t||ms>t+260) return null; const h=handPt(tsp,tsp.act,sT.x,sT.b,-1),q=seg(ms,t,t+260); return {x:lerp(h.x,toX,q),y:lerp(h.y,toY,q)-Math.sin(q*Math.PI)*14,r:q*5}; };
+  const mouth=()=>({x:sN.x-NW*.4,y:sN.b-NH*.55});
+  // Behind everyone: a warm dining room, a hanging lamp over the table.
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#2a1a10',.5);
+    gfx.globalAlpha=k*.2; E(fc+12,tY-30,120,70,'#ffcf8a'); gfx.globalAlpha=k; Ln(fc+12,BARH,fc+12,tY-TH*.9,2,'#2a2018'); EO(fc+12,tY-TH*.9,12,6,'#c88a3a'); E(fc+12,tY-TH*.9+5,8,3,'#fff2c0'); gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    const ti=tIn(ms),to=tOut(ms),yo=(1-ti)*-70,a=Math.min(ti*1.5,to),jy=jig(ms);
+    // the bare table (seen once the cloth is gone): wooden top and legs
+    if(a>0) { gfx.globalAlpha=a; RO(tL+4,tY+yo+4,6,by-tY-6,'#6a4428'); RO(tR-10,tY+yo+4,6,by-tY-6,'#6a4428'); RO(tL,tY+yo-2+jy*.3,tR-tL,7,'#8a5a30'); R(tL,tY+yo-2+jy*.3,tR-tL,2,'#a8723e'); gfx.globalAlpha=1; }
+    // Nara under the table: only the part of her sticking out past the left end shows (the rest is under the cloth)
+    if(ms>P.run&&ms<P.pop) { gfx.save(); gfx.beginPath(); gfx.rect(0,0,tL-2,324); gfx.clip(); drawAt(nsp,sN.f,sN.x,sN.b,nsp.pal,1); gfx.restore(); }
+    // the tablecloth: on the table, then lifted by Nara, flying, and draped over every monster
+    const c=clothAt(ms); if(ms<P.pop) { c.yT+=yo+jy*.3; c.yB+=yo; }
+    const ca=ms<P.drape?a:1-ez(seg(ms,P.home-200,P.home+300)); cloth(c,ms,ca);
+    if(ms>=P.land&&ms<P.home) drawAt(nsp,sN.f,sN.x,sN.b,nsp.pal,1);   // sitting proud, in front of the draped cloth
+    // dishes on the table (they stay put when the cloth flies, of course)
+    if(a>0) { gfx.globalAlpha=a; const top=tY+yo-1+(ms<P.pop?jy*.3:0),hop=i=>ms>P.wig0&&ms<P.pop?-Math.abs(Math.sin(ms/50+i*1.7))*3:0;
+      EO(fc-6,top-2+hop(0),15,3.5,'#f4f0e6'); boule(fc-6,top-9+hop(0),.8,false);
+      EO(tL+18,top-2+hop(1),11,3,'#f4f0e6'); boule(tL+18,top-6+hop(1),.45,true);
+      RO(fc+40,top-16+hop(2),4,14,'#fff6dc'); E(fc+42,top-21+hop(2)+Math.sin(ms/70),2.4,4,'#ffb030'); E(fc+42,top-20+hop(2),1,2,'#fff2a0');
+      RO(fc+60,top-12+hop(3),7,10,'#bfe0ef'); R(fc+60,top-8+hop(3),7,5,'#d84a5a'); gfx.globalAlpha=1; }
+    // the sourdough bits, down to Nara
+    for(const t of BITS) { const m=mouth(),b=bitAt(t,ms,m.x,m.y); if(b) { gfx.save(); gfx.translate(b.x,b.y); gfx.rotate(b.r); EO(0,0,3.5,2.6,'#d89a52'); E(-1,-1,1.6,1,'#f0c88a'); gfx.restore(); }
+      if(ms>t+260&&ms<t+900) { const q=seg(ms,t+260,t+900); gfx.globalAlpha=1-q; heart(m.x+4,m.y-14-q*22,4,PINK); gfx.globalAlpha=1; } }
+    { const m=mouth(),b=bitAt(P.treat,ms,m.x+2,m.y); if(b) { gfx.save(); gfx.translate(b.x,b.y); gfx.rotate(b.r); EO(0,0,3.5,2.6,'#d89a52'); gfx.restore(); }
+      if(ms>P.treat+260&&ms<P.treat+1100) { const q=seg(ms,P.treat+260,P.treat+1100); gfx.globalAlpha=q>.8?(1-q)/.2:1; heart(sN.x,sN.b-NH-10-q*26,6,PINK); gfx.globalAlpha=1; } }
+    // monsters wriggle under the cloth
+    if(ms>P.drape&&ms<P.end-60) for(const o of o3) { const f=o.f,wk=ms<P.home?1:1-seg(ms,P.home,P.home+300); f.ox=Math.sin(ms/55+o.q.x)*2.5*wk; f.spin=Math.sin(ms/90+o.q.x)*.05*wk; f.spinAt=performance.now(); }
+    // sparkles when she sits, proud
+    if(ms>P.land&&ms<P.land+800) { const q=seg(ms,P.land,P.land+800); gfx.globalAlpha=1-q; for(let j=0;j<6;j++) { const an=j*1.05+q; star(sN.x+Math.cos(an)*(16+q*16),sN.b-NH*.5+Math.sin(an)*(14+q*10),2.5,GOLD); } gfx.globalAlpha=1; }
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Family dinner. Nara is under the table.'); B2.aim=null; S('click'); }],
+    [P.table,()=>{ S('thud'); }],
+    [P.tline,()=>{ say('tom','dcnara3'); }],
+    [BITS[0]-300,()=>{ setMessage('Tom sneaks her bits of his sourdough.'); }],
+    [P.nline,()=>{ say('nara','dc3'); }],
+    [P.wig0,()=>{ S('jangle'); word('WAG WAG',fc,Math.max(60,tY-TH*.7-20),CREAM,3,.6); setMessage('Nara gets VERY excited.'); }],
+    [P.pop,()=>{ S('boing'); S('bark'); word('POP!',nMid,Math.max(56,tY-90),GOLD,5,.6); }],
+    [P.fly,()=>{ S('whoosh'); setMessage('The tablecloth flies off. The plates do not move.'); }],
+    [P.land,()=>{ S('step'); }],
+    [P.drape,()=>{ S('thud'); battle.shakeEnemy=.5; word('FLUMP!',Math.max(90,gx),40,CREAM,5,.9); setMessage('It lands over every monster like a net.'); }],
+    ['hf',P.hit],
+    [P.apply,()=>{ E2.apply(); S('chime2'); for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sN.x,mid:sN.b-NH*.5}:ST.unit(p)); scene('glow',1,{x:q2.x,y:q2.mid,rx:38,ry:52,c:GOLD,a:.35}); } }],
+    [P.treat,()=>{ setMessage('Tom slips her one more bit. Good girl.'); }],
+    [P.treat+260,()=>{ S('bonk'); }],
+    [P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.spin=0; } return (E2.result||'')+' Nobody tell Olivia.'; }]];
+  BITS.forEach(t=>{ steps.push([t-120,()=>{ S('sniff'); }]); steps.push([t+260,()=>{ S('bonk'); }]); });
+  o3.forEach((o,i)=>steps.push([hitT[i],()=>{ S('bonk'); ST.jolt(o.f,.5); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:'#ff8a8a',w:3}); landHit(split100(i,o3.length)); }]));
+  ST.play(E2,steps);
+};
+
+// ================= Family Finish Director's Cuts (ff1_dc to ff4_dc): no damage, all warmth =================
+// Shared: dcRun poses every member from one function. Each row's pose(u,ms,sp,spot,s2) returns {x,y,f,rot,hide} or
+// null (stand at the spot); the walk in and the run home are done here. s2 keeps each body's drawn x, b and frame.
+const dcFr=(sp,k,right)=>right?mirrorRowsCached(sp,sp[k]?k:'idle'):(sp[k]||sp.idle);
+const dcRun=(E2,spot,P,pose)=>{ const st={};
+  for(const u of E2.mem){ const s0=startOf(u),sp0=BATTLE_SPRITES[u.id],S0=spot[u.id],s2=st[u.id]={x:s0.x,b:s0.b,f:sp0.idle,ex:S0.x,eb:S0.b};
+    pathOf(E2.fx[E2.mem.indexOf(u)],P.end,(ms,c)=>{ const spr=c.sp; let x=S0.x,y=S0.b,f=spr.idle,rot=0,hide=false;
+      if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(s0.x,S0.x,k); y=lerp(s0.b,S0.b,k)+ffHop(ms,0,P.walk); f=runFr(spr,c.t,S0.x>s0.x?1:-1); }
+      else if(ms<P.home) { const r=pose(u,ms,spr,S0,s2); if(r) { if(r.x!=null) x=r.x; if(r.y!=null) y=r.y; if(r.f) f=r.f; rot=r.rot||0; hide=!!r.hide; } s2.ex=x; s2.eb=y; }
+      else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(s2.ex,c.origX,k); y=lerp(s2.eb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?runFr(spr,c.t,1):spr.idle; }
+      s2.x=x; s2.b=y; s2.f=f; return {cx:x,base:y,frame:f,rot,hide}; }); }
+  return st; };
+const dcShow=P=>ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.home,P.end-100)));
+const dcHeights=E2=>{ const h={}; for(const u of E2.mem) { const sp=BATTLE_SPRITES[u.id]; h[u.id]=sp.idle.length*sp.scale; } return h; };
+const dcGlow=(E2,st,H,c)=>{ for(const p of b2LiveParty()) { const m=st[p.id],q=m?{x:m.x,mid:m.b-H[p.id]*.5}:ST.unit(p); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c,a:.35}); } };
+const dcFoeBurst=(steps,o3,t0,gap,sfxName,col,first)=>o3.forEach((o,i)=>steps.push([t0+i*gap,()=>{ S(sfxName); ST.jolt(o.f,.45); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:44,c:col,w:3}); if(i===0) first(); }]));
+const dcHeartPath=(g,cx,cy,r)=>{ gfx.beginPath(); gfx.moveTo(cx,cy+r*.95); gfx.bezierCurveTo(cx-r*1.7,cy-r*.1,cx-r*.8,cy-r*1.5,cx,cy-r*.5); gfx.bezierCurveTo(cx+r*.8,cy-r*1.5,cx+r*1.7,cy-r*.1,cx,cy+r*.95); gfx.closePath(); };
+
+// A pot: stacked rows with a profile. h 0..1 grows it, bulge shapes the belly, squash flattens it.
+const dcPot=(x,b,H,W,col,bulge,wob)=>{ if(H<=1) return; for(const pass of [0,1]) for(let y=0;y<H;y+=2) { const q=y/H,w=W*(.55+bulge*Math.sin(Math.PI*Math.min(1,q*.9+.05))+(q>.85?.18:0))+Math.sin(q*6+wob)*(wob?1.2:0),
+      yy=b-y-2; if(pass===0) R(x-w/2-2,yy-1,w+4,4,OUT); else R(x-w/2,yy,w,2,q>.9?'#ffffff66'.slice(0,7):col); }
+  gfx.globalAlpha*=.35; R(x-W*.3,b-H+2,3,Math.max(0,H-6),'#ffffff'); gfx.globalAlpha=1; };
+
+// ---------- ff1_dc: Pottery Lesson ----------
+B2_TOMBO_ANIM.ff1_dc=E2=>{ B2.aim=null;
+  const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),tom=by0('tom'),gr=by0('grace'),ro=by0('rose'),tn=by0('tnb');
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),H=dcHeights(E2),T=ST.unit(tom);
+  const fc=cl(GR.x1+150,GR.x1+120,420),by=cl(Math.max(GR.base-10,T.base),236,292),kx=Math.min(fc+156,548);
+  const X={rose:fc-92,grace:fc-34,tom:fc+24,tnb:fc+84},spot={};
+  for(const id in X) spot[id]={x:X[id],b:by};
+  const P={walk:800,tline:1100,grow0:1200,grow1:2300,fly:2400,rline:2900,sq:3200,col:3900,carry:4500,fire:5300,rock:5550,burst:5900,apply:6500,home:7000,end:7700};
+  const st=dcRun(E2,spot,P,(u,ms,sp,S0,s2)=>{ let f=sp.idle,y=S0.b,x=S0.x;
+    const work=ms>P.grow0&&ms<P.carry;
+    if(u===ro) { if(ms>P.fly-100&&ms<P.fly+500) f=sp.celeb; else if(work) f=sp.act; if(ms>P.fly&&ms<P.fly+400) y-=Math.sin(seg(ms,P.fly,P.fly+400)*Math.PI)*10; }
+    else if(u===gr) { if(ms>P.sq-150&&ms<P.sq+700) f=sp.celeb; else if(work) f=sp.act; }
+    else if(u===tom) { if(ms>P.col&&ms<P.col+900) f=sp.kneel||sp.expr||sp.idle; else if(work) f=sp.act; }
+    else { if(ms>P.tline-80&&ms<P.tline+800) f=sp.act; else if(ms>P.sq&&ms<P.col+900) f=sp.expr||sp.idle; }
+    if(ms>P.burst&&ms<P.apply) f=sp.celeb; if(ms>=P.apply) f=sp.celeb; return {x,y,f}; });
+  const show=dcShow(P),PO={rose:'#e07a5a',grace:'#f0a0d0',tom:'#6aa0d8',tnb:'#e8d8a8'};
+  const wx=id=>X[id]-30, wy=by-8;
+  const grow=(ms,a)=>ez(seg(ms,P.grow0+a,P.grow1+a*.5));
+  // pot heights: Rose's launches, Grace's squishes, Tom's collapses, TNB's is perfect and goes first to the kiln
+  const potH=(id,ms)=>{ const g=grow(ms,id==='tnb'?-100:(id==='tom'?150:0)),mx=id==='tnb'?34:28; return g*mx; };
+  const carryK=(i,ms)=>ez(seg(ms,P.carry+i*150,P.carry+i*150+650));
+  const kd=[kx-8,by-28];
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#2a2018',.45);
+    gfx.globalAlpha=k*.25; E(fc+20,by-60,150,70,'#ffd9a0'); gfx.globalAlpha=1; }});
+  const spin=ms=>ms*.02;
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    // kiln: brick dome with a glowing door and a chimney
+    const ki=ez(seg(ms,500,1000)),fireK=ms>P.fire?ez(seg(ms,P.fire,P.fire+300))*(1-ez(seg(ms,P.apply,P.home))):0;
+    if(ki>0) { gfx.globalAlpha=ki; E(kx,by-14,26,26,OUT); E(kx,by-14,24,24,'#a8553a'); R(kx-24,by-14,48,18,OUT); R(kx-22,by-14,44,16,'#a8553a');
+      for(let j=0;j<4;j++) R(kx-22,by-12+j*4,44,1,'#7a3a28'); RO(kx+10,by-48,8,16,'#6a3a2a');
+      RO(kx-9,by-14,18,13,'#241410'); gfx.globalAlpha=ki*(.25+fireK*.75); R(kx-7,by-12,14,9,'#ffb030'); R(kx-4,by-10,8,6,'#fff2a0'); gfx.globalAlpha=1;
+      if(fireK>0) { gfx.globalAlpha=fireK*.3; E(kx,by-16,50,40,'#ffb030'); gfx.globalAlpha=1; } }
+    // wheels and pots
+    for(const id of ['rose','grace','tom','tnb']) { const w=ez(seg(ms,500+['rose','grace','tom','tnb'].indexOf(id)*90,1000)); if(w<=0) continue;
+      const x=wx(id),y=wy; gfx.globalAlpha=w; RO(x-3,y,6,by-y,'#6a4a2a'); EO(x,y,16,4,'#7a828e');
+      const sp2=ms>P.grow0&&ms<P.carry?spin(ms):0; for(let j=0;j<5;j++) R(x-14+((j*7+sp2)%28),y-1,2,2,'#a8b0bc'); gfx.globalAlpha=1;
+      if(ms<P.grow0) continue;
+      let h=potH(id,ms),sq=0,px=x,py=y-1,col=PO[id],bulge=.28,wob=0;
+      if(id==='rose') { if(ms>P.fly) h=0; else wob=ms*.01; }
+      if(id==='grace') { if(ms>P.sq) { const q=seg(ms,P.sq,P.sq+500); col=lerp(0,1,q)>.5?'#ff9ac0':col; bulge=.28+q*.25; h*=(1-.25*q)*(1+Math.sin(ms/110)*.08*q); wob=ms*.02*q; } }
+      if(id==='tom') { if(ms>P.col) { const q=ez(seg(ms,P.col,P.col+500)); h*=1-.75*q; bulge=.28+q*.45; wob=q*3; } else wob=ms*.012*grow(ms,150); }
+      if(ms>=P.carry) { const i=['grace','tom','tnb'].indexOf(id); if(i<0) continue; const c=carryK(i,ms); if(c>0) { px=lerp(x,kd[0],c); py=lerp(y-1,kd[1],c)-Math.sin(c*Math.PI)*34; h=lerp(h,10,c); if(c>=1) continue; } }
+      gfx.globalAlpha=w; dcPot(px,py,h,26,col,bulge,wob); gfx.globalAlpha=1; }
+    // Rose's pot flies to the first monster: a thrown vase on an arc
+    const rf=seg(ms,P.fly,P.fly+520); if(rf>0&&rf<1) { const t0=o3[0].q,x=lerp(wx('rose'),t0.x,rf),y=lerp(wy-24,t0.mid,rf)-Math.sin(rf*Math.PI)*60; gfx.save(); gfx.translate(x,y); gfx.rotate(rf*9); dcPot(0,14,26,26,PO.rose,.28,0); gfx.restore(); }
+    // fireworks over the monsters
+    o3.forEach((o,i)=>{ const t0=P.rock+i*90,tb=P.burst+i*90,q=seg(ms,t0,tb),top=Math.max(50,o.q.top-24);
+      if(q>0&&q<1) { const x=lerp(kx+14,o.q.x,ez(q)),y=lerp(by-48,top,q)-Math.sin(q*Math.PI)*30; R(x-1,y-1,3,3,'#fff2a0'); for(let j=1;j<5;j++) { gfx.globalAlpha=.5-j*.1; R(x-1+j*2,y+j*3,2,2,'#ffb030'); } gfx.globalAlpha=1; }
+      const b=seg(ms,tb,tb+900); if(b>0&&b<1) { gfx.globalAlpha=1-b*b; for(let j=0;j<14;j++) { const an=j/14*Math.PI*2,r=b*(44+(j%2)*18); star(o.q.x+Math.cos(an)*r,top+Math.sin(an)*r+b*b*14,3.4-b,['#ff7a7a','#ffe08a','#8affc0','#8ac8ff','#ff9ac0'][j%5]); } gfx.globalAlpha=1; } });
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! TNB teaches the family pottery.'); B2.aim=null; S('click'); }],
+    [P.tline,()=>{ say('tnb','dcff1'); }],
+    [P.grow0,()=>{ S('whoosh'); setMessage('Four wheels, four lumps of clay. Gentle hands.'); }],
+    [P.fly,()=>{ S('whoosh'); word('FLING!',fc-30,50,CREAM,4,.6); setMessage('Rose’s pot takes off.'); }],
+    [P.fly+520,()=>{ S('bonk'); ST.jolt(o3[0].f,.4); scene('tb_rings',.4,{x:o3[0].q.x,y:o3[0].q.mid,r:30,c:'#ffd9a0',w:3}); }],
+    [P.rline,()=>{ say('rose','dcff1'); }],
+    [P.sq,()=>{ S('boing'); word('SQUISH',wx('grace'),by-90,'#ff9ac0',3,.7); setMessage('Grace’s pot turns into a squishy.'); }],
+    [P.col,()=>{ S('thud'); word('plop',wx('tom'),by-70,CREAM,3,.6); setMessage('Tom’s pot gives up.'); }],
+    [P.carry,()=>{ S('step'); setMessage('Into the kiln they all go.'); }],
+    [P.fire,()=>{ S('rumble'); word('FWOOOM',kx,by-80,'#ffb030',4,.8); setMessage('The kiln fires up.'); }],
+    [P.rock,()=>{ S('whoosh'); }],
+    [P.apply,()=>{ E2.apply(); S('chime2'); dcGlow(E2,st,H,GOLD); }],
+    [P.end,'end',()=>(E2.result||'')+' Tom’s pot is still a puddle. TNB says it has character.']];
+  dcFoeBurst(steps,o3,P.burst,90,'chime2','#ffe08a',()=>landHit(100));
+  ST.play(E2,steps);
+};
+
+// ---------- ff2_dc: Breakfast in Bed ----------
+B2_TOMBO_ANIM.ff2_dc=E2=>{ B2.aim=null;
+  const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),amy=by0('amy'),gr=by0('grace'),ro=by0('rose');
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),H=dcHeights(E2),A=ST.unit(amy);
+  const ax=cl(GR.x1+160,GR.x1+130,460),by=cl(Math.max(GR.base-10,A.base),236,292),gx=ax-62,rx=ax-102;
+  const spot={amy:{x:ax+8,b:by},grace:{x:gx,b:by+4},rose:{x:rx,b:by+8}};
+  const P={walk:800,gline:1150,flip0:1200,flip1:2500,syr0:2700,syr1:3500,rline:3200,wake:3700,aline:3900,tip:4300,fly:4700,hit:5200,apply:5900,home:6400,end:7100};
+  const NP=8,stk=ms=>Math.floor(ez(seg(ms,P.flip0,P.flip1))*NP+.001);
+  const st=dcRun(E2,spot,P,(u,ms,sp,S0)=>{ let f=sp.idle,y=S0.b;
+    if(u===amy) { f=ms<P.wake?(sp.kneel||sp.idle):(ms<P.apply?sp.celeb:sp.idle); if(ms>P.wake&&ms<P.wake+300) y-=Math.sin(seg(ms,P.wake,P.wake+300)*Math.PI)*8; }
+    else if(u===gr) { f=ms>P.flip0&&ms<P.tip?(Math.floor(ms/260)%2?sp.act:sp.idle):(ms>=P.tip&&ms<P.fly?sp.expr||sp.idle:sp.idle); if(ms>=P.fly) f=sp.celeb; }
+    else { f=ms>P.syr0&&ms<P.syr1?sp.act:(ms>=P.tip&&ms<P.fly?sp.expr||sp.idle:sp.idle); if(ms>=P.fly) f=sp.celeb; }
+    return {y,f}; });
+  const show=dcShow(P),tx=ax-40,ty=by-30;   // tray stands on the bed's foot
+  const stackTop=ms=>ty-4-stk(ms)*3.2;
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#3a2230',.4);
+    // morning light through a window
+    gfx.globalAlpha=k*(.2+.2*ez(seg(ms,P.wake-300,P.wake+400))); R(ax-30,40,60,80,'#ffe9a8'); gfx.globalAlpha=k; RO(ax-20,48,40,50,'#bfe0ef'); R(ax-1,48,2,50,OUT); R(ax-20,72,40,2,OUT); gfx.globalAlpha=1;
+    const bi=ez(seg(ms,300,800)); gfx.globalAlpha=bi*k; RO(ax-10,by-48,48,14,'#fff6dc'); R(ax-6,by-46,40,3,'#ffffff'); gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; const bi=ez(seg(ms,300,800));
+    // the bed: frame, blanket, tray
+    if(bi>0) { gfx.globalAlpha=bi; RO(ax-34,by-22,90,26,'#8a5a30'); R(ax-34,by-22,90,3,'#a8723e'); RO(ax-30,by-30,80,16,'#ff9ac0'); R(ax-30,by-30,80,3,'#ffc4dc');
+      for(let j=0;j<5;j++) { R(ax-24+j*16,by-26,5,5,'#ffdbe9'); } RO(ax+54,by-36,6,38,'#8a5a30'); gfx.globalAlpha=1; }
+    // the Zs, then a heart when Mom wakes
+    if(ms>P.walk&&ms<P.wake) { const z=Math.floor(ms/450)%3; for(let j=0;j<=z;j++) label('Z',ax+22+j*7,by-88-j*10-((ms/90)%6),'#cfe0ff',1+j%2); }
+    if(ms>P.wake&&ms<P.wake+900) { const q=seg(ms,P.wake,P.wake+900); gfx.globalAlpha=1-q; heart(ax+8,by-100-q*22,6,PINK); gfx.globalAlpha=1; }
+    // the tray and the pancake stack
+    if(bi>0) { const lift=ms>P.tip?0:0,tiltQ=ms>P.tip&&ms<P.fly?ez(seg(ms,P.tip,P.fly)):0,w=Math.sin(ms/70)*tiltQ*2;
+      gfx.save(); gfx.translate(tx,ty); gfx.rotate(tiltQ*-.5+w*.01); RO(-26,0,52,5,'#c8a060');
+      if(ms<P.fly+600) { for(let j=0;j<stk(ms);j++) { const jy=-4-j*3.2,sh=Math.sin(ms/60+j)*tiltQ*3; EO(sh,jy,17-j%2,3.2,j%2?'#e8b868':'#f0c878'); }
+        const sy=seg(ms,P.syr0,P.syr1); if(sy>0&&stk(ms)>0) { const topY=-4-(stk(ms)-1)*3.2; gfx.globalAlpha=.9; E(0,topY-1,15*sy,2.6,'#8a4a1a'); for(let j=0;j<5;j++) { const dx=-12+j*6,dl=Math.min(1,sy*1.2)*(6+((j*5)%7)); R(dx,topY,2,dl,'#8a4a1a'); } gfx.globalAlpha=1; }
+        if(stk(ms)>=NP-1) { EO(0,-4-(NP)*3.2,4,3,'#fff2a0'); } }
+      gfx.restore();
+      // the syrup bottle in Rose's hand
+      const sy=seg(ms,P.syr0,P.syr1); if(sy>0&&sy<1) { gfx.save(); gfx.translate(tx+14,ty-40-stk(ms)*3); gfx.rotate(-2.2); RO(-4,-8,8,14,'#a8561e'); R(-2,-12,4,4,'#f6f0dc'); gfx.restore(); } }
+    // pancakes fly over the monsters
+    o3.forEach((o,i)=>{ const q=seg(ms,P.fly+i*80,P.hit+i*70-0); if(q>0&&q<1) { const x=lerp(tx,o.q.x,ez(q)),y=lerp(ty-20,o.q.mid,q)-Math.sin(q*Math.PI)*56; gfx.save(); gfx.translate(x,y); gfx.rotate(q*14); EO(0,0,14,4,'#f0c878'); E(0,-1,9,2,'#8a4a1a'); gfx.restore(); }
+      const sp=seg(ms,P.hit+i*70,P.hit+i*70+1300); if(sp>0&&sp<1) { gfx.globalAlpha=1-sp*sp; for(let j=0;j<6;j++) E(o.q.x+Math.cos(j*1.05)*(10+sp*18),o.q.mid-4+Math.sin(j*1.05)*(8+sp*12)+sp*sp*20,3.2,2.6,j%2?'#8a4a1a':'#f0c878'); gfx.globalAlpha=1; } });
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! The girls make Mom breakfast in bed.'); B2.aim=null; S('click'); }],
+    [P.gline,()=>{ }],
+    [P.flip0,()=>{ S('sizzle'); setMessage('Grace flips. Dairy-free pancakes, one by one.'); }],
+    [P.syr0,()=>{ S('splash'); setMessage('Rose is on syrup.'); }],
+    [P.rline,()=>{ say('rose','dcff2'); }],
+    [P.wake,()=>{ S('chime2'); word('MOM!',ax+8,60,GOLD,4,.7); setMessage('Mom wakes up. The stack is a little tall.'); }],
+    [P.aline,()=>{ say('grace','dcff2'); }],
+    [P.tip,()=>{ S('rumble'); setMessage('The tower leans.'); }],
+    [P.fly,()=>{ S('whoosh'); word('TIMBER!',tx,50,CREAM,4,.8); setMessage('It tips onto the monsters.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); dcGlow(E2,st,H,GOLD); }],
+    [P.end,'end',()=>(E2.result||'')+' Mom says it is the best breakfast ever. The monsters agree.']];
+  dcFoeBurst(steps,o3,P.hit,70,'splat','#ffd9a0',()=>landHit(100));
+  ST.play(E2,steps);
+};
+
+// ---------- ff3_dc: The Family Walk ----------
+B2_TOMBO_ANIM.ff3_dc=E2=>{ B2.aim=null;
+  const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),dd=by0('deedee'),bp=by0('boppy'),tom=by0('tom');
+  const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),H=dcHeights(E2),T=ST.unit(tom);
+  const by=cl(Math.max(GR.base-8,T.base),236,292),x0=cl(GR.x1+200,GR.x1+170,500),dist=80;
+  const off={deedee:-34,tom:0,boppy:36},spot={};
+  for(const id in off) spot[id]={x:x0+off[id],b:by};
+  const P={walk:800,go:1000,stop:4300,bline:1900,dline:3000,burst:4500,apply:5300,home:5800,end:6500};
+  const wk=ms=>ez(seg(ms,P.go,P.stop));
+  const slow=(sp,t)=>sp.run?sp.run[Math.floor(t*5)%2]:sp.idle;
+  const st=dcRun(E2,spot,P,(u,ms,sp,S0)=>{ const k=wk(ms),moving=ms>P.go&&ms<P.stop; let x=S0.x-dist*k+(u===dd?-10*k:(u===bp?10*k:0)),y=S0.b,f=sp.idle;
+    if(moving) { f=slow(sp,ms/1000+(u===bp?.2:0)); y-=Math.abs(Math.sin(ms/190+(u===bp?1:0)))*(u===bp?1.2:2.4); }
+    else if(ms>=P.stop) f=u===tom?sp.celeb:(sp.expr||sp.idle);
+    if(u===bp&&ms>P.bline-100&&ms<P.bline+1200) f=sp.hip||sp.act||sp.idle;
+    if(u===dd&&ms>P.dline-100&&ms<P.dline+1000) f=sp.act||sp.idle;
+    return {x,y,f}; });
+  const show=dcShow(P),lamps=[0,1,2,3,4,5].map(i=>({x:60+i*110,i}));
+  const fl=Array.from({length:14},(_,j)=>({a:j*1.7,r:20+(j*13)%50,y:by-70-(j*17)%60,sp:.6+(j%4)*.2}));
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#14183a',.6);
+    gfx.globalAlpha=k*.7; for(let j=0;j<26;j++) R((j*61)%576,(j*37)%110,2,2,j%3?'#cfd8ff':'#fff6dc'); gfx.globalAlpha=1;
+    E(480,56,16,16,'#fff6dc'); E(488,52,15,15,'#14183a'.length?'#1c2250':'#1c2250');
+    const sc=ms>P.go?(ms-P.go)*.016:0;   // street lamps drift past as they walk
+    for(const L of lamps) { const lx=((L.x-sc)%660+660)%660-40,lit=ez(seg(ms,600+L.i*350,1000+L.i*350));
+      RO(lx-2,by-96,4,98,'#3a3a46'); RO(lx-8,by-100,16,6,'#3a3a46'); if(lit>0) { gfx.globalAlpha=k*lit*.25; E(lx,by-90,40,44,'#ffd27a'); gfx.globalAlpha=k*lit; E(lx,by-95,5,3,'#fff2b0'); gfx.globalAlpha=1; } } }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    // the path
+    gfx.globalAlpha=k*.5; R(0,by+2,576,6,'#4a3c30'); for(let x=-((ms-P.go)*.016*1.0)%40;x<576;x+=40) R(x,by+4,14,2,'#6a5a48'); gfx.globalAlpha=1;
+    // fireflies drift, then swirl: some to the monsters (warm), some to the walkers (heal)
+    const mid=(st.tom.x),my=by-H.tom*.6;
+    fl.forEach((F,j)=>{ const q=seg(ms,P.burst,P.apply),fo=o3[j%o3.length].q;
+      let x=mid+Math.cos(ms/900*F.sp+F.a)*(30+F.r),y=F.y+Math.sin(ms/700+F.a)*8;
+      if(ms>P.stop-400&&ms<=P.burst) { const a=ez(seg(ms,P.stop-400,P.burst)); x=lerp(x,mid+Math.cos(ms/200+F.a)*30,a); y=lerp(y,my+Math.sin(ms/200+F.a)*22,a); }
+      if(ms>P.burst) { if(j%2===0) { x=lerp(mid+Math.cos(ms/200+F.a)*30,fo.x,ez(q)); y=lerp(my+Math.sin(ms/200+F.a)*22,fo.mid,ez(q))-Math.sin(q*Math.PI)*30; } else { const p=b2LiveParty()[j%b2LiveParty().length],pu=st[p.id]; if(pu) { x=lerp(mid+Math.cos(ms/200+F.a)*30,pu.x,ez(q)); y=lerp(my,pu.b-H[p.id]*.5,ez(q)); } } }
+      if(ms>P.apply+300) return; const al=ez(seg(ms,400,1400))*(1-ez(seg(ms,P.apply,P.apply+300)));
+      gfx.globalAlpha=al*k*.35; E(x,y,5,5,'#fff2a0'); gfx.globalAlpha=al*k; R(x-1,y-1,2,2,'#fffbe6'); gfx.globalAlpha=1; });
+    // a heart over Tom when they stop; the group holds hands (a small arc between)
+    if(ms>P.stop&&ms<P.apply+600) { const q=seg(ms,P.stop,P.apply+600); gfx.globalAlpha=Math.min(1,q*4)*(1-q*q); heart(mid,my-H.tom*.5-16-q*14,8,PINK); gfx.globalAlpha=1; }
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! An evening walk. Tom in the middle.'); B2.aim=null; S('click'); }],
+    [P.go,()=>{ S('step'); setMessage('Deedee sets the pace. Boppy has opinions about it.'); }],
+    [P.bline,()=>{ say('boppy','dcff3'); }],
+    [P.dline,()=>{ say('deedee','dcff3'); }],
+    [P.stop,()=>{ S('chime'); setMessage('They stop. Fireflies come out.'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); dcGlow(E2,st,H,GOLD); }],
+    [P.end,'end',()=>(E2.result||'')+' Boppy’s feet hurt. He will say it was worth it.']];
+  dcFoeBurst(steps,o3,P.burst+500,90,'chime2','#fff2a0',()=>landHit(100));
+  ST.play(E2,steps);
+};
+
+// ---------- ff4_dc: The Eight-Seat Dinner Table ----------
+B2_TOMBO_ANIM.ff4_dc=E2=>{ B2.aim=null;
+  const mem=E2.mem,list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),H=dcHeights(E2),T=ST.unit(mem.find(p=>p.id==='tom')||mem[0]);
+  const by=cl(Math.max(GR.base-6,T.base),240,292),x1=546,x0=Math.max(GR.x1+60,x1-300),sp8=(x1-x0)/8;
+  const seatX=i=>x0+sp8*(i+.5),tcx=(x0+x1)/2,ring=by-120;
+  // the party sit at seats chosen from the eight (spread out); the other seats light up on their own
+  const pick=mem.length>=4?[1,3,5,7]:[1,4,6],spot={};
+  mem.forEach((u,i)=>{ spot[u.id]={x:seatX(pick[i]),b:by-10}; });
+  const P={walk:800,table:300,light0:1100,tline:2400,rise:3300,rline:3900,heart:4700,beam:5200,hit:5600,apply:6200,home:6700,end:7400};
+  const st=dcRun(E2,spot,P,(u,ms,sp,S0)=>{ let f=ms>P.light0+1800?(ms<P.apply?sp.celeb:sp.celeb):sp.idle; if(u.id==='tom'&&ms>P.tline-100&&ms<P.tline+900) f=sp.act; return {y:S0.b-(f===sp.celeb?Math.abs(Math.sin(ms/160))*2:0),f}; });
+  const COL=['#ff7a7a','#ffb04a','#ffe08a','#8affc0','#8ac8ff','#9a8aff','#ff9ac0','#ffffff'];
+  const show=dcShow(P),taken=new Set(pick.slice(0,mem.length));
+  const orb=(i,ms)=>{ const t0=P.light0+i*220,a=ez(seg(ms,t0,t0+300)); const x=seatX(i),y=by-62;
+    const rs=ez(seg(ms,P.rise,P.heart)),an=ms/900+i/8*Math.PI*2,rx=lerp(x,tcx+Math.cos(an)*62,rs),ry=lerp(y,ring+Math.sin(an)*18,rs);
+    const hs=ez(seg(ms,P.heart,P.beam)); const j=i/8*Math.PI*2,hx=tcx+16*Math.pow(Math.sin(j),3)*1.6,hy=ring-(13*Math.cos(j)-5*Math.cos(2*j)-2*Math.cos(3*j)-Math.cos(4*j))*1.6;
+    return {a,x:lerp(rx,hx,hs),y:lerp(ry,hy,hs)}; };
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#241810',.5);
+    gfx.globalAlpha=k*.22; E(tcx,by-40,180,80,'#ffcf8a'); gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
+    const ti=ez(seg(ms,P.table,P.table+500)),yo=(1-ti)*-60; gfx.globalAlpha=ti;
+    // the long table: cloth, legs, plates and candles
+    RO(x0,by-36+yo,x1-x0,6,'#8a5a30'); R(x0,by-36+yo,x1-x0,2,'#a8723e'); RO(x0+2,by-30+yo,x1-x0-4,32,'#f4efe2'); for(let x=x0+6;x<x1-6;x+=12) R(x,by-30+yo,2,30,'#e6ddc8');
+    for(let i=0;i<8;i++) { EO(seatX(i),by-34+yo,9,2.6,'#fffbe6'); }
+    gfx.globalAlpha=1;
+    // the orbs: seat lights, rise into a rainbow ring, then fold into a heart
+    for(let i=0;i<8;i++) { const o=orb(i,ms); if(o.a<=0) continue; const al=o.a*(ms>P.beam?1-ez(seg(ms,P.beam,P.beam+500)):1);
+      gfx.globalAlpha=al*.3; E(o.x,o.y,9,9,COL[i]); gfx.globalAlpha=al; EO(o.x,o.y,3.4,3.4,COL[i]); R(o.x-1,o.y-2,1,1,'#ffffff');
+      if(ms>P.rise&&ms<P.beam) { gfx.globalAlpha=al*.4; E(o.x-Math.sin(ms/900+i)*5,o.y+3,2,2,COL[i]); } gfx.globalAlpha=1; }
+    // the heart that forms, then fires a beam at the monsters
+    if(ms>P.heart&&ms<P.beam+500) { const q=ez(seg(ms,P.heart,P.beam)),pul=1+Math.sin(ms/80)*.05; gfx.globalAlpha=q*(1-ez(seg(ms,P.beam,P.beam+500))); dcHeartPath(0,tcx,ring,26*q*pul); gfx.fillStyle='#ff9ac0'; gfx.fill(); gfx.globalAlpha*=.6; dcHeartPath(0,tcx-4,ring-4,12*q); gfx.fillStyle='#ffe0ee'; gfx.fill(); gfx.globalAlpha=1; }
+    o3.forEach((o,i)=>{ const q=seg(ms,P.beam+i*60,P.hit+i*70); if(q>0&&q<1) { const x=lerp(tcx,o.q.x,ez(q)),y=lerp(ring,o.q.mid,ez(q))-Math.sin(q*Math.PI)*34; gfx.save(); gfx.translate(x,y); dcHeartPath(0,0,0,9); gfx.fillStyle='#ff9ac0'; gfx.fill(); gfx.restore(); for(let j=1;j<5;j++) { gfx.globalAlpha=.5-j*.1; E(x+j*5,y+j*2,3,3,COL[(i+j)%8]); } gfx.globalAlpha=1; }
+      const sp=seg(ms,P.hit+i*70,P.hit+i*70+900); if(sp>0&&sp<1) { gfx.globalAlpha=1-sp; for(let j=0;j<8;j++) { const an=j*.78+sp; star(o.q.x+Math.cos(an)*(14+sp*22),o.q.mid+Math.sin(an)*(14+sp*18),2.6,COL[j]); } gfx.globalAlpha=1; } });
+    bars(k); }});
+  const steps=[
+    [0,()=>{ setMessage('DIRECTOR’S CUT! One long table, eight seats.'); B2.aim=null; S('click'); }],
+    [P.table,()=>{ S('thud'); }],
+    [P.light0,()=>{ setMessage('Every seat gets a little light.'); }],
+    [P.tline,()=>{ say('tom','dcff4'); }],
+    [P.rise,()=>{ S('whoosh'); setMessage('The lights rise and start to circle.'); }],
+    [P.rline,()=>{ say('rose','dcff4'); }],
+    [P.heart,()=>{ S('levelUp'); word('HEART',tcx,Math.max(48,ring-60),'#ff9ac0',4,.9); setMessage('They fold into one big heart.'); }],
+    [P.beam,()=>{ S('whoosh'); }],
+    [P.apply,()=>{ E2.apply(); S('heal'); dcGlow(E2,st,H,GOLD); }],
+    [P.end,'end',()=>(E2.result||'')+' There was a seat for the monsters too. Nobody minded.']];
+  for(let i=0;i<8;i++) steps.push([P.light0+i*220,()=>{ S('chime'); }]);
+  dcFoeBurst(steps,o3,P.hit,70,'chime2','#ff9ac0',()=>landHit(100));
   ST.play(E2,steps);
 };
 })();

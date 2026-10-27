@@ -83,21 +83,36 @@ const mix=(a,b,t)=>{ const o={}; for(const k in a) o[k]=typeof a[k]==='number'?l
 const lv=(a,L)=>[Math.sin(a*D)*L,Math.cos(a*D)*L];
 // Limb tips relative to the hip centre (before rotation). Used for the rolling table and for standing heights.
 function tipsRel(q) { const j=q.side?J.side:J.front,R=[];
-  if(!q.side) { for(const [s,a] of [[j.shA,q.aA],[j.shB,q.aB]]) { const v=lv(a,ARM); R.push([s[0]-C+v[0],s[1]-C+v[1]]); } }
+  if(!q.side) { for(const [s,a,cf] of [[j.shA,q.aA,q.cA||0],[j.shB,q.aB,q.cB||0]]) { const v=lv(a,ARM*(q.al||1)*(1-cf*.55)); R.push([s[0]-C+v[0],s[1]-C+v[1]]); } }
   for(const [h,a,b] of [[j.hpA,q.lA,q.bA||0],[j.hpB,q.lB,q.bB||0]]) { const v=lv(a,LEG*(1-b*.35)); R.push([h[0]-C+v[0],h[1]-C+v[1]]); }
   return R; }
 const rot=(v,th)=>{ const c=Math.cos(th),s=Math.sin(th); return [v[0]*c-v[1]*s,v[0]*s+v[1]*c]; };
 const tips=(q,th)=>tipsRel(q).map(v=>rot(v,th));
 const low=(q,th)=>Math.max(...tips(q,th).map(v=>v[1]))+2.2;   // shoe or hand radius plus outline
 
+// Handstand body (q.hang): the long hair down her left side is cut away and the hair hangs from the top of her head
+// instead (toward the floor once the body is turned upside down). Built once on first use.
+let HANG=null;
+function hangBody() { if(HANG) return HANG;
+  const rows=B.celeb.map(r=>r.split('')),H=rows.length;
+  for(const r in FRONT_ARMS) for(const [a,b] of FRONT_ARMS[r]) for(let x=a;x<=b;x++) rows[r][x]='.';
+  for(let r=28;r<H;r++) rows[r].fill('.');
+  for(let r=15;r<28;r++) for(let x=0;x<=10;x++) rows[r][x]='.';   // side hair and the hem behind it
+  const g=[]; for(let y=0;y<N;y++) g.push(new Array(N).fill('.'));
+  for(let r=0;r<H;r++) for(let x=0;x<rows[0].length;x++) if(rows[r][x]!=='.') g[r+4][x+16]=rows[r][x];
+  // Hanging hair: strands above the head top (canvas rows 0..4), longer in the middle, two shades.
+  const L=[2,3,4,4,4,4,4,4,4,4,4,4,3,2],cols=[];
+  for(let x=9;x<=22;x++) cols.push(x);
+  cols.forEach((x,i)=>{ const n=L[i]; for(let k=1;k<=n;k++) { const y=4-k+1; if(y<0) continue; g[y][x+16]=(x+k)%3===0?'i':((x+k)%3===1?'h':'f'); } });
+  HANG=reline(g); return HANG; }
 function build(q) {
-  const j=q.side?J.side:J.front,base=q.side?SIDE:FRONT;
+  const j=q.side?J.side:J.front,base=q.side?SIDE:(q.hang?hangBody():FRONT);
   const g=[]; for(let y=0;y<N;y++) g.push(new Array(N).fill('.'));
   // Legs behind the body: hips block, then each leg (two-bone, knee bends forward), shoes at the tips.
   const lm=newMask(); const b=j.belt; for(let y=Math.round(b[1]);y<=Math.round(b[3]);y++) for(let x=Math.round(b[0]);x<=Math.round(b[2]);x++) setM(lm,x,y);
   const feet=[];
   for(const [h,a,bd,far] of [[j.hpB,q.lB,q.bB||0,1],[j.hpA,q.lA,q.bA||0,0]]) {
-    const v=lv(a,LEG*(1-bd*.35)),t=[h[0]+v[0],h[1]+v[1]],r=ik(h[0],h[1],t[0],t[1],LEG/2,LEG/2,a<0?1:-1);
+    const v=lv(a,LEG*(1-bd*.35)),t=[h[0]+v[0],h[1]+v[1]],kd=far?(q.kB||0):(q.kA||0),r=ik(h[0],h[1],t[0],t[1],LEG/2,LEG/2,kd||(a<0?1:-1));
     seg(lm,h[0],h[1],r.ex,r.ey,2.0,1.7); seg(lm,r.ex,r.ey,r.tx,r.ty,1.7,1.4); feet.push([r.tx,r.ty,a]);
   }
   paint(g,lm,LEGC);
@@ -106,8 +121,9 @@ function build(q) {
   // Body on top (its own outline stays where it sits on the legs).
   for(let y=0;y<N;y++) for(let x=0;x<N;x++) if(base[y][x]!=='.') g[y][x]=base[y][x];
   // Arms in front (front-facing poses only; the idle frame keeps its own guard arms).
-  if(!q.side) for(const [s,a,dir] of [[j.shA,q.aA,1],[j.shB,q.aB,-1]]) {
-    const am=newMask(),v=lv(a,ARM),r=ik(s[0],s[1],s[0]+v[0],s[1]+v[1],ARM/2,ARM/2,dir);
+  // Optional per pose: cA/cB fold the elbow (0 straight .. 1 tight), eA/eB flip which way the elbow points, al arm length.
+  if(!q.side) for(const [s,a,dir,cf,ef] of [[j.shA,q.aA,1,q.cA||0,q.eA||1],[j.shB,q.aB,-1,q.cB||0,q.eB||1]]) {
+    const AL=ARM*(q.al||1),am=newMask(),v=lv(a,AL*(1-cf*.55)),r=ik(s[0],s[1],s[0]+v[0],s[1]+v[1],AL/2,AL/2,dir*ef);
     seg(am,s[0],s[1],r.ex,r.ey,1.7,1.6); seg(am,r.ex,r.ey,r.tx,r.ty,1.6,1.5); disc(am,r.tx,r.ty,1.9);
     paint(g,am,SKIN);
   }
@@ -116,8 +132,10 @@ function build(q) {
 const cache={};
 // A frame for a pose (by name, or a pose object with a cache key).
 const frame=(q,key)=>{ if(typeof q==='string') { key=q; q=P[q]; } return cache[key]||(cache[key]=build(q)); };
+// The same frame mirrored left to right (spins and facing the other way).
+const mirror=(q,key)=>{ const f=frame(q,key),k='~'+(typeof q==='string'?q:key); return cache[k]||(cache[k]=f.map(r=>r.split('').reverse().join(''))); };
 // Blends are snapped to a few steps so the frames can be cached (pixel art does not tween smoothly anyway).
 const blend=(a,b,t,steps=4)=>{ const k=Math.round(clamp(t,0,1)*steps); return {q:mix(P[a],P[b],k/steps),key:a+'>'+b+':'+k}; };
 for(const k in P) frame(k);
-return {N,C,scale:2,P,frame,blend,mix,tips,low,rot,TL};
+return {N,C,scale:2,P,frame,mirror,blend,mix,tips,low,rot,TL};
 })();
