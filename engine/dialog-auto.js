@@ -17,12 +17,23 @@ function daSync() {
   b.classList.toggle('on',DA.on);
   b.setAttribute('aria-pressed',DA.on?'true':'false');
 }
+// Rose Mode (engine/feel.js): every conversation opens with AUTO ON, since Rose cannot read yet. The button still
+// turns it off for that one conversation; the saved setting belongs to Grace and Director Modes and is left alone.
+const daRose=()=>typeof B7!=='undefined'&&B7.diff==='rose';
 function setDialogAuto(on,quiet) {
   DA.on=!!on; DA.t=0;
-  try { localStorage.setItem('le-dialog-auto',DA.on?'on':'off'); } catch(e) {}
+  if(!daRose()) { try { localStorage.setItem('le-dialog-auto',DA.on?'on':'off'); } catch(e) {} }
   daSync();
   if(!quiet&&typeof sfx!=='undefined') sfx.select();
 }
+const LE_openDialog_da=openDialog;
+openDialog=function(name,lines,npc) {
+  const r=LE_openDialog_da(name,lines,npc);
+  let want=true;
+  if(!daRose()) { want=false; try { want=localStorage.getItem('le-dialog-auto')==='on'; } catch(e) {} }   // the saved setting
+  if(DA.on!==want) { DA.on=want; DA.t=0; daSync(); }
+  return r;
+};
 
 // Seconds to hold once the page's text is fully shown (and any spoken clip has ended).
 function daWait() {

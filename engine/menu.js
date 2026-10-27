@@ -30,7 +30,7 @@ function gearDiff(m,id,slot) {
   return GEAR_KEYS.map(k=>[k,gearVal(it,k)-gearVal(cur,k)]).filter(([,v])=>v);
 }
 function gearOptions(m,slot) {
-  return [...new Set(bag.filter(id=>items[id].slot===slot&&canWear(m,items[id])))]
+  return [...new Set(bag.filter(id=>items[id]&&items[id].slot===slot&&canWear(m,items[id])))]
     .sort((a,b)=>gearScore(items[b])-gearScore(items[a])||items[a].name.localeCompare(items[b].name));
 }
 function bestFor(m,slot) {
@@ -314,7 +314,7 @@ function renderGearTab(body,m) {
       off.querySelector('.item-copy').appendChild(diffChips(gearDiff(m,null,slot),it,null));
       picker.appendChild(off);
     }
-    const others=[...new Set(bag.filter(b=>items[b].slot===slot&&!canWear(m,items[b])))];
+    const others=[...new Set(bag.filter(b=>items[b]&&items[b].slot===slot&&!canWear(m,items[b])))];
     if(!opts.length) picker.appendChild(el('div','menu-empty','Nothing in the pockets fits '+m.name+' here yet.'));
     if(others.length) { const note=el('div','menu-empty small'); note.textContent=others.map(b=>items[b].name+' ('+memberById(items[b].who).name+' only)').join(', ')+' also in the pockets.'; picker.appendChild(note); }
     list.appendChild(picker);
@@ -336,7 +336,7 @@ function gearPreview(slot,id) {
 // ITEMS: filters, stacks, inline targets.
 function renderItemsTab(body) {
   $('menu-foot').textContent='\u{1FA99} '+coins+' coins. Healing works here; battle items are used from the ▼ Bag in a fight. Buy and sell at Penny’s Pockets.';
-  const ids=[...new Set(bag)];
+  const ids=[...new Set(bag)].filter(id=>items[id]);
   const count={all:ids.length,heal:0,battle:0,gear:0,keep:0};
   for(const id of ids) count[itemCat(items[id])]++;
   if(menuFilter!=='all'&&!count[menuFilter]) menuFilter='all';
@@ -348,7 +348,7 @@ function renderItemsTab(body) {
   }
   body.appendChild(chips);
   if(!ids.length) { body.appendChild(el('div','menu-empty','Pockets empty. Go find a door.')); return; }
-  const shown=ids.filter(id=>menuFilter==='all'||itemCat(items[id])===menuFilter)
+  const shown=ids.filter(id=>items[id]).filter(id=>menuFilter==='all'||itemCat(items[id])===menuFilter)
     .sort((a,b)=>CAT_ORDER[itemCat(items[a])]-CAT_ORDER[itemCat(items[b])]||items[a].name.localeCompare(items[b].name));
   const list=el('div','item-list single');
   for(const id of shown) {
