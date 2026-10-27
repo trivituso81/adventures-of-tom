@@ -231,6 +231,8 @@ function musicTick() {
   // iOS: let music play even with the ring/silent switch on silent.
   const sess=music.on&&sound.enabled?'playback':'auto';
   if(navigator.audioSession&&music.session!==sess) { try { navigator.audioSession.type=sess; music.session=sess; } catch(e) {} }
+  // Baked clips (engine/music-clips.js) take over wherever a track exists; the synth below covers the rest.
+  if(typeof clipTick==='function'&&clipTick()!==undefined) { if(music.cur) musicStop(.4); return; }
   const want=musicWanted();
   if(want!==(music.cur&&music.cur.id)) { if(want) musicStart(want); else musicStop(); }
   const G=music.cur;

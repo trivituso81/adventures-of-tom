@@ -75,7 +75,7 @@ B.grumbleShow=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'sit',dx:(u,tt)=>Math.sin(tt*3)*1},{t:1900,f:'aim',dx:u=>-ez(u)*4},{t:2300,f:'spread',dx:(u,tt)=>u<.2?Math.sin(tt*40)*2:0},{t:3400,f:'hip'},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks out in front. Slowly. He sits down where everybody can see him.'); say(m.id,'grumble'); scene('bp_arrow',3.6,{plan:{x:Gp.x,y:Math.max(40,Gp.top-34),on:1200,stop:2300}}); }],
-    [1300,()=>{ sfx.sulk&&sfx.sulk(); scene('bp_text',1.4,{st,txt:'TOO FAST',c:CREAM,sc:2}); setMessage('He points at the walking speed. It is wildly overenthusiastic.'); }],
+    [1300,()=>{ sfx.sulk&&sfx.sulk(); scene('bp_text',1.4,{st,txt:'TOO FAST',c:CREAM,sc:2}); setMessage('He points at the walking speed. It\'s wildly overenthusiastic.'); }],
     ['hf',2300],
     [2300,()=>{ E2.apply(); sfx.stun(); sfx.thud(); scene('bp_shield',1.2,{x:p.x,y:p.y-BH()*.45,rx:30,ry:46,c:GOLD}); }],
     [2700,()=>{ setMessage('The grumble squashes it into a stop sign. He braces in front.'); }],
@@ -285,7 +285,7 @@ B.nineteen_seventy=E2=>{ const {m,fx}=E2,list=foes(E2).length?foes(E2):b2LiveFoe
     [hit,()=>{ E2.apply(); sfx.ding(); for(const f of list) { const q=ST.foe(f); scene('bp_heart',.9,{x:q.x,y:q.top-4,r:5}); } }],
     [3000,()=>{ setMessage('Every enemy finds a little chair and settles in.'); }],
     [3400,()=>{ sfx.select(); setMessage('He prepares another finger.'); }],
-    [5200,'end','The story has not started yet. Everyone is waiting for it.']]); };
+    [5200,'end','The story hasn\'t started yet. Everyone is waiting for it.']]); };
 
 // ---------- Jar-Lid Negotiations ----------
 SC.bp_jar=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.96);
@@ -399,7 +399,7 @@ B.cap_swat=E2=>{ ensureBare(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=fro
     [1800,()=>{ sfx.whoosh(); }],
     [1950,()=>{ setMessage('Swat! Missed.'); scene('bv_text',.6,{x:F.x,y:F.top-20,txt:'MISS',c:CREAM,sc:2}); }],
     [2150,()=>{ sfx.whoosh(); }],
-    [2300,()=>{ setMessage('Swat! Missed again. It is quick.'); scene('bv_text',.6,{x:F.x-16,y:F.top-20,txt:'MISS',c:CREAM,sc:2}); }],
+    [2300,()=>{ setMessage('Swat! Missed again. It\'s quick.'); scene('bv_text',.6,{x:F.x-16,y:F.top-20,txt:'MISS',c:CREAM,sc:2}); }],
     [2500,()=>{ sfx.whoosh(); }],
     ['hf',hit],
     [hit,()=>{ sfx.slash(); sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('bv_rings',.5,{x:F.x+8,y:F.mid,c:CREAM,r:40}); scene('bv_big',1.1,{x:F.x,y:F.top-74,txt:'SWAT!',c:GOLD,sc:4}); }],
@@ -491,7 +491,7 @@ B.lockdown=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,70),me=ST
     ['hf',P.slam],
     [P.slam,()=>{ sfx.clang(); sfx.thud(); ST.jolt(f,.55); landHit(100); scene('bv_big',1.3,{x:F.x,y:F.top-74,txt:'LOCKDOWN!',c:'#ff6a5a',sc:4}); }],
     [P.jang,()=>{ sfx.jangle(0,8); setMessage('He jangles his big key ring. Very slowly.'); }],
-    [P.turn,()=>{ sfx.click?sfx.click():sfx.select(); setMessage('Click. That plan is not going anywhere.'); }],
+    [P.turn,()=>{ sfx.click?sfx.click():sfx.select(); setMessage('Click. That plan isn\'t going anywhere.'); }],
     [4500,'end',res(E2)+'Nobody gets out on his watch.']]); };
 
 // ---------- Everybody Waits (A5, kept: the dispenser and the FAMILY FIRST ticket are bigger) ----------
@@ -526,7 +526,7 @@ B.pepper_breath=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100)
     {t:2350,f:'spread',dx:u=>-ez(u*4)*8},{t:3300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over with one homegrown cayenne pepper.'); say(m.id,'pepper_breath'); scene('bv_pepper',3.6,{P,st}); }],
-    [1300,()=>{ setMessage('He holds it up. He grew it himself. He is very proud of it.'); }],
+    [1300,()=>{ setMessage('He holds it up. He grew it himself. He\'s very proud of it.'); }],
     [1900,()=>{ sfx.crunch(); setMessage('Crunch.'); }],
     [1950,()=>{ sfx.stun(); setMessage('His face goes red. Steam comes out of his ears.'); }],
     [2400,()=>{ sfx.flame(0,1.0); scene('bv_cone',1.1,{P,st}); setMessage('HAAAH! A cone of pepper fire!'); }],
@@ -596,7 +596,7 @@ B.five_alarm_jar=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,60)
     {t:2650,f:'celeb2',dx:(u,tt)=>Math.sin(tt*40)*2},{t:2950,f:'spread',dx:u=>-ez(u*4)*6},{t:3400,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:3900,f:back(p.x,me),hop:2,hn:6},{t:4900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over with a jar of his pickled ghost peppers.'); say(m.id,'five_alarm_jar'); scene('bv_jar',3.7,{P}); scene('bv_bite',3.8,{P,st}); }],
-    [1550,()=>{ setMessage('He twists the lid. It is on there good.'); sfx.charge&&sfx.charge(); }],
+    [1550,()=>{ setMessage('He twists the lid. It\'s on there good.'); sfx.charge&&sfx.charge(); }],
     [1900,()=>{ sfx.boing(); setMessage('POP. Something spooky floats out of the jar.'); sfx.boo&&sfx.boo(); }],
     [2350,()=>{ sfx.crunch(); setMessage('He eats one anyway.'); }],
     [2650,()=>{ sfx.siren(); scene('bv_alarm',1.6,{P:{bx:Math.max(70,Math.min(506,(p.x+Gh.x)/2)),by:56},st}); setMessage('The fire alarm goes off. Somebody stop him.'); }],
@@ -679,7 +679,7 @@ B.cap_swat=E2=>{ ensureBare(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=fro
     [1800,()=>{ sfx.whoosh(); }],
     [1950,()=>{ setMessage('Swat! Missed.'); scene('bv_big',.7,{x:F.x-30,y:F.top-46,txt:'MISS',c:CREAM,sc:3,rot:-.12}); }],
     [2150,()=>{ sfx.whoosh(); }],
-    [2300,()=>{ setMessage('Swat! Missed again. It is quick.'); scene('bv_big',.7,{x:F.x+26,y:F.top-46,txt:'MISS',c:CREAM,sc:3,rot:.12}); }],
+    [2300,()=>{ setMessage('Swat! Missed again. It\'s quick.'); scene('bv_big',.7,{x:F.x+26,y:F.top-46,txt:'MISS',c:CREAM,sc:3,rot:.12}); }],
     [2500,()=>{ sfx.whoosh(); }],
     ['hf',hit],
     [hit,()=>{ sfx.slash(); sfx.bonk(); ST.jolt(f,.55); landHit(100); scene('bp2_rings',.6,{x:F.x+8,y:F.mid,c:GOLD,r:60}); scene('bv_flash',.25,{a:.35}); scene('bv_big',1.1,{x:F.x,y:F.top-74,txt:'SWAT!',c:GOLD,sc:5}); }],
@@ -937,7 +937,7 @@ B.fish_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
     [P.b1,()=>{ scene('b5_span',.5,{x:sx,y:headY,w0:12,w:34}); scene('b5_big',.6,{x:sx,y:headY-26,txt:'THIS BIG',c:CREAM,sc:2}); sfx.select(); setMessage('"It was THIS big," says Boppy.'); }],
     [P.b2,()=>{ scene('b5_span',.5,{x:sx-20,y:headY,w0:34,w:90}); scene('b5_big',.6,{x:sx-20,y:headY-30,txt:'NO, THIS BIG!',c:GOLD,sc:3}); sfx.boing(); setMessage('The fish heard him. The fish grows.'); }],
     [P.b3,()=>{ scene('b5_span',.75,{x:288,y:headY,w0:90,w:540}); scene('b5_big',.75,{x:288,y:headY-34,txt:'HONEST TO GOD!',c:'#ffb04a',sc:4}); sfx.boing(); b7Later(()=>sfx.boing(),180);
-      setMessage('Now it is the size of a bus. It blocks out the lights.'); }],
+      setMessage('Now it\'s the size of a bus. It blocks out the lights.'); }],
     [P.drop,()=>{ sfx.whoosh(); }],
     ['hf',P.hit],
     [P.hit,()=>{ sfx.splash(); sfx.thud(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('b5_flash',.3,{a:.5,c:FOAM});
@@ -947,7 +947,7 @@ B.fish_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
       setMessage('The wave washes their buffs over to Boppy. A pier rail goes up in front of the family.'); }],
     [P.away,()=>{ sfx.splash(); scene('b5_big',1.1,{x:Math.max(90,Gp.x0+60),y:BAR+44,txt:'IT GOT AWAY!',c:CREAM,sc:3}); setMessage('Then it flips back in the water and swims off. Of course it does.'); }],
     [P.gone-200,()=>{ sfx.splash(); }],
-    [6600,'end',()=>res(E2)+'Next time he tells it, it will be bigger.']]); };
+    [6600,'end',()=>res(E2)+'Next time he tells it, it\'ll be bigger.']]); };
 
 // ---------- Van Cortlandt Park '70 (B6) ----------
 // The park in 1970 (back layer): sky, two rows of rolling hills, autumn trees, a dirt course. The sepia goes on top.
@@ -1025,7 +1025,7 @@ B.xc_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m);
       scene('b5_sepia',4.35,{delay:.25}); sfx.projector(0,30); say(m.id,'xc_ult'); setMessage('The projector clicks on. Did he ever tell you about 1970?'); }],
     [700,()=>{ sfx.whoosh(); const c=ST.unit(m); ST.fly((x,y,uu)=>cardigan(x,y,uu*5),c.x,c.mid,c.x+90,BAR+10,.7,40); setMessage('Off comes the cardigan. Under it: the varsity singlet. Number 70.'); }],
     [1150,()=>{ scene('b5_big',.5,{x:288,y:BAR+56,txt:'ON YOUR MARKS',c:CREAM,sc:3}); }],
-    [1300,()=>{ scene('b5_pistol',.9,{x:Math.min(500,S.x+30)}); sfx.bang(); scene('b5_big',.8,{x:Math.min(480,S.x+10),y:BAR+70,txt:'BANG!',c:CREAM,sc:4}); sfx.crowd(.1); setMessage('BANG! And he is off like it is 1970.'); }],
+    [1300,()=>{ scene('b5_pistol',.9,{x:Math.min(500,S.x+30)}); sfx.bang(); scene('b5_big',.8,{x:Math.min(480,S.x+10),y:BAR+70,txt:'BANG!',c:CREAM,sc:4}); sfx.crowd(.1); setMessage('BANG! And he\'s off like it is 1970.'); }],
     [P.go,()=>{ scene('b5_spin',3.3,{list:spins,t0:P.go,h:20,ox:8}); }],
     ...spins.map(b=>[Math.round(b.t),()=>{ sfx.whoosh(); }]),
     [hits[0],()=>{ landHit(30); scene('b5_big',.9,{x:Gp.x,y:Gp.top-60,txt:'LAPPED!',c:'#ffb04a',sc:3}); setMessage('He laps them once.'); }],
@@ -1034,8 +1034,8 @@ B.xc_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m);
     ['hf',P.tape],
     [P.tape,()=>{ landHit(40); sfx.thud(); sfx.crowd(); for(const f of list) ST.jolt(f,.6); scene('b5_flash',.25,{a:.4,c:'#fff4dc'});
       scene('b5_big',1.2,{x:Math.max(140,bx+40),y:Gp.top-74,txt:'CHAMPION!',c:GOLD,sc:4}); setMessage('Through the tape! Nobody caught him.'); }],
-    [4600,()=>{ scene('b5_flash',.4,{a:.8,c:'#ffffff'}); sfx.select(); const c=ST.unit(m); scene('b5_rings',.5,{x:endX,y:fy-60,c:CREAM,r:30}); setMessage('Back to color. Back to now. He is a little out of breath.'); }],
+    [4600,()=>{ scene('b5_flash',.4,{a:.8,c:'#ffffff'}); sfx.select(); const c=ST.unit(m); scene('b5_rings',.5,{x:endX,y:fy-60,c:CREAM,r:30}); setMessage('Back to color. Back to now. He\'s a little out of breath.'); }],
     [5000,()=>{ E2.apply(); sfx.guard(); scene('b5_belly',1.4,{st}); }],
     [5300,()=>{ scene('b5_big',1.2,{st,txt:'STILL GOT IT.',c:GOLD,sc:3}); setMessage('"Still got it," says Boppy. He pats his stomach. "Ooh. My stomach."'); }],
-    [6700,'end',()=>res(E2)+'He will tell you about it again at dinner.']]); };
+    [6700,'end',()=>res(E2)+'He\'ll tell you about it again at dinner.']]); };
 })();

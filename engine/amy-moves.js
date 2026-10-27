@@ -56,8 +56,8 @@ A.starting_step=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30),
     [450,()=>{ sfx.run&&sfx.run(); sfx.whoosh(); }],
     ['hf',1150],
     [1150,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('am_ringhit',.5,{x:F.x+8,y:F.mid,r:30}); }],
-    [1350,()=>{ scene('am_text',1,{st,txt:'ON THE MOVE',c:GOLD,sc:2}); setMessage('She is already jogging in place when it notices.'); }],
-    [3300,'end',res(E2)+'Amy does not waste the first second.']]); };
+    [1350,()=>{ scene('am_text',1,{st,txt:'ON THE MOVE',c:GOLD,sc:2}); setMessage('She\'s already jogging in place when it notices.'); }],
+    [3300,'end',res(E2)+'Amy doesn\'t waste the first second.']]); };
 
 // ---------- PEP TALK ----------
 SC.am_arrow=(s,u)=>{ const g=ez(u/.2),b=Math.sin(s.t*8)*2; gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(s.x,s.y+b); gfx.scale(g,g);
@@ -250,7 +250,7 @@ A.shakeout_mile=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LivePa
   K.push({t,f:'walkR',hop:2,hn:3}); t+=600; const homeAt=t; K.push({t,x:'home',y:'home',f:'spread'},{t:t+700,f:'celeb'},{t:t+1000,f:'idle'});
   const st=ST.keys(fx,K),hit=Math.max(1700,homeAt-200);
   ST.play(E2,[
-    [0,()=>{ setMessage('Amy sets a pace slider between EASY and RACE. It is drifting toward RACE.'); say(m.id,'shakeout_mile'); scene('am_slider',2.2,{plan:{x:me.x-60,y:Math.max(30,me.top-20),push:400}}); scene('am_steps',(homeAt+1200)/1000,{st,from:1100,to:homeAt,list:[]}); }],
+    [0,()=>{ setMessage('Amy sets a pace slider between EASY and RACE. It\'s drifting toward RACE.'); say(m.id,'shakeout_mile'); scene('am_slider',2.2,{plan:{x:me.x-60,y:Math.max(30,me.top-20),push:400}}); scene('am_steps',(homeAt+1200)/1000,{st,from:1100,to:homeAt,list:[]}); }],
     [400,()=>{ sfx.select(); setMessage('She pushes it firmly to EASY. Easy means actually easy.'); }],
     [1100,()=>{ setMessage('A gentle jog. Warm footprints follow her round.'); }],
     ['hf',hit],
@@ -363,7 +363,7 @@ A.red_pen=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.
     ['hf',2150],
     [2150,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('av_big',1.4,{x:F.x,y:F.top-74,txt:'F',c:PEN,sc:6}); setMessage('A giant red F. Circled. Twice.'); }],
     [2600,()=>{ scene('av_text',1.4,{x:F.x,y:F.top-18,txt:'SEE ME AFTER CLASS',c:'#ff6a60'}); }],
-    [4000,'end',res(E2)+'It will be seeing her after class.']]); };
+    [4000,'end',res(E2)+'It\'ll be seeing her after class.']]); };
 
 // ---------- Hot Lunch Tray (A2) ----------
 // A steaming cafeteria tray of soup for a friend. The cold melts off them. HOT LUNCH.
@@ -382,7 +382,7 @@ A.hot_lunch_tray=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFo
   const st=ST.keys(fx,K),give=self?1500:1400,hit=give+400,end=self?3300:3800;
   const plan={give,x:self?me.x-30:H.x+H.w*.1,y:self?me.base-30:H.mid+6};
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Amy grabs a hot lunch tray for herself. Teachers eat too.':'Amy carries a steaming cafeteria tray over to '+t.name+'. Careful, it is hot.'); say(m.id,'hot_lunch_tray'); scene('av_lunch',(end-100)/1000,{plan}); }],
+    [0,()=>{ setMessage(self?'Amy grabs a hot lunch tray for herself. Teachers eat too.':'Amy carries a steaming cafeteria tray over to '+t.name+'. Careful, it\'s hot.'); say(m.id,'hot_lunch_tray'); scene('av_lunch',(end-100)/1000,{plan}); }],
     [give,()=>{ sfx.select(); setMessage('Tomato soup, a roll, an apple. The steam alone does it.'); }],
     ['hf',hit],
     [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#ffb45a'}); scene('av_melt',1.2,{x:H.x,top:H.top,w:H.w,h:H.h}); scene('av_big',1.2,{x:H.x,y:H.top-60,txt:'HOT LUNCH!',c:'#ffb45a',sc:3}); hopOf(t!==m?t:null); }],
@@ -433,7 +433,7 @@ SC.av_packet=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; if(ms<P.drop) return; co
   const q=cl((ms-P.drop)/(P.hit-P.drop)),y=ms<P.hit?lerp(-h,F.top-h*.3,q*q):F.top-h*.3+Math.min(8,(ms-P.hit)*.03),sq=ms>P.hit?Math.max(0,1-(ms-P.hit)/200)*.25:0;
   gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(F.x,y+h/2); gfx.rotate(-.08); gfx.scale(1+sq,1-sq);
   for(let k=3;k>=1;k--) RO(-w/2+k*4,-h/2+k*4,w,h,'#e8e2d4'); RO(-w/2,-h/2,w,h,CREAM); R(-w/2+8,-h/2+6,6,4,'#9aa3a8');
-  bigWord('POP QUIZ',0,-h/2+12,PEN,2); for(let k=0;k<5;k++) { const yy=-h/2+34+k*(h-44)/5; RO(-w/2+10,yy,6,6,CREAM); R(-w/2+22,yy+2,w-34,2,'#9aa3a8'); } gfx.restore(); };
+  bigWord('QUIZ',0,-h/2+12,PEN,2); for(let k=0;k<5;k++) { const yy=-h/2+34+k*(h-44)/5; RO(-w/2+10,yy,6,6,CREAM); R(-w/2+22,yy+2,w-34,2,'#9aa3a8'); } gfx.restore(); };
 SC.av_pencils=(s,u)=>{ for(let k=0;k<6;k++) { const a=-Math.PI*.15-k*Math.PI*.14,d=ez(u)*70,x=s.x+Math.cos(a)*d*1.3,y=s.y+Math.sin(a)*d-Math.sin(u*Math.PI)*20+u*u*40;
   gfx.globalAlpha=1-u*u; gfx.save(); gfx.translate(x,y); gfx.rotate(u*10+k); R(-12,-3,24,6,OUT); R(-10,-2,18,4,'#ffd23a'); R(8,-2,3,4,'#f0a0a0'); gfx.restore(); } };
 A.pop_quiz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
@@ -442,11 +442,11 @@ A.pop_quiz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'celeb2'},{t:1100,f:'celeb',hop:16},{t:1500,f:'throw',dx:-8},{t:2100,f:'hip'},{t:2900,f:'clap'},{t:3200,f:back(p.x,me)},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Amy sprints over. Clear your desks.'); say(m.id,'pop_quiz'); scene('av_packet',3.2,{plan}); }],
-    [800,()=>{ scene('av_big',1.0,{st,txt:'POP QUIZ!',c:GOLD,sc:3}); sfx.jumpWhistle?sfx.jumpWhistle():sfx.whoosh(); }],
+    [800,()=>{ scene('av_big',1.0,{st,txt:'SURPRISE QUIZ!',c:GOLD,sc:2}); sfx.jumpWhistle?sfx.jumpWhistle():sfx.whoosh(); }],
     [1300,()=>{ sfx.slideWhistle?sfx.slideWhistle():sfx.whoosh(); setMessage('A very thick test packet drops out of the sky.'); }],
     ['hf',plan.hit],
     [plan.hit,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('av_dust',.6,{x:F.x,y:F.base,r:50}); scene('av_pencils',.9,{x:F.x,y:F.top}); scene('av_text',1.2,{x:F.x,y:F.top-90,txt:'NO TALKING',c:CREAM}); }],
-    [2600,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('av_hearts',1,{x:q.x,y:q.top}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It did not study.'); }],
+    [2600,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('av_hearts',1,{x:q.x,y:q.top}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It didn\'t study.'); }],
     [4000,'end',res(E2)+'Pencils down.']]); };
 
 // ---------- Burpee Blitz (B1; Lace, Then Race numbers) ----------
@@ -461,10 +461,10 @@ A.burpee_blitz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,52),k
   ST.play(E2,[
     [0,()=>{ setMessage('Amy drops right in front of it. Burpees.'); say(m.id,'burpee_blitz'); scene('av_count',(leap+400)/1000,{plan:{st,marks}}); }],
     ...marks.map(([ms])=>[ms,()=>{ sfx.thud(); scene('av_dust',.4,{x:st.x||p.x,y:p.y,r:22,n:6}); }]),
-    [leap,()=>{ setMessage('The last one does not come back down where it started.'); sfx.whoosh(); }],
+    [leap,()=>{ setMessage('The last one doesn\'t come back down where it started.'); sfx.whoosh(); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); ST.jolt(f,.55); landHit(100); scene('av_big',1,{x:F.x,y:F.top-74,txt:'BURPEE!',c:GOLD,sc:4}); scene('av_burst',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:44}); }],
-    [leap+1700,'end',res(E2)+'She is not even out of breath. She says.']]); };
+    [leap+1700,'end',res(E2)+'She\'s not even out of breath. She says.']]); };
 
 // ---------- Hill Repeats (B2; Hill Math numbers) ----------
 // A real hill heaves up out of the ground. She sprints up and down it three times, faster each time, then charges down onto them.
@@ -704,11 +704,11 @@ A.detention_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2
     [3650,()=>{ scene('a5_big',.9,{st,txt:'SEE ME.',c:'#ff6a60',sc:3}); sfx.select(); }],
     ['hf',4000],
     [4000,()=>{ sfx.thud(); sfx.bonk(); (sfx.clang||sfx.thud)(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('a5_flash',.35,{a:.55}); scene('a5_blast',1.2,{B});
-      scene('a5_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'DETENTION!',c:GOLD,sc:4}); setMessage('The whole board blows apart. Erasers. Chalk dust. Report cards.'); }],
+      scene('a5_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'NOBODY LEAVES!',c:GOLD,sc:3}); setMessage('The whole board blows apart. Erasers. Chalk dust. Report cards.'); }],
     [4500,()=>{ E2.apply(); sfx.ding(); sfx.levelUp(); scene('a5_seeme',1.7,{list:list.map(f=>ST.foe(f))});
       scene('a5_vp',1.2,{x:P.px-12,y:P.py-70,to:party.map(p=>ST.unit(p))}); for(const p of party) { const q=ST.unit(p); scene('a5_glow',1,{x:q.x,y:q.mid,c:VPB}); } }],
     [5100,()=>{ scene('a5_big',1.1,{st,txt:'NOBODY LEAVES.',c:CREAM,sc:2}); setMessage('Every one of them has to see her after class.'); }],
-    [6400,'end',()=>res(E2)+'Detention for everyone. She already has the paperwork.']]); };
+    [6400,'end',()=>res(E2)+'Nobody leaves. She brought snacks for the long haul.']]); };
 
 // ---------- Boston Qualifier (B6) ----------
 // The FINISH arch and crowd barriers (back layer), the tape (front), the stopwatch, speed lines, bowling-pin tumbles,
@@ -788,7 +788,7 @@ A.marathon_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2L
     [3800,()=>{ setMessage('Everybody jogs it out. Hands on heads. Breathe.'); }],
     [4700,()=>{ E2.apply(); sfx.heal(); sfx.levelUp(); const FL=party.map(p=>[ST.unit(p),p.id]); scene('a5_foilB',1.7,{list:FL,back:true}); scene('a5_foil',1.7,{list:FL}); for(const p of party) { const q=ST.unit(p); scene('a5_glow',1,{x:q.x,y:q.mid,c:GOLD}); } }],
     [5300,()=>{ scene('a5_big',1,{st,txt:'WE QUALIFIED!',c:GOLD,sc:2}); setMessage('Foil blankets for the whole family. Personal bests all round.'); }],
-    [6400,'end',()=>res(E2)+'She is already signing everyone up for next year.']]); };
+    [6400,'end',()=>res(E2)+'She\'s already signing everyone up for next year.']]); };
 })();
 
 // ================= Polish pass (2026-10-24, claude/move-review.md) =================
@@ -854,7 +854,7 @@ SC.av_packet=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; if(ms<P.drop) return; co
   gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(F.x,y+h/2); gfx.rotate(-.06); gfx.scale(1+sq,1-sq);
   for(let k=9;k>=1;k--) RO(-w/2+k*2.5,-h/2+k*3,w,h,k%2?'#e8e2d4':'#f4efe2');
   RO(-w/2,-h/2,w,h,CREAM); RO(-12,-h/2-8,24,14,'#2b2a26'); R(-8,-h/2-14,16,8,'#9aa3a8');
-  bigWord('POP QUIZ',0,-h/2+12,PEN,3); label('50 PAGES',0,-h/2+34,'#5a5a60',2);
+  bigWord('QUIZ',0,-h/2+12,PEN,3); label('50 PAGES',0,-h/2+34,'#5a5a60',2);
   for(let k=0;k<5;k++) { const yy=-h/2+52+k*(h-62)/5; RO(-w/2+12,yy,7,7,CREAM); R(-w/2+26,yy+2,w-40,2,'#9aa3a8'); } gfx.restore();
   if(ms>P.hit&&ms<P.hit+380) { const z=(ms-P.hit)/380; gfx.globalAlpha=1-z; for(let k=0;k<10;k++) { const a=Math.PI+k/9*Math.PI,d=w*.6+z*40; Ln(F.x+Math.cos(a)*d,F.base+Math.sin(a)*d*.35,F.x+Math.cos(a)*(d+20),F.base+Math.sin(a)*(d+20)*.35,4,CREAM); } } };
 A.pop_quiz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
@@ -863,12 +863,12 @@ A.pop_quiz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'celeb2'},{t:1100,f:'celeb',hop:16},{t:1500,f:'throw',dx:-8},{t:2100,f:'hip'},{t:2900,f:'clap'},{t:3200,f:back(p.x,me)},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Amy sprints over. Clear your desks.'); say(m.id,'pop_quiz'); scene('av_packet',3.2,{plan}); }],
-    [800,()=>{ scene('av_big',1.0,{st,txt:'POP QUIZ!',c:GOLD,sc:3}); sfx.jumpWhistle?sfx.jumpWhistle():sfx.whoosh(); }],
+    [800,()=>{ scene('av_big',1.0,{st,txt:'SURPRISE QUIZ!',c:GOLD,sc:2}); sfx.jumpWhistle?sfx.jumpWhistle():sfx.whoosh(); }],
     [1300,()=>{ sfx.slideWhistle?sfx.slideWhistle():sfx.whoosh(); setMessage('A very, very thick test packet drops out of the sky.'); }],
     ['hf',plan.hit],
     [plan.hit,()=>{ sfx.thud(); sfx.thud(); sfx.bonk(); ST.jolt(f,.7); landHit(100); scene('av_flash',.18,{a:.45}); scene('av_dust',.7,{x:F.x,y:F.base,r:70,n:14}); scene('av_pencils',.9,{x:F.x,y:F.top}); }],
     [plan.hit+250,()=>{ sfx.ding(); scene('av_big',1.5,{x:F.x,y:Math.min(F.top-74,top-14),txt:'PENCILS DOWN!',c:CREAM,sc:3}); setMessage('PENCILS DOWN.'); }],
-    [2700,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('av_hearts',1,{x:q.x,y:q.top}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It did not study.'); }],
+    [2700,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('av_hearts',1,{x:q.x,y:q.top}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It didn\'t study.'); }],
     [4000,'end',res(E2)+'Pencils down.']]); };
 
 // ---------- Burpee Blitz: a counter and a big final jump ----------
@@ -886,13 +886,13 @@ A.burpee_blitz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,52),k
   K.push({t,f:'kneel',dy:u=>ez(u)*8},{t:t+200,f:'act',hop:110,dx:u=>-ez(u)*6},{t:t+700,x:k.x,y:k.y,f:'celeb',hop:10},{t:t+1100,f:back(k.x,me)},{t:t+1800,x:'home',y:'home',f:'idle'});
   const st=ST.keys(fx,K),hit=leap+450,bx=Math.min(522,Math.max(54,p.x+104)),by=44;
   ST.play(E2,[
-    [0,()=>{ setMessage('Amy drops right in front of it. Burpees. She is counting.'); say(m.id,'burpee_blitz'); scene('ap_count',(leap+1300)/1000,{plan:{marks,show:700,x:bx,y:by}}); }],
+    [0,()=>{ setMessage('Amy drops right in front of it. Burpees. She\'s counting.'); say(m.id,'burpee_blitz'); scene('ap_count',(leap+1300)/1000,{plan:{marks,show:700,x:bx,y:by}}); }],
     ...marks.slice(0,3).map(([ms])=>[ms,()=>{ sfx.thud(); sfx.select(); scene('av_dust',.4,{x:st.x||p.x,y:p.y,r:22,n:6}); }]),
-    [leap,()=>{ setMessage('Number four does not come back down where it started.'); sfx.whoosh(); }],
+    [leap,()=>{ setMessage('Number four doesn\'t come back down where it started.'); sfx.whoosh(); }],
     [leap+200,()=>{ (sfx.jumpWhistle||sfx.whoosh)(); scene('ap_leap',.5,{st}); scene('av_dust',.6,{x:p.x,y:p.y,r:34,n:10}); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); sfx.ding(); ST.jolt(f,.65); landHit(100); scene('av_big',1.1,{x:F.x,y:F.top-74,txt:'BURPEE!',c:GOLD,sc:5}); scene('av_burst',.7,{x:F.x+F.w*.3,y:F.mid,n:10,r:56}); }],
-    [leap+1900,'end',res(E2)+'She is not even out of breath. She says.']]); };
+    [leap+1900,'end',res(E2)+'She\'s not even out of breath. She says.']]); };
 
 // ---------- Oat Milk, Please: bigger pizza and carton, a huge NO THANKS ----------
 const DS=1.8;

@@ -164,7 +164,7 @@ G.runway=E2=>{ const {fx}=E2;
     700,()=>{ pose(fx,'expr',.7); sfx.beat(); bt('WALK',96,34,CREAM,3,.6); },
     700,()=>{ pose(fx,'celebFlip',.8); sfx.beat(); scene('werk',1.0,{x:gpos().cx,y:gpos().base-gpos().h-20}); bt('POSE',96,34,PINK,4,.8); scene('flashes',.7,{n:10}); sfx.click(); sfx.click(); },
     600,()=>{ fx.kick=.45; sfx.slash(); },150,()=>{ battle.slash=.22; battle.enemyKnock=.45; battle.flashEnemy=.4; sfx.thud(); scene('burst',.5,{x:214,y:212,c:PINK,c2:GOLD}); bt('WERK',96,34,GOLD,4,1); hit(E2); },
-    800,E2.result+' The Grump was not dressed for this.',()=>checkEnemy()); };
+    800,E2.result+' The Grump wasn\'t dressed for this.',()=>checkEnemy()); };
 
 // DANCE BATTLE (6 MP, level 2): a boombox drops in, she dances, the Grump tries, the judges are not kind to the Grump.
 G.dancebattle=E2=>{ const {fx}=E2; const p=gpos();
@@ -650,7 +650,7 @@ G.eight_count=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),be
   K.push({t:760+8*beat,f:'act',dx:u=>-ez(u)*8},{t:760+8*beat+300,f:'act'},{t:2500,f:'celeb',hop:10},{t:2900,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'});
   const st=ST.keys(fx,K),hookAt=760+7*beat,hit=760+8*beat;
   ST.play(E2,[
-    [0,()=>{ setMessage('Grace counts it out right next to '+f.name+'. It is off the beat.'); say(m.id,'eight_count'); scene('gr_dots',2.6,{st,plan:{x:p.x,y:p.y,steps,c0:760,beat}}); scene('gr_buff',3.4,{st,plan:{x:F.x,y:F.top-18,hook:hookAt}}); }],
+    [0,()=>{ setMessage('Grace counts it out right next to '+f.name+'. It\'s off the beat.'); say(m.id,'eight_count'); scene('gr_dots',2.6,{st,plan:{x:p.x,y:p.y,steps,c0:760,beat}}); scene('gr_buff',3.4,{st,plan:{x:F.x,y:F.top-18,hook:hookAt}}); }],
     [760,()=>{ for(let k=0;k<8;k++) b7Later(()=>sfx.beat(),k*beat); }],
     [hookAt,()=>{ sfx.whoosh(); setMessage('One exact side-step. Her finish, its good part.'); }],
     ['hf',hit],
@@ -870,7 +870,7 @@ G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p))
     ['hf',2450],
     [2450,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gv_confetti',1.9,{n:70,seed:3}); scene('gv_big',1.3,{x:px,y:py-158,txt:'DANCE BREAK!',c:GOLD,sc:4});
       for(const p of party) { const q=ST.unit(p); scene('gv_glitter',.8,{x:q.x,y:q.mid,r:40}); } }],
-    [4300,'end','Everyone dances. Even the ones who said they would not.']]); };
+    [4300,'end','Everyone dances. Even the ones who said they\'d not.']]); };
 
 // ---------- Squishy Squeeze (A1) ----------
 // Grace carries the gold dumpling squishy over, holds it out, and the friend gives it the biggest squeeze. SQUISH.
@@ -939,7 +939,7 @@ G.welcome_back=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(
   const xs=self?[me]:[H,ST.unit(m)],bx0=Math.max(8,Math.min(H.x-H.w*.5-14,sp.x-40)),bx1=Math.min(568,Math.max(H.x+H.w*.5,sp.x+30)),by0=Math.max(8,H.top-30),by1=Math.min(320,H.base+14);
   const plan={ask:1700,back:2600,tx:self?me.x-14:H.x+H.w*.3,ty:self?me.top+24:H.top+H.h*.35};
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Grace picks up her hairbrush. It is a microphone now.':'Grace runs over to '+t.name+' with her hairbrush. It is a microphone now.'); say(m.id,'welcome_back'); scene('gv_brush',end/1000,{plan}); }],
+    [0,()=>{ setMessage(self?'Grace picks up her hairbrush. It\'s a microphone now.':'Grace runs over to '+t.name+' with her hairbrush. It\'s a microphone now.'); say(m.id,'welcome_back'); scene('gv_brush',end/1000,{plan}); }],
     [self?900:1100,()=>{ scene('gv_rec',(end-1300)/1000,{B:{x0:bx0,x1:bx1,y0:by0,y1:by1}}); scene('gv_big',1.1,{x:(bx0+bx1)/2,y:by0-16,txt:'HI GUYS!',c:PINK,sc:3}); sfx.ding(); }],
     [1700,()=>{ setMessage(self?'Today on the channel: how Grace is feeling. Answer: amazing.':'Today on the channel: '+t.name+'. How are you feeling?'); sfx.select(); }],
     ['hf',2100],
@@ -959,11 +959,11 @@ G.like_subscribe=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,34)
   const plan={hit:900};
   ST.play(E2,[
     [0,()=>{ setMessage('Grace marches up to '+f.name+' and points at the sky.'); say(m.id,'like_subscribe'); }],
-    [1200,()=>{ scene('gv_subbtn',2.4,{f,plan}); sfx.whoosh(); setMessage('And do not forget to SUBSCRIBE.'); }],
+    [1200,()=>{ scene('gv_subbtn',2.4,{f,plan}); sfx.whoosh(); setMessage('And don\'t forget to SUBSCRIBE.'); }],
     ['hf',2100],
     [2100,()=>{ sfx.bonk(); sfx.thud(); ST.jolt(f,.6); landHit(100); scene('gv_big',1,{x:F.x,y:F.top-80,txt:'BONK!',c:RED,sc:4}); }],
     [2350,()=>{ sfx.ding(); b7Later(()=>sfx.ding(),160); scene('gv_text',.9,{x:F.x+62,y:F.top-30,txt:'DING DING',c:GOLD}); }],
-    [4000,'end',res(E2)+'It is now subscribed. It cannot argue with that.']]); };
+    [4000,'end',res(E2)+'It\'s now subscribed. It can\'t argue with that.']]); };
 
 // ---------- Dumpling Drop (A5) ----------
 // Grace's whole squishy collection rains down on the row, bouncing off heads. SQUISH SQUISH.
@@ -977,14 +977,14 @@ SC.gv_dizzy=(s,u)=>{ for(const f of s.L) { const F=ST.unit(f); for(let k=0;k<3;k
 G.dumpling_drop=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,52);
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'celeb',hop:12},{t:1000,f:'celeb',dy:(u,tt)=>-Math.abs(Math.sin(tt*10))*6},{t:2600,f:'expr'},{t:2900,f:'celeb',hop:12},{t:3300,f:'runR'},{t:4000,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Grace runs over with her backpack. It is full of squishies. All of them.'); say(m.id,'dumpling_drop'); }],
+    [0,()=>{ setMessage('Grace runs over with her backpack. It\'s full of squishies. All of them.'); say(m.id,'dumpling_drop'); }],
     [1000,()=>{ scene('gv_big',1.1,{st,txt:'INCOMING!',c:GOLD,sc:3}); sfx.whoosh(); }],
     [1200,()=>{ scene('gv_rain',2.4,{L:list,n:16}); setMessage('Her whole collection rains down. Every limited edition.'); }],
     ['hf',1750],
     [1750,()=>{ sfx.squeak(); sfx.bonk(); all(list); landHit(50); }],
     [2150,()=>{ sfx.squeak(); sfx.boing(); all(list); landHit(50); scene('gv_big',1,{x:Gp.x,y:Gp.top-74,txt:'SQUISH SQUISH!',c:PINK,sc:3}); scene('gv_dizzy',1.4,{L:list}); }],
     [2500,()=>{ sfx.squeak(); }],
-    [4100,'end',res(E2)+'She will want every single one of those back.']]); };
+    [4100,'end',res(E2)+'She\'ll want every single one of those back.']]); };
 
 // ---------- Dance Battle (B1) ----------
 // A step-off. Spotlight on Grace: her moves. Spotlight on the monster: it tries. Spotlight on Grace: big finish. She wins its buff.
@@ -1093,7 +1093,7 @@ G.chalk_up=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,46
     ['hf',2700],
     [2700,()=>{ sfx.bonk(); sfx.ding(); all(list); landHit(33); scene('gv_prints',1.6,{L:list}); }],
     [3400,()=>{ scene('gr_beam',1.0,{x:c.x,y:c.y,w:32}); scene('gv_big',1,{x:c.x-30,y:c.y-GH()-50,txt:'STUCK IT',c:GOLD,sc:3}); sfx.ding(); }],
-    [4500,'end',res(E2)+'Chalk handprints everywhere. That is how you know it was good.']]); };
+    [4500,'end',res(E2)+'Chalk handprints everywhere. That\'s how you know it was good.']]); };
 })();
 
 // ================= Option 3 Ultimates (phase 5b, 2026-10-24) =================
@@ -1198,7 +1198,7 @@ G.viral_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m
   const pp={land:550,grab:700,beam0:1000,beam1:2100,hx:cx-6,hy:Math.round(floor-GH()-70)};
   let pl=null;
   ST.play(E2,[
-    [0,()=>{ scene('g5_bars',6.2,{}); setMessage('Grace grabs her hairbrush. It is a microphone now. She is going LIVE.'); say(m.id,'viral_ult'); scene('g5_brush',6.2,{to:3000}); }],
+    [0,()=>{ scene('g5_bars',6.2,{}); setMessage('Grace grabs her hairbrush. It\'s a microphone now. She\'s going LIVE.'); say(m.id,'viral_ult'); scene('g5_brush',6.2,{to:3000}); }],
     [650,()=>{ scene('g5_live',6.1,{plan:lp}); sfx.click&&sfx.click(); b7Later(()=>sfx.ding(),150); }],
     [900,()=>{ scene('g5_big',1.1,{x:cx,y:floor-GH()-40,txt:'HI GUYS!',c:PINK,sc:3}); setMessage('Viewers: 3. Her whole family.'); }],
     [1300,()=>{ setMessage('Then the count starts going up. And UP.'); for(let k=0;k<8;k++) b7Later(()=>sfx.click&&sfx.click(),k*110); }],
@@ -1259,7 +1259,7 @@ G.olympic_ult=E2=>{ const {m,fx}=E2,f=foesOf(E2)[0],F=ST.unit(f),me=ST.unit(m),j
     [0,()=>{ scene('g5_bars',6.0,{}); scene('g5_floor',5.8,{back:true}); setMessage('The whole floor turns into a championship spring floor.'); say(m.id,'olympic_ult'); sfx.floorMusic(); }],
     [700,()=>{ scene('g5_poof',.8,{x:corner.x,y:corner.y-GH()*.5}); scene('g5_sequins',5.2,{st}); leotard(true); sfx.spin&&sfx.spin(); setMessage('Grace twirls into her diamond leotard. Sequins. So many sequins.'); }],
     [1150,()=>{ scene('g5_text',1,{st,txt:'ARMS UP!',c:PINK2}); sfx.ding(); setMessage('Corner of the mat. She salutes the judges.'); }],
-    [1300,()=>{ judges.forEach((j,k)=>{ const J=ST.foe(j); b7Later(()=>{ scene('g5_score',2.2,{x:J.x+6,y:J.top-34,rot:(k%2?-.1:.1),c:CONF[k%CONF.length]}); lift(j,-6,0,0); },k*160); }); if(judges.length) setMessage('The other monsters are the judges now. They were not asked.'); }],
+    [1300,()=>{ judges.forEach((j,k)=>{ const J=ST.foe(j); b7Later(()=>{ scene('g5_score',2.2,{x:J.x+6,y:J.top-34,rot:(k%2?-.1:.1),c:CONF[k%CONF.length]}); lift(j,-6,0,0); },k*160); }); if(judges.length) setMessage('The other monsters are the judges now. They weren\'t asked.'); }],
     [1650,()=>{ setMessage('Deep breath.'); }],
     [1850,()=>{ sfx.whoosh(); setMessage('She sprints the diagonal!'); }],
     [2700,()=>{ scene('g5_vortex',.6,{st}); sfx.jumpWhistle&&sfx.jumpWhistle(); sfx.whoosh(); b7Later(()=>sfx.whoosh(),180); setMessage('Triple twist! Straight up! Off the top of the screen!'); }],
@@ -1456,14 +1456,14 @@ G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p))
   ST.play(E2,[
     [0,()=>{ setMessage('Grace takes the floor in front of everyone. Dance break.'); say(m.id,'dance'); }],
     [750,()=>{ for(let k=0;k<4;k++) b7Later(()=>{ S_('click'); scene('gf_word',.25,{x:px,y:py-GH()-36,txt:['5','6','7','8'][k],c:k===3?GOLD:CREAM,sc:3}); },k*200); setMessage('Five, six, seven, eight.'); }],
-    [B0,()=>{ sfx.dance(); setMessage('Step, touch. Grapevine. Hips. She has been practicing this all week.'); scene('gf_notes',(SPIN-B0+600)/1000,{x:px,y:py-GH()-40});
+    [B0,()=>{ sfx.dance(); setMessage('Step, touch. Grapevine. Hips. She\'s been practicing this all week.'); scene('gf_notes',(SPIN-B0+600)/1000,{x:px,y:py-GH()-40});
       others.forEach((p,k)=>{ moveU(p,(SPIN-B0)/1000,(q,tt)=>{ const ms=q*(SPIN-B0),b=Math.floor(ms/BT),v=(ms%BT)/BT; return {dx:(b%2?6:-6)*ez(cl(v/.4)),dy:-Math.sin(cl(v/.35)*Math.PI)*5,frame:b%4===3?'celeb':'idle'}; }); }); }],
     ...steps,
     [SPIN,()=>{ S_('whoosh'); setMessage('And spin!'); }],
     ['hf',FIN],
     [FIN,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gv_confetti',1.9,{n:70,seed:3}); scene('gf_word',1.3,{x:px,y:py-GH()-70,txt:'DANCE BREAK!',c:GOLD,sc:4});
       for(const p of party) { const q=ST.unit(p); scene('gv_glitter',.8,{x:q.x,y:q.mid,r:40}); } }],
-    [END,'end','Everyone dances. Even the ones who said they would not.']]); };
+    [END,'end','Everyone dances. Even the ones who said they\'d not.']]); };
 
 // ---------- Dance Battle (B1) ----------
 // Lights down, spotlight on Grace. She struts up, points at the monster, beckons it (COME ON!), then shimmy, hip pop,

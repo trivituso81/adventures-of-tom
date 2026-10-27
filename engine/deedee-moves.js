@@ -284,11 +284,11 @@ D.basic=E2=>{ const {i,m,fx}=E2;
     720,()=>{ pose(fx,'act',1.0); scene('dthumb',1.1,{x:GX+18,y:206}); S.squeak(); battle.enemyWobble=1.0; },
     360,()=>S.squeak(),360,()=>{ S.squeak(); bt('SCRUB',96,32,'#fff1cb',3,.7); },
     420,()=>{ S.sparkle(); scene('dgleam',1.2,{x:GX,y:226}); battle.flashEnemy=.25; hit(E2); bt('SPARKLY',96,36,'#bfe6ff',3,.9); },
-    800,E2.result+' Much better. Now it is presentable.',()=>checkEnemy()); };
+    800,E2.result+' Much better. Now it\'s presentable.',()=>checkEnemy()); };
 
 // Power Walk: ten thousand steps, around and through the monster, arms pumping.
 D.walk=E2=>{ const {i,m,fx}=E2; const LAP=.95,N=3,DUR=LAP*N; let face=1;
-  enqueue(()=>{ setMessage('Deedee laces up. Morning walk. She does not stop for monsters.'); say(m.id,'walk',.1);
+  enqueue(()=>{ setMessage('Deedee laces up. Morning walk. She doesn\'t stop for monsters.'); say(m.id,'walk',.1);
       scene('dpedo',DUR+.5,{x:288,y:40,to:10000}); scene('dspeed',DUR,{dir:()=>face});
       path(fx,DUR,(q,c)=>{
         const L=Math.min(N-1e-6,q*N),u=L%1,step=Math.abs(Math.sin(c.t*16));
@@ -299,7 +299,7 @@ D.walk=E2=>{ const {i,m,fx}=E2; const LAP=.95,N=3,DUR=LAP*N; let face=1;
       for(let k=0;k<Math.round(DUR*7);k++) later(k*140,()=>S.step()); },
     ...[0,1,2].flatMap(k=>[k===0?330:950,()=>{ battle.slash=.2; battle.enemyWobble=.4; sfx.slash(); S.beep(); scene('dust',.5,{x:GX+30,y:262,n:5}); bt(['EXCUSE ME','COMING THROUGH','ON YOUR LEFT'][k],96,30+k*2,'#ff9ac0',2,.7); part(E2,3,k); }]),
     1000,()=>{ sfx.levelChime(); scene('confetti',1.2,{x0:180,x1:400,n:24}); bt('10000 STEPS',96,36,'#ffe08a',3,1.1); pose(fx,'celeb',.9); },
-    900,E2.result+' Deedee is not even out of breath. The '+enemyName().toLowerCase()+' is.',()=>checkEnemy()); };
+    900,E2.result+' Deedee isn\'t even out of breath. The '+enemyName().toLowerCase()+' is.',()=>checkEnemy()); };
 
 // Registered Nut: retired registered nurse. Tom calls her a registered nut. A little pinch, then a BRAVE sticker.
 D.nurse=E2=>{ const {i,m,fx}=E2; let woozy=false;
@@ -315,7 +315,7 @@ D.nurse=E2=>{ const {i,m,fx}=E2; let woozy=false;
 
 // Wet Floor: she mops the whole battlefield. It sparkles. It is VERY slippery. Then the sign.
 D.mop=E2=>{ const {i,m,fx}=E2;
-  enqueue(()=>{ setMessage('Deedee mops the whole battlefield. It sparkles. It is VERY slippery.'); say(m.id,'mop',.2); hold(i,'dmop',2.4,{scrub:true}); scene('dwet',4.6,{}); S.swish(1.6);
+  enqueue(()=>{ setMessage('Deedee mops the whole battlefield. It sparkles. It\'s VERY slippery.'); say(m.id,'mop',.2); hold(i,'dmop',2.4,{scrub:true}); scene('dwet',4.6,{}); S.swish(1.6);
       path(fx,2.2,(q,c)=>{ const u=q<.5?ez(q/.5):1-ez((q-.5)/.5),wig=Math.sin(c.t*18); return {cx:lerp(c.origX,300,u)+wig*6,base:c.origBase-Math.abs(wig)*3}; });
       scene('dbubbles',2.0,{x:420,y:262,n:14,sp:220,delay:.3}); },
     1300,()=>{ S.bubbles(); scene('dbubbles',1.6,{x:GX,y:262,n:12,sp:120}); battle.enemyWobble=.8; bt('SHINY',96,30,'#bfe6ff',3,.7); },
@@ -327,7 +327,7 @@ D.mop=E2=>{ const {i,m,fx}=E2;
 
 // Rhubarb Crisp: straight from the oven, still bubbling. Dropped on from above, then a scoop of ice cream on top.
 D.crisp=E2=>{ const {i,m,fx}=E2; const top=()=>(battle.enemyTop||170);
-  enqueue(()=>{ setMessage('Deedee pulls a rhubarb crisp out of the oven. It is still bubbling. Her recipe. Nobody gets the recipe.'); hold(i,'dcrisp',1.9,{}); pose(fx,'aim',1.9); say(m.id,'crisp',.3); S.bubbling(1.6); },
+  enqueue(()=>{ setMessage('Deedee pulls a rhubarb crisp out of the oven. It\'s still bubbling. Her recipe. Nobody gets the recipe.'); hold(i,'dcrisp',1.9,{}); pose(fx,'aim',1.9); say(m.id,'crisp',.3); S.bubbling(1.6); },
     1700,()=>{ battle.held=null; pose(fx,'throw',.5); const h=hand(); toss('dcrisp',h.x,h.y,GX,-60,0,.45,40,{spin:false}); sfx.whoosh(); },
     700,()=>{ scene('shadow',.5,{x:GX,y:264,r:50}); toss('dcrisp',GX,-60,GX,top()+10,0,.45,0,{spin:false}); sfx.slideWhistle(); },
     450,()=>{ sfx.splat(); sfx.thud(); battle.shakeEnemy=.6; battle.flashEnemy=.3; scene('dsplat',2.6,{x:GX,y:top()+34}); scene('crumbs',1.0,{x:GX,y:top()+14,n:26,sp:150,c:'#e8b46a'}); scene('dsteam',2.4,{x:GX,y:top()+20,w:90}); part(E2,2,0); bt('HOT HOT HOT',96,30,'#ff6f8f',3,.9); },
@@ -541,7 +541,7 @@ D.hugShow=E2=>{ const {m,fx}=E2;
     500,()=>{ fx.hug=1.3; const h=home(m); for(const p of b2LiveParty()) { if(p===m) continue; const q=home(p); toss('dheart',h.x-10,h.base-h.h*.7,q.x,q.base-q.h*.6,0,.5,60,{spin:false,r:9}); } sfx.kiss&&sfx.kiss(); },
     IMPACT,()=>{ E2.apply(); for(const p of b2LiveParty()) scene('glow',.9,{x:home(p).x,y:home(p).base-40,rx:40,ry:56,c:'#ff9ac0',a:.35}); sfx.fountain(); bt('TO THE MOON',96,22,GOLD,2,1.2); },
     500,()=>{ for(const p of b2LiveParty()) if(p!==m) battle.fx[p.idx].hop=.3; sfx.heal(); },
-    300,'There is no shortened version of this love. Everyone is Tucked In.',()=>checkEnemy()); };
+    300,'There\'s no shortened version of this love. Everyone is Tucked In.',()=>checkEnemy()); };
 D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
   enqueue(()=>{ setMessage('Deedee straightens her badge. The sticker says NUT.'); say('deedee','registered_nut'); scene('d_badge',1.0,{}); pose(fx,'expr',.9); },
     500,()=>{ scene('d_pulse',1.4,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); sfx.beep&&sfx.beep(); },
@@ -585,7 +585,7 @@ D.garden_shower=E2=>{ const {fx}=E2;
     500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
     300,res(E2)+'The watering schedule was ambitious.',()=>checkEnemy()); };
 D.windows_open=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty());
-  enqueue(()=>{ setMessage('Deedee unlatches a window that was not there a moment ago.'); say('deedee','windows_open'); scene('d_window',1.9,{}); pose(fx,'act',.6); sfx.doorIn&&sfx.doorIn(); },
+  enqueue(()=>{ setMessage('Deedee unlatches a window that wasn\'t there a moment ago.'); say('deedee','windows_open'); scene('d_window',1.9,{}); pose(fx,'act',.6); sfx.doorIn&&sfx.doorIn(); },
     500,()=>{ sfx.whoosh(); },
     IMPACT,()=>{ E2.apply(); for(const u of who) scene('glow',.9,{x:home(u).x,y:home(u).base-40,rx:36,ry:50,c:'#9fd8ff',a:.3}); sfx.ding(); },
     500,()=>{ for(const u of who) if(u.side==='party'&&u!==m) battle.fx[u.idx].hop=.25; pose(fx,'celeb',.5); },
@@ -662,7 +662,7 @@ SC.dd_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.global
 D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'throw',dx:-8},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Deedee power-walks over. She has seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dd_towel',3.0,{plan:{snap:1850,fold:2150}}); }],
+    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dd_towel',3.0,{plan:{snap:1850,fold:2150}}); }],
     [1500,()=>{ sfx.whoosh(); }],
     ['hf',1850],
     [1850,()=>{ sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('dd_poof',.5,{x:F.x+8,y:F.mid-8,c:BLUE,n:8}); }],
@@ -692,7 +692,7 @@ D.hugShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m
     ...visits.map(([ms,o])=>[ms,()=>{ const q=ST.unit(o); scene('dd_heart',.9,{x:q.x,y:q.top-4}); battle.fx[o.idx].hop=.3; sfx.kiss?sfx.kiss():sfx.select(); }]),
     ['hf',heartAt],
     [heartAt,()=>{ E2.apply(); for(const p of party) { const q=ST.unit(p); scene('dd_glow',.9,{x:q.x,y:q.mid,c:ROSE}); } sfx.fountain?sfx.fountain():sfx.heal(); sfx.heal(); }],
-    [heartAt+1100,'end','There is no shortened version of this love. Everyone is Tucked In.']]); };
+    [heartAt+1100,'end','There\'s no shortened version of this love. Everyone is Tucked In.']]); };
 D.moon_back=E2=>D.hugShow(E2);
 
 // ---------- Registered Nut, Reporting ----------
@@ -954,7 +954,7 @@ SC.dv_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.global
 D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
   ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'throw',dx:-8},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Deedee power-walks over. She has seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dv_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150}}); }],
+    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dv_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150}}); }],
     [1500,()=>{ sfx.whoosh(); setMessage('She twists her big dish towel into a rope.'); }],
     ['hf',1850],
     [1850,()=>{ sfx.bonk(); sfx.slash&&sfx.slash(); ST.jolt(f,.45); landHit(100); scene('dv_rings',.5,{x:F.x+8,y:F.mid-8,c:BLUE,r:36}); scene('dv_big',1.1,{x:F.x,y:F.top-74,txt:'FLICK!',c:CREAM,sc:4}); }],
@@ -1074,7 +1074,7 @@ D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST
     [2300,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'TING!',c:GOLD,sc:4}); scene('dv_text',1.1,{st,txt:'CHEERS!',c:CREAM,sc:3}); setMessage('Cheers! The last TING rings right through it.'); }],
     [2950,()=>{ setMessage('She sips.'); sfx.vapor&&sfx.vapor(); }],
     [3450,()=>{ scene('dv_text',1.2,{st,txt:'AHH.',c:GOLD,sc:3}); sfx.ding(); setMessage('Ahh. Everyone may now resume.'); }],
-    [4900,'end',res(E2)+'It is five o’clock somewhere. Its wind-up is cancelled.']]); };
+    [4900,'end',res(E2)+'It\'s five o’clock somewhere. Its wind-up is cancelled.']]); };
 
 // ---------- Brisk Means Brisk (B1, kept: hand weights and swinging arms) ----------
 const dumbbell=(x,y,rot,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); RO(-11,-2,22,4,'#9aa3b0'); for(const sd of [-1,1]) { RO(sd*11-5,-9,10,18,'#ff7aa8'); R(sd*11-3,-7,3,14,'#ffb0cc'); } gfx.restore(); };
@@ -1134,7 +1134,7 @@ D.rise_and_shine=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:1000,x:sx,y:sy,f:'aim'},{t:1550,f:'wind'},{t:1700,f:'throw',dy:6},{t:1850,f:'celeb',hop:10},{t:2800,f:'hip'},{t:3100,f:back(sx,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
   const P={x:wx,y:wy,grab:1000,open:1700};
   ST.play(E2,[
-    [0,()=>{ setMessage('The shades are drawn. It is very dark in here. Deedee does not approve.'); say(m.id,'rise_and_shine'); scene('dv_dim',2.0,{open:1700}); scene('dv_shade',4.1,{P,st}); }],
+    [0,()=>{ setMessage('The shades are drawn. It\'s very dark in here. Deedee doesn\'t approve.'); say(m.id,'rise_and_shine'); scene('dv_dim',2.0,{open:1700}); scene('dv_shade',4.1,{P,st}); }],
     [1000,()=>{ setMessage('She takes hold of the shade cord.'); }],
     [1700,()=>{ sfx.whoosh(); sfx.levelChime(); scene('dv_light',2.2,{x:wx,y:wy}); scene('dv_big',1.6,{x:288,y:44,txt:'RISE AND SHINE!',c:'#fff27a',sc:3}); setMessage('ZIP! Blinding morning light floods the room.'); }],
     [1900,()=>{ const sq=foe?[foe]:fl; scene('dv_squint',1.6,{list:sq}); ST.draw((s,u)=>{ sq.forEach((g,k)=>lift(g,0,-.16*ez(u/.15)*(1-ez((u-.8)/.2))+Math.sin(u*40)*.02,6*ez(u/.15)*(1-ez((u-.8)/.2)))); },1.6); if(!foe) setMessage('The monsters squint. Everybody else wakes right up.'); }],
@@ -1178,7 +1178,7 @@ D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
     [950,()=>{ scene('dv_big',1.3,{x:H.x,y:H.top-40,txt:'SQUEEZE!',c:ROSE,sc:4}); scene('dv_hearts',1.4,{x:H.x,y:H.top,n:7}); sfx.squeak&&sfx.squeak(); b7Later(()=>sfx.squeak&&sfx.squeak(),300); setMessage('One big squeezy Deedee hug.'); if(foe) ST.draw((s,u)=>lift(t,Math.abs(Math.sin(u*20))*-4,Math.sin(u*24)*.06,0),1.25); }],
     ['hf',1500],
     [1500,()=>{ E2.apply(); sfx.heal(); scene('dv_glow',1,{x:H.x,y:H.mid,c:ROSE}); }],
-    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-30,y:c.y-30,txt:'MWAH!',c:LIP,sc:3}); setMessage('And a lipstick kiss on the cheek. That will not come off for days.'); }],
+    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-30,y:c.y-30,txt:'MWAH!',c:LIP,sc:3}); setMessage('And a lipstick kiss on the cheek. That\'ll not come off for days.'); }],
     [4100,'end',kindLine(t,'Squeezed, kissed, and feeling much better.')]]); };
 })();
 
@@ -1266,7 +1266,7 @@ D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST
     [2300,()=>{ sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('dp_rings',.7,{x:F.x,y:F.mid,r:70,c:CREAM}); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'TING!',c:GOLD,sc:5}); scene('dv_text',1.1,{st,txt:'CHEERS!',c:CREAM,sc:3}); setMessage('Cheers! The last TING rings right through it.'); }],
     [2950,()=>{ setMessage('She sips.'); sfx.vapor&&sfx.vapor(); }],
     [3450,()=>{ scene('dv_text',1.2,{st,txt:'AHH.',c:GOLD,sc:3}); sfx.ding(); setMessage('Ahh. Everyone may now resume.'); }],
-    [4900,'end',res(E2)+'It is five o’clock somewhere. Its wind-up is cancelled.']]); };
+    [4900,'end',res(E2)+'It\'s five o’clock somewhere. Its wind-up is cancelled.']]); };
 
 // ---------- Oven Mitt Ultimatum: huge mitts, a big clap shockwave ----------
 const MS=2.0;
@@ -1320,7 +1320,7 @@ D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
     [950,()=>{ scene('dv_big',1.3,{x:H.x,y:H.top-84,txt:'SQUEEZE!',c:ROSE,sc:5}); scene('dp_hug',1.3,{x:H.x,y:H.top+10}); sfx.squeak&&sfx.squeak(); b7Later(()=>sfx.squeak&&sfx.squeak(),300); b7Later(()=>sfx.squeak&&sfx.squeak(),600); setMessage('One big squeezy Deedee hug.'); if(foe) ST.draw((s,u)=>lift(t,Math.abs(Math.sin(u*20))*-8,Math.sin(u*24)*.12,0),1.25); }],
     ['hf',1500],
     [1500,()=>{ E2.apply(); sfx.heal(); scene('dv_glow',1,{x:H.x,y:H.mid,c:ROSE}); }],
-    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-46,y:c.y-40,txt:'MWAH!',c:LIP,sc:4}); setMessage('And a big lipstick kiss on the cheek. That will not come off for days.'); }],
+    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-46,y:c.y-40,txt:'MWAH!',c:LIP,sc:4}); setMessage('And a big lipstick kiss on the cheek. That\'ll not come off for days.'); }],
     [4100,'end',kindLine(t,'Squeezed, kissed, and feeling much better.')]]); };
 })();
 

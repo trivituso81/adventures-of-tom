@@ -228,7 +228,7 @@ T.quickchange=E2=>{ const {i,m,fx}=E2; const pieces=['tophat','bowtie','boa'];
     ...pieces.flatMap((kd,k)=>[k===0?800:450,()=>pose(fx,'wind',.25),220,()=>{ pose(fx,'throw',.3); const h=hand(); toss(kd,h.x,h.y,GX,kd==='tophat'?(battle.enemyTop||180)-24:226,0,.5,70); sfx.whoosh(); },
       500,()=>{ sfx.bonk(); battle.shakeEnemy=.3; scene('burst',.35,{x:GX,y:kd==='tophat'?(battle.enemyTop||180)-14:226,c:'#fff6dc'}); part(E2,3,k); if(k===0) scene('dressed',3.2,{pieces:1}); else battle.scenes.filter(q=>q.kind==='dressed').forEach(q=>q.pieces=k+1); bt(['HAT','BOW TIE','BOA'][k],96,32,'#ffd166',3,.6); }]),
     400,()=>{ sfx.levelChime(); battle.flashEnemy=.3; scene('flash',.25,{a:.35}); bt('CONTINUITY',96,36,'#ff8fb8',3,1.1); },
-    1100,E2.result+' It looks great. It is furious about it.',()=>checkEnemy()); };
+    1100,E2.result+' It looks great. It\'s furious about it.',()=>checkEnemy()); };
 
 // Next Stop: the express train comes through. TNB is driving.
 T.metro=E2=>{ const {i,m,fx}=E2;
@@ -240,23 +240,23 @@ T.metro=E2=>{ const {i,m,fx}=E2;
 
 // Jump Scare: lights out, VHS hum, eyes in the dark, then BOO. May leave the monster too rattled to act.
 T.jumpscare=E2=>{ const {i,m,fx}=E2; let spooked=false;
-  enqueue(()=>{ setMessage('TNB puts on his favorite horror movie. He has seen it eleven times.'); say(m.id,'jumpscare',.2); scene('dark',3.4,{a:.85,c:'#06060c'}); scene('vhs',3.4,{}); S.drone(2.2); },
+  enqueue(()=>{ setMessage('TNB puts on his favorite horror movie. He\'s seen it eleven times.'); say(m.id,'jumpscare',.2); scene('dark',3.4,{a:.85,c:'#06060c'}); scene('vhs',3.4,{}); S.drone(2.2); },
     1100,()=>{ scene('eyes',1.2,{}); },
     1200,()=>{ S.sting(); scene('flash',.25,{a:.8}); scene('scare',1.3,{}); battle.lift={t:0,dur:.7}; battle.flashEnemy=.4; bt('BOO',132,30,'#ff3b3b',5,1); },
     350,()=>{ scene('yikes',1.2,{}); battle.shakeEnemy=.8; hit(E2); spooked=confuseMaybe(.45); },
-    800,()=>setMessage(spooked?E2.result+' The '+enemyName().toLowerCase()+' is too scared to move.':E2.result+' TNB was not scared. Not even a little.'),
+    800,()=>setMessage(spooked?E2.result+' The '+enemyName().toLowerCase()+' is too scared to move.':E2.result+' TNB wasn\'t scared. Not even a little.'),
     1150,()=>checkEnemy()); };
 
 // Kiln Blast: cone six, straight from the studio.
 T.kiln=E2=>{ const {i,m,fx}=E2;
-  enqueue(()=>{ setMessage('TNB opens the kiln. Cone six. Do not touch the door.'); pose(fx,'aim',3.0); say(m.id,'kiln',.3); scene('kiln',3.0,{}); sfx.slideWhistle(); },
+  enqueue(()=>{ setMessage('TNB opens the kiln. Cone six. Don\'t touch the door.'); pose(fx,'aim',3.0); say(m.id,'kiln',.3); scene('kiln',3.0,{}); sfx.slideWhistle(); },
     900,()=>{ sfx.fireball(); scene('jet',1.5,{x0:298,y0:236,x1:196,y1:226,w:34,grow:.2,cs:['#ff8c3a','#ffd166','#fff6c8','#ffffff']}); scene('flames',1.4,{x:GX,y:262,w:100,h:120,cs:['#ff8c3a','#ffd166','#fff6c8','#ffffff']}); scene('flash',.45,{c:'#fff2c8',a:.5}); },
     700,()=>{ battle.flashEnemy=.5; battle.shakeEnemy=.7; hit(E2); scene('shards',1.0,{x:GX,y:222,n:14,cs:['#b4573d','#d98f3f','#f4efe0']}); bt('CONE SIX',96,36,'#ffb070',3,1); },
     900,E2.result+' Fired. Let it cool overnight.',()=>checkEnemy()); };
 
 // Bomb the Hill: a hill appears. TNB rides it. No brakes. Never brakes.
 T.bomb=E2=>{ const {i,m,fx}=E2;
-  enqueue(()=>{ setMessage('A hill appears behind TNB. He has been waiting his whole life for this hill.'); say(m.id,'bomb',.3); scene('bighill',3.4,{back:true}); scene('board',3.4,{});
+  enqueue(()=>{ setMessage('A hill appears behind TNB. He\'s been waiting his whole life for this hill.'); say(m.id,'bomb',.3); scene('bighill',3.4,{back:true}); scene('board',3.4,{});
       path(fx,3.4,(q,c)=>{
         if(q<.14) { const u=q/.14; return {cx:lerp(c.origX,552,u),base:lerp(c.origBase,hillY(552),u)-10-Math.sin(u*Math.PI)*60,noShadow:true}; }
         if(q<.32) return {cx:552,base:hillY(552)-10,rot:Math.sin(c.t*14)*.05,noShadow:true};
@@ -281,7 +281,7 @@ T.wrap=E2=>{ const {i,m,fx}=E2;
     800,()=>{ sfx.bonk(); sfx.splat(); battle.shakeEnemy=.8; battle.flashEnemy=.5; scene('shards',1.0,{x:GX,y:214,n:22}); part(E2,2,1); },
     500,()=>{ scene('letterbox',4.2,{}); scene('credits',4.2,{lines:credits}); pose(fx,'celeb',1.5); sfx.fanfare(); bt('THAT\'S A WRAP',96,22,'#ffe08a',3,1.6); },
     1800,()=>{ scene('confetti',1.6,{x0:70,x1:300,n:40}); },
-    2400,E2.result+' That is a wrap on the '+enemyName().toLowerCase()+'. Great work, everybody.',()=>checkEnemy()); };
+    2400,E2.result+' That\'s a wrap on the '+enemyName().toLowerCase()+'. Great work, everybody.',()=>checkEnemy()); };
 
 // ================= Special: WARDROBE =================
 // Rolls out the wardrobe rack and throws a fresh outfit to the chosen member: back up if they were down,
@@ -534,7 +534,7 @@ T.practical_effects=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),cx=F.x+F.w
   ST.play(E2,[
     [0,()=>{ setMessage('TNB dims the lights and sets a tiny curtain next to '+f.name+'.'); say(m.id,'practical_effects'); scene('tn_dark',3.9,{a:.5}); S.drone(2.2); }],
     [700,()=>{ scene('tn_curtain',3.2,{x:cx,y:cy,fx:F.x+14,popAt:(2250-700)/3200}); sfxs('select'); }],
-    [1150,()=>{ scene('tn_string',1.8,{x:cx,y:cy,tautAt:(1800-1150)/1800}); setMessage('The pull-string is very visible. That is part of the charm.'); }],
+    [1150,()=>{ scene('tn_string',1.8,{x:cx,y:cy,tautAt:(1800-1150)/1800}); setMessage('The pull-string is very visible. That\'s part of the charm.'); }],
     ['hf',2350],
     [2250,()=>{ S.sting(); }],
     [2350,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('tn_text',1.1,{x:F.x+62,y:F.top-2,txt:'BOO!',c:'#ff6b6b',sc:3}); landHit(100); }],
@@ -624,7 +624,7 @@ T.kiln_door_policy=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),kx=F.x+F.w*
     [2600,()=>{ const h=hand(); ST.fly((x,y)=>shieldTile(x,y,1),kx,ky-36,h.x-6,h.y-6,.3,30); }],
     [2900,()=>{ scene('tn_tile',.45,{cracked:true,tag:true}); }],
     [3350,()=>{ const h=hand(); ST.fly((x,y)=>shieldTile(x,y,1),h.x-6,h.y-6,620,h.y+40,.5,80,0,{spin:2}); sfx.whoosh(); }],
-    [4300,'end',res(E2)+'The glaze stays. The shield does not.']]); };
+    [4300,'end',res(E2)+'The glaze stays. The shield doesn\'t.']]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
@@ -705,7 +705,7 @@ T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Mat
   const lx=F.x+F.w*.5+26,ly=F.base-12;
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls a slightly crooked mug out of his tote.'); say(m.id,'mug_toss'); scene('tv2_mugheld',2.0,{P}); }],
-    [900,()=>{ setMessage('It is a second. It even has a sticker that says so.'); S('select'); }],
+    [900,()=>{ setMessage('It\'s a second. It even has a sticker that says so.'); S('select'); }],
     [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly(()=>mug(0,0,0,2.3),h.x-6,h.y-14,F.x+6,F.top+14,.55,90,0,{spin:1.25}); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); S('ting'); ST.jolt(f,.5); landHit(100); scene('tv2_rings',.5,{x:F.x+6,y:F.top+14,c:CREAM,r:44}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'CLUNK!',c:GOLD,sc:4}); }],
@@ -737,7 +737,7 @@ T.quick_change=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(
     ['hf',hit],
     [hit,()=>{ sfx.ding(); E2.apply(); scene('tn_debuff',1.0,{x:H.x+10,y:H.mid,fall:H.base-H.mid}); scene('tv2_sparkle',.9,{x:H.x,y:H.mid,r:H.h*.5,n:10}); scene('tv2_glow',.8,{x:H.x,y:H.mid,c:'#c9b3e6'});
       if(!foe) { const cur=B2_RACK.find(r=>t.st&&t.st[r.id]); if(cur) scene('tn_tag',1.4,{x:H.x,y:Math.max(20,hy-28),txt:cur.tag,c:cur.c,delay:.85}); } }],
-    [2650,()=>{ setMessage(foe?'Hat, jacket, boa. It has never looked better.':'Hat, jacket, boa. Same person, better pockets.'); }],
+    [2650,()=>{ setMessage(foe?'Hat, jacket, boa. It\'s never looked better.':'Hat, jacket, boa. Same person, better pockets.'); }],
     [3800,'end',kindLine(t,'Same person, better pockets. The pockets were the important part.')]]); };
 
 // ---------- Continuity Pins (A2, kept: a sewing flourish and giant safety pins) ----------
@@ -942,7 +942,7 @@ T.kiln_door_policy=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),kx=Math.min
     [hit,()=>{ sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('tv2_big',1.2,{x:F.x,y:F.top-74,txt:'FWOOM!',c:'#ffb040',sc:4}); }],
     [SP.crack,()=>{ S('crunch'); }],
     [P.shut,()=>{ (sfx.clang||sfx.thud)(); setMessage('He closes the door. Bad ideas cool off outside.'); }],
-    [4400,'end',res(E2)+'The glaze stays. The shield does not.']]); };
+    [4400,'end',res(E2)+'The glaze stays. The shield doesn\'t.']]); };
 })();
 
 // ================= Round 3 override from Tom (2026-10-24 18:40, claude/move-review.md) =================
@@ -1004,7 +1004,7 @@ T.dadjoke_pottery=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m)
     [0,()=>{ setMessage('TNB carries a bucket of wet clay over. Something is in it.'); say(m.id,'dadjoke_pottery'); scene('t3n_prop',(home+100)/1000,{plan}); }],
     [grab,()=>{ S('splat'); setMessage('He pulls out a heavy, dripping, terracotta pigeon.'); }],
     [heave,()=>{ S('charge'); }],
-    [throwT,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu,s)=>pigeon(0,0,2.4,s.t*1000,true),h.x-4,h.y-12,F.x+F.w*.05,F.mid-F.h*.1,(hit-throwT)/1000,60); setMessage('He throws it. It flaps once. It is mostly clay.'); }],
+    [throwT,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu,s)=>pigeon(0,0,2.4,s.t*1000,true),h.x-4,h.y-12,F.x+F.w*.05,F.mid-F.h*.1,(hit-throwT)/1000,60); setMessage('He throws it. It flaps once. It\'s mostly clay.'); }],
     ['hf',hit],
     [hit,()=>{ S('splat'); S('thud'); ST.jolt(f,.6); landHit(100); scene('t3n_splat',2.6,{F}); scene('t3n_big',1.1,{x:F.x,y:F.top-74,txt:'SPLAT!',c:'#f0a070',sc:4}); }],
     [pun,()=>{ scene('t3n_text',1.5,{st,txt:"IT'S A CLAY PIGEON.",c:CREAM,sc:2,dy:16}); setMessage('He waits. He makes eye contact.'); }],
@@ -1069,7 +1069,7 @@ T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Mat
   const lx=F.x+F.w*.5+34,ly=F.base-38;
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls a slightly crooked mug out of his tote.'); say(m.id,'mug_toss'); scene('tp2_mugheld',2.0,{P}); }],
-    [900,()=>{ setMessage('It is a second. It even has a sticker that says so.'); S('select'); }],
+    [900,()=>{ setMessage('It\'s a second. It even has a sticker that says so.'); S('select'); }],
     [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-30,h.y-30,F.x+6,F.top+18,.55,90); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); S('ting'); ST.jolt(f,.55); landHit(100); scene('tp2_burst',.6,{x:F.x+6,y:F.top+18,r:56}); scene('tv2_flash',.25,{a:.3}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'CLUNK!',c:GOLD,sc:5}); }],
@@ -1355,7 +1355,7 @@ T.wrap_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
   ST.play(E2,[
     [0,()=>{ scene('t5_bars',6.95,{}); scene('t5_studio',6.75,{plan:P,back:true}); scene('t5_fall',2.6,{plan:P,t0:P.fall,delay:P.fall/1000}); scene('t5_lamps',6.75,{plan:P});
       scene('t5_walkie',1.55,{t0:150,talk:800,delay:.15}); say(m.id,'wrap_ult'); setMessage('Last setup of the day on Stage 7. TNB has his walkie on.'); }],
-    [800,()=>{ S('walkie'); setMessage('The walkie crackles. "And that is a wrap!"'); }],
+    [800,()=>{ S('walkie'); setMessage('The walkie crackles. "And that\'s a wrap!"'); }],
     [1300,()=>{ S('cheer'); scene('t5_big',1.1,{x:288,y:BAR+44,txt:'THAT\'S A WRAP!',c:GOLD,sc:4}); }],
     [1600,()=>{ scene('t5_racks',3.0,{t0:1600,y:300,xOf}); scene('t5_dress',2.0,{t0:1600,list:dress}); S('rumble',0,1.6); setMessage('Wardrobe first. TNB pushes the racks through the family. Arms up, everybody.'); }],
     ...dress.map(d=>[d.t,()=>{ S('whoosh'); }]),
@@ -1371,7 +1371,7 @@ T.wrap_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
     [5250,()=>{ scene('t5_credits',1.75,{lines,x1:Math.max(x1+40,220),y1:yb-4}); setMessage('Roll credits.'); }],
     [5050,()=>{ scene('t5_chair',1.55,{x:cx,y:cy,back:true}); }],
     [5550,()=>{ scene('t5_cup',.85,{}); S('ding'); setMessage('TNB sits down in his wardrobe chair with a coffee. In one of his own mugs, obviously.'); }],
-    [6900,'end',()=>res(E2)+'Wrap gift tomorrow. It is a mug. It is always a mug.']]); };
+    [6900,'end',()=>res(E2)+'Wrap gift tomorrow. It\'s a mug. It\'s always a mug.']]); };
 
 // ---------- Baxter Street Bomb (B6) ----------
 // Baxter Street at sunset (back layer): sky, the hills, a steep street from the top right down to the flat where the monsters
@@ -1450,5 +1450,5 @@ T.hillbomb_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.uni
     [4500,()=>{ if(tomU) { scene('t5_heart',.7,{x0:C.x+10,y0:C.y-110,x1:tomU.x,y1:tomU.top+6}); S('ting'); setMessage('TNB winks at Tom.'); } else setMessage('TNB catches his breath. Well, well, well.'); }],
     [5200,()=>{ E2.apply(); if(tomU) { scene('t5_rings',.5,{x:tomU.x,y:tomU.top+6,c:'#ff6a8a',r:30}); scene('t5_big',1.1,{x:tomU.x,y:tomU.top-58,txt:'YOUR TURN, BABE',c:'#ffb0c8',sc:2}); } }],
     [5300,()=>{ S('rumble',0,1); setMessage('He rolls back to his spot like it was nothing.'); }],
-    [6550,'end',()=>res(E2)+'He would like to go again. Tom would like him not to.']]); };
+    [6550,'end',()=>res(E2)+'He\'d like to go again. Tom would like him not to.']]); };
 })();

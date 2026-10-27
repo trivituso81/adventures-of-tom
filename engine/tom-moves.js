@@ -134,7 +134,7 @@ Tm.flashcard=E2=>{ const {fx,dmg,crit}=E2; const cards=[['猫','CAT'],['水','WA
     800,()=>{ bt('QUIZZED',96,34,'#9fe8ff',3,1); sfx.lineClear(); battle.flashEnemy=.3; },
     800,E2.result+' The Grump got none of them.',()=>checkEnemy()); };
 Tm.unbox=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('A package arrives. Tom did not need it. Tom needed it.'); say('tom','unbox'); scene('box',4.2,{}); sfx.slideWhistle(); },
+  enqueue(()=>{ setMessage('A package arrives. Tom didn\'t need it. Tom needed it.'); say('tom','unbox'); scene('box',4.2,{}); sfx.slideWhistle(); },
     600,()=>{ sfx.thud(); battle.shakeEnemy=.2; },
     120,()=>{ act(fx,1.2); },
     560,()=>{ sfx.whoosh(); },
@@ -142,7 +142,7 @@ Tm.unbox=E2=>{ const {fx}=E2;
     700,()=>{ sfx.ding(); bt('NEW',96,42,'#9fe8ff',4,.8); },
     400,()=>{ scene('gadgetbeam',.9,{}); sfx.laser(); },
     300,()=>{ battle.flashEnemy=.4; scene('flash',.4,{a:.6}); scene('ring',.6,{x:GX,y:264,r:100,c:'#9fe8ff'}); bt('$$$$',96,36,'#ffe08a',4,1); hit(E2); },
-    900,E2.result+' It was on sale. It was not on sale.',()=>checkEnemy()); };
+    900,E2.result+' It was on sale. It wasn\'t on sale.',()=>checkEnemy()); };
 Tm.dutch=E2=>{ const {fx}=E2;
   enqueue(()=>{ setMessage('Tom preheats the dutch oven. Five hundred degrees. Lid on.'); say('tom','dutch'); act(fx,.6); scene('dutch',3.4,{}); sfx.charge(); },
     880,()=>{ sfx.thud(); sfx.lineClear(); battle.shakeEnemy=.6; scene('dust',.7,{x:GX,y:262,n:8,sp:22,up:20}); scene('ring',.6,{x:GX,y:264,r:110}); hit(E2); },
@@ -948,7 +948,7 @@ Tm.starter_splash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m
   const sp=all.filter(o=>o!==f).map(o=>{ const O=ST.unit(o); return [go0+Math.max(0,(jx-O.x)/v),()=>{ ST.jolt(o,.25); sfx.splat(); }]; });
   ST.play(E2,[
     [0,()=>{ setMessage('Tom carries Bready Mercury, his sourdough starter, to the end of the row.'); say(m.id,'starter_splash'); scene('tv_jar',4.0,{plan}); }],
-    [1000,()=>{ setMessage('Day three. He is VERY bubbly. The lid starts to rattle.'); sfx.charge(); }],
+    [1000,()=>{ setMessage('Day three. He\'s VERY bubbly. The lid starts to rattle.'); sfx.charge(); }],
     [1650,()=>{ (sfx.boing||sfx.whoosh)(); scene('tv_text',.9,{x:jx-10,y:p.y-TH()-20,txt:'BURP',c:STARTER,sc:3}); }],
     [1850,()=>{ scene('tv_wave',(plan.done+500-1850)/1000,{plan,t0:1850}); sfx.whoosh(); setMessage('A wave of starter rolls out across the field.'); }],
     ...sp,
@@ -987,7 +987,7 @@ Tm.crumb_shot=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,m
     [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('tv_glow',1.1,{x:H.x,y:H.mid,c:'#ffd8a0'}); scene('tv_hearts',1,{x:H.x,y:H.top}); hopOf(t!==m?t:null); setMessage('The steam rolls over '+(self?'him':t.name)+'. It smells like a Sunday.'); }],
     [2650,()=>{ scene('tv_phone',1.0,{flash:snap-2650}); }],
     [snap,()=>{ (sfx.shutter||sfx.select)(); scene('tv_flash',.3,{a:.55}); scene('tv_big',1.1,{x:bx,y:by-86,txt:'CRUMB SHOT',c:GOLD,sc:3}); }],
-    [end,'end',kindLine(t,'He will be posting that one.')]]); };
+    [end,'end',kindLine(t,'He\'ll be posting that one.')]]); };
 
 // ---------- Mint Unboxing (A3) ----------
 // A brand-new gadget box. He peels the plastic film off in one long, perfect strip, lifts the lid, and a golden light
@@ -1013,7 +1013,7 @@ Tm.mint_unboxing=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
     ['hf',hit],
     [hit,()=>{ E2.apply(); sfx.ding(); sfx.heal(); for(const u of who) { const q=ST.unit(u); scene('tv_glow',.9,{x:q.x,y:q.mid,c:GOLD,rx:32,ry:44}); scene('tv_hearts',1,{x:q.x,y:q.top}); hopOf(u!==m?u:null); } setMessage(foe?foe.name+' gets to hold it. Carefully.':'Everyone gets to look at it. Nobody touches the screen.'); }],
     ...(dee&&!foe?[[hit+300,()=>{ const q=ST.unit(dee); scene('tv_text',.9,{x:q.x,y:q.top-16,txt:'WARM CRUST',c:'#f3c37a',sc:1}); }]]:[]),
-    [put,()=>{ sfx.select(); setMessage('He puts it back in the box. He is keeping the box.'); }],
+    [put,()=>{ sfx.select(); setMessage('He puts it back in the box. He\'s keeping the box.'); }],
     [put+1300,'end',foe?kindLine(foe):'The box is being kept. Forever.']]); };
 
 // ---------- Noise-Canceling (A4) ----------
@@ -1036,7 +1036,7 @@ Tm.noise_canceling=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,5
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:950,x:p.x,y:p.y,f:'expr'},{t:lift,f:'act',dx:-3},{t:on,f:'expr'},{t:click,f:'act',dx:-4},{t:quiet,f:'idle'},{t:2500,f:'idle',rot:(u,tt)=>Math.sin(tt*2.4)*.05},{t:3500,f:back(p.x,me)},{t:4300,x:'home',y:'home',f:'idle'}]);
   const plan={F,st,lift,on,click,quiet,hx:-4,hy:6};
   ST.play(E2,[
-    [0,()=>{ setMessage(f.name+' will not stop yelling. Tom walks over anyway.'); say(m.id,'noise_canceling'); scene('tv_noise',3.9,{plan}); scene('tv_phones',4.4,{plan}); }],
+    [0,()=>{ setMessage(f.name+' won\'t stop yelling. Tom walks over anyway.'); say(m.id,'noise_canceling'); scene('tv_noise',3.9,{plan}); scene('tv_phones',4.4,{plan}); }],
     [lift,()=>{ setMessage('He takes out his big flight headphones. He puts them on.'); sfx.whoosh(); }],
     [click,()=>{ sfx.select(); }],
     [quiet,()=>{ scene('tv_hush',.7,{x:p.x-10,y:p.y-TH()*.6,r:Math.max(140,p.x-F.x+60)}); (sfx.charge||sfx.whoosh)(); }],
@@ -1077,7 +1077,7 @@ Tm.window_seat=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(
     [slam+250,()=>{ E2.apply(); setMessage('Shade down. Lights off. First class.'); }],
     [up,()=>{ sfx.whoosh(); }],
     [tagAt,()=>{ if(LU) { const q=selfL?me:LU; scene('tv_tag',1.4,{x:selfL?me.x-44:q.x-q.w*.5-6,y:q.mid-30}); sfx.select(); } }],
-    [end,'end',res(E2)+'Do not disturb.']]); };
+    [end,'end',res(E2)+'Don\'t disturb.']]); };
 
 // ---------- Flashcard Flurry (B1) ----------
 // POP QUIZ. Tom flicks flashcards from a deck at every monster, one after another; they bonk and stick. Over the target,
@@ -1139,7 +1139,7 @@ Tm.konami_code=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(
     ['hf',boom],
     [boom,()=>{ (sfx.levelUp||sfx.fanfare)(); sfx.thud(); for(const f of list) ST.jolt(f,.55); landHit(40); scene('tv_flash',.35,{a:.6}); scene('tv_big',1.6,{x:Gp.x,y:Gp.top-74,txt:'30 LIVES!',c:GOLD,sc:4});
       for(const q of b2LiveParty()) { const U=ST.unit(q); scene('tv_1up',1.3,{x:U.x,y:U.top-10}); } }],
-    [boom+1700,'end',res(E2)+'Thirty lives. He is not going to need them.']]); };
+    [boom+1700,'end',res(E2)+'Thirty lives. He\'s not going to need them.']]); };
 
 // ---------- Save Point Sandwich (B3, kept; big crystal, save chime) ----------
 // Same beats as before: a save crystal rises over the friend, Tom walks over and unfolds it into a sandwich. The crystal
@@ -1293,7 +1293,7 @@ Tm.sourdough_snob=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
     [st0[1],()=>{ S('select'); }],
     [st0[2],()=>{ S('select'); setMessage('Forty-eight hours of fermentation. He has a pointer.'); }],
     [up,()=>{ (sfx.fanfare||sfx.ding)(); scene('t3_big',1.4,{x:cx,y:cy,txt:'ADMIRE THE CRUST!',c:GOLD,sc:3}); setMessage('Stop chewing. Look at the crust. LOOK at it.'); }],
-    [end,'end',kindLine(t,'He is still talking about the crust.')]]); };
+    [end,'end',kindLine(t,'He\'s still talking about the crust.')]]); };
 
 // ---------- Overpriced Gadget (A3) ----------
 // A huge matte-black box drops in front of Tom, price tag swinging ($1499). The lid slides off by itself. Very slowly.
@@ -1327,7 +1327,7 @@ Tm.overpriced_gadget=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2L
   ST.play(E2,[
     [0,()=>{ setMessage(foe?'Tom brings '+foe.name+' a very expensive box.':'Tom kneels down. A huge matte-black box lands in front of him.'); say2(m.id,'overpriced_gadget'); scene('t3_gbox',(done+250)/1000,{plan}); scene('t3_gadget',(done+50)/1000,{plan}); }],
     [set,()=>{ S('thud'); scene('t3_text',1.1,{x:px-64,y:py-112,txt:'MAX CHIP',c:'#c8ccd6',sc:2}); }],
-    [lid0,()=>{ setMessage('The lid slides off by itself. Very slowly. He does not help it.'); S('whoosh'); }],
+    [lid0,()=>{ setMessage('The lid slides off by itself. Very slowly. He doesn\'t help it.'); S('whoosh'); }],
     [lid1,()=>{ (sfx.fanfare||sfx.levelUp)(); }],
     ['hf',hit],
     [hit,()=>{ E2.apply(); S('ding'); S('heal'); scene('t3_big',1.4,{x:288,y:52,txt:'RETAIL THERAPY',c:GOLD,sc:3}); for(const u of who) { const q=ST.unit(u); scene('t3_glow',.9,{x:q.x,y:q.mid,c:GOLD,rx:32,ry:44}); scene('t3_hearts',1,{x:q.x,y:q.top}); hopOf(u!==m?u:null); }
@@ -1369,7 +1369,7 @@ Tm.seat_1a=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p
   end=lie+1750;
   const st=ST.keys(fx,K),plan={x0,x1,top,bot,d0,slam,shade,open,gone};
   ST.play(E2,[
-    [0,()=>{ setMessage('Now boarding: Group 5. Tom is not in Group 5.'); say2(m.id,'seat_1a'); scene('t3_group5',(open-200)/1000,{x:(x0+x1)/2,y:top+18}); scene('t3_suite',(gone+320)/1000,{plan}); }],
+    [0,()=>{ setMessage('Now boarding: Group 5. Tom isn\'t in Group 5.'); say2(m.id,'seat_1a'); scene('t3_group5',(open-200)/1000,{x:(x0+x1)/2,y:top+18}); scene('t3_suite',(gone+320)/1000,{plan}); }],
     [1150,()=>{ S('beep'); setMessage('He presses one button on a little remote.'); }],
     [d0,()=>{ S('whoosh'); }],
     ['hf',slam],
@@ -1403,7 +1403,7 @@ Tm.skincare_10=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,
     :[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:1000,x:sp.x,y:sp.y,f:X},{t:r0,f:A,dx:(u,tt)=>sg*4+Math.sin(tt*20)*3},{t:mask,f:X,dx:sg*6},{t:t0,f:X,dy:(u,tt)=>Math.abs(Math.sin(tt*5))*-2},{t:off,f:foeT?'celeb':'flip',hop:6},{t:off+500,f:X},{t:off+700,f:back(sp.x,me)},{t:off+1550,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),plan={r0,step,mask,off,t0,x:cl(fxX,90,486),y:Math.max(60,H.top-28),fx:fxX,fy:fyY};
   ST.play(E2,[
-    [0,()=>{ setMessage('Tom pauses the battle. Everyone freezes. It is skincare time.'); say2(m.id,'skincare_10'); S('menuOpen'); scene('t3_pause',(off+600)/1000,{off:off+200}); scene('t3_routine',(mask+50)/1000,{plan}); scene('t3_led',(off+350)/1000,{plan}); }],
+    [0,()=>{ setMessage('Tom pauses the battle. Everyone freezes. It\'s skincare time.'); say2(m.id,'skincare_10'); S('menuOpen'); scene('t3_pause',(off+600)/1000,{off:off+200}); scene('t3_routine',(mask+50)/1000,{plan}); scene('t3_led',(off+350)/1000,{plan}); }],
     [r0,()=>{ setMessage('Ten steps. In order. He has a tray.'); }],
     ...STEPS.map((_,k)=>[r0+k*step,()=>S('select')]),
     [mask,()=>{ S('charge'); }],
@@ -1495,7 +1495,7 @@ Tm.noise_canceling=E2=>{ const {m,fx}=E2,f=(E2.targets||[]).find(t=>t.side==='fo
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:950,x:p.x,y:p.y,f:'expr'},{t:lift,f:'act',dx:-3},{t:on,f:'expr'},{t:click,f:'act',dx:-4},{t:quiet,f:'idle'},{t:2500,f:'idle',rot:(u,tt)=>Math.sin(tt*2.4)*.05},{t:3500,f:back(p.x,me)},{t:4300,x:'home',y:'home',f:'idle'}]);
   const plan={F,st,lift,on,click,quiet};
   ST.play(E2,[
-    [0,()=>{ setMessage(f.name+' will not stop yelling. Tom walks over anyway.'); say(m.id,'noise_canceling'); scene('tv_noise',3.9,{plan}); scene('tv_phones',4.4,{plan}); }],
+    [0,()=>{ setMessage(f.name+' won\'t stop yelling. Tom walks over anyway.'); say(m.id,'noise_canceling'); scene('tv_noise',3.9,{plan}); scene('tv_phones',4.4,{plan}); }],
     [lift,()=>{ setMessage('He takes out his big flight headphones. He puts them on.'); S('whoosh'); }],
     [click,()=>{ S('select'); }],
     [quiet,()=>{ scene('tv_hush',.7,{x:p.x-10,y:p.y-TH()*.6,r:Math.max(140,p.x-F.x+60)}); (sfx.charge||sfx.whoosh)(); setMessage('The noise is cut off mid-air.'); }],
@@ -1504,14 +1504,19 @@ Tm.noise_canceling=E2=>{ const {m,fx}=E2,f=(E2.targets||[]).find(t=>t.side==='fo
     [2500,()=>{ scene('tv_text',1.2,{st,txt:'AHH',c:CREAM,dy:30}); setMessage('Tom closes his eyes. Total quiet. Just like seat 1A.'); }],
     [4400,'end',res(E2)+'The noise has been canceled.']]); };
 
-// ---------- Flashcard Flurry: big cards, one readable kana each ----------
-const KANA=[['KU',[[[.3,-.5],[-.3,0],[.3,.5]]]],['SHI',[[[-.15,-.55],[-.15,.25],[0,.48],[.35,.3]]]],['TSU',[[[-.45,-.15],[0,-.32],[.4,-.12],[.32,.18],[-.05,.42]]]],
-  ['HE',[[[-.5,.12],[-.2,-.25],[.5,.35]]]],['I',[[[-.35,-.4],[-.4,.1],[-.25,.4]],[[.3,-.3],[.4,.15]]]],['KO',[[[-.3,-.35],[.3,-.35]],[[-.35,.18],[-.2,.36],[.35,.33]]]]];
+// ---------- Flashcard Flurry: small cards, one real kanji each (sun, moon, fire, water, tree, mountain) ----------
+// Strokes are drawn by hand (no font needed) in a -.5 to .5 box; the meaning pops up when a card sticks.
+const KANA=[['SUN',[[[-.3,-.5],[.3,-.5],[.3,.5],[-.3,.5],[-.3,-.5]],[[-.3,0],[.3,0]]]],
+  ['MOON',[[[-.3,-.5],[-.3,.45],[-.42,.55]],[[-.3,-.5],[.3,-.5],[.3,.42],[.2,.54]],[[-.3,-.1],[.3,-.1]],[[-.3,.2],[.3,.2]]]],
+  ['FIRE',[[[-.2,-.28],[-.38,.02]],[[.2,-.28],[.38,.02]],[[.02,-.52],[-.12,.0],[-.46,.5]],[[-.04,-.05],[.22,.2],[.5,.5]]]],
+  ['WATER',[[[0,-.55],[0,.5],[-.12,.56]],[[-.46,-.1],[-.1,-.1],[-.44,.42]],[[.32,-.3],[.1,-.05]],[[.1,.05],[.5,.45]]]],
+  ['TREE',[[[-.5,-.2],[.5,-.2]],[[0,-.55],[0,.5]],[[-.1,-.05],[-.45,.45]],[[.1,-.05],[.45,.45]]]],
+  ['MOUNTAIN',[[[-.45,.45],[.45,.45]],[[-.45,-.1],[-.45,.45]],[[0,-.52],[0,.45]],[[.45,-.1],[.45,.45]]]]];
 const card=(x,y,sc,k,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc); RO(-13,-17,26,34,CREAM); R(-13,11,26,6,'#d8e8ff');
-  gfx.strokeStyle=INK; gfx.lineWidth=3.4; gfx.lineCap='round'; gfx.lineJoin='round'; for(const pts of KANA[k%6][1]) { gfx.beginPath(); pts.forEach(([a,b],i)=>{ const px=a*20,py=b*20-3; i?gfx.lineTo(px,py):gfx.moveTo(px,py); }); gfx.stroke(); }
+  gfx.strokeStyle=INK; gfx.lineWidth=2.3; gfx.lineCap='round'; gfx.lineJoin='round'; for(const pts of KANA[k%6][1]) { gfx.beginPath(); pts.forEach(([a,b],i)=>{ const px=a*20,py=b*20-3; i?gfx.lineTo(px,py):gfx.moveTo(px,py); }); gfx.stroke(); }
   gfx.restore(); };
-SC.tp_deck=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.94); const left=Math.max(0,P.n-Math.floor(Math.max(0,ms-P.c0)/P.step)); for(let k=Math.min(3,left);k>0;k--) card(h.x-12-k*3,h.y-18-k*3,1.6,(P.n-left+k-1)%6,0); };
-SC.tp_stuck=(s,u)=>{ gfx.globalAlpha=fade(u,.7); card(s.x,s.y,1.9,s.k,s.rot); if(u<.55) { gfx.globalAlpha=1-u/.55; bigWord(KANA[s.k%6][0],s.x,s.y-50,CREAM,2); } };
+SC.tp_deck=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.94); const left=Math.max(0,P.n-Math.floor(Math.max(0,ms-P.c0)/P.step)); for(let k=Math.min(3,left);k>0;k--) card(h.x-10-k*2,h.y-14-k*2,1.1,(P.n-left+k-1)%6,0); };
+SC.tp_stuck=(s,u)=>{ gfx.globalAlpha=fade(u,.7); card(s.x,s.y,1.3,s.k,s.rot); if(u<.55) { gfx.globalAlpha=1-u/.55; bigWord(KANA[s.k%6][0],s.x,s.y-34,CREAM,2); } };
 Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m),all=b2LiveFoes(),Gp=ST.group(all),kind=!!(B2.move&&B2.move.kindOnFoe);
   const sx=Math.max(Gp.x1+70,Math.min(me.x-40,Gp.x1+150)),sy=Math.min(316,me.base+6),n=6,c0=1150,step=190;
   const order=[]; for(let k=0;k<n-1;k++) order.push(all[k%all.length]); order.push(t);
@@ -1519,14 +1524,49 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
   for(let k=0;k<n;k++) K.push({t:c0+k*step-40,f:'act',dx:u=>-Math.sin(u*Math.PI)*8});
   K.push({t:c0+n*step,f:'expr'},{t:3300,f:'idle'},{t:3400,f:back(sx,me)},{t:4100,x:'home',y:'home',f:'idle'});
   ST.keys(fx,K); const reveal=c0+n*step+350;
-  const throws=order.map((o,k)=>[c0+k*step,()=>{ const O=ST.unit(o),h=hand(),rot=(k%2?-.25:.25),ox=((k*17)%28)-14,oy=((k*11)%18)-9; S('whoosh'); ST.fly((x,y,uu)=>card(0,0,1.9,k,uu*9),h.x-12,h.y-18,O.x+ox,O.mid+oy,.26,30);
+  const throws=order.map((o,k)=>[c0+k*step,()=>{ const O=ST.unit(o),h=hand(),rot=(k%2?-.25:.25),ox=((k*17)%28)-14,oy=((k*11)%18)-9; S('whoosh'); ST.fly((x,y,uu)=>card(0,0,1.3,k,uu*9),h.x-10,h.y-14,O.x+ox,O.mid+oy,.26,30);
     b7Later(()=>{ S('select'); ST.jolt(o,.18); scene('tp_stuck',1.3,{x:O.x+ox,y:O.mid+oy,k,rot}); },260); }]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Tom steps out with a deck of Japanese flashcards.'); say(m.id,'flashcard_flurry'); scene('tp_deck',(c0+n*step+200)/1000,{plan:{c0,step,n}}); scene('tv_q',3.5,{x:Math.min(560,F.x+F.w*.5+24),y:F.mid-16,flip:reveal,kind}); }],
+    [0,()=>{ setMessage('Tom steps out with a deck of kanji flashcards.'); say(m.id,'flashcard_flurry'); scene('tp_deck',(c0+n*step+200)/1000,{plan:{c0,step,n}}); scene('tv_q',3.5,{x:Math.min(560,F.x+F.w*.5+24),y:F.mid-16,flip:reveal,kind}); }],
     [900,()=>{ scene('tv_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'POP QUIZ!',c:CREAM,sc:3}); S('select'); }],
-    [c0,()=>{ setMessage(kind?'Flashcards for everybody. '+t.name+' gets the easy ones.':'Ku. Shi. Tsu. He. I. Ko. No peeking.'); }],
+    [c0,()=>{ setMessage(kind?'Flashcards for everybody. '+t.name+' gets the easy ones.':'Sun. Moon. Fire. Water. Tree. Mountain. No peeking.'); }],
     ...throws,
     ['hf',reveal],
     [reveal,()=>{ E2.apply(); S('ding'); ST.jolt(t,.2); scene('tv_big',1.3,{x:F.x,y:F.top-74,txt:kind?'GOOD JOB!':'WEAK SPOT!',c:GOLD,sc:3}); }],
     [4200,'end',kind?kindLine(t):'Pencils down. The answers are showing.']]); };
+// ---------- Button Mash (basic), rebuilt 2026-10-27: one button, no signal, the controller gets thrown ----------
+// Tom stays at his spot. He presses one button on a wireless controller, nothing happens (a little signal icon with a red
+// cross), he says it is not connecting, and he throws the controller at the monster. Same numbers: free, +1 VP.
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc);
+  RO(-5,-12,10,5,'#3a3f46'); R(-3,-11,6,2,GREY2);
+  const rr=(a,b,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(a,b,w,h,r); else gfx.rect(a,b,w,h); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
+  E(-13,5,6,7,OUT); E(13,5,6,7,OUT); E(-13,5,4.2,5.2,'#6a6f7a'); E(13,5,4.2,5.2,'#6a6f7a'); rr(-18,-8,36,15,5,'#6a6f7a'); R(-16,-6,32,2,GREY2);
+  R(-12,-3,5,2,INK); R(-10.5,-4.5,2,5,INK); E(10,-1,2.4,2.4,lit?GOLD:RED); E(14,-3,2,2,'#f0c040'); E(0,-4,1.6,1.6,led?'#ff4a3a':'#5a1a14'); gfx.restore(); };
+SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAlpha=1; const h=hand();
+  const wind=ms>P.wind?ez((ms-P.wind)/(P.thr-P.wind)):0,press=P.presses.some(t=>ms>t&&ms<t+110),shake=ms>P.ugh&&ms<P.wind?Math.sin(ms*.09)*2:0;
+  const x=h.x-8+shake-wind*10,y=h.y-4-wind*16,led=Math.floor(ms/180)%2===0&&ms>P.presses[0];
+  ctl(x,y+(press?2:0),1.25,-.3-wind*.7,press,led);
+  // The signal icon over the controller: three arcs, a red cross once the presses fail.
+  if(ms>P.presses[0]+100&&ms<P.wind) { const sx=x+4,sy=y-26,a=Math.min(1,(ms-P.presses[0]-100)/150); gfx.globalAlpha=a;
+    gfx.strokeStyle=CREAM; gfx.lineCap='round'; gfx.lineWidth=2.5; for(let k=1;k<=3;k++) { gfx.beginPath(); gfx.arc(sx,sy+8,k*5,Math.PI*1.2,Math.PI*1.8); gfx.stroke(); } E(sx,sy+8,1.8,1.8,CREAM);
+    if(ms>P.presses[1]) { Ln(sx-9,sy-6,sx+9,sy+10,3.5,OUT); Ln(sx+9,sy-6,sx-9,sy+10,3.5,OUT); Ln(sx-9,sy-6,sx+9,sy+10,2,RED); Ln(sx+9,sy-6,sx-9,sy+10,2,RED); } } };
+SC.tp_cdown=(s,u)=>{ const q=ez(u/.35); gfx.globalAlpha=fade(u,.7); ctl(s.x+q*s.dx,s.y+Math.abs(Math.sin(q*Math.PI*2))*-8*(1-q)+q*s.dy,1.25,.5+q*1.4,false,false); };
+Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
+  const presses=[500,900,1300],ugh=1650,wind=2250,thr=2650,fly=360,hit=thr+fly;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'act'},{t:ugh,f:'act',dy:(u,tt)=>Math.sin(tt*30)*-.7},{t:ugh+10,f:'expr'},{t:wind,f:'expr',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:wind+10,f:'act'},{t:thr,f:'act',dx:u=>ez(u)*8},
+    {t:thr+10,f:'act',dx:-8},{t:hit+500,f:'expr'},{t:hit+1300,f:'idle'}]);
+  const plan={presses,ugh,wind,thr};
+  const taps=presses.map((t,k)=>[t,()=>{ S('select'); if(k===2) S('nope'); }]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Tom takes out a wireless controller and presses one button.'); scene('tp_ctl',(thr+80)/1000,{plan}); }],
+    ...taps,
+    [presses[1]+80,()=>{ scene('tv_text',1.0,{st,txt:'...',c:CREAM,sc:2,dy:6}); }],
+    [ugh,()=>{ say(m.id,'button_mash'); setMessage('Nothing. He presses it again. Nothing.'); scene('tv_text',1.2,{st,txt:'UGH.',c:RED,sc:3,dy:10}); }],
+    [wind,()=>{ setMessage('Tom winds up.'); }],
+    [thr,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu)=>ctl(0,0,1.25,0,false,false),h.x-8,h.y-26,F.x,F.mid,fly/1000,34,0,{spin:3}); }],
+    ['hf',hit],
+    [hit,()=>{ S('bonk'); S('thud'); ST.jolt(f,.6); landHit(100); scene('tv_big',1.0,{x:F.x,y:F.top-62,txt:'BONK!',c:GOLD,sc:4}); scene('tv_burst',.6,{x:F.x,y:F.mid,n:10,r:46}); scene('tv_ring',.6,{x:F.x,y:F.mid,r:42});
+      scene('tp_cdown',1.2,{x:F.x,y:F.mid,dx:-26,dy:F.base-F.mid-6}); setMessage('The controller connects. Just not the way it was meant to.'); }],
+    [hit+1700,'end',res(E2)+'It was the Bluetooth.']]); };
 })();

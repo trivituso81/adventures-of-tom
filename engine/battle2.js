@@ -591,9 +591,9 @@ function b2FoeTurn(e) {
   // Lost turns first: Staggered, Smitten, Goofed. A boss that loses a turn is steady for its next one.
   const lost=!!(e.st.staggered||e.st.stunned||e.st.smitten||e.st.goofed);
   if(e.boss) e.steady=lost;
-  if(e.st.staggered) { delete e.st.staggered; e.intent=null; e.shield=null; if(e.boss) e.step='C'; enqueue(()=>{ b2Msg(N+' is still STAGGERED. It cannot move!'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
+  if(e.st.staggered) { delete e.st.staggered; e.intent=null; e.shield=null; if(e.boss) e.step='C'; enqueue(()=>{ b2Msg(N+' is still STAGGERED. It can\'t move!'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
   if(e.st.stunned) { delete e.st.stunned; enqueue(()=>{ b2Msg(N+' is still seeing stars. It loses its turn.'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
-  if(e.st.smitten) { const by=e.st.smitten.by; delete e.st.smitten; enqueue(()=>{ b2Msg(by&&by.id&&by.id!=='nara'?N+' is still thinking about '+by.name+'. It cannot bring itself to fight.':N+' looks at Nara. Nara looks back. It cannot do it.'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
+  if(e.st.smitten) { const by=e.st.smitten.by; delete e.st.smitten; enqueue(()=>{ b2Msg(by&&by.id&&by.id!=='nara'?N+' is still thinking about '+by.name+'. It can\'t bring itself to fight.':N+' looks at Nara. Nara looks back. It can\'t do it.'); sfx.stun(); },1100,()=>b2AfterAction()); return; }
   if(e.st.goofed) {
     delete e.st.goofed;
     const coins=Math.random()<.5;
@@ -602,7 +602,7 @@ function b2FoeTurn(e) {
     return;
   }
   b2TickStatus(e);
-  if(e.D.inert) { enqueue(()=>b2Msg(N+' sits there. It is an acorn.'),900,()=>b2AfterAction()); return; }   // Acorn Cache
+  if(e.D.inert) { enqueue(()=>b2Msg(N+' sits there. It\'s an acorn.'),900,()=>b2AfterAction()); return; }   // Acorn Cache
   if(e.boss) return b2BossTurn(e);
   // A telegraphed move on a normal monster (a story fight can set one): it does exactly what it announced.
   if(e.intent) { const I=e.intent; e.intent=null; e.shield=null; return b2FoeAct(e,I.act,I.kind==='all'?null:(b2Alive(I.target)?I.target:null)); }
@@ -858,7 +858,7 @@ const B2_DIRECTOR={
   adds:n=>n>1?'Two Extra Extras shuffle onto the set!':'An Extra Extra shuffles onto the set!',
   brace:(N,e)=>N+' takes a deep breath for THAT’S A WRAP next turn! Break its guard: Popcorn Jump (or any Tombo), or '+e.shield.need+' Cozy hits.',
   cutWarn:'"Quiet on set!" CUT! is coming next turn. Whoever is next on the ribbon loses their turn. WARDROBE makes them Fresh.',
-  healWarn:'"Again! Take two!" It will heal itself next turn. Hit it hard now.'
+  healWarn:'"Again! Take two!" It\'ll heal itself next turn. Hit it hard now.'
 };
 const b2NextUp=()=>b2LiveParty().slice().sort((a,b)=>a.ct-b.ct||a.idx-b.idx)[0];
 function b2DirectorTurn(e,N) {
@@ -1006,7 +1006,7 @@ const B2_UNREAD={
   genres:[{name:'MYSTERY',weak:['chatter'],resist:['kinetic'],line:'Who did it? Nobody knows. Ask it questions: Chatter works.'},
     {name:'ADVENTURE',weak:['kinetic'],resist:['chatter'],line:'Swords, ships, a map with an X. Hit it hard: Kinetic works.'},
     {name:'FAIRY TALE',weak:['sparkle'],resist:['cozy'],line:'Once upon a time, with sparkles. Sparkle works.'},
-    {name:'COOKBOOK',weak:['cozy'],resist:['sparkle'],line:'Why is there a cookbook in the middle of a novel? Cozy works.'}],
+    {name:'COOKBOOK',weak:['cozy'],resist:['sparkle'],line:'Why\'s there a cookbook in the middle of a novel? Cozy works.'}],
   open:'The green lamps flicker. The Unread creaks open to page one. Dust everywhere. Seventy years of it.',
   open2:'Every third turn it turns to a new chapter, and its weak spot changes. It shows on the turn ribbon first.',
   chapter:e=>{ const G=B2_UNREAD.genres[e.genre]; return 'CHAPTER '+(e.chap||1)+': '+G.name+'. '+G.line; },
@@ -1061,7 +1061,7 @@ function b2UnreadNext(e) {
 const B2_IRON={
   open:'The firebox door swings open. Every stolen pilot light on 2nd Avenue is roaring around inside Old Ironbelly.',
   open2:'She gets hotter every turn. At BROIL she hits everyone. Splash cools her down a step. Cozy stokes her up.',
-  phase:N=>N+' rattles her grate. Every damper is open. She is ROARING.',
+  phase:N=>N+' rattles her grate. Every damper is open. She\'s ROARING.',
   adds:n=>n>1?'Two Lukewarms drip out of the ash pan!':'A Lukewarm drips out of the ash pan!',
   brace:(N,e)=>N+' opens every damper for FULL FURNACE on everyone next turn! Break her guard: '+e.shield.need+' Splash or Kinetic hits, or any Tombo.',
   warn:N=>N+' glows white hot. BROIL next turn, on everyone! One Splash hit cools her and calls it off.',
@@ -1195,7 +1195,7 @@ const B2_CALL={
   open:'DING. Every flap on the board spins. \"This is the LAST CALL for Flight Zero. Boarding Group Zero, please proceed to the gate.\"',
   open2:'Each turn she calls someone NOW BOARDING. They must act before her next turn, or the gate closes on them. Her DELAYED pushes them back. Tom can DEFEND them to walk them on.',
   phase:N=>N+' flips every flap to FINAL CALL. The whole board rattles.',
-  adds:n=>n>1?'Two Carry-Ons roll in. They will not fit.':'A Carry-On rolls in. It will not fit.',
+  adds:n=>n>1?'Two Carry-Ons roll in. They\'ll not fit.':'A Carry-On rolls in. It\'ll not fit.',
   brace:(N,e)=>N+' clears the board for FINAL BOARDING on everyone next turn! Break her guard: '+e.shield.need+' Kinetic or Sparkle hits, or any Tombo.',
   call:(n,t)=>'NOW BOARDING: GROUP '+n+'. '+t.name+', please proceed to Gate Zero.'+(b2Tom()&&t.id!=='tom'?' ('+t.name+' must act before her next turn, or Tom can DEFEND them.)':' (Act before her next turn.)')
 };
@@ -1249,46 +1249,46 @@ function b2CallTurn(e,N) {
   return go(()=>enqueue(...b2CallPick(e),()=>b2FoeAct(e,act,act.delay&&e.call?e.call:null)));
 }
 // ANSWER THE CALL for the Last Call (chapter 10). The spoken lines are in data/lines.js (praise).
-const B2_ANSWER_LINES={tom:['Here. Group zero. Pass out, liquids in a bag, shoes back on.','Present. Window seat, please. I will not be reclining.'],
-  grace:['HERE! Grace! Group zero! I have been waiting my WHOLE LIFE for this!','Present! Can I sit by the window? I want to film the takeoff for my channel.'],
-  rose:['HERE! I am HERE! Me! Rose! I have Lamby!','Me me me! Can I push the button? The ding button?'],
-  amy:['Here! Gregori, party of four. We are always first in line.','Present. I have never missed a connection in my life.'],
+const B2_ANSWER_LINES={tom:['Here. Group zero. Pass out, liquids in a bag, shoes back on.','Present. Window seat, please. I\'ll not be reclining.'],
+  grace:['HERE! Grace! Group zero! I\'ve been waiting my WHOLE LIFE for this!','Present! Can I sit by the window? I want to film the takeoff for my channel.'],
+  rose:['HERE! I\'m HERE! Me! Rose! I have Lamby!','Me me me! Can I push the button? The ding button?'],
+  amy:['Here! Gregori, party of four. We\'re always first in line.','Present. I\'ve never missed a connection in my life.'],
   _:['Here! Group zero!']};
 // ASK HER TO DANCE for the Mirrorball (chapter 9). The spoken lines are in data/lines.js (praise).
-const B2_DANCE_LINES={tom:['May I have this dance? I should warn you. I mostly sway.','One song. I lead. You spin. You are very good at spinning.'],
-  deedee:['Come on, honey. Deedee has not missed a dance floor in fifty years. One, two, three.','Shoes off, everybody! Floors just mopped! Let us DANCE!'],
+const B2_DANCE_LINES={tom:['May I have this dance? I should warn you. I mostly sway.','One song. I lead. You spin. You\'re very good at spinning.'],
+  deedee:['Come on, honey. Deedee hasn\'t missed a dance floor in fifty years. One, two, three.','Shoes off, everybody! Floors just mopped! Let\'s DANCE!'],
   boppy:['My knees say no. My heart says one song. Just one. Slow.','Did I ever tell you I won a dance contest? 1970. Sit down. I mean, stand up.'],
   _:['Shall we dance?']};
 // BAKE SOMETHING for Old Ironbelly (chapter 8). The spoken lines are in data/lines.js (praise).
-const B2_BAKE_LINES={tom:['One sourdough boule. Score it, slide it in. Twenty minutes. Do not open the door.','Here. Bready Mercury’s best. You are the only oven on the block hot enough for him.'],
-  tnb:['I made you a little pot, buddy. Bisque fire. Five minutes in you and it is perfect.','Mug in the kiln! Okay, in the stove. Same thing. You are basically a kiln with feelings.'],
-  nara:['Nara drops her chicken jerky in the warming tray, very carefully. She wants it warm. She is very picky.','Nara pushes her cold dinner bowl right up to the firebox door with her nose. Please. Warm it.'],
+const B2_BAKE_LINES={tom:['One sourdough boule. Score it, slide it in. Twenty minutes. Don\'t open the door.','Here. Bready Mercury’s best. You\'re the only oven on the block hot enough for him.'],
+  tnb:['I made you a little pot, buddy. Bisque fire. Five minutes in you and it\'s perfect.','Mug in the kiln! Okay, in the stove. Same thing. You\'re basically a kiln with feelings.'],
+  nara:['Nara drops her chicken jerky in the warming tray, very carefully. She wants it warm. She\'s very picky.','Nara pushes her cold dinner bowl right up to the firebox door with her nose. Please. Warm it.'],
   _:['Here. Bake this.']};
 // READ ALOUD for the Unread (chapter 7). The spoken lines are in data/lines.js (praise).
-const B2_READ_LINES={tom:['Chapter one. It was a dark and stormy night. Good start. Classic.','And then the detective said... ooh. I did not see that coming.'],
-  grace:['Hey guys! Today we are reading a REAL book. Out loud. Smash that like button!','Chapter two! I am doing all the voices. This one is the duchess. She is bossy.'],
-  rose:['Once upon a time there was a LAMB. The end! Again! AGAIN!','I am reading the pictures! There is a dragon. The dragon is ME. RAWR!'],
+const B2_READ_LINES={tom:['Chapter one. It was a dark and stormy night. Good start. Classic.','And then the detective said... ooh. I didn\'t see that coming.'],
+  grace:['Hey guys! Today we\'re reading a REAL book. Out loud. Smash that like button!','Chapter two! I\'m doing all the voices. This one is the duchess. She\'s bossy.'],
+  rose:['Once upon a time there was a LAMB. The end! Again! AGAIN!','I\'m reading the pictures! There\'s a dragon. The dragon is ME. RAWR!'],
   _:['Once upon a time...']};
 // SHARE A SNACK for Chairman Cheeks (chapter 6). The spoken lines are in data/lines.js (praise).
 const B2_CHEEKS_LINES={tom:['Here. Sourdough. I made it. You can have the heel. The heel is the best part.','Have a slice. Seriously. Bread is for sharing.'],
-  tnb:['Want half my granola bar? It is the good kind. With the chocolate.','Here, buddy. I always pack two. One for me, one for whoever is having a bad day.'],
-  nara:['Nara looks at her chicken jerky. Looks at the squirrel. Nara drops the jerky at its feet. This is the biggest thing she has ever done.','Nara nudges her own treat across the branch with her nose. Very slowly. Very brave.'],
+  tnb:['Want half my granola bar? It\'s the good kind. With the chocolate.','Here, buddy. I always pack two. One for me, one for whoever is having a bad day.'],
+  nara:['Nara looks at her chicken jerky. Looks at the squirrel. Nara drops the jerky at its feet. This is the biggest thing she\'s ever done.','Nara nudges her own treat across the branch with her nose. Very slowly. Very brave.'],
   _:['Here. Have some.']};
 // COMPLIMENT and GREAT TAKE! (▼ Bag, only against monsters that want one: B2_FOES praise). Free, standard speed.
 // praise.share: Warmth as a share of the goal (halved each time the same person says it again). praise.need: that many
 // kind words Un-Grump it outright (the Director's Cut: three GREAT TAKEs).
 const B2_PRAISE_LINES={
-  tom:['Honestly? Great take. Really. Chef’s kiss.','That was a GREAT take. I would watch that twice.','Great take. I got chills. Real ones.'],
-  tnb:['Babe... I mean, buddy. That take? Iconic.','That was a great take. And I have seen forty-seven horror movies.','Great take. I would not change a single stitch.'],
-  nara:['Nara gives it the biggest tail wag she has. Ten out of ten.','Nara sits, looks it in the eye, and boops it. That is a five-star review.'],
+  tom:['Honestly? Great take. Really. Chef’s kiss.','That was a GREAT take. I\'d watch that twice.','Great take. I got chills. Real ones.'],
+  tnb:['Babe... I mean, buddy. That take? Iconic.','That was a great take. And I\'ve seen forty-seven horror movies.','Great take. I\'d not change a single stitch.'],
+  nara:['Nara gives it the biggest tail wag she has. Ten out of ten.','Nara sits, looks it in the eye, and boops it. That\'s a five-star review.'],
   _:['Great take! Really!','That was wonderful. Really wonderful.']
 };
-const B2_CRAB_LINES={tom:['Nice handwriting. Honestly. Very readable.','Those are the neatest cue cards I have ever seen.'],
-  tnb:['Your lettering is so clean. Are those fonts? Tell me those are not fonts.','Love the cards. Very crisp. Very wardrobe.'],
+const B2_CRAB_LINES={tom:['Nice handwriting. Honestly. Very readable.','Those are the neatest cue cards I\'ve ever seen.'],
+  tnb:['Your lettering is so clean. Are those fonts? Tell me those aren\'t fonts.','Love the cards. Very crisp. Very wardrobe.'],
   nara:['Nara sniffs the cards and wags. She approves of the handwriting.'],_:['Nice handwriting!']};
 // NICE HANDWRITING for the Red Pen (chapter 5). The spoken lines are in data/lines.js (praise).
-const B2_PEN_LINES={tom:['Honestly? Lovely handwriting. Very legible.','That is beautiful penmanship. I mean it.'],
-  grace:['Your cursive is SO pretty. Can you teach me the capital G?','Your loops are perfect. I am going to practice mine.'],
+const B2_PEN_LINES={tom:['Honestly? Lovely handwriting. Very legible.','That\'s beautiful penmanship. I mean it.'],
+  grace:['Your cursive is SO pretty. Can you teach me the capital G?','Your loops are perfect. I\'m going to practice mine.'],
   rose:['Your writing is so pretty! Can you write ROSE? Big?','I like your red! Red is my second favorite!'],
   amy:['Neatest handwriting in the building. And I check.','Your margins are immaculate. Gold star.'],
   _:['Nice handwriting!']};

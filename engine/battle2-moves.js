@@ -63,7 +63,7 @@ RM.rose.silly=E2=>{ const {m,fx}=E2,t=E2.targets[0];
 RM.amy.pep=E2=>{ const {m,fx}=E2;
   if(E2.act&&E2.act.o3&&RM.amy.pepShow) return RM.amy.pepShow(E2);   // Option 3 Primary animation (amy-moves.js)
   fx.coach=1.7; sfx.dance(); say(m.id,'pep');
-  enqueue(()=>{ setMessage(m.name+' claps twice. "Thirty seconds! Give me everything!"'); },
+  enqueue(()=>{ setMessage(m.name+' claps twice. "Look at me. Breathe. Go."'); },
     900,()=>{ E2.apply(); sfx.levelUp(); },
     'The team is fired up. Next attack or heal +50%.',()=>checkEnemy());
 };
@@ -71,7 +71,7 @@ RM.amy.pep=E2=>{ const {m,fx}=E2;
 RM.boppy.grumble=E2=>{ const {m,fx}=E2;
   if(E2.act&&E2.act.o3&&RM.boppy.grumbleShow) return RM.boppy.grumbleShow(E2);   // Option 3 Primary animation (boppy-moves.js)
   fx.grumble=1.9; sfx.sulk(); say(m.id,'grumble');
-  enqueue(()=>{ setMessage(m.name+' sits down. "I am not feeling good. It is the stomach. And everybody walks too FAST."'); },
+  enqueue(()=>{ setMessage(m.name+' sits down. "I\'m not feeling good. It\'s the stomach. And everybody walks too FAST."'); },
     1200,()=>{ E2.apply(); sfx.stun(); bt('...',52,34,'#fff1cb',3,1); },
     'They feel awful about it. They hit softer, and they glare at Boppy.',()=>checkEnemy());
 };
@@ -94,10 +94,10 @@ window.B2_SUPPORT=B2_SUPPORT;
 window.b2SupportGeneric=E2=>support(E2,{pose:fx=>{ fx.cheer=1.2; },word:E2.act.name.toUpperCase(),line:E2.act.desc});
 // Tom: Unboxing. The box drops in the middle, a gadget rises out, and it powers up the whole party.
 B2_SUPPORT.unbox=E2=>{ const {m,fx}=E2;
-  enqueue(()=>{ setMessage('A package arrives. Tom did not need it. Tom needed it.'); say('tom','unbox'); scene('box',3.6,{}); sfx.slideWhistle(); },
+  enqueue(()=>{ setMessage('A package arrives. Tom didn\'t need it. Tom needed it.'); say('tom','unbox'); scene('box',3.6,{}); sfx.slideWhistle(); },
     600,()=>{ sfx.thud(); },700,()=>{ fx.punch=1.2; sfx.whoosh(); },900,()=>{ sfx.charge(); },
     700,()=>{ sfx.ding(); scene('flash',.3,{a:.4}); E2.apply(); for(const p of b2LiveParty()) glowOn(p,'#9fe8ff'); bt('ONE MORE THING',96,24,'#9fe8ff',3,1.2); },
-    'New gadget for everyone. It was on sale. It was not on sale.',()=>checkEnemy());
+    'New gadget for everyone. It was on sale. It wasn\'t on sale.',()=>checkEnemy());
 };
 // Grace: Squishy Squeeze. Tosses the gold dumpling squishy to an ally.
 B2_SUPPORT.squishy=E2=>support(E2,{color:'#ffe08a',word:'SQUEEZE',pose:fx=>{ fx.cheer=1; },

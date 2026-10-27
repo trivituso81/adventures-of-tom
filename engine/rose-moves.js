@@ -217,7 +217,7 @@ Rm.pounce=E2=>{ const {fx,dmg,crit}=E2,hits=split(dmg,3);
 // Dress-Up Day: the Grump gets a bow, a tutu and a tiara, whether he likes it or not. Then a photo.
 Rm.dressup=E2=>{ const {fx,dmg,crit}=E2,hits=split(dmg,3); let fit;
   const throwAt=(kind,dx,dy,arc)=>{ const p=rose(); toss(kind,p.cx-16,p.base-p.h*.55,EX()+dx,top()+dy,0,.55,arc,{spin:true}); sfx.whoosh(); };
-  enqueue(()=>{ setMessage('Rose has decided the Grump needs an outfit. The Grump was not consulted.'); say('rose','dressup',.2); sfx.giggle(); fit=scene('outfit',5.2,{n:0});
+  enqueue(()=>{ setMessage('Rose has decided the Grump needs an outfit. The Grump wasn\'t consulted.'); say('rose','dressup',.2); sfx.giggle(); fit=scene('outfit',5.2,{n:0});
       path(fx,5.4,(q,c)=>{ if(q>.78) return {frame:c.sp.celeb,base:c.origBase-Math.round(Math.abs(Math.sin(c.t*10))*16)}; const th=[.16,.36,.56].some(a=>q>a-.04&&q<a+.08); return {frame:th?c.sp.act:(Math.floor(c.t*4)%2?c.sp.celeb:c.sp.idle),cx:c.origX+(th?-6:0)}; }); },
     700,()=>{ throwAt('bow',-30,4,80); },
     560,()=>{ fit.n=1; sfx.bonk(); sfx.ding(); battle.shakeEnemy=.3; bt('BOW',70,36,'#ffb3cf',3,.8); hit(E2,hits[0],false); },
@@ -230,7 +230,7 @@ Rm.dressup=E2=>{ const {fx,dmg,crit}=E2,hits=split(dmg,3); let fit;
     1200,E2.result+' The Grump looks lovely and knows it.',()=>checkEnemy()); };
 // Monster Under the Bed: lights out, flashlight under the chin, a story, and a shadow monster that is far too big.
 Rm.bedtime=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Rose turns off the lights. She has a story. It is not a nice one.'); say('rose','bedtime',.3); scene('dark',5.2,{a:.72,back:true,c:'#06061a'}); sfx.sulk(); scene('torch',4.4,{});
+  enqueue(()=>{ setMessage('Rose turns off the lights. She has a story. It\'s not a nice one.'); say('rose','bedtime',.3); scene('dark',5.2,{a:.72,back:true,c:'#06061a'}); sfx.sulk(); scene('torch',4.4,{});
       path(fx,5.6,(q,c)=>{ if(q<.72) return {frame:Math.floor(c.t*2)%2?c.sp.expr:c.sp.idle,cx:c.origX-10}; return {frame:c.sp.celeb,base:c.origBase-Math.round(Math.abs(Math.sin(c.t*11))*18),cx:c.origX}; }); },
     700,()=>{ const p=rose(); bt('ONCE UPON',Math.round(p.cx/3)-46,Math.round((p.base-p.h)/3)-26,'#fff1cb',2,1.1); bt('A TIME...',Math.round(p.cx/3)-44,Math.round((p.base-p.h)/3)-18,'#fff1cb',2,1.1); },
     1000,()=>{ const p=rose(); bt('THE SOCK',Math.round(p.cx/3)-46,Math.round((p.base-p.h)/3)-26,'#ffb3cf',2,1.1); bt('MONSTER...',Math.round(p.cx/3)-48,Math.round((p.base-p.h)/3)-18,'#ffb3cf',2,1.1); scene('shadowmon',3.2,{}); sfx.charge(); },
@@ -426,7 +426,7 @@ Rm.floor_is_jelly=E2=>{ const {fx}=E2;
     500,()=>{ pose(fx,'celeb',.5); sfx.boing(); },
     300,res(E2)+'The rule is new but immediately binding.',()=>checkEnemy()); };
 Rm.lookout_lamby=E2=>{ const {m,fx}=E2,tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p));
-  enqueue(()=>{ setMessage('Lamby takes the telescope. It is backwards. Lamby is confident.'); say('rose','lookout_lamby'); scene('r_telescope',1.0,{}); pose(fx,'expr',.9); },
+  enqueue(()=>{ setMessage('Lamby takes the telescope. It\'s backwards. Lamby is confident.'); say('rose','lookout_lamby'); scene('r_telescope',1.0,{}); pose(fx,'expr',.9); },
     500,()=>{ scene('r_pennant',1.1,{}); sfx.whoosh(); },
     IMPACT,()=>{ sfx.bonk(); sfx.baa(); battle.shakeEnemy=.35; hit(E2); },
     400,()=>{ E2.apply(); if(!tom) scene('r_cushion',1.1,{}); pose(fx,'celeb',.6); sfx.boing(); },
@@ -626,7 +626,7 @@ Rm.lamby_appointment=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=sp
   const end=self?3700:4300;
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Lamby is seeing patients. The patient today is Rose.':'Rose carries Lamby over. Lamby is seeing patients.'); say(m.id,'lamby_appointment'); scene('ro_lamby',end/1000,{plan}); }],
-    [plan.seat,()=>{ scene('ro_clinic',(end-plan.seat-300)/1000,{x:cx,y:cy}); sfx.select(); setMessage('The waiting room is a cushion. There is a sign.'); }],
+    [plan.seat,()=>{ scene('ro_clinic',(end-plan.seat-300)/1000,{x:cx,y:cy}); sfx.select(); setMessage('The waiting room is a cushion. There\'s a sign.'); }],
     [1500,()=>{ scene('ro_clip',1.3,{checkAt:800}); sfx.select(); }],
     [1900,()=>{ sfx.boing(); }],
     ['hf',2300],
@@ -668,7 +668,7 @@ Rm.lookout_lamby=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30)
   else K.push({t:3250,x:'home',y:'home',f:'kneel'},{t:3700,f:'celeb',hop:8},{t:4000,f:'idle'});
   const st=ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose holds Lamby up high. Lamby takes the telescope. It is backwards.'); say(m.id,'lookout_lamby'); scene('ro_scope',1.3,{st}); }],
+    [0,()=>{ setMessage('Rose holds Lamby up high. Lamby takes the telescope. It\'s backwards.'); say(m.id,'lookout_lamby'); scene('ro_scope',1.3,{st}); }],
     [1250,()=>{ scene('ro_lambyhead',(tom?4.6:3.2),{st}); scene('ro_pennant',1.45,{swingAt:650}); setMessage('Lamby is confident. Lamby points. Rose charges.'); sfx.baa(); }],
     [1900,()=>{ sfx.whoosh(); }],
     ['hf',2150],
@@ -903,7 +903,7 @@ Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,24
     [plan.on,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('rv_burst',.8,{x:F.x,y:F.top,n:10,r:52,c:GOLD,c2:PINK}); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'CROWNED!',c:GOLD,sc:3}); }],
     [2000,()=>{ scene('rv_preen',1.7,{f}); setMessage(cap(f.def?f.def.the:f.name)+' looks at itself. And looks. And looks.'); }],
     [2300,()=>{ scene('ro_text',1.1,{x:F.x+62,y:F.top-8,txt:'SO PRETTY',c:PINK,sc:2}); sfx.giggle(); }],
-    [4300,'end',res(E2)+'It is too busy admiring its tiara to stand up straight.']]); };
+    [4300,'end',res(E2)+'It\'s too busy admiring its tiara to stand up straight.']]); };
 
 // ---------- Giggle Storm (A3) ----------
 // Rose gets the giggles, falls over laughing, and the giggles become a pink storm cloud that rains HA HA HA on the row.
@@ -920,7 +920,7 @@ Rm.giggle_storm=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'celeb',hop:10},{t:1000,f:'expr',dx:(u,tt)=>Math.sin(tt*40)*1.5},
     {t:1400,f:'idle',rot:u=>-ez(u/.15)*1.45,dy:(u,tt)=>ez(u/.15)*lie-Math.abs(Math.sin(tt*16))*4},{t:3300,f:'celeb',hop:16},{t:3600,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose runs over. She is trying not to laugh. She is failing.'); say(m.id,'giggle_storm'); }],
+    [0,()=>{ setMessage('Rose runs over. She\'s trying not to laugh. She\'s failing.'); say(m.id,'giggle_storm'); }],
     [1000,()=>{ sfx.giggle(); scene('ro_text',.7,{st,txt:'PFFT',c:PINK,sc:2}); }],
     [1400,()=>{ sfx.giggle(); scene('rv_storm',2.4,{G}); setMessage('She falls over giggling. The giggles turn into a storm.'); }],
     [1900,()=>{ sfx.giggle(); sfx.bonk(); all(list); landHit(34); scene('rv_laughs',1.6,{list}); }],
@@ -1056,7 +1056,7 @@ Rm.lamby_boomerang=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpo
     [hitAt(0),()=>{ sfx.baa(); sfx.bonk(); all(list); landHit(50); scene('rv_burst',.6,{x:G.x,y:G.top+10,n:8,r:44,c:GOLD,c2:PINK}); }],
     [hitAt(1),()=>{ sfx.bonk(); all(list); landHit(50); }],
     [plan.back,()=>{ sfx.ding(); scene('rv_hearts',.9,{x:p.x-6,y:p.y-RH()*.7,n:5,r:36,sz:6}); scene('ro_text',.9,{st,txt:'GOT HIM',c:PINK,sc:2}); }],
-    [4900,'end',res(E2)+'Lamby always comes back. That is the rule.']]); };
+    [4900,'end',res(E2)+'Lamby always comes back. That\'s the rule.']]); };
 
 // ---------- Pillow Fort (B5) ----------
 // Rose runs into the middle of everyone and cushions fly in from every direction; a big quilt goes over the top.
@@ -1227,9 +1227,9 @@ Rm.teaparty_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2
     [0,()=>{ scene('r5_bars',6.4,{}); setMessage('Rose is having a tea party. Everyone is invited. Everyone HAS to come.'); say(m.id,'teaparty_ult'); sfx.ding(); scene('r5_lamby',6.1,{plan:P}); }],
     [300,()=>{ scene('r5_tables',5.9,{plan:P,t0:300}); scene('r5_sit',4.6,{plan:P,t0:300}); sfx.whoosh(); places.forEach(c=>b7Later(()=>sfx.boing(),c.at-300+150)); }],
     [450,()=>{ setMessage('Little lacy tables roll out. Tiny pink chairs pop up under every enemy.'); }],
-    [850,()=>{ sfx.baa(); scene('r5_big',1,{x:P.lx,y:P.ly-36,txt:'BOW TIE',c:CREAM,sc:2}); setMessage('Lamby sits at the head of the table. He is wearing a bow tie.'); }],
+    [850,()=>{ sfx.baa(); scene('r5_big',1,{x:P.lx,y:P.ly-36,txt:'BOW TIE',c:CREAM,sc:2}); setMessage('Lamby sits at the head of the table. He\'s wearing a bow tie.'); }],
     [1050,()=>{ scene('r5_pot',1.5,{plan:P}); sfx.select(); }],
-    [S0,()=>{ setMessage('Rose pours everybody tea. It is invisible. It is VERY hot.'); places.forEach(c=>b7Later(()=>{ sfx.ting?sfx.ting():sfx.ding(); },c.pour0-S0+120)); }],
+    [S0,()=>{ setMessage('Rose pours everybody tea. It\'s invisible. It\'s VERY hot.'); places.forEach(c=>b7Later(()=>{ sfx.ting?sfx.ting():sfx.ding(); },c.pour0-S0+120)); }],
     [Math.round(places[0]?places[0].pour0:S0),()=>{ const c=places[0]; if(c) scene('r5_big',1.2,{x:c.cx,y:c.top-30,txt:'INVISIBLE TEA',c:SKY,sc:2}); }],
     [2650,()=>{ sfx.dance&&sfx.dance(); scene('r5_big',1.1,{st,txt:'DRINK UP!',c:PINK2,sc:3}); setMessage('Rose claps. DRINK UP!'); }],
     [2900,()=>{ scene('r5_sip',1.0,{plan:P}); setMessage('Every enemy lifts a tiny cup. Pinkies up.'); places.forEach(c=>b7Later(()=>sfx.ting?sfx.ting():sfx.select(),c.k*90+400)); }],
@@ -1313,7 +1313,7 @@ Rm.mecha_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),tom=tomUp()
     [900,()=>{ bounce(.3); scene('r5_armor',5.0,{plan:Object.assign({},P,{t0:900})}); sfx.select(); }],
     [1050,()=>{ for(let i=0;i<5;i++) b7Later(()=>{ sfx.chunk?sfx.chunk():sfx.thud(); bounce(.15); },i*190); setMessage('Cardboard boxes fly in and snap on. Tape. Crayon. Robot.'); }],
     [1950,()=>{ scene('r5_big',1.1,{x:300,y:BAR+40,txt:'DOCKING COMPLETE!',c:GOLD,sc:3}); sfx.ding(); }],
-    [2050,()=>{ sfx.thud(); setMessage('Rose pulls down her visor. It is a cereal box.'); }],
+    [2050,()=>{ sfx.thud(); setMessage('Rose pulls down her visor. It\'s a cereal box.'); }],
     [2300,()=>{ scene('r5_lock',1.4,{list:list.map(f=>ST.foe(f))}); sfx.beep?sfx.beep():sfx.select(); b7Later(()=>sfx.beep?sfx.beep():sfx.select(),180);
       scene('r5_big',1.2,{x:Gp.x+30,y:Gp.top-58,txt:'TARGET LOCKED: BAD GUYS',c:'#ff6a5a',sc:2}); }],
     [2700,()=>{ scene('r5_charge',.8,{plan:P}); sfx.charge(); setMessage('She pulls both levers. The chest starts to glow.'); }],
@@ -1405,7 +1405,7 @@ Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,24
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:9,hn:6},{t:1100,x:p.x,y:p.y,f:'expr'},{t:1300,f:'celeb',hop:46},{t:1800,f:'idle'},{t:2000,f:'act'},
     {t:2700,f:'celeb',hop:10,hn:2},{t:3200,f:'walkR',hop:6,hn:5},{t:4200,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose skips over with the biggest tiara in the dress-up box. It is bigger than her head.'); say(m.id,'dress_up_tiara'); scene('rv_tiara',4.3,{st,f,plan}); }],
+    [0,()=>{ setMessage('Rose skips over with the biggest tiara in the dress-up box. It\'s bigger than her head.'); say(m.id,'dress_up_tiara'); scene('rv_tiara',4.3,{st,f,plan}); }],
     [1300,()=>{ sfx.jumpWhistle(); }],
     ['hf',plan.on],
     [plan.on,()=>{ (sfx.ting?sfx.ting():sfx.ding()); sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('rp_clink',.8,{x:F.x,y:sit+14*TSC});
@@ -1414,7 +1414,7 @@ Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,24
     [plan.on+500,()=>{ scene('rv_big',.8,{x:F.x,y:F.top-100,txt:'CROWNED!',c:GOLD,sc:3}); sfx.ding(); }],
     [2000,()=>{ scene('rv_preen',1.7,{f}); setMessage(cap(f.def?f.def.the:f.name)+' looks at itself. And looks. And looks.'); }],
     [3050,()=>{ scene('rv_big',1.1,{x:F.x,y:F.top-100,txt:'SO PRETTY',c:PINK,sc:3}); sfx.giggle(); }],
-    [4300,'end',res(E2)+'It is too busy admiring its tiara to stand up straight.']]); };
+    [4300,'end',res(E2)+'It\'s too busy admiring its tiara to stand up straight.']]); };
 
 // ---------- Lamby Hug: bigger squish, a fountain of hearts ----------
 SC.rv_hug=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=1.45,rot=.3,sx=1,sy=1;
@@ -1589,8 +1589,8 @@ Rm.boo=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose sneaks up. Then she crouches down and winks.'); }],
     [750,()=>{ scene('ro_text',.9,{st,txt:'SHHH',c:CREAM,sc:2}); sfx.select(); }],
-    [1150,()=>{ sfx.poof(); scene('rf_poof',.7,{x:pR.x,y:pR.y,r:34}); scene('rf_look',.75,{f:t}); setMessage('POOF. She is gone. Where did she go?'); }],
-    [1850,()=>{ sfx.poof(); scene('rf_poof',.6,{x:pB.x,y:pB.y,r:30,seed:1}); setMessage('POOF. She is right behind it.'); }],
+    [1150,()=>{ sfx.poof(); scene('rf_poof',.7,{x:pR.x,y:pR.y,r:34}); scene('rf_look',.75,{f:t}); setMessage('POOF. She\'s gone. Where did she go?'); }],
+    [1850,()=>{ sfx.poof(); scene('rf_poof',.6,{x:pB.x,y:pB.y,r:30,seed:1}); setMessage('POOF. She\'s right behind it.'); }],
     ['hf',BOO],
     [BOO,()=>{ say(m.id,'boo'); E2.apply(); sfx.boo?sfx.boo():sfx.boing(); sfx.boing(); scene('rv_flash',.25,{a:.75}); scene('rv_big',1.3,{x:pB.x+30,y:F.top-104,txt:'BOOOO!!',c:'#ff5a8a',sc:5,rot:-.08});
       scene('rv_scare',1.8,{f:t}); ST.jolt(t,.5); }],
@@ -1733,7 +1733,7 @@ Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46
     [plan.on,()=>{ sfx.splat?sfx.splat():sfx.bonk(); sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('rf_splat',.9,{x:F.x,y:F.top+6}); scene('rv_big',1,{x:F.x,y:F.top-90,txt:'SPLAT!',c:GOLD,sc:3}); }],
     [3400,()=>{ scene('rv_preen',1.5,{f}); setMessage(cap(f.def?f.def.the:f.name)+' is wearing macaroni now. It feels very fancy.'); }],
     [3600,()=>{ scene('rf_word',1.0,{x:F.x,y:F.top-90,txt:'SO FANCY',c:PINK,sc:3}); sfx.giggle(); }],
-    [4900,'end',res(E2)+'It is too busy being fancy to stand up straight.']]); };
+    [4900,'end',res(E2)+'It\'s too busy being fancy to stand up straight.']]); };
 
 // ---------- Lamby Boomerang (B1, key lookout_lamby): both Lambys, then up onto Tom ----------
 // Rose whirls Lamby and Backup Lamby on her ribbons and lets go: one loops high, one loops low, both bonk the monster
@@ -1765,7 +1765,7 @@ Rm.lookout_lamby=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,70)
     [hitB,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rf_word',.7,{x:F.x,y:F.top-60,txt:'BONK BONK',c:GOLD,sc:3}); }],
     [plan.back,()=>{ sfx.ding(); scene('ro_text',.9,{st,txt:'GOT THEM',c:PINK,sc:2}); }],
     ...(tom?[[3300,()=>{ sfx.jumpWhistle(); }],[3700,()=>{ E2.apply(); battle.fx[tom.idx].hop=.3; }]]:[[3600,()=>{ E2.apply(); sfx.select(); }]]),
-    [tom?3900:4300,'end',res(E2)+(tom?'Both Lambys came back. Rose is up on Tom.':'Both Lambys came back. That is the rule.')]]); };
+    [tom?3900:4300,'end',res(E2)+(tom?'Both Lambys came back. Rose is up on Tom.':'Both Lambys came back. That\'s the rule.')]]); };
 
 // ---------- Ms. Cathy's Snack Attack (B4, key lamby_boomerang) ----------
 // Rose cups her hands and yells for Ms. Cathy, her sitter (about 60, shoulder-length blonde hair, glasses). Ms. Cathy
@@ -1823,7 +1823,7 @@ Rm.lamby_boomerang=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpo
     ...tosses,
     [plan.throwEnd,()=>{ scene('rv_big',1.1,{x:G.x,y:G.top-74,txt:'SUGAR RUSH!',c:PINK2,sc:3}); setMessage('Snack attack! Everybody gets a treat. Nobody can sit still now.'); sfx.ding(); }],
     [plan.wave,()=>{ scene('rf_word',.8,{x:cx,y:plan.y-150,txt:'BYE ROSE!',c:CREAM,sc:2}); }],
-    [END,'end',res(E2)+'Ms. Cathy always has snacks. That is why she is the best.']]); };
+    [END,'end',res(E2)+'Ms. Cathy always has snacks. That\'s why she\'s the best.']]); };
 })();
 
 // ================= Tom's second Rose review (2026-10-26, round 2) =================
@@ -1873,10 +1873,10 @@ Rm.boo=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m);
     {t:BOO,f:'celeb',hop:34,sc:u=>1+ez(u/.3)*.35},{t:2200,f:'celeb',sc:1.3,dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*4},{t:2650,f:'celeb',hop:10,hn:2},
     {t:BACK,x:pB.x,y:pB.y,f:'idle',hide:true},{t:BACK+120,x:'home',y:'home',f:'idle',hide:true},{t:BACK+140,x:'home',y:'home',f:'celeb',hop:10},{t:BACK+600,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose crouches down right where she is and winks.'); }],
+    [0,()=>{ setMessage('Rose crouches down right where she\'s and winks.'); }],
     [250,()=>{ scene('ro_text',.9,{st,txt:'SHHH',c:CREAM,sc:2}); sfx.select(); }],
-    [OUT1,()=>{ sfx.poof(); scene('rf_poof',.7,{x:me.x,y:me.base,r:34}); scene('rf_look',(IN-OUT1)/1000+.05,{f:t}); setMessage('POOF. She is gone. Where did she go?'); }],
-    [IN,()=>{ sfx.poof(); scene('rf_poof',.6,{x:pB.x,y:pB.y,r:30,seed:1}); setMessage('POOF. She is right behind it.'); }],
+    [OUT1,()=>{ sfx.poof(); scene('rf_poof',.7,{x:me.x,y:me.base,r:34}); scene('rf_look',(IN-OUT1)/1000+.05,{f:t}); setMessage('POOF. She\'s gone. Where did she go?'); }],
+    [IN,()=>{ sfx.poof(); scene('rf_poof',.6,{x:pB.x,y:pB.y,r:30,seed:1}); setMessage('POOF. She\'s right behind it.'); }],
     ['hf',BOO],
     [BOO,()=>{ say(m.id,'boo'); E2.apply(); sfx.boo?sfx.boo():sfx.boing(); sfx.boing(); scene('rv_flash',.25,{a:.75}); scene('rv_big',1.3,{x:pB.x+30,y:F.top-104,txt:'BOOOO!!',c:'#ff5a8a',sc:5,rot:-.08});
       scene('rv_scare',1.8,{f:t}); ST.jolt(t,.5); }],
@@ -1938,9 +1938,9 @@ Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,48
     [plan.toss,()=>{ sfx.jumpWhistle(); }],
     ['hf',plan.on],
     [plan.on,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('rf_splat',.9,{x:F.x,y:F.mid}); scene('rv_big',1,{x:F.x,y:F.top-90,txt:'STICK!',c:GOLD,sc:3}); }],
-    [plan.on+300,()=>{ scene('rv_preen',1.5,{f}); setMessage(cap(f.def?f.def.the:f.name)+' has a unicorn on a rainbow now. It cannot stop looking at it.'); }],
+    [plan.on+300,()=>{ scene('rv_preen',1.5,{f}); setMessage(cap(f.def?f.def.the:f.name)+' has a unicorn on a rainbow now. It can\'t stop looking at it.'); }],
     [plan.on+500,()=>{ scene('rg_word',1.0,{x:F.x,y:F.top-90,txt:'SO PRETTY',c:PINK,sc:3}); sfx.giggle(); }],
-    [plan.on+1800,'end',res(E2)+'It is too busy admiring it to stand up straight.']]); };
+    [plan.on+1800,'end',res(E2)+'It\'s too busy admiring it to stand up straight.']]); };
 
 // ---------- Lamby Hug (A4): one Lamby in each hand ----------
 // Lamby in her left hand, Backup Lamby in her right. At the hug they squish in from both sides of the friend, side by side.
@@ -2002,7 +2002,7 @@ Rm.lookout_lamby=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m)
     [hitB,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rg_word',.7,{x:F.x,y:F.top-60,txt:'BONK BONK',c:GOLD,sc:3}); }],
     [plan.back,()=>{ sfx.ding(); scene('ro_text',.9,{st,txt:'GOT THEM',c:PINK,sc:2}); }],
     ...(tom?[[2900,()=>{ sfx.jumpWhistle(); }],[3300,()=>{ E2.apply(); battle.fx[tom.idx].hop=.3; }]]:[[3300,()=>{ E2.apply(); sfx.select(); }]]),
-    [tom?3500:3900,'end',res(E2)+(tom?'Both Lambys came back. Rose is up on Tom.':'Both Lambys came back. That is the rule.')]]); };
+    [tom?3500:3900,'end',res(E2)+(tom?'Both Lambys came back. Rose is up on Tom.':'Both Lambys came back. That\'s the rule.')]]); };
 
 // ---------- Pillow Fort (B5): walls outside the party, roof above everyone ----------
 // The cushion walls stack up just outside the party's left and right edges, and the blanket roof spans above the

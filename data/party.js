@@ -16,7 +16,7 @@ const items={
   trousers:{price:10,name:'Pocket Trousers',icon:'\u{1F456}',slot:'Outfit',desc:'Four pockets. Three of them are useful.',stats:{hp:8,grit:2}},
   shoes:{price:10,name:'Walking Shoes',icon:'\u{1F45F}',slot:'Charm',desc:'Broken in by a previous owner. Thanks, previous owner.',perk:{stat:{pep:.05}}},
   notebook:{price:14,name:'Pocket Notebook',icon:'\u{1F4D3}',slot:'Tool',desc:'Every page says "ask Dot about windows."',stats:{pow:1,warmth:2}},
-  pebble:{price:8,name:'Smooth Pebble',icon:'\u{1FAA8}',slot:'Charm',desc:'Pip would like you to know it is not a pet.',perk:{crit:.05}},
+  pebble:{price:8,name:'Smooth Pebble',icon:'\u{1FAA8}',slot:'Charm',desc:'Pip would like you to know it\'s not a pet.',perk:{crit:.05}},
   button:{sell:1,name:'Spare Button',icon:'\u{1F518}',slot:null,desc:'From something. Possibly a coat. Possibly a future coat.'},
   roll:{price:8,name:'Warm Roll',icon:'\u{1F956}',slot:null,heal:48,desc:'Souvenir from Crumb Bakery. Emotionally available.'},
   bookmark:{price:14,name:'Overdue Bookmark',icon:'\u{1F516}',slot:'Tool',desc:'Souvenir from The Hush Library. It knows where you were.',stats:{warmth:3}},
@@ -34,23 +34,23 @@ const items={
   cookie:{name:"Deedee's Cookie",icon:'\u{1F36A}',slot:null,heal:56,desc:'Still warm.'},
   fridgephoto:{name:'Fridge Photo',icon:'\u{1F5BC}',slot:null,desc:'The whole family at the pond, before the Grump. Tom is blinking.'},
   drawing:{name:"Rose's Drawing",icon:'\u{1F58D}',slot:'Charm',desc:'Tata fighting a green blob. Grace added a sword. Rose added glitter.',perk:{heart:10}},
-  pepper:{name:"Boppy's Pepper",icon:'\u{1F336}',slot:'Charm',desc:'Do not eat it. Holding it makes you braver, somehow.',perk:{stat:{pow:.1}}},
+  pepper:{name:"Boppy's Pepper",icon:'\u{1F336}',slot:'Charm',desc:'Don\'t eat it. Holding it makes you braver, somehow.',perk:{stat:{pow:.1}}},
   jacket:{name:"TNB's Jacket",icon:'\u{1F9E5}',slot:'Outfit',color:'#9ea3ab',desc:'Soft grey, slightly too big, smells like home. Warm enough to be brave in.',stats:{hp:20,grit:3,cool:4}},
-  sweater:{name:'Lucky Red Sweater',icon:'\u{1F9F6}',slot:'Outfit',color:'#c43e3e',desc:'Deedee knit it in a weekend. It has never lost.',stats:{hp:16,grit:2,cool:3}},
+  sweater:{name:'Lucky Red Sweater',icon:'\u{1F9F6}',slot:'Outfit',color:'#c43e3e',desc:'Deedee knit it in a weekend. It\'s never lost.',stats:{hp:16,grit:2,cool:3}},
   hoodie:{sell:15,name:'Pond Hoodie',icon:'\u{1F9E5}',slot:'Outfit',color:'#3f8f6e',desc:'The Grump dropped it. It smells like the pond. He wants it back.',stats:{hp:18,grit:4,cool:1}},
   beanie:{price:16,name:'Moon Beanie',icon:'\u{1F9E2}',slot:'Charm',color:'#3a4a8a',desc:'Navy with one star. Keeps big ideas warm.',perk:{stat:{warmth:.1}},hat:'beanie'},
   mudpie:{sell:2,name:'Mud Pie',icon:'\u{1F967}',slot:null,heal:32,desc:'Mostly mud. Some pie. Rose insists.'},
   honey:{sell:6,name:'Swamp Honey',icon:'\u{1F36F}',slot:null,heal:72,desc:'The skeeters were guarding it. Sticky, sweet, slightly buzzy.'},
-  lilyhat:{sell:20,name:'Lily Pad Hat',icon:'\u{1FAB7}',slot:'Charm',color:'#5b8a4a',desc:'Slid off a Bog Toad. Still damp. Grace says it is a crown.',perk:{regen:.05}},
+  lilyhat:{sell:20,name:'Lily Pad Hat',icon:'\u{1FAB7}',slot:'Charm',color:'#5b8a4a',desc:'Slid off a Bog Toad. Still damp. Grace says it\'s a crown.',perk:{regen:.05}},
   // Chapter 3 drops (Cattail Pier and the Whispering Marsh, data/marsh-monsters.js).
-  dampsock:{sell:1,name:'Damp Sock',icon:'\u{1F9E6}',slot:null,desc:'A lone sock from the marsh. It is not dry. It will never be dry.'},
+  dampsock:{sell:1,name:'Damp Sock',icon:'\u{1F9E6}',slot:null,desc:'A lone sock from the marsh. It\'s not dry. It\'ll never be dry.'},
   luckybobber:{sell:16,name:'Lucky Bobber',icon:'\u{1F534}',slot:'Charm',color:'#d94a3a',desc:'A little red float. It ducks at the right moment. So do you.',perk:{evade:.06}},
   fishline:{sell:14,name:'Spool of Line',icon:'\u{1F9F5}',slot:'Charm',desc:'Twenty yards of fishing line, somehow not tangled. Nothing slows you down.',perk:{immune:['slow']}},
   driftwood:{sell:15,name:'Driftwood Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Smooth from years in the marsh. Good for poking. Better for bonking.',stats:{pow:5,warmth:2}},
   pepperjar:{name:'Boppy’s Pepper Jar',icon:'\u{1FAD9}',slot:null,keepsake:true,desc:'Homegrown, pickled, and older than Amy. Still sealed. Still hot.'},
   oldcoin:{name:'Old Gold Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Found wedged in the sundial. Heavy, worn smooth, and stamped with a little clock face. Somebody wants these.'},
   // Chapter 4 drops (the studio lot, data/backlot-monsters.js) and rewards.
-  callsheet:{sell:2,name:'Call Sheet',icon:'\u{1F4C4}',slot:null,desc:'Call time 4 AM. Lunch at 1 PM. Wrap: TBD. It is always TBD.'},
+  callsheet:{sell:2,name:'Call Sheet',icon:'\u{1F4C4}',slot:null,desc:'Call time 4 AM. Lunch at 1 PM. Wrap: TBD. It\'s always TBD.'},
   windsock:{sell:16,name:'Fuzzy Windscreen',icon:'\u{1F3A4}',slot:'Charm',desc:'The fluffy cover off a boom mic. Muffles the noise. Nothing can shush you.',perk:{immune:['silenced','shushed']}},
   slate:{sell:15,name:'Chalk Slate',icon:'\u{1F3AC}',slot:'Tool',desc:'Scene one, take one. It still has a little chalk on it.',stats:{pow:5,warmth:3}},
   fogjuice:{sell:5,name:'Fog Juice',icon:'\u{1F9EA}',slot:null,vp:4,desc:'For fog machines. Tastes like grape soda and regret. Somehow restores 4 VP.'},
@@ -62,15 +62,15 @@ const items={
   hallpass:{sell:16,name:'Hall Pass',icon:'\u{1F3AB}',slot:'Charm',desc:'Laminated. Signed by Principal Pruitt in 1994. Nobody can make you late.',perk:{immune:['tardy','slow']}},
   gluestick:{sell:15,name:'Glitter Glue Cap',icon:'\u{2728}',slot:'Charm',desc:'Still a little sticky. You stick around a little longer, too.',perk:{regen:.05}},
   dodgeitem:{sell:8,name:'Red Rubber Ball',icon:'\u{1F534}',slot:null,dmg:72,desc:'The one from gym class. Thrown with love and a lot of spin. Never misses.'},
-  a_stopwatch:{who:'amy',name:'Golden Stopwatch',icon:'\u{23F1}',slot:'Tool',desc:'Principal Pruitt’s own. Thirty-one Field Days. It has never once stopped early.',stats:{pow:5,warmth:6}},
+  a_stopwatch:{who:'amy',name:'Golden Stopwatch',icon:'\u{23F1}',slot:'Tool',desc:'Principal Pruitt’s own. Thirty-one Field Days. It\'s never once stopped early.',stats:{pow:5,warmth:6}},
   fielddaytee:{name:'Field Day Tee',icon:'\u{1F455}',slot:'Outfit',color:'#2f8a5a',desc:'GO SNAILS! on the front. FIELD DAY STAFF on the back. Amy has eleven of these.',stats:{hp:28,grit:4,cool:4}},
   // Chapter 6 drops (Old Oak Park and the Old Oak, data/oak-monsters.js) and rewards.
   acorn:{sell:1,name:'Marked Acorn',icon:'\u{1F330}',slot:null,heal:24,desc:'An acorn with a tiny X carved in it. Evidence. Also a snack, technically.'},
-  sapjar:{sell:5,name:'Jar of Sap',icon:'\u{1F36F}',slot:null,vp:3,desc:'Very slow. Very sweet. Somehow restores 3 VP. Do not ask how.'},
+  sapjar:{sell:5,name:'Jar of Sap',icon:'\u{1F36F}',slot:null,vp:3,desc:'Very slow. Very sweet. Somehow restores 3 VP. Don\'t ask how.'},
   peanuts:{sell:3,name:'Bag of Peanuts',icon:'\u{1F95C}',slot:null,healAll:40,desc:'Unsalted. Pass the bag around: everyone gets some. Nobody boos.'},
   binoculars:{sell:16,name:'Tiny Binoculars',icon:'\u{1F52D}',slot:'Charm',desc:'Standard issue for Twig Spies. You see every opening.',perk:{crit:.08}},
   cheekpouch:{sell:15,name:'Cheek Pouch',icon:'\u{1F45D}',slot:'Charm',desc:'For winter. You always save a little energy for later.',perk:{startVp:1}},
-  y_goldball:{who:'nara',name:'Golden Tennis Ball',icon:'\u{1F3BE}',slot:'Tool',desc:'Lachlan painted it gold. It took four days and most of a bottle. Nara will not let go of it.',stats:{pow:6,warmth:4}},
+  y_goldball:{who:'nara',name:'Golden Tennis Ball',icon:'\u{1F3BE}',slot:'Tool',desc:'Lachlan painted it gold. It took four days and most of a bottle. Nara won\'t let go of it.',stats:{pow:6,warmth:4}},
   watchvest:{name:'Neighborhood Watch Vest',icon:'\u{1F9BA}',slot:'Outfit',color:'#e8843a',desc:'Reflective orange. WATCH on the back. Bernadette gives one out every nineteen years.',stats:{hp:30,grit:4,cool:5}},
   bready:{name:'Bready Mercury',icon:'\u{1FAD9}',slot:null,keepsake:true,desc:'Tom’s sourdough starter. Nine years old. Flew Delta One twice. Got kidnapped by squirrels once. Extremely sour about it.'},
   // Chapter 7 drops (the Stacks under the Hush Library, data/library-monsters.js) and rewards.
@@ -83,10 +83,10 @@ const items={
   hushsweater:{name:'Hush Library Sweater',icon:'\u{1F9E5}',slot:'Outfit',color:'#8d7293',desc:'Purple, a little itchy, SHHH on the front. Page knits one every winter. There are boxes of them.',stats:{hp:32,grit:4,cool:6}},
   // Chapter 8 drops (the Car Barn, data/barn-monsters.js) and rewards.
   tepidcoffee:{sell:2,name:'Lukewarm Coffee',icon:'\u{2615}',slot:null,vp:3,desc:'Not hot. Not cold. Somehow restores 3 VP anyway.'},
-  leftovers:{sell:4,name:'Leftover Lasagna',icon:'\u{1F961}',slot:null,heal:60,desc:'The label says WED. It is actually very good. Do not ask which Wednesday.'},
+  leftovers:{sell:4,name:'Leftover Lasagna',icon:'\u{1F961}',slot:null,heal:60,desc:'The label says WED. It\'s actually very good. Don\'t ask which Wednesday.'},
   warmblanket:{sell:16,name:'Dry Corner',icon:'\u{1F9E3}',slot:'Charm',desc:'The one dry corner of the Wet Blanket. Warm now. Nothing can chill you.',perk:{immune:['chilled','drowsy']}},
   draftstopper:{sell:16,name:'Draft Stopper',icon:'\u{1F40D}',slot:'Charm',desc:'A long fabric snake for the bottom of a door. You slip past things the same way.',perk:{evade:.07}},
-  hotsauce:{sell:8,name:'Hot Sauce Packet',icon:'\u{1F336}',slot:null,dmg:80,desc:'The Picky Eater would not touch it. Thrown at an enemy, it never misses.'},
+  hotsauce:{sell:8,name:'Hot Sauce Packet',icon:'\u{1F336}',slot:null,dmg:80,desc:'The Picky Eater wouldn\'t touch it. Thrown at an enemy, it never misses.'},
   t_peel:{who:'tom',name:'Ironbelly’s Bread Peel',icon:'\u{1F956}',slot:'Tool',desc:'A long wooden peel, worn smooth by fifty years of night-crew biscuits. Old Ironbelly wants Tom to have it.',stats:{pow:6,warmth:7}},
   motorcoat:{name:'Motorman’s Coat',icon:'\u{1F9E5}',slot:'Outfit',color:'#2f3f6a',desc:'Navy wool, brass buttons, a 7 LINE pin. Mr. Washington’s father wore it on the night run.',stats:{hp:34,grit:5,cool:5}},
   // Chapter 9 drops (the Moon Club, data/club-monsters.js) and rewards.
@@ -107,7 +107,7 @@ const items={
   zeropjs:{name:'Lie-Flat Pajamas',icon:'\u{1F97C}',slot:'Outfit',color:'#3a4a7a',desc:'Navy, with a little gold 0 on the pocket. From the Gate Zero lounge. Tom has opinions about pajamas. These pass.',stats:{hp:38,grit:6,cool:6}},
   barkslab:{sell:15,name:'Bark Slab',icon:'\u{1FAB5}',slot:'Tool',desc:'Came off a Log Lump. Heavy, mossy, and surprisingly good at stopping things.',stats:{pow:5}},
   lure:{name:"Boppy's Lost Lure",icon:'\u{1FA9D}',slot:'Charm',desc:'Twenty years in a fish\u2019s lip. Still shiny. Boppy will want to hear about this.',perk:{coins:.25}},
-  juice:{price:6,name:'Juice Box',icon:'\u{1F9C3}',slot:null,heal:40,desc:'From the bottom of Amy\'s bag.'},
+  juice:{price:6,name:'Juice Box',icon:'\u{1F9C3}',slot:null,heal:40,desc:'From the bottom of Amy\'s bag. There\'s always one more.'},
   // ---- Penny's Pockets stock: healing ----
   bandage:{price:15,name:'Dino Bandage',icon:'\u{1FA79}',slot:null,heal:96,desc:'Has a T. rex on it. Rose says that makes it work faster. Rose is right.'},
   picnic:{price:26,name:'Picnic Basket',icon:'\u{1F9FA}',slot:null,healAll:48,desc:'Sandwiches for everyone. Somebody always gets the squished one.'},
@@ -124,19 +124,19 @@ const items={
   t_headphones:{who:'tom',price:20,name:'Retro Headphones',icon:'\u{1F3A7}',slot:'Charm',desc:'Plays the boss music on a loop. Only Tom can hear it.',perk:{crit:.1}},
   t_apron:{who:'tom',price:30,name:'Sourdough Apron',icon:'\u{1F35E}',slot:'Outfit',color:'#c9b07a',desc:'Flour in every pocket. Smells like a day three starter.',stats:{hp:20,grit:3,cool:3}},
   t_slippers:{who:'tom',price:24,name:'Lie-Flat Slippers',icon:'\u{1FA74}',slot:'Charm',desc:'Delta One amenity kit. Tom has kept them since 2019.',perk:{startVp:2}},
-  t_controller:{who:'tom',price:36,name:'Lucky Controller',icon:'\u{1F3AE}',slot:'Tool',desc:'The A button is worn smooth. It has beaten Final Fantasy IV eleven times.',stats:{pow:4,warmth:4}},
-  g_headband:{who:'grace',price:18,name:'Sparkle Headband',icon:'\u{1F451}',slot:'Charm',desc:'Glitter falls off it constantly. That is the point.',perk:{crit:.1}},
+  t_controller:{who:'tom',price:36,name:'Lucky Controller',icon:'\u{1F3AE}',slot:'Tool',desc:'The A button is worn smooth. It\'s beaten Final Fantasy IV eleven times.',stats:{pow:4,warmth:4}},
+  g_headband:{who:'grace',price:18,name:'Sparkle Headband',icon:'\u{1F451}',slot:'Charm',desc:'Glitter falls off it constantly. That\'s the point.',perk:{crit:.1}},
   g_leotard:{who:'grace',price:30,name:'Gym Leotard',icon:'\u{1FA71}',slot:'Outfit',color:'#d65aa0',desc:'Pink and purple. Built for cartwheels. Judges love it.',stats:{hp:16,grit:2,cool:3}},
   g_leggings:{who:'grace',price:16,name:'Glitter Leggings',icon:'✨',slot:'Charm',desc:'Leaves a trail. Grace calls it her signature.',perk:{evade:.08}},
   g_squishy:{who:'grace',price:22,name:'Squishy Keychain',icon:'\u{1F351}',slot:'Tool',desc:'A peach that smells like a peach. Squeezed four hundred times a day.',stats:{pow:2,warmth:4}},
   r_ears:{who:'rose',price:16,name:'Bunny Ears',icon:'\u{1F430}',slot:'Charm',desc:'Makes every jump at least ten percent bouncier.',perk:{evade:.1}},
   r_raincoat:{who:'rose',price:26,name:'Frog Raincoat',icon:'\u{1F438}',slot:'Outfit',color:'#6fbf5a',desc:'Has eyes on the hood. Puddles fear it.',stats:{hp:18,grit:3,cool:2}},
   r_boots:{who:'rose',price:18,name:'Puddle Boots',icon:'\u{1F462}',slot:'Charm',desc:'For jumping in puddles. All puddles. Especially the deep one.',perk:{immune:['drowsy','slow']}},
-  r_lamby:{who:'rose',price:24,name:'Mini Lamby',icon:'\u{1F411}',slot:'Tool',desc:'Lamby’s little cousin. Rose says it is brave.',stats:{pow:4,warmth:2}},
+  r_lamby:{who:'rose',price:24,name:'Mini Lamby',icon:'\u{1F411}',slot:'Tool',desc:'Lamby’s little cousin. Rose says it\'s brave.',stats:{pow:4,warmth:2}},
   a_visor:{who:'amy',price:18,name:'Running Visor',icon:'\u{1F9E2}',slot:'Charm',desc:'Sweat-wicking. Glare-blocking. Excuse-blocking.',perk:{crit:.08}},
-  a_singlet:{who:'amy',price:30,name:'Race Day Singlet',icon:'\u{1F3BD}',slot:'Outfit',color:'#e8743b',desc:'Bib still pinned on. She is always racing something.',stats:{hp:16,grit:2,cool:2}},
+  a_singlet:{who:'amy',price:30,name:'Race Day Singlet',icon:'\u{1F3BD}',slot:'Outfit',color:'#e8743b',desc:'Bib still pinned on. She\'s always racing something.',stats:{hp:16,grit:2,cool:2}},
   a_flats:{who:'amy',price:24,name:'Racing Flats',icon:'\u{1F45F}',slot:'Charm',desc:'Weigh less than a juice box. Amy checked.',perk:{stat:{pep:.1}}},
-  a_redpen:{who:'amy',price:16,name:'Red Pen',icon:'\u{1F58A}',slot:'Tool',desc:'Grading at all times. Even monsters.',stats:{pow:2,warmth:4}},
+  a_redpen:{who:'amy',price:16,name:'Green Pen',icon:'\u{1F58A}',slot:'Tool',desc:'Circles the good parts first. Even on monsters.',stats:{pow:2,warmth:4}},
   d_hat:{who:'deedee',price:18,name:'Garden Hat',icon:'\u{1F452}',slot:'Charm',desc:'Wide brim, silk flower, one ladybug that lives there now.',perk:{regen:.05}},
   d_apron:{who:'deedee',price:28,name:'Floral Apron',icon:'\u{1F33A}',slot:'Outfit',color:'#e59aa8',desc:'Flour, frosting and forty tomatoes worth of stains.',stats:{hp:18,grit:2,cool:3}},
   d_clogs:{who:'deedee',price:18,name:'Garden Clogs',icon:'\u{1F97F}',slot:'Charm',desc:'Muddy forever. Comfortable forever.',perk:{stat:{grit:.1}}},
@@ -144,8 +144,8 @@ const items={
   b_hat:{who:'boppy',price:20,name:'Bucket Hat',icon:'\u{1F3A3}',slot:'Charm',desc:'Seven lures hooked in the brim. None of them have caught anything.',perk:{coins:.2}},
   b_vest:{who:'boppy',price:32,name:'Fishing Vest',icon:'\u{1F9BA}',slot:'Outfit',color:'#6b7a4a',desc:'Twelve pockets. Eleven have peppers in them.',stats:{hp:22,grit:4,cool:2}},
   b_shoes:{who:'boppy',price:22,name:'Comfy Sneakers',icon:'\u{1F45E}',slot:'Charm',desc:'Extra arch support. The knee approves. The hip has notes.',perk:{stat:{pep:.1}}},
-  b_pad:{who:'boppy',price:26,name:'Heating Pad',icon:'\u{1F525}',slot:'Charm',desc:'Plugged into nothing. Still works. Boppy says it is mental.',perk:{regen:.06}},
-  n_helmet:{who:'tnb',price:20,name:'Transit Cap',icon:'\u{1F9E2}',slot:'Charm',desc:'Covered in pins from every transit system he has ridden. He can name all the lines.',perk:{stat:{pep:.08}}},
+  b_pad:{who:'boppy',price:26,name:'Heating Pad',icon:'\u{1F525}',slot:'Charm',desc:'Plugged into nothing. Still works. Boppy says it\'s mental.',perk:{regen:.06}},
+  n_helmet:{who:'tnb',price:20,name:'Transit Cap',icon:'\u{1F9E2}',slot:'Charm',desc:'Covered in pins from every transit system he\'s ridden. He can name all the lines.',perk:{stat:{pep:.08}}},
   n_apron:{who:'tnb',price:30,name:'Glaze Apron',icon:'\u{1F3FA}',slot:'Outfit',color:'#7f5a44',desc:'Splattered in every glaze color. Cone six approved.',stats:{hp:18,grit:2,cool:4}},
   n_shoes:{who:'tnb',price:24,name:'Skate Shoes',icon:'\u{1F6F9}',slot:'Charm',desc:'Worn through at the toe from braking. He says he never brakes.',perk:{evade:.08}},
   n_lintroller:{who:'tnb',price:18,name:'Lint Roller',icon:'\u{1F9FB}',slot:'Tool',desc:'Wardrobe runner essential. No scene goes out fuzzy.',stats:{pow:2,warmth:4}},
@@ -154,7 +154,7 @@ const items={
   y_booties:{who:'nara',price:20,name:'Rain Booties',icon:'\u{1F97E}',slot:'Charm',desc:'She walks like a cartoon horse in them. Very protective, very embarrassing.',perk:{stat:{grit:.1}}},
   y_ball:{who:'nara',price:14,name:'Squeaky Ball',icon:'\u{1F3BE}',slot:'Tool',desc:'Squeaks every time she bites it. Which is constantly.',stats:{pow:4,warmth:1}},
   jerky:{price:6,name:'Chicken Jerky',icon:'\u{1F357}',slot:null,heal:64,dogOk:true,desc:'The only snack Nara will eat. Humans can have some too. Technically.'},
-  naraball:{name:'Slobbery Tennis Ball',icon:'\u{1F3BE}',slot:'Charm',desc:'Nara dropped it at Tom\u2019s feet the second she saw him. It is very wet. It is a gift.',perk:{stat:{pep:.08}}},
+  naraball:{name:'Slobbery Tennis Ball',icon:'\u{1F3BE}',slot:'Charm',desc:'Nara dropped it at Tom\u2019s feet the second she saw him. It\'s very wet. It\'s a gift.',perk:{stat:{pep:.08}}},
   // ---- Starting Signature Tools (F6): everyone starts holding one (B6_STARTER in data/progress.js). Not for sale. ----
   k_keyboard:{who:'tom',name:'Mechanical Keyboard',icon:'\u{2328}',slot:'Tool',desc:'Clicky blue switches. The whole house knows when Tom is typing.',stats:{pow:2,warmth:2}},
   g_dumpling:{who:'grace',name:'Gold Dumpling Squishy',icon:'\u{1F95F}',slot:'Tool',desc:'The sparkling diamond gold soup dumpling. Limited edition. Only two in the whole world.',stats:{pow:1,warmth:3}},
@@ -163,7 +163,7 @@ const items={
   d_pin:{who:'deedee',name:'Rolling Pin',icon:'\u{1F9C1}',slot:'Tool',desc:'Fifty years of pie crust. Also very good for pointing.',stats:{pow:1,warmth:3}},
   b_rod:{who:'boppy',name:'Rikers Bass Rod',icon:'\u{1F3A3}',slot:'Tool',desc:'Twenty years on the same rod. The fish all know it by name.',stats:{pow:3,warmth:1}},
   n_rib:{who:'tnb',name:'Pottery Rib',icon:'\u{1F3FA}',slot:'Tool',desc:'A worn wooden rib from his first wheel class. Shapes clay. Shapes opinions.',stats:{pow:1,warmth:3}},
-  y_stick:{who:'nara',name:'The Best Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Nara found it on 2nd Ave. It is the best stick. Everyone must see the stick.',stats:{pow:3,warmth:1}}
+  y_stick:{who:'nara',name:'The Best Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Nara found it on 2nd Ave. It\'s the best stick. Everyone must see the stick.',stats:{pow:3,warmth:1}}
 };
 const souvenirs={bakery:'roll',library:'bookmark',greenhouse:'sprout',post:'stamp',tea:'biscuit',observatory:'scrap',home:'fridgephoto',amyhouse:'drawing',grands:'pepper'};
 let coins=25;
@@ -224,7 +224,7 @@ const ATTACKS={
   grace:[{key:'cartwheel',name:'Cartwheel',mp:0,mult:1},{key:'squishy',name:'Squishy Squeeze',mp:3,mult:1.3},{key:'polish',name:'Glitter Nails',mp:4,mult:1.5},{key:'runway',name:'Runway Walk',mp:5,mult:1.7},
        {key:'dancebattle',name:'Dance Battle',mp:6,mult:2.0,lvl:2},{key:'subscribe',name:'Like and Subscribe',mp:7,mult:2.3,lvl:3},{key:'beam',name:'Beam Dismount',mp:8,mult:2.6,lvl:4},{key:'perfect10',name:'Perfect 10',mp:10,mult:3.2,lvl:5}],
   amy:[{key:'basic',name:'Sprint Tackle',mp:0,mult:1},{key:'burpee',name:'Burpee Blitz',mp:3,mult:1.3},{key:'finish',name:'Finish Line',mp:4,mult:1.5},{key:'redpen',name:'Red Pen',mp:5,mult:1.7},
-       {key:'hills',name:'Hill Repeats',mp:6,mult:2.0,lvl:2},{key:'quiz',name:'Pop Quiz',mp:7,mult:2.2,lvl:3},{key:'marathon',name:'Marathon',mp:8,mult:2.6,lvl:4},{key:'pb',name:'Personal Best',mp:10,mult:3.2,lvl:5}],
+       {key:'hills',name:'Hill Repeats',mp:6,mult:2.0,lvl:2},{key:'quiz',name:'Surprise Quiz',mp:7,mult:2.2,lvl:3},{key:'marathon',name:'Marathon',mp:8,mult:2.6,lvl:4},{key:'pb',name:'Personal Best',mp:10,mult:3.2,lvl:5}],
   deedee:[{key:'basic',name:'Spit Shine',mp:0,mult:1},{key:'walk',name:'Power Walk',mp:3,mult:1.3},{key:'nurse',name:'Registered Nut',mp:4,mult:1.5},{key:'mop',name:'Wet Floor',mp:5,mult:1.7},
        {key:'crisp',name:'Rhubarb Crisp',mp:6,mult:2.0,lvl:2},{key:'wine',name:'Wine O\u2019Clock',mp:7,mult:2.3,lvl:3},{key:'dinner',name:'Sunday Dinner',mp:8,mult:2.6,lvl:4},{key:'moonshot',name:'To the Moon & Back',mp:10,mult:3.2,lvl:5}],
   boppy:[{key:'basic',name:'Cap Swat',mp:0,mult:1},{key:'cast',name:'Cast Line',mp:3,mult:1.3},{key:'pepper',name:'Pepper Breath',mp:4,mult:1.5},{key:'recliner',name:'Recliner Drop',mp:5,mult:1.7},
@@ -291,12 +291,12 @@ function equipItem(id) {
   if(!item.slot) {
     sfx.nope();
     if(fieldUsable(item)) { useFieldItem(m,id); return; }
-    showToast(item.name+' is not something you can wear. Or is it. No.',2.2);
+    showToast(item.name+' isn\'t something you can wear. Or is it. No.',2.2);
     return;
   }
   if(!canWear(m,item)) {
     sfx.nope();
-    showToast(item.name+' is made for '+memberById(item.who).name+'. It would not fit '+m.name+'.',2.4);
+    showToast(item.name+' is made for '+memberById(item.who).name+'. It\'d not fit '+m.name+'.',2.4);
     return;
   }
   if(!equipTo(m,id)) return;
@@ -314,7 +314,7 @@ function useFieldItem(m,id) {
   if(m.id==='nara'&&item.heal&&!item.dogOk) { sfx.nope(); showToast('Nara sniffs the '+item.name+', looks at Tom, and walks away. Picky. She only eats Chicken Jerky.',2.8); return; }
   if(item.revive) {
     if(m.hp>0) { sfx.nope(); showToast(m.name+' is awake already. Save it for an emergency.',2.2); return; }
-    m.hp=Math.ceil(m.maxHp/2); msg=m.name+' sits up. "I am fine. I was resting."';
+    m.hp=Math.ceil(m.maxHp/2); msg=m.name+' sits up. "I\'m fine. I was resting."';
   } else if(item.healAll) {
     if(!party.some(p=>p.hp>0&&p.hp<p.maxHp)) { sfx.nope(); showToast('Everyone is already full. Save the picnic.',2.2); return; }
     for(const p of party) if(p.hp>0) p.hp=Math.min(p.maxHp,p.hp+item.healAll);

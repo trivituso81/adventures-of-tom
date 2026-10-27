@@ -36,15 +36,15 @@ SCENES.opening=()=>{
     {hop:'rose',from:[dx-1,row+1],to:[dx,row],time:.5,arc:22,lift:[0,SHOULDER]},
     {call:()=>{ const r=sceneActor('rose'); r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; sfx.giggle(); }},
     {trace:'rose-shoulders'}, {flag:'tombo:rose1'},   // Double-Decker Airplane unlocks here (chapter 1)
-    {talk:'Rose',lines:['I am the tallest! Giddyup, Tata!'],voice:[['rose','intro3']]},
+    {talk:'Rose',lines:['I\'m the tallest! Giddyup, Tata!'],voice:[['rose','intro3']]},
     {talk:'Tom',lines:['Hello, Rose. Please keep your arms and legs inside the uncle at all times.'],voice:[['tom','intro2']]},
     {face:'grace',dir:'right'}, {call:()=>{ intro.squishy={t:0}; snd.squeak(); }},
     {wait:.7},
     {call:()=>{ intro.showcase={t:0}; snd.sparkle(); }},
-    {talk:'Grace',lines:["Tata, LOOK. A sparkling diamond gold dumpling squishy!","It is limited edition. There are only two in the whole world. You can squeeze it!"],voice:[['grace','intro3'],['grace','intro4']]},
+    {talk:'Grace',lines:["Tata, LOOK. A sparkling diamond gold dumpling squishy!","It's limited edition. There are only two in the whole world. You can squeeze it!"],voice:[['grace','intro3'],['grace','intro4']]},
     {call:()=>{ intro.showcase=null; snd.squeak(); }},
     {flag:'saw-squishy'}, {flag:'tombo:grace1'},      // Hi Guys, Welcome Back! unlocks here (chapter 1)
-    {talk:'Tom',lines:['That is the shiniest dumpling I have ever seen. And I have seen a LOT of dumplings.'],voice:[['tom','intro3']]},
+    {talk:'Tom',lines:['That\'s the shiniest dumpling I\'ve ever seen. And I\'ve seen a LOT of dumplings.'],voice:[['tom','intro3']]},
     {talk:'Rose',lines:["Come on, Tata! Let's go!"],voice:[['rose','intro4']]},
     {call:()=>{ intro.squishy=null; snd.whee(true); const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
     {hop:'rose',from:[dx,row],to:[dx-1,row+1],time:.45,arc:14,lift:[SHOULDER,0]},
@@ -64,11 +64,10 @@ const CH1_TIN_LINE='Take the tin home to Rivituso Row.';
 // 1. Right after the opening: why we are going to Deedee's.
 SCENES.ch1Goal=[
   {flag:'ch1-goal'},
-  {talk:'Grace',lines:['Tata! Deedee made rhubarb crisp for you. It is cooling RIGHT NOW.']},
-  {talk:'Rose',lines:['I already licked the spoon. Do not tell.']},
+  {talk:'Grace',lines:['Tata! Deedee made rhubarb crisp for you. It\'s cooling RIGHT NOW.']},
+  {talk:'Rose',lines:['I already licked the spoon. Don\'t tell.']},
   {talk:'Tom',lines:['Then we had better hurry. Before somebody licks the rest.']},
   {toast:'New Tombos: Hi Guys, Welcome Back! (Grace) and Double-Decker Airplane (Rose). In battle, ◀ TOMBO.',time:4},
-  {wait:4.2},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5}
 ];
 
@@ -79,9 +78,9 @@ SCENES.ch1Theft=[
   {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
   {hearts:'Deedee'},
-  {talk:'Deedee',lines:["There's my Tommy!",'And my two angels! Come here, come here.'],voice:[['deedee','greet',0,"There's my Tommy!"]]},
+  {talk:'Deedee',lines:["There's my Tommy!",'And my girls! Come here, come here.'],voice:[['deedee','greet',0,"There's my Tommy!"]]},
   {trace:'deedee-hug'},
-  {talk:'Deedee',lines:['Tom, you are skin and bones. Sit. The crisp needs ten minutes on the counter.']},
+  {talk:'Deedee',lines:['Tom, you\'re skin and bones. Sit. The crisp needs ten minutes on the counter.']},
   {talk:'Tom',lines:['I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.']},
   {talk:'Deedee',lines:['Your bread and my rhubarb crisp. Now THAT is a meal.']},
   {flag:'tombo:deedee1'},
@@ -97,12 +96,11 @@ SCENES.ch1Theft=[
   {walk:'Big Mudling',to:[[5,8],[6,8],[6,9]],speed:.22,onStep:()=>sfx.splat()},
   {sfx:'doorOut'}, {despawn:'Big Mudling'},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
-  {talk:'Deedee',lines:['That is my GOOD tin! Grab your shoes. I am coming with you.']},
-  {talk:'Boppy',lines:['I TOLD you something lives in that pond. Twenty years I have been saying it. Nobody listens to Boppy.','I would come, but the stomach. Bring me back that fish.']},
+  {talk:'Deedee',lines:['That\'s my GOOD tin! Grab your shoes. I\'m coming with you.']},
+  {talk:'Boppy',lines:['I TOLD you something lives in that pond. Twenty years I\'ve been saying it. Nobody listens to Boppy.','I\'d come, but the stomach. Bring me back that fish.']},
   {join:'deedee'},
   {wait:2.8},
   {toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3},
-  {wait:3.2},
   {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5}
 ];
 
@@ -120,11 +118,11 @@ SCENES.ch1Mudling=[
   {talk:'Rose',lines:['Tata. The mud is MOVING.']},
   {sfx:'look'},
   {walk:'Mudling',to:[[8,16],[8,17],[7,17]],speed:.35},
-  {talk:'Mudling',lines:['Blub. The pie went that way. You cannot have it. Blub.']},
-  {talk:'Grace',lines:['Okay, everybody. Tata is in front. I am in charge of choreography. FIGHT!']},
+  {talk:'Mudling',lines:['Blub. The pie went that way. You can\'t have it. Blub.']},
+  {talk:'Grace',lines:['Okay, everybody. Tata is in front. I\'m in charge of choreography. FIGHT!']},
   {battle:'mudling',tut:'basics'},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
-    {talk:'Deedee',lines:['Good job, babies. The crumbs keep going north.']}])
+    {talk:'Deedee',lines:['Good job, girls. The crumbs keep going north.']}])
 ];
 SCENES.ch1Skeeter=[
   {flag:'ch1-t2'},
@@ -135,15 +133,15 @@ SCENES.ch1Skeeter=[
   {talk:'Grace',lines:['Ew. Ew ew ew. Nobody touch my hair.']},
   {battle:'skeeter',tut:'dance'},
   ...CH1_AFTER(()=>flag('battle:skeeter')!=='win',[
-    {talk:'Deedee',lines:['Everybody okay? Itchy is not hurt. Keep walking.']}])
+    {talk:'Deedee',lines:['Everybody okay? Itchy isn\'t hurt. Keep walking.']}])
 ];
 SCENES.ch1Grump=[
   {flag:'ch1-tuts',value:'pending'},
   {place:'Pond Grump',at:()=>[player.x+1,player.y-2]},
   {walk:'Pond Grump',to:()=>[[player.x+1,player.y-1]],speed:.4,onStep:()=>sfx.splat()},
-  {talk:'Pond Grump',lines:['Grrrumble. You are standing in my puddle. And the small one is LAUGHING at me.']},
-  {talk:'Rose',lines:['I am not laughing. I am giggling. It is different.']},
-  {talk:'Pond Grump',lines:['That is IT. Soggy Slap. For the giggler.']},
+  {talk:'Pond Grump',lines:['Grrrumble. You\'re standing in my puddle. And the small one is LAUGHING at me.']},
+  {talk:'Rose',lines:['I\'m not laughing. I\'m giggling. It\'s different.']},
+  {talk:'Pond Grump',lines:['That\'s IT. Soggy Slap. For the giggler.']},
   {battle:'grump',tut:'defend'},
   ...CH1_AFTER(()=>flag('battle:grump')!=='win',[]),
   {flag:'ch1-tuts'},
@@ -170,8 +168,8 @@ SCENES.ch1Pond=[
   {walk:'Big Mudling',to:[[20,12]],speed:.3},
   {call:()=>sfx.splat()}, {despawn:'Big Mudling'},
   {face:'The Big One',dir:'down'},
-  {talk:'The Big One',lines:['It fits. I am a king now. GLUB.']},
-  {talk:'Deedee',lines:['That is my GOOD tin, you overgrown handbag!']},
+  {talk:'The Big One',lines:['It fits. I\'m a king now. GLUB.']},
+  {talk:'Deedee',lines:['That\'s my GOOD tin, you overgrown handbag!']},
   {talk:'Rose',lines:['Tata, he looks like a turtle wearing a hat.']},
   {talk:'Tom',lines:['Nobody touches Deedee’s crisp. Everybody ready?']},
   {battle:'bigone',tut:'bigone'},
@@ -186,7 +184,7 @@ SCENES.ch1AfterBoss=[
   {call:()=>sfx.pickup()},
   {if:()=>!!flag('kind:bigone'),
     then:[{talk:'The Big One',lines:['Glub. Nobody ever made me laugh before. You can have your tin back.']}],
-    else:[{talk:'The Big One',lines:['Glub. Fine. Take your tin. I am going back in the pond to think about things.']}]},
+    else:[{talk:'The Big One',lines:['Glub. Fine. Take your tin. I\'m going back in the pond to think about things.']}]},
   {talk:'Deedee',lines:['My tin! And look. Half the crisp is still in it.']},
   {talk:'Grace',lines:['The Big One ate the other half. I saw crumbs on its chin.']},
   {talk:'Deedee',lines:['Then we split this half. Everybody home. Boppy has to hear about this.']},
@@ -201,11 +199,11 @@ SCENES.ch1End=()=>[
   {talk:'Boppy',lines:['You found the Big One? I TOLD everybody. Twenty years.']},
   ...(bag.includes('lure')?[
     {talk:'Tom',lines:['It had this stuck in its lip.']},
-    {talk:'Boppy',lines:['My LURE! I lost that in 2006. Still shiny. Unlike me.','Keep it, Tom. For luck. The fish clearly did not want it.']}]:[]),
+    {talk:'Boppy',lines:['My LURE! I lost that in 2006. Still shiny. Unlike me.','Keep it, Tom. For luck. The fish clearly didn\'t want it.']}]:[]),
   {talk:'Deedee',lines:['Sit. Everybody sit. Half a crisp is still a crisp.']},
   {trace:'ch1-crisp'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {talk:'Rose',lines:['This is the best half a crisp I ever had.']},
-  {talk:'Grace',lines:['Tata, you are staying the WHOLE week, right?']},
+  {talk:'Grace',lines:['Tata, you\'re staying the WHOLE week, right?']},
   {talk:'Tom',lines:['The whole week. And nobody is stealing anything else.']},
   {talk:'Boppy',lines:['Slow down. Everybody eats too fast. My stomach.']},
   {fade:'out',time:.8}, {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
@@ -226,7 +224,7 @@ const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap
 // 1. Landing downtown: where TNB is.
 SCENES.ch2Arrive=[
   {flag:'ch2-goal'},
-  {talk:'Tom',lines:['TNB said he would be home. Spring Street loft. He is never home.','...He said he would be home.']},
+  {talk:'Tom',lines:['TNB said he\'d be home. Spring Street loft. He\'s never home.','...He said he\'d be home.']},
   {toast:"Goal: TNB's Loft (LOFTS), Spring Street, bottom middle of Downtown.",time:4.5}
 ];
 // 2. The loft: the heart-kiss greeting. TNB joins.
@@ -237,12 +235,12 @@ SCENES.ch2Loft=[
   {call:()=>{ const t=sceneActor('TNB'); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   {talk:'TNB',lines:['Look who flew three thousand miles to see me.']},
-  {talk:'Tom',lines:['I flew three thousand miles to see my sourdough starter. You are a bonus.']},
-  {talk:'TNB',lines:['I will take bonus. Bonus sounds premium. Like your seat.']},
+  {talk:'Tom',lines:['I flew three thousand miles to see my sourdough starter. You\'re a bonus.']},
+  {talk:'TNB',lines:['I\'ll take bonus. Bonus sounds premium. Like your seat.']},
   {trace:'tnb-hello'},
-  {talk:'TNB',lines:['My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I am all yours.',
+  {talk:'TNB',lines:['My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I\'m all yours.',
     'Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.']},
-  {talk:'Tom',lines:['All yours. I like that. We will look, together. One quick stop first. My starter has been alone for a week.']},
+  {talk:'Tom',lines:['All yours. I like that. We\'ll look, together. One quick stop first. My starter has been alone for a week.']},
   {join:'tnb'},
   {wait:2.6},
   {toast:'Goal: home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468.',time:4.5}
@@ -252,9 +250,9 @@ SCENES.ch2Porch=[
   {flag:'ch2-nara'},
   {join:'nara'},
   {wait:.6},
-  {talk:'TNB',lines:['Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.','She has been sitting on your porch since eight. I tried to take her to the loft. She refused.']},
-  {talk:'TNB',lines:['Also, your starter was bubbling out of the jar, so I baked a boule with it. Do not be mad.']},
-  {talk:'Tom',lines:['Mad? I am proud. And a little mad.']},
+  {talk:'TNB',lines:['Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.','She\'s been sitting on your porch since eight. I tried to take her to the loft. She refused.']},
+  {talk:'TNB',lines:['Also, your starter was bubbling out of the jar, so I baked a boule with it. Don\'t be mad.']},
+  {talk:'Tom',lines:['Mad? I\'m proud. And a little mad.']},
   {call:()=>{ sfx.whoosh(); }},
   {talk:'Nara',lines:['Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.','She gets the bread. Tom gets a lick.']},
   {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.15); }},
@@ -262,7 +260,6 @@ SCENES.ch2Porch=[
   {flag:'tombo:nara1'},
   {talk:'Tom',lines:['Sit, paw, treat. She knows the whole routine. Very polite. Very strong paw.']},
   {toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, ◀ TOMBO.',time:3.6},
-  {wait:3.8},
   {toast:'Goal: feed the starter. Kitchen island, inside Tom’s house.',time:4.5}
 ];
 // 4. Tom's kitchen: feeding Bready Mercury. Through the window, the sky is purple.
@@ -275,11 +272,11 @@ SCENES.ch2Starter=[
   {trace:'starter'}, {hearts:'tom'},
   {talk:'TNB',lines:['You talk to that jar more than you talk to me.']},
   {talk:'Tom',lines:['The jar never leaves wet towels on the bed.','...The jar also never steamed my shirts for my flight. You win.']},
-  {talk:'TNB',lines:['I will take it.']},
+  {talk:'TNB',lines:['I\'ll take it.']},
   {call:()=>sfx.whine&&sfx.whine()},
   {talk:'Nara',lines:['Nara is at the front window, whining. Her tail is down.']},
   {talk:'TNB',lines:['Babe. Look outside. Is the street... purple?']},
-  {toast:'Goal: go out to 2nd Ave and see what is going on.',time:4}
+  {toast:'Goal: go out to 2nd Ave and see what\'s going on.',time:4}
 ];
 // 5. 2nd Ave: the smog rolls in. Mr. Washington stops mid-story. Two Smoglets drift onto the street. First fight.
 SCENES.ch2Smog=[
@@ -292,50 +289,49 @@ SCENES.ch2Smog=[
   {talk:'Mr. Washington',lines:['Tom. Back in 1979, this whole block...']},
   {wait:1.2},
   {talk:'Mr. Washington',lines:['...']},
-  {talk:'TNB',lines:['He has been on "this whole block" for a while, babe.']},
+  {talk:'TNB',lines:['He\'s been on "this whole block" for a while, babe.']},
   {talk:'Mr. Washington',lines:['Such a nice afternoon. It should always be this afternoon.']},
   {talk:'Tom',lines:['Excuse me, smog. That was UNCALLED for.'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
   {spawn:{name:'Smoglet',monster:'smoglet',at:[12,19],dir:'left'}},
   {spawn:{name:'Smoglet B',monster:'smoglet',at:[13,20],dir:'left'}},
   {all:[{walk:'Smoglet',to:[[11,19],[10,19],[9,19],[8,19]],speed:.4},{walk:'Smoglet B',to:[[12,20],[11,20],[10,20],[9,20],[8,20]],speed:.36}]},
-  {talk:'Smoglet',lines:['Cough. Nice street. We are going to sit on it for a while. Forever, actually.']},
+  {talk:'Smoglet',lines:['Cough. Nice street. We\'re going to sit on it for a while. Forever, actually.']},
   {talk:'TNB',lines:['Babe. Remember movie night? You threw the whole popcorn bowl.']},
   {talk:'Tom',lines:['I was startled. Briefly. With dignity.']},
-  {talk:'TNB',lines:['It was a battle plan. You just did not know it yet.']},
+  {talk:'TNB',lines:['It was a battle plan. You just didn\'t know it yet.']},
   {flag:'tombo:tnb1'},
   {toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6},
-  {wait:1.2},
   {battle:()=>findMonster('smoglet'),tut:'ch2lawn'},
   {despawn:'Smoglet'}, {despawn:'Smoglet B'},
   {if:()=>flag('battle:smoglet')!=='win',then:[{heal:true},{talk:'TNB',lines:['Okay. Okay. Everybody breathe. Through the nose. Not the smog.']}],else:[]},
   {flag:'ch2-lawn'},
-  {talk:'TNB',lines:['They are gone, but he is still out of it. Look at him.']},
+  {talk:'TNB',lines:['They\'re gone, but he\'s still out of it. Look at him.']},
   {talk:'Mr. Washington',lines:['Nobody needs to go anywhere. Nobody needs to get any older.']},
-  {talk:'Tom',lines:['That is not a Mr. Washington sentence. Let us check on the boulevard. Miss Odette and Doña Carmen.']},
+  {talk:'Tom',lines:['That\'s not a Mr. Washington sentence. Let\'s check on the boulevard. Miss Odette and Doña Carmen.']},
   {toast:'Goal: check on Miss Odette (CREOLE) and Doña Carmen (PUPUSAS) on Jefferson Boulevard.',time:5}
 ];
 // 6. The boulevard: both kitchens are stuck in the same afternoon.
 SCENES.ch2Odette=[
   {flag:'ch2-odette'},
   {talk:'Miss Odette',lines:['Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?']},
-  {talk:'TNB',lines:['She has made that gumbo every day for fifty years. It has never once been "never done."']},
-  {talk:'Tom',lines:['The smog wants everything to stay exactly the same. Forever. That is not a nice afternoon. That is a hostage situation.']},
+  {talk:'TNB',lines:['She\'s made that gumbo every day for fifty years. It\'s never once been "never done."']},
+  {talk:'Tom',lines:['The smog wants everything to stay exactly the same. Forever. That\'s not a nice afternoon. That\'s a hostage situation.']},
   {if:()=>!flag('ch2-carmen'),then:[{toast:'Goal: Doña Carmen next door (PUPUSAS).',time:3.5}],else:[]}
 ];
 SCENES.ch2Carmen=[
   {flag:'ch2-carmen'},
-  {talk:'Doña Carmen',lines:['The pupusas are fine. Everything is fine. It is always this afternoon. Why would I ever flip them?']},
+  {talk:'Doña Carmen',lines:['The pupusas are fine. Everything is fine. It\'s always this afternoon. Why\'d I ever flip them?']},
   {call:()=>sfx.sizzle?sfx.sizzle():sfx.whoosh()},
   {talk:'Nara',lines:['Nara sniffs the comal. She sneezes. The smoke smells like the hills.']},
-  {talk:'TNB',lines:['Nara is right. That is not kitchen smoke. That is the same purple stuff.']},
+  {talk:'TNB',lines:['Nara is right. That\'s not kitchen smoke. That\'s the same purple stuff.']},
   {if:()=>!flag('ch2-odette'),then:[{toast:'Goal: Miss Odette next door (CREOLE).',time:3.5}],else:[]}
 ];
 // 7. Back outside: the smog is coming down from Griffith Park.
 SCENES.ch2Source=[
   {flag:'ch2-source'},
-  {talk:'TNB',lines:['Babe. Look north. It is all coming down off the hills.','The Observatory. The pipes on the side are pumping it out like a smoke machine on a bad set.']},
-  {talk:'Tom',lines:['Then that is where we are going. Nara, stay close.']},
-  {talk:'Nara',lines:['Nara presses against Tom’s leg. She is not letting him go anywhere without her.']},
+  {talk:'TNB',lines:['Babe. Look north. It\'s all coming down off the hills.','The Observatory. The pipes on the side are pumping it out like a smoke machine on a bad set.']},
+  {talk:'Tom',lines:['Then that\'s where we\'re going. Nara, stay close.']},
+  {talk:'Nara',lines:['Nara presses against Tom’s leg. She\'s not letting him go anywhere without her.']},
   {toast:'Goal: Griffith Park, north through Downtown. The trail is open now.',time:5}
 ];
 // 8. Griffith Park: two story fights on the trail, then the Observatory.
@@ -347,7 +343,7 @@ SCENES.ch2Flurry=[
   {flag:'ch2-t1'},
   {place:'Ticket Flurry',at:()=>[player.x+3,player.y-2]},
   {walk:'Ticket Flurry',to:()=>[[player.x+2,player.y-1],[player.x+1,player.y-1],[player.x+1,player.y]],speed:.25},
-  {talk:'Ticket Flurry',lines:['Street cleaning. Tuesday. Eight to ten. You did not read the sign. And the smog says we can stay forever.']},
+  {talk:'Ticket Flurry',lines:['Street cleaning. Tuesday. Eight to ten. You didn\'t read the sign. And the smog says we can stay forever.']},
   {talk:'TNB',lines:['I take the Metro. You have nothing on me.']},
   {battle:'tickets',tut:'ch2flurry'},
   ...CH2_AFTER(()=>flag('battle:tickets')!=='win',[{talk:'Tom',lines:['Contested. Appeal granted. Keep going.']}])
@@ -373,13 +369,13 @@ SCENES.ch2Boss=[
   {flag:'ch2-boss'}, {call:()=>storyWorld()},
   {hide:'The Big Shake'},
   {call:()=>{ sfx.thud(); }},
-  {talk:'TNB',lines:['The ground is humming. That is never a good sign. I have seen this movie forty-seven times.']},
+  {talk:'TNB',lines:['The ground is humming. That\'s never a good sign. I\'ve seen this movie forty-seven times.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Big Shake'}, {face:'The Big Shake',dir:'right'},
   {talk:'The Big Shake',lines:['RUMBLE. Somebody plugged my pipes. Now everything is stuck. I LIKE stuck.','Stuck means nothing moves. Nothing changes. Nothing ever has to say goodbye.']},
   {talk:'Tom',lines:['Some of us have a six AM flight out of LAX. Things have to move.']},
   {talk:'Nara',lines:['Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw.']},
-  {talk:'TNB',lines:['Well, well, well... looks like we are in a bit of a shaky situation.']},
+  {talk:'TNB',lines:['Well, well, well... looks like we\'re in a bit of a shaky situation.']},
   {battle:'bigshake',tut:'bigshake'},
   {if:()=>flag('battle:bigshake')!=='win',then:[
     {heal:true},
@@ -391,11 +387,11 @@ SCENES.ch2AfterBoss=[
   {flag:'ch2-clear'},
   {call:()=>{ sfx.whoosh(); sfx.levelChime&&sfx.levelChime(); }},
   {if:()=>!!flag('kind:bigshake'),
-    then:[{talk:'The Big Shake',lines:['Rumble. You asked how I was doing. Nobody has asked in a million years.','...I will let things move. A little. Two inches a year. That is my best offer.']}],
-    else:[{talk:'The Big Shake',lines:['Rumble. Fine. The pipes are clear. I am going back under the hill to think about my choices.']}]},
+    then:[{talk:'The Big Shake',lines:['Rumble. You asked how I was doing. Nobody has asked in a million years.','...I\'ll let things move. A little. Two inches a year. That\'s my best offer.']}],
+    else:[{talk:'The Big Shake',lines:['Rumble. Fine. The pipes are clear. I\'m going back under the hill to think about my choices.']}]},
   {talk:'TNB',lines:['Look. The sky is blue again. LA blue. Slightly brown, but blue.']},
-  {talk:'Tom',lines:['Somebody plugged those pipes on purpose. Smog does not do that by itself.']},
-  {talk:'TNB',lines:['Spooky. I love it. I hate it. Let us go check on Mr. Washington.']},
+  {talk:'Tom',lines:['Somebody plugged those pipes on purpose. Smog doesn\'t do that by itself.']},
+  {talk:'TNB',lines:['Spooky. I love it. I hate it. Let\'s go check on Mr. Washington.']},
   {toast:'Goal: back to 2nd Ave in Jefferson Park.',time:4.5}
 ];
 // 11. 2nd Ave: Mr. Washington finishes his sentence. Chapter complete.
@@ -405,7 +401,7 @@ SCENES.ch2End=[
   {walk:'tom',to:routeTo('tom',5,19),speed:.22}, {face:'tom',dir:'right'},
   {place:'tnb',at:[4,19],dir:'right'}, {place:'nara',at:[5,20],dir:'up'},
   {talk:'Mr. Washington',lines:['...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.','Where was I? Oh. I was done. That was the whole story.']},
-  {talk:'Mr. Washington',lines:['Funny. For a while there I did not want anything to change. Then I remembered the best parts all came from things changing.']},
+  {talk:'Mr. Washington',lines:['Funny. For a while there I didn\'t want anything to change. Then I remembered the best parts all came from things changing.']},
   {talk:'Tom',lines:['Keep the old windows, though.']},
   {talk:'Mr. Washington',lines:['Keep the old windows. Smart man.']},
   {trace:'washington'},
@@ -416,7 +412,7 @@ SCENES.ch2End=[
   {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {fade:'out',time:.8}, {card:2,done:true,time:3.4}, {flag:'ch2-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 2 complete! When you are ready, Sol at Angel City Cab Co. (downtown) flies you home for chapter 3.',time:6}
+  {toast:'Chapter 2 complete! When you\'re ready, Sol at Angel City Cab Co. (downtown) flies you home for chapter 3.',time:6}
 ];
 
 // When each scene starts (engine/story.js storyTriggers). Every scene sets the flag that stops its own trigger.
@@ -532,9 +528,9 @@ const STORY_MAPFX=[
 const TUTORIALS={
   basics:{tips:[
     {id:'tom',who:'tom',dir:'up',text:'Tom’s turn. Tap ▲ Skills (or press A). His free basic move, Button Mash, is first; basic moves also earn 1 VP.'},
-    {id:'grace',who:'grace',dir:'up',text:'See the pink bar under each Mudling? That is Warmth. Kind moves fill it, and a full bar sends a monster home happy. ▲ Skills, then Cartwheel, for now.'},
+    {id:'grace',who:'grace',dir:'up',text:'See the pink bar under each Mudling? That\'s Warmth. Kind moves fill it, and a full bar sends a monster home happy. ▲ Skills, then Cartwheel, for now.'},
     {id:'rose',who:'rose',dir:'right',text:'Rose’s RASPBERRY is the ▶ button. A Goofed monster loses its next turn, and Mudlings love a raspberry (lots of Warmth).'},
-    {id:'deedee',who:'deedee',text:'B, or tapping the portrait in the middle, Inspects a monster: why it is grumpy, what it likes, and what it is weak to.'},
+    {id:'deedee',who:'deedee',text:'B, or tapping the portrait in the middle, Inspects a monster: why it\'s grumpy, what it likes, and what it\'s weak to.'},
     {id:'vp',who:'tom',text:'VP is the blue pips on each card: +2 every turn, +1 for a basic move. Skills learned with Stamp Points cost VP.'}]},
   dance:{tips:[
     {id:'dance',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.85),text:'Everybody is itchy. Grace’s DANCE (▶) heals the whole party.'},
@@ -560,7 +556,7 @@ const TUTORIALS={
   ch2lawn:{
     setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
     tips:[
-      {id:'wardrobe',who:'tnb',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.8),text:'TNB’s WARDROBE (▶) heals one person a lot, dresses them in the next costume on his rack, and gets them back up if they are knocked out.'},
+      {id:'wardrobe',who:'tnb',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.8),text:'TNB’s WARDROBE (▶) heals one person a lot, dresses them in the next costume on his rack, and gets them back up if they\'re knocked out.'},
       {id:'puppy',who:'nara',dir:'right',text:'Nara’s HUMAN EYES (▶): the monster is Smitten and skips its next turn. Its Warmth bar fills too.'},
       {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Tom and TNB rain popcorn on every enemy at once, and the whole party glows.'},
       {id:'fetch',who:['tom','nara'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='nara1'&&!r.why),text:'◀ TOMBO: Sit. Paw. Treat. Always a critical hit, and Nara marks the monster with her scent.'}]},
@@ -613,7 +609,7 @@ const routeBeside=a=>()=>{
 SCENES.ch3Arrive=[
   {flag:'ch3-goal'},
   {talk:'Grace',lines:['Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.']},
-  {talk:'Rose',lines:['He said if you were late he would catch the fish without you. He has never caught a fish.']},
+  {talk:'Rose',lines:['He said if you were late he\'d catch the fish without you. He\'s never caught a fish.']},
   {talk:'Tom',lines:['Then we had better go help him not catch one.']},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5}
 ];
@@ -624,19 +620,18 @@ SCENES.ch3Fishing=[
   {walk:'tom',to:routeTo('tom',6,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
   {hearts:'Deedee'},
-  {talk:'Deedee',lines:["There's my Tommy!",'Back already! Look at you. Did they feed you out there? Never mind. I will feed you.'],voice:[['deedee','greet',0,"There's my Tommy!"]]},
-  {talk:'Boppy',lines:['Tom. Good. Sit down. No. Do not sit down. We are going fishing.','The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.']},
+  {talk:'Deedee',lines:["There's my Tommy!",'Back already! Look at you. Did they feed you out there? Never mind. I\'ll feed you.'],voice:[['deedee','greet',0,"There's my Tommy!"]]},
+  {talk:'Boppy',lines:['Tom. Good. Sit down. No. Don\'t sit down. We\'re going fishing.','The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.']},
   {talk:'Deedee',lines:['Nobody believes him.']},
   {talk:'Rose',lines:['Boppy, is the Whisker Perch real?']},
   {talk:'Boppy',lines:['Real as my heartburn, kiddo.']},
-  {talk:'Grace',lines:['I am bringing a notebook. For science. And for proof.']},
-  {talk:'Boppy',lines:['And I am bringing THIS. My pepper jar. Homegrown, pickled in 1989. Older than your mother.']},
-  {talk:'Deedee',lines:['I have three pies in, so I am staying put. Do NOT let him eat peppers on an empty stomach.']},
-  {talk:'Boppy',lines:['I never eat peppers on an empty stomach. I eat them on a full stomach. Then it is empty.']},
+  {talk:'Grace',lines:['I\'m bringing a notebook. For science. And for proof.']},
+  {talk:'Boppy',lines:['And I\'m bringing THIS. My pepper jar. Homegrown, pickled in 1989. Older than your mother.']},
+  {talk:'Deedee',lines:['I have three pies in, so I\'m staying put. Do NOT let him eat peppers on an empty stomach.']},
+  {talk:'Boppy',lines:['I never eat peppers on an empty stomach. I eat them on a full stomach. Then it\'s empty.']},
   {join:'boppy'},
   {wait:2.8},
   {toast:'Goal: Cattail Pier, through the gap at the bottom of Rivituso Row.',time:4.5},
-  {wait:4.6},
   {toast:'Tip: Kettle Cottage in the Square makes a stomach tea Boppy swears by. If you want to stop on the way.',time:4.5}
 ];
 // 3. Optional: Kettle Cottage. Stomach tea, and the kettle's gossip about a man in a long coat.
@@ -648,7 +643,7 @@ SCENES.ch3Tea=[
   {talk:'The kettle',lines:['The kettle whistles, low and long. Oolong leans in to listen.']},
   {talk:'Oolong',lines:['The kettle says a man in a long coat has been buying up gold coins at Penny’s. Paying double. Never takes his hat off.']},
   {talk:'Tom',lines:['On Long Island? Nobody here pays double for anything.']},
-  {talk:'Oolong',lines:['The kettle also says it will rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.']},
+  {talk:'Oolong',lines:['The kettle also says it\'ll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.']},
   {toast:'Everyone is healed. Goal: Cattail Pier, south of Rivituso Row.',time:4}
 ];
 // 4. On the way down the Row: the 1970 story, and everybody walks too fast.
@@ -659,11 +654,11 @@ SCENES.ch3Story=[
   {talk:'Boppy',lines:['Then forty-one. First year of college. Cross country. Five miles through the woods, up the big hill, and I never breathed hard.',
     'Last hill, I passed the whole field. Champion. They put my name on a plaque. The plaque is in a box. Somewhere.']},
   {talk:'Rose',lines:['Can you still run that fast?']},
-  {talk:'Boppy',lines:['...Sure. Sure I can. I just choose not to. It is bad for the stomach.']},
+  {talk:'Boppy',lines:['...Sure. Sure I can. I just choose not to. It\'s bad for the stomach.']},
   {trace:'boppy-1970'}, {hearts:'boppy'},
   {talk:'Rose',lines:['Race you to the pier, Boppy!']},
-  {talk:'Grace',lines:['Last one there is a soggy sock!']},
-  {talk:'Boppy',lines:['Why is everybody walking like they are going to a fire? Slow down! My stomach is doing flips!']},
+  {talk:'Grace',lines:['Last one there\'s a soggy sock!']},
+  {talk:'Boppy',lines:['Why\'s everybody walking like they\'re going to a fire? Slow down! My stomach is doing flips!']},
   {talk:'Tom',lines:['Boppy speed, everybody. We walk at Boppy speed.']},
   {toast:'Goal: Cattail Pier. Through the gap at the bottom of the Row.',time:4}
 ];
@@ -676,16 +671,16 @@ SCENES.ch3Pier=[
   {talk:'Rose',lines:['I AM BEING QUIET.']},
   {talk:'Grace',lines:['Rose. Inside voice. Outside.']},
   {talk:'Tom',lines:['Shhh. Quiet on the pier, everybody. Boppy has a whole system.']},
-  {talk:'Boppy',lines:['Tom holds the tackle box. I cast. The fish comes. Nobody talks. That is the system.']},
+  {talk:'Boppy',lines:['Tom holds the tackle box. I cast. The fish comes. Nobody talks. That\'s the system.']},
   {flag:'tombo:boppy1'},
   {toast:'New Tombo: You Hold the Net (Tom + Boppy). In battle, ◀ TOMBO.',time:3.6},
   {call:()=>sfx.whoosh()}, {wait:1.4},
   {talk:'Boppy',lines:['...Any minute now.']},
   {wait:1.2},
-  {talk:'Grace',lines:['It has been a minute. I wrote it down.']},
+  {talk:'Grace',lines:['It\'s been a minute. I wrote it down.']},
   {talk:'Boppy',lines:['Snack. A pickled pepper settles the stomach.']},
   {talk:'Rose',lines:['Deedee said NO peppers.']},
-  {talk:'Boppy',lines:['Deedee is not here.']},
+  {talk:'Boppy',lines:['Deedee isn\'t here.']},
   {call:()=>{ const b=sceneActor('boppy'); if(b) b.carry='jar'; sfx.pickup(); }},
   {wait:.6},
   {call:()=>{ sfx.splat(); sfx.thud(); }},
@@ -694,7 +689,7 @@ SCENES.ch3Pier=[
   {face:'rose',dir:'right'}, {face:'boppy',dir:'right'}, {face:'tom',dir:'right'},
   {talk:'Old Iron-Gill',lines:['BLORP.']},
   {talk:'Rose',lines:['TATA! A FISH! A HUGE ONE! WITH A MUSTACHE!']},
-  {talk:'Boppy',lines:['That is no perch. That is OLD IRON-GILL. I saw him in 1994! I TOLD everybody!']},
+  {talk:'Boppy',lines:['That\'s no perch. That\'s OLD IRON-GILL. I saw him in 1994! I TOLD everybody!']},
   {talk:'Old Iron-Gill',lines:['Blorp. Something smells like peppers.']},
   {call:()=>{ const b=sceneActor('boppy'),g=sceneActor('Old Iron-Gill'); if(b) b.carry=null; if(g) g.carry='jar'; sfx.pickup(); sfx.splat(); }},
   {talk:'Boppy',lines:['MY JAR!']},
@@ -716,7 +711,7 @@ SCENES.ch3Sock=[
   {place:'Soggy Sock',at:spotNear(3)},
   {call:()=>sfx.splat()},
   {walk:'Soggy Sock',to:routeBeside('Soggy Sock'),speed:.35,onStep:()=>sfx.splat()},
-  {talk:'Soggy Sock',lines:['Squelch. Have you seen my other sock? It looks just like me. It is ALSO angry.']},
+  {talk:'Soggy Sock',lines:['Squelch. Have you seen my other sock? It looks just like me. It\'s ALSO angry.']},
   {talk:'Rose',lines:['Tata, that sock has a FACE.']},
   {talk:'Boppy',lines:['Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.']},
   {battle:'soggysock',tut:'ch3sock'},
@@ -728,14 +723,14 @@ SCENES.ch3Tangle=[
   {place:'Tangle',at:spotNear(3)},
   {call:()=>sfx.whoosh()},
   {walk:'Tangle',to:routeBeside('Tangle'),speed:.35},
-  {talk:'Tangle',lines:['Snarl. Somebody cast me badly in 1997. I have been in a knot ever since. Nobody gets past ME.']},
-  {talk:'Boppy',lines:['Excuse me? Nobody gets past ME. That is MY line. I was saying that at Rikers before you were a knot.']},
+  {talk:'Tangle',lines:['Snarl. Somebody cast me badly in 1997. I\'ve been in a knot ever since. Nobody gets past ME.']},
+  {talk:'Boppy',lines:['Excuse me? Nobody gets past ME. That\'s MY line. I was saying that at Rikers before you were a knot.']},
   {battle:'tangle',tut:'ch3tangle'},
   ...CH3_AFTER(()=>flag('battle:tangle')!=='win',[]),
   {flag:'ch3-tuts'},
   {heal:true},
-  {talk:'Grace',lines:['Boppy, you are breathing kind of hard.']},
-  {talk:'Boppy',lines:['I am breathing EXACTLY as hard as I want to.']},
+  {talk:'Grace',lines:['Boppy, you\'re breathing kind of hard.']},
+  {talk:'Boppy',lines:['I\'m breathing EXACTLY as hard as I want to.']},
   {talk:'Tom',lines:['We take it slow. Iron-Gill’s wake goes northwest, toward those big reeds.']},
   {toast:'Goal: follow Iron-Gill’s wake to the far corner of the marsh (top left). The marsh’s monsters are awake now.',time:5}
 ];
@@ -743,10 +738,10 @@ SCENES.ch3Tangle=[
 SCENES.ch3Wait=[
   {flag:'ch3-wait'},
   {talk:'Boppy',lines:['The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.']},
-  {talk:'Grace',lines:['Sundials cannot tell the wrong time. That is not how sundials work.']},
-  {talk:'Boppy',lines:['That is what I said.']},
+  {talk:'Grace',lines:['Sundials can\'t tell the wrong time. That\'s not how sundials work.']},
+  {talk:'Boppy',lines:['That\'s what I said.']},
   {talk:'Old reeds',lines:['Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it.']},
-  {talk:'Tom',lines:['Then we ask it nicely to move. Iron-Gill is not keeping that jar.']}
+  {talk:'Tom',lines:['Then we ask it nicely to move. Iron-Gill isn\'t keeping that jar.']}
 ];
 // 8. The Snag sits on the old boardwalk. Once it drifts off, the reeds open onto Sundial Hollow.
 SCENES.ch3Snag=[
@@ -754,16 +749,16 @@ SCENES.ch3Snag=[
   {place:'Snag',at:spotNear(2)},
   {call:()=>{ sfx.splat(); sfx.thud(); }},
   {walk:'Snag',to:routeBeside('Snag'),speed:.45,onStep:()=>sfx.splat()},
-  {talk:'Snag',lines:['Creak. This was a boardwalk once. Now it is MY spot. Everything catches on me here. I like it.']},
-  {talk:'Boppy',lines:['You are sitting on the way to Sundial Hollow. Shove over.']},
-  {talk:'Snag',lines:['Make me. Slowly. I am very heavy when wet. I am always wet.']},
-  {talk:'Rose',lines:['Tata, it is a LOG with a BOOT.']},
+  {talk:'Snag',lines:['Creak. This was a boardwalk once. Now it\'s MY spot. Everything catches on me here. I like it.']},
+  {talk:'Boppy',lines:['You\'re sitting on the way to Sundial Hollow. Shove over.']},
+  {talk:'Snag',lines:['Make me. Slowly. I\'m very heavy when wet. I\'m always wet.']},
+  {talk:'Rose',lines:['Tata, it\'s a LOG with a BOOT.']},
   {battle:'snag',tut:'ch3snag'},
   ...CH3_AFTER(()=>flag('battle:snag')!=='win',[]),
   {flag:'ch3-snag'},
   {call:()=>{ ch3OpenReeds(); storyWorld(); sfx.whoosh(); sfx.splat(); }},
   {talk:'Old reeds',lines:['The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk.']},
-  {talk:'Grace',lines:['A secret boardwalk. Of course there is a secret boardwalk.']},
+  {talk:'Grace',lines:['A secret boardwalk. Of course there\'s a secret boardwalk.']},
   {talk:'Boppy',lines:['Not secret. Just old. Like me. Nobody comes back here anymore.']},
   {toast:'Goal: through the old reeds (top left) into Sundial Hollow.',time:4.5}
 ];
@@ -772,9 +767,9 @@ SCENES.ch3Hollow=()=>[
   {flag:'ch3-hollow'},
   {walk:'tom',to:routeTo('tom',10,16),speed:.25}, {face:'tom',dir:'up'},
   {place:'boppy',at:[12,16],dir:'up'}, {place:'grace',at:[9,16],dir:'up'}, {place:'rose',at:[11,17],dir:'up'},
-  {talk:'Boppy',lines:['Sundial Hollow. I have not been back here since I was nine. It has not changed. It still says seven.']},
-  {talk:'Grace',lines:['It is the AFTERNOON. The sun is right there. Sundials cannot be wrong. That is not how sundials work.']},
-  {talk:'Boppy',lines:['That is what I said.']},
+  {talk:'Boppy',lines:['Sundial Hollow. I haven\'t been back here since I was nine. It hasn\'t changed. It still says seven.']},
+  {talk:'Grace',lines:['It\'s the AFTERNOON. The sun is right there. Sundials can\'t be wrong. That\'s not how sundials work.']},
+  {talk:'Boppy',lines:['That\'s what I said.']},
   {talk:'Rose',lines:['Tata! Something shiny is stuck in it!']},
   {walk:'tom',to:[[10,15]],speed:.25}, {face:'tom',dir:'up'},
   {talk:'Tom',lines:['A coin. Wedged right under the pointer. Somebody pushed this in on purpose.']},
@@ -784,12 +779,12 @@ SCENES.ch3Hollow=()=>[
   {talk:'The sundial',lines:['Click. The shadow swings all the way around the dial and settles on the right hour.']},
   {call:()=>{ ch3DrainSpillway(); sfx.splat(); sfx.thud(); }},
   {talk:'The spillway',lines:['Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open.']},
-  {talk:'Grace',lines:['It MOVED. Shadows do not move like that. I am writing this down. In pen.']},
+  {talk:'Grace',lines:['It MOVED. Shadows don\'t move like that. I\'m writing this down. In pen.']},
   ...(flag('ch3-tea')?[
     {talk:'Tom',lines:['Oolong’s kettle said a man in a long coat is buying gold coins at Penny’s. Paying double.']},
     {talk:'Boppy',lines:['Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket.']}]:[
     {talk:'Boppy',lines:['Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything.']}]),
-  {talk:'Boppy',lines:['Now. The Deep Pool. That is where Iron-Gill goes to sulk.']},
+  {talk:'Boppy',lines:['Now. The Deep Pool. That\'s where Iron-Gill goes to sulk.']},
   {toast:'Goal: the Deep Pool, across the drained spillway at the top of Sundial Hollow.',time:4.5}
 ];
 // 10. The Deep Pool: Old Iron-Gill surfaces. Boss fight.
@@ -804,8 +799,8 @@ SCENES.ch3Pool=[
   {talk:'Old Iron-Gill',lines:['Blorp. The old man. And his small, loud friends.']},
   {talk:'Boppy',lines:['You took my jar.']},
   {talk:'Old Iron-Gill',lines:['I took your jar. Forty years you sit on that pier and you never once come to visit. You only ever bring HOOKS.']},
-  {talk:'Rose',lines:['Boppy, he is sad! And spicy!']},
-  {talk:'Boppy',lines:['He is a FISH, kiddo.','Tom. Tackle box. We do this the old way.']},
+  {talk:'Rose',lines:['Boppy, he\'s sad! And spicy!']},
+  {talk:'Boppy',lines:['He\'s a FISH, kiddo.','Tom. Tackle box. We do this the old way.']},
   {talk:'Tom',lines:['Quiet on the pier, everybody.']},
   {battle:'irongill',tut:'irongill'},
   {if:()=>flag('battle:irongill')!=='win',then:[
@@ -822,9 +817,9 @@ SCENES.ch3AfterBoss=()=>[
     {talk:'Old Iron-Gill',lines:['Blorp. Fine. FINE. Take your jar. It was too spicy anyway.']}]),
   ...(bag.includes('pepperjar')?[]:[{give:'pepperjar'}]),
   {talk:'Boppy',lines:['My jar. Still sealed. Still hot.','And look at that. Forty years, and I finally caught Old Iron-Gill.']},
-  {talk:'Grace',lines:['Technically he caught your jar, and then we caught him. I am writing it down anyway. For proof.']},
+  {talk:'Grace',lines:['Technically he caught your jar, and then we caught him. I\'m writing it down anyway. For proof.']},
   {talk:'Boppy',lines:['Put the date. Put the time. Use the sundial. It works now.']},
-  {talk:'Boppy',lines:['Go on, you old bucket. Catch and release. I will come by. No hooks.']},
+  {talk:'Boppy',lines:['Go on, you old bucket. Catch and release. I\'ll come by. No hooks.']},
   {call:()=>{ setFlag('ch3-release'); storyWorld(); sfx.splat(); }},
   {talk:'Deep Pool',lines:['Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.']},
   {trace:'boppy-irongill'}, {hearts:'boppy'},
@@ -843,10 +838,10 @@ SCENES.ch3End=[
   {talk:'Deedee',lines:['There they are! Well? Did anybody catch anything?']},
   {talk:'Boppy',lines:['Old Iron-Gill. Forty years, Dee. I TOLD everybody.']},
   {talk:'Deedee',lines:['Nobody believed you.']},
-  {talk:'Grace',lines:['I have proof. It is in my notebook. With the time. From a sundial.']},
+  {talk:'Grace',lines:['I have proof. It\'s in my notebook. With the time. From a sundial.']},
   {talk:'Rose',lines:['Deedee! Boppy almost ate a PEPPER! On the pier! Before LUNCH!']},
   {talk:'Deedee',lines:['Did he.']},
-  {talk:'Boppy',lines:['...Almost is not eating. Almost is fine.']},
+  {talk:'Boppy',lines:['...Almost isn\'t eating. Almost is fine.']},
   {talk:'Deedee',lines:['Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.']},
   {talk:'Boppy',lines:['Slowly. Finally. Somebody in this family gets it.']},
   {trace:'ch3-crisp'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
@@ -854,7 +849,7 @@ SCENES.ch3End=[
   {talk:'Deedee',lines:['I love you all to the moon and back. Now eat.']},
   {fade:'out',time:.8}, {card:3,done:true,time:3.4}, {flag:'ch3-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 3 complete! When you are ready, Sal at Long Island Taxi Co. (the Square) flies you to Los Angeles for chapter 4.',time:6}
+  {toast:'Chapter 3 complete! When you\'re ready, Sal at Long Island Taxi Co. (the Square) flies you to Los Angeles for chapter 4.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch3-goal',map:'town',when:{...CH3,notFlag:'ch3-goal'},scene:'ch3Arrive'},
@@ -962,8 +957,8 @@ TUTORIALS.ch3snag={tips:[
 TUTORIALS.irongill={tips:[
   {id:'inspect',who:'*',text:'Old Iron-Gill is weak to Kinetic and Sparkle. His favorite kind moves: Boppy’s GRUMBLE and his 1970 story.'},
   {id:'belch',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'&&!f.shield),text:'PEPPER BELCH next turn hits everyone (see the turn ribbon). Heal right after it: Grace’s DANCE (▶) or a snack from the ▼ Bag.'},
-  {id:'dive',who:['tom','boppy'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>r.T.id==='boppy1'&&!r.why),text:'He is diving! ◀ TOMBO: You Hold the Net breaks his guard in one go.'},
-  {id:'dive2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'He is diving for a DEEP DIVE. Break his guard first: 2 Splash or Kinetic hits, or any Tombo.'}]};
+  {id:'dive',who:['tom','boppy'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>r.T.id==='boppy1'&&!r.why),text:'He\'s diving! ◀ TOMBO: You Hold the Net breaks his guard in one go.'},
+  {id:'dive2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'He\'s diving for a DEEP DIVE. Break his guard first: 2 Splash or Kinetic hits, or any Tombo.'}]};
 // Tips for the two marsh fights.
 TUTORIALS.ch3sock={
   setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
@@ -975,7 +970,7 @@ TUTORIALS.ch3tangle={
   // Boppy already has a little heartburn from that pickled pepper he almost ate.
   setup() { const b=B2.party.find(p=>p.id==='boppy'); if(b) { b.burn=Math.max(b.burn||0,2); } b2Render(); },
   tips:[
-    {id:'burn',who:'boppy',dir:'right',when:u=>(u.burn||0)<3,text:'See the ●●○ on Boppy’s card? That is his Heartburn. GRUMBLE, then every hit he takes while guarding adds a pip. At 3, watch out.'},
+    {id:'burn',who:'boppy',dir:'right',when:u=>(u.burn||0)<3,text:'See the ●●○ on Boppy’s card? That\'s his Heartburn. GRUMBLE, then every hit he takes while guarding adds a pip. At 3, watch out.'},
     {id:'roar',who:'boppy',dir:'up',when:u=>(u.burn||0)>=3,text:'HEARTBURN! Boppy’s next attack lets out the Warden’s Counter-Roar: whoever hit him last loses its turn. ▲ Skills, Cap Swat.'},
     {id:'slow',who:'*',when:()=>b2LiveParty().some(p=>p.st&&p.st.slow),text:'Slowed: that one acts later on the turn ribbon for a while. Grace’s DANCE heals everybody in the meantime.'}]};
 
@@ -996,7 +991,7 @@ const CH4_AFTER=(lost,lines)=>[
   {if:()=>flag('ch4-main')&&flag('ch4-west')&&flag('ch4-ny')&&!flag('ch4-sets'),then:[
     {flag:'ch4-sets'}, {call:()=>{ sfx.thud(); sfx.levelChime(); }},
     {talk:'Kiki',lines:['(on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad.']},
-    {talk:'TNB',lines:['All three sets are clear. And Stage 7 just opened. That is where the fog came from.']},
+    {talk:'TNB',lines:['All three sets are clear. And Stage 7 just opened. That\'s where the fog came from.']},
     {toast:'Goal: Soundstage 7, the big door at the top of the Backlot.',time:4.5}],else:[]}
 ];
 
@@ -1009,13 +1004,13 @@ SCENES.ch4Arrive=[
   {walk:'tnb',to:routeBeside('tnb'),speed:.2},
   {face:'tom',dir:'left'},
   ch4Kiss(),
-  {talk:'TNB',lines:['Look who flew in for my big day. I am on a forty-minute lunch. I spent thirty of it on the Metro.']},
+  {talk:'TNB',lines:['Look who flew in for my big day. I\'m on a forty-minute lunch. I spent thirty of it on the Metro.']},
   {talk:'Tom',lines:['You took the train to meet the plane.']},
   {talk:'TNB',lines:['I took the train to meet the man. The plane was a bonus.']},
   {trace:'tnb-hello4'}, {hearts:'tom'},
   {talk:'TNB',lines:['Big shoot today. BACKLOT BEDLAM. Car chases, a saloon, a fake New York. I have forty costumes on one rack, and every single one is steamed.',
-    'Also, Olivia dropped Nara at your place again. Family trip to the desert. She has been howling at your front door since nine.']},
-  {talk:'Tom',lines:['Then we get Nara. Then I watch you be very important. I am not joking.']},
+    'Also, Olivia dropped Nara at your place again. Family trip to the desert. She\'s been howling at your front door since nine.']},
+  {talk:'Tom',lines:['Then we get Nara. Then I watch you be very important. I\'m not joking.']},
   {talk:'TNB',lines:['Very, very important. I have a lanyard.']},
   {party:{lock:['tom','tnb']}},
   {toast:'Goal: pick up Nara at Tom’s house (3468) in Jefferson Park, south of Downtown.',time:4.5}
@@ -1030,39 +1025,38 @@ SCENES.ch4Nara=[
   {talk:'Nara',lines:['She does three laps around Tom, slams into his shins, and leans on him with all forty pounds.']},
   {talk:'Tom',lines:['Hi. Hi. Yes. I know. I was gone FOREVER. It was six days.']},
   {join:'nara'},
-  {talk:'TNB',lines:['She is coming to set. I already asked. Nobody said yes, but nobody said no fast enough.']},
+  {talk:'TNB',lines:['She\'s coming to set. I already asked. Nobody said yes, but nobody said no fast enough.']},
   {toast:'Goal: Sunset Gold Studios, the gate at the east end of Downtown.',time:4.5}
 ];
 // 3. Studio Gate: the rack is gone and the shoot is about to collapse.
 SCENES.ch4Gate=[
   {flag:'ch4-gate'},
   {talk:'Ray',lines:['Sunset Gold Studios. Closed set. Name?']},
-  {talk:'TNB',lines:['Ray, it is me. Wardrobe. I left eighty minutes ago. You waved.']},
-  {talk:'Ray',lines:['I wave at everybody. That is the job. Go on in.']},
+  {talk:'TNB',lines:['Ray, it\'s me. Wardrobe. I left eighty minutes ago. You waved.']},
+  {talk:'Ray',lines:['I wave at everybody. That\'s the job. Go on in.']},
   {walk:'Kiki',to:routeBeside('Kiki'),speed:.14},
-  {talk:'Kiki',lines:['TNB! TNB! The rack! Rack two! It is GONE.']},
-  {talk:'TNB',lines:['Gone? It is a rack. It has wheels. It does not have ambitions.']},
+  {talk:'Kiki',lines:['TNB! TNB! The rack! Rack two! It\'s GONE.']},
+  {talk:'TNB',lines:['Gone? It\'s a rack. It has wheels. It doesn\'t have ambitions.']},
   {talk:'Kiki',lines:['It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.']},
   {walk:'Dana',to:routeBeside('Dana'),speed:.2},
-  {talk:'Dana',lines:['Dana Park. Director. First feature. Without wardrobe there is no shoot. Without a shoot there is no movie.',
+  {talk:'Dana',lines:['Dana Park. Director. First feature. Without wardrobe there\'s no shoot. Without a shoot there\'s no movie.',
     'And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.']},
   {talk:'Tom',lines:['Friction Sprites. On a closed set.']},
   {talk:'TNB',lines:['Babe. Forty costumes. I steamed every single one. By hand. While humming.']},
   {talk:'Tom',lines:['Then we go get them back. Nara, stay close. This is a professional environment.']},
   {talk:'Nara',lines:['Nara is already sniffing the craft services table.']},
   {toast:'Goal: the Backlot, north past the trailers. Find TNB’s rack.',time:4.5},
-  {wait:4.6},
   {toast:'Tip: Toni at craft services (right) might have something picky Nara will actually eat.',time:4.5}
 ];
 // 4. Optional: craft services. The one snack Nara will eat (talk to Toni or the table; data in ch4Crafty below).
 SCENES.ch4Snack=[
   {flag:'ch4-snack'},
-  {talk:'Toni',lines:['Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They are also picky.']},
+  {talk:'Toni',lines:['Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They\'re also picky.']},
   {call:()=>{ sfx.pickup(); }},
-  {talk:'Nara',lines:['Nara takes it very gently. Then she inhales it. Then she sits again, in case there is more.']},
+  {talk:'Nara',lines:['Nara takes it very gently. Then she inhales it. Then she sits again, in case there\'s more.']},
   {hearts:'nara'}, {trace:'nara-snack'}, {call:()=>sfx.levelChime()},
-  {talk:'TNB',lines:['She has never eaten anything that fast. Not even my shoe.']},
-  {talk:'Toni',lines:['Here. For the road. Do not tell the grips.']},
+  {talk:'TNB',lines:['She\'s never eaten anything that fast. Not even my shoe.']},
+  {talk:'Toni',lines:['Here. For the road. Don\'t tell the grips.']},
   {give:'jerky'}, {give:'jerky'},
   {toast:'Toni slips you two Chicken Jerky. Nara watches the bag the whole time.',time:3.5}
 ];
@@ -1073,26 +1067,26 @@ SCENES.ch4Fetch=[
   {talk:'TNB',lines:['The Backlot. Main Street up on the left, the Western street on the right, New York down on the left. All fake. All very expensive.']},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {talk:'Nara',lines:['Nara’s ears go straight up. Something shiny is skittering across New York.']},
-  {talk:'Tom',lines:['Nara. NARA. Do not...']},
+  {talk:'Tom',lines:['Nara. NARA. Don\'t...']},
   {walk:'nara',to:routeTo('nara',11,18),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
-  {talk:'TNB',lines:['That is a closed set! She is not on the call sheet!']},
+  {talk:'TNB',lines:['That\'s a closed set! She\'s not on the call sheet!']},
   {face:'nara',dir:'down'},
   {wait:.5},
   {call:()=>{ const n=sceneActor('nara'); if(n) n.carry='tag'; sfx.pickup(); }},
   {talk:'Nara',lines:['Nara sniffs the fire hydrant. She gets VERY excited about the fire hydrant.']},
   {call:()=>{ const n=sceneActor('nara'); if(n&&typeof naraPuddle==='function') naraPuddle(currentMap,n.x,n.y); sfx.splat&&sfx.splat(); }},
   {talk:'TNB',lines:['She peed on the hydrant. That hydrant is fiberglass. That hydrant is a PROP.']},
-  {talk:'Tom',lines:['She does not know that. Let her have this.']},
+  {talk:'Tom',lines:['She doesn\'t know that. Let her have this.']},
   {walk:'nara',to:routeBeside('nara'),speed:.12},
   {face:'tom',dir:'left'},
   {talk:'Nara',lines:['She drops something at Tom’s feet. Very proud. Very slobbery.']},
   {call:()=>{ const n=sceneActor('nara'); if(n) n.carry=null; sfx.pickup(); }},
-  {talk:'TNB',lines:['That is a costume tag. That is MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice.',
+  {talk:'TNB',lines:['That\'s a costume tag. That\'s MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice.',
     'And it smells like fog juice. The grape kind. Only Stage 7 has a fog machine.']},
   {talk:'Tom',lines:['Good girl. Professional environment, very good girl.']},
   {trace:'nara-fetch'},
   {flag:'ch4-fetch'},
-  {talk:'TNB',lines:['Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew cannot work like this.']},
+  {talk:'TNB',lines:['Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can\'t work like this.']},
   {talk:'Tom',lines:['Then we clear the sets. One at a time. Main Street, the Western street, New York.']},
   {toast:'Goal: clear the three sets: Main Street (top left), the Western street (top right), New York (bottom left).',time:5}
 ];
@@ -1101,8 +1095,8 @@ SCENES.ch4Crab=[
   {flag:'ch4-main',value:'pending'},
   {walk:'Cue Card Crab',to:routeBeside('Cue Card Crab'),speed:.3},
   {talk:'Cue Card Crab',lines:['Pinch. This is MY set. I hold up the lines. Every line. I hold up this one: GO AWAY.']},
-  {talk:'TNB',lines:['Those are the neatest cue cards I have ever seen. Is that calligraphy?']},
-  {talk:'Cue Card Crab',lines:['...Do not try to be nice to me. Nobody is nice to me. I will PINCH.']},
+  {talk:'TNB',lines:['Those are the neatest cue cards I\'ve ever seen. Is that calligraphy?']},
+  {talk:'Cue Card Crab',lines:['...Don\'t try to be nice to me. Nobody is nice to me. I\'ll PINCH.']},
   {battle:'cuecrab',tut:'ch4crab'},
   ...CH4_AFTER(()=>flag('battle:cuecrab')!=='win',[
     {flag:'ch4-main'},
@@ -1113,8 +1107,8 @@ SCENES.ch4Clapper=[
   {call:()=>{ sfx.bonk&&sfx.bonk(); }},
   {walk:'Clapper Snapper',to:routeBeside('Clapper Snapper'),speed:.18},
   {talk:'Clapper Snapper',lines:['SNAP! Scene one, take one! SNAP! I go first! Nothing happens until I clap! SNAP!']},
-  {talk:'Tom',lines:['It is very fast. And very loud.']},
-  {talk:'TNB',lines:['That is every clapper I have ever met.']},
+  {talk:'Tom',lines:['It\'s very fast. And very loud.']},
+  {talk:'TNB',lines:['That\'s every clapper I\'ve ever met.']},
   {battle:'clapper',tut:'ch4clapper'},
   ...CH4_AFTER(()=>flag('battle:clapper')!=='win',[
     {flag:'ch4-west'},
@@ -1130,12 +1124,12 @@ SCENES.ch4Moth=[
   {battle:'boommoth',tut:'ch4moth'},
   ...CH4_AFTER(()=>flag('battle:boommoth')!=='win',[
     {flag:'ch4-ny'},
-    {talk:'TNB',lines:['New York is clear. It never looked better. It is plywood.']}])
+    {talk:'TNB',lines:['New York is clear. It never looked better. It\'s plywood.']}])
 ];
 // 7. Soundstage 7: dark, foggy, and the catwalk is up.
 SCENES.ch4Stage=[
   {flag:'ch4-stage'},
-  {talk:'TNB',lines:['Somebody killed the work lights. And look, the catwalk is up. You only raise a catwalk when you are hiding something up there.']},
+  {talk:'TNB',lines:['Somebody killed the work lights. And look, the catwalk is up. You only raise a catwalk when you\'re hiding something up there.']},
   {talk:'Tom',lines:['The stage set is at the top. The rack is up there. I can smell the steamer.']},
   {talk:'TNB',lines:['The main light rig runs the catwalk motor. If I get power back to it, the catwalk comes down.',
     'Three junction boxes. They have to come up in the right order or the dimmer pops. The rig will tell us the order.']},
@@ -1164,12 +1158,12 @@ SCENES.ch4Boss=[
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Director’s Cut'}, {face:'The Director’s Cut',dir:'down'},
   {talk:'The Director’s Cut',lines:['CUT! CUT! CUT! Who said you could walk onto my set? The blocking is WRONG.',
-    'Forty years I have been on this lot. Forty years of bad takes, yelled through ME. Nobody ever gets it right.']},
+    'Forty years I\'ve been on this lot. Forty years of bad takes, yelled through ME. Nobody ever gets it right.']},
   {talk:'Tom',lines:['You took the rack.']},
-  {talk:'The Director’s Cut',lines:['If there are no costumes, there is no take. If there is no take, there is no BAD take. It is perfect. It is my best work.']},
-  {talk:'TNB',lines:['Babe. It is a megaphone in a beret. It has notes.']},
+  {talk:'The Director’s Cut',lines:['If there are no costumes, there\'s no take. If there\'s no take, there\'s no BAD take. It\'s perfect. It\'s my best work.']},
+  {talk:'TNB',lines:['Babe. It\'s a megaphone in a beret. It has notes.']},
   {talk:'Nara',lines:['Nara growls at the megaphone. Very small growl. Very serious.']},
-  {talk:'Tom',lines:['This is a closed set. And you are not on the call sheet.']},
+  {talk:'Tom',lines:['This is a closed set. And you\'re not on the call sheet.']},
   {battle:'directorscut',tut:'directorscut'},
   {if:()=>flag('battle:directorscut')!=='win',then:[
     {heal:true},
@@ -1181,11 +1175,11 @@ SCENES.ch4AfterBoss=()=>[
   {flag:'ch4-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:directorscut')?[
-    {talk:'The Director’s Cut',lines:['...Great take. Nobody has ever said that to me. Forty years. Not once.','I think I would like to hear it again. Somewhere quiet. On a shelf.']}]:[
-    {talk:'The Director’s Cut',lines:['Fine. FINE. That’s a wrap. On me. I am going back in the prop closet.']}]),
+    {talk:'The Director’s Cut',lines:['...Great take. Nobody has ever said that to me. Forty years. Not once.','I think I\'d like to hear it again. Somewhere quiet. On a shelf.']}]:[
+    {talk:'The Director’s Cut',lines:['Fine. FINE. That’s a wrap. On me. I\'m going back in the prop closet.']}]),
   {call:()=>{ setFlag('ch4-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'Stage set',lines:['The megaphone hops off the rack and rolls away under the set, muttering about lighting.']},
-  {talk:'TNB',lines:['Forty. I counted. I am going to count again. Forty.']},
+  {talk:'TNB',lines:['Forty. I counted. I\'m going to count again. Forty.']},
   {talk:'TNB',lines:['And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it.']},
   {talk:'Tom',lines:['A gold coin. Again. Somebody keeps leaving these around. Somebody in a long coat, if Oolong’s kettle is right.']},
   {talk:'TNB',lines:['Spooky. I love it. I hate it. Help me push. This thing has four wheels and four opinions.']},
@@ -1195,15 +1189,15 @@ SCENES.ch4AfterBoss=()=>[
 SCENES.ch4End=[
   {flag:'ch4-done',value:'pending'},
   {walk:'Dana',to:routeBeside('Dana'),speed:.2},
-  {talk:'Dana',lines:['The rack! The costumes! We can shoot! We are shooting! That is a WRAP on today, everybody!']},
+  {talk:'Dana',lines:['The rack! The costumes! We can shoot! We\'re shooting! That\'s a WRAP on today, everybody!']},
   {call:()=>{ sfx.levelChime(); }},
-  {talk:'Kiki',lines:['WRAP PARTY AT CRAFTY! Toni made a cake! It is shaped like a clapper! It is not clapping!']},
-  {talk:'Dana',lines:['TNB, the studio wants you to have this. Gold-plated. It is the steamer from the lot’s very first wardrobe department.']},
+  {talk:'Kiki',lines:['WRAP PARTY AT CRAFTY! Toni made a cake! It\'s shaped like a clapper! It\'s not clapping!']},
+  {talk:'Dana',lines:['TNB, the studio wants you to have this. Gold-plated. It\'s the steamer from the lot’s very first wardrobe department.']},
   {give:'n_steamer'},
   {toast:'TNB gets a new Signature Tool: the Golden Garment Steamer (POW +4, WARMTH +7). Equip it in the menu.',time:4.5},
-  {talk:'TNB',lines:['I am going to cry. I am not going to cry. I am a professional. I am crying a little.']},
-  {talk:'Tom',lines:['You are a professional. A crying professional. I am so proud of you.']},
-  {talk:'Dana',lines:['And crew jackets. Wrap Party Jackets. Only the crew gets one. You are crew now. Even the dog.']},
+  {talk:'TNB',lines:['I\'m going to cry. I\'m not going to cry. I\'m a professional. I\'m crying a little.']},
+  {talk:'Tom',lines:['You\'re a professional. A crying professional. I\'m so proud of you.']},
+  {talk:'Dana',lines:['And crew jackets. Wrap Party Jackets. Only the crew gets one. You\'re crew now. Even the dog.']},
   {give:'wrapjacket'},
   {toast:'New outfit: the Wrap Party Jacket. Purple satin. Anyone can wear it.',time:4},
   {talk:'TNB',lines:['You know what this whole day was? A real steam-ulating experience.']},
@@ -1216,12 +1210,12 @@ SCENES.ch4End=[
   {trace:'ch4-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
   {talk:'Tom',lines:['A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."']},
-  {talk:'TNB',lines:['You are the only uncle.']},
-  {talk:'Tom',lines:['Which makes me the good one. By default. I will take it.']},
+  {talk:'TNB',lines:['You\'re the only uncle.']},
+  {talk:'Tom',lines:['Which makes me the good one. By default. I\'ll take it.']},
   {party:null},
   {fade:'out',time:.8}, {card:4,done:true,time:3.4}, {flag:'ch4-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 4 complete! When you are ready, Sol at Angel City Cab Co. (downtown) flies you home for chapter 5.',time:6}
+  {toast:'Chapter 4 complete! When you\'re ready, Sol at Angel City Cab Co. (downtown) flies you home for chapter 5.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch4-arrive',map:'blvd',when:{...CH4,notFlag:'ch4-goal'},scene:'ch4Arrive'},
@@ -1273,7 +1267,7 @@ function ch4BoxOn(c) { return typeof flag==='function'&&(!!flag('ch4-rig')||ch4S
 function ch4Box(o) {
   if(STORY.mode!=='full'||STORY.chapter!==4||!flag('ch4-stage')||flag('ch4-rig')) return false;
   const seq=ch4Seq();
-  if(seq.includes(o.jbox)) { openDialog(o.name,['It is already on. The little light is green.']); return true; }
+  if(seq.includes(o.jbox)) { openDialog(o.name,['It\'s already on. The little light is green.']); return true; }
   if(CH4_RIG_ORDER[seq.length]!==o.jbox) {
     setFlag('ch4-rigseq',false); sfx.bump(); sfx.thud&&sfx.thud();
     openDialog('TNB',[seq.length?'POP. The dimmer tripped. Everything is off again.':'CLUNK. The switch flips, sparks, and flips right back.',
@@ -1326,20 +1320,20 @@ STORY_MAPFX.push(time=>{
 TUTORIALS.ch4crab={
   setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
   tips:[
-    {id:'praise',who:'*',dir:'down',care:1,text:'The crab is armored, but it really wants a compliment. ▼ Bag, then COMPLIMENT. It is free and fills its Warmth bar fast.'},
+    {id:'praise',who:'*',dir:'down',care:1,text:'The crab is armored, but it really wants a compliment. ▼ Bag, then COMPLIMENT. It\'s free and fills its Warmth bar fast.'},
     {id:'inspect',who:'*',text:'Kinetic hits bounce off its shell. Splash and Chatter work. B Inspects it.'}]};
 TUTORIALS.ch4clapper={tips:[
-  {id:'first',who:'*',text:'The Clapper Snapper always goes first, and it is fast. Watch the turn ribbon: it shows up a lot.'},
+  {id:'first',who:'*',text:'The Clapper Snapper always goes first, and it\'s fast. Watch the turn ribbon: it shows up a lot.'},
   {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Cozy, on every enemy. Clappers hate Cozy.'}]};
 TUTORIALS.ch4moth={tips:[
   {id:'silence',who:'*',when:u=>!!u.st.silenced,text:'Silenced (MUTED): only the free basic move under ▲ Skills works for a couple of turns. ▶ signature moves, ▼ Bag and ◀ Tombos still work.'},
   {id:'moth',who:'*',text:'The moth is weak to Splash and Kinetic. Nara’s ▲ Jump Up is Kinetic.'}]};
 TUTORIALS.directorscut={tips:[
-  {id:'cut',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='cut'),text:'CUT! is coming (on the ribbon). Whoever is next loses their turn. TNB’s WARDROBE makes them Fresh: CUT! cannot touch them.'},
-  {id:'take',who:'*',dir:'down',care:1,text:'It has never once heard "great take." ▼ Bag, GREAT TAKE! Say it three times and it gives up happy. Anyone can say it.'},
-  {id:'heal',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='heal'),text:'Take Two is coming: it will heal itself. Hit it hard now.'},
-  {id:'wrap',who:['tom','tnb'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'It is bracing for THAT’S A WRAP. ◀ TOMBO: Popcorn Jump smashes the guard in one go.'},
-  {id:'wrap2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'It is bracing for THAT’S A WRAP on everyone. Break its guard: any Tombo, or 3 Cozy hits (TNB’s Kiln Door Policy breaks it at once).'}]};
+  {id:'cut',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='cut'),text:'CUT! is coming (on the ribbon). Whoever is next loses their turn. TNB’s WARDROBE makes them Fresh: CUT! can\'t touch them.'},
+  {id:'take',who:'*',dir:'down',care:1,text:'It\'s never once heard "great take." ▼ Bag, GREAT TAKE! Say it three times and it gives up happy. Anyone can say it.'},
+  {id:'heal',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='heal'),text:'Take Two is coming: it\'ll heal itself. Hit it hard now.'},
+  {id:'wrap',who:['tom','tnb'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'It\'s bracing for THAT’S A WRAP. ◀ TOMBO: Popcorn Jump smashes the guard in one go.'},
+  {id:'wrap2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'It\'s bracing for THAT’S A WRAP on everyone. Break its guard: any Tombo, or 3 Cozy hits (TNB’s Kiln Door Policy breaks it at once).'}]};
 
 // ======================================================================================================
 // CHAPTER 5: Parent-Teacher Conference of Doom. Sol flies Tom home (storyTripSteps sets chapter 5). Conference night at
@@ -1365,20 +1359,19 @@ SCENES.ch5Arrive=[
   {place:'amy',at:spotNear(4),dir:'up'}, {show:'amy'},
   {talk:'Amy',lines:['TOM. Oh, thank goodness.']},
   {walk:'amy',to:routeBeside('amy'),speed:.12,onStep:i=>{ if(i%2===0) sfx.run(); }},
-  {talk:'Amy',lines:['Two coffees. Both mine. Here, have one. That is how much I need you tonight.']},
+  {talk:'Amy',lines:['Two coffees. Both mine. Here, have one. That\'s how much I need you tonight.']},
   {call:()=>sfx.pickup()},
-  {talk:'Tom',lines:['You brought me coffee. At night. That is a cry for help.']},
-  {talk:'Amy',lines:['It is conference night. Thirty parents at seven o’clock. And the school has lost its mind.',
+  {talk:'Tom',lines:['You brought me coffee. At night. That\'s a cry for help.']},
+  {talk:'Amy',lines:['It\'s conference night. Thirty parents at seven o’clock. And the school has lost its mind.',
     'The bells ring whenever they feel like it. Every clock says a different time. And the sign-up sheet ran off.']},
   {talk:'Grace',lines:['Ran off? Like, RAN? On legs?']},
-  {talk:'Amy',lines:['On little paper legs. Mrs. Kowalski saw it. She is still upset about it.']},
-  {talk:'Rose',lines:['Mom. Mom. Are we going to SCHOOL? At NIGHT? That is the best thing that ever happened.']},
-  {talk:'Amy',lines:['Everybody is coming. I have a clipboard, and I am not afraid to use it.']},
+  {talk:'Amy',lines:['On little paper legs. Mrs. Kowalski saw it. She\'s still upset about it.']},
+  {talk:'Rose',lines:['Mom. Mom. Are we going to SCHOOL? At NIGHT? That\'s the best thing that ever happened.']},
+  {talk:'Amy',lines:['Everybody is coming. I have a clipboard, and I\'m not afraid to use it.']},
   {trace:'amy-coffee'}, {hearts:'tom'},
   {flag:'tombo:amy1'},
   {party:{lock:['tom','grace','rose','amy']}},
   {toast:'New Tombo: I Called It! (Tom + Amy). In battle, ◀ TOMBO.',time:3.5},
-  {wait:3.7},
   {toast:'Goal: Long Island Elementary, through the gate at the east end of the Square.',time:4.5}
 ];
 // 2. The schoolyard: Principal Pruitt explains. Conferences start at seven.
@@ -1388,12 +1381,12 @@ SCENES.ch5Pruitt=[
   {talk:'School bell',lines:['BRRRRRING. From inside the school. Then again. Then a little one: brring?']},
   {walk:'Principal Pruitt',to:routeBeside('Principal Pruitt'),speed:.2},
   {talk:'Principal Pruitt',lines:['Mrs. Gregori! Thank goodness. And you brought the whole family.']},
-  {talk:'Amy',lines:['Principal Pruitt, my brother Tom. He is very good in a crisis. He is also very calm about it, which is annoying.']},
+  {talk:'Amy',lines:['Principal Pruitt, my brother Tom. He\'s very good in a crisis. He\'s also very calm about it, which is annoying.']},
   {talk:'Tom',lines:['Hello. I hear your bells are haunted.']},
   {talk:'Principal Pruitt',lines:['Not haunted. Grumpy. Thirty-one years in this building. I know the difference.',
     'The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.',
-    'The Cafetorium doors run on the bell system. The bells run on the hallway clocks. Thirty parents are on their way, and those doors will not open.']},
-  {talk:'Grace',lines:['Doors do not just not open. That is not how doors work.']},
+    'The Cafetorium doors run on the bell system. The bells run on the hallway clocks. Thirty parents are on their way, and those doors won\'t open.']},
+  {talk:'Grace',lines:['Doors don\'t just not open. That\'s not how doors work.']},
   {talk:'Principal Pruitt',lines:['Set every clock in the hall to seven. Seven o’clock. Not seven-thirty. Not six-fifty-nine. Seven.']},
   {talk:'Rose',lines:['Tata. A school. At NIGHT. With MONSTERS, probably.']},
   {talk:'Tom',lines:['Stay close, everybody. This is a professional learning environment.']},
@@ -1409,28 +1402,27 @@ SCENES.ch5Hall=[
   {face:'rose',dir:'up'},
   {talk:'Rose',lines:['Little paper feet. With glitter. They go EVERYWHERE.']},
   {talk:'Grace',lines:['I can read the doors. Room One is ART. Room Two is MUSIC. Room Three is the GYM.',
-    'The gym is not a room. It is a gym. It has a number anyway.']},
+    'The gym isn\'t a room. It\'s a gym. It has a number anyway.']},
   {talk:'Grace',lines:['The footprints go into all three. Then out again. Then east, to the Cafetorium.']},
-  {talk:'Amy',lines:['Girls. That is excellent detective work. Gold stars. Both of you.']},
+  {talk:'Amy',lines:['Girls. That\'s excellent detective work. Gold stars. Both of you.']},
   {trace:'sisters-trail'}, {hearts:'rose'},
   {talk:'Tom',lines:['Then we clear Art, Music and the Gym. After each one, we fix its clock. Seven o’clock.']},
   {flag:'ch5-hall'},
   {toast:'Goal: clear the Art room, the Music room and the Gym (top). After each, set its hallway clock to 7:00.',time:5.5},
-  {wait:5.7},
   {toast:'Tip: the staff room (bottom left) has a fridge. Rose is hungry.',time:4}
 ];
 // 4. Optional: the staff fridge. Which one is not somebody's lunch? (data in ch5Fridge below).
 SCENES.ch5Snack=[
   {flag:'ch5-snack'},
-  {talk:'Grace',lines:['FOR EVERYONE, LOVE DEEDEE. That is Deedee’s handwriting! Everyone means us!']},
+  {talk:'Grace',lines:['FOR EVERYONE, LOVE DEEDEE. That\'s Deedee’s handwriting! Everyone means us!']},
   {call:()=>sfx.pickup()},
   {talk:'Rose',lines:['Rhubarb crisp! Deedee brings the teachers CRISP?']},
-  {talk:'Mr. Halverson',lines:['Every conference night. Twelve years. It is the only reason Gary shows up.']},
+  {talk:'Mr. Halverson',lines:['Every conference night. Twelve years. It\'s the only reason Gary shows up.']},
   {talk:'Amy',lines:['She never told me that. Of course she never told me that.']},
   {talk:'Tom',lines:['To the moon and back. And apparently to the staff room.']},
   {hearts:'grace'}, {trace:'deedee-plate'}, {call:()=>sfx.levelChime()},
   {heal:true},
-  {talk:'Mr. Halverson',lines:['Take some for the road. Do not tell Gary.']},
+  {talk:'Mr. Halverson',lines:['Take some for the road. Don\'t tell Gary.']},
   {give:'picnic'},
   {toast:'Everyone is healed. Mr. Halverson slips you a Picnic Basket.',time:3.5}
 ];
@@ -1439,8 +1431,8 @@ SCENES.ch5Art=[
   {flag:'ch5-art',value:'pending'},
   {call:()=>sfx.ding()},
   {walk:'Tardy Bell',to:routeBeside('Tardy Bell'),speed:.2,onStep:()=>sfx.ding()},
-  {talk:'Tardy Bell',lines:['DING! You are LATE! Everybody is late! I ring and I ring and nobody is ever on time!']},
-  {talk:'Amy',lines:['I have never been late in my life. Not once. Not even when I was born. I was early.']},
+  {talk:'Tardy Bell',lines:['DING! You\'re LATE! Everybody is late! I ring and I ring and nobody is ever on time!']},
+  {talk:'Amy',lines:['I\'ve never been late in my life. Not once. Not even when I was born. I was early.']},
   {talk:'Tardy Bell',lines:['...DING. Prove it.']},
   {battle:'tardybell',tut:'ch5bell'},
   ...CH5_AFTER(()=>flag('battle:tardybell')!=='win',[
@@ -1451,9 +1443,9 @@ SCENES.ch5Art=[
 SCENES.ch5Music=[
   {flag:'ch5-music',value:'pending'},
   {walk:'Glitter Glue',to:routeBeside('Glitter Glue'),speed:.3,onStep:()=>sfx.splat()},
-  {talk:'Glitter Glue',lines:['Squelch. I glued the piano. I glued the xylophone. I glued a recorder to a tuba. It is ART.']},
-  {talk:'Rose',lines:['Tata, it is SPARKLY. I love it. I hate it. I love it.']},
-  {talk:'Grace',lines:['You cannot glue a xylophone. That is not how xylophones work.']},
+  {talk:'Glitter Glue',lines:['Squelch. I glued the piano. I glued the xylophone. I glued a recorder to a tuba. It\'s ART.']},
+  {talk:'Rose',lines:['Tata, it\'s SPARKLY. I love it. I hate it. I love it.']},
+  {talk:'Grace',lines:['You can\'t glue a xylophone. That\'s not how xylophones work.']},
   {battle:'glitterglue',tut:'ch5glue'},
   ...CH5_AFTER(()=>flag('battle:glitterglue')!=='win',[
     {flag:'ch5-music'},
@@ -1467,11 +1459,11 @@ SCENES.ch5Gym=[
   {talk:'Dodgeball Dread',lines:['BOING. Everybody against the wall. Nobody picks me first. Nobody EVER picks me first.']},
   {talk:'Amy',lines:['Oh, I remember you. Fourth grade. You and me. Every Friday.']},
   {talk:'Tom',lines:['Amy was the scariest kid in dodgeball. They had to make a rule about her.']},
-  {talk:'Amy',lines:['The Gregori Rule. No throwing at teachers. It is still on the wall.']},
+  {talk:'Amy',lines:['The Gregori Rule. No throwing at teachers. It\'s still on the wall.']},
   {battle:'dodgeball',tut:'ch5dodge'},
   ...CH5_AFTER(()=>flag('battle:dodgeball')!=='win',[
     {flag:'ch5-gym'},
-    {talk:'Amy',lines:['You know I was terrified of that thing? Every Friday. That is why I threw so hard.']},
+    {talk:'Amy',lines:['You know I was terrified of that thing? Every Friday. That\'s why I threw so hard.']},
     {talk:'Tom',lines:['I know. You threw one at me at Thanksgiving. I was holding a pie.']},
     {talk:'Amy',lines:['You caught the pie, though.']},
     {talk:'Tom',lines:['I caught the pie.']},
@@ -1484,13 +1476,12 @@ SCENES.ch5Clocks=[
   {call:()=>{ sfx.ding(); }}, {wait:.5},
   {talk:'School bell',lines:['BRRRRRING. One bell. Right on time. Then silence. The good kind.']},
   {call:()=>{ ch5OpenCafe(); storyWorld(); sfx.thud(); sfx.levelChime(); }},
-  {talk:'Principal Pruitt',lines:['(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There is something in the Cafetorium.',
+  {talk:'Principal Pruitt',lines:['(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There\'s something in the Cafetorium.',
     'Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.']},
   {talk:'Amy',lines:['The footprints go in there. The sign-up sheet is in there.']},
   {talk:'Grace',lines:['And the something.']},
   {flag:'tombo:grace2'},   // Uncle Spotter Toss unlocks here (chapter 5: the school is clear)
   {toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2},
-  {wait:3.4},
   {toast:'Goal: the Cafetorium, at the east end of the hall.',time:4.5}
 ];
 // 7. The Cafetorium: The Red Pen, grading the sign-up sheet on the stage. Boss fight.
@@ -1500,19 +1491,19 @@ SCENES.ch5Boss=[
   {walk:'tom',to:routeTo('tom',9,6),speed:.25}, {face:'tom',dir:'up'},
   {place:'amy',at:[10,6],dir:'up'}, {place:'grace',at:[8,6],dir:'up'}, {place:'rose',at:[9,7],dir:'up'},
   {talk:'Grace',lines:['There! The sign-up sheet! On the podium!']},
-  {talk:'Rose',lines:['It is covered in RED.']},
+  {talk:'Rose',lines:['It\'s covered in RED.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Red Pen'}, {face:'The Red Pen',dir:'down'},
   {talk:'The Red Pen',lines:['Click. Wrong. Wrong. Wrong. Every name on this sheet is written wrong.',
     'Kowalski has a W. Delgado has a G. Gregori has TWO Rs, and nobody ever writes them neatly.']},
-  {talk:'Amy',lines:['That is the conference sign-up sheet. Thirty parents are waiting for it.']},
-  {talk:'The Red Pen',lines:['A hundred thousand wrong answers, I have marked. Every quiz. Every spelling test. Every crooked line.',
+  {talk:'Amy',lines:['That\'s the conference sign-up sheet. Thirty parents are waiting for it.']},
+  {talk:'The Red Pen',lines:['A hundred thousand wrong answers, I\'ve marked. Every quiz. Every spelling test. Every crooked line.',
     'Nobody ever grades ME. Nobody ever writes NEAT next to ME. So tonight, I grade the grown-ups.']},
   {talk:'Tom',lines:['You took the sign-up sheet to grade it.']},
   {talk:'The Red Pen',lines:['And the bells. And the clocks. Late is late. Points off.']},
-  {talk:'Rose',lines:['Tata, it is a PEN. With GLASSES.']},
-  {talk:'Amy',lines:['I have used a thousand pens like you. Put the sheet down. Now.']},
-  {talk:'Tom',lines:['That is her teacher voice. I would listen.']},
+  {talk:'Rose',lines:['Tata, it\'s a PEN. With GLASSES.']},
+  {talk:'Amy',lines:['I\'m going to count to three, and you\'re going to put the sheet down. One.']},
+  {talk:'Tom',lines:['That\'s her teacher voice. I\'d listen.']},
   {battle:'redpen',tut:'redpen'},
   {if:()=>flag('battle:redpen')!=='win',then:[
     {heal:true},
@@ -1524,15 +1515,15 @@ SCENES.ch5AfterBoss=()=>[
   {flag:'ch5-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:redpen')?[
-    {talk:'The Red Pen',lines:['...Nice handwriting. Nobody has ever said that. A hundred thousand papers. Not once.','I fixed the spelling. And I gave everyone a gold star. In red. It is the only color I have.']}]:[
-    {talk:'The Red Pen',lines:['Click. Fine. FINE. Pencils down. I am going back in my cup.']}]),
+    {talk:'The Red Pen',lines:['...Nice handwriting. Nobody has ever said that. A hundred thousand papers. Not once.','I fixed the spelling. And I gave everyone a gold star. In red. It\'s the only color I have.']}]:[
+    {talk:'The Red Pen',lines:['Click. Fine. FINE. Pencils down. I\'m going back in my cup.']}]),
   {call:()=>{ setFlag('ch5-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'Podium',lines:['The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room.']},
-  {talk:'Amy',lines:['...It is going to my desk. Of course it is going to my desk.']},
-  {talk:'Grace',lines:['The sign-up sheet! It is a bit crumpled. And look, Tata. Something is taped to the bottom.']},
-  {talk:'Tom',lines:['A gold coin. Again. Same little clock face.','The sundial. The steamer. Now the sign-up sheet. Somebody keeps leaving these where we will find them.']},
-  {talk:'Amy',lines:['Whoever it is has very neat tape. Look at those corners.']},
-  {talk:'Rose',lines:['Can we keep it? I will keep it inside Lamby.']},
+  {talk:'Amy',lines:['...It\'s going to my desk. Of course it\'s going to my desk.']},
+  {talk:'Grace',lines:['The sign-up sheet! It\'s a bit crumpled. And look, Tata. Something is taped to the bottom.']},
+  {talk:'Tom',lines:['A gold coin. Again. Same little clock face.','The sundial. The steamer. Now the sign-up sheet. Somebody keeps leaving these where we\'ll find them.']},
+  {talk:'Amy',lines:['Whoever it\'s has very neat tape. Look at those corners.']},
+  {talk:'Rose',lines:['Can we keep it? I\'ll keep it inside Lamby.']},
   {talk:'Tom',lines:['We keep it. In my pocket. Not inside Lamby.']},
   {fade:'out',time:.6},
   {spawn:{name:'Principal Pruitt',look:'pruitt',at:[12,6],dir:'left'}},
@@ -1542,11 +1533,11 @@ SCENES.ch5AfterBoss=()=>[
   {talk:'Conference night',lines:['For two hours, Amy talks to thirty parents. Grace hands out cookies. Rose tells everybody the pen had glasses. Tom stacks chairs and nods calmly.']},
   {fade:'in',time:.8},
   {talk:'Principal Pruitt',lines:['Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears.',
-    'This is for you. My Golden Stopwatch. Thirty-one Field Days. It has never once stopped early.']},
+    'This is for you. My Golden Stopwatch. Thirty-one Field Days. It\'s never once stopped early.']},
   {give:'a_stopwatch'},
   {toast:'Amy gets a new Signature Tool: the Golden Stopwatch (POW +5, WARMTH +6). Equip it in the menu.',time:4.5},
-  {talk:'Amy',lines:['Principal Pruitt, I cannot take this.','...I am taking it. Thank you.']},
-  {talk:'Principal Pruitt',lines:['And Field Day shirts. Staff shirts. You are all staff now. Even the small loud ones.']},
+  {talk:'Amy',lines:['Principal Pruitt, I can\'t take this.','...I\'m taking it. Thank you.']},
+  {talk:'Principal Pruitt',lines:['And Field Day shirts. Staff shirts. You\'re all staff now. Even the small loud ones.']},
   {give:'fielddaytee'},
   {toast:'New outfit: the Field Day Tee. GO SNAILS. Anyone can wear it.',time:4},
   {despawn:'Principal Pruitt'},
@@ -1563,17 +1554,17 @@ SCENES.ch5End=[
   {talk:'Grace',lines:['Dad used the heart! He only uses the heart on special days!']},
   {talk:'Amy',lines:['Girls. Did we save a cookie for Dad?']},
   {talk:'Rose',lines:['...Define save.']},
-  {talk:'Rose',lines:['Tata. Tata. There is a man.']},
+  {talk:'Rose',lines:['Tata. Tata. There\'s a man.']},
   {spawn:{name:'Long coat',look:'longcoat',at:[9,16],dir:'up'}},
   {face:'tom',dir:'right'},
-  {talk:'Rose',lines:['By the last car. In a long coat. He is looking at us.']},
+  {talk:'Rose',lines:['By the last car. In a long coat. He\'s looking at us.']},
   {wait:.8},
   {walk:'Long coat',to:[[10,16]],speed:.35},
   {call:()=>sfx.whoosh()}, {despawn:'Long coat'},
   {talk:'Tom',lines:['...Nobody there.']},
-  {talk:'Amy',lines:['Probably a parent. A late one. There is always a late one.']},
-  {talk:'Tom',lines:['Probably.','A long coat. Gold coins. That is what Oolong’s kettle said, too. I am keeping a list.']},
-  {talk:'Grace',lines:['I am keeping a list too. Mine has a chart.']},
+  {talk:'Amy',lines:['Probably a parent. A late one. There\'s always a late one.']},
+  {talk:'Tom',lines:['Probably.','A long coat. Gold coins. That\'s what Oolong’s kettle said, too. I\'m keeping a list.']},
+  {talk:'Grace',lines:['I\'m keeping a list too. Mine has a chart.']},
   {talk:'Amy',lines:['Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.']},
   {talk:'Tom',lines:['By default.']},
   {talk:'Amy',lines:['By a LOT. Take the compliment, Tom.']},
@@ -1581,7 +1572,7 @@ SCENES.ch5End=[
   {party:null},
   {fade:'out',time:.8}, {card:5,done:true,time:3.4}, {flag:'ch5-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 5 complete! When you are ready, Sal at Long Island Taxi Co. flies you to Los Angeles for chapter 6.',time:6}
+  {toast:'Chapter 5 complete! When you\'re ready, Sal at Long Island Taxi Co. flies you to Los Angeles for chapter 6.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch5-goal',map:'town',when:{...CH5,notFlag:'ch5-goal'},scene:'ch5Arrive'},
@@ -1643,7 +1634,7 @@ const CH5_FRIDGE=[
   {label:'A YOGURT THAT SAYS GARY',no:'It says GARY. Underlined twice. Under that: THIS MEANS YOU, GARY. Grace closes the fridge a little.'},
   {label:'A CONTAINER OF FISH',no:'Rose opens it. Rose closes it. Rose would like to go home now.'},
   {label:'A PLATE: FOR EVERYONE, LOVE DEEDEE',ok:true},
-  {label:'A SAD DESK SALAD',no:'It is labeled TUESDAY. It is not Tuesday. It has not been Tuesday for a while.'}];
+  {label:'A SAD DESK SALAD',no:'It\'s labeled TUESDAY. It\'s not Tuesday. It hasn\'t been Tuesday for a while.'}];
 function ch5Fridge(o) {
   if(STORY.mode!=='full'||STORY.chapter!==5||!flag('ch5-hall')||flag('ch5-snack')) return false;
   openChoice('Staff fridge',['Every lunch in here has a name on it. Rose is hungry. Grace says the rules are the rules.','Which one is NOT somebody’s lunch?'],
@@ -1690,7 +1681,7 @@ TUTORIALS.ch5dodge={tips:[
   {id:'dodge',who:'*',text:'The Dread dodges a lot of single hits. Hits on everyone never miss, like the Tombo I Called It!'}]};
 TUTORIALS.redpen={tips:[
   {id:'seeme',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&f.intent.target.id!=='tom'&&!f.intent.target.st.guarded),
-    text:'SEE ME is coming (the red LOCK). ▶ DEFEND, then whoever it is after: Tom takes the mark instead.'},
+    text:'SEE ME is coming (the red LOCK). ▶ DEFEND, then whoever it\'s after: Tom takes the mark instead.'},
   {id:'marked',who:'grace',dir:'up',when:()=>b2LiveParty().some(p=>p.st.seeme),text:'Someone is marked SEE ME: double damage, and the pen keeps going after them. Grace’s Squishy Squeeze (▲ Skills) clears it.'},
   {id:'praise',who:'*',dir:'down',care:1,text:'It grades everyone, and nobody ever grades it back. ▼ Bag, NICE HANDWRITING. Three times and it gives up happy.'},
   {id:'final',who:'amy',dir:'up',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&u.kit.skills.some(s=>['quiz','eyes_up_front','inside_voices','false_start'].includes(s.key)),text:'FINAL GRADE on everyone next turn! Amy’s Eyes Up Front or False Start (▲ Skills) breaks the wind-up outright.'},
@@ -1736,8 +1727,8 @@ const CH6_AFTER=(lost,lines)=>[
 SCENES.ch6Arrive=[
   {flag:'ch6-goal'},
   {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Tom',lines:['A text from TNB.','"Babe. Come home. Your house. NOW. It is about Bready Mercury."','"Also there are acorns in the flour."']},
-  {talk:'Tom',lines:['He has a key. I gave him a key for exactly this kind of emergency.','I did not picture acorns.']},
+  {talk:'Tom',lines:['A text from TNB.','"Babe. Come home. Your house. NOW. It\'s about Bready Mercury."','"Also there are acorns in the flour."']},
+  {talk:'Tom',lines:['He has a key. I gave him a key for exactly this kind of emergency.','I didn\'t picture acorns.']},
   {toast:'Goal: Tom’s house (3468) in Jefferson Park, south of Downtown.',time:4.5}
 ];
 // 2. Tom's kitchen: the jar is gone. The heart-kiss. TNB joins.
@@ -1748,22 +1739,21 @@ SCENES.ch6Kitchen=[
   {place:'tnb',at:[13,26],dir:'left'}, {show:'tnb'},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
-  {talk:'TNB',lines:['Okay. Hi. Missed you. Do not panic. Look at the island.']},
+  {talk:'TNB',lines:['Okay. Hi. Missed you. Don\'t panic. Look at the island.']},
   {face:'tom',dir:'up'},
-  {talk:'Tom',lines:['...Where is Bready Mercury.']},
-  {talk:'TNB',lines:['That is the thing. I came over to feed him, like you asked. The jar was gone. The window was open.','And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.']},
+  {talk:'Tom',lines:['...Where\'s Bready Mercury.']},
+  {talk:'TNB',lines:['That\'s the thing. I came over to feed him, like you asked. The jar was gone. The window was open.','And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.']},
   {talk:'Tom',lines:['Bready Mercury is nine years old. He has flown Delta One. Twice.']},
-  {talk:'TNB',lines:['I know, babe. I have seen every horror movie ever made. This is exactly how they start.','And this was on the windowsill. An acorn. With a tiny X carved in it.']},
+  {talk:'TNB',lines:['I know, babe. I\'ve seen every horror movie ever made. This is exactly how they start.','And this was on the windowsill. An acorn. With a tiny X carved in it.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['Somebody took my starter. And left a calling card.','That was UNCALLED for!'],voice:[['tom','hurt',1,'That was UNCALLED for!']]},
   {trace:'tnb-hello6'}, {hearts:'tom'},
-  {talk:'TNB',lines:['Olivia texted me too. Nara has not slept in three days. She just stands at the window and growls at trees.']},
-  {talk:'Tom',lines:['Nara is scared of the vacuum. Nara does not growl at trees.']},
+  {talk:'TNB',lines:['Olivia texted me too. Nara hasn\'t slept in three days. She just stands at the window and growls at trees.']},
+  {talk:'Tom',lines:['Nara is scared of the vacuum. Nara doesn\'t growl at trees.']},
   {talk:'TNB',lines:['Exactly. Something is going on out there.']},
   {party:{lock:['tom','tnb']}},
   {flag:'tombo:tnb2'},   // Red Line Transfer unlocks here (chapter 6)
   {toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2},
-  {wait:3.4},
   {toast:'Goal: out to 2nd Ave. Find Olivia, Michael and Nara.',time:4.5}
 ];
 // 3. 2nd Ave: Olivia hands over Nara. The whole block is missing things.
@@ -1771,22 +1761,21 @@ SCENES.ch6Nara=[
   {flag:'ch6-nara'},
   {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.2); }},
   {walk:'Olivia',to:routeBeside('Olivia'),speed:.2},
-  {talk:'Olivia',lines:['Tom! Oh, thank goodness. Can you take her? Please? She has not slept since Sunday.']},
+  {talk:'Olivia',lines:['Tom! Oh, thank goodness. Can you take her? Please? She hasn\'t slept since Sunday.']},
   {walk:'Nara',to:routeBeside('Nara'),speed:.1},
   {talk:'Nara',lines:['Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.','Then she spins around and growls at the jacaranda.']},
   {hearts:'tom'},
-  {talk:'Olivia',lines:['That. All night. And it is not just us. Lachlan’s toy truck is gone. Mr. Washington’s reading glasses. Marisol says every tennis ball on the block.']},
+  {talk:'Olivia',lines:['That. All night. And it\'s not just us. Lachlan’s toy truck is gone. Mr. Washington’s reading glasses. Marisol says every tennis ball on the block.']},
   {talk:'Michael',lines:['I found my car keys in the gutter. With three peanuts. Arranged in a triangle.']},
   {talk:'TNB',lines:['A triangle. Babe. A triangle is a SYMBOL.']},
-  {talk:'Tom',lines:['TNB has seen a lot of movies.','...He is usually right about this stuff.']},
-  {talk:'Olivia',lines:['Bernadette from the Neighborhood Watch says it is squirrels. She has a clipboard about it. She is in Old Oak Park, at the south end of 2nd Ave.']},
+  {talk:'Tom',lines:['TNB has seen a lot of movies.','...He\'s usually right about this stuff.']},
+  {talk:'Olivia',lines:['Bernadette from the Neighborhood Watch says it\'s squirrels. She has a clipboard about it. She\'s in Old Oak Park, at the south end of 2nd Ave.']},
   {join:'nara'},
   {talk:'Tom',lines:['Nara. Want to go for a walk?']},
-  {talk:'Nara',lines:['Nara knows the word WALK. She has always known the word walk. She is already at the end of the street.']},
-  {talk:'Olivia',lines:['Bring her back tired! Please! Michael, can you grab Isla? She is licking the mailbox.']},
+  {talk:'Nara',lines:['Nara knows the word WALK. She\'s always known the word walk. She\'s already at the end of the street.']},
+  {talk:'Olivia',lines:['Bring her back tired! Please! Michael, can you grab Isla? She\'s licking the mailbox.']},
   {flag:'tombo:nara2'},   // Tug of War unlocks here (chapter 6)
   {toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2},
-  {wait:3.4},
   {toast:'Goal: Old Oak Park, through the south end of 2nd Ave.',time:4.5}
 ];
 // 4. Old Oak Park: Bernadette's briefing. Three lookouts, three fresh holes, one tree.
@@ -1794,20 +1783,19 @@ SCENES.ch6Park=[
   {flag:'ch6-park',value:'pending'},
   {walk:'Bernadette',to:routeBeside('Bernadette'),speed:.2},
   {talk:'Bernadette',lines:['Halt. Neighborhood Watch. State your business.']},
-  {talk:'Tom',lines:['Tom. 3468. I have lived on 2nd Ave for six years.']},
+  {talk:'Tom',lines:['Tom. 3468. I\'ve lived on 2nd Ave for six years.']},
   {talk:'Bernadette',lines:['I know who you are. You water your drought garden. Everybody knows.',
-    'Bernadette. Neighborhood Watch Captain, nineteen years. And I will say it, because nobody else will.','The squirrels are organized.']},
+    'Bernadette. Neighborhood Watch Captain, nineteen years. And I\'ll say it, because nobody else will.','The squirrels are organized.']},
   {talk:'TNB',lines:['I KNEW it.']},
-  {talk:'Bernadette',lines:['Lookouts in the playground. A spy in the community garden. Somebody at the picnic tables stuffing their cheeks with anything that is not nailed down.',
-    'And it all goes up THAT tree. The Old Oak. There is a little door in the trunk. I have heard a secret knock. Only bits of it.']},
+  {talk:'Bernadette',lines:['Lookouts in the playground. A spy in the community garden. Somebody at the picnic tables stuffing their cheeks with anything that\'s not nailed down.',
+    'And it all goes up THAT tree. The Old Oak. There\'s a little door in the trunk. I\'ve heard a secret knock. Only bits of it.']},
   {call:()=>sfx.bark&&sfx.bark()},
   {talk:'Nara',lines:['Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.']},
   {talk:'Tom',lines:['They buried something. Three somethings.']},
-  {talk:'Bernadette',lines:['Clear out those lookouts and your dog can dig. I will be here. With my clipboard.']},
-  {talk:'TNB',lines:['Babe, she has a corkboard with red string. I have never felt so seen.']},
+  {talk:'Bernadette',lines:['Clear out those lookouts and your dog can dig. I\'ll be here. With my clipboard.']},
+  {talk:'TNB',lines:['Babe, she has a corkboard with red string. I\'ve never felt so seen.']},
   {flag:'ch6-park'},
   {toast:'Goal: clear the playground (top left), the garden (top right) and the picnic tables (bottom left). Then let Nara dig.',time:5.5},
-  {wait:5.7},
   {toast:'Tip: the dog park (bottom right) has a bench. Nara looks very hopeful.',time:4}
 ];
 // 5. The three lookouts.
@@ -1817,7 +1805,7 @@ SCENES.ch6Gallery=[
   {talk:'Peanut Gallery',lines:['BOO! BOOOO! Get off the stage! This is OUR playground!']},
   {talk:'TNB',lines:['Is it heckling us? From inside a peanut?']},
   {talk:'Peanut Gallery',lines:['Your shoes are untied! Made you look! BOOOO!']},
-  {talk:'Tom',lines:['My shoes do not have laces.']},
+  {talk:'Tom',lines:['My shoes don\'t have laces.']},
   {battle:'peanutgallery',tut:'ch6gallery'},
   ...CH6_AFTER(()=>flag('battle:peanutgallery')!=='win',[
     {flag:'ch6-play'},
@@ -1827,7 +1815,7 @@ SCENES.ch6Gallery=[
 SCENES.ch6Spy=[
   {flag:'ch6-garden',value:'pending'},
   {walk:'Twig Spy',to:routeBeside('Twig Spy'),speed:.3},
-  {talk:'Twig Spy',lines:['...You did not see me. I am a stick. Sticks do not talk.']},
+  {talk:'Twig Spy',lines:['...You didn\'t see me. I\'m a stick. Sticks don\'t talk.']},
   {talk:'TNB',lines:['That stick has binoculars.']},
   {talk:'Twig Spy',lines:['Standard issue. Code name: Twig. I report to the Chairman. Pretend I said nothing.']},
   {talk:'Tom',lines:['The Chairman.']},
@@ -1835,7 +1823,7 @@ SCENES.ch6Spy=[
   {battle:'twigspy',tut:'ch6spy'},
   ...CH6_AFTER(()=>flag('battle:twigspy')!=='win',[
     {flag:'ch6-garden'},
-    {talk:'Tom',lines:['The garden is clear. Every tomato has exactly one bite out of it. That is a policy.']},
+    {talk:'Tom',lines:['The garden is clear. Every tomato has exactly one bite out of it. That\'s a policy.']},
     {toast:'Nara can dig in the garden now (the fresh dirt, between the beds).',time:4}])
 ];
 SCENES.ch6Stuffer=[
@@ -1844,7 +1832,7 @@ SCENES.ch6Stuffer=[
   {talk:'Cheek Stuffer',lines:['Mmmf. Mmmf mmf! (These are MY sandwiches.)']},
   {talk:'Tom',lines:['Those are somebody’s sandwiches. Somebody’s whole birthday picnic.']},
   {talk:'Cheek Stuffer',lines:['Mmf. (Winter is coming. Winter is ALWAYS coming.)']},
-  {talk:'TNB',lines:['Buddy. It is Los Angeles. It is seventy-four degrees.']},
+  {talk:'TNB',lines:['Buddy. It\'s Los Angeles. It\'s seventy-four degrees.']},
   {battle:'cheekstuffer',tut:'ch6stuffer'},
   ...CH6_AFTER(()=>flag('battle:cheekstuffer')!=='win',[
     {flag:'ch6-picnic'},
@@ -1859,15 +1847,15 @@ const ch6DigScene=C=>[
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:[cap(C.item)+'. Those are '+C.who+'’s.']},
   ...(C.c==='garden'?[
-    {talk:'Tom',lines:['Mr. Washington reads the paper on his porch every morning. He has been reading the same headline for three days.']},
+    {talk:'Tom',lines:['Mr. Washington reads the paper on his porch every morning. He\'s been reading the same headline for three days.']},
     {talk:'TNB',lines:['We bring them back today. Personally. With a pastry.']},
     {trace:'washington-glasses'}, {hearts:'nara'}]:[]),
-  {talk:'TNB',lines:['And there is a scrap of paper in here. A drawing of '+['','one acorn','two acorns','three acorns'][C.acorns]+'. And one word: '+C.knock+'.']},
+  {talk:'TNB',lines:['And there\'s a scrap of paper in here. A drawing of '+['','one acorn','two acorns','three acorns'][C.acorns]+'. And one word: '+C.knock+'.']},
   {call:()=>sfx.levelChime()},
   {toast:'Knock scrap: '+['','one acorn','two acorns','three acorns'][C.acorns]+', '+C.knock+'.',time:4},
   {if:()=>CH6_CACHES.every(k=>ch6Dug(k.c)),then:[
     {flag:'ch6-scraps'}, {wait:4.2},
-    {talk:'TNB',lines:['That is all three scraps. One acorn, two acorns, three acorns. It is a sequence, babe. It is ALWAYS a sequence.']},
+    {talk:'TNB',lines:['That\'s all three scraps. One acorn, two acorns, three acorns. It\'s a sequence, babe. It\'s ALWAYS a sequence.']},
     {talk:'Tom',lines:['One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER.']},
     {toast:'Goal: the little door in the Old Oak (top of the park). Knock the way the scraps say.',time:5}],else:[]}
 ];
@@ -1880,8 +1868,8 @@ SCENES.ch6Fetch=[
   {talk:'Nara',lines:['Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.']},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {hearts:'nara'}, {trace:'nara-dogpark'}, {call:()=>sfx.levelChime()},
-  {talk:'TNB',lines:['She has not eaten in three days, and she just ate your emergency bread.']},
-  {talk:'Tom',lines:['She will only eat bread if I throw it. Still true. Still very picky. Still very athletic.']},
+  {talk:'TNB',lines:['She hasn\'t eaten in three days, and she just ate your emergency bread.']},
+  {talk:'Tom',lines:['She\'ll only eat bread if I throw it. Still true. Still very picky. Still very athletic.']},
   {heal:true},
   {toast:'Everyone is healed. Nara is very, very proud of herself.',time:3.5}
 ];
@@ -1889,7 +1877,7 @@ SCENES.ch6Fetch=[
 SCENES.ch6Door=[
   {flag:'ch6-door'},
   {call:()=>{ sfx.thud(); }}, {wait:.6},
-  {talk:'Little door',lines:['A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..."','"...wait. You are very tall. Are you a squirrel?"']},
+  {talk:'Little door',lines:['A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..."','"...wait. You\'re very tall. Are you a squirrel?"']},
   {talk:'Tom',lines:['Yes.']},
   {talk:'Little door',lines:['Running footsteps. Very small ones. Going up.']},
   {call:()=>{ ch6OpenDoor(); storyWorld(); sfx.doorIn&&sfx.doorIn(); sfx.levelChime(); }},
@@ -1900,21 +1888,21 @@ SCENES.ch6Door=[
 // 9. Inside the Old Oak.
 SCENES.ch6Oak=[
   {flag:'ch6-oak'},
-  {talk:'TNB',lines:['Babe. We are inside a tree. This is the second act of every horror movie I have ever seen.']},
+  {talk:'TNB',lines:['Babe. We\'re inside a tree. This is the second act of every horror movie I\'ve ever seen.']},
   {talk:'Tom',lines:['Then we stay together.']},
-  {talk:'TNB',lines:['That is what they always say in the second act.']},
+  {talk:'TNB',lines:['That\'s what they always say in the second act.']},
   {call:()=>sfx.bark&&sfx.bark()},
   {talk:'Nara',lines:['Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint.']},
-  {talk:'Tom',lines:['He is up there. And there is no ladder.']},
+  {talk:'Tom',lines:['He\'s up there. And there\'s no ladder.']},
   {toast:'Goal: find a way up. The war room is on the left, the pantry on the right.',time:4.5}
 ];
 // 10. The war room corkboard.
 SCENES.ch6Board=[
   {flag:'ch6-board'},
-  {talk:'TNB',lines:['Babe. Babe. They have a corkboard. With RED STRING. I have waited my whole life for this.']},
+  {talk:'TNB',lines:['Babe. Babe. They have a corkboard. With RED STRING. I\'ve waited my whole life for this.']},
   {talk:'Corkboard',lines:['Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH.','In the middle, circled three times: Tom’s jar. Across the top: OPERATION BIG BREAD.']},
-  {talk:'Tom',lines:['That is my house. That is my JAR. Why is my jar in the middle of everything?']},
-  {talk:'TNB',lines:['Everything connects to the jar, babe. That is how corkboards work.']},
+  {talk:'Tom',lines:['That\'s my house. That\'s my JAR. Why\'s my jar in the middle of everything?']},
+  {talk:'TNB',lines:['Everything connects to the jar, babe. That\'s how corkboards work.']},
   {talk:'Corkboard',lines:['A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.','Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY).']},
   {talk:'Nara',lines:['Nara looks at the drawing of herself. She seems pleased with it.']},
   {toast:'Goal: the pantry (right). The bucket on the rope.',time:4.5}
@@ -1922,17 +1910,17 @@ SCENES.ch6Board=[
 // 11. The bucket: Nara is the counterweight. The rope ladder comes down.
 SCENES.ch6Ladder=[
   {flag:'ch6-ladder'},
-  {talk:'TNB',lines:['It is a counterweight. Put enough weight in the bucket and the ladder comes down. Classic pulley.']},
+  {talk:'TNB',lines:['It\'s a counterweight. Put enough weight in the bucket and the ladder comes down. Classic pulley.']},
   {talk:'Tom',lines:['We need about forty pounds.']},
   {talk:'TNB',lines:['...']},
   {talk:'Tom',lines:['...']},
   {talk:'Tom',lines:['Nara. Sit. In the bucket.']},
-  {talk:'Nara',lines:['Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket.','She would do anything for Tom. She makes very sure he knows it.']},
+  {talk:'Nara',lines:['Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket.','She\'d do anything for Tom. She makes very sure he knows it.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {call:()=>{ ch6LowerLadder(); storyWorld(); }},
   {talk:'Inside the Old Oak',lines:['CREEEEAK. The bucket sinks. Across the trunk, a rope ladder unrolls down the middle, all the way to the floor.']},
   {talk:'Nara',lines:['Nara is out of the bucket before it stops moving. She leans on Tom with all forty pounds.']},
-  {talk:'Tom',lines:['Very brave. Extremely brave. You will be getting a lot of chicken.']},
+  {talk:'Tom',lines:['Very brave. Extremely brave. You\'ll be getting a lot of chicken.']},
   {trace:'nara-bucket'}, {hearts:'nara'},
   {toast:'Goal: up the rope ladder to the top of the Oak.',time:4.5}
 ];
@@ -1947,14 +1935,14 @@ SCENES.ch6Boss=[
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'Chairman Cheeks'}, {face:'Chairman Cheeks',dir:'down'},
   {talk:'Chairman Cheeks',lines:['ORDER. ORDER! Who let a DOG into the Oak?',
-    'I am the Chairman. Chairman Cheeks. Every acorn, every peanut, every shiny thing on 2nd Avenue comes up this tree. Because winter is coming.']},
-  {talk:'Tom',lines:['It is Los Angeles. Winter is a light jacket.']},
-  {talk:'Chairman Cheeks',lines:['That is what they WANT you to think.',
-    'And this jar. This jar smells like bread FOREVER. You feed it and it grows. It never runs out. It is the perfect hoard.']},
-  {talk:'Tom',lines:['That is Bready Mercury. He is nine. You feed him flour and water, and then you SHARE the bread. That is the whole point of him.']},
+    'I\'m the Chairman. Chairman Cheeks. Every acorn, every peanut, every shiny thing on 2nd Avenue comes up this tree. Because winter is coming.']},
+  {talk:'Tom',lines:['It\'s Los Angeles. Winter is a light jacket.']},
+  {talk:'Chairman Cheeks',lines:['That\'s what they WANT you to think.',
+    'And this jar. This jar smells like bread FOREVER. You feed it and it grows. It never runs out. It\'s the perfect hoard.']},
+  {talk:'Tom',lines:['That\'s Bready Mercury. He\'s nine. You feed him flour and water, and then you SHARE the bread. That\'s the whole point of him.']},
   {talk:'Chairman Cheeks',lines:['Share? ...Nobody shares. Not with a squirrel. Twenty years, and every bird feeder on the block has chased me off it.']},
-  {talk:'Nara',lines:['Nara growls. A very small growl. Very serious. She has waited three days for this.']},
-  {talk:'TNB',lines:['It is a squirrel in a tiny tie, babe. I am so scared and so delighted.']},
+  {talk:'Nara',lines:['Nara growls. A very small growl. Very serious. She\'s waited three days for this.']},
+  {talk:'TNB',lines:['It\'s a squirrel in a tiny tie, babe. I\'m so scared and so delighted.']},
   {talk:'Tom',lines:['Put the starter down. No touching, please.']},
   {battle:'chairman',tut:'chairman'},
   {if:()=>flag('battle:chairman')!=='win',then:[
@@ -1967,18 +1955,18 @@ SCENES.ch6AfterBoss=()=>[
   {flag:'ch6-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:chairman')?[
-    {talk:'Chairman Cheeks',lines:['...Shared. You shared with me. Three times. Nobody has ever... I am going to need a minute.','Take the jar. And... could I maybe have a slice? Sometimes?']},
+    {talk:'Chairman Cheeks',lines:['...Shared. You shared with me. Three times. Nobody has ever... I\'m going to need a minute.','Take the jar. And... could I maybe have a slice? Sometimes?']},
     {talk:'Tom',lines:['Saturdays. On my back fence. One slice. The heel.']},
     {talk:'Chairman Cheeks',lines:['The heel is the best part.']}]:[
-    {talk:'Chairman Cheeks',lines:['Fine. FINE. This meeting is adjourned. I am going to go stare at a bird feeder.']}]),
+    {talk:'Chairman Cheeks',lines:['Fine. FINE. This meeting is adjourned. I\'m going to go stare at a bird feeder.']}]),
   {call:()=>{ setFlag('ch6-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The hoard',lines:['Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.']},
   {give:'bready'},
-  {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You were on an adventure.','You are going to be extremely sour about this.']},
+  {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You were on an adventure.','You\'re going to be extremely sour about this.']},
   {talk:'TNB',lines:['Was that a pun? Babe. Did you just make a PUN?']},
-  {talk:'Tom',lines:['He is a starter. Sour is a compliment.']},
+  {talk:'Tom',lines:['He\'s a starter. Sour is a compliment.']},
   {talk:'TNB',lines:['And look. Something taped to the lid. A gold coin. With a little clock face.']},
-  {talk:'Tom',lines:['Squirrels hoard shiny things. Squirrels do not tape things. Look at those corners.','The sundial. The steamer. The sign-up sheet. Now my jar. Somebody keeps leaving these where we will find them.']},
+  {talk:'Tom',lines:['Squirrels hoard shiny things. Squirrels don\'t tape things. Look at those corners.','The sundial. The steamer. The sign-up sheet. Now my jar. Somebody keeps leaving these where we\'ll find them.']},
   {talk:'TNB',lines:['Somebody in a long coat, if your niece and your kettle are right. Spooky. I love it. I hate it.']},
   {toast:'Goal: take Bready Mercury home to 2nd Ave. Everybody is waiting.',time:4.5}
 ];
@@ -1989,31 +1977,31 @@ SCENES.ch6End=[
   {place:'Olivia',at:[11,19],dir:'down'}, {place:'Michael',at:[13,19],dir:'down'},
   {place:'tnb',at:[11,20],dir:'up'}, {place:'nara',at:[13,20],dir:'up'},
   {spawn:{name:'Bernadette',look:'bernadette',at:[10,19],dir:'right'}},
-  {talk:'Olivia',lines:['Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He has not put it down. He is eating cereal with one hand.']},
-  {talk:'Bernadette',lines:['Neighborhood Watch Captain’s report: case closed.','I would like it noted that I was right.']},
+  {talk:'Olivia',lines:['Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn\'t put it down. He\'s eating cereal with one hand.']},
+  {talk:'Bernadette',lines:['Neighborhood Watch Captain’s report: case closed.','I\'d like it noted that I was right.']},
   {talk:'TNB',lines:['Noted. On a corkboard. With red string.']},
   {talk:'Michael',lines:['Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.']},
   {give:'y_goldball'},
   {toast:'Nara gets a new Signature Tool: the Golden Tennis Ball (POW +6, WARMTH +4). Equip it in the menu.',time:4.5},
-  {talk:'Nara',lines:['Nara takes it very gently. She will never let go of it again. She is going to sleep for twelve hours, holding it.']},
-  {talk:'Bernadette',lines:['And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I am giving out three. Even the dog.']},
+  {talk:'Nara',lines:['Nara takes it very gently. She\'ll never let go of it again. She\'s going to sleep for twelve hours, holding it.']},
+  {talk:'Bernadette',lines:['And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I\'m giving out three. Even the dog.']},
   {give:'watchvest'},
   {toast:'New outfit: the Neighborhood Watch Vest. Reflective orange. Anyone can wear it.',time:4},
   {despawn:'Bernadette'},
   {talk:'TNB',lines:['You know what today was, babe? Absolutely nuts.']},
-  {talk:'Tom',lines:['...That is not a pun. That is just a word.']},
-  {talk:'TNB',lines:['It is a word with a pun in its heart.']},
+  {talk:'Tom',lines:['...That\'s not a pun. That\'s just a word.']},
+  {talk:'TNB',lines:['It\'s a word with a pun in its heart.']},
   ch4Kiss(),
   {talk:'Tom',lines:['Fine. It was nuts.']},
   {trace:'ch6-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it is fine. It is NOT fine. Come home."']},
+  {talk:'Tom',lines:['A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it\'s fine. It\'s NOT fine. Come home."']},
   {talk:'TNB',lines:['The library is whispering. Is that not just... its job?']},
   {talk:'Tom',lines:['Not on Long Island. On Long Island, the library shushes YOU.']},
   {party:null},
   {fade:'out',time:.8}, {card:6,done:true,time:3.4}, {flag:'ch6-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 6 complete! When you are ready, Sol at Angel City Cab Co. flies you home for chapter 7.',time:6}
+  {toast:'Chapter 6 complete! When you\'re ready, Sol at Angel City Cab Co. flies you home for chapter 7.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch6-arrive',map:'blvd',when:{...CH6,notFlag:'ch6-goal'},scene:'ch6Arrive'},
@@ -2074,7 +2062,7 @@ function ch6Knock(o) {
   if(STORY.mode!=='full'||STORY.chapter!==6||flag('ch6-door')) return false;
   if(!flag('ch6-scraps')) {
     const n=CH6_CACHES.filter(k=>ch6Dug(k.c)).length;
-    openDialog(o.name,['A little round door with an acorn for a knocker. Somebody behind it is chittering.',
+    openDialog(o.name,['A little round door with an acorn for a knocker. Somebody behind it\'s chittering.',
       'TNB: "We need the whole knock, babe. '+(n?'We have '+n+' of 3 scraps.':'Bernadette said the lookouts know it. Nara can dig up the rest.')+'"']);
     return true;
   }
@@ -2087,19 +2075,19 @@ function ch6Knock(o) {
       if(seq.join('|')===CH6_KNOCK.join('|')) { playScene('ch6Door'); return; }
       sfx.nope&&sfx.nope();
       openDialog('Little door',['Silence. Then, from inside: "Wrong knock. Go away."',
-        'TNB: "'+pick(['One acorn first. Then two. Then three. Count the acorns, babe.','The scraps have acorns on them. One, two, three. That is the order.','Wrong order. The acorns tell us the order.'])+'"']);
+        'TNB: "'+pick(['One acorn first. Then two. Then three. Count the acorns, babe.','The scraps have acorns on them. One, two, three. That\'s the order.','Wrong order. The acorns tell us the order.'])+'"']);
     }})));
   ask(); return true;
 }
 // The dog park: throw something for Nara (Heart-Trace).
 const CH6_THROWS=[
-  {label:'A STICK',no:'Nara watches the stick fly. She looks at Tom. She does not do sticks. She has never done sticks.'},
-  {label:'A TENNIS BALL',no:'Nara brings a ball back. It is not that ball. It is a different dog’s ball. The different dog is very upset.'},
+  {label:'A STICK',no:'Nara watches the stick fly. She looks at Tom. She doesn\'t do sticks. She\'s never done sticks.'},
+  {label:'A TENNIS BALL',no:'Nara brings a ball back. It\'s not that ball. It\'s a different dog’s ball. The different dog is very upset.'},
   {label:'TOM’S SHOE',no:'TNB: "Babe. No." Tom puts his shoe back on.'},
   {label:'A HEEL OF SOURDOUGH',ok:true}];
 function ch6Throw(o) {
   if(STORY.mode!=='full'||STORY.chapter!==6||!inParty(nara)||!flag('ch6-park')||flag('ch6-fetch')) return false;
-  openChoice('Dog park',['A whole dog park, and Nara has not played in three days. She sits. She stares at Tom.','What does Tom throw?'],
+  openChoice('Dog park',['A whole dog park, and Nara hasn\'t played in three days. She sits. She stares at Tom.','What does Tom throw?'],
     CH6_THROWS.map(t=>({label:t.label,fn:()=>{ if(t.ok) playScene('ch6Fetch'); else { sfx.nope&&sfx.nope(); openDialog('Nara',[t.no]); } }})));
   return true;
 }
@@ -2173,7 +2161,7 @@ const CH7_CARDS=[
   {c:'non',fight:'ch7-non',n:2,letter:'H',title:'HOW TO WHISPER, VOLUME 2'},
   {c:'pic',fight:'ch7-pic',n:3,letter:'H',title:'HUSH, LITTLE LAMBY'}];
 const CH7_AFTER=(lost,lines)=>[
-  {if:()=>lost(),then:[{heal:true},{talk:'Grace',lines:['Okay. Everybody up. I am in charge of getting up. Up, up, UP.']}],else:[]},
+  {if:()=>lost(),then:[{heal:true},{talk:'Grace',lines:['Okay. Everybody up. I\'m in charge of getting up. Up, up, UP.']}],else:[]},
   ...lines
 ];
 // What each troublemaker leaves behind: a catalog card with a gold letter circled. All three: the password.
@@ -2184,7 +2172,7 @@ const ch7CardSteps=c=>{ const C=CH7_CARDS.find(k=>k.c===c); return [
   {toast:'Catalog card '+C.n+' of 3: the letter '+C.letter+'.',time:4},
   {if:()=>CH7_CARDS.every(k=>flag(k.fight)===true),then:[
     {flag:'ch7-cards'}, {wait:4.2},
-    {talk:'Grace',lines:['That is all three cards, Tata. Card one, card two, card three. Three gold letters.']},
+    {talk:'Grace',lines:['That\'s all three cards, Tata. Card one, card two, card three. Three gold letters.']},
     {talk:'Tom',lines:['A password for the Reading Room. In card order.']},
     {toast:'Goal: the Reading Room doors (top of the hall). Put the gold letters in card order.',time:5}],else:[]}]; };
 
@@ -2193,11 +2181,11 @@ SCENES.ch7Arrive=[
   {flag:'ch7-goal'},
   {talk:'Grace',lines:['Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after.']},
   {talk:'Tom',lines:['I got it. The library is whispering.']},
-  {talk:'Grace',lines:['Not a little bit. ALL the books. At the same time. And they are saying THINGS.']},
+  {talk:'Grace',lines:['Not a little bit. ALL the books. At the same time. And they\'re saying THINGS.']},
   {talk:'Rose',lines:['A book told me Boppy eats cookies in the car. In the CAR, Tata. Before DINNER.']},
   {talk:'Tom',lines:['...That one is true. Everybody knows that one.']},
-  {talk:'Grace',lines:['A book told everybody I sing in the shower. Which is PRIVATE. Also I am very good.',
-    'Page says everything is fine. Page has said fine eleven times. I counted. Nobody says fine eleven times if it is fine.']},
+  {talk:'Grace',lines:['A book told everybody I sing in the shower. Which is PRIVATE. Also I\'m very good.',
+    'Page says everything is fine. Page has said fine eleven times. I counted. Nobody says fine eleven times if it\'s fine.']},
   {trace:'grace-text'}, {hearts:'grace'},
   {toast:'Goal: The Hush Library (BOOKS), at the top of the Square.',time:4.5}
 ];
@@ -2208,17 +2196,17 @@ SCENES.ch7Page=[
   {talk:'Page',lines:['Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.']},
   {talk:'Grace',lines:['Twelve.']},
   {talk:'Whispers',lines:['...psst... Page hums in the elevator... psst... Page has never finished Moby Dick... psst...']},
-  {talk:'Page',lines:['...It is not fine. It started a week ago. It comes up from the Stacks, downstairs. The old part.',
-    'Every book down there is whispering. Everything they ever heard. Seventy years of people reading quietly and thinking nobody was listening.']},
+  {talk:'Page',lines:['...It\'s not fine. It started a week ago. It comes up from the Stacks, downstairs. The old part.',
+    'Every book down there\'s whispering. Everything they ever heard. Seventy years of people reading quietly and thinking nobody was listening.']},
   {talk:'Tom',lines:['Books overhear things.']},
-  {talk:'Page',lines:['Books overhear EVERYTHING. That is why we whisper in here. It was never for the people. It is for the books.']},
+  {talk:'Page',lines:['Books overhear EVERYTHING. That\'s why we whisper in here. It was never for the people. It\'s for the books.']},
   {talk:'Rose',lines:['Are there monsters down there? Say yes.']},
   {talk:'Page',lines:['There are three sections. Fiction, Nonfiction and Picture Books. And the Reading Room, at the very back.',
     'The Reading Room doors use the old card catalog lock. I lost the password in 1998.']},
   {talk:'Grace',lines:['I have read every book in the kids section. Twice. I can read ALL the signs.']},
-  {talk:'Page',lines:['Then you are in charge of the signs. Here. The staff door is open.']},
+  {talk:'Page',lines:['Then you\'re in charge of the signs. Here. The staff door is open.']},
   {call:()=>{ sfx.thud(); sfx.doorIn&&sfx.doorIn(); }},
-  {talk:'Page',lines:['Please be careful. And please, do not answer the books. It only encourages them.']},
+  {talk:'Page',lines:['Please be careful. And please, don\'t answer the books. It only encourages them.']},
   {flag:'ch7-page'},
   {toast:'Goal: the Stacks, through the STAFF ONLY door (back right of the library).',time:4.5}
 ];
@@ -2226,17 +2214,16 @@ SCENES.ch7Page=[
 SCENES.ch7Stacks=[
   {flag:'ch7-stacks',value:'pending'},
   {talk:'Whispers',lines:['psst... psst... the uncle is here... the TALL one... psst... he talks to his bread...']},
-  {talk:'Tom',lines:['I do talk to my bread. It is part of the process.']},
+  {talk:'Tom',lines:['I do talk to my bread. It\'s part of the process.']},
   {talk:'Rose',lines:['Tata. Tata. The books are looking at us.']},
-  {talk:'Grace',lines:['Books cannot look. They do not have... okay, that one has eyes.']},
-  {talk:'Grace',lines:['FICTION is that way. NONFICTION is that way. PICTURE BOOKS are down there. The READING ROOM is at the top.','I can read every sign. Rose cannot read yet.']},
+  {talk:'Grace',lines:['Books can\'t look. They don\'t have... okay, that one has eyes.']},
+  {talk:'Grace',lines:['FICTION is that way. NONFICTION is that way. PICTURE BOOKS are down there. The READING ROOM is at the top.','I can read every sign. Rose can\'t read yet.']},
   {talk:'Rose',lines:['I can read PICTURES. Pictures are harder.']},
-  {talk:'Grace',lines:['...That is actually true.']},
+  {talk:'Grace',lines:['...That\'s actually true.']},
   {trace:'sisters-stacks'}, {hearts:'rose'},
   {talk:'Tom',lines:['Somebody down here knows the password. We ask nicely. Then we ask less nicely.']},
   {flag:'ch7-stacks'},
   {toast:'Goal: Fiction (top left), Nonfiction (top right), Picture Books (bottom). Then the Reading Room doors (top).',time:5.5},
-  {wait:5.7},
   {toast:'Tip: Picture Books has a story time chair. Rose has a book ready.',time:4}
 ];
 // 4. Optional: story time. Which book does Rose want? (data in ch7Storytime below).
@@ -2244,9 +2231,9 @@ SCENES.ch7Story=[
   {flag:'ch7-story'},
   {talk:'Tom',lines:['Lamby’s Big Day. Page one. Lamby woke up and decided it was going to be a big day.']},
   {talk:'Rose',lines:['Do the voice. Do Lamby’s voice.']},
-  {talk:'Tom',lines:['(a very small voice) Today I am going to jump on everybody.']},
+  {talk:'Tom',lines:['(a very small voice) Today I\'m going to jump on everybody.']},
   {talk:'Rose',lines:['THAT IS WHAT I DO.']},
-  {talk:'Grace',lines:['Okay. That is actually a good book. Do not tell anyone I said that.']},
+  {talk:'Grace',lines:['Okay. That\'s actually a good book. Don\'t tell anyone I said that.']},
   {talk:'Whispers',lines:['All around the rug, the picture books go quiet. One of them says, very softly: ...again?']},
   {hearts:'rose'}, {trace:'storytime'}, {call:()=>sfx.levelChime()},
   {heal:true},
@@ -2260,7 +2247,7 @@ SCENES.ch7Fic=[
   {talk:'The Cliffhanger',lines:['And then... the uncle walked into Fiction... and he saw... he saw...']},
   {talk:'Tom',lines:['Saw what.']},
   {talk:'The Cliffhanger',lines:['Find out next time!']},
-  {talk:'Grace',lines:['That is SO annoying. Finish your SENTENCES.']},
+  {talk:'Grace',lines:['That\'s SO annoying. Finish your SENTENCES.']},
   {battle:'cliffhanger',tut:'ch7cliff'},
   ...CH7_AFTER(()=>flag('battle:cliffhanger')!=='win',[
     {flag:'ch7-fic'},
@@ -2271,18 +2258,18 @@ SCENES.ch7Fic=[
 SCENES.ch7Non=[
   {flag:'ch7-non',value:'pending'},
   {walk:'The Know-It-All',to:routeBeside('The Know-It-All'),speed:.25},
-  {talk:'The Know-It-All',lines:['Actually, it is li-BRAR-y. Two Rs. Everybody says it wrong. Actually.']},
+  {talk:'The Know-It-All',lines:['Actually, it\'s li-BRAR-y. Two Rs. Everybody says it wrong. Actually.']},
   {talk:'Grace',lines:['Actually, I KNOW that. Actually, I said it right.']},
   {talk:'The Know-It-All',lines:['Actually, you said it bossy.']},
   {talk:'Rose',lines:['Tata. It sounds like Grace.']},
   {talk:'Grace',lines:['It does NOT sound like me. Tata. Tell her.']},
-  {talk:'Tom',lines:['...Let us focus on the encyclopedia.']},
+  {talk:'Tom',lines:['...Let\'s focus on the encyclopedia.']},
   {battle:'knowitall',tut:'ch7know'},
   ...CH7_AFTER(()=>flag('battle:knowitall')!=='win',[
     {flag:'ch7-non'},
-    {talk:'Grace',lines:['Tata. Am I a know-it-all? Be honest. Actually, do not be honest.']},
+    {talk:'Grace',lines:['Tata. Am I a know-it-all? Be honest. Actually, don\'t be honest.']},
     {talk:'Tom',lines:['You know a lot. And you tell people. Those are two different things, and only one of them needs a little work.',
-      'The other one is why you are in charge of the signs down here.']},
+      'The other one is why you\'re in charge of the signs down here.']},
     {talk:'Grace',lines:['...Okay. I can work on the telling part. A little. Starting tomorrow.']},
     {trace:'grace-knowitall'}, {hearts:'grace'},
     ...ch7CardSteps('non')])
@@ -2293,7 +2280,7 @@ SCENES.ch7Pic=[
   {call:()=>sfx.whoosh()},
   {talk:'Pop-Up Panic',lines:['BOO!']},
   {talk:'Rose',lines:['AAAAH!']},
-  {talk:'Rose',lines:['...Hey. HEY. Nobody scares ME. I do the scaring. That is MY job.']},
+  {talk:'Rose',lines:['...Hey. HEY. Nobody scares ME. I do the scaring. That\'s MY job.']},
   {talk:'Pop-Up Panic',lines:['...Boo?']},
   {talk:'Rose',lines:['BOOOOOOO!']},
   {talk:'Pop-Up Panic',lines:['AAAAH!']},
@@ -2302,7 +2289,7 @@ SCENES.ch7Pic=[
   ...CH7_AFTER(()=>flag('battle:popup')!=='win',[
     {flag:'ch7-pic'},
     {talk:'Rose',lines:['Tata, did you see? I scared it back. It was TERRIFIED.']},
-    {talk:'Tom',lines:['It was terrified. Best scaring I have ever seen. Ten out of ten.']},
+    {talk:'Tom',lines:['It was terrified. Best scaring I\'ve ever seen. Ten out of ten.']},
     {trace:'rose-boo'}, {hearts:'rose'},
     ...ch7CardSteps('pic')])
 ];
@@ -2312,7 +2299,7 @@ SCENES.ch7Door=[
   {call:()=>{ sfx.thud(); }}, {wait:.6},
   {talk:'Reading Room doors',lines:['Click. Click. CLUNK. The brass drawer slides shut by itself.']},
   {call:()=>{ ch7OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); sfx.levelChime(); }},
-  {talk:'Whispers',lines:['All through the Stacks, every book stops whispering at once.','Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who is there?\"']},
+  {talk:'Whispers',lines:['All through the Stacks, every book stops whispering at once.','Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who\'s there?\"']},
   {talk:'Rose',lines:['Tata. The door talked.']},
   {talk:'Tom',lines:['The thing behind the door talked. Stay close.']},
   {toast:'Goal: the Reading Room.',time:4}
@@ -2323,23 +2310,23 @@ SCENES.ch7Boss=[
   {hide:'The Unread'},
   {walk:'tom',to:routeTo('tom',9,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[8,7],dir:'up'}, {place:'rose',at:[10,7],dir:'up'},
-  {talk:'Grace',lines:['Tata. On the dais. It is a book. A really, REALLY big book.']},
+  {talk:'Grace',lines:['Tata. On the dais. It\'s a book. A really, REALLY big book.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Unread'}, {face:'The Unread',dir:'down'},
   {talk:'The Unread',lines:['...Visitors. Nobody comes to the Reading Room. Nobody has come since 1952.']},
-  {talk:'Tom',lines:['You are the one whispering.']},
-  {talk:'The Unread',lines:['I am the oldest book in the Stacks. Seventy years on this shelf. Nobody has checked me out. Nobody has opened me. Not once.',
+  {talk:'Tom',lines:['You\'re the one whispering.']},
+  {talk:'The Unread',lines:['I\'m the oldest book in the Stacks. Seventy years on this shelf. Nobody has checked me out. Nobody has opened me. Not once.',
     'So I listened. Everybody who ever sat in this room thought nobody could hear them. I heard ALL of it.',
-    'If nobody will read me, then I will read THEM. Out loud. To everybody.']},
+    'If nobody will read me, then I\'ll read THEM. Out loud. To everybody.']},
   {talk:'Rose',lines:['You told everybody Boppy eats cookies in the car.']},
   {talk:'The Unread',lines:['He does. In the CAR.']},
-  {talk:'Grace',lines:['You cannot just tell people’s secrets! That is the rudest thing a book can do! That is a RULE!']},
+  {talk:'Grace',lines:['You can\'t just tell people’s secrets! That\'s the rudest thing a book can do! That\'s a RULE!']},
   {talk:'The Unread',lines:['Then read me. Go on. Nobody ever does.']},
   {talk:'Tom',lines:['Girls, behind me. No touching, please.']},
   {battle:'unread',tut:'unread'},
   {if:()=>flag('battle:unread')!=='win',then:[
     {heal:true},
-    {talk:'Grace',lines:['Up, everybody. I am in charge now.','Tata, it TELLS us its chapter. Mystery, Chatter. Adventure, Kinetic. Read the message. And maybe somebody should just read it. Out loud. Three times.']},
+    {talk:'Grace',lines:['Up, everybody. I\'m in charge now.','Tata, it TELLS us its chapter. Mystery, Chatter. Adventure, Kinetic. Read the message. And maybe somebody should just read it. Out loud. Three times.']},
     {toast:'Face The Unread and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 8. After the boss (won in the scene, or on a retry with A): the Unread settles down. A coin, and a checkout card.
@@ -2350,37 +2337,37 @@ SCENES.ch7AfterBoss=()=>[
     {talk:'The Unread',lines:['...You read me. Out loud. With VOICES.','Seventy years. That was the best chapter of my whole life. It was chapter one.']},
     {talk:'Rose',lines:['I did the dragon.']},
     {talk:'The Unread',lines:['You were a wonderful dragon.']}]:[
-    {talk:'The Unread',lines:['...Fine. The end. I will be quiet. I am very good at quiet. I have had a lot of practice.']}]),
+    {talk:'The Unread',lines:['...Fine. The end. I\'ll be quiet. I\'m very good at quiet. I\'ve had a lot of practice.']}]),
   {call:()=>{ setFlag('ch7-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The Reading Room',lines:['The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering.']},
   {talk:'Grace',lines:['Tata, something fell out of it. Something gold. It was being used as a bookmark.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['A gold coin. Same little clock face.','The sundial. The steamer. The sign-up sheet. My jar. Now a book nobody has opened since 1952.']},
   {talk:'Grace',lines:['Somebody DID open it, then. To put the coin in.','And look. The checkout card, in the pocket. One stamp. DUE BACK 1952. No name. Just a little clock.']},
-  {talk:'Rose',lines:['Somebody took it out and did not READ it? That is so sad.']},
-  {talk:'Tom',lines:['And brought it back with a coin in it. Look at those corners. Very neat.','I am adding it to the list.']},
-  {talk:'Grace',lines:['I am adding it to MY list. Mine has a chart AND a key now.']},
+  {talk:'Rose',lines:['Somebody took it out and didn\'t READ it? That\'s so sad.']},
+  {talk:'Tom',lines:['And brought it back with a coin in it. Look at those corners. Very neat.','I\'m adding it to the list.']},
+  {talk:'Grace',lines:['I\'m adding it to MY list. Mine has a chart AND a key now.']},
   {toast:'Goal: back up to the Hush Library. Page is waiting.',time:4.5}
 ];
 // 9. The Hush Library: properly quiet. Rewards. TNB's text. Chapter complete.
 SCENES.ch7End=[
   {flag:'ch7-done',value:'pending'},
   {walk:'Page',to:routeBeside('Page'),speed:.25},
-  {talk:'Page',lines:['Listen. It is quiet. Properly quiet. The good kind. The dictionaries are snoring.']},
-  {talk:'Grace',lines:['It just wanted somebody to read it. That is all. All of it was because nobody read it.']},
-  {talk:'Page',lines:['Then we will read it. Story time, Saturdays, out loud. And I think I know who should do the voices.',
+  {talk:'Page',lines:['Listen. It\'s quiet. Properly quiet. The good kind. The dictionaries are snoring.']},
+  {talk:'Grace',lines:['It just wanted somebody to read it. That\'s all. All of it was because nobody read it.']},
+  {talk:'Page',lines:['Then we\'ll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.',
     'Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.']},
   {give:'g_librarycard'},
   {toast:'Grace gets a new Signature Tool: the Gold Library Card (POW +6, WARMTH +6). Equip it in the menu.',time:4.5},
-  {talk:'Grace',lines:['No late fees. EVER? Tata. I am going to take out every book. Every single one. Alphabetically.']},
+  {talk:'Grace',lines:['No late fees. EVER? Tata. I\'m going to take out every book. Every single one. Alphabetically.']},
   {talk:'Page',lines:['And sweaters. I knit one every winter. I have run out of people. Please take some.']},
   {give:'hushsweater'},
   {toast:'New outfit: the Hush Library Sweater. SHHH on the front. Anyone can wear it.',time:4},
-  {talk:'Rose',lines:['It is itchy. I love it.']},
+  {talk:'Rose',lines:['It\'s itchy. I love it.']},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You are on bread. For forty people.\"',
-    '\"I said yes for you. You are welcome. Bring the starter.\"']},
-  {talk:'Grace',lines:['Forty people? Tata. That is a FEAST.']},
+  {talk:'Tom',lines:['A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You\'re on bread. For forty people.\"',
+    '\"I said yes for you. You\'re welcome. Bring the starter.\"']},
+  {talk:'Grace',lines:['Forty people? Tata. That\'s a FEAST.']},
   {talk:'Tom',lines:['...Bready Mercury is going to need a bigger jar.']},
   {trace:'ch7-wrap'}, {hearts:'grace'}, {call:()=>sfx.levelChime()},
   {party:null},
@@ -2388,7 +2375,6 @@ SCENES.ch7End=[
   {fade:'out',time:.8}, {card:7,done:true,time:3.4}, {flag:'ch7-done'}, {fade:'in',time:.8},
   {save:true},
   {toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2},
-  {wait:3.4},
   {toast:'Chapter 7 complete! Chapter 8 is still being built. Long Island is yours to explore.',time:6}
 ];
 TRIGGERS.push(
@@ -2446,16 +2432,16 @@ function ch7Catalog(o) {
     CH7_WORDS.map(w=>({label:w==='BOO'?'BOO (Rose’s idea)':w,fn:()=>{
       if(w==='SHH') { playScene('ch7Door'); return; }
       sfx.nope&&sfx.nope();
-      if(w==='BOO') { openDialog('Rose',['BOO!','...It did not work. It SHOULD have worked. Boo always works.']); return; }
-      openDialog('Grace',[pick(['Card one first, Tata. Then card two. Then card three.','The cards are numbered. One, two, three. That is the order.','Wrong order. Card ONE is the first letter.'])]);
+      if(w==='BOO') { openDialog('Rose',['BOO!','...It didn\'t work. It SHOULD have worked. Boo always works.']); return; }
+      openDialog('Grace',[pick(['Card one first, Tata. Then card two. Then card three.','The cards are numbered. One, two, three. That\'s the order.','Wrong order. Card ONE is the first letter.'])]);
     }})));
   return true;
 }
 // Story time: pick the book Rose wants (Heart-Trace).
 const CH7_BOOKS=[
   {label:'A BOOK ABOUT TAXES',no:'Rose falls asleep on page one. Then she wakes up and says no.'},
-  {label:'THE DICTIONARY',no:'Rose: \"Read the A part.\" Tom reads the A part. Rose: \"Is there a story?\" There is not a story.'},
-  {label:'THE SCARIEST ONE',no:'Grace: \"NO. She will be up all night and she will come in MY room.\" Rose: \"I WILL.\"'},
+  {label:'THE DICTIONARY',no:'Rose: \"Read the A part.\" Tom reads the A part. Rose: \"Is there a story?\" There\'s not a story.'},
+  {label:'THE SCARIEST ONE',no:'Grace: \"NO. She\'ll be up all night and she\'ll come in MY room.\" Rose: \"I WILL.\"'},
   {label:'LAMBY’S BIG DAY',ok:true}];
 function ch7Storytime(o) {
   if(STORY.mode!=='full'||STORY.chapter!==7||!flag('ch7-stacks')||flag('ch7-story')) return false;
@@ -2507,7 +2493,7 @@ TUTORIALS.ch7know={tips:[
   {id:'weak',who:'*',text:'The Know-It-All is weak to Chatter and Sparkle, and shrugs off Cozy. B Inspects it.'}]};
 TUTORIALS.ch7pop={tips:[
   {id:'dodge',who:'*',text:'Pop-Up Panic folds flat and dodges a lot of single hits. Hits on everyone never miss.'},
-  {id:'weak',who:'rose',dir:'up',text:'It is weak to Kinetic and Sparkle. Rose’s Lamby Launch is Kinetic. Scare it back.'}]};
+  {id:'weak',who:'rose',dir:'up',text:'It\'s weak to Kinetic and Sparkle. Rose’s Lamby Launch is Kinetic. Scare it back.'}]};
 TUTORIALS.unread={tips:[
   {id:'chapter',who:'*',text:'The Unread is reading one chapter at a time. The message says which genre, and what works on it. B Inspects it too.'},
   {id:'page',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='page'),text:'PAGE TURN is coming: next turn its weak spot changes. Spend big skills now, while you know the weak spot.'},
@@ -2540,13 +2526,13 @@ const CH8_AFTER=(lost,lines)=>[
 // What each troublemaker was hogging: one pilot light from a 2nd Ave stove. All three: the turntable motor.
 const ch8PilotSteps=c=>{ const C=CH8_SHOPS.find(k=>k.c===c); return [
   {call:()=>sfx.pickup()},
-  {talk:'Tom',lines:['A pilot light. A tiny blue flame, floating right there. That is '+C.whose+' stove. That is the '+C.dish+'.']},
-  {talk:'Nara',lines:['Nara sniffs it. It is warm. Her tail goes like a propeller.']},
+  {talk:'Tom',lines:['A pilot light. A tiny blue flame, floating right there. That is '+C.whose+' stove. That\'s the '+C.dish+'.']},
+  {talk:'Nara',lines:['Nara sniffs it. It\'s warm. Her tail goes like a propeller.']},
   {call:()=>sfx.levelChime()},
   {toast:'Pilot light '+CH8_SHOPS.filter(k=>flag(k.fight)===true).length+' of 3.',time:3.5},
   {if:()=>CH8_SHOPS.every(k=>flag(k.fight)===true),then:[
     {flag:'ch8-pilots'}, {wait:3.7},
-    {talk:'TNB',lines:['That is three, babe. And that little steam motor by the turntable has three empty burners. Three. I can fix that.']},
+    {talk:'TNB',lines:['That\'s three, babe. And that little steam motor by the turntable has three empty burners. Three. I can fix that.']},
     {talk:'Tom',lines:['You can fix anything.']},
     {talk:'TNB',lines:['I can fix most things. I fixed your dishwasher with a butter knife.']},
     {toast:'Goal: the turntable motor (bottom of the corridor, by the turntable).',time:5}],else:[]}]; };
@@ -2555,8 +2541,8 @@ const ch8PilotSteps=c=>{ const C=CH8_SHOPS.find(k=>k.c===c); return [
 SCENES.ch8Arrive=[
   {flag:'ch8-goal'},
   {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Tom',lines:['A text from TNB.','"Babe. Potluck is TONIGHT. Forty people. You are on bread."','"Also every oven on 2nd Ave just went cold. At the same time. At noon. Come home."']},
-  {talk:'Tom',lines:['Bready Mercury’s dough has been rising since Thursday. Forty loaves. It needs a five hundred degree oven.','I did not fly here to serve forty people raw dough.']},
+  {talk:'Tom',lines:['A text from TNB.','"Babe. Potluck is TONIGHT. Forty people. You\'re on bread."','"Also every oven on 2nd Ave just went cold. At the same time. At noon. Come home."']},
+  {talk:'Tom',lines:['Bready Mercury’s dough has been rising since Thursday. Forty loaves. It needs a five hundred degree oven.','I didn\'t fly here to serve forty people raw dough.']},
   {toast:'Goal: 2nd Ave in Jefferson Park, south of Downtown.',time:4.5}
 ];
 // 2. 2nd Ave: TNB, the heart-kiss, Bernadette's clipboard, cold ovens. Olivia hands over Nara.
@@ -2567,23 +2553,23 @@ SCENES.ch8Block=[
   {place:'tnb',at:[13,20],dir:'left'}, {show:'tnb'},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
-  {talk:'TNB',lines:['Hi. Missed you. Do not panic. Touch your stove.']},
-  {talk:'Tom',lines:['...I have not been home yet.']},
-  {talk:'TNB',lines:['Right. Well, it is cold. Everybody’s is cold. I tried to light yours. The flame LEANED, babe. Sideways. Toward the boulevard. Like it wanted to leave.']},
+  {talk:'TNB',lines:['Hi. Missed you. Don\'t panic. Touch your stove.']},
+  {talk:'Tom',lines:['...I haven\'t been home yet.']},
+  {talk:'TNB',lines:['Right. Well, it\'s cold. Everybody’s is cold. I tried to light yours. The flame LEANED, babe. Sideways. Toward the boulevard. Like it wanted to leave.']},
   {trace:'tnb-hello8'}, {hearts:'tom'},
   {spawn:{name:'Bernadette',look:'bernadette',at:[11,20],dir:'right'}},
   {talk:'Bernadette',lines:['Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.','Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.']},
   {talk:'Tom',lines:['Did you call the gas company?']},
-  {talk:'Bernadette',lines:['They said it is the weekend. I said it is the POTLUCK. They hung up. I have filed a report. With myself.']},
+  {talk:'Bernadette',lines:['They said it\'s the weekend. I said it\'s the POTLUCK. They hung up. I\'ve filed a report. With myself.']},
   {walk:'Olivia',to:routeBeside('Olivia'),speed:.2},
-  {talk:'Olivia',lines:['Tom! Can you take Nara? She will not eat. Her dinner is cold, so she will not eat it. Michael warmed it in his hands. She still will not eat it.']},
+  {talk:'Olivia',lines:['Tom! Can you take Nara? She\'ll not eat. Her dinner is cold, so she\'ll not eat it. Michael warmed it in his hands. She still won\'t eat it.']},
   {walk:'Nara',to:routeBeside('Nara'),speed:.1},
   {talk:'Nara',lines:['Nara slams into Tom’s shins and leans on him with all forty pounds. Then she turns, points her nose east, and sniffs. Hard.']},
   {join:'nara'}, {hearts:'nara'}, {trace:'nara-hello8'},
-  {talk:'TNB',lines:['East. Toward the end of the boulevard. Babe. The old Car Barn. Division Nine. The streetcars ran out of there until 1963.','I have wanted to go in there since I MOVED here.']},
-  {talk:'Bernadette',lines:['The barn? It has been chained up for sixty years. Here. Committee key. I am the committee. We are closing the boulevard for the tables. Bread by six.']},
+  {talk:'TNB',lines:['East. Toward the end of the boulevard. Babe. The old Car Barn. Division Nine. The streetcars ran out of there until 1963.','I\'ve wanted to go in there since I MOVED here.']},
+  {talk:'Bernadette',lines:['The barn? It\'s been chained up for sixty years. Here. Committee key. I\'m the committee. We\'re closing the boulevard for the tables. Bread by six.']},
   {despawn:'Bernadette'},
-  {talk:'Olivia',lines:['Bring her back fed! Please! Michael, Isla is eating the lasagna. It is a brick. She is eating a brick.']},
+  {talk:'Olivia',lines:['Bring her back fed! Please! Michael, Isla is eating the lasagna. It\'s a brick. She\'s eating a brick.']},
   {party:{lock:['tom','tnb']}},
   {flag:'ch8-block'},
   {toast:'Goal: the old Car Barn, at the east end of Jefferson Boulevard.',time:4.5}
@@ -2591,54 +2577,53 @@ SCENES.ch8Block=[
 // 3. The Car Barn: cold, frost, and little blue flames drifting toward the turntable.
 SCENES.ch8Barn=[
   {flag:'ch8-barn',value:'pending'},
-  {talk:'TNB',lines:['Oh. Oh, babe. Look at it. The tracks are still in the floor. The time clock. The crew bench. I am going to cry a little.']},
-  {talk:'Tom',lines:['It is beautiful. It is also freezing. It is seventy-four degrees outside.']},
+  {talk:'TNB',lines:['Oh. Oh, babe. Look at it. The tracks are still in the floor. The time clock. The crew bench. I\'m going to cry a little.']},
+  {talk:'Tom',lines:['It\'s beautiful. It\'s also freezing. It\'s seventy-four degrees outside.']},
   {talk:'Nara',lines:['Nara watches a little blue flame drift past her nose, along the floor, toward the back. Then another one. Then another.']},
-  {talk:'Tom',lines:['Those are pilot lights. The whole block’s pilot lights. Something down here is collecting them.']},
+  {talk:'Tom',lines:['Those are pilot lights. The whole block’s pilot lights. Something down here\'s collecting them.']},
   {talk:'TNB',lines:['And some of them got stuck. Look. The Paint Shop, the Machine Shop, the Lunchroom. Something in each one is hogging one.']},
   {flag:'ch8-barn'},
   {toast:'Goal: the Paint Shop (top left), the Machine Shop (top right), the Lunchroom (bottom left). Get the pilot lights back.',time:5.5},
-  {wait:5.7},
-  {toast:'Tip: Nara has not eaten all day. The Lunchroom has tables.',time:4}
+  {toast:'Tip: Nara hasn\'t eaten all day. The Lunchroom has tables.',time:4}
 ];
 // 4. The three shops. A troublemaker in each one, hogging a pilot light.
 SCENES.ch8Paint=[
   {flag:'ch8-paint',value:'pending'},
   {walk:'Wet Blanket',to:routeBeside('Wet Blanket'),speed:.3},
-  {talk:'Wet Blanket',lines:['...Oh. Visitors. Great. I suppose you want that little flame.','Why bother. It is just going to go out. Everything goes out eventually.']},
+  {talk:'Wet Blanket',lines:['...Oh. Visitors. Great. I suppose you want that little flame.','Why bother. It\'s just going to go out. Everything goes out eventually.']},
   {talk:'TNB',lines:['Wow. Okay. Big mood, buddy.']},
   {talk:'Tom',lines:['That flame is a gumbo. Forty years of gumbo. Hand it over.']},
   {battle:'wetblanket',tut:'ch8blanket'},
   ...CH8_AFTER(()=>flag('battle:wetblanket')!=='win',[
     {flag:'ch8-paint'},
-    {talk:'TNB',lines:['It dried out a little. Look. It is almost fluffy. It is a blanket again.']},
+    {talk:'TNB',lines:['It dried out a little. Look. It\'s almost fluffy. It\'s a blanket again.']},
     ...ch8PilotSteps('paint')])
 ];
 SCENES.ch8Shop=[
   {flag:'ch8-shop',value:'pending'},
   {walk:'The Draft',to:routeBeside('The Draft'),speed:.35},
-  {talk:'The Draft',lines:['Wooooo. Pfft. Pfft. Pfft. That was me. I blew them all out. Every stove on the block.','Ironbelly asked for the flames, so I carried them. I am a delivery draft.']},
-  {talk:'Tom',lines:['Who is Ironbelly.']},
-  {talk:'The Draft',lines:['Wooooo. I said nothing. I am just air.']},
+  {talk:'The Draft',lines:['Wooooo. Pfft. Pfft. Pfft. That was me. I blew them all out. Every stove on the block.','Ironbelly asked for the flames, so I carried them. I\'m a delivery draft.']},
+  {talk:'Tom',lines:['Who\'s Ironbelly.']},
+  {talk:'The Draft',lines:['Wooooo. I said nothing. I\'m just air.']},
   {talk:'TNB',lines:['Babe, close a door on it. Any door.']},
   {battle:'thedraft',tut:'ch8draft'},
   ...CH8_AFTER(()=>flag('battle:thedraft')!=='win',[
     {flag:'ch8-shop'},
     {talk:'Tom',lines:['Ironbelly. Somebody named Ironbelly wanted every flame on 2nd Ave.']},
-    {talk:'TNB',lines:['That is either a boat or a stove. In a car barn, babe, it is a stove.']},
+    {talk:'TNB',lines:['That\'s either a boat or a stove. In a car barn, babe, it\'s a stove.']},
     ...ch8PilotSteps('shop')])
 ];
 SCENES.ch8Lunch=[
   {flag:'ch8-lunch',value:'pending'},
   {walk:'The Picky Eater',to:routeBeside('The Picky Eater'),speed:.25},
-  {talk:'The Picky Eater',lines:['Ew. EW. Who are you. What is that. Is that a dog? Ew. Is that BREAD? Bread is the worst. Bread TOUCHES things.']},
+  {talk:'The Picky Eater',lines:['Ew. EW. Who are you. What\'s that. Is that a dog? Ew. Is that BREAD? Bread is the worst. Bread TOUCHES things.']},
   {talk:'Nara',lines:['Nara looks at the lunchbox. The lunchbox looks at Nara. Two very picky eaters. Nobody blinks.']},
-  {talk:'TNB',lines:['Babe. It is her. It is Nara as a lunchbox.']},
+  {talk:'TNB',lines:['Babe. It\'s her. It\'s Nara as a lunchbox.']},
   {talk:'Tom',lines:['That flame is my oven. My forty loaves. Put it down. No touching, please.']},
   {battle:'pickyeater',tut:'ch8picky'},
   ...CH8_AFTER(()=>flag('battle:pickyeater')!=='win',[
     {flag:'ch8-lunch'},
-    {talk:'The Picky Eater',lines:['...Fine. FINE. Take it. I will try a bite of something. Later. Maybe. If it is warm. And not touching.']},
+    {talk:'The Picky Eater',lines:['...Fine. FINE. Take it. I\'ll try a bite of something. Later. Maybe. If it\'s warm. And not touching.']},
     {talk:'Nara',lines:['Nara nods. She understands completely.']},
     ...ch8PilotSteps('lunch')])
 ];
@@ -2649,17 +2634,17 @@ SCENES.ch8Plate=[
   {talk:'Nara',lines:['Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate.','She eats it in three bites. She licks the plate. She lies down on his feet.']},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {hearts:'nara'}, {trace:'nara-plate'}, {call:()=>sfx.levelChime()},
-  {talk:'TNB',lines:['She would not eat her own dinner. She ate YOUR dinner.']},
-  {talk:'Tom',lines:['It was on my plate. That is the rule. Food on her plate is suspicious. Food on my plate is a gift.']},
+  {talk:'TNB',lines:['She\'d not eat her own dinner. She ate YOUR dinner.']},
+  {talk:'Tom',lines:['It was on my plate. That\'s the rule. Food on her plate is suspicious. Food on my plate is a gift.']},
   {heal:true},
-  {toast:'Everyone is healed. Nara finally ate. Tom did not.',time:3.5}
+  {toast:'Everyone is healed. Nara finally ate. Tom didn\'t.',time:3.5}
 ];
 // 6. Optional: the lunch pail on Track 1.
 SCENES.ch8Pail=[
   {flag:'ch8-pail'},
-  {talk:'Tom',lines:['A note taped inside the lid: FOR THE NEXT SHIFT. HAVE A GOOD RUN. BOOKER W.','And a picnic basket. Somebody packed it a very long time ago. It is somehow fine.']},
+  {talk:'Tom',lines:['A note taped inside the lid: FOR THE NEXT SHIFT. HAVE A GOOD RUN. BOOKER W.','And a picnic basket. Somebody packed it a very long time ago. It\'s somehow fine.']},
   {give:'picnic'},
-  {talk:'TNB',lines:['Babe. Somebody left lunch for the next guy. Sixty years ago. That is the nicest thing I have ever seen in a train yard.']},
+  {talk:'TNB',lines:['Babe. Somebody left lunch for the next guy. Sixty years ago. That\'s the nicest thing I\'ve ever seen in a train yard.']},
   {toast:'Got a Picnic Basket.',time:3}
 ];
 // 7. TNB fixes the turntable motor with the three pilot lights.
@@ -2669,7 +2654,7 @@ SCENES.ch8Motor=[
   {call:()=>{ sfx.thud(); sfx.whoosh&&sfx.whoosh(); }},
   {talk:'Turntable motor',lines:['FWOOMP. Three little blue flames catch under the boiler. The needle on the gauge creeps up. The pipes start to tick.']},
   {call:()=>sfx.levelChime()},
-  {talk:'TNB',lines:['Steam. We have STEAM, babe. I fixed a hundred-year-old turntable motor. I am going to put this on my resume.']},
+  {talk:'TNB',lines:['Steam. We have STEAM, babe. I fixed a hundred-year-old turntable motor. I\'m going to put this on my resume.']},
   {talk:'Tom',lines:['Put it at the top. New section.']},
   {talk:'TNB',lines:['Under hero.']},
   {trace:'tnb-motor'}, {hearts:'tnb'},
@@ -2689,16 +2674,16 @@ SCENES.ch8Boss=[
   {hide:'Old Ironbelly'},
   {walk:'tom',to:routeTo('tom',9,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'tnb',at:[8,7],dir:'up'}, {place:'nara',at:[10,7],dir:'up'},
-  {talk:'TNB',lines:['Babe. It is warm in here. Like, really warm. Like, opening-the-oven-door warm.']},
+  {talk:'TNB',lines:['Babe. It\'s warm in here. Like, really warm. Like, opening-the-oven-door warm.']},
   {call:()=>{ sfx.thud(); sfx.whoosh&&sfx.whoosh(); }},
   {show:'Old Ironbelly'}, {face:'Old Ironbelly',dir:'down'},
-  {talk:'Old Ironbelly',lines:['...Who is in my Boiler Room. Nobody comes down here. Not since the last car went out. 1963.',
-    'I am Old Ironbelly. 1912. Cast iron, all the way through. Biscuits for the night crew, every night, for fifty-one years. Cornbread on Fridays.']},
+  {talk:'Old Ironbelly',lines:['...Who\'s in my Boiler Room. Nobody comes down here. Not since the last car went out. 1963.',
+    'I\'m Old Ironbelly. 1912. Cast iron, all the way through. Biscuits for the night crew, every night, for fifty-one years. Cornbread on Fridays.']},
   {talk:'Tom',lines:['You took every pilot light on 2nd Avenue.']},
-  {talk:'Old Ironbelly',lines:['Everybody up there has a little fire. I have been cold for sixty years. I only borrowed some.','And look at me. I am WARM again. I am five hundred degrees. Do you know how long it has been since I was five hundred degrees?']},
+  {talk:'Old Ironbelly',lines:['Everybody up there has a little fire. I\'ve been cold for sixty years. I only borrowed some.','And look at me. I\'m WARM again. I\'m five hundred degrees. Do you know how long it\'s been since I was five hundred degrees?']},
   {talk:'TNB',lines:['On the day of the POTLUCK, though.']},
   {talk:'Old Ironbelly',lines:['A potluck. Everybody brings a dish. Nobody ever brings anything to the oven. Nobody has put a single thing in me since 1963.']},
-  {talk:'Nara',lines:['Nara growls. A small growl. She is very hungry, and very serious.']},
+  {talk:'Nara',lines:['Nara growls. A small growl. She\'s very hungry, and very serious.']},
   {talk:'Tom',lines:['Give the flames back. No touching, please.']},
   {battle:'ironbelly',tut:'ironbelly'},
   {if:()=>flag('battle:ironbelly')!=='win',then:[
@@ -2711,19 +2696,19 @@ SCENES.ch8AfterBoss=()=>[
   {flag:'ch8-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:ironbelly')?[
-    {talk:'Old Ironbelly',lines:['...Bread. There is bread in me. And a little pot. And a dog’s dinner. Sixty years of nothing, and now THIS.','I do not need all those little flames. I can make my own fire. I always could. I just needed something to make it FOR.']},
-    {talk:'Tom',lines:['Forty loaves. Tonight. You are the only oven on 2nd Ave hot enough for Bready Mercury.']},
-    {talk:'Old Ironbelly',lines:['Then bring me the dough, baker. And do not open the door. I will know.']}]:[
-    {talk:'Old Ironbelly',lines:['...Fine. FINE. Take your little flames back. I will be cold again. I am used to it.']},
-    {talk:'Tom',lines:['Or. Forty loaves. Tonight. You are the only oven on 2nd Ave hot enough.']},
+    {talk:'Old Ironbelly',lines:['...Bread. There\'s bread in me. And a little pot. And a dog’s dinner. Sixty years of nothing, and now THIS.','I don\'t need all those little flames. I can make my own fire. I always could. I just needed something to make it FOR.']},
+    {talk:'Tom',lines:['Forty loaves. Tonight. You\'re the only oven on 2nd Ave hot enough for Bready Mercury.']},
+    {talk:'Old Ironbelly',lines:['Then bring me the dough, baker. And don\'t open the door. I\'ll know.']}]:[
+    {talk:'Old Ironbelly',lines:['...Fine. FINE. Take your little flames back. I\'ll be cold again. I\'m used to it.']},
+    {talk:'Tom',lines:['Or. Forty loaves. Tonight. You\'re the only oven on 2nd Ave hot enough.']},
     {talk:'Old Ironbelly',lines:['...Forty? Nobody has asked me for forty anything since 1963. Bring the dough.']}]),
   {call:()=>{ setFlag('ch8-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The Boiler Room',lines:['The little blue flames lift off her grate, one by one, and drift up the flue toward 2nd Avenue. Her own fire settles in, low and gold.']},
   {fade:'out',time:.8},
   {talk:'The Boiler Room',lines:['Two hours later.']},
   {fade:'in',time:.8},
-  {talk:'TNB',lines:['Forty loaves, babe. FORTY. They are crackling. Listen to them. They are singing.']},
-  {talk:'Old Ironbelly',lines:['That is the crust. That is what crust does when it is done right. Here. Take my peel. Fifty-one years of biscuits. It wants to work again.']},
+  {talk:'TNB',lines:['Forty loaves, babe. FORTY. They\'re crackling. Listen to them. They\'re singing.']},
+  {talk:'Old Ironbelly',lines:['That\'s the crust. That\'s what crust does when it\'s done right. Here. Take my peel. Fifty-one years of biscuits. It wants to work again.']},
   {give:'t_peel'},
   {toast:'Tom gets a new Signature Tool: Ironbelly’s Bread Peel (POW +6, WARMTH +7). Equip it in the menu.',time:4.5},
   {trace:'ironbelly-bread'}, {hearts:'tom'},
@@ -2731,7 +2716,7 @@ SCENES.ch8AfterBoss=()=>[
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['A gold coin. Same little clock face.','The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. And now an oven nobody has opened since 1963.']},
   {talk:'TNB',lines:['Somebody keeps getting into places nobody gets into. Very neat. Very quiet. Very spooky. I love it. I hate it.']},
-  {talk:'Tom',lines:['Look at the corners. Not a speck of ash on it. Somebody put it there after the fire went out. I am adding it to the list.']},
+  {talk:'Tom',lines:['Look at the corners. Not a speck of ash on it. Somebody put it there after the fire went out. I\'m adding it to the list.']},
   {toast:'Goal: the bread to the potluck. They closed Jefferson Boulevard for the tables.',time:4.5}
 ];
 // 11. Jefferson Boulevard, closed for the 2nd Ave potluck: the feast. Rewards. A letter for Tom. Chapter complete.
@@ -2741,25 +2726,25 @@ SCENES.ch8End=[
   {place:'tnb',at:[12,11],dir:'up'}, {place:'nara',at:[14,11],dir:'up'},
   {place:'Olivia',at:[11,8],dir:'down'}, {place:'Michael',at:[12,8],dir:'down'}, {place:'Mr. Washington',at:[16,8],dir:'down'},
   {spawn:{name:'Bernadette',look:'bernadette',at:[14,8],dir:'down'}},
-  {talk:'Bernadette',lines:['Forty loaves. Six o’clock. On the dot. Potluck committee report: we are a success.','The gumbo is hot. The casserole is hot. Everything is hot. I would like it noted.']},
+  {talk:'Bernadette',lines:['Forty loaves. Six o’clock. On the dot. Potluck committee report: we\'re a success.','The gumbo is hot. The casserole is hot. Everything is hot. I\'d like it noted.']},
   {talk:'TNB',lines:['Noted, Bernadette.']},
-  {talk:'Olivia',lines:['Tom. TOM. Nara is eating. Look at her. She is EATING.']},
-  {talk:'Nara',lines:['Nara is eating bread off Tom’s plate. Tom put it there for her. She knows exactly what she is doing.']},
-  {talk:'Mr. Washington',lines:['Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.','He would want it on somebody who went back in there and lit that stove. Here.']},
+  {talk:'Olivia',lines:['Tom. TOM. Nara is eating. Look at her. She\'s EATING.']},
+  {talk:'Nara',lines:['Nara is eating bread off Tom’s plate. Tom put it there for her. She knows exactly what she\'s doing.']},
+  {talk:'Mr. Washington',lines:['Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.','He\'d want it on somebody who went back in there and lit that stove. Here.']},
   {give:'motorcoat'},
   {toast:'New outfit: the Motorman’s Coat. Navy wool, brass buttons, a 7 LINE pin. Anyone can wear it.',time:4.5},
-  {talk:'Tom',lines:['...Thank you. I will take very good care of it.']},
-  {talk:'Mr. Washington',lines:['I know you will. Now stand up straight. He would say that too.']},
-  {talk:'Michael',lines:['Lachlan has eaten three rolls and fallen asleep in the bread basket. I am leaving him there. He is happy.']},
+  {talk:'Tom',lines:['...Thank you. I\'ll take very good care of it.']},
+  {talk:'Mr. Washington',lines:['I know you will. Now stand up straight. He\'d say that too.']},
+  {talk:'Michael',lines:['Lachlan has eaten three rolls and fallen asleep in the bread basket. I\'m leaving him there. He\'s happy.']},
   {talk:'TNB',lines:['You know what tonight was, babe? Toast.']},
   {talk:'Tom',lines:['...']},
-  {talk:'TNB',lines:['Because the bread. And we are TOASTING. It works on two levels.']},
+  {talk:'TNB',lines:['Because the bread. And we\'re TOASTING. It works on two levels.']},
   {talk:'Tom',lines:['It works on one level. Barely.','...I love that level.']},
   ch4Kiss(),
   {trace:'ch8-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."','"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I have lived here forty years. I love you to the moon and back. Call me."']},
-  {talk:'TNB',lines:['The Moon Club. Babe. That is a secret society. I have seen this movie. Several times. It never goes well for the tall one.']},
+  {talk:'Tom',lines:['A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."','"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I\'ve lived here forty years. I love you to the moon and back. Call me."']},
+  {talk:'TNB',lines:['The Moon Club. Babe. That\'s a secret society. I\'ve seen this movie. Several times. It never goes well for the tall one.']},
   {talk:'Tom',lines:['A little clock. On the seal.']},
   {party:null},
   {fade:'out',time:.8}, {card:8,done:true,time:3.4}, {flag:'ch8-done'}, {fade:'in',time:.8},
@@ -2816,7 +2801,7 @@ function ch8Motor(o) {
 // The lever swings the bridge round, either way, once there is steam.
 function ch8Lever(o) {
   if(STORY.mode!=='full'||STORY.chapter<8) return false;
-  if(!ch8MotorOn()) { openDialog(o.name,['A big iron lever: TURNTABLE. Tom pulls. It will not budge.','TNB: "No steam, babe. That motor at the bottom of the corridor runs it."']); return true; }
+  if(!ch8MotorOn()) { openDialog(o.name,['A big iron lever: TURNTABLE. Tom pulls. It\'ll not budge.','TNB: "No steam, babe. That motor at the bottom of the corridor runs it."']); return true; }
   const east=!worlds.carbarn.ttEast;
   setFlag('ch8-tt',east?'east':'north'); ch8SetBridge(east); placeFollowers();
   sfx.thud(); sfx.whoosh&&sfx.whoosh();
@@ -2827,13 +2812,13 @@ function ch8Lever(o) {
 // Nara has not eaten all day: what does Tom give her? (Heart-Trace)
 const ch8CanPlate=()=>STORY.mode==='full'&&STORY.chapter===8&&!!flag('ch8-barn')&&!flag('ch8-plate')&&inParty(nara);
 const CH8_PLATES=[
-  {label:'HER OWN KIBBLE',no:'Nara sniffs the kibble. She looks at Tom like he has insulted her family.'},
+  {label:'HER OWN KIBBLE',no:'Nara sniffs the kibble. She looks at Tom like he\'s insulted her family.'},
   {label:'A NICE CARROT',no:'Nara takes the carrot, carries it three steps away, and leaves it there. A message.'},
-  {label:'OLIVIA’S LASAGNA',no:'TNB: "Babe. It is a brick. A cold brick." Nara agrees with TNB.'},
+  {label:'OLIVIA’S LASAGNA',no:'TNB: "Babe. It\'s a brick. A cold brick." Nara agrees with TNB.'},
   {label:'TOM’S OWN SANDWICH',ok:true}];
 function ch8Plate(o) {
   if(!ch8CanPlate()) return false;
-  openChoice(o.name,['Nara sits next to the table. She has not eaten all day. She stares at Tom. She stares at the table. She stares at Tom.','What does Tom give her?'],
+  openChoice(o.name,['Nara sits next to the table. She hasn\'t eaten all day. She stares at Tom. She stares at the table. She stares at Tom.','What does Tom give her?'],
     CH8_PLATES.map(p=>({label:p.label,fn:()=>{ if(p.ok) playScene('ch8Plate'); else { sfx.nope&&sfx.nope(); openDialog('Nara',[p.no]); } }})));
   return true;
 }
@@ -2898,7 +2883,7 @@ TUTORIALS.ch8blanket={
     {id:'chilled',who:'*',when:()=>b2LiveParty().some(p=>p.st.chilled),text:'Chilled: WARMTH and PEP down, so kind moves and heals go weaker and that person acts later. TNB’s Quick Change (▶) clears it.'},
     {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Cozy, on every enemy.'}]};
 TUTORIALS.ch8draft={tips:[
-  {id:'dodge',who:'*',text:'The Draft dodges a lot of single hits. Hits on everyone never miss, like Popcorn Jump. It is weak to Cozy and Sparkle.'}]};
+  {id:'dodge',who:'*',text:'The Draft dodges a lot of single hits. Hits on everyone never miss, like Popcorn Jump. It\'s weak to Cozy and Sparkle.'}]};
 TUTORIALS.ch8picky={tips:[
   {id:'vp',who:'*',text:'The Picky Eater is tough and steals VP. Chatter and Splash work; it shrugs off Kinetic. Tom’s Starter Splash is Splash.'},
   {id:'kind',who:'nara',dir:'up',text:'Car Barn things love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
@@ -2935,7 +2920,7 @@ const ch9MirrorSteps=c=>{ const M=CLUB_MIRRORS.find(k=>k.fight==='ch9-'+c); retu
   {toast:'Mirror '+CLUB_MIRRORS.filter(k=>flag(k.fight)===true).length+' of 3 is back on its stand in the hall.',time:3.5},
   {if:()=>CLUB_MIRRORS.every(k=>flag(k.fight)===true),then:[
     {flag:'ch9-mirrors'}, {wait:3.7},
-    {talk:'Boppy',lines:['Three mirrors. Three stands. One little moonbeam. I did not drive a car for forty years without learning about mirrors.']},
+    {talk:'Boppy',lines:['Three mirrors. Three stands. One little moonbeam. I didn\'t drive a car for forty years without learning about mirrors.']},
     {talk:'Deedee',lines:['You drove into the mailbox twice, honey.']},
     {talk:'Boppy',lines:['The mailbox moved.']},
     {toast:'Goal: turn the three mirror stands in the hall (A turns one) until the moonbeam reaches the Dome doors.',time:5.5}],else:[]}]; };
@@ -2943,12 +2928,12 @@ const ch9MirrorSteps=c=>{ const M=CLUB_MIRRORS.find(k=>k.fight==='ch9-'+c); retu
 // 1. The Square, right after the girls' welcome: Deedee has a letter.
 SCENES.ch9Arrive=[
   {flag:'ch9-goal'},
-  {talk:'Grace',lines:['Tata. TATA. Deedee has a LETTER for you. It is GOLD. She will not let us open it.','She let us hold it. For one second. Then she took it back and said, careful, that is wax.']},
+  {talk:'Grace',lines:['Tata. TATA. Deedee has a LETTER for you. It\'s GOLD. She\'ll not let\'s open it.','She let\'s hold it. For one second. Then she took it back and said, careful, that\'s wax.']},
   {talk:'Rose',lines:['It smells like a candle. I licked it a little.']},
   {talk:'Tom',lines:['You licked my mail.']},
   {talk:'Rose',lines:['A LITTLE.']},
-  {talk:'Grace',lines:['Also the moon is gone. Look. It is supposed to be a full moon. Luna said so. Luna is very upset.']},
-  {talk:'Tom',lines:['...There is no moon.','There is no moon, and I have a gold letter. Okay.']},
+  {talk:'Grace',lines:['Also the moon is gone. Look. It\'s supposed to be a full moon. Luna said so. Luna is very upset.']},
+  {talk:'Tom',lines:['...There\'s no moon.','There\'s no moon, and I have a gold letter. Okay.']},
   {trace:'girls-letter'}, {hearts:'grace'},
   {toast:'Goal: Deedee and Boppy’s house (RIVITUSO), on Rivituso Row, south of the Square.',time:4.5}
 ];
@@ -2959,14 +2944,14 @@ SCENES.ch9Letter=[
   {talk:'Deedee',lines:['Tommy! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['\"THE MOON CLUB requests the pleasure of TOM. Tonight, at moonrise. Admit three. Adults only. Dress: your very best.\"','Gold wax seal. A little clock on it.']},
-  {talk:'Grace',lines:['ADULTS ONLY? I am basically an adult. I have a YouTube channel. I have a SKINCARE ROUTINE.']},
-  {talk:'Rose',lines:['I am six. Is six adults?']},
-  {talk:'Aunt Ellie',lines:['Girls. You are staying with me. I brought cards. I cheat. You will learn a great deal.']},
-  {talk:'Deedee',lines:['Forty years I have lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once.','Admit three, Tommy. You. Me. And Boppy.']},
-  {talk:'Boppy',lines:['I am not wearing a tie.']},
-  {talk:'Deedee',lines:['You are wearing the tie.']},
-  {talk:'Boppy',lines:['...I am wearing the tie.']},
-  {talk:'Aunt Ellie',lines:['The Moon Club. I have not heard that name since 1971.']},
+  {talk:'Grace',lines:['ADULTS ONLY? I\'m basically an adult. I have a YouTube channel. I have a SKINCARE ROUTINE.']},
+  {talk:'Rose',lines:['I\'m six. Is six adults?']},
+  {talk:'Aunt Ellie',lines:['Girls. You\'re staying with me. I brought cards. I cheat. You\'ll learn a great deal.']},
+  {talk:'Deedee',lines:['Forty years I\'ve lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once.','Admit three, Tommy. You. Me. And Boppy.']},
+  {talk:'Boppy',lines:['I\'m not wearing a tie.']},
+  {talk:'Deedee',lines:['You\'re wearing the tie.']},
+  {talk:'Boppy',lines:['...I\'m wearing the tie.']},
+  {talk:'Aunt Ellie',lines:['The Moon Club. I haven\'t heard that name since 1971.']},
   {talk:'Tom',lines:['You went?']},
   {talk:'Aunt Ellie',lines:['Darling, I went to everything. The last dance. A big silver ball turned all night. Then they locked the doors and nobody ever said why.','I left a coat there. Purple velvet. I was in a hurry.']},
   {talk:'Deedee',lines:['And now the moon is missing. Three nights. I power walk at nine. I walked straight into the Hendersons’ hedge.']},
@@ -2976,7 +2961,6 @@ SCENES.ch9Letter=[
   {party:{lock:['tom','deedee','boppy'],bar:['grace','rose'],allow:['deedee','boppy']}},
   {trace:'deedee-invite'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {toast:'Deedee and Boppy join the party. Grace and Rose stay with Aunt Ellie.',time:3.5},
-  {wait:3.7},
   {flag:'ch9-letter'},
   {toast:'Goal: the Moon Club. Luna’s observatory (MOON) in the Square.',time:4.5}
 ];
@@ -2986,56 +2970,55 @@ SCENES.ch9Luna=[
   {walk:'Luna',to:routeBeside('Luna'),speed:.25},
   {talk:'Luna',lines:['Oh! Visitors. At night. Is that... is that an INVITATION?']},
   {talk:'Tom',lines:['The Moon Club. Tonight. Admit three.']},
-  {talk:'Luna',lines:['Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.','And my telescope cannot find the moon. It is not behind a cloud. It is not anywhere. It is just GONE.']},
+  {talk:'Luna',lines:['Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.','And my telescope can\'t find the moon. It\'s not behind a cloud. It\'s not anywhere. It\'s just GONE.']},
   {talk:'Deedee',lines:['Honey, show her the seal.']},
   {call:()=>{ sfx.thud(); sfx.doorIn&&sfx.doorIn(); }},
   {talk:'Little silver door',lines:['Tom holds up the invitation. The brass moon on the little door clicks, and the door swings open by itself.']},
-  {talk:'Luna',lines:['...It was not a closet.']},
-  {talk:'Boppy',lines:['Stairs. Of course it is stairs. Nobody take them fast.']},
+  {talk:'Luna',lines:['...It wasn\'t a closet.']},
+  {talk:'Boppy',lines:['Stairs. Of course it\'s stairs. Nobody take them fast.']},
   {flag:'ch9-luna'},
   {toast:'Goal: up the stairs, through the little silver door (back right of the observatory).',time:4.5}
 ];
 // 4. The Moon Club: dust since 1971, one thread of moonlight, three empty mirror stands.
 SCENES.ch9Club=[
   {flag:'ch9-club',value:'pending'},
-  {talk:'Deedee',lines:['Oh. Oh, Tommy. It is beautiful.','It is FILTHY. Fifty years of dust. Somebody hand me a mop.']},
+  {talk:'Deedee',lines:['Oh. Oh, Tommy. It\'s beautiful.','It\'s FILTHY. Fifty years of dust. Somebody hand me a mop.']},
   {talk:'Boppy',lines:['Nobody is here. A party and nobody is here.']},
-  {talk:'Tom',lines:['Look at the east window. Moonlight. Just a thread of it.','The moon is not gone. Something up in the Dome is pulling all of its light inside. Only a little gets out.']},
+  {talk:'Tom',lines:['Look at the east window. Moonlight. Just a thread of it.','The moon isn\'t gone. Something up in the Dome is pulling all of its light inside. Only a little gets out.']},
   {talk:'Deedee',lines:['The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. Somebody took the mirrors.']},
   {talk:'Boppy',lines:['A coat check, a card room, a ballroom. Three rooms. Three stands. I count three suspects.','Assistant Deputy Warden. Rikers. I know what a lineup looks like.']},
   {trace:'grands-club'}, {hearts:'deedee'},
   {flag:'ch9-club'},
   {toast:'Goal: find the three mirrors. Coat Check (top left), Card Room (top right), Ballroom (bottom).',time:5.5},
-  {wait:5.7},
-  {toast:'Tip: the Ballroom has a jukebox. Somebody here has not danced in a while.',time:4}
+  {toast:'Tip: the Ballroom has a jukebox. Somebody here hasn\'t danced in a while.',time:4}
 ];
 // 5. The three rooms. A troublemaker in each one, holding a mirror.
 SCENES.ch9Coat=[
   {flag:'ch9-coat',value:'pending'},
   {walk:'The Hanger-On',to:routeBeside('The Hanger-On'),speed:.25},
-  {talk:'The Hanger-On',lines:['Ticket? Do you have a ticket? I am holding this coat for ticket seven. She said she would be right back.','That was 1971. I have not let go once. I am VERY good at hanging on.']},
-  {talk:'Deedee',lines:['Purple velvet. Tommy. That is Aunt Ellie’s coat.']},
+  {talk:'The Hanger-On',lines:['Ticket? Do you have a ticket? I\'m holding this coat for ticket seven. She said she\'d be right back.','That was 1971. I haven\'t let go once. I\'m VERY good at hanging on.']},
+  {talk:'Deedee',lines:['Purple velvet. Tommy. That\'s Aunt Ellie’s coat.']},
   {talk:'Tom',lines:['And our mirror is hanging off your other shoulder.']},
   {talk:'The Hanger-On',lines:['Nobody gets anything without a ticket.']},
   {battle:'coathanger',tut:'ch9coat'},
   ...CH9_AFTER(()=>flag('battle:coathanger')!=='win',[
     {flag:'ch9-coat'},
     {talk:'The Hanger-On',lines:['...Okay. Okay. You can take it to her. Tell her I held on the whole time.']},
-    {talk:'Deedee',lines:['We will tell her, honey. She will be so pleased. She will pretend not to be. That is how you know.']},
+    {talk:'Deedee',lines:['We\'ll tell her, honey. She\'ll be so pleased. She\'ll pretend not to be. That\'s how you know.']},
     ...ch9MirrorSteps('coat')])
 ];
 SCENES.ch9Cards=[
   {flag:'ch9-cards',value:'pending'},
   {walk:'The Sore Loser',to:routeBeside('The Sore Loser'),speed:.25},
-  {talk:'The Sore Loser',lines:['Deal me in. No. Wait. Do not deal me in. You are cheating. Everybody is cheating. The MIRROR is cheating.']},
-  {talk:'Boppy',lines:['Gin rummy with Deedee, fifty years. I have never won a hand. Not one. I know a sore loser when I see one.']},
+  {talk:'The Sore Loser',lines:['Deal me in. No. Wait. Don\'t deal me in. You\'re cheating. Everybody is cheating. The MIRROR is cheating.']},
+  {talk:'Boppy',lines:['Gin rummy with Deedee, fifty years. I\'ve never won a hand. Not one. I know a sore loser when I see one.']},
   {talk:'Deedee',lines:['You ARE a sore loser, honey.']},
-  {talk:'Boppy',lines:['I am a sore WINNER. Who has not won yet.']},
+  {talk:'Boppy',lines:['I\'m a sore WINNER. Who hasn\'t won yet.']},
   {battle:'soreloser',tut:'ch9cards'},
   ...CH9_AFTER(()=>flag('battle:soreloser')!=='win',[
     {flag:'ch9-cards'},
     {talk:'The Sore Loser',lines:['...Best two out of three?']},
-    {talk:'Boppy',lines:['Sunday. My house. Bring your own deck. You will lose. I will lose too. We can lose together.']},
+    {talk:'Boppy',lines:['Sunday. My house. Bring your own deck. You\'ll lose. I\'ll lose too. We can lose together.']},
     {talk:'Deedee',lines:['Look at you. Making a friend.']},
     {trace:'boppy-cards'}, {hearts:'boppy'},
     ...ch9MirrorSteps('cards')])
@@ -3043,16 +3026,16 @@ SCENES.ch9Cards=[
 SCENES.ch9Ball=[
   {flag:'ch9-ball',value:'pending'},
   {walk:'The Wallflower',to:routeBeside('The Wallflower'),speed:.15},
-  {talk:'The Wallflower',lines:['Oh. Oh no. People. Do not look at me. I am just here. With the wall. And this mirror. Which I am hiding behind.']},
+  {talk:'The Wallflower',lines:['Oh. Oh no. People. Don\'t look at me. I\'m just here. With the wall. And this mirror. Which I\'m hiding behind.']},
   {talk:'Deedee',lines:['Oh, sweetheart. Nobody asked you to dance, did they?']},
   {talk:'The Wallflower',lines:['Every song, 1924 to 1971. I stood right here. Nobody. Ever.']},
-  {talk:'Tom',lines:['Then we will ask. Nicely. After you give us the mirror.']},
+  {talk:'Tom',lines:['Then we\'ll ask. Nicely. After you give us the mirror.']},
   {battle:'wallflower',tut:'ch9ball'},
   ...CH9_AFTER(()=>flag('battle:wallflower')!=='win',[
     {flag:'ch9-ball'},
     {talk:'The Wallflower',lines:['...You were very nice about it. For a fight. Here. The mirror. It was the big one, over the bandstand, before she came.']},
     {talk:'Tom',lines:['She?']},
-    {talk:'The Wallflower',lines:['The Mirrorball. Up in the Dome. She has not stopped spinning in three nights.']},
+    {talk:'The Wallflower',lines:['The Mirrorball. Up in the Dome. She hasn\'t stopped spinning in three nights.']},
     ...ch9MirrorSteps('ball')])
 ];
 // 6. Optional: the jukebox. Which record for Deedee and Boppy? (data in ch9Jukebox below).
@@ -3061,9 +3044,9 @@ SCENES.ch9Dance=[
   {call:()=>sfx.levelChime()},
   {talk:'Boppy',lines:['A slow one. My stomach gets one song. One. Deedee. May I.']},
   {talk:'Deedee',lines:['Fifty-two years, and he still asks. Every time.']},
-  {talk:'Ballroom',lines:['They dance across the dusty floor, slow and small and very close. Boppy does not mention his stomach once.']},
+  {talk:'Ballroom',lines:['They dance across the dusty floor, slow and small and very close. Boppy doesn\'t mention his stomach once.']},
   {hearts:'deedee'}, {hearts:'boppy'}, {trace:'grands-dance'},
-  {talk:'Tom',lines:['(Tom does not take a picture. Tom takes four pictures.)']},
+  {talk:'Tom',lines:['(Tom doesn\'t take a picture. Tom takes four pictures.)']},
   {heal:true},
   {toast:'Everyone is healed. Deedee and Boppy had one song.',time:3.5}
 ];
@@ -3074,7 +3057,7 @@ SCENES.ch9Door=[
   {talk:'Dome doors',lines:['The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.']},
   {call:()=>{ ch9OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); }},
   {talk:'Deedee',lines:['Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm.']},
-  {talk:'Boppy',lines:['Somebody up there is playing music. Very loud music. In 1971 they called that a nuisance.']},
+  {talk:'Boppy',lines:['Somebody up there\'s playing music. Very loud music. In 1971 they called that a nuisance.']},
   {toast:'Goal: the Dome.',time:4}
 ];
 // 8. The Dome: the Mirrorball, full of the moon. Boss fight.
@@ -3083,14 +3066,14 @@ SCENES.ch9Boss=[
   {hide:'The Mirrorball'},
   {walk:'tom',to:routeTo('tom',9,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'deedee',at:[8,7],dir:'up'}, {place:'boppy',at:[10,7],dir:'up'},
-  {talk:'Deedee',lines:['Tommy. Over the bandstand. It is so BRIGHT. I cannot look at it. I am looking at it.']},
+  {talk:'Deedee',lines:['Tommy. Over the bandstand. It\'s so BRIGHT. I can\'t look at it. I\'m looking at it.']},
   {call:()=>{ sfx.whoosh(); sfx.ding&&sfx.ding(); }},
   {show:'The Mirrorball'}, {face:'The Mirrorball',dir:'down'},
   {talk:'The Mirrorball',lines:['Guests! GUESTS! Oh, at last. Welcome to the Moon Club. Nobody has come up those stairs since 1971.',
     'Every full moon, they danced under me. Then the last dance. The band said see you next moon. Nobody came back.']},
   {talk:'Tom',lines:['So you took the moon.']},
-  {talk:'The Mirrorball',lines:['I CAUGHT it. All of it. Every bit of moonlight, right here in me.','If I am the brightest thing in the whole sky, somebody will HAVE to come dance. And look. Somebody did.']},
-  {talk:'Deedee',lines:['Honey, there is a whole town walking into hedges down there.']},
+  {talk:'The Mirrorball',lines:['I CAUGHT it. All of it. Every bit of moonlight, right here in me.','If I\'m the brightest thing in the whole sky, somebody will HAVE to come dance. And look. Somebody did.']},
+  {talk:'Deedee',lines:['Honey, there\'s a whole town walking into hedges down there.']},
   {talk:'The Mirrorball',lines:['Then they can come UP. One more dance. Just one. Everybody, under me, forever.']},
   {talk:'Boppy',lines:['Forever is a lot of dancing. And everybody dances too fast.']},
   {talk:'Tom',lines:['Deedee, Boppy, behind me. No touching, please.']},
@@ -3105,9 +3088,9 @@ SCENES.ch9AfterBoss=()=>[
   {flag:'ch9-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:mirrorball')?[
-    {talk:'The Mirrorball',lines:['...You asked me. Three times. Nobody has asked me to dance since 1971.','I do not need the moon. I just needed somebody to ASK.']}]:[
-    {talk:'The Mirrorball',lines:['...Fine. The party is over. It was over in 1971. I just did not want to be the one to turn off the lights.']},
-    {talk:'Deedee',lines:['Oh, honey. Nobody has to turn off the lights. We will come back. Every full moon. I will bring crisp.']}]),
+    {talk:'The Mirrorball',lines:['...You asked me. Three times. Nobody has asked me to dance since 1971.','I don\'t need the moon. I just needed somebody to ASK.']}]:[
+    {talk:'The Mirrorball',lines:['...Fine. The party is over. It was over in 1971. I just didn\'t want to be the one to turn off the lights.']},
+    {talk:'Deedee',lines:['Oh, honey. Nobody has to turn off the lights. We\'ll come back. Every full moon. I\'ll bring crisp.']}]),
   {call:()=>{ storyWorld(); sfx.whoosh(); }},
   {talk:'The Dome',lines:['The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.']},
   {talk:'The Mirrorball',lines:['One dance. Before you go. Somebody. Please.']},
@@ -3116,14 +3099,14 @@ SCENES.ch9AfterBoss=()=>[
   {talk:'Deedee',lines:['Then sway with your mother.']},
   {talk:'The Dome',lines:['Tom and Deedee sway under the Mirrorball, and a thousand little moons go round and round the Dome. Boppy keeps time on the bass drum. Badly. Proudly.']},
   {hearts:'tom'}, {hearts:'deedee'}, {trace:'tom-deedee-dance'},
-  {talk:'The Mirrorball',lines:['Here. One of my little mirrors. For the lady who said she would come back. So you can carry a bit of the moon home.']},
+  {talk:'The Mirrorball',lines:['Here. One of my little mirrors. For the lady who said she\'d come back. So you can carry a bit of the moon home.']},
   {give:'d_compact'},
   {toast:'Deedee gets a new Signature Tool: the Moonlit Compact (POW +5, WARMTH +8). Equip it in the menu.',time:4.5},
   {talk:'Boppy',lines:['Something fell out of her top. On the bandstand. Something gold.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['A gold coin. Same little clock face.','The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. Now a mirrorball from 1971.']},
-  {talk:'Deedee',lines:['Somebody invited you up here, Tommy. Not her. She cannot hold a pen. She is a ball.','Somebody who knew you would come. And that you would bring your mother.']},
-  {talk:'Tom',lines:['Somebody with a little clock. I am adding it to the list.']},
+  {talk:'Deedee',lines:['Somebody invited you up here, Tommy. Not her. She can\'t hold a pen. She\'s a ball.','Somebody who knew you\'d come. And that you\'d bring your mother.']},
+  {talk:'Tom',lines:['Somebody with a little clock. I\'m adding it to the list.']},
   {toast:'Goal: back to the Rivituso house. Aunt Ellie and the girls are waiting up.',time:4.5}
 ];
 // 10. The Rivituso house: the moon is back. Ellie's coat. A boarding pass. Chapter complete.
@@ -3131,25 +3114,25 @@ SCENES.ch9End=[
   {flag:'ch9-done',value:'pending'},
   {call:()=>ch9GirlsMove()},
   {talk:'Grace',lines:['TATA! The MOON came back! We saw it from the window! Aunt Ellie said it was probably you.']},
-  {talk:'Rose',lines:['I won at cards. I cheated. Aunt Ellie said I am a natural.']},
-  {talk:'Aunt Ellie',lines:['She is. It is frightening. Well? Was there a ball?']},
+  {talk:'Rose',lines:['I won at cards. I cheated. Aunt Ellie said I\'m a natural.']},
+  {talk:'Aunt Ellie',lines:['She is. It\'s frightening. Well? Was there a ball?']},
   {talk:'Deedee',lines:['Ellie. There was a BALL. A big silver one. She remembered you. And look what we brought home.']},
-  {talk:'Aunt Ellie',lines:['...My coat. Ticket seven.','I left it at the last dance. I was in a hurry. I had a date with a man who turned out to be a disappointment. The coat was not.']},
-  {talk:'Aunt Ellie',lines:['It has not fit me since 1972. Keep it, Tom. Somebody in this family should wear velvet properly.']},
+  {talk:'Aunt Ellie',lines:['...My coat. Ticket seven.','I left it at the last dance. I was in a hurry. I had a date with a man who turned out to be a disappointment. The coat wasn\'t.']},
+  {talk:'Aunt Ellie',lines:['It hasn\'t fit me since 1972. Keep it, Tom. Somebody in this family should wear velvet properly.']},
   {give:'velvetcoat'},
   {toast:'New outfit: the Moon Club Velvet Coat. Purple velvet, 1971. Anyone can wear it.',time:4.5},
-  {talk:'Boppy',lines:['I wore the tie. Everybody saw. Nobody can say I did not wear the tie.']},
-  {talk:'Deedee',lines:['Tommy, there was something else in the envelope. Stuck to the bottom. I did not see it. I read it eleven times and I did not see it.']},
+  {talk:'Boppy',lines:['I wore the tie. Everybody saw. Nobody can say I didn\'t wear the tie.']},
+  {talk:'Deedee',lines:['Tommy, there was something else in the envelope. Stuck to the bottom. I didn\'t see it. I read it eleven times and I didn\'t see it.']},
   {call:()=>sfx.pickup()},
-  {talk:'Tom',lines:['A boarding pass. \"BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. GATE: TO BE ANNOUNCED.\" And a little gold clock.','There is no boarding group zero. I have flown Delta One forty times. I would know.']},
+  {talk:'Tom',lines:['A boarding pass. \"BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. GATE: TO BE ANNOUNCED.\" And a little gold clock.','There\'s no boarding group zero. I have flown Delta One forty times. I\'d know.']},
   {talk:'Grace',lines:['Tata. Somebody wants you to go on a TRIP.']},
-  {talk:'Rose',lines:['Can I come? I will be good. I will be medium good.']},
+  {talk:'Rose',lines:['Can I come? I\'ll be good. I\'ll be medium good.']},
   {trace:'ch9-wrap'}, {hearts:'deedee'}, {call:()=>sfx.levelChime()},
   {leave:'boppy'}, {leave:'deedee'}, {party:null},
   {call:()=>ch9GirlsBack()}, {join:'grace'},
   {fade:'out',time:.8}, {card:9,done:true,time:3.4}, {flag:'ch9-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 9 complete! When you are ready, Sal at Long Island Taxi Co. (the Square) has a ride for chapter 10.',time:6}
+  {toast:'Chapter 9 complete! When you\'re ready, Sal at Long Island Taxi Co. (the Square) has a ride for chapter 10.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch9-goal',map:'town',when:{...CH9,notFlag:'ch9-goal'},scene:'ch9Arrive'},
@@ -3169,8 +3152,8 @@ HOLD_RULES.push(n=>STORY.chapter===9&&currentMap.id==='moonclub'&&(flag('ch9-clu
 
 // Grace and Rose spend chapter 9 at the Rivituso house with Aunt Ellie (engine/travel.js puts girls who are away at
 // the Gregori house; this moves them across, and back again at the end).
-const CH9_GIRL_LINES={Grace:['Aunt Ellie is teaching us cards. She says the first rule of cards is never trust anyone who says they do not cheat.','When I am an adult I am going to the Moon Club EVERY night. With a fan. A big one.'],
-  Rose:['I am winning. I do not know the rules. I am still winning.','Tata, bring me back a piece of the moon. A small one. For my room.']};
+const CH9_GIRL_LINES={Grace:['Aunt Ellie is teaching us cards. She says the first rule of cards is never trust anyone who says they don\'t cheat.','When I\'m an adult I\'m going to the Moon Club EVERY night. With a fan. A big one.'],
+  Rose:['I\'m winning. I don\'t know the rules. I\'m still winning.','Tata, bring me back a piece of the moon. A small one. For my room.']};
 function ch9GirlsMove() {
   const from=worlds.amyhouse,to=worlds.grands; if(!from||!to) return;
   for(const n of from.npcs.filter(n=>n.girlAtHome)) {
@@ -3229,15 +3212,15 @@ function ch9Mirror(o) {
 function ch9DomeLock(o) {
   if(STORY.mode!=='full'||STORY.chapter!==9||flag('ch9-door')||!flag('ch9-club')) return false;
   const n=CLUB_MIRRORS.filter(k=>flag(k.fight)===true).length;
-  openDialog(o.name,['A lock shaped like a full moon. It is cold and dark. The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT.',
+  openDialog(o.name,['A lock shaped like a full moon. It\'s cold and dark. The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT.',
     'Deedee: \"'+(n>=3?'All three mirrors are back, honey. Bounce that little moonbeam up here.':'We need the mirrors, Tommy. '+n+' of 3 so far.')+'\"']);
   return true;
 }
 // The jukebox: which record for Deedee and Boppy? (Heart-Trace)
 const CH9_RECORDS=[
-  {label:'SOMETHING FAST',no:'Boppy: \"Fast? I was a champion runner. I am not a champion dancer. The stomach has spoken.\"'},
+  {label:'SOMETHING FAST',no:'Boppy: \"Fast? I was a champion runner. I\'m not a champion dancer. The stomach has spoken.\"'},
   {label:'THE CHICKEN DANCE',no:'Deedee does the chicken dance alone, with total commitment. Boppy claps. Nobody else is allowed to talk about it.'},
-  {label:'A POLKA',no:'Boppy: \"A polka is just running in a circle. I did not retire to run in a circle.\"'},
+  {label:'A POLKA',no:'Boppy: \"A polka is just running in a circle. I didn\'t retire to run in a circle.\"'},
   {label:'A SLOW ONE',ok:true}];
 function ch9Jukebox(o) {
   if(STORY.mode!=='full'||STORY.chapter!==9||!flag('ch9-club')||flag('ch9-dance')||!inParty(deedee)||!inParty(boppy)) return false;
@@ -3348,8 +3331,8 @@ const ch10HandSteps=c=>{ const H=TERM_HANDS.find(k=>k.fight==='ch10-'+c); return
   {toast:'Clock hand '+TERM_HANDS.filter(k=>flag(k.fight)===true).length+' of 3 is back on the Gate Zero clock.',time:3.5},
   {if:()=>TERM_HANDS.every(k=>flag(k.fight)===true),then:[
     {flag:'ch10-hands'}, {wait:3.7},
-    {talk:'Amy',lines:['Three hands. The clock still is not moving. Tom. The slots round the face. There are seven of them.']},
-    {talk:'Tom',lines:['Seven slots. And I have seven gold coins. In a sock. In my bag.','I have been keeping a list. I have also been keeping the coins.']},
+    {talk:'Amy',lines:['Three hands. The clock still isn\'t moving. Tom. The slots round the face. There are seven of them.']},
+    {talk:'Tom',lines:['Seven slots. And I\'ve seven gold coins. In a sock. In my bag.','I\'ve been keeping a list. I have also been keeping the coins.']},
     {talk:'Grace',lines:['They go in the order we found them! Like a clock. Going round. I KNEW the list was important.']},
     {toast:'Goal: the Gate Zero doors (top of the concourse). Put the seven coins in, in the order Tom found them.',time:5.5}],else:[]}]; };
 
@@ -3361,17 +3344,16 @@ SCENES.ch10Start=[
   {fade:'out',time:.6}, {card:10,time:3.2}, {fade:'in',time:.6},
   {join:'amy',quiet:true}, {hide:'amy'},
   {place:'amy',at:spotNear(3),dir:'up'}, {show:'amy'},
-  {talk:'Amy',lines:['TOM. Do not get in that cab.']},
+  {talk:'Amy',lines:['TOM. Don\'t get in that cab.']},
   {walk:'amy',to:routeBeside('amy'),speed:.12,onStep:i=>{ if(i%2===0) sfx.run(); }},
-  {talk:'Amy',lines:['You are not taking my girls to a closed airport at midnight without me.','Every clock in our house stopped at twelve. The microwave. The oven. My running watch. My RUNNING WATCH, Tom.']},
+  {talk:'Amy',lines:['You\'re not taking my girls to a closed airport at midnight without me.','Every clock in our house stopped at twelve. The microwave. The oven. My running watch. My RUNNING WATCH, Tom.']},
   {talk:'Tom',lines:['Every clock in town. Sal says zero o’clock.']},
-  {talk:'Grace',lines:['Mom, it is SO good. We have boarding passes. Well. Tata has one. And Sal has one. Group ZERO.']},
-  {talk:'Rose',lines:['I am in group zero too. I decided.']},
-  {talk:'Amy',lines:['Fine. I have run through every airport in America. I have never missed a connection.','Justin is at the shop, rewiring the whole block by flashlight. He says go. He says bring snacks.']},
+  {talk:'Grace',lines:['Mom, it\'s SO good. We have boarding passes. Well. Tata has one. And Sal has one. Group ZERO.']},
+  {talk:'Rose',lines:['I\'m in group zero too. I decided.']},
+  {talk:'Amy',lines:['Fine. I have run through every airport in America. I\'ve never missed a connection.','Justin is at the shop, rewiring the whole block by flashlight. He says go. He says bring snacks.']},
   {trace:'amy-airport'}, {hearts:'amy'},
   {party:{lock:['tom','grace','rose','amy'],allow:['amy']}},
   {toast:'Amy joins the party.',time:3},
-  {wait:1},
   {talk:'Sal',lines:['Cab seven! Everybody in. Long Island Regional. The door nobody uses.']},
   {fade:'out',time:.8},
   {flag:'ch10-start'},
@@ -3384,32 +3366,30 @@ SCENES.ch10Term=[
   {flag:'ch10-term',value:'pending'},
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Speaker',lines:['DING. Good evening, and welcome to Terminal Zero. Flight Zero to Nowhere is now boarding at Gate Zero. Boarding Group Zero only.','DING. Passengers are reminded that the gate clock is missing its hands. Passengers will kindly find them.']},
-  {talk:'Tom',lines:['A gate agent who makes the passengers fix the clock. I have flown Delta One forty times. That is a first.']},
+  {talk:'Tom',lines:['A gate agent who makes the passengers fix the clock. I have flown Delta One forty times. That\'s a first.']},
   {talk:'Amy',lines:['Directory. Security top left. Baggage Claim top right. The Lounge bottom left. Gate Zero, up the middle.']},
-  {talk:'Grace',lines:['Everything is from the olden days. That phone has a CORD. Rose. Rose, do not lick the phone.']},
+  {talk:'Grace',lines:['Everything is from the olden days. That phone has a CORD. Rose. Rose, don\'t lick the phone.']},
   {talk:'Rose',lines:['I was SMELLING it.']},
   {talk:'Tom',lines:['Every board says midnight. Every gate says zero. And somebody dusted the plants.','Stay close, everybody. Shoes on. Liquids in a bag.']},
   {trace:'girls-terminal'}, {hearts:'grace'},
   {flag:'ch10-term'},
   {flag:'tombo:rose2'}, {flag:'tombo:amy2'},   // Seat 1A Stowaway and Wing Walk unlock here (chapter 10)
   {toast:'New Tombos: Seat 1A Stowaway (Rose) and Wing Walk (Amy). 50% HEART each.',time:3.6},
-  {wait:3.8},
   {toast:'Goal: find the gate clock’s three hands. Security (top left), Baggage Claim (top right), the Lounge (bottom left).',time:5.5},
-  {wait:5.7},
-  {toast:'Tip: there is a photo booth by the curb doors. There is a quarter on the seat.',time:4}
+  {toast:'Tip: there\'s a photo booth by the curb doors. There\'s a quarter on the seat.',time:4}
 ];
 // 3. The three wings. A troublemaker in each one, holding a clock hand.
 SCENES.ch10Sec=[
   {flag:'ch10-sec',value:'pending'},
   {walk:'The Long Line',to:routeBeside('The Long Line'),speed:.12},
-  {talk:'The Long Line',lines:['Please wait to be called. PLEASE. WAIT. TO BE CALLED.','Nobody has reached the front of me since 1989. I am holding the hour hand. Nobody gets an hour without waiting for it.']},
-  {talk:'Amy',lines:['I do not wait in lines. I pass people in lines. Politely. Then not politely.']},
+  {talk:'The Long Line',lines:['Please wait to be called. PLEASE. WAIT. TO BE CALLED.','Nobody has reached the front of me since 1989. I\'m holding the hour hand. Nobody gets an hour without waiting for it.']},
+  {talk:'Amy',lines:['I don\'t wait in lines. I move to the front, and I say thank you to every single person on the way.']},
   {talk:'Tom',lines:['Shoes off, everyone. Not you, Rose. Rose, put your shoe back on.']},
   {battle:'longline',tut:'ch10sec'},
   ...CH10_AFTER(()=>flag('battle:longline')!=='win',[
     {flag:'ch10-sec'},
-    {talk:'The Long Line',lines:['...Next. NEXT! You. You are at the front. Somebody is finally at the front.']},
-    {talk:'Rose',lines:['I am at the front! I am the FRONT! Do I win?']},
+    {talk:'The Long Line',lines:['...Next. NEXT! You. You\'re at the front. Somebody is finally at the front.']},
+    {talk:'Rose',lines:['I\'m at the front! I\'m the FRONT! Do I win?']},
     {talk:'The Long Line',lines:['You win. Here. The hour hand. Go on through.']},
     {trace:'rose-front'}, {hearts:'rose'},
     ...ch10HandSteps('sec')])
@@ -3419,12 +3399,12 @@ SCENES.ch10Bag=[
   {walk:'The Unclaimed',to:routeBeside('The Unclaimed'),speed:.12},
   {talk:'The Unclaimed',lines:['Round and round. Round and round. Every other bag got picked up. Every one. Since 1989.','I have the minute hand. It goes round and round too. We understand each other.']},
   {talk:'Grace',lines:['It has SO many stickers. Tata, look. Paris. Tokyo. Cleveland.']},
-  {talk:'Tom',lines:['A well-traveled bag. We will pick you up. After you give us the minute hand.']},
+  {talk:'Tom',lines:['A well-traveled bag. We\'ll pick you up. After you give us the minute hand.']},
   {battle:'unclaimed',tut:'ch10bag'},
   ...CH10_AFTER(()=>flag('battle:unclaimed')!=='win',[
     {flag:'ch10-bag'},
     {talk:'The Unclaimed',lines:['...You stopped the carousel. For me.']},
-    {talk:'Grace',lines:['I am picking you up. Officially. You are claimed. I am putting a sticker on you. It says GRACE.']},
+    {talk:'Grace',lines:['I\'m picking you up. Officially. You\'re claimed. I\'m putting a sticker on you. It says GRACE.']},
     {talk:'The Unclaimed',lines:['Claimed. Oh. Here. The minute hand. Take it to the gate.']},
     {trace:'grace-claim'}, {hearts:'grace'},
     ...ch10HandSteps('bag')])
@@ -3432,8 +3412,8 @@ SCENES.ch10Bag=[
 SCENES.ch10Lounge=[
   {flag:'ch10-lounge',value:'pending'},
   {walk:'The Armrest Hog',to:routeBeside('The Armrest Hog'),speed:.12},
-  {talk:'The Armrest Hog',lines:['Occupied. All of them. Both armrests. The middle seat. The window. Mine.','The second hand is mine too. I am not giving up a single second.']},
-  {talk:'Tom',lines:['Lounge etiquette. You get one armrest. The middle seat gets both. That is the rule.']},
+  {talk:'The Armrest Hog',lines:['Occupied. All of them. Both armrests. The middle seat. The window. Mine.','The second hand is mine too. I\'m not giving up a single second.']},
+  {talk:'Tom',lines:['Lounge etiquette. You get one armrest. The middle seat gets both. That\'s the rule.']},
   {talk:'Amy',lines:['Tom has very strong opinions about armrests.']},
   {talk:'Tom',lines:['Everybody should have very strong opinions about armrests.']},
   {battle:'armresthog',tut:'ch10lounge'},
@@ -3455,7 +3435,7 @@ SCENES.ch10Photo=[
   {talk:'Amy',lines:['Sending it to Justin.']},
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Amy',lines:['\"Best one yet. Is that an airport? At midnight?? Proud of you guys.\" With the heart. He used the heart.']},
-  {talk:'Grace',lines:['TWO hearts this year! That is a record!']},
+  {talk:'Grace',lines:['TWO hearts this year! That\'s a record!']},
   {hearts:'amy'}, {hearts:'tom'}, {trace:'photo-justin'},
   {heal:true},
   {toast:'Everyone is healed. One strip for the fridge, one for Tom’s wallet.',time:3.5}
@@ -3464,7 +3444,7 @@ SCENES.ch10Photo=[
 SCENES.ch10Door=[
   {flag:'ch10-door'},
   {call:()=>{ sfx.levelChime(); storyWorld(); }}, {wait:.8},
-  {talk:'Gate clock',lines:['The seventh coin clicks into its slot. All three hands shiver. The clock does not start. The middle slot is still empty.','But the doors under it go CLUNK, and swing open by themselves.']},
+  {talk:'Gate clock',lines:['The seventh coin clicks into its slot. All three hands shiver. The clock doesn\'t start. The middle slot is still empty.','But the doors under it go CLUNK, and swing open by themselves.']},
   {call:()=>{ ch10OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); }},
   {talk:'Grace',lines:['The sundial, the steamer, the sign-up sheet, the jar, the book, the oven, the Mirrorball. I knew it. I KNEW the list was important.']},
   {talk:'Amy',lines:['Seven coins. Seven chapters of your life, Tom. Somebody has been planning this.']},
@@ -3483,9 +3463,9 @@ SCENES.ch10Boss=[
   {talk:'The Last Call',lines:['DING. Passengers! Oh. Oh, PASSENGERS. At Gate Zero. This is the LAST CALL for Flight Zero.',
     'Flight Zero was due out at midnight. 1989. I called it and called it. Nobody came to the gate. Nobody answered.']},
   {talk:'Tom',lines:['So you stopped every clock on Long Island at midnight.']},
-  {talk:'The Last Call',lines:['If it is always midnight, the flight is never late. If the flight is never late, somebody might still come.','And somebody DID. Group Zero. Now boarding. All of you. Forever.']},
-  {talk:'Amy',lines:['My running watch has not moved in a day. I cannot log a run. Do you understand what you have done.']},
-  {talk:'Grace',lines:['Rose, she is a sign that talks. Like the one at the dentist. But MAD.']},
+  {talk:'The Last Call',lines:['If it\'s always midnight, the flight is never late. If the flight is never late, somebody might still come.','And somebody DID. Group Zero. Now boarding. All of you. Forever.']},
+  {talk:'Amy',lines:['My running watch hasn\'t moved in a day. I can\'t log a run. Do you understand what you\'ve done.']},
+  {talk:'Grace',lines:['Rose, she\'s a sign that talks. Like the one at the dentist. But MAD.']},
   {talk:'Tom',lines:['Girls, Amy, behind me. Watch the board. When she calls your name, you move. No touching, please.']},
   {battle:'lastcall',tut:'lastcall'},
   {if:()=>flag('battle:lastcall')!=='win',then:[
@@ -3498,39 +3478,39 @@ SCENES.ch10AfterBoss=()=>[
   {flag:'ch10-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:lastcall')?[
-    {talk:'The Last Call',lines:['...You answered. Three times. Thirty-seven years, and somebody answered.','I did not need midnight. I needed somebody to say HERE.']}]:[
-    {talk:'The Last Call',lines:['...Fine. Flight Zero is cancelled. It was cancelled in 1989. I just did not want to be the one to flip the flap.']},
+    {talk:'The Last Call',lines:['...You answered. Three times. Thirty-seven years, and somebody answered.','I didn\'t need midnight. I needed somebody to say HERE.']}]:[
+    {talk:'The Last Call',lines:['...Fine. Flight Zero is cancelled. It was cancelled in 1989. I just didn\'t want to be the one to flip the flap.']},
     {talk:'Amy',lines:['Hey. Nobody cancelled you. You just needed a crowd. Look. You have a crowd.']}]),
-  {talk:'The Last Call',lines:['Something for the gate clock. It has been in my bottom row since 1989.']},
+  {talk:'The Last Call',lines:['Something for the gate clock. It\'s been in my bottom row since 1989.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['A gold coin. Same little clock face. Number eight.','The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. The Mirrorball from 1971. And a gate from 1989.']},
   {talk:'Gate Zero',lines:['Tom walks back out to the gate clock and pushes the eighth coin into the middle slot. Click.','The second hand jumps. Then the minute hand. Then, slowly, the hour hand. TICK. TICK. TICK.']},
   {call:()=>{ storyWorld(); sfx.ding&&sfx.ding(); }},
   {talk:'Amy',lines:['My watch. Tom. My WATCH. It says twelve oh one. Twelve oh one!']},
   {talk:'Grace',lines:['Every clock in the whole town is going again. I can FEEL it.']},
-  {talk:'The Last Call',lines:['For the smallest passenger in Group Zero. Junior pilot wings. I have been saving them for somebody.']},
+  {talk:'The Last Call',lines:['For the smallest passenger in Group Zero. Junior pilot wings. I\'ve been saving them for somebody.']},
   {give:'r_wings'},
   {toast:'Rose gets her Signature Tool: Junior Pilot Wings (POW +5, WARMTH +7). Equip it in the menu.',time:4.5},
-  {talk:'Rose',lines:['I am a PILOT. I am wearing them upside down. On purpose. It is a pilot thing.']},
+  {talk:'Rose',lines:['I\'m a PILOT. I\'m wearing them upside down. On purpose. It\'s a pilot thing.']},
   {hearts:'rose'}, {trace:'lastcall-wings'},
-  {talk:'Grace',lines:['Tata. Tata. The jet bridge. There is a man.']},
+  {talk:'Grace',lines:['Tata. Tata. The jet bridge. There\'s a man.']},
   {spawn:{name:'Long coat',look:'longcoat',at:[14,2],dir:'down'}},
   {face:'tom',dir:'right'},
-  {talk:'Grace',lines:['In a long coat. Like at the school. He is tipping his hat at you.']},
+  {talk:'Grace',lines:['In a long coat. Like at the school. He\'s tipping his hat at you.']},
   {wait:1},
   {walk:'Long coat',to:[[15,2]],speed:.35},
   {call:()=>sfx.doorIn&&sfx.doorIn()}, {despawn:'Long coat'},
   {call:()=>{ CH10_PLANE.t0=performance.now(); sfx.whoosh(); }},
-  {talk:'Gate Zero',lines:['The jet bridge door clicks shut. Outside the big window, Flight Zero turns on its lights, pushes back, and rolls away into the dark. Very quietly. Like it has done this before.']},
+  {talk:'Gate Zero',lines:['The jet bridge door clicks shut. Outside the big window, Flight Zero turns on its lights, pushes back, and rolls away into the dark. Very quietly. Like it\'s done this before.']},
   {wait:1.5}, {flag:'ch10-gone'},
   {talk:'Amy',lines:['Tom. Who IS that?']},
   {talk:'Tom',lines:['Somebody who knows I always make my connection.','He left a card on the podium. Gold ink. \"THANK YOU FOR FLYING NOWHERE. YOUR LAYOVER WILL BE ANNOUNCED.\" And a little clock.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['My boarding pass changed. \"BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. STATUS: LAYOVER.\"']},
-  {talk:'Rose',lines:['What is a layover?']},
-  {talk:'Tom',lines:['It means this trip is not over.']},
+  {talk:'Rose',lines:['What\'s a layover?']},
+  {talk:'Tom',lines:['It means this trip isn\'t over.']},
   {hearts:'tom'},
-  {talk:'Amy',lines:['Okay. It is twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab.']},
+  {talk:'Amy',lines:['Okay. It\'s twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab.']},
   {fade:'out',time:.8},
   {call:()=>{ beginTransition({kind:'edge',to:'row',spawn:{x:18,y:9},facing:'up'}); }},
   {wait:.5}, {fade:'in',time:.6},
@@ -3539,22 +3519,22 @@ SCENES.ch10AfterBoss=()=>[
 // 8. The Rivituso house: Sunday dinner at midnight. Part 1 complete.
 SCENES.ch10End=[
   {flag:'ch10-done',value:'pending'},
-  {talk:'Deedee',lines:['THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It is fine. It is seasoning.']},
-  {talk:'Boppy',lines:['Every clock in this house started at once. Eleven clocks. I did not know we had eleven clocks.','My stomach is still on midnight. My stomach is always on midnight.']},
-  {talk:'Aunt Ellie',lines:['Sit. Tell me about the airport. Leave nothing out. I will know.']},
+  {talk:'Deedee',lines:['THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It\'s fine. It\'s seasoning.']},
+  {talk:'Boppy',lines:['Every clock in this house started at once. Eleven clocks. I didn\'t know we\'d eleven clocks.','My stomach is still on midnight. My stomach is always on midnight.']},
+  {talk:'Aunt Ellie',lines:['Sit. Tell me about the airport. Leave nothing out. I\'ll know.']},
   {spawn:{name:'Justin',look:'bean',at:spotNear(2),dir:'up'}},
   {call:()=>{ const j=currentMap.npcs.find(n=>n.scripted&&n.name==='Justin'); if(j) j.sheet='justin'; sfx.doorIn&&sfx.doorIn(); }},
   {talk:'Grace',lines:['DAD!']},
   {talk:'Justin',lines:['Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread.']},
-  {talk:'Tom',lines:['It is store-bought.']},
-  {talk:'Justin',lines:['It is store-bought.']},
-  {talk:'Tom',lines:['I will allow it. Tonight.']},
+  {talk:'Tom',lines:['It\'s store-bought.']},
+  {talk:'Justin',lines:['It\'s store-bought.']},
+  {talk:'Tom',lines:['I\'ll allow it. Tonight.']},
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Tom',lines:['A text from TNB. \"babe. every clock in LA stopped at midnight. they just started again. was that you?\"','Tom writes back: \"Mostly Amy.\" TNB sends a heart. Tom sends one back. Then another one.']},
   {talk:'Amy',lines:['Mostly Amy. Put that on a shirt.']},
-  {talk:'Deedee',lines:['Everybody sit. Everybody. Justin, you too. Ellie, that is Boppy’s chair. Boppy, that is my chair. Boppy.']},
-  {talk:'Rose',lines:['Tata. Next time there is a layover, can I come?']},
-  {talk:'Grace',lines:['WE are coming. All of us. I am already packing. In my head.']},
+  {talk:'Deedee',lines:['Everybody sit. Everybody. Justin, you too. Ellie, that\'s Boppy’s chair. Boppy, that\'s my chair. Boppy.']},
+  {talk:'Rose',lines:['Tata. Next time there\'s a layover, can I come?']},
+  {talk:'Grace',lines:['WE are coming. All of us. I\'m already packing. In my head.']},
   {talk:'Tom',lines:['Everybody comes next time.','To the moon and back, everybody. Eat. Deedee made everything.']},
   {talk:'Deedee',lines:['To the moon and BACK.']},
   {trace:'ch10-wrap'}, {hearts:'deedee'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
@@ -3607,19 +3587,19 @@ talkToDriver=function(n) {
       'And somebody left this on my dashboard. A boarding pass. BOARDING GROUP 0. Same as yours?',
       'Long Island Regional has four gates. And a fifth door nobody uses. TERMINAL ZERO. Closed since 1989. Last night, every light in it came on.'],[
       {label:'TO TERMINAL ZERO',fn:()=>playScene('ch10Start')},
-      {label:'NOT YET',fn:()=>openDialog(n.name,['Okay. Cab seven is parked. It is midnight. It has been midnight for a while.'],n)}],n);
+      {label:'NOT YET',fn:()=>openDialog(n.name,['Okay. Cab seven is parked. It\'s midnight. It\'s been midnight for a while.'],n)}],n);
     return;
   }
   if(STORY.chapter===10&&flag('ch10-start')===true&&flag('ch10-done')!==true) {
     n.visitedOnce=true;
-    openChoice(n.name,['Back to Terminal Zero? It is the only place open. It is the only place anything is open.'],[
+    openChoice(n.name,['Back to Terminal Zero? It\'s the only place open. It\'s the only place anything is open.'],[
       {label:'TERMINAL ZERO',fn:term},
-      {label:'JUST VISITING',fn:()=>openDialog(n.name,['Okay. It is still midnight. I am not going anywhere.'],n)}],n);
+      {label:'JUST VISITING',fn:()=>openDialog(n.name,['Okay. It\'s still midnight. I\'m not going anywhere.'],n)}],n);
     return;
   }
   if(STORY.chapter>=10&&flag('ch10-done')===true) {
     n.visitedOnce=true;
-    openChoice(n.name,['Where to? Terminal Zero? Somebody moved my clock up four minutes. I do not ask questions.'],[
+    openChoice(n.name,['Where to? Terminal Zero? Somebody moved my clock up four minutes. I don\'t ask questions.'],[
       {label:'TERMINAL ZERO',fn:term},
       {label:'SOMEWHERE ELSE',fn:()=>LE_talkToDriver_ch10(n)}],n);
     return;
@@ -3631,7 +3611,7 @@ talkToDriver=function(n) {
 const CH10_COINS=['THE SUNDIAL','THE STEAMER','THE SIGN-UP SHEET','BREADY’S JAR','THE 1952 BOOK','THE 1963 OVEN','THE MIRRORBALL'];
 const CH10_HINTS=[
   'Grace: \"Tata. You said the list like a HUNDRED times. It starts with the sundial. In the marsh. With Boppy.\"',
-  'Grace: \"Okay. I will just say it. Sundial, steamer, sign-up sheet, jar, book, oven, Mirrorball. Going round.\"'];
+  'Grace: \"Okay. I\'ll just say it. Sundial, steamer, sign-up sheet, jar, book, oven, Mirrorball. Going round.\"'];
 function ch10Gate(o) {
   if(STORY.mode!=='full'||STORY.chapter!==10||flag('ch10-door')||!flag('ch10-term')) return false;
   const n=TERM_HANDS.filter(k=>flag(k.fight)===true).length;
@@ -3641,7 +3621,7 @@ function ch10Gate(o) {
       'Amy: \"Still missing: '+miss.join(', ')+'.\"']);
     return true;
   }
-  openChoice(o.name,['The clock has all three hands now. They do not move. Seven coin slots round the face, one in the middle.','Tom takes out the sock. Seven gold coins.'],[
+  openChoice(o.name,['The clock has all three hands now. They don\'t move. Seven coin slots round the face, one in the middle.','Tom takes out the sock. Seven gold coins.'],[
     {label:'PUT THE COINS IN',fn:()=>ch10Slot(0)},
     {label:'NOT YET',fn:()=>{}}]);
   return true;

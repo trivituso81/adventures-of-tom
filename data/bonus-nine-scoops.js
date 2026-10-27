@@ -19,7 +19,7 @@ const inBonus=()=>typeof STORY!=='undefined'&&STORY.mode==='full'&&STORY.chapter
 // ---------- 1. Chapter 21 and the title screen ----------
 CHAPTERS[NS]={n:NS,title:'Nine Scoops',bonus:true,party:{allow:[],
   decline:{amy:'Go. GO. I have a house to decorate and a cake to hide from your father. Take the girls and get the scoops.',
-           deedee:'Not today, honey. The cake is in the oven and the oven does not care that it is a birthday.',
+           deedee:'Not today, honey. The cake is in the oven and the oven doesn\'t care that it\'s a birthday.',
            boppy:'Ice cream? My knee says sit. My knee has been saying sit since 1994.'}},
   noFlight:()=>({lines:['Airport? On the birthday? Your sister would find me. On foot. In the dark.','The creamery is at the top of the Square. Go get those scoops.']})};
 function beginBonus() {
@@ -76,7 +76,7 @@ Object.assign(MONSTERS,{
     attacks:['The gremlin flicks a sprinkle at {t}.','The gremlin jumps on {t}. It is very small.','The gremlin shouts at {t} in sprinkle.'],
     special:{name:'Sprinkle Spray',every:3,kind:'hit',msg:'{e} sprays sprinkles everywhere! Mostly at {t}.'},
     wobble:'The gremlin wobbles...',die:'It pops into a puff of sprinkles. They taste fine.',
-    rest:['...I am resting on a scoop. Do not tell him.'],talk:['Brr! Tiny! Angry!','We came in the freezer. It was cold. We are STILL cold.'],again:['Round {n}. We brought more sprinkles.'],
+    rest:['...I\'m resting on a scoop. Don\'t tell him.'],talk:['Brr! Tiny! Angry!','We came in the freezer. It was cold. We\'re STILL cold.'],again:['Round {n}. We brought more sprinkles.'],
     vapor:['#ff7ac0','#7ad0ff','#ffe08a','#ffffff'],hint:'Tiny and cold. They come in threes.'},
   slushslug:{id:'slushslug',coins:14,coinStep:4,name:'Slushie Slug',the:'the slug',short:'Slug',sprite:NS_SLUSH,pal:NS_SLUSH_PAL,scale:3,eyes:[[12,12],[21,12]],mouth:[16,17],
     hp:40,hpStep:6,atk:2,xp:14,xpStep:4,level:5,rank:'TOUGH',
@@ -84,7 +84,7 @@ Object.assign(MONSTERS,{
     attacks:['The slug oozes onto {t}. Blue raspberry.','The slug sneezes slush at {t}.','The slug sits on {t}. Slowly. Coldly.'],
     special:{name:'Brain Freeze',every:3,kind:'all',msg:'{e} chugs itself. BRAIN FREEZE for everyone!'},
     wobble:'The slug slumps...',die:'It melts into the fountain. The fountain is blue now.',
-    rest:['...Melting. Give me a minute. Glorp.'],talk:['Glorp. These scoops are mine. He said so.','Blue raspberry is not a fruit. I know. I do not care.'],again:['Round {n}. I refroze.'],
+    rest:['...Melting. Give me a minute. Glorp.'],talk:['Glorp. These scoops are mine. He said so.','Blue raspberry isn\'t a fruit. I know. I don\'t care.'],again:['Round {n}. I refroze.'],
     vapor:['#7fcaf0','#b8e6fb','#ffffff','#3a7ab0'],hint:'Lots of HP, but it melts and skips every third turn. Warm moves melt it faster.'},
   conehead:{id:'conehead',coins:10,coinStep:3,name:'Cone Head',the:'the cone',short:'Cone',sprite:NS_CONE,pal:NS_CONE_PAL,scale:3,eyes:[[5,6],[14,6]],mouth:[9,8],
     hp:24,hpStep:4,atk:2,xp:10,xpStep:3,level:5,rank:'MEDIUM',
@@ -96,7 +96,7 @@ Object.assign(MONSTERS,{
     vapor:['#d9a24e','#8fd4a8','#ffffff','#a8702a'],hint:'They come in pairs and pass a scoop back and forth to heal.'},
   brainfreeze:{id:'brainfreeze',coins:60,coinStep:10,name:'Brain Freeze',the:'Brain Freeze',short:'Freeze',sprite:NS_FREEZER,pal:NS_FREEZER_PAL,scale:3,eyes:[[7,9],[24,9]],mouth:[15,18],
     hp:140,hpStep:14,atk:4,xp:40,xpStep:8,level:5,rank:'BOSS',
-    intro:'The pond goes still. Then it frosts over. A chest freezer stands up on the ice. It is BRAIN FREEZE.',
+    intro:'The pond goes still. Then it frosts over. A chest freezer stands up on the ice. It\'s BRAIN FREEZE.',
     attacks:['Brain Freeze gives {t} the cold shoulder.','Brain Freeze breathes frost on {t}.','Brain Freeze flings an ice cube at {t}. Rude.'],
     special:{name:'Brain Freeze',every:3,kind:'all',msg:'BRAIN FREEZE! Everyone grabs their forehead!'},
     wobble:'Brain Freeze rattles...',die:'The lid pops open. Nine scoops, still perfect.',
@@ -129,9 +129,9 @@ B2_FORMATIONS.conehead=[['conehead','front'],['conehead','front']];
 const NS_LIKES=['rose.silly','rose.peekaboo','grace.squishy','grace.dance','tom.starter'];
 Object.assign(B2_GRUMP,{
   gremlin:{goal:80,grumpy:'Tiny, cold, and nobody ever picks sprinkles first.',likes:NS_LIKES},
-  slushslug:{goal:160,grumpy:'Half melted, half frozen, and blue raspberry is not even a real fruit.',likes:NS_LIKES},
+  slushslug:{goal:160,grumpy:'Half melted, half frozen, and blue raspberry isn\'t even a real fruit.',likes:NS_LIKES},
   conehead:{goal:140,grumpy:'Nobody wants the cone. Everybody wants the scoop. Think about that.',likes:NS_LIKES},
-  brainfreeze:{goal:380,grumpy:'Nobody came to its birthday. Not one. It has been cold about it ever since.',likes:NS_LIKES}
+  brainfreeze:{goal:380,grumpy:'Nobody came to its birthday. Not one. It\'s been cold about it ever since.',likes:NS_LIKES}
 });
 if(typeof B6_XP!=='undefined') Object.assign(B6_XP,{gremlin:10,slushslug:44,conehead:30,brainfreeze:100});
 // Brain Freeze fights like the Big Shake (engine/battle2.js B2_SHAKE_STYLE): every third turn a telegraphed party-wide
@@ -171,9 +171,9 @@ b2BossTurn=function(e) {
 
 // ---------- 4. Items, props, sounds ----------
 Object.assign(items,{
-  present:{name:'Grace’s Present',icon:'\u{1F381}',slot:null,desc:'Wrapped. From Tata. Do not shake it. Presents are after cake. That is the rule.'},
-  instax:{name:'Instax Printer',icon:'\u{1F4F7}',slot:'Tool',desc:'Grace’s ninth birthday present. Prints a photo from a phone in a minute. You do not have to freeze a moment. You take a picture.',stats:{warmth:4}},
-  nsphoto:{name:'The Cab Selfie',icon:'\u{1F5BC}',slot:'Charm',desc:'Tom, Grace, Rose, one duck and one cow, by Cab 7. The first print. It is going on the fridge.',perk:{heart:10}}
+  present:{name:'Grace’s Present',icon:'\u{1F381}',slot:null,desc:'Wrapped. From Tata. Don\'t shake it. Presents are after cake. That\'s the rule.'},
+  instax:{name:'Instax Printer',icon:'\u{1F4F7}',slot:'Tool',desc:'Grace’s ninth birthday present. Prints a photo from a phone in a minute. You don\'t have to freeze a moment. You take a picture.',stats:{warmth:4}},
+  nsphoto:{name:'The Cab Selfie',icon:'\u{1F5BC}',slot:'Charm',desc:'Tom, Grace, Rose, one duck and one cow, by Cab 7. The first print. It\'s going on the fridge.',perk:{heart:10}}
 });
 if(!sfx.quack) sfx.quack=(d=0)=>{ tone({type:'sawtooth',f0:420,f1:300,dur:.13,vol:.16,delay:d,filter:1400}); tone({type:'square',f0:300,f1:240,dur:.1,vol:.08,delay:d+.12,filter:900}); };
 if(!sfx.shutter) sfx.shutter=(d=0)=>{ noise({dur:.05,vol:.25,delay:d,f0:4000,f1:2000,type:'bandpass',q:1}); tone({type:'square',f0:1800,dur:.03,vol:.08,delay:d+.06}); noise({dur:.04,vol:.2,delay:d+.09,f0:3000,f1:1500,type:'bandpass',q:1}); };
@@ -214,18 +214,18 @@ function drawBwCake(x,y,w,lit,n,time) {
 
 // ---------- 5. Spoken lines ----------
 Object.assign(LINES.tom,{
-  arrive_bday:["Oof, I'm finally here! Six hours on Delta One and I did not miss the big day."],
-  present_rule:['Presents are after cake. That is the rule. I did not make the rule.'],
+  arrive_bday:["Oof, I'm finally here! Six hours on Delta One and I didn't miss the big day."],
+  present_rule:['Presents are after cake. That\'s the rule. I didn\'t make the rule.'],
   present_give:['Okay. Presents are before cake. New rule.'],
   duck_ride:['Hello, Rose. Hello, duck. Please keep your arms, legs and bills inside the uncle at all times.'],
-  bday_cow:['That is the fluffiest cow I have ever seen. And I have seen a LOT of cows.'],
-  not_puppy:['It is not a puppy.'],
+  bday_cow:['That\'s the fluffiest cow I\'ve ever seen. And I\'ve seen a LOT of cows.'],
+  not_puppy:['It\'s not a puppy.'],
   wish:['Nine candles. Hold still, please.'],
   wish_win:['That was a LOT of cake.']
 });
 Object.assign(LINES.grace,{
   arrive_bday:['TATA! You came for my BIRTHDAY!'],
-  bday_nine:['I have been nine for SIX hours.'],
+  bday_nine:['I\'ve been nine for SIX hours.'],
   bday_squish:['Tata, LOOK. A fluffy purple cow. Her name is Moo-rielle. And a GLITTER DICE.'],
   dice_nine:['It only does nines today.'],
   rude:['Stealing on a BIRTHDAY? Rude.'],
@@ -237,7 +237,7 @@ Object.assign(LINES.grace,{
   wish_print:['Printing. That one is going on the fridge.']
 });
 Object.assign(LINES.rose,{
-  bday_six:['I have been six for a hundred MILLION years.'],
+  bday_six:['I\'ve been six for a hundred MILLION years.'],
   duck_mine:['The duck is mine now.'],
   puppy:['Is the present a puppy?'],
   bigpuppy:['Is the present a BIGGER puppy?'],
@@ -251,7 +251,7 @@ Object.assign(LINES.rose,{
 // The first three-person Family Finish: Tom + Grace + Rose, 75% HEART, nine candle hits and the wish on every enemy.
 B2_TOMBOS.push({id:'wish',who:['tom','grace','rose'],tier:'ff',cost:75,flag:'tombo:wish',name:'Birthday Wish',elem:['sparkle','cozy'],stat:'hybrid',mult:6.0,target:'all',weight:'standard',kindV:300,tombo:true,
   fx:[['goof',1,'t'],['heal',.25,0,'party']],
-  desc:'Rose jumps out from behind the monsters with the duck (BOO!), Tom drops a black and white cookie cake on them and lights nine candles with a Combo Fireball, and Grace handsprings onto it and blows them out one hit at a time. Then the wish: a huge Sparkle and Cozy hit on every enemy. They are Goofed for a round and the party heals 25%.'});
+  desc:'Rose jumps out from behind the monsters with the duck (BOO!), Tom drops a black and white cookie cake on them and lights nine candles with a Combo Fireball, and Grace handsprings onto it and blows them out one hit at a time. Then the wish: a huge Sparkle and Cozy hit on every enemy. They\'re Goofed for a round and the party heals 25%.'});
 // Grace's INSTAX: once she has the printer, a Sparkle flash that Goofs every enemy and warms them up (4 VP, no damage).
 const NS_INSTAX_SKILL={key:'instax',name:'Instax',vp:4,elem:['sparkle'],target:'all',weight:'standard',fx:[['goof',1,'t']],
   desc:'Grace snaps a photo of the whole row and prints it. The flash Goofs every enemy (they lose a turn), and seeing themselves warms them up.'};
@@ -360,7 +360,7 @@ SCENES.nsOpening=()=>{
     {walk:'tom',to:[[dx,dy+1],[dx,row]],speed:.3},
     {wait:.3},
     {step:stretchStep()},
-    {talk:'Tom',lines:["Oof, I'm finally here! Six hours on Delta One and I did not miss the big day."],voice:[['tom','arrive_bday']]},
+    {talk:'Tom',lines:["Oof, I'm finally here! Six hours on Delta One and I didn't miss the big day."],voice:[['tom','arrive_bday']]},
     {call:()=>{ intro.bubble={text:'TATA!!!',t:0}; snd.gasp(); }}, {say:['grace','introshout']}, {say:['rose','introshout',.5]},
     {wait:.6},
     {face:'tom',dir:'left'},
@@ -372,13 +372,13 @@ SCENES.nsOpening=()=>{
     ]},
     {call:()=>{ intro.bubble=null; }}, {face:'grace',dir:'right'}, {face:'rose',dir:'up'},
     {step:hugStep()},
-    {talk:'Grace',lines:['TATA! You came for my BIRTHDAY!','I have been nine for SIX hours.'],voice:[['grace','arrive_bday'],['grace','bday_nine']]},
-    {talk:'Rose',lines:['I have been six for a hundred MILLION years.','Tata, up! Up up up!'],voice:[['rose','bday_six'],['rose','intro2']]},
+    {talk:'Grace',lines:['TATA! You came for my BIRTHDAY!','I\'ve been nine for SIX hours.'],voice:[['grace','arrive_bday'],['grace','bday_nine']]},
+    {talk:'Rose',lines:['I\'ve been six for a hundred MILLION years.','Tata, up! Up up up!'],voice:[['rose','bday_six'],['rose','intro2']]},
     {call:()=>{ const r=sceneActor('rose'); snd.whee(); snd.oof(.38); r.depthBias=-.05; r.facing='left'; }},
     {hop:'rose',from:[dx-1,row+1],to:[dx,row],time:.5,arc:22,lift:[0,SHOULDER]},
     {call:()=>{ const r=sceneActor('rose'); r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; sfx.giggle(); sfx.quack(.3); }},
     {trace:'rose-shoulders'},
-    {talk:'Rose',lines:['I am the tallest! Giddyup, Tata!'],voice:[['rose','intro3']]},
+    {talk:'Rose',lines:['I\'m the tallest! Giddyup, Tata!'],voice:[['rose','intro3']]},
     {talk:'Tom',lines:['Hello, Rose. Hello, duck. Please keep your arms, legs and bills inside the uncle at all times.'],voice:[['tom','duck_ride']]},
     {face:'grace',dir:'right'}, {call:()=>{ intro.squishy={t:0,sprite:NS_COW,pal:NS_COW_PAL,plain:true}; snd.squeak(); }},
     {wait:.7},
@@ -390,7 +390,7 @@ SCENES.nsOpening=()=>{
     {call:()=>{ intro.showcase=null; snd.squeak(); intro.squishy=null; }},
     {call:()=>sfx.quack()},
     {talk:'Rose',lines:['The duck is mine now.'],voice:[['rose','duck_mine']]},
-    {talk:'Tom',lines:['That is the fluffiest cow I have ever seen. And I have seen a LOT of cows.'],voice:[['tom','bday_cow']]},
+    {talk:'Tom',lines:['That\'s the fluffiest cow I\'ve ever seen. And I\'ve seen a LOT of cows.'],voice:[['tom','bday_cow']]},
     {call:()=>{ NSFX.flash=.6; sfx.shutter(); }},
     {talk:'Tom',lines:['One for the fridge. Everybody say ice cream.']},
     {talk:'Rose',lines:['ICE CREAM! Come on, Tata! Let’s go!']},
@@ -403,12 +403,11 @@ SCENES.nsOpening=()=>{
 // Right after the opening: the plan, and the present stays wrapped.
 SCENES.nsGoal=[
   {flag:'ns-goal'},
-  {talk:'Grace',lines:['Tata! Sprinkle Street Creamery! The sundae! Mr. Pistachio said it would be READY.']},
+  {talk:'Grace',lines:['Tata! Sprinkle Street Creamery! The sundae! Mr. Pistachio said it\'d be READY.']},
   {talk:'Tom',lines:['Nine dairy-free scoops. One per year. Black and white cookie on top. I ordered it in July.']},
   {talk:'Rose',lines:['Is the present a puppy?'],voice:[['rose','puppy']]},
-  {talk:'Tom',lines:['It is not a puppy.','Presents are after cake. That is the rule. I did not make the rule.'],voice:[['tom','not_puppy'],['tom','present_rule']]},
+  {talk:'Tom',lines:['It\'s not a puppy.','Presents are after cake. That\'s the rule. I didn\'t make the rule.'],voice:[['tom','not_puppy'],['tom','present_rule']]},
   {toast:'Tombos ready: Hi Guys, Welcome Back! (Grace) and Double-Decker Airplane (Rose). In battle, ◀ TOMBO.',time:4},
-  {wait:4.2},
   {toast:'Goal: Sprinkle Street Creamery, the shop with the SCOOPS sign at the top of the Square.',time:4.5}
 ];
 // Sprinkle Street Creamery: frozen solid. Mr. Pistachio in an ice cube, three gremlins, the story of the thief.
@@ -418,24 +417,24 @@ SCENES.nsCreamery=[
   {walk:'tom',to:()=>[[currentMap.spawn.x,currentMap.spawn.y-1]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:()=>[currentMap.spawn.x+1,currentMap.spawn.y],dir:'up'}, {place:'rose',at:()=>[currentMap.spawn.x-1,currentMap.spawn.y],dir:'up'},
   {sfx:'look'},
-  {talk:'Rose',lines:['Tata. It is SNOWING. Inside.']},
+  {talk:'Rose',lines:['Tata. It\'s SNOWING. Inside.']},
   {talk:'Grace',lines:['Mr. Pistachio is in an ICE CUBE. Mr. PISTACHIO.']},
   {talk:'Mr. Pistachio',lines:['Mmmf. Mmf MMF. Mmmmf.']},
   {talk:'Tom',lines:['He says the freezer walked off. I speak ice cube.']},
   {sfx:'whoosh'},
   spawnAt('Sprinkle Gremlin','gremlin',[3,6],{dir:'down'}), spawnAt('Sprinkle Gremlin B','gremlin',[6,6],{dir:'down'}),
   {talk:'Sprinkle Gremlin',lines:['Brr! Tiny! Angry! The scoops are OURS!']},
-  {talk:'Grace',lines:['Tata is in front. I am in charge of choreography. It is my birthday. FIGHT!']},
+  {talk:'Grace',lines:['Tata is in front. I\'m in charge of choreography. It\'s my birthday. FIGHT!']},
   {battle:()=>sceneActor('Sprinkle Gremlin'),tut:'nsGremlin'},
   {despawn:'Sprinkle Gremlin'}, {despawn:'Sprinkle Gremlin B'},
-  {if:()=>flag('battle:gremlin')!=='win',then:[{heal:true},{talk:'Grace',lines:['Up. Everybody up. It is my birthday and NOBODY stays down on my birthday.']},{flag:'ns-creamery',value:false}],else:[
+  {if:()=>flag('battle:gremlin')!=='win',then:[{heal:true},{talk:'Grace',lines:['Up. Everybody up. It\'s my birthday and NOBODY stays down on my birthday.']},{flag:'ns-creamery',value:false}],else:[
     {call:()=>{ setFlag('ns-cube',false); sfx.lineClear(); }},
     {talk:'Mr. Pistachio',lines:['PFFF. Thank you. I could see my own eyebrows in there.','It was BRAIN FREEZE. A walking chest freezer. He said birthdays are a scam and nobody came to his.','He took every scoop and ran. Three bags. One to the fountain, one up the Hollow trail, one to the pond.']},
     {talk:'Grace',lines:['He took MY scoops? On MY birthday?','Stealing on a BIRTHDAY? Rude.'],voice:[null,['grace','rude']]},
     {talk:'Rose',lines:['A bad guy! On a Saturday!'],voice:[['rose','badguy']]},
-    {talk:'Tom',lines:['We get the scoops, we get the sundae, we are home by four.']},
+    {talk:'Tom',lines:['We get the scoops, we get the sundae, we\'re home by four.']},
     {talk:'Rose',lines:['Is the present a puppy?'],voice:[['rose','puppy']]},
-    {talk:'Tom',lines:['It is not a puppy.'],voice:[['tom','not_puppy']]},
+    {talk:'Tom',lines:['It\'s not a puppy.'],voice:[['tom','not_puppy']]},
     {call:()=>setFlag('ns-scoops',0)},
     {toast:'Goal: the fountain in the middle of the Square. Rose has a plan.',time:4.5}]}
 ];
@@ -454,12 +453,12 @@ SCENES.nsFountain=[
   {talk:'Slushie Slug',lines:['GLORP. What? WHO? Oh no. I dropped a scoop. I dropped TWO scoops.']},
   {battle:()=>sceneActor('Slushie Slug'),tut:'nsSlug'},
   {despawn:'Slushie Slug'},
-  {if:()=>flag('battle:slushslug')!=='win',then:[{heal:true},{talk:'Grace',lines:['Up, up. It is a slug. We are not losing to a SLUG on my birthday.']},{flag:'ns-fountain',value:false}],else:[
+  {if:()=>flag('battle:slushslug')!=='win',then:[{heal:true},{talk:'Grace',lines:['Up, up. It\'s a slug. We\'re not losing to a SLUG on my birthday.']},{flag:'ns-fountain',value:false}],else:[
     {call:()=>{ setFlag('ns-scoops',3); sfx.pickup(); }},
     scoopToast(3,'Vanilla, strawberry, mint. Cold and perfect.'),
     {wait:2},
     {talk:'Rose',lines:['Is the present a BIGGER puppy?'],voice:[['rose','bigpuppy']]},
-    {talk:'Tom',lines:['It is not a bigger puppy.']},
+    {talk:'Tom',lines:['It\'s not a bigger puppy.']},
     {toast:'Goal: the Grump Hollow trail, through the gap in the trees up north.',time:4.5}]}
 ];
 // The trail: two Cone Heads, one of them takes Moo-rielle. Scoops 4 to 6. Brain Freeze watches from the trees.
@@ -477,12 +476,12 @@ SCENES.nsTrail=[
   {sfx:'look'},
   {talk:'Brain Freeze',lines:['...Nobody filmed MY birthday.']},
   {talk:'Rose',lines:['Tata. The trees are TALKING.']},
-  {talk:'Tom',lines:['The trees are not talking. The freezer is. Eyes on the cones.']},
+  {talk:'Tom',lines:['The trees aren\'t talking. The freezer is. Eyes on the cones.']},
   {battle:()=>sceneActor('Cone Head'),tut:'nsCone'},
   {despawn:'Cone Head'}, {despawn:'Cone Head B'},
   {if:()=>flag('battle:conehead')!=='win',then:[{heal:true},{talk:'Grace',lines:['Up. UP. Moo-rielle needs us.']},{flag:'ns-trail',value:false}],else:[
     {call:()=>{ setFlag('ns-cow-stolen',false); setFlag('ns-scoops',6); sfx.pickup(); }},
-    {talk:'Grace',lines:['Moo-rielle! You smell like mint. We will talk about it later.']},
+    {talk:'Grace',lines:['Moo-rielle! You smell like mint. We\'ll talk about it later.']},
     scoopToast(6,'Chocolate, cookie dough, coffee. The cones had them in a cooler.'),
     {wait:2},
     {toast:'Goal: the pond, east around the water. Three scoops left. And one freezer.',time:4.5}]}
@@ -492,7 +491,7 @@ SCENES.nsBoss2=[
   {battle:()=>sceneActor('Brain Freeze'),tut:'nsBoss2'},
   {if:()=>flag('battle:brainfreeze')!=='win',then:[
     {heal:true},
-    {talk:'Grace',lines:['Up, up. It is still my birthday. We go AGAIN.']},
+    {talk:'Grace',lines:['Up, up. It\'s still my birthday. We go AGAIN.']},
     {flag:'ns-retry'},
     {toast:'Walk up to Brain Freeze to try again. Everyone is healed.',time:4.5}],else:[{flag:'ns-retry',value:false}]}
 ];
@@ -501,7 +500,7 @@ SCENES.nsPond=[
   {place:'grace',at:()=>[player.x-1,player.y+1],dir:'right'}, {place:'rose',at:()=>[player.x,player.y+1],dir:'right'}, {face:'tom',dir:'right'},
   spawnAt('Pond Grump','grump',[15,13],{dir:'right'}),
   {walk:'Pond Grump',to:[[16,13],[17,13]],speed:.3,onStep:()=>sfx.splat()},
-  {talk:'Pond Grump',lines:['Grrrumble. Something moved into my pond. It is COLD. I am a POND grump, not an ICE grump.']},
+  {talk:'Pond Grump',lines:['Grrrumble. Something moved into my pond. It\'s COLD. I\'m a POND grump, not an ICE grump.']},
   {walk:'Pond Grump',to:[[16,13],[15,13],[14,14]],speed:.3,onStep:()=>sfx.splat()},
   {despawn:'Pond Grump'},
   {face:'grace',dir:'right'},
@@ -514,7 +513,7 @@ SCENES.nsPond=[
   {talk:'Brain Freeze',lines:['Nine scoops. Nine candles. Nine years. All of it MELTS.','Not in here. Nothing melts in here. Nothing changes.','Nobody came to MY birthday. So nobody gets one.']},
   {talk:'Grace',lines:['Stealing on a BIRTHDAY? Rude.'],voice:[['grace','rude']]},
   {talk:'Rose',lines:['A bad guy! On a Saturday!'],voice:[['rose','badguy']]},
-  {talk:'Tom',lines:['We get the scoops, we get the sundae, we are home by four. Everybody ready?']},
+  {talk:'Tom',lines:['We get the scoops, we get the sundae, we\'re home by four. Everybody ready?']},
   {battle:()=>sceneActor('Brain Freeze'),tut:'nsBoss1'},
   {if:()=>B2.result==='shell',then:[
     {flag:'ns-rosefrozen'},
@@ -524,7 +523,7 @@ SCENES.nsPond=[
     {talk:'Tom',lines:['...Okay. Presents are before cake. New rule.'],voice:[['tom','present_give']]},
     {call:()=>{ sfx.pickup(); setFlag('ns-printer'); setFlag('tombo:wish'); STORY.flags.heart=75; }},
     {give:'instax'},
-    {talk:'Grace',lines:['An INSTAX. Tata. A PRINTER. For PHOTOS.','...Wait.','He does not want to freeze the world. He wants to keep a moment.']},
+    {talk:'Grace',lines:['An INSTAX. Tata. A PRINTER. For PHOTOS.','...Wait.','He doesn\'t want to freeze the world. He wants to keep a moment.']},
     {talk:'Tom',lines:['Pair it to my phone. One tap. The cab photo is still on there.']},
     {call:()=>{ sfx.shutter(); NSFX.flash=.5; }},
     {wait:.5},
@@ -537,19 +536,17 @@ SCENES.nsPond=[
     {talk:'Grace',lines:["You don't have to freeze it. You just take a picture. See? It stays.",'And we still get to eat the ice cream.'],voice:[['grace','photo_stays']]},
     {wait:.6},
     {call:()=>{ sfx.lineClear(); sfx.stun(); NSFX.flash=.4; }},
-    {talk:'Brain Freeze',lines:['...It is warm. Why is the picture WARM.','My lid. My LID. It is OPENING.']},
+    {talk:'Brain Freeze',lines:['...It\'s warm. Why\'s the picture WARM.','My lid. My LID. It\'s OPENING.']},
     {call:()=>{ setFlag('ns-rosefrozen',false); sfx.levelChime(); sfx.quack(.4); }},
     {talk:'Rose',lines:['I was in the MIDDLE of a boo.'],voice:[['rose','thaw']]},
     {toast:'New Family Finish: BIRTHDAY WISH (Tom + Grace + Rose). HEART is at 75%. In battle, ◀ TOMBO.',time:5},
-    {wait:5.2},
     {toast:'Grace learned INSTAX: a flash that Goofs every enemy. ▲ Skills.',time:4},
-    {wait:4.2},
     {walk:'grace',to:()=>[[player.x+1,player.y]],speed:.3},
-    {talk:'Tom',lines:['Everybody ready? Round two. It is still her birthday.']},
+    {talk:'Tom',lines:['Everybody ready? Round two. It\'s still her birthday.']},
     {seq:SCENES.nsBoss2}
   ],else:[
     {heal:true},
-    {talk:'Grace',lines:['Up, up. It is my birthday. Nobody stays down.']},
+    {talk:'Grace',lines:['Up, up. It\'s my birthday. Nobody stays down.']},
     {despawn:'Brain Freeze'},
     {flag:'ns-pond',value:false}]}
 ];
@@ -559,15 +556,15 @@ SCENES.nsAfterBoss=[
   {flag:'ns-clear'},
   {call:()=>{ const b=sceneActor('Brain Freeze'); if(b) b.carry='nsphoto'; }},
   {if:()=>!!flag('kind:brainfreeze'),
-    then:[{talk:'Brain Freeze',lines:['...Nobody ever warmed me up before. Take the scoops. They are in the freezer. Where scoops go.']}],
-    else:[{talk:'Brain Freeze',lines:['Fine. FINE. Take the scoops. They are in the freezer. Where scoops go.']}]},
+    then:[{talk:'Brain Freeze',lines:['...Nobody ever warmed me up before. Take the scoops. They\'re in the freezer. Where scoops go.']}],
+    else:[{talk:'Brain Freeze',lines:['Fine. FINE. Take the scoops. They\'re in the freezer. Where scoops go.']}]},
   {call:()=>{ setFlag('ns-scoops',9); sfx.pickup(); }},
   scoopToast(9,'Peanut butter, lemon, black and white cookie. All nine. Still perfect.'),
   {wait:2.2},
   {talk:'Grace',lines:['Come to my party.']},
   {talk:'Brain Freeze',lines:['...Nobody has ever... Is there cake?']},
-  {talk:'Tom',lines:['There is a LOT of cake.']},
-  {talk:'Brain Freeze',lines:['I will bring the ice. I am mostly ice.']},
+  {talk:'Tom',lines:['There\'s a LOT of cake.']},
+  {talk:'Brain Freeze',lines:['I\'ll bring the ice. I\'m mostly ice.']},
   {talk:'Rose',lines:['He can sit next to the duck.']},
   {walk:'Brain Freeze',to:[[20,13],[21,14]],speed:.4}, {despawn:'Brain Freeze'},
   {call:()=>setFlag('ns-frost',false)},
@@ -581,16 +578,16 @@ SCENES.nsEnd=()=>[
   {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
   {hearts:'Amy'},
-  {talk:'Amy',lines:['You got them? All nine? Tom, I could KISS you. I will not. I am sweaty.']},
-  {talk:'Justin',lines:['Hold this. No, the other end. It is the banner. Do not touch the copper.']},
+  {talk:'Amy',lines:['You got them? All nine? Tom, I could KISS you. I\'ll not. I\'m sweaty.']},
+  {talk:'Justin',lines:['Hold this. No, the other end. It\'s the banner. Don\'t touch the copper.']},
   {talk:'Deedee',lines:['Cake is out of the oven. Dairy free. I checked the box nine times.']},
   {talk:'Boppy',lines:['Nine scoops. In my day we got one scoop. And a lecture.']},
   {sfx:'doorIn'},
   spawnAt('Brain Freeze','brainfreeze',[6,9],{dir:'up',mscale:1.2,carry:'nsphoto'}),
   {walk:'Brain Freeze',to:[[6,8]],speed:.35,onStep:()=>sfx.thud()},
   {talk:'Brain Freeze',lines:['I brought ice. Where do you want the ice.']},
-  {talk:'Boppy',lines:['Nobody told me there would be a FREEZER at the table.']},
-  {talk:'Deedee',lines:['He is a guest, Boppy. Sit. He can sit next to you. You could use the cold on that knee.']},
+  {talk:'Boppy',lines:['Nobody told me there\'d be a FREEZER at the table.']},
+  {talk:'Deedee',lines:['He\'s a guest, Boppy. Sit. He can sit next to you. You could use the cold on that knee.']},
   {talk:'Tom',lines:['Everybody, this is the Nine Scoop Sundae. Vanilla, strawberry, mint, chocolate, cookie dough, coffee, peanut butter, lemon, and black and white cookie on top.']},
   {trace:'ns-sundae'}, {call:()=>sfx.levelChime()},
   {talk:'Grace',lines:['Moo-rielle gets her own tiny scoop. Mint. She earned it.']},
@@ -603,10 +600,10 @@ SCENES.nsEnd=()=>[
   {talk:'Tom',lines:['Relight. Nine candles. Hold still, please.']},
   {call:()=>sfx.fireball()},
   {wait:.8},
-  {talk:'Grace',lines:['Okay. For real this time. I wish...','I am not telling. That is the rule. I did not make the rule.']},
+  {talk:'Grace',lines:['Okay. For real this time. I wish...','I\'m not telling. That\'s the rule. I didn\'t make the rule.']},
   {call:()=>{ sfx.blow(); sfx.birthdayChime(.3); }},
   {hearts:'grace'}, {hearts:'tom'},
-  {talk:'Brain Freeze',lines:['...This is a good birthday. I am putting it on my door.']},
+  {talk:'Brain Freeze',lines:['...This is a good birthday. I\'m putting it on my door.']},
   {fade:'out',time:.8}, {card:NS,done:true,time:3.6}, {flag:'ns-done'}, {fade:'in',time:.8},
   {save:true},
   {toast:'Bonus chapter complete! Long Island is yours. Brain Freeze is staying for cake.',time:6}
@@ -637,7 +634,7 @@ STORY_WORLD.push(()=>{
 });
 HOLD_RULES.push(n=>inBonus()&&!n.scripted);
 if(worlds.bakery) for(const n of worlds.bakery.npcs) if(n.name==='Bun') { n.away=(n.away||[]).concat([{chapter:NS}]); AWAY_NPCS.push({map:worlds.bakery,n}); }
-for(const [id,at,name,lines] of [['town',[[29,9],[29,10]],'School gate',['The gate to Long Island Elementary is locked. It is Saturday. It is a BIRTHDAY.']],['row',[[14,21],[15,21]],'Pier path',['A sign on the branch: CATTAIL PIER. CLOSED. THE FISH ARE AT A PARTY.']]]) {
+for(const [id,at,name,lines] of [['town',[[29,9],[29,10]],'School gate',['The gate to Long Island Elementary is locked. It\'s Saturday. It\'s a BIRTHDAY.']],['row',[[14,21],[15,21]],'Pier path',['A sign on the branch: CATTAIL PIER. CLOSED. THE FISH ARE AT A PARTY.']]]) {
   const M=worlds[id]; if(M&&M.spec) (M.spec.gates=M.spec.gates||[]).unshift({at,cond:{chapter:NS},name,lines});
 }
 

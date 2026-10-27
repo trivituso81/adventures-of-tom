@@ -58,8 +58,8 @@ function setGirlsAway(away) {
       const fi=followers.findIndex(f=>f.member===m); if(fi>=0) followers.splice(fi,1);
     }
     if(!home.npcs.some(n=>n.girlAtHome)) home.npcs.push(
-      makeGirlAtHome(grace,3,5,['Tata is in Los Angeles. I am in charge now.','Mom says we can call him after dinner. I have a list of questions. It is two pages.','When he gets back I am doing my whole floor routine for him. Twice.']),
-      makeGirlAtHome(rose,4,7,['I am drawing Tata a palm tree. It has a face.','Is Tata back yet? Is it now? Is it NOW?','When Tata comes home I am going to jump on him SO hard.'])
+      makeGirlAtHome(grace,3,5,['Tata is in Los Angeles. I\'m in charge now.','Mom says we can call him after dinner. I have a list of questions. It\'s two pages.','When he gets back I\'m doing my whole floor routine for him. Twice.']),
+      makeGirlAtHome(rose,4,7,['I\'m drawing Tata a palm tree. It has a face.','Is Tata back yet? Is it now? Is it NOW?','When Tata comes home I\'m going to jump on him SO hard.'])
     );
   } else {
     for(let i=home.npcs.length-1;i>=0;i--) if(home.npcs[i].girlAtHome) home.npcs.splice(i,1);
@@ -72,47 +72,47 @@ function setGirlsAway(away) {
 // ---------- The drivers ----------
 // Recruits never leave their own town: whoever is along says goodbye at the cab and heads home.
 const TRAVEL_TALK={
-  amy:{stay:['Los Angeles? On a school night? I have thirty second-graders at eight.','Go. I will race you when you get back. And I will win.'],toast:'Amy jogs home. She has papers to grade.'},
+  amy:{stay:['Los Angeles? On a school night? I have thirty second-graders at eight.','Go. I\'ll race you when you get back. And I\'ll win.'],toast:'Amy jogs home. She has papers to grade.'},
   deedee:{stay:['Oh, Tommy. Somebody has to stay with my angels. And the pies.','Here. Cookies for the flight. To the moon and back, honey.'],toast:'Deedee heads home to the Rivituso house. The pies need her.'},
-  boppy:{stay:['Six hours in a seat? My stomach says no. I say no. We agree for once.','Go on. The recliner and I will hold down the fort.'],toast:'Boppy shuffles home to the recliner.'},
-  nara:{stay:['Nara stops at the curb. She looks at the cab. She looks at Tom.','Tom kneels down. "I will be back. I promise. You keep 2nd Ave safe."','Nara licks his whole face. Then she trots back to 2nd Ave to wait at the corner.'],toast:'Nara heads back to 2nd Ave. She will be waiting.',narrate:true}
+  boppy:{stay:['Six hours in a seat? My stomach says no. I say no. We agree for once.','Go on. The recliner and I\'ll hold down the fort.'],toast:'Boppy shuffles home to the recliner.'},
+  nara:{stay:['Nara stops at the curb. She looks at the cab. She looks at Tom.','Tom kneels down. "I\'ll be back. I promise. You keep 2nd Ave safe."','Nara licks his whole face. Then she trots back to 2nd Ave to wait at the corner.'],toast:'Nara heads back to 2nd Ave. She\'ll be waiting.',narrate:true}
 };
 // Story departures: each chapter's airport run has its own goodbyes (Tom, 26 Oct: no repeats). Keyed by the chapter the
 // flight starts. Any part left out (or demo mode) uses the lines above and in startTrip. Chapters 2 and 3 use the defaults.
 // driver, grace, rose, tom: the girls' goodbye on a westbound run (Sal speaks first). sol: Sol's one line eastbound.
 // tnb + tnbToast, and stay[id] {stay,toast,narrate}: recruits heading home. flight: Tom's two pages in the air.
 const DEPARTURES={
-  4:{driver:['Los Angeles again? Cab seven loves this run. She hums the whole way.',"The girls stay home. Amy's rule. I do not argue with Amy."],
-     grace:['Tata, you HAVE to be back for my meet. I already told everybody you are coming.'],
-     rose:['My tooth is loose. Look. LOOK. Tata, you are not looking.'],
-     tom:['I will be at the meet. Front row. I will make a sign.','Rose, that is a very good tooth. Guard it with your life.'],
-     stay:{boppy:{stay:['Los Angeles again? My back just got home from the marsh.','Go. If you see a pepper out there, bring it back. I will judge it.'],toast:'Boppy heads home. The recliner missed him.'}},
+  4:{driver:['Los Angeles again? Cab seven loves this run. She hums the whole way.',"The girls stay home. Amy's rule. I don't argue with Amy."],
+     grace:['Tata, you HAVE to be back for my meet. I already told everybody you\'re coming.'],
+     rose:['My tooth is loose. Look. LOOK. Tata, you\'re not looking.'],
+     tom:['I\'ll be at the meet. Front row. I\'ll make a sign.','Rose, that\'s a very good tooth. Guard it with your life.'],
+     stay:{boppy:{stay:['Los Angeles again? My back just got home from the marsh.','Go. If you see a pepper out there, bring it back. I\'ll judge it.'],toast:'Boppy heads home. The recliner missed him.'}},
      flight:['Lie flat, warm nuts, and absolutely no fish.','...Boppy would hate it up here.']},
-  5:{sol:'Airport. Your young man fixed my visor. He made me promise to drive careful. So I am going the speed limit. Everybody hates it.',
-     tnb:['That is a wrap, babe. I have a five a.m. call and forty capes to steam.','Go survive conference night. Bring snacks. I packed you snacks. Check your bag.'],
-     tnbToast:'TNB heads back to the lot. Forty capes will not steam themselves.',
-     stay:{nara:{stay:['Nara sits down on Tom’s feet. If he cannot move, he cannot leave.','Tom wiggles free. "A week. Maybe two. You guard the porch."','Nara lets out the biggest sigh a dog has ever sighed. Then she trots home.'],toast:'Nara heads back to 2nd Ave. Dramatically.',narrate:true}},
-     flight:['Six hours. Then conference night. My sister has a clipboard.','I am not scared. I am PREPARED. Those are different.']},
-  6:{driver:['Back to Los Angeles. Your sister gave me a gold star for using my blinker.','The girls stay home. School night. It is always a school night.'],
-     grace:['Tata, Mom says I am in charge while you are gone. Of Rose.'],
-     rose:['She is NOT in charge of me. Tata, tell her. TELL her.'],
-     tom:['Nobody is in charge of anybody. Your mom is in charge of everybody.','That is how it has always worked. Trust me. I was there.'],
-     stay:{amy:{stay:['I survived conference night. I can survive you leaving.','Text me when you land. I am timing the flight. Do not lose.'],toast:'Amy runs home. She is timing that too.'}},
+  5:{sol:'Airport. Your young man fixed my visor. He made me promise to drive careful. So I\'m going the speed limit. Everybody hates it.',
+     tnb:['That\'s a wrap, babe. I have a five a.m. call and forty capes to steam.','Go survive conference night. Bring snacks. I packed you snacks. Check your bag.'],
+     tnbToast:'TNB heads back to the lot. Forty capes won\'t steam themselves.',
+     stay:{nara:{stay:['Nara sits down on Tom’s feet. If he can\'t move, he can\'t leave.','Tom wiggles free. "A week. Maybe two. You guard the porch."','Nara lets out the biggest sigh a dog has ever sighed. Then she trots home.'],toast:'Nara heads back to 2nd Ave. Dramatically.',narrate:true}},
+     flight:['Six hours. Then conference night. My sister has a clipboard.','I\'m not scared. I\'m PREPARED. Those are different.']},
+  6:{driver:['Back to Los Angeles. Your sister gave me a gold star for using my blinker.','The girls stay home. School night. It\'s always a school night.'],
+     grace:['Tata, Mom says I\'m in charge while you\'re gone. Of Rose.'],
+     rose:['She\'s NOT in charge of me. Tata, tell her. TELL her.'],
+     tom:['Nobody is in charge of anybody. Your mom is in charge of everybody.','That\'s how it\'s always worked. Trust me. I was there.'],
+     stay:{amy:{stay:['I survived conference night. I can survive you leaving.','Text me when you land. I\'m timing the flight. Don\'t lose.'],toast:'Amy runs home. She\'s timing that too.'}},
      flight:['Delta One. Nobody is grading me up here.','The flight attendant asked what I wanted. I said a nap. She laughed. I was SERIOUS.']},
-  7:{sol:'LAX. I am taking the long way. There are squirrels on the short way.',
-     tnb:['Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence.','Go. I will feed the starter. Twice a day, room temperature, no squirrels. I wrote it down.'],
+  7:{sol:'LAX. I\'m taking the long way. There are squirrels on the short way.',
+     tnb:['Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence.','Go. I\'ll feed the starter. Twice a day, room temperature, no squirrels. I wrote it down.'],
      tnbToast:'TNB stays in LA. Bready Mercury is in good hands.',
      stay:{nara:{stay:['Nara spots a squirrel across the street. She looks at the squirrel. She looks at Tom.','She picks Tom. She leans on his legs for one long minute.','Then she picks the squirrel. Fair enough.'],toast:'Nara heads back to 2nd Ave. The squirrel situation is ongoing.',narrate:true}},
      flight:['Somewhere down there, a squirrel is plotting.','Not my problem. For six whole hours.']},
-  8:{driver:['Los Angeles again? I am starting to think you live there.','The girls stay home. School tomorrow. Library books are due.'],
-     grace:['Tata, I checked out a book about Los Angeles. Now I will know where you are. Every minute.'],
-     rose:['I checked out a book about a pig. It is not about Los Angeles. It is better.'],
+  8:{driver:['Los Angeles again? I\'m starting to think you live there.','The girls stay home. School tomorrow. Library books are due.'],
+     grace:['Tata, I checked out a book about Los Angeles. Now I\'ll know where you are. Every minute.'],
+     rose:['I checked out a book about a pig. It\'s not about Los Angeles. It\'s better.'],
      tom:['Both excellent choices. Return them on time.','That library has had enough excitement for one year.'],
      flight:['Six hours of quiet. The library would be proud.','...I already miss Rose shushing everybody at full volume.']},
   9:{sol:'Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.',
-     tnb:['Forty loaves, zero leftovers. Not bad for two guys and one oven.','Go open your fancy letter. Wear the blue shirt. I fixed the button. You are welcome.'],
+     tnb:['Forty loaves, zero leftovers. Not bad for two guys and one oven.','Go open your fancy letter. Wear the blue shirt. I fixed the button. You\'re welcome.'],
      tnbToast:'TNB stays in LA. Somebody has to wash forty bread pans.',
-     stay:{nara:{stay:['Nara is still full from the potluck. She lifts one paw. That is all she can manage.','Tom shakes it. "Deal. Back soon."','Nara lets out one very satisfied burp. Then she waddles home.'],toast:'Nara heads back to 2nd Ave. Slowly. Very full.',narrate:true}},
+     stay:{nara:{stay:['Nara is still full from the potluck. She lifts one paw. That\'s all she can manage.','Tom shakes it. "Deal. Back soon."','Nara lets out one very satisfied burp. Then she waddles home.'],toast:'Nara heads back to 2nd Ave. Slowly. Very full.',narrate:true}},
      flight:['A letter with a seal. Nobody sends a seal for good news.','Or do they? Six hours to think about it. Great.']}
 };
 // The departure for this airport run: the chapter it starts, if the current one is done (full story only).
@@ -121,15 +121,46 @@ function departureNow() {
   return DEPARTURES[STORY.chapter+1]||{};
 }
 
+// Story arrivals: what Tom and the girls say when this chapter's flight lands (Tom, 26 Oct: no repeats). Keyed by the chapter the
+// flight starts, like DEPARTURES. Westbound (even chapters) lands in LA: tom = Tom's pages at the cab. Eastbound (odd chapters)
+// lands on Long Island: tom = Tom's landing page, then talk = [speaker, pages] in order after the hug. Chapters 2 and 3 (and any
+// flight not starting a chapter, and the demo) keep the voiced default lines. New lines stay silent until baked.
+const ARRIVALS={
+  4:{tom:["Downtown LA. Seventy-two and sunny. I didn't have to check.","Six hours, no fish, and a pepper to find for Boppy. In that order."]},
+  5:{tom:["Long Island. Quiet. Thursday is conference night. It won't stay quiet."],
+     talk:[['Grace',["Tata! You're BACK! That's TWO times!","Mom made you a binder. It has TABS."]],
+           ['Rose',["Did you bring the snacks? Tata. The SNACKS."]],
+           ['Tom',["TNB packed them. Check my bag. Carefully. He also packed a note."]],
+           ['Rose',["I'm checking NOW."]]]},
+  6:{tom:["Downtown LA. Five hours and fifty-one minutes. Amy will want the number.","...Is that a squirrel on the cab? That's a squirrel on the cab."]},
+  7:{tom:["Long Island. Quiet. Library quiet. That's a different kind."],
+     talk:[['Grace',["Tata! THREE times! The library's still whispering. I SAID so. In a text."]],
+           ['Rose',["It said my name. It said ROSE. Then it said shhh."]],
+           ['Tom',["Then we go find out what it wants. After a sandwich."]],
+           ['Grace',["I'm bringing a flashlight. And a pencil. For notes."]]]},
+  8:{tom:["Downtown LA. It smells like somebody's grill. Everybody's grill.","TNB says bring an empty stomach and forty bread pans. I've got the stomach."]},
+  9:{tom:["Long Island. No moon tonight. Somebody's going to make that my problem."],
+     talk:[['Grace',["Tata! FOUR! I have a chart now. You're on it."]],
+           ['Rose',["Deedee has your letter. She hasn't opened it. She's LOOKED at it. A lot."]],
+           ['Tom',["A wax seal with a clock on it. I'd look at it a lot too."]],
+           ['Rose',["I named the seal Flippers."]]]}
+};
+// The arrival for this airport run: the chapter it starts (full story only), if it lands where that chapter's lines expect.
+function arrivalNow(dir) {
+  if(typeof STORY==='undefined'||STORY.mode!=='full'||!flag('ch'+STORY.chapter+'-done')) return null;
+  const n=STORY.chapter+1;
+  return (dir==='west')===(n%2===0)?(ARRIVALS[n]||null):null;
+}
+
 function talkToDriver(n) {
   const inLA=regionOf(currentMap)==='la';
   const pages=n.visitedOnce?[]:npcLines(n);
   n.visitedOnce=true;
-  pages.push(inLA?'Where to? The airport? It is always the airport.'
-    :'Where to? Around town, or... the airport? I have waited years for somebody to say airport.');
+  pages.push(inLA?'Where to? The airport? It\'s always the airport.'
+    :'Where to? Around town, or... the airport? I\'ve waited years for somebody to say airport.');
   openChoice(n.name,pages,[
     {label:inLA?'AIRPORT, PLEASE':'TO THE AIRPORT',fn:()=>startTrip(n,inLA?'east':'west')},
-    {label:'JUST VISITING',fn:()=>openDialog(n.name,[inLA?'Okay. I will be here. In traffic.':'Okay. Cab seven is ready when you are. Cab seven is always ready.'],n)}
+    {label:'JUST VISITING',fn:()=>openDialog(n.name,[inLA?'Okay. I\'ll be here. In traffic.':'Okay. Cab seven is ready when you are. Cab seven is always ready.'],n)}
   ],n);
 }
 
@@ -139,25 +170,25 @@ function runScene(steps) {
 }
 
 function startTrip(n,dir) {
-  const steps=[],d=departureNow();
+  const steps=[],d=departureNow(),arr=arrivalNow(dir);
   if(dir==='west') {
     if(!girlsAway()&&memberHome('grace')!=='any') steps.push(
       S.talk('Sal',d.driver||['Los Angeles? You got it. Flights leave whenever I get there.',"One thing. The girls stay home. Amy's rule. No flying on a school night."]),
-      S.talk('Grace',d.grace||['Tata, you are leaving AGAIN? You JUST got here!']),
+      S.talk('Grace',d.grace||['Tata, you\'re leaving AGAIN? You JUST got here!']),
       S.talk('Rose',d.rose||['Bring me back a palm tree. A small one. For my room.']),
-      S.talk('Tom',d.tom||['I will be back before you know it. Go home and listen to your mom.','Rose, I will see what I can do about the palm tree.']),
+      S.talk('Tom',d.tom||['I\'ll be back before you know it. Go home and listen to your mom.','Rose, I\'ll see what I can do about the palm tree.']),
       S.call(()=>{ setGirlsAway(true); sfx.doorOut(); showToast('Grace and Rose head home to the Gregori house.',3); }),
       S.wait(.9)
     );
     else steps.push(S.talk('Sal',['Los Angeles? You got it. Buckle up.']));
   } else {
-    steps.push(S.talk('Sol',[d.sol||'Airport. Love it. We will be there in twenty minutes. Or two hours. Nobody knows.']));
+    steps.push(S.talk('Sol',[d.sol||'Airport. Love it. We\'ll be there in twenty minutes. Or two hours. Nobody knows.']));
   }
   const dest=dir==='west'?'la':'le';
   for(const f of extras()) {
     const home=memberHome(f.id); if(home==='any'||home===dest) continue;   // party rules (engine/story.js) say who lives where
     if(f===tnb) steps.push(
-      S.talk('TNB',d.tnb||['Well, well... this is where I get off. Glaze firing tomorrow, call time at five, and somebody has to water your plants.','Go. Hug the girls for me. I will be right here, pot-sitive.']),
+      S.talk('TNB',d.tnb||['Well, well... this is where I get off. Glaze firing tomorrow, call time at five, and somebody has to water your plants.','Go. Hug the girls for me. I\'ll be right here, pot-sitive.']),
       S.call(()=>{ const tf=followers.find(x=>x.member===tnb); if(tf) { kiss={npc:tf,start:elapsedTime}; sfx.kiss(); } recruitLeave(tnb,true); showToast(d.tnbToast||'TNB stays in LA. Pottery, a shoot, and Tom\u2019s plants.',3.2); }),
       S.wait(.8));
     else if(TRAVEL_TALK[f.id]) { const tt=(d.stay&&d.stay[f.id])||TRAVEL_TALK[f.id]; steps.push(
@@ -167,7 +198,7 @@ function startTrip(n,dir) {
       S.wait(.6)); }
   }
   if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
-  steps.push(...flightSteps(dir,d.flight));
+  steps.push(...flightSteps(dir,d.flight,arr));
   runScene(steps);
 }
 
@@ -189,7 +220,7 @@ function flightSound(mode,dir) {
     tone({type:'sine',f0:1200,f1:500,dur:.25,vol:.06,delay:2.3});
   }
 }
-function flightSteps(dir,talk) {
+function flightSteps(dir,talk,arr) {
   const west=dir==='west';
   return [
     S.call(()=>{ intro.flight={dir,mode:'board',t:0}; $('area-name').textContent='In flight'; $('eyebrow').textContent='DELTA ONE / SEAT 1A'; }),
@@ -200,7 +231,7 @@ function flightSteps(dir,talk) {
         :['Six hours. Then two small people will jump on me at full speed.','Worth it.'])))),
     flightPhase('landing',4.2),
     S.call(()=>{ intro.flight=null; }),
-    ...(west?arriveLA():arriveHome())
+    ...(west?arriveLA(arr):arriveHome(arr))
   ];
 }
 
@@ -214,7 +245,7 @@ function arriveAt(map,houseId) {
   intro.fade=1;
   return h;
 }
-function arriveLA() {
+function arriveLA(arr) {
   let h=null;
   return [
     S.call(()=>{ h=arriveAt(worlds.blvd,'lacab'); }),
@@ -222,17 +253,17 @@ function arriveLA() {
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[h.door.x,h.door.y+1]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     S.call(()=>{ for(const f of followers) { f.hidden=false; f.x=h.door.x; f.y=h.door.y; f.facing='down'; } }),
-    S.talk('Tom',['Downtown LA. Seventy-two and sunny. It is always seventy-two and sunny.']),
+    S.talk('Tom',(arr&&arr.tom)||['Downtown LA. Seventy-two and sunny. It\'s always seventy-two and sunny.']),
     S.call(()=>{
       endIntro(); placeFollowers();
       sfx.levelChime();
-      showToast('Los Angeles! Downtown is here, Jefferson Park is south, monsters are up in Griffith Park.',4.5);
+      showToast(arr?'Welcome back to Los Angeles.':'Los Angeles! Downtown is here, Jefferson Park is south, monsters are up in Griffith Park.',arr?3:4.5);
       saveGame('auto',true);
     })
   ];
 }
 // Back on Long Island: Tom steps out of the taxi depot and the girls come running.
-function arriveHome() {
+function arriveHome(arr) {
   const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
   const welcome=[];
   let g=null,r=null;
@@ -247,7 +278,7 @@ function arriveHome() {
     S.wait(.6),
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[dx,dy+1],[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
-    S.talk('Tom',['Long Island. Nice and quiet. For about four more seconds.']),
+    S.talk('Tom',(arr&&arr.tom)||['Long Island. Nice and quiet. For about four more seconds.']),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
     S.wait(.6),
     S.call(()=>{ player.facing='left';
@@ -260,11 +291,12 @@ function arriveHome() {
       update(dt){ return this.s.update(dt); }},
     S.call(()=>{ intro.bubble=null; g.facing='right'; r.facing='up'; }),
     hugStep(),
-    S.talk('Grace',['Tata! You are BACK! AGAIN!','Did you miss us? Say a big number.']),
+    ...(arr&&arr.talk?arr.talk.map(([who,pages])=>S.talk(who,pages)):[
+    S.talk('Grace',['Tata! You\'re BACK! AGAIN!','Did you miss us? Say a big number.']),
     S.talk('Tom',['A very big number. The biggest one.']),
     S.talk('Rose',['Did you bring me a palm tree?']),
     S.talk('Tom',['I brought you a picture of a palm tree.']),
-    S.talk('Rose',['...That is ALMOST a palm tree.']),
+    S.talk('Rose',['...That\'s ALMOST a palm tree.'])]),
     S.call(()=>{
       endIntro();
       g.x=dx-1; g.y=row; g.facing='right'; g.move=null;

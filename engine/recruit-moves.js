@@ -20,7 +20,7 @@ const A=RECRUIT_MOVES.amy,D=RECRUIT_MOVES.deedee,B=RECRUIT_MOVES.boppy,T=RECRUIT
 
 // ================= AMY: track, classroom =================
 A.basic=E=>{ const {i,m,fx}=E; const h=home(E);
-  enqueue(()=>{ setMessage(pick(['Amy sprints in and shoulders it. She does not slow down.','Amy tackles it like the finish line owes her money.'])); appr(fx,1.5); sfx.run(); say(m.id,LINES[m.id].basic?'basic':'attack'); for(let k=0;k<5;k++) scene('dust',.5,{x:h.x-26-k*24,y:h.y+2,n:3,delay:.05+k*.11}); },
+  enqueue(()=>{ setMessage(pick(['Amy sprints in and shoulders it. She doesn\'t slow down.','Amy tackles it like the finish line owes her money.'])); appr(fx,1.5); sfx.run(); say(m.id,LINES[m.id].basic?'basic':'attack'); for(let k=0;k<5;k++) scene('dust',.5,{x:h.x-26-k*24,y:h.y+2,n:3,delay:.05+k*.11}); },
     880,()=>{ fx.punch=.4; pose(fx,'act',.5); battle.slash=.22; sfx.thud(); sfx.slash(); scene('burst',.45,{x:214,y:212}); scene('ring',.55,{x:GX+34,y:264,r:84}); scene('dust',.6,{x:226,y:262,n:6}); bt('WHAM',96,32,'#ffe08a',4,.9); hit(E); battle.enemyKnock=.3; },
     800,E.result,()=>checkEnemy()); };
 A.burpee=E=>{ const {i,m,fx}=E,h=home(E);
@@ -28,7 +28,7 @@ A.burpee=E=>{ const {i,m,fx}=E,h=home(E);
     1500,()=>{ fx.lunge=.6; pose(fx,'act',.5); },330,()=>{ battle.slash=.22; sfx.thud(); scene('ring',.6,{x:GX+34,y:264,r:100}); scene('burst',.5,{x:216,y:226,c:'#9fe8ff'}); scene('dust',.6,{x:230,y:262,n:6}); bt('BURPEE',96,36,'#9fe8ff',3,.9); hit(E); },
     700,E.result+' The last one landed on the Grump.',()=>checkEnemy()); };
 A.finish=E=>{ const {i,m,fx}=E;
-  enqueue(()=>{ setMessage('Amy sees a finish line. It is through the Grump.'); fx.run=1.3; fx.runDur=1.3; fx.runPasses=1; sfx.run(); say(m.id,'finish'); scene('finishline',1.8,{snap:.17}); },
+  enqueue(()=>{ setMessage('Amy sees a finish line. It\'s through the Grump.'); fx.run=1.3; fx.runDur=1.3; fx.runPasses=1; sfx.run(); say(m.id,'finish'); scene('finishline',1.8,{snap:.17}); },
     380,()=>{ sfx.fanfare(); scene('confetti',1.4,{x0:90,x1:260,n:34}); bt('FINISH',96,36,'#ffe08a',3,1); },
     300,()=>{ battle.slash=.2; sfx.slash(); hit(E); battle.enemyKnock=.45; },
     900,E.result+' First place. Obviously.',()=>checkEnemy()); };
@@ -43,11 +43,11 @@ A.hills=E=>{ const {i,m,fx}=E;
     ...[0,1,2].flatMap(k=>[k===0?400:800,()=>{ battle.slash=.2; sfx.slash(); landHit(Math.max(1,Math.round(E.dmg/3)),E.crit&&k===2); }]),
     1000,()=>{ battle.hill=false; },E.result,()=>checkEnemy()); };
 A.quiz=E=>{ const {i,m,fx}=E;
-  enqueue(()=>{ setMessage('Pop quiz! No talking. Eyes on your own slime.'); appr(fx,3.2); say(m.id,'quiz',.4); },
+  enqueue(()=>{ setMessage('Surprise quiz! No rush. You know this.'); appr(fx,3.2); say(m.id,'quiz',.4); },
     720,()=>{ pose(fx,'hip',1.2); hold(i,'clip',2.4,{}); scene('blackboard',2.4,{}); sfx.whoosh(); },
     1100,()=>{ pose(fx,'throw',.6); const hh=hand(E); for(let k=0;k<6;k++) battle.props.push({kind:'paper',x0:hh.x,y0:hh.y,x1:130+k*14,y1:200+(k%2)*12,t:-k*.08,dur:.7+k*.08}); sfx.whoosh(); },
     900,()=>{ hit(E); if(Math.random()<.4) confuse2(); bt('???',60,36,'#fff1cb',4,1); battle.shakeEnemy=.4; },
-    600,()=>setMessage(battle.enemyStunned===2?E.result+' The Grump did not study.':E.result),1150,()=>checkEnemy()); };
+    600,()=>setMessage(battle.enemyStunned===2?E.result+' The Grump didn\'t study.':E.result),1150,()=>checkEnemy()); };
 A.marathon=E=>{ const {i,m,fx}=E; const mi=['MILE 5','MILE 10','MILE 15','MILE 20','MILE 26'];
   enqueue(()=>{ setMessage('Amy runs a marathon. All of it goes through the Grump.'); fx.run=3.2; fx.runDur=3.2; fx.runPasses=5; sfx.run(); say(m.id,'marathon'); mi.forEach((t,k)=>scene('miles',.85,{text:t,delay:k*.64})); for(let k=0;k<4;k++) scene('sweat',.8,{x:BATTLE_POS[i].x*3-14,y:BATTLE_POS[i].base*3-96,delay:.6+k*.7}); scene('finishline',1.3,{snap:.3,delay:2.5}); },
     ...[0,1,2,3,4].flatMap(k=>[k===0?320:640,()=>{ battle.slash=.2; sfx.slash(); landHit(Math.max(1,Math.round(E.dmg/5)),E.crit&&k===4); }]),
@@ -58,7 +58,7 @@ A.pb=E=>{ const {i,m,fx}=E;
     ...[0,1].flatMap(k=>[k===0?450:900,()=>{ battle.slash=.2; sfx.slash(); landHit(Math.max(1,Math.round(E.dmg/2)),E.crit&&k===1); }]),
     700,()=>{ pose(fx,'celeb',1.6); battle.enemyKnock=.45; battle.flashEnemy=.5; sfx.levelChime(); scene('trophy',1.8,{}); bt('NEW PB',96,36,'#ffe08a',3,1.2); },
     780,()=>{ sfx.thud(); sfx.fanfare(); scene('confetti',1.6,{x0:70,x1:290,n:40}); scene('ring',.6,{x:GX,y:264,r:90}); battle.shakeEnemy=.5; },
-    1000,E.result+' A new record. She will mention it at dinner.',()=>checkEnemy()); };
+    1000,E.result+' A new record. She\'ll mention it at dinner.',()=>checkEnemy()); };
 function confuse2(){ battle.enemyStunned=2; sfx.stun(); }
 
 // DEEDEE: her moves live in engine/deedee-moves.js.

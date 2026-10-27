@@ -161,6 +161,8 @@ function b2DrawOverlay(t) {
       else { const h=headOf(u); arrow(h.x,h.y-14-bounce,'#9be39a'); }
     }
     if(o&&o.primary&&B2.pending&&B2.pending.target==='splash') for(const n of b2Splash(o.primary)) { const p=b2FoeCanvasPos(n); gfx.globalAlpha=.55; arrow(p.x,p.y-p.h-14-bounce,'#f0c75a'); gfx.globalAlpha=1; }
+    // Every other enemy that can be tapped gets a faint marker.
+    for(const q of B2.opts) if(q!==o&&q.primary&&q.primary.side==='foe'&&q.targets.length===1&&!(o&&o.targets.includes(q.primary))) { const p=b2FoeCanvasPos(q.primary); gfx.globalAlpha=.4; arrow(p.x,p.y-p.h-18-bounce,'#f0c75a'); gfx.globalAlpha=1; }
   }
   for(const e of B2.fx) if(e.t>=0) b2DrawFx(e,t);
   b7DrawOverlay(t);   // the High-Five sparkle
@@ -366,6 +368,61 @@ function b2ElemNote(a) {
   const e=(a&&a.elem)||[]; if(!e.length) return '';
   return ' '+e.map(k=>B2_ELEMS[k].name+' = '+B2_ELEM_WHAT[k]).join('; ')+'. Monsters weak to '+(e.length>1?'either':'it')+' take +50%.';
 }
+// ---------- Short move preview ----------
+// The message line for a highlighted move: NAME · COST · ROLE TAGS · reach · what it does (heal, statuses, VP...).
+// Built from the move data (hits, target, fx), so every character's moves, new ones included, are covered.
+const B2_SCOPE={enemy:'1 foe',splash:'1 foe',row:'row',front:'front row',all:'all foes',multi:'all foes',ally:'1 ally',allyko:'1 ally (KO ok)',party:'party',self:'self'};
+const B2_WHOW={party:'party',lowest:'lowest ally',slowest:'slowest ally',self:'self',others:'others',partner:'partner',both:'both',allFoes:'all foes',all:'all foes',fasterFoes:'faster foes'};
+function b2Brief(a) {
+  const out=[],add=s=>{ if(s&&!out.includes(s)) out.push(s); };
+  const who=w=>(!w||w==='t')?'':' ('+(B2_WHOW[w]||cap(String(w)))+')';
+  const stName=id=>{ const ids=typeof b8StId==='function'?b8StId(id):[id],S=B2_STATUS[ids[0]]||B2_STATUS[id]; return S?S.name:String(id); };
+  const turns=n=>n?' '+n+(n===1?' turn':' turns'):'';
+  const pct=n=>Math.round(n*100)+'%';
+  const scan=list=>{ for(const f of (typeof b8Translate==='function'?b8Translate(list||[]):(list||[]))) {
+    switch(f[0]) {
+      case 'ifup': case 'ift': scan(f[2]); break;
+      case 'st': add(stName(f[1])+turns(f[2])+who(f[3])); break;
+      case 'heal': add('Heal '+pct(f[1])+who(f[3])); break;
+      case 'revive': add('Revive '+pct(f[1])+who(f[2])); break;
+      case 'cont': add('Heal '+pct(f[1])+' next turn'+who(f[2])); break;
+      case 'vp': add('+'+f[1]+' VP'+who(f[2])); break;
+      case 'refill': add('VP max'+who(f[1])); break;
+      case 'cure': add('Cure '+(B2_STATUS[f[1]]?B2_STATUS[f[1]].name:'debuffs')+who(f[2])); break;
+      case 'ct': case 'ctq': add((f[1]>0?'Delay turn':'Speed up turn')+who(f[2])); break;
+      case 'goof': add('Goof'+(f[1]&&f[1]<1?' ('+pct(f[1])+')':'')+who(f[2])); break;
+      case 'smit': add('Smitten'+(f[1]&&f[1]<1?' ('+pct(f[1])+')':'')+who(f[2])); break;
+      case 'coins': add('Coins'); break;
+      case 'reveal': add('Shows weakness'); break;
+      case 'row': add('Moves row'+who(f[2])); break;
+      case 'shieldBreak': add('Breaks shield'); break;
+      case 'interrupt': add('Interrupts wind-up'); break;
+      case 'steal': add('Steals a buff'); break;
+      case 'take': add('Steals held item'); break;
+      case 'randbuff': add('Random buff'+turns(f[1])+who(f[2])); break;
+      case 'crust': add('+Warm Crust'); break;
+      case 'tray': add('Hot Dish'); break;
+      case 'burn': add('+Heartburn'); break;
+      case 'rack': add('Costume change'); break;
+      case 'mount': add('Shoulder Ride'); break;
+      case 'pep': add('Next hit +50%'); break;
+      case 'warm': add('Warmth +'+f[1]+'%'); break;
+      case 'mile': add('+'+(f[1]||1)+' Mile'); break;
+      case 'trend': add(f[1]==='lock'?'Trend locked':'Trend +'+(f[1]||1)); break;
+      case 'scent': add('Tracked Scent'+turns(f[1])+who(f[2])); break;
+      case 'closeup': add('Close-Up'+who(f[2])); break;
+    }
+  } };
+  scan(a&&a.fx);
+  // Name the reach only when it matters: a foe-aimed move that neither hits nor weakens (a party heal filed as "all") says nothing.
+  const roles=b2Roles(a),foeAim=B2_FOE_TGT.includes(a&&a.target);
+  const scope=(foeAim&&!roles.includes('dmg')&&!roles.includes('debuff'))?'':(B2_SCOPE[a&&a.target]||'');
+  return {scope:((a&&a.hits>1?a.hits+' hits, ':'')+scope).replace(/, $/,''),tags:out.slice(0,5)};
+}
+function b2BriefLine(name,cost,a) {
+  const roles=b2Roles(a).map(k=>B2_ROLES[k].tag).join(' + '),B=b2Brief(a);
+  return [name,cost,roles,B.scope,B.tags.join(', ')].filter(Boolean).join(' · ');
+}
 // The ▲ Skills list: the free basic move first, then every skill.
 function b2SkillRows(u) { return u&&u.kit?[u.kit.basic,...u.kit.skills].filter(Boolean):[]; }
 function b2CostTag(u,s) { if(s===u.kit.basic) return '<b class="b2-gain">+1 VP</b>'; return b2Diamond(u,s)?'<b class="b2-free">FREE</b>':b2Cost(u,s)+' VP'; }
@@ -436,10 +493,10 @@ function b2Render() {
 function b2Info() {
   if(battle.state!=='command'||!B2.actor) return;
   const u=B2.actor;
-  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; if(s) b2Msg(s.name+' ('+(s===u.kit.basic?'free, +1 VP':b2Diamond(u,s)?'FREE and instant: Diamond Medallion':b2Cost(u,s)+' VP')+'). '+b2RoleWords(s)+'. '+s.desc+b2ElemNote(s)); }
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; if(s) b2Msg(b2BriefLine(s.name,s===u.kit.basic?'+1 VP':b2Diamond(u,s)?'FREE (Diamond)':b2Cost(u,s)+' VP',s)); }
   else if(B2.ui==='bag') { const r=b2BagList(u)[B2.sel]; if(r&&r.item) b2Msg(r.lock||r.item.it.name+'. '+r.item.it.desc); else if(r&&r.crust) b2Msg(u.id==='nara'?'Warm Crust. Homemade, so Nara will eat it: heals 40% and POW +30%. Free; her turn goes on.':'Warm Crust from Deedee’s tray. Heals 20%. Free; the turn goes on. One per turn.'); else if(r&&r.praise) { const f=b2LiveFoes().find(x=>x.D.praise); b2Msg(f&&f.D.praise.need?r.name+' Free. Tell '+f.def.the+' what it never hears. '+(f.takes||0)+' of '+f.D.praise.need+' so far.':r.name+' Free. Say something nice. It counts as a favorite kind move.'); } else if(r) b2Msg('Leave this fight.'); }
-  else if(B2.ui==='target') b2Msg((B2.pending&&B2.pending.name?B2.pending.name+': ':'')+'pick a target. A to confirm, B to go back.');
-  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.T.name+' ('+r.T.cost+'% HEART). '+(r.why||b2RoleWords(r.T)+'. '+r.T.desc+b2ElemNote(r.T))); else b2Msg(b2TomboRows(u,true).length?b2TomboEmpty(u):'Tombos are Tom plus one partner. They unlock as the story goes.'); }
+  else if(B2.ui==='target') b2Msg((B2.pending&&B2.pending.name?B2.pending.name+': ':'')+'pick a target. Tap an enemy or a name, A to confirm, B to go back.');
+  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.why?r.T.name+' · '+r.T.cost+'% HEART · '+r.why:b2BriefLine(r.T.name,r.T.cost+'% HEART',r.T)); else b2Msg(b2TomboRows(u,true).length?b2TomboEmpty(u):'Tombos are Tom plus one partner. They unlock as the story goes.'); }
   else if(B2.ui==='inspect') { const f=b2LiveFoes()[B2.sel]; if(f) b2Msg(b2InspectText(f)); }
   else if(B2.ui==='cross') {
     // A boss winding up gets top billing, so the hint is there when it matters.
@@ -564,7 +621,6 @@ function b2Hover(i) {
 const B2_PREVIEW_LISTS=['skills','bag','tombo'];
 function b2Preview(i) {
   sfx.move(); b2Hover(i);
-  const el=$('b2-msg'); if(el) el.textContent=el.textContent.replace(/\s*$/,'')+' Tap again to use.';
 }
 
 // ---------- Input: touch, keyboard, gamepad ----------
@@ -590,6 +646,50 @@ function b2Pad(dir,dirEdge,A,B) {
   if(dirEdge&&dir) b2Dir(dir);
   if(A) b2A(); else if(B) b2Back();
 }
+// ---------- Tap an enemy to target it ----------
+// A screen point to canvas pixels (576x324). The forced-landscape layout turns the whole stage a quarter turn,
+// so the canvas' x runs down the screen and its y runs toward the left (same swap as the D-pad in engine/draw.js).
+function b2CanvasPt(cx,cy) {
+  const cv=$('battle-canvas'); if(!cv) return null;
+  const r=cv.getBoundingClientRect(); if(!r.width||!r.height) return null;
+  const rot=typeof layout!=='undefined'&&layout.rotated;
+  const u=rot?(cy-r.top)/r.height:(cx-r.left)/r.width,v=rot?(r.right-cx)/r.width:(cy-r.top)/r.height;
+  return {x:u*cv.width,y:v*cv.height,inside:u>=0&&u<=1&&v>=0&&v<=1};
+}
+// The living enemy under a canvas point: its sprite plus a little slack, and the HP bars under its feet.
+function b2FoeAt(x,y) {
+  let best=null,bd=1e9;
+  for(const f of b2LiveFoes()) {
+    const p=b2FoeCanvasPos(f),pad=8;
+    if(x<p.x-p.w/2-pad||x>p.x+p.w/2+pad||y<p.y-p.h-pad||y>p.y+22) continue;
+    const d=Math.hypot(x-p.x,y-(p.y-p.h/2));
+    if(d<bd) { bd=d; best=f; }
+  }
+  return best;
+}
+// Which target option a tap at (cx,cy) means, or -1. One enemy: its own option. A row: the option holding it.
+function b2TargetAt(cx,cy) {
+  if(!B2.active||battle.state!=='command'||B2.ui!=='target'||!B2.opts) return -1;
+  const q=b2CanvasPt(cx,cy); if(!q||!q.inside) return -1;
+  const f=b2FoeAt(q.x,q.y); if(!f) return -1;
+  const k=B2.opts.findIndex(o=>o.targets.length===1&&o.targets[0]===f);
+  return k>=0?k:B2.opts.findIndex(o=>o.targets.includes(f));
+}
+(function b2WireCanvas() {
+  const cv=$('battle-canvas'); if(!cv) return;
+  cv.addEventListener('click',e=>{
+    const k=b2TargetAt(e.clientX,e.clientY); if(k<0) return;
+    // One enemy: use the move on it. A whole row: the first tap shows the row, the next tap confirms it.
+    if(B2.opts[k].targets.length>1&&k!==B2.sel) { sfx.move(); b2Hover(k); return; }
+    b2Pick(k);
+  });
+  cv.addEventListener('pointermove',e=>{
+    if(e.pointerType!=='mouse') return;
+    const k=b2TargetAt(e.clientX,e.clientY); cv.style.cursor=k>=0?'pointer':'';
+    if(k>=0&&k!==B2.sel) b2Hover(k);
+  });
+})();
+
 (function b2Wire() {
   const ui=$('b2-ui'); if(!ui) return;
   ui.addEventListener('click',e=>{

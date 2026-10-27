@@ -34,19 +34,19 @@ const DEFAULT_RULES={lock:['tom','grace','rose'],force:[],bar:[],allow:null,home
 const CHAPTERS=[
   {n:0,title:'Demo',party:{}},
   {n:1,title:'The Soup Dumpling Protocol',party:{allow:['deedee'],
-    decline:{amy:'Thirty spelling tests and a 5K in the morning. Take your mother. She has more energy than all of us.',
+    decline:{amy:'Twelve reading plans and a 5K in the morning. Take your mother. She has more energy than all of us.',
              boppy:'Not today. My stomach is doing something. Take Deedee. She already has her shoes on.'}},
     // No flights in chapter 1 (chapter 2 opens with the flight to LA).
     // After the chapter, the brakes are in: Sal's airport run starts chapter 2 (storyTripSteps).
     noFlight:()=>flag('ch1-done')?null
-      :{lines:['Cab seven needs new brakes. She is parked until the part comes in.','Besides, you just got here. Go see your mother. She made crisp.']}},
+      :{lines:['Cab seven needs new brakes. She\'s parked until the part comes in.','Besides, you just got here. Go see your mother. She made crisp.']}},
   {n:2,title:'Smog on 2nd Avenue',party:{lock:['tom'],allow:['tnb','nara'],
     decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
     // Sol stays put until the smog is gone; after the chapter, his airport run starts chapter 3 (storyTripSteps).
     noFlight:()=>flag('ch2-done')?null
-      :{lines:['Airport? You JUST landed. The smog has me grounded anyway. I cannot see the freeway.','Go find your boyfriend. He called here twice asking if you landed.']}},
+      :{lines:['Airport? You JUST landed. The smog has me grounded anyway. I can\'t see the freeway.','Go find your boyfriend. He called here twice asking if you landed.']}},
   {n:3,title:'Paces & Peppers',party:{allow:['boppy'],
-    decline:{amy:'Thirty science fair projects to grade. Thirty. Take Dad fishing. He has been asking since you landed.',
+    decline:{amy:'Science fair tomorrow and three of my kids are presenting. Take Dad fishing. He\'s been asking since you landed.',
              deedee:'Not this time, honey. I have three pies in and Boppy needs somebody to go fishing with. Take the girls.'}},
     // No flights once Tom is home for chapter 3 (the marsh comes first). After the chapter, Sal's airport run starts
     // chapter 4 (storyTripSteps).
@@ -66,20 +66,20 @@ const CHAPTERS=[
              boppy:'A school? At night? My stomach says no. My knees say absolutely not.'}},
     // After the parking lot, Sal's airport run starts chapter 6 (storyTripSteps).
     noFlight:()=>flag('ch5-done')?null
-      :{lines:['Airport? On conference night? Your sister would find me. She would find me on foot. Fast.','Long Island Elementary is east of the Square. Follow the clipboard.']}},
+      :{lines:['Airport? On conference night? Your sister would find me. She\'d find me on foot. Fast.','Long Island Elementary is east of the Square. Follow the clipboard.']}},
   // Chapter 6: squirrels in Jefferson Park. TNB joins in Tom's kitchen and is locked in by the scene (override); Nara
   // joins on 2nd Ave. Sol stays put until Bready Mercury is home.
   {n:6,title:'The Great Squirrel Conspiracy',party:{lock:['tom'],allow:['tnb','nara'],
     decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
     // After Bready Mercury is home, Sol's airport run starts chapter 7 (storyTripSteps).
     noFlight:()=>flag('ch6-done')?null
-      :{lines:['Airport? You JUST landed. Your young man called the depot. Something about your bread.','He said, and I quote, "tell him it is a bread emergency." I did not know bread could have those.']}},
+      :{lines:['Airport? You JUST landed. Your young man called the depot. Something about your bread.','He said, and I quote, "tell him it\'s a bread emergency." I didn\'t know bread could have those.']}},
   // Chapter 7: the Hush Library is whispering. Tom, Grace and Rose go down into the Stacks; everybody else is busy.
   // No flights until the library is quiet again.
   {n:7,title:'The Whispering Stacks',party:{allow:[],
-    decline:{amy:'Report cards. Thirty of them. Take the girls. They both have library cards. I made sure.',
-             deedee:'Not today, honey. Book club at four. We are reading the same book as last month. Nobody finished it.',
-             boppy:'A library? I read a book once. 1974. It was about fish. It was not accurate.'}},
+    decline:{amy:'Progress reports. Every one of them takes an hour, and every one deserves it. Take the girls. They both have library cards. I made sure.',
+             deedee:'Not today, honey. Book club at four. We\'re reading the same book as last month. Nobody finished it.',
+             boppy:'A library? I read a book once. 1974. It was about fish. It wasn\'t accurate.'}},
     noFlight:()=>flag('ch7-done')
       ?null
       :{lines:['Airport? You just got here. Your niece called the depot. From her mother’s phone.','She said, and I quote, "tell Tata the library is being WEIRD." She hung up before I could ask how.']}},
@@ -89,13 +89,13 @@ const CHAPTERS=[
     decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
     noFlight:()=>flag('ch8-done')
       ?null
-      :{lines:['Airport? You JUST landed. Your young man said, and I quote, "forty loaves, babe."','I do not know what that means. It sounded serious.']}},
+      :{lines:['Airport? You JUST landed. Your young man said, and I quote, "forty loaves, babe."','I don\'t know what that means. It sounded serious.']}},
   // Chapter 9: the Moon Club. Deedee and Boppy join at the Rivituso house and are locked in by the scene (override);
   // Grace and Rose stay with Aunt Ellie; Amy is grading. No flights until the moon is back.
   {n:9,title:'The Moon Club Invitation',party:{allow:['deedee','boppy'],
     decline:{amy:'Report cards AND a 10K on Saturday. Go. Take Mom and Dad. Make Dad wear the tie.',
-             deedee:'Not yet, honey. I am still deciding on earrings. Come back with the invitation.',
-             boppy:'Not yet. I am still looking for the tie. I have one tie.'}},
+             deedee:'Not yet, honey. I\'m still deciding on earrings. Come back with the invitation.',
+             boppy:'Not yet. I\'m still looking for the tie. I have one tie.'}},
     // After the moon is back, Sal's ride to Terminal Zero starts chapter 10 (data/scenes.js wraps talkToDriver).
     noFlight:()=>flag('ch9-done')
       ?null
@@ -104,10 +104,10 @@ const CHAPTERS=[
   // Amy (she joins at the cab, locked in by the scene) to Terminal Zero at Long Island Regional. Sal only goes to Terminal
   // Zero until the clocks start again (data/scenes.js talkToDriver).
   {n:10,title:'Boarding Group Zero',party:{allow:['amy'],
-    decline:{deedee:'Not this time, honey. Somebody has to start Sunday dinner. Every clock in my kitchen says midnight and the roast does not care.',
-             boppy:'An airport? At midnight? I am still recovering from the tie.'}},
+    decline:{deedee:'Not this time, honey. Somebody has to start Sunday dinner. Every clock in my kitchen says midnight and the roast doesn\'t care.',
+             boppy:'An airport? At midnight? I\'m still recovering from the tie.'}},
     noFlight:()=>flag('ch10-done')?null
-      :{lines:['Airport? Every clock in town says midnight. The planes are not going anywhere.','Terminal Zero, though. Terminal Zero is open.']}},
+      :{lines:['Airport? Every clock in town says midnight. The planes aren\'t going anywhere.','Terminal Zero, though. Terminal Zero is open.']}},
   {n:11,title:'The Layover Between Worlds'},
   {n:12,title:'Welcome to Jefferson Park, Girls'},
   {n:13,title:'The Subway Beneath the Sea of Clouds'},
@@ -248,7 +248,9 @@ const SCENE_OPS={
   leave:o=>S.call(()=>{ const m=MEMBERS()[o.leave]; if(m) forceLeave(m,o.quiet!==false); }),
   party:o=>S.call(()=>{ STORY.override=o.party; applyPartyRules(); }),
   trace:o=>S.call(()=>heartTrace(o.trace)),
-  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { setFlag('goal',o.toast.slice(6)); refreshObjective(); } showToast(o.toast,o.time||3); }),
+  // A "Goal: ..." toast is a quest update: it is stored silently (no popup, nothing waits on it) and the location label
+  // pulses until the player taps it (watchObjective below). Every other toast shows as before.
+  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { setFlag('goal',o.toast.slice(6)); refreshObjective(); return; } return; /* scene toasts are silent: objectives pulse the label, nothing pops up */ }),
   sfx:o=>S.call(()=>{ const f=sfx[o.sfx]; if(f) f(); }),
   say:o=>S.call(()=>say(o.say[0],o.say[1],o.say[2])),
   save:o=>S.call(()=>saveGame('auto',true)),
@@ -457,7 +459,7 @@ talkToDriver=function(n) {
   // Chapter 2 is over: the freeways reopened, and Sol says so before the usual airport offer.
   if(STORY.mode==='full'&&STORY.chapter===2&&flag('ch2-done')&&!flag('ch3-sol')) {
     setFlag('ch3-sol'); n.visitedOnce=true;
-    openDialog(n.name,['They finished the 105! Two years early. Nobody knows what to do with themselves.','Which means I can get you to LAX in twenty minutes. Or two hours. It is LA. But the AIRPORT is back.'],n);
+    openDialog(n.name,['They finished the 105! Two years early. Nobody knows what to do with themselves.','Which means I can get you to LAX in twenty minutes. Or two hours. It\'s LA. But the AIRPORT is back.'],n);
     n.onClose=()=>LE_talkToDriver_story(n); return;
   }
   // Chapter 3 is over: Sal says so before the usual airport offer (the flight starts chapter 4).
@@ -475,25 +477,25 @@ talkToDriver=function(n) {
   // Chapter 5 is over: Sal says so before the usual airport offer (the flight starts chapter 6).
   if(STORY.mode==='full'&&STORY.chapter===5&&flag('ch5-done')&&!flag('ch6-sal')) {
     setFlag('ch6-sal'); n.visitedOnce=true;
-    openDialog(n.name,['Cab seven slept for two days after conference night. She is herself again.','Your young man called the depot from Los Angeles. Something about squirrels. He sounded very serious about the squirrels.'],n);
+    openDialog(n.name,['Cab seven slept for two days after conference night. She\'s herself again.','Your young man called the depot from Los Angeles. Something about squirrels. He sounded very serious about the squirrels.'],n);
     n.onClose=()=>LE_talkToDriver_story(n); return;
   }
   // Chapter 6 is over: Sol says so before the usual airport offer (the flight starts chapter 7).
   if(STORY.mode==='full'&&STORY.chapter===6&&flag('ch6-done')&&!flag('ch7-sol')) {
     setFlag('ch7-sol'); n.visitedOnce=true;
-    openDialog(n.name,['The 110 is open again. The squirrels let it go. I do not ask questions.','Your niece called the depot. Long distance. Something about a library. She sounded very serious about the library.'],n);
+    openDialog(n.name,['The 110 is open again. The squirrels let it go. I don\'t ask questions.','Your niece called the depot. Long distance. Something about a library. She sounded very serious about the library.'],n);
     n.onClose=()=>LE_talkToDriver_story(n); return;
   }
   // Chapter 7 is over: Sal says so before the usual airport offer (the flight starts chapter 8).
   if(STORY.mode==='full'&&STORY.chapter===7&&flag('ch7-done')&&!flag('ch8-sal')) {
     setFlag('ch8-sal'); n.visitedOnce=true;
-    openDialog(n.name,['Cab seven has four new tires. She is so proud. She keeps looking at them.','Your young man called the depot. Something about a potluck. He said, and I quote, "bring the starter."'],n);
+    openDialog(n.name,['Cab seven has four new tires. She\'s so proud. She keeps looking at them.','Your young man called the depot. Something about a potluck. He said, and I quote, "bring the starter."'],n);
     n.onClose=()=>LE_talkToDriver_story(n); return;
   }
   // Chapter 8 is over: Sol says so before the usual airport offer (the flight starts chapter 9).
   if(STORY.mode==='full'&&STORY.chapter===8&&flag('ch8-done')&&!flag('ch9-sol')) {
     setFlag('ch9-sol'); n.visitedOnce=true;
-    openDialog(n.name,['Cab 8 is detailed. She is gleaming. She wants to go somewhere fancy.','Your mother called the depot. Long distance. She said, and I quote, "tell Tommy the letter has a SEAL."'],n);
+    openDialog(n.name,['Cab 8 is detailed. She\'s gleaming. She wants to go somewhere fancy.','Your mother called the depot. Long distance. She said, and I quote, "tell Tommy the letter has a SEAL."'],n);
     n.onClose=()=>LE_talkToDriver_story(n); return;
   }
   return LE_talkToDriver_story(n);
@@ -637,7 +639,7 @@ function refreshObjective() {
 function toggleObjective(open=!objectiveOpen) {
   objectiveOpen=open; clearTimeout(objectiveTimer);
   const brand=document.querySelector('#hud .brand'); if(!brand) return;
-  if(open) refreshObjective();
+  if(open) { refreshObjective(); setObjectivePulse(false); }   // opening it counts as seeing the new objective
   brand.classList.toggle('open',open); brand.setAttribute('aria-expanded',open);
   document.getElementById('objective').hidden=!open;
   if(open) { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); objectiveTimer=setTimeout(()=>toggleObjective(false),12000); }
@@ -648,3 +650,25 @@ function toggleObjective(open=!objectiveOpen) {
   brand.setAttribute('aria-label','Location. Tap to see your next objective');
   brand.addEventListener('click',e=>{ e.stopPropagation(); toggleObjective(); });
 })();
+
+// ---------- New-objective pulse ----------
+// When the objective changes to something new (a "Goal:" step in a scene, or a chapter-complete message), the location
+// label frame pulses until the player taps it. It never pauses the game or opens anything by itself.
+// The first look after a new game or a loaded save only records the objective (STORY.flags is replaced by both, so a
+// new object means a fresh baseline). The fallback text and Demo mode never pulse.
+const OBJ_DEFAULT_TEXT='Look around. The story will find you.';
+let objectiveSig=null,objectiveFlagsRef=null;
+function setObjectivePulse(on) {
+  const brand=document.querySelector('#hud .brand'); if(!brand) return;
+  brand.classList.toggle('obj-new',!!on);
+  brand.setAttribute('aria-label',on?'Location. New objective. Tap to see it':'Location. Tap to see your next objective');
+}
+function watchObjective() {
+  if(STORY.mode!=='full') { objectiveSig=null; if(document.querySelector('#hud .brand.obj-new')) setObjectivePulse(false); return; }
+  const o=currentObjective(),sig=o.head+'|'+o.text;
+  if(objectiveFlagsRef!==STORY.flags) { objectiveFlagsRef=STORY.flags; objectiveSig=sig; setObjectivePulse(false); return; }
+  if(sig===objectiveSig) return;
+  objectiveSig=sig;
+  if(!objectiveOpen&&o.text!==OBJ_DEFAULT_TEXT) setObjectivePulse(true);
+}
+setInterval(watchObjective,250);

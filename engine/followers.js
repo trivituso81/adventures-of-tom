@@ -5,7 +5,7 @@ function makeFollower(m,lines) {
   return {name:m.name,member:m,kid:true,x:player.x,y:player.y,facing:'down',move:null,walkClock:0,path:[],idle:1,duration:.14,lines,isPlayer:false,follower:true};
 }
 const followers=[
-  makeFollower(grace,["Tata, can we go to the bakery again?","I named the Grump. His name is Kevin.","Are we there yet? Where is there?"]),
+  makeFollower(grace,["Tata, can we go to the bakery again?","I named the Grump. His name is Kevin.","Are we there yet? Where's there?"]),
   makeFollower(rose,["I found a rock. It's a pet now.","Tata, the slime looked at me funny.","Tata, piggyback?"])
 ];
 
@@ -33,32 +33,32 @@ function movePlayer(dir) {
 // Los Angeles: Tom plus TNB and Nara (both at once). Recruits never leave their own town.
 const extras=()=>party.filter(x=>x!==hero&&x!==grace&&x!==rose);
 const RECRUIT_TALK={
-  amy:{ask:'Also. I have been standing still for four minutes and it is killing me. Want a running partner out there?',
-       yes:'Finally. Try to keep up. I mean that with love.',no:'Fine. I will do burpees until you change your mind.',
-       swap:'Somebody has to tag out. I can wait, but I will be stretching the whole time.',
+  amy:{ask:'Also. I\'ve been standing still for four minutes and it\'s killing me. Want a running partner out there?',
+       yes:'Finally. Try to keep up. I mean that with love.',no:'Fine. I\'ll do burpees until you change your mind.',
+       swap:'Somebody has to tag out. I can wait, but I\'ll be stretching the whole time.',
        bye:'Amy jogs home. Backwards. To make it harder.',
-       lines:['Pick up the pace, Tom. The girls are faster than you.','Is that the Grump? I could take him. I have taken a second-grade class on a field trip.','Rose, shoes. Grace, water. Tom, posture.']},
-  deedee:{ask:'Now hold on, Tommy. You are not taking my angels anywhere without me and a bag of cookies. Can Deedee come along?',
+       lines:['Pick up the pace, Tom. The girls are faster than you.','Is that the Grump? I could take him. I\'ve taken a second-grade class on a field trip.','Rose, shoes. Grace, water. Tom, posture.']},
+  deedee:{ask:'Now hold on, Tommy. You\'re not taking my angels anywhere without me and a bag of cookies. Can Deedee come along?',
        yes:'Wonderful! Everybody hold hands. Tommy, you too. To the moon and back, here we come.',no:'All right, all right. The pies need me anyway. Come back for a cookie.',
-       swap:'Oh, honey. Somebody has to stay and mind the house. Who is it going to be?',
+       swap:'Oh, honey. Somebody has to stay and mind the house. Who\'s it going to be?',
        bye:'Deedee heads home to check on the pies. All four of them.',
-       lines:['Are you warm enough? Nobody is warm enough.','Grace, Rose, to the moon and back. Say it. LOUDER.','I packed cookies. They are in my purse. The purse is at home. We go back.','Pick up those feet. A brisk walk never hurt anybody.','Tommy, you look pale. When did you last drink water? Nurse is asking.','When we get home I am making a big dinner. Nobody argue.']},
-  boppy:{ask:'My stomach is not right and the fish are not biting. Want an old man along? Just do not walk too fast.',
+       lines:['Are you warm enough? Nobody is warm enough.','Grace, Rose, to the moon and back. Say it. LOUDER.','I packed cookies. They\'re in my purse. The purse is at home. We go back.','Pick up those feet. A brisk walk never hurt anybody.','Tommy, you look pale. When did you last drink water? Nurse is asking.','When we get home I\'m making a big dinner. Nobody argue.']},
+  boppy:{ask:'My stomach isn\'t right and the fish aren\'t biting. Want an old man along? Just don\'t walk too fast.',
        yes:'Good. Somebody grab my cap. And slow down. I was a champion, you know.',no:'Suit yourself. The recliner and I have an understanding.',
        swap:'Somebody has to sit this one out. My stomach volunteers, but the rest of me is coming.',
-       bye:'Boppy shuffles home to the recliner. He is not feeling good. Deedee will hear all about it.',
+       bye:'Boppy shuffles home to the recliner. He\'s not feeling good. Deedee will hear all about it.',
        lines:['Slow down! Who taught you to walk? I was a champion runner and I never went this fast.','At Rikers I did the headcount. One, two, three, Tom. Everybody here.','My stomach is talking. It says no more peppers. My stomach is wrong.','That Grump owes me a fish. Tell him.']},
-  tnb:{ask:'Heading out? I can come. I have my longboard, a bus pass and a garment bag. I am ready for anything. Mostly costume emergencies.',
-       yes:'Great. Let me grab my jacket. Oh. You have it. Let me grab my other jacket.',no:'Okay. I will be here, throwing bowls. Come back if anything cracks.',
+  tnb:{ask:'Heading out? I can come. I have my longboard, a bus pass and a garment bag. I\'m ready for anything. Mostly costume emergencies.',
+       yes:'Great. Let me grab my jacket. Oh. You have it. Let me grab my other jacket.',no:'Okay. I\'ll be here, throwing bowls. Come back if anything cracks.',
        swap:'Somebody has to hold down the house. I vote the couch, but it has to be a person.',
-       bye:'TNB heads back to Spring Street to check the kiln. It is fine. He checks anyway.',
-       lines:['Tom, your shoelace. No, the other one. Got it.','Well, well... a foggy canyon at dusk. This is how every horror movie starts.','If a coyote jumps out at us, I have seen this movie. Stay together. Nobody go in the basement.','After this, clay. Any two colors. I will make them get along.']}
+       bye:'TNB heads back to Spring Street to check the kiln. It\'s fine. He checks anyway.',
+       lines:['Tom, your shoelace. No, the other one. Got it.','Well, well... a foggy canyon at dusk. This is how every horror movie starts.','If a coyote jumps out at us, I\'ve seen this movie. Stay together. Nobody go in the basement.','After this, clay. Any two colors. I\'ll make them get along.']}
 ,
-  nara:{ask:'Nara leans her whole body against Tom\u2019s legs. She is not letting him out of her sight. Take her along?',
-       yes:'Nara spins in three happy circles. Then a fourth, for luck. Then she checks Tom is still there.',no:'Nara lies down on Tom\u2019s foot. She will wait. She will wait RIGHT here.',
-       swap:'Nara will not go anywhere without Tom. Somebody else has to sit this one out.',
-       bye:'Nara trots back to 2nd Ave, looking over her shoulder the whole way. She will be waiting at the corner.',
-       lines:['Nara checks that Tom is still there. He is. She checks again.','Nara found a stick. It is the best stick. Everyone must see the stick.','Nara sniffs one jacaranda for a full minute. Important news.','Nara turned down a perfectly good biscuit this morning. She has standards.']}
+  nara:{ask:'Nara leans her whole body against Tom\u2019s legs. She\'s not letting him out of her sight. Take her along?',
+       yes:'Nara spins in three happy circles. Then a fourth, for luck. Then she checks Tom is still there.',no:'Nara lies down on Tom\u2019s foot. She\'ll wait. She\'ll wait RIGHT here.',
+       swap:'Nara won\'t go anywhere without Tom. Somebody else has to sit this one out.',
+       bye:'Nara trots back to 2nd Ave, looking over her shoulder the whole way. She\'ll be waiting at the corner.',
+       lines:['Nara checks that Tom is still there. He is. She checks again.','Nara found a stick. It\'s the best stick. Everyone must see the stick.','Nara sniffs one jacaranda for a full minute. Important news.','Nara turned down a perfectly good biscuit this morning. She has standards.']}
 };
 function recruitLeave(m,quiet) {
   const i=party.indexOf(m); if(i<0) return;
@@ -114,11 +114,11 @@ function saveRaw(slot) {
 }
 function saveGame(slot,quiet=false) {
   let raw;
-  try { raw=JSON.stringify(saveSnapshot()); } catch(e) { if(!quiet) showToast('Could not save here.',2.5); return false; }
+  try { raw=JSON.stringify(saveSnapshot()); } catch(e) { if(!quiet) showToast('Couldn\'t save here.',2.5); return false; }
   SAVE_CACHE[slot]=raw;
   let local=true; try { localStorage.setItem(SAVE_PREFIX+slot,raw); } catch(e) { local=false; }
   const cloud=typeof cloudPut==='function'&&cloudPut(slot,raw);
-  if(!local&&!cloud) { if(!quiet) showToast('Could not save here.',2.5); return false; }
+  if(!local&&!cloud) { if(!quiet) showToast('Couldn\'t save here.',2.5); return false; }
   if(!quiet) { sfx.pickup(); showToast(slot==='auto'?'Autosaved.':'Saved to slot '+slot+'.',2); }
   return true;
 }

@@ -73,17 +73,17 @@ N.fetch=E2=>{ const {i,m,fx}=E2;
     600,()=>{ sfx.bonk(); battle.shakeEnemy=.3; scene('burst',.4,{x:GX+10,y:206,c:'#d8ef4a'}); part(E2,2,0); bt('BONK',96,34,'#d8ef4a',3,.8); },
     200,()=>{ run(fx,1.2,1); sfx.run(); barks(3,.12); },
     560,()=>{ battle.slash=.2; sfx.slash(); part(E2,2,1); battle.enemyKnock=.35; scene('dust',.6,{x:GX+20,y:262,n:6}); },
-    900,()=>{ pose(fx,'celeb',.9); sfx.squeak(); },E2.result+' She got the ball. She would like to go again.',()=>checkEnemy()); };
+    900,()=>{ pose(fx,'celeb',.9); sfx.squeak(); },E2.result+' She got the ball. She\'d like to go again.',()=>checkEnemy()); };
 N.zoomies=E2=>{ const {i,m,fx}=E2;
   enqueue(()=>{ setMessage('Nara gets the zoomies. Nobody knows why. Not even Nara.'); run(fx,2.6,4); sfx.run(); say(m.id,'zoomies'); for(let k=0;k<8;k++) scene('dust',.5,{x:100+(k%4)*110,y:262,n:4,delay:k*.3}); },
     ...[0,1,2,3].flatMap(k=>[k===0?420:620,()=>{ battle.slash=.18; sfx.slash(); sfx.bark(); bt('ZOOM',60+k*30,30+(k%2)*10,'#9fe8ff',3,.6); part(E2,4,k); }]),
-    900,()=>{ pose(fx,'celeb',.8); },E2.result+' She is panting. She is thrilled.',()=>checkEnemy()); };
+    900,()=>{ pose(fx,'celeb',.8); },E2.result+' She\'s panting. She\'s thrilled.',()=>checkEnemy()); };
 N.puddle=E2=>{ const {i,m,fx}=E2;
   enqueue(()=>{ setMessage('Nara gets SO excited about the Grump. Too excited.'); appr(fx,2.4); barks(4,.1); say(m.id,'puddle',.3); },
     760,()=>{ fx.cheer=1.2; sfx.giggle&&sfx.giggle(); },
     700,()=>{ scene('naraPuddle',2.6,{}); sfx.splat(); bt('OOPS',96,32,'#e9e07a',4,1); },
     600,()=>{ battle.enemyKnock=.5; battle.shakeEnemy=.45; sfx.thud(); scene('splashw',.6,{x:GX,y:250,c:'#e9e07a',c2:'#f6f0b0',n:10,sp:80}); hit(E2); confuseMaybe(.3); },
-    700,()=>setMessage(E2.result+(battle.enemyStunned===2?' The Grump slips. It is very confused about what just happened.':' The Grump steps in it. It is not happy.')),1300,()=>checkEnemy()); };
+    700,()=>setMessage(E2.result+(battle.enemyStunned===2?' The Grump slips. It\'s very confused about what just happened.':' The Grump steps in it. It\'s not happy.')),1300,()=>checkEnemy()); };
 N.tug=E2=>{ const {i,m,fx}=E2;
   enqueue(()=>{ setMessage('Nara grabs the Grump by something. Tug of war. Nara never loses tug of war.'); appr(fx,3.2); say(m.id,'tug',.3); },
     700,()=>{ pose(fx,'aim',2.4); scene('tugrope',2.4,{from:mouth(E2)}); sfx.growl?sfx.growl():sfx.sulk(); },
@@ -95,16 +95,16 @@ N.shake=E2=>{ const {i,m,fx}=E2;
     1100,()=>{ battle.shakeEnemy=.5; sfx.splat(); scene('splashw',.6,{x:GX,y:206,n:12,sp:90}); hit(E2); },
     800,E2.result+' Everything smells like wet dog now. Everything.',()=>checkEnemy()); };
 N.howl=E2=>{ const {i,m,fx}=E2;
-  enqueue(()=>{ setMessage('Nara thinks Tom might leave. Without her. She cannot handle it.'); pose(fx,'sit',3); sfx.whine(); scene('dark',3,{a:.35}); },
+  enqueue(()=>{ setMessage('Nara thinks Tom might leave. Without her. She can\'t handle it.'); pose(fx,'sit',3); sfx.whine(); scene('dark',3,{a:.35}); },
     800,()=>{ say(m.id,'howl'); sfx.howl(); scene('howlRings',2,{from:mouth(E2)}); bt('AWOOOO',96,30,'#c9b3e6',4,1.6); },
     1300,()=>{ battle.shakeEnemy=.6; battle.flashEnemy=.3; sfx.thud(); hit(E2); confuseMaybe(.35); },
-    700,()=>setMessage(E2.result+(battle.enemyStunned===2?' The Grump feels terrible. And very confused.':' Tom did not leave. He would never.')),1200,()=>checkEnemy()); };
+    700,()=>setMessage(E2.result+(battle.enemyStunned===2?' The Grump feels terrible. And very confused.':' Tom didn\'t leave. He\'d never.')),1200,()=>checkEnemy()); };
 N.squirrel=E2=>{ const {i,m,fx}=E2;
   enqueue(()=>{ setMessage('Nara freezes. Ears up. Something moved.'); pose(fx,'idle2',1.1); bt('!',150,40,'#ffe08a',5,1); sfx.ding(); },
     1000,()=>{ setMessage('SQUIRREL!'); say(m.id,'squirrel'); scene('squirrel',3.2,{passes:4}); run(fx,3.2,4); sfx.run(); barks(6,.16); bt('SQUIRREL!',96,30,'#ffb070',4,1.4); },
     ...[0,1,2,3].flatMap(k=>[k===0?500:700,()=>{ battle.slash=.2; sfx.slash(); scene('dust',.5,{x:GX+(k%2?30:-30),y:262,n:5}); part(E2,4,k); }]),
     700,()=>{ battle.enemyKnock=.5; battle.flashEnemy=.4; sfx.fanfare(); scene('confetti',1.4,{x0:70,x1:290,n:34}); scene('ring',.6,{x:GX,y:264,r:90}); },
-    900,E2.result+' The squirrel got away. The Grump did not.',()=>checkEnemy()); };
+    900,E2.result+' The squirrel got away. The Grump didn\'t.',()=>checkEnemy()); };
 
 // ================= Special: HUMAN EYES (key puppy) =================
 // Nara sits and looks up. The enemy is Smitten and skips its next turn (E2.apply rolls it; bosses resist more).
@@ -112,8 +112,8 @@ N.puppy=E2=>{ const {i,m,fx}=E2; const t=E2.targets[0];
   pose(fx,'sit',2.2); sfx.whine(); say(m.id,'puppy',.2);
   scene('pupHearts',2.2,{i}); scene('bigEyes',1.8,{});
   enqueue('Nara sits. Head tilt. Big brown eyes.',
-    900,()=>{ E2.apply(); if(t&&t.st.smitten) { sfx.stun(); bt('AWWW',96,32,'#ff9ac0',4,1.2); setMessage(cap(t.def.the)+' melts. It cannot attack something that cute next turn.'); }
-      else setMessage(t?cap(t.def.the)+' looks away on purpose. It has seen this trick before.':'Nobody is looking.'); },
+    900,()=>{ E2.apply(); if(t&&t.st.smitten) { sfx.stun(); bt('AWWW',96,32,'#ff9ac0',4,1.2); setMessage(cap(t.def.the)+' melts. It can\'t attack something that cute next turn.'); }
+      else setMessage(t?cap(t.def.the)+' looks away on purpose. It\'s seen this trick before.':'Nobody is looking.'); },
     1300,()=>checkEnemy());
 };
 })();
@@ -236,7 +236,7 @@ N.puppyEyesShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=t?ST.unit(t):{x:168,top:
     ['hf',1900],
     [1900,()=>{ E2.apply(); if(t) scene('na_melt',1.6,{x:F.x,y:F.top}); if(t&&t.st.smitten) { sfx.stun(); ST.jolt(t,.2); } }],
     [2700,()=>{ scene('na_wag',.6,{}); sfxs('squeak'); }],
-    [3800,'end',()=>t&&t.st.smitten?cap(t.def.the)+' melts. It cannot attack something that cute next turn.':(t?cap(t.def.the)+' looks away on purpose. It has seen this trick before.':'Nobody is looking.')]]); };
+    [3800,'end',()=>t&&t.st.smitten?cap(t.def.the)+' melts. It can\'t attack something that cute next turn.':(t?cap(t.def.the)+' looks away on purpose. It\'s seen this trick before.':'Nobody is looking.')]]); };
 N.puppy_eyes=E2=>N.puppyEyesShow(E2);
 const sfxs=k=>{ if(sfx[k]) sfx[k](); };
 
@@ -266,11 +266,11 @@ N.five_second_zoomies=E2=>{ const {m,fx}=E2,M=B2.move,W=(M&&M.waves||[]).map(w=>
   ST.keys(fx,K);
   const hitT=[];
   const flags=scene('na_flags',3.6,{pts,hitT});
-  const steps=[[0,()=>{ setMessage('Four little flags pop up. There are four places, so she will go to all four.'); say(m.id,'five_second_zoomies'); }],
+  const steps=[[0,()=>{ setMessage('Four little flags pop up. There are four places, so she\'ll go to all four.'); say(m.id,'five_second_zoomies'); }],
     [900,()=>{ barks(3,.1); sfxs('run'); }],['hf',1250]];
   pts.forEach((p,k)=>steps.push([1250+k*380,()=>{ hitT[k]=flags.t; sfx.slash(); ST.jolt(p.f,.35); scene('na_dust',.5,{x:p.x,y:p.y}); scene('na_text',.6,{x:p.x,y:p.y-80,txt:'ZOOM',c:'#9fe8ff'}); landHit(25); }]));
-  steps.push([2900,()=>{ scene('na_route',1.4,{pts:[{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3},...pts,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3}]}); setMessage('The route map updates a moment after she has finished it.'); }]);
-  steps.push([4300,'end',res(E2)+'Nara has been everywhere on the map. She is panting. She is thrilled.']);
+  steps.push([2900,()=>{ scene('na_route',1.4,{pts:[{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3},...pts,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3}]}); setMessage('The route map updates a moment after she\'s finished it.'); }]);
+  steps.push([4300,'end',res(E2)+'Nara has been everywhere on the map. She\'s panting. She\'s thrilled.']);
   ST.play(E2,steps); };
 
 // Trade You (A3): carries a CHICKEN JERKY packet over, noses out one piece, almost takes it back, sits proudly.
@@ -297,7 +297,7 @@ N.keepaway_rules=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.max(F
     ['hf',2100],
     [2100,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('na_poof',.5,{x:ix,y:iy,c:'#ffb070'}); scene('na_text',1,{x:F.x+62,y:F.top-2,txt:'YANK',c:'#ffb070',sc:2}); landHit(100); }],
     [2600,()=>{ setMessage('She sets it down behind her and stands in the way.'); scene('na_text',1,{x:px,y:py-96,txt:'GRR',c:CREAM}); }],
-    [4100,'end',res(E2)+'Nara does not approve of that game.']]); };
+    [4100,'end',res(E2)+'Nara doesn\'t approve of that game.']]); };
 
 // No Ball Left Behind (A5): flattens to look under the row, sweeps the retriever across their feet, the ball rolls out.
 N.no_ball_left=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),ly=Math.min(318,G.base+8),sx=G.x1+60;
@@ -322,7 +322,7 @@ N.paw_on_shoe=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m
     ['hf',1800],
     [1800,()=>{ E2.apply(); sfx.heal(); scene('na_pawpulse',1.2,{x:H.x+(foe?0:4),y:H.base+2}); scene('na_glow',.9,{x:H.x,y:H.mid,c:'#ffb45a'}); if(foe) ST.jolt(t,.15); else if(t!==m) battle.fx[t.idx].hop=.3; }],
     [2400,()=>{ scene('na_hearts',.9,{x:H.x,y:H.top}); }],
-    [3800,'end',kindLine(t,'Nara makes sure her friend knows she is there.')]]); };
+    [3800,'end',kindLine(t,'Nara makes sure her friend knows she\'s there.')]]); };
 
 // Shake It Off, Everyone (B2): stands in front of the party, one twitch nobody notices, a full shake; damp, better friends.
 N.shake_everyone=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });
@@ -358,7 +358,7 @@ N.puddle_geography=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),fs=list.
     ['hf',2300],
     [2300,()=>{ sfx.thud(); hitAll(list); }],
     [2900,()=>{ scene('na_text',1,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3-90,txt:'?',c:CREAM,sc:2}); }],
-    [3800,'end',res(E2)+'The puddle is tiny. The detour is not.']]); };
+    [3800,'end',res(E2)+'The puddle is tiny. The detour isn\'t.']]); };
 
 // Family Food Inspector (B5): two covered dishes; sniff, reject the fancy one, stamp HOMEMADE; warm steam for everyone.
 N.food_inspector=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });
@@ -418,13 +418,13 @@ function startNaraMeet(n) {
         if(t>.2&&t<1.1&&Math.floor(t*10)!==Math.floor((t-dt)*10)&&Math.floor(t*10)%2===0) intro.hearts.push({x:player.x+.5+(Math.random()-.5)*.8,y:player.y-.6,t:0});
         if(t>=1.3) { n.scr=null; n.lift=0; return true; } return false; }},
     S.talk('Nara',['Arf! Arf arf arf! Awoo!'],[['nara','greet']]),
-    S.talk('Tom',['Nara! What are YOU doing here?!','Where is Olivia? Where is Michael? Where are Lachlan and Isla?!']),
+    S.talk('Tom',['Nara! What are YOU doing here?!','Where\'s Olivia? Where\'s Michael? Where are Lachlan and Isla?!']),
     S.call(()=>naraPuddle(map,n.x,n.y)),
     S.wait(.5),
-    S.talk('Tom',['...And she peed. She is so happy she peed. Of COURSE she did.']),
+    S.talk('Tom',['...And she peed. She\'s so happy she peed. Of COURSE she did.']),
     S.call(()=>sfx.squeak()),
     S.talk('Nara',['Nara drops a very wet tennis ball at Tom’s feet. Then she leans on his legs and looks up at him.']),
-    S.talk('Tom',['Okay. Okay. Nobody is getting left alone today. We will find your family.']),
+    S.talk('Tom',['Okay. Okay. Nobody is getting left alone today. We\'ll find your family.']),
     S.call(()=>{ endIntro(); n.idle=1; grantItem('naraball'); if(typeof heartTrace==='function') { heartTrace('nara-meet'); setFlag('met-nara'); } setTimeout(()=>{ if(!inParty(nara)&&!dialog.active&&!battle.active) offerRecruit(nara,n); },900); })
   ];
   runScene(steps);
@@ -435,8 +435,8 @@ function talkToNara(n) {
   if(!n.visitedOnce) { startNaraMeet(n); return; }
   say('nara','greet');
   const excited=Math.random()<.3;
-  n.lines=[pick(['Nara wiggles so hard her whole back half goes sideways.','Nara brings Tom a stick. It is the best stick. He has to see it.','Nara sniffed every jacaranda on 2nd Ave. She has a full report.','Nara rolls over for belly rubs. She has earned them. She says.','Somebody offered Nara a biscuit. She looked at it like it was a rock.','Nara drops the tennis ball at Tom’s feet. Then picks it back up. Then drops it. Throw it. THROW IT.'])];
-  if(excited) n.lines.push('...She got a little too excited. There is a puddle. Tom steps around it.');
+  n.lines=[pick(['Nara wiggles so hard her whole back half goes sideways.','Nara brings Tom a stick. It\'s the best stick. He has to see it.','Nara sniffed every jacaranda on 2nd Ave. She has a full report.','Nara rolls over for belly rubs. She\'s earned them. She says.','Somebody offered Nara a biscuit. She looked at it like it was a rock.','Nara drops the tennis ball at Tom’s feet. Then picks it back up. Then drops it. Throw it. THROW IT.'])];
+  if(excited) n.lines.push('...She got a little too excited. There\'s a puddle. Tom steps around it.');
   n.onClose=()=>{ if(!inParty(nara)) offerRecruit(nara,n); };
   if(excited) { const prev=n.onClose; n.onClose=()=>{ naraPuddle(currentMap,n.x,n.y); prev(); }; }
   openDialog(n.name,n.lines,n);
@@ -542,7 +542,7 @@ N.puppyEyesShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=t?ST.unit(t):{x:168,top:
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:sx,y:sy,f:'sit'},{t:2800,f:'sit',rot:-.12},{t:3400,f:'sit',rot:u=>-.12+Math.sin(u*Math.PI*4)*.05},{t:3900,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Nara trots to the middle of the room and sits.'); say(m.id,'puppy_eyes'); sfx.whine(); }],
-    [850,()=>{ scene('nv_closeup',1.8,{}); sfx.charge(); setMessage('She looks up. Those are not dog eyes. Those are PEOPLE eyes.'); }],
+    [850,()=>{ scene('nv_closeup',1.8,{}); sfx.charge(); setMessage('She looks up. Those aren\'t dog eyes. Those are PEOPLE eyes.'); }],
     [1000,()=>{ scene('nv_big',1.5,{x:288,y:58,txt:'HUMAN EYES',c:CREAM,sc:3}); }],
     [2700,()=>{ if(!t) return; setMessage(cap(t.def.the)+' looks away. Then looks back. Wait. WHAT?'); ST.draw((s,u)=>{ const q=cl(u/.93);
         const ox=q<.35?-ez(q/.35)*16:lerp(-16,6,ez((q-.35)/.15))*(1-ez((q-.7)/.3)),sp=q<.35?-.12*ez(q/.35):lerp(-.12,.08,ez((q-.35)/.15))*(1-ez((q-.7)/.3)); lift(t,0,sp,ox); },.75); }],
@@ -550,7 +550,7 @@ N.puppyEyesShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=t?ST.unit(t):{x:168,top:
     ['hf',3250],
     [3250,()=>{ E2.apply(); if(t&&t.st.smitten) { sfx.stun(); scene('na_melt',1.6,{x:F.x,y:F.top}); scene('nv_big',1.2,{x:F.x,y:F.top-74,txt:'AWWW',c:PINK,sc:4}); scene('nv_hearts',1.4,{x:F.x,y:F.top+10});
         ST.draw((s,u)=>{ const q=u; lift(t,ez(q/.5)*F.h*.12*(1-ez((q-.8)/.2)),Math.sin(q*30)*.05*(1-q),0); },1.2); } }],
-    [4600,'end',()=>t&&t.st.smitten?cap(t.def.the)+' melts. It cannot attack something that looks at it like that.':(t?cap(t.def.the)+' looks away on purpose. It has seen this trick before.':'Nobody is looking.')]]); };
+    [4600,'end',()=>t&&t.st.smitten?cap(t.def.the)+' melts. It can\'t attack something that looks at it like that.':(t?cap(t.def.the)+' looks away on purpose. It\'s seen this trick before.':'Nobody is looking.')]]); };
 N.puppy_eyes=E2=>N.puppyEyesShow(E2);
 
 // ---------- Tennis Ball Fetch (A1) ----------
@@ -563,14 +563,14 @@ N.tennis_ball_fetch=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),H0=homeOf(
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'wind',rot:(u,tt)=>Math.sin(tt*30)*.05},{t:700,f:'run',ns:true},{t:1500,x:ex,y:ly,f:'celeb',hop:10},{t:1900,f:'runR'},{t:3000,x:'home',y:'home',f:'sit'},{t:3800,f:'sit',rot:-.12}]);
   ST.play(E2,[
     [0,()=>{ setMessage(T?'Tom holds up the tennis ball. Nara stops breathing.':'Nara noses her tennis ball into the air.'); say(m.id,'tennis_ball_fetch'); }],
-    [300,()=>{ const a=T?{x:T.x-10,y:T.top+16}:mouth(); ST.fly((x,y)=>ball(x,y),a.x,a.y,lx,ly-14,.9,140); sfx.whoosh(); if(T) hopOf(tom); setMessage('The ball flies. She is GONE.'); }],
+    [300,()=>{ const a=T?{x:T.x-10,y:T.top+16}:mouth(); ST.fly((x,y)=>ball(x,y),a.x,a.y,lx,ly-14,.9,140); sfx.whoosh(); if(T) hopOf(tom); setMessage('The ball flies. She\'s GONE.'); }],
     [700,()=>{ barks(2,.1); scene('nv_speed',.8,{}); sfxs('run'); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); ST.jolt(f,.55); landHit(100); scene('nv_dust',.6,{x:F.x,y:F.base,r:40}); scene('nv_big',1.1,{x:F.x,y:F.top-74,txt:'FETCH!',c:BALL,sc:4}); }],
     [1200,()=>{ ST.fly((x,y)=>ball(x,y),lx,ly-14,lx,ly-14,.3,16,0,{ease:'lin'}); sfxs('squeak'); }],
     [1500,()=>{ hold=true; ST.draw(()=>{ if(hold) { const p=mouth(); ball(p.x-6,p.y+4,11); } else if(drop) ball(drop.x,drop.y,11); },2.4); barks(1); setMessage('Got it. Very proud. Very slobbery.'); }],
     [3000,()=>{ hold=false; const p=mouth(); drop={x:p.x-24,y:Math.min(318,BATTLE_POS[m.idx].base*3-8)}; sfxs('squeak'); scene('nv_text',1.1,{x:H0.x,y:H0.y-NH()-24,txt:'AGAIN?',c:GOLD,sc:2}); }],
-    [3900,'end',res(E2)+'She will do that forty more times if anyone lets her.']]); };
+    [3900,'end',res(E2)+'She\'ll do that forty more times if anyone lets her.']]); };
 
 // ---------- Don't Leave Me! (A2) ----------
 // Someone takes ONE step away. Nara panics: AWOOOOO, then frantic laps all over the room, crashing into monsters (4 hits).
@@ -594,7 +594,7 @@ N.dont_leave_me=E2=>{ const {m,fx}=E2,M=B2.move,W=(M&&M.waves||[]).map(w=>w[0]&&
     [1800,()=>{ scene('nv_sweat',2.2,{}); barks(4,.1); sfxs('run'); setMessage('She runs laps. Everywhere. Into everything.'); }],
     ['hf',2100]];
   pts.forEach((p,k)=>steps.push([2100+k*380,()=>{ sfx.thud(); ST.jolt(p.f,.4); scene('nv_dust',.5,{x:p.x,y:p.y}); scene('nv_text',.6,{x:p.x,y:ST.unit(p.f).top-20-(k%2)*16,txt:words[k],c:'#ffb070'}); landHit(25); }]));
-  steps.push([3500,()=>{ if(L) setMessage(L.name+' comes back. Nara reacts like it has been a year.'); }]);
+  steps.push([3500,()=>{ if(L) setMessage(L.name+' comes back. Nara reacts like it\'s been a year.'); }]);
   steps.push([3900,()=>{ if(L) { hopOf(L); scene('nv_hearts',1.2,{x:back.x+10,y:back.y-NH()}); } barks(3,.12); }]);
   steps.push([5100,'end',res(E2)+'Everybody is right here. Nara has counted. Twice.']);
   ST.play(E2,steps); };
@@ -611,7 +611,7 @@ N.just_one_bite=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m
   ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:nx,y:ny,f:'sit'},{t:1900,f:'sit',rot:u=>-.2*ez(u/.3)},{t:2300,f:'act',rot:-.2,dx:u=>-Math.abs(Math.sin(u*Math.PI*2))*8},{t:2700,f:'sit',rot:-.2},{t:3300,f:'celeb',hop:8,hn:2,rot:wag},{t:3800,f:self?'idle':'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
   const plate=scene('nv_plate',4.4,{x:pl.x,y:pl.y,biteAt:3050});
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Nara finds a sandwich. She waits for permission anyway.':'There is a sandwich by '+t.name+'. Nara sits next to it. Very politely.'); say(m.id,'just_one_bite'); }],
+    [0,()=>{ setMessage(self?'Nara finds a sandwich. She waits for permission anyway.':'There\'s a sandwich by '+t.name+'. Nara sits next to it. Very politely.'); say(m.id,'just_one_bite'); }],
     [900,()=>{ scene('nv_text',1.4,{x:pl.x+10,y:pl.y-NH()-30,txt:'JUST ONE BITE?',c:GOLD,sc:2}); }],
     [1150,()=>{ scene('nv_drool',2.0,{floor:ny-2}); setMessage('A little drool.'); }],
     [1900,()=>{ setMessage('The head tilt.'); }],
@@ -709,7 +709,7 @@ SC.nv_puddle=(s,u)=>{ const a=fin(u,.05)*fade(u,.92)*.9; s.spots.forEach((p,k)=>
 N.happy_puddle=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),px=Math.min(530,G.x1+44),py=Math.min(316,G.base+6),Ps=list.map(f=>ST.unit(f));
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:px,y:py,f:'celeb',hop:18,hn:4,rot:wag},{t:1700,f:'idle',rot:wag},{t:2000,f:'runR'},{t:2400,x:Math.min(556,px+60),y:py,f:'sit'},{t:3300,f:'sit',rot:-.14},{t:3900,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Nara sees the whole front row. She is SO excited.'); say(m.id,'happy_puddle'); barks(3,.12); }],
+    [0,()=>{ setMessage('Nara sees the whole front row. She\'s SO excited.'); say(m.id,'happy_puddle'); barks(3,.12); }],
     [800,()=>{ scene('nv_text',.9,{x:px,y:py-NH()-24,txt:'WIGGLE WIGGLE',c:GOLD,sc:2}); }],
     [1500,()=>{ scene('nv_puddle',3.0,{sx:px-20,spots:Ps.map(F=>({x:F.x,y:F.base+2,w:F.w}))}); sfx.splat&&sfx.splat(); setMessage('A happy little puddle. It spreads. Right under their feet.'); }],
     [2100,()=>{ sfx.slideWhistle(); ST.draw((s,u)=>{ const q=u; list.forEach((f,k)=>{ const sd=k%2?1:-1,F=Ps[k];
@@ -718,7 +718,7 @@ N.happy_puddle=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),px=Math.min(
     ['hf',2700],
     [2700,()=>{ sfx.thud(); for(const f of list) ST.jolt(f,.4); landHit(100); scene('nv_big',1.1,{x:G.x,y:G.top-74,txt:'SLIP!',c:PEE,sc:4}); }],
     [3300,()=>{ scene('nv_text',1,{x:Math.min(556,px+60),y:py-NH()-24,txt:'?',c:CREAM,sc:3}); }],
-    [4600,'end',res(E2)+'The front row lost its footing. Nara lost nothing. She is delighted.']]); };
+    [4600,'end',res(E2)+'The front row lost its footing. Nara lost nothing. She\'s delighted.']]); };
 })();
 
 // ================= Polish pass (2026-10-24, claude/move-review.md) =================
@@ -798,7 +798,7 @@ N.tennis_ball_fetch=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),H0=homeOf(
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'wind',rot:(u,tt)=>Math.sin(tt*30)*.05},{t:700,f:'run',ns:true},{t:1500,x:ex,y:ly,f:'celeb',hop:10},{t:1900,f:'runR'},{t:3000,x:'home',y:'home',f:'sit'},{t:3800,f:'sit',rot:-.12}]);
   ST.play(E2,[
     [0,()=>{ setMessage(T?'Tom holds up the tennis ball. Nara stops breathing.':'Nara noses her tennis ball into the air.'); say(m.id,'tennis_ball_fetch'); }],
-    [300,()=>{ const a=T?{x:T.x-10,y:T.top+16}:mouth(); ST.fly((x,y,u)=>{ gfx.globalAlpha=.35; ball(x+18,y+6,16); gfx.globalAlpha=1; ball(x,y,20); },a.x,a.y,lx,ly-20,.9,150); sfx.whoosh(); if(T) hopOf(tom); setMessage('The ball flies. She is GONE.'); }],
+    [300,()=>{ const a=T?{x:T.x-10,y:T.top+16}:mouth(); ST.fly((x,y,u)=>{ gfx.globalAlpha=.35; ball(x+18,y+6,16); gfx.globalAlpha=1; ball(x,y,20); },a.x,a.y,lx,ly-20,.9,150); sfx.whoosh(); if(T) hopOf(tom); setMessage('The ball flies. She\'s GONE.'); }],
     [700,()=>{ barks(2,.1); scene('np_streaks',.85,{dir:1}); scene('nv_big',.9,{x:(H0.x+ex)/2,y:84,txt:'ZOOM',c:CREAM,sc:3,rot:-.08}); sfxs('run'); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('nv_dust',.7,{x:F.x,y:F.base,r:56}); scene('nv_flash',.25,{a:.3}); scene('nv_big',1.2,{x:F.x,y:F.top-74,txt:'FETCH!',c:BALL,sc:5}); }],
@@ -806,7 +806,7 @@ N.tennis_ball_fetch=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),H0=homeOf(
     [1500,()=>{ hold=true; ST.draw(()=>{ if(hold) { const p=mouth(); ball(p.x-8,p.y+4,15); } else if(drop) ball(drop.x,drop.y,15); },2.4); barks(1); setMessage('Got it. Very proud. Very slobbery.'); }],
     [1900,()=>{ scene('np_streaks',1.0,{dir:-1}); }],
     [3000,()=>{ hold=false; const p=mouth(); drop={x:p.x-30,y:Math.min(316,BATTLE_POS[m.idx].base*3-12)}; sfxs('squeak'); scene('nv_text',1.1,{x:H0.x,y:H0.y-NH()-24,txt:'AGAIN?',c:GOLD,sc:3}); }],
-    [3900,'end',res(E2)+'She will do that forty more times if anyone lets her.']]); };
+    [3900,'end',res(E2)+'She\'ll do that forty more times if anyone lets her.']]); };
 
 // ---------- Just One Bite?: a bigger sandwich and a long drool drip ----------
 SC.np_plate=(s,u)=>{ const x=s.x,y=s.y,bit=s.biteAt!=null&&s.t*1000>s.biteAt; gfx.globalAlpha=fin(u,.08)*fade(u,.92);
@@ -825,7 +825,7 @@ N.just_one_bite=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m
   ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:nx,y:ny,f:'sit'},{t:1900,f:'sit',rot:u=>-.2*ez(u/.3)},{t:2300,f:'act',rot:-.2,dx:u=>-Math.abs(Math.sin(u*Math.PI*2))*8},{t:2700,f:'sit',rot:-.2},{t:3300,f:'celeb',hop:8,hn:2,rot:wag},{t:3800,f:self?'idle':'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
   scene('np_plate',4.4,{x:pl.x,y:pl.y,biteAt:3050});
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Nara finds a sandwich. She waits for permission anyway.':'There is a sandwich by '+t.name+'. Nara sits next to it. Very politely.'); say(m.id,'just_one_bite'); }],
+    [0,()=>{ setMessage(self?'Nara finds a sandwich. She waits for permission anyway.':'There\'s a sandwich by '+t.name+'. Nara sits next to it. Very politely.'); say(m.id,'just_one_bite'); }],
     [900,()=>{ scene('nv_text',1.5,{x:pl.x+20,y:pl.y-NH()-40,txt:'JUST ONE BITE?',c:GOLD,sc:3}); }],
     [1150,()=>{ scene('np_drool',2.1,{floor:ny-2}); setMessage('A little drool. Then a lot of drool.'); }],
     [1900,()=>{ setMessage('The head tilt.'); }],
@@ -888,7 +888,7 @@ SC.np_dizzy=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.75); for(let k=0;k<3;k++)
 N.happy_puddle=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),px=Math.min(530,G.x1+44),py=Math.min(316,G.base+6),Ps=list.map(f=>ST.unit(f));
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:px,y:py,f:'celeb',hop:18,hn:4,rot:wag},{t:1700,f:'idle',rot:wag},{t:2000,f:'runR'},{t:2400,x:Math.min(556,px+60),y:py,f:'sit'},{t:3300,f:'sit',rot:-.14},{t:3900,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Nara sees the whole front row. She is SO excited.'); say(m.id,'happy_puddle'); barks(3,.12); }],
+    [0,()=>{ setMessage('Nara sees the whole front row. She\'s SO excited.'); say(m.id,'happy_puddle'); barks(3,.12); }],
     [800,()=>{ scene('nv_text',.9,{x:px,y:py-NH()-24,txt:'WIGGLE WIGGLE',c:GOLD,sc:2}); }],
     [1500,()=>{ scene('nv_puddle',3.0,{sx:px-20,spots:Ps.map(F=>({x:F.x,y:F.base+2,w:F.w}))}); sfx.splat&&sfx.splat(); setMessage('A happy little puddle. It spreads. Right under their feet.'); }],
     [2100,()=>{ sfx.slideWhistle(); ST.draw((s,u)=>{ const q=u; list.forEach((f,k)=>{ const sd=k%2?1:-1,F=Ps[k];
@@ -897,7 +897,7 @@ N.happy_puddle=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),px=Math.min(
     ['hf',2700],
     [2700,()=>{ sfx.thud(); for(const f of list) ST.jolt(f,.45); landHit(100); scene('nv_big',1.1,{x:G.x,y:G.top-74,txt:'SLIP!',c:PEE,sc:5}); Ps.forEach(F=>{ scene('np_dizzy',1.4,{x:F.x,y:F.top-6}); scene('nv_dust',.5,{x:F.x,y:F.base,r:40,c:'#f6f0b0'}); }); }],
     [3300,()=>{ scene('nv_text',1,{x:Math.min(556,px+60),y:py-NH()-24,txt:'?',c:CREAM,sc:3}); }],
-    [4600,'end',res(E2)+'The front row lost its footing. Nara lost nothing. She is delighted.']]); };
+    [4600,'end',res(E2)+'The front row lost its footing. Nara lost nothing. She\'s delighted.']]); };
 
 // ---------- Family Food Inspector: bigger dishes and a big paw stamp ----------
 const cloche=(x,y,c,lid)=>{ EO(x,y+4,46,9,'#f4f2ea'); E(x,y+2,34,5,'#e2ded2');
@@ -1065,7 +1065,7 @@ N.squirrel_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.uni
     [END,()=>{ S('chitter'); S('squeak'); }],
     [END+60,()=>{ S('crash'); S('thud'); landHit(60); for(const f of list) ST.jolt(f,.7); scene('nu_spin',1.1,{list:spins,t0:END+60,h:26,ox:8}); scene('nu_flash',.3,{a:.5});
       scene('nu_rings',.8,{x:Gp.x,y:Gp.base-20,r:140,w:5,c:GOLD}); scene('nu_big',1.3,{x:288,y:BAR+30,txt:'STAGGER!',c:GOLD,sc:5});
-      setMessage('Chairman Cheeks zips up the oak just in time. The monsters do not.'); }],
+      setMessage('Chairman Cheeks zips up the oak just in time. The monsters don\'t.'); }],
     [5300,()=>{ E2.apply(); barks(4,.2); scene('nu_big',.9,{x:P.tx+70,y:P.branch+40,txt:'ARF! ARF!',c:'#ffb070',sc:2});
       setMessage('Nara barks up the tree. The whole family is fired up. (She means: COME DOWN HERE.)'); }],
     [6000,()=>{ S('chitter'); }],
@@ -1139,7 +1139,7 @@ N.pack_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
     [900,()=>{ scene('nu_crumb',1.6,{x:Sx-40,y:Sy-44}); S('ting'); setMessage('One golden crumb floats down. Sourdough.'); }],
     [1500,()=>{ say(m.id,'pack_ult'); S('sniff'); scene('nu_text',.9,{x:Sx-30,y:Sy-110,txt:'SNFF SNFF',c:CREAM,sc:2}); setMessage('Sniff. Sniff sniff.'); }],
     [P.color,()=>{ barks(2,.2); S('crash'); scene('nu_flash',.35,{a:.7}); scene('nu_shatter',.8,{x:Sx-20,y:Sy-40}); scene('nu_trail',4.4,{trail:T,reveal:500});
-      scene('nu_big',1.1,{x:288,y:BAR+30,txt:'ARF! ARF!',c:'#ffb070',sc:5}); setMessage(tom?'(She means: I know that smell. That is MY person.)':'(She means: I know that smell. That is MY pack.)'); }],
+      scene('nu_big',1.1,{x:288,y:BAR+30,txt:'ARF! ARF!',c:'#ffb070',sc:5}); setMessage(tom?'(She means: I know that smell. That\'s MY person.)':'(She means: I know that smell. That\'s MY pack.)'); }],
     [R0,()=>{ S('run'); S('whoosh'); setMessage('She follows the scent of home. Straight through every monster.'); }],
     ...cross.map(c=>[c.t,()=>{ const F=ST.foe(c.f); S('slash'); S('bark'); ST.jolt(c.f,.5); landHit(share); scene('nu_pawburst',.6,{x:F.x,y:F.mid}); scene('nu_mark',3.2,{f:c.f}); }]),
     ['hf',R1],

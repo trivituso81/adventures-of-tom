@@ -23,15 +23,15 @@ const PENNY={
     'Gear for the whole family, snacks for fights, and a few things that go POP. Gently.',
     'Got something to sell? I buy almost anything. Not Steve. Never Steve.'],
   hello:['Back again! The coins missed you.','Browse all you like. Browsing is free. Buying is better.','Fresh stock. Same Penny.'],
-  tab:{healing:'Snacks and fixes. Eat them in battle or from the menu.',battle:'For monsters only. Do not pop the poppers in here.',
+  tab:{healing:'Snacks and fixes. Eat them in battle or from the menu.',battle:'For monsters only. Don\'t pop the poppers in here.',
     sell:'Half price, no haggling. Okay, a little haggling. No.'},
   gear:id=>({tom:'For the uncle. Comfy, nerdy, and a little bit Delta One.',grace:'Gymnastics approved. Glitter included.',rose:'Bouncy, brave and puddle-proof.',
     amy:'Built for speed. She tried everything on twice.',deedee:'Garden to oven and back. To the moon and back, she says.',boppy:'Twelve pockets and extra arch support.',
-    tnb:'Skate, glaze, wardrobe. He likes the apron.',nara:'For the dog. She will chew at least one of these.'})[id],
-  bought:['Pleasure doing business.','Good choice. I would have picked that one too.','Into the pockets it goes.','Ka-ching. That is my favorite sound.'],
+    tnb:'Skate, glaze, wardrobe. He likes the apron.',nara:'For the dog. She\'ll chew at least one of these.'})[id],
+  bought:['Pleasure doing business.','Good choice. I\'d have picked that one too.','Into the pockets it goes.','Ka-ching. That\'s my favorite sound.'],
   sold:['Sold! I know just the shelf.','A fine addition to my collection.','Half price, full gratitude.'],
   broke:['Not enough coins. Grump Hollow pays, in a way.','Short on coins. The monsters up north are carrying some.'],
-  keep:['I could never. That is a family thing.','Not for sale. Some things are priceless.','Put that back in your pocket. It is special.']
+  keep:['I could never. That\'s a family thing.','Not for sale. Some things are priceless.','Put that back in your pocket. It\'s special.']
 };
 let shopOpen=false,shopMode='buy',shopTab='tom',shopNote='';
 // The shopkeeper's lines: Penny on Long Island, her cousin Nickel in Los Angeles (npc.shopLines).
@@ -129,7 +129,7 @@ function buyItem(id) {
 function wearItem(m,id) {
   if(!equipTo(m,id)) { sfx.nope(); return; }
   sfx.equip();
-  shopNote=m.name+' puts on the '+items[id].name+'.'+(inParty(m)?'':' It will be ready when '+m.name+' joins the party.');
+  shopNote=m.name+' puts on the '+items[id].name+'.'+(inParty(m)?'':' It\'ll be ready when '+m.name+' joins the party.');
   renderShop();
 }
 function sellItem(id) {

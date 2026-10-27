@@ -579,7 +579,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     ['hf',P.hit],
     [P.laugh,()=>{ word('HA HA HA',sN.x,sN.b-150,CREAM,3,.9); }],
     [P.cap,()=>{ S('clang'); }],
-    [P.tline,()=>{ say('tom','tombotnb'); setMessage('Tom says he was not scared. The popcorn was.'); }],
+    [P.tline,()=>{ say('tom','tombotnb'); setMessage('Tom says he wasn\'t scared. The popcorn was.'); }],
     [P.kiss0,()=>{ setMessage('TNB laughs and kisses him. Very brave.'); }],
     [P.kiss,()=>{ S('kiss'); }],
     [P.glow,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); }],
@@ -654,7 +654,7 @@ B2_TOMBO_ANIM.nara1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   ST.play(E2,[
     [0,()=>{ setMessage('TOMBO! Tom holds up a treat. Nara knows this one.'); B2.aim=null; S('click'); }],
     [P.hold,()=>{ S('ting'); say('tom','tombofetch'); }],
-    [P.sit,()=>{ word('SIT.',T.x+60,T.top-20,CREAM,4,.9); S('bump'); setMessage('Sit. Nara sits. She is wiggling all over.'); }],
+    [P.sit,()=>{ word('SIT.',T.x+60,T.top-20,CREAM,4,.9); S('bump'); setMessage('Sit. Nara sits. She\'s wiggling all over.'); }],
     [P.wig0+200,()=>{ word('WIGGLE!',nx,nb-104,GOLD,3,1); }],
     [P.paw,()=>{ word('PAW.',T.x+60,T.top-20,CREAM,4,.9); S('boing'); setMessage('Paw. She gives him her paw. VERY hard.'); }],
     [P.shadow,()=>{ S('slideWhistle'); }],
@@ -764,7 +764,7 @@ B2_TOMBO_ANIM.boppy1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [0,()=>{ setMessage('TOMBO! Boppy is fishing. Tom has one job: hold the net.'); B2.aim=null; S('click'); }],
     [P.cast,()=>{ S('whoosh'); word('CAST!',GR.x+40,GR.top-40,CREAM,3,.7); }],
     [P.plop,()=>{ S('splash'); scene('tb_rings',.7,{x:bob.x,y:bob.y,r:26,c:FOAM,w:2}); }],
-    [P.line,()=>{ say('boppy','tombo'); setMessage('Boppy wants the net held STILL. It is not still.'); }],
+    [P.line,()=>{ say('boppy','tombo'); setMessage('Boppy wants the net held STILL. It\'s not still.'); }],
     [P.bite,()=>{ S('ding'); word('!',bob.x,bob.y-50,GOLD,7,.8); for(const o of S0) ST.jolt(o.f,.4); setMessage('Something bites. Something BIG.'); }],
     [P.reel,()=>{ S('charge'); word('REEL!',Bp.x-60,Bp.top-20,'#9fe8ff',3,.8); }],
     [P.tline,()=>{ say('tom','tombopier'); }],
@@ -830,7 +830,7 @@ B2_TOMBO_ANIM.amy1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [0,()=>{ setMessage('TOMBO! Tom and Amy both lunge for the same monster.'); B2.aim=null; S('whoosh'); }],
     [P.mine,()=>{ word('MINE!',Lx-10,by-TH-26,CREAM,4,.55); S('bump'); }],
     [P.mine2,()=>{ word('MINE!!',Rx+16,by-AH-30,PINK,4,.55); S('bump'); }],
-    [P.jos,()=>{ setMessage('They bicker like they are kids again.'); S('squeak'); }],
+    [P.jos,()=>{ setMessage('They bicker like they\'re kids again.'); S('squeak'); }],
     ['hf',B0+360]];
   for(let k=0;k<n;k++) { const t0=B0+k*BP,amyShoves=k%2===0,h=hitAt(k),f=tgts[k],q=f?ST.foe(f):{x:h.x-30,top:h.y-90,base:h.y};
     steps.push([t0+150,()=>{ S('whoosh'); word(amyShoves?'MOVE!':'QUIT IT!',Rx+6,by-(amyShoves?AH:TH)-24,amyShoves?PINK:CREAM,3,.6);
@@ -1332,7 +1332,7 @@ B2_TOMBO_ANIM.rose2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const steps=[
     [0,()=>{ setMessage('TOMBO! Tom packs his carry-on. Rose has a plan.'); B2.aim=null; S('click'); }],
     [P.hop,()=>{ S('pop'); }],
-    [P.roll0,()=>{ S('creak'); setMessage('Tom wheels his carry-on right up to the monsters. There is a lump under the blanket.'); }],
+    [P.roll0,()=>{ S('creak'); setMessage('Tom wheels his carry-on right up to the monsters. There\'s a lump under the blanket.'); }],
     [P.tline,()=>{ say('tom','tomborose2'); }],
     [P.lean0,()=>{ order.forEach((o,i)=>word('?',o.q.x+10,o.q.top-16,CREAM,4,.9)); setMessage('The monsters lean in. Two little sneakers wiggle.'); S('squeak'); }],
     [P.wig,()=>{ S('giggle'); }],
@@ -1443,7 +1443,7 @@ B2_TOMBO_ANIM.amy2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.go,()=>{ S('whoosh'); word('GO!',rootX-20,wY-AH-30,GOLD,5,.8); setMessage('Amy sprints down the wing. Into the wind.'); }],
     [P.tip,()=>{ S('squeak'); word('!!',tipX+20,wY-AH-26,RED,5,.6); setMessage('End of the wing. The rope goes tight.'); }],
     [P.apply,()=>{ E2.apply(); }],
-    [P.yank,()=>{ S('reel'); S('whoosh'); setMessage('Tom reels her in. He does not sit up.'); }],
+    [P.yank,()=>{ S('reel'); S('whoosh'); setMessage('Tom reels her in. He doesn\'t sit up.'); }],
     [P.land,()=>{ S('thud'); scene('dust',.5,{x:rootX,y:wY,n:6,sp:20,up:8}); }],
     [P.pr,()=>{ word('NEW PR!',cl(rootX-40,90,480),Math.max(70,wY-AH-50),GOLD,5,1.3); S('fanfare'); for(const p of party) glowOn(p); }],
     [P.ret,()=>{ S('whoosh'); setMessage('The monsters blow back in. At the back of the line.'); }],
@@ -1521,7 +1521,7 @@ B2_TOMBO_ANIM.boppy2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.drop,()=>{ S('whoosh'); }],
     [P.slam,()=>{ S('clang'); S('thud'); battle.shakeEnemy=.6; rattle=1; scene('dust',.6,{x:dL+dW/2,y:by+2,n:10,sp:40,up:10});
       word('CLANG!',dL+dW/2,Math.max(60,dTop-14),'#ffffff',6,1.1); setMessage('A jail-cell door slams down in front of the family.'); }],
-    [B0-150,()=>{ setMessage('The monsters charge. They do not read the sign.'); }],
+    [B0-150,()=>{ setMessage('The monsters charge. They don\'t read the sign.'); }],
     [P.back,()=>{ S('sulk'); word('MY BACK.',bx-10,by-BH-24,CREAM,3,1); setMessage('Boppy’s back is acting up. The door is fine.'); }],
     [P.apply,()=>{ E2.apply(); S('heal'); scene('glow',.9,{x:sT.x,y:sT.b-TH*.5,rx:38,ry:52,c:'#aef0ff',a:.35}); scene('glow',.9,{x:sB.x,y:sB.b-BH*.5,rx:38,ry:52,c:'#aef0ff',a:.35});
       for(const p of party) if(p!==tom&&p!==pt) scene('glow',.9,{x:ST.unit(p).x,y:ST.unit(p).mid,rx:38,ry:52,c:'#aef0ff',a:.35}); }],
@@ -1557,11 +1557,10 @@ const memory=(x,y,sc,a,sq=0)=>{ if(a<=0) return; const img=ghostDumpling(),sx=sc
   for(let k=0;k<4;k++) { const ph=(t*1.2+k/4)%1; gfx.globalAlpha=a*(1-Math.abs(ph-.5)*2); star(x+[-.32,.3,.05,-.1][k]*w,y+[-.2,-.1,-.42,.25][k]*h,2+ph*4*Math.min(2,sc),k%2?'#aef0ff':'#fffbe6'); }
   gfx.globalAlpha=1; };
 
-// ---------- The Golden Dumpling Wish (Tom + Grace, tier 3) ----------
-// Twilight. Grace holds a glowing memory of her gold dumpling to her heart, then puts it into Tom's hands; a pillar of
-// gold light goes up. The memory floats up, grows giant, and bounces happily across every monster, then bursts into
-// diamond sparkles that rain on the family. Grace hugs Tom. Effects: Sparkle hit on every enemy (warms them), fallen
-// friends up at 50%, party heals 60% and loses its debuffs, Grace's Trending locks for 3 turns.
+// ---------- Bedazzle Everything (Tom + Grace, tier 3) ----------
+// A craft table with a plain star on it. Tom holds the glue gun, Grace does the rhinestones. The star gets bedazzled, grows,
+// and bounces across every monster, leaving rhinestones stuck on each, then bursts into glitter that rains on the family.
+// Effects: Sparkle hit on every enemy (warms them), fallen friends up at 50%, party heals 60% and loses its debuffs, Trending locks for 3 turns.
 B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
@@ -1571,7 +1570,7 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   order.forEach((o,i)=>{ o.t=B0+i*BP; });
   const burst=(order.length?order[order.length-1].t:B0)+320;
   const P={walk:650,gline:800,offer:1700,meet:2000,tline:2500,rise:3000,top:3700,burst,apply:burst+120,hug:burst+500,home:burst+1300,end:burst+2000};
-  const sky={x:GR.x,y:Math.max(64,GR.top-70)};
+  const sky={x:GR.x,y:Math.max(64,GR.top-70)},tbl={x:mx,y:by-24};
   const sT={x:T.x,b:T.base,f:tsp.idle},sG={x:gx,b:by,f:gsp.flip};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
@@ -1586,52 +1585,63 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     sG.x=x; sG.b=y; sG.f=f; return {cx:x,base:y,frame:f}; });
   const shade=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
   // Behind everyone: twilight and a few stars.
-  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=shade(ms); if(k<=0) return; dim(k,'#1a1640',.62);
-    for(let j=0;j<14;j++) { const tw=.5+.5*Math.sin(ms/300+j*1.7); gfx.globalAlpha=k*tw; star((j*83+31)%560+8,18+(j*47)%120,2+(j%3),j%2?'#fffbe6':GOLD); } gfx.globalAlpha=1; }});
+  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=shade(ms); if(k<=0) return; dim(k,'#3a1f4a',.4); gfx.globalAlpha=1; }});
+  const GEMC=['#ff8fd0','#aef0ff','#ffe27a','#fffbe6','#b9a0ff'];
+  const gems=(x,y,rx,ry,n2,ms,a)=>{ for(let j=0;j<n2;j++) { const ang=j*2.399,rr=.35+((j*37)%10)/16,tw=.55+.45*Math.sin(ms/110+j*2.3); gfx.globalAlpha=a*tw; R(Math.round(x+Math.cos(ang)*rx*rr)-1,Math.round(y+Math.sin(ang)*ry*rr)-1,3,3,GEMC[j%5]); } gfx.globalAlpha=1; };
+  const bzStar=(x,y,sc,a,sq,g,ms)=>{ const r=14*sc,w=1+sq*.35,h=1-sq*.3; gfx.save(); gfx.translate(x,y); gfx.scale(w,h); gfx.globalAlpha=a;
+    if(g>0) { gfx.globalAlpha=a*.25*g; E(0,0,r*1.5,r*1.4,'#ffe9f6'); gfx.globalAlpha=a; }
+    star(0,0,r,g>.5?'#ffd0ec':'#d9d2c0'); gfx.restore(); if(g>0) gems(x,y,r*.7,r*.7,Math.round(g*16),ms,a); gfx.globalAlpha=1; };
   // Where the memory is at any moment (null when not shown), and its squash.
   const gh=()=>handPt(gsp,sG.f,sG.x,sG.b,1),th=()=>handPt(tsp,sT.f,sT.x,sT.b,-1);
   const memAt=ms=>{ if(ms<P.walk+100||ms>P.burst) return null;
-    const a=ez(seg(ms,P.walk+100,P.walk+500));
-    if(ms<P.offer) { const h=gh(); return {x:h.x+4,y:h.y-6,sc:.7,a,sq:0}; }
-    if(ms<P.rise) { const h=gh(),t2=th(),k=ez(seg(ms,P.offer,P.meet)),x=lerp(h.x+4,(h.x+t2.x)/2,k),y=lerp(h.y-4,Math.min(h.y,t2.y)-6,k); return {x,y,sc:.7+.06*Math.sin(ms/120),a,sq:0}; }
-    const h0={x:(gh().x+th().x)/2,y:Math.min(gh().y,th().y)-6};
-    if(ms<P.top) { const k=seg(ms,P.rise,P.top),e=ez(k); return {x:lerp(h0.x,sky.x,e),y:lerp(h0.y,sky.y,e)+Math.sin(k*8)*4,sc:lerp(.7,2.2,e),a:1,sq:0}; }
+    const a=ez(seg(ms,P.walk+100,P.walk+500)),g=ez(seg(ms,P.meet,P.rise+200));
+    if(ms<P.rise) return {x:tbl.x,y:tbl.y-12,sc:.8+.04*Math.sin(ms/120),a,sq:0,g};
+    const h0={x:tbl.x,y:tbl.y-12};
+    if(ms<P.top) { const k=seg(ms,P.rise,P.top),e=ez(k); return {x:lerp(h0.x,sky.x,e),y:lerp(h0.y,sky.y,e)+Math.sin(k*8)*4,sc:lerp(.8,2.2,e),a:1,sq:0,g:1}; }
     // bounces: from the sky (or the last monster) to the top of each monster in turn, a squash at each landing
     let px=sky.x,py=sky.y,t0=P.top;
     for(const o of order) { const ly=o.q.top-16;
-      if(ms<o.t) { const k=seg(ms,t0,o.t); return {x:lerp(px,o.q.x,k),y:lerp(py,ly,k)-Math.sin(k*Math.PI)*70,sc:2.2,a:1,sq:k>.85?(k-.85)/.15*.5:0}; }
+      if(ms<o.t) { const k=seg(ms,t0,o.t); return {x:lerp(px,o.q.x,k),y:lerp(py,ly,k)-Math.sin(k*Math.PI)*70,sc:2.2,a:1,sq:k>.85?(k-.85)/.15*.5:0,g:1}; }
       px=o.q.x; py=ly; t0=o.t; }
-    const k=seg(ms,t0,P.burst); return {x:lerp(px,GR.x,k),y:lerp(py,sky.y+10,ez(k))-Math.sin(k*Math.PI)*40,sc:2.2+k*.6,a:1,sq:k<.2?.5*(1-k/.2):0}; };
+    const k=seg(ms,t0,P.burst); return {x:lerp(px,GR.x,k),y:lerp(py,sky.y+10,ez(k))-Math.sin(k*Math.PI)*40,sc:2.2+k*.6,a:1,sq:k<.2?.5*(1-k/.2):0,g:1}; };
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
-    // the pillar of gold light where their hands meet
-    if(ms>P.meet&&ms<P.rise+500) { const k=ez(seg(ms,P.meet,P.meet+250))*(1-ez(seg(ms,P.rise,P.rise+500))),h=th(),g2=gh(),x=(h.x+g2.x)/2,y=Math.min(h.y,g2.y);
-      const w=18+6*Math.sin(ms/70); gfx.globalAlpha=.35*k; R(x-w,0,w*2,y,'#ffe9a0'); gfx.globalAlpha=.6*k; R(x-w*.45,0,w*.9,y,'#fffbe6'); gfx.globalAlpha=1;
-      for(let j=0;j<5;j++) { const q=(ms/600+j/5)%1; gfx.globalAlpha=k*(1-q); star(x+Math.sin(j*2.1+ms/300)*w,y-q*y,2+j%3,j%2?GOLD:'#fffbe6'); } gfx.globalAlpha=1; }
-    const m=memAt(ms); if(m) memory(m.x,m.y,m.sc,m.a,m.sq);
+    // the craft table, with a glue gun in Tom's hand once Grace hands it over
+    if(ms>P.walk&&ms<P.home) { const k=ez(seg(ms,P.walk,P.walk+300))*(1-ez(seg(ms,P.rise+400,P.rise+800))); gfx.globalAlpha=k;
+      R(tbl.x-30,tbl.y,60,5,'#c98a4a'); R(tbl.x-30,tbl.y+5,60,2,'#8a5a2a'); R(tbl.x-26,tbl.y+7,4,by-tbl.y-7,'#8a5a2a'); R(tbl.x+22,tbl.y+7,4,by-tbl.y-7,'#8a5a2a');
+      R(tbl.x-24,tbl.y-3,6,3,'#ff8fd0'); R(tbl.x+16,tbl.y-3,6,3,'#aef0ff'); R(tbl.x+8,tbl.y-2,5,2,'#ffe27a'); gfx.globalAlpha=1; }
+    if(ms>P.offer&&ms<P.rise+300) { const h=th(),k=ez(seg(ms,P.offer,P.offer+250))*(1-ez(seg(ms,P.rise,P.rise+300)));
+      gfx.globalAlpha=k; R(h.x-9,h.y-5,11,6,'#f0a030'); R(h.x-9,h.y+1,4,6,'#c07818'); R(h.x+2,h.y-3,5,2,'#d8d8d8');
+      if(ms>P.meet) { gfx.globalAlpha=k*(.6+.4*Math.sin(ms/60)); R(h.x+7,h.y-4,3,3,'#fffbe6'); }
+      gfx.globalAlpha=1; }
+    if(ms>P.meet&&ms<P.rise+500) { const k=ez(seg(ms,P.meet,P.meet+250))*(1-ez(seg(ms,P.rise,P.rise+500)));
+      for(let j=0;j<6;j++) { const q=(ms/500+j/6)%1; gfx.globalAlpha=k*(1-q); star(tbl.x+Math.cos(j*1.9+ms/250)*(14+q*16),tbl.y-14-q*26,2+j%3,j%2?GOLD:'#ff8fd0'); } gfx.globalAlpha=1; }
+    const m=memAt(ms); if(m) bzStar(m.x,m.y,m.sc,m.a,m.sq,m.g,ms);
+    // rhinestones stuck on every monster the star has bounced on
+    for(const o of order) if(ms>o.t&&ms<P.home+300) gems(o.q.x,o.q.mid,o.q.w*.4,o.q.h*.4,12,ms,1-ez(seg(ms,P.home-200,P.home+300)));
     // after the burst: diamond sparkles rain from the sky over the whole family
     if(ms>P.burst&&ms<P.home+400) { const k=seg(ms,P.burst,P.home+400);
       for(let j=0;j<30;j++) { const a=(j*0.618)%1,x0=sky.x,x1=lerp(GR.x0,560,a),q=cl(k*1.4-(j%6)*.06); if(q<=0||q>=1) continue;
-        gfx.globalAlpha=q>.8?(1-q)/.2:1; star(lerp(x0,x1,q),lerp(sky.y,300,q*q)+Math.sin(j+ms/200)*4,2+(j%3)*1.5,j%3===0?'#aef0ff':(j%3===1?GOLD:'#fffbe6')); } gfx.globalAlpha=1; }
+        gfx.globalAlpha=q>.8?(1-q)/.2:1; star(lerp(x0,x1,q),lerp(sky.y,300,q*q)+Math.sin(j+ms/200)*4,2+(j%3)*1.5,GEMC[j%5]); } gfx.globalAlpha=1; }
     // hearts over the side hug
     if(ms>P.hug+200&&ms<P.home) for(let j=0;j<3;j++) { const q=((ms-P.hug)/900+j/3)%1; gfx.globalAlpha=1-q; heart(sT.x-12+j*10,sT.b-TH-8-q*30,4+j%2*2,PINK); }
     gfx.globalAlpha=1; bars(ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.end-100)))); }});
   const steps=[
-    [0,()=>{ setMessage('TOMBO! The Golden Dumpling Wish.'); B2.aim=null; S('levelChime'); }],
-    [P.walk+100,()=>{ S('heal'); setMessage('Grace holds a glowing memory of her gold dumpling close.'); }],
+    [0,()=>{ setMessage('TOMBO! Bedazzle Everything.'); B2.aim=null; S('levelChime'); }],
+    [P.walk+100,()=>{ S('heal'); setMessage('A craft table. A very plain star. Grace has the rhinestones.'); }],
     [P.gline,()=>{ say('grace','tombo3'); }],
-    [P.offer,()=>{ setMessage('She puts it into Tom’s hands.'); }],
-    [P.meet,()=>{ S('chime2'); S('fanfare'); word('WISH',(gx+tx)/2,Math.max(60,by-GH-70),GOLD,4,1); }],
+    [P.offer,()=>{ setMessage('She hands Tom the glue gun.'); }],
+    [P.meet,()=>{ S('chime2'); S('fanfare'); word('GLUE!',(gx+tx)/2,Math.max(60,by-GH-70),GOLD,4,1); }],
     [P.tline,()=>{ say('tom','tombograce3'); }],
-    [P.rise,()=>{ S('slideWhistle'); setMessage('The wish floats up. It grows. It glows.'); }],
-    [P.burst,()=>{ S('levelChime'); S('fanfare'); scene('tb_rings',.9,{x:GR.x,y:sky.y+10,r:120,c:GOLD,w:4}); word('SHINE!',GR.x,Math.max(56,sky.y-50),GOLD,6,1.2); }],
+    [P.rise,()=>{ S('slideWhistle'); setMessage('The star is covered. It floats up. It grows.'); }],
+    [P.burst,()=>{ S('levelChime'); S('fanfare'); scene('tb_rings',.9,{x:GR.x,y:sky.y+10,r:120,c:GOLD,w:4}); word('BEDAZZLED!',GR.x,Math.max(56,sky.y-50),'#ff8fd0',5,1.2); }],
     [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sG.x,mid:sG.b-GH*.5}:ST.unit(p)); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
     [P.hug,()=>{ S('kiss'); setMessage('Grace gives Tom a big hug. He hugs back.'); }],
   ];
-  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('boing'); ST.jolt(o.f,.6); battle.shakeEnemy=.4; scene('tb_rings',.6,{x:o.q.x,y:o.q.top,r:44,c:GOLD,w:3});
+  order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('boing'); ST.jolt(o.f,.6); battle.shakeEnemy=.4; S('chime2'); scene('tb_rings',.6,{x:o.q.x,y:o.q.top,r:44,c:GOLD,w:3});
       word(['BOING!','BOP!','BOUNCE!','BOING!!'][i%4],o.q.x,i%2?66:40,'#fffbe6',4,.4);
       landHit(Math.floor(100/order.length)+(i<100%order.length?1:0)); }]); });
   steps.push(['hf',order.length?order[0].t:P.burst]);
-  steps.push([P.end,'end',()=>(E2.result||'')+' The memory of the dumpling was enough. It always is.']);
+  steps.push([P.end,'end',()=>(E2.result||'')+' There\'s glitter on everything. There\'ll be glitter forever.']);
   ST.play(E2,steps);
 };
 
@@ -1826,7 +1836,7 @@ B2_TOMBO_ANIM.amy3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   ];
   HIT.forEach((h,i)=>{ steps.push([h,()=>{ S('whoosh'); }]); steps.push([h+220,()=>{ S('crash'); S('bonk'); ST.jolt(tgt,.5); battle.shakeEnemy=.35; word(FL[i],q.x,i%2?66:40,i%2?'#ffb0a0':'#dff0fa',4,i===4?.3:.4); landHit(12); }]); });
   steps.push(['hf',P.hit]);
-  steps.push([P.end,'end',()=>{ tgt.ox=0; tgt.oy=0; tgt.fsc=0; tgt.spin=0; return (E2.result||'')+' A dead heat. They will argue about it for years.'; }]);
+  steps.push([P.end,'end',()=>{ tgt.ox=0; tgt.oy=0; tgt.fsc=0; tgt.spin=0; return (E2.result||'')+' A dead heat. They\'ll argue about it for years.'; }]);
   ST.play(E2,steps);
 };
 
@@ -2349,7 +2359,7 @@ B2_TOMBO_ANIM.ff1=E2=>{ B2.aim=null;
     [P.nline,()=>{ say('tnb','ff1'); }],
     [P.eek-150,()=>{ S('creak'); }],
     [P.eek,()=>{ S('boo'); word('EEK!',spot.grace.x,66,'#fffbe6',4,.5); }],
-    [P.grow0,()=>{ S('rumble'); setMessage('The fort keeps growing. It is a castle now.'); }],
+    [P.grow0,()=>{ S('rumble'); setMessage('The fort keeps growing. It\'s a castle now.'); }],
     [P.wob,()=>{ S('creak'); }],
     [T0,()=>{ S('slideWhistle'); setMessage('And it topples right onto the monsters!'); }],
     [T1,()=>{ S('crash'); battle.shakeEnemy=.7; word('FLUMP!',GR.x,52,'#fffbe6',6,1); }],
@@ -2714,7 +2724,7 @@ B2_TOMBO_ANIM.ff4=E2=>{ B2.aim=null;
   ];
   hits.forEach((o,i)=>{ steps.push([o.t,()=>{ S('thud'); ST.jolt(o.f,.5); scene('tb_rings',.5,{x:o.hx,y:o.hy,r:44,c:GOLD,w:3}); landHit(split100(i,hits.length)); }]); });
   steps.push(['hf',hits.length?hits[0].t:P.clink]);
-  steps.push([P.end,'end',()=>{ if(guest) { guest.f.ox=0; guest.f.oy=0; guest.f.spin=0; } return (E2.result||'')+' There is always room for one more.'; }]);
+  steps.push([P.end,'end',()=>{ if(guest) { guest.f.ox=0; guest.f.oy=0; guest.f.spin=0; } return (E2.result||'')+' There\'s always room for one more.'; }]);
   ST.play(E2,steps);
 };
 // ================= Director's Cuts (tombo-review.md DC column) =================
@@ -2961,13 +2971,13 @@ B2_TOMBO_ANIM.amy1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       if(ms<P.splat+500) for(let j=0;j<5;j++) { const q=seg(ms,P.splat,P.splat+500),an=-.6-j*.5; E(face.x+Math.cos(an)*q*50,face.y+Math.sin(an)*q*40+q*q*30,3,2,'#fffaf0'); } }
   }});
   const steps=[
-    [0,()=>{ setMessage('DIRECTOR’S CUT! Coach Amy has a whistle. It is field day.'); B2.aim=null; S('click'); }],
+    [0,()=>{ setMessage('DIRECTOR’S CUT! Coach Amy has a whistle. It\'s field day.'); B2.aim=null; S('click'); }],
     [P.tweet,()=>{ S('toot'); word('TWEET!',ax0+10,Math.max(80,ab-AH-40),CREAM,4,.7); }],
     [P.aline,()=>{ say('amy','dc1'); }],
     [P.go-200,'Tom draws the egg-and-spoon race.'],
     [P.go,()=>{ word('GO!',ax0-40,40,GOLD,5,.8); S('ding'); }],
     [P.tline,()=>{ say('tom','dcamy1'); setMessage('Tom walks it very, very carefully.'); }],
-    [P.run,()=>{ S('whoosh'); setMessage('Amy is not walking. Amy is sprinting.'); }],
+    [P.run,()=>{ S('whoosh'); setMessage('Amy isn\'t walking. Amy is sprinting.'); }],
     [P.bump,()=>{ S('bump'); S('boing'); word('BUMP!',bumpX,Math.max(90,sb-TH-40),PINK,4,.6); }],
     [P.fly+150,()=>{ S('slideWhistle'); }],
     [P.splat,()=>{ S('squeak'); S('thud'); ST.jolt(tgt,.5); battle.shakeEnemy=.4; word('SPLAT!',face.x,40,'#ffd24a',5,.9);
@@ -2975,7 +2985,7 @@ B2_TOMBO_ANIM.amy1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       landHit(100); }],
     ['hf',P.splat],
     [P.tape,()=>{ S('fanfare'); word('1ST!',fin,Math.max(96,ab-AH-44),GOLD,5,1.1); scene('confetti',1.3,{x0:fin-90,x1:fin+90,n:26}); }],
-    [P.tape+300,'Amy wins. The egg does not.'],
+    [P.tape+300,'Amy wins. The egg doesn\'t.'],
     [P.apply,()=>{ E2.apply(); S('heal'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sA.x,y:sA.b-AH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:GOLD,a:.35});
       for(const p of b2LiveParty()) if(p!==tom&&p!==pt) glowOn(p); }],
     [P.end,'end',()=>(E2.result||'')+' Amy is still doing a victory lap.']];
@@ -3467,13 +3477,13 @@ B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [0,()=>{ setMessage('DIRECTOR’S CUT! Judge Grace is in session. Tom is up first.'); B2.aim=null; S('whoosh'); }],
     [P.try0,()=>{ setMessage('Tom attempts a cartwheel.'); }],
     [P.tip,()=>{ S('creak'); }],
-    [P.flop,()=>{ S('thud'); word('FLOP.',lie,Math.max(80,sb-TH-10),CREAM,4,.9); setMessage('It is not a cartwheel. It is a tip-over.'); }],
+    [P.flop,()=>{ S('thud'); word('FLOP.',lie,Math.max(80,sb-TH-10),CREAM,4,.9); setMessage('It\'s not a cartwheel. It\'s a tip-over.'); }],
     [P.card,()=>{ S('ding'); }],
     [P.gline,()=>{ say('grace','dc2'); }],
     [P.laugh,()=>{ S('giggle'); word('HA HA HA!',GR.x,40,'#ffffff',4,1); setMessage('The monsters laugh so hard they forget to defend.'); }],
     [P.laugh+700,()=>{ word('LOL',GR.x,66,'#ffd2a0',3,.7); }],
     [P.tline,()=>{ say('tom','dcgrace2'); }],
-    [P.hop,()=>{ S('boing'); setMessage('Grace shows him how it is done.'); }],
+    [P.hop,()=>{ S('boing'); setMessage('Grace shows him how it\'s done.'); }],
     [P.cw1,()=>{ S('whoosh'); }],
     [P.cw2,()=>{ S('whoosh'); word('OVER!',tx,Math.max(70,sb-TH-60),PINK,3,.6); }],
     [P.hit,()=>{ S('thud'); S('bonk'); battle.shakeEnemy=.8; battle.flashEnemy=.3; for(const f of row) ST.jolt(f,f===front?.7:.45);
@@ -3660,7 +3670,7 @@ B2_TOMBO_ANIM.amy2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.tline,()=>{ say('tom','dcamy2'); }],
     [P.let,()=>{ S('slideWhistle'); word('NOPE.',tx,40,CREAM,4,.8); }],
     [P.land,()=>{ S('clang'); S('thud'); ST.jolt(tgt,.5); battle.shakeEnemy=.6; word('CLANG!',F.x,66,'#dfe6f2',5,.9); scene('tb_rings',.6,{x:F.x,y:F.top+10,r:60,c:'#dfe6f2',w:3});   // no landHit: no damage, no kindness; effects wait for the water break
-      setMessage('Gravity drops it right on the monster. It is too busy holding a kettlebell to attack.'); }],
+      setMessage('Gravity drops it right on the monster. It\'s too busy holding a kettlebell to attack.'); }],
     ['hf',P.land],
     [P.stare,()=>{ S('creak'); }],
     [P.apply,()=>{ E2.apply(); S('heal'); setMessage('Fine. Water break. Everybody hydrate.'); for(const q of [{x:sT.x,y:sT.b-TH*.45},{x:sA.x,y:sA.b-AH*.45}]) scene('glow',.9,{x:q.x,y:q.y,rx:38,ry:52,c:'#86a9ff',a:.35});
@@ -3797,7 +3807,7 @@ B2_TOMBO_ANIM.deedee2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       for(const p of party) if(p!==tom&&p!==pt) glowOn(p); }],
     [P.shrink,()=>{ S('slideWhistle'); }],
     [P.lift2,()=>{ setMessage('Back to a lantern. A very, very shiny lantern.'); }],
-    [P.end,'end',()=>(E2.result||'')+' Deedee says now it is clean.']];
+    [P.end,'end',()=>(E2.result||'')+' Deedee says now it\'s clean.']];
   o3.slice().sort((a,b)=>b.q.x-a.q.x).forEach((o,i,arr)=>{ const t=passAt(o.q.x,-1);
     steps.push([t,()=>{ S('chime2'); ST.jolt(o.f,.2); scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:GOLD,w:3});
       for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*18,y1:o.q.top-24,arc:10,spin:false,r:6,t:-j*.05,dur:.7});
@@ -3894,7 +3904,7 @@ B2_TOMBO_ANIM.boppy2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.bline,()=>{ say('boppy','dc2'); }],
     [P.tug1,()=>{ S('squeak'); setMessage('Boppy tries to fix it. It gets worse.'); }],
     [P.tug2,()=>{ S('squeak'); S('sulk'); word('WORSE.',bxAt(P.tug2),Math.max(80,sb-BH-30),CREAM,3,.6); setMessage('Bigger. Much worse.'); }],
-    [P.tug3,()=>{ S('squeak'); word('WORSER.',bxAt(P.tug3),Math.max(80,sb-BH-30),CREAM,3,.6); setMessage('It is the size of a beach ball now.'); }],
+    [P.tug3,()=>{ S('squeak'); word('WORSER.',bxAt(P.tug3),Math.max(80,sb-BH-30),CREAM,3,.6); setMessage('It\'s the size of a beach ball now.'); }],
     [P.tline,()=>{ say('tom','dcboppy2'); }],
     [P.roll,()=>{ S('whoosh'); setMessage('The whole tangle rolls off the rod.'); }],
     [P.wrap,()=>{ S('reel'); S('thud'); ST.jolt(tgt,.4); }],
@@ -4001,7 +4011,7 @@ B2_TOMBO_ANIM.tnb2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       if(ms>P.slam&&ms<P.slam+1000) for(let j=0;j<3;j++) { const a=ms/240+j*2.1; star(o.q.x+f.ox+Math.cos(a)*o.q.w*.36,o.q.top-10+Math.sin(a)*5,4,j%2?GOLD:'#fffbe6'); } });
   }});
   const steps=[
-    [0,()=>{ setMessage('DIRECTOR’S CUT! The last train home. It is already here.'); B2.aim=null; S('rumble'); }],
+    [0,()=>{ setMessage('DIRECTOR’S CUT! The last train home. It\'s already here.'); B2.aim=null; S('rumble'); }],
     [1150,()=>{ S('chime2'); word('DING DONG',dX-40,Math.max(80,top-16),CREAM,3,.8); }],
     [P.close0,()=>{ S('creak'); setMessage('Stand clear of the closing doors.'); }],
     [P.run0+100,()=>{ S('whoosh'); }],
@@ -4026,7 +4036,7 @@ B2_TOMBO_ANIM.tnb2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   steps.push([P.apply,()=>{ landHit(100); E2.apply(); S('heal'); S('chime2'); setMessage('Home. The monsters cool right off, and everybody shakes off the day.');
     for(const o of o3) scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:PINK,w:3});
     for(const p of party) { const q2=ST.unit(p); scene('glow',.9,{x:q2.x,y:q2.mid,rx:38,ry:52,c:'#ffd6a0',a:.35}); } }]);
-  steps.push([P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.fsc=0; o.f.spin=0; } return (E2.result||'')+' Tom says he did not run. He hurried.'; }]);
+  steps.push([P.end,'end',()=>{ for(const o of o3) { o.f.ox=0; o.f.oy=0; o.f.fsc=0; o.f.spin=0; } return (E2.result||'')+' Tom says he didn\'t run. He hurried.'; }]);
   ST.play(E2,steps);
 };
 // ---------- Nara, No! (Tom + Nara, Director's Cut of tier 2) ----------
@@ -4090,7 +4100,7 @@ B2_TOMBO_ANIM.nara2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.z0,()=>{ S('whoosh'); S('bark'); word('ZOOMIES!',GR.x,40,GOLD,5,1); setMessage('ZOOMIES. She tears around the room.'); }],
     [P.tline,()=>{ say('tom','dcnara2'); }],
     [P.z1,()=>{ S('brakes'); }],
-    [P.sit,()=>{ S('bark'); E2.apply(); setMessage('She stops. She sits. She is extremely proud of herself.'); }],
+    [P.sit,()=>{ S('bark'); E2.apply(); setMessage('She stops. She sits. She\'s extremely proud of herself.'); }],
     [P.good,()=>{ S('chime2'); word('GOOD GIRL.',(sT.x+sitX)/2,Math.max(80,sb-TH-34),PINK,3,.9); }],
     [P.end,'end',()=>{ for(const o of o3) { o.f.spin=0; o.f.oy=0; o.f.ox=0; } return (E2.result||'')+' Tom says that was a no. Nara heard a yes.'; }]];
   toms.slice(0,NO.length).forEach((p,i)=>steps.push([p.t,()=>{ word(NO[i],tx,i%2?Math.max(80,sb-TH-40):Math.max(96,sb-TH-24),CREAM,3,.55); }]));
@@ -4307,7 +4317,7 @@ B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [G0,()=>{ S('levelChime'); }],
     [P.glow,()=>{ S('fanfare'); word('GLOW!',LF.x,40,GOLD,5,.9); setMessage('Lamby glows brighter. And brighter.'); }],
     [G1-150,()=>{ word('SHOO!',GR.x,66,'#fffbe6',4,.7); setMessage('The dark runs away, and the monsters run with it.'); }],
-    [P.back,()=>{ S('step'); setMessage('They creep back in. It is much less scary with the light on.'); }],
+    [P.back,()=>{ S('step'); setMessage('They creep back in. It\'s much less scary with the light on.'); }],
     [P.backEnd,()=>{ S('chime2'); for(const o of o3) { scene('tb_rings',.6,{x:o.q.x,y:o.q.mid,r:40,c:PINK,w:3}); for(let j=0;j<3;j++) battle.props.push({kind:'dheart',x0:o.q.x,y0:o.q.mid,x1:o.q.x+(j-1)*18,y1:o.q.top-26,arc:10,spin:false,r:6,t:-j*.06,dur:.7}); }
       landHit(100); }],
     [P.apply,()=>{ E2.apply(); S('heal'); for(const p of party) { const q=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sT.x,mid:sT.b-TH}:ST.unit(p)); scene('glow',1,{x:q.x,y:q.mid,rx:38,ry:52,c:GOLD,a:.4}); } }],
@@ -4679,7 +4689,7 @@ B2_TOMBO_ANIM.boppy3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     steps.push([rT(i)+420,()=>{ word(['HOT.','HOTTER.','HOTTEST.','HELP.'][i],tx,Math.max(60,by-TH-34),['#ffd04a','#ffb03a','#ff7a2a','#ff4a3a'][i],3,.45); }]); }
   order.forEach((o,i)=>{ steps.push([o.t,()=>{ S('bonk'); ST.jolt(o.f,.6); scene('tb_rings',.5,{x:o.q.x,y:o.q.mid,r:46,c:'#ffb02a',w:3}); landHit(split100(i,order.length)); }]); });
   steps.push(['hf',order.length?order[0].t:P.fire]);
-  steps.push([P.end,'end',()=>(E2.result||'')+' Tom still cannot feel his face.']);
+  steps.push([P.end,'end',()=>(E2.result||'')+' Tom still can\'t feel his face.']);
   ST.play(E2,steps);
 };
 
@@ -4801,7 +4811,7 @@ B2_TOMBO_ANIM.tnb3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.apply,()=>{ E2.apply(); S('heal'); setMessage('A gold glow settles over the family.');
       for(const p of party) { const q2=p===tom?{x:sT.x,mid:sT.b-TH*.5}:(p===pt?{x:sN.x,mid:sN.b-NH*.5}:ST.unit(p)); scene('glow',1.1,{x:q2.x,y:q2.mid,rx:40,ry:54,c:GOLD,a:.45}); } }],
     [P.kiss,()=>{ S('kiss'); }],
-    [P.end,'end',()=>(E2.result||'')+' Now it is theirs.']];
+    [P.end,'end',()=>(E2.result||'')+' Now it\'s theirs.']];
   ST.play(E2,steps);
 };
 
@@ -4901,7 +4911,7 @@ B2_TOMBO_ANIM.nara3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.nline,()=>{ say('nara','dc3'); }],
     [P.wig0,()=>{ S('jangle'); word('WAG WAG',fc,Math.max(60,tY-TH*.7-20),CREAM,3,.6); setMessage('Nara gets VERY excited.'); }],
     [P.pop,()=>{ S('boing'); S('bark'); word('POP!',nMid,Math.max(56,tY-90),GOLD,5,.6); }],
-    [P.fly,()=>{ S('whoosh'); setMessage('The tablecloth flies off. The plates do not move.'); }],
+    [P.fly,()=>{ S('whoosh'); setMessage('The tablecloth flies off. The plates don\'t move.'); }],
     [P.land,()=>{ S('step'); }],
     [P.drape,()=>{ S('thud'); battle.shakeEnemy=.5; word('FLUMP!',Math.max(90,gx),40,CREAM,5,.9); setMessage('It lands over every monster like a net.'); }],
     ['hf',P.hit],
@@ -5055,7 +5065,7 @@ B2_TOMBO_ANIM.ff2_dc=E2=>{ B2.aim=null;
     [P.tip,()=>{ S('rumble'); setMessage('The tower leans.'); }],
     [P.fly,()=>{ S('whoosh'); word('TIMBER!',tx,50,CREAM,4,.8); setMessage('It tips onto the monsters.'); }],
     [P.apply,()=>{ E2.apply(); S('heal'); dcGlow(E2,st,H,GOLD); }],
-    [P.end,'end',()=>(E2.result||'')+' Mom says it is the best breakfast ever. The monsters agree.']];
+    [P.end,'end',()=>(E2.result||'')+' Mom says it\'s the best breakfast ever. The monsters agree.']];
   dcFoeBurst(steps,o3,P.hit,70,'splat','#ffd9a0',()=>landHit(100));
   ST.play(E2,steps);
 };
@@ -5105,7 +5115,7 @@ B2_TOMBO_ANIM.ff3_dc=E2=>{ B2.aim=null;
     [P.dline,()=>{ say('deedee','dcff3'); }],
     [P.stop,()=>{ S('chime'); setMessage('They stop. Fireflies come out.'); }],
     [P.apply,()=>{ E2.apply(); S('heal'); dcGlow(E2,st,H,GOLD); }],
-    [P.end,'end',()=>(E2.result||'')+' Boppy’s feet hurt. He will say it was worth it.']];
+    [P.end,'end',()=>(E2.result||'')+' Boppy’s feet hurt. He\'ll say it was worth it.']];
   dcFoeBurst(steps,o3,P.burst+500,90,'chime2','#fff2a0',()=>landHit(100));
   ST.play(E2,steps);
 };

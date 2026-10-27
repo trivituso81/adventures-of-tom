@@ -13,7 +13,7 @@ const DV={src:null,token:0,cache:new Map(),page:-1,playing:false,pendingSay:[]};
 function dvVoiceOf(name) { return DIALOG_CAST.speakers[String(name||'').trim()]||null; }
 function dvClip(name,text) {
   const v=dvVoiceOf(name); if(!v||typeof text!=='string') return null;
-  return DIALOG_CLIPS.clips[v+'|'+text]||null;
+  return DIALOG_CLIPS.clips[v+'|'+text]||(typeof CONTRACT_OLD!=='undefined'&&CONTRACT_OLD[text]&&DIALOG_CLIPS.clips[v+'|'+CONTRACT_OLD[text]])||null;
 }
 function dvStop() {
   DV.token++; DV.playing=false;

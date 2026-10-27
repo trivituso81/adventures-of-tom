@@ -21,6 +21,8 @@ const chselRegion=n=>n%2===0&&n<10?'la':'le';
 function chselStateBefore(n) {
   const flags={'opening-done':true},gives=[];
   if(n>=3) Object.assign(flags,{'met-tnb':true,'met-nara':true,'visited-la':true});   // chapter 2 met them in LA
+  // The opening scene (SCENES.opening, not a ch-numbered scene) is where Rose's and Grace's first Tombos unlock.
+  Object.assign(flags,{'saw-squishy':true,'tombo:rose1':true,'tombo:grace1':true});
   const take=(k,v)=>{ if(!k||k==='goal'||v==='pending'||v===false||v===null) return; flags[k]=v===undefined?true:v; };
   const fromSource=fn=>{ for(const m of String(fn).matchAll(/setFlag\(\s*'([^']+)'\s*(?:,\s*'([^']*)')?/g)) take(m[1],m[2]); };
   const walk=x=>{

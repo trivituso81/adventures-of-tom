@@ -34,7 +34,7 @@ function say(id,kind,delay=0,only=null) {
   const baked=VOICE_CLIPS&&VOICE_CLIPS.clips&&VOICE_CLIPS.clips[id]&&VOICE_CLIPS.clips[id][fkind];
   // Pick the line first, then play its own clip if baked; an unbaked line is synthesized so every line gets heard.
   const line=only&&LINES[id][fkind].includes(only)?only:pick(LINES[id][fkind]);
-  const allowed=new Set([line]);
+  const allowed=new Set([line]); if(typeof CONTRACT_OLD!=='undefined'&&CONTRACT_OLD[line]) allowed.add(CONTRACT_OLD[line]);   // a contracted line plays its old baked clip
   let bakedClips=baked?baked.filter(c=>c&&allowed.has(c.text)):[];
   // Same words already baked under another kind (a shout reused from a hurt line, say) count too.
   if(!bakedClips.length&&VOICE_CLIPS&&VOICE_CLIPS.clips&&VOICE_CLIPS.clips[id])
@@ -42,7 +42,7 @@ function say(id,kind,delay=0,only=null) {
   const go=()=>{
     if(bakedClips.length) { if(playClip(pick(bakedClips))) return; }
     const part=typeof CLIP_PARTS!=='undefined'&&CLIP_PARTS[id]&&CLIP_PARTS[id][line];
-    if(part) { const all=VOICE_CLIPS.clips[id]||{}; for(const k in all) { const src=all[k].find(c=>c&&c.text===part.text); if(src&&playClip(src,part)) return; } }
+    if(part) { const all=VOICE_CLIPS.clips[id]||{}; const pt=(typeof CONTRACT_OLD!=='undefined'&&CONTRACT_OLD[part.text])||part.text; for(const k in all) { const src=all[k].find(c=>c&&(c.text===part.text||c.text===pt)); if(src&&playClip(src,part)) return; } }
     if('speechSynthesis'in window) {
       try {
         const u=new SpeechSynthesisUtterance(line);
