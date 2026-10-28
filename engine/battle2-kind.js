@@ -2908,7 +2908,13 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,TH=tsp.idle.length*tsp.scale,RS=BATTLE_SPRITES.rose.scale,RIDE=ROSE_RIDE.bt_idle;
   const tx=cl(GR.x1+140,GR.x1+110,500),sb=cl(GR.base+4,236,300);
-  const P={hop:500,walk:520,arrive:1150,cloud:1100,still:1800,tline:1650,tb0:1650,tb1:2800,rline:2850,rb0:2850,rb1:3950,morph:3900,morphEnd:4550,word:4400,fall:4650,sit:5050,apply:5200,puff:5750,puffEnd:6250,home:5850,end:6650};
+  // Timing follows the two voice clips so the lines never talk over each other. Measured speech inside each clip (ms):
+  // Tom "That cloud is clearly a sourdough loaf." speaks 146 to 2839; Rose "No! It's Lamby!" speaks 153 to 2043.
+  // Rose starts BEAT ms after Tom's last word, and the cloud starts to morph as she says "Lamby!". Spans that wait on a
+  // voice are multiplied by the battle speed K, because the timeline runs K times faster than the audio (engine/main.js).
+  const K=b7Speed(),TOM_SPEAK=2839,ROSE_LEAD=153,ROSE_SPEAK=2043,BEAT=450,tl=1650;
+  const rl=tl+(TOM_SPEAK+BEAT-ROSE_LEAD)*K,mo=rl+(ROSE_SPEAK-280)*K;
+  const P={hop:500,walk:520,arrive:1150,cloud:1100,still:1800,tline:tl,tb0:tl,tb1:tl+3000*K,rline:rl,rb0:rl,rb1:mo+520,morph:mo,morphEnd:mo+650,word:mo+500,fall:mo+750,sit:mo+1150,apply:mo+1300,puff:mo+1850,puffEnd:mo+2350,home:mo+1950,end:mo+2750};
   const LS=3.3,sky={x:cl(F.x,90,480),y:Math.max(78,F.top-82)},seat={x:F.x+4,y:Math.max(70,F.top+F.h*.38-17*LS)};
   const sT={x:0,b:0},seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
   const st0=startOf(pt);
