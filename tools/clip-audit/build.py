@@ -96,6 +96,13 @@ if os.path.exists('dd-orig-scripts.json'):
         else:
             if ('deedee',t) in have_b: continue
             battle.append(dict(key='deedee|'+x['kind']+'|'+t,ch='deedee',kind=x['kind'],text=t,tag='rebake',note=note,script=sc,hand=bool(o),dd=True))
+
+# ---- battle lines never recorded (found 2026-10-28 while checking chapter 8) ----
+if os.path.exists('extra-battle.json'):
+    have_b={(b['ch'],b['text']) for b in battle}
+    for ch,kind,t,sc in json.load(open('extra-battle.json')):
+        if (ch,t) in have_b: continue
+        battle.append(dict(key=ch+'|'+kind+'|'+t,ch=ch,kind=kind,text=t,tag='new',note='Never recorded. New hand-written direction.',script=sc,hand=True))
 need=sorted({d['voice'] for d in dialog})
 fam={i:{k:B['voices'][i][k] for k in ('voice_id','name','settings','direction') if k in B['voices'][i]} for i in B['cast']['family'] if i in B['voices']}
 cv={v:B['cast']['voices'][v] for v in need if v in B['cast']['voices']}

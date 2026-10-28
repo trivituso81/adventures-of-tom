@@ -107,7 +107,7 @@ function render(){
 }
 function cardHtml(it){
   const takes=takesFor(it.id), kept=takes.some(t=>t.keep), k=esc(it.id);
-  let h='<div class="win card" data-id="'+k+'"><div class="top"><span class="who">'+esc(it.speaker)+'</span><span class="game">'+esc(it.text)+'</span>'+(it.dd?'<span class="tag new">Deedee recast</span>':'<span class="tag rebake">re-bake</span>')+''+(kept?'<span class="tag kept">kept</span>':'')+'</div>';
+  let h='<div class="win card" data-id="'+k+'"><div class="top"><span class="who">'+esc(it.speaker)+'</span><span class="game">'+esc(it.text)+'</span>'+(it.dd?'<span class="tag new">Deedee recast</span>':(it.tag==='new'?'<span class="tag new">never recorded</span>':'<span class="tag rebake">re-bake</span>'))+''+(kept?'<span class="tag kept">kept</span>':'')+'</div>';
   if(it.note) h+='<div class="after">'+esc(it.note)+'</div>';
   h+='<div><div class="hint">Script (what ElevenLabs reads)</div><textarea data-act="script" data-id="'+k+'" rows="2">'+esc(scriptFor(it))+'</textarea></div>';
   h+='<div class="chips">'+TAG_CHIPS.map(t=>'<span class="chip" data-act="chip" data-id="'+k+'" data-t="'+esc(t)+'">'+esc(t)+'</span>').join('')+'<span class="chip" data-act="reset" data-id="'+k+'">reset</span></div>';
