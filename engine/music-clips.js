@@ -174,7 +174,11 @@ function clipTick() {
   const v=MC.cur;
   if(v) {
     if(v.loop) { while(c.currentTime>v.nextAt-.35) mcCopy(v,Math.max(v.nextAt,c.currentTime+.02)); }
-    else if(c.currentTime>v.end+.1) { MC.cur=null; mcFadeOut(v,.05); }
+    else if(c.currentTime>v.end+.1) {
+      MC.cur=null; mcFadeOut(v,.05);
+      // A jingle that has finished must not restart while its window (set in mcJingle, a little longer than the track) is still open.
+      if(MC.jingle&&MC.jingle.id===v.id) MC.jingle.end=0;
+    }
   }
   // Warm the cache while idle: the jingles first (small), then the battle track.
   if(!battle.active&&!MC.loading.size) for(const id of (mcBonus()?['victory','defeat','battle','levelup','ns_win']:['victory','defeat','battle','levelup'])) if(!MC.bufs.has(id)&&mcOk(id)) { mcLoad(id); break; }
