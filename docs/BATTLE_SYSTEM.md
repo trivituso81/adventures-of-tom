@@ -49,6 +49,8 @@ Every move is a timeline on a stage of real canvas coordinates (576 x 324). Help
 - Nara's black fur over Tom's dark shirt reads as translucent: land her beside him.
 - Draw order is party index (Nara last), not depth; Rose riding Tom is the exception.
 - The 3x5 font has no slash and no curly apostrophe.
+- A voiced beat is anchored to the speech inside its clip, not to the clip's start or length. Measure it with `python3 tools/speech_windows.py amy:tombo2` (voiced segments in ms), place each beat on its words, and multiply every span that waits on a voice by `K=b7Speed()`: the timeline runs K times faster than the audio at 2x. Start the move with `warmLine(id,line)` so the first play is not late, and pass the exact line as `say(id,kind,0,line)`. Worked example: Ymamot Creation (`amy2`) in `engine/battle2-kind.js`. Check the offsets in real ms at 1x and 2x.
+- Errors are contained, not fatal: `nextStep` (`data/battle-sprites.js`) catches a step that throws, `RFX.draw` drops the scene that threw, and `frame()` in `engine/main.js` guards each stage so the loop never stops. All report through `gameFault(where,err)`: a short "Hiccup in ..." note on screen and `window.__faults`. A fault no longer freezes the game but it is still a bug; `python3 tools/fault_test.py` proves the guards work.
 
 ## Testing a move
 
