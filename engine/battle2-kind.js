@@ -562,7 +562,7 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // popcorn rains over every enemy. TNB laughs and kisses him. Effects unchanged: big Cozy hit on every enemy, and the
 // party glows (Kiln Glow: WARMTH and COOL +25% for 3 turns).
 const popcorn=(x,y,r)=>{ E(x,y,r+1.6,r+1.6,OUT); E(x-r*.5,y+r*.1,r*.75,r*.75,CREAM); E(x+r*.45,y,r*.7,r*.7,'#fff0c8'); E(x,y-r*.45,r*.7,r*.7,'#ffffff'); E(x+r*.2,y+r*.4,r*.35,r*.3,'#ffd060'); };
-const popBowl=(x,y,a,full)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a);
+const popBowl=(x,y,a,full,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(sc,sc);
   if(full) for(let j=0;j<9;j++) popcorn(-28+j*7,-18-Math.abs(Math.sin(j*1.7))*8-(j>2&&j<7?6:0),6);
   const pth=()=>{ gfx.beginPath(); gfx.moveTo(-36,-16); gfx.lineTo(36,-16); gfx.lineTo(24,18); gfx.lineTo(-24,18); gfx.closePath(); };
   pth(); gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.lineJoin='round'; gfx.stroke(); gfx.fillStyle='#ffffff'; gfx.fill();
@@ -572,27 +572,83 @@ const popBowl=(x,y,a,full)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a);
 const slasher=(x,y,k)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(k,k);
   E(0,40,46,60,'#06060c'); E(0,-14,26,30,'#06060c'); for(const sx of [-1,1]) { gfx.beginPath(); gfx.moveTo(sx*30,10); gfx.lineTo(sx*58,-40); gfx.lineTo(sx*48,-46); gfx.lineTo(sx*20,0); gfx.closePath(); gfx.fillStyle='#06060c'; gfx.fill(); E(sx*54,-46,8,8,'#06060c'); }
   E(0,-10,15,19,'#e8e4dc'); E(-6,-14,4,5,'#06060c'); E(6,-14,4,5,'#06060c'); E(0,-2,2,4,'#06060c'); for(let j=-2;j<=2;j++) E(j*4,6,1,1,'#7a766c'); gfx.restore(); };
+// Seated poses for the couch, built once from the current sprites (so a new outfit still works).
+// Tom: his idle top half (head, arms, shirt, belt), then knees toward the camera, short shins and shoes.
+// TNB: his side-on sit pose (beer in hand, facing Tom and the screen) with the bar stool cut away.
+const seatCache=new Map();
+const seatTom=()=>{ const sp=BATTLE_SPRITES.tom,src=sp.idle; if(seatCache.has(src)) return seatCache.get(src);
+  let out=src; const W=src[0].length;
+  if(src.length===40&&W===29&&['a','h','f','i','c','d','v','z'].every(k=>k==='a'||sp.pal[k])) {
+    const row=()=>Array(W).fill('.'),put=(a,c,s)=>{ for(let i=0;i<s.length;i++) a[c+i]=s[i]; return a; };
+    const top=src.slice(0,29).map(r=>r.split('')); top[28][9]='a'; top[28][24]='a';
+    const L=[put(row(),9,'ahhhhhhaahhhhhha'),put(row(),9,'afhhhhfaafhhhhfa'),put(row(),9,'aahhhfaaaafhhhaa'),put(put(row(),10,'ahhhfa'),18,'afhhha'),
+      put(put(row(),8,'aciiiddca'),17,'acddiiica'),put(put(row(),8,'avzzzzvva'),17,'avvzzzzva'),put(put(row(),8,'aaaaaaaaa'),17,'aaaaaaaaa')];
+    out=top.concat(L).map(r=>r.join(''));
+    if(sp.eyeAt) sp.eyeAt.set(out,sp.eyeAt.get(src)||sp.eye); }
+  seatCache.set(src,out); return out; };
+const seatTnb=()=>{ const sp=BATTLE_SPRITES.tnb,src=sp.sit; if(!src) return sp.idle; if(seatCache.has(src)) return seatCache.get(src);
+  let out=src;
+  if(src.length>=47&&src[0].length===49) {
+    const g=src.map(r=>Array.from(r));
+    for(let y=34;y<g.length;y++) for(let x=y===34?27:26;x<g[y].length;x++) g[y][x]='.';
+    g[34][27]='!'; for(let y=35;y<44;y++) if(g[y][25]!=='.'&&g[y][25]!=='!') g[y][26]='!';
+    out=g.map(r=>r.join('')); while(out.length&&!/[^.]/.test(out[out.length-1])) out.pop();
+    if(sp.eyeAt) sp.eyeAt.set(out,sp.eyeAt.get(src)||sp.eye);
+    if(sp.handAt&&sp.handAt.get(src)) sp.handAt.set(out,sp.handAt.get(src)); }
+  seatCache.set(src,out); return out; };
+// A rounded box with the dark outline, and a plain rounded fill.
+const cRR=(x,y,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x,y,w,h,r); else gfx.rect(x,y,w,h); gfx.fillStyle=c; gfx.fill(); };
+const cRRO=(x,y,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x-2,y-2,w+4,h+4,r+2); else gfx.rect(x-2,y-2,w+4,h+4); gfx.fillStyle=OUT; gfx.fill(); cRR(x,y,w,h,r,c); };
+// The couch: a rust velvet two-seater with tufted back cushions, two seat cushions, rolled arms and wooden feet.
+// couchBack draws everything behind the two of them; couchFront draws the rolled arms, which overlap their sides.
+const CO={d:'#4a2219',m:'#7c3a2a',l:'#9c4d36',h:'#bd6a4c',rim:'#9ab8ff',wood:'#6a4426',wood2:'#8e6038',pil:'#e0b44a',pil2:'#b88a2a'};
+const couchBack=(cx,fl)=>{ const x0=cx-92;
+  E(cx,fl+1,98,7,'rgba(0,0,0,.35)');
+  // frame and back
+  cRRO(x0+8,fl-66,168,56,14,CO.d);
+  for(let i=0;i<2;i++) { const bx=x0+21+i*72;
+    cRRO(bx,fl-60,70,44,10,CO.m); cRR(bx+4,fl-57,62,7,4,CO.l); cRR(bx+6,fl-56,28,3,2,CO.h); cRR(bx+3,fl-23,64,6,3,CO.d);
+    for(const ox of [20,50]) { E(bx+ox,fl-41,2.2,2,CO.d); Ln(bx+ox-6,fl-45,bx+ox-2,fl-42,1.5,CO.d); Ln(bx+ox+6,fl-45,bx+ox+2,fl-42,1.5,CO.d); } }
+  // a throw pillow tucked in the right corner, behind TNB
+  gfx.save(); gfx.translate(cx+58,fl-32); gfx.rotate(.18); cRRO(-11,-12,22,22,7,CO.pil); cRR(-8,-9,16,5,3,'#f0cc6a'); E(0,0,2,2,CO.pil2); cRR(-8,5,16,3,2,CO.pil2); gfx.restore();
+  // seat cushions: top surface, piped front edge, front face
+  cRRO(x0+18,fl-22,148,9,4,CO.l); R(cx-1,fl-22,2,9,CO.d); R(x0+24,fl-21,64,2,CO.h); R(cx+4,fl-21,64,2,CO.h);
+  RO(x0+18,fl-13,148,8,CO.m); R(x0+18,fl-13,148,2,CO.h); R(cx-1,fl-13,2,8,CO.d); R(x0+18,fl-7,148,2,CO.d);
+  // skirt and wooden feet
+  RO(x0+10,fl-4,164,3,CO.d);
+  for(const fx of [x0+18,x0+166]) { RO(fx-3,fl-1,6,6,CO.wood); R(fx-3,fl-1,2,6,CO.wood2); } };
+// The arms: square-ish with a soft rounded top, a lighter top band and a stitched front panel.
+const couchFront=(cx,fl)=>{ const x0=cx-92,x1=cx+92;
+  for(const ax of [x0,x1-24]) {
+    cRRO(ax,fl-46,24,42,9,CO.m);
+    cRR(ax+2,fl-45,20,8,6,CO.l); cRR(ax+4,fl-44,12,2,1,CO.h);
+    cRR(ax+4,fl-34,16,26,4,CO.d); cRR(ax+5,fl-33,14,24,3,CO.m); cRR(ax+6,fl-32,5,22,2,CO.l);
+    R(ax+2,fl-9,20,3,CO.d); }
+  // blue light from the screen along the left arm
+  const a=gfx.globalAlpha; gfx.globalAlpha=a*.5; R(x0,fl-42,2,36,CO.rim); R(x0+3,fl-47,8,2,CO.rim); gfx.globalAlpha=a; };
 B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),N=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgt=list[0];
-  const CX=cl((GR.x1+T.x)/2+14,GR.x1+84,T.x-30),F=296,tsx=CX-36,nsx=CX+40;
+  const CX=cl((GR.x1+T.x)/2+16,GR.x1+100,T.x-20),FL=300,tsx=CX-36,nsx=CX+46;
   const SX=16,SY=12,SW=cl(GR.x1+40,220,268)-16,SH=136;
   const P={walk:700,line:900,quiet:1700,scare:2250,jumpEnd:2750,over:2950,rain0:2950,hit:3080,rain1:3600,cap:3650,tline:3700,laugh:3200,kiss0:4300,kiss:4600,glow:4800,home:5300,end:6200};
   const sT={x:T.x,b:T.base,f:null},sN={x:N.x,b:N.base};
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tsx,y=F+10,f=sp.idle;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tsx,k); y=lerp(c.origBase,F+10,k); f=runFr(sp,c.t,-1); }
+  const tSeat=seatTom(),nSeat=seatTnb();
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tsx,y=FL,f=tSeat;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tsx,k); y=lerp(c.origBase,FL,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.home) { if(ms>P.scare&&ms<P.jumpEnd) { const k=seg(ms,P.scare,P.jumpEnd); y-=Math.sin(k*Math.PI)*84; f=sp.celeb; x+=Math.sin(k*Math.PI)*-6; }
-      else if(ms>P.jumpEnd&&ms<P.jumpEnd+120) y+=4;
-      else if(ms>P.kiss0&&ms<P.home) f=sp.flip;
+      else if(ms>P.jumpEnd&&ms<P.jumpEnd+120) y+=2;
+      else if(ms>P.kiss0&&ms<P.home) x+=ez(seg(ms,P.kiss0,P.kiss))*5*(1-ez(seg(ms,P.kiss+350,P.kiss+700)));
       else if(ms>P.line&&ms<P.scare) x-=ez(seg(ms,P.quiet,P.scare))*4; }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tsx,c.origX,k); y=lerp(F+10,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tsx,c.origX,k); y=lerp(FL,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,noShadow:ms>P.walk&&ms<P.home}; });
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nsx,y=F-8,f=sp.sit||sp.idle;
-    if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,nsx,k); y=lerp(c.origBase,F-8,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.home) { if(ms>P.laugh&&ms<P.laugh+700) { y-=Math.abs(Math.sin(seg(ms,P.laugh,P.laugh+700)*Math.PI*4))*5; f=sp.celeb||f; }
-      else if(ms>P.kiss0&&ms<P.home) { x-=ez(seg(ms,P.kiss0,P.kiss))*10*(1-ez(seg(ms,P.kiss+350,P.kiss+700))); f=sp.idle; } }
-    else { const k=ez(seg(ms,P.home+60,P.home+700)); x=lerp(nsx,c.origX,k); y=lerp(F-8,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nsx,y=FL,f=nSeat;
+    if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,nsx,k); y=lerp(c.origBase,FL,k); f=runFr(sp,c.t,-1); }
+    else if(ms<P.home) { if(ms>P.laugh&&ms<P.laugh+700) y-=Math.abs(Math.sin(seg(ms,P.laugh,P.laugh+700)*Math.PI*4))*4;
+      else if(ms>P.kiss0&&ms<P.home) x-=ez(seg(ms,P.kiss0,P.kiss))*10*(1-ez(seg(ms,P.kiss+350,P.kiss+700))); }
+    else { const k=ez(seg(ms,P.home+60,P.home+700)); x=lerp(nsx,c.origX,k); y=lerp(FL,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sN.x=x; sN.b=y; return {cx:x,base:y,frame:f,noShadow:ms>P.walk&&ms<P.home}; });
   const dimK=ms=>ms<P.walk?ez(seg(ms,0,P.walk)):1-ez(seg(ms,P.home,P.home+600));
+  const lap=()=>({x:sT.x+6,y:sT.b-24}),BS=.62;
   // Behind everyone: the room goes dark, the screen glows, the couch back.
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=dimK(ms); if(k<=0) return;
     const fl=ms>P.scare&&ms<P.scare+160?1:0;
@@ -610,35 +666,33 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     else { R(SX,SY,SW,SH,'#0c0c14'); gfx.globalAlpha=k*fin(seg(ms,P.scare+1200,P.scare+1600),.5); bigWord('THE END?',mx,my-4,'#cfd8d6',3); gfx.globalAlpha=k; }
     gfx.restore();
     // the light from the screen
-    gfx.globalAlpha=k*.10; gfx.beginPath(); gfx.moveTo(SX+SW,SY+20); gfx.lineTo(CX+110,F-80); gfx.lineTo(CX+110,F+10); gfx.lineTo(SX+SW,SY+SH); gfx.closePath(); gfx.fillStyle=fl?'#ffffff':'#9ab8ff'; gfx.fill(); gfx.globalAlpha=k;
-    // couch back
-    RO(CX-84,F-104,168,70,'#5a3c7a'); for(const ox of [-40,40]) { RO(CX+ox-38,F-98,76,58,'#6e4c94'); R(CX+ox-32,F-94,64,6,'#8a68b0'); }
+    gfx.globalAlpha=k*.10; gfx.beginPath(); gfx.moveTo(SX+SW,SY+20); gfx.lineTo(CX+110,FL-80); gfx.lineTo(CX+110,FL); gfx.lineTo(SX+SW,SY+SH); gfx.closePath(); gfx.fillStyle=fl?'#ffffff':'#9ab8ff'; gfx.fill(); gfx.globalAlpha=k;
+    couchBack(CX,FL);
     gfx.globalAlpha=1; }});
   // Kernels: each monster gets a shower from the upturned bowl.
   const rnd=(i,j)=>{ const v=Math.sin(i*127.1+j*311.7)*43758.5453; return v-Math.floor(v); };
   const bowlAt={x:cl(GR.x,90,260),y:cl(GR.top-74,36,120)};
   const kern=[]; list.forEach((f,i)=>{ const q=ST.foe(f); for(let j=0;j<14;j++) kern.push({d:P.rain0+rnd(i,j)*600,x0:bowlAt.x+(rnd(j,i)-.5)*48,y0:bowlAt.y+6,x1:q.x+(rnd(i+5,j)-.5)*q.w*1.1,y1:q.base-rnd(i,j+9)*q.h*.7,rest:q.base-2-rnd(i+2,j)*6,r:5+rnd(j,i+3)*2.2}); });
   for(let j=0;j<10;j++) kern.push({d:P.rain0+rnd(99,j)*700,x0:bowlAt.x+(rnd(j,99)-.5)*48,y0:bowlAt.y+6,x1:GR.x0-20+rnd(j,7)*(GR.w+40),y1:GR.base+4-rnd(7,j)*40,rest:GR.base+6-rnd(7,j)*30,r:5});
-  // In front: the couch seat (over their legs), the bowl, the popcorn, the kiss.
+  // In front: the couch's rolled arms (over their sides), the bowl, the popcorn, the kiss.
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=dimK(ms);
-    if(k>0) { gfx.globalAlpha=k; RO(CX-80,F-30,160,30,'#6e4c94'); R(CX-76,F-28,152,6,'#8a68b0'); R(CX-1,F-30,2,30,'#4a3066');
-      for(const sx of [-1,1]) { RO(CX+sx*84-12,F-54,24,54,'#5a3c7a'); R(CX+sx*84-10,F-52,20,6,'#8a68b0'); RO(CX+sx*76-4,F,8,8,'#3a2a22'); } gfx.globalAlpha=1; }
+    if(k>0) { gfx.globalAlpha=k; couchFront(CX,FL); gfx.globalAlpha=1; }
     // the bowl: in Tom's lap, then thrown and flipped over the monsters, then dropped on the first one like a hat
-    if(ms>P.walk-150&&ms<P.scare) popBowl(sT.x-6,sT.b-44,0,true);
-    else if(ms>=P.scare&&ms<P.over) { const q=seg(ms,P.scare,P.over),x=lerp(sT.x-6,bowlAt.x,ez(q)),y=lerp(sT.b-44,bowlAt.y,q)-Math.sin(q*Math.PI)*70; popBowl(x,y,-q*Math.PI,q<.4); }
+    if(ms>P.walk-150&&ms<P.scare) { const L=lap(); popBowl(L.x,L.y,0,true,BS); }
+    else if(ms>=P.scare&&ms<P.over) { const q=seg(ms,P.scare,P.over),L0={x:tsx+6,y:FL-24},x=lerp(L0.x,bowlAt.x,ez(q)),y=lerp(L0.y,bowlAt.y,q)-Math.sin(q*Math.PI)*70; popBowl(x,y,-q*Math.PI,q<.4,lerp(BS,1,ez(q))); }
     else if(ms>=P.over&&ms<P.cap) popBowl(bowlAt.x+Math.sin(ms/30)*3,bowlAt.y,Math.PI,false);
     else if(ms>=P.cap&&ms<P.end-150&&tgt) { const q=ST.foe(tgt),a=seg(ms,P.cap,P.cap+300),hy=q.top+(tgt.def._top||0)*tgt.sc+4;
       gfx.globalAlpha=ms>P.end-500?(P.end-150-ms)/350:1; popBowl(lerp(bowlAt.x,q.x,ez(a)),lerp(bowlAt.y,hy-10,a*a),Math.PI,false); gfx.globalAlpha=1; }
     for(const c of kern) { if(ms<c.d) continue; const q=seg(ms,c.d,c.d+420),x=lerp(c.x0,c.x1,q),y=q<1?lerp(c.y0,c.y1,q*q):Math.min(c.rest,c.y1+(ms-c.d-420)*.25);
       gfx.globalAlpha=ms>P.end-600?Math.max(0,(P.end-150-ms)/450):1; popcorn(x,y,c.r); gfx.globalAlpha=1; }
-    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100),hx=(sT.x+sN.x)/2+4,hy=Math.min(sT.b-112,sN.b-112)-q*30;
+    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100),hx=(sT.x+sN.x)/2+4,hy=Math.min(sT.b-104,sN.b-104)-q*30;
       gfx.globalAlpha=fade(q,.7); heart(hx,hy,lerp(8,20,ez(q*3)),PINK); gfx.globalAlpha=1; }
   }});
   ST.play(E2,[
     [0,()=>{ setMessage('TOMBO! Movie night. One couch, one giant bowl of popcorn.'); B2.aim=null; S('click'); }],
     [P.line,()=>{ say('tnb','tombo'); setMessage('TNB loves the scary part.'); }],
     [P.quiet,()=>{ setMessage('The music goes very quiet...'); S('heartbeat'); }],
-    [P.scare,()=>{ S('scream'); S('crash'); word('AAAAH!',CX-40,F-170,'#ffffff',5,.9,-.1); setMessage('AAAAH! Tom jumps. The popcorn goes EVERYWHERE.'); }],
+    [P.scare,()=>{ S('scream'); S('crash'); word('AAAAH!',CX-40,FL-174,'#ffffff',5,.9,-.1); setMessage('AAAAH! Tom jumps. The popcorn goes EVERYWHERE.'); }],
     [P.over,()=>{ S('whoosh'); }],
     [P.hit,()=>{ S('crunch'); S('bonk'); battle.shakeEnemy=.7; for(const f of list) ST.jolt(f,.5); word('POPCORN!',bowlAt.x,bowlAt.y-30,GOLD,5,1.2); landHit(100); }],
     ['hf',P.hit],
