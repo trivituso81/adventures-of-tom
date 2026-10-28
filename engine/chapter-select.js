@@ -12,9 +12,9 @@
 // Remove by setting CHAPTER_SELECT=false (or dropping this file from index.html) when the full game ships.
 // Loaded after engine/skip.js, before engine/main.js.
 const CHAPTER_SELECT=true;
-const CHSEL_LAST=15;   // the last chapter with content
+const CHSEL_LAST=16;   // the last chapter with content
 // Party level at the start of each chapter (about two below that chapter's boss).
-const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13,15,17,19,20];   // [11]: Part 2 test start, just past the chapter 10 boss
+const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13,15,17,19,20,21];   // [11]: Part 2 test start, just past the chapter 10 boss
 const chselRegion=n=>n%2===0&&n<10?'la':'le';
 
 // Everything the chapters before n would have left behind: flags and items.
@@ -57,6 +57,7 @@ function chapterJump(n) {
   for(const id of st.gives) if(items[id]&&!bag.includes(id)) bag.push(id);
   b6Prep(CHSEL_LEVEL[n]||1);
   coins=25+60*(n-1);
+  if(n>=16) { chselSixteen(); return; }
   if(n>=15) { chselFifteen(); return; }
   if(n>=14) { chselFourteen(); return; }
   if(n>=13) { chselThirteen(); return; }
@@ -127,6 +128,19 @@ function chselFifteen() {
   for(const m of extras()) recruitLeave(m,true);
   forceJoin(amy,true);
   currentMap=worlds.grands; player.x=6; player.y=7; player.facing='up'; player.move=null; player.hidden=false;
+  placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
+}
+// Chapter 16 test start: chapter 15 is done. Tom, Amy, Grace and Rose stand at the south end of the Square, TNB and Nara wait on the bench, Deedee and
+// Boppy are home; the chapter 16 opening plays by itself (its trigger on the town map) and moves everyone into the photograph.
+function chselSixteen() {
+  setFlag('part1-clear'); STORY.mode='full'; setFlag('part2-start');
+  for(const f of ['ch11-met','ch11-vance','ch11-done','ch12-open','ch12-done','ch15-done']) setFlag(f);
+  setChapter(15);
+  if(girlsAway()) setGirlsAway(false);
+  for(const m of extras()) recruitLeave(m,true);
+  forceJoin(amy,true);
+  for(const m of [tnb,nara]) if(typeof benchAdd==='function') benchAdd(m);
+  currentMap=worlds.town; player.x=14; player.y=22; player.facing='up'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 // Part 2 without Part 1 clear data (test): Part 1 counts as cleared, then Part 2 opens the way beginPart2 does.

@@ -83,3 +83,12 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - Vance's message, delivered by HUSH-9: "Thank you for dinner. Tomorrow, the Square. Bring everyone. I would like a family photograph." Amy: "That's a trap." Tom: "We'll bring everyone anyway. And we'll bring dessert."
 - Deedee and Boppy: "Fifty-one years." "And counting, Robert." Family Finish ff3 Fifty-One Years & Counting unlocks.
 
+## Chapter 16: The Amber Eclipse (canon, 2026-10-28)
+- The morning after the dinner, in the Square. Vance's "family photograph" is taken by Monochrome Marlowe at a big box camera on a tripod; Vance is only a voice in the camera ("Thank you for flying nowhere. I have waited a very long time for a picture where nobody leaves."). He wants the little ones: Grace and Rose, "the ones with all their years still in them".
+- Deedee and Boppy step in front of the girls, arms locked. Deedee: "Girls. Close your eyes. Moon and back." Boppy: "Nobody gets past us." Last words: "Fifty-one years." / "...And counting." They turn to stone, holding each other up. The statue stands in the Square in front of the camera. Tom: the stone is still a little warm.
+- Vance "helps with Marlowe's notes": the leftover amber turns Marlowe into an eclipse (black disc, amber ring, clipboard NOTES: NONE). "Less. Less. Less." Marlowe never wanted this ("I only moved the colors around").
+- Grace takes Rose and runs to Cab 7 and Sal ("Rose. Hand. Run. Now." / "I KNOW. RUN."). The fight is Tom, Amy, TNB and Nara only. No kind route: he is not listening. Below half HP: Grey Notes (stickies that say LESS) and TOTAL ECLIPSE behind a shield. Tom: "Then it doesn't get past us. Dad said so."
+- No victory fanfare. Sound is off from the moment he falls until the end of the aftermath; the only sound is wind. Marlowe: "I wanted it quieter. I didn't want it like this."
+- Vance seals Long Island in a snow globe and reels it up on a cable. Cab 7 gets everyone out through the closing glass (it shaves the roof off). The chapter ends at the Angel City cab stand: Rose, "Are they cold?" Tom: "No. They're warm. I checked." Grace: "Then it's not forever. It's just a long time." Vance: "If you want them, you know the building. Downtown. Sixty floors."
+- Tom's line to Boppy at the end: "Dad. Keep her warm. I'm coming back."
+

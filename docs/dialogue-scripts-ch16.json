@@ -1,0 +1,342 @@
+{
+ "chapter": 16,
+ "note": "Unbaked. Dialogue lines in scene order (opening, retry, aftermath, globe narration). Vance has no voice yet (needs a new cast entry before baking), Marlowe speaks in his chapter 12 voice, Sal in his usual voice, everyone else uses their existing voices. Nara never speaks, so her narration line is left out. No battle lines were added (no kind route).",
+ "lines": [
+  {
+   "speaker": "Tom",
+   "text": "The Square, the morning after the dinner. Six of us, two grandparents, and one very big camera on a tripod."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I wore the good scrunchie. I want that on the record."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I wore my ALSO scrunchie."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Nobody touches anything. Hands to yourselves. If it looks like a trap, it is a trap."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Is that the photographer? He looks like he hasn’t eaten. Robert, look how thin he is."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "A grown man in a grey suit on a Tuesday. That’s the whole problem right there."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Wonderful. Everybody came. I love a turnout."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Marlowe. Monochrome Marlowe. We met in Jefferson Park. I took the pink out of your neighbor’s window. I’d say sorry, but honestly I think it looks better."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Where is he?"
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Mr. Vance is in a meeting. He sends his regards, and a camera."
+  },
+  {
+   "speaker": "Grace",
+   "text": "It’s a very big camera."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It’s looking at me."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "That’s what cameras do. Little ones in front, please. Tall ones in back. Everybody tight. Mr. Vance likes everybody tight."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I took a portrait class once. This is a terrible setup. The light is coming from inside the camera."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Is it going to take long? I have a roast in. Robert. Stand up straight."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I AM standing up straight. This is as straight as I go."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Marlowe. What is the photograph for?"
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Mr. Vance keeps the happy ones. A good family at the right moment, just so. Nothing ever changes again. Nobody leaves. It’s a gift."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Nobody asked for the gift."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We said we’d bring everyone. We didn’t say we’d stay."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Everybody stays in a photograph. That’s what a photograph is."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Hello, Tom. Thank you for flying nowhere. I have waited a very long time for a picture where nobody leaves."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "That’s the voice. That’s the fella with the deal."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Hello, Robert. You broke our contract. That’s all right. I am a forgiving man. Everybody, please look here."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I’m doing my photo face."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I’m doing my ALSO face."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Amy."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I know. Girls, down. Behind me. NOW."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Not Tom. Not the grown ones. The little ones. The ones with all their years still in them. Those are the ones I want to keep."
+  },
+  {
+   "speaker": "Tom",
+   "text": "No."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Robert."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I know."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Girls. Close your eyes. Moon and back."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Nobody gets past us."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Mom! Dad!"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Fifty-one years."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "...And counting."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Deedee?"
+  },
+  {
+   "speaker": "Grace",
+   "text": "Boppy. You can move now."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mom."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nobody moves. Nobody says anything. In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands."
+  },
+  {
+   "speaker": "Vance",
+   "text": "There. That is a family photograph. Thank you, Tom. You may keep the frame."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Where are you?"
+  },
+  {
+   "speaker": "Vance",
+   "text": "Marlowe. Collect the children."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Mr. Vance. They are... they are children. I only moved the colors around. That’s all I ever did. I never wrote anything like that."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Then I shall help with your notes."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Less. Less. Less. That is all I ever wanted. Less."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Grace. Rose. Go. Cab seven. Find Sal. Now."
+  },
+  {
+   "speaker": "Grace",
+   "text": "But Deedee..."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I know. Go. Please, Grace."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Rose. Hand. Run. Now."
+  },
+  {
+   "speaker": "Rose",
+   "text": "But Boppy..."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I KNOW. RUN."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tom. Whatever this is, it is between them and the road."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Then it doesn’t get past us. Dad said so."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’m here, babe."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Less. Round two."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Slow down. Break the eclipse and heal after the flash. Together."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Up. Up. We are not done. Breathe. Then we go again."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "I wanted it quieter. I only ever wanted it quieter."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Look at them. LOOK."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "I didn’t want it like this."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nobody does. That is what he counts on."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Mom. Dad."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s warm. Amy. It’s still a little warm."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Then they’re not gone."
+  },
+  {
+   "speaker": "Tom",
+   "text": "They’re not gone."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Then we get them back."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Thank you for the photograph. It is perfect. I would like to keep it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Give them back."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Nobody leaves, Tom. That is what a photograph is for. If you want them, you know the building. Downtown. Sixty floors. Do come up. I will leave the light on."
+  },
+  {
+   "speaker": "Sal",
+   "text": "TOMMY! The glass is coming down! I have the girls in the cab! GET IN!"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Amy. TNB. Nara. Run."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad. Keep her warm. I’m coming back."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Sal took the Sub-Rail the long way, with the meter off. Nobody has said anything since the tunnel."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata. Are they cold?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "No, Rose. They’re warm. I checked."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Okay."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Then it’s not forever. It’s just a long time."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s just a long time."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Vance said downtown. Sixty floors. We rest tonight. Tomorrow we go up."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We got out. Sal went through the closing glass with the meter running, and it shaved the roof off cab seven."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Behind us the glass closes. Long Island is the size of a snow globe now, and a cable is taking it up into the sky."
+  }
+ ]
+}

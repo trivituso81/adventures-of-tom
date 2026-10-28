@@ -278,6 +278,30 @@ function outlineBox(x,y,w,h,fill) { rect(x-1,y-1,w+2,h+2,OUT); rect(x,y,w,h,fill
 function drawObject(o,time) {
   const x=o.x*T,y=o.y*T,w=o.w*T,h=o.h*T,b=y+h,cx=x+w/2;
 
+  // Chapter 16: Deedee and Boppy in stone (two tiles wide), and Vance's camera on its tripod (one tile). See data/scenes-ch16.js.
+  if(o.kind==='statue') {
+    const amb=Math.floor(time*2)%2?'#ffd36a':'#f2a33a';
+    ellipse(cx,b-3,30,6,'#34533b38'); ellipse(cx,b-30,36,34,'#f2a33a1c');
+    rect(x+4,b-11,w-8,11,OUT); rect(x+5,b-10,w-10,9,'#8a8a92'); rect(x+5,b-10,w-10,1,'#b8b8c0');
+    rect(x+12,b-41,17,32,OUT); rect(x+13,b-40,15,30,'#9a9aa2'); rect(x+16,b-30,9,18,'#b8b8c0'); rect(x+13,b-40,2,30,'#b0b0b8');
+    ellipse(x+20,b-47,8,8,OUT); ellipse(x+20,b-47,6.5,6.5,'#aeaeb6'); ellipse(x+20,b-55,5,4,OUT); ellipse(x+20,b-55,4,3,'#8a8a92');
+    rect(x+35,b-47,19,38,OUT); rect(x+36,b-46,17,36,'#8d8d96'); rect(x+51,b-46,2,36,'#74747c');
+    ellipse(x+45,b-55,8,8,OUT); ellipse(x+45,b-55,6.5,6.5,'#aeaeb6'); rect(x+41,b-52,9,2,'#6e6e76'); rect(x+38,b-63,15,5,OUT); rect(x+39,b-62,13,3,'#6e6e76');
+    rect(x+27,b-36,12,7,OUT); rect(x+28,b-35,10,5,'#9a9aa2'); ellipse(cx,b-32,4,3.5,'#b8b8c0');
+    rect(x+19,b-37,1,11,amb); rect(x+44,b-42,1,13,amb); rect(cx-1,b-37,1,5,amb); rect(x+15,b-20,1,7,amb); rect(x+47,b-24,1,8,amb);
+    polygon([[x+7,b-1],[x+11,b-9],[x+14,b-1]],amb); polygon([[x+50,b-1],[x+54,b-8],[x+57,b-1]],amb);
+    return;
+  }
+  if(o.kind==='tripod') {
+    const lens=(typeof CH16FX!=='undefined'&&CH16FX.lens)||0,pulse=Math.floor(time*3)%2;
+    polygon([[cx-2,b-33],[cx-17,b-2],[cx-12,b-2],[cx+1,b-31]],OUT); polygon([[cx+2,b-33],[cx+17,b-2],[cx+12,b-2],[cx-1,b-31]],OUT); rect(cx-1,b-33,3,31,OUT);
+    rect(cx-16,b-56,32,24,OUT); rect(cx-15,b-55,30,22,'#3a3a42'); rect(cx-15,b-55,30,2,'#6e6e76');
+    ellipse(cx,b-44,11,11,OUT); ellipse(cx,b-44,9,9,'#1d1a22'); ellipse(cx,b-44,6.5+lens*3,6.5+lens*3,pulse?'#ffd36a':'#f2a33a'); ellipse(cx-2,b-46,2,2,'#fff6c8');
+    rect(cx+8,b-52,5,3,'#d9493e');
+    if(lens>0) ellipse(cx,b-44,14+lens*30,14+lens*30,'#f2a33a'+(lens>.5?'66':'33'));
+    return;
+  }
+
   if(o.kind==='tree') {
     const tint=hash(o.x,o.y)%3;
     const c1=['#527d56','#5b875a','#608757'][tint],c2='#668e60',c3='#7ba36b',c4='#4a7049';

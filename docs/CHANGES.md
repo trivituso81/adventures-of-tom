@@ -1,5 +1,14 @@
 # Change log (newest first)
 
+## 2026-10-28: Part 2, Chapter 16 "The Amber Eclipse"
+- Walking into the Square after chapter 15 starts chapter 16: the family photograph. Marlowe at a box camera, Vance's voice, the lens charging, the amber beam at Grace and Rose, Deedee and Boppy stepping in front (arms locked, "Fifty-one years." / "...And counting.") and turning to stone. Vance "helps with Marlowe's notes". Grace takes Rose and runs for Cab 7.
+- Marlowe Transformed (level 23, `marlowe16`): Shake-style boss for Tom, Amy, TNB and Nara. Overexposure on everyone every third turn (telegraphed), Grey Notes and an eclipse shield below half HP (2 Chatter, Splash or Kinetic hits or a Tombo break it, otherwise Total Eclipse). No kind route.
+- No victory fanfare: no jingle, no cheers, no level-up chime (sound is off from the win to the end of the aftermath); only a short wind sound. Then the glass comes down and Long Island is sealed in a snow globe that Vance reels up. The chapter ends at the Angel City cab stand.
+- New screen effects (beam, grey wash, flash, snow globe), new map objects: stone statue of Deedee and Boppy, Vance's camera on a tripod. Deedee and Boppy are absent from their house once they are stone.
+- Chapter select has chapter 16 (level 21 start, chselSixteen). Chapter 16 party rules: Tom, Amy, TNB, Nara.
+- Files: see docs/C16-DONE.md. Tests: tools/ch16_test.py all ok; smoke, bg_test, ch11 to ch15 re-run.
+- Lines to bake (all new dialogue is unvoiced until Tom bakes it): docs/dialogue-scripts-ch16.json (84 lines; Vance needs a new voice cast entry). No existing spoken line was reworded.
+
 ## 2026-10-28: Amy less bossy in Part 2
 - Tom: "why is Amy so bossy". Cause: Part 2 scenes (ch11 to 14, written after the Amy rewrite) used her as the drill voice for every fight tip ("Up, everybody. Walk it off.", "Positions.") and slipped back to "thirty-one third graders" (canon: Special Ed, her room of twelve).
 - Rewrote 10 unrecorded Amy lines (no clips lost): fight tips are now "Everybody okay? Good. ..." and "Here's the plan. ..."; "please" on the colors; "I teach kids for a living". Files: data/scenes-p2.js, scenes-ch12.js, scenes-ch13.js, scenes-ch14.js.

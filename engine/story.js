@@ -127,7 +127,12 @@ const CHAPTERS=[
     party:{lock:['tom','grace','rose'],allow:['amy','deedee','boppy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch15-done')?{lines:['Chapter 16 is coming. Vance wants a family photograph in the Square, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. Dinner is at six. Five means four thirty.']}},
-  {n:16,title:'The Amber Eclipse'},
+  // Chapter 16 (tragedy): the photograph in the Square. The scene itself runs on a party override (Tom, Grace, Rose, Amy out front, TNB and Nara on
+  // the bench); once Deedee and Boppy are stone and the girls run for Cab 7, these are the rules: Tom, Amy, TNB and Nara fight, nobody else.
+  {n:16,title:'The Amber Eclipse',start:{map:'town',x:11,y:12},
+    party:{lock:['tom','amy','tnb','nara'],allow:['amy','tnb','nara'],bar:['deedee','boppy','grace','rose'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch16-done')?{lines:['Chapter 17 is coming. Long Island is under glass, and the cab stand has coffee nobody is drinking.']}
+      :{lines:['Airport? Tom. Not today. Not this.']}},
   {n:17,title:'Ascent of the Glass Tower'},
   {n:18,title:'No Touching, Please.'},
   {n:19,title:'The Unsent Dead-Letter Office'},
