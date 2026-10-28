@@ -320,7 +320,7 @@ const B8_KITS={
       p:{key:"round_with_jojo",name:"Round with Jojo",src:1,vp:4,elem:["kinetic"],desc:"His sister Jojo lines up one disc for a very long time, then throws it through the whole row. Hit and delay them."},
       r:{key:"rx_kiln",name:"Cone Six Kiln",src:2,vp:4,elem:["cozy"],desc:"TNB opens his studio kiln at peak Cone Six firing temperature ($2200^\\circ\\text{F}$), shattering boss shields, splashing foes, thawing party Amber, and granting himself Kiln Glow (+25% WARMTH/COOL)."}},
     B4:{play:null,
-      p:{key:"status_green",name:"Status: Green",src:1,vp:3,elem:["cozy"],desc:"Click the friend's status dot from red to green, then coffee. Heal at least 20% HP and restore 2 VP. Nothing else has changed."},
+      p:{key:"coffee_run",name:"Coffee Run",src:1,vp:3,elem:["cozy"],desc:"TNB sprints off for a coffee run and brings back the friend's order, exactly right. Heal at least 20% HP and restore 2 VP."},
       r:{key:"rx_fixit",name:"Gaffer Tape Fix",src:2,vp:3,elem:["cozy"],desc:"TNB patches up an ally (or monster!) with pro gaffer tape and a ceramic mug of tea, healing 45% HP and boosting GRIT (if used on Tom, TNB greets Tom with a kiss and a heart for +2 VP!)."}},
     B5:{play:null,
       p:{key:"kiln_door_policy",name:"Kiln Door Policy",src:1,vp:6,elem:["cozy"],desc:"Close the kiln door on a bad idea. Hit one enemy, break its ordinary shield, and interrupt its wind-up."},

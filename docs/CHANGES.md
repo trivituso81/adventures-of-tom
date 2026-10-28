@@ -1,5 +1,12 @@
 # Change log (newest first)
 
+## 2026-10-28: TNB move tweaks from Tom's Move Lab feedback
+- Foraged at Dawn: gold-rimmed fine-china plate, glossy pea, herb-oil swoosh, microgreens, flower, glint.
+- Tasting Menu: banquet tables (linen drape, gold trim, candle, rose vase); the pea courses are now plated food (seared scallop, beet rose, chocolate dome with gold leaf).
+- Just Around the Bend: the trail now climbs a clear LA hill (Observatory on top, Hollywood sign, downtown skyline, palms, chaparral).
+- Status: Green replaced by Coffee Run (key `coffee_run`, same numbers: 3 VP, ally, heals 20% + 2 VP, kind on a monster). Files: `engine/tnb-moves.js`, `data/battle2-data.js`, `data/abilities.js`, `data/lines.js`, `data/battle-icons.js`, `docs/MOVE_KEYS.md`, `docs/CANON.md`.
+- Lines to bake: `tnb.coffee_run: "Coffee run. I got you the usual."` (replaces `tnb.status_green`, whose clip, if any, is now unused).
+
 ## 2026-10-27: purged dialogue audio for lines that were since replaced
 - Tom asked for unused, replaced dialogue to be purged. Audit method: every baked clip's exact text was checked against every string the game source can still produce (plain strings, templates, `{n}`-style placeholders, concatenations). Scenes and `LINES` categories were also checked: every scene is still started somewhere and every `LINES` category is still used, so the dead material was audio only.
 - Removed 139 clips whose text no longer exists anywhere: 87 battle clips (amy 12, boppy 15, deedee 3, grace 4, rose 17, tnb 19, tom 16, nara 1) and 52 dialogue clips (dialog-ch1 to ch8, ch10, ch21 to ch23). They were old audio for lines since reworded or contracted (for example "Good job, babies." became "Good job, girls.", old rose pogo and tickle shouts, Amy's "Thirty second-graders" lines). The 7 tnb clips are the old lines of the seven moves the TNB revamp just replaced (quick_change, continuity_pins, rush_hour_racks, wrap_ult, cone_six, curb_appeal, fix_wobble). Also removed 9 matching bake-script notes in `voices.*.scripts` of `data/voice-clips.js`.
@@ -55,7 +62,9 @@
 
 ## Lines to bake
 
-None pending. Add any new or reworded spoken line here as `character.kind: "text"` (and the old text if reworded).
+- `tnb.coffee_run: "Coffee run. I got you the usual."` (new; old `tnb.status_green: "I changed it to green. We're fine now."` is dead).
+
+Add any new or reworded spoken line here as `character.kind: "text"` (and the old text if reworded).
 
 ## Known gaps
 

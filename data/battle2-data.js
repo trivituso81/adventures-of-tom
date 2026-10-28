@@ -519,8 +519,8 @@ const B2_SKILLS={
         fx:[['heal',.25,.4,'t'],['cure','amber','t'],['st','kiln_glow',2,'t']],desc:'Three bends and a summit snack. Heals a friend 25%, clears Amber-Stuck, and WARMTH and COOL +25% for 2 turns. Kind on a monster.'},
       {key:'round_with_jojo',name:'Round with Jojo',vp:4,elem:['kinetic'],stat:'hybrid',mult:1.4,target:'row',weight:'quick',o3:true,
         fx:[['ctq',.15,'t']],desc:'Jojo throws one disc through the row. Hits a row and delays them.'},
-      {key:'status_green',name:'Status: Green',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
-        fx:[['heal',.20,.4,'t'],['vp',2,'t']],desc:'Red to amber to green, then coffee. Heals 20% and restores 2 VP. Kind on a monster.'},
+      {key:'coffee_run',name:'Coffee Run',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
+        fx:[['heal',.20,.4,'t'],['vp',2,'t']],desc:'TNB sprints off and brings back everyone\'s order. Heals 20% and restores 2 VP. Kind on a monster.'},
       {key:'kiln_door_policy',name:'Kiln Door Policy',vp:6,elem:['cozy'],stat:'warmth',mult:1.9,target:'enemy',weight:'heavy',o3:true,
         fx:[['shieldBreak','t'],['interrupt','t']],desc:'Close the kiln door on a bad idea. Hits one enemy, breaks its shield and cancels its wind-up.'},
       // Ultimates (phase 5b). Primary versions from Option 2 (TNB's Kit Table). rack on the party dresses each friend in the
