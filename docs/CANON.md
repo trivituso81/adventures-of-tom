@@ -44,3 +44,12 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - TNB and Nara arrive from Los Angeles by the jet bridge. TNB to Grace: "Tom shows me all your videos. You're very good at telling people to subscribe." Grace: "Thank you. Subscribe."
 - The fighting party is four. Anyone else along is on the bench and walks with the party; Boarding Gate benches swap who is out front. Tom, Grace and Rose never sit out in chapter 11.
 - The Standby Sprite has been number 17 on the list since 1998.
+
+## Part 2, Chapter 11, second half (canon, 2026-10-28)
+- The Lost and Found holds every bag that was left at the good part of a trip. Each has a gold clock tag. Ledger: UNCLAIMED 4,017,311, CLAIMED 0. A card in the Gate Zero gold ink: "FOUND: ONE TOM. HELD FOR PICKUP. NO RUSH."
+- Julian Vance is the man in the long coat. He paused every other town on Earth at its happiest afternoon so nobody is sad or late. Long Island and Los Angeles kept moving because Tom kept flying. He wants everyone safe "in the good part, forever". Tom: "No, thank you. We have a connection to make."
+- FINAL CALL is his last announcement: a departures board on robot legs that has never once got to fly. It can be befriended (LET IT FLY).
+- Gold coin number nine drops from the Gate Infinity clock after the fight.
+- After the fight Long Island is CLOSED (its dome turns amber), only Los Angeles is open, and Deedee does not pick up. Tom: "We always make our connection."
+- BENCH CALL: in the FINAL CALL fight, ▼ Bag swaps the fourth member for someone on the bench. Tom, Grace and Rose never sit out.
+

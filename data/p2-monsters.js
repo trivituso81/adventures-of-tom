@@ -80,7 +80,38 @@ const STANDBY_SPRITE=(()=>{
   c.rect(14,43,4,5,'y'); c.rect(25,43,4,5,'y'); c.rect(12,47,7,3,'k'); c.rect(24,47,7,3,'k');       // legs and shoes
   c.outline('o'); return c.rows();
 })();
+
+// ---- FINAL CALL: the chapter 11 boss. A departures board on robot legs; every flap says ON TIME or DELAYED, never GONE ----
+const FINALCALL_PAL={o:'#1a1428',b:'#3a2f58',B:'#5a4a86',d:'#241c3c',g:'#f2c75a',G:'#fbe08a',w:'#f4f0e6',k:'#161018',r:'#d9503f',s:'#9aa0b8',S:'#6a7088',y:'#e8c84a'};
+const FINALCALL_SPRITE=(()=>{
+  const c=p2Canvas(60,64);
+  c.line(30,0,30,5,'s'); c.ell(30,0,2,2,'r');                                                  // beacon
+  c.rect(4,5,52,38,'b'); c.rect(4,5,52,3,'B'); c.rect(4,40,52,3,'d'); c.rect(4,5,3,38,'d'); c.rect(53,5,3,38,'d');   // the board
+  c.rect(8,9,44,30,'k');                                                                         // screen
+  for(const y of [11,19,27,35]) { c.rect(10,y,40,6,'d'); for(let x=12;x<48;x+=5) c.rect(x,y+1,4,4,'k'); c.rect(11,y+3,38,1,'S'); }   // split-flap rows
+  c.rect(10,11,18,6,'g'); c.glyph('1',12,11,'k'); c.glyph('7',16,11,'k'); c.rect(32,11,16,6,'g');   // lit row: a gold ticket
+  c.ell(20,26,5,5,'w'); c.ell(40,26,5,5,'w'); c.ell(21,27,2.4,3,'k'); c.ell(41,27,2.4,3,'k'); c.set(20,25,'w'); c.set(40,25,'w');   // two sad eyes
+  c.line(14,21,24,23,'k'); c.line(46,21,36,23,'k');                                              // worried brows
+  c.line(24,35,36,35,'k'); c.set(23,34,'k'); c.set(37,34,'k');                                  // a small hopeful frown
+  c.rect(26,43,8,3,'S');                                                                         // neck
+  c.rect(14,46,32,8,'B'); c.rect(14,46,32,2,'G'); c.rect(14,52,32,2,'d');                        // hips
+  c.rect(17,54,7,7,'s'); c.rect(36,54,7,7,'s'); c.rect(14,60,13,4,'k'); c.rect(33,60,13,4,'k');  // robot legs and feet
+  c.rect(1,18,3,22,'s'); c.rect(56,18,3,22,'s'); c.ell(2,41,2.5,2.5,'S'); c.ell(57,41,2.5,2.5,'S'); // arms
+  c.rect(0,12,5,5,'g'); c.set(2,14,'k');                                                         // a tiny gold bell
+  c.outline('o'); return c.rows();
+})();
 Object.assign(MONSTERS,{
+  finalcall:{id:'finalcall',coins:90,coinStep:10,name:'FINAL CALL',the:'FINAL CALL',short:'FINAL CALL',sprite:FINALCALL_SPRITE,pal:FINALCALL_PAL,scale:4,eyes:[[20,26],[40,26]],mouth:[30,35],
+    hp:150,hpStep:12,atk:4,xp:70,xpStep:8,level:15,rank:'BOSS',
+    intro:'The departures board at Gate Infinity unfolds onto two robot legs. Every flap says ON TIME. One flap, in the corner, says NOT YET.',
+    attacks:['FINAL CALL slaps {t} with a row of flaps.','FINAL CALL flips {t}’s name to DELAYED.','FINAL CALL crackles static at {t}.'],
+    special:{name:'CANCELLED',every:4,kind:'all',msg:'CANCELLED! FINAL CALL flips every flap to a single word!'},
+    wobble:'FINAL CALL’s flaps stutter...',die:'The flaps slow down, click, click, and settle on ON TIME. All of them. It sits down on the carpet.',
+    rest:['...now boarding. Now boarding. Please. Somebody.','Every other town is happy. That is the whole job.'],
+    talk:['I have never once got to fly. I only call it.','Paused is safe. Nobody is late. Nobody is lost.'],
+    again:['DING. Final call. Please have your pass ready.','Round {n}. Still boarding.'],
+    vapor:['#f2c75a','#3a2f58','#9aa0b8','#d9503f'],
+    hint:'The boss of Gate Infinity. It calls someone each turn: act before its next turn or the gate closes. Tom can DEFEND them, and ▼ Bag, BENCH CALL pulls a benched friend in.'},
   lostluggage:{id:'lostluggage',coins:22,coinStep:3,name:'Lost Luggage',the:'the Lost Luggage',short:'Lost Luggage',sprite:LUGGAGE_SPRITE,pal:LUGGAGE_PAL,scale:3,eyes:[[18,25],[28,25]],mouth:[23,33],
     hp:36,hpStep:5,atk:3,xp:22,xpStep:3,level:12,rank:'TRICKY',
     intro:'A teal suitcase wheels itself out of the crowd. A sock hangs out of its zipper. Its tag says ? in marker.',
@@ -120,4 +151,4 @@ Object.assign(MONSTERS,{
 });
 // Map spots. Endless Concourse: a Standby Sprite holds the way east until it is beaten (data/scenes-p2.js); Lost Luggage
 // and Red-Eyes drift round the rest.
-const P2_CONCOURSE_SPOTS=[['standbysprite',23,6],['lostluggage',9,4],['lostluggage',12,10],['redeye',16,9],['lostluggage',27,5],['redeye',30,9]];
+const P2_CONCOURSE_SPOTS=[['finalcall',34,9],['standbysprite',23,6],['lostluggage',9,4],['lostluggage',12,10],['redeye',16,9],['lostluggage',27,5],['redeye',30,9]];

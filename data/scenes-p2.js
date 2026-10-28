@@ -1,10 +1,12 @@
 'use strict';
 // data/scenes-p2.js — Part 2, Chapter 11 "The Layover Between Worlds" (C11a: house morning, Flight Zero, Terminal Infinity,
-// the Standby Sprite, TNB and Nara, the Sleepover Tombo). C11b adds Lost & Found, Julian Vance and the FINAL CALL boss.
+// the Standby Sprite, TNB and Nara, the Sleepover Tombo), C11b (Lost & Found, Julian Vance, the FINAL CALL boss, the ending).
 // Flags, in order: ch11-start (leaving the house), ch11-cabin (Flight Zero scene begun), ch11-boo (Rose out from the blanket),
 // ch11-tear (the sky tears; we are through), ch11-gate00 (arrival scene), ch11-conc (concourse scene), ch11-sprite (the
 // Standby Sprite has been met), ch11-stby (it is beaten; the checkpoint is open), ch11-met (TNB and Nara arrived),
-// ch11-closed and ch11-done are C11b. Loaded after data/scenes.js.
+// ch11-lost (optional: the Lost & Found was opened), ch11-vance (Julian Vance at Gate Infinity; FINAL CALL steps out),
+// battle:finalcall ('win'), ch11-closed (LONG ISLAND: CLOSED; the Long Island dome goes amber), ch11-done (CHAPTER 11 COMPLETE).
+// Loaded after data/scenes.js.
 const CH11={mode:'full',chapter:11};
 
 SCENES.part2Open=()=>[
@@ -177,13 +179,152 @@ TUTORIALS.ch11a={tips:[
   {id:'wl',who:'*',text:'WAIT LIST sends one of you to the back of the turn ribbon. Splash and Kinetic moves hit him hardest.'},
   {id:'pep',who:'amy',dir:'down',care:1,text:'He is fussy and he loves a pep talk. ▼ Bag, PEP TALK, to calm him down for a Kindness win.'}]};
 
-// Gate Infinity and the Lost & Found: C11a stops at the doors.
+
+// ---------- C11b ----------
+Object.assign(items,{
+  goldtag:{name:'Gold Clock Tag',icon:'\u{1F3F7}',slot:null,keepsake:true,desc:'From the Lost and Found. A little gold clock face on a string, and in the same gold ink as the card at Gate Zero: HELD FOR PICKUP. NO RUSH.'}});
+
+// The Lost and Found: optional. Where every Lost Luggage in Terminal Infinity comes home to wait.
+SCENES.ch11Lost=[
+  {flag:'ch11-lost',value:'pending'},
+  {call:()=>sfx.doorIn&&sfx.doorIn()},
+  {talk:'Lost and Found',lines:['The door was never locked. It just said BACK IN FIVE MINUTES for so long that nobody tried it.','Inside: a counter, a brass bell, and shelves that go up past the ceiling. Every item has a little gold clock tied to it.']},
+  {talk:'Rose',lines:['Can I ring the bell?']},
+  {talk:'Tom',lines:['Gently.']},
+  {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Rose',lines:['I rang it gently. It rang back less gently.']},
+  {talk:'Grace',lines:['Tata. Every single thing here has a tag. A blue mitten. A trombone. A birthday hat. A retainer.']},
+  {talk:'Amy',lines:['Nobody has claimed the retainer in my family since 2011. That’s not related. Moving on.']},
+  {talk:'TNB',lines:['These are all things people left behind when they got to the good part of a trip. A mitten from the best snow day. A hat from the best party.','They didn’t want to leave. So they didn’t go back for it.']},
+  {talk:'Tom',lines:['Somebody collected them. Every gold clock is the same little clock as the coins.']},
+  {talk:'Rose',lines:['Tata. Tata. The ? suitcases. They’re all in here. They’re all being very polite.']},
+  {talk:'Lost and Found',lines:['A ledger on the counter. UNCLAIMED: 4,017,311 ITEMS. CLAIMED: 0.','The last line, in gold ink: THE ONLY WAY TO LEAVE SOMETHING SAFE IS TO NEVER COME BACK FOR IT.']},
+  {talk:'Grace',lines:['That is the saddest thing I have ever read. And I read my sister’s diary.']},
+  {talk:'Rose',lines:['I don’t have a diary. I have a drawing of a dog.']},
+  {call:()=>sfx.pickup&&sfx.pickup()},
+  {talk:'Lost and Found',lines:['Under the bell, a card in the same gold ink as the one at Gate Zero:','FOUND: ONE TOM. HELD FOR PICKUP. NO RUSH.']},
+  {talk:'Tom',lines:['...He’s been holding a spot for me. Not for my bag. For me.']},
+  {talk:'Amy',lines:['That’s either the nicest thing I’ve ever heard or a threat.']},
+  {talk:'TNB',lines:['Both, probably. That’s how the good ones are.']},
+  {give:'goldtag'},
+  {toast:'Keepsake: Gold Clock Tag. Boppy wants a pretzel, so you also take the tin of Airplane Pretzels.',time:5},
+  {give:'pretzels'},
+  {trace:'lost-and-found'}, {hearts:'tom'}, {hearts:'rose'},
+  {flag:'ch11-lost'}
+];
+
+// Julian Vance at Gate Infinity.
+SCENES.ch11Vance=[
+  {flag:'ch11-vance',value:'pending'},
+  {call:()=>sfx.ding&&sfx.ding()},
+  {spawn:{name:'Long coat',look:'longcoat',at:[36,3],dir:'down'}},
+  {walk:'Long coat',to:[[36,4],[35,5]],speed:.3}, {face:'Long coat',dir:'right'},
+  {talk:'Long coat',lines:['Hello, Tom.']},
+  {face:'Long coat',dir:'down'},
+  {talk:'Tom',lines:['You’re the man in the long coat. At the school. At the airport. At Gate Zero.']},
+  {call:()=>sfx.whoosh&&sfx.whoosh()},
+  {talk:'Julian Vance',lines:['Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed.','You opened every door I couldn’t. Thank you for flying nowhere, Tom.']},
+  {talk:'Amy',lines:['You stopped our clocks. You stopped MY clock.']},
+  {talk:'Julian Vance',lines:['I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late.','Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you.']},
+  {talk:'Grace',lines:['Paused isn’t happy. Paused is stuck.']},
+  {talk:'Rose',lines:['The seagull has had that fry for a hundred years. He’s not happy. He’s hungry.']},
+  {talk:'TNB',lines:['I have a vase in the kiln in Los Angeles. It’s been in there a long time. It’s going to crack.','That’s what happens when you leave something at its best. It doesn’t stay good. It just stays.']},
+  {talk:'Julian Vance',lines:['Maybe. But it stays safe. That is all I have ever wanted for anyone.','Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost.']},
+  {talk:'Tom',lines:['That’s the nicest offer anyone’s ever made me. And it was in my pocket the whole time. I had a pass.','No, thank you. We have a connection to make.']},
+  {talk:'Julian Vance',lines:['...Then I’ll make the last announcement.','Someone has to.']},
+  {call:()=>sfx.charge&&sfx.charge()},
+  {talk:'Julian Vance',lines:['He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.','FINAL CALL.']},
+  {call:()=>{ sfx.whoosh&&sfx.whoosh(); }},
+  {despawn:'Long coat'},
+  {flag:'ch11-vance'}, {call:()=>storyWorld()},
+  {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Amy',lines:['Positions. Tom in front. Girls behind. Nobody lets that board call their name and sit down.']},
+  {talk:'Grace',lines:['Rose, when it calls you, move. Don’t stop to look at anything.']},
+  {talk:'Rose',lines:['I won’t look at anything.']},
+  {talk:'Rose',lines:['...I looked at one thing.']},
+  {talk:'Tom',lines:['If somebody gets called and can’t move, I’ll walk them on. And if we need a friend in a hurry, wave to the bench.']},
+  {toast:'Tip: ▼ Bag, BENCH CALL swaps in a friend from the bench. Tom DEFENDs anyone who is called.',time:6},
+  {battle:'finalcall',tut:'finalcall'},
+  {if:()=>flag('battle:finalcall')!=='win',then:[
+    {heal:true},
+    {talk:'Amy',lines:['Up, everybody. Walk it off. It calls one of us every turn. Move before it goes again, or Tom walks you on.']},
+    {toast:'Face FINAL CALL (near the big door) and press A to try again. Everyone is healed.',time:5}],else:[]}
+];
+
+// After the boss (won in the scene, or on a retry): the board flaps, Long Island closes, Deedee does not pick up.
+SCENES.ch11After=()=>[
+  {flag:'ch11-after',value:'pending'},
+  {call:()=>sfx.levelChime&&sfx.levelChime()},
+  ...(flag('kind:finalcall')?[
+    {talk:'FINAL CALL',lines:['...You asked the board to come. Nobody asked the board.','I think I just wanted to be on one flight.']},
+    {talk:'Amy',lines:['Then you’re on one. Seat 18C. Don’t recline.']}]:[
+    {talk:'FINAL CALL',lines:['...ON TIME. ON TIME. ON TIME.','It’s fine. They’re all on time. I am not.']},
+    {talk:'Amy',lines:['Nobody is cancelling you. You just never got a boarding pass. Here. Take mine.']}]),
+  {talk:'Tom',lines:['Something is dropping out of the gate clock. A gold coin, with a little clock face. Number nine.']},
+  {call:()=>sfx.pickup&&sfx.pickup()},
+  {talk:'Tom',lines:['It’s warm. Whatever Vance was holding, it wasn’t his.']},
+  {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Speaker',lines:['DING. Attention, passengers. The departures board has been updated.']},
+  {call:()=>sfx.whoosh&&sfx.whoosh()},
+  {fade:'out',time:.7},
+  {call:()=>{ switchMap({kind:'edge',to:'gate00',spawn:{x:9,y:11},facing:'up'}); camera.snap=true; }},
+  {wait:.5},
+  {fade:'in',time:.7},
+  {talk:'Speaker',lines:['DING. LONG ISLAND: CLOSED. LOS ANGELES: NOW BOARDING.']},
+  {flag:'ch11-closed'}, {call:()=>sfx.whoosh&&sfx.whoosh()}, {wait:1.6},
+  {talk:'Grace',lines:['Tata. The little green town. It’s turning orange. No. Amber. Like a caution light.']},
+  {talk:'Rose',lines:['Is Deedee okay?']},
+  {talk:'Amy',lines:['I’m calling her. I’m calling her right now.']},
+  {call:()=>sfx.ding&&sfx.ding()}, {wait:.8}, {call:()=>sfx.ding&&sfx.ding()}, {wait:.8}, {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Amy',lines:['It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings.']},
+  {talk:'Tom',lines:['Sit down. Everybody. Deep breath.','Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.']},
+  {talk:'TNB',lines:['Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.']},
+  {talk:'Tom',lines:['We’ll go get them. We always make our connection.']},
+  {talk:'Rose',lines:['Which one is Los Angeles?']},
+  {talk:'Tom',lines:['The orange one. It’s the only one still open.','And it’s where Nara and TNB live. It’s home. Our other home.']},
+  {call:()=>sfx.levelChime&&sfx.levelChime()},
+  {trace:'ch11-wrap'}, {hearts:'tom'}, {hearts:'amy'}, {hearts:'tnb'},
+  {party:null},
+  {fade:'out',time:.8}, {card:11,done:true,time:3.4}, {flag:'ch11-done'}, {fade:'in',time:.8},
+  {toast:'CHAPTER 11 COMPLETE! Chapter 12 is still being built. Los Angeles is open, but its door is not.',time:7},
+  {save:true}
+];
+
+TRIGGERS.push(
+  {id:'ch11-after',map:'concourse',when:{...CH11,flag:{'battle:finalcall':'win'},notFlag:'ch11-done'},scene:'ch11After'}
+);
+// FINAL CALL stays folded up beside the big door until Julian Vance has made his announcement, and goes quiet after the win.
+STORY_WORLD.push(()=>{
+  if(STORY.mode!=='full') return;
+  const b=findMonster('finalcall'); if(!b) return;
+  b.mscale=1.15;
+  const under=STORY.chapter<11||(STORY.chapter===11&&!flag('ch11-vance'))||flag('battle:finalcall')==='win'||STORY.chapter>11;
+  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
+});
+TUTORIALS.finalcall={tips:[
+  {id:'call',who:'*',text:'NOW BOARDING: each turn it calls someone (gold BOARDING tag). They must act before its next turn, or the gate closes on them and they lose a turn.'},
+  {id:'escort',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.call&&b2Alive(f.call)&&f.call.id!=='tom'&&f.call.st.boarding&&!f.call.st.guarded),
+    text:'Called someone slow? ▶ DEFEND, then pick them: Tom walks them onto the plane.'},
+  {id:'bench',who:'*',dir:'down',care:1,when:()=>b2BenchReady&&b2BenchReady(),text:'▼ Bag, BENCH CALL: the fourth member sits out and a friend from the bench hops in. Costs a turn.'},
+  {id:'final',who:['tom','grace','rose','amy','tnb','nara'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'CANCELLED is coming. Any ◀ TOMBO (try Sleepover at Tom’s) smashes its guard in one go.'},
+  {id:'final2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'CANCELLED on everyone next turn! Break its guard: 2 Kinetic or Sparkle hits, or any Tombo.'},
+  {id:'fly',who:'*',dir:'down',care:1,text:'It has never once got to fly. ▼ Bag, LET IT FLY. Three times and it comes along, happy.'}]};
+
+// Gate Infinity and the Lost & Found.
 const LE_pressAction_ch11=pressAction;
 pressAction=function() {
   if(!transition&&!intro.active&&!dialog.active&&!player.move&&STORY.mode==='full'&&STORY.chapter===11) {
     const t=facingTarget(),v=t&&t.value;
-    if(t&&t.kind==='object'&&v.gateinfinity&&flag('ch11-met')) { openDialog(v.name,['GATE INFINITY. NOW BOARDING. NOT YET.','Chapter 11 continues in the next update.']); saveGame('auto',true); return; }
-    if(t&&t.kind==='object'&&v.lostfound&&flag('ch11-met')) { openDialog(v.name,['LOST AND FOUND. The door is locked. A light is on inside. Chapter 11 continues in the next update.']); return; }
+    if(t&&t.kind==='object'&&v.gateinfinity&&flag('ch11-met')) {
+      if(flag('ch11-done')) { openDialog(v.name,['LOS ANGELES: NOW BOARDING.','Chapter 12 is still being built. Long Island is amber. Los Angeles is open, and waiting.']); saveGame('auto',true); return; }
+      if(!flag('ch11-vance')) { playScene('ch11Vance'); return; }
+      openDialog(v.name,['GATE INFINITY. FINAL CALL. Something with robot legs is standing in the way. Walk into it to try again.']); return;
+    }
+    if(t&&t.kind==='object'&&v.lostfound&&flag('ch11-met')) {
+      if(flag('ch11-lost')) { openDialog(v.name,['LOST AND FOUND. The bell, the shelves, the ledger. FOUND: ONE TOM. HELD FOR PICKUP. NO RUSH.']); return; }
+      playScene('ch11Lost'); return;
+    }
   }
   return LE_pressAction_ch11();
 };

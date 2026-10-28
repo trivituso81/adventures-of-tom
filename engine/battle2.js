@@ -726,9 +726,10 @@ function b2BossOpen(e) {
     return [()=>{ b2Msg(B2_BALL.open); e.shake=.6; sfx.whoosh&&sfx.whoosh(); },1800,()=>b2Msg(B2_BALL.open2),2300,
       ()=>{ b2Msg(B2_BALL.side(e)); b2Render(); },1900];
   }
-  if(e.boss==='lastcall') {
+  if(e.boss==='lastcall'||e.boss==='finalcall') {
     e.count=0; e.group=0; e.call=null;
-    return [()=>{ b2Msg(B2_CALL.open); e.shake=.6; sfx.ding&&sfx.ding(); },1800,()=>b2Msg(B2_CALL.open2),2400,...b2CallPick(e)];
+    const C=b2CallText(e);
+    return [()=>{ b2Msg(C.open); e.shake=.6; sfx.ding&&sfx.ding(); },1800,()=>b2Msg(C.open2),2400,...b2CallPick(e)];
   }
   if(e.boss==='directorscut') {
     e.count=0; e.tel=0;
@@ -745,7 +746,7 @@ function b2BossOpen(e) {
 function b2SetLock(e,t) { e.intent={kind:'lock',target:t,act:e.D.chomp||e.acts[0]}; }
 function b2SetAll(e,act,shield=true) { e.intent={kind:'all',act:act||e.D.flop||e.acts[0]}; if(e.D.shield&&shield) e.shield={need:e.D.shield.need+(b7Diff().shieldPlus||0),elems:e.D.shield.elems.slice(),hits:0}; }
 function b2CheckPhase(t) {
-  if((t.boss==='bigone'||B2_SHAKE_STYLE[t.boss]||t.boss==='directorscut'||t.boss==='redpen'||t.boss==='chairman'||t.boss==='unread'||t.boss==='ironbelly'||t.boss==='mirrorball'||t.boss==='lastcall')&&t.phase===1&&t.hp<=t.maxHp*.5) { t.phase=2; t.step='A'; t.phaseNew=true; const p=b2FoePoint(t); battle.texts.push({txt:B2_SHAKE_STYLE[t.boss]?B2_SHAKE_STYLE[t.boss].word:t.boss==='directorscut'?'FROM THE TOP':t.boss==='redpen'?'POINTS OFF':t.boss==='chairman'?'ORDER!':t.boss==='unread'?'PLOT TWIST':t.boss==='ironbelly'?'ROARING':t.boss==='mirrorball'?'ENCORE!':t.boss==='lastcall'?'FINAL CALL':'FURIOUS',x:p.x,y:p.y-30,color:'#ff8f80',sc:2,t:0,dur:1.4}); }
+  if((t.boss==='bigone'||B2_SHAKE_STYLE[t.boss]||t.boss==='directorscut'||t.boss==='redpen'||t.boss==='chairman'||t.boss==='unread'||t.boss==='ironbelly'||t.boss==='mirrorball'||t.boss==='lastcall'||t.boss==='finalcall')&&t.phase===1&&t.hp<=t.maxHp*.5) { t.phase=2; t.step='A'; t.phaseNew=true; const p=b2FoePoint(t); battle.texts.push({txt:B2_SHAKE_STYLE[t.boss]?B2_SHAKE_STYLE[t.boss].word:t.boss==='directorscut'?'FROM THE TOP':t.boss==='redpen'?'POINTS OFF':t.boss==='chairman'?'ORDER!':t.boss==='unread'?'PLOT TWIST':t.boss==='ironbelly'?'ROARING':t.boss==='mirrorball'?'ENCORE!':t.boss==='lastcall'||t.boss==='finalcall'?'FINAL CALL':'FURIOUS',x:p.x,y:p.y-30,color:'#ff8f80',sc:2,t:0,dur:1.4}); }
 }
 function b2ShieldHit(t,act) {
   if(t.boss==='ironbelly') b2IronElem(t,act);
@@ -777,7 +778,7 @@ function b2BossTurn(e) {
   if(e.boss==='unread') return b2UnreadTurn(e,N);
   if(e.boss==='ironbelly') return b2IronTurn(e,N);
   if(e.boss==='mirrorball') return b2BallTurn(e,N);
-  if(e.boss==='lastcall') return b2CallTurn(e,N);
+  if(e.boss==='lastcall'||e.boss==='finalcall') return b2CallTurn(e,N);
   const pre=[];
   if(e.boss==='bigone') {
     // Phase 2 starts on its next turn: two Mudlings, then the belly-flop wind-up.
@@ -850,7 +851,7 @@ function b2BossNext(e) {
   if(e.boss==='unread') return b2UnreadNext(e);
   if(e.boss==='ironbelly') return b2IronNext(e);
   if(e.boss==='mirrorball') return b2BallNext(e);
-  if(e.boss==='lastcall') return [];   // her call comes at the start of her turn (b2CallTurn)
+  if(e.boss==='lastcall'||e.boss==='finalcall') return [];   // her call comes at the start of her turn (b2CallTurn)
   if(B2_SHAKE_STYLE[e.boss]&&e.phase===1) {
     e.count=(e.count||0)+1;
     if(e.count%3===2) { b2SetAll(e,e.D.flop,false);
@@ -1210,6 +1211,15 @@ const B2_CALL={
   brace:(N,e)=>N+' clears the board for FINAL BOARDING on everyone next turn! Break her guard: '+e.shield.need+' Kinetic or Sparkle hits, or any Tombo.',
   call:(n,t)=>'NOW BOARDING: GROUP '+n+'. '+t.name+', please proceed to Gate Zero.'+(b2Tom()&&t.id!=='tom'?' ('+t.name+' must act before her next turn, or Tom can DEFEND them.)':' (Act before her next turn.)')
 };
+const B2_FINAL={
+  open:'DING. Every flap on the board spins, then settles. ON TIME. ON TIME. ON TIME. \"This is the FINAL CALL for Gate Infinity. Everyone, please remain exactly where you are.\"',
+  open2:'Each turn it calls someone NOW BOARDING. They must act before its next turn, or the gate closes on them. Tom can DEFEND them. ▼ Bag, BENCH CALL swaps in a friend from the bench.',
+  phase:N=>N+' flips every flap to CANCELLED, then back to ON TIME, then CANCELLED. The whole board shudders.',
+  adds:n=>n>1?'Two Lost Luggage roll in. They are very sorry.':'A Lost Luggage rolls in. It is very sorry.',
+  brace:(N,e)=>N+' clears the board for CANCELLED on everyone next turn! Break its guard: '+e.shield.need+' Kinetic or Sparkle hits, or any Tombo. A Sleepover will do it.',
+  call:(n,t)=>'NOW BOARDING: GROUP '+n+'. '+t.name+', please proceed to Gate Infinity.'+(b2Tom()&&t.id!=='tom'?' ('+t.name+' must act before its next turn, or Tom can DEFEND them.)':' (Act before its next turn.)')
+};
+const b2CallText=e=>e&&e.boss==='finalcall'?B2_FINAL:B2_CALL;
 function b2CallPick(e) {
   if(!b2Alive(e)||(e.intent&&e.intent.kind==='all')||(e.phase===2&&e.step==='A')) return [];
   const live=b2LiveParty().filter(u=>!u.st.grounded),others=live.filter(u=>u.id!=='tom'),pool=others.length?others:live;
@@ -1218,13 +1228,13 @@ function b2CallPick(e) {
   for(const u of B2.party) delete u.st.boarding;
   e.call=t; e.group=(e.group||0)+1; t.st.boarding={turns:99};
   const p=b2FoePoint(e),n=e.group;
-  return [()=>{ battle.texts.push({txt:'NOW BOARDING',x:p.x,y:p.y-30,color:'#f2c75a',sc:2,t:0,dur:1.2}); sfx.ding&&sfx.ding(); b2PopParty(t,'BOARDING','#f2c75a',-18); b2Msg(B2_CALL.call(n,t)); b2Render(); },1900];
+  return [()=>{ battle.texts.push({txt:'NOW BOARDING',x:p.x,y:p.y-30,color:'#f2c75a',sc:2,t:0,dur:1.2}); sfx.ding&&sfx.ding(); b2PopParty(t,'BOARDING','#f2c75a',-18); b2Msg(b2CallText(e).call(n,t)); b2Render(); },1900];
 }
 // The called person took a turn in time: they board.
 function b2CallBoarded(u) {
   if(!u.st.boarding) return;
   delete u.st.boarding;
-  const e=B2.foes.find(f=>f.boss==='lastcall'); if(e&&e.call===u) e.call=null;
+  const e=B2.foes.find(f=>f.boss==='lastcall'||f.boss==='finalcall'); if(e&&e.call===u) e.call=null;
   if(!b2Alive(u)) return;
   u.vp=Math.min(B2_VP.cap,u.vp+2); b2PopParty(u,'BOARDED +2 VP','#f2c75a',-18); b2Heart(B2_HEART.weak); sfx.coin&&sfx.coin();
   b7Later(()=>{ if(B2.active) b2Msg(u.name+' made it to the gate. Boarded! +2 VP.'); },350);
@@ -1247,11 +1257,11 @@ function b2CallTurn(e,N) {
   if(e.phase===2&&e.step==='A') {
     e.step='B'; e.intent=null;
     const adds=b2LiveFoes().filter(f=>f!==e).length,steps=[];
-    if(e.phaseNew) { e.phaseNew=false; steps.push(()=>{ b2Msg(B2_CALL.phase(N)); e.shake=.7; sfx.thud&&sfx.thud(); },1300); }
+    if(e.phaseNew) { e.phaseNew=false; steps.push(()=>{ b2Msg(b2CallText(e).phase(N)); e.shake=.7; sfx.thud&&sfx.thud(); },1300); }
     if(adds<2&&(e.summons||0)<2) { e.summons=(e.summons||0)+1;
-      steps.push(()=>{ const n=b2Summon('carryon',2-adds,Math.max(1,e.lvl-2)); b2Msg(B2_CALL.adds(n)); sfx.thud&&sfx.thud(); b2Render(); },1300); }
-    else steps.push(()=>{ b2Msg(N+' flips through every city she knows. Very fast.'); e.lunge=.4; },1000);
-    steps.push(()=>{ b2SetAll(e,e.D.rumble); b2Msg(B2_CALL.brace(N,e)); sfx.charge&&sfx.charge(); b2Render(); },2000);
+      steps.push(()=>{ const n=b2Summon(e.D.add||'carryon',2-adds,Math.max(1,e.lvl-2)); b2Msg(b2CallText(e).adds(n)); sfx.thud&&sfx.thud(); b2Render(); },1300); }
+    else steps.push(()=>{ b2Msg(e.boss==='finalcall'?N+' flips through every gate it has ever called. Very fast.':N+' flips through every city she knows. Very fast.'); e.lunge=.4; },1000);
+    steps.push(()=>{ b2SetAll(e,e.D.rumble); b2Msg(b2CallText(e).brace(N,e)); sfx.charge&&sfx.charge(); b2Render(); },2000);
     return go(()=>enqueue(...steps,()=>b2AfterAction()));
   }
   // A normal turn: the gate, a new call, then her move. DELAYED goes for whoever she just called.
@@ -1265,6 +1275,14 @@ const B2_ANSWER_LINES={tom:['Here. Group zero. Pass out, liquids in a bag, shoes
   rose:['HERE! I\'m HERE! Me! Rose! I have Lamby!','Me me me! Can I push the button? The ding button?'],
   amy:['Here! Gregori, party of four. We\'re always first in line.','Present. I\'ve never missed a connection in my life.'],
   _:['Here! Group zero!']};
+// LET IT FLY for FINAL CALL (chapter 11): tell the board it gets to come along. Unvoiced until Tom bakes the chapter 11 lines.
+const B2_FLY_LINES={tom:['You can come. Seat 18C. Bring the whole board. We have a connection to make.','Nobody ever asked you to fly. I’m asking. Please step off the wall.'],
+  grace:['You’re coming with us! I’ll tell everybody. I’ll make a video. Please like and subscribe.','Every flight needs a board. YOU are the board. Come on!'],
+  rose:['You can sit by me! I have snacks! They’re mostly crumbs!','Fly with us! You can be the pilot! I’m the pilot! We can both be the pilot!'],
+  amy:['Fine, you’re on my flight. I’ll save you a seat. And I’m always early.','You’re coming. That’s decided. I don’t lose and I don’t leave a board behind.'],
+  tnb:['Hey. Buddy. You can ride in my bag. I won’t even charge you.','I’ll fix the flaps on the plane. You just come and watch.'],
+  nara:['Nara brings the board her squeaky ball.'],
+  _:['You can come with us!']};
 // ASK HER TO DANCE for the Mirrorball (chapter 9). The spoken lines are in data/lines.js (praise).
 const B2_DANCE_LINES={tom:['May I have this dance? I should warn you. I mostly sway.','One song. I lead. You spin. You\'re very good at spinning.'],
   deedee:['Come on, honey. Deedee hasn\'t missed a dance floor in fifty years. One, two, three.','Shoes off, everybody! Floors just mopped! Let\'s DANCE!'],
@@ -1306,7 +1324,7 @@ const B2_PEN_LINES={tom:['Honestly? Lovely handwriting. Very legible.','That\'s 
 function b2PraiseSteps(u,opt) {
   const t=opt&&opt.primary,P=t&&t.D.praise;
   if(!t||!P||!b2Alive(t)) return [()=>b2Msg('Nobody to say it to.'),700];
-  const pool=(t.id==='cuecrab'?B2_CRAB_LINES:t.id==='redpen'?B2_PEN_LINES:t.id==='chairman'?B2_CHEEKS_LINES:t.id==='unread'?B2_READ_LINES:t.id==='ironbelly'?B2_BAKE_LINES:t.id==='mirrorball'?B2_DANCE_LINES:t.id==='lastcall'?B2_ANSWER_LINES:B2_PRAISE_LINES),lines=pool[u.id]||pool._,line=pick(lines);
+  const pool=(t.id==='cuecrab'?B2_CRAB_LINES:t.id==='redpen'?B2_PEN_LINES:t.id==='chairman'?B2_CHEEKS_LINES:t.id==='unread'?B2_READ_LINES:t.id==='ironbelly'?B2_BAKE_LINES:t.id==='mirrorball'?B2_DANCE_LINES:t.id==='lastcall'?B2_ANSWER_LINES:t.id==='finalcall'?B2_FLY_LINES:B2_PRAISE_LINES),lines=pool[u.id]||pool._,line=pick(lines);
   const said=u.id==='nara'?line:u.name+': "'+line+'"';
   return [()=>{ b2Msg(said); battle.fx[u.idx].hop=.4; if(u.id!=='nara') say(u.id,'praise',0,line); else { sfx.bark&&sfx.bark(); } },1500,()=>{
     const p=b2FoePoint(t),c=b2FoeCanvasPos(t);
