@@ -1,0 +1,626 @@
+{
+ "chapter": 13,
+ "note": "Unbaked. Speakers HUSH-9 and Drill Worm have no voice mapping yet.",
+ "lines": [
+  {
+   "speaker": "Tom",
+   "text": "Sol. Sal says there’s a way under the dome. Tell me you know where."
+  },
+  {
+   "speaker": "Sol",
+   "text": "Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite."
+  },
+  {
+   "speaker": "Sol",
+   "text": "Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Is it crimes?"
+  },
+  {
+   "speaker": "Sol",
+   "text": "Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps."
+  },
+  {
+   "speaker": "Amy",
+   "text": "You’ve been running a secret mail route."
+  },
+  {
+   "speaker": "Sol",
+   "text": "A dispatch network. We call it the Network. We never came up with a better name."
+  },
+  {
+   "speaker": "Sal",
+   "text": "Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. She’s the only thing in town that’s moving."
+  },
+  {
+   "speaker": "Sol",
+   "text": "Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. Say hi."
+  },
+  {
+   "speaker": "Sal",
+   "text": "Tommy! It’s quiet in here. Even the clocks are quiet. Your mother’s in the kitchen. Don’t panic. She’s fine. She just won’t stop baking."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Sal. Can you get me in?"
+  },
+  {
+   "speaker": "Sal",
+   "text": "I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. But I can dig toward you."
+  },
+  {
+   "speaker": "Sol",
+   "text": "The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. It was supposed to open in 2031. It meets in the middle, right under the dome."
+  },
+  {
+   "speaker": "TNB",
+   "text": "You built a transcontinental subway. As a hobby."
+  },
+  {
+   "speaker": "Sol",
+   "text": "We got a very good deal on a drill."
+  },
+  {
+   "speaker": "Sal",
+   "text": "The drill stopped answering when the dome came down. Something put a chip in it. Be careful of the worm."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The worm."
+  },
+  {
+   "speaker": "Sol",
+   "text": "The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. She doesn’t love it."
+  },
+  {
+   "speaker": "Sol",
+   "text": "I need dispatchers. Two of them. Radio only. Somebody has to read me the tunnel."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I’m extremely good at being in charge."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I’m in charge of snacks."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Girls. Dispatch is the most important job in the building. If Sol says stay, you stay."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Copy."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Copy copy."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Sol. I am leaving my children with a cab driver."
+  },
+  {
+   "speaker": "Sol",
+   "text": "Thirty years. Never lost a passenger. Found two in the trunk. Both were fine."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Somehow that is not comforting."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We’ll be on the radio the whole way. Grace, you’re the voice. Rose, you’re the snacks."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Snacks are critical infrastructure."
+  },
+  {
+   "speaker": "Tom",
+   "text": "TNB. Nara. Amy. With me. We go down."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I have my thermos. I’m always ready for a tunnel."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara has never been this ready for anything. She is already at the Metro stairs, vibrating."
+  },
+  {
+   "speaker": "Sol",
+   "text": "Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. That’s you. You’re employees now."
+  },
+  {
+   "speaker": "Tom",
+   "text": "EMPLOYEES ONLY. A platform under the boulevard. And a tunnel."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I have ridden every line in this city. I didn’t know this one existed. I’m a little bit offended."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Dispatch to Tom. Radio check. Say “over.”"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Over."
+  },
+  {
+   "speaker": "Grace",
+   "text": "At the END, Tata. You say it at the end of what you say."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I said it at the end. It was the only thing I said."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Snack check! Check your pockets! I put a pretzel in your left one!"
+  },
+  {
+   "speaker": "Tom",
+   "text": "...There’s a pretzel in my left pocket."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Tom! Good. Okay. Before you go in, I have to tell you something, and I have to say it fast, because Penny made me promise."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nickel. You’re shaking."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Julian Vance."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "We didn’t know. We thought he was a collector. We took the money. And we kept the best coins in the back, in case he ever paid triple."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Penny called on the Network from under the dome. She said, “Tell Tom we’re sorry.” And then she said, “The drawer is under the counter.”"
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Eleven coins. Hers and mine. The last of the old gold. They were supposed to be a retirement."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Why bring them?"
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. He says. I don’t know. He’s a cab driver."
+  },
+  {
+   "speaker": "Tom",
+   "text": "You’re giving up your retirement."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run."
+  },
+  {
+   "speaker": "Amy",
+   "text": "You don’t have to do this."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Yes, I do. Somebody gave me a shop. I’d like to be somebody who gave something back."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The tracks run east. We follow the rails."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Stay together. Nobody falls behind. I’ll be counting."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Dispatch to Tom. You’re at mile marker one thousand two hundred and fifty. But the tunnel is forty feet long. Is that normal?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "The sign says halfway. I’m choosing to believe the sign."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata, did you see the stone in the doorway? It’s STANDING. I think it’s the bouncer."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Dispatch to Tom. You’re breaking up. Say... over... Tata?"
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata? I can’t hear the... Tata? Tata?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Grace? Rose? The radio’s gone. It’s not static. It’s just gone."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "THIS IS A QUIET CAR."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara barks. Nothing comes out. She tries again. Nothing. She looks at her own mouth, deeply offended."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "Noise is a leak. Families are the loudest leak I have ever measured."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Who are you?"
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "HUSH-9. Quiet Car, Series Nine. Property of Mr. Vance. Mr. Vance likes it quiet. Quiet is safe."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That’s the second time today somebody has told me quiet is safe. Marlowe said it too."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "Marlowe takes the color. I take the sound. We are a very good team. Please lower your voices."
+  },
+  {
+   "speaker": "TNB",
+   "text": "We’re being pretty quiet right now."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "You are breathing audibly."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I teach third grade. I know what a person sounds like right before they say “be quiet.” You’re in the wrong tunnel."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "I have given the Drill a chip. It no longer digs toward a place. It digs toward the noise. Please observe the quiet. Goodbye."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He left the quiet on. Is anybody else’s ears ringing?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "The chip makes it listen for noise. So we make a lot of it. Loudly. Together."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I’ve been trying to get Rose to use her indoor voice for six years. I’m glad somebody finally wants her outdoor one."
+  },
+  {
+   "speaker": "Tom",
+   "text": "A cavern. A wall of amber the size of a house. And a hole in the dirt exactly the width of a drill."
+  },
+  {
+   "speaker": "Amy",
+   "text": "That is the biggest drill I have ever seen."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That’s a Dual-Coast Drill. They went with the budget model. I can tell by the bolts."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s not charging. It’s digging in place. Round and round."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Its lamps are pointed at the amber. Like it wants to dig through and can’t."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s been drilling at that wall for years. Nobody told it to stop."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara sits very still. She has never seen anything so large that wanted so little."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Hit it if it hits back. Be kind first. Amy, heal. TNB, I’m on the chip. Everybody make some noise."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Up, everybody. Walk it off. It brings the roof down every third turn. Heal before, not after."
+  },
+  {
+   "speaker": "Drill Worm",
+   "text": "...Five? Five minutes. Nobody ever told me I could stop."
+  },
+  {
+   "speaker": "Drill Worm",
+   "text": "I’ve been drilling since 1952. I don’t even remember what I was looking for."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Union rules. Hydrate. And when you’re ready, we’ll tell you where you were going."
+  },
+  {
+   "speaker": "Drill Worm",
+   "text": "...Bit’s down. Engine’s off. I wasn’t going anywhere. I was just digging in."
+  },
+  {
+   "speaker": "Drill Worm",
+   "text": "I’m sorry about the roof."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s fine. Nobody’s mad at a drill. They’re mad at whoever put a chip in it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "A little grey cube just popped out of its side. The hush chip. It’s very quiet."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Not anymore."
+  },
+  {
+   "speaker": "Rose",
+   "text": "TATA! We can hear you! Sol says the radio is back! I ate a snack for you!"
+  },
+  {
+   "speaker": "Grace",
+   "text": "Dispatch to Tom. You’re loud and clear. What happened? Say over. At the END."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We took care of it. Over."
+  },
+  {
+   "speaker": "Grace",
+   "text": "See? You can do it."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Tom! Sol drove me to the second mile marker and made me run. I have never been so tired and so right."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Eleven coins. Mine are in this bag. Penny’s are on the other side of that wall."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The amber is clear on one side. There’s a pocket behind it. Two people are in it. One of them is waving a shovel."
+  },
+  {
+   "speaker": "Sal",
+   "text": "(through the glass) TOMMY! Over here! Hi! Don’t hug the amber, it’s sticky!"
+  },
+  {
+   "speaker": "Penny",
+   "text": "(through the glass) Tom! I’m so sorry! Nickel, hold up the drawer! I’ve got mine!"
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Eleven coins. Hers and mine. On three."
+  },
+  {
+   "speaker": "Penny",
+   "text": "(through the glass) One. Two. Don’t think about the interest. Three."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door."
+  },
+  {
+   "speaker": "Sal",
+   "text": "It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!"
+  },
+  {
+   "speaker": "Penny",
+   "text": "Nickel."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "Penny."
+  },
+  {
+   "speaker": "Penny",
+   "text": "I was saving for a boat."
+  },
+  {
+   "speaker": "Nickel",
+   "text": "You don’t know how to drive a boat."
+  },
+  {
+   "speaker": "Penny",
+   "text": "That’s why it was a savings."
+  },
+  {
+   "speaker": "Sal",
+   "text": "Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. I never thought anyone would walk through it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Sal. You’re the reason I got home."
+  },
+  {
+   "speaker": "Sal",
+   "text": "I’m a cab driver. That’s the whole job."
+  },
+  {
+   "speaker": "Penny",
+   "text": "Tom. I’m sorry. I sold him the coins. I took the money and I didn’t ask."
+  },
+  {
+   "speaker": "Tom",
+   "text": "You gave back the best drawer you ever had. We’re square."
+  },
+  {
+   "speaker": "Penny",
+   "text": "It was a very good drawer."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Can I say something? I’ve spent a lot of time fixing mugs somebody dropped. You don’t get the mug back. You get a better mug, with a gold line where it broke."
+  },
+  {
+   "speaker": "Penny",
+   "text": "That’s a very nice way to say it."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s called kintsugi. It’s also called Tuesday."
+  },
+  {
+   "speaker": "Amy",
+   "text": "TNB. You fought like somebody who’s done it his whole life."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’ve carried a lot of coffee in my life. It’s mostly timing."
+  },
+  {
+   "speaker": "Amy",
+   "text": "You fix things. That’s good. Nobody fixes things anymore. They throw them out and buy a new one."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’m worried about him. About Tom. He says he’s fine. He’s not very good at saying the other thing."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tom is worried about everyone except himself. We take turns. You’re on the schedule now."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’d like that."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I’m standing right here."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s a very nice schedule."
+  },
+  {
+   "speaker": "Sal",
+   "text": "Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar."
+  },
+  {
+   "speaker": "Grace",
+   "text": "We heard the whole thing. Mommy. We are coming. Do not do anything dramatic."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Copy copy! Tata, I have a pretzel for Nara!"
+  },
+  {
+   "speaker": "Amy",
+   "text": "Grace. Rose. You stay with Sol until the handcar. I love you. I’m not being dramatic."
+  },
+  {
+   "speaker": "Grace",
+   "text": "You’re being a little dramatic."
+  },
+  {
+   "speaker": "Amy",
+   "text": "A little."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Rivituso Row. The tomatoes are fine. The peppers are fine. Everything is exactly where it was."
+  },
+  {
+   "speaker": "Tom",
+   "text": "And nothing is moving."
+  },
+  {
+   "speaker": "Amy",
+   "text": "The sprinkler. Every drop is hanging in the air. It’s the prettiest thing I’ve ever seen and I hate it."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s so quiet. This is the quietest place I’ve ever been. And I live near a freeway."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Halt."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Dad? What are you wearing?"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Warden’s plate. Gold. It hums. I like the hum."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "My back doesn’t hurt, Tommy. It’s been eleven years. I made a deal."
+  },
+  {
+   "speaker": "Tom",
+   "text": "What deal?"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I stand here and the glass stays up. That’s the deal."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad. That isn’t safe. That’s a freezer."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Go home, Tom. Take your friends. Go back to the good coast."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Dad. Take that off. You’ll rust."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "...Amy. You’re not supposed to be here. You’re supposed to be safe."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I’m supposed to be your daughter."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Go home."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He said go home. Twice. That’s a man who wants an argument."
+  },
+  {
+   "speaker": "Tom",
+   "text": "He’s my dad. He wants a lot of arguments."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We’re not leaving. We always make our connection."
+  }
+ ]
+}

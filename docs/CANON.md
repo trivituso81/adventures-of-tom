@@ -60,3 +60,11 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - Gridlock Prime is not angry, it is stuck. Nobody ever let it go first. Kind route: give it a green light.
 - Amy and TNB bond over Tom: he checks the door three times and stands in doorways with a thermos "for the cat". Tom's house wall has the girls' photos; he says good morning to them every day.
 - Tombo ff2 "Run With Us, Mommy!" (Amy, Grace, Rose) unlocks in the Alvarez kitchen. Green Light keepsake from the boss.
+
+## Chapter 13: The Subway Beneath the Sea of Clouds
+- Sal and Sol are cousins who have run a secret dispatch network (the Network) for eleven years and bored the Transcontinental Sub-Rail under the dome as a hobby.
+- Party: Tom, Amy, TNB, Nara. Grace and Rose run the dispatch radio from the cab stand.
+- Penny and Nickel sold gold coins to Vance for years. They own up and melt their last eleven coins to open the amber ("gold remembers being warm").
+- HUSH-9 (Vance's Quiet Car) debuts: takes sound, chips the Drill to dig toward noise.
+- Boss: Dual-Coast Drill Worm (Amy and TNB spotlight). Kind route: TAKE FIVE.
+- Final beat: Boppy at the Rivituso gate in glowing Warden's plate. "I made a deal. Nobody gets hurt, nobody gets old, nobody gets left."

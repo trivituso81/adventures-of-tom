@@ -129,3 +129,6 @@ Add any new or reworded spoken line here as `character.kind: "text"` (and the ol
 - First launch on a phone may be slow with all voices loaded; in the live artifact the answer is to fetch clips on demand. Not relevant to the silent build in this repo.
 
 - C11b follow-up: Rose Mode picture UI now has a BENCH CALL icon (BI_ART x_bench, bpBag branch), so the bag row shows a bench picture instead of crashing.
+
+## Chapter 13 (Sub-Rail)
+Lines to bake: all dialogue in data/scenes-ch13.js (listed in docs/dialogue-scripts-ch13.json), plus B2_BREAK_LINES in data/ch13-battle.js and the Drill Worm and Hushling battle lines. Speakers HUSH-9 and Drill Worm need a voice mapping in data/dialog-cast.js first.

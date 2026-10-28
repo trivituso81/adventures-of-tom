@@ -1,16 +1,13 @@
-# NEXT (rewritten end of C12)
-Live: Chapter 12 "Welcome to Jefferson Park, Girls" is complete on main (Tom's house, TNB's loft, Marlowe's grey-out, amber neighbors, Gridlock Prime, Run With Us Mommy unlock).
-Project is FULL: Project writes are refused. Tom must delete old Project docs (the 120+ claude/ lab, baker and cut scripts) before claude/next.md can be updated there. This file stands in for it.
+# NEXT: build Chapter 14, "The Rikers Wall of Rivituso Row"
 
-## One next task: Chapter 13 "The Subway Beneath the Sea of Clouds"
-Read claude/part2-map.md row 13 and the bible ch13 entry. Build it end to end from the outline (no proposal gate). Entry: the cab stand (Sol, Angel City Cab Co.) after ch12-done. Replace the CHAPTERS[13] stub in engine/story.js.
+Opening prompt: "Read docs/NEXT.md in the repo and continue."
 
-## Files to read
-docs/C12-DONE.md, docs/CANON.md, docs/WORKFLOW.md, data/scenes-ch12.js (pattern), data/ch12-battle.js (Shake-style boss pattern).
+State: chapters 1 to 13 built. Read docs/C13-DONE.md first (flags, girls handling, armored Boppy). Then docs/CANON.md and claude/part2-map.md row 14 in the Project.
 
-## Tests
-python3 tools/smoke.py
-python3 tools/ch11_test.py
-python3 tools/ch11b_test.py
-python3 tools/ch12_test.py
-Look at tools/shots/ before pushing to main.
+Task: replace the CHAPTERS[14] stub in engine/story.js. Start at Rivituso Row with armored Boppy at the gate. Girls rejoin via setGirlsAway(false) (it clears girlAtHome NPCs everywhere). Remove the persistent Boppy re-spawn in data/scenes-ch13.js STORY_WORLD when chapter 14 starts or make it chapter-aware. Add CHSEL_LAST=14 and a chselFourteen in engine/chapter-select.js.
+
+Pattern to copy: data/scenes-ch13.js, data/maps-ch13.js, engine/ch13-render.js, tools/ch13_test.py.
+
+Tests: python3 tools/smoke.py; tools/ch11_test.py, ch11b_test.py, ch12_test.py, ch13_test.py, plus a new ch14 test. Look at tools/shots/ before pushing to main, then check https://trivituso81.github.io/adventures-of-tom/.
+
+Rules: no em dashes, never hand-edit data/voice*, log reworded lines in docs/CHANGES.md.

@@ -115,7 +115,10 @@ const CHAPTERS=[
     party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch12-done')?{lines:['Sal called from the East Coast. He is working on a way under the dome.','Chapter 13 is coming. Until then, the cab stand has coffee.']}
       :{lines:['Airport? Tom. You just got home. Show the girls the house first.']}},
-  {n:13,title:'The Subway Beneath the Sea of Clouds'},
+  {n:13,title:'The Subway Beneath the Sea of Clouds',
+    party:{lock:['tom','amy','tnb','nara'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch13-done')?{lines:['Chapter 14 is coming. Boppy is at the gate, and the cab stand has coffee.']}
+      :{lines:['Airport? Tom. The way in is under the world. Take the Metro stairs on the boulevard.']}},
   {n:14,title:'The Rikers Wall of Rivituso Row'},
   {n:15,title:'The Eight-Seat Dinner Table'},
   {n:16,title:'The Amber Eclipse'},
