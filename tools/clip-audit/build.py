@@ -126,6 +126,7 @@ def dd_pick():
     desc=re.search(r"deedee:\{.*?desc:'((?:[^'\\]|\\.)*)'",js,re.S).group(1).replace("\\'","'")
     sample=re.search(r"deedee:\{.*?sample:'((?:[^'\\]|\\.)*)'",js,re.S).group(1).replace("\\'","'")
     v=B['voices']['deedee']
+    desc=desc.replace('A woman in her seventies who sounds about fifty-five.','A woman who sounds about fifty-five.')
     return {'deedee':{'desc':desc,'sample':sample,'old_id':v['voice_id'],'old_name':v['name'],'samples':samples}}
 data=dict(pick=dd_pick(),accent={'deedee':'warm Long Island accent'},built=datetime.date.today().isoformat(),battle=battle,dialog=dialog,voicesLive=vl,fam=fam,castVoices=cv,designed=designed,vnames=names)
 js=json.dumps(data,ensure_ascii=False).replace('</','<\\/')

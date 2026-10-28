@@ -70,7 +70,21 @@ const PICK=DATA.pick||{};
 let PREV=[];
 async function designDD(){
   need(); const c=PICK.deedee;
-  const r=await fetch('https://api.elevenlabs.io/v1/text-to-voice/design?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify({voice_description:S.ddDesc||c.desc,model_id:'eleven_ttv_v3',text:S.ddSample||c.sample,guidance_scale:5})});
+  const QP='Perfect audio quality, studio-quality recording, close microphone, crisp and clear. ';
+  let desc=(S.ddDesc||c.desc).replace(/\s*Clean studio recording\.?/i,'');
+  const body={voice_description:QP+desc,model_id:'eleven_ttv_v3',text:S.ddSample||c.sample,guidance_scale:+(S.ddGuide||3),quality:0.9,loudness:0.6};
+  if(S.ddRef){ body.reference_audio_base64=c.samples[1].mp3; body.prompt_strength=0.6; }
+  let fmt='mp3_44100_192';
+  const go=()=>fetch('https://api.elevenlabs.io/v1/text-to-voice/design?output_format='+fmt,{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify(body)});
+  let r=await go();
+  for(let k=0;k<3&&!r.ok&&[400,403,422].includes(r.status);k++){
+    const e=await apiErr(r), m=e.message;
+    if(/192|tier|output_format|format/i.test(m)) fmt='mp3_44100_128';
+    else if(/reference|prompt_strength/i.test(m)&&body.reference_audio_base64){ delete body.reference_audio_base64; delete body.prompt_strength; }
+    else if(/quality/i.test(m)&&body.quality!=null) delete body.quality;
+    else throw e;
+    r=await go();
+  }
   if(!r.ok) throw await apiErr(r);
   const j=await r.json(); return (j.previews||[]).map(p=>({gid:p.generated_voice_id,mp3:p.audio_base_64}));
 }
@@ -86,21 +100,41 @@ async function freeSlot(){
   const r=await fetch('https://api.elevenlabs.io/v1/voices/'+encodeURIComponent(id),{method:'DELETE',headers:{'xi-api-key':apiKey()}});
   if(!r.ok&&r.status!==404) throw await apiErr(r);
 }
+let LIB=[];
+async function searchLib(){
+  need(); const q=new URLSearchParams({page_size:'30',gender:'female',search:S.libQ!=null?S.libQ:'New York'});
+  if((S.libAge||'old')!=='any') q.set('age',S.libAge||'old');
+  const r=await fetch('https://api.elevenlabs.io/v1/shared-voices?'+q.toString(),{headers:{'xi-api-key':apiKey()}});
+  if(!r.ok) throw await apiErr(r);
+  const j=await r.json(); LIB=(j.voices||[]).filter(v=>v.preview_url);
+  if(!LIB.length) throw new Error('No library voices matched. Try another word, or set age to any.');
+}
+async function addLib(v){
+  need(); const name='AoT Deedee ('+v.name.slice(0,30)+')';
+  const r=await fetch('https://api.elevenlabs.io/v1/voices/add/'+encodeURIComponent(v.public_owner_id)+'/'+encodeURIComponent(v.voice_id),{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify({new_name:name})});
+  if(!r.ok) throw await apiErr(r);
+  const j=await r.json(); if(!j.voice_id) throw new Error('No voice ID came back.'); setPick(j.voice_id,name);
+}
 function setPick(id,name){ S.pick=S.pick||{}; S.pick.deedee={voice_id:id,name:name}; delete S.dvoices.deedee; saveState(); }
 let PB={busy:'',err:'',full:false};
 function pickPanel(){
   const c=PICK.deedee; if(!c) return '';
   const cur=S.pick&&S.pick.deedee, k='dd';
-  let h='<div class="win panel"><h2>Deedee\'s voice</h2><div class="note">Every Deedee line in this page is read in the voice chosen here. Right now: <b>'+esc(cur?cur.name:c.old_name)+'</b>'+(cur?'':' (her current game voice)')+'. Listen to her current voice, or design new options and pick one. Changing the voice later means her lines need making again (old takes stop counting).</div>';
+  let h='<div class="win panel"><h2>Deedee\'s voice</h2><div class="note">Every Deedee line in this page is read in the voice chosen here. Right now: <b>'+esc(cur?cur.name:c.old_name)+'</b>'+(cur?'':' (her current game voice)')+'. Listen to her current voice, then either design new options or pick a real recorded voice from the ElevenLabs library. Changing the voice later means her lines need making again (old takes stop counting).</div>';
   h+='<div class="row" style="margin-top:8px">'+c.samples.map((s,i)=>'<button class="play" data-act="ddcur" data-i="'+i+'">&#9654;</button><span class="hint">Current: '+esc(s.text)+'</span>').join('')+'</div>';
   h+='<div class="field" style="margin-top:10px"><label>Voice description (what ElevenLabs designs from)</label><textarea id="dddesc" rows="4">'+esc(S.ddDesc||c.desc)+'</textarea></div>';
   h+='<div class="field"><label>What the options say (sample)</label><textarea id="ddsample" rows="3">'+esc(S.ddSample||c.sample)+'</textarea></div>';
+  h+='<div class="row" style="margin-bottom:8px"><label class="hint">Follow the description: <b id="ddgv">'+(S.ddGuide||3)+'</b></label><input type="range" id="ddguide" min="1" max="6" step="0.5" value="'+(S.ddGuide||3)+'"><span class="hint">(lower = cleaner sound, looser accent)</span></div>';
+  h+='<label class="row hint" style="margin-bottom:8px"><input type="checkbox" id="ddref"'+(S.ddRef?' checked':'')+'> Start from her current voice (options sound like a cleaner cousin of it)</label>';
   h+='<div class="row"><button class="btn gold" data-act="dddesign"'+(PB.busy?' disabled':'')+'>Design 3 options</button>';
   if(cur) h+='<button class="btn" data-act="ddreset">Go back to her current voice</button>';
   h+='<span class="busy">'+esc(PB.busy)+'</span></div>';
   if(PB.err) h+='<div class="err" style="margin-top:6px">'+esc(PB.err)+'</div>';
   if(PB.full) h+='<div class="note" style="margin-top:6px">Your ElevenLabs account has no free voice slot. <button class="btn small" data-act="ddfree">Delete '+esc(c.old_name)+' and use the option</button> Her lines already in the game keep playing; this only frees the slot.</div>';
   PREV.forEach((p,i)=>{ h+='<div class="pv"><button class="play" data-act="ddplay" data-i="'+i+'">&#9654;</button><span class="hint">Option '+(i+1)+'</span><div class="grow"></div><button class="btn small" data-act="dduse" data-i="'+i+'">Use this voice</button></div>'; });
+  h+='<h2 style="margin-top:16px">Or pick a real recorded voice from the ElevenLabs Voice Library</h2><div class="note">These are recorded from real people, so they are never muffled. Search words: New York, Long Island, Brooklyn, grandma, warm.</div>';
+  h+='<div class="row" style="margin-top:6px"><input type="text" id="libq" value="'+esc(S.libQ!=null?S.libQ:'New York')+'" style="min-width:150px"><select id="libage">'+['old','middle_aged','any'].map(a=>'<option value="'+a+'"'+((S.libAge||'old')===a?' selected':'')+'>'+(a==='middle_aged'?'middle aged':a)+'</option>').join('')+'</select><button class="btn" data-act="libsearch"'+(PB.busy?' disabled':'')+'>Search</button></div>';
+  LIB.forEach((v,i)=>{ h+='<div class="pv"><button class="play" data-act="libplay" data-i="'+i+'">&#9654;</button><span class="hint"><b style="color:var(--text)">'+esc(v.name)+'</b> · '+esc([v.accent,v.age,v.descriptive].filter(Boolean).join(', '))+(v.description?'<br>'+esc(v.description.slice(0,140)):'')+'</span><div class="grow"></div><button class="btn small" data-act="libuse" data-i="'+i+'">Use this voice</button></div>'; });
   h+='<div class="field" style="margin-top:10px"><label>Or paste the ID of a voice already in your ElevenLabs library</label><input type="text" id="ddvid" placeholder="voice ID" value="'+esc(cur?cur.voice_id:'')+'"></div>';
   return h+'</div>';
 }
@@ -209,8 +243,11 @@ document.addEventListener('click',e=>{
   if(b.dataset.act==='ddcur'){ playSrc('data:audio/mpeg;base64,'+PICK.deedee.samples[+b.dataset.i].mp3,b); return; }
   if(b.dataset.act==='ddplay'){ const p=PREV[+b.dataset.i]; if(p) playSrc('data:audio/mpeg;base64,'+p.mp3,b); return; }
   if(b.dataset.act==='dddesign'){ ddRun('Designing 3 options. Up to a minute...',async()=>{ PREV=await designDD(); }); return; }
-  if(b.dataset.act==='dduse'){ const p=PREV[+b.dataset.i]; if(!p) return; PENDING=p.gid; ddRun('Saving this voice...',async()=>{ await saveDD(p.gid); PREV=[]; PB.full=false; }); return; }
-  if(b.dataset.act==='ddfree'){ if(!confirm('Delete '+PICK.deedee.old_name+' from your ElevenLabs account? Her lines already in the game keep playing.')) return; ddRun('Freeing a slot...',async()=>{ await freeSlot(); if(PENDING){ await saveDD(PENDING); PREV=[]; } PB.full=false; }); return; }
+  if(b.dataset.act==='dduse'){ const p=PREV[+b.dataset.i]; if(!p) return; PENDING=async()=>{ await saveDD(p.gid); PREV=[]; }; ddRun('Saving this voice...',async()=>{ await PENDING(); PENDING=null; PB.full=false; }); return; }
+  if(b.dataset.act==='libsearch'){ ddRun('Searching the library...',searchLib); return; }
+  if(b.dataset.act==='libplay'){ const v=LIB[+b.dataset.i]; if(v) playSrc(v.preview_url,b); return; }
+  if(b.dataset.act==='libuse'){ const v=LIB[+b.dataset.i]; if(!v) return; PENDING=async()=>{ await addLib(v); LIB=[]; }; ddRun('Adding this voice to your account...',async()=>{ await PENDING(); PENDING=null; PB.full=false; }); return; }
+  if(b.dataset.act==='ddfree'){ if(!confirm('Delete '+PICK.deedee.old_name+' from your ElevenLabs account? Her lines already in the game keep playing.')) return; ddRun('Freeing a slot...',async()=>{ await freeSlot(); if(PENDING){ await PENDING(); PENDING=null; } PB.full=false; }); return; }
   if(b.dataset.act==='ddreset'){ delete S.pick.deedee; delete S.dvoices.deedee; saveState(); render(); return; }
   const act=b.dataset.act, it=b.dataset.id&&BYID.get(b.dataset.id), tk=b.dataset.tid&&TAKES.get(b.dataset.tid);
   if(act==='gen'&&it) generate(it);
@@ -222,12 +259,16 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const t=e.target;
   if(t.dataset.act==='keep'){ const tk=TAKES.get(t.dataset.tid); if(!tk) return; if(t.checked) for(const x of takesFor(tk.item)) if(x.keep&&x.id!==tk.id){x.keep=false;dbPut(x);} tk.keep=t.checked; dbPut(tk); refreshCard(tk.item); }
+  else if(t.id==='ddref'){ S.ddRef=t.checked; saveState(); }
+  else if(t.id==='libage'){ S.libAge=t.value; saveState(); }
   else if(t.id==='ddvid'){ const v=t.value.trim(); if(v) setPick(v,'Pasted voice '+v.slice(0,6)); else if(S.pick){ delete S.pick.deedee; delete S.dvoices.deedee; saveState(); } render(); }
   else if(t.id==='vsel'){ S.voice=t.value; S.limit=40; saveState(); render(); }
 });
 function updateSent(it){ const el=document.querySelector('[data-sent="'+CSS.escape(it.id)+'"]'); if(el) el.innerHTML=sentHtml(it); }
 document.addEventListener('input',e=>{
   const t=e.target;
+  if(t.id==='ddguide'){ S.ddGuide=+t.value; const g=$('ddgv'); if(g) g.textContent=t.value; saveState(); return; }
+  if(t.id==='libq'){ S.libQ=t.value; saveState(); return; }
   if(t.id==='dddesc'){ S.ddDesc=t.value; saveState(); return; }
   if(t.id==='ddsample'){ S.ddSample=t.value; saveState(); return; }
   if(t.id==='search'){ S.search=t.value; S.limit=40; saveState(); clearTimeout(window.__st); window.__st=setTimeout(()=>{ const pos=t.selectionStart; render(); const n=$('search'); if(n){ n.focus(); try{n.setSelectionRange(pos,pos);}catch(e){} } },250); return; }
