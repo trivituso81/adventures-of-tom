@@ -389,10 +389,11 @@ function splashScene(W,H,panelH,time) {
   // Front row, left to right. Rose rides on Tom's shoulders (engine/rose-ride.js); she bounces on her own turn.
   const rose=by('rose');
   for(const m of SPLASH_CAST.filter(m=>m.row===0&&!m.rider&&m.id!=='nara')) {
-    const cx=X(m.fx),lift=hopY(m),set=OW[m.id],fr=m.hopT>=0?2:0;
+    // Rose's bounce is carried by Tom (the pair hops as one), so her legs keep their length and her shoes stay on his shoulders.
+    const cx=X(m.fx),lift=hopY(m)+(m.id==='tom'?hopY(rose):0),set=OW[m.id],fr=m.hopT>=0?2:0;
     shadow(cx,frontFy,set.down[0][0].length,lift);
     if(m.id==='tom') {
-      const tf=set.down[fr],top=frontFy-tf.length*S-lift,rb=hopY(rose)+(Math.floor(time*3)%2)*S;
+      const tf=set.down[fr],top=frontFy-tf.length*S-lift,rb=(Math.floor(time*3)%2)*S;
       roseRide('ow_down','back',cx,top-rb,S);
       drawOne(set,fr,cx,frontFy,lift);
       roseRide('ow_down','front',cx,top-Math.min(rb,S),S);

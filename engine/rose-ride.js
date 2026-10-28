@@ -23,10 +23,13 @@ function roseSeatBattle(m,i,frame,sp,fx,hurt,t,force) {
   const tom=b2Tom(),d=tom&&b2Alive(tom)&&battle.drawnAt&&battle.drawnAt[tom.idx]; if(!d) return false;
   const pose=(frame===sp.celeb||frame===sp.celebFlip)?'bt_celeb':'bt_idle',s=sp.scale;
   const cx=d.x!=null?d.x+d.w/2:d.cx;
-  const bob=Math.round(Math.abs(Math.sin(t*3))*2)+(fx.hop>0?Math.round(Math.abs(Math.sin(t*9))*10):0);
+  // Her own bounce is carried by Tom (hop below, added to his lift in engine/battle-draw.js), so the pair hops as one: her
+  // legs keep their length and her shoes stay on his shoulders instead of stretching and floating off.
+  const bob=Math.round(Math.abs(Math.sin(t*3))*2);
+  const hop=fx.hop>0?Math.round(Math.abs(Math.sin(t*9))*12):0;
   const top=d.base-d.h-bob;
   const at=roseRide(pose,'back',cx,top,s,false,{flash:fx.flash>0});
-  battle._seat={pose,cx,top,s,flash:fx.flash>0}; battle._seatLast=true;
+  battle._seat={pose,cx,top,s,flash:fx.flash>0,hop}; battle._seatLast=true;
   battle.drawnAt[i]={cx:Math.round(cx-4),base:Math.round(top+5),h:Math.round(31*s)};
   if(hurt&&at) {   // black eye, as on her normal frame
     const P=ROSE_RIDE[pose],ey=sp.eye,bx=at.x+(ey.col+P.sx)*s-s,by=at.y+(ey.row+P.sy)*s-s;

@@ -82,6 +82,7 @@ function drawBattle() {
     if(coaching) hop=Math.round(Math.abs(Math.sin(t*7))*14);
     if(burpee&&burpeeFrame===sp.celeb) hop=Math.round(Math.abs(Math.sin(t*12))*24);
     if(fx.hop>0) hop=Math.round(Math.abs(Math.sin(t*9))*18);
+    if(m.id==='tom'&&battle._seat&&battle._seat.hop) hop+=battle._seat.hop;   // Rose bounces on his shoulders: he lifts with her (engine/rose-ride.js)
     let appr=0;
     if(fx.appr>0) { const e=fx.apprDur-fx.appr; appr=e<.7?Math.min(1,e/.7):(fx.appr<.35?fx.appr/.35:1); }
     let cx=pos.x*3-Math.round(lunge*(pos.x*3-250))-Math.round(appr*(pos.x*3-(m.id==='rose'?236:262)))+(fx.shake>0?rand(-5,5):0)+(fx.tongue>0?Math.round(Math.sin(t*22)*2):0)+(dancing?Math.round(Math.sin(t*4.5)*16):0);
