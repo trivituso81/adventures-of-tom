@@ -59,3 +59,16 @@ function frame(now) {
 window.__LE={intro,splash,startSplash,splashPick,startTitle,beginOpening,get coins(){return coins;},set coins(v){coins=v;},openShop,closeShop,items,party,battle,bag,sfx,say,sound,town,player,followers,startBattle,openDialog,toggleLayout,layout,RECRUITS,recruitJoin,recruitLeave,offerRecruit,dialog,pickChoice,saveGame,loadGame,readSave,ATTACKS,B2,B2_SKILLS,B2_FOES,b2Start,b2Lab,b2Do,b2Dir,b2A,b2Back,b2Forecast,b2Damage,b2TargetOptions,B2_LAB,BATTLE_SPRITES,get map(){return currentMap;},worlds,findGrump,findMonster,allMonsters,MONSTERS,go:(id)=>{ const m=worlds[id]; if(!m) return false; currentMap=m; player.x=m.spawn.x; player.y=m.spawn.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; return true; },refresh:()=>b2Render()};
 requestAnimationFrame(frame);
 startSplash();
+
+// Coming back to the app after it sat in the background for a while shows the title screen,
+// exactly like a fresh launch (iOS resumes home-screen apps instead of reloading them).
+// Not during a battle or cutscene, so nothing in progress is lost. Autosave still covers the rest.
+(function(){
+  let hiddenAt=0;
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden) { hiddenAt=Date.now(); return; }
+    const away=hiddenAt?Date.now()-hiddenAt:0; hiddenAt=0;
+    if(away<60000||splash.active||battle.active||cutsceneOn()) return;
+    location.reload();
+  });
+})();
