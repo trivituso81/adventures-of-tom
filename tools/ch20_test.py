@@ -26,7 +26,7 @@ def fight(pg,tag,maxn=400):
             if tag=='levi':
                 if pg.evaluate("()=>!!ch20Barrier()"):
                     pg.evaluate("()=>b2Do({relay:true,name:'FAMILY RELAY',weight:'standard'},{label:'RELAY',targets:[],primary:B2.actor,ally:true})"); relays+=1; pg.wait_for_timeout(1500); continue
-                pg.evaluate("()=>{ const f=B2.foes.find(f=>f.boss==='leviathan'); const B=CH20_BARS[f.barrier||0]; if(B) f.hp=Math.min(f.hp,Math.round(f.maxHp*B.floor)+40); }")
+                pg.evaluate("()=>{ const f=B2.foes.find(f=>f.boss==='leviathan'); const B=CH20_BARS[f.barrier||0]; if(B) if(B){ f.hp=Math.round(f.maxHp*B.floor)-5; ch20Floor(f); } }")
             else:
                 pg.evaluate("()=>{ const j=B2.foes.find(f=>f.boss==='julian'); if(j&&!j.tomDone){ j.acts7=CH20_ACTS.slice(); j.warm=Math.round(j.warmGoal*7/8); j.tomDue=true; } }")
             pg.evaluate("()=>window.__LE.b2Dir('right')"); pg.wait_for_timeout(120)
