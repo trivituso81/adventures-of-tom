@@ -46,12 +46,25 @@ function audio() {
       sound.musicBus.connect(sound.ctx.destination);
     } catch(e) { return null; }
   }
-  if(sound.ctx.state==='suspended') sound.ctx.resume();
+  // iPhone Safari sets the state to 'interrupted' (not 'suspended') after switching apps, so wake it from any state but running.
+  if(sound.ctx.state!=='running') wakeAudio();
   return sound.ctx;
 }
 
+// Wake the audio engine after an app switch, a call, or Siri. iOS only lets a stopped context restart from a touch,
+// so this runs on return to the page and again on the next tap. A silent blip also nudges iOS to reopen the output.
+function wakeAudio() {
+  const c=sound.ctx; if(!c) return;
+  try {
+    const p=c.resume(); if(p&&p.catch) p.catch(()=>{});
+    const b=c.createBuffer(1,1,22050),s=c.createBufferSource(); s.buffer=b; s.connect(c.destination); s.start(0);
+  } catch(e) {}
+}
+for(const ev of ['visibilitychange','pageshow','focus']) window.addEventListener(ev,()=>{ if(!document.hidden) wakeAudio(); });
+
 function unlockAudio() {
   audio();
+  if(sound.ctx&&sound.ctx.state!=='running') wakeAudio();
   if(!sound.unlocked&&'speechSynthesis'in window) {
     sound.unlocked=true;
     try {
@@ -63,7 +76,7 @@ function unlockAudio() {
     } catch(e) {}
   }
 }
-for(const ev of ['touchstart','mousedown','keydown']) window.addEventListener(ev,unlockAudio,{passive:true});
+for(const ev of ['touchstart','touchend','mousedown','keydown']) window.addEventListener(ev,unlockAudio,{passive:true});
 
 function tone(o) {
   const c=sound.enabled&&audio();
