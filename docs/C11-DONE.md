@@ -6,4 +6,4 @@ Add this under "Chapter sessions" in the build plan (claude/build-plan.md in the
 - Code: data/scenes-p2.js, data/p2-monsters.js, data/p2-battle.js, engine/battle2.js (finalcall branches, B2_FINAL, B2_FLY_LINES), engine/benchcall.js (new), index.html. Repo main commit d63d3cd. Tests: tools/ch11b_test.py, tools/ch11_test.py, tools/smoke.py FAILS: [].
 - Wiring still to do for chapter 12: CHSEL_LAST 12 once chapter 12 is proposed and approved; chapter 12 start is Los Angeles (Tom, Grace, Rose, Amy, TNB, Nara arrive from Gate Infinity). The glasses beat and the one-time EVERYTHING gives you gas callback were not used in chapter 11.
 - Unvoiced: every new C11 dialogue line and the FINAL CALL kindness lines (docs/dialogue-scripts-ch11.json). Speakers with no voice mapping: Speaker, Standby Sprite, Nara, Lost and Found, Julian Vance, FINAL CALL.
-- Known gaps: the Rose Mode picture UI has no BI_ART entry for BENCH CALL (it shows no picture); no battle music for FINAL CALL; coin nine is narrated, not an inventory item.
+- Known gaps: no battle music for FINAL CALL; coin nine is narrated, not an inventory item.

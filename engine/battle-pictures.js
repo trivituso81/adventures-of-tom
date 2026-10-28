@@ -79,7 +79,7 @@ function bpBag(u) {
   const rows=b2BagList(u);
   return '<div class="b2-grid bp-grid">'+rows.map((r,i)=>{
     let ic,mk='',n='';
-    if(r.run) ic='x_run'; else if(r.praise) { ic='x_praise'; mk=bpIcon('m_heartp',16); } else if(r.crust) { ic='x_crust'; mk=bpIcon('m_plusheart',16)+bpIcon('m_hand',16); }
+    if(r.run) ic='x_run'; else if(r.praise) { ic='x_praise'; mk=bpIcon('m_heartp',16); } else if(r.crust) { ic='x_crust'; mk=bpIcon('m_plusheart',16)+bpIcon('m_hand',16); } else if(r.benchcall) { ic='x_bench'; mk=bpIcon('m_hand',16); }
     else { ic=r.item.id; mk=bpItemMark(r.item.it); n='<b class="bp-n">x'+r.item.n+'</b>'; }
     return '<button type="button" class="b2-btn bp-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span class="bp-ic">'+(bpIcon(ic,44,'',!!r.no)||bpIcon('x_bag',44))+n+(r.lock?'<i class="bp-lock">'+bpIcon('m_lock',18)+'</i>':'')+'</span><span class="bp-m">'+mk+'</span></button>'; }).join('')+bpBack()+'</div>';
 }
