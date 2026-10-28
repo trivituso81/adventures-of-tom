@@ -18,13 +18,21 @@ def shot(pg,n): pg.screenshot(path=os.path.join(SHOTS,f'ch20-{n}.png'))
 def check(name,ok):
     print(('ok   ' if ok else 'FAIL ')+name)
     if not ok: fails.append(name)
-def fight(pg,tag,maxn=1500):
+def fight(pg,tag,maxn=400):
+    relays=0
     for i in range(maxn):
-        if not pg.evaluate("()=>battle.active"): return
+        if not pg.evaluate("()=>battle.active"): return relays
         if pg.evaluate("()=>battle.state==='command'&&B2.actor&&B2.actor.side==='party'"):
+            if tag=='levi':
+                if pg.evaluate("()=>!!ch20Barrier()"):
+                    pg.evaluate("()=>b2Do({relay:true,name:'FAMILY RELAY',weight:'standard'},{label:'RELAY',targets:[],primary:B2.actor,ally:true})"); relays+=1; pg.wait_for_timeout(1500); continue
+                pg.evaluate("()=>{ const f=B2.foes.find(f=>f.boss==='leviathan'); const B=CH20_BARS[f.barrier||0]; if(B) f.hp=Math.min(f.hp,Math.round(f.maxHp*B.floor)+40); }")
+            else:
+                pg.evaluate("()=>{ const j=B2.foes.find(f=>f.boss==='julian'); if(j&&!j.tomDone){ j.acts7=CH20_ACTS.slice(); j.warm=Math.round(j.warmGoal*7/8); j.tomDue=true; } }")
             pg.evaluate("()=>window.__LE.b2Dir('right')"); pg.wait_for_timeout(120)
             for k in range(3): pg.evaluate("()=>window.__LE.b2A()"); pg.wait_for_timeout(120)
-        pg.wait_for_timeout(300)
+        pg.wait_for_timeout(500)
+    return relays
 with sync_playwright() as pw:
     br=pw.chromium.launch(args=['--headless=new','--no-proxy-server'])
     pg=br.new_page(viewport={'width':430,'height':860})
@@ -57,7 +65,7 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ B7.speed=3; }")
     check('Leviathan boss in the fight',pg.evaluate("()=>B2.foes.some(f=>f.boss==='leviathan')"))
     # break each barrier by relay via debug: use the real wrapper where available, else drive through the fight
-    fight(pg,'levi')
+    n=fight(pg,'levi'); check('four relays broke four barriers',n>=4 and pg.evaluate("()=>flag('relay:distance')&&flag('relay:fear')")); shot(pg,'levi-end')
     pg.evaluate("()=>{ if(flag('battle:leviathan')!=='win') setFlag('battle:leviathan','win'); }")
     check('shatter scene to Julian',adv(pg,500,"()=>flag('ch20-shatter')===true&&battle.active")); pg.wait_for_timeout(1500); shot(pg,'julian-open')
     pg.evaluate("()=>{ B7.speed=3; }")
