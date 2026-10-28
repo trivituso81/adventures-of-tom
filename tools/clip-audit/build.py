@@ -1,6 +1,6 @@
 import json,re,datetime,collections,sys
 sys.path.insert(0,'/home/claude/bk'); from fixtext import tr
-from keepscript import convert,check
+from keepscript import convert,check,caps_from_text
 import os
 ORIG=json.load(open('orig-scripts.json')) if os.path.exists('orig-scripts.json') else {}
 IDX={}
@@ -63,6 +63,39 @@ for bi,b in enumerate(BAD):
         sc=handscript(bi,t) or auto(ch,t)
         if ch=='tnb' and re.search(r'[Ww]ell, well, well',t): sc=wwwfix(sc)
         battle.append(dict(key=ch+'|'+kind+'|'+t,ch=ch,kind=kind,text=t,tag='rebake',note=note,script=sc,hand=bool(old)))
+
+# ---- Deedee recast: every Deedee line, original hand-written scripts (tags and CAPS kept) ----
+BAN=re.compile(r"\b(old|elderly|frail|weary|drowsy|tired|fussing|scratchy|quavering|sleepy)\b,?\s*",re.I)
+def clean_tags(sc):
+    def f(m):
+        inner=BAN.sub('',m.group(1)).strip().strip(',').strip()
+        inner=re.sub(r'\s*,\s*,\s*',', ',inner)
+        return '['+inner+']' if inner else ''
+    return re.sub(r'\s+',' ',re.sub(r'\[([^\]]*)\]',f,sc)).strip()
+dd_kept=0; dd_lost=[]
+if os.path.exists('dd-orig-scripts.json'):
+    DDL=json.load(open('dd-to-match.json')); DDO=json.load(open('dd-orig-scripts.json'))
+    have_d={d['key'] for d in dialog}; have_b={(b['ch'],b['text']) for b in battle}
+    for x in DDL:
+        o=DDO.get(x['id']); t=x['text']; sc=None
+        if o:
+            c,_=convert(o['script'],t)
+            if check(c,t): sc=clean_tags(caps_from_text(c,t)[0])
+            else: dd_lost.append((x['id'],t,'convert failed: '+o['script']))
+        else: dd_lost.append((x['id'],t,'no original'))
+        if sc: dd_kept+=1
+        else: sc=auto('deedee',t)
+        note='Deedee recast: original direction and emphasis restored.'
+        if x['kind']=='dialog':
+            k='deedee|'+t
+            if k in have_d:
+                for d in dialog:
+                    if d['key']==k: d['script']=sc; d['note']=d['note']+' '+note; d['dd']=True
+                continue
+            dialog.append(dict(key=k,voice='deedee',speaker='Deedee',text=t,ctx='Deedee recast',tag='rebake',note=note,after='',script=sc,hand=bool(o),dd=True))
+        else:
+            if ('deedee',t) in have_b: continue
+            battle.append(dict(key='deedee|'+x['kind']+'|'+t,ch='deedee',kind=x['kind'],text=t,tag='rebake',note=note,script=sc,hand=bool(o),dd=True))
 need=sorted({d['voice'] for d in dialog})
 fam={i:{k:B['voices'][i][k] for k in ('voice_id','name','settings','direction') if k in B['voices'][i]} for i in B['cast']['family'] if i in B['voices']}
 cv={v:B['cast']['voices'][v] for v in need if v in B['cast']['voices']}
@@ -72,7 +105,7 @@ for v,o in LOAN.items():
 names={v:next((n for n,vv in B['cast']['speakers'].items() if vv==v),v) for v in need}; names['tnb']='TNB'
 vl={ch:({k:v[k] for k in v if k!='scripts'} if isinstance(v,dict) else v) for ch,v in B['voices'].items()}
 dialog.sort(key=lambda d:(d['voice'],d['text']))
-data=dict(built=datetime.date.today().isoformat(),battle=battle,dialog=dialog,voicesLive=vl,fam=fam,castVoices=cv,designed=designed,vnames=names)
+data=dict(accent={'deedee':'warm Long Island accent'},built=datetime.date.today().isoformat(),battle=battle,dialog=dialog,voicesLive=vl,fam=fam,castVoices=cv,designed=designed,vnames=names)
 js=json.dumps(data,ensure_ascii=False).replace('</','<\\/')
 head=open('tpl_head.html').read(); body=open('tpl_body.js').read()
 out=head.rstrip()[:-len('/*__DATA__*/;')]+js+';\n'+body
@@ -81,3 +114,5 @@ print('dialog',len(dialog),'battle',len(battle),'battle scripts kept from old',h
 print(collections.Counter(d['voice'] for d in dialog)); print('no voice id:',[v for v in need if v not in fam and not (designed.get(v) or {}).get('voice_id')])
 
 print('hand-written scripts kept',kept,'of',len(BAD)); [print('  LOST',x) for x in lost]
+
+print('deedee recast kept',dd_kept,'lost',len(dd_lost)); [print('  DD LOST',x) for x in dd_lost]

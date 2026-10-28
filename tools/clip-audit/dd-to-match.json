@@ -1,0 +1,942 @@
+[
+ {
+  "id": "b0",
+  "kind": "praise",
+  "text": "Come on, honey. Deedee hasn't missed a dance floor in fifty years. One, two, three."
+ },
+ {
+  "id": "b1",
+  "kind": "praise",
+  "text": "Shoes off, everybody! Floors just mopped! Let's DANCE!"
+ },
+ {
+  "id": "b2",
+  "kind": "join",
+  "text": "Room for one more? Deedee brings cookies, hugs, and love to the moon and back!"
+ },
+ {
+  "id": "b3",
+  "kind": "greet",
+  "text": "There's my Tommy!"
+ },
+ {
+  "id": "b4",
+  "kind": "greet",
+  "text": "Girls! I love you to the moon and back!"
+ },
+ {
+  "id": "b5",
+  "kind": "greet",
+  "text": "Who wants rhubarb crisp? Everyone wants rhubarb crisp."
+ },
+ {
+  "id": "b6",
+  "kind": "basic",
+  "text": "Hold still! You've got a smudge!"
+ },
+ {
+  "id": "b7",
+  "kind": "basic",
+  "text": "Spit shine! There. Much better."
+ },
+ {
+  "id": "b8",
+  "kind": "walk",
+  "text": "Ten thousand steps! Keep up, honey!"
+ },
+ {
+  "id": "b9",
+  "kind": "nurse",
+  "text": "Retired registered nurse! Little pinch, honey!"
+ },
+ {
+  "id": "b10",
+  "kind": "mop",
+  "text": "I just mopped! Watch your step!"
+ },
+ {
+  "id": "b11",
+  "kind": "crisp",
+  "text": "Fresh rhubarb crisp! Careful, it's HOT!"
+ },
+ {
+  "id": "b12",
+  "kind": "wine",
+  "text": "Just one glass! It's five o'clock somewhere!"
+ },
+ {
+  "id": "b13",
+  "kind": "dinner",
+  "text": "Dinner's ready! Nobody leaves this table hungry!"
+ },
+ {
+  "id": "b14",
+  "kind": "moonshot",
+  "text": "I love you to the moon... AND BACK!"
+ },
+ {
+  "id": "b15",
+  "kind": "dish_towel_flick",
+  "text": "Dish-towel flick. You had a spot."
+ },
+ {
+  "id": "b16",
+  "kind": "registered_nut",
+  "text": "Registered nut, reporting. Let me see that."
+ },
+ {
+  "id": "b17",
+  "kind": "corner_piece",
+  "text": "Corner-piece privilege. I saved the good bit."
+ },
+ {
+  "id": "b18",
+  "kind": "oven_mitt_ultimatum",
+  "text": "Oven mitt ultimatum. Enough of that."
+ },
+ {
+  "id": "b19",
+  "kind": "brisk_means_brisk",
+  "text": "Brisk means brisk. Keep your arms moving."
+ },
+ {
+  "id": "b20",
+  "kind": "garden_shower",
+  "text": "Garden shower. You looked a little wilted."
+ },
+ {
+  "id": "b21",
+  "kind": "rise_and_shine",
+  "text": "Rise and shine! The day is wasting!"
+ },
+ {
+  "id": "b22",
+  "kind": "beanie_master",
+  "text": "Oh my!"
+ },
+ {
+  "id": "b23",
+  "kind": "beanie_master_open",
+  "text": "I am the Beanie Master!"
+ },
+ {
+  "id": "b24",
+  "kind": "grandma_squeeze",
+  "text": "Come here, you! One big squeeze!"
+ },
+ {
+  "id": "b25",
+  "kind": "sunday_ult",
+  "text": "Wash your hands, everybody! Sunday dinner is on the table!"
+ },
+ {
+  "id": "b26",
+  "kind": "moon_ult",
+  "text": "Hold on tight! I love this family to the moon and back!"
+ },
+ {
+  "id": "b27",
+  "kind": "tombo",
+  "text": "Did you SEE what it was wearing?"
+ },
+ {
+  "id": "b28",
+  "kind": "dc1",
+  "text": "Faster, honey! Clean as you go!"
+ },
+ {
+  "id": "b29",
+  "kind": "dc2",
+  "text": "Rome, then Florence, then the coast. I made a binder."
+ },
+ {
+  "id": "b30",
+  "kind": "dc3",
+  "text": "Everybody eat! Wait, the gumbo goes HERE. Elbows off!"
+ },
+ {
+  "id": "b31",
+  "kind": "tombo2",
+  "text": "Pull, honey! Roots and all!"
+ },
+ {
+  "id": "b32",
+  "kind": "tombo3",
+  "text": "Needs salt. Who cleaned this counter?!"
+ },
+ {
+  "id": "b33",
+  "kind": "ff3",
+  "text": "Fifty-one years, Boppy. I'd do every single day again!"
+ },
+ {
+  "id": "b34",
+  "kind": "hug",
+  "text": "To the moon and back! Everybody in!"
+ },
+ {
+  "id": "b35",
+  "kind": "hug",
+  "text": "Group hug! Tommy, you too!"
+ },
+ {
+  "id": "b36",
+  "kind": "hurt",
+  "text": "Oh! Well, I never!"
+ },
+ {
+  "id": "b37",
+  "kind": "hurt",
+  "text": "Ow! That needs ice. Trust me, I'm a nurse!"
+ },
+ {
+  "id": "b38",
+  "kind": "low",
+  "text": "Deedee needs a little sit-down, girls."
+ },
+ {
+  "id": "b39",
+  "kind": "low",
+  "text": "Somebody pour me a glass of wine."
+ },
+ {
+  "id": "b40",
+  "kind": "ko",
+  "text": "I'm just resting my eyes."
+ },
+ {
+  "id": "b41",
+  "kind": "win",
+  "text": "Rhubarb crisp for everyone! You earned it!"
+ },
+ {
+  "id": "b42",
+  "kind": "win",
+  "text": "My girls did it! To the moon and back!"
+ },
+ {
+  "id": "b43",
+  "kind": "dcff3",
+  "text": "Keep up, honey! Arms at ninety!"
+ },
+ {
+  "id": "d44",
+  "kind": "dialog",
+  "text": "Your bread and my rhubarb crisp. Now THAT is a meal.",
+  "chapter": 1
+ },
+ {
+  "id": "d45",
+  "kind": "dialog",
+  "text": "Crumbs! Rhubarb crumbs. That little thief went right through here.",
+  "chapter": 1
+ },
+ {
+  "id": "d46",
+  "kind": "dialog",
+  "text": "Up, up. Everybody up. Deedee kisses it better.",
+  "chapter": 1
+ },
+ {
+  "id": "d47",
+  "kind": "dialog",
+  "text": "There. Good as new. Try not to do that again.",
+  "chapter": 1
+ },
+ {
+  "id": "d48",
+  "kind": "dialog",
+  "text": "Hugs for everyone. There. All better.",
+  "chapter": 1
+ },
+ {
+  "id": "d49",
+  "kind": "dialog",
+  "text": "Tommy, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.",
+  "chapter": 1
+ },
+ {
+  "id": "d50",
+  "kind": "dialog",
+  "text": "My tin! And look. Half the crisp is still in it.",
+  "chapter": 1
+ },
+ {
+  "id": "d51",
+  "kind": "dialog",
+  "text": "Then we split this half. Everybody home. Boppy has to hear about this.",
+  "chapter": 1
+ },
+ {
+  "id": "d52",
+  "kind": "dialog",
+  "text": "Sit. Everybody sit. Half a crisp is still a crisp.",
+  "chapter": 1
+ },
+ {
+  "id": "d53",
+  "kind": "dialog",
+  "text": "Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
+  "chapter": 1
+ },
+ {
+  "id": "d54",
+  "kind": "dialog",
+  "text": "Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.",
+  "chapter": 1
+ },
+ {
+  "id": "d55",
+  "kind": "dialog",
+  "text": "Tommy, is that a bruise? Sit. Eat. Explain.",
+  "chapter": 1
+ },
+ {
+  "id": "d56",
+  "kind": "dialog",
+  "text": "I baked at five this morning. The neighbors have stopped asking why.",
+  "chapter": 1
+ },
+ {
+  "id": "d57",
+  "kind": "dialog",
+  "text": "To the moon and back, girls. The MOON. And BACK.",
+  "chapter": 1
+ },
+ {
+  "id": "d58",
+  "kind": "dialog",
+  "text": "Grace, Rose, who wants to help Deedee frost something?",
+  "chapter": 1
+ },
+ {
+  "id": "d59",
+  "kind": "dialog",
+  "text": "I already did my walk. Boppy did one lap around the recliner.",
+  "chapter": 1
+ },
+ {
+  "id": "d60",
+  "kind": "dialog",
+  "text": "I just cleaned the floors. Shoes OFF.",
+  "chapter": 1
+ },
+ {
+  "id": "d61",
+  "kind": "dialog",
+  "text": "Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.",
+  "chapter": 1
+ },
+ {
+  "id": "d62",
+  "kind": "dialog",
+  "text": "Sunday dinner is at five. Five means four thirty.",
+  "chapter": 1
+ },
+ {
+  "id": "d63",
+  "kind": "dialog",
+  "text": "Hugs for everyone, just because. To the moon and back.",
+  "chapter": 1
+ },
+ {
+  "id": "d64",
+  "kind": "dialog",
+  "text": "Are you warm enough? Nobody is warm enough.",
+  "chapter": 1
+ },
+ {
+  "id": "d65",
+  "kind": "dialog",
+  "text": "Grace, Rose, to the moon and back. Say it. LOUDER.",
+  "chapter": 1
+ },
+ {
+  "id": "d66",
+  "kind": "dialog",
+  "text": "Pick up those feet. A brisk walk never hurt anybody.",
+  "chapter": 1
+ },
+ {
+  "id": "d67",
+  "kind": "dialog",
+  "text": "Tommy, you look pale. When did you last drink water? Nurse is asking.",
+  "chapter": 1
+ },
+ {
+  "id": "d68",
+  "kind": "dialog",
+  "text": "To the moon and BACK.",
+  "chapter": 10
+ },
+ {
+  "id": "d69",
+  "kind": "dialog",
+  "text": "Oh, Tommy. Somebody has to stay with my angels. And the pies.",
+  "chapter": 2
+ },
+ {
+  "id": "d70",
+  "kind": "dialog",
+  "text": "Here. Cookies for the flight. To the moon and back, honey.",
+  "chapter": 2
+ },
+ {
+  "id": "d71",
+  "kind": "dialog",
+  "text": "On her BIRTHDAY. Boppy, did you hear that?",
+  "chapter": 22
+ },
+ {
+  "id": "d72",
+  "kind": "dialog",
+  "text": "I had them. I had them a MINUTE ago.",
+  "chapter": 22
+ },
+ {
+  "id": "d73",
+  "kind": "dialog",
+  "text": "Hold on, honey. Let me read the cake box first. It has to say dairy free. Where are my glasses.",
+  "chapter": 22
+ },
+ {
+  "id": "d74",
+  "kind": "dialog",
+  "text": "To the moon and back, Rosie. The MOON. And BACK.",
+  "chapter": 22
+ },
+ {
+  "id": "d75",
+  "kind": "dialog",
+  "text": "Cake is on the counter. Dairy free. I read the box nine times. With my glasses.",
+  "chapter": 22
+ },
+ {
+  "id": "d76",
+  "kind": "dialog",
+  "text": "Not today, honey. Book club at four. We're reading the same book as last month. Nobody finished it.",
+  "chapter": 24
+ },
+ {
+  "id": "d77",
+  "kind": "dialog",
+  "text": "Not yet, honey. I'm still deciding on earrings. Come back with the invitation.",
+  "chapter": 24
+ },
+ {
+  "id": "d78",
+  "kind": "dialog",
+  "text": "Not this time, honey. Somebody has to start Sunday dinner. Every clock in my kitchen says midnight and the roast doesn't care.",
+  "chapter": 24
+ },
+ {
+  "id": "d79",
+  "kind": "dialog",
+  "text": "And my girls! Come here, come here.",
+  "chapter": 25
+ },
+ {
+  "id": "d80",
+  "kind": "dialog",
+  "text": "Where are my reading glasses? I had them one second ago. I need to read the timer.",
+  "chapter": 25
+ },
+ {
+  "id": "d81",
+  "kind": "dialog",
+  "text": "So they are. Not one word to Boppy.",
+  "chapter": 25
+ },
+ {
+  "id": "d82",
+  "kind": "dialog",
+  "text": "A sliver for me. Just a sliver. Sourdough gives me gas.",
+  "chapter": 25
+ },
+ {
+  "id": "d83",
+  "kind": "dialog",
+  "text": "And I eat it anyway. That's love, Tommy.",
+  "chapter": 25
+ },
+ {
+  "id": "d84",
+  "kind": "dialog",
+  "text": "Good job, girls. The crumbs keep going north.",
+  "chapter": 25
+ },
+ {
+  "id": "d85",
+  "kind": "dialog",
+  "text": "Not one pepper for me either. Peppers give me gas.",
+  "chapter": 25
+ },
+ {
+  "id": "d86",
+  "kind": "dialog",
+  "text": "Who told you that.",
+  "chapter": 25
+ },
+ {
+  "id": "d87",
+  "kind": "dialog",
+  "text": "Tata is on thin ice.",
+  "chapter": 25
+ },
+ {
+  "id": "d88",
+  "kind": "dialog",
+  "text": "Hand me my glasses. I want to look at him properly. Where ARE my glasses.",
+  "chapter": 25
+ },
+ {
+  "id": "d89",
+  "kind": "dialog",
+  "text": "Thank you, Rosie. Now. Let me look at him.",
+  "chapter": 25
+ },
+ {
+  "id": "d90",
+  "kind": "dialog",
+  "text": "Somebody read me that plaque. My glasses are in my other purse.",
+  "chapter": 25
+ },
+ {
+  "id": "d91",
+  "kind": "dialog",
+  "text": "Oh. So I am. Well then.",
+  "chapter": 25
+ },
+ {
+  "id": "d92",
+  "kind": "dialog",
+  "text": "I couldn't FIND them, honey.",
+  "chapter": 25
+ },
+ {
+  "id": "d93",
+  "kind": "dialog",
+  "text": "None for me, Justin. Store-bought gives me gas.",
+  "chapter": 25
+ },
+ {
+  "id": "d94",
+  "kind": "dialog",
+  "text": "Fine. One slice. For the girl who said it.",
+  "chapter": 25
+ },
+ {
+  "id": "d95",
+  "kind": "dialog",
+  "text": "And has anybody seen my glasses? I can't read the oven.",
+  "chapter": 25
+ },
+ {
+  "id": "d96",
+  "kind": "dialog",
+  "text": "Of course they are. Nobody touch the butter.",
+  "chapter": 25
+ },
+ {
+  "id": "d97",
+  "kind": "dialog",
+  "text": "There's my Tommy! And my girls! Come here, come here.",
+  "chapter": 25
+ },
+ {
+  "id": "d98",
+  "kind": "dialog",
+  "text": "Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice.",
+  "chapter": 25
+ },
+ {
+  "id": "d99",
+  "kind": "dialog",
+  "text": "Found my glasses. They were in the fridge. Don't ask. Who wants a cookie?",
+  "chapter": 25
+ },
+ {
+  "id": "d100",
+  "kind": "dialog",
+  "text": "All right, all right. The pies need me anyway. Come back for a cookie.",
+  "chapter": 25
+ },
+ {
+  "id": "d101",
+  "kind": "dialog",
+  "text": "Now hold on, Tommy. You're not taking my angels anywhere without me and a bag of cookies. Can Deedee come along?",
+  "chapter": 25
+ },
+ {
+  "id": "d102",
+  "kind": "dialog",
+  "text": "Wonderful! Everybody hold hands. Tommy, you too. To the moon and back, here we come.",
+  "chapter": 25
+ },
+ {
+  "id": "d103",
+  "kind": "dialog",
+  "text": "Oh, honey. Somebody has to stay and mind the house. Who's it going to be?",
+  "chapter": 25
+ },
+ {
+  "id": "d104",
+  "kind": "dialog",
+  "text": "Tom, you're skin and bones. Sit. The crisp needs ten minutes on the counter.",
+  "chapter": 25
+ },
+ {
+  "id": "d105",
+  "kind": "dialog",
+  "text": "That's my GOOD tin! Grab your shoes. I'm coming with you.",
+  "chapter": 25
+ },
+ {
+  "id": "d106",
+  "kind": "dialog",
+  "text": "Everybody okay? Itchy isn't hurt. Keep walking.",
+  "chapter": 25
+ },
+ {
+  "id": "d107",
+  "kind": "dialog",
+  "text": "The crumbs go around the pond. Toward Boppy’s fishing spot.",
+  "chapter": 25
+ },
+ {
+  "id": "d108",
+  "kind": "dialog",
+  "text": "That's my GOOD tin, you overgrown handbag!",
+  "chapter": 25
+ },
+ {
+  "id": "d109",
+  "kind": "dialog",
+  "text": "Back already! Look at you. Did they feed you out there? Never mind. I'll feed you.",
+  "chapter": 25
+ },
+ {
+  "id": "d110",
+  "kind": "dialog",
+  "text": "I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach.",
+  "chapter": 25
+ },
+ {
+  "id": "d111",
+  "kind": "dialog",
+  "text": "You're wearing the tie.",
+  "chapter": 26
+ },
+ {
+  "id": "d112",
+  "kind": "dialog",
+  "text": "Forty years I've lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once.",
+  "chapter": 26
+ },
+ {
+  "id": "d113",
+  "kind": "dialog",
+  "text": "Oh. Oh, Tommy. It's beautiful.",
+  "chapter": 26
+ },
+ {
+  "id": "d114",
+  "kind": "dialog",
+  "text": "It's FILTHY. Fifty years of dust. Somebody hand me a mop.",
+  "chapter": 26
+ },
+ {
+  "id": "d115",
+  "kind": "dialog",
+  "text": "Purple velvet. Tommy. That's Aunt Ellie’s coat.",
+  "chapter": 26
+ },
+ {
+  "id": "d116",
+  "kind": "dialog",
+  "text": "We'll tell her, honey. She'll be so pleased. She'll pretend not to be. That's how you know.",
+  "chapter": 26
+ },
+ {
+  "id": "d117",
+  "kind": "dialog",
+  "text": "Tommy. Over the bandstand. It's so BRIGHT. I can't look at it. I'm looking at it.",
+  "chapter": 26
+ },
+ {
+  "id": "d118",
+  "kind": "dialog",
+  "text": "Honey, there's a whole town walking into hedges down there.",
+  "chapter": 26
+ },
+ {
+  "id": "d119",
+  "kind": "dialog",
+  "text": "Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.",
+  "chapter": 26
+ },
+ {
+  "id": "d120",
+  "kind": "dialog",
+  "text": "Somebody invited you up here, Tommy. Not her. She can't hold a pen. She's a ball.",
+  "chapter": 26
+ },
+ {
+  "id": "d121",
+  "kind": "dialog",
+  "text": "Somebody who knew you'd come. And that you'd bring your mother.",
+  "chapter": 26
+ },
+ {
+  "id": "d122",
+  "kind": "dialog",
+  "text": "Tommy, there was something else in the envelope. Stuck to the bottom. I didn't see it. I read it eleven times and I didn't see it.",
+  "chapter": 26
+ },
+ {
+  "id": "d123",
+  "kind": "dialog",
+  "text": "THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It's fine. It's seasoning.",
+  "chapter": 26
+ },
+ {
+  "id": "d124",
+  "kind": "dialog",
+  "text": "Everybody sit. Everybody. Justin, you too. Ellie, that's Boppy’s chair. Boppy, that's my chair. Boppy.",
+  "chapter": 26
+ },
+ {
+  "id": "d125",
+  "kind": "dialog",
+  "text": "There's my Tommy! And my girls! And my... oh. OH. Why is Rose in an ice cube.",
+  "chapter": 26
+ },
+ {
+  "id": "d126",
+  "kind": "dialog",
+  "text": "...So they are. Don't say anything.",
+  "chapter": 26
+ },
+ {
+  "id": "d127",
+  "kind": "dialog",
+  "text": "Dairy free. Good. Now. Rose. Come here, sweetheart. Deedee's got you.",
+  "chapter": 26
+ },
+ {
+  "id": "d128",
+  "kind": "dialog",
+  "text": "Cold doesn't beat cold, Tommy. Warm beats cold. Always has. Ask any nurse.",
+  "chapter": 26
+ },
+ {
+  "id": "d129",
+  "kind": "dialog",
+  "text": "He's a guest, Boppy. Sit. He can sit next to you. You could use the cold on that knee.",
+  "chapter": 27
+ },
+ {
+  "id": "d130",
+  "kind": "dialog",
+  "text": "The tomatoes are coming in. You're going home with forty.",
+  "chapter": 27
+ },
+ {
+  "id": "d131",
+  "kind": "dialog",
+  "text": "Boppy says he's not feeling good. Boppy also won't stop fishing.",
+  "chapter": 27
+ },
+ {
+  "id": "d132",
+  "kind": "dialog",
+  "text": "A little glass of wine with dinner. Just one. Nurse's orders.",
+  "chapter": 27
+ },
+ {
+  "id": "d133",
+  "kind": "dialog",
+  "text": "Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.",
+  "chapter": 27
+ },
+ {
+  "id": "d134",
+  "kind": "dialog",
+  "text": "I packed cookies. They're in my purse. The purse is at home. We go back.",
+  "chapter": 27
+ },
+ {
+  "id": "d135",
+  "kind": "dialog",
+  "text": "When we get home I'm making a big dinner. Nobody argue.",
+  "chapter": 27
+ },
+ {
+  "id": "d136",
+  "kind": "dialog",
+  "text": "Nobody believes him.",
+  "chapter": 3
+ },
+ {
+  "id": "d137",
+  "kind": "dialog",
+  "text": "There they are! Well? Did anybody catch anything?",
+  "chapter": 3
+ },
+ {
+  "id": "d138",
+  "kind": "dialog",
+  "text": "Nobody believed you.",
+  "chapter": 3
+ },
+ {
+  "id": "d139",
+  "kind": "dialog",
+  "text": "Did he.",
+  "chapter": 3
+ },
+ {
+  "id": "d140",
+  "kind": "dialog",
+  "text": "Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.",
+  "chapter": 3
+ },
+ {
+  "id": "d141",
+  "kind": "dialog",
+  "text": "I love you all to the moon and back. Now eat.",
+  "chapter": 3
+ },
+ {
+  "id": "d142",
+  "kind": "dialog",
+  "text": "Not this time, honey. I have three pies in and Boppy needs somebody to go fishing with. Take the girls.",
+  "chapter": 3
+ },
+ {
+  "id": "d143",
+  "kind": "dialog",
+  "text": "Not tonight, honey. I made a plate for the teachers. Somebody has to keep Boppy away from it.",
+  "chapter": 5
+ },
+ {
+  "id": "d144",
+  "kind": "dialog",
+  "text": "Tommy! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.",
+  "chapter": 9
+ },
+ {
+  "id": "d145",
+  "kind": "dialog",
+  "text": "And now the moon is missing. Three nights. I power walk at nine. I walked straight into the Hendersons’ hedge.",
+  "chapter": 9
+ },
+ {
+  "id": "d146",
+  "kind": "dialog",
+  "text": "Honey, show her the seal.",
+  "chapter": 9
+ },
+ {
+  "id": "d147",
+  "kind": "dialog",
+  "text": "The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. Somebody took the mirrors.",
+  "chapter": 9
+ },
+ {
+  "id": "d148",
+  "kind": "dialog",
+  "text": "Okay, everybody up. Deedee is a nurse. Up, up. Little sip of water. Good.",
+  "chapter": 9
+ },
+ {
+  "id": "d149",
+  "kind": "dialog",
+  "text": "You ARE a sore loser, honey.",
+  "chapter": 9
+ },
+ {
+  "id": "d150",
+  "kind": "dialog",
+  "text": "Look at you. Making a friend.",
+  "chapter": 9
+ },
+ {
+  "id": "d151",
+  "kind": "dialog",
+  "text": "Oh, sweetheart. Nobody asked you to dance, did they?",
+  "chapter": 9
+ },
+ {
+  "id": "d152",
+  "kind": "dialog",
+  "text": "Fifty-two years, and he still asks. Every time.",
+  "chapter": 9
+ },
+ {
+  "id": "d153",
+  "kind": "dialog",
+  "text": "Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm.",
+  "chapter": 9
+ },
+ {
+  "id": "d154",
+  "kind": "dialog",
+  "text": "Up, everybody. Deedee is a nurse.",
+  "chapter": 9
+ },
+ {
+  "id": "d155",
+  "kind": "dialog",
+  "text": "Then sway with your mother.",
+  "chapter": 9
+ },
+ {
+  "id": "d156",
+  "kind": "dialog",
+  "text": "Tommy. Dance with your mother.",
+  "chapter": 9
+ },
+ {
+  "id": "d157",
+  "kind": "dialog",
+  "text": "Ellie. There was a BALL. A big silver one. She remembered you. And look what we brought home.",
+  "chapter": 9
+ },
+ {
+  "id": "d158",
+  "kind": "dialog",
+  "text": "Admit three, Tommy. You. Me. And Boppy.",
+  "chapter": 9
+ },
+ {
+  "id": "d159",
+  "kind": "dialog",
+  "text": "You drove into the mailbox twice, honey.",
+  "chapter": 9
+ },
+ {
+  "id": "d160",
+  "kind": "dialog",
+  "text": "Tommy, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times.",
+  "chapter": 9
+ },
+ {
+  "id": "d161",
+  "kind": "dialog",
+  "text": "Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.",
+  "chapter": 11
+ },
+ {
+  "id": "d162",
+  "kind": "dialog",
+  "text": "A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.",
+  "chapter": 11
+ },
+ {
+  "id": "d163",
+  "kind": "dialog",
+  "text": "To the moon and back, Tommy. Both ways.",
+  "chapter": 11
+ }
+]

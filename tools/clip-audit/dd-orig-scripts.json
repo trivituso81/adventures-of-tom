@@ -1,0 +1,658 @@
+{
+ "b0": {
+  "script": "[coaxing, confident, smiling] Come on, honey. Deedee has not missed a dance floor in fifty years. [counting in, brisk] One, two, three.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b1": {
+  "script": "[cheerful hostess, firm, then joyful] Shoes off, everybody! Floors just mopped! Let us DANCE!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b2": {
+  "script": "[bright, warm, upbeat] Room for one more? Deedee brings cookies, hugs, and love to the moon and back!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b3": {
+  "script": "[delighted, arms open] There's my Tommy!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b4": {
+  "script": "[loving, clear, beaming] Girls! I love you to the moon and back!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b5": {
+  "script": "[cheerful offer] Who wants rhubarb crisp? [matter-of-fact, firm] Everyone wants rhubarb crisp.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b6": {
+  "script": "[brisk, fond, in charge] Hold still! You've got a smudge!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b7": {
+  "script": "[brisk, then satisfied] Spit shine! There. Much better.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b8": {
+  "script": "[energetic power-walker, upbeat] Ten thousand steps! Keep up, honey!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b9": {
+  "script": "[brisk nurse, kind, confident] Retired registered nurse! Little pinch, honey!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b10": {
+  "script": "[firm, house-proud, not angry] I just mopped! Watch your step!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b11": {
+  "script": "[proud, warning, warm] Fresh rhubarb crisp! Careful, it's HOT!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b12": {
+  "script": "[cheeky, bright laugh] Just one glass! It's five o'clock somewhere!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b13": {
+  "script": "[calling across the house, strong, warm] Dinner's ready! Nobody leaves this table hungry!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b14": {
+  "script": "[building, loving, then shouting with joy] I love you to the moon... AND BACK!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b15": {
+  "script": "[brisk, playful, in charge] Dish-towel flick. You had a spot.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b16": {
+  "script": "[cheerful nurse, confident] Registered nut, reporting. [caring, firm] Let me see that.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b17": {
+  "script": "[warm, conspiratorial] Corner-piece privilege. I saved the good bit.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b18": {
+  "script": "[firm, final, calm authority] Oven mitt ultimatum. Enough of that.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b19": {
+  "script": "[energetic coach, brisk] Brisk means brisk. Keep your arms moving.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b20": {
+  "script": "[gentle, teasing, kind] Garden shower. You looked a little wilted.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b21": {
+  "script": "[bright, energetic morning voice] Rise and shine! The day is wasting!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b22": {
+  "script": "[surprised, delighted] Oh my!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b23": {
+  "script": "[Long Island accent, energetic grandma, proud and grand, announcing like a superhero] I am the Beanie Master!",
+  "source": "claude/pending-baker-scripts.js"
+ },
+ "b24": {
+  "script": "[loving, arms wide, strong] Come here, you! One big squeeze!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b25": {
+  "script": "[calling across the house, firm and warm] Wash your hands, everybody! Sunday dinner is on the table!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b26": {
+  "script": "[building, then shouting with joy] Hold on tight! I love this family to the moon and back!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b27": {
+  "script": "[scandalized, delighted gossip] Did you SEE what it was wearing?",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b28": {
+  "script": "[brisk, encouraging, in charge] Faster, honey! Clean as you go!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b29": {
+  "script": "[proud, organized, delighted with herself] Rome, then Florence, then the coast. I made a binder.",
+  "source": "claude/voice-baker-scripts-familylab.json"
+ },
+ "b30": {
+  "script": "[hostess, firm, fond, quick] Everybody eat! [correcting] Wait, the gumbo goes HERE. [firm] Elbows off!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b31": {
+  "script": "[gardener, encouraging shout] Pull, honey! Roots and all!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b32": {
+  "script": "[tasting, then sharp, house-proud] Needs salt. [firm] Who cleaned this counter?!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b33": {
+  "script": "[tender, sincere, strong] Fifty-one years, Boppy. [warm, sure] I'd do every single day again!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b34": {
+  "script": "[warm, arms wide, bright] To the moon and back! Everybody in!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b35": {
+  "script": "[loving, insistent, laughing] Group hug! Tommy, you too!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b36": {
+  "script": "[shocked, indignant, dignified] Oh! Well, I never!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b37": {
+  "script": "[pained, then nurse matter-of-fact] Ow! That needs ice. Trust me, I'm a nurse!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b38": {
+  "script": "[catching her breath, composed, kind] Deedee needs a little sit-down, girls.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b39": {
+  "script": "[composed, dry, a little funny] Somebody pour me a glass of wine.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b40": {
+  "script": "[calm, insisting, half joking] I'm just resting my eyes.",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b41": {
+  "script": "[cheering, generous, bright] Rhubarb crisp for everyone! You earned it!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b42": {
+  "script": "[proud, beaming] My girls did it! To the moon and back!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "b43": {
+  "script": "[energetic coach, brisk, fond] Keep up, honey! Arms at ninety!",
+  "source": "claude/voice-baker-scripts-deedee.json"
+ },
+ "d44": {
+  "script": "[pleased, proud of both of them] Your bread and my rhubarb crisp. Now THAT is a meal.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d45": {
+  "script": "[spotting a clue, sharp and bright] Crumbs! Rhubarb crumbs. [on the hunt] That little thief went right through here.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d46": {
+  "script": "[nurse, brisk and loving] Up, up. Everybody up. [tender] Deedee kisses it better.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d47": {
+  "script": "[satisfied, then firm with a smile] There. Good as new. Try not to do that again.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d48": {
+  "script": "[warm, strong hug] Hugs for everyone. [satisfied] There. All better.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d49": {
+  "script": "[calm commander, clear, confident] Tommy, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d50": {
+  "script": "[relieved, delighted] My tin! And look. Half the crisp is still in it.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d51": {
+  "script": "[decisive, warm] Then we split this half. Everybody home. [eager] Boppy has to hear about this.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d52": {
+  "script": "[hostess, firm, cheerful] Sit. Everybody sit. Half a crisp is still a crisp.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d53": {
+  "script": "[brisk, cheerful, running the house] Rhubarb crisp in the oven, dinner on the stove, floors just mopped. [firm] Shoes off. [bright] Who wants a cookie?",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d54": {
+  "script": "[loving, then playfully firm] Grace, Rose, Deedee loves you to the moon and back. Say it back. [coaxing] Louder.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d55": {
+  "script": "[nurse mother, sharp-eyed, firm] Tommy, is that a bruise? Sit. Eat. Explain.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d56": {
+  "script": "[cheerful, matter-of-fact, a little proud] I baked at five this morning. The neighbors have stopped asking why.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d57": {
+  "script": "[loving, emphatic, making sure they hear it] To the moon and back, girls. The MOON. And BACK.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d58": {
+  "script": "[inviting, bright] Grace, Rose, who wants to help Deedee frost something?",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d59": {
+  "script": "[brisk, proud, then dry] I already did my walk. Boppy did one lap around the recliner.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d60": {
+  "script": "[firm, house-proud, not angry] I just cleaned the floors. Shoes OFF.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d61": {
+  "script": "[matter-of-fact, then pointed and funny] Retired registered nurse. Tom calls me a registered nut. [threat with a smile] Tom is due for a checkup.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d62": {
+  "script": "[firm, clear, house rule] Sunday dinner is at five. Five means four thirty.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d63": {
+  "script": "[warm, strong hug] Hugs for everyone, just because. To the moon and back.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d64": {
+  "script": "[fussing, worried] Are you warm enough? [certain] Nobody is warm enough.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "d65": {
+  "script": "[cheerleader, sing-song] Grace, Rose, to the moon and back. Say it. [shouting happily] LOUDER.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "d66": {
+  "script": "[brisk power walker] Pick up those feet. [cheerful] A brisk walk never hurt anybody.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "d67": {
+  "script": "[concerned nurse, peering at him] Tommy, you look pale. When did you last drink water? [firm] Nurse is asking.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "d68": {
+  "script": "[tender, strong, to the whole table] To the moon and BACK.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d69": {
+  "script": "[warm, a little sad, waving him off] Oh, Tommy. Somebody has to stay with my angels. [practical] And the pies.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "d70": {
+  "script": "[pressing a bag into his hands] Here. Cookies for the flight. [tender] To the moon and back, honey.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "d76": {
+  "script": "[warm, brisk, wry] Not today, honey. Book club at four. [dry] We are reading the same book as last month. [wry] Nobody finished it.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "d77": {
+  "script": "[energetic grandma, distracted, sweet] Not yet, honey. I am still deciding on earrings. [bright] Come back with the invitation.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "d78": {
+  "script": "[energetic grandma, brisk, fast] Not this time, honey. Somebody has to start Sunday dinner. [dry] Every clock in my kitchen says midnight and the roast does not care.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "d79": {
+  "script": "[beaming, gathering them in] And my girls! Come here, come here.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d84": {
+  "script": "[warm praise, then brisk] Good job, girls. The crumbs keep going north.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d97": {
+  "script": "[delighted, arms open, gathering them in] There's my Tommy! And my girls! Come here, come here.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d104": {
+  "script": "[fond, firm, taking charge] Tom, you are skin and bones. Sit. [brisk] The crisp needs ten minutes on the counter.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d105": {
+  "script": "[outraged about the tin, then decisive] That is my GOOD tin! [brisk, no argument] Grab your shoes. I am coming with you.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d106": {
+  "script": "[quick nurse check, then firm] Everybody okay? Itchy is not hurt. Keep walking.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d107": {
+  "script": "[tracking, matter-of-fact, a knowing note on Boppy] The crumbs go around the pond. Toward Boppy's fishing spot.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d108": {
+  "script": "[indignant, fierce, a little funny] That is my GOOD tin, you overgrown handbag!",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d109": {
+  "script": "[delighted, looking him over] Back already! Look at you. Did they feed you out there? [decided] Never mind. I will feed you.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d110": {
+  "script": "[practical, then firm nurse order] I have three pies in, so I am staying put. [pointed] Do NOT let him eat peppers on an empty stomach.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d111": {
+  "script": "[calm, final, not up for discussion] You are wearing the tie.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d112": {
+  "script": "[remembering, wistful but clear] Forty years I have lived in this town. Every full moon, the lights used to go on in that dome above Luna's. [quiet] Nobody I know has ever been invited. Not once.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d113": {
+  "script": "[hushed, moved] Oh. Oh, Tommy. It is beautiful.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d114": {
+  "script": "[snapping back to practical, appalled, brisk] It is FILTHY. Fifty years of dust. Somebody hand me a mop.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d115": {
+  "script": "[recognizing it, hushed, certain] Purple velvet. Tommy. That is Aunt Ellie's coat.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d116": {
+  "script": "[warm, knowing, fond of Ellie] We will tell her, honey. She will be so pleased. [smiling] She will pretend not to be. That is how you know.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d117": {
+  "script": "[awed, urgent] Tommy. Over the bandstand. It is so BRIGHT. [laughing at herself] I cannot look at it. I am looking at it.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d118": {
+  "script": "[reasonable, firm, a touch of humor] Honey, there is a whole town walking into hedges down there.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d119": {
+  "script": "[kind, reassuring, warm promise] Oh, honey. Nobody has to turn off the lights. We will come back. Every full moon. [smiling] I will bring crisp.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d120": {
+  "script": "[thinking it through, practical, dry] Somebody invited you up here, Tommy. Not her. She cannot hold a pen. [plain] She is a ball.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d121": {
+  "script": "[soft, realizing, touched] Somebody who knew you would come. And that you would bring your mother.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d122": {
+  "script": "[surprised, a little flustered, laughing at herself] Tommy, there was something else in the envelope. Stuck to the bottom. I did not see it. I read it eleven times and I did not see it.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d123": {
+  "script": "[overjoyed, emotional, then brisk and funny] THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. [matter-of-fact] Into the gravy. It is fine. It is seasoning.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d124": {
+  "script": "[hostess running the table, firm, fast, fond] Everybody sit. Everybody. Justin, you too. Ellie, that is Boppy's chair. Boppy, that is my chair. [warning tone, loving] Boppy.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d129": {
+  "script": "[firm with her husband, kind, practical nurse] He is a guest, Boppy. Sit. He can sit next to you. [dry] You could use the cold on that knee.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d130": {
+  "script": "[proud gardener, no argument] The tomatoes are coming in. You are going home with forty.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d131": {
+  "script": "[dry, fond, a wife's report] Boppy says he is not feeling good. Boppy also will not stop fishing.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d132": {
+  "script": "[cheeky, warm] A little glass of wine with dinner. Just one. [official] Nurse's orders.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d133": {
+  "script": "[firm, then giving in with a smile] Rhubarb crisp is cooling on the counter. Do not touch it. [relenting] Okay, one corner.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d134": {
+  "script": "[cheerful, then realizing, then decisive] I packed cookies. They are in my purse. [beat] The purse is at home. [brisk] We go back.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "d135": {
+  "script": "[firm, loving] When we get home I am making a big dinner. [no arguments] Nobody argue.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "d136": {
+  "script": "[dry aside, fond] Nobody believes him.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d137": {
+  "script": "[bright welcome, curious] There they are! Well? Did anybody catch anything?",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d138": {
+  "script": "[teasing, affectionate] Nobody believed you.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d139": {
+  "script": "[flat, knowing, one eyebrow up] Did he.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d140": {
+  "script": "[fond, firm, in charge of the table] Sit down, you. I made rhubarb crisp. Everybody sit. [pointed, to Boppy] And eat SLOWLY.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d141": {
+  "script": "[tender, then brisk] I love you all to the moon and back. Now eat.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d142": {
+  "script": "[warm, firm] Not this time, honey. I have three pies in and Boppy needs somebody to go fishing with. [bright] Take the girls.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "d143": {
+  "script": "[warm, firm, brisk] Not tonight, honey. I made a plate for the teachers. [wry] Somebody has to keep Boppy away from it.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "d144": {
+  "script": "[excited, flustered, bright] Tommy! There you are. Sit. No, stand. Read it. Read it out loud. [breathless] I have read it eleven times.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d145": {
+  "script": "[concerned, then indignant and a little funny] And now the moon is missing. Three nights. I power walk at nine. I walked straight into the Hendersons' hedge.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d146": {
+  "script": "[gentle prompt, warm] Honey, show her the seal.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d147": {
+  "script": "[reading aloud, curious, then sharp] The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. [noticing] Somebody took the mirrors.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d148": {
+  "script": "[calm nurse, brisk and kind] Okay, everybody up. Deedee is a nurse. Up, up. Little sip of water. [approving] Good.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d149": {
+  "script": "[affectionate teasing, settled fact] You ARE a sore loser, honey.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d150": {
+  "script": "[proud, teasing her husband] Look at you. Making a friend.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d151": {
+  "script": "[kind, gentle, understanding] Oh, sweetheart. Nobody asked you to dance, did they?",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d152": {
+  "script": "[touched, smiling, to the room] Fifty-two years, and he still asks. Every time.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d153": {
+  "script": "[thrilled, giddy] Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d154": {
+  "script": "[brisk nurse, calm] Up, everybody. Deedee is a nurse.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d155": {
+  "script": "[amused, unbothered, still firm] Then sway with your mother.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d156": {
+  "script": "[firm, loving, not a request] Tommy. Dance with your mother.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d157": {
+  "script": "[bursting to tell her, bright, warm] Ellie. There was a BALL. A big silver one. She remembered you. [proud] And look what we brought home.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d158": {
+  "script": "[thrilled, counting it out] Admit three, Tommy. You. Me. [decided] And Boppy.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d159": {
+  "script": "[dry, loving, correcting her husband] You drove into the mailbox twice, honey.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d160": {
+  "script": "[clear coach, then softer and knowing] Tommy, whatever her shiny side shows bounces right back. Use something else. [gentle] And honey, nobody has asked her to dance since nineteen seventy one. Three times.",
+  "source": "claude/dialogue-scripts-deedee.json"
+ },
+ "d71": {
+  "script": "[gasping, scandalized, delighted] On her BIRTHDAY. [calling over her shoulder] Boppy, did you hear that?",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d72": {
+  "script": "[patting her pockets, flustered, laughing at herself] I had them. [insisting] I had them a MINUTE ago.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d73": {
+  "script": "[warm, holding up a hand] Hold on, honey. Let me read the cake box first. [careful, serious] It has to say dairy free. [patting her pockets, muttering] Where are my glasses.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d74": {
+  "script": "[loving, strong] To the moon and back, Rosie. [bigger] The MOON. [joyful, emphatic] And BACK.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d75": {
+  "script": "[proud, reassuring] Cake is on the counter. Dairy free. [laughing at herself] I read the box nine times. [triumphant] With my glasses.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d80": {
+  "script": "[bright, flustered, searching] Where are my reading glasses? I had them one second ago. [hurried] I need to read the timer.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d81": {
+  "script": "[noticing, amused, a little sheepish] So they are. [conspiratorial whisper] Not one word to Boppy.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d82": {
+  "script": "[cheerful, holding up two fingers] A sliver for me. Just a sliver. [matter-of-fact, unbothered] Sourdough gives me gas.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d83": {
+  "script": "[warm, loving, a little smug] And I eat it anyway. [tender] That's love, Tommy.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d85": {
+  "script": "[brisk, waving it off] Not one pepper for me either. [matter-of-fact] Peppers give me gas.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d86": {
+  "script": "[flat, narrowing her eyes, amused] Who told you that.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d87": {
+  "script": "[mock-stern, teasing, smiling] Tata is on thin ice.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d88": {
+  "script": "[eager, holding out her hand] Hand me my glasses. I want to look at him properly. [exasperated, laughing] Where ARE my glasses.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d89": {
+  "script": "[warm, grateful] Thank you, Rosie. [settling in, fond] Now. Let me look at him.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d90": {
+  "script": "[bright, squinting, cheerful] Somebody read me that plaque. [laughing at herself] My glasses are in my other purse.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d91": {
+  "script": "[surprised, then dignified and amused] Oh. So I am. [brisk] Well then.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d92": {
+  "script": "[defensive, laughing, a little indignant] I couldn't FIND them, honey.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d93": {
+  "script": "[polite but firm, smiling] None for me, Justin. [matter-of-fact] Store-bought gives me gas.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d94": {
+  "script": "[giving in, warm, touched] Fine. One slice. [tender] For the girl who said it.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d95": {
+  "script": "[calling out, bright, flustered] And has anybody seen my glasses? [laughing] I can't read the oven.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d96": {
+  "script": "[knowing, dry, fond] Of course they are. [firm, house rule] Nobody touch the butter.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d98": {
+  "script": "[bright, searching, flustered] Have you seen my reading glasses? I had them a minute ago. [exasperated, laughing] I've looked everywhere. [emphatic] Twice.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d99": {
+  "script": "[triumphant, then sheepish] Found my glasses. [beat] They were in the fridge. [quick, firm] Don't ask. [bright, cheerful] Who wants a cookie?",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d100": {
+  "script": "[good-natured, waving them off] All right, all right. The pies need me anyway. [warm, inviting] Come back for a cookie.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d101": {
+  "script": "[cheerful, hands on hips, playfully firm] Now hold on, Tommy. You're not taking my angels anywhere without me and a bag of cookies. [hopeful, sweet] Can Deedee come along?",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d102": {
+  "script": "[delighted, clapping] Wonderful! Everybody hold hands. [fond, insisting] Tommy, you too. [joyful, rallying] To the moon and back, here we come.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d103": {
+  "script": "[warm, practical] Oh, honey. Somebody has to stay and mind the house. [curious, brisk] Who's it going to be?",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d125": {
+  "script": "[delighted, arms open] There's my Tommy! And my girls! [slowing, confused] And my... [alarmed] oh. OH. [baffled, nurse taking charge] Why is Rose in an ice cube.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d126": {
+  "script": "[sheepish, amused, quiet] ...So they are. [firm whisper] Don't say anything.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d127": {
+  "script": "[reading carefully, satisfied] Dairy free. Good. [shifting into nurse mode, tender] Now. Rose. Come here, sweetheart. [warm, sure] Deedee's got you.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d128": {
+  "script": "[calm, confident nurse, kind] Cold doesn't beat cold, Tommy. Warm beats cold. [firm, smiling] Always has. [wry] Ask any nurse.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d161": {
+  "script": "[bright, bustling, delighted] Tommy! Sit. Eat. I made a crisp. [laughing, unapologetic] It is nine in the morning and it is a crisp. [playfully firm] Do not argue.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d162": {
+  "script": "[excited, then fussing over him warmly] A layover! Where? [waving it off] Never mind. Take a sweater. [quicker] Take two. [pressing it into his hands] Take the crisp.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ },
+ "d163": {
+  "script": "[tender, loving, strong] To the moon and back, Tommy. [soft, sure] Both ways.",
+  "source": "written 2026-10-28 (no hand-written script existed)"
+ }
+}

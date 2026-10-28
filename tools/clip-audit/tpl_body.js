@@ -35,7 +35,11 @@ const cfgOf=it=>it.type==='b'?bcfg(it.ch):dcfg(it.voice);
 const scriptFor=it=>S.scripts[it.id]!=null?S.scripts[it.id]:it.script;
 function finalText(it){
   const d=(cfgOf(it).direction||'').trim().replace(/^\[|\]$/g,''),sc=scriptFor(it).trim();
-  if(!d) return sc; const m=sc.match(/^\[([^\]]*)\]\s*/); return m?'['+d+', '+m[1]+'] '+sc.slice(m[0].length):'['+d+'] '+sc;
+  const acc=(DATA.accent||{})[it.voice]||'';
+  let out=sc; if(!/^\[/.test(out)) out='[] '+out;
+  let first=true;
+  out=out.replace(/\[([^\]]*)\]/g,(m,inner)=>{ const p=[]; if(first&&d) p.push(d); first=false; if(acc&&!/accent/i.test(inner)) p.push(acc); if(inner.trim()) p.push(inner.trim()); return '['+p.join(', ')+']'; });
+  return out.replace(/^\[\]\s*/,'');
 }
 let db=null; const TAKES=new Map();
 function openDB(){return new Promise(res=>{try{const r=indexedDB.open('aot-cfix',1);r.onupgradeneeded=()=>r.result.createObjectStore('takes',{keyPath:'id'});r.onsuccess=()=>{db=r.result;res();};r.onerror=()=>res();}catch(e){res();}});}
@@ -85,7 +89,7 @@ function render(){
   renderTabs();
   const tab=TABS.find(t=>t.id===S.tab), type=tab.type, c=counts(type), f=S.filter[type];
   let h='<div class="win panel"><h2>'+tab.name+'</h2><div class="note">';
-  h+='These lines show a contraction on screen (she\'s, I\'m, don\'t) but their recording says the long form (she is, I am, do not), because the last re-record read old scripts. Each card shows what the old clip says. The scripts below now match the screen word for word. ';
+  h+='Two jobs in one page. <b>Contraction fixes</b>: lines whose recording says the long form (she is, I am) under an on-screen contraction (she\'s, I\'m). <b>Deedee recast</b>: every Deedee line again, now with your original hand-written directions and CAPS emphasis (her accent is added inside every bracket). Every script keeps its original tags; only words that differ from the screen were changed. Pick Deedee in the voice list to do her alone. ';
   h+=type==='d'?'Save as <b>dialogue-pending.json</b> and send it to Claude.':'Save as <b>voices.json</b> and send it to Claude.';
   h+=' ('+c.todo+' left)</div><div class="row" style="margin-top:10px"><button class="btn gold" id="doAll">'+(BULK&&BULK.type===type?'Stop':'Make everything shown below')+'</button>';
   h+='<button class="btn" id="saveTab">'+(type==='b'?'Save voices.json':'Save dialogue-pending.json')+'</button><span id="bulkMsg" class="busy">'+esc(BULKMSG[type]||'')+'</span></div><div id="bulkErr"></div></div>';
@@ -103,7 +107,7 @@ function render(){
 }
 function cardHtml(it){
   const takes=takesFor(it.id), kept=takes.some(t=>t.keep), k=esc(it.id);
-  let h='<div class="win card" data-id="'+k+'"><div class="top"><span class="who">'+esc(it.speaker)+'</span><span class="game">'+esc(it.text)+'</span><span class="tag rebake">re-bake</span>'+(kept?'<span class="tag kept">kept</span>':'')+'</div>';
+  let h='<div class="win card" data-id="'+k+'"><div class="top"><span class="who">'+esc(it.speaker)+'</span><span class="game">'+esc(it.text)+'</span>'+(it.dd?'<span class="tag new">Deedee recast</span>':'<span class="tag rebake">re-bake</span>')+''+(kept?'<span class="tag kept">kept</span>':'')+'</div>';
   if(it.note) h+='<div class="after">'+esc(it.note)+'</div>';
   h+='<div><div class="hint">Script (what ElevenLabs reads)</div><textarea data-act="script" data-id="'+k+'" rows="2">'+esc(scriptFor(it))+'</textarea></div>';
   h+='<div class="chips">'+TAG_CHIPS.map(t=>'<span class="chip" data-act="chip" data-id="'+k+'" data-t="'+esc(t)+'">'+esc(t)+'</span>').join('')+'<span class="chip" data-act="reset" data-id="'+k+'">reset</span></div>';

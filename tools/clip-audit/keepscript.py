@@ -42,3 +42,17 @@ if __name__=='__main__':
     s="[thick New York accent, groaning] I am not feeling good. I was fine an hour ago. [thick New York accent, guilty] Then I had a pepper."
     print(convert(s,"I'm not feeling good. I was fine an hour ago. Then I had a pepper."))
     print(convert("[proud] Rose. Rose do not lick the phone. [beat] Tah Tah has one, and Sal has two thousand six.","Rose. Rose don't lick the phone. Tata has one, and Sal has 2006."))
+
+def caps_from_text(script,text):
+    """Wherever the screen shouts a word (LOUDER, MOON), make the script shout it too."""
+    toks=TOK.findall(script); widx=[i for i,t in enumerate(toks) if not t.startswith('[')]
+    sw=[norm(toks[i]) for i in widx]; ts=text.replace('’',"'").split(); tw=[norm(w) for w in ts]
+    n=0
+    for op,i1,i2,j1,j2 in difflib.SequenceMatcher(None,sw,tw,autojunk=False).get_opcodes():
+        if op!='equal': continue
+        for a,b in zip(range(i1,i2),range(j1,j2)):
+            core=re.sub(r"[^A-Za-z]","",ts[b])
+            if len(core)>1 and core.isupper():
+                t=toks[widx[a]]
+                if not re.sub(r"[^A-Za-z]","",t).isupper(): toks[widx[a]]=re.sub(r"[A-Za-z']+",lambda m:m.group(0).upper(),t,count=1); n+=1
+    return ''.join(toks),n
