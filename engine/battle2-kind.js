@@ -5474,12 +5474,12 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const by=300,cx=cl(GR.x1+110,220,330),kT={x:cx+52,y:by},kA={x:cx-52,y:by};   // the counter sits between the kids
   // Timing follows the two voice clips so the lines never overlap and every beat lands on its words. Speech measured inside
-  // each clip (ms): Amy says ketchup 100, pickles 770, cereal 1570, sock 2370, then "It's a Ymamot Creation!" 3340 to 4810.
+  // each clip (ms): Amy says ketchup 110, pickles 1130, cereal 1880, sock 2680, then "It's a Ymamot Creation!" 3490 to 7010 (Ymamot 4260).
   // Tom says "Yama-Mott." 90 to 960, "It's Tom backwards." 1310 to 2770, "We were six." 3240 to 4070. The timeline runs K
   // times faster than the audio at 2x (engine/main.js), so every span that waits on a voice is multiplied by K.
-  const K=b7Speed(),A0=1000,ING_T=[100,770,1570,1960,2160,2370].map(v=>A0+v*K);   // mustard and lemon go in during Amy's pauses
+  const K=b7Speed(),A0=1000,ING_T=[110,1130,1880,2400,2540,2680].map(v=>A0+v*K);   // mustard and lemon go in during Amy's pauses
   const AMY_LINE="Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!",TOM_LINE="Yama-Mott. It's Tom backwards. We were six.";
-  const P={fb:300,in:ING_T[0],name:A0+3670*K,lift:A0+(4810+150)*K,sling:0,hit:0,back:0,end:0};
+  const P={fb:300,in:ING_T[0],name:A0+4260*K,lift:A0+(7010+150)*K,sling:0,hit:0,back:0,end:0};
   P.sling=P.lift+3350*K; P.hit=P.sling+380*K; P.back=P.hit+1100; P.end=P.back+1100;
   // grown-ups hide for the flashback (they stay at the staging spots)
   const hideAt=ms=>ms>P.fb&&ms<P.back;
