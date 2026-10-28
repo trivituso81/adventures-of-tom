@@ -4,6 +4,7 @@
 - Tom: "why is Amy so bossy". Cause: Part 2 scenes (ch11 to 14, written after the Amy rewrite) used her as the drill voice for every fight tip ("Up, everybody. Walk it off.", "Positions.") and slipped back to "thirty-one third graders" (canon: Special Ed, her room of twelve).
 - Rewrote 10 unrecorded Amy lines (no clips lost): fight tips are now "Everybody okay? Good. ..." and "Here's the plan. ..."; "please" on the colors; "I teach kids for a living". Files: data/scenes-p2.js, scenes-ch12.js, scenes-ch13.js, scenes-ch14.js.
 - Left as is (recorded, approved in the rewrite): "Up! Everybody up! Walk it off. Hydrate. We go again." Known slip, recorded: travel stay "thirty second-graders at eight".
+- (Baker) Contraction Fix Baker v5 adds a Deedee voice picker (Tom wants to choose her voice): plays 3 clips of her current voice, designs 3 options from the recast brief (editable), Use this voice saves it to ElevenLabs (if the account is full it offers to delete the old Deedee voice; recorded lines keep playing), or paste a library voice ID. All 164 Deedee lines and the saved voices.json / dialogue-pending.json use the picked voice; takes made with another voice stop counting. Merge: her new voice_id rides in both files.
 - Rule for new Amy lines: calm, specific, warm with the girls; competitive only at Tom, the clock, herself (claude/amy-dialogue-review.md).
 - Tests: smoke, ch12, ch13, ch14 FAILS: []; ch11 test ran clean.
 

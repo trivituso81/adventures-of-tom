@@ -8,7 +8,7 @@ for(const x of DATA.dialog) ITEMS.push(Object.assign({},x,{type:'d',id:'d:'+x.ke
 for(const x of DATA.battle) ITEMS.push(Object.assign({},x,{type:'b',id:'b:'+x.key,voice:x.ch,speaker:x.ch==='tnb'?'TNB':x.ch[0].toUpperCase()+x.ch.slice(1),ctx:x.kind}));
 const BYID=new Map(ITEMS.map(i=>[i.id,i]));
 const ofType=t=>ITEMS.filter(i=>i.type===t);
-const STORE='aot-cfix-baker-v1', VSTORE='aot-missing-voices-v2';
+const STORE='aot-cfix-baker-v1', VSTORE='aot-cfix-voices-v1';
 let S={tab:'dialog',filter:{b:'todo',d:'todo'},voice:'all',search:'',limit:40,scripts:{},dvoices:{}};
 try{const s=JSON.parse(localStorage.getItem(STORE)||'null'); if(s) S=Object.assign(S,s);}catch(e){}
 let SHARED={}; try{SHARED=JSON.parse(localStorage.getItem(VSTORE)||'{}')||{};}catch(e){}
@@ -26,11 +26,12 @@ function dcfg(v){
     if(isFam(v)){ const sv=DATA.fam[v]||{},st=sv.settings||{}; S.dvoices[v]={voice_id:sv.voice_id||'',name:sv.name||'',stability:st.stability!=null?st.stability:0.5,similarity:st.similarity_boost!=null?st.similarity_boost:0.85,direction:sv.direction||''}; }
     else { const c=DATA.castVoices[v]||{},d=DATA.designed[v]||{}; S.dvoices[v]={voice_id:d.voice_id||'',name:d.name||'',stability:c.stability!=null?c.stability:0.5,similarity:0.8,direction:'',desc:c.desc||'',sample:c.sample||''}; }
   }
+  if(isFam(v)&&S.pick&&S.pick[v]&&S.pick[v].voice_id){ S.dvoices[v].voice_id=S.pick[v].voice_id; S.dvoices[v].name=S.pick[v].name; return S.dvoices[v]; }
   if(isFam(v)){ const sv=DATA.fam[v]; if(sv&&sv.voice_id&&S.dvoices[v].voice_id!==sv.voice_id){ S.dvoices[v].voice_id=sv.voice_id; S.dvoices[v].name=sv.name||''; } }
   else { const d=DATA.designed[v]; if(d&&d.voice_id&&!S.dvoices[v].voice_id){ S.dvoices[v].voice_id=d.voice_id; S.dvoices[v].name=d.name||''; } }
   return S.dvoices[v];
 }
-function bcfg(ch){ const v=DATA.voicesLive[ch]||{},st=v.settings||{}; return {voice_id:v.voice_id||'',stability:st.stability!=null?st.stability:0.5,similarity:st.similarity_boost!=null?st.similarity_boost:0.85,direction:v.direction||''}; }
+function bcfg(ch){ const v=DATA.voicesLive[ch]||{},st=v.settings||{},pk=S.pick&&S.pick[ch]; return {voice_id:(pk&&pk.voice_id)||v.voice_id||'',name:(pk&&pk.name)||v.name||'',stability:st.stability!=null?st.stability:0.5,similarity:st.similarity_boost!=null?st.similarity_boost:0.85,direction:v.direction||''}; }
 const cfgOf=it=>it.type==='b'?bcfg(it.ch):dcfg(it.voice);
 const scriptFor=it=>S.scripts[it.id]!=null?S.scripts[it.id]:it.script;
 function finalText(it){
@@ -47,7 +48,8 @@ function dbPut(t){try{if(db) db.transaction('takes','readwrite').objectStore('ta
 function dbDel(id){try{if(db) db.transaction('takes','readwrite').objectStore('takes').delete(id);}catch(e){}}
 function dbAll(){return new Promise(res=>{if(!db) return res([]);try{const r=db.transaction('takes').objectStore('takes').getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>res([]);}catch(e){res([]);}});}
 const takesFor=id=>[...TAKES.values()].filter(t=>t.item===id).sort((a,b)=>a.t-b.t);
-const hasKept=it=>takesFor(it.id).some(t=>t.keep);
+const curVoice=it=>cfgOf(it).voice_id;
+const hasKept=it=>takesFor(it.id).some(t=>t.keep&&(!t.voice_id||t.voice_id===curVoice(it)));
 const todo=it=>!hasKept(it);
 let playing=null;
 function stopPlay(){if(playing){playing.a.pause();playing.btn&&playing.btn.classList.remove('on');playing=null;}}
@@ -64,6 +66,46 @@ async function tts(c,text){
   if(!r.ok) throw await apiErr(r);
   return b64(await r.arrayBuffer());
 }
+const PICK=DATA.pick||{};
+let PREV=[];
+async function designDD(){
+  need(); const c=PICK.deedee;
+  const r=await fetch('https://api.elevenlabs.io/v1/text-to-voice/design?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify({voice_description:S.ddDesc||c.desc,model_id:'eleven_ttv_v3',text:S.ddSample||c.sample,guidance_scale:5})});
+  if(!r.ok) throw await apiErr(r);
+  const j=await r.json(); return (j.previews||[]).map(p=>({gid:p.generated_voice_id,mp3:p.audio_base_64}));
+}
+async function saveDD(gid){
+  need(); const name='AoT Deedee (picked '+new Date().toISOString().slice(0,10)+')';
+  const r=await fetch('https://api.elevenlabs.io/v1/text-to-voice',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify({voice_name:name,voice_description:S.ddDesc||PICK.deedee.desc,generated_voice_id:gid})});
+  if(!r.ok) throw await apiErr(r);
+  const j=await r.json(); if(!j.voice_id) throw new Error('No voice ID came back.');
+  setPick(j.voice_id,name);
+}
+async function freeSlot(){
+  need(); const id=PICK.deedee.old_id;
+  const r=await fetch('https://api.elevenlabs.io/v1/voices/'+encodeURIComponent(id),{method:'DELETE',headers:{'xi-api-key':apiKey()}});
+  if(!r.ok&&r.status!==404) throw await apiErr(r);
+}
+function setPick(id,name){ S.pick=S.pick||{}; S.pick.deedee={voice_id:id,name:name}; delete S.dvoices.deedee; saveState(); }
+let PB={busy:'',err:'',full:false};
+function pickPanel(){
+  const c=PICK.deedee; if(!c) return '';
+  const cur=S.pick&&S.pick.deedee, k='dd';
+  let h='<div class="win panel"><h2>Deedee\'s voice</h2><div class="note">Every Deedee line in this page is read in the voice chosen here. Right now: <b>'+esc(cur?cur.name:c.old_name)+'</b>'+(cur?'':' (her current game voice)')+'. Listen to her current voice, or design new options and pick one. Changing the voice later means her lines need making again (old takes stop counting).</div>';
+  h+='<div class="row" style="margin-top:8px">'+c.samples.map((s,i)=>'<button class="play" data-act="ddcur" data-i="'+i+'">&#9654;</button><span class="hint">Current: '+esc(s.text)+'</span>').join('')+'</div>';
+  h+='<div class="field" style="margin-top:10px"><label>Voice description (what ElevenLabs designs from)</label><textarea id="dddesc" rows="4">'+esc(S.ddDesc||c.desc)+'</textarea></div>';
+  h+='<div class="field"><label>What the options say (sample)</label><textarea id="ddsample" rows="3">'+esc(S.ddSample||c.sample)+'</textarea></div>';
+  h+='<div class="row"><button class="btn gold" data-act="dddesign"'+(PB.busy?' disabled':'')+'>Design 3 options</button>';
+  if(cur) h+='<button class="btn" data-act="ddreset">Go back to her current voice</button>';
+  h+='<span class="busy">'+esc(PB.busy)+'</span></div>';
+  if(PB.err) h+='<div class="err" style="margin-top:6px">'+esc(PB.err)+'</div>';
+  if(PB.full) h+='<div class="note" style="margin-top:6px">Your ElevenLabs account has no free voice slot. <button class="btn small" data-act="ddfree">Delete '+esc(c.old_name)+' and use the option</button> Her lines already in the game keep playing; this only frees the slot.</div>';
+  PREV.forEach((p,i)=>{ h+='<div class="pv"><button class="play" data-act="ddplay" data-i="'+i+'">&#9654;</button><span class="hint">Option '+(i+1)+'</span><div class="grow"></div><button class="btn small" data-act="dduse" data-i="'+i+'">Use this voice</button></div>'; });
+  h+='<div class="field" style="margin-top:10px"><label>Or paste the ID of a voice already in your ElevenLabs library</label><input type="text" id="ddvid" placeholder="voice ID" value="'+esc(cur?cur.voice_id:'')+'"></div>';
+  return h+'</div>';
+}
+async function ddRun(label,fn){ PB.busy=label; PB.err=''; render(); try{ await fn(); }catch(e){ const m=e.message||String(e); if(/limit|maximum|slots?/i.test(m)) PB.full=true; PB.err=m; } PB.busy=''; render(); }
+let PENDING=null;
 const retry=async(fn,tries=4)=>{for(let k=0;;k++){try{return await fn();}catch(e){const m=e&&e.message||String(e);if(k<tries-1&&/ 429| 409|too many|concurrent|in progress/i.test(m)){await new Promise(r=>setTimeout(r,window.__FAST?5:2500*(k+1)));continue;}throw e;}}};
 
 const busy={},errs={};
@@ -93,6 +135,7 @@ function render(){
   h+=type==='d'?'Save as <b>dialogue-pending.json</b> and send it to Claude.':'Save as <b>voices.json</b> and send it to Claude.';
   h+=' ('+c.todo+' left)</div><div class="row" style="margin-top:10px"><button class="btn gold" id="doAll">'+(BULK&&BULK.type===type?'Stop':'Make everything shown below')+'</button>';
   h+='<button class="btn" id="saveTab">'+(type==='b'?'Save voices.json':'Save dialogue-pending.json')+'</button><span id="bulkMsg" class="busy">'+esc(BULKMSG[type]||'')+'</span></div><div id="bulkErr"></div></div>';
+  h+=pickPanel();
   const opts=[['todo','To do ('+c.todo+')'],['all','All lines ('+c.all+')'],['kept','Kept takes']];
   h+='<div class="win panel"><div class="row"><div class="seg" id="filter">'+opts.map(o=>'<button data-f="'+o[0]+'"'+(f===o[0]?' class="on"':'')+'>'+o[1]+'</button>').join('')+'</div>';
   const vs=[...new Set(ofType(type).map(i=>i.voice))]; h+='<select id="vsel"><option value="all">Every voice</option>'+vs.map(v=>'<option value="'+v+'"'+(S.voice===v?' selected':'')+'>'+esc(type==='d'?vName(v):v)+' ('+ofType(type).filter(i=>i.voice===v&&todo(i)).length+' to do)</option>').join('')+'</select>';
@@ -128,7 +171,7 @@ async function generate(it){
   try{
     const sent=finalText(it); const mp3=await retry(()=>tts(cfgOf(it),sent));
     for(const x of takesFor(it.id)) if(x.keep){x.keep=false;dbPut(x);}
-    const t={id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),item:it.id,type:it.type,mp3,keep:true,sent,t:Date.now(),model:'eleven_v4'};
+    const t={id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),item:it.id,type:it.type,mp3,keep:true,sent,t:Date.now(),model:'eleven_v4',voice_id:curVoice(it)};
     TAKES.set(t.id,t); dbPut(t); ok=true;
   }catch(e){ errs[it.id]={message:e.message||String(e)}; }
   delete busy[it.id]; refreshCard(it.id); return ok;
@@ -163,6 +206,12 @@ document.addEventListener('click',e=>{
   if(e.target.id==='doAll'){ doAll(); return; }
   if(e.target.id==='saveTab'){ save(); return; }
   const b=e.target.closest('[data-act]'); if(!b) return;
+  if(b.dataset.act==='ddcur'){ playSrc('data:audio/mpeg;base64,'+PICK.deedee.samples[+b.dataset.i].mp3,b); return; }
+  if(b.dataset.act==='ddplay'){ const p=PREV[+b.dataset.i]; if(p) playSrc('data:audio/mpeg;base64,'+p.mp3,b); return; }
+  if(b.dataset.act==='dddesign'){ ddRun('Designing 3 options. Up to a minute...',async()=>{ PREV=await designDD(); }); return; }
+  if(b.dataset.act==='dduse'){ const p=PREV[+b.dataset.i]; if(!p) return; PENDING=p.gid; ddRun('Saving this voice...',async()=>{ await saveDD(p.gid); PREV=[]; PB.full=false; }); return; }
+  if(b.dataset.act==='ddfree'){ if(!confirm('Delete '+PICK.deedee.old_name+' from your ElevenLabs account? Her lines already in the game keep playing.')) return; ddRun('Freeing a slot...',async()=>{ await freeSlot(); if(PENDING){ await saveDD(PENDING); PREV=[]; } PB.full=false; }); return; }
+  if(b.dataset.act==='ddreset'){ delete S.pick.deedee; delete S.dvoices.deedee; saveState(); render(); return; }
   const act=b.dataset.act, it=b.dataset.id&&BYID.get(b.dataset.id), tk=b.dataset.tid&&TAKES.get(b.dataset.tid);
   if(act==='gen'&&it) generate(it);
   else if(act==='play'&&tk) playSrc('data:audio/mpeg;base64,'+tk.mp3,b);
@@ -173,11 +222,14 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const t=e.target;
   if(t.dataset.act==='keep'){ const tk=TAKES.get(t.dataset.tid); if(!tk) return; if(t.checked) for(const x of takesFor(tk.item)) if(x.keep&&x.id!==tk.id){x.keep=false;dbPut(x);} tk.keep=t.checked; dbPut(tk); refreshCard(tk.item); }
+  else if(t.id==='ddvid'){ const v=t.value.trim(); if(v) setPick(v,'Pasted voice '+v.slice(0,6)); else if(S.pick){ delete S.pick.deedee; delete S.dvoices.deedee; saveState(); } render(); }
   else if(t.id==='vsel'){ S.voice=t.value; S.limit=40; saveState(); render(); }
 });
 function updateSent(it){ const el=document.querySelector('[data-sent="'+CSS.escape(it.id)+'"]'); if(el) el.innerHTML=sentHtml(it); }
 document.addEventListener('input',e=>{
   const t=e.target;
+  if(t.id==='dddesc'){ S.ddDesc=t.value; saveState(); return; }
+  if(t.id==='ddsample'){ S.ddSample=t.value; saveState(); return; }
   if(t.id==='search'){ S.search=t.value; S.limit=40; saveState(); clearTimeout(window.__st); window.__st=setTimeout(()=>{ const pos=t.selectionStart; render(); const n=$('search'); if(n){ n.focus(); try{n.setSelectionRange(pos,pos);}catch(e){} } },250); return; }
   const it=t.dataset.id&&BYID.get(t.dataset.id); if(!it) return;
   if(t.dataset.act==='script'){ S.scripts[it.id]=t.value; saveState(); updateSent(it); }
@@ -185,10 +237,11 @@ document.addEventListener('input',e=>{
 function download(name,obj){ const blob=new Blob([JSON.stringify(obj)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); }
 function save(){
   const type=TABS.find(t=>t.id===S.tab).type;
-  const kept=[...TAKES.values()].filter(t=>t.keep&&t.type===type&&BYID.has(t.item));
+  const kept=[...TAKES.values()].filter(t=>t.keep&&t.type===type&&BYID.has(t.item)&&(!t.voice_id||t.voice_id===curVoice(BYID.get(t.item))));
   if(!kept.length){ alert('Keep at least one take in this tab first.'); return; }
   if(type==='b'){
     const clips={}, voices=JSON.parse(JSON.stringify(DATA.voicesLive));
+    for(const ch in (S.pick||{})) if(S.pick[ch]&&S.pick[ch].voice_id&&voices[ch]){ voices[ch].voice_id=S.pick[ch].voice_id; voices[ch].name=S.pick[ch].name; }
     for(const t of kept){ const it=BYID.get(t.item); ((clips[it.ch]=clips[it.ch]||{})[it.kind]=clips[it.ch][it.kind]||[]).push({text:it.text,mp3:t.mp3,model:t.model||'eleven_v4'});
       const v=voices[it.ch]=voices[it.ch]||{}; (v.scripts=v.scripts||{})[it.kind+'|'+it.text]=scriptFor(it); }
     download('voices.json',{built:BUILT,clips,voices});

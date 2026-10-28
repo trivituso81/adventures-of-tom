@@ -112,7 +112,22 @@ for v,o in LOAN.items():
 names={v:next((n for n,vv in B['cast']['speakers'].items() if vv==v),v) for v in need}; names['tnb']='TNB'
 vl={ch:({k:v[k] for k in v if k!='scripts'} if isinstance(v,dict) else v) for ch,v in B['voices'].items()}
 dialog.sort(key=lambda d:(d['voice'],d['text']))
-data=dict(accent={'deedee':'warm Long Island accent'},built=datetime.date.today().isoformat(),battle=battle,dialog=dialog,voicesLive=vl,fam=fam,castVoices=cv,designed=designed,vnames=names)
+
+# ---- Deedee voice picker: her current voice, two samples of it, and the recast design brief ----
+def dd_pick():
+    R='/home/claude/adventures-of-tom/'
+    line=[l for l in open(R+'data/voice/deedee.js',encoding='utf8').read().split('\n') if l.startswith('VOICE_CLIPS.clips.deedee=')][0]
+    C=json.loads(line[len('VOICE_CLIPS.clips.deedee='):].rstrip(';'))
+    def one(kind,pref=None):
+        for c in C.get(kind,[]):
+            if c and c.get('mp3') and (not pref or pref in c['text']): return {'text':c['text'],'mp3':c['mp3']}
+    samples=[x for x in (one('greet',"Tommy"),one('moon_ult'),one('dinner')) if x]
+    js=open(R+'tools/voice-recast/build.js',encoding='utf8').read()
+    desc=re.search(r"deedee:\{.*?desc:'((?:[^'\\]|\\.)*)'",js,re.S).group(1).replace("\\'","'")
+    sample=re.search(r"deedee:\{.*?sample:'((?:[^'\\]|\\.)*)'",js,re.S).group(1).replace("\\'","'")
+    v=B['voices']['deedee']
+    return {'deedee':{'desc':desc,'sample':sample,'old_id':v['voice_id'],'old_name':v['name'],'samples':samples}}
+data=dict(pick=dd_pick(),accent={'deedee':'warm Long Island accent'},built=datetime.date.today().isoformat(),battle=battle,dialog=dialog,voicesLive=vl,fam=fam,castVoices=cv,designed=designed,vnames=names)
 js=json.dumps(data,ensure_ascii=False).replace('</','<\\/')
 head=open('tpl_head.html').read(); body=open('tpl_body.js').read()
 out=head.rstrip()[:-len('/*__DATA__*/;')]+js+';\n'+body
