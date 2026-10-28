@@ -37,3 +37,10 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - The original game is kept as a frozen **demo**; the new build is the **full game**.
 - Voice: ElevenLabs v4. Tom runs all voice baking himself, once all ability updates are done. Do not build voice bakers or ask him to bake mid-stream.
 - Loved: Rose's original Boop. Disliked: its replacement "Tiny Tap". Do not revive Tiny Tap.
+
+## Part 2, Chapter 11 (canon, 2026-10-28)
+- Terminal Infinity is the layover between Long Island and Los Angeles: always dusk, every flight ON TIME, every gate PAUSED. Gate 00 shows two glass domes, green for Long Island and orange for Los Angeles.
+- Flight Zero leaves Rivituso morning when the boarding pass buzzes. Grace and Rose stow away under a blanket; Amy runs in after them ("I'm their ride home. And I'm faster than you.").
+- TNB and Nara arrive from Los Angeles by the jet bridge. TNB to Grace: "Tom shows me all your videos. You're very good at telling people to subscribe." Grace: "Thank you. Subscribe."
+- The fighting party is four. Anyone else along is on the bench and walks with the party; Boarding Gate benches swap who is out front. Tom, Grace and Rose never sit out in chapter 11.
+- The Standby Sprite has been number 17 on the list since 1998.

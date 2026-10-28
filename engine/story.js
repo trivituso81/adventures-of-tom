@@ -108,7 +108,9 @@ const CHAPTERS=[
              boppy:'An airport? At midnight? I\'m still recovering from the tie.'}},
     noFlight:()=>flag('ch10-done')?null
       :{lines:['Airport? Every clock in town says midnight. The planes aren\'t going anywhere.','Terminal Zero, though. Terminal Zero is open.']}},
-  {n:11,title:'The Layover Between Worlds'},
+  {n:11,title:'The Layover Between Worlds',start:{map:'grands',x:6,y:7},
+    party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>({lines:['Airport? Tom. You’re on a layover. I don’t fly layovers. I just wave at them.']})},
   {n:12,title:'Welcome to Jefferson Park, Girls'},
   {n:13,title:'The Subway Beneath the Sea of Clouds'},
   {n:14,title:'The Rikers Wall of Rivituso Row'},

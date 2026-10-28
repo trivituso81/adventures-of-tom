@@ -12,7 +12,7 @@
 // Remove by setting CHAPTER_SELECT=false (or dropping this file from index.html) when the full game ships.
 // Loaded after engine/skip.js, before engine/main.js.
 const CHAPTER_SELECT=true;
-const CHSEL_LAST=10;   // the last chapter with content
+const CHSEL_LAST=11;   // the last chapter with content
 // Party level at the start of each chapter (about two below that chapter's boss).
 const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13];   // [11]: Part 2 test start, just past the chapter 10 boss
 const chselRegion=n=>n%2===0&&n<10?'la':'le';
