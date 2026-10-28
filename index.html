@@ -877,6 +877,24 @@ html.landscape .mcmds-win{min-height:0;overflow-y:auto}
 html.landscape .mcmds{padding:4px 6px}html.landscape .mcmd{padding:4px 6px 4px 24px}
 html.landscape .mback-win{padding:3px}html.landscape .mback{font-size:18px;padding:3px 4px}html.landscape .mback b{font-size:22px}
 html.landscape .mpurse{padding:5px 10px;gap:3px}html.landscape .mp-row{padding-bottom:3px}
+/* Gear and per-character views on wide, short windows (desktop, landscape): compact party strip, bigger portrait, slots fill the height */
+html.landscape .mmain #menu-party{flex:none;padding:8px 8px 0}
+html.landscape .mmain #menu-party .ptab{flex:1 1 0;min-height:0;padding:6px 12px}
+html.landscape .mmain #menu-party .ptab-name{font-size:11px;letter-spacing:1px;margin-bottom:3px}
+html.landscape .mmain #menu-party .mbar{height:4px}
+html.landscape .gear-wrap{gap:12px;align-items:stretch}
+html.landscape .gear-side{display:flex;flex-direction:column;gap:8px}
+html.landscape .gear-top{align-items:center}
+html.landscape .gear-top .pbox{flex:none;align-self:center}
+html.landscape .gear-stats{padding:10px 8px;row-gap:10px!important}
+html.landscape .gs-val{font-size:22px}
+html.landscape .gear-acts{margin-top:0;flex-direction:column}
+html.landscape .gear-acts .menu-act{padding:12px 6px}
+html.landscape .slot-list{align-content:start;gap:8px}
+html.landscape .slot-row{padding:12px 12px;gap:12px}
+html.landscape .slot-row .item-icon.sm{width:40px;height:40px;font-size:22px}
+html.landscape .slot-name{width:56px}
+@media(min-width:900px) and (min-height:600px){html.landscape .gear-wrap{grid-template-columns:minmax(0,4fr) minmax(0,6fr)}}
 </style>
 <script>(function(){var d=document.documentElement;d.classList.add('js-on');setTimeout(function(){if(!d.classList.contains('js-running'))d.classList.add('js-stuck');},12000);document.addEventListener('click',function(e){var n=e.target.closest&&e.target.closest('#preview-note');if(n){e.preventDefault();location.reload();}});})();</script>
 </head>

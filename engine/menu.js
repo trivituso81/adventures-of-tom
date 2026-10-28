@@ -278,7 +278,7 @@ function renderGearTab(body,m) {
     panel.appendChild(c);
   }
   const top=el('div','gear-top');
-  top.appendChild(charPic(m,64));
+  top.appendChild(charPic(m,document.documentElement.classList.contains('landscape')?96:64));
   top.appendChild(panel);
   side.appendChild(top);
   const acts=el('div','gear-acts');
