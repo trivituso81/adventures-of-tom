@@ -1,0 +1,1118 @@
+{
+ "chapter": 11,
+ "note": "All spoken lines in data/scenes-p2.js (C11a and C11b). Speakers with voice null (Speaker, Standby Sprite, Nara, Lost and Found, Julian Vance, FINAL CALL) have no voice mapping yet. script is the plain text; add voice directions before baking.",
+ "lines": [
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I wasn’t going to argue.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "I wasn’t going to argue."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "A layover! Where? Never mind. Take a sweater. Take two. Take the crisp."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Bring me back a pretzel. A real one. Not the airport kind.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "Bring me back a pretzel. A real one. Not the airport kind."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "To the moon and back, Tommy. Both ways.",
+   "ctx": "Chapter 11: part2Open",
+   "after": null,
+   "script": "To the moon and back, Tommy. Both ways."
+  },
+  {
+   "voice": null,
+   "speaker": "Speaker",
+   "text": "DING. Welcome aboard Flight Zero, nonstop to Wherever. Please stow your bags, your seatbacks, and your questions.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "DING. Welcome aboard Flight Zero, nonstop to Wherever. Please stow your bags, your seatbacks, and your questions."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A pod seat. A real one. Somebody upgraded me and nobody told me why.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "A pod seat. A real one. Somebody upgraded me and nobody told me why."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "And something in seat 5B is giggling.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "And something in seat 5B is giggling."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Whoever is under the blanket: it’s breathing very loudly.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Whoever is under the blanket: it’s breathing very loudly."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "BOO! We’re stowaways! Tata, what’s a stowaway?",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "BOO! We’re stowaways! Tata, what’s a stowaway?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It’s a person who hides on a plane they weren’t invited to.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "It’s a person who hides on a plane they weren’t invited to."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Which is illegal. And also, apparently, a family tradition.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Which is illegal. And also, apparently, a family tradition."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "We weren’t hiding. We were pre-boarding. Rose got the good blanket.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "We weren’t hiding. We were pre-boarding. Rose got the good blanket."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It’s the one with the tiny planes on it.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "It’s the one with the tiny planes on it."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, if you tell Mom, I’m going to make a video about it. Please like and subscribe.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Tata, if you tell Mom, I’m going to make a video about it. Please like and subscribe."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nobody is subscribing to a stowaway.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Nobody is subscribing to a stowaway."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "STOP THE PLANE. I have a ticket. I don’t have a ticket. I have my running shoes.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "STOP THE PLANE. I have a ticket. I don’t have a ticket. I have my running shoes."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nobody here is racing.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Nobody here is racing."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "That’s what the person who loses says.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "That’s what the person who loses says."
+  },
+  {
+   "voice": null,
+   "speaker": "Speaker",
+   "text": "Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "The sky has a hole in it. The hole is pink. Tata, can I touch the hole?",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "The sky has a hole in it. The hole is pink. Tata, can I touch the hole?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "No touching, please.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "No touching, please."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Everybody hold on to something. Preferably each other.",
+   "ctx": "Chapter 11: ch11Cabin",
+   "after": null,
+   "script": "Everybody hold on to something. Preferably each other."
+  },
+  {
+   "voice": null,
+   "speaker": "Speaker",
+   "text": "DING. Welcome to Terminal Infinity. It is always dusk. Every flight is on time.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "DING. Welcome to Terminal Infinity. It is always dusk. Every flight is on time."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata. The window. There are two tiny towns in it.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "Tata. The window. There are two tiny towns in it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Left one is green. That’s Long Island. Right one is orange. That’s Los Angeles.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "Left one is green. That’s Long Island. Right one is orange. That’s Los Angeles."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Both of them inside glass. Like snow globes.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "Both of them inside glass. Like snow globes."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Then we’re in the layover. Between the two. Everything is on time and nothing is going anywhere.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "Then we’re in the layover. Between the two. Everything is on time and nothing is going anywhere."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Can we live here? There’s a plant with a hat.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "Can we live here? There’s a plant with a hat."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "We are not living in an airport, Rose.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "We are not living in an airport, Rose."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "We’re finding the way through it. East, down the Endless Concourse.",
+   "ctx": "Chapter 11: ch11Gate00",
+   "after": null,
+   "script": "We’re finding the way through it. East, down the Endless Concourse."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Nine gates. Boston, Denver, Seattle, Chicago, Miami. Every one of them says PAUSED.",
+   "ctx": "Chapter 11: ch11Conc",
+   "after": null,
+   "script": "Nine gates. Boston, Denver, Seattle, Chicago, Miami. Every one of them says PAUSED."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It’s a whole day of everybody’s trip, stopped in the middle. The seagull still has the fry.",
+   "ctx": "Chapter 11: ch11Conc",
+   "after": null,
+   "script": "It’s a whole day of everybody’s trip, stopped in the middle. The seagull still has the fry."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Careful. A town paused is still a town. Don’t lick the glass.",
+   "ctx": "Chapter 11: ch11Conc",
+   "after": null,
+   "script": "Careful. A town paused is still a town. Don’t lick the glass."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I wasn’t going to.",
+   "ctx": "Chapter 11: ch11Conc",
+   "after": null,
+   "script": "I wasn’t going to."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I was going to look at it with my face.",
+   "ctx": "Chapter 11: ch11Conc",
+   "after": null,
+   "script": "I was going to look at it with my face."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Gate Infinity is the big door at the far end. There’s a checkpoint in the middle, and somebody is standing in it.",
+   "ctx": "Chapter 11: ch11Conc",
+   "after": null,
+   "script": "Gate Infinity is the big door at the far end. There’s a checkpoint in the middle, and somebody is standing in it."
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "Hold it. Hold it right there. Name?",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Hold it. Hold it right there. Name?"
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "Not on the list. Nobody is ever on the list. You’re standby. Congratulations. You’re number eighteen.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Not on the list. Nobody is ever on the list. You’re standby. Congratulations. You’re number eighteen."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Who is number seventeen?",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Who is number seventeen?"
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "Me. I’ve been seventeen since 1998. If you pass me, I move up. Nobody passes me.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Me. I’ve been seventeen since 1998. If you pass me, I move up. Nobody passes me."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "I’ve never been on standby in my life. I’ve been on time, or I’ve been first.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "I’ve never been on standby in my life. I’ve been on time, or I’ve been first."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Rose, he has a paddle that says STANDBY and he thinks it’s a weapon.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Rose, he has a paddle that says STANDBY and he thinks it’s a weapon."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Stay behind me. If he sends someone to the back of the line, we’ll get them right back.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Stay behind me. If he sends someone to the back of the line, we’ll get them right back."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Up, everybody. Walk it off. He’s a clipboard with legs.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "Up, everybody. Walk it off. He’s a clipboard with legs."
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "...Seventeen. Somebody called seventeen. Was that me?",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "...Seventeen. Somebody called seventeen. Was that me?"
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "It was me. I’m on the plane. I’m on THE PLANE.",
+   "ctx": "Chapter 11: ch11Stby",
+   "after": null,
+   "script": "It was me. I’m on the plane. I’m on THE PLANE."
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "...Seventeen. Somebody called seventeen. Was that me?",
+   "ctx": "Chapter 11: ch11StbyAfter",
+   "after": null,
+   "script": "...Seventeen. Somebody called seventeen. Was that me?"
+  },
+  {
+   "voice": null,
+   "speaker": "Standby Sprite",
+   "text": "It was me. I’m on the plane. I’m on THE PLANE.",
+   "ctx": "Chapter 11: ch11StbyAfter",
+   "after": null,
+   "script": "It was me. I’m on the plane. I’m on THE PLANE."
+  },
+  {
+   "voice": null,
+   "speaker": "Speaker",
+   "text": "DING. Flight Zero from Los Angeles has arrived at the Jet Bridge. Welcome to the layover. Please do not feed the dog the pretzels.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "DING. Flight Zero from Los Angeles has arrived at the Jet Bridge. Welcome to the layover. Please do not feed the dog the pretzels."
+  },
+  {
+   "voice": null,
+   "speaker": "Nara",
+   "text": "Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Hi. Hi, bean. Yes. I know. You were so brave on the plane.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Hi. Hi, bean. Yes. I know. You were so brave on the plane."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You came through the sky.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "You came through the sky."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I came through the sky with a dog on a pillow. It was fine. There was a pot on the cart that was kind of incredible.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "I came through the sky with a dog on a pillow. It was fine. There was a pot on the cart that was kind of incredible."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Hi! I’m Grace. I’m nine.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Hi! I’m Grace. I’m nine."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I know exactly who you are. Tom shows me all your videos. You’re very good at telling people to subscribe.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "I know exactly who you are. Tom shows me all your videos. You’re very good at telling people to subscribe."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Thank you. Subscribe.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Thank you. Subscribe."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I’m Rose. I’m six. I’m on a longboard.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "I’m Rose. I’m six. I’m on a longboard."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That’s my longboard.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "That’s my longboard."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It’s ours now.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "It’s ours now."
+  },
+  {
+   "voice": null,
+   "speaker": "Nara",
+   "text": "Nara licks Grace’s glitter nails, one at a time. She seems to feel it’s a type of review.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Nara licks Grace’s glitter nails, one at a time. She seems to feel it’s a type of review."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "You’re the boyfriend.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "You’re the boyfriend."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And you’re the sister. The runner. I’ve heard a lot.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "And you’re the sister. The runner. I’ve heard a lot."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "I’ve heard nothing, which means he’s been saving you for a special occasion.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "I’ve heard nothing, which means he’s been saving you for a special occasion."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I can fix a handle or fire a vase. What are you good at?",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "I can fix a handle or fire a vase. What are you good at?"
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Everything, and quickly. I think we’re going to get along.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Everything, and quickly. I think we’re going to get along."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Okay. Everybody. Sleepover rules. We have a blanket, a dog, and nine hours of dusk.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Okay. Everybody. Sleepover rules. We have a blanket, a dog, and nine hours of dusk."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Tom, build the fort. I’ll make the snacks.",
+   "ctx": "Chapter 11: ch11Meet",
+   "after": null,
+   "script": "Tom, build the fort. I’ll make the snacks."
+  },
+  {
+   "voice": null,
+   "speaker": "Lost and Found",
+   "text": "The door was never locked. It just said BACK IN FIVE MINUTES for so long that nobody tried it.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "The door was never locked. It just said BACK IN FIVE MINUTES for so long that nobody tried it."
+  },
+  {
+   "voice": null,
+   "speaker": "Lost and Found",
+   "text": "Inside: a counter, a brass bell, and shelves that go up past the ceiling. Every item has a little gold clock tied to it.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Inside: a counter, a brass bell, and shelves that go up past the ceiling. Every item has a little gold clock tied to it."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Can I ring the bell?",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Can I ring the bell?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Gently.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Gently."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I rang it gently. It rang back less gently.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "I rang it gently. It rang back less gently."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata. Every single thing here has a tag. A blue mitten. A trombone. A birthday hat. A retainer.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Tata. Every single thing here has a tag. A blue mitten. A trombone. A birthday hat. A retainer."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Nobody has claimed the retainer in my family since 2011. That’s not related. Moving on.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Nobody has claimed the retainer in my family since 2011. That’s not related. Moving on."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "These are all things people left behind when they got to the good part of a trip. A mitten from the best snow day. A hat from the best party.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "These are all things people left behind when they got to the good part of a trip. A mitten from the best snow day. A hat from the best party."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "They didn’t want to leave. So they didn’t go back for it.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "They didn’t want to leave. So they didn’t go back for it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Somebody collected them. Every gold clock is the same little clock as the coins.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Somebody collected them. Every gold clock is the same little clock as the coins."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Tata. Tata. The ? suitcases. They’re all in here. They’re all being very polite.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Tata. Tata. The ? suitcases. They’re all in here. They’re all being very polite."
+  },
+  {
+   "voice": null,
+   "speaker": "Lost and Found",
+   "text": "A ledger on the counter. UNCLAIMED: 4,017,311 ITEMS. CLAIMED: 0.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "A ledger on the counter. UNCLAIMED: 4,017,311 ITEMS. CLAIMED: 0."
+  },
+  {
+   "voice": null,
+   "speaker": "Lost and Found",
+   "text": "The last line, in gold ink: THE ONLY WAY TO LEAVE SOMETHING SAFE IS TO NEVER COME BACK FOR IT.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "The last line, in gold ink: THE ONLY WAY TO LEAVE SOMETHING SAFE IS TO NEVER COME BACK FOR IT."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That is the saddest thing I have ever read. And I read my sister’s diary.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "That is the saddest thing I have ever read. And I read my sister’s diary."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I don’t have a diary. I have a drawing of a dog.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "I don’t have a diary. I have a drawing of a dog."
+  },
+  {
+   "voice": null,
+   "speaker": "Lost and Found",
+   "text": "Under the bell, a card in the same gold ink as the one at Gate Zero:",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Under the bell, a card in the same gold ink as the one at Gate Zero:"
+  },
+  {
+   "voice": null,
+   "speaker": "Lost and Found",
+   "text": "FOUND: ONE TOM. HELD FOR PICKUP. NO RUSH.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "FOUND: ONE TOM. HELD FOR PICKUP. NO RUSH."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "...He’s been holding a spot for me. Not for my bag. For me.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "...He’s been holding a spot for me. Not for my bag. For me."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "That’s either the nicest thing I’ve ever heard or a threat.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "That’s either the nicest thing I’ve ever heard or a threat."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Both, probably. That’s how the good ones are.",
+   "ctx": "Chapter 11: ch11Lost",
+   "after": null,
+   "script": "Both, probably. That’s how the good ones are."
+  },
+  {
+   "voice": null,
+   "speaker": "Long coat",
+   "text": "Hello, Tom.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Hello, Tom."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You’re the man in the long coat. At the school. At the airport. At Gate Zero.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "You’re the man in the long coat. At the school. At the airport. At Gate Zero."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "You opened every door I couldn’t. Thank you for flying nowhere, Tom.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "You opened every door I couldn’t. Thank you for flying nowhere, Tom."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "You stopped our clocks. You stopped MY clock.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "You stopped our clocks. You stopped MY clock."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Paused isn’t happy. Paused is stuck.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Paused isn’t happy. Paused is stuck."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "The seagull has had that fry for a hundred years. He’s not happy. He’s hungry.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "The seagull has had that fry for a hundred years. He’s not happy. He’s hungry."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I have a vase in the kiln in Los Angeles. It’s been in there a long time. It’s going to crack.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "I have a vase in the kiln in Los Angeles. It’s been in there a long time. It’s going to crack."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That’s what happens when you leave something at its best. It doesn’t stay good. It just stays.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "That’s what happens when you leave something at its best. It doesn’t stay good. It just stays."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "Maybe. But it stays safe. That is all I have ever wanted for anyone.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Maybe. But it stays safe. That is all I have ever wanted for anyone."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That’s the nicest offer anyone’s ever made me. And it was in my pocket the whole time. I had a pass.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "That’s the nicest offer anyone’s ever made me. And it was in my pocket the whole time. I had a pass."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "No, thank you. We have a connection to make.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "No, thank you. We have a connection to make."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "...Then I’ll make the last announcement.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "...Then I’ll make the last announcement."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "Someone has to.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Someone has to."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once."
+  },
+  {
+   "voice": null,
+   "speaker": "Julian Vance",
+   "text": "FINAL CALL.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "FINAL CALL."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Positions. Tom in front. Girls behind. Nobody lets that board call their name and sit down.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Positions. Tom in front. Girls behind. Nobody lets that board call their name and sit down."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Rose, when it calls you, move. Don’t stop to look at anything.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Rose, when it calls you, move. Don’t stop to look at anything."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I won’t look at anything.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "I won’t look at anything."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "...I looked at one thing.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "...I looked at one thing."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "If somebody gets called and can’t move, I’ll walk them on. And if we need a friend in a hurry, wave to the bench.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "If somebody gets called and can’t move, I’ll walk them on. And if we need a friend in a hurry, wave to the bench."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Up, everybody. Walk it off. It calls one of us every turn. Move before it goes again, or Tom walks you on.",
+   "ctx": "Chapter 11: ch11Vance",
+   "after": null,
+   "script": "Up, everybody. Walk it off. It calls one of us every turn. Move before it goes again, or Tom walks you on."
+  },
+  {
+   "voice": null,
+   "speaker": "FINAL CALL",
+   "text": "...You asked the board to come. Nobody asked the board.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "...You asked the board to come. Nobody asked the board."
+  },
+  {
+   "voice": null,
+   "speaker": "FINAL CALL",
+   "text": "I think I just wanted to be on one flight.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "I think I just wanted to be on one flight."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Then you’re on one. Seat 18C. Don’t recline.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Then you’re on one. Seat 18C. Don’t recline."
+  },
+  {
+   "voice": null,
+   "speaker": "FINAL CALL",
+   "text": "...ON TIME. ON TIME. ON TIME.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "...ON TIME. ON TIME. ON TIME."
+  },
+  {
+   "voice": null,
+   "speaker": "FINAL CALL",
+   "text": "It’s fine. They’re all on time. I am not.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "It’s fine. They’re all on time. I am not."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Nobody is cancelling you. You just never got a boarding pass. Here. Take mine.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Nobody is cancelling you. You just never got a boarding pass. Here. Take mine."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Something is dropping out of the gate clock. A gold coin, with a little clock face. Number nine.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Something is dropping out of the gate clock. A gold coin, with a little clock face. Number nine."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It’s warm. Whatever Vance was holding, it wasn’t his.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "It’s warm. Whatever Vance was holding, it wasn’t his."
+  },
+  {
+   "voice": null,
+   "speaker": "Speaker",
+   "text": "DING. Attention, passengers. The departures board has been updated.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "DING. Attention, passengers. The departures board has been updated."
+  },
+  {
+   "voice": null,
+   "speaker": "Speaker",
+   "text": "DING. LONG ISLAND: CLOSED. LOS ANGELES: NOW BOARDING.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "DING. LONG ISLAND: CLOSED. LOS ANGELES: NOW BOARDING."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata. The little green town. It’s turning orange. No. Amber. Like a caution light.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Tata. The little green town. It’s turning orange. No. Amber. Like a caution light."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Is Deedee okay?",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Is Deedee okay?"
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "I’m calling her. I’m calling her right now.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "I’m calling her. I’m calling her right now."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Sit down. Everybody. Deep breath.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Sit down. Everybody. Deep breath."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "We’ll go get them. We always make our connection.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "We’ll go get them. We always make our connection."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Which one is Los Angeles?",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "Which one is Los Angeles?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The orange one. It’s the only one still open.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "The orange one. It’s the only one still open."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "And it’s where Nara and TNB live. It’s home. Our other home.",
+   "ctx": "Chapter 11: ch11After",
+   "after": null,
+   "script": "And it’s where Nara and TNB live. It’s home. Our other home."
+  }
+ ]
+}
