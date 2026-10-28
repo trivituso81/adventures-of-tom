@@ -600,7 +600,7 @@ const seatTnb=()=>{ const sp=BATTLE_SPRITES.tnb,src=sp.sit; if(!src) return sp.i
 const cRR=(x,y,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x,y,w,h,r); else gfx.rect(x,y,w,h); gfx.fillStyle=c; gfx.fill(); };
 const cRRO=(x,y,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x-2,y-2,w+4,h+4,r+2); else gfx.rect(x-2,y-2,w+4,h+4); gfx.fillStyle=OUT; gfx.fill(); cRR(x,y,w,h,r,c); };
 // The couch: a rust velvet two-seater with tufted back cushions, two seat cushions, rolled arms and wooden feet.
-// couchBack draws everything behind the two of them; couchFront draws the rolled arms, which overlap their sides.
+// Everything on the couch (back, cushions, rolled arms) is drawn behind the two of them so nothing covers their bodies.
 const CO={d:'#4a2219',m:'#7c3a2a',l:'#9c4d36',h:'#bd6a4c',rim:'#9ab8ff',wood:'#6a4426',wood2:'#8e6038',pil:'#e0b44a',pil2:'#b88a2a'};
 const couchBack=(cx,fl)=>{ const x0=cx-92;
   E(cx,fl+1,98,7,'rgba(0,0,0,.35)');
@@ -667,7 +667,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     gfx.restore();
     // the light from the screen
     gfx.globalAlpha=k*.10; gfx.beginPath(); gfx.moveTo(SX+SW,SY+20); gfx.lineTo(CX+110,FL-80); gfx.lineTo(CX+110,FL); gfx.lineTo(SX+SW,SY+SH); gfx.closePath(); gfx.fillStyle=fl?'#ffffff':'#9ab8ff'; gfx.fill(); gfx.globalAlpha=k;
-    couchBack(CX,FL);
+    couchBack(CX,FL); couchFront(CX,FL);   // the arms are drawn behind them too, so nothing on the couch covers Tom or TNB
     gfx.globalAlpha=1; }});
   // Kernels: each monster gets a shower from the upturned bowl.
   const rnd=(i,j)=>{ const v=Math.sin(i*127.1+j*311.7)*43758.5453; return v-Math.floor(v); };
@@ -676,7 +676,6 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   for(let j=0;j<10;j++) kern.push({d:P.rain0+rnd(99,j)*700,x0:bowlAt.x+(rnd(j,99)-.5)*48,y0:bowlAt.y+6,x1:GR.x0-20+rnd(j,7)*(GR.w+40),y1:GR.base+4-rnd(7,j)*40,rest:GR.base+6-rnd(7,j)*30,r:5});
   // In front: the couch's rolled arms (over their sides), the bowl, the popcorn, the kiss.
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=dimK(ms);
-    if(k>0) { gfx.globalAlpha=k; couchFront(CX,FL); gfx.globalAlpha=1; }
     // the bowl: in Tom's lap, then thrown and flipped over the monsters, then dropped on the first one like a hat
     if(ms>P.walk-150&&ms<P.scare) { const L=lap(); popBowl(L.x,L.y,0,true,BS); }
     else if(ms>=P.scare&&ms<P.over) { const q=seg(ms,P.scare,P.over),L0={x:tsx+6,y:FL-24},x=lerp(L0.x,bowlAt.x,ez(q)),y=lerp(L0.y,bowlAt.y,q)-Math.sin(q*Math.PI)*70; popBowl(x,y,-q*Math.PI,q<.4,lerp(BS,1,ez(q))); }
