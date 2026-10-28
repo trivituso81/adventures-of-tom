@@ -326,7 +326,7 @@ SCENES.ch2Odette=[
 ];
 SCENES.ch2Carmen=[
   {flag:'ch2-carmen'},
-  {talk:'Doña Carmen',lines:['The pupusas are fine. Everything is fine. It\'s always this afternoon. Why\'d I ever flip them?']},
+  {talk:'Doña Carmen',lines:['The pupusas are fine. Everything is fine. It\'s always this afternoon. Why did I ever flip them?']},
   {call:()=>sfx.sizzle?sfx.sizzle():sfx.whoosh()},
   {talk:'Nara',lines:['Nara sniffs the comal. She sneezes. The smoke smells like the hills.']},
   {talk:'TNB',lines:['Nara is right. That\'s not kitchen smoke. That\'s the same purple stuff.']},
@@ -669,7 +669,7 @@ SCENES.ch3Story=[
   {trace:'boppy-1970'}, {hearts:'boppy'},
   {talk:'Rose',lines:['Race you to the pier, Boppy!']},
   {talk:'Grace',lines:['Last one there\'s a soggy sock!']},
-  {talk:'Boppy',lines:['Why\'s everybody walking like they\'re going to a fire? Slow down! My stomach is doing flips!']},
+  {talk:'Boppy',lines:['Why is everybody walking like they\'re going to a fire? Slow down! My stomach is doing flips!']},
   {talk:'Tom',lines:['Boppy speed, everybody. We walk at Boppy speed.']},
   {toast:'Goal: Cattail Pier. Through the gap at the bottom of the Row.',time:4}
 ];
@@ -1917,7 +1917,7 @@ SCENES.ch6Board=[
   {flag:'ch6-board'},
   {talk:'TNB',lines:['Babe. Babe. They have a corkboard. With RED STRING. I\'ve waited my whole life for this.']},
   {talk:'Corkboard',lines:['Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH.','In the middle, circled three times: Tom’s jar. Across the top: OPERATION BIG BREAD.']},
-  {talk:'Tom',lines:['That\'s my house. That\'s my JAR. Why\'s my jar in the middle of everything?']},
+  {talk:'Tom',lines:['That\'s my house. That\'s my JAR. Why is my jar in the middle of everything?']},
   {talk:'TNB',lines:['Everything connects to the jar, babe. That\'s how corkboards work.']},
   {talk:'Corkboard',lines:['A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.','Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY).']},
   {talk:'Nara',lines:['Nara looks at the drawing of herself. She seems pleased with it.']},
@@ -2596,7 +2596,7 @@ SCENES.ch8Barn=[
   {talk:'TNB',lines:['Oh. Oh, babe. Look at it. The tracks are still in the floor. The time clock. The crew bench. I\'m going to cry a little.']},
   {talk:'Tom',lines:['It\'s beautiful. You can cry a little. I\'ll wait.','...It\'s also freezing in here, and it\'s seventy-four degrees outside.']},
   {talk:'Nara',lines:['Nara watches a little blue flame drift past her nose, along the floor, toward the back. Then another one. Then another.']},
-  {talk:'Tom',lines:['Those are pilot lights. The whole block’s pilot lights. Something down here\'s collecting them.']},
+  {talk:'Tom',lines:['Those are pilot lights. The whole block’s pilot lights. Something down here is collecting them.']},
   {talk:'TNB',lines:['And some of them got stuck. Look. The Paint Shop, the Machine Shop, the Lunchroom. Something in each one is hogging one.']},
   {flag:'ch8-barn'},
   {toast:'Goal: the Paint Shop (top left), the Machine Shop (top right), the Lunchroom (bottom left). Get the pilot lights back.',time:5.5},
@@ -3076,7 +3076,7 @@ SCENES.ch9Door=[
   {talk:'Dome doors',lines:['The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.']},
   {call:()=>{ ch9OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); }},
   {talk:'Deedee',lines:['Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm.']},
-  {talk:'Boppy',lines:['Somebody up there\'s playing music. Very loud music. In 1971 they called that a nuisance.']},
+  {talk:'Boppy',lines:['Somebody up there is playing music. Very loud music. In 1971 they called that a nuisance.']},
   {toast:'Goal: the Dome.',time:4}
 ];
 // 8. The Dome: the Mirrorball, full of the moon. Boss fight.
