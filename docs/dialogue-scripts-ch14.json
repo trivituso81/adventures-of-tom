@@ -1,0 +1,452 @@
+{
+ "chapter": 14,
+ "note": "Unbaked. Dialogue lines in scene order, then the MAKE HIM LAUGH battle lines (kind praise, keyed by speaker id). The porch Deedee and armored Boppy use the existing Deedee and Boppy voices.",
+ "lines": [
+  {
+   "speaker": "Tom",
+   "text": "Dad. It’s Tom. I’m right in front of you."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Halt."
+  },
+  {
+   "speaker": "Amy",
+   "text": "He said that before. He’s going to say it again. He’s going to say it until we do something about it."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Tom. Behind us, down the stairs, something is coming up the tunnel. A lot of clipboards. I counted fourteen."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara growls, low. She has opinions about clipboards."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Sol’s handcar is right behind them with the girls. I’ll send them up. Nara and I will hold the breach. Somebody has to be at the bottom of the stairs to say no."
+  },
+  {
+   "speaker": "Tom",
+   "text": "You’re staying in a tunnel full of Auditors."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I used to carry coffee through a film set at five in the morning. I can handle an Auditor."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Take the thermos. They hate a thermos."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I never leave without it. Go fix the door, Tom. I’ll fix the tunnel."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Be careful. Please. I mean that in a very specific, very annoying way."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I know. I’ll be careful in the exact way you’re being annoying about right now."
+  },
+  {
+   "speaker": "Grace",
+   "text": "MOMMY. We took a handcar. It has a HORN."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I honked it at the tunnel and the tunnel honked BACK. I said it was rude. It said honk."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Sol was supposed to keep you."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Sol said, and I quote, “I’m not stopping them. I’ve met them.”"
+  },
+  {
+   "speaker": "Rose",
+   "text": "Is Boppy a statue? Can I climb him?"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "...Rose. Grace. Go back to the cab."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Boppy, you have a bucket on your head."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "It’s a helm."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It’s a bucket."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Why is Boppy a knight? Is this a quest? Is there a quest log? Do I get a badge?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Girls. Stay behind me. He’s not himself."
+  },
+  {
+   "speaker": "Amy",
+   "text": "He’s completely himself. That’s the problem. He’s himself with a gate."
+  },
+  {
+   "speaker": "Grace",
+   "text": "So. Where’s Deedee?"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Inside. She’s fine. She’s making a crisp. Don’t look at the porch."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Boppy. There’s a Deedee on the porch."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "That’s a decoration."
+  },
+  {
+   "speaker": "Rose",
+   "text": "She waved."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Okay. First the porch. Then Dad. Nobody touches the armor. Not even a little. Rose, that includes you."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I wasn’t going to touch it. I was going to boop it."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Rose."
+  },
+  {
+   "speaker": "Rose",
+   "text": "A very small boop."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mom. It’s Amy. Mom, look at me."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes."
+  },
+  {
+   "speaker": "Tom",
+   "text": "She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Amber is warmth that got stuck. She’s been giving it to nobody for hours. It needs somewhere to go."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Maybe nobody ate it."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Rose. That is the smartest thing you have said all week."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I say smart things every day. They just come out as noise."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Deedee. I’m going to eat the crisp now. Okay? Okay."
+  },
+  {
+   "speaker": "Rose",
+   "text": "...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Oh. Somebody ate it. Oh, Rosie."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Oh. I was making that for a long time, wasn’t I."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mom?"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Amy. Tommy. My girls. How long was I gone?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "A while."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Your father put on that armor. He said the glass would keep us all safe. He’s been standing out there for hours and he hasn’t sat down. Not once. Not for his back."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "He thinks the armor takes the ache away. It doesn’t. It just stops him from feeling it. There’s a difference. I was a nurse for forty years. There is a very big difference."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Can you walk?"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "The glass has my feet. It’s up to my knees. I can’t go anywhere. But I can see him."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Don’t hit him, Tommy. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I have a whole bit."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I have a whole VIDEO."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Dad used to run cross country. If I can get him to walk a lap, I can get him to talk."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "When he’s ready, I’ll call out. You won’t miss it. I’ve been calling that man for fifty years."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We’ll be careful."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "You were always the careful one. Now be the kind one. Go."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad. We’re not here to fight you."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Then you’re here to leave."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Mom’s on the porch. She’s awake."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "She is NOT. She’s fine. She’s baking. That’s the deal. Nobody gets hurt, nobody gets old, nobody gets left."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Stand down, Tommy. I don’t want to hurt you."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Then don’t. And I won’t hurt you either."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "The gold hums. It likes it when somebody swings. I can’t stop it from liking it."
+  },
+  {
+   "speaker": "Rose",
+   "text": "So we just don’t swing!"
+  },
+  {
+   "speaker": "Grace",
+   "text": "We’re the opposite of swinging. We’re the family that shows up."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "...Last warning."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Noted."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Up. Walk it off. He hits like a dad who loves you and is very upset about it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go."
+  },
+  {
+   "speaker": "Rose",
+   "text": "The bucket rolled down the steps. Can I have it? Is it mine?"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Ow."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Ow. My back. My back is back."
+  },
+  {
+   "speaker": "Grace",
+   "text": "The ache came back!"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "It never left. I just had a bucket on it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "A man in a long coat came to the door. Very polite. He never took his hat off. He said he could stop the aches. Stop the slowing down."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "He said the girls would be safe. In the good part, forever. All I had to do was stand here."
+  },
+  {
+   "speaker": "Tom",
+   "text": "And you said yes."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I signed a thing. It said WARDEN on the top. I didn’t read the bottom."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nobody reads the bottom."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I’m seventy-some years old. Every year the girls get faster and I get slower. I’m not mad about it. I’m just... one day I won’t be able to catch you."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I just didn’t want to get too old to keep you all safe."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "You big nut."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "We keep each other safe. That is the whole deal. That’s the only one. You don’t get to keep us safe alone."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Deedee."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Robert."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Is this the part where everybody cries?"
+  },
+  {
+   "speaker": "Grace",
+   "text": "Yes. Rose. Yes it is."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Boppy. You’re allowed to be slow. We’ll wait. I’ll film it. For the memories. I’ll pause and wait for you."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I’ll walk slow. I’ll walk like a snail. A snail wearing a hat."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Rosie. That’s the best offer I’ve had in eleven years."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Dad. Come on. I’ll walk you in. Short laps. You can complain the whole time."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "My stomach is doing something."
+  },
+  {
+   "speaker": "Amy",
+   "text": "There he is."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Vance said the girls would be safe in the good part, forever. We told him no once. He won’t take it well."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We always make our connection."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Take the key, Tommy. It opens the gate. It also opens the door. It doesn’t matter which. Nobody gets past us."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nobody gets past us."
+  }
+ ],
+ "battleLines": [
+  {
+   "speaker": "tom",
+   "kind": "praise",
+   "text": "Dad. You have been standing here so long the pigeons named you. Gary. They call you Gary."
+  },
+  {
+   "speaker": "tom",
+   "kind": "praise",
+   "text": "Dad, I said I would never hit you and then I stood next to you and now I realize that’s the same thing as a very large lawn ornament."
+  },
+  {
+   "speaker": "grace",
+   "kind": "praise",
+   "text": "Knock knock! Who’s there? Boppy! Boppy who? Boppy, take off the bucket, it’s not Halloween!"
+  },
+  {
+   "speaker": "grace",
+   "kind": "praise",
+   "text": "Why did Boppy cross the road? To complain about the other side! I did a whole video on it and it has seven likes. They’re all mine."
+  },
+  {
+   "speaker": "rose",
+   "kind": "praise",
+   "text": "Boppy, is your hat a BUCKET? Can I wear it? Can I wear the bucket? Knock knock! Bucket!"
+  },
+  {
+   "speaker": "rose",
+   "kind": "praise",
+   "text": "Is it a bath? Are you in a metal bath? Boppy, I want to be in a metal bath!"
+  },
+  {
+   "speaker": "amy",
+   "kind": "praise",
+   "text": "Dad. Elbows down. Stride out. You haven’t walked at a proper clip in eleven years. Come on. Pick up your feet."
+  },
+  {
+   "speaker": "amy",
+   "kind": "praise",
+   "text": "You’ve been standing for hours. I’ll walk with you. Short laps. You can complain the entire time."
+  }
+ ]
+}

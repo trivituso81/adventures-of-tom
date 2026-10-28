@@ -68,3 +68,11 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - HUSH-9 (Vance's Quiet Car) debuts: takes sound, chips the Drill to dig toward noise.
 - Boss: Dual-Coast Drill Worm (Amy and TNB spotlight). Kind route: TAKE FIVE.
 - Final beat: Boppy at the Rivituso gate in glowing Warden's plate. "I made a deal. Nobody gets hurt, nobody gets old, nobody gets left."
+
+## Chapter 14: The Rikers Wall of Rivituso Row (canon, 2026-10-28)
+- Boppy took Vance's deal: a man in a long coat (never took his hat off) promised no aches, no slowing down, and the girls "safe in the good part, forever". He signed a paper that said WARDEN on top and did not read the bottom. The gold plate hums and makes him feel no ache; it does not take the ache away.
+- Deedee, in amber from the waist down, looping a rhubarb crisp. Rose eats the crisp and the loop breaks. Deedee was a nurse for forty years: "There is a very big difference" between no ache and no feeling. She calls Boppy ROBERT.
+- Boppy laughs when he is scared (he did at their wedding). You cannot hit him; hitting makes the armor stronger. DEFEND, Amy's pace, jokes, and Deedee.
+- Key lines: "I just didn't want to get too old to keep you all safe." / "You big nut. We keep each other safe." / Tom: "We always make our connection."
+- TNB and Nara hold the breach against Vance's Auditors (fourteen clipboards). Tombo `boppy2` Nobody Gets Past Us unlocks. Rose names the helm Sir Bucket.
+

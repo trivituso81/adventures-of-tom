@@ -1,5 +1,13 @@
 # Change log (newest first)
 
+## 2026-10-28: Part 2, Chapter 14 "The Rikers Wall of Rivituso Row"
+- Chapter 13's ending now flows into chapter 14 on Rivituso Row. TNB and Nara stay to hold the breach; Grace and Rose rejoin (party: Tom, Amy, Grace, Rose). Deedee stands on the porch in amber, looping a rhubarb crisp; Rose eating it breaks the loop (amber is warmth that got stuck). The neighbors on the Row (Gus, Bean) are in amber until the chapter ends.
+- Warden Boppy (level 20, `warden`): cannot be beaten. Every hit makes the gold armor hum brighter (heals him, costs Warmth, "ARMOR UP"). DEFEND (Tom) warms him, favorites are PEP TALK, DANCE, SILLY and ff2, and ▼ Bag, MAKE HIM LAUGH (3 jokes) is the Un-Grump route. His calm waits for Deedee's call from the porch ("ROBERT."), whose MOON & BACK heals the party 60%; she calls at the latest on his fourth turn. Gate Slam on everyone every third turn (telegraphed), otherwise gentle numbers.
+- After: the plate melts, "I just didn't want to get too old to keep you all safe." / "You big nut. We keep each other safe." Unlocks the Tombo **Nobody Gets Past Us** (`boppy2`) and the Warden's Bucket keepsake. Boppy and Deedee go back inside; the Row thaws.
+- Chapter select has chapter 14 (`chselFourteen`). Chapter 13's armored Boppy now stays on the Row through chapter 14 (`data/scenes-ch13.js`); the chapter 13 "chapter 14 is coming" toasts were removed.
+- Files: see docs/C14-DONE.md. Tests: tools/ch14_test.py all ok; smoke, ch11, ch11b, ch12, ch13 re-run.
+- Lines to bake (all new dialogue is unvoiced until Tom bakes it): docs/dialogue-scripts-ch14.json (101 dialogue lines and the 8 MAKE HIM LAUGH battle lines; Boppy and Deedee use their existing voices). No existing spoken line was reworded.
+
 ## 2026-10-28: New battle backgrounds (17 pictures)
 - Tom's new pixel-art backdrops replace the code-drawn ones in battle: 17 PNGs (576x324, opaque) in `bgs/`, named `01-pond-town` to `17-oak-crown-canopy`. `engine/battle-draw.js` now has `BG_FILES`, `battleBgKey()` (picks the picture from the map's ground, or the Battle Lab `B2.lab*` flags) and `drawBattleBackdrop(t)`.
 - Map to picture: pond = every Long Island map without its own look (town, row, hollow, marsh, pier, sundial); griffith = Griffith Park plus Downtown and Jefferson Park; classroom = school and schoolyard; cafe; stacks; readroom; club; dome; barn; boiler; term; gate; lot = Studio Gate and Backlot; stage = Soundstage 7 and Stage Set; park; oak; canopy.

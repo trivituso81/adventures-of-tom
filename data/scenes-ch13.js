@@ -276,8 +276,8 @@ SCENES.ch13After=()=>[
   {trace:'ch13-wrap'}, {hearts:'tom'}, {hearts:'amy'}, {hearts:'tnb'},
   {flag:'ch13-gate'},
   {fade:'out',time:.8}, {card:13,done:true,time:3.4}, {flag:'ch13-done'}, {fade:'in',time:.8},
-  {toast:'Goal: Warden Boppy is at the Rivituso door. Chapter 14 is coming.',time:7},
-  {call:()=>showToast&&showToast('CHAPTER 13 COMPLETE! Chapter 14 is still being built.',7)},
+  {toast:'Goal: Warden Boppy is at the Rivituso door.',time:7},
+  {call:()=>showToast&&showToast('CHAPTER 13 COMPLETE!',5)},
   {save:true}
 ];
 const CH13_BOPPY_LINES=['The armor hums. Boppy does not move. His eyes follow you. Everything else is gold.','“Go home, Tom. Take your friends. Go back to the good coast.”','“The glass stays up. That’s the deal.”'];
@@ -290,7 +290,7 @@ TRIGGERS.push(
 );
 
 // World state: the Worm sleeps under the dirt until the chamber scene; it is gone once beaten. While chapter 13 is the chapter the girls
-// are at the cab stand (a save load puts them back at Amy's house first). After chapter 13 Boppy stands at the Rivituso door.
+// are at the cab stand (a save load puts them back at Amy's house first). After chapter 13 Boppy stands at the Rivituso door, through chapter 14 until the Warden fight is won (data/scenes-ch14.js).
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const b=findMonster('drillworm');
@@ -303,7 +303,7 @@ STORY_WORLD.push(()=>{
   const ch=worlds.subchamber;
   if(ch&&flag('ch13-melted')&&ch.tiles[6][20]!=='subgold') for(const y of [6,7]) tile(ch,20,y,'subgold',false);
   if(STORY.chapter===13&&girlsAway()) ch13Girls();
-  if(STORY.chapter===13&&flag('ch13-done')&&!intro.active) {
+  if(((STORY.chapter===13&&flag('ch13-done'))||(STORY.chapter===14&&!flag('ch14-after')))&&!intro.active) {
     const row=worlds.row;
     if(row&&!row.npcs.some(n=>n.scripted&&n.name==='Boppy')) {
       const a=actor('Boppy',18,9,'gus',CH13_BOPPY_LINES);
