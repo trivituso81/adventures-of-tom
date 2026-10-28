@@ -76,3 +76,10 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - Key lines: "I just didn't want to get too old to keep you all safe." / "You big nut. We keep each other safe." / Tom: "We always make our connection."
 - TNB and Nara hold the breach against Vance's Auditors (fourteen clipboards). Tombo `boppy2` Nobody Gets Past Us unlocks. Rose names the helm Sir Bucket.
 
+## Chapter 15: The Eight-Seat Dinner Table (canon, 2026-10-28)
+- First time all eight (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara) sit at one table, in the Rivituso house. Deedee slips Nara crust from the edge of the pie ("I'm not a stranger. I'm a woman with crust.") and tells Tom to keep TNB.
+- Boppy's pepper contest with TNB ends in a draw. TNB cannot feel his face; Boppy gives him the gruff nod ("...You'll do."). Tom got the nod after his third visit.
+- HUSH-9 Final Form (Quiet Car, Series Nine, upgraded to be quiet in all directions) crashes dinner to stop the laughing: "Laughing is how people leak." It loses. Kind route: nobody has ever saved it a seat. Its chip ends up with Rose, playing the table laughing.
+- Vance's message, delivered by HUSH-9: "Thank you for dinner. Tomorrow, the Square. Bring everyone. I would like a family photograph." Amy: "That's a trap." Tom: "We'll bring everyone anyway. And we'll bring dessert."
+- Deedee and Boppy: "Fifty-one years." "And counting, Robert." Family Finish ff3 Fifty-One Years & Counting unlocks.
+

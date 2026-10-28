@@ -123,7 +123,10 @@ const CHAPTERS=[
     party:{lock:['tom','amy','grace','rose'],allow:['amy'],bar:['tnb','nara','deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch14-done')?{lines:['Chapter 15 is coming. The dinner table is set for eight, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. Your father is standing in the gate in a bucket. Go and see him first.']}},
-  {n:15,title:'The Eight-Seat Dinner Table'},
+  {n:15,title:'The Eight-Seat Dinner Table',start:{map:'grands',x:6,y:7},
+    party:{lock:['tom','grace','rose'],allow:['amy','deedee','boppy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch15-done')?{lines:['Chapter 16 is coming. Vance wants a family photograph in the Square, and the cab stand has coffee.']}
+      :{lines:['Airport? Tom. Dinner is at six. Five means four thirty.']}},
   {n:16,title:'The Amber Eclipse'},
   {n:17,title:'Ascent of the Glass Tower'},
   {n:18,title:'No Touching, Please.'},

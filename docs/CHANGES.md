@@ -1,5 +1,13 @@
 # Change log (newest first)
 
+## 2026-10-28: Part 2, Chapter 15 "The Eight-Seat Dinner Table"
+- Walking into the Rivituso house after chapter 14 starts chapter 15: all eight sit at a long dinner table (a table object that exists only while the chapter is live). Deedee and Nara's crust, TNB and Boppy's pepper contest, a toast, and then HUSH-9 Final Form crashes dinner.
+- HUSH-9 Final Form (level 21, `hush9final`): Shake-style boss. Dead Air on everyone every third turn (telegraphed), Hushlings and a hush chip below half HP (2 Chatter or Kinetic hits or a Tombo break it, otherwise Total Silence). Kind route: PULL UP A CHAIR x3. BENCH CALL swaps the fourth slot with any of Deedee, Boppy, TNB or Nara (the fight gets all four as reserves).
+- New dining room battle picture bgs/18-dinner-table.png, used while HUSH-9 Final Form is in the fight.
+- Rewards: HUSH-9's Chip keepsake, and Family Finish ff3 Fifty-One Years & Counting (Deedee, Boppy, Tom) unlocks. Chapter select has chapter 15 (level 20 start, chselFifteen).
+- Files: see docs/C15-DONE.md. Tests: tools/ch15_test.py all ok; smoke, bg_test, ch11, ch11b, ch12, ch13, ch14 re-run.
+- Lines to bake (all new dialogue is unvoiced until Tom bakes it): docs/dialogue-scripts-ch15.json (79 dialogue lines and 14 PULL UP A CHAIR battle lines). No existing spoken line was reworded.
+
 ## 2026-10-28: Part 2, Chapter 14 "The Rikers Wall of Rivituso Row"
 - Chapter 13's ending now flows into chapter 14 on Rivituso Row. TNB and Nara stay to hold the breach; Grace and Rose rejoin (party: Tom, Amy, Grace, Rose). Deedee stands on the porch in amber, looping a rhubarb crisp; Rose eating it breaks the loop (amber is warmth that got stuck). The neighbors on the Row (Gus, Bean) are in amber until the chapter ends.
 - Warden Boppy (level 20, `warden`): cannot be beaten. Every hit makes the gold armor hum brighter (heals him, costs Warmth, "ARMOR UP"). DEFEND (Tom) warms him, favorites are PEP TALK, DANCE, SILLY and ff2, and ▼ Bag, MAKE HIM LAUGH (3 jokes) is the Un-Grump route. His calm waits for Deedee's call from the porch ("ROBERT."), whose MOON & BACK heals the party 60%; she calls at the latest on his fourth turn. Gate Slam on everyone every third turn (telegraphed), otherwise gentle numbers.

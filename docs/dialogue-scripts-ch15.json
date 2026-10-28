@@ -1,0 +1,394 @@
+{
+ "chapter": 15,
+ "note": "Unbaked. Dialogue lines in scene order, then the PULL UP A CHAIR battle lines (kind praise, keyed by speaker id). Deedee, Boppy, TNB and the rest use their existing voices. HUSH-9 speaks in its chapter 13 voice. Nara never speaks, so her narration lines are left out.",
+ "lines": [
+  {
+   "speaker": "Tom",
+   "text": "Eight chairs. Deedee, there are seven of us and a dog."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Nara counts. Nara is people. Sit, sit, sit. Everybody sit."
+  },
+  {
+   "speaker": "Grace",
+   "text": "This is the first time all of us have been at one table. I’m going to film it. For the memories."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Phone down. Eat first. Film after."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Eating is also content."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "TNB, sweetheart. Look at you. You’re too thin. Is Tommy feeding you? Tommy, are you feeding him?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "He makes the bowls I eat out of. We’re even."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s a very good bowl, Deedee. I’m biased."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Polite, and he makes bowls. Tommy. Keep this one."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That’s the plan."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Nara, honey. Come here. Crust, from the very edge of the pie. That’s the best part. Don’t tell Tommy."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Nara doesn’t eat from strangers. She ate from you."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "I’m not a stranger. I’m a woman with crust."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Nobody touch the peppers. Those came off the plant by the window. They are not for the faint of heart."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "TNB. You work in a fancy restaurant. You eat anything?"
+  },
+  {
+   "speaker": "TNB",
+   "text": "Mostly I serve it."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "That’s a no."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That’s a “professionally, I’m very polite about it.”"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "One pepper each. You and me. First one to reach for water loses."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I’ll time it. Nobody move. Nobody breathe. Ready? Go."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Is somebody going to die?"
+  },
+  {
+   "speaker": "Grace",
+   "text": "Rose. Not in front of the pepper."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "It’s nothing. It’s fine. It’s... it’s fine."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s actually quite floral. There’s a bright citrus note at the front."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "...Citrus."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad, you’re sweating."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "It’s warm in here. It’s the oven. Deedee, what is the oven doing?"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Nothing. It’s off. Robert."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Forty seconds. Boppy’s hand is moving toward the water. It is hovering. It is hovering."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "My stomach is doing something."
+  },
+  {
+   "speaker": "Grace",
+   "text": "That’s the pepper!"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "It was doing something BEFORE."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’m calling it a draw. Neither of us reached. I’m going to breathe through my nose for a minute. I can’t feel my face. Nobody say anything."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "...You’ll do."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "That’s the nod. Tommy. Your father gave him the nod."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I know what the nod is. I got it after the third visit."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Okay. Toast. Everybody up. Glasses. Nara, paw."
+  },
+  {
+   "speaker": "Tom",
+   "text": "To the table."
+  },
+  {
+   "speaker": "Grace",
+   "text": "To the eight chairs!"
+  },
+  {
+   "speaker": "Rose",
+   "text": "To the CRUST!"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "To the moon and back."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "THIS IS A QUIET CAR."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s a dining room."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "It is the loudest dining room I have ever measured. Forty-one decibels of laughing. Mr. Vance does not want laughing. Laughing is how people leak."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s a family dinner. Everybody gets to be loud at a family dinner."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "That is the problem. You are happiest here. I have been upgraded. I am quiet in all directions. FINAL FORM."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Nobody gets past us. Nobody comes to this table and shushes my wife’s cooking."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Robert. Your back."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "I’ll do it with my back."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dad, sit. We’re rotating. Amy’s up front with us. You’re on the bench. When somebody needs a break, wave, and tag in a friend."
+  },
+  {
+   "speaker": "Grace",
+   "text": "A bench call. We have a bench. I have been waiting my whole life to say bench call."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Can I raspberry the train?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "You may raspberry the train."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "Shh. Again. Round two."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Slower. Chair or chatter. Tag in a friend if you need one."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Up, up. Eat something. Sit a minute. Then we try again."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Somebody’s laughing."
+  },
+  {
+   "speaker": "Grace",
+   "text": "It’s the TRAIN."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "I measured forty-one decibels. It was forty-one decibels of nobody leaving."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Scoot, Robert. The train needs a chair."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Why am I scooting?"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Because you’re the widest."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "My BACK is the widest."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Rhubarb crisp. Nine minutes. Eat."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "I do not eat."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Everybody eats."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "...It is warm. It is loud. It is... acceptable."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "The chip is broken. I cannot keep it quiet. I do not understand. It is very loud in here and nobody is sad."
+  },
+  {
+   "speaker": "Amy",
+   "text": "That’s the point of the loud."
+  },
+  {
+   "speaker": "HUSH-9",
+   "text": "Mr. Vance asked me to deliver a message. “Thank you for dinner. Tomorrow, the Square. Bring everyone. I would like a family photograph.”"
+  },
+  {
+   "speaker": "Amy",
+   "text": "That’s not a photograph. That’s a trap."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Of course it’s a trap. We’ll bring everyone anyway. And we’ll bring dessert."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I’m wearing the good scrunchie."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It left its chip! It plays a tiny dinner! Listen!"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Deedee. Fifty-one years."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "And counting, Robert."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Don’t make it weird."
+  }
+ ],
+ "battleLines": [
+  {
+   "speaker": "tom",
+   "kind": "praise",
+   "text": "There’s a chair at the end of the table. It’s folding. It’s yours. Please sit down."
+  },
+  {
+   "speaker": "tom",
+   "kind": "praise",
+   "text": "You’ve been standing in the doorway of every room for years. Come in. We’ll shuffle over."
+  },
+  {
+   "speaker": "grace",
+   "kind": "praise",
+   "text": "Okay, so it’s a very small quiet car, and it’s my grandparents’ house, and you’re invited to dinner. Subscribe to dinner!"
+  },
+  {
+   "speaker": "grace",
+   "kind": "praise",
+   "text": "You can sit next to me. I’ll only tell you to be quiet during my videos. That’s a rule for everybody."
+  },
+  {
+   "speaker": "rose",
+   "kind": "praise",
+   "text": "You can sit by Nara! Nara loves everybody! Nara already loves you!"
+  },
+  {
+   "speaker": "rose",
+   "kind": "praise",
+   "text": "I made you a name tag. It says HUSH. I spelled the H very carefully."
+  },
+  {
+   "speaker": "amy",
+   "kind": "praise",
+   "text": "Dinner is at six. You’re not late. Late is when you don’t come. Sit."
+  },
+  {
+   "speaker": "amy",
+   "kind": "praise",
+   "text": "I have taught a room of thirty kids with a recorder each. You are not the loudest thing I have handled. Sit."
+  },
+  {
+   "speaker": "deedee",
+   "kind": "praise",
+   "text": "Sit, sit, you’re too thin. Even a train. Who wants rhubarb crisp? Everyone. Even the train."
+  },
+  {
+   "speaker": "deedee",
+   "kind": "praise",
+   "text": "Oh, honey. Nobody ever saved you a seat? Here. Right here next to me."
+  },
+  {
+   "speaker": "boppy",
+   "kind": "praise",
+   "text": "Sit down. Take the weight off. My back understands better than anybody."
+  },
+  {
+   "speaker": "boppy",
+   "kind": "praise",
+   "text": "Pull up a chair. I’ll tell you about my stomach. It’s loud, but you’ll live."
+  },
+  {
+   "speaker": "tnb",
+   "kind": "praise",
+   "text": "I set you a place. Fork on the left. I’m a server. It’s how I say hello."
+  },
+  {
+   "speaker": "tnb",
+   "kind": "praise",
+   "text": "Hey. I have a thermos. It’s very quiet cocoa. Sit with us a minute."
+  }
+ ]
+}
