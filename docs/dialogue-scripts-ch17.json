@@ -1,0 +1,366 @@
+{
+ "chapter": 17,
+ "note": "Unbaked. Dialogue lines in scene order (Sol, lobby, landing, hatch, six shelf smashes, locks, race, vault, aftermath), then the two girls' landing NPC lines. The Archivist and Vance have no voices yet (new cast entries needed before baking; Vance is also owed from chapter 16). Nara never speaks, so her narration lines are left out. Smash lines are Tom narrating. No battle lines were added (no kind route).",
+ "lines": [
+  {
+   "speaker": "Sol",
+   "text": "Downtown. The tallest thing on the boulevard that wasn’t there on Monday. Sixty floors of glass, and every clock in it says 4:59."
+  },
+  {
+   "speaker": "Amy",
+   "text": "That’s the building. That’s where he is."
+  },
+  {
+   "speaker": "Grace",
+   "text": "We’re coming. All of us. I already told Rose. She’s packing."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I packed a pretzel. And a second pretzel, for Deedee."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Girls. It is sixty floors. It is going to be hard and strange and not fair."
+  },
+  {
+   "speaker": "Grace",
+   "text": "We know. That’s why we’re coming."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Okay. Here’s how we do it. Two teams of three. Grace, Rose and me take the stairs. Amy, TNB and Nara work the Archive on thirty."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Divide and conquer. I like it. I also like not being on the stairs."
+  },
+  {
+   "speaker": "Amy",
+   "text": "And I get to hit something. Good."
+  },
+  {
+   "speaker": "Sol",
+   "text": "I’ll keep the meter off and the engine on. Go get your folks, Tommy."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It’s so tall. Tata, it’s TALLER than the Starlite."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard."
+  },
+  {
+   "speaker": "Grace",
+   "text": "It’s so clean. Nobody lives here. Nobody even touched the floor."
+  },
+  {
+   "speaker": "Rose",
+   "text": "There’s a plant. It looks scared."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Floor directory says the stairs are on the east side. Twenty-eight flights."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Twenty-eight? That’s a leg day AND an arm day."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The lifts are locked. We take the stairs to thirty. Amy, TNB and Nara meet us up there."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Landing thirty. A huge glass door with a gold lock the size of a dinner plate. The counter over it says LOCKS ENGAGED 6 OF 6."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Six locks. Six of something. I don’t like that."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tom, this is Amy. We’re in the service ducts. I can hear glass. A lot of glass. There’s a little hatch on your landing, it should open on the Archive."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Found it. Staff only. Somebody wrote HE IS OBVIOUSLY STAFF under it."
+  },
+  {
+   "speaker": "Amy",
+   "text": "That’s TNB’s handwriting. Go through. Girls hold the landing."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Holding the landing! Holding it! Holding!"
+  },
+  {
+   "speaker": "Tom",
+   "text": "The Archive. A long hall of glass shelves, and on every shelf a whole tiny town under a dome, each one paused on its happiest afternoon."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tom. Look at the plaque. Look at the little man with the pierogi."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That’s a very good diorama. I hate it. It’s very well made."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Six towns. Six shelves. The lock counter on the stairs says six. I do not think that is a coincidence."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Smash them. Gently, I mean. Free the towns."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Gently is not a word I use."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "Attention. A collection has been disturbed. Six exhibits are no longer on file."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "This is unfortunate. This is not a problem. The Archivist is not unkind. The Archivist is only thorough."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "Floors 2 to 30 are now unlocked for your convenience. The express lift has been withdrawn. Please use the stairs. All of them. The Archivist will be waiting at the top."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Withdrawn. The lift has been WITHDRAWN. Tom. Did he just challenge me to a stair race?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "I don’t think he knows what he just did."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube."
+  },
+  {
+   "speaker": "Amy",
+   "text": "You and me. Landing to landing. Loser buys dinner."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Amy, we have a deadline. We have a tower. We have two grandparents made of stone."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Which is why I am going to win this."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I am calling it. On my mark. Mark!"
+  },
+  {
+   "speaker": "Rose",
+   "text": "I’m the finish line!"
+  },
+  {
+   "speaker": "TNB",
+   "text": "I am not running. I am carrying the thermos. Somebody has to."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Floor fifty-nine. We hit the vault door at exactly the same time. Amy’s forehead and mine, a quarter inch apart."
+  },
+  {
+   "speaker": "Amy",
+   "text": "That was MINE."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It was a tie."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tie means nobody won. Tie means I lost. Rematch. Later. After."
+  },
+  {
+   "speaker": "Tom",
+   "text": "After."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY."
+  },
+  {
+   "speaker": "Grace",
+   "text": "They’re so small. They’re okay. They’re holding hands."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Stay behind me. All of you."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "Thank you for the six exhibits. The collection is, for the first time, incomplete. I find that I do not like it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "You’re the Archivist."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "I am what Mr. Vance keeps when he wants a thing never to change. I file. I label. I hold. It is all I was made to do. It is a very good job."
+  },
+  {
+   "speaker": "Amy",
+   "text": "You froze the pierogi man for thirty years."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "Thirty-one. He was very happy. I made sure of it."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That is the single saddest thing I have ever heard a lens say."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "Please hold still. This will not hurt. Nothing will, ever again."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Up. Everyone up. We have a lens to break. Breathe. Then we go again."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "I was only... keeping them safe."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I know. They were never yours to keep."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "What does one do... with a day that is allowed to end?"
+  },
+  {
+   "speaker": "Rose",
+   "text": "You eat dinner. Then you go to sleep. Then it’s morning."
+  },
+  {
+   "speaker": "Archivist",
+   "text": "That sounds... sufficient."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata. The globe."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Floor sixty is for family. Come up when you are ready. I have kept your parents very warm."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mom. Dad. We are coming. We’re coming."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Everybody breathe. We rest. Then we go to the top."
+  },
+  {
+   "speaker": "Tom",
+   "text": "A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Amy picks up the nearest chair like a javelin. “Eat the pierogi, little man.”"
+  },
+  {
+   "speaker": "Tom",
+   "text": "The tiny man finishes his bite. In 1993, in Dunmore, Pennsylvania, 2:15 PM comes at last."
+  },
+  {
+   "speaker": "Tom",
+   "text": "TNB taps the dome once, lightly, with a pottery tool. “Structurally, this was never going to hold.”"
+  },
+  {
+   "speaker": "Tom",
+   "text": "The firework goes off. Somewhere in Tallulah Falls a crowd on blankets says oooooh, nine years late."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nara headbutts the shelf. There is a long pause. Then the glass sings and comes down in a bright rain."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The ball comes down in left field. The tiny dad catches it. Cedar Hollow loses in the bottom of the ninth and has never been happier."
+  },
+  {
+   "speaker": "Tom",
+   "text": "“This is for the lady with the suitcase.” Amy swings. The dome goes."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The tiny woman reaches the ferry. The gangway comes up behind her, and the ferry leaves, and she waves, and she is crying, and it is fine."
+  },
+  {
+   "speaker": "Tom",
+   "text": "“I have never broken a pie case in my life.” TNB breaks it, apologetically, with his whole arm."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The judge puts down the fork. The baker in the front row screams. It is a very good pie."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nara and Amy hit the last dome together, from both sides. It comes apart like an ice shelf."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The two tiny people finish the kiss. The flower girl sticks her tongue out one more time, on principle."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Team Stairs is holding the landing. That is a very important job. I decided that."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I can hear the shelves smashing through the wall. Mommy sounds really happy."
+  },
+  {
+   "speaker": "Grace",
+   "text": "If anything comes up the stairs, it has to get past me. And then past Rose. She is worse."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I’m guarding the hatch. Nobody comes in. Nobody goes out. Except Tata. And snacks."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Is the wall making that noise, or is it Nara?"
+  },
+  {
+   "speaker": "Rose",
+   "text": "I’m going to name every shelf. Shelf one is Gerald."
+  }
+ ]
+}

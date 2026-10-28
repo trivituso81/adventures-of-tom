@@ -92,3 +92,11 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - Vance seals Long Island in a snow globe and reels it up on a cable. Cab 7 gets everyone out through the closing glass (it shaves the roof off). The chapter ends at the Angel City cab stand: Rose, "Are they cold?" Tom: "No. They're warm. I checked." Grace: "Then it's not forever. It's just a long time." Vance: "If you want them, you know the building. Downtown. Sixty floors."
 - Tom's line to Boppy at the end: "Dad. Keep her warm. I'm coming back."
 
+## Chapter 17: Ascent of the Glass Tower (canon, 2026-10-28)
+- Julian Vance's Glass Tower in Downtown LA is 60 floors of glass where every clock says 4:59. Floors 2 to 29 are the Stillness (guards), 30 to 58 the Archive, 59 the Vault, 60 Mr. Vance. The lifts are locked. Staff-only hatches have stickers: "HE IS OBVIOUSLY STAFF."
+- Two strike teams: Tom, Grace, Rose (stairs) and Amy, TNB, Nara (the Archive). Tom runs between them. Amy: "Gently is not a word I use."
+- The Archive holds six towns paused on their happiest afternoon (Dunmore PA pierogi fest, Tallulah Falls fireworks, Cedar Hollow little league, Port Gilly last ferry, Hickory Bend pie judging, Lower Brightwater wedding). Smashing a shelf lets the moment finish. TNB: "Structurally, this was never going to hold."
+- The Archivist (a pair of lenses, one cold, one amber): "I am not unkind. I am only thorough." It froze the pierogi man for thirty-one years "and made sure he was happy". Rose, to a lens that does not know what to do with a day that ends: "You eat dinner. Then you go to sleep. Then it's morning."
+- Amy and Tom race floors 31 to 59 and tie ("Tie means nobody won. Tie means I lost. Rematch."). Tombo amy3 Sixty-Story Sibling Pace unlocks.
+- Vance, after the fight: "Floor sixty is for family. Come up when you are ready. I have kept your parents very warm." The snow globe lifts off its plinth on a gold cable. Deedee and Boppy are still stone inside it.
+

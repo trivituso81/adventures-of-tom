@@ -133,7 +133,12 @@ const CHAPTERS=[
     party:{lock:['tom','amy','tnb','nara'],allow:['amy','tnb','nara'],bar:['deedee','boppy','grace','rose'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch16-done')?{lines:['Chapter 17 is coming. Long Island is under glass, and the cab stand has coffee nobody is drinking.']}
       :{lines:['Airport? Tom. Not today. Not this.']}},
-  {n:17,title:'Ascent of the Glass Tower'},
+  // Chapter 17: two strike teams of three (see data/scenes-ch17.js). Grace and Rose are never benched (a bench save would break loading), so they
+  // are the stairs team; Amy, TNB and Nara are the shelves team. The service hatch on landing 30 swaps who is out front.
+  {n:17,title:'Ascent of the Glass Tower',start:{map:'lacab',x:7,y:6},
+    party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch17-done')?{lines:['Chapter 18 is coming. The pinnacle lift is waiting, and the cab stand has coffee.']}
+      :{lines:['Airport? Tom. Not now. The tower is right there. Go up.']}},
   {n:18,title:'No Touching, Please.'},
   {n:19,title:'The Unsent Dead-Letter Office'},
   {n:20,title:'The Forever Engine & The Open Sky'}

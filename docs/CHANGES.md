@@ -1,11 +1,23 @@
 # Change log (newest first)
 
+## 2026-10-28: Part 2, Chapter 17 "Ascent of the Glass Tower"
+- Talk to Sol at the Angel City cab stand after chapter 16 to start chapter 17. Grace and Rose rejoin. Julian Vance's 60-story Glass Tower stands on the Downtown boulevard (doors in the alley between Ramen Ramen and The Starlite).
+- New dungeon, four maps: the Lobby, the Stairwell (floors 2 to 30, Stillness guards, coffee restore points), the Shelf Hall, the Vault. Glass, gold and a golden-hour skyline; new battle backdrop.
+- Two strike teams of three: Tom, Grace, Rose climb the stairs; Tom, Amy, TNB, Nara work the Shelf Hall. The service hatch on landing 30 swaps the teams (the waiting team holds the landing or sits on the bench).
+- Six shelves, each a tiny town paused on its happiest afternoon. Smashing one lets the moment finish (the pierogi bite, the firework, the last ferry). Six of six drops the locks.
+- Amy and Tom race floors 31 to 59 (screen overlay, photo finish). Unlocks the Tombo Sixty-Story Sibling Pace (amy3).
+- The Archivist's Twin Lenses (level 25, `twinlens`): Shake-style boss. Long Exposure on everyone every third turn (telegraphed), Curators and an amber lens below half HP (2 Kinetic or Sparkle hits or a Tombo break it, otherwise Total Archive). No kind route. Fight party: Tom, Grace, Rose, Amy; TNB and Nara on the bench.
+- New monsters: Pausesprite, Paperweight, Curator. Chapter select has chapter 17 (level 22 start, chselSeventeen).
+- Files: see docs/C17-DONE.md. Tests: tools/ch17_test.py all ok; smoke, bg_test, ch11 to ch16 re-run.
+- Lines to bake: docs/dialogue-scripts-ch17.json (90 lines; the Archivist and Vance need cast entries). No existing spoken line was reworded. Chapter 16's end toast changed (it told Tom chapter 17 was still being built).
+
 ## 2026-10-28: Contraction Fix Baker dialogue merged (255 clips) and Deedee's new dialogue voice
 - Tom sent dialogue-pending.json: 255 clips (Deedee 120 in her new picked voice "AoT Deedee (picked 2026-10-28)", id 9UrcxKDUU0pvcnFhdfTU; plus the 135 contraction re-bakes). Merged with tools/clip-audit/merge.py: each clip to the file that holds its key (or the file its removed clip came from); 3 new lines to the new data/voice/dialog-ch28.js (listed last in DIALOG_CAST.files, also carries the updated voice settings). Silence trim, cast and speaker effects (Boppy 0.9, monsters), Grace shrink once. Largest file 14.6 MB.
 - Audit of the 135 re-bakes (speech recognition): 130 say exactly the screen text. 5 still read the long form, so their screen text now matches the audio (no re-bake): "Why is everybody walking...", "Why did I ever flip them?", "Somebody up there is playing music", "Why is my jar in the middle...", "Something down here is collecting them."
 - Result: chapters 1 to 10 and Nine Scoops have no dialogue line without a clip (re-harvest: only Part 2 lines remain, 612). Dialogue clips 2118 to 2256.
 - Still to come from Tom: voices.json from the baker's Battle tab (57 lines: Deedee's 44 in the new voice, TNB's 8 new moves, 5 contraction fixes). Until then Deedee's battle lines play her previous voice.
 - Tests: tools/smoke.py FAILS: []; harvest page load with all 18 dialogue files, no page errors.
+
 
 ## 2026-10-28: Part 2, Chapter 16 "The Amber Eclipse"
 - Walking into the Square after chapter 15 starts chapter 16: the family photograph. Marlowe at a box camera, Vance's voice, the lens charging, the amber beam at Grace and Rose, Deedee and Boppy stepping in front (arms locked, "Fifty-one years." / "...And counting.") and turning to stone. Vance "helps with Marlowe's notes". Grace takes Rose and runs for Cab 7.

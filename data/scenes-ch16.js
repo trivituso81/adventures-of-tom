@@ -243,8 +243,8 @@ SCENES.ch16After=()=>[
   {talk:'Grace',lines:['Then it’s not forever. It’s just a long time.']},
   {talk:'Tom',lines:['It’s just a long time.']},
   {talk:'Amy',lines:['Vance said downtown. Sixty floors. We rest tonight. Tomorrow we go up.']},
-  {toast:'Goal: Chapter 17 is coming. Vance is waiting in the Glass Tower, Downtown.',time:8},
-  {call:()=>showToast&&showToast('CHAPTER 16 COMPLETE! Chapter 17 is still being built.',7)},
+  {toast:'Goal: talk to Sol at the cab stand to start Chapter 17. Vance is waiting in the Glass Tower, Downtown.',time:8},
+  {call:()=>showToast&&showToast('CHAPTER 16 COMPLETE!',7)},
   {save:true}
 ];
 SCENE_OPS.ch16Grey=()=>S.seq(ch16Fx('grey',.9,2.2));
