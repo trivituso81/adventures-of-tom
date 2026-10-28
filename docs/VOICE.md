@@ -12,7 +12,7 @@ Test runs are slow with the real audio loaded. For quick tests copy the repo to 
 
 - Battle and overworld barks: `data/lines.js` has `LINES` keyed by character and kind (a move key, `hurt`, `low`, `ko`, `win`, `special`). `say(id, kind)` picks a line, plays a baked clip if one matches, else falls back (browser speech synthesis in `engine/speech.js`, or silence for Nara and dialogue).
 - Dialogue boxes: `data/dialog-cast.js` maps a speaker name to a voice; `engine/dialog-voice.js` plays the clip for the speaker and exact page text. Unbaked pages stay silent.
-- **A clip plays only when its text exactly matches the line.** Rewording a line, even a comma, silences it until it is re-baked. Count of dialogue clips in the live game: 1903.
+- **A clip plays only when its text exactly matches the line.** Rewording a line, even a comma, silences it until it is re-baked. Count of dialogue clips in the live game: 2253 (battle clips: 463), after the 2026-10-27 purge of stale clips.
 - The 3x5 on-screen font cannot show some characters, but spoken text can. Scripts for voice baking spell "Ta-Ta" as "Tah Tah" and numbers as words.
 
 ## Rules for you
