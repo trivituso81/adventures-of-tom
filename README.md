@@ -31,3 +31,6 @@ The game must be served over http; opening `index.html` directly will not work. 
 | [`docs/CHANGES.md`](docs/CHANGES.md) | Change log and known gaps |
 
 Exported from the live game, artifact version `1792983007-0e46` (v252), 25 Oct 2026.
+
+## Credits
+Rose Mode menu pictures (data/battle-emoji.js, built by tools/build_bp_emoji.py) are Twemoji by Twitter / jdecked, CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/

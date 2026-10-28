@@ -686,7 +686,7 @@ html.landscape .b2-ribbon{min-height:40px;padding:4px 6px}
 .b7-tools button.on{background:var(--gold);color:#1a1e26;border-color:#fff8df}
 
 /* ---- Rose Mode picture menus (engine/battle-pictures.js) ---- */
-.bi{image-rendering:pixelated;display:block;flex:none}
+.bi{image-rendering:pixelated;display:block;flex:none}.bi.be{image-rendering:auto}.bi.be.grey{filter:grayscale(1)}.bp-ic .bi.be,.bp-cross .bi.be{filter:drop-shadow(0 0 3px #ffffffb0)}.bp-ic .bi.be.grey{filter:grayscale(1) drop-shadow(0 0 3px #ffffff80)}.bp-cross .bi.be.grey{filter:grayscale(1)}
 .bp .b2-x{gap:3px}.bp .b2-x small{font-size:10px;font-weight:800;color:var(--ink)}
 .bp .bp-vp{display:flex;align-items:center;gap:2px;font-size:10px;font-weight:800;color:var(--ink-dim);min-height:12px}
 .bp-mid{gap:3px}.bp-mid small{color:var(--ink)!important}
@@ -1076,6 +1076,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/progress.js"></script>
 <script src="engine/feel.js"></script>
 <script src="data/battle-icons.js"></script>
+<script src="data/battle-emoji.js"></script>
 <script src="engine/battle-pictures.js"></script>
 <script src="engine/overworld.js"></script>
 <script src="data/font.js"></script>

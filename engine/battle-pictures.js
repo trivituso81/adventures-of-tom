@@ -7,7 +7,11 @@
 const bpText=b2RenderCmd;
 const BP_ELEM={kinetic:'e_kinetic',cozy:'e_cozy',splash:'e_splash',sparkle:'e_sparkle',chatter:'e_chatter',amber:'e_amber'};
 const bpOn=()=>{ try { return !!b7Diff().pictures; } catch(e) { return false; } };
-const bpIcon=(id,px,cls,grey)=>{ const u=biIcon(id,grey?'grey':''); return u?'<img class="bi '+(cls||'')+'" alt="" src="'+u+'" width="'+px+'" height="'+px+'">':''; };
+const bpIcon=(id,px,cls,grey)=>{
+  // Big, sharp pictures (data/battle-emoji.js) first; the old 16x16 pixel pictures (data/battle-icons.js) only for ids without one.
+  const be=typeof BE_MAP!=='undefined'&&BE_MAP[id];
+  if(be) return '<img class="bi be '+(cls||'')+(grey?' grey':'')+'" alt="" src="'+BE_SVG[be]+'" width="'+px+'" height="'+px+'">';
+  const u=biIcon(id,grey?'grey':''); return u?'<img class="bi '+(cls||'')+'" alt="" src="'+u+'" width="'+px+'" height="'+px+'">':''; };
 const bpWord=s=>String(s||'').replace(/[^A-Za-z0-9' ]/g,' ').trim().split(/\s+/)[0].toUpperCase().slice(0,9);
 // Strength: 1, 2 or 3 fists from the move's damage multiplier.
 function bpFists(a) {
