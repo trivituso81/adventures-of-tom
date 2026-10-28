@@ -1543,16 +1543,16 @@ SC.rf_poke=(s,u)=>{ const ms=s.t*1000+s.t0,n=s.n; if(ms<s.from) return;
   rrect(2,-4,22,8,4); gfx.lineWidth=3.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#ffc49e'; gfx.fill();   // pointer finger, a shade lighter
   R(4,-3,16,2,'#ffdcc2'); E(21,-1.6,2.6,1.8,'#ffe6ee'); Ln(11,-4,11,-1.5,1.2,SKIND);   // highlight, nail, knuckle crease
   gfx.restore(); };
-Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),pokes=[1350,1600,1900];
+Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500;
+  const pokes=[HIT];   // ONE jab (Tom, 2026-10-27). Damage, sound, flash, BOOP! word and her spoken "Boop!" all land on HIT.
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1150,f:'act',dy:u=>-ez(u)*6},
     {t:2200,f:'celeb',hop:16},{t:2650,f:'celeb',hop:9,hn:2},{t:3050,f:'runR'},{t:3750,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); say(m.id,'boop'); }],
-    [1150,()=>{ setMessage('Pointer finger out. Poke.'); scene('rf_poke',1.3,{n,from:1150,pokes,back:2050,t0:1150}); }],
-    [pokes[0],()=>{ sfx.poke(); f.shake=Math.max(f.shake||0,.15); scene('rv_rings',.3,{x:n.x,y:n.y,r:10}); scene('rf_word',.45,{x:F.x+30,y:F.top-30,txt:'POKE',c:CREAM,sc:2}); }],
-    [pokes[1],()=>{ sfx.poke(); f.shake=Math.max(f.shake||0,.18); scene('rv_rings',.3,{x:n.x,y:n.y,r:12}); scene('rf_word',.45,{x:F.x-24,y:F.top-46,txt:'POKE',c:CREAM,sc:2}); }],
-    ['hf',pokes[2]],
-    [pokes[2],()=>{ sfx.boop?sfx.boop():sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'BOOP!',c:PINK2,sc:5});
+    [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); }],
+    [1150,()=>{ setMessage('Pointer finger out.'); scene('rf_poke',1.0,{n,from:1150,pokes,back:1850,t0:1150}); }],
+    [HIT-60,()=>{ say(m.id,'boop'); }],   // starts a hair early so the word itself lands on contact
+    ['hf',HIT],
+    [HIT,()=>{ sfx.boop?sfx.boop():sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'BOOP!',c:PINK2,sc:5});
       scene('rv_rings',.6,{x:n.x,y:n.y,r:34}); scene('rv_burst',.7,{x:n.x,y:n.y,n:8,r:40,sz:6}); }],
     [2200,()=>{ sfx.giggle(); scene('ro_text',.9,{st,txt:'HEE HEE',c:PINK,sc:2}); }],
     [3850,'end',res(E2)+'Boop. One finger. Right on the nose.']]); };
