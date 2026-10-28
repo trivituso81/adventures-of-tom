@@ -16,6 +16,18 @@ function playClip(cl,part) {
   return true;
 }
 
+// Decode a line's clip ahead of time so it starts on cue (a clip is otherwise decoded the first time it plays).
+function warmLine(id,line) {
+  const c=audio(); if(!c||!sound.enabled) return;
+  const all=VOICE_CLIPS&&VOICE_CLIPS.clips&&VOICE_CLIPS.clips[id]; if(!all) return;
+  const part=typeof CLIP_PARTS!=='undefined'&&CLIP_PARTS[id]&&CLIP_PARTS[id][line], want=part?part.text:line;
+  for(const k in all) for(const cl of all[k]) if(cl&&cl.text===want) {
+    if(clipCache.has(cl.mp3)) return;
+    const bin=atob(cl.mp3),u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
+    c.decodeAudioData(u.buffer).then(buf=>clipCache.set(cl.mp3,buf)).catch(()=>{}); return;
+  }
+}
+
 function pickVoice(id) {
   const list=sound.voices.length?sound.voices:(('speechSynthesis'in window)?speechSynthesis.getVoices():[]);
   const en=list.filter(v=>/^en/i.test(v.lang));
