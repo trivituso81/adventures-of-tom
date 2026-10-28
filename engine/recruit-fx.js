@@ -23,7 +23,7 @@ if(!sfx.ding) sfx.ding=function(){ tone({type:'sine',f0:1320,f1:1320,dur:.5,vol:
 RFX.scene=(kind,dur,o)=>{ const s=Object.assign({kind,dur,t:-((o&&o.delay)||0),seed:Math.random()*100},o); (battle.scenes=battle.scenes||[]).push(s); return s; };
 RFX.hold=(i,kind,dur,o)=>{ battle.held=Object.assign({i,kind,dur,t:0},o); return battle.held; };
 RFX.update=dt=>{
-  if(battle.scenes) { for(const s of battle.scenes) s.t+=dt; battle.scenes=battle.scenes.filter(s=>s.t<s.dur); }
+  if(battle.scenes) { for(const s of battle.scenes) s.t+=dt; battle.scenes=battle.scenes.filter(s=>s.t<s.dur&&!s.dead); }
   if(battle.held) { battle.held.t+=dt; if(battle.held.t>battle.held.dur) battle.held=null; }
   battle.enemyWobble=Math.max(0,(battle.enemyWobble||0)-dt);
 };
@@ -33,7 +33,10 @@ RFX.draw=back=>{
   for(const s of battle.scenes) {
     if(s.t<0||!!s.back!==!!back) continue;
     const f=SC[s.kind]; if(!f) continue;
-    gfx.save(); if(typeof B2!=='undefined'&&B2.aim&&!B2_NOWARP.has(s.kind)) b2WarpCtx(); f(s,cl(s.t/s.dur),s.t); gfx.restore(); gfx.globalAlpha=1;
+    gfx.save();
+    try { if(typeof B2!=='undefined'&&B2.aim&&!B2_NOWARP.has(s.kind)) b2WarpCtx(); f(s,cl(s.t/s.dur),s.t); }
+    catch(err) { s.dead=true; gameFault('scene '+s.kind,err); }   // drop the scene that threw; the rest keep drawing
+    gfx.restore(); gfx.globalAlpha=1;
   }
 };
 

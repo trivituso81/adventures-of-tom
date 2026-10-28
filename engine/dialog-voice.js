@@ -31,11 +31,15 @@ function dvPlay(b64) {
   const c=audio(); if(!c) return;
   const tok=DV.token;
   DV.playing=true;
+  // Failsafe: a dead audio engine (iOS after an app switch) never decodes the clip or says it ended. AUTO waits on
+  // DV.playing, so without a limit a conversation could hang for good. Decoding gets 6 s; once playing, clip length + 1.2 s.
+  const guard=ms=>{ clearTimeout(DV.guard); DV.guard=setTimeout(()=>{ if(tok===DV.token&&DV.playing) { DV.playing=false; if(DV.src) { try { DV.src.onended=null; } catch(e) {} DV.src=null; } } },ms); };
+  guard(6000);
   const go=buf=>{
     if(tok!==DV.token||dvMuted()) { if(tok===DV.token) DV.playing=false; return; }
     const src=c.createBufferSource(); src.buffer=buf; src.connect(sound.master);
     src.onended=()=>{ if(DV.src===src) { DV.src=null; DV.playing=false; } };
-    DV.src=src; src.start();
+    DV.src=src; src.start(); guard(Math.round(buf.duration*1000)+1200);
   };
   if(DV.cache.has(b64)) { go(DV.cache.get(b64)); return; }
   try {

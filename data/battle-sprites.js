@@ -685,6 +685,22 @@ function drawSprite(rows,pal,x,y,scale,opts={}) {
 
 function setMessage(text) { b2Msg(text); }
 
+// Fail-safe for the frame loop, the battle queue and the scene drawing: something that throws in one step, scene or frame
+// must never freeze the game. The error is logged (console and window.__faults) and the player sees one short line,
+// then play carries on.
+function gameFault(where,err) {
+  try {
+    const msg=String((err&&err.message)||err).slice(0,80),key=where+'|'+msg,F=gameFault.seen||(gameFault.seen={});
+    F[key]=(F[key]||0)+1;
+    if(F[key]<=3) console.error('fault in '+where+': '+msg,err);
+    if(F[key]!==1) return;
+    const log=window.__faults||(window.__faults=[]); log.push({where,msg,at:Date.now()}); if(log.length>30) log.shift();
+    const text='Hiccup in '+where+': '+msg,el=document.getElementById('toast');
+    if(typeof showToast==='function') showToast(text,4.5);
+    if(el) { el.textContent=text; el.classList.add('visible'); clearTimeout(gameFault.timer); gameFault.timer=setTimeout(()=>el.classList.remove('visible'),4500); }   // battle does not refresh the toast
+  } catch(e) {}
+}
+
 function clearBattleQueue() {
   battle.queue.length=0;
   clearTimeout(battle.timer);
@@ -707,7 +723,7 @@ function nextStep() {
   } else if(typeof s==='number') {
     battle.timer=setTimeout(nextStep,s/b7Speed());
   } else {
-    s();
+    try { s(); } catch(err) { gameFault('step',err); }   // a step that throws must not strand the rest of the move
     nextStep();
   }
 }

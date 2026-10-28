@@ -59,11 +59,13 @@ function daPad() {
 }
 function daTick(now) {
   const dt=Math.min(.25,Math.max(0,(now-DA.last)/1000)); DA.last=now;
-  daPad();
-  if(DA.on&&daReady()) {
-    if(DV.playing) DA.t=0;                       // a clip is still talking: wait for it
-    else { DA.t+=dt; if(DA.t>=daWait()) { DA.t=0; advanceDialog(); } }
-  } else DA.t=0;
+  try {
+    daPad();
+    if(DA.on&&daReady()) {
+      if(DV.playing) DA.t=0;                       // a clip is still talking: wait for it
+      else { DA.t+=dt; if(DA.t>=daWait()) { DA.t=0; advanceDialog(); } }
+    } else DA.t=0;
+  } catch(err) { DA.t=0; gameFault('auto',err); }
   requestAnimationFrame(daTick);
 }
 

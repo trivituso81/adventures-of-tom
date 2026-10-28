@@ -41,17 +41,18 @@ function frame(now) {
   previous=now;
   elapsedTime+=dt;
   if(!intro.active&&!splash.active) playTime+=dt;
-  pollGamepad();
+  // Every stage is guarded on its own: an error in one frame must never stop the loop (a stopped loop is a frozen game),
+  // and an error in drawing must not stop the game logic. See gameFault (data/battle-sprites.js).
+  try { pollGamepad(); } catch(err) { gameFault('pad',err); }
   if(battle.active) {
-    updateBattle(dt*b7Speed());   // 2x battle speed (engine/feel.js)
-    drawBattle();
+    try { updateBattle(dt*b7Speed()); } catch(err) { gameFault('battle update',err); }   // 2x battle speed (engine/feel.js)
+    try { drawBattle(); } catch(err) { gameFault('battle draw',err); }
   } else {
-    update(dt);
-    updateCamera(dt);
-    draw(elapsedTime);
-    updateUI(now);
+    try { update(dt); updateCamera(dt); } catch(err) { gameFault('update',err); }
+    try { draw(elapsedTime); } catch(err) { gameFault('draw',err); }
+    try { updateUI(now); } catch(err) { gameFault('ui',err); }
   }
-  refreshCutUI();
+  try { refreshCutUI(); } catch(err) { gameFault('cutscene ui',err); }
   document.documentElement.classList.add('js-running');
   requestAnimationFrame(frame);
 }

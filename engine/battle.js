@@ -11,7 +11,7 @@ function updateBattle(dt) {
   for(const f of battle.fx) { for(const k of ['shake','flash','lunge','twirl','tongue','appr','controller','cartwheel','kick','poke','combo','handspring','dismount','pogo','flop','roundoff','rebound','flip','punch','cheer','tickle','run','burpee','coach','hug','grumble','hop','toss','aim','cast','pose']) f[k]=Math.max(0,f[k]-dt); }
   battle.enemyKnock=Math.max(0,(battle.enemyKnock||0)-dt);
   for(const f of battle.fx) if(f.path) { f.path.t+=dt; if(f.path.t>=f.path.dur) f.path=null; }
-  RFX.update(dt);
+  try { RFX.update(dt); } catch(err) { gameFault('fx update',err); }
   if(battle.fireball) { battle.fireball.t+=dt; if(battle.fireball.t>battle.fireball.dur) battle.fireball=null; }
   if(battle.tetris) { battle.tetris.t+=dt; if(battle.tetris.t>battle.tetris.dur) battle.tetris=null; }
   for(const x of battle.texts) x.t+=dt; battle.texts=battle.texts.filter(x=>x.t<x.dur);
@@ -30,7 +30,7 @@ function updateBattle(dt) {
   if(battle.block) { battle.block.t+=dt; if(battle.block.t>=battle.block.dur) battle.block=null; }
   for(const p of battle.pops) p.t+=dt;
   battle.pops=battle.pops.filter(p=>p.t<1);
-  if(battle.v2) b2Update(dt);
+  if(battle.v2) { try { b2Update(dt); } catch(err) { gameFault('turn update',err); } }
 }
 
 // Thrown and dropped things for the recruits' moves. Drawn centered at the origin.
