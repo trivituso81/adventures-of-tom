@@ -34,25 +34,24 @@ function toggleLayout() {
   if(typeof sfx!=='undefined') sfx.select();
 }
 
+function buildAudio() {
+  sound.ctx=new (window.AudioContext||window.webkitAudioContext)();
+  sound.master=sound.ctx.createGain();
+  sound.master.gain.value=.45*volGain(sound.vol.fx);
+  sound.master.connect(sound.ctx.destination);
+  sound.musicBus=sound.ctx.createGain();
+  sound.musicBus.gain.value=.45*volGain(sound.vol.music);
+  sound.musicBus.connect(sound.ctx.destination);
+}
+
 function audio() {
-  if(!sound.ctx) {
-    try {
-      sound.ctx=new (window.AudioContext||window.webkitAudioContext)();
-      sound.master=sound.ctx.createGain();
-      sound.master.gain.value=.45*volGain(sound.vol.fx);
-      sound.master.connect(sound.ctx.destination);
-      sound.musicBus=sound.ctx.createGain();
-      sound.musicBus.gain.value=.45*volGain(sound.vol.music);
-      sound.musicBus.connect(sound.ctx.destination);
-    } catch(e) { return null; }
-  }
+  if(!sound.ctx) { try { buildAudio(); } catch(e) { return null; } }
   // iPhone Safari sets the state to 'interrupted' (not 'suspended') after switching apps, so wake it from any state but running.
   if(sound.ctx.state!=='running') wakeAudio();
   return sound.ctx;
 }
 
-// Wake the audio engine after an app switch, a call, or Siri. iOS only lets a stopped context restart from a touch,
-// so this runs on return to the page and again on the next tap. A silent blip also nudges iOS to reopen the output.
+// Wake the audio engine after an app switch, a call, or Siri. iOS only lets a stopped context restart from a touch.
 function wakeAudio() {
   const c=sound.ctx; if(!c) return;
   try {
@@ -60,9 +59,38 @@ function wakeAudio() {
     const b=c.createBuffer(1,1,22050),s=c.createBufferSource(); s.buffer=b; s.connect(c.destination); s.start(0);
   } catch(e) {}
 }
-for(const ev of ['visibilitychange','pageshow','focus']) window.addEventListener(ev,()=>{ if(!document.hidden) wakeAudio(); });
+
+// After an app switch iPhone Safari can leave the sound engine dead even though it reports 'running'. Waking it does not
+// help, so on return we mark it stale and, on the very next tap (iOS only opens new audio from a tap), throw it away and
+// build a fresh one. Decoded sound buffers belong to no engine, so the cached clips and tracks carry over; only the
+// connections (buses, music voices) are rebuilt, and the music restarts by itself on the next tick.
+sound.hiddenAt=0; sound.stale=false;
+function rebuildAudio() {
+  const old=sound.ctx; if(!old) return;
+  sound.stale=false;
+  try { if(typeof music!=='undefined') { music.eng=null; music.cur=null; music.ducked=false; music.duckUntil=0; } } catch(e) {}
+  try { if(typeof MC!=='undefined') { MC.out=null; MC.duck=null; MC.cur=null; MC.old=[]; MC.ducked=false; MC.lastWant=undefined; MC.lvUntil=0; MC.loading.clear(); } } catch(e) {}
+  try { if(typeof DV!=='undefined') { DV.src=null; DV.playing=false; DV.token=(DV.token||0)+1; } } catch(e) {}
+  sound.ctx=null;
+  try { buildAudio(); } catch(e) { sound.ctx=null; return; }
+  wakeAudio();
+  try { old.close(); } catch(e) {}
+}
+function onAppHidden() { sound.hiddenAt=performance.now(); }
+function onAppBack() {
+  const away=sound.hiddenAt?performance.now()-sound.hiddenAt:0; sound.hiddenAt=0;
+  if(!sound.ctx) return;
+  wakeAudio();
+  // Gone for more than a moment, or not running right after we woke it: rebuild on the next tap.
+  if(away>1500) sound.stale=true;
+  else setTimeout(()=>{ if(sound.ctx&&sound.ctx.state!=='running') sound.stale=true; },400);
+}
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) onAppHidden(); else onAppBack(); });
+window.addEventListener('pagehide',onAppHidden);
+window.addEventListener('pageshow',()=>{ if(!document.hidden) onAppBack(); });
 
 function unlockAudio() {
+  if(sound.stale) rebuildAudio();
   audio();
   if(sound.ctx&&sound.ctx.state!=='running') wakeAudio();
   if(!sound.unlocked&&'speechSynthesis'in window) {
