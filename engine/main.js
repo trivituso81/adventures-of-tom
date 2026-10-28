@@ -77,3 +77,12 @@ startSplash();
   window.addEventListener('pageshow',check);
   window.addEventListener('focus',check);
 })();
+
+// Build stamp on the title screen so we can tell which version a phone is running.
+(function(){
+  const sp=document.getElementById('splash'); if(!sp) return;
+  const d=document.createElement('div');
+  d.textContent='build resume-title 2';
+  d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
+  sp.appendChild(d);
+})();
