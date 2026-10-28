@@ -958,7 +958,7 @@ SCENES.nsEnd=()=>[
   {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
   {hearts:'Amy'},
-  {talk:'Amy',lines:['You got them? All nine? Tom, I could KISS you. I\'ll not. I\'m sweaty.']},
+  {talk:'Amy',lines:['You got them? All nine? Tom, I could KISS you. I won\'t. I\'m sweaty.']},
   {talk:'Justin',lines:['Hold this. No, the other end. It\'s the OTHER banner. Don\'t touch the copper.']},
   {talk:'Deedee',lines:['Cake is on the counter. Dairy free. I read the box nine times. With my glasses.']},
   {talk:'Boppy',lines:['Nine scoops. In my day we got one scoop. And a lecture.']},

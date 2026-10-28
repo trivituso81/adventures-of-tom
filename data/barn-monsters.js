@@ -380,7 +380,7 @@ Object.assign(MONSTERS,{
     rest:['...ew. Ew. Is that touching? It\'s touching. EW.','I only eat the crust. No, the middle. No. Neither.'],
     talk:['I don\'t eat cold food. I don\'t eat hot food. I don\'t eat food that TOUCHES.','Ironbelly used to warm every lunch in here. Now everything is cold, and everything is EW.'],
     again:['Ew! Round two!','Round {n}. Still not eating it.'],
-    drop:{id:'hotsauce',chance:1,once:true,msg:'The Picky Eater left a packet of hot sauce behind. It\'ll not touch it. It went in a pocket.'},
+    drop:{id:'hotsauce',chance:1,once:true,msg:'The Picky Eater left a packet of hot sauce behind. It won\'t touch it. It went in a pocket.'},
     vapor:['#c8463a','#e8685a','#e8c84a','#ff8aa0'],
     hint:'Sends everything back. It steals VP and heckles people. It shrugs off Kinetic.'},
   // Old Ironbelly: the chapter 8 boss. The Car Barn's cast-iron stove, built 1912. She cooked for the night crews until

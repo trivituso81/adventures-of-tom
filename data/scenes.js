@@ -1536,7 +1536,7 @@ SCENES.ch5AfterBoss=()=>[
   {talk:'Amy',lines:['...It\'s going to my desk. Of course it\'s going to my desk.']},
   {talk:'Grace',lines:['The sign-up sheet! It\'s a bit crumpled. And look, Tata. Something is taped to the bottom.']},
   {talk:'Tom',lines:['A gold coin. Again. Same little clock face.','The sundial. The steamer. Now the sign-up sheet. Somebody keeps leaving these where we\'ll find them.']},
-  {talk:'Amy',lines:['Whoever it\'s has very neat tape. Look at those corners.']},
+  {talk:'Amy',lines:['Whoever it is has very neat tape. Look at those corners.']},
   {talk:'Rose',lines:['Can we keep it? I\'ll keep it inside Lamby.']},
   {talk:'Tom',lines:['We keep it. In my pocket. Not inside Lamby.']},
   {fade:'out',time:.6},
@@ -2578,7 +2578,7 @@ SCENES.ch8Block=[
   {talk:'Tom',lines:['Did you call the gas company?']},
   {talk:'Bernadette',lines:['They said it\'s the weekend. I said it\'s the POTLUCK. They hung up. I\'ve filed a report. With myself.']},
   {walk:'Olivia',to:routeBeside('Olivia'),speed:.2},
-  {talk:'Olivia',lines:['Tom! Can you take Nara? She\'ll not eat. Her dinner is cold, so she\'ll not eat it. Michael warmed it in his hands. She still won\'t eat it.']},
+  {talk:'Olivia',lines:['Tom! Can you take Nara? She won\'t eat. Her dinner is cold, so she won\'t eat it. Michael warmed it in his hands. She still won\'t eat it.']},
   {walk:'Nara',to:routeBeside('Nara'),speed:.1},
   {talk:'Nara',lines:['Nara slams into Tom’s shins and leans on him with all forty pounds. Then she turns, points her nose east, and sniffs. Hard.']},
   {join:'nara'}, {hearts:'nara'}, {trace:'nara-hello8'},
@@ -2650,7 +2650,7 @@ SCENES.ch8Plate=[
   {talk:'Nara',lines:['Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate.','She eats it in three bites. She licks the plate. She lies down on his feet.']},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {hearts:'nara'}, {trace:'nara-plate'}, {call:()=>sfx.levelChime()},
-  {talk:'TNB',lines:['She\'d not eat her own dinner. She ate YOUR dinner.']},
+  {talk:'TNB',lines:['She wouldn\'t eat her own dinner. She ate YOUR dinner.']},
   {talk:'Tom',lines:['It was on my plate. That\'s the rule. Food on her plate is suspicious. Food on my plate is a gift.']},
   {heal:true},
   {toast:'Everyone is healed. Nara finally ate. Tom didn\'t.',time:3.5}
@@ -2817,7 +2817,7 @@ function ch8Motor(o) {
 // The lever swings the bridge round, either way, once there is steam.
 function ch8Lever(o) {
   if(STORY.mode!=='full'||STORY.chapter<8) return false;
-  if(!ch8MotorOn()) { openDialog(o.name,['A big iron lever: TURNTABLE. Tom pulls. It\'ll not budge.','TNB: "No steam, babe. That motor at the bottom of the corridor runs it."']); return true; }
+  if(!ch8MotorOn()) { openDialog(o.name,['A big iron lever: TURNTABLE. Tom pulls. It won\'t budge.','TNB: "No steam, babe. That motor at the bottom of the corridor runs it."']); return true; }
   const east=!worlds.carbarn.ttEast;
   setFlag('ch8-tt',east?'east':'north'); ch8SetBridge(east); placeFollowers();
   sfx.thud(); sfx.whoosh&&sfx.whoosh();
@@ -2944,7 +2944,7 @@ const ch9MirrorSteps=c=>{ const M=CLUB_MIRRORS.find(k=>k.fight==='ch9-'+c); retu
 // 1. The Square, right after the girls' welcome: Deedee has a letter.
 SCENES.ch9Arrive=[
   {flag:'ch9-goal'},
-  {talk:'Grace',lines:['Tata. TATA. Deedee has a LETTER for you. It\'s GOLD. She\'ll not let\'s open it.','She let\'s hold it. For one second. Then she took it back and said, careful, that\'s wax.']},
+  {talk:'Grace',lines:['Tata. TATA. Deedee has a LETTER for you. It\'s GOLD. She won\'t let us open it.','She let us hold it. For one second. Then she took it back and said, careful, that\'s wax.']},
   {talk:'Rose',lines:['It smells like a candle. I licked it a little.']},
   {talk:'Tom',lines:['You licked my mail.']},
   {talk:'Rose',lines:['A LITTLE.']},
@@ -3353,7 +3353,7 @@ const ch10HandSteps=c=>{ const H=TERM_HANDS.find(k=>k.fight==='ch10-'+c); return
   {if:()=>TERM_HANDS.every(k=>flag(k.fight)===true),then:[
     {flag:'ch10-hands'}, {wait:3.7},
     {talk:'Amy',lines:['Three hands. The clock still isn\'t moving. Tom. The slots round the face. There are seven of them.']},
-    {talk:'Tom',lines:['Seven slots. And I\'ve seven gold coins. In a sock. In my bag.','I\'ve been keeping a list. I have also been keeping the coins.']},
+    {talk:'Tom',lines:['Seven slots. And I have seven gold coins. In a sock. In my bag.','I\'ve been keeping a list. I have also been keeping the coins.']},
     {talk:'Grace',lines:['They go in the order we found them! Like a clock. Going round. I KNEW the list was important.']},
     {toast:'Goal: the Gate Zero doors (top of the concourse). Put the seven coins in, in the order Tom found them.',time:5.5}],else:[]}]; };
 

@@ -358,7 +358,7 @@ Object.assign(MONSTERS,{
     special:{name:'To Be Continued',every:3,kind:'all',msg:'TO BE CONTINUED! Everybody is left hanging!'},
     wobble:'The Cliffhanger loses its grip a little...',die:'It finally reaches the last page, sighs, and closes.',
     rest:['...and then... and THEN...','Find out next time. Same shelf. Same book.'],
-    talk:['Nobody ever finishes me. They read the first chapter and put me back. Every time.','And then the uncle turned around and saw... no. I\'ll not say.'],
+    talk:['Nobody ever finishes me. They read the first chapter and put me back. Every time.','And then the uncle turned around and saw... no. I won\'t say.'],
     again:['Previously, on this fight...','Round {n}. And then... and then...'],
     drop:{id:'sequel',chance:1,once:true,msg:'The Cliffhanger left its sequel behind. Nobody has ever read it. It went in a pocket.'},
     vapor:['#3f8a5a','#7ac08a','#e8c84a','#f2e8cf'],

@@ -870,7 +870,7 @@ G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p))
     ['hf',2450],
     [2450,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gv_confetti',1.9,{n:70,seed:3}); scene('gv_big',1.3,{x:px,y:py-158,txt:'DANCE BREAK!',c:GOLD,sc:4});
       for(const p of party) { const q=ST.unit(p); scene('gv_glitter',.8,{x:q.x,y:q.mid,r:40}); } }],
-    [4300,'end','Everyone dances. Even the ones who said they\'d not.']]); };
+    [4300,'end','Everyone dances. Even the ones who said they wouldn\'t.']]); };
 
 // ---------- Squishy Squeeze (A1) ----------
 // Grace carries the gold dumpling squishy over, holds it out, and the friend gives it the biggest squeeze. SQUISH.
@@ -1463,7 +1463,7 @@ G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p))
     ['hf',FIN],
     [FIN,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gv_confetti',1.9,{n:70,seed:3}); scene('gf_word',1.3,{x:px,y:py-GH()-70,txt:'DANCE BREAK!',c:GOLD,sc:4});
       for(const p of party) { const q=ST.unit(p); scene('gv_glitter',.8,{x:q.x,y:q.mid,r:40}); } }],
-    [END,'end','Everyone dances. Even the ones who said they\'d not.']]); };
+    [END,'end','Everyone dances. Even the ones who said they wouldn\'t.']]); };
 
 // ---------- Dance Battle (B1) ----------
 // Lights down, spotlight on Grace. She struts up, points at the monster, beckons it (COME ON!), then shimmy, hip pop,

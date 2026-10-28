@@ -1206,7 +1206,7 @@ const B2_CALL={
   open:'DING. Every flap on the board spins. \"This is the LAST CALL for Flight Zero. Boarding Group Zero, please proceed to the gate.\"',
   open2:'Each turn she calls someone NOW BOARDING. They must act before her next turn, or the gate closes on them. Her DELAYED pushes them back. Tom can DEFEND them to walk them on.',
   phase:N=>N+' flips every flap to FINAL CALL. The whole board rattles.',
-  adds:n=>n>1?'Two Carry-Ons roll in. They\'ll not fit.':'A Carry-On rolls in. It\'ll not fit.',
+  adds:n=>n>1?'Two Carry-Ons roll in. They won\'t fit.':'A Carry-On rolls in. It won\'t fit.',
   brace:(N,e)=>N+' clears the board for FINAL BOARDING on everyone next turn! Break her guard: '+e.shield.need+' Kinetic or Sparkle hits, or any Tombo.',
   call:(n,t)=>'NOW BOARDING: GROUP '+n+'. '+t.name+', please proceed to Gate Zero.'+(b2Tom()&&t.id!=='tom'?' ('+t.name+' must act before her next turn, or Tom can DEFEND them.)':' (Act before her next turn.)')
 };
@@ -1260,7 +1260,7 @@ function b2CallTurn(e,N) {
   return go(()=>enqueue(...b2CallPick(e),()=>b2FoeAct(e,act,act.delay&&e.call?e.call:null)));
 }
 // ANSWER THE CALL for the Last Call (chapter 10). The spoken lines are in data/lines.js (praise).
-const B2_ANSWER_LINES={tom:['Here. Group zero. Pass out, liquids in a bag, shoes back on.','Present. Window seat, please. I\'ll not be reclining.'],
+const B2_ANSWER_LINES={tom:['Here. Group zero. Pass out, liquids in a bag, shoes back on.','Present. Window seat, please. I won\'t be reclining.'],
   grace:['HERE! Grace! Group zero! I\'ve been waiting my WHOLE LIFE for this!','Present! Can I sit by the window? I want to film the takeoff for my channel.'],
   rose:['HERE! I\'m HERE! Me! Rose! I have Lamby!','Me me me! Can I push the button? The ding button?'],
   amy:['Here! Gregori, party of four. We\'re always first in line.','Present. I\'ve never missed a connection in my life.'],
@@ -1290,7 +1290,7 @@ const B2_CHEEKS_LINES={tom:['Here. Sourdough. I made it. You can have the heel. 
 // kind words Un-Grump it outright (the Director's Cut: three GREAT TAKEs).
 const B2_PRAISE_LINES={
   tom:['Honestly? Great take. Really. Chef’s kiss.','That was a GREAT take. I\'d watch that twice.','Great take. I got chills. Real ones.'],
-  tnb:['Babe... I mean, buddy. That take? Iconic.','That was a great take. And I\'ve seen forty-seven horror movies.','Great take. I\'d not change a single stitch.'],
+  tnb:['Babe... I mean, buddy. That take? Iconic.','That was a great take. And I\'ve seen forty-seven horror movies.','Great take. I wouldn\'t change a single stitch.'],
   nara:['Nara gives it the biggest tail wag she has. Ten out of ten.','Nara sits, looks it in the eye, and boops it. That\'s a five-star review.'],
   _:['Great take! Really!','That was wonderful. Really wonderful.']
 };

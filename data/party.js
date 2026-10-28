@@ -372,7 +372,7 @@ function equipItem(id) {
   }
   if(!canWear(m,item)) {
     sfx.nope();
-    showToast(item.name+' is made for '+memberById(item.who).name+'. It\'d not fit '+m.name+'.',2.4);
+    showToast(item.name+' is made for '+memberById(item.who).name+'. It wouldn\'t fit '+m.name+'.',2.4);
     return;
   }
   if(!equipTo(m,id)) return;

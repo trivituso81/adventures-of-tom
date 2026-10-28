@@ -534,7 +534,7 @@ LA_AREAS.find(a=>a.id==='oak').objects.push(
   ['sign',9,17,1,1,'Tiny sign','A tiny sign: HQ. AUTHORIZED SQUIRRELS ONLY. Under it: THIS MEANS DOGS.']);
 // 2nd Ave in chapter 6: things are missing, and then they come back.
 { const J=LA_AREAS.find(a=>a.id==='jpark').npcs,N=n=>J.find(x=>x.name===n),add=(n,...v)=>{ const p=N(n); if(p) p.when=[...v,...(p.when||[])]; };
-  add('Mr. Washington',{...CH6_DONE,lines:['My reading glasses! Found in a hole in the park. I\'ll not ask.','Back in 1979 the squirrels were polite. They waited until you finished your sandwich.']},
+  add('Mr. Washington',{...CH6_DONE,lines:['My reading glasses! Found in a hole in the park. I won\'t ask.','Back in 1979 the squirrels were polite. They waited until you finished your sandwich.']},
     {...CH6_ON,lines:['Somebody took my reading glasses off the porch rail. I have read the same headline for three days.','I think it says WEATHER. It might say WHETHER.']});
   add('Marisol',{...CH6_DONE,lines:['Eleven tennis balls! Back! My dog is beside himself. Wherever he is.']},
     {...CH6_ON,lines:['Every tennis ball on the block. Gone. My dog has nothing to ignore now.','There he is. No. That\'s a squirrel. It\'s looking at me.']});
@@ -621,7 +621,7 @@ LA_AREAS.push(
       ['lunchtable',2,18,3,1,'Lunch table','The end of the long table. A clean spot. A good spot for a lunch break.',{plate:true}],
       // The corridor, the turntable and Track 4
       ['ttmotor',14,18,2,1,'Turntable motor','The little steam motor that turns the turntable. Three empty burners, cold as a mailbox.',{ttmotor:true}],
-      ['ttlever',18,13,1,1,'Turntable lever','A big iron lever: TURNTABLE. It\'ll not budge. No steam.',{ttlever:true}],
+      ['ttlever',18,13,1,1,'Turntable lever','A big iron lever: TURNTABLE. It won\'t budge. No steam.',{ttlever:true}],
       ['tracksign',25,13,1,1,'Track sign','TRACK 4. BOILER ROOM. CREW ONLY. Under it, in chalk: SHE IS GRUMPY BEFORE SHE WARMS UP.'],
       ['coalcart',27,13,2,1,'Coal cart','A little cart of coal. Every lump is cold. Every lump is pointing at the Boiler Room door.'],
       ['tracksign',19,19,1,1,'Track sign','TRACK 1. WASH RACK. A bucket, a mop and a brush the size of Nara.'],
@@ -667,7 +667,7 @@ LA_AREAS.push(
     {...CH8_ON,lines:['My tamales are cold. My dog is cold. My dog is somewhere. He\'s probably cold.']});
   add('Larry',{...CH8_ON,lines:['I\'m blowing leaves. They\'re frosty. In LA. I have questions.']});
   add('Olivia',{...CH8_DONE,lines:['Nara ate! A whole plate! Off your plate, but still! I\'m counting it!','Michael, Isla has a roll in each hand. That\'s fine. That\'s a balanced meal.']},
-    {...CH8_ON,flag:'ch8-block',lines:['Did she eat? She\'ll not eat cold food. She\'ll not eat warm food either. She eats off YOUR plate, Tom.','My lasagna is a brick. A cold lasagna brick. Michael is holding it. He\'s holding everything.']});
+    {...CH8_ON,flag:'ch8-block',lines:['Did she eat? She won\'t eat cold food. She won\'t eat warm food either. She eats off YOUR plate, Tom.','My lasagna is a brick. A cold lasagna brick. Michael is holding it. He\'s holding everything.']});
   add('Michael',{...CH8_DONE,lines:['Best potluck ever. Lachlan fell asleep in the bread basket.']},
     {...CH8_ON,flag:'ch8-block',lines:['I have Isla, the diaper bag, and a cold lasagna. I\'m at full capacity.']}); }
 

@@ -291,7 +291,7 @@ const CALL_PAL={a:'#e0ce97',b:'#c7a464',c:'#c78e41',d:'#9c8b77',e:'#ad7c40',f:'#
 Object.assign(MONSTERS,{
   carryon:{id:'carryon',coins:10,coinStep:2,name:'Carry-On',the:'the Carry-On',short:'Carry-On',sprite:CARRYON_SPRITE,pal:CARRYON_PAL,scale:3,eyes:[[17, 17], [28, 17]],mouth:[23, 21],
     hp:24,hpStep:3,atk:1,xp:11,xpStep:2,level:9,rank:'EASY',
-    intro:'An overstuffed roller bag wheels itself into the way. It\'ll not fit. It\'s going to try anyway.',
+    intro:'An overstuffed roller bag wheels itself into the way. It won\'t fit. It\'s going to try anyway.',
     attacks:['The Carry-On rolls over {t}’s foot.','The Carry-On bonks {t} with its handle.','The Carry-On unzips a little at {t}. Socks everywhere.'],
     special:{name:'Gate Check',every:3,kind:'all',msg:'GATE CHECK! The Carry-On bumps into everybody looking for a spot!'},
     wobble:'The Carry-On sags a little...',die:'It zips itself shut, very neatly, and rolls under a bench.',

@@ -1178,7 +1178,7 @@ D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
     [950,()=>{ scene('dv_big',1.3,{x:H.x,y:H.top-40,txt:'SQUEEZE!',c:ROSE,sc:4}); scene('dv_hearts',1.4,{x:H.x,y:H.top,n:7}); sfx.squeak&&sfx.squeak(); b7Later(()=>sfx.squeak&&sfx.squeak(),300); setMessage('One big squeezy Deedee hug.'); if(foe) ST.draw((s,u)=>lift(t,Math.abs(Math.sin(u*20))*-4,Math.sin(u*24)*.06,0),1.25); }],
     ['hf',1500],
     [1500,()=>{ E2.apply(); sfx.heal(); scene('dv_glow',1,{x:H.x,y:H.mid,c:ROSE}); }],
-    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-30,y:c.y-30,txt:'MWAH!',c:LIP,sc:3}); setMessage('And a lipstick kiss on the cheek. That\'ll not come off for days.'); }],
+    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-30,y:c.y-30,txt:'MWAH!',c:LIP,sc:3}); setMessage('And a lipstick kiss on the cheek. That won\'t come off for days.'); }],
     [4100,'end',kindLine(t,'Squeezed, kissed, and feeling much better.')]]); };
 })();
 
@@ -1320,7 +1320,7 @@ D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
     [950,()=>{ scene('dv_big',1.3,{x:H.x,y:H.top-84,txt:'SQUEEZE!',c:ROSE,sc:5}); scene('dp_hug',1.3,{x:H.x,y:H.top+10}); sfx.squeak&&sfx.squeak(); b7Later(()=>sfx.squeak&&sfx.squeak(),300); b7Later(()=>sfx.squeak&&sfx.squeak(),600); setMessage('One big squeezy Deedee hug.'); if(foe) ST.draw((s,u)=>lift(t,Math.abs(Math.sin(u*20))*-8,Math.sin(u*24)*.12,0),1.25); }],
     ['hf',1500],
     [1500,()=>{ E2.apply(); sfx.heal(); scene('dv_glow',1,{x:H.x,y:H.mid,c:ROSE}); }],
-    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-46,y:c.y-40,txt:'MWAH!',c:LIP,sc:4}); setMessage('And a big lipstick kiss on the cheek. That\'ll not come off for days.'); }],
+    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-46,y:c.y-40,txt:'MWAH!',c:LIP,sc:4}); setMessage('And a big lipstick kiss on the cheek. That won\'t come off for days.'); }],
     [4100,'end',kindLine(t,'Squeezed, kissed, and feeling much better.')]]); };
 })();
 

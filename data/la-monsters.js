@@ -262,7 +262,7 @@ Object.assign(MONSTERS,{
     rest:['We\'re being processed. Come back in six to eight weeks.','Contested. Pending review.'],
     talk:['Street cleaning. Tuesday. Eight to ten. You didn\'t read the sign.','We\'re seventy-three dollars each. There are a lot of us.'],
     again:['We doubled. Late fees.','Round {n}. Your appeal was denied.'],
-    drop:{id:'parkticket',chance:.5,msg:'One ticket stayed behind, stuck to Tom. It went in a pocket. He\'ll not be paying it.'},
+    drop:{id:'parkticket',chance:.5,msg:'One ticket stayed behind, stuck to Tom. It went in a pocket. He won\'t be paying it.'},
     vapor:['#f4ecd2','#e8c84a','#9a9480','#ffffff'],
     hint:'Hard to hit. Steals MP. Items never miss.'},
   coyote:{id:'coyote',la:true,coins:12,coinStep:3,name:'Canyon Coyote',the:'the coyote',short:'Coyote',sprite:COYOTE_SPRITE,pal:COYOTE_PAL,scale:3,eyes:[[9,10],[15,10]],mouth:[12,15],
