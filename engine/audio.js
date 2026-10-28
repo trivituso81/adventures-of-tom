@@ -27,6 +27,7 @@ function applyLayout() {
   document.documentElement.classList.toggle('rotated',layout.rotated);
   for(const id of ['rotate-hud','rotate-menu']) { const b=document.getElementById(id); if(b) b.setAttribute('aria-label',layout.landscape?'Switch to portrait':'Switch to landscape'); }
   if(typeof resize==='function') resize();
+  if(typeof menuZoom==='function') { menuZoom(); if(typeof menuOpen!=='undefined'&&menuOpen) requestAnimationFrame(sizeRoster); }
 }
 function toggleLayout() {
   layout.mode=layout.landscape?'portrait':'landscape';

@@ -83,6 +83,7 @@ function openShop(note) {
   if(!SHOP_STOCK[shopTab]) shopTab='tom';
   shopNote=(shopAnyNew()&&((SHOPK||PENNY).fresh||PENNY.fresh)[shopTierLevel()-1])||note||pick((SHOPK||PENNY).hello);
   renderShop();
+  if(typeof menuZoom==='function') menuZoom();
   $('shop').hidden=false;
   $('shop-close').focus();
 }

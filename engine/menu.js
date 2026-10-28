@@ -176,7 +176,17 @@ const fmtTime=s=>{ s=Math.floor(s); const h=Math.floor(s/3600),mm=Math.floor(s/6
 
 // Portrait box: an image when PORTRAITS has one, otherwise a placeholder with the initial.
 // Portrait size snapped so the 64px art lands on whole device pixels.
-function snapPz(want) { const dpr=window.devicePixelRatio||1,step=64/dpr,k=Math.floor(want/step); return k>=1&&step*k>=want*.8?step*k:want; }
+// Big screens (desktop, iPad): the menu and shop lay out as if on a phone in landscape (about 880 x 500),
+// then zoom up to fill the screen, so text and windows grow together. Phones never reach the threshold.
+let menuZ=1;
+function menuZoom() {
+  const g=$('game'), rot=typeof layout!=='undefined'&&layout.rotated;
+  const w=rot&&g?g.offsetWidth:innerWidth, h=rot&&g?g.offsetHeight:innerHeight;
+  menuZ=(w>=1000&&h>=560)?Math.max(1,Math.min(2.4,w/880,h/500)):1;
+  for(const id of ['menu','shop']) { const e=$(id); if(e) e.style.zoom=menuZ>1?menuZ.toFixed(3):''; }
+  return menuZ;
+}
+function snapPz(want) { const dpr=(window.devicePixelRatio||1)*menuZ,step=64/dpr,k=Math.floor(want/step); return k>=1&&step*k>=want*.8?step*k:want; }
 // Big portrait for the STATUS and GEAR views.
 function charPic(m,want,cls) {
   const b=portraitBox(m,'lg'+(cls?' '+cls:'')+(m.hp<=0?' ko':''));
@@ -227,12 +237,12 @@ function sizeRoster() {
   const land=document.documentElement.classList.contains('landscape');
   const cap=land?Math.min(150,body.clientWidth*.2):Math.min(132,body.clientWidth*.46);
   const want=Math.max(48,Math.min(cap,rowH-12));
-  const dpr=window.devicePixelRatio||1, step=64/dpr;
+  const dpr=(window.devicePixelRatio||1)*menuZ, step=64/dpr;
   const snap=step*Math.floor(want/step);
   const pz=snap>=want*.88?snap:Math.floor(want*dpr)/dpr;
   list.style.setProperty('--pz',pz.toFixed(2)+'px');
 }
-addEventListener('resize',()=>{ if(!$('menu').hidden) sizeRoster(); });
+addEventListener('resize',()=>{ menuZoom(); if(!$('menu').hidden) sizeRoster(); });
 
 // Leaving the Stampcard (another tab, Back, or closing the menu) autosaves quietly, so new stamps are never lost.
 function menuLeaveStamps() { if(menuTab==='stamps'&&typeof saveGame==='function') saveGame('auto',true); }
@@ -558,6 +568,7 @@ function openMenu(viaKeys) {
   menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false;
   menuKeyNav=!!viaKeys;
   menuFocusNext=menuKeyNav?'cmd-home':null;
+  menuZoom();
   $('menu').hidden=false;
   $('menu-body').scrollTop=0;
   renderMenu();
