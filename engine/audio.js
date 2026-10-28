@@ -67,8 +67,8 @@ function wakeAudio() {
 sound.hiddenAt=0; sound.stale=false;
 function rebuildAudio() {
   const old=sound.ctx; if(!old) return;
-  sound.stale=false;
-  try { if(typeof music!=='undefined') { music.eng=null; music.cur=null; music.ducked=false; music.duckUntil=0; } } catch(e) {}
+  sound.stale=false; sound.bad=0; sound.lastT=null; sound.wasRunning=false;
+  try { if(typeof music!=='undefined') { music.eng=null; music.cur=null; music.ducked=false; music.duckUntil=0; music.session=null; } } catch(e) {}
   try { if(typeof MC!=='undefined') { MC.out=null; MC.duck=null; MC.cur=null; MC.old=[]; MC.ducked=false; MC.lastWant=undefined; MC.lvUntil=0; MC.loading.clear(); } } catch(e) {}
   try { if(typeof DV!=='undefined') { DV.src=null; DV.playing=false; DV.token=(DV.token||0)+1; } } catch(e) {}
   sound.ctx=null;
@@ -78,15 +78,29 @@ function rebuildAudio() {
 }
 function onAppHidden() { sound.hiddenAt=performance.now(); }
 function onAppBack() {
-  const away=sound.hiddenAt?performance.now()-sound.hiddenAt:0; sound.hiddenAt=0;
+  const wasAway=sound.hiddenAt>0; sound.hiddenAt=0;
   if(!sound.ctx) return;
   wakeAudio();
-  // Gone for more than a moment, or not running right after we woke it: rebuild on the next tap.
-  if(away>1500) sound.stale=true;
-  else setTimeout(()=>{ if(sound.ctx&&sound.ctx.state!=='running') sound.stale=true; },400);
+  // Any return from the background: iOS may have killed the output even for a short switch, so rebuild on the next tap.
+  if(wasAway) sound.stale=true;
 }
+// Watchdog: an engine that says 'running' but whose clock stands still is dead, and so is one that ran before and now
+// stays stopped while the app is in front. Either way, rebuild on the next tap.
+sound.lastT=null; sound.bad=0; sound.wasRunning=false;
+setInterval(()=>{
+  const c=sound.ctx; if(!c||document.hidden||sound.stale) { sound.lastT=null; return; }
+  const running=c.state==='running';
+  if(running&&sound.lastT!==null&&c.currentTime===sound.lastT) sound.bad++;
+  else if(!running&&sound.wasRunning) sound.bad++;
+  else sound.bad=0;
+  if(running&&c.currentTime!==sound.lastT) sound.wasRunning=true;
+  sound.lastT=c.currentTime;
+  if(sound.bad>=2) { sound.stale=true; sound.bad=0; sound.lastT=null; }
+},500);
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) onAppHidden(); else onAppBack(); });
 window.addEventListener('pagehide',onAppHidden);
+document.addEventListener('freeze',onAppHidden);
+document.addEventListener('resume',()=>{ if(!document.hidden) onAppBack(); });
 window.addEventListener('pageshow',()=>{ if(!document.hidden) onAppBack(); });
 
 function unlockAudio() {
@@ -104,7 +118,7 @@ function unlockAudio() {
     } catch(e) {}
   }
 }
-for(const ev of ['touchstart','touchend','mousedown','keydown']) window.addEventListener(ev,unlockAudio,{passive:true});
+for(const ev of ['touchstart','touchend','mousedown','keydown']) window.addEventListener(ev,unlockAudio,{passive:true,capture:true});
 
 function tone(o) {
   const c=sound.enabled&&audio();
