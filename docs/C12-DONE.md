@@ -1,0 +1,7 @@
+# Chapter 12 "Welcome to Jefferson Park, Girls": done (2026-10-28)
+Flow: Gate Infinity (after ch11-done) > ch12Open > Jefferson Park > ch12Arrive > Tom's house (Bready Mercury, photo wall) > TNB's Loft (Amy and TNB) > Marlowe greys the block and ambers the neighbors > Doña Carmen (warm pupusa) and Casa Alvarez (laps, Run With Us Mommy, tombo:ff2) in either order > Marlowe presents Gridlock Prime at Jefferson and 2nd > boss > colour returns, Marlowe's hint, Green Light keepsake, CHAPTER 12 COMPLETE.
+Flags: ch12-open, ch12-arrive, ch12-house, ch12-studio, ch12-marlowe, ch12-grey, ch12-carmen, ch12-alvarez, ch12-prime, battle:gridlockprime, ch12-clear, ch12-done, tombo:ff2.
+Party: Tom, Grace, Rose, Amy out front; TNB and Nara on the bench. Swap on Tom's couch or the Parkway bench (`homebench`, same menu as the Boarding Gate). Deedee and Boppy are barred.
+Boss: Gridlock Prime (Shake style, level 16). Rush Hour every third turn; below half HP two Gridlocks and TOTAL GRIDLOCK behind a red light (2 Kinetic or Splash hits, or any Tombo). Kind route: GIVE IT A GREEN LIGHT x3. No BENCH CALL (only FINAL CALL has it).
+Files: data/ch12-monsters.js, data/ch12-battle.js, data/maps-ch12.js, data/scenes-ch12.js, engine/ch12-render.js (grey saturation overlay, amber glass), plus small edits in story.js, chapter-select.js (chselTwelve), battle2.js (praise pool), bench.js (benchName), scenes-p2.js (gate), index.html.
+Test: python3 tools/ch12_test.py (all ok). Dialogue list: docs/dialogue-scripts-ch12.json (unvoiced).

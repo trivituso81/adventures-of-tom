@@ -53,3 +53,10 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - After the fight Long Island is CLOSED (its dome turns amber), only Los Angeles is open, and Deedee does not pick up. Tom: "We always make our connection."
 - BENCH CALL: in the FINAL CALL fight, ▼ Bag swaps the fourth member for someone on the bench. Tom, Grace and Rose never sit out.
 
+
+## Part 2, Chapter 12 (canon, 2026-10-28)
+- Monochrome Marlowe (grey suit, clipboard "NOTES: LESS") is Vance's fixer. He takes colour and sound out of places. Debuts in ch12, tells Tom Long Island is under glass and Deedee has been baking a crisp for hours.
+- Amber is warmth that got stuck. You do not break it, you give it somewhere to go: a warm pupusa for Doña Carmen, running laps for the Alvarez house.
+- Gridlock Prime is not angry, it is stuck. Nobody ever let it go first. Kind route: give it a green light.
+- Amy and TNB bond over Tom: he checks the door three times and stands in doorways with a thermos "for the cat". Tom's house wall has the girls' photos; he says good morning to them every day.
+- Tombo ff2 "Run With Us, Mommy!" (Amy, Grace, Rose) unlocks in the Alvarez kitchen. Green Light keepsake from the boss.

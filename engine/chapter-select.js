@@ -12,9 +12,9 @@
 // Remove by setting CHAPTER_SELECT=false (or dropping this file from index.html) when the full game ships.
 // Loaded after engine/skip.js, before engine/main.js.
 const CHAPTER_SELECT=true;
-const CHSEL_LAST=11;   // the last chapter with content
+const CHSEL_LAST=12;   // the last chapter with content
 // Party level at the start of each chapter (about two below that chapter's boss).
-const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13];   // [11]: Part 2 test start, just past the chapter 10 boss
+const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13,15];   // [11]: Part 2 test start, just past the chapter 10 boss
 const chselRegion=n=>n%2===0&&n<10?'la':'le';
 
 // Everything the chapters before n would have left behind: flags and items.
@@ -57,6 +57,7 @@ function chapterJump(n) {
   for(const id of st.gives) if(items[id]&&!bag.includes(id)) bag.push(id);
   b6Prep(CHSEL_LEVEL[n]||1);
   coins=25+60*(n-1);
+  if(n>=12) { chselTwelve(); return; }
   if(n>=PARTS[2].from) { chselPart2(st); return; }
   if(n>=CHSEL_LAST) { chselTen(); return; }
   const la=chselRegion(n)==='la';
@@ -75,6 +76,18 @@ function chselTen() {
   currentMap=town; player.x=h.door.x; player.y=h.door.y+1; player.facing='down'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true;
   playScene('ch10Start',{fade:1});
+}
+// Chapter 12 test start: Amy is along, TNB and Nara wait on the bench, the party lands on Jefferson Park.
+function chselTwelve() {
+  setFlag('part1-clear'); STORY.mode='full'; setFlag('part2-start');
+  for(const f of ['ch11-met','ch11-vance','ch11-done']) setFlag(f);
+  setChapter(12); setFlag('ch12-open');
+  if(girlsAway()) setGirlsAway(false);
+  for(const m of extras()) recruitLeave(m,true);
+  forceJoin(amy,true);
+  for(const m of [tnb,nara]) if(typeof benchAdd==='function') benchAdd(m);
+  ch12Place();
+  playScene(()=>[{card:12,time:3.2},{call:()=>{}}],{fade:.7});
 }
 // Part 2 without Part 1 clear data (test): Part 1 counts as cleared, then Part 2 opens the way beginPart2 does.
 function chselPart2() {

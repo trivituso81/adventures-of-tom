@@ -111,7 +111,10 @@ const CHAPTERS=[
   {n:11,title:'The Layover Between Worlds',start:{map:'grands',x:6,y:7},
     party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>({lines:['Airport? Tom. You’re on a layover. I don’t fly layovers. I just wave at them.']})},
-  {n:12,title:'Welcome to Jefferson Park, Girls'},
+  {n:12,title:'Welcome to Jefferson Park, Girls',start:{map:'jpark',x:4,y:19},
+    party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch12-done')?{lines:['Sal called from the East Coast. He is working on a way under the dome.','Chapter 13 is coming. Until then, the cab stand has coffee.']}
+      :{lines:['Airport? Tom. You just got home. Show the girls the house first.']}},
   {n:13,title:'The Subway Beneath the Sea of Clouds'},
   {n:14,title:'The Rikers Wall of Rivituso Row'},
   {n:15,title:'The Eight-Seat Dinner Table'},

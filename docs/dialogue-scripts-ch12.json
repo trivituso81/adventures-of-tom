@@ -1,0 +1,618 @@
+{
+ "chapter": 12,
+ "note": "Unvoiced until baked. Speaker is the dialogue speaker name.",
+ "lines": [
+  {
+   "speaker": "Speaker",
+   "text": "DING. Attention, passengers. Los Angeles is now boarding. All other gates remain closed."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The gold clock on the big door finally has hands. They’re pointing at 3, 4, 6, 8."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That’s my address. The door knows where I live."
+  },
+  {
+   "speaker": "Rose",
+   "text": "The door knows where you live? That’s so creepy. I love it."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Home. Okay. Good. I have a very good couch and a very bad idea of what’s in the fridge."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara hears the word home. Nara is already pressed against the door, vibrating."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Everybody together. Nobody gets left behind in the layover. That’s the only rule."
+  },
+  {
+   "speaker": "Grace",
+   "text": "That’s two rules. Together, and nobody gets left."
+  },
+  {
+   "speaker": "Amy",
+   "text": "They’re the same rule, Grace."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Dog on a leash. Girls on the buddy system. Here we go."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Jefferson Park. Same jacarandas, same lemon tree, same wood door."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nothing is paused here. The sprinklers are even on."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It smells like lemons. And a little bit like a burrito."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That’s the lemon tree and Doña Carmen’s. Welcome to 3468."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata, you live in a real grown-up house. With flax."
+  },
+  {
+   "speaker": "Rose",
+   "text": "What’s flax?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "The red grass by the steps. It looks like it’s waving."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It’s waving at ME."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Wood door. A welcome mat in Japanese. Not one thing out of place."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I’ve known you thirty-some years, and I pictured a pile of laundry and a gaming chair."
+  },
+  {
+   "speaker": "Tom",
+   "text": "TNB is the reason nothing is out of place."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’m the reason there are coasters."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Come in. I’ll show you where I live. Mind the dog. And the sourdough."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That’s Bready Mercury. He’s nine years old, he’s flown Delta One, and he’s the only one in this house who gets fed on time."
+  },
+  {
+   "speaker": "Grace",
+   "text": "You named your bread Mercury? Like the planet?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Like the singer. He’s a showman. He rises on command."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Can he do a trick?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "He rises. Every day. Without being asked. It’s the best trick anybody in this house does."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I do a trick where I turn a lump into a bowl."
+  },
+  {
+   "speaker": "Tom",
+   "text": "You do. Yours is better. Don’t tell Bready."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata. There’s a picture of us. On the wall. In the nice frame."
+  },
+  {
+   "speaker": "Rose",
+   "text": "There’s one of me with a sandwich. It’s my best side."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s the wall I walk past every morning. Before work. Before coffee."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I say good morning to the two of you."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Every morning?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Every morning. Rose usually says it back. In my head."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I said it back just now. Good morning, Tata."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Good morning, Rose."
+  },
+  {
+   "speaker": "Grace",
+   "text": "So this is your house."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s yours too. I mean it. A snow globe called Long Island, and a house called this one. Both. Always both."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tom. That wall is the nicest thing I’ve seen in a house in years."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It’s an Ikea frame. Don’t make it weird."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s a very nice Ikea frame."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara has climbed onto the couch. This is not allowed. She looks right at Tom. It is allowed."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Okay. Next stop, the loft. Everybody’s coming. I’ll show you where I break things on purpose."
+  },
+  {
+   "speaker": "TNB",
+   "text": "This is it. The loft. Kiln, wheel, and a lot of clay in places clay shouldn’t be."
+  },
+  {
+   "speaker": "Grace",
+   "text": "It’s so many mugs."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Can I touch the clay?"
+  },
+  {
+   "speaker": "TNB",
+   "text": "Rose. Come here. Wet hands. Sit. Put your thumb in the middle. Don’t push. Just open it."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It’s a hole."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s a bowl. It just doesn’t know yet."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Mine is leaning."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Leaning is a style. It’s called Pisa."
+  },
+  {
+   "speaker": "Amy",
+   "text": "He taught my six-year-old to center clay in four minutes. I’ve been trying to get her to center her cereal for two years."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Clay doesn’t move. Cereal moves."
+  },
+  {
+   "speaker": "Amy",
+   "text": "So. Tom. Tell me one thing he does when he thinks nobody is watching."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He checks the front door three times before bed. Tells me it’s for the dog."
+  },
+  {
+   "speaker": "Amy",
+   "text": "He did that at nine. He told Mom it was for the cat."
+  },
+  {
+   "speaker": "TNB",
+   "text": "You had a cat?"
+  },
+  {
+   "speaker": "Amy",
+   "text": "We never had a cat."
+  },
+  {
+   "speaker": "TNB",
+   "text": "The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case."
+  },
+  {
+   "speaker": "Amy",
+   "text": "That is exactly him. He’s been standing in doorways with a thermos since he was nine."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He thinks I didn’t see him. I fired a second kiln so he’d have a reason to stay."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Okay. I like you. Don’t tell him."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He’s standing right behind you."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I was looking at a mug."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s a very nice mug."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Look! I made a bowl! It has a hat! The hat is a lump!"
+  },
+  {
+   "speaker": "TNB",
+   "text": "That’s the best bowl in the loft. It goes in the kiln tonight. You can pick it up when we’re all home safe."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Excuse me. Who are you?"
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Marlowe. Monochrome Marlowe. I fix places. This place has a lot going on. Too much color, too many porches, a dog doing something on a lawn."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara, offended, does it again. On purpose."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That’s a neighborhood."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "That’s the problem with a neighborhood. Notes."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers."
+  },
+  {
+   "speaker": "Rose",
+   "text": "He took the pink off the jacaranda!"
+  },
+  {
+   "speaker": "Grace",
+   "text": "You can’t just take the pink!"
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I teach thirty-one third graders. You don’t scare me. Put the colors back."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "He walks off into the grey, humming a jingle that never resolves."
+  },
+  {
+   "speaker": "Tom",
+   "text": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That’s amber. It’s warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We check on the neighbors first."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata. Doña Carmen turned into candy."
+  },
+  {
+   "speaker": "Tom",
+   "text": "She’s amber. Mid-sentence."
+  },
+  {
+   "speaker": "Grace",
+   "text": "She’s still pointing at the volcano."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Warmth. We’re good at warmth. Everybody find the warmest thing in the room."
+  },
+  {
+   "speaker": "Rose",
+   "text": "The comal! The pupusas!"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber."
+  },
+  {
+   "speaker": "Doña Carmen",
+   "text": "A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes."
+  },
+  {
+   "speaker": "Doña Carmen",
+   "text": "...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?"
+  },
+  {
+   "speaker": "Doña Carmen",
+   "text": "Where did my pupusas go?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "You were amber for a little while."
+  },
+  {
+   "speaker": "Doña Carmen",
+   "text": "I was what? I had a whole sentence. I lost the sentence. It was a good sentence."
+  },
+  {
+   "speaker": "Grace",
+   "text": "A man in a grey suit did it. His name is Marlowe."
+  },
+  {
+   "speaker": "Doña Carmen",
+   "text": "That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good."
+  },
+  {
+   "speaker": "Doña Carmen",
+   "text": "Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry."
+  },
+  {
+   "speaker": "Daisy",
+   "text": "Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Okay. They’re amber. The grey got in through the front door."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving."
+  },
+  {
+   "speaker": "Grace",
+   "text": "You mean..."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Everybody up. Girls, with me. We’re running laps around the kitchen table."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Run with us, Mommy!"
+  },
+  {
+   "speaker": "Amy",
+   "text": "Lap one! Knees up, Rose!"
+  },
+  {
+   "speaker": "Don Beto",
+   "text": "...and that is a FOUL! That is a foul! Who has the remote?"
+  },
+  {
+   "speaker": "Amy",
+   "text": "Lap two! Grace, don’t look at the camera!"
+  },
+  {
+   "speaker": "Tony",
+   "text": "Why is there a woman running around my table? Why is it a good idea? It’s a very good idea."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Lap three! Everybody on the last one!"
+  },
+  {
+   "speaker": "Mrs. Alvarez",
+   "text": "...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls?"
+  },
+  {
+   "speaker": "Mrs. Alvarez",
+   "text": "...Okay. That one can stay."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That wasn’t a lap. That was a Tombo. Run With Us, Mommy. Amy, Grace and Rose, together."
+  },
+  {
+   "speaker": "Mrs. Alvarez",
+   "text": "Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step."
+  },
+  {
+   "speaker": "Daisy",
+   "text": "Is it okay if I say that was the best thing that has ever happened in our kitchen?"
+  },
+  {
+   "speaker": "Rose",
+   "text": "It was the best thing in OUR kitchen too. We don’t even have a kitchen table. We have a counter."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Put the rest of the colors back."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Notes. This intersection has no flow. Let me introduce our new Head of Traffic."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Mr. Prime! Please give them a moment to rethink the neighborhood."
+  },
+  {
+   "speaker": "Rose",
+   "text": "It’s the biggest car in the WORLD."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Every light on the block is red. Every single one."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata. Its headlights are pointed at the ground. It looks sad."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five."
+  },
+  {
+   "speaker": "TNB",
+   "text": "If it’s stuck, maybe it just needs somewhere to go. Kindness first. Hit it if it hits back."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Positions. I run point with the girls. If we need a swap, sit on a couch or a bench."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Nobody gets run over. I’ll step in front of anyone who needs it."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Up, everybody. Walk it off. It floors Rush Hour every third turn. Heal before, not after."
+  },
+  {
+   "speaker": "Gridlock Prime",
+   "text": "...Green. It’s green. Somebody turned me green."
+  },
+  {
+   "speaker": "Gridlock Prime",
+   "text": "Nobody ever let me go first. I’m always the one who holds everybody."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Go. Signal first. We’ve got the crosswalk."
+  },
+  {
+   "speaker": "Gridlock Prime",
+   "text": "...SigAlert cleared. Merging left. I’m sorry. Everybody was in my lane."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s fine. Nobody was in your lane. You were in everybody’s. Take the exit."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The green lamp just popped off the traffic light. It’s still warm, and it’s humming."
+  },
+  {
+   "speaker": "Rose",
+   "text": "The pink is back! The jacaranda has its pink back!"
+  },
+  {
+   "speaker": "Grace",
+   "text": "And the music is back in the window."
+  },
+  {
+   "speaker": "Mr. Washington",
+   "text": "...and that is why you never trust a Tuesday. Hm? Why is everybody looking at me? Did I fall asleep? Again?"
+  },
+  {
+   "speaker": "Larry",
+   "text": "I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Love it. Hate it. Love it. Notes withdrawn."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Where is my mother?"
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Long Island is under glass, you know. A very safe house. Your mother is in the kitchen. She’s making a crisp. She’s been making it for hours."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Tell me where."
+  },
+  {
+   "speaker": "Marlowe",
+   "text": "Notes are due at five."
+  },
+  {
+   "speaker": "Amy",
+   "text": "He just told us something he shouldn’t have."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Long Island is under glass. So we go under the glass. Or around it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Sal and Sol know every road between here and there. We start with the cab stand."
+  },
+  {
+   "speaker": "Tom",
+   "text": "We’ll get them back. We always make our connection."
+  }
+ ]
+}

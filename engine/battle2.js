@@ -1324,7 +1324,7 @@ const B2_PEN_LINES={tom:['Honestly? Lovely handwriting. Very legible.','That\'s 
 function b2PraiseSteps(u,opt) {
   const t=opt&&opt.primary,P=t&&t.D.praise;
   if(!t||!P||!b2Alive(t)) return [()=>b2Msg('Nobody to say it to.'),700];
-  const pool=(t.id==='cuecrab'?B2_CRAB_LINES:t.id==='redpen'?B2_PEN_LINES:t.id==='chairman'?B2_CHEEKS_LINES:t.id==='unread'?B2_READ_LINES:t.id==='ironbelly'?B2_BAKE_LINES:t.id==='mirrorball'?B2_DANCE_LINES:t.id==='lastcall'?B2_ANSWER_LINES:t.id==='finalcall'?B2_FLY_LINES:B2_PRAISE_LINES),lines=pool[u.id]||pool._,line=pick(lines);
+  const pool=(t.id==='cuecrab'?B2_CRAB_LINES:t.id==='redpen'?B2_PEN_LINES:t.id==='chairman'?B2_CHEEKS_LINES:t.id==='unread'?B2_READ_LINES:t.id==='ironbelly'?B2_BAKE_LINES:t.id==='mirrorball'?B2_DANCE_LINES:t.id==='lastcall'?B2_ANSWER_LINES:t.id==='finalcall'?B2_FLY_LINES:t.id==='gridlockprime'?B2_GREEN_LINES:B2_PRAISE_LINES),lines=pool[u.id]||pool._,line=pick(lines);
   const said=u.id==='nara'?line:u.name+': "'+line+'"';
   return [()=>{ b2Msg(said); battle.fx[u.idx].hop=.4; if(u.id!=='nara') say(u.id,'praise',0,line); else { sfx.bark&&sfx.bark(); } },1500,()=>{
     const p=b2FoePoint(t),c=b2FoeCanvasPos(t);

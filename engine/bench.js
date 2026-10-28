@@ -95,7 +95,7 @@ resetStory=function(mode,chapter) { benchClear(); return LE_resetStory_bench(mod
 // ---------- The Boarding Gate bench ----------
 function benchMenu(o) {
   const bench=benchMembers();
-  if(!bench.length) { openDialog(o.name,['BOARDING GATE. Nobody is waiting on the bench right now. Everybody who came is already out front.']); return; }
+  if(!bench.length) { openDialog(o.name,[(o.benchName||'BOARDING GATE')+'. Nobody is waiting on the bench right now. Everybody who came is already out front.']); return; }
   const outs=extras().filter(canLeave);
   const ask=m=>{
     if(!outs.length) { openDialog(o.name,['Nobody out front can sit this one out right now.']); return; }
@@ -104,7 +104,7 @@ function benchMenu(o) {
       {label:'NEVER MIND',fn:()=>{}}]);
   };
   const front=party.filter(p=>p!==hero).map(p=>p.name).join(', ');
-  openChoice(o.name,['BOARDING GATE. Out front: Tom, '+front+'. On the bench: '+bench.map(m=>m.name).join(', ')+'.','Tom always fights. Who comes out front?'],[
+  openChoice(o.name,[(o.benchName||'BOARDING GATE')+'. Out front: Tom, '+front+'. On the bench: '+bench.map(m=>m.name).join(', ')+'.','Tom always fights. Who comes out front?'],[
     ...bench.map(m=>({label:'BRING IN '+m.name.toUpperCase(),fn:()=>ask(m)})),
     {label:'NEVER MIND',fn:()=>{}}]);
 }

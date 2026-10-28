@@ -317,7 +317,7 @@ pressAction=function() {
   if(!transition&&!intro.active&&!dialog.active&&!player.move&&STORY.mode==='full'&&STORY.chapter===11) {
     const t=facingTarget(),v=t&&t.value;
     if(t&&t.kind==='object'&&v.gateinfinity&&flag('ch11-met')) {
-      if(flag('ch11-done')) { openDialog(v.name,['LOS ANGELES: NOW BOARDING.','Chapter 12 is still being built. Long Island is amber. Los Angeles is open, and waiting.']); saveGame('auto',true); return; }
+      if(flag('ch11-done')) { if(!flag('ch12-open')) { saveGame('auto',true); playScene('ch12Open'); return; } openDialog(v.name,['LOS ANGELES: NOW BOARDING.','Long Island is amber. Los Angeles is open.']); return; }
       if(!flag('ch11-vance')) { playScene('ch11Vance'); return; }
       openDialog(v.name,['GATE INFINITY. FINAL CALL. Something with robot legs is standing in the way. Walk into it to try again.']); return;
     }
