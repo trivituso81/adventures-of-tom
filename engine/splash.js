@@ -55,23 +55,33 @@ function startSplash() {
 const SPLASH_PARENT={new:'launch',admin:'launch',part1:'new',part2:'new',bonus:'new',lab:'admin'};
 const splashSaveCount=()=>SAVE_SLOTS.filter(k=>readSave(k)).length;
 const splashBuilt=n=>n<=(typeof CHSEL_LAST==='number'?CHSEL_LAST:1)||n===PARTS[2].from;
+// Who can be in the party in chapter n, in portrait order: the locked members plus everyone the chapter allows
+// (CHAPTERS[n].party; DEFAULT_RULES.lock when a chapter sets no lock). CHAPTER_CAST_FIX covers chapters whose scenes
+// change the cast in a way the rules do not show (chapter 9: the girls stay with Aunt Ellie).
+const SPLASH_PORTRAIT_ORDER=['tom','grace','rose','amy','deedee','boppy','tnb','nara'];
+const CHAPTER_CAST_FIX={9:['tom','deedee','boppy']};
+function splashChapterCast(n) {
+  const p=(CHAPTERS[n]&&CHAPTERS[n].party)||{};
+  const ids=CHAPTER_CAST_FIX[n]||[...(p.lock||DEFAULT_RULES.lock),...(p.allow||[])];
+  return SPLASH_PORTRAIT_ORDER.filter(id=>ids.includes(id));
+}
 function splashChapterChoices(from,to) {
   const out=[];
   for(let n=from;n<=to;n++) {
     const c=CHAPTERS[n]; if(!c) continue;
     const built=splashBuilt(n);
-    if(!built) { out.push({name:'CH '+n,sub:c.title+' · Still being built.',cls:'locked',why:'Chapter '+n+' is still being built.'}); continue; }
-    let act,sub=c.title;
+    if(!built) { out.push({name:'CH '+n,title:c.title,sub:'Still being built.',cls:'locked',why:'Chapter '+n+' is still being built.'}); continue; }
+    let act,sub='';
     if(n===1) act=()=>splashGo(confirmNew);
     else if(n===PARTS[2].from) {
       const clr=partClearSlots();
-      sub+=clr.length?' · From your Part 1 clear data.':' · Test: as if Part 1 were done.';
+      sub=clr.length?'From your Part 1 clear data.':'Test: as if Part 1 were done.';
       act=()=>splashGo(clr.length?()=>confirmPart2(splashNewestClear(clr)):()=>confirmChapter(n));
     } else {
-      sub+=' · '+(chselRegion(n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[n];
+      sub=(chselRegion(n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[n];
       act=()=>splashGo(()=>confirmChapter(n));
     }
-    out.push({name:'CH '+n,sub,act});
+    out.push({name:'CH '+n,title:c.title,cast:splashChapterCast(n),sub,act});
   }
   out.push({name:'BACK',sub:'',cls:'back',act:splashBack});
   return out;
@@ -116,7 +126,7 @@ function splashSetMode(mode,sel=0) {
   box.classList.toggle('grid',!M.layout&&list.length>3);
   box.classList.toggle('launch',M.layout==='launch');
   box.innerHTML=list.map((c,i)=>
-    '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+'</span>'+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
+    '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+(c.title?'<span class="sp-ttl">'+c.title+'</span>':'')+'</span>'+(c.cast&&c.cast.length?'<span class="sp-cast">'+c.cast.map(id=>'<img src="portraits/'+id+'.png" alt="'+id+'" title="'+id+'">').join('')+'</span>':'')+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
   splashMark();
 }
 function splashMark() {

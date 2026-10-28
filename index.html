@@ -351,6 +351,18 @@ html.landscape .rrow{padding:3px 8px;min-height:calc(var(--pz) + 6px)}
 .sp-choice.locked{background:#ece3cc;border-style:dashed;border-color:#9aa08a;color:#8d927f}
 .sp-choice.locked .sp-sub{color:#9a9e8c}
 .sp-choice.locked.sel{background:#e9dfc4;border-color:#b5a77e;color:#7f846f}
+.sp-choice .sp-ttl{display:block;margin-top:2px;font-size:11px;font-weight:700;letter-spacing:0;line-height:1.25}
+.sp-choice.sel .sp-name .sp-ttl{padding-left:12px}
+.sp-cast{display:flex;gap:3px;margin-top:2px;min-width:0}
+.sp-cast img{flex:0 1 26px;min-width:0;width:26px;height:auto;aspect-ratio:1;border-radius:6px;border:1px solid #64725a;background:#27473d;image-rendering:pixelated;object-fit:cover}
+.sp-choice.locked .sp-ttl{font-weight:600}
+/* Landscape has little height: a chapter row becomes one line (CH n, title, portraits at the right). */
+html.landscape .sp-choices.grid .sp-choice:has(.sp-cast),html.landscape .sp-choices.grid .sp-choice:has(.sp-ttl){flex-direction:row;align-items:center;gap:8px;padding:4px 10px}
+html.landscape .sp-choice .sp-name{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.landscape .sp-choice .sp-ttl{display:inline;margin:0 0 0 8px;font-size:11px}
+html.landscape .sp-choice.sel .sp-name .sp-ttl{padding-left:0}
+html.landscape .sp-cast{flex:none;margin:0}
+html.landscape .sp-cast img{flex:0 0 22px;width:22px;height:22px;aspect-ratio:auto;border-radius:4px}
 .sp-soon{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:6px;background:#9aa08a;color:#fff5dc;font-size:9px;letter-spacing:1px;vertical-align:2px}
 .sp-choice.back{flex:0 0 auto;justify-content:center;padding-left:14px;padding-right:14px}
 .sp-choice.back .sp-name{font-size:12px}
