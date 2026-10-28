@@ -7,8 +7,11 @@
 //   - saves keep working: a save made while he is gone lists the party without him, and loadGame (wrapped below) re-applies the switch after loading.
 // tomBack() reverses it (chapter 19: "Tom comes back mid-boss"). Wraps applyPartyRules and loadGame. Loaded after engine/bench.js.
 const tomGone=()=>typeof STORY!=='undefined'&&STORY.mode==='full'&&flag('tom-gone')===true;
-const tomGoneLead=()=>tomGone()?tnb:hero;          // whose sprite is the player on the overworld
-const playerSkinId=()=>tomGone()?tomGoneLead().id:'tom';
+const tomGoneLead=()=>tomGone()?tnb:hero;          // who leads the party while Tom is gone
+// Chapter 19 memory rooms: the player walks them as one member alone (SOLO_SKIN is that member's id; data/scenes-ch19.js sets it per map).
+let SOLO_SKIN=null;
+const playerSkinId=()=>SOLO_SKIN||(tomGone()?tomGoneLead().id:'tom');       // whose sprite is the player on the overworld
+const playerMember=()=>SOLO_SKIN?(MEMBERS()[SOLO_SKIN]||tomGoneLead()):tomGoneLead();
 function tomGoneApply() {
   if(!tomGone()) { if(!party.includes(hero)) party.unshift(hero); return; }
   const i=party.indexOf(hero); if(i>=0) party.splice(i,1);
@@ -23,6 +26,8 @@ function tomGoneApply() {
 function tomBack() {
   setFlag('tom-gone',false);
   if(!party.includes(hero)) party.unshift(hero);
+  // The party holds four: Amy (then TNB) steps out to the bench if Tom's return makes five. Nobody is sent home.
+  while(party.length>PARTY_MAX) { const out=[amy,tnb,nara].find(m=>m!==hero&&party.includes(m)&&typeof benchAdd==='function'); if(!out) break; benchAdd(out); }
   if(typeof menuChar!=='undefined') menuChar=0;
   if(typeof b6Badge==='function') b6Badge();
 }

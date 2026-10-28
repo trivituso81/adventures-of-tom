@@ -106,3 +106,11 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - Tom steps in front of every ray and says "No touching, please." On the last one he does not step aside. His HP bar goes white, then gold, then light. His last words in the fight: "We always make our connection."
 - Nobody else is touched. The party wakes in Jefferson Park, Tom gone. TNB leads and is drawn as the player; the menu has no Tom portrait.
 - Vance is afraid, not grumpy. He cannot be hurt in this fight.
+
+
+## Chapter 19: The Unsent Dead-Letter Office (canon, 2026-10-28)
+- Tom's mailbox on Second Avenue opens on the Dead-Letter Office, a sorting hall under the street where everything nobody could deliver ends up. A big ledger has a clean white rectangle where Tom's name was erased.
+- The party plays without Tom: TNB leads (drawn as the player), with Grace, Rose, Amy; Nara waits on the bench. Four doors, four people who will not forget him. In each room you play ONLY that person: Grace (gym, the aisle seat, the soup dumpling squishy), Rose (shoulder rides, Lamby, the pink ribbon "come back with the same wrist"), Amy (backyard races he lost on purpose, mile 20, the notebook of her times), TNB (the gold-seamed mug, the studio, the too-big-handled first cup).
+- The Oblivion Censor is a tired night clerk with a black bar for a face. "Nobody has ever handed me a letter to deliver. They only hand me returns." He can be won over. Tom bursts back in mid-fight: "Sorry I am late. I was written out of the schedule. Did anybody eat?" He hands the Censor Rose's pretzel (stamped DELIVERED) as a first delivery.
+- Neighbors (Olivia, Michael, Mrs. Alvarez) bring lasagna, a rock and lemon bars. A house is warm when somebody is cooking in it (Deedee's rule). Sal drives cab seven to the Glass Tower. Deedee and Boppy wake at the snow globe: "to the moon and back and back and back." Boppy: "Hand me one. For my knees."
+- Ending hook: every clock in the sky stops on the same minute and a door opens high in the tower. Tom: "Seconds first. Then the sky."

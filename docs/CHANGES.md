@@ -205,3 +205,8 @@ Reworded spoken lines (need re-bake; update dialogue-scripts-ch2/ch6/ch8.json fi
 - Michael chapter 8: "Cold lasagna, one diaper bag, and Isla eating the tablecloth. We're thriving."
 Engine: battle backdrop for glass-tower maps now uses the code-drawn tower (also fixes ch17); intro.whiteout added for a white flash fade.
 Not ported from the artifact on purpose: its contraction edits to Mr. Washington, ttlever and other ch8 lines.
+
+## Chapter 19 (2026-10-28)
+No existing spoken lines were reworded. New dialogue is unbaked: docs/dialogue-scripts-ch19.json. New speakers needing cast entries in data/dialog-cast.js: Oblivion Censor, Dead-Letter Office (narration), Mrs. Alvarez, Floor 59 (narration); Vance, the Archivist and Floor 60 are still owed from ch16 to ch18.
+Engine: engine/benchcall.js now gives BENCH CALL reserves in the Twin Lenses fight (ch17 promised it but had none) and the Censor fight. tomBack() benches Amy/TNB/Nara if Tom's return makes five. SOLO_SKIN lets a map draw the player as one member (memory rooms). Nara's Frantic state also applies with no Tom in the party.
+Known: Censor balance checked by script only (tune B2_FOES.censor in data/ch19-battle.js).

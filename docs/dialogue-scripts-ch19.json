@@ -1,0 +1,514 @@
+{
+ "chapter": 19,
+ "note": "Unbaked. Extracted from data/scenes-ch19.js (memory pages first, then scenes in order). New speakers needing cast entries: Oblivion Censor, Dead-Letter Office (narration), Mrs. Alvarez, Floor 59 (narration). Battle lines are in data/ch19-battle.js.",
+ "lines": [
+  {
+   "speaker": "Grace",
+   "text": "This is my first meet. I was seven. I looked at the bleachers and there was one empty folding chair at the very front, on the aisle, and then there was Tata in it."
+  },
+  {
+   "speaker": "Grace",
+   "text": "He was an hour early. He had a thermos. He said the aisle seat is for the person who cheers the loudest. Then he did not cheer at all. He said “Mm.” It was the loudest Mm of my whole life."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I fell off the beam. It is four inches wide. It does not care about me."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The beam is four inches. You are nine. Both of those are fine."
+  },
+  {
+   "speaker": "Grace",
+   "text": "He said it like it was a fact on a form. I got back up because it sounded official."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Before every routine I gave him my Sparkling Diamond Gold Soup Dumpling squishy to hold. Nobody else is allowed to hold it. It is very important and slightly sticky."
+  },
+  {
+   "speaker": "Grace",
+   "text": "He has put it in his coat pocket at every single meet since. It has been through three coats. He says it has “seniority.” I am going to put it somewhere he will trip on it."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Shoulder rides. The ceiling is so close up here. You can touch it if you stretch."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Duck."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I ducked. He did not duck. We hit the lamp. It was the best day of my life, and I was in a hospital hallway."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Bedtime. Tata reads to Lamby, not to me. Lamby likes dragons. Tata does the dragon voice like a man filing his taxes."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I laughed so hard I got the hiccups. He said “That is not on the schedule.” He wrote HICCUPS on his hand with a pen."
+  },
+  {
+   "speaker": "Rose",
+   "text": "At the airport I tied a pink ribbon around his wrist. I said, come back with the same wrist."
+  },
+  {
+   "speaker": "Rose",
+   "text": "He did. He kept the ribbon in his wallet next to his library card. He said he checks it out regularly."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Backyard races. I won every one until I was twelve. Then I found out why."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I made him run it again, for real. He lost again. Honestly. My big brother, the slowest man on Long Island, and he looked so proud."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mile twenty of my first marathon. I was falling apart. And there was Tom on the curb with a thermos and a sign."
+  },
+  {
+   "speaker": "Amy",
+   "text": "The sign said: AMY. GO. (I HAVE NO SIGN WORDS.) I cried. I ran the last six miles in a rage. Best six miles of my life."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Every long run, he asked my time. I thought he was being polite."
+  },
+  {
+   "speaker": "Amy",
+   "text": "There is a notebook in his desk. Every time, every run, in his awful handwriting, with a little star next to the fast ones. He never told me. He just kept the numbers."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Our first date. He had a mug with a broken handle and he was drinking out of it anyway, holding the pieces."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I fixed it right there with gold. A seam you can see. He said, “Does it work?” I said, “It works better now.” He looked at me like I had said something in a language he had been waiting for."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He used to sit in the studio and read while I threw pots. Hours. Not a word."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Once he looked up and said I looked like a man doing nothing very carefully. I said, “You really wheel know me.” He groaned so beautifully. I am keeping that groan forever."
+  },
+  {
+   "speaker": "TNB",
+   "text": "My first cup. Lopsided. The handle is much too big. I made it for him and then I was embarrassed and hid it in a drawer."
+  },
+  {
+   "speaker": "TNB",
+   "text": "He found it. He has used it every morning since. Every morning, same cup. He says it holds exactly the right amount of coffee. It does not. It holds too much. That is the point."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Here. You are not allowed to forget this. I put it right where you will trip on it."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Come back with the same wrist, Tata. I tied it already. You just have to come."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Time starts when you get here, Tom. I will be the one standing at the line, yelling."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Hey. You left your coffee. It is still warm, I think. Come get it."
+  },
+  {
+   "speaker": "Dead-Letter Office",
+   "text": "Far off, in the hub, a brass bell rings by itself. Four lights are on at the Claim Desk. It is time."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It has been eleven hours. I have made coffee four times. I have not drunk any of it. That is not like me."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Plan. Mom and Dad are stone. Tom is somewhere the Loom does not have a place for. And there is one place in this city that keeps everything nobody could put anywhere."
+  },
+  {
+   "speaker": "Grace",
+   "text": "The post office. We already said that."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Nara found it first."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara is sitting very straight in front of Tom’s mailbox, and she is staring into the slot. She has not blinked. A thin gold light is coming out of the slot, like a sleeping lamp."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That is not a regular mailbox. That is a mailbox that is thinking about something."
+  },
+  {
+   "speaker": "Amy",
+   "text": "It’s his. It’s the mailbox at the bottom of his steps, where his bills and my birthday cards go. It’s warm."
+  },
+  {
+   "speaker": "Grace",
+   "text": "If you drop a letter in a mailbox and it goes nowhere... where does it go?"
+  },
+  {
+   "speaker": "TNB",
+   "text": "Down. I think it goes down."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Whoa. It’s a post office for things that don’t have anywhere to go."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Dead letters. Every undelivered thing in the city ends up under it. Birthday cards. Thank-you notes. One pretzel."
+  },
+  {
+   "speaker": "Grace",
+   "text": "That’s MY pretzel. I mean Rose’s. Rose’s pretzel. For Deedee."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Look at the big ledger. There’s a page for Second Avenue. There’s a blank rectangle where a name should be."
+  },
+  {
+   "speaker": "TNB",
+   "text": "It’s still wet. Somebody erased him and left the space, like they were going to write somebody else in."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Four doors. One for each of us."
+  },
+  {
+   "speaker": "TNB",
+   "text": "People who would not forget him. That’s the whole job description."
+  },
+  {
+   "speaker": "Amy",
+   "text": "The desk in the middle has four little brass niches in the front. Four of us, four niches. And a chair that someone just stood up out of."
+  },
+  {
+   "speaker": "Rose",
+   "text": "There’s a thermos on it."
+  },
+  {
+   "speaker": "TNB",
+   "text": "That’s his. I would know that thermos in the dark."
+  },
+  {
+   "speaker": "Dead-Letter Office",
+   "text": "Four keepsakes glow in four brass niches. The bell sits on the counter. Rose reaches up, stands on her tiptoes, and rings it."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "Good evening. The Office is closed. May I help you? You look lost, which is the right way to look in here."
+  },
+  {
+   "speaker": "TNB",
+   "text": "We’re here for a name. A man named Tom, on Second Avenue."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "I have one clean line on a page. I have a name that is too loud for it. I was tidying. It is not personal. I tidy everything that does not fit."
+  },
+  {
+   "speaker": "Amy",
+   "text": "He is my brother."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "I am sure he is lovely. He is also unclaimed. Everything here is. That is the best a thing can be, Mrs. Gregori: safe and unclaimed."
+  },
+  {
+   "speaker": "Grace",
+   "text": "You can’t erase somebody because he doesn’t fit your form."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "It is the only thing I am for. No one has ever handed me a letter to deliver. They only hand me returns."
+  },
+  {
+   "speaker": "Rose",
+   "text": "That’s the saddest job in the world."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "It is a very tidy job."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "Please step back from the desk. I will write the name out."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Up. Everybody up. Breathe. We can do this again. It’s a pottery rule: the first one always cracks."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "I have never been argued with by so many people at once. It was... full."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Sorry I was late. I was written out of the schedule. I’ll sort it out with accounting."
+  },
+  {
+   "speaker": "Rose",
+   "text": "TATA!"
+  },
+  {
+   "speaker": "Grace",
+   "text": "TATA!"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Hello. Hello. Yes. Careful of the glasses. The glasses have been through a lot."
+  },
+  {
+   "speaker": "Amy",
+   "text": "You absolute marshmallow. You were GONE. You ate nothing. You skipped lunch for a whole afternoon, and then a night."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I had a granola bar. It was written out too. I haven’t felt this hungry since the nineties."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Hey."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Hey."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara arrives at about a hundred miles an hour and climbs directly onto Tom. Nobody tries to stop her."
+  },
+  {
+   "speaker": "Tom",
+   "text": "I know. I know. I missed you too. I was a small gold light and I missed you the whole time."
+  },
+  {
+   "speaker": "Tom",
+   "text": "He turns to the Censor, who is looking at the floor."
+  },
+  {
+   "speaker": "Tom",
+   "text": "You have never delivered anything."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "No."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Rose."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Here. It’s a little bit squished. It’s for Deedee. It was held for pickup, but nobody picked it up, because she’s stone."
+  },
+  {
+   "speaker": "Tom",
+   "text": "It is a first-timer’s route. One pretzel. One tower. Fifty-nine floors up, and then a grandmother."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "I do not... I have never left the Office."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED."
+  },
+  {
+   "speaker": "Oblivion Censor",
+   "text": "It is a nicer word to hold than I expected."
+  },
+  {
+   "speaker": "Dead-Letter Office",
+   "text": "In the big ledger, the clean white rectangle fills itself in, one slow letter at a time. T. O. M. The ink is the exact blue of a thermos cap."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Okay. Home. Food. Then Mom and Dad. In that order."
+  },
+  {
+   "speaker": "Tom",
+   "text": "In that order."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Stone does not respond to talking. I have checked. Stone responds to being warm for a long time with people nearby."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mom’s rule: a house is warm when somebody is cooking in it."
+  },
+  {
+   "speaker": "Grace",
+   "text": "So we cook."
+  },
+  {
+   "speaker": "Rose",
+   "text": "A lot. We cook a LOT."
+  },
+  {
+   "speaker": "Olivia",
+   "text": "Tom! You’re BACK. I saw the light on at four a.m. and I thought, he’s home, and then I thought, no, that’s a different kind of light. I made a lasagna."
+  },
+  {
+   "speaker": "Michael",
+   "text": "I brought a rock. Lachlan picked it out. Isla ate a different rock. We are keeping a close eye on it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Thank you. All of you. I will put the rock on the mantel."
+  },
+  {
+   "speaker": "Mrs. Alvarez",
+   "text": "I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They are very hot. A man called Boppy would know what to do."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Boppy would eat one raw and say it was “fine” in a voice."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday."
+  },
+  {
+   "speaker": "TNB",
+   "text": "The oven door handle came off. I fixed it. You could say I handled it."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Please stop."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Lasagna, eleven minutes. Lemon bars, six. I have a timer on everything. Nobody is allowed to be late for this."
+  },
+  {
+   "speaker": "Grace",
+   "text": "I choreographed the pasta. It goes from the pot to the plate in a very specific arc."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I am the taster. I have tasted nine times. It’s for quality."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The pasta does not go in an arc."
+  },
+  {
+   "speaker": "Grace",
+   "text": "It goes in an arc if you believe in it, Tata."
+  },
+  {
+   "speaker": "Tom",
+   "text": "He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Pack it up. Sal is waiting outside with cab seven. We are going to the Glass Tower, and we are bringing dinner."
+  },
+  {
+   "speaker": "Sal",
+   "text": "Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Mom. Dad. We brought dinner."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I brought a pretzel. It has been DELIVERED. It has a stamp."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Everybody sit. Around the plinth. Nobody leave. Plates on laps."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine."
+  },
+  {
+   "speaker": "Grace",
+   "text": "It’s working. It’s working!"
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Oh. Oh, my back. My back is going to be talking about this for a week."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Is that lasagna? Who made lasagna? Who has been in my kitchen?"
+  },
+  {
+   "speaker": "Rose",
+   "text": "DEEDEE! BOPPY!"
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Oh, my babies. Come here. All of you. Come here, to the moon and back and back and back."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Which one of you is eating the peppers raw?"
+  },
+  {
+   "speaker": "Grace",
+   "text": "Nobody. Yet."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Hand me one. For my knees."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog."
+  },
+  {
+   "speaker": "Deedee",
+   "text": "Tom. Who is the man in the gold coat? The one who kept us on a shelf?"
+  },
+  {
+   "speaker": "Tom",
+   "text": "Vance. He is still up there, at the top. He is going to want more than a shelf."
+  },
+  {
+   "speaker": "Boppy",
+   "text": "Then we finish eating first."
+  },
+  {
+   "speaker": "Floor 59",
+   "text": "Overhead, through the glass ceiling, every clock in the sky stops. They are all pointing at the same minute: the one just after the last. A door nobody has noticed before, high up in the tower, has begun to open."
+  },
+  {
+   "speaker": "Tom",
+   "text": "He sets down his plate. Then he picks it back up."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Seconds first. Then the sky."
+  }
+ ]
+}

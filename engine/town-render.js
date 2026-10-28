@@ -23,7 +23,7 @@ function drawSheetActor(a,set) {
   const fr=frames[fi];
   const w=fr[0].length,h=fr.length;
   if(!a.noShadow) ellipse(cx,base+1+Math.round(a.lift||0),Math.round(w*.45),4,'#2f493640');
-  const m=a.isPlayer?(typeof tomGoneLead==='function'?tomGoneLead():hero):a.member;
+  const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
   activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
   const rider=a.isPlayer?roseRider():null;
   if(rider) drawOwRider(rider,a.facing,cx,base-h,true);

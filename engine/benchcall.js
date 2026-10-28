@@ -3,13 +3,13 @@
 // to a boss fight as a reserve. In battle, ▼ Bag, BENCH CALL is free of VP and costs the caller's turn: the fourth member (the
 // one who is not Tom, Grace or Rose) steps out and a reserve steps in at the same slot, acting very soon. The member who steps
 // out keeps their HP and VP and waits as a reserve, so they can be called back in. Only fights that list reserves have the row
-// (b2Start gets cfg.reserve from the bench; today that is the FINAL CALL fight). Loaded after engine/bench.js and battle2-ui.js.
+// (b2Start gets cfg.reserve from the bench; today that is the FINAL CALL, Twin Lenses and Oblivion Censor fights). Loaded after engine/bench.js and battle2-ui.js.
 const B2_NEVER_SIT=['tom','grace','rose'];
 const LE_b2Start_bench=b2Start;
 b2Start=function(cfg) {
   const ids=(cfg.foes||[]).map(f=>Array.isArray(f)?f[0]:f.id);
   B2.reserve=[];
-  if(cfg.npc&&ids.includes('finalcall')&&typeof benchMembers==='function') cfg.reserveIds=benchMembers().map(m=>m.id);
+  if(cfg.npc&&ids.some(i=>['finalcall','twinlens','censor'].includes(i))&&typeof benchMembers==='function') cfg.reserveIds=benchMembers().map(m=>m.id);
   const r=LE_b2Start_bench(cfg);
   if(cfg.reserveIds) {
     const lv=(cfg.levels)||{};

@@ -49,7 +49,7 @@ const b2Tom=()=>B2.party.find(p=>p.id==='tom');
 function b2Eff(u,k) {
   let m=1;
   for(const id in u.st) { const d=B2_STATUS[id]; if(d&&d.mod&&d.mod[k]) { const a=u.st[id].amt; m+=a!=null?Math.sign(d.mod[k])*a:d.mod[k]; } }
-  if(u.id==='nara'&&u.side==='party') { const t=b2Tom(); if(t&&!b2Alive(t)) { if(k==='pow') m+=.5; if(k==='pep') m+=.3; } }
+  if(u.id==='nara'&&u.side==='party') { const t=b2Tom(); if(t?!b2Alive(t):(typeof tomGone==='function'&&tomGone())) { if(k==='pow') m+=.5; if(k==='pep') m+=.3; } }
   if(k==='pep'&&u.side==='party') m+=b2Cadence();   // Amy's Pace Setter (engine/battle2-traits.js)
   if(u.perk&&u.perk.stat[k]) m+=u.perk.stat[k];       // Charm perks and passive stamps (engine/progress.js)
   return Math.max(1,u[k]*Math.max(.2,m));

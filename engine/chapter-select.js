@@ -12,9 +12,9 @@
 // Remove by setting CHAPTER_SELECT=false (or dropping this file from index.html) when the full game ships.
 // Loaded after engine/skip.js, before engine/main.js.
 const CHAPTER_SELECT=true;
-const CHSEL_LAST=18;   // the last chapter with content
+const CHSEL_LAST=19;   // the last chapter with content
 // Party level at the start of each chapter (about two below that chapter's boss).
-const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13,15,17,19,20,21,22,23];   // [11]: Part 2 test start, just past the chapter 10 boss
+const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13,15,17,19,20,21,22,23,24];   // [11]: Part 2 test start, just past the chapter 10 boss
 const chselRegion=n=>n%2===0&&n<10?'la':'le';
 
 // Everything the chapters before n would have left behind: flags and items.
@@ -57,6 +57,7 @@ function chapterJump(n) {
   for(const id of st.gives) if(items[id]&&!bag.includes(id)) bag.push(id);
   b6Prep(CHSEL_LEVEL[n]||1);
   coins=25+60*(n-1);
+  if(n>=19) { chselNineteen(); return; }
   if(n>=18) { chselEighteen(); return; }
   if(n>=17) { chselSeventeen(); return; }
   if(n>=16) { chselSixteen(); return; }
@@ -143,6 +144,25 @@ function chselSixteen() {
   forceJoin(amy,true);
   for(const m of [tnb,nara]) if(typeof benchAdd==='function') benchAdd(m);
   currentMap=worlds.town; player.x=14; player.y=22; player.facing='up'; player.move=null; player.hidden=false;
+  placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
+}
+// Chapter 19 test start: chapter 18 is done. Tom is gone, TNB leads, and Grace, Rose, Amy and TNB are out front with Nara on the bench, on Second Avenue in the morning.
+function chselNineteen() {
+  setFlag('part1-clear'); STORY.mode='full'; setFlag('part2-start');
+  for(const f of ['ch11-met','ch11-vance','ch11-done','ch12-open','ch12-done','ch15-done','ch16-open','ch16-stone','ch16-after','ch16-done',
+    'ch17-open','ch17-lobby','ch17-landing','ch17-locks','ch17-race','ch17-vault','ch17-fight','ch17-after','ch17-done','tombo:amy3',
+    'ch18-open','ch18-pinnacle','ch18-fight','ch18-after','ch18-done']) setFlag(f);
+  setFlag('ch17-smashed',6); for(let i=0;i<6;i++) setFlag('shelf-'+i);
+  setFlag('battle:twinlens','win'); setFlag('battle:vance','lose');
+  setChapter(19,{apply:false});
+  STORY.override=null;
+  for(const m of extras()) recruitLeave(m,true);
+  if(girlsAway()) setGirlsAway(false);
+  forceJoin(amy,true);
+  if(typeof benchAdd==='function') benchAdd(nara);
+  setFlag('tom-gone'); tomGoneApply();
+  if(typeof menuChar!=='undefined') menuChar=0;
+  currentMap=worlds.jpark; player.x=4; player.y=19; player.facing='up'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 // Chapter 18 test start: chapter 17 is done. Tom, Grace, Rose and Amy stand in the Vault facing the pinnacle lift; TNB and Nara are on the bench.

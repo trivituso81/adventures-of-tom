@@ -145,7 +145,12 @@ const CHAPTERS=[
     party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch18-done')?{lines:['Chapter 19 is coming. Nobody is going to the airport. Nobody is going anywhere without Tom.']}
       :{lines:['Airport? Tom. Not now. Floor sixty.']}},
-  {n:19,title:'The Unsent Dead-Letter Office'},
+  // Chapter 19: Tom is gone (flag 'tom-gone') until he bursts back into the Censor fight (data/scenes-ch19.js). Grace, Rose, Amy and TNB fight, Nara is on the bench.
+  // Deedee and Boppy are stone until the feast thaws them; the chapter ends with the eight of them in the Vault.
+  {n:19,title:'The Unsent Dead-Letter Office',start:{map:'jpark',x:4,y:19},
+    party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch19-done')?{lines:['Chapter 20 is coming. The sky has a clock in it now, and the cab stand has coffee.']}
+      :{lines:['Airport? Not today. Today you find Tom.']}},
   {n:20,title:'The Forever Engine & The Open Sky'}
 ];
 const MEMBERS=()=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara});
