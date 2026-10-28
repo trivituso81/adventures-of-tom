@@ -1,6 +1,6 @@
 'use strict';
-// engine/chapter-select.js — TEST TOOL: jump straight to the start of any Part 1 chapter from the title screen.
-// PART 1 > CHAPTER SELECT lists chapters 1 to 10. Picking one fast-forwards the story as if every earlier chapter
+// engine/chapter-select.js — Jump straight to the start of any chapter from the title screen (START NEW > PART 1 or
+// PART 2 lists the chapters; the lists are built in engine/splash.js). Picking one fast-forwards the story as if every earlier chapter
 // were finished, then plays that chapter's opening the normal way:
 //   flags   every flag the earlier chapters' scenes and triggers set (scene {flag} steps, setFlag calls inside {call}
 //           steps, trigger conditions, boss results as 'win')
@@ -14,7 +14,7 @@
 const CHAPTER_SELECT=true;
 const CHSEL_LAST=10;   // the last chapter with content
 // Party level at the start of each chapter (about two below that chapter's boss).
-const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11];
+const CHSEL_LEVEL=[0,1,3,5,5,6,7,8,9,10,11,13];   // [11]: Part 2 test start, just past the chapter 10 boss
 const chselRegion=n=>n%2===0&&n<10?'la':'le';
 
 // Everything the chapters before n would have left behind: flags and items.
@@ -57,6 +57,7 @@ function chapterJump(n) {
   for(const id of st.gives) if(items[id]&&!bag.includes(id)) bag.push(id);
   b6Prep(CHSEL_LEVEL[n]||1);
   coins=25+60*(n-1);
+  if(n>=PARTS[2].from) { chselPart2(st); return; }
   if(n>=CHSEL_LAST) { chselTen(); return; }
   const la=chselRegion(n)==='la';
   // Nobody is along yet: the chapter's own scenes bring people in.
@@ -75,6 +76,17 @@ function chselTen() {
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true;
   playScene('ch10Start',{fade:1});
 }
+// Part 2 without Part 1 clear data (test): Part 1 counts as cleared, then Part 2 opens the way beginPart2 does.
+function chselPart2() {
+  setFlag('part1-clear'); STORY.mode='full'; setFlag('part2-start'); setChapter(PARTS[2].from);
+  if(girlsAway()) setGirlsAway(false);
+  const st=chapterInfo(PARTS[2].from).start,h=houseById.taxi;
+  if(st&&worlds[st.map]) { currentMap=worlds[st.map]; player.x=st.x; player.y=st.y; }
+  else { currentMap=town; player.x=h.door.x; player.y=h.door.y+1; }
+  player.facing='down'; player.move=null; player.hidden=false;
+  placeFollowers(); refreshAreaUI(); resize(); camera.snap=true;
+  playScene(()=>[{partCard:2,time:3},{card:PARTS[2].from,time:3.2},...(SCENES.part2Open?SCENES.part2Open():[]),{save:true}],{fade:.7});
+}
 // Everyone to level L with Auto-Stamp and full HP.
 function b6Prep(L) {
   for(const m of ALL_MEMBERS()) {
@@ -91,56 +103,5 @@ function confirmChapter(n) {
   ]);
 }
 
-// ---------- Title screen: PART 1 > CHAPTER SELECT ----------
-if(CHAPTER_SELECT) {
-  const LE_startChoices=SPLASH_MODES.start.choices;
-  SPLASH_MODES.start.choices=()=>{
-    const c=LE_startChoices();   // START NEW, LOAD, BACK
-    c.splice(2,0,{name:'CHAPTERS',sub:'Test: jump to any chapter.'});
-    return c;
-  };
-  SPLASH_MODES.chapters={tab:'Chapter Select (test)',cue:'A / Enter to jump in. B / Esc to go back',choices:()=>[
-    ...CHAPTERS.slice(1,CHSEL_LAST+1).map(c=>({name:'CH '+c.n,sub:c.title+' · '+(chselRegion(c.n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[c.n],ch:c.n})),
-    {name:'BACK',sub:'',cls:'back'}]};
-
-  const LE_splashPick_chsel=splashPick;
-  splashPick=function(i) {
-    if(!splash.active) return;
-    if(splash.mode==='start') {
-      if(i===2) { splash.sel=i; splashMark(); sfx.select(); splashSetMode('chapters'); return; }
-      if(i===3) i=2;   // BACK
-      return LE_splashPick_chsel(i);
-    }
-    if(splash.mode==='chapters') {
-      const c=(splash.list||[])[i]; if(!c) return;
-      splash.sel=i; splashMark();
-      if(c.cls==='back') { splashBack(); return; }
-      sfx.select(); unlockAudio(); splash.ret='chapters';
-      splashLeave(()=>confirmChapter(c.ch));
-      return;
-    }
-    return LE_splashPick_chsel(i);
-  };
-  const LE_splashBack_chsel=splashBack;
-  splashBack=function() {
-    if(splash.mode==='chapters') { sfx.move(); splashSetMode('start'); splash.sel=2; splashMark(); return; }
-    return LE_splashBack_chsel();
-  };
-  // In the chapter grid, up and down move a whole row.
-  const LE_splashMove_chsel=splashMove;
-  splashMove=function(d,dir) {
-    if(splash.mode!=='chapters'||(dir!=='up'&&dir!=='down')) return LE_splashMove_chsel(d,dir);
-    const n=(splash.list||[]).length; if(!n) return;
-    let s=splash.sel+d*2;
-    if(s<0) s=n-1; else if(s>=n) s=0;
-    splash.sel=s; sfx.move(); splashMark();
-  };
-  // BACK from the jump warning returns to the chapter list.
-  const LE_splashReturn_chsel=splashReturn;
-  splashReturn=function() {
-    const ok=LE_splashReturn_chsel();
-    if(ok&&splash.ret==='chapters') splashSetMode('chapters');
-    return ok;
-  };
-}
+// The title screen's chapter lists (START NEW > PART 1 / PART 2) live in engine/splash.js and call confirmChapter.
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{chapterJump,chselStateBefore}); });

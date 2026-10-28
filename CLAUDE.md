@@ -5,7 +5,7 @@ Read this first. It is the working agreement for Claude in this repo. Claude run
 ## What this is
 
 A 16-bit JRPG starring Tom's real family, written as plain browser JavaScript (no framework, no bundler, no npm build).
-Chapters 1 to 10 are built (the story bible plans 20 chapters in two Parts). It runs as a static site, played on an iPhone home-screen shortcut.
+Chapters 1 to 10 are built (the story bible plans 20 chapters in two Parts). It runs as a static site on GitHub Pages, played from an iPhone home-screen app.
 Title: **The Adventures of Tom**. Home towns: Long Island and Los Angeles. (Older files and docs still say "Little Elsewhere"; that was the demo town name.)
 
 ## The person you are working for
@@ -27,7 +27,7 @@ Tom is a product director. He designs and directs; he does **not** code and does
 5. **Changing a spoken line silences it.** Baked clips play only when the clip text exactly matches the line in `data/lines.js` or the dialogue text. If you reword a line, say so; it needs a re-bake. Prefer not to reword spoken lines unless asked.
 6. **Canon is in `docs/CANON.md`.** Characters, voice and tone, and what is decided. Read it before writing any dialogue, move or scene.
 7. **Reuse the battle animation primitives** before inventing new systems (`docs/BATTLE_SYSTEM.md`).
-8. **The claude.ai artifact is the working copy; this repo is the published copy.** Tom plays and reviews the artifact on his phone, so every change is published there first. Push the artifact's files to `main` (which updates GitHub Pages) only when Tom asks. Read `docs/WORKFLOW.md` for the exact routine.
+8. **This repo is the live app.** Tom plays https://trivituso81.github.io/adventures-of-tom/ from his iPhone home screen (decided 2026-10-27: "the actual app is on GitHub"). Every finished change goes to `main` (which updates GitHub Pages). The claude.ai artifact is only a scratch copy for building and testing; it means nothing to Tom, so never tell him something is "live" because it is on the artifact. Read `docs/WORKFLOW.md` for the exact routine.
 
 ## How to work
 

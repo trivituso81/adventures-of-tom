@@ -42,14 +42,20 @@ function b6Sync() {
     if(m.level>was) { b6Refresh(m,true); if(!inParty(m)) m.caughtUp=(m.caughtUp||0)+(m.level-was); }
   }
 }
-// XP for the fight just won: each monster's B6_XP (+5% per time it has been beaten), or a flat level for a boss.
+// XP for the fight just won: each monster's B6_XP (+5% per time it has been beaten, up to +50%), or a flat level for a boss.
 // foes and npc default to the fight in progress; the overlevel instant win (engine/feel.js) passes its own.
 function b6BattleXp(foes,npc) {
   if(!foes) { foes=B2.foes; npc=B2.cfg&&B2.cfg.npc; }
   const tier=Math.min(B6.tierXpMax,(npc&&npc.tier)||0);
   if(foes.some(f=>f.boss)) return B6.bossXp;
+  // Base XP never grows with tier: the fallback uses the monster's starting level (f.lvl climbs by 1 every win, which
+  // used to compound). Outlevelling a foe tapers its XP (B6.overTaper per level above it, down to B6.overFloor).
   let xp=0;
-  for(const f of foes) xp+=(B6_XP[f.id]||Math.round(10+(f.lvl||1)*3))*(1+B6.tierXp*tier);
+  for(const f of foes) {
+    const D=typeof b2FoeDef==='function'&&b2FoeDef(f.id),base=(D&&D.level)||(MONSTERS[f.id]&&MONSTERS[f.id].level)||1;
+    const gap=Math.max(0,(hero.level||1)-Math.max(base,f.lvl||1)),taper=Math.max(B6.overFloor,1-B6.overTaper*gap);
+    xp+=(B6_XP[f.id]||Math.round(10+base*3))*(1+B6.tierXp*tier)*taper;
+  }
   return Math.max(1,Math.round(xp));
 }
 
@@ -235,7 +241,7 @@ function b6Perks(m,all) {
     if(pk.stat) for(const k in pk.stat) P.stat[k]=(P.stat[k]||0)+pk.stat[k];
     if(pk.immune) for(const s of pk.immune) if(!P.immune.includes(s)) P.immune.push(s);
     if(pk.boost) P.boost.push(pk.boost); };
-  for(const slot of SLOTS) { const id=m.equipment&&m.equipment[slot]; if(id&&items[id]) add(items[id].perk); }
+  for(const slot of (typeof wearSlots==='function'?wearSlots(m):SLOTS)) { const id=m.equipment&&m.equipment[slot]; if(id&&items[id]) add(items[id].perk); }
   P.evade=Math.min(.5,P.evade);
   return P;
 }

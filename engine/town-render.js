@@ -504,6 +504,7 @@ function drawActor(a) {
   if(a.kid) { drawSheetActor(a,OW[a.member.id]); return; }
   if(a.sheet) { drawSheetActor(a,OW[a.sheet]); return; }
   const v=VILLAGERS[a.paletteName];
+  if(!v&&OW[a.paletteName]) { drawSheetActor(a,OW[a.paletteName]); return; }   // a traced sheet registered under the look name (data/npc-sprites.js: the chapter 3 to 6 townspeople)
   if(v) { drawSheetActor(a,villagerSet(v)); return; }
   drawNpc(a);
 }

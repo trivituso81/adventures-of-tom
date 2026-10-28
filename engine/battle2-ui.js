@@ -152,7 +152,7 @@ function b2DrawOverlay(t) {
   const headOf=u=>{ const q=BATTLE_POS[u.idx],sp=BATTLE_SPRITES[u.id],d=b2Riding(u)&&battle.drawnAt&&battle.drawnAt[u.idx];
     if(d) return {x:d.cx,y:d.base-sp.idle.length*sp.scale-8};
     return {x:q.x*3,y:q.base*3-sp.idle.length*sp.scale-8}; };
-  if(battle.state==='command'&&B2.actor&&B2.ui!=='target'&&B2.ui!=='inspect') { const h=headOf(B2.actor); arrow(h.x,h.y-14-bounce,'#f0c75a'); }
+  if(battle.state==='command'&&!battle.busy&&!battle.queue.length&&B2.actor&&B2.ui!=='target'&&B2.ui!=='inspect') { const h=headOf(B2.actor); arrow(h.x,h.y-14-bounce,'#f0c75a'); }
   if(battle.state==='command'&&B2.ui==='inspect') { const f=b2LiveFoes()[B2.sel]; if(f) { const p=b2FoeCanvasPos(f); arrow(p.x,p.y-p.h-18-bounce,'#ff9ac0'); } }
   if(battle.state==='command'&&B2.ui==='target') {
     const o=B2.opts[B2.sel];

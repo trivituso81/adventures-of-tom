@@ -122,7 +122,7 @@ const B2_TRAIT={miles:3,trend:[1,1.2,1.5],ride:4,rideHit:.4,cadence:.05,cadenceM
 // Until F6 (Stampcards) everyone knows every path skill.
 const B2_SKILLS={
   tom:{
-    basic:{key:'mash',name:'Button Mash',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
+    basic:{key:'mash',name:'Press Start',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
       desc:'Fast controller combo. Free, and gives +1 VP.'},
     special:{key:'defend',name:'DEFEND',vp:1,target:'ally',weight:'quick',kind:'defend',
       desc:'Step in front of an ally for 2 turns. Hits aimed at them go to Tom, 40% softer.'},
@@ -147,7 +147,7 @@ const B2_SKILLS={
     // DEFEND keeps its legacy resolver (engine/battle2.js b2DefendSteps); only the animation is new.
     // data/abilities.js B8_KITS says which slot each key belongs to (engine/progress.js b8Move picks the version).
     o3:[
-      {key:'button_mash',name:'Button Mash',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
+      {key:'button_mash',name:'Press Start',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
         desc:'Tom presses one button. Nothing connects. He throws the controller. Free, and gives +1 VP.'},
       {key:'defend',sig:true,name:'DEFEND',vp:1,target:'ally',weight:'quick',kind:'defend',o3:true,
         desc:'Step in front of an ally for 2 turns. Hits aimed at them go to Tom, 40% softer.'},
@@ -393,7 +393,7 @@ const B2_SKILLS={
         fx:[['interrupt','t']],desc:'Ting, ting, ting: a toast. Every monster freezes to listen. Hits one enemy and cancels its wind-up.'},
       {key:'oven_mitt_ultimatum',name:'Oven Mitt Ultimatum',vp:5,elem:['cozy'],stat:'warmth',mult:1.6,target:'row',weight:'standard',o3:true,
         fx:[['st','grumbled',2,'t']],desc:'Clap the oven mitts once. Hits a row and lowers its POW and WARMTH 30% for 2 turns.'},
-      {key:'brisk_means_brisk',name:'Brisk Means Brisk',vp:2,elem:['kinetic'],stat:'pow',mult:1.5,target:'enemy',weight:'quick',o3:true,
+      {key:'brisk_means_brisk',name:'Brisk Walk',vp:2,elem:['kinetic'],stat:'pow',mult:1.5,target:'enemy',weight:'quick',o3:true,
         desc:'One very brisk pass through an enemy. Deedee acts again soon.'},
       {key:'garden_shower',name:'Garden Shower',vp:3,elem:['splash'],stat:'warmth',mult:1.2,target:'row',weight:'standard',o3:true,
         fx:[['ctq',.15,'t']],desc:'Water an enemy row rather thoroughly. Hits them and delays their next turns.'},
@@ -1052,9 +1052,9 @@ const B2_HEART={cap:100,basic:5,care:15,weak:15,hurt:10,calm:20,boss:25};
 // Fields like a skill (elem, stat, mult, target, fx) plus partner, tier, cost, kindV (Warmth to the enemies it targets
 // or, for party Tombos, to every enemy), and the animation in B2_TOMBO_ANIM (engine/battle2-kind.js).
 const B2_TOMBOS=[
-  {id:'grace1',partner:'grace',tier:1,cost:25,flag:'tombo:grace1',name:'Hi Guys, Welcome Back!',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
+  {id:'grace1',partner:'grace',tier:1,cost:25,flag:'tombo:grace1',name:'Squishy Delivery',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
     fx:[['heal',.35,0,'party'],['cure','debuff','party']],
-    desc:'Grace films a video on Tom’s phone; his thumb is in the shot. Her gold dumpling floats up and lands on the monsters, giant. The party heals 35% and loses its debuffs, and every enemy warms up.'},
+    desc:'Grace begs for a new squishy and Tom sighs and says fine. A gift box floats down from the sky and a big pink sparkly dice squishy tumbles onto the front monster. The party heals 35% and loses its debuffs, and every enemy warms up.'},
   // Director's Cuts (dc: the Primary they belong to). Same HEART cost; numbers from the designed Director's Cut row (revamp
   // plan dc_tb_grace_1 Sparkle 2.1 row; option 3 brief dc_tombo_rose_clouds Chatter, no damage; dc_tombo_amy_dismissal
   // Sparkle party, vp 2 party, cure one Amy; dc_tombo_deedee_clean Splash party, heal 25% party, cure one each; dc_tb_boppy_1
@@ -1097,9 +1097,9 @@ const B2_TOMBOS=[
   {id:'amy1',partner:'amy',tier:1,cost:25,flag:'tombo:amy1',name:'I Called It!',elem:['kinetic','sparkle'],stat:'pow',mult:2.2,target:'all',weight:'standard',
     fx:[['st','pepup',3,'party']],
     desc:'Tom and Amy both call dibs on the same monster and shove each other back and forth, knocking into every enemy. A Kinetic and Sparkle hit on all of them, and the party is faster (PEP +30%) for 3 turns.'},
-  {id:'amy1_dc',dc:'amy1',partner:'amy',tier:1,cost:25,flag:'tombo:amy1',name:'Field Day',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
+  {id:'amy1_dc',dc:'amy1',partner:'amy',tier:1,cost:25,flag:'tombo:amy1',name:'Opening Night',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
     fx:[['vp',2,'party'],['cure','one','amy']],
-    desc:'Amy blows the whistle for field day. Tom walks the egg-and-spoon race very carefully; Amy sprints past, bumps him, and the egg flies into a monster’s face. No damage: every enemy warms up, the party gets 2 VP, and Amy shakes off one debuff.'},
+    desc:'Tom and Amy put on a musical for the party. Tom directs from his chair with a megaphone; Amy sings, jazz hands, kick line, spin; Tom joins the big finish in a top hat. No damage: every enemy warms up, the party gets 2 VP, and Amy shakes off one debuff.'},
   // Tier 2 (Task T, tombo-review.md Primary column; numbers from the revamp plan section I3, tier-2 rows). 50% HEART.
   // Not animated yet: a Tombo without B2_TOMBO_ANIM falls back to b2TomboPlain.
   {id:'grace2',partner:'grace',tier:2,cost:50,flag:'tombo:grace2',name:'Uncle Spotter Toss',elem:['kinetic'],stat:'pow',mult:2.9,target:'splash',weight:'standard',crit:1,
@@ -1114,25 +1114,25 @@ const B2_TOMBOS=[
   {id:'rose2_dc',dc:'rose2',partner:'rose',tier:2,cost:50,flag:'tombo:rose2',name:'Princess and Her Bodyguard',elem:['cozy'],target:'party',weight:'standard',kindV:300,
     fx:[['st','evade',2,'party'],['cure','mental','partner'],['mount']],
     desc:'Rose in full princess dress-up; Tom in sunglasses and an earpiece as her royal bodyguard. He clears the way, she knights each monster with Lamby, and they bow out of her path. No damage: every enemy warms up, the party turns Evasive for 2 turns, Rose shakes off Dizzy and other mind troubles, and she rides home on Tom\'s shoulders.'},
-  {id:'amy2',partner:'amy',tier:2,cost:50,flag:'tombo:amy2',name:'Wing Walk',elem:['kinetic'],stat:'pow',mult:2.9,target:'all',weight:'standard',
+  {id:'amy2',partner:'amy',tier:2,cost:50,flag:'tombo:amy2',name:'Ymamot Creation',elem:['kinetic'],stat:'pow',mult:2.9,target:'all',weight:'standard',
     fx:[['row','back','t'],['ct',.5,'t'],['st','pepup',3,'party']],
-    desc:'On the plane wing. Tom stays in his lie-flat seat and holds Amy’s rope out the window; Amy sprints into the wind and kicks the monsters off the end. A Kinetic hit on every enemy, they all go to the back row and lose time, and the party is faster for 3 turns.'},
-  {id:'amy2_dc',dc:'amy2',partner:'amy',tier:2,cost:50,flag:'tombo:amy2',name:'Spot Me, Tom',elem:['kinetic'],target:'party',weight:'standard',
+    desc:'A flashback. Little Tom and little Amy at the kitchen counter: ketchup, pickles, cereal, mustard, a whole lemon and one sock, all in the bowl. A Ymamot Creation (Tom backwards). They sling it across every monster. A Kinetic hit on every enemy, they all go to the back row and lose time, and the party is faster for 3 turns.'},
+  {id:'amy2_dc',dc:'amy2',partner:'amy',tier:2,cost:50,flag:'tombo:amy2',name:'Party Decorators',elem:['kinetic'],target:'party',weight:'standard',
     fx:[['refill','both'],['st','brace',1,'party']],
-    desc:'Amy makes Tom do her kettlebell workout and yells the reps at him. On rep three he gives up and lets go; gravity drops the kettlebell on a monster. No damage: Tom and Amy refill their VP, and the party Guards (takes half damage) for 1 turn.'},
+    desc:'The girls\' birthday is tomorrow. Tom hangs streamers from a wobbly stepladder, Amy strings the HAPPY BIRTHDAY banner and blows up one balloon far too much. Pop. Ladder. Cake arrives anyway. No damage: Tom and Amy refill their VP, and the party Guards (takes half damage) for 1 turn.'},
   {id:'deedee2',partner:'deedee',tier:2,cost:50,flag:'tombo:deedee2',name:'Pick the Rhubarb',elem:['sparkle'],stat:'warmth',mult:2.7,target:'all',weight:'standard',
     fx:[['cure','debuff','party'],['st','coolup',3,'party'],['st','shushed',2,'t'],['crust',2]],
     desc:'Deedee puts Tom to work in her garden. The rhubarb will not come out, so they both pull, and the root is the monster. A Sparkle hit on every enemy (Shushed for 2 turns), the party loses its debuffs and gets COOL +25% for 3 turns, and 2 Warm Crusts go on the tray.'},
-  {id:'deedee2_dc',dc:'deedee2',partner:'deedee',tier:2,cost:50,flag:'tombo:deedee2',name:'Library Vault Lantern',elem:['cozy'],target:'party',weight:'standard',kindV:300,
+  {id:'deedee2_dc',dc:'deedee2',partner:'deedee',tier:2,cost:50,flag:'tombo:deedee2',name:'Trip to Italy',elem:['cozy'],target:'party',weight:'standard',kindV:300,
     fx:[['st','tucked',3,'party'],['crust',2]],
-    desc:'Down in the library vault, Deedee polishes the old brass lamp so hard it turns into a lighthouse. Tom just holds it. No damage: every enemy warms up in the light, the party is Tucked In for 3 turns, and 2 Warm Crusts go on the tray.'},
+    desc:'Deedee has a binder. Three rings, tabs. A map of Italy unrolls and the pins go in: Rome, Florence, the coast. Espresso, gelato, a Vespa. Everybody gets a brochure, the monsters too. No damage: every enemy warms up, the party is Tucked In for 3 turns, and 2 Warm Crusts go on the tray.'},
   {id:'boppy2',partner:'boppy',tier:2,cost:50,flag:'tombo:boppy2',name:'Nobody Gets Past Us',elem:['chatter'],stat:'warmth',mult:2.7,target:'all',weight:'standard',kindV:300,
     fx:[['interrupt','t'],['st','shield',3,'party']],
     desc:'Father and son stand shoulder to shoulder and a jail-cell door with bars slams down in front of the family. A Chatter hit on every enemy that stops their wind-ups, and the party takes 40% less damage for 3 turns.'},
-  {id:'boppy2_dc',dc:'boppy2',partner:'boppy',tier:2,cost:50,flag:'tombo:boppy2',name:"Bird's Nest",elem:['splash'],stat:'pow',mult:2.8,target:'enemy',weight:'standard',
+  {id:'boppy2_dc',dc:'boppy2',partner:'boppy',tier:2,cost:50,flag:'tombo:boppy2',name:"Measure Twice",elem:['splash'],stat:'pow',mult:2.8,target:'enemy',weight:'standard',
     fx:[['steal','t']],
-    desc:'Tom casts and makes a giant bird\'s nest of a tangle. Boppy grumbles and tries to fix it, it only gets bigger, and the whole mess wraps the monster up like a net. A big Splash hit on one enemy that breaks its shield and steals a buff.'},
-  {id:'tnb2',partner:'tnb',tier:2,cost:50,flag:'tombo:tnb2',name:'Red Line Transfer',elem:['kinetic'],stat:'pow',mult:2.9,target:'all',weight:'standard',
+    desc:'Tom\'s sink drips. Boppy brings the wrench. One turn: a spray. Another: three sprays. A third: a geyser, water on the ceiling, and Tom in tears. The geyser blasts the monster. A big Splash hit on one enemy that breaks its shield and steals a buff.'},
+  {id:'tnb2',partner:'tnb',tier:2,cost:50,flag:'tombo:tnb2',name:'Measure Twice',elem:['kinetic'],stat:'pow',mult:2.9,target:'all',weight:'standard',
     fx:[['ct',-1,'party'],['st','evade',2,'party'],['st','staggered',1,'t']],
     desc:'Tom drives the subway, TNB surfs the roof and hands everyone a transfer, and the train barrels through the monsters. A Kinetic hit on every enemy (Staggered), the whole party jumps to the front of the line, and everyone is Evasive for 2 turns.'},
   {id:'tnb2_dc',dc:'tnb2',partner:'tnb',tier:2,cost:50,flag:'tombo:tnb2',name:'Last Train Home',elem:['cozy'],target:'party',weight:'standard',kindV:300,
@@ -1147,9 +1147,9 @@ const B2_TOMBOS=[
   // Tier 3 (Task T, tombo-review.md Primary column; numbers from the revamp plan section I3, tier-3 rows, mapped onto real ops
   // with the caps: revive 50%, party heal 60%). 75% HEART. Unlock beats are in chapters 17 and 19, which do not exist yet,
   // so tier 3 is Battle Lab only for now. pause = lose time (ctq), Tom's Upgrade Mile comes with every Tombo already.
-  {id:'grace3',partner:'grace',tier:3,cost:75,flag:'tombo:grace3',name:'Bedazzle Everything',elem:['sparkle'],stat:'warmth',mult:3.8,target:'all',weight:'standard',kindV:300,
+  {id:'grace3',partner:'grace',tier:3,cost:75,flag:'tombo:grace3',name:'The Golden Dumpling Wish',elem:['sparkle'],stat:'warmth',mult:3.8,target:'all',weight:'standard',kindV:300,
     fx:[['revive',.5,'party'],['heal',.6,0,'party'],['cure','debuff','party'],['trend','lock',3]],
-    desc:'Grace has the rhinestones. Tom holds the glue gun. A plain star gets bedazzled, grows huge, and bounces over every enemy, leaving rhinestones behind. A huge Sparkle hit on all of them; fallen friends get back up at 50%, the party heals 60% and loses its debuffs, and Grace’s Trending locks at the top for 3 turns.'},
+    desc:'Grace holds up the golden dumpling and it wakes like a grumpy genie. Tom wishes too loudly and gets squished flat, then tiny dumplings rain down and bonk every enemy. A huge Sparkle hit on all of them; fallen friends get back up at 50%, the party heals 60% and loses its debuffs, and Grace’s Trending locks at the top for 3 turns.'},
     {id:'grace3_dc',dc:'grace3',partner:'grace',tier:3,cost:75,flag:'tombo:grace3',name:'Shadow Squishy',elem:['sparkle'],stat:'warmth',mult:3.6,target:'enemy',weight:'standard',kindV:300,
     fx:[['closeup',2,'t']],
     desc:'Lights out, lamp on. Tom makes a shadow bunny on the wall. It is not good. Grace fixes it into a perfect shadow dumpling, the shadow grows across the whole wall, and the monster panics and hides from a squishy. A big Sparkle hit on one enemy (it warms right up), and it gets a Close-Up: the next damaging hit on it counts double.'},
@@ -1159,9 +1159,9 @@ const B2_TOMBOS=[
     {id:'rose3_dc',dc:'rose3',partner:'rose',tier:3,cost:75,flag:'tombo:rose3',name:'Lamby Night-Light',elem:['chatter'],target:'all',weight:'standard',kindV:300,
     fx:[['ct',.4,'t'],['interrupt','t'],['cure','mental','party'],['mount']],
     desc:'Bedtime, and Rose is scared of the dark. Tom holds Lamby up like a night-light, and Lamby glows brighter and brighter until the dark runs away, and the monsters with it. No damage: every enemy warms up, loses its wind-up and its next turn comes later, the party’s mental debuffs (Dizzy, Shushed, Heckled and the like) clear, and Rose rides on Tom’s shoulders.'},
-{id:'amy3',partner:'amy',tier:3,cost:75,flag:'tombo:amy3',name:'Sixty-Story Sibling Pace',elem:['kinetic'],stat:'pow',mult:.75,hits:6,target:'enemy',weight:'standard',crit:1,
+{id:'amy3',partner:'amy',tier:3,cost:75,flag:'tombo:amy3',name:'Knock It Off!',elem:['kinetic'],stat:'pow',mult:.75,hits:6,target:'enemy',weight:'standard',crit:1,
     fx:[['st','best',3,'party']],
-    desc:'Tom and Amy race each other up the outside of a sixty-story glass tower, trading hits floor by floor, then dive off the roof onto the monster together. Six sure critical Kinetic hits on one enemy, and the party gets Personal Best (POW and WARMTH +30%) for 3 turns.'},
+    desc:'A flashback to the couch. Little Tom and little Amy fight over the good spot: pillow, slipper, cushion, the remote. Every swing misses the sibling and hits the monster, until Mom yells KNOCK IT OFF. Six sure critical Kinetic hits on one enemy, and the party gets Personal Best (POW and WARMTH +30%) for 3 turns.'},
     {id:'amy3_dc',dc:'amy3',partner:'amy',tier:3,cost:75,flag:'tombo:amy3',name:'Elevator Cheat',elem:['cozy'],target:'party',weight:'standard',
     fx:[['ct',-.55,'party'],['st','pepup',2,'party'],['cure','amber','party']],
     desc:'Same tower, inside. Amy takes the stairs at full speed; Tom presses the elevator button. The doors open on the roof and Amy is already there with her stopwatch, so mad she stomps a hole in the roof. No damage: the whole party jumps up the turn order, gets PEP +30% for 2 turns, and Amber melts off.'},
@@ -1171,9 +1171,9 @@ const B2_TOMBOS=[
     {id:'deedee3_dc',dc:'deedee3',partner:'deedee',tier:3,cost:75,flag:'tombo:deedee3',name:'Feast on Jefferson Park',elem:['cozy'],target:'party',weight:'standard',kindV:300,
     fx:[['revive',.35,'party'],['heal',.6,0,'party'],['cure','debuff','party'],['crust',3]],
     desc:'A block-party feast under the string lights on Jefferson Park. Tom passes the dishes; Deedee rearranges everyone\'s plates and wipes the table while they eat. No damage: every enemy warms up, fallen friends get back up at 35%, the party heals 60% and loses its debuffs, and 3 Warm Crusts go on the tray.'},
-  {id:'boppy3',partner:'boppy',tier:3,cost:75,flag:'tombo:boppy3',name:'The Pepper-Broth Sneeze',elem:['cozy'],stat:'pow',mult:4.1,target:'all',weight:'standard',
+  {id:'boppy3',partner:'boppy',tier:3,cost:75,flag:'tombo:boppy3',name:'Garden Lesson',elem:['cozy'],stat:'pow',mult:4.1,target:'all',weight:'standard',
     fx:[['st','stunned',1,'t'],['cure','amber','party'],['burn',3,'boppy']],
-    desc:'Tom wafts a bowl of extra-cayenne broth under Boppy’s nose, then hides behind an umbrella. Boppy sneezes a fireball across the whole stage. The biggest Cozy hit there is on every enemy; they see stars (lose a turn), Amber melts off the party, and Boppy’s Heartburn fills.'},
+    desc:'Boppy teaches Tom to plant tomatoes: stake, hole, seedling, water. Tom plants his upside down. Boppy fixes it, the vines shoot up, and giant tomatoes fly at every monster. He eats a pepper off his own vine. The biggest Cozy hit there is on every enemy; they see stars (lose a turn), Amber melts off the party, and Boppy\'s Heartburn fills.'},
     {id:'boppy3_dc',dc:'boppy3',partner:'boppy',tier:3,cost:75,flag:'tombo:boppy3',name:'Pepper Contest',elem:['cozy'],stat:'pow',mult:3.5,target:'row',weight:'standard',
     fx:[['st','gritdown',3,'t'],['steal','t'],['burn',1,'boppy']],
     desc:'Father and son eat hot peppers one after another, staring each other down. Tom sweats buckets; Boppy stays calm until his stomach rumbles, and they both breathe fire into the monsters. A big Cozy hit on a row that lowers their GRIT for 3 turns and steals a buff from each, and Boppy\'s Heartburn fills a little.'},

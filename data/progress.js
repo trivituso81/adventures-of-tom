@@ -7,7 +7,8 @@
 const B6={xpPerLevel:100,maxLevel:50,
   // Stamp Points, Polish Points, Remix Tickets, node costs and gates: B8 in data/abilities.js (Option 3).
   bossXp:100,           // a boss fight is one full level for everyone
-  tierXp:.05,tierXpMax:10};   // +5% XP per time that monster has been beaten (up to +50%)
+  tierXp:.05,tierXpMax:10,   // +5% XP per time that monster has been beaten (up to +50%)
+  overTaper:.1,overFloor:.2};   // -10% XP per level Tom is above a monster, never below 20%
 
 // ---- Stampcard path names. The slots (A1 to A6, B1 to B6), both versions of each and the Auto-Stamp route are in
 // data/abilities.js (B8_KITS). ----

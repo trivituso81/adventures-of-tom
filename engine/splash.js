@@ -1,8 +1,8 @@
 'use strict';
-// engine/splash.js — Launch screen before the title card: a dusk sky over the hills (no village),
-// the whole cast lined up for a group photo, and a choice of PART 1, PART 2, DEMO and BATTLE LAB.
-// DEMO opens the frozen demo build in demo/ (same tab). PART 1 swaps the panel to START NEW / LOAD / BACK; PART 2 is locked
-// (dashed, shakes) until Part 1 clear data exists, then lists the clear data to continue from. Picking fades into the town.
+// engine/splash.js — Launch screen before the title card: a dusk sky over the hills (no village), the whole cast
+// lined up for a group photo, and the menu: START NEW (Part 1, Part 2, Bonus, each with a chapter list), LOAD, and a
+// small ADMIN button (Demo, Battle Lab). Picking fades into the town. The title theme plays from the first tap until a
+// game actually begins (engine/music-clips.js).
 // Fun bits: a "wave" of hops left to right with a STARRING caption, Rose bouncing on Tom's shoulders,
 // Tom tossing Nara's tennis ball and Nara fetching it, hearts between Tom and TNB, fireflies, stars.
 const splash={active:false,t:0,sel:0,c:null,g:null,stars:[],flies:[],hearts:[],name:'',nameT:0,cycle:0,
@@ -10,14 +10,14 @@ const splash={active:false,t:0,sel:0,c:null,g:null,stars:[],flies:[],hearts:[],n
 
 // Cast, in wave order (left to right). row: 0 front, 1 back. fx: fraction of the stage width.
 const SPLASH_CAST=[
-  {id:'deedee',name:'DEEDEE',row:1,fx:.13},
-  {id:'grace',name:'GRACE',row:0,fx:.2},
-  {id:'boppy',name:'BOPPY',row:1,fx:.37},
-  {id:'tom',name:'TOM',row:0,fx:.5},
-  {id:'rose',name:'ROSE',row:0,fx:.5,rider:true},
-  {id:'tnb',name:'TNB',row:1,fx:.63},
-  {id:'nara',name:'NARA',row:0,fx:.81},
-  {id:'amy',name:'AMY',row:1,fx:.87}
+  {id:'amy',name:'AMY',row:0,fx:.14},
+  {id:'deedee',name:'DEEDEE',row:1,fx:.22},
+  {id:'grace',name:'GRACE',row:0,fx:.31},
+  {id:'boppy',name:'BOPPY',row:1,fx:.4},
+  {id:'tom',name:'TOM',row:0,fx:.51},
+  {id:'rose',name:'ROSE',row:0,fx:.51,rider:true},
+  {id:'tnb',name:'TNB',row:0,fx:.69},
+  {id:'nara',name:'NARA',row:1,fx:.87}
 ];
 const SPLASH_HOP=.42,SPLASH_STEP=.3;
 let FULL_GAME_OPEN=true;   // opened in C1 (2026-10-20): chapter 1 is playable
@@ -46,52 +46,85 @@ function startSplash() {
   requestAnimationFrame(splashFrame);
 }
 
-// Panel modes. launch: PART 1 / PART 2 / BONUS / DEMO / BATTLE LAB (a 2-column grid). start (PART 1): START NEW / LOAD / BACK.
-// part2 (PART 2): one choice per Part 1 clear data, LOAD, BACK. The game is one story in two Parts (engine/story.js PARTS):
-// Part 2 stays locked until this device has Part 1 clear data, and starts from it with everything carried over.
+// Panel menus. Each choice carries its own action (act) or a locked reason (why).
+//   launch: START NEW / LOAD, plus a small ADMIN button.
+//   new:    PART 1 / PART 2 / BONUS / BACK.   part1: chapters 1 to 10.   part2: chapters 11 to 20.   bonus: Nine Scoops.
+//   admin:  DEMO / BATTLE LAB / BACK.          lab: the Battle Lab fights.
+// Chapter 1 is a true new game; later chapters fast-forward the story (engine/chapter-select.js). Part 2 chapter 11
+// continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none.
+const SPLASH_PARENT={new:'launch',admin:'launch',part1:'new',part2:'new',bonus:'new',lab:'admin'};
+const splashSaveCount=()=>SAVE_SLOTS.filter(k=>readSave(k)).length;
+const splashBuilt=n=>n<=(typeof CHSEL_LAST==='number'?CHSEL_LAST:1)||n===PARTS[2].from;
+function splashChapterChoices(from,to) {
+  const out=[];
+  for(let n=from;n<=to;n++) {
+    const c=CHAPTERS[n]; if(!c) continue;
+    const built=splashBuilt(n);
+    if(!built) { out.push({name:'CH '+n,sub:c.title+' · Still being built.',cls:'locked',why:'Chapter '+n+' is still being built.'}); continue; }
+    let act,sub=c.title;
+    if(n===1) act=()=>splashGo(confirmNew);
+    else if(n===PARTS[2].from) {
+      const clr=partClearSlots();
+      sub+=clr.length?' · From your Part 1 clear data.':' · Test: as if Part 1 were done.';
+      act=()=>splashGo(clr.length?()=>confirmPart2(splashNewestClear(clr)):()=>confirmChapter(n));
+    } else {
+      sub+=' · '+(chselRegion(n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[n];
+      act=()=>splashGo(()=>confirmChapter(n));
+    }
+    out.push({name:'CH '+n,sub,act});
+  }
+  out.push({name:'BACK',sub:'',cls:'back',act:splashBack});
+  return out;
+}
+const splashNewestClear=slots=>slots.slice().sort((a,b)=>(readSave(b).when||0)-(readSave(a).when||0))[0];
 const SPLASH_MODES={
-  launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',choices:()=>{
-    const clr=partClearSlots().length;
+  launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',layout:'launch',choices:()=>{
+    const n=splashSaveCount();
     return [
-      FULL_GAME_OPEN?{name:'PART 1',sub:'Chapters 1 to 10. Start here.'}:{name:'PART 1',sub:'Coming soon. Still being built.',cls:'locked'},
-      clr?{name:'PART 2',sub:'Chapters 11 to 20. Continue from your Part 1 clear data.'}:{name:'PART 2',sub:'Chapters 11 to 20. Finish Part 1 to unlock.',cls:'locked'},
-      {name:'BONUS',sub:'Nine Scoops: Grace’s 9th birthday. Tom, Grace and Rose.'},
-      {name:'DEMO',sub:'The original Long Island and Los Angeles.'},
-      {name:'BATTLE LAB',sub:'Try every move and Tombo.'}]; }},
-  // Bonus chapters (data/bonus-nine-scoops.js): standalone, no Part 1 or Part 2 save needed. One entry per chapter, then LOAD and BACK.
-  bonus:{tab:'Bonus Chapter',cue:'A / Enter to pick. B / Esc to go back',choices:()=>{
-    const n=SAVE_SLOTS.filter(k=>readSave(k)).length;
-    return [{name:'NINE SCOOPS',sub:'Grace’s 9th birthday on Long Island. Tom, Grace and Rose. About 40 minutes.'},
-      {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')},
-      {name:'BACK',sub:'',cls:'back'}]; }},
-  part2:{tab:'Part 2',cue:'Pick the clear data to continue from. B / Esc to go back',choices:()=>[
-    ...partClearSlots().map((s,i)=>({name:'CLEAR DATA '+(i+1),sub:partClearSummary(readSave(s)),slot:s})),
-    {name:'LOAD',sub:'Continue a Part 2 save.'},
-    {name:'BACK',sub:'',cls:'back'}]},
-  // Test fights for the new battle (engine/battle2.js, B2_LAB in data/battle2-data.js). Remove when the full game opens.
-  lab:{tab:'Battle Lab',cue:'A / Enter to fight. B / Esc to go back',choices:()=>[...B2_LAB.map(L=>({name:L.name,sub:L.sub})),{name:'BACK',sub:'',cls:'back'}]},
-  start:{tab:'Part 1',cue:'A / Enter to pick. B / Esc to go back',choices:()=>{
-    const n=SAVE_SLOTS.filter(k=>readSave(k)).length;
-    return [{name:'START NEW',sub:'Begin with the opening scene.'},
-      {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():'')},
-      {name:'BACK',sub:'',cls:'back'}]; }}
+      {name:'START NEW',sub:'Pick a Part and a chapter.',to:'new'},
+      {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():''),act:()=>splashGo(loadMenu)},
+      {name:'ADMIN',cls:'admin',to:'admin'}]; }},
+  new:{tab:'Start New',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
+    FULL_GAME_OPEN?{name:'PART 1',sub:'Chapters 1 to 10. Start here.',to:'part1'}
+      :{name:'PART 1',sub:'Coming soon. Still being built.',cls:'locked',why:'Part 1 is still being built.'},
+    {name:'PART 2',sub:'Chapters 11 to 20.',to:'part2'},
+    {name:'BONUS',sub:'Nine Scoops: Grace’s 9th birthday. Tom, Grace and Rose.',to:'bonus'},
+    {name:'BACK',sub:'',cls:'back',act:splashBack}]},
+  part1:{tab:'Part 1: pick a chapter',cue:'A / Enter to start. B / Esc to go back',choices:()=>splashChapterChoices(PARTS[1].from,PARTS[1].to)},
+  part2:{tab:'Part 2: pick a chapter',cue:'A / Enter to start. B / Esc to go back',choices:()=>splashChapterChoices(PARTS[2].from,PARTS[2].to)},
+  // Bonus chapters (data/bonus-nine-scoops.js): standalone, no Part 1 or Part 2 save needed.
+  bonus:{tab:'Bonus Chapter',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
+    {name:'NINE SCOOPS',sub:'Grace’s 9th birthday on Long Island. Tom, Grace and Rose. About 80 minutes.',
+      act:()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew)},
+    {name:'BACK',sub:'',cls:'back',act:splashBack}]},
+  admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
+    {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
+    {name:'BATTLE LAB',sub:'Try every move and Tombo.',to:'lab'},
+    {name:'BACK',sub:'',cls:'back',act:splashBack}]},
+  // Test fights for the new battle (engine/battle2.js, B2_LAB in data/battle2-data.js).
+  lab:{tab:'Battle Lab',cue:'A / Enter to fight. B / Esc to go back',choices:()=>[
+    ...B2_LAB.map((L,i)=>({name:L.name,sub:L.sub,act:()=>splashLab(i)})),
+    {name:'BACK',sub:'',cls:'back',act:splashBack}]}
 };
-function splashSetMode(mode) {
-  splash.mode=mode; splash.sel=0;
-  const M=SPLASH_MODES[mode],el=$('splash');
+function splashSetMode(mode,sel=0) {
+  splash.mode=mode;
+  const M=SPLASH_MODES[mode],el=$('splash'),box=el.querySelector('.sp-choices');
   el.querySelector('.sp-tab').textContent=M.tab;
   $('sp-cue').textContent=M.cue;
-  const list=M.choices(); splash.list=list; el.querySelector('.sp-choices').classList.toggle('grid',list.length>3);
-  el.querySelector('.sp-choices').innerHTML=list.map((c,i)=>
+  const list=M.choices(); splash.list=list;
+  splash.sel=Math.max(0,Math.min(list.length-1,sel));
+  box.classList.toggle('grid',!M.layout&&list.length>3);
+  box.classList.toggle('launch',M.layout==='launch');
+  box.innerHTML=list.map((c,i)=>
     '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+'</span>'+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
   splashMark();
 }
 function splashMark() {
   document.querySelectorAll('#splash .sp-choice').forEach(b=>b.classList.toggle('sel',Number(b.dataset.i)===splash.sel));
 }
-// In the 2x2 grid, up and down move a whole row (dir is the pressed direction; d is -1 or 1).
+// In a 2-column grid, up and down move a whole row (dir is the pressed direction; d is -1 or 1).
 function splashMove(d,dir) {
-  const n=document.querySelectorAll('#splash .sp-choice').length||2;
+  const n=(splash.list||[]).length||2;
   const grid=document.querySelector('#splash .sp-choices.grid')&&(dir==='up'||dir==='down');
   if(grid) { let s=splash.sel+d*2; if(s<0) s=n-1; else if(s>=n) s=0; splash.sel=s; }
   else splash.sel=(splash.sel+d+n)%n;
@@ -99,43 +132,34 @@ function splashMove(d,dir) {
 }
 function splashPick(i) {
   if(!splash.active) return;
+  const c=(splash.list||[])[i]; if(!c) return;
   splash.sel=i; splashMark();
-  if(splash.mode==='start') {
-    if(i===2) { splashBack(); return; }
-    sfx.select(); splash.ret='start'; splashLeave(i===0?confirmNew:loadMenu);
-    return;
-  }
-  if(splash.mode==='part2') {
-    const c=(splash.list||[])[i]; if(!c) return;
-    if(c.cls==='back') { splashBack(); return; }
-    sfx.select(); splash.ret='part2'; splashLeave(c.slot?()=>confirmPart2(c.slot):loadMenu);
-    return;
-  }
-  if(splash.mode==='lab') {
-    if(i>=B2_LAB.length) { splashBack(); return; }
-    sfx.select(); unlockAudio(); splash.active=false;
-    const el=$('splash'); el.classList.add('out');
-    setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
-    b2Lab(i);
-    return;
-  }
-  if(splash.mode==='bonus') {
-    if(i===2) { splashBack(); return; }
-    sfx.select(); splash.ret='bonus'; splashLeave(i===0?(typeof confirmBonus==='function'?confirmBonus:confirmNew):loadMenu);
-    return;
-  }
-  if(i===2) { sfx.select(); splashSetMode('bonus'); return; }
-  if(i===3) { openDemo(); return; }
-  if(i===4) { sfx.select(); splashSetMode('lab'); return; }
-  const locked=i===0?!FULL_GAME_OPEN:!partClearSlots().length;
-  if(locked) {
+  if(c.cls==='locked') {
     sfx.nope(); splash.shakeT=.4;
     const b=document.querySelector('#splash .sp-choice[data-i="'+i+'"]');
     if(b) { b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); }
-    $('sp-cue').textContent=i===0?'Part 1 is still being built. Try the Demo!':'Finish Part 1 to unlock Part 2.';
+    $('sp-cue').textContent=c.why||'Not yet.';
     return;
   }
-  sfx.select(); splashSetMode(i===0?'start':'part2');
+  if(c.to) splashOpen(c.to); else if(c.act) c.act();
+}
+// Open a submenu (remembers where to land when coming back).
+function splashOpen(mode) { sfx.select(); splashSetMode(mode); }
+function splashBack() {
+  const up=SPLASH_PARENT[splash.mode]; if(!up) return;
+  const from=splash.mode; sfx.move();
+  splashSetMode(up);
+  const i=(splash.list||[]).findIndex(c=>c.to===from);
+  if(i>=0) { splash.sel=i; splashMark(); }
+}
+// Leave the title screen for a prompt over the town (new game warning, load list, chapter jump). BACK in that prompt
+// returns here, to the same menu and choice (splashReturn).
+function splashGo(next) { sfx.select(); unlockAudio(); splash.ret=splash.mode; splash.retSel=splash.sel; splashLeave(next); }
+function splashLab(i) {
+  sfx.select(); unlockAudio(); splash.active=false;
+  const el=$('splash'); el.classList.add('out');
+  setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
+  b2Lab(i);
 }
 // The demo is its own frozen copy of the game in demo/, with its own saves (the le-save-* keys).
 function openDemo() {
@@ -143,7 +167,6 @@ function openDemo() {
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('demo/index.html',location.href).href; },250);
 }
-function splashBack() { if(splash.mode==='start'||splash.mode==='lab'||splash.mode==='part2'||splash.mode==='bonus') { sfx.move(); splashSetMode('launch'); } }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {
   const el=$('splash'); if(!el) return;
@@ -151,18 +174,18 @@ function splashToLab() {
   splash.active=true; splashSetMode('lab');
   splash.last=performance.now(); requestAnimationFrame(splashFrame);
 }
-// Fade the title screen out over the town and run next (confirmNew or loadMenu) there.
+// Fade the title screen out over the town and run next there.
 function splashLeave(next) {
   splash.active=false;
   const el=$('splash'); el.classList.add('out');
   startTitle(next);
   setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
 }
-// BACK from the load list or the new-game warning: return to the title screen.
+// BACK from the load list or a start warning: return to the title screen where the player was.
 function splashReturn() {
   const el=$('splash'); if(!el) return false;
   el.hidden=false; el.classList.remove('out');
-  splash.active=true; splashSetMode(splash.ret==='part2'&&partClearSlots().length?'part2':splash.ret==='bonus'?'bonus':'start');
+  splash.active=true; splashSetMode(SPLASH_MODES[splash.ret]?splash.ret:'launch',splash.retSel||0);
   splash.last=performance.now(); requestAnimationFrame(splashFrame);
   return true;
 }
@@ -173,6 +196,8 @@ function splashPad(dir,dirEdge,A,B) {
   if(A) splashPick(splash.sel);
   else if(B) splashBack();
 }
+// iPhone only lets sound start from a tap: unlock on the release of any tap too (touchend and click count there).
+for(const ev of ['touchend','click']) window.addEventListener(ev,unlockAudio,{passive:true});
 window.addEventListener('keydown',e=>{
   if(!splash.active) return;
   if(e.code==='KeyL') return; // rotate still works
@@ -231,7 +256,7 @@ function splashUpdate(dt) {
 function splashThrow() {
   const L=splash.L,n=splash.nara; if(!L) return;
   const tom=L.pos.tom;
-  n.ball={x0:tom.x+L.S*8,y0:tom.y-L.S*30,x1:splashW()*1.1,y1:L.frontFy-L.S*2,arc:L.S*60,dur:1.1,t:0,x:0,y:0};
+  n.ball={x0:tom.x+L.S*8,y0:tom.y-L.S*30,x1:splashW()*1.1,y1:(L.naraFy||L.frontFy)-L.S*2,arc:L.S*60,dur:1.1,t:0,x:0,y:0};
   n.state='wait'; n.t=0; splash.name='NARA'; splash.nameT=0;
   sfx.whoosh&&sfx.whoosh();
 }
@@ -338,50 +363,49 @@ function splashScene(W,H,panelH,time) {
   };
   const shadow=(cx,feet,fw,lift)=>{ gfx.globalAlpha=Math.max(.15,.35-lift/(S*60)); ellipse(cx,feet+S,Math.round(fw*S*.42*(1-lift/(S*40))),Math.max(2,S*2),'#203b32'); gfx.globalAlpha=1; };
   const breath=k=>Math.floor((time*1.6+k)%2); // idle bob: up one pixel every other beat
-  for(const m of SPLASH_CAST.filter(m=>m.row===1)) {
-    const set=OW[m.id],cx=X(m.fx),lift=hopY(m)+breath(m.fx*5)*S*0;
+  const naraM=by('nara'),naraFy=naraM.row===1?backFy:frontFy; L.naraFy=naraFy;
+  for(const m of SPLASH_CAST.filter(m=>m.row===1&&m.id!=='nara')) {
+    const set=OW[m.id],cx=X(m.fx),lift=hopY(m);
     shadow(cx,backFy,set.down[0][0].length,lift);
     drawOne(set,m.hopT>=0?1:0,cx,backFy,lift);
     L.pos[m.id]={x:cx,y:backFy};
   }
-  // Hearts between Tom and TNB.
-  // Front row.
-  const tom=by('tom'),rose=by('rose'),grace=by('grace'),naraM=by('nara');
-  {
-    const set=OW.grace,cx=X(grace.fx),lift=hopY(grace);
-    shadow(cx,frontFy,set.down[0][0].length,lift); drawOne(set,grace.hopT>=0?2:0,cx,frontFy,lift);
-  }
-  {
-    const cx=X(tom.fx),lift=hopY(tom);
-    shadow(cx,frontFy,OW.tom.down[0][0].length,lift);
-    // Rose sits on Tom's shoulders (engine/rose-ride.js); she bounces on her own turn and a little all the time.
-    const tf=OW.tom.down[tom.hopT>=0?2:0],top=frontFy-tf.length*S-lift,rb=hopY(rose)+(Math.floor(time*3)%2)*S;
-    roseRide('ow_down','back',cx,top-rb,S);
-    drawOne(OW.tom,tom.hopT>=0?2:0,cx,frontFy,lift);
-    roseRide('ow_down','front',cx,top-Math.min(rb,S),S);
-    L.pos.tom={x:cx,y:frontFy-lift};
-  }
-  // Nara: idle at her spot, or running for the ball.
-  {
+  // Nara: idle at her spot, or running for the ball (drawn with her row, so the front row stands in front of her).
+  const drawNara=()=>{
     const n=splash.nara,home=X(naraM.fx),cx=home+Math.round(n.x),lift=n.state==='idle'?hopY(naraM):Math.abs(Math.round(Math.sin(time*18)*S*2));
     L.naraHome=home; const set=OW.nara,run=n.state==='out'||n.state==='back';
     const frame=run?1+Math.floor(time*10)%2:(naraM.hopT>=0?1:0);
-    shadow(cx,frontFy,run?set.side[0][0].length:set.down[0][0].length,lift);
-    drawOne(set,frame,cx,frontFy,lift,run?false:undefined);
+    shadow(cx,naraFy,run?set.side[0][0].length:set.down[0][0].length,lift);
+    drawOne(set,frame,cx,naraFy,lift,run?false:undefined);
     if(n.carry) { // ball in her mouth (she faces right)
-      const bx=cx+Math.round(set.side[0][0].length*S*.42),bY=frontFy-Math.round(set.side[0].length*S*.55)-lift;
+      const bx=cx+Math.round(set.side[0][0].length*S*.42),bY=naraFy-Math.round(set.side[0].length*S*.55)-lift;
       splashBall(bx,bY,S);
     }
     if(n.state==='idle'&&!run&&Math.floor(time*1.2)%5===0) { // wag: a tiny excited hop now and then
-      const k=(time*1.2)%1; if(k<.3) label('!',cx+S*12,frontFy-set.down[0].length*S-S*8,'#fff1cb',S);
+      const k=(time*1.2)%1; if(k<.3) label('!',cx+S*12,naraFy-set.down[0].length*S-S*8,'#fff1cb',S);
     }
+  };
+  if(naraM.row===1) drawNara();
+  // Front row, left to right. Rose rides on Tom's shoulders (engine/rose-ride.js); she bounces on her own turn.
+  const rose=by('rose');
+  for(const m of SPLASH_CAST.filter(m=>m.row===0&&!m.rider&&m.id!=='nara')) {
+    const cx=X(m.fx),lift=hopY(m),set=OW[m.id],fr=m.hopT>=0?2:0;
+    shadow(cx,frontFy,set.down[0][0].length,lift);
+    if(m.id==='tom') {
+      const tf=set.down[fr],top=frontFy-tf.length*S-lift,rb=hopY(rose)+(Math.floor(time*3)%2)*S;
+      roseRide('ow_down','back',cx,top-rb,S);
+      drawOne(set,fr,cx,frontFy,lift);
+      roseRide('ow_down','front',cx,top-Math.min(rb,S),S);
+    } else drawOne(set,set.down[fr]?fr:0,cx,frontFy,lift);
+    L.pos[m.id]={x:cx,y:frontFy-lift};
   }
+  if(naraM.row!==1) drawNara();
   if(splash.nara.ball) splashBall(splash.nara.ball.x,splash.nara.ball.y,S);
   // Hearts float up between Tom and TNB.
   const tnb=L.pos.tnb,tp=L.pos.tom;
   if(tnb&&tp) for(const hrt of splash.hearts) {
     if(hrt.t<0) continue;
-    const u=hrt.t/1.6,x=Math.round((tp.x+tnb.x)/2+hrt.dx*S*20+Math.sin(hrt.t*6)*S*2),y=Math.round(backFy-S*50-u*S*30);
+    const u=hrt.t/1.6,x=Math.round((tp.x+tnb.x)/2+hrt.dx*S*20+Math.sin(hrt.t*6)*S*2),y=Math.round(frontFy-S*62-u*S*30);
     gfx.globalAlpha=1-u; drawHeart(x,y,Math.max(1,S)); gfx.globalAlpha=1;
   }
 }

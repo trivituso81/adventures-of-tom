@@ -38,7 +38,7 @@ function bestFor(m,slot) {
   for(const id of gearOptions(m,slot)) { const s=gearScore(items[id]); if(s>bs) { best=id; bs=s; } }
   return best;
 }
-const hasUpgrade=m=>SLOTS.some(s=>bestFor(m,s));
+const hasUpgrade=m=>wearSlots(m).some(s=>bestFor(m,s));
 function gearTotals(m,swapSlot,swapId) {
   const t={};
   for(const k of GEAR_KEYS) {
@@ -94,7 +94,7 @@ function menuTakeOff(m,slot) {
 }
 function equipBest(m) {
   const before=gearTotals(m),put=[];
-  for(const s of SLOTS) { const id=bestFor(m,s); if(id&&equipTo(m,id)) put.push(items[id].name); }
+  for(const s of wearSlots(m)) { const id=bestFor(m,s); if(id&&equipTo(m,id)) put.push(items[id].name); }
   if(!put.length) { sfx.nope(); showToast(m.name+' is already wearing the best gear in the pockets.',2.2); return; }
   sfx.equip(); syncHeroHat();
   const after=gearTotals(m);
@@ -103,7 +103,7 @@ function equipBest(m) {
   menuSlot=null; renderMenu();
 }
 function removeAll(m) {
-  const off=SLOTS.filter(s=>m.equipment[s]);
+  const off=wearSlots(m).filter(s=>m.equipment[s]);
   if(!off.length) { sfx.nope(); return; }
   for(const s of off) { bag.push(m.equipment[s]); m.equipment[s]=null; }
   sfx.unequip(); syncHeroHat();
@@ -274,12 +274,12 @@ function renderGearTab(body,m) {
   const acts=el('div','gear-acts');
   const up=hasUpgrade(m);
   acts.appendChild(btn('menu-act primary'+(up?'':' dim'),'best','★ BEST GEAR',()=>equipBest(m)));
-  acts.appendChild(btn('menu-act'+(SLOTS.some(s=>m.equipment[s])?'':' dim'),'strip','REMOVE ALL',()=>removeAll(m)));
+  acts.appendChild(btn('menu-act'+(wearSlots(m).some(s=>m.equipment[s])?'':' dim'),'strip','REMOVE ALL',()=>removeAll(m)));
   side.appendChild(acts);
   wrap.appendChild(side);
 
   const list=el('div','slot-list');
-  for(const slot of SLOTS) {
+  for(const slot of wearSlots(m)) {
     const id=m.equipment[slot],it=id?items[id]:null,open=menuSlot===slot,better=bestFor(m,slot);
     const opts=gearOptions(m,slot);
     const row=btn('slot-row'+(open?' open':''),'slot-'+slot,'',()=>{ sfx.tab(); menuSlot=open?null:slot; menuFocusNext=menuKeyNav?(open?'slot-'+slot:(opts[0]?'cand-'+slot+'-'+opts[0]:'slot-'+slot)):null; renderMenu(); });

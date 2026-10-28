@@ -31,9 +31,33 @@ const PENNY={
   bought:['Pleasure doing business.','Good choice. I\'d have picked that one too.','Into the pockets it goes.','Ka-ching. That\'s my favorite sound.'],
   sold:['Sold! I know just the shelf.','A fine addition to my collection.','Half price, full gratitude.'],
   broke:['Not enough coins. Grump Hollow pays, in a way.','Short on coins. The monsters up north are carrying some.'],
-  keep:['I could never. That\'s a family thing.','Not for sale. Some things are priceless.','Put that back in your pocket. It\'s special.']
+  keep:['I could never. That\'s a family thing.','Not for sale. Some things are priceless.','Put that back in your pocket. It\'s special.'],
+  // Shop tiers: what the shopkeeper says about the shelves that open after chapters 3, 6 and 9 (see SHOP_TIER_GATES in data/party.js).
+  fresh:['New shipment! The crates are still warm. Come see the good shelf.','Fresh stock, and it\'s a big step up. I\'m a little emotional.','The top shelf, finally. I\'ve been saving it for you. Look.'],
+  tierTab:{
+    gear:['The new shelf: sturdier, shinier, still gently priced. Twice the coins, more than twice the gear.','The grown-up shelf. Gear for people who actually fight things.','Top shelf. Everything up here has a story and a warranty. Sort of.'],
+    healing:['Bigger bandages and a real picnic. Same pockets, more fixing.','The med kit has a flashlight now. Don\'t ask me why that helps.','Feast-grade snacks. Deedee called to approve them personally.'],
+    battle:['The Confetti Cannon is new. Please aim it away from my shelves.','Fireworks. Legally a gray area. Emotionally, a gift.','The Finale Rocket. Hold it like it owes you money.']}
 };
 let shopOpen=false,shopMode='buy',shopTab='tom',shopNote='';
+
+// ---------- Shop tiers ----------
+// Tiers unlock on the chapter-clear flags (a later chapter number also opens them, for chapter select and finished saves).
+const shopTierLevel=()=>{ let n=0; SHOP_TIER_GATES.forEach((c,i)=>{ if(STORY.chapter>c||flag('ch'+c+'-clear')) n=i+1; }); return n; };
+// What a tab sells: unlocked tier rows (newest first), then the base shelf.
+function shopStockFor(tab) {
+  const lv=shopTierLevel(),tiers=SHOP_TIER_STOCK[tab]||[],out=[];
+  for(let t=lv-1;t>=0;t--) out.push(...(tiers[t]||[]));
+  return out.concat(SHOP_STOCK[tab]);
+}
+const shopTierIds=tab=>{ const lv=shopTierLevel(),a=[]; for(let t=0;t<lv;t++) a.push(...((SHOP_TIER_STOCK[tab]||[])[t]||[])); return a; };
+const shopIsNew=id=>!!items[id].tier&&!flag('shopseen:'+id);
+const shopTabHasNew=tab=>shopTierIds(tab).some(shopIsNew);
+const shopAnyNew=()=>SHOP_TABS.some(t=>shopTabHasNew(t.id));
+const shopPrice=it=>it.price||it.shopPrice||0;
+// Every shelf has been seen once the shop closes; the NEW tags go away then.
+function shopMarkSeen() { for(const t of SHOP_TABS) for(const id of shopTierIds(t.id)) if(!flag('shopseen:'+id)) setFlag('shopseen:'+id); }
+const shopTierLine=kind=>{ const lv=shopTierLevel(); if(!lv) return ''; const k=SHOPK||PENNY,tt=(k.tierTab||PENNY.tierTab)[kind]; return tt?tt[lv-1]:''; };
 // The shopkeeper's lines: Penny on Long Island, her cousin Nickel in Los Angeles (npc.shopLines).
 let SHOPK=null;
 
@@ -57,7 +81,7 @@ function openShop(note) {
   sfx.menuOpen();
   shopMode='buy';
   if(!SHOP_STOCK[shopTab]) shopTab='tom';
-  shopNote=note||pick((SHOPK||PENNY).hello);
+  shopNote=(shopAnyNew()&&((SHOPK||PENNY).fresh||PENNY.fresh)[shopTierLevel()-1])||note||pick((SHOPK||PENNY).hello);
   renderShop();
   $('shop').hidden=false;
   $('shop-close').focus();
@@ -65,6 +89,7 @@ function openShop(note) {
 function closeShop() {
   if(!shopOpen) return;
   shopOpen=false;
+  shopMarkSeen();
   sfx.menuClose();
   $('shop').hidden=true;
   saveGame('auto',true);
@@ -102,12 +127,13 @@ function shopButton(text,cls,fn) {
 }
 
 function shopRow(id,{meta,note,noteCls,buttons,tag}) {
-  const item=items[id];
+  const item=items[id],fresh=shopIsNew(id);
   const row=document.createElement('div');
   row.className='item-row shop-row';
   row.innerHTML='<span class="item-icon">'+item.icon+(item.color?'<i class="swatch" style="background:'+item.color+'"></i>':'')+'</span>'+
     '<span class="item-copy"><span class="item-name"></span><span class="item-meta"></span><span class="shop-note"></span></span><span class="shop-actions"></span>';
   row.querySelector('.item-name').textContent=item.name;
+  if(fresh) { const nb=document.createElement('span'); nb.className='shop-new'; nb.textContent='NEW'; row.querySelector('.item-name').appendChild(nb); }
   row.querySelector('.item-meta').textContent=meta;
   const n=row.querySelector('.shop-note');
   if(note) { n.textContent=note; if(noteCls) n.classList.add(noteCls); } else n.remove();
@@ -119,11 +145,12 @@ function shopRow(id,{meta,note,noteCls,buttons,tag}) {
 
 function buyItem(id) {
   const item=items[id];
-  if(coins<item.price) { sfx.nope(); shopNote=pick((SHOPK||PENNY).broke); renderShop(); return; }
-  coins-=item.price;
+  const cost=shopPrice(item);
+  if(coins<cost) { sfx.nope(); shopNote=pick((SHOPK||PENNY).broke); renderShop(); return; }
+  coins-=cost;
   bag.push(id);
   sfx.coin();
-  shopNote='Bought '+item.name+' for '+item.price+' coins. '+pick((SHOPK||PENNY).bought);
+  shopNote=cost?'Bought '+item.name+' for '+cost+' coins. '+pick((SHOPK||PENNY).bought):item.name+' is on the house. '+pick((SHOPK||PENNY).free||['Happy birthday. No charge. Don\'t tell the other shelves.']);
   renderShop();
 }
 function wearItem(m,id) {
@@ -155,6 +182,7 @@ function renderShop() {
     b.type='button'; b.className='shop-tab'+(t.cat?' cat':'')+(t.id===shopTab?' active':'');
     b.textContent=t.label;
     if(!t.cat&&inParty(memberById(t.id))) { const d=document.createElement('i'); d.className='in-party'; b.appendChild(d); }
+    if(shopTabHasNew(t.id)) { const d=document.createElement('i'); d.className='shop-new-dot'; b.appendChild(d); }
     b.addEventListener('click',()=>{ if(shopTab!==t.id) sfx.tab(); shopTab=t.id; shopNote=''; renderShop(); });
     tabs.appendChild(b);
   });
@@ -189,31 +217,31 @@ function renderShop() {
   if(tab.cat) {
     head.hidden=true; icon.hidden=false; icon.textContent=shopTab==='healing'?'\u{1FA79}':'\u{1F388}';
     $('shop-subtitle').textContent=shopTab==='healing'?'HEALING · HP, VP AND WAKE-UPS':'BATTLE ITEMS · USE FROM THE SNACK BAG IN A FIGHT';
-    for(const id of SHOP_STOCK[shopTab]) {
-      const it=items[id],n=countInBag(id),afford=coins>=it.price;
+    for(const id of shopStockFor(shopTab)) {
+      const it=items[id],n=countInBag(id),afford=coins>=shopPrice(it);
       list.appendChild(shopRow(id,{meta:it.desc,note:effectText(it).replace('Battle: ','')+(n?' · '+n+' in pockets':''),noteCls:'fx',
-        buttons:[shopButton('\u{1FA99}'+it.price,'buy'+(afford?'':' poor'),()=>buyItem(id))]}));
+        buttons:[shopButton(shopPrice(it)?'\u{1FA99}'+shopPrice(it):'FREE','buy'+(afford?'':' poor'),()=>buyItem(id))]}));
     }
   } else {
     const m=memberById(shopTab);
     head.hidden=false; icon.hidden=true;
     drawPortrait(m,'shop-portrait');
     $('shop-subtitle').textContent='GEAR FOR '+m.name.toUpperCase()+' · '+(inParty(m)?'IN THE PARTY':'AT HOME, WEARS IT WHEN RECRUITED');
-    for(const id of SHOP_STOCK[shopTab]) {
-      const it=items[id],owner=wornBy(id),inBag=countInBag(id)>0,afford=coins>=it.price;
+    for(const id of shopStockFor(shopTab)) {
+      const it=items[id],owner=wornBy(id),inBag=countInBag(id)>0,afford=coins>=shopPrice(it);
       const c=compareText(m,it);
       const buttons=[];
       let tag=null;
       if(owner===m) tag='WORN';
       else if(inBag) buttons.push(shopButton('WEAR','wear',()=>wearItem(m,id)));
       else if(owner) tag=owner.name.toUpperCase()+' HAS IT';
-      else buttons.push(shopButton('\u{1FA99}'+it.price,'buy'+(afford?'':' poor'),()=>buyItem(id)));
-      list.appendChild(shopRow(id,{meta:SLOT_LABEL[it.slot].toUpperCase()+' · '+bonusText(it)+'. '+it.desc,
+      else buttons.push(shopButton(shopPrice(it)?'\u{1FA99}'+shopPrice(it):'FREE','buy'+(afford?'':' poor'),()=>buyItem(id)));
+      list.appendChild(shopRow(id,{meta:(it.shopPrice?'GOLD ':'')+SLOT_LABEL[it.slot].toUpperCase()+' · '+bonusText(it)+'. '+it.desc,
         note:owner===m?'':c.text,noteCls:c.up>0?'up':(c.up<0?'down':''),buttons,tag}));
     }
   }
   body.appendChild(list);
-  $('shop-foot').textContent=shopNote||(tab.cat?(SHOPK||PENNY).tab[shopTab]:(SHOPK||PENNY).gear(shopTab)+' Bought gear goes in the pockets; tap WEAR to put it on.');
+  $('shop-foot').textContent=shopNote||(tab.cat?(SHOPK||PENNY).tab[shopTab]+' '+shopTierLine(shopTab):(SHOPK||PENNY).gear(shopTab)+' '+shopTierLine('gear')+' Bought gear goes in the pockets; tap WEAR to put it on.').replace(/\s+/g,' ').trim();
 }
 
 for(const b of document.querySelectorAll('.shop-mode'))

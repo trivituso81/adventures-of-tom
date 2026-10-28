@@ -987,7 +987,9 @@ const LE_ROOMS=[
           'Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.',
           'Sunday dinner is at five. Five means four thirty.',
           'I just cleaned the floors. Shoes OFF.',
-          "A little glass of wine with dinner. Just one. Nurse's orders."],
+          "A little glass of wine with dinner. Just one. Nurse's orders.",
+          'Have you seen my reading glasses? I had them a minute ago. I\'ve looked everywhere. Twice.',
+          'Found my glasses. They were in the fridge. Don\'t ask. Who wants a cookie?'],
         hug:[
           'Hugs for everyone. There. All better.',
           'Hugs for everyone, just because. To the moon and back.']},
@@ -1021,9 +1023,10 @@ const LE_ROOMS=[
           'I\'m not feeling good. I was fine an hour ago. Then I had a pepper.',
           'Slow down, Tom. Who walks this fast? I was a champion runner and I never walked this fast.',
           'Deedee says I\'m not allowed near the pond. The pond says otherwise.',
-          'Grace, Rose, who\'s the strongest grandpa? Correct. Now help me up.']}],
+          'Grace, Rose, who\'s the strongest grandpa? Correct. Now help me up.',
+          'She\'s looking for her glasses again. They\'re on her head. I\'m not saying anything. I\'m saying it to you.']}],
     objects:[
-      ['recliner',1,1,2,2,"Boppy's recliner",'Don\'t sit in it. Everyone has tried. Everyone has been told. There\'s a heating pad.'],
+      ['recliner',1,1,2,2,"Boppy's recliner",'Don\'t sit in it. Everyone has tried. Everyone has been told. There\'s a heating pad. And one pair of Deedee’s reading glasses, down the side. She\'s looked for these.'],
       ['tv',5,1,3,1,'The TV','The fishing channel. It\'s been on since 1994.'],
       ['counter',1,7,4,1,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
       ['photo',9,7,1,1,'Photo wall','Tom at six. Amy at four. Boppy in his college track singlet, holding a trophy. Another one with a fish.'],

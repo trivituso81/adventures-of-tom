@@ -100,6 +100,7 @@ function b2ResetStage() {
   BATTLE_POS.length=0; for(const q of ([null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B2.party.length]||BATTLE_POS4)) BATTLE_POS.push(q);
   if(typeof RFX!=='undefined') RFX.reset();
   for(const f of battle.fx) { for(const k in f) if(typeof f[k]==='number') f[k]=0; f.poseK=''; f.path=null; f.koAt=null; f.levelUp=false; }
+  if(B2.staged&&typeof b2Unstage==='function') b2Unstage(true);
   Object.assign(battle,{props:[],hose:null,lift:null,enemyAtkDown:0,missing:false,pops:[],time:0,shakeEnemy:0,flashEnemy:0,enemyLunge:0,slash:0,vapor:0,
     enemyStunned:0,block:null,vaporParts:[],enemyGone:true,enemyKnock:0,laser:null,boop:null,fireball:null,tetris:null,texts:[],actor:0,actorPos:null});
   clearBattleQueue(); clearInput();
@@ -359,6 +360,7 @@ function b2ApplyEntry(e,amt) {
   if(t.hp<=0) b2FoeDown(t); else b2CheckPhase(t);
 }
 function b2FinishMove() {
+  if(B2.staged) { const ms=b2Unstage(); if(ms) { enqueue(ms,()=>b2FinishMove()); return; } }   // Tombo pair walks home first
   const M=B2.move; if(!M) return b2AfterAction();
   for(const w of M.waves) for(const e of w) if(e.done<e.dmg||e.first) b2ApplyEntry(e,e.dmg-e.done);
   const steps=[];

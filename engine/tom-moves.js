@@ -840,7 +840,7 @@ Tm.cart_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
 // Tom's review: things Tom actually does (games, sourdough, gadgets, flying, Japanese), one big readable moment per move.
-// Button Mash (basic), Starter Splash, Crumb Shot, Mint Unboxing, Noise-Canceling, Window Seat, Flashcard Flurry,
+// Press Start (basic), Starter Splash, Crumb Shot, Mint Unboxing, Noise-Canceling, Window Seat, Flashcard Flurry,
 // Konami Code, Save Point Sandwich (kept; big spinning crystal and a save chime), Kanji Strike. Same numbers as the
 // slots they replace. Same engine/stage.js standard; scenes prefix tv_. The older functions above stay for the old keys.
 (function(){
@@ -897,7 +897,7 @@ const pad=(x,y,sc,lit)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   const dp=(dx,dy,w,h,k)=>R(-11+dx,-1+dy,w,h,lit===k?GOLD:INK); dp(-3,-4,4,3,'U'); dp(-3,2,4,3,'D'); dp(-6,-1,3,4,'L'); dp(1,-1,3,4,'R'); R(-12,-3,2,2,INK); R(-10,-1,2,2,INK);
   E(9,1,3,3,lit==='B'?GOLD:'#f0c040'); E(15,-2,3,3,lit==='A'||lit===true?GOLD:RED); R(-3,-5,6,2,'#3a3f46'); gfx.restore(); };
 
-// ---------- Button Mash (basic) ----------
+// ---------- Press Start (basic) ----------
 // He kneels in front of the monster with a giant controller and mashes. A tiny cloud of A's, a combo counter climbing
 // over the monster (x2 ... x16), then the last press lands one big hit: COMBO x16.
 SC.tv_mash=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.95);
@@ -1534,7 +1534,7 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
     ['hf',reveal],
     [reveal,()=>{ E2.apply(); S('ding'); ST.jolt(t,.2); scene('tv_big',1.3,{x:F.x,y:F.top-74,txt:kind?'GOOD JOB!':'WEAK SPOT!',c:GOLD,sc:3}); }],
     [4200,'end',kind?kindLine(t):'Pencils down. The answers are showing.']]); };
-// ---------- Button Mash (basic), rebuilt 2026-10-27: one button, no signal, the controller gets thrown ----------
+// ---------- Press Start (basic), rebuilt 2026-10-27: one button, no signal, the controller gets thrown ----------
 // Tom stays at his spot. He presses one button on a wireless controller, nothing happens (a little signal icon with a red
 // cross), he says it is not connecting, and he throws the controller at the monster. Same numbers: free, +1 VP.
 const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);

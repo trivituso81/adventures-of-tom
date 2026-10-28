@@ -16,8 +16,8 @@ const B8_SLOTS=['A1','A2','A3','A4','A5','A6','B1','B2','B3','B4','B5','B6'];
 const B8_KITS={
   tom:{
     basic:{play:'mash',
-      p:{key:"button_mash",name:"Button Mash",src:1,vp:0,elem:["kinetic"],desc:"Tom presses one button. Nothing connects. He throws the controller. Recover 1 VP."},
-      r:{key:"rx_mash",name:"Button Mash",src:2,vp:0,elem:["kinetic"],desc:"Tom calmly taps a wireless controller while a 16-bit cursor bonks the target. Costs 0 VP."}},
+      p:{key:"button_mash",name:"Press Start",src:1,vp:0,elem:["kinetic"],desc:"Tom presses one button. Nothing connects. He throws the controller. Recover 1 VP."},
+      r:{key:"rx_mash",name:"Press Start",src:2,vp:0,elem:["kinetic"],desc:"Tom calmly taps a wireless controller while a 16-bit cursor bonks the target. Costs 0 VP."}},
     sig:{play:'defend',
       p:{key:"defend",name:"DEFEND",src:1,vp:1,elem:[],desc:"Tom steps in front of an ally. No touching, please."},
       r:{key:"rx_defend",name:"DEFEND",src:2,vp:1,elem:["kinetic"],desc:"Tom steps straight in front of an ally, taking their hits for 1 turn and earning 1 Upgrade Mile."}},
@@ -221,7 +221,7 @@ const B8_KITS={
       p:{key:"sunday_ult",name:"Sunday Roast Spread",src:2,vp:8,elem:["cozy"],desc:"Ultimate. The dinner bell rings, a kitchen whirlwind hits every enemy, and the family sits down at the eight-seat table. Heals the party 60%, clears their debuffs, and fills the tray with 3 Hot Dishes."},
       r:{key:"rx_open_visiting",name:"Open Visiting Hours",src:1,vp:8,elem:["cozy"],desc:"Open a place where nobody has to recover alone. Heal the party, clear debuffs, and fill the Warm Crust tray."}},
     B1:{play:'walk',
-      p:{key:"brisk_means_brisk",name:"Brisk Means Brisk",src:1,vp:2,elem:["kinetic"],desc:"Take one very brisk pass through an enemy. Act again quickly."},
+      p:{key:"brisk_means_brisk",name:"Brisk Walk",src:1,vp:2,elem:["kinetic"],desc:"Take one very brisk pass through an enemy. Act again quickly."},
       r:{key:"rx_powerwalk",name:"Power Walk",src:2,vp:2,elem:["kinetic"],desc:"Deedee pumps her light hand-weights and power-walks right over an enemy, boosting her own PEP and pulling her next turn up 25%."}},
     B2:{play:null,
       p:{key:"garden_shower",name:"Garden Shower",src:1,vp:3,elem:["splash"],desc:"Water an enemy row rather more thoroughly than expected. Delay its next turns."},
@@ -381,9 +381,9 @@ const B8_LEGACY={'tom': [['starter', 'dutch', 'unbox', 'delta'], ['flashcard', '
 // Director's Cut is the B2_TOMBOS row id+'_dc'. r names follow claude/tombo-review.md (Director's Cut rows).
 // The Director's Cut opens when the tier is story-unlocked (flag) and every participant is level 30 (b8DcOpen).
 const B8_COMBOS=[
-  {id:'grace1',flag:'tombo:grace1',who:['tom', 'grace'],barrier:null,p:{key:'tombo_grace_review',name:"Hi Guys, Welcome Back!",src:1},r:{key:'dc_tb_grace_1',name:"Smash That Like Button",src:2}},
+  {id:'grace1',flag:'tombo:grace1',who:['tom', 'grace'],barrier:null,p:{key:'tombo_grace_review',name:"Squishy Delivery",src:1},r:{key:'dc_tb_grace_1',name:"Smash That Like Button",src:2}},
   {id:'grace2',flag:'tombo:grace2',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_2',name:"Uncle Spotter Toss",src:2},r:{key:'dc_tombo_grace_spotter',name:"Judge Grace",src:1}},
-  {id:'grace3',flag:'tombo:grace3',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_3',name:"Bedazzle Everything",src:2},r:{key:'dc_tombo_grace_no_props',name:"Shadow Squishy",src:1}},
+  {id:'grace3',flag:'tombo:grace3',who:['tom', 'grace'],barrier:null,p:{key:'tb_grace_3',name:"The Golden Dumpling Wish",src:2},r:{key:'dc_tombo_grace_no_props',name:"Shadow Squishy",src:1}},
   {id:'rose1',flag:'tombo:rose1',who:['tom', 'rose'],barrier:null,p:{key:'tb_rose_1',name:"Double-Decker Airplane",src:2},r:{key:'dc_tombo_rose_clouds',name:"That Cloud Is Lamby",src:1}},
   {id:'rose2',flag:'tombo:rose2',who:['tom', 'rose'],barrier:null,p:{key:'tombo_rose_customs',name:"Seat 1A Stowaway",src:1},r:{key:'dc_tb_rose_2',name:"Princess and Her Bodyguard",src:2}},
   {id:'rose3',flag:'tombo:rose3',who:['tom', 'rose'],barrier:null,p:{key:'tb_rose_3',name:"Headphones in the Dark",src:2},r:{key:'dc_tombo_rose_headphones',name:"Lamby Night-Light",src:1}},
@@ -394,7 +394,7 @@ const B8_COMBOS=[
   {id:'deedee2',flag:'tombo:deedee2',who:['tom', 'deedee'],barrier:null,p:{key:'tombo_deedee_recipe',name:"Pick the Rhubarb",src:1},r:{key:'dc_tb_deedee_2',name:"Library Vault Lantern",src:2}},
   {id:'deedee3',flag:'tombo:deedee3',who:['tom', 'deedee'],barrier:null,p:{key:'tombo_deedee_open_door',name:"Tom Cooks for Mom",src:1},r:{key:'dc_tb_deedee_3',name:"Feast on Jefferson Park",src:2}},
   {id:'boppy1',flag:'tombo:boppy1',who:['tom', 'boppy'],barrier:null,p:{key:'tombo_boppy_net',name:"You Hold the Net",src:1},r:{key:'dc_tb_boppy_1',name:"Quiet on Cattail Pier",src:2}},
-  {id:'boppy2',flag:'tombo:boppy2',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_2',name:"Nobody Gets Past Us",src:2},r:{key:'dc_tombo_boppy_untangle',name:"Bird's Nest",src:1}},
+  {id:'boppy2',flag:'tombo:boppy2',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_2',name:"Nobody Gets Past Us",src:2},r:{key:'dc_tombo_boppy_untangle',name:"Measure Twice",src:1}},
   {id:'boppy3',flag:'tombo:boppy3',who:['tom', 'boppy'],barrier:null,p:{key:'tb_boppy_3',name:"The Pepper-Broth Sneeze",src:2},r:{key:'dc_tombo_boppy_taste',name:"Pepper Contest",src:1}},
   {id:'tnb1',flag:'tombo:tnb1',who:['tom', 'tnb'],barrier:null,p:{key:'tombo_tnb_commentary',name:"Popcorn Jump",src:1},r:{key:'dc_tb_tnb_1',name:"2nd Ave Window Wash",src:2}},
   {id:'tnb2',flag:'tombo:tnb2',who:['tom', 'tnb'],barrier:null,p:{key:'tb_tnb_2',name:"Red Line Transfer",src:2},r:{key:'dc_tombo_tnb_transfer',name:"Last Train Home",src:1}},

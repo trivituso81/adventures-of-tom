@@ -41,6 +41,9 @@ function say(id,kind,delay=0,only=null) {
     for(const k in VOICE_CLIPS.clips[id]) for(const c of VOICE_CLIPS.clips[id][k]) if(c&&allowed.has(c.text)) bakedClips.push(c);
   const go=()=>{
     if(bakedClips.length) { if(playClip(pick(bakedClips))) return; }
+    // The same words baked as a dialogue line in this character's voice (data/voice/dialog-ch*.js) count too.
+    const dl=typeof DIALOG_CLIPS!=='undefined'&&DIALOG_CLIPS.clips[id+'|'+line];
+    if(dl&&playClip({mp3:dl})) return;
     const part=typeof CLIP_PARTS!=='undefined'&&CLIP_PARTS[id]&&CLIP_PARTS[id][line];
     if(part) { const all=VOICE_CLIPS.clips[id]||{}; const pt=(typeof CONTRACT_OLD!=='undefined'&&CONTRACT_OLD[part.text])||part.text; for(const k in all) { const src=all[k].find(c=>c&&(c.text===part.text||c.text===pt)); if(src&&playClip(src,part)) return; } }
     if('speechSynthesis'in window) {

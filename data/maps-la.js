@@ -58,6 +58,12 @@ const NICKEL={
   sold:['Sold! I know just the shelf.','Half price, full gratitude.','That\'s very vintage now.'],
   broke:['Not enough coins. Griffith Park pays, in a way.','Short on coins. The monsters up in the park are carrying some.'],
   keep:['I could never. That\'s a family thing.','Not for sale. Some things are priceless.','Keep that one. Trust me.'],
+  // Shop tiers (see SHOP_TIER_GATES in data/party.js): lines for the shelves that open after chapters 3, 6 and 9.
+  fresh:['New shipment! It came in on a truck that found parking. Come look.','Fresh stock, and a real upgrade. Penny will be so jealous.','The top shelf is finally stocked. Worth the traffic.'],
+  tierTab:{
+    gear:['The new shelf: sturdier, shinier, still reasonable by Los Angeles standards.','The grown-up shelf. Gear for people who actually fight things.','Top shelf. Everything up here has a story and an agent.'],
+    healing:['Bigger bandages and a real picnic. Same pockets, more fixing.','The med kit has a flashlight now. Very LA. It has a ring light too.','Feast-grade snacks. Catered, practically.'],
+    battle:['The Confetti Cannon is new. Please aim it away from the palm trees.','Fireworks. Legally a gray area. Emotionally a gift.','The Finale Rocket. Hold it like a parking ticket.']},
   who:'Nickel'
 };
 
@@ -125,19 +131,24 @@ const LA_AREAS=[
       {name:'Skye',x:3,y:10,look:'skye',lines:["I'm filming a day-in-my-life video. I live in the lofts.","This is the day. You're in my life now.",'Say hi to my eleven followers.']},
       {name:'Chet',x:8,y:13,look:'chet',lines:["I'm an actor. Well. I'm an actor who parks cars at a tower.",'I had a callback last week. For a cereal.','The cereal went with someone else. It happens.']},
       {name:'Wes',x:8,y:16,look:'wes',lines:["I'm a screenwriter. I live in the lofts, two floors down from your boyfriend.","Draft forty-one. It's about a man who writes screenplays. It's very personal.",'He lends me a mug when I\'m stuck. I\'m stuck a lot. I have nine of his mugs.']},
-      // Boomie: Tom's friend, same age, lives downtown. An amazing singer and very kind. Her voice carries.
+      // Boomie: Tom's friend, same age, lives downtown. An amazing gospel and soul singer, very kind, about to go on tour.
+      // Her talk is the tour (next stops), the Friday home show where Tom has the front row, and songs. No food talk.
+      // Voice: warm, young, deeper-voiced Black woman (voice id boomie2 in data/dialog-cast.js).
       {name:'Boomie',x:11,y:10,look:'skye',sheet:'boomie',kin:true,trace:'boomie-hug',duration:0.8,lines:[
         'TOM! Get over here. Hug. Mmm-hmm. There it is.',
-        'Are you eating? You look like you\'re not eating. I have a plate for you upstairs. Don\'t argue.',
-        'Sorry, I sang that whole sentence. It happens. The lawyer on the bench has heard every note.'],
+        'I leave Tuesday for the tour. Atlanta first, then Chicago, then Nashville. One suitcase. Nine dresses.',
+        'Friday is the home show, right here downtown. You\'re in the front row. I wrote your name on the seat.',
+        'Oh, the sun\'s coming up on my street. Hallelujah, hallelujah! Sorry. I sang that whole sentence.'],
         revisit:[
           'La la LAAA! Oops. A car alarm went off. That one is on me.',
-          'Sol says he times his breaks around my high notes. I say he times them around my cornbread.',
+          'Atlanta, then Chicago, then Nashville. I keep saying it out loud so I don\'t forget.',
+          'Friday night, front row. I don\'t start the show without you. Okay, I start. But I look for you.',
+          'How\'s TNB? Tell him there\'s a seat for him too. Two front row seats. Don\'t make me beg.',
+          'Oh, when the morning comes, I\'m gonna rise. Rise, rise, rise! Sing with me, Tom. Amen!',
+          'I open with a hymn my grandmother sang. She\'d say I\'m doing it too loud. She\'d be right.',
+          'Sol says he parks his cab outside to hear me warm up. I say he\'s just early.',
           'You text me when you land. I mean it. A song is also fine.',
           'I sang in the shower this morning. The whole building clapped. Thin walls.',
-          'How\'s TNB? How\'s that bread? Tell me everything. I have time.',
-          'Somebody on the ninth floor was having a bad day. I sang them a little something. Now it\'s a medium day.',
-          'Same age, same jokes, Tom. I just hit the high notes.',
           'Hmm hmm hmmm. Oh, I was humming? I\'m always humming.']},
       {name:'Bev',x:16,y:9,look:'bev',lines:['I came all the way from Ohio. I rode the tiny orange railway up the hill.','It went one block. It cost a dollar. Best dollar of my life.','Then I ate a pupusa in a market from 1917. I may never go home.']}]},
 

@@ -5,8 +5,10 @@
 // (and its `color` recolors the sprite), Keepsake Charm has a perk (see b6PerkText in engine/progress.js).
 // Item fields: slot, stats (flat bonuses to the battle stats), perk, who (only that member), color, hat (shows on the head).
 const SLOTS=['Tool','Outfit','Charm'];
-const SLOT_LABEL={Tool:'Signature Tool',Outfit:'Outfit',Charm:'Keepsake Charm'};
-const SLOT_SHORT={Tool:'TOOL',Outfit:'OUTFIT',Charm:'CHARM'};
+const SLOT_LABEL={Tool:'Signature Tool',Outfit:'Outfit',Charm:'Keepsake Charm',Sash:'Birthday Sash'};
+const SLOT_SHORT={Tool:'TOOL',Outfit:'OUTFIT',Charm:'CHARM',Sash:'SASH'};
+// A member can carry extra slots (m.extraSlots, e.g. Grace's Birthday Sash after the Nine Scoops bonus chapter).
+const wearSlots=m=>m&&m.extraSlots&&m.extraSlots.length?SLOTS.concat(m.extraSlots):SLOTS;
 // The six battle stats (B2_STAT_KEYS in data/battle2-data.js, which loads later).
 const STAT_NAMES=['hp','pow','grit','warmth','cool','pep'];
 const STAT_LABEL={hp:'HP',pow:'POW',grit:'GRIT',warmth:'WARMTH',cool:'COOL',pep:'PEP'};
@@ -165,6 +167,80 @@ const items={
   n_rib:{who:'tnb',name:'Pottery Rib',icon:'\u{1F3FA}',slot:'Tool',desc:'A worn wooden rib from his first wheel class. Shapes clay. Shapes opinions.',stats:{pow:1,warmth:3}},
   y_stick:{who:'nara',name:'The Best Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Nara found it on 2nd Ave. It\'s the best stick. Everyone must see the stick.',stats:{pow:3,warmth:1}}
 };
+// ---------- Shop tiers (engine/shop.js) ----------
+// Penny's and Nickel's stock grows with the story: a better Tool, Outfit and Charm for each member, a stronger heal and
+// a stronger throwable, unlocked when chapters 3, 6 and 9 are cleared (so the new shelf opens in chapters 4, 7 and 10).
+// Prices are the member's base shelf price x2, x3, x4. Outfits are HP 24, 30, 36. Ids: <who>_tool1, _out2, _chm3 and so on.
+const SHOP_TIER_GATES=[3,6,9];
+const SHOP_TIER_MULT=[2,3,4];
+const SHOP_TIER_OUT=[{hp:24,grit:4,cool:3},{hp:30,grit:4,cool:4},{hp:36,grit:5,cool:5}];
+const SHOP_TIER_TOOL={power:[{pow:5,warmth:4},{pow:6,warmth:5},{pow:7,warmth:6}],warm:[{pow:3,warmth:6},{pow:4,warmth:7},{pow:5,warmth:8}]};
+// who: [profile, base prices (tool, outfit, charm), charm perk key, its three values, [name, icon, desc] x3 for tool, outfit, charm]
+const SHOP_TIER_GEAR={
+  tom:['power',[36,30,20],'crit',[.12,.15,.18],
+    [['Tournament Keyboard','\u{2328}','Hot-swap switches. Tom swaps them mid-meeting. Nobody notices.'],['Boss Rush Controller','\u{1F579}','Remapped for speed runs. The A button has its own fan club.'],['Platinum Trophy Pad','\u{1F3C6}','Every trophy. Every achievement. Tom keeps a spreadsheet.']],
+    [['Cozy Cardigan','\u{1F9E5}','Soft, grey, and secretly bulletproof against small talk.'],['Delta One Robe','\u{1F6C1}','Heavy cotton. Tom says he earned it. Twice.'],['Head Baker Coat','\u{1F35E}','Starched white. A dusting of flour makes it official.']],
+    [['Studio Headphones','\u{1F3A7}','The boss music, now in stereo.'],['Over-Ear Cans','\u{1F3A7}','Big, padded, and loud enough to stop a conversation.'],['Noise-Cancelling Cans','\u{1F3A7}','Silences everything except a good combo.']]],
+  grace:['warm',[22,30,18],'crit',[.12,.14,.16],
+    [['Glitter Squishy Deluxe','\u{1F351}','Two peaches. Double the squeeze. Triple the sparkle.'],['Judge’s Clipboard','\u{1F4CB}','Grace scores everyone. You’re welcome.'],['Champion’s Chalk Bag','\u{1F947}','Chalk dust, cold nerves, perfect landings.']],
+    [['Meet Day Leotard','\u{1FA71}','Sequins to the ceiling. Judges are legally obligated to look.'],['Podium Warmup Jacket','\u{1F9E5}','Says TEAM across the back. Grace is the team.'],['National Team Leotard','\u{1F31F}','Red, white and so much glitter. Cleaning crews dread it.']],
+    [['Tiara Headband','\u{1F451}','Real tiny rhinestones. Fake tiny pearls. Fully a crown.'],['Medal Ribbon','\u{1F396}','Gold, silk, and worn to bed. Grace says it’s for luck.'],['Perfect Ten Pin','\u{1F4AF}','Nine tens and an eleven. Grace wants a recount.']]],
+  rose:['warm',[24,26,16],'evade',[.12,.14,.16],
+    [['Lamby Jr. Deluxe','\u{1F411}','Lamby’s cousin, now with a cape. Brave and fast, says Rose.'],['Lamby Squad','\u{1F411}','Three lambs. One plan. No plan, actually.'],['Lamby the Brave','\u{1F6E1}','Knitted armor. Very strong. Very fluffy. Both matter.']],
+    [['Frog Slicker Deluxe','\u{1F438}','Webbed pockets. Puddles are scared of it.'],['Rainbow Tutu','\u{1FA70}','Twirls for the ages. Weighs about nothing.'],['Superhero Cape Set','\u{1F9B8}','Cape, mask and one boot. The other boot is lost.']],
+    [['Bunny Ears Plus','\u{1F430}','Taller ears. Better bounce.'],['Jumping Shoes','\u{1F45F}','Springs in the heels. Not a toy. Definitely a toy.'],['Cloud Slippers','\u{2601}','Fluffy, loud and impossible to catch.']]],
+  amy:['power',[16,30,18],'pep',[.12,.14,.16],
+    [['Silver Coach Whistle','\u{1F4EF}','Louder than the old one. The class heard it from the parking lot.'],['Stopwatch Pro','\u{23F1}','Splits to the hundredth. Amy checks them twice.'],['Relay Baton','\u{1F3C3}','She passed it to herself. Won anyway.']],
+    [['Tempo Singlet','\u{1F3BD}','Lighter, tighter, faster. Lucky bib still pinned on.'],['Teacher of the Year Blazer','\u{1F9E5}','A tiny apple pin. Worn with great authority.'],['Marathon Finisher Jacket','\u{1F3C5}','Shiny, crinkly and fully earned.']],
+    [['Pro Racing Flats','\u{1F45F}','Barely there. Amy weighed them on a kitchen scale.'],['Split-Time Watch','\u{231A}','Beeps every mile. Beeps at Tom too.'],['Finisher Medal','\u{1F3C5}','Heavy and shiny. Also a snack holder, technically.']]],
+  deedee:['warm',[20,28,18],'regen',[.07,.08,.09],
+    [['Marble Rolling Pin','\u{1F9C1}','Cold marble. Pie crust like silk.'],['Cast Iron Skillet','\u{1F373}','Seasoned for forty years. Seasoned with love for fifty.'],['Garden Shears','\u{2702}','Snip, snip. The roses never complained.']],
+    [['Sunday Apron','\u{1F33A}','Pressed and starched. For company only.'],['Gardening Overalls','\u{1F33B}','Eleven pockets. Seeds in nine.'],['Holiday Cardigan','\u{2744}','Embroidered snowflakes. Smells like cinnamon, forever.']],
+    [['Sun Hat Supreme','\u{1F452}','Bigger brim. Bigger ladybug.'],['Garden Gloves','\u{1F9E4}','Dirt on the thumbs. Pride in the fingers.'],['Moon Locket','\u{1F319}','To the moon and back. It says so inside.']]],
+  boppy:['power',[24,32,20],'regen',[.08,.10,.12],
+    [['Carbon Fishing Rod','\u{1F3A3}','Lighter than the old one. Boppy doesn’t trust it. Yet.'],['Tackle Box Deluxe','\u{1F9F0}','Three layers. Two lures. Eleven peppers.'],['Pepper Mill Cannon','\u{1F336}','Cracked pepper at speed. He swears it’s for the soup.']],
+    [['Pier Vest Pro','\u{1F9BA}','More pockets. Fewer fish.'],['Recliner Robe','\u{1F6CB}','Terry cloth. Built-in lumbar support. Zero ambition.'],['Pier Weather Coat','\u{1F9E5}','Yellow slicker. Smells like nine thousand fish stories.']],
+    [['Heated Seat Cushion','\u{1F525}','Plugged into nothing. Still toasty. The back approves.'],['Knee Brace','\u{1F9B5}','Compression sleeve. He tells everyone about it.'],['Magnetic Back Wrap','\u{1F9F2}','Allegedly works. Boppy insists.']]],
+  tnb:['warm',[18,30,20],'evade',[.10,.12,.14],
+    [['Wooden Pottery Rib','\u{1F3FA}','Smooth as a river stone. Shapes clay and quietly shapes opinions.'],['Mini Steamer','\u{2668}','Portable and a little hissy. Pun intended.'],['Pro Glaze Brush','\u{1F58C}','Fine bristles. Fine work. A fine pun, even.']],
+    [['Studio Apron','\u{1F3FA}','Fresh stains, fresh stories. Cone ten approved.'],['Set Runner Vest','\u{1F9BA}','Walkie pocket, tape pocket, tiny pocket for sanity.'],['Supervisor Coat','\u{1F9E5}','Pins on the lapel. Every pin has a job.']],
+    [['Transit Pin Set','\u{1F687}','Every line, every station. Next stop: dramatic.'],['Longboard Grip Tape','\u{1F6F9}','Rough, grippy and covered in stickers.'],['Kiln Glove Charm','\u{1F9E4}','Cone ten heat. Cool as ever.']]],
+  nara:['power',[14,26,16],'pep',[.12,.14,.16],
+    [['Tug Rope','\u{1FAA2}','Three knots. Four teeth marks. Very proud.'],['Squeaky Ball Deluxe','\u{1F3BE}','Squeaks at two pitches. Nara has opinions about both.'],['Giant Best Stick','\u{1FAB5}','A stick so big it needs a permit.']],
+    [['Reflective Harness','\u{1F9BA}','Hi-vis. Hi-fur.'],['Rain Slicker for Dogs','\u{2614}','Bright yellow. She wears it with shame and speed.'],['Working Dog Vest','\u{1F9E5}','Says WORKING DOG. Mostly works on the sofa.']],
+    [['Racing Bandana','\u{1F9E3}','Silk, striped, fast.'],['Jingle Collar','\u{1F514}','Every step announces her. She doesn’t mind.'],['Bacon Treat Pouch','\u{1F953}','Smells like victory. And bacon.']]]
+};
+// Heals and throwables: [id, name, icon, desc, effect, base price of the first shelf item].
+const SHOP_TIER_ITEMS={
+  healing:[
+    ['bandage',[['Mega Dino Bandage','\u{1FA79}','Two dinosaurs on it. They fight. It heals faster.',{heal:140}],['Jurassic Bandage','\u{1FA79}','A whole herd. Rose approves of the herd.',{heal:200}],['Dino Med Kit','\u{1F9F0}','Bandages, a tiny flashlight and a roar.',{heal:280}]],15],
+    ['picnic',[['Family Picnic','\u{1F9FA}','Two sandwiches each. Nobody gets the squished one. Mostly.',{healAll:70}],['Backyard BBQ Basket','\u{1F356}','Smells like Boppy’s grill. Everyone gets a plate.',{healAll:100}],['Holiday Feast','\u{1F357}','Deedee cooked for forty. There are six of you. Perfect.',{healAll:140}]],26]],
+  battle:[
+    ['popper',[['Confetti Cannon','\u{1F389}','Louder. Wider. Monsters hate a parade.',{dmg:150}],['Fireworks Fan','\u{1F386}','Seven colors, zero permits. Never misses.',{dmg:190}],['Finale Rocket','\u{1F680}','The big one at the end of the show. Duck.',{dmg:240}]],22]]
+};
+const SHOP_TIER_STOCK={};   // tab id -> [tier 1 ids, tier 2 ids, tier 3 ids]
+for(const [who,g] of Object.entries(SHOP_TIER_GEAR)) {
+  const [prof,base,pk,vals,tools,outs,charms]=g;
+  SHOP_TIER_STOCK[who]=[[],[],[]];
+  for(let t=0;t<3;t++) {
+    const perk=pk==='pep'?{stat:{pep:vals[t]}}:{[pk]:vals[t]};
+    items[who+'_tool'+(t+1)]={who,tier:t+1,price:base[0]*SHOP_TIER_MULT[t],name:tools[t][0],icon:tools[t][1],slot:'Tool',desc:tools[t][2],stats:{...SHOP_TIER_TOOL[prof][t]}};
+    items[who+'_out'+(t+1)]={who,tier:t+1,price:base[1]*SHOP_TIER_MULT[t],name:outs[t][0],icon:outs[t][1],slot:'Outfit',desc:outs[t][2],stats:{...SHOP_TIER_OUT[t]}};
+    items[who+'_chm'+(t+1)]={who,tier:t+1,price:base[2]*SHOP_TIER_MULT[t],name:charms[t][0],icon:charms[t][1],slot:'Charm',desc:charms[t][2],perk};
+    SHOP_TIER_STOCK[who][t].push(who+'_tool'+(t+1),who+'_out'+(t+1),who+'_chm'+(t+1));
+  }
+}
+for(const [tab,rows] of Object.entries(SHOP_TIER_ITEMS)) {
+  SHOP_TIER_STOCK[tab]=[[],[],[]];
+  for(const [baseId,list,basePrice] of rows) for(let t=0;t<3;t++) {
+    const [name,icon,desc,fx]=list[t], id=baseId+(t+1);
+    items[id]=Object.assign({tier:t+1,price:basePrice*SHOP_TIER_MULT[t],name,icon,slot:null,desc},fx);
+    SHOP_TIER_STOCK[tab][t].push(id);
+  }
+}
+// Boppy's Gold Signature Tool (the others got theirs from the story). shopPrice, not price: gold is not for resale.
+items.b_goldreel={who:'boppy',tier:1,shopPrice:90,name:'Golden Reel',icon:'\u{1F3A3}',slot:'Tool',desc:'Gold-plated, never tangles, hums at dawn. Old Iron-Gill would approve. Boppy won’t say so out loud.',stats:{pow:5,warmth:6}};
+SHOP_TIER_STOCK.boppy[0].unshift('b_goldreel');
 const souvenirs={bakery:'roll',library:'bookmark',greenhouse:'sprout',post:'stamp',tea:'biscuit',observatory:'scrap',home:'fridgephoto',amyhouse:'drawing',grands:'pepper'};
 let coins=25;
 const bag=['sunhat','notebook','pebble','button','sweater','beanie'];
@@ -219,7 +295,7 @@ const PARTY_MAX=4;
 const inParty=m=>party.includes(m);
 // The old battle's move tables (before F3). Nothing in the main build reads them now; kits live in B2_SKILLS (data/battle2-data.js) and the Stampcards in data/progress.js.
 const ATTACKS={
-  tom:[{key:'mash',name:'Button Mash',mp:0,mult:1},{key:'starter',name:'Starter Splash',mp:3,mult:1.3},{key:'flashcard',name:'Flashcard Flurry',mp:4,mult:1.5},{key:'unbox',name:'Unboxing',mp:5,mult:1.7},
+  tom:[{key:'mash',name:'Press Start',mp:0,mult:1},{key:'starter',name:'Starter Splash',mp:3,mult:1.3},{key:'flashcard',name:'Flashcard Flurry',mp:4,mult:1.5},{key:'unbox',name:'Unboxing',mp:5,mult:1.7},
        {key:'dutch',name:'Dutch Oven',mp:6,mult:2.0,lvl:2},{key:'kanji',name:'Kanji Strike',mp:7,mult:2.3,lvl:3},{key:'delta',name:'Delta One',mp:8,mult:2.6,lvl:4},{key:'finalboss',name:'Final Boss',mp:10,mult:3.2,lvl:5}],
   grace:[{key:'cartwheel',name:'Cartwheel',mp:0,mult:1},{key:'squishy',name:'Squishy Squeeze',mp:3,mult:1.3},{key:'polish',name:'Glitter Nails',mp:4,mult:1.5},{key:'runway',name:'Runway Walk',mp:5,mult:1.7},
        {key:'dancebattle',name:'Dance Battle',mp:6,mult:2.0,lvl:2},{key:'subscribe',name:'Like and Subscribe',mp:7,mult:2.3,lvl:3},{key:'beam',name:'Beam Dismount',mp:8,mult:2.6,lvl:4},{key:'perfect10',name:'Perfect 10',mp:10,mult:3.2,lvl:5}],
@@ -242,7 +318,7 @@ let menuOpen=false,menuTab='inventory',menuChar=0,menuSlot=null;
 // Flat gear bonus to one battle stat (hp, pow, grit, warmth, cool, pep) from what a member wears.
 function statBonus(m,stat) {
   let total=0;
-  for(const slot of SLOTS) { const id=m.equipment[slot],it=id&&items[id]; if(it&&it.stats&&it.stats[stat]) total+=it.stats[stat]; }
+  for(const slot of wearSlots(m)) { const id=m.equipment[slot],it=id&&items[id]; if(it&&it.stats&&it.stats[stat]) total+=it.stats[stat]; }
   return total;
 }
 // A member's battle stat outside a fight: the level line (B2_STATS) plus gear. Percent perks apply in battle.

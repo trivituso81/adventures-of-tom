@@ -8,7 +8,7 @@
 const B7_DIFF={
   rose:{id:'rose',name:'ROSE MODE',sub:'Story and kid assist',
     text:'Monsters hit half as hard and have 25% less HP. High-Fives always land. A gold glow shows a good move each turn. If everyone gets knocked out, Deedee tosses in a Rhubarb Pie and everyone gets back up (once a fight).',
-    taken:.5,foeHp:.75,autoHf:true,recommend:true,pie:true},
+    taken:.5,foeHp:.75,autoHf:true,recommend:true,pie:true,pictures:true},
   grace:{id:'grace',name:'GRACE MODE',sub:'Classic, the standard game',
     text:'The game as designed: monsters at full strength, boss shields as written, snacks whenever you like.'},
   director:{id:'director',name:'DIRECTOR MODE',sub:'Tactical challenge',

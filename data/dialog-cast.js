@@ -7,7 +7,7 @@
 // Baked clips live in DIALOG_CLIPS (one file per chapter, DIALOG_CAST.files, loaded after startup by engine/dialog-voice.js).
 // A line is spoken only if its exact text has a clip for that speaker's voice. Objects and signs stay silent.
 const DIALOG_CAST={
-  files:['data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js'],
+  files:['data/voice/dialog-ch22.js','data/voice/dialog-ch23.js','data/voice/dialog-ch24.js','data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js','data/voice/dialog-ch25.js','data/voice/dialog-ch26.js','data/voice/dialog-ch27.js'],
   speakers:{
     Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Deedee:'deedee',Boppy:'boppy',TNB:'tnb',
     Pip:'pip',Moss:'moss',Dot:'dot',Gus:'gus',Bean:'bean',Bun:'bun',Page:'page',Fern:'fern',Kit:'kit',Oolong:'oolong',
@@ -16,7 +16,7 @@ const DIALOG_CAST={
     'Log Lump':'log','The Big One':'bigone',
     // Chapter 2 (Los Angeles): story people get their own voice; walk-on neighbors share a voice by type (a townsfolk voice
     // from Long Island or an LA type voice), told apart by speakerFx. Monsters reuse a chapter 1 monster voice of the same kind.
-    'Mr. Washington':'washington','Miss Odette':'odette','Doña Carmen':'carmen',Boomie:'boomie',Olivia:'olivia',Michael:'michael',
+    'Mr. Washington':'washington','Miss Odette':'odette','Doña Carmen':'carmen',Boomie:'boomie2',Olivia:'olivia',Michael:'michael',
     'Mrs. Alvarez':'carmen',Kenji:'kenji',Marisol:'la_woman',Yesenia:'la_woman',Tony:'michael',Kevin:'bean',Mateo:'bean',
     Daisy:'rose',Sofi:'rose',Skye:'bun',Chet:'bean',Wes:'page',Bev:'pip',Juniper:'luna',Sage:'fern',Priya:'dot',
     Marguerite:'oolong',Dolores:'dolores',Dash:'moss',Nickel:'penny',Sol:'sal',Larry:'gus','Don Beto':'moss',Claudia:'luna',
@@ -199,9 +199,9 @@ const DIALOG_CAST={
     carmen:{name:'Doña Carmen',type:'Neighbor: pupuseria owner',stability:.5,
       desc:'A woman in her sixties with a warm, firm, proud voice and a light Salvadoran Spanish accent. Runs a pupuseria, generous and no-nonsense, laughs easily. Clean studio recording.',
       sample:'Bienvenidos! Pupusas revueltas, and curtido on the side. Curtido is not optional. I came from San Salvador in nineteen ninety-one. This comal came with me in a suitcase. The juice bar next door asked me what a pupusa is. Now they ask every day.'},
-    boomie:{name:'Boomie',type:'Downtown: singer neighbor',stability:.5,
-      desc:'A woman in her forties with a big, warm, rich singer\u2019s voice, bubbly and motherly, slides into song mid-sentence, laughs from the belly. Clean studio recording.',
-      sample:'Tom! Get over here. Hug. Mmm-hmm. There it is. Are you eating? You look like you are not eating. I have a plate for you upstairs. Do not argue. Sorry, I sang that whole sentence. It happens. La la laaa!'},
+    boomie2:{name:'Boomie',type:'Downtown: gospel singer friend',stability:.5,
+      desc:'A young Black American woman in her late twenties to early thirties with a warm, rich, low alto voice, smooth and a little husky, deeper than most women\u2019s voices. A gospel and soul singer, kind and bubbly, laughs from the belly, slides into song mid-sentence. Clean studio recording.',
+      sample:'Tom! Get over here. Hug. Mmm-hmm. There it is. I leave Tuesday for the tour. Atlanta first, then Chicago, then Nashville. Oh, when the morning comes, I am gonna rise. Hallelujah!'},
     olivia:{name:'Olivia',type:'Family friend: journalist mom',stability:.5,
       desc:'A woman in her late thirties with a quick, bright, articulate American voice. A journalist and mom of two little kids, talks fast, wry and warm, always half distracted. Clean studio recording.',
       sample:'Tom! Hi! Sorry, I am mid-sentence in my head. I am filing a story on AI in classrooms. The kids use it to write the homework. The teachers use it to grade the homework. Nobody is in the room. Michael! Can you grab Isla? She has a leaf.'},
