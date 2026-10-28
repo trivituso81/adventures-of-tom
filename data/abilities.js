@@ -311,7 +311,7 @@ const B8_KITS={
       p:{key:"tasting_ult",name:"Tasting Menu",src:2,vp:8,elem:["sparkle"],desc:"Ultimate. Fourteen courses in four seconds: heal the family 40%, dress each in the next costume, and Wardrobe Fresh for 2 turns. Then the check lands face down on every enemy."},
       r:{key:"rx_everybody_lives",name:"Final Cut: Everybody Lives",src:1,vp:9,elem:["sparkle"],desc:"Arrange soft costume stand-ins for the scary scene. Clear mental debuffs and give each friend one short-lived automatic revival."}},
     B1:{play:'carve',
-      p:{key:"dadjoke_pottery",name:"Dad-Joke Pottery",src:1,vp:2,elem:["kinetic"],desc:"Chuck a heavy wet terracotta pigeon at one enemy. SPLAT. Then the pun. Extra crit chance."},
+      p:{key:"throw_down",name:"Throw Down",src:1,vp:2,elem:["kinetic"],desc:"Throw a bowl on the wheel until it flies off and lands on one enemy. CLONK. Then the pun. Extra crit chance."},
       r:{key:"rx_carve",name:"Sunset Carve",src:2,vp:2,elem:["kinetic"],desc:"TNB carves a tight S-turn on his longboard around an enemy, spraying road grit to lower its COOL and making himself Evasive for 1 turn."}},
     B2:{play:null,
       p:{key:"around_the_bend",name:"Just Around the Bend",src:1,vp:4,elem:["cozy"],desc:"Three bends, a summit at golden hour and a snack thrown down. Heal a friend, clear Amber-Stuck, and raise WARMTH and COOL."},

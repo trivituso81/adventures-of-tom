@@ -348,14 +348,42 @@ const clayCurl=(x,y,r=6,ang=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang
   gfx.strokeStyle=CLAY; gfx.lineWidth=3; gfx.stroke(); gfx.restore(); };
 const tray=(x,y,label='REUSE')=>{ poly([[x-18,y-4],[x+18,y-4],[x+14,y+5],[x-14,y+5]],SLIP); R(x-12,y-2,24,2,CLAYD); label&&labelTxt(label,x,y-16,CREAM,1); };
 const labelTxt=(t,x,y,c,sc)=>label(t,x,y,c,sc);
-// The wardrobe rack with five costumes and a sign.
+// The wardrobe rack: steel tubes, a slat shelf with shoes and a hat, casters, five costumes on wood hangers, a marquee sign.
+// Costume pieces hang from (0,0) = the hanger hook. kind: 0 blazer, 1 dress, 2 hoodie, 3 striped shirt, 4 trench coat.
+const garment=(kind,c,tr,dk,sw=0)=>{ gfx.save(); gfx.rotate(sw);
+  Ln(0,-12,0,-4,1.6,OUT); E(0,-12,1.8,1.8,STEEL); Ln(0,-4,-10,3,3.6,OUT); Ln(0,-4,10,3,3.6,OUT); Ln(0,-4,-10,3,1.6,'#c9a06a'); Ln(0,-4,10,3,1.6,'#c9a06a');
+  if(kind===0) { poly([[-10,3],[-14,8],[-13,34],[-9,34],[-8,10]],dk,2); poly([[10,3],[14,8],[13,34],[9,34],[8,10]],dk,2);
+    poly([[-9,2],[-4,1],[0,4],[4,1],[9,2],[9,38],[-9,38]],c,2); poly([[-4,1],[0,18],[-7,8]],tr,1.4); poly([[4,1],[0,18],[7,8]],tr,1.4);
+    E(0,23,1.2,1.2,GOLD); E(0,29,1.2,1.2,GOLD); R(3,26,5,1.6,dk); R(-9,36,18,2,dk); R(-7,6,1.6,28,'rgba(255,255,255,.25)'); }
+  else if(kind===1) { poly([[-6,2],[6,2],[5,12],[13,40],[-13,40],[-5,12]],c,2); for(const px of [-3,0,3]) Ln(px,16,px*2,38,1,dk);
+    R(-5.5,12,11,3,tr); poly([[-5,2],[0,9],[5,2],[3,1],[0,4],[-3,1]],tr,1.4); R(-12,36,24,2,tr); E(0,7,1,1,dk); }
+  else if(kind===2) { poly([[-8,2],[0,-1],[8,2],[6,9],[-6,9]],dk,2); poly([[-9,6],[-13,10],[-12,32],[-9,32]],dk,2); poly([[9,6],[13,10],[12,32],[9,32]],dk,2);
+    poly([[-9,4],[9,4],[10,12],[9,14],[9,36],[-9,36],[-9,14],[-10,12]],c,2); poly([[-6,24],[6,24],[8,33],[-8,33]],dk,1.4);
+    Ln(-2,8,-2,16,1.3,tr); Ln(2,8,2,16,1.3,tr); E(-2,16.5,1,1,tr); E(2,16.5,1,1,tr); R(-9,35,18,2,dk); }
+  else if(kind===3) { poly([[-9,2],[-3,1],[0,4],[3,1],[9,2],[12,10],[8,13],[8,36],[-8,36],[-8,13],[-12,10]],c,2);
+    for(let y=9;y<35;y+=5) R(-8,y,16,1.8,tr); poly([[-3,1],[0,7],[-6,5]],'#fff6dc',1.2); poly([[3,1],[0,7],[6,5]],'#fff6dc',1.2); for(let k=0;k<4;k++) E(0,11+k*6,.8,.8,dk); }
+  else { poly([[-10,3],[-14,8],[-14,40],[-10,40],[-9,10]],dk,2); poly([[10,3],[14,8],[14,40],[10,40],[9,10]],dk,2);
+    poly([[-9,2],[9,2],[10,46],[-10,46]],c,2); poly([[-9,2],[-1,2],[-5,12]],dk,1.4); poly([[9,2],[1,2],[5,12]],dk,1.4);
+    R(-10,22,20,3,dk); R(-2,22,4,3,GOLD); for(const yy of [14,29,37]) { E(-3,yy,.9,.9,GOLD); E(3,yy,.9,.9,GOLD); } }
+  gfx.restore(); };
 const rack=(x,y,sway=0,sign=true,sleeve=null)=>{
-  R(x-48,y-112,4,112,OUT); R(x+44,y-112,4,112,OUT); R(x-50,y-114,100,5,OUT); R(x-48,y-113,96,3,STEEL);
-  R(x-54,y-2,108,5,OUT); for(const wx of [-48,46]) { E(x+wx,y+6,5,5,OUT); E(x+wx,y+6,3,3,'#5e6670'); }
-  const cs=[['#e0402e','#fff6dc'],['#284fb4','#ffd166'],['#9be39a','#2b2a26'],['#c9b3e6','#fff6dc'],['#ffd166','#e0402e']];
-  cs.forEach((c,k)=>{ const sx=x-36+k*18,sy=y-100+Math.sin(sway+k)*1.5; Ln(sx,y-112,sx,sy-2,2,OUT);
-    poly([[sx-9,sy],[sx+9,sy],[sx+11,sy+8],[sx+7,sy+8],[sx+7,sy+40],[sx-7,sy+40],[sx-7,sy+8],[sx-11,sy+8]],c[0]); R(sx-2,sy+2,4,4,c[1]); });
-  if(sign) { RO(x-32,y-138,64,16,CREAM); label('WARDROBE',x,y-133,'#284fb4',1); }
+  E(x,y+5,60,6,'rgba(0,0,0,.25)');
+  for(const px of [x-48,x+44]) { R(px-1,y-116,6,118,OUT); R(px,y-114,4,114,STEEL); R(px,y-114,1.5,114,'#e6e9ee'); R(px+3,y-114,1,114,'#7d8892'); }
+  R(x-53,y-119,110,8,OUT); R(x-51,y-118,106,5,STEEL); R(x-51,y-118,106,1.6,'#eef1f5'); E(x-52,y-115,3,3.6,'#7d8892'); E(x+56,y-115,3,3.6,'#7d8892');
+  const cs=[[0,'#e0402e','#fff6dc','#a82a1c'],[1,'#284fb4','#ffd166','#1b3680'],[2,'#6fc27a','#2b2a26','#4a9a56'],[3,'#c9b3e6','#fff6dc','#9a82c4'],[4,'#ffd166','#e0402e','#d6a63a']];
+  cs.forEach((c,k)=>{ gfx.save(); gfx.translate(x-34+k*17,y-100+Math.sin(sway+k)*1.2); garment(c[0],c[1],c[2],c[3],Math.sin(sway*.8+k*1.3)*.035); gfx.restore(); });
+  // slat shelf with a shoe box, two pairs of shoes and a hat
+  RO(x-46,y-20,92,5,'#8a6a46'); R(x-46,y-20,92,1.6,'#b8946a'); for(let k=0;k<6;k++) R(x-40+k*16,y-17,1,3,'#6a4a2c');
+  RO(x-43,y-35,22,15,'#d8c8a0'); R(x-43,y-29,22,2,'#c46a3c'); R(x-34,y-26,5,2,'#fff6dc');
+  poly([[x-15,y-21],[x-4,y-21],[x-2,y-26],[x-8,y-28],[x-15,y-25]],'#2b2a26',1.8); R(x-15,y-22,13,1.4,'#6b4030');
+  poly([[x+2,y-21],[x+13,y-21],[x+15,y-26],[x+9,y-28],[x+2,y-25]],'#8a4a2c',1.8); R(x+2,y-22,13,1.4,'#d9a070');
+  E(x+30,y-22,12,3.4,OUT); E(x+30,y-22,11,2.6,'#4a3a2a'); EO(x+30,y-27,6,5,'#5a4632'); R(x+24,y-26,12,2,'#c46a3c');
+  // feet and casters
+  R(x-56,y-3,112,6,OUT); R(x-54,y-2,108,3.5,'#7d8892'); R(x-54,y-2,108,1.2,'#d8dce2');
+  for(const wx of [-50,50]) { R(x+wx-2.5,y+2,5,5,OUT); R(x+wx-1,y+2,2,5,STEEL); EO(x+wx,y+9,5,5,'#2b2a26'); E(x+wx,y+9,1.8,1.8,'#aeb3ba'); }
+  if(sign) { Ln(x-26,y-123,x-26,y-132,3,OUT); Ln(x+26,y-123,x+26,y-132,3,OUT); Ln(x-26,y-123,x-26,y-132,1.4,STEEL); Ln(x+26,y-123,x+26,y-132,1.4,STEEL);
+    RO(x-36,y-152,72,22,'#1b2a5a'); R(x-34,y-150,68,18,'#233a7a'); label('WARDROBE',x,y-144,CREAM,1);
+    for(let i=0;i<13;i++) { const on=Math.sin(sway*4+i*1.1)>0; E(x-33+i*5.5,y-151,1.5,1.5,on?'#ffe08a':'#8a7a4a'); E(x-33+i*5.5,y-131,1.5,1.5,on?'#8a7a4a':'#ffe08a'); } }
 };
 SC.tn_rack=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const x=st.x+(s.off||-78),y=st.y; gfx.globalAlpha=fin(u,.05)*fade(u,.96); rack(x,y,s.t*3,true); };
 // A stage light beam from the top of the screen onto a spot.
@@ -363,7 +391,7 @@ SC.tn_beam=(s,u)=>{ const a=fin(u,.15)*fade(u,.85)*.35; gfx.globalAlpha=a; gfx.f
   gfx.globalAlpha=a*1.6; E(s.x,s.y,60,10,'#fff6c8'); };
 // A costume silhouette drops onto someone, then glows.
 SC.tn_costume=(s,u)=>{ const d=ez(u/.35),x=s.x,y=lerp(s.y-170,s.y-s.h*.62,d); gfx.globalAlpha=fade(u,.8);
-  poly([[x-20,y],[x+20,y],[x+26,y+14],[x+16,y+14],[x+16,y+52],[x-16,y+52],[x-16,y+14],[x-26,y+14]],s.c||'#284fb4'); R(x-4,y+4,8,8,s.c2||'#ffd166');
+  gfx.save(); gfx.translate(x,y-8); gfx.scale(1.8,1.8); garment(0,s.c||'#284fb4',s.c2||'#ffd166','rgba(0,0,0,.28)',Math.sin(u*10)*.05*(1-d)); gfx.restore();
   if(u>.35) { gfx.globalAlpha=fade(u,.8)*(1-cl((u-.35)/.4)); ring(x,y+26,30+u*30,40+u*30,3,GOLD); } };
 // A crooked collar marker that straightens.
 SC.tn_collar=(s,u)=>{ const a=lerp(.5,0,ez((u-.35)/.3)); gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(a);
@@ -946,7 +974,7 @@ T.kiln_door_policy=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),kx=Math.min
 })();
 
 // ================= Round 3 override from Tom (2026-10-24 18:40, claude/move-review.md) =================
-// Dad-Joke Pottery (B1, key dadjoke_pottery, was clay_pigeon): same numbers (hybrid hit, +15% crit). A heavy wet
+// Throw Down (B1, key throw_down, was clay_pigeon): same numbers (hybrid hit, +15% crit). A heavy wet
 // terracotta pigeon out of a slip bucket, a heavy throw, SPLAT, then the pun. The pun does psychic damage (wavy rings,
 // PUN DAMAGE); the monster leans away. He pulls out another one: I HAVE MORE. Scenes prefix t3n_.
 (function(){
@@ -996,23 +1024,74 @@ SC.t3n_splat=(s,u)=>{ const F=s.F,q=ez(u/.08),a=fade(u,.8); gfx.globalAlpha=a; c
 SC.t3n_pun=(s,u)=>{ const P=s.plan; for(let k=0;k<4;k++) { const q=cl(u*1.6-k*.18); if(q<=0||q>=1) continue; const x=lerp(P.x0,P.x1,q),y=lerp(P.y0,P.y1,q); gfx.globalAlpha=(1-q)*.9; gfx.strokeStyle=PURP; gfx.lineWidth=4; gfx.beginPath();
   for(let j=-6;j<=6;j++) { const yy=y+j*5,xx=x+Math.sin(j*.9+u*20)*5; j===-6?gfx.moveTo(xx,yy):gfx.lineTo(xx,yy); } gfx.stroke(); } };
 SC.t3n_lean=(s,u)=>{ const q=u<.2?ez(u/.2):u>.85?1-ez((u-.85)/.15):1; lift(s.f,-q*4,-q*.22,-q*26); };
-T.dadjoke_pottery=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.round(Math.min(me.x-60,F.x+F.w*.5+78)),wy=Math.min(316,F.base+4);
-  const set=900,grab=1150,heave=1450,throwT=1850,hit=2450,pun=2750,psy=3500,more=4500,home=5100,end=5900;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:set,x:wx,y:wy,f:'kneel'},{t:grab,f:'kneel',dy:(u,tt)=>Math.sin(tt*30)*1},{t:heave,f:'wind',dy:(u,tt)=>Math.sin(tt*24)*1.5},{t:throwT,f:'throw',dx:-8},{t:throwT+400,f:'idle'},{t:pun,f:'aim'},{t:psy,f:'hip'},{t:more,f:'celeb'},{t:home-150,f:'idle'},{t:home,f:'walkR'},{t:home+800,x:'home',y:'home',f:'idle'}]);
-  const plan={st,set,grab,heave,throw:throwT,more,home,bx:wx-40,by:wy+2};
+// ---- Throw Down, take two (Tom's feedback 2026-10-28): he throws a bowl on the wheel, the wheel spins out of control, and the bowl
+// flies off and lands on the enemy's head. "Throwing a bowl. Literally." Numbers unchanged.
+const wheelHead=(ang,speed)=>{ // wheel head ellipse at (0,-54): grooves, plus spin marks that smear when fast
+  EO(0,-54,19,5.6,'#9aa3ad'); ring(0,-54,13,3.9,1,'#6e7882'); ring(0,-54,7,2.1,1,'#6e7882');
+  for(let k=0;k<3;k++) { const a=ang+k*2.094,mx=Math.cos(a)*16,my=-54+Math.sin(a)*4.6;
+    if(speed>16) { gfx.globalAlpha*=.5; ring(0,-54,16,4.6,2,'rgba(255,255,255,.6)'); gfx.globalAlpha/=.5; } else E(mx,my,1.6,1,'#ffffff'); } };
+const clayOn=(prog,wob,ms)=>{ // lump -> centered cylinder -> opened bowl, standing on the wheel head (surface at y=-54)
+  const open=ez(cl((prog-.3)/.3)),flare=ez(cl((prog-.55)/.45)),w=lerp(8,15,flare),h=lerp(lerp(8,22,ez(cl(prog/.5))),17,flare);
+  gfx.save(); gfx.translate(wob,-54);
+  poly([[-w*.72,0],[w*.72,0],[w,-h],[-w,-h]],'#d9784a',2);
+  R(-w*.6,-h*.9,1.8,h*.8,'rgba(255,255,255,.4)'); R(w*.45,-h*.9,w*.25,h*.9,'rgba(120,60,30,.25)');
+  for(let k=1;k<4;k++) Ln(-w*.9,-h*k/4,w*.9,-h*k/4,.8,'rgba(150,70,35,.5)');                         // throwing rings
+  E(0,-h,w,Math.max(.6,w*.3*open),'#e89a6a'); if(prog>.32) { E(0,-h,w-2,Math.max(.4,(w-2)*.3*open),'#8a4526'); E(0,-h+.5,w-4,Math.max(.3,(w-4)*.22*open),'#a85a34'); }
+  gfx.restore(); };
+const bowlProp=(x,y,sc,flip=false)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,flip?-sc:sc);  // a finished clay bowl, side view
+  gfx.fillStyle=OUT; gfx.beginPath(); gfx.moveTo(-14,-9); gfx.quadraticCurveTo(-14,8,0,8); gfx.quadraticCurveTo(14,8,14,-9); gfx.closePath(); gfx.fill();
+  gfx.fillStyle='#d9784a'; gfx.beginPath(); gfx.moveTo(-12,-8); gfx.quadraticCurveTo(-12,6,0,6); gfx.quadraticCurveTo(12,6,12,-8); gfx.closePath(); gfx.fill();
+  R(-11,-5,22,2.5,'#fff6dc'); R(-9,-2,18,1.2,'#5fae9a'); R(-10,-8,2,9,'rgba(255,255,255,.35)'); R(6,-8,5,12,'rgba(120,60,30,.28)');
+  E(0,-8,12.6,3.4,OUT); E(0,-8,11.6,2.8,'#e8b48a'); E(0,-7.8,9.2,1.8,'#8a4526'); R(-5,5.4,10,2.4,'#b8603a'); R(-5,5.4,10,.9,'#e8946a'); gfx.restore(); };
+SC.t3n_wheel=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.drop) return;
+  const dt=Math.min(.05,s.t-(s.lt==null?s.t:s.lt)); s.lt=s.t;
+  const sp=ms<P.tap?4:ms<P.fast?lerp(4,14,ez((ms-P.tap)/(P.fast-P.tap))):ms<P.launch?lerp(14,38,ez((ms-P.fast)/(P.launch-P.fast))):lerp(38,0,ez((ms-P.launch)/1800));
+  s.ang=(s.ang||0)+sp*dt;
+  const dq=ez((ms-P.drop)/350),by=P.y-(1-dq)*130+(ms>P.drop+350&&ms<P.drop+500?-Math.sin((ms-P.drop-350)/150*Math.PI)*6:0);
+  const shake=ms>P.fast&&ms<P.launch+400?Math.sin(ms/22)*lerp(.5,2.2,cl((ms-P.fast)/(P.launch-P.fast))):0;
+  gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(P.x+shake,by); gfx.scale(1.5,1.5);
+  E(0,3,40,7,'rgba(0,0,0,.28)');
+  // electric wheel: housing, dial, pedal on a cable
+  RO(-28,-32,56,30,'#59636e'); R(-28,-32,56,4,'#7c8794'); R(-28,-6,56,3,'#3f4852'); for(const bx of [-24,24]) { E(bx,-26,1.2,1.2,'#cfd5dc'); E(bx,-8,1.2,1.2,'#cfd5dc'); }
+  label('POT-5',-18,-20,'#d8dce2',1);
+  const lvl=ms<P.tap?0:ms<P.fast?1:ms<P.launch?2:3,da=-2.2+lvl*.95; EO(14,-18,6,6,'#cfd5dc'); Ln(14,-18,14+Math.cos(da)*5,-18+Math.sin(da)*5,1.6,OUT);
+  const press=ms>P.tap?(ms>P.fast?1:.55):0; gfx.strokeStyle=OUT; gfx.lineWidth=2.4; gfx.beginPath(); gfx.moveTo(28,-14); gfx.quadraticCurveTo(46,-14,50,-4+press*0); gfx.stroke();
+  gfx.save(); gfx.translate(54,0); gfx.rotate(press*.16); poly([[-4,-6],[20,-1],[20,4],[-4,4]],'#aeb3ba',2); for(let k=0;k<4;k++) Ln(0+k*5,-3+k*.9,0+k*5,3,1,'#7d8892'); gfx.restore();
+  // splash pan and the wheel head on its shaft
+  R(-3,-50,6,20,'#59636e'); EO(0,-46,35,9.5,'#aeb3ba'); E(0,-47,30,7.4,'#7d8892'); E(0,-46,27,6,'#b58a64'); E(-8,-48,10,1.6,'rgba(255,255,255,.35)');
+  wheelHead(s.ang,sp);
+  if(ms>P.clay&&ms<P.launch) { const prog=cl((ms-P.clay)/(P.shape-P.clay)),wob=ms>P.fast?Math.sin(ms/30)*lerp(.4,4,cl((ms-P.fast)/(P.launch-P.fast))):Math.sin(ms/200)*.3; clayOn(prog,wob,ms);
+    if(ms>P.tap&&ms<P.launch) { const n=ms>P.fast?14:6; for(let k=0;k<n;k++) { const q=((ms/(ms>P.fast?260:520))+k/n)%1,a=k/n*Math.PI*2+ms/90,r=14+q*(ms>P.fast?64:30); gfx.globalAlpha=fade(u,.94)*(1-q)*.9;
+        E(Math.cos(a)*r,-66+Math.sin(a)*r*.45-q*8,1.6,1.3,k%2?'#8fd0ff':'#b99a78'); } gfx.globalAlpha=fade(u,.94); } }
+  if(ms>P.launch&&ms<P.launch+900) { gfx.globalAlpha=fade(u,.94)*(1-(ms-P.launch)/900); E(0,-54,12,3.2,'#8a4526'); }   // wet ring left behind
+  gfx.restore();
+  if(ms>P.fast&&ms<P.launch) { gfx.globalAlpha=fade(u,.94); label('FASTER',P.x-20,by-118,CREAM,2); } gfx.globalAlpha=1; };
+SC.t3n_hat=(s,u)=>{ const f=u>.7?ez((u-.7)/.3):0,rot=Math.sin(s.t*17)*.3*(1-f*.6); gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(s.x,s.y+f*34); gfx.rotate(rot); bowlProp(0,0,1.9,true); gfx.restore();
+  if(u<.75) for(let k=0;k<3;k++) { const q=(s.t*3+k/3)%1; gfx.globalAlpha=(1-q)*.8; E(s.x-14+k*14,s.y-16-q*12,2,1.6,'#8fd0ff'); } gfx.globalAlpha=1; };
+T.throw_down=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.round(Math.min(me.x-60,F.x+F.w*.5+120)),wy=Math.min(316,F.base+4);
+  const set=900,pedal=2000,fast=2400,launch=2800,hit=3350,pun=3700,psy=4400,more=5250,home=5850,end=6650;
+  const wheelX=wx-52,P={x:wheelX,y:wy+2,drop:200,clay:1000,shape:2000,tap:pedal,fast,launch};
+  const hx=wheelX,hy=wy+2-54*1.5-14,tx=F.x+F.w*.05,ty=F.top+6;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:set,x:wx,y:wy,f:'kneel'},{t:1000,f:'kneel',dy:(u,tt)=>Math.sin(tt*16)*1.2},{t:pedal,f:'aim',dx:-2},{t:fast,f:'wind',dx:u=>ez(u)*10},{t:launch,f:'spread',dx:-4},{t:launch+500,f:'spread',hop:5},{t:hit+300,f:'idle'},{t:pun,f:'aim'},{t:psy,f:'hip'},{t:more,f:'celeb'},{t:home-150,f:'idle'},{t:home,f:'walkR'},{t:home+800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('TNB carries a bucket of wet clay over. Something is in it.'); say(m.id,'dadjoke_pottery'); scene('t3n_prop',(home+100)/1000,{plan}); }],
-    [grab,()=>{ S('splat'); setMessage('He pulls out a heavy, dripping, terracotta pigeon.'); }],
-    [heave,()=>{ S('charge'); }],
-    [throwT,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu,s)=>pigeon(0,0,2.4,s.t*1000,true),h.x-4,h.y-12,F.x+F.w*.05,F.mid-F.h*.1,(hit-throwT)/1000,60); setMessage('He throws it. It flaps once. It\'s mostly clay.'); }],
+    [0,()=>{ setMessage('TNB sets up his pottery wheel. A lump of clay, a calm bowl.'); say(m.id,'throw_down'); scene('t3n_wheel',(home+100)/1000,{P}); S('whoosh'); }],
+    [P.drop+350,()=>{ S('thud'); scene('tn_poof',.5,{x:wheelX,y:wy+2,c:'#c9a070'}); }],
+    [1000,()=>{ S('splat'); setMessage('He centers the clay. Pulls the walls up. It is a lovely bowl.'); }],
+    [1700,()=>{ S('select'); }],
+    [pedal,()=>{ S('charge'); scene('t3n_big',.7,{x:wheelX,y:wy-130,txt:'JUST A TAP',c:CREAM,sc:2}); setMessage('He taps the pedal. Just a little.'); }],
+    [fast,()=>{ S('charge'); scene('t3n_big',.7,{x:wheelX,y:wy-130,txt:'TOO FAST',c:GOLD,sc:3}); setMessage('The wheel is going a bit faster than the pedal said.'); }],
+    [2600,()=>{ S('charge'); setMessage('Water is flying everywhere. The bowl is holding on.'); }],
+    [launch,()=>{ S('whoosh'); S('boing'); setMessage('The bowl lets go.'); const dx=tx-hx,dy=ty-hy,n=Math.hypot(dx,dy)||1;
+      ST.fly((x,y,uu)=>{ for(const [k,al] of [[3,.15],[2,.25],[1,.4]]) { gfx.globalAlpha=al; bowlProp(-dx/n*k*14,-dy/n*k*14,1.6); } gfx.globalAlpha=1; gfx.save(); gfx.rotate(uu*Math.PI*14); bowlProp(0,0,1.6); gfx.restore(); },hx,hy,tx,ty,(hit-launch)/1000,70);
+      scene('t3n_big',.7,{x:wheelX,y:wy-130,txt:'WHOOPS',c:'#ffb04a',sc:3}); }],
     ['hf',hit],
-    [hit,()=>{ S('splat'); S('thud'); ST.jolt(f,.6); landHit(100); scene('t3n_splat',2.6,{F}); scene('t3n_big',1.1,{x:F.x,y:F.top-74,txt:'SPLAT!',c:'#f0a070',sc:4}); }],
-    [pun,()=>{ scene('t3n_text',1.5,{st,txt:"IT'S A CLAY PIGEON.",c:CREAM,sc:2,dy:16}); setMessage('He waits. He makes eye contact.'); }],
+    [hit,()=>{ S('bonk'); S('thud'); ST.jolt(f,.6); landHit(100); scene('t3n_hat',1.7,{x:tx,y:ty+4}); scene('t3n_big',1.1,{x:F.x,y:F.top-74,txt:'CLONK!',c:'#f0a070',sc:4}); setMessage(f.name+' is now wearing a bowl.'); }],
+    [pun,()=>{ scene('t3n_text',1.5,{st,txt:'I WAS THROWING A BOWL.',c:CREAM,sc:2,dy:16}); setMessage('He waits. He makes eye contact.'); }],
     [pun+500,()=>{ scene('t3n_text',1.0,{st,txt:'LITERALLY.',c:GOLD,sc:3,dy:-2}); S('select'); }],
     [psy,()=>{ const p=head(st,10); scene('t3n_pun',.9,{plan:{x0:p.x-20,y0:p.y,x1:F.x+F.w*.3,y1:F.mid}}); S('stun'); scene('t3n_lean',(end-psy-200)/1000,{f}); }],
     [psy+300,()=>{ ST.jolt(f,.2); scene('t3n_big',.9,{x:F.x,y:F.top-64,txt:'PUN DAMAGE',c:PURP,sc:3}); scene('t3n_text',1,{x:F.x+F.w*.4,y:F.top-14,txt:'UGH',c:CREAM,sc:2}); setMessage(f.name+' leans away. Slowly.'); }],
     [more,()=>{ S('boing'); scene('t3n_text',1.2,{st,txt:'WAIT! I HAVE MORE!',c:CREAM,sc:2,dy:14}); }],
-    [end,'end',res(E2)+'The pun did more damage than the clay.']]); };
+    [end,'end',res(E2)+'The pun did more damage than the bowl.']]); };
 })();
 
 // ================= Polish pass (2026-10-24, claude/move-review.md) =================
@@ -1054,15 +1133,23 @@ SC.tp2_burst=(s,u)=>{ const q=ez(u/.4); gfx.globalAlpha=fade(u,.5); for(let k=0;
   star(s.x,s.y,(s.r||40)*.5*Math.sin(cl(u*2)*Math.PI),s.c||GOLD,u*2); };
 
 // ---------- Mug Toss: a much bigger mug, a spin blur and a big CLUNK ----------
-const MS=3.2;
+const MS=2.0;
 const mug=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.scale(sc,sc);
-  ring(9,-1,5,6,5,OUT); ring(9,-1,5,6,2.4,'#e8d2b0');
-  poly([[-8,-10],[9,-11.5],[7.5,10],[-7,10]],'#e8d2b0',2.2); R(-8,-10,16.5,4,'#5fae9a'); E(-4,-4,2,3,'#5fae9a'); E(3,-5,1.6,2.4,'#5fae9a'); R(-6,6,12,2,'#c9a07a'); R(-6,-6,2,10,'rgba(255,255,255,.45)'); gfx.restore(); };
+  ring(9,-1,5,6,5.4,OUT); ring(9,-1,5,6,2.6,'#e8d2b0'); ring(9.6,-1.6,4.4,5,.8,'#fff6e6');                                  // handle, with a highlight
+  poly([[-8,-10],[9,-11.5],[7.5,10],[-7,10]],'#e8d2b0',2.2);                                                                   // slightly crooked body
+  R(3.5,-9,4,18,'rgba(140,96,52,.22)'); R(-6,-6,1.8,11,'rgba(255,255,255,.6)');                                                // shade side, highlight
+  for(const [dx,dy] of [[-4,2],[0,5],[-1,-1],[3,3],[-5,6],[2,-3],[5,6],[-3,-4]]) E(dx,dy,.55,.5,'#9a7448');                    // clay speckles
+  gfx.fillStyle='#5fae9a'; gfx.beginPath(); gfx.moveTo(-8,-10); gfx.lineTo(9,-11.5); gfx.lineTo(8.8,-4.4);                      // teal glaze with drips
+  gfx.quadraticCurveTo(7,-2,5.4,-4.6); gfx.quadraticCurveTo(3.6,-6.2,2,-3.6); gfx.quadraticCurveTo(.6,-1,-1,-4.8); gfx.quadraticCurveTo(-2.8,-7,-4.6,-4.4); gfx.quadraticCurveTo(-5.8,-2.4,-7.6,-4.6); gfx.closePath(); gfx.fill();
+  Ln(-7.6,-4.6,8.8,-4.4,.6,'#3f8a7a'); R(-6,-9,6,1,'rgba(255,255,255,.45)');
+  R(-5,.5,8,5,'#fff6dc'); R(-4,1.8,6,1,'#e0402e'); R(-4,3.6,4,.8,'#a8825a');                                                    // the sticker
+  E(.5,-10.8,8.7,2.3,'#f4e6cc'); E(.5,-10.6,7,1.6,'#6b4a30'); E(.5,-10.2,5.6,1,'#8a6240');                                     // rim and inside
+  R(-6,9.4,12.8,2.2,'#b8946a'); R(-6,9.4,12.8,.8,'#d8b48a'); gfx.restore(); };
 const spinMug=(x,y,u,turns,sc)=>{ const ang=u*Math.PI*2*turns,a0=gfx.globalAlpha; for(const [d,al] of [[.9,.15],[.55,.3]]) { gfx.globalAlpha=a0*al; mug(x,y,ang-d*Math.sign(turns),sc); } gfx.globalAlpha=a0;
-  gfx.strokeStyle='rgba(255,255,255,.75)'; gfx.lineWidth=3; gfx.beginPath(); gfx.arc(x,y,16*sc,ang-1.2*Math.sign(turns),ang,turns<0); gfx.stroke(); mug(x,y,ang,sc); };
-SC.tp2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1; mug(h.x-30,h.y-30,Math.sin(ms/260)*.08,MS);
-  if(ms>P.show) { RO(h.x-62,h.y-92,64,20,'#f2c94c'); label('2ND',h.x-30,h.y-87,OUT,3); } };
-SC.tp2_mugrest=(s,u)=>{ gfx.globalAlpha=fade(u,.85); mug(s.x,s.y,0,MS); if(s.t>.25) steam(s.x-4,s.y-46,s.t,3,'#ffffff',40); if(s.t>.35) bigWord('STILL WORKS',s.x,s.y-100,CREAM,3); };
+  gfx.strokeStyle='rgba(255,255,255,.75)'; gfx.lineWidth=2.4; gfx.beginPath(); gfx.arc(x,y,16*sc,ang-1.2*Math.sign(turns),ang,turns<0); gfx.stroke(); mug(x,y,ang,sc); };
+SC.tp2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1; mug(h.x-24,h.y-26,Math.sin(ms/260)*.08,MS);
+  if(ms>P.show) { RO(h.x-56,h.y-70,50,16,'#f2c94c'); label('2ND',h.x-31,h.y-66,OUT,2); } };
+SC.tp2_mugrest=(s,u)=>{ gfx.globalAlpha=fade(u,.85); mug(s.x,s.y,0,MS); if(s.t>.25) steam(s.x-3,s.y-30,s.t,3,'#ffffff',28); if(s.t>.35) bigWord('STILL WORKS',s.x,s.y-66,CREAM,2); };
 T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.max(F.x+F.w*.5+130,Math.min(me.x-40,F.x+200));
   const P={show:900,throw:1950},hit=2500;
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:800,x:wx,f:'act'},{t:1650,f:'wind',dx:u=>ez(u)*8},{t:1950,f:'throw',dx:-6},{t:2400,f:'aim'},{t:3300,f:'celeb',hop:6},{t:3600,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);
@@ -1070,7 +1157,7 @@ T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Mat
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls a slightly crooked mug out of his tote.'); say(m.id,'mug_toss'); scene('tp2_mugheld',2.0,{P}); }],
     [900,()=>{ setMessage('It\'s a second. It even has a sticker that says so.'); S('select'); }],
-    [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-30,h.y-30,F.x+6,F.top+18,.55,90); }],
+    [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-24,h.y-26,F.x+6,F.top+18,.55,90); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); S('ting'); ST.jolt(f,.55); landHit(100); scene('tp2_burst',.6,{x:F.x+6,y:F.top+18,r:56}); scene('tv2_flash',.25,{a:.3}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'CLUNK!',c:GOLD,sc:5}); }],
     [2550,()=>{ ST.fly((x,y,u)=>spinMug(0,0,u,-1,MS),F.x+6,F.top+18,lx,ly,.5,60); }],
