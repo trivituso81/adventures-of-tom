@@ -871,7 +871,7 @@ TRIGGERS.push(
   {id:'ch3-tea',map:'tea',when:{...CH3,flag:'ch3-boppy',notFlag:['ch3-tea','ch3-jar'],test:()=>inParty(boppy)},scene:'ch3Tea'},
   {id:'ch3-story',map:'row',at:[10,16,14,20],when:{...CH3,flag:'ch3-boppy',notFlag:'ch3-story'},scene:'ch3Story'},
   {id:'ch3-pier',map:'pier',at:[9,10,14,13],when:{...CH3,flag:'ch3-boppy',notFlag:'ch3-pier'},scene:'ch3Pier'},
-  {id:'ch3-r1',map:'reeds',at:[17,12,24,18],when:{...CH3,flag:'ch3-jar',notFlag:'ch3-r1'},scene:'ch3Sock'},
+  {id:'ch3-r1',map:'reeds',at:[17,9,25,14],when:{...CH3,flag:'ch3-jar',notFlag:'ch3-r1'},scene:'ch3Sock'},
   {id:'ch3-r2',map:'reeds',at:[1,1,16,21],when:{...CH3,flag:'ch3-r1',notFlag:'ch3-tuts'},scene:'ch3Tangle'},
   {id:'ch3-wait',map:'reeds',at:[1,1,8,5],when:{...CH3,flag:'ch3-tuts',notFlag:'ch3-wait'},scene:'ch3Wait'},
   {id:'ch3-snag',map:'reeds',when:{...CH3,flag:'ch3-wait',notFlag:'ch3-snag'},scene:'ch3Snag'},
@@ -889,7 +889,7 @@ HOLD_RULES.push(n=>STORY.chapter===3&&!flag('ch3-coin')&&currentMap.id==='sundia
 // The old reeds at the top left of the marsh: four reed tiles step aside once the Snag has moved.
 function ch3OpenReeds() {
   const M=worlds.reeds; if(!M||M.reedsOpen) return;
-  for(const [x,y] of [[2,1],[3,1],[2,2],[3,2]]) {
+  for(const [x,y] of [[3,1],[4,1],[3,2],[4,2]]) {
     const o=M.objectAt.get(key(x,y)); if(o) { M.objects.splice(M.objects.indexOf(o),1); M.objectAt.delete(key(x,y)); }
     tile(M,x,y,'boards');
   }

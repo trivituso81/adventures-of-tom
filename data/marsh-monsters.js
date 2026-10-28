@@ -282,7 +282,7 @@ Object.assign(MONSTERS,{
     hint:'The boss of the marsh. Armored, ancient, and full of Boppy’s peppers.'}
 });
 // Where each one stands in the Whispering Marsh (the Reeds). The Snag sits on the far side, by the way deeper in.
-const MARSH_MONSTER_SPOTS=[['soggysock',19,15],['bobber',14,8],['tangle',8,15],['snag',5,6]];
+const MARSH_MONSTER_SPOTS=[['soggysock',24,10],['bobber',16,12],['tangle',10,9],['snag',4,4]];
 // Sundial Hollow (chapter 3, C3b): marsh monsters on the near side of the spillway, and Old Iron-Gill in the Deep Pool
 // (at the end of the little jetty; hidden until the party walks out to the pool, data/scenes.js STORY_WORLD).
 const SUNDIAL_MONSTER_SPOTS=[['bobber',17,7],['tangle',4,13],['soggysock',16,16],['irongill',10,3]];
