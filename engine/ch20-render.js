@@ -73,6 +73,7 @@ drawLEBattleBg=function(t) {
   rect(0,66,192,42,'#2a2230'); for(let k=0;k<7;k++) rect(0,68+k*6,192,1,'#1c1824'); for(let k=0;k<14;k++) rect(k*14+((k%2)*7),66,1,42,'#1c1824');
   if(calm) { rect(60,56,72,3,'#6a4a2a'); rect(76,40,40,18,'#4a3626'); rect(80,36,32,6,'#6a4a3a'); ellipse(96,34,10,6,'#ffe9a0'); }   // a lamp and an armchair, in glass
   for(let k=0;k<14;k++) { const px=(k*37+now*(5+k%4))%192,py=(k*53+now*(3+k%3)*2)%108; gfx.globalAlpha=.3+.2*Math.sin(now+k); rect(px,py,2,2,'#f2d27a'); gfx.globalAlpha=1; }
+  return true;
 };
 b7DrawMapFx=function(time) {
   LE_b7DrawMapFx_ch20(time);
