@@ -1,11 +1,42 @@
 'use strict';
 // engine/battle-draw.js — Drawing the battle scene, animations and effects.
-function drawBattle() {
-  gfx=fightCtx;
-  const party=battlePartyList();   // the new battle (engine/battle2.js) draws its own party units here
-  const t=battle.time;
-  gfx.save();
-  gfx.scale(3,3);
+
+// ---------- Battle backdrops ----------
+// Tom's pixel-art pictures live in bgs/ (576x324 PNGs, one per place). battleBgKey picks the picture from the map's
+// ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not loaded yet, the older code-drawn
+// backdrops in the render files (engine/*-render.js, drawLABattleBg / drawLEBattleBg) and the pond code below are used.
+const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-school-classroom',cafe:'04-school-cafetorium',
+  stacks:'05-library-stacks',readroom:'06-library-reading-room',club:'07-moon-club',dome:'08-moon-club-dome',barn:'09-car-barn',
+  boiler:'10-boiler-room',term:'11-terminal-zero',gate:'12-gate-zero',lot:'13-studio-backlot',stage:'14-soundstage',
+  park:'15-oak-park',oak:'16-inside-the-oak',canopy:'17-oak-crown-canopy'};
+const BG_IMG={};
+for(const k in BG_FILES) { const im=new Image(); im.src='bgs/'+BG_FILES[k]+'.png'; BG_IMG[k]=im; }
+function battleBgKey() {
+  const g=currentMap&&currentMap.style&&currentMap.style.ground,L=B2.active?B2:{};
+  if(L.labLA||regionOf(currentMap)==='la') {
+    if(g==='barn'||g==='boiler') return g;
+    if(g==='lot'||g==='backlot') return 'lot';
+    if(g==='stage') return 'stage';
+    if(g==='park'||g==='oak'||g==='canopy') return g;
+    if(L.labBarn) return L.labBoiler?'boiler':'barn';
+    if(L.labStudio) return 'lot';
+    if(L.labOak) return L.labCrown?'canopy':'park';
+    return 'griffith';
+  }
+  if(g==='gate'||L.labGate) return 'gate';
+  if(g==='term'||L.labTerm) return 'term';
+  if(g==='dome'||(L.labClub&&L.labDome)) return 'dome';
+  if(g==='club'||L.labClub) return 'club';
+  if(g==='readroom'||(L.labStacks&&L.labRead)) return 'readroom';
+  if(g==='stacks'||L.labStacks) return 'stacks';
+  if(g==='cafe'||(L.labSchool&&L.labCafe)) return 'cafe';
+  if(g==='school'||g==='schoolyard'||L.labSchool) return 'classroom';
+  return 'pond';
+}
+function drawBattleBackdrop(t) {
+  const im=BG_IMG[battleBgKey()];
+  if(im&&im.complete&&im.naturalWidth) { gfx.imageSmoothingEnabled=false; gfx.drawImage(im,0,0,192,108); return; }
+  // Fallback while a picture loads: the code-drawn backdrops.
   if((B2.active&&B2.labLA)||regionOf(currentMap)==='la') drawLABattleBg(t);
   else if(typeof drawLEBattleBg==='function'&&drawLEBattleBg(t)) {}   // engine/school-render.js: Long Island Elementary
   else {
@@ -24,6 +55,15 @@ function drawBattle() {
     rect(x-10,y-5,20,10,'#648c5e');
   }
   }
+}
+
+function drawBattle() {
+  gfx=fightCtx;
+  const party=battlePartyList();   // the new battle (engine/battle2.js) draws its own party units here
+  const t=battle.time;
+  gfx.save();
+  gfx.scale(3,3);
+  drawBattleBackdrop(t);
   gfx.restore();
   RFX.draw(true);
 

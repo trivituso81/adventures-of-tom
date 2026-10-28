@@ -1,5 +1,12 @@
 # Change log (newest first)
 
+## 2026-10-28: New battle backgrounds (17 pictures)
+- Tom's new pixel-art backdrops replace the code-drawn ones in battle: 17 PNGs (576x324, opaque) in `bgs/`, named `01-pond-town` to `17-oak-crown-canopy`. `engine/battle-draw.js` now has `BG_FILES`, `battleBgKey()` (picks the picture from the map's ground, or the Battle Lab `B2.lab*` flags) and `drawBattleBackdrop(t)`.
+- Map to picture: pond = every Long Island map without its own look (town, row, hollow, marsh, pier, sundial); griffith = Griffith Park plus Downtown and Jefferson Park; classroom = school and schoolyard; cafe; stacks; readroom; club; dome; barn; boiler; term; gate; lot = Studio Gate and Backlot; stage = Soundstage 7 and Stage Set; park; oak; canopy.
+- The old code-drawn backdrops stay in `engine/*-render.js` and the pond code as a fallback only while a picture is still loading.
+- Lost on purpose: the small animations (clock hand, lamp flicker, fireflies, drifting SHH) and the story-state variants (Moon in the Dome, warm Car Barn, Flight 0 leaving Gate Zero). Pictures are static.
+- New test: `python3 tools/bg_test.py` jumps to every battle map, starts a real battle and saves `tools/shots/bg-<map>.png`.
+
 ## 2026-10-28: Popcorn Jump couch no longer overlaps Tom and TNB
 - The couch's rolled arms were drawn in front of Tom and TNB and covered parts of their bodies (Tom's left fist). All couch pieces now draw behind them (`engine/battle2-kind.js`, `couchBack` plus `couchFront` in the back scene).
 
