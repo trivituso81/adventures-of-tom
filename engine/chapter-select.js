@@ -119,7 +119,7 @@ function chselFourteen() {
   if(!girlsAway()) setGirlsAway(true);   // the girls are at the cab stand: room for Amy, TNB and Nara
   forceJoin(amy,true); forceJoin(tnb,true); forceJoin(nara,true);
   if(typeof ch13Girls==='function') ch13Girls();
-  currentMap=worlds.row; player.x=18; player.y=11; player.facing='up'; player.move=null; player.hidden=false;
+  currentMap=worlds.row; player.x=18; player.y=9; player.facing='up'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 // Chapter 15 test start: chapter 14 is done. Tom, Amy, Grace and Rose stand just inside the Rivituso house; Deedee and Boppy are home, TNB and Nara

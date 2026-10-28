@@ -87,6 +87,7 @@ function walkable(map,x,y) {
 }
 
 function finishMap(map) {
+  for(const o of map.objects) o.baked=true;
   for(let y=0;y<map.h;y++) {
     for(let x=0;x<map.w;x++) {
       if(walkable(map,x,y) && !map.npcNoGo.has(key(x,y)) &&
@@ -145,6 +146,8 @@ function placeMonsters(map,spots) {
     map.npcs.push(mon);
   }
 }
+function applyPlateMask(map,mask){ for(let y=0;y<map.h;y++) for(let x=0;x<map.w;x++){ const k=key(x,y); if(map.portals.has(k)){map.solid[y*map.w+x]=0;continue;} if(map.objectAt.has(k)) continue; map.solid[y*map.w+x]=((mask[y]||'')[x]||'#')==='#'?1:0; } }
+
 function buildArea(spec) {
   const map=makeMap(spec.id,spec.name,spec.w,spec.h,true,spec.ground?{ground:spec.ground}:{});
   map.houses=[];
@@ -154,6 +157,7 @@ function buildArea(spec) {
   map.spec=spec;
   paths(map,spec.paths||[]);
   for(const t of spec.tiles||[]) paths(map,t.rects,t.tile);
+  if(spec.plateMask) spec.plateMask.forEach((row,y)=>{ for(let x=0;x<row.length;x++) if(row[x]!=='#') tile(map,x,y,'path'); });
   if(spec.houseRoad!=null) {
     const road=spec.houseRoad;
     for(const h of houses.filter(h=>h.area===spec.id)) placeHouse(map,h,Array.isArray(road)?(h.y<10?road[0]:road[1]):road);
@@ -172,6 +176,7 @@ function buildArea(spec) {
   placeObjects(map,spec.objects);
   for(const s of spec.npcs||[]) map.npcs.push(npcFromSpec(s,false));
   placeMonsters(map,spec.monsters);
+  if(spec.plateMask) applyPlateMask(map,spec.plateMask);
   finishMap(map);
   return map;
 }

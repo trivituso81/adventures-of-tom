@@ -1,6 +1,10 @@
 'use strict';
 // engine/draw.js — Main overworld draw, touch and keyboard input, menu wiring.
 function draw(time) {
+  const plate=plateFor(currentMap);
+  const pk=plate?Math.min(3,Math.max(1,Math.ceil(window.devicePixelRatio||1))):1;
+  plateSetK(pk);
+  ctx.setTransform(pk,0,0,pk,0,0);
   rect(0,0,W,H,currentMap.outside?'#294c3e':'#30413c');
 
   for(let y=0;y<H;y+=48)
@@ -18,8 +22,14 @@ function draw(time) {
   const y0=Math.max(0,Math.floor(camera.y/T)-2);
   const y1=Math.min(currentMap.h,Math.ceil((camera.y+H)/T)+2);
 
+  if(plate) {
+    ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+    ctx.drawImage(plate.img,0,0,currentMap.w*T,currentMap.h*T);
+    ctx.imageSmoothingEnabled=false;
+  }
   for(let y=y0;y<y1;y++) {
     for(let x=x0;x<x1;x++) {
+      if(plate) break;
       if(currentMap.outside)
         drawOutdoorTile(x,y,currentMap.tiles[y][x],time);
       else
@@ -27,13 +37,13 @@ function draw(time) {
     }
   }
 
-  for(const rug of currentMap.rugs) drawRug(rug);
+  if(!plate) for(const rug of currentMap.rugs) drawRug(rug);
 
-  const items=currentMap.objects.map(o=>({
+  const items=(plate?currentMap.objects.filter(o=>!o.baked):currentMap.objects).map(o=>({
     kind:'object',value:o,depth:(o.y+o.h)*T
   }));
 
-  if(currentMap.outside) {
+  if(currentMap.outside&&!plate) {
     for(const h of currentMap.houses)
       items.push({kind:'house',value:h,depth:(h.y+h.h)*T});
   }

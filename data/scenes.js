@@ -117,13 +117,13 @@ const CH1_AFTER=(lost,lines)=>[
 ];
 SCENES.ch1Mudling=[
   {flag:'ch1-t1'},
-  {walk:'tom',to:[[7,19]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[8,19],dir:'up'}, {place:'rose',at:[8,20],dir:'up'}, {place:'deedee',at:[7,20],dir:'up'},
+  {walk:'tom',to:[[9,19]],speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[10,19],dir:'up'}, {place:'rose',at:[10,20],dir:'up'}, {place:'deedee',at:[9,20],dir:'up'},
   {talk:'Deedee',lines:['Crumbs! Rhubarb crumbs. That little thief went right through here.']},
   {place:'Mudling',at:[9,16]},
   {talk:'Rose',lines:['Tata. The mud is MOVING.']},
   {sfx:'look'},
-  {walk:'Mudling',to:[[8,16],[8,17],[7,17]],speed:.35},
+  {walk:'Mudling',to:[[10,16],[10,17],[9,17]],speed:.35},
   {talk:'Mudling',lines:['Blub. The pie went that way. You can\'t have it. Blub.']},
   {talk:'Grace',lines:['Okay, everybody. Tata is in front. I\'m in charge of choreography. FIGHT!']},
   {battle:'mudling',tut:'basics'},
@@ -426,7 +426,7 @@ const CH1={mode:'full',chapter:1};
 const TRIGGERS=[
   {id:'ch1-goal',map:'town',when:{...CH1,flag:'opening-done',notFlag:'ch1-goal'},scene:'ch1Goal'},
   {id:'ch1-theft',map:'grands',when:{...CH1,notFlag:'ch1-theft'},scene:'ch1Theft'},
-  {id:'ch1-t1',map:'hollow',at:[6,17,9,21],when:{...CH1,flag:'ch1-theft',notFlag:'ch1-t1'},scene:'ch1Mudling'},
+  {id:'ch1-t1',map:'hollow',at:[9,17,11,21],when:{...CH1,flag:'ch1-theft',notFlag:'ch1-t1'},scene:'ch1Mudling'},
   {id:'ch1-t2',map:'hollow',at:[1,1,22,15],when:{...CH1,flag:'ch1-t1',notFlag:'ch1-t2'},scene:'ch1Skeeter'},
   {id:'ch1-t3',map:'hollow',at:[1,1,22,14],when:{...CH1,flag:'ch1-t2',notFlag:'ch1-tuts'},scene:'ch1Grump'},
   {id:'ch1-pond',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-pond'},scene:'ch1Pond'},
@@ -869,7 +869,7 @@ TRIGGERS.push(
   {id:'ch3-goal',map:'town',when:{...CH3,notFlag:'ch3-goal'},scene:'ch3Arrive'},
   {id:'ch3-boppy',map:'grands',when:{...CH3,flag:'ch3-goal',notFlag:'ch3-boppy'},scene:'ch3Fishing'},
   {id:'ch3-tea',map:'tea',when:{...CH3,flag:'ch3-boppy',notFlag:['ch3-tea','ch3-jar'],test:()=>inParty(boppy)},scene:'ch3Tea'},
-  {id:'ch3-story',map:'row',at:[10,14,19,20],when:{...CH3,flag:'ch3-boppy',notFlag:'ch3-story'},scene:'ch3Story'},
+  {id:'ch3-story',map:'row',at:[10,16,14,20],when:{...CH3,flag:'ch3-boppy',notFlag:'ch3-story'},scene:'ch3Story'},
   {id:'ch3-pier',map:'pier',at:[9,10,14,13],when:{...CH3,flag:'ch3-boppy',notFlag:'ch3-pier'},scene:'ch3Pier'},
   {id:'ch3-r1',map:'reeds',at:[17,12,24,18],when:{...CH3,flag:'ch3-jar',notFlag:'ch3-r1'},scene:'ch3Sock'},
   {id:'ch3-r2',map:'reeds',at:[1,1,16,21],when:{...CH3,flag:'ch3-r1',notFlag:'ch3-tuts'},scene:'ch3Tangle'},
@@ -3533,7 +3533,7 @@ SCENES.ch10AfterBoss=()=>[
   {hearts:'tom'},
   {talk:'Amy',lines:['Okay. It\'s twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab.']},
   {fade:'out',time:.8},
-  {call:()=>{ beginTransition({kind:'edge',to:'row',spawn:{x:18,y:9},facing:'up'}); }},
+  {call:()=>{ beginTransition({kind:'edge',to:'row',spawn:{x:18,y:8},facing:'up'}); }},
   {wait:.5}, {fade:'in',time:.6},
   {toast:'Goal: Sunday dinner at Deedee and Boppy’s house (RIVITUSO). Everyone is waiting.',time:4.5}
 ];

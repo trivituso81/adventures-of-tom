@@ -280,6 +280,7 @@ function resize() {
   H=Math.max(1,Math.ceil(height/scale));
   canvas.width=W;
   canvas.height=H;
+  if(typeof plateSetK==='function') plateSetK.k=1;
   ctx.imageSmoothingEnabled=false;
 
   const short=layout.landscape;

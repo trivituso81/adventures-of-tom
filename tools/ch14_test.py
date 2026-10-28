@@ -33,14 +33,14 @@ with sync_playwright() as pw:
     check('Deedee on the porch in amber',pg.evaluate("()=>worlds.row.npcs.some(n=>n.porch&&n.amber)"))
     check('girls gone from the cab stand',pg.evaluate("()=>worlds.lacab.npcs.filter(n=>n.girlAtHome).length")==0)
     # Boppy before Deedee is freed: only talk, no fight
-    stand(pg,18,10); pg.keyboard.press('Enter'); pg.wait_for_timeout(600)
+    stand(pg,18,9); pg.keyboard.press('Enter'); pg.wait_for_timeout(600)
     check('Boppy only talks before Deedee is freed',pg.evaluate("()=>!battle.active&&!flag('ch14-gate')")); adv(pg,40,"()=>!dialog.active")
     check('dialog closed',pg.evaluate("()=>!dialog.active&&!intro.active"))
     # Deedee on the porch
-    stand(pg,16,10); pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
+    stand(pg,15,9,'right'); pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
     check('Deedee scene',adv(pg,700,"()=>flag('ch14-deedee')===true&&!intro.active")); shot(pg,'deedee')
     # Warden Boppy
-    stand(pg,18,10); pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
+    stand(pg,18,9); pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
     check('boss starts',adv(pg,700,"()=>battle.active")); pg.wait_for_timeout(8000); shot(pg,'boss-open')
     check('warden foe in the fight',pg.evaluate("()=>B2.foes.length===1&&B2.foes[0].boss==='warden'"))
     # One real hit first: the armor should say ARMOR UP and lose warmth

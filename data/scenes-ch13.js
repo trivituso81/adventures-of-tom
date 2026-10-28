@@ -244,7 +244,7 @@ SCENES.ch13After=()=>[
   {flag:'ch13-after'},
   {call:()=>sfx.whoosh&&sfx.whoosh()},
   {fade:'out',time:.8},
-  {call:()=>{ ch13Place('row',15,13,'up'); }},
+  {call:()=>{ ch13Place('row',15,11,'up'); }},
   {wait:.6},
   {fade:'in',time:.8},
   {wait:.4},
@@ -252,9 +252,9 @@ SCENES.ch13After=()=>[
   {talk:'Tom',lines:['And nothing is moving.']},
   {talk:'Amy',lines:['The sprinkler. Every drop is hanging in the air. It’s the prettiest thing I’ve ever seen and I hate it.']},
   {talk:'TNB',lines:['It’s so quiet. This is the quietest place I’ve ever been. And I live near a freeway.']},
-  {spawn:{name:'Boppy',look:'gus',at:[18,9],dir:'down'}},
+  {spawn:{name:'Boppy',look:'gus',at:[18,8],dir:'down'}},
   {call:()=>{ const b=ch13Npc('Boppy'); if(b) Object.assign(b,{sheet:'boppy',armor:true,duration:.96,lines:CH13_BOPPY_LINES}); }},
-  {walk:'tom',to:[[15,12],[15,11],[16,11],[17,11],[18,11],[18,10]],speed:.3}, {face:'tom',dir:'up'},
+  {walk:'tom',to:[[15,10],[15,9],[16,9],[17,9],[18,9]],speed:.3}, {face:'tom',dir:'up'},
   {talk:'Tom',lines:['Dad.']},
   {talk:'Boppy',lines:['Halt.']},
   {talk:'Amy',lines:['Dad? What are you wearing?']},
@@ -306,7 +306,7 @@ STORY_WORLD.push(()=>{
   if(((STORY.chapter===13&&flag('ch13-done'))||(STORY.chapter===14&&!flag('ch14-after')))&&!intro.active) {
     const row=worlds.row;
     if(row&&!row.npcs.some(n=>n.scripted&&n.name==='Boppy')) {
-      const a=actor('Boppy',18,9,'gus',CH13_BOPPY_LINES);
+      const a=actor('Boppy',18,8,'gus',CH13_BOPPY_LINES);
       Object.assign(a,{sheet:'boppy',armor:true,duration:.96,scripted:true,tier:0,maxHp:1,defeatedUntil:0,roam:0,facing:'down',monster:null});
       row.npcs.push(a);
     }
