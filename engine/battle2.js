@@ -20,8 +20,17 @@ function b2PartyUnit(id,lvl,i,carry) {
   if(carry&&mem.maxHp) u.hp=mem.hp<=0?0:Math.max(1,Math.round(u.maxHp*mem.hp/mem.maxHp));
   return u;
 }
+// A monster drawn facing the wrong way in battle sets flipBattle on its def: the battle gets a cached mirrored copy
+// (sprite rows reversed, eye and mouth x mirrored) so every move that aims at eyes or mouth still lands. The town keeps the original.
+const B2_FLIPPED={};
+function b2BattleDef(d) {
+  if(!d||!d.flipBattle) return d;
+  if(!B2_FLIPPED[d.id]) { const W=d.sprite[0].length; B2_FLIPPED[d.id]=Object.assign({},d,{sprite:d.sprite.map(r=>Array.from(r).reverse().join('')),
+    eyes:d.eyes&&d.eyes.map(e=>[W-1-e[0],e[1]]),mouth:d.mouth&&[W-1-d.mouth[0],d.mouth[1]]}); }
+  return B2_FLIPPED[d.id];
+}
 function b2FoeUnit(id,row,i,lvl) {
-  const D=b2FoeDef(id),def=MONSTERS[id]||MONSTERS.mudling,L=Math.max(D.level,lvl||D.level),up=L-D.level;
+  const D=b2FoeDef(id),def=b2BattleDef(MONSTERS[id]||MONSTERS.mudling),L=Math.max(D.level,lvl||D.level),up=L-D.level;
   const u={side:'foe',id,def,D,name:def.name,lvl:L,idx:i,row,st:{},turns:0,acts:D.acts,weak:D.weak,resist:D.resist,
     shake:0,flash:0,lunge:0,dying:-1,dead:false,parts:[],boss:D.boss||null,phase:1,intent:null,shield:null,step:0};
   for(const k of B2_STAT_KEYS) u[k]=D[k]+up*(k==='hp'?D.step*6:D.step);

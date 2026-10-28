@@ -270,7 +270,7 @@ Object.assign(MONSTERS,{
     wobble:'The cone cracks...',die:'It crumbles into cone crumbs. Grace eats one.',
     rest:['...Crunch. Regrouping. Crunch.'],talk:['We hold the scoops. We hold the cow. We hold EVERYTHING.','Mint chip. Say it. MINT. CHIP.'],again:['Round {n}. Fresh cones.'],
     vapor:['#d9a24e','#8fd4a8','#ffffff','#a8702a'],hint:'They come in pairs and pass a scoop back and forth to heal.'},
-  brainfreeze:{id:'brainfreeze',coins:60,coinStep:10,name:'Brain Freeze',the:'Brain Freeze',short:'Freeze',sprite:NS_FREEZER,pal:NS_FREEZER_PAL,scale:3,eyes:[[20, 18], [41, 18]],mouth:[31, 26],
+  brainfreeze:{id:'brainfreeze',coins:60,coinStep:10,name:'Brain Freeze',the:'Brain Freeze',short:'Freeze',sprite:NS_FREEZER,pal:NS_FREEZER_PAL,scale:3,eyes:[[20, 18], [41, 18]],mouth:[31, 26],flipBattle:true,
     hp:140,hpStep:14,atk:4,xp:40,xpStep:8,level:5,rank:'BOSS',
     intro:'The pond goes still. Then it frosts over. A chest freezer stands up on the ice. It\'s BRAIN FREEZE.',
     attacks:['Brain Freeze gives {t} the cold shoulder.','Brain Freeze breathes frost on {t}.','Brain Freeze flings an ice cube at {t}. Rude.'],
