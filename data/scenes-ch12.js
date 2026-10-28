@@ -135,7 +135,7 @@ SCENES.ch12Marlowe=[
   {talk:'Rose',lines:['He took the pink off the jacaranda!']},
   {talk:'Grace',lines:['You can’t just take the pink!']},
   {talk:'Marlowe',lines:['I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells.']},
-  {talk:'Amy',lines:['I teach thirty-one third graders. You don’t scare me. Put the colors back.']},
+  {talk:'Amy',lines:['I have twelve kids in my room who’ve had harder mornings than you. You don’t scare me. Colors back, please.']},
   {talk:'Marlowe',lines:['I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.']},
   {talk:'Marlowe',lines:['He walks off into the grey, humming a jingle that never resolves.']},
   {despawn:'Marlowe'},
@@ -209,7 +209,7 @@ SCENES.ch12Prime=[
   {spawn:{name:'Marlowe',look:'marlowe',at:[14,5],dir:'down'}},
   {walk:'Marlowe',to:[[14,6],[14,7],[14,8]],speed:.3}, {face:'Marlowe',dir:'down'},
   {talk:'Marlowe',lines:['Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for.']},
-  {talk:'Amy',lines:['Put the rest of the colors back.']},
+  {talk:'Amy',lines:['The rest of the colors too, please. All of them.']},
   {talk:'Marlowe',lines:['Notes. This intersection has no flow. Let me introduce our new Head of Traffic.','Mr. Prime! Please give them a moment to rethink the neighborhood.']},
   {call:()=>sfx.charge&&sfx.charge()},
   {flag:'ch12-prime'}, {call:()=>storyWorld()}, {call:()=>sfx.thud&&sfx.thud()}, {wait:1.2},
@@ -219,13 +219,13 @@ SCENES.ch12Prime=[
   {talk:'Marlowe',lines:['It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five.']},
   {despawn:'Marlowe'},
   {talk:'TNB',lines:['If it’s stuck, maybe it just needs somewhere to go. Kindness first. Hit it if it hits back.']},
-  {talk:'Amy',lines:['Positions. I run point with the girls. If we need a swap, sit on a couch or a bench.']},
+  {talk:'Amy',lines:['Here’s the plan. I stay with the girls. If anybody needs a break, sit on a couch or a bench and we’ll swap.']},
   {talk:'Tom',lines:['Nobody gets run over. I’ll step in front of anyone who needs it.']},
   {toast:'Tip: Amy, Grace and Rose in front unlocks Run With Us, Mommy!, which breaks its red light in one go.',time:6},
   {battle:'gridlockprime',tut:'ch12'},
   {if:()=>flag('battle:gridlockprime')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Up, everybody. Walk it off. It floors Rush Hour every third turn. Heal before, not after.']},
+    {talk:'Amy',lines:['Everybody okay? Good. It floors Rush Hour every third turn, so we heal before, not after.']},
     {toast:'Face Gridlock Prime (the intersection on Jefferson) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 

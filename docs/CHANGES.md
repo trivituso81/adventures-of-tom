@@ -1,5 +1,12 @@
 # Change log (newest first)
 
+## 2026-10-28: Amy less bossy in Part 2
+- Tom: "why is Amy so bossy". Cause: Part 2 scenes (ch11 to 14, written after the Amy rewrite) used her as the drill voice for every fight tip ("Up, everybody. Walk it off.", "Positions.") and slipped back to "thirty-one third graders" (canon: Special Ed, her room of twelve).
+- Rewrote 10 unrecorded Amy lines (no clips lost): fight tips are now "Everybody okay? Good. ..." and "Here's the plan. ..."; "please" on the colors; "I teach kids for a living". Files: data/scenes-p2.js, scenes-ch12.js, scenes-ch13.js, scenes-ch14.js.
+- Left as is (recorded, approved in the rewrite): "Up! Everybody up! Walk it off. Hydrate. We go again." Known slip, recorded: travel stay "thirty second-graders at eight".
+- Rule for new Amy lines: calm, specific, warm with the girls; competitive only at Tom, the clock, herself (claude/amy-dialogue-review.md).
+- Tests: smoke, ch12, ch13, ch14 FAILS: []; ch11 test ran clean.
+
 ## 2026-10-28: Part 2, Chapter 15 "The Eight-Seat Dinner Table"
 - Walking into the Rivituso house after chapter 14 starts chapter 15: all eight sit at a long dinner table (a table object that exists only while the chapter is live). Deedee and Nara's crust, TNB and Boppy's pepper contest, a toast, and then HUSH-9 Final Form crashes dinner.
 - HUSH-9 Final Form (level 21, `hush9final`): Shake-style boss. Dead Air on everyone every third turn (telegraphed), Hushlings and a hush chip below half HP (2 Chatter or Kinetic hits or a Tombo break it, otherwise Total Silence). Kind route: PULL UP A CHAIR x3. BENCH CALL swaps the fourth slot with any of Deedee, Boppy, TNB or Nara (the fight gets all four as reserves).

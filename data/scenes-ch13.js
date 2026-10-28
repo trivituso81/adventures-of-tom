@@ -144,7 +144,7 @@ SCENES.ch13Hush=[
   {talk:'HUSH-9',lines:['Marlowe takes the color. I take the sound. We are a very good team. Please lower your voices.']},
   {talk:'TNB',lines:['We’re being pretty quiet right now.']},
   {talk:'HUSH-9',lines:['You are breathing audibly.']},
-  {talk:'Amy',lines:['I teach third grade. I know what a person sounds like right before they say “be quiet.” You’re in the wrong tunnel.']},
+  {talk:'Amy',lines:['I teach kids for a living. I know what a person sounds like right before they say “be quiet.” You’re in the wrong tunnel.']},
   {talk:'HUSH-9',lines:['I have given the Drill a chip. It no longer digs toward a place. It digs toward the noise. Please observe the quiet. Goodbye.']},
   {call:()=>sfx.charge&&sfx.charge()},
   {walk:'HUSH-9',to:[[29,7],[30,7],[31,7],[32,7],[33,7],[34,7]],speed:.3}, {despawn:'HUSH-9'},
@@ -171,7 +171,7 @@ SCENES.ch13Worm=[
   {battle:'drillworm',tut:'ch13'},
   {if:()=>flag('battle:drillworm')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Up, everybody. Walk it off. It brings the roof down every third turn. Heal before, not after.']},
+    {talk:'Amy',lines:['Everybody okay? Good. It brings the roof down every third turn, so we heal before, not after.']},
     {toast:'Face the Drill Worm (the cavern, east of the tracks) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 

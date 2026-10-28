@@ -107,7 +107,7 @@ SCENES.ch11Stby=[
   {battle:'standbysprite',tut:'ch11a'},
   {if:()=>flag('battle:standbysprite')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Up, everybody. Walk it off. He’s a clipboard with legs.']},
+    {talk:'Amy',lines:['Everybody okay? Good. He’s a clipboard with legs.']},
     {toast:'Face the Standby Sprite and press A to try again. Everyone is healed.',time:5}],else:[
     {call:()=>setFlag('ch11-stby',true)},
     {talk:'Standby Sprite',lines:['...Seventeen. Somebody called seventeen. Was that me?','It was me. I’m on the plane. I’m on THE PLANE.']},
@@ -238,7 +238,7 @@ SCENES.ch11Vance=[
   {despawn:'Long coat'},
   {flag:'ch11-vance'}, {call:()=>storyWorld()},
   {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Amy',lines:['Positions. Tom in front. Girls behind. Nobody lets that board call their name and sit down.']},
+  {talk:'Amy',lines:['Here’s the plan. Tom up front, girls with me. If that board calls your name, don’t sit there. Move.']},
   {talk:'Grace',lines:['Rose, when it calls you, move. Don’t stop to look at anything.']},
   {talk:'Rose',lines:['I won’t look at anything.']},
   {talk:'Rose',lines:['...I looked at one thing.']},
@@ -247,7 +247,7 @@ SCENES.ch11Vance=[
   {battle:'finalcall',tut:'finalcall'},
   {if:()=>flag('battle:finalcall')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Up, everybody. Walk it off. It calls one of us every turn. Move before it goes again, or Tom walks you on.']},
+    {talk:'Amy',lines:['Everybody okay? It calls one of us every turn. Move before it goes again, or Tom will walk you on.']},
     {toast:'Face FINAL CALL (near the big door) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 

@@ -146,7 +146,7 @@ SCENES.ch14Gate=()=>[
   {call:()=>{ const b=ch14Boppy(); if(b) b.monster=null; }},
   {if:()=>flag('battle:warden')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Up. Walk it off. He hits like a dad who loves you and is very upset about it.']},
+    {talk:'Amy',lines:['Everybody okay? He hits like a dad who loves you and is very upset about it.']},
     {toast:'Face Warden Boppy (at the Rivituso door) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 
