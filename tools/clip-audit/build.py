@@ -1,5 +1,17 @@
 import json,re,datetime,collections,sys
 sys.path.insert(0,'/home/claude/bk'); from fixtext import tr
+from keepscript import convert,check
+import os
+ORIG=json.load(open('orig-scripts.json')) if os.path.exists('orig-scripts.json') else {}
+IDX={}
+kept=0; lost=[]
+def handscript(i,text):
+    global kept
+    o=ORIG.get(str(i))
+    if not o: lost.append((i,text,'no original found')); return None
+    sc,_=convert(o['script'],text)
+    if not check(sc,text): lost.append((i,text,'convert failed: '+o['script'])); return None
+    kept+=1; return sc
 BAD=json.load(open(sys.argv[1])); B=json.load(open('baked.json'))
 ONES='zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen'.split()
 TENS=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety']
@@ -38,19 +50,17 @@ def fixscript(sc,miss,text):
     return sc if bare(sc)==bare(speak(text)) else None
 LOAN={'bun':'penny','fern':'luna','kit':'bean','kenji':'justin','dolores':'ellie'}
 dialog=[];battle=[];handkept=0
-for b in BAD:
+for bi,b in enumerate(BAD):
     note=('Wording fixed (was: "'+b['old_text']+'"). ' if b['old_text']!=b['text'] else '')+'Old clip says: "'+b['asr']+'"'
     if b['kind']=='dialog':
         v,t=b['newkey'].split('|',1)
-        sc=auto(v,t,b.get('speaker'))
+        sc=handscript(bi,t) or auto(v,t,b.get('speaker'))
         if v=='tnb' and re.search(r'[Ww]ell, well, well',t): sc=wwwfix(sc)
         dialog.append(dict(key=b['newkey'],voice=v,speaker=b.get('speaker') or next((n for n,vv in B['cast']['speakers'].items() if vv==v),v),text=t,ctx=b.get('file',''),tag='rebake',note=note,after='',script=sc,hand=False))
     else:
         m=re.match(r'(\w+)\.(\w+)\[\d+\]',b['key']); ch,kind=m.group(1),m.group(2); t=b['text']
         old=(B['voices'].get(ch,{}).get('scripts') or {}).get(kind+'|'+b['old_text'])
-        sc=fixscript(tr(old),b['miss'],t) if old else None
-        if sc: handkept+=1
-        else: sc=auto(ch,t)
+        sc=handscript(bi,t) or auto(ch,t)
         if ch=='tnb' and re.search(r'[Ww]ell, well, well',t): sc=wwwfix(sc)
         battle.append(dict(key=ch+'|'+kind+'|'+t,ch=ch,kind=kind,text=t,tag='rebake',note=note,script=sc,hand=bool(old)))
 need=sorted({d['voice'] for d in dialog})
@@ -69,3 +79,5 @@ out=head.rstrip()[:-len('/*__DATA__*/;')]+js+';\n'+body
 open('out/Contraction-Fix-Baker.html','w').write(out)
 print('dialog',len(dialog),'battle',len(battle),'battle scripts kept from old',handkept,len(out)//1024,'KB')
 print(collections.Counter(d['voice'] for d in dialog)); print('no voice id:',[v for v in need if v not in fam and not (designed.get(v) or {}).get('voice_id')])
+
+print('hand-written scripts kept',kept,'of',len(BAD)); [print('  LOST',x) for x in lost]

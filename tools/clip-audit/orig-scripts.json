@@ -1,0 +1,554 @@
+{
+ "84": {
+  "script": "[quick, brisk, competitive teacher, sharp, commanding] TOM. [firm] Do not get in that cab.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "85": {
+  "script": "[bright, bossy nine-year-old, thrilled, fast] Mom, it is SO good. We have boarding passes. [correcting] Well. Tah Tah has one. And Sal has one. [proud] Group ZERO.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "86": {
+  "script": "[bright, bossy nine-year-old, amazed, then sharp] Everything is from the olden days. That phone has a CORD. [warning] Rose. Rose, do not lick the phone.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "87": {
+  "script": "[weak, droning, deep, slow, queue voice, stunned, then rising] ...Next. [louder] NEXT! [amazed] You. You are at the front. [wondering] Somebody is finally at the front.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "88": {
+  "script": "[silly six-year-old, ecstatic] I am at the front! I am the FRONT! [hopeful] Do I win?",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "89": {
+  "script": "[dry, slow, realizing] Seven slots. [flat] And I have seven gold coins. [beat] In a sock. In my bag.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "90": {
+  "script": "[bright, bossy nine-year-old, official, tender] I am picking you up. Officially. [firm] You are claimed. [proud] I am putting a sticker on you. [beaming] It says GRACE.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "91": {
+  "script": "[bright, bossy nine-year-old, gleeful] TWO hearts this year! [proud] That is a record!",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "92": {
+  "script": "[bright, bossy nine-year-old, explaining to her sister, whispering] Rose, she is a sign that talks. Like the one at the dentist. [emphatic] But MAD.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "93": {
+  "script": "[silly six-year-old, ecstatic, then dignified] I am a PILOT. [proud] I am wearing them upside down. On purpose. [serious] It is a pilot thing.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "94": {
+  "script": "[bright, bossy nine-year-old, decisive] WE are coming. All of us. [proud] I am already packing. [matter-of-fact] In my head.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "128": {
+  "script": "[droning, deep, patient, slow, nasal queue voice, stern] Nobody has reached the front of me since nineteen eighty-nine. [firm] That is what a line is FOR.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "129": {
+  "script": "[gruff, smug, spread-out, lecturing] The middle seat gets nothing. [emphatic] That is the RULE.",
+  "source": "claude/dialogue-scripts-ch10.json"
+ },
+ "1": {
+  "script": "[outraged, near tears, dramatic] Tah Tah, you are leaving AGAIN? [wailing] You JUST got here!",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "5": {
+  "script": "[urgent news, bossy] Tah Tah! Deedee made rhubarb crisp for you. [dramatic whisper building to a squeal] It is cooling RIGHT NOW.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "6": {
+  "script": "[thick New York accent, vindicated and indignant] I TOLD you something lives in that pond. [thick New York accent, building] Twenty years I have been saying it. [thick New York accent, wounded sigh] Nobody listens to Boppy.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "7": {
+  "script": "[bossy team captain, clapping] Okay, everybody. Tah Tah is in front. [very important] I am in charge of choreography. [shouting, pointing] FIGHT!",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "8": {
+  "script": "[low cranky grumble, dripping] Grrrrumble. You are standing in my puddle. [offended, voice cracking] And the small one is LAUGHING at me.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "9": {
+  "script": "[hopeful, a little worried, pressing] Tah Tah, you are staying the WHOLE week, right?",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "117": {
+  "script": "[low cranky grumble, flexing, proud] I have been doing push-ups in the pond.",
+  "source": "claude/dialogue-scripts-ch1.json"
+ },
+ "10": {
+  "script": "[older woman, light Salvadoran accent, flat and dreamy] The pupusas are fine. Everything is fine. [slow] It is always this afternoon. [puzzled] Why would I ever flip them?",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "116": {
+  "script": "[light Salvadoran accent, dreamy, puzzled] It is always this afternoon. Why would I ever flip them?",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "111": {
+  "script": "[shouting over her shoulder] MICHAEL. [quick] Can you grab Isla? She is going for the dog bowl.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "112": {
+  "script": "[shouting, alarmed] MICHAEL. Can you grab Isla? She has a leaf. [faster] She is going to eat the leaf.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "114": {
+  "script": "[cheerful, unbothered] Your name is Tom? I wrote TAM. [beat] It is basically the same.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "115": {
+  "script": "[tired young mom, escalating] Sofi, no. Sofi. SOFI. [beat, worried] ...She bit something. We do not have a dog. I do not know what she bit.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "130": {
+  "script": "[incredulous] Airport? You JUST landed. [rueful] The smog has me grounded anyway. I cannot see the freeway.",
+  "source": "claude/dialogue-scripts-ch2.json"
+ },
+ "2": {
+  "script": "[shrieking with joy, running] Tah Tah! You are BACK! [even louder] AGAIN!",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "3": {
+  "script": "[long considering pause, generous] ...That is ALMOST a palm tree.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "11": {
+  "script": "[thick New York accent, proud, holding it up] And I am bringing THIS. My pepper jar. [thick New York accent, reverent] Homegrown, pickled in nineteen eighty-nine. [thick New York accent, smug] Older than your mother.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "12": {
+  "script": "[thick New York accent, shouting after them, huffing] Why is everybody walking like they are going to a fire? [thick New York accent, louder] Slow down! My stomach is doing flips!",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "13": {
+  "script": "[thick New York accent, stunned, then shouting] That is no perch. That is OLD IRON-GILL. [thick New York accent, vindicated] I saw him in nineteen ninety-four! I TOLD everybody!",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "14": {
+  "script": "[small, soggy, squelchy, grumpy] Squelch. Have you seen my other sock? It looks just like me. [huffy] It is ALSO angry.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "15": {
+  "script": "[thick New York accent, offended, squaring up] Excuse me? Nobody gets past ME. That is MY line. [thick New York accent, scornful] I was saying that at Rikers before you were a knot.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "16": {
+  "script": "[tight, wiry, snarling] Snarl. Somebody cast me badly in nineteen ninety-seven. I have been in a knot ever since. [puffed up] Nobody gets past ME.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "17": {
+  "script": "[thick New York accent, out of breath, defiant] I am breathing EXACTLY as hard as I want to.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "18": {
+  "script": "[slow, deep, waterlogged, creaky] Creak. This was a boardwalk once. Now it is MY spot. Everything catches on me here. [satisfied] I like it.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "19": {
+  "script": "[shocked, rattled, scribbling] It MOVED. Shadows do not move like that. I am writing this down. [very serious] In pen.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "20": {
+  "script": "[exasperated, pointing] It is the AFTERNOON. The sun is right there. Sundials cannot be wrong. [firm] That is not how sundials work.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "21": {
+  "script": "[thick New York accent, flat, exasperated] He is a FISH, kiddo.",
+  "source": "claude/dialogue-scripts-ch3.json"
+ },
+ "0": {
+  "script": "[dry, impressed, deadpan] That is the fluffiest cow I have ever seen. [beat] And I have seen a LOT of cows.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "95": {
+  "script": "[hushed, amazed, little kid] Tah Tah. [beat] It is SNOWING. [whispers] Inside.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "96": {
+  "script": "[bossy, giving orders fast] Tah Tah is in front. I am in charge of choreography. It is my birthday. [battle cry] FIGHT!",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "97": {
+  "script": "[breathless, excited, counting it off] Tah Tah! Sprinkle Street Creamery! The sundae! [proud] Mister Pistachio said it would be READY.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "98": {
+  "script": "[firm, rallying, a little bossy] Up. Everybody up. [stern] It is my birthday and NOBODY stays down on my birthday.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "99": {
+  "script": "[bossy, disbelieving] Up, up. It is a slug. [indignant] We are not losing to a SLUG on my birthday.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "100": {
+  "script": "[gravelly, grumbling, offended, shivering] Grrrumble. Something moved into my pond. It is COLD. [huffy] I am a POND grump, not an ICE grump.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "101": {
+  "script": "[determined, bossy] Up, up. It is still my birthday. [fierce] We go AGAIN.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "102": {
+  "script": "[confused, monotone cracking] ...It is warm. [alarmed] Why is the picture WARM.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "103": {
+  "script": "[panicking, metallic voice shaking] My lid. My LID. [a creak in it] It is OPENING.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "104": {
+  "script": "[sulky, giving up, grumbling] Fine. FINE. Take the scoops. They are in the freezer. [a little proud] Where scoops go.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "105": {
+  "script": "[dry, deadpan, warm underneath] There is a LOT of cake.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "106": {
+  "script": "[out of breath, thrilled, Long Island accent, fast] You got them? All nine? Tom, I could KISS you. [beat] I will not. I am sweaty.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "107": {
+  "script": "[thick New York accent, deep, complaining] Nobody told me there would be a FREEZER at the table.",
+  "source": "claude/dialogue-scripts-ch21.json"
+ },
+ "22": {
+  "script": "[breathless, frantic young production assistant, running up] TNB! TNB! The rack! Rack two! [wailing] It is GONE.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "23": {
+  "script": "[sharp whisper, then breaking off] Nara. [louder] NARA. [trailing] Do not...",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "24": {
+  "script": "[gasp, then fierce] That is a costume tag. That is MY tag. [reading, outraged] WARDROBE, RACK TWO, HAND WASH ONLY. [quiet, hurt] I underlined it twice.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "25": {
+  "script": "[flustered, defensive, a tiny crack in the voice] ...Do not try to be nice to me. Nobody is nice to me. [weak threat] I will PINCH.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "26": {
+  "script": "[megaphone voice, twisted logic, proud] If there are no costumes, there is no take. If there is no take, there is no BAD take. [triumphant] It is perfect. [smug] It is my best work.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "27": {
+  "script": "[megaphone voice, defeated, sulking] Fine. FINE. [sigh] That's a wrap. [mumbling] On me. I am going back in the prop closet.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "28": {
+  "script": "[tense director, bursting with relief] The rack! The costumes! We can shoot! We are shooting! [shouting, thrilled] That is a WRAP on today, everybody!",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "29": {
+  "script": "[breathless, over the radio, cheering] WRAP PARTY AT CRAFTY! Toni made a cake! It is shaped like a clapper! [giggling] It is not clapping!",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "118": {
+  "script": "[buzzy, plaintive] Every time someone says CUT, I am the last to know.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "119": {
+  "script": "[buzzy, overwhelmed, whispering] I hear everything. [louder] EVERYTHING. [small] It is a lot.",
+  "source": "claude/dialogue-scripts-ch4.json"
+ },
+ "30": {
+  "script": "[bouncing, breathless, silly] Mom. Mom. Are we going to SCHOOL? At NIGHT? [thrilled shriek] That is the BEST thing that ever happened.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "31": {
+  "script": "[reading a note, gasp] FOR EVERYONE, LOVE DEEDEE. [thrilled] That is Deedee's handwriting! [bossy] Everyone means US!",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "32": {
+  "script": "[clanging, shrill, scolding] DING! You are LATE! Everybody is late! [wailing] I ring and I ring and nobody is ever on time!",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "33": {
+  "script": "[gloopy, sticky, proud, squelchy] Squelch. I glued the piano. I glued the xylophone. I glued a recorder to a tuba. [flamboyant] It is ART.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "34": {
+  "script": "[torn, gasping] Tah Tah, it is SPARKLY. I love it. [horrified] I hate it. [swooning] I love it.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "35": {
+  "script": "[crackly intercom, calm and clear] Kssssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. [uneasy] There is something in the Cafetorium.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "36": {
+  "script": "[small, awed whisper] It is covered in RED.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "37": {
+  "script": "[whisper-shrieking, giddy] Tah Tah, it is a PEN. [thrilled] With GLASSES.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "38": {
+  "script": "[impressed, teacherly] Whoever it is has very neat tape. [admiring] Look at those corners.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "108": {
+  "script": "[outraged, clipped] The sign-up sheet RAN AWAY. [seething] On little paper legs. [stiff] I have never been so offended.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "120": {
+  "script": "[gloopy, indignant, grand] I am not messy. [dramatic] I am DECORATIVE.",
+  "source": "claude/dialogue-scripts-ch5.json"
+ },
+ "39": {
+  "script": "[reading a text aloud, flat, then a flicker of worry] \"Babe. Come home. Your house. NOW. [low] It is about Bready Mercury.\"",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "40": {
+  "script": "[stern, hushed, pointing] And it all goes up THAT tree. The Old Oak. [low] There is a little door in the trunk. [intense] I have heard a secret knock. [frustrated] Only bits of it.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "41": {
+  "script": "[breathless, thrilled] That is all three scraps. One acorn, two acorns, three acorns. [whisper] It is a sequence, babe. [delighted] It is ALWAYS a sequence.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "42": {
+  "script": "[tight, controlled] That is my house. That is my JAR. [rising, bewildered] Why is my jar in the middle of everything?",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "43": {
+  "script": "[trembling whisper, overjoyed] Babe. Babe. They have a corkboard. [reverent] With RED STRING. [breathless] I have waited my whole life for this.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "44": {
+  "script": "[firm, patient, quietly passionate] That is Bready Mercury. He is nine. You feed him flour and water, and then you SHARE the bread. [gentle] That is the whole point of him.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "45": {
+  "script": "[squeaky, dreamy, greedy, hugging the jar] And this jar. This jar smells like bread FOREVER. You feed it and it grows. [awed] It never runs out. [whisper] It is the perfect hoard.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "46": {
+  "script": "[squeaky, pompous, defeated, sulking] Fine. [snapping] FINE. This meeting is adjourned. [mumbling] I am going to go stare at a bird feeder.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "47": {
+  "script": "[reading a text aloud, dry] A text from Grace. [in Grace's bossy voice, caps] \"Tah Tah. The library is WHISPERING. Like actually. Page says it is fine. It is NOT fine. Come home.\"",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "4": {
+  "script": "[hushed, unrolling it] And there is a scrap of paper in here. A drawing of two acorns. [low] And one word: SCRATCH.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "134": {
+  "script": "[elderly, delighted, warm] My reading glasses! Found in a hole in the park. [chuckling] I will not ask.",
+  "source": "claude/dialogue-scripts-ch6.json"
+ },
+ "48": {
+  "script": "[bossy, wide-eyed] Not a little bit. ALL the books. At the same time. [hushed] And they are saying THINGS.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "49": {
+  "script": "[bossy, mortified, then proud] A book told everybody I sing in the shower. [outraged] Which is PRIVATE. [lofty] Also I am very good.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "50": {
+  "script": "[whispery librarian, intense] Books overhear EVERYTHING. [hushed] That is why we whisper in here. [grave] It was never for the people. It is for the books.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "51": {
+  "script": "[bossy, outraged] That is SO annoying. [stern] Finish your SENTENCES.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "52": {
+  "script": "[bossy, clapping, in charge] Okay. Everybody up. I am in charge of getting up. [rallying] Up, up, UP.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "53": {
+  "script": "[stunned, then fiercely indignant] ...Hey. HEY. [furious] Nobody scares ME. [proud] I do the scaring. That is MY job.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "54": {
+  "script": "[awed whisper, bossy] Tah Tah. On the dais. [hushed] It is a book. [stunned] A really, REALLY big book.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "55": {
+  "script": "[very old, papery, rising, ominous] If nobody will read me, then I will read THEM. [hissing] Out loud. [booming] To everybody.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "56": {
+  "script": "[bossy, furious] You cannot just tell people's secrets! [shouting] That is the rudest thing a book can do! [stamping] That is a RULE!",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "57": {
+  "script": "[indignant, then sad] Somebody took it out and did not READ it? [soft] That is so sad.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "58": {
+  "script": "[bossy, proud] I am adding it to MY list. [smug] Mine has a chart AND a key now.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "59": {
+  "script": "[stunned, overjoyed, breathless] No late fees. [shrieking whisper] EVER? Tah Tah. [determined] I am going to take out every book. Every single one. [proud] Alphabetically.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "60": {
+  "script": "[wide-eyed, bossy] Forty people? Tah Tah. [awed] That is a FEAST.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "121": {
+  "script": "[hushed, breathy, prim, sinister] Shh. The books are listening. [creepy] They are ALWAYS listening.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "122": {
+  "script": "[creased, papery, pleading, then shouting] Use a bookmark. That is all I ask. [shouting] A BOOKMARK.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "135": {
+  "script": "[dramatic announcer, deep, theatrical, teasing] And then the uncle turned around and saw... [coy] no. I will not say.",
+  "source": "claude/dialogue-scripts-ch7.json"
+ },
+ "61": {
+  "script": "[reading a text aloud, dry] \"Babe. Potluck is TONIGHT. [beat] Forty people. You are on bread.\"",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "62": {
+  "script": "[stern, crisp, seething] They said it is the weekend. I said it is the POTLUCK. [flat] They hung up. [tight] I have filed a report. [beat] With myself.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "63": {
+  "script": "[easy, then hushed and spooked] Right. Well, it is cold. Everybody's is cold. I tried to light yours. [whisper] The flame LEANED, babe. Sideways. Toward the boulevard. [low] Like it wanted to leave.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "64": {
+  "script": "[dreamy, longing] I have wanted to go in there since I MOVED here.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "65": {
+  "script": "[low, working it out] Those are pilot lights. The whole block's pilot lights. [grim] Something down here is collecting them.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "66": {
+  "script": "[prissy, whiny, nasal, appalled] Ew. EW. Who are you. What is that. [horrified] Is that a dog? Ew. [shrieking] Is that BREAD? [wailing] Bread is the worst. [shrill] Bread TOUCHES things.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "67": {
+  "script": "[amused, laughing] She would not eat her own dinner. [delighted] She ate YOUR dinner.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "68": {
+  "script": "[prissy, whiny, nasal, sulking, giving in] ...Fine. [snapping] FINE. Take it. [grumbling] I will try a bite of something. Later. Maybe. [petulant] If it is warm. And not touching.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "69": {
+  "script": "[thrilled, amazed, laughing] Steam. We have STEAM, babe. [proud] I fixed a hundred-year-old turntable motor. [grin] I am going to put this on my resume.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "70": {
+  "script": "[huge, deep, rumbling, slow, defeated, resigned] ...Fine. [heavy] FINE. Take your little flames back. [sad] I will be cold again. [quiet] I am used to it.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "71": {
+  "script": "[huge, deep, rumbling, rising, joyful] And look at me. I am WARM again. [thrilled] I am five hundred degrees. [roaring] Do you know how long it has been since I was five hundred degrees?",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "72": {
+  "script": "[giddy, hushed, tilting his head] Forty loaves, babe. FORTY. [wondering] They are crackling. Listen to them. [soft] They are singing.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "73": {
+  "script": "[fast, overjoyed mom, hushed and thrilled] Tom. TOM. Nara is eating. [breathless] Look at her. She is EATING.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "74": {
+  "script": "[giddy, explaining his own joke] Because the bread. [grinning] And we are TOASTING. [proud] It works on two levels.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "76": {
+  "script": "[reading a text aloud, in Deedee's warm voice, fond] \"It says THE MOON CLUB. Nobody gets invited to the Moon Club. [emphatic] I have lived here forty years. [tender] I love you to the moon and back. [brisk] Call me.\"",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "110": {
+  "script": "[fast, mom, bewildered] Did she eat? She will not eat cold food. She will not eat warm food either. [exasperated] She eats off YOUR plate, Tom.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "113": {
+  "script": "[old, deadpan, over a leaf blower] I am blowing leaves. [beat] They are frosty. [flat] In LA. [dry] I have questions.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "123": {
+  "script": "[mild, defensive, brittle] I am fine. [snapping] I am FINE. [prim] I am exactly room temperature.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "124": {
+  "script": "[prissy, whiny, nasal, appalled] I do not eat cold food. I do not eat hot food. [shrill] I do not eat food that TOUCHES.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "132": {
+  "script": "[fast, frazzled mom, pleading] Tom! Can you take Nara? She will not eat. Her dinner is cold, so she will not eat it. [incredulous] Michael warmed it in his HANDS. [wailing] She still will not eat it.",
+  "source": "claude/dialogue-scripts-ch8.json"
+ },
+ "75": {
+  "script": "[bright, bossy nine-year-old, breathless] Tah Tah. [louder] TAH TAH. Deedee has a LETTER for you. [awed] It is GOLD. [indignant] She will not let us open it.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "133": {
+  "script": "[bright, bossy nine-year-old, aggrieved] She let us hold it. For one second. [mimicking Deedee] Then she took it back and said, careful, that is wax.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "77": {
+  "script": "[bright, bossy nine-year-old, outraged] ADULTS ONLY? [indignant] I am basically an adult. I have a YouTube channel. [proud] I have a SKINCARE ROUTINE.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "78": {
+  "script": "[breathless, worried, bookish woman] And my telescope cannot find the moon. [urgent] It is not behind a cloud. It is not anywhere. [hushed] It is just GONE.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "79": {
+  "script": "[frazzled, clingy, proud, a little sad] That was nineteen seventy-one. I have not let go once. [bright] I am VERY good at hanging on.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "80": {
+  "script": "[cranky, bitter, rapid-fire] Deal me in. [snapping] No. Wait. Do not deal me in. [accusing] You are cheating. Everybody is cheating. [shrill] The MIRROR is cheating.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "81": {
+  "script": "[gruff, thick New York accent, indignant, then flat] I am a sore WINNER. [dry] Who has not won yet.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "82": {
+  "script": "[gruff, thick New York accent, suspicious, flat] Somebody up there is playing music. Very loud music. [dry] In nineteen seventy-one they called that a nuisance.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "83": {
+  "script": "[dazzling, theatrical, glittery diva, fierce, then delighted] If I am the brightest thing in the whole sky, somebody will HAVE to come dance. [triumphant] And look. [thrilled] Somebody did.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "109": {
+  "script": "[breathless, worried, bookish woman, rattled] It is not behind a cloud. [distressed] It is just not THERE. [small] I checked four times.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "125": {
+  "script": "[weak, snooty, starchy, wheezy] ...one does not RUN in a ballroom.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "126": {
+  "script": "[cranky, bitter, shrill] I am wild. [loud] WILD. [sulky] Nobody ever plays me.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "127": {
+  "script": "[dazzling, theatrical, glittery diva, fierce, desperate] If I am the brightest thing in the sky, somebody will HAVE to come.",
+  "source": "claude/dialogue-scripts-ch9.json"
+ },
+ "131": {
+  "script": "[whining, aggrieved, up a ladder] But I've been on this ladder for an hour!",
+  "source": "claude/voice-baker-scripts-familylab.json"
+ },
+ "136": {
+  "script": "[easy-going, warm] Great take. I would not change a single stitch.",
+  "source": "claude/voice-baker-scripts.json"
+ },
+ "137": {
+  "script": "[dry, polite] Present. Window seat, please. [deadpan] I will not be reclining.",
+  "source": "claude/voice-baker-scripts.json"
+ }
+}
