@@ -283,8 +283,9 @@ SC.tb_rec=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez(ms/250)*(ms>P.off?1-ez((ms-P.
 B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tgt=(E2.targets||[]).find(t=>t.side==='foe')||list.find(f=>f.row==='front')||list[0],F=ST.foe(tgt);
-  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  const gx=Math.max(GR.x1+60,T.x-118),gb=Math.min(316,T.base+16);
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,GH=gsp.idle.length*gsp.scale,GW=gsp.idle[0].length*gsp.scale;
+  // Grace stands in front of Tom (to his left, facing him) with a clear gap. If the monsters leave no room, Tom steps right.
+  const tx=cl(Math.max(T.x,GR.x1+6+GW+10+TW/2),T.x,470),gx=tx-TW/2-GW/2-10,gb=Math.min(316,T.base+4);
   // Voice-anchored timing: Grace's line is 3.15 s and Tom's "Fine." is 1.3 s of real audio. Game time runs K times faster than the
   // clock at 2x speed, so those two spans are stretched by K and the squishy can never fall before "Fine." has been said.
   const K=b7Speed(),g0=700,gEnd=g0+3150*K,fine=gEnd+650,fineEnd=fine+1300*K,box=fineEnd+100;
@@ -318,6 +319,7 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<650) { const k=ez(ms/650); x=lerp(c.origX,gx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.back) { x=gx; y=gb;
       for(const t0 of stomps) if(ms>t0&&ms<t0+260) y-=Math.sin(seg(ms,t0,t0+260)*Math.PI)*9;
+      if(ms>P.g0&&ms<P.gEnd) f=mirrorRowsCached(sp,'expr');   // pointing at Tom while she tells him
       if(ms>P.yes&&ms<P.yes+900) { y-=Math.abs(Math.sin(seg(ms,P.yes,P.yes+900)*Math.PI*2))*18; f=sp.celebFlip||sp.flip; }
       if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celebFlip||sp.flip; } }
     else { const k=ez(seg(ms,P.back,P.back+600)); x=lerp(gx,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
@@ -326,9 +328,10 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   pathOf(fxT,D,(ms,c)=>{ const sp=c.sp; let y=c.origBase,f=sp.idle;
     if(ms>P.sigh&&ms<P.yes) { f=sp.expr||sp.idle; y+=Math.sin(seg(ms,P.sigh,P.sigh+500)*Math.PI)*2; if(ms>P.fine-100&&ms<P.fine+500) y-=Math.sin(seg(ms,P.fine-100,P.fine+500)*Math.PI*2)*4; }
     if(ms>P.land&&ms<P.land+900) f=sp.celeb;
-    return {cx:c.origX,base:y,frame:f}; });
+    const cx=ms<P.back?lerp(c.origX,tx,ez(seg(ms,0,650))):lerp(tx,c.origX,ez(seg(ms,P.back,P.back+500)));
+    return {cx,base:y,frame:f}; });
   scene('tb_draw',D/1000,{back:false,draw:(s,u,ms)=>{
-    const gy=st.gb-GH,mx=T.x-TW/2+10*tsp.scale,my=T.base-TH+17*tsp.scale;
+    const gy=st.gb-GH,mx=tx-TW/2+10*tsp.scale,my=T.base-TH+17*tsp.scale;
     // bossy: a burst of emphasis lines beside her head on each stomp, no begging
     for(const t0 of stomps) if(ms>t0&&ms<t0+400) { const q=seg(ms,t0,t0+400); gfx.globalAlpha=1-q;
       for(let j=0;j<3;j++) { const a=-.5+j*.5-Math.PI/2+.4,r0=22+q*8,r1=r0+10; Ln(st.gx+14+Math.cos(a)*r0,gy+8+Math.sin(a)*r0,st.gx+14+Math.cos(a)*r1,gy+8+Math.sin(a)*r1,3,CREAM); } gfx.globalAlpha=1; }
@@ -350,7 +353,7 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     ...stomps.map(t0=>[t0,()=>S('bump')]),
     [g0+1000,'Grace is not asking. She is informing.'],
     [P.sigh,()=>{ S('whoosh'); setMessage('Tom sighs. He knows how this ends.'); }],
-    [P.fine,()=>{ say('tom','tombograce'); word('FINE.',T.x-20,T.base-TH-14,CREAM,4,1); }],
+    [P.fine,()=>{ say('tom','tombograce'); word('FINE.',tx-20,T.base-TH-14,CREAM,4,1); }],
     [P.yes,()=>{ word('YAY!',gx+10,gb-GH-14,GOLD,4,1); S('cheer'); }],
     [P.box,()=>{ setMessage('A gift box floats down from the sky.'); S('whoosh'); }],
     [P.rattle,()=>{ S('squeak'); }],
