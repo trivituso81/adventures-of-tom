@@ -1548,11 +1548,14 @@ Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=no
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1150,f:'act',dy:u=>-ez(u)*6},
     {t:2200,f:'celeb',hop:16},{t:2650,f:'celeb',hop:9,hn:2},{t:3050,f:'runR'},{t:3750,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); }],
+    [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); warmClip('rose','Boop!'); }],   // decode the clip now so it plays instantly later
     [1150,()=>{ setMessage('Pointer finger out.'); scene('rf_poke',1.0,{n,from:1150,pokes,back:1850,t0:1150}); }],
-    [HIT-60,()=>{ say(m.id,'boop'); }],   // starts a hair early so the word itself lands on contact
+    // The baked "Boop!" clip is 2.08 s long and the word itself sits at 1.42 to 1.60 s, so play only that slice (1.39 to 1.75 s).
+    // Voice and sound start a little before contact to cover phone audio output delay (about 60 to 100 ms).
+    [HIT-80,()=>{ say(m.id,'boop',0,null,{text:'Boop!',len:45756,from:1.39,to:1.75}); }],
+    [HIT-50,()=>{ sfx.boop?sfx.boop():sfx.bonk(); }],
     ['hf',HIT],
-    [HIT,()=>{ sfx.boop?sfx.boop():sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'BOOP!',c:PINK2,sc:5});
+    [HIT,()=>{ ST.jolt(f,.35); landHit(100); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'BOOP!',c:PINK2,sc:5});
       scene('rv_rings',.6,{x:n.x,y:n.y,r:34}); scene('rv_burst',.7,{x:n.x,y:n.y,n:8,r:40,sz:6}); }],
     [2200,()=>{ sfx.giggle(); scene('ro_text',.9,{st,txt:'HEE HEE',c:PINK,sc:2}); }],
     [3850,'end',res(E2)+'Boop. One finger. Right on the nose.']]); };

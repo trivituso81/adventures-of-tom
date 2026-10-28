@@ -38,7 +38,20 @@ function pickVoice(id) {
   return en[0]||list[0]||null;
 }
 
-function say(id,kind,delay=0,only=null) {
+// Decode a baked clip ahead of time so its first play has no decode delay (call a second or so before it is needed).
+function warmClip(id,text) {
+  const c=audio(); const all=(VOICE_CLIPS&&VOICE_CLIPS.clips&&VOICE_CLIPS.clips[id])||{};
+  if(!c) return;
+  for(const k in all) for(const cl of all[k]) {
+    if(!cl||cl.text!==text||clipCache.has(cl.mp3)) continue;
+    const bin=atob(cl.mp3),u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
+    c.decodeAudioData(u.buffer).then(buf=>clipCache.set(cl.mp3,buf)).catch(()=>{});
+    return;
+  }
+}
+// slice={text,len,from,to}: play only seconds from..to of the baked clip with that text. The slice applies only if the
+// clip's length still equals len (a re-baked clip has different timing, so then the whole clip plays instead).
+function say(id,kind,delay=0,only=null,slice=null) {
   if(!sound.enabled) return;
   const v=VOICE[id];
   if(!LINES[id]||!(LINES[id][kind]||LINES[id].attack||LINES[id].basic||LINES[id].hurt)) return;
@@ -52,7 +65,8 @@ function say(id,kind,delay=0,only=null) {
   if(!bakedClips.length&&VOICE_CLIPS&&VOICE_CLIPS.clips&&VOICE_CLIPS.clips[id])
     for(const k in VOICE_CLIPS.clips[id]) for(const c of VOICE_CLIPS.clips[id][k]) if(c&&allowed.has(c.text)) bakedClips.push(c);
   const go=()=>{
-    if(bakedClips.length) { if(playClip(pick(bakedClips))) return; }
+    if(bakedClips.length) { const cl=pick(bakedClips), ok=slice&&cl.text===slice.text&&cl.mp3.length===slice.len;
+      if(playClip(cl,ok?{from:slice.from,to:slice.to,gain:1}:undefined)) return; }
     // The same words baked as a dialogue line in this character's voice (data/voice/dialog-ch*.js) count too.
     const dl=typeof DIALOG_CLIPS!=='undefined'&&DIALOG_CLIPS.clips[id+'|'+line];
     if(dl&&playClip({mp3:dl})) return;

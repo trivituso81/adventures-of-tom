@@ -47,9 +47,9 @@ function dvPlay(b64) {
 
 // Overworld barks (say) wait one tick, so a dialogue box opened in the same moment can claim the voice first.
 const LE_say_dv=say;
-say=function(id,kind,delay=0,only=null) {
-  if(battle.active||(typeof cutsceneOn==='function'&&cutsceneOn())) return LE_say_dv(id,kind,delay,only);
-  const h=setTimeout(()=>{ DV.pendingSay=DV.pendingSay.filter(x=>x!==h); LE_say_dv(id,kind,delay,only); },0);
+say=function(id,kind,delay=0,only=null,slice=null) {
+  if(battle.active||(typeof cutsceneOn==='function'&&cutsceneOn())) return LE_say_dv(id,kind,delay,only,slice);
+  const h=setTimeout(()=>{ DV.pendingSay=DV.pendingSay.filter(x=>x!==h); LE_say_dv(id,kind,delay,only,slice); },0);
   DV.pendingSay.push(h);
 };
 function dvDropPendingSay() { for(const h of DV.pendingSay) clearTimeout(h); DV.pendingSay=[]; }

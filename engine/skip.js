@@ -26,10 +26,10 @@ const cutMuted=()=>cut.skip||performance.now()<cut.muteUntil;
 const LE_tone_cut=tone,LE_noise_cut=noise,LE_say_cut=say;
 tone=function(o) { if(cutMuted()) return; return LE_tone_cut(o); };
 noise=function(o) { if(cutMuted()) return; return LE_noise_cut(o); };
-say=function(id,kind,delay=0,only=null) {
+say=function(id,kind,delay=0,only=null,slice=null) {
   if(cutMuted()||(cut.ff&&cutsceneOn())) return;
-  if(delay) { setTimeout(()=>{ if(!cutMuted()&&!(cut.ff&&cutsceneOn())) LE_say_cut(id,kind,0,only); },delay*1000); return; }
-  return LE_say_cut(id,kind,0,only);
+  if(delay) { setTimeout(()=>{ if(!cutMuted()&&!(cut.ff&&cutsceneOn())) LE_say_cut(id,kind,0,only,slice); },delay*1000); return; }
+  return LE_say_cut(id,kind,0,only,slice);
 };
 
 const onChoiceNow=()=>dialog.active&&dialog.choice&&dialog.index===dialog.lines.length-1;
