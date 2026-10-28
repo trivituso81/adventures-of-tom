@@ -1,5 +1,12 @@
 # Change log (newest first)
 
+## 2026-10-28: Painted plates for four Long Island areas
+- The Square, Rivituso Row, Grump Hollow and the Whispering Marsh (map id `reeds`) now use Tom's painted art (`art/*.webp`, drawn by `engine/plate.js`). The tile grid stays underneath as the invisible walk map. Row, Hollow and Marsh have a `plateMask` in `data/maps-le.js` ('#' blocks, '.' walks); doors, exits and spec objects stay as they were, spec objects are no longer drawn (flag `baked`), runtime props still are.
+- Rivituso Row is re-laid to the painting: Gregori (7,3), Rivituso (18,7 door), Aunt Ellie's house (id `elliehouse`, now at 9,11). Exits to the Square, Pier, Hollow and Marsh moved; chapter 1, 3, 9, 13, 14 and Nine Scoops coordinates remapped. Tests: `tools/ch14_test.py` stand positions updated.
+- Marsh: one long route (east platform, long boardwalk, zigzag, dirt path to the old reeds). The old reeds now block (3..4, 1..2). The south-west dirt path in the painting is not walkable.
+- Known roughness: minimaps still draw the old tile look; the painted Square fountain and notice board differ slightly from the sprites.
+- Not reworded: no spoken lines changed.
+
 ## 2026-10-28: Part 2, Chapter 17 "Ascent of the Glass Tower"
 - Talk to Sol at the Angel City cab stand after chapter 16 to start chapter 17. Grace and Rose rejoin. Julian Vance's 60-story Glass Tower stands on the Downtown boulevard (doors in the alley between Ramen Ramen and The Starlite).
 - New dungeon, four maps: the Lobby, the Stairwell (floors 2 to 30, Stillness guards, coffee restore points), the Shelf Hall, the Vault. Glass, gold and a golden-hour skyline; new battle backdrop.
