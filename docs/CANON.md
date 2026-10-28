@@ -31,6 +31,7 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 
 - Title: **The Adventures of Tom**. Hometown: Long Island (formerly "Little Elsewhere").
 - Three-area town structure: residential, commercial, monster area, reached through openings at screen edges.
+- Aunt Ellie (Deedee's aunt) lives in her own house on Rivituso Row (top left, purple roof, label ELLIE), not in the Rivituso house (decided 2026-10-28). She visits the Rivituso house for the chapter 9 card game with the girls and the chapter 10 homecoming dinner.
 - Story vision: about 40 hours, classic SNES JRPG structure with a sudden modern twist, shocking twists, extreme tragedy later undone, betrayal, growing love and bonds. Characters come and go from the party like Final Fantasy IV.
 - The game splits into two Parts, both on the title screen. Part 2 is greyed out until Part 1 is complete and starts only from a Part 1 end-game save with everything carried over.
 - The original game is kept as a frozen **demo**; the new build is the **full game**.

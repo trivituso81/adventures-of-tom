@@ -1705,13 +1705,15 @@ TUTORIALS.redpen={tips:[
 // and come back when none do (Justin at work during chapter 5; Olivia and Michael on their desert trip).
 const AWAY_NPCS=[];
 for(const id in worlds) for(const n of worlds[id].npcs) if(n.away) AWAY_NPCS.push({map:worlds[id],n});
-STORY_WORLD.push(()=>{
+function syncAwayNpcs() {
   for(const {map,n} of AWAY_NPCS) {
     const gone=n.away.some(storyMatch),has=map.npcs.includes(n);
     if(gone&&has) { map.npcs.splice(map.npcs.indexOf(n),1); n.move=null; n.path=[]; }
     else if(!gone&&!has) map.npcs.push(n);
   }
-});
+}
+STORY_WORLD.push(syncAwayNpcs);
+syncAwayNpcs(); // once at load too, so a visitor's second copy (Aunt Ellie at the Rivituso house) never shows outside the story
 
 // ======================================================================================================
 // CHAPTER 6: The Great Squirrel Conspiracy. Sal flies Tom to LA (storyTripSteps sets chapter 6). Bready Mercury, Tom's

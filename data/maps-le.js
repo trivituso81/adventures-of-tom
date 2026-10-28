@@ -65,7 +65,8 @@ const LE_HOUSES=[
   {id:'taxi',area:'town',name:'Long Island Taxi Co.',label:'TAXI',x:23,y:14,w:5,h:5,roof:'#d9a43a',light:'#f2c75a',wall:'#efe4cb',taxi:true},
   {id:'shop',area:'town',name:"Penny's Pockets",label:'SHOP',x:23,y:3,w:5,h:5,roof:'#b9483f',light:'#d9675b',wall:'#f3e3bf',shop:true},
   {id:'amyhouse',area:'row',x:9,y:4,name:"Amy's House",label:'GREGORI',w:5,h:5,roof:'#c0707e',light:'#dc9aa5',wall:'#f0e2d6'},
-  {id:'grands',area:'row',x:16,y:4,name:"Deedee and Boppy's House",label:'RIVITUSO',w:5,h:5,roof:'#8d7b63',light:'#b59e82',wall:'#ead9b8'}
+  {id:'grands',area:'row',x:16,y:4,name:"Deedee and Boppy's House",label:'RIVITUSO',w:5,h:5,roof:'#8d7b63',light:'#b59e82',wall:'#ead9b8'},
+  {id:'elliehouse',area:'row',x:2,y:4,name:"Aunt Ellie's House",label:'ELLIE',w:5,h:5,roof:'#6e4a7e',light:'#9a76a8',wall:'#eadcea'}
 ];
 
 // Areas drawn as an ASCII plan (chapter 3 on): one character per tile, turned into pools, tiles, patches and objects.
@@ -148,7 +149,7 @@ const LE_AREAS=[
               {chapter:1,flag:'ch1-theft',lines:['A mud blob ran through the Square with a pie tin. One blob. One tin. I counted.','It went north. Into the gap in the trees. Gap number one.']}]}]},
 
   {id:'row',name:'Rivituso Row',w:24,h:22,
-    tag:"Two houses. One family. Cookies at Deedee's.",
+    tag:"Three houses. One family. Cookies at Deedee's.",
     eyebrow:'LONG ISLAND / RIVITUSO ROW',
     hint:'Home. Knock on any door. Someone will feed you.',
     spawn:{x:14,y:2},
@@ -167,14 +168,13 @@ const LE_AREAS=[
       {kind:'fence',at:[[16,14],[17,14],[18,14],[19,14],[20,14],[21,14]]},
       ['sign',16,1,1,1,'Row signpost',"THE SQUARE, back that way. Shops, fountain, Pip's rock."],
       ['sign',16,20,1,1,'Pier signpost','CATTAIL PIER, south. Catch and release. Mostly release.'],
-      ['sign',10,13,1,1,'Family notice',"Rivituso Row. Cookies at Deedee's. Juice at Amy's. Peace and quiet at nobody's."],
+      ['sign',10,13,1,1,'Family notice',"Rivituso Row. Cookies at Deedee's. Juice at Amy's. Opinions at Ellie's. Peace and quiet at nobody's."],
       ['bench',4,13,2,1,'The other bench','Boppy sat here once in 2019. It\'s still his.'],
       ['planter',17,15,3,1,"Deedee's tomatoes",'Forty tomatoes. You\'ll be sent home with all of them.'],
       ['planter',20,16,2,1,"Boppy's peppers",'A pepper so hot the garden hose flinched. Boppy is proud.'],
       ['planter',2,16,3,1,"Deedee's herb bed","Basil, mint and rosemary. Deedee says the rosemary is for Boppy's stomach. Boppy disagrees."],
-      ['planter',2,7,3,1,'Community garden',"Squash, beans and a scarecrow wearing Boppy's old cap. The scarecrow walks too fast, apparently."],
-      {kind:'tree',at:[[3,4],[5,5]]},
-      ['sign',4,9,1,1,'Corner garden','Everybody on the Row shares this patch. Grace planted a sunflower. Rose planted a rock.'],
+      ['planter',2,12,3,1,'Community garden',"Squash, beans and a scarecrow wearing Boppy's old cap. The scarecrow walks too fast, apparently."],
+      ['sign',5,12,1,1,'Corner garden','Everybody on the Row shares this patch. Grace planted a sunflower. Rose planted a rock.'],
       ['bench',11,20,2,1,'The porch bench',"Grace and Rose's chalk drawings cover the seat. Sit carefully. Sit colorfully."]],
     npcs:[
       {name:'Gus',x:5,y:19,look:'gus',lines:[
@@ -600,6 +600,9 @@ function planClub(plan) {
 const CLUB_MIRRORS=[{m:'A',fight:'ch9-coat',x:21,y:11,from:'the Coat Check'},{m:'B',fight:'ch9-cards',x:21,y:9,from:'the Card Room'},{m:'C',fight:'ch9-ball',x:15,y:9,from:'the Ballroom'}];
 const CLUB_BEAM={x:28,y:11,dir:'left'};
 const CH9_ON={chapter:9,notFlag:'ch9-done'},CH9_DONE={from:9,flag:'ch9-done'};
+// Aunt Ellie lives in her own house on Rivituso Row. She walks over to the Rivituso house for the chapter 9 card game with the
+// girls and for the chapter 10 homecoming dinner; her house copy is `away` then and the visiting copy below is `away` otherwise.
+const ELLIE_VISIT=[{mode:'full',chapter:9,flag:'ch9-letter',notFlag:'ch9-done'},{mode:'full',chapter:10,flag:'ch10-clear',notFlag:'ch10-done'}];
 LE_AREAS.push(
   planMerge({id:'moonclub',name:'The Moon Club',w:30,h:22,ground:'club',
     tag:'Up the stairs behind the telescope. Velvet, marble, and a lot of dust since 1971.',
@@ -993,23 +996,11 @@ const LE_ROOMS=[
         hug:[
           'Hugs for everyone. There. All better.',
           'Hugs for everyone, just because. To the moon and back.']},
-      // Aunt Ellie: Deedee's aunt, visiting. Cosmopolitan, fashionable, sharp, wise, takes no nonsense.
-      {name:'Aunt Ellie',x:6,y:3,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,lines:[
-        'Tom. Stand up straight. There. Now you look like someone I\'m related to.',
-        'Yes, Deedee has an aunt. Yes, I\'m older. No, you may not ask by how much.',
-        'I\'ve been to Paris eleven times. Long Island is charming. Like a hat you wear once.'],
-        when:[{...CH9_ON,flag:'ch9-letter',lines:['The girls and I are playing cards. I\'m winning. I\'m also cheating. They\'re learning a great deal.','Go. Dance. Somebody in this family should get to finish a party at the Moon Club.']},
-              {...CH9_DONE,lines:['My coat. Ticket seven. I left it at the last dance and never went back for it.','I had a date with a man who turned out to be a disappointment. The coat wasn\'t. Keep it warm for me.']}],
-        revisit:[
-          'Deedee keeps offering me rhubarb crisp. I keep saying yes. That\'s called manners.',
-          'Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.',
-          'Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.',
-          'Wisdom is remembering what went wrong and saying so before it happens again.',
-          'Never apologize for being early, dressing up, or leaving a bad party.',
-          'Tom, you have a good heart. Now do something about the shoes.',
-          'Deedee says I\'m sharp. I say everyone else is a little dull.',
-          'A good scarf fixes almost anything. Not Boppy. But almost anything.',
-          'Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.']},
+      // Aunt Ellie visiting: in chapter 9 she minds the girls with cards; at the chapter 10 homecoming she wants the airport story.
+      {name:'Aunt Ellie',x:6,y:3,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,
+        away:[{test:S=>!ELLIE_VISIT.some(storyMatch)}],
+        lines:['Sit. Tell me about the airport. Leave nothing out. I\'ll know.'],
+        when:[{...CH9_ON,flag:'ch9-letter',lines:['The girls and I are playing cards. I\'m winning. I\'m also cheating. They\'re learning a great deal.','Go. Dance. Somebody in this family should get to finish a party at the Moon Club.']}]},
       {name:'Boppy',x:8,y:5,look:'gus',sheet:'boppy',grandpa:true,duration:0.96,lines:[
         'Tom! Good. I\'m not feeling good. Something with the stomach. Sit, I\'ll tell you about it.',
         'Grace, Rose, come give Boppy a hug. Gently. The stomach. And slow down, you two walk too fast.',
@@ -1030,5 +1021,33 @@ const LE_ROOMS=[
       ['tv',5,1,3,1,'The TV','The fishing channel. It\'s been on since 1994.'],
       ['counter',1,7,4,1,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
       ['photo',9,7,1,1,'Photo wall','Tom at six. Amy at four. Boppy in his college track singlet, holding a trophy. Another one with a fish.'],
-      ['pot',10,1,1,1,'Pepper plant',"Boppy's pride. The label just says NO."]]}
+      ['pot',10,1,1,1,'Pepper plant',"Boppy's pride. The label just says NO."]]},
+  {id:'elliehouse',w:12,h:10,
+    style:{floor:'#cdb9c6',alt:'#d8c6d2',wall:'#7a5a78',trim:'#eadcea',pattern:'wood',rug:'#6a3a8a'},
+    rug:[3,4,6,3],
+    npcs:[
+      // Aunt Ellie: Deedee's aunt. Cosmopolitan, fashionable, sharp, wise, takes no nonsense. Lives here; visits the Rivituso house in chapters 9 and 10.
+      {name:'Aunt Ellie',x:5,y:5,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,away:ELLIE_VISIT,lines:[
+        'Tom. Stand up straight. There. Now you look like someone I\'m related to.',
+        'Yes, Deedee has an aunt. Yes, I\'m older. No, you may not ask by how much.',
+        'I\'ve been to Paris eleven times. Long Island is charming. Like a hat you wear once.'],
+        when:[{...CH9_DONE,lines:['My coat. Ticket seven. I left it at the last dance and never went back for it.','I had a date with a man who turned out to be a disappointment. The coat wasn\'t. Keep it warm for me.']}],
+        revisit:[
+          'Deedee keeps offering me rhubarb crisp. I keep saying yes. That\'s called manners.',
+          'Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.',
+          'Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.',
+          'Wisdom is remembering what went wrong and saying so before it happens again.',
+          'Never apologize for being early, dressing up, or leaving a bad party.',
+          'Tom, you have a good heart. Now do something about the shoes.',
+          'Deedee says I\'m sharp. I say everyone else is a little dull.',
+          'A good scarf fixes almost anything. Not Boppy. But almost anything.',
+          'Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.']}],
+    objects:[
+      ['shelf',1,1,3,1,'Hat shelf','Eleven hat boxes, one for every trip to Paris. A twelfth sits empty. Ellie is planning.'],
+      ['photo',5,1,1,1,'Framed photo','Ellie on a ship deck in a wide white hat, 1968. The caption says: Arrived fashionably late.'],
+      ['desk',8,1,3,1,'Writing desk','Cream stationery, a fountain pen, and a thank-you note for a favor nobody has done yet.'],
+      ['recliner',1,3,2,2,"Ellie's wardrobe",'Every hanger faces the same way. One hanger is empty, and Ellie will not say why.'],
+      ['pot',10,3,1,1,'White orchid','Alive for nine years, out of pure intimidation.'],
+      ['pot',1,7,1,1,'Umbrella stand','Six umbrellas, none for rain. Ellie says rain should dress better.'],
+      ['counter',8,7,3,1,'Tea tray','One silver tray, one good cup. A note on the saucer: The good china is not for Boppy.',{variant:'letters'}]]}
 ];
