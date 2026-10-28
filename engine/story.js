@@ -151,7 +151,12 @@ const CHAPTERS=[
     party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch19-done')?{lines:['Chapter 20 is coming. The sky has a clock in it now, and the cab stand has coffee.']}
       :{lines:['Airport? Not today. Today you find Tom.']}},
-  {n:20,title:'The Forever Engine & The Open Sky'}
+  // Chapter 20 (the finale): all eight climb. Tom, Grace and Rose are always out front, the fourth slot swaps at the Core bench, the rest wait on the bench.
+  // The Deedee/Boppy bar is lifted. Julian's fights call BENCH CALL for the signature specials (data/ch20-battle.js).
+  {n:20,title:'The Forever Engine & The Open Sky',start:{map:'towervault',x:10,y:3},
+    party:{lock:['tom','grace','rose'],allow:['amy','deedee','boppy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch20-done')?{lines:['The train runs both coasts now. Sal is thrilled and very confused about his job.']}
+      :{lines:['Airport? Tom. Not now. There is a man in a clock who needs dinner.']}}
 ];
 const MEMBERS=()=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara});
 function chapterInfo(n=STORY.chapter) { return CHAPTERS[n]||CHAPTERS[0]; }

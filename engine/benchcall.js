@@ -3,13 +3,15 @@
 // to a boss fight as a reserve. In battle, ▼ Bag, BENCH CALL is free of VP and costs the caller's turn: the fourth member (the
 // one who is not Tom, Grace or Rose) steps out and a reserve steps in at the same slot, acting very soon. The member who steps
 // out keeps their HP and VP and waits as a reserve, so they can be called back in. Only fights that list reserves have the row
-// (b2Start gets cfg.reserve from the bench; today that is the FINAL CALL, Twin Lenses and Oblivion Censor fights). Loaded after engine/bench.js and battle2-ui.js.
+// (b2Start gets cfg.reserve from the bench; today that is the FINAL CALL, Twin Lenses, Oblivion Censor, Chronos-Leviathan and Julian fights). Loaded after engine/bench.js and battle2-ui.js.
 const B2_NEVER_SIT=['tom','grace','rose'];
+// Fights that bring the bench along (data/ch20-battle.js adds the finale's two). B2.benchFree (set by a fight) makes BENCH CALL nearly free: the caller acts again almost at once.
+const B2_BENCH_FIGHTS=['finalcall','twinlens','censor','leviathan','julian'];
 const LE_b2Start_bench=b2Start;
 b2Start=function(cfg) {
   const ids=(cfg.foes||[]).map(f=>Array.isArray(f)?f[0]:f.id);
   B2.reserve=[];
-  if(cfg.npc&&ids.some(i=>['finalcall','twinlens','censor'].includes(i))&&typeof benchMembers==='function') cfg.reserveIds=benchMembers().map(m=>m.id);
+  if(cfg.npc&&ids.some(i=>B2_BENCH_FIGHTS.includes(i))&&typeof benchMembers==='function') cfg.reserveIds=benchMembers().map(m=>m.id);
   const r=LE_b2Start_bench(cfg);
   if(cfg.reserveIds) {
     const lv=(cfg.levels)||{};
@@ -65,7 +67,7 @@ b2Do=function(act,opt) {
   const inc=opt&&opt.primary,out=b2BenchOut();
   if(!inc||!out||!B2.reserve.includes(inc)) { sfx.nope&&sfx.nope(); return; }
   battle.state='busy'; B2.ui='busy'; B2.pending=null;
-  u.ct=b2Delay(u,'standard');
+  u.ct=b2Delay(u,B2.benchFree?.25:'standard');
   const idx=out.idx;
   B2.reserve.splice(B2.reserve.indexOf(inc),1,out);   // the one stepping out takes the reserve's place
   inc.idx=idx; inc.st={}; inc.guard=false; inc.turns=0; inc.ct=Math.max(0,b2Delay(inc,.3));
