@@ -1,0 +1,238 @@
+{
+ "chapter": 18,
+ "note": "Unbaked. Extracted from data/scenes-ch18.js in scene order; Vance and 'Floor 60' (narration) need cast entries. Ray lines are in data/ch18-battle.js (CH18_AIM, CH18_AFTER, CH18 messages).",
+ "lines": [
+  {
+   "speaker": "Tom",
+   "text": "The pinnacle lift opens without a sound. There is no button inside, no floor number. The walls are mirrors, and every one of us is in them."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Everybody in. Nobody lags behind. Nobody gets left on this floor."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata. I’m scared. I’m also coming. Both of those are true at the same time."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That is exactly the right amount of both."
+  },
+  {
+   "speaker": "Rose",
+   "text": "I brought a pretzel for Deedee. It’s a little bit squished."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Squished is fine. I fix squished things for a living."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Stay behind me. All of you."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The lift opens on a round room made of clock. Gold thread runs floor to ceiling, thousands of strands, humming. In the middle stands a loom the size of a house. In front of it, a man in a long coat has his back to us. His hat is on."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Tom. Thank you for coming. Everyone, please, come in. Mind the threads. They are all somebody’s afternoon."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Where are my parents."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Warm. Downstairs, on a plinth, under glass. Exactly as you left them. I want you to understand I have taken very good care of them."
+  },
+  {
+   "speaker": "Grace",
+   "text": "They’re STONE."
+  },
+  {
+   "speaker": "Vance",
+   "text": "They are safe. There is a difference. I had to have it explained to me, too."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Are you the man who took all the coins?"
+  },
+  {
+   "speaker": "Vance",
+   "text": "I am the man who kept them. Gold remembers being warm. I only wanted it to keep remembering."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Okay. I fix things for a living. Whatever this is, it is structurally unsound."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Nothing is the same twice, Mr. TNB. You mend a cup, and it is a mended cup. I would like every cup to stay unbroken."
+  },
+  {
+   "speaker": "Tom",
+   "text": "That is not how cups work."
+  },
+  {
+   "speaker": "Vance",
+   "text": "Tom. You know why I wanted you. Two places that kept moving, and one man flying between them. You are not a traveler. You are the thread. If you stop, they stop. If you stay, they stay."
+  },
+  {
+   "speaker": "Vance",
+   "text": "I will not hurt you. I will not hurt anyone. I will only finish the afternoon."
+  },
+  {
+   "speaker": "Tom",
+   "text": "No, thank you. We have a connection to make."
+  },
+  {
+   "speaker": "Vance",
+   "text": "I know. That is why this is so hard."
+  },
+  {
+   "speaker": "Tom",
+   "text": "The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm."
+  },
+  {
+   "speaker": "Vance",
+   "text": "The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Over my dead body."
+  },
+  {
+   "speaker": "Vance",
+   "text": "That will not be necessary. That is not even on the table."
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata."
+  },
+  {
+   "speaker": "Tom",
+   "text": "Girls. Amy. TNB. Nara. Behind me."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara presses herself against the back of Tom’s legs and does not make a sound. She is very good at this."
+  },
+  {
+   "speaker": "Tom",
+   "text": "He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward."
+  },
+  {
+   "speaker": "Tom",
+   "text": "No touching, please."
+  },
+  {
+   "speaker": "Floor 60",
+   "text": "Where Tom was standing, there is a small warm light, hanging in the air at about the height of his glasses. Then there is not."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Tata?"
+  },
+  {
+   "speaker": "Grace",
+   "text": "Tata. TATA."
+  },
+  {
+   "speaker": "Rose",
+   "text": "He was right there. He was RIGHT there."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara walks to the exact spot where Tom was standing, lies down on it, and does not move."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Tom. Tom, answer me. I am not doing this. I am not doing this."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Tom."
+  },
+  {
+   "speaker": "Vance",
+   "text": "That was not in the model."
+  },
+  {
+   "speaker": "Vance",
+   "text": "The Ray was written for five. He took all of it. I did not think anyone would step into it. I have never once seen anyone step into it."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Give him back."
+  },
+  {
+   "speaker": "Vance",
+   "text": "I cannot. The Loom does not hand back. I only know how it keeps."
+  },
+  {
+   "speaker": "Vance",
+   "text": "He is not destroyed. The Ray unwrites the story of a thing. Somewhere he is still a man with a thermos. The Loom simply does not have a place to put him."
+  },
+  {
+   "speaker": "Floor 60",
+   "text": "The Loom shudders. Every thread in it goes white. The Ray has nowhere left to go, and a wave of light rolls out from the place Tom stood."
+  },
+  {
+   "speaker": "Vance",
+   "text": "It will take you home. It goes where he is from. Hold on to something."
+  },
+  {
+   "speaker": "Amy",
+   "text": "We are not leaving without him!"
+  },
+  {
+   "speaker": "Vance",
+   "text": "You are not leaving. You are being sent. That is a different thing."
+  },
+  {
+   "speaker": "TNB",
+   "text": "Okay. We are on Second Avenue. It is morning. It is somehow morning."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Is Tata coming?"
+  },
+  {
+   "speaker": "Grace",
+   "text": "He said we always make our connection. So he will."
+  },
+  {
+   "speaker": "Amy",
+   "text": "I know my brother. He is going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate."
+  },
+  {
+   "speaker": "TNB",
+   "text": "His thermos is on the porch rail. He left it out for the cat."
+  },
+  {
+   "speaker": "Rose",
+   "text": "Is the cat going to be okay?"
+  },
+  {
+   "speaker": "TNB",
+   "text": "The cat is fine. The cat is always fine. The cat is not even his."
+  },
+  {
+   "speaker": "Nara",
+   "text": "Nara sits down on Tom’s porch step, facing the street, and waits."
+  },
+  {
+   "speaker": "Amy",
+   "text": "Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere. And there is exactly one thing in this city that does not forget where things go."
+  },
+  {
+   "speaker": "Grace",
+   "text": "The post office."
+  },
+  {
+   "speaker": "TNB",
+   "text": "I’ll make coffee first. Tom would want me to make coffee first."
+  }
+ ]
+}

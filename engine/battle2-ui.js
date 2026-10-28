@@ -301,7 +301,7 @@ function b2RenderParty() {
   const box=$('b2-party'); if(!box) return;
   const tgt=B2.ui==='target'&&B2.opts[B2.sel]?B2.opts[B2.sel].targets:[];
   box.innerHTML=b2HeartRow()+B2.party.map((u,i)=>{
-    const r=Math.max(0,u.hp)/u.maxHp,cls='b2-pc'+(u===B2.actor&&battle.state==='command'?' act':'')+(u.hp<=0?' ko':'')+(tgt.includes(u)?' tgt':'');
+    const r=u.light?1:Math.max(0,u.hp)/u.maxHp,cls='b2-pc'+(u===B2.actor&&battle.state==='command'?' act':'')+(u.hp<=0?' ko':'')+(tgt.includes(u)?' tgt':'');
     const pips=Array.from({length:B2_VP.cap},(_,k)=>'<i'+(k<u.vp?' class="on"':'')+'></i>').join('');
     const sk=Object.keys(u.st).filter(k=>B2_STATUS[k]&&!B2_STATUS[k].hide);
     const st=sk.slice(0,2).map(k=>'<span class="b2-st" style="color:'+B2_STATUS[k].color+'">'+B2_STATUS[k].short+'</span>').join('')+(sk.length>2?'<span class="b2-st">+'+(sk.length-2)+'</span>':'');
@@ -309,8 +309,8 @@ function b2RenderParty() {
     const badge=tb.txt&&u.hp>0?'<b class="b2-tr'+(tb.on?' on':'')+(tb.cls?' '+tb.cls:'')+'" title="'+b2Esc(tb.title)+'">'+b2Esc(tb.txt)+'</b>':'';
     return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+badge+'</span>'+
       '<div><div class="b2-nm">'+b2Esc(u.name)+st+'<em>Lv'+u.lvl+'</em></div>'+
-      '<div class="b2-bar"><i class="'+(r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></div>'+
-      '<div class="b2-sub"><span>'+(u.hp<=0?'KNOCKED OUT':'HP '+Math.max(0,u.hp)+'/'+u.maxHp)+'</span><span class="b2-vp" aria-label="VP '+u.vp+'">'+pips+'</span></div></div></div>';
+      '<div class="b2-bar"><i class="'+(u.light?'light':r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></div>'+
+      '<div class="b2-sub"><span>'+(u.light?'HP \u2726 LIGHT \u2726':u.hp<=0?'KNOCKED OUT':'HP '+Math.max(0,u.hp)+'/'+u.maxHp)+'</span><span class="b2-vp" aria-label="VP '+u.vp+'">'+pips+'</span></div></div></div>';
   }).join('');
 }
 // The shared HEART meter: four hearts of 25%.

@@ -118,7 +118,7 @@ LE_AREAS.push(
     planGlass(TOWERVAULT_PLAN),
     {objects:[
       ['glplinth',9,6,4,2,'The snow globe','A snow globe the size of a beach ball on a glass plinth. Inside it is the Square, very small. The fountain, the library, the camera on its tripod, and two stone figures holding each other up. The snow is falling on them. A little amber light crawls along their joined hands.'],
-      ['glelev',9,1,4,1,'Pinnacle lift','A gold lift door, floor to ceiling, with no call button at all. A small brass plate says: FLOOR 60. BY INVITATION. Chapter 18 is coming.'],
+      ['glelev',9,1,4,1,'Pinnacle lift','A gold lift door, floor to ceiling, with no call button at all. A small brass plate says: FLOOR 60. BY INVITATION.'],
       ['glcase',2,4,2,2,'Display case','A glass case of tiny diorama towns, all lit from inside, all so happy. The little plaque says: SIXTY-ONE TOWNS. ONE COAST. ONE FAMILY.'],
       ['glcase',2,8,2,2,'Display case','A glass case. Inside, a tiny armchair, a tiny cup of tea, a tiny dog on the rug. Nobody is in the chair. The tea is still warm.'],
       ['glcase',18,4,2,2,'Display case','A glass case. A tiny kitchen with a tiny pie in the window. It has been cooling for years. Somebody is a little hungry.'],

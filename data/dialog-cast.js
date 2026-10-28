@@ -207,7 +207,7 @@ const DIALOG_CAST={
       sample:'Tom! Hi! Sorry, I am mid-sentence in my head. I am filing a story on AI in classrooms. The kids use it to write the homework. The teachers use it to grade the homework. Nobody is in the room. Michael! Can you grab Isla? She has a leaf.'},
     michael:{name:'Michael',type:'Family friend: calm dad',stability:.5,
       desc:'A tall man in his early forties with a calm, low, dry American voice. A tech dad holding two kids, patient, deadpan, quietly funny, a little tired. Clean studio recording.',
-      sample:'Hey, Tom. I would wave, but I am out of arms. I work at Meta. I build things that connect people. Right now I am connecting a four-year-old to a nap. I heard Olivia say Michael. I am already holding them. I am always holding them.'},
+      sample:'Hey, Tom. Good to see you. Please ignore the cracker crumbs. They live here now. I work at Meta. I build things that connect people. Right now I am connecting a four-year-old to a nap. I heard Olivia say Michael. Whatever it is, I am on it. Isla, that is not a snack.'},
     alvarez:{name:'Mrs. Alvarez',type:'Neighbor: matriarch of a full house',stability:.5,
       desc:'A woman in her late fifties with a loud, warm, exasperated voice and a light Mexican Spanish accent. Matriarch of a crowded house, scolds and mothers in the same breath, very funny. Clean studio recording.',
       sample:'Ten. Ten people in a two-bedroom house from nineteen twelve. One bathroom. One! Tony, feet off my table! Tom, mijo, sit. If you can find a chair. Everybody says the house is so full of love. It is full of something. Take tamales. Please.'},

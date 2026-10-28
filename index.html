@@ -622,6 +622,8 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-bar{height:6px;border:1px solid #000;background:var(--w-deep);margin-top:3px}
 .b2-bar i{display:block;height:100%;background:var(--hp)}
 .b2-bar i.low{background:var(--hp-low)}.b2-bar i.crit{background:var(--hp-crit)}
+.b2-bar i.light{background:linear-gradient(90deg,#fff6c8,#ffe27a,#ffffff,#ffe27a,#fff6c8);background-size:200% 100%;animation:b2light 1.6s linear infinite;box-shadow:0 0 6px 1px #ffe27aaa}
+@keyframes b2light{from{background-position:0 0}to{background-position:-200% 0}}
 .b2-sub{display:flex;justify-content:space-between;align-items:center;gap:4px;font-size:10px;color:var(--ink-dim);margin-top:3px}
 .b2-vp{display:flex;gap:1px}
 .b2-vp i{width:5px;height:7px;background:var(--w-deep);box-shadow:0 0 0 1px #000a}
@@ -1014,10 +1016,12 @@ html.landscape .slot-name{width:56px}
 <script src="data/ch15-monsters.js"></script>
 <script src="data/ch16-monsters.js"></script>
 <script src="data/ch17-monsters.js"></script>
+<script src="data/ch18-monsters.js"></script>
 <script src="data/maps-le.js"></script>
 <script src="data/maps-p2.js"></script>
 <script src="data/maps-ch13.js"></script>
 <script src="data/maps-ch17.js"></script>
+<script src="data/maps-ch18.js"></script>
 <script src="engine/world.js"></script>
 <script src="data/party.js"></script>
 <script src="data/maps-la.js"></script>
@@ -1107,6 +1111,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/nara.js"></script>
 <script src="engine/story.js"></script>
 <script src="engine/bench.js"></script>
+<script src="engine/tom-gone.js"></script>
 <script src="engine/benchcall.js"></script>
 <script src="data/scenes.js"></script>
 <script src="data/scenes-p2.js"></script>
@@ -1116,15 +1121,18 @@ html.landscape .slot-name{width:56px}
 <script src="data/ch15-battle.js"></script>
 <script src="data/ch16-battle.js"></script>
 <script src="data/ch17-battle.js"></script>
+<script src="data/ch18-battle.js"></script>
 <script src="data/scenes-ch12.js"></script>
 <script src="data/scenes-ch13.js"></script>
 <script src="data/scenes-ch14.js"></script>
 <script src="data/scenes-ch15.js"></script>
 <script src="data/scenes-ch16.js"></script>
 <script src="data/scenes-ch17.js"></script>
+<script src="data/scenes-ch18.js"></script>
 <script src="engine/ch12-render.js"></script>
 <script src="engine/ch13-render.js"></script>
 <script src="engine/ch17-render.js"></script>
+<script src="engine/ch18-render.js"></script>
 <script src="engine/splash.js"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>

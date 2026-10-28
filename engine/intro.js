@@ -254,7 +254,7 @@ function drawIntroScreen(time) {
     const P=logoUnit(W*.86,H*.32);
     drawGameLogo(W/2,Math.round(safeTop+H*.1),P,time,false);
   }
-  if(intro.fade>0) rect(0,0,W,H,'rgba(20,32,28,'+intro.fade+')');
+  if(intro.fade>0) rect(0,0,W,H,'rgba('+(intro.whiteout?'255,246,200':'20,32,28')+','+intro.fade+')');   // intro.whiteout: chapter 18's flash of light
   if(intro.showcase) {
     // Fit between the header and the dialogue box, which covers more of the screen in landscape.
     const box=$('dialog'),dh=box&&!box.hidden?box.offsetHeight/scale:safeBottom,avail=Math.max(80,H-safeTop-dh);

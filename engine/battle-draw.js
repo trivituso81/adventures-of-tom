@@ -34,6 +34,8 @@ function battleBgKey() {
   return 'pond';
 }
 function drawBattleBackdrop(t) {
+  // The Glass Tower (chapters 17 and 18) has code-drawn backdrops (engine/ch17-render.js, ch18-render.js); there is no picture for it, so it must come before the picture lookup.
+  if(typeof glGround==='function'&&glGround(currentMap)&&typeof drawLEBattleBg==='function'&&drawLEBattleBg(t)) return;
   const im=BG_IMG[battleBgKey()];
   if(im&&im.complete&&im.naturalWidth) { gfx.imageSmoothingEnabled=false; gfx.drawImage(im,0,0,192,108); return; }
   // Fallback while a picture loads: the code-drawn backdrops.

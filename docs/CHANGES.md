@@ -193,3 +193,15 @@ Add any new or reworded spoken line here as `character.kind: "text"` (and the ol
 
 ## Chapter 13 (Sub-Rail)
 Lines to bake: all dialogue in data/scenes-ch13.js (listed in docs/dialogue-scripts-ch13.json), plus B2_BREAK_LINES in data/ch13-battle.js and the Drill Worm and Hushling battle lines. Speakers HUSH-9 and Drill Worm need a voice mapping in data/dialog-cast.js first.
+
+## Chapter 18 (2026-10-28)
+Reworded spoken lines (need re-bake; update dialogue-scripts-ch2/ch6/ch8.json first):
+- Olivia (revisit): "Michael! Isla is near the curb. Okay. Never mind. Thank you, babe."
+- Michael (first visit): "Hey, Tom. Good to see you. Please ignore the cracker crumbs. They live here now."
+- Michael (revisit): "I heard Olivia say Michael. Whatever it is, I'm on it. Isla, that is not a snack."
+- Michael (revisit 2): "Yes, Olivia. Heard you. Handled. Lachlan, we do not lick the fence."
+- Nara chapter 6 scene line: "Zero car keys and one very sticky toddler. Wait. Keys. Gutter. Right."
+- Olivia chapter 8: "...Michael is guarding it with his life."
+- Michael chapter 8: "Cold lasagna, one diaper bag, and Isla eating the tablecloth. We're thriving."
+Engine: battle backdrop for glass-tower maps now uses the code-drawn tower (also fixes ch17); intro.whiteout added for a white flash fade.
+Not ported from the artifact on purpose: its contraction edits to Mr. Washington, ttlever and other ch8 lines.

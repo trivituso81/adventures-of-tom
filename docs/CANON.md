@@ -100,3 +100,9 @@ Other canon: Michael and Justin are the same height, about 10% taller than the o
 - Amy and Tom race floors 31 to 59 and tie ("Tie means nobody won. Tie means I lost. Rematch."). Tombo amy3 Sixty-Story Sibling Pace unlocks.
 - Vance, after the fight: "Floor sixty is for family. Come up when you are ready. I have kept your parents very warm." The snow globe lifts off its plinth on a gold cable. Deedee and Boppy are still stone inside it.
 
+
+## Chapter 18: No Touching, Please. (canon, 2026-10-28)
+- Floor 60 of the Glass Tower is the Chronos Loom Chamber: a house-sized loom whose threads are people's afternoons. Julian Vance (long coat, hat never off) fires the Unwriting Ray, aimed at Grace, Rose, Amy and TNB, then everyone.
+- Tom steps in front of every ray and says "No touching, please." On the last one he does not step aside. His HP bar goes white, then gold, then light. His last words in the fight: "We always make our connection."
+- Nobody else is touched. The party wakes in Jefferson Park, Tom gone. TNB leads and is drawn as the player; the menu has no Tom portrait.
+- Vance is afraid, not grumpy. He cannot be hurt in this fight.

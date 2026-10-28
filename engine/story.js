@@ -139,7 +139,12 @@ const CHAPTERS=[
     party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch17-done')?{lines:['Chapter 18 is coming. The pinnacle lift is waiting, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. Not now. The tower is right there. Go up.']}},
-  {n:18,title:'No Touching, Please.'},
+  // Chapter 18: the top of the Glass Tower. The same six as chapter 17's finish: Tom, Grace, Rose, Amy out front, TNB and Nara on the bench.
+  // At the end Tom is gone (flag 'tom-gone', engine/tom-gone.js): he leaves `party`, TNB leads, and these rules keep working for the rest.
+  {n:18,title:'No Touching, Please.',start:{map:'towervault',x:10,y:3},
+    party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
+    noFlight:()=>flag('ch18-done')?{lines:['Chapter 19 is coming. Nobody is going to the airport. Nobody is going anywhere without Tom.']}
+      :{lines:['Airport? Tom. Not now. Floor sixty.']}},
   {n:19,title:'The Unsent Dead-Letter Office'},
   {n:20,title:'The Forever Engine & The Open Sky'}
 ];

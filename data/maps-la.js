@@ -205,15 +205,15 @@ const LA_AREAS=[
           'Michael, can you take Lachlan? He\'s licking the fence. Thank you, babe.',
           'Everybody asks if robots will take their jobs. I tell them a robot still can\'t fold a fitted sheet. Neither can I.',
           'I interviewed a chatbot today. It was very polite. Too polite. I didn\'t trust it.',
-          'Michael! Isla is near the curb. Okay. He has her. He always has her.',
+          'Michael! Isla is near the curb. Okay. Never mind. Thank you, babe.',
           'Did Nara eat today? Tell me the truth. Michael, did Nara eat?',
           'Teachers aren\'t getting replaced. They\'re getting a very confident new student who never did the reading.']},
       {name:'Michael',x:13,y:19,look:'larry',sheet:'michael',kin:true,trace:'michael-hello',duration:0.95,away:NARA_TRIP,lines:[
-        'Hey, Tom. I\'d wave, but I\'m out of arms.',
+        'Hey, Tom. Good to see you. Please ignore the cracker crumbs. They live here now.',
         'I work at Meta. I build things that connect people. Right now I\'m connecting a four-year-old to a nap.',
-        'I heard Olivia say Michael. I\'m already holding them. I\'m always holding them.'],
+        'I heard Olivia say Michael. Whatever it is, I\'m on it. Isla, that is not a snack.'],
         revisit:[
-          'Yes, Olivia. Got him. Got her. Got both. I\'ve had both since breakfast.',
+          'Yes, Olivia. Heard you. Handled. Lachlan, we do not lick the fence.',
           'Lachlan wants to know if Nara is his dog. I said it\'s complicated. It\'s not. It\'s his dog.',
           'Isla said her first word last week. It was no. She uses it very well.',
           'I took a meeting today with Isla on my lap. She muted me. Best meeting of the quarter.',
@@ -542,7 +542,7 @@ LA_AREAS.find(a=>a.id==='oak').objects.push(
   add('Olivia',{...CH6_DONE,lines:['Nara slept! Twelve hours! She\'s snoring like Michael.','Thank you, Tom. Tell TNB thank you. Tell the squirrels nothing.']},
     {...CH6_ON,flag:'ch6-nara',lines:['Is she okay? Is she eating? She\'s not eating, is she.','Michael, the squirrel is back on the fence. Don\'t make eye contact.']});
   add('Michael',{...CH6_DONE,lines:['Lachlan got his truck back. He hasn\'t put it down. He\'s eating cereal with one hand.']},
-    {...CH6_ON,flag:'ch6-nara',lines:['I have both kids and zero car keys. Wait. Keys. Gutter. Right.']}); }
+    {...CH6_ON,flag:'ch6-nara',lines:['Zero car keys and one very sticky toddler. Wait. Keys. Gutter. Right.']}); }
 
 // ---------- Chapter 8 (Feast on Jefferson Park): the old Car Barn, east end of Jefferson Boulevard ----------
 // Division Nine Car Barn (ground 'barn'): the Paint Shop (top left), the Machine Shop (top right), the Lunchroom (bottom
@@ -667,9 +667,9 @@ LA_AREAS.push(
     {...CH8_ON,lines:['My tamales are cold. My dog is cold. My dog is somewhere. He\'s probably cold.']});
   add('Larry',{...CH8_ON,lines:['I\'m blowing leaves. They\'re frosty. In LA. I have questions.']});
   add('Olivia',{...CH8_DONE,lines:['Nara ate! A whole plate! Off your plate, but still! I\'m counting it!','Michael, Isla has a roll in each hand. That\'s fine. That\'s a balanced meal.']},
-    {...CH8_ON,flag:'ch8-block',lines:['Did she eat? She won\'t eat cold food. She won\'t eat warm food either. She eats off YOUR plate, Tom.','My lasagna is a brick. A cold lasagna brick. Michael is holding it. He\'s holding everything.']});
+    {...CH8_ON,flag:'ch8-block',lines:['Did she eat? She won\'t eat cold food. She won\'t eat warm food either. She eats off YOUR plate, Tom.','My lasagna is a brick. A cold lasagna brick. Michael is guarding it with his life.']});
   add('Michael',{...CH8_DONE,lines:['Best potluck ever. Lachlan fell asleep in the bread basket.']},
-    {...CH8_ON,flag:'ch8-block',lines:['I have Isla, the diaper bag, and a cold lasagna. I\'m at full capacity.']}); }
+    {...CH8_ON,flag:'ch8-block',lines:['Cold lasagna, one diaper bag, and Isla eating the tablecloth. We\'re thriving.']}); }
 
 // ---------- Rooms ----------
 const LA_ROOMS=[
