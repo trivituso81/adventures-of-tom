@@ -62,13 +62,18 @@ startSplash();
 
 // Coming back to the app after it sat in the background for a while shows the title screen,
 // exactly like a fresh launch (iOS resumes home-screen apps instead of reloading them).
+// Detected by a time gap, not one event: iOS freezes timers while the app is away, so a tick
+// that arrives 60s+ late means the app was away. Checked on every resume-type event too.
 // Not during a battle or cutscene, so nothing in progress is lost. Autosave still covers the rest.
 (function(){
-  let hiddenAt=0;
-  document.addEventListener('visibilitychange',()=>{
-    if(document.hidden) { hiddenAt=Date.now(); return; }
-    const away=hiddenAt?Date.now()-hiddenAt:0; hiddenAt=0;
-    if(away<60000||splash.active||battle.active||cutsceneOn()) return;
-    location.reload();
-  });
+  let last=Date.now(), done=false;
+  function check() {
+    const now=Date.now(), away=now-last; last=now;
+    if(done||away<60000||splash.active||battle.active||cutsceneOn()) return;
+    done=true; location.reload();
+  }
+  setInterval(check,1000);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) check(); });
+  window.addEventListener('pageshow',check);
+  window.addEventListener('focus',check);
 })();
