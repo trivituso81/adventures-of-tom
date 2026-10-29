@@ -438,5 +438,5 @@ Object.assign(MONSTERS,{
 // still until its story fight. Inside the Oak: Acorn Agents and Sticky Saps. Chairman Cheeks waits on its hoard in the
 // crown (hidden until the boss scene).
 const OAKPARK_MONSTER_SPOTS=[['acornagent',10,9],['acornagent',16,15],['acornagent',20,12],['peanutgallery',5,7],['twigspy',20,7],['cheekstuffer',5,16]];
-const OAK_MONSTER_SPOTS=[['acornagent',4,14],['stickysap',19,13],['acornagent',3,5],['stickysap',19,4]];
+const OAK_MONSTER_SPOTS=[['acornagent',4,13],['stickysap',19,14],['acornagent',5,5],['stickysap',19,8]];
 const CROWN_MONSTER_SPOTS=[['chairman',9,4]];
