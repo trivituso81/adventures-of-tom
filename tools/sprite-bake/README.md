@@ -61,3 +61,5 @@ Amy head ratio lowered to 0.40 of height (was 0.445) and hair blend lengthened t
 Deedee sized to Tom (2026-10-29): bake_deedee.py solves the head factor (ratio 0.40; battle 1.58x, walk 1.65x), heights 99.5 battle / 41.7 walk, BATTLE_SIZE 1.3, OW k 1. Extras follow via x_ frames (KOVM multiplier for heave).
 
 Boppy matched to Deedee (2026-10-29): bake_boppy.py now solves the head factor per set so hair-to-chin is 0.40 of height (battle 1.45, walk 1.115), and bakes at Deedee's size: battle idle 66.7 rows x sp.scale 1.94 = 129 px (Deedee 99.5 x 1.3), overworld 41.7 rows, OW.boppy.k 1. Measured from the atlas alpha. Front-view chin is row 126 (`w_down*`).
+
+Boppy fishing poses (2026-10-29): `bake_boppy_extra.py` also bakes Sheet C fish1-4, sit1, sit2 into `art/chars/boppy-fish.webp` (BOPPY_FISH in data/boppy-extra.js, feet-anchored, rod kept: `_drop_slivers` is skipped for f_ poses; `tip` = rod tip used as the hand point). Patient Angler uses x_fish1, x_sit1/2, x_fish4 (hook set), x_fish2/3 (reel). The code-drawn rod and crank are skipped when painted (SC.bv_rod). Sheet A poses are baked at the same scale as the idle (battle_h 66.7).

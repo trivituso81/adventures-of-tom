@@ -114,9 +114,10 @@ def _drop_slivers(im, er=5, grow=7):
     """Remove thin leftovers (jacket edge pixels the head swap leaves floating): erode the silhouette, keep what survives plus a rim."""
     from scipy import ndimage as ndi
     a = np.array(im); m = a[:, :, 3] > 40
-    core = ndi.binary_erosion(m, iterations=er)
-    keep = ndi.binary_dilation(core, iterations=grow) & (a[:, :, 3] > 0)
-    a[:, :, 3] = np.where(keep, a[:, :, 3], 0)
+    if er:
+        core = ndi.binary_erosion(m, iterations=er)     # er=0: keep thin parts (fishing rods); only floating bits are dropped below
+        keep = ndi.binary_dilation(core, iterations=grow) & (a[:, :, 3] > 0)
+        a[:, :, 3] = np.where(keep, a[:, :, 3], 0)
     lab, n = ndi.label(a[:, :, 3] > 20)                      # floating bits: drop pieces not connected to the figure
     if n > 1:
         ar = ndi.sum(np.ones_like(lab), lab, range(1, n + 1)); big_ = ar.max()
@@ -156,7 +157,7 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
         if name == 'b_win':                                       # raised fists and arms stay in front of the bigger head, where they were
             for (a, b, y0) in ((0, 56, 3), (56, 80, 72), (205, W, 3), (200, 205, 72)):
                 big.alpha_composite(img.crop((a, y0, b, 112)), (a + pad, y0 + pad))
-    big = _drop_slivers(big, 3 if name == 'b_leap' else 5)
+    big = _drop_slivers(big, 0 if name.startswith('f_') else 3 if name == 'b_leap' else 5)
     return big.crop(big.getbbox())
 # Same proportions as Deedee (and Tom): head (hair to chin) is 0.40 of figure height. The head factor is solved per set (battle idle, walk down).
 TOM_HEAD_RATIO = 0.40

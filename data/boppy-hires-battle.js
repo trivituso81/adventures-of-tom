@@ -37,6 +37,14 @@
     m2['.']='.';
     for(const k in EX.rows) sp['x_'+k]=reg(paintRows(EX.rows[k].map(r=>{ let q=''; for(const ch of r) q+=m2[ch]; return q; }),'boppyExtra',k,false));
   }
+  // Fishing poses (Sheet C, data/boppy-extra.js): x_fish1..4, x_sit1, x_sit2. Their hand point is the rod tip, where the code draws the line.
+  if(typeof BOPPY_FISH!=='undefined') {
+    const FX=BOPPY_FISH; paintedAtlas('boppyFish',FX.atlas.src,FX.atlas.rects,FX.atlas.k);
+    const m3={}; let n3=0; for(const k in FX.pal) { const c=String.fromCharCode(0x0500+n3++); m3[k]=c; pal[c]=FX.pal[k]; }
+    m3['.']='.';
+    for(const k in FX.rows) { const r=paintRows(FX.rows[k].map(q=>{ let o=''; for(const ch of q) o+=m3[ch]; return o; }),'boppyFish',k,false); reg(r);
+      if(sp.handAt) sp.handAt.set(r,{n:FX.tip[k].slice(),f:FX.tip[k].slice()}); sp['x_'+k]=r; }
+  }
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.boppy={scale:.8*2*SZ,pal:BOPPY_HIRES.ko.pal,rows:paintRows(BOPPY_HIRES.ko.rows.slice(),'boppyKo','ko',true)};
   // His cardigan is not a dark tee, so outfit recolouring does not apply to the painted Boppy.

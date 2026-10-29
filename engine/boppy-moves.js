@@ -415,8 +415,8 @@ SC.bv_rod=(s,u)=>{ const ms=s.t*1000,P=s.P,h=hand(); gfx.globalAlpha=fade(u,.97)
   else if(ms>=P.tug&&ms<P.reel1) { const q=ez((ms-P.tug)/220); ang=lerp(.5,1.55,q); bend=.8*(1-ez((ms-P.tug-300)/400)); }
   else if(ms>=P.reel1) ang=lerp(1.55,1.1,ez((ms-P.reel1)/300));
   if(ms>P.home) ang=1.4;
-  const H={ang,len:132,bend}; HELD.rod(H,u,h.x,h.y);
-  if(ms>P.reel0&&ms<P.reel1+200) { const cx=h.x-6,cy=h.y+14,a=(ms-P.reel0)/70; EO(cx,cy,13,13,'#aeb3ba'); E(cx,cy,5,5,'#5e6670'); LnO(cx,cy,cx+Math.cos(a)*16,cy+Math.sin(a)*16,3,'#d8dce2'); EO(cx+Math.cos(a)*16,cy+Math.sin(a)*16,4,4,RED);
+  const PN=!!BSP().x_sit1,H={ang,len:132,bend}; if(PN) { H.tx=h.x; H.ty=h.y; } else HELD.rod(H,u,h.x,h.y);   // painted fishing poses already hold the rod; h is its tip
+  if(ms>P.reel0&&ms<P.reel1+200) { const cx=h.x-6,cy=h.y+14,a=(ms-P.reel0)/70; if(!PN) { EO(cx,cy,13,13,'#aeb3ba'); E(cx,cy,5,5,'#5e6670'); LnO(cx,cy,cx+Math.cos(a)*16,cy+Math.sin(a)*16,3,'#d8dce2'); EO(cx+Math.cos(a)*16,cy+Math.sin(a)*16,4,4,RED); }
     if(ms>P.reel0+150) bigWord('REEL REEL',cx,h.y-58,GOLD,2); }
   if(ms>P.sit&&ms<P.home) { let fx2=P.fx,fy=P.fy+Math.sin(ms/260)*1.5;
     if(ms>P.nudge&&ms<P.nudge+300) fy+=Math.sin((ms-P.nudge)/300*Math.PI)*7;
@@ -431,9 +431,9 @@ SC.bv_splash=(s,u)=>{ const x=s.x,y=s.y; gfx.globalAlpha=fade(u,.6);
   const col=Math.sin(cl(u*1.6)*Math.PI); if(col>0) { E(x,y-col*40,14,col*44,'#bfe6ff'); E(x,y-col*40,8,col*34,'#ffffff'); }
   gfx.globalAlpha=fade(u,.5)*.8; ring(x,y,20+u*60,5+u*14,3,'#d8f0ff'); };
 SC.bv_yank=(s,u)=>{ const ms=s.t*1000,q=cl(ms/700); if(q<1) lift(s.f,-Math.sin(q*Math.PI)*34,Math.sin(q*Math.PI*2)*.25,Math.sin(q*Math.PI)*14); };
-B.patient_angler=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
+B.patient_angler=E2=>{ const FA=!!BSP().x_sit1; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
   const P={sit:1150,nudge:2000,tug:2500,reel0:2850,reel1:3500,home:3700,fx:F.x+F.w*.5+20,fy:F.base-2,ft:F.mid};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1150,x:p.x,y:p.y,f:'sit'},{t:2500,f:'wind',dx:u=>ez(u)*8},{t:2850,f:'act',dx:(u,tt)=>6+Math.sin(tt*30)*2},{t:3500,f:'celeb',hop:6},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1150,x:p.x,y:p.y,f:FA?'x_fish1':'sit'},{t:1450,f:FA?'x_sit1':'sit'},{t:1850,f:FA?'x_sit2':'sit'},{t:2200,f:FA?'x_sit1':'sit'},{t:2500,f:FA?'x_fish4':'wind',dx:u=>ez(u)*8},{t:2850,f:FA?((u,tt)=>Math.floor(tt*7)%2?'x_fish3':'x_fish2'):'act',dx:(u,tt)=>6+Math.sin(tt*30)*2},{t:3500,f:'celeb',hop:6},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over with his rod and sits down. The fish can wait for him.'); say(m.id,'patient_angler'); scene('bv_rod',3.8,{P}); scene('bv_pond',3.7,{P:{on:1100,x:P.fx,y:P.fy+3}}); }],
     [2000,()=>{ ST.jolt(f,.12); sfx.boop?sfx.boop():sfx.select(); setMessage(cap(f.def?f.def.the:'it')+' gets impatient and nudges the float.'); }],
