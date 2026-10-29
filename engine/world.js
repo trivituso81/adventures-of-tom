@@ -179,6 +179,7 @@ function buildArea(spec) {
   if(spec.plateMask) applyPlateMask(map,spec.plateMask);
   for(const [x,y] of spec.noGo||[]) map.npcNoGo.add(key(x,y));   // tiles NPCs never wander onto (keeps chokepoints clear)
   finishMap(map);
+  for(const o of map.objects) if((spec.liveKinds||[]).includes(o.kind)) o.baked=false;   // props still drawn on a painted plate (puzzle pieces)
   return map;
 }
 

@@ -3196,8 +3196,9 @@ function ch9GirlsBack() {
 function ch9OpenDoors() {
   const M=worlds.moonclub; if(!M||M.doorsOpen) return;
   const o=M.objects.find(o=>o.kind==='clubdoors');
-  if(o) { M.objects.splice(M.objects.indexOf(o),1); for(const x of [14,15]) M.objectAt.delete(key(x,1)); }
-  for(const x of [14,15]) tile(M,x,1,'marble');
+  const dy=o?o.y:2;   // the Dome doors sit on row 2 of the painted hall
+  if(o) { M.objects.splice(M.objects.indexOf(o),1); for(const x of [14,15]) M.objectAt.delete(key(x,dy)); }
+  for(const x of [14,15]) tile(M,x,dy,'marble');
   M.doorsOpen=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{
