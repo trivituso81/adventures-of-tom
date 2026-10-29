@@ -74,7 +74,7 @@ with sync_playwright() as pw:
     check('Griffith brings Tom back to the west road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x<=2&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     stand(pg,28,12,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('east road leads to the studio lot (chapter 5)',pg.evaluate("()=>currentMap.id==='studio'"))
-    stand(pg,1,8,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000); skip_intro(pg)
+    stand(pg,1,10,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000); skip_intro(pg)
     print('after studio exit:',pg.evaluate("()=>[currentMap.id,player.x,player.y,worlds.blvd.solid[player.y*worlds.blvd.w+player.x]]"))
     check('studio brings Tom back to the east road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=24&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     # A on a prop opens its text
