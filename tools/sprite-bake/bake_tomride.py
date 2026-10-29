@@ -39,6 +39,26 @@ walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'ste
 for nm, im in slice_sheet(os.path.join(SRC, 'tomride-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
 
+# ---------------------------------------------------------------- shorten Rose's legs
+# In the sheets her legs run from his shoulders down to shoes near his belt, which reads too long. Squash the band below his
+# chin down to the bottom of her shoes (and the torso with it) so the shoes sit higher and the legs are shorter (Tom, 2026-10-29).
+# Bands are (top y, bottom y) in each sliced frame, picked by eye from the sheet; f is the height they keep.
+LEG_BAND = {'b_idle': (205, 340), 'b_windup': (240, 372), 'b_strike': (225, 350), 'b_run1': (218, 350), 'b_run2': (222, 345),
+            'b_leap': (250, 350), 'b_hurt': (225, 318), 'b_kneel': (258, 338), 'b_win': (220, 322), 'b_defend': (255, 338), 'b_cast': (228, 322)}
+for d in ('down', 'up', 'left'):
+    for n in ('stand', 'step1', 'stand2', 'step2'):
+        LEG_BAND['w_%s_%s' % (d, n)] = (215, 300)
+LEG_KEEP, SIZE_BACK = 0.66, 1.08      # fraction of the band height kept; scale back up a bit so Tom is not shorter than before
+H0b, H0w = poses['b_idle'].height, poses['w_down_stand'].height
+def squash_band(img, y0, y1, f):
+    top, mid, bot = img.crop((0, 0, img.width, y0)), img.crop((0, y0, img.width, y1)), img.crop((0, y1, img.width, img.height))
+    mid = mid.resize((img.width, max(1, int(round((y1 - y0) * f)))), Image.LANCZOS)
+    out = Image.new('RGBA', (img.width, top.height + mid.height + bot.height), (0, 0, 0, 0))
+    out.paste(top, (0, 0)); out.paste(mid, (0, top.height)); out.paste(bot, (0, top.height + mid.height))
+    return out
+for nm, (y0, y1) in LEG_BAND.items():
+    if nm in poses: poses[nm] = squash_band(poses[nm], y0, min(y1, poses[nm].height - 1), LEG_KEEP)
+
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k
@@ -178,7 +198,7 @@ def fmt_rows(rows, indent='    '):
 battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
-fb = args.battle_h * KB / poses['b_idle'].height
+fb = args.battle_h * KB / H0b * SIZE_BACK
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 
@@ -196,7 +216,7 @@ def paint_bruise(img, cx, cy, rx, ry):
         k = (wgt * cov)[:, :, None]
         a[:, :, :3] = a[:, :, :3] * (1 - k) + np.array(col, float) * k
     return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-bt_big['kneel'] = paint_bruise(bt_big['kneel'], 108, 168, 12, 9)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
+bt_big['kneel'] = paint_bruise(bt_big['kneel'], 118, 177, 12, 9)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'tomride-battle.webp'))
 
@@ -207,7 +227,7 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'tomride-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = args.ow_h * KW / H0w * SIZE_BACK
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
@@ -245,9 +265,9 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
-atlas = {'bt': {'src': 'art/chars/tomride-battle.webp', 'k': KB, 'rects': bt_rects},
-         'ko': {'src': 'art/chars/tomride-ko.webp', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/tomride-ow.webp', 'k': KW, 'rects': ow_rects}}
+atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=2', 'k': KB, 'rects': bt_rects},
+         'ko': {'src': 'art/chars/tomride-ko.webp?v=2', 'k': KO_, 'rects': ko_rects},
+         'ow': {'src': 'art/chars/tomride-ow.webp?v=2', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
 js = []
