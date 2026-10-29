@@ -367,7 +367,7 @@ function splashScene(W,H,panelH,time) {
   const L=splash.L={S,frontFy,backFy,pos:{}};
   const hopY=m=>m.hopT>=0?Math.round(Math.sin(Math.PI*m.hopT/SPLASH_HOP)*S*12):0;
   const by=id=>SPLASH_CAST.find(m=>m.id===id);
-  const kOf=set=>{ const id=Object.keys(SPLASH_BIG).find(i=>OW[i]===set); return id?SPLASH_BIG[id]:1; };
+  const kOf=set=>{ const id=Object.keys(SPLASH_BIG).find(i=>OW[i]===set||(i==='tom'&&OW.tomRide===set)); return id?SPLASH_BIG[id]:1; };
   const drawOne=(set,frame,cx,feet,lift,flip)=>{
     const fr=flip?set.left[frame]:(flip===false?set.side[frame]:set.down[frame]);
     const fw=fr[0].length,fh=fr.length,Sk=S*kOf(set);
@@ -405,7 +405,8 @@ function splashScene(W,H,panelH,time) {
     // Rose's bounce is carried by Tom (the pair hops as one), so her legs keep their length and her shoes stay on his shoulders.
     const cx=X(m.fx),lift=hopY(m)+(m.id==='tom'?hopY(rose):0),set=OW[m.id],fr=m.hopT>=0?2:0;
     shadow(cx,frontFy,set.down[0][0].length*kOf(set),lift);
-    if(m.id==='tom') {
+    if(m.id==='tom'&&OW.tomRide) drawOne(OW.tomRide,fr,cx,frontFy,lift);   // painted: Tom carrying Rose (data/tomride-use.js)
+    else if(m.id==='tom') {
       const Sk=S*kOf(set),tf=set.down[fr],top=frontFy-tf.length*Sk-lift,rb=(Math.floor(time*3)%2)*S;
       roseRide('ow_down','back',cx,top-rb,Sk);
       drawOne(set,fr,cx,frontFy,lift);

@@ -16,6 +16,10 @@ function walkPhase(a) {
 }
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
+  const rider=a.isPlayer?roseRider():null;
+  // Rose on his shoulders: one painted figure (OW.tomRide, data/tomride-use.js); falls back to the layered pixel Rose.
+  const painted=!!(rider&&OW.tomRide&&(typeof playerMember!=='function'||playerMember().id==='tom'));
+  if(painted) set=OW.tomRide;
   const p=position(a),k=actorK()*(set.k||1);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
@@ -24,12 +28,11 @@ function drawSheetActor(a,set) {
   const w=fr[0].length,h=fr.length,hk=h*k,wk=w*k;
   if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round(wk*.45),Math.round(4*k),'#2f493640');
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
-  activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
-  const rider=a.isPlayer?roseRider():null;
-  if(rider) drawOwRider(rider,a.facing,cx,base-hk,true,k);
-  activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
+  activeTint=painted?null:(m?garmentTint('ow',m.id,memberTopColor(m)):null);
+  if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,true,k);
+  activeTint=painted?null:(m?garmentTint('ow',m.id,memberTopColor(m)):null);
   drawSprite(fr,set.pal,cx-Math.floor(wk/2),Math.round(base-hk),k);
-  if(rider) drawOwRider(rider,a.facing,cx,base-hk,false,k);
+  if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,false,k);
   activeTint=null;
 }
 
