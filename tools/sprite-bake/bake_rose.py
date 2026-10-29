@@ -43,6 +43,13 @@ A_NAMES = ['boop', 'boopBack', 'raspberry', 'boo', 'tiara', 'hug', 'balance', 'l
 B_NAMES = ['ride_front', 'ride_back', 'ride_side', 'ride_cheer', 'crouch', 'jump', 'wave', 'hold']
 for nm, im in slice_sheet(os.path.join(SRC, 'rose-extra-battle-v2.png'), [A_NAMES[0:4], A_NAMES[4:8], A_NAMES[8:12]]).items():
     poses['x_' + nm] = im
+# Jab sheet (Oct 29): wind-up, jab, recoil for the Boop. Sized to match the boop pose of sheet A (same leaning pointing stance).
+J_NAMES = ['jab0', 'jab1', 'jab2']
+_jab = slice_sheet(os.path.join(SRC, 'rose-jab-v2.png'), [J_NAMES])
+_rJ = poses['x_boop'].height / _jab['jab0'].height
+for nm, im in _jab.items():
+    poses['x_' + nm] = im.resize((round(im.width * _rJ), round(im.height * _rJ)), Image.LANCZOS)
+X_NAMES = A_NAMES + J_NAMES
 for nm, im in slice_sheet(os.path.join(SRC, 'rose-extra-ow-v2.png'), [B_NAMES[0:4], B_NAMES[4:8]]).items():
     poses['y_' + nm] = im
 
@@ -206,7 +213,7 @@ def paint_bruise(img, cx, cy, rx, ry):
 bt_big['kneel'] = paint_bruise(bt_big['kneel'], 66, 67.5, 7.5, 6)
 # Sheet A poses: scaled so her standing hug matches the guard pose of the main sheet; own canvas (head on the centre column, feet on the bottom row).
 rA = poses['b_defend'].height / poses['x_hug'].height
-x_big = {k: scaled_to(poses['x_' + k], fb * rA) for k in A_NAMES}
+x_big = {k: scaled_to(poses['x_' + k], fb * rA) for k in X_NAMES}
 x_big = tighten(place(x_big, KB, 'head'), KB)
 _all = dict(bt_big); _all.update({'x_' + k: v for k, v in x_big.items()})
 bt_pal, _rows = rows_of(_all, KB, args.colors)
@@ -327,7 +334,7 @@ for k in ('crouch', 'jump', 'wave', 'hold'):
     js.append(f"    e_{k}:" + fmt_rows(ow_rows['e_' + k]) + ",")
 js.append("  },")
 js.append("  x:{")
-for k in A_NAMES:
+for k in X_NAMES:
     js.append(f"    {k}:" + fmt_rows(x_rows[k]) + ",")
 js.append("  },")
 js.append("  ride:{pal:" + json.dumps(ride['pal']) + ",")
