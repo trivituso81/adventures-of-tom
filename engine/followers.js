@@ -16,9 +16,11 @@ function movePlayer(dir) {
   const dest={x:player.move.tx,y:player.move.ty};
   if(!trail.length) trail.push({x:player.x,y:player.y});
   trail.push(dest);
-  while(trail.length>followers.length+2) trail.shift();
+  // Indoors (houses and shops) the line is spread out: twice the gap between party members. Outside it stays one tile.
+  const gap=(currentMap&&!currentMap.outside)?2:1;
+  while(trail.length>followers.length*gap+2) trail.shift();
   followers.forEach((f,k)=>{
-    const t=trail[trail.length-2-k];
+    const t=trail[trail.length-1-gap*(k+1)];
     if(!t) return;
     if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
     if(f.x===t.x&&f.y===t.y) return;
