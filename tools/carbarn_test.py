@@ -61,7 +61,7 @@ with sync_playwright() as pw:
     pg.evaluate(REACH.replace('const seen','const seen'))
     r2=pg.evaluate(REACH); print('after lever:',r2['reachable'],'tiles reachable'); check('lunchroom reachable',pg.evaluate("()=>{const m=worlds.carbarn;return true}"))
     # out the west arch to Jefferson Park, back, and out the east rails to the Boiler Room
-    stand(pg,1,10,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(1800); skip_intro(pg)
+    pg.evaluate("()=>window.__LE.go('carbarn')"); pg.wait_for_timeout(1800); skip_intro(pg); print('state:',pg.evaluate("()=>({d:dialog.active,i:intro.active,t:!!transition,sc:typeof STORY!=='undefined'&&!!STORY.scene})")); stand(pg,1,10,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(1800); skip_intro(pg)
     print('after west walk:',pg.evaluate("()=>[currentMap.id,player.x,player.y]"))
     check('west arch leads to Jefferson Park',pg.evaluate("()=>currentMap.id==='jpark'"))
     check('jpark door lands on a walkable carbarn tile',pg.evaluate("()=>{const m=worlds.carbarn; return [[1,10]].every(([x,y])=>m.solid[y*m.w+x]===0);}"))
