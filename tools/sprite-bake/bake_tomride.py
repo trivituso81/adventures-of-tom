@@ -56,8 +56,51 @@ def squash_band(img, y0, y1, f):
     out = Image.new('RGBA', (img.width, top.height + mid.height + bot.height), (0, 0, 0, 0))
     out.paste(top, (0, 0)); out.paste(mid, (0, top.height)); out.paste(bot, (0, top.height + mid.height))
     return out
+# Rose looked bigger on his shoulders than she does on her own (Tom, 2026-10-29). Shrink everything above the crown of his head
+# (her head, hair, upper body) to ROSE_SCALE, blending back to full size over BLEND rows just above his head so there is no step.
+# Tom is untouched. CROWN is the y of the top of his head in each sliced frame, picked by eye; scaling is about her head's centre.
+ROSE_SCALE, BLEND = 0.8, 36
+CROWN = {'b_idle': 118, 'b_windup': 185, 'b_strike': 150, 'b_run1': 135, 'b_run2': 140, 'b_leap': 165, 'b_hurt': 118,
+         'b_kneel': 150, 'b_win': 130, 'b_defend': 140, 'b_cast': 120}
+for d, y in (('down', 95), ('up', 190), ('left', 98)):
+    for n in ('stand', 'step1', 'stand2', 'step2'):
+        CROWN['w_%s_%s' % (d, n)] = y
+def shrink_rose(img, crown, f=ROSE_SCALE, blend=BLEND):
+    from scipy import ndimage as ndi
+    a = np.array(img).astype(np.float64)
+    h, w = a.shape[:2]
+    ya = max(4, crown - blend)
+    # vertical scale per source row: f above ya, rising linearly to 1 at the crown, 1 below
+    ys = np.arange(h, dtype=np.float64)
+    v = np.where(ys < ya, f, np.where(ys < crown, f + (1 - f) * (ys - ya) / (crown - ya), 1.0))
+    out_y = np.concatenate([[0.0], np.cumsum(v)])[:h]          # output position of the top edge of each source row
+    out_y = out_y - (out_y[crown] - crown)                        # keep the crown where it was: Rose sinks, Tom stays
+    # output rows -> source rows (monotone), shifting so output starts at the first row that has content
+    top = out_y[0]
+    H = h - int(np.floor(-top)) if top < 0 else h
+    oy = np.arange(H, dtype=np.float64) + (0 if top >= 0 else -top)
+    src = np.interp(oy + top if top < 0 else oy, out_y, ys)
+    al = a[:, :, 3] > 40
+    cx = np.where(al[:max(8, ya)])[1].mean() if al[:max(8, ya)].any() else w / 2.0
+    sx = np.interp(src, ys, v)
+    pm = a.copy(); pm[:, :, :3] *= (a[:, :, 3:4] / 255.0)
+    res = np.zeros((H, w, 4))
+    xs = np.arange(w, dtype=np.float64)
+    for r in range(H):
+        sr = src[r]; s = sx[r]
+        xin = cx + (xs - cx) / s
+        r0 = int(np.clip(np.floor(sr), 0, h - 2)); t = sr - r0
+        row = pm[r0] * (1 - t) + pm[r0 + 1] * t
+        for c in range(4):
+            res[r, :, c] = np.interp(xin, xs, row[:, c], left=0, right=0)
+    if top > 0: res[:int(np.ceil(top)) + 1] = 0      # rows above the shrunken figure stay empty (no smeared top row)
+    al2 = res[:, :, 3:4] / 255.0
+    rgb = np.where(al2 > 0.01, res[:, :, :3] / np.maximum(al2, 0.01), 0)
+    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), res[:, :, 3]]).astype(np.uint8), 'RGBA')
 for nm, (y0, y1) in LEG_BAND.items():
     if nm in poses: poses[nm] = squash_band(poses[nm], y0, min(y1, poses[nm].height - 1), LEG_KEEP)
+for nm, cy in CROWN.items():
+    if nm in poses: poses[nm] = shrink_rose(poses[nm], cy)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -265,9 +308,9 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
-atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=2', 'k': KB, 'rects': bt_rects},
-         'ko': {'src': 'art/chars/tomride-ko.webp?v=2', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/tomride-ow.webp?v=2', 'k': KW, 'rects': ow_rects}}
+atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=3', 'k': KB, 'rects': bt_rects},
+         'ko': {'src': 'art/chars/tomride-ko.webp?v=3', 'k': KO_, 'rects': ko_rects},
+         'ow': {'src': 'art/chars/tomride-ow.webp?v=3', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
 js = []
