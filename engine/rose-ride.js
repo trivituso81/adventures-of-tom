@@ -56,11 +56,11 @@ function roseSeatFront(m) {
 function roseRider() { return followers.find(f=>f.seat&&!f.hidden)||null; }
 function owRidePose(facing) { return facing==='up'?['ow_up',false]:facing==='down'?['ow_down',false]:['ow_left',facing==='right']; }
 // before=true: called just before Tom is drawn; false: just after.
-function drawOwRider(r,facing,cx,top,before) {
+function drawOwRider(r,facing,cx,top,before,k=1) {
   const [pose,flip]=owRidePose(facing),up=pose==='ow_up';
   const layer=before===!up?'back':'front';
   const keep=activeTint;
   activeTint=layer==='back'&&r.member?garmentTint('ow','rose',memberTopColor(r.member)):null;
-  roseRide(pose,layer,cx,top,1,flip);
+  roseRide(pose,layer,cx,top,k,flip);
   activeTint=keep;
 }

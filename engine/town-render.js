@@ -16,20 +16,20 @@ function walkPhase(a) {
 }
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
-  const p=position(a);
-  const cx=Math.round((p.x+.5)*T)+kissLean(a),base=Math.round((p.y+1)*T-2)-Math.round(a.lift||0);
+  const p=position(a),k=actorK();   // k: bigger inside painted rooms (engine/plate.js)
+  const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0&&ph<.55?1+(a.stepN%2):0;
   const fr=frames[fi];
-  const w=fr[0].length,h=fr.length;
-  if(!a.noShadow) ellipse(cx,base+1+Math.round(a.lift||0),Math.round(w*.45),4,'#2f493640');
+  const w=fr[0].length,h=fr.length,hk=h*k,wk=w*k;
+  if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round(wk*.45),Math.round(4*k),'#2f493640');
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
   activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
   const rider=a.isPlayer?roseRider():null;
-  if(rider) drawOwRider(rider,a.facing,cx,base-h,true);
+  if(rider) drawOwRider(rider,a.facing,cx,base-hk,true,k);
   activeTint=m?garmentTint('ow',m.id,memberTopColor(m)):null;
-  drawSprite(fr,set.pal,cx-Math.floor(w/2),base-h,1);
-  if(rider) drawOwRider(rider,a.facing,cx,base-h,false);
+  drawSprite(fr,set.pal,cx-Math.floor(wk/2),Math.round(base-hk),k);
+  if(rider) drawOwRider(rider,a.facing,cx,base-hk,false,k);
   activeTint=null;
 }
 
@@ -544,7 +544,7 @@ function drawTarget(target) {
   if(target.kind==='npc') {
     const p=position(target.value);
     x=(p.x+.5)*T;
-    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70:52));
+    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK()-1)):52));
   } else if(target.kind==='object') {
     x=(target.value.x+target.value.w/2)*T;
     y=target.value.y*T-(target.value.kind==='tree'?70:28);

@@ -65,7 +65,7 @@ function draw(time) {
     const t=elapsedTime-kiss.start;
     if(t>2.6) kiss=null;
     else {
-      const mx=Math.round(((player.x+kiss.npc.x)/2+.5)*T),my=Math.round(Math.min(player.y,kiss.npc.y)*T-20);
+      const mx=Math.round(((player.x+kiss.npc.x)/2+.5)*T),my=Math.round(Math.min(player.y,kiss.npc.y)*T-20-Math.round(44*(actorK()-1)));
       const rise=Math.round(Math.min(1,t/1.6)*26),pulse=1+(Math.sin(t*9)>0?1:0);
       const alpha=t<2?1:1-(t-2)/.6;
       gfx.globalAlpha=alpha;
