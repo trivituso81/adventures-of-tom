@@ -72,13 +72,15 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
-def bigger_head(img, name, k, pad=160, taper=22):
+def bigger_head(img, name, k, pad=160, taper=16, margin=8):
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
     top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
+    x0, x1 = max(0, x0 - margin), min(W, x1 + margin)            # keep ears and hair edges inside the box
     ax = (x0 + x1) / 2.0
-    X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad
+    # the taper back to scale 1 happens BELOW the chin (in the neck), so the whole face, jaw included, keeps the full enlargement
+    X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + taper + pad
     out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
     arr[Y0:AY, X0:X1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))

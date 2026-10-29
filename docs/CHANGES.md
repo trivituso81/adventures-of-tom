@@ -2,6 +2,19 @@
 - `art/blvd.webp` (1920 x 1664, 30 x 26 tiles) replaced with Tom's new golden-hour painting. Same eight buildings, new positions: the Griffith Park arch and steps are top left, the Jefferson Park arch and steps are bottom centre, the Metro is bottom right.
 - Doors now at coffee (7,7), ramen (12,7), Starlite (18,8), Nickel's (24,8), wardrobe (4,18), loft (11,19), tower (18,19), cab (24,20). `plateMask` retraced from the painting. The west road exit is gone; Griffith Park is up the steps at (3,3) and (4,3), and the chapter 2 trail barrier moved there. Jefferson Park exits are the four tiles under the arch (12..15,25); jpark and griffith arrivals updated. The chapter 13 subfloor now comes up at the Metro (21,24).
 - Props: hot dog cart removed (not in the new painting); taco truck, bus bench, Metro and cab object boxes re-placed. `tools/blvd_test.py` updated for the new tiles. smoke.py FAILS: [], blvd, griffith, jpark, loftlobby, reach and ch17 tests pass. No spoken lines changed.
+## 2026-10-29: Cattail Pier is painted
+- New `art/pier.webp` (Tom's painting, 1536 x 1408 = 24 x 22 tiles at 64 px) registered in `engine/plate.js` as `PLATES.pier` (`?v=20261029` busts phone caches). Before this the pier drew with the generic pond tile look.
+- Walk map (`plateMask` in `data/maps-le.js`): dirt road from the north gate (x 11 to 13) and the west edge (rows 5 and 6), the bait shack front, the boardwalk (x 12 and 13), the platform (rows 10 to 12). Water, reeds, trees and rocks block.
+- Objects re-laid to the painting: bait shack (17,1) 5x4, pier sign (14,3), Boppy's bench (7,3), tackle box (10,11). Reel stands at (19,5) in front of the shack. The rowboat object is gone (it floats in unreachable water). The old cattail objects and tree list are gone.
+- Story: in `ch3Pier` Rose now stands at (13,12) on the platform (was (12,13), now water). Trigger zone and the other positions are unchanged.
+- Checks: `tools/pier_test.py` 0 fails (objects touchable, scene tiles walkable, walk down the boardwalk, west exit enters the marsh), `tools/smoke.py` 0 fails, portrait and landscape shots looked at.
+## 2026-10-29: Jefferson Park repaint (themed shops, one label per house)
+- `art/jpark.webp` is replaced with Tom's revised painting (same 1920 x 1536 at 64 px, upscaled from the 1402 x 1122 source). Same street, paths, camera and building positions, so the `plateMask`, doors, exits and objects are unchanged.
+- Shops are exaggerated to read as what they sell: Odette's Creole Kitchen (Mardi Gras awning, giant crawfish, brass horn, CREOLE KITCHEN sign), Pupuseria La Ceiba (giant pupusa on the roof, PUPUSERIA sign), Board Room (skateboard on the roof, boards in the window, BOARD ROOM sign), Very Green Juice (giant green smoothie, VERY GREEN JUICE sign).
+- Houses: exactly one label each (TOM'S HOUSE, JORDAN & SAM'S, CASA ALVAREZ, DAKOTA & RYAN'S); the duplicate labels are gone. Tom's house shows 3468.
+- `PLATES.jpark.src` gets `?v=20261029` so phones that cached the old painting load the new one.
+- Checks: `tools/jpark_test.py` 0 fails (all eight doors enter, every object touchable), `tools/smoke.py` 0 fails, portrait and landscape shots looked at.
+- Known roughness: the sign text is painted, so the in-game names (Odette's Creole Kitchen, Pupuseria La Ceiba) show only in the HUD and dialogue. Door tiles sit on the landing in front of each painted door, as before.
 ## 2026-10-29: Chapter, load and new-game prompts use the welcome page
 - Picking a chapter, LOAD, PART 2 or the bonus on the welcome page used to cut to the town with the old pixel logo and a dialogue box. The prompt now stays on the welcome page: same painted logo, same gold-framed panel and serif menu buttons (START CHAPTER 2 / BACK, the load list, the new-game warning).
 - New `titleAsk(name,text,options)` in `engine/splash.js` (same arguments as `openChoice`; falls back to it if there is no welcome page). `splashGo` no longer fades to the town first; it fades out only when the pick starts a game without a prompt (`splashFade`). New `ask` mode in `SPLASH_MODES`, a `.sp-text` line in the panel, Esc/B runs the prompt's BACK. Callers switched: `engine/intro.js` (confirmNew, loadMenu), `engine/story.js` (confirmPart2), `engine/chapter-select.js` (confirmChapter), `data/bonus-nine-scoops.js` (confirmBonus). smoke.py FAILS: []. No spoken lines changed.
@@ -202,6 +215,12 @@
 - Same row geometry as before, so Rose's ride, hand points, hurt, KO, defend and outfits all still work. `TOM_HIRES_OFF=true` restores the old Tom.
 - New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
 - Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
+
+## 2026-10-29: Starter Splash and Popcorn Jump use painted poses
+- `tools/sprite-bake/src/tom-poses-v2.png` (12 poses) baked into `art/chars/tom-poses.webp` with the first set: `carry, raise, lidpop, splash, goo, proud` (Starter Splash) and `bowlsit, spook, scream, bowlthrow, cower, frozen` (movie night, terrified). The jar and popcorn bowl are painted into the poses.
+- Starter Splash (engine/tom-moves.js): carry, raise, lid pop, splash, goo, proud; the drawn jar (`tv_jar`) is skipped while painted poses are on.
+- Popcorn Jump (`B2_TOMBO_ANIM.tnb1`, engine/battle2-kind.js): Tom sits with his painted bowl, is spooked, screams mid-jump while the game's bowl flies, cowers, then stands proud for the kiss. The drawn lap bowl is skipped. `bowlthrow` and `frozen` are baked but not used yet.
+- `tools/sprite-bake/sheet.py` now merges loose debris (flying popcorn) into the nearest figure. Script versions bumped to `?v=tom4`.
 
 ## 2026-10-29: Painted controller for Press Start
 - `tools/sprite-bake/src/prop-controller.png` baked by new `tools/sprite-bake/bake_props.py` to `art/chars/prop-controller.webp` (levelled, 200 px wide). `ctl()` in engine/tom-moves.js draws it (wind-up, throw, falling); the old drawn controller is the fallback until it loads.

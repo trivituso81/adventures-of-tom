@@ -655,7 +655,9 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const SX=16,SY=12,SW=cl(GR.x1+40,220,268)-16,SH=136;
   const P={walk:700,line:900,quiet:1700,scare:2250,jumpEnd:2750,over:2950,rain0:2950,hit:3080,rain1:3600,cap:3650,tline:3700,laugh:3200,kiss0:4300,kiss:4600,glow:4800,home:5300,end:6200};
   const sT={x:T.x,b:T.base,f:null},sN={x:N.x,b:N.base};
-  const tSeat=seatTom(),nSeat=seatTnb();
+  // Painted Tom (art/chars/tom-poses.webp): sits holding his own bowl, spooked, screaming mid-jump, cowering, then proud.
+  const TP=BATTLE_SPRITES.tom&&BATTLE_SPRITES.tom.hires&&BATTLE_SPRITES.tom.bowlsit?BATTLE_SPRITES.tom:null;
+  const tSeat=TP?TP.bowlsit:seatTom(),nSeat=seatTnb();
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tsx,y=FL,f=tSeat;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tsx,k); y=lerp(c.origBase,FL,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.home) { if(ms>P.scare&&ms<P.jumpEnd) { const k=seg(ms,P.scare,P.jumpEnd); y-=Math.sin(k*Math.PI)*84; f=sp.celeb; x+=Math.sin(k*Math.PI)*-6; }
@@ -663,6 +665,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       else if(ms>P.kiss0&&ms<P.home) x+=ez(seg(ms,P.kiss0,P.kiss))*5*(1-ez(seg(ms,P.kiss+350,P.kiss+700)));
       else if(ms>P.line&&ms<P.scare) x-=ez(seg(ms,P.quiet,P.scare))*4; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tsx,c.origX,k); y=lerp(FL,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    if(TP&&c.sp===TP&&ms>=P.walk&&ms<P.home) f=ms<P.quiet?TP.bowlsit:(ms<P.scare?TP.spook:(ms<P.jumpEnd?TP.scream:(ms<P.tline?TP.cower:TP.proud)));
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,noShadow:ms>P.walk&&ms<P.home}; });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nsx,y=FL,f=nSeat;
     if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,nsx,k); y=lerp(c.origBase,FL,k); f=runFr(sp,c.t,-1); }
@@ -700,7 +703,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   // In front: the couch's rolled arms (over their sides), the bowl, the popcorn, the kiss.
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=dimK(ms);
     // the bowl: in Tom's lap, then thrown and flipped over the monsters, then dropped on the first one like a hat
-    if(ms>P.walk-150&&ms<P.scare) { const L=lap(); popBowl(L.x,L.y,0,true,BS); }
+    if(ms>P.walk-150&&ms<P.scare) { if(!TP) { const L=lap(); popBowl(L.x,L.y,0,true,BS); } }
     else if(ms>=P.scare&&ms<P.over) { const q=seg(ms,P.scare,P.over),L0={x:tsx+6,y:FL-24},x=lerp(L0.x,bowlAt.x,ez(q)),y=lerp(L0.y,bowlAt.y,q)-Math.sin(q*Math.PI)*70; popBowl(x,y,-q*Math.PI,q<.4,lerp(BS,1,ez(q))); }
     else if(ms>=P.over&&ms<P.cap) popBowl(bowlAt.x+Math.sin(ms/30)*3,bowlAt.y,Math.PI,false);
     else if(ms>=P.cap&&ms<P.end-150&&tgt) { const q=ST.foe(tgt),a=seg(ms,P.cap,P.cap+300),hy=q.top+(tgt.def._top||0)*tgt.sc+4;
