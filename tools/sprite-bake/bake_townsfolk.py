@@ -21,7 +21,8 @@ KW = 3
 # standing height in rows (Tom is 43); matches the old sprites so nobody changes size in the town
 CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 43, 'bean': 46, 'reel': 40, 'pruitt': 43,
         'page': 43, 'bun': 41, 'halverson': 43, 'ike': 42, 'delgado': 44, 'kowalski': 41,
-        'sal': 44, 'kit': 45, 'luna': 38, 'penny': 38, 'oolong': 37, 'fern': 41}
+        'sal': 44, 'kit': 45, 'luna': 38, 'penny': 38, 'oolong': 37, 'fern': 41,
+        'washington': 44, 'bev': 38, 'boomie': 42, 'wes': 42, 'chet': 44, 'skye': 38}
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)

@@ -23,7 +23,7 @@ def clear(pg):
             if quiet>=3: return True
             pg.wait_for_timeout(250)
     return False
-WHO=[('Pip','pip'),('Moss','moss'),('Dot','dot'),('Gus','gus'),('Bean','bean'),('Reel','reel'),('Principal Pruitt','pruitt'),('Page','page'),('Bun','bun'),('Mr. Halverson','halverson'),('Grandpa Ike','ike'),('Mr. Delgado','delgado'),('Mrs. Kowalski','kowalski'),('Sal','sal'),('Kit','kit'),('Luna','luna'),('Penny','penny'),('Oolong','oolong'),('Fern','fern')]
+WHO=[('Pip','pip'),('Moss','moss'),('Dot','dot'),('Gus','gus'),('Bean','bean'),('Reel','reel'),('Principal Pruitt','pruitt'),('Page','page'),('Bun','bun'),('Mr. Halverson','halverson'),('Grandpa Ike','ike'),('Mr. Delgado','delgado'),('Mrs. Kowalski','kowalski'),('Sal','sal'),('Kit','kit'),('Luna','luna'),('Penny','penny'),('Oolong','oolong'),('Fern','fern'),('Mr. Washington','washington'),('Bev','bev'),('Boomie','boomie'),('Wes','wes'),('Chet','chet'),('Skye','skye')]
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -32,8 +32,8 @@ with sync_playwright() as pw:
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(500)
     clear(pg)
-    check('painted sets registered',pg.evaluate("()=>!!(OW.reel&&OW.pruitt&&OW.tf_pip&&OW.tf_moss&&OW.tf_dot&&OW.tf_gus&&OW.tf_bean&&OW.tf_page&&OW.tf_bun&&OW.tf_sal&&OW.tf_kit&&OW.tf_luna&&OW.tf_penny&&OW.tf_oolong&&OW.tf_fern&&OW.halverson&&OW.ike&&OW.delgado&&OW.kowalski)"))
-    check('sets are painted rows',pg.evaluate("()=>[OW.reel,OW.pruitt,OW.tf_pip,OW.tf_moss,OW.tf_dot,OW.tf_gus,OW.tf_bean,OW.tf_page,OW.tf_bun,OW.tf_sal,OW.tf_kit,OW.tf_luna,OW.tf_penny,OW.tf_oolong,OW.tf_fern,OW.halverson,OW.ike,OW.delgado,OW.kowalski].every(s=>s.down[0]._paint&&s.side[0]._paint&&s.left[0]._paint)"))
+    check('painted sets registered',pg.evaluate("()=>!!(OW.reel&&OW.pruitt&&OW.tf_pip&&OW.tf_moss&&OW.tf_dot&&OW.tf_gus&&OW.tf_bean&&OW.tf_page&&OW.tf_bun&&OW.tf_sal&&OW.tf_kit&&OW.tf_luna&&OW.tf_penny&&OW.tf_oolong&&OW.tf_fern&&OW.tf_washington&&OW.tf_bev&&OW.tf_wes&&OW.tf_chet&&OW.tf_skye&&OW.boomie&&OW.halverson&&OW.ike&&OW.delgado&&OW.kowalski)"))
+    check('sets are painted rows',pg.evaluate("()=>[OW.reel,OW.pruitt,OW.tf_pip,OW.tf_moss,OW.tf_dot,OW.tf_gus,OW.tf_bean,OW.tf_page,OW.tf_bun,OW.tf_sal,OW.tf_kit,OW.tf_luna,OW.tf_penny,OW.tf_oolong,OW.tf_fern,OW.tf_washington,OW.tf_bev,OW.tf_wes,OW.tf_chet,OW.tf_skye,OW.boomie,OW.halverson,OW.ike,OW.delgado,OW.kowalski].every(s=>s.down[0]._paint&&s.side[0]._paint&&s.left[0]._paint)"))
     for name,look in WHO:
         mapid=pg.evaluate("(n)=>{ for(const id in worlds){ if((worlds[id].npcs||[]).some(x=>x.name===n)) return id; } return null; }",name)
         check(f'{name} found on a map ({mapid})',bool(mapid))

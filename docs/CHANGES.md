@@ -1,3 +1,8 @@
+## 2026-10-29: Six more painted townsfolk, Los Angeles (Mr. Washington, Bev, Boomie, Wes, Chet, Skye)
+- Sheets `tools/sprite-bake/src/{washington,bev,boomie,wes,chet,skye}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 44, 38, 42, 42, 44, 38). Names given by Tom in attachment order (the files arrived as "image.png", pasted rather than attached).
+- Mr. Washington, Bev, Wes, Chet and Skye are matched BY NAME (`TOWN_PAINTED`). Boomie is a sheet actor (look `skye`, `sheet:'boomie'`), so `OW.boomie` is replaced directly in `data/townsfolk-hires-use.js`; her old `BOOMIE_OW` set stays in `data/npc-sprites.js` as the fallback.
+- Checks: `tools/townsfolk_test.py` (25 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Six more painted townsfolk (Sal, Kit, Luna, Penny, Oolong, Fern)
 - Sheets `tools/sprite-bake/src/{sal,kit,luna,penny,oolong,fern}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 44, 45, 38, 38, 37, 41) and matched BY NAME in `data/townsfolk-hires-use.js` (`TOWN_PAINTED`): the looks kit (TNB's stand-in body in LA) and oolong (Aunt Ellie's) are shared.
 - These six arrived as "image.png", so the characters were matched by the town's own data, not file names: Kit is the mail carrier at the Post, Sal the taxi driver, and Penny, Luna, Oolong and Fern match the villagers' hair and clothing colours in `data/villagers.js`. Confirm with Tom; a wrong match is a one-line swap in `CAST`.
