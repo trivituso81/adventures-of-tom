@@ -21,7 +21,7 @@ const SPLASH_CAST=[
 ];
 const SPLASH_HOP=.42,SPLASH_STEP=.3;
 // Welcome screen: Tom, Grace, Rose and Deedee are drawn 33% bigger (Rose rides on Tom, so she grows with him). Tom's call, 2026-10-29.
-const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33};
+const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33,nara:typeof NARA_SIZE!=='undefined'&&OW.nara.k?NARA_SIZE:1};   // Nara 1.15 (data/nara-hires-use.js)
 // Welcome screen shows the painted art (art/welcome.webp, set in index.html). Set false to bring back the drawn cast scene.
 const SPLASH_ART=true;
 let FULL_GAME_OPEN=true;   // opened in C1 (2026-10-20): chapter 1 is playable
@@ -391,10 +391,10 @@ function splashScene(W,H,panelH,time) {
     const n=splash.nara,home=X(naraM.fx),cx=home+Math.round(n.x),lift=n.state==='idle'?hopY(naraM):Math.abs(Math.round(Math.sin(time*18)*S*2));
     L.naraHome=home; const set=OW.nara,run=n.state==='out'||n.state==='back';
     const frame=run?1+Math.floor(time*10)%2:(naraM.hopT>=0?1:0);
-    shadow(cx,naraFy,run?set.side[0][0].length:set.down[0][0].length,lift);
+    shadow(cx,naraFy,(run?set.side[0][0].length:set.down[0][0].length)*kOf(set),lift);
     drawOne(set,frame,cx,naraFy,lift,run?false:undefined);
     if(n.carry) { // ball in her mouth (she faces right)
-      const bx=cx+Math.round(set.side[0][0].length*S*.42),bY=naraFy-Math.round(set.side[0].length*S*.55)-lift;
+      const bx=cx+Math.round(set.side[0][0].length*S*kOf(set)*.42),bY=naraFy-Math.round(set.side[0].length*S*kOf(set)*.55)-lift;
       splashBall(bx,bY,S);
     }
     if(n.state==='idle'&&!run&&Math.floor(time*1.2)%5===0) { // wag: a tiny excited hop now and then
