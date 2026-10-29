@@ -23,6 +23,7 @@
   const P=(k,name)=>reg(paintRows(rk(B[k]),'boppyBattle',name||k,false));
   const mir=rows=>{ const r=mirrorRows(rows),W=rows[0].length,e=sp.eyeAt&&sp.eyeAt.get(rows),h=sp.handAt&&sp.handAt.get(rows);
     if(e) sp.eyeAt.set(r,{col:W-1-e.col,row:e.row}); if(h) sp.handAt.set(r,{n:[W-1-h.f[0],h.f[1]],f:[W-1-h.n[0],h.n[1]]}); return r; };
+  const P2=(rows,atlas,name,mp)=>reg(paintRows(rows.map(q=>{ let o=''; for(const ch of q) o+=mp[ch]; return o; }),atlas,name,false));
   const SZ=(typeof BATTLE_SIZE!=='undefined'&&BATTLE_SIZE.boppy)||1;
   sp.scale=2*SZ; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
   sp.idle=P('idle'); sp.act=P('act'); sp.celeb=P('celeb'); sp.windup=P('windup'); sp.leap=P('leap');
@@ -44,6 +45,21 @@
     m3['.']='.';
     for(const k in FX.rows) { const r=paintRows(FX.rows[k].map(q=>{ let o=''; for(const ch of q) o+=m3[ch]; return o; }),'boppyFish',k,false); reg(r);
       if(sp.handAt) sp.handAt.set(r,{n:FX.tip[k].slice(),f:FX.tip[k].slice()}); sp['x_'+k]=r; }
+  }
+  // Stock poses (Sheet B): aim, throw, spread, toast, point, clap, shrug replace his pixel stances. (sitc, the armchair pose, is not used: moves draw their own chair.)
+  if(typeof BOPPY_STOCK!=='undefined') {
+    const SX=BOPPY_STOCK; paintedAtlas('boppyStock',SX.atlas.src,SX.atlas.rects,SX.atlas.k);
+    const m4={}; let n4=0; for(const k in SX.pal) { const c=String.fromCharCode(0x0600+n4++); m4[k]=c; pal[c]=SX.pal[k]; }
+    m4['.']='.';
+    for(const k in SX.rows) if(k!=='sitc') sp[k]=P2(SX.rows[k],'boppyStock',k,m4);
+  }
+  // Young runner (XC Ult flashback): yg_ready, yg_run1, yg_run2, yg_wind, yg_strike, yg_celebr (+ yg_run1R, yg_run2R mirrored). engine/boppy-moves.js youngOn() swaps them in.
+  if(typeof BOPPY_YOUNG!=='undefined') {
+    const YX=BOPPY_YOUNG; paintedAtlas('boppyYoung',YX.atlas.src,YX.atlas.rects,YX.atlas.k);
+    const m5={}; let n5=0; for(const k in YX.pal) { const c=String.fromCharCode(0x0700+n5++); m5[k]=c; pal[c]=YX.pal[k]; }
+    m5['.']='.';
+    for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,m5);
+    sp.yg_run1R=mir(sp.yg_run1); sp.yg_run2R=mir(sp.yg_run2);
   }
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.boppy={scale:.8*2*SZ,pal:BOPPY_HIRES.ko.pal,rows:paintRows(BOPPY_HIRES.ko.rows.slice(),'boppyKo','ko',true)};

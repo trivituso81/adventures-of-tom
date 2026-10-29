@@ -1091,6 +1091,7 @@ const ensureArt=()=>{ if(ready) return; ready=true; const sp=BSP(); Object.assig
   FR.y_run1R=mir(FR.y_run1); FR.y_run2R=mir(FR.y_run2); reg(FR.y_run1R,'run1',true); reg(FR.y_run2R,'run2',true);
   for(const k of ['act','throw','aim','hip','wind']) sp['bare_'+k]=FR['bare_'+k]; };
 const youngOn=()=>{ ensureArt(); const sp=BSP(); if(saved) return; saved={wind:sp.wind,spread:sp.spread,hip:sp.hip,run:sp.run,runFlip:sp.runFlip};
+  if(sp.yg_ready) { sp.wind=sp.yg_ready; sp.spread=sp.yg_wind; sp.hip=sp.yg_celebr; sp.run=[sp.yg_run1,sp.yg_run2]; sp.runFlip=[sp.yg_run1R,sp.yg_run2R]; return; }   // painted young runner
   sp.wind=FR.y_wind; sp.spread=FR.y_spread; sp.hip=FR.y_hip; sp.run=[FR.y_run1,FR.y_run2]; sp.runFlip=[FR.y_run1R,FR.y_run2R]; };
 const youngOff=()=>{ if(!saved) return; const sp=BSP(); Object.assign(sp,saved); saved=null; };
 // ---- the baseball cap, drawn at final size (hand at the origin, brim to the left) ----

@@ -126,7 +126,7 @@ def _drop_slivers(im, er=5, grow=7):
     return Image.fromarray(a, 'RGBA')
 
 def bigger_head(img, name, k=None, pad=160, taper=TAPER):
-    if k is None: k = HEAD_KB if (name.startswith('b_') or name.startswith('x_')) else HEAD_KW
+    if k is None: k = HEAD_KB if name[:2] in ('b_', 'x_', 'f_', 's_') else HEAD_KW
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
