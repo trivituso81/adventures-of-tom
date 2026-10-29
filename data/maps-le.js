@@ -1243,17 +1243,30 @@ const LE_ROOMS=[
   {id:'taxi',w:11,h:9,
     style:{floor:'#c9c3b4',alt:'#d7d1c2',wall:'#a99a6e',trim:'#efe0b0',pattern:'check',rug:'#d9a43a'},
     rug:[3,5,5,2],
+    // Painted plate (art/taxi.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Dispatch desk fills the back; rug in front of it; plant and chair left, lost and found table and umbrella stand right; two gate posts frame the door.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '###########',
+      '###########',
+      '##......###',
+      '##........#',
+      '#...#.#...#',
+      '#####.#####'],
     npcs:[
-      {name:'Sal',x:5,y:5,look:'sal',driver:true,lines:[
+      {name:'Sal',x:5,y:5,look:'sal',driver:true,roam:0,lines:[
         'Long Island Taxi. We go anywhere in town. Town is small, so mostly here.',
         'I have one cab. It\'s cab seven. Cabs one through six are a dream I\'m working on.',
         'You just rode with me. You tipped in sourdough starter. Odd. Generous.']}],
     objects:[
-      ['counter',3,3,5,1,'Dispatch desk','A radio crackles: "Cab seven, cab seven. Never mind, I can see you."',{variant:'letters'}],
-      ['shelf',1,1,2,1,'Key board','Seven hooks. One key. Sal is optimistic.'],
-      ['photo',8,1,1,1,'Driver of the month','It\'s Sal. It\'s always Sal. Sal is the only driver.'],
-      ['desk',7,6,2,1,'Lost and found','One mitten, one umbrella, and a library book that\'s eleven years overdue.'],
-      ['pot',1,6,1,1,'Waiting room plant','It\'s been waiting for a cab since spring. It\'s in no hurry.']]},
+      ['shelf',2,0,1,5,'Key board','Seven hooks. One key. Sal is optimistic.'],
+      ['counter',3,0,3,5,'Dispatch desk','A radio crackles: "Cab seven, cab seven. Never mind, I can see you."',{variant:'letters'}],
+      ['photo',6,0,4,5,'Driver of the month','It\'s Sal. It\'s always Sal. Sal is the only driver.'],
+      ['desk',8,5,2,1,'Lost and found','One mitten, one umbrella, and a library book that\'s eleven years overdue.'],
+      ['pot',0,5,2,2,'Waiting room plant','It\'s been waiting for a cab since spring. It\'s in no hurry.'],
+      ['pot',10,5,1,2,'Umbrella stand','Umbrellas for a town where it rains twice a year. Sal keeps them anyway.']]},
   {id:'amyhouse',w:12,h:10,
     style:{floor:'#e2cfc0',alt:'#ead9cb',wall:'#c99aa4',trim:'#f0dde0',pattern:'tile',rug:'#d2a4b0'},
     rug:[6,5,4,3],
