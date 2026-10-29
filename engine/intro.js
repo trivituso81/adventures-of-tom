@@ -119,8 +119,8 @@ function hugStep() {
 
 // Tom stretches after six hours in the cab line: arms up over his head, up on his toes, a long exhale.
 function stretchStep() {
-  return {t:0,start(){ this.t=0; player.facing='down'; intro.stretch={t:0}; snd.stretch(); },
-    update(dt){ this.t+=dt; const u=Math.min(1,this.t/1.6);
+  return {t:0,start(){ this.t=0; this.s2=false; player.facing='down'; intro.stretch={t:0}; snd.stretch(); },
+    update(dt){ this.t+=dt; if(TOM_STRETCH&&!this.s2&&this.t>3.9) { this.s2=true; snd.stretch(); } const u=Math.min(1,this.t/(TOM_STRETCH?5.2:1.6));
       intro.stretch.t=this.t;
       if(u>=1) { intro.stretch=null; player.hidden=false; return true; } return false; }};
 }
@@ -159,7 +159,21 @@ function stretchFrame(pose) {
   return (stretchFrames[pose]={rows:g.map(r=>r.join('')),pad:P});
 }
 function stretchPose(u) { return u<.12||u>.92?0:(u<.26||u>.8?1:2); }
+// Painted Tom (data/tom-hires-use.js): tired, start, full, side, crack, neck, exhale, fresh over 5.2 seconds.
+const STRETCH_SEQ=[['tired',0],['start',.1],['full',.22],['side',.42],['crack',.54],['neck',.66],['exhale',.76],['fresh',.88]];
+function drawStretchPainted(time) {
+  const u=Math.min(1,intro.stretch.t/5.2);
+  let name='tired'; for(const [n,a] of STRETCH_SEQ) if(u>=a) name=n;
+  player.hidden=true;
+  const rows=TOM_STRETCH[name],p=position(player),w=rows[0].length,h=rows.length;
+  const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),bob=name==='exhale'?Math.round(Math.sin(intro.stretch.t*5)*1):0;
+  ellipse(cx,base+1,Math.round(w*.4),4,'#2f493640');
+  drawSprite(rows,OW.tom.pal,cx-Math.floor(w/2),base-h+bob,1);
+  if(name==='full') { const k=(u-.22)/.2; gfx.globalAlpha=Math.max(0,1-Math.abs(k-.5)*2); label('~',cx+22,base-h+16-Math.round(k*10),'#fff1cb',2); label('~',cx-23,base-h+22-Math.round(k*10),'#fff1cb',2); gfx.globalAlpha=1; }
+  if(name==='fresh'&&u>=.97) player.hidden=false;
+}
 function drawStretch(time) {
+  if(TOM_STRETCH) return drawStretchPainted(time);
   const u=Math.min(1,intro.stretch.t/1.6),pose=stretchPose(u);
   if(!pose) { player.hidden=false; return; }
   player.hidden=true;

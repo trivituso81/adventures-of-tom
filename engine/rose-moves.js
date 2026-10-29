@@ -1543,13 +1543,14 @@ SC.rf_poke=(s,u)=>{ const ms=s.t*1000+s.t0,n=s.n; if(ms<s.from) return;
   rrect(2,-4,22,8,4); gfx.lineWidth=3.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#ffc49e'; gfx.fill();   // pointer finger, a shade lighter
   R(4,-3,16,2,'#ffdcc2'); E(21,-1.6,2.6,1.8,'#ffe6ee'); Ln(11,-4,11,-1.5,1.2,SKIND);   // highlight, nail, knuckle crease
   gfx.restore(); };
-Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500;
+Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500,jx=Math.min(548,n.x+30),jy=cl(n.y+47,p.y-12,p.y+4);   // jab frames: fingertip is 33 px left of her centre and 47 px above her feet
   const pokes=[HIT];   // ONE jab (Tom, 2026-10-27). Damage, sound, flash, BOOP! word and her spoken "Boop!" all land on HIT.
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1150,f:'boop',dy:u=>-ez(u)*6},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'jab0'},{t:1250,f:'jab0',dx:u=>ez(u)*3},
+    {t:HIT-110,x:jx,y:jy,f:'jab1'},{t:HIT+250,f:'jab1'},{t:HIT+450,x:p.x,y:p.y,f:'jab2'},
     {t:2200,f:'boopBack',hop:16},{t:2650,f:'celeb',hop:9,hn:2},{t:3050,f:'runR'},{t:3750,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); warmClip('rose','Boop!'); }],   // decode the clip now so it plays instantly later
-    [1150,()=>{ setMessage('Pointer finger out.'); scene('rf_poke',1.0,{n,from:1150,pokes,back:1850,t0:1150}); }],
+    [1150,()=>{ setMessage('Pointer finger out.'); }],
     // The baked "Boop!" clip is 2.08 s long and the word itself sits at 1.42 to 1.60 s, so play only that slice (1.39 to 1.75 s).
     // Voice and sound start a little before contact to cover phone audio output delay (about 60 to 100 ms).
     [HIT-80,()=>{ say(m.id,'boop',0,null,{text:'Boop!',len:45756,from:1.39,to:1.75}); }],
