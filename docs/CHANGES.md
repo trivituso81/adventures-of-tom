@@ -1,3 +1,10 @@
+## 2026-10-29: The Starlite (inside) is painted (Area 43, map id `cinema`)
+- New `art/starlite.webp` (Tom's painting, 832 x 704 = 13 x 11 tiles at 64 px) registered as `PLATES.cinema` (`?v=20261029`, interior actor scale 1.98). Map size, door (6,10) and spawn (6,9) unchanged.
+- Walk map (`plateMask` in `data/maps-la.js`): the center aisle (x6, rows 4 to 10), the front strip across the seat rows (row 7, x1 to 9), the velvet-rope nook (8,8), and the red-carpet stairs (x5 and x6, rows 8 to 10) as the way out. Stage, both seat blocks, the concession bar, ticket desk, fern and brass posts are painted and blocked.
+- Objects re-laid: The big screen (4,2,5,2), Row F (1,5,5,2), Row G (7,4,4,3), Concessions (10,5,3,4), new Ticket desk (0,8) and Lobby fern (2,8) and Velvet rope (8,9). Dolores moved from (6,3), now stage, to (3,7); her lines are NOT changed (clips still match).
+- Object text reworded or added (not voiced, no re-bake): Row F ("three" coats), Row G (plaid blanket), Concessions (prices), Ticket desk, Lobby fern, Velvet rope.
+- Checks: new `tools/starlite_test.py` 0 fails (objects touchable, Dolores answers, concessions answer, stairs lead to the boulevard), smoke, blvd_test, bg_test, ramen_test 0 fails. Portrait and landscape shots looked at.
+
 ## 2026-10-29: Very Green Juice (inside) is painted
 - New `art/juicebar.webp` (Tom's painting, area 40, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.juicebar` with the interior actor scale. Map `juicebar` keeps its size. Door (5,8) and spawn (5,7) unchanged; the whole doormat between the gate posts (x 4 to 6, rows 7 and 8) now walks and all three bottom tiles are exits to Jefferson Park (`doors:[[4,8],[6,8]]`).
 - Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter, the open floor right of the counter (8,3), the sunny left side down to the herb table. Counter and blender wall, wheatgrass beds, herb table, big fern and the supplement shelf are painted and blocked.

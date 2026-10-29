@@ -20,6 +20,7 @@ PLATES.boiler={src:'art/boilerroom.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.ramen={src:'art/ramen.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.tomsuite={src:'art/tomsuite.webp',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.juicebar={src:'art/juicebar.webp?v=20261029',px:64,img:null,ready:false};
+PLATES.cinema={src:'art/starlite.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;

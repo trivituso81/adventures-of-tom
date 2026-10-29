@@ -959,19 +959,38 @@ const LA_ROOMS=[
       ['desk',2,7,2,1,'Continuity desk','Polaroids of every actor in every scene. Scene 12, the scarf was on the LEFT.'],
       ['photo',6,1,1,1,'Call sheet','Tomorrow: 5 AM call. Forty extras. One horse. The horse has a stand-in.'],
       ['pot',10,7,1,1,'Prop plant','It\'s fake. It\'s been in four movies. It has an agent.']]},
+  // The Starlite, painted plate (art/starlite.webp, engine/plate.js), 13 x 11 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
+  // Stage and screen across the top, two blocks of seats with the center aisle (x6) between them, the concession bar down the right,
+  // and the front strip (row 7) across the seat rows. The ticket desk and fern are bottom left; the velvet-rope nook (8,8) fronts the right fern.
+  // The two tiles on the red-carpet stairs (x5 and x6, rows 8 to 10) are the way out.
   {id:'cinema',w:13,h:11,
     style:{floor:'#7a3a3a',alt:'#843f3f',wall:'#2c2c33',trim:'#a8453a',pattern:'night',rug:'#a8453a'},
     rug:[4,8,5,2],
+    plateMask:[
+      '#############',
+      '#############',
+      '#############',
+      '#############',
+      '######.######',
+      '######.######',
+      '######.######',
+      '#.........###',
+      '#####..#.####',
+      '#####..######',
+      '#####..######'],
     npcs:[
-      {name:'Dolores',x:6,y:3,look:'dolores',lines:[
+      {name:'Dolores',x:3,y:7,look:'dolores',lines:[
         'Welcome to the Starlite. Built in 1931. The popcorn is newer. A little.',
         'I have run the projector here for forty years. I\'ve seen every movie twice.',
         'Tonight it\'s a horror double feature. Your boyfriend would love it. You\'d watch it through your fingers.']}],
     objects:[
-      ['screen',3,1,7,1,'The big screen','Velvet curtains, gold trim, and one stubborn stain from 1987.'],
-      ['couch',1,5,3,1,'Row F','The good seats. Somebody already put a coat on two of them.'],
-      ['couch',9,5,3,1,'Row G','A sticky floor under it. A historic stickiness.'],
-      ['counter',8,8,3,1,'Concessions','Popcorn, red candy ropes, and a hot dog that\'s seen things.',{variant:'bread'}]]},
+      ['screen',4,2,5,2,'The big screen','Velvet curtains, gold trim, and one stubborn stain from 1987.'],
+      ['couch',1,5,5,2,'Row F','The good seats. Somebody already put a coat on three of them.'],
+      ['couch',7,4,4,3,'Row G','A sticky floor under it. A historic stickiness. Someone left a plaid blanket behind.'],
+      ['counter',10,5,3,4,'Concessions','Popcorn and hot dogs a quarter, candy and soda less. The prices are from 1931. The hot dog is not.',{variant:'bread'}],
+      ['desk',0,8,2,2,'Ticket desk','A stack of old programs. The top one says NIGHT OF THE GIANT LOBSTER, ONE SHOW ONLY. The lobster is the reason.'],
+      ['pot',2,8,2,2,'Lobby fern','It has been in the lobby since the talkies. It has seen every movie too, but from the side.'],
+      ['pot',8,9,2,2,'Velvet rope','A rope, a brass post and a fern. Nobody is allowed past it. Nobody can say what is past it.']]},
   {id:'boards',w:11,h:9,
     style:{floor:'#b6c3c8',alt:'#c6d1d4',wall:'#2f4e6a',trim:'#d6e6ec',pattern:'wood',rug:'#e2793a'},
     rug:[3,5,5,2],
