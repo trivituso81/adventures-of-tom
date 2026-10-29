@@ -30,6 +30,16 @@
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.runFlip=sp.run.map(mir);
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.deedee={scale:.8,pal:DEEDEE_HIRES.ko.pal,rows:paintRows(DEEDEE_HIRES.ko.rows.slice(),'deedeeKo','ko',true)};
+  // Extra painted poses (attack sheet x_* and story sheet), baked by tools/sprite-bake/bake_deedee_extra.py. Hand points come from the bake.
+  if(typeof DEEDEE_EXTRA!=='undefined') {
+    const EX=DEEDEE_EXTRA; paintedAtlas('deedeeExtra',EX.atlas.src,EX.atlas.rects,EX.atlas.k);
+    const m2={}; let n2=0; for(const k in EX.pal) { const c=String.fromCharCode(0x0400+n2++); m2[k]=c; pal[c]=EX.pal[k]; } m2['.']='.';
+    const X=k=>{ const rows=paintRows(EX.rows[k].map(r=>{ let q=''; for(const ch of r) q+=m2[ch]; return q; }),'deedeeExtra',k,false); reg(rows);
+      const h=EX.hands[k]; if(h&&sp.handAt) { const cur=sp.handAt.get(rows)||{}; sp.handAt.set(rows,{n:h.n||cur.n,f:h.f||cur.f}); } return rows; };
+    for(const k in EX.rows) sp['x_'+k]=X(k);
+    sp.sit=sp.toast=sp.x_sitL; sp.sitR=sp.x_sitR; sp.whisper=sp.x_whisper; sp.point=sp.x_point; sp.spread=sp.x_gasp;
+    sp.carry=sp.x_carry; sp.hug=sp.x_open; sp.shrug=sp.x_shrug; sp.hip=sp.x_hips; sp.clap=sp.x_clap;
+  }
   // Her cardigan is not a dark tee, so outfit recolouring does not apply to the painted Deedee.
   if(typeof GARMENT!=='undefined') { delete GARMENT.bt.deedee; delete GARMENT.ow.deedee; }
 })();

@@ -477,8 +477,8 @@ html.landscape #splash-panel{border-radius:8px 8px 0 0}
 /* Welcome art (Tom, 2026-10-29): painted title scene (art/welcome.webp) behind a navy and gold menu panel. */
 #splash{background:#0b0f1a}
 #splash::before{content:'';position:absolute;inset:-24px;background:url(art/welcome.webp) center/cover no-repeat;filter:blur(18px) brightness(.55);z-index:0}
-#splash-art{display:block;z-index:1;background:linear-gradient(to bottom,#0a0e1800 74%,#0a0e18b8 88%,#0a0e18ee 100%),url(art/welcome.webp) center top/cover no-repeat}
-html.landscape #splash-art{background:linear-gradient(to bottom,#0a0e1800 58%,#0a0e18c8 82%,#0a0e18f0 100%),url(art/welcome.webp) 50% 12%/auto 270% no-repeat;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
+#splash-art{display:block;z-index:1;background:linear-gradient(to bottom,#0a0e1800 80%,#0a0e18b8 91%,#0a0e18ee 100%),url(art/welcome.webp) center top/cover no-repeat}
+html.landscape #splash-art{background:linear-gradient(to bottom,#0a0e1800 58%,#0a0e18c8 82%,#0a0e18f0 100%),url(art/welcome.webp) 50% 12%/auto 255% no-repeat;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
 #splash-rotate,#splash-panel{z-index:3}
 #splash #splash-rotate{border:1px solid #b8914a;background:#141a26d9;color:#f3dfa8}
 #splash #splash-panel{left:4%;right:4%;bottom:calc(14px + env(safe-area-inset-bottom));padding:26px 12px 12px;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18,inset 0 0 0 2px #0a0e18,inset 0 0 0 3px #6d5629,0 10px 26px #000a;font-family:Georgia,'Palatino Linotype',Palatino,serif}
@@ -1185,6 +1185,7 @@ html.landscape .slot-name{width:56px}
 <script src="data/recruit-run.js"></script>
 <script src="data/recruit-poses.js"></script>
 <script src="data/deedee-poses.js"></script>
+<script src="data/deedee-extra.js"></script>
 <script src="data/deedee-hires-battle.js"></script>
 <script src="data/battle-size.js"></script>
 <script src="data/tnb-poses.js"></script>
@@ -1243,7 +1244,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=welcome3"></script>
+<script src="engine/splash.js?v=welcome4"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js"></script>
