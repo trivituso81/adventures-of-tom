@@ -207,6 +207,28 @@ function b2TomboPlain(E) {
 
 // ---------- Tombo animations: made from the existing scenes, props and body moves ----------
 const B2_TOMBO_ANIM={};
+// Spacing helpers for Tom + partner scenes. The painted frames are far narrower than their boxes (Tom's idle is about 70 px of a
+// 138 px box), so spacing is worked out from the painted pixels, not the box. Tom stands on the LEFT (his staged spot, nearer the
+// monsters) facing right; the partner stands on the RIGHT facing left, so they face each other and never cross when they walk in.
+const TB_FOOT=new WeakMap(),TB_MIR=new WeakMap();
+// Left and right edge of the painted pixels of a frame, relative to the body's centre (canvas px). Middle 60% of the box if the art is not ready.
+function tbFoot(sp,rows) {
+  rows=rows||sp.idle; const W=rows[0].length*sp.scale; let r=TB_FOOT.get(rows); if(r) return r;
+  const c=typeof paintedCanvas==='function'?paintedCanvas(rows,false):null; if(!c) return [-W*.3,W*.3];
+  const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data; let x0=1e9,x1=-1;
+  for(let y=0;y<c.height;y++) for(let x=0;x<c.width;x++) if(d[(y*c.width+x)*4+3]>40) { if(x<x0) x0=x; if(x>x1) x1=x; }
+  if(x1<0) return [-W*.3,W*.3];
+  r=[x0/c.width*W-W/2,(x1+1)/c.width*W-W/2]; TB_FOOT.set(rows,r); return r;
+}
+// The mirror of one of a sprite's frames ('act', 'kneel', ...), made once.
+function tbMir(sp,key) {
+  const rows=typeof key==='string'?sp[key]:key; if(!rows) return null;
+  let m=TB_MIR.get(rows); if(!m) { m=mirrorRows(rows); TB_MIR.set(rows,m); } return m;
+}
+// Smallest distance between the centres of a left body (using frames L) and a right body (using frames R) that keeps `gap` px between their painted pixels.
+function tbSep(Lsp,L,Rsp,R,gap=10) {
+  return Math.max(...L.map(f=>tbFoot(Lsp,f)[1]))+gap-Math.min(...R.map(f=>tbFoot(Rsp,f)[0]));
+}
 (function(){
 const {scene,GX}=RFX;
 const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t,ez=u=>{ u=cl(u); return u*u*(3-2*u); };
@@ -281,10 +303,12 @@ SC.tb_rec=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez(ms/250)*(ms>P.off?1-ez((ms-P.
   const th=ms<P.th1?ez(seg(ms,P.th0,P.th0+300)):1-ez(seg(ms,P.th1,P.th1+260)),pk=Math.sin(seg(ms,P.pk0,P.pk1)*Math.PI)*.55;
   gfx.globalAlpha=1; thumb(Math.max(th,pk),s.t*5); };
 B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
-  const TS=34,T0=ST.unit(tom),T=Object.assign({},T0,{x:T0.x+TS}),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
+  const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tgt=(E2.targets||[]).find(t=>t.side==='foe')||list.find(f=>f.row==='front')||list[0],F=ST.foe(tgt);
-  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  const GW=gsp.idle[0].length*gsp.scale,gx=Math.max(GR.x1+GW/2+2,T.x-TW/2-GW/2-4),gb=Math.min(316,T.base+22); // Grace stands in front of Tom (toward the monsters, a step lower), never on top of him
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
+  // Tom stays at his staged spot facing right; Grace stands on his right facing left (they face each other), a step lower, spaced from the painted widths.
+  const tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb')};
+  const gx=Math.round(T.x+tbSep(tsp,[tF.idle,tF.act,tF.celeb],gsp,[gsp.beg,gsp.celeb,gsp.idle],12)),gb=Math.min(316,T.base+22);
   // Timing is built around the two baked clips, which are not touched: Grace's line runs 4.8 s and starts the moment the scene does;
   // Tom caves 1.2 s into it (he knows how this ends), so the two overlap about 2 s, no more than before, and his clip (5.6 s) ends
   // at 6.8 s. The box arrives on his second phrase and the squishy lands as Grace finishes begging; the move ends 0.5 s after the
@@ -314,23 +338,23 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const puff=(x,y,k)=>{ for(let j=0;j<4;j++) { const q=cl(k*1.2-j*.12); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.85; E(x-q*34-j*7,y-q*18-j*3,5+q*7,3.5+q*5,'#e8eef5'); } gfx.globalAlpha=1; };
   // Grace: runs to her mark facing Tom, begs with clasped hands and hops, cheers, then runs home.
   pathOf(fxP,D,(ms,c)=>{ const sp=c.sp; let x,y,f=sp.flip;
-    if(ms<650) { const k=ez(ms/650); x=lerp(c.origX,gx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.back) { x=gx; y=gb;
-      if(ms<P.land&&sp.begFlip) { f=sp.begFlip; y+=Math.abs(Math.sin(seg(ms,P.plead0,P.plead1)*Math.PI*6))*-2; }
-      if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celebFlip||sp.flip; } }
-    else { const k=ez(seg(ms,P.back,P.back+600)); x=lerp(gx,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    if(ms<650) { const k=ez(ms/650); x=lerp(c.origX,gx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,1); }
+    else if(ms<P.back) { x=gx; y=gb; f=sp.idle;
+      if(ms<P.land&&sp.beg) { f=sp.beg; y+=Math.abs(Math.sin(seg(ms,P.plead0,P.plead1)*Math.PI*6))*-2; }
+      if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celeb; } }
+    else { const k=ez(seg(ms,P.back,P.back+600)); x=lerp(gx,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
     st.gx=x; st.gb=y; return {cx:x,base:y,frame:f}; });
   // Tom: stays put, sighs, shrugs and says fine, then celebrates the landing.
-  pathOf(fxT,D,(ms,c)=>{ const sp=c.sp; let y=c.origBase,f=sp.idle;
-    if(ms>P.sigh&&ms<P.fine+800) { f=sp.expr||sp.idle; y+=Math.sin(seg(ms,P.sigh,P.sigh+500)*Math.PI)*2; if(ms>P.fine-100&&ms<P.fine+500) y-=Math.sin(seg(ms,P.fine-100,P.fine+500)*Math.PI*2)*4; }
-    if(ms>P.land&&ms<P.land+900) f=sp.celeb;
-    const sh=ms<P.back?ez(ms/450):1-ez(seg(ms,P.back,P.back+600)); return {cx:c.origX+TS*sh,base:y,frame:f}; });
+  pathOf(fxT,D,(ms,c)=>{ const sp=c.sp; let y=c.origBase,f=tF.idle;
+    if(ms>P.sigh&&ms<P.fine+800) { f=tF.act; y+=Math.sin(seg(ms,P.sigh,P.sigh+500)*Math.PI)*2; if(ms>P.fine-100&&ms<P.fine+500) y-=Math.sin(seg(ms,P.fine-100,P.fine+500)*Math.PI*2)*4; }
+    if(ms>P.land&&ms<P.land+900) f=tF.celeb;
+    return {cx:c.origX,base:y,frame:f}; });
   scene('tb_draw',D/1000,{back:false,draw:(s,u,ms)=>{
-    const gy=st.gb-GH,mx=T.x-TW/2+10*tsp.scale,my=T.base-TH+17*tsp.scale;
+    const gy=st.gb-GH,mx=T.x+26,my=T.base-TH+17*tsp.scale;
     // begging: clasped hands in front of her chest, shiny puppy-eye twinkles and a tear
     if(ms>P.plead0-100&&ms<P.land-100) { const tw=(Math.sin(ms/110)+1)/2; 
-      gfx.globalAlpha=.5+.5*tw; star(st.gx+9,gy+GH*.2,3+tw*2,'#ffffff'); star(st.gx+20,gy+GH*.2,2.4+(1-tw)*2,'#ffffff'); gfx.globalAlpha=1;
-      if(ms>P.plead0+400) E(st.gx+21,gy+GH*.3+((ms/40)%10),1.6,2.4,'#9fd8ff'); }
+      gfx.globalAlpha=.5+.5*tw; star(st.gx-9,gy+GH*.2,3+tw*2,'#ffffff'); star(st.gx-20,gy+GH*.2,2.4+(1-tw)*2,'#ffffff'); gfx.globalAlpha=1;
+      if(ms>P.plead0+400) E(st.gx-21,gy+GH*.3+((ms/40)%10),1.6,2.4,'#9fd8ff'); }
     // Tom's sigh
     if(ms>P.sigh&&ms<P.sigh+900) puff(mx,my,seg(ms,P.sigh,P.sigh+900));
     // the gift box floats down from the sky, rattles, then pops open
@@ -347,7 +371,7 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [0,()=>{ setMessage('TOMBO! Grace needs a new squishy.'); B2.aim=null; S('click'); say('grace','tombo'); S('bump'); }],
     [500,'Her puppy eyes are on full power.'],
     [P.sigh,()=>{ S('whoosh'); setMessage('Tom sighs. He knows how this ends.'); }],
-    [P.fine,()=>{ say('tom','tombograce'); word('FINE.',T.x-20,T.base-TH-14,CREAM,4,1); }],
+    [P.fine,()=>{ say('tom','tombograce'); word('FINE.',T.x+8,T.base-TH-14,CREAM,4,1); }],
     [3280,()=>{ word('PLEEASE!',gx+10,gb-GH-14,PINK,4,1.2); S('squeak'); }],
     [P.box,()=>{ setMessage('A gift box floats down from the sky.'); S('whoosh'); }],
     [P.rattle,()=>{ S('squeak'); }],
@@ -976,33 +1000,36 @@ SC.tb_mat=(s,u)=>{ const ms=s.t*1000,k=ez(ms/450)*(ms>s.off?1-ez((ms-s.off)/300)
 B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  const sx=cl(F.x+F.w/2+78,170,T.x),sb=cl(Math.max(T.base,F.base)+4,200,312),ux=sx+112;   // Tom's spot, Grace's run-up
-  const hands={x:sx-30,y:sb-TH*.34},onTop={x:F.x+4,y:F.top+10},meet={x:sx-40,y:sb};
+  // Tom stays on the left at his staged spot facing right; Grace runs in from the right, so they face each other and never cross.
+  const tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb'),expr:tbMir(tsp,'act')};
+  const sx=cl(F.x+F.w/2+78,170,T.x),sb=cl(Math.max(T.base,F.base)+4,200,312),ux=sx+140;   // Tom's spot, Grace's run-up
+  const hands={x:sx+52,y:sb-TH*.34},onTop={x:F.x+4,y:F.top+10},
+    meet={x:Math.round(sx+tbSep(tsp,[tF.idle,tF.celeb],gsp,[gsp.celeb,gsp.idle],10)),y:sb};
   const P={walk:650,clap:700,cup:950,go1:1150,go2:1350,step:1550,up:1750,gone:2250,drop:2800,hit:3300,back:3800,five:3850,apply:3950,
     tline:4350,home:5050,end:5750};
   const sT={x:T.x,b:T.base},sG={x:G.x,b:G.base,rot:0,trail:false};
   // Tom: walks to his spot, claps chalk, makes the stirrup, heaves (arms up), high fives, walks home.
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=sx,y=sb,f=sp.idle;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,sx,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.up) { f=ms>P.clap&&ms<P.clap+160?sp.celeb:(ms>P.cup?sp.act:sp.idle); if(ms>P.step&&ms<P.up) y+=Math.sin(seg(ms,P.step,P.up)*Math.PI)*4; }
-    else if(ms<P.gone+200) { f=sp.celeb; y-=Math.sin(seg(ms,P.up,P.up+260)*Math.PI)*8; }
-    else if(ms<P.home) { f=ms>P.five-80&&ms<P.five+500?sp.celeb:(ms>P.drop-200&&ms<P.hit+200?sp.expr:sp.idle); }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(sx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=sx,y=sb,f=tF.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,sx,k); y=lerp(c.origBase,sb,k); f=Math.abs(sx-c.origX)>4?runFr(sp,c.t,sx>c.origX?1:-1):tF.idle; }
+    else if(ms<P.up) { f=ms>P.clap&&ms<P.clap+160?tF.celeb:(ms>P.cup?tF.act:tF.idle); if(ms>P.step&&ms<P.up) y+=Math.sin(seg(ms,P.step,P.up)*Math.PI)*4; }
+    else if(ms<P.gone+200) { f=tF.celeb; y-=Math.sin(seg(ms,P.up,P.up+260)*Math.PI)*8; }
+    else if(ms<P.home) { f=ms>P.five-80&&ms<P.five+500?tF.celeb:(ms>P.drop-200&&ms<P.hit+200?tF.expr:tF.idle); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(sx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?tF.idle:sp.idle; }
     sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
   // Grace: run-up spot, two steps, onto the hands, launched, gone, the drop (two flips), the bounce, the high five.
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=ux,y=sb,f=sp.idle,rot=0,hide=false; sG.trail=false;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,ux,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,-1); }
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,ux,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,ux>c.origX?1:-1); }
     else if(ms<P.go1) { f=sp.idle; }
     else if(ms<P.step) { const k=seg(ms,P.go1,P.step),n=k<.5?k*2:(k-.5)*2,leg=k<.5?0:1;
-      x=lerp(ux,sx+34,ez(k)); y=sb-Math.sin(n*Math.PI)*(leg?30:14); f=sp.act; }
-    else if(ms<P.up) { const k=ez(seg(ms,P.step,P.step+120)); x=lerp(sx+34,hands.x+4,k); y=lerp(sb,hands.y+6,k)-Math.sin(k*Math.PI)*20; f=sp.celeb; }
-    else if(ms<P.gone) { const k=seg(ms,P.up,P.gone),e=1-(1-k)*(1-k); x=lerp(hands.x+4,onTop.x+30,e); y=lerp(hands.y+6,-GH-40,e); rot=-k*Math.PI*2; f=sp.celeb; sG.trail=true; }
+      x=lerp(ux,hands.x+30,ez(k)); y=sb-Math.sin(n*Math.PI)*(leg?30:14); f=sp.act; }
+    else if(ms<P.up) { const k=ez(seg(ms,P.step,P.step+120)); x=lerp(hands.x+30,hands.x+4,k); y=lerp(sb,hands.y+6,k)-Math.sin(k*Math.PI)*20; f=sp.celeb; }
+    else if(ms<P.gone) { const k=seg(ms,P.up,P.gone),e=1-(1-k)*(1-k); x=lerp(hands.x+4,onTop.x+30,e*e); y=lerp(hands.y+6,-GH-40,e); rot=-k*Math.PI*2; f=sp.celeb; sG.trail=true; }
     else if(ms<P.drop) { hide=true; x=onTop.x; y=-GH-40; }
     else if(ms<P.hit) { const k=seg(ms,P.drop,P.hit),e=k*k; x=lerp(onTop.x+18,onTop.x,k); y=lerp(-GH-30,onTop.y,e); rot=-ez(k)*Math.PI*4; f=sp.celeb; sG.trail=true; }
-    else if(ms<P.hit+140) { x=onTop.x; y=onTop.y+Math.sin(seg(ms,P.hit,P.hit+140)*Math.PI)*6; f=sp.celebFlip||sp.celeb; }
-    else if(ms<P.back) { const k=seg(ms,P.hit+140,P.back); x=lerp(onTop.x,meet.x,ez(k)); y=lerp(onTop.y,meet.y,k)-Math.sin(k*Math.PI)*70; rot=k*Math.PI*2; f=sp.celeb; }
-    else if(ms<P.home) { x=meet.x; y=meet.y; f=sp.celebFlip||sp.flip; if(ms>P.five+400) f=ms>P.tline?sp.flip:(sp.celebFlip||sp.flip); }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(meet.x,c.origX,k); y=lerp(meet.y,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    else if(ms<P.hit+140) { x=onTop.x; y=onTop.y+Math.sin(seg(ms,P.hit,P.hit+140)*Math.PI)*6; f=sp.celeb; }
+    else if(ms<P.back) { const k=seg(ms,P.hit+140,P.back); x=lerp(onTop.x,meet.x,ez(k)); y=lerp(onTop.y,meet.y,k)-Math.sin(k*Math.PI)*120; rot=k*Math.PI*2; f=sp.celeb; }
+    else if(ms<P.home) { x=meet.x; y=meet.y; f=sp.celeb; if(ms>P.five+400) f=ms>P.tline?sp.idle:sp.celeb; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(meet.x,c.origX,k); y=lerp(meet.y,c.origBase,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
     sG.x=x; sG.b=y; sG.rot=rot; return {cx:x,base:y,frame:f,rot,hide,noShadow:ms>P.step&&ms<P.back}; });
   scene('tb_mat',P.end/1000,{back:true,x1:sx+150,w:Math.max(200,sx+150-F.x+F.w/2+20),y:sb+4,off:P.home});
   // Front layer: chalk puffs, the stirrup hands, the star trail, the twinkle up high.
@@ -1010,8 +1037,8 @@ B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
     const chalk=(t0,x,y,r)=>{ const k=seg(ms,t0,t0+600); if(k<=0||k>=1) return; gfx.globalAlpha=(1-k)*.85;
       for(let j=0;j<6;j++) { const a=j/6*Math.PI*2+k; E(x+Math.cos(a)*r*k,y+Math.sin(a)*r*.6*k-k*10,6+k*8,5+k*6,'#f4f4f0'); } gfx.globalAlpha=1; };
-    chalk(P.clap,sT.x-6,sT.b-TH*.62,26); chalk(P.up,hands.x,hands.y,40);
-    if(ms>P.cup&&ms<P.up+120) { const h={x:sT.x-26,y:sT.b-TH*.34};
+    chalk(P.clap,sT.x+6,sT.b-TH*.62,26); chalk(P.up,hands.x,hands.y,40);
+    if(ms>P.cup&&ms<P.up+120) { const h={x:sT.x+52,y:sT.b-TH*.34};
       EO(h.x,h.y,11,6,SKIN); for(let j=-1;j<=1;j++) Ln(h.x+j*5,h.y-5,h.x+j*5,h.y+2,1.5,SKIN2); }
     if(sG.trail) trail.push({t:ms,x:sG.x,y:sG.b-GH*.5});
     while(trail.length&&ms-trail[0].t>420) trail.shift();
@@ -1027,20 +1054,20 @@ B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     landHit(100); };
   ST.play(E2,[
     [0,()=>{ setMessage('TOMBO! Coach Tom is spotting Grace.'); B2.aim=null; S('whoosh'); }],
-    [P.clap,()=>{ S(sfx.clap?'clap':'bump'); word('CHALK UP',sx-20,Math.max(80,sb-TH-24),CREAM,3,.7); }],
+    [P.clap,()=>{ S(sfx.clap?'clap':'bump'); word('CHALK UP',sx+10,Math.max(80,sb-TH-24),CREAM,3,.7); }],
     [P.cup,()=>{ say('grace','tombo2'); setMessage('Grace counts it in. Two steps and UP.'); }],
     [P.go1,()=>{ S('step'); word('ONE!',ux-10,sb-GH-30,PINK,3,.45); }],
-    [P.go2,()=>{ S('step'); word('TWO!',sx+50,sb-GH-34,PINK,3,.45); }],
+    [P.go2,()=>{ S('step'); word('TWO!',hands.x+40,sb-GH-34,PINK,3,.45); }],
     [P.step,()=>{ S('bump'); }],
-    [P.up,()=>{ S('jumpWhistle'); S('whoosh'); word('UP!',sx-30,Math.max(70,sb-TH-50),GOLD,6,.9); setMessage('Tom heaves her straight up. Way up.'); }],
+    [P.up,()=>{ S('jumpWhistle'); S('whoosh'); word('UP!',sx+30,Math.max(70,sb-TH-50),GOLD,6,.9); setMessage('Tom heaves her straight up. Way up.'); }],
     [P.gone+200,'Higher than the gym ceiling...'],
     [P.drop,()=>{ S('slideWhistle'); setMessage('...and here she comes. Two flips. Feet first.'); }],
     [P.hit,hit],
     ['hf',P.hit],
-    [P.five,()=>{ S(sfx.clap?'clap':'bonk'); S('ding'); word('HIGH FIVE!',meet.x-14,Math.max(70,sb-TH-40),CREAM,4,1);
-      scene('tb_rings',.6,{x:meet.x+20,y:sb-TH*.95,r:40,c:CREAM,w:3}); scene('confetti',1.4,{x0:meet.x-120,x1:meet.x+120,n:26}); }],
+    [P.five,()=>{ S(sfx.clap?'clap':'bonk'); S('ding'); word('HIGH FIVE!',(sx+meet.x)/2,Math.max(70,sb-TH-40),CREAM,4,1);
+      scene('tb_rings',.6,{x:(sx+meet.x)/2,y:sb-TH*.95,r:40,c:CREAM,w:3}); scene('confetti',1.4,{x0:meet.x-120,x1:meet.x+120,n:26}); }],
     [P.apply,()=>{ E2.apply(); scene('glow',.9,{x:sT.x,y:sT.b-TH*.5,rx:38,ry:52,c:GOLD,a:.35}); }],
-    [P.tline,()=>{ say('tom','tombograce2'); word('STUCK IT',meet.x-10,Math.max(70,sb-GH-60),GOLD,4,1.1); setMessage('She stuck it. Tom takes full credit.'); }],
+    [P.tline,()=>{ say('tom','tombograce2'); word('STUCK IT',meet.x+10,Math.max(104,sb-GH-60),GOLD,4,1.1); setMessage('She stuck it. Tom takes full credit.'); }],
     [P.end,'end',()=>(E2.result||'')+' Grace stuck the landing.']]);
 };
 // ---------- Red Line Transfer (Tom + TNB, tier 2) ----------
@@ -1682,25 +1709,29 @@ const memory=(x,y,sc,a,sq=0)=>{ if(a<=0) return; const img=ghostDumpling(),sx=sc
 B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+34,gx=mx-34;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx-66,
+    tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb')},gA=gsp.act||gsp.idle,gC=gsp.celeb||gsp.idle,
+    flatPad=Math.round(.7*Math.max(...tbFoot(tsp,tF.idle).slice(1))),
+    gx=Math.round(tx+tbSep(tsp,[tF.idle,tF.act,tF.celeb],gsp,[gsp.idle,gA,gC],12)),
+    gh=Math.round(tx+tbSep(tsp,[tF.celeb],gsp,[gC],2));
   const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
   const B0=4900,BP=300;
   order.forEach((o,i)=>{ o.t=B0+i*BP; });
   const last=order.length?order[order.length-1].t:B0;
   const P={walk:650,gline:800,rise:1700,wake:2200,gren:2900,tline:3300,squash:3700,flat:4000,burst:4400,apply:last+250,hug:last+600,home:last+1500,end:last+2200};
-  const sky={x:GR.x,y:Math.max(64,GR.top-60)},hold={x:mx,y:by-GH-44};
-  const sT={x:T.x,b:T.base,f:tsp.idle},sG={x:gx,b:by,f:gsp.flip};
+  const sky={x:GR.x,y:Math.max(64,GR.top-60)},hold={x:gx-6,y:by-GH-44};
+  const sT={x:T.x,b:T.base,f:tF.idle},sG={x:gx,b:by,f:gsp.idle};
   const flatK=ms=>ez(seg(ms,P.squash,P.squash+140))*(1-ez(seg(ms,P.flat+500,P.flat+800)));
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=tF.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.home) { f=ms>P.tline-100&&ms<P.squash?sp.act:(ms>P.hug?sp.celeb:sp.idle); if(ms>P.hug&&ms<P.hug+500) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+500)*Math.PI*2))*8; }
+    else if(ms<P.home) { f=ms>P.tline-100&&ms<P.squash?tF.act:(ms>P.hug?tF.celeb:tF.idle); if(ms>P.hug&&ms<P.hug+500) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+500)*Math.PI*2))*8; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,hide:flatK(ms)>.02}; });
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,actR=sp.act?mirrorRowsCached(sp,'act'):sp.flip; let x=gx,y=by,f=sp.flip;
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=by,f=sp.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.hug) { f=ms>P.gline&&ms<P.wake?actR:sp.flip; if(ms>P.burst&&ms<P.burst+900) f=sp.celebFlip||sp.flip; }
-    else if(ms<P.home) { const k=ez(seg(ms,P.hug,P.hug+300)); x=lerp(gx,tx-20,k); f=sp.celebFlip||sp.flip; if(ms<P.hug+600) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+600)*Math.PI*2))*10; }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx-20,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    else if(ms<P.hug) { f=ms>P.gline&&ms<P.wake?gA:sp.idle; if(ms>P.burst&&ms<P.burst+900) f=gC; }
+    else if(ms<P.home) { const k=ez(seg(ms,P.hug,P.hug+300)); x=lerp(gx,gh,k); f=gC; if(ms<P.hug+600) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+600)*Math.PI*2))*10; }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(gh,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sG.x=x; sG.b=y; sG.f=f; return {cx:x,base:y,frame:f}; });
   const shade=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=shade(ms); if(k<=0) return; dim(k,'#3a2a10',.35); gfx.globalAlpha=1; }});
@@ -1742,7 +1773,7 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     for(const o of order) if(ms>o.t&&ms<o.t+500) { const k=seg(ms,o.t,o.t+500); gfx.globalAlpha=1-k; for(let j=0;j<4;j++) star(o.q.x+Math.cos(j*1.57+k*3)*(10+k*14),o.q.top+4+Math.sin(j*1.57+k*3)*5-k*10,3,GEMC[j]); } gfx.globalAlpha=1;
     // the mouth catch: a mini dumpling drops into a fallen friend
     if(ms>P.apply&&ms<P.apply+700) { const k=seg(ms,P.apply,P.apply+700); const tgtp=fallen[0]; if(tgtp) { const q=ST.unit(tgtp); gfx.globalAlpha=1-k*k; E(q.x,lerp(q.mid-90,q.mid-8,ez(k)),5,4,'#ffd45a'); gfx.globalAlpha=1; } }
-    if(ms>P.hug+200&&ms<P.home) for(let j=0;j<3;j++) { const q=((ms-P.hug)/900+j/3)%1; gfx.globalAlpha=1-q; heart(sT.x-12+j*10,sT.b-TH-8-q*30,4+j%2*2,PINK); }
+    if(ms>P.hug+200&&ms<P.home) for(let j=0;j<3;j++) { const q=((ms-P.hug)/900+j/3)%1; gfx.globalAlpha=1-q; heart((sT.x+sG.x)/2-10+j*10,sT.b-TH-8-q*30,4+j%2*2,PINK); }
     gfx.globalAlpha=1; bars(ez(seg(ms,0,400))*(1-ez(seg(ms,P.home,P.end-100)))); }});
   const steps=[
     [0,()=>{ setMessage('TOMBO! The Golden Dumpling Wish.'); B2.aim=null; S('levelChime'); }],
@@ -2874,24 +2905,27 @@ const likeBtn=(x,by,press,glow)=>{ const h=26*(1-press*.62);
   RO(x-37,by-19,74,19,'#2c2a36'); R(x-37,by-19,74,3,'#4a4656'); label('LIKE',x,by-13,CREAM,2); };
 B2_TOMBO_ANIM.grace1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),row=(E2.targets||[]).filter(t=>t.side==='foe'&&b2Alive(t)),tg=row.length?row:list,GR=ST.group(list),RW=ST.group(tg);
-  const tsp=BATTLE_SPRITES.tom,TH=tsp.idle.length*tsp.scale;
-  const tx=cl(GR.x1+190,GR.x1+150,520),sb=cl(GR.base+6,236,300),bx=tx-40,gx=bx-34;
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale;
+  // Tom (left, facing right) and Grace (right, facing left) flank the LIKE button (74 px wide), each clear of it and of each other, so nobody crosses on the way in.
+  const tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb')};
+  const tx=Math.max(GR.x1+46,ST.unit(tom).x-16),sb=cl(GR.base+6,236,300),bx=Math.round(tx+Math.max(...[tF.idle,tF.celeb].map(f=>tbFoot(tsp,f)[1]))+10+37),
+    gx=Math.round(bx+37+8-Math.min(...[gsp.idle,gsp.celeb].map(f=>tbFoot(gsp,f)[0])));
   const P={walk:650,gline:850,drop:1900,land:2250,up:2500,tline:2600,smash:3450,launch:3500,peak:3950,slam:4300,apply:4650,home:5350,end:6050};
   const SL=2.3,BR=28*SL,land={x:cl(RW.x,BR+8,568-BR),y:cl(Math.max((RW.top+RW.base)/2,RW.base-BR*1.1),BR+30,300)},peak={x:lerp(bx,land.x,.45),y:44};
   const sT={x:0,b:0},sG={x:0,b:0};
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=sb,f=sp.idle;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); f=runFr(sp,c.t,1); }
     else if(ms<P.home) { const hop=ms>P.gline-50&&ms<P.gline+350?Math.sin(seg(ms,P.gline-50,P.gline+350)*Math.PI)*14:(ms>P.slam&&ms<P.slam+400?Math.sin(seg(ms,P.slam,P.slam+400)*Math.PI)*12:(ms>P.slam+520&&ms<P.slam+900?Math.sin(seg(ms,P.slam+520,P.slam+900)*Math.PI)*14:(ms>P.up-350&&ms<P.up-50?Math.sin(seg(ms,P.up-350,P.up-50)*Math.PI)*8:0)));
-      y-=hop; f=hop>0?sp.celeb:(ms>P.drop&&ms<P.smash?(sp.flip):sp.idle); if(ms>P.smash&&ms<P.smash+650) f=sp.celeb; }
-    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(gx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+600); f=k<1?sp.flip:sp.idle; }
+      y-=hop; f=hop>0?sp.celeb:sp.idle; if(ms>P.smash&&ms<P.smash+650) f=sp.celeb; }
+    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(gx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+600); f=k<1?runFr(sp,c.t,-1):sp.idle; }
     sG.x=x; sG.b=y; return {cx:x,base:y,frame:f}; });
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=sp.idle;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=sb,f=tF.idle;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); f=runFr(sp,c.t,1); }
     else if(ms<P.home) {
-      if(ms>P.up&&ms<P.smash) { f=sp.celeb; y-=Math.min(1,seg(ms,P.up,P.up+200))*6+Math.abs(Math.sin(ms/160))*2; }
-      else if(ms>=P.smash&&ms<P.smash+650) { f=sp.act; y+=6*(1-seg(ms,P.smash+250,P.smash+650)); }
-      else if(ms>P.slam+100&&ms<P.slam+1000) { f=sp.celeb; if(ms>P.slam+520&&ms<P.slam+900) y-=Math.sin(seg(ms,P.slam+520,P.slam+900)*Math.PI)*14; } }
-    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+600); f=k<1?sp.flip:sp.idle; }
+      if(ms>P.up&&ms<P.smash) { f=tF.celeb; y-=Math.min(1,seg(ms,P.up,P.up+200))*6+Math.abs(Math.sin(ms/160))*2; }
+      else if(ms>=P.smash&&ms<P.smash+650) { f=tF.act; y+=6*(1-seg(ms,P.smash+250,P.smash+650)); }
+      else if(ms>P.slam+100&&ms<P.slam+1000) { f=tF.celeb; if(ms>P.slam+520&&ms<P.slam+900) y-=Math.sin(seg(ms,P.slam+520,P.slam+900)*Math.PI)*14; } }
+    else { const k=ez(seg(ms,P.home,P.home+600)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+600); f=k<1?tF.idle:sp.idle; }
     sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
   const flat=(ms,f,q)=>{ const k=ms<P.slam+120?seg(ms,P.slam,P.slam+120):1-ez(seg(ms,P.slam+450,P.slam+900)),s=1-.24*k;
     f.spin=0; f.ox=0; f.fsc=s; f.oy=q.h/2*(1-s); f.spinAt=performance.now(); };
@@ -3567,7 +3601,8 @@ B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
   const W=GRACE_WHEEL,WS=W.scale,WHC=W.C*WS,DEG=Math.PI/180,WP=W.P,TAU=Math.PI*2;
   if(!WP.tuck) WP.tuck={lA:-78,lB:-56,lean:0,bA:.95,bB:.95,side:1};   // knees to chest for the back tuck
-  const tx=cl(GR.x1+150,GR.x1+124,448),sb=cl(GR.base+4,236,300),gx=Math.min(548,tx+104),lie=tx-48,c2=F.x+F.w/2+44,lx=tx+16;
+  const tx=cl(GR.x1+150,GR.x1+124,448),sb=cl(GR.base+4,236,300),gx=Math.min(548,tx+104),lie=tx-48,c2=F.x+F.w/2+44,lx=lie+84;   // Grace sticks her landing 10 px clear of Tom's painted edge, and he faces her
+  const kneelR=tbMir(tsp,'kneel'),celebR=tbMir(tsp,'celeb'),idleR=tbMir(tsp,'idle');
   const GY=Math.min(314,F.base+3),reach=-Math.min(...W.tips(WP.kick,WP.kick.lean*DEG).map(v=>v[0]))*WS,kx=Math.min(c2-10,F.x+F.w*.5-2+reach);
   const P={walk:650,try0:800,tip:1000,fall:1550,flop:1800,ow:2250,card:2650,gline:2750,laugh:3350,tline:3900,hop:4550,cw0:4800,ro0:5050,hs0:5550,tk0:5950,ae0:6350,kk0:6850,hit:7350,reb:7470,land:7950,ten:8000,up:7800,clap:8250,home:8650,end:9300};
   const xa=gx-22,xs=[xa,lerp(xa,c2,.22),lerp(xa,c2,.46),lerp(xa,c2,.7),c2];
@@ -3582,8 +3617,8 @@ B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       else if(ms<P.flop) { const q=seg(ms,P.fall,P.flop),e=Math.pow(q,2.4); f=sp.act; rot=lerp(-1.15,-Math.PI/2,e); x=lerp(tx-30,lie,e); y=sb+(TH/2-16)*e; }
       else if(ms<P.tline-100) { const u=ms-P.flop,b=Math.exp(-u/170),bo=Math.abs(Math.sin(u/95))*b; f=sp.act; x=lie; y=sb+(TH/2-16)-bo*10;
         rot=-Math.PI/2-bo*.12; if(u>240) rot+=Math.sin((u-240)/60)*.07*Math.exp(-(u-240)/320); }   // the legs flop down last
-      else if(ms<P.up) { f=sp.kneel; x=lie; }
-      else { x=lie; f=ms>P.clap?(Math.floor((ms-P.clap)/160)%2?sp.celeb:sp.idle):sp.idle; if(ms>P.clap+640) f=sp.celeb; } }
+      else if(ms<P.up) { f=kneelR; x=lie; }
+      else { x=lie; f=ms>P.clap?(Math.floor((ms-P.clap)/160)%2?celebR:idleR):idleR; if(ms>P.clap+640) f=celebR; } }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(lie,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
     sT.x=x; sT.b=y; sT.f=f; sT.rot=rot; return {cx:x,base:y,frame:f,rot}; });
   // Grace: judges from her desk, hops over it, then ONE flowing pass: round-off, back handspring, back tuck, aerial,
@@ -3605,7 +3640,7 @@ B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     else if(ms<P.land) { const q=seg(ms,P.reb,P.land); gy=lerp(GY,sb,ez(q)); x=lerp(kx,lx,ez(q)); h=Math.sin(q*Math.PI)*60+(1-q)*22; th=TAU*ez(q);
       const b=q<.3?W.blend('kick','chamber',q/.3,3):(q>.8?W.blend('chamber','land',(q-.8)/.2,3):{q:WP.chamber,key:'chamber'}); fr=W.frame(b.q,b.key); }
     else { gy=sb; x=lx; h=ms<P.land+140?-Math.sin(seg(ms,P.land,P.land+140)*Math.PI)*4:0; fr=W.frame('land'); }
-    if(ms<P.hit||(ms>=P.reb&&ms<P.land)) h+=Math.max(0,1-Math.abs(x-lie)/54)*40;   // she hurdles Tom, who is kneeling on the mat
+    if(ms<P.hit||(ms>=P.reb&&ms<P.land)) h+=Math.max(0,1-Math.abs(x-lie)/135)*140;   // she clears Tom (kneeling on the mat) by a full body, feet above his head
     return {x,h,th,fr,gy}; };
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=sb,f=sp.idle,rot=0;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,0,P.walk); }
@@ -4307,7 +4342,10 @@ const readLamp=(x0,b0,on)=>{ gfx.save(); gfx.translate(x0,b0); gfx.scale(1.35,1.
 B2_TOMBO_ANIM.grace3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  const by=cl(Math.max(GR.base,ST.unit(tom).base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx+30,gx=mx-30,lx=tx+44;
+  const by=cl(Math.max(GR.base,ST.unit(tom).base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx-66,
+    tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),expr:tbMir(tsp,'expr'),celeb:tbMir(tsp,'celeb')},
+    gx=Math.round(tx+tbSep(tsp,[tF.idle,tF.act,tF.expr,tF.celeb],gsp,[gsp.idle,gsp.celeb,gsp.act],12)),
+    lx=Math.round(tx+Math.min(...[tF.idle,tF.act,tF.expr,tF.celeb].map(f=>tbFoot(tsp,f)[0]))-40);
   const P={walk:650,lamp:800,bunny:1200,bunnyUp:1500,ghop:1950,gline:2100,fix:2600,morph:2700,morphEnd:3150,tline:3300,grow:3900,grown:4700,panic:4300,hide:4850,
     boo:5250,apply:5450,lights:5650,home:6050,end:6750};
   // the lit patch on the wall: small over the monsters, then the whole wall
@@ -4324,15 +4362,14 @@ B2_TOMBO_ANIM.grace3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const sT={x:tx,b:by},sG={x:gx,b:by};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
-    else if(ms<P.home) { f=ms>P.bunny&&ms<P.fix?sp.act:(ms>=P.fix&&ms<P.tline+700?sp.expr:(ms>P.boo&&ms<P.boo+700?sp.celeb:sp.idle));
+    else if(ms<P.home) { f=ms>P.bunny&&ms<P.fix?tF.act:(ms>=P.fix&&ms<P.tline+700?tF.expr:(ms>P.boo&&ms<P.boo+700?tF.celeb:tF.idle));
       if(ms>P.boo&&ms<P.boo+700) y-=Math.abs(Math.sin(seg(ms,P.boo,P.boo+700)*Math.PI*2))*6; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
     sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=by,f=sp.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,by,k)+ffHop(ms,0,P.walk); }
     else if(ms<P.home) {
-      if(ms>P.bunnyUp&&ms<P.ghop) f=sp.flip;                                     // she turns to look at Tom's bunny
-      else if(ms>=P.ghop&&ms<P.fix) { f=sp.celeb; y-=Math.sin(seg(ms,P.ghop,P.fix)*Math.PI)*12; }
+      if(ms>=P.ghop&&ms<P.fix) { f=sp.celeb; y-=Math.sin(seg(ms,P.ghop,P.fix)*Math.PI)*12; }
       else if(ms>=P.fix&&ms<P.grown) f=sp.act;
       else if(ms>P.boo&&ms<P.boo+800) { f=sp.celeb; y-=Math.abs(Math.sin(seg(ms,P.boo,P.boo+800)*Math.PI*2))*10; } }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(gx,c.origX,k); y=lerp(by,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }

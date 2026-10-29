@@ -1,5 +1,5 @@
 ## 2026-10-29: Nara on the welcome screen sits behind Grace
-- `SPLASH_SPOTS` in `engine/splash.js`: Nara moved from the bottom left to behind Grace at the foot of the stairs (x 262, feet 1066, h 104) and listed first so every family member draws over her. No spoken lines changed.
+- `SPLASH_SPOTS` in `engine/splash.js`: Nara moved from the bottom left to behind Grace at the foot of the stairs (x 240, feet 1020, h 104) and listed first so every family member draws over her. Everyone on the welcome art is also 10% bigger (`SPLASH_ALL=1.1`, feet stay planted). No spoken lines changed.
 
 ## 2026-10-29: TNB sized exactly like Tom, plus 24 extra painted poses
 - TNB's head-to-body ratio and height now match Tom's (per-frame head solve in `bake_tnb.py`: 44.5 percent of battle height, 43.3 front, 41.7 side; 100 battle rows, 42 overworld rows).

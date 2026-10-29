@@ -431,8 +431,9 @@ function splashScene(W,H,panelH,time) {
 // Positions are in the picture's own pixels (941 x 1671) and are mapped through the same "cover, top" fit the CSS uses.
 // h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
 const SPLASH_IMG={w:941,h:1671};
+const SPLASH_ALL=1.1;   // Tom 2026-10-29: everyone on the welcome art 10% bigger (feet stay planted)
 const SPLASH_SPOTS=[
-  {id:'nara',x:262,feet:1066,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
+  {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
   {id:'tom',x:425,feet:1175,h:335},
   {id:'tnb',x:170,feet:1198,h:250},
   {id:'boppy',x:768,feet:1222,h:255},
@@ -451,7 +452,7 @@ function splashCastDraw(time) {
   try {
     for(const m of SPLASH_SPOTS) {
       const set=m.id==='tom'&&OW.tomRide?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
-      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*s/fh;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*SPLASH_ALL*s/fh;
       const bob=Math.floor((time*1.6+SPLASH_SPOTS.indexOf(m)*.37)%2)*Math.max(1,Math.round(s*2));
       drawSprite(fr,set.pal,Math.round(ox+m.x*s-fw*k/2),Math.round(m.feet*s-fh*k-bob),k);
     }
