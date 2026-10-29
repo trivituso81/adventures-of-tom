@@ -895,6 +895,12 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 /* Portrait phone: the box hugs its content (portrait face sits above the footer line); the touch controls hide while it is open. */
 html:not(.landscape) #dialog{min-height:0}
 html:not(.landscape) #dialog-text{min-height:calc(64px * 4 / 3 + 4px)}
+/* Landscape phone: the box hugs its content too (it was a fixed 156px, almost half the screen). Smaller face, tighter padding. */
+html.landscape #dialog{min-height:0;padding:12px calc(14px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left))}
+html.landscape #dialog-portrait{top:12px;width:56px;height:56px}
+html.landscape #dialog.has-portrait #dialog-text,html.landscape #dialog.has-portrait #dialog-choices{margin-left:68px}
+html.landscape #dialog-text,html.landscape #dialog.has-portrait #dialog-text{flex:none;min-height:56px;font-size:14px;line-height:1.4}
+html.landscape .dialog-footer{margin-top:4px;padding-top:3px}
 main:has(#dialog:not([hidden])) #controls{visibility:hidden}
 
 /* Back frame under the menu commands */
@@ -1081,7 +1087,7 @@ html.landscape .slot-name{width:56px}
 <script src="data/battle-sprites.js"></script>
 <script src="data/ko-sprites.js"></script>
 <script src="engine/battle.js"></script>
-<script src="engine/battle-draw.js?v=ride2"></script>
+<script src="engine/battle-draw.js?v=ride4"></script>
 <script src="engine/recruit-fx.js"></script>
 <script src="engine/stage.js"></script>
 <script src="data/grace-wheel.js"></script>
@@ -1105,7 +1111,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/battle2-kind.js"></script>
 <script src="engine/battle2-traits.js"></script>
 <script src="data/rose-ride.js"></script>
-<script src="engine/rose-ride.js?v=ride2"></script>
+<script src="engine/rose-ride.js?v=ride4"></script>
 <script src="engine/battle2-effects.js"></script>
 <script src="engine/progress.js"></script>
 <script src="engine/feel.js"></script>
@@ -1130,9 +1136,11 @@ html.landscape .slot-name{width:56px}
 <script src="data/rose-hires.js"></script>
 <script src="data/rose-hires-use.js"></script>
 <script src="data/recruit-sprites.js"></script>
-<script src="data/tomride-hires.js?v=ride2"></script>
-<script src="data/tomride-use.js?v=ride2"></script>
+<script src="data/tomride-hires.js?v=ride4"></script>
+<script src="data/tomride-use.js?v=ride4"></script>
 <script src="data/npc-sprites.js"></script>
+<script src="data/ellie-hires.js"></script>
+<script src="data/ellie-hires-use.js"></script>
 <script src="engine/gear.js"></script>
 <script src="data/tnb-battle.js"></script>
 <script src="data/recruit-stances.js"></script>
@@ -1146,7 +1154,9 @@ html.landscape .slot-name{width:56px}
 <script src="data/amy-hires-battle.js"></script>
 <script src="data/battle-size.js"></script>
 <script src="data/nara.js"></script>
-<script src="engine/town-render.js?v=ride2"></script>
+<script src="data/nara-hires.js"></script>
+<script src="data/nara-hires-use.js"></script>
+<script src="engine/town-render.js?v=ride4"></script>
 <script src="engine/la-render.js"></script>
 <script src="engine/marsh-render.js"></script>
 <script src="engine/backlot-render.js"></script>
@@ -1192,7 +1202,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=ride2"></script>
+<script src="engine/splash.js?v=ride4"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js"></script>
@@ -1201,7 +1211,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/dialog-voice.js"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js"></script><!-- tap to walk -->
-<script src="engine/main.js?v=ride3"></script>
+<script src="engine/main.js?v=ride4"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js"></script>
