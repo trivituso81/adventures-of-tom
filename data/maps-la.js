@@ -669,17 +669,37 @@ LA_AREAS.push(
     eyebrow:'LOS ANGELES / THE OLD OAK / THE CROWN',
     hint:'Up top. Something is sitting on a very big pile.',
     spawn:{x:9,y:14},
+    // Painted plate (art/crown.webp, engine/plate.js), 20 x 16 tiles. The mask is the walk map: '#' blocks, '.' walks. The hoard (rows 2 to 4), the
+    // acorn crates, trunk and leaves are painted and blocked. Walkable: the plank floor (rows 5 to 10), the two lookout decks (rows 4 to 5, reached by
+    // the stairs at x 3 to 5 and x 15 to 16), and the rope bridge down (x 9 and 10, rows 10 to 15).
+    plateMask:[
+      '####################',
+      '####################',
+      '####################',
+      '####################',
+      '##..############..##',
+      '###...##.....##..###',
+      '#####...........####',
+      '######.........#####',
+      '#######.........####',
+      '#######......#..####',
+      '#########..###..####',
+      '#########..#########',
+      '#########..#########',
+      '#########..#########',
+      '#########..#########',
+      '#########..#########'],
     border:{kind:'leafwall',open:[[9,15],[10,15]]},
     exits:[[9,15,'oak',11,1,'down','branch'],[10,15,'oak',12,1,'down','branch']],
-    pools:[{tile:'pit',cells:[[1,1],[2,1],[1,2],[17,1],[18,1],[18,2],[1,13],[1,14],[2,14],[18,13],[18,14],[17,14]]}],
     objects:[
-      ['hoard',6,1,8,2,'The hoard','Bottle caps, tennis balls, a hubcap, three sets of earbuds, a toy truck wheel, and about a million acorns.',
+      // Only what you can reach and touch is listed; the rest of the painted hoard is scenery. The chairman sits on the chest at (9,4).
+      ['hoard',11,4,2,1,'The hoard','Bottle caps, tennis balls, a hubcap, three sets of earbuds, a toy truck wheel, and about a million acorns.',
         {when:[{flag:'ch6-clear',text:'The hoard. Somebody has put a little sign on it: FREE. PLEASE TAKE. SHARING IS NICE.'}]}],
-      ['acornpile',3,4,1,1,'Acorn pile','A neat pyramid of acorns. Counted. Labeled. JANUARY.'],
-      ['acornpile',16,4,1,1,'Acorn pile','Another pyramid. FEBRUARY. There are twelve of them up here.'],
-      ['lookout',2,8,1,1,'Lookout post','A twig with a bottle cap on top. From here you can see the whole park. And Tom’s house.'],
-      ['lookout',17,9,1,1,'Lookout post','Another lookout post. A tiny paper sign: BIRD FEEDER, 2ND AVE. THEY WILL CHASE YOU.'],
-      ['acornpile',4,11,1,1,'Acorn pile','MARCH. This one is just peanuts. Somebody ran out of acorns.']],
+      ['acornpile',6,5,2,1,'Acorn pile','A neat pyramid of acorns. Counted. Labeled. JANUARY.'],
+      ['acornpile',13,5,2,1,'Acorn pile','Another pyramid. FEBRUARY. There are twelve of them up here.'],
+      ['acornpile',5,7,1,1,'Acorn pile','MARCH. This one is just peanuts. Somebody ran out of acorns.'],
+      ['lookout',2,3,1,1,'Lookout telescope','A brass telescope on a tripod. From here you can see the whole park. And Tom’s house.'],
+      ['lookout',17,3,1,1,'Lookout telescope','Another telescope. A tiny paper sign taped to the tripod: BIRD FEEDER, 2ND AVE. THEY WILL CHASE YOU.']],
     npcs:[],
     monsters:CROWN_MONSTER_SPOTS}
 );
