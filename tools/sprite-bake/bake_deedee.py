@@ -62,8 +62,78 @@ def swirl_eye(img, cx, cy, r):
         pts = [(cx + (r * t / 40.0) * math.cos(t * 0.22), cy + (r * t / 40.0) * math.sin(t * 0.22)) for t in range(0, 41)]
         d.line(pts, fill=(70, 34, 30, 255), width=max(2, int(r / 4)))
     return _layer(img, sp, .6)
-poses['b_kneel'] = black_eye(poses['b_kneel'], 80, 77, 13, 9)
+poses['b_kneel'] = black_eye(poses['b_kneel'], 80, 77, 9, 6)
 poses['b_ko'] = swirl_eye(swirl_eye(poses['b_ko'], 75, 34, 5), 62, 29, 4)
+
+# ---------------------------------------------------------------- head size (match Tom's caricature proportions)
+# Tom's head (hair to chin) is about 45 percent of his height; the painted Deedee's is about 28 percent. Each frame's head is cut out,
+# scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
+HEAD_K = 1.8
+def _auto_head(img):
+    a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
+    top = int(np.where(a.any(1))[0].min())
+    ws = np.convolve(a.sum(1).astype(float), np.ones(7) / 7, 'same')
+    lo, hi = int(top + .18 * (H - top)), int(top + .40 * (H - top))
+    chin = lo + int(np.argmin(ws[lo:hi]))
+    cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
+    return top, chin, int(xs.min()), int(xs.max())
+# hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
+HEAD_BOX = {'b_strike': (3, 108, 125, 245), 'b_leap': (8, 120, 88, 212), 'b_win': (5, 108, 54, 162), 'b_kneel': (3, 92, 32, 159)}
+def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
+    """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
+    neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
+    from scipy import ndimage as ndi
+    H = ay - y0                                                      # source rows y0..ay-1
+    u = np.arange(H)                                                 # source row index
+    dist = ay - (y0 + u)                                             # rows above the anchor (1..H)
+    s = np.where(dist >= taper, k, 1.0 + (k - 1.0) * (dist / float(taper)))
+    # dest distance above the anchor of the top edge of each source row (cumulative from the anchor upward)
+    order = np.argsort(dist); cum = np.zeros(H + 1); cum[1:] = np.cumsum(s[order])
+    Hd = int(np.ceil(cum[-1]))
+    r = Hd - (np.arange(Hd) + .5)                                           # dest row centres, measured upward from the anchor
+    idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)             # which source row (by sorted order) covers each dest row
+    srcdist = dist[order][idx]; sr = ay - srcdist + .0               # source row (y) for each dest row
+    sc = s[order][idx]
+    Wd = int(np.ceil((x1 - x0) * k)) + 2
+    xd = np.arange(Wd) + .0
+    xc = (ax - x0) * k                                               # dest x of the anchor column
+    out = np.zeros((Hd, Wd, 4))
+    pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
+    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / sc[:, None]
+    for c in range(4):
+        out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
+    al = out[:, :, 3:4]
+    out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
+    return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
+
+def bigger_head(img, name, k=HEAD_K, pad=160, taper=22):
+    W, H = img.size
+    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
+    arr = np.array(big)
+    if name == 'b_ko':                                  # lying: head on the left, neck on its right edge. Work on the transposed picture.
+        x0, x1, y0, ay = 70 + pad, 130 + pad, 0 + pad, 128 + pad   # in transposed terms: cross range = original rows, "up" = original left
+        t = np.transpose(arr, (1, 0, 2)).copy()
+        # transposed: rows = original x, cols = original y. Head = rows 0..128, anchor row 128, cross centre = original y 70
+        cx0, cx1 = pad + 0, pad + H
+        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 128, pad + 70, k, 18)
+        t[pad + 0:pad + 128, cx0:cx1, 3] = 0                   # erase the original head
+        full = Image.fromarray(t, 'RGBA'); full.alpha_composite(Image.fromarray(out, 'RGBA'), (max(dx, 0), max(dy, 0)))
+        big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
+    else:
+        top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
+        ax = (x0 + x1) / 2.0
+        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad
+        out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
+        arr[Y0:AY, X0:X1, 3] = 0                                  # erase the original head
+        big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
+        if name == 'b_win':                                       # raised fists stay in front of the bigger head
+            for (a, b, sgn) in ((0, 50, -1), (165, W, 1)):          # arms only (no head pixels), sheared outward: 0 at y=100, 60 px at the fist
+                for y in range(5, 101):
+                    d = int(round(sgn * 60 * (100 - y) / 95.0))
+                    strip = img.crop((a, y, b, y + 1)); big.alpha_composite(strip, (a + pad + d, y + pad))
+    return big.crop(big.getbbox())
+for _n in list(poses):
+    poses[_n] = bigger_head(poses[_n], _n)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
