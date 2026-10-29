@@ -432,13 +432,13 @@ function splashScene(W,H,panelH,time) {
 // h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
 const SPLASH_IMG={w:941,h:1671};
 const SPLASH_SPOTS=[
+  {id:'nara',x:262,feet:1066,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
   {id:'tom',x:425,feet:1175,h:335},
   {id:'tnb',x:170,feet:1198,h:250},
   {id:'boppy',x:768,feet:1222,h:255},
   {id:'grace',x:287,feet:1222,h:225},
   {id:'amy',x:566,feet:1222,h:278},
-  {id:'deedee',x:672,feet:1258,h:278},
-  {id:'nara',x:355,feet:1240,h:78}
+  {id:'deedee',x:672,feet:1258,h:278}
 ];
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
