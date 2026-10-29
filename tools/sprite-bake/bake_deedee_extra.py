@@ -60,8 +60,8 @@ def mark(img, pts, r=7):
     return Image.fromarray(a, 'RGBA')
 
 
-# heave: both arms flank her face and her hands sit above it, so the whole upper figure (hands, arms, head) is scaled together, gently (1.25 not 1.45)
-g['KOV'].update({'x_heave': 1.25})
+# heave: both arms flank her face and her hands sit above it, so the whole upper figure (hands, arms, head) is scaled together, gently (0.86 of the solved factor)
+g['KOVM'].update({'x_heave': 0.86})
 for k, v in ex.items():
     g['poses']['x_' + k] = mark(v, HANDS.get(k, {}))
     g['HEAD_BOX']['x_' + k] = HEAD[k]

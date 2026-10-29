@@ -25,8 +25,8 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=92)   # idle height in grid rows
-ap.add_argument('--ow-h', type=int, default=38)        # standing height of the overworld sprite in rows
+ap.add_argument('--battle-h', type=int, default=99.5)   # idle height in grid rows
+ap.add_argument('--ow-h', type=float, default=41.7)        # standing height of the overworld sprite in rows
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -66,7 +66,7 @@ poses['b_kneel'] = black_eye(poses['b_kneel'], 80, 77, 9, 6)
 poses['b_ko'] = swirl_eye(swirl_eye(poses['b_ko'], 75, 34, 5), 62, 29, 4)
 
 # ---------------------------------------------------------------- head size (match Tom's caricature proportions)
-# Tom's head (hair to chin) is about 45 percent of his height; the painted Deedee's is about 28 percent. Each frame's head is cut out,
+# Head factor is now solved per set (battle and walk) so her head is 0.40 of her height, like Amy and Tom; heights 99.5 battle / 41.7 walk. Each frame's head is cut out,
 # scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
 HEAD_K = 1.45
 TAPER = 16   # rows below the neck line over which the scale eases back to 1 (the face itself stays uniformly scaled)
@@ -109,8 +109,10 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
-def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
-    k = KOV.get(name, k)
+KOVM = {}   # pose name -> multiplier on the solved head factor
+def bigger_head(img, name, k=None, pad=160, taper=TAPER):
+    if k is None: k = HEAD_KB if (name.startswith('b_') or name.startswith('x_')) else HEAD_KW
+    k = KOV.get(name, k) * KOVM.get(name, 1.0)
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
@@ -138,6 +140,21 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
     for (a, b, c, d) in KEEP.get(name, ()):
         big.alpha_composite(img.crop((a, b, c, d)), (a + pad, b + pad))
     return big.crop(big.getbbox())
+# Match Tom's proportions: head (hair to chin) is 0.40 of figure height (Tom's call on Amy, 2026-10-29), figure heights 99.5 battle / 41.7 walk.
+TOM_HEAD_RATIO = 0.40
+HEAD_KB = HEAD_KW = HEAD_K
+def _head_ratio(name, k):
+    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name])
+    return (chin - top) * k / bigger_head(poses[name], name, k=k).height
+def _solve(name):
+    lo, hi = 1.0, 4.0
+    for _ in range(14):
+        mid = (lo + hi) / 2
+        if _head_ratio(name, mid) < TOM_HEAD_RATIO: lo = mid
+        else: hi = mid
+    return round((lo + hi) / 2, 3)
+HEAD_KB, HEAD_KW = _solve('b_idle'), _solve('w_down_stand')
+print('head factors solved: battle', HEAD_KB, 'walk', HEAD_KW)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
 

@@ -58,3 +58,4 @@ Boppy size fix and extra poses (2026-10-29): painted battle rows are now 62 high
 It reuses `bake_deedee.py`'s head warp (`HEAD_K` 1.45, taper below the chin, `KOV` per-pose factor, `KEEP` paste-back) so heads match her core set. Hand points are set by eye in `HANDS`.
 Attack frames are `x_*` (used via `DD_XF` in `engine/deedee-moves.js`, falls back to the old frame); story frames replace sit, toast, sitR, whisper, point, spread, carry, hug, shrug, hip, clap in `data/deedee-hires-battle.js`.
 Amy head ratio lowered to 0.40 of height (was 0.445) and hair blend lengthened to 55 rows (2026-10-29, Tom: head too big, hair by body shrunk).
+Deedee sized to Tom (2026-10-29): bake_deedee.py solves the head factor (ratio 0.40; battle 1.58x, walk 1.65x), heights 99.5 battle / 41.7 walk, BATTLE_SIZE 1.3, OW k 1. Extras follow via x_ frames (KOVM multiplier for heave).
