@@ -129,7 +129,7 @@ const LA_AREAS=[
       '#........#.##..###.###########',
       '#######.#......##..#######.###',
       '#######................###.###',
-      '#########.....##..####.......#',
+      '#########......#..####.......#',
       '##############.....####....###',
       '##############.............###'],
     // The painted street has one-tile corridors (the east sidewalk, the west street and the way round to the south sidewalk).
@@ -137,8 +137,8 @@ const LA_AREAS=[
     noGo:[...[20,21,22,23,25,26,27].map(x=>[x,9]),[1,10],[27,10],[27,11],...[11,12,13,14,15,16,17,18,19,20].map(y=>[1,y]),
       ...[2,3,4,5,6,7].map(x=>[x,20]),[4,19],[7,21],[10,20],[10,21],...[7,8,9,14,15,16,17,18,19,20,21,22].map(x=>[x,22]),[22,23],[23,23],[26,23],[16,24],[17,24]],
     // Chapter 4: the east end of the boulevard leads to the studio lot (Sunset Gold Studios).
-    border:{kind:'citywall',open:[[0,9],[0,10],[14,25],[15,25],[29,12],[29,13]]},
-    exits:[[0,9,'griffith',10,20,'up'],[0,10,'griffith',11,20,'up'],[14,25,'jpark',14,1,'down'],[15,25,'jpark',15,1,'down'],[29,12,'studio',1,8,'right'],[29,13,'studio',1,9,'right']],
+    border:{kind:'citywall',open:[[0,9],[0,10],[14,25],[15,25],[16,25],[17,25],[29,12],[29,13]]},
+    exits:[[0,9,'griffith',10,20,'up'],[0,10,'griffith',11,20,'up'],[14,25,'jpark',14,1,'down'],[15,25,'jpark',15,1,'down'],[16,25,'jpark',16,1,'down'],[17,25,'jpark',17,1,'down'],[29,12,'studio',1,8,'right'],[29,13,'studio',1,9,'right']],
     // Chapter 2: the trail is closed for smog until Tom and TNB work out where it is coming from.
     gates:[{at:[[0,9],[0,10]],look:'barrier',dy:.4,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
       lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','Somebody added in marker: "This means you, Gary."'],
@@ -194,12 +194,12 @@ const LA_AREAS=[
     // Painted plate (art/jpark.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks. Doors, exits and the
     // N-S street (x14,15) keep their old tiles; street trees, hedges and yards are blocked by the mask, not by objects.
     plateMask:[
-      '##############..##############',
-      '##############..##############',
-      '##############..##############',
-      '##############..##############',
-      '##############..##############',
-      '##############..##############',
+      '##############....############',
+      '##############....############',
+      '##############....############',
+      '##############....############',
+      '##############....############',
+      '##############....############',
       '###..........................#',
       '#####........................#',
       '#####....................##..#',
@@ -219,10 +219,10 @@ const LA_AREAS=[
       '#####....#####..##############',
       '##############..##############'],
     paths:[[1,8,28,8],[1,11,28,11],[1,19,28,19],[1,22,28,22]],
-    tiles:[{tile:'road',rects:[[1,9,28,10],[1,20,28,21],[14,0,15,22]]}],
+    tiles:[{tile:'road',rects:[[1,9,28,10],[1,20,28,21],[14,0,17,22]]}],
     houseRoad:[8,19],
-    border:{kind:'jacaranda',open:[[14,0],[15,0],[14,23],[15,23],[29,9],[29,10]]},
-    exits:[[14,0,'blvd',14,24,'up','road'],[15,0,'blvd',15,24,'up','road'],[14,23,'oakpark',12,20,'down','road'],[15,23,'oakpark',13,20,'down','road'],
+    border:{kind:'jacaranda',open:[[14,0],[15,0],[16,0],[17,0],[14,23],[15,23],[29,9],[29,10]]},
+    exits:[[14,0,'blvd',14,24,'up','road'],[15,0,'blvd',15,24,'up','road'],[16,0,'blvd',16,24,'up','road'],[17,0,'blvd',17,24,'up','road'],[14,23,'oakpark',12,20,'down','road'],[15,23,'oakpark',13,20,'down','road'],
       [29,9,'carbarn',1,10,'right','road'],[29,10,'carbarn',1,10,'right','road']],
     // Chapter 6: Old Oak Park (south end of 2nd Ave) is closed for tree trimming until chapter 6, and until Nara is along.
     gates:[{at:[[14,23],[15,23]],look:'barrier',dy:-.4,cond:{test:S=>S.chapter<6||(S.chapter===6&&!S.flags['ch6-nara'])},name:'Park barrier',

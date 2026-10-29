@@ -48,6 +48,11 @@
 - All 40 original objects kept with their text, re-placed; 8 new props (shrubs, sideboard, cabinets, primary toilet) with short new text. Bed and shower still restore. Guest bath fixtures re-laid so each is touchable.
 - New `tools/tomhouse_test.py` (all floor reachable, every object touchable, both door tiles exit to Jefferson Park, 14 shots).
 - Not reworded: no spoken lines changed. No walk-behind layer yet (engine has none for tile rooms).
+## 2026-10-29: Downtown LA south exit is wider
+- The crosswalk exit from Downtown LA (`blvd`) to Jefferson Park (`jpark`) is now 4 tiles wide (x 14 to 17 on the bottom row) instead of 2. Walk map only, the painting is untouched.
+- `blvd`: exits and border openings added at (16,25) and (17,25); tile (14,23) opened so Tom can step onto the crosswalk from the street. `jpark`: the top of the map (rows 0 to 5) is 4 wide at x 14 to 17, with matching exits at (16,0) and (17,0), so the passage lines up both ways.
+- Tested: tools/reach_test.py, blvd_test.py, jpark_test.py, smoke.py, and a key-press walk through every tile both directions.
+
 ## 2026-10-28: Painted plate for Downtown LA (the boulevard, map id `blvd`)
 - Downtown LA now uses Tom's painting (`art/blvd.webp`, 1920 x 1664, 30 x 26 tiles at 64 px, entry in `PLATES`). The clean version was used; the grid image was only a guide. A `plateMask` in `data/maps-la.js` is the walk map. Spawn is now (26,22), on the pad in front of the Cab Co. door.
 - The painting is drawn in perspective, so the street slopes down to the right and the lower buildings sit lower than the grid markers. Doors were moved onto the painted doors by shifting the building rows: Coffee (4,7), Ramen (11,7), Starlite (18,7) unchanged; Nickel's (24,8), Wardrobe (4,18), TNB's Loft (10,19), Grand Tower (18,20), Cab Co. (26,21). Every door is entered from the sidewalk pad in front of it.
