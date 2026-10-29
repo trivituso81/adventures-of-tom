@@ -367,5 +367,5 @@ Object.assign(MONSTERS,{
 // Map spots. Terminal Zero: Carry-Ons roam the concourse and Baggage Claim, Jet Lags the Lounge and Security (they
 // hold still until the party has looked around). Each wing's troublemaker holds still until its story fight. The
 // Last Call hangs over the podium at Gate Zero.
-const TERM_MONSTER_SPOTS=[['carryon',6,10],['carryon',24,9],['jetlag',4,19],['jetlag',9,6],['carryon',26,5],['longline',8,5],['unclaimed',21,5],['armresthog',9,17]];
+const TERM_MONSTER_SPOTS=[['carryon',6,10],['carryon',24,9],['jetlag',6,17],['jetlag',9,6],['carryon',27,6],['longline',10,4],['unclaimed',27,5],['armresthog',6,15]];
 const GATE_MONSTER_SPOTS=[['lastcall',9,4]];

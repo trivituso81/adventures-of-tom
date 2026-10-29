@@ -3385,7 +3385,7 @@ SCENES.ch10Start=[
   {talk:'Sal',lines:['Cab seven! Everybody in. Long Island Regional. The door nobody uses.']},
   {fade:'out',time:.8},
   {flag:'ch10-start'},
-  {call:()=>{ sfx.travel&&sfx.travel(); beginTransition({kind:'edge',to:'terminal',spawn:{x:21,y:19},facing:'up'}); }},
+  {call:()=>{ sfx.travel&&sfx.travel(); beginTransition({kind:'edge',to:'terminal',spawn:{x:15,y:19},facing:'up'}); }},
   {wait:.5},
   {fade:'in',time:.6}
 ];
@@ -3579,9 +3579,9 @@ SCENES.ch10End=[
 ];
 TRIGGERS.push(
   {id:'ch10-term',map:'terminal',when:{...CH10,flag:'ch10-start',notFlag:'ch10-term'},scene:'ch10Term'},
-  {id:'ch10-sec',map:'terminal',at:[1,1,11,7],when:{...CH10,flag:'ch10-term',notFlag:'ch10-sec'},scene:'ch10Sec'},
-  {id:'ch10-bag',map:'terminal',at:[16,1,28,7],when:{...CH10,flag:'ch10-term',notFlag:'ch10-bag'},scene:'ch10Bag'},
-  {id:'ch10-lounge',map:'terminal',at:[1,13,12,20],when:{...CH10,flag:'ch10-term',notFlag:'ch10-lounge'},scene:'ch10Lounge'},
+  {id:'ch10-sec',map:'terminal',at:[1,1,11,6],when:{...CH10,flag:'ch10-term',notFlag:'ch10-sec'},scene:'ch10Sec'},
+  {id:'ch10-bag',map:'terminal',at:[18,1,28,6],when:{...CH10,flag:'ch10-term',notFlag:'ch10-bag'},scene:'ch10Bag'},
+  {id:'ch10-lounge',map:'terminal',at:[1,14,13,17],when:{...CH10,flag:'ch10-term',notFlag:'ch10-lounge'},scene:'ch10Lounge'},
   {id:'ch10-boss',map:'gatezero',when:{...CH10,flag:'ch10-door',notFlag:'ch10-boss'},scene:'ch10Boss'},
   {id:'ch10-after',map:'gatezero',when:{...CH10,flag:{'battle:lastcall':'win'},notFlag:'ch10-clear'},scene:'ch10AfterBoss'},
   {id:'ch10-end',map:'grands',when:{...CH10,flag:'ch10-clear',notFlag:'ch10-done'},scene:'ch10End'}
@@ -3615,7 +3615,7 @@ STORY_WORLD.push(()=>{
 const LE_talkToDriver_ch10=talkToDriver;
 talkToDriver=function(n) {
   if(STORY.mode!=='full'||n.name!=='Sal') return LE_talkToDriver_ch10(n);
-  const term=()=>beginTransition({kind:'edge',to:'terminal',spawn:{x:21,y:19},facing:'up'});
+  const term=()=>beginTransition({kind:'edge',to:'terminal',spawn:{x:15,y:19},facing:'up'});
   if(STORY.chapter===9&&flag('ch9-done')===true) {
     n.visitedOnce=true;
     openChoice(n.name,['Tom! Every clock in town stopped. Midnight. Cab seven’s clock. The depot clock. My watch. Zero o’clock.',
