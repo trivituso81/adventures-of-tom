@@ -1,3 +1,10 @@
+## 2026-10-29: Ramen Ramen is painted (Area 39, map id `ramen`)
+- New `art/ramen.webp` (Tom's painting, 768 x 576 = 12 x 9 tiles at 64 px) registered as `PLATES.ramen` (`?v=20261029`, interior actor scale 1.98). Map size unchanged; the old tile-drawn shop is gone.
+- Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter (rows 4 and 5), the rug alcove at (2,3), and the two tiles under the noren curtain (x 5 and 6, rows 6 to 8) as the way out. The counter and stools, kitchen, sake shelf, bamboo pot, lantern step, corner booth and both front fences are blocked.
+- Objects re-laid to the painting: counter (3,2) 5 wide, sake shelf (8,2), corner table (9,4), bamboo (1,3), new Lantern step (0,5). Kenji stays at (5,4) and wanders the front floor.
+- Reworded (object text, not voiced, no re-bake): counter "Twelve stools" is now "Five stools" (the painting has five); bamboo text now mentions the egg painted on the pot and "the rest for luck" (the painting shows more than three stalks). New line: Lantern step.
+- Checks: new `tools/ramen_test.py` 0 fails (objects touchable, Kenji and counter talk, door walked to the boulevard), smoke, bg_test, jpark_test, blvd_test 0 fails. Portrait and landscape shots looked at.
+- Known: `tools/carbarn_test.py` fails its two walk-out checks (west arch to Jefferson Park, east rails to the Boiler Room) on a clean checkout too, so it predates this change. No foreground layer, so characters draw over the front fence.
 ## 2026-10-29: Golden Hour Coffee is painted (Area 38, map id `coffee`)
 - New `art/coffee.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.coffee` (`?v=20261029`). Same size as the old room, so the Boulevard door and the exit are unchanged: door (5,8), arrival (5,7).
 - Walk map (`plateMask`): the floor in front of the counter (row 3, x 4 to 6), the middle floor (rows 4 and 5), and the entry lane over the mosaic mat (x 4 to 6, rows 6 to 8). The back counter, pastry case, left laptop table, right window table and book table, and the plants and low walls at the front are painted and blocked.

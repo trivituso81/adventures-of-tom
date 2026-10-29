@@ -878,19 +878,33 @@ const LA_ROOMS=[
       ['table',0,3,3,3,'Laptop table','Someone has been writing a screenplay here since 2016. The sign on the wall says SAME SCRIPT, DIFFERENT YEAR.'],
       ['table',8,3,2,2,'Window table','A man is having a very loud meeting about a podcast. Two microphones, one cup of tea.'],
       ['table',8,5,2,1,'Book table','A sketchbook and a stack of magazines. The shelf sign says ART, TRAVEL, MUSIC, FILM, IDEAS. Mostly ideas.']]},
+  // Ramen Ramen, painted plate (art/ramen.webp, engine/plate.js), 12 x 9 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
+  // Kitchen, broth pot and the five-stool counter along the back; sake shelf back right; bamboo pot and raised lantern step on the left;
+  // the corner booth table on the right. The two tiles under the noren curtain (x5 and x6) are the way out.
   {id:'ramen',w:12,h:9,
     style:{floor:'#cbb89c',alt:'#d8c6aa',wall:'#7a3a33',trim:'#e8c8a0',pattern:'wood',rug:'#b9483f'},
     rug:[4,5,4,2],
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '##.#########',
+      '##.......###',
+      '####.....###',
+      '#####..#####',
+      '#####..#####',
+      '#####..#####'],
     npcs:[
       {name:'Kenji',x:5,y:4,look:'kenji',lines:[
         'Irasshaimase! Welcome!',
         'Tom-san, your Japanese is very good.',
         'It\'s not. But you\'re trying very hard, and I respect that.']}],
     objects:[
-      ['counter',2,2,6,1,'Ramen counter','Twelve stools. A pot of broth that\'s been simmering since Tuesday.',{variant:'tea'}],
-      ['table',8,4,2,2,'Corner table','A tiny sign: PLEASE SLURP. IT IS POLITE.'],
-      ['shelf',9,1,2,1,'Sake shelf','The bottles are labeled in kanji. Tom can read two. He\'s very proud.'],
-      ['pot',1,6,1,1,'Lucky bamboo','Three stalks. One for broth, one for noodles, one for the egg.']]},
+      ['counter',3,2,5,2,'Ramen counter','Five stools. A pot of broth that\'s been simmering since Tuesday.',{variant:'tea'}],
+      ['table',9,4,3,2,'Corner table','A tiny sign: PLEASE SLURP. IT IS POLITE.'],
+      ['shelf',8,2,3,2,'Sake shelf','The bottles are labeled in kanji. Tom can read two. He\'s very proud.'],
+      ['pot',1,3,1,2,'Lucky bamboo','The pot has a soft-boiled egg painted on it. One stalk for broth, one for noodles, one for the egg, and the rest for luck.'],
+      ['table',0,5,4,1,'Lantern step','A low wooden step with a lantern on it. Nobody sits here. Kenji says the lantern has seniority.']]},
   {id:'juicebar',w:11,h:9,
     style:{floor:'#dfe8d0',alt:'#eaf0de',wall:'#6fb35a',trim:'#f4fbe8',pattern:'tile',rug:'#9ccf7a'},
     rug:[3,5,5,2],
