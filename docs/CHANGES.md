@@ -1,3 +1,8 @@
+## 2026-10-28: Painted plate for Penny's Pockets (the shop)
+- Penny's Pockets (map id `shop`, 11 x 9 tiles) now uses Tom's painting (`art/shop.webp`, 704 x 576 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,8) and spawn (5,7) are unchanged; the rail across the front has one gap, so the doorway is one tile wide.
+- Objects re-laid onto the painted furniture: counter unchanged (3,3,5,1, Penny stays at (5,2) behind it); gear shelf and snack shelf now 2 x 2 (each touchable from the floor row below); battle bin now (0,5,2,2) with its barrel; shop plant now (9,5,1,2).
+- New `tools/shop_test.py`: every object touchable, A opens a dialogue at each prop, the counter opens the shop from x3, x5 and x7, Penny behind the counter, bin and counter block walking, doorway returns to the Square, portrait and landscape shots in `tools/shots/shop-*.png`. `tools/reach_test.py shop` 0 fails, `tools/smoke.py` no fails.
+
 ## 2026-10-28: Painted plate for the Hush Library
 - The Hush Library (map id `library`) now uses Tom's painting (`art/library.webp`, 1280 x 1088, 20 x 17 tiles at 64 px, entry in `PLATES`). The room grew from 13 x 11 to 20 x 17.
 - Reading the grid image: blue (10,16) street door, green (10,14) arrival spot, purple (10,11) Page, orange (17,2) staff door. The teal dot (16,13) sits on the low wall, so it was not used.

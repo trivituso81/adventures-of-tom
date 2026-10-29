@@ -1172,14 +1172,28 @@ const LE_ROOMS=[
   {id:'shop',w:11,h:9,
     style:{floor:'#d9c49c',alt:'#e6d3ad',wall:'#c27a62',trim:'#f1d9b5',pattern:'check',rug:'#c9a24d'},
     rug:[3,6,5,2],
+    // Painted plate (art/shop.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Gear shelf back left, snack shelf back right, the long counter across the middle (Penny works behind it),
+    // battle bin and barrel front left, big plant front right, the yellow rug in the middle.
+    // The low rail across the front has one gap (x5): the doorway and the mat below it.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '#..#####..#',
+      '#.........#',
+      '##.......##',
+      '##.......##',
+      '#####.#####',
+      '#####.#####'],
     npcs:[
       {name:'Penny',x:5,y:2,look:'penny',shopkeeper:true,roam:0,lines:[]}],
     objects:[
       ['counter',3,3,5,1,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. BROWSE. MOSTLY BUY.',{variant:'letters',shop:true}],
-      ['shelf',1,1,2,1,'Gear shelf','Folded sweaters, tiny leotards and one fishing vest with twelve pockets.'],
-      ['shelf',8,1,2,1,'Snack shelf','Picnic baskets, juice boxes, and cocoa tins stacked in a very confident tower.'],
-      ['toybox',1,6,1,1,'Battle bin','Water balloons, kazoos and party poppers. A label says: FOR MONSTERS ONLY.'],
-      ['pot',9,6,1,1,'Shop plant','It has a price tag. The price is "no."']]},
+      ['shelf',1,1,2,2,'Gear shelf','Folded sweaters, tiny leotards and one fishing vest with twelve pockets.'],
+      ['shelf',8,1,2,2,'Snack shelf','Picnic baskets, juice boxes, and cocoa tins stacked in a very confident tower.'],
+      ['toybox',0,5,2,2,'Battle bin','Water balloons, kazoos and party poppers. A label says: FOR MONSTERS ONLY.'],
+      ['pot',9,5,1,2,'Shop plant','It has a price tag. The price is "no."']]},
   {id:'taxi',w:11,h:9,
     style:{floor:'#c9c3b4',alt:'#d7d1c2',wall:'#a99a6e',trim:'#efe0b0',pattern:'check',rug:'#d9a43a'},
     rug:[3,5,5,2],
