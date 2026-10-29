@@ -1122,18 +1122,34 @@ const LE_ROOMS=[
       ['shelf',8,6,3,2,'Gardening shelf','A manual titled "So You Have Soiled Yourself: Gardening Basics."']]},
   {id:'post',w:10,h:12,
     style:{floor:'#b6c3be',alt:'#c6d1c6',wall:'#8faaa8',trim:'#d5ddd0',pattern:'wood',rug:'#9baebb'},
-    walls:[[1,4],[8,4]],
-    rug:[3,7,4,3],
+    rug:[4,5,2,6],
+    // Painted plate (art/post.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Sorting counter across the back, pigeonhole shelf and parcel scale on the back wall, the big stamp desk with chair and stool on the right,
+    // the big plant on the left, the blue runner down the middle. The steps at the bottom (x4 and x5) are the way out.
+    plateMask:[
+      '##########',
+      '##########',
+      '##########',
+      '######.###',
+      '######..##',
+      '###....###',
+      '###....###',
+      '###....###',
+      '###.....##',
+      '#.......##',
+      '####..####',
+      '####..####'],
     npcs:[
-      {name:'Kit',x:5,y:3,look:'kit',lines:[
+      {name:'Kit',x:7,y:4,look:'kit',lines:[
         'Your parcel is arriving any Tuesday now.',
         'The snails asked for smaller uniforms.',
         'I deliver good news. Bad news has to walk.']}],
     objects:[
-      ['mailboxes',1,1,2,2,'Post boxes','Box 4 contains a letter addressed to "Whoever Smells Nice."'],
-      ['counter',2,4,4,1,'Sorting counter','This pile is marked "Urgent-ish."',{variant:'letters'}],
-      ['desk',6,8,2,1,'Stamp desk','A stamp featuring a potato. First-class taste.'],
-      ['pot',1,9,1,1,'Office plant','The plant has received more postcards than you.']]},
+      ['mailboxes',5,0,2,3,'Post boxes','Box 4 contains a letter addressed to "Whoever Smells Nice."'],
+      ['counter',1,3,5,2,'Sorting counter','This pile is marked "Urgent-ish."',{variant:'letters'}],
+      ['desk',7,5,3,3,'Stamp desk','A stamp featuring a potato. First-class taste.'],
+      ['pot',0,5,3,4,'Office plant','The plant has received more postcards than you.'],
+      ['pot',8,9,2,1,'Parcel basket','Every parcel in it is addressed to "The Occupant." The Occupant has not been in.']]},
   {id:'tea',w:12,h:9,
     style:{floor:'#d5ba9e',alt:'#e3cdb0',wall:'#bb9d88',trim:'#efd7b8',pattern:'wood',rug:'#c6aa76'},
     walls:[[1,1],[1,2],[10,1],[10,2]],
