@@ -34,4 +34,11 @@ plateSetK.k=1;
 // the bakery counter and the dining chairs: adults wanted about 1.8x their street size, then Tom asked for 10% more: 1.98x. Feet stay on the same tile, the sprite grows upward.
 const INTERIOR_ACTOR_SCALE=1.98;
 for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','amyhouse','grands']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
-function actorK() { const p=currentMap&&PLATES[currentMap.id]; return (p&&p.actorScale&&!currentMap.outside)?p.actorScale:1; }
+// Outdoor maps (the streets, parks and yards): Tom asked for 20% bigger.
+const OUTDOOR_ACTOR_SCALE=1.2;
+function actorK() {
+  if(!currentMap) return 1;
+  const p=PLATES[currentMap.id];
+  if(p&&p.actorScale&&!currentMap.outside) return p.actorScale;
+  return currentMap.outside?OUTDOOR_ACTOR_SCALE:1;
+}
