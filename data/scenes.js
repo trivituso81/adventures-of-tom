@@ -2886,7 +2886,7 @@ STORY_MAPFX.push(time=>{
     } else if(STORY.mode==='full'&&STORY.chapter>=8) { c.globalAlpha=.06; rect(0,0,M.w*T,M.h*T,'#ffb04a'); c.globalAlpha=1; }
   }
   if(id==='boiler') {
-    const f=.12+.05*Math.sin(time*3.3)+.03*Math.sin(time*7.1),g=c.createRadialGradient(9.5*T,4*T,T,9.5*T,4*T,T*9);
+    const f=.12+.05*Math.sin(time*3.3)+.03*Math.sin(time*7.1),g=c.createRadialGradient(6.5*T,4*T,T,6.5*T,4*T,T*9);
     g.addColorStop(0,'rgba(255,140,60,'+(f*2).toFixed(3)+')'); g.addColorStop(1,'rgba(255,140,60,0)');
     c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
   }
