@@ -1,3 +1,69 @@
+## 2026-10-29: Jefferson Park repaint (themed shops, one label per house)
+- `art/jpark.webp` is replaced with Tom's revised painting (same 1920 x 1536 at 64 px, upscaled from the 1402 x 1122 source). Same street, paths, camera and building positions, so the `plateMask`, doors, exits and objects are unchanged.
+- Shops are exaggerated to read as what they sell: Odette's Creole Kitchen (Mardi Gras awning, giant crawfish, brass horn, CREOLE KITCHEN sign), Pupuseria La Ceiba (giant pupusa on the roof, PUPUSERIA sign), Board Room (skateboard on the roof, boards in the window, BOARD ROOM sign), Very Green Juice (giant green smoothie, VERY GREEN JUICE sign).
+- Houses: exactly one label each (TOM'S HOUSE, JORDAN & SAM'S, CASA ALVAREZ, DAKOTA & RYAN'S); the duplicate labels are gone. Tom's house shows 3468.
+- `PLATES.jpark.src` gets `?v=20261029` so phones that cached the old painting load the new one.
+- Checks: `tools/jpark_test.py` 0 fails (all eight doors enter, every object touchable), `tools/smoke.py` 0 fails, portrait and landscape shots looked at.
+- Known roughness: the sign text is painted, so the in-game names (Odette's Creole Kitchen, Pupuseria La Ceiba) show only in the HUD and dialogue. Door tiles sit on the landing in front of each painted door, as before.
+## 2026-10-29: Chapter, load and new-game prompts use the welcome page
+- Picking a chapter, LOAD, PART 2 or the bonus on the welcome page used to cut to the town with the old pixel logo and a dialogue box. The prompt now stays on the welcome page: same painted logo, same gold-framed panel and serif menu buttons (START CHAPTER 2 / BACK, the load list, the new-game warning).
+- New `titleAsk(name,text,options)` in `engine/splash.js` (same arguments as `openChoice`; falls back to it if there is no welcome page). `splashGo` no longer fades to the town first; it fades out only when the pick starts a game without a prompt (`splashFade`). New `ask` mode in `SPLASH_MODES`, a `.sp-text` line in the panel, Esc/B runs the prompt's BACK. Callers switched: `engine/intro.js` (confirmNew, loadMenu), `engine/story.js` (confirmPart2), `engine/chapter-select.js` (confirmChapter), `data/bonus-nine-scoops.js` (confirmBonus). smoke.py FAILS: []. No spoken lines changed.
+## 2026-10-29: Tom's House is now two painted rooms (replaces the tall top-down plate)
+- Tom did not like the top-down plate, so the house is rebuilt from two 3/4 oblique paintings in the same style as the other houses. The hall wing (laundry, office, jetted bath, guest bath, storage, guest bedroom), the decks and the yard are gone for now.
+- Main floor, map `tomhouse` (16 x 24 tiles, `art/tomhouse.webp` 1024 x 1536): wet bar, dining, kitchen with island, living room. The front door is three tiles wide at (3,18) (4,18) (5,18); spawn (4,17). The open doorway at the top middle (7,3) is an edge portal to the suite.
+- Primary suite, new map `tomsuite` (16 x 15, `art/tomsuite.webp` 1024 x 960, the source painting scaled down): bedroom with the bed (restores the party), glass shower (restores), bath, two walk-in closets, window bench. Door at (7,12) and (8,12) leads back to the main floor (7,4). `houseById.tomsuite` in `engine/la.js` borrows the house record so the minimap and name lookups work; it is not a street door.
+- `makeRoom` (engine/world.js) gained `doors` (extra front-door tiles) and `edges` (a doorway to another room of the same house). Both rooms use `PLATES` actor scale 1.98 like the other interiors.
+- Scenes: `ch2-starter` and `ch12-house` trigger anywhere on the main floor (`at:[2,5,13,17]`); `ch2Starter` and `ch6Kitchen` walk Tom to (8,8) beside the island, TNB at (7,8) (Tom now faces the island to the right). `tools/tomhouse_test.py` rewritten for the two rooms; smoke and the Chapter 12 test pass. No spoken lines changed.
+- Not done: walk-behind layer; the old hall rooms (a new painting would bring them back as another room via `edges`).
+## 2026-10-29: Lobby elevator is a call button
+- The brass elevator doors in `loftlobby` are scenery now. The call button beside them (object at 7,2, stand at 7,3 facing up) asks "Go up to TNB's loft?" with Enter TNB's / Not now. Yes rides to `lofts` at (6,8). New object field `ride:[map,x,y,facing]` (with optional `ridePrompt`) handled in `engine/overworld.js` (`pressAction`), reusable for any lift or door that should ask first.
+- Test: `tools/loftlobby_test.py` covers the prompt, Not now, and Enter TNB's. smoke.py FAILS: []. No spoken lines changed.
+
+## 2026-10-29: TNB's loft is painted (map `lofts`)
+- `art/lofts.webp` (768 x 640, 12 x 10 tiles) is the loft plate, registered in `engine/plate.js` with the interior actor scale. `plateMask` in `data/maps-la.js` is traced from the painting; the loft is entered from the lobby elevator (arrive 6,8) and its door (6,9) is the elevator back down.
+- Objects re-placed on the painted furniture, same names and jokes: kiln (2,1), garment rack (4,1), pottery shelf (8,1), wheel (1,3), longboard wall (8,4), horror couch (1,6). New: coffee table (5,4) and side tables (4,6). TNB stays at (6,5).
+- `ch2Loft` scene: TNB now stands at (6,5) and Tom walks to (6,6), because the coffee table sits on the old spot.
+- Test: `tools/loft_test.py` (every object touchable, TNB on floor, door to the lobby, ch2 greeting). smoke.py FAILS: []. No spoken lines changed.
+
+## 2026-10-29: Lobby of TNB's building (map `loftlobby`)
+- New painted room `art/loftlobby.webp` (768 x 640, 12 x 10 tiles, registered in `engine/plate.js` with the interior actor scale). Spring Street's LOFTS door now opens on the lobby (spawn inside the gate at 6,8); the street gate is the exit (6,9 and 5,9). The brass elevator doors (5,1 and 6,1) go up to TNB's loft (`lofts`, arrive at 6,8). The loft's door is now the elevator back down (arrive at the lobby doors, 5,3), not the street.
+- Engine hooks: `house.enterMap` (battle-draw.js `switchMap`), `houseById.loftlobby` alias to the LOFTS house (engine/la.js, so minimap, music and exit work; the door count is unchanged), room specs `exitTo` and `portals` plus `name` (engine/world.js).
+- Lobby objects: mailboxes, package desk, leather sofa, monstera; all touchable. Chapter scenes that start in `lofts` (ch2Loft, ch12Loft) now start when the party steps out of the elevator.
+- Test: `tools/loftlobby_test.py` (street door, lobby, elevator, loft, back, street). No spoken lines changed.
+
+## 2026-10-29: Indoor party spacing 25% tighter
+- `movePlayer` in `engine/followers.js`: inside houses and shops the gap between party members is now 1.5 tiles (was 2). Outdoors stays 1 tile. Fractional gaps are interpolated along Tom's trail, so followers can stand between tiles. Checked by walking Tom in a house (gaps 1.5, 1.5) and outside (1, 1). No spoken lines changed.
+
+## 2026-10-29: Tom's House is painted (Area 46, map id `tomhouse`)
+- `art/tomhouse.webp` (1216 x 2752, 64 art px per tile) is the painted plate; `PLATES.tomhouse` in `engine/plate.js` (characters drawn at 1.5x). The painting came from Tom's image AI using the corrections list in `docs/area46/`; it matched the 19 x 43 shape, so the map size did not change.
+- The old tile plan is gone. `plateMask` in `data/maps-la.js` is now traced from the painting (the old walkmap no longer matches the art: the hall lobby, doors, bath and closet positions all differ). All 210 walkable tiles and all 38 objects are reachable from the front door (checked by flood fill, then walked with real key presses through every door).
+- Objects were re-placed on the painted furniture, same names and same flavor text. Dropped (their tiles are scenery now): lemon tree, back hedge tree, shrubs, yard tree, deck planter, flax and the welcome mat. The deck chairs, photo wall, nightstands, plants and the rest stay.
+- Art patch: the painted office closet has no exit, so the office was sealed. One doorway was cut into the office east wall (art x 600-634, y 1350-1404 at full size, a floor strip pasted over the wall) so the office opens onto the hall at tile (9,21). The real plan has the office entered through its closet.
+- Scenery only (not walkable): north deck, west lawn, back yard and the front porch. The deck furniture closes the deck in the middle, so the yard cannot be reached from the south deck.
+- Scenes moved to the new kitchen: `ch2-starter` and `ch12-house` trigger anywhere on the main floor (`at:[4,28,15,37]`); `ch2Starter` and `ch6Kitchen` walk Tom to (14,31) beside the island, TNB at (15,31). Both checked in a headless run.
+- Not done: walk-behind (a character passing behind a tall prop is still drawn on top); there is no foreground layer yet. No spoken lines changed.
+
+## 2026-10-29: Nara on the welcome screen sits behind Grace
+- `SPLASH_SPOTS` in `engine/splash.js`: Nara moved from the bottom left to behind Grace at the foot of the stairs (x 240, feet 1020, h 104) and listed first so every family member draws over her. Everyone on the welcome art is also 10% bigger (`SPLASH_ALL=1.1`, feet stay planted). No spoken lines changed.
+
+## 2026-10-29: Aunt Ellie's house is painted
+- Her interior (map `elliehouse`) now uses Tom's painting (`art/elliehouse.webp`, 768x640 like the other room plates). Registered in `engine/plate.js` with the interior actor scale. Walk map (`plateMask`) follows the furniture; exit at the bottom stairs back to Rivituso Row.
+- Examine objects re-laid to the painting: writing cabinet (orchid joke kept), kettle, green sofa, lamp table (1968 ship photo), tea table (good china note kept), dining table, side table, umbrella stand, vanity (wardrobe joke kept). The old hat shelf and desk jokes: hat shelf dropped (no hat boxes in the painting).
+- Ellie's spoken lines are unchanged, so every baked clip still plays. The hutch, photo wall, armchair, basket, shoe rack and right sideboard are painted but not reachable.
+- Tests: `tools/ellie_test.py` (new) passes; `tools/smoke.py` FAILS: []. `tools/tea_test.py` 'walked up from the door' is flaky (passes and fails on identical code).
+
+## 2026-10-29: TNB sized exactly like Tom, plus 24 extra painted poses
+- TNB's head-to-body ratio and height now match Tom's (per-frame head solve in `bake_tnb.py`: 44.5 percent of battle height, 43.3 front, 41.7 side; 100 battle rows, 42 overworld rows).
+- 24 new poses from two extra sheets (battle actions, story scenes), same baker. Mug Toss now plays painted pull, wind-up and release frames (the drawn mug is skipped while a painted pose holds its own). Slasher Scare uses the dodge pose. point, aim, spread, hip, clap, carry, shrug are painted; story poses sit, toast, sitR, hug, whisper plus new wave, talk, laugh are painted. Saved but not yet used in a move: heave, crouch.
+- Known roughness: small sleeve slivers beside the head on a few frames (windup, strike, leap, win, kneel, crouchlook).
+- No spoken lines changed.
+
+## 2026-10-29: Grace's cartwheel and gymnastics poses are painted
+- New pose sheets `tools/sprite-bake/src/grace-poses-a1.png` (lunge, star, handstand, land, knee lift, front kick, floor split, bridge, dance, balance, bow) and `grace-poses-a2.png` (tuck, leap, salute, dance, balance, bow), baked by `python3 tools/sprite-bake/bake_grace_poses.py` into `art/chars/grace-wheel.webp` (16 frames, 260 px, hip at the centre of each frame; the hip is the leggings centre nearest the leotard) and `data/grace-wheel-hires.js` (generated).
+- `data/grace-wheel-use.js` swaps the picture only: `GRACE_WHEEL.frame` and `.mirror` now return a painted 130 x 130 frame (drawn at scale 1, the same 130 px box as the old 65-row frames at scale 2); the hip path, planted hand or foot and rotation maths in `data/grace-wheel.js` are unchanged. Tweens between two model poses show the nearer painted pose. Used by Cartwheel's showpiece, Judge Grace (Tom and Grace), and the round-off combos. Set `GRACE_WHEEL_HIRES_OFF=true` to get the pixel frames back.
+- This also fixes the pixel cartwheel frames drawing at half size since the painted Grace went in (her sprite scale is now 1, the frames were built for 2).
+- Not wired yet: `GRACE_WHEEL.painted(name)` also holds handstand, leap, salute, dance, balance, bow, split and bridge for other moves (Handstand Contest, Split Leap, Olympic salute, DANCE). They are hip-centred, not feet-aligned like the battle frames.
+- `sheet.py` gained `split_erode` (figures that nearly touch are separated by eroding, then each pixel goes to its nearest figure).
 ## 2026-10-28: Painted Grace (battle, knocked out, overworld)
 - Grace now comes from her painted sheets (`tools/sprite-bake/src/grace-battle-v2.png`, `grace-walk-v2.png`, hero `grace-hero-v2.png`), baked by `python3 tools/sprite-bake/bake_grace.py` into `art/chars/grace-battle.webp`, `grace-ko.webp`, `grace-ow.webp` and `data/grace-hires.js` (generated). `data/grace-hires-use.js` swaps her in (set `GRACE_HIRES_OFF=true` to get the old pixel Grace back). Battle idle is 80 rows at scale 1 (old: 40 rows at 2, same height); overworld stands 38 rows (old 43 x .88).
 - Her violet leotard is close to the magenta background, so `sheet.py` has a `robust=True` cut (distance to the real background colour; interior pixels untouched; only the rim and pink hair strands are cleaned). Tom's bake still uses the old cut.
@@ -18,6 +84,11 @@
 - All 40 original objects kept with their text, re-placed; 8 new props (shrubs, sideboard, cabinets, primary toilet) with short new text. Bed and shower still restore. Guest bath fixtures re-laid so each is touchable.
 - New `tools/tomhouse_test.py` (all floor reachable, every object touchable, both door tiles exit to Jefferson Park, 14 shots).
 - Not reworded: no spoken lines changed. No walk-behind layer yet (engine has none for tile rooms).
+## 2026-10-29: Downtown LA south exit is wider
+- The crosswalk exit from Downtown LA (`blvd`) to Jefferson Park (`jpark`) is now 4 tiles wide (x 14 to 17 on the bottom row) instead of 2. Walk map only, the painting is untouched.
+- `blvd`: exits and border openings added at (16,25) and (17,25); tile (14,23) opened so Tom can step onto the crosswalk from the street. `jpark`: the top of the map (rows 0 to 5) is 4 wide at x 14 to 17, with matching exits at (16,0) and (17,0), so the passage lines up both ways.
+- Tested: tools/reach_test.py, blvd_test.py, jpark_test.py, smoke.py, and a key-press walk through every tile both directions.
+
 ## 2026-10-28: Painted plate for Downtown LA (the boulevard, map id `blvd`)
 - Downtown LA now uses Tom's painting (`art/blvd.webp`, 1920 x 1664, 30 x 26 tiles at 64 px, entry in `PLATES`). The clean version was used; the grid image was only a guide. A `plateMask` in `data/maps-la.js` is the walk map. Spawn is now (26,22), on the pad in front of the Cab Co. door.
 - The painting is drawn in perspective, so the street slopes down to the right and the lower buildings sit lower than the grid markers. Doors were moved onto the painted doors by shifting the building rows: Coffee (4,7), Ramen (11,7), Starlite (18,7) unchanged; Nickel's (24,8), Wardrobe (4,18), TNB's Loft (10,19), Grand Tower (18,20), Cab Co. (26,21). Every door is entered from the sidewalk pad in front of it.
@@ -134,6 +205,25 @@
 - Same row geometry as before, so Rose's ride, hand points, hurt, KO, defend and outfits all still work. `TOM_HIRES_OFF=true` restores the old Tom.
 - New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
 - Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
+
+## 2026-10-29: Starter Splash and Popcorn Jump use painted poses
+- `tools/sprite-bake/src/tom-poses-v2.png` (12 poses) baked into `art/chars/tom-poses.webp` with the first set: `carry, raise, lidpop, splash, goo, proud` (Starter Splash) and `bowlsit, spook, scream, bowlthrow, cower, frozen` (movie night, terrified). The jar and popcorn bowl are painted into the poses.
+- Starter Splash (engine/tom-moves.js): carry, raise, lid pop, splash, goo, proud; the drawn jar (`tv_jar`) is skipped while painted poses are on.
+- Popcorn Jump (`B2_TOMBO_ANIM.tnb1`, engine/battle2-kind.js): Tom sits with his painted bowl, is spooked, screams mid-jump while the game's bowl flies, cowers, then stands proud for the kiss. The drawn lap bowl is skipped. `bowlthrow` and `frozen` are baked but not used yet.
+- `tools/sprite-bake/sheet.py` now merges loose debris (flying popcorn) into the nearest figure. Script versions bumped to `?v=tom4`.
+
+## 2026-10-29: Painted controller for Press Start
+- `tools/sprite-bake/src/prop-controller.png` baked by new `tools/sprite-bake/bake_props.py` to `art/chars/prop-controller.webp` (levelled, 200 px wide). `ctl()` in engine/tom-moves.js draws it (wind-up, throw, falling); the old drawn controller is the fallback until it loads.
+
+## 2026-10-29: Tom's arrival stretch (painted)
+- `tools/sprite-bake/src/tom-stretch-v1.png` (8 front-facing poses) baked to `art/chars/tom-stretch.webp`; `TOM_STRETCH` (data/tom-hires-use.js) holds them: tired, start, full, side, crack, neck, exhale, fresh.
+- `engine/intro.js`: the cab-line stretch now plays all of them over 5.2 s (`drawStretchPainted`), with a second exhale sound; the old drawn-arms version remains as the fallback when `TOM_HIRES_OFF` is set.
+
+## 2026-10-29: Tom's custom battle poses and a front-facing walk
+- New walk sheet: Tom's head faces straight at the camera when he walks toward you (`tom-walk-v2.png` replaced).
+- New pose sheet `tools/sprite-bake/src/tom-poses-v1.png` (12 poses) baked to `art/chars/tom-poses.webp` (own canvas, so Tom's idle box and Rose's shoulder ride are unchanged). On `BATTLE_SPRITES.tom` as `hold, annoyed, tw_windup, tw_follow, lift, fling, unbox, flick, brush, limit, startled, direct`; use them as `f:'hold'` in a move's `ST.keys`.
+- Wired so far: Press Start (`button_mash`: hold, annoyed, wind-up, throw). The `hold` pose has a painted controller, so the game's own controller is skipped until the "UGH" beat. Not wired yet: lift (Dutch Oven), fling (Starter Splash), unbox, flick (Flashcard Flurry), brush (Kanji Strike), limit (Final Boss), startled, direct.
+- Outfit recolour on these poses uses fixed torso fractions (rough).
 
 ## 2026-10-28: Painted plate for the Moon Club
 - The Moon Club hall (map id `moonclub`, chapter 9) now uses Tom's painting (`art/moonclub.webp`, 1920 x 1408, 30 x 22 tiles at 64 px, entry in `PLATES`). The ASCII plan stays underneath as the invisible tile layer; a `plateMask` is the walk map. The Dome (upstairs) is not painted yet.
@@ -455,3 +545,11 @@ Known: Censor balance checked by script only (tune B2_FOES.censor in data/ch19-b
 No existing spoken lines were reworded. New dialogue is unbaked. New speakers needing cast entries in data/dialog-cast.js: Stillness Core and Forever Engine (narrator), Vance (reused), Oblivion Censor, Sal, Sol, Nara. Spoken battle lines for the relays and the seven care acts reuse existing keys. Older owed: 7 Michael/Olivia re-bakes, Vance, Archivist, Floor 60/59, Mrs. Alvarez, Dead-Letter Office.
 Engine: BENCH CALL now works in the Leviathan and Julian fights (B2_BENCH_FIGHTS), near free in Julian's.
 Known: Dot says "ten doors" (should be eleven); ch15 QUIET glyphs; ch17_test pre-existing failure; ch18 flaky roster check.
+
+## Rose extra poses and painted shoulder ride
+- 12 new painted battle poses (boop, boopBack, raspberry, boo, tiara, hug, balance, lookout, throwWind, throwRel, sitStory, sitTea) baked from Sheet A into `art/chars/rose-battle-x.webp`; wired into Boop, Silly, Boo!!, Lamby Hug, Bedtime Story, Floor Is Lava, Lookout Lamby.
+- Painted shoulder ride (battle and overworld) replaces the old pixel ride; seat anchors in `tools/sprite-bake/rose-ride-anchors.json`.
+- Overworld extras (crouch, jump, wave, hold) baked into `ROSE_OW.extra`; no scene uses them yet. Tiara, tiara-free Macaroni Crown, sitTea and throw poses for Ms. Cathy are unused so far.
+
+## Rose Boop: painted jab
+- Boop now uses three painted frames (jab0 wind-up, jab1 extended index finger, jab2 recoil) from `tools/sprite-bake/src/rose-jab-v2.png`, lunging so the fingertip lands on the enemy's nose at the hit. The old drawn-on arm (`rf_poke`) is no longer used by Boop.

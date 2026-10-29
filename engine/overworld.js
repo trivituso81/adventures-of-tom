@@ -224,6 +224,12 @@ function pressAction() {
       for(const m of party) { m.hp=m.maxHp; m.mp=m.maxMp; }
       sfx.fountain();
       openDialog(o.name,[text,storyVariant(o,'restoreText')||('The spray is freezing. Everyone is completely restored.'+(party.includes(rose)?' Rose is thrilled.':''))]);
+    } else if(o.ride) {
+      // A call button: ask first, then the party rides to another room (the lobby elevator up to TNB's loft).
+      const [to,sx,sy,f]=o.ride;
+      openChoice(o.name,[text,o.ridePrompt||'Ride up?'],[
+        {label:'Enter TNB\'s',fn:()=>beginTransition({kind:'edge',to,spawn:{x:sx,y:sy},facing:f})},
+        {label:'Not now',fn:()=>{}}]);
     } else {
       openDialog(o.name,[text]);
     }

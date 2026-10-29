@@ -35,6 +35,15 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v1.png'),
+        [['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling'], ['unbox', 'flick', 'brush', 'limit', 'startled', 'direct']]).items():
+    poses['c_' + nm] = im
+STRETCH = ['tired', 'start', 'full', 'side', 'crack', 'neck', 'exhale', 'fresh']
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-stretch-v1.png'), [STRETCH[:4], STRETCH[4:]]).items():
+    poses['s_' + nm] = im
+CUSTOM2 = ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v2.png'), [CUSTOM2[:6], CUSTOM2[6:]], dilate=1).items():
+    poses['c_' + nm] = im
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
@@ -178,11 +187,18 @@ def fmt_rows(rows, indent='    '):
 battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+CUSTOM = ['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling', 'unbox', 'flick', 'brush', 'limit', 'startled', 'direct']
+CUSTOM += ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
-bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
+# custom poses: their own canvas (some are taller than the idle), feet on the bottom row and head on the centre column
+cu_big = tighten(place({c: scaled_to(poses['c_' + c], fb) for c in CUSTOM}, KB, 'head'), KB)
+bt_pal, all_rows = rows_of({**bt_big, **cu_big}, KB, args.colors)      # one shared palette
+bt_rows = {k: all_rows[k] for k in bt_big}
+cu_rows = {k: all_rows[k] for k in cu_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'tom-battle.webp'))
+cu_rects = pack(cu_big, os.path.join(ART, 'tom-poses.webp'))
 
 # knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
@@ -194,7 +210,13 @@ ko_rects = pack(ko_big, os.path.join(ART, 'tom-ko.webp'))
 fo = args.ow_h * KW / poses['w_down_stand'].height
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
-ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
+# arrival stretch (town view, facing the camera): scaled so the relaxed standing pose matches the walk sprite's standing height
+fs = fo * poses['w_down_stand'].height / poses['s_fresh'].height
+st_big = tighten(place({c: scaled_to(poses['s_' + c], fs) for c in STRETCH}, KW, 'center'), KW)
+ow_pal, all_ow_rows = rows_of({**ow_big, **st_big}, KW, args.colors)
+ow_rows = {k: all_ow_rows[k] for k in ow_big}
+st_rows = {k: all_ow_rows[k] for k in st_big}
+st_rects = pack(st_big, os.path.join(ART, 'tom-stretch.webp'))
 ow_rects = pack(ow_big, os.path.join(ART, 'tom-ow.webp'))
 
 def mirror(rows):
@@ -230,6 +252,8 @@ meta = {
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
 atlas = {'bt': {'src': 'art/chars/tom-battle.webp', 'k': KB, 'rects': bt_rects},
+         'pose': {'src': 'art/chars/tom-poses.webp', 'k': KB, 'rects': cu_rects},
+         'stretch': {'src': 'art/chars/tom-stretch.webp', 'k': KW, 'rects': st_rects},
          'ko': {'src': 'art/chars/tom-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/tom-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
@@ -242,9 +266,11 @@ js.append("const TOM_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel') :
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
+js.append("  pose:{" + ",".join(f"{k}:" + fmt_rows(cu_rows[k]) for k in CUSTOM) + "},")
+js.append("  stretch:{" + ",".join(f"{k}:" + fmt_rows(st_rows[k]) for k in STRETCH) + "},")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):

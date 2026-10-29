@@ -415,8 +415,8 @@ SC.bv_rod=(s,u)=>{ const ms=s.t*1000,P=s.P,h=hand(); gfx.globalAlpha=fade(u,.97)
   else if(ms>=P.tug&&ms<P.reel1) { const q=ez((ms-P.tug)/220); ang=lerp(.5,1.55,q); bend=.8*(1-ez((ms-P.tug-300)/400)); }
   else if(ms>=P.reel1) ang=lerp(1.55,1.1,ez((ms-P.reel1)/300));
   if(ms>P.home) ang=1.4;
-  const H={ang,len:132,bend}; HELD.rod(H,u,h.x,h.y);
-  if(ms>P.reel0&&ms<P.reel1+200) { const cx=h.x-6,cy=h.y+14,a=(ms-P.reel0)/70; EO(cx,cy,13,13,'#aeb3ba'); E(cx,cy,5,5,'#5e6670'); LnO(cx,cy,cx+Math.cos(a)*16,cy+Math.sin(a)*16,3,'#d8dce2'); EO(cx+Math.cos(a)*16,cy+Math.sin(a)*16,4,4,RED);
+  const PN=!!BSP().x_sit1,H={ang,len:132,bend}; if(PN) { H.tx=h.x; H.ty=h.y; } else HELD.rod(H,u,h.x,h.y);   // painted fishing poses already hold the rod; h is its tip
+  if(ms>P.reel0&&ms<P.reel1+200) { const cx=h.x-6,cy=h.y+14,a=(ms-P.reel0)/70; if(!PN) { EO(cx,cy,13,13,'#aeb3ba'); E(cx,cy,5,5,'#5e6670'); LnO(cx,cy,cx+Math.cos(a)*16,cy+Math.sin(a)*16,3,'#d8dce2'); EO(cx+Math.cos(a)*16,cy+Math.sin(a)*16,4,4,RED); }
     if(ms>P.reel0+150) bigWord('REEL REEL',cx,h.y-58,GOLD,2); }
   if(ms>P.sit&&ms<P.home) { let fx2=P.fx,fy=P.fy+Math.sin(ms/260)*1.5;
     if(ms>P.nudge&&ms<P.nudge+300) fy+=Math.sin((ms-P.nudge)/300*Math.PI)*7;
@@ -431,9 +431,9 @@ SC.bv_splash=(s,u)=>{ const x=s.x,y=s.y; gfx.globalAlpha=fade(u,.6);
   const col=Math.sin(cl(u*1.6)*Math.PI); if(col>0) { E(x,y-col*40,14,col*44,'#bfe6ff'); E(x,y-col*40,8,col*34,'#ffffff'); }
   gfx.globalAlpha=fade(u,.5)*.8; ring(x,y,20+u*60,5+u*14,3,'#d8f0ff'); };
 SC.bv_yank=(s,u)=>{ const ms=s.t*1000,q=cl(ms/700); if(q<1) lift(s.f,-Math.sin(q*Math.PI)*34,Math.sin(q*Math.PI*2)*.25,Math.sin(q*Math.PI)*14); };
-B.patient_angler=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
+B.patient_angler=E2=>{ const FA=!!BSP().x_sit1; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
   const P={sit:1150,nudge:2000,tug:2500,reel0:2850,reel1:3500,home:3700,fx:F.x+F.w*.5+20,fy:F.base-2,ft:F.mid};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1150,x:p.x,y:p.y,f:'sit'},{t:2500,f:'wind',dx:u=>ez(u)*8},{t:2850,f:'act',dx:(u,tt)=>6+Math.sin(tt*30)*2},{t:3500,f:'celeb',hop:6},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1150,x:p.x,y:p.y,f:FA?'x_fish1':'sit'},{t:1450,f:FA?'x_sit1':'sit'},{t:1850,f:FA?'x_sit2':'sit'},{t:2200,f:FA?'x_sit1':'sit'},{t:2500,f:FA?'x_fish4':'wind',dx:u=>ez(u)*8},{t:2850,f:FA?((u,tt)=>Math.floor(tt*7)%2?'x_fish3':'x_fish2'):'act',dx:(u,tt)=>6+Math.sin(tt*30)*2},{t:3500,f:'celeb',hop:6},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over with his rod and sits down. The fish can wait for him.'); say(m.id,'patient_angler'); scene('bv_rod',3.8,{P}); scene('bv_pond',3.7,{P:{on:1100,x:P.fx,y:P.fy+3}}); }],
     [2000,()=>{ ST.jolt(f,.12); sfx.boop?sfx.boop():sfx.select(); setMessage(cap(f.def?f.def.the:'it')+' gets impatient and nudges the float.'); }],
@@ -520,10 +520,10 @@ SC.bv_cone=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return;
   const layer=(f,c,jit)=>{ const pts=[[mo.x,mo.y]]; for(let k=0;k<=8;k++) { const q=k/8,a=a0+lerp(-spread,spread,q)*f,r=len*(.92+.08*Math.sin(s.t*40+k*1.7))+Math.sin(s.t*55+k*2.3)*jit; pts.push([mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r]); } gfx.globalAlpha=shrink*.95; poly(pts,c,f===1?3:0); };
   layer(1,'#e0402e',8); layer(.7,'#ff8a2a',6); layer(.38,'#ffe070',4);
   for(let k=0;k<10;k++) { const q=((s.t*2.2)+k/10)%1,a=a0+Math.sin(k*2.1)*spread*.8,r=len*q; gfx.globalAlpha=(1-q)*shrink; E(mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r-q*10,3+q*4,3+q*4,k%2?'#ffd040':'#ff6a2a'); } };
-B.pepper_breath=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),me=ST.unit(m);
+B.pepper_breath=E2=>{ const PB=BSP().x_pepper?'x_pepper':'wind',PF=BSP().x_fire?'x_fire':'spread'; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),me=ST.unit(m);
   const P={show:1350,eat:1700,red:1950,fire:2400,done:3500,tx:F.x+F.w*.15,ty:F.mid},hit=2600;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1300,f:'act'},{t:1700,f:'wind'},{t:1950,f:'hip',dx:(u,tt)=>Math.sin(tt*40)*2},
-    {t:2350,f:'spread',dx:u=>-ez(u*4)*8},{t:3300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1300,f:'act'},{t:1700,f:PB},{t:1950,f:'hip',dx:(u,tt)=>Math.sin(tt*40)*2},
+    {t:2350,f:PF,dx:u=>-ez(u*4)*8},{t:3300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over with one homegrown cayenne pepper.'); say(m.id,'pepper_breath'); scene('bv_pepper',3.6,{P,st}); }],
     [1300,()=>{ setMessage('He holds it up. He grew it himself. He\'s very proud of it.'); }],
@@ -1091,6 +1091,7 @@ const ensureArt=()=>{ if(ready) return; ready=true; const sp=BSP(); Object.assig
   FR.y_run1R=mir(FR.y_run1); FR.y_run2R=mir(FR.y_run2); reg(FR.y_run1R,'run1',true); reg(FR.y_run2R,'run2',true);
   for(const k of ['act','throw','aim','hip','wind']) sp['bare_'+k]=FR['bare_'+k]; };
 const youngOn=()=>{ ensureArt(); const sp=BSP(); if(saved) return; saved={wind:sp.wind,spread:sp.spread,hip:sp.hip,run:sp.run,runFlip:sp.runFlip};
+  if(sp.yg_ready) { sp.wind=sp.yg_ready; sp.spread=sp.yg_wind; sp.hip=sp.yg_celebr; sp.run=[sp.yg_run1,sp.yg_run2]; sp.runFlip=[sp.yg_run1R,sp.yg_run2R]; return; }   // painted young runner
   sp.wind=FR.y_wind; sp.spread=FR.y_spread; sp.hip=FR.y_hip; sp.run=[FR.y_run1,FR.y_run2]; sp.runFlip=[FR.y_run1R,FR.y_run2R]; };
 const youngOff=()=>{ if(!saved) return; const sp=BSP(); Object.assign(sp,saved); saved=null; };
 // ---- the baseball cap, drawn at final size (hand at the origin, brim to the left) ----
@@ -1125,12 +1126,12 @@ SC.bv_cap=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.off||ms>P.on) return; const 
   if(ms<P.off+200) ang=lerp(-2.4,-1.25,ez((ms-P.off)/200));
   P.sw.forEach(([a,b],k)=>{ if(ms<a||ms>b+320) return; const cur=ms<b?lerp(-1.25,.55,ez((ms-a)/(b-a))):.55,al=ms<b?1:1-(ms-b)/320;
     for(const [r,w,c] of [[REACH*.95,9,OUT],[REACH*.95,5,k===2?GOLD:'#ffffff'],[REACH*.7,4,OUT],[REACH*.7,2,'#dfe8f0']]) { gfx.globalAlpha=al*(c===OUT?.7:.9); gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(px,py,r,Math.PI-1.25,Math.PI+cur); gfx.stroke(); } });
-  gfx.globalAlpha=1; bigCap(px,py,ang);
+  gfx.globalAlpha=1; if(!BSP().x_swat) bigCap(px,py,ang);
   const st=s.st; if(st&&st.x!=null&&ms<P.off+700) { const p=head(st,8),q=(ms-P.off)/700; gfx.globalAlpha=1-q; for(let k=0;k<3;k++) { const sx=p.x-14+k*12,sy=p.y-14-k%2*6; Ln(sx-3-q*6,sy,sx+3+q*6,sy,2,'#ffffff'); Ln(sx,sy-3-q*6,sx,sy+3+q*6,2,'#ffffff'); } } };
-B.cap_swat=E2=>{ ensureArt(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
+B.cap_swat=E2=>{ ensureArt(); const SW=BSP().x_swat?'x_swat':'bare_throw',SF=BSP().x_follow?'x_follow':'bare_act'; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
   const sw=[[1800,1950],[2150,2300],[2500,2650]],hit=2650;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1200,x:p.x,y:p.y,f:'hip'},{t:1450,f:'bare_act'},
-    {t:1800,f:'bare_throw',dx:-6},{t:1950,f:'bare_act'},{t:2150,f:'bare_throw',dx:-8},{t:2300,f:'bare_act'},{t:2500,f:'bare_throw',dx:u=>-6-ez(u)*8},{t:2950,f:'bare_hip'},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1200,x:p.x,y:p.y,f:'hip'},{t:1450,f:SF},
+    {t:1800,f:SW,dx:-6},{t:1950,f:SF},{t:2150,f:SW,dx:-8},{t:2300,f:SF},{t:2500,f:SW,dx:u=>-6-ez(u)*8},{t:2950,f:SF},
     {t:3200,f:'hip'},{t:3450,f:back(p.x,me),hop:2,hn:6},{t:4400,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over. At his own pace. Something is pestering his family.'); say(m.id,'cap_swat'); scene('bv_cap',3.3,{st,P:{off:1450,on:3200,sw}}); scene('bv_dodge',2.6,{f,P:{d1:1850,d2:2200}}); }],

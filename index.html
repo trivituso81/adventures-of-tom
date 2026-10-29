@@ -474,6 +474,40 @@ html.landscape #splash-panel{border-radius:8px 8px 0 0}
 .sp-choice.admin.sel{background:#ffffff14;border-color:#ffffff55;color:var(--ink-dim)}
 .sp-soon{background:#ffffff1f;color:var(--ink-dim)}
 
+/* Welcome art (Tom, 2026-10-29): painted title scene (art/welcome.webp) behind a navy and gold menu panel. */
+#splash{background:#0b0f1a}
+#splash::before{content:'';position:absolute;inset:-24px;background:url(art/welcome.webp) center/cover no-repeat;filter:blur(18px) brightness(.55);z-index:0}
+#splash-art{display:block;z-index:1;background:linear-gradient(to bottom,#0a0e1800 80%,#0a0e18b8 91%,#0a0e18ee 100%),url(art/welcome.webp) center top/cover no-repeat}
+html.landscape #splash-art{background:linear-gradient(to bottom,#0a0e1800 58%,#0a0e18c8 82%,#0a0e18f0 100%),url(art/welcome.webp) 50% 12%/auto 255% no-repeat;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
+#splash-rotate,#splash-panel{z-index:3}
+#splash #splash-rotate{border:1px solid #b8914a;background:#141a26d9;color:#f3dfa8}
+#splash #splash-panel{left:4%;right:4%;bottom:calc(14px + env(safe-area-inset-bottom));padding:26px 12px 12px;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18,inset 0 0 0 2px #0a0e18,inset 0 0 0 3px #6d5629,0 10px 26px #000a;font-family:Georgia,'Palatino Linotype',Palatino,serif}
+#splash .sp-tab{top:-17px;left:22px;padding:6px 18px;border:2px solid #6d5629;border-radius:5px;background:#141924;color:#f2e6cc;font-family:inherit;font-weight:400;font-size:15px;letter-spacing:.3px;text-shadow:none;box-shadow:0 0 0 2px #0a0e18}
+#splash .sp-choice{border:2px solid #4b5160;border-radius:5px;background:linear-gradient(#2b313e,#232834);color:#f2e6cc;font-family:inherit;box-shadow:inset 0 0 0 1px #0a0e18}
+#splash .sp-choice .sp-name{font-weight:400;font-size:17px;letter-spacing:1px;font-variant:small-caps;text-transform:none}
+#splash .sp-choice .sp-sub{color:#aeb6c6;font-size:12px}
+#splash .sp-choice.sel{background:linear-gradient(#1f5393,#143a6e);border-color:#d9a94f;color:#fff6e0;box-shadow:inset 0 0 0 1px #f3d58a66,0 0 10px #d9a94f55}
+#splash .sp-choice.sel .sp-sub{color:#cfe0f7}
+#splash .sp-choice.sel .sp-name::before{content:'\25B6\00a0';color:#f0b94d;font-size:.8em;vertical-align:1px}
+#splash .sp-choice.locked{background:#1c212c;border-style:dashed;border-color:#4b5160;color:#7d8496}
+#splash .sp-choice.locked.sel{background:#232936;border-color:#8a7440;color:#a3a9b8;box-shadow:none}
+#splash .sp-choice.admin{background:transparent;border:1px solid #4b5160;color:#8a92a4;box-shadow:none}
+#splash .sp-choice.admin .sp-name{font-size:11px}
+#splash .sp-choice.admin.sel{background:#ffffff10;border-color:#b8914a;color:#f2e6cc;box-shadow:none}
+#splash .sp-choice.admin.sel .sp-name::before{content:''}
+#splash .sp-cast img{border-color:#6d5629;background:#141924}
+#splash .dialog-footer{color:#aeb6c6;border-color:#ffffff1f}
+html.landscape #splash #splash-panel{left:calc(4% + env(safe-area-inset-left));right:calc(4% + env(safe-area-inset-right));bottom:calc(6px + env(safe-area-inset-bottom));padding:22px 10px 6px}
+html.landscape #splash .sp-tab{font-size:13px;padding:4px 14px;top:-15px}
+html.landscape #splash .sp-choice .sp-name{font-size:14px}
+html.landscape #splash .sp-choices.launch{grid-template-columns:1fr 1fr auto;gap:8px;align-items:stretch}
+html.landscape #splash .sp-choice.admin{grid-column:auto;justify-self:end;align-self:end}
+html.landscape #splash .sp-choice{padding:6px 10px;gap:2px}
+html.landscape #splash .sp-choice .sp-sub{font-size:11px;line-height:1.25}
+html.landscape #splash .dialog-footer{margin-top:4px;padding-top:3px;font-size:10px}
+#splash .sp-text{margin:0 2px 10px;color:#f2e6cc;font-size:14px;line-height:1.45;white-space:pre-line}
+html.landscape #splash .sp-text{margin-bottom:6px;font-size:12px;line-height:1.3}
+
 /* Pause menu windows */
 #menu,#shop{background:#0c0e12eb}
 .mwin,.menu-panel{border:2px solid var(--edge);border-radius:7px;background:var(--win);box-shadow:var(--bevel),0 4px 0 #0007;color:var(--ink)}
@@ -895,6 +929,12 @@ html.landscape #dialog.has-portrait #dialog-text{min-height:68px}
 /* Portrait phone: the box hugs its content (portrait face sits above the footer line); the touch controls hide while it is open. */
 html:not(.landscape) #dialog{min-height:0}
 html:not(.landscape) #dialog-text{min-height:calc(64px * 4 / 3 + 4px)}
+/* Landscape phone: the box hugs its content too (it was a fixed 156px, almost half the screen). Smaller face, tighter padding. */
+html.landscape #dialog{min-height:0;padding:12px calc(14px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left))}
+html.landscape #dialog-portrait{top:12px;width:56px;height:56px}
+html.landscape #dialog.has-portrait #dialog-text,html.landscape #dialog.has-portrait #dialog-choices{margin-left:68px}
+html.landscape #dialog-text,html.landscape #dialog.has-portrait #dialog-text{flex:none;min-height:56px;font-size:14px;line-height:1.4}
+html.landscape .dialog-footer{margin-top:4px;padding-top:3px}
 main:has(#dialog:not([hidden])) #controls{visibility:hidden}
 
 /* Back frame under the menu commands */
@@ -966,6 +1006,7 @@ html.landscape .slot-name{width:56px}
     <button id="splash-rotate" type="button" aria-label="Switch between portrait and landscape">&#8635;</button>
     <section id="splash-panel" aria-label="Choose how to play">
       <div class="sp-tab">Choose how to play</div>
+      <div class="sp-text" hidden></div>
       <div class="sp-choices">
         <button class="sp-choice sel" data-i="0" type="button"><span class="sp-name">DEMO</span><span class="sp-sub">Long Island and Los Angeles. Play now.</span></button>
         <button class="sp-choice locked" data-i="1" type="button" aria-disabled="true"><span class="sp-name">FULL GAME</span><span class="sp-sub">Coming soon. Still being built.</span></button>
@@ -1078,15 +1119,15 @@ html.landscape .slot-name{width:56px}
 <script src="data/contraction-alias.js"></script>
 <script src="engine/speech.js"></script>
 <script src="engine/battle-state.js"></script>
-<script src="data/battle-sprites.js"></script>
+<script src="data/battle-sprites.js?v=tom4"></script>
 <script src="data/ko-sprites.js"></script>
 <script src="engine/battle.js"></script>
-<script src="engine/battle-draw.js?v=ride2"></script>
+<script src="engine/battle-draw.js?v=ride6"></script>
 <script src="engine/recruit-fx.js"></script>
 <script src="engine/stage.js"></script>
 <script src="data/grace-wheel.js"></script>
 <script src="engine/recruit-moves.js"></script>
-<script src="engine/tom-moves.js"></script>
+<script src="engine/tom-moves.js?v=tom4"></script>
 <script src="engine/grace-moves.js"></script>
 <script src="engine/rose-moves.js"></script>
 <script src="engine/tnb-moves.js"></script>
@@ -1102,10 +1143,10 @@ html.landscape .slot-name{width:56px}
 <script src="engine/battle2-ui.js"></script>
 <script src="engine/battle2-moves.js"></script>
 <script src="data/kid-sprites.js"></script>
-<script src="engine/battle2-kind.js"></script>
+<script src="engine/battle2-kind.js?v=tom4"></script>
 <script src="engine/battle2-traits.js"></script>
 <script src="data/rose-ride.js"></script>
-<script src="engine/rose-ride.js?v=ride2"></script>
+<script src="engine/rose-ride.js?v=ride6"></script>
 <script src="engine/battle2-effects.js"></script>
 <script src="engine/progress.js"></script>
 <script src="engine/feel.js"></script>
@@ -1115,37 +1156,55 @@ html.landscape .slot-name{width:56px}
 <script src="engine/overworld.js"></script>
 <script src="data/font.js"></script>
 <script src="data/overworld-sprites.js"></script>
-<script src="engine/tiles.js"></script>
+<script src="engine/tiles.js?v=tom4"></script>
 <script src="data/villagers.js"></script>
 <script src="data/recruit-rig.js"></script>
-<script src="engine/painted.js"></script>
-<script src="data/tom-hires.js"></script>
-<script src="data/tom-hires-use.js"></script>
+<script src="engine/painted.js?v=tom4"></script>
+<script src="data/tom-hires.js?v=tom4"></script>
+<script src="data/tom-hires-use.js?v=tom4"></script>
 <script src="data/grace-hires.js"></script>
 <script src="data/grace-hires-use.js"></script>
+<script src="data/grace-wheel-hires.js"></script>
+<script src="data/grace-wheel-use.js"></script>
 <script src="data/deedee-hires.js"></script>
 <script src="data/deedee-hires-use.js"></script>
+<script src="data/amy-hires.js"></script>
+<script src="data/amy-hires-use.js"></script>
+<script src="data/boppy-hires.js"></script>
+<script src="data/boppy-hires-use.js"></script>
 <script src="data/rose-hires.js"></script>
 <script src="data/rose-hires-use.js"></script>
-<script src="data/recruit-sprites.js"></script>
-<script src="data/tomride-hires.js?v=ride2"></script>
-<script src="data/tomride-use.js?v=ride2"></script>
+<script src="data/tnb-hires.js"></script>
+<script src="data/tnb-hires-use.js"></script>
+<script src="data/recruit-sprites.js?v=tom4"></script>
+<script src="data/tomride-hires.js?v=ride6"></script>
+<script src="data/tomride-use.js?v=ride6"></script>
 <script src="data/npc-sprites.js"></script>
 <script src="data/ellie-hires.js"></script>
 <script src="data/ellie-hires-use.js"></script>
-<script src="engine/gear.js"></script>
+<script src="engine/gear.js?v=tom4"></script>
 <script src="data/tnb-battle.js"></script>
 <script src="data/recruit-stances.js"></script>
 <script src="data/recruit-run.js"></script>
 <script src="data/recruit-poses.js"></script>
 <script src="data/deedee-poses.js"></script>
+<script src="data/deedee-extra.js"></script>
+<script src="data/deedee-brisk.js"></script>
 <script src="data/deedee-hires-battle.js"></script>
 <script src="data/battle-size.js"></script>
 <script src="data/tnb-poses.js"></script>
+<script src="data/tnb-hires-battle.js"></script>
 <script src="data/boppy-poses.js"></script>
+<script src="data/boppy-extra.js"></script>
+<script src="data/boppy-hires-battle.js"></script>
 <script src="data/amy-poses.js"></script>
+<script src="data/amy-hires-battle.js"></script>
+<script src="data/amy-hires-extra.js"></script>
+<script src="data/amy-hires-extra-use.js"></script>
 <script src="data/nara.js"></script>
-<script src="engine/town-render.js?v=ride2"></script>
+<script src="data/nara-hires.js"></script>
+<script src="data/nara-hires-use.js"></script>
+<script src="engine/town-render.js?v=ride6"></script>
 <script src="engine/la-render.js"></script>
 <script src="engine/marsh-render.js"></script>
 <script src="engine/backlot-render.js"></script>
@@ -1158,7 +1217,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/infinity-render.js"></script>
 <script src="engine/plate.js"></script>
 <script src="engine/draw.js"></script>
-<script src="engine/intro.js"></script>
+<script src="engine/intro.js?v=tom4"></script>
 <script src="engine/travel.js"></script>
 <script src="engine/nara.js"></script>
 <script src="engine/story.js"></script>
@@ -1191,7 +1250,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=ride2"></script>
+<script src="engine/splash.js?v=welcome5"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js"></script>
@@ -1200,7 +1259,7 @@ html.landscape .slot-name{width:56px}
 <script src="engine/dialog-voice.js"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js"></script><!-- tap to walk -->
-<script src="engine/main.js?v=ride3"></script>
+<script src="engine/main.js?v=ride6"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js"></script>

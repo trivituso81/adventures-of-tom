@@ -21,7 +21,9 @@ const SPLASH_CAST=[
 ];
 const SPLASH_HOP=.42,SPLASH_STEP=.3;
 // Welcome screen: Tom, Grace, Rose and Deedee are drawn 33% bigger (Rose rides on Tom, so she grows with him). Tom's call, 2026-10-29.
-const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33};
+const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33,nara:typeof NARA_SIZE!=='undefined'&&OW.nara.k?NARA_SIZE:1};   // Nara 1.15 (data/nara-hires-use.js)
+// Welcome screen shows the painted art (art/welcome.webp, set in index.html). Set false to bring back the drawn cast scene.
+const SPLASH_ART=true;
 let FULL_GAME_OPEN=true;   // opened in C1 (2026-10-20): chapter 1 is playable
 
 function startSplash() {
@@ -93,7 +95,7 @@ const SPLASH_MODES={
   launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',layout:'launch',choices:()=>{
     const n=splashSaveCount();
     return [
-      {name:'START NEW',sub:'Pick a Part and a chapter.',to:'new'},
+      {name:'NEW GAME',sub:'Pick a Part and a chapter.',to:'new'},
       {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():''),act:()=>splashGo(loadMenu)},
       {name:'ADMIN',cls:'admin',to:'admin'}]; }},
   new:{tab:'Start New',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
@@ -123,6 +125,7 @@ function splashSetMode(mode,sel=0) {
   const M=SPLASH_MODES[mode],el=$('splash'),box=el.querySelector('.sp-choices');
   el.querySelector('.sp-tab').textContent=M.tab;
   $('sp-cue').textContent=M.cue;
+  const tx=el.querySelector('.sp-text'); if(tx) { tx.textContent=M.text||''; tx.hidden=!M.text; }
   const list=M.choices(); splash.list=list;
   splash.sel=Math.max(0,Math.min(list.length-1,sel));
   box.classList.toggle('grid',!M.layout&&list.length>3);
@@ -158,15 +161,40 @@ function splashPick(i) {
 // Open a submenu (remembers where to land when coming back).
 function splashOpen(mode) { sfx.select(); splashSetMode(mode); }
 function splashBack() {
+  if(splash.mode==='ask') { const b=(splash.list||[]).find(c=>c.cls==='back'); if(b) b.act(); return; }
   const up=SPLASH_PARENT[splash.mode]; if(!up) return;
   const from=splash.mode; sfx.move();
   splashSetMode(up);
   const i=(splash.list||[]).findIndex(c=>c.to===from);
   if(i>=0) { splash.sel=i; splashMark(); }
 }
-// Leave the title screen for a prompt over the town (new game warning, load list, chapter jump). BACK in that prompt
-// returns here, to the same menu and choice (splashReturn).
-function splashGo(next) { sfx.select(); unlockAudio(); splash.ret=splash.mode; splash.retSel=splash.sel; splashLeave(next); }
+// Pick from the welcome page. The prompts that follow (new game warning, load list, chapter jump) are shown on this same
+// page, in the same panel (titleAsk). BACK returns to the menu and choice the player came from (splashReturn). If the pick
+// starts a game with no prompt, the welcome page fades out over the town.
+function splashGo(next) {
+  sfx.select(); unlockAudio(); splash.ret=splash.mode; splash.retSel=splash.sel;
+  startTitle(()=>{ splash.asked=false; next(); if(!splash.asked) splashFade(); });
+}
+function splashFade() {
+  splash.active=false;
+  const el=$('splash'); if(!el) return;
+  el.classList.add('out');
+  setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
+}
+// A prompt (same shape as openChoice: name, text, [{label,fn}]) drawn on the welcome page instead of the dialogue box.
+function titleAsk(name,text,options) {
+  const el=$('splash');
+  if(!el||!splash.wired) { openChoice(name,text,options); return; }
+  splash.asked=true;
+  const was=splash.active&&!el.hidden;
+  el.hidden=false; el.classList.remove('out'); splash.active=true;
+  SPLASH_MODES.ask={tab:name,cue:'A / Enter to pick. B / Esc to go back',text:Array.isArray(text)?text.join('\n'):text,
+    choices:()=>options.map(o=>o.label==='BACK'
+      ?{name:o.label,cls:'back',act:()=>{ sfx.move(); o.fn(); }}
+      :{name:o.label,act:()=>{ sfx.select(); splash.asked=false; o.fn(); if(!splash.asked) splashFade(); }})};
+  splashSetMode('ask');
+  if(!was) { splash.last=performance.now(); requestAnimationFrame(splashFrame); }
+}
 function splashLab(i) {
   sfx.select(); unlockAudio(); splash.active=false;
   const el=$('splash'); el.classList.add('out');
@@ -196,9 +224,10 @@ function splashLeave(next) {
 // BACK from the load list or a start warning: return to the title screen where the player was.
 function splashReturn() {
   const el=$('splash'); if(!el) return false;
+  const was=splash.active&&!el.hidden;
   el.hidden=false; el.classList.remove('out');
   splash.active=true; splashSetMode(SPLASH_MODES[splash.ret]?splash.ret:'launch',splash.retSel||0);
-  splash.last=performance.now(); requestAnimationFrame(splashFrame);
+  if(!was) { splash.last=performance.now(); requestAnimationFrame(splashFrame); }
   return true;
 }
 // Gamepad: called from pollGamepad while the splash is up.
@@ -281,6 +310,7 @@ const splashW=()=>splash.c?splash.c.width:390;
 function splashFrame(now) {
   const el=$('splash');
   if(!el||el.hidden) return;
+  if(SPLASH_ART) { splashCastDraw(now/1000); requestAnimationFrame(splashFrame); return; }
   const dt=Math.min(.05,Math.max(0,(now-splash.last)/1000)); splash.last=now;
   splashUpdate(dt);
   splashDraw();
@@ -388,10 +418,10 @@ function splashScene(W,H,panelH,time) {
     const n=splash.nara,home=X(naraM.fx),cx=home+Math.round(n.x),lift=n.state==='idle'?hopY(naraM):Math.abs(Math.round(Math.sin(time*18)*S*2));
     L.naraHome=home; const set=OW.nara,run=n.state==='out'||n.state==='back';
     const frame=run?1+Math.floor(time*10)%2:(naraM.hopT>=0?1:0);
-    shadow(cx,naraFy,run?set.side[0][0].length:set.down[0][0].length,lift);
+    shadow(cx,naraFy,(run?set.side[0][0].length:set.down[0][0].length)*kOf(set),lift);
     drawOne(set,frame,cx,naraFy,lift,run?false:undefined);
     if(n.carry) { // ball in her mouth (she faces right)
-      const bx=cx+Math.round(set.side[0][0].length*S*.42),bY=naraFy-Math.round(set.side[0].length*S*.55)-lift;
+      const bx=cx+Math.round(set.side[0][0].length*S*kOf(set)*.42),bY=naraFy-Math.round(set.side[0].length*S*kOf(set)*.55)-lift;
       splashBall(bx,bY,S);
     }
     if(n.state==='idle'&&!run&&Math.floor(time*1.2)%5===0) { // wag: a tiny excited hop now and then
@@ -424,6 +454,38 @@ function splashScene(W,H,panelH,time) {
     gfx.globalAlpha=1-u; drawHeart(x,y,Math.max(1,S)); gfx.globalAlpha=1;
   }
 }
+// Painted welcome art (Tom, 2026-10-29): the family stands where the shadows fall on the plaza in art/welcome.webp.
+// Positions are in the picture's own pixels (941 x 1671) and are mapped through the same "cover, top" fit the CSS uses.
+// h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
+const SPLASH_IMG={w:941,h:1671};
+const SPLASH_ALL=1.1;   // Tom 2026-10-29: everyone on the welcome art 10% bigger (feet stay planted)
+const SPLASH_SPOTS=[
+  {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
+  {id:'tom',x:425,feet:1175,h:335},
+  {id:'tnb',x:170,feet:1198,h:250},
+  {id:'boppy',x:768,feet:1222,h:255},
+  {id:'grace',x:287,feet:1222,h:225},
+  {id:'amy',x:566,feet:1222,h:278},
+  {id:'deedee',x:672,feet:1258,h:278}
+];
+function splashCastDraw(time) {
+  const c=splash.c,box=$('splash'); if(!c||!box) return;
+  const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
+  if(c.width!==w||c.height!==h) { c.width=w; c.height=h; }
+  const g=splash.g; g.clearRect(0,0,w,h);
+  if(w>h) return;
+  const s=Math.max(w/SPLASH_IMG.w,h/SPLASH_IMG.h),ox=(w-SPLASH_IMG.w*s)/2;
+  const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
+  try {
+    for(const m of SPLASH_SPOTS) {
+      const set=m.id==='tom'&&OW.tomRide?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*SPLASH_ALL*s/fh;
+      const bob=Math.floor((time*1.6+SPLASH_SPOTS.indexOf(m)*.37)%2)*Math.max(1,Math.round(s*2));
+      drawSprite(fr,set.pal,Math.round(ox+m.x*s-fw*k/2),Math.round(m.feet*s-fh*k-bob),k);
+    }
+  } finally { gfx=prev; }
+}
+
 function splashBall(x,y,S) {
   const r=Math.max(2,Math.round(S*2.5));
   ellipse(x,y,r+1,r+1,'#2b2a26'); ellipse(x,y,r,r,'#c8e04a'); rect(x-r+1,y-1,r*2-2,Math.max(1,Math.round(S/2)),'#f4fbd0');

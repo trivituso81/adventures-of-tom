@@ -16,12 +16,14 @@ function movePlayer(dir) {
   const dest={x:player.move.tx,y:player.move.ty};
   if(!trail.length) trail.push({x:player.x,y:player.y});
   trail.push(dest);
-  // Indoors (houses and shops) the line is spread out: twice the gap between party members. Outside it stays one tile.
-  const gap=(currentMap&&!currentMap.outside)?2:1;
-  while(trail.length>followers.length*gap+2) trail.shift();
+  // Indoors (houses and shops) the line is spread out: 1.5 tiles between party members (it was 2; Tom asked for 25% less).
+  // Outside it stays one tile. A fractional gap lands between two trail tiles, so the spot is interpolated along the trail.
+  const gap=(currentMap&&!currentMap.outside)?1.5:1;
+  while(trail.length>followers.length*2+2) trail.shift();
   followers.forEach((f,k)=>{
-    const t=trail[trail.length-1-gap*(k+1)];
-    if(!t) return;
+    const at=trail.length-1-gap*(k+1),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
+    if(!a||!b) return;
+    const fr=at-lo,t={x:a.x+(b.x-a.x)*fr,y:a.y+(b.y-a.y)*fr};
     if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
     if(f.x===t.x&&f.y===t.y) return;
     f.facing=directionTo(t.x-f.x,t.y-f.y);

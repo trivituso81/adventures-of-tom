@@ -1391,6 +1391,20 @@ const LE_ROOMS=[
   {id:'elliehouse',w:12,h:10,
     style:{floor:'#cdb9c6',alt:'#d8c6d2',wall:'#7a5a78',trim:'#eadcea',pattern:'wood',rug:'#6a3a8a'},
     rug:[3,4,6,3],
+    // Painted plate (art/elliehouse.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Hutch and photo wall top left, kitchen top right, green sofa centre, tea table on the rug, dining table right,
+    // armchair and basket lower right, vanity and umbrella stand left, entry stairs bottom centre (door at 6,9).
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '######...###',
+      '######...###',
+      '##.....#####',
+      '##.....#####',
+      '##......####',
+      '##.##..#####',
+      '############'],
     npcs:[
       // Aunt Ellie: Deedee's aunt. Cosmopolitan, fashionable, sharp, wise, takes no nonsense. Lives here; visits the Rivituso house in chapters 9 and 10.
       {name:'Aunt Ellie',x:5,y:5,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,away:ELLIE_VISIT,lines:[
@@ -1409,11 +1423,13 @@ const LE_ROOMS=[
           'A good scarf fixes almost anything. Not Boppy. But almost anything.',
           'Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.']}],
     objects:[
-      ['shelf',1,1,3,1,'Hat shelf','Eleven hat boxes, one for every trip to Paris. A twelfth sits empty. Ellie is planning.'],
-      ['photo',5,1,1,1,'Framed photo','Ellie on a ship deck in a wide white hat, 1968. The caption says: Arrived fashionably late.'],
-      ['desk',8,1,3,1,'Writing desk','Cream stationery, a fountain pen, and a thank-you note for a favor nobody has done yet.'],
-      ['recliner',1,3,2,2,"Ellie's wardrobe",'Every hanger faces the same way. One hanger is empty, and Ellie will not say why.'],
-      ['pot',10,3,1,1,'White orchid','Alive for nine years, out of pure intimidation.'],
-      ['pot',1,7,1,1,'Umbrella stand','Six umbrellas, none for rain. Ellie says rain should dress better.'],
-      ['counter',8,7,3,1,'Tea tray','One silver tray, one good cup. A note on the saucer: The good china is not for Boppy.',{variant:'letters'}]]}
+      ['shelf',5,2,2,1,'Writing cabinet','Cream stationery, a fountain pen, and a thank-you note for a favor nobody has done yet. A white orchid watches from the corner, alive for nine years out of pure intimidation.'],
+      ['counter',7,2,2,1,'Kettle and fruit bowl','The kettle is always warm. Ellie says a kettle that waits is a kettle that judges.'],
+      ['sofa',3,3,3,2,'Green sofa','Lace on the back, six cushions, zero crumbs. Nobody has ever been allowed to find out why.'],
+      ['pot',2,3,1,2,'Lamp table','A tiny framed photo of Ellie on a ship deck in a wide white hat, 1968. The caption says: Arrived fashionably late.'],
+      ['counter',7,5,2,2,'Tea table','One silver teapot, two cups, and a plate of cookies. A note on the saucer: The good china is not for Boppy.',{variant:'letters'}],
+      ['pot',9,3,2,2,'Dining table','Set for two, in case Deedee drops by. Deedee has been told to call first.'],
+      ['pot',8,7,1,1,'Side table','A book about Paris. Eleven trips, and she is still on the introduction.'],
+      ['pot',1,6,1,1,'Umbrella stand','Six umbrellas, none for rain. Ellie says rain should dress better.'],
+      ['recliner',0,7,2,2,"Ellie's vanity",'A silver brush, a pink shawl, and a mirror that has only ever agreed with her. Her wardrobe is upstairs. Every hanger faces the same way, and one hanger is empty. Ellie will not say why.']]}
 ];

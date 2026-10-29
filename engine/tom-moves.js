@@ -927,7 +927,7 @@ const jar=(x,y,sc,lid,bub)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   R(-16,-16,32,42,OUT); R(-14,-14,28,38,'#cfe6ee'); R(-14,-2,28,26,STARTER); for(let k=0;k<5;k++) { const b=((performance.now()/25+k*13)%22); E(-9+k*4.5,22-b,1.8,1.8,CREAM); }
   R(-13,-10,26,10,CREAM); label('DAY 3',0,-8,'#2b2a26',1);
   if(bub>0) { const r=3+bub*9; E(0,-18-r*.6,r+2,r*.8+2,OUT); E(0,-18-r*.6,r,r*.8,STARTER); } gfx.restore(); };
-SC.tv_jar=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),raise=ez((ms-P.raise)/350)*(ms>P.lower?1-ez((ms-P.lower)/300):1);
+SC.tv_jar=(s,u)=>{ if(BATTLE_SPRITES.tom&&BATTLE_SPRITES.tom.hires&&BATTLE_SPRITES.tom.carry) return; const ms=s.t*1000,P=s.plan,h=hand(),raise=ez((ms-P.raise)/350)*(ms>P.lower?1-ez((ms-P.lower)/300):1);
   const lid=ms<P.pop?0:(ms<P.close?ez((ms-P.pop)/500):0),bub=ms>P.raise&&ms<P.pop?ez((ms-P.raise)/(P.pop-P.raise)):0;
   gfx.globalAlpha=fade(u,.95); const wob=ms>P.raise&&ms<P.pop?Math.sin(ms*.06)*.08:0; gfx.save(); gfx.translate(h.x-16,h.y-10-raise*30); gfx.rotate(wob); jar(0,0,1.5,lid,bub); gfx.restore(); };
 SC.tv_wave=(s,u)=>{ const ms=s.t*1000+s.t0,P=s.plan; if(ms<P.go) return; const y=P.y,H=P.H;
@@ -944,7 +944,9 @@ SC.tv_goo=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.6)*.95; for(const q of s.li
 Tm.starter_splash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),all=b2LiveFoes(),Gp=ST.group(all),p=rowSpot(Gp,84);
   const go0=1900,hit=2500,y=Math.min(318,F.base+2),jx=p.x-50,v=Math.max(.25,(jx-F.x)/(hit-go0));
   const plan={raise:1000,pop:1650,close:3250,lower:3500,go:go0,jx,v,y,H:Math.round(cl(F.h*.95,56,96)),tx:F.x,ty:F.mid,splash:hit,done:hit+Math.round((F.x+80)/v)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:950,x:p.x,y:p.y,f:'expr'},{t:1650,f:'act',dx:u=>-ez(u)*6},{t:2000,f:'expr'},{t:3250,f:'kneel'},{t:3600,f:'idle'},{t:3700,f:back(p.x,me)},{t:4500,x:'home',y:'home',f:'idle'}]);
+  const PJ=BATTLE_SPRITES.tom&&BATTLE_SPRITES.tom.hires&&BATTLE_SPRITES.tom.carry;   // painted poses carry their own jar (art/chars/tom-poses.webp)
+  const st=PJ?ST.keys(fx,[{t:0,x:'home',y:'home',f:'carry'},{t:950,x:p.x,y:p.y,f:'raise'},{t:1650,f:'lidpop',dx:u=>-ez(u)*6},{t:1850,f:'splash'},{t:2800,f:'goo'},{t:3250,f:'proud'},{t:3700,f:'idle'},{t:3800,f:'idle'},{t:4500,x:'home',y:'home',f:'idle'}])
+    :ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:950,x:p.x,y:p.y,f:'expr'},{t:1650,f:'act',dx:u=>-ez(u)*6},{t:2000,f:'expr'},{t:3250,f:'kneel'},{t:3600,f:'idle'},{t:3700,f:back(p.x,me)},{t:4500,x:'home',y:'home',f:'idle'}]);
   const sp=all.filter(o=>o!==f).map(o=>{ const O=ST.unit(o); return [go0+Math.max(0,(jx-O.x)/v),()=>{ ST.jolt(o,.25); sfx.splat(); }]; });
   ST.play(E2,[
     [0,()=>{ setMessage('Tom carries Bready Mercury, his sourdough starter, to the end of the row.'); say(m.id,'starter_splash'); scene('tv_jar',4.0,{plan}); }],
@@ -1538,7 +1540,11 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
 // Tom stays at his spot. He presses one button on a wireless controller, nothing happens (a little signal icon with a red
 // cross), he says it is not connecting, and he throws the controller at the monster. Same numbers: free, +1 VP.
 const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+// Painted controller (art/chars/prop-controller.webp, tools/sprite-bake/bake_props.py); the drawn one below is the fallback until it loads.
+const CTL_IMG=new Image(); CTL_IMG.src='art/chars/prop-controller.webp?v=tom4';
 const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc);
+  if(CTL_IMG.complete&&CTL_IMG.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.drawImage(CTL_IMG,-21,-14,42,Math.round(42*CTL_IMG.naturalHeight/CTL_IMG.naturalWidth));
+    if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.imageSmoothingEnabled=sm; gfx.restore(); return; }
   RO(-5,-12,10,5,'#3a3f46'); R(-3,-11,6,2,GREY2);
   const rr=(a,b,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(a,b,w,h,r); else gfx.rect(a,b,w,h); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
   E(-13,5,6,7,OUT); E(13,5,6,7,OUT); E(-13,5,4.2,5.2,'#6a6f7a'); E(13,5,4.2,5.2,'#6a6f7a'); rr(-18,-8,36,15,5,'#6a6f7a'); R(-16,-6,32,2,GREY2);
@@ -1546,7 +1552,7 @@ const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot
 SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAlpha=1; const h=hand();
   const wind=ms>P.wind?ez((ms-P.wind)/(P.thr-P.wind)):0,press=P.presses.some(t=>ms>t&&ms<t+110),shake=ms>P.ugh&&ms<P.wind?Math.sin(ms*.09)*2:0;
   const x=h.x-8+shake-wind*10,y=h.y-4-wind*16,led=Math.floor(ms/180)%2===0&&ms>P.presses[0];
-  ctl(x,y+(press?2:0),1.25,-.3-wind*.7,press,led);
+  if(ms>=P.ugh) ctl(x-wind*6,y+(press?2:0)-wind*36,1.25-wind*.3,-.3-wind*.7,press,led);   // until then the painted pose holds its own controller
   // The signal icon over the controller: three arcs, a red cross once the presses fail.
   if(ms>P.presses[0]+100&&ms<P.wind) { const sx=x+4,sy=y-26,a=Math.min(1,(ms-P.presses[0]-100)/150); gfx.globalAlpha=a;
     gfx.strokeStyle=CREAM; gfx.lineCap='round'; gfx.lineWidth=2.5; for(let k=1;k<=3;k++) { gfx.beginPath(); gfx.arc(sx,sy+8,k*5,Math.PI*1.2,Math.PI*1.8); gfx.stroke(); } E(sx,sy+8,1.8,1.8,CREAM);
@@ -1554,8 +1560,9 @@ SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAl
 SC.tp_cdown=(s,u)=>{ const q=ez(u/.35); gfx.globalAlpha=fade(u,.7); ctl(s.x+q*s.dx,s.y+Math.abs(Math.sin(q*Math.PI*2))*-8*(1-q)+q*s.dy,1.25,.5+q*1.4,false,false); };
 Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const presses=[500,900,1300],ugh=1650,wind=2250,thr=2650,fly=360,hit=thr+fly;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'act'},{t:ugh,f:'act',dy:(u,tt)=>Math.sin(tt*30)*-.7},{t:ugh+10,f:'expr'},{t:wind,f:'expr',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:wind+10,f:'act'},{t:thr,f:'act',dx:u=>ez(u)*8},
-    {t:thr+10,f:'act',dx:-8},{t:hit+500,f:'expr'},{t:hit+1300,f:'idle'}]);
+  // Painted poses (art/chars/tom-poses.webp): hold = thumbs on the controller, annoyed = holding it out, tw_windup / tw_follow = the throw.
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'hold'},{t:ugh,f:'hold',dy:(u,tt)=>Math.sin(tt*30)*-.7},{t:ugh+10,f:'annoyed'},{t:wind,f:'annoyed',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:wind+10,f:'tw_windup'},{t:thr,f:'tw_windup',dx:u=>ez(u)*8},
+    {t:thr+10,f:'tw_follow',dx:-8},{t:hit+500,f:'tw_follow'},{t:hit+900,f:'idle'},{t:hit+1300,f:'idle'}]);
   const plan={presses,ugh,wind,thr};
   const taps=presses.map((t,k)=>[t,()=>{ S('select'); if(k===2) S('nope'); }]);
   ST.play(E2,[
@@ -1564,7 +1571,7 @@ Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     [presses[1]+80,()=>{ scene('tv_text',1.0,{st,txt:'...',c:CREAM,sc:2,dy:6}); }],
     [ugh,()=>{ say(m.id,'button_mash'); setMessage('Nothing. He presses it again. Nothing.'); scene('tv_text',1.2,{st,txt:'UGH.',c:RED,sc:3,dy:10}); }],
     [wind,()=>{ setMessage('Tom winds up.'); }],
-    [thr,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu)=>ctl(0,0,1.25,0,false,false),h.x-8,h.y-26,F.x,F.mid,fly/1000,34,0,{spin:3}); }],
+    [thr,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu)=>ctl(0,0,1.25,0,false,false),h.x-14,h.y-60,F.x,F.mid,fly/1000,34,0,{spin:3}); }],
     ['hf',hit],
     [hit,()=>{ S('bonk'); S('thud'); ST.jolt(f,.6); landHit(100); scene('tv_big',1.0,{x:F.x,y:F.top-62,txt:'BONK!',c:GOLD,sc:4}); scene('tv_burst',.6,{x:F.x,y:F.mid,n:10,r:46}); scene('tv_ring',.6,{x:F.x,y:F.mid,r:42});
       scene('tp_cdown',1.2,{x:F.x,y:F.mid,dx:-26,dy:F.base-F.mid-6}); setMessage('The controller connects. Just not the way it was meant to.'); }],

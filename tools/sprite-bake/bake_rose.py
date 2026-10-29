@@ -38,6 +38,20 @@ for nm, im in slice_sheet(os.path.join(SRC, 'rose-battle-v2.png'),
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'rose-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
+# Extra sheets (Oct 29): A = 12 battle poses, B = 4 shoulder-ride views and 4 overworld extras.
+A_NAMES = ['boop', 'boopBack', 'raspberry', 'boo', 'tiara', 'hug', 'balance', 'lookout', 'throwWind', 'throwRel', 'sitStory', 'sitTea']
+B_NAMES = ['ride_front', 'ride_back', 'ride_side', 'ride_cheer', 'crouch', 'jump', 'wave', 'hold']
+for nm, im in slice_sheet(os.path.join(SRC, 'rose-extra-battle-v2.png'), [A_NAMES[0:4], A_NAMES[4:8], A_NAMES[8:12]]).items():
+    poses['x_' + nm] = im
+# Jab sheet (Oct 29): wind-up, jab, recoil for the Boop. Sized to match the boop pose of sheet A (same leaning pointing stance).
+J_NAMES = ['jab0', 'jab1', 'jab2']
+_jab = slice_sheet(os.path.join(SRC, 'rose-jab-v2.png'), [J_NAMES])
+_rJ = poses['x_boop'].height / _jab['jab0'].height
+for nm, im in _jab.items():
+    poses['x_' + nm] = im.resize((round(im.width * _rJ), round(im.height * _rJ)), Image.LANCZOS)
+X_NAMES = A_NAMES + J_NAMES
+for nm, im in slice_sheet(os.path.join(SRC, 'rose-extra-ow-v2.png'), [B_NAMES[0:4], B_NAMES[4:8]]).items():
+    poses['y_' + nm] = im
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -197,8 +211,16 @@ def paint_bruise(img, cx, cy, rx, ry):
         a[:, :, :3] = a[:, :, :3] * (1 - k) + np.array(col, float) * k
     return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
 bt_big['kneel'] = paint_bruise(bt_big['kneel'], 66, 67.5, 7.5, 6)
-bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
+# Sheet A poses: scaled so her standing hug matches the guard pose of the main sheet; own canvas (head on the centre column, feet on the bottom row).
+rA = poses['b_defend'].height / poses['x_hug'].height
+x_big = {k: scaled_to(poses['x_' + k], fb * rA) for k in X_NAMES}
+x_big = tighten(place(x_big, KB, 'head'), KB)
+_all = dict(bt_big); _all.update({'x_' + k: v for k, v in x_big.items()})
+bt_pal, _rows = rows_of(_all, KB, args.colors)
+bt_rows = {k: _rows[k] for k in bt_big}
+x_rows = {k: _rows['x_' + k] for k in x_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'rose-battle.webp'))
+x_rects = pack(x_big, os.path.join(ART, 'rose-battle-x.webp'))
 
 # knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
@@ -209,9 +231,38 @@ ko_rects = pack(ko_big, os.path.join(ART, 'rose-ko.webp'))
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
+rOW = poses['w_down_stand'].height / poses['y_hold'].height          # standing hug on sheet B matches the walk sheet's stand
+for k in ('crouch', 'jump', 'wave', 'hold'):
+    ow_big['e_' + k] = scaled_to(poses['y_' + k], fo * rOW)
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
 ow_rects = pack(ow_big, os.path.join(ART, 'rose-ow.webp'))
+
+# ---------------------------------------------------------------- shoulder ride (painted)
+# Each view gives a back layer (the whole figure, drawn behind Tom's head) and a front layer (only the legs from CUT down, drawn
+# after Tom so her shoes sit on his shoulders). Anchor (ax, ay): the seat pixel, in rows, that lands on Tom's anchor point.
+rB = poses['b_defend'].height / poses['y_hold'].height
+RIDE_CUT = 0.74      # front layer (shins and shoes) starts this far down the figure
+def front_layer(img, k):
+    a = np.array(img).copy()
+    ys = np.where(a[:, :, 3] > 8)[0]
+    cut = int(ys.min() + (ys.max() - ys.min()) * RIDE_CUT)
+    a[:cut, :, 3] = 0
+    return Image.fromarray(a, 'RGBA')
+rd_bt = tighten(place({'idle': scaled_to(poses['y_ride_front'], fb * rB), 'celeb': scaled_to(poses['y_ride_cheer'], fb * rB)}, KB, 'head'), KB)
+rd_ow = tighten(place({'down': scaled_to(poses['y_ride_front'], fo * rOW), 'up': scaled_to(poses['y_ride_back'], fo * rOW),
+                       'left': scaled_to(poses['y_ride_side'], fo * rOW)}, KW, 'head'), KW)
+rd_bt_all = {}; rd_ow_all = {}
+for n, v in rd_bt.items(): rd_bt_all[n + '_back'] = v; rd_bt_all[n + '_front'] = front_layer(v, KB)
+for n, v in rd_ow.items(): rd_ow_all[n + '_back'] = v; rd_ow_all[n + '_front'] = front_layer(v, KW)
+rd_small = {'b_' + n: hard(scaled_to(v, 1.0 / KB)) for n, v in rd_bt_all.items()}
+rd_small.update({'o_' + n: hard(scaled_to(v, 1.0 / KW)) for n, v in rd_ow_all.items()})
+rd_pal, rd_rows = quantize(rd_small, 40)
+rd_bt_rects = pack(rd_bt_all, os.path.join(ART, 'rose-ride-bt.webp'))
+rd_ow_rects = pack(rd_ow_all, os.path.join(ART, 'rose-ride-ow.webp'))
+# Seat anchors in rows (seat pixel, then the near eye for the hurt overlay). Tuned by eye on the gridded frames.
+RIDE_ANCH = {'bt_idle': dict(ax=None, ay=None, ex=None, ey=None), 'bt_celeb': dict(ax=None, ay=None, ex=None, ey=None),
+             'ow_down': dict(ax=None, ay=None), 'ow_up': dict(ax=None, ay=None), 'ow_left': dict(ax=None, ay=None)}
 
 def mirror(rows):
     return [r[::-1] for r in rows]
@@ -247,7 +298,20 @@ meta = {
 }
 atlas = {'bt': {'src': 'art/chars/rose-battle.webp', 'k': KB, 'rects': bt_rects},
          'ko': {'src': 'art/chars/rose-ko.webp', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/rose-ow.webp', 'k': KW, 'rects': ow_rects}}
+         'ow': {'src': 'art/chars/rose-ow.webp', 'k': KW, 'rects': ow_rects},
+         'btx': {'src': 'art/chars/rose-battle-x.webp', 'k': KB, 'rects': x_rects},
+         'rideBt': {'src': 'art/chars/rose-ride-bt.webp', 'k': KB, 'rects': rd_bt_rects},
+         'rideOw': {'src': 'art/chars/rose-ride-ow.webp', 'k': KW, 'rects': rd_ow_rects}}
+# ride anchors: tuned values live in tools/sprite-bake/rose-ride-anchors.json (rows); defaults are a guess
+ANCH_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'rose-ride-anchors.json')
+anch = json.load(open(ANCH_FILE)) if os.path.exists(ANCH_FILE) else {}
+def _dims(rows): return len(rows[0]), len(rows)
+ride = {'pal': rd_pal}
+for key, pre, nm in (('bt_idle', 'b_', 'idle'), ('bt_celeb', 'b_', 'celeb'), ('ow_down', 'o_', 'down'), ('ow_up', 'o_', 'up'), ('ow_left', 'o_', 'left')):
+    w, h = _dims(rd_rows[pre + nm + '_back'])
+    a = dict(ax=w / 2.0, ay=h * .55, sx=0, sy=0); a.update(anch.get(key, {}))
+    a['back'] = rd_rows[pre + nm + '_back']; a['front'] = rd_rows[pre + nm + '_front']; a['w'] = w; a['h'] = h
+    ride[key] = a
 print(json.dumps(meta))
 
 js = []
@@ -266,6 +330,19 @@ js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):
     for n in ('stand', 'step1', 'step2'):
         js.append(f"    {d}_{n}:" + fmt_rows(ow_rows[f'{d}_{n}']) + ",")
+for k in ('crouch', 'jump', 'wave', 'hold'):
+    js.append(f"    e_{k}:" + fmt_rows(ow_rows['e_' + k]) + ",")
+js.append("  },")
+js.append("  x:{")
+for k in X_NAMES:
+    js.append(f"    {k}:" + fmt_rows(x_rows[k]) + ",")
+js.append("  },")
+js.append("  ride:{pal:" + json.dumps(ride['pal']) + ",")
+for key in ('bt_idle', 'bt_celeb', 'ow_down', 'ow_up', 'ow_left'):
+    r = ride[key]
+    js.append(f"    {key}:{{ax:{r['ax']:.2f},ay:{r['ay']:.2f},sx:{r['sx']},sy:{r['sy']},w:{r['w']},h:{r['h']},")
+    js.append("      back:" + fmt_rows(r['back'], '        ') + ",")
+    js.append("      front:" + fmt_rows(r['front'], '        ') + "},")
 js.append("  }")
 js.append("};")
 with open(OUT, 'w') as f:

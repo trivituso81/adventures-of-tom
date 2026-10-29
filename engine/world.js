@@ -191,6 +191,7 @@ function makeRoom(spec) {
   const house=houseById[spec.id];
   const map=makeMap(spec.id,house.name,spec.w,spec.h,false,spec.style);
   map.spec=spec;
+  if(spec.name) map.name=spec.name;
 
   for(let y=0;y<map.h;y++)
     for(let x=0;x<map.w;x++)
@@ -208,6 +209,14 @@ function makeRoom(spec) {
   map.npcNoGo.add(key(dx,dy));
   map.npcNoGo.add(key(dx,dy-1));
   if(spec.door2) { const [ex,ey]=spec.door2; tile(map,ex,ey,'exit'); map.portals.set(key(ex,ey),{kind:'exit',house}); map.npcNoGo.add(key(ex,ey)); map.npcNoGo.add(key(ex,ey-1)); }
+  // exitTo: [map,x,y,facing] sends the door to another room instead of the street (the loft's door is the elevator back to the lobby).
+  if(spec.exitTo) { const [to,sx,sy,f]=spec.exitTo; for(const d of [[dx,dy],spec.door2]) if(d) map.portals.set(key(d[0],d[1]),{kind:'edge',to,spawn:{x:sx,y:sy},facing:f}); }
+  // portals: [[x,y,map,spawnX,spawnY,facing]] extra doorways inside the room (the lobby's elevator).
+  for(const [px,py,to,sx,sy,f] of spec.portals||[]) opening(map,px,py,to,{x:sx,y:sy},f,'floor');
+  // More front-door tiles (a wide double door): spec.doors:[[x,y],...].
+  for(const [ex,ey] of spec.doors||[]) { tile(map,ex,ey,'exit'); map.portals.set(key(ex,ey),{kind:'exit',house}); map.npcNoGo.add(key(ex,ey)); map.npcNoGo.add(key(ex,ey-1)); }
+  // Doorways to another room of the same house: spec.edges:[{at:[x,y],to:mapId,spawn:{x,y},facing}] (replaces an exit on that tile).
+  for(const e of spec.edges||[]) { const [ex,ey]=e.at; tile(map,ex,ey,'exit'); map.portals.set(key(ex,ey),{kind:'edge',to:e.to,spawn:e.spawn,facing:e.facing}); map.npcNoGo.add(key(ex,ey)); }
   if(spec.spawn) map.spawn={...spec.spawn};
   map.rugs.push({x:spec.rug[0],y:spec.rug[1],w:spec.rug[2],h:spec.rug[3]});
 

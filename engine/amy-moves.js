@@ -328,7 +328,7 @@ SC.av_bell=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=P.st; if(st.x==null) return; g
   if(ms>P.swing&&ms<P.hit+150) { gfx.globalAlpha=.5; for(let k=1;k<4;k++) { const b=a-k*.18; gfx.beginPath(); gfx.arc(px,py,r+8,b-.15,b); gfx.strokeStyle=CREAM; gfx.lineWidth=3; gfx.stroke(); } gfx.globalAlpha=1; }
   Ln(px,py,bx,by,5,OUT); bell(bx,by,1.4); };
 A.kettlebell_swing=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,42),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'wind',dy:u=>ez(u)*6},{t:1350,f:'wind',dy:6,dx:(u,tt)=>Math.sin(u*Math.PI*1.5)*4},{t:1650,f:'throw',dx:u=>-ez(u)*10},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'hike',dy:u=>ez(u)*6},{t:1350,f:'swingup',dy:6,dx:(u,tt)=>Math.sin(u*Math.PI*1.5)*4},{t:1500,f:'swingtop',dy:2},{t:1650,f:'throw',dx:u=>-ez(u)*10},
     {t:2100,f:'celeb',hop:6},{t:2600,f:back(p.x,me)},{t:3300,x:'home',y:'home',f:'idle'}]);
   const plan={st,hike:800,swing:1350,hit:1650,drop:2100};
   ST.play(E2,[
@@ -1071,7 +1071,7 @@ SC.a6_leap=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=f
 A.burpee_blitz=E2=>{ poses(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,56),k=front(F,12),me=ST.unit(m);
   const K=[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:700,x:p.x,y:p.y,f:'hip'}]; let t=900; const marks=[],beats=[],PX=p.x,PY=p.y;
   // the plank lies with its head toward the monster: the turn point sits a little right of the standing spot
-  const rep=(t0,last)=>{ K.push({t:t0,f:'squat',dy:u=>ez(u)*2},{t:t0+150,f:'plant',x:PX,y:PY+2},{t:t0+280,f:'plank',x:PX-8,y:PY+2,ns:1,ease:'out'},{t:t0+440,f:'pushup',x:PX-8,y:PY+2,ns:1},{t:t0+580,f:'plank2',x:PX-8,y:PY+2,ns:1},{t:t0+720,f:'tuck',x:PX,y:PY+2,ease:'out'}); if(!last) K.push({t:t0+860,f:'jump',x:PX,y:PY,hop:34}); beats.push([t0,'SQUAT'],[t0+150,'HANDS'],[t0+280,'PLANK'],[t0+440,'PUSH'],[t0+580,'UP'],[t0+720,'IN'],[t0+860,last?'LAST ONE':'JUMP!']); };
+  const rep=(t0,last)=>{ K.push({t:t0,f:'squat',dy:u=>ez(u)*2},{t:t0+150,f:'plant',x:PX,y:PY+16},{t:t0+280,f:'plank',x:PX-8,y:PY+16,ease:'out'},{t:t0+440,f:'pushup',x:PX-8,y:PY+16},{t:t0+580,f:'plank2',x:PX-8,y:PY+16},{t:t0+720,f:'tuck',x:PX,y:PY+16,ease:'out'}); if(!last) K.push({t:t0+860,f:'jump',x:PX,y:PY,hop:34}); beats.push([t0,'SQUAT'],[t0+150,'HANDS'],[t0+280,'PLANK'],[t0+440,'PUSH'],[t0+580,'UP'],[t0+720,'IN'],[t0+860,last?'LAST ONE':'JUMP!']); };
   for(let i=0;i<3;i++) { rep(t,false); marks.push([t+880,String(i+1)]); t+=1200; }
   rep(t,true); const leap=t+860; marks.push([leap+140,'4']);
   K.push({t:leap,f:'jump',hop:120,x:k.x,y:k.y,ease:'lin',ns:1},{t:leap+520,x:k.x,y:k.y,f:'jump',hop:8},{t:leap+950,f:'hip'},{t:leap+1250,f:back(k.x,me)},{t:leap+1950,x:'home',y:'home',f:'idle'});
