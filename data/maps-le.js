@@ -361,45 +361,47 @@ const LE_AREAS=[
       ['sign',6,3,1,1,'Rotten signpost','SUNDIAL HOLLOW. Beyond the old reeds. The letters have been scratched over: DO NOT BE LATE.'],
       ['sign',22,10,1,1,'Marsh sign','WHISPERING MARSH. The reeds talk. Don\'t answer them. It only encourages them.']]}),
   // Chapter 3 (C3b): Sundial Hollow, through the old reeds at the top left of the marsh. A clearing with a sundial that
-  // tells the wrong time, a spillway (rows 9 and 10) that drains once the coin is out of the sundial, and the Deep Pool
-  // above it, where Old Iron-Gill lives. The spillway drains in data/scenes.js (ch3DrainSpillway).
-  planMerge({id:'sundial',name:'Sundial Hollow',w:22,h:20,
+  // tells the wrong time, a spillway (rows 8 and 9, painted as a water band with one stepping-stone crossing at x 13) that
+  // drains once the coin is out of the sundial, and the Deep Pool above it, where Old Iron-Gill lives. The spillway opens
+  // in data/scenes.js (ch3DrainSpillway, using drainOpen below).
+  {id:'sundial',name:'Sundial Hollow',w:22,h:20,
     tag:'A sundial that tells the wrong time, and a pool nobody has seen the bottom of.',
     eyebrow:'LONG ISLAND / SUNDIAL HOLLOW',
     hint:'The sundial is in the middle. The Deep Pool is past the spillway, at the top.',
     spawn:{x:10,y:18},
     wild:true,
+    // Painted plate (art/sundial.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    plateMask:[
+      '######################',
+      '######################',
+      '######################',
+      '######################',
+      '##########....########',
+      '#########.....########',
+      '########......########',
+      '#########......#######',
+      '######################',
+      '######################',
+      '########........######',
+      '####.......##......###',
+      '###.......###.......##',
+      '#######...###.......##',
+      '#########......#######',
+      '###....##......#######',
+      '#####...........######',
+      '#####...........######',
+      '##########.....#######',
+      '##########..##########'],
+    drainOpen:[[13,8],[13,9]],
     border:{kind:'tree',open:[[10,19],[11,19]]},
     exits:[[10,19,'reeds',3,1,'down','mud'],[11,19,'reeds',4,1,'down','mud']],
-    monsters:SUNDIAL_MONSTER_SPOTS},
-    planArea([
-      'TTTTTTTTTTTTTTTTTTTTTT',
-      'T,c~~~~~~~~~~~~~~~~c,T',
-      'Tc~~~~~~~~~~~~~~~~~~cT',
-      'T~~~~~~~~~~~~~~~~~~~~T',
-      'T~~~~~~~~~==~~~~~~~~~T',
-      'Tc~~~~~~~~==~~~~~~~~cT',
-      'T,c,,~~~~~==~~~~~,,c,T',
-      'T.....,.,....,.,.....T',
-      'T.c...........,....c.T',
-      'T~~~~~~~~~~~~~~~~~~~~T',
-      'T~~~~~~~~~~~~~~~~~~~~T',
-      'T..c,.............,c.T',
-      'T.........,..........T',
-      'T......,........,....T',
-      'Tc...................T',
-      'T.....,.......,.....cT',
-      'T.c..................T',
-      'T,...,.....,.....,c..T',
-      'Tc..........,.......cT',
-      'TTTTTTTTTT..TTTTTTTTTT'],{c:['Cattails','Cattails, very old and very tall. They lean toward the sundial like they\'re trying to read it.']}),
-    {objects:[
-      ['sundial',10,14,2,1,'The sundial','A stone sundial, green with moss. The shadow points at the 7. It\'s clearly not seven.',
+    monsters:SUNDIAL_MONSTER_SPOTS,
+    objects:[
+      ['sundial',11,12,2,2,'The sundial','A stone sundial, green with moss. The shadow points at the 7. It\'s clearly not seven.',
         {when:[{flag:'ch3-coin',text:'The shadow points the right way now. Grace checked. Twice. She wrote it down.'}]}],
-      ['sign',8,17,1,1,'Mossy sign','SUNDIAL HOLLOW. Tells the time. Not this time. A different time.'],
-      ['sign',13,7,1,1,'Pool marker','THE DEEP POOL. Depth: yes. No fishing. (Someone has crossed out NO.)'],
-      ['bench',3,15,2,1,'Stone bench','Carved into the stone: WAITED HERE 1970. Under it, newer: STILL WAITING.'],
-      {kind:'tree',at:[[1,12],[20,12],[5,18],[16,18],[19,15]]}]}),
+      ['sign',8,15,1,1,'Mossy sign','SUNDIAL HOLLOW. Tells the time. Not this time. A different time.'],
+      ['sign',14,6,1,1,'Pool marker','THE DEEP POOL. Depth: yes. No fishing. (Someone has crossed out NO.)'],
+      ['bench',3,13,4,2,'Stone bench','Carved into the stone: WAITED HERE 1970. Under it, newer: STILL WAITING.']]},
 ];
 
 // ---------- Chapter 5: Long Island Elementary, east of the Square (conference night) ----------

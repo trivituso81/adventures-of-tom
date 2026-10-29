@@ -782,7 +782,7 @@ SCENES.ch3Hollow=()=>[
   {talk:'Grace',lines:['It\'s the AFTERNOON. The sun is right there. Sundials can\'t be wrong. That\'s not how sundials work.']},
   {talk:'Boppy',lines:['That\'s what I said.']},
   {talk:'Rose',lines:['Tata! Something shiny is stuck in it!']},
-  {walk:'tom',to:[[10,15]],speed:.25}, {face:'tom',dir:'up'},
+  {walk:'tom',to:[[11,14]],speed:.25}, {face:'tom',dir:'up'},
   {talk:'Tom',lines:['A coin. Wedged right under the pointer. Somebody pushed this in on purpose.']},
   {call:()=>sfx.pickup()}, {flag:'ch3-coin'}, {give:'oldcoin'},
   {wait:.6},
@@ -895,10 +895,12 @@ function ch3OpenReeds() {
   }
   M.reedsOpen=true; M.mini=null;
 }
-// Sundial Hollow's spillway (rows 9 and 10) drains to mud once the coin is out of the sundial.
+// Sundial Hollow's spillway drains once the coin is out of the sundial. On the painted plate (spec.drainOpen) only the
+// painted stepping-stone crossing opens; without it the old rows 9 and 10 turn to mud.
 function ch3DrainSpillway() {
   const M=worlds.sundial; if(!M||M.drained) return;
-  for(const y of [9,10]) for(let x=1;x<M.w-1;x++) tile(M,x,y,'mud');
+  if(M.spec&&M.spec.drainOpen) for(const [x,y] of M.spec.drainOpen) tile(M,x,y,'mud');
+  else for(const y of [9,10]) for(let x=1;x<M.w-1;x++) tile(M,x,y,'mud');
   M.drained=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{

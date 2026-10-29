@@ -1,5 +1,11 @@
 # Change log (newest first)
 
+## 2026-10-28: Painted plate for Sundial Hollow
+- Sundial Hollow (map id `sundial`, chapter 3) now uses Tom's painting (`art/sundial.webp`, 22 x 20 tiles at 64 px, entry in `PLATES`). The ASCII plan is replaced by a `plateMask` in `data/maps-le.js`.
+- Objects re-laid to the painting: sundial (11,12, 2x2; stand at 11 or 12,14), mossy sign (8,15), Pool marker (14,6), stone bench (3,13, 4x2). Monster spots moved onto dry land: Bobber (17,12), Tangle (5,16), Soggy Sock (14,16); Iron-Gill stays at (10,3) in the pond. The coin scene now walks Tom to (11,14).
+- Spillway: the painting's water band is rows 8 and 9 with one stepping-stone crossing at x 13. It stays blocked until the coin is out of the sundial, then `ch3DrainSpillway` opens only `drainOpen` ([13,8],[13,9]). The painted water does not change. Boss trigger at the north bank still works (tested).
+- Known roughness: the minimap still draws the old tile look.
+
 ## 2026-10-28: Painted plates for Amy's house and Deedee and Boppy's house
 - The Gregori house (map id `amyhouse`) and the Rivituso house (`grands`) now use Tom's painted interiors (`art/amyhouse.webp`, `art/grands.webp`, 768 x 640, 64 px per tile). Interiors can now carry a `plateMask` like the outdoor areas (`makeRoom` in `engine/world.js` applies it); the room's old `walls` list is gone.
 - Both rooms are re-laid to the painting: objects moved to what is painted (recliner, TV and sofa, baking island, photo wall, beds, toy chest, kitchen island), each reachable from the door. Notes: Boppy's pepper plant interaction sits on the painted lamp-table plant (the big painted pepper plant is behind the sofa and cannot be reached); the TV object covers the TV and sofa; the Grace and Rose bed interactions are reached from the rug strip in front of the beds.

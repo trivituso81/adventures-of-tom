@@ -285,4 +285,4 @@ Object.assign(MONSTERS,{
 const MARSH_MONSTER_SPOTS=[['soggysock',24,10],['bobber',16,12],['tangle',10,9],['snag',4,4]];
 // Sundial Hollow (chapter 3, C3b): marsh monsters on the near side of the spillway, and Old Iron-Gill in the Deep Pool
 // (at the end of the little jetty; hidden until the party walks out to the pool, data/scenes.js STORY_WORLD).
-const SUNDIAL_MONSTER_SPOTS=[['bobber',17,7],['tangle',4,13],['soggysock',16,16],['irongill',10,3]];
+const SUNDIAL_MONSTER_SPOTS=[['bobber',17,12],['tangle',5,16],['soggysock',14,16],['irongill',10,3]];
