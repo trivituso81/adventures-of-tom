@@ -4,6 +4,20 @@
 - The bake paints in what the sheet avoids: a black eye on the kneel pose (low HP) and a dizzy spiral on the knocked-out pose. The startled pose is the hurt pose as drawn. A `beg` frame (kneel without the bruise) feeds the Squishy Delivery begging pose.
 - Outfit colours: `engine/painted.js` atlases take an optional tint function; Grace's picks the violet pixels only (Tom's default is unchanged). `drawSprite` now honours a per-frame palette (`rows._pal`).
 - Known roughness: her bespoke cartwheel poses (`data/grace-wheel.js`, used by Cartwheel's showpiece, Grace's Tombo move and her round-off combos) are still built from the old pixel body and keep the old palette, so they look pixel-style mid-move; the Olympic leotard colour swap does not show on the painted body; windup, leap, hurt and cast poses are baked but not wired yet (Track B, same as Tom).
+## 2026-10-28: Painted Rose (battle, kneel, KO, overworld)
+- Baked from Tom's Rose sheets with `tools/sprite-bake/bake_rose.py`; `data/rose-hires.js` is generated, `data/rose-hires-use.js` swaps her in (`ROSE_HIRES_OFF=true` falls back to the old pixel Rose). Battle is 72 rows at scale 1 (Tom is 100); overworld 35 rows. Raspberry mouth point is `{col:34,row:20}`.
+- Black eye is painted onto the kneel frame by the baker (the sheets avoid injury wording). KO is the napping pose as drawn. Startled is used as hurt.
+- Outfit recolour: `painted.js` has a `coral` tint mode (picks the coral tunic by hue, keeps shading); Rose's atlases use it. `gear.js` takes her garment keys from the baked meta.
+- Shoulder ride (`data/rose-ride.js`) is still the old pixel Rose, kept on her old palette (`ROSE_RIDE_PAL`). Painted ride art is still to do.
+- No spoken lines changed.
+## 2026-10-28: Tom's House rebuilt from the real floor plan (Area 46, map id `tomhouse`)
+- New 19 x 43 map (was 16 x 35), 2.5 ft per tile, one tile walls, laid out from the architectural plan. Specs and reasoning in `docs/area46/` (geometry review, walkmap, JSON, art corrections list for the future painting). Drawn with the game's own tiles for now; a painted plate (1216 x 2752) can replace it later.
+- Rooms: back yard, rear deck and west lawn; primary bath, wardrobe and bedroom; laundry, pantry, central hall; office (entered through its closet); jetted-tub bath; guest bedroom with its own bath and east storage; open kitchen, dining and living room; entry.
+- Front door is a double door (two exit tiles at 5,38 and 6,38); spawn is 5,37. Exterior house door on Jefferson Park is unchanged.
+- Assumed doors (plan shows none): guest bedroom, jetted bath, pantry; backyard linked to the deck by three tiles. See the review doc.
+- All 40 original objects kept with their text, re-placed; 8 new props (shrubs, sideboard, cabinets, primary toilet) with short new text. Bed and shower still restore. Guest bath fixtures re-laid so each is touchable.
+- New `tools/tomhouse_test.py` (all floor reachable, every object touchable, both door tiles exit to Jefferson Park, 14 shots).
+- Not reworded: no spoken lines changed. No walk-behind layer yet (engine has none for tile rooms).
 ## 2026-10-28: Painted plate for Downtown LA (the boulevard, map id `blvd`)
 - Downtown LA now uses Tom's painting (`art/blvd.webp`, 1920 x 1664, 30 x 26 tiles at 64 px, entry in `PLATES`). The clean version was used; the grid image was only a guide. A `plateMask` in `data/maps-la.js` is the walk map. Spawn is now (26,22), on the pad in front of the Cab Co. door.
 - The painting is drawn in perspective, so the street slopes down to the right and the lower buildings sit lower than the grid markers. Doors were moved onto the painted doors by shifting the building rows: Coffee (4,7), Ramen (11,7), Starlite (18,7) unchanged; Nickel's (24,8), Wardrobe (4,18), TNB's Loft (10,19), Grand Tower (18,20), Cab Co. (26,21). Every door is entered from the sidewalk pad in front of it.

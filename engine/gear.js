@@ -4,8 +4,8 @@
 // GARMENT says which palette keys make up the top and which rows it sits on, per sprite set.
 // Rows are for the raw sheet; prepped overworld sets are scaled by their resample factor.
 const GARMENT={
-  bt:{tom:(typeof TOM_HIRES!=='undefined'&&TOM_OW.hires)?{keys:TOM_HIRES.meta.bt.keys.join(''),rows:TOM_HIRES.meta.bt.rows}:{keys:'dc',rows:[16,29]},grace:(typeof GRACE_HIRES!=='undefined'&&GRACE_OW.hires)?{keys:GRACE_HIRES.meta.bt.keys.join(''),rows:GRACE_HIRES.meta.bt.rows}:{keys:'yxvsnj',rows:[16,28]},rose:{keys:'tvwyz',rows:[17,32]}},
-  ow:{tom:(typeof TOM_HIRES!=='undefined'&&TOM_OW.hires)?{keys:TOM_HIRES.meta.ow.keys.join(''),rows:TOM_HIRES.meta.ow.rows,f:1}:{keys:'dc',rows:[17,32],f:1.07},grace:(typeof GRACE_HIRES!=='undefined'&&GRACE_OW.hires)?{keys:GRACE_HIRES.meta.ow.keys.join(''),rows:GRACE_HIRES.meta.ow.rows,f:1}:{keys:'yxvsnj',rows:[17,31],f:.88},rose:{keys:'tvwyz',rows:[19,35],f:.82},
+  bt:{tom:(typeof TOM_HIRES!=='undefined'&&TOM_OW.hires)?{keys:TOM_HIRES.meta.bt.keys.join(''),rows:TOM_HIRES.meta.bt.rows}:{keys:'dc',rows:[16,29]},grace:(typeof GRACE_HIRES!=='undefined'&&GRACE_OW.hires)?{keys:GRACE_HIRES.meta.bt.keys.join(''),rows:GRACE_HIRES.meta.bt.rows}:{keys:'yxvsnj',rows:[16,28]},rose:(typeof ROSE_HIRES!=='undefined'&&ROSE_OW.hires)?{keys:ROSE_HIRES.meta.bt.keys.join(''),rows:ROSE_HIRES.meta.bt.rows}:{keys:'tvwyz',rows:[17,32]}},
+  ow:{tom:(typeof TOM_HIRES!=='undefined'&&TOM_OW.hires)?{keys:TOM_HIRES.meta.ow.keys.join(''),rows:TOM_HIRES.meta.ow.rows,f:1}:{keys:'dc',rows:[17,32],f:1.07},grace:(typeof GRACE_HIRES!=='undefined'&&GRACE_OW.hires)?{keys:GRACE_HIRES.meta.ow.keys.join(''),rows:GRACE_HIRES.meta.ow.rows,f:1}:{keys:'yxvsnj',rows:[17,31],f:.88},rose:(typeof ROSE_HIRES!=='undefined'&&ROSE_OW.hires)?{keys:ROSE_HIRES.meta.ow.keys.join(''),rows:ROSE_HIRES.meta.ow.rows,f:1}:{keys:'tvwyz',rows:[19,35],f:.82},
       amy:{keys:'ef',rows:[23,48],f:.86},deedee:{keys:'m',rows:[25,43],f:.85},boppy:{keys:'b',rows:[24,40],f:.9},tnb:{keys:'p',rows:[25,37],f:.92}}
 };
 // Rigged recruits reuse the overworld body (data/recruit-rig.js), padded by 12 rows at the top.

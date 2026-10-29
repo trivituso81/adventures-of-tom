@@ -11,7 +11,7 @@ function rideRows(pose,layer,flip) {
 function roseRide(pose,layer,cx,top,s,flip,opts) {
   const P=ROSE_RIDE[pose],R=rideRows(pose,layer,flip); if(!R) return null;
   const ax=flip?R[0].length-P.ax:P.ax,x=Math.round(cx-ax*s),y=Math.round(top-P.ay*s);
-  drawSprite(R,OW.rose.pal,x,y,s,opts||{});
+  drawSprite(R,typeof ROSE_RIDE_PAL!=='undefined'?ROSE_RIDE_PAL:OW.rose.pal,x,y,s,opts||{});
   return {x,y};
 }
 
