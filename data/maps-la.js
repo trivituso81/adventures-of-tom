@@ -1276,8 +1276,21 @@ const LA_ROOMS=[
   {id:'pupuseria',w:11,h:9,
     style:{floor:'#e8dcc4',alt:'#f2e6d0',wall:'#2f6fb3',trim:'#ffffff',pattern:'tile',rug:'#2f6fb3'},
     rug:[3,5,5,2],
+    // Painted plate (art/pupuseria.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // The comal counter fills the back, the family table sits left, two tables and the loroco-planter sit right,
+    // so the floor is the centre aisle (x 4 to 6, rows 4 to 6) and a one-tile lane at x 5 (rows 7 and 8) over the mat.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '###########',
+      '####...####',
+      '####...####',
+      '####...####',
+      '#####.#####',
+      '#####.#####'],
     npcs:[
-      {name:'Doña Carmen',x:5,y:4,look:'carmen',
+      {name:'Doña Carmen',x:5,y:4,look:'carmen',roam:0,
         when:[{...CH2_SMOG,lines:['The pupusas are fine. Everything is fine.','It\'s always this afternoon. Why\'d I ever flip them?']},
               {...CH2_CLEAR,lines:['I left them on the comal the whole time. They came out perfectly crispy, actually.','Don\'t tell the juice bar. They\'ll want the recipe.']}],
         lines:[
@@ -1285,10 +1298,11 @@ const LA_ROOMS=[
         'I came from San Salvador in 1991. This comal came with me in a suitcase.',
         'The juice bar next door asked me what a pupusa is. I gave them three. Now they ask every day.']}],
     objects:[
-      ['counter',3,2,5,1,'The comal','A big flat griddle, pupusas puffing on it, and a jar of curtido the size of a toddler.',{variant:'tea'}],
-      ['table',1,5,2,2,'Family table','Three generations eating at once. Everyone talking. Nobody waiting.'],
-      ['photo',8,1,1,1,'Volcano photo','A volcano outside San Salvador at sunrise. Carmen points at it every time someone looks.'],
-      ['pot',9,6,1,1,'Loroco plant','Grown from seeds a cousin mailed. The flowers go in the pupusas.']]},
+      ['counter',3,2,5,2,'The comal','A big flat griddle, pupusas puffing on it, and a jar of curtido the size of a toddler.',{variant:'tea'}],
+      ['table',1,4,3,2,'Family table','Three generations eating at once. Everyone talking. Nobody waiting.'],
+      ['table',7,4,2,1,'Window table','Hot sauce, a napkin holder and a woven runner. Someone left a pupusa half eaten. Nobody dares touch it.'],
+      ['table',7,5,3,2,'Corner table','Curtido in a jar, salsa roja in a squeeze bottle, and a napkin holder with a volcano on it.'],
+      ['pot',3,6,1,1,'Loroco plant','Grown from seeds a cousin mailed. The flowers go in the pupusas.']]},
   {id:'jordansam',w:11,h:9,
     style:{floor:'#e8e4dc',alt:'#f2f0ea',wall:'#2c2c2e',trim:'#f4f4f0',pattern:'tile',rug:'#c9b89a'},
     rug:[3,5,5,2],

@@ -1,3 +1,11 @@
+## 2026-10-29: Pupuseria La Ceiba (inside) is painted (Area 51, map id `pupuseria`)
+- New `art/pupuseria.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.pupuseria` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the Jefferson Park door still works.
+- Walk map (`plateMask` in `data/maps-la.js`): the centre aisle (x 4 to 6, rows 4 to 6) and a one-tile lane at x 5 (rows 7 and 8) over the mat. The comal counter, family table, both right tables, the planters, the rails and the walls are painted and blocked.
+- Doña Carmen stays visible at (5,4) with `roam:0` (the painting has no cook); her lines are NOT changed, so clips still match.
+- Objects re-laid: The comal (3,2,5,2), Family table (1,4,3,2), new Window table (7,4,2,1) and Corner table (7,5,3,2) with new unvoiced text, Loroco plant (3,6). The Volcano photo object is gone (the painted volcano hangs on a wall nobody can reach); its line "A volcano outside San Salvador at sunrise. Carmen points at it every time someone looks." is no longer in the game.
+- Checks: new `tools/pupuseria_test.py` 0 fails (objects touchable, Carmen answers, counter answers, door walked to Jefferson Park), smoke, bg_test, jpark_test 0 fails. Portrait and landscape shots looked at.
+- Known: no foreground layer, so characters draw over the front plants and rail.
+
 ## 2026-10-29: carbarn_test fixed (test only, no game change)
 - `tools/carbarn_test.py` failed "west arch leads to Jefferson Park" and "east rails lead to the Boiler Room" because a wandering monster (Lukewarm waits at the west arch) started a fight on arrival, which froze the walk. The exits and walk map were fine. The test now ends any fight and clears monsters near the player before each exit walk. 0 fails.
 
