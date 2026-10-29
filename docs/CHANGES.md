@@ -1,3 +1,12 @@
+## 2026-10-28: Painted plate for the Cafetorium
+- The Cafetorium (map id `cafetorium`, chapter 5) now uses Tom's painting (`art/cafetorium.webp`, 1280 x 896, 20 x 14 tiles at 64 px, entry in `PLATES`). The ASCII plan stays underneath as the invisible tile layer; a `plateMask` is the walk map.
+- Door: the school exit moved onto the painted double doors at (1,5), step up from the spawn (1,6). The trash can at (0,6) and (0,7) now blocks. The school still sends Tom to (1,6) and (1,7).
+- Stage: one walkable row (y 2) reached by the two painted side stairs ((3,2) to (3,4) on the left, (16,2) to (16,4) on the right). The podium (10,2) splits the stage; the Red Pen now stands at (9,2) beside it (was (9,3)); stand at (8,2) to challenge it.
+- Objects re-laid to the painting: the four lunch tables are now on the painted tabletops (3,7), (12,7), (2,10), (12,10), reached from the open aisle at y 9 or from y 12. Milk cooler (18,6) reached from (18,7) or (17,6). Cafetorium sign on the painted easel at (18,11), reached from (18,12).
+- Chapter 5 stand positions (Tom 9,6, Grace 8,6, Amy 10,6, Rose 9,7, Pruitt 12,6) are all on open floor. No scene edits.
+- Tests: smoke no fails; `tools/reach_test.py cafetorium school` 0 fails; every object and the Red Pen reachable from the spawn; walked the left stairs onto the stage and out the door with real key presses; looked at portrait and landscape.
+- Known roughness: the minimap still draws the old tile look. Not reworded: no spoken lines changed.
+
 # Change log (newest first)
 
 ## 2026-10-28: Painted plate for Long Island Elementary (map id `school`, the hallway and its rooms)

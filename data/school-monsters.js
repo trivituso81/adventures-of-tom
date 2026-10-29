@@ -334,4 +334,4 @@ Object.assign(MONSTERS,{
 // Map spots. The hallway: two Pop Quizzes roam it (they hold still until the girls find the glitter trail). Each room's
 // troublemaker holds still until its story fight. The Red Pen waits on the Cafetorium stage (hidden until the boss scene).
 const SCHOOL_MONSTER_SPOTS=[['popquiz',8,10],['popquiz',19,9],['tardybell',5,4],['glitterglue',14,4],['dodgeball',24,4]];
-const CAFE_MONSTER_SPOTS=[['redpen',9,3]];
+const CAFE_MONSTER_SPOTS=[['redpen',9,2]];

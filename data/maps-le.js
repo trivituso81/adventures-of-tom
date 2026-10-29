@@ -521,7 +521,23 @@ LE_AREAS.push(
     eyebrow:'LONG ISLAND / LONG ISLAND ELEMENTARY / CAFETORIUM',
     hint:'The stage is at the top. Something is grading up there.',
     spawn:{x:1,y:6},
-    exits:[[0,6,'school',27,9,'down','cafefloor'],[0,7,'school',28,9,'down','cafefloor']],
+    exits:[[1,5,'school',27,9,'down','cafefloor']],
+    // Painted plate (art/cafetorium.webp, engine/plate.js). '#' blocks, '.' walks. Stage row 2 is reached by the two side stairs.
+    plateMask:[
+      '####################',
+      '####################',
+      '###..............###',
+      '###.############.###',
+      '###...............##',
+      '#.#...............##',
+      '#.................##',
+      '#..######...######.#',
+      '...######...######.#',
+      '....................',
+      '..######....########',
+      '..######....########',
+      '....................',
+      '....................'],
     monsters:CAFE_MONSTER_SPOTS},
     planSchool([
       'WWWWWWWWWWWWWWWWWWWW',
@@ -541,12 +557,12 @@ LE_AREAS.push(
     {objects:[
       ['podium',10,2,1,1,'Podium','A wooden podium. Somebody has carved PRUITT WAS HERE 1993 into it. It was Pruitt.',
         {when:[{flag:'ch5-clear',text:'A wooden podium. The sign-up sheet used to be here. Now there\'s just a small, neat note: SORRY. (In red.)'}]}],
-      ['lunchtable',2,9,5,1,'Lunch table','A long lunch table with the little round seats. Somebody’s pudding cup is still here. Nobody will claim it.'],
-      ['lunchtable',12,9,5,1,'Lunch table','A long lunch table. Thirty conference chairs are stacked on top. They look nervous.'],
-      ['lunchtable',2,11,5,1,'Lunch table','A lunch table. NO TRADING SNACKS, says a sign. Rose looks at it like it\'s a challenge.'],
-      ['lunchtable',12,11,5,1,'Lunch table','A lunch table. Nine hundred cookies on trays, under plastic wrap. Mrs. Kowalski counted them.'],
-      ['milkcooler',17,6,1,1,'Milk cooler','Chocolate milk, white milk, and one strawberry milk that\'s been here for a very long time.'],
-      ['sign',17,12,1,1,'Cafetorium sign','THE CAFETORIUM. Lunch at noon. Plays at seven. Don\'t mix them up again. (The spaghetti incident.)']]})
+      ['lunchtable',3,7,6,2,'Lunch table','A long lunch table with the little round seats. Somebody’s pudding cup is still here. Nobody will claim it.'],
+      ['lunchtable',12,7,6,2,'Lunch table','A long lunch table. Thirty conference chairs are stacked on top. They look nervous.'],
+      ['lunchtable',2,10,6,2,'Lunch table','A lunch table. NO TRADING SNACKS, says a sign. Rose looks at it like it\'s a challenge.'],
+      ['lunchtable',12,10,7,2,'Lunch table','A lunch table. Nine hundred cookies on trays, under plastic wrap. Mrs. Kowalski counted them.'],
+      ['milkcooler',18,6,2,1,'Milk cooler','Chocolate milk, white milk, and one strawberry milk that\'s been here for a very long time.'],
+      ['sign',18,11,2,1,'Cafetorium sign','THE CAFETORIUM. Lunch at noon. Plays at seven. Don\'t mix them up again. (The spaghetti incident.)']]})
 );
 
 // ---------- Chapter 7: the Stacks under the Hush Library, and the Reading Room ----------
