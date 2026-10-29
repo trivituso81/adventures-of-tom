@@ -1,3 +1,6 @@
+## 2026-10-29: Indoor party spacing 25% tighter
+- `movePlayer` in `engine/followers.js`: inside houses and shops the gap between party members is now 1.5 tiles (was 2). Outdoors stays 1 tile. Fractional gaps are interpolated along Tom's trail, so followers can stand between tiles. Checked by walking Tom in a house (gaps 1.5, 1.5) and outside (1, 1). No spoken lines changed.
+
 ## 2026-10-29: Tom's House is painted (Area 46, map id `tomhouse`)
 - `art/tomhouse.webp` (1216 x 2752, 64 art px per tile) is the painted plate; `PLATES.tomhouse` in `engine/plate.js` (characters drawn at 1.5x). The painting came from Tom's image AI using the corrections list in `docs/area46/`; it matched the 19 x 43 shape, so the map size did not change.
 - The old tile plan is gone. `plateMask` in `data/maps-la.js` is now traced from the painting (the old walkmap no longer matches the art: the hall lobby, doors, bath and closet positions all differ). All 210 walkable tiles and all 38 objects are reachable from the front door (checked by flood fill, then walked with real key presses through every door).
