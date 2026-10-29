@@ -91,7 +91,6 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_er
         bands.append((y0, len(proj)))
     if len(bands) != len(rows_names):
         raise SystemExit(f'{path}: found {len(bands)} rows, expected {len(rows_names)}: {bands}')
-    out = {}
     for (ya, yb), names in zip(bands, rows_names):
         sub = lmask[ya:yb]
         if split_erode:
