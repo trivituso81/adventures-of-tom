@@ -1074,18 +1074,31 @@ const LE_ROOMS=[
               {...CH7_DONE,text:'STAFF ONLY. THE STACKS. Somebody has added a second sign: STORY TIME, SATURDAYS, 10 AM. ALL BOOKS WELCOME.'}]}]]},
   {id:'greenhouse',w:12,h:10,
     style:{floor:'#aebe99',alt:'#becbab',wall:'#91a58d',trim:'#d7dfbd',pattern:'tile',rug:'#a8b480'},
-    walls:[[5,2],[5,3],[5,5]],
     rug:[6,5,4,3],
+    // Painted plate (art/greenhouse.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Two potting beds along the back, the barrel plant and back bench between them, plant stool and hose left, gardening shelf right,
+    // the green rug in the middle. The arch at the bottom (x5 and x6) is the way out.
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '######.#####',
+      '#....#....##',
+      '#.#.......##',
+      '###.....####',
+      '##......####',
+      '#####..#####',
+      '#####..#####'],
     npcs:[
       {name:'Fern',x:7,y:5,look:'fern',lines:[
         'I name every plant here.',
         "They're all called Steve. It saves time.",
         'Except that one. That\'s Assistant Steve.']}],
     objects:[
-      ['planter',1,2,3,2,'The Steves','Three plants lean in. This appears to be a staff meeting.'],
-      ['planter',7,2,3,2,'The other Steves','A label says: "Water daily. Compliment hourly."'],
-      ['pot',2,7,1,1,'Assistant Steve','Assistant Steve has requested a corner office.'],
-      ['shelf',8,7,2,1,'Gardening shelf','A manual titled "So You Have Soiled Yourself: Gardening Basics."']]},
+      ['planter',1,2,4,2,'The Steves','Three plants lean in. This appears to be a staff meeting.'],
+      ['planter',7,2,4,2,'The other Steves','A label says: "Water daily. Compliment hourly."'],
+      ['pot',2,5,1,2,'Assistant Steve','Assistant Steve has requested a corner office.'],
+      ['shelf',8,6,3,2,'Gardening shelf','A manual titled "So You Have Soiled Yourself: Gardening Basics."']]},
   {id:'post',w:10,h:12,
     style:{floor:'#b6c3be',alt:'#c6d1c6',wall:'#8faaa8',trim:'#d5ddd0',pattern:'wood',rug:'#9baebb'},
     walls:[[1,4],[8,4]],

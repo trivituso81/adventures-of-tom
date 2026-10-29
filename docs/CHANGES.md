@@ -1,3 +1,10 @@
+## 2026-10-28: Painted plate for Sprout House (the greenhouse)
+- Sprout House (map id `greenhouse`, the Square's greenhouse interior) now uses Tom's painting (`art/greenhouse.webp`, 768 x 640, 12 x 10 tiles at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (6,9) and spawn (6,8) are unchanged.
+- Walkable: the strip in front of the beds, the aisle either side of the barrel plant, the green rug, the arch (x 5 and 6, rows 8 and 9). Blocked: the glass wall, back bench, both potting beds, the barrel plant, the plant stool and hose on the left, the gardening shelf and plants on the right, the hedges and gate posts at the bottom.
+- Objects re-laid to the painting: The Steves (1,2) 4x2, the other Steves (7,2) 4x2, Assistant Steve on the plant stool (2,5) 1x2, gardening shelf (8,6) 3x2. All touched from the floor in front. Fern stays at (7,5). Object text unchanged.
+- New `tools/greenhouse_test.py`: objects touchable, Fern on floor, A opens dialogue at every prop, walking down the arch returns to the Square, portrait and landscape shots in `tools/shots/greenhouse-*.png`. `tools/reach_test.py greenhouse` 0 fails, `tools/smoke.py` no fails.
+- Known roughness: the minimap still draws the old tile look; the barrel plant in the middle has no line of its own yet.
+- Not reworded: no spoken lines changed.
 ## 2026-10-28: Painted plate for Crumb Bakery
 - The Crumb Bakery interior (room id `bakery`, 11 x 10 tiles) now uses Tom's painting (`art/bakery.webp`, 704 x 640 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,9) and spawn (5,8) are unchanged.
 - Walkable: the rug and checker floor (x 2 to 9, rows 4 to 7), the nook beside the work table (3,3), and the doorway and mat (5 and 6, row 8). Blocked: oven and work table, bread counter, window benches, fern, dresser, roll basket, half wall.
