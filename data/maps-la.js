@@ -961,20 +961,36 @@ const LA_ROOMS=[
       ['toybox',3,4,1,2,'Ball display','Star balls, party bottles and a little palm tree sign: THIS WAY TO FUN. FUN IS NOT REFUNDABLE.'],
       ['pot',1,6,1,1,'Shop fern','It has a price tag too. The tag just says: IT\'S FINE.'],
       ['pot',9,4,1,3,'Shop cactus','It has a price tag. The price is "no." Penny taught her well.']]},
+  // Backlot Wardrobe, painted plate (art/wardrobe.webp, engine/plate.js), 12 x 10 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
+  // Western rack and hat shelf back left, the call sheet and the space rack across the back, the continuity desk down the left side,
+  // the prop plant and trunks down the right. The two tiles of purple carpet between the gate posts (x5 and x6, rows 8 and 9) are the way out.
   {id:'wardrobe',w:12,h:10,
     style:{floor:'#cfc3d6',alt:'#dcd2e2',wall:'#6a4f7a',trim:'#e3d6e8',pattern:'tile',rug:'#8a6aa0'},
     rug:[3,5,6,2],
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '#####.######',
+      '####.....###',
+      '#####...####',
+      '#####...####',
+      '##........##',
+      '##..#..#..##',
+      '#####..#####'],
+    doors:[[5,9]],
     npcs:[
       {name:'Marguerite',x:6,y:5,look:'marguerite',lines:[
         'Backlot Wardrobe. If it was worn on screen, it lived here first.',
         "You're Tom? TNB's Tom! He found a shoe for us once. A lead actor's shoe. Four minutes before the take.",
         'We still talk about the shoe. Tell him there\'s always a rack here with his name on it.']}],
     objects:[
-      ['rack',1,2,3,1,'Rack A: Westerns','Forty cowboy hats. One cowboy. The cowboy is very tired.'],
-      ['rack',8,2,3,1,'Rack B: Space','Silver jumpsuits in every size. Even yours.'],
-      ['desk',2,7,2,1,'Continuity desk','Polaroids of every actor in every scene. Scene 12, the scarf was on the LEFT.'],
-      ['photo',6,1,1,1,'Call sheet','Tomorrow: 5 AM call. Forty extras. One horse. The horse has a stand-in.'],
-      ['pot',10,7,1,1,'Prop plant','It\'s fake. It\'s been in four movies. It has an agent.']]},
+      ['rack',1,1,4,3,'Rack A: Westerns','A shelf of cowboy hats, a rack of fringe, and a lasso. One cowboy. The cowboy is very tired.'],
+      ['rack',8,1,3,3,'Rack B: Space','Silver jumpsuits in every size. Even yours.'],
+      ['desk',0,4,4,3,'Continuity desk','Polaroids of every actor in every scene. Scene 12, the scarf was on the LEFT.'],
+      ['photo',6,2,2,2,'Call sheet','Crew call at 8. Western at 10:30, space at 1, horse stand-in at 3. The horse has a stand-in. The stand-in has opinions.'],
+      ['pot',9,5,2,2,'Prop plant','It\'s fake. It\'s been in four movies. It has an agent.'],
+      ['roadcase',10,7,2,2,'Hat case','A purple hat with gold buckles sits on a road case. It has been in more movies than Tom.']]},
   // The Starlite, painted plate (art/starlite.webp, engine/plate.js), 13 x 11 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
   // Stage and screen across the top, two blocks of seats with the center aisle (x6) between them, the concession bar down the right,
   // and the front strip (row 7) across the seat rows. The ticket desk and fern are bottom left; the velvet-rope nook (8,8) fronts the right fern.
