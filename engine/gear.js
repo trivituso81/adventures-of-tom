@@ -39,7 +39,7 @@ function garmentTint(kind,id,color,raw=false) {
   const map={};
   for(const k of g.keys) { if(!pal[k]) continue; const c=hexToHsl(pal[k]); map[k]=hslToHex(tint.h,tint.s,Math.max(.06,Math.min(.94,tint.l+(c.l-base.l)))); }
   const f=raw?1:(g.f||1),rows=[Math.floor(g.rows[0]*f),Math.ceil(g.rows[1]*f)];
-  const t={map,rows};
+  const t={map,rows,color};
   tintCache.set(ck,t);
   return t;
 }

@@ -728,6 +728,7 @@ function bigSpriteCanvas(rows,pal,scale,flash) {
 function drawSprite(rows,pal,x,y,scale,opts={}) {
   const {flash=false,alpha=1,lean=0}=opts;
   if(alpha<=0) return;
+  if(rows._paint&&!lean&&drawPainted(rows,x,y,scale,flash,alpha)) return;
   if(rows.length>=60&&!lean) {
     const prevA=gfx.globalAlpha; gfx.globalAlpha=alpha;
     gfx.drawImage(bigSpriteCanvas(rows,pal,scale,flash),Math.round(x),Math.round(y));

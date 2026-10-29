@@ -98,6 +98,13 @@
 - Tests: `tools/smoke.py` (tnb,nara and grace,rose) FAILS [], `tools/kit_test.py tom --speed2` all moves ran with their lines, frames looked at. Outfit tint, low HP, KO, Rose ride and the town overworld looked at in screenshots.
 - Not reworded: no spoken lines changed.
 
+## 2026-10-28: Tom is now truly painted (bitmap sprites)
+- Tom is drawn from his two new painted pose sheets (caricature, no outlines): `tools/sprite-bake/src/tom-battle-v2.png` and `tom-walk-v2.png`, baked by `bake_tom.py` into `art/chars/tom-battle.webp` (2x), `tom-ko.webp` (2x), `tom-ow.webp` (3x) and `data/tom-hires.js`.
+- New `engine/painted.js`: rows tagged `_paint` draw their painted frame (flip, flash and outfit recolour supported); rows are the fallback while the image loads. `drawSprite` has the fast path; `mirrorRows` (engine/tiles.js) keeps the tag and toggles `flip`. `garmentTint` now also returns `color`, used to recolour the painted shirt.
+- Same row geometry as before, so Rose's ride, hand points, hurt, KO, defend and outfits all still work. `TOM_HIRES_OFF=true` restores the old Tom.
+- New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
+- Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
+
 ## 2026-10-28: Painted plate for the Moon Club
 - The Moon Club hall (map id `moonclub`, chapter 9) now uses Tom's painting (`art/moonclub.webp`, 1920 x 1408, 30 x 22 tiles at 64 px, entry in `PLATES`). The ASCII plan stays underneath as the invisible tile layer; a `plateMask` is the walk map. The Dome (upstairs) is not painted yet.
 - The painting has no walls between the hall and the Coat Check and Card Room tops, so the rooms are tighter than the old plan: Coat Check floor is the rug strip (row 5, x 3 to 9) reached through the painted carved door (5 and 6, rows 6 to 8, opened in the wall); the Card Room is the strip x 17 to 18 plus row 5 (x 18 to 21) beside the tables. The Ballroom is the painted dance floor, entered through the gap in the rail at the top (x 12 to 18).

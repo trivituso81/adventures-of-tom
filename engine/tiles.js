@@ -13,7 +13,11 @@ function resample(rows,f) {
   }
   return out;
 }
-function mirrorRows(rows) { return rows.map(r=>r.split('').reverse().join('')); }
+function mirrorRows(rows) {
+  const m=rows.map(r=>r.split('').reverse().join(''));
+  if(rows._paint) m._paint={a:rows._paint.a,f:rows._paint.f,flip:!rows._paint.flip};
+  return m;
+}
 function prepOW(src,f) {
   const o={pal:src.pal};
   for(const k of ['down','up','side']) o[k]=src[k].map(fr=>f===1?fr:resample(fr,f));

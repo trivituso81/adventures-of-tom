@@ -1,79 +1,63 @@
 #!/usr/bin/env python3
-"""Bake Tom's painted character sheet into the game's own sprite format (palette keys + row strings).
+"""Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tom-sheet.png  (flat magenta background, 6 rows of poses, see docs/ART_PIPELINE.md)
-Output: data/tom-hires.js                     (do not hand-edit; re-run this script)
+Input : tools/sprite-bake/src/tom-battle-v2.png and tom-walk-v2.png (flat magenta background, see README.md)
+Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
+        data/tom-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
+
+The rows are a downscaled, quantized copy of each painted frame. The game's logic (hand points, Rose's seat, outfit keys,
+mirroring) reads the rows; the painted frame is what gets drawn (engine/painted.js). Same frame size either way.
 
 Usage : python3 tools/sprite-bake/bake_tom.py [--battle-h 100] [--ow-h 42] [--colors 46]
 """
 import argparse, json, os, sys
 import numpy as np
 from PIL import Image
-from scipy import ndimage as ndi
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SHEET = os.path.join(ROOT, 'tools/sprite-bake/src/tom-sheet.png')
+SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tom-hires.js')
+ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=100)   # idle height in grid rows (old sprite: 40 rows drawn at 2.6x = 104 px)
-ap.add_argument('--ow-h', type=int, default=42)        # standing height of the overworld sprite (old: 42 rows)
+ap.add_argument('--battle-h', type=int, default=100)   # idle height in grid rows
+ap.add_argument('--ow-h', type=int, default=42)        # standing height of the overworld sprite in rows
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
+os.makedirs(ART, exist_ok=True)
 
-# ---------------------------------------------------------------- slice the sheet
-im = Image.open(SHEET).convert('RGB')
-a = np.array(im).astype(int)
-R, G, B = a[:, :, 0], a[:, :, 1], a[:, :, 2]
-fg = (np.minimum(R, B) - G) <= 90          # not magenta
-proj = fg.sum(1)
-y_split = 520 + int(np.argmin(proj[520:565]))   # rows 3 and 4 touch; split where they are thinnest
-BANDS = {'down': (11, 176), 'up': (190, 360), 'left': (373, y_split), 'battle': (y_split, 718), 'react': (730, 900), 'face': (913, 1086)}
-NAMES = {'down': ['stand', 'step1', 'stand2', 'step2'], 'up': ['stand', 'step1', 'stand2', 'step2'],
-         'left': ['stand', 'step1', 'stand2', 'step2'],
-         'battle': ['idle', 'windup', 'strike', 'run1', 'run2', 'leap'],
-         'react': ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast'],
-         'face': ['neutral', 'happy', 'surprised', 'annoyed', 'proud', 'sad']}
 poses = {}
-for k, (y0, y1) in BANDS.items():
-    sub = fg[y0:y1]
-    lab, m = ndi.label(sub)
-    areas = ndi.sum(sub, lab, range(1, m + 1))
-    keep = np.isin(lab, [i + 1 for i, ar in enumerate(areas) if ar >= 150])      # drops specks
-    l2, m2 = ndi.label(ndi.binary_dilation(keep, iterations=14))
-    objs = ndi.find_objects(l2)
-    cells = sorted([(o[1].start, i + 1) for i, o in enumerate(objs)])
-    assert len(cells) == len(NAMES[k]), (k, len(cells))
-    for (_, idx), nm in zip(cells, NAMES[k]):
-        mask = keep & (l2 == idx)
-        if k == 'react' and nm == 'hurt':          # the yellow hit burst is drawn by the game, not part of the sprite
-            l3, n3 = ndi.label(ndi.binary_dilation(mask, iterations=3))
-            sz = ndi.sum(mask, l3, range(1, n3 + 1))
-            mask = mask & (l3 == 1 + int(np.argmax(sz)))
-        ys, xs = np.where(mask)
-        ya, yb, xa, xb = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
-        crop = a[y0 + ya:y0 + yb, xa:xb].copy()
-        m_ = mask[ya:yb, xa:xb]
-        sc = np.minimum(crop[:, :, 0], crop[:, :, 2]) - crop[:, :, 1]
-        edge = m_ & (sc > 25)
-        for c in (0, 2):                            # despill magenta fringe
-            crop[:, :, c] = np.where(edge, np.minimum(crop[:, :, c], crop[:, :, 1] + 25), crop[:, :, c])
-        alpha = np.where(m_ & (sc <= 60), 255, 0)
-        poses[f'{k}_{nm}'] = Image.fromarray(np.dstack([crop, alpha]).astype(np.uint8), 'RGBA')
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v2.png'),
+        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
+    poses['b_' + nm] = im
+walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
+    poses['w_' + nm] = im
 
 # ---------------------------------------------------------------- helpers
-def scaled(img, f):
-    """Resize with alpha-weighted (premultiplied) averaging, then threshold alpha so edges stay crisp."""
+def up(n, k):
+    return -(-n // k) * k
+
+def scaled_to(img, f):
+    """Resize with premultiplied alpha so the painted soft edge stays clean (no threshold)."""
     w, h = max(1, round(img.width * f)), max(1, round(img.height * f))
     arr = np.array(img).astype(float)
     al = arr[:, :, 3:4] / 255.0
-    pm = Image.fromarray((arr[:, :, :3] * al).astype(np.uint8), 'RGB').resize((w, h), Image.LANCZOS)
+    pm = Image.fromarray((arr[:, :, :3] * al).clip(0, 255).astype(np.uint8), 'RGB').resize((w, h), Image.LANCZOS)
     alr = Image.fromarray(arr[:, :, 3].astype(np.uint8), 'L').resize((w, h), Image.LANCZOS)
     pa, aa = np.array(pm).astype(float), np.array(alr).astype(float) / 255.0
     rgb = np.where(aa[:, :, None] > 0.02, pa / np.maximum(aa[:, :, None], 0.02), 0)
-    out = np.dstack([np.clip(rgb, 0, 255), np.where(aa >= 0.5, 255, 0)]).astype(np.uint8)
-    return Image.fromarray(out, 'RGBA')
+    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), aa * 255]).astype(np.uint8), 'RGBA')
+
+def hard(img, thr=0.5):
+    a = np.array(img)
+    a[:, :, 3] = np.where(a[:, :, 3] >= 255 * thr, 255, 0)
+    return Image.fromarray(a, 'RGBA')
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
@@ -83,17 +67,17 @@ def head_cx(img):
     band = al[top: top + max(4, int((ys.max() - top) * 0.30))]
     return float(np.where(band)[1].mean())
 
-def place(frames, anchor='head'):
-    """Put frames on one common canvas: body anchor on the centre column, feet on the bottom row."""
+def place(frames, k, anchor='head'):
+    """Put frames on one common canvas (size a multiple of k): head on the centre column, feet on the bottom row."""
     items = {}
     for nm, im_ in frames.items():
-        ax = head_cx(im_) if anchor == 'head' and not nm.endswith('ko') else im_.width / 2.0
+        ax = head_cx(im_) if anchor == 'head' else im_.width / 2.0
         items[nm] = (im_, ax)
     left = max(ax for _, ax in items.values())
     right = max(im_.width - ax for im_, ax in items.values())
-    half = int(np.ceil(max(left, right))) + 1
+    half = up(int(np.ceil(max(left, right))) + 1, k)
     Wc = half * 2
-    Hc = max(im_.height for im_, _ in items.values())
+    Hc = up(max(im_.height for im_, _ in items.values()), k)
     out = {}
     for nm, (im_, ax) in items.items():
         canvas = Image.new('RGBA', (Wc, Hc), (0, 0, 0, 0))
@@ -101,15 +85,36 @@ def place(frames, anchor='head'):
         out[nm] = canvas
     return out
 
-def tight_sides(frames):
-    """Trim columns that are empty in every frame (keeps the centre column centred)."""
-    arrs = {k: np.array(v)[:, :, 3] > 0 for k, v in frames.items()}
+def tighten(frames, k):
+    """Trim empty columns (both sides, symmetric) and empty rows above the tallest frame, keeping multiples of k."""
+    arrs = {n: np.array(v)[:, :, 3] > 8 for n, v in frames.items()}
     allm = np.any(np.stack(list(arrs.values())), axis=0)
-    cols = np.where(allm.any(0))[0]
+    cols = np.where(allm.any(0))[0]; rws = np.where(allm.any(1))[0]
     W = allm.shape[1]
-    half = max(W // 2 - cols.min(), cols.max() + 1 - W // 2)
-    x0, x1 = W // 2 - half, W // 2 + half
-    return {k: v.crop((x0, 0, x1, v.height)) for k, v in frames.items()}
+    half = up(max(W // 2 - cols.min(), cols.max() + 1 - W // 2), k)
+    half = min(half, W // 2)
+    top = (rws.min() // k) * k
+    return {n: v.crop((W // 2 - half, top, W // 2 + half, v.height)) for n, v in frames.items()}
+
+def rows_of(frames, k, ncolors):
+    """Downscale painted frames by k, quantize them together. Returns (palette, rows by name)."""
+    small = {n: hard(scaled_to(v, 1.0 / k)) for n, v in frames.items()}
+    return quantize(small, ncolors)
+
+def pack(frames, path):
+    """Write all frames into one webp atlas. Returns {name: [x, y, w, h]}."""
+    names = list(frames); w0, h0 = frames[names[0]].size
+    per = max(1, 2048 // w0)
+    nrows = -(-len(names) // per)
+    atlas = Image.new('RGBA', (min(per, len(names)) * w0, nrows * h0), (0, 0, 0, 0))
+    rects = {}
+    for i, n in enumerate(names):
+        x, y = (i % per) * w0, (i // per) * h0
+        atlas.paste(frames[n], (x, y))
+        rects[n] = [x, y, w0, h0]
+    atlas.save(path, 'WEBP', lossless=True, quality=100, method=6)
+    print('wrote', os.path.relpath(path, ROOT), atlas.size, os.path.getsize(path) // 1024, 'KB')
+    return rects
 
 def quantize(frames, ncolors):
     """One shared palette for a set of frames. Returns (palette dict key->hex, frames as row strings)."""
@@ -146,17 +151,6 @@ def quantize(frames, ncolors):
         out[nm] = rows
     return palette, out
 
-def trim_top(rows_by_name):
-    """Remove empty rows above the tallest frame (common top), keep every frame the same height."""
-    tops = []
-    for rows in rows_by_name.values():
-        t = 0
-        while t < len(rows) and set(rows[t]) <= {'.'}:
-            t += 1
-        tops.append(t)
-    t = min(tops)
-    return {k: v[t:] for k, v in rows_by_name.items()}
-
 def hexrgb(h):
     return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 
@@ -180,38 +174,31 @@ def shirt_info(palette, rows, f0, f1):
 def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
-# ---------------------------------------------------------------- battle set
-battle_names = {'idle': 'battle_idle', 'act': 'battle_strike', 'windup': 'battle_windup', 'celeb': 'react_win',
-                'run1': 'battle_run1', 'run2': 'battle_run2', 'leap': 'battle_leap', 'hurt': 'react_hurt',
-                'defend': 'react_defend', 'cast': 'react_cast', 'kneel': 'react_kneel'}
-fb = args.battle_h / poses['battle_idle'].height
-bt_src = {k: scaled(poses[v], fb) for k, v in battle_names.items()}
-bt_src = place(bt_src, 'head')
-bt_src = tight_sides(bt_src)
-bt_pal, bt_rows = quantize(bt_src, args.colors)
-bt_rows = trim_top(bt_rows)
+# ---------------------------------------------------------------- battle set (painted at KB x)
+battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
+                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
+                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+fb = args.battle_h * KB / poses['b_idle'].height
+bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
+bt_big = tighten(place(bt_big, KB, 'head'), KB)
+bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
+bt_rects = pack(bt_big, os.path.join(ART, 'tom-battle.webp'))
 
-# knocked out (lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT, so mirror it)
-ko_img = scaled(poses['react_ko'], fb)
-ko_ow_names = {}
+# knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
+ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
+ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
+ko_rows = ko_rows['ko']
+ko_rects = pack(ko_big, os.path.join(ART, 'tom-ko.webp'))
 
-# ---------------------------------------------------------------- overworld set
-fo = args.ow_h / poses['down_stand'].height
-ow_src = {}
-for d in ('down', 'up', 'left'):
-    for nm in ('stand', 'step1', 'step2'):
-        ow_src[f'{d}_{nm}'] = scaled(poses[f'{d}_{nm}'], fo)
-ow_src = place(ow_src, 'center')
-ow_src = tight_sides(ow_src)
-ow_pal, ow_rows = quantize(ow_src, args.colors)
-ow_rows = trim_top(ow_rows)
+# ---------------------------------------------------------------- overworld set (painted at KW x)
+fo = args.ow_h * KW / poses['w_down_stand'].height
+ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
+ow_big = tighten(place(ow_big, KW, 'center'), KW)
+ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
+ow_rects = pack(ow_big, os.path.join(ART, 'tom-ow.webp'))
 
 def mirror(rows):
     return [r[::-1] for r in rows]
-
-# KO sprite uses its own small palette quantised from the lying pose
-ko_pal, ko_rows = quantize({'ko': ko_img}, 28)
-ko_rows = ko_rows['ko']
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
 bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .47, .77)
@@ -242,26 +229,27 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
+atlas = {'bt': {'src': 'art/chars/tom-battle.webp', 'k': KB, 'rects': bt_rects},
+         'ko': {'src': 'art/chars/tom-ko.webp', 'k': KO_, 'rects': ko_rects},
+         'ow': {'src': 'art/chars/tom-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
-# ---------------------------------------------------------------- write data/tom-hires.js
 js = []
 js.append("'use strict';")
-js.append("// data/tom-hires.js — Tom, from Tom's painted character sheet (Oct 2026). GENERATED by tools/sprite-bake/bake_tom.py; do not hand-edit.")
-js.append("// Same format as the old Tom (palette keys + row strings), about 2.5x the detail. Loaded after data/battle-sprites.js and before data/recruit-sprites.js.")
+js.append("// data/tom-hires.js — Tom, from his two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_tom.py; do not hand-edit.")
+js.append("// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js).")
 js.append("const TOM_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
+js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
 for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
-for d, dn in (('down', 'down'), ('up', 'up'), ('side', 'left')):
-    frames = [ow_rows[f'{dn}_stand'], ow_rows[f'{dn}_step1'], ow_rows[f'{dn}_step2']]
-    if d == 'side':
-        frames = [mirror(f) for f in frames]       # the game's 'side' set faces RIGHT; 'left' is its mirror
-    js.append(f"    {d}:[" + ','.join(fmt_rows(f) for f in frames) + "],")
+for d in ('down', 'up', 'left'):
+    for n in ('stand', 'step1', 'step2'):
+        js.append(f"    {d}_{n}:" + fmt_rows(ow_rows[f'{d}_{n}']) + ",")
 js.append("  }")
 js.append("};")
 with open(OUT, 'w') as f:
