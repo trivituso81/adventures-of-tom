@@ -14,6 +14,14 @@
 - Checks: new `tools/creole_test.py` 0 fails (objects touchable, no cut-off floor, Odette answers, tables, booth and walls hold, door walked to Jefferson Park), smoke, jpark_test, bg_test, boards_test 0 fails. Portrait and landscape shots looked at.
 - Known: no foreground layer, so characters draw over the chair backs and the door plants.
 
+## 2026-10-29: Casa Alvarez (inside) is painted (Area 47, map id `casa`)
+- art/casa.webp (896 x 704, 14 x 11 tiles at 64 px), PLATES.casa (actorScale 1.98), plateMask and door/spawn in data/maps-la.js. Door (7,10) and (6,10), spawn (7,9).
+- The painting shows no doorway into the west rooms (laundry, bath, bedroom) or the bunk room, so they are scenery. Walkable: front lane at x 7, the kitchen and dining room, and the living room along row 6 (x 9 to 12).
+- Objects re-laid, all touchable: Kitchen island, Stove, Fridge (new), Dining table (new), Family wall, Big TV, Green sofa (new), Toy pile, Coat hooks (new), Shoe shelf (new). The old Bunk bed and Baby Lupita's crib objects are gone with their rooms (no room in the painting to touch them from).
+- NPCs moved off blocked tiles, spoken lines unchanged: Don Beto (12,6) in the wicker chair, Tony (5,5), Yesenia (8,2), Kevin (5,4), Daisy (4,4), Mateo (6,6), Sofi (8,5). Mrs. Alvarez (7,5) and Claudia (10,6) stay.
+- tools/casa_test.py (0 fails), smoke, jpark_test, ch12_test 0 fails.
+- Known: no foreground layer, so characters draw over the furniture. Kevin's bunk bed lines are now spoken away from the bunk bed; the sofa and TV rooms carry the scene.
+
 ## 2026-10-29: carbarn_test fixed (test only, no game change)
 - `tools/carbarn_test.py` failed "west arch leads to Jefferson Park" and "east rails lead to the Boiler Room" because a wandering monster (Lukewarm waits at the west arch) started a fight on arrival, which froze the walk. The exits and walk map were fine. The test now ends any fight and clears monsters near the player before each exit walk. 0 fails.
 

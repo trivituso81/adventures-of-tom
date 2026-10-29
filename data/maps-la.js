@@ -1157,43 +1157,62 @@ const LA_ROOMS=[
   {id:'casa',w:14,h:11,
     style:{floor:'#d8b48a',alt:'#e2c39c',wall:'#c98a5a',trim:'#f4e6c8',pattern:'tile',rug:'#2f8a8a'},
     rug:[4,4,6,4],
+    // Painted plate (art/casa.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // The painting shows no doorway into the west rooms (laundry, bath, bedroom) or the bunk room, so they are scenery. Kitchen and dining room in the middle,
+    // the living room to the east (reached along the bottom row, 9 to 12), and the front door lane at x 7 (rows 7 to 10, two wide at the stairs).
+    plateMask:[
+      '##############',
+      '##############',
+      '########.#####',
+      '#####.##.#####',
+      '####..##.#####',
+      '#####....#####',
+      '######.......#',
+      '#######.######',
+      '#######.######',
+      '######..######',
+      '######..######'],
+    door:[7,10],door2:[6,10],spawn:{x:7,y:9},
     npcs:[
       {name:'Mrs. Alvarez',x:7,y:5,look:'alvarez',lines:[
         'TEN. Ten people in a two-bedroom house from 1912. One bathroom. ONE.',
         'Tony, feet off my table! Kevin, the baby isn\'t a football! Mateo, give Abuela the remote! ...Tom, mijo, sit. If you can find a chair.',
         "Everybody says, 'Mama, the house is so full of love.' It's full of SOMETHING. Take tamales. Please. I need the room in my fridge."]},
-      {name:'Don Beto',x:11,y:3,look:'beto',lines:[
+      {name:'Don Beto',x:12,y:6,look:'beto',lines:[
         "I've been in this chair since the game started. Which game? Yes.",
         'Ten people. I counted once. Then I lost count. Then I took a nap.']},
-      {name:'Tony',x:4,y:5,look:'tony',lines:[
+      {name:'Tony',x:5,y:5,look:'tony',lines:[
         'Me and Yesenia are saving for our own place. In this market? We\'ll be here until Mateo goes to college.',
         'The two houses next door sold for more than this whole block cost in 1990. My mom isn\'t okay about it.']},
-      {name:'Yesenia',x:5,y:7,look:'yesenia',lines:[
+      {name:'Yesenia',x:8,y:2,look:'yesenia',lines:[
         'Sofi, no. Sofi. SOFI. ...She bit something. We don\'t have a dog. I don\'t know what she bit.',
         'Baby Lupita is finally asleep. If you wake her, you\'re moving in.']},
       {name:'Claudia',x:10,y:6,look:'claudia',lines:[
         'Night shift nurse. I sleep in the bathtub. It\'s the only room with a lock.',
         'Until somebody needs the bathroom. Somebody always needs the bathroom.']},
-      {name:'Kevin',x:3,y:8,look:'kevin',lines:[
+      {name:'Kevin',x:5,y:4,look:'kevin',lines:[
         "I share the bunk bed with Uncle Tony's exercise bike.",
         'It\'s not a metaphor. The bike is on the top bunk.']},
-      {name:'Daisy',x:9,y:8,look:'daisy',lines:[
+      {name:'Daisy',x:4,y:4,look:'daisy',lines:[
         "I'm making a documentary about this house. It's a horror movie.",
         "Scene one: the bathroom line. Scene two: who ate Abuela's last concha."]},
-      {name:'Mateo',x:6,y:8,look:'mateo',duration:0.45,lines:[
+      {name:'Mateo',x:6,y:6,look:'mateo',duration:0.45,lines:[
         'Truck! TRUCK!',
         'Ba! Ba! ...Truck.']},
-      {name:'Sofi',x:8,y:6,look:'sofi',duration:0.45,lines:[
+      {name:'Sofi',x:8,y:5,look:'sofi',duration:0.45,lines:[
         "I'm a dinosaur. RAWR.",
         "Abuela says no more dinosaurs inside. I'm a quiet dinosaur. rawr."]}],
     objects:[
-      ['table',2,3,2,2,'Kitchen table',"Tamales, homework, a diaper bag, three phones charging off one outlet, and a sign in Mrs. Alvarez's handwriting: NO."],
-      ['counter',7,1,3,1,'Stove','Four pots on four burners. A pot of beans that\'s been simmering since 1998.',{variant:'bread'}],
-      ['recliner',11,1,2,2,"Don Beto's recliner",'The game is on. The volume is at 60. Nobody has ever seen it lower.'],
-      ['bed',1,7,2,2,'Bunk bed','Kevin on the bottom. An exercise bike on the top. Don\'t ask how it got up there.'],
-      ['bed',11,7,2,2,"Baby Lupita's crib",'Baby Lupita, seven months old, asleep. Somehow. Nobody breathe.'],
-      ['toybox',5,9,1,1,'Toy pile','Blocks, a plastic dinosaur missing its tail, and the TV remote. Mateo hid it again.'],
-      ['photo',5,1,1,1,'Family wall','Four generations, two weddings, one quinceañera, and a photo of the house in 1975, back when it had a lawn.']]},
+      ['table',6,2,2,2,'Kitchen island',"Tamales, homework, a diaper bag, three phones charging off one outlet, and a sign in Mrs. Alvarez's handwriting: NO."],
+      ['counter',5,1,1,2,'Stove','Four pots on four burners. A pot of beans that\'s been simmering since 1998.',{variant:'bread'}],
+      ['pot',8,1,1,1,'Fridge','Magnets from eleven countries. Nobody in this house has been to any of them. A tamale count in marker on the door: 38.'],
+      ['table',6,4,2,1,'Dining table','Sunflowers in a jar, a half-finished jigsaw puzzle and Daisy\'s storyboard. Scene one is the bathroom line.'],
+      ['photo',9,4,2,1,'Family wall','Four generations, two weddings, one quinceañera, and a photo of the house in 1975, back when it had a lawn.'],
+      ['recliner',12,4,2,2,'Big TV','The game is on. The volume is at 60. Nobody has ever seen it lower.'],
+      ['bench',9,5,3,1,'Green sofa','Four generations have sat here. Two of the cushions belong to Tony and are not for sharing.'],
+      ['toybox',5,6,1,1,'Toy pile','Blocks, a plastic dinosaur missing its tail, and the TV remote. Mateo hid it again.'],
+      ['photo',6,8,1,1,'Coat hooks','Eleven coats on six hooks. Nobody knows whose the green one is. It has been here since 2019.'],
+      ['shelf',8,8,1,1,'Shoe shelf','Forty shoes. Zero pairs. Tony\'s boots are the only ones that match.']]},
   {id:'loftlobby',name:'The Lofts Lobby',w:12,h:10,
     style:{floor:'#d8b57a',alt:'#e0c08a',wall:'#8a5a44',trim:'#d9c0a0',pattern:'tile',rug:'#7a4a3a'},
     rug:[4,4,4,2],
