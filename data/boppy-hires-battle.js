@@ -27,6 +27,7 @@
   sp.scale=2*SZ; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
   sp.idle=P('idle'); sp.act=P('act'); sp.celeb=P('celeb'); sp.windup=P('windup'); sp.leap=P('leap');
   sp.hurtPose=P('hurt'); sp.defend=P('defend'); sp.castPose=P('cast'); sp.kneel=P('kneel');
+  sp.hip=sp.idle; sp.wind=sp.windup;   // stock stances with no painted pose of their own: nearest painted one (Sheet B poses will replace)
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.cheer=[sp.celeb,sp.celebFlip]; sp.runFlip=sp.run.map(mir);
   // Extra attack poses (Sheet A, data/boppy-extra.js): x_swat, x_follow (cap in hand), x_castb (faces right), x_castf, x_reel, x_pepper, x_fire, x_seed, x_jar, x_marks, x_sprint
