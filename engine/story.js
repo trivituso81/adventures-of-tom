@@ -623,7 +623,7 @@ function partClearSummary(sv) {
 }
 function confirmPart2(slot) {
   if(!readSave('auto')) { beginPart2(slot); return; }
-  openChoice('Part 2','Part 2 starts from this clear data. It replaces the autosave once it begins. Slots 1 to 3 and the clear data are kept.',[
+  titleAsk('Part 2','Part 2 starts from this clear data. It replaces the autosave once it begins. Slots 1 to 3 and the clear data are kept.',[
     {label:'START PART 2',fn:()=>beginPart2(slot)},
     {label:'BACK',fn:titleMenu}
   ]);

@@ -42,7 +42,7 @@ function beginBonus() {
 }
 window.confirmBonus=function() {
   if(!readSave('auto')) { beginBonus(); return; }
-  openChoice('Nine Scoops','The bonus chapter replaces the autosave once it begins. Slots 1 to 3 are kept.',[
+  titleAsk('Nine Scoops','The bonus chapter replaces the autosave once it begins. Slots 1 to 3 are kept.',[
     {label:'START',fn:beginBonus},
     {label:'BACK',fn:titleMenu}
   ]);
