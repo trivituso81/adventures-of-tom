@@ -908,16 +908,32 @@ const LA_ROOMS=[
   {id:'juicebar',w:11,h:9,
     style:{floor:'#dfe8d0',alt:'#eaf0de',wall:'#6fb35a',trim:'#f4fbe8',pattern:'tile',rug:'#9ccf7a'},
     rug:[3,5,5,2],
+    // Painted plate (art/juicebar.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Juice counter and blender wall across the back (Sage works behind it; A on the counter in front of him talks to him),
+    // wheatgrass beds and the herb table down the sunny left side, the big fern and the supplement shelf on the right.
+    // The doormat (x 4 to 6, rows 7 and 8) between the two gate posts is the way out.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '########.##',
+      '###......##',
+      '###......##',
+      '##.......##',
+      '####...####',
+      '####...####'],
+    doors:[[4,8],[6,8]],
     npcs:[
-      {name:'Sage',x:5,y:4,look:'sage',lines:[
+      {name:'Sage',x:5,y:2,look:'sage',roam:0,lines:[
         'Welcome. Breathe in. Now order.',
         'We opened in March. The pupuseria next door has been here since 1994. We\'re learning a lot.',
         "Today's special is celery. Doña Carmen says that's not a meal. She's right."]}],
     objects:[
-      ['counter',3,2,5,1,'Juice bar','A blender the size of a car engine. It sounds like one too.',{variant:'tea'}],
-      ['planter',1,6,2,1,'Wheatgrass','Grown on site. Harvested on site. Judged on site.'],
-      ['pot',9,1,1,1,'Fern','It\'s thriving. It\'s the only thing here that\'s not stressed.'],
-      ['shelf',8,6,2,1,'Supplement shelf','Powders. So many powders. One just says ENERGY in capital letters.']]},
+      ['counter',3,3,5,1,'Juice bar','A blender the size of a car engine. It sounds like one too.',{variant:'tea',across:true}],
+      ['planter',1,2,2,4,'Wheatgrass','Grown on site. Harvested on site. Judged on site.'],
+      ['pot',1,6,1,1,'Herb table','Basil, mint and a tag that says BE GENTLE. The basil looks like it took that personally.'],
+      ['pot',8,2,2,1,'Fern','It\'s thriving. It\'s the only thing here that\'s not stressed.'],
+      ['shelf',9,3,2,4,'Supplement shelf','Powders. So many powders. One just says ENERGY in capital letters.']]},
   {id:'nickels',w:11,h:9,
     style:{floor:'#d9c49c',alt:'#e6d3ad',wall:'#3a9ca0',trim:'#f1d9b5',pattern:'check',rug:'#2f6f73'},
     rug:[3,6,5,2],

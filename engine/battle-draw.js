@@ -661,6 +661,8 @@ function facingTarget() {
     if(!f.move&&f.x===x&&f.y===y) return {kind:'npc',value:f,x,y};
 
   const o=currentMap.objectAt.get(key(x,y));
+  // A counter with `across:true` lets you talk to whoever stands right behind it (the juice bar's Sage).
+  if(o&&o.across) { const bx=x+d.x,by=y+d.y; for(const n of currentMap.npcs) if(occupied(n,bx,by)) return {kind:'npc',value:n,x:bx,y:by}; }
   if(o&&o.text) return {kind:'object',value:o,x,y};
 
   const portal=currentMap.portals.get(key(x,y));

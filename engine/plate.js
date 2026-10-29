@@ -19,6 +19,7 @@ PLATES.coffee={src:'art/coffee.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.boiler={src:'art/boilerroom.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.ramen={src:'art/ramen.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.tomsuite={src:'art/tomsuite.webp',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.juicebar={src:'art/juicebar.webp?v=20261029',px:64,img:null,ready:false};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;
@@ -50,7 +51,7 @@ plateSetK.k=1;
 // (a counter or a sofa should come up to a character's waist, not their knees). Measured from the Taxi desk, Amy's island and sofa,
 // the bakery counter and the dining chairs: adults wanted about 1.8x their street size, then Tom asked for 10% more: 1.98x. Feet stay on the same tile, the sprite grows upward.
 const INTERIOR_ACTOR_SCALE=1.98;
-for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','amyhouse','grands','elliehouse','loftlobby','lofts']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
+for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','amyhouse','grands','elliehouse','loftlobby','lofts','juicebar']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
 // Outdoor maps (the streets, parks and yards): Tom asked for 20% bigger.
 const OUTDOOR_ACTOR_SCALE=1.2;
 function actorK() {

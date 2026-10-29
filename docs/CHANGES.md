@@ -1,3 +1,12 @@
+## 2026-10-29: Very Green Juice (inside) is painted
+- New `art/juicebar.webp` (Tom's painting, area 40, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.juicebar` with the interior actor scale. Map `juicebar` keeps its size. Door (5,8) and spawn (5,7) unchanged; the whole doormat between the gate posts (x 4 to 6, rows 7 and 8) now walks and all three bottom tiles are exits to Jefferson Park (`doors:[[4,8],[6,8]]`).
+- Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter, the open floor right of the counter (8,3), the sunny left side down to the herb table. Counter and blender wall, wheatgrass beds, herb table, big fern and the supplement shelf are painted and blocked.
+- Objects re-laid: Juice bar counter (3,3,5,1), Wheatgrass beds (1,2,2,4), new Herb table (1,6) with one new unvoiced line, Fern (8,2), Supplement shelf (9,3,2,4). Sage moved behind the counter to (5,2), where the painting's keeper stands; her lines are NOT changed (clips still match).
+- Engine: a counter object with `across:true` lets A talk to whoever stands directly behind it (`facingTarget` in `engine/battle-draw.js`), so Sage can be talked to across the counter. Only the juice bar counter uses it.
+- Checks: new `tools/juicebar_test.py` 0 fails (objects touchable, Sage across the counter, all three mat tiles exit, walls hold), smoke, bg_test, jpark_test, taxi_test, shop_test 0 fails. Portrait and landscape shots looked at.
+
+
+
 ## 2026-10-29: Ramen Ramen is painted (Area 39, map id `ramen`)
 - New `art/ramen.webp` (Tom's painting, 768 x 576 = 12 x 9 tiles at 64 px) registered as `PLATES.ramen` (`?v=20261029`, interior actor scale 1.98). Map size unchanged; the old tile-drawn shop is gone.
 - Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter (rows 4 and 5), the rug alcove at (2,3), and the two tiles under the noren curtain (x 5 and 6, rows 6 to 8) as the way out. The counter and stools, kitchen, sake shelf, bamboo pot, lantern step, corner booth and both front fences are blocked.
