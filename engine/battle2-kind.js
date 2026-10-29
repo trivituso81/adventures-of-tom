@@ -302,6 +302,9 @@ SC.tb_rec=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez(ms/250)*(ms>P.off?1-ez((ms-P.
   // Thumb over the lens: in at th0, out at th1, a cheeky peek back at pk0..pk1.
   const th=ms<P.th1?ez(seg(ms,P.th0,P.th0+300)):1-ez(seg(ms,P.th1,P.th1+260)),pk=Math.sin(seg(ms,P.pk0,P.pk1)*Math.PI)*.55;
   gfx.globalAlpha=1; thumb(Math.max(th,pk),s.t*5); };
+// Painted Grace pose by name with the drop that puts her feet on the ground (hip-centred frames); null without the painted set.
+const GQ=n=>{ const W=typeof GRACE_WHEEL!=='undefined'&&GRACE_WHEEL,H=typeof GRACE_WHEEL_HIRES!=='undefined'&&GRACE_WHEEL_HIRES,g=BATTLE_SPRITES.grace;
+  if(!W||!W.painted||!H||!H.rects[n]||!g||!g.hires) return null; return {fr:W.painted(n),dy:(H.rows-H.foot[n])*g.scale}; };
 B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tgt=(E2.targets||[]).find(t=>t.side==='foe')||list.find(f=>f.row==='front')||list[0],F=ST.foe(tgt);
@@ -341,7 +344,10 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<650) { const k=ez(ms/650); x=lerp(c.origX,gx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,1); }
     else if(ms<P.back) { x=gx; y=gb; f=sp.idle;
       if(ms<P.land&&sp.beg) { f=sp.beg; y+=Math.abs(Math.sin(seg(ms,P.plead0,P.plead1)*Math.PI*6))*-2; }
-      if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celeb; } }
+      if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celeb; }
+      // painted begging sequence (data/grace-wheel-use.js, sheet C): kneel, hop, pout, kneel, gasp at the box, squeal at the landing, happy bounce
+      if(GQ('sq_kneel')) { const nm=ms<P.land?(ms<1500?'sq_kneel':ms<2100?'sq_hop':ms<2800?'sq_pout':ms<P.box?'sq_kneel':'sq_gasp'):(ms<P.land+600?'sq_squeal':'sq_joy');
+        const q=GQ(nm); f=q.fr; y+=q.dy+(nm==='sq_hop'?-Math.abs(Math.sin(ms/110))*10:0)+(nm==='sq_gasp'?-Math.abs(Math.sin(ms/90))*5:0); } }
     else { const k=ez(seg(ms,P.back,P.back+600)); x=lerp(gx,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
     st.gx=x; st.gb=y; return {cx:x,base:y,frame:f}; });
   // Tom: stays put, sighs, shrugs and says fine, then celebrates the landing.

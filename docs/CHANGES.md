@@ -540,3 +540,6 @@ Known: Dot says "ten doors" (should be eleven); ch15 QUIET glyphs; ch17_test pre
 
 ## Grace sheet B poses (2026-10-29)
 Painted frames for her level-5 moves (src tools/sprite-bake/src/grace-poses-b.png, baked by bake_grace_poses.py into art/chars/grace-wheel.webp): hs_flip, hs_land, aerial, db_tuck, db_stick, p10. Handspring, Beam Dismount and Perfect 10 now draw them (engine/battle-draw.js, gw()); `aerial` is baked but not wired yet. Perfect 10 ends on the p10 pose (fx.p10).
+
+## Squishy Delivery painted begging sequence (2026-10-29)
+Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq_kneel, sq_hop, sq_pout, sq_gasp, sq_squeal, sq_joy. B2_TOMBO_ANIM.grace1 (engine/battle2-kind.js, GQ helper) plays kneel, hop, pout, kneel, gasp at the gift box, squeal on the landing, then a happy bounce. Falls back to the old kneel and celebrate frames if the painted set is missing.

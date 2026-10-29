@@ -6,6 +6,7 @@ Input : tools/sprite-bake/src/grace-poses-a1.png   (11 figures: row 1 lunge star
         tools/sprite-bake/src/grace-walk-v2.png    (front and side standing frames)
         tools/sprite-bake/src/grace-battle-v2.png  (only to measure her size)
         tools/sprite-bake/src/grace-poses-b.png    (1 row: hs_flip hs_land aerial db_tuck db_stick p10)
+        tools/sprite-bake/src/grace-poses-c.png    (1 row, Squishy Delivery: sq_kneel sq_hop sq_pout sq_gasp sq_squeal sq_joy)
 Output: art/chars/grace-wheel.webp   one atlas of FRAME x FRAME px frames, hip at the exact centre of every frame
         data/grace-wheel-hires.js    rects and frame size (generated; do not hand-edit)
 
@@ -30,6 +31,7 @@ FRAME = 260            # atlas px; 130 rows at 2 px per row, drawn at scale 1 (t
 a1 = slice_sheet(os.path.join(SRC, 'grace-poses-a1.png'), [['lunge', 'star', 'handstand', 'land', 'knee', 'kick'], ['split', 'bridge', 'dance_a', 'balance_a', 'bow_a']], robust=True, split_erode=3)
 a2 = slice_sheet(os.path.join(SRC, 'grace-poses-a2.png'), [['tuck', 'leap', 'salute', 'dance', 'balance', 'bow']], robust=True)
 b1 = slice_sheet(os.path.join(SRC, 'grace-poses-b.png'), [['hs_flip', 'hs_land', 'aerial', 'db_tuck', 'db_stick', 'p10']], robust=True)
+c1 = slice_sheet(os.path.join(SRC, 'grace-poses-c.png'), [['sq_kneel', 'sq_hop', 'sq_pout', 'sq_gasp', 'sq_squeal', 'sq_joy']], robust=True)
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 wk = slice_sheet(os.path.join(SRC, 'grace-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]], robust=True)
 bt = slice_sheet(os.path.join(SRC, 'grace-battle-v2.png'), [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']], robust=True)
@@ -62,6 +64,7 @@ BATTLE_F = 80 * 2 / bt['idle'].height
 f_of = {'a1': BATTLE_F * REF / teal_h(a1['land']),
         'a2': BATTLE_F * REF / teal_h(a2['salute']),
         'b': BATTLE_F * REF / teal_h(b1['hs_land']) * float(os.environ.get('BFIX', '1')),
+        'c': BATTLE_F * REF / teal_h(c1['sq_pout']) * float(os.environ.get('CFIX', '1')),
         'wk': BATTLE_F * REF / teal_h(wk['down_stand'])}
 print('scale factors', {k: round(v, 3) for k, v in f_of.items()}, 'battle', round(BATTLE_F, 3))
 
@@ -71,7 +74,9 @@ order = [('stand', wk['down_stand'], 'wk'), ('sstand', wk['left_stand'], 'wk'),
          ('tuck', a2['tuck'], 'a2'), ('leap', a2['leap'], 'a2'), ('salute', a2['salute'], 'a2'), ('dance', a2['dance'], 'a2'),
          ('balance', a2['balance'], 'a2'), ('bow', a2['bow'], 'a2'),
          ('hs_flip', b1['hs_flip'], 'b'), ('hs_land', b1['hs_land'], 'b'), ('aerial', b1['aerial'], 'b'),
-         ('db_tuck', b1['db_tuck'], 'b'), ('db_stick', b1['db_stick'], 'b'), ('p10', b1['p10'], 'b')]
+         ('db_tuck', b1['db_tuck'], 'b'), ('db_stick', b1['db_stick'], 'b'), ('p10', b1['p10'], 'b'),
+         ('sq_kneel', c1['sq_kneel'], 'c'), ('sq_hop', c1['sq_hop'], 'c'), ('sq_pout', c1['sq_pout'], 'c'),
+         ('sq_gasp', c1['sq_gasp'], 'c'), ('sq_squeal', c1['sq_squeal'], 'c'), ('sq_joy', c1['sq_joy'], 'c')]
 
 frames, hips = {}, {}
 for nm, im, sh in order:
