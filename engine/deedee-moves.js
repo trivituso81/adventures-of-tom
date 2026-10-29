@@ -1470,7 +1470,7 @@ D.sunday_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2Liv
   const seatOf=new Map(); seatOf.set(m,7); others.forEach((p,k)=>seatOf.set(p,[1,3,5,6,4,2,0][k]));
   const seatX=p=>seat0+seatOf.get(p)*seatW;
   const cookF=(u,tt)=>['act','throw','wind','celeb'][Math.floor(tt*8)%4];
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:cook.x<me.x?'walk':'walkR'},{t:700,x:cook.x,y:cook.y,f:'hip'},{t:950,f:'aim'},{t:P.cook0,f:cookF,dx:(u,tt)=>Math.sin(tt*20)*3,hop:5,hn:6},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:cook.x<me.x?'walk':'walkR'},{t:700,x:cook.x,y:cook.y,f:DD_XF('bell','hip')},{t:950,f:'aim'},{t:P.cook0,f:cookF,dx:(u,tt)=>Math.sin(tt*20)*3,hop:5,hn:6},
     {t:P.go,f:'throw',hop:8},{t:3350,f:seatX(m)<cook.x?'walk':'walkR'},{t:3900,x:seatX(m),y:seatY,f:'spread'},{t:4550,f:'celeb',hop:10,hn:2},{t:5300,f:'clap'},
     {t:5600,f:me.x<seatX(m)?'walk':'walkR'},{t:6300,x:'home',y:'home',f:'idle'}]);
   for(const p of others) { const U=ST.unit(p),dx=seatX(p)-U.x,dy=seatY-U.base,k=p.idx; jog(p,6300,(ms,tt)=>{
@@ -1552,7 +1552,7 @@ D.moon_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2LiveP
   const chest={x:me.x-6,y:me.base-DH()*.42};
   const P={t0:0,moon,h0:1600,h1:2400,h2:3150,h3:3700,hx:chest.x,hy:chest.y,gx:Gp.x,gy:Math.round((Gp.top+Gp.base)/2),bx0:Math.max(0,Gp.x0-26),bx1:Math.min(576,Gp.x1+26),by:Gp.base+10,top:moon.y+moon.r};
   const hugX=me.x-12,hugY=me.base;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:800,f:'spread'},{t:1500,f:'clap'},{t:1600,f:'celeb2'},{t:2400,f:'spread'},{t:3550,f:'aim'},{t:4300,f:'celeb',hop:8},{t:4900,f:'throw'},{t:5600,f:'idle'},{t:6400,f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:800,f:'spread'},{t:1500,f:'clap'},{t:1600,f:DD_XF('launch','celeb2')},{t:2400,f:'spread'},{t:3550,f:'aim'},{t:4300,f:'celeb',hop:8},{t:4900,f:'throw'},{t:5600,f:'idle'},{t:6400,f:'idle'}]);
   for(const p of others) { const U=ST.unit(p),dx=(hugX-U.x)*.55,dy=(hugY-U.base)*.55,k=p.idx; jog(p,6400,(ms,tt)=>{
     if(ms<800) return {};
     if(ms<1400) { const q=ez((ms-800)/600); return {frame:dx>0?'runR':'run',dx:dx*q,dy:dy*q}; }
