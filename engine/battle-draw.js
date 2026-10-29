@@ -101,7 +101,7 @@ function drawBattle() {
     const runFrame=running?(sp.run?sp.run[Math.floor(t*12)%2]:(Math.floor(t*14)%2?sp.expr:sp.idle)):null;
     const approaching=fx.appr>0&&sp.run&&!punching&&!running;
     const tossing=fx.toss>0&&sp.wind,aiming=fx.aim>0&&sp.aim;
-    let frame=punching?sp.act:(cheering?cheerFrame:(silly?sillyFrame:(dancing?danceFrame:(twirling?(spinFrame?sp.flip:sp.idle):((hurt||guarding)?sp.kneel:sp.idle)))));
+    let frame=punching?sp.act:(cheering?cheerFrame:(silly?sillyFrame:(dancing?danceFrame:(twirling?(spinFrame?sp.flip:sp.idle):((guarding&&sp.defend)?sp.defend:((hurt||guarding)?sp.kneel:sp.idle))))));
     if(approaching) { const e=fx.apprDur-fx.appr; frame=(e<.7||fx.appr<.35)?sp.run[Math.floor(t*12)%2]:sp.idle; }
     if(tossing) frame=fx.toss>.45?sp.wind:sp.throw;
     if(aiming&&!approaching) frame=sp.aim;
@@ -304,7 +304,7 @@ function drawBattle() {
       rect(tx-len*sp.scale,ty,len*sp.scale,sp.scale*.7,'#f4a6b8');
       rect(tx-len*sp.scale+sp.scale,ty+sp.scale*.7,sp.scale*.6,sp.scale*1.3,'#c9607e');
     }
-    if(hurt&&!punching) {
+    if(hurt&&!punching&&!sp.hires) {
       const ey=(sp.eyeAt&&sp.eyeAt.get(frame))||sp.eye;
       const bx=x+ey.col*sp.scale-sp.scale,by=y+ey.row*sp.scale-sp.scale;
       rect(bx,by,sp.scale*3,sp.scale*3,'rgba(96,52,130,.55)');

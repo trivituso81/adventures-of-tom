@@ -702,9 +702,38 @@ BATTLE_SPRITES.grace.beg=[
 ];
 BATTLE_SPRITES.grace.begFlip=BATTLE_SPRITES.grace.beg.map(r=>r.split('').reverse().join(''));
 
+// Big (painted, 60+ row) sprites are drawn once into an offscreen canvas per (frame, palette, scale, flash, outfit tint, kneel cut)
+// and then blitted, so higher detail costs one drawImage instead of thousands of fillRects.
+const SPRITE_CACHE=new WeakMap();
+let spriteCacheId=0;
+function bigSpriteCanvas(rows,pal,scale,flash) {
+  let m=SPRITE_CACHE.get(rows); if(!m) { m=new Map(); SPRITE_CACHE.set(rows,m); }
+  const t=activeTint;
+  const key=(pal._cid||(pal._cid=++spriteCacheId))+'|'+scale+'|'+(flash?1:0)+'|'+(t?(t.rows.join(',')+JSON.stringify(t.map)):'')+'|'+activeKneelCut;
+  let c=m.get(key); if(c) return c;
+  const w=Math.ceil(rows[0].length*scale)+1,h=Math.ceil(rows.length*scale)+1;
+  c=document.createElement('canvas'); c.width=w; c.height=h;
+  const g=c.getContext('2d');
+  for(let r=0;r<rows.length;r++) {
+    const row=rows[r],y0=Math.round(r*scale),y1=Math.round((r+1)*scale);
+    for(let q=0;q<row.length;q++) {
+      const ch=row[q]; if(ch==='.') continue;
+      const x0=Math.round(q*scale),x1=Math.round((q+1)*scale);
+      g.fillStyle=flash?'#fff8e6':((t&&tintColor(ch,r))||pal[ch]);
+      g.fillRect(x0,y0,x1-x0,y1-y0);
+    }
+  }
+  m.set(key,c); return c;
+}
 function drawSprite(rows,pal,x,y,scale,opts={}) {
   const {flash=false,alpha=1,lean=0}=opts;
   if(alpha<=0) return;
+  if(rows.length>=60&&!lean) {
+    const prevA=gfx.globalAlpha; gfx.globalAlpha=alpha;
+    gfx.drawImage(bigSpriteCanvas(rows,pal,scale,flash),Math.round(x),Math.round(y));
+    gfx.globalAlpha=prevA;
+    return;
+  }
   const prevAlpha=gfx.globalAlpha;
   gfx.globalAlpha=alpha;
   for(let r=0;r<rows.length;r++) {
