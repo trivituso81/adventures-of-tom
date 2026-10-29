@@ -16,7 +16,7 @@ def _magentaness(a):
     return np.minimum(a[:, :, 0], a[:, :, 2]) - a[:, :, 1]
 
 
-def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False):
+def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_erode=0):
     """robust=True is for characters whose clothes sit close to magenta (Grace's violet leotard): foreground is judged by
     distance to the real background colour, interior pixels keep their colour untouched, and only the rim is decontaminated
     (colour copied from the nearest interior pixel, alpha from where the pixel sits between that colour and the background)."""
@@ -32,11 +32,13 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False):
         bad = ndi.binary_propagation(rim, mask=rim | pink)              # the pink that connects to the silhouette edge
         core = ndi.binary_erosion(fg & ~bad, iterations=1)
         sc = None
+        lmask = fg
     else:
         sc = _magentaness(img)
         fg = sc <= 90                                   # clearly not background
+        lmask = fg
     # horizontal bands (one per row of poses)
-    proj = fg.sum(1)
+    proj = lmask.sum(1)
     bands, inb, y0 = [], False, 0
     for y, v in enumerate(proj):
         if v > 3 and not inb:
@@ -51,17 +53,30 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False):
         raise SystemExit(f'{path}: found {len(bands)} rows, expected {len(rows_names)}: {bands}')
     out = {}
     for (ya, yb), names in zip(bands, rows_names):
-        sub = fg[ya:yb]
-        lab, n = ndi.label(sub)
-        areas = ndi.sum(sub, lab, range(1, n + 1))
-        keep = np.isin(lab, [i + 1 for i, ar in enumerate(areas) if ar >= min_area])
-        l2, m2 = ndi.label(ndi.binary_dilation(keep, iterations=dilate))
-        objs = ndi.find_objects(l2)
-        cells = sorted([(o[1].start, i + 1) for i, o in enumerate(objs)])
+        sub = lmask[ya:yb]
+        if split_erode:
+            # figures that nearly touch: label the eroded cores, then give every pixel to its nearest core (within reach)
+            ce = ndi.binary_erosion(sub, iterations=split_erode)
+            labE, nE = ndi.label(ce)
+            arE = ndi.sum(ce, labE, range(1, nE + 1))
+            labE = np.where(np.isin(labE, [i + 1 for i, ar in enumerate(arE) if ar >= min_area // 3]), labE, 0)
+            dd, (iy, ix) = ndi.distance_transform_edt(labE == 0, return_indices=True)
+            assigned = labE[iy, ix]
+            l2 = np.where((dd <= split_erode + 4) & (dist[ya:yb] > 30 if robust else sub), assigned, 0)
+            ids = [i for i in np.unique(l2) if i > 0]
+            cells = sorted([(np.where(l2 == i)[1].min(), int(i)) for i in ids])
+            keep = l2 > 0
+        else:
+            labd, n = ndi.label(sub)
+            areas = ndi.sum(sub, labd, range(1, n + 1))
+            keep = np.isin(labd, [i + 1 for i, ar in enumerate(areas) if ar >= min_area])
+            l2, m2 = ndi.label(ndi.binary_dilation(keep, iterations=dilate))
+            objs = ndi.find_objects(l2)
+            cells = sorted([(o[1].start, i + 1) for i, o in enumerate(objs)])
         if len(cells) != len(names):
             raise SystemExit(f'{path}: row {ya}-{yb} has {len(cells)} figures, expected {len(names)}')
         for (_, idx), nm in zip(cells, names):
-            region = ndi.binary_dilation(keep & (l2 == idx), iterations=3)      # include the soft edge pixels
+            region = (l2 == idx) if split_erode else ndi.binary_dilation(keep & (l2 == idx), iterations=3)      # include the soft edge pixels
             ys, xs = np.where(region)
             y_a, y_b, x_a, x_b = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
             P = img[ya + y_a: ya + y_b, x_a: x_b]
