@@ -1,3 +1,9 @@
+## 2026-10-29: The Stage Set is painted
+- New `art/stageset.webp` (Tom's painting, 1280 x 896 = 20 x 14 tiles at 64 px) registered as `PLATES.stageset` (`?v=20261029`). Map `stageset` resized from 20 x 16 to 20 x 14 to match the painting.
+- Walk map (`plateMask`): the compass floor, the stairs to the director's platform (x 10 and 11, rows 4 and 5) and the entry ramp (x 9 to 11, rows 12 and 13). Castle ruins, scaffolds, camera crane, crates and lights are painted and blocked.
+- Exits: ramp row 13 (x 9 to 11) to Soundstage 7 (12,1) and (13,1). Soundstage 7's catwalk exits now arrive at the set's (10,12) and (11,12). Spawn (10,12). Boss scene tiles unchanged and walkable: Tom (10,9), TNB (9,9), Nara (11,9), Director's Cut (10,4).
+- Objects re-laid: painted backdrop (10,3), Rack 2 (9,4, beside the stairs; the painting has no costume rack, so it is an unpainted touch point), camera crane (16,7), director's chair (16,8), lantern post (8,11), prop crates (7,9), light stand (15,9). Couch and set lamp dropped (not in the painting).
+- Checks: `tools/stageset_test.py` 0 fails, smoke 0 fails, bg_test 0 fails, portrait and landscape shots looked at.
 ## 2026-10-29: Deedee rebaked, all 164 lines (loops fixed)
 - Tom reported repeated words and phrases in Deedee's clips. Speech recognition over her old clips found 78 of 141 checked looping the line 3 to 10 times. New Deedee Rebake Baker (Project claude/deedee-rebake-*) transcribes every take and retries until clean. Tom sent deedee-rebake.json (164 clips, baker flagged none, voice AoT Deedee (picked 2026-10-28), id 9UrcxKDUU0pvcnFhdfTU, stability 0.5, similarity 0.85).
 - Independent audit (sherpa-onnx Whisper base.en): 0 loops, 159 match the screen text, 5 flagged only by digits or recognizer quirks. Two worth a listen: "Keep up, honey! Arms at ninety!" (heard an extra "Can you") and "...So they are. Don't say anything." (heard "So they're so they are").
