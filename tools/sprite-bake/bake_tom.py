@@ -38,6 +38,9 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v2.png'),
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v1.png'),
         [['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling'], ['unbox', 'flick', 'brush', 'limit', 'startled', 'direct']]).items():
     poses['c_' + nm] = im
+STRETCH = ['tired', 'start', 'full', 'side', 'crack', 'neck', 'exhale', 'fresh']
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-stretch-v1.png'), [STRETCH[:4], STRETCH[4:]]).items():
+    poses['s_' + nm] = im
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
@@ -203,7 +206,13 @@ ko_rects = pack(ko_big, os.path.join(ART, 'tom-ko.webp'))
 fo = args.ow_h * KW / poses['w_down_stand'].height
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
-ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
+# arrival stretch (town view, facing the camera): scaled so the relaxed standing pose matches the walk sprite's standing height
+fs = fo * poses['w_down_stand'].height / poses['s_fresh'].height
+st_big = tighten(place({c: scaled_to(poses['s_' + c], fs) for c in STRETCH}, KW, 'center'), KW)
+ow_pal, all_ow_rows = rows_of({**ow_big, **st_big}, KW, args.colors)
+ow_rows = {k: all_ow_rows[k] for k in ow_big}
+st_rows = {k: all_ow_rows[k] for k in st_big}
+st_rects = pack(st_big, os.path.join(ART, 'tom-stretch.webp'))
 ow_rects = pack(ow_big, os.path.join(ART, 'tom-ow.webp'))
 
 def mirror(rows):
@@ -240,6 +249,7 @@ meta = {
 }
 atlas = {'bt': {'src': 'art/chars/tom-battle.webp', 'k': KB, 'rects': bt_rects},
          'pose': {'src': 'art/chars/tom-poses.webp', 'k': KB, 'rects': cu_rects},
+         'stretch': {'src': 'art/chars/tom-stretch.webp', 'k': KW, 'rects': st_rects},
          'ko': {'src': 'art/chars/tom-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/tom-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
@@ -256,6 +266,7 @@ for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'def
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  pose:{" + ",".join(f"{k}:" + fmt_rows(cu_rows[k]) for k in CUSTOM) + "},")
+js.append("  stretch:{" + ",".join(f"{k}:" + fmt_rows(st_rows[k]) for k in STRETCH) + "},")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):
