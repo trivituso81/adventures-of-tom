@@ -68,7 +68,8 @@ poses['b_ko'] = swirl_eye(poses['b_ko'], 82, 33, 5)
 # ---------------------------------------------------------------- head size (match Tom's caricature proportions)
 # Tom's head (hair to chin) is about 45 percent of his height; the painted Amy's is about 28 percent. Each frame's head is cut out,
 # scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
-HEAD_KB, HEAD_KW = 2.1, 1.8      # Amy's painted head is about 25 percent of battle height (28 for Deedee), so battle needs more; walk heads are bigger already
+HEAD_KB, HEAD_KW = 1.8, 1.45     # Amy's painted head is about 25 percent of battle height (28 for Deedee), so battle needs a bit more than Deedee's 1.45; goal is about 37 percent like Deedee and TNB
+TAPER = 30                       # rows BELOW the chin over which the scale eases back to 1 (the face itself stays uniformly scaled, so the jaw is not squashed)
 HEAD_K = HEAD_KB
 def _auto_head(img, name=''):
     """Walk frames: top = first row, chin from CHIN_W by direction, x range = every column with figure pixels in those rows."""
@@ -79,8 +80,14 @@ def _auto_head(img, name=''):
     return top, chin, int(xs.min()), int(xs.max())
 # hand-set head boxes (top, chin, x0, x1) in pose pixels, read off zoomed rulers
 HEAD_BOX = {'b_idle': (3, 98, 18, 168), 'b_windup': (3, 100, 10, 196), 'b_strike': (3, 96, 92, 300), 'b_run1': (3, 98, 28, 212), 'b_run2': (3, 98, 48, 234),
-            'b_leap': (19, 115, 64, 268), 'b_hurt': (3, 100, 54, 236), 'b_kneel': (3, 115, 8, 205), 'b_win': (17, 100, 26, 176),
+            'b_leap': (19, 115, 64, 268), 'b_hurt': (3, 100, 54, 236), 'b_kneel': (3, 115, 8, 205), 'b_win': (17, 100, 26, 204),
             'b_defend': (2, 106, 72, 240), 'b_cast': (3, 88, 80, 258)}
+def _hair_right(img, y0, y1):
+    """Right-most column of hair (figure pixels that are not skin, sleeve, lanyard, watch or shoe) in rows y0..y1."""
+    a = np.array(img).astype(int); R, G, B, A = a[:, :, 0], a[:, :, 1], a[:, :, 2], a[:, :, 3]
+    dark = (A > 40) & (R < 215) & (R - B > 5) & (G < R - 10) & ~((R > 200) & (G > 150) & (B < 120))
+    cols = np.where(dark[y0:y1 + 1].any(0))[0]
+    return int(cols.max()) if len(cols) else 0
 def _neck_x(img, chin, x0, x1):
     """Profile heads grow about the neck, not the middle of the hair: x centre of the skin pixels just above the chin line."""
     a = np.array(img).astype(int); R, G, B, A = a[:, :, 0], a[:, :, 1], a[:, :, 2], a[:, :, 3]
@@ -115,18 +122,18 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
-def bigger_head(img, name, k=None, pad=160, taper=26):
+def bigger_head(img, name, k=None, pad=160, taper=TAPER):
     if k is None: k = HEAD_KB if name.startswith('b_') else HEAD_KW
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
     if name == 'b_ko':                                  # lying: head on the left, neck on its right edge. Work on the transposed picture.
-        x0, x1, y0, ay = 70 + pad, 130 + pad, 0 + pad, 112 + pad   # in transposed terms: cross range = original rows, "up" = original left
+        x0, x1, y0, ay = 70 + pad, 130 + pad, 0 + pad, 112 + pad + taper   # in transposed terms: cross range = original rows, "up" = original left
         t = np.transpose(arr, (1, 0, 2)).copy()
         # transposed: rows = original x, cols = original y. Head = rows 0..128, anchor row 128, cross centre = original y 70
         cx0, cx1 = pad + 0, pad + H
-        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 112, pad + 60, k, 18)
-        t[pad + 0:pad + 112, cx0:cx1, 3] = 0                   # erase the original head
+        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 112 + taper, pad + 60, k, taper)
+        t[pad + 0:pad + 112 + taper, cx0:cx1, 3] = 0                   # erase the original head
         full = Image.fromarray(t, 'RGBA'); full.alpha_composite(Image.fromarray(out, 'RGBA'), (max(dx, 0), max(dy, 0)))
         big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
     else:
@@ -136,13 +143,14 @@ def bigger_head(img, name, k=None, pad=160, taper=26):
             q = np.array(img).astype(int); R, G, B, A = q[:, :, 0], q[:, :, 1], q[:, :, 2], q[:, :, 3]
             skin = (A > 60) & (R > 185) & (B > 70) & (R - B > 35) & (R - G > 20) & (G > B - 5)
             yel = (A > 60) & (R > 200) & (G > 150) & (B < 120) & (G - B > 60)
-            m = (skin | yel); m[101:] = False
+            m = (skin | yel); m[chin + taper + 1:] = False
             lab, n = ndi.label(m)
             keep = [i for i, o in enumerate(ndi.find_objects(lab), 1) if o[1].start < 40 or o[1].stop > 185]   # arm pieces only; teeth and eyes split the face into bits
             WIN_ARMS = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & (A > 20)
             arr[pad:pad + H, pad:pad + W, 3] = np.where(WIN_ARMS, 0, arr[pad:pad + H, pad:pad + W, 3])
         ax = _neck_x(img, chin, x0, x1) if not name.startswith(('w_down', 'w_up')) else (x0 + x1) / 2.0
-        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad
+        if name != 'b_win': x1 = max(x1, _hair_right(img, top, chin + taper) + 2)       # hair keeps widening below the chin; take it all into the warp or it tears at the box edge
+        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
         out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
         arr[Y0:AY, X0:X1, 3] = 0                                  # erase the original head
         big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
