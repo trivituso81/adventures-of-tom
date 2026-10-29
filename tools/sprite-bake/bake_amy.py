@@ -69,7 +69,7 @@ poses['b_ko'] = swirl_eye(poses['b_ko'], 82, 33, 5)
 # Tom's head (hair to chin) is about 45 percent of his height; the painted Amy's is about 28 percent. Each frame's head is cut out,
 # scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
 HEAD_KB, HEAD_KW = 1.8, 1.45     # Amy's painted head is about 25 percent of battle height (28 for Deedee), so battle needs a bit more than Deedee's 1.45; goal is about 37 percent like Deedee and TNB
-TAPER = 30                       # rows BELOW the chin over which the scale eases back to 1 (the face itself stays uniformly scaled, so the jaw is not squashed)
+TAPER = 55                       # rows BELOW the chin over which the scale eases back to 1 (the face itself stays uniformly scaled, so the jaw is not squashed)
 HEAD_K = HEAD_KB
 def _auto_head(img, name=''):
     """Walk frames: top = first row, chin from CHIN_W by direction, x range = every column with figure pixels in those rows."""
@@ -172,7 +172,7 @@ def bigger_head(img, name, k=None, pad=420, taper=TAPER):
     return big.crop(big.getbbox())
 # Match Tom's head-to-body ratio EXACTLY: his head (hair to chin) is 0.445 of his height in both his battle and his walk frames (measured on his baked
 # frames, 2026-10-29). Solve the head factor for Amy's idle (battle) and down_stand (walk) so hers comes out the same.
-TOM_HEAD_RATIO = 0.445
+TOM_HEAD_RATIO = 0.40
 def _head_ratio(name, k):
     top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name], name)
     return (chin - top) * k / bigger_head(poses[name], name, k=k).height

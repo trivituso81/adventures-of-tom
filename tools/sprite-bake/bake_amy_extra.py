@@ -20,7 +20,7 @@ from headwarp import *
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src'); ART = os.path.join(ROOT, 'art/chars'); OUT = os.path.join(ROOT, 'data/amy-hires-extra.js')
 KB, KW = 2, 3
-TOM_HEAD_RATIO, BATTLE_H, WALK_H = 0.445, 99.5, 41.7
+TOM_HEAD_RATIO, BATTLE_H, WALK_H = 0.40, 99.5, 41.7
 
 ATK = ['t1_start', 't2_sprint', 't3_windup', 't4_hit', 't5_recover', 't6_win', 'k1_hike', 'k2_swingup', 'k3_top', 'k4_carry', 'k5_throw', 'k6_dazed']
 STN = ['s1_hips', 's2_point', 's3_clap', 's4_whistle', 's5_shh', 's6_shrug', 's7_write', 's8_card', 's9_squat', 's10_plank', 's11_pushup', 's12_jump']
