@@ -1,3 +1,9 @@
+## 2026-10-29: Cattail Pier is painted
+- New `art/pier.webp` (Tom's painting, 1536 x 1408 = 24 x 22 tiles at 64 px) registered in `engine/plate.js` as `PLATES.pier` (`?v=20261029` busts phone caches). Before this the pier drew with the generic pond tile look.
+- Walk map (`plateMask` in `data/maps-le.js`): dirt road from the north gate (x 11 to 13) and the west edge (rows 5 and 6), the bait shack front, the boardwalk (x 12 and 13), the platform (rows 10 to 12). Water, reeds, trees and rocks block.
+- Objects re-laid to the painting: bait shack (17,1) 5x4, pier sign (14,3), Boppy's bench (7,3), tackle box (10,11). Reel stands at (19,5) in front of the shack. The rowboat object is gone (it floats in unreachable water). The old cattail objects and tree list are gone.
+- Story: in `ch3Pier` Rose now stands at (13,12) on the platform (was (12,13), now water). Trigger zone and the other positions are unchanged.
+- Checks: `tools/pier_test.py` 0 fails (objects touchable, scene tiles walkable, walk down the boardwalk, west exit enters the marsh), `tools/smoke.py` 0 fails, portrait and landscape shots looked at.
 ## 2026-10-29: Jefferson Park repaint (themed shops, one label per house)
 - `art/jpark.webp` is replaced with Tom's revised painting (same 1920 x 1536 at 64 px, upscaled from the 1402 x 1122 source). Same street, paths, camera and building positions, so the `plateMask`, doors, exits and objects are unchanged.
 - Shops are exaggerated to read as what they sell: Odette's Creole Kitchen (Mardi Gras awning, giant crawfish, brass horn, CREOLE KITCHEN sign), Pupuseria La Ceiba (giant pupusa on the roof, PUPUSERIA sign), Board Room (skateboard on the roof, boards in the window, BOARD ROOM sign), Very Green Juice (giant green smoothie, VERY GREEN JUICE sign).

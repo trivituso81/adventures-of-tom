@@ -677,7 +677,7 @@ SCENES.ch3Story=[
 SCENES.ch3Pier=[
   {flag:'ch3-pier'},
   {walk:'tom',to:routeTo('tom',11,12),speed:.25}, {face:'tom',dir:'down'},
-  {place:'boppy',at:[12,12],dir:'down'}, {place:'grace',at:[10,12],dir:'down'}, {place:'rose',at:[12,13],dir:'down'},
+  {place:'boppy',at:[12,12],dir:'down'}, {place:'grace',at:[10,12],dir:'down'}, {place:'rose',at:[13,12],dir:'down'},
   {talk:'Boppy',lines:['This is the spot. Forty years, this spot. Now everybody be QUIET.']},
   {talk:'Rose',lines:['I AM BEING QUIET.']},
   {talk:'Grace',lines:['Rose. Inside voice. Outside.']},
