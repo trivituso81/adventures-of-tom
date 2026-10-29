@@ -65,9 +65,11 @@ function rideFrameOf(fr) {
 }
 // Draw Tom's body. While Rose rides and Tom's pose has a painted ride frame, draw that frame instead (bottom centre stays put,
 // so his feet do not move); otherwise draw the old layered Rose behind him and Tom as usual.
+function rideSkin(key,fb) { return (typeof TOMRIDE!=='undefined'&&TOMRIDE.ok&&TOMRIDE.bt.sk&&TOMRIDE.bt.sk[key])||fb; }
 function rideBodyDraw(m,fr,pal,x,y,s,opts) {
   if(m.id==='tom') battle._tomDrawnAt=battle.time;
   const q=m.id==='tom'&&battle._seat;
+  if(m.id==='tom'&&fr._skin) { if(q) q.ridden=true; const keep=activeTint; activeTint=null; drawSprite(fr,TOMRIDE.bt.pal,x,y,s,opts); activeTint=keep; return; }
   if(q) {
     const R=rideFrameOf(fr);
     if(R) {

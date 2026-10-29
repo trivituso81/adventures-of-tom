@@ -962,7 +962,7 @@ SC.rv_hotfoot=(s,u)=>{ const ms=s.t*1000; for(const f of s.list) { const F=ST.un
   if(Math.floor(ms/300+f.idx)%2) { gfx.globalAlpha=fade(u,.85); label('HOT',F.x+(f.idx%2?-14:14),F.top-20,'#ff5a2a',2); } } };
 Rm.floor_is_lava=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,46),cush={x:p.x,y:p.y};
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'idle'},{t:800,f:'expr',dx:(u,tt)=>Math.sin(tt*35)*1.5},
-    {t:1350,f:'celeb',hop:30},{t:1700,f:'idle',dy:u=>-9,rot:(u,tt)=>Math.sin(tt*6)*.12},{t:3500,f:'celeb',hop:12,dy:-9},{t:3800,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
+    {t:1350,f:'celeb',hop:30},{t:1700,f:'balance',dy:u=>-9,rot:(u,tt)=>Math.sin(tt*6)*.12},{t:3500,f:'celeb',hop:12,dy:-9},{t:3800,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose runs right up to the enemies.'); say(m.id,'floor_is_lava'); }],
     [800,()=>{ scene('rv_big',1.4,{st,txt:'THE FLOOR IS LAVA!',c:'#ff7a3a',sc:2}); sfx.charge(); }],
@@ -1019,8 +1019,8 @@ SC.rv_book=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.sit; if(ms<P.sit) return; const
 SC.rv_zzz=(s,u)=>{ for(let k=0;k<3;k++) { const q=((s.t*1000/900)+k/3)%1; gfx.globalAlpha=(1-q)*fade(u,.85); label('Z',s.x+8+q*22+Math.sin(q*6)*4,s.y-q*40,'#cfe0ff',2+(k===1?1:0)); } };
 Rm.bedtime_story=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,34),self=t===m;
   const sit=self?400:1000,end=self?3900:4600;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:sit,f:'kneel'},{t:3300,f:'celeb',hop:8},{t:3600,f:'idle'},{t:3800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:6},{t:sit,x:sp.x,y:sp.y,f:'kneel'},{t:3400,f:'celeb',hop:8},{t:3700,f:'walkR',hop:4,hn:5},{t:4500,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:sit,f:'sitStory'},{t:3300,f:'celeb',hop:8},{t:3600,f:'idle'},{t:3800,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:6},{t:sit,x:sp.x,y:sp.y,f:'sitStory'},{t:3400,f:'celeb',hop:8},{t:3700,f:'walkR',hop:4,hn:5},{t:4500,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),bx=Math.min(520,sp.x+(self?-40:-48)),by=sp.y-34;
   const plan={sit,turn1:1900,turn2:2700,bx,by};
   ST.play(E2,[
@@ -1545,8 +1545,8 @@ SC.rf_poke=(s,u)=>{ const ms=s.t*1000+s.t0,n=s.n; if(ms<s.from) return;
   gfx.restore(); };
 Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500;
   const pokes=[HIT];   // ONE jab (Tom, 2026-10-27). Damage, sound, flash, BOOP! word and her spoken "Boop!" all land on HIT.
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1150,f:'act',dy:u=>-ez(u)*6},
-    {t:2200,f:'celeb',hop:16},{t:2650,f:'celeb',hop:9,hn:2},{t:3050,f:'runR'},{t:3750,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1150,f:'boop',dy:u=>-ez(u)*6},
+    {t:2200,f:'boopBack',hop:16},{t:2650,f:'celeb',hop:9,hn:2},{t:3050,f:'runR'},{t:3750,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); warmClip('rose','Boop!'); }],   // decode the clip now so it plays instantly later
     [1150,()=>{ setMessage('Pointer finger out.'); scene('rf_poke',1.0,{n,from:1150,pokes,back:1850,t0:1150}); }],
@@ -1568,13 +1568,13 @@ SC.rf_tongue=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*10
   EO(x,y,6.5*k*g+.1,(4.2+flap*.4)*k*g+.1,'#ff5f8f'); Ln(x-4*k*g,y,x+2*k,y-.5,1.5,'#d93a6e'); E(x-2*k,y-1.4*k,2*k*g+.1,1.2*k*g+.1,'#ff9cbc');
   for(const sd of [-1,1]) { gfx.globalAlpha=.7; E(m.x+sd*6*k,m.y-2*k,3*k,2.4*k,'#ff9a9a'); gfx.globalAlpha=1; } };
 Rm.sillyShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),cx=Math.min(470,F.x+F.w*.5+96),cy=Math.min(312,F.base+6),lie=lieDy();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:5},{t:900,x:cx,y:cy,f:'idle'},{t:1100,f:'expr',sc:u=>1+ez(u)*.16},{t:1800,f:'expr',sc:1.16,dx:(u,tt)=>Math.sin(tt*45)*2},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:5},{t:900,x:cx,y:cy,f:'idle'},{t:1100,f:'raspberry',sc:u=>1+ez(u)*.16},{t:1800,f:'raspberry',sc:1.16,dx:(u,tt)=>Math.sin(tt*45)*2},
     {t:2700,f:'idle',rot:u=>-ez(u/.3)*1.45,dy:(u,tt)=>ez(u/.3)*lie-Math.abs(Math.sin(tt*16))*3},{t:3350,f:'celeb',hop:22},{t:3650,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose walks to centre stage and takes an extravagantly serious breath.'); say(m.id,'silly'); }],
-    [1100,()=>{ scene('ro_breath',.8,{st}); scene('rf_tongue',.7,{st,out:9999}); sfx.charge(); }],
+    [1100,()=>{ scene('ro_breath',.8,{st}); sfx.charge(); }],
     [1800,()=>{ sfx.pbbt(.95,.65); const p=mouthAt(st);
-      scene('rp_spray',1.0,{mx:p.x-20,my:p.y+3,F}); scene('rf_tongue',.9,{st,out:0}); scene('rp_pbbt',1.25,{x:(p.x+F.x)/2-10,y:Math.max(34,F.top-86),sc:5}); }],
+      scene('rp_spray',1.0,{mx:p.x-20,my:p.y+3,F}); scene('rp_pbbt',1.25,{x:(p.x+F.x)/2-10,y:Math.max(34,F.top-86),sc:5}); }],
     ['hf',2350],
     [2350,()=>{ E2.apply(); sfx.boing(); ST.jolt(t,.6); scene('ro_goof',1.6,{x:F.x,y:F.top}); scene('ro_poof',.5,{x:F.x,y:F.mid,c:SPIT,n:12,r:34}); }],
     [2700,()=>{ sfx.giggle(); setMessage('Rose has made an excellent point. She falls over laughing at it.'); }],
@@ -1873,7 +1873,7 @@ SC.rg_word=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,
 Rm.boo=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m);
   const pB={x:Math.max(22,F.x-F.w*.5-18),y:Math.min(314,F.base+2)},OUT1=700,IN=1400,BOO=1650,BACK=3050;
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'kneel'},{t:OUT1,x:'home',y:'home',f:'idle',hide:true},{t:IN,x:pB.x,y:pB.y,f:'kneel'},
-    {t:BOO,f:'celeb',hop:34,sc:u=>1+ez(u/.3)*.35},{t:2200,f:'celeb',sc:1.3,dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*4},{t:2650,f:'celeb',hop:10,hn:2},
+    {t:BOO,f:'boo',hop:34,sc:u=>1+ez(u/.3)*.35},{t:2200,f:'celeb',sc:1.3,dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*4},{t:2650,f:'boo',hop:10,hn:2},
     {t:BACK,x:pB.x,y:pB.y,f:'idle',hide:true},{t:BACK+120,x:'home',y:'home',f:'idle',hide:true},{t:BACK+140,x:'home',y:'home',f:'celeb',hop:10},{t:BACK+600,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose crouches down right where she\'s and winks.'); }],
@@ -1960,8 +1960,8 @@ SC.rg_hug=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; if(!st||st.x==null) retur
   gfx.save(); gfx.translate(bx,by); gfx.scale(sx,sy); plush(0,0,sc,{pose:'held',rot:rb,v:'backup',flip:true}); gfx.restore();
   if(ms>P.press+150&&ms<P.back-100) { const sq=Math.abs(Math.sin((ms-P.press)/150)); bigWord('SQUISH',Math.max(44,P.tx),P.ty-62-sq*6,PINK2,3); } };
 Rm.lamby_hug=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:600,f:'expr'},{t:1200,f:'act',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2500,f:'celeb',hop:10},{t:2900,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:5,hn:6},{t:1100,x:sp.x,y:sp.y,f:'expr'},{t:1400,f:'act'},{t:2500,f:'celeb',hop:10},{t:2900,f:'walkR',hop:4,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:600,f:'expr'},{t:1200,f:'hug',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2500,f:'celeb',hop:10},{t:2900,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'walk',hop:5,hn:6},{t:1100,x:sp.x,y:sp.y,f:'expr'},{t:1400,f:'hug'},{t:2500,f:'celeb',hop:10},{t:2900,f:'walkR',hop:4,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),press=self?1200:1400,end=self?3400:4000;
   const plan={press,back:2500,tx:H.x,ty:H.mid+8,gap:Math.max(38,H.w*.6)};
   ST.play(E2,[
@@ -1992,7 +1992,7 @@ Rm.lookout_lamby=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m)
   const plan={swing:300,go:1100,back:2400,path,mountAt:tom?2900:99999};
   // The out-bound pass reaches the monster's middle at q where cos(2*pi*q) = (F.x-cx)/rx
   const qHit=Math.acos(cl((F.x-cx)/rx,-1,1))/(Math.PI*2),hitA=Math.round(plan.go+qHit*(plan.back-plan.go)),hitB=hitA+140;
-  const K=[{t:0,x:'home',y:'home',f:'expr'},{t:plan.swing,f:(u,tt)=>Math.floor(tt*10)%2?'act':'celeb'},{t:plan.go,f:'act',dx:u=>-ez(u/.3)*8},{t:plan.go+300,f:'idle'},{t:plan.back,f:'celeb',hop:16}];
+  const K=[{t:0,x:'home',y:'home',f:'expr'},{t:plan.swing,f:(u,tt)=>Math.floor(tt*10)%2?'throwWind':'throwRel'},{t:plan.go,f:'throwRel',dx:u=>-ez(u/.3)*8},{t:plan.go+300,f:'idle'},{t:plan.back,f:'celeb',hop:16}];
   if(tom) K.push({t:2900,x:TU.x+30,y:TU.base+3,f:'celeb',hop:50,ns:true},{t:3300,x:()=>ride(tom).x,y:()=>ride(tom).y,f:'idle',ns:true},{t:4200,x:()=>ride(tom).x,y:()=>ride(tom).y,f:'idle',ns:true});
   else K.push({t:3000,x:'home',y:'home',f:'kneel'},{t:3300,f:'celeb',hop:8},{t:3700,f:'idle'});
   const st=ST.keys(fx,K);

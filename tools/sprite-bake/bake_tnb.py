@@ -38,6 +38,13 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tnb-battle-v2.png'),
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tnb-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
+# extra poses (2026-10-29): battle actions (c_) and story / overworld scenes (s_), both drawn at battle size
+EX_A = [['pull', 'tw_wind', 'tw_rel', 'point', 'present', 'shrug'], ['hips', 'clap', 'carry', 'heave', 'crouch', 'dodge']]
+EX_B = [['toast', 'hug', 'whisper', 'wave'], ['sit', 'sittoast', 'talk', 'crouchlook'], ['sitR', 'sittoastR', 'talkR', 'laugh']]
+for nm, im in slice_sheet(os.path.join(SRC, 'tnb-extra-battle.png'), EX_A).items():
+    poses['c_' + nm] = im
+for nm, im in slice_sheet(os.path.join(SRC, 'tnb-extra-story.png'), EX_B).items():
+    poses['s_' + nm] = im
 
 
 # ---------------------------------------------------------------- despill (hair tips blended with the magenta backdrop)
@@ -100,6 +107,13 @@ HEAD_BOX = {   # (hair top, chin = bottom of the beard, left, right, anchor colu
     'w_down_stand': (0, 135, 10, 174, 88), 'w_down_step1': (3, 135, 7, 166, 83), 'w_down_stand2': (0, 135, 8, 168, 84), 'w_down_step2': (3, 135, 7, 164, 80),
     'w_up_stand': (0, 133, 9, 148, 80), 'w_up_step1': (1, 133, 5, 142, 77), 'w_up_stand2': (0, 133, 7, 144, 76), 'w_up_step2': (1, 133, 4, 140, 73),
     'w_left_stand': (1, 121, 7, 159, 78), 'w_left_step1': (2, 121, 17, 165, 89), 'w_left_stand2': (1, 121, 15, 163, 87), 'w_left_step2': (1, 121, 25, 174, 97)}
+EX_BOX = {
+    'c_pull': (2, 122, 33, 187, 90), 'c_tw_wind': (2, 113, 62, 225, 137), 'c_tw_rel': (3, 115, 50, 232, 124), 'c_point': (3, 113, 65, 225, 135),
+    'c_present': (2, 108, 82, 234, 146), 'c_shrug': (2, 105, 52, 206, 113), 'c_hips': (2, 108, 35, 180, 95), 'c_clap': (2, 98, 38, 180, 105),
+    'c_carry': (2, 108, 140, 278, 204), 'c_heave': (2, 108, 50, 203, 115), 'c_crouch': (3, 126, 0, 155, 86), 'c_dodge': (3, 118, 78, 228, 123),
+    's_toast': (3, 133, 35, 180, 105), 's_hug': (3, 133, 73, 218, 148), 's_whisper': (3, 137, 1, 161, 86), 's_wave': (3, 133, 44, 169, 109),
+    's_sit': (2, 123, 50, 210, 115), 's_sittoast': (2, 120, 73, 228, 118), 's_talk': (2, 118, 56, 196, 106), 's_crouchlook': (3, 138, 9, 194, 99),
+    's_sitR': (2, 102, 10, 165, 95), 's_sittoastR': (2, 112, 8, 158, 98), 's_talkR': (2, 116, 26, 161, 96), 's_laugh': (2, 131, 4, 144, 79)}
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
@@ -183,9 +197,26 @@ def solve_k(img, name, ratio):
 _kb, _Hb = solve_k(poses['b_idle'], 'b_idle', TARGET_BT)
 _kw, _Hw = solve_k(poses['w_down_stand'], 'w_down_stand', TARGET_OW)
 print('head factor: battle idle %.3f, overworld down %.3f' % (_kb, _kw))
+def scaled_to(img, f):
+    """Resize with premultiplied alpha so the painted soft edge stays clean (no threshold)."""
+    w, h = max(1, round(img.width * f)), max(1, round(img.height * f))
+    arr = np.array(img).astype(float)
+    al = arr[:, :, 3:4] / 255.0
+    pm = Image.fromarray((arr[:, :, :3] * al).clip(0, 255).astype(np.uint8), 'RGB').resize((w, h), Image.LANCZOS)
+    alr = Image.fromarray(arr[:, :, 3].astype(np.uint8), 'L').resize((w, h), Image.LANCZOS)
+    pa, aa = np.array(pm).astype(float), np.array(alr).astype(float) / 255.0
+    rgb = np.where(aa[:, :, None] > 0.02, pa / np.maximum(aa[:, :, None], 0.02), 0)
+    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), aa * 255]).astype(np.uint8), 'RGBA')
+_idle_body = poses['b_idle'].height - HEAD_BOX['b_idle'][1]            # chin to sole of the ready pose, in sheet pixels
+for _pre, _refs in (('c_', ['c_pull', 'c_point', 'c_present', 'c_shrug', 'c_hips']), ('s_', ['s_toast', 's_hug', 's_whisper', 's_wave'])):
+    _fs = sorted(_idle_body / (poses[r].height - EX_BOX[r][1]) for r in _refs); _f = _fs[len(_fs) // 2]
+    print('extra sheet %s scaled by %.3f' % (_pre, _f))
+    for _n in [n for n in poses if n.startswith(_pre)]:
+        poses[_n] = scaled_to(poses[_n], _f); _b = EX_BOX[_n]
+        _v = [int(round(v * _f)) for v in _b]; _v[3] = min(_v[3], poses[_n].width); HEAD_BOX[_n] = tuple(_v)
 for _n in list(poses):
     _t, _c = head_cc(poses[_n], _n)
-    _k = (TARGET_BT * _Hb if _n.startswith('b_') else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
+    _k = (TARGET_BT * _Hb if _n.startswith(('b_', 'c_', 's_')) else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
     poses[_n] = bigger_head(poses[_n], _n, k=_k)
 if os.environ.get('HEADSHEET'):                      # debug: all head-warped frames on grey
     _it = list(poses.items()); _cw = max(i.width for _, i in _it) + 10; _ch = max(i.height for _, i in _it) + 10
@@ -335,8 +366,13 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
-bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
+EXN = [n for n in poses if n.startswith(('c_', 's_'))]
+cu_big = tighten(place({n: scaled_to(poses[n], fb) for n in EXN}, KB, 'head'), KB)      # own canvas: some are taller or wider than the idle
+bt_pal, _all_rows = rows_of({**bt_big, **{'x_' + n: v for n, v in cu_big.items()}}, KB, args.colors)    # one shared palette
+bt_rows = {k: _all_rows[k] for k in bt_big}
+cu_rows = {n: _all_rows['x_' + n] for n in cu_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'tnb-battle.webp'))
+cu_rects = pack(cu_big, os.path.join(ART, 'tnb-poses.webp'))
 
 # knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
@@ -384,6 +420,7 @@ meta = {
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
 atlas = {'bt': {'src': 'art/chars/tnb-battle.webp', 'k': KB, 'rects': bt_rects},
+         'pose': {'src': 'art/chars/tnb-poses.webp', 'k': KB, 'rects': {n[2:]: r for n, r in cu_rects.items()}},
          'ko': {'src': 'art/chars/tnb-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/tnb-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
@@ -399,6 +436,7 @@ js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
 for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
+js.append("  pose:{" + ",".join(f"{n[2:]}:" + fmt_rows(cu_rows[n]) for n in cu_rows) + "},")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):
