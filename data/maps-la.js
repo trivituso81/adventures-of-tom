@@ -1427,19 +1427,38 @@ const LA_ROOMS=[
       ['pot',2,6,2,1,'Window planter','Ferns in a long planter on the low wall. Real ones. Jordan checked.']]},
   {id:'dakota',w:12,h:10,
     style:{floor:'#e2d0b0',alt:'#ecdcc0',wall:'#f2f2ee',trim:'#b98a5a',pattern:'wood',rug:'#9ccfd8'},
-    rug:[3,5,5,3],
     npcs:[
-      {name:'Dakota',x:4,y:6,look:'dakota',lines:[
+      {name:'Dakota',x:4,y:4,look:'dakota',lines:[
         "We're restoring the original 1912 windows. It's a whole thing.",
         'Mr. Washington told us the windows are older than his father. He was very serious about it.',
         'Every house on this street has a story. Ours is: the plumbing.']},
-      {name:'Ryan',x:8,y:5,look:'ryan',lines:[
+      {name:'Ryan',x:8,y:4,look:'ryan',lines:[
         'Baby Hudson is asleep. Please whisper. Please. I\'m begging.',
         'We moved from the Westside for the space. And the character. Mostly the price. Which was still a lot.',
         'I work from home. Home is very loud on the Alvarez side. I bought noise-canceling headphones. They lost.']}],
+    rug:[3,5,5,3],
+    doors:[[5,9]],
+    // Painted plate (art/dakota.webp, engine/plate.js), area 53, 12 x 10 tiles at 64 art px. The mask is the walk map: '#' blocks, '.' walks.
+    // Dining table, bookshelf, crib and monstera line the back wall (row 2 is all furniture), the armchair and pouf fill the left
+    // side, and the dresser and the roof edge close the right. The open floor is rows 3 to 6, wide at the top and narrowing past the
+    // front rooms. The two posts at the bottom frame the entry lane (x 5 and 6, rows 7 to 9) over the mats; the stool and the shoe bench stay painted and blocked.
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '###.......##',
+      '####......##',
+      '####......##',
+      '#####...####',
+      '#####..#####',
+      '#####..#####',
+      '#####..#####'],
     objects:[
-      ['bed',9,1,2,2,"Hudson's crib",'Baby Hudson, five months old, asleep under a mobile of tiny felt clouds that cost eighty dollars.'],
-      ['table',2,2,2,2,'Dining table','Reclaimed wood. Reclaimed from where? Ryan doesn\'t know. It was very expensive.'],
-      ['shelf',7,8,3,1,'Book shelf','Baby books, a guide to historic window restoration, and a plant care book with every plant marked DEAD.'],
-      ['pot',1,7,1,1,'Monstera','Huge. Healthy. Its name is Kevin. The Kevin next door finds this upsetting.']]}
+      ['bed',7,1,3,2,"Hudson's crib",'Baby Hudson, five months old, asleep under a mobile of tiny felt clouds that cost eighty dollars.'],
+      ['table',2,1,3,2,'Dining table','Reclaimed wood. Reclaimed from where? Ryan doesn\'t know. It was very expensive.'],
+      ['shelf',5,1,2,2,'Book shelf','Baby books, a guide to historic window restoration, and a plant care book with every plant marked DEAD.'],
+      ['pot',10,2,1,3,'Monstera','Huge. Healthy. Its name is Kevin. The Kevin next door finds this upsetting.'],
+      ['chair',1,3,2,2,'Green armchair','A sage green reading chair with a knit throw. Ryan feeds Hudson in it at 3 AM. Dakota says it is a very good chair for a very short nap.'],
+      ['pouf',3,4,1,1,'Leather pouf','It is a footstool. Everyone who visits tries to sit on it anyway. It has opinions about that.'],
+      ['bench',7,8,2,1,'Shoe bench','Two pairs of grown-up sneakers, a basket of keys and one tiny sock. The sock has been missing a week.']]}
 ];
