@@ -520,10 +520,10 @@ SC.bv_cone=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return;
   const layer=(f,c,jit)=>{ const pts=[[mo.x,mo.y]]; for(let k=0;k<=8;k++) { const q=k/8,a=a0+lerp(-spread,spread,q)*f,r=len*(.92+.08*Math.sin(s.t*40+k*1.7))+Math.sin(s.t*55+k*2.3)*jit; pts.push([mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r]); } gfx.globalAlpha=shrink*.95; poly(pts,c,f===1?3:0); };
   layer(1,'#e0402e',8); layer(.7,'#ff8a2a',6); layer(.38,'#ffe070',4);
   for(let k=0;k<10;k++) { const q=((s.t*2.2)+k/10)%1,a=a0+Math.sin(k*2.1)*spread*.8,r=len*q; gfx.globalAlpha=(1-q)*shrink; E(mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r-q*10,3+q*4,3+q*4,k%2?'#ffd040':'#ff6a2a'); } };
-B.pepper_breath=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),me=ST.unit(m);
+B.pepper_breath=E2=>{ const PB=BSP().x_pepper?'x_pepper':'wind',PF=BSP().x_fire?'x_fire':'spread'; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),me=ST.unit(m);
   const P={show:1350,eat:1700,red:1950,fire:2400,done:3500,tx:F.x+F.w*.15,ty:F.mid},hit=2600;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1300,f:'act'},{t:1700,f:'wind'},{t:1950,f:'hip',dx:(u,tt)=>Math.sin(tt*40)*2},
-    {t:2350,f:'spread',dx:u=>-ez(u*4)*8},{t:3300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1300,f:'act'},{t:1700,f:PB},{t:1950,f:'hip',dx:(u,tt)=>Math.sin(tt*40)*2},
+    {t:2350,f:PF,dx:u=>-ez(u*4)*8},{t:3300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over with one homegrown cayenne pepper.'); say(m.id,'pepper_breath'); scene('bv_pepper',3.6,{P,st}); }],
     [1300,()=>{ setMessage('He holds it up. He grew it himself. He\'s very proud of it.'); }],
@@ -1125,12 +1125,12 @@ SC.bv_cap=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.off||ms>P.on) return; const 
   if(ms<P.off+200) ang=lerp(-2.4,-1.25,ez((ms-P.off)/200));
   P.sw.forEach(([a,b],k)=>{ if(ms<a||ms>b+320) return; const cur=ms<b?lerp(-1.25,.55,ez((ms-a)/(b-a))):.55,al=ms<b?1:1-(ms-b)/320;
     for(const [r,w,c] of [[REACH*.95,9,OUT],[REACH*.95,5,k===2?GOLD:'#ffffff'],[REACH*.7,4,OUT],[REACH*.7,2,'#dfe8f0']]) { gfx.globalAlpha=al*(c===OUT?.7:.9); gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(px,py,r,Math.PI-1.25,Math.PI+cur); gfx.stroke(); } });
-  gfx.globalAlpha=1; bigCap(px,py,ang);
+  gfx.globalAlpha=1; if(!BSP().x_swat) bigCap(px,py,ang);
   const st=s.st; if(st&&st.x!=null&&ms<P.off+700) { const p=head(st,8),q=(ms-P.off)/700; gfx.globalAlpha=1-q; for(let k=0;k<3;k++) { const sx=p.x-14+k*12,sy=p.y-14-k%2*6; Ln(sx-3-q*6,sy,sx+3+q*6,sy,2,'#ffffff'); Ln(sx,sy-3-q*6,sx,sy+3+q*6,2,'#ffffff'); } } };
-B.cap_swat=E2=>{ ensureArt(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
+B.cap_swat=E2=>{ ensureArt(); const SW=BSP().x_swat?'x_swat':'bare_throw',SF=BSP().x_follow?'x_follow':'bare_act'; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
   const sw=[[1800,1950],[2150,2300],[2500,2650]],hit=2650;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1200,x:p.x,y:p.y,f:'hip'},{t:1450,f:'bare_act'},
-    {t:1800,f:'bare_throw',dx:-6},{t:1950,f:'bare_act'},{t:2150,f:'bare_throw',dx:-8},{t:2300,f:'bare_act'},{t:2500,f:'bare_throw',dx:u=>-6-ez(u)*8},{t:2950,f:'bare_hip'},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1200,x:p.x,y:p.y,f:'hip'},{t:1450,f:SF},
+    {t:1800,f:SW,dx:-6},{t:1950,f:SF},{t:2150,f:SW,dx:-8},{t:2300,f:SF},{t:2500,f:SW,dx:u=>-6-ez(u)*8},{t:2950,f:SF},
     {t:3200,f:'hip'},{t:3450,f:back(p.x,me),hop:2,hn:6},{t:4400,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Boppy walks over. At his own pace. Something is pestering his family.'); say(m.id,'cap_swat'); scene('bv_cap',3.3,{st,P:{off:1450,on:3200,sw}}); scene('bv_dodge',2.6,{f,P:{d1:1850,d2:2200}}); }],
