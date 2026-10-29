@@ -31,10 +31,12 @@ from sheet import slice_sheet
 ROWS_A = [['wind', 'flick', 'lick', 'scrub', 'walk', 'heave'], ['nurse', 'mop', 'toast', 'bell', 'hug', 'launch']]
 ROWS_B = [['sitL', 'sitR', 'whisper', 'point', 'gasp', 'carry'], ['open', 'shrug', 'hips', 'clap', 'laugh', 'wave']]
 ROWS_C = [['fwalk', 'fspot', 'ftaut', 'fshake', 'fwind1', 'fwind2'], ['fsnap', 'ffollow', 'frecoil', 'ffold', 'ftuck', 'fdone']]   # Dish-Towel Flick sheet (towel painted in her hand)
+ROWS_D = [['nwalk', 'nsalute', 'nclip', 'nput', 'nout', 'nlean'], ['nlis1', 'nlis2', 'naha', 'nverdict', 'nwrite', 'nclear']]   # Registered Nut sheet (stethoscope and clipboard painted in)
 ex = {}
 ex.update(slice_sheet(os.path.join(g['SRC'], 'deedee-attack-v1.png'), ROWS_A, by_position=True))
 ex.update(slice_sheet(os.path.join(g['SRC'], 'deedee-story-v1.png'), ROWS_B))
 ex.update(slice_sheet(os.path.join(g['SRC'], 'deedee-flick-v1.png'), ROWS_C))
+ex.update(slice_sheet(os.path.join(g['SRC'], 'deedee-nurse-v1.png'), ROWS_D))
 
 # (top, chin, x0, x1) of each head in its sliced pose, set by eye where arms or raised fists confuse the detector
 HEAD = {'wind': (4, 114, 60, 180), 'flick': (3, 102, 105, 228), 'lick': (3, 109, 37, 154), 'scrub': (3, 100, 80, 200),
@@ -45,7 +47,10 @@ HEAD = {'wind': (4, 114, 60, 180), 'flick': (3, 102, 105, 228), 'lick': (3, 109,
         'hips': (3, 109, 45, 160), 'clap': (3, 105, 12, 129), 'laugh': (3, 98, 55, 173), 'wave': (18, 128, 60, 172),
         'fwalk': (3, 110, 45, 175), 'fspot': (3, 108, 30, 160), 'ftaut': (3, 108, 60, 200), 'fshake': (3, 108, 90, 225),
         'fwind1': (3, 112, 95, 246), 'fwind2': (3, 115, 150, 299), 'fsnap': (3, 110, 210, 345), 'ffollow': (3, 112, 175, 315),
-        'frecoil': (3, 110, 70, 205), 'ffold': (3, 102, 5, 140), 'ftuck': (3, 100, 20, 155), 'fdone': (3, 102, 30, 165)}
+        'frecoil': (3, 110, 70, 205), 'ffold': (3, 102, 5, 140), 'ftuck': (3, 100, 20, 155), 'fdone': (3, 102, 30, 165),
+        'nwalk': (3, 112, 50, 185), 'nsalute': (3, 108, 55, 225), 'nclip': (3, 115, 35, 190), 'nput': (3, 108, 45, 190),
+        'nout': (3, 110, 95, 230), 'nlean': (3, 108, 65, 215), 'nlis1': (3, 108, 95, 230), 'nlis2': (3, 108, 100, 225),
+        'naha': (3, 108, 95, 225), 'nverdict': (3, 110, 100, 235), 'nwrite': (3, 115, 15, 165), 'nclear': (3, 112, 40, 195)}
 # n = hand that holds the prop or leads, f = the other hand; (x, y) in the sliced pose. Poses not listed use the game's default guess.
 HANDS = {'wind': {'n': (44, 114), 'f': (238, 166)}, 'flick': {'n': (40, 100), 'f': (296, 160)},
          'lick': {'n': (22, 140), 'f': (168, 190)}, 'scrub': {'n': (30, 145), 'f': (290, 120)},
@@ -57,7 +62,11 @@ HANDS = {'wind': {'n': (44, 114), 'f': (238, 166)}, 'flick': {'n': (40, 100), 'f
          'fwalk': {'n': (140, 215), 'f': (20, 185)}, 'fspot': {'n': (50, 238), 'f': (225, 203)}, 'ftaut': {'n': (12, 168), 'f': (199, 178)},
          'fshake': {'n': (18, 182), 'f': (222, 212)}, 'fwind1': {'n': (80, 62), 'f': (276, 215)}, 'fwind2': {'n': (130, 98)},
          'fsnap': {'n': (118, 90), 'f': (395, 185)}, 'ffollow': {'n': (122, 115), 'f': (375, 170)}, 'frecoil': {'n': (186, 180)},
-         'ffold': {'n': (70, 185), 'f': (105, 185)}, 'ftuck': {'n': (86, 120), 'f': (15, 208)}, 'fdone': {'n': (140, 175)}}
+         'ffold': {'n': (70, 185), 'f': (105, 185)}, 'ftuck': {'n': (86, 120), 'f': (15, 208)}, 'fdone': {'n': (140, 175)},
+         'nwalk': {'n': (15, 185), 'f': (150, 200)}, 'nsalute': {'n': (92, 48)}, 'nclip': {'n': (88, 150), 'f': (155, 262)},
+         'nput': {'n': (35, 95), 'f': (195, 100)}, 'nout': {'n': (25, 125), 'f': (250, 165)}, 'nlean': {'n': (15, 108)},
+         'nlis1': {'n': (15, 108), 'f': (235, 185)}, 'nlis2': {'n': (15, 110), 'f': (185, 155)}, 'naha': {'n': (18, 108), 'f': (190, 185)},
+         'nverdict': {'n': (12, 88), 'f': (195, 195)}, 'nwrite': {'n': (80, 150)}, 'nclear': {'n': (25, 100)}}
 MARK = {'n': (0, 255, 0), 'f': (0, 255, 255)}
 
 
@@ -71,7 +80,7 @@ def mark(img, pts, r=7):
 
 # heave: both arms flank her face and her hands sit above it, so the whole upper figure (hands, arms, head) is scaled together, gently (0.86 of the solved factor)
 g['KOVM'].update({'x_heave': 0.86})
-g['KEEP'].update({'x_fwind1': [(0, 35, 105, 165)], 'x_fwind2': [(0, 62, 122, 135)]})   # raised towel hand stays in front of the bigger head
+g['KEEP'].update({'x_fwind1': [(0, 35, 105, 165)], 'x_fwind2': [(0, 62, 122, 135)], 'x_nput': [(0, 60, 52, 125), (186, 70, 215, 125)]})   # raised towel hand stays in front of the bigger head
 for k, v in ex.items():
     g['poses']['x_' + k] = mark(v, HANDS.get(k, {}))
     g['HEAD_BOX']['x_' + k] = HEAD[k]

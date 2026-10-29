@@ -1734,6 +1734,11 @@ const CHEST={tom:.47,grace:.45,rose:.43,amy:.56,boppy:.56,tnb:.58,nara:.4,deedee
 SC.df_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,P=s.P,k=st.sc||1; gfx.globalAlpha=fade(u,.95);
   const nx=st.x+2*k,ny=st.y-52*k,yx=nx+1*k,yy=ny+17*k,hs=hands(),go=ez((ms-P.on)/320);
   const TUBE='#2c3037',ME='#c9d0d8';
+  if(P.painted) { // the painted frames carry the stethoscope; add only the glint where the chest piece touches and the heartbeat
+    if(ms>P.b0-150&&ms<P.b1+150) ring(hs.n.x,hs.n.y,11+Math.sin(ms/90)*2,11+Math.sin(ms/90)*2,1.5,'#ffffff');
+    if(ms>P.b0&&ms<P.b1) { const ph=((ms-P.b0)%520)/520,beat=ph<.15?ph/.15:ph<.3?1-(ph-.15)/.15*.5:.5*(1-(ph-.3)/.7),bx=P.x+(P.foe?0:-6),by=P.y-44;
+      gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(bx,by); const r=10+beat*9; heartP(0,0,r+2.5); gfx.fillStyle=OUT; gfx.fill(); heartP(0,0,r); gfx.fillStyle='#ff4a6a'; gfx.fill(); gfx.restore(); if(ph<.5) bigWord('BA-DUMP',bx,by-40,CREAM,2); }
+    return; }
   // the tubes: round the back of the neck, then down in a V over the chest to the Y junction
   for(const [w,c] of [[6.5,OUT],[3.6,TUBE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.lineJoin='round';
     gfx.beginPath(); gfx.moveTo(nx-9*k,ny-4*k); gfx.quadraticCurveTo(nx-10*k,ny+9*k,yx,yy); gfx.stroke();
@@ -1749,14 +1754,17 @@ SC.df_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*100
   if(ms>P.b0&&ms<P.b1) { const ph=((ms-P.b0)%520)/520,beat=ph<.15?ph/.15:ph<.3?1-(ph-.15)/.15*.5:.5*(1-(ph-.3)/.7),bx=P.x+(P.foe?0:-6),by=P.y-44;
     gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(bx,by); const r=10+beat*9; heartP(0,0,r+2.5); gfx.fillStyle=OUT; gfx.fill(); heartP(0,0,r); gfx.fillStyle='#ff4a6a'; gfx.fill(); gfx.restore(); if(ph<.5) bigWord('BA-DUMP',bx,by-40,CREAM,2); } };
 D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m),foe=t.side==='foe';
-  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:DD_XF('nurse','aim')},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
+  const PT=!!(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee.x_nlis1);
+  const K=PT?(self?[{t:0,x:'home',y:'home',f:'x_nclip'},{t:300,f:'x_nput'},{t:500,f:'x_nout'},{t:700,f:'x_nlean'},{t:900,f:'x_nlis1'},{t:1200,f:'x_nlis2'},{t:1550,f:'x_naha'},{t:1900,f:'x_nverdict'},{t:2300,f:'x_nwrite'},{t:2650,f:'x_nclear'},{t:3000,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'x_nwalk',hop:3,hn:6},{t:800,x:sp.x,y:sp.y,f:'x_nsalute'},{t:1000,f:'x_nclip'},{t:1150,f:'x_nput'},{t:1300,f:'x_nout'},{t:1450,f:'x_nlean'},{t:1550,f:'x_nlis1'},{t:1750,f:'x_nlis2'},{t:1900,f:'x_naha'},{t:2050,f:'x_nverdict'},{t:2400,f:'x_nwrite'},{t:2800,f:'x_nclear'},{t:3250,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}])
+    :self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:DD_XF('nurse','aim')},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
     :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:DD_XF('nurse','aim'),dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),end=self?3200:3900,hit=self?1900:2050;
   const ch=foe?.5:(CHEST[t.id]||.56);   // chest height as a share of the patient's height, so it sits at Grace's chest for her pose
-  const P={on:self?400:850,self,foe,x:self?me.x-6:(foe?H.x+H.w*.12:H.x-H.w*.12),y:self?me.base-DH()*.36:H.base-H.h*ch,b0:self?700:1150,b1:hit-80};
+  const P={on:self?400:850,self,foe,x:self?me.x-6:(foe?H.x+H.w*.12:H.x-H.w*.12),y:self?me.base-DH()*.36:H.base-H.h*ch,b0:PT?(self?900:1550):(self?700:1150),b1:hit-80,painted:PT};
   const bx=foe?H.x:H.x-H.w*.08,by=foe?H.mid:H.mid-H.h*.12;
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); scene('dd_badge',(end-200)/1000,{st,fix:self?300:900}); scene('df_steth',(hit+500)/1000,{st,P}); }],
+    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); if(!PT) scene('dd_badge',(end-200)/1000,{st,fix:self?300:900}); scene('df_steth',(hit+500)/1000,{st,P}); }],
     [P.b0,()=>{ setMessage('Off her neck comes the big stethoscope. Ba-dump. Ba-dump.'); for(let k=0;k<3;k++) sfx.heartbeat(k*.52); }],
     ['hf',hit],
     [hit,()=>{ E2.apply(); sfx.heal(); sfx.boing(); scene('dv_bandage',(end-hit)/1000,{x:self?me.x-14:bx,y:self?me.base-DH()*.5:by}); scene('dv_big',1.1,{x:self?me.x:H.x,y:(self?me.top:H.top)-40,txt:'POP!',c:CREAM,sc:4}); scene('dv_glow',.9,{x:H.x,y:H.mid,c:'#8ef0a0'}); hopOf(t!==m?t:null); setMessage('A bandage. A big one. Right where it counts.'); }],
