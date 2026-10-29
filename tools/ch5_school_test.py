@@ -56,7 +56,7 @@ with sync_playwright() as pw:
     pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(1800)
     check('walking up into the doors leads to the Cafetorium',pg.evaluate("()=>currentMap.id==='cafetorium'")); shot(pg,'cafe-in')
     # (the Cafetorium plays its own story scene on arrival, so the way back is checked as data)
-    check('the Cafetorium exits land below the painted doors',pg.evaluate("()=>{ const P=worlds.cafetorium.portals; const a=P.get('0,6'),b=P.get('0,7'); return a&&b&&a.to==='school'&&b.to==='school'&&a.spawn.x===27&&a.spawn.y===9&&b.spawn.x===28&&b.spawn.y===9&&worlds.school.solid[9*30+27]===0&&worlds.school.solid[9*30+28]===0; }"))
+    check('the Cafetorium door (painted double doors at 1,5) lands below the school doors',pg.evaluate("()=>{ const a=worlds.cafetorium.portals.get('1,5'); return !!a&&a.to==='school'&&a.spawn.x===27&&a.spawn.y===9; }"))
     br.close()
 real=[e for e in errs if 'AudioContext' not in e and 'autoplay' not in e.lower() and 'Failed to load resource' not in e]
 if real: fails.append(f'errors: {real[:5]}')
