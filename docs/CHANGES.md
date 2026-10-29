@@ -206,6 +206,12 @@
 - New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
 - Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
 
+## 2026-10-29: Starter Splash and Popcorn Jump use painted poses
+- `tools/sprite-bake/src/tom-poses-v2.png` (12 poses) baked into `art/chars/tom-poses.webp` with the first set: `carry, raise, lidpop, splash, goo, proud` (Starter Splash) and `bowlsit, spook, scream, bowlthrow, cower, frozen` (movie night, terrified). The jar and popcorn bowl are painted into the poses.
+- Starter Splash (engine/tom-moves.js): carry, raise, lid pop, splash, goo, proud; the drawn jar (`tv_jar`) is skipped while painted poses are on.
+- Popcorn Jump (`B2_TOMBO_ANIM.tnb1`, engine/battle2-kind.js): Tom sits with his painted bowl, is spooked, screams mid-jump while the game's bowl flies, cowers, then stands proud for the kiss. The drawn lap bowl is skipped. `bowlthrow` and `frozen` are baked but not used yet.
+- `tools/sprite-bake/sheet.py` now merges loose debris (flying popcorn) into the nearest figure. Script versions bumped to `?v=tom4`.
+
 ## 2026-10-29: Painted controller for Press Start
 - `tools/sprite-bake/src/prop-controller.png` baked by new `tools/sprite-bake/bake_props.py` to `art/chars/prop-controller.webp` (levelled, 200 px wide). `ctl()` in engine/tom-moves.js draws it (wind-up, throw, falling); the old drawn controller is the fallback until it loads.
 

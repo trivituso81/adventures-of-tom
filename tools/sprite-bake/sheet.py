@@ -114,6 +114,18 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_er
             l2, m2 = ndi.label(ndi.binary_dilation(keep, iterations=dilate))
             objs = ndi.find_objects(l2)
             cells = sorted([(o[1].start, i + 1) for i, o in enumerate(objs)])
+        if len(cells) > len(names):
+            # loose debris (flying popcorn, drips) is merged into the nearest big figure
+            sizes = ndi.sum(l2 > 0, l2, range(1, m2 + 1))
+            big = sorted(np.argsort(-sizes)[:len(names)] + 1)
+            cent = {i: ndi.center_of_mass(l2 == i) for i in range(1, m2 + 1)}
+            for i in range(1, m2 + 1):
+                if i in big:
+                    continue
+                near = min(big, key=lambda b: (cent[b][0] - cent[i][0]) ** 2 + (cent[b][1] - cent[i][1]) ** 2)
+                l2[l2 == i] = near
+            objs = ndi.find_objects(l2)
+            cells = sorted([(objs[i - 1][1].start, i) for i in big])
         if len(cells) != len(names):
             raise SystemExit(f'{path}: row {ya}-{yb} has {len(cells)} figures, expected {len(names)}')
         for (_, idx), nm in zip(cells, names):
