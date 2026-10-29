@@ -282,7 +282,8 @@ const splashW=()=>splash.c?splash.c.width:390;
 // ---------- Drawing ----------
 function splashFrame(now) {
   const el=$('splash');
-  if(!el||el.hidden||SPLASH_ART) return;
+  if(!el||el.hidden) return;
+  if(SPLASH_ART) { splashCastDraw(now/1000); requestAnimationFrame(splashFrame); return; }
   const dt=Math.min(.05,Math.max(0,(now-splash.last)/1000)); splash.last=now;
   splashUpdate(dt);
   splashDraw();
@@ -426,6 +427,37 @@ function splashScene(W,H,panelH,time) {
     gfx.globalAlpha=1-u; drawHeart(x,y,Math.max(1,S)); gfx.globalAlpha=1;
   }
 }
+// Painted welcome art (Tom, 2026-10-29): the family stands where the shadows fall on the plaza in art/welcome.webp.
+// Positions are in the picture's own pixels (941 x 1671) and are mapped through the same "cover, top" fit the CSS uses.
+// h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
+const SPLASH_IMG={w:941,h:1671};
+const SPLASH_SPOTS=[
+  {id:'tnb',x:250,feet:1214,h:240},
+  {id:'grace',x:362,feet:1186,h:165},
+  {id:'tom',x:488,feet:1234,h:292},
+  {id:'amy',x:635,feet:1222,h:205},
+  {id:'deedee',x:738,feet:1214,h:158},
+  {id:'boppy',x:812,feet:1204,h:168},
+  {id:'nara',x:566,feet:1262,h:66}
+];
+function splashCastDraw(time) {
+  const c=splash.c,box=$('splash'); if(!c||!box) return;
+  const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
+  if(c.width!==w||c.height!==h) { c.width=w; c.height=h; }
+  const g=splash.g; g.clearRect(0,0,w,h);
+  if(w>h) return;
+  const s=Math.max(w/SPLASH_IMG.w,h/SPLASH_IMG.h),ox=(w-SPLASH_IMG.w*s)/2;
+  const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
+  try {
+    for(const m of SPLASH_SPOTS) {
+      const set=m.id==='tom'&&OW.tomRide?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*s/fh;
+      const bob=Math.floor((time*1.6+SPLASH_SPOTS.indexOf(m)*.37)%2)*Math.max(1,Math.round(s*2));
+      drawSprite(fr,set.pal,Math.round(ox+m.x*s-fw*k/2),Math.round(m.feet*s-fh*k-bob),k);
+    }
+  } finally { gfx=prev; }
+}
+
 function splashBall(x,y,S) {
   const r=Math.max(2,Math.round(S*2.5));
   ellipse(x,y,r+1,r+1,'#2b2a26'); ellipse(x,y,r,r,'#c8e04a'); rect(x-r+1,y-1,r*2-2,Math.max(1,Math.round(S/2)),'#f4fbd0');
