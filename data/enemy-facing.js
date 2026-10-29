@@ -13,10 +13,13 @@ const ENEMY_FACE_WANT='R';
 const ENEMY_FACE_DRAWN={
   // drawn looking left (fogwisp trails its tail to the right, so it is moving and looking left)
   coyote:'L', mudling:'L', grump:'L', toad:'L', fogwisp:'L',
+  // drawn turned left (three-quarter view), added 2026-10-28 after Tom saw them still facing the wrong way
+  gridlock:'L', tardybell:'L', lukewarm:'L', smoglet:'L', shusher:'L', stuffedshirt:'L', unclaimed:'L',
   // drawn looking right
   directorscut:'R', dogear:'R', extra:'R', longline:'R', peanutgallery:'R', dodgeball:'R', armresthog:'R'
 };
-// Drawn front-on with a slight turn, left alone on purpose: soreloser, popup, coathanger, clapper, knowitall, wallflower, stuffedshirt.
+// Drawn front-on or already turned right, left alone on purpose: soreloser, popup, coathanger, clapper, knowitall, wallflower.
+// Anything with writing on it (standbysprite, popquiz, greynote, knowitall) is never mirrored, so the letters stay readable.
 (function() {
   for(const id of Object.keys(ENEMY_FACE_DRAWN)) {
     const d=MONSTERS[id];

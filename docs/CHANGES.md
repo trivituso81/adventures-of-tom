@@ -1,5 +1,10 @@
 # Change log (newest first)
 
+## 2026-10-28: More monsters now face right
+- Tom saw many monsters still looking left. `data/enemy-facing.js` now also mirrors Gridlock, Tardy Bell, Lukewarm, Smoglet, Shusher, Stuffed Shirt and Unclaimed (they were drawn turned left). Eyes and mouth are mirrored with the art, so every move still aims correctly.
+- Monsters with writing on them (Standby Sprite, Pop Quiz, Grey Note, Know-It-All) are left alone on purpose so the letters do not read backwards.
+- Tests: `tools/smoke.py` no fails; looked at the mirrored sprites on a contact sheet. No spoken lines changed.
+
 ## 2026-10-28: Painted plate for Sundial Hollow
 - Sundial Hollow (map id `sundial`, chapter 3) now uses Tom's painting (`art/sundial.webp`, 22 x 20 tiles at 64 px, entry in `PLATES`). The ASCII plan is replaced by a `plateMask` in `data/maps-le.js`.
 - Objects re-laid to the painting: sundial (11,12, 2x2; stand at 11 or 12,14), mossy sign (8,15), Pool marker (14,6), stone bench (3,13, 4x2). Monster spots moved onto dry land: Bobber (17,12), Tangle (5,16), Soggy Sock (14,16); Iron-Gill stays at (10,3) in the pond. The coin scene now walks Tom to (11,14).
