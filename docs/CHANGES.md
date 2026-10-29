@@ -1,5 +1,11 @@
 # Change log (newest first)
 
+## 2026-10-28: Rivituso Row, path to Aunt Ellie's house and the south side
+- Bug: the only way to Ellie's door (11,15), the south path and the Pier exit was a one-tile corridor along row 16 (x6 to x14), and Gus stood in it at (7,16), so the south could not be reached. The east garden loop also dead-ended at (20,16).
+- Fix: the plateMask row 16 now runs x6 to x21, joining the west path and the east loop to Ellie's plaza (two ways in). New spec field `noGo` (`buildArea` in `engine/world.js`): tiles NPCs never wander onto; Row uses it for the whole plaza strip. Gus now starts by the bench at (4,11). The Pier signpost moved from (15,16) to (15,17) so it no longer sits on the opened path.
+- New `tools/reach_test.py [mapId ...]`: flood fill over the real collision grid; fails if any door or exit is cut off, blocked by an NPC's starting tile, or can be cut off by any single wandering NPC. Row, Square and Hollow pass. The Marsh exit to the Sundial reports unreachable on purpose (old reeds until chapter 3).
+- The Pier path (Row south exit) is still gated until chapter 3 (Boppy takes everyone fishing); that is design, not a bug.
+
 ## 2026-10-28: More monsters now face right
 - Tom saw many monsters still looking left. `data/enemy-facing.js` now also mirrors Gridlock, Tardy Bell, Lukewarm, Smoglet, Shusher, Stuffed Shirt and Unclaimed (they were drawn turned left). Eyes and mouth are mirrored with the art, so every move still aims correctly.
 - Monsters with writing on them (Standby Sprite, Pop Quiz, Grey Note, Know-It-All) are left alone on purpose so the letters do not read backwards.

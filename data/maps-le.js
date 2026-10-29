@@ -171,12 +171,15 @@ const LE_AREAS=[
       '#####..#############...#',
       '#####..##############..#',
       '#####..####.#######...##',
-      '######.........#####..##',
+      '######................##',
       '###########...##########',
       '###########...##########',
       '###########...##########',
       '###########...##########',
       '###########...##########'],
+    // Ellie's plaza (row 16) joins the west path and the east garden loop, so Ellie's door and the south path have two ways in.
+    // NPCs never wander onto the plaza strip, so nobody can plug it (tools/reach_test.py checks this).
+    noGo:[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21].map(x=>[x,16]),
     houseRoad:8,
     border:{kind:'tree',open:[[12,0],[13,0],[11,21],[12,21]]},
     exits:[[12,0,'town',14,24,'up'],[13,0,'town',15,24,'up'],[11,21,'pier',11,1,'down'],[12,21,'pier',12,1,'down']],
@@ -186,7 +189,7 @@ const LE_AREAS=[
       when:[{chapter:3,lines:['The path south goes to Cattail Pier.','Going fishing without Boppy? He\'d never, ever let you hear the end of it.']}]}],
     objects:[
       ['sign',14,1,1,1,'Row signpost',"THE SQUARE, back that way. Shops, fountain, Pip's rock."],
-      ['sign',15,16,1,1,'Pier signpost','CATTAIL PIER, south. Catch and release. Mostly release.'],
+      ['sign',15,17,1,1,'Pier signpost','CATTAIL PIER, south. Catch and release. Mostly release.'],
       ['sign',7,9,2,1,'Family notice',"Rivituso Row. Cookies at Deedee's. Juice at Amy's. Opinions at Ellie's. Peace and quiet at nobody's."],
       ['sign',7,7,1,1,'Chalk drawings',"Grace and Rose's chalk drawings cover the path. Step around the sunshine. Step carefully. Step colorfully."],
       ['bench',3,10,3,1,'The other bench','Boppy sat here once in 2019. It\'s still his.'],
@@ -195,7 +198,7 @@ const LE_AREAS=[
       ['planter',4,12,1,1,"Deedee's herb bed","Basil, mint and rosemary. Deedee says the rosemary is for Boppy's stomach. Boppy disagrees."],
       ['planter',2,10,1,1,'Community garden',"Squash, beans, a sunflower Grace planted, a rock Rose planted, and a scarecrow wearing Boppy's old cap. The scarecrow walks too fast, apparently."]],
     npcs:[
-      {name:'Gus',x:7,y:16,look:'gus',lines:[
+      {name:'Gus',x:4,y:11,look:'gus',lines:[
         "I'm training for the annual sit-down.",
         'My coach is a bench.',
         'We have a very supportive relationship.']},
