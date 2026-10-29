@@ -139,6 +139,7 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
         big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
     else:
         top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
+        if name.startswith('w_down'): chin = 126       # front view: the detector stops under the nose, which squashed mouth and chin
         ax = (x0 + x1) / 2.0
         X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
         # jacket (navy, below the cap) inside the box stays on the body at scale 1; only head pixels are lifted and enlarged
