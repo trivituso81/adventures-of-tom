@@ -12,12 +12,13 @@ const CH15={mode:'full',chapter:15};
 Object.assign(items,{
   hushchip:{name:'HUSH-9’s Chip',icon:'🔇',slot:null,keepsake:true,desc:'The hush chip, cracked down the middle. It does not hush anything now. It plays one small sound on a loop: this table, laughing. Rose keeps it in her pocket and says it is a tiny dinner.'}});
 
-// Seats around the table (table object at x 4 to 8, y 4 to 5). Each is [x, y, facing].
-const CH15_SEATS={deedee:[3,4,'right'],nara:[3,5,'right'],tnb:[4,3,'down'],tom:[5,3,'down'],amy:[7,3,'down'],boppy:[9,4,'left'],grace:[5,6,'up'],rose:[7,6,'up']};
+// Seats around the table (table object at x 4 to 8, y 5 to 6, dragged into the middle of the painted living room). Each is [x, y, facing].
+// Top side sits in front of the painted sofa; Tom, Grace and Boppy sit on the door side, leaving (6,7) for HUSH-9.
+const CH15_SEATS={deedee:[3,5,'right'],nara:[3,4,'right'],tnb:[5,4,'down'],amy:[6,4,'down'],rose:[7,4,'down'],grace:[5,7,'up'],tom:[7,7,'up'],boppy:[8,7,'up']};
 const ch15Hush=()=>{ const g=worlds.grands; return g&&g.npcs.find(n=>n.name==='HUSH-9'); };
 function ch15AddTable() {
   const g=worlds.grands; if(!g||g.objects.some(o=>o.ch15)) return;
-  object(g,'table',4,4,5,2,'The dinner table','Eight places set. A rhubarb crisp, a jar of Boppy’s peppers, the good plates, and a candle that Deedee says is for atmosphere and Boppy says is a fire hazard.',{ch15:true});
+  object(g,'table',4,5,5,2,'The dinner table','Eight places set. A rhubarb crisp, a jar of Boppy’s peppers, the good plates, and a candle that Deedee says is for atmosphere and Boppy says is a fire hazard.',{ch15:true});
 }
 function ch15RemoveTable() {
   const g=worlds.grands; if(!g) return;

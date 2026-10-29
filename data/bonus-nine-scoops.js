@@ -792,7 +792,7 @@ SCENES.nsThaw=[
   {talk:'Boppy',lines:['My peppers. Out back, in the garden. The hose flinched.','Don\'t take the ghost one. The ghost one is MINE.']},
   {talk:'Grace',lines:['Which one is the ghost one?']},
   {talk:'Boppy',lines:['The one that\'s looking at you.']},
-  {walk:'Deedee',to:[[5,6],[4,6]],speed:.25}, {face:'Deedee',dir:'down'},
+  {walk:'Deedee',to:[[5,6]],speed:.25}, {face:'Deedee',dir:'down'},
   {save:true},
   {toast:'Goal: Boppy’s pepper planter, out back on Rivituso Row. Something warm.',time:5}
 ];
@@ -951,10 +951,10 @@ SCENES.nsAfterBoss=[
 // The party at Amy's house: the whole family, Grace's friends, Mr. Pistachio and one freezer. BONUS CHAPTER COMPLETE.
 SCENES.nsEnd=()=>[
   {flag:'ns-done',value:'pending'},
-  {place:'Amy',at:[7,5],dir:'down'}, {place:'Justin',at:[3,5],dir:'down'},
-  {call:()=>{ const d=storySpawn({name:'Deedee',at:[4,4],look:'pip',dir:'down'}); d.sheet='deedee'; const b=storySpawn({name:'Boppy',at:[9,5],look:'gus',dir:'down'}); b.sheet='boppy';
-    storySpawn({name:'Pip',at:[3,3],look:'pip',dir:'down'}); storySpawn({name:'Moss',at:[4,2],look:'moss',dir:'down'}); storySpawn({name:'Dot',at:[7,3],look:'dot',dir:'down'});
-    const p=storySpawn({name:'Mr. Pistachio',at:[10,4],look:'bun',dir:'down'}); p.sheet=null; }},
+  {place:'Amy',at:[7,6],dir:'down'}, {place:'Justin',at:[5,6],dir:'down'},
+  {call:()=>{ const d=storySpawn({name:'Deedee',at:[4,2],look:'pip',dir:'down'}); d.sheet='deedee'; const b=storySpawn({name:'Boppy',at:[9,2],look:'gus',dir:'down'}); b.sheet='boppy';
+    storySpawn({name:'Pip',at:[3,2],look:'pip',dir:'down'}); storySpawn({name:'Moss',at:[5,2],look:'moss',dir:'down'}); storySpawn({name:'Dot',at:[7,2],look:'dot',dir:'down'});
+    const p=storySpawn({name:'Mr. Pistachio',at:[8,2],look:'bun',dir:'down'}); p.sheet=null; }},
   {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
   {hearts:'Amy'},

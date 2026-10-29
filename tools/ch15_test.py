@@ -34,7 +34,7 @@ with sync_playwright() as pw:
     check('chapter 15, table object stands',pg.evaluate("()=>STORY.chapter===15&&worlds.grands.objects.some(o=>o.ch15)"))
     check('party is Tom Amy Grace Rose',pg.evaluate("()=>party.length===4&&['tom','amy','grace','rose'].every(i=>party.some(p=>p.id===i))"))
     check('bench holds Deedee Boppy TNB Nara',pg.evaluate("()=>['deedee','boppy','tnb','nara'].every(i=>STORY.bench.includes(i))&&STORY.bench.length===4"))
-    check('everybody seated',pg.evaluate("()=>{ const S={deedee:[3,4],nara:[3,5],tnb:[4,3],amy:[7,3],boppy:[9,4],grace:[5,6],rose:[7,6]}; return Object.keys(S).every(id=>{ const f=followers.find(f=>f.member&&f.member.id===id); return f&&f.x===S[id][0]&&f.y===S[id][1]; })&&player.x===5&&player.y===3; }"))
+    check('everybody seated',pg.evaluate("()=>{ const S={deedee:[3,5],nara:[3,4],tnb:[5,4],amy:[6,4],boppy:[8,7],grace:[5,7],rose:[7,4]}; return Object.keys(S).every(id=>{ const f=followers.find(f=>f.member&&f.member.id===id); return f&&f.x===S[id][0]&&f.y===S[id][1]; })&&player.x===7&&player.y===7; }"))
     check('HUSH-9 arrives',adv(pg,600,"()=>!!worlds.grands.npcs.find(n=>n.name==='HUSH-9')&&!dialog.active")); shot(pg,'hush-arrives')
     check('boss starts',adv(pg,700,"()=>battle.active")); pg.wait_for_timeout(8000); shot(pg,'boss-open')
     check('HUSH-9 Final Form in the fight',pg.evaluate("()=>B2.foes.length===1&&B2.foes[0].boss==='hush9final'"))

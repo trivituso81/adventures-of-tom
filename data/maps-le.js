@@ -986,12 +986,25 @@ const LE_ROOMS=[
       ['pot',1,6,1,1,'Waiting room plant','It\'s been waiting for a cab since spring. It\'s in no hurry.']]},
   {id:'amyhouse',w:12,h:10,
     style:{floor:'#e2cfc0',alt:'#ead9cb',wall:'#c99aa4',trim:'#f0dde0',pattern:'tile',rug:'#d2a4b0'},
-    walls:[[5,1],[5,2],[5,3]],
     rug:[6,5,4,3],
+    // Painted plate (art/amyhouse.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Girls' beds along the back wall (a rug strip runs in front of them), plaid sofa and coffee table left, dining table and kitchen island right,
+    // toy chest and step front left. One aisle (x6) joins the back strip to the front.
+    plateMask:[
+      '############',
+      '############',
+      '###.......##',
+      '######.#####',
+      '######.#####',
+      '#####..#####',
+      '#####...####',
+      '#####...####',
+      '#........###',
+      '############'],
     npcs:[
       // Justin: Amy's husband, Grace and Rose's dad. Electrician, always mid-project. Away at work during chapter 5's
       // conferences (he texts Amy at the end); data/scenes.js AWAY rule.
-      {name:'Justin',x:3,y:5,look:'bean',sheet:'justin',kin:true,trace:'justin-hello',duration:0.7,
+      {name:'Justin',x:5,y:5,look:'bean',sheet:'justin',kin:true,trace:'justin-hello',duration:0.7,
         away:[{chapter:5,notFlag:'ch5-done'}],lines:[
         'Tom. Hey. Hold this. No, the other end. Don\'t touch the copper.',
         'Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.',
@@ -1022,17 +1035,29 @@ const LE_ROOMS=[
           'Rose. Big feelings are allowed. Throwing Lamby isn\'t. Come here.',
           'Grace, you don\'t have to be the best at it. You have to be the one who keeps going. Okay, now be the best at it.']}],
     objects:[
-      ['bed',1,2,2,2,"Grace's bed",'Books under the pillow. A flashlight. A plan.'],
-      ['bed',8,2,2,2,"Rose's bed",'Seventeen stuffed animals, arranged by importance.'],
-      ['photo',6,1,1,1,'Family photo','Amy, Justin, Grace and Rose at a 5K. Amy won. Justin carried both girls across the finish anyway.'],
-      ['toybox',1,7,2,1,'Toy box','Mostly rocks. Rose has a system.'],
-      ['counter',8,7,3,1,'Kitchen counter','A stack of graded spelling tests, a race bib for Sunday, and three running medals used as coasters.',{variant:'letters'}]]},
+      ['bed',2,1,3,1,"Grace's bed",'Books under the pillow. A flashlight. A plan.'],
+      ['bed',8,1,2,1,"Rose's bed",'Seventeen stuffed animals, arranged by importance.'],
+      ['photo',5,1,2,1,'Family photo','Amy, Justin, Grace and Rose at a 5K. Amy won. Justin carried both girls across the finish anyway.'],
+      ['toybox',1,6,3,2,'Toy box','Mostly rocks. Rose has a system.'],
+      ['counter',8,5,4,3,'Kitchen counter','A stack of graded spelling tests, a race bib for Sunday, and three running medals used as coasters.',{variant:'letters'}]]},
   {id:'grands',w:12,h:10,
     style:{floor:'#cbb089',alt:'#d7be98',wall:'#9a8f78',trim:'#e6dcc3',pattern:'wood',rug:'#9c6e62'},
-    walls:[[1,4],[10,4]],
     rug:[3,5,6,3],
+    // Painted plate (art/grands.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Recliner and lamp table top left, TV and plaid sofa centre, rocker and cabinets right, baking island left, round table right.
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '####.#######',
+      '#....#######',
+      '##.......###',
+      '#####...####',
+      '#####...####',
+      '#####...####',
+      '############'],
     npcs:[
-      {name:'Deedee',x:4,y:6,look:'pip',sheet:'deedee',grandma:true,duration:0.84,lines:[
+      {name:'Deedee',x:5,y:6,look:'pip',sheet:'deedee',grandma:true,duration:0.84,lines:[
         "There's my Tommy! And my girls! Come here, come here.",
         'Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?',
         'Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.'],
@@ -1055,7 +1080,7 @@ const LE_ROOMS=[
           'Hugs for everyone. There. All better.',
           'Hugs for everyone, just because. To the moon and back.']},
       // Aunt Ellie visiting: in chapter 9 she minds the girls with cards; at the chapter 10 homecoming she wants the airport story.
-      {name:'Aunt Ellie',x:6,y:3,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,
+      {name:'Aunt Ellie',x:7,y:5,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,
         away:[{test:S=>!ELLIE_VISIT.some(storyMatch)}],
         lines:['Sit. Tell me about the airport. Leave nothing out. I\'ll know.'],
         when:[{...CH9_ON,flag:'ch9-letter',lines:['The girls and I are playing cards. I\'m winning. I\'m also cheating. They\'re learning a great deal.','Go. Dance. Somebody in this family should get to finish a party at the Moon Club.']}]},
@@ -1075,11 +1100,11 @@ const LE_ROOMS=[
           'Grace, Rose, who\'s the strongest grandpa? Correct. Now help me up.',
           'She\'s looking for her glasses again. They\'re on her head. I\'m not saying anything. I\'m saying it to you.']}],
     objects:[
-      ['recliner',1,1,2,2,"Boppy's recliner",'Don\'t sit in it. Everyone has tried. Everyone has been told. There\'s a heating pad. And one pair of Deedee’s reading glasses, down the side. She\'s looked for these.'],
-      ['tv',5,1,3,1,'The TV','The fishing channel. It\'s been on since 1994.'],
-      ['counter',1,7,4,1,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
-      ['photo',9,7,1,1,'Photo wall','Tom at six. Amy at four. Boppy in his college track singlet, holding a trophy. Another one with a fish.'],
-      ['pot',10,1,1,1,'Pepper plant',"Boppy's pride. The label just says NO."]]},
+      ['recliner',1,2,3,2,"Boppy's recliner",'Don\'t sit in it. Everyone has tried. Everyone has been told. There\'s a heating pad. And one pair of Deedee’s reading glasses, down the side. She\'s looked for these.'],
+      ['tv',5,2,3,3,'The TV','The fishing channel. It\'s been on since 1994.'],
+      ['counter',0,6,5,2,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
+      ['photo',0,3,1,2,'Photo wall','Tom at six. Amy at four. Boppy in his college track singlet, holding a trophy. Another one with a fish.'],
+      ['pot',8,3,1,2,'Pepper plant',"Boppy's pride. The label just says NO."]]},
   {id:'elliehouse',w:12,h:10,
     style:{floor:'#cdb9c6',alt:'#d8c6d2',wall:'#7a5a78',trim:'#eadcea',pattern:'wood',rug:'#6a3a8a'},
     rug:[3,4,6,3],

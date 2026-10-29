@@ -1,5 +1,13 @@
 # Change log (newest first)
 
+## 2026-10-28: Painted plates for Amy's house and Deedee and Boppy's house
+- The Gregori house (map id `amyhouse`) and the Rivituso house (`grands`) now use Tom's painted interiors (`art/amyhouse.webp`, `art/grands.webp`, 768 x 640, 64 px per tile). Interiors can now carry a `plateMask` like the outdoor areas (`makeRoom` in `engine/world.js` applies it); the room's old `walls` list is gone.
+- Both rooms are re-laid to the painting: objects moved to what is painted (recliner, TV and sofa, baking island, photo wall, beds, toy chest, kitchen island), each reachable from the door. Notes: Boppy's pepper plant interaction sits on the painted lamp-table plant (the big painted pepper plant is behind the sofa and cannot be reached); the TV object covers the TV and sofa; the Grace and Rose bed interactions are reached from the rug strip in front of the beds.
+- Cutscene stand positions moved off painted furniture: Deedee (5,6) in chapter 3 and Nine Scoops, the Nine Scoops party guests along Amy's back strip.
+- Chapter 15: the long dinner table is now at x 4 to 8, y 5 to 6 (dragged into the middle of the painted living room). New seats: Deedee (3,5), Nara (3,4), TNB (5,4), Amy (6,4), Rose (7,4), Grace (5,7), Tom (7,7), Boppy (8,7); (6,7) stays free for HUSH-9. `tools/ch15_test.py` updated and passing.
+- Tests: smoke, `tools/ch15_test.py` all ok; reach check (every object and NPC reachable from the door) in both rooms.
+- Not reworded: no spoken lines changed. Known roughness: the rocking chair, side table and round dining table block movement but have no interaction.
+
 ## 2026-10-28: Tap to walk, Squishy Delivery, enemy facing (synced from the artifact scratch copy)
 - Tap to walk (`engine/tapwalk.js`): tap the floor, an NPC, an object or a door and Tom walks there, followers trailing. Any key, stick, dialogue, menu, battle or cutscene cancels it. Toast text updated.
 - Enemies now all face right (`data/enemy-facing.js` mirrors the left-facing sprites once at load). Bosses with helpers draw 1.5x, boss on the left, helpers in front.

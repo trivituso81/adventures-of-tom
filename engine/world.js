@@ -209,6 +209,7 @@ function makeRoom(spec) {
 
   placeObjects(map,spec.objects);
   for(const s of spec.npcs||[]) map.npcs.push(npcFromSpec(s,true));
+  if(spec.plateMask) applyPlateMask(map,spec.plateMask);   // painted plate: the mask is the walk map
 
   finishMap(map);
   if(house.region==='la') map.region='la';

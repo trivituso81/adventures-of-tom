@@ -622,7 +622,7 @@ SCENES.ch3Arrive=[
 // 2. Deedee and Boppy's house: the Whisker Perch, the pepper jar. Boppy joins; Deedee stays to bake.
 SCENES.ch3Fishing=[
   {flag:'ch3-boppy'},
-  {place:'Deedee',at:[4,6],dir:'right'}, {place:'Boppy',at:[8,5],dir:'down'},
+  {place:'Deedee',at:[5,6],dir:'right'}, {place:'Boppy',at:[8,5],dir:'down'},
   {walk:'tom',to:routeTo('tom',6,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
   {hearts:'Deedee'},
