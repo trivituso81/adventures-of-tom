@@ -13,8 +13,9 @@
 
 ## 2026-10-28: Grace voice baker (new child voice)
 - Tom heard Grace as a grown woman. Pitch and voice-size shifts of her current Ivy clips (3 rounds, up to +5 semitones) all sounded mechanical or cartoonish, and calm or long lines stayed adult. Decision: replace the voice, not process it.
-- New `tools/voice-recast/build-grace.js` builds `grace-voice-baker.html` (Voice Design 3 options or a pasted voice ID, then re-records her 50 battle and 160 story lines with the existing scripts). `tools/voice-recast/test_grace_baker.py` tests it with ElevenLabs mocked (includes the delete-Ivy path when the account is full). Export merges with `node tools/voice-recast/merge-voice.js recast.json data <outdir> grace`. Do NOT run shrink-voice.js on the new clips.
+- New `tools/voice-recast/build-grace.js` builds `grace-voice-baker.html` (searches the ElevenLabs Voice Library or takes a pasted voice ID, then re-records her 50 battle and 160 story lines with the existing scripts). `tools/voice-recast/test_grace_baker.py` tests it with ElevenLabs mocked (includes the delete-Ivy path when the account is full). Export merges with `node tools/voice-recast/merge-voice.js recast.json data <outdir> grace`. Do NOT run shrink-voice.js on the new clips.
 - `tools/voice-recast/template.html`: an empty accent no longer adds a blank entry to the bracket direction. No game files or spoken lines changed.
+- ElevenLabs returned 403 (safety block) when Voice Design was asked for a nine-year-old girl. Do not reword around it: Grace is picked from the Voice Library instead (`tools/voice-recast/grace-library.js`, built into the baker; adding the voice deletes Ivy if the account is full). The library calls are tested with mocks only, not against the live API.
 - Waiting for: Tom to run the baker and send recast.json.
 
 ## 2026-10-28: More monsters now face right
