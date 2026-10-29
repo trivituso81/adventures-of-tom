@@ -22,6 +22,8 @@ const SPLASH_CAST=[
 const SPLASH_HOP=.42,SPLASH_STEP=.3;
 // Welcome screen: Tom, Grace, Rose and Deedee are drawn 33% bigger (Rose rides on Tom, so she grows with him). Tom's call, 2026-10-29.
 const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33};
+// Welcome screen shows the painted art (art/welcome.webp, set in index.html). Set false to bring back the drawn cast scene.
+const SPLASH_ART=true;
 let FULL_GAME_OPEN=true;   // opened in C1 (2026-10-20): chapter 1 is playable
 
 function startSplash() {
@@ -93,7 +95,7 @@ const SPLASH_MODES={
   launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',layout:'launch',choices:()=>{
     const n=splashSaveCount();
     return [
-      {name:'START NEW',sub:'Pick a Part and a chapter.',to:'new'},
+      {name:'NEW GAME',sub:'Pick a Part and a chapter.',to:'new'},
       {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():''),act:()=>splashGo(loadMenu)},
       {name:'ADMIN',cls:'admin',to:'admin'}]; }},
   new:{tab:'Start New',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
@@ -280,7 +282,7 @@ const splashW=()=>splash.c?splash.c.width:390;
 // ---------- Drawing ----------
 function splashFrame(now) {
   const el=$('splash');
-  if(!el||el.hidden) return;
+  if(!el||el.hidden||SPLASH_ART) return;
   const dt=Math.min(.05,Math.max(0,(now-splash.last)/1000)); splash.last=now;
   splashUpdate(dt);
   splashDraw();

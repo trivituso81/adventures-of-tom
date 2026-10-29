@@ -25,8 +25,8 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=88)   # idle height in grid rows
-ap.add_argument('--ow-h', type=int, default=40)        # standing height of the overworld sprite in rows
+ap.add_argument('--battle-h', type=float, default=99.5)   # idle figure height in grid rows (Tom's measured on his baked idle: 99.5)
+ap.add_argument('--ow-h', type=float, default=41.7)    # standing figure height in rows (Tom's measured on his baked down_stand: 41.7; his frame is 43 with headroom)
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -83,10 +83,9 @@ HEAD_BOX = {'b_idle': (3, 98, 18, 168), 'b_windup': (3, 100, 10, 196), 'b_strike
             'b_leap': (19, 115, 64, 268), 'b_hurt': (3, 100, 54, 236), 'b_kneel': (3, 115, 8, 205), 'b_win': (17, 100, 26, 204),
             'b_defend': (2, 106, 72, 240), 'b_cast': (3, 88, 80, 258)}
 def _hair_right(img, y0, y1):
-    """Right-most column of hair (figure pixels that are not skin, sleeve, lanyard, watch or shoe) in rows y0..y1."""
-    a = np.array(img).astype(int); R, G, B, A = a[:, :, 0], a[:, :, 1], a[:, :, 2], a[:, :, 3]
-    dark = (A > 40) & (R < 215) & (R - B > 5) & (G < R - 10) & ~((R > 200) & (G > 150) & (B < 120))
-    cols = np.where(dark[y0:y1 + 1].any(0))[0]
+    """Right-most figure column in rows y0..y1 (the head rows: hair is the widest thing there; light hair tips count)."""
+    al = np.array(img)[:, :, 3] > 12
+    cols = np.where(al[y0:y1 + 1].any(0))[0]
     return int(cols.max()) if len(cols) else 0
 def _neck_x(img, chin, x0, x1):
     """Profile heads grow about the neck, not the middle of the hair: x centre of the skin pixels just above the chin line."""
@@ -95,7 +94,7 @@ def _neck_x(img, chin, x0, x1):
     band = skin[max(0, chin - 18):chin, x0:x1]
     xs = np.where(band)[1]
     return float(x0 + xs.mean()) if len(xs) > 30 else (x0 + x1) / 2.0
-def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
+def _warp_head(arr, x0, x1, y0, ay, ax, k, taper, flat_x=False):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
     from scipy import ndimage as ndi
@@ -115,14 +114,14 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     xc = (ax - x0) * k                                               # dest x of the anchor column
     out = np.zeros((Hd, Wd, 4))
     pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
-    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / sc[:, None]
+    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / (np.ones_like(sc)[:, None] if flat_x else sc[:, None])
     for c in range(4):
         out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
     al = out[:, :, 3:4]
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
-def bigger_head(img, name, k=None, pad=160, taper=TAPER):
+def bigger_head(img, name, k=None, pad=420, taper=TAPER):
     if k is None: k = HEAD_KB if name.startswith('b_') else HEAD_KW
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
@@ -149,15 +148,43 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
             WIN_ARMS = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & (A > 20)
             arr[pad:pad + H, pad:pad + W, 3] = np.where(WIN_ARMS, 0, arr[pad:pad + H, pad:pad + W, 3])
         ax = _neck_x(img, chin, x0, x1) if not name.startswith(('w_down', 'w_up')) else (x0 + x1) / 2.0
-        if name != 'b_win': x1 = max(x1, _hair_right(img, top, chin + taper) + 2)       # hair keeps widening below the chin; take it all into the warp or it tears at the box edge
+        if name != 'b_win': x1 = max(x1, _hair_right(img, top, chin) + 3)       # hair keeps widening below the chin; take it all into the warp or it tears at the box edge
         X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
-        out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
+        # Two layers: hair and skin are enlarged (and blended back to scale 1 below the chin); the shirt, sleeves and lanyard are only stretched
+        # vertically, never widened, so the shoulders do not flare into a cape behind the neck. The shirt layer goes on top.
+        q = arr.astype(int); R_, G_, B_ = q[:, :, 0], q[:, :, 1], q[:, :, 2]
+        from scipy import ndimage as ndi
+        body = ((R_ > 215) & (G_ > 175) & (B_ < 100) & (G_ - B_ > 100)) | ((R_ < 110) & (G_ > 120) & (B_ > 150))     # saturated yellow shirt, teal lanyard (skin has G-B of about 60)
+        body = ndi.binary_opening(body, iterations=2)                    # drop stray specks inside the face
+        body = ndi.binary_dilation(body, iterations=2) & (q[:, :, 3] > 20)
+        body[:max(0, chin + pad - 12)] = False                          # shirt layer only from just above the chin down
+        if name in ('b_leap', 'b_defend', 'b_hurt', 'b_win', 'b_kneel') or name.startswith('w_left'): body[:] = False   # arms and sleeves beside the head: single-layer warp (the split mangles them)
+        arrH = arr.copy(); arrH[body, 3] = 0
+        arrB = arr.copy(); arrB[~body, 3] = 0
+        outH, dx, dy = _warp_head(arrH, X0, X1, Y0, AY, ax + pad, k, taper)
+        outB, dxb, dyb = _warp_head(arrB, X0, X1, Y0, AY, ax + pad, k, taper, flat_x=True)
         arr[Y0:AY, X0:X1, 3] = 0                                  # erase the original head
-        big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
+        big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(outH, 'RGBA'), (dx, dy))
+        big.alpha_composite(Image.fromarray(outB, 'RGBA'), (dxb, dyb))
         if name == 'b_win':                                       # raised arms stay in front of the bigger head, unmoved
             aa = np.array(img); aa[:, :, 3] = np.where(WIN_ARMS, aa[:, :, 3], 0)
             big.alpha_composite(Image.fromarray(aa, 'RGBA'), (pad, pad))
     return big.crop(big.getbbox())
+# Match Tom's head-to-body ratio EXACTLY: his head (hair to chin) is 0.445 of his height in both his battle and his walk frames (measured on his baked
+# frames, 2026-10-29). Solve the head factor for Amy's idle (battle) and down_stand (walk) so hers comes out the same.
+TOM_HEAD_RATIO = 0.445
+def _head_ratio(name, k):
+    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name], name)
+    return (chin - top) * k / bigger_head(poses[name], name, k=k).height
+def _solve(name):
+    lo, hi = 1.0, 4.0
+    for _ in range(14):
+        mid = (lo + hi) / 2
+        if _head_ratio(name, mid) < TOM_HEAD_RATIO: lo = mid
+        else: hi = mid
+    return round((lo + hi) / 2, 3)
+HEAD_KB, HEAD_KW = _solve('b_idle'), _solve('w_down_stand')
+print('head factors solved: battle', HEAD_KB, 'walk', HEAD_KW)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
 if os.environ.get('DUMP'):

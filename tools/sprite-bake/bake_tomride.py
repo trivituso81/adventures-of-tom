@@ -25,82 +25,26 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=138)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
+ap.add_argument('--battle-h', type=int, default=128)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
 ap.add_argument('--ow-h', type=int, default=57)        # standing height of the overworld sprite in rows
+ap.add_argument('--combo-k', type=float, default=1.0)   # fine tune for the combo sheet size
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
+COMBO_K = args.combo_k
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'tomride-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
+for nm, im in slice_sheet(os.path.join(SRC, 'tomride-combo.png'),
+        [['biplane', 'biplane2', 'cloud'], ['cloud2', 'phones', 'night']]).items():
+    poses['c_' + nm] = im
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tomride-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
 
-# ---------------------------------------------------------------- shorten Rose's legs
-# In the sheets her legs run from his shoulders down to shoes near his belt, which reads too long. Squash the band below his
-# chin down to the bottom of her shoes (and the torso with it) so the shoes sit higher and the legs are shorter (Tom, 2026-10-29).
-# Bands are (top y, bottom y) in each sliced frame, picked by eye from the sheet; f is the height they keep.
-LEG_BAND = {'b_idle': (205, 340), 'b_windup': (240, 372), 'b_strike': (225, 350), 'b_run1': (218, 350), 'b_run2': (222, 345),
-            'b_leap': (250, 350), 'b_hurt': (225, 318), 'b_kneel': (258, 338), 'b_win': (220, 322), 'b_defend': (255, 338), 'b_cast': (228, 322)}
-for d in ('down', 'up', 'left'):
-    for n in ('stand', 'step1', 'stand2', 'step2'):
-        LEG_BAND['w_%s_%s' % (d, n)] = (215, 300)
-LEG_KEEP, SIZE_BACK = 0.66, 1.08      # fraction of the band height kept; scale back up a bit so Tom is not shorter than before
 H0b, H0w = poses['b_idle'].height, poses['w_down_stand'].height
-def squash_band(img, y0, y1, f):
-    top, mid, bot = img.crop((0, 0, img.width, y0)), img.crop((0, y0, img.width, y1)), img.crop((0, y1, img.width, img.height))
-    mid = mid.resize((img.width, max(1, int(round((y1 - y0) * f)))), Image.LANCZOS)
-    out = Image.new('RGBA', (img.width, top.height + mid.height + bot.height), (0, 0, 0, 0))
-    out.paste(top, (0, 0)); out.paste(mid, (0, top.height)); out.paste(bot, (0, top.height + mid.height))
-    return out
-# Rose looked bigger on his shoulders than she does on her own (Tom, 2026-10-29). Shrink everything above the crown of his head
-# (her head, hair, upper body) to ROSE_SCALE, blending back to full size over BLEND rows just above his head so there is no step.
-# Tom is untouched. CROWN is the y of the top of his head in each sliced frame, picked by eye; scaling is about her head's centre.
-ROSE_SCALE, BLEND = 0.8, 36
-CROWN = {'b_idle': 118, 'b_windup': 185, 'b_strike': 150, 'b_run1': 135, 'b_run2': 140, 'b_leap': 165, 'b_hurt': 118,
-         'b_kneel': 150, 'b_win': 130, 'b_defend': 140, 'b_cast': 120}
-for d, y in (('down', 95), ('up', 190), ('left', 98)):
-    for n in ('stand', 'step1', 'stand2', 'step2'):
-        CROWN['w_%s_%s' % (d, n)] = y
-def shrink_rose(img, crown, f=ROSE_SCALE, blend=BLEND):
-    from scipy import ndimage as ndi
-    a = np.array(img).astype(np.float64)
-    h, w = a.shape[:2]
-    ya = max(4, crown - blend)
-    # vertical scale per source row: f above ya, rising linearly to 1 at the crown, 1 below
-    ys = np.arange(h, dtype=np.float64)
-    v = np.where(ys < ya, f, np.where(ys < crown, f + (1 - f) * (ys - ya) / (crown - ya), 1.0))
-    out_y = np.concatenate([[0.0], np.cumsum(v)])[:h]          # output position of the top edge of each source row
-    out_y = out_y - (out_y[crown] - crown)                        # keep the crown where it was: Rose sinks, Tom stays
-    # output rows -> source rows (monotone), shifting so output starts at the first row that has content
-    top = out_y[0]
-    H = h - int(np.floor(-top)) if top < 0 else h
-    oy = np.arange(H, dtype=np.float64) + (0 if top >= 0 else -top)
-    src = np.interp(oy + top if top < 0 else oy, out_y, ys)
-    al = a[:, :, 3] > 40
-    cx = np.where(al[:max(8, ya)])[1].mean() if al[:max(8, ya)].any() else w / 2.0
-    sx = np.interp(src, ys, v)
-    pm = a.copy(); pm[:, :, :3] *= (a[:, :, 3:4] / 255.0)
-    res = np.zeros((H, w, 4))
-    xs = np.arange(w, dtype=np.float64)
-    for r in range(H):
-        sr = src[r]; s = sx[r]
-        xin = cx + (xs - cx) / s
-        r0 = int(np.clip(np.floor(sr), 0, h - 2)); t = sr - r0
-        row = pm[r0] * (1 - t) + pm[r0 + 1] * t
-        for c in range(4):
-            res[r, :, c] = np.interp(xin, xs, row[:, c], left=0, right=0)
-    if top > 0: res[:int(np.ceil(top)) + 1] = 0      # rows above the shrunken figure stay empty (no smeared top row)
-    al2 = res[:, :, 3:4] / 255.0
-    rgb = np.where(al2 > 0.01, res[:, :, :3] / np.maximum(al2, 0.01), 0)
-    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), res[:, :, 3]]).astype(np.uint8), 'RGBA')
-for nm, (y0, y1) in LEG_BAND.items():
-    if nm in poses: poses[nm] = squash_band(poses[nm], y0, min(y1, poses[nm].height - 1), LEG_KEEP)
-for nm, cy in CROWN.items():
-    if nm in poses: poses[nm] = shrink_rose(poses[nm], cy)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -241,8 +185,12 @@ def fmt_rows(rows, indent='    '):
 battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
-fb = args.battle_h * KB / H0b * SIZE_BACK
-bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
+fb = args.battle_h * KB / H0b
+# Combo poses (Tom and Rose for Double-Decker Airplane, That Cloud Is Lamby, Headphones in the Dark, Lamby Night-Light).
+# That sheet was drawn at a slightly different size, so scale it from the standing 'night' pose to match the idle pose.
+fc = fb * poses['b_idle'].height / poses['c_night'].height * COMBO_K
+for k in ('biplane', 'biplane2', 'cloud', 'cloud2', 'phones', 'night'): battle_names[k] = 'c_' + k
+bt_big = {k: scaled_to(poses[v], fc if v.startswith('c_') else fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 
 # The sheets avoid injury wording, so the black eye is painted in here: Tom's kneel frame (under 25 percent HP) gets a soft
@@ -259,7 +207,7 @@ def paint_bruise(img, cx, cy, rx, ry):
         k = (wgt * cov)[:, :, None]
         a[:, :, :3] = a[:, :, :3] * (1 - k) + np.array(col, float) * k
     return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-bt_big['kneel'] = paint_bruise(bt_big['kneel'], 118, 177, 12, 9)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
+bt_big['kneel'] = paint_bruise(bt_big['kneel'], 116, 164, 11, 8)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'tomride-battle.webp'))
 
@@ -270,7 +218,7 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'tomride-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / H0w * SIZE_BACK
+fo = args.ow_h * KW / H0w
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
@@ -308,9 +256,9 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
-atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=3', 'k': KB, 'rects': bt_rects},
-         'ko': {'src': 'art/chars/tomride-ko.webp?v=3', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/tomride-ow.webp?v=3', 'k': KW, 'rects': ow_rects}}
+atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=5', 'k': KB, 'rects': bt_rects},
+         'ko': {'src': 'art/chars/tomride-ko.webp?v=5', 'k': KO_, 'rects': ko_rects},
+         'ow': {'src': 'art/chars/tomride-ow.webp?v=5', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
 js = []
@@ -321,7 +269,7 @@ js.append("const TOMRIDE_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel', 'biplane', 'biplane2', 'cloud', 'cloud2', 'phones', 'night'):
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")

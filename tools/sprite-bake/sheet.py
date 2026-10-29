@@ -2,6 +2,7 @@
 
     from sheet import slice_sheet
     poses = slice_sheet('src/tom-battle-v2.png', [['ready','windup',...], [...]])   # one name list per row
+    (cut_rects=[(x0, y0, x1, y1)] erases a small box first, to separate figures that touch)
 
 Soft alpha keeps the painted look (no hard stair-stepped silhouette); magenta that bled into edge pixels is removed.
 """
@@ -16,7 +17,7 @@ def _magentaness(a):
     return np.minimum(a[:, :, 0], a[:, :, 2]) - a[:, :, 1]
 
 
-def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_erode=0):
+def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_erode=0, cut_rects=()):
     """robust=True is for characters whose clothes sit close to magenta (Grace's violet leotard): foreground is judged by
     distance to the real background colour, interior pixels keep their colour untouched, and only the rim is decontaminated
     (colour copied from the nearest interior pixel, alpha from where the pixel sits between that colour and the background)."""
@@ -36,7 +37,9 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_er
     else:
         sc = _magentaness(img)
         fg = sc <= 90                                   # clearly not background
-        lmask = fg
+    for (cx0, cy0, cx1, cy1) in cut_rects:          # where two figures touch (a shared fishing rod): erase this box so they separate
+        fg[cy0:cy1, cx0:cx1] = False
+    lmask = fg
     # horizontal bands (one per row of poses)
     proj = lmask.sum(1)
     bands, inb, y0 = [], False, 0
