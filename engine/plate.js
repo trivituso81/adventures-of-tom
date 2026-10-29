@@ -31,7 +31,7 @@ plateSetK.k=1;
 
 // Interiors: the painted rooms are drawn at furniture scale, so the cast is drawn bigger inside them than on the streets
 // (a counter or a sofa should come up to a character's waist, not their knees). Measured from the Taxi desk, Amy's island and sofa,
-// the bakery counter and the dining chairs: adults want about 1.8x their street size. Feet stay on the same tile, the sprite grows upward.
-const INTERIOR_ACTOR_SCALE=1.8;
+// the bakery counter and the dining chairs: adults wanted about 1.8x their street size, then Tom asked for 10% more: 1.98x. Feet stay on the same tile, the sprite grows upward.
+const INTERIOR_ACTOR_SCALE=1.98;
 for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','amyhouse','grands']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
 function actorK() { const p=currentMap&&PLATES[currentMap.id]; return (p&&p.actorScale&&!currentMap.outside)?p.actorScale:1; }
