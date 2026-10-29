@@ -1594,9 +1594,9 @@ TRIGGERS.push(
   {id:'ch5-goal',map:'town',when:{...CH5,notFlag:'ch5-goal'},scene:'ch5Arrive'},
   {id:'ch5-pruitt',map:'schoolyard',when:{...CH5,flag:'ch5-goal',notFlag:'ch5-pruitt'},scene:'ch5Pruitt'},
   {id:'ch5-hall',map:'school',when:{...CH5,flag:'ch5-pruitt',notFlag:'ch5-hall'},scene:'ch5Hall'},
-  {id:'ch5-art',map:'school',at:[1,1,7,6],when:{...CH5,flag:'ch5-hall',notFlag:'ch5-art'},scene:'ch5Art'},
-  {id:'ch5-music',map:'school',at:[9,1,15,6],when:{...CH5,flag:'ch5-hall',notFlag:'ch5-music'},scene:'ch5Music'},
-  {id:'ch5-gym',map:'school',at:[17,1,28,6],when:{...CH5,flag:'ch5-hall',notFlag:'ch5-gym'},scene:'ch5Gym'},
+  {id:'ch5-art',map:'school',at:[1,3,8,5],when:{...CH5,flag:'ch5-hall',notFlag:'ch5-art'},scene:'ch5Art'},
+  {id:'ch5-music',map:'school',at:[10,3,17,5],when:{...CH5,flag:'ch5-hall',notFlag:'ch5-music'},scene:'ch5Music'},
+  {id:'ch5-gym',map:'school',at:[19,2,28,5],when:{...CH5,flag:'ch5-hall',notFlag:'ch5-gym'},scene:'ch5Gym'},
   {id:'ch5-boss',map:'cafetorium',when:{...CH5,flag:'ch5-clocks',notFlag:'ch5-boss'},scene:'ch5Boss'},
   {id:'ch5-after',map:'cafetorium',when:{...CH5,flag:{'battle:redpen':'win'},notFlag:'ch5-clear'},scene:'ch5AfterBoss'},
   {id:'ch5-end',map:'schoolyard',when:{...CH5,flag:'ch5-clear',notFlag:'ch5-done'},scene:'ch5End'}
@@ -1606,10 +1606,13 @@ const CH5_ROOM_FLAG={tardybell:'ch5-art',glitterglue:'ch5-music',dodgeball:'ch5-
 HOLD_RULES.push(n=>STORY.chapter===5&&currentMap.id==='school'&&(flag('ch5-hall')!==true||(CH5_ROOM_FLAG[n.monster]&&flag(CH5_ROOM_FLAG[n.monster])!==true)));
 
 // Map changes. They check flags (not events), so they also hold after loading a save.
-// The Cafetorium doors (east end of the hall) come off once the three clocks say seven.
+// The Cafetorium doors (painted double doors, east end of the hall) open once the three clocks say seven.
 function ch5OpenCafe() {
   const M=worlds.school; if(!M||M.cafeOpen) return;
-  for(const y of [9,10]) { const o=M.objectAt.get(key(29,y)); if(o) { M.objects.splice(M.objects.indexOf(o),1); for(const yy of [9,10]) M.objectAt.delete(key(29,yy)); } tile(M,29,y,'lino'); }
+  // The painted double doors (x 27 to 28, y 7 to 8): the locked-door object comes off and the two bottom tiles become exits.
+  const o=M.objectAt.get(key(27,8));
+  if(o) { M.objects.splice(M.objects.indexOf(o),1); for(const yy of [7,8]) for(const xx of [27,28]) M.objectAt.delete(key(xx,yy)); }
+  for(const [x,sy] of [[27,6],[28,7]]) { opening(M,x,8,'cafetorium',{x:1,y:sy},'right','lino'); M.solid[8*M.w+x]=0; }
   M.cafeOpen=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{
