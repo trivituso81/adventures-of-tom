@@ -45,6 +45,15 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tnb-extra-battle.png'), EX_A).items
     poses['c_' + nm] = im
 for nm, im in slice_sheet(os.path.join(SRC, 'tnb-extra-story.png'), EX_B).items():
     poses['s_' + nm] = im
+# longboard poses (2026-10-29, sheet src/tnb-board-v1.png, 2 rows of 6; the airborne board of the kick is its own piece, rejoined below): battle ability poses, d_
+DB_NAMES = [['ride_idle', 'push', 'carve_in', 'carve_out', 'tuck', 'top_of_hill'], ['ollie', 'kick_f', 'kick_b', 'lob', 'bert_slide', 'wobble', 'drop_board']]
+_bp = slice_sheet(os.path.join(SRC, 'tnb-board-v1.png'), DB_NAMES); _bpos = dict(slice_sheet.pos)
+_kf, _kb_ = _bp.pop('kick_f'), _bp.pop('kick_b'); (_fx, _fy), (_bx, _by) = _bpos['kick_f'], _bpos['kick_b']
+_ox, _oy = min(_fx, _bx), min(_fy, _by)
+_kc = Image.new('RGBA', (max(_fx + _kf.width, _bx + _kb_.width) - _ox, max(_fy + _kf.height, _by + _kb_.height) - _oy), (0, 0, 0, 0))
+_kc.alpha_composite(_kb_, (_bx - _ox, _by - _oy)); _kc.alpha_composite(_kf, (_fx - _ox, _fy - _oy)); _bp['kick'] = _kc
+for nm, im in _bp.items():
+    poses['d_' + nm] = im
 
 
 # ---------------------------------------------------------------- despill (hair tips blended with the magenta backdrop)
@@ -114,6 +123,11 @@ EX_BOX = {
     's_toast': (3, 133, 35, 180, 105), 's_hug': (3, 133, 73, 218, 148), 's_whisper': (3, 137, 1, 161, 86), 's_wave': (3, 133, 44, 169, 109),
     's_sit': (2, 123, 50, 210, 115), 's_sittoast': (2, 120, 73, 228, 118), 's_talk': (2, 118, 56, 196, 106), 's_crouchlook': (3, 138, 9, 194, 99),
     's_sitR': (2, 102, 10, 165, 95), 's_sittoastR': (2, 112, 8, 158, 98), 's_talkR': (2, 116, 26, 161, 96), 's_laugh': (2, 131, 4, 144, 79)}
+DB_BOX = {   # board poses (top, chin, left, right, anchor), in sheet pixels of tnb-board-v1.png pieces, read off zoomed rulers
+    'd_ride_idle': (3, 108, 28, 186, 95), 'd_push': (3, 106, 6, 170, 88), 'd_carve_in': (3, 105, 79, 236, 140), 'd_carve_out': (3, 103, 28, 186, 87),
+    'd_tuck': (3, 113, 5, 182, 89), 'd_top_of_hill': (2, 105, 20, 166, 94), 'd_ollie': (3, 113, 8, 175, 100), 'd_kick': (2, 111, 8, 150, 78),
+    'd_lob': (3, 109, 98, 262, 162), 'd_bert_slide': (3, 107, 146, 270, 213), 'd_wobble': (2, 103, 50, 200, 123), 'd_drop_board': (3, 101, 66, 216, 136)}
+DB_SOLE_IDLE = (108, 342)   # ride_idle: chin row and sole row (sheet pixels); the body from chin to sole is what is matched to the ready pose
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
@@ -219,6 +233,7 @@ for _pre, _refs in (('c_', ['c_pull', 'c_point', 'c_present', 'c_shrug', 'c_hips
 # stretched sideways about the body's centre line (blending in over BODY_BLEND rows so the neck and hair do not shear); height is untouched, so size
 # and head ratio stay exactly Tom's. BODY_KX front/back and battle, BODY_KXL side view (depth). Env vars BODY_KX / BODY_KXL override.
 BODY_KX = float(os.environ.get('BODY_KX', 1.26)); BODY_KXL = float(os.environ.get('BODY_KXL', 1.16)); BODY_BLEND = 22
+BODY_KD = float(os.environ.get('BODY_KD', 1.26))   # longboard poses (the board is stretched with the body, measured 2026-10-29: unwidened, the painted riding body was as slim as the old TNB; 1.0 turns it off)
 def _bulk_rows(img, chin, kx, blend):
     from scipy import ndimage as ndi
     arr = np.array(img); H, W = arr.shape[:2]; al = arr[:, :, 3] > 40
@@ -242,11 +257,15 @@ def bulk_body(img, name, chin, kx):
         t = _bulk_rows(t, chin, kx, BODY_BLEND)
         return Image.fromarray(np.transpose(np.array(t), (1, 0, 2)).copy(), 'RGBA')
     return _bulk_rows(img, chin, kx, BODY_BLEND)
+_fd = _idle_body / float(DB_SOLE_IDLE[1] - DB_SOLE_IDLE[0]); print('board sheet d_ scaled by %.3f' % _fd)
+for _n in [n for n in poses if n.startswith('d_')]:
+    poses[_n] = scaled_to(poses[_n], _fd); _v = [int(round(v * _fd)) for v in DB_BOX[_n]]; _v[3] = min(_v[3], poses[_n].width); HEAD_BOX[_n] = tuple(_v)
 for _n in list(poses):
     _t, _c = head_cc(poses[_n], _n)
-    _k = (TARGET_BT * _Hb if _n.startswith(('b_', 'c_', 's_')) else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
+    _k = (TARGET_BT * _Hb if _n.startswith(('b_', 'c_', 's_', 'd_')) else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
     poses[_n] = bigger_head(poses[_n], _n, k=_k)
-    if BODY_KX != 1.0: poses[_n] = bulk_body(poses[_n], _n, int(round((_c - _t) * _k)), BODY_KXL if 'left' in _n else BODY_KX)
+    _kx = BODY_KD if _n.startswith('d_') else (BODY_KXL if 'left' in _n else BODY_KX)
+    if _kx != 1.0: poses[_n] = bulk_body(poses[_n], _n, int(round((_c - _t) * _k)), _kx)
 if os.environ.get('HEADSHEET'):                      # debug: all head-warped frames on grey
     _it = list(poses.items()); _cw = max(i.width for _, i in _it) + 10; _ch = max(i.height for _, i in _it) + 10
     _sh = Image.new('RGBA', (_cw * 6, _ch * -(-len(_it) // 6)), (128, 128, 128, 255))
@@ -397,9 +416,13 @@ bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 EXN = [n for n in poses if n.startswith(('c_', 's_'))]
 cu_big = tighten(place({n: scaled_to(poses[n], fb) for n in EXN}, KB, 'head'), KB)      # own canvas: some are taller or wider than the idle
-bt_pal, _all_rows = rows_of({**bt_big, **{'x_' + n: v for n, v in cu_big.items()}}, KB, args.colors)    # one shared palette
+DBN = [n for n in poses if n.startswith('d_')]
+db_big = tighten(place({n: scaled_to(poses[n], fb) for n in DBN}, KB, 'head'), KB)     # longboard poses: own canvas, bottom row = bottom of the wheels
+bt_pal, _all_rows = rows_of({**bt_big, **{'x_' + n: v for n, v in cu_big.items()}, **{'y_' + n: v for n, v in db_big.items()}}, KB, args.colors)    # one shared palette
 bt_rows = {k: _all_rows[k] for k in bt_big}
 cu_rows = {n: _all_rows['x_' + n] for n in cu_big}
+db_rows = {n: _all_rows['y_' + n] for n in db_big}
+db_rects = pack(db_big, os.path.join(ART, 'tnb-board.webp'))
 bt_rects = pack(bt_big, os.path.join(ART, 'tnb-battle.webp'))
 cu_rects = pack(cu_big, os.path.join(ART, 'tnb-poses.webp'))
 
@@ -450,6 +473,7 @@ meta = {
 }
 atlas = {'bt': {'src': 'art/chars/tnb-battle.webp', 'k': KB, 'rects': bt_rects},
          'pose': {'src': 'art/chars/tnb-poses.webp', 'k': KB, 'rects': {n[2:]: r for n, r in cu_rects.items()}},
+         'board': {'src': 'art/chars/tnb-board.webp', 'k': KB, 'rects': {n[2:]: r for n, r in db_rects.items()}},
          'ko': {'src': 'art/chars/tnb-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/tnb-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
@@ -466,6 +490,7 @@ for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'def
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  pose:{" + ",".join(f"{n[2:]}:" + fmt_rows(cu_rows[n]) for n in cu_rows) + "},")
+js.append("  board:{" + ",".join(f"{n[2:]}:" + fmt_rows(db_rows[n]) for n in db_rows) + "},")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):

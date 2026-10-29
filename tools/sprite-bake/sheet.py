@@ -22,6 +22,7 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_er
     robust=True is for characters whose clothes sit close to magenta (Grace's violet leotard): foreground is judged by
     distance to the real background colour, interior pixels keep their colour untouched, and only the rim is decontaminated
     (colour copied from the nearest interior pixel, alpha from where the pixel sits between that colour and the background)."""
+    slice_sheet.pos = {}
     img = np.array(Image.open(path).convert('RGB')).astype(float)
     if robust:
         edge = np.concatenate([img[:4].reshape(-1, 3), img[-4:].reshape(-1, 3), img[:, :4].reshape(-1, 3), img[:, -4:].reshape(-1, 3)])
@@ -48,6 +49,7 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False, split_er
         y_a, y_b, x_a, x_b = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
         P = img[ya + y_a: ya + y_b, x_a: x_b]
         reg = region[y_a:y_b, x_a:x_b]
+        slice_sheet.pos[nm] = (int(x_a), int(ya + y_a))       # where the cut sits on the sheet (to rejoin pieces of one pose)
         if robust:
             out[nm] = Image.fromarray(_rim_clean(P, reg, core[ya + y_a: ya + y_b, x_a: x_b], bgc), 'RGBA')
             return
