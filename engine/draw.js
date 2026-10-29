@@ -2,6 +2,7 @@
 // engine/draw.js — Main overworld draw, touch and keyboard input, menu wiring.
 function draw(time) {
   const plate=plateFor(currentMap);
+  const hold=!plate&&plateHold(currentMap);
   const pk=plate?Math.min(3,Math.max(1,Math.ceil(window.devicePixelRatio||1))):1;
   plateSetK(pk);
   ctx.setTransform(pk,0,0,pk,0,0);
@@ -29,7 +30,7 @@ function draw(time) {
   }
   for(let y=y0;y<y1;y++) {
     for(let x=x0;x<x1;x++) {
-      if(plate) break;
+      if(plate||hold) break;
       if(currentMap.outside)
         drawOutdoorTile(x,y,currentMap.tiles[y][x],time);
       else
@@ -37,18 +38,18 @@ function draw(time) {
     }
   }
 
-  if(!plate) for(const rug of currentMap.rugs) drawRug(rug);
+  if(!plate&&!hold) for(const rug of currentMap.rugs) drawRug(rug);
 
-  const items=(plate?currentMap.objects.filter(o=>!o.baked):currentMap.objects).map(o=>({
+  const items=(hold?[]:plate?currentMap.objects.filter(o=>!o.baked):currentMap.objects).map(o=>({
     kind:'object',value:o,depth:(o.y+o.h)*T
   }));
 
-  if(currentMap.outside&&!plate) {
+  if(currentMap.outside&&!plate&&!hold) {
     for(const h of currentMap.houses)
       items.push({kind:'house',value:h,depth:(h.y+h.h)*T});
   }
 
-  for(const a of [...currentMap.npcs,...followers,player])
+  for(const a of (hold?[]:[...currentMap.npcs,...followers,player]))
     items.push({kind:'actor',value:a,depth:(position(a).y+1+(a.depthBias||0))*T+.2});
 
   items.sort((a,b)=>a.depth-b.depth);

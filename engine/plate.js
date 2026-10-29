@@ -5,9 +5,21 @@ const PLATES={ town:{src:'art/town.webp',px:64,img:null,ready:false}, row:{src:'
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;
-  if(!p.img) { p.img=new Image(); p.img.onload=()=>{p.ready=true;}; p.img.src=p.src; }
+  plateLoad(p);
   return p.ready?p:null;
 }
+function plateLoad(p) {
+  if(p.img) return;
+  p.img=new Image();
+  const done=()=>{p.ready=true;};
+  p.img.onload=()=>{ if(p.img.decode) p.img.decode().then(done,done); else done(); };
+  p.img.onerror=()=>{p.failed=true;};
+  p.img.src=p.src;
+}
+// True while a painted map's art is still loading: draw a plain backdrop, never the old tile version.
+function plateHold(map) { const p=map&&PLATES[map.id]; return !!(p&&!p.ready&&!p.failed); }
+// Start every plate loading at boot so it is decoded long before the player walks there.
+for(const k in PLATES) plateLoad(PLATES[k]);
 // Render the backing store at device resolution on plate maps so the painting stays sharp.
 function plateSetK(want) {
   if(want===plateSetK.k) return;

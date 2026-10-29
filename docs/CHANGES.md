@@ -1,5 +1,10 @@
 # Change log (newest first)
 
+## 2026-10-28: Old area art no longer flashes before the painted version
+- Bug: walking into a Long Island area showed the old tile drawing for about a second, then the painted art. Cause: `engine/plate.js` only started loading a painted plate the first time you entered its map, and `engine/draw.js` drew tiles until it finished.
+- Fix: every plate now starts loading and decoding at boot. If one is still loading, `draw.js` shows a plain backdrop (`plateHold`) instead of tiles, houses, objects or actors. A plate that fails to load falls back to tiles.
+- Tested with the art slowed 8 s: plain backdrop, then painting, never tiles. smoke and reach_test pass.
+
 ## 2026-10-28: Rivituso Row, path to Aunt Ellie's house and the south side
 - Bug: the only way to Ellie's door (11,15), the south path and the Pier exit was a one-tile corridor along row 16 (x6 to x14), and Gus stood in it at (7,16), so the south could not be reached. The east garden loop also dead-ended at (20,16).
 - Fix: the plateMask row 16 now runs x6 to x21, joining the west path and the east loop to Ellie's plaza (two ways in). New spec field `noGo` (`buildArea` in `engine/world.js`): tiles NPCs never wander onto; Row uses it for the whole plaza strip. Gus now starts by the bench at (4,11). The Pier signpost moved from (15,16) to (15,17) so it no longer sits on the opened path.
