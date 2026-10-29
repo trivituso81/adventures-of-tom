@@ -1,6 +1,6 @@
 'use strict';
 // data/recruit-sprites.js — Prepared overworld sets and recruit battle sprites.
-const OW={tom:prepOW(TOM_OW,TOM_OW.hires?1:1.07),grace:prepOW(GRACE_OW,.88),rose:prepOW(ROSE_OW,.82),deedee:prepOW(DEEDEE_OW,.85),boppy:prepOW(BOPPY_OW,.9),amy:prepOW(AMY_OW,.86),tnb:prepOW(TNB_OW,.92)};
+const OW={tom:prepOW(TOM_OW,TOM_OW.hires?1:1.07),grace:prepOW(GRACE_OW,GRACE_OW.hires?1:.88),rose:prepOW(ROSE_OW,.82),deedee:prepOW(DEEDEE_OW,.85),boppy:prepOW(BOPPY_OW,.9),amy:prepOW(AMY_OW,.86),tnb:prepOW(TNB_OW,.92)};
 // Recruit battle sprites come from data/recruit-rig.js: left-facing, same outline and shading as Tom, Grace and Rose.
 const RECRUIT_EXPR={amy:'clap',deedee:'spread',boppy:'hip',tnb:'hip'};
 for(const id of ['amy','deedee','boppy','tnb']) {

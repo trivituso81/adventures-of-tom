@@ -16,10 +16,25 @@ def _magentaness(a):
     return np.minimum(a[:, :, 0], a[:, :, 2]) - a[:, :, 1]
 
 
-def slice_sheet(path, rows_names, dilate=2, min_area=150):
+def slice_sheet(path, rows_names, dilate=2, min_area=150, robust=False):
+    """robust=True is for characters whose clothes sit close to magenta (Grace's violet leotard): foreground is judged by
+    distance to the real background colour, interior pixels keep their colour untouched, and only the rim is decontaminated
+    (colour copied from the nearest interior pixel, alpha from where the pixel sits between that colour and the background)."""
     img = np.array(Image.open(path).convert('RGB')).astype(float)
-    sc = _magentaness(img)
-    fg = sc <= 90                                   # clearly not background
+    if robust:
+        edge = np.concatenate([img[:4].reshape(-1, 3), img[-4:].reshape(-1, 3), img[:, :4].reshape(-1, 3), img[:, -4:].reshape(-1, 3)])
+        bgc = np.median(edge, axis=0)
+        dist = np.sqrt(((img - bgc) ** 2).sum(2))
+        fg = dist > 45
+        rim = fg & ~ndi.binary_erosion(fg, iterations=4)
+        # strongly pink pixels (hair strands blended with the background); violet has blue well above red so it never matches
+        pink = fg & (_magentaness(img) > 60) & (img[:, :, 0] > img[:, :, 2] - 10)
+        bad = ndi.binary_propagation(rim, mask=rim | pink)              # the pink that connects to the silhouette edge
+        core = ndi.binary_erosion(fg & ~bad, iterations=1)
+        sc = None
+    else:
+        sc = _magentaness(img)
+        fg = sc <= 90                                   # clearly not background
     # horizontal bands (one per row of poses)
     proj = fg.sum(1)
     bands, inb, y0 = [], False, 0
@@ -51,6 +66,9 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150):
             y_a, y_b, x_a, x_b = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
             P = img[ya + y_a: ya + y_b, x_a: x_b]
             reg = region[y_a:y_b, x_a:x_b]
+            if robust:
+                out[nm] = Image.fromarray(_rim_clean(P, reg, core[ya + y_a: ya + y_b, x_a: x_b], bgc), 'RGBA')
+                continue
             s = _magentaness(P)
             alpha = np.clip(1.0 - (s - 35.0) / 65.0, 0.0, 1.0) * reg
             a3 = alpha[:, :, None]
@@ -63,3 +81,23 @@ def slice_sheet(path, rows_names, dilate=2, min_area=150):
             rgba = np.dstack([F, alpha * 255.0]).astype(np.uint8)
             out[nm] = Image.fromarray(rgba, 'RGBA')
     return out
+
+
+def _rim_clean(P, reg, core, bgc):
+    """RGBA for one pose in robust mode. core = surely-foreground pixels; the rest of the region is the soft rim."""
+    core = core & reg
+    if core.sum() == 0:
+        core = reg
+    idx = ndi.distance_transform_edt(~core, return_distances=False, return_indices=True)
+    F = P[idx[0], idx[1]]                                   # colour of the nearest interior pixel
+    D = F - bgc
+    a = np.clip(((P - bgc) * D).sum(2) / np.maximum((D * D).sum(2), 1.0), 0.0, 1.0)
+    a = np.where(core, 1.0, a) * reg
+    a = np.where(a < 0.06, 0.0, a)
+    F = np.where(core[:, :, None], P, F)
+    # last pass: leftover magenta-pink flecks (red and blue both well above green, red not far below blue) turn warm like the hair around them
+    R, G, B = F[:, :, 0], F[:, :, 1], F[:, :, 2]
+    fleck = (R - G > 55) & (B - G > 55) & (R > B - 12)
+    F[:, :, 2] = np.where(fleck, G + 0.1 * (B - G), B)
+    F[:, :, 0] = np.where(fleck, np.minimum(R, G + 0.9 * (R - G)), R)
+    return np.dstack([np.clip(F, 0, 255), a * 255.0]).astype(np.uint8)

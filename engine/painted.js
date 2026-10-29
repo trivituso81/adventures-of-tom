@@ -10,8 +10,8 @@
 //
 // Atlas: one image of equally sized frames at K times the rows' resolution (K = 2 in battle, 3 on the overworld).
 const PAINTED={};
-function paintedAtlas(id,src,rects,k) {
-  const a={id,rects,k,img:new Image(),ready:false,failed:false};
+function paintedAtlas(id,src,rects,k,tintFn) {
+  const a={id,rects,k,tintFn,img:new Image(),ready:false,failed:false};
   a.img.onload=()=>{ a.ready=true; };
   a.img.onerror=()=>{ a.failed=true; };
   a.img.src=src;
@@ -20,7 +20,8 @@ function paintedAtlas(id,src,rects,k) {
 }
 function paintRows(rows,atlas,frame,flip) { rows._paint={a:atlas,f:frame,flip:!!flip}; return rows; }
 // Recolour the dark shirt pixels of a painted frame to an outfit colour, keeping the painted shading.
-function paintedTintPixels(g,w,h,rowRange,k,hex) {
+// tintFn(r,g,b) -> brightness factor for a pixel that is part of the garment, or 0 to leave it alone (default: Tom's dark tee).
+function paintedTintPixels(g,w,h,rowRange,k,hex,tintFn) {
   const y0=Math.max(0,Math.floor(rowRange[0]*k)),y1=Math.min(h-1,Math.ceil((rowRange[1]+1)*k));
   if(y1<=y0) return;
   const cr=parseInt(hex.slice(1,3),16),cg=parseInt(hex.slice(3,5),16),cb=parseInt(hex.slice(5,7),16);
@@ -28,9 +29,13 @@ function paintedTintPixels(g,w,h,rowRange,k,hex) {
   for(let i=0;i<d.length;i+=4) {
     if(d[i+3]<8) continue;
     const r=d[i],gg=d[i+1],b=d[i+2],mx=Math.max(r,gg,b);
-    if(mx>120||r<b-14) continue;                         // not dark and warm: skin, jeans, logo, hair highlights
-    const lum=(r*.3+gg*.59+b*.11)/255;
-    let f=.32+lum*3.6; if(f>1.12) f=1.12;
+    let f;
+    if(tintFn) { f=tintFn(r,gg,b); if(!f) continue; }
+    else {
+      if(mx>120||r<b-14) continue;                         // not dark and warm: skin, jeans, logo, hair highlights
+      const lum=(r*.3+gg*.59+b*.11)/255;
+      f=.32+lum*3.6; if(f>1.12) f=1.12;
+    }
     d[i]=Math.min(255,cr*f); d[i+1]=Math.min(255,cg*f); d[i+2]=Math.min(255,cb*f);
   }
   g.putImageData(im,0,y0);
@@ -50,7 +55,7 @@ function paintedCanvas(rows,flash) {
   g.drawImage(A.img,R[0],R[1],R[2],R[3],0,0,R[2],R[3]);
   g.setTransform(1,0,0,1,0,0);
   if(flash) { g.globalCompositeOperation='source-in'; g.fillStyle='#fff8e6'; g.fillRect(0,0,R[2],R[3]); g.globalCompositeOperation='source-over'; }
-  else if(t&&t.rows) paintedTintPixels(g,R[2],R[3],t.rows,A.k,t.color);
+  else if(t&&t.rows) paintedTintPixels(g,R[2],R[3],t.rows,A.k,t.color,A.tintFn);
   cache.set(key,c);
   return c;
 }
