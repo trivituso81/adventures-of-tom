@@ -1,6 +1,6 @@
 'use strict';
 // data/recruit-sprites.js — Prepared overworld sets and recruit battle sprites.
-const OW={tom:prepOW(TOM_OW,TOM_OW.hires?1:1.07),grace:prepOW(GRACE_OW,GRACE_OW.hires?1:.88),rose:prepOW(ROSE_OW,.82),deedee:prepOW(DEEDEE_OW,DEEDEE_OW.hires?1:.85),boppy:prepOW(BOPPY_OW,BOPPY_OW.hires?1:.9),amy:prepOW(AMY_OW,.86),tnb:prepOW(TNB_OW,.92)};
+const OW={tom:prepOW(TOM_OW,TOM_OW.hires?1:1.07),grace:prepOW(GRACE_OW,GRACE_OW.hires?1:.88),rose:prepOW(ROSE_OW,.82),deedee:prepOW(DEEDEE_OW,DEEDEE_OW.hires?1:.85),boppy:prepOW(BOPPY_OW,BOPPY_OW.hires?1:.9),amy:prepOW(AMY_OW,.86),tnb:prepOW(TNB_OW,TNB_OW.hires?1:.92)};
 OW.boppy.k=BOPPY_OW.hires?41/40:1;   // painted Boppy is 40 rows tall, Tom 43: a little shorter than Tom
 OW.deedee.k=DEEDEE_OW.hires?43/39:1;   // painted Deedee is 39 rows tall, Tom 43: draw her at Tom's height
 // Recruit battle sprites come from data/recruit-rig.js: left-facing, same outline and shading as Tom, Grace and Rose.
