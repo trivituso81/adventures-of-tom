@@ -20,9 +20,10 @@ var TOWN_PAINTED={};
   OW.reel=make('reel');
   OW.pruitt=make('pruitt');
   OW.toni=make('toni'); OW.ray=make('ray');   // studio crew: their look keys are used by no one else
-  OW.boomie=make('boomie');   // Boomie is a sheet actor (sheet:'boomie'), so it replaces the old set directly
+  OW.boomie=make('boomie');
+  for(const id of ['bernadette','dana','kiki']) OW[id]=make(id);   // Boomie is a sheet actor (sheet:'boomie'), so it replaces the old set directly
   for(const id of ['halverson','ike','delgado','kowalski']) OW[id]=make(id);   // school staff and visitors: their look keys are used by no one else
-  for(const [name,id] of [['Pip','pip'],['Moss','moss'],['Dot','dot'],['Gus','gus'],['Bean','bean'],['Page','page'],['Bun','bun'],['Sal','sal'],['Kit','kit'],['Luna','luna'],['Penny','penny'],['Oolong','oolong'],['Fern','fern'],['Mr. Washington','washington'],['Bev','bev'],['Wes','wes'],['Chet','chet'],['Skye','skye'],['Larry','larry'],['Marisol','marisol']]) {
+  for(const [name,id] of [['Pip','pip'],['Moss','moss'],['Dot','dot'],['Gus','gus'],['Bean','bean'],['Page','page'],['Bun','bun'],['Sal','sal'],['Kit','kit'],['Luna','luna'],['Penny','penny'],['Oolong','oolong'],['Fern','fern'],['Mr. Washington','washington'],['Bev','bev'],['Wes','wes'],['Chet','chet'],['Skye','skye'],['Larry','larry'],['Marisol','marisol'],['Sage','sage'],['Kenji','kenji'],['Juniper','juniper']]) {
     OW['tf_'+id]=make(id);
     TOWN_PAINTED[name]={look:id,set:'tf_'+id};
   }

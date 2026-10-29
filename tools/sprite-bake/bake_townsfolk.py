@@ -23,7 +23,8 @@ CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 43, 'bean': 46, 'reel': 40, 'pr
         'page': 43, 'bun': 41, 'halverson': 43, 'ike': 42, 'delgado': 44, 'kowalski': 41,
         'sal': 44, 'kit': 45, 'luna': 38, 'penny': 38, 'oolong': 37, 'fern': 41,
         'washington': 44, 'bev': 38, 'boomie': 42, 'wes': 42, 'chet': 44, 'skye': 38,
-        'toni': 39, 'ray': 44, 'larry': 44, 'marisol': 38}
+        'toni': 39, 'ray': 44, 'larry': 44, 'marisol': 38,
+        'sage': 38, 'kenji': 44, 'juniper': 38, 'bernadette': 42, 'dana': 41, 'kiki': 40}
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)

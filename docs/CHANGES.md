@@ -1,3 +1,8 @@
+## 2026-10-29: Six more painted townsfolk, Los Angeles (Sage, Kenji, Juniper, Bernadette, Dana, Kiki)
+- Sheets `tools/sprite-bake/src/{sage,kenji,juniper,bernadette,dana,kiki}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 38, 44, 38, 42, 41, 40). Files arrived as "image.png"; Tom's names screenshot gave the names and the sheets were matched to the NPCs by hair, clothes and job (palettes in `data/maps-la.js`).
+- Sage, Kenji and Juniper are matched BY NAME (`TOWN_PAINTED`) because `VILLAGERS` has entries for those looks and wins over a plain `OW` set (first try showed the old pixel art in the shops). Bernadette, Dana and Kiki replace `OW.bernadette`, `OW.dana`, `OW.kiki` directly.
+- Checks: `tools/townsfolk_test.py` (35 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Four more painted townsfolk (Toni, Ray, Larry, Marisol)
 - Sheets `tools/sprite-bake/src/{toni,ray,larry,marisol}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 39, 44, 44, 38). Tom sent six files; "Muscular Security Guard Turnaround Sheet" is identical to Ray's and "Gardener Character Walk-Cycle Sheet" to Larry's (checked by hash), so only four were baked.
 - Toni and Ray replace `OW.toni` and `OW.ray` directly (Sunset Gold Studios crew). Larry and Marisol are matched by name (`TOWN_PAINTED`) because the looks larry and marisol are the base bodies of Michael and Olivia in the LA houses.
