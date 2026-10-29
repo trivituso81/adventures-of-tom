@@ -562,7 +562,7 @@ function switchMap(portal) {
   const house=portal.house;
 
   if(portal.kind==='enter') {
-    currentMap=worlds[house.id];
+    currentMap=worlds[house.enterMap||house.id];
     player.x=currentMap.spawn.x;
     player.y=currentMap.spawn.y;
     player.facing='up';

@@ -984,7 +984,32 @@ const LA_ROOMS=[
       ['bed',11,7,2,2,"Baby Lupita's crib",'Baby Lupita, seven months old, asleep. Somehow. Nobody breathe.'],
       ['toybox',5,9,1,1,'Toy pile','Blocks, a plastic dinosaur missing its tail, and the TV remote. Mateo hid it again.'],
       ['photo',5,1,1,1,'Family wall','Four generations, two weddings, one quinceañera, and a photo of the house in 1975, back when it had a lawn.']]},
+  {id:'loftlobby',name:'The Lofts Lobby',w:12,h:10,
+    style:{floor:'#d8b57a',alt:'#e0c08a',wall:'#8a5a44',trim:'#d9c0a0',pattern:'tile',rug:'#7a4a3a'},
+    rug:[4,4,4,2],
+    // Painted plate (art/loftlobby.webp, engine/plate.js). Street gate at the bottom (door 6,9 and 5,9), brass elevator doors at the top (5,1 and 6,1).
+    // Mailboxes top left, package desk top right, leather sofa left, monstera right. The mask is the walk map: '#' blocks, '.' walks.
+    plateMask:[
+      '############',
+      '#####..#####',
+      '#####..#####',
+      '###.....####',
+      '###.......##',
+      '###.......##',
+      '###.......##',
+      '#####..#####',
+      '#####..#####',
+      '#####..#####'],
+    door:[6,9],door2:[5,9],spawn:{x:6,y:8},
+    portals:[[5,1,'lofts',6,8,'up'],[6,1,'lofts',6,8,'up']],
+    npcs:[],
+    objects:[
+      ['shelf',2,1,3,2,'Mailboxes',"Thirty brass mailboxes. TNB's just says CLAY in marker, because the real label fell off in 2022. It is full of glaze catalogs."],
+      ['table',8,2,3,2,'Package desk','A box stamped FRAGILE: POTTERY, addressed to TNB. Every neighbor has shaken it once. Nobody has admitted it.'],
+      ['couch',0,4,3,3,'Leather sofa','For people waiting on someone. A handbag and yesterday\'s paper sit on it. Nobody has claimed either.'],
+      ['pot',10,4,2,3,'Monstera','Taller than the mailboxes. A tag on the pot says WATER ME THURSDAYS. It looks like it has opinions about the other days.']]},
   {id:'lofts',w:12,h:10,
+    exitTo:['loftlobby',5,3,'down'],
     style:{floor:'#b98a6a',alt:'#c49878',wall:'#8a5a44',trim:'#d9c0a0',pattern:'wood',rug:'#3f4650'},
     rug:[3,5,5,2],
     npcs:[

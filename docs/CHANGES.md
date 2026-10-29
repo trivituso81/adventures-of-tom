@@ -1,3 +1,9 @@
+## 2026-10-29: Lobby of TNB's building (map `loftlobby`)
+- New painted room `art/loftlobby.webp` (768 x 640, 12 x 10 tiles, registered in `engine/plate.js` with the interior actor scale). Spring Street's LOFTS door now opens on the lobby (spawn inside the gate at 6,8); the street gate is the exit (6,9 and 5,9). The brass elevator doors (5,1 and 6,1) go up to TNB's loft (`lofts`, arrive at 6,8). The loft's door is now the elevator back down (arrive at the lobby doors, 5,3), not the street.
+- Engine hooks: `house.enterMap` (battle-draw.js `switchMap`), `houseById.loftlobby` alias to the LOFTS house (engine/la.js, so minimap, music and exit work; the door count is unchanged), room specs `exitTo` and `portals` plus `name` (engine/world.js).
+- Lobby objects: mailboxes, package desk, leather sofa, monstera; all touchable. Chapter scenes that start in `lofts` (ch2Loft, ch12Loft) now start when the party steps out of the elevator.
+- Test: `tools/loftlobby_test.py` (street door, lobby, elevator, loft, back, street). No spoken lines changed.
+
 ## 2026-10-29: Indoor party spacing 25% tighter
 - `movePlayer` in `engine/followers.js`: inside houses and shops the gap between party members is now 1.5 tiles (was 2). Outdoors stays 1 tile. Fractional gaps are interpolated along Tom's trail, so followers can stand between tiles. Checked by walking Tom in a house (gaps 1.5, 1.5) and outside (1, 1). No spoken lines changed.
 

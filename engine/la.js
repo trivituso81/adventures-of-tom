@@ -11,6 +11,8 @@ const REGION_NAME={le:'LONG ISLAND',la:'LOS ANGELES'};
 // Buildings, palettes, Nickel's lines, areas and rooms are content in data/maps-la.js.
 for(const h of LA_HOUSES) { h.region='la'; h.light=h.awning||h.roof; houses.push(h); houseById[h.id]=h; }
 for(const h of houses) if(!h.region) h.region='le';
+// TNB's building: the street door opens on the lobby (map loftlobby); the elevator goes up to the loft (map lofts). Both rooms belong to the one LOFTS door.
+houseById.lofts.enterMap='loftlobby'; houseById.loftlobby=houseById.lofts;
 Object.assign(palettes,LA_PALETTES);
 
 // ---------- Items found in LA ----------
