@@ -31,7 +31,9 @@ function twWorld(clientX,clientY) {
   if(layout.rotated) { const cx=r.left+r.width/2,cy=r.top+r.height/2; lx=lw/2+(clientY-cy); ly=lh/2-(clientX-cx); }
   else { lx=(clientX-r.left)*(lw/r.width); ly=(clientY-r.top)*(lh/r.height); }
   if(lx<0||ly<0||lx>=lw||ly>=lh) return null;
-  return {x:lx*canvas.width/lw+Math.round(camera.x),y:ly*canvas.height/lh+Math.round(camera.y)};
+  // World units are the logical stage (W x H). On painted maps the backing store is W*k wide for sharpness (engine/draw.js),
+  // so canvas.width is NOT the world scale on a phone: using it put every tap at the wrong tile when devicePixelRatio > 1.
+  return {x:lx*W/lw+Math.round(camera.x),y:ly*H/lh+Math.round(camera.y)};
 }
 
 // ---------- What was tapped ----------
