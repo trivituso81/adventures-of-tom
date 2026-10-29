@@ -1359,20 +1359,39 @@ const LA_ROOMS=[
   {id:'jordansam',w:11,h:9,
     style:{floor:'#e8e4dc',alt:'#f2f0ea',wall:'#2c2c2e',trim:'#f4f4f0',pattern:'tile',rug:'#c9b89a'},
     rug:[3,5,5,2],
+    // Painted plate (art/jordansam.webp, engine/plate.js), area 52. The mask is the walk map: '#' blocks, '.' walks.
+    // Cream couch and coffee table down the left, the espresso bar and olive tree across the back, the dining table on the right,
+    // and one lane (x 5) over the doormat as the way out. Everything else is painted furniture and blocked.
+    plateMask:[
+      '###########',
+      '###########',
+      '#####.#####',
+      '#####....##',
+      '#####.#####',
+      '##....#####',
+      '####..#####',
+      '#####.#####',
+      '#####.#####'],
     npcs:[
-      {name:'Jordan',x:4,y:5,look:'jordan',lines:[
+      {name:'Jordan',x:4,y:6,look:'jordan',roam:0,lines:[
         'We took it down to the studs. Then we put the studs back. Very authentic.',
         "Have you tried the juice bar on Jefferson? It's so nice the neighborhood is finally getting... options.",
         'We painted it black. The neighbors call it the haunted house. We\'re choosing to take that as a compliment.']},
-      {name:'Sam',x:7,y:5,look:'sam',lines:[
+      {name:'Sam',x:7,y:3,look:'sam',lines:[
         'Mrs. Alvarez brought us tamales. We posted them. We tagged her. She doesn\'t have Instagram.',
         "Our mortgage is, um. We don't say the number out loud. The house can hear.",
         'Everyone else on this street rents. We think about that a lot. Mostly on podcasts.']}],
     objects:[
-      ['couch',2,2,3,1,'Boucle couch','Cream colored. Nobody is allowed to eat on it, including Jordan and Sam.'],
-      ['counter',7,1,3,1,'Espresso bar','A machine with a pressure gauge and a name. It\'s named Bruno. Bruno gets dusted twice a day.',{variant:'tea'}],
-      ['photo',9,6,1,1,'Before and after','Framed. Before: the old porch and a red door. After: black paint, a slat fence, one agave.'],
-      ['pot',1,6,1,1,'Olive tree','In a concrete planter. It\'s never made an olive. It\'s purely aesthetic.']]},
+      ['couch',2,2,3,2,'Boucle couch','Cream colored. Nobody is allowed to eat on it, including Jordan and Sam. Above it, two framed photos: before, the old porch and a red door. After, black paint, a slat fence, one agave.'],
+      ['table',2,4,2,1,'Coffee table','Round, low, and holding a stack of design books, a candle and a bowl. Nothing on it is allowed to move. There is a diagram.'],
+      ['pot',4,4,1,1,'Leather pouf','Hand stitched in Morocco, per the card. It was shipped from a warehouse in Ohio.'],
+      ['shelf',5,0,1,2,'Slat divider','Vertical wood slats with a skinny shelf of books. The spines go by color. Nobody has read them.'],
+      ['pot',6,1,1,2,'Olive tree','In a big planter. It\'s never made an olive. It\'s purely aesthetic.'],
+      ['counter',7,2,3,1,'Espresso bar','A machine with a pressure gauge and a name. It\'s named Bruno. Bruno gets dusted twice a day.',{variant:'tea'}],
+      ['shelf',9,2,1,2,'Mug shelf','Hand thrown mugs, each with a little card about the artist. TNB picked one up and said "Nice rim."'],
+      ['table',6,4,3,3,'Dining table','Reclaimed oak from a barn in Vermont. Nobody in this house has met the barn.'],
+      ['table',1,5,1,2,'Side table','A lamp, two design books and a candle that smells like wet cedar. Nobody has lit it.'],
+      ['pot',2,6,2,1,'Window planter','Ferns in a long planter on the low wall. Real ones. Jordan checked.']]},
   {id:'dakota',w:12,h:10,
     style:{floor:'#e2d0b0',alt:'#ecdcc0',wall:'#f2f2ee',trim:'#b98a5a',pattern:'wood',rug:'#9ccfd8'},
     rug:[3,5,5,3],

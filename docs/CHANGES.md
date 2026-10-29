@@ -22,6 +22,14 @@
 - tools/casa_test.py (0 fails), smoke, jpark_test, ch12_test 0 fails.
 - Known: no foreground layer, so characters draw over the furniture. Kevin's bunk bed lines are now spoken away from the bunk bed; the sofa and TV rooms carry the scene.
 
+## 2026-10-29: Jordan and Sam's Place (inside) is painted (Area 52, map id `jordansam`)
+- New `art/jordansam.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.jordansam` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the Jefferson Park door still works.
+- Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the espresso bar and the aisle beside the sofa (row 3, x 5 to 8; x 5 down rows 2 to 6), the front floor (row 5, x 2 to 5), the sunny tiles by the entry (4,6) (5,6), and a one-tile lane at x 5 (rows 7 and 8) over the doormat. The sofa, coffee table, pouf, dining table and chairs, kitchen, olive tree, slat divider, both side tables, planter ledge and the right wall are painted and blocked.
+- Objects re-laid on painted things: Boucle couch (2,2) 3 x 2, Coffee table (2,4), Leather pouf (4,4) (new), Slat divider (5,0) (new), Olive tree (6,1) 1 x 2 (moved), Espresso bar (7,2), Mug shelf (9,2) (new), Dining table (6,4) 3 x 3 (new), Side table (1,5) (new), Window planter (2,6) (new). The old "Before and after" photo object is gone (the frames hang over the sofa where nothing can touch them); its line now lives in the couch text.
+- Residents: Jordan moved from (4,5) to (4,6) and no longer wanders (the old spot blocked the aisle to the sofa side). Sam moved from (7,5), now the dining table, to (7,3) in front of the espresso bar and still wanders. Neither one's lines changed, so no clip is affected.
+- Reworded or new object text (not voiced, no re-bake): couch (adds the before and after frames), coffee table, pouf, slat divider, mug shelf (TNB line), dining table, side table, planter. Espresso bar and olive tree keep the old jokes (olive tree: "In a big planter").
+- Checks: new `tools/jordansam_test.py` 0 fails (objects touchable, no cut-off floor, both residents talk, walls hold, lane walked to Jefferson Park), smoke, bg_test, jpark_test, nickels_test, boards_test 0 fails. Portrait and landscape shots looked at.
+- Known: no foreground layer, so characters draw over the front plants and the ledge. The hallway door behind the slat divider is scenery only.
 ## 2026-10-29: carbarn_test fixed (test only, no game change)
 - `tools/carbarn_test.py` failed "west arch leads to Jefferson Park" and "east rails lead to the Boiler Room" because a wandering monster (Lukewarm waits at the west arch) started a fight on arrival, which froze the walk. The exits and walk map were fine. The test now ends any fight and clears monsters near the player before each exit walk. 0 fails.
 
