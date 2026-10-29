@@ -44,4 +44,6 @@ Object.assign(souvenirs,{coffee:'coldbrew',ramen:'ramen',juicebar:'greenjuice',w
 
 // ---------- Maps (built from data/maps-la.js by buildArea and makeRoom in engine/world.js) ----------
 for(const spec of LA_AREAS) worlds[spec.id]=buildArea(spec);
+// Tom's House has a second painted room (the primary suite, map id tomsuite). It is not a door on the street: it borrows the house's record so the minimap and the outdoor map lookups work.
+houseById.tomsuite=Object.assign({},houseById.tomhouse,{id:'tomsuite',name:'Primary Suite',tag:'Tom and TNB\'s room.'});
 for(const spec of LA_ROOMS) worlds[spec.id]=makeRoom(spec);
