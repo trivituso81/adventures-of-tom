@@ -79,6 +79,8 @@ def _auto_head(img):
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, int(xs.min()), int(xs.max())
 # hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
+KOV = {}    # pose name -> head factor override (default HEAD_K)
+KEEP = {}   # pose name -> [(x0, y0, x1, y1)] regions of the ORIGINAL pose pasted back over the bigger head (hands raised above the head)
 HEAD_BOX = {'b_strike': (3, 108, 125, 245), 'b_leap': (8, 120, 88, 212), 'b_win': (5, 108, 54, 162), 'b_kneel': (3, 92, 32, 159)}
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
@@ -108,6 +110,7 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
 def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
+    k = KOV.get(name, k)
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
@@ -132,6 +135,8 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
                 for y in range(5, 101):
                     d = int(round(sgn * 60 * (100 - y) / 95.0))
                     strip = img.crop((a, y, b, y + 1)); big.alpha_composite(strip, (a + pad + d, y + pad))
+    for (a, b, c, d) in KEEP.get(name, ()):
+        big.alpha_composite(img.crop((a, b, c, d)), (a + pad, b + pad))
     return big.crop(big.getbbox())
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)

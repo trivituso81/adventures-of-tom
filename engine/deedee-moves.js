@@ -4,6 +4,7 @@
 // Same shape as tnb-moves.js: RECRUIT_MOVES.deedee[key] queues steps and registers scenes (RFX.SC), held items (RFX.HELD) and props (PROP2).
 // Also holds her special, MOON & BACK (group hug: +5 HP and +2 MP for everyone).
 RECRUIT_MOVES.deedee={};
+const DD_XF=(k,fb)=>(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee['x_'+k])?'x_'+k:fb;   // painted extra pose if baked, else the older frame
 (function(){
 const SC=RFX.SC,HELD=RFX.HELD,{scene,hold,GX,GY}=RFX;
 const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,rx,ry,c);
@@ -281,8 +282,8 @@ SC.dcrescent=(s,u)=>{
 // Spit Shine: she licks her thumb and goes in. Every grandma's oldest move. Free.
 D.basic=E2=>{ const {i,m,fx}=E2;
   enqueue(()=>{ setMessage(pick(['Deedee licks her thumb. The '+enemyName().toLowerCase()+' has a smudge.','"Hold still, honey. You have something on your face." Here comes the thumb.'])); appr(fx,2.3); say(m.id,'basic'); },
-    720,()=>{ pose(fx,'act',1.0); scene('dthumb',1.1,{x:GX+18,y:206}); S.squeak(); battle.enemyWobble=1.0; },
-    360,()=>S.squeak(),360,()=>{ S.squeak(); bt('SCRUB',96,32,'#fff1cb',3,.7); },
+    720,()=>{ pose(fx,DD_XF('lick','act'),.62); scene('dthumb',1.1,{x:GX+18,y:206}); S.squeak(); battle.enemyWobble=1.0; },
+    360,()=>{ pose(fx,DD_XF('scrub','act'),.7); S.squeak(); },360,()=>{ S.squeak(); bt('SCRUB',96,32,'#fff1cb',3,.7); },
     420,()=>{ S.sparkle(); scene('dgleam',1.2,{x:GX,y:226}); battle.flashEnemy=.25; hit(E2); bt('SPARKLY',96,36,'#bfe6ff',3,.9); },
     800,E2.result+' Much better. Now it\'s presentable.',()=>checkEnemy()); };
 
@@ -679,7 +680,7 @@ SC.dd_moon=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),mx=110,my=60,go=ez((ms-P
   if(ms>P.heart) { const r=lerp(0,P.r,ez((ms-P.heart)/350)); for(const [w,c] of [[7,OUT],[4,ROSE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; heartPath(P.cx,P.cy,r); gfx.stroke(); } if(ms>P.heart+300) label('...AND BACK',P.cx,P.cy-P.r-20,GOLD,2); } };
 D.hugShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
   const cx=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length),cy=Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length),px=cx-20,py=Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+18);
-  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:'spread'},{t:900,f:'celeb'},{t:1700,f:'spread'}];
+  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:DD_XF('hug','spread')},{t:900,f:'celeb'},{t:1700,f:DD_XF('hug','spread')}];
   let t=1800; const visits=[];
   for(const o of others) { const q=ST.unit(o),x=Math.min(560,q.x+q.w*.5+18),y=Math.min(316,q.base+3); K.push({t,f:'run'}); t+=380; K.push({t,x,y,f:'spread',dx:(u,tt)=>Math.sin(tt*20)*1.5}); visits.push([t,o]); t+=260; }
   const heartAt=t; K.push({t,f:'celeb',hop:10},{t:t+400,f:'walk'},{t:t+1000,x:'home',y:'home',f:'idle'});
@@ -973,8 +974,8 @@ SC.dv_bandage=(s,u)=>{ const pop=u<.1?ez(u/.1)*1.35:lerp(1.35,1,cl((u-.1)/.1)); 
   for(const a of [-.6,.6]) { gfx.save(); gfx.rotate(a); RO(-26,-8,52,16,'#f0c890'); RO(-8,-6,16,12,'#fff0d8'); for(const dx of [-20,-14,14,20]) for(const dy of [-3,3]) R(dx-1,dy-1,2,2,'#c99a62'); gfx.restore(); }
   gfx.restore(); };
 D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m),foe=t.side==='foe';
-  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:'aim'},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:'aim',dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:DD_XF('nurse','aim')},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:DD_XF('nurse','aim'),dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),end=self?3200:3900,hit=self?1900:2050;
   const P={on:self?400:850,x:self?me.x-6:(foe?H.x+H.w*.2:H.x-H.w*.05),y:self?me.base-DH()*.40:H.mid+(foe?0:H.h*.06),b0:self?700:1150,b1:hit-80,foe};
   const bx=foe?H.x:H.x-H.w*.08,by=foe?H.mid:H.mid-H.h*.12;
@@ -1028,7 +1029,7 @@ D.wet_floor=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foeT=t.side===
   const lf=liveFoes(),sl=foeT?t:lf.slice().sort((a,b)=>ST.unit(b).x-ST.unit(a).x)[0],SF=sl?ST.unit(sl):null;
   const bop=!foeT&&B2.party.find(p=>p.id==='boppy'&&b2Alive(p)&&p!==t),BU=bop?ST.unit(bop):null;
   const fy=sp.y,mx=self?me.x:sp.x,signX=foeT?Math.min(556,sp.x+40):Math.max(30,H.x-H.w*.5-24);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':brisk,hop:3,hn:6},{t:900,x:mx,y:fy,f:'aim'},{t:1000,f:'aim',dx:(u,tt)=>Math.sin(tt*14)*10},{t:2300,f:'hip'},{t:2500,f:'throw'},{t:2700,f:'hip'},{t:3100,f:'expr'},{t:3700,f:self?'idle':'walkR',hop:3,hn:6},{t:4500,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':brisk,hop:3,hn:6},{t:900,x:mx,y:fy,f:DD_XF('mop','aim')},{t:1000,f:DD_XF('mop','aim'),dx:(u,tt)=>Math.sin(tt*14)*10},{t:2300,f:'hip'},{t:2500,f:'throw'},{t:2700,f:'hip'},{t:3100,f:'expr'},{t:3700,f:self?'idle':'walkR',hop:3,hn:6},{t:4500,x:'home',y:'home',f:'idle'}]);
   const P={g0:1000,g1:2600,x1:mx+10,y1:fy,x0:SF?SF.x:mx-160,y0:SF?SF.base+2:fy};
   const blobs=foeT?[]:[[-18,2],[4,6],[20,0],[-4,-3]].map(([dx,dy])=>({x:H.x+dx,y:H.base+dy}));
   const end=4700;
@@ -1061,7 +1062,7 @@ SC.dv_glass=(s,u)=>{ const ms=s.t*1000,hs=hands(),P=s.P; gfx.globalAlpha=fade(u,
 SC.dv_freeze=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.85); for(const f of s.list) { const F=ST.unit(f); bigWord('!',F.x+F.w*.3,F.top-12,GOLD,3); } if(u>.2&&u<.8) { gfx.globalAlpha=1; const G=ST.group(s.list); bigWord('LISTENING...',G.x,G.top-48,CREAM,2); } };
 D.wine=(old=>E2=>(E2.act&&E2.act.o3&&D.wineShow)?D.wineShow(E2):old(E2))(D.wine);
 D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST.unit(m),list=liveFoes();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:back(p.x,me)==='walkR'?'walkR':'walk',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:'aim'},{t:1250,f:'clap'},{t:1400,f:'aim'},{t:1650,f:'clap'},{t:1800,f:'aim'},{t:2050,f:'clap'},{t:2300,f:'celeb',hop:6},{t:2900,f:'expr'},{t:3500,f:'hip'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:back(p.x,me)==='walkR'?'walkR':'walk',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:DD_XF('toast','aim')},{t:1250,f:'clap'},{t:1400,f:DD_XF('toast','aim')},{t:1650,f:'clap'},{t:1800,f:DD_XF('toast','aim')},{t:2050,f:'clap'},{t:2300,f:'celeb',hop:6},{t:2900,f:'expr'},{t:3500,f:'hip'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
   const P={sip:2950};
   const ting=(k)=>()=>{ const hs=hands(); sfx.ting(); scene('dv_rings',.7,{x:hs.n.x,y:hs.n.y-20,c:GOLD,r:30+k*20}); scene('dv_text',.8,{x:hs.n.x-20-k*30,y:hs.n.y-60-k*16,txt:'TING',c:GOLD,sc:2+(k===2?1:0)}); };
   ST.play(E2,[
@@ -1253,7 +1254,7 @@ SC.dp_rings=(s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.3-k*.12); if(q<=0||q>
   gfx.globalAlpha=fade(u,.5); for(let k=0;k<8;k++) { const a=k/8*Math.PI*2+.2,d=14+ez(u)*s.r*.55; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,s.x+Math.cos(a)*(d+10),s.y+Math.sin(a)*(d+10)*.75,3,GOLD); } };
 SC.dp_freeze=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.85); for(const f of s.list) { const F=ST.unit(f); bigWord('!',F.x+F.w*.3,F.top-12,GOLD,4); } if(u>.2&&u<.8) { gfx.globalAlpha=1; const G=ST.group(s.list); bigWord('LISTENING...',G.x,G.top-52,CREAM,2); } };
 D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST.unit(m),list=liveFoes();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:back(p.x,me)==='walkR'?'walkR':'walk',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:'aim'},{t:1250,f:'clap'},{t:1400,f:'aim'},{t:1650,f:'clap'},{t:1800,f:'aim'},{t:2050,f:'clap'},{t:2300,f:'celeb',hop:6},{t:2900,f:'expr'},{t:3500,f:'hip'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:back(p.x,me)==='walkR'?'walkR':'walk',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:DD_XF('toast','aim')},{t:1250,f:'clap'},{t:1400,f:DD_XF('toast','aim')},{t:1650,f:'clap'},{t:1800,f:DD_XF('toast','aim')},{t:2050,f:'clap'},{t:2300,f:'celeb',hop:6},{t:2900,f:'expr'},{t:3500,f:'hip'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
   const P={sip:2950};
   const ting=(k)=>()=>{ const g=gpos(); sfx.ting(); scene('dp_rings',.8,{x:g.x,y:g.y-18,r:60+k*45}); scene('dv_text',.8,{x:g.x-30-k*34,y:g.y-70-k*14,txt:'TING',c:GOLD,sc:3+(k===2?1:0)}); };
   ST.play(E2,[
@@ -1666,7 +1667,7 @@ SC.df_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y-4; gfx.glob
 SC.df_shock=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.5-k*.12); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.9; ring(s.x,s.y,6+q*(s.r||44),4+q*(s.r||44)*.8,(5-q*4)+k*.4,k%2?'#ffffff':'#bfe0ff'); }
   gfx.globalAlpha=(1-u)*.9; for(let k=0;k<8;k++) { const a=k/8*Math.PI*2+.2,d=10+ez(u)*32; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,s.x+Math.cos(a)*(d+12),s.y+Math.sin(a)*(d+12),3,'#ffffff'); } gfx.globalAlpha=1; };
 D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'wind',dx:u=>-ez(u)*3},{t:1850,f:'throw',dx:-10},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:DD_XF('wind','wind')},{t:1750,f:DD_XF('wind','wind'),dx:u=>-ez(u)*3},{t:1850,f:DD_XF('flick','throw'),dx:-10},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('df_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150}}); }],
     [1150,()=>{ setMessage('She snaps her dish towel out and cocks her arm back.'); sfx.whoosh(); }],
@@ -1706,7 +1707,7 @@ SC.df_tuck=(s,u)=>{ const t=s.t,q=s; gfx.globalAlpha=fade(u,.7)*fin(u,.1); const
   for(let k=0;k<7;k++) { const a=t*2.4+k*.9,ph=(t*1.1+k/7)%1; twk(q.x+Math.cos(a)*(q.w*.42+6),q.y+q.h*.3-ph*q.h*.9,3+2*Math.sin(ph*Math.PI),k%2?'#ffffff':'#c8e0ff'); } gfx.globalAlpha=1; };
 D.hugShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
   const cx=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length),cy=Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length),px=cx-20,py=Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+18);
-  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:'spread'},{t:900,f:'celeb'},{t:1700,f:'spread'}];
+  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:DD_XF('hug','spread')},{t:900,f:'celeb'},{t:1700,f:DD_XF('hug','spread')}];
   let t=1800; const visits=[];
   for(const o of others) { const q=ST.unit(o),x=Math.min(560,q.x+q.w*.5+18),y=Math.min(316,q.base+3); K.push({t,f:'run'}); t+=380; K.push({t,x,y,f:'spread',dx:(u,tt)=>Math.sin(tt*20)*1.5}); visits.push([t,o]); t+=260; }
   const heartAt=t; K.push({t,f:'celeb',hop:10},{t:t+400,f:'walk'},{t:t+1000,x:'home',y:'home',f:'idle'});
@@ -1742,8 +1743,8 @@ SC.df_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*100
   if(ms>P.b0&&ms<P.b1) { const ph=((ms-P.b0)%520)/520,beat=ph<.15?ph/.15:ph<.3?1-(ph-.15)/.15*.5:.5*(1-(ph-.3)/.7),bx=P.x+(P.foe?0:-6),by=P.y-44;
     gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(bx,by); const r=10+beat*9; heartP(0,0,r+2.5); gfx.fillStyle=OUT; gfx.fill(); heartP(0,0,r); gfx.fillStyle='#ff4a6a'; gfx.fill(); gfx.restore(); if(ph<.5) bigWord('BA-DUMP',bx,by-40,CREAM,2); } };
 D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m),foe=t.side==='foe';
-  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:'aim'},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:'aim',dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:DD_XF('nurse','aim')},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:DD_XF('nurse','aim'),dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),end=self?3200:3900,hit=self?1900:2050;
   const ch=foe?.5:(CHEST[t.id]||.56);   // chest height as a share of the patient's height, so it sits at Grace's chest for her pose
   const P={on:self?400:850,self,foe,x:self?me.x-6:(foe?H.x+H.w*.12:H.x-H.w*.12),y:self?me.base-DH()*.36:H.base-H.h*ch,b0:self?700:1150,b1:hit-80};
