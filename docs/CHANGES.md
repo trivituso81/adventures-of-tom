@@ -1,6 +1,12 @@
 ## 2026-10-29: Nara on the welcome screen sits behind Grace
 - `SPLASH_SPOTS` in `engine/splash.js`: Nara moved from the bottom left to behind Grace at the foot of the stairs (x 240, feet 1020, h 104) and listed first so every family member draws over her. Everyone on the welcome art is also 10% bigger (`SPLASH_ALL=1.1`, feet stay planted). No spoken lines changed.
 
+## 2026-10-29: Aunt Ellie's house is painted
+- Her interior (map `elliehouse`) now uses Tom's painting (`art/elliehouse.webp`, 768x640 like the other room plates). Registered in `engine/plate.js` with the interior actor scale. Walk map (`plateMask`) follows the furniture; exit at the bottom stairs back to Rivituso Row.
+- Examine objects re-laid to the painting: writing cabinet (orchid joke kept), kettle, green sofa, lamp table (1968 ship photo), tea table (good china note kept), dining table, side table, umbrella stand, vanity (wardrobe joke kept). The old hat shelf and desk jokes: hat shelf dropped (no hat boxes in the painting).
+- Ellie's spoken lines are unchanged, so every baked clip still plays. The hutch, photo wall, armchair, basket, shoe rack and right sideboard are painted but not reachable.
+- Tests: `tools/ellie_test.py` (new) passes; `tools/smoke.py` FAILS: []. `tools/tea_test.py` 'walked up from the door' is flaky (passes and fails on identical code).
+
 ## 2026-10-29: TNB sized exactly like Tom, plus 24 extra painted poses
 - TNB's head-to-body ratio and height now match Tom's (per-frame head solve in `bake_tnb.py`: 44.5 percent of battle height, 43.3 front, 41.7 side; 100 battle rows, 42 overworld rows).
 - 24 new poses from two extra sheets (battle actions, story scenes), same baker. Mug Toss now plays painted pull, wind-up and release frames (the drawn mug is skipped while a painted pose holds its own). Slasher Scare uses the dodge pose. point, aim, spread, hip, clap, carry, shrug are painted; story poses sit, toast, sitR, hug, whisper plus new wave, talk, laugh are painted. Saved but not yet used in a move: heave, crouch.
