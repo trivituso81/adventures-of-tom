@@ -68,7 +68,8 @@ poses['b_ko'] = swirl_eye(swirl_eye(poses['b_ko'], 75, 34, 5), 62, 29, 4)
 # ---------------------------------------------------------------- head size (match Tom's caricature proportions)
 # Tom's head (hair to chin) is about 45 percent of his height; the painted Deedee's is about 28 percent. Each frame's head is cut out,
 # scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
-HEAD_K = 1.8
+HEAD_K = 1.45
+TAPER = 16   # rows below the neck line over which the scale eases back to 1 (the face itself stays uniformly scaled)
 def _auto_head(img):
     a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
     top = int(np.where(a.any(1))[0].min())
@@ -106,7 +107,7 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
-def bigger_head(img, name, k=HEAD_K, pad=160, taper=22):
+def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
@@ -115,14 +116,14 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=22):
         t = np.transpose(arr, (1, 0, 2)).copy()
         # transposed: rows = original x, cols = original y. Head = rows 0..128, anchor row 128, cross centre = original y 70
         cx0, cx1 = pad + 0, pad + H
-        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 128, pad + 70, k, 18)
-        t[pad + 0:pad + 128, cx0:cx1, 3] = 0                   # erase the original head
+        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 128 + taper, pad + 70, k, taper)
+        t[pad + 0:pad + 128 + taper, cx0:cx1, 3] = 0                   # erase the original head
         full = Image.fromarray(t, 'RGBA'); full.alpha_composite(Image.fromarray(out, 'RGBA'), (max(dx, 0), max(dy, 0)))
         big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
     else:
         top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
         ax = (x0 + x1) / 2.0
-        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad
+        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
         out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
         arr[Y0:AY, X0:X1, 3] = 0                                  # erase the original head
         big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
