@@ -1,3 +1,8 @@
+## 2026-10-29: Six more painted townsfolk (Sal, Kit, Luna, Penny, Oolong, Fern)
+- Sheets `tools/sprite-bake/src/{sal,kit,luna,penny,oolong,fern}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 44, 45, 38, 38, 37, 41) and matched BY NAME in `data/townsfolk-hires-use.js` (`TOWN_PAINTED`): the looks kit (TNB's stand-in body in LA) and oolong (Aunt Ellie's) are shared.
+- These six arrived as "image.png", so the characters were matched by the town's own data, not file names: Kit is the mail carrier at the Post, Sal the taxi driver, and Penny, Luna, Oolong and Fern match the villagers' hair and clothing colours in `data/villagers.js`. Confirm with Tom; a wrong match is a one-line swap in `CAST`.
+- Checks: `tools/townsfolk_test.py` (19 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Six more painted townsfolk (Page, Bun, Mr. Halverson, Grandpa Ike, Mr. Delgado, Mrs. Kowalski)
 - Sheets `tools/sprite-bake/src/{page,bun,halverson,ike,delgado,kowalski}-walk-v1.png` added to `CAST` in `tools/sprite-bake/bake_townsfolk.py` (standing heights: Page 43, Bun 41, Halverson 43, Ike 42, Delgado 44, Kowalski 41). The file "Teacher's Apron Walk Cycle Sprite Sheet" is Mrs. Kowalski (the PTA president, the only school character left).
 - Halverson, Ike, Delgado and Kowalski replace their `OW` sets in `data/townsfolk-hires-use.js`. Page and Bun are matched by name (`TOWN_PAINTED`), because the look `bun` is the stand-in body for Mr. Pistachio in the Nine Scoops scenes.
