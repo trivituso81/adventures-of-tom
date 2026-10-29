@@ -1276,8 +1276,21 @@ const LA_ROOMS=[
   {id:'creole',w:12,h:9,
     style:{floor:'#c9a87a',alt:'#d6b688',wall:'#7a3a5a',trim:'#e8c060',pattern:'check',rug:'#4a7a3a'},
     rug:[4,5,4,2],
+    // Painted plate (art/creole.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Pastry case and kitchen across the back, gingham table left, long family table center, yellow table right of it,
+    // dark booths down the right side. The floor is a ring around the family table, with a lane at x 5 and 6 down to the doormat.
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '####...#####',
+      '######.#####',
+      '##.###..####',
+      '##......####',
+      '#####..#####',
+      '#####..#####'],
     npcs:[
-      {name:'Miss Odette',x:6,y:4,look:'odette',
+      {name:'Miss Odette',x:4,y:3,look:'odette',roam:0,
         when:[{...CH2_SMOG,lines:['Stirring. Stirring.','The gumbo never has to be done, baby. Isn\'t that nice? Nothing ever has to be done.']},
               {...CH2_CLEAR,lines:['That smog had me stirring one pot for an hour. Best roux I ever made, though.','Sit. Eat. You and that boyfriend earned a bowl today.']}],
         lines:[
@@ -1285,10 +1298,15 @@ const LA_ROOMS=[
         'My mama opened this kitchen when this stretch was Little New Orleans. Folks came from Louisiana and brought the food.',
         'Pralines by the register. Take two. One for you, one for that boyfriend who keeps coming in for the red beans.']}],
     objects:[
-      ['counter',2,2,6,1,'Pastry case','Pralines, sweet potato pie and a hand-written sign: NO, YOU CANNOT HAVE THE RECIPE.',{variant:'bread'}],
-      ['table',8,5,2,2,'Corner table','Hot sauce, a paper menu, and a church fan from 1987.'],
-      ['photo',9,1,1,1,'Boulevard photo','Jefferson Boulevard, 1958. Same kitchen. Same sign. Younger Odette in the doorway, holding a pot.'],
-      ['pot',1,6,1,1,'Pepper plant','Cayenne. Odette says Boppy couldn\'t handle it. She\'s never met Boppy. She\'s right.']]},
+      ['counter',3,2,5,1,'Pastry case','Pralines, sweet potato pie and a hand-written sign: NO, YOU CANNOT HAVE THE RECIPE.',{variant:'bread'}],
+      ['table',1,3,3,2,'Gingham table','Red gingham, a bottle of hot sauce, and one chair that is always taken by the same cousin. Nobody asks.'],
+      ['table',3,4,3,2,'Family table','A runner older than the kitchen, hot sauce in a row, and a bowl of paper napkins folded into little hats.'],
+      ['table',7,3,2,2,'Yellow table','Hot sauce, a paper menu and a vase of daisies. Someone rewrote the menu by hand. Twice.'],
+      ['table',1,5,1,1,'Green sideboard','A framed photo, a lace doily and one bottle of hot sauce. The photo is watching to see if you use it.'],
+      ['pot',1,6,1,1,'Pepper plant','Cayenne, with a watering can that has seen things. Odette says Boppy couldn\'t handle it. She\'s never met Boppy. She\'s right.'],
+      ['booth',8,5,1,3,'Dark booth','Reserved. Nobody knows for who. The card has been there since 1987.'],
+      ['pot',4,7,1,1,'Door plant','White flowers by the door. Odette says it is whichever plant survives. This one is thriving out of spite.'],
+      ['pot',7,7,1,1,'Door plant','The twin of the other door plant. They have never agreed on which of them is taller.']]},
   {id:'pupuseria',w:11,h:9,
     style:{floor:'#e8dcc4',alt:'#f2e6d0',wall:'#2f6fb3',trim:'#ffffff',pattern:'tile',rug:'#2f6fb3'},
     rug:[3,5,5,2],

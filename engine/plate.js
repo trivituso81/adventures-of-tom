@@ -25,6 +25,7 @@ PLATES.boards={src:'art/boards.webp?v=20261029',px:64,img:null,ready:false,actor
 PLATES.nickels={src:'art/nickels.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.pupuseria={src:'art/pupuseria.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.wardrobe={src:'art/wardrobe.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.creole={src:'art/creole.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;
