@@ -1,3 +1,8 @@
+## 2026-10-29: Four more painted townsfolk (Toni, Ray, Larry, Marisol)
+- Sheets `tools/sprite-bake/src/{toni,ray,larry,marisol}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 39, 44, 44, 38). Tom sent six files; "Muscular Security Guard Turnaround Sheet" is identical to Ray's and "Gardener Character Walk-Cycle Sheet" to Larry's (checked by hash), so only four were baked.
+- Toni and Ray replace `OW.toni` and `OW.ray` directly (Sunset Gold Studios crew). Larry and Marisol are matched by name (`TOWN_PAINTED`) because the looks larry and marisol are the base bodies of Michael and Olivia in the LA houses.
+- Checks: `tools/townsfolk_test.py` (29 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Six more painted townsfolk, Los Angeles (Mr. Washington, Bev, Boomie, Wes, Chet, Skye)
 - Sheets `tools/sprite-bake/src/{washington,bev,boomie,wes,chet,skye}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 44, 38, 42, 42, 44, 38). Names given by Tom in attachment order (the files arrived as "image.png", pasted rather than attached).
 - Mr. Washington, Bev, Wes, Chet and Skye are matched BY NAME (`TOWN_PAINTED`). Boomie is a sheet actor (look `skye`, `sheet:'boomie'`), so `OW.boomie` is replaced directly in `data/townsfolk-hires-use.js`; her old `BOOMIE_OW` set stays in `data/npc-sprites.js` as the fallback.

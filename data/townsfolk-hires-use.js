@@ -2,7 +2,7 @@
 // data/townsfolk-hires-use.js: overworld sprites for Pip, Moss, Dot, Gus, Bean, Reel and Principal Pruitt, from their painted walk sheets
 // (data/townsfolk-hires.js, art/chars/<id>-ow.webp). Loads right after data/npc-sprites.js and data/ellie-hires-use.js.
 // Reel, Pruitt, Halverson, Ike, Delgado and Kowalski replace their OW sets (the old traced ones). Pip, Moss, Dot, Gus, Bean, Page and Bun are keyed by NAME (TOWN_PAINTED, read in drawActor):
-// their look keys pip, dot, gus, bean, bun, kit, oolong and skye (Boomie's base look) are also borrowed as stand-in bodies for Deedee, Boppy, Amy and Justin in story scenes,
+// their look keys pip, dot, gus, bean, bun, kit, oolong, skye (Boomie's base look), larry (Michael's) and marisol (Olivia's) are also borrowed as stand-in bodies for Deedee, Boppy, Amy and Justin in story scenes,
 // so only an actor really named Pip, Moss, Dot, Gus or Bean gets the painted art. Set TOWNSFOLK_HIRES_OFF=true (before this file) to keep the old ones.
 var TOWN_PAINTED={};
 (function() {
@@ -19,9 +19,10 @@ var TOWN_PAINTED={};
   };
   OW.reel=make('reel');
   OW.pruitt=make('pruitt');
+  OW.toni=make('toni'); OW.ray=make('ray');   // studio crew: their look keys are used by no one else
   OW.boomie=make('boomie');   // Boomie is a sheet actor (sheet:'boomie'), so it replaces the old set directly
   for(const id of ['halverson','ike','delgado','kowalski']) OW[id]=make(id);   // school staff and visitors: their look keys are used by no one else
-  for(const [name,id] of [['Pip','pip'],['Moss','moss'],['Dot','dot'],['Gus','gus'],['Bean','bean'],['Page','page'],['Bun','bun'],['Sal','sal'],['Kit','kit'],['Luna','luna'],['Penny','penny'],['Oolong','oolong'],['Fern','fern'],['Mr. Washington','washington'],['Bev','bev'],['Wes','wes'],['Chet','chet'],['Skye','skye']]) {
+  for(const [name,id] of [['Pip','pip'],['Moss','moss'],['Dot','dot'],['Gus','gus'],['Bean','bean'],['Page','page'],['Bun','bun'],['Sal','sal'],['Kit','kit'],['Luna','luna'],['Penny','penny'],['Oolong','oolong'],['Fern','fern'],['Mr. Washington','washington'],['Bev','bev'],['Wes','wes'],['Chet','chet'],['Skye','skye'],['Larry','larry'],['Marisol','marisol']]) {
     OW['tf_'+id]=make(id);
     TOWN_PAINTED[name]={look:id,set:'tf_'+id};
   }
