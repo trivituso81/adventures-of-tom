@@ -1650,6 +1650,11 @@ const foldedTowel=(x,y,f)=>{ const w=lerp(58,36,f); RO(x-w/2,y-18,w,36,TWL); for
   for(const dy of [-7,0,7]) R(x-w/2+1,y+dy-1,w-2,2,'#d8584a'); gfx.setLineDash([3,3]); gfx.strokeStyle=TWH; gfx.lineWidth=1.3; gfx.strokeRect(x-w/2+3,y-14,w-6,28); gfx.setLineDash([]);
   ring(x+w/2-6,y-18,4,5,3.5,OUT); ring(x+w/2-6,y-18,4,5,1.8,'#d8584a'); for(let j=0;j<5;j++) Ln(x-w/2-1,y-12+j*6,x-w/2-6,y-12+j*6,2,'#e8dcb4'); };
 SC.df_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y-4; gfx.globalAlpha=fade(u,.96);
+  if(P.painted) { // the painted frames already carry the towel: draw only the whoosh arc, the crack burst and the word
+    const S=P.snap,tip=[Math.max(s.tx,x-120),y];
+    if(ms>=S-130&&ms<S) { gfx.globalAlpha=.6; for(const [r,w,c] of [[70,10,'#ffffff'],[70,4,'#bfe0ff'],[44,5,'#ffffff']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(x-40,y,r,-.9,-3.1,true); gfx.stroke(); } gfx.globalAlpha=1; }
+    if(ms>=S&&ms<S+260) { const q=(ms-S)/260; gfx.globalAlpha=1-q; for(let k=0;k<10;k++) { const a=k/10*Math.PI*2; Ln(tip[0]+Math.cos(a)*(8+q*10),tip[1]+Math.sin(a)*(8+q*10),tip[0]+Math.cos(a)*(18+q*26),tip[1]+Math.sin(a)*(18+q*26),k%2?3:2,k%2?'#ffffff':GOLD); } twk(tip[0],tip[1],20*(1-q)+8,'#ffffff'); gfx.globalAlpha=1; if(q<.8) bigWord('CRACK!',tip[0]+6,tip[1]-46,GOLD,3); }
+    return; }
   if(ms>P.fold) { const f=ez((ms-P.fold)/350); foldedTowel(x-10,y+2,f); if(f>.9) bigWord('SQUARE',x-10,y-40,CREAM,2); return; }
   const S=P.snap,reach=Math.max(90,x-s.tx+14); let th,L,lag,wv=0,ghost=0;
   if(ms<P.wind-420) { th=1.78+Math.sin(ms/260)*.08; L=64; lag=-4; }
@@ -1666,10 +1671,11 @@ SC.df_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y-4; gfx.glob
   };
 SC.df_shock=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.5-k*.12); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.9; ring(s.x,s.y,6+q*(s.r||44),4+q*(s.r||44)*.8,(5-q*4)+k*.4,k%2?'#ffffff':'#bfe0ff'); }
   gfx.globalAlpha=(1-u)*.9; for(let k=0;k<8;k++) { const a=k/8*Math.PI*2+.2,d=10+ez(u)*32; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,s.x+Math.cos(a)*(d+12),s.y+Math.sin(a)*(d+12),3,'#ffffff'); } gfx.globalAlpha=1; };
-D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:DD_XF('wind','wind')},{t:1750,f:DD_XF('wind','wind'),dx:u=>-ez(u)*3},{t:1850,f:DD_XF('flick','throw'),dx:-10},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
+D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m),PT=!!(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee.x_fsnap);
+  if(PT) ST.keys(fx,[{t:0,x:'home',y:'home',f:(u,tt)=>Math.sin(tt*10)>0?'x_fwalk':'x_fspot',hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'x_fspot'},{t:1250,f:'x_ftaut'},{t:1420,f:'x_fshake'},{t:1520,f:'x_fwind1'},{t:1740,f:'x_fwind2',dx:u=>-ez(u)*3},{t:1850,f:'x_fsnap',dx:-10},{t:2000,f:'x_ffollow'},{t:2150,f:'x_frecoil'},{t:2450,f:'x_ffold'},{t:2800,f:'x_ftuck'},{t:3150,f:'x_fdone'},{t:3500,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
+  else ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'wind',dx:u=>-ez(u)*3},{t:1850,f:'throw',dx:-10},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('df_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150}}); }],
+    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('df_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150,painted:PT}}); }],
     [1150,()=>{ setMessage('She snaps her dish towel out and cocks her arm back.'); sfx.whoosh(); }],
     [1500,()=>{ sfx.charge&&sfx.charge(); setMessage('The towel goes taut. Oh no. She\'s lined it up.'); }],
     [1730,()=>{ sfx.whoosh(); }],
