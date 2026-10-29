@@ -402,7 +402,8 @@ function splashScene(W,H,panelH,time) {
     // Rose's bounce is carried by Tom (the pair hops as one), so her legs keep their length and her shoes stay on his shoulders.
     const cx=X(m.fx),lift=hopY(m)+(m.id==='tom'?hopY(rose):0),set=OW[m.id],fr=m.hopT>=0?2:0;
     shadow(cx,frontFy,set.down[0][0].length,lift);
-    if(m.id==='tom') {
+    if(m.id==='tom'&&OW.tomRide) drawOne(OW.tomRide,fr,cx,frontFy,lift);   // painted: Tom carrying Rose (data/tomride-use.js)
+    else if(m.id==='tom') {
       const tf=set.down[fr],top=frontFy-tf.length*S-lift,rb=(Math.floor(time*3)%2)*S;
       roseRide('ow_down','back',cx,top-rb,S);
       drawOne(set,fr,cx,frontFy,lift);

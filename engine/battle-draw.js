@@ -197,7 +197,7 @@ function drawBattle() {
     else if(rot!==0||pathSc!==1||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
       const fr2=frameOverride||sp.idle,w2=fr2[0].length*sp.scale,h2=fr2.length*sp.scale;
       gfx.save(); gfx.translate(cx,base-h2/2*pathSc); gfx.scale(pathSc,pathSc); gfx.rotate(rot);
-      drawSprite(fr2,sp.pal,-w2/2,-h2/2,sp.scale,{flash:fx.flash>0});
+      rideBodyDraw(m,fr2,sp.pal,-w2/2,-h2/2,sp.scale,{flash:fx.flash>0});
       gfx.restore();
       if(fx.flop>0&&rot!==0) { const q=1-fx.flop/1.8; if(q>.62&&q<.75) for(let k=0;k<6;k++) { const a=k*1.05,r=20+(q-.62)*300; ellipse(cx+Math.cos(a)*r,base-4-Math.abs(Math.sin(a))*r*.3,7,4,'rgba(230,220,190,.7)'); } }
     } else if(fx.cartwheel>0) {
@@ -220,7 +220,7 @@ function drawBattle() {
       const wig=fx.tickle>0?Math.round(Math.sin(t*30)*3):0;
       const fr3=running&&frameOverride?frameOverride:(poking?sp.expr:frame);
       activeKneelCut=fr3===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
-      drawSprite(fr3,sp.pal,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0),sp.scale,{flash:fx.flash>0,alpha:1,lean:guarding?-7:0});
+      rideBodyDraw(m,fr3,sp.pal,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0),sp.scale,{flash:fx.flash>0,alpha:1,lean:guarding?-7:0});
       activeKneelCut=0;
       if(sp.handAt) RFX.postParty(i,sp,fr3,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0));
     }
@@ -312,6 +312,7 @@ function drawBattle() {
     }
     activeTint=null;
   });
+  if(battle.v2) rideFlush();   // Rose still shows if Tom was hidden this frame (engine/rose-ride.js)
 
   gfx.save(); b2WarpCtx();
   if(battle.laser) {

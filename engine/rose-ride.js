@@ -28,13 +28,10 @@ function roseSeatBattle(m,i,frame,sp,fx,hurt,t,force) {
   const bob=Math.round(Math.abs(Math.sin(t*3))*2);
   const hop=fx.hop>0?Math.round(Math.abs(Math.sin(t*9))*12):0;
   const top=d.base-d.h-bob;
-  const at=roseRide(pose,'back',cx,top,s,false,{flash:fx.flash>0});
-  battle._seat={pose,cx,top,s,flash:fx.flash>0,hop}; battle._seatLast=true;
+  // The painted ride (Tom and Rose as one figure) is drawn by Tom's own draw (rideBodyDraw). Her old layered art is only drawn
+  // when Tom's pose has no painted ride frame (rideBodyDraw / rideFlush draw it then).
+  battle._seat={pose,cx,top,s,flash:fx.flash>0,hop,tint:activeTint,hurt,eye:sp.eye,ridden:false,backDone:false}; battle._seatLast=true;
   battle.drawnAt[i]={cx:Math.round(cx-4),base:Math.round(top+5),h:Math.round(31*s)};
-  if(hurt&&at) {   // black eye, as on her normal frame
-    const P=ROSE_RIDE[pose],ey=sp.eye,bx=at.x+(ey.col+P.sx)*s-s,by=at.y+(ey.row+P.sy)*s-s;
-    rect(bx,by,s*3,s*3,'rgba(96,52,130,.55)'); rect(bx+s*.5,by+s*.5,s*2,s*2,'rgba(40,20,64,.7)');
-  }
   return true;
 }
 // A move's path that parks Rose where the old standing ride put her (Tom's centre +2, his top +20) means she is up on
@@ -43,9 +40,56 @@ function roseSeatNear(cx,base) {
   const tom=b2Tom(),d=tom&&battle.drawnAt&&battle.drawnAt[tom.idx]; if(!d) return false;
   return Math.abs(cx-(d.cx+2))<=8&&Math.abs(base-(d.base-d.h+20))<=10;
 }
-// Right after Tom is drawn: her shoes on his shoulders.
+// The old layered Rose behind Tom's head (only when Tom has no painted ride frame for his pose).
+function rideBackFallback(q) {
+  if(q.backDone) return; q.backDone=true;
+  const keep=activeTint; activeTint=q.tint;
+  const at=roseRide(q.pose,'back',q.cx,q.top,q.s,false,{flash:q.flash});
+  activeTint=keep;
+  if(q.hurt&&at) {   // black eye, as on her normal frame
+    const P=ROSE_RIDE[q.pose],ey=q.eye,bx=at.x+(ey.col+P.sx)*q.s-q.s,by=at.y+(ey.row+P.sy)*q.s-q.s;
+    rect(bx,by,q.s*3,q.s*3,'rgba(96,52,130,.55)'); rect(bx+q.s*.5,by+q.s*.5,q.s*2,q.s*2,'rgba(40,20,64,.7)');
+  }
+}
+// Tom's frame -> the same pose of Tom carrying Rose (painted, data/tomride-use.js). Built once from his sprite table.
+let _rideMap=null,_rideMapFor=null;
+function rideFrameOf(fr) {
+  if(typeof TOMRIDE==='undefined'||!TOMRIDE.ok) return null;
+  const T=BATTLE_SPRITES.tom;
+  if(!_rideMap||_rideMapFor!==T) {
+    _rideMapFor=T; _rideMap=new Map(); const R=TOMRIDE.bt;
+    for(const k of ['idle','act','celeb','windup','leap','hurtPose','defend','castPose','kneel','expr','flip','celebFlip']) if(T[k]&&R[k]) _rideMap.set(T[k],R[k]);
+    for(const k of ['run','runFlip']) if(T[k]&&R[k]) T[k].forEach((f,i)=>R[k][i]&&_rideMap.set(f,R[k][i]));
+  }
+  return _rideMap.get(fr)||null;
+}
+// Draw Tom's body. While Rose rides and Tom's pose has a painted ride frame, draw that frame instead (bottom centre stays put,
+// so his feet do not move); otherwise draw the old layered Rose behind him and Tom as usual.
+function rideBodyDraw(m,fr,pal,x,y,s,opts) {
+  if(m.id==='tom') battle._tomDrawnAt=battle.time;
+  const q=m.id==='tom'&&battle._seat;
+  if(q) {
+    const R=rideFrameOf(fr);
+    if(R) {
+      q.ridden=true;
+      const keep=activeTint; activeTint=null;
+      drawSprite(R,TOMRIDE.bt.pal,x+(fr[0].length-R[0].length)*s/2,y+(fr.length-R.length)*s,s,opts);
+      activeTint=keep; return;
+    }
+    rideBackFallback(q);
+  }
+  drawSprite(fr,pal,x,y,s,opts);
+}
+// After the party is drawn: if Tom never drew this frame (hidden mid-move), still show Rose the old way.
+function rideFlush() {
+  const q=battle._seat; if(!q||q.ridden||q.backDone) return;
+  if(battle._tomDrawnAt===battle.time) return;   // she hopped up after Tom was drawn this frame: skip the one-frame blip, the painted ride starts next frame
+  rideBackFallback(q);
+  const keep=activeTint; activeTint=null; roseRide(q.pose,'front',q.cx,q.top,q.s,false,{flash:q.flash}); activeTint=keep;
+}
+// Right after Tom is drawn: her shoes on his shoulders (not needed when the painted ride frame was used).
 function roseSeatFront(m) {
-  const q=battle._seat; if(!q||m.id!=='tom') return;
+  const q=battle._seat; if(!q||m.id!=='tom'||q.ridden) return;
   const keep=activeTint; activeTint=null;
   roseRide(q.pose,'front',q.cx,q.top,q.s,false,{flash:q.flash});
   activeTint=keep;
