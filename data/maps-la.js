@@ -105,7 +105,7 @@ const LA_AREAS=[
     houseRoad:[10,21],
     // Chapter 4: the east end of the boulevard leads to the studio lot (Sunset Gold Studios).
     border:{kind:'citywall',open:[[7,0],[8,0],[14,25],[15,25],[29,9],[29,10]]},
-    exits:[[7,0,'griffith',7,20,'up'],[8,0,'griffith',8,20,'up'],[14,25,'jpark',14,1,'down'],[15,25,'jpark',15,1,'down'],[29,9,'studio',1,8,'right'],[29,10,'studio',1,9,'right']],
+    exits:[[7,0,'griffith',10,20,'up'],[8,0,'griffith',11,20,'up'],[14,25,'jpark',14,1,'down'],[15,25,'jpark',15,1,'down'],[29,9,'studio',1,8,'right'],[29,10,'studio',1,9,'right']],
     // Chapter 2: the trail is closed for smog until Tom and TNB work out where it is coming from.
     gates:[{at:[[7,0],[8,0]],look:'barrier',dy:1,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
       lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','Somebody added in marker: "This means you, Gary."'],
@@ -252,26 +252,47 @@ const LA_AREAS=[
     tag:'Dusty trails. Tar pits. Six things are watching from the brush.',
     eyebrow:'LOS ANGELES / GRIFFITH PARK',
     hint:'Monsters live here. Smoglet is easy. The Big Shake isn\'t.',
-    spawn:{x:7,y:19},
+    spawn:{x:11,y:19},
     wild:true,
-    paths:[[7,13,8,21],[3,13,12,14],[11,9,12,12]],
-    border:{kind:'scrub',open:[[7,21],[8,21]]},
-    exits:[[7,21,'blvd',7,1,'down'],[8,21,'blvd',8,1,'down']],
-    pools:[{tile:'tar',shore:'mud',cells:[[14,5],[15,5],[16,5],[13,6],[14,6],[15,6],[16,6],[17,6],[13,7],[14,7],[15,7],[16,7],[17,7],[14,8],[15,8],[16,8],
-      [4,17],[5,17],[4,18]]}],
+    // Painted plate (art/griffith.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Trails: the main trail up the middle, a ridge trail to the lookout (top), a west slope to the Observatory hill,
+    // a shore path under the south tar pit, and the east trail along y 11 to 12.
+    plateMask:[
+      '########################',
+      '########################',
+      '########################',
+      '############.....#######',
+      '##########...###########',
+      '##########..############',
+      '###..#####....##########',
+      '###....#####..##########',
+      '####...#####...#########',
+      '#####...###....#########',
+      '#######......###########',
+      '###########..####.....##',
+      '###########............#',
+      '###########..###########',
+      '##########.....#########',
+      '###########.....########',
+      '############......######',
+      '####.............#######',
+      '###...........##########',
+      '#########.....##########',
+      '#########.....##########',
+      '##########..############'],
+    border:{kind:'scrub',open:[[10,21],[11,21]]},
+    exits:[[10,21,'blvd',7,1,'down'],[11,21,'blvd',8,1,'down']],
+    pools:[{tile:'tar',cells:[[14,5],[15,5],[16,5],[17,5],[18,5],[19,5],[20,5],[21,5],[22,5],[23,5],[15,6],[16,6],[17,6],[18,6],[19,6],[20,6],[21,6],[22,6],[23,6],[14,7],[15,7],[16,7],[17,7],[18,7],[19,7],[20,7],[21,7],[22,7],[23,7],[15,8],[16,8],[17,8],[18,8],[19,8],[20,8],[21,8],[17,9],[18,9],[19,9],[20,9],[21,9],
+      [4,16],[5,16],[6,16],[7,16]]}],
     objects:[
-      ['dome',2,1,3,2,'The Observatory','A white dome on the hill. On a clear night you can see three stars. On a normal night, one.'],
-      ['oak',6,2],['scrub',9,2],['rock',11,1],['scrub',20,2],['oak',22,3],['scrub',1,4],['rock',3,4],['scrub',5,5],['oak',8,5],['scrub',1,8],
-      ['rock',3,9],['scrub',6,8],['oak',21,10],['scrub',22,12],['rock',1,11],['scrub',2,15],['oak',1,17],['scrub',4,20],['rock',11,17],['scrub',14,16],
-      ['oak',16,15],['scrub',19,17],['rock',21,18],['scrub',12,19],['oak',16,19],['scrub',20,20],['rock',1,20],['scrub',22,20],['oak',8,10],['scrub',9,7],
-      {kind:'fence',at:[[3,20],[5,20],[6,20],[9,20],[10,20]]},
-      ['sign',6,13,1,1,'Trailhead sign','GRIFFITH PARK. Stay on the trail. Start with the Smoglet. Save the hill for last.'],
-      ['sign',9,5,1,1,'Tar warning','DO NOT STEP IN THE TAR. It\'s not a puddle. It\'s a commitment.'],
-      ['bench',3,15,2,1,'Hiking bench','A plaque says: IN MEMORY OF A GREAT VIEW. The view is fine. It\'s right there.'],
-      ['bench',18,13,2,1,'Lookout bench','You can see the whole city from here. Most of it\'s parking.'],
-      ['sign',13,10,1,1,'Fault marker','EARTHQUAKE COUNTRY. If the ground starts talking, don\'t answer.']],
+      ['rock',17,3,2,1,'Lookout rock','From up here you can see the Observatory\'s white dome across the ridge. On a clear night you can see three stars. On a normal night, one.'],
+      ['sign',13,13,2,1,'Trailhead sign','GRIFFITH PARK. Stay on the trail. Start with the Smoglet. Save the hill for last.'],
+      ['sign',14,6,1,1,'Tar warning','DO NOT STEP IN THE TAR. It\'s not a puddle. It\'s a commitment.'],
+      ['bench',16,15,2,1,'Lookout bench','You can see the whole city from here. Most of it\'s parking.'],
+      ['rock',13,10,3,1,'Fault marker','EARTHQUAKE COUNTRY. If the ground starts talking, don\'t answer.']],
     npcs:[],
-    monsters:LA_MONSTER_SPOTS}
+    // Spots re-laid onto the painted trails (the Big Shake waits on the west slope below the Observatory).
+    monsters:[['smoglet',9,17],['tickets',20,12],['coyote',13,8],['gridlock',15,3],['tarblob',5,8],['bigshake',3,6]]}
 ];
 
 // ---------- Chapter 4 (Backlot Bedlam): Sunset Gold Studios, east of Downtown ----------

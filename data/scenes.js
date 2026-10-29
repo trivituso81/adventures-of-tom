@@ -507,7 +507,7 @@ const STORY_MAPFX=[
     if(STORY.chapter!==2) return;
     const M=currentMap,smog=!!flag('ch2-smog')&&!flag('ch2-clear');
     // The Observatory's pipes, coughing smog until the Big Shake is beaten.
-    if(M.id==='griffith') for(const [px,py] of [[2.2,2.55],[4.5,2.55]]) {
+    if(M.id==='griffith') for(const [px,py] of [[5.4,2.1],[6.9,2.1]]) {
       const x=Math.round(px*T),y=Math.round(py*T);
       rect(x-3,y-14,8,16,OUT); rect(x-2,y-13,6,14,'#8e9aa8'); rect(x-4,y-16,10,4,OUT); rect(x-3,y-15,8,2,'#aeb3ba');
       if(smog||!flag('ch2-tnb')) for(let k=0;k<4;k++) { const ph=(time*.5+k/4)%1; gfx.globalAlpha=(1-ph)*.7; ellipse(x+1+Math.sin(time*2+k)*5,y-18-ph*40,5+ph*12,4+ph*8,k%2?'#8a5aa8':'#b48ad0'); }
