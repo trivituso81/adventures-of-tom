@@ -1,3 +1,6 @@
+## 2026-10-29: carbarn_test fixed (test only, no game change)
+- `tools/carbarn_test.py` failed "west arch leads to Jefferson Park" and "east rails lead to the Boiler Room" because a wandering monster (Lukewarm waits at the west arch) started a fight on arrival, which froze the walk. The exits and walk map were fine. The test now ends any fight and clears monsters near the player before each exit walk. 0 fails.
+
 ## 2026-10-29: The Starlite (inside) is painted (Area 43, map id `cinema`)
 - New `art/starlite.webp` (Tom's painting, 832 x 704 = 13 x 11 tiles at 64 px) registered as `PLATES.cinema` (`?v=20261029`, interior actor scale 1.98). Map size, door (6,10) and spawn (6,9) unchanged.
 - Walk map (`plateMask` in `data/maps-la.js`): the center aisle (x6, rows 4 to 10), the front strip across the seat rows (row 7, x1 to 9), the velvet-rope nook (8,8), and the red-carpet stairs (x5 and x6, rows 8 to 10) as the way out. Stage, both seat blocks, the concession bar, ticket desk, fern and brass posts are painted and blocked.

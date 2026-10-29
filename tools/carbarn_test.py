@@ -60,13 +60,14 @@ with sync_playwright() as pw:
     check('bridge walkable after the lever',all(v==0 for v in br_cells))
     pg.evaluate(REACH.replace('const seen','const seen'))
     r2=pg.evaluate(REACH); print('after lever:',r2['reachable'],'tiles reachable'); check('lunchroom reachable',pg.evaluate("()=>{const m=worlds.carbarn;return true}"))
-    # out the west arch to Jefferson Park, back, and out the east rails to the Boiler Room
-    pg.evaluate("()=>window.__LE.go('carbarn')"); pg.wait_for_timeout(1800); skip_intro(pg); print('state:',pg.evaluate("()=>({d:dialog.active,i:intro.active,t:!!transition,sc:typeof STORY!=='undefined'&&!!STORY.scene})")); stand(pg,1,10,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(1800); skip_intro(pg)
+    # out the west arch to Jefferson Park, back, and out the east rails to the Boiler Room.
+    # Wandering monsters (Lukewarm waits at the arch) start a battle on contact and freeze the walk, so end any fight and clear the monsters near the player first.
+    pg.evaluate("()=>window.__LE.go('carbarn')"); pg.wait_for_timeout(1800); skip_intro(pg); print('state:',pg.evaluate("()=>({d:dialog.active,i:intro.active,t:!!transition,sc:typeof STORY!=='undefined'&&!!STORY.scene})")); stand(pg,1,10,'left'); pg.evaluate("()=>{ if(battle.active) b2End('run'); currentMap.npcs=currentMap.npcs.filter(n=>Math.abs(n.x-player.x)+Math.abs(n.y-player.y)>6); }"); pg.wait_for_timeout(300); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(1800); skip_intro(pg)
     print('after west walk:',pg.evaluate("()=>[currentMap.id,player.x,player.y]"))
     check('west arch leads to Jefferson Park',pg.evaluate("()=>currentMap.id==='jpark'"))
     check('jpark door lands on a walkable carbarn tile',pg.evaluate("()=>{const m=worlds.carbarn; return [[1,10]].every(([x,y])=>m.solid[y*m.w+x]===0);}"))
     pg.evaluate("()=>window.__LE.go('carbarn')"); pg.wait_for_timeout(1800); skip_intro(pg)
-    stand(pg,28,14,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(1800); skip_intro(pg)
+    stand(pg,28,14,'right'); pg.evaluate("()=>{ if(battle.active) b2End('run'); currentMap.npcs=currentMap.npcs.filter(n=>Math.abs(n.x-player.x)+Math.abs(n.y-player.y)>6); }"); pg.wait_for_timeout(300); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(1800); skip_intro(pg)
     print('after east walk:',pg.evaluate("()=>[currentMap.id,player.x,player.y]"))
     check('east rails lead to the Boiler Room',pg.evaluate("()=>currentMap.id==='boiler'"))
     check('boiler door lands on a walkable carbarn tile',pg.evaluate("()=>{const m=worlds.carbarn; return [[28,14],[28,15]].every(([x,y])=>m.solid[y*m.w+x]===0);}"))
