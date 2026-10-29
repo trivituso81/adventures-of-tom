@@ -147,6 +147,9 @@
 - New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
 - Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
 
+## 2026-10-29: Painted controller for Press Start
+- `tools/sprite-bake/src/prop-controller.png` baked by new `tools/sprite-bake/bake_props.py` to `art/chars/prop-controller.webp` (levelled, 200 px wide). `ctl()` in engine/tom-moves.js draws it (wind-up, throw, falling); the old drawn controller is the fallback until it loads.
+
 ## 2026-10-29: Tom's arrival stretch (painted)
 - `tools/sprite-bake/src/tom-stretch-v1.png` (8 front-facing poses) baked to `art/chars/tom-stretch.webp`; `TOM_STRETCH` (data/tom-hires-use.js) holds them: tired, start, full, side, crack, neck, exhale, fresh.
 - `engine/intro.js`: the cab-line stretch now plays all of them over 5.2 s (`drawStretchPainted`), with a second exhale sound; the old drawn-arms version remains as the fallback when `TOM_HIRES_OFF` is set.
