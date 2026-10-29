@@ -437,7 +437,7 @@ const SPLASH_SPOTS=[
   {id:'boppy',x:768,feet:1222,h:255},
   {id:'grace',x:287,feet:1222,h:225},
   {id:'amy',x:566,feet:1222,h:278},
-  {id:'deedee',x:668,feet:1258,h:228},
+  {id:'deedee',x:672,feet:1258,h:278},
   {id:'nara',x:355,feet:1240,h:78}
 ];
 function splashCastDraw(time) {
