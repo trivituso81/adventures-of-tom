@@ -26,6 +26,11 @@
 - New `tools/library_test.py`: every object touchable, no walkable island, Page answers, staff door to the Stacks, street door to town, portrait and landscape shots.
 - Known roughness: minimap still draws the old tile look. Not reworded: no spoken lines changed.
 
+## 2026-10-28: Painted plate for Kettle Cottage (the tea room)
+- Kettle Cottage (map id `tea`, 12 x 9 tiles) now uses Tom's painting (`art/tea.webp`, 768 x 576, 64 px per tile, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (6,8) and spawn (6,7) are unchanged.
+- The grid image's markers were the old object positions, and the painting did not follow them (the biscuit table is two tiles further right, the counter is longer). Objects were re-laid onto the painted furniture: Tea for two (2,3 2x2), Biscuit table (9,3 2x2), Mint plant (1,5, the big left planter), the kettle counter (5,1 5x2). Oolong still starts at (5,3).
+- New `tools/tea_test.py`: objects touchable, Oolong on floor, A opens dialogue at every prop, walking down the door gap returns to the Square, portrait and landscape shots in `tools/shots/tea-*.png`. `tools/reach_test.py tea` 0 fails, `tools/smoke.py` no fails.
+
 ## 2026-10-28: Painted plate for Sprout House (the greenhouse)
 - Sprout House (map id `greenhouse`, the Square's greenhouse interior) now uses Tom's painting (`art/greenhouse.webp`, 768 x 640, 12 x 10 tiles at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (6,9) and spawn (6,8) are unchanged.
 - Walkable: the strip in front of the beds, the aisle either side of the barrel plant, the green rug, the arch (x 5 and 6, rows 8 and 9). Blocked: the glass wall, back bench, both potting beds, the barrel plant, the plant stool and hose on the left, the gardening shelf and plants on the right, the hedges and gate posts at the bottom.

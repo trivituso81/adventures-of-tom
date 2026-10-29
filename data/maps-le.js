@@ -1153,7 +1153,20 @@ const LE_ROOMS=[
   {id:'tea',w:12,h:9,
     style:{floor:'#d5ba9e',alt:'#e3cdb0',wall:'#bb9d88',trim:'#efd7b8',pattern:'wood',rug:'#c6aa76'},
     walls:[[1,1],[1,2],[10,1],[10,2]],
-    rug:[4,2,3,5],
+    rug:[5,5,2,3],
+    // Painted plate (art/tea.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Tea table with two chairs left, biscuit table with two chairs right, the long counter and kettle along the back,
+    // the mint planter and crates on the left wall, the rug in the middle. The gap between the two posts at the bottom (x5 and x6) is the way out.
+    plateMask:[
+      '############',
+      '############',
+      '############',
+      '#####...####',
+      '####....####',
+      '##.........#',
+      '#.........##',
+      '#...#..#..##',
+      '#####..#####'],
     npcs:[
       {name:'Oolong',x:5,y:3,look:'oolong',lines:[
         'The kettle has been gossiping again.',
@@ -1162,9 +1175,9 @@ const LE_ROOMS=[
         when:[{chapter:3,flag:'ch3-tea',lines:['The kettle is still going on about that man in the long coat. Gold coins. Paying double.','I told it to mind its own business. It\'s a kettle. It has no business.']}]}],
     objects:[
       ['table',2,3,2,2,'Tea for two','Two cups are having a heated discussion.'],
-      ['table',7,3,2,2,'Biscuit table','A biscuit whispers: "Dunk me. I dare you."'],
-      ['pot',1,6,1,1,'Mint plant','The mint has excellent taste in itself.'],
-      ['counter',7,1,3,1,'The kettle','The kettle says nothing. Suspiciously nothing.',{variant:'tea'}]]},
+      ['table',9,3,2,2,'Biscuit table','A biscuit whispers: "Dunk me. I dare you."'],
+      ['pot',1,5,1,1,'Mint plant','The mint has excellent taste in itself.'],
+      ['counter',5,1,5,2,'The kettle','The kettle says nothing. Suspiciously nothing.',{variant:'tea'}]]},
   {id:'observatory',w:13,h:12,
     style:{floor:'#8d9aab',alt:'#a0adbb',wall:'#718299',trim:'#bac8d1',pattern:'night',rug:'#777f9e'},
     rug:[4,5,6,4],
