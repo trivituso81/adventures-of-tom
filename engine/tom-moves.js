@@ -1538,7 +1538,11 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
 // Tom stays at his spot. He presses one button on a wireless controller, nothing happens (a little signal icon with a red
 // cross), he says it is not connecting, and he throws the controller at the monster. Same numbers: free, +1 VP.
 const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+// Painted controller (art/chars/prop-controller.webp, tools/sprite-bake/bake_props.py); the drawn one below is the fallback until it loads.
+const CTL_IMG=new Image(); CTL_IMG.src='art/chars/prop-controller.webp';
 const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc);
+  if(CTL_IMG.complete&&CTL_IMG.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.drawImage(CTL_IMG,-21,-14,42,Math.round(42*CTL_IMG.naturalHeight/CTL_IMG.naturalWidth));
+    if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.imageSmoothingEnabled=sm; gfx.restore(); return; }
   RO(-5,-12,10,5,'#3a3f46'); R(-3,-11,6,2,GREY2);
   const rr=(a,b,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(a,b,w,h,r); else gfx.rect(a,b,w,h); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
   E(-13,5,6,7,OUT); E(13,5,6,7,OUT); E(-13,5,4.2,5.2,'#6a6f7a'); E(13,5,4.2,5.2,'#6a6f7a'); rr(-18,-8,36,15,5,'#6a6f7a'); R(-16,-6,32,2,GREY2);

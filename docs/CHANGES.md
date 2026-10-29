@@ -1,3 +1,15 @@
+## 2026-10-29: TNB sized exactly like Tom, plus 24 extra painted poses
+- TNB's head-to-body ratio and height now match Tom's (per-frame head solve in `bake_tnb.py`: 44.5 percent of battle height, 43.3 front, 41.7 side; 100 battle rows, 42 overworld rows).
+- 24 new poses from two extra sheets (battle actions, story scenes), same baker. Mug Toss now plays painted pull, wind-up and release frames (the drawn mug is skipped while a painted pose holds its own). Slasher Scare uses the dodge pose. point, aim, spread, hip, clap, carry, shrug are painted; story poses sit, toast, sitR, hug, whisper plus new wave, talk, laugh are painted. Saved but not yet used in a move: heave, crouch.
+- Known roughness: small sleeve slivers beside the head on a few frames (windup, strike, leap, win, kneel, crouchlook).
+- No spoken lines changed.
+
+## 2026-10-29: Grace's cartwheel and gymnastics poses are painted
+- New pose sheets `tools/sprite-bake/src/grace-poses-a1.png` (lunge, star, handstand, land, knee lift, front kick, floor split, bridge, dance, balance, bow) and `grace-poses-a2.png` (tuck, leap, salute, dance, balance, bow), baked by `python3 tools/sprite-bake/bake_grace_poses.py` into `art/chars/grace-wheel.webp` (16 frames, 260 px, hip at the centre of each frame; the hip is the leggings centre nearest the leotard) and `data/grace-wheel-hires.js` (generated).
+- `data/grace-wheel-use.js` swaps the picture only: `GRACE_WHEEL.frame` and `.mirror` now return a painted 130 x 130 frame (drawn at scale 1, the same 130 px box as the old 65-row frames at scale 2); the hip path, planted hand or foot and rotation maths in `data/grace-wheel.js` are unchanged. Tweens between two model poses show the nearer painted pose. Used by Cartwheel's showpiece, Judge Grace (Tom and Grace), and the round-off combos. Set `GRACE_WHEEL_HIRES_OFF=true` to get the pixel frames back.
+- This also fixes the pixel cartwheel frames drawing at half size since the painted Grace went in (her sprite scale is now 1, the frames were built for 2).
+- Not wired yet: `GRACE_WHEEL.painted(name)` also holds handstand, leap, salute, dance, balance, bow, split and bridge for other moves (Handstand Contest, Split Leap, Olympic salute, DANCE). They are hip-centred, not feet-aligned like the battle frames.
+- `sheet.py` gained `split_erode` (figures that nearly touch are separated by eroding, then each pixel goes to its nearest figure).
 ## 2026-10-28: Painted Grace (battle, knocked out, overworld)
 - Grace now comes from her painted sheets (`tools/sprite-bake/src/grace-battle-v2.png`, `grace-walk-v2.png`, hero `grace-hero-v2.png`), baked by `python3 tools/sprite-bake/bake_grace.py` into `art/chars/grace-battle.webp`, `grace-ko.webp`, `grace-ow.webp` and `data/grace-hires.js` (generated). `data/grace-hires-use.js` swaps her in (set `GRACE_HIRES_OFF=true` to get the old pixel Grace back). Battle idle is 80 rows at scale 1 (old: 40 rows at 2, same height); overworld stands 38 rows (old 43 x .88).
 - Her violet leotard is close to the magenta background, so `sheet.py` has a `robust=True` cut (distance to the real background colour; interior pixels untouched; only the rim and pink hair strands are cleaned). Tom's bake still uses the old cut.
@@ -134,6 +146,13 @@
 - Same row geometry as before, so Rose's ride, hand points, hurt, KO, defend and outfits all still work. `TOM_HIRES_OFF=true` restores the old Tom.
 - New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
 - Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
+
+## 2026-10-29: Painted controller for Press Start
+- `tools/sprite-bake/src/prop-controller.png` baked by new `tools/sprite-bake/bake_props.py` to `art/chars/prop-controller.webp` (levelled, 200 px wide). `ctl()` in engine/tom-moves.js draws it (wind-up, throw, falling); the old drawn controller is the fallback until it loads.
+
+## 2026-10-29: Tom's arrival stretch (painted)
+- `tools/sprite-bake/src/tom-stretch-v1.png` (8 front-facing poses) baked to `art/chars/tom-stretch.webp`; `TOM_STRETCH` (data/tom-hires-use.js) holds them: tired, start, full, side, crack, neck, exhale, fresh.
+- `engine/intro.js`: the cab-line stretch now plays all of them over 5.2 s (`drawStretchPainted`), with a second exhale sound; the old drawn-arms version remains as the fallback when `TOM_HIRES_OFF` is set.
 
 ## 2026-10-29: Tom's custom battle poses and a front-facing walk
 - New walk sheet: Tom's head faces straight at the camera when he walks toward you (`tom-walk-v2.png` replaced).
@@ -461,3 +480,11 @@ Known: Censor balance checked by script only (tune B2_FOES.censor in data/ch19-b
 No existing spoken lines were reworded. New dialogue is unbaked. New speakers needing cast entries in data/dialog-cast.js: Stillness Core and Forever Engine (narrator), Vance (reused), Oblivion Censor, Sal, Sol, Nara. Spoken battle lines for the relays and the seven care acts reuse existing keys. Older owed: 7 Michael/Olivia re-bakes, Vance, Archivist, Floor 60/59, Mrs. Alvarez, Dead-Letter Office.
 Engine: BENCH CALL now works in the Leviathan and Julian fights (B2_BENCH_FIGHTS), near free in Julian's.
 Known: Dot says "ten doors" (should be eleven); ch15 QUIET glyphs; ch17_test pre-existing failure; ch18 flaky roster check.
+
+## Rose extra poses and painted shoulder ride
+- 12 new painted battle poses (boop, boopBack, raspberry, boo, tiara, hug, balance, lookout, throwWind, throwRel, sitStory, sitTea) baked from Sheet A into `art/chars/rose-battle-x.webp`; wired into Boop, Silly, Boo!!, Lamby Hug, Bedtime Story, Floor Is Lava, Lookout Lamby.
+- Painted shoulder ride (battle and overworld) replaces the old pixel ride; seat anchors in `tools/sprite-bake/rose-ride-anchors.json`.
+- Overworld extras (crouch, jump, wave, hold) baked into `ROSE_OW.extra`; no scene uses them yet. Tiara, tiara-free Macaroni Crown, sitTea and throw poses for Ms. Cathy are unused so far.
+
+## Rose Boop: painted jab
+- Boop now uses three painted frames (jab0 wind-up, jab1 extended index finger, jab2 recoil) from `tools/sprite-bake/src/rose-jab-v2.png`, lunging so the fingertip lands on the enemy's nose at the hit. The old drawn-on arm (`rf_poke`) is no longer used by Boop.

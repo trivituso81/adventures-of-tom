@@ -28,8 +28,9 @@
   BATTLE_SPRITES.grace=sp;
   // Knocked out: the family KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.grace={scale:.8,pal:GRACE_HIRES.ko.pal,rows:tag(GRACE_HIRES.ko.rows.slice(),'graceKo','ko',true)};
-  // Her bespoke cartwheel poses (data/grace-wheel.js) are still built from the old pixel body; keep their own palette so they draw right.
-  if(typeof GRACE_WHEEL!=='undefined'&&old&&old.pal) {
+  // Her bespoke cartwheel poses (data/grace-wheel.js) are drawn from painted frames by data/grace-wheel-use.js. If that file or its art is
+  // missing, the old pixel frames keep their own palette so they still draw right.
+  if(typeof GRACE_WHEEL!=='undefined'&&old&&old.pal&&typeof GRACE_WHEEL_HIRES==='undefined') {
     const oldPal=old.pal;
     for(const fn of ['frame','mirror']) { const f0=GRACE_WHEEL[fn]; GRACE_WHEEL[fn]=function() { const r=f0.apply(this,arguments); if(r&&!r._pal) r._pal=oldPal; return r; }; }
   }
