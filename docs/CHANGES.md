@@ -11,12 +11,17 @@
 - New `tools/reach_test.py [mapId ...]`: flood fill over the real collision grid; fails if any door or exit is cut off, blocked by an NPC's starting tile, or can be cut off by any single wandering NPC. Row, Square and Hollow pass. The Marsh exit to the Sundial reports unreachable on purpose (old reeds until chapter 3).
 - The Pier path (Row south exit) is still gated until chapter 3 (Boppy takes everyone fishing); that is design, not a bug.
 
+## 2026-10-28: Grace has a new voice (Gretchen)
+- Tom picked "AoT Grace (Gretchen)" (id JVVJ6VsnUPJAdfGmEBGP, ElevenLabs library) in the Grace baker and sent recast.json. Merged with `merge-voice.js ... grace`: all 50 battle lines (60 clips counting alternates in data/voice/grace.js) and all 160 story lines replaced, none added. Every LINES.grace text has a clip. No shrink step (new voice is already a kid); do not run shrink-voice.js on Grace again.
+- The six chapter files with no Grace clips (dialog-ch2, 4, 6, 8, 23, 28) still named Ivy in their voice metadata; that entry was updated to Gretchen so the last-loaded file cannot undo it. Ivy is no longer used anywhere.
+- Median pitch of her clips about 320 Hz (Amy about 280, Rose about 430). `IDS=grace,rose python3 tools/smoke.py`: FAILS []. No spoken text changed. Largest voice file 14.4 MB.
+- Any new Grace clip from now on goes straight in with merge-voice.js, in this voice.
+
 ## 2026-10-28: Grace voice baker (new child voice)
 - Tom heard Grace as a grown woman. Pitch and voice-size shifts of her current Ivy clips (3 rounds, up to +5 semitones) all sounded mechanical or cartoonish, and calm or long lines stayed adult. Decision: replace the voice, not process it.
 - New `tools/voice-recast/build-grace.js` builds `grace-voice-baker.html` (searches the ElevenLabs Voice Library or takes a pasted voice ID, then re-records her 50 battle and 160 story lines with the existing scripts). `tools/voice-recast/test_grace_baker.py` tests it with ElevenLabs mocked (includes the delete-Ivy path when the account is full). Export merges with `node tools/voice-recast/merge-voice.js recast.json data <outdir> grace`. Do NOT run shrink-voice.js on the new clips.
 - `tools/voice-recast/template.html`: an empty accent no longer adds a blank entry to the bracket direction. No game files or spoken lines changed.
 - ElevenLabs returned 403 (safety block) when Voice Design was asked for a nine-year-old girl. Do not reword around it: Grace is picked from the Voice Library instead (`tools/voice-recast/grace-library.js`, built into the baker; adding the voice deletes Ivy if the account is full). The library calls are tested with mocks only, not against the live API.
-- Waiting for: Tom to run the baker and send recast.json.
 
 ## 2026-10-28: More monsters now face right
 - Tom saw many monsters still looking left. `data/enemy-facing.js` now also mirrors Gridlock, Tardy Bell, Lukewarm, Smoglet, Shusher, Stuffed Shirt and Unclaimed (they were drawn turned left). Eyes and mouth are mirrored with the art, so every move still aims correctly.
