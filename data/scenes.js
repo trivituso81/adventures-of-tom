@@ -677,7 +677,7 @@ SCENES.ch3Story=[
 SCENES.ch3Pier=[
   {flag:'ch3-pier'},
   {walk:'tom',to:routeTo('tom',11,12),speed:.25}, {face:'tom',dir:'down'},
-  {place:'boppy',at:[12,12],dir:'down'}, {place:'grace',at:[10,12],dir:'down'}, {place:'rose',at:[12,13],dir:'down'},
+  {place:'boppy',at:[12,12],dir:'down'}, {place:'grace',at:[10,12],dir:'down'}, {place:'rose',at:[13,12],dir:'down'},
   {talk:'Boppy',lines:['This is the spot. Forty years, this spot. Now everybody be QUIET.']},
   {talk:'Rose',lines:['I AM BEING QUIET.']},
   {talk:'Grace',lines:['Rose. Inside voice. Outside.']},
@@ -1084,7 +1084,7 @@ SCENES.ch4Fetch=[
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {talk:'Nara',lines:['Nara’s ears go straight up. Something shiny is skittering across New York.']},
   {talk:'Tom',lines:['Nara. NARA. Don\'t...']},
-  {walk:'nara',to:routeTo('nara',11,18),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
+  {walk:'nara',to:routeTo('nara',14,6),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
   {talk:'TNB',lines:['That\'s a closed set! She\'s not on the call sheet!']},
   {face:'nara',dir:'down'},
   {wait:.5},
@@ -1104,7 +1104,7 @@ SCENES.ch4Fetch=[
   {flag:'ch4-fetch'},
   {talk:'TNB',lines:['Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can\'t work like this.']},
   {talk:'Tom',lines:['Then we clear the sets. One at a time. Main Street, the Western street, New York.']},
-  {toast:'Goal: clear the three sets: Main Street (top left), the Western street (top right), New York (bottom left).',time:5}
+  {toast:'Goal: clear the three sets: the Western street (top left), New York (top right), and Main Street (the jungle set, right).',time:5}
 ];
 // 6. The three sets. A troublemaker on each one.
 SCENES.ch4Crab=[
@@ -1149,7 +1149,7 @@ SCENES.ch4Stage=[
   {talk:'Tom',lines:['The stage set is at the top. The rack is up there. I can smell the steamer.']},
   {talk:'TNB',lines:['The main light rig runs the catwalk motor. If I get power back to it, the catwalk comes down.',
     'Three junction boxes. They have to come up in the right order or the dimmer pops. The rig will tell us the order.']},
-  {toast:'Goal: get the light rig working. Look at the rig (by the catwalk), then flip the three junction boxes in the right order.',time:5.5}
+  {toast:'Goal: get the light rig working. Look at the rig (middle of the floor), then flip the three junction boxes in the right order.',time:5.5}
 ];
 // 8. The rig works. TNB tapes the cable. The catwalk comes down.
 SCENES.ch4Rig=[
@@ -1162,7 +1162,7 @@ SCENES.ch4Rig=[
   {talk:'Tom',lines:['You fixed a whole soundstage with tape.']},
   {talk:'TNB',lines:['I fix everything with tape. You know this. Your kitchen drawer knows this.']},
   {trace:'tnb-rig'}, {hearts:'tnb'},
-  {toast:'Goal: up the catwalk to the stage set (top).',time:4.5}
+  {toast:'Goal: up the stairs to the stage set (top).',time:4.5}
 ];
 // 9. The stage set: The Director's Cut, sitting on TNB's rack. Boss fight.
 SCENES.ch4Boss=[
@@ -1238,9 +1238,9 @@ TRIGGERS.push(
   {id:'ch4-nara',map:'jpark',when:{...CH4,flag:'ch4-goal',notFlag:'ch4-nara',test:()=>!inParty(nara)},scene:'ch4Nara'},
   {id:'ch4-gate',map:'studio',when:{...CH4,flag:'ch4-nara',notFlag:'ch4-gate'},scene:'ch4Gate'},
   {id:'ch4-fetch',map:'backlot',when:{...CH4,flag:'ch4-gate',notFlag:'ch4-fetch',test:()=>inParty(nara)},scene:'ch4Fetch'},
-  {id:'ch4-main',map:'backlot',at:[1,6,13,9],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-main'},scene:'ch4Crab'},
-  {id:'ch4-west',map:'backlot',at:[16,6,28,9],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-west'},scene:'ch4Clapper'},
-  {id:'ch4-ny',map:'backlot',at:[1,17,13,19],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-ny'},scene:'ch4Moth'},
+  {id:'ch4-main',map:'backlot',at:[9,9,13,13],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-main'},scene:'ch4Crab'},
+  {id:'ch4-west',map:'backlot',at:[0,5,9,7],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-west'},scene:'ch4Clapper'},
+  {id:'ch4-ny',map:'backlot',at:[12,3,15,6],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-ny'},scene:'ch4Moth'},
   {id:'ch4-stage',map:'stage7',when:{...CH4,flag:'ch4-sets',notFlag:'ch4-stage'},scene:'ch4Stage'},
   {id:'ch4-boss',map:'stageset',when:{...CH4,flag:'ch4-rig',notFlag:'ch4-boss'},scene:'ch4Boss'},
   {id:'ch4-after',map:'stageset',when:{...CH4,flag:{'battle:directorscut':'win'},notFlag:'ch4-clear'},scene:'ch4AfterBoss'},
@@ -1253,10 +1253,10 @@ HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='backlot'&&(flag('ch4-fetc
 HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='stage7'&&!flag('ch4-rig'));
 
 // Map changes. They check flags (not events), so they also hold after loading a save.
-// The raised catwalk section in Soundstage 7 (rows 4 and 5) comes down once the rig is fixed.
+// The catwalk up to the stage set in Soundstage 7 comes down once the rig is fixed: the gate on the stairs (data/maps-la.js stage7 gates)
+// opens on the flag ch4-rig, so there is no tile to change on the painted map.
 function ch4LowerCatwalk() {
   const M=worlds.stage7; if(!M||M.catwalkDown) return;
-  for(const y of [4,5]) for(const x of [12,13]) tile(M,x,y,'catwalk');
   M.catwalkDown=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{
@@ -1322,8 +1322,8 @@ STORY_PROPS.tag=(cx,y)=>{ const yy=Math.round(y-6); rect(cx-5,yy-1,10,8,OUT); re
 // Soundstage 7 in the dark (until the rig is fixed): a pool of light around Tom. The fog machine room is always foggy.
 STORY_MAPFX.push(time=>{
   const M=currentMap; if(M.id!=='stage7') return;
-  // Fog in the fog machine room (x 18 to 24, rows 1 to 10), drifting.
-  for(let k=0;k<16;k++) { const n=hash(k,77),fx=18*T+((n%(7*T))+time*(8+k%4)*(k%2?1:-1)+7*T*4)%(7*T),fy=T+(n>>>9)%(10*T);
+  // Fog in the fog machine corner (x 16 to 23, rows 3 to 12), drifting.
+  for(let k=0;k<16;k++) { const n=hash(k,77),fx=16*T+((n%(7*T))+time*(8+k%4)*(k%2?1:-1)+7*T*4)%(7*T),fy=3*T+(n>>>9)%(9*T);
     gfx.globalAlpha=.32; ellipse(fx,fy,22+n%12,10+n%6,'#eef2f6'); }
   gfx.globalAlpha=1;
   if(flag('ch4-rig')) return;
@@ -2050,10 +2050,11 @@ function ch6OpenDoor() {
   for(const x of [12,13]) tile(M,x,4,'path');
   M.doorOpen=true; M.mini=null;
 }
-// The rope ladder (rows 3 to 5 up the middle of the Oak) comes down once Nara rides the bucket.
+// The rope ladder up the middle of the Old Oak (the gap in column 12, rows 2, 4 and 5, between the top bridge, the middle bridge and the
+// war room bridge; the `ladder` cells in the oak spec) comes down once Nara rides the bucket. It is drawn live over the painting (below).
 function ch6LowerLadder() {
   const M=worlds.oak; if(!M||M.ladderDown) return;
-  for(const y of [3,4,5]) for(const x of [11,12]) tile(M,x,y,'ladder');
+  for(const [x,y] of (M.spec&&M.spec.ladder)||[]) tile(M,x,y,'ladder');
   M.ladderDown=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{
@@ -2137,14 +2138,22 @@ pressAction=function() {
   }
   return LE_pressAction_ch6();
 };
-// The Oak in the dark: a pool of firefly light around Tom until the ladder is down; the crown is bright.
+// The Old Oak is painted and lit by its own lanterns, so the dark is a soft pool around Tom, not a blackout. Once Nara has lowered the
+// ladder it is drawn live over the painting: a rope ladder from the top bridge down to the war room bridge, swaying a little.
 STORY_MAPFX.push(time=>{
   const M=currentMap; if(M.id!=='oak') return;
   const p=position(player),px=(p.x+.5)*T,py=(p.y+.5)*T,c=gfx;
-  const g=c.createRadialGradient(px,py,T*2,px,py,T*7); g.addColorStop(0,'rgba(20,12,6,0)'); g.addColorStop(1,'rgba(20,12,6,.55)');
+  const g=c.createRadialGradient(px,py,T*3,px,py,T*9); g.addColorStop(0,'rgba(20,12,6,0)'); g.addColorStop(1,'rgba(20,12,6,.32)');
   c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
-  // light falling down the hollow from the crown
-  gfx.globalAlpha=.06+.02*Math.sin(time); rect(11*T+6,0,2*T-12,10*T,'#fff1cb'); gfx.globalAlpha=1;
+  if(!M.ladderDown) return;
+  const cx=12.5*T,half=.3*T,top=1.75*T,bot=6.3*T,sway=Math.sin(time*1.3)*.04*T;
+  // This draws over the actors, so it fades out where the party is climbing, otherwise the rungs would hide them.
+  const climbers=[player,...followers].map(a=>position(a)).filter(q=>Math.abs(q.x-12)<.7).map(q=>[(q.y+1)*T-1.7*T,(q.y+1)*T+2]);
+  const fade=y=>climbers.some(([a,b])=>y>=a&&y<=b)?.12:1;
+  for(const s of [-1,1]) for(let y=top;y<bot;y+=4) { gfx.globalAlpha=fade(y); rect(cx+s*half-1+sway*.4,y,4,4,'#2b1d12'); rect(cx+s*half+sway*.4,y,2,4,'#d9bd8a'); }
+  for(let y=top+.12*T;y<bot-.05*T;y+=.26*T) { const sw=sway*(1-(y-top)/(bot-top)*.6); gfx.globalAlpha=fade(y); rect(cx-half+sw*.4,y,half*2+2,4,'#2b1d12'); rect(cx-half+sw*.4,y+1,half*2+2,2,'#b98a52'); }
+  gfx.globalAlpha=1;
+  rect(cx-half-3,top-3,half*2+8,6,'#2b1d12'); rect(cx-half-2,top-2,half*2+6,3,'#8a8f98');   // the hooks on the top bridge
 });
 
 // Tips for the chapter 6 story fights and Chairman Cheeks.
@@ -2863,7 +2872,7 @@ pressAction=function() {
 // The Car Barn is cold (a blue chill, frost at the edges) with little blue pilot lights drifting along the hall toward
 // the turntable, until Ironbelly lets them go. The Boiler Room glows. Jefferson Park is a little blue until the feast,
 // and on the night of the feast there is a long table down the middle of Jefferson Boulevard.
-const CH8_FLAMES=[[2,10],[9,10],[16,9],[17,14],[20,12],[26,15],[6,4],[22,3],[5,16]];
+const CH8_FLAMES=[[2,10],[9,10],[16,11],[19,12],[20,11],[26,15],[7,7],[21,7],[8,19]];
 STORY_MAPFX.push(time=>{
   const M=currentMap,id=M.id,c=gfx;
   const cold=STORY.mode==='full'&&STORY.chapter===8&&!flag('ch8-wrap');
@@ -2871,7 +2880,7 @@ STORY_MAPFX.push(time=>{
     if(cold) {
       c.globalAlpha=.16; rect(0,0,M.w*T,M.h*T,'#9fd8ff'); c.globalAlpha=1;
       for(let k=0;k<CH8_FLAMES.length;k++) {
-        const [fx,fy]=CH8_FLAMES[k],ph=((time*.25+k*.37)%1),tx=(fx+(28-fx)*ph)*T,ty=(fy+(15.5-fy)*ph*ph)*T+Math.sin(time*3+k)*4;
+        const [fx,fy]=CH8_FLAMES[k],ph=((time*.25+k*.37)%1),tx=(fx+(28-fx)*ph)*T,ty=(fy+(14.5-fy)*ph*ph)*T+Math.sin(time*3+k)*4;
         c.globalAlpha=Math.sin(ph*Math.PI)*.9; ellipse(tx,ty,4,6,'#6cb0ff'); ellipse(tx,ty+1,2,3,'#dff0ff'); c.globalAlpha=1;
       }
     } else if(STORY.mode==='full'&&STORY.chapter>=8) { c.globalAlpha=.06; rect(0,0,M.w*T,M.h*T,'#ffb04a'); c.globalAlpha=1; }

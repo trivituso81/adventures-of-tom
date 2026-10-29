@@ -31,7 +31,7 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
     for(let y=o.y-1;y<=o.y+o.h;y++) for(let x=o.x-1;x<=o.x+o.w;x++){ const inside=x>=o.x&&x<o.x+o.w&&y>=o.y&&y<o.y+o.h; const edge=(x>=o.x&&x<o.x+o.w)||(y>=o.y&&y<o.y+o.h); if(!inside&&edge&&seen.has(x+','+y)) ok=true; }
     if(!ok) bad.push(o.name+'@'+o.x+','+o.y); }
   const npcBad=m.npcs.filter(n=>!seen.has(n.x+','+n.y)).map(n=>n.name+'@'+n.x+','+n.y);
-  const arrivals=[[20,22],[12,9],[14,9],[28,12],[28,13],[1,9],[1,10],[26,22]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
+  const arrivals=[[21,24],[12,9],[14,9],[28,12],[28,13],[3,4],[4,4],[27,21]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
@@ -47,19 +47,19 @@ with sync_playwright() as pw:
     r=pg.evaluate(REACH); print(r)
     check('every object touchable',not r['badObjects']); check('every NPC on reachable floor',not r['npcBad']); check('story arrival tiles walkable',not r['arrivals'])
     # shots of the painted street
-    for n,(x,y,d) in {'spawn':(26,22,'up'),'coffee':(4,8,'up'),'starlite':(18,8,'up'),'nickels':(24,9,'up'),'taco':(22,10,'down'),'bus':(25,14,'up'),
-                      'wardrobe':(4,19,'up'),'lofts':(10,20,'up'),'tower':(18,21,'up'),'cab':(26,22,'up'),'metro':(20,22,'down'),'west':(1,10,'left'),'south':(14,24,'down')}.items():
+    for n,(x,y,d) in {'spawn':(27,21,'up'),'coffee':(7,8,'up'),'starlite':(18,9,'up'),'nickels':(24,9,'up'),'taco':(22,10,'down'),'bus':(27,14,'up'),
+                      'wardrobe':(4,19,'up'),'lofts':(11,20,'up'),'tower':(18,20,'up'),'cab':(24,21,'up'),'metro':(21,24,'up'),'west':(3,6,'up'),'south':(14,24,'down')}.items():
         stand(pg,x,y,d); shot(pg,n)
     pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,18,9,'up'); shot(pg,'landscape')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
     # every door: walk up from the pad, land in the right building, walk back out
-    pads={'coffee':(4,8),'ramen':(11,8),'cinema':(18,8),'nickels':(24,9),'wardrobe':(4,19),'lofts':(10,20),'tower':(18,21),'lacab':(26,22)}
+    pads={'coffee':(7,8),'ramen':(12,8),'cinema':(18,9),'nickels':(24,9),'wardrobe':(4,19),'lofts':(11,20),'tower':(18,20),'lacab':(24,21)}
     for hid,(px,py) in pads.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
         stand(pg,px,py,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(700); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(1600); skip_intro(pg)
         got=pg.evaluate("()=>currentMap.id")
-        check(f'door {hid} opens its building ({got})',got==hid)
-        if got==hid:
+        check(f'door {hid} opens its building ({got})',(got==hid or (hid=='lofts' and got=='loftlobby')))
+        if got in (hid,'loftlobby'):
             pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(1800); skip_intro(pg)
             check(f'{hid} brings Tom back to the street',pg.evaluate("()=>currentMap.id==='blvd'"))
             if hid in ('lofts','lacab'): shot(pg,'out-'+hid)
@@ -68,17 +68,17 @@ with sync_playwright() as pw:
     stand(pg,14,24,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('south crosswalk leads to Jefferson Park',pg.evaluate("()=>currentMap.id==='jpark'"))
     pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
-    stand(pg,1,9,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000); skip_intro(pg)
-    check('west road leads to Griffith Park',pg.evaluate("()=>currentMap.id==='griffith'"))
+    stand(pg,3,4,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000); skip_intro(pg)
+    check('the Griffith arch leads to Griffith Park',pg.evaluate("()=>currentMap.id==='griffith'"))
     stand(pg,10,20,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(2000); skip_intro(pg)
-    check('Griffith brings Tom back to the west road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x<=2&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
+    check('Griffith brings Tom back under the arch',pg.evaluate("()=>currentMap.id==='blvd'&&player.x<=5&&player.y<=9&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     stand(pg,28,12,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('east road leads to the studio lot (chapter 5)',pg.evaluate("()=>currentMap.id==='studio'"))
-    stand(pg,1,8,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000); skip_intro(pg)
+    stand(pg,1,10,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000); skip_intro(pg)
     print('after studio exit:',pg.evaluate("()=>[currentMap.id,player.x,player.y,worlds.blvd.solid[player.y*worlds.blvd.w+player.x]]"))
     check('studio brings Tom back to the east road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=24&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     # A on a prop opens its text
-    for nm,(x,y,d) in {'Taco truck':(22,10,'down'),'Hot dog cart':(5,9,'up'),'Metro stairs':(20,22,'down'),'Cab 8':(24,23,'up'),'Bus bench':(25,14,'up'),'Shop sign':(23,9,'up')}.items():
+    for nm,(x,y,d) in {'Taco truck':(22,10,'down'),'Metro stairs':(21,24,'up'),'Cab 8':(25,23,'up'),'Bus bench':(27,13,'left'),'Shop sign':(23,9,'up')}.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(700); skip_intro(pg)
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
         got=pg.evaluate("()=>dialog.active||(typeof choice!=='undefined'&&!!choice&&choice.active)||!!document.querySelector('#toast:not([hidden])')")

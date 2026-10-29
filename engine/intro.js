@@ -48,7 +48,7 @@ function titleMenu() {
 }
 function confirmNew() {
   if(!readSave('auto')) { beginOpening(); return; }
-  openChoice('Start New','A new game replaces the autosave once it begins. Slots 1 to 3 are kept.',[
+  titleAsk('Start New','A new game replaces the autosave once it begins. Slots 1 to 3 are kept.',[
     {label:'START NEW',fn:beginOpening},
     {label:'BACK',fn:titleMenu}
   ]);
@@ -56,11 +56,11 @@ function confirmNew() {
 function loadMenu() {
   const slots=SAVE_SLOTS.filter(s=>readSave(s));
   if(!slots.length) {
-    openChoice('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
+    titleAsk('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
     return;
   }
   const nm=s=>s==='auto'?'Autosave':'Slot '+s;
-  openChoice('Load',slots.map(s=>nm(s)+': '+saveSummary(readSave(s))).join('\n'),
+  titleAsk('Load',slots.map(s=>nm(s)+': '+saveSummary(readSave(s))).join('\n'),
     slots.map(s=>({label:nm(s).toUpperCase(),fn:()=>{ endIntro(); loadGame(s); }})).concat([{label:'BACK',fn:titleMenu}]));
 }
 function endIntro() {

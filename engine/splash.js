@@ -125,6 +125,7 @@ function splashSetMode(mode,sel=0) {
   const M=SPLASH_MODES[mode],el=$('splash'),box=el.querySelector('.sp-choices');
   el.querySelector('.sp-tab').textContent=M.tab;
   $('sp-cue').textContent=M.cue;
+  const tx=el.querySelector('.sp-text'); if(tx) { tx.textContent=M.text||''; tx.hidden=!M.text; }
   const list=M.choices(); splash.list=list;
   splash.sel=Math.max(0,Math.min(list.length-1,sel));
   box.classList.toggle('grid',!M.layout&&list.length>3);
@@ -160,15 +161,40 @@ function splashPick(i) {
 // Open a submenu (remembers where to land when coming back).
 function splashOpen(mode) { sfx.select(); splashSetMode(mode); }
 function splashBack() {
+  if(splash.mode==='ask') { const b=(splash.list||[]).find(c=>c.cls==='back'); if(b) b.act(); return; }
   const up=SPLASH_PARENT[splash.mode]; if(!up) return;
   const from=splash.mode; sfx.move();
   splashSetMode(up);
   const i=(splash.list||[]).findIndex(c=>c.to===from);
   if(i>=0) { splash.sel=i; splashMark(); }
 }
-// Leave the title screen for a prompt over the town (new game warning, load list, chapter jump). BACK in that prompt
-// returns here, to the same menu and choice (splashReturn).
-function splashGo(next) { sfx.select(); unlockAudio(); splash.ret=splash.mode; splash.retSel=splash.sel; splashLeave(next); }
+// Pick from the welcome page. The prompts that follow (new game warning, load list, chapter jump) are shown on this same
+// page, in the same panel (titleAsk). BACK returns to the menu and choice the player came from (splashReturn). If the pick
+// starts a game with no prompt, the welcome page fades out over the town.
+function splashGo(next) {
+  sfx.select(); unlockAudio(); splash.ret=splash.mode; splash.retSel=splash.sel;
+  startTitle(()=>{ splash.asked=false; next(); if(!splash.asked) splashFade(); });
+}
+function splashFade() {
+  splash.active=false;
+  const el=$('splash'); if(!el) return;
+  el.classList.add('out');
+  setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
+}
+// A prompt (same shape as openChoice: name, text, [{label,fn}]) drawn on the welcome page instead of the dialogue box.
+function titleAsk(name,text,options) {
+  const el=$('splash');
+  if(!el||!splash.wired) { openChoice(name,text,options); return; }
+  splash.asked=true;
+  const was=splash.active&&!el.hidden;
+  el.hidden=false; el.classList.remove('out'); splash.active=true;
+  SPLASH_MODES.ask={tab:name,cue:'A / Enter to pick. B / Esc to go back',text:Array.isArray(text)?text.join('\n'):text,
+    choices:()=>options.map(o=>o.label==='BACK'
+      ?{name:o.label,cls:'back',act:()=>{ sfx.move(); o.fn(); }}
+      :{name:o.label,act:()=>{ sfx.select(); splash.asked=false; o.fn(); if(!splash.asked) splashFade(); }})};
+  splashSetMode('ask');
+  if(!was) { splash.last=performance.now(); requestAnimationFrame(splashFrame); }
+}
 function splashLab(i) {
   sfx.select(); unlockAudio(); splash.active=false;
   const el=$('splash'); el.classList.add('out');
@@ -198,9 +224,10 @@ function splashLeave(next) {
 // BACK from the load list or a start warning: return to the title screen where the player was.
 function splashReturn() {
   const el=$('splash'); if(!el) return false;
+  const was=splash.active&&!el.hidden;
   el.hidden=false; el.classList.remove('out');
   splash.active=true; splashSetMode(SPLASH_MODES[splash.ret]?splash.ret:'launch',splash.retSel||0);
-  splash.last=performance.now(); requestAnimationFrame(splashFrame);
+  if(!was) { splash.last=performance.now(); requestAnimationFrame(splashFrame); }
   return true;
 }
 // Gamepad: called from pollGamepad while the splash is up.

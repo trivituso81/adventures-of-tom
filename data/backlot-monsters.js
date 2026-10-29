@@ -324,6 +324,6 @@ Object.assign(MONSTERS,{
 // Map spots. The Backlot: a troublemaker on each of the three sets (held still until its story fight, data/scenes.js),
 // and crowds of extras wandering between them. Soundstage 7: fog wisps in the fog machine room, extras in wardrobe.
 // The Director's Cut waits on the stage set (hidden until the boss scene).
-const BACKLOT_MONSTER_SPOTS=[['cuecrab',6,8],['clapper',22,8],['boommoth',5,18],['extra',14,12],['extra',24,17]];
-const STAGE7_MONSTER_SPOTS=[['fogwisp',21,5],['fogwisp',19,9],['extra',3,9]];
+const BACKLOT_MONSTER_SPOTS=[['cuecrab',12,10],['clapper',3,6],['boommoth',14,5],['extra',9,11],['extra',7,17]];
+const STAGE7_MONSTER_SPOTS=[['fogwisp',19,6],['fogwisp',13,13],['extra',10,10]];
 const STAGESET_MONSTER_SPOTS=[['directorscut',10,4]];

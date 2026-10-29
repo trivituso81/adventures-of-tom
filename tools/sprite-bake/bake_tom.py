@@ -41,6 +41,9 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v1.png'),
 STRETCH = ['tired', 'start', 'full', 'side', 'crack', 'neck', 'exhale', 'fresh']
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-stretch-v1.png'), [STRETCH[:4], STRETCH[4:]]).items():
     poses['s_' + nm] = im
+CUSTOM2 = ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v2.png'), [CUSTOM2[:6], CUSTOM2[6:]], dilate=1).items():
+    poses['c_' + nm] = im
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
@@ -185,6 +188,7 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
 CUSTOM = ['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling', 'unbox', 'flick', 'brush', 'limit', 'startled', 'direct']
+CUSTOM += ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
