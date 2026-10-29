@@ -1,8 +1,8 @@
 'use strict';
 // data/townsfolk-hires-use.js: overworld sprites for Pip, Moss, Dot, Gus, Bean, Reel and Principal Pruitt, from their painted walk sheets
 // (data/townsfolk-hires.js, art/chars/<id>-ow.webp). Loads right after data/npc-sprites.js and data/ellie-hires-use.js.
-// Reel and Pruitt replace OW.reel and OW.pruitt (the old traced sets). The other five are keyed by NAME (TOWN_PAINTED, read in drawActor):
-// their look keys pip, moss, dot, gus and bean are also borrowed as stand-in bodies for Deedee, Boppy, Amy and Justin in story scenes,
+// Reel, Pruitt, Halverson, Ike, Delgado and Kowalski replace their OW sets (the old traced ones). Pip, Moss, Dot, Gus, Bean, Page and Bun are keyed by NAME (TOWN_PAINTED, read in drawActor):
+// their look keys pip, dot, gus, bean and bun are also borrowed as stand-in bodies for Deedee, Boppy, Amy and Justin in story scenes,
 // so only an actor really named Pip, Moss, Dot, Gus or Bean gets the painted art. Set TOWNSFOLK_HIRES_OFF=true (before this file) to keep the old ones.
 var TOWN_PAINTED={};
 (function() {
@@ -19,7 +19,8 @@ var TOWN_PAINTED={};
   };
   OW.reel=make('reel');
   OW.pruitt=make('pruitt');
-  for(const [name,id] of [['Pip','pip'],['Moss','moss'],['Dot','dot'],['Gus','gus'],['Bean','bean']]) {
+  for(const id of ['halverson','ike','delgado','kowalski']) OW[id]=make(id);   // school staff and visitors: their look keys are used by no one else
+  for(const [name,id] of [['Pip','pip'],['Moss','moss'],['Dot','dot'],['Gus','gus'],['Bean','bean'],['Page','page'],['Bun','bun']]) {
     OW['tf_'+id]=make(id);
     TOWN_PAINTED[name]={look:id,set:'tf_'+id};
   }

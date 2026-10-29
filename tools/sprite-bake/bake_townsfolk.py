@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bake the painted townsfolk (Pip, Moss, Dot, Gus, Bean, Reel, Principal Pruitt) into the game (overworld only).
+"""Bake the painted townsfolk (Pip, Moss, Dot, Gus, Bean, Reel, Principal Pruitt, Page, Bun, Halverson, Ike, Delgado, Kowalski) into the game (overworld only).
 
 Input : tools/sprite-bake/src/<id>-walk-v1.png (3 rows of 4: down, up, left; each stand, step, stand, step; flat magenta)
 Output: art/chars/<id>-ow.webp (painted frames, 3x the size of the rows), data/townsfolk-hires.js (rows, palette, atlas rects; do not hand-edit)
@@ -19,7 +19,8 @@ ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = 3
 # standing height in rows (Tom is 43); matches the old sprites so nobody changes size in the town
-CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 43, 'bean': 46, 'reel': 40, 'pruitt': 43}
+CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 43, 'bean': 46, 'reel': 40, 'pruitt': 43,
+        'page': 43, 'bun': 41, 'halverson': 43, 'ike': 42, 'delgado': 44, 'kowalski': 41}
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)
@@ -166,7 +167,17 @@ out = {}
 for cid, ow_h in CAST.items():
     if args.only and cid not in args.only.split(','):
         continue
-    poses = slice_sheet(os.path.join(SRC, f'{cid}-walk-v1.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]])
+    rn = [walk_names[0:4], walk_names[4:8], walk_names[8:12]]
+    try:
+        poses = slice_sheet(os.path.join(SRC, f'{cid}-walk-v1.png'), rn)
+    except SystemExit:
+        # rows 2 and 3 touch (Kowalski): split the picture at the emptiest line between them, then cut each part on its own
+        im = Image.open(os.path.join(SRC, f'{cid}-walk-v1.png')).convert('RGB'); a = np.array(im).astype(float)
+        fg = (np.minimum(a[:, :, 0], a[:, :, 2]) - a[:, :, 1]) < 120
+        cnt = fg.sum(1); y0 = int(650 + np.argmin(cnt[650:800]))
+        tmp = os.path.join('/tmp', f'{cid}-top.png'); tmp2 = os.path.join('/tmp', f'{cid}-bot.png')
+        im.crop((0, 0, im.width, y0)).save(tmp); im.crop((0, y0, im.width, im.height)).save(tmp2)
+        poses = slice_sheet(tmp, rn[:2]); poses.update(slice_sheet(tmp2, rn[2:]))
     fo = ow_h * KW / poses['down_stand'].height
     ow_big = {n: scaled_to(v, fo) for n, v in poses.items() if not n.endswith('stand2')}
     ow_big = tighten(place(ow_big, KW, 'center'), KW)

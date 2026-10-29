@@ -1,3 +1,9 @@
+## 2026-10-29: Six more painted townsfolk (Page, Bun, Mr. Halverson, Grandpa Ike, Mr. Delgado, Mrs. Kowalski)
+- Sheets `tools/sprite-bake/src/{page,bun,halverson,ike,delgado,kowalski}-walk-v1.png` added to `CAST` in `tools/sprite-bake/bake_townsfolk.py` (standing heights: Page 43, Bun 41, Halverson 43, Ike 42, Delgado 44, Kowalski 41). The file "Teacher's Apron Walk Cycle Sprite Sheet" is Mrs. Kowalski (the PTA president, the only school character left).
+- Halverson, Ike, Delgado and Kowalski replace their `OW` sets in `data/townsfolk-hires-use.js`. Page and Bun are matched by name (`TOWN_PAINTED`), because the look `bun` is the stand-in body for Mr. Pistachio in the Nine Scoops scenes.
+- Kowalski's sheet has rows 2 and 3 touching, so the baker now splits such a sheet at its emptiest line and cuts each part separately.
+- Checks: `tools/townsfolk_test.py` (13 characters) 0 fails, smoke, ch5_school_test, bg_test, bakery_test 0 fails.
+
 ## 2026-10-29: Painted townsfolk (Pip, Moss, Dot, Gus, Bean, Reel, Principal Pruitt)
 - Seven painted walk sheets (3 rows of 4: down, up, left; magenta) saved as `tools/sprite-bake/src/<id>-walk-v1.png` and baked by new `python3 tools/sprite-bake/bake_townsfolk.py` into `art/chars/<id>-ow.webp` (3x) and `data/townsfolk-hires.js` (generated, never hand-edit). Same recipe as Ellie, no head enlargement (the heads are already caricature size). Standing heights in rows: Pip 38, Dot 41, Reel 40, Gus 43, Pruitt 43, Bean 46, Moss 48 (the old villagers were 40 to 43).
 - `data/townsfolk-hires-use.js` (loads after `data/ellie-hires-use.js`): Reel and Pruitt replace `OW.reel` and `OW.pruitt`. Pip, Moss, Dot, Gus and Bean are matched BY NAME (`TOWN_PAINTED`, read in `drawActor`, `engine/town-render.js`) because the look keys pip, gus, dot and bean are also stand-in bodies for Deedee, Boppy, Amy and Justin in story scenes; those stand-ins keep the old villager art. `TOWNSFOLK_HIRES_OFF=true` restores the old sprites.
