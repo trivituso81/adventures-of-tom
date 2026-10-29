@@ -8,6 +8,7 @@ PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stageset={src:'art/stageset.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.oakpark={src:'art/oakpark.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stage7={src:'art/stage7.webp?v=20261029',px:64,img:null,ready:false};
+PLATES.crown={src:'art/crown.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.lofts={src:'art/lofts.webp',px:64,img:null,ready:false};
 PLATES.loftlobby={src:'art/loftlobby.webp',px:64,img:null,ready:false};
 // Tom's house: two painted rooms, the main floor (16 x 24 tiles) and the primary suite (16 x 15), both 64 art px per tile.
