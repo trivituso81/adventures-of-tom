@@ -6,6 +6,7 @@ PLATES.pier={src:'art/pier.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.studio={src:'art/studio.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stageset={src:'art/stageset.webp?v=20261029',px:64,img:null,ready:false};
+PLATES.oakpark={src:'art/oakpark.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stage7={src:'art/stage7.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.oak={src:'art/oak.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.lofts={src:'art/lofts.webp',px:64,img:null,ready:false};
