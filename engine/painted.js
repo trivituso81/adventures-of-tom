@@ -58,7 +58,7 @@ function paintedCanvas(rows,flash) {
   g.drawImage(A.img,R[0],R[1],R[2],R[3],0,0,R[2],R[3]);
   g.setTransform(1,0,0,1,0,0);
   if(flash) { g.globalCompositeOperation='source-in'; g.fillStyle='#fff8e6'; g.fillRect(0,0,R[2],R[3]); g.globalCompositeOperation='source-over'; }
-  else if(t&&t.rows) paintedTintPixels(g,R[2],R[3],t.rows,A.k,t.color,A.tintMode,A.tintFn);
+  else if(t&&t.rows) paintedTintPixels(g,R[2],R[3],A.tintFrac?[A.tintFrac[0]*R[3]/A.k,A.tintFrac[1]*R[3]/A.k]:t.rows,A.k,t.color,A.tintMode,A.tintFn);
   cache.set(key,c);
   return c;
 }

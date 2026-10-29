@@ -22,10 +22,10 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/boppy-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 3, 2, 3          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=92)   # idle height in grid rows
+ap.add_argument('--battle-h', type=int, default=62)   # idle height in grid rows
 ap.add_argument('--ow-h', type=int, default=38)        # standing height of the overworld sprite in rows
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()

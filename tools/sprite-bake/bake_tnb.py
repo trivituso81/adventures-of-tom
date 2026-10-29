@@ -80,7 +80,7 @@ poses['b_ko'] = swirl_eye(swirl_eye(poses['b_ko'], 65, 35, 5), 80, 26, 4)
 # ---------------------------------------------------------------- head size (match Tom's caricature proportions)
 # Tom's head (hair to chin) is about 40 to 44 percent of his height; the painted TNB's is about 33 percent (walk) to 30 percent (side view). Each frame's head is cut out,
 # scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
-HEAD_K = 1.4
+HEAD_K = 1.4   # default only; the bake solves a factor per frame (see TARGET_* below)
 TAPER = 16   # rows below the neck line over which the scale eases back to 1 (the face itself stays uniformly scaled)
 def _auto_head(img):
     a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
@@ -91,9 +91,15 @@ def _auto_head(img):
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, int(xs.min()), int(xs.max())
 # hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
-HEAD_BOX = {'b_windup': (3, 110, 7, 140), 'b_strike': (3, 112, 95, 249), 'b_leap': (18, 116, 88, 214), 'b_hurt': (3, 106, 102, 226),
-            'b_kneel': (3, 108, 5, 150), 'b_win': (12, 128, 68, 174),
-            'w_left_stand': (1, 122, 19, 138), 'w_left_step1': (2, 122, 27, 151), 'w_left_stand2': (1, 122, 26, 149), 'w_left_step2': (1, 122, 35, 159)}
+HEAD_BOX = {   # (hair top, chin = bottom of the beard, left, right, anchor column) in sheet pixels, read off each frame by eye.
+               # left/right cover ALL the hair (so the scaled copy never ends in a hard vertical cut) but stop short of cups and arms;
+               # the anchor column (where the head grows from) is the old face/neck centre.
+    'b_idle': (3, 106, 22, 166, 91), 'b_windup': (3, 110, 3, 160, 73), 'b_strike': (3, 108, 98, 252, 172), 'b_run1': (3, 101, 3, 142, 74),
+    'b_run2': (3, 100, 18, 162, 89), 'b_leap': (26, 110, 105, 218, 151), 'b_hurt': (3, 110, 95, 243, 164), 'b_kneel': (3, 114, 3, 158, 77),
+    'b_win': (20, 118, 60, 180, 121), 'b_defend': (3, 108, 40, 182, 108), 'b_cast': (6, 110, 84, 214, 146),
+    'w_down_stand': (0, 135, 10, 174, 88), 'w_down_step1': (3, 135, 7, 166, 83), 'w_down_stand2': (0, 135, 8, 168, 84), 'w_down_step2': (3, 135, 7, 164, 80),
+    'w_up_stand': (0, 133, 9, 148, 80), 'w_up_step1': (1, 133, 5, 142, 77), 'w_up_stand2': (0, 133, 7, 144, 76), 'w_up_step2': (1, 133, 4, 140, 73),
+    'w_left_stand': (1, 121, 7, 159, 78), 'w_left_step1': (2, 121, 17, 165, 89), 'w_left_stand2': (1, 121, 15, 163, 87), 'w_left_step2': (1, 121, 25, 174, 97)}
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
@@ -135,11 +141,22 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
         full = Image.fromarray(t, 'RGBA'); full.alpha_composite(Image.fromarray(out, 'RGBA'), (max(dx, 0), max(dy, 0)))
         big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
     else:
-        top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
-        ax = (x0 + x1) / 2.0
+        _bx = HEAD_BOX.get(name) or _auto_head(img)
+        top, chin, x0, x1 = _bx[:4]
+        ax = _bx[4] if len(_bx) > 4 else (x0 + x1) / 2.0
         X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
-        out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
-        arr[Y0:AY, X0:X1, 3] = 0                                  # erase the original head
+        # Below the chin (the neck blend) only hair, skin and beard are scaled: sleeves, shirt, apron and cups that cross the head box
+        # keep their own size, so no cut-off sleeve pieces appear at the box edge. Face rows are scaled whole (eye whites, teeth).
+        sub = arr[Y0:AY, X0:X1].copy(); rgb = sub[:, :, :3].astype(float)
+        mx, mn = rgb.max(2), rgb.min(2); sat = (mx - mn) / np.maximum(mx, 1)
+        headlike = (rgb[:, :, 0] >= rgb[:, :, 1]) & (rgb[:, :, 1] >= rgb[:, :, 2] - 6) & (sat > 0.42) & (rgb[:, :, 0] > 70)
+        from scipy import ndimage as _nd
+        keep = _nd.binary_fill_holes(_nd.binary_closing(headlike & (sub[:, :, 3] > 40), iterations=2))   # hair + skin + enclosed eye whites/teeth
+        keep = _nd.binary_opening(keep, iterations=1) | (keep & (sub[:, :, 3] > 40) & (sat > 0.55))   # drop thin sleeve slivers, keep hair strands
+        keep[: max(0, chin - top - 30)] |= (sub[: max(0, chin - top - 30), :, 3] > 0) & (headlike[: max(0, chin - top - 30)] | (sat[: max(0, chin - top - 30)] > 0.3))
+        warp_in = arr.copy(); warp_in[Y0:AY, X0:X1, 3] = np.where(keep, sub[:, :, 3], 0)
+        out, dx, dy = _warp_head(warp_in, X0, X1, Y0, AY, ax + pad, k, taper)
+        arr[Y0:AY, X0:X1, 3] = np.where(keep, 0, sub[:, :, 3])    # erase the original head (not the body pieces that stay)
         big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
         if name == 'b_win_off':                                     # raised fists stay in front of the bigger head
             for (a, b, sgn) in ((0, 50, -1), (165, W, 1)):          # arms only (no head pixels), sheared outward: 0 at y=100, 60 px at the fist
@@ -147,8 +164,29 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
                     d = int(round(sgn * 60 * (100 - y) / 95.0))
                     strip = img.crop((a, y, b, y + 1)); big.alpha_composite(strip, (a + pad + d, y + pad))
     return big.crop(big.getbbox())
+# Every frame's head is sized to Tom's exact head height (hair to chin) in rows, so TNB's head-to-body ratio and overall size equal Tom's.
+# Tom, measured on his baked frames: battle idle 44.5 of 100 rows; overworld facing front/back 18.2 of 42 rows; overworld side 17.5 of 42.
+# The figure height after the warp is what the bake later refits to 100 (battle) or 42 (overworld) rows, so the head factor is solved on the
+# idle / down-stand frame (bisection on the real warp) and every other frame gets the factor that gives the same head height in rows.
+TARGET_BT, TARGET_OW, TARGET_OWL = 0.445, 18.2 / 42, 17.5 / 42
+def head_cc(img, name):
+    if name == 'b_ko': return 0, 105
+    return tuple((HEAD_BOX.get(name) or _auto_head(img))[:2])
+def solve_k(img, name, ratio):
+    t, c = head_cc(img, name); lo, hi = 1.0, 3.0
+    for _ in range(14):
+        k = (lo + hi) / 2
+        if k * (c - t) / bigger_head(img, name, k=k).height < ratio: lo = k
+        else: hi = k
+    k = (lo + hi) / 2
+    return k, bigger_head(img, name, k=k).height
+_kb, _Hb = solve_k(poses['b_idle'], 'b_idle', TARGET_BT)
+_kw, _Hw = solve_k(poses['w_down_stand'], 'w_down_stand', TARGET_OW)
+print('head factor: battle idle %.3f, overworld down %.3f' % (_kb, _kw))
 for _n in list(poses):
-    poses[_n] = bigger_head(poses[_n], _n)
+    _t, _c = head_cc(poses[_n], _n)
+    _k = (TARGET_BT * _Hb if _n.startswith('b_') else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
+    poses[_n] = bigger_head(poses[_n], _n, k=_k)
 if os.environ.get('HEADSHEET'):                      # debug: all head-warped frames on grey
     _it = list(poses.items()); _cw = max(i.width for _, i in _it) + 10; _ch = max(i.height for _, i in _it) + 10
     _sh = Image.new('RGBA', (_cw * 6, _ch * -(-len(_it) // 6)), (128, 128, 128, 255))
