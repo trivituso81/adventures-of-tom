@@ -637,6 +637,23 @@ LE_AREAS.push(
     hint:'The dais is at the top. Something up there\'s turning its own pages.',
     spawn:{x:9,y:12},
     exits:[[9,13,'stacks',14,2,'down','readwood'],[10,13,'stacks',15,2,'down','readwood']],
+    // Painted plate (art/readroom.webp, engine/plate.js). '#' blocks, '.' walks. The dais (rows 2 to 3) is reached by the
+    // painted steps; the four reading tables, the globe and the gate posts block.
+    plateMask:[
+      '####################',
+      '####################',
+      '########....########',
+      '#######......#######',
+      '####............####',
+      '##................##',
+      '#######......#######',
+      '#######......#######',
+      '#######......#######',
+      '######........######',
+      '######........######',
+      '#######.#...########',
+      '#########..#########',
+      '#########..#########'],
     monsters:READROOM_MONSTER_SPOTS},
     planStacks([
       'BBBBBBBBBBBBBBBBBBBB',
@@ -654,10 +671,10 @@ LE_AREAS.push(
       'BRRRRRRRRRRRRRRRRRRB',
       'BBBBBBBBBRRBBBBBBBBB']),
     {objects:[
-      ['lamptable',2,8,3,1,'Reading table','A long oak table. Every green lamp on it\'s flickering at the same time. Like breathing.'],
-      ['lamptable',15,8,3,1,'Reading table','Another long table. Carved into it: P + M, 1974. Page won\'t say who M is.'],
-      ['lamptable',2,11,3,1,'Reading table','A table with one chair pulled out, as if someone just left. The seat is still warm. It\'s not.'],
-      ['lamptable',15,11,3,1,'Reading table','A stack of returned books, all overdue. The newest one is from 1999.'],
+      ['lamptable',2,6,5,3,'Reading table','A long oak table. Every green lamp on it\'s flickering at the same time. Like breathing.'],
+      ['lamptable',13,6,6,3,'Reading table','Another long table. Carved into it: P + M, 1974. Page won\'t say who M is.'],
+      ['lamptable',1,9,5,3,'Reading table','A table with one chair pulled out, as if someone just left. The seat is still warm. It\'s not.'],
+      ['lamptable',14,9,6,3,'Reading table','A stack of returned books, all overdue. The newest one is from 1999.'],
       ['stackglobe',17,5,1,1,'Globe','A globe on a stand. Somebody has drawn a little clock face on the Pacific Ocean. In pen.'],
       ['lectern',9,5,2,1,'Lectern','A brass lectern with nothing on it. Whatever used to sit here\'s up on the dais now.',
         {when:[{flag:'ch7-clear',text:'A brass lectern. The Unread sits on it now, open to page one, waiting for whoever is next.'}]}]]})
