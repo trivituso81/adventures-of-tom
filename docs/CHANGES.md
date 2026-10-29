@@ -1,3 +1,9 @@
+## 2026-10-29: TNB's loft is painted (map `lofts`)
+- `art/lofts.webp` (768 x 640, 12 x 10 tiles) is the loft plate, registered in `engine/plate.js` with the interior actor scale. `plateMask` in `data/maps-la.js` is traced from the painting; the loft is entered from the lobby elevator (arrive 6,8) and its door (6,9) is the elevator back down.
+- Objects re-placed on the painted furniture, same names and jokes: kiln (2,1), garment rack (4,1), pottery shelf (8,1), wheel (1,3), longboard wall (8,4), horror couch (1,6). New: coffee table (5,4) and side tables (4,6). TNB stays at (6,5).
+- `ch2Loft` scene: TNB now stands at (6,5) and Tom walks to (6,6), because the coffee table sits on the old spot.
+- Test: `tools/loft_test.py` (every object touchable, TNB on floor, door to the lobby, ch2 greeting). smoke.py FAILS: []. No spoken lines changed.
+
 ## 2026-10-29: Lobby of TNB's building (map `loftlobby`)
 - New painted room `art/loftlobby.webp` (768 x 640, 12 x 10 tiles, registered in `engine/plate.js` with the interior actor scale). Spring Street's LOFTS door now opens on the lobby (spawn inside the gate at 6,8); the street gate is the exit (6,9 and 5,9). The brass elevator doors (5,1 and 6,1) go up to TNB's loft (`lofts`, arrive at 6,8). The loft's door is now the elevator back down (arrive at the lobby doors, 5,3), not the street.
 - Engine hooks: `house.enterMap` (battle-draw.js `switchMap`), `houseById.loftlobby` alias to the LOFTS house (engine/la.js, so minimap, music and exit work; the door count is unchanged), room specs `exitTo` and `portals` plus `name` (engine/world.js).
