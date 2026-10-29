@@ -26,17 +26,34 @@ function b2Open(mode,sel) {
 // The front row centers on the old Grump spot (x 168, feet at y 264), where every move animation was drawn,
 // so a single enemy lines up exactly. The back row stands behind it, further left. Slots stay put when someone falls.
 const B2_REF={x:168,y:264};
+const B2_BOSS_GROW=1.5;   // how much bigger a boss is drawn than a regular monster of the same art
 function b2LayoutFoes() {
   const live=B2.foes.filter(f=>!f.dead);
   const F=live.filter(f=>f.row==='front'),Bk=live.filter(f=>f.row==='back'),n=live.length;
   const want=[0,96,80,68,60][n]||60;
-  const size=(f,k)=>{ const base=f.def.scale||3,w=f.def.sprite[0].length; return Math.max(base*.7,Math.min(base*(f.boss?1.5:1.3),(f.boss?want*1.35:want)/w))*k; };
+  const size=(f,k,wn=want)=>{ const base=f.def.scale||3,w=f.def.sprite[0].length; return Math.max(base*.7,Math.min(base*(f.boss?1.5:1.3),(f.boss?wn*1.35:wn)/w))*k; };
   const fy={1:[264],2:[224,302],3:[218,262,306]},fx={1:[168],2:[184,156],3:[188,158,188]};
   const by={1:[236],2:[214,268]},bx={1:[84],2:[92,70]};
   // A boss holds the middle of the front row.
   const fr=F.slice(); const bi=fr.findIndex(f=>f.boss); if(bi>=0&&fr.length===3&&bi!==1) { const [b]=fr.splice(bi,1); fr.splice(1,0,b); }
-  fr.forEach((f,k)=>{ f.px=fx[fr.length][k]; f.py=fy[fr.length][k]; f.sc=size(f,1); });
-  Bk.forEach((f,k)=>{ f.px=bx[Bk.length][k]; f.py=by[Bk.length][k]; f.sc=size(f,.9); });
+  // Bosses are drawn B2_BOSS_GROW (1.5x) bigger than the size above. A very tall boss (Old Ironbelly, the Red Pen) is
+  // stood a little lower and capped so its head stays on the screen.
+  const grow=(f,alone)=>{
+    if(!f.boss) return;
+    const H=f.def.sprite.length; f.sc=size(f,1,96)*B2_BOSS_GROW;   // sized as if it stood alone, so helpers never shrink it
+    if(alone&&H*f.sc>f.py-44) f.py=Math.min(f.py+30,296);
+    f.sc=Math.min(f.sc,(f.py-16)/H);
+  };
+  const boss=fr.find(f=>f.boss),crowd=!!boss&&fr.length>1;
+  fr.forEach((f,k)=>{ f.px=fx[fr.length][k]; f.py=crowd&&f.boss?264:fy[fr.length][k]; f.sc=size(f,1); grow(f,fr.length===1||crowd); });
+  Bk.forEach((f,k)=>{ f.px=bx[Bk.length][k]; f.py=by[Bk.length][k]; f.sc=size(f,.9); grow(f,false); });
+  // A boss with helpers (they are called in mid-fight): the big boss stands at the left and the helpers stand in front
+  // of it on the right, so none of them is hidden behind it. Helpers sit lower than the boss, so they draw on top.
+  if(crowd) {
+    const others=fr.filter(f=>f!==boss),half=boss.def.sprite[0].length*boss.sc/2;
+    boss.px=Math.min(168,Math.max(100,Math.round(half+4)));
+    others.forEach((f,k)=>{ f.px=[272,294][k]; f.py=others.length===1?288:[266,302][k]; });
+  }
 }
 function b2FoeCanvasPos(f) { const R=f.def.sprite; return {x:f.px,y:f.py,w:R[0].length*f.sc,h:R.length*f.sc}; }
 // Point over the enemy's head in the 192x108 stage units that pop() and battle.texts use.

@@ -59,7 +59,7 @@ function draw(time) {
     else drawActor(item.value);
   }
 
-  if(intro.active) drawIntroWorld(time); else drawTarget(facingTarget());
+  if(intro.active) drawIntroWorld(time); else { drawTarget(facingTarget()); if(typeof twDraw==='function') twDraw(time); }
   if(kiss) {
     const t=elapsedTime-kiss.start;
     if(t>2.6) kiss=null;
@@ -379,7 +379,7 @@ if('ResizeObserver' in window)
   new ResizeObserver(resize).observe(game);
 
 resize();
-showToast('Wander with the D-pad or arrow keys. A / Enter says hello.',5);
+showToast('Tap the map to walk, or use the D-pad. A / Enter says hello.',5);
 
 let previous=performance.now();
 

@@ -22,5 +22,9 @@ sp.run1=set('run1',F.runA); sp.run2=set('run2',F.runB); sp.run=[sp.run1,sp.run2]
 sp.runFlip=[mir('_rf1',F.runA),mir('_rf2',F.runB)];
 set('sit',F.sitL); set('toast',F.sitL); set('sitR',F.sitR); set('whisper',F.whisper);
 set('point',F.point); set('spread',F.gasp); sp.expr=sp.spread; set('carry',F.carry); set('hug',F.hug); set('shrug',F.shrug);
-set('hip',F.hips); set('clap',F.clap); set('cheer',F.cheer); sp.celeb=sp.cheer; sp.celeb2=sp.cheer; mir('celebFlip',F.cheer);
+set('hip',F.hips); set('clap',F.clap);
+// sp.cheer is the two-frame list engine/battle-draw.js plays for victory and level-up cheers, so keep it a list of frames
+// (the single frame lives in sp.celeb); assigning the frame itself to sp.cheer made the cheer draw nothing.
+const cheerFrame=set('cheer',F.cheer); sp.celeb=cheerFrame; sp.celeb2=cheerFrame; const cheerFlip=mir('celebFlip',F.cheer);
+sp.cheer=[cheerFrame,cheerFlip];
 })();

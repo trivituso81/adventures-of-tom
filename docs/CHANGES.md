@@ -1,5 +1,12 @@
 # Change log (newest first)
 
+## 2026-10-28: Tap to walk, Squishy Delivery, enemy facing (synced from the artifact scratch copy)
+- Tap to walk (`engine/tapwalk.js`): tap the floor, an NPC, an object or a door and Tom walks there, followers trailing. Any key, stick, dialogue, menu, battle or cutscene cancels it. Toast text updated.
+- Enemies now all face right (`data/enemy-facing.js` mirrors the left-facing sprites once at load). Bosses with helpers draw 1.5x, boss on the left, helpers in front.
+- Squishy Delivery (Grace and Tom Tombo) uses the version with Grace kneeling to beg (`BATTLE_SPRITES.grace.beg`).
+- Cheer fix: Amy, Boppy, Deedee, TNB victory and level-up cheer now draws. Small Rose pixel fix.
+- Reworded spoken lines (need re-bake only if the baked clip text differs; both full clips are already baked): `grace.tombo` is 'Ta-Ta, I need a new squishy! Pleeease!' and `tom.tombograce` is 'Fine. One squishy. Just one.' `CLIP_PARTS` emptied.
+
 ## 2026-10-28: Painted plates for four Long Island areas
 - The Square, Rivituso Row, Grump Hollow and the Whispering Marsh (map id `reeds`) now use Tom's painted art (`art/*.webp`, drawn by `engine/plate.js`). The tile grid stays underneath as the invisible walk map. Row, Hollow and Marsh have a `plateMask` in `data/maps-le.js` ('#' blocks, '.' walks); doors, exits and spec objects stay as they were, spec objects are no longer drawn (flag `baked`), runtime props still are.
 - Rivituso Row is re-laid to the painting: Gregori (7,3), Rivituso (18,7 door), Aunt Ellie's house (id `elliehouse`, now at 9,11). Exits to the Square, Pier, Hollow and Marsh moved; chapter 1, 3, 9, 13, 14 and Nine Scoops coordinates remapped. Tests: `tools/ch14_test.py` stand positions updated.

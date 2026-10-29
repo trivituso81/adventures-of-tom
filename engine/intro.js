@@ -187,7 +187,7 @@ function finishOpening() {
   trail.length=0; trail.push({x:r.x,y:r.y},{x:g.x,y:g.y},{x:player.x,y:player.y});
   sfx.levelChime();
   showToast('Grace and Rose join the party!',3);
-  setTimeout(()=>{ if(!dialog.active) showToast('Wander with the D-pad or arrow keys. A / Enter says hello.',4); },3400);
+  setTimeout(()=>{ if(!dialog.active) showToast('Tap the map to walk, or use the D-pad. A / Enter says hello.',4); },3400);
   saveGame('auto',true);
 }
 

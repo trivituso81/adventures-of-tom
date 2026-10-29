@@ -233,6 +233,7 @@ function pressAction() {
 }
 
 function update(dt) {
+  if(typeof twGuard==='function') twGuard();
   if(menuOpen||shopOpen||battle.active) return;
   if(intro.active) { updateIntro(dt); return; }
   if(transition) {
@@ -264,9 +265,10 @@ function update(dt) {
   if(!player.move) {
     const dir=moveInput();
     if(dir) {
+      if(typeof twCancel==='function') twCancel();
       if(movePlayer(dir)) sfx.step();
       else if(performance.now()-lastBump>260) { lastBump=performance.now(); sfx.bump(); }
-    }
+    } else if(typeof twStep==='function') twStep(dt);
   }
   // A follower step started this frame waits a frame, so it stays in lockstep with Tom instead of finishing early.
   for(const f of followers) if(f.move) { if(f.move.fresh) { f.move.fresh=false; continue; } advanceMove(f,dt); }

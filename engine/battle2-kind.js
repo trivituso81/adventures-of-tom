@@ -281,17 +281,15 @@ SC.tb_rec=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez(ms/250)*(ms>P.off?1-ez((ms-P.
   const th=ms<P.th1?ez(seg(ms,P.th0,P.th0+300)):1-ez(seg(ms,P.th1,P.th1+260)),pk=Math.sin(seg(ms,P.pk0,P.pk1)*Math.PI)*.55;
   gfx.globalAlpha=1; thumb(Math.max(th,pk),s.t*5); };
 B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
-  const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
+  const TS=34,T0=ST.unit(tom),T=Object.assign({},T0,{x:T0.x+TS}),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tgt=(E2.targets||[]).find(t=>t.side==='foe')||list.find(f=>f.row==='front')||list[0],F=ST.foe(tgt);
-  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,GH=gsp.idle.length*gsp.scale,GW=gsp.idle[0].length*gsp.scale;
-  // Grace stands in front of Tom (to his left, facing him) with a clear gap. If the monsters leave no room, Tom steps right.
-  const tx=cl(Math.max(T.x,GR.x1+6+GW+10+TW/2),T.x,470),gx=tx-TW/2-GW/2-10,gb=Math.min(316,T.base+4);
-  // Voice-anchored timing: Grace's line is 3.15 s and Tom's "Fine." is 1.3 s of real audio. Game time runs K times faster than the
-  // clock at 2x speed, so those two spans are stretched by K and the squishy can never fall before "Fine." has been said.
-  const K=b7Speed(),g0=700,gEnd=g0+3150*K,fine=gEnd+650,fineEnd=fine+1300*K,box=fineEnd+100;
-  const P={g0,gEnd,sigh:gEnd+350,fine,yes:fineEnd,box,rattle:box+650,open:box+1250,out:box+1400,land:box+2250,settle:box+3250,pop:box+3650,back:box+2950,end:box+4250};
-  const stomps=[.08,.4,.72].map(f=>g0+f*3150*K);
-  if(typeof warmLine==='function') { warmLine('grace','Ta-Ta, I need a new squishy!'); warmLine('tom','Fine.'); }
+  const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,GH=gsp.idle.length*gsp.scale;
+  const GW=gsp.idle[0].length*gsp.scale,gx=Math.max(GR.x1+GW/2+2,T.x-TW/2-GW/2-4),gb=Math.min(316,T.base+22); // Grace stands in front of Tom (toward the monsters, a step lower), never on top of him
+  // Timing is built around the two baked clips, which are not touched: Grace's line runs 4.8 s and starts the moment the scene does;
+  // Tom caves 1.2 s into it (he knows how this ends), so the two overlap about 2 s, no more than before, and his clip (5.6 s) ends
+  // at 6.8 s. The box arrives on his second phrase and the squishy lands as Grace finishes begging; the move ends 0.5 s after the
+  // closing message, so his last word finishes while the pair walk home.
+  const P={plead0:650,plead1:4400,sigh:900,fine:1200,box:3060,rattle:3460,open:3820,out:3920,land:4450,settle:5150,pop:5450,back:5150,end:5550};
   const D=P.end,sky={x:F.x,y:Math.max(64,F.top-120)};
   const st={gx:G.x,gb:G.base};
   // squishy die: pink glittery cube, four pips and a squishy little face in the middle
@@ -318,27 +316,25 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   pathOf(fxP,D,(ms,c)=>{ const sp=c.sp; let x,y,f=sp.flip;
     if(ms<650) { const k=ez(ms/650); x=lerp(c.origX,gx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.back) { x=gx; y=gb;
-      for(const t0 of stomps) if(ms>t0&&ms<t0+260) y-=Math.sin(seg(ms,t0,t0+260)*Math.PI)*9;
-      if(ms>P.g0&&ms<P.gEnd) f=mirrorRowsCached(sp,'expr');   // pointing at Tom while she tells him
-      if(ms>P.yes&&ms<P.yes+900) { y-=Math.abs(Math.sin(seg(ms,P.yes,P.yes+900)*Math.PI*2))*18; f=sp.celebFlip||sp.flip; }
+      if(ms<P.land&&sp.begFlip) { f=sp.begFlip; y+=Math.abs(Math.sin(seg(ms,P.plead0,P.plead1)*Math.PI*6))*-2; }
       if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celebFlip||sp.flip; } }
     else { const k=ez(seg(ms,P.back,P.back+600)); x=lerp(gx,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     st.gx=x; st.gb=y; return {cx:x,base:y,frame:f}; });
   // Tom: stays put, sighs, shrugs and says fine, then celebrates the landing.
   pathOf(fxT,D,(ms,c)=>{ const sp=c.sp; let y=c.origBase,f=sp.idle;
-    if(ms>P.sigh&&ms<P.yes) { f=sp.expr||sp.idle; y+=Math.sin(seg(ms,P.sigh,P.sigh+500)*Math.PI)*2; if(ms>P.fine-100&&ms<P.fine+500) y-=Math.sin(seg(ms,P.fine-100,P.fine+500)*Math.PI*2)*4; }
+    if(ms>P.sigh&&ms<P.fine+800) { f=sp.expr||sp.idle; y+=Math.sin(seg(ms,P.sigh,P.sigh+500)*Math.PI)*2; if(ms>P.fine-100&&ms<P.fine+500) y-=Math.sin(seg(ms,P.fine-100,P.fine+500)*Math.PI*2)*4; }
     if(ms>P.land&&ms<P.land+900) f=sp.celeb;
-    const cx=ms<P.back?lerp(c.origX,tx,ez(seg(ms,0,650))):lerp(tx,c.origX,ez(seg(ms,P.back,P.back+500)));
-    return {cx,base:y,frame:f}; });
+    const sh=ms<P.back?ez(ms/450):1-ez(seg(ms,P.back,P.back+600)); return {cx:c.origX+TS*sh,base:y,frame:f}; });
   scene('tb_draw',D/1000,{back:false,draw:(s,u,ms)=>{
-    const gy=st.gb-GH,mx=tx-TW/2+10*tsp.scale,my=T.base-TH+17*tsp.scale;
-    // bossy: a burst of emphasis lines beside her head on each stomp, no begging
-    for(const t0 of stomps) if(ms>t0&&ms<t0+400) { const q=seg(ms,t0,t0+400); gfx.globalAlpha=1-q;
-      for(let j=0;j<3;j++) { const a=-.5+j*.5-Math.PI/2+.4,r0=22+q*8,r1=r0+10; Ln(st.gx+14+Math.cos(a)*r0,gy+8+Math.sin(a)*r0,st.gx+14+Math.cos(a)*r1,gy+8+Math.sin(a)*r1,3,CREAM); } gfx.globalAlpha=1; }
+    const gy=st.gb-GH,mx=T.x-TW/2+10*tsp.scale,my=T.base-TH+17*tsp.scale;
+    // begging: clasped hands in front of her chest, shiny puppy-eye twinkles and a tear
+    if(ms>P.plead0-100&&ms<P.land-100) { const tw=(Math.sin(ms/110)+1)/2; 
+      gfx.globalAlpha=.5+.5*tw; star(st.gx+9,gy+GH*.2,3+tw*2,'#ffffff'); star(st.gx+20,gy+GH*.2,2.4+(1-tw)*2,'#ffffff'); gfx.globalAlpha=1;
+      if(ms>P.plead0+400) E(st.gx+21,gy+GH*.3+((ms/40)%10),1.6,2.4,'#9fd8ff'); }
     // Tom's sigh
     if(ms>P.sigh&&ms<P.sigh+900) puff(mx,my,seg(ms,P.sigh,P.sigh+900));
     // the gift box floats down from the sky, rattles, then pops open
-    if(ms>P.box&&ms<P.out+500) { const k=ez(seg(ms,P.box,P.box+500)),op=ez(seg(ms,P.open,P.open+260)),wob=ms>P.rattle&&ms<P.open?Math.sin(ms/28)*(.12+seg(ms,P.rattle,P.open)*.1):0,fl=Math.sin(ms/260)*3;
+    if(ms>P.box&&ms<P.out+500) { const k=ez(seg(ms,P.box,P.box+420)),op=ez(seg(ms,P.open,P.open+260)),wob=ms>P.rattle&&ms<P.open?Math.sin(ms/28)*(.12+seg(ms,P.rattle,P.open)*.1):0,fl=Math.sin(ms/260)*3;
       gfx.globalAlpha=k*(1-ez(seg(ms,P.out+250,P.out+500))); if(op>0) rays(sky.x,sky.y-4,op*(1-seg(ms,P.out+100,P.out+500)));
       giftBox(sky.x,lerp(sky.y-90,sky.y,k)+fl,lerp(.2,1.4,k),op,wob); gfx.globalAlpha=1; }
     // the dice squishy tumbles out and drops onto the front monster
@@ -348,13 +344,11 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       if(ms>P.settle) { const k=seg(ms,P.settle,P.pop); gfx.globalAlpha=1-k; sc*=1+k*.5; }
       dieSq(x,y,sc,rot,sq,ms); gfx.globalAlpha=1; } }});
   ST.play(E2,[
-    [0,()=>{ setMessage('TOMBO! Grace needs a new squishy.'); B2.aim=null; S('click'); }],
-    [g0,()=>{ say('grace','tombo'); }],
-    ...stomps.map(t0=>[t0,()=>S('bump')]),
-    [g0+1000,'Grace is not asking. She is informing.'],
+    [0,()=>{ setMessage('TOMBO! Grace needs a new squishy.'); B2.aim=null; S('click'); say('grace','tombo'); S('bump'); }],
+    [500,'Her puppy eyes are on full power.'],
     [P.sigh,()=>{ S('whoosh'); setMessage('Tom sighs. He knows how this ends.'); }],
-    [P.fine,()=>{ say('tom','tombograce'); word('FINE.',tx-20,T.base-TH-14,CREAM,4,1); }],
-    [P.yes,()=>{ word('YAY!',gx+10,gb-GH-14,GOLD,4,1); S('cheer'); }],
+    [P.fine,()=>{ say('tom','tombograce'); word('FINE.',T.x-20,T.base-TH-14,CREAM,4,1); }],
+    [3280,()=>{ word('PLEEASE!',gx+10,gb-GH-14,PINK,4,1.2); S('squeak'); }],
     [P.box,()=>{ setMessage('A gift box floats down from the sky.'); S('whoosh'); }],
     [P.rattle,()=>{ S('squeak'); }],
     [P.open,()=>{ S('ding'); S('chime2'); setMessage('The box pops open!'); scene('tb_rings',.7,{x:sky.x,y:sky.y,r:70,c:GOLD,w:3}); }],
@@ -365,8 +359,10 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal');
       list.forEach((f,k)=>{ const q=ST.foe(f); for(let j=0;j<2;j++) battle.props.push({kind:'dheart',x0:q.x,y0:q.mid,x1:q.x+(j?18:-18),y1:q.top-30,arc:20,spin:false,r:8,t:-(k*.1+j*.15),dur:.7}); }); }],
     ['hf',P.land],
+    [P.land+100,()=>{ word('YAY!',gx+10,gb-GH-14,GOLD,4,1); S('cheer'); }],
     [P.land+350,()=>{ S('fanfare'); setMessage('Warm, pink and glittery. Everybody feels it.'); }],
-    [P.end,'end','The party is healed and fresh. The monsters got a squishy to the face, and they kind of loved it.']]);
+    [P.end,()=>setMessage('The party is healed and fresh. The monsters got a squishy to the face, and they kind of loved it.')],
+    [P.end+500,()=>checkEnemy()]]);
 };
 // Right-facing copy of a frame, made once per sprite.
 const mirCache=new Map();

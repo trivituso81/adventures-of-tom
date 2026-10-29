@@ -441,9 +441,9 @@ const ROSE_BT={pal:{"a":"#050404","b":"#28140c","c":"#142633","d":"#4a2618","e":
     '......ahruuuuuuuknnhedamka.....',
     '......aeuuuuuuuuukglngddkea....',
     '......agauuuddduurghhghekha....',
-    '.......aaauuuuuluuneaglggha....',
-    '.......aaauuaaxauuuduualglga...',
-    '.......aaauuaazuuuunkuakilgaa..',
+    '.......auuuuuuuluuneaglggha....',
+    '.......aaxauaaxauuuduualglga...',
+    '.......aazuuaazuuuunkuakilgaa..',
     '.......auuuuuuuuuuunlraieklha..',
     '.aaaa..auuuuuuuuuuuuuaehdeila..',
     '.auua...aubhbauuuulaadgekeglaa.',
@@ -484,9 +484,9 @@ const ROSE_BT={pal:{"a":"#050404","b":"#28140c","c":"#142633","d":"#4a2618","e":
     '.......ainuuuuuurgnheeapbka.....',
     '.......aeauuuuuuukhllidaekaa....',
     '.......aauuuudbbuueggheiekea....',
-    '........aauuuuaauuuedagkeggaa...',
-    '........aaauuaaxauueduuakhlea...',
-    '..aaa...auuuuaazuuuerkuahglha...',
+    '........auuuuuaauuuedagkeggaa...',
+    '........aaxauaaxauueduuakhlea...',
+    '..aaa...aazuuaazuuuerkuahglha...',
     '.aaaa...auuuuuuuuuululuaieilea..',
     'aruuaa..auuuuuuuuuuluuaeiegkga..',
     'auuuuu...aubebuuuuuaaadeiehleaa.',
@@ -662,6 +662,45 @@ for(const k in BATTLE_SPRITES) {
   if(BATTLE_SPRITES[k].run) BATTLE_SPRITES[k].runFlip=BATTLE_SPRITES[k].run.map(f=>f.map(r=>r.split('').reverse().join('')));
 }
 BATTLE_SPRITES.rose.mouth={col:9,row:16};
+// Grace's begging pose (Squishy Delivery): kneeling, praying hands under her chin. begFlip faces right.
+BATTLE_SPRITES.grace.beg=[
+  '..................a............',
+  '...........aaaaaaaaa...........',
+  '.........aaffhhheehfaaa........',
+  '........aammmmphleefeeaa.......',
+  '.......ahheeefppehlfffha.......',
+  '......aampheefiflpfeffffa......',
+  '......apmicqqttleilefffea......',
+  '.....aapcqttttttfffifffiea.....',
+  '.....aahattttttttiffmfeifa.....',
+  '.....aaeattttttttiiefpfffa.....',
+  '......aeatttttttbteiffmfffa....',
+  '......aiaattttaattqffelmfia....',
+  '......ahaatttaazattfttafmfha...',
+  '.......aabttttaztttmlmteefifa..',
+  '........atqaattttttqtpteemfia..',
+  '..........attaattttqafahehmhha.',
+  '.........atttttaatqaaaclfchpha.',
+  '........atqtttqttaacccfhlpehma.',
+  '........atqttqtttaavsaecemmcfla',
+  '.......aatqttqttqavyyyaaeelfela',
+  '........aattttttaaaxyyyaaeemfa.',
+  '.........aayyyyyattasyygaeciha.',
+  '..........cyxyyattttaaittafclia',
+  '..........ayyxyatttttttttaachaa',
+  '..........axyxyaatttttttttaeea.',
+  '..........ayyyyyvaapttttttafa..',
+  '..........avyxxyyyxvvaaaaaa....',
+  '.........addgjbdbgdddjgaa......',
+  '........aaddgkddbgdddjdddaa....',
+  '.......addkggdddddgdgddddgaa...',
+  '......addgggdddddddddgdgdddaaa.',
+  '.....adkggddaadddddaaddddgaaaaa',
+  '.....addggdaaauuzzzraaaauuzzra.',
+  '.....aaaaaaa.aauuzzzraa.aazzza.',
+  '..............aaaaaaaa..aaaaaa.'
+];
+BATTLE_SPRITES.grace.begFlip=BATTLE_SPRITES.grace.beg.map(r=>r.split('').reverse().join(''));
 
 function drawSprite(rows,pal,x,y,scale,opts={}) {
   const {flash=false,alpha=1,lean=0}=opts;
