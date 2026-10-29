@@ -137,7 +137,7 @@ function finalText(l){
   const d=CFG[l.ch];let sc=(S.scripts[l.key]!=null?S.scripts[l.key]:SCRIPTS[l.key]||'[natural] '+l.text).trim();
   if(!/^\[/.test(sc))sc='[natural] '+sc;
   let first=true;
-  return sc.replace(/\[([^\]]*)\]/g,(m,inner)=>{const parts=[];if(first&&d.direction)parts.push(d.direction);first=false;parts.push(d.accent);if(inner.trim())parts.push(inner.trim());return '['+parts.join(', ')+']';});
+  return sc.replace(/\[([^\]]*)\]/g,(m,inner)=>{const parts=[];if(first&&d.direction)parts.push(d.direction);first=false;if(d.accent)parts.push(d.accent);if(inner.trim())parts.push(inner.trim());return '['+parts.join(', ')+']';});
 }
 const sentHtml=l=>'Sent: '+esc(finalText(l)).replace(/\[([^\]]*)\]/g,'<b>[$1]</b>');
 
