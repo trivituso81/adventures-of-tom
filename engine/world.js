@@ -207,6 +207,8 @@ function makeRoom(spec) {
   map.portals.set(key(dx,dy),{kind:'exit',house});
   map.npcNoGo.add(key(dx,dy));
   map.npcNoGo.add(key(dx,dy-1));
+  if(spec.door2) { const [ex,ey]=spec.door2; tile(map,ex,ey,'exit'); map.portals.set(key(ex,ey),{kind:'exit',house}); map.npcNoGo.add(key(ex,ey)); map.npcNoGo.add(key(ex,ey-1)); }
+  if(spec.spawn) map.spawn={...spec.spawn};
   map.rugs.push({x:spec.rug[0],y:spec.rug[1],w:spec.rug[2],h:spec.rug[3]});
 
   placeObjects(map,spec.objects);

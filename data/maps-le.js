@@ -592,7 +592,7 @@ LE_AREAS.push(
     hint:'Fiction top left, Nonfiction top right, Picture Books at the bottom. The Reading Room is at the top.',
     spawn:{x:1,y:10},
     wild:true,
-    exits:[[0,10,'library',11,2,'down','stairsup'],[14,1,'readroom',9,12,'up','hallwood'],[15,1,'readroom',10,12,'up','hallwood']],
+    exits:[[0,10,'library',17,5,'down','stairsup'],[14,1,'readroom',9,12,'up','hallwood'],[15,1,'readroom',10,12,'up','hallwood']],
     monsters:STACKS_MONSTER_SPOTS,
     // Painted plate (art/stacks.webp, engine/plate.js). '#' blocks, '.' walks. The runner leads from the Reading Room doors (top) to the hall;
     // the hall (rows 8 to 10) joins the left exit (0,10), the Fiction and Nonfiction lanes (row 7) and the gap (x 14 to 16) down to Picture Books.
@@ -1052,12 +1052,32 @@ const LE_ROOMS=[
       ['shelf',10,3,1,4,'Recipe shelf','Every recipe begins with: "First, believe in butter."'],
       ['pot',0,6,2,2,'Flour fern','A flour-dusted fern. It seems to be self-raising.'],
       ['pot',10,7,1,1,'Roll basket','A basket of warm rolls. A tag says they are all named Gerald.']]},
-  {id:'library',w:13,h:11,
+  {id:'library',w:20,h:17,door:[10,16],door2:[9,16],spawn:{x:10,y:14},
     style:{floor:'#c7bbbd',alt:'#d6cccb',wall:'#a69ba8',trim:'#e2d6cf',pattern:'wood',rug:'#9992ad'},
-    walls:[[6,1],[6,2],[6,3],[6,4]],
-    rug:[3,6,6,3],
+    rug:[6,6,8,5],
+    // Painted plate (art/library.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Shelf wall and staff door along the top, window counter and reading desk left, round table on the rug, tall stacks and the
+    // cactus table right. The gate posts leave one carpeted aisle (x8-11) down to the street door at the bottom.
+    plateMask:[
+      '####################',
+      '####################',
+      '####################',
+      '####################',
+      '####################',
+      '##................##',
+      '##...............###',
+      '##......####.....###',
+      '#####...####......##',
+      '#####...####......##',
+      '#####.............##',
+      '######...........###',
+      '##...............###',
+      '########....########',
+      '########....########',
+      '########....########',
+      '#########..#########'],
     npcs:[
-      {name:'Page',x:6,y:7,look:'page',lines:[
+      {name:'Page',x:10,y:11,look:'page',roam:2,lines:[
         'Please whisper. The dictionaries are sleeping.',
         "Someone shelved a sandwich under 'S'.",
         'Technically correct. Deeply concerning.'],
@@ -1065,11 +1085,12 @@ const LE_ROOMS=[
               {...CH7_ON,flag:'ch7-page',lines:['The Stacks are through the staff door. Please be careful. And please don\'t answer the books.','I\'m fine. Everything is fine. The dictionaries haven\'t slept in a week.']},
               {...CH7_ON,lines:['It\'s fine. Everything is fine. Please whisper.','...Did you hear that? That wasn\'t me. I\'d know my own shush.']}]}],
     objects:[
-      ['shelf',1,2,4,1,'Serious books','A book called "Advanced Napping" has fallen asleep.'],
-      ['shelf',8,2,3,1,'Less serious books','Volume three of "How to Count" is labeled volume banana.'],
-      ['desk',2,7,2,1,'Reading desk','The bookmark says: "You were probably around here."'],
-      ['pot',10,8,1,1,'Library cactus','A cactus is reading a very prickly romance.'],
-      ['stacksdoor',11,1,1,1,'Staff door','STAFF ONLY. THE STACKS. A little brass sign under it: SHHH.',{stacks:true,
+      ['shelf',2,3,6,2,'Serious books','A book called "Advanced Napping" has fallen asleep.'],
+      ['shelf',11,3,4,2,'Less serious books','Volume three of "How to Count" is labeled volume banana.'],
+      ['desk',3,11,3,1,'Reading desk','The bookmark says: "You were probably around here."'],
+      ['table',8,7,4,3,'Reading table','A vase of daisies sits on a stack of overdue books. The daisies are not sorry.'],
+      ['pot',17,11,2,2,'Library cactus','A cactus is reading a very prickly romance.'],
+      ['stacksdoor',16,4,2,1,'Staff door','STAFF ONLY. THE STACKS. A little brass sign under it: SHHH.',{stacks:true,
         when:[{chapter:7,flag:'ch7-page',text:'STAFF ONLY. THE STACKS. The door is unlocked. Cold air comes up the stairs, and a lot of whispering.'},
               {...CH7_DONE,text:'STAFF ONLY. THE STACKS. Somebody has added a second sign: STORY TIME, SATURDAYS, 10 AM. ALL BOOKS WELCOME.'}]}]]},
   {id:'greenhouse',w:12,h:10,

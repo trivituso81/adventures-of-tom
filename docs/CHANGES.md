@@ -1,3 +1,11 @@
+## 2026-10-28: Painted plate for the Hush Library
+- The Hush Library (map id `library`) now uses Tom's painting (`art/library.webp`, 1280 x 1088, 20 x 17 tiles at 64 px, entry in `PLATES`). The room grew from 13 x 11 to 20 x 17.
+- Reading the grid image: blue (10,16) street door, green (10,14) arrival spot, purple (10,11) Page, orange (17,2) staff door. The teal dot (16,13) sits on the low wall, so it was not used.
+- Street door is now two tiles (9,16) and (10,16); `makeRoom` gained `door2` and `spawn` options. The staff door is at (16,4) 2 wide and the Stacks stairs now arrive at (17,5).
+- Objects re-laid onto the painting: serious books (2,3), less serious books (11,3), reading desk (3,11), cactus table (17,11), plus a new Reading table on the rug (8,7) with one new unvoiced line. Page roams 2 tiles.
+- New `tools/library_test.py`: every object touchable, no walkable island, Page answers, staff door to the Stacks, street door to town, portrait and landscape shots.
+- Known roughness: minimap still draws the old tile look. Not reworded: no spoken lines changed.
+
 ## 2026-10-28: Painted plate for Sprout House (the greenhouse)
 - Sprout House (map id `greenhouse`, the Square's greenhouse interior) now uses Tom's painting (`art/greenhouse.webp`, 768 x 640, 12 x 10 tiles at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (6,9) and spawn (6,8) are unchanged.
 - Walkable: the strip in front of the beds, the aisle either side of the barrel plant, the green rug, the arch (x 5 and 6, rows 8 and 9). Blocked: the glass wall, back bench, both potting beds, the barrel plant, the plant stool and hose on the left, the gardening shelf and plants on the right, the hedges and gate posts at the bottom.
