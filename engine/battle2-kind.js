@@ -397,6 +397,7 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const S0={x:T.x,y:T.base,rot:0,dir:-1,bank:0,rx:0,rb:0,rrot:0};
   const at=ms=>{ let i=0; while(i<K.length-2&&ms>K[i+1][0]) i++; const a=K[i],b=K[i+1],k=cl((ms-a[0])/Math.max(1,b[0]-a[0])),e=i>=1&&i<=4?k:ez(k);
     return [lerp(a[1],b[1],e),lerp(a[2],b[2],e),i]; };
+  const skinOn=ms=>rideSkin('biplane',null)&&ms>=P.wingIn&&ms<P.arrive;   // the painted pair replaces Tom, Rose and the hand-drawn wings
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp,[x,y,i]=at(ms),[x2]=at(ms+40),dir=x2>x+.3?1:(x2<x-.3?-1:S0.dir);
     let rot=0,f=sp.idle,bob=0;
     if(ms<P.go) { f=ms>P.wingIn+100?sp.celeb:sp.idle; bob=ms>P.wingIn?Math.abs(Math.sin(ms/90))*2:0; }
@@ -404,8 +405,10 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     else if(ms<P.home0) { const k=Math.sin(seg(ms,P.arrive,P.home0)*Math.PI); rot=lean*ez(seg(ms,P.arrive,P.lean0))*(ms<P.lean1?1:1-ez(seg(ms,P.lean1,P.home0))); f=sp.idle; }
     else { f=ms<P.end-80?(dir>0?(sp.runFlip?sp.runFlip[Math.floor(c.t*7)%2]:sp.flip):sp.idle):sp.idle; }
     S0.x=x; S0.y=y-bob; S0.rot=rot; S0.dir=dir; S0.bank=ms>P.go&&ms<P.arrive?rot*1.8+Math.sin(ms/240)*.06:0;
+    if(skinOn(ms)) f=rideSkin(ms>P.go&&Math.abs(S0.bank)>.09?'biplane2':'biplane',f);   // painted Tom carrying Rose, arms out as wings
     return {cx:x,base:y-bob,frame:f,rot,noShadow:false}; });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
+    if(skinOn(ms)) return {hide:true};
     if(ms<P.hop) { const k=ez(ms/P.hop),s=seatAt(S0.x,S0.y,S0.rot); return {cx:lerp(c.origX,s.x,k),base:lerp(c.origBase,s.y,k)-Math.sin(k*Math.PI)*90,frame:sp.celeb,noShadow:true}; }
     const s=seatAt(S0.x,S0.y,S0.rot);
     let t=S0.rot*.6;
@@ -424,13 +427,13 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       while(trail.length&&ms-trail[0].t>650) trail.shift();
       for(let j=0;j<4;j++) for(let i=1;i<trail.length;i++) { const a=trail[i-1],c2=trail[i],q=1-(ms-c2.t)/650; gfx.globalAlpha=Math.max(0,q)*.8; Ln(a.pts[j][0],a.pts[j][1],c2.pts[j][0],c2.pts[j][1],2+q*4,'#ffffff'); }
       gfx.globalAlpha=1; }
-    if(wk>0) { gfx.save(); gfx.translate(cx,lowY); gfx.rotate(b); gfx.scale(wk,1);
+    if(wk>0&&!skinOn(ms)) { gfx.save(); gfx.translate(cx,lowY); gfx.rotate(b); gfx.scale(wk,1);
       const up=upY-lowY; for(const sx of [-38,38]) { Ln(sx,up,sx,0,6,OUT); Ln(sx,up,sx,0,3,'#8a5a30'); }
       wing(0,0,160,14); wing(2,up,132,12);
       if(ms>P.go&&ms<P.arrive) { const pr=Math.floor(ms/40)%2; E(-86,0,3,pr?11:4,'#dddddd'); }
       gfx.restore(); }
     // goggles on Rose's head, rotating with her
-    { const t=S0.rrot,f=S0.dir>0&&ms>P.go?-1:1,px=S0.rx,py=S0.rb-RH/2; goggles(px-3*f*Math.cos(t)+HD*Math.sin(t),py-3*f*Math.sin(t)-HD*Math.cos(t),t); }
+    if(!skinOn(ms)) { const t=S0.rrot,f=S0.dir>0&&ms>P.go?-1:1,px=S0.rx,py=S0.rb-RH/2; goggles(px-3*f*Math.cos(t)+HD*Math.sin(t),py-3*f*Math.sin(t)-HD*Math.cos(t),t); }
   }});
   const hit=(n,dmg,txt)=>{ S('bonk'); ST.jolt(tgt,.4); battle.shakeEnemy=.35; word(txt,F.x,F.top-14,PINK,3,.7,n?.15:-.15); landHit(dmg); };
   ST.play(E2,[
@@ -1784,11 +1787,13 @@ B2_TOMBO_ANIM.rose3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const last=order.length?order[order.length-1].t:N0;
   const P={walk:700,rline:900,ribbon:1800,go:2100,arrive:2800,lift:3000,seat:3400,tline:3500,play:3900,light:4400,apply:last+250,clear:last+450,home:last+1300,end:last+2000};
   const sT={x:T.x,b:T.base,f:tsp.idle},sR={x:rx,b:rb,f:rsp.idle};
+  let skinNow=false;
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
     if(ms<P.go) { f=ms>P.ribbon+150?sp.expr:sp.idle; }
     else if(ms<P.arrive) { const k=ez(seg(ms,P.go,P.arrive)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,rb,k); f=k<1?runFr(sp,c.t*.8,-1):sp.idle; }
     else if(ms<P.home) { x=tx; y=rb; f=ms<P.seat?sp.act:(ms>P.play&&ms<P.play+500?sp.celeb:(ms>P.clear&&ms<P.clear+700?sp.celeb:sp.idle)); }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(rb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    skinNow=ms>=P.seat&&ms<P.end-150&&f===sp.idle&&!!rideSkin('phones',null); if(skinNow) f=rideSkin('phones',f);   // Rose in her own headphones, Tom calm
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
   // Rose: walks into the middle of the dark, listens, then hops up onto Tom's shoulders and stays there (she sits: a path
   // parked on the riding spot is drawn seated, engine/rose-ride.js roseSeatNear).
@@ -1828,7 +1833,7 @@ B2_TOMBO_ANIM.rose3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       for(const [w,c,al] of [[7,'#ffe9a0',.35],[3,GOLD,1]]) { gfx.globalAlpha=a*al; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath();
         for(let j=0;j<=n;j++) { const q=j/n,x=lerp(x0,x1,q),y=lerp(y0,y1,q)+Math.sin(q*Math.PI*6-ms/90)*6*Math.sin(q*Math.PI); j?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke(); }
       gfx.globalAlpha=1; }
-    if(seated) phones(sR.x-4,rTop+9*RS,8.5*RS,1-seg(ms,P.home+300,P.end-150)); else phones(sR.x+1,rTop+RH*.2,RH*.17,1);
+    if(skinNow) {} else if(seated) phones(sR.x-4,rTop+9*RS,8.5*RS,1-seg(ms,P.home+300,P.end-150)); else phones(sR.x+1,rTop+RH*.2,RH*.17,1);
     // PLAY: a gold stereo wave sweeps left across the stage
     if(ms>P.play&&ms<P.light+500) { const q=seg(ms,P.play,P.light+500);
       for(let j=0;j<4;j++) { const p=cl(q*1.3-j*.12); if(p<=0||p>=1) continue; gfx.globalAlpha=(1-p)*.8; gfx.strokeStyle=j%2?'#ffe9a0':GOLD; gfx.lineWidth=5;
@@ -2972,6 +2977,7 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     else if(ms<P.arrive) { const k=ez(seg(ms,P.walk,P.arrive)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,sb,k)+ffHop(ms,P.walk,P.arrive); }
     else if(ms<P.home) { f=ms>P.tline-80&&ms<P.tb1?sp.act:(ms>P.sit&&ms<P.sit+600?sp.celeb:(ms>P.rline&&ms<P.morph?sp.expr:sp.idle)); }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(sb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    if(ms>=P.arrive&&ms<P.home&&f!==sp.celeb) f=rideSkin(ms>P.rline&&ms<P.morph?'cloud2':'cloud',f);   // looking up at the cloud; Rose points, then explains
     sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
   // Rose hops up from wherever she is and sits on his shoulders for the rest (a path parked on the riding spot is seated).
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,s=seatPt();
@@ -4412,11 +4418,13 @@ B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const P={walk:700,eyes:950,rline:1200,tgo:2000,tarr:2700,lift:2850,seat:3250,hold:3350,tline:3500,glow:4150,back:lastFlee+650,backEnd:lastFlee+1250,
     apply:lastFlee+1450,home:lastFlee+2150,end:lastFlee+2850};
   const sT={x:T.x,b:T.base},sR={x:rx,b:rb};
+  let skinNow=false;
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
     if(ms<P.tgo) f=ms>P.rline+300?sp.expr:sp.idle;
     else if(ms<P.tarr) { const k=ez(seg(ms,P.tgo,P.tarr)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,rb,k)+ffHop(ms,P.tgo,P.tarr); }
     else if(ms<P.home) { x=tx; y=rb; f=ms<P.lift+150?sp.kneel:(ms<P.hold?sp.idle:(ms<P.backEnd?sp.act:(ms<P.backEnd+500?sp.celeb:sp.idle))); }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(rb,c.origBase,k)+ffHop(ms,P.home,P.home+650); f=k<1?sp.flip:sp.idle; }
+    skinNow=ms>=P.home-50&&ms<P.end-100&&f===sp.idle&&!!rideSkin('night',null); if(skinNow) f=rideSkin('night',f);   // Rose hugging Lamby
     sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
   // Rose: walks into the dark, huddles (shivering), then hops onto Tom's shoulders and stays seated (riding spot)
   const seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
@@ -4459,7 +4467,7 @@ B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<P.end-100) { const a=ms>P.end-300?seg(P.end-100-ms,0,200):1;
       if(g>0) { const r=18+g*70; gfx.save(); gfx.translate(L.x,L.y); const gr=gfx.createRadialGradient(0,0,0,0,0,r); gr.addColorStop(0,'rgba(255,240,180,'+(.75*g*a)+')'); gr.addColorStop(1,'rgba(255,240,180,0)'); gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(0,0,r,0,Math.PI*2); gfx.fill();
         gfx.globalAlpha=g*.55*a; for(let j=0;j<10;j++) { const an=j/10*Math.PI*2+ms/900,r0=20+g*10,r1=r0+16+g*42+Math.sin(ms/120+j)*5; Ln(Math.cos(an)*r0,Math.sin(an)*r0,Math.cos(an)*r1,Math.sin(an)*r1,2.5,GOLD); } gfx.restore(); gfx.globalAlpha=1; }
-      gfx.globalAlpha=a; RFX.plush(L.x,L.y,L.sc,{pose:'held',glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; }
+      if(!skinNow) { gfx.globalAlpha=a; RFX.plush(L.x,L.y,L.sc,{pose:'held',glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; } }
     // the dark runs away: a few shadow wisps with eyes scurry off to the left once the light grows
     if(ms>G0+300&&ms<G1+700) for(let j=0;j<5;j++) { const q=seg(ms,G0+300+j*120,G1+300+j*80); if(q<=0||q>=1) continue;
       const y=90+j*38,x=lerp(Math.min(560,L.x-80-j*10),-60,ez(q)); gfx.globalAlpha=(1-q)*.9; E(x,y,22,13,'#0c0d1a'); E(x+16,y+4,10,7,'#0c0d1a');

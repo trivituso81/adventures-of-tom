@@ -21,5 +21,8 @@ const TOMRIDE={ok:false,bt:null};
   const sp={pal:B.pal,idle:P('idle'),act:P('act'),celeb:P('celeb'),windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),
     defend:P('defend'),castPose:P('cast'),kneel:P('kneel'),run:[P('run1'),P('run2')]};
   sp.expr=sp.act; sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
+  // Combo skins: Tom carrying Rose in the pose a Tombo move needs (airplane, cloud gazing, headphones, night-light).
+  // Moves ask for one with rideSkin(key,fallbackFrame) (engine/rose-ride.js). _skin tells rideBodyDraw to draw it as is.
+  sp.sk={}; for(const k of ['biplane','biplane2','cloud','cloud2','phones','night']) if(B[k]) { const f=P(k); f._skin=true; sp.sk[k]=f; }
   TOMRIDE.bt=sp; TOMRIDE.ok=true;
 })();

@@ -47,3 +47,5 @@ Sheets: `src/boppy-hero.png`, `src/boppy-battle-v2.png`, `src/boppy-walk-v2.png`
 
 Ride set update (2026-10-29): the sheets were re-rendered with Tom holding Rose's feet and a smaller Rose. The leg-squash and Rose-shrink workarounds were removed from bake_tomride.py; battle-h is now 128 (Tom body stays 100 rows) and the kneel black eye is painted at (98,164).
 Amy head warp, fixed 2026-10-29 after Tom saw a distorted lower face and neck hair: the blend back to scale 1 now happens BELOW the chin (TAPER 30 rows, same idea as Deedee and TNB) so the jaw is not squashed; the warp box is widened to the hair's right edge through the blend rows (`_hair_right`, not for the win pose); head factors lowered to 1.8 battle and 1.45 walk (goal about 37 percent of height like Deedee and TNB).
+
+Combo skins (2026-10-29): src/tomride-combo.png (3x2: biplane, biplane2, cloud, cloud2, phones, night) baked into the ride battle atlas; moves ask for one with rideSkin(key,fallback) (engine/rose-ride.js). Used by Double-Decker Airplane, That Cloud Is Lamby, Headphones in the Dark, Lamby Night-Light. Sleeping pose not used (Tom: no use case).
