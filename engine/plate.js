@@ -22,6 +22,7 @@ PLATES.tomsuite={src:'art/tomsuite.webp',px:64,img:null,ready:false,actorScale:1
 PLATES.juicebar={src:'art/juicebar.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.cinema={src:'art/starlite.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.boards={src:'art/boards.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.nickels={src:'art/nickels.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;

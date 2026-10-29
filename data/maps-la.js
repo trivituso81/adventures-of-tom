@@ -937,14 +937,30 @@ const LA_ROOMS=[
   {id:'nickels',w:11,h:9,
     style:{floor:'#d9c49c',alt:'#e6d3ad',wall:'#3a9ca0',trim:'#f1d9b5',pattern:'check',rug:'#2f6f73'},
     rug:[3,6,5,2],
+    // Painted plate (art/nickels.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Sweater wall, window and helmet shelf down the left, the long counter across the back (the painted shopkeeper stands behind it),
+    // crates and the ball display front left, snack shelf back right, the cactus and a fern front right.
+    // The floor opens into a short lane at x 5 (rows 6 to 8): the doorway and the mat below it.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '###########',
+      '########.##',
+      '####.....##',
+      '##.......##',
+      '#####.#####',
+      '#####.#####'],
     npcs:[
-      {name:'Nickel',x:5,y:2,look:'nickel',shopkeeper:true,roam:0,shopLines:NICKEL,shopName:"Nickel's",lines:[]}],
+      // The keeper is painted into the plate, so the sprite stays hidden; A on the counter still opens the shop.
+      {name:'Nickel',x:5,y:2,look:'nickel',shopkeeper:true,hidden:true,roam:0,shopLines:NICKEL,shopName:"Nickel's",lines:[]}],
     objects:[
-      ['counter',3,3,5,1,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. NO, WE DO NOT VALIDATE.',{variant:'letters',shop:true}],
-      ['shelf',1,1,2,1,'Gear shelf','Sweaters nobody in LA needs, and sunglasses everybody does.'],
-      ['shelf',8,1,2,1,'Snack shelf','Juice boxes, picnic baskets, and a very expensive bottle of water.'],
-      ['toybox',1,6,1,1,'Battle bin','Water balloons, kazoos and party poppers. A label says: FOR MONSTERS ONLY. AND COYOTES.'],
-      ['pot',9,6,1,1,'Shop cactus','It has a price tag. The price is "no." Penny taught her well.']]},
+      ['counter',4,3,4,2,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. NO, WE DO NOT VALIDATE.',{variant:'letters',shop:true}],
+      ['shelf',8,1,2,3,'Snack shelf','Juice boxes, picnic baskets, and a very expensive bottle of water.'],
+      ['toybox',1,4,2,2,'Battle bin','Water balloons, kazoos and party poppers. A label says: FOR MONSTERS ONLY. AND COYOTES.'],
+      ['toybox',3,4,1,2,'Ball display','Star balls, party bottles and a little palm tree sign: THIS WAY TO FUN. FUN IS NOT REFUNDABLE.'],
+      ['pot',1,6,1,1,'Shop fern','It has a price tag too. The tag just says: IT\'S FINE.'],
+      ['pot',9,4,1,3,'Shop cactus','It has a price tag. The price is "no." Penny taught her well.']]},
   {id:'wardrobe',w:12,h:10,
     style:{floor:'#cfc3d6',alt:'#dcd2e2',wall:'#6a4f7a',trim:'#e3d6e8',pattern:'tile',rug:'#8a6aa0'},
     rug:[3,5,6,2],

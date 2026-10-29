@@ -16,6 +16,13 @@
 - Checks: new `tools/boards_test.py` 0 fails (objects touchable, Dash talks, bench/counter/rack block, all three mat tiles exit), smoke, bg_test, jpark_test, juicebar_test 0 fails. Portrait and landscape shots looked at.
 - Known: no foreground layer, so characters draw over the front plants and rail.
 
+## 2026-10-29: Nickel's (inside) is painted (Area 41, map id `nickels`)
+- New `art/nickels.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.nickels` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the boulevard door still works.
+- Walk map (`plateMask` in `data/maps-la.js`): the open floor in front of the counter (rows 5 and 6), one tile beside the snack shelf (8,4), and a one-tile lane at x 5 (rows 6 to 8) between the door posts over the mat. The counter, sweater wall, window, helmet shelf, crates, ball display, cactus and the right wall stay blocked.
+- Nickel is painted into the plate, so her sprite is `hidden:true` at (5,2) behind the counter. A on the counter (any tile x 4 to 7, row 5) still opens the shop through the shop flag on the counter object.
+- Objects re-laid to the painting: Shop counter (4,3) 4 x 2, Snack shelf (8,1) 2 x 3, Battle bin (1,4) 2 x 2, new Ball display (3,4), new Shop fern (1,6), Shop cactus (9,4) 1 x 3. Unvoiced text only: two new lines (Ball display, Shop fern). The old Gear shelf is gone as an object (the sweater wall is not reachable on the painted floor); its line "Sweaters nobody in LA needs, and sunglasses everybody does." is no longer in the game.
+- Checks: new `tools/nickels_test.py` 0 fails (objects touchable, no cut-off floor, shop opens from every counter tile, walls hold, door walked to the boulevard), smoke, bg_test, blvd_test, shop_test, ramen_test, juicebar_test 0 fails. Portrait and landscape shots looked at.
+- Known: no foreground layer, so characters draw over the cactus and the front ledge. The painted keeper looks different from the old Nickel sprite (teal hair); the painting is canon.
 ## 2026-10-29: Very Green Juice (inside) is painted
 - New `art/juicebar.webp` (Tom's painting, area 40, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.juicebar` with the interior actor scale. Map `juicebar` keeps its size. Door (5,8) and spawn (5,7) unchanged; the whole doormat between the gate posts (x 4 to 6, rows 7 and 8) now walks and all three bottom tiles are exits to Jefferson Park (`doors:[[4,8],[6,8]]`).
 - Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter, the open floor right of the counter (8,3), the sunny left side down to the herb table. Counter and blender wall, wheatgrass beds, herb table, big fern and the supplement shelf are painted and blocked.
