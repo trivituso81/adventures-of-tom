@@ -1,5 +1,5 @@
 'use strict';
-// data/amy-hires-battle.js — Battle half of the painted Amy. Loaded after data/amy-poses.js (last word on her frames) and before data/battle-size.js.
+// data/amy-hires-battle.js — Battle half of the painted Amy. Loaded after data/amy-poses.js (last word on her frames) and after data/battle-size.js (it reads BATTLE_SIZE.amy itself).
 // Replaces her core frames (idle, strike, wind-up, run, leap, hurt, kneel, celebrate, defend, cast, knocked out) with painted ones.
 // Her story-only poses (sit, toast, hug, point, clap, whisper...) keep their pixel rows. The painted palette is moved to unused keys so both coexist.
 (function() {
@@ -23,7 +23,8 @@
   const P=(k,name)=>reg(paintRows(rk(B[k]),'amyBattle',name||k,false));
   const mir=rows=>{ const r=mirrorRows(rows),W=rows[0].length,e=sp.eyeAt&&sp.eyeAt.get(rows),h=sp.handAt&&sp.handAt.get(rows);
     if(e) sp.eyeAt.set(r,{col:W-1-e.col,row:e.row}); if(h) sp.handAt.set(r,{n:[W-1-h.f[0],h.f[1]],f:[W-1-h.n[0],h.n[1]]}); return r; };
-  sp.scale=1; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
+  const SZ=(typeof BATTLE_SIZE!=='undefined'&&BATTLE_SIZE.amy)||1;   // data/battle-size.js loads earlier; this file replaces the sprite, so it applies the size itself
+  sp.scale=SZ; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
   sp.idle=P('idle'); sp.act=P('act'); sp.celeb=P('celeb'); sp.windup=P('windup'); sp.leap=P('leap');
   sp.hurtPose=P('hurt'); sp.defend=P('defend'); sp.castPose=P('cast'); sp.kneel=P('kneel');
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
@@ -34,7 +35,7 @@
   sp.hip=sp.idle; sp.clap=sp.celeb; sp.spread=sp.hurtPose; sp.point=sp.castPose; sp.aim=sp.windup; sp.wind=sp.windup; sp.throw=sp.act;
   sp.pump=sp.celeb; sp.flex=sp.celeb; sp.wave=sp.castPose;
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
-  if(typeof KO_SPRITES!=='undefined') KO_SPRITES.amy={scale:.8,pal:AMY_HIRES.ko.pal,rows:paintRows(AMY_HIRES.ko.rows.slice(),'amyKo','ko',true)};
+  if(typeof KO_SPRITES!=='undefined') KO_SPRITES.amy={scale:.8*SZ,pal:AMY_HIRES.ko.pal,rows:paintRows(AMY_HIRES.ko.rows.slice(),'amyKo','ko',true)};
   // Her yellow top is not a dark tee, so outfit recolouring does not apply to the painted Amy.
   if(typeof GARMENT!=='undefined') { delete GARMENT.bt.amy; delete GARMENT.ow.amy; }
 })();
