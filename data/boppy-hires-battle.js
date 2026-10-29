@@ -24,13 +24,20 @@
   const mir=rows=>{ const r=mirrorRows(rows),W=rows[0].length,e=sp.eyeAt&&sp.eyeAt.get(rows),h=sp.handAt&&sp.handAt.get(rows);
     if(e) sp.eyeAt.set(r,{col:W-1-e.col,row:e.row}); if(h) sp.handAt.set(r,{n:[W-1-h.f[0],h.f[1]],f:[W-1-h.n[0],h.n[1]]}); return r; };
   const SZ=(typeof BATTLE_SIZE!=='undefined'&&BATTLE_SIZE.boppy)||1;
-  sp.scale=SZ; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
+  sp.scale=2*SZ; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
   sp.idle=P('idle'); sp.act=P('act'); sp.celeb=P('celeb'); sp.windup=P('windup'); sp.leap=P('leap');
   sp.hurtPose=P('hurt'); sp.defend=P('defend'); sp.castPose=P('cast'); sp.kneel=P('kneel');
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.cheer=[sp.celeb,sp.celebFlip]; sp.runFlip=sp.run.map(mir);
+  // Extra attack poses (Sheet A, data/boppy-extra.js): x_swat, x_follow (cap in hand), x_castb (faces right), x_castf, x_reel, x_pepper, x_fire, x_seed, x_jar, x_marks, x_sprint
+  if(typeof BOPPY_EXTRA!=='undefined') {
+    const EX=BOPPY_EXTRA; paintedAtlas('boppyExtra',EX.atlas.src,EX.atlas.rects,EX.atlas.k);
+    const m2={}; let n2=0; for(const k in EX.pal) { const c=String.fromCharCode(0x0400+n2++); m2[k]=c; pal[c]=EX.pal[k]; }
+    m2['.']='.';
+    for(const k in EX.rows) sp['x_'+k]=reg(paintRows(EX.rows[k].map(r=>{ let q=''; for(const ch of r) q+=m2[ch]; return q; }),'boppyExtra',k,false));
+  }
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
-  if(typeof KO_SPRITES!=='undefined') KO_SPRITES.boppy={scale:.8*SZ,pal:BOPPY_HIRES.ko.pal,rows:paintRows(BOPPY_HIRES.ko.rows.slice(),'boppyKo','ko',true)};
+  if(typeof KO_SPRITES!=='undefined') KO_SPRITES.boppy={scale:.8*2*SZ,pal:BOPPY_HIRES.ko.pal,rows:paintRows(BOPPY_HIRES.ko.rows.slice(),'boppyKo','ko',true)};
   // His cardigan is not a dark tee, so outfit recolouring does not apply to the painted Boppy.
   if(typeof GARMENT!=='undefined') { delete GARMENT.bt.boppy; delete GARMENT.ow.boppy; }
 })();
