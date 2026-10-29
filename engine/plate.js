@@ -29,6 +29,7 @@ PLATES.wardrobe={src:'art/wardrobe.webp?v=20261029',px:64,img:null,ready:false,a
 PLATES.creole={src:'art/creole.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.casa={src:'art/casa.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.jordansam={src:'art/jordansam.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.tower={src:'art/tower.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;

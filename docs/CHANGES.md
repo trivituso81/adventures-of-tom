@@ -56,6 +56,12 @@
 - Checks: new `tools/boards_test.py` 0 fails (objects touchable, Dash talks, bench/counter/rack block, all three mat tiles exit), smoke, bg_test, jpark_test, juicebar_test 0 fails. Portrait and landscape shots looked at.
 - Known: no foreground layer, so characters draw over the front plants and rail.
 
+## 2026-10-29: The Grand Tower (inside) is painted (Area 49, map id `tower`)
+- New `art/tower.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.tower` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the boulevard door at (18,20) still works.
+- Walk map (`plateMask` in `data/maps-la.js`): rows 0 and 1 are the window wall; open floor through the middle (rows 2 to 6), a one-tile lane at x 5 (rows 6 to 8) between the planters. Blocked: sofa (cols 1 to 3), standing desk (7 and 8), two stone pillars, TV unit (col 1), kitchen island and stools (cols 2 to 4, rows 5 and 6), dining set (6 and 7), armchair and corner nook (right side).
+- Objects re-laid to the painting: Gray couch, Standing desk, The TV (now the whole unit down the left wall), Fiddle-leaf fig, plus new Kitchen island, Dining table, Armchair and Corner nook. Unvoiced text only: four new prop lines. Priya moved to (6,2) by her desk; her lines are unchanged.
+- Checks: new `tools/tower_test.py` 0 fails (objects touchable, no cut-off floor, Priya talks, walls hold, door walked to the boulevard), smoke, bg_test, blvd_test, shop_test, nickels_test 0 fails. Portrait and landscape shots looked at. ch17_test did not finish inside the 280 s timeout here; the chapter 17 Glass Tower does not use this map.
+- Known: no foreground layer, so characters draw over the front planters and pillars. The (8,5) tile sits just in front of the nook plant.
 ## 2026-10-29: Nickel's (inside) is painted (Area 41, map id `nickels`)
 - New `art/nickels.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.nickels` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the boulevard door still works.
 - Walk map (`plateMask` in `data/maps-la.js`): the open floor in front of the counter (rows 5 and 6), one tile beside the snack shelf (8,4), and a one-tile lane at x 5 (rows 6 to 8) between the door posts over the mat. The counter, sweater wall, window, helmet shelf, crates, ball display, cactus and the right wall stay blocked.

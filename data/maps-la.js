@@ -1297,16 +1297,34 @@ const LA_ROOMS=[
   {id:'tower',w:11,h:9,
     style:{floor:'#cfd6de',alt:'#dde3ea',wall:'#3f5a74',trim:'#c9d6de',pattern:'tile',rug:'#6f9fc4'},
     rug:[3,5,5,2],
+    // Painted plate (art/tower.webp, engine/plate.js), area 49. The mask is the walk map: '#' blocks, '.' walks.
+    // Rows 0 and 1 are the window wall. Sofa and chaise back left (cols 1 to 3), standing desk back right (cols 7 and 8), the two stone pillars
+    // (3,3) and (8,3), the TV unit down the left wall (col 1), the kitchen island and stools (cols 2 to 4, rows 5 and 6), the dining set (cols 6 and 7),
+    // the armchair and side nook down the right (col 9). The open floor runs down the middle to a one-tile lane at x 5 between the planters.
+    plateMask:[
+      '###########',
+      '###########',
+      '####...####',
+      '##.#..#####',
+      '##....##.##',
+      '#####....##',
+      '#####.#####',
+      '#####.#####',
+      '#####.#####'],
     npcs:[
-      {name:'Priya',x:6,y:5,look:'priya',lines:[
+      {name:'Priya',x:6,y:2,look:'priya',lines:[
         '34th floor. From my desk I can see Griffith Park. I\'ve never been to Griffith Park.',
         'My dog is named Bagel. He has more friends in this building than I do.',
         'The pool is on the roof. Nobody swims. Everyone takes photos of the pool.']}],
     objects:[
-      ['couch',2,2,3,1,'Gray couch','It came in a box. Most things in this building came in a box.'],
+      ['couch',1,2,3,1,'Gray couch','It came in a box. Most things in this building came in a box.'],
       ['desk',7,2,2,1,'Standing desk','Three monitors. A sticky note: GO OUTSIDE. Under it: LATER.'],
-      ['tv',2,7,3,1,'The TV',"A slideshow of somebody else's vacation. It came with the apartment."],
-      ['pot',9,6,1,1,'Fiddle-leaf fig','Thriving. Gets more sun than anyone in the building.']]},
+      ['tv',1,3,1,4,'The TV',"A slideshow of somebody else's vacation. It came with the apartment."],
+      ['counter',2,5,3,2,'Kitchen island','Four stools, one sink, and a bowl of oranges nobody has ever peeled. Priya says it is for decoration. The oranges agree.'],
+      ['table',6,3,2,2,'Dining table','Set for four. Priya says she has never once had four people over. The fruit bowl is doing its best.'],
+      ['pot',9,3,1,2,'Fiddle-leaf fig','Thriving. Gets more sun than anyone in the building.'],
+      ['couch',9,5,1,1,'Armchair','A book left open on the side table. The page has not changed in weeks.'],
+      ['table',8,6,2,1,'Corner nook','A framed beach photo and a lamp left on. Somebody wants this to feel like home.']]},
   {id:'creole',w:12,h:9,
     style:{floor:'#c9a87a',alt:'#d6b688',wall:'#7a3a5a',trim:'#e8c060',pattern:'check',rug:'#4a7a3a'},
     rug:[4,5,4,2],
