@@ -1149,7 +1149,7 @@ SCENES.ch4Stage=[
   {talk:'Tom',lines:['The stage set is at the top. The rack is up there. I can smell the steamer.']},
   {talk:'TNB',lines:['The main light rig runs the catwalk motor. If I get power back to it, the catwalk comes down.',
     'Three junction boxes. They have to come up in the right order or the dimmer pops. The rig will tell us the order.']},
-  {toast:'Goal: get the light rig working. Look at the rig (by the catwalk), then flip the three junction boxes in the right order.',time:5.5}
+  {toast:'Goal: get the light rig working. Look at the rig (middle of the floor), then flip the three junction boxes in the right order.',time:5.5}
 ];
 // 8. The rig works. TNB tapes the cable. The catwalk comes down.
 SCENES.ch4Rig=[
@@ -1162,7 +1162,7 @@ SCENES.ch4Rig=[
   {talk:'Tom',lines:['You fixed a whole soundstage with tape.']},
   {talk:'TNB',lines:['I fix everything with tape. You know this. Your kitchen drawer knows this.']},
   {trace:'tnb-rig'}, {hearts:'tnb'},
-  {toast:'Goal: up the catwalk to the stage set (top).',time:4.5}
+  {toast:'Goal: up the stairs to the stage set (top).',time:4.5}
 ];
 // 9. The stage set: The Director's Cut, sitting on TNB's rack. Boss fight.
 SCENES.ch4Boss=[
@@ -1253,10 +1253,10 @@ HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='backlot'&&(flag('ch4-fetc
 HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='stage7'&&!flag('ch4-rig'));
 
 // Map changes. They check flags (not events), so they also hold after loading a save.
-// The raised catwalk section in Soundstage 7 (rows 4 and 5) comes down once the rig is fixed.
+// The catwalk up to the stage set in Soundstage 7 comes down once the rig is fixed: the gate on the stairs (data/maps-la.js stage7 gates)
+// opens on the flag ch4-rig, so there is no tile to change on the painted map.
 function ch4LowerCatwalk() {
   const M=worlds.stage7; if(!M||M.catwalkDown) return;
-  for(const y of [4,5]) for(const x of [12,13]) tile(M,x,y,'catwalk');
   M.catwalkDown=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{
@@ -1322,8 +1322,8 @@ STORY_PROPS.tag=(cx,y)=>{ const yy=Math.round(y-6); rect(cx-5,yy-1,10,8,OUT); re
 // Soundstage 7 in the dark (until the rig is fixed): a pool of light around Tom. The fog machine room is always foggy.
 STORY_MAPFX.push(time=>{
   const M=currentMap; if(M.id!=='stage7') return;
-  // Fog in the fog machine room (x 18 to 24, rows 1 to 10), drifting.
-  for(let k=0;k<16;k++) { const n=hash(k,77),fx=18*T+((n%(7*T))+time*(8+k%4)*(k%2?1:-1)+7*T*4)%(7*T),fy=T+(n>>>9)%(10*T);
+  // Fog in the fog machine corner (x 16 to 23, rows 3 to 12), drifting.
+  for(let k=0;k<16;k++) { const n=hash(k,77),fx=16*T+((n%(7*T))+time*(8+k%4)*(k%2?1:-1)+7*T*4)%(7*T),fy=3*T+(n>>>9)%(9*T);
     gfx.globalAlpha=.32; ellipse(fx,fy,22+n%12,10+n%6,'#eef2f6'); }
   gfx.globalAlpha=1;
   if(flag('ch4-rig')) return;

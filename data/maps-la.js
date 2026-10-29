@@ -400,7 +400,7 @@ LA_AREAS.push(
     wild:true,
     paths:[[14,0,15,23],[1,6,13,7],[16,6,28,7],[1,17,13,18]],
     border:{kind:'studiowall',open:[[14,0],[15,0],[14,23],[15,23]]},
-    exits:[[14,23,'studio',10,1,'down'],[15,23,'studio',11,1,'down'],[14,0,'stage7',12,20,'up'],[15,0,'stage7',13,20,'up']],
+    exits:[[14,23,'studio',10,1,'down'],[15,23,'studio',11,1,'down'],[14,0,'stage7',9,15,'up'],[15,0,'stage7',10,15,'up']],
     gates:[{at:[[14,0],[15,0]],look:'barrier',dy:1,cond:{chapter:4,notFlag:'ch4-sets'},name:'Stage 7 door',
       lines:['SOUNDSTAGE 7. The big door is locked from the inside. The red light is on: ROLLING.','Nobody is rolling anything. TNB says the sets come first. The Sprites will wreck the shoot.']}],
     objects:[
@@ -426,41 +426,59 @@ LA_AREAS.push(
       {kind:'cstand',at:[[17,20],[27,21],[3,10]],name:'C-stand',text:'A C-stand with a flag on it. The flag is black. It blocks the sun. It\'s losing.'}],
     npcs:[],
     monsters:BACKLOT_MONSTER_SPOTS},
-  // Soundstage 7 (the dungeon): the wardrobe department (left), the fog machine room (right), and catwalks over a dark
-  // pit up the middle to the stage set (north). A raised catwalk section (rows 4 and 5) comes down once TNB fixes the
-  // light rig: three junction boxes switched on in the order of the gels on the rig (blue, amber, red).
-  Object.assign(studioPlan([
-    'TTTTTTTTTTTT==TTTTTTTTTTTT',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXXddXXXP.......T',
-    'T.......PXXXddXXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'T.......PXXX==XXXP.......T',
-    'TPPP..PPPXXX==XXXPPP..PPPT',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'T........................T',
-    'TTTTTTTTTTTT..TTTTTTTTTTTT']),
-    {id:'stage7',name:'Soundstage 7',w:26,h:22,region:'la',ground:'stage',
-      tag:'Wardrobe, a fog machine that turned itself on, and catwalks in the dark.',
-      eyebrow:'LOS ANGELES / SOUNDSTAGE 7',
-      hint:'Wardrobe on the left, the fog machines on the right. The stage set is up the catwalk.',
-      spawn:{x:12,y:20},
-      wild:true,
-      border:{kind:'studiowall',open:[[12,0],[13,0],[12,21],[13,21]]},
-      exits:[[12,21,'backlot',14,1,'down'],[13,21,'backlot',15,1,'down'],[12,0,'stageset',10,12,'up','catwalk'],[13,0,'stageset',11,12,'up','catwalk']],
-      monsters:STAGE7_MONSTER_SPOTS}),
+  // Soundstage 7 (the dungeon), painted plate (art/stage7.webp, engine/plate.js), 24 x 18 tiles. The wardrobe department (left, sealed
+  // behind its racks and sewing tables), the video village and fog machines (right) and the open stage floor between them. The way up to
+  // the stage set (north, the stairs at x 14 to 16) is shut by a gate until TNB fixes the light rig: three junction boxes switched on in
+  // the order of the gels on the rig (blue, amber, red), data/scenes.js. The mask is the walk map: '#' blocks, '.' walks. The rig, the
+  // boxes and the spike tape are drawn live over the painting (liveKinds) because the puzzle changes them.
+  {id:'stage7',name:'Soundstage 7',w:24,h:18,region:'la',ground:'stage',
+    tag:'Wardrobe, a fog machine that turned itself on, and a catwalk that is up.',
+    eyebrow:'LOS ANGELES / SOUNDSTAGE 7',
+    hint:'Wardrobe on the left, the fog machines on the right. The stage set is up the stairs at the top.',
+    spawn:{x:9,y:15},
+    wild:true,
+    liveKinds:['jbox','lightrig','tapemark'],
+    plateMask:[
+      '########################',
+      '########################',
+      '########################',
+      '###############..#######',
+      '###############..#######',
+      '##############...#######',
+      '###########..........###',
+      '###########.....########',
+      '#########......#########',
+      '########.......#########',
+      '######.........#########',
+      '######...........#######',
+      '########..........######',
+      '#########..##......#####',
+      '#########..###.....#####',
+      '#########..#######.....#',
+      '#########..##########..#',
+      '########################'],
+    border:{kind:'studiowall',open:[[9,16],[10,16],[15,3],[16,3]]},
+    exits:[[9,16,'backlot',14,1,'down'],[10,16,'backlot',15,1,'down'],[15,3,'stageset',10,12,'up'],[16,3,'stageset',11,12,'up']],
+    // The catwalk is up (and the work lights are off) until the rig is fixed: the stairs to the set are shut.
+    gates:[{at:[[15,3],[16,3]],look:'barrier',dy:.9,cond:{chapter:4,notFlag:'ch4-rig'},name:'The catwalk',
+      lines:['The catwalk up to the set is raised. The stairs end in a gap and a very dark drop.','TNB says the light rig runs the catwalk motor. Fix the rig first.']}],
+    objects:[
+      // Only what you can reach and touch is listed; the rest of the painted set dressing is scenery.
+      ['rack',5,8,2,2,'Rack 3','RACK 3. Trench coats. Every single extra wears one. Every single one.'],
+      ['roadcase',9,6,2,2,'Road case','A road case covered in stickers. One says: IF FOUND, RETURN TO WARDROBE. It\'s not wardrobe’s.'],
+      ['roadcase',17,10,2,2,'Road case','A road case full of cable. Every cable is tangled. Boppy would get along with these.'],
+      ['applebox',19,4,3,2,'Video village','Four monitors, all showing the same empty stage. The fifth is showing fog. TNB says it\'s called a video village. Tom says it\'s a lot of screens.'],
+      ['camera',15,8,2,2,'Camera dolly','A camera on a dolly, on its own little railroad. Somebody has taped NO TOUCHING over the lens. Tom approves.'],
+      ['fogmachine',21,6,1,2,'Fog machine','A fog machine. It\'s on. Nobody turned it on. It just keeps going: PFFFFT.'],
+      ['fogmachine',16,7,2,1,'Fog machine','Another fog machine. Also on. Also nobody turned it on.'],
+      ['tapemark',8,9,2,1,'Spike tape','Glow tape on the floor: RACK 2. There\'s nothing on it. TNB stares at it like it owes him money.'],
+      ['lightrig',11,8,2,1,'Light rig','The main light rig, dead. Three colored gels across the front, left to right: BLUE, AMBER, RED. Three cables run off to junction boxes.',
+        {when:[{flag:'ch4-rig',text:'The light rig, humming. Blue, amber, red. TNB taped the cable down with gaffer tape. Twice.'}]}],
+      ['jbox',6,11,1,1,'Red junction box','A junction box with a RED stripe. One big switch.',{jbox:'red'}],
+      ['jbox',21,15,1,1,'Blue junction box','A junction box with a BLUE stripe. One big switch.',{jbox:'blue'}],
+      ['jbox',13,12,1,1,'Amber junction box','A junction box with an AMBER stripe. One big switch.',{jbox:'amber'}],
+      ['sign',12,12,1,1,'Stage sign','SOUNDSTAGE 7. Red light means rolling. Somebody has added: OR HAUNTED.']],
+    monsters:STAGE7_MONSTER_SPOTS},
   {id:'stageset',name:'The Stage Set',w:20,h:14,region:'la',ground:'stage',
     tag:'A ruined castle that is not a castle, under forty lights.',
     eyebrow:'LOS ANGELES / SOUNDSTAGE 7 / THE SET',
@@ -485,7 +503,7 @@ LA_AREAS.push(
       '#########...########',
       '#########...########'],
     border:{kind:'studiowall',open:[[9,13],[10,13],[11,13]]},
-    exits:[[9,13,'stage7',12,1,'down'],[10,13,'stage7',13,1,'down'],[11,13,'stage7',13,1,'down']],
+    exits:[[9,13,'stage7',15,4,'down'],[10,13,'stage7',15,4,'down'],[11,13,'stage7',16,4,'down']],
     objects:[
       // Only what you can reach and touch is listed; the rest of the painted set dressing is scenery.
       ['setwall',10,3,2,1,'Painted backdrop','A painted castle on a painted hill under a painted storm. The lightning is real. Somebody wired it to a switch marked DRAMA.'],
@@ -499,26 +517,6 @@ LA_AREAS.push(
     npcs:[],
     monsters:STAGESET_MONSTER_SPOTS}
 );
-// Soundstage 7 extras: the wardrobe department, the fog machines, the light rig and its junction boxes.
-const STAGE7=LA_AREAS.find(a=>a.id==='stage7');
-STAGE7.objects.push(
-  ['rack',1,2,3,1,'Rack 1','RACK 1. Cowboy hats, chaps and one very confused poodle skirt.'],
-  ['rack',4,2,3,1,'Rack 3','RACK 3. Trench coats. Every single extra wears one. Every single one.'],
-  ['rack',1,5,3,1,'Rack 4','RACK 4. Pajamas. For the dream sequence. There\'s always a dream sequence.'],
-  ['tapemark',5,5,2,1,'Spike tape','Glow tape on the floor: RACK 2. There\'s nothing on it. TNB stares at it like it owes him money.'],
-  ['sewing',2,8,2,1,'Sewing table','A sewing machine, a pincushion shaped like a tomato and a coffee that went cold on Tuesday.'],
-  ['mirror',6,8,1,1,'Fitting mirror','A tall mirror with lights around it. Tom looks great. Tom always looks great in these.'],
-  ['fogmachine',19,2,2,1,'Fog machine','A fog machine. It\'s on. Nobody turned it on. It just keeps going: PFFFFT.'],
-  ['fogmachine',23,7,1,1,'Fog machine','Another fog machine. Also on. Also nobody turned it on.'],
-  ['lightrig',15,12,2,1,'Light rig','The main light rig, dead. Three colored gels across the front, left to right: BLUE, AMBER, RED. Three cables run off to junction boxes.',
-    {when:[{flag:'ch4-rig',text:'The light rig, humming. Blue, amber, red. TNB taped the cable down with gaffer tape. Twice.'}]}],
-  ['jbox',3,15,1,1,'Red junction box','A junction box with a RED stripe. One big switch.',{jbox:'red'}],
-  ['jbox',21,15,1,1,'Blue junction box','A junction box with a BLUE stripe. One big switch.',{jbox:'blue'}],
-  ['jbox',8,19,1,1,'Amber junction box','A junction box with an AMBER stripe. One big switch.',{jbox:'amber'}],
-  ['roadcase',18,18,2,1,'Road case','A road case covered in stickers. One says: IF FOUND, RETURN TO WARDROBE. It\'s not wardrobe’s.'],
-  ['roadcase',4,19,2,1,'Road case','A road case full of cable. Every cable is tangled. Boppy would get along with these.'],
-  ['sign',11,20,1,1,'Stage sign','SOUNDSTAGE 7. Red light means rolling. Somebody has added: OR HAUNTED.']);
-
 // ---------- Chapter 6 (The Great Squirrel Conspiracy): Old Oak Park, south of 2nd Ave ----------
 // Old Oak Park (ground 'park'): a playground (top left), the community garden (top right), picnic tables (bottom left)
 // and a fenced dog park (bottom right), with the Old Oak at the top. Its little door (oakdoor) opens with the secret
