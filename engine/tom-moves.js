@@ -1539,7 +1539,7 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
 // cross), he says it is not connecting, and he throws the controller at the monster. Same numbers: free, +1 VP.
 const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
 // Painted controller (art/chars/prop-controller.webp, tools/sprite-bake/bake_props.py); the drawn one below is the fallback until it loads.
-const CTL_IMG=new Image(); CTL_IMG.src='art/chars/prop-controller.webp';
+const CTL_IMG=new Image(); CTL_IMG.src='art/chars/prop-controller.webp?v=tom3';
 const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc);
   if(CTL_IMG.complete&&CTL_IMG.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.drawImage(CTL_IMG,-21,-14,42,Math.round(42*CTL_IMG.naturalHeight/CTL_IMG.naturalWidth));
     if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.imageSmoothingEnabled=sm; gfx.restore(); return; }

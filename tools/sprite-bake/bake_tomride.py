@@ -46,6 +46,39 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tomride-walk-v2.png'), [walk_names[
 
 H0b, H0w = poses['b_idle'].height, poses['w_down_stand'].height
 
+# ---------------------------------------------------------------- Rose faces the other way (2026-10-29, Tom)
+# The sheets draw Rose's head turned to the right; battle sprites face left (toward the enemy), so her head and upper body are
+# mirrored in place. Box per pose in source pixels: head centre cx, half width hw (symmetric so the head stays put), ycut = the row
+# where Tom's head starts (nothing of Tom is above it). The bottom 8 rows blend back to the original so the hair has no seam.
+# The two cloud poses are mirrored whole (Tom looks up at the cloud and Rose points at it, so both must turn together).
+ROSE_FLIP = {'b_idle': (85, 66, 98), 'b_windup': (100, 70, 100), 'b_strike': (240, 68, 96), 'b_run1': (112, 70, 98),
+             'b_run2': (116, 66, 98), 'b_leap': (168, 130, 98), 'b_hurt': (188, 128, 112), 'b_kneel': (92, 80, 105),
+             'b_win': (158, 110, 98), 'b_defend': (124, 76, 112), 'b_cast': (207, 111, 104), 'c_biplane': (275, 150, 108),
+             'c_biplane2': (255, 145, 112), 'c_phones': (128, 80, 108), 'c_night': (128, 88, 112)}
+WHOLE_FLIP = ('c_cloud', 'c_cloud2')
+def flip_rose(img, cx, hw, yc, feather=8):
+    a = np.array(img).astype(float)
+    H, W = a.shape[:2]
+    x0, x1 = int(max(0, cx - hw)), int(min(W, cx + hw))
+    cx_ = (x0 + x1) / 2.0
+    hw_ = min(cx_ - x0, x1 - cx_); x0, x1 = int(round(cx_ - hw_)), int(round(cx_ + hw_))
+    yc = min(yc, H)
+    pm = a.copy(); pm[:, :, :3] *= (a[:, :, 3:4] / 255.0)          # premultiplied, so blending keeps clean edges
+    box = pm[:yc, x0:x1]; mir = box[:, ::-1]
+    w = np.ones((yc, 1, 1))
+    for i in range(feather): w[yc - feather + i] = 1.0 - (i + 1) / float(feather + 1)
+    pm[:yc, x0:x1] = w * mir + (1 - w) * box
+    al = pm[:, :, 3:4]
+    rgb = np.where(al > 1, pm[:, :, :3] / np.maximum(al / 255.0, 1e-3), 0)
+    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), al]).astype(np.uint8), 'RGBA')
+for _k, (_cx, _hw, _yc) in ROSE_FLIP.items(): poses[_k] = flip_rose(poses[_k], _cx, _hw, _yc)
+for _k in WHOLE_FLIP: poses[_k] = poses[_k].transpose(Image.FLIP_LEFT_RIGHT)
+if os.environ.get('RIDE_DEBUG'):
+    _t = [poses[k].crop((0, 0, poses[k].width, min(poses[k].height, 230))) for k in list(ROSE_FLIP) + list(WHOLE_FLIP)]
+    _W = sum(t.width + 6 for t in _t); _s = Image.new('RGB', (_W, 230), (90, 90, 110)); _x = 0
+    for t in _t: _s.paste(t, (_x, 0), t); _x += t.width + 6
+    _s.save(os.environ['RIDE_DEBUG']); print('debug sheet', _s.size)
+
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k
@@ -256,9 +289,9 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
-atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=5', 'k': KB, 'rects': bt_rects},
-         'ko': {'src': 'art/chars/tomride-ko.webp?v=5', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/tomride-ow.webp?v=5', 'k': KW, 'rects': ow_rects}}
+atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=6', 'k': KB, 'rects': bt_rects},
+         'ko': {'src': 'art/chars/tomride-ko.webp?v=6', 'k': KO_, 'rects': ko_rects},
+         'ow': {'src': 'art/chars/tomride-ow.webp?v=6', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
 js = []

@@ -6,11 +6,11 @@ let TOM_STRETCH=null;
 (function() {
   if(typeof TOM_HIRES==='undefined'||(typeof TOM_HIRES_OFF!=='undefined'&&TOM_HIRES_OFF)) return;
   const AT=TOM_HIRES.atlas,mirror=rows=>{ const m=rows.map(r=>r.split('').reverse().join('')); if(rows._paint) m._paint={a:rows._paint.a,f:rows._paint.f,flip:!rows._paint.flip}; return m; };
-  paintedAtlas('tomBattle',AT.bt.src,AT.bt.rects,AT.bt.k);
-  paintedAtlas('tomPose',AT.pose.src,AT.pose.rects,AT.pose.k).tintFrac=[.47,.77];
-  paintedAtlas('tomStretch',AT.stretch.src,AT.stretch.rects,AT.stretch.k);
-  paintedAtlas('tomKo',AT.ko.src,AT.ko.rects,AT.ko.k);
-  paintedAtlas('tomOw',AT.ow.src,AT.ow.rects,AT.ow.k);
+  paintedAtlas('tomBattle',AT.bt.src+'?v=tom3',AT.bt.rects,AT.bt.k);
+  paintedAtlas('tomPose',AT.pose.src+'?v=tom3',AT.pose.rects,AT.pose.k).tintFrac=[.47,.77];
+  paintedAtlas('tomStretch',AT.stretch.src+'?v=tom3',AT.stretch.rects,AT.stretch.k);
+  paintedAtlas('tomKo',AT.ko.src+'?v=tom3',AT.ko.rects,AT.ko.k);
+  paintedAtlas('tomOw',AT.ow.src+'?v=tom3',AT.ow.rects,AT.ow.k);
   const tag=(rows,a,f,flip)=>paintRows(rows,a,f,flip);
   // Overworld: same shape as the old TOM_OW (pal, down/up/side with [stand, step, step]); recruit-sprites.js preps it at scale 1.
   // The sheet draws Tom facing LEFT; the game's 'side' set faces RIGHT (its 'left' is the mirror), so side = flipped left frames.

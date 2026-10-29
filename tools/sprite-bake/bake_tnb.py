@@ -214,10 +214,39 @@ for _pre, _refs in (('c_', ['c_pull', 'c_point', 'c_present', 'c_shrug', 'c_hips
     for _n in [n for n in poses if n.startswith(_pre)]:
         poses[_n] = scaled_to(poses[_n], _f); _b = EX_BOX[_n]
         _v = [int(round(v * _f)) for v in _b]; _v[3] = min(_v[3], poses[_n].width); HEAD_BOX[_n] = tuple(_v)
+# Body build (2026-10-29, Tom: "TNB body proportions still don't seem to match Tom"). Head and height already equal Tom's, but the painted TNB is a
+# slim figure and Tom is stocky: Tom's torso (shoulders, arms, trunk) is about 0.50 of his height wide, TNB's about 0.39. Below the chin every row is
+# stretched sideways about the body's centre line (blending in over BODY_BLEND rows so the neck and hair do not shear); height is untouched, so size
+# and head ratio stay exactly Tom's. BODY_KX front/back and battle, BODY_KXL side view (depth). Env vars BODY_KX / BODY_KXL override.
+BODY_KX = float(os.environ.get('BODY_KX', 1.26)); BODY_KXL = float(os.environ.get('BODY_KXL', 1.16)); BODY_BLEND = 22
+def _bulk_rows(img, chin, kx, blend):
+    from scipy import ndimage as ndi
+    arr = np.array(img); H, W = arr.shape[:2]; al = arr[:, :, 3] > 40
+    y0 = min(H - 2, chin + blend); y1 = min(H, y0 + max(8, int((H - y0) * .5)))
+    cols = np.where(al[y0:y1].any(0))[0]
+    cx = float(cols.mean()) if len(cols) else W / 2.0
+    pad = int(np.ceil((kx - 1) * max(cx, W - cx))) + 2
+    W2 = W + 2 * pad
+    ys = np.arange(H, dtype=float)
+    s = 1.0 + (kx - 1.0) * np.clip((ys - chin) / float(blend), 0, 1)
+    xs = cx + (np.arange(W2)[None, :] - (cx + pad)) / s[:, None]
+    yy = np.repeat(ys[:, None], W2, 1)
+    pm = arr.astype(float); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
+    out = np.zeros((H, W2, 4))
+    for c in range(4): out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [yy, xs], order=1, mode='constant', cval=0.0)
+    a = out[:, :, 3:4]; out[:, :, :3] = np.where(a > 1, out[:, :, :3] / np.maximum(a, 1) * 255.0, 0)
+    im = Image.fromarray(out.clip(0, 255).astype(np.uint8), 'RGBA'); return im.crop(im.getbbox())
+def bulk_body(img, name, chin, kx):
+    if name == 'b_ko':                          # lying: head on the left, body runs right; thickness is vertical, so work on the transposed picture
+        t = Image.fromarray(np.transpose(np.array(img), (1, 0, 2)).copy(), 'RGBA')
+        t = _bulk_rows(t, chin, kx, BODY_BLEND)
+        return Image.fromarray(np.transpose(np.array(t), (1, 0, 2)).copy(), 'RGBA')
+    return _bulk_rows(img, chin, kx, BODY_BLEND)
 for _n in list(poses):
     _t, _c = head_cc(poses[_n], _n)
     _k = (TARGET_BT * _Hb if _n.startswith(('b_', 'c_', 's_')) else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
     poses[_n] = bigger_head(poses[_n], _n, k=_k)
+    if BODY_KX != 1.0: poses[_n] = bulk_body(poses[_n], _n, int(round((_c - _t) * _k)), BODY_KXL if 'left' in _n else BODY_KX)
 if os.environ.get('HEADSHEET'):                      # debug: all head-warped frames on grey
     _it = list(poses.items()); _cw = max(i.width for _, i in _it) + 10; _ch = max(i.height for _, i in _it) + 10
     _sh = Image.new('RGBA', (_cw * 6, _ch * -(-len(_it) // 6)), (128, 128, 128, 255))
