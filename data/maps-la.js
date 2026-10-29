@@ -846,17 +846,31 @@ LA_AREAS.push(
 const LA_ROOMS=[
   {id:'coffee',w:11,h:9,
     style:{floor:'#d9c4a8',alt:'#e6d3b8',wall:'#b98a5a',trim:'#f0d9b5',pattern:'wood',rug:'#c98a4a'},
-    rug:[3,5,5,2],
+    rug:[4,4,3,2],
+    // Painted plate (art/coffee.webp, engine/plate.js), 11 x 9 tiles. Door and mosaic mat bottom centre (5,8). Counter, pastry case and monstera along the back,
+    // laptop table left, window table and book table right, low front walls with plants either side of the entry. '#' blocks, '.' walks.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '####...####',
+      '###.....###',
+      '####....###',
+      '####...####',
+      '####...####',
+      '####...####'],
     npcs:[
-      {name:'Juniper',x:5,y:4,look:'juniper',lines:[
+      {name:'Juniper',x:5,y:3,look:'juniper',lines:[
         'Welcome to Golden Hour. Every hour is golden hour if you believe.',
         'Our oat milk is oat-adjacent.',
         'Your name is Tom? I wrote TAM. It\'s basically the same.']}],
     objects:[
-      ['counter',3,2,5,1,'Espresso bar','A machine with eleven knobs. Juniper uses two of them.',{variant:'tea'}],
-      ['table',1,5,2,2,'Laptop table','Someone has been writing a screenplay here since 2016.'],
-      ['table',8,5,2,2,'Window table','A man is having a very loud meeting about a podcast.'],
-      ['pot',9,1,1,1,'Monstera','It has more Instagram followers than Skye.']]},
+      ['counter',4,2,3,1,'Espresso bar','A machine with eleven knobs. Juniper uses two of them.',{variant:'tea'}],
+      ['counter',7,2,2,2,'Pastry case','Croissants, a lemon bar the size of a paperback, and a card that says PASTRY 4.0. Nobody has seen the pastry for 4.0.',{variant:'tea'}],
+      ['pot',3,2,1,2,'Monstera','It has more Instagram followers than Skye.'],
+      ['table',0,3,3,3,'Laptop table','Someone has been writing a screenplay here since 2016. The sign on the wall says SAME SCRIPT, DIFFERENT YEAR.'],
+      ['table',8,3,2,2,'Window table','A man is having a very loud meeting about a podcast. Two microphones, one cup of tea.'],
+      ['table',8,5,2,1,'Book table','A sketchbook and a stack of magazines. The shelf sign says ART, TRAVEL, MUSIC, FILM, IDEAS. Mostly ideas.']]},
   {id:'ramen',w:12,h:9,
     style:{floor:'#cbb89c',alt:'#d8c6aa',wall:'#7a3a33',trim:'#e8c8a0',pattern:'wood',rug:'#b9483f'},
     rug:[4,5,4,2],
