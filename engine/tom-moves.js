@@ -1546,7 +1546,7 @@ const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot
 SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAlpha=1; const h=hand();
   const wind=ms>P.wind?ez((ms-P.wind)/(P.thr-P.wind)):0,press=P.presses.some(t=>ms>t&&ms<t+110),shake=ms>P.ugh&&ms<P.wind?Math.sin(ms*.09)*2:0;
   const x=h.x-8+shake-wind*10,y=h.y-4-wind*16,led=Math.floor(ms/180)%2===0&&ms>P.presses[0];
-  ctl(x,y+(press?2:0),1.25,-.3-wind*.7,press,led);
+  if(ms>=P.ugh) ctl(x-wind*6,y+(press?2:0)-wind*36,1.25-wind*.3,-.3-wind*.7,press,led);   // until then the painted pose holds its own controller
   // The signal icon over the controller: three arcs, a red cross once the presses fail.
   if(ms>P.presses[0]+100&&ms<P.wind) { const sx=x+4,sy=y-26,a=Math.min(1,(ms-P.presses[0]-100)/150); gfx.globalAlpha=a;
     gfx.strokeStyle=CREAM; gfx.lineCap='round'; gfx.lineWidth=2.5; for(let k=1;k<=3;k++) { gfx.beginPath(); gfx.arc(sx,sy+8,k*5,Math.PI*1.2,Math.PI*1.8); gfx.stroke(); } E(sx,sy+8,1.8,1.8,CREAM);
@@ -1554,8 +1554,9 @@ SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAl
 SC.tp_cdown=(s,u)=>{ const q=ez(u/.35); gfx.globalAlpha=fade(u,.7); ctl(s.x+q*s.dx,s.y+Math.abs(Math.sin(q*Math.PI*2))*-8*(1-q)+q*s.dy,1.25,.5+q*1.4,false,false); };
 Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const presses=[500,900,1300],ugh=1650,wind=2250,thr=2650,fly=360,hit=thr+fly;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'act'},{t:ugh,f:'act',dy:(u,tt)=>Math.sin(tt*30)*-.7},{t:ugh+10,f:'expr'},{t:wind,f:'expr',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:wind+10,f:'act'},{t:thr,f:'act',dx:u=>ez(u)*8},
-    {t:thr+10,f:'act',dx:-8},{t:hit+500,f:'expr'},{t:hit+1300,f:'idle'}]);
+  // Painted poses (art/chars/tom-poses.webp): hold = thumbs on the controller, annoyed = holding it out, tw_windup / tw_follow = the throw.
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'hold'},{t:ugh,f:'hold',dy:(u,tt)=>Math.sin(tt*30)*-.7},{t:ugh+10,f:'annoyed'},{t:wind,f:'annoyed',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:wind+10,f:'tw_windup'},{t:thr,f:'tw_windup',dx:u=>ez(u)*8},
+    {t:thr+10,f:'tw_follow',dx:-8},{t:hit+500,f:'tw_follow'},{t:hit+900,f:'idle'},{t:hit+1300,f:'idle'}]);
   const plan={presses,ugh,wind,thr};
   const taps=presses.map((t,k)=>[t,()=>{ S('select'); if(k===2) S('nope'); }]);
   ST.play(E2,[
@@ -1564,7 +1565,7 @@ Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     [presses[1]+80,()=>{ scene('tv_text',1.0,{st,txt:'...',c:CREAM,sc:2,dy:6}); }],
     [ugh,()=>{ say(m.id,'button_mash'); setMessage('Nothing. He presses it again. Nothing.'); scene('tv_text',1.2,{st,txt:'UGH.',c:RED,sc:3,dy:10}); }],
     [wind,()=>{ setMessage('Tom winds up.'); }],
-    [thr,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu)=>ctl(0,0,1.25,0,false,false),h.x-8,h.y-26,F.x,F.mid,fly/1000,34,0,{spin:3}); }],
+    [thr,()=>{ const h=hand(); S('whoosh'); ST.fly((x,y,uu)=>ctl(0,0,1.25,0,false,false),h.x-14,h.y-60,F.x,F.mid,fly/1000,34,0,{spin:3}); }],
     ['hf',hit],
     [hit,()=>{ S('bonk'); S('thud'); ST.jolt(f,.6); landHit(100); scene('tv_big',1.0,{x:F.x,y:F.top-62,txt:'BONK!',c:GOLD,sc:4}); scene('tv_burst',.6,{x:F.x,y:F.mid,n:10,r:46}); scene('tv_ring',.6,{x:F.x,y:F.mid,r:42});
       scene('tp_cdown',1.2,{x:F.x,y:F.mid,dx:-26,dy:F.base-F.mid-6}); setMessage('The controller connects. Just not the way it was meant to.'); }],
