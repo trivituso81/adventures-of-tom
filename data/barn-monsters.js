@@ -400,5 +400,5 @@ Object.assign(MONSTERS,{
 });
 // Map spots. The Car Barn: Lukewarms roam the hall, Leftovers the corridor and the Machine Shop (they hold still until
 // the party walks in). Each shop's troublemaker holds still until its story fight. Old Ironbelly waits on the hearth.
-const BARN_MONSTER_SPOTS=[['lukewarm',8,10],['lukewarm',25,9],['leftover',16,17],['leftover',26,5],['wetblanket',9,5],['thedraft',20,4],['pickyeater',9,17]];
+const BARN_MONSTER_SPOTS=[['lukewarm',6,10],['lukewarm',24,9],['leftover',18,18],['leftover',22,6],['wetblanket',9,7],['thedraft',21,7],['pickyeater',9,19]];
 const BOILER_MONSTER_SPOTS=[['ironbelly',9,3]];

@@ -14,6 +14,7 @@ PLATES.lofts={src:'art/lofts.webp',px:64,img:null,ready:false};
 PLATES.loftlobby={src:'art/loftlobby.webp',px:64,img:null,ready:false};
 // Tom's house: two painted rooms, the main floor (16 x 24 tiles) and the primary suite (16 x 15), both 64 art px per tile.
 PLATES.tomhouse={src:'art/tomhouse.webp',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.carbarn={src:'art/carbarn.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.tomsuite={src:'art/tomsuite.webp',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];

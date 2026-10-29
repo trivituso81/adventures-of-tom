@@ -2872,7 +2872,7 @@ pressAction=function() {
 // The Car Barn is cold (a blue chill, frost at the edges) with little blue pilot lights drifting along the hall toward
 // the turntable, until Ironbelly lets them go. The Boiler Room glows. Jefferson Park is a little blue until the feast,
 // and on the night of the feast there is a long table down the middle of Jefferson Boulevard.
-const CH8_FLAMES=[[2,10],[9,10],[16,9],[17,14],[20,12],[26,15],[6,4],[22,3],[5,16]];
+const CH8_FLAMES=[[2,10],[9,10],[16,11],[19,12],[20,11],[26,15],[7,7],[21,7],[8,19]];
 STORY_MAPFX.push(time=>{
   const M=currentMap,id=M.id,c=gfx;
   const cold=STORY.mode==='full'&&STORY.chapter===8&&!flag('ch8-wrap');
@@ -2880,7 +2880,7 @@ STORY_MAPFX.push(time=>{
     if(cold) {
       c.globalAlpha=.16; rect(0,0,M.w*T,M.h*T,'#9fd8ff'); c.globalAlpha=1;
       for(let k=0;k<CH8_FLAMES.length;k++) {
-        const [fx,fy]=CH8_FLAMES[k],ph=((time*.25+k*.37)%1),tx=(fx+(28-fx)*ph)*T,ty=(fy+(15.5-fy)*ph*ph)*T+Math.sin(time*3+k)*4;
+        const [fx,fy]=CH8_FLAMES[k],ph=((time*.25+k*.37)%1),tx=(fx+(28-fx)*ph)*T,ty=(fy+(14.5-fy)*ph*ph)*T+Math.sin(time*3+k)*4;
         c.globalAlpha=Math.sin(ph*Math.PI)*.9; ellipse(tx,ty,4,6,'#6cb0ff'); ellipse(tx,ty+1,2,3,'#dff0ff'); c.globalAlpha=1;
       }
     } else if(STORY.mode==='full'&&STORY.chapter>=8) { c.globalAlpha=.06; rect(0,0,M.w*T,M.h*T,'#ffb04a'); c.globalAlpha=1; }
