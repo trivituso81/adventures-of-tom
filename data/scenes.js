@@ -1084,7 +1084,7 @@ SCENES.ch4Fetch=[
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {talk:'Nara',lines:['Nara’s ears go straight up. Something shiny is skittering across New York.']},
   {talk:'Tom',lines:['Nara. NARA. Don\'t...']},
-  {walk:'nara',to:routeTo('nara',11,18),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
+  {walk:'nara',to:routeTo('nara',14,6),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
   {talk:'TNB',lines:['That\'s a closed set! She\'s not on the call sheet!']},
   {face:'nara',dir:'down'},
   {wait:.5},
@@ -1104,7 +1104,7 @@ SCENES.ch4Fetch=[
   {flag:'ch4-fetch'},
   {talk:'TNB',lines:['Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can\'t work like this.']},
   {talk:'Tom',lines:['Then we clear the sets. One at a time. Main Street, the Western street, New York.']},
-  {toast:'Goal: clear the three sets: Main Street (top left), the Western street (top right), New York (bottom left).',time:5}
+  {toast:'Goal: clear the three sets: the Western street (top left), New York (top right), and Main Street (the jungle set, right).',time:5}
 ];
 // 6. The three sets. A troublemaker on each one.
 SCENES.ch4Crab=[
@@ -1238,9 +1238,9 @@ TRIGGERS.push(
   {id:'ch4-nara',map:'jpark',when:{...CH4,flag:'ch4-goal',notFlag:'ch4-nara',test:()=>!inParty(nara)},scene:'ch4Nara'},
   {id:'ch4-gate',map:'studio',when:{...CH4,flag:'ch4-nara',notFlag:'ch4-gate'},scene:'ch4Gate'},
   {id:'ch4-fetch',map:'backlot',when:{...CH4,flag:'ch4-gate',notFlag:'ch4-fetch',test:()=>inParty(nara)},scene:'ch4Fetch'},
-  {id:'ch4-main',map:'backlot',at:[1,6,13,9],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-main'},scene:'ch4Crab'},
-  {id:'ch4-west',map:'backlot',at:[16,6,28,9],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-west'},scene:'ch4Clapper'},
-  {id:'ch4-ny',map:'backlot',at:[1,17,13,19],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-ny'},scene:'ch4Moth'},
+  {id:'ch4-main',map:'backlot',at:[9,9,13,13],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-main'},scene:'ch4Crab'},
+  {id:'ch4-west',map:'backlot',at:[0,5,9,7],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-west'},scene:'ch4Clapper'},
+  {id:'ch4-ny',map:'backlot',at:[12,3,15,6],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-ny'},scene:'ch4Moth'},
   {id:'ch4-stage',map:'stage7',when:{...CH4,flag:'ch4-sets',notFlag:'ch4-stage'},scene:'ch4Stage'},
   {id:'ch4-boss',map:'stageset',when:{...CH4,flag:'ch4-rig',notFlag:'ch4-boss'},scene:'ch4Boss'},
   {id:'ch4-after',map:'stageset',when:{...CH4,flag:{'battle:directorscut':'win'},notFlag:'ch4-clear'},scene:'ch4AfterBoss'},
