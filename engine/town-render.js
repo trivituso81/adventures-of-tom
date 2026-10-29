@@ -530,6 +530,8 @@ function drawActor(a) {
   if(a.isPlayer) { drawSheetActor(a,OW[typeof playerSkinId==='function'?playerSkinId():'tom']); return; }   // TNB while Tom is gone (engine/tom-gone.js)
   if(a.kid) { drawSheetActor(a,OW[a.member.id]); return; }
   if(a.sheet) { drawSheetActor(a,OW[a.sheet]); return; }
+  const tp=typeof TOWN_PAINTED!=='undefined'?TOWN_PAINTED[a.name]:null;   // the painted townsfolk (data/townsfolk-hires-use.js), by name
+  if(tp&&tp.look===a.paletteName&&OW[tp.set]) { drawSheetActor(a,OW[tp.set]); return; }
   const v=VILLAGERS[a.paletteName];
   if(!v&&OW[a.paletteName]) { drawSheetActor(a,OW[a.paletteName]); return; }   // a traced sheet registered under the look name (data/npc-sprites.js: the chapter 3 to 6 townspeople)
   if(v) { drawSheetActor(a,villagerSet(v)); return; }
