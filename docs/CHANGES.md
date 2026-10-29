@@ -1,3 +1,11 @@
+## 2026-10-28: Painted plate for the Reading Room (chapter 7)
+- The Reading Room (map id `readroom`, under the Hush Library) now uses Tom's painting (`art/readroom.webp`, 1280 x 896, 20 x 14 tiles at 64 px, entry in `PLATES`). The ASCII plan stays underneath as the invisible tile layer; a `plateMask` in `data/maps-le.js` is the walk map.
+- Walkable: the dais carpet (row 2, x 8 to 11), the painted steps (row 3, x 7 to 12), the floor, and the gate (9,12) to (10,13), which still leads down to the Stacks. Spawn (9,12) is unchanged. The balustrades, the four reading tables, the globe, the lectern and the gate posts and lamps block.
+- Objects re-laid to cover each painted table so they can be touched from any open side: top left (2,6) 5x3, top right (13,6) 6x3, bottom left (1,9) 5x3, bottom right (14,9) 6x3 (Tom's pink markers sit inside these). Globe stays at (17,5) (reach it from (16,5) or (17,6)); lectern stays at (9,5). Object text is unchanged.
+- Chapter 7 boss scene needed no edits: Tom (9,7), Grace (8,7), Rose (10,7) are on open floor and the Unread stands on the dais steps at (9,3); fight it from (9,4). Watched the scene play on the painting.
+- Tests: new `tools/readroom_test.py` (objects touchable, boss stand tiles walkable, real key presses up the aisle and out the gate to the Stacks, portrait and landscape shots in `tools/shots/readroom-*.png`); `tools/reach_test.py readroom stacks` 0 fails; smoke no fails; `tools/ch5_school_test.py` still clean.
+- Known roughness: the minimap still draws the old tile look. Not reworded: no spoken lines changed.
+
 ## 2026-10-28: Painted plate for the Cafetorium
 - The Cafetorium (map id `cafetorium`, chapter 5) now uses Tom's painting (`art/cafetorium.webp`, 1280 x 896, 20 x 14 tiles at 64 px, entry in `PLATES`). The ASCII plan stays underneath as the invisible tile layer; a `plateMask` is the walk map.
 - Door: the school exit moved onto the painted double doors at (1,5), step up from the spawn (1,6); it leads to the hallway at (27,9). The trash can at (0,6) and (0,7) now blocks. The school sends Tom to (1,6) and (1,7).
