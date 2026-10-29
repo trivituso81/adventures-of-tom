@@ -21,7 +21,7 @@ function roseRide(pose,layer,cx,top,s,flip,opts) {
 function roseSeatBattle(m,i,frame,sp,fx,hurt,t,force) {
   if(!force&&!b2RidePos(m,i)) return false;
   const tom=b2Tom(),d=tom&&b2Alive(tom)&&battle.drawnAt&&battle.drawnAt[tom.idx]; if(!d) return false;
-  const pose=(frame===sp.celeb||frame===sp.celebFlip)?'bt_celeb':'bt_idle',s=sp.scale;
+  const pose=(frame===sp.celeb||frame===sp.celebFlip)?'bt_celeb':'bt_idle',s=BATTLE_SPRITES.tom.scale;   // the ride art is sized to Tom, so she rides at his scale
   const cx=d.x!=null?d.x+d.w/2:d.cx;
   // Her own bounce is carried by Tom (hop below, added to his lift in engine/battle-draw.js), so the pair hops as one: her
   // legs keep their length and her shoes stay on his shoulders instead of stretching and floating off.
