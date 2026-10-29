@@ -207,7 +207,7 @@ G.perfect10=E2=>{ const {fx,dmg,crit}=E2; const per=Math.max(1,Math.floor(dmg/5)
     600,()=>{ fx.rebound=.45; sfx.bonk(); landHit(per,false); bt('THREE',96,34,CREAM,3,.6); },
     600,()=>{ fx.flip=.8; sfx.jumpWhistle(); },
     800,()=>{ fx.kick=.45; sfx.slash(); },150,()=>{ battle.slash=.22; battle.enemyKnock=.45; battle.flashEnemy=.5; sfx.thud(); scene('flash',.5,{a:.6}); scene('burst',.6,{x:GX,y:GY,r:80,n:14,c:PINK,c2:GOLD}); scene('ring',.7,{x:GX,y:264,r:130,c:GOLD}); landHit(last,crit); },
-    500,()=>{ scene('scorecards',2.2,{cards:['10','10','10']}); sfx.levelChime(); scene('confetti',2.0,{n:50}); scene('flashes',1.6,{n:14}); for(let k=0;k<6;k++) b7Later(()=>sfx.click(),k*180); bt('PERFECT 10',96,30,GOLD,4,1.4); pose(fx,'celeb',1.6); },
+    500,()=>{ scene('scorecards',2.2,{cards:['10','10','10']}); sfx.levelChime(); scene('confetti',2.0,{n:50}); scene('flashes',1.6,{n:14}); for(let k=0;k<6;k++) b7Later(()=>sfx.click(),k*180); bt('PERFECT 10',96,30,GOLD,4,1.4); pose(fx,'celeb',1.6); fx.p10=1.6; },
     1800,E2.result+' Gold medal. One million views. The Grump needs a minute.',()=>checkEnemy()); };
 })();
 

@@ -8,7 +8,7 @@ function updateBattle(dt) {
   battle.flashEnemy=Math.max(0,battle.flashEnemy-dt);
   battle.enemyLunge=Math.max(0,battle.enemyLunge-dt);
   battle.slash=Math.max(0,battle.slash-dt);
-  for(const f of battle.fx) { for(const k of ['shake','flash','lunge','twirl','tongue','appr','controller','cartwheel','kick','poke','combo','handspring','dismount','pogo','flop','roundoff','rebound','flip','punch','cheer','tickle','run','burpee','coach','hug','grumble','hop','toss','aim','cast','pose']) f[k]=Math.max(0,f[k]-dt); }
+  for(const f of battle.fx) { for(const k of ['shake','flash','lunge','twirl','tongue','appr','controller','cartwheel','kick','poke','combo','handspring','dismount','p10','pogo','flop','roundoff','rebound','flip','punch','cheer','tickle','run','burpee','coach','hug','grumble','hop','toss','aim','cast','pose']) f[k]=Math.max(0,f[k]-dt); }
   battle.enemyKnock=Math.max(0,(battle.enemyKnock||0)-dt);
   for(const f of battle.fx) if(f.path) { f.path.t+=dt; if(f.path.t>=f.path.dur) f.path=null; }
   try { RFX.update(dt); } catch(err) { gameFault('fx update',err); }

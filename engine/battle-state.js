@@ -10,7 +10,7 @@ const battle={
   actor:0,sel:0,mode:'main',
   shakeEnemy:0,flashEnemy:0,enemyLunge:0,enemyStunned:false,
   slash:0,vapor:0,vaporParts:[],enemyGone:false,block:null,
-  pops:[],time:0,laser:null,boop:null,fireball:null,tetris:null,texts:[],fx:party.map(()=>({pose:0,poseK:'',shake:0,flash:0,lunge:0,twirl:0,tongue:0,appr:0,apprDur:0,controller:0,cartwheel:0,kick:0,poke:0,combo:0,handspring:0,dismount:0,pogo:0,flop:0,roundoff:0,rebound:0,flip:0,punch:0,cheer:0,tickle:0,run:0,runDur:0,runPasses:1,burpee:0,coach:0,hug:0,grumble:0,hop:0,toss:0,aim:0,cast:0}))
+  pops:[],time:0,laser:null,boop:null,fireball:null,tetris:null,texts:[],fx:party.map(()=>({pose:0,poseK:'',shake:0,flash:0,lunge:0,twirl:0,tongue:0,appr:0,apprDur:0,controller:0,cartwheel:0,kick:0,poke:0,combo:0,handspring:0,dismount:0,p10:0,pogo:0,flop:0,roundoff:0,rebound:0,flip:0,punch:0,cheer:0,tickle:0,run:0,runDur:0,runPasses:1,burpee:0,coach:0,hug:0,grumble:0,hop:0,toss:0,aim:0,cast:0}))
 };
 // Party positions in 192x108 stage units (drawn at 3x).
 const BATTLE_POS1=[{x:150,base:90}];

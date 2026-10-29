@@ -530,3 +530,6 @@ Known: Dot says "ten doors" (should be eleven); ch15 QUIET glyphs; ch17_test pre
 
 ## Rose Boop: painted jab
 - Boop now uses three painted frames (jab0 wind-up, jab1 extended index finger, jab2 recoil) from `tools/sprite-bake/src/rose-jab-v2.png`, lunging so the fingertip lands on the enemy's nose at the hit. The old drawn-on arm (`rf_poke`) is no longer used by Boop.
+
+## Grace sheet B poses (2026-10-29)
+Painted frames for her level-5 moves (src tools/sprite-bake/src/grace-poses-b.png, baked by bake_grace_poses.py into art/chars/grace-wheel.webp): hs_flip, hs_land, aerial, db_tuck, db_stick, p10. Handspring, Beam Dismount and Perfect 10 now draw them (engine/battle-draw.js, gw()); `aerial` is baked but not wired yet. Perfect 10 ends on the p10 pose (fx.p10).

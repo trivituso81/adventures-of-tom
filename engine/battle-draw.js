@@ -151,7 +151,13 @@ function drawBattle() {
       for(let k=0;k<4;k++) rect(cx+(dirL?w/2+6+k*8:-w/2-14-k*8),base-h*.6+k*9,12-k*2,2,'rgba(255,246,220,'+(.6-k*.13)+')');
       if(!dirL) frameOverride=sp.runFlip?sp.runFlip[Math.floor(t*12)%2]:sp.flip;
     }
-    if(fx.handspring>0) { const q=1-fx.handspring/.8; rot=-q*Math.PI*4; base-=Math.round(Math.abs(Math.sin(q*Math.PI*2))*18); frameOverride=sp.idle; }
+    // Grace's painted tumbling frames (data/grace-wheel-use.js): hip-centred, so standing ones drop to put her feet on the ground.
+    let gwPose=null;
+    const gw=n=>{ if(m.id!=='grace'||typeof GRACE_WHEEL==='undefined'||!GRACE_WHEEL.painted||typeof GRACE_WHEEL_HIRES==='undefined'||!GRACE_WHEEL_HIRES.rects[n]||!(sp&&sp.hires)) return null;
+      const fr=GRACE_WHEEL.painted(n); return {fr,drop:(fr.length-(GRACE_WHEEL_HIRES.foot[n]||fr.length))*sp.scale}; };
+    if(fx.handspring>0) { const q=1-fx.handspring/.8; rot=-q*Math.PI*4; base-=Math.round(Math.abs(Math.sin(q*Math.PI*2))*18); frameOverride=sp.idle;
+      const ld=q<.1||q>.9?gw('hs_land'):null, fl=ld?null:gw(q>.2&&q<.8?'hs_flip':'hs_land');
+      if(ld) { rot=0; gwPose=ld; } else if(fl) { gwPose=fl; if(q>.2&&q<.8) rot=-(q-.2)/.6*Math.PI*2; else rot=0; } }
     if(fx.roundoff>0) { const q=1-fx.roundoff/.6; rot=-q*Math.PI*2; base-=Math.round(Math.sin(q*Math.PI)*12); frameOverride=sp.idle; }
     if(fx.rebound>0) { const q=1-fx.rebound/.45; frameOverride=sp.flip; base-=Math.round(Math.sin(q*Math.PI)*26); cx+=Math.round(Math.sin(q*Math.PI/2)*34); }
     if(fx.flip>0) { const q=1-fx.flip/.8; rot=q*Math.PI*2; base-=Math.round(Math.sin(q*Math.PI)*78); frameOverride=sp.idle; noShadow=q>.15&&q<.85; }
@@ -162,7 +168,9 @@ function drawBattle() {
       else if(q<.8) { cx=tx; base=ty-Math.round(Math.abs(Math.sin((q-.6)/.2*Math.PI))*6); }
       else { const u=(q-.8)/.2; cx=Math.round(tx+(origX-tx)*u); base=Math.round(ty+(origBase-ty)*u)-Math.round(Math.sin(u*Math.PI)*40); }
       frameOverride=sp.idle; if(q<.6) noShadow=true;
+      const g=q<.4?gw('db_tuck'):(q>=.6&&q<.8?gw('db_stick'):null); if(g) gwPose=g;
     }
+    if(fx.p10>0) { const g=gw('p10'); if(g) { gwPose=g; rot=0; base-=Math.round(Math.abs(Math.sin(t*7))*8); } }
     if(fx.pogo>0) {
       const D=1.5,q=1-fx.pogo/D,tx=236;
       if(q<.7) { const u=q/.7; cx=Math.round(origX+(tx-origX)*u); const air=Math.abs(Math.sin(u*Math.PI*3)); base=origBase-Math.round(air*46); frameOverride=air>.25?sp.celeb:sp.idle; }
@@ -194,9 +202,9 @@ function drawBattle() {
     battle.drawnAt[i]={cx,base,h,x,w};
     if(!noShadow) ellipse(cx,base+3,w*.55*pathSc,6*pathSc,'rgba(47,73,54,.3)');
     if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
-    else if(rot!==0||pathSc!==1||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
-      const fr2=frameOverride||sp.idle,w2=fr2[0].length*sp.scale,h2=fr2.length*sp.scale;
-      gfx.save(); gfx.translate(cx,base-h2/2*pathSc); gfx.scale(pathSc,pathSc); gfx.rotate(rot);
+    else if(rot!==0||pathSc!==1||gwPose||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
+      const fr2=gwPose?gwPose.fr:(frameOverride||sp.idle),w2=fr2[0].length*sp.scale,h2=fr2.length*sp.scale;
+      gfx.save(); gfx.translate(cx,base-h2/2*pathSc+(gwPose&&!rot?gwPose.drop:0)); gfx.scale(pathSc,pathSc); gfx.rotate(rot);
       rideBodyDraw(m,fr2,sp.pal,-w2/2,-h2/2,sp.scale,{flash:fx.flash>0});
       gfx.restore();
       if(fx.flop>0&&rot!==0) { const q=1-fx.flop/1.8; if(q>.62&&q<.75) for(let k=0;k<6;k++) { const a=k*1.05,r=20+(q-.62)*300; ellipse(cx+Math.cos(a)*r,base-4-Math.abs(Math.sin(a))*r*.3,7,4,'rgba(230,220,190,.7)'); } }
