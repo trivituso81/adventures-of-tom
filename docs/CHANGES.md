@@ -1,3 +1,7 @@
+## 2026-10-29: Lobby elevator is a call button
+- The brass elevator doors in `loftlobby` are scenery now. The call button beside them (object at 7,2, stand at 7,3 facing up) asks "Go up to TNB's loft?" with Enter TNB's / Not now. Yes rides to `lofts` at (6,8). New object field `ride:[map,x,y,facing]` (with optional `ridePrompt`) handled in `engine/overworld.js` (`pressAction`), reusable for any lift or door that should ask first.
+- Test: `tools/loftlobby_test.py` covers the prompt, Not now, and Enter TNB's. smoke.py FAILS: []. No spoken lines changed.
+
 ## 2026-10-29: TNB's loft is painted (map `lofts`)
 - `art/lofts.webp` (768 x 640, 12 x 10 tiles) is the loft plate, registered in `engine/plate.js` with the interior actor scale. `plateMask` in `data/maps-la.js` is traced from the painting; the loft is entered from the lobby elevator (arrive 6,8) and its door (6,9) is the elevator back down.
 - Objects re-placed on the painted furniture, same names and jokes: kiln (2,1), garment rack (4,1), pottery shelf (8,1), wheel (1,3), longboard wall (8,4), horror couch (1,6). New: coffee table (5,4) and side tables (4,6). TNB stays at (6,5).

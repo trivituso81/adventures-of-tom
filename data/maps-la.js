@@ -987,12 +987,12 @@ const LA_ROOMS=[
   {id:'loftlobby',name:'The Lofts Lobby',w:12,h:10,
     style:{floor:'#d8b57a',alt:'#e0c08a',wall:'#8a5a44',trim:'#d9c0a0',pattern:'tile',rug:'#7a4a3a'},
     rug:[4,4,4,2],
-    // Painted plate (art/loftlobby.webp, engine/plate.js). Street gate at the bottom (door 6,9 and 5,9), brass elevator doors at the top (5,1 and 6,1).
+    // Painted plate (art/loftlobby.webp, engine/plate.js). Street gate at the bottom (door 6,9 and 5,9). The brass elevator doors (5,1 and 6,1) are scenery: the call button beside them (7,2) asks to go up to TNB's loft.
     // Mailboxes top left, package desk top right, leather sofa left, monstera right. The mask is the walk map: '#' blocks, '.' walks.
     plateMask:[
       '############',
-      '#####..#####',
-      '#####..#####',
+      '############',
+      '############',
       '###.....####',
       '###.......##',
       '###.......##',
@@ -1001,9 +1001,9 @@ const LA_ROOMS=[
       '#####..#####',
       '#####..#####'],
     door:[6,9],door2:[5,9],spawn:{x:6,y:8},
-    portals:[[5,1,'lofts',6,8,'up'],[6,1,'lofts',6,8,'up']],
     npcs:[],
     objects:[
+      ['photo',7,2,1,1,'Elevator button',"The brass call button. A tiny label under it says: TNB, TOP FLOOR, MIND THE KILN.",{ride:['lofts',6,8,'up'],ridePrompt:"Go up to TNB's loft?"}],
       ['shelf',2,1,3,2,'Mailboxes',"Thirty brass mailboxes. TNB's just says CLAY in marker, because the real label fell off in 2022. It is full of glaze catalogs."],
       ['table',8,2,3,2,'Package desk','A box stamped FRAGILE: POTTERY, addressed to TNB. Every neighbor has shaken it once. Nobody has admitted it.'],
       ['couch',0,4,3,3,'Leather sofa','For people waiting on someone. A handbag and yesterday\'s paper sit on it. Nobody has claimed either.'],

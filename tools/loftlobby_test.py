@@ -47,15 +47,28 @@ with sync_playwright() as pw:
     w=where(pg); print(w); check('street door opens the lobby',w[0]=='loftlobby')
     check('lobby plate drawn',pg.evaluate("()=>!!plateFor(currentMap)"))
     r=pg.evaluate(REACH); print(r)
-    check('every lobby object touchable',not r['badObjects']); check('both elevator doors reachable',not r['portalsUnreached'])
+    check('every lobby object touchable',not r['badObjects']); check('exit gate reachable',not r['portalsUnreached'])
     shot(pg,'spawn')
     pg.evaluate("()=>{ for(const n of currentMap.npcs){ n.x=0; n.y=0; } }")
     for n,(x,y,dr) in {'mail':(3,3,'up'),'desk':(8,4,'up'),'sofa':(3,5,'left'),'plant':(9,5,'right')}.items():
         stand(pg,x,y,dr); pg.keyboard.press('Enter'); pg.wait_for_timeout(400); shot(pg,n)
         check(f'{n} examine opens text',pg.evaluate("()=>dialog.active")); skip_intro(pg)
-    # walk the whole way with real key presses: gate (6,8) up to the elevator (6,1)
-    stand(pg,6,8,'up'); walk(pg,'ArrowUp',7)
-    w=where(pg); print(w); check('elevator leads to the loft',w[0]=='lofts')
+    # the elevator is a call button: stand under it, press A, pick Enter TNB's
+    check('lobby has no walk-through elevator doors',pg.evaluate("()=>![...currentMap.portals.values()].some(p=>p.to==='lofts')"))
+    stand(pg,7,3,'up'); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    for i in range(8):
+        if pg.evaluate("()=>!!dialog.choice&&!document.getElementById('dialog-choices').hidden"): break
+        pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    check('button asks a yes/no question',pg.evaluate("()=>!!dialog.choice&&dialog.choice.options[0].label.startsWith('Enter')"))
+    shot(pg,'button')
+    pg.evaluate("()=>pickChoice(1)"); pg.wait_for_timeout(500)
+    check('Not now stays in the lobby',pg.evaluate("()=>currentMap.id==='loftlobby'"))
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    for i in range(8):
+        if pg.evaluate("()=>!!dialog.choice&&!document.getElementById('dialog-choices').hidden"): break
+        pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    pg.evaluate("()=>pickChoice(0)"); pg.wait_for_timeout(1800)
+    w=where(pg); print(w); check('Enter TNB\'s brings the party to the loft',w[0]=='lofts' and w[1]==6 and w[2]==8)
     skip_intro(pg,800)
     shot(pg,'loft')
     # loft exit leads back to the lobby elevator
@@ -66,7 +79,6 @@ with sync_playwright() as pw:
     stand(pg,6,7,'down'); walk(pg,'ArrowDown',3)
     w=where(pg); print(w); check('lobby gate leads to the street',w[0]=='blvd' and w[2]>=d['y']+1)
     check('loft elevator lands at the lobby doors',pg.evaluate("()=>{ const p=worlds.lofts.portals.get('6,9'); return p.kind==='edge'&&p.to==='loftlobby'&&p.spawn.x===5&&p.spawn.y===3; }"))
-    check('lobby elevator lands in the loft',pg.evaluate("()=>{ const p=worlds.loftlobby.portals.get('5,1'); return p.kind==='edge'&&p.to==='lofts'; }"))
     check('no console errors',not errs)
     if errs: print(errs[:5])
     br.close()
