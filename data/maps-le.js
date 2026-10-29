@@ -575,12 +575,12 @@ LE_AREAS.push(
 const STACKS_TILES={f:'fiction',n:'nonfic',',':'hallwood',p:'picrug',r:'storyrug',D:'hallwood',R:'readwood',P:'dais'};
 const STACKS_SHELF={f:['Fiction','FICTION. Mysteries, dragons, a horse who solves crimes. Somebody is whispering behind the books.'],
   n:['Nonfiction','NONFICTION. Volcanoes, bridges, 101 Uses for a Potato. The potato book is whispering the loudest.']};
-function planStacks(plan) {
+function planStacks(plan,noWingObjs) {
   const walls=[],voids=[],floors={},objs=[];
   plan.forEach((row,y)=>{ for(let x=0;x<row.length;x++) { const c=row[x];
     if(c==='B') walls.push([x,y]); else if(c==='X') voids.push([x,y]);
     else if(c==='S') { const w=x<14?'f':'n'; (floors[STACKS_TILES[w]]=floors[STACKS_TILES[w]]||[]).push([x,y,x,y]);
-      objs.push(['bookcase',x,y,1,1,STACKS_SHELF[w][0],STACKS_SHELF[w][1],{wing:w}]); }
+      if(!noWingObjs) objs.push(['bookcase',x,y,1,1,STACKS_SHELF[w][0],STACKS_SHELF[w][1],{wing:w}]); }
     else if(STACKS_TILES[c]) (floors[STACKS_TILES[c]]=floors[STACKS_TILES[c]]||[]).push([x,y,x,y]); } });
   return {tiles:Object.entries(floors).map(([tile,rects])=>({tile,rects})),pools:[{tile:'bkwall',cells:walls},{tile:'bkvoid',cells:voids}],objects:objs};
 }
@@ -593,7 +593,32 @@ LE_AREAS.push(
     spawn:{x:1,y:10},
     wild:true,
     exits:[[0,10,'library',11,2,'down','stairsup'],[14,1,'readroom',9,12,'up','hallwood'],[15,1,'readroom',10,12,'up','hallwood']],
-    monsters:STACKS_MONSTER_SPOTS},
+    monsters:STACKS_MONSTER_SPOTS,
+    // Painted plate (art/stacks.webp, engine/plate.js). '#' blocks, '.' walks. The runner leads from the Reading Room doors (top) to the hall;
+    // the hall (rows 8 to 10) joins the left exit (0,10), the Fiction and Nonfiction lanes (row 7) and the gap (x 14 to 16) down to Picture Books.
+    plateMask:[
+      '##############################',
+      '##############################',
+      '##############..##########.###',
+      '##############..##########.###',
+      '#####..#######..##########.###',
+      '######.#######..##########.###',
+      '#####..#######..##########.###',
+      '####...##..................###',
+      '####......####..#####......###',
+      '#.........####..####.........#',
+      '................##...........#',
+      '##############...#############',
+      '##############...#############',
+      '##############...#############',
+      '##############...#####.#######',
+      '######.###..###...###..#######',
+      '######.###..###...###..#######',
+      '######.......#....####.#######',
+      '############......####.#######',
+      '############......###....#####',
+      '######.....................###',
+      '##############################']},
     planStacks([
       'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',
       'BffffffffffffBDDBnnnnnnnnnnnnB',
@@ -616,20 +641,24 @@ LE_AREAS.push(
       'XXXXXXXBpprrrrppppppppBXXXXXXX',
       'XXXXXXXBppppppppppppppBXXXXXXX',
       'XXXXXXXBBBBBBBBBBBBBBBBXXXXXXX',
-      'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']),
+      'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'],true),
     {objects:[
+      ['bookcase',4,6,1,1,'Fiction',STACKS_SHELF.f[1],{wing:'f'}],
+      ['bookcase',7,6,1,1,'Fiction',STACKS_SHELF.f[1],{wing:'f'}],
+      ['bookcase',25,3,1,1,'Nonfiction',STACKS_SHELF.n[1],{wing:'n'}],
+      ['bookcase',25,5,1,1,'Nonfiction',STACKS_SHELF.n[1],{wing:'n'}],
       ['readdoors',14,1,2,1,'Reading Room doors','Two tall doors: THE READING ROOM. A brass lock shaped like a card catalog drawer. Somebody behind them is whispering.',{catalog:true}],
-      ['stackglobe',3,9,1,1,'Globe','An old globe. Half the countries have changed names. The globe hasn\'t been told. Nobody wants to tell it.'],
-      ['bookcart',19,11,1,1,'Returns cart','RETURNS. A cart of books waiting to go back on the shelves. One of them is a cookbook. It smells faintly of soup.'],
-      ['lamptable',25,11,2,1,'Reading table','A long table with a green lamp. Someone left a note: QUIET PLEASE. Under it, smaller: we heard you.'],
-      ['stacksign',2,11,1,1,'Stacks sign','THE STACKS. Please return books to the cart. Please don\'t answer the books.',
+      ['stackglobe',12,8,2,2,'Globe','An old globe. Half the countries have changed names. The globe hasn\'t been told. Nobody wants to tell it.'],
+      ['bookcart',16,8,2,3,'Returns cart','RETURNS. A cart of books waiting to go back on the shelves. One of them is a cookbook. It smells faintly of soup.'],
+      ['lamptable',27,6,2,2,'Reading table','A long table with a green lamp. Someone left a note: QUIET PLEASE. Under it, smaller: we heard you.'],
+      ['stacksign',20,8,1,1,'Stacks sign','THE STACKS. Please return books to the cart. Please don\'t answer the books.',
         {when:[{...CH7_DONE,text:'THE STACKS. Please return books to the cart. Somebody added, in glitter pen: AND READ THEM OUT LOUD.'}]}],
-      ['ladder',12,1,1,1,'Rolling ladder','A rolling library ladder. Grace wants to ride it. Tom says no. Grace rides it anyway, one foot, very carefully.'],
-      ['lowshelf',8,13,2,1,'Low shelf','Picture books, sorted by color. Somebody very small sorted them. Somebody very small is proud of it.'],
-      ['lowshelf',18,13,2,1,'Low shelf','Board books, chewed on all four corners. Lovingly.'],
-      ['beanbag',20,18,1,1,'Beanbag','A beanbag the size of Rose. Rose sits in it and disappears completely.'],
-      ['storychair',12,15,1,1,'Story time chair','The big rocking chair for story time. A basket of books sits beside it. Rose is already standing there, holding one up.',{storytime:true}],
-      ['puppettheater',16,16,2,1,'Puppet theater','A little puppet theater. The puppets are whispering. That\'s not how puppets work.',
+      ['ladder',27,3,1,1,'Rolling ladder','A rolling library ladder. Grace wants to ride it. Tom says no. Grace rides it anyway, one foot, very carefully.'],
+      ['lowshelf',8,19,2,1,'Low shelf','Picture books, sorted by color. Somebody very small sorted them. Somebody very small is proud of it.'],
+      ['lowshelf',19,19,1,1,'Low shelf','Board books, chewed on all four corners. Lovingly.'],
+      ['beanbag',23,16,2,2,'Beanbag','A beanbag the size of Rose. Rose sits in it and disappears completely.'],
+      ['storychair',7,15,3,2,'Story time chair','The big rocking chair for story time. A basket of books sits beside it. Rose is already standing there, holding one up.',{storytime:true}],
+      ['puppettheater',23,13,3,3,'Puppet theater','A little puppet theater. The puppets are whispering. That\'s not how puppets work.',
         {when:[{...CH7_DONE,text:'A little puppet theater. The puppets are quiet now. One of them waves at Rose.'}]}]]}),
   planMerge({id:'readroom',name:'The Reading Room',w:20,h:14,ground:'readroom',
     tag:'The oldest room in the library. Green lamps, long tables, and one very old book.',
