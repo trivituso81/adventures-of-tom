@@ -3707,7 +3707,7 @@ STORY_MAPFX.push(time=>{
   if(id==='gatezero') {
     const gone=STORY.mode==='full'&&(STORY.chapter>10||!!flag('ch10-gone'));
     const leaving=CH10_PLANE.t0&&!gone?(performance.now()-CH10_PLANE.t0)/1000:0;
-    if(!gone||leaving) {
+    if(!plateFor(M)&&(!gone||leaving)) {
       const dx=-leaving*leaving*40,y0=4,x0=3*T+dx;
       c.save(); c.beginPath(); c.rect(T,0,(M.w-2)*T,T); c.clip();
       rect(x0,y0+8,12*T,12,'#e8eaf4'); ellipse(x0+12*T,y0+14,12,6,'#e8eaf4'); rect(x0,y0+18,12*T,2,'#2f5fb0');

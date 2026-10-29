@@ -945,6 +945,23 @@ LE_AREAS.push(
     hint:'The podium is at the top, under the board. The jet bridge door is next to it.',
     spawn:{x:9,y:12},
     exits:[[9,13,'terminal',13,2,'down','gatecarpet'],[10,13,'terminal',14,2,'down','gatecarpet']],
+    // Painted plate (art/gatezero.webp, engine/plate.js). '#' blocks, '.' walks. Window wall, podium, jet bridge door, four bench
+    // rows, the two potted plants and the gate posts block; the red carpet, the stone floor and the walkway down to the terminal walk.
+    plateMask:[
+      '####################',
+      '####################',
+      '####################',
+      '####################',
+      '#######.........####',
+      '########....########',
+      '########....########',
+      '#..................#',
+      '#######......#######',
+      '#######......#######',
+      '###..............###',
+      '###...##....##...###',
+      '########....########',
+      '#########..#########'],
     monsters:GATE_MONSTER_SPOTS},
     planTerm([
       'WVVVVVVVVVVVVVVVVVVW',
@@ -962,16 +979,16 @@ LE_AREAS.push(
       'WggggggggggggggggggW',
       'WWWWWWWWWggWWWWWWWWW']),
     {objects:[
-      ['gatepodium',4,2,2,1,'Gate podium','GATE 0. FLIGHT 0. TO: NOWHERE. DEPARTS: 12:00. A sticky note on the counter: BACK IN FIVE MINUTES. It\'s dated 1989.',
+      ['gatepodium',4,3,3,2,'Gate podium','GATE 0. FLIGHT 0. TO: NOWHERE. DEPARTS: 12:00. A sticky note on the counter: BACK IN FIVE MINUTES. It\'s dated 1989.',
         {when:[{...CH10_CLEAR,text:'GATE 0. A new card on the counter, in gold ink: THANK YOU FOR FLYING NOWHERE. YOUR LAYOVER WILL BE ANNOUNCED. And a little clock.'}]}],
-      ['jetdoor',14,1,2,1,'Jet bridge door','The door to the jet bridge. Through the little window: a plane, lights on, engines quiet. Waiting.',
+      ['jetdoor',14,1,2,3,'Jet bridge door','The door to the jet bridge. Through the little window: a plane, lights on, engines quiet. Waiting.',
         {when:[{...CH10_CLEAR,text:'The door to the jet bridge. Through the little window: nothing. The plane is gone. The jet bridge is still swaying a little.'}]}],
-      ['gateseats',2,6,4,1,'Gate seats','Four seats in a row, facing the window. Perfect for watching planes. There\'s one plane.'],
-      ['gateseats',14,6,4,1,'Gate seats','Four seats. Rose takes the window. There are no windows on these seats. She takes it anyway.'],
-      ['gateseats',2,9,4,1,'Gate seats','Four more seats. Amy stretches her calves on one. Tom pretends not to know her.'],
-      ['gateseats',14,9,4,1,'Gate seats','Four seats. A tiny pilot hat on one of them. It\'s too small for anybody but Rose.'],
-      ['termplant',1,12,1,1,'Plant','A plastic ficus with a GATE 0 tag on it. It\'s seen one flight. It\'s seen zero flights.'],
-      ['termplant',18,12,1,1,'Plant','A plastic ficus. Its pot says CREW ONLY.']]})
+      ['gateseats',3,5,5,2,'Gate seats','Four seats in a row, facing the window. Perfect for watching planes. There\'s one plane.'],
+      ['gateseats',12,5,5,2,'Gate seats','Four seats. Rose takes the window. There are no windows on these seats. She takes it anyway.'],
+      ['gateseats',1,8,6,2,'Gate seats','Four more seats. Amy stretches her calves on one. Tom pretends not to know her.'],
+      ['gateseats',13,8,6,2,'Gate seats','Four seats. A tiny pilot hat on one of them. It\'s too small for anybody but Rose.'],
+      ['termplant',1,10,2,2,'Plant','A plastic ficus with a GATE 0 tag on it. It\'s seen one flight. It\'s seen zero flights.'],
+      ['termplant',17,10,2,2,'Plant','A plastic ficus. Its pot says CREW ONLY.']]})
 );
 
 // ---------- Rooms ----------
