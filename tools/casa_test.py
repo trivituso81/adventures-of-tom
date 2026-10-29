@@ -65,7 +65,7 @@ with sync_playwright() as pw:
     SPEC={'Mrs. Alvarez':(7,5),'Don Beto':(12,6),'Tony':(5,5),'Yesenia':(8,2),'Claudia':(10,6),'Kevin':(5,4),'Daisy':(4,4),'Mateo':(6,6),'Sofi':(8,5)}
     for nm in names:
         kx,ky=SPEC[nm]
-        pg.evaluate("([nm,kx,ky])=>{ for(const n of currentMap.npcs){ n.move=null; if(n.name===nm){ n.x=kx; n.y=ky; } else { n.x=0; n.y=0; } } }",[nm,kx,ky])
+        pg.evaluate("([nm,kx,ky])=>{ for(const n of currentMap.npcs){ n.move=null; n.roam=0; n.wait=1e9; if(n.name===nm){ n.x=kx; n.y=ky; } else { n.x=0; n.y=0; } } }",[nm,kx,ky])
         got=pg.evaluate("([kx,ky])=>{const m=currentMap; for(const [dx,dy,d] of [[0,1,'up'],[-1,0,'right'],[1,0,'left'],[0,-1,'down']]){const x=kx+dx,y=ky+dy; if(x>=0&&y>=0&&x<m.w&&y<m.h&&m.solid[y*m.w+x]===0) return [x,y,d];} return null;}",[kx,ky])
         check(nm+' has a walkable neighbour at '+str((kx,ky)),got is not None)
         if got:
