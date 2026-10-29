@@ -866,7 +866,7 @@ SC.tv2_slasher=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.peek) return; let x,y,s
   gfx.globalAlpha=a; slasher(x,y,sc,arms); };
 T.slasher_scare=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),hit=2050;
   const P={on:350,flick:1500,lunge:2000,up:2650,peek:1050,wave:3250,gone:3950,bx:F.x-6,by:Math.max(110,F.base-20),fx:Math.min(540,F.x+F.w*.5+30),fy:Math.min(318,F.base+8)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:350,f:'hip'},{t:700,f:'act'},{t:1900,f:'kneel'},{t:2650,f:'celeb',hop:6},{t:3100,f:'clap'},{t:3600,f:'idle'},{t:4000,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:350,f:'hip'},{t:700,f:'act'},{t:1900,f:'dodge'},{t:2650,f:'celeb',hop:6},{t:3100,f:'clap'},{t:3600,f:'idle'},{t:4000,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('TNB reaches for the light switch.'); say(m.id,'slasher_scare'); scene('tv2_dark',3.1,{P,st}); scene('tv2_slasher',4.1,{P}); scene('tv2_torch',2.8,{P,st}); }],
     [P.on,()=>{ S('click'); setMessage('Click. Total darkness. A flashlight clicks on under his chin.'); }],
@@ -1147,17 +1147,19 @@ const mug=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.s
   R(-6,9.4,12.8,2.2,'#b8946a'); R(-6,9.4,12.8,.8,'#d8b48a'); gfx.restore(); };
 const spinMug=(x,y,u,turns,sc)=>{ const ang=u*Math.PI*2*turns,a0=gfx.globalAlpha; for(const [d,al] of [[.9,.15],[.55,.3]]) { gfx.globalAlpha=a0*al; mug(x,y,ang-d*Math.sign(turns),sc); } gfx.globalAlpha=a0;
   gfx.strokeStyle='rgba(255,255,255,.75)'; gfx.lineWidth=2.4; gfx.beginPath(); gfx.arc(x,y,16*sc,ang-1.2*Math.sign(turns),ang,turns<0); gfx.stroke(); mug(x,y,ang,sc); };
-SC.tp2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1; mug(h.x-24,h.y-26,Math.sin(ms/260)*.08,MS);
+const mugPainted=()=>{ const sp=BATTLE_SPRITES.tnb; return !!(sp&&sp.hires&&sp.mugPull); };   // painted Mug Toss poses hold their own mug
+SC.tp2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1; if(!mugPainted()) mug(h.x-24,h.y-26,Math.sin(ms/260)*.08,MS);
   if(ms>P.show) { RO(h.x-56,h.y-70,50,16,'#f2c94c'); label('2ND',h.x-31,h.y-66,OUT,2); } };
 SC.tp2_mugrest=(s,u)=>{ gfx.globalAlpha=fade(u,.85); mug(s.x,s.y,0,MS); if(s.t>.25) steam(s.x-3,s.y-30,s.t,3,'#ffffff',28); if(s.t>.35) bigWord('STILL WORKS',s.x,s.y-66,CREAM,2); };
 T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.max(F.x+F.w*.5+130,Math.min(me.x-40,F.x+200));
   const P={show:900,throw:1950},hit=2500;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:800,x:wx,f:'act'},{t:1650,f:'wind',dx:u=>ez(u)*8},{t:1950,f:'throw',dx:-6},{t:2400,f:'aim'},{t:3300,f:'celeb',hop:6},{t:3600,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);
+  const pp=mugPainted();
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:800,x:wx,f:pp?'mugPull':'act'},{t:1650,f:pp?'mugWind':'wind',dx:u=>ez(u)*8},{t:1950,f:pp?'mugRel':'throw',dx:-6},{t:2400,f:'aim'},{t:3300,f:'celeb',hop:6},{t:3600,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);
   const lx=F.x+F.w*.5+34,ly=F.base-38;
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls a slightly crooked mug out of his tote.'); say(m.id,'mug_toss'); scene('tp2_mugheld',2.0,{P}); }],
     [900,()=>{ setMessage('It\'s a second. It even has a sticker that says so.'); S('select'); }],
-    [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-24,h.y-26,F.x+6,F.top+18,.55,90); }],
+    [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-(pp?4:24),h.y-(pp?6:26),F.x+6,F.top+18,.55,90); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); S('ting'); ST.jolt(f,.55); landHit(100); scene('tp2_burst',.6,{x:F.x+6,y:F.top+18,r:56}); scene('tv2_flash',.25,{a:.3}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'CLUNK!',c:GOLD,sc:5}); }],
     [2550,()=>{ ST.fly((x,y,u)=>spinMug(0,0,u,-1,MS),F.x+6,F.top+18,lx,ly,.5,60); }],

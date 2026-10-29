@@ -1,8 +1,8 @@
 'use strict';
 // data/tnb-hires-battle.js — Battle half of the painted TNB. Loaded after data/tnb-poses.js (last word on his pixel frames) and data/battle-size.js.
 // Replaces his core frames (idle, strike, wind-up, run, leap, hurt, kneel, celebrate, defend, cast, knocked out) with painted ones, and points the
-// move-only frames his attacks use (aim, throw, wind, spread, point, hip, clap, carry, shrug, idle2) at the nearest painted pose so every frame
-// in a move is the same size. His story-only poses (sit, toast, sitR, hug, whisper) keep their pixel rows.
+// move-only frames his attacks use at painted poses so every frame in a move is the same size (the extra sheets supply point, aim, spread, hip, clap,
+// carry, shrug, mugPull, mugWind, mugRel, heave, crouch, dodge and the story poses sit, toast, sitR, hug, whisper, wave, talk, laugh).
 // The painted palette is moved to unused keys so both coexist. He is drawn at Tom's height: scale 1 times BATTLE_SIZE.tnb.
 (function() {
   if(typeof TNB_HIRES==='undefined'||!TNB_OW.hires) return;
@@ -30,9 +30,20 @@
   sp.hurtPose=P('hurt'); sp.defend=P('defend'); sp.castPose=P('cast'); sp.kneel=P('kneel');
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')]; sp.run1=sp.run[0]; sp.run2=sp.run[1];
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.runFlip=sp.run.map(mir); sp.cheer=[sp.celeb,sp.celebFlip];
-  // Move-only frames: nearest painted pose (same size, same palette).
-  sp.idle2=sp.idle; sp.hip=sp.idle; sp.clap=sp.idle; sp.carry=sp.idle; sp.shrug=sp.idle;
-  sp.wind=sp.windup; sp.throw=sp.act; sp.aim=sp.castPose; sp.spread=sp.castPose; sp.point=sp.castPose;
+  // Extra painted poses (art/chars/tnb-poses.webp, sheets of 2026-10-29): move frames and story poses, same size and palette as the core set.
+  // Their hand points use a taller arm band than the core frames (pointing and mug-holding arms sit above the waist).
+  const metaX=rows=>{ const H=rows.length,W=rows[0].length; let lx=W,ly=Math.round(H*.5),rx=0,ry=Math.round(H*.5);
+    for(let y=Math.floor(H*.25);y<Math.floor(H*.75);y++) for(let x=0;x<W;x++) if(rows[y][x]!=='.') { if(x<lx) { lx=x; ly=y; } if(x>rx) { rx=x; ry=y; } }
+    return {n:[lx+1,ly],f:[rx-1,ry]}; };
+  const X=TNB_HIRES.pose,Q=k=>{ const r=paintRows(rk(X[k]),'tnbPose',k,false); if(sp.eyeAt) sp.eyeAt.set(r,sp.eyeAt.get(sp.idle)||{col:M.eye[0],row:M.eye[1]}); if(sp.handAt) sp.handAt.set(r,metaX(r)); return r; };
+  // Move frames
+  sp.idle2=sp.idle; sp.wind=sp.windup; sp.throw=sp.act;
+  sp.point=Q('point'); sp.aim=sp.point; sp.spread=Q('present'); sp.hip=Q('hips'); sp.clap=Q('clap'); sp.carry=Q('carry'); sp.shrug=Q('shrug');
+  sp.mugPull=Q('pull'); sp.mugWind=Q('tw_wind'); sp.mugRel=Q('tw_rel');   // Mug Toss: pull from the tote, wind up, release
+  sp.heave=Q('heave'); sp.crouch=Q('crouch'); sp.dodge=Q('dodge');
+  // Story and overworld-scene poses (battle size)
+  sp.sit=Q('sit'); sp.toast=Q('sittoast'); sp.sitR=Q('sitR'); sp.sitToastR=Q('sittoastR'); sp.hug=Q('hug'); sp.whisper=Q('whisper');
+  sp.wave=Q('wave'); sp.cheers=Q('toast'); sp.talk=Q('talk'); sp.talkR=Q('talkR'); sp.laugh=Q('laugh'); sp.lookDown=Q('crouchlook');
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.tnb={scale:.8*SZ,pal:TNB_HIRES.ko.pal,rows:paintRows(TNB_HIRES.ko.rows.slice(),'tnbKo','ko',true)};
   // His shirt is cream under an apron, not a dark tee, so outfit recolouring does not apply to the painted TNB.
