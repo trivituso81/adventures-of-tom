@@ -135,6 +135,12 @@
 - New `tools/sprite-bake/sheet.py` slices magenta sheets with soft alpha and despill. Still not wired: windup, leap, hurt flinch and cast poses; overworld Rose ride on the new Tom is unchecked.
 - Tests: smoke and kit_test tom, frames looked at. No spoken lines changed.
 
+## 2026-10-29: Tom's custom battle poses and a front-facing walk
+- New walk sheet: Tom's head faces straight at the camera when he walks toward you (`tom-walk-v2.png` replaced).
+- New pose sheet `tools/sprite-bake/src/tom-poses-v1.png` (12 poses) baked to `art/chars/tom-poses.webp` (own canvas, so Tom's idle box and Rose's shoulder ride are unchanged). On `BATTLE_SPRITES.tom` as `hold, annoyed, tw_windup, tw_follow, lift, fling, unbox, flick, brush, limit, startled, direct`; use them as `f:'hold'` in a move's `ST.keys`.
+- Wired so far: Press Start (`button_mash`: hold, annoyed, wind-up, throw). The `hold` pose has a painted controller, so the game's own controller is skipped until the "UGH" beat. Not wired yet: lift (Dutch Oven), fling (Starter Splash), unbox, flick (Flashcard Flurry), brush (Kanji Strike), limit (Final Boss), startled, direct.
+- Outfit recolour on these poses uses fixed torso fractions (rough).
+
 ## 2026-10-28: Painted plate for the Moon Club
 - The Moon Club hall (map id `moonclub`, chapter 9) now uses Tom's painting (`art/moonclub.webp`, 1920 x 1408, 30 x 22 tiles at 64 px, entry in `PLATES`). The ASCII plan stays underneath as the invisible tile layer; a `plateMask` is the walk map. The Dome (upstairs) is not painted yet.
 - The painting has no walls between the hall and the Coat Check and Card Room tops, so the rooms are tighter than the old plan: Coat Check floor is the rug strip (row 5, x 3 to 9) reached through the painted carved door (5 and 6, rows 6 to 8, opened in the wall); the Card Room is the strip x 17 to 18 plus row 5 (x 18 to 21) beside the tables. The Ballroom is the painted dance floor, entered through the gap in the rail at the top (x 12 to 18).
