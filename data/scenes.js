@@ -3302,11 +3302,12 @@ STORY_MAPFX.push(time=>{
   }
   if(id==='dome') {
     const moon=clubMoonBack();
-    c.globalAlpha=moon?.12:.22; rect(0,0,M.w*T,M.h*T,'#0c1024'); c.globalAlpha=1;
+    // The painted Dome (art/dome.webp) already has its own night; only the old tile version needs the dark wash.
+    if(!plateFor(M)) { c.globalAlpha=moon?.12:.22; rect(0,0,M.w*T,M.h*T,'#0c1024'); c.globalAlpha=1; }
     for(let k=0;k<16;k++) { const a=time*.6+k*.39,x=9.5*T+Math.cos(a)*T*(4+k%5),y=6*T+Math.sin(a*1.3)*T*(2+k%3);
       c.globalAlpha=moon?.25:.55; ellipse(x,y,3,2,'#dfe6f2'); }
     c.globalAlpha=1;
-    if(!moon&&STORY.chapter===9&&flag('ch9-boss')) glow(9.5*T,3*T,T*5,.35,'230,240,255');
+    if(!moon&&STORY.chapter===9&&flag('ch9-boss')) glow(9.5*T,(plateFor(M)?4.2:3)*T,T*5,.35,'230,240,255');
   }
 });
 

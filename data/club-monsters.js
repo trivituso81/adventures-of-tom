@@ -408,4 +408,4 @@ Object.assign(MONSTERS,{
 // until the party has looked around). Each room's troublemaker holds still until its story fight. The Mirrorball hangs
 // over the bandstand in the Dome.
 const CLUB_MONSTER_SPOTS=[['velvetrope',8,10],['velvetrope',25,10],['stuffedshirt',18,5],['stuffedshirt',19,16],['coathanger',8,5],['soreloser',20,5],['wallflower',11,17]];
-const DOME_MONSTER_SPOTS=[['mirrorball',9,3]];
+const DOME_MONSTER_SPOTS=[['mirrorball',9,5]];
