@@ -16,7 +16,7 @@ function walkPhase(a) {
 }
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
-  const p=position(a),k=actorK();   // k: bigger inside painted rooms (engine/plate.js)
+  const p=position(a),k=actorK()*(set.k||1);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0&&ph<.55?1+(a.stepN%2):0;
