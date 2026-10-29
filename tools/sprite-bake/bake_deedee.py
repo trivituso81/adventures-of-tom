@@ -109,6 +109,7 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
+KEEPIMG = {}   # pose name -> RGBA layer (same size as the pose) composited unscaled over the bigger head (props that must not be warped, e.g. hand weights)
 KOVM = {}   # pose name -> multiplier on the solved head factor
 def bigger_head(img, name, k=None, pad=160, taper=TAPER):
     if k is None: k = HEAD_KB if (name.startswith('b_') or name.startswith('x_')) else HEAD_KW
@@ -139,6 +140,8 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
                     strip = img.crop((a, y, b, y + 1)); big.alpha_composite(strip, (a + pad + d, y + pad))
     for (a, b, c, d) in KEEP.get(name, ()):
         big.alpha_composite(img.crop((a, b, c, d)), (a + pad, b + pad))
+    if name in KEEPIMG:
+        big.alpha_composite(KEEPIMG[name], (pad, pad))
     return big.crop(big.getbbox())
 # Match Tom's proportions: head (hair to chin) is 0.40 of figure height (Tom's call on Amy, 2026-10-29), figure heights 99.5 battle / 41.7 walk.
 TOM_HEAD_RATIO = 0.40

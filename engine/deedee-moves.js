@@ -1820,9 +1820,12 @@ SC.df_weights=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1
   if(on&&Math.floor(s.t*4)%2) { gfx.globalAlpha=.9; bigWord(Math.floor(s.t*2)%2?'HUP':'TWO',st.x,st.y-DH()-20,CREAM,2); } gfx.globalAlpha=1; };
 D.brisk_means_brisk=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),far=Math.max(24,F.x-F.w*.5-36),fy=Math.min(316,F.base+4);
   const passAt=Math.round(1400*(me.x-F.x)/(me.x-far));
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'clap'},{t:450,f:brisk,ease:'lin'},{t:1850,x:far,y:fy,f:'flip'},{t:2100,f:(u,tt)=>Math.sin(tt*14)>0?'runR':'walkR',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'idle'},{t:3900,f:'hip'}]);
+  const PT=!!(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee.x_bpw1);   // painted tracksuit set (weights are painted in)
+  const LOOP=['x_bpw1','x_bpw2','x_bsp1','x_bsp2','x_bfull'];
+  const st=PT?ST.keys(fx,[{t:0,x:'home',y:'home',f:'x_bready'},{t:450,f:(u,tt)=>Math.abs(tt*1000-(450+passAt))<130?'x_bpass':LOOP[Math.floor(tt*9)%LOOP.length],ease:'lin'},{t:1850,x:far,y:fy,f:'x_bturn'},{t:2100,f:(u,tt)=>'x_bback',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'x_bcool'},{t:3950,f:'x_bwin'}])
+    :ST.keys(fx,[{t:0,x:'home',y:'home',f:'clap'},{t:450,f:brisk,ease:'lin'},{t:1850,x:far,y:fy,f:'flip'},{t:2100,f:(u,tt)=>Math.sin(tt*14)>0?'runR':'walkR',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'idle'},{t:3900,f:'hip'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Deedee picks up her pink hand weights. Perfectly respectable posture.'); say(m.id,'brisk_means_brisk'); scene('df_weights',4.35,{st,from:450,to:3700}); scene('dd_speed',3.8,{st,from:450,to:3700,dir:ms=>ms<1850?1:-1}); sfx.ding(); }],
+    [0,()=>{ setMessage(PT?'Deedee changes into her tracksuit and grabs her orange hand weights. Perfectly respectable posture.':'Deedee picks up her pink hand weights. Perfectly respectable posture.'); say(m.id,'brisk_means_brisk'); if(!PT) scene('df_weights',4.35,{st,from:450,to:3700}); scene('dd_speed',3.8,{st,from:450,to:3700,dir:ms=>ms<1850?1:-1}); sfx.ding(); }],
     [450,()=>{ sfx.run&&sfx.run(); setMessage('Arms swinging. Weights pumping. She sets off.'); }],
     ['hf',450+passAt],
     [450+passAt,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('dd_thump',.8,{x:F.x,y:F.mid}); scene('dv_big',1.1,{x:F.x,y:F.top-74,txt:'BRISK!',c:'#ff7aa8',sc:4}); }],

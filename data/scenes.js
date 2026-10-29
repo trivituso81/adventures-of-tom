@@ -271,7 +271,7 @@ SCENES.ch2Porch=[
 // 4. Tom's kitchen: feeding Bready Mercury. Through the window, the sky is purple.
 SCENES.ch2Starter=[
   {flag:'ch2-starter'},
-  {walk:'tom',to:routeTo('tom',14,31),speed:.22}, {face:'tom',dir:'left'},   // beside the kitchen island, where the jar lives
+  {walk:'tom',to:routeTo('tom',8,8),speed:.22}, {face:'tom',dir:'right'},   // beside the kitchen island, where the jar lives
   {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You missed me.']},
   {call:()=>{ sfx.splat&&sfx.splat(); }},
   {talk:'Tom',lines:['Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles. Proud of you.']},
@@ -435,7 +435,7 @@ const TRIGGERS=[
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},
   {id:'ch2-loft',map:'lofts',when:{...CH2,notFlag:'ch2-tnb'},scene:'ch2Loft'},
   {id:'ch2-porch',map:'jpark',when:{...CH2,flag:'met-nara',notFlag:'ch2-nara'},scene:'ch2Porch'},
-  {id:'ch2-starter',map:'tomhouse',at:[4,28,15,37],when:{...CH2,flag:'ch2-nara',notFlag:'ch2-starter'},scene:'ch2Starter'},
+  {id:'ch2-starter',map:'tomhouse',at:[2,5,13,17],when:{...CH2,flag:'ch2-nara',notFlag:'ch2-starter'},scene:'ch2Starter'},
   {id:'ch2-smog',map:'jpark',when:{...CH2,flag:'ch2-starter',notFlag:'ch2-smog'},scene:'ch2Smog'},
   {id:'ch2-odette',map:'creole',when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-odette'},scene:'ch2Odette'},
   {id:'ch2-carmen',map:'pupuseria',when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-carmen'},scene:'ch2Carmen'},
@@ -1756,12 +1756,12 @@ SCENES.ch6Arrive=[
 SCENES.ch6Kitchen=[
   {flag:'ch6-tnb'},
   {join:'tnb',quiet:true}, {hide:'tnb'},
-  {walk:'tom',to:routeTo('tom',14,31),speed:.2}, {face:'tom',dir:'right'},
-  {place:'tnb',at:[15,31],dir:'left'}, {show:'tnb'},
+  {walk:'tom',to:routeTo('tom',8,8),speed:.2}, {face:'tom',dir:'left'},
+  {place:'tnb',at:[7,8],dir:'right'}, {show:'tnb'},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
   {talk:'TNB',lines:['Okay. Hi. Missed you. Don\'t panic. Look at the island.']},
-  {face:'tom',dir:'left'},
+  {face:'tom',dir:'right'},
   {talk:'Tom',lines:['...Where\'s Bready Mercury.']},
   {talk:'TNB',lines:['That\'s the thing. I came over to feed him, like you asked. The jar was gone. The window was open.','And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.']},
   {talk:'Tom',lines:['Bready Mercury is nine years old. He has flown Delta One. Twice.']},
