@@ -15,8 +15,8 @@ const battle={
 // Party positions in 192x108 stage units (drawn at 3x).
 const BATTLE_POS1=[{x:150,base:90}];
 const BATTLE_POS2=[{x:140,base:84},{x:162,base:97}];
-const BATTLE_POS3=[{x:133,base:82},{x:154,base:93},{x:172,base:103}];
-const BATTLE_POS4=[{x:118,base:77},{x:137,base:87},{x:154,base:96},{x:170,base:105}];
+const BATTLE_POS3=[{x:142,base:84},{x:157,base:94},{x:172,base:104}];
+const BATTLE_POS4=[{x:139,base:80},{x:150,base:89},{x:161,base:98},{x:172,base:106}];
 const BATTLE_POS=BATTLE_POS3.slice();
 
 // Detailed battle sprites, drawn pixel by pixel. '.' is transparent.

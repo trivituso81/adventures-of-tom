@@ -13,13 +13,15 @@ const SPLASH_CAST=[
   {id:'amy',name:'AMY',row:0,fx:.14},
   {id:'deedee',name:'DEEDEE',row:1,fx:.22},
   {id:'grace',name:'GRACE',row:0,fx:.31},
-  {id:'boppy',name:'BOPPY',row:1,fx:.4},
+  {id:'boppy',name:'BOPPY',row:1,fx:.8},
   {id:'tom',name:'TOM',row:0,fx:.51},
   {id:'rose',name:'ROSE',row:0,fx:.51,rider:true},
   {id:'tnb',name:'TNB',row:0,fx:.69},
   {id:'nara',name:'NARA',row:1,fx:.87}
 ];
 const SPLASH_HOP=.42,SPLASH_STEP=.3;
+// Welcome screen: Tom, Grace, Rose and Deedee are drawn 33% bigger (Rose rides on Tom, so she grows with him). Tom's call, 2026-10-29.
+const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33};
 let FULL_GAME_OPEN=true;   // opened in C1 (2026-10-20): chapter 1 is playable
 
 function startSplash() {
@@ -365,18 +367,19 @@ function splashScene(W,H,panelH,time) {
   const L=splash.L={S,frontFy,backFy,pos:{}};
   const hopY=m=>m.hopT>=0?Math.round(Math.sin(Math.PI*m.hopT/SPLASH_HOP)*S*12):0;
   const by=id=>SPLASH_CAST.find(m=>m.id===id);
+  const kOf=set=>{ const id=Object.keys(SPLASH_BIG).find(i=>OW[i]===set||(i==='tom'&&OW.tomRide===set)); return id?SPLASH_BIG[id]:1; };
   const drawOne=(set,frame,cx,feet,lift,flip)=>{
     const fr=flip?set.left[frame]:(flip===false?set.side[frame]:set.down[frame]);
-    const fw=fr[0].length,fh=fr.length;
-    drawSprite(fr,set.pal,Math.round(cx-fw*S/2),Math.round(feet-fh*S-lift),S);
-    return fh*S;
+    const fw=fr[0].length,fh=fr.length,Sk=S*kOf(set);
+    drawSprite(fr,set.pal,Math.round(cx-fw*Sk/2),Math.round(feet-fh*Sk-lift),Sk);
+    return fh*Sk;
   };
   const shadow=(cx,feet,fw,lift)=>{ gfx.globalAlpha=Math.max(.15,.35-lift/(S*60)); ellipse(cx,feet+S,Math.round(fw*S*.42*(1-lift/(S*40))),Math.max(2,S*2),'#203b32'); gfx.globalAlpha=1; };
   const breath=k=>Math.floor((time*1.6+k)%2); // idle bob: up one pixel every other beat
   const naraM=by('nara'),naraFy=naraM.row===1?backFy:frontFy; L.naraFy=naraFy;
   for(const m of SPLASH_CAST.filter(m=>m.row===1&&m.id!=='nara')) {
     const set=OW[m.id],cx=X(m.fx),lift=hopY(m);
-    shadow(cx,backFy,set.down[0][0].length,lift);
+    shadow(cx,backFy,set.down[0][0].length*kOf(set),lift);
     drawOne(set,m.hopT>=0?1:0,cx,backFy,lift);
     L.pos[m.id]={x:cx,y:backFy};
   }
@@ -401,13 +404,13 @@ function splashScene(W,H,panelH,time) {
   for(const m of SPLASH_CAST.filter(m=>m.row===0&&!m.rider&&m.id!=='nara')) {
     // Rose's bounce is carried by Tom (the pair hops as one), so her legs keep their length and her shoes stay on his shoulders.
     const cx=X(m.fx),lift=hopY(m)+(m.id==='tom'?hopY(rose):0),set=OW[m.id],fr=m.hopT>=0?2:0;
-    shadow(cx,frontFy,set.down[0][0].length,lift);
+    shadow(cx,frontFy,set.down[0][0].length*kOf(set),lift);
     if(m.id==='tom'&&OW.tomRide) drawOne(OW.tomRide,fr,cx,frontFy,lift);   // painted: Tom carrying Rose (data/tomride-use.js)
     else if(m.id==='tom') {
-      const tf=set.down[fr],top=frontFy-tf.length*S-lift,rb=(Math.floor(time*3)%2)*S;
-      roseRide('ow_down','back',cx,top-rb,S);
+      const Sk=S*kOf(set),tf=set.down[fr],top=frontFy-tf.length*Sk-lift,rb=(Math.floor(time*3)%2)*S;
+      roseRide('ow_down','back',cx,top-rb,Sk);
       drawOne(set,fr,cx,frontFy,lift);
-      roseRide('ow_down','front',cx,top-Math.min(rb,S),S);
+      roseRide('ow_down','front',cx,top-Math.min(rb,S),Sk);
     } else drawOne(set,set.down[fr]?fr:0,cx,frontFy,lift);
     L.pos[m.id]={x:cx,y:frontFy-lift};
   }
