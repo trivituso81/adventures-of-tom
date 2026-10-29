@@ -5,6 +5,14 @@
 - Object text reworded or added (not voiced, no re-bake): Row F ("three" coats), Row G (plaid blanket), Concessions (prices), Ticket desk, Lobby fern, Velvet rope.
 - Checks: new `tools/starlite_test.py` 0 fails (objects touchable, Dolores answers, concessions answer, stairs lead to the boulevard), smoke, blvd_test, bg_test, ramen_test 0 fails. Portrait and landscape shots looked at.
 
+## 2026-10-29: The Board Room (inside) is painted (Area 44, map id `boards`)
+- New `art/boards.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.boards` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged; the whole doormat (x 4 to 6, rows 7 and 8) walks and all three bottom tiles exit to Jefferson Park (`doors:[[4,8],[6,8]]`).
+- Walk map (`plateMask` in `data/maps-la.js`): the front floor (rows 5 and 6, x 2 to 6), the lane in front of the counter (row 4, x 2 to 8) and the sunlit tile past the counter's right end (8,3). The deck and longboard walls, the grip tape counter, wheel wall, bench, the board and wheel rack and the cactus are painted and blocked.
+- Objects re-laid: Grip tape counter (2,3,6,1), Wheel wall (0,2,2,3) (new), Bench (0,5,2,2) (new), Longboard rack (7,5,4,2) (new), Cactus (9,2,2,2). The two wall objects (deck wall, longboard wall) are gone because the counter blocks the way to them; the cat deck line moved into the counter text. Dash moved to (3,6) on the left rug and no longer wanders (the old spot blocked the door lane); his three lines are unchanged, so clips still match.
+- Reworded or new object text (not voiced, no re-bake): counter (adds the cat deck), Wheel wall, Bench, Longboard rack (the green wheels bin labeled TNB, a nod to Dash's line).
+- Checks: new `tools/boards_test.py` 0 fails (objects touchable, Dash talks, bench/counter/rack block, all three mat tiles exit), smoke, bg_test, jpark_test, juicebar_test 0 fails. Portrait and landscape shots looked at.
+- Known: no foreground layer, so characters draw over the front plants and rail.
+
 ## 2026-10-29: Very Green Juice (inside) is painted
 - New `art/juicebar.webp` (Tom's painting, area 40, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.juicebar` with the interior actor scale. Map `juicebar` keeps its size. Door (5,8) and spawn (5,7) unchanged; the whole doormat between the gate posts (x 4 to 6, rows 7 and 8) now walks and all three bottom tiles are exits to Jefferson Park (`doors:[[4,8],[6,8]]`).
 - Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter, the open floor right of the counter (8,3), the sunny left side down to the herb table. Counter and blender wall, wheatgrass beds, herb table, big fern and the supplement shelf are painted and blocked.

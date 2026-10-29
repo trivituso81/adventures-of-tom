@@ -994,16 +994,31 @@ const LA_ROOMS=[
   {id:'boards',w:11,h:9,
     style:{floor:'#b6c3c8',alt:'#c6d1d4',wall:'#2f4e6a',trim:'#d6e6ec',pattern:'wood',rug:'#e2793a'},
     rug:[3,5,5,2],
+    // Painted plate (art/boards.webp, engine/plate.js), area 44. The mask is the walk map: '#' blocks, '.' walks.
+    // Deck wall and the cat painting across the top, the grip tape counter (row 3), wheel wall and bench down the left,
+    // the board and wheel rack and the helmeted cactus on the right. The doormat (x 4 to 6, rows 7 and 8) is the way out.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '########.##',
+      '##.......##',
+      '##.....####',
+      '##.....####',
+      '####...####',
+      '####...####'],
+    doors:[[4,8],[6,8]],
     npcs:[
-      {name:'Dash',x:5,y:6,look:'dash',lines:[
+      {name:'Dash',x:3,y:6,look:'dash',roam:0,lines:[
         'Board Room. We sell boards. We also sit on them.',
         'TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend.',
         'If you see him, tell him the wheels he ordered came in. The green ones.']}],
     objects:[
-      ['boardwall',1,1,3,1,'Board wall','Twenty decks on the wall. One has a drawing of a cat on it. Most expensive one.'],
-      ['boardwall',7,1,3,1,'Longboard wall','Long ones. Very long ones. One that\'s basically a canoe.'],
-      ['counter',3,3,5,1,'Grip tape counter','Stickers, wax, wheels, and a jar labeled LOST TEETH. Don\'t ask.',{variant:'letters'}],
-      ['pot',9,6,1,1,'Cactus','It wears a tiny helmet. Safety first.']]},
+      ['counter',2,3,6,1,'Grip tape counter','Stickers, wax, wheels, and a jar labeled LOST TEETH. Don\'t ask. Behind it, the cat deck on the wall is the most expensive one.',{variant:'letters'}],
+      ['shelf',0,2,2,3,'Wheel wall','Wheels on pegs, sorted by color, then hardness, then mood. A black shirt hangs on the end.'],
+      ['table',0,5,2,2,'Bench','A bench by the rug for people waiting while Dash looks for the right bolt. Nobody has seen the right bolt.'],
+      ['shelf',7,5,4,2,'Longboard rack','Decks on edge, wheels in bins below, sorted by color. One bin is all green. Someone wrote TNB on the label.'],
+      ['pot',9,2,2,2,'Cactus','It wears a tiny helmet. Safety first.']]},
   {id:'lacab',w:11,h:9,
     style:{floor:'#c9c3b4',alt:'#d7d1c2',wall:'#a99a6e',trim:'#efe0b0',pattern:'check',rug:'#d9a43a'},
     rug:[3,5,5,2],
