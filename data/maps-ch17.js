@@ -54,7 +54,7 @@ LE_AREAS.push(
     eyebrow:'LOS ANGELES / THE GLASS TOWER · FLOOR 1',
     hint:'The stairs are on the east side. The lifts are out of order. Everything is out of order. Nothing is moving.',
     spawn:{x:10,y:11},
-    exits:[[10,13,'blvd',14,3,'down','glfloor'],[11,13,'blvd',15,3,'down','glfloor'],[21,8,'towerstairs',1,39,'right','glfloor'],[21,9,'towerstairs',1,40,'right','glfloor']]},
+    exits:[[10,13,'blvd',12,9,'down','glfloor'],[11,13,'blvd',14,9,'down','glfloor'],[21,8,'towerstairs',1,39,'right','glfloor'],[21,9,'towerstairs',1,40,'right','glfloor']]},
     planGlass(TOWERLOBBY_PLAN),
     {objects:[
       ['gldesk',8,4,6,1,'Reception desk','A long glass reception desk. A nameplate says WELCOME. A second nameplate says WELCOME BACK. A third says YOU WERE NEVER HERE.'],

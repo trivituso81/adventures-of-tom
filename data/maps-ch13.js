@@ -52,7 +52,7 @@ LE_AREAS.push(
     eyebrow:'LOS ANGELES / SUB-RAIL DEPOT',
     hint:'The tracks run east into the tunnel. Sol’s coffee machine fixes everybody.',
     spawn:{x:4,y:5},
-    exits:[[0,4,'blvd',23,22,'left','subfloor'],[0,5,'blvd',23,22,'left','subfloor'],
+    exits:[[0,4,'blvd',20,22,'left','subfloor'],[0,5,'blvd',20,22,'left','subfloor'],
            [23,7,'subtunnel',1,5,'right','subtrack'],[23,8,'subtunnel',1,6,'right','subtrack']]},
     planSub(SUBDEPOT_PLAN),
     {objects:[

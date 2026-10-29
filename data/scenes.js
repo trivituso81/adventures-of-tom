@@ -1015,7 +1015,7 @@ const CH4_AFTER=(lost,lines)=>[
 SCENES.ch4Arrive=[
   {flag:'ch4-goal'},
   {join:'tnb',quiet:true}, {hide:'tnb'},
-  {place:'tnb',at:[21,20],dir:'right'}, {show:'tnb'},
+  {place:'tnb',at:[21,22],dir:'right'}, {show:'tnb'},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   {walk:'tnb',to:routeBeside('tnb'),speed:.2},
   {face:'tom',dir:'left'},

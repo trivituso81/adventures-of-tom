@@ -32,7 +32,7 @@ with sync_playwright() as pw:
     check('chapter 17, on blvd',pg.evaluate("()=>STORY.chapter===17&&currentMap.id==='blvd'"))
     check('team stairs: Tom Grace Rose, adults on the bench',pg.evaluate("()=>party.length===3&&['tom','grace','rose'].every(i=>party.some(p=>p.id===i))&&['amy','tnb','nara'].every(i=>STORY.bench.includes(i))"))
     check('tower front stands',pg.evaluate("()=>worlds.blvd.objects.some(o=>o.kind==='towerfront')"))
-    pg.evaluate("()=>{ player.x=14; player.y=3; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400); shot(pg,'door')
+    pg.evaluate("()=>{ player.x=14; player.y=9; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400); shot(pg,'door')
     pg.keyboard.press('Enter'); pg.wait_for_timeout(100)
     for i in range(6): pg.keyboard.press('Enter'); pg.wait_for_timeout(120)
     check('inside the lobby',adv(pg,60,"()=>currentMap.id==='towerlobby'")); pg.wait_for_timeout(700)
