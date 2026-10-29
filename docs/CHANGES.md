@@ -1,3 +1,12 @@
+## 2026-10-29: Tom's House is painted (Area 46, map id `tomhouse`)
+- `art/tomhouse.webp` (1216 x 2752, 64 art px per tile) is the painted plate; `PLATES.tomhouse` in `engine/plate.js` (characters drawn at 1.5x). The painting came from Tom's image AI using the corrections list in `docs/area46/`; it matched the 19 x 43 shape, so the map size did not change.
+- The old tile plan is gone. `plateMask` in `data/maps-la.js` is now traced from the painting (the old walkmap no longer matches the art: the hall lobby, doors, bath and closet positions all differ). All 210 walkable tiles and all 38 objects are reachable from the front door (checked by flood fill, then walked with real key presses through every door).
+- Objects were re-placed on the painted furniture, same names and same flavor text. Dropped (their tiles are scenery now): lemon tree, back hedge tree, shrubs, yard tree, deck planter, flax and the welcome mat. The deck chairs, photo wall, nightstands, plants and the rest stay.
+- Art patch: the painted office closet has no exit, so the office was sealed. One doorway was cut into the office east wall (art x 600-634, y 1350-1404 at full size, a floor strip pasted over the wall) so the office opens onto the hall at tile (9,21). The real plan has the office entered through its closet.
+- Scenery only (not walkable): north deck, west lawn, back yard and the front porch. The deck furniture closes the deck in the middle, so the yard cannot be reached from the south deck.
+- Scenes moved to the new kitchen: `ch2-starter` and `ch12-house` trigger anywhere on the main floor (`at:[4,28,15,37]`); `ch2Starter` and `ch6Kitchen` walk Tom to (14,31) beside the island, TNB at (15,31). Both checked in a headless run.
+- Not done: walk-behind (a character passing behind a tall prop is still drawn on top); there is no foreground layer yet. No spoken lines changed.
+
 ## 2026-10-29: Nara on the welcome screen sits behind Grace
 - `SPLASH_SPOTS` in `engine/splash.js`: Nara moved from the bottom left to behind Grace at the foot of the stairs (x 240, feet 1020, h 104) and listed first so every family member draws over her. Everyone on the welcome art is also 10% bigger (`SPLASH_ALL=1.1`, feet stay planted). No spoken lines changed.
 
