@@ -27,14 +27,19 @@ KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked o
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=128)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
 ap.add_argument('--ow-h', type=int, default=57)        # standing height of the overworld sprite in rows
+ap.add_argument('--combo-k', type=float, default=1.0)   # fine tune for the combo sheet size
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
+COMBO_K = args.combo_k
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'tomride-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
+for nm, im in slice_sheet(os.path.join(SRC, 'tomride-combo.png'),
+        [['biplane', 'biplane2', 'cloud'], ['cloud2', 'phones', 'night']]).items():
+    poses['c_' + nm] = im
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tomride-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
     poses['w_' + nm] = im
@@ -181,7 +186,11 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
 fb = args.battle_h * KB / H0b
-bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
+# Combo poses (Tom and Rose for Double-Decker Airplane, That Cloud Is Lamby, Headphones in the Dark, Lamby Night-Light).
+# That sheet was drawn at a slightly different size, so scale it from the standing 'night' pose to match the idle pose.
+fc = fb * poses['b_idle'].height / poses['c_night'].height * COMBO_K
+for k in ('biplane', 'biplane2', 'cloud', 'cloud2', 'phones', 'night'): battle_names[k] = 'c_' + k
+bt_big = {k: scaled_to(poses[v], fc if v.startswith('c_') else fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 
 # The sheets avoid injury wording, so the black eye is painted in here: Tom's kneel frame (under 25 percent HP) gets a soft
@@ -198,7 +207,7 @@ def paint_bruise(img, cx, cy, rx, ry):
         k = (wgt * cov)[:, :, None]
         a[:, :, :3] = a[:, :, :3] * (1 - k) + np.array(col, float) * k
     return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-bt_big['kneel'] = paint_bruise(bt_big['kneel'], 98, 164, 11, 8)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
+bt_big['kneel'] = paint_bruise(bt_big['kneel'], 116, 164, 11, 8)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'tomride-battle.webp'))
 
@@ -247,9 +256,9 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
-atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=4', 'k': KB, 'rects': bt_rects},
-         'ko': {'src': 'art/chars/tomride-ko.webp?v=4', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/tomride-ow.webp?v=4', 'k': KW, 'rects': ow_rects}}
+atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=5', 'k': KB, 'rects': bt_rects},
+         'ko': {'src': 'art/chars/tomride-ko.webp?v=5', 'k': KO_, 'rects': ko_rects},
+         'ow': {'src': 'art/chars/tomride-ow.webp?v=5', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
 js = []
@@ -260,7 +269,7 @@ js.append("const TOMRIDE_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel', 'biplane', 'biplane2', 'cloud', 'cloud2', 'phones', 'night'):
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
