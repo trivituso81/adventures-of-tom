@@ -25,8 +25,8 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KB, KO_, KW = 3, 2, 3          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=62)   # idle height in grid rows
-ap.add_argument('--ow-h', type=int, default=38)        # standing height of the overworld sprite in rows
+ap.add_argument('--battle-h', type=float, default=66.7)   # idle height in rows of the 1.94-scale rig: 66.7 x 1.94 = Deedee's 99.5 x 1.3 = 129 px
+ap.add_argument('--ow-h', type=float, default=41.7)        # standing height of the overworld sprite in rows
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -124,7 +124,8 @@ def _drop_slivers(im, er=5, grow=7):
             if v < .03 * big_: a[lab == i + 1, 3] = 0
     return Image.fromarray(a, 'RGBA')
 
-def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
+def bigger_head(img, name, k=None, pad=160, taper=TAPER):
+    if k is None: k = HEAD_KB if (name.startswith('b_') or name.startswith('x_')) else HEAD_KW
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
@@ -157,6 +158,22 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
                 big.alpha_composite(img.crop((a, y0, b, 112)), (a + pad, y0 + pad))
     big = _drop_slivers(big, 3 if name == 'b_leap' else 5)
     return big.crop(big.getbbox())
+# Same proportions as Deedee (and Tom): head (hair to chin) is 0.40 of figure height. The head factor is solved per set (battle idle, walk down).
+TOM_HEAD_RATIO = 0.40
+HEAD_KB = HEAD_KW = HEAD_K
+def _head_ratio(name, k):
+    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name])
+    if name.startswith('w_down'): chin = 126
+    return (chin - top) * k / bigger_head(poses[name], name, k=k).height
+def _solve(name):
+    lo, hi = 1.0, 4.0
+    for _ in range(14):
+        mid = (lo + hi) / 2
+        if _head_ratio(name, mid) < TOM_HEAD_RATIO: lo = mid
+        else: hi = mid
+    return round((lo + hi) / 2, 3)
+HEAD_KB, HEAD_KW = _solve('b_idle'), _solve('w_down_stand')
+print('head factors solved: battle', HEAD_KB, 'walk', HEAD_KW)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
 

@@ -59,3 +59,5 @@ It reuses `bake_deedee.py`'s head warp (`HEAD_K` 1.45, taper below the chin, `KO
 Attack frames are `x_*` (used via `DD_XF` in `engine/deedee-moves.js`, falls back to the old frame); story frames replace sit, toast, sitR, whisper, point, spread, carry, hug, shrug, hip, clap in `data/deedee-hires-battle.js`.
 Amy head ratio lowered to 0.40 of height (was 0.445) and hair blend lengthened to 55 rows (2026-10-29, Tom: head too big, hair by body shrunk).
 Deedee sized to Tom (2026-10-29): bake_deedee.py solves the head factor (ratio 0.40; battle 1.58x, walk 1.65x), heights 99.5 battle / 41.7 walk, BATTLE_SIZE 1.3, OW k 1. Extras follow via x_ frames (KOVM multiplier for heave).
+
+Boppy matched to Deedee (2026-10-29): bake_boppy.py now solves the head factor per set so hair-to-chin is 0.40 of height (battle 1.45, walk 1.115), and bakes at Deedee's size: battle idle 66.7 rows x sp.scale 1.94 = 129 px (Deedee 99.5 x 1.3), overworld 41.7 rows, OW.boppy.k 1. Measured from the atlas alpha. Front-view chin is row 126 (`w_down*`).
