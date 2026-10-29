@@ -1,3 +1,10 @@
+## 2026-10-28: Painted plate for Crumb Bakery
+- The Crumb Bakery interior (room id `bakery`, 11 x 10 tiles) now uses Tom's painting (`art/bakery.webp`, 704 x 640 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,9) and spawn (5,8) are unchanged.
+- Walkable: the rug and checker floor (x 2 to 9, rows 4 to 7), the nook beside the work table (3,3), and the doorway and mat (5 and 6, row 8). Blocked: oven and work table, bread counter, window benches, fern, dresser, roll basket, half wall.
+- Objects re-laid: oven (1,2) 2x2 on the work table, bread display (4,2) 5x2, new Window benches (1,4) 1x2, recipe shelf (10,3) 1x4 on the dresser, flour fern (0,6) 2x2, new Roll basket (10,7). All touched from the floor in front. Bun stays at (4,5) on the rug.
+- New `tools/bakery_test.py` (objects touchable, Bun on floor, walk up from the door and back out, A opens the counter text, portrait and landscape shots). `tools/reach_test.py bakery` 0 fails, `tools/smoke.py` no fails.
+- New object text (not voiced): Window benches, Roll basket. No spoken lines changed.
+
 ## 2026-10-28: Painted plate for Terminal Zero (chapter 10)
 - Terminal Zero (map id `terminal`) now uses Tom's painting (`art/terminal.webp`, 1920 x 1408, 30 x 22 tiles at 64 px, entry in `PLATES`). Used the clean version (`Terminal_Zero_Area_14_1920x1408_v2.png`, signs left blank); the lettered version was not used. The ASCII plan stays underneath as the invisible tile layer; a `plateMask` in `data/maps-le.js` is the walk map.
 - The painting is centred, so the doors moved: curb doors are now (14,21) and (15,21) (spawn (15,20); Sal's cab and the ch10 intro arrive at (15,19)), Gate Zero doors (14,1) and (15,1); Gate Zero sends the party back to (14,2) and (15,2).

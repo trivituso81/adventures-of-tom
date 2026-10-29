@@ -1026,6 +1026,20 @@ const LE_ROOMS=[
     style:{floor:'#dfbd8e',alt:'#e8cb9e',wall:'#c9a77e',trim:'#f0d5a9',pattern:'check',rug:'#c18268'},
     walls:[[5,1],[5,2],[5,3]],
     rug:[3,5,4,3],
+    // Painted plate (art/bakery.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Brick oven and work table back left, glass bread counter across the back, window benches and the fern down the left,
+    // dresser and roll basket down the right, half wall across the front with the doorway and mat in the middle.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '###.#######',
+      '##........#',
+      '##........#',
+      '##........#',
+      '###.......#',
+      '#####..####',
+      '###########'],
     npcs:[
       {name:'Bun',x:4,y:5,look:'bun',lines:[
         'Welcome! Our bread is emotionally available.',
@@ -1033,9 +1047,11 @@ const LE_ROOMS=[
         "Today's special is yesterday's tomorrow toast."]}],
     objects:[
       ['oven',1,2,2,2,'The oven','A tiny sign says: "No buns left behind."'],
-      ['counter',6,2,3,1,'Bread display','A loaf is wearing a little scarf. It\'s a breadwinner.',{variant:'bread'}],
-      ['shelf',7,6,2,1,'Recipe shelf','Every recipe begins with: "First, believe in butter."'],
-      ['pot',1,7,1,1,'Flour fern','A flour-dusted fern. It seems to be self-raising.']]},
+      ['counter',4,2,5,2,'Bread display','A loaf is wearing a little scarf. It\'s a breadwinner.',{variant:'bread'}],
+      ['bench',1,4,1,2,'Window benches','The sunniest seats in town. A sign says: sit at your own risk of crumbs.'],
+      ['shelf',10,3,1,4,'Recipe shelf','Every recipe begins with: "First, believe in butter."'],
+      ['pot',0,6,2,2,'Flour fern','A flour-dusted fern. It seems to be self-raising.'],
+      ['pot',10,7,1,1,'Roll basket','A basket of warm rolls. A tag says they are all named Gerald.']]},
   {id:'library',w:13,h:11,
     style:{floor:'#c7bbbd',alt:'#d6cccb',wall:'#a69ba8',trim:'#e2d6cf',pattern:'wood',rug:'#9992ad'},
     walls:[[6,1],[6,2],[6,3],[6,4]],
