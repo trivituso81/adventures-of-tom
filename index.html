@@ -678,6 +678,35 @@ html.landscape .b2-pc img,html.landscape .b2-ph{width:28px;height:28px}
 html.landscape .b2-btn{padding:5px 7px}html.landscape .b2-btn span{font-size:11px}
 html.landscape .b2-ribbon{min-height:40px;padding:4px 6px}
 @media(max-width:600px){#battle.v2 #battle-canvas{max-height:36vh}}
+/* Landscape battle: the scene takes all the room, the menu is a slim right-hand strip (Tom, 2026-10-29).
+   The stage is a size container so cqw/cqh follow it even when the whole stage is rotated by the layout toggle. */
+html.landscape #battle.v2{--b2pw:clamp(176px,23vw,224px)}
+html.landscape #battle.v2 .battle-stage{flex:1 1 0;width:auto;min-width:0;container-type:size;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) env(safe-area-inset-left)}
+html.landscape #battle.v2 #battle-canvas{width:min(100cqw,calc((100cqh - 30px) * 16 / 9));height:auto;aspect-ratio:16/9;max-width:none;max-height:none}
+html.landscape #battle.v2 .b2-ribbon{min-height:0;padding:2px 6px;gap:3px;border-bottom:0;background:transparent}
+html.landscape #battle.v2 .b2-rib-lbl{font-size:8px;margin-right:2px}
+html.landscape #battle.v2 .b2-tk{width:22px;height:22px;font-size:9px}html.landscape #battle.v2 .b2-tk.now{width:26px;height:26px}
+html.landscape #battle.v2 .b2-tk b{font-size:8px}
+html.landscape #battle.v2 .b2-ui{flex:0 0 var(--b2pw);width:var(--b2pw);gap:3px;padding:calc(3px + env(safe-area-inset-top)) calc(4px + env(safe-area-inset-right)) calc(3px + env(safe-area-inset-bottom)) 3px}
+html.landscape #battle.v2 .b2-low{gap:3px}
+html.landscape #battle.v2 .b2-msg{font-size:9px;line-height:1.25;padding:3px 6px;max-height:4.8em;overflow:hidden}
+html.landscape #battle.v2 .b2-party{padding:3px;gap:1px 3px}
+html.landscape #battle.v2 .b2-heart{padding:0 2px 2px;gap:3px}html.landscape #battle.v2 .b2-heart .lbl{font-size:7px;letter-spacing:.6px}
+html.landscape #battle.v2 .b2-heart svg{width:10px;height:9px}html.landscape #battle.v2 .b2-heart .hts{gap:1px}html.landscape #battle.v2 .b2-heart b{font-size:8px}
+html.landscape #battle.v2 .b2-pc{grid-template-columns:20px minmax(0,1fr);gap:3px;padding:1px 2px}
+html.landscape #battle.v2 .b2-pc img,html.landscape #battle.v2 .b2-ph{width:20px;height:20px}
+html.landscape #battle.v2 .b2-nm{font-size:8.5px;letter-spacing:.2px}
+html.landscape #battle.v2 .b2-bar{height:4px;margin-top:1px}
+html.landscape #battle.v2 .b2-sub{font-size:7.5px;margin-top:1px;gap:2px}
+html.landscape #battle.v2 .b2-vp{gap:1px;flex:none}html.landscape #battle.v2 .b2-vp i{width:1.5px;height:5px}html.landscape #battle.v2 .b2-sub>span:first-child{font-size:7px;white-space:nowrap;flex:none}html.landscape #battle.v2 .b2-sub{flex-wrap:nowrap;overflow:hidden}html.landscape #battle.v2 .b2-nm em{padding-left:2px}
+html.landscape #battle.v2 .b2-cmd{padding:3px}
+html.landscape #battle.v2 .b2-cross{gap:3px;max-height:none;height:auto;width:min(100%,calc(100cqh));margin:auto}
+html.landscape #battle.v2 .b2-x{font-size:8.5px;letter-spacing:.2px;border-width:1px;border-radius:5px}
+html.landscape #battle.v2 .b2-x .ar{font-size:10px}html.landscape #battle.v2 .b2-x small{font-size:7px}
+html.landscape #battle.v2 .b2-grid{grid-template-columns:1fr;gap:3px}html.landscape #battle.v2 .b2-list{gap:3px}
+html.landscape #battle.v2 .b2-btn{padding:3px 6px;gap:1px;border-width:1px}html.landscape #battle.v2 .b2-btn span{font-size:9.5px}html.landscape #battle.v2 .b2-btn em{font-size:8px}
+html.landscape #battle.v2 .b2-back{padding:3px 6px}
+html.landscape #battle.v2 .bp-grid .bp-btn{height:62px}html.landscape #battle.v2 .bp-list .bp-row{min-height:38px;padding:3px 6px}
 
 /* ---- F7 (engine/feel.js): speed and AUTO buttons, Rose Mode tip, victory card, Options ---- */
 .battle-stage{position:relative}
