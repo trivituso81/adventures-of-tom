@@ -738,7 +738,7 @@ LE_AREAS.push(
     hint:'Coat Check top left, Card Room top right, Ballroom at the bottom. The Dome is at the top.',
     spawn:{x:1,y:10},
     wild:true,
-    exits:[[0,10,'observatory',11,2,'down','clubstairs'],[14,2,'dome',9,12,'up','marble'],[15,2,'dome',10,12,'up','marble']],
+    exits:[[0,10,'observatory',10,3,'down','clubstairs'],[14,2,'dome',9,12,'up','marble'],[15,2,'dome',10,12,'up','marble']],
     // Painted plate (art/moonclub.webp, engine/plate.js). '#' blocks, '.' walks. The mirror stands stay drawn on top of the painting
     // (liveKinds) because the moonbeam puzzle needs to show which are back and which way they lean. The beam row 11, column 21,
     // row 9 and column 15 are kept walkable so the beam (clubBeam) is never cut off by a painted prop.
@@ -1151,8 +1151,24 @@ const LE_ROOMS=[
       ['counter',7,1,3,1,'The kettle','The kettle says nothing. Suspiciously nothing.',{variant:'tea'}]]},
   {id:'observatory',w:13,h:12,
     style:{floor:'#8d9aab',alt:'#a0adbb',wall:'#718299',trim:'#bac8d1',pattern:'night',rug:'#777f9e'},
-    walls:[[8,6],[9,6],[10,6],[11,6],[8,7],[8,9]],
-    rug:[2,5,5,5],
+    rug:[4,5,6,4],
+    // Painted plate (art/observatory.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
+    // Telescope platform and ladder back left, bookshelf and scroll barrel back centre, the silver door (with its rug) back right,
+    // Luna's desk left, the moon rug in the middle, the Lost Sock star chart right, crates front right.
+    // The stairs at the bottom (x6) are the way out; the club door is reached from its rug at (10,3).
+    plateMask:[
+      '#############',
+      '#############',
+      '#############',
+      '##########.##',
+      '#####......##',
+      '###.......###',
+      '####......###',
+      '#####.....###',
+      '###.....#####',
+      '######.######',
+      '######.######',
+      '######.######'],
     npcs:[
       {name:'Luna',x:5,y:6,look:'luna',lines:[
         "I've discovered a new constellation.",
@@ -1162,11 +1178,12 @@ const LE_ROOMS=[
               {...CH9_ON,flag:'ch9-luna',lines:['The door is open. Twelve years I have swept this floor, and that door is open.','If you see the moon up there, please tell it to come home. My telescope misses it.']},
               {...CH9_ON,lines:['There\'s supposed to be a full moon tonight. My telescope can\'t find it.','It\'s not behind a cloud. It\'s just not THERE. I checked four times.']}]}],
     objects:[
-      ['telescope',5,2,3,2,'The telescope','You can see a star. It looks extremely pleased with itself.'],
-      ['desk',1,7,3,1,'Research desk','An important equation: moon + cheese = dinner.'],
-      ['shelf',9,2,2,1,'Space books','"Astronomy for People Who Keep Saying Astrology."'],
-      ['chart',9,8,2,1,'Star chart','The constellation of the Lost Sock remains unaccounted for.'],
-      ['clubdoor',11,1,1,1,'Little silver door','A little silver door with a brass moon on it. A sign: MEMBERS ONLY. It\'s locked. It\'s always been locked.',{club:true,
+      ['telescope',3,2,3,2,'The telescope','You can see a star. It looks extremely pleased with itself.'],
+      ['desk',1,6,3,2,'Research desk','An important equation: moon + cheese = dinner.'],
+      ['shelf',6,2,4,2,'Space books','"Astronomy for People Who Keep Saying Astrology."'],
+      ['chart',10,5,3,3,'Star chart','The constellation of the Lost Sock remains unaccounted for.'],
+      ['toybox',8,8,3,2,'Supply crates','Stamped FRAGILE: CELESTIAL. Inside, mostly packing peanuts. Luna calls them meteorites.'],
+      ['clubdoor',10,2,1,1,'Little silver door','A little silver door with a brass moon on it. A sign: MEMBERS ONLY. It\'s locked. It\'s always been locked.',{club:true,
         when:[{chapter:9,flag:'ch9-luna',text:'The little silver door is open. Stairs go up and up. Somewhere up there, very faintly, a piano.'},
               {...CH9_DONE,text:'The little silver door, propped open with a doorstop shaped like a moon. A new sign: ALL WELCOME. FULL MOONS.'}]}]]},
   {id:'shop',w:11,h:9,
