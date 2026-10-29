@@ -1054,17 +1054,32 @@ const LA_ROOMS=[
   {id:'lacab',w:11,h:9,
     style:{floor:'#c9c3b4',alt:'#d7d1c2',wall:'#a99a6e',trim:'#efe0b0',pattern:'check',rug:'#d9a43a'},
     rug:[3,5,5,2],
+    // Painted plate (art/lacab.webp, engine/plate.js), area 45. The mask is the walk map: '#' blocks, '.' walks.
+    // The dispatch desk (row 3), red sofa and magazine table on the left, water cooler, lost and found and green sofa on the right.
+    // The doormat (x 4 to 6, rows 7 and 8) between the gate posts is the way out.
+    plateMask:[
+      '###########',
+      '###########',
+      '###########',
+      '###########',
+      '##.......##',
+      '###......##',
+      '###......##',
+      '####...####',
+      '####...####'],
+    doors:[[4,8],[6,8]],
     npcs:[
       {name:'Sol',x:5,y:5,look:'sol',driver:true,lines:[
         "Angel City Cab Co. I'm Sol. Sal's cousin. Also one cab.",
         'Cab eight. Sal has cab seven. We don\'t talk about what happened to the other six.',
         'I go to the airport, the airport, and sometimes the airport.']}],
     objects:[
-      ['counter',3,3,5,1,'Dispatch desk','A radio crackles: "Cab eight, there\'s traffic everywhere." Sol nods. There\'s always traffic everywhere.',{variant:'letters'}],
-      ['shelf',1,1,2,1,'Key board','Eight hooks. One key. Sol and Sal have a friendly rivalry about hooks.'],
-      ['photo',8,1,1,1,'Driver of the month','It\'s Sol. In sunglasses. At sunset. He had it professionally done.'],
-      ['desk',7,6,2,1,'Lost and found','Sunglasses, sunglasses, sunglasses, and one Oscar. It\'s probably fake. Probably.'],
-      ['pot',1,6,1,1,'Waiting room palm','A palm tree in a pot. It\'s waiting for a cab to the beach.']]},
+      ['counter',3,3,5,1,'Dispatch desk','A radio crackles: "Cab eight, there\'s traffic everywhere." Sol nods. There\'s always traffic everywhere. Above it, a map of LA covered in pins, and a key board with eight hooks and one key.',{variant:'letters'}],
+      ['pot',8,2,1,2,'Water cooler','Full. Nobody has ever seen it get refilled. Sol says that is how you know it works.'],
+      ['desk',9,3,2,2,'Lost and found','Sunglasses, sunglasses, sunglasses, and one Oscar. It\'s probably fake. Probably. Above it, the Driver of the month: Sol, in sunglasses, at sunset. Professionally done.'],
+      ['table',9,5,2,2,'Green sofa','Two green leather seats and a side table of magazines. The waiting room has never had more than one person waiting.'],
+      ['table',0,3,2,2,'Red leather sofa','Red leather, worn smooth by every driver who ever said five more minutes.'],
+      ['table',1,5,2,2,'Magazine table','Magazines from three different decades. The newest cover is a hurricane. The palm beside it is waiting for a cab to the beach.']]},
   // Tom's house, 3468 2nd Ave. Main floor: painted plate art/tomhouse.webp (engine/plate.js), 16 x 24 tiles at 64 art px per tile.
   // The mask is traced from the painting: '#' blocks, '.' walks. The front door (three tiles) is at the bottom left; the open doorway at the
   // top middle is an edge portal to the primary suite (map id tomsuite). The old hall wing (laundry, office, guest rooms) is gone.

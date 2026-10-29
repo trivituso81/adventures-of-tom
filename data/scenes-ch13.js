@@ -26,7 +26,7 @@ function ch13Girls() {
   home.npcs=home.npcs.filter(n=>!n.girlAtHome);
   for(const g of gs) {
     if(room.npcs.some(n=>n.girlAtHome&&n.name===g.name)) continue;
-    Object.assign(g,{x:g.name==='Grace'?2:3,y:g.name==='Grace'?5:7,move:null,path:[],lines:CH13_GIRL_LINES[g.name]||g.lines,visitedOnce:false});
+    Object.assign(g,{x:g.name==='Grace'?3:4,y:g.name==='Grace'?5:6,move:null,path:[],lines:CH13_GIRL_LINES[g.name]||g.lines,visitedOnce:false});
     room.npcs.push(g);
   }
 }

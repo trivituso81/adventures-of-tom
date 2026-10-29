@@ -1,3 +1,11 @@
+## 2026-10-29: Angel City Cab Co. (inside) is painted (Area 45, map id `lacab`)
+- New `art/lacab.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.lacab` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged; the whole doormat (x 4 to 6, rows 7 and 8) walks and all three bottom tiles exit to the boulevard (`doors:[[4,8],[6,8]]`).
+- Walk map (`plateMask` in `data/maps-la.js`): the lane in front of the dispatch desk (row 4, x 2 to 8) and the open floor below it (rows 5 and 6, x 3 to 8). Desk, both sofas, magazine table, water cooler, lost and found, the plants and the front ledge are painted and blocked.
+- Objects re-laid: Dispatch desk (3,3,5,1), Water cooler (8,2,1,2) (new), Lost and found (9,3,2,2), Green sofa (9,5,2,2) (new), Red leather sofa (0,3,2,2) (new), Magazine table (1,5,2,2) (new). The wall-only objects (Key board, Driver of the month photo, Waiting room palm) are gone because nothing can reach them; their lines moved into the desk (map and key board), lost and found (photo) and magazine table (palm). Unvoiced text only.
+- Sol stays at (5,5), lines unchanged. The chapter 13 to 16 scenes park Grace and Rose in this room: their tiles moved from (2,5) and (3,7), now blocked, to (3,5) and (4,6) in `data/scenes-ch13.js`; their lines are unchanged. Tom's arrival tile (7,6) in chapter select is still open floor.
+- Checks: new `tools/lacab_test.py` 0 fails (objects touchable, Sol talks, girls' tiles walk, walls hold, all three mat tiles exit to the boulevard), smoke 0 fails. Portrait and landscape shots looked at.
+- Known: no foreground layer, so characters draw over the front plants and the ledge.
+
 ## 2026-10-29: Pupuseria La Ceiba (inside) is painted (Area 51, map id `pupuseria`)
 - New `art/pupuseria.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.pupuseria` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the Jefferson Park door still works.
 - Walk map (`plateMask` in `data/maps-la.js`): the centre aisle (x 4 to 6, rows 4 to 6) and a one-tile lane at x 5 (rows 7 and 8) over the mat. The comal counter, family table, both right tables, the planters, the rails and the walls are painted and blocked.
