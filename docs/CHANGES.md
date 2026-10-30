@@ -1,3 +1,8 @@
+## 2026-10-29: Six more painted townsfolk, Los Angeles (Don Beto, Sol, Dash, Dolores, Marguerite, Nickel)
+- Sheets `tools/sprite-bake/src/{beto,sol,dash,dolores,marguerite,nickel}-walk-v1.png` added to `CAST` (heights 42, 40, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`.
+- All six matched BY NAME (`TOWN_PAINTED`) because `VILLAGERS` has entries for these looks. Nickel is a hidden shopkeeper, so the painted set is not visible in his shop.
+- Checks: `tools/townsfolk_test.py` (41 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Six more painted townsfolk, Los Angeles (Sage, Kenji, Juniper, Bernadette, Dana, Kiki)
 - Sheets `tools/sprite-bake/src/{sage,kenji,juniper,bernadette,dana,kiki}-walk-v1.png` added to `CAST` in `bake_townsfolk.py` (heights 38, 44, 38, 42, 41, 40). Files arrived as "image.png"; Tom's names screenshot gave the names and the sheets were matched to the NPCs by hair, clothes and job (palettes in `data/maps-la.js`).
 - Sage, Kenji and Juniper are matched BY NAME (`TOWN_PAINTED`) because `VILLAGERS` has entries for those looks and wins over a plain `OW` set (first try showed the old pixel art in the shops). Bernadette, Dana and Kiki replace `OW.bernadette`, `OW.dana`, `OW.kiki` directly.
