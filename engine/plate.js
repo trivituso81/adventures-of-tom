@@ -37,6 +37,7 @@ PLATES.dakota={src:'art/dakota.webp?v=20261029',px:64,img:null,ready:false,actor
 PLATES.concourse={src:'art/concourse.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.flightzero={src:'art/flightzero.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.subdepot={src:'art/subdepot.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.towervault={src:'art/towervault.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;

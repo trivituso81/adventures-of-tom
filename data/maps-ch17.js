@@ -137,16 +137,36 @@ LE_AREAS.push(
     hint:'The lift to the top is at the north wall. The bench swaps who fights. The coffee machine is a restore point.',
     spawn:{x:10,y:11},
     exits:[[10,13,'towerlobby',10,11,'up','glfloor'],[11,13,'towerlobby',11,11,'up','glfloor']],
-    monsters:CH17_VAULT_SPOTS},
+    monsters:CH17_VAULT_SPOTS,
+    // Painted plate (art/towervault.webp, engine/plate.js). '#' blocks, '.' walks. The walk is a ring round the snow globe: row 3 in front of the lift
+    // (the Twin Lenses hover at (10,4) and are talked to from (10,3)), the side lanes at cols 7 and 14, the row-9 apron south of the globe, and the
+    // wide row 10 in front of the cases. Blocked: the globe and its base (cols 8 to 13, rows 4 to 8), the four display cases, the bench, the lamp
+    // pillars and the stair rails at the bottom. The coffee table behind the north-east case is reached by a lane down the east wall (col 20) round
+    // the south-east case, through the little alcove at cols 18 to 20, rows 3 to 5.
+    plateMask:[
+      '######################',
+      '######################',
+      '######################',
+      '#######........###.###',
+      '#######.######.###...#',
+      '#######.######.###...#',
+      '######..######..####.#',
+      '######..######..####.#',
+      '######..######..####.#',
+      '######..........####.#',
+      '##...................#',
+      '#######.#....#....####',
+      '##########..##########',
+      '##########..##########']},
     planGlass(TOWERVAULT_PLAN),
     {objects:[
-      ['glplinth',9,6,4,2,'The snow globe','A snow globe the size of a beach ball on a glass plinth. Inside it is the Square, very small. The fountain, the library, the camera on its tripod, and two stone figures holding each other up. The snow is falling on them. A little amber light crawls along their joined hands.'],
-      ['glelev',9,1,4,1,'Pinnacle lift','A gold lift door, floor to ceiling, with no call button at all. A small brass plate says: FLOOR 60. BY INVITATION.'],
-      ['glcase',2,4,2,2,'Display case','A glass case of tiny diorama towns, all lit from inside, all so happy. The little plaque says: SIXTY-ONE TOWNS. ONE COAST. ONE FAMILY.'],
-      ['glcase',2,8,2,2,'Display case','A glass case. Inside, a tiny armchair, a tiny cup of tea, a tiny dog on the rug. Nobody is in the chair. The tea is still warm.'],
-      ['glcase',18,4,2,2,'Display case','A glass case. A tiny kitchen with a tiny pie in the window. It has been cooling for years. Somebody is a little hungry.'],
-      ['glcase',18,8,2,2,'Display case','A glass case. A tiny brass plaque: THE FAMILY OF THE ANCHOR. UNDERNEATH, A SMALLER PLAQUE: RESERVED.'],
-      ['glbench',4,11,3,1,'The Archive bench','THE ARCHIVE BENCH. Who sits out, who comes up front?',{swapbench:true,benchName:'THE ARCHIVE BENCH'}],
-      ['glvend',16,2,1,1,'Coffee machine','A coffee machine in the Vault. The button has been taped over. Somebody has peeled the tape back, very neatly, with one finger. Everyone is completely restored.',{restore:true,restoreText:'A last hot coffee before the Lenses. Everyone is completely restored.'}],
-      ['glsign',16,12,3,1,'Freight lift sign','FREIGHT LIFT TO THE LOBBY. A hand-lettered note: ONLY GO DOWN IF YOU ARE LEAVING. ALL OTHER DIRECTIONS ARE UP.',{sign:'FREIGHT LIFT'}]]})
+      ['glplinth',8,5,6,4,'The snow globe','A snow globe the size of a beach ball on a glass plinth. Inside it is the Square, very small. The fountain, the library, the camera on its tripod, and two stone figures holding each other up. The snow is falling on them. A little amber light crawls along their joined hands.'],
+      ['glelev',10,1,2,2,'Pinnacle lift','A gold lift door, floor to ceiling, with no call button at all. A small brass plate says: FLOOR 60. BY INVITATION.'],
+      ['glcase',3,3,4,3,'Display case','A glass case of tiny diorama towns, all lit from inside, all so happy. The little plaque says: SIXTY-ONE TOWNS. ONE COAST. ONE FAMILY.'],
+      ['glcase',2,6,4,4,'Display case','A glass case. Inside, a tiny armchair, a tiny cup of tea, a tiny dog on the rug. Nobody is in the chair. The tea is still warm.'],
+      ['glcase',15,3,3,3,'Display case','A glass case. A tiny kitchen with a tiny pie in the window. It has been cooling for years. Somebody is a little hungry.'],
+      ['glcase',16,6,4,4,'Display case','A glass case. A tiny brass plaque: THE FAMILY OF THE ANCHOR. UNDERNEATH, A SMALLER PLAQUE: RESERVED.'],
+      ['glbench',3,11,4,1,'The Archive bench','THE ARCHIVE BENCH. Who sits out, who comes up front?',{swapbench:true,benchName:'THE ARCHIVE BENCH'}],
+      ['glvend',17,2,2,1,'Coffee machine','A coffee machine in the Vault. The button has been taped over. Somebody has peeled the tape back, very neatly, with one finger. Everyone is completely restored.',{restore:true,restoreText:'A last hot coffee before the Lenses. Everyone is completely restored.'}],
+      ['glsign',18,11,2,2,'Freight lift sign','FREIGHT LIFT TO THE LOBBY. A hand-lettered note: ONLY GO DOWN IF YOU ARE LEAVING. ALL OTHER DIRECTIONS ARE UP.',{sign:'FREIGHT LIFT'}]]})
 );
