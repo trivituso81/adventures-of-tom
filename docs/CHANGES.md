@@ -1,3 +1,10 @@
+## 2026-10-29: Bready Mercury on Tom's kitchen island
+- Tom: Bready Mercury should be visible in the game world, e.g. sitting on the counter, using the starter move art as the reference. The painted house plate had an empty island.
+- Done (draw only): `drawBreadyJar` in `engine/plate.js`, called from `plateLive` for map `tomhouse`. Same jar as the starter moves (glass, cream starter that bubbles, gold lid, MERCURY label with a tiny face and mustache), plus a small crown. Sits left of the sink, drawn over the painting and under the actors.
+- Story gating: hidden only in chapter 6 until `ch6-clear` (the squirrels have him), back from the Oak boss on and in every other chapter. The island's inspect text follows it (`when` variant in `data/maps-la.js`): empty round spot in the flour and tiny footprints while he is gone, Bready by the sink otherwise.
+- Cache tags bumped (`plate.js?v=bready1`, `maps-la.js?v=bready1`). Test: new `tools/bready_test.py` 0 fails; smoke FAILS: []. Zoom in `tools/shots/bready-zoom.png`. Not yet seen on Tom's phone. To move or resize, change the two numbers in the `plateLive` call (position 606, 499 and scale 1.2).
+- Not done: other places Bready could appear (the ch8 bakery rack, Tom's Long Island side). The Oak crown already shows the jar on the hoard.
+
 ## 2026-10-29: Enemy hurt frame holds longer
 - Tom: the enemy's damage frame flashed too quickly. The hurt frame only showed while the hit's shake or flash timer ran (about 0.35 s for most hits), and the white flash lasted 0.16 s.
 - Fix in `engine/battle2-ui.js` (`b2FoeFrame`, `B2_HURT_HOLD` = 700 ms): once a hit starts, the hurt frame is held for at least 0.7 s, for every move, since it is decided in one place. White flash on a plain hit raised from 0.16 s to 0.3 s (`engine/battle2.js`, `engine/battle2-traits.js`). Party member flash unchanged.

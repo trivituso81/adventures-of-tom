@@ -92,7 +92,26 @@ function actorK() {
 }
 
 // Live touches drawn over a painting. Gate 00: after chapter 11 the Long Island dome (left window) goes amber, as it did on the tile version.
+// Bready Mercury, Tom's sourdough starter, sitting on the kitchen island in Tom's house. Painted live over the plate (the painting has an empty counter).
+// Same jar as the starter moves: glass, cream starter, gold lid, a MERCURY label (here with a tiny face and mustache), plus a crown. cx, by = jar centre and base in map px.
+function drawBreadyJar(cx,by,u,time) {
+  const R=(x,y,w,h,c)=>{ ctx.fillStyle=c; ctx.fillRect(cx+x*u,by+y*u,w*u,h*u); };
+  const OUT='#2b2a26', top=-19+1.2*Math.sin(time*1.3);
+  ctx.save();
+  ctx.fillStyle='rgba(60,40,20,.30)'; ctx.beginPath(); ctx.ellipse(cx+2*u,by+1*u,17*u,3.6*u,0,0,Math.PI*2); ctx.fill();
+  R(-14,-31,28,32,OUT); R(-13,-30,26,30,'#cfe6ee');
+  R(-13,top,26,-top,'#efe3c8'); R(-13,top-1,26,1,'#fff8e8');
+  for(let k=0;k<4;k++) { const t=(time*.45+k*.27)%1, bx=-9+k*6, byy=-2+t*(top+3); ctx.globalAlpha=t>.8?(1-t)*5:1; R(bx,byy,2,2,'#fff8e8'); }
+  ctx.globalAlpha=1;
+  R(-11,-28,2,22,'rgba(255,255,255,.55)');
+  R(-14,-38,28,7,OUT); R(-13,-37,26,5,'#c9a03e'); R(-11,-37,22,1,'#e6c46a');
+  R(-6,-43,12,5,OUT); R(-5,-42,10,3,'#e8b923'); R(-5,-45,2,3,'#e8b923'); R(-1,-46,2,4,'#e8b923'); R(3,-45,2,3,'#e8b923');
+  R(-9,-15,18,10,OUT); R(-8,-14,16,8,'#f6efdc'); R(-5,-12,2,2,OUT); R(3,-12,2,2,OUT); R(-5,-8,10,2,OUT); R(-6,-7,2,1,OUT); R(4,-7,2,1,OUT);
+  ctx.restore();
+}
 function plateLive(map,time) {
+  // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
+  if(map&&map.id==='tomhouse'&&!(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'}))) drawBreadyJar(606*T/64,499*T/64,1.2*T/64,time);
   if(!map||map.id!=='gate00'||typeof infFlag!=='function'||!infFlag('ch11-closed')) return;
   const s=T/64, cx=478*s, cy=98*s, r=96*s;
   ctx.save();
