@@ -3,7 +3,7 @@
 function draw(time) {
   const plate=plateFor(currentMap);
   const hold=!plate&&plateHold(currentMap);
-  const pk=plate?Math.min(3,Math.max(1,Math.ceil(window.devicePixelRatio||1))):1;
+  const pk=plate?Math.min(4,Math.max(1,Math.ceil((window.devicePixelRatio||1)*Math.max(1,scale)))):1;
   plateSetK(pk);
   ctx.setTransform(pk,0,0,pk,0,0);
   rect(0,0,W,H,currentMap.outside?'#294c3e':'#30413c');

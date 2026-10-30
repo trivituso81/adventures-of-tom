@@ -286,6 +286,13 @@ function resize() {
   scale=!currentMap.outside&&width>=900&&height>=700?2:1;
   W=Math.max(1,Math.ceil(width/scale));
   H=Math.max(1,Math.ceil(height/scale));
+  // Phone portrait, inside a house: zoom so the room's left and right walls sit flush with the screen edges
+  // (the canvas is exactly the room's width; CSS stretches it to the screen, so scale may be a fraction).
+  if(!currentMap.outside&&!layout.landscape&&width<900) {
+    scale=width/(currentMap.w*T);
+    W=currentMap.w*T;
+    H=Math.max(1,Math.ceil(height/scale));
+  }
   canvas.width=W;
   canvas.height=H;
   if(typeof plateSetK==='function') plateSetK.k=1;
