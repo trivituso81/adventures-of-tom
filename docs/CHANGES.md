@@ -1,3 +1,8 @@
+## 2026-10-30: Starter Splash wave matches the painted look
+
+- The wave of starter, the flying drops and the floor puddles in Tom's Starter Splash (`SC.tv_wave`, `SC.tv_goo` in `engine/tom-moves.js`) were flat cream shapes with a hard black outline. They now use the painted jar's dough: smooth gradient, glossy bubble holes, warm brown outline, rounded blob edges, foam balls on the crest. Timing, damage and sounds unchanged.
+- Script version bumped to `?v=tom9`. Tests: kit_test tom starter_splash and smoke, frames looked at.
+
 ## 2026-10-30: Painted props wired into the rest of the cast (Grace, Amy, Deedee, Boppy, TNB, Tom)
 
 - Grace 10 of 12, Amy 36 of 36, Deedee 25 of 26, Boppy 26 of 26, TNB 6 of 24, Tom 17 of 17 (with Rose's 24 and the Tombos, every painted prop is now referenced except the ones below). Drawn versions stay as fallbacks. Visuals only.
