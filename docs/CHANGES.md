@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, TNB 31-item sheet (source only)
+- Saved `tools/sprite-bake/src/props/tnb-sheet1-items1-31.png`. Items 1 to 23 match the prompt list. Items 24 to 31 drifted into invented props and need a redo (longboard, painted curb, rocking platform, spirit level, clay wedge, brick kiln, stoneware mugs, street signs). Not wired into the game.
+
 ## 2026-10-30: Difficulty picker on New Game
 - After picking a new game (Part 1 chapter, Part 2 test jump, or the Bonus), a "Choose your difficulty" screen shows Easy (Rose portrait, Rose Mode), Medium (Grace portrait, Grace Mode) and Hard (Tom portrait, Director Mode). It defaults to the saved mode, BACK returns to the chapter list, and the choice can still be changed in Options. Part 2 from Part 1 clear data does not ask (the mode comes with the data). engine/splash.js (`SPLASH_DIFF`, `splashDifficulty`, `diff` mode), script tag `?v=diff1`. Smoke 0 fails; portrait and landscape checked.
 ## 2026-10-30: Outdoor maps stop flush at the edge (no soft strip at the bottom)
