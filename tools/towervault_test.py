@@ -30,7 +30,7 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ splash.active=false; const s=document.getElementById('splash'); if(s) s.hidden=true; intro&&(intro.active=false); }")
     r=pg.evaluate(REACH); print(json.dumps(r))
     fails+=len(r['unreachableObjects'])+sum(1 for s_ in r['stand'] if not s_['ok'])+sum(1 for p_ in r['portals'] if not p_['ok'])
-    pg.evaluate("()=>{ STORY.mode='full'; STORY.chapter=17; __LE.go('towervault'); }"); pg.wait_for_timeout(1500)
+    pg.evaluate("()=>{ STORY.mode='full'; STORY.chapter=17; __LE.go('towervault'); }"); pg.wait_for_function('()=>!!plateFor(currentMap)',timeout=60000); pg.wait_for_timeout(500)
     print('plate ready',pg.evaluate("()=>!!plateFor(currentMap)"),'map',pg.evaluate("()=>currentMap.id"))
     if not pg.evaluate("()=>!!plateFor(currentMap)"): fails+=1
     def shot(name,x,y):
