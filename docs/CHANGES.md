@@ -2,9 +2,11 @@
 - Cause: a 12 second watchdog in `index.html` showed the error card whenever the game had not started yet. The game loads 196 scripts (about 122 MB of baked voice), so a slow first load passed 12 s and the card stayed on screen even after the game booted.
 - New `#boot` loading screen (navy, gold flower, moving bar, "Loading the town...") covers the stage immediately and fades out on the first frame (`js-running`). After 15 s it adds a "still going" line. The retry screen shows only if a game file fails to download (8 s grace) or 90 s pass with no start. It no longer links to the claude.ai artifact.
 - Checked in headless Chromium: normal boot, 20 s delayed script (no error at 12 s, clears on boot), blocked `main.js` (retry shows). Smoke 0 fails.
+
 ## 2026-10-29: Six more painted townsfolk, Los Angeles (Mateo, Daisy, Kevin, Claudia, Yesenia, Tony)
 - Sheets `tools/sprite-bake/src/{mateo,daisy,kevin,claudia,yesenia,tony}-walk-v1.png` added to `CAST` (heights 36, 38, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`. All matched BY NAME (`TOWN_PAINTED`). Tom's screenshot also listed "Magenta Teen Character Turnaround", not selected and not sent, so skipped.
 - Checks: `tools/townsfolk_test.py` (47 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Fix: a beaten monster on a one-tile path no longer walls off the route (Whispering Marsh softlock)
 - Bug (Tom): in the Whispering Marsh the monsters on the boardwalk blocked the only path, so the game was stuck for good. Cause: map monsters are solid NPCs and the marsh route is one tile wide in places (Bobber at 16,12 on the long boardwalk, Tangle in the neck at 10,8). Winning only puts the monster to sleep ("resting", 25 s, `defeatedUntil`) on the same tile, still solid, and it wakes and fights again, so Tom could never pass. From the entry platform only 15 of 50 walkable tiles were reachable.
 - Fix: `engine/battle-draw.js` `canOccupy` now lets Tom and the party walk through a monster that is resting (`restingPassable`). An awake monster is still solid and still fights on touch. The tile map, spots and story scenes are unchanged.
@@ -15,11 +17,13 @@
 - Sheets `tools/sprite-bake/src/{beto,sol,dash,dolores,marguerite,nickel}-walk-v1.png` added to `CAST` (heights 42, 40, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`.
 - All six matched BY NAME (`TOWN_PAINTED`) because `VILLAGERS` has entries for these looks. Nickel is a hidden shopkeeper, so the painted set is not visible in his shop.
 - Checks: `tools/townsfolk_test.py` (41 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Painted plate for Flight Zero's cabin (chapter 11)
 - Flight Zero (map id `flightzero`, 19 x 7 tiles at 64 px, `art/flightzero.webp`, entry in `PLATES`) now uses Tom's painting. A `plateMask` in `data/maps-p2.js` is the walk map: only the blue aisle (rows 3 and 4, x 1 to 17) walks. The window wall, the five back pods, the five front pods with their nightstands, both galleys, the cabin door and the drinks cart (x 11 and 12, row 3) block.
 - Objects re-laid to the painting: back pods (2,1) 3x2, (5,1) 3x2, (8,1) 2x2, (10,1) 3x2, (13,1) 3x2; front pods (2,5), (8,5), (11,5), (15,5) 3x2, Rose's pod as seat (5,5), blanket (6,5), seat (7,5); cart (11,3) 2x1; door (17,3). Object text is unchanged.
 - Spawn moved from (3,2) to (3,3), the aisle in front of Tom's back-left pod (the old tile is inside the painted pod). Changed in the map spec and the opening step in `data/scenes-p2.js`. The cabin scene stand tiles (Tom 6,4; girls 6,5 and 7,5; Amy 17,4) are unchanged and the scene plays through.
 - Tests: new `tools/flightzero_test.py` (objects touchable, stand tiles walkable, A opens every pod, the cart and the door, the aisle walks end to end, portrait and landscape shots); `tools/ch11_test.py`, `tools/ch11b_test.py` and `tools/smoke.py` pass. Known roughness: the "sky tears pink" effect in the windows (`ch11-tear`) was drawn by the old tile look and is not shown on the painting; the minimap still draws the old tile look. No spoken lines changed.
+
 ## 2026-10-29: Gate 00 is painted (Terminal Infinity, chapter 11)
 - Tom's painting of Gate 00 (`art/gate00.webp`, 1280 x 896, 20 x 14 tiles at 64 px, entry in `PLATES` with `actorScale` 1.98). He sent two pairs; the final plus grid pair (`gate00_final.png`, `gate00_grid.png`) was used because it is the one with the tile grid. Two grid-less alternate paintings were not used (one of them has a departures board listing Long Island, Los Angeles, Somewhere Else, A Little Later, Much Farther; it could be a later variant).
 - `data/maps-p2.js`: new `plateMask` for `gate00` (window wall, podium and its posts, four benches and lamp tables, luggage cart, two plants, right console and the rails block; the marble aisle, carpet and the east doorway walk). Objects re-laid onto the painting: podium (text now starts "AREA 55, GATE 00", matching the painted sign), departure board, four bench rows, two plants, plus two new ones (yoga mat with thermos, luggage cart with WHEREVER and NOT MY BAG tags). Spawn (9,11) and the east exits (19,6) and (19,7) to the Endless Concourse are unchanged. The Concourse's west doors now both return to (18,7), because (18,6) is a painted pillar base.
@@ -82,6 +86,7 @@
 - Objects re-laid: The comal (3,2,5,2), Family table (1,4,3,2), new Window table (7,4,2,1) and Corner table (7,5,3,2) with new unvoiced text, Loroco plant (3,6). The Volcano photo object is gone (the painted volcano hangs on a wall nobody can reach); its line "A volcano outside San Salvador at sunrise. Carmen points at it every time someone looks." is no longer in the game.
 - Checks: new `tools/pupuseria_test.py` 0 fails (objects touchable, Carmen answers, counter answers, door walked to Jefferson Park), smoke, bg_test, jpark_test 0 fails. Portrait and landscape shots looked at.
 - Known: no foreground layer, so characters draw over the front plants and rail.
+
 ## 2026-10-29: Odette's Creole Kitchen (inside) is painted (Area 50, map id `creole`)
 - New `art/creole.webp` (Tom's painting, 768 x 576 = 12 x 9 tiles at 64 px) registered as `PLATES.creole` (`?v=20261029`, interior actor scale 1.98). Map size, door (6,8) and spawn (6,7) unchanged, so the Jefferson Park door still works.
 - Walk map (`plateMask` in `data/maps-la.js`): a ring of floor around the family table (row 3 x 4 to 6, column x 6, rows 5 and 6 on the left and right of the table), the west nook (2,5) and (2,6), and the doormat lane (x 5 and 6, rows 7 and 8). The pastry case and kitchen, all three tables, the dark booths, the right wall alcove, the front bench and plants stay blocked. The back right corner (rug and wooden door) is cut off by the yellow table, so it is blocked too.
@@ -107,6 +112,7 @@
 - Reworded or new object text (not voiced, no re-bake): couch (adds the before and after frames), coffee table, pouf, slat divider, mug shelf (TNB line), dining table, side table, planter. Espresso bar and olive tree keep the old jokes (olive tree: "In a big planter").
 - Checks: new `tools/jordansam_test.py` 0 fails (objects touchable, no cut-off floor, both residents talk, walls hold, lane walked to Jefferson Park), smoke, bg_test, jpark_test, nickels_test, boards_test 0 fails. Portrait and landscape shots looked at.
 - Known: no foreground layer, so characters draw over the front plants and the ledge. The hallway door behind the slat divider is scenery only.
+
 ## 2026-10-29: carbarn_test fixed (test only, no game change)
 - `tools/carbarn_test.py` failed "west arch leads to Jefferson Park" and "east rails lead to the Boiler Room" because a wandering monster (Lukewarm waits at the west arch) started a fight on arrival, which froze the walk. The exits and walk map were fine. The test now ends any fight and clears monsters near the player before each exit walk. 0 fails.
 
@@ -131,6 +137,7 @@
 - Objects re-laid to the painting: Gray couch, Standing desk, The TV (now the whole unit down the left wall), Fiddle-leaf fig, plus new Kitchen island, Dining table, Armchair and Corner nook. Unvoiced text only: four new prop lines. Priya moved to (6,2) by her desk; her lines are unchanged.
 - Checks: new `tools/tower_test.py` 0 fails (objects touchable, no cut-off floor, Priya talks, walls hold, door walked to the boulevard), smoke, bg_test, blvd_test, shop_test, nickels_test 0 fails. Portrait and landscape shots looked at. ch17_test did not finish inside the 280 s timeout here; the chapter 17 Glass Tower does not use this map.
 - Known: no foreground layer, so characters draw over the front planters and pillars. The (8,5) tile sits just in front of the nook plant.
+
 ## 2026-10-29: Nickel's (inside) is painted (Area 41, map id `nickels`)
 - New `art/nickels.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.nickels` (`?v=20261029`, interior actor scale 1.98). Map size, door (5,8) and spawn (5,7) unchanged, so the boulevard door still works.
 - Walk map (`plateMask` in `data/maps-la.js`): the open floor in front of the counter (rows 5 and 6), one tile beside the snack shelf (8,4), and a one-tile lane at x 5 (rows 6 to 8) between the door posts over the mat. The counter, sweater wall, window, helmet shelf, crates, ball display, cactus and the right wall stay blocked.
@@ -146,6 +153,7 @@
 - Reworded (object text, not voiced, no re-bake): Rack A "Forty cowboy hats" is now a shelf of hats, fringe and a lasso (the painting has about ten hats); the Call sheet now reads the painted schedule (8 AM crew call, horse stand-in at 3) instead of "5 AM, forty extras". Prop plant ("four movies") and the desk scarf joke kept, since the painting shows both. New line: Hat case.
 - Checks: new `tools/wardrobe_test.py` 0 fails (objects touchable, no walkable islands, Marguerite and the desk answer, carpet walked to the boulevard), smoke, bg_test, blvd_test, reach_test, shop_test 0 fails. Portrait and landscape shots looked at.
 - Known roughness: no foreground layer, so characters draw over the front ledge and gate posts.
+
 ## 2026-10-29: Very Green Juice (inside) is painted
 - New `art/juicebar.webp` (Tom's painting, area 40, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.juicebar` with the interior actor scale. Map `juicebar` keeps its size. Door (5,8) and spawn (5,7) unchanged; the whole doormat between the gate posts (x 4 to 6, rows 7 and 8) now walks and all three bottom tiles are exits to Jefferson Park (`doors:[[4,8],[6,8]]`).
 - Walk map (`plateMask` in `data/maps-la.js`): the floor in front of the counter, the open floor right of the counter (8,3), the sunny left side down to the herb table. Counter and blender wall, wheatgrass beds, herb table, big fern and the supplement shelf are painted and blocked.
@@ -162,12 +170,14 @@
 - Reworded (object text, not voiced, no re-bake): counter "Twelve stools" is now "Five stools" (the painting has five); bamboo text now mentions the egg painted on the pot and "the rest for luck" (the painting shows more than three stalks). New line: Lantern step.
 - Checks: new `tools/ramen_test.py` 0 fails (objects touchable, Kenji and counter talk, door walked to the boulevard), smoke, bg_test, jpark_test, blvd_test 0 fails. Portrait and landscape shots looked at.
 - Known: `tools/carbarn_test.py` fails its two walk-out checks (west arch to Jefferson Park, east rails to the Boiler Room) on a clean checkout too, so it predates this change. No foreground layer, so characters draw over the front fence.
+
 ## 2026-10-29: Golden Hour Coffee is painted (Area 38, map id `coffee`)
 - New `art/coffee.webp` (Tom's painting, 704 x 576 = 11 x 9 tiles at 64 px) registered as `PLATES.coffee` (`?v=20261029`). Same size as the old room, so the Boulevard door and the exit are unchanged: door (5,8), arrival (5,7).
 - Walk map (`plateMask`): the floor in front of the counter (row 3, x 4 to 6), the middle floor (rows 4 and 5), and the entry lane over the mosaic mat (x 4 to 6, rows 6 to 8). The back counter, pastry case, left laptop table, right window table and book table, and the plants and low walls at the front are painted and blocked.
 - Objects re-laid on painted things: Espresso bar (4,2), Pastry case (7,2) (new), Monstera (3,2), Laptop table (0,3) (its text now also reads the wall sign SAME SCRIPT, DIFFERENT YEAR), Window table (8,3), Book table (8,5) (new, replaces the old second table). Juniper stands in front of the counter (5,3). None of the new text is spoken, so no clip is affected. Juniper's three lines are unchanged.
 - Checks: new `tools/coffee_test.py` 0 fails (objects touchable, Juniper on a walkable tile and talks, door walked with a real key), smoke, bg_test, blvd_test and reach_test 0 fails. Portrait and landscape shots looked at.
 - Known roughness: no foreground layer, so characters draw over the plants and low walls at the front; the left rug, the right armchair and the bookshelf are scenery only.
+
 ## 2026-10-29: Inside the Old Oak is painted
 - New `art/oak.webp` (Tom's painting, 1536 x 1280 = 24 x 20 tiles at 64 px) registered as `PLATES.oak` (`?v=20261029`). Map `oak` keeps its size; the tile-drawn bark, branches and pits are gone (the spec no longer uses `oakPlan`).
 - Walk map (`plateMask` in `data/maps-la.js`): the entry stairs (x 11 and 12, rows 17 to 19), the lower floor (tea table, stove and rug on the left, the table and rug on the right), the long walkway and stairs up the right side to the pantry, the pantry walkway and pulley deck, the middle rope bridge (row 6) across to the war room ramp, and the war room lane (row 5) in front of the war table. The top bridge (row 1) and the middle bridge (row 3) are cut off until the ladder is down.
@@ -177,6 +187,7 @@
 - Spoken lines NOT changed: the ladder scene still says the rope ladder unrolls "all the way to the floor" (it now ends at the war room bridge), and `ch6Oak` still says "war room on the left, pantry on the right" (still true). Only the hint text was reworded (not voiced).
 - Checks: new `tools/oak_test.py` 0 fails (objects touchable, ladder gap holds then opens, corkboard and bucket and ladder scene run, stairs and climb walked with real keys), smoke 0 fails, bg_test 0 fails, reach_test 0 fails. Portrait and landscape shots looked at.
 - Known roughness: no foreground layer, so characters draw over the bridge rails and the pantry barrels. The war room is one lane deep (the table, desks and filing cabinets are blocked).
+
 ## 2026-10-29: The Crown of the Oak is painted (Area 35, map id `crown`)
 - New `art/crown.webp` (Tom's painting, 1280 x 1024 = 20 x 16 tiles at 64 px) registered as `PLATES.crown` (`?v=20261029`). Same size as the old map, so nothing was resized. The old pit corners (`pools`) are gone.
 - Walk map (`plateMask`): the plank floor (rows 5 to 10), the rope bridge down (x 9 and 10, rows 10 to 15), the two lookout decks with their stairs (left x 2 to 5, rows 4 to 5; right x 15 to 17), and a small floor tongue on the right (x 14 and 15, row 10). The hoard, crates, trunk and leaves are painted and blocked.
@@ -184,6 +195,7 @@
 - Objects re-laid on painted things: hoard (11,4), JANUARY crate (6,5), FEBRUARY crate (13,5), MARCH pile (5,7), and the two lookout posts are now the painted telescopes (2,3) and (17,3), reached from the decks. Same jokes; the lookout text now names a telescope. None of this is spoken, so no clip is affected.
 - Not changed: the battle backdrop for the crown (`bgs/17-oak-crown-canopy.png`) is still the old pixel one.
 - Checks: new `tools/crown_test.py` 0 fails (objects touchable, decks and exits reachable, bridge walked with a real key, boss scene runs to the Chairman battle), smoke, bg_test and reach_test 0 fails, portrait and landscape shots looked at.
+
 ## 2026-10-29: Old Oak Park is painted
 - New `art/oakpark.webp` (Tom's painting, 1664 x 1408 = 26 x 22 tiles at 64 px, same size as the old map) registered as `PLATES.oakpark` (`?v=20261029`). No map resize, so every exit and arrival tile is unchanged: south gate (12,21) (13,21) to 2nd Ave, little door (12,4) (13,4) to the Old Oak, arrivals (12,20) (13,20) and (12,5) (13,5).
 - Walk map (`plateMask`): the Old Oak steps and door, the dirt paths round the central planter (blocked) into two lanes, the playground sand, the picnic lawn, the dog park (in through the bone gate), the garden's front dirt, and the south corridor. Garden beds and stepping stones are painted and blocked.
@@ -191,12 +203,14 @@
 - Monster spots moved off painted props: acorn agents (11,9) (17,16) (20,12), Peanut Gallery (5,7), Twig Spy (20,6), Cheek Stuffer (4,18).
 - Checks: new `tools/oakpark_test.py` 0 fails (objects touchable, no walkable islands, exits reachable, south gate and little door walked with real keys), smoke, bg_test, stage7_test, backlot_test 0 fails, portrait and landscape frames looked at.
 - Known roughness: no foreground layer (characters draw over tree leaves); the bollards at the south gate and the lamp posts are walk-through.
+
 ## 2026-10-29: The Boiler Room is painted
 - New `art/boilerroom.webp` (Tom's painting, 1280 x 896 = 20 x 14 tiles at 64 px) registered as `PLATES.boiler` (`?v=20261029`). Map size unchanged. The room is now a plain spec with a `plateMask` (no more `barnPlan`, so the old hearth tiles are gone; `barnPlan` is no longer used by any room).
 - Walk map: the west arch (exits (0,7) and (0,8) to the Car Barn, arriving at (28,14) and (28,15) there), the lit walkway down past the coal cart, and the open stone floor out to the coal bin, the bread rack and the baker's bench. The boiler and its control platform, the pipes, and the south wall of crates are blocked.
 - Objects re-laid on painted props: Old boiler, Coal bin, Coal cart (was Coal scuttle), Bread rack, Peel rack (the tool rack by the oven), Baker's bench (new, bowl, mug and dough tub), Ash pan (the floor barrel), Stacked crates (new). The ch8-clear texts are unchanged.
 - Old Ironbelly now stands at (8,5) on the floor in front of the boiler (was (9,3) on the old hearth). The chapter 8 boss scene positions (Tom (9,7), TNB (8,7), Nara (10,7)) are all painted floor and unchanged. The firelight glow moved to the boiler (6.5, 4). Hint text no longer says "up on the hearth".
 - Checks: new `tools/boilerroom_test.py` 0 fails (objects touchable, Ironbelly and scene tiles walkable, west arch walked, boss scene reaches the fight with real keys), smoke, bg_test, carbarn_test 0 fails; portrait and landscape frames looked at. Known roughness: no foreground layer (characters draw over the platform rail and pipes), the oven door on the east wall is scenery only (the bread-in-the-oven moment is still the Bread rack).
+
 ## 2026-10-29: Division Nine Car Barn is painted
 - New `art/carbarn.webp` (Tom's painting, 1920 x 1344 = 30 x 21 tiles at 64 px) registered as `PLATES.carbarn` (`?v=20261029`). Map size unchanged. The map is now a plain spec with a `plateMask` (no more `barnPlan` for this room; the Boiler Room still uses it).
 - Walk map: west arch (exit to Jefferson Park at (0,9) and (0,10)), the Paint Shop floor, the hall above the pit, the rails strip up to the Machine Shop, the east floor to Track 4 (exits (29,14) and (29,15) to the Boiler Room, which now arrives at (28,14) and (28,15)), the turntable control platform and the steel stairs down to the Lunchroom. The Lunchroom is only reached by the platform and stairs (the painting walls it off from the hall).
@@ -204,6 +218,7 @@
 - Objects re-laid on painted props: Car 9, drying rack (with the ice-skinned paint cans text), paint cart, sawhorses, workbench, wheel truck, lathe, dispatch board, crew bench, time clock, three lunch tables (clean spot with the Nara plate is the table by the stairs), turntable motor (control boxes), lever (green post by the east pit rim), coal cart, Track 4 sign, lunch pail (by the sign). Dropped as unreachable scenery: lockers, menu board, snack machine, Track 1 sign, oil cans, second lunch-table end.
 - Monster spots and the drifting pilot lights moved onto painted floor. `tools/carbarn_test.py` added (objects touchable, exits and stairs reachable, bridge gate, west and east exits walked).
 - Checks: carbarn_test, smoke, bg_test, jpark_test 0 fails; portrait and landscape shots looked at. Known roughness: no foreground layer (characters draw over pillars), (8,10) sits on a pillar base, the Lunchroom aisles are tight because the tables fill the room.
+
 ## 2026-10-29: Soundstage 7 is painted
 - New `art/stage7.webp` (Tom's painting, 1536 x 1152 = 24 x 18 tiles at 64 px) registered as `PLATES.stage7` (`?v=20261029`). Map `stage7` resized from 26 x 22 to 24 x 18 to match. The catwalk and pit layout is gone; the painting is an open stage floor.
 - Walk map (`plateMask`): the open floor between the wardrobe department (left) and the video village and camera gear (right), the stairs up to the set (x 14 to 16, rows 3 to 5), the desk walkway (row 6), and the south loading gate (x 9 and 10, rows 13 to 16). The wardrobe department is sealed behind its racks and tables, so Rack 1, Rack 4, the sewing table and the fitting mirror are dropped (not reachable, now scenery). Rack 3 is the big painted rack (5,8).
@@ -212,6 +227,7 @@
 - Light rig puzzle kept: light rig (11,8) and spike tape RACK 2 (8,9) and the three junction boxes (red 6,11, blue 21,15, amber 13,12) are drawn live over the painting (`liveKinds`). Fog drifts over the right side (x 16 to 23). Monsters: fogwisp (19,6) and (13,13), extra (10,10).
 - Objects re-laid on painted things: road cases (9,6) and (17,10), video village (19,4), camera dolly (15,8), two fog machines (21,6) and (16,7), stage sign (12,12). `tools/stage7_test.py` added.
 - Checks: `tools/stage7_test.py` 0 fails (objects touchable, exits reachable, gate holds then opens, south gate walked), stageset_test, studio_test, bg_test and smoke 0 fails, portrait and landscape shots looked at (dark and lit).
+
 ## 2026-10-29: The Backlot is painted
 - New `art/backlot.webp` (Tom's painting, 1536 x 1152 = 24 x 18 tiles at 64 px) registered in `engine/plate.js` as `PLATES.backlot` (`?v=20261029`). The map shrank from 30 x 24 (old tile look) to 24 x 18 to match the painting.
 - Walk map (`plateMask` in `data/maps-la.js`): the studio gate lot and plaza at the bottom, the road north to the Stage 7 door (x 12 and 13), the Western dirt strip (row 6, with a corridor on row 5 that joins the road), and the New York sidewalk (rows 5 and 6, right). The gate arm is treated as raised. The jungle set, tent, flats, scaffolds, truck and the lower right are scenery. The studio `border` is open along row 17 so the bottom lot walks.
@@ -221,12 +237,14 @@
 - NOT changed (spoken, baked): three lines still say "Main Street" (`ch4Fetch` TNB line, Tom's "Then we clear the sets" line, and "Main Street is clear" in `ch4Crab`) and the `ch4Fetch` direction line says "Western street on the right, New York down on the left". They no longer match the painting. Rewording them needs a re-bake of `data/voice/dialog-ch4.js` lines.
 - Checks: new `tools/backlot_test.py` 0 fails (objects touchable, exits reachable, scene tiles walkable, south gate and Stage 7 door walked with real keys), `tools/studio_test.py` 0 fails, smoke 0 fails, reach_test 0 fails, bg_test 0 fails; fetch scene and all three set zones start their scene and battle. Portrait and landscape shots looked at.
 - Known roughness: no foreground layer, so characters draw over tree leaves, the tent and the camera dolly. The Western corridor on row 5 passes through a bush.
+
 ## 2026-10-29: The Stage Set is painted
 - New `art/stageset.webp` (Tom's painting, 1280 x 896 = 20 x 14 tiles at 64 px) registered as `PLATES.stageset` (`?v=20261029`). Map `stageset` resized from 20 x 16 to 20 x 14 to match the painting.
 - Walk map (`plateMask`): the compass floor, the stairs to the director's platform (x 10 and 11, rows 4 and 5) and the entry ramp (x 9 to 11, rows 12 and 13). Castle ruins, scaffolds, camera crane, crates and lights are painted and blocked.
 - Exits: ramp row 13 (x 9 to 11) to Soundstage 7 (12,1) and (13,1). Soundstage 7's catwalk exits now arrive at the set's (10,12) and (11,12). Spawn (10,12). Boss scene tiles unchanged and walkable: Tom (10,9), TNB (9,9), Nara (11,9), Director's Cut (10,4).
 - Objects re-laid: painted backdrop (10,3), Rack 2 (9,4, beside the stairs; the painting has no costume rack, so it is an unpainted touch point), camera crane (16,7), director's chair (16,8), lantern post (8,11), prop crates (7,9), light stand (15,9). Couch and set lamp dropped (not in the painting).
 - Checks: `tools/stageset_test.py` 0 fails, smoke 0 fails, bg_test 0 fails, portrait and landscape shots looked at.
+
 ## 2026-10-29: Deedee rebaked, all 164 lines (loops fixed)
 - Tom reported repeated words and phrases in Deedee's clips. Speech recognition over her old clips found 78 of 141 checked looping the line 3 to 10 times. New Deedee Rebake Baker (Project claude/deedee-rebake-*) transcribes every take and retries until clean. Tom sent deedee-rebake.json (164 clips, baker flagged none, voice AoT Deedee (picked 2026-10-28), id 9UrcxKDUU0pvcnFhdfTU, stability 0.5, similarity 0.85).
 - Independent audit (sherpa-onnx Whisper base.en): 0 loops, 159 match the screen text, 5 flagged only by digits or recognizer quirks. Two worth a listen: "Keep up, honey! Arms at ninety!" (heard an extra "Can you") and "...So they are. Don't say anything." (heard "So they're so they are").
@@ -239,16 +257,19 @@
 - Objects re-laid to the painting: guard booth (5,7), three trailers (14,4) (18,4) (22,4), craft services (15,9), lamp banner as the studio sign (2,13), studio lights (10,14), apple box (12,14), two cones. Dropped (not reachable, now scenery): golf cart, director's chair, lot sign, C-stands, the second apple box. NPCs: Ray (4,9), Toni (14,8), Kiki (8,11), Dana (6,12). Story scenes use `routeBeside`, so no scene tiles changed.
 - Checks: `tools/studio_test.py` 0 fails (objects touchable, exits reachable, west and north exits walked with real keys), smoke 0 fails, bg_test 0 fails, portrait and landscape shots looked at. `tools/blvd_test.py` studio step now stands at (1,10); its "door lofts opens its building" failure was already there.
 - Known roughness: the west entrance cells (x 0, rows 9 to 12) sit under painted tree leaves, as drawn in Tom's grid. No foreground layer yet, so characters draw over trees and the tent peak.
+
 ## 2026-10-29: Downtown LA has a new painted plate
 - `art/blvd.webp` (1920 x 1664, 30 x 26 tiles) replaced with Tom's new golden-hour painting. Same eight buildings, new positions: the Griffith Park arch and steps are top left, the Jefferson Park arch and steps are bottom centre, the Metro is bottom right.
 - Doors now at coffee (7,7), ramen (12,7), Starlite (18,8), Nickel's (24,8), wardrobe (4,18), loft (11,19), tower (18,19), cab (24,20). `plateMask` retraced from the painting. The west road exit is gone; Griffith Park is up the steps at (3,3) and (4,3), and the chapter 2 trail barrier moved there. Jefferson Park exits are the four tiles under the arch (12..15,25); jpark and griffith arrivals updated. The chapter 13 subfloor now comes up at the Metro (21,24).
 - Props: hot dog cart removed (not in the new painting); taco truck, bus bench, Metro and cab object boxes re-placed. `tools/blvd_test.py` updated for the new tiles. smoke.py FAILS: [], blvd, griffith, jpark, loftlobby, reach and ch17 tests pass. No spoken lines changed.
+
 ## 2026-10-29: Cattail Pier is painted
 - New `art/pier.webp` (Tom's painting, 1536 x 1408 = 24 x 22 tiles at 64 px) registered in `engine/plate.js` as `PLATES.pier` (`?v=20261029` busts phone caches). Before this the pier drew with the generic pond tile look.
 - Walk map (`plateMask` in `data/maps-le.js`): dirt road from the north gate (x 11 to 13) and the west edge (rows 5 and 6), the bait shack front, the boardwalk (x 12 and 13), the platform (rows 10 to 12). Water, reeds, trees and rocks block.
 - Objects re-laid to the painting: bait shack (17,1) 5x4, pier sign (14,3), Boppy's bench (7,3), tackle box (10,11). Reel stands at (19,5) in front of the shack. The rowboat object is gone (it floats in unreachable water). The old cattail objects and tree list are gone.
 - Story: in `ch3Pier` Rose now stands at (13,12) on the platform (was (12,13), now water). Trigger zone and the other positions are unchanged.
 - Checks: `tools/pier_test.py` 0 fails (objects touchable, scene tiles walkable, walk down the boardwalk, west exit enters the marsh), `tools/smoke.py` 0 fails, portrait and landscape shots looked at.
+
 ## 2026-10-29: Jefferson Park repaint (themed shops, one label per house)
 - `art/jpark.webp` is replaced with Tom's revised painting (same 1920 x 1536 at 64 px, upscaled from the 1402 x 1122 source). Same street, paths, camera and building positions, so the `plateMask`, doors, exits and objects are unchanged.
 - Shops are exaggerated to read as what they sell: Odette's Creole Kitchen (Mardi Gras awning, giant crawfish, brass horn, CREOLE KITCHEN sign), Pupuseria La Ceiba (giant pupusa on the roof, PUPUSERIA sign), Board Room (skateboard on the roof, boards in the window, BOARD ROOM sign), Very Green Juice (giant green smoothie, VERY GREEN JUICE sign).
@@ -256,9 +277,11 @@
 - `PLATES.jpark.src` gets `?v=20261029` so phones that cached the old painting load the new one.
 - Checks: `tools/jpark_test.py` 0 fails (all eight doors enter, every object touchable), `tools/smoke.py` 0 fails, portrait and landscape shots looked at.
 - Known roughness: the sign text is painted, so the in-game names (Odette's Creole Kitchen, Pupuseria La Ceiba) show only in the HUD and dialogue. Door tiles sit on the landing in front of each painted door, as before.
+
 ## 2026-10-29: Chapter, load and new-game prompts use the welcome page
 - Picking a chapter, LOAD, PART 2 or the bonus on the welcome page used to cut to the town with the old pixel logo and a dialogue box. The prompt now stays on the welcome page: same painted logo, same gold-framed panel and serif menu buttons (START CHAPTER 2 / BACK, the load list, the new-game warning).
 - New `titleAsk(name,text,options)` in `engine/splash.js` (same arguments as `openChoice`; falls back to it if there is no welcome page). `splashGo` no longer fades to the town first; it fades out only when the pick starts a game without a prompt (`splashFade`). New `ask` mode in `SPLASH_MODES`, a `.sp-text` line in the panel, Esc/B runs the prompt's BACK. Callers switched: `engine/intro.js` (confirmNew, loadMenu), `engine/story.js` (confirmPart2), `engine/chapter-select.js` (confirmChapter), `data/bonus-nine-scoops.js` (confirmBonus). smoke.py FAILS: []. No spoken lines changed.
+
 ## 2026-10-29: Tom's House is now two painted rooms (replaces the tall top-down plate)
 - Tom did not like the top-down plate, so the house is rebuilt from two 3/4 oblique paintings in the same style as the other houses. The hall wing (laundry, office, jetted bath, guest bath, storage, guest bedroom), the decks and the yard are gone for now.
 - Main floor, map `tomhouse` (16 x 24 tiles, `art/tomhouse.webp` 1024 x 1536): wet bar, dining, kitchen with island, living room. The front door is three tiles wide at (3,18) (4,18) (5,18); spawn (4,17). The open doorway at the top middle (7,3) is an edge portal to the suite.
@@ -266,6 +289,7 @@
 - `makeRoom` (engine/world.js) gained `doors` (extra front-door tiles) and `edges` (a doorway to another room of the same house). Both rooms use `PLATES` actor scale 1.98 like the other interiors.
 - Scenes: `ch2-starter` and `ch12-house` trigger anywhere on the main floor (`at:[2,5,13,17]`); `ch2Starter` and `ch6Kitchen` walk Tom to (8,8) beside the island, TNB at (7,8) (Tom now faces the island to the right). `tools/tomhouse_test.py` rewritten for the two rooms; smoke and the Chapter 12 test pass. No spoken lines changed.
 - Not done: walk-behind layer; the old hall rooms (a new painting would bring them back as another room via `edges`).
+
 ## 2026-10-29: Lobby elevator is a call button
 - The brass elevator doors in `loftlobby` are scenery now. The call button beside them (object at 7,2, stand at 7,3 facing up) asks "Go up to TNB's loft?" with Enter TNB's / Not now. Yes rides to `lofts` at (6,8). New object field `ride:[map,x,y,facing]` (with optional `ridePrompt`) handled in `engine/overworld.js` (`pressAction`), reusable for any lift or door that should ask first.
 - Test: `tools/loftlobby_test.py` covers the prompt, Not now, and Enter TNB's. smoke.py FAILS: []. No spoken lines changed.
@@ -315,18 +339,21 @@
 - This also fixes the pixel cartwheel frames drawing at half size since the painted Grace went in (her sprite scale is now 1, the frames were built for 2).
 - Not wired yet: `GRACE_WHEEL.painted(name)` also holds handstand, leap, salute, dance, balance, bow, split and bridge for other moves (Handstand Contest, Split Leap, Olympic salute, DANCE). They are hip-centred, not feet-aligned like the battle frames.
 - `sheet.py` gained `split_erode` (figures that nearly touch are separated by eroding, then each pixel goes to its nearest figure).
+
 ## 2026-10-28: Painted Grace (battle, knocked out, overworld)
 - Grace now comes from her painted sheets (`tools/sprite-bake/src/grace-battle-v2.png`, `grace-walk-v2.png`, hero `grace-hero-v2.png`), baked by `python3 tools/sprite-bake/bake_grace.py` into `art/chars/grace-battle.webp`, `grace-ko.webp`, `grace-ow.webp` and `data/grace-hires.js` (generated). `data/grace-hires-use.js` swaps her in (set `GRACE_HIRES_OFF=true` to get the old pixel Grace back). Battle idle is 80 rows at scale 1 (old: 40 rows at 2, same height); overworld stands 38 rows (old 43 x .88).
 - Her violet leotard is close to the magenta background, so `sheet.py` has a `robust=True` cut (distance to the real background colour; interior pixels untouched; only the rim and pink hair strands are cleaned). Tom's bake still uses the old cut.
 - The bake paints in what the sheet avoids: a black eye on the kneel pose (low HP) and a dizzy spiral on the knocked-out pose. The startled pose is the hurt pose as drawn. A `beg` frame (kneel without the bruise) feeds the Squishy Delivery begging pose.
 - Outfit colours: `engine/painted.js` atlases take an optional tint function; Grace's picks the violet pixels only (Tom's default is unchanged). `drawSprite` now honours a per-frame palette (`rows._pal`).
 - Known roughness: her bespoke cartwheel poses (`data/grace-wheel.js`, used by Cartwheel's showpiece, Grace's Tombo move and her round-off combos) are still built from the old pixel body and keep the old palette, so they look pixel-style mid-move; the Olympic leotard colour swap does not show on the painted body; windup, leap, hurt and cast poses are baked but not wired yet (Track B, same as Tom).
+
 ## 2026-10-28: Painted Rose (battle, kneel, KO, overworld)
 - Baked from Tom's Rose sheets with `tools/sprite-bake/bake_rose.py`; `data/rose-hires.js` is generated, `data/rose-hires-use.js` swaps her in (`ROSE_HIRES_OFF=true` falls back to the old pixel Rose). Battle is 72 rows at scale 1 (Tom is 100); overworld 35 rows. Raspberry mouth point is `{col:34,row:20}`.
 - Black eye is painted onto the kneel frame by the baker (the sheets avoid injury wording). KO is the napping pose as drawn. Startled is used as hurt.
 - Outfit recolour: `painted.js` has a `coral` tint mode (picks the coral tunic by hue, keeps shading); Rose's atlases use it. `gear.js` takes her garment keys from the baked meta.
 - Shoulder ride (`data/rose-ride.js`) is still the old pixel Rose, kept on her old palette (`ROSE_RIDE_PAL`). Painted ride art is still to do.
 - No spoken lines changed.
+
 ## 2026-10-28: Tom's House rebuilt from the real floor plan (Area 46, map id `tomhouse`)
 - New 19 x 43 map (was 16 x 35), 2.5 ft per tile, one tile walls, laid out from the architectural plan. Specs and reasoning in `docs/area46/` (geometry review, walkmap, JSON, art corrections list for the future painting). Drawn with the game's own tiles for now; a painted plate (1216 x 2752) can replace it later.
 - Rooms: back yard, rear deck and west lawn; primary bath, wardrobe and bedroom; laundry, pantry, central hall; office (entered through its closet); jetted-tub bath; guest bedroom with its own bath and east storage; open kitchen, dining and living room; entry.
@@ -335,6 +362,7 @@
 - All 40 original objects kept with their text, re-placed; 8 new props (shrubs, sideboard, cabinets, primary toilet) with short new text. Bed and shower still restore. Guest bath fixtures re-laid so each is touchable.
 - New `tools/tomhouse_test.py` (all floor reachable, every object touchable, both door tiles exit to Jefferson Park, 14 shots).
 - Not reworded: no spoken lines changed. No walk-behind layer yet (engine has none for tile rooms).
+
 ## 2026-10-29: Downtown LA south exit is wider
 - The crosswalk exit from Downtown LA (`blvd`) to Jefferson Park (`jpark`) is now 4 tiles wide (x 14 to 17 on the bottom row) instead of 2. Walk map only, the painting is untouched.
 - `blvd`: exits and border openings added at (16,25) and (17,25); tile (14,23) opened so Tom can step onto the crosswalk from the street. `jpark`: the top of the map (rows 0 to 5) is 4 wide at x 14 to 17, with matching exits at (16,0) and (17,0), so the passage lines up both ways.
@@ -350,6 +378,7 @@
 - New `tools/blvd_test.py` (objects touchable, NPCs on floor, arrival tiles walkable, all eight doors open the right building from the pad and bring Tom back, south, west and east exits both ways, A on the props, portrait and landscape shots in `tools/shots/blvd-*.png`). `tools/ch17_test.py` now stands at (14,9) for the tower front. `tools/reach_test.py blvd` 0 fails, `tools/smoke.py`, `tools/ch13_test.py`, `tools/ch17_test.py` no fails.
 - Known roughness: the minimap still draws the old tile look; the chapter 17 Glass Tower front is drawn live over the painted sidewalk and rooftops until that chapter gets its own painting; the west street uses a planter bed as a walkway at (1,12); the small cypress and trash cans are walk-through.
 - Not reworded: no spoken lines changed. Object names changed only for the signpost ('Trail signpost'); object text is unchanged.
+
 ## 2026-10-28: Painted plate for Long Island Taxi Co.
 - The taxi office (map id `taxi`, 11 x 9 tiles) now uses Tom's painting (`art/taxi.webp`, 704 x 576 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,8) and spawn (5,7) are unchanged; the one-tile aisle between the two gate posts (x 5, rows 7 and 8) is the way out.
 - Walkable: the rug and floor in front of the desk (x 2 to 7, row 5), the wide strip below it (row 6), and the front row either side of the posts. Blocked: the whole back wall and dispatch desk (rows 0 to 4), left plant and chair, lost and found table, umbrella stand, gate posts.
@@ -358,6 +387,7 @@
 - New object text (not voiced): Umbrella stand. No spoken lines changed.
 - New `tools/taxi_test.py` (copied from tea_test.py; Sal's dialogue can fly the party to LA, so the test reloads the room after it). `tools/reach_test.py taxi` 0 fails, `tools/smoke.py` no fails, `tools/tea_test.py` still passes.
 - Known roughness: the minimap still draws the old tile look; the file cabinet and coat rack have no line of their own.
+
 ## 2026-10-28: Painted plate for Griffith Park
 - Griffith Park (map id `griffith`, 24 x 22 tiles) now uses Tom's painting (`art/griffith.webp`, 1536 x 1408 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-la.js` is the walk map. Tom sent only the grid and final images; the grid markers were the OLD positions and the painting did not follow them, so everything was re-laid onto the painted features.
 - Walkable: the main trail up the middle (bottom exit to the steps, trailhead sign, lookout bench, fault rock, up past the tar pit), the ridge trail at the top (x 12 to 16, row 3), the east trail (rows 11 to 12), the west slope toward the Observatory hill (x 2 to 7, rows 6 to 10) and the shore path under the south tar pit (rows 17 to 18). Both tar pits are blocked.
@@ -367,6 +397,7 @@
 - New `tools/griffith_test.py` (objects touchable, every monster on a reachable tile, walking up the trail and out the south exit to the Boulevard, shots in `tools/shots/griffith-*.png`). `tools/smoke.py` 0 fails.
 - Known roughness: the minimap still draws the old tile look; the Observatory itself is scenery only; the chapter 2 boss walk (west slope) and the pipe positions have not been looked at on the phone.
 - Jefferson Park (map id `jpark`, 30 x 24 tiles) now uses Tom's painting (`art/jpark.webp`, 1920 x 1536 at 64 px, entry in `PLATES`). Used the clean version (`27_jpark_final.png`). A `plateMask` in `data/maps-la.js` is the walk map: street, N-S path (x14,15), sidewalks, house walkways. Street trees, hedges and yards are blocked by the mask, so the old tree, fence and wall objects were removed. Spawn, edge exits and scripted drop-in tiles (4,19), (7,19), (28,10), (14,22) are unchanged. Doors re-laid onto the painting: the four shops now enter from the landing (y6, was y7; Odette's door x5, La Ceiba x10), Tom's house door moved to x3 (the painted stairs). Larry moved from the old tree yard to (8,6). Objects re-laid onto painted things: Front garden (2,15), Front yard (17,15), Drought garden (24,15), Street sign (16,6), plaque (13,18), Jefferson Boulevard sign (17,7), Bus bench (21,5), 2nd Ave signs (2,19) and (28,19). Parked cars block tiles; the juice bar exit tile overlaps the car roof edge. New `tools/jpark_test.py`.
+
 ## 2026-10-28: Painted plate for the Post (Snail Mail)
 - The Post interior (map id `post`, 10 x 12 tiles) now uses Tom's painting (`art/post.webp`, 640 x 768 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,11) and spawn (5,10) are unchanged; the steps (x 4 and 5, rows 10 and 11) are the way out.
 - Walkable: the floor in front of the counter and down the blue runner (x 3 to 6, rows 5 to 8), the aisle past the counter's right end (6,3), (6,4), (7,4), row 9 along the bottom, and the steps. Blocked: sorting counter and back wall, pigeonhole shelf and parcel scale, the big stamp desk with its chair and stool, the left plant and window sill, the stair railings.
@@ -374,6 +405,7 @@
 - New object text (not voiced): Parcel basket. No spoken lines changed.
 - New `tools/post_test.py` (objects touchable, Kit on floor, A opens dialogue at every prop and at Kit, walking up from the steps and back out to the Square, portrait and landscape shots in `tools/shots/post-*.png`). `tools/reach_test.py post` 0 fails, `tools/smoke.py` no fails, `tools/greenhouse_test.py` still passes.
 - Known roughness: the minimap still draws the old tile look; the wall cabinet behind the counter has no line of its own.
+
 ## 2026-10-28: Painted plate for Luna's observatory (Moon Club entrance)
 - Luna's observatory (room id `observatory`, 13 x 12 tiles, shown in the HUD as "Moon Club") now uses Tom's painting (`art/observatory.webp`, 832 x 768 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (6,11) and spawn (6,10) are unchanged. The old `walls` list is gone.
 - Walkable: the moon rug and floor in the middle, the strip under the bookshelf (x 5 to 10, row 4), the door rug (10,3), the left aisle (x 3 to 4, row 5 and 8), and the stairs (x 6, rows 9 to 11, one tile wide). Blocked: telescope platform and ladder, left cabinets and the desk with its chair, bookshelf and scroll barrel, star chart and globe cabinet, crates, front railing and planters.
@@ -382,6 +414,7 @@
 - New `tools/observatory_test.py` (objects touchable, Luna on floor, A opens dialogue at every prop including the club door, door rug walkable, walk up the stairs and back out to the Square, portrait and landscape shots). `tools/reach_test.py observatory` 0 fails, `tools/moonclub_test.py` 0 fails, `tools/smoke.py` no fails.
 - New object text (not voiced): Supply crates. No spoken lines changed.
 - Known roughness: the minimap still draws the old tile look; the painted door is always drawn closed.
+
 ## 2026-10-28: Painted plate for Penny's Pockets (the shop)
 - Penny's Pockets (map id `shop`, 11 x 9 tiles) now uses Tom's painting (`art/shop.webp`, 704 x 576 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,8) and spawn (5,7) are unchanged; the rail across the front has one gap, so the doorway is one tile wide.
 - Objects re-laid onto the painted furniture: counter unchanged (3,3,5,1, Penny stays at (5,2) behind it); gear shelf and snack shelf now 2 x 2 (each touchable from the floor row below); battle bin now (0,5,2,2) with its barrel; shop plant now (9,5,1,2).
@@ -407,6 +440,7 @@
 - New `tools/greenhouse_test.py`: objects touchable, Fern on floor, A opens dialogue at every prop, walking down the arch returns to the Square, portrait and landscape shots in `tools/shots/greenhouse-*.png`. `tools/reach_test.py greenhouse` 0 fails, `tools/smoke.py` no fails.
 - Known roughness: the minimap still draws the old tile look; the barrel plant in the middle has no line of its own yet.
 - Not reworded: no spoken lines changed.
+
 ## 2026-10-28: Painted plate for Crumb Bakery
 - The Crumb Bakery interior (room id `bakery`, 11 x 10 tiles) now uses Tom's painting (`art/bakery.webp`, 704 x 640 at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Door (5,9) and spawn (5,8) are unchanged.
 - Walkable: the rug and checker floor (x 2 to 9, rows 4 to 7), the nook beside the work table (3,3), and the doorway and mat (5 and 6, row 8). Blocked: oven and work table, bread counter, window benches, fern, dresser, roll basket, half wall.
@@ -433,6 +467,7 @@
 - New `tools/dome_test.py`: objects touchable, Mirrorball and boss stand tiles on reachable floor, A opens dialogue at every prop from a real key press, walking down the carpet with the arrow key returns to the Moon Club, portrait and landscape shots in `tools/shots/dome-*.png`. `tools/reach_test.py dome moonclub` 0 fails, `tools/moonclub_test.py` 0 fails, `tools/smoke.py` no fails.
 - Known roughness: the painting always shows the full moon in the glass (top right), but the story has the moon missing until the Mirrorball is beaten, and the telescope line says "no moon at all". Hiding it needs a second painting without the moon; erasing it in code also erased the glass bar across it. The minimap still draws the old tile look.
 - Not reworded: no spoken lines changed.
+
 ## 2026-10-28: Painted plate for Gate Zero (chapter 10)
 - Gate Zero (map id `gatezero`, the last room of Terminal Zero) now uses Tom's painting (`art/gatezero.webp`, 1280 x 896, 20 x 14 tiles at 64 px, entry in `PLATES`). A `plateMask` in `data/maps-le.js` is the walk map. Spawn (9,12) and the exit down to Terminal Zero ((9,13), (10,13)) are unchanged.
 - Walkable: the red carpet aisle, the stone floor, the strip in front of the window (row 4, x 7 to 15) and the walkway at the bottom. Blocked: the window wall, the podium, the jet bridge door, the four bench rows, the two potted plants and the gate posts.
@@ -676,6 +711,7 @@
 - Tests: `tools/smoke.py` FAILS: []; page load with all voice files, no page errors; Olivia's leaf line has no clip, untouched lines still play.
 - Same baker now also re-recasts Deedee (Tom: keep every emphasis): all 164 Deedee lines (44 battle, 120 dialogue). 130 use the original hand-written scripts (mostly the 2026-10-26 Deedee re-voice files), 34 that never had one got new hand-written directions; every on-screen CAPS word is in the script; banned frail words stripped from tags; "warm Long Island accent" goes inside every bracket and her direction leads the first. Voice: the current Deedee voice (AoT Deedee, Long Island, 2026-10-28).
 - Chapter 8 check (Tom heard missing clips): of 120 chapter 8 scene pages, 86 have clips, 17 are Nara or objects (silent by design), and the other 16 plus 9 Jefferson Park NPC lines are the contraction-fix removals, all already in the baker. Added 10 battle lines that never had a clip (TNB's 8 revamp moves incl. coffee_run, tom.tombograce "Fine.", grace.tombo short line) with hand-written directions (`tools/clip-audit/extra-battle.json`). Harvest tool: `tools/clip-audit/harvest.py` + `miss.py` (every unrecorded line, tagged by chapter). Part 2 chapters 11 to 14 have about 480 unrecorded lines; not in this baker.
+
 ## 2026-10-28: Part 2, Chapter 11 "The Layover Between Worlds", first half (C11a)
 - Part 2 now opens for real: the Rivituso house morning (Deedee's crisp, Boppy's gold card, the boarding pass buzzing), then Flight Zero's cabin (Rose and Grace stowaway, Amy sprints in, the sky tears), then Terminal Infinity.
 - New places: Flight Zero (`flightzero`), Gate 00 (`gate00`, two glass domes for Long Island and Los Angeles), the Endless Concourse (`concourse`, Gates 1 Boston to 9 Miami, all paused).
