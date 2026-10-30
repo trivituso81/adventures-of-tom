@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, redo sheet (source only)
+- Saved `tools/sprite-bake/src/props/redo-sheet1.png`. All 14 redo props match the list. Every character's props now exist as painted source images (starter pistol for Boppy reuses Amy's). Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, TNB 31-item sheet (source only)
 - Saved `tools/sprite-bake/src/props/tnb-sheet1-items1-31.png`. Items 1 to 23 match the prompt list. Items 24 to 31 drifted into invented props and need a redo (longboard, painted curb, rocking platform, spirit level, clay wedge, brick kiln, stoneware mugs, street signs). Not wired into the game.
 
