@@ -299,7 +299,15 @@ function resize() {
   H=Math.max(1,Math.ceil(height/scale-1e-6));
   // Phone portrait, inside a house: zoom so the room's left and right walls sit flush with the screen edges
   // (the canvas is exactly the room's width; CSS stretches it to the screen, so scale may be a fraction).
-  if(!currentMap.outside&&!layout.landscape&&width<900) {
+  // Square painted rooms (docs/ROOM_PAINTINGS.md): the painting fills the screen. Portrait shows its full height and the middle
+  // ~46% of its width, landscape its full width and the middle ~46% of its height; the camera follows the player.
+  const sq=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
+  if(sq) {
+    const mw=currentMap.w*T,mh=currentMap.h*T;
+    scale=Math.max(width/mw,height/mh);
+    W=Math.ceil(width/scale-1e-6);
+    H=Math.ceil(height/scale-1e-6);
+  } else if(!currentMap.outside&&!layout.landscape&&width<900) {
     scale=width/(currentMap.w*T);
     W=currentMap.w*T;
     H=Math.max(1,Math.ceil(height/scale));
@@ -330,12 +338,13 @@ function updateCamera(dt) {
   let ty;
   if(mh>=H) {
     ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H);
-    // Outdoor maps only (rooms keep their own fit). Near the top or bottom edge the painting is flush with the screen, which would put
+    // Outdoor maps and square painted rooms (rooms of the older fit keep their own). Near the top or bottom edge the painting is flush with the screen, which would put
     // Tom's tile under the title bar or the controls. Scroll past the map edge just far enough to keep his tile inside the safe band;
     // that strip, only ever behind the title bar and controls, shows the soft backdrop (engine/draw.js plateBackdrop) and only
     // while he is next to an edge.
     const lo=(p.y+1)*T-(H-safeBottom),hi=p.y*T-safeTop;
-    if(currentMap.outside&&lo<=hi) ty=clamp(ty,lo,hi);
+    const sqRoom=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
+    if((currentMap.outside||sqRoom)&&lo<=hi) ty=clamp(ty,lo,hi);
   } else ty=mh<=available
       ? -(safeTop+(available-mh)/2)
       : clamp((p.y+.5)*T-available/2,0,mh-available)-safeTop;

@@ -23,7 +23,7 @@ Tom is redoing every building interior so the painting fills the whole iPhone sc
 ## How the game shows a square plate
 
 - Portrait: full painting height, middle ~46% of its width. Landscape: full width, middle ~46% of its height. Every current iPhone is 9:19.5, so this fills the screen. The camera follows the player.
-- Rooms get bigger: N x N tiles with N = max(16, max(w, h) + 3).
+- Rooms get bigger: N x N tiles with N = max(16, max(w, h) + 3), BUT keep N = 16 unless the painting clearly needs more: the painter draws every room at the same scale, so a bigger N makes characters look small (decided 2026-10-30, batch 1 used 16 for all five). Register the plate with `square:true` in `PLATES` (`engine/plate.js`); `resize()` then fills the screen.
 - Code: `resize()` and `updateCamera()` in `engine/overworld.js` (safeTop 82/57, safeBottom 170/106 portrait/landscape); `PLATES` in `engine/plate.js` (px per tile, optional `actorScale` 1.98 for rooms); `makeRoom(spec)` in `engine/world.js` with a `plateMask` ASCII walk map ('#' blocks, '.' walks).
 
 ## Routine
@@ -38,3 +38,11 @@ Tom is redoing every building interior so the painting fills the whole iPhone sc
 8. Tell Tom in a few lines which rooms are live and which need a redo and why. Make the calls yourself; do not hand him options.
 
 Rooms whose art has not arrived keep their current plates and must keep working.
+
+## Done so far
+
+| Batch | Rooms (ids) | Date |
+|---|---|---|
+| rooms1.zip | bakery, library, greenhouse, post, tea | 2026-10-30 |
+
+Test with `python3 tools/rooms_test.py <ids>` (shots in `tools/shots/room-*`). Template for a 16 x 16 room: copy a spec from `data/maps-le.js` (bakery), set `door:[8,15],door2:[7,15],doors:[[6,15],[9,15]]` when the painting has the usual gate gap, and draw `plateMask` from a grid overlay of the painting (tile = image width / 16).

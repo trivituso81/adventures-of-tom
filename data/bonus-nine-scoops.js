@@ -644,7 +644,7 @@ SCENES.nsGoal=[
 // Sprinkle Street Creamery: frozen solid. Mr. Pistachio in an ice cube, three gremlins, the story of the thief.
 SCENES.nsCreamery=[
   {flag:'ns-creamery'}, {flag:'ns-frost'}, {flag:'ns-cube'},
-  {call:()=>{ const n=storySpawn({name:'Mr. Pistachio',at:[4,4],look:'bun',dir:'down'}); n.sheet=null; }},
+  {call:()=>{ const n=storySpawn({name:'Mr. Pistachio',at:[7,5],look:'bun',dir:'down'}); n.sheet=null; }},
   {walk:'tom',to:()=>[[currentMap.spawn.x,currentMap.spawn.y-1]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:()=>[currentMap.spawn.x+1,currentMap.spawn.y],dir:'up'}, {place:'rose',at:()=>[currentMap.spawn.x-1,currentMap.spawn.y],dir:'up'},
   {sfx:'look'},
@@ -653,7 +653,7 @@ SCENES.nsCreamery=[
   {talk:'Mr. Pistachio',lines:['Mmmf. Mmf MMF. Mmmmf.']},
   {talk:'Tom',lines:['He says the freezer walked off. I speak ice cube.']},
   {sfx:'whoosh'},
-  spawnAt('Sprinkle Gremlin','gremlin',[3,6],{dir:'down'}), spawnAt('Sprinkle Gremlin B','gremlin',[6,6],{dir:'down'}),
+  spawnAt('Sprinkle Gremlin','gremlin',[5,8],{dir:'down'}), spawnAt('Sprinkle Gremlin B','gremlin',[11,8],{dir:'down'}),
   {talk:'Sprinkle Gremlin',lines:['Brr! Tiny! Angry! The scoops are OURS!']},
   {talk:'Grace',lines:['Tata is in front. I\'m in charge of choreography. It\'s my birthday. FIGHT!']},
   {battle:()=>sceneActor('Sprinkle Gremlin'),tut:'nsGremlin'},
@@ -821,7 +821,7 @@ SCENES.nsPeppers=[
 // ---- Quest 4: The Old Freezer (Mr. Pistachio tells the truth about Brain Freeze) ----
 SCENES.nsOldFreezer=[
   {flag:'ns-pistachio'},
-  {call:()=>{ if(!sceneActor('Mr. Pistachio')) { const n=storySpawn({name:'Mr. Pistachio',at:[4,4],look:'bun',dir:'down'}); n.sheet=null; } }},
+  {call:()=>{ if(!sceneActor('Mr. Pistachio')) { const n=storySpawn({name:'Mr. Pistachio',at:[7,5],look:'bun',dir:'down'}); n.sheet=null; } }},
   {walk:'tom',to:()=>[[currentMap.spawn.x,currentMap.spawn.y-1]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:()=>[currentMap.spawn.x+1,currentMap.spawn.y],dir:'up'}, {place:'rose',at:()=>[currentMap.spawn.x-1,currentMap.spawn.y],dir:'up'},
   {talk:'Mr. Pistachio',lines:['You\'re back! Did you... oh. No scoops. And the little one looks defrosted.']},
