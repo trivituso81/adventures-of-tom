@@ -8,6 +8,9 @@
 - Known limitation as on the Square and Row: in portrait the D-pad covers part of the south exit board when Tom stands at the exit.
 - Tests: reach_test hollow 0 fails, smoke and camera_clamp clean, phone-size shots portrait and landscape (`tools/shots/hollow-*.png`, not committed).
 
+## 2026-10-30: Tombo redo sheet 1 of 2 (source and cut)
+- Saved `tombo-redo-sheet1-of-2.png`; all 7 match and are cut (judge's desk, 1A suitcase, pink blanket, sneakers, tiara, sunglasses with earpiece, Italy wall map). 131 of 138 Tombo props painted; redo sheet 2 (palm tree, skyline, glass, pendant lamp, sourdough bite, nurse cap, family table) is the last. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 6 of 10 (source and cut)
 - Saved `tombo-sheet06-of-10.png` (items 71 to 84); all 14 match (deputy cap, under-sink cabinet, garden bed, stake, seedling, watering can, vine, tomato, card table, peppers, Scoville meter, paper fan, milk, newspaper) and are cut. 124 of 138 Tombo props painted; the other 14 wait on the redo sheets. Not wired yet.
 

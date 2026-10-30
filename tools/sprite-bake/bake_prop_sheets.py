@@ -50,6 +50,7 @@ SHEETS = [
     ('tombo-sheet08-of-10.png', 'tombo', rng(99, 109)),
     ('tombo-sheet09-of-10.png', 'tombo', rng(113, 123)),
     ('tombo-sheet10-of-10.png', 'tombo', rng(126, 138)),
+    ('tombo-redo-sheet1-of-2.png', None, [(i + 1, ('tombo', n)) for i, n in enumerate([9, 10, 11, 12, 13, 14, 56])]),   # Tombo redo 1: item numbers of the props missed on sheets 1 and 4
     # redo sheet: cell -> (character, item)
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
