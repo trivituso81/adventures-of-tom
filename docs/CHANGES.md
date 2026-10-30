@@ -1,3 +1,9 @@
+## 2026-10-30: Painted Chronos-Leviathan (chapter 20 boss)
+- Tom pasted one image with the word "leviathan". It was a flat picture with a checkerboard baked into the pixels (no transparency), so the background was keyed out (edge-connected and enclosed light grey pockets, then light remnants near the cut edge) and saved as `tools/sprite-bake/src/foe-leviathan-v1.png`. If a clean transparent sheet arrives later, drop it over that file and rebake with the same flags.
+- Painted, shows in a test fight; old sprite stays as fallback until Tom approves on his phone.
+- Known small flaws: faint light specks remain in the golden swirl effects (attack2 and attack3), and a few in the hurt frame's sparks, left over from the checkerboard.
+- Tests: `tools/foes_test.py leviathan` 0 fails; `tools/smoke.py` FAILS: [].
+
 ## 2026-10-30: Battle prop sheets, redo sheet (source only)
 - Saved `tools/sprite-bake/src/props/redo-sheet1.png`. All 14 redo props match the list. Every character's props now exist as painted source images (starter pistol for Boppy reuses Amy's). Not wired into the game.
 ## 2026-10-30: Painted Julian Vance and Nine Scoops enemies

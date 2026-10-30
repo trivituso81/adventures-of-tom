@@ -114,6 +114,7 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | slushslug | foe-slushslug-v1.png (Slushie Slug, Nine Scoops, 4 frames, `--cut-y 390`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | conehead | foe-conehead-v1.png (Cone Head, Nine Scoops, 4 frames, `--cut-y 390`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | brainfreeze | foe-brainfreeze-v1.png (Brain Freeze, Nine Scoops boss, 6 frames, `--cut-y 430 --cuts 381,721,1056,1374,1838 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| leviathan | foe-leviathan-v1.png (The Chronos-Leviathan, chapter 20 boss, 6 frames; arrived as a pasted image with a checkerboard baked into the pixels, no alpha, so the background was keyed out into the saved source; `--cut-y 374 --cuts 356,737,1076,1420,1847 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
