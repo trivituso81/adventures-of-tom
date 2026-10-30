@@ -75,8 +75,13 @@ MARK = {
     'unclaimed': {'eyes': [(.63, .50), (.76, .50)], 'mouth': (.69, .62)},
     'armresthog': {'eyes': [(.62, .33), (.70, .33)], 'mouth': (.76, .45)},
     'lastcall': {'eyes': [(.59, .50), (.78, .50)], 'mouth': (.68, .66)},
+    'finalcall': {'eyes': [(.69, .38), (.82, .38)], 'mouth': (.72, .55)},
+    'gridlockprime': {'eyes': [(.69, .38), (.80, .37)], 'mouth': (.76, .55)},
+    'lostluggage': {'eyes': [(.62, .38), (.78, .37)], 'mouth': (.62, .56)},
+    'redeye': {'eyes': [(.70, .35), (.80, .37)], 'mouth': (.86, .55)},
+    'standbysprite': {'eyes': [(.44, .38), (.62, .36)], 'mouth': (.52, .56)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
@@ -86,6 +91,7 @@ ap.add_argument('--cells', type=int, default=None)      # stance width in row ce
 ap.add_argument('--atlas-w', type=int, default=None)    # stance width in atlas pixels (288 regular, 480 boss)
 ap.add_argument('--colors', type=int, default=24)
 ap.add_argument('--by-pieces', type=int, default=0)   # frames overlap in x: give each connected piece of ink to the frame holding its centre, instead of cutting at the column
+ap.add_argument('--cut-y', type=int, default=0)   # force the sheet's first row to end at this y (when a lone second-row stance sits too close to be auto-detected)
 ap.add_argument('--trim-edges', type=int, nargs='?', const=2, default=0)  # px from a cut edge; above 2 it also uses raw (undilated) pieces  # drop small slivers of a neighbour frame's effects clipped onto this frame's cut edge
 ap.add_argument('--extra-ok', action='store_true')    # more frames on the sheet than needed: keep the first ones
 ap.add_argument('--drop-grey', action='store_true')   # remove small detached grey-white specks (AI artifacts, e.g. beside the Tar Pit Blob)
@@ -120,6 +126,7 @@ runs = np.split(ys, np.where(np.diff(ys) > 3)[0] + 1)
 runs = [r for r in runs if len(r) > 20]                    # a second ROW is a tall run (a shadow or a speck is not)
 if len(runs) > 1 and len(runs[1]) > .4 * len(runs[0]):
     cut = int(runs[1][0]); print(f'second row at y={cut}: ignored')
+if args.cut_y: cut = args.cut_y; print('forced cut at y=%d' % cut)
 alpha_r = alpha[:cut]
 
 # Frame columns: split at the emptiest columns. Stray droplets (< 2% of the ink) are not frames.

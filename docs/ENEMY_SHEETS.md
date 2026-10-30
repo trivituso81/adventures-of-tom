@@ -94,6 +94,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | unclaimed | foe-unclaimed-v1.png (The Unclaimed) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | armresthog | foe-armresthog-v1.png (The Armrest Hog) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | lastcall | foe-lastcall-v1.png (The Last Call, boss, 6 frames, `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| lostluggage | foe-lostluggage-v1.png (4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| redeye | foe-redeye-v1.png (4 frames, `--cut-y 385`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| standbysprite | foe-standbysprite-v1.png (4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| finalcall | foe-finalcall-v1.png (chapter 11 boss, 6 frames, `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| gridlockprime | foe-gridlockprime-v1.png (chapter 12 boss, 6 frames, `--cut-y 385 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 

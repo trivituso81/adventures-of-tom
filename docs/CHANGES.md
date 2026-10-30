@@ -1,3 +1,9 @@
+## 2026-10-30: Painted Chapter 11 and 12 enemies
+- Tom sent ch11_12monsters.zip. Installed lostluggage, redeye, standbysprite, finalcall (chapter 11 boss) and gridlockprime (chapter 12 boss). All five show painted in a test fight; old sprites kept as fallback until Tom approves on his phone.
+- New bake flag `--cut-y N` forces where the first row of frames ends, for sheets whose lone second-row stance is not auto-detected (redeye, gridlockprime, both 385).
+- Known small flaws in the source art: finalcall attack4 has its left foot slightly clipped, gridlockprime attack4 has its left edge slightly clipped (the neighbouring frame's effects overlap). A corrected sheet would fix both.
+- Tests: `tools/foes_test.py` on all five, 0 fails; `tools/smoke.py` FAILS: [].
+
 ## 2026-10-30: Square painted rooms, batch 2 (Moon Club, Penny's Pockets, Taxi Co., Deedee and Boppy's House)
 - Tom sent rooms2.zip (01_Moon_Club, 02_Pennys_Pockets, 03_Long_Island_Taxi_Co, 04_Deedee_and_Boppys_House). Matched to ids `observatory` (Luna's Moon Club room in the Square, not the `moonclub` dance hall), `shop`, `taxi`, `grands`. The README says a fifth image was not available; nothing else arrived. All four are square, full bleed, 1254 px (under the 1500 px target, installed anyway).
 - All four are 16 x 16 with the usual gate gap and `square:true`. New plateMask, objects and NPC spots in `data/maps-le.js`. Observatory: gap x7 to x8, little silver door at (12,5) (reached from (12,6)); the Moon Club stairs now return to (12,6). Shop: Penny stands in front of the counter at (8,7) because the painting has no floor behind it.
