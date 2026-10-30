@@ -975,6 +975,57 @@ html.landscape .slot-row .item-icon.sm{width:40px;height:40px;font-size:22px}
 html.landscape .slot-name{width:56px}
 @media(min-width:900px) and (min-height:600px){html.landscape .gear-wrap{grid-template-columns:minmax(0,4fr) minmax(0,6fr)}}
 </style>
+<style id="theme-welcome">
+/* ---- UI theme: Welcome (2026-10-29). Every menu, dialogue, shop and battle window now matches the title screen's panel:
+   navy window, gold border with a bronze inner line, serif type, small-caps command names, and a blue selection bar with a
+   gold border, glow and gold cursor. It re-points the Slate tokens above, so change colors here. Canvas art is unchanged. ---- */
+:root{
+  --w-top:#1b212e;--w-bot:#141924;--w-flat:#1b212e;--w-deep:#0f1320;
+  --edge:#b8914a;--edge-ink:#0a0e18;--edge-hi:#6d5629;
+  --ink:#f2e6cc;--ink-dim:#aeb6c6;--ink-faint:#7d8496;--label:#d6bd86;
+  --sel-top:#1f5393;--sel-bot:#143a6e;--raise:#262c39;--gold:#f0b94d;
+  --sel-edge:#d9a94f;--sel-glow:inset 0 0 0 1px #f3d58a66,0 0 10px #d9a94f55;
+  --row:linear-gradient(#2b313e,#232834);--row-edge:#4b5160;
+  font-family:Georgia,'Palatino Linotype',Palatino,serif;font-variant-numeric:lining-nums;background:#0b0f1a}
+#game{background:#101521}
+button,input,select{font-family:inherit}
+#battle{font-family:inherit;background:#0b0f1a}
+.battle-stage{background:#121826}
+#menu,#shop{background:#060910ec}
+
+/* Windows: dark ring, gold border, bronze inner line (the title panel's frame) */
+#dialog,.mwin,.menu-panel{box-shadow:0 0 0 2px var(--edge-ink),inset 0 0 0 2px var(--edge-ink),inset 0 0 0 3px var(--edge-hi),0 4px 0 #0007}
+#menu-panel{box-shadow:none}
+.battle-box{box-shadow:0 0 0 2px var(--edge-ink),inset 0 0 0 2px var(--edge-ink),inset 0 0 0 3px var(--edge-hi),0 3px 0 #0008}
+#speaker{border:2px solid var(--edge-hi);background:var(--w-bot);color:var(--ink);text-shadow:none;box-shadow:0 0 0 2px var(--edge-ink);font-weight:400}
+
+/* Unselected buttons and rows: the title screen's slate gradient with a dark inner line */
+.choice,.battle-cmd,.b2-btn,.b2-x,.mtab,.party-btn,.shop-tab,.menu-act,.save-btn,.fchip{border-color:var(--row-edge);background:var(--row);box-shadow:inset 0 0 0 1px var(--edge-ink)}
+.shop-tab.cat:not(.active){background:var(--row)}
+.mcard,.stat-cell,.save-row,.item-row,.slot-row{border-color:var(--row-edge);background:var(--row);box-shadow:inset 0 0 0 1px var(--edge-ink)}
+.item-row:active{background:#2e3a52}
+.slot-row.open,.item-row.open{border-color:var(--sel-edge);background:linear-gradient(#233a63,#1a2c4d)}
+.ptab.active canvas{background:#1b2434}
+.pbox.ph{background:repeating-linear-gradient(135deg,#1b2230 0 8px,#232b3c 8px 16px)}
+
+/* Selected: blue bar, gold border and glow, gold cursor */
+.mtab.active,.party-btn.active,.shop-tab.active,.shop-tab.cat.active,.fchip.active,.choice.sel,.battle-cmd.sel,.b2-btn.sel,.mcmd.active,.b2-x:active,.b2-pc.act{border-color:var(--sel-edge);box-shadow:var(--sel-glow)}
+.choice.sel::before{content:'\25B6\00a0';font-size:.8em;vertical-align:1px}
+
+/* Command names in small caps, like the title menu */
+.mcmd,.choice,.battle-cmd,.mtab,.party-btn,.shop-tab,.menu-act,.save-btn,.b2-btn>span,.b2-x,#speaker,.menu-title h2{font-variant-caps:small-caps}
+
+/* Touch controls */
+.dir{border:1px solid #b8914a99;background:#141924c4}
+.dir.active{background:#f2e6cce8;color:#1b212e}
+.pad-center{background:#141924a0;color:#f2e6cc70}
+#action{background:radial-gradient(circle at 50% 35%,#2a62ad,#143a6e)}
+#action.pressed{background:radial-gradient(circle at 50% 35%,#1f5393,#0f2d58)}
+
+/* Shop buttons */
+.shop-btn{border-color:var(--sel-edge)}
+.shop-btn.ghost,.shop-btn.wear{background:#f2e6cc;border-color:#fff6e0;color:#1b212e}
+</style>
 <script>(function(){var d=document.documentElement;d.classList.add('js-on');
 function fail(){if(!d.classList.contains('js-running'))d.classList.add('js-failed');}
 /* A game file that fails to download (8 s grace, in case the game still starts), or a load that stalls for 90 seconds, shows the retry button. */
