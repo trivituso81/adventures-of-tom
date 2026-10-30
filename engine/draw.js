@@ -27,6 +27,7 @@ function draw(time) {
     ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
     ctx.drawImage(plate.img,0,0,currentMap.w*T,currentMap.h*T);
     ctx.imageSmoothingEnabled=false;
+    if(typeof plateLive==='function') plateLive(currentMap,time);
   }
   for(let y=y0;y<y1;y++) {
     for(let x=x0;x<x1;x++) {

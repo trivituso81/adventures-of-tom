@@ -30,6 +30,7 @@ PLATES.creole={src:'art/creole.webp?v=20261029',px:64,img:null,ready:false,actor
 PLATES.casa={src:'art/casa.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.jordansam={src:'art/jordansam.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.tower={src:'art/tower.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.gate00={src:'art/gate00.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.dakota={src:'art/dakota.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.flightzero={src:'art/flightzero.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
@@ -71,4 +72,17 @@ function actorK() {
   const p=PLATES[currentMap.id];
   if(p&&p.actorScale&&!currentMap.outside) return p.actorScale;
   return currentMap.outside?OUTDOOR_ACTOR_SCALE:1;
+}
+
+// Live touches drawn over a painting. Gate 00: after chapter 11 the Long Island dome (left window) goes amber, as it did on the tile version.
+function plateLive(map,time) {
+  if(!map||map.id!=='gate00'||typeof infFlag!=='function'||!infFlag('ch11-closed')) return;
+  const s=T/64, cx=478*s, cy=98*s, r=96*s;
+  ctx.save();
+  ctx.beginPath(); ctx.ellipse(cx,cy+6*s,92*s,66*s,0,0,Math.PI*2); ctx.clip();
+  const g=ctx.createRadialGradient(cx,cy,4*s,cx,cy,r);
+  g.addColorStop(0,'rgba(255,170,64,.78)'); g.addColorStop(.7,'rgba(238,132,38,.66)'); g.addColorStop(1,'rgba(214,110,30,.40)');
+  ctx.globalAlpha=.92+.08*Math.sin(time*2.2);
+  ctx.fillStyle=g; ctx.fillRect(cx-r,cy-r,r*2,r*2);
+  ctx.restore();
 }
