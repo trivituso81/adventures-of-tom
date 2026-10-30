@@ -41,6 +41,7 @@ PLATES.towerstairs={src:'art/towerstairs.webp?v=20261029',px:64,img:null,ready:f
 PLATES.subdepot={src:'art/subdepot.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towervault={src:'art/towervault.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.memtnb={src:'art/memtnb.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.memgrace={src:'art/memgrace.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towershelves={src:'art/towershelves.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towerpinnacle={src:'art/towerpinnacle.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
