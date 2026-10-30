@@ -80,11 +80,13 @@ MARK = {
     'hushling': {'eyes': [(.59, .53), (.82, .49)], 'mouth': (.77, .64)},
     'turnstile': {'eyes': [(.54, .25), (.63, .26)], 'mouth': (.57, .35)},
     'drillworm': {'eyes': [(.58, .25), (.69, .24)], 'mouth': (.60, .53)},
+    'warden': {'eyes': [(.57, .41), (.68, .41)], 'mouth': (.62, .50)},
+    'hush9final': {'eyes': [(.70, .40), (.84, .40)], 'mouth': (.72, .60)},
     'lostluggage': {'eyes': [(.62, .38), (.78, .37)], 'mouth': (.62, .56)},
     'redeye': {'eyes': [(.70, .35), (.80, .37)], 'mouth': (.86, .55)},
     'standbysprite': {'eyes': [(.44, .38), (.62, .36)], 'mouth': (.52, .56)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm', 'warden', 'hush9final'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
@@ -96,6 +98,7 @@ ap.add_argument('--colors', type=int, default=24)
 ap.add_argument('--by-pieces', type=int, default=0)   # frames overlap in x: give each connected piece of ink to the frame holding its centre, instead of cutting at the column
 ap.add_argument('--cut-y', type=int, default=0)   # force the sheet's first row to end at this y (when a lone second-row stance sits too close to be auto-detected)
 ap.add_argument('--trim-edges', type=int, nargs='?', const=2, default=0)  # px from a cut edge; above 2 it also uses raw (undilated) pieces  # drop small slivers of a neighbour frame's effects clipped onto this frame's cut edge
+ap.add_argument('--cuts', default=None)   # explicit cut columns between frames, comma separated (n-1 of them), for frames that overlap in x with no clean gap
 ap.add_argument('--extra-ok', action='store_true')    # more frames on the sheet than needed: keep the first ones
 ap.add_argument('--drop-grey', action='store_true')   # remove small detached grey-white specks (AI artifacts, e.g. beside the Tar Pit Blob)
 args = ap.parse_args()
@@ -158,6 +161,10 @@ if len(big) > n:
     sys.exit(f'{ID}: found {len(big)} frames, expected {n} {frames}')
 # Each frame takes the ink between the midpoints of the gaps around it.
 edges = [0] + [(big[i][1] + big[i + 1][0]) // 2 for i in range(n - 1)] + [W]
+if args.cuts:
+    _c = [int(v) for v in args.cuts.split(',')]
+    assert len(_c) == n - 1, 'need n-1 cuts'
+    edges = [0] + _c + [W]
 cells = {}
 for i, nm in enumerate(frames):
     if args.by_pieces:

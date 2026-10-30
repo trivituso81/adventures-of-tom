@@ -3,6 +3,11 @@
 
 ## 2026-10-30: Battle prop sheets, Rose sheet 1 of 2 (source only)
 - Saved `tools/sprite-bake/src/props/rose-sheet1-of-2.png`. All 13 props match the prompt list. Not wired into the game.
+## 2026-10-30: Painted Chapter 14 and 15 bosses
+- Tom sent ch14monsters.zip: Warden Boppy (chapter 14 boss, id `warden`) and HUSH-9 Final Form (chapter 15 boss, id `hush9final`). Both show painted in a test fight; old sprites stay as fallback until Tom approves on his phone.
+- New bake flag `--cuts x1,x2,...` forces the column between each pair of frames, for sheets whose frames overlap in x with no clean gap (the Warden's swoosh and the HUSH-9 sound waves reach into the next frame).
+- Known small flaws in the source art: Warden attack2 has a stray halberd tip at its left edge and a speck under the stance; Warden attack4 has a thin sliver of attack3's flash at its left edge; HUSH-9 attack3 has its left foot slightly clipped. A corrected sheet would fix them.
+- Tests: `tools/foes_test.py warden,hush9final` 0 fails; `tools/smoke.py` FAILS: [].
 
 ## 2026-10-30: Battle prop sheets, Grace's sheet (source only)
 - Saved Grace's returned sheet as `tools/sprite-bake/src/props/grace-sheet1-of-1.png`. All 15 props match the prompt list. Not wired into the game.
