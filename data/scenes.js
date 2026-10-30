@@ -74,9 +74,9 @@ SCENES.ch1Goal=[
 // 2. Deedee and Boppy's house: the greeting, Tom's loaf, and the theft. Deedee joins.
 SCENES.ch1Theft=[
   {flag:'ch1-theft'},
-  {place:'Deedee',at:[5,6],dir:'down'}, {place:'Boppy',at:[8,5],dir:'down'},
-  {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
+  {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[10,8],dir:'down'},
+  {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
   {hearts:'Deedee'},
   {talk:'Deedee',lines:["There's my Tommy!",'And my girls! Come here, come here.'],voice:[['deedee','greet',0,"There's my Tommy!"]]},
   {trace:'deedee-hug'},
@@ -92,14 +92,14 @@ SCENES.ch1Theft=[
   {flag:'tombo:deedee1'},
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
   {sfx:'doorIn'},
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[6,9],dir:'up'}},
-  {walk:'Big Mudling',to:[[6,8],[5,8],[4,8]],speed:.32,onStep:()=>sfx.splat()},
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[8,12],dir:'up'}},
+  {walk:'Big Mudling',to:[[8,11],[7,11],[7,10]],speed:.32,onStep:()=>sfx.splat()},
   {face:'Big Mudling',dir:'up'},
   {wait:.3},
   {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry='tin'; sfx.pickup(); }},
   {face:'rose',dir:'left'}, {face:'grace',dir:'left'}, {face:'tom',dir:'left'},
   {talk:'Rose',lines:['Deedee! A mud blob is taking your PIE!']},
-  {walk:'Big Mudling',to:[[5,8],[6,8],[6,9]],speed:.22,onStep:()=>sfx.splat()},
+  {walk:'Big Mudling',to:[[7,11],[8,11],[8,12]],speed:.22,onStep:()=>sfx.splat()},
   {sfx:'doorOut'}, {despawn:'Big Mudling'},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
   {talk:'Deedee',lines:['That\'s my GOOD tin! Grab your shoes. I\'m coming with you.']},
@@ -199,9 +199,9 @@ SCENES.ch1AfterBoss=[
 // 6. Home: half a crisp, Boppy's lure, chapter complete.
 SCENES.ch1End=()=>[
   {flag:'ch1-done',value:'pending'},
-  {place:'Boppy',at:[8,5],dir:'down'},
-  {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'}, {place:'deedee',at:[5,6],dir:'right'},
+  {place:'Boppy',at:[10,8],dir:'down'},
+  {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'}, {place:'deedee',at:[7,9],dir:'right'},
   {talk:'Boppy',lines:['You found the Big One? I TOLD everybody. Twenty years.']},
   ...(bag.includes('lure')?[
     {talk:'Tom',lines:['It had this stuck in its lip.']},
@@ -622,9 +622,9 @@ SCENES.ch3Arrive=[
 // 2. Deedee and Boppy's house: the Whisker Perch, the pepper jar. Boppy joins; Deedee stays to bake.
 SCENES.ch3Fishing=[
   {flag:'ch3-boppy'},
-  {place:'Deedee',at:[5,6],dir:'right'}, {place:'Boppy',at:[8,5],dir:'down'},
-  {walk:'tom',to:routeTo('tom',6,7),speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
+  {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[10,8],dir:'down'},
+  {walk:'tom',to:routeTo('tom',8,10),speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
   {hearts:'Deedee'},
   {talk:'Deedee',lines:["There's my Tommy!",'Back already! Look at you. Did they feed you out there? Never mind. I\'ll feed you.'],voice:[['deedee','greet',0,"There's my Tommy!"]]},
   {talk:'Boppy',lines:['Tom. Good. Sit down. No. Don\'t sit down. We\'re going fishing.','The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.']},
@@ -842,9 +842,9 @@ SCENES.ch3AfterBoss=()=>[
 // 12. Deedee and Boppy's house: Rose tells on Boppy. Crisp. Chapter complete.
 SCENES.ch3End=[
   {flag:'ch3-done',value:'pending'},
-  {place:'Deedee',at:[5,6],dir:'right'},
-  {walk:'tom',to:routeTo('tom',6,7),speed:.25}, {face:'tom',dir:'up'},
-  {place:'boppy',at:[7,6],dir:'left'}, {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
+  {place:'Deedee',at:[7,9],dir:'right'},
+  {walk:'tom',to:routeTo('tom',8,10),speed:.25}, {face:'tom',dir:'up'},
+  {place:'boppy',at:[9,9],dir:'left'}, {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
   {hearts:'Deedee'},
   {talk:'Deedee',lines:['There they are! Well? Did anybody catch anything?']},
   {talk:'Boppy',lines:['Old Iron-Gill. Forty years, Dee. I TOLD everybody.']},

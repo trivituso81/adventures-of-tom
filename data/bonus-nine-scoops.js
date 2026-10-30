@@ -771,7 +771,7 @@ SCENES.nsThaw=[
   {hold:['Deedee','Boppy','Aunt Ellie']},
   {walk:'tom',to:()=>[[currentMap.spawn.x,currentMap.spawn.y-1]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:()=>[currentMap.spawn.x+1,currentMap.spawn.y],dir:'up'}, {place:'rose',at:()=>[currentMap.spawn.x-1,currentMap.spawn.y],dir:'up'},
-  {walk:'Deedee',to:()=>[[5,6],[5,7]].filter(t=>walkable(currentMap,t[0],t[1])),speed:.25}, {face:'Deedee',dir:'down'},
+  {walk:'Deedee',to:()=>[[7,9],[7,10]].filter(t=>walkable(currentMap,t[0],t[1])),speed:.25}, {face:'Deedee',dir:'down'},
   {talk:'Deedee',lines:['There\'s my Tommy! And my girls! And my... oh. OH. Why is Rose in an ice cube.']},
   {talk:'Tom',lines:['A freezer did it. Long story. Short version: freezer.']},
   {talk:'Grace',lines:['He stole the scoops AND Moo-rielle AND he froze Rose. On my BIRTHDAY, Deedee.']},
@@ -792,7 +792,7 @@ SCENES.nsThaw=[
   {talk:'Boppy',lines:['My peppers. Out back, in the garden. The hose flinched.','Don\'t take the ghost one. The ghost one is MINE.']},
   {talk:'Grace',lines:['Which one is the ghost one?']},
   {talk:'Boppy',lines:['The one that\'s looking at you.']},
-  {walk:'Deedee',to:[[5,6]],speed:.25}, {face:'Deedee',dir:'down'},
+  {walk:'Deedee',to:[[7,9]],speed:.25}, {face:'Deedee',dir:'down'},
   {save:true},
   {toast:'Goal: Boppy’s pepper planter, out back on Rivituso Row. Something warm.',time:5}
 ];

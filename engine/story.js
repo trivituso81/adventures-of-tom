@@ -108,7 +108,7 @@ const CHAPTERS=[
              boppy:'An airport? At midnight? I\'m still recovering from the tie.'}},
     noFlight:()=>flag('ch10-done')?null
       :{lines:['Airport? Every clock in town says midnight. The planes aren\'t going anywhere.','Terminal Zero, though. Terminal Zero is open.']}},
-  {n:11,title:'The Layover Between Worlds',start:{map:'grands',x:6,y:7},
+  {n:11,title:'The Layover Between Worlds',start:{map:'grands',x:8,y:10},
     party:{lock:['tom','grace','rose'],allow:['amy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>({lines:['Airport? Tom. You’re on a layover. I don’t fly layovers. I just wave at them.']})},
   {n:12,title:'Welcome to Jefferson Park, Girls',start:{map:'jpark',x:4,y:19},
@@ -123,7 +123,7 @@ const CHAPTERS=[
     party:{lock:['tom','amy','grace','rose'],allow:['amy'],bar:['tnb','nara','deedee','boppy'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch14-done')?{lines:['Chapter 15 is coming. The dinner table is set for eight, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. Your father is standing in the gate in a bucket. Go and see him first.']}},
-  {n:15,title:'The Eight-Seat Dinner Table',start:{map:'grands',x:6,y:7},
+  {n:15,title:'The Eight-Seat Dinner Table',start:{map:'grands',x:8,y:10},
     party:{lock:['tom','grace','rose'],allow:['amy','deedee','boppy','tnb','nara'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch15-done')?{lines:['Chapter 16 is coming. Vance wants a family photograph in the Square, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. Dinner is at six. Five means four thirty.']}},
