@@ -32,8 +32,8 @@ with sync_playwright() as pw:
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(500)
     clear(pg)
-    check('painted sets registered',pg.evaluate("()=>!!(OW.reel&&OW.pruitt&&OW.tf_pip&&OW.tf_moss&&OW.tf_dot&&OW.tf_gus&&OW.tf_bean&&OW.tf_page&&OW.tf_bun&&OW.tf_sal&&OW.tf_kit&&OW.tf_luna&&OW.tf_penny&&OW.tf_oolong&&OW.tf_fern&&OW.tf_washington&&OW.tf_bev&&OW.tf_wes&&OW.tf_chet&&OW.tf_skye&&OW.tf_larry&&OW.tf_marisol&&OW.tf_sage&&OW.tf_kenji&&OW.tf_juniper&&OW.tf_beto&&OW.tf_sol&&OW.tf_dash&&OW.tf_dolores&&OW.tf_marguerite&&OW.tf_nickel&&OW.tf_mateo&&OW.tf_daisy&&OW.tf_kevin&&OW.tf_claudia&&OW.tf_yesenia&&OW.tf_tony&&OW.tf_ryan&&OW.tf_dakota&&OW.tf_sam&&OW.tf_jordan&&OW.tf_carmen&&OW.tf_odette&&OW.tf_priya&&OW.tf_sofi&&OW.bernadette&&OW.dana&&OW.kiki&&OW.toni&&OW.ray&&OW.boomie&&OW.halverson&&OW.ike&&OW.delgado&&OW.kowalski)"))
-    check('sets are painted rows',pg.evaluate("()=>[OW.reel,OW.pruitt,OW.tf_pip,OW.tf_moss,OW.tf_dot,OW.tf_gus,OW.tf_bean,OW.tf_page,OW.tf_bun,OW.tf_sal,OW.tf_kit,OW.tf_luna,OW.tf_penny,OW.tf_oolong,OW.tf_fern,OW.tf_washington,OW.tf_bev,OW.tf_wes,OW.tf_chet,OW.tf_skye,OW.tf_larry,OW.tf_marisol,OW.tf_sage,OW.tf_kenji,OW.tf_juniper,OW.tf_beto,OW.tf_sol,OW.tf_dash,OW.tf_dolores,OW.tf_marguerite,OW.tf_nickel,OW.tf_mateo,OW.tf_daisy,OW.tf_kevin,OW.tf_claudia,OW.tf_yesenia,OW.tf_tony,OW.tf_ryan,OW.tf_dakota,OW.tf_sam,OW.tf_jordan,OW.tf_carmen,OW.tf_odette,OW.tf_priya,OW.tf_sofi,OW.bernadette,OW.dana,OW.kiki,OW.toni,OW.ray,OW.boomie,OW.halverson,OW.ike,OW.delgado,OW.kowalski].every(s=>s.down[0]._paint&&s.side[0]._paint&&s.left[0]._paint)"))
+    check('painted sets registered',pg.evaluate("()=>!!(OW.reel&&OW.pruitt&&OW.tf_pip&&OW.tf_moss&&OW.tf_dot&&OW.tf_gus&&OW.tf_bean&&OW.tf_page&&OW.tf_bun&&OW.tf_sal&&OW.tf_kit&&OW.tf_luna&&OW.tf_penny&&OW.tf_oolong&&OW.tf_fern&&OW.tf_washington&&OW.tf_bev&&OW.tf_wes&&OW.tf_chet&&OW.tf_skye&&OW.tf_larry&&OW.tf_marisol&&OW.tf_sage&&OW.tf_kenji&&OW.tf_juniper&&OW.tf_beto&&OW.tf_sol&&OW.tf_dash&&OW.tf_dolores&&OW.tf_marguerite&&OW.tf_nickel&&OW.tf_mateo&&OW.tf_daisy&&OW.tf_kevin&&OW.tf_claudia&&OW.tf_yesenia&&OW.tf_tony&&OW.tf_ryan&&OW.tf_dakota&&OW.tf_sam&&OW.tf_jordan&&OW.tf_carmen&&OW.tf_odette&&OW.tf_priya&&OW.tf_sofi&&OW.tf_marlowe&&OW.tf_hush9&&OW.tf_pistachio&&OW.vance&&OW.bernadette&&OW.dana&&OW.kiki&&OW.toni&&OW.ray&&OW.boomie&&OW.halverson&&OW.ike&&OW.delgado&&OW.kowalski)"))
+    check('sets are painted rows',pg.evaluate("()=>[OW.reel,OW.pruitt,OW.tf_pip,OW.tf_moss,OW.tf_dot,OW.tf_gus,OW.tf_bean,OW.tf_page,OW.tf_bun,OW.tf_sal,OW.tf_kit,OW.tf_luna,OW.tf_penny,OW.tf_oolong,OW.tf_fern,OW.tf_washington,OW.tf_bev,OW.tf_wes,OW.tf_chet,OW.tf_skye,OW.tf_larry,OW.tf_marisol,OW.tf_sage,OW.tf_kenji,OW.tf_juniper,OW.tf_beto,OW.tf_sol,OW.tf_dash,OW.tf_dolores,OW.tf_marguerite,OW.tf_nickel,OW.tf_mateo,OW.tf_daisy,OW.tf_kevin,OW.tf_claudia,OW.tf_yesenia,OW.tf_tony,OW.tf_ryan,OW.tf_dakota,OW.tf_sam,OW.tf_jordan,OW.tf_carmen,OW.tf_odette,OW.tf_priya,OW.tf_sofi,OW.tf_marlowe,OW.tf_hush9,OW.tf_pistachio,OW.vance,OW.bernadette,OW.dana,OW.kiki,OW.toni,OW.ray,OW.boomie,OW.halverson,OW.ike,OW.delgado,OW.kowalski].every(s=>s.down[0]._paint&&s.side[0]._paint&&s.left[0]._paint)"))
     for name,look in WHO:
         mapid=pg.evaluate("(n)=>{ for(const id in worlds){ if((worlds[id].npcs||[]).some(x=>x.name===n)) return id; } return null; }",name)
         check(f'{name} found on a map ({mapid})',bool(mapid))
@@ -47,6 +47,15 @@ with sync_playwright() as pw:
         check(f'{name} actor present',r is not None)
         pg.wait_for_timeout(700)
         pg.screenshot(path=os.path.join(SHOTS,f'townsfolk-{look}.png'))
+    # story-spawned characters (not fixed NPCs): spawn each the way a scene does, then look at it
+    for name,look,idn in [('Marlowe','marlowe','marlowe'),('HUSH-9','hush9','hush9'),('Mr. Pistachio','bun','pistachio')]:
+        clear(pg); pg.evaluate("()=>window.__LE.go('casa')"); pg.wait_for_timeout(1800); clear(pg)
+        r=pg.evaluate("""(a)=>{ const [n,l]=a; const t=storySpawn({name:n,look:l,at:[player.x,player.y-2],dir:'down'});
+          player.facing='up'; player.move=null; camera.snap=true;
+          const tp=TOWN_PAINTED[n]; return {painted:!!(tp&&tp.look===t.paletteName&&OW[tp.set]&&OW[tp.set].down[0]._paint)}; }""",[name,look])
+        check(f'{name} spawns painted',bool(r and r['painted']))
+        pg.wait_for_timeout(700); pg.screenshot(path=os.path.join(SHOTS,f'townsfolk-{idn}.png'))
+        pg.evaluate("(n)=>storyDespawn(n)",name)
     check('no page errors',not errs)
     if errs: print(errs[:5])
     br.close()
