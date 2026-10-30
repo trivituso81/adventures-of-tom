@@ -38,8 +38,13 @@ MARK = {
     'coyote':  {'eyes': [(.82, .45), (.91, .44)], 'mouth': (.90, .64)},
     'tickets': {'eyes': [(.60, .52), (.77, .53)], 'mouth': (.70, .62)},
     'smoglet': {'eyes': [(.70, .54), (.88, .55)], 'mouth': (.79, .62)},
+    'soggysock': {'eyes': [(.42, .38), (.61, .36)], 'mouth': (.42, .50)},
+    'bobber':  {'eyes': [(.61, .32), (.73, .33)], 'mouth': (.60, .53)},
+    'tangle':  {'eyes': [(.62, .41), (.71, .41)], 'mouth': (.64, .59)},
+    'snag':    {'eyes': [(.59, .67), (.71, .67)], 'mouth': (.65, .74)},
+    'irongill': {'eyes': [(.70, .59), (.89, .61)], 'mouth': (.80, .72)},
 }
-BOSS = {'bigone', 'bigshake'}
+BOSS = {'bigone', 'bigshake', 'irongill'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
@@ -48,6 +53,7 @@ ap.add_argument('--frames', default=None)
 ap.add_argument('--cells', type=int, default=None)      # stance width in row cells (44 regular, 42 boss: what the old sprites used)
 ap.add_argument('--atlas-w', type=int, default=None)    # stance width in atlas pixels (288 regular, 480 boss)
 ap.add_argument('--colors', type=int, default=24)
+ap.add_argument('--extra-ok', action='store_true')    # more frames on the sheet than needed: keep the first ones
 ap.add_argument('--drop-grey', action='store_true')   # remove small detached grey-white specks (AI artifacts, e.g. beside the Tar Pit Blob)
 args = ap.parse_args()
 ID = args.id
@@ -101,6 +107,9 @@ while len(big) < n:                                       # touching frames: spl
     sm = np.convolve(prof, np.ones(9) / 9, mode='same')
     cx = lo + int(np.argmin(sm[lo:hi]))
     big[k:k + 1] = [[a, cx], [cx, b]]
+if len(big) > n and args.extra_ok:                        # a spare frame (soggysock's duplicate stance on the right) is dropped
+    print(f'{ID}: ignoring {len(big) - n} extra frame(s) on the right')
+    big = big[:n]
 if len(big) > n:
     sys.exit(f'{ID}: found {len(big)} frames, expected {n} {frames}')
 # Each frame takes the ink between the midpoints of the gaps around it.
@@ -112,6 +121,9 @@ for i, nm in enumerate(frames):
     box = (xs_.min(), ys_.min(), xs_.max() + 1, ys_.max() + 1)
     cells[nm] = Image.fromarray(sub).crop(box)
     print(nm, 'src box', (edges[i] + box[0], box[1], edges[i] + box[2], box[3]), 'size', cells[nm].size)
+
+if 'extra' in cells:                                       # name a spare frame 'extra' in --frames to cut it apart, then drop it
+    del cells['extra']; frames = [f for f in frames if f != 'extra']; n = len(frames)
 
 # One pixel density for every frame, set by the stance width.
 sw = cells['stance'].size[0]

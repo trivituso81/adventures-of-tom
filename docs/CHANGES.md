@@ -3,6 +3,12 @@
 - Was the nose emoji. `tools/build_bp_emoji.py` MAP `rose.boop` is now the pointing-up finger (U+1F446), `data/battle-emoji.js` regenerated (regen of the old map reproduced the old file byte for byte first, so only Boop changed). The Nose Boop move (`rx_boop`) has no picture of its own and is untouched.
 - Cache tag `?v=boop1` on `data/battle-emoji.js` in `index.html`. Checked headless in Rose Mode: Boop tile shows the finger, no console errors; smoke FAILS: []. No spoken lines changed. Not yet seen on Tom's phone.
 
+## 2026-10-30: Painted Chapter 3 marsh enemies
+- Tom sent five sheets (ch3_monsters.zip): Soggy Sock, Bobber, Tangle, Snag and the boss Old Iron-Gill. All five now use the painted frames in battle (stance, hurt, attack frames; Iron-Gill has four attack frames).
+- Baked with `tools/sprite-bake/bake_foe.py` (new `--extra-ok` flag, and a frame named `extra` is cut and dropped; the Sock sheet has a spare 5th stance and its two attack frames touch). Script tags added before `data/foes/use.js`. Old pixel rows stay as the fallback.
+- Test: `tools/foes_test.py` on all five (painted, atlas ready, frames drawn, no page errors), contact sheets looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+- Note: the Sock is tall and narrow (77 rows high), so it stands taller than the other regulars.
+
 ## 2026-10-30: RELOAD button on the welcome page
 - Tom: the iPhone home-screen app has no refresh button and sometimes holds on to old files, and he cannot clear the cache from inside the app.
 - New small RELOAD button (refresh icon) on the welcome page, left of ADMIN, same outline style, portrait and landscape (`engine/splash.js` `splashReload`, CSS in `index.html`; the launch row is now a wrapping flex row, landscape stays on one row).

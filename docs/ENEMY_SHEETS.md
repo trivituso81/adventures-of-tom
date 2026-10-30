@@ -57,6 +57,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | coyote | foe-coyote-v1.png | stance, hurt, attack1, attack2 | 2026-10-29 | no |
 | tickets | foe-tickets-v1.png (Ticket Flurry) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
 | smoglet | foe-smoglet-v1.png | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| soggysock | foe-soggysock-v1.png (5 cells; the 5th is a duplicate stance, cut with `--frames stance,hurt,attack1,attack2,extra`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| bobber | foe-bobber-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| tangle | foe-tangle-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| snag | foe-snag-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| irongill | foe-irongill-v1.png (boss, 6 frames; lone stance on a second row ignored) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
