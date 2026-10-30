@@ -4,6 +4,10 @@
 - Some painted props replace animated drawn parts: the ff3 hourglass sand level, the ff1 fort's disco lights, the tnb1_dc fan box flap. Kintsugi cup is painted only once mended.
 - New test tool `tools/tombo_test.py` fires any Tombo (or `--char=grace`) in a lab fight, saves frames and a contact sheet, and prints `PAINTED_PROPS`. `tools/tombo_props_map.json` lists the props each Tombo uses. `__LE.B2_TOMBOS` is now exposed.
 - Tested: every Tombo run, every mapped prop draws, smoke green. Tags `?v=pa4` (prop-art.js), `?v=tom7` (battle2-kind.js).
+## 2026-10-30: Bready Mercury on Tom's counter now uses the painted jar prop
+
+- The jar on the kitchen island in Tom's house (`drawBreadyJar` in `engine/plate.js`) was a code-drawn pixel jar. It now draws `art/props/tom/sourdough_starter_jar.webp` (the DAY 3 jar, same art the Starter Splash move uses), same spot and size, with a soft shadow. Still hidden in chapter 6 until `ch6-clear`.
+- Prop cache version bumped to `pa4` (`engine/prop-art.js`, its tag in `index.html`) so phones fetch the newest image; `?v=bready2` on `engine/plate.js`. `tools/bready_test.py` passes.
 
 ## 2026-10-30: Tombo redo sheet 2: the last seven Tombo props cut (all 138 painted)
 
