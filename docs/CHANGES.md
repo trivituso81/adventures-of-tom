@@ -1,3 +1,7 @@
+## 2026-10-29: Eight more painted townsfolk, Los Angeles (Ryan, Dakota, Sam, Jordan, Dona Carmen, Miss Odette, Priya, Sofi)
+- Sheets `tools/sprite-bake/src/{ryan,dakota,sam,jordan,carmen,odette,priya,sofi}-walk-v1.png` added to `CAST` (heights 42, 37, 38, 43, 38, 36, 39, 36). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`. All matched BY NAME (`TOWN_PAINTED`); the look keys for Dona Carmen and Miss Odette are `carmen` and `odette`.
+- Checks: `tools/townsfolk_test.py` (55 characters) 0 fails, smoke 0 fails.
+
 ## 2026-10-29: Painted plate for the Sub-Rail Depot (chapter 13)
 - Sub-Rail Depot (map id `subdepot`, 24 x 12 tiles at 64 px, `art/subdepot.webp`, entry in `PLATES`) now uses Tom's painting (files `subdepot_final.png` and `subdepot_grid.png`, sent with no text, so treated as "install this plate"). A `plateMask` in `data/maps-ch13.js` is the walk map: the upper platform (rows 3 and 4), the lower platform (rows 8 to 10) and the track bed between them (rows 5 to 8, which walks like the old rails did). Blocked: the wall and stairs, Sol's desk and cabinets, both benches, the handcar, both piles of mail crates, the fence and lamp post at the far right, and the pit under the lower platform.
 - Exits moved to the painting: the stairs up to the boulevard are now (1,4) and (2,4) (were the west edge), the tunnel mouth is (23,3) and (23,4) (were (23,7) and (23,8)). The tunnel's west exits now arrive at (22,3) and (22,4) on the platform. Spawn moved from (4,5) to (4,4).
