@@ -67,10 +67,12 @@ B.cap_check=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,42),me=S
 SC.bp_arrow=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; if(ms<P.on) return; gfx.globalAlpha=fade(u,.9);
   const sq=ez((ms-P.stop)/260);
   if(sq<1) { const zip=Math.sin(ms/40)*4,w=lerp(120,8,sq); gfx.save(); gfx.translate(x+zip,y); gfx.scale(lerp(1,.1,sq),1);
-    gfx.beginPath(); gfx.moveTo(60,-10); gfx.lineTo(-30,-10); gfx.lineTo(-30,-22); gfx.lineTo(-64,0); gfx.lineTo(-30,22); gfx.lineTo(-30,10); gfx.lineTo(60,10); gfx.closePath();
-    gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#9be39a'; gfx.fill(); gfx.restore();
-    if(sq<.2) { for(let k=0;k<3;k++) R(x+70+k*10+((ms/30+k*7)%10),y-12+k*12,14,2,'rgba(255,246,220,.8)'); label('WALKING SPEED',x,y-36,CREAM,1); } }
-  else { const r=22; gfx.beginPath(); for(let k=0;k<8;k++) { const a=Math.PI/8+k*Math.PI/4; const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#d8343a'; gfx.fill(); label('STOP',x,y-3,CREAM,1); } };
+    const pw=PROPART.draw('boppy/walking_speed_sign',2,12,{h:86});   // painted sign; the drawn arrow is the fallback
+    if(!pw) { gfx.beginPath(); gfx.moveTo(60,-10); gfx.lineTo(-30,-10); gfx.lineTo(-30,-22); gfx.lineTo(-64,0); gfx.lineTo(-30,22); gfx.lineTo(-30,10); gfx.lineTo(60,10); gfx.closePath();
+    gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#9be39a'; gfx.fill(); }
+    gfx.restore();
+    if(sq<.2) { for(let k=0;k<3;k++) R(x+70+k*10+((ms/30+k*7)%10),y-12+k*12,14,2,'rgba(255,246,220,.8)'); if(!pw) label('WALKING SPEED',x,y-36,CREAM,1); } }
+  else { if(PROPART.draw('boppy/stop_sign',x,y+10,{h:74})) return; const r=22; gfx.beginPath(); for(let k=0;k<8;k++) { const a=Math.PI/8+k*Math.PI/4; const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#d8343a'; gfx.fill(); label('STOP',x,y-3,CREAM,1); } };
 B.grumbleShow=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,74),me=ST.unit(m);
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'sit',dx:(u,tt)=>Math.sin(tt*3)*1},{t:1900,f:'aim',dx:u=>-ez(u)*4},{t:2300,f:'spread',dx:(u,tt)=>u<.2?Math.sin(tt*40)*2:0},{t:3400,f:'hip'},{t:3700,f:back(p.x,me),hop:2,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
@@ -268,10 +270,10 @@ B.mild_for_company=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spot
 
 // ---------- In Nineteen Seventy ----------
 SC.bp_1970=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.92);
-  if(ms>P.stool-100) { const x=P.sx,y=P.sy; R(x-12,y-14,24,4,WOOD); Ln(x-10,y-10,x+8,y,3,'#8a5a30'); Ln(x+10,y-10,x-8,y,3,'#8a5a30'); }
-  if(ms>P.card) { const d=ez((ms-P.card)/400),y=lerp(-40,P.cy,d),x=P.cx; RO(x-62,y-26,124,52,SEPIA); R(x-58,y-22,116,44,'#e8cf98'); label('1970',x,y-12,'#5a3a1a',4); }
+  if(ms>P.stool-100) { const x=P.sx,y=P.sy; if(PROPART.draw('boppy/stool',x,y-14,{h:34})) {} else { R(x-12,y-14,24,4,WOOD); Ln(x-10,y-10,x+8,y,3,'#8a5a30'); Ln(x+10,y-10,x-8,y,3,'#8a5a30'); } }
+  if(ms>P.card) { const d=ez((ms-P.card)/400),y=lerp(-40,P.cy,d),x=P.cx; if(!PROPART.draw('boppy/1970_card',x,y,{w:116})) { RO(x-62,y-26,124,52,SEPIA); R(x-58,y-22,116,44,'#e8cf98'); label('1970',x,y-12,'#5a3a1a',4); } }
   if(ms>P.card2) { const d=ez((ms-P.card2)/350),x=lerp(P.cx+260,P.cx,d),y=P.cy+44; RO(x-58,y-10,116,20,CREAM); label('FIRST SOME CONTEXT',x,y-3,'#5a3a1a',1); }
-  if(ms>P.chairs) for(const q of P.list) { const g=ez((ms-P.chairs)/300),x=q.x+q.w*.5+4,y=q.base; gfx.save(); gfx.translate(x,y); gfx.scale(g,g); RO(-6,-16,12,4,WOOD); R(-6,-12,2,12,'#8a5a30'); R(4,-12,2,12,'#8a5a30'); RO(4,-28,2,14,'#8a5a30'); gfx.restore(); }
+  if(ms>P.chairs) for(const q of P.list) { const g=ez((ms-P.chairs)/300),x=q.x+q.w*.5+4,y=q.base; gfx.save(); gfx.translate(x,y); gfx.scale(g,g); if(!PROPART.draw('boppy/folding_chair',0,-17,{h:34})) { RO(-6,-16,12,4,WOOD); R(-6,-12,2,12,'#8a5a30'); R(4,-12,2,12,'#8a5a30'); RO(4,-28,2,14,'#8a5a30'); } gfx.restore(); }
   if(ms>P.also&&ms<P.also+900) { const h=hand(); label('ALSO',h.x,h.y-40,GOLD,2); } };
 B.nineteen_seventy=E2=>{ const {m,fx}=E2,list=foes(E2).length?foes(E2):b2LiveFoes(),Gp=ST.group(list),p=rowSpot(Gp,84),me=ST.unit(m);
   const plan={stool:1000,sx:p.x,sy:p.y,card:1500,card2:2200,chairs:2800,also:3400,cx:Gp.x,cy:Math.max(40,Gp.top-58),list:list.map(f=>ST.foe(f))},hit=2800;
@@ -408,7 +410,7 @@ B.cap_swat=E2=>{ ensureBare(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=fro
 
 // ---------- Patient Angler (A1, kept: bigger splash and reel) ----------
 SC.bv_pond=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.on) return; const g=ez((ms-P.on)/300); gfx.globalAlpha=fade(u,.9)*g*.9;
-  E(P.x,P.y,56*g,13*g,'#4f8fc8'); E(P.x-8,P.y-2,34*g,6*g,'#8fc8f4'); for(let k=0;k<2;k++) { const q=(s.t*.7+k*.5)%1; gfx.globalAlpha=fade(u,.9)*g*(1-q)*.8; ring(P.x,P.y,10+q*48,3+q*11,2,'#d8f0ff'); } };
+  if(!PROPART.draw('boppy/pond',P.x,P.y-6,{w:128*g,h:70*g})) { E(P.x,P.y,56*g,13*g,'#4f8fc8'); E(P.x-8,P.y-2,34*g,6*g,'#8fc8f4'); } for(let k=0;k<2;k++) { const q=(s.t*.7+k*.5)%1; gfx.globalAlpha=fade(u,.9)*g*(1-q)*.8; ring(P.x,P.y,10+q*48,3+q*11,2,'#d8f0ff'); } };
 SC.bv_rod=(s,u)=>{ const ms=s.t*1000,P=s.P,h=hand(); gfx.globalAlpha=fade(u,.97);
   let ang=1.4,bend=0;
   if(ms>P.sit&&ms<P.tug) ang=.5+Math.sin(ms/700)*.02;
@@ -422,7 +424,7 @@ SC.bv_rod=(s,u)=>{ const ms=s.t*1000,P=s.P,h=hand(); gfx.globalAlpha=fade(u,.97)
     if(ms>P.nudge&&ms<P.nudge+300) fy+=Math.sin((ms-P.nudge)/300*Math.PI)*7;
     if(ms>P.tug) { const q=ez((ms-P.tug)/350); fx2=lerp(P.fx,P.fx+50,q); fy=lerp(P.fy,P.fy-70,q); }
     if(ms<P.tug+350) { gfx.strokeStyle='rgba(255,255,255,.85)'; gfx.lineWidth=1.5; gfx.beginPath(); gfx.moveTo(H.tx,H.ty); gfx.quadraticCurveTo((H.tx+fx2)/2,ms>P.tug?(H.ty+fy)/2:Math.max(H.ty,fy)+14,fx2,fy); gfx.stroke();
-      EO(fx2,fy,7,9,CREAM); R(fx2-7,fy-2,14,5,RED); }
+      if(!PROPART.draw('boppy/bobber',fx2+3,fy-6,{h:32})) { EO(fx2,fy,7,9,CREAM); R(fx2-7,fy-2,14,5,RED); } }
     else { gfx.strokeStyle='rgba(255,255,255,.85)'; gfx.lineWidth=2; const ty=P.ft+ (ms<P.reel1?0:-ez((ms-P.reel1)/300)*10); gfx.beginPath(); gfx.moveTo(H.tx,H.ty); gfx.lineTo(P.fx+10,ty); gfx.stroke(); }
     if(ms>P.sit+200&&ms<P.nudge) bigWord('PATIENCE',h.x-30,h.y-58,CREAM,2);
     if(ms>P.nudge&&ms<P.tug) bigWord('NUDGE',P.fx,P.fy-34,CREAM,2); } };
@@ -479,7 +481,7 @@ SC.bv_cell=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.94);
   RO(P.x0-6,P.base-8,w+12,8,IRON);
   const lx=P.x1-4,ly=(P.top+P.base)/2; RO(lx-10,ly-14,20,26,BRASS); E(lx,ly-3,3,3,OUT); R(lx-1,ly-1,3,8,OUT);
   gfx.restore();
-  if(ms>P.turn&&ms<P.turn+900) { const q=ez((ms-P.turn)/250),kx=P.x1+4,ky=(P.top+P.base)/2-3; gfx.save(); gfx.translate(kx,ky); gfx.rotate(-q*Math.PI/2); LnO(0,0,26,0,4,BRASS); EO(30,0,7,7,BRASS); E(30,0,3,3,OUT); gfx.restore(); bigWord('CLICK',kx+10,ky-30,CREAM,2); }
+  if(ms>P.turn&&ms<P.turn+900) { const q=ez((ms-P.turn)/250),kx=P.x1+4,ky=(P.top+P.base)/2-3; gfx.save(); gfx.translate(kx,ky); gfx.rotate(-q*Math.PI/2); if(!PROPART.draw('boppy/big_key',20,0,{h:36,rot:Math.PI/4})) { LnO(0,0,26,0,4,BRASS); EO(30,0,7,7,BRASS); E(30,0,3,3,OUT); } gfx.restore(); bigWord('CLICK',kx+10,ky-30,CREAM,2); }
   if(ms>P.slam&&ms<P.slam+1300) { const q=(ms-P.slam)/1300; gfx.globalAlpha=(1-q)*.22*(Math.sin(q*Math.PI*6)>0?1:.3); R(0,0,576,324,'#ff2a2a'); } };
 B.lockdown=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,70),me=ST.unit(m);
   const P={jang:2200,drop:1500,slam:1800,turn:2700,x0:F.x-F.w*.5-12,x1:F.x+F.w*.5+12,top:Math.max(26,F.top-18),base:F.base+4};
@@ -567,6 +569,7 @@ SC.bp_pot=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.give) return; gf
 // A jar of his pickled ghost peppers. The lid pops, a little ghost floats out, he eats one, and the fire alarm goes off.
 const gpep=(x,y,rot,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); E(0,0,7,9,OUT); E(0,0,5.4,7.4,'#f6e6a0'); E(1.5,1.5,2,4,'#d8c070'); R(-3,-2,2,2,OUT); R(1,-2,2,2,OUT); R(-1,2,2,2,OUT); R(-1,-12,3,4,'#6a8a3a'); gfx.restore(); };
 const jar=(x,y,lidOff,shake)=>{ const sx=shake?Math.sin(performance.now()/25)*2:0; gfx.save(); gfx.translate(x+sx,y);
+  if(lidOff?PROPART.draw('boppy/jar_of_ghost_peppers',0,1,{h:58,src:[0,24,103,136]}):PROPART.draw('boppy/jar_of_ghost_peppers',0,-4,{h:68})) { gfx.restore(); return; }   // painted jar (lid cropped off once it pops); drawn jar is the fallback
   RO(-22,-28,44,56,'#cfe8ee'); R(-19,-18,38,43,'#c8d890'); gpep(-9,-6,.4,1.2); gpep(8,2,-.5,1.2); gpep(-5,14,.2,1.1); gpep(10,-14,-.2,1); R(-16,-24,4,40,'rgba(255,255,255,.45)');
   RO(-20,4,40,12,CREAM); label('GHOST',0,6,RED,1);
   if(!lidOff) { RO(-24,-36,48,10,'#c9a23a'); R(-22,-34,44,2,'#f0d27a'); }
@@ -574,18 +577,18 @@ const jar=(x,y,lidOff,shake)=>{ const sx=shake?Math.sin(performance.now()/25)*2:
 SC.bv_jar=(s,u)=>{ const ms=s.t*1000,P=s.P,h=hand(),x=h.x-18,y=h.y-36; gfx.globalAlpha=fade(u,.96); if(ms>P.alarm) return;
   jar(x,y,ms>P.pop,ms>P.twist&&ms<P.pop);
   if(ms>P.twist&&ms<P.pop) bigWord('TWIST',x,y-58,CREAM,2);
-  if(ms>P.pop&&ms<P.pop+600) { const q=ez((ms-P.pop)/600); gfx.save(); gfx.translate(x-q*60,y-36-Math.sin(q*Math.PI)*70); gfx.rotate(q*10); RO(-24,-5,48,10,'#c9a23a'); gfx.restore(); bigWord('POP!',x-58,y-40,GOLD,2); }
+  if(ms>P.pop&&ms<P.pop+600) { const q=ez((ms-P.pop)/600); gfx.save(); gfx.translate(x-q*60,y-36-Math.sin(q*Math.PI)*70); gfx.rotate(q*10); if(!PROPART.draw('boppy/jar_of_ghost_peppers',0,0,{h:10,w:44,src:[0,0,103,24]})) RO(-24,-5,48,10,'#c9a23a'); gfx.restore(); bigWord('POP!',x-58,y-40,GOLD,2); }
   if(ms>P.pop&&ms<P.eat) { const q=cl((ms-P.pop)/(P.eat-P.pop)),gx=x+Math.sin(q*8)*10,gy=y-40-q*60; gfx.globalAlpha=fade(u,.96)*(1-q*.4);
     E(gx,gy,13,15,OUT); E(gx,gy,11,13,GHOST); poly([[gx-11,gy],[gx-11,gy+16],[gx-6,gy+11],[gx-1,gy+17],[gx+4,gy+11],[gx+11,gy+16],[gx+11,gy]],GHOST,0); R(gx-6,gy-4,3,4,OUT); R(gx+3,gy-4,3,4,OUT); E(gx,gy+5,3,3,OUT);
     gfx.globalAlpha=fade(u,.96); if(q>.15) bigWord('BOO',gx+28,gy-14,GHOST,2); } };
 SC.bv_bite=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const h=hand(),mo=mouth(st); gfx.globalAlpha=1;
-  if(ms<P.eat+250) { const q=ez((ms-P.eat)/250); gpep(lerp(h.x-14,mo.x,q),lerp(h.y-30,mo.y,q),.3,1.6*(1-q*.6)); }
+  if(ms<P.eat+250) { const q=ez((ms-P.eat)/250); { const gx=lerp(h.x-14,mo.x,q),gy=lerp(h.y-30,mo.y,q),gs=1.6*(1-q*.6); if(!PROPART.draw('boppy/ghost_pepper',gx,gy,{h:36*gs/1.6,rot:-.3})) gpep(gx,gy,.3,gs); } }
   if(ms>P.eat+250&&ms<P.eat+800) bigWord('CRUNCH',mo.x-6,mo.y-48,CREAM,2);
   if(ms>P.alarm&&ms<P.done) { const hp=head(st,16),pulse=.4+.2*Math.sin(ms/60); gfx.globalAlpha=pulse; E(hp.x-4,hp.y+4,18,16,'#ff1a0a'); gfx.globalAlpha=1; steam(hp.x-28,hp.y-4,s.t,3,'#ffd0b0',40); steam(hp.x+22,hp.y-4,s.t+.4,3,'#ffd0b0',40); } };
 SC.bv_alarm=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; gfx.globalAlpha=fade(u,.92);
   const bx=P.bx,by=P.by,a=s.t*9;
   for(let k=0;k<2;k++) { const ang=a+k*Math.PI; gfx.globalAlpha=fade(u,.92)*.22; poly([[bx,by],[bx+Math.cos(ang-.25)*620,by+Math.sin(ang-.25)*620],[bx+Math.cos(ang+.25)*620,by+Math.sin(ang+.25)*620]],'#ff3a2a',0); }
-  gfx.globalAlpha=fade(u,.92); RO(bx-16,by+6,32,8,'#5a5a60'); gfx.beginPath(); gfx.arc(bx,by+6,14,Math.PI,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=Math.sin(a*2)>0?'#ff3a2a':'#c81a12'; gfx.fill(); E(bx-5,by-2,3,4,'#ffb0a0');
+  gfx.globalAlpha=fade(u,.92); if(!PROPART.draw('boppy/fire_alarm',bx,by+8,{h:52})) { RO(bx-16,by+6,32,8,'#5a5a60'); gfx.beginPath(); gfx.arc(bx,by+6,14,Math.PI,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=Math.sin(a*2)>0?'#ff3a2a':'#c81a12'; gfx.fill(); E(bx-5,by-2,3,4,'#ffb0a0'); }
   if(ms<1300) { const q=ms/1300; gfx.globalAlpha=.2*(Math.sin(q*Math.PI*8)>0?1:0)*(1-q); R(0,0,576,324,'#ff2a1a'); }
   gfx.globalAlpha=fade(u,.92); bigWord('5-ALARM!',bx,by-24,'#ff6a5a',3); };
 SC.bv_blaze=(s,u)=>{ const x=s.x,y=s.base,hgt=s.h*Math.sin(cl(u*1.4)*Math.PI*.5+.0)*(u>.75?(1-u)/.25:1); if(hgt<=1) return; gfx.globalAlpha=1;
@@ -690,6 +693,7 @@ B.cap_swat=E2=>{ ensureBare(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=fro
 // ---------- Recliner Reservation: twice the size, and it THUMPS down ----------
 const CS=1.9;
 const chair=(x,base,foot,sc=1)=>{ gfx.save(); gfx.translate(x,base); gfx.scale(sc,sc);
+  if(PROPART.draw('boppy/recliner',10,-31,{h:64})) { gfx.restore(); return; }   // painted recliner (footrest already out); drawn chair is the fallback
   R(-14,-4,3,6,OUT); R(12,-4,3,6,OUT);
   RO(-18,-62,22,46,LEATHER); R(-15,-58,16,40,'#8a5a36'); R(-13,-54,12,4,'#9c6a42'); R(-13,-44,12,4,'#9c6a42');
   RO(-18,-24,34,14,'#8a5a36'); R(-15,-22,28,3,'#9c6a42'); RO(-22,-34,8,22,LEATHER); RO(12,-34,8,22,LEATHER);
@@ -701,8 +705,8 @@ SC.bp_chair=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.drop) return; const lan
   const sq=ms>land&&ms<land+300?Math.sin((ms-land)/300*Math.PI)*.14:0;
   gfx.save(); gfx.translate(P.x,y); gfx.scale(1+sq,1-sq); gfx.translate(-P.x,-y); chair(P.x,y,ez((ms-P.foot)/400),CS); gfx.restore();
   const top=y-62*CS;
-  if(ms<P.card) { RO(P.x-40,top-30,80,22,CREAM); label('RESERVED',P.x,top-24,RED,2); }
-  else if(ms<P.card+700) { const q=(ms-P.card)/700; gfx.save(); gfx.translate(P.x+q*110,top-19-Math.sin(q*Math.PI)*60); gfx.rotate(q*5); RO(-40,-11,80,22,CREAM); label('RESERVED',0,-5,RED,2); gfx.restore(); }
+  if(ms<P.card) { if(!PROPART.draw('boppy/reserved_card',P.x,top-14,{w:84})) { RO(P.x-40,top-30,80,22,CREAM); label('RESERVED',P.x,top-24,RED,2); } }
+  else if(ms<P.card+700) { const q=(ms-P.card)/700; gfx.save(); gfx.translate(P.x+q*110,top-19-Math.sin(q*Math.PI)*60); gfx.rotate(q*5); if(!PROPART.draw('boppy/reserved_card',0,5,{w:84})) { RO(-40,-11,80,22,CREAM); label('RESERVED',0,-5,RED,2); } gfx.restore(); }
   if(ms>land&&ms<land+800) { gfx.globalAlpha=a0; bigWord('THUMP!',P.x+10,top-52,CREAM,3); }
   if(ms>P.comfy&&ms<P.comfy+1100) { gfx.globalAlpha=a0; bigWord('COMFY?',P.x-12,top-64,GOLD,3); } };
 // the thump itself: dust and a shake, started by the move timeline (added here so the move function stays as it was)
@@ -725,16 +729,18 @@ SC.bv_count=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.9); const 
 
 // ---------- Everybody Waits: a wide FAMILY FIRST ticket and one big shield over the family ----------
 SC.bp_ticket=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.95); const a0=gfx.globalAlpha;
-  if(ms<P.pull+200) { const h=hand(); RO(h.x-24,h.y-30,34,40,'#d8343a'); R(h.x-20,h.y-38,26,8,CREAM); EO(h.x-7,h.y-12,5,5,'#a82a2a'); if(ms>P.pull-500) bigWord('TAKE A NUMBER',h.x,h.y-62,CREAM,2); }
+  if(ms<P.pull+200) { const h=hand(); if(!PROPART.draw('boppy/ticket_dispenser',h.x-8,h.y-12,{h:56})) { RO(h.x-24,h.y-30,34,40,'#d8343a'); R(h.x-20,h.y-38,26,8,CREAM); EO(h.x-7,h.y-12,5,5,'#a82a2a'); } if(ms>P.pull-500) bigWord('TAKE A NUMBER',h.x,h.y-62,CREAM,2); }
   if(ms<P.pull) return;
   const party=P.wide>0,top=Math.max(8,P.y0-14),full=P.y1-top,q=ez((ms-P.pull)/(P.unroll-P.pull)),len=full*q,cx=P.x+(party?-14:14),hw=27;
   // the big shield first, so the ticket sits in front of it
   if(party&&ms>P.unroll) { const g=ez((ms-P.unroll)/350),dx=P.x+P.wide*.5,dy=(P.y0+P.y1)*.5+4,rx=Math.min(P.wide*.5+16,566-dx)*g,ry=Math.min(dy-6,(P.y1-P.y0)*.5+22)*g,pl=.5+.5*Math.sin(s.t*6);
     gfx.globalAlpha=a0*(.16+pl*.06); E(dx,dy,rx,ry,BLUE); gfx.globalAlpha=a0*.9; ring(dx,dy,rx+2,ry+2,8,OUT); ring(dx,dy,rx,ry,5,BLUE); ring(dx,dy,rx-7,ry-7,2,'#dff0ff');
     gfx.globalAlpha=a0*.5; gfx.strokeStyle='#ffffff'; gfx.lineWidth=5; gfx.beginPath(); gfx.ellipse(dx,dy,Math.max(1,rx-14),Math.max(1,ry-14),0,Math.PI*1.12,Math.PI*1.42); gfx.stroke(); gfx.globalAlpha=a0; }
-  RO(cx-hw,top,hw*2,Math.max(2,len),CREAM); for(let y=top+6;y<top+len-4;y+=12) { R(cx-hw,y,3,3,'#c9c2b8'); R(cx+hw-3,y,3,3,'#c9c2b8'); }
+  const paintT=PROPART.ready('boppy/family_first_ticket');
+  if(paintT) { gfx.save(); gfx.beginPath(); gfx.rect(cx-hw-6,top,hw*2+12,Math.max(2,len)); gfx.clip(); PROPART.draw('boppy/family_first_ticket',cx,top+full*.5,{h:full,w:hw*2+12}); gfx.restore(); }   // painted ticket, revealed as it unrolls
+  else { RO(cx-hw,top,hw*2,Math.max(2,len),CREAM); for(let y=top+6;y<top+len-4;y+=12) { R(cx-hw,y,3,3,'#c9c2b8'); R(cx+hw-3,y,3,3,'#c9c2b8'); } }
   const gap=(full-14)/6,sc=gap>=17?3:2;
-  ['FAMILY','FIRST'].forEach((wd,c)=>{ const x=cx+(c?13:-12),off=c?(6-wd.length)*gap*.5:0; [...wd].forEach((ch,k)=>{ const y=top+8+off+k*gap; if(y<top+len-sc*5) label(ch,x,y,RED,sc); }); });
+  if(!paintT) ['FAMILY','FIRST'].forEach((wd,c)=>{ const x=cx+(c?13:-12),off=c?(6-wd.length)*gap*.5:0; [...wd].forEach((ch,k)=>{ const y=top+8+off+k*gap; if(y<top+len-sc*5) label(ch,x,y,RED,sc); }); });
   if(ms>P.unroll+500) { gfx.globalAlpha=a0; bigWord('FAMILY FIRST',party?P.x+P.wide*.5:cx,party?Math.max(24,P.y0-30):top-24,GOLD,3); } };
 
 // ---------- Seeds of Trouble: a bigger packet, fiery seeds, big sparks ----------
@@ -745,8 +751,10 @@ const cayenne=(x,y,rot,sc,c='#e0402e')=>{ gfx.save(); gfx.translate(x,y); gfx.ro
 const pk=()=>{ const h=hand(); return {x:h.x-34,y:h.y-64}; };
 SC.bp2_packet=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.pocket) return; gfx.globalAlpha=fade(u,.96);
   const tap=ms>P.t0&&ms<P.t1?Math.abs(Math.sin((ms-P.t0)/(P.t1-P.t0)*Math.PI*3))*14:0,shake=ms>P.shake&&ms<P.pocket?Math.sin(ms/30)*6:0,o=pk();
-  const x=o.x+shake,y=o.y+tap; RO(x-36,y-48,72,94,'#f6e2b8'); R(x-36,y-48,72,22,'#4f8a3a'); R(x-36,y-28,72,3,'#3f7a2a'); label('SEEDS',x,y-41,CREAM,2);
-  label('HOT',x,y-18,RED,4); cayenne(x+4,y+18,.9,1.6); R(x-30,y+40,60,2,'#d8c49a');
+  const x=o.x+shake,y=o.y+tap;
+  if(PROPART.draw('boppy/seed_packet',x+4,y-2,{h:104})) {} else {   // painted packet; drawn one is the fallback
+  RO(x-36,y-48,72,94,'#f6e2b8'); R(x-36,y-48,72,22,'#4f8a3a'); R(x-36,y-28,72,3,'#3f7a2a'); label('SEEDS',x,y-41,CREAM,2);
+  label('HOT',x,y-18,RED,4); cayenne(x+4,y+18,.9,1.6); R(x-30,y+40,60,2,'#d8c49a'); }
   if(ms>P.t0&&ms<P.t1) for(let k=0;k<4;k++) { const fq=(s.t*3+k*.25)%1; gfx.globalAlpha=1-fq; E(x-20+k*13,y-52-fq*30,4,6,k%2?'#ffb04a':'#ff6a2a'); gfx.globalAlpha=1; }
   if(ms>P.show&&ms<P.t0) bigWord('HOMEGROWN',x,y-84,GOLD,3);
   if(ms>P.shake+200) { EO(x+44,y+38,4,5,'#f0d27a'); bigWord('ONE LEFT',x,y-84,CREAM,3); } };
@@ -768,11 +776,13 @@ B.seeds_of_trouble=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSp
     [4700,'end',res(E2)+'The crop is performing above expectations.']]); };
 
 // ---------- Mild for Company: a bigger pot with big steam ----------
-const pot=(x,y,t)=>{ RO(x-56,y-10,12,10,'#9a948a'); RO(x+44,y-10,12,10,'#9a948a'); EO(x,y+10,46,28,'#c9c2b8'); E(x-16,y+4,10,12,'#e2ddd4'); EO(x,y-12,44,10,'#aaa398'); E(x,y-12,38,7,'#e88a4a'); E(x-10,y-14,10,2,'#f4b070');
+const pot=(x,y,t)=>{ if(PROPART.draw('boppy/pot_of_broth',x,y+4,{w:100})) { bigSteam(x,y-20,t,5,'#ffffff',120); return; }
+  RO(x-56,y-10,12,10,'#9a948a'); RO(x+44,y-10,12,10,'#9a948a'); EO(x,y+10,46,28,'#c9c2b8'); E(x-16,y+4,10,12,'#e2ddd4'); EO(x,y-12,44,10,'#aaa398'); E(x,y-12,38,7,'#e88a4a'); E(x-10,y-14,10,2,'#f4b070');
   bigSteam(x,y-20,t,5,'#ffffff',120); };
 SC.bp2_pot=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.give) return; gfx.globalAlpha=fade(u,.96);
   const x=h.x-32,y=h.y-24; pot(x,y,s.t);
-  const flip=cl((ms-P.flip)/400),sc=Math.cos(flip*Math.PI); gfx.save(); gfx.translate(x,y-92); gfx.scale(Math.abs(sc),1); RO(-46,-18,92,36,CREAM); label(sc>0?'HOT':'MILD',0,-10,sc>0?RED:'#2f6b3a',4); gfx.restore();
+  const flip=cl((ms-P.flip)/400),sc=Math.cos(flip*Math.PI); gfx.save(); gfx.translate(x,y-92); gfx.scale(Math.abs(sc),1); if(PROPART.draw('boppy/hot_mild_sign',0,0,{h:66})) { if(sc<=0) { RO(-30,-24,60,36,CREAM); label('MILD',0,-14,'#2f6b3a',3); } }   // painted HOT sign; its MILD side is drawn
+  else { RO(-46,-18,92,36,CREAM); label(sc>0?'HOT':'MILD',0,-10,sc>0?RED:'#2f6b3a',4); } gfx.restore();
   if(ms>P.test&&ms<P.test+600) { LnO(x+30,y-40,x+38,y-4,4,'#c9c2b8'); EO(x+29,y-42,5,3,'#c9c2b8'); bigWord('TINY',x+60,y-130,CREAM,3); } };
 B.mild_for_company=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
   const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:'aim'},{t:1200,f:'act'},{t:1700,f:'throw'},{t:2400,f:'celeb',hop:6},{t:2900,x:'home',y:'home',f:'idle'}]
@@ -783,7 +793,7 @@ B.mild_for_company=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spot
     [0,()=>{ setMessage(self?'Boppy turns the label on his broth around. HOT. Then MILD.':'Boppy walks over to '+t.name+' with a pot of broth.'); say(m.id,'mild_for_company'); scene('bp2_pot',(plan.give+100)/1000,{plan}); }],
     [plan.flip,()=>{ sfx.select(); if(!self) setMessage('He turns the label around. HOT becomes MILD, in careful handwriting.'); }],
     [plan.test,()=>{ setMessage('He tests one tiny spoonful like a safety inspector.'); }],
-    [plan.give,()=>{ const h=hand(); ST.fly((x,y)=>{ EO(x,y+4,18,11,'#c9c2b8'); E(x,y-3,15,4,'#e88a4a'); for(let k=0;k<3;k++) E(x-8+k*8,y-12-k%2*4,4,4,'rgba(255,230,192,.7)'); },h.x-32,h.y-24,H.x+(self?-30:6),H.mid,.4,30); sfx.whoosh(); }],
+    [plan.give,()=>{ const h=hand(); ST.fly((x,y)=>{ if(PROPART.draw('boppy/bowl_of_broth',x,y-4,{w:46})) return; EO(x,y+4,18,11,'#c9c2b8'); E(x,y-3,15,4,'#e88a4a'); for(let k=0;k<3;k++) E(x-8+k*8,y-12-k%2*4,4,4,'rgba(255,230,192,.7)'); },h.x-32,h.y-24,H.x+(self?-30:6),H.mid,.4,30); sfx.whoosh(); }],
     ['hf',hit],
     [hit,()=>{ E2.apply(); sfx.heal(); scene('bp_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('bp_glow',.9,{x:H.x,y:H.mid,c:'#ffd9a0'}); scene('bp2_rings',.7,{x:H.x,y:H.mid,c:'#ffd9a0',r:50}); hopOf(t!==m?t:null); }],
     [hit+300,()=>{ setMessage('The label was accurate. Boppy looks relieved.'); }],
@@ -861,6 +871,7 @@ SC.b5_pier=(s,u)=>{ const P=s.plan,g=ez(s.t/.35),out=u>.92?(1-u)/.08:1,x0=P.px0,
 // The catfish, facing left: flat whiskered head, olive back, pale belly, forked tail. mo opens the mouth.
 const catfish=(x,y,sc,rot,t,mo=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc);
   const tw=Math.sin(t*14)*3;
+  if(PROPART.draw('boppy/giant_catfish',-2,1,{w:78,flip:true})) { gfx.restore(); return; }   // painted catfish (faces left); the drawn fish is the fallback
   PO([[16,0],[31,-12+tw],[27,0],[31,12+tw]],CAT2,2);
   PO([[-4,-8],[3,-16],[8,-8]],CAT2,2); PO([[6,7],[12,12],[13,6]],CAT2,1.5);
   EO(0,0,21,9.5,CAT); EO(-15,1,10,8,CAT); E(-14,1,9,7,CAT);
@@ -915,6 +926,7 @@ SC.b5_splash=(s,u)=>{ for(const F of s.list) { const k=Math.sin(Math.min(1,u*1.6
 // The pier rail in front of the family (Nobody Gets Past): posts and two planks rise at everyone's feet.
 SC.b5_rail=(s,u)=>{ const g=ez(u/.2); gfx.globalAlpha=fade(u,.85);
   for(const q of s.list) { const x0=q.x-q.w*.32,x1=q.x+q.w*.32,y=q.base+4,h=30*g;
+    if(PROPART.draw('boppy/pier_rail',q.x,y-h*.62,{w:Math.max(36,x1-x0+16),h:Math.max(2,44*g)})) { gfx.globalAlpha=fade(u,.85)*.25; E(q.x,q.mid,q.w*.5,q.h*.6,'#9fc4f0'); gfx.globalAlpha=fade(u,.85); continue; }
     RO(x0-3,y-h-4,6,h+4,WOOD3); RO(x1-3,y-h-4,6,h+4,WOOD3); RO(x0-6,y-h+3,x1-x0+12,7,WOOD); RO(x0-6,y-h+15,x1-x0+12,7,WOOD2);
     gfx.globalAlpha=fade(u,.85)*.25; E(q.x,q.mid,q.w*.5,q.h*.6,'#9fc4f0'); gfx.globalAlpha=fade(u,.85); } gfx.globalAlpha=1; };
 B.fish_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),party=b2LiveParty();
@@ -982,7 +994,7 @@ SC.b5_singlet=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const sc=st.sc
   RO(x-6*sc,y0+5*sc,12*sc,9*sc,'#ffffff'); label('70',x,y0+7*sc,OUT,Math.max(1,Math.round(sc*1.4)));
   gfx.globalAlpha=1; };
 // The cardigan coming off (and later back on): a grey knit cardigan with buttons.
-const cardigan=(x,y,r)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(r); PO([[-14,-12],[14,-12],[16,14],[-16,14]],KNIT,2); PO([[-14,-12],[-28,6],[-22,10],[-12,-2]],KNIT2,2); PO([[14,-12],[28,6],[22,10],[12,-2]],KNIT2,2);
+const cardigan=(x,y,r)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(r); if(PROPART.draw('boppy/cardigan',0,0,{w:62})) { gfx.restore(); return; } PO([[-14,-12],[14,-12],[16,14],[-16,14]],KNIT,2); PO([[-14,-12],[-28,6],[-22,10],[-12,-2]],KNIT2,2); PO([[14,-12],[28,6],[22,10],[12,-2]],KNIT2,2);
   R(-1,-12,2,26,'#4a494d'); for(let k=0;k<3;k++) EO(3,-6+k*7,1.6,1.6,'#c8b090'); gfx.restore(); };
 // Autumn leaves whirling round him and trailing behind while he runs (and speed lines).
 SC.b5_leaves=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000+s.t0; if(ms<s.P.go||ms>s.P.stop) return;
@@ -995,13 +1007,21 @@ SC.b5_leaves=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*10
   gfx.globalAlpha=1; };
 // The finish arch and tape at the end of the course; the tape snaps when he breaks it.
 SC.b5_finish=(s,u)=>{ const P=s.plan,ms=s.t*1000+s.t0,g=ez((ms-P.arch)/300); if(g<=0) return; const x=P.bx,y=P.lane,h=96*g,out=u>.9?(1-u)/.1:1; gfx.globalAlpha=out;
+  const br=ms>P.tape,AW=100*g,AH=86*g,k=AW/160;
+  if(PROPART.ready('boppy/finish_arch')) {   // painted arch with its red tape; after the break the middle of the tape is cut away and the drawn ends whip back
+    if(!br) PROPART.draw('boppy/finish_arch',x,y-AH*.5+2,{w:AW,h:AH});
+    else { const yt=y-AH+2;   // top strip (banner) and the two side pieces (posts); the middle of the tape is gone
+      PROPART.draw('boppy/finish_arch',x,yt+26*k,{src:[0,0,160,52],w:AW,h:52*k});
+      for(const [sx0,sw] of [[0,40],[120,40]]) PROPART.draw('boppy/finish_arch',x+(sx0+sw/2-80)*k,yt+95*k,{src:[sx0,52,sw,86],w:sw*k,h:86*k}); }
+    if(br) { const q=ez((ms-P.tape)/350); LnO(x-30,y-46,x-30-q*14,y-46+q*30,2,'#ffe08a'); LnO(x+30,y-48,x+30+q*16,y-48+q*34,2,'#ffe08a'); }
+    gfx.globalAlpha=1; return; }
   RO(x-34,y-h,5,h,'#e8e0d0'); RO(x+30,y-h,5,h,'#e8e0d0'); RO(x-42,y-h-18,84,20,'#2a5a3a'); if(g>.8) label('FINISH',x,y-h-12,'#fff4dc',2);
-  const br=ms>P.tape; if(!br) { LnO(x-30,y-56,x+30,y-58,2,'#ffe08a'); }
+  if(!br) { LnO(x-30,y-56,x+30,y-58,2,'#ffe08a'); }
   else { const q=ez((ms-P.tape)/350); LnO(x-30,y-56,x-30-q*14,y-56+q*30,2,'#ffe08a'); LnO(x+30,y-58,x+30+q*16,y-58+q*34,2,'#ffe08a'); }
   gfx.globalAlpha=1; };
 // The starter's pistol from the top corner: BANG and a puff of smoke.
 SC.b5_pistol=(s,u)=>{ const x=s.x,y=BAR+30,k=u<.15?ez(u/.15):1; gfx.globalAlpha=fade(u,.7);
-  gfx.save(); gfx.translate(x+40*(1-k),y); RO(-4,0,30,8,'#5a5a5a'); RO(-4,4,8,14,'#6a4a2a'); RO(26,-2,40,10,'#c8a07a'); gfx.restore();
+  gfx.save(); gfx.translate(x+40*(1-k),y); if(PROPART.ready('boppy/starter_pistol')) { RO(26,-2,40,10,'#c8a07a'); PROPART.draw('boppy/starter_pistol',14,10,{w:54}); } else { RO(-4,0,30,8,'#5a5a5a'); RO(-4,4,8,14,'#6a4a2a'); RO(26,-2,40,10,'#c8a07a'); } gfx.restore();
   if(u>.15) for(let j=0;j<6;j++) { const q=cl((u-.15)*1.6); gfx.globalAlpha=(1-q)*.8; E(x-6-j*5,y-q*24-j*3,5+q*7,5+q*7,'#e8e0d0'); } gfx.globalAlpha=1; };
 // Stomach pat glow when present-day Boppy gets his breath back.
 SC.b5_belly=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const H=BH(),x=st.x+2,y=st.y-H*.3; gfx.globalAlpha=fade(u,.7)*(.35+.25*Math.sin(s.t*10)); E(x,y,22,16,'#ff8c3a'); gfx.globalAlpha=1; };
@@ -1098,6 +1118,7 @@ const youngOn=()=>{ ensureArt(); const sp=BSP(); if(saved) return; saved={wind:s
 const youngOff=()=>{ if(!saved) return; const sp=BSP(); Object.assign(sp,saved); saved=null; };
 // ---- the baseball cap, drawn at final size (hand at the origin, brim to the left) ----
 const bigCap=(x,y,ang)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.lineJoin='round'; gfx.lineCap='round';
+  if(PROPART.draw('boppy/baseball_cap',-52,-8,{w:126})) { gfx.restore(); return; }   // painted cap; the drawn one below is the fallback
   const path=fn=>{ gfx.beginPath(); fn(); gfx.closePath(); };
   // brim: curved, with a lighter top edge, a dark underside and stitch rows
   path(()=>{ gfx.moveTo(-50,-2); gfx.bezierCurveTo(-76,-6,-102,-2,-114,10); gfx.bezierCurveTo(-104,22,-74,20,-46,12); });
@@ -1151,7 +1172,7 @@ B.cap_swat=E2=>{ ensureArt(); const SW=BSP().x_swat?'x_swat':'bare_throw',SF=BSP
 // the tank top is part of the young sprite now, so the old singlet overlay only adds the bib
 SC.b5_singlet=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const sc=st.sc||1,H=BH()*sc,sp=BSP(),fl=sp.runFlip&&sp.runFlip.includes(st.frame)||st.frame===sp.flip?-1:1;
   const x=st.x+3*fl*sc,y0=st.y-H*.42; gfx.globalAlpha=fin(u,.04);
-  RO(x-5*sc,y0+3*sc,10*sc,7*sc,'#ffffff'); label('70',x,y0+4.5*sc,OUT,Math.max(1,Math.round(sc*1.3)));
+  if(!PROPART.draw('boppy/race_bib',x,y0+6.5*sc,{w:12*sc})) { RO(x-5*sc,y0+3*sc,10*sc,7*sc,'#ffffff'); label('70',x,y0+4.5*sc,OUT,Math.max(1,Math.round(sc*1.3))); }
   gfx.globalAlpha=1; };
 const xc=B.xc_ult;
 B.xc_ult=E2=>{ youngOff(); ensureArt(); const play=ST.play;
