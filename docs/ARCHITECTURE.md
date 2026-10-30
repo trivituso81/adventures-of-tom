@@ -42,7 +42,7 @@ Static site. `index.html` holds the markup, all CSS (portrait and landscape layo
 
 ## Things hardcoded to the claude.ai artifact (leave alone unless Tom asks)
 
-- `index.html`: the `#preview-note` fallback link points at the artifact URL.
+- `index.html`: `#boot` is the loading screen (covers the stage until the first frame adds `js-running`; shows Try again only if a script fails or 90 s pass).
 - `engine/cloud-save.js`: the artifact `db` capability (see above).
 
 ## Hosting

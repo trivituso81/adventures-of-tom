@@ -16,6 +16,6 @@ Do not start any of this without a direction from Tom. This is context so your c
 
 ## Longer-term fixes worth doing when Tom asks
 
-- Make `engine/cloud-save.js` and the `#preview-note` link in `index.html` conditional so a standalone host has no claude.ai dependencies.
+- Make `engine/cloud-save.js` conditional so a standalone host has no claude.ai dependencies.
 - Split `engine/battle2-kind.js` (400 KB) by tier or by set piece if editing it becomes slow. Mind the load order and the IIFE-local helper names.
 - Stream voice clips on demand (asset files) instead of base64 inside scripts, once the game is hosted standalone.
