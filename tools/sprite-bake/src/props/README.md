@@ -28,3 +28,4 @@ Notes for the future bake: cells carry a white number in the top-left corner (cr
 | tombo-sheet08-of-10.png | Tombo props 99 to 112 (Kintsugi Cup ... Sourdough Bite) | Cells 1 to 11 match (the giant paw runs off the top of its cell and is cut at the edge). Cells 12 to 14 are wrong: fork for Drinking Glass, red napkin for Hanging Pendant Lamp, wooden chair for Sourdough Bite. Redo those three |
 | tombo-sheet09-of-10.png | Tombo props 113 to 125 (Blanket Fort Castle ... Red Striped Family Table) | Cells 1 to 11 match. Cell 12 (Nurse Cap) came back as a pink handkerchief and cell 13 (Red Striped Family Table) as a sealed envelope: redo both |
 | tombo-sheet10-of-10.png | Tombo props 126 to 138 (Wooden Dining Chair ... Cream Eight-Seat Table) | 13 of 13 match |
+| tombo-sheet06-of-10.png | Tombo props 71 to 84 (Deputy Cap ... Newspaper) | 14 of 14 match. All ten Tombo sheets are now in; only the 14-prop redo is left |

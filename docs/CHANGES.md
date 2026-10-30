@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 6 of 10 (source and cut)
+- Saved `tombo-sheet06-of-10.png` (items 71 to 84); all 14 match (deputy cap, under-sink cabinet, garden bed, stake, seedling, watering can, vine, tomato, card table, peppers, Scoville meter, paper fan, milk, newspaper) and are cut. 124 of 138 Tombo props painted; the other 14 wait on the redo sheets. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 10 of 10 (source and cut)
 - Saved `tombo-sheet10-of-10.png` (items 126 to 138); all 13 match (dining chair, GUEST card, kids cup, pottery wheel, clay pot, bed, pillow, window, tray, pancakes, syrup, street lamp, eight-seat table) and are cut. 110 of 138 Tombo props painted. Still outstanding: sheet 6 (items 71 to 84) and 14 redo props. Not wired yet.
 
