@@ -538,6 +538,40 @@ function drawActor(a) {
   drawNpc(a);
 }
 
+// Talking distance (Tom, 2026-10-29: "a bit more distance, they are almost touching"). Tom and a neighbor stand on adjacent tiles, and the
+// painted figures are drawn wider than a tile, so they touched. Draw-only: while Tom faces or talks to someone, each is eased a few px away
+// from the other along the line between them. Tiles, collision and interaction are unchanged. Not for monsters, and not during the TNB kiss.
+const TALK_GAP_X=9,TALK_GAP_Y=11;   // px each person moves: sideways pairs, and up/down pairs (tall figures overlap more that way)
+let talkPartnerNow=null,talkGapClock=0;
+function talkGapFrame() {
+  const now=performance.now(),dt=Math.min(.1,Math.max(0,(now-(talkGapClock||now))/1000)); talkGapClock=now;
+  let n=null;
+  if(!transition&&!intro.active&&!kiss) {
+    if(dialog.active) n=dialog.npc;
+    else if(!player.move) { const t=facingTarget(); if(t&&t.kind==='npc') n=t.value; }
+    if(n&&(n.monster||n.hidden||n.seat)) n=null;
+  }
+  talkPartnerNow=n;
+  const k=Math.min(1,dt*16);
+  for(const a of [...currentMap.npcs,...followers,player]) {
+    let tx=0,ty=0;
+    if(n&&n!==player&&Math.abs(player.x-n.x)+Math.abs(player.y-n.y)===1) {
+      const dx=Math.sign(player.x-n.x),dy=Math.sign(player.y-n.y);
+      if(a===n) { tx=-dx*TALK_GAP_X; ty=-dy*TALK_GAP_Y; }
+      else if(a===player||followers.includes(a)) { tx=dx*TALK_GAP_X; ty=dy*TALK_GAP_Y; }   // Tom's party moves with him so nobody gets crowded from behind
+    }
+    const g=a._tg||(a._tg={x:0,y:0});
+    g.x+=(tx-g.x)*k; g.y+=(ty-g.y)*k;
+    if(Math.abs(g.x)<.05) g.x=0;
+    if(Math.abs(g.y)<.05) g.y=0;
+  }
+}
+function drawActorSpaced(a) {
+  const g=a._tg,dx=g?Math.round(g.x):0,dy=g?Math.round(g.y):0;
+  if(!dx&&!dy) { drawActor(a); return; }
+  gfx.save(); gfx.translate(dx,dy); drawActor(a); gfx.restore();
+}
+
 const HEART=['.OO.OO.','OHhHOHO','OHHHHHO','.OHHHO.','..OHO..','...O...'];
 function drawHeart(x,y,sc) {
   const pal={O:'#5a1f2e',H:'#e8536a',h:'#ffb3bf'};

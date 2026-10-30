@@ -55,9 +55,11 @@ function draw(time) {
 
   items.sort((a,b)=>a.depth-b.depth);
 
+  if(typeof talkGapFrame==='function') talkGapFrame();   // engine/town-render.js: a little air between Tom and who he talks to
   for(const item of items) {
     if(item.kind==='object') drawObject(item.value,time);
     else if(item.kind==='house') drawBuilding(item.value,time);
+    else if(typeof drawActorSpaced==='function') drawActorSpaced(item.value);
     else drawActor(item.value);
   }
 
