@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 2 of 10 (source and cut)
+- Saved `tombo-sheet02-of-10.png`; all 14 match (scepter, reading lamp, 8-bit music note, director's chair, megaphone, top hat, cane, stage curtains, kitchen counter, mixing bowl, ketchup, pickles, cereal box, mustard). Cut to `art/props/tombo/`; 22 of 138 Tombo props painted. Not wired yet.
+
 ## 2026-10-30: Rivituso Row repainted: every house and both exits labeled
 
 - New painting installed as `art/row.webp` (1536 x 1408, from Tom's image, kept in `docs/reference/row_v2_from_tom.png`). Built by `tools/row_signs.py <source.png>`: scales to the plate size and repaints the three house boards larger (240 x 96) and the two exit boards taller, because the generator drew them too small for a phone.

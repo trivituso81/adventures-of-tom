@@ -41,11 +41,12 @@ SHEETS = [
     # Tombo props (group 'tombo'): item numbers run 1..138 over the 10 sheets in order (14 each, last two 13). Only the cells that
     # matched their prompt are listed; the rest go on a redo sheet. Sheets not returned yet are skipped.
     ('tombo-sheet01-of-10.png', 'tombo', rng(1, 8)),
+    ('tombo-sheet02-of-10.png', 'tombo', rng(15, 28)),
     # redo sheet: cell -> (character, item)
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
-TOTAL = {'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+TOTAL = {'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
 
 

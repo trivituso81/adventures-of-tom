@@ -20,3 +20,4 @@ Painted prop sheets Tom generated from claude prompts (the Project doc claude/pr
 
 Notes for the future bake: cells carry a white number in the top-left corner (crop off). Edges have light and colored halos from background removal. Cell numbers restart at 1 on every sheet; match by the order in the prompt file.
 | tombo-sheet01-of-10.png | Tombo props 1 to 14 (Gift Box ... Bodyguard Sunglasses) | Cells 1 to 8 match (gift box, dice squishy, LIKE button, biplane wings, goggles, cloud, hair tuft, blue gym mat). Cells 9 to 14 are invented (gavel, genie lamp, hourglass, barrel, ship wheel, treasure chest): redo Judge's Desk, Carry-On Suitcase, Pink Blanket Lump, Pink Sneakers, Gold Tiara, Bodyguard Sunglasses and Earpiece |
+| tombo-sheet02-of-10.png | Tombo props 15 to 28 (Gold Scepter Stick ... Mustard Bottle) | 14 of 14 match |
