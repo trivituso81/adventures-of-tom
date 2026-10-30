@@ -5,6 +5,12 @@
 ## 2026-10-30: Slimmer dialogue box
 - Removed the divider line and the "Tap here or A / Enter to continue" hint from the dialogue box. AUTO and the page count now sit right under the text. Portrait top and bottom padding trimmed, and the portrait face moved up with it. Portrait box is about 52 px shorter (197 to 145 px with a portrait face); landscape box is tighter too.
 - CSS only, in `index.html` after the landscape dialogue rules. The hint element still exists but is hidden, so `engine/overworld.js` is untouched. The camera and area changes are untouched (`engine/intro.js` reads the box height, so it just gets more room). The splash panel keeps its own footer.
+## 2026-10-30: Painted Chapter 13 enemies
+- Tom sent ch13monsters.zip with three sheets: Dual-Coast Drill Worm (boss, id `drillworm`), Hushling, Turnstile Grump (id `turnstile`). All three show painted in a test fight; old sprites stay as fallback until Tom approves on his phone.
+- Signal Fault (`signalfault`) was NOT in the zip (its note says the PNG was not available), so it still uses its old sprite. Needs a sheet from Tom.
+- Hushling's sheet had a white streak and specks between its last two frames; blanked in the saved source.
+- Known flaw in the source art: Drill Worm attack1 has its drill tip clipped at the right edge (the next frame's dirt cloud overlaps it). A corrected sheet would fix it.
+- Tests: `tools/foes_test.py hushling,turnstile,drillworm` 0 fails; `tools/smoke.py` FAILS: [].
 
 ## 2026-10-30: Painted Chapter 11 and 12 enemies
 - Tom sent ch11_12monsters.zip. Installed lostluggage, redeye, standbysprite, finalcall (chapter 11 boss) and gridlockprime (chapter 12 boss). All five show painted in a test fight; old sprites kept as fallback until Tom approves on his phone.

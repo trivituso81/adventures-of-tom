@@ -99,6 +99,9 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | standbysprite | foe-standbysprite-v1.png (4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | finalcall | foe-finalcall-v1.png (chapter 11 boss, 6 frames, `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 | gridlockprime | foe-gridlockprime-v1.png (chapter 12 boss, 6 frames, `--cut-y 385 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| hushling | foe-hushling-v1.png (4 frames plus a spare stance on the right, `--extra-ok`; white streak and specks between x 1697 and 1797 blanked in the saved source) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| turnstile | foe-turnstile-v1.png (Turnstile Grump, 4 frames, lone stance on row 2) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| drillworm | foe-drillworm-v1.png (Dual-Coast Drill Worm, chapter 13 boss, 6 frames, `--cut-y 370 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
