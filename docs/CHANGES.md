@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Rose sheet 1 of 2 (source only)
+- Saved `tools/sprite-bake/src/props/rose-sheet1-of-2.png`. All 13 props match the prompt list. Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Grace's sheet (source only)
 - Saved Grace's returned sheet as `tools/sprite-bake/src/props/grace-sheet1-of-1.png`. All 15 props match the prompt list. Not wired into the game.
 
