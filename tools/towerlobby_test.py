@@ -61,10 +61,12 @@ with sync_playwright() as pw:
     check('the desk blocks',pg.evaluate("()=>Math.round(player.y)===5"))
     stand(pg,10,10,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(1300); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(400)
     check('walked up from the gate to the desk',pg.evaluate("()=>player.y<=10&&player.y>=5")); shot(pg,'walk-up')
-    # east door to the stairwell and back
+    # east door to the stairwell (the Stillness guards are parked off the map so no fight starts while the test passes through)
+    pg.evaluate("()=>{ worlds.towerstairs.npcs.splice(0); }")
     stand(pg,19,7,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1800); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2000)
     skip_intro(pg)
     check('east door leads to the stairwell',pg.evaluate("()=>currentMap.id==='towerstairs'")); shot(pg,'stairs')
+    check('no fight running',pg.evaluate("()=>!(typeof B2!=='undefined'&&B2&&B2.active)"))
     # both stairwell door tiles lead back to the lobby, onto walkable floor (not walked: Stillness guards patrol the landings)
     for y in (39,40):
         ok=pg.evaluate("(y)=>{ const p=worlds.towerstairs.portals.get('0,'+y); if(!p||p.to!=='towerlobby') return false; const m=worlds.towerlobby; return m.solid[p.spawn.y*m.w+p.spawn.x]===0; }",y)
