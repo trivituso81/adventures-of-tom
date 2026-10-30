@@ -21,6 +21,9 @@ def skip_intro(pg,n=500):
         if not pg.evaluate("()=>intro.active||dialog.active||!!transition"): return True
         pg.keyboard.press('Enter'); pg.wait_for_timeout(80)
     return False
+def park(pg):
+    # roaming monsters can wander into the walk and start a fight: freeze them where they are
+    pg.evaluate("()=>{ for(const n of currentMap.npcs) { n.roam=0; if(n.monster) { n.move=null; n.wander=0; } } }")
 def stand(pg,x,y,dir='up'):
     pg.evaluate(f"()=>{{ player.x={x}; player.y={y}; player.facing='{dir}'; player.move=null; placeFollowers(); camera.snap=true; }}"); pg.wait_for_timeout(500)
 REACH="""()=>{ const m=worlds.concourse, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H&&m.solid[y*W+x]===0;
@@ -41,7 +44,7 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; window.__LE.chapterJump(11); }"); pg.wait_for_timeout(2500)
     skip_intro(pg)
     pg.evaluate("()=>{ window.__LE.setFlag('ch11-cabin',true); window.__LE.setFlag('ch11-gate00',true); window.__LE.setFlag('ch11-conc',true); window.__LE.go('concourse'); }"); pg.wait_for_timeout(1800)
-    skip_intro(pg); pg.wait_for_timeout(500)
+    skip_intro(pg); pg.wait_for_timeout(500); park(pg)
     check('in the Concourse',pg.evaluate("()=>currentMap.id==='concourse'"))
     check('painted plate is drawn',pg.evaluate("()=>!!plateFor(currentMap)"))
     r=pg.evaluate(REACH); print(r)
@@ -60,15 +63,17 @@ with sync_playwright() as pw:
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
     # west door back to Gate 00 and east doorway back again
     stand(pg,1,7,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000)
-    skip_intro(pg)
+    skip_intro(pg); park(pg)
+    print('state after west door:',pg.evaluate("()=>({map:currentMap.id,battle:!!(window.__LE.battle&&window.__LE.battle.active),dlg:dialog.active,p:[player.x,player.y]})"))
     check('west door returns to Gate 00 on walkable floor',pg.evaluate("()=>currentMap.id==='gate00'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
     stand(pg,16,7,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1800); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2000)
-    skip_intro(pg)
+    skip_intro(pg); park(pg)
     check('Gate 00 east doorway lands on the Concourse floor',pg.evaluate("()=>currentMap.id==='concourse'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
     # lane walk with real key presses: the Standby Sprite is beaten, so the lane is clear; up the lane from the south, then east along the back strip
     pg.evaluate("()=>{ window.__LE.setFlag('ch11-sprite',true); window.__LE.setFlag('ch11-stby',true); window.__LE.setFlag('ch11-met',true); window.__LE.setFlag('battle:standbysprite','win'); const b=findMonster&&findMonster('standbysprite'); if(b){ b.x=0; b.y=0; b.hidden=true; b.move=null; } }")
     stand(pg,23,9,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(1700); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(500)
-    check('walked up the checkpoint lane',pg.evaluate("()=>Math.round(player.x)===23&&player.y<=6.2")); shot(pg,'lane')
+    pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(500); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(300)
+    check('walked up the checkpoint lane',pg.evaluate("()=>Math.round(player.x)===23&&player.y<=5.2")); shot(pg,'lane')
     pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1500); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(500)
     check('walked east beyond the checkpoint',pg.evaluate("()=>player.x>=25")); shot(pg,'east')
     check('no page errors',not errs)
