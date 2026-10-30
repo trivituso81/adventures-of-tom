@@ -945,3 +945,7 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 - Six painted enemy sheets (tools/sprite-bake/src/foe-<id>-v1.png) baked by the new tools/sprite-bake/bake_foe.py into art/foes/<id>.webp and data/foes/<id>-hires.js, installed by data/foes/use.js (script tags added after nara-hires-use.js). Old rows kept as MONSTERS.<id>.sprite0.
 - Battle: engine/battle2-ui.js b2FoeFrame shows the hurt frame when hit or dying and the attack frames in order during a lunge (2 for regulars, 4 for the Big One). New painted enemies reuse the same path.
 - Test: tools/foes_test.py (0 fails); smoke 0 fails.
+
+## Painted enemies, batch 2: Big Shake, Tar Pit Blob, Gridlock, Canyon Coyote, Ticket Flurry, Smoglet (2026-10-29)
+- Same pipeline as batch 1 (bake_foe.py, data/foes/use.js). Big Shake is a boss (6 frames). New in bake_foe.py: thin gap second-row detection, DROP_GREY for stray specks (Tar Pit Blob). tools/foes_test.py now covers all 12 (0 fails); smoke 0 fails.
+

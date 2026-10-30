@@ -32,8 +32,15 @@ MARK = {
     'toad':    {'eyes': [(.64, .25), (.80, .25)],   'mouth': (.78, .40)},
     'log':     {'eyes': [(.62, .68), (.82, .72)],   'mouth': (.71, .80)},
     'bigone':  {'eyes': [(.66, .27), (.84, .26)],   'mouth': (.835, .355)},
+    'bigshake': {'eyes': [(.58, .53), (.77, .53)], 'mouth': (.65, .68)},
+    'tarblob': {'eyes': [(.53, .65), (.67, .66)], 'mouth': (.60, .76)},
+    'gridlock': {'eyes': [(.68, .46), (.80, .45)], 'mouth': (.77, .60)},
+    'coyote':  {'eyes': [(.82, .45), (.91, .44)], 'mouth': (.90, .64)},
+    'tickets': {'eyes': [(.60, .52), (.77, .53)], 'mouth': (.70, .62)},
+    'smoglet': {'eyes': [(.70, .54), (.88, .55)], 'mouth': (.79, .62)},
 }
-BOSS = {'bigone'}
+BOSS = {'bigone', 'bigshake'}
+DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
 ap.add_argument('id')
@@ -41,6 +48,7 @@ ap.add_argument('--frames', default=None)
 ap.add_argument('--cells', type=int, default=None)      # stance width in row cells (44 regular, 42 boss: what the old sprites used)
 ap.add_argument('--atlas-w', type=int, default=None)    # stance width in atlas pixels (288 regular, 480 boss)
 ap.add_argument('--colors', type=int, default=24)
+ap.add_argument('--drop-grey', action='store_true')   # remove small detached grey-white specks (AI artifacts, e.g. beside the Tar Pit Blob)
 args = ap.parse_args()
 ID = args.id
 boss = ID in BOSS
@@ -54,13 +62,23 @@ alpha = A[:, :, 3]
 A[alpha < 10] = 0                                        # kill stray near-transparent noise
 alpha = A[:, :, 3]
 H, W = alpha.shape
+if args.drop_grey or ID in DROP_GREY:
+    lab, nl = ndi.label(ndi.binary_dilation(alpha > 10, iterations=3))
+    for i in range(1, nl + 1):
+        m = lab == i
+        if m.sum() > 6000: continue
+        px = A[m & (alpha > 40)][:, :3].astype(int)
+        if len(px) and (px.max(1) - px.min(1)).mean() < 28 and px.mean() > 110:
+            A[m] = 0; print('dropped grey speck of', int(m.sum()), 'px')
+    alpha = A[:, :, 3]
 
 # A second row (skeeter's lone stance) sits below a clear horizontal gap: keep the first row only.
 rowprof = (alpha > 40).sum(1)
 ys = np.where(rowprof > 0)[0]
 cut = H
-runs = np.split(ys, np.where(np.diff(ys) > 25)[0] + 1)
-if len(runs) > 1:
+runs = np.split(ys, np.where(np.diff(ys) > 3)[0] + 1)
+runs = [r for r in runs if len(r) > 20]                    # a second ROW is a tall run (a shadow or a speck is not)
+if len(runs) > 1 and len(runs[1]) > .4 * len(runs[0]):
     cut = int(runs[1][0]); print(f'second row at y={cut}: ignored')
 alpha_r = alpha[:cut]
 

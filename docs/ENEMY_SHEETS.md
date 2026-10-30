@@ -51,6 +51,12 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | toad | foe-toad-v1.png (Four-Frame_Lily-Pad_Frog_Sprite_Sheet) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
 | log | foe-log-v1.png (Log_Monster_Attack_Sprite_Sheet) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
 | bigone | foe-bigone-v1.png (Chubby_Sea_Monster_Sprite_Sheet) | stance, hurt, attack1 to attack4 (6th frame reads as a follow-through close to the stance) | 2026-10-29 | no |
+| bigshake | foe-bigshake-v1.png (boss, 6 frames; lone stance on a second row ignored) | stance, hurt, attack1 to attack4 | 2026-10-29 | no |
+| tarblob | foe-tarblob-v1.png (stray grey specks removed by DROP_GREY) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| gridlock | foe-gridlock-v1.png | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| coyote | foe-coyote-v1.png | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| tickets | foe-tickets-v1.png (Ticket Flurry) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| smoglet | foe-smoglet-v1.png | stance, hurt, attack1, attack2 | 2026-10-29 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
@@ -61,4 +67,5 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 - Wiring is shared: add the `<id>-hires.js` script tag before `data/foes/use.js` in index.html (after nara-hires-use.js). use.js installs every FOE_HIRES entry; it keeps the old rows as `sprite0`. `FOE_PAINT_OFF=true` (or `{log:true}`) before use.js turns painting off.
 - Frame choice is `b2FoeFrame` in engine/battle2-ui.js: hurt while hit or dying, attack frames in order across a lunge, otherwise stance; calm (un-grumped) hop uses the stance. Overworld and the turn ribbon use the stance.
 - The painted Big One already wears a rusty tin, so Deedee's pie tin overlay is drawn lower (`tinY`) on it instead of floating above.
+- Sheets can arrive with colored fringe on almost-transparent pixels (alpha 1 to 9); bake_foe zeroes alpha under 10, so it never shows. A second row is detected by a tall run below a gap of 4 rows or more. Hovering or standing enemies keep the shadow painted in their sheet, so a faint second shadow can show under the engine's own ellipse.
 - Test: `python3 tools/foes_test.py [ids]` writes `tools/shots/foes-<id>.png` (stance, hurt, attacks in a real battle); look at it.

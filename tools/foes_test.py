@@ -5,7 +5,7 @@ import threading, http.server, socketserver, functools, base64, os, sys
 from playwright.sync_api import sync_playwright
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
 SHOTS=os.path.join(HERE,'shots'); os.makedirs(SHOTS,exist_ok=True)
-IDS=(sys.argv[1] if len(sys.argv)>1 else 'mudling,skeeter,grump,toad,log,bigone').split(',')
+IDS=(sys.argv[1] if len(sys.argv)>1 else 'mudling,skeeter,grump,toad,log,bigone,bigshake,tarblob,gridlock,coyote,tickets,smoglet').split(',')
 class Q(http.server.SimpleHTTPRequestHandler):
     def log_message(self,*a): pass
 socketserver.TCPServer.allow_reuse_address=True
