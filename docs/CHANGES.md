@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Amy sheet 2 of 3 (source only)
+- Saved `tools/sprite-bake/src/props/amy-sheet2-of-3.png`. All 13 props match the prompt list. Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Amy sheet 1 of 3 (source only)
 - Saved `tools/sprite-bake/src/props/amy-sheet1-of-3.png`. All 13 props match the prompt list. Not wired into the game.
 
