@@ -59,7 +59,7 @@ with sync_playwright() as pw:
     stand(pg,16,7,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1800); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2000)
     skip_intro(pg)
     check('east doorway leads to the Endless Concourse',pg.evaluate("()=>currentMap.id==='concourse'"))
-    stand(pg,1,6,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000)
+    stand(pg,1,7,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000)
     skip_intro(pg)
     check('west door returns to Gate 00 on walkable floor',pg.evaluate("()=>currentMap.id==='gate00'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
     # amber dome after chapter 11 closes Long Island

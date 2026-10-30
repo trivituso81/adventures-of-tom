@@ -57,10 +57,10 @@ const CABIN_PLAN=(()=>{
 })();
 const P2_GATES=[
   [3,1,'Boston','A baseball game, paused. The ball is in the air. A man in the second row has both hands out, ready to catch it. He’s been ready for a very long time.'],
-  [9,3,'Denver','A ski lodge, paused. A mug of cocoa halfway to a mouth. Somebody laughing so hard the marshmallows are mid-bounce.'],
-  [15,5,'Seattle','A ferry deck, paused. A seagull stuck mid-flap with a fry in its beak. Everybody on board is pointing at it and smiling.'],
-  [27,7,'Chicago','A street festival, paused. One very large balloon dog, and a child reaching up for it. Her fingers are an inch away.'],
-  [31,9,'Miami','A beach, paused. A volleyball at the top of its arc. Four people watching it with their mouths open. Nobody ever lands.']];
+  [8,3,'Denver','A ski lodge, paused. A mug of cocoa halfway to a mouth. Somebody laughing so hard the marshmallows are mid-bounce.'],
+  [13,5,'Seattle','A ferry deck, paused. A seagull stuck mid-flap with a fry in its beak. Everybody on board is pointing at it and smiling.'],
+  [22,7,'Chicago','A street festival, paused. One very large balloon dog, and a child reaching up for it. Her fingers are an inch away.'],
+  [27,9,'Miami','A beach, paused. A volleyball at the top of its arc. Four people watching it with their mouths open. Nobody ever lands.']];
 LE_AREAS.push(
   planMerge({id:'flightzero',name:'Flight Zero',w:19,h:7,ground:'cabin',
     tag:'Delta One, Seat 1A. The overhead bins are full of somebody else’s weather.',
@@ -98,7 +98,7 @@ LE_AREAS.push(
     eyebrow:'TERMINAL INFINITY / GATE 00',
     hint:'The doorway on the right leads to the Endless Concourse.',
     spawn:{x:9,y:11},
-    exits:[[19,6,'concourse',1,6,'right','infmarble'],[19,7,'concourse',1,7,'right','infmarble']],
+    exits:[[19,6,'concourse',1,7,'right','infmarble'],[19,7,'concourse',1,8,'right','infmarble']],
     // Painted plate (art/gate00.webp, engine/plate.js). '#' blocks, '.' walks. Window wall, podium and its two posts, the four bench rows
     // with their lamp tables, the luggage cart, the left plant, the bottom-right plant, the right console and both rails block.
     // The marble aisle, the carpet and the marble doorway on the right (tiles 19,6 and 19,7) walk.
@@ -133,23 +133,46 @@ LE_AREAS.push(
     tag:'Gates 1 to 9, every one of them PAUSED. The moving walkway is moving. Nothing else is.',
     eyebrow:'TERMINAL INFINITY / THE ENDLESS CONCOURSE',
     hint:'Gate 00 is behind you. Keep going east, to the big door at the far end.',
-    spawn:{x:1,y:6},
-    exits:[[0,6,'gate00',18,7,'left','infmarble'],[0,7,'gate00',18,7,'left','infmarble']],
-    monsters:P2_CONCOURSE_SPOTS},
+    spawn:{x:1,y:8},
+    exits:[[0,7,'gate00',18,7,'left','infmarble'],[0,8,'gate00',18,7,'left','infmarble']],
+    monsters:P2_CONCOURSE_SPOTS,
+    // Painted plate (art/concourse.webp, engine/plate.js). '#' blocks, '.' walks. Blocked: the window wall and every back-wall bench,
+    // board and plant (row 4 and up), both moving walkways, the checkpoint wall (steep upper piece, the arch and the long lower
+    // diagonal), the bins, the three lower-left benches, the Lost and Found door, the lower-right benches and plants.
+    // The way through the checkpoint is the one-tile lane at x 23 (rows 5 to 9) under the arch: the Standby Sprite stands in it. The far-right
+    // strip (x 39, rows 5 to 9) walks round the end of the right moving walkway to the east half.
+    plateMask:[
+      '########################################',
+      '########################################',
+      '########################################',
+      '########################################',
+      '########################################',
+      '##.................###..................',
+      '##..................###.###############.',
+      '....###############..##.###############.',
+      '....###############..##.##..............',
+      '#.......................###.............',
+      '#...............##........#..###########',
+      '##.#######.###########....#..###########',
+      '##.#...###.##.....#..#....##...........#',
+      '########################################']},
     planInf(CONCOURSE_PLAN,'infwall'),
     {objects:[
-      ...P2_GATES.map(([x,n,city,text])=>['infgatesign',x,1,3,1,'Gate '+n,'GATE '+n+'. '+city.toUpperCase()+'. STATUS: PAUSED. Through the little window: '+text,{city}]),
-      ['boardbench',6,11,2,1,'Boarding Gate bench','BOARDING GATE. A gold bench with a sign: SWAP. Sit here and the whole party can change who is out front.',{swapbench:true}],
+      ...P2_GATES.map(([x,n,city,text])=>['infgatesign',x,4,1,1,'Gate '+n,'GATE '+n+'. '+city.toUpperCase()+'. STATUS: PAUSED. Through the little window: '+text,{city}]),
+      ['boardbench',4,11,3,1,'Boarding Gate bench','BOARDING GATE. A gold bench with a sign: SWAP. Sit here and the whole party can change who is out front.',{swapbench:true}],
       ['boardbench',19,11,2,1,'Boarding Gate bench','BOARDING GATE. A gold bench with a sign: SWAP. Sit here and the whole party can change who is out front.',{swapbench:true}],
-      ['boardbench',31,11,2,1,'Boarding Gate bench','BOARDING GATE. A gold bench with a sign: SWAP. Sit here and the whole party can change who is out front.',{swapbench:true}],
-      ['infrope',23,7,1,1,'Checkpoint rope','A velvet rope. A little sign hangs from it: THIS LANE IS CLOSED. THE OTHER LANE IS ALSO CLOSED. PLEASE USE THE OTHER OTHER LANE.'],
-      ['infdesk',20,4,3,1,'Standby desk','STANDBY LIST. A very long list. Number 17 has been circled in red since 1998. Number 18 is somebody else’s problem.'],
-      ['infdoor',14,12,2,1,'Lost and Found','LOST AND FOUND. A sign hangs on the door: BACK IN FIVE MINUTES. It is dated a very long time ago, and it is not wrong.',{lostfound:true}],
-      ['infjet',35,1,2,1,'Jet bridge door','A jet bridge door. Gate 00 is behind you; this one is for people arriving from somewhere else.'],
-      ['infbigdoor',37,5,2,3,'Gate Infinity','GATE INFINITY. A tall door with a gold clock face in it and no hands. A card on the door: NOW BOARDING. NOT YET.',{gateinfinity:true}],
-      ['infplant',1,1,1,1,'Plant','A gold potted ficus. A moving walkway has been going past it for years. It feels very behind.'],
-      ['infplant',1,12,1,1,'Plant','A gold potted ficus with a tiny hat. Somebody dressed it. Nobody has claimed it.'],
-      ['infplant',38,12,1,1,'Plant','A gold potted ficus. A paper sign in the pot: PLEASE DO NOT WATER. IT IS ALREADY TOMORROW.'],
-      ['infcart',10,9,1,1,'Luggage cart','A luggage cart stacked with bags that all have the same tag. The tag says ?.'],
-      ['infseats',28,2,3,1,'Gate seats','Three seats. A newspaper on one. THE FRONT PAGE: NOTHING HAS HAPPENED. A SECOND PAGE: IT WAS A VERY NICE DAY.']]})
+      ['boardbench',34,10,3,2,'Boarding Gate bench','BOARDING GATE. A gold bench with a sign: SWAP. Sit here and the whole party can change who is out front.',{swapbench:true}],
+      ['infrope',22,8,1,1,'Checkpoint rope','A velvet rope. A little sign hangs from it: THIS LANE IS CLOSED. THE OTHER LANE IS ALSO CLOSED. PLEASE USE THE OTHER OTHER LANE.'],
+      ['infdesk',17,4,2,1,'Standby desk','STANDBY LIST. A very long list. Number 17 has been circled in red since 1998. Number 18 is somebody else’s problem.'],
+      ['infdoor',16,10,2,2,'Lost and Found','LOST AND FOUND. A sign hangs on the door: BACK IN FIVE MINUTES. It is dated a very long time ago, and it is not wrong.',{lostfound:true}],
+      ['infjet',32,3,3,2,'Jet bridge window','A window onto a jet bridge. Gate 00 is behind you; this one is for people arriving from somewhere else.'],
+      ['infbigdoor',37,3,2,2,'Gate Infinity','GATE INFINITY. A tall door with a gold clock face in it and no hands. A card on the door: NOW BOARDING. NOT YET.',{gateinfinity:true}],
+      ['infplant',1,4,1,2,'Plant','A gold potted ficus. A moving walkway has been going past it for years. It feels very behind.'],
+      ['infplant',1,11,1,2,'Plant','A gold potted ficus with a tiny hat. Somebody dressed it. Nobody has claimed it.'],
+      ['infplant',11,11,2,2,'Plant','A gold potted ficus. Somebody tied a tiny boarding pass to it. It says WHEREVER.'],
+      ['infplant',37,10,2,2,'Plant','A gold potted ficus. A paper sign in the pot: PLEASE DO NOT WATER. IT IS ALREADY TOMORROW.'],
+      ['infcart',8,11,2,2,'Luggage cart','A luggage cart stacked with bags that all have the same tag. The tag says ?.'],
+      ['infseats',23,4,3,1,'Gate seats','Three seats. A newspaper on one. THE FRONT PAGE: NOTHING HAS HAPPENED. A SECOND PAGE: IT WAS A VERY NICE DAY.'],
+      ['infseats',13,11,2,1,'Gate seats','Three seats. Somebody has left a boarding pass on one. It is for yesterday’s flight to tomorrow.'],
+      ['infseats',30,10,3,2,'Gate seats','Three seats. A folded newspaper on one. Today’s date is blank. So is tomorrow’s.']]})
 );

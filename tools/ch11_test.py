@@ -30,7 +30,7 @@ with sync_playwright() as pw:
         print(step,ok,pg.evaluate("()=>window.__LE.map.id"),errs[-3:])
     pg.evaluate("()=>{ window.__LE.go('concourse'); }"); pg.wait_for_timeout(800)
     ok=adv(pg,300,"()=>window.__LE.flag('ch11-conc')===true&&!window.__LE.intro.active"); pg.screenshot(path=os.path.join(SHOTS,'ch11-conc.png')); print('conc',ok,errs[-3:])
-    pg.evaluate("()=>{ const P=window.__LE.player; P.x=20; P.y=6; P.move=null; }"); pg.wait_for_timeout(1500)
+    pg.evaluate("()=>{ const P=window.__LE.player; P.x=20; P.y=9; P.move=null; }"); pg.wait_for_timeout(1500)
     ok=adv(pg,300,"()=>window.__LE.battle.active"); pg.wait_for_timeout(2500); pg.screenshot(path=os.path.join(SHOTS,'ch11-stby-battle.png')); print('battle',ok,errs[-3:])
     pg.evaluate("()=>{ for(const f of window.__LE.B2.foes) f.hp=1; }")
     for i in range(14):
@@ -41,7 +41,7 @@ with sync_playwright() as pw:
     print('battle over',not pg.evaluate("()=>window.__LE.battle.active"), pg.evaluate("()=>window.__LE.B2.result"))
     adv(pg,200,"()=>window.__LE.flag('ch11-stby')===true&&!window.__LE.intro.active")
     print('stby',pg.evaluate("()=>window.__LE.flag('ch11-stby')"),errs[-3:])
-    pg.evaluate("()=>{ const P=window.__LE.player; P.x=33; P.y=6; P.move=null; }"); pg.wait_for_timeout(1500)
+    pg.evaluate("()=>{ const P=window.__LE.player; P.x=33; P.y=9; P.move=null; }"); pg.wait_for_timeout(1500)
     adv(pg,300,"()=>window.__LE.flag('ch11-met')===true&&!window.__LE.intro.active"); pg.screenshot(path=os.path.join(SHOTS,'ch11-meet.png'))
     print('met',pg.evaluate("()=>({m:window.__LE.flag('ch11-met'),bench:window.__LE.benchIds(),party:window.__LE.party.map(p=>p.id),fol:window.__LE.followers.map(f=>f.member.id),t:window.__LE.flag('tombo:ff1')})"),errs[-3:])
     r=pg.evaluate("""()=>{ const L=window.__LE,M=L.MEMBERS(),o={};

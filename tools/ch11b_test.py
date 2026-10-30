@@ -25,17 +25,17 @@ with sync_playwright() as pw:
     # skip C11a: set its flags, put the whole group together on the concourse
     pg.evaluate("""()=>{ const L=window.__LE; for(const k of ['ch11-start','ch11-cabin','ch11-boo','ch11-tear','ch11-gate00','ch11-conc','ch11-sprite','ch11-stby','ch11-met']) L.setFlag(k,true);
       L.setFlag('tombo:ff1',true); L.go('concourse'); const M=L.MEMBERS(); L.forceJoin(M.grace); L.forceJoin(M.rose); L.forceJoin(M.amy); L.benchAdd(M.tnb); L.benchAdd(M.nara);
-      L.player.x=36; L.player.y=6; L.player.move=null; L.player.facing='right'; }""")
+      L.player.x=36; L.player.y=5; L.player.move=null; L.player.facing='right'; }""")
     pg.wait_for_timeout(1500)
     adv(pg,60,"()=>!window.__LE.intro.active&&window.__LE.map.id==='concourse'")
     print('setup',pg.evaluate("()=>({map:window.__LE.map.id,party:window.__LE.party.map(p=>p.id),bench:window.__LE.benchIds()})"),errs[-3:])
     # Lost & Found
-    pg.evaluate("()=>{ const L=window.__LE; L.player.x=14; L.player.y=11; L.player.move=null; L.player.facing='down'; }"); pg.wait_for_timeout(600)
+    pg.evaluate("()=>{ const L=window.__LE; L.player.x=16; L.player.y=12; L.player.move=null; L.player.facing='up'; }"); pg.wait_for_timeout(600)
     pg.keyboard.press('Enter'); pg.wait_for_timeout(600)
     ok=adv(pg,200,"()=>window.__LE.flag('ch11-lost')===true&&!window.__LE.intro.active"); shot(pg,'lost')
     print('lost',ok,pg.evaluate("()=>window.__LE.bag.filter(i=>i==='goldtag'||i==='pretzels')"),errs[-3:])
     # Vance + boss
-    pg.evaluate("()=>{ const L=window.__LE; L.player.x=36; L.player.y=6; L.player.move=null; L.player.facing='right'; }"); pg.wait_for_timeout(600)
+    pg.evaluate("()=>{ const L=window.__LE; L.player.x=37; L.player.y=5; L.player.move=null; L.player.facing='up'; }"); pg.wait_for_timeout(600)
     pg.keyboard.press('Enter'); pg.wait_for_timeout(600)
     ok=adv(pg,200,"()=>window.__LE.flag('ch11-vance')===true"); shot(pg,'vance')
     ok=adv(pg,200,"()=>window.__LE.battle.active"); pg.wait_for_timeout(3500); shot(pg,'boss-open')
