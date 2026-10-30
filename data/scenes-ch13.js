@@ -193,23 +193,23 @@ SCENES.ch13After=()=>[
   {talk:'Grace',lines:['See? You can do it.']},
   {flag:'ch13-clear'}, {call:()=>storyWorld()},
   // Nickel arrives from the west with the coins; Sal and Penny are on the far side of the amber.
-  {spawn:{name:'Nickel',look:'nickel',at:[1,6],dir:'right'}},
-  {walk:'Nickel',to:[[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],speed:.28}, {face:'Nickel',dir:'right'},
+  {spawn:{name:'Nickel',look:'nickel',at:[2,4],dir:'right'}},
+  {walk:'Nickel',to:[[3,4],[4,4],[4,5],[5,5],[6,5],[6,6],[7,6]],speed:.28}, {face:'Nickel',dir:'right'},
   {talk:'Nickel',lines:['Tom! Sol drove me to the second mile marker and made me run. I have never been so tired and so right.']},
   {talk:'Nickel',lines:['Eleven coins. Mine are in this bag. Penny’s are on the other side of that wall.']},
-  {spawn:{name:'Sal',look:'sal',at:[22,6],dir:'left'}},
-  {spawn:{name:'Penny',look:'penny',at:[22,7],dir:'left'}},
+  {spawn:{name:'Sal',look:'sal',at:[22,4],dir:'left'}},
+  {spawn:{name:'Penny',look:'penny',at:[21,4],dir:'left'}},
   {talk:'Tom',lines:['The amber is clear on one side. There’s a pocket behind it. Two people are in it. One of them is waving a shovel.']},
   {talk:'Sal',lines:['(through the glass) TOMMY! Over here! Hi! Don’t hug the amber, it’s sticky!']},
   {talk:'Penny',lines:['(through the glass) Tom! I’m so sorry! Nickel, hold up the drawer! I’ve got mine!']},
   {talk:'Nickel',lines:['Eleven coins. Hers and mine. On three.']},
   {talk:'Penny',lines:['(through the glass) One. Two. Don’t think about the interest. Three.']},
   {call:()=>{ sfx.charge&&sfx.charge(); setFlag('ch13-melt'); }}, {wait:3.4},
-  {call:()=>{ const m=worlds.subchamber; if(m) for(const y of [6,7]) tile(m,20,y,'subgold',false); setFlag('ch13-melted'); sfx.ding&&sfx.ding(); }},
+  {call:()=>{ const m=worlds.subchamber; if(m) for(const x of [21,22]) tile(m,x,5,'subgold',false); setFlag('ch13-melted'); sfx.ding&&sfx.ding(); }},
   {talk:'Tom',lines:['The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.']},
   {talk:'Sal',lines:['It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!']},
-  {walk:'Sal',to:[[21,6],[20,6],[19,6],[18,6]],speed:.28},
-  {walk:'Penny',to:[[21,7],[20,7],[19,7],[18,7]],speed:.28},
+  {walk:'Sal',to:[[22,5],[22,6],[22,7],[21,7],[20,7],[19,7],[18,7]],speed:.28},
+  {walk:'Penny',to:[[21,5],[21,6],[20,6],[19,6],[18,6]],speed:.28},
   {talk:'Penny',lines:['Nickel.']},
   {talk:'Nickel',lines:['Penny.']},
   {talk:'Penny',lines:['I was saving for a boat.']},
@@ -301,7 +301,7 @@ STORY_WORLD.push(()=>{
     b.mscale=1.5;
   }
   const ch=worlds.subchamber;
-  if(ch&&flag('ch13-melted')&&ch.tiles[6][20]!=='subgold') for(const y of [6,7]) tile(ch,20,y,'subgold',false);
+  if(ch&&flag('ch13-melted')&&ch.tiles[5][21]!=='subgold') for(const x of [21,22]) tile(ch,x,5,'subgold',false);
   if(STORY.chapter===13&&girlsAway()) ch13Girls();
   if(((STORY.chapter===13&&flag('ch13-done'))||(STORY.chapter===14&&!flag('ch14-after')))&&!intro.active) {
     const row=worlds.row;

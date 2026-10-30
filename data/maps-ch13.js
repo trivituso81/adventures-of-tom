@@ -6,7 +6,8 @@
 //   subtunnel   The Transcontinental Sub-Rail: a long dark tunnel, 36 wide, painted (art/subtunnel.webp), with stalled train cars, mile signs, rubble and Friction Sprites.
 //               HUSH-9 debuts halfway along (scene ch13Hush).
 //   subchamber  Under the Amber: a cavern at the end of the bore. The Dual-Coast Drill Worm drills at a wall of amber (Long Island's dome seen
-//               from below). Past the amber is a little pocket where Sal and Penny wait. Boss scene ch13Worm; the coin melt is ch13After.
+//               from below). Painted plate (art/subchamber.webp): the tunnel mouth is top left, the amber wall runs down the right. Behind the glass
+//               (top right) is a little pocket where Sal and Penny wait. Boss scene ch13Worm; the coin melt is ch13After (the glass doorway is tiles 21,5 and 22,5).
 // Plan characters: 'W' concrete wall, 'R' rock, 'A' amber, 'f' platform, 't' track, 'd' cave floor, 'g' molten gold.
 // Renderer: engine/ch13-render.js. Monsters: data/ch13-monsters.js. Scenes: data/scenes-ch13.js.
 const SUB_TILES={f:'subfloor',t:'subtrack',d:'subdirt',g:'subgold'};
@@ -90,7 +91,7 @@ LE_AREAS.push(
     hint:'Follow the tunnel east to the far door. Stalled cars block the tracks, so use the platforms. The coffee machines are restore points.',
     spawn:{x:3,y:3},
     exits:[[0,2,'subdepot',22,3,'left','subfloor'],[1,2,'subdepot',22,4,'left','subfloor'],
-           [34,2,'subchamber',1,6,'right','subfloor'],[35,2,'subchamber',1,7,'right','subfloor']],
+           [34,2,'subchamber',3,4,'right','subfloor'],[35,2,'subchamber',3,5,'right','subfloor']],
     // Painted plate (art/subtunnel.webp, engine/plate.js, 36 x 12 tiles). '#' blocks, '.' walks. The wall and its decor (rows 0 to 2), the track
     // ends, the four stalled cars (the foot line of a tile has to sit in front of the car, so the upper cars block one row, the lower two block two),
     // the generator box, the ledge lamp, and the wall face under the ledge block. Walk: top platform (row 3), the track bed (rows 4 to 6),
@@ -136,16 +137,35 @@ LE_AREAS.push(
     tag:'A cavern at the end of the bore. A wall of amber the size of a house. The sound of something that will not stop.',
     eyebrow:'THE SUB-RAIL / UNDER THE AMBER',
     hint:'The amber is Long Island’s dome, seen from below. The Drill Worm has been digging at it for years.',
-    spawn:{x:2,y:6},
-    exits:[[0,6,'subtunnel',33,3,'left','subfloor'],[0,7,'subtunnel',33,3,'left','subfloor']],
+    spawn:{x:3,y:4},
+    // The way back is the tunnel mouth, top left, where the rails come out (tiles 1,3 and 2,3).
+    exits:[[1,3,'subtunnel',33,3,'left','subfloor'],[2,3,'subtunnel',33,3,'left','subfloor']],
+    // Painted plate (art/subchamber.webp, engine/plate.js). '#' blocks, '.' walks. Rock walls all round, the amber wall (it blocks until the
+    // coins melt the doorway at 21,5 and 22,5), the two rubble piles on the north wall, the left pile, the barrel pile, the lower-right pile
+    // and its crate, both tripod lamps. The rails, the open floor and the tunnel mouth walk.
+    plateMask:[
+      '##########################',
+      '##########################',
+      '##########################',
+      '#..####...###.############',
+      '##............###..#######',
+      '##.......#..........######',
+      '##.....................###',
+      '#####....................#',
+      '#####................#####',
+      '####.................#####',
+      '####...............#######',
+      '#########....#.....#######',
+      '##########################',
+      '##########################'],
     monsters:CH13_CHAMBER_SPOTS},
     planSub(SUBCHAMBER_PLAN),
     {objects:[
-      ['subrubble',4,3,1,1,'Rubble','A pile of rock. A little hand-lettered sign: WORM CROSSING.'],
-      ['subrubble',6,10,1,1,'Rubble','A pile of rock. A tiny pickaxe is stuck in the top of it, like a flag.'],
-      ['subrubble',15,3,1,1,'Rubble','A pile of rock. It is very warm. It is the nearest thing to a pile of rock that is also a campfire.'],
-      ['subrubble',16,10,1,1,'Rubble','A pile of rock. A hard hat balances on top. The initials inside say S.'],
-      ['subrubble',18,5,1,1,'Rubble','A pile of rock. Somebody has written in the dust: HELLO? and underneath it, in different writing: HELLO!!!'],
-      ['sublamp',3,9,1,1,'Work lamp','A tripod work lamp. It lights the whole cave a tired orange.'],
-      ['sublamp',18,10,1,1,'Work lamp','A tripod work lamp. It is pointed straight at the amber, because the amber is the only interesting thing in the cave.']]})
+      ['subrubble',10,3,3,1,'Rubble','A pile of rock. A little hand-lettered sign: WORM CROSSING.'],
+      ['subrubble',19,10,4,2,'Rubble','A pile of rock. A tiny pickaxe is stuck in the top of it, like a flag.'],
+      ['subrubble',14,3,3,2,'Rubble','A pile of rock. It is very warm. It is the nearest thing to a pile of rock that is also a campfire.'],
+      ['subrubble',1,7,4,2,'Rubble','A pile of rock. A hard hat balances on top. The initials inside say S.'],
+      ['subrubble',21,8,3,2,'Rubble','A pile of rock. Somebody has written in the dust: HELLO? and underneath it, in different writing: HELLO!!!'],
+      ['sublamp',6,3,1,1,'Work lamp','A tripod work lamp. It lights the whole cave a tired orange.'],
+      ['sublamp',24,8,1,1,'Work lamp','A tripod work lamp. It is pointed straight at the amber, because the amber is the only interesting thing in the cave.']]})
 );

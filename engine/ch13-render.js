@@ -184,7 +184,37 @@ drawLEBattleBg=function(t) {
 // ---------- Map effects ----------
 // The amber plate and its pocket (chamber), HUSH-9's rings (an NPC with `hush`), Boppy's gold plate (an NPC with `armor`).
 let ch13MeltT=-1,ch13MeltSeen=false,ch13Last=0;
+// Painted chamber (art/subchamber.webp): the amber wall is already in the painting. Until the coins melt it, a veil of the same painting is
+// laid back over the glass at 62% so Sal and Penny read as standing behind it; the veil fades as the gold runs. Gold then runs down the
+// glass and the doorway (tiles 21,5 and 22,5) glows, and stays faintly lit once it is open.
+const CH13_GLASS=[[20.4,2.2],[25,2.2],[25,7.7],[24.4,7.3],[22.6,6.4],[20.9,5.6],[20.4,5.3]];
+function ch13PlatePainted(time,melt,plate) {
+  const s=T/64;
+  gfx.save();
+  gfx.beginPath(); CH13_GLASS.forEach(([x,y],i)=>gfx[i?'lineTo':'moveTo'](x*T,y*T)); gfx.closePath(); gfx.clip();
+  const veil=.62*(1-melt);
+  if(veil>0) {
+    gfx.globalAlpha=veil; gfx.imageSmoothingEnabled=true;
+    gfx.drawImage(plate.img,20*64,2*64,6*64,6*64,20*T,2*T,6*T,6*T);
+    gfx.imageSmoothingEnabled=false;
+    gfx.globalAlpha=(1-melt)*.1; for(let k=0;k<5;k++) rect(20*T+k*T+((Math.floor(time*3)+k)%5)*3,2*T,3,6*T,'#fff1c0');
+  }
+  if(melt>0&&melt<1) {
+    for(let k=0;k<9;k++) { const run=Math.max(0,Math.min(1,melt*1.6-k*.06)),gx=Math.round(20.7*T+k*.36*T),len=Math.round(run*(5.4*T-(k*.12*T)));
+      gfx.globalAlpha=Math.max(0,Math.min(1,.9*(1-Math.max(0,melt-.7)/.3))); rect(gx,3*T,3,len,k%2?'#ffd24a':'#ffe27a'); }
+  }
+  gfx.restore();
+  const glow=melt>=1?.5+.1*Math.sin(time*2.4):Math.min(.75,melt*.9);
+  if(glow>0) {   // the open doorway: a soft gold glow, brighter in the middle
+    gfx.save(); gfx.translate(22*T,5.3*T); gfx.scale(1.5,1);
+    const g=gfx.createRadialGradient(0,0,2,0,0,1.5*T);
+    g.addColorStop(0,'rgba(255,244,176,'+glow+')'); g.addColorStop(.55,'rgba(255,208,90,'+(glow*.55)+')'); g.addColorStop(1,'rgba(255,190,60,0)');
+    gfx.fillStyle=g; gfx.fillRect(-1.6*T,-1.6*T,3.2*T,3.2*T); gfx.restore();
+  }
+}
 function ch13Plate(time,melt) {
+  const pl=typeof plateFor==='function'?plateFor(currentMap):null;
+  if(pl) return ch13PlatePainted(time,melt,pl);
   const x0=20*T,y0=3*T,w=5*T,h=8*T;   // the plate, plus the pocket behind it
   gfx.save();
   gfx.globalAlpha=(1-melt)*.34; rect(x0,y0,w,h,'#f2a92e');
@@ -227,7 +257,7 @@ b7DrawMapFx=function(time) {
     if(!flag('ch13-melt')) { ch13MeltSeen=false; ch13MeltT=-1; }
     if(ch13MeltT>=0) ch13MeltT=Math.min(3,ch13MeltT+dt);
     const melt=melted?1:ch13MeltT>=0?ch13MeltT/3:0;
-    if(melt<1) ch13Plate(time,melt);
+    if(melt<1||(typeof plateFor==='function'&&plateFor(currentMap))) ch13Plate(time,melt);
   }
   for(const n of currentMap.npcs) { if(n.hidden) continue; if(n.hush) ch13Hush(n,time); if(n.armor) ch13Armor(n,time); }
 };
