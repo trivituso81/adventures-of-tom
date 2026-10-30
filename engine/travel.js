@@ -58,8 +58,8 @@ function setGirlsAway(away) {
       const fi=followers.findIndex(f=>f.member===m); if(fi>=0) followers.splice(fi,1);
     }
     if(!home.npcs.some(n=>n.girlAtHome)) home.npcs.push(
-      makeGirlAtHome(grace,3,5,['Tata is in Los Angeles. I\'m in charge now.','Mom says we can call him after dinner. I have a list of questions. It\'s two pages.','When he gets back I\'m doing my whole floor routine for him. Twice.']),
-      makeGirlAtHome(rose,4,7,['I\'m drawing Tata a palm tree. It has a face.','Is Tata back yet? Is it now? Is it NOW?','When Tata comes home I\'m going to jump on him SO hard.'])
+      makeGirlAtHome(grace,11,8,['Tata is in Los Angeles. I\'m in charge now.','Mom says we can call him after dinner. I have a list of questions. It\'s two pages.','When he gets back I\'m doing my whole floor routine for him. Twice.']),
+      makeGirlAtHome(rose,6,8,['I\'m drawing Tata a palm tree. It has a face.','Is Tata back yet? Is it now? Is it NOW?','When Tata comes home I\'m going to jump on him SO hard.'])
     );
   } else {
     for(let i=home.npcs.length-1;i>=0;i--) if(home.npcs[i].girlAtHome) home.npcs.splice(i,1);

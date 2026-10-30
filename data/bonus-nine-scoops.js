@@ -844,9 +844,9 @@ SCENES.nsOldFreezer=[
 SCENES.nsBanner=[
   {flag:'ns-banner'},
   {hold:['Amy','Justin']},
-  {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
-  {walk:'Amy',to:[[7,6],[6,6]].filter(Boolean),speed:.25}, {face:'Amy',dir:'down'},
+  {walk:'tom',to:[[8,8]],speed:.25}, {face:'tom',dir:'right'},
+  {place:'grace',at:[7,8],dir:'right'}, {place:'rose',at:[6,8],dir:'right'},
+  {walk:'Amy',to:[[13,8],[10,8]],speed:.25}, {face:'Amy',dir:'left'},
   {talk:'Amy',lines:['There they are. No scoops. One defrosted child. Tom, status report. Ten words or less.']},
   {talk:'Tom',lines:['Freezer. Sad. Never had a birthday. Stole everything. We\'re going back.']},
   {talk:'Amy',lines:['Nine words. Good.','Okay. Listen to me. I\'ve run thirty marathons and taught four hundred kids. You don\'t out-freeze a freezer.','You bring the party TO him. Warm things. Loud things. The works.']},
@@ -862,7 +862,7 @@ SCENES.nsBanner=[
   {talk:'Grace',lines:['And Moo-rielle.']},
   {talk:'Amy',lines:['And Moo-rielle. Go. Love you. Don\'t tip your sister.']},
   {hearts:'Amy'},
-  {walk:'Amy',to:[[7,6]],speed:.25},
+  {walk:'Amy',to:[[13,8]],speed:.25},
   {call:()=>setFlag('ns-ready')},
   {save:true},
   {toast:'Goal: Grump Hollow, the pond. Round two. Bring the warm things.',time:5}
@@ -951,12 +951,12 @@ SCENES.nsAfterBoss=[
 // The party at Amy's house: the whole family, Grace's friends, Mr. Pistachio and one freezer. BONUS CHAPTER COMPLETE.
 SCENES.nsEnd=()=>[
   {flag:'ns-done',value:'pending'},
-  {place:'Amy',at:[7,6],dir:'down'}, {place:'Justin',at:[5,6],dir:'down'},
-  {call:()=>{ const d=storySpawn({name:'Deedee',at:[4,2],look:'pip',dir:'down'}); d.sheet='deedee'; const b=storySpawn({name:'Boppy',at:[9,2],look:'gus',dir:'down'}); b.sheet='boppy';
-    storySpawn({name:'Pip',at:[3,2],look:'pip',dir:'down'}); storySpawn({name:'Moss',at:[5,2],look:'moss',dir:'down'}); storySpawn({name:'Dot',at:[7,2],look:'dot',dir:'down'});
-    const p=storySpawn({name:'Mr. Pistachio',at:[8,2],look:'bun',dir:'down'}); p.sheet=null; }},
-  {walk:'tom',to:[[6,7]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[7,7],dir:'up'}, {place:'rose',at:[5,7],dir:'up'},
+  {place:'Amy',at:[10,8],dir:'left'}, {place:'Justin',at:[11,8],dir:'left'},
+  {call:()=>{ const d=storySpawn({name:'Deedee',at:[10,5],look:'pip',dir:'down'}); d.sheet='deedee'; const b=storySpawn({name:'Boppy',at:[11,5],look:'gus',dir:'down'}); b.sheet='boppy';
+    storySpawn({name:'Pip',at:[12,5],look:'pip',dir:'down'}); storySpawn({name:'Moss',at:[13,5],look:'moss',dir:'down'}); storySpawn({name:'Dot',at:[14,5],look:'dot',dir:'down'});
+    const p=storySpawn({name:'Mr. Pistachio',at:[14,6],look:'bun',dir:'down'}); p.sheet=null; }},
+  {walk:'tom',to:[[8,8]],speed:.25}, {face:'tom',dir:'right'},
+  {place:'grace',at:[7,8],dir:'right'}, {place:'rose',at:[6,8],dir:'right'},
   {hearts:'Amy'},
   {talk:'Amy',lines:['You got them? All nine? Tom, I could KISS you. I won\'t. I\'m sweaty.']},
   {talk:'Justin',lines:['Hold this. No, the other end. It\'s the OTHER banner. Don\'t touch the copper.']},
@@ -966,8 +966,8 @@ SCENES.nsEnd=()=>[
   {talk:'Moss',lines:['I brought a tree. A small one. It said it wanted to come.']},
   {talk:'Dot',lines:['Twelve people, one duck, one cow. I counted twice. The freezer counts as a person.']},
   {sfx:'doorIn'},
-  spawnAt('Brain Freeze','brainfreeze',[6,9],{dir:'up',mscale:1.2,carry:'nsphoto'}),
-  {walk:'Brain Freeze',to:[[6,8]],speed:.35,onStep:()=>sfx.thud()},
+  spawnAt('Brain Freeze','brainfreeze',[9,11],{dir:'up',mscale:1.2,carry:'nsphoto'}),
+  {walk:'Brain Freeze',to:[[9,9]],speed:.35,onStep:()=>sfx.thud()},
   {talk:'Brain Freeze',lines:['I brought ice. Where do you want the ice.']},
   {talk:'Boppy',lines:['Nobody told me there\'d be a FREEZER at the table.']},
   {talk:'Deedee',lines:['He\'s a guest, Boppy. Sit. He can sit next to you. You could use the cold on that knee.']},

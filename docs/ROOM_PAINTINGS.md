@@ -45,5 +45,6 @@ Rooms whose art has not arrived keep their current plates and must keep working.
 |---|---|---|
 | rooms1.zip | bakery, library, greenhouse, post, tea | 2026-10-30 |
 | rooms2.zip | observatory (Moon Club), shop, taxi, grands | 2026-10-30 |
+| amyshouse.zip | amyhouse (ground floor; second-floor image not wired) | 2026-10-30 |
 
 Test with `python3 tools/rooms_test.py <ids>` (shots in `tools/shots/room-*`). Template for a 16 x 16 room: copy a spec from `data/maps-le.js` (bakery), set `door:[8,15],door2:[7,15],doors:[[6,15],[9,15]]` when the painting has the usual gate gap, and draw `plateMask` from a grid overlay of the painting (tile = image width / 16).

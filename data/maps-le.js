@@ -1379,27 +1379,34 @@ const LE_ROOMS=[
       ['desk',12,6,4,4,'Lost and found','One mitten, one umbrella, and a library book that\'s eleven years overdue.'],
       ['pot',0,7,3,5,'Waiting room plant','It\'s been waiting for a cab since spring. It\'s in no hurry.'],
       ['pot',13,10,3,2,'Umbrella stand','Umbrellas for a town where it rains twice a year. Sal keeps them anyway.']]},
-  {id:'amyhouse',w:12,h:10,
+  {id:'amyhouse',w:16,h:16,door:[9,15],door2:[8,15],
     style:{floor:'#e2cfc0',alt:'#ead9cb',wall:'#c99aa4',trim:'#f0dde0',pattern:'tile',rug:'#d2a4b0'},
-    rug:[6,5,4,3],
-    // Painted plate (art/amyhouse.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // Girls' beds along the back wall (a rug strip runs in front of them), plaid sofa and coffee table left, dining table and kitchen island right,
-    // toy chest and step front left. One aisle (x6) joins the back strip to the front.
+    rug:[10,5,4,3],
+    // Square painted plate (art/amyhouse.webp, engine/plate.js, 16 x 16 tiles): the whole ground floor cut away from above, with the garden path
+    // (x8 to x9, y13 to y15) up to the blue front door (9,12). The mask is the walk map: '#' blocks, '.' walks.
+    // One hall (x9) from the door to the cross hall (row 8). West along row 8 to the stair hall (x3) for the study and bath; the corridor (x7) leads to the
+    // bedroom. East side: x10 up to the kitchen row (y5), the dining table in the middle. Living room and reading nook are painted dressing only.
     plateMask:[
-      '############',
-      '############',
-      '###.......##',
-      '######.#####',
-      '######.#####',
-      '####....####',
-      '#####...####',
-      '#####...####',
-      '#........###',
-      '############'],
+      '################',
+      '################',
+      '################',
+      '#######.######.#',
+      '##..##...#####.#',
+      '###.###..#.....#',
+      '###.###.##.###.#',
+      '#...###.##.###.#',
+      '###............#',
+      '#########.##..##',
+      '#########.######',
+      '#########.######',
+      '#########.######',
+      '#########.######',
+      '########..######',
+      '################'],
     npcs:[
       // Justin: Amy's husband, Grace and Rose's dad. Electrician, always mid-project. Away at work during chapter 5's
       // conferences (he texts Amy at the end); data/scenes.js AWAY rule.
-      {name:'Justin',x:5,y:5,look:'bean',sheet:'justin',kin:true,trace:'justin-hello',duration:0.7,
+      {name:'Justin',x:8,y:4,look:'bean',sheet:'justin',kin:true,trace:'justin-hello',duration:0.7,
         away:[{chapter:5,notFlag:'ch5-done'}],lines:[
         'Tom. Hey. Hold this. No, the other end. Don\'t touch the copper.',
         'Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.',
@@ -1413,7 +1420,7 @@ const LE_ROOMS=[
           'Amy says I never sit down. I sat down once. It was a playoff game. We lost.',
           'Watch your step, Tom. That board is loose. I know. It\'s on the list.',
           'Those two girls are the best thing I ever built. And I built that deck.']},
-      {name:'Amy',x:7,y:6,look:'dot',sheet:'amy',mom:true,duration:0.6,lines:[
+      {name:'Amy',x:13,y:9,look:'dot',sheet:'amy',mom:true,duration:0.6,lines:[
         'Grace! Rose! Did you stretch before all this adventuring?',
         'Tom, I ran eight miles before you woke up. Just stating facts.',
         'Justin is rewiring the hallway. Again. He says hi from the ladder.'],
@@ -1430,11 +1437,10 @@ const LE_ROOMS=[
           'Rose. Big feelings are allowed. Throwing Lamby isn\'t. Come here.',
           'Grace, you don\'t have to be the best at it. You have to be the one who keeps going. Okay, now be the best at it.']}],
     objects:[
-      ['bed',2,1,3,1,"Grace's bed",'Books under the pillow. A flashlight. A plan.'],
-      ['bed',8,1,2,1,"Rose's bed",'Seventeen stuffed animals, arranged by importance.'],
-      ['photo',5,1,2,1,'Family photo','Amy, Justin, Grace and Rose at a 5K. Amy won. Justin carried both girls across the finish anyway.'],
-      ['toybox',1,6,3,2,'Toy box','Mostly rocks. Rose has a system.'],
-      ['counter',8,5,4,3,'Kitchen counter','A stack of graded spelling tests, a race bib for Sunday, and three running medals used as coasters.',{variant:'letters'}]]},
+      ['photo',4,5,2,1,'Family photos','Amy, Justin, Grace and Rose at a 5K. Amy won. Justin carried both girls across the finish anyway.'],
+      ['counter',2,3,2,1,"Amy's desk",'A stack of graded spelling tests, a race bib for Sunday, and three running medals used as coasters.',{variant:'letters'}],
+      ['bed',5,3,2,1,"Amy and Justin's bed",'Neatly made. A duffel bag packed for a race. Justin\'s side has a level on it.'],
+      ['counter',10,4,5,1,'Kitchen island','A bowl of fruit, a loaf of bread, and a carton of oat milk. Amy keeps it exactly where she can see it from the track.']]},
   {id:'grands',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#cbb089',alt:'#d7be98',wall:'#9a8f78',trim:'#e6dcc3',pattern:'wood',rug:'#9c6e62'},
     rug:[3,5,6,3],
