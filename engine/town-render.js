@@ -509,6 +509,23 @@ function drawNpc(a) {
     rect(cx-11,head-5,22,8,OUT); rect(cx-10,head-4,20,6,c.hat); rect(cx-7,head-8,14,5,c.hat); rect(cx-7,head-9,14,1,OUT); rect(cx-10,head-4,20,1,shadeHex(c.hat,20)); rect(cx-7,head-6,14,1,shadeHex(c.hat,-20));
   }
 }
+// Where an overworld person's head is, in map pixels: {cx, top, w} = centre x, the top of the painted figure (first non-empty
+// sprite row, same scale and set as drawActor picks) and its drawn width. Used by effects that sit over a head (the ch2 trance).
+function actorHeadAnchor(a) {
+  const p=position(a),ak=actorK(),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*ak);
+  let set=null;
+  if(a.sheet) set=OW[a.sheet];
+  else {
+    const tp=typeof TOWN_PAINTED!=='undefined'?TOWN_PAINTED[a.name]:null,v=VILLAGERS[a.paletteName];
+    if(tp&&tp.look===a.paletteName&&OW[tp.set]) set=OW[tp.set];
+    else if(!v&&OW[a.paletteName]) set=OW[a.paletteName];
+    else if(v) set=villagerSet(v);
+  }
+  if(!set) return {cx,top:base-32,w:20};   // the layered pixel figure (drawNpc) is 32 px tall
+  const k=ak*(set.k||1),frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]),fr=(frames||set.down)[0];
+  let row=0; while(row<fr.length-1&&typeof fr[row]==='string'&&!/[^. ]/.test(fr[row])) row++;
+  return {cx,top:Math.round(base-fr.length*k+row*k),w:fr[0].length*k};
+}
 function shadeHex(hex,d) {
   const n=parseInt(hex.slice(1),16);
   const r=clamp(((n>>16)&255)+d,0,255),g=clamp(((n>>8)&255)+d,0,255),b=clamp((n&255)+d,0,255);

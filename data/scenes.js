@@ -522,13 +522,39 @@ const STORY_MAPFX=[
       gfx.globalAlpha=Math.min(.7,a*1.8); ellipse(x,y,26+(n%16),10+(n%7),'#c49ae0');
     }
     gfx.globalAlpha=1;
-    // Trance swirls over the neighbors' heads.
-    for(const n of M.npcs) if(n.trance&&!n.hidden) {
-      const p=position(n),cx=Math.round((p.x+.5)*T),cy=Math.round(p.y*T)-10;
-      for(let k=0;k<8;k++) { const ang=time*3+k*.8,r=3+k*1.2; rect(Math.round(cx+Math.cos(ang)*r)-1,Math.round(cy+Math.sin(ang)*r*.5)-1,3,3,k%2?'#e9c9ff':'#9a5ac8'); }
-    }
+    // Trance stars circling the neighbors' heads (drawTranceStars, below).
+    for(const n of M.npcs) if(n.trance&&!n.hidden) drawTranceStars(n,time);
   }
 ];
+// Three smooth lavender stars with the game's dark outline circle a flat ring above the head, over a soft purple glow, with
+// a quick twinkle: the same painted look as the knocked-out stars (koStar, engine/battle-draw.js), tinted to the smog.
+// The ring sits on the real top of the painted figure (actorHeadAnchor, engine/town-render.js), so it clears the head at any size.
+function tranceStar(x,y,r,rot,a) {
+  gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.globalAlpha=a;
+  gfx.beginPath(); for(let k=0;k<10;k++) { const ang=-Math.PI/2+k*Math.PI/5,q=k%2?r*.48:r; gfx.lineTo(Math.cos(ang)*q,Math.sin(ang)*q); } gfx.closePath();
+  gfx.lineJoin='round'; gfx.lineWidth=Math.max(1.4,r*.34); gfx.strokeStyle=OUT; gfx.stroke();
+  const g=gfx.createLinearGradient(0,-r,0,r); g.addColorStop(0,'#fbf0ff'); g.addColorStop(.5,'#d3a8f5'); g.addColorStop(1,'#9a5ac8');
+  gfx.fillStyle=g; gfx.fill();
+  gfx.beginPath(); gfx.arc(-r*.22,-r*.2,Math.max(.7,r*.14),0,Math.PI*2); gfx.fillStyle='#ffffff'; gfx.fill();
+  gfx.restore();
+}
+function drawTranceStars(n,time) {
+  const H=actorHeadAnchor(n),k=Math.max(1,actorK()),rx=Math.max(13,H.w*.36),cy=H.top-9*k,spin=time*2.6+hash(n.x|0,n.y|0)%7;
+  gfx.save();
+  const glow=gfx.createRadialGradient(H.cx,cy,2,H.cx,cy,rx+6); glow.addColorStop(0,'rgba(214,170,255,.38)'); glow.addColorStop(1,'rgba(214,170,255,0)');
+  gfx.fillStyle=glow; gfx.beginPath(); gfx.ellipse(H.cx,cy,rx+6,10,0,0,Math.PI*2); gfx.fill();
+  gfx.restore();
+  const stars=[0,1,2].map(i=>{ const a=spin+i*Math.PI*2/3; return {i,x:H.cx+Math.cos(a)*rx,y:cy+Math.sin(a)*rx*.3,front:Math.sin(a)}; }).sort((p,q)=>p.front-q.front);
+  for(const s of stars) {
+    const front=s.front>0,r=(front?6.4:4.5)*Math.min(1.5,k*.9+.1),tw=(Math.sin(time*8+s.i*2)+1)/2;
+    tranceStar(s.x,s.y,r,time*1.5+s.i*1.7,front?1:.65);
+    if(front&&tw>.8) {
+      gfx.save(); gfx.globalAlpha=(tw-.8)*5; gfx.fillStyle='#ffffff';
+      const sx=s.x+r+2,sy=s.y-r*.7; gfx.fillRect(sx-.5,sy-2.5,1,5); gfx.fillRect(sx-2.5,sy-.5,5,1); gfx.restore();
+    }
+  }
+  gfx.globalAlpha=1;
+}
 
 // Tips for the three tutorial fights (engine/story.js b2TutTip). ▲ Skills (basic move first), ▶ signature move, ◀ Tombo, ▼ Bag, B Inspect.
 const TUTORIALS={

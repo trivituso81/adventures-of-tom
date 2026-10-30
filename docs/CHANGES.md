@@ -1,3 +1,9 @@
+## 2026-10-30: Chapter 2 smog trance: pixel squares replaced with drawn stars above the head
+
+- Tom: in chapter 2 the stars over people's heads were still pixels and not over the head. These are not the knocked-out stars (those were fixed on 10-29); they are the smog trance on the neighbors (Mr. Washington, Marisol, Larry, Miss Odette, Dona Carmen). The old effect was eight 3 by 3 pixel squares at a fixed 10 px above the feet, which landed on the face of the taller painted figures.
+- Now: three smooth lavender stars with the game's dark outline, a white glint, a slow spin, a soft purple glow under the ring and an occasional twinkle (`drawTranceStars` in `data/scenes.js`), in the same style as the knocked-out stars but tinted to the purple smog. The ring sits on the real top of each figure via the new `actorHeadAnchor(a)` in `engine/town-render.js` (same sprite set and scale as `drawActor`), so it clears the head at any size, including the hat on Marisol.
+- Tags: `town-render.js?v=trance1`, `scenes.js?v=trance1`. Checked: Jefferson Park with the smog on, portrait and landscape, close-ups; smoke and camera_clamp 0 fails. Not yet seen on Tom's phone. Other maps' trance NPCs use the same code path (Odette and Carmen not shot individually).
+
 ## 2026-10-30: Painted props wired into all Tombos, Director's Cuts and Family Finishes
 
 - 46 of the 48 Tombo animations in `B2_TOMBO_ANIM` now draw the painted props from `art/props/tombo/` (plus reused character props such as Lamby, the sourdough boule, the cayenne pepper and the longboard). Each hook falls back to the drawn version until the image loads. Visuals only: no damage, timing or story changes. `amy1`, `nara2_dc` and `nara3` have no props mapped, so they are unchanged.
