@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 10 of 10 (source and cut)
+- Saved `tombo-sheet10-of-10.png` (items 126 to 138); all 13 match (dining chair, GUEST card, kids cup, pottery wheel, clay pot, bed, pillow, window, tray, pancakes, syrup, street lamp, eight-seat table) and are cut. 110 of 138 Tombo props painted. Still outstanding: sheet 6 (items 71 to 84) and 14 redo props. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 9 of 10 (source and cut)
 - Saved `tombo-sheet09-of-10.png` (items 113 to 125). Cells 1 to 11 match (blanket fort castle, NO GROWN-UPS sign, popcorn bag, wall of clocks, chains, yellow tape, hourglass, film reel, picture frame, red rose, wedding ring) and are cut. Nurse Cap and Red Striped Family Table came back as a handkerchief and an envelope: redo. 97 of 138 painted. Not wired yet.
 
