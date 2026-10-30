@@ -23,3 +23,4 @@ Notes for the future bake: cells carry a white number in the top-left corner (cr
 | tombo-sheet02-of-10.png | Tombo props 15 to 28 (Gold Scepter Stick ... Mustard Bottle) | 14 of 14 match |
 | tombo-sheet03-of-10.png | Tombo props 29 to 42 (Whole Lemon ... Blue Cushion) | 14 of 14 match |
 | tombo-sheet04-of-10.png | Tombo props 43 to 56 (Pink Slipper ... Italy Wall Map) | Cells 1 to 13 match. Cell 14 is a pencil: redo Italy Wall Map. Row gaps set by hand in ROWCUTS |
+| tombo-sheet05-of-10.png | Tombo props 57 to 70 (Espresso Cup ... Sourdough Crust Bait) | 14 of 14 match. Row 3 columns set by hand in COLCUTS (string lights are wide, plate and net touch) |

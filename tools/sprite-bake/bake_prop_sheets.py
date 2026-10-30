@@ -44,12 +44,14 @@ SHEETS = [
     ('tombo-sheet02-of-10.png', 'tombo', rng(15, 28)),
     ('tombo-sheet03-of-10.png', 'tombo', rng(29, 42)),
     ('tombo-sheet04-of-10.png', 'tombo', rng(43, 55)),
+    ('tombo-sheet05-of-10.png', 'tombo', rng(57, 70)),
     # redo sheet: cell -> (character, item)
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
-TOTAL = {'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+TOTAL = {'tombo-sheet05-of-10.png': 14, 'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
 ROWCUTS = {'tombo-sheet04-of-10.png': [325, 635, 935]}   # sheets where the row gaps are not the emptiest places (a hanging cord, tall props)
+COLCUTS = {'tombo-sheet05-of-10.png': {2: [328, 641, 940]}}   # hand-set column gaps for one row (row index from 0) where props touch or one prop spans two columns
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
 
 
@@ -71,7 +73,7 @@ def valleys(profile, k, min_gap):
     return sorted(cuts)
 
 
-def cut_sheet(sheet, count, cols, rows, rowcuts=None):
+def cut_sheet(sheet, count, cols, rows, rowcuts=None, colcuts=None):
     """Return `count` trimmed RGBA crops in reading order. The AI sheets are not an exact grid, so rows and columns are
     found from the ink: corner numbers are dropped, then each row is cut at the emptiest places of the row profile and each
     row's columns at the emptiest places of its column profile. Props that touch a neighbour are split at the valley."""
@@ -98,7 +100,7 @@ def cut_sheet(sheet, count, cols, rows, rowcuts=None):
     for r in range(nrows):
         y0, y1 = ycuts[r], ycuts[r + 1]
         k = min(cols, count - r * cols)
-        xcuts = [0] + valleys(ink[y0:y1].sum(axis=0), k - 1, W / cols * .5) + [W]
+        xcuts = [0] + ((colcuts or {}).get(r) or valleys(ink[y0:y1].sum(axis=0), k - 1, W / cols * .5)) + [W]
         for c in range(k):
             if xcuts[c + 1] - xcuts[c] < 20 or y1 - y0 < 20:
                 notes.append(f'degenerate cell row {r} col {c}')
@@ -153,7 +155,7 @@ def main():
             continue
         sheet = Image.open(os.path.join(SRC, fn)).convert('RGBA')
         cols, rows = GRID[sheet.size]
-        crops, notes = cut_sheet(sheet, TOTAL.get(fn, max(c for c, _ in cells)), cols, rows, ROWCUTS.get(fn))
+        crops, notes = cut_sheet(sheet, TOTAL.get(fn, max(c for c, _ in cells)), cols, rows, ROWCUTS.get(fn), COLCUTS.get(fn))
         for nn in notes:
             report.append(f'{fn}: {nn}')
         for cell, item in cells:
