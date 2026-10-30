@@ -974,3 +974,6 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 - Chapter 5 ending moved to the aisle behind the minivan: Tom (6,12), Amy (5,12), Grace (7,12), Rose (6,13); the long coat appears at (7,16). Night glow moved to the doors.
 - Route into the parking aisle is one tile wide at (9,10), (9,11), (8,11), (8,12), or around the island.
 - Test: tools/schoolyard_test.py (0 fails). Smoke, ch5_school_test, bg_test 0 fails.
+
+## 2026-10-29: Battle Voice Baker
+- New tools/battle-baker/ (build.py, tpl_head.html, tpl_body.js, handscripts.txt, dump.js, merge.js, test.py, README.md). One page, tab per character, preview current clip, make new take, save only ticked lines. No game files changed.

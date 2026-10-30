@@ -1,0 +1,252 @@
+# Hand-written battle directions recovered from the Project docs (voice-baker-scripts.json, -tombo, -boppy, -familylab, -deedee).
+# One per line: character ::: script. The build matches each to the current game line (contractions and CAPS are adapted).
+# Only lines that have no script saved in data/voice-clips.js need to be here.
+tom ::: [firm, exasperated dog owner] Nara, NO jumping!
+tom ::: [warm, sincere, a little dry] Honestly? Great take. Really. [soft chuckle] Chef's kiss.
+tom ::: [quietly moved, sincere] Great take. I got chills. [beat] Real ones.
+tom ::: [dry, approving, matter-of-fact] Nice handwriting. Honestly. Very readable.
+tom ::: [mock-serious, impressed] Those are the neatest cue cards I have ever seen.
+tom ::: [warm, a little dry] Honestly? Lovely handwriting. Very legible.
+tom ::: [sincere, gentle] That is beautiful penmanship. [pause] I mean it.
+tom ::: [proud, casual] Here. Sourdough. I made it. [conspiratorial] You can have the heel. The heel is the best part.
+tom ::: [warm, offering] Have a slice. Seriously. Bread is for sharing.
+tom ::: [reading aloud, dramatic storyteller] Chapter one. It was a dark and stormy night. [normal, approving] Good start. Classic.
+tom ::: [reading aloud, building suspense] And then the detective said... [gasps softly] ooh. I did not see that coming.
+tom ::: [calm, precise, like a baking instructor] One sourdough boule. Score it, slide it in. Twenty minutes. [firm] Do not open the door.
+tom ::: [proud, warm] Here. Bready Mercury's best. You are the only oven on the block hot enough for him.
+tom ::: [shy, charming] May I have this dance? [sheepish laugh] I should warn you. I mostly sway.
+tom ::: [warm, playful] One song. I lead. You spin. [smiling] You are very good at spinning.
+tom ::: [brisk, dry, gate-agent tone] Here. Group zero. Pass out, liquids in a bag, shoes back on.
+tom ::: [dry, polite] Present. Window seat, please. [deadpan] I will not be reclining.
+tom ::: [relieved exhale, cheerful] Oof, I'm finally here! At least the six hours went by fast on Delta One!
+tom ::: [delighted, then mock-serious announcer] Hello, Rose! Please keep your arms and legs inside the uncle at all times.
+tom ::: [sharp yelp] Ow!
+tom ::: [winded, hit in the gut] OOF!
+tom ::: [indignant] Hey now!
+tom ::: [polite but forceful shout] Excuse me!
+tom ::: [brisk, rolling up sleeves] Right, then!
+tom ::: [button-mashing, fast, mock-serious] A, A, A, A. [deadpan] Very technical!
+tom ::: [rapid, excited] Mash, mash, mash! That is the strategy!
+tom ::: [teacher voice, rapid-fire] Flashcards! Pop quiz! No peeking!
+tom ::: [shouting, hot kitchen warning] Dutch oven! Five hundred degrees! Mind the lid!
+tom ::: [smug, shouting] Delta One! Lie flat! You are in basic economy!
+tom ::: [calm, firm, protective] No touching, please!
+tom ::: [calm, deadpan, unbothered] One button. [beat] Entirely sufficient.
+tom ::: [offended bread snob, emphatic] It fermented for forty-eight hours! [indignant] Stop chewing and admire the crust!
+tom ::: [dry, honest confession] Do I need the Max chip? [beat] No. [sheepish] Did I buy it anyway? Yes.
+tom ::: [smug, superior, settling in] Wait your turn, Boarding Group five. [luxurious sigh] I'm lying flat now.
+tom ::: [drawn out, condescending] Ummm... [smug] actually, you're wrong.
+tom ::: [rapid, excited gamer chant] Up, up, down, down, left, right, left, right, B, A!
+tom ::: [deadpan, sincere] A proofing drawer. [beat] For emotional support.
+tom ::: [soothing flight attendant voice, then sleepy] Thank you for being a Million Miler. [yawns softly] Goodnight.
+tom ::: [dry, deadpan, long-suffering uncle, giving in with a sigh] Fine. [beat, firm] One squishy. [flat] Just one.
+tom ::: [pilot voice, calm, then excited] Tower, we are cleared for takeoff. [shouting] Hold on tight!
+tom ::: [dry, conspiratorial, gossiping] I saw. [beat] I have notes.
+tom ::: [calm, patient dog trainer] Sit. [warm] Good. [expectant] Paw. [beat, wincing a little] ...Gentle paw, Nara.
+tom ::: [straining, dry, deadpan] It is a very big fish, Dad.
+tom ::: [flat, deadpan, long-suffering brother] You have called it since we were kids.
+tom ::: [dry, deadpan subway conductor announcement] Express service. [emphatic, official] Stand clear of the closing doors!
+tom ::: [straining in a tug of war, calm and polite, losing badly] I am letting you win. [beat, unconvincing] This is strategy.
+tom ::: [straining, dry, deadpan, losing to a vegetable] The rhubarb is fighting back.
+tom ::: [overly casual, innocent, a little too smooth, wheeling a suitcase] Nothing to see here. [whistling-casual] Just my carry-on.
+tom ::: [dry, explaining to the audience, slightly embarrassed] Yama-Mott. It's Tom backwards. We were six.
+tom ::: [hyping him up, big and emphatic] Lock 'em up, Dep! Nobody gets past The Dep!
+tom ::: [warm, proud, calm gamer] Best co-op partner in the world. [determined, a small smile] Let's finish the level.
+tom ::: [calm, warm, quietly proud, at the head of a big family table] All the seats are full. [gentle, firm] Nobody gets left behind.
+tom ::: [proud son, a little bashful, holding out a fresh loaf] I made it myself, Mom. [quietly proud, deadpan] Forty-eight hours.
+tom ::: [dry, resigned, already knows the answer] Dad, I planted them upside down, didn't I.
+tom ::: [calm, warm, quietly certain, a little moved] Three thousand miles is nothing. [soft, close] I'm right here.
+tom ::: [relieved, tender, almost a whisper, hugging his dog] There you are. [soft, warm] I've got you.
+tom ::: [dry, deadpan, polite, a tiny smile] Smashing it. [beat] Respectfully.
+tom ::: [lying on the grass, calm, very sure of himself, dry] That cloud is clearly a sourdough loaf.
+tom ::: [dry, self-important, through a megaphone] From the top. More feeling, Amy. I'm the director.
+tom ::: [flustered, rushing, dish towel flying, deadpan] I'm drying at maximum speed.
+tom ::: [dry, deadpan, whispering back, pointing] Dad, they're monsters. [patient, flat] They're right behind those reeds.
+tom ::: [dry, deadpan, quietly satisfied, like a status report] Visibility restored. [beat, pleased] Spotless.
+tom ::: [calm, patient dog trainer, crouched by a puzzle toy] Find it. [encouraging] Use the nose. [beat, wincing, dry] No, not the paw.
+tom ::: [lying flat on a gym mat, dry, deadpan, offended] I demand a recount.
+tom ::: [face down on a gym mat, muffled and pained, deadpan] OW!
+tom ::: [dry, deadpan royal bodyguard, sunglasses on, talking into an earpiece, calm and firm] No touching the princess, please.
+tom ::: [dry, deadpan, mildly offended, still holding up his hand] Mine was a very modern bunny.
+tom ::: [calm, gentle, reassuring uncle at bedtime, holding a toy up like a night-light] Lamby is very brave. [soft, a small smile] Lamby is glowing.
+tom ::: [whining, aggrieved, up a ladder] But I've been on this ladder for an hour!
+tom ::: [dry, impressed despite himself] Mom, it's a three-ring binder. With tabs.
+tom ::: [calm, dry, pressing an elevator button while his sister sprints for the stairs] Elevator. [matter-of-fact] I'm a gamer. [beat, smug] It's a shortcut.
+tom ::: [sweating buckets, voice strained and dry, deadpan, mouth on fire] I can no longer feel my face.
+tom ::: [calm, dry, quietly pleased with himself, pronounced keen-TSOO-gee] Kintsugi. [matter-of-fact] I know the word. [beat, deadpan, proud] I'm very proud.
+tom ::: [conspiratorial whisper at the dinner table, sneaking food to a dog under it, dry] Shh. [softer, sly] Don't tell your mom.
+tom ::: [jogging slowly, out of breath, dry, deadpan] Running isn't in my skincare routine.
+tom ::: [quick, firm] Nope! No touching!
+tom ::: [urgent, reassuring] I've got you!
+tom ::: [strained, wincing] Not great. [more worried] Not great!
+tom ::: [exhausted, fading] I... need a minute.
+tom ::: [pleased, upbeat] Well! Good job, team!
+tom ::: [warm, proud] Very proud of you two!
+tom ::: [calm, warm, quietly proud, at the head of a long family table] One more chair. [gentle, certain] There's always one more chair.
+rose ::: [squealing, calling out] Tah Tah!
+rose ::: [bouncing, demanding] Tah Tah, up! Up up up!
+rose ::: [giggling, proud] I am the tallest! Giddyup, Tah Tah!
+rose ::: [impatient, excited] Come on, Tah Tah! Let's go!
+rose ::: [whiny] Owie!
+rose ::: [pouting] No fair!
+rose ::: [scared, calling] Tah Tah, help!
+rose ::: [giggling, playful] Boop!
+rose ::: [blowing a raspberry, silly] Bleh!
+rose ::: [giggling, teasing] You are a silly slime!
+rose ::: [small, teary] My eye hurts.
+rose ::: [tired, whiny] Tah Tah, carry me.
+rose ::: [sad, sleepy] I want to go home.
+rose ::: [squealing] Yay!
+rose ::: [cheering] Yay, Tah Tah!
+rose ::: [six-year-old popping up behind someone, shouting as loud as she can] BOOOO!! [giggling, thrilled with herself] Did I scare you? I did!
+rose ::: [proud six-year-old at the craft table, holding up a drawing] I drew you a unicorn on a rainbow! [sing-song, cutting with safety scissors] Snip snip!
+rose ::: [silly six-year-old wiggling her fingers, bursting with giggles] Tickle storm! [bossy, bouncing] Everybody laugh! [laughing hard] HA HA HA!
+rose ::: [excited six-year-old throwing her stuffed lambs, shouting] Lamby boomerang! Backup Lamby too! [calling after them, eager] Come back, both of you!
+rose ::: [giggling, bouncing] Piggyback pounce! Giddyup!
+rose ::: [cozy six-year-old with a picture book, soft storyteller voice] Bedtime story! Once upon a time, there was a Lamby. [dramatic whisper, then delighted] Then came Backup Lamby!
+rose ::: [six-year-old yelling for her babysitter across the yard, excited] Ms. Cathy! [shouting, gleeful] Snack attack! Bring the cookies!
+rose ::: [secretive, bossy] Pillow fort! You need the password to get in!
+rose ::: [proud six-year-old hosting a pretend tea party, very proper and important] Tea party! [sweet, bossy] Lamby made the tea and Backup Lamby serves it!
+rose ::: [shouting, anime robot pilot] Tah Tah Mecha, combine! Fire the Glitter Lasers!
+rose ::: [spinning, dizzy, delighted] Twirl tornado! Wheeeeee!
+rose ::: [excited, throwing] Lamby launch! Go get him, Lamby!
+rose ::: [sweet, proud] Dress-up day! You get a bow!
+rose ::: [spooky little-kid voice, then giggles] Monster under the bed! Lights out!
+rose ::: [wild excitement] Lamby stampede! A hundred Lambies!
+rose ::: [bouncing, excited] Tah Tah, up! Put your wings out, we're flying!
+rose ::: [six-year-old, whispery and amazed, then excited] I heard your video game song in the dark, Tah Tah!
+rose ::: [delighted six-year-old, pointing at the sky, correcting him] No! [excited, bubbly] It's Lamby!
+rose ::: [six-year-old in a princess costume, very grand and bossy, waving a scepter] Make way [shouting, delighted] for the princess!
+rose ::: [bossy six-year-old guarding her blanket fort, very serious] No grown-ups in the fort! [beat, sweet and giggly] Except Tah Tah!
+rose ::: [six-year-old, earnest and bursting with love, tugging her mom's hand] We can carry you too! [excited, pulling] Run with us, Mommy!
+rose ::: [sweet, chatty] I like your red! Red is my second favorite!
+rose ::: [eager, rapid] Me me me! Can I push the button? The ding button?
+rose ::: [excited six-year-old, arms wide, bouncing] Everybody get in the heart!
+amy ::: [warm, easy smile, teacher at ease] Need a fourth? [dry, playful] I'm fast, I'm patient, [bright] and I brought snacks.
+amy ::: [coach voice, mom checking in] Grace! Rose! Did you stretch?
+amy ::: [smug, competitive] Tom, I ran eight miles before you woke up.
+amy ::: [challenging, then deadpan] Race you to the fountain. [pause] No? Then I win.
+amy ::: [running, breathless shout] Coming through! Hydrate later!
+amy ::: [competitive shout] Heads up! Mom has a record to set!
+amy ::: [counting down, steady, coaching] Five burpees. Four. Three. [slow, calming breath] Breathe. [warm, sure] You can do hard things.
+amy ::: [focused, menacing] I see the finish line. [pause] It's you.
+amy ::: [gentle, kind teacher] I circled what you did well. [beat, light and unbothered] Now the rest.
+amy ::: [coach shout, rhythmic] Hill repeats! Up the slime, down the slime!
+amy ::: [bright, cheerful] Surprise quiz! [reassuring, soft] Don't panic. You know this. [patient] Take your time.
+amy ::: [determined, powering through] Twenty-six point two! Straight through the slime!
+amy ::: [triumphant, competitive] New personal best! Write it down, Tom!
+amy ::: [quiet, intense, eye contact] Look at me. [slow breath] Breathe. [certain] You've done this before. [firm, loving] Go.
+amy ::: [teacher clapping hands, brisk] Eyes up, team! Stretching is over!
+amy ::: [coach voice, firm] Kettlebell swing! Hips, not back!
+amy ::: [teacher, brisk, warm] Hot lunch! Soup first, then recess.
+amy ::: [warm teacher, approving] Gold-star recess. Rest counts as good work.
+amy ::: [calm, icy teacher stare] Inside voices, please. [pause] I will wait.
+amy ::: [polite but firm, cheerful] No dairy, thank you. Oat milk, please!
+amy ::: [referee, stern] False start. Back behind the line.
+amy ::: [warm, resolute, standing in the doorway] Nobody leaves this room until every single one of you knows how good you are.
+amy ::: [racing, breathless, triumphant] Right on Hereford, left on Boylston! [shouting] Sprint to the tape!
+amy ::: [wincing, then composing herself] Ow. [beat] Okay. I'm okay. [slow breath] Deep breath.
+amy ::: [indignant referee] Hey! That's a time penalty!
+amy ::: [winded, steadying herself] That was a lot. [calm, grounding] I'm going to count to three.
+amy ::: [breathing hard, determined] Walking it off. Walking it off.
+amy ::: [exhausted, panting between words] Time. Out. Somebody hydrate me.
+amy ::: [proud, competitive] That's how this family does it!
+amy ::: [smug, teasing] Faster than Tom. [deadpan] As usual.
+amy ::: [proud, quiet, glowing] Everybody did their job. [warm] I saw every bit of it.
+amy ::: [triumphant, gloating like a bratty kid sibling, arms up] I called it! [teasing, competitive] Get your own monster!
+amy ::: [gleeful, like a six-year-old announcing a recipe; Ymamot is said YAH-mah-mott] Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!
+amy ::: [tired mom, choked up and moved] My girls. [getting her fire back, coach voice] Okay, hands together! [fierce, joyful, sprinting] Nobody stops the three of us!
+amy ::: [teacher, approving, dry] Neatest handwriting in the building. And I check.
+amy ::: [teacher, crisp, approving] Your margins are immaculate. Gold star.
+amy ::: [tender, kneeling to a kid's level] You waited your turn. [sincere] That's the hardest thing there is. [bright] Gold star.
+amy ::: [brisk, proud, organized mom] Here! Gregori, party of four. We are always first in line.
+amy ::: [competitive, proud] Present. I have never missed a connection in my life.
+boppy ::: [thick New York accent, grumbling, then softening] My stomach says no. My heart says one song. Just one. [thick New York accent, firm] Slow.
+boppy ::: [thick New York accent, proud storyteller] Did I ever tell you I won a dance contest? 1970. [thick New York accent, gruff] Sit down. [thick New York accent, correcting himself] I mean, stand up.
+boppy ::: [thick New York accent, gruff grandpa, loud whisper, annoyed] Shh! [thick New York accent, hissing] Keep it down, Tom, you're scaring the fish!
+boppy ::: [thick New York accent, gruff grandpa, totally calm, chewing a hot pepper, deadpan] That one's mild. [thick New York accent, sliding the bowl over, a tiny challenge] Have another.
+boppy ::: [thick New York accent, gruff old corrections officer, barking an order] Lock it down, Tom! [thick New York accent, proud, protective] Nobody gets past us!
+boppy ::: [thick New York accent, gruff, teaching, deadpan] A tomato needs a cage, Tom. Like an inmate.
+boppy ::: [thick New York accent, gruff grandpa, grumbling] Even with my stomach? [thick New York accent, softening, gruff but tender] Yeah. Me too, Deedee.
+boppy ::: [thick New York accent, settling in for a long story] Did I ever tell you about 1970? [thick New York accent, gruff] Sit down. This takes a while.
+boppy ::: [thick New York accent, gruff, proud] Need somebody to count heads? Count me in! Nobody gets past Boppy!
+boppy ::: [thick New York accent, gruff, then complaining] Tom! Good. [thick New York accent, sighs] I'm not feeling good. It's the stomach.
+boppy ::: [thick New York accent, complaining, exasperated] Grace, Rose! Slow down! Why does everybody walk so fast?
+boppy ::: [thick New York accent, proud, gruff] Did I ever tell you I was a champion cross country runner? Sit down.
+boppy ::: [thick New York accent, gruff, swatting] Cap swat! I've had this cap since Rikers!
+boppy ::: [thick New York accent, proud laugh, then groaning] Hah! Still got it. [thick New York accent, wincing] Ooh. My stomach.
+boppy ::: [thick New York accent, shouting, then groaning] Set the hook! [thick New York accent, wincing] Ooh, too much twisting. My stomach!
+boppy ::: [thick New York accent, ominous, gruff] I had a pepper at lunch. You're about to find out.
+boppy ::: [thick New York accent, territorial shout] Recliner! Nobody sits in it! Not even you!
+boppy ::: [thick New York accent, proud, taunting] Grew this one myself! Eat up, slimy!
+boppy ::: [thick New York accent, excited, shouting] Big one! Biggest one! Somebody get the camera!
+boppy ::: [thick New York accent, fired up, then panicking] Ghost pepper! Nobody stop me! [thick New York accent, wheezing] Ohh, somebody stop me.
+boppy ::: [thick New York accent, gruff, firm] Cap check. Not past me.
+boppy ::: [thick New York accent, slow, patient, gruff] Patient angler. The fish can wait for me.
+boppy ::: [thick New York accent, grumbling, reluctant] Recliner reservation. [thick New York accent, sighs] I suppose you can have it.
+boppy ::: [thick New York accent, gruff warden, counting] Headcount, again. Nobody move while I count.
+boppy ::: [thick New York accent, gruff, final] Closing time. That nonsense is closed.
+boppy ::: [thick New York accent, shouting, warden voice] Lockdown! The deputy warden says nobody gets out!
+boppy ::: [thick New York accent, gruff grandpa, protective, loud] Everybody slow down. [thick New York accent, firm, proud] My family goes first!
+boppy ::: [thick New York accent, reasonable, then worried] One pepper. Sensible size. [thick New York accent, muttering] Stomach may disagree.
+boppy ::: [thick New York accent, proud gardener, ominous] Seeds of trouble. I grew these myself.
+boppy ::: [thick New York accent, gruff, proud of himself] Mild for company. I checked this time.
+boppy ::: [thick New York accent, settling into a long story, nostalgic] In nineteen seventy, before everybody walked so fast...
+boppy ::: [thick New York accent, strained, then gruff] Jar-lid negotiations. I was being polite before.
+boppy ::: [thick New York accent, young, triumphant shout] Nineteen seventy! Up the hills, and nobody caught me!
+boppy ::: [thick New York accent, grumbling, sulky] I'm not feeling good. Something with the stomach. [thick New York accent, muttering] Nobody asked.
+boppy ::: [thick New York accent, grumbling, complaining] My stomach is acting up, and everybody walks too fast!
+boppy ::: [thick New York accent, outraged] Hey! All those years at Rikers and nobody hit me like that!
+boppy ::: [thick New York accent, weak, complaining] I'm not feeling good. Somebody get me a ginger ale.
+boppy ::: [thick New York accent, dramatic, fading] I need the recliner. Tell Deedee I was brave.
+boppy ::: [thick New York accent, triumphant, then groaning] Champion! Just like my cross country days! [thick New York accent, wincing] Ooh, my stomach.
+boppy ::: [thick New York accent, gruff drill sergeant] Everybody line up! Headcount! [thick New York accent, satisfied] Good. Nobody's missing.
+boppy ::: [thick New York accent, proud, then deadpan] Who's the strongest grandpa? [thick New York accent, pause] Correct.
+boppy ::: [thick New York accent, gruff grandpa, huffing along on an evening walk] Where's the fire? [thick New York accent, grumbling] Everybody walks too fast!
+tnb ::: [catching himself, laid-back] Babe... I mean, buddy. That take? Iconic.
+tnb ::: [chill, sincere] That was a great take. And I have seen forty-seven horror movies.
+tnb ::: [easy-going, warm] Great take. I would not change a single stitch.
+tnb ::: [impressed, suspicious] Your lettering is so clean. Are those fonts? Tell me those are not fonts.
+tnb ::: [laid-back, approving] Love the cards. Very crisp. Very wardrobe.
+tnb ::: [friendly, casual] Want half my granola bar? It is the good kind. With the chocolate.
+tnb ::: [kind, easy-going] Here, buddy. I always pack two. One for me, one for whoever is having a bad day.
+tnb ::: [warm, proud of his craft] I made you a little pot, buddy. Bisque fire. Five minutes in you and it is perfect.
+tnb ::: [playful, punny] Mug in the kiln! Okay, in the stove. Same thing. [chuckles] You are basically a kiln with feelings.
+tnb ::: [chill, upbeat] Need a fourth? I'm suited up and ready to roll!
+tnb ::: [slow, amused, drawn out] Well, well, well...
+tnb ::: [casual, tossing] Catch! [shrugging] That one was a second anyway.
+tnb ::: [cheerful warning] Heads up! Handmade!
+tnb ::: [amused, smooth] Well, well... a mug for you.
+tnb ::: [rapid-fire, backstage rush] Quick change! Arms up! Hat, bow tie, boa!
+tnb ::: [train announcer voice] Next stop, you! Doors closing!
+tnb ::: [creepy, slow, horror-movie voice] Well, well, well... look who is behind you.
+tnb ::: [punny, playful] Cone six! Hold still, you are getting fired!
+tnb ::: [stoked, yelling, wind rushing] Bombing the hill! No brakes! Never brakes!
+tnb ::: [laid-back, punny] Clay offcut. Waste not, bonk not.
+tnb ::: [warm, laid-back] Lost warmth. Found scarf. Nice connection.
+tnb ::: [amused, proud of the craft] Practical effects. The string is part of the charm.
+tnb ::: [punny, pleased with himself] Clay pigeon. Literally. I worked on that pun.
+tnb ::: [dry, laid-back] Kiln-door policy. Bad ideas cool off outside.
+tnb ::: [film-set announcer, satisfied] Final scene, everybody in costume! That is a wrap!
+tnb ::: [stoked, yelling, wind rushing] Steepest street in Echo Park! Hang on to your mugs, Tom!
+tnb ::: [slow, amused, settling in for a horror movie] Well, well, well. [whispering, gleeful] Here comes the good part.
+tnb ::: [chill, easy-going, grinning, rolling up on a longboard with a garden hose] Well, well, well. [playful, warm] Let's clear the air on Second Avenue, babe.
+tnb ::: [chill, laughing, out of breath, holding subway doors open with his longboard] Mind the gap, babe! [urgent, playful, cheering him on] Go go go!
+tnb ::: [chill, soft, warm, gently mending a broken cup with gold] Broken is fine. [tender, a small smile] Now it's ours.
+tnb ::: [chill, grinning, riding high on a train roof, like a transit announcer] Next stop: right through these guys! [laughing, playful] Hold the handrail, Tom!
+tnb ::: [chill, soft, tender, holding a handmade mug] First cup I ever threw. [warm, quiet smile] It always brings you home.
+tnb ::: [chill, low spooky campfire-story whisper, flashlight under his chin, drawing it out] And then... the door... creaked... open...
+tnb ::: [wardrobe department, brisk] Wardrobe! Arms up, new shirt!
+tnb ::: [playful, conspiratorial] Fresh look! Nobody tell continuity!
+tnb ::: [amused, smooth] Well, well... somebody needs a costume change.
+tnb ::: [indignant, mock-offended] Hey! That was glazed!
+tnb ::: [pained, then punny] Ow. Not pot-sitive about that one.
+tnb ::: [unbothered, dry] Well, well... somebody is in a mood.
+tnb ::: [strained, still joking] Tom, I am a little cracked over here.
+tnb ::: [tired, wry] Well, well... I have seen better takes.
+tnb ::: [fading, still punny] Needs a second firing. Give me a minute.
+tnb ::: [fading, amused] Well, well... that is a wrap for me.
+tnb ::: [easy-going, cheerful] Nice work, team. Who wants a mug?
+tnb ::: [director voice, satisfied] And cut! That is a wrap, team.
+tnb ::: [smug, amused] Well, well... look who wrapped early.
+tnb ::: [chill, soft, patient pottery teacher, guiding a beginner's hands on a spinning wheel] Gentle hands. [calm, coaxing] Gentle. [beat, amused] Okay, duck.
