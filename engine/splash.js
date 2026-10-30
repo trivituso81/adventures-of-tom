@@ -57,6 +57,19 @@ function startSplash() {
 // Chapter 1 is a true new game; later chapters fast-forward the story (engine/chapter-select.js). Part 2 chapter 11
 // continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none.
 const SPLASH_PARENT={new:'launch',admin:'launch',part1:'new',part2:'new',bonus:'new',lab:'admin'};
+// RELOAD (welcome page, left of ADMIN): a hard reload for the iPhone home-screen app, which has no refresh button and can
+// hold on to old files. It re-downloads the page and every script (skipping the big baked voice files, which rarely change),
+// then reloads on a fresh address. Saves live in localStorage for this site, so they are kept.
+const SPLASH_RELOAD_ICON='<svg class="sp-ico" viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 8A5.2 5.2 0 1 1 11.7 4.3"/><path d="M13.4 1.8v3.5h-3.5"/></svg>';
+function splashReload() {
+  if(splash.reloading) return;
+  splash.reloading=true; sfx.select();
+  const cue=$('sp-cue'); if(cue) cue.textContent='Reloading the game. Your saves are kept.';
+  const urls=[location.href,...Array.from(document.scripts).map(s=>s.src).filter(u=>u&&u.indexOf('/data/voice')<0)];
+  const done=()=>{ const u=new URL(location.href); u.searchParams.set('r',Date.now().toString(36)); location.replace(u.toString()); };
+  const timer=setTimeout(done,8000);
+  Promise.all(urls.map(u=>fetch(u,{cache:'reload'}).catch(()=>null))).then(()=>{ clearTimeout(timer); done(); });
+}
 const splashSaveCount=()=>SAVE_SLOTS.filter(k=>readSave(k)).length;
 const splashBuilt=n=>n<=(typeof CHSEL_LAST==='number'?CHSEL_LAST:1)||n===PARTS[2].from;
 // Who can be in the party in chapter n, in portrait order: the locked members plus everyone the chapter allows
@@ -97,6 +110,7 @@ const SPLASH_MODES={
     return [
       {name:'NEW GAME',sub:'Pick a Part and a chapter.',to:'new'},
       {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():''),act:()=>splashGo(loadMenu)},
+      {name:SPLASH_RELOAD_ICON+'RELOAD',cls:'admin reload',act:splashReload},
       {name:'ADMIN',cls:'admin',to:'admin'}]; }},
   new:{tab:'Start New',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     FULL_GAME_OPEN?{name:'PART 1',sub:'Chapters 1 to 10. Start here.',to:'part1'}

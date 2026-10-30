@@ -366,9 +366,10 @@ html.landscape .sp-cast img{flex:0 0 22px;width:22px;height:22px;aspect-ratio:au
 .sp-soon{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:6px;background:#9aa08a;color:#fff5dc;font-size:9px;letter-spacing:1px;vertical-align:2px}
 .sp-choice.back{flex:0 0 auto;justify-content:center;padding-left:14px;padding-right:14px}
 .sp-choice.back .sp-name{font-size:12px}
-.sp-choices.launch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.sp-choice.admin{grid-column:1/-1;justify-self:end;flex:none;padding:3px 10px;border:1px solid #9aa08a;border-radius:8px;background:transparent;color:#7f846f;box-shadow:none}
+.sp-choices.launch{display:flex;flex-wrap:wrap;gap:10px}.sp-choices.launch .sp-choice:not(.admin){flex:1 1 calc(50% - 5px)}
+.sp-choice.admin{flex:none;padding:3px 10px;border:1px solid #9aa08a;border-radius:8px;background:transparent;color:#7f846f;box-shadow:none}
 .sp-choice.admin .sp-name{font-size:10px;font-weight:700;letter-spacing:1.2px}
+.sp-choice.reload{margin-left:auto}.sp-choice.reload .sp-name{display:flex;align-items:center;gap:5px}.sp-ico{flex:none}
 .sp-choice.admin.sel{background:#f1e2b8;border-color:#c9a24d;color:#5d6a55}
 .sp-choice.admin.sel .sp-name::before{content:''}
 .sp-choice.shake{animation:spShake .35s}
@@ -510,8 +511,8 @@ html.landscape #splash-art{background:linear-gradient(to bottom,#0a0e1800 58%,#0
 html.landscape #splash #splash-panel{left:calc(4% + env(safe-area-inset-left));right:calc(4% + env(safe-area-inset-right));bottom:calc(6px + env(safe-area-inset-bottom));padding:22px 10px 6px}
 html.landscape #splash .sp-tab{font-size:13px;padding:4px 14px;top:-15px}
 html.landscape #splash .sp-choice .sp-name{font-size:14px}
-html.landscape #splash .sp-choices.launch{grid-template-columns:1fr 1fr auto;gap:8px;align-items:stretch}
-html.landscape #splash .sp-choice.admin{grid-column:auto;justify-self:end;align-self:end}
+html.landscape #splash .sp-choices.launch{flex-wrap:nowrap;gap:8px;align-items:stretch}html.landscape #splash .sp-choices.launch .sp-choice:not(.admin){flex:1 1 0}
+html.landscape #splash .sp-choice.admin{align-self:end}html.landscape #splash .sp-choice.reload{margin-left:0}
 html.landscape #splash .sp-choice{padding:6px 10px;gap:2px}
 html.landscape #splash .sp-choice .sp-sub{font-size:11px;line-height:1.25}
 html.landscape #splash .dialog-footer{margin-top:4px;padding-top:3px;font-size:10px}
@@ -1337,7 +1338,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=welcome6"></script>
+<script src="engine/splash.js?v=welcome7"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js?v=rose1"></script>

@@ -1,3 +1,10 @@
+## 2026-10-30: RELOAD button on the welcome page
+- Tom: the iPhone home-screen app has no refresh button and sometimes holds on to old files, and he cannot clear the cache from inside the app.
+- New small RELOAD button (refresh icon) on the welcome page, left of ADMIN, same outline style, portrait and landscape (`engine/splash.js` `splashReload`, CSS in `index.html`; the launch row is now a wrapping flex row, landscape stays on one row).
+- Tap: it re-downloads the page and every script (the big baked voice files are skipped, they rarely change) with `cache:'reload'`, then reloads on a fresh `?r=` address. Saves live in the site's localStorage, so they are kept (checked headless). An 8 second timer reloads anyway if a download hangs.
+- Test: headless portrait and landscape screenshots, click RELOAD lands on `?r=`, localStorage survives, no console errors; smoke FAILS: []. Cache tag `welcome7` on splash.js. Not yet seen on Tom's phone.
+- Not done: a build number on the title screen (offered earlier, not asked for yet).
+
 ## 2026-10-30: Home-screen icon shows Tom much bigger
 - Tom: make Tom more prominent in the iPhone icon.
 - New `icon-v6.png` (180x180): the painted icon cropped in tight around Tom's face, scenery kept as backdrop. `index.html` now points at it (new filename so iOS does not serve the cached icon). No code or spoken lines changed.
