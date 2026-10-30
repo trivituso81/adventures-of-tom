@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 3 of 10 (source and cut)
+- Saved `tombo-sheet03-of-10.png`; all 14 match (lemon, sock, Ymamot sign, stepladder, birthday banner, banner pole, pink balloon, cake, balloon trio, purple couch, floor lamp, MOM placard, two cushions). Cut to `art/props/tombo/`; 36 of 138 painted. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 2 of 10 (source and cut)
 - Saved `tombo-sheet02-of-10.png`; all 14 match (scepter, reading lamp, 8-bit music note, director's chair, megaphone, top hat, cane, stage curtains, kitchen counter, mixing bowl, ketchup, pickles, cereal box, mustard). Cut to `art/props/tombo/`; 22 of 138 Tombo props painted. Not wired yet.
 ## 2026-10-30: Painted enemies from 14 pasted sheets (the last missing ones)
