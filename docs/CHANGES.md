@@ -1150,3 +1150,9 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 ## Justin smaller head (2026-10-30)
 - Tom: Justin's head was proportionally as big as everyone else's, which on a 53 row body made it too big (20.7 rows vs Tom 16). bake_justin.py defaults are now --ratio 0.33 and --ratio-side 0.315 (head about 17 rows, only slightly bigger than Tom's). Rebaked art/chars/justin-ow.webp and data/justin-hires.js; atlas src carries ?v=head2 and the two Justin script tags in index.html carry ?v=head2 so cached copies are not mixed.
 - Body height unchanged (53 rows, still taller than Michael 50 and Tom 42). tools/justin_test.py 0 fails, smoke 0 fails. The welcome screen cast and the Gregori house both use this same sheet.
+
+## 2026-10-30: Everyone inside painted rooms 20% bigger
+- Tom: now that the interiors are enlarged, the characters looked too small. One multiplier, `INTERIOR_ACTOR_BOOST` 1.2 in `engine/plate.js` `actorK()`, so inside any painted room the effective scale is 1.98 x 1.2 = 2.376. Every painted figure draws through `actorK()` (Tom, Grace, Rose, the recruits, family, and all townspeople), so NPCs are covered by the same change. Streets (1.2) unchanged.
+- The talk gap (`talkGapFrame`, engine/town-render.js) widens indoors by the same ratio so bigger figures still do not touch. The heart over a kiss and the talk arrow already followed `actorK()`.
+- Not scaled: the blocky fallback figures (`drawNpc`), which only appear outdoors, and monsters (they use `mscale`).
+- Tests: `tools/rooms_test.py bakery grands` 0 fails and looked at portrait frames; `tools/smoke.py` FAILS: []. `amyhouse` and `tomhouse` "square plate" check fails before and after (pre-existing: not square plates).

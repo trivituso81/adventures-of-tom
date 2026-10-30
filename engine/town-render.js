@@ -552,13 +552,13 @@ function talkGapFrame() {
     if(n&&(n.monster||n.hidden||n.seat)) n=null;
   }
   talkPartnerNow=n;
-  const k=Math.min(1,dt*16);
+  const k=Math.min(1,dt*16),gs=currentMap.outside?1:Math.max(1,actorK()/1.98);   // gs: figures drawn bigger indoors need a wider gap
   for(const a of [...currentMap.npcs,...followers,player]) {
     let tx=0,ty=0;
     if(n&&n!==player&&Math.abs(player.x-n.x)+Math.abs(player.y-n.y)===1) {
       const dx=Math.sign(player.x-n.x),dy=Math.sign(player.y-n.y);
-      if(a===n) { tx=-dx*TALK_GAP_X; ty=-dy*TALK_GAP_Y; }
-      else if(a===player||followers.includes(a)) { tx=dx*TALK_GAP_X; ty=dy*TALK_GAP_Y; }   // Tom's party moves with him so nobody gets crowded from behind
+      if(a===n) { tx=-dx*TALK_GAP_X*gs; ty=-dy*TALK_GAP_Y*gs; }
+      else if(a===player||followers.includes(a)) { tx=dx*TALK_GAP_X*gs; ty=dy*TALK_GAP_Y*gs; }   // Tom's party moves with him so nobody gets crowded from behind
     }
     const g=a._tg||(a._tg={x:0,y:0});
     g.x+=(tx-g.x)*k; g.y+=(ty-g.y)*k;

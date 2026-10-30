@@ -82,12 +82,15 @@ plateSetK.k=1;
 // the bakery counter and the dining chairs: adults wanted about 1.8x their street size, then Tom asked for 10% more: 1.98x. Feet stay on the same tile, the sprite grows upward.
 const INTERIOR_ACTOR_SCALE=1.98;
 for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','amyhouse','grands','elliehouse','loftlobby','lofts','juicebar']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
+// Tom (2026-10-30): after the interiors were enlarged to fill the phone screen, everyone inside is 20% bigger again. One multiplier
+// here covers the family, the followers and every townsperson, since they all draw through actorK().
+const INTERIOR_ACTOR_BOOST=1.2;
 // Outdoor maps (the streets, parks and yards): Tom asked for 20% bigger.
 const OUTDOOR_ACTOR_SCALE=1.2;
 function actorK() {
   if(!currentMap) return 1;
   const p=PLATES[currentMap.id];
-  if(p&&p.actorScale&&!currentMap.outside) return p.actorScale;
+  if(p&&p.actorScale&&!currentMap.outside) return p.actorScale*INTERIOR_ACTOR_BOOST;
   return currentMap.outside?OUTDOOR_ACTOR_SCALE:1;
 }
 
