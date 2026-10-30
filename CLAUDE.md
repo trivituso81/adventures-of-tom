@@ -69,6 +69,7 @@ The game must be served over http. Opening `index.html` as a file will not work.
 | Difficulty modes | `B7_DIFF` in `engine/feel.js` |
 | Stats, items, party members | `data/party.js`, `data/abilities.js`, `data/progress.js` |
 | Menus | `engine/menu.js`, `engine/progress.js`, `engine/shop.js` |
+| How big a map painting must be, how outdoor maps zoom to fill the phone screen | `docs/MAP_SIZES.md` |
 
 ## Debug handle
 

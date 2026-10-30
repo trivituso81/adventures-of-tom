@@ -1,6 +1,10 @@
 # Camera clamp: on every map, with Tom at each corner and edge, the visible canvas must never show space outside the map
 # (in any axis where the map is at least as big as the canvas). Maps smaller than the canvas on an axis stay centred.
-# Checks portrait and landscape and writes corner screenshots for one big area map.   Usage: python3 tools/camera_clamp_test.py
+# Outdoor painted maps are zoomed to cover the screen (engine/overworld.js outdoorCover): sideways they never show space past an edge, and
+# mid-map the whole screen is painting. Next to the top or bottom edge the camera may scroll past the edge, but only into the title bar and
+# controls bands and only to keep Tom's tile inside the safe band. Maps that hit the zoom cap are listed at the end: they need a bigger
+# painting (docs/MAP_SIZES.md).
+# Usage: python3 tools/camera_clamp_test.py
 import threading, http.server, socketserver, functools, os
 from playwright.sync_api import sync_playwright
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
@@ -18,14 +22,18 @@ JS="""(a)=>{ const [fx,fy]=a; const out=[]; const T_=T;
     const mw=m.w*T_,mh=m.h*T_;
     for(const [px,py] of [[0,0],[m.w-1,0],[0,m.h-1],[m.w-1,m.h-1],[(m.w-1)/2,0],[(m.w-1)/2,m.h-1],[0,(m.h-1)/2],[m.w-1,(m.h-1)/2],[m.w/2,m.h/2]]){
       player.x=px; player.y=py; camera.snap=true; updateCamera(1);
-      out.push({id,px,py,cx:camera.x,cy:camera.y,W,H,mw,mh});
+      out.push({id,px,py,cx:camera.x,cy:camera.y,W,H,mw,mh,scale,outside:!!m.outside,cover:!!(m.outside&&PLATES[m.id]),cap:OUTDOOR_COVER_CAP,sT:safeTop,sB:safeBottom,T:T_,mid:px===m.w/2&&py===m.h/2});
     } }
   return out; }"""
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
     br=pw.chromium.launch(**kw)
-    for label,vp in (('portrait',{'width':430,'height':860}),('landscape',{'width':860,'height':430})):
+    capped=set()
+    for label,vp in (('portrait',{'width':430,'height':860}),('landscape',{'width':860,'height':430}),
+                     ('portrait-pro-max',{'width':440,'height':956}),('landscape-pro-max',{'width':956,'height':440}),
+                     ('portrait-15',{'width':393,'height':852}),('landscape-15',{'width':852,'height':393}),
+                     ('portrait-se',{'width':375,'height':667}),('landscape-se',{'width':667,'height':375})):
         pg=br.new_page(viewport=vp)
         pg.on('pageerror',lambda e: errs.append(str(e)))
         pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
@@ -34,14 +42,31 @@ with sync_playwright() as pw:
         rows=pg.evaluate(JS,[0,0]); n=0; clamped=0
         for r in rows:
             n+=1
+            T_=r['T']
+            if r['cover']:
+                if r['scale']>=r['cap']-1e-6: capped.add(r['id'])
+                else:
+                    # Painted outdoor map zoomed to cover: sideways it never shows space past an edge; mid-map the whole screen is painting.
+                    check(f"{label} {r['id']} covers sideways at ({r['px']},{r['py']}): cam {r['cx']:.1f} view {r['W']} map {r['mw']}",r['cx']>=-0.01 and r['cx']+r['W']<=r['mw']+0.01)
+                    if r['mid']: check(f"{label} {r['id']} covers screen mid-map: cam y {r['cy']:.1f} view {r['H']} map {r['mh']}",r['cy']>=-0.01 and r['cy']+r['H']<=r['mh']+0.01)
             if r['mw']>=r['W']:
                 ok=r['cx']>=-0.01 and r['cx']+r['W']<=r['mw']+0.01
                 check(f"{label} {r['id']} x at ({r['px']},{r['py']}): cam {r['cx']:.1f} W {r['W']} mw {r['mw']}",ok)
             if r['mh']>=r['H']:
-                ok=r['cy']>=-0.01 and r['cy']+r['H']<=r['mh']+0.01
-                check(f"{label} {r['id']} y at ({r['px']},{r['py']}): cam {r['cy']:.1f} H {r['H']} mh {r['mh']}",ok)
+                if r['outside']:
+                    # Outdoor: space past the top or bottom edge may only fall inside the title bar and controls bands, and only to keep
+                    # Tom's tile inside the safe band (the painting must never put him under the controls).
+                    ok=r['cy']>=-r['sT']-0.01 and r['cy']+r['H']<=r['mh']+r['sB']+0.01
+                    check(f"{label} {r['id']} y within HUD bands at ({r['px']},{r['py']}): cam {r['cy']:.1f} H {r['H']} mh {r['mh']}",ok)
+                    top=r['py']*T_-r['cy']; bot=(r['py']+1)*T_-r['cy']
+                    if r['H']-r['sB']-r['sT']>=T_:
+                        check(f"{label} {r['id']} Tom in safe band at ({r['px']},{r['py']}): tile {top:.1f}..{bot:.1f} band {r['sT']:.1f}..{r['H']-r['sB']:.1f}",top>=r['sT']-0.01 and bot<=r['H']-r['sB']+0.01)
+                else:
+                    ok=r['cy']>=-0.01 and r['cy']+r['H']<=r['mh']+0.01
+                    check(f"{label} {r['id']} y at ({r['px']},{r['py']}): cam {r['cy']:.1f} H {r['H']} mh {r['mh']}",ok)
                 clamped+=1
         print(f'{label}: {len(set(r["id"] for r in rows))} maps, {n} positions, {clamped} full-height checks')
         pg.close()
     br.close()
+print('at the zoom cap on some phone size (need a bigger painting):',sorted(capped))
 print('errors:',errs[:3]); print('FAILS:',fails[:20],len(fails))

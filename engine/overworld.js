@@ -281,11 +281,22 @@ function update(dt) {
   updateNPCs(dt);
 }
 
+// Outdoor painted maps: zoom the painting just enough that it covers the whole screen in both axes, so no flat backdrop shows
+// past a map edge in portrait or landscape. The camera already stops at the map edges, so the painting then sits flush against
+// the screen edges. The art is 64 px per tile drawn at T=32 (2.0x is native), so the zoom is capped a little past that; a map
+// that would need more (small rooms, strips) keeps the cap and shows a soft backdrop instead (engine/draw.js plateBackdrop),
+// and wants a bigger painting (docs/MAP_SIZES.md).
+const OUTDOOR_COVER_CAP=2.25;
+function outdoorCover(map,width,height) {
+  if(!map||!map.outside||typeof PLATES==='undefined'||!PLATES[map.id]) return 1;
+  return Math.min(OUTDOOR_COVER_CAP,Math.max(1,width/(map.w*T),height/(map.h*T)));
+}
 function resize() {
   const width=game.clientWidth,height=game.clientHeight;
-  scale=!currentMap.outside&&width>=900&&height>=700?2:1;
-  W=Math.max(1,Math.ceil(width/scale));
-  H=Math.max(1,Math.ceil(height/scale));
+  scale=currentMap.outside?outdoorCover(currentMap,width,height):!currentMap.outside&&width>=900&&height>=700?2:1;
+  // The tiny epsilon keeps a map that fits exactly from rounding up to one pixel more than the map (which would show a sliver).
+  W=Math.max(1,Math.ceil(width/scale-1e-6));
+  H=Math.max(1,Math.ceil(height/scale-1e-6));
   // Phone portrait, inside a house: zoom so the room's left and right walls sit flush with the screen edges
   // (the canvas is exactly the room's width; CSS stretches it to the screen, so scale may be a fraction).
   if(!currentMap.outside&&!layout.landscape&&width<900) {
@@ -316,9 +327,16 @@ function updateCamera(dt) {
   // Map taller than the whole canvas: follow Tom inside the HUD-safe band, but clamp to the full
   // canvas so the map always fills the screen and never shows blank space past its edges.
   // Map shorter than the canvas: keep it centred in the safe band (blank space is unavoidable).
-  const ty=mh>=H
-    ? clamp((p.y+.5)*T-safeTop-available/2,0,mh-H)
-    : mh<=available
+  let ty;
+  if(mh>=H) {
+    ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H);
+    // Outdoor maps only (rooms keep their own fit). Near the top or bottom edge the painting is flush with the screen, which would put
+    // Tom's tile under the title bar or the controls. Scroll past the map edge just far enough to keep his tile inside the safe band;
+    // that strip, only ever behind the title bar and controls, shows the soft backdrop (engine/draw.js plateBackdrop) and only
+    // while he is next to an edge.
+    const lo=(p.y+1)*T-(H-safeBottom),hi=p.y*T-safeTop;
+    if(currentMap.outside&&lo<=hi) ty=clamp(ty,lo,hi);
+  } else ty=mh<=available
       ? -(safeTop+(available-mh)/2)
       : clamp((p.y+.5)*T-available/2,0,mh-available)-safeTop;
 

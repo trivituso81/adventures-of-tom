@@ -1,5 +1,27 @@
 'use strict';
 // engine/draw.js — Main overworld draw, touch and keyboard input, menu wiring.
+
+// Outdoor painted maps are zoomed to cover the screen (engine/overworld.js outdoorCover). The few that are too small even at the zoom cap
+// would show flat green past their edge, so fill that with the painting itself: a tiny thumbnail of it stretched large (the stretch is a free
+// blur), darkened, behind the sharp plate. Only drawn when the view actually reaches past the map. Those maps want a bigger painting.
+function plateBackdrop(p,mw,mh) {
+  if(camera.x>=0&&camera.y>=0&&camera.x+W<=mw&&camera.y+H<=mh) return;
+  if(p.thumb===undefined) {
+    try {
+      const tw=48,th=Math.max(8,Math.round(tw*p.img.naturalHeight/p.img.naturalWidth));
+      const c=document.createElement('canvas'); c.width=tw; c.height=th;
+      const g=c.getContext('2d'); g.imageSmoothingEnabled=true; g.imageSmoothingQuality='high'; g.drawImage(p.img,0,0,tw,th);
+      p.thumb=c;
+    } catch(e) { p.thumb=null; }
+  }
+  if(!p.thumb) return;
+  const mx=Math.max(-camera.x,camera.x+W-mw,0)+8,my=Math.max(-camera.y,camera.y+H-mh,0)+8;
+  ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+  ctx.drawImage(p.thumb,-mx,-my,mw+mx*2,mh+my*2);
+  ctx.fillStyle='rgba(8,18,15,.55)';
+  ctx.fillRect(-mx,-my,mw+mx*2,mh+my*2);
+}
+
 function draw(time) {
   const plate=plateFor(currentMap);
   const hold=!plate&&plateHold(currentMap);
@@ -24,6 +46,7 @@ function draw(time) {
   const y1=Math.min(currentMap.h,Math.ceil((camera.y+H)/T)+2);
 
   if(plate) {
+    plateBackdrop(plate,currentMap.w*T,currentMap.h*T);
     ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
     ctx.drawImage(plate.img,0,0,currentMap.w*T,currentMap.h*T);
     ctx.imageSmoothingEnabled=false;
