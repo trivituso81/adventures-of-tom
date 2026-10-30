@@ -8,6 +8,9 @@
 - Known small flaws in the source art: Brain Freeze attack1 has its right arm slightly clipped and attack4 a thin sliver at its left edge (neighbouring frames overlap).
 - Tests: `tools/foes_test.py vance,julian,slushslug,conehead,brainfreeze` 0 fails; `tools/smoke.py` FAILS: [].
 
+## 2026-10-30: A button moved next to Menu
+- The A (Interact) button is now the same size as the Menu button and sits directly to its right, bottom left (portrait 54px phones, 62px wider, landscape 46px). The D-pad stays bottom right. CSS only in index.html (`#action-wrap`, `#action`, `#action-label`, `#menu-label`). Smoke 0 fails; portrait and landscape checked. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Battle prop sheets, TNB 31-item sheet (source only)
 - Saved `tools/sprite-bake/src/props/tnb-sheet1-items1-31.png`. Items 1 to 23 match the prompt list. Items 24 to 31 drifted into invented props and need a redo (longboard, painted curb, rocking platform, spirit level, clay wedge, brick kiln, stoneware mugs, street signs). Not wired into the game.
 
