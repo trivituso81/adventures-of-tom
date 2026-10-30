@@ -38,14 +38,34 @@ LE_AREAS.push(
     hint:'The Chronos-Leviathan coils round the Engine. Four barriers hold it up. A relay breaks each one.',
     spawn:{x:10,y:12},
     exits:[[10,14,'stillcore',12,15,'up','glfloor'],[11,14,'stillcore',13,15,'up','glfloor']],
-    monsters:[...CH20_HEART_SPOTS,...CH20_JULIAN_SPOTS]},
+    monsters:[...CH20_HEART_SPOTS,...CH20_JULIAN_SPOTS],
+    // Painted plate (art/foreverheart.webp, engine/plate.js). '#' blocks, '.' walks. Only the round floor walks: rows 8 to 10 across the platform, row 7 along the
+    // front of the Engine's base (cols 7 to 14, so you can stand under the Leviathan at 11,5 and Julian at 11,6), both plants (cols 3 to 4 and 17 to 18, rows 10 to 11)
+    // blocked, the balustrade posts either side of the gate (cols 8 and 13, row 11) blocked, and the gate lane (cols 10 to 11, rows 12 to 14) walks to the lift
+    // doors. The gears, clocks and Engine are walls, each with a tall object box that reaches row 7 so it can be touched from the floor below.
+    plateMask:[
+      '######################',
+      '######################',
+      '######################',
+      '######################',
+      '######################',
+      '######################',
+      '######################',
+      '#######........#######',
+      '###................###',
+      '##..................##',
+      '##.##............##.##',
+      '#######.#....#.#######',
+      '##########..##########',
+      '##########..##########',
+      '##########..##########']},
     planGlass(FOREVERHEART_PLAN),
     {objects:[
-      ['ceengine',7,2,8,5,'The Forever Engine','A column of gears the height of a tower, every one of them in mesh with every other, all turning in sync. Every tooth is a minute somebody wanted to keep. At the very top, a single brass hand points at 4:59.'],
-      ['cegear',2,4,2,2,'A very large gear','A gear, half as tall as the room. The teeth are sharp and polished. It is the first gear in the Moon, and it has never once been oiled.'],
-      ['cegear',18,4,2,2,'A very large gear','A gear that turns the other way. Every tooth has a very small name scratched on it.'],
-      ['glclock',3,1,2,1,'Engine clock','It says 4:59. The hand has not moved. Under it somebody has scratched, very small, MISSED IT.'],
-      ['glclock',17,1,2,1,'Engine clock','It says 4:59. This one is ticking, very faintly, as if it has begun to remember how.'],
-      ['glplant',2,11,1,1,'Potted plant','A plant, in the heart of a Moon. It is leaning toward the south door, toward the lift, toward the rest of you.'],
-      ['glplant',19,11,1,1,'Potted plant','A plant, thriving, which should not be possible and which nobody is going to point out.']]})
+      ['ceengine',7,0,8,7,'The Forever Engine','A column of gears the height of a tower, every one of them in mesh with every other, all turning in sync. Every tooth is a minute somebody wanted to keep. At the very top, a single brass hand points at 4:59.'],
+      ['cegear',4,5,3,3,'A very large gear','A gear, half as tall as the room. The teeth are sharp and polished. It is the first gear in the Moon, and it has never once been oiled.'],
+      ['cegear',15,5,3,3,'A very large gear','A gear that turns the other way. Every tooth has a very small name scratched on it.'],
+      ['glclock',2,0,2,8,'Engine clock','It says 4:59. The hand has not moved. Under it somebody has scratched, very small, MISSED IT.'],
+      ['glclock',18,0,2,8,'Engine clock','It says 4:59. This one is ticking, very faintly, as if it has begun to remember how.'],
+      ['glplant',3,10,2,2,'Potted plant','A plant, in the heart of a Moon. It is leaning toward the south door, toward the lift, toward the rest of you.'],
+      ['glplant',17,10,2,2,'Potted plant','A plant, thriving, which should not be possible and which nobody is going to point out.']]})
 );
