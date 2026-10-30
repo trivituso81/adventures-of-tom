@@ -70,8 +70,13 @@ MARK = {
     'coathanger': {'eyes': [(.50, .27), (.56, .27)], 'mouth': (.53, .31)},
     'soreloser': {'eyes': [(.56, .35), (.70, .36)], 'mouth': (.64, .45)},
     'mirrorball': {'eyes': [(.73, .46), (.88, .46)], 'mouth': (.81, .56)},
+    'carryon': {'eyes': [(.62, .38), (.82, .37)], 'mouth': (.76, .52)},
+    'jetlag': {'eyes': [(.62, .52)], 'mouth': (.68, .62)},
+    'unclaimed': {'eyes': [(.63, .50), (.76, .50)], 'mouth': (.69, .62)},
+    'armresthog': {'eyes': [(.62, .33), (.70, .33)], 'mouth': (.76, .45)},
+    'lastcall': {'eyes': [(.59, .50), (.78, .50)], 'mouth': (.68, .66)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()

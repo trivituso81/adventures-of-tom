@@ -89,6 +89,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | coathanger | foe-coathanger-v1.png (The Hanger-On) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | soreloser | foe-soreloser-v1.png (The Sore Loser) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | mirrorball | foe-mirrorball-v1.png (The Mirrorball, boss, 6 frames, `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| carryon | foe-carryon-v1.png (Carry-On; source had a white streak artifact between frames, removed from the saved source; 5th cell is a spare stance, cut with `--frames stance,hurt,attack1,attack2,extra --extra-ok`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| jetlag | foe-jetlag-v1.png (Jet Lag) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| unclaimed | foe-unclaimed-v1.png (The Unclaimed) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| armresthog | foe-armresthog-v1.png (The Armrest Hog) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| lastcall | foe-lastcall-v1.png (The Last Call, boss, 6 frames, `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 

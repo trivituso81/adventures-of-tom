@@ -1,3 +1,8 @@
+## 2026-10-30: Painted Chapter 10 enemies
+- Tom sent chapter10_monster_sprites_1.zip. Installed painted frames for Carry-On, Jet Lag, The Unclaimed, The Armrest Hog and the boss The Last Call (four attack frames). All face right.
+- Carry-On's source had a stray white vertical streak; removed from the saved source before baking. Not installed: The Long Line (no image in the zip; id `longline`).
+- Test: `tools/foes_test.py` on all five, contact sheets and a boss battle screenshot looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Painted Chapter 9 enemies
 - Tom sent ch9_monster.zip. Installed painted frames for Velvet Rope, Stuffed Shirt, The Hanger-On (id `coathanger`), The Sore Loser and the boss The Mirrorball (four attack frames). All face right.
 - Not installed: The Wallflower (no image in the zip; id `wallflower`).
