@@ -368,6 +368,8 @@ const garment=(kind,c,tr,dk,sw=0)=>{ gfx.save(); gfx.rotate(sw);
   gfx.restore(); };
 const rack=(x,y,sway=0,sign=true,sleeve=null)=>{
   E(x,y+5,60,6,'rgba(0,0,0,.25)');
+  const paintedRack=PROPART.draw('tnb/wardrobe_rack',x+2,y-54,{w:122});   // painted rack with its costumes; the drawn one below is the fallback
+  if(!paintedRack) {
   for(const px of [x-48,x+44]) { R(px-1,y-116,6,118,OUT); R(px,y-114,4,114,STEEL); R(px,y-114,1.5,114,'#e6e9ee'); R(px+3,y-114,1,114,'#7d8892'); }
   R(x-53,y-119,110,8,OUT); R(x-51,y-118,106,5,STEEL); R(x-51,y-118,106,1.6,'#eef1f5'); E(x-52,y-115,3,3.6,'#7d8892'); E(x+56,y-115,3,3.6,'#7d8892');
   const cs=[[0,'#e0402e','#fff6dc','#a82a1c'],[1,'#284fb4','#ffd166','#1b3680'],[2,'#6fc27a','#2b2a26','#4a9a56'],[3,'#c9b3e6','#fff6dc','#9a82c4'],[4,'#ffd166','#e0402e','#d6a63a']];
@@ -381,7 +383,8 @@ const rack=(x,y,sway=0,sign=true,sleeve=null)=>{
   // feet and casters
   R(x-56,y-3,112,6,OUT); R(x-54,y-2,108,3.5,'#7d8892'); R(x-54,y-2,108,1.2,'#d8dce2');
   for(const wx of [-50,50]) { R(x+wx-2.5,y+2,5,5,OUT); R(x+wx-1,y+2,2,5,STEEL); EO(x+wx,y+9,5,5,'#2b2a26'); E(x+wx,y+9,1.8,1.8,'#aeb3ba'); }
-  if(sign) { Ln(x-26,y-123,x-26,y-132,3,OUT); Ln(x+26,y-123,x+26,y-132,3,OUT); Ln(x-26,y-123,x-26,y-132,1.4,STEEL); Ln(x+26,y-123,x+26,y-132,1.4,STEEL);
+  }
+  if(sign) { const ty=paintedRack?y-112:y-123; Ln(x-26,ty,x-26,y-132,3,OUT); Ln(x+26,ty,x+26,y-132,3,OUT); Ln(x-26,ty,x-26,y-132,1.4,STEEL); Ln(x+26,ty,x+26,y-132,1.4,STEEL);
     RO(x-36,y-152,72,22,'#1b2a5a'); R(x-34,y-150,68,18,'#233a7a'); label('WARDROBE',x,y-144,CREAM,1);
     for(let i=0;i<13;i++) { const on=Math.sin(sway*4+i*1.1)>0; E(x-33+i*5.5,y-151,1.5,1.5,on?'#ffe08a':'#8a7a4a'); E(x-33+i*5.5,y-131,1.5,1.5,on?'#8a7a4a':'#ffe08a'); } }
 };
@@ -802,12 +805,15 @@ T.continuity_pins=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotF
 // ---------- Metro Tap Card (A3; key metro_tap; same numbers as Lost-and-Found Warmth) ----------
 // He taps his card at the reader (BEEP), a light-rail train glides in behind the line and stops with its doors right at
 // the friend; warm air rolls out, they feel better; ding-dong, doors closing, it pulls away.
-const tapCard=(x,y,ang)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); RO(-17,-11,34,22,'#2f7fd0'); R(-17,-4,34,4,'#ffd166'); R(-13,4,10,4,'#dfe6ee'); label('TAP',4,4,'#fff6dc',1); gfx.restore(); };
-const reader=(x,y,ok)=>{ RO(x-6,y-58,12,58,'#5e6670'); RO(x-14,y-80,28,26,'#3a3f46'); R(x-10,y-76,20,14,ok?'#5ad06a':'#2a2f36'); if(ok) { Ln(x-5,y-69,x-1,y-65,2.5,'#fff'); Ln(x-1,y-65,x+6,y-74,2.5,'#fff'); } else label('TAP',x,y-72,GOLD,1); };
+const tapCard=(x,y,ang)=>{ if(PROPART.draw('tnb/metro_card',x,y,{w:44,rot:ang})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(ang); RO(-17,-11,34,22,'#2f7fd0'); R(-17,-4,34,4,'#ffd166'); R(-13,4,10,4,'#dfe6ee'); label('TAP',4,4,'#fff6dc',1); gfx.restore(); };
+const reader=(x,y,ok)=>{ if(PROPART.draw('tnb/card_reader',x,y-42,{h:86})) { if(!ok) label('TAP',x,y-102,GOLD,1); return; }   // painted reader (its light is always green)
+  RO(x-6,y-58,12,58,'#5e6670'); RO(x-14,y-80,28,26,'#3a3f46'); R(x-10,y-76,20,14,ok?'#5ad06a':'#2a2f36'); if(ok) { Ln(x-5,y-69,x-1,y-65,2.5,'#fff'); Ln(x-1,y-65,x+6,y-74,2.5,'#fff'); } else label('TAP',x,y-72,GOLD,1); };
 SC.tv2_reader=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fin(u,.08)*fade(u,.9); reader(P.x,P.y,ms>P.beep);
   if(ms<P.beep+120) { const h=hand(); tapCard(h.x-4,h.y-10,-.2); }
   if(ms>P.beep&&ms<P.beep+900) bigWord('BEEP!',P.x,P.y-104,'#9be39a',3); };
 const trainCar=(x,y,P,doors)=>{ const L=P.len,Hh=70,top=y-Hh;
+  if(PROPART.draw('tnb/light_rail_train',x,y-62,{w:176})) { P.paint=1; return; }   // painted light-rail car (no animated doors; the warm light cone still opens at the friend)
+  P.paint=0;
   poly([[x-L*.5+26,top],[x+L*.5,top],[x+L*.5,y-10],[x-L*.5,y-10],[x-L*.5,top+30]],'#dfe3e8');
   R(x-L*.5+8,y-24,L-8,8,'#e0402e'); R(x-L*.5+20,top+4,L-24,4,'#c9a23a');
   poly([[x-L*.5+28,top+8],[x-L*.5+44,top+8],[x-L*.5+44,top+30],[x-L*.5+8,top+30]],'#2a3a4a',2);
@@ -822,7 +828,7 @@ SC.tv2_train=(s,u)=>{ const ms=s.t*1000,P=s.P; let x;
   if(ms<P.in) return; const doors=ms<P.open?0:ms<P.shut?ez((ms-P.open)/200):1-ez((ms-P.shut)/200);
   gfx.globalAlpha=1; trainCar(x,P.y+Math.sin(ms/50)*(ms<P.stop||ms>P.go?.8:0),P,doors);
   if(ms>P.open&&ms<P.shut+200) { const dx=x+P.dx; gfx.globalAlpha=.35*doors; poly([[dx-16,P.y-62],[dx+16,P.y-62],[dx+46,P.y+14],[dx-46,P.y+14]],'#ffd98a',0); }
-  gfx.globalAlpha=1; if(ms>P.stop-200&&ms<P.go) { const sy=Math.max(4,Math.min(P.y-122,P.top-48)); RO(x+P.dx-60,sy,120,40,'#2a2f36'); label('NEXT STOP',x+P.dx,sy+5,'#ffb04a',2); label(P.name,x+P.dx,sy+25,'#ffd27a',2); } };
+  gfx.globalAlpha=1; if(ms>P.stop-200&&ms<P.go) { const sy=Math.max(4,Math.min(P.y-(P.paint?168:122),P.top-48)); RO(x+P.dx-60,sy,120,40,'#2a2f36'); label('NEXT STOP',x+P.dx,sy+5,'#ffb04a',2); label(P.name,x+P.dx,sy+25,'#ffd27a',2); } };
 T.metro_tap=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foe=t.side==='foe',me=homeOf(m),self=t===m;
   const rx=me.x-62,P={x:rx,y:me.y,beep:900};
   const TR={in:1100,stop:2000,open:2150,shut:3050,go:3300,gone:4100,y:Math.max(110,H.base-14),len:260,dx:0,name:nameTxt(t),top:H.top};
@@ -1488,8 +1494,9 @@ SC.t5_hill=(s,u)=>{ const P=s.plan,ms=s.t*1000,k=ez(ms/400)*(u>.92?(1-u)/.08:1),
     gfx.strokeStyle='#5a3a2a'; gfx.lineWidth=5; gfx.beginPath(); gfx.moveTo(px,py); gfx.quadraticCurveTo(px+8,py-ph/2,px+3,py-ph); gfx.stroke();
     gfx.fillStyle='#2f5a3a'; for(let f=0;f<7;f++) { const a=f/7*Math.PI*2+Math.sin(s.t*2+j)*.05; gfx.beginPath(); gfx.ellipse(px+3+Math.cos(a)*14,py-ph+Math.sin(a)*5,17,4,a,0,Math.PI*2); gfx.fill(); } }
   // the signs at the top
-  if(grow>.8) { const sx=A.x-34,sy=ay-22; RO(sx-2,sy-92,4,92,'#8a9098'); RO(sx-40,sy-96,80,18,'#2f7a4a'); label('BAXTER ST',sx,sy-91,'#ffffff',2);
-    gfx.save(); gfx.translate(sx,sy-58); gfx.rotate(Math.PI/4); RO(-15,-15,30,30,'#ffd166'); gfx.restore(); label('32%',sx,sy-61,'#2b2a26',1); }
+  if(grow>.8) { const sx=A.x-34,sy=ay-22; if(PROPART.draw('tnb/street_signs',sx,sy-54,{h:108})) { label('32%',sx+32,sy-12,OUT,1); label('32%',sx+32,sy-13,'#ffd166',1); } else {   // painted BAXTER ST + steep-hill signs
+    RO(sx-2,sy-92,4,92,'#8a9098'); RO(sx-40,sy-96,80,18,'#2f7a4a'); label('BAXTER ST',sx,sy-91,'#ffffff',2);
+    gfx.save(); gfx.translate(sx,sy-58); gfx.rotate(Math.PI/4); RO(-15,-15,30,30,'#ffd166'); gfx.restore(); label('32%',sx,sy-61,'#2b2a26',1); } }
   gfx.globalAlpha=1; };
 // The board under his feet: tilted down the hill while he bombs it, sideways in the slide. Speed lines and wheel sparks.
 const board=(x,y,tilt,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(sc,sc); for(const wx of [-24,22]) { E(wx,8,6,6,OUT); E(wx,8,4,4,RED); E(wx,8,1.5,1.5,GOLD); }
@@ -1872,7 +1879,8 @@ T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=home
 // ---------- Coffee Run (B4; key coffee_run; replaces Status: Green; Fix the Wobble's numbers) ----------
 // The wardrobe runner's job. TNB says "coffee run" and sprints offstage. A cafe sign and a long line flash by while he waits.
 // He sprints back with a cardboard tray of cups and hands the friend theirs (their name is spelled wrong). Heal + VP.
-const cup=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); PO([[-6,-13],[6,-13],[4.4,0],[-4.4,0]],WHITE,2); R(-5.2,-9,10.4,5,'#a8743c'); RO(-7,-17,14,5,'#3a2a22'); gfx.restore(); };
+const cup=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tnb/coffee_mug',0,-9,{h:19})) { gfx.restore(); return; }   // painted coffee mug
+  PO([[-6,-13],[6,-13],[4.4,0],[-4.4,0]],WHITE,2); R(-5.2,-9,10.4,5,'#a8743c'); RO(-7,-17,14,5,'#3a2a22'); gfx.restore(); };
 SC.t6_tray=(s,u)=>{ const ms=s.t*1000; if(ms<s.from||ms>s.until) return; const h=hand(); gfx.globalAlpha=1; RO(h.x-16,h.y-3,32,5,'#b89868'); cup(h.x-9,h.y-4,1.1); cup(h.x+1,h.y-4,1.1); if(ms<s.cupGone) cup(h.x+11,h.y-4,1.1); steam(h.x-4,h.y-22,s.t,2,'#ffffff',16); };
 SC.t6_cafe=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.9); const x=s.x,y=s.y;
   RO(x-40,y-70,80,22,CREAM); label('CAFE',x-12,y-63,INK,2); RO(x+34,y-48,6,48,'#8a6436');
