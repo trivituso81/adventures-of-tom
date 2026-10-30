@@ -33,6 +33,10 @@ Tom is a product director. He designs and directs; he does **not** code and does
 
 Tom may drop a PNG enemy sprite sheet into any conversation, often with no words. That means "install this enemy". Follow `docs/ENEMY_SHEETS.md`: identify the enemy id, bake the sheet (tools/sprite-bake), wire the painted frames, test a fight against it, push, and log it in that doc's table.
 
+## Room paintings (standing rule, 2026-10-30)
+
+Tom is redoing every interior as one square painting per room that fills the iPhone screen in portrait and landscape. He may drop a zip of these paintings into any conversation, often with no words. That means "install these rooms". Follow `docs/ROOM_PAINTINGS.md`: check each image against the art requirements (square, full bleed, no people or text), convert to `art/<id>.webp`, update PLATES, grid size, walk maps, doors, residents and props, test portrait and landscape with screenshots, push to `main`, and tell Tom which rooms are live and which need a redo. Never ask him to unpack or resize anything.
+
 ## How to work
 
 1. Read only the files the task needs. The repo is large (`engine/battle2-kind.js` alone is 400 KB). Use search to find the section; do not open whole files.
