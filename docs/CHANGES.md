@@ -1,3 +1,7 @@
+## 2026-10-30: Slimmer dialogue box, part 2 (portrait height)
+- Part 1 only removed the divider and hint; the box stayed tall. Portrait now shrinks the box itself: face 89 to 56 px, text 18 to 16 px, AUTO and the page count sit in the text column beside the face instead of in a row below it, less top and bottom padding (half the home-bar inset). Box is about 87 px plus the home-bar inset, down from about 197 px on Tom's phone.
+- CSS only (`index.html`, "Slim dialogue box" block). Landscape and the splash panel unchanged.
+
 ## 2026-10-30: Slimmer dialogue box
 - Removed the divider line and the "Tap here or A / Enter to continue" hint from the dialogue box. AUTO and the page count now sit right under the text. Portrait top and bottom padding trimmed, and the portrait face moved up with it. Portrait box is about 52 px shorter (197 to 145 px with a portrait face); landscape box is tighter too.
 - CSS only, in `index.html` after the landscape dialogue rules. The hint element still exists but is hidden, so `engine/overworld.js` is untouched. The camera and area changes are untouched (`engine/intro.js` reads the box height, so it just gets more room). The splash panel keeps its own footer.
