@@ -21,4 +21,4 @@ const PROPART=(()=>{
   return {draw,ready,preload,get,hits};
 })();
 // Props that moves already use; fetched shortly after start so the first fight shows them, not the drawn fallback.
-setTimeout(()=>PROPART.preload(['tom/headphones','tom/sourdough_boule','grace/gold_dumpling_squishy','rose/lamby','rose/backup_lamby','amy/kettlebell','deedee/crisp_pan','boppy/cayenne_pepper','tnb/test_mug']),2500);
+setTimeout(()=>PROPART.preload(['tom/headphones','tom/sourdough_boule','grace/gold_dumpling_squishy','rose/lamby','rose/backup_lamby','amy/kettlebell','deedee/crisp_pan','boppy/cayenne_pepper','tnb/test_mug','tom/airliner','tom/lie_flat_pod','tom/airline_suite_door','tom/boarding_group_5_sign','tom/duvet','tom/sleep_mask','tom/phone_and_boarding_passes','tom/gate_scanner','tom/gate_0_door','tom/hot_towel']),2500);

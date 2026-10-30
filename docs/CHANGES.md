@@ -5,6 +5,10 @@
 - Removed the old hard-coded tests casa_test, loft_test, loftlobby_test, tower_test (other tower map tests stay). `rooms_test.py` and `tap_test.py` cover the new rooms.
 - Tests: rooms_test 4 rooms FAILS []; smoke FAILS []; camera_clamp FAILS []; ch12_test FAILS []; tap_test on the 4 rooms PASS. Screenshots in `tools/shots/room-*`.
 
+## 2026-10-30: Delta One moves use the painted props
+- Tom's Seat 1A (Boarding Group 5 sign, suite door that slides in, duvet, sleep mask), Boarding Group Zero (phone with boarding passes, gate scanner, Gate 0 door, lie-flat pod, sleep mask, airliner, hot towels) and the plain Delta One move (pod, airliner) now paint first and fall back to the drawn version. The red carpet is still drawn (it stretches to any length). `tools/kit_test.py tom --only=seat_1a` prints which painted props fired.
+- Script tags: tom-moves `tom6`, prop-art `pa3`.
+
 ## 2026-10-30: The Square repainted: every shop and exit labeled, a much larger fountain
 - Tom sent a new painting of The Square (`docs/reference/town_v2_from_tom.png`, 1347 x 1168, scaled to 1920 x 1664 = 30 x 26 tiles at 64 px) generated from the prompt in the Project doc `claude/square-redo.md`. Built into `art/town.webp` by `tools/town_signs.py`.
 - Labels: the generator drew the eight shop boards too small to read on a phone (about 124 x 33 px), so the script repaints them as 240 x 96 px boards (cream face, frame in each building's colour). The three green exit boards are Tom's. All eleven boards are lettered live by `drawPlateSigns` in `engine/plate.js` (`PLATE_SIGNS.town`, face rects in art px): CRUMB BAKERY, HUSH LIBRARY, SPROUT HOUSE, PENNY'S POCKETS, SNAIL MAIL, KETTLE COTTAGE, MOON CLUB, TAXI CO.; exits GRUMP HOLLOW (north steps), RIVITUSO ROW (south street), SCHOOL (east opening). The exits are painted open; the fallen branch and school gate are still drawn over them by the story gates, so the labels show even while closed. Change a name by editing `PLATE_SIGNS`, no re-paint.

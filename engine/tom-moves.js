@@ -90,9 +90,11 @@ SC.seat=(s,u)=>{
   // A lie-flat pod slides in behind Tom: long bed, headrest at the far end, a little tray with a glass.
   const p=tomPos(),b=p.base,slide=ez(u/.16),fade=u>.9?(1-u)/.1:1; gfx.globalAlpha=fade;
   const x=p.cx+(1-slide)*260,w=150;
+  if(!PROPART.draw('tom/lie_flat_pod',x+w/2-4,b-46,{h:96})) {
   R(x-40,b-30,w+8,30,OUT); R(x-38,b-28,w+4,26,'#1d3a8a'); R(x-38,b-28,w+4,6,'#3458b0'); R(x-34,b-10,w-4,4,'#142a66');
   R(x+w-54,b-74,44,50,OUT); R(x+w-52,b-72,40,46,'#1d3a8a'); R(x+w-50,b-70,36,14,'#c9ccd4'); R(x+w-52,b-44,40,4,'#3458b0');
   R(x+w-70,b-42,30,8,OUT); R(x+w-68,b-40,26,4,'#e8e8f0'); R(x+w-62,b-56,8,16,OUT); R(x+w-60,b-54,4,12,'#ffd166'); E(x+w-58,b-56,5,3,OUT); E(x+w-58,b-56,3.4,1.6,'#fff8e8');
+  }
   if(u>.3) { label('1A',x+w-32,b-92,'#ffe08a',2); label('LIE FLAT',x+40,b-44,'#fff1cb',1); }
 };
 SC.plane=(s,u)=>{
@@ -100,10 +102,12 @@ SC.plane=(s,u)=>{
   const t=ez(u),x=lerp(640,-200,t),dip=Math.sin(t*Math.PI),y=60+dip*70,sc=1+dip*.5; gfx.globalAlpha=u>.92?(1-u)/.08:1;
   for(let k=0;k<2;k++) { gfx.strokeStyle='rgba(255,255,255,'+(.35-k*.1)+')'; gfx.lineWidth=7-k*2; gfx.beginPath(); gfx.moveTo(x+40*sc,y-6+k*14); gfx.quadraticCurveTo(x+200,y-10+k*14-dip*20,x+420,y-50*(1-t)+k*14); gfx.stroke(); }
   gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); gfx.rotate(-.12+dip*.1);
+  if(!PROPART.draw('tom/airliner',0,0,{w:130})) {
   poly([[-60,-4],[-50,-12],[40,-12],[62,-2],[40,8],[-50,8]],'#e8e8f0',true); poly([[-60,-4],[-50,8],[40,8],[62,-2]],'#c9ccd4'); poly([[-54,-12],[-40,-36],[-30,-36],[-36,-12]],'#1d3a8a',true);
   poly([[-10,-6],[6,-28],[24,-28],[12,-6]],'#1d3a8a',true); poly([[-20,2],[-2,26],[18,26],[6,2]],'#c9ccd4',true);
   for(let k=0;k<7;k++) R(-36+k*11,-7,6,4,'#5c8fe0'); R(44,-9,10,5,'#5c8fe0'); poly([[-18,2],[-6,2],[-4,12],[-18,12]],'#8a8f96',true); poly([[-50,-12],[-56,-20],[-46,-20],[-42,-12]],'#e0402e');
   label('DELTA',-20,-5,'#1d3a8a',1);
+  }
   gfx.restore();
   if(dip>.6) { const q=(dip-.6)/.4; for(let k=0;k<6;k++) { const yy=200+k*12,ln=20+k*8; Ln(GX-80-k*6,yy,GX-80-k*6-ln*q,yy+2,3,'rgba(255,255,255,'+(.7*q)+')'); } for(let k=0;k<5;k++) { const a=rr(s,k); E(GX-60-q*80*a,230-a*40,4,3,'#8fb07a'); } }
 };
@@ -691,28 +695,31 @@ SC.tm_puffs=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+
 // ---------- Boarding Group Zero ----------
 // Gate scanner beeps PRIORITY BOARDING, a red carpet rolls to a glowing door, Tom lies flat in a pod with a sleep mask,
 // the jet rolls in (his window says Zzz), streaks through the enemy line, hot towels fall on the party, Tom wakes rested.
-SC.tm_phone=(s,u)=>{ const ms=s.t*1000,h=hand(); gfx.globalAlpha=fade(u,.9); RO(h.x-6,h.y-14,10,16,'#2b2f38'); R(h.x-4,h.y-12,6,11,ms>s.beep?'#3fe07a':'#5c8fe0'); };
+SC.tm_phone=(s,u)=>{ const ms=s.t*1000,h=hand(); gfx.globalAlpha=fade(u,.9); if(!PROPART.draw('tom/phone_and_boarding_passes',h.x-2,h.y-8,{w:28})) { RO(h.x-6,h.y-14,10,16,'#2b2f38'); R(h.x-4,h.y-12,6,11,ms>s.beep?'#3fe07a':'#5c8fe0'); } };
 SC.tm_scan=(s,u)=>{ const ms=s.t*1000,ok=ms>s.beep,x=s.x,y=s.y,k=ez(ms/300); gfx.globalAlpha=fade(u,.92);
-  const top=y-64*k; RO(x-5,top+14,10,y-top-14,'#6a6f7a'); RO(x-13,top,26,16,'#2b2f38'); R(x-10,top+3,20,10,ok?'#3fe07a':'#4a5060');
+  const top=y-64*k; if(!PROPART.draw('tom/gate_scanner',x,y-39*k,{h:Math.max(4,78*k)})) { RO(x-5,top+14,10,y-top-14,'#6a6f7a'); RO(x-13,top,26,16,'#2b2f38'); R(x-10,top+3,20,10,ok?'#3fe07a':'#4a5060'); }
   if(ok&&ms<s.beep+1300) { label('PRIORITY',x,top-34,GREEN,2); label('BOARDING',x,top-20,GREEN,2); } };
 SC.tm_carpet=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez((ms-P.r0)/(P.r1-P.r0)); if(ms<P.r0) return; const xe=lerp(P.x0,P.x1,k); gfx.globalAlpha=fade(u,.93);
   const a=Math.min(P.x0,xe),b=Math.max(P.x0,xe); R(a,P.y-5,b-a,12,OUT); R(a,P.y-3,b-a,8,'#c8283a'); R(a,P.y-3,b-a,2,'#e8c84a'); R(a,P.y+3,b-a,2,'#e8c84a');
   if(k<1) { EO(xe,P.y-2,6,8,'#a81e30'); R(xe-1,P.y-8,2,12,'#e8c84a'); } };
 SC.tm_door=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez((ms-P.d0)/300),x=P.x,y=P.y; if(ms<P.d0) return; gfx.globalAlpha=fade(u,.9);
   const h=96*k,w=48,glow=ms>P.in&&ms<P.in+500?1-(ms-P.in)/500:0;
-  R(x-w/2-4,y-h-4,w+8,h+4,OUT); R(x-w/2-2,y-h-2,w+4,h+2,'#8a8f9a'); R(x-w/2,y-h,w,h,'#fff0b4'); gfx.globalAlpha*=.5; R(x-w/2+4,y-h+4,w-8,h-4,'#ffffff'); gfx.globalAlpha=fade(u,.9);
+  const pdr=h>3&&PROPART.draw('tom/gate_0_door',x,y-h/2-6,{w:78*(.4+.6*k),h:h+12});
+  if(!pdr) {   R(x-w/2-4,y-h-4,w+8,h+4,OUT); R(x-w/2-2,y-h-2,w+4,h+2,'#8a8f9a'); R(x-w/2,y-h,w,h,'#fff0b4'); gfx.globalAlpha*=.5; R(x-w/2+4,y-h+4,w-8,h-4,'#ffffff'); gfx.globalAlpha=fade(u,.9); }
   if(glow>0) { gfx.globalAlpha=glow*.6; E(x,y-h/2,w*1.4,h*.8,'#fff6cc'); gfx.globalAlpha=fade(u,.9); }
-  if(k>.9) { RO(x-26,y-h-24,52,14,NAVY); label('GATE 0',x,y-h-20,CREAM,1); } };
+  if(k>.9&&!pdr) { RO(x-26,y-h-24,52,14,NAVY); label('GATE 0',x,y-h-20,CREAM,1); } };
 // The lie-flat pod. Tom's body is drawn by the path (rotated); the duvet and mask go over him.
 SC.tm_pod=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; gfx.globalAlpha=fin(u,.08)*fade(u,.88);
-  if(!s.front) { RO(x-54,y-14,108,12,NAVY); R(x-52,y-2,104,10,'#14204a'); R(x-50,y-12,100,4,'#3a5aa8'); RO(x+40,y-40,12,28,NAVY); RO(x-58,y-34,12,22,'#c9ccd4'); R(x-60,y-36,16,3,OUT); RO(x-56,y-44,4,8,'#cfe6ee'); return; }
+  if(!s.front) { if(PROPART.draw('tom/lie_flat_pod',x-4,y-34,{w:128})) return; RO(x-54,y-14,108,12,NAVY); R(x-52,y-2,104,10,'#14204a'); R(x-50,y-12,100,4,'#3a5aa8'); RO(x+40,y-40,12,28,NAVY); RO(x-58,y-34,12,22,'#c9ccd4'); R(x-60,y-36,16,3,OUT); RO(x-56,y-44,4,8,'#cfe6ee'); return; }
   const lay=ms>P.lay; if(!lay) return;
-  RO(x-52,y-50,70,36,'#eef2f6'); R(x-52,y-50,70,4,'#c9d2e0'); for(let k=0;k<3;k++) R(x-44+k*20,y-30,8,2,'#c9d2e0');
-  R(x-52,y-18,104,16,NAVY); R(x-52,y-6,104,4,'#3a5aa8');   // pod rim in front of the body
-  RO(x+18,y-31,16,6,NAVY);   // sleep mask over the eyes
+  const pp=PROPART.ready('tom/lie_flat_pod');
+  if(!pp) { RO(x-52,y-50,70,36,'#eef2f6'); R(x-52,y-50,70,4,'#c9d2e0'); for(let k=0;k<3;k++) R(x-44+k*20,y-30,8,2,'#c9d2e0');
+  R(x-52,y-18,104,16,NAVY); R(x-52,y-6,104,4,'#3a5aa8'); }   // pod rim in front of the body
+  if(!PROPART.draw('tom/sleep_mask',x+26,y-28,{w:20})) RO(x+18,y-31,16,6,NAVY);   // sleep mask over the eyes
   RO(x-22,y-58,14,7,CREAM);   // a warm towel on the chest
   for(let k=0;k<3;k++) { const q=((s.t*.8+k/3)%1); gfx.globalAlpha=(1-q)*fade(u,.88); label('Z',x+30+q*24+k*2,y-56-q*30,CREAM,1+(k===2?1:0)); } };
 const jet=(k,t,zz,thrust)=>{ gfx.save(); gfx.scale(k,k);
+  const pa=PROPART.draw('tom/airliner',136,-4,{w:210}); if(!pa) {
   PO([[160,4],[214,4],[246,46],[224,46]],'#c9ccd4');   // far wing
   PO([[206,-12],[236,-52],[254,-52],[248,-12]],NAVY);   // tail fin
   R(0,-16,250,32,OUT); E(4,0,18,18,OUT); PO([[244,-16],[272,-8],[272,6],[244,16]],OUT,0);
@@ -723,6 +730,7 @@ const jet=(k,t,zz,thrust)=>{ gfx.save(); gfx.scale(k,k);
   PO([[96,6],[150,6],[196,52],[176,52]],'#b8bac2');   // near wing
   R(116,18,40,16,OUT); R(118,20,36,12,'#9a9ca4'); E(118,26,6,7,'#2b2f38');
   const fl=thrust*(6+Math.sin(t*40)*2); if(fl>0) { E(158+fl,26,4+fl,5,'#ffb04a'); E(156+fl*.6,26,2+fl*.5,3,'#fff6cc'); }
+  }
   gfx.restore();
   if(zz) for(let j=0;j<2;j++) { const q=((t*.9+j/2)%1); gfx.globalAlpha=1-q; label('Z',(49+q*8)*k,(-14-q*26)*k,CREAM,2); gfx.globalAlpha=1; } };
 SC.tm_jet=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,th=.4;
@@ -736,8 +744,8 @@ SC.tm_jet=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,th=.4;
   if(ms>P.park&&ms<P.go) { label('COZY',x+120,y-46,WARM,2); label('KINETIC',x+170,y+72,'#ffb04a',2); } };
 SC.tm_passes=(s,u)=>{ for(let k=0;k<10;k++) { const a=s.seed+k*.63,d=ez(u)*(30+k%3*12),x=s.x+Math.cos(a)*d,y=s.y-Math.abs(Math.sin(a))*d*.8+u*u*60;
   gfx.save(); gfx.translate(x,y); gfx.rotate(a+u*6); gfx.globalAlpha=1-u*u; R(-7,-4,14,8,OUT); R(-6,-3,12,6,'#ffffff'); R(-6,-3,3,6,NAVY); gfx.restore(); } };
-const towel=(x,y,uu)=>{ R(-9,-5,18,10,OUT); R(-8,-4,16,8,CREAM); R(-4,-4,1,8,'#e6dccb'); R(2,-4,1,8,'#e6dccb'); gfx.globalAlpha=.6; for(let k=0;k<2;k++) E(-4+k*8,-10-((uu*30+k*7)%10),2,3,'#ffffff'); gfx.globalAlpha=1; };
-SC.tm_mask=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,8); gfx.globalAlpha=fade(u,.85); RO(p.x-16,p.y-2,30,5,NAVY); };
+const towel=(x,y,uu)=>{ if(PROPART.draw('tom/hot_towel',0,0,{w:26})) return; R(-9,-5,18,10,OUT); R(-8,-4,16,8,CREAM); R(-4,-4,1,8,'#e6dccb'); R(2,-4,1,8,'#e6dccb'); gfx.globalAlpha=.6; for(let k=0;k<2;k++) E(-4+k*8,-10-((uu*30+k*7)%10),2,3,'#ffffff'); gfx.globalAlpha=1; };
+SC.tm_mask=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,8); gfx.globalAlpha=fade(u,.85); if(!PROPART.draw('tom/sleep_mask',p.x,p.y,{w:30})) RO(p.x-16,p.y-2,30,5,NAVY); };
 Tm.delta_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),party=b2LiveParty();
   const doorX=Math.round(Math.max(Gp.x1+70,me.x-80)),floor=Math.min(312,me.base+4),pod={x:doorX,y:floor};
   const lieSc=.72,lieBase=pod.y-22+TH()*lieSc/2;
@@ -1346,12 +1354,13 @@ Tm.overpriced_gadget=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2L
 // door slides across the row and SLAMS shut (the hit), DO NOT DISTURB light on. The motorized shade whirs down behind
 // it. The door slides back on dazed monsters. He tucks the most hurt friend under a plush duvet and a pillow (Guarded),
 // then lies flat himself for a second, eye mask on.
-SC.t3_group5=(s,u)=>{ const a=fin(u,.08)*fade(u,.85),x=s.x,y=s.y; gfx.globalAlpha=a; gfx.save(); gfx.translate(x,y+Math.sin(s.t*4)*2); RO(-74,-18,148,36,'#2050a0'); label('BOARDING',0,-13,CREAM,2); label('GROUP 5',0,1,GOLD,2); gfx.restore(); };
+SC.t3_group5=(s,u)=>{ const a=fin(u,.08)*fade(u,.85),x=s.x,y=s.y; gfx.globalAlpha=a; gfx.save(); gfx.translate(x,y+Math.sin(s.t*4)*2); if(!PROPART.draw('tom/boarding_group_5_sign',0,22,{h:92})) { RO(-74,-18,148,36,'#2050a0'); label('BOARDING',0,-13,CREAM,2); label('GROUP 5',0,1,GOLD,2); } gfx.restore(); };
 SC.t3_suite=(s,u)=>{ const ms=s.t*1000,P=s.plan,x0=P.x0,x1=P.x1,top=P.top+44,bot=P.bot,W=x1-x0;
   const show=ez(ms/250)*(ms>P.gone?1-ez((ms-P.gone)/300):1); if(show<=0) return; gfx.globalAlpha=show;
   // The privacy door slides in from the right edge of the row.
   let c; if(ms<P.d0) c=0; else if(ms<P.slam) c=ez((ms-P.d0)/(P.slam-P.d0)); else if(ms<P.open) c=1; else c=1-ez((ms-P.open)/400);
-  if(c>0) { const dw=W*c,dx=x1-dw; RO(dx,top,dw,bot-top,NAVY); for(let k=0;k<5;k++) { const yy=top+64+k*((bot-top-70)/5); if(dw>16) R(dx+6,yy,dw-12,3,NAVY2); }
+  let pd=false; if(c>0.02) { const dw0=W*c; gfx.save(); gfx.beginPath(); gfx.rect(x1-dw0,top-2,dw0,bot-top+4); gfx.clip(); pd=PROPART.draw('tom/airline_suite_door',x1-W/2,(top+bot)/2,{w:W,h:bot-top}); gfx.restore(); }
+  if(c>0&&!pd) { const dw=W*c,dx=x1-dw; RO(dx,top,dw,bot-top,NAVY); for(let k=0;k<5;k++) { const yy=top+64+k*((bot-top-70)/5); if(dw>16) R(dx+6,yy,dw-12,3,NAVY2); }
     if(dw>60) { RO(dx+10,top+8,36,20,'#c9a23a'); label('1A',dx+28,top+13,INK,2); E(dx+dw-14,top+16,5,5,ms>P.slam&&Math.floor(ms/250)%2?RED:'#5a1a14'); RO(dx+dw-14,(top+bot)/2,6,26,GREY2);
       // The window in the door, and its motorized shade.
       const wx=dx+dw/2,wy=top+44,ww=Math.min(64,dw-70),wh=34; if(ww>20) { rrO(wx-ww/2,wy-wh/2,ww,wh,10,'#bfe8ff'); E(wx-8,wy-6,10,4,'#ffffff');
@@ -1359,8 +1368,10 @@ SC.t3_suite=(s,u)=>{ const ms=s.t*1000,P=s.plan,x0=P.x0,x1=P.x1,top=P.top+44,bot
         if(ms>P.shade&&ms<P.shade+800) bigWord('WHIRRR',wx,wy+26,CREAM,2); } } }
   if(ms>P.d0&&ms<P.slam) bigWord('BZZZ',Math.min(560,x1+20),top+40,CREAM,2); };
 SC.t3_duvet=(s,u)=>{ const ms=s.t*1000,H=s.H,a=ez(ms/350); gfx.globalAlpha=fade(u,.9); const w=H.w+18,full=s.lie?H.h:H.h*.62,h=full*a,x=H.x-w/2+(s.dx||0),y=H.base+2-h;
+  if(h<3||!PROPART.draw('tom/duvet',x+w/2,y+h/2,{w:w,h:h})) {
   rrO(x,y,w,h,8,'#6c8ae0'); for(let k=1;k<4;k++) R(x+4,y+k*h/4,w-8,2,'#5a76c8'); for(let k=1;k<3;k++) R(x+k*w/3,y+4,2,Math.max(0,h-8),'#5a76c8'); R(x,y,w,Math.min(9,h),'#f4f0ff'); for(let k=0;k<3;k++) star(x+10+k*(w-20)/2,y+h*.55,3,'#ffffff'); };
-SC.t3_mask=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=fade(u,.85); const p={x:st.x+(s.lie?TH()*.36:-4),y:s.lie?st.y-18:head(st).y-2}; RO(p.x-12,p.y-4,24,8,'#3a2a5a'); R(p.x-10,p.y-2,8,4,'#5a4a8a'); R(p.x+2,p.y-2,8,4,'#5a4a8a');
+  }
+SC.t3_mask=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=fade(u,.85); const p={x:st.x+(s.lie?TH()*.36:-4),y:s.lie?st.y-18:head(st).y-2}; if(!PROPART.draw('tom/sleep_mask',p.x,p.y,{w:30})) { RO(p.x-12,p.y-4,24,8,'#3a2a5a'); R(p.x-10,p.y-2,8,4,'#5a4a8a'); R(p.x+2,p.y-2,8,4,'#5a4a8a'); }
   for(let k=0;k<3;k++) { const q=((s.t*.8)+k/3)%1; gfx.globalAlpha=Math.sin(q*Math.PI); label('Z',p.x+12+q*16+k*4,p.y-14-q*26,CREAM,2+(k%2)); } };
 Tm.seat_1a=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,64);
   const L=lowest(),LU=L?ST.unit(L):null,selfL=L===m,d0=1250,slam=1950,shade=2050,open=3000,gone=3500;
