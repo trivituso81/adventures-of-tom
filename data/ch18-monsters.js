@@ -39,4 +39,4 @@ Object.assign(MONSTERS,{
     vapor:['#ffd36a','#f4f0e6','#7ad0e8','#262432'],
     hint:'He cannot be hurt. Every ray is aimed at the family, and Tom steps in front of every one. DEFEND, heal Tom, and hold on.'}
 });
-const CH18_PINNACLE_SPOTS=[['vance',10,5]];
+const CH18_PINNACLE_SPOTS=[['vance',10,6]];
