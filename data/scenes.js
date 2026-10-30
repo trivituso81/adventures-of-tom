@@ -1562,8 +1562,8 @@ SCENES.ch5AfterBoss=()=>[
 // 9. The parking lot: Justin texts. A man in a long coat by the last car. Chapter complete.
 SCENES.ch5End=[
   {flag:'ch5-done',value:'pending'},
-  {walk:'tom',to:routeTo('tom',4,14),speed:.2}, {face:'tom',dir:'left'},
-  {place:'amy',at:[3,13],dir:'right'}, {place:'grace',at:[5,14],dir:'left'}, {place:'rose',at:[4,15],dir:'up'},
+  {walk:'tom',to:routeTo('tom',6,12),speed:.2}, {face:'tom',dir:'left'},
+  {place:'amy',at:[5,12],dir:'right'}, {place:'grace',at:[7,12],dir:'left'}, {place:'rose',at:[6,13],dir:'up'},
   {talk:'Amy',lines:['Thirty conferences. Zero tears. One very well-behaved pen.']},
   {call:()=>sfx.ding()},
   {talk:'Amy',lines:['Oh. A text. From Justin.','"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart.']},
@@ -1571,11 +1571,11 @@ SCENES.ch5End=[
   {talk:'Amy',lines:['Girls. Did we save a cookie for Dad?']},
   {talk:'Rose',lines:['...Define save.']},
   {talk:'Rose',lines:['Tata. Tata. There\'s a man.']},
-  {spawn:{name:'Long coat',look:'longcoat',at:[9,16],dir:'up'}},
+  {spawn:{name:'Long coat',look:'longcoat',at:[7,16],dir:'up'}},
   {face:'tom',dir:'right'},
   {talk:'Rose',lines:['By the last car. In a long coat. He\'s looking at us.']},
   {wait:.8},
-  {walk:'Long coat',to:[[10,16]],speed:.35},
+  {walk:'Long coat',to:[[8,16]],speed:.35},
   {call:()=>sfx.whoosh()}, {despawn:'Long coat'},
   {talk:'Tom',lines:['...Nobody there.']},
   {talk:'Amy',lines:['Probably a parent. A late one. There\'s always a late one.']},
@@ -1679,7 +1679,7 @@ STORY_MAPFX.push(time=>{
   c.globalCompositeOperation='lighter';
   for(const h of M.houses||[]) if(h.door) glow((h.door.x+.5)*T,(h.door.y+.6)*T,T*2.2,.28);
   if(M.id==='town') glow(12.5*T,11.5*T,T*2.5,.18);
-  if(M.id==='schoolyard') { glow(12*T,2*T,T*3.2,.34); glow(5*T,13*T,T*2,.12); }
+  if(M.id==='schoolyard') { glow(12*T,3.5*T,T*3.2,.3); glow(3.5*T,11.5*T,T*2,.1); }
   const p=position(player); glow((p.x+.5)*T,(p.y+.5)*T,T*2.6,.14);
   c.globalCompositeOperation='source-over';
   for(let k=0;k<14;k++) { const n=hash(k,55); if((Math.floor(time*1.5)+k)%7===0) continue; rect(n%(M.w*T),(n>>>9)%(3*T),2,2,'#fff6c0'); }

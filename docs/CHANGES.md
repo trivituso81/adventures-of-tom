@@ -965,3 +965,12 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 ## Painted enemies, batch 2: Big Shake, Tar Pit Blob, Gridlock, Canyon Coyote, Ticket Flurry, Smoglet (2026-10-29)
 - Same pipeline as batch 1 (bake_foe.py, data/foes/use.js). Big Shake is a boss (6 frames). New in bake_foe.py: thin gap second-row detection, DROP_GREY for stray specks (Tar Pit Blob). tools/foes_test.py now covers all 12 (0 fails); smoke 0 fails.
 
+
+## Schoolyard painted plate (2026-10-29)
+- Map `schoolyard` (Long Island Elementary, ch5) is now a painted plate: art/schoolyard.webp (24 x 18 tiles at 64 px, from 07_schoolyard_final.png), PLATES entry, plateMask in data/maps-le.js. The old paths and tiles lists are gone.
+- Doors: the front doors are the exits at (11,3) and (12,3); the school's doors now land on the porch at (11,4) and (12,4). West edge (0,8) and (0,9) to the Square is unchanged. The playground gate is (17,9).
+- Objects re-laid on the art: pillars (10,4) and (13,4) carry the two school wing lines, flagpole (9,5), school sign (15,5), bike rack (4,5), pickup bench (7,7), slide (20,7), swings (21,9), Minivan (2,10), Hatchback (5,10), Sedan (2,13), Snail stone (14,8, was Front walk sign), new Fence bench (19,12). Pruitt now stands at (12,9), Mr. Delgado at (8,14).
+- Reworded game text (no clips depend on these): Swings now reads "Two swings. The left one squeaks..." and absorbs the tetherball line (the tetherball object is gone, the art has no reachable pole); the sign is now "Snail stone"; new Fence bench line.
+- Chapter 5 ending moved to the aisle behind the minivan: Tom (6,12), Amy (5,12), Grace (7,12), Rose (6,13); the long coat appears at (7,16). Night glow moved to the doors.
+- Route into the parking aisle is one tile wide at (9,10), (9,11), (8,11), (8,12), or around the island.
+- Test: tools/schoolyard_test.py (0 fails). Smoke, ch5_school_test, bg_test 0 fails.
