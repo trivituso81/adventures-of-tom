@@ -1,6 +1,7 @@
 # Reach test: flood fill over the real collision grid of an outdoor map from its spawn.
 # Reports every door, exit and NPC spot that cannot be reached, and which NPCs sit in one-tile corridors.
 # Usage: python3 tools/reach_test.py [mapId ...]   (default: row)
+#        python3 tools/reach_test.py all            every painted-plate map, one summary line each (full grid only for maps with problems)
 import threading, http.server, socketserver, functools, os, sys, json
 from playwright.sync_api import sync_playwright
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
@@ -42,10 +43,16 @@ with sync_playwright() as pw:
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
     br=pw.chromium.launch(**kw); pg=br.new_page(viewport={'width':430,'height':860})
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
+    every=ids==['all']
+    if every: ids=pg.evaluate("()=>Object.keys(worlds).filter(id=>typeof PLATES!=='undefined'&&PLATES[id])")
     for i in ids:
         r=pg.evaluate(JS,i)
+        n=len(r.get('unreachable',[]))+len(r.get('blockedByNpc',[]))+len(r.get('pluggable',[]))
+        cut=sum(row.count('X') for row in r.get('grid',[]))
+        if every and not n:
+            print(f"ok   {i:14s} walkable {r.get('walkable')}"+(f"  ({cut} walkable tiles not reachable from spawn)" if cut else '')); continue
         print(json.dumps({k:v for k,v in r.items() if k!='grid'},indent=1))
         print('\n'.join(r.get('grid',[]))); print("legend: # solid, . reachable, n reachable only if NPCs move, X cut off")
-        bad+=len(r.get('unreachable',[]))+len(r.get('blockedByNpc',[]))+len(r.get('pluggable',[]))
+        bad+=n
     br.close()
 print('REACH FAILS:',bad); sys.exit(1 if bad else 0)

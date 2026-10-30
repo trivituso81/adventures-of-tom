@@ -9,6 +9,12 @@
 - Tom: make Tom more prominent in the iPhone icon.
 - New `icon-v6.png` (180x180): the painted icon cropped in tight around Tom's face, scenery kept as backdrop. `index.html` now points at it (new filename so iOS does not serve the cached icon). No code or spoken lines changed.
 - Limit: the only source is the 180px painted icon, so the crop is slightly soft. A larger painting of Tom would be sharper.
+## 2026-10-30: Walking paths follow the painted paths
+- Tom: many places show a clear painted path that the character cannot walk.
+- Town: had no walk mask and invisible legacy tree and fence objects blocking painted paths. Rebuilt a `plateMask` for the town (data/maps-le.js), removed the legacy tree and fence lists, re-seated benches, planters and the shop sign on the painting, and added `noGo` so villagers never plug the doors and the east neck.
+- Other maps: about 200 tiles opened across 8 map files (maps-le, la, p2, ch13, ch17, ch18, ch19, ch20), reviewed one by one against the paintings (oak plank bridge, moon club floor and carpet, stacks aisles, sundial and pier paths, tower and gate floors). Low-confidence tiles (props, void edges) were left closed.
+- `tools/reach_test.py all` checks every plate map for unreachable exits and NPC plugs. Interactive objects (taxi, counters, shelves and similar) that overreach their art were left alone. Known: the tap test on blvd (27,23) already failed before this change.
+- smoke FAILS: []. No spoken lines changed. Not yet seen on Tom's phone (close and reopen the app).
 
 ## 2026-10-30: Old Oak door no longer gets stuck when the last scrap scene is cut short
 - Tom: no way to knock at the old oak tree, stuck in the game.
