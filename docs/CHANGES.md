@@ -1,3 +1,7 @@
+## 2026-10-30: Battle prop sheets, Tom's first two (source only)
+- Tom ran the image AI on the first prop prompts. Saved the two returned sheets under `tools/sprite-bake/src/props/` with a README saying which cells are right. 30 of Tom's 31 props are usable; the retro console is still to redo.
+- Not wired into the game. No code change.
+
 ## 2026-10-30: Slimmer dialogue box, part 2 (portrait height)
 - Part 1 only removed the divider and hint; the box stayed tall. Portrait now shrinks the box itself: face 89 to 56 px, text 18 to 16 px, AUTO and the page count sit in the text column beside the face instead of in a row below it, less top and bottom padding (half the home-bar inset). Box is about 87 px plus the home-bar inset, down from about 197 px on Tom's phone.
 - CSS only (`index.html`, "Slim dialogue box" block). Landscape and the splash panel unchanged.
