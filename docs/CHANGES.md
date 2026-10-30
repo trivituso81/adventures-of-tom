@@ -1,3 +1,11 @@
+## 2026-10-30: Painted props wired into the rest of the cast (Grace, Amy, Deedee, Boppy, TNB, Tom)
+
+- Grace 10 of 12, Amy 36 of 36, Deedee 25 of 26, Boppy 26 of 26, TNB 6 of 24, Tom 17 of 17 (with Rose's 24 and the Tombos, every painted prop is now referenced except the ones below). Drawn versions stay as fallbacks. Visuals only.
+- Not wired: Grace `phone_on_mini_tripod` (no matching drawn prop); Deedee `dining_table` (the Sunday Roast table is a different shape, needs a new scene); 18 TNB props (celadon_glaze, clay_pigeon, clay_wedge, director_s_chair, feather_boa, kiln_cone, needle_and_thread, painted_curb, painted_flat, red_sleeve, rocking_platform, safety_pins, shirts_on_hangers, slip_bucket, spirit_level, stage_light, velvet_jacket, walkie_talkie) that belonged to TNB moves replaced in the 2026-10-27 revamp.
+- Wired in code but never seen in play: Deedee rn_badge, stethoscope, hand_weights (her painted frames already carry them); Boppy baseball_cap (his pose already holds one); Grace spring_floor_mat and giant_glitter_nail (moves not in any skill list).
+- Fixed on the way: Tom's Flashcard Flurry "?" tile never rendered (an option named `kind` overwrote the scene's own `kind`); renamed to `kf`.
+- Tags: `prop-art.js?v=pa5`, `tom-moves.js?v=tom8`, `tnb-moves.js?v=jojo3`, `boppy-moves.js?v=pa3`, grace `pa2xg`, deedee `pa2xd`, amy `pa2xa`.
+
 ## 2026-10-30: Rose's remaining 20 painted props wired into her moves
 
 - Unicorn cut-out, safety scissors and crayon (Dress-Up Tiara); rainbow feather (Tickle Storm); couch cushion and lava pool (Floor Is Lava); cushions, quilt and password sign (Pillow Fort); stack of cushions (Piggyback Pounce, shows when Tom is down); picture book (Bedtime Story); snack tray and treat set (Ms. Cathy's Snack Attack); two teapots, teacups, tiny chairs and lacy table (Tea Party ult); chest armor, visor, tube levers and rocket fist (Mecha ult). Drawn versions stay as fallbacks. Visuals only.

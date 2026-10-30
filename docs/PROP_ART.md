@@ -30,7 +30,7 @@ Options: `h` or `w` (stage units), `rot`, `flip`, `sx`, `sy`. It returns false u
 
 Tom's Delta One family (Seat 1A, Boarding Group Zero, Delta One) and all Tombos, Director's Cuts and Family Finishes (see `tools/tombo_props_map.json`, test with `tools/tombo_test.py`) are also wired.
 
-All 24 of Rose's painted props are now wired (Primary and Option 3 moves, Tombos, Family Finishes).
+Every character's painted props are now wired except the leftovers listed in docs/CHANGES.md (2026-10-30, rest of the cast). Rose's 24 are all wired (Primary and Option 3 moves, Tombos, Family Finishes).
 
 Also hooked but not drawn by a current Primary move (kept as harmless fallbacks): Tom's sourdough jar and boule, TNB's top hat, Grace's squishy in older throws.
 
