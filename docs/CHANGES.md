@@ -1,6 +1,15 @@
+## 2026-10-29: The Glass Tower lobby is painted (chapter 17, map `towerlobby`)
+- Tom's painting of the lobby (`art/towerlobby.webp`, 1408 x 896, 22 x 14 tiles at 64 px, entry in `PLATES` with `actorScale` 1.98). Used the final plus grid pair (`towerlobby_final.png`, `towerlobby_grid.png`); the baked art is the grid-free final.
+- `data/maps-ch17.js`: new `plateMask` for `towerlobby`. Rows 0 to 4 (window wall, back wall, desk, coffee cabinet, back planters), the lift wall on the left diagonal, both lounge benches, the corner planters and lanterns, and the glass fence block. The floor, both rugs, the gate doors (x 8 to 12, rows 11 to 13) and the east door mat walk.
+- Exits: the east stair door is now tiles 21,7 and 21,8 (was 21,8 and 21,9); both stairwell doors land at 20,8 (was 20,8 and 20,9, which is now planter). South gate exits and spawn (10,11) unchanged.
+- Objects re-laid to the painting (wall pieces are touched from the floor row below them): coffee machine (6,4) restore point, floor directory (7,4), desk (8,4), clock (10,4), desk (12,4), frames (15,4) 3x1, plants (5,4) (14,4) (4,11) (17,11), benches (1,7) 3x3 and (17,8) 3x2 plus (18,7), three lift doors (1,6) (2,5) (3,4), stairs sign (20,6). Object text is unchanged except two: the clock and the second desk (new line: pen cup, guest book, empty chair, signatures timed 4:59). Hint now says "through the east door". No spoken lines changed.
+- Test: new `tools/towerlobby_test.py` (every object touchable, stand tiles connected, text opens, desk blocks, walk up from the gate, east door to the stairwell, both stairwell doors return to walkable floor, south doors to the boulevard, portrait and landscape shots). smoke, blvd, gate00, loftlobby tests 0 fails.
+- Known, pre-existing (same 11 failures on the code before this change): `tools/ch17_test.py` fails from "back at the stairs" onward (Shelf Hall to Vault part of the script). Not touched.
+
 ## 2026-10-29: Eight more painted townsfolk, Los Angeles (Ryan, Dakota, Sam, Jordan, Dona Carmen, Miss Odette, Priya, Sofi)
 - Sheets `tools/sprite-bake/src/{ryan,dakota,sam,jordan,carmen,odette,priya,sofi}-walk-v1.png` added to `CAST` (heights 42, 37, 38, 43, 38, 36, 39, 36). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`. All matched BY NAME (`TOWN_PAINTED`); the look keys for Dona Carmen and Miss Odette are `carmen` and `odette`.
 - Checks: `tools/townsfolk_test.py` (55 characters) 0 fails, smoke 0 fails.
+
 
 ## 2026-10-29: Painted plate for the Sub-Rail Depot (chapter 13)
 - Sub-Rail Depot (map id `subdepot`, 24 x 12 tiles at 64 px, `art/subdepot.webp`, entry in `PLATES`) now uses Tom's painting (files `subdepot_final.png` and `subdepot_grid.png`, sent with no text, so treated as "install this plate"). A `plateMask` in `data/maps-ch13.js` is the walk map: the upper platform (rows 3 and 4), the lower platform (rows 8 to 10) and the track bed between them (rows 5 to 8, which walks like the old rails did). Blocked: the wall and stairs, Sol's desk and cabinets, both benches, the handcar, both piles of mail crates, the fence and lamp post at the far right, and the pit under the lower platform.
@@ -12,6 +21,7 @@
 ## 2026-10-29: Rose hops off Tom's shoulders before a Tombo
 - When Rose is riding Tom (Shoulder Ride) and any Tombo or Tom Family Finish starts, `b2Dismount()` in `engine/battle2-kind.js` ends the ride, plays a short hop from his shoulders back to her place in the line (about 0.6 s), shows a message, refreshes the RIDE badge, and only then does the normal step-out and animation begin. No effect when she is not riding. No spoken lines changed.
 - Checked in headless Chromium: Tom + Rose (Double-Decker Airplane) and Tom + Grace (Squishy Delivery), portrait and landscape, ride ends, no page errors; frames looked at. Smoke 0 fails.
+
 ## 2026-10-29: Loading screen replaces the "The game did not load" card
 - Cause: a 12 second watchdog in `index.html` showed the error card whenever the game had not started yet. The game loads 196 scripts (about 122 MB of baked voice), so a slow first load passed 12 s and the card stayed on screen even after the game booted.
 - New `#boot` loading screen (navy, gold flower, moving bar, "Loading the town...") covers the stage immediately and fades out on the first frame (`js-running`). After 15 s it adds a "still going" line. The retry screen shows only if a game file fails to download (8 s grace) or 90 s pass with no start. It no longer links to the claude.ai artifact.
