@@ -1,3 +1,13 @@
+## 2026-10-30: Grump Hollow repainted: signs lettered, south exit labeled, north-west trail closed
+
+- New painting installed as `art/hollow.webp` (1536 x 1408, from Tom's image, kept in `docs/reference/hollow_v2_from_tom.png`). `tools/hollow_signs.py <source.png>` scales it to the plate size. The generator drew the three wooden signs and the green exit board large enough, so nothing is repainted.
+- The game letters all four boards live (`PLATE_SIGNS.hollow` in `engine/plate.js`): GRUMP / HOLLOW, NO / SWIMMING, NOT A / FROG, and the south exit THE SQUARE / SHOPS. The painting carries blank boards.
+- The trail in the north-west corner now ends in a dead end (the painting shows a fallen log and dense forest). It was already blocked in the walk map, so no mask change.
+- 'Crooked sign' object moved from (6,12) to (6,11), at the foot of its new board. Pond sign (9,4) and Warning stake (15,11) already sit at their boards.
+- `?v=hollow1` on `engine/plate.js` and `data/maps-le.js`, `?v=20261030d` on the plate.
+- Known limitation as on the Square and Row: in portrait the D-pad covers part of the south exit board when Tom stands at the exit.
+- Tests: reach_test hollow 0 fails, smoke and camera_clamp clean, phone-size shots portrait and landscape (`tools/shots/hollow-*.png`, not committed).
+
 ## 2026-10-30: Tombo prop sheet 6 of 10 (source and cut)
 - Saved `tombo-sheet06-of-10.png` (items 71 to 84); all 14 match (deputy cap, under-sink cabinet, garden bed, stake, seedling, watering can, vine, tomato, card table, peppers, Scoville meter, paper fan, milk, newspaper) and are cut. 124 of 138 Tombo props painted; the other 14 wait on the redo sheets. Not wired yet.
 

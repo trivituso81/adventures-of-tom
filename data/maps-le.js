@@ -272,7 +272,7 @@ const LE_AREAS=[
     exits:[[9,21,'town',7,1,'down'],[10,21,'town',8,1,'down']],
     pools:[{tile:'water',shore:'mud',cells:[[11,3],[12,3],[13,3],[14,3],[15,3],[16,3],[17,3],[18,3],[19,3],[10,4],[11,4],[12,4],[13,4],[14,4],[15,4],[16,4],[17,4],[18,4],[19,4],[20,4],[21,4],[22,4],[10,5],[11,5],[12,5],[13,5],[14,5],[15,5],[16,5],[17,5],[18,5],[19,5],[20,5],[21,5],[22,5],[10,6],[11,6],[12,6],[13,6],[14,6],[15,6],[16,6],[17,6],[18,6],[19,6],[20,6],[21,6],[22,6],[10,7],[11,7],[12,7],[13,7],[14,7],[15,7],[16,7],[17,7],[18,7],[19,7],[20,7],[21,7],[22,7],[10,8],[11,8],[12,8],[13,8],[14,8],[15,8],[16,8],[17,8],[18,8],[19,8],[20,8],[21,8],[22,8],[10,9],[11,9],[12,9],[13,9],[14,9],[15,9],[16,9],[17,9],[18,9],[19,9],[20,10],[21,10],[22,10]]}],
     objects:[
-      ['sign',6,12,1,1,'Crooked sign','GRUMP HOLLOW. Trespassers will be squelched. Start with the Mudling. Save the fish for last.'],
+      ['sign',6,11,1,1,'Crooked sign','GRUMP HOLLOW. Trespassers will be squelched. Start with the Mudling. Save the fish for last.'],
       ['sign',9,4,1,1,'Pond sign','NO SWIMMING. The pond signed this itself.'],
       ['bench',2,12,4,2,'Soggy bench','Nobody has sat here since the Grump moved in. The bench misses company.'],
       ['bench',18,13,4,1,"Boppy's fishing spot",'A thermos, a bucket, zero fish. Boppy swears the big one lives here.'],
