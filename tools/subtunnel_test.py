@@ -76,10 +76,10 @@ with sync_playwright() as pw:
     stand(pg,35,3,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000)
     skip_intro(pg)
     check('east door leads to Under the Amber',pg.evaluate("()=>currentMap.id==='subchamber'"))
-    stand(pg,1,6,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000)
+    stand(pg,3,4,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(500); pg.keyboard.up('ArrowLeft'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000)   # the painted chamber's way back is its tunnel mouth, top left
     skip_intro(pg)
 
-    check('chamber west edge returns to the tunnel on walkable floor',pg.evaluate("()=>currentMap.id==='subtunnel'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
+    check('chamber tunnel mouth returns to the tunnel on walkable floor',pg.evaluate("()=>currentMap.id==='subtunnel'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
     check('no page errors',not errs)
     if errs: print(errs[:5])
     br.close()
