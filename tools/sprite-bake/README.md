@@ -72,3 +72,8 @@ TNB longboard poses (2026-10-29): `src/tnb-board-v1.png` (2 rows of 6, one figur
 Deedee Flick sheet (src/deedee-flick-v1.png, frames x_fwalk..x_fdone, towel painted into the hand) is baked by bake_deedee_extra.py; Dish-Towel Flick plays it and df_towel draws only the whoosh and crack.
 Deedee nurse sheet (src/deedee-nurse-v1.png, frames x_nwalk..x_nclear) baked by bake_deedee_extra.py; Registered Nut plays it, df_steth draws only the glint and heartbeat.
 Deedee Brisk Walk tracksuit set: bake_deedee_brisk.py (src/deedee-brisk-v1.png, own palette, hand weights lifted out of the head warp via KEEPIMG) -> art/chars/deedee-brisk.webp + data/deedee-brisk.js; frames x_bwarm..x_bwin; Brisk Walk plays them and skips the drawn weights.
+
+
+## Justin (2026-10-29)
+
+Overworld only. `src/justin-walk-v1.png` (3x4) -> `python3 tools/sprite-bake/bake_justin.py [--ratio 0.42 --ratio-side 0.40 --ow-h 53]` writes `art/chars/justin-ow.webp` and `data/justin-hires.js`; `data/justin-hires-use.js` builds `OW.justin`. Head factor is solved per view so hair-to-chin matches TNB and Boppy; `CHIN_FIX` hand-corrects the side-view chin of `w_left_stand2`. 53 rows tall (Michael 50, Tom 42), `--contact PATH` saves a contact sheet.
