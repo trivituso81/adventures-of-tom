@@ -462,10 +462,10 @@ const SPLASH_ALL=1.1;   // Tom 2026-10-29: everyone on the welcome art 10% bigge
 const SPLASH_SPOTS=[
   {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
   {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'5", tallest) stands just behind Amy and Deedee, listed early so they draw over him
-  {id:'tom',x:425,feet:1175,h:335},
+  {id:'grace',x:425,feet:1175,h:225},   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
+  {id:'tom',x:287,feet:1222,h:335},
   {id:'tnb',x:170,feet:1198,h:250},
   {id:'boppy',x:768,feet:1222,h:255},
-  {id:'grace',x:287,feet:1222,h:225},
   {id:'amy',x:566,feet:1222,h:278},
   {id:'deedee',x:672,feet:1258,h:278}
 ];
