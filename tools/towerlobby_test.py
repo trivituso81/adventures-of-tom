@@ -68,9 +68,9 @@ with sync_playwright() as pw:
     check('east door leads to the stairwell',pg.evaluate("()=>currentMap.id==='towerstairs'")); shot(pg,'stairs')
     check('no fight running',pg.evaluate("()=>!(typeof B2!=='undefined'&&B2&&B2.active)"))
     # both stairwell door tiles lead back to the lobby, onto walkable floor (not walked: Stillness guards patrol the landings)
-    for y in (39,40):
-        ok=pg.evaluate("(y)=>{ const p=worlds.towerstairs.portals.get('0,'+y); if(!p||p.to!=='towerlobby') return false; const m=worlds.towerlobby; return m.solid[p.spawn.y*m.w+p.spawn.x]===0; }",y)
-        check(f'stairwell door at row {y} returns to walkable lobby floor',ok)
+    for x in (2,3):   # the painted stairwell door (towerstairs plate): tiles 2,39 and 3,39
+        ok=pg.evaluate("(x)=>{ const p=worlds.towerstairs.portals.get(x+',39'); if(!p||p.to!=='towerlobby') return false; const m=worlds.towerlobby; return m.solid[p.spawn.y*m.w+p.spawn.x]===0; }",x)
+        check(f'stairwell door at tile {x},39 returns to walkable lobby floor',ok)
     pg.evaluate("()=>window.__LE.go('towerlobby')"); pg.wait_for_timeout(1800); skip_intro(pg); pg.wait_for_timeout(500)
     check('back in the lobby',pg.evaluate("()=>currentMap.id==='towerlobby'"))
     # south gate to the boulevard
