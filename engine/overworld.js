@@ -306,9 +306,14 @@ function updateCamera(dt) {
     ? -(W-mw)/2
     : clamp((p.x+.5)*T-W/2,0,mw-W);
 
-  const ty=mh<=available
-    ? -(safeTop+(available-mh)/2)
-    : clamp((p.y+.5)*T-available/2,0,mh-available)-safeTop;
+  // Map taller than the whole canvas: follow Tom inside the HUD-safe band, but clamp to the full
+  // canvas so the map always fills the screen and never shows blank space past its edges.
+  // Map shorter than the canvas: keep it centred in the safe band (blank space is unavoidable).
+  const ty=mh>=H
+    ? clamp((p.y+.5)*T-safeTop-available/2,0,mh-H)
+    : mh<=available
+      ? -(safeTop+(available-mh)/2)
+      : clamp((p.y+.5)*T-available/2,0,mh-available)-safeTop;
 
   const amount=camera.snap?1:Math.min(1,dt*12);
   camera.x+=(tx-camera.x)*amount;
