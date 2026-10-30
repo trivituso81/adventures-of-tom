@@ -45,6 +45,7 @@ PLATES.memtnb={src:'art/memtnb.webp?v=20261029',px:64,img:null,ready:false,actor
 PLATES.memgrace={src:'art/memgrace.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towershelves={src:'art/towershelves.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towerpinnacle={src:'art/towerpinnacle.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.deadletter={src:'art/deadletter.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;

@@ -2,7 +2,7 @@
 // data/maps-ch19.js — Chapter 19 "The Unsent Dead-Letter Office": the sorting hall under Second Avenue where everything nobody could deliver ends up, and the four
 // memory rooms off it. Same spec format as data/maps-ch17.js (planMerge, pools, tiles, objects, exits). Loaded after data/maps-ch18.js.
 //   deadletter  The Dead-Letter Office (hub, 26 x 17): pigeonholes, conveyor belts, the Claim Desk in the middle (four keepsake niches, one empty chair).
-//               South: the chute up to Tom's mailbox on Second Avenue. Doors: Grace (north-west), Rose (north-east), Amy (west), TNB (east).
+//               South: the chute up to Tom's mailbox on Second Avenue. Doors on the north wall, left to right: Rose, Grace, Amy, TNB (painted plate art/deadletter.webp).
 //               The Oblivion Censor waits at the desk (data/ch19-monsters.js) until all four keepsakes are down.
 //   memgrace    The Gym Floor     (blue mats, a balance beam, a folding chair)          you play it as Grace.
 //   memrose     The Shoulder Hall (pink carpet, tall lamps, a very small yellow coat)   you play it as Rose.
@@ -40,11 +40,13 @@ const MEMROSE_PLAN=dlRoom(16,11,'p',[[8,10]]);
 const MEMAMY_PLAN=dlRoom(16,11,'t',[[8,10]]);
 const MEMTNB_PLAN=dlRoom(16,11,'k',[[8,10]]);
 // The four rooms in story order: where their door is in the hub, and who you play.
+// Painted hub (art/deadletter.webp): all four doors are on the north wall. Left to right: Rose (amber, the clock), Grace (blue, the hand),
+// Amy (green, the runner), TNB (pink, the vase). Each door is two tiles wide on row 3; you arrive on row 4 under it.
 const CH19_ROOMS=[
-  {id:'grace',map:'memgrace',door:[4,1],back:[4,2,'down'],who:'Grace',frags:3},
-  {id:'rose',map:'memrose',door:[21,1],back:[21,2,'down'],who:'Rose',frags:3},
-  {id:'amy',map:'memamy',door:[0,9],back:[1,9,'right'],who:'Amy',frags:3},
-  {id:'tnb',map:'memtnb',door:[25,9],back:[24,9,'left'],who:'TNB',frags:3}];
+  {id:'grace',map:'memgrace',door:[6,3],back:[6,4,'down'],who:'Grace',frags:3},
+  {id:'rose',map:'memrose',door:[3,3],back:[3,4,'down'],who:'Rose',frags:3},
+  {id:'amy',map:'memamy',door:[20,3],back:[20,4,'down'],who:'Amy',frags:3},
+  {id:'tnb',map:'memtnb',door:[23,3],back:[23,4,'down'],who:'TNB',frags:3}];
 
 LE_AREAS.push(
   planMerge({id:'deadletter',name:'The Dead-Letter Office',w:26,h:17,ground:'dead',
@@ -53,28 +55,52 @@ LE_AREAS.push(
     hint:'Four doors. Four people who will not forget him. The Claim Desk is in the middle.',
     spawn:{x:12,y:14},
     exits:[[12,16,'jpark',7,19,'down','dlfloor'],[13,16,'jpark',7,19,'down','dlfloor'],
-      [4,1,'memgrace',8,9,'up','dldoor'],[21,1,'memrose',8,9,'up','dldoor'],[0,9,'memamy',8,9,'up','dldoor'],[25,9,'memtnb',6,9,'up','dldoor']],
-    monsters:[...CH19_HUB_SPOTS,...CH19_CENSOR_SPOTS]},
+      [2,3,'memrose',8,9,'up','dldoor'],[3,3,'memrose',8,9,'up','dldoor'],[5,3,'memgrace',8,9,'up','dldoor'],[6,3,'memgrace',8,9,'up','dldoor'],
+      [19,3,'memamy',8,9,'up','dldoor'],[20,3,'memamy',8,9,'up','dldoor'],[22,3,'memtnb',6,9,'up','dldoor'],[23,3,'memtnb',6,9,'up','dldoor']],
+    monsters:[...CH19_HUB_SPOTS,...CH19_CENSOR_SPOTS],
+    // Walk map for the painting. Rows 0 to 3 are the back wall (pigeonholes and the four doors; the door tiles are portals, so they walk anyway).
+    // Row 4 is the strip under the doors; it joins the floor by the lanes round the belt ends (column 2 west, column 23 east). The belts (row 5),
+    // the Claim Desk (rows 5 and 6), the sacks, benches, the ledger stand and the big stamp are objects. Blocked by mask: the gear boxes, the
+    // parcel table (2 to 3, rows 8 to 9), the bucket and parcel stacks by the benches, the crates along both side walls, the railings and
+    // planters at the gate (rows 13 to 16). The gate opening and stairs are columns 12 and 13.
+    plateMask:[
+      '##########################',
+      '##########################',
+      '##########################',
+      '##########################',
+      '##........######........##',
+      '##.####################.##',
+      '##........######........##',
+      '##.....................###',
+      '####...................###',
+      '####..#####....######..###',
+      '##.......##....##.......##',
+      '###....................###',
+      '###...................####',
+      '############..############',
+      '############..############',
+      '############..############',
+      '############..############']},
     planDead(DEADLETTER_PLAN),
     {objects:[
-      ['dlaltar',10,5,6,3,'The Claim Desk','A long oak counter with a brass bell and a ledger. Four small brass niches in the front, all empty. Behind it, one wooden chair pushed back from the desk, as if someone has just stood up. A thermos sits on the seat. It is warm.'],
-      DL_P('belt',2,5,6,1,'Conveyor belt','A conveyor belt of envelopes, shuffling past. Every one is stamped RETURN TO SENDER. None of them has anywhere to go back to.'),
-      DL_P('belt',18,5,6,1,'Conveyor belt','This belt carries postcards. Wish you were here, wish you were here, wish you were here. Nobody is.'),
-      DL_P('sack',2,8,1,1,'Mail sack','A canvas sack stuffed with birthday cards that arrived four years late. The top one says: BELATED, BUT YOU WERE ON MY MIND.'),
-      DL_P('sack',23,11,1,1,'Mail sack','A sack of thank-you notes. Nobody ever opened the ones addressed to a person who left the party early.'),
-      DL_P('ledger',12,12,2,1,'The Unclaimed','A big ledger on a stand. UNCLAIMED, VOL. 4,017,312. You turn to the page for Second Avenue. Where a name should be there is a clean white rectangle, exactly the size of one. It is still a little damp.'),
-      DL_P('bench',4,12,3,1,'Waiting bench','A long wooden bench with a ticket machine. NOW SERVING: NOBODY. The machine has printed one ticket, and it is stuck halfway out.'),
-      DL_P('bench',19,12,3,1,'Waiting bench','A bench. On the end is a pretzel, a little bit squished, wrapped in a napkin. It has a tag: HELD FOR PICKUP. Rose would know whose it is.'),
-      DL_P('stamp',22,2,2,2,'The big stamp','A stamp the size of a washing machine. RETURN TO SENDER, in red. It comes down by itself every few minutes, thump, on nothing at all.'),
-      DL_P('lamp',8,2,1,1,'Hanging lamp','A green banker\'s lamp on a long cord. Every lamp in the Office is lit. Nobody here has ever turned one off.'),
-      DL_P('lamp',17,2,1,1,'Hanging lamp','A banker\'s lamp. The shade is cracked, and the light inside is a very faint gold.')]},
+      ['dlaltar',10,5,6,2,'The Claim Desk','A long oak counter with a brass bell and a ledger. Four small brass niches in the front, all empty. Behind it, one wooden chair pushed back from the desk, as if someone has just stood up. A thermos sits on the seat. It is warm.'],
+      DL_P('belt',4,5,6,1,'Conveyor belt','A conveyor belt of envelopes, shuffling past. Every one is stamped RETURN TO SENDER. None of them has anywhere to go back to.'),
+      DL_P('belt',16,5,7,1,'Conveyor belt','This belt carries postcards. Wish you were here, wish you were here, wish you were here. Nobody is.'),
+      DL_P('sack',6,7,2,2,'Mail sack','A canvas sack stuffed with birthday cards that arrived four years late. The top one says: BELATED, BUT YOU WERE ON MY MIND.'),
+      DL_P('sack',18,7,2,2,'Mail sack','A sack of thank-you notes. Nobody ever opened the ones addressed to a person who left the party early.'),
+      DL_P('ledger',15,9,1,2,'The Unclaimed','A big ledger on a stand. UNCLAIMED, VOL. 4,017,312. You turn to the page for Second Avenue. Where a name should be there is a clean white rectangle, exactly the size of one. It is still a little damp.'),
+      DL_P('bench',6,9,4,1,'Waiting bench','A long wooden bench with a ticket machine. NOW SERVING: NOBODY. The machine has printed one ticket, and it is stuck halfway out.'),
+      DL_P('bench',16,9,5,1,'Waiting bench','A bench. On the end is a pretzel, a little bit squished, wrapped in a napkin. It has a tag: HELD FOR PICKUP. Rose would know whose it is.'),
+      DL_P('stamp',24,5,2,4,'The big stamp','A stamp the size of a washing machine. RETURN TO SENDER, in red. It comes down by itself every few minutes, thump, on nothing at all.'),
+      DL_P('lamp',8,3,1,1,'Hanging lamp','A green banker\'s lamp on a long cord. Every lamp in the Office is lit. Nobody here has ever turned one off.'),
+      DL_P('lamp',17,3,1,1,'Hanging lamp','A banker\'s lamp. The shade is cracked, and the light inside is a very faint gold.')]},
   ),
   planMerge({id:'memgrace',name:'The Gym Floor',w:16,h:11,ground:'dead',
     tag:'Grace\'s room. Somebody always came early.',
     eyebrow:'THE DEAD-LETTER OFFICE / GRACE',
     hint:'Find three memories. Then put something down.',
     spawn:{x:8,y:9},
-    exits:[[8,10,'deadletter',4,2,'down','dldoor']],
+    exits:[[8,10,'deadletter',6,4,'down','dldoor']],
     // Painted plate (art/memgrace.webp, engine/plate.js). '#' blocks, '.' walks. The floor is rows 2 to 8 between the left bench (col 1) and the
     // bleachers (cols 13 to 15); the beam blocks row 4 from col 3 to col 11 and you walk round it at col 2 or col 12. The entrance mat is row 9,
     // cols 6 to 9, down to the door at (8,10). Blocked: the plants at (2,2) and (13,2), the chalk cart (1,3, beside the bench), the brass pedestal (10,2), the
@@ -108,7 +134,7 @@ LE_AREAS.push(
     eyebrow:'THE DEAD-LETTER OFFICE / ROSE',
     hint:'Find three memories. Then put something down.',
     spawn:{x:8,y:9},
-    exits:[[8,10,'deadletter',21,2,'down','dldoor'],[7,10,'deadletter',21,2,'down','dldoor']],
+    exits:[[8,10,'deadletter',3,4,'down','dldoor'],[7,10,'deadletter',3,4,'down','dldoor']],
     // Painted plate (art/memrose.webp, engine/plate.js). '#' blocks, '.' walks. The carpet is rows 3 to 9; the back wall with the two tall
     // lamps and the candle stand is rows 0 to 2 (talked to from row 3). Blocked on the carpet: the step stool (col 5, row 5), the coil of
     // ribbon (cols 2 to 4, rows 5 to 6), the pillow fort with Lamby (cols 9 to 13, rows 4 to 6, roof to row 3 at cols 11 to 13) and the coat rack
@@ -145,7 +171,7 @@ LE_AREAS.push(
     eyebrow:'THE DEAD-LETTER OFFICE / AMY',
     hint:'Find three memories. Then put something down.',
     spawn:{x:8,y:9},
-    exits:[[8,10,'deadletter',1,9,'right','dldoor']]},
+    exits:[[8,10,'deadletter',20,4,'down','dldoor']]},
     planDead(MEMAMY_PLAN),
     {objects:[
       DL_P('bleacher',1,2,6,2,'Bleachers','Aluminum bleachers. Somebody has taped a sign across the second row: RESERVED FOR TOM. NO, THE OTHER TOM. THE GOOD ONE.'),
@@ -165,7 +191,7 @@ LE_AREAS.push(
     eyebrow:'THE DEAD-LETTER OFFICE / TNB',
     hint:'Find three memories. Then put something down.',
     spawn:{x:6,y:9},
-    exits:[[6,10,'deadletter',24,9,'left','dldoor']],
+    exits:[[6,10,'deadletter',23,4,'down','dldoor']],
     liveKinds:['dlmem','dlkeep'],
     plateMask:[
       '################',

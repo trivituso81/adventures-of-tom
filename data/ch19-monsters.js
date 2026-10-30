@@ -91,5 +91,5 @@ Object.assign(MONSTERS,{
     hint:'A stamp with feet. Every third turn it comes down on one person (DENIED, GRIT down). Kinetic and Sparkle work; it loves Tom’s starter and TNB’s COFFEE RUN.'}
 });
 // Map spots: the hub only (the memory rooms are gentle). The boss waits at the Claim Desk (data/scenes-ch19.js, ch19Censor).
-const CH19_HUB_SPOTS=[['deadletter',6,10],['rubberstamp',19,10],['deadletter',5,14],['rubberstamp',20,14]];
+const CH19_HUB_SPOTS=[['deadletter',6,10],['rubberstamp',19,10],['deadletter',4,11],['rubberstamp',21,11]];
 const CH19_CENSOR_SPOTS=[['censor',12,9]];
