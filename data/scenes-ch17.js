@@ -149,7 +149,7 @@ const ch17CrossOps=to=>()=>{
   return [
     {fade:'out',time:.5},
     {call:()=>{ sfx.doorIn&&sfx.doorIn(); setFlag('ch17-hatch',true); ch17Team(team);
-      if(toShelves) ch17Place('towershelves',1,6,'right'); else ch17Place('towerstairs',13,3,'down'); }},
+      if(toShelves) ch17Place('towershelves',1,5,'right'); else ch17Place('towerstairs',13,3,'down'); }},
     {fade:'in',time:.5},
     ...(first?[
       {talk:'Tom',lines:['The Archive. A long hall of glass shelves, and on every shelf a whole tiny town under a dome, each one paused on its happiest afternoon.']},

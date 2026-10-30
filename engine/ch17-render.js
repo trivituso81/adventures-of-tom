@@ -223,7 +223,7 @@ b7DrawMapFx=function(time) {
   if(typeof STORY==='undefined'||STORY.mode!=='full') return;
   if(currentMap.id==='towershelves') {
     for(const k of Object.keys(CH17_GLOW)) { const g=CH17_GLOW[k],u=Math.min(1,(time-g.t0)/2.4); if(u>=1) { delete CH17_GLOW[k]; continue; }
-      const [sx,sy]=CH17_SHELVES[k]; const cx=(sx+2)*T,by=sy*T+T;
+      const [sx,sy,sw,sh]=CH17_SHELVES[k]; const cx=(sx+sw/2)*T,by=(sy+sh)*T;
       gfx.save(); gfx.globalAlpha=(1-u)*.5; rect(cx-18,by-40-u*100,36,40+u*100,'#ffe27a'); gfx.globalAlpha=(1-u)*.8; rect(cx-6,by-60-u*120,12,60+u*120,'#fff6c8'); gfx.restore(); }
   }
 };

@@ -40,6 +40,7 @@ PLATES.flightzero={src:'art/flightzero.webp?v=20261029',px:64,img:null,ready:fal
 PLATES.towerstairs={src:'art/towerstairs.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.subdepot={src:'art/subdepot.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towervault={src:'art/towervault.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.towershelves={src:'art/towershelves.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;

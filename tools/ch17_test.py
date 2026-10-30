@@ -49,8 +49,8 @@ with sync_playwright() as pw:
     check('team shelves: Tom Amy TNB Nara',pg.evaluate("()=>party.length===4&&['tom','amy','tnb','nara'].every(i=>party.some(p=>p.id===i))&&girlsAway()"))
     check('girls hold the landing',pg.evaluate("()=>worlds.towerstairs.npcs.filter(n=>n.girlAtHome).length===2"))
     # smash all six
-    for i,(sx,sy) in enumerate([[3,2],[11,2],[19,2],[3,10],[11,10],[19,10]]):
-        if i<3: pg.evaluate(f"()=>{{ player.x={sx+1}; player.y={sy+2}; player.facing='up'; player.move=null; pressAction(); }}")
+    for i,(sx,sy,sw,sh) in enumerate([[3,2,5,3],[9,2,6,3],[16,2,5,3],[2,9,7,4],[10,9,7,4],[18,9,7,4]]):
+        if i<3: pg.evaluate(f"()=>{{ player.x={sx+1}; player.y={sy+sh}; player.facing='up'; player.move=null; pressAction(); }}")
         else: pg.evaluate(f"()=>{{ player.x={sx+1}; player.y={sy-1}; player.facing='down'; player.move=null; pressAction(); }}")
         pg.wait_for_timeout(300); pg.keyboard.press('Enter'); pg.wait_for_timeout(200)
         ok=adv(pg,120,f"()=>flag('shelf-{i}')===true&&!dialog.active&&!intro.active")
@@ -62,7 +62,7 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ layout.mode='landscape'; applyLayout(); }"); pg.wait_for_timeout(600); shot(pg,'shelves-landscape')
     pg.evaluate("()=>{ layout.mode='portrait'; applyLayout(); }"); pg.wait_for_timeout(400)
     # back to the stairs: everyone regroups
-    pg.evaluate("()=>{ player.x=1; player.y=6; player.facing='left'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
+    pg.evaluate("()=>{ player.x=1; player.y=5; player.facing='left'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
     pg.keyboard.press('Enter'); pg.wait_for_timeout(200)
     check('back at the stairs',adv(pg,80,"()=>currentMap.id==='towerstairs'&&!intro.active&&!dialog.active")); pg.wait_for_timeout(500)
     check('final team: Tom Grace Rose Amy',pg.evaluate("()=>party.length===4&&['tom','grace','rose','amy'].every(i=>party.some(p=>p.id===i))&&STORY.bench.includes('tnb')&&STORY.bench.includes('nara')"))

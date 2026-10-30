@@ -39,7 +39,8 @@ const TOWERSTAIRS_PLAN=(()=>{
 const TOWERSHELVES_PLAN=glRoom(28,14,'c',[]).map((r,y)=>y>=12?'W'.repeat(28):r);
 const TOWERVAULT_PLAN=glRoom(22,14,'f',[[10,13],[11,13]]);
 // The six shelves in the Shelf Hall, in order: north wall left, middle, right; south wall left, middle, right.
-const CH17_SHELVES=[[3,2],[11,2],[19,2],[3,10],[11,10],[19,10]];
+// Painted Shelf Hall (art/towershelves.webp): each shelf is [x,y,w,h] in tiles, the footprint of its painted glass case.
+const CH17_SHELVES=[[3,2,5,3],[9,2,6,3],[16,2,5,3],[2,9,7,4],[10,9,7,4],[18,9,7,4]];
 const CH17_TOWNS=[
   {id:0,town:'Dunmore, PA',moment:'the Pierogi Festival, 1993, 2:14 PM',look:'A diorama of a church parking lot under a banner that says PIEROGI FEST. A tiny man holds one tiny pierogi up to his tiny mouth. He has been about to take the bite for a very long time.'},
   {id:1,town:'Tallulah Falls',moment:'the Fourth of July, 4:59 PM',look:'A tiny town green with a tiny crowd on blankets, all looking up. One firework hangs at the top of its arc, lit, not going off. A plaque says: ALMOST.'},
@@ -169,18 +170,37 @@ LE_AREAS.push(
     tag:'Six shelves, and on each one a whole town that was paused on its happiest afternoon.',
     eyebrow:'THE GLASS TOWER / THE ARCHIVE · FLOORS 30 TO 31',
     hint:'Smash the shelves. Every shelf you smash lets a town go on with its afternoon. The coffee machine is a restore point.',
-    spawn:{x:2,y:6},
+    spawn:{x:2,y:5},
+    // Painted plate (art/towershelves.webp, engine/plate.js). '#' blocks, '.' walks. The hall is one long aisle in front of the three north
+    // cases (row 5) and the benches (rows 6 to 8). Blocked: the wall, all six cases, the two small cases, the lift, the coffee cabinet,
+    // the vault door, the three benches, the lamps and plants, and everything south of row 8.
+    plateMask:[
+      '############################',
+      '############################',
+      '############################',
+      '############################',
+      '############################',
+      '#...........................',
+      '#####.....#.....#.....#..###',
+      '#####.###############.##.###',
+      '####.....................###',
+      '############################',
+      '############################',
+      '############################',
+      '############################',
+      '############################'],
     monsters:CH17_SHELF_SPOTS},
     planGlass(TOWERSHELVES_PLAN),
     {objects:[
-      ...CH17_SHELVES.map(([x,y],i)=>['towershelf',x,y,4,2,CH17_SHELF_NAMES[i],CH17_TOWNS[i].look,{shelf:i}]),
-      ['glhatch',0,6,1,2,'Service hatch','The hatch back to the stairwell, on the landing at floor 30. The wheel is warm from where somebody leaned on it.'],
-      ['glelev',27,5,1,3,'Express lift','THE EXPRESS LIFT. A tiny panel over the button says FLOORS 31 TO 59. A second line says STILLNESS LOCK: ENGAGED.'],
-      ['glvend',14,2,1,1,'Coffee machine','A coffee machine in the Archive. A sticky note: THE EXHIBITS DO NOT NEED COFFEE. THE VISITORS MIGHT. Everyone is completely restored.',{restore:true,restoreText:'Hot coffee in the one room in the building where everything is on a shelf. Everyone is completely restored.'}],
-      ['glsign',8,1,3,1,'Hall sign','THE ARCHIVE, LEVEL ONE. THE COLLECTION. PLEASE DO NOT TOUCH. PLEASE DO NOT BREATHE ON THE EXHIBITS. PLEASE DO NOT BE LOUD ABOUT THE DUST.',{sign:'THE ARCHIVE'}],
-      ['glcase',1,4,1,2,'Display case','A little glass case with a tiny cardboard sign: NOT YET ARCHIVED. It is empty. It has been cleaned very recently, in case.'],
-      ['glcase',26,9,1,2,'Display case','A little glass case. Inside it, a tiny paper tag on a tiny string: THE NEXT ONE.'],
-      ['glclock',18,1,2,1,'Archive clock','A big clock. It says 4:59. Under it somebody has written, in very small capitals: THIS IS FINE.']]}),
+      ...CH17_SHELVES.map(([x,y,w,h],i)=>['towershelf',x,y,w,h,CH17_SHELF_NAMES[i],CH17_TOWNS[i].look,{shelf:i}]),
+      ['glhatch',0,4,1,2,'Service hatch','The round vault door back to the stairwell, on the landing at floor 30. The wheel is warm from where somebody leaned on it.'],
+      ['glelev',25,2,3,3,'Express lift','THE EXPRESS LIFT. A tiny panel over the button says FLOORS 31 TO 59. A second line says STILLNESS LOCK: ENGAGED.'],
+      ['glvend',23,3,2,2,'Coffee machine','A coffee machine in the Archive. A sticky note: THE EXHIBITS DO NOT NEED COFFEE. THE VISITORS MIGHT. Everyone is completely restored.',{restore:true,restoreText:'Hot coffee in the one room in the building where everything is on a shelf. Everyone is completely restored.'}],
+      ['glbench',6,7,3,1,'Velvet bench','A velvet bench facing the cases. A big clock on the wall says 4:59. Under it somebody has written, in very small capitals: THIS IS FINE.'],
+      ['glbench',11,7,4,1,'Velvet bench','THE ARCHIVE, LEVEL ONE. THE COLLECTION. PLEASE DO NOT TOUCH. PLEASE DO NOT BREATHE ON THE EXHIBITS. PLEASE DO NOT BE LOUD ABOUT THE DUST. This is printed on a brass plate on the bench, which is not where anyone would look.'],
+      ['glbench',17,7,4,1,'Velvet bench','A velvet bench with a small brass plate: FOR WATCHING. NOT FOR SITTING. The cushion is warm anyway.'],
+      ['glcase',1,6,3,3,'Display case','A little glass case with a tiny cardboard sign: NOT YET ARCHIVED. It is empty. It has been cleaned very recently, in case.'],
+      ['glcase',25,6,2,3,'Display case','A little glass case. Inside it, a tiny brass wheel, and a paper tag on a tiny string: THE NEXT ONE.']]}),
   planMerge({id:'towervault',name:'The Vault',w:22,h:14,ground:'glass',
     tag:'Floor 59. One plinth, one snow globe, one very big lens.',
     eyebrow:'THE GLASS TOWER / THE VAULT · FLOOR 59',
