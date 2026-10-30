@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Deedee sheet 1 of 2 (source only)
+- Saved `tools/sprite-bake/src/props/deedee-sheet1-of-2.png`. All 15 props match the prompt list. Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Amy sheet 3 of 3 (source only)
 - Saved `tools/sprite-bake/src/props/amy-sheet3-of-3.png`. All 13 props match the prompt list. Amy is complete (39 of 39). Not wired into the game.
 
