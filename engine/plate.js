@@ -10,8 +10,8 @@ PLATES.oakpark={src:'art/oakpark.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stage7={src:'art/stage7.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.oak={src:'art/oak.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.crown={src:'art/crown.webp?v=20261029',px:64,img:null,ready:false};
-PLATES.lofts={src:'art/lofts.webp',px:64,img:null,ready:false};
-PLATES.loftlobby={src:'art/loftlobby.webp',px:64,img:null,ready:false};
+PLATES.lofts={src:'art/lofts.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
+PLATES.loftlobby={src:'art/loftlobby.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 // Tom's house: two painted rooms, the main floor (16 x 24 tiles) and the primary suite (16 x 15), both 64 art px per tile.
 PLATES.tomhouse={src:'art/tomhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08};
 PLATES.carbarn={src:'art/carbarn.webp?v=20261029',px:64,img:null,ready:false};
@@ -27,9 +27,9 @@ PLATES.nickels={src:'art/nickels.webp?v=20261030',px:78,img:null,ready:false,squ
 PLATES.pupuseria={src:'art/pupuseria.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.wardrobe={src:'art/wardrobe.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 PLATES.creole={src:'art/creole.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
-PLATES.casa={src:'art/casa.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.casa={src:'art/casa.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 PLATES.jordansam={src:'art/jordansam.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
-PLATES.tower={src:'art/tower.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.tower={src:'art/tower.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 PLATES.gate00={src:'art/gate00.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towerlobby={src:'art/towerlobby.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.subtunnel={src:'art/subtunnel.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
@@ -81,7 +81,7 @@ plateSetK.k=1;
 // (a counter or a sofa should come up to a character's waist, not their knees). Measured from the Taxi desk, Amy's island and sofa,
 // the bakery counter and the dining chairs: adults wanted about 1.8x their street size, then Tom asked for 10% more: 1.98x. Feet stay on the same tile, the sprite grows upward.
 const INTERIOR_ACTOR_SCALE=1.98;
-for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','grands','elliehouse','loftlobby','lofts','juicebar']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
+for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','grands','elliehouse','juicebar']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
 // Tom (2026-10-30): after the interiors were enlarged to fill the phone screen, everyone inside is 20% bigger again. One multiplier
 // here covers the family, the followers and every townsperson, since they all draw through actorK().
 const INTERIOR_ACTOR_BOOST=1.2;

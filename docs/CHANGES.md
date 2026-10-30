@@ -1,3 +1,10 @@
+## 2026-10-30: Room paintings, batch 5 (Casa Alvarez, Lofts Lobby, TNB's Loft, Grand Tower apartment)
+- rooms5.zip: `casa`, `loftlobby`, `lofts`, `tower` installed as square plates (`art/<id>.webp`, 16 x 16 tiles, `px:78`, actorScale 1.98). Image 21 (Primary Suite) was already live as `tomsuite`.
+- Walk masks, objects and NPC positions rewritten in `data/maps-la.js`; every old object text and NPC name kept (Casa Alvarez still has all nine residents, so `ch12Alvarez` and STORY_WORLD are untouched).
+- Lobby elevator button now sits at (11,3) and rides to the loft at (8,14); the loft's way down returns to the lobby at (9,5). `ch2Loft` now places TNB at (8,9) and walks Tom to (8,10).
+- Removed the old hard-coded tests casa_test, loft_test, loftlobby_test, tower_test (other tower map tests stay). `rooms_test.py` and `tap_test.py` cover the new rooms.
+- Tests: rooms_test 4 rooms FAILS []; smoke FAILS []; camera_clamp FAILS []; ch12_test FAILS []; tap_test on the 4 rooms PASS. Screenshots in `tools/shots/room-*`.
+
 ## 2026-10-30: The Square repainted: every shop and exit labeled, a much larger fountain
 - Tom sent a new painting of The Square (`docs/reference/town_v2_from_tom.png`, 1347 x 1168, scaled to 1920 x 1664 = 30 x 26 tiles at 64 px) generated from the prompt in the Project doc `claude/square-redo.md`. Built into `art/town.webp` by `tools/town_signs.py`.
 - Labels: the generator drew the eight shop boards too small to read on a phone (about 124 x 33 px), so the script repaints them as 240 x 96 px boards (cream face, frame in each building's colour). The three green exit boards are Tom's. All eleven boards are lettered live by `drawPlateSigns` in `engine/plate.js` (`PLATE_SIGNS.town`, face rects in art px): CRUMB BAKERY, HUSH LIBRARY, SPROUT HOUSE, PENNY'S POCKETS, SNAIL MAIL, KETTLE COTTAGE, MOON CLUB, TAXI CO.; exits GRUMP HOLLOW (north steps), RIVITUSO ROW (south street), SCHOOL (east opening). The exits are painted open; the fallen branch and school gate are still drawn over them by the story gates, so the labels show even while closed. Change a name by editing `PLATE_SIGNS`, no re-paint.

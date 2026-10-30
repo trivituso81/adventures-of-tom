@@ -1202,110 +1202,124 @@ const LA_ROOMS=[
       ['pot',1,12,2,2,'Fiddle-leaf fig','In a TNB pot. TNB waters it when Tom is away and talks to it. It\'s thriving. Suspiciously.'],
       ['pot',2,7,1,2,'Rubber plant','A rubber plant by the photo wall. TNB says it is thriving. Tom says it is thriving because TNB talks to it.'],
       ['pot',13,5,2,3,'Big plant','A tall leafy plant by the closet door. The leaves lean toward the window like they want to go outside.']]},
-  {id:'casa',w:14,h:11,
+  {id:'casa',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#d8b48a',alt:'#e2c39c',wall:'#c98a5a',trim:'#f4e6c8',pattern:'tile',rug:'#2f8a8a'},
     rug:[4,4,6,4],
-    // Painted plate (art/casa.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // The painting shows no doorway into the west rooms (laundry, bath, bedroom), so they stay scenery. Walkable: kitchen and dining room in the middle,
-    // the living room to the east (reached along row 6, 9 to 12), the bunk room through the gap past the kitchen desk (row 2, 9 to 12),
-    // the foyer (x 7 and 8) down to the front steps (x 5 to 8), and the front yard strip along the bottom row either side of the steps (exits stay at 6 and 7).
+
+    // Square painted plate (art/casa.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Kitchen island and stove across the back, bunk beds back right, dining table in the middle, green sofa and TV right, toy rug left, coat hooks and shoe shelf by the door. Walkable: the open floor from the door up the middle, the west pocket by the kitchen (x2 to x5) and the east pocket past the dining table (x9 to x12). The gap between the gate posts (x7 to x9) is the way out.
     plateMask:[
-      '##############',
-      '##############',
-      '########.....#',
-      '#####.##.#####',
-      '####..##.#####',
-      '#####....#####',
-      '######.......#',
-      '#######..#####',
-      '#######.######',
-      '#####....#####',
-      '..............'],
-    door:[7,10],door2:[6,10],spawn:{x:7,y:9},
+      '################',
+      '################',
+      '################',
+      '################',
+      '##....####...###',
+      '####..###...####',
+      '#####.###.######',
+      '#####.....######',
+      '####......######',
+      '####......######',
+      '########.#######',
+      '########.#######',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######'],
     npcs:[
-      {name:'Mrs. Alvarez',x:7,y:5,look:'alvarez',lines:[
+      {name:'Mrs. Alvarez',x:7,y:7,look:'alvarez',lines:[
         'TEN. Ten people in a two-bedroom house from 1912. One bathroom. ONE.',
         'Tony, feet off my table! Kevin, the baby isn\'t a football! Mateo, give Abuela the remote! ...Tom, mijo, sit. If you can find a chair.',
         "Everybody says, 'Mama, the house is so full of love.' It's full of SOMETHING. Take tamales. Please. I need the room in my fridge."]},
-      {name:'Don Beto',x:12,y:6,look:'beto',lines:[
+      {name:'Don Beto',x:11,y:5,look:'beto',lines:[
         "I've been in this chair since the game started. Which game? Yes.",
         'Ten people. I counted once. Then I lost count. Then I took a nap.']},
-      {name:'Tony',x:5,y:5,look:'tony',lines:[
+      {name:'Tony',x:4,y:4,look:'tony',lines:[
         'Me and Yesenia are saving for our own place. In this market? We\'ll be here until Mateo goes to college.',
         'The two houses next door sold for more than this whole block cost in 1990. My mom isn\'t okay about it.']},
-      {name:'Yesenia',x:8,y:2,look:'yesenia',lines:[
+      {name:'Yesenia',x:10,y:4,look:'yesenia',lines:[
         'Sofi, no. Sofi. SOFI. ...She bit something. We don\'t have a dog. I don\'t know what she bit.',
         'Baby Lupita is finally asleep. If you wake her, you\'re moving in.']},
-      {name:'Claudia',x:10,y:6,look:'claudia',lines:[
+      {name:'Claudia',x:12,y:4,look:'claudia',lines:[
         'Night shift nurse. I sleep in the bathtub. It\'s the only room with a lock.',
         'Until somebody needs the bathroom. Somebody always needs the bathroom.']},
-      {name:'Kevin',x:11,y:2,look:'kevin',lines:[
+      {name:'Kevin',x:11,y:4,look:'kevin',lines:[
         "I share the bunk bed with Uncle Tony's exercise bike.",
         'It\'s not a metaphor. The bike is on the top bunk.']},
-      {name:'Daisy',x:4,y:4,look:'daisy',lines:[
+      {name:'Daisy',x:3,y:4,look:'daisy',lines:[
         "I'm making a documentary about this house. It's a horror movie.",
         "Scene one: the bathroom line. Scene two: who ate Abuela's last concha."]},
-      {name:'Mateo',x:6,y:6,look:'mateo',duration:0.45,lines:[
+      {name:'Mateo',x:4,y:9,look:'mateo',duration:0.45,lines:[
         'Truck! TRUCK!',
         'Ba! Ba! ...Truck.']},
-      {name:'Sofi',x:8,y:5,look:'sofi',duration:0.45,lines:[
+      {name:'Sofi',x:6,y:8,look:'sofi',duration:0.45,lines:[
         "I'm a dinosaur. RAWR.",
         "Abuela says no more dinosaurs inside. I'm a quiet dinosaur. rawr."]}],
     objects:[
-      ['table',6,2,2,2,'Kitchen island',"Tamales, homework, a diaper bag, three phones charging off one outlet, and a sign in Mrs. Alvarez's handwriting: NO."],
-      ['counter',5,1,1,2,'Stove','Four pots on four burners. A pot of beans that\'s been simmering since 1998.',{variant:'bread'}],
-      ['pot',8,1,1,1,'Fridge','Magnets from eleven countries. Nobody in this house has been to any of them. A tamale count in marker on the door: 38.'],
-      ['table',6,4,2,1,'Dining table','Sunflowers in a jar, a half-finished jigsaw puzzle and Daisy\'s storyboard. Scene one is the bathroom line.'],
-      ['photo',9,4,2,1,'Family wall','Four generations, two weddings, one quinceañera, and a photo of the house in 1975, back when it had a lawn.'],
-      ['recliner',12,4,2,2,'Big TV','The game is on. The volume is at 60. Nobody has ever seen it lower.'],
-      ['bench',9,5,3,1,'Green sofa','Four generations have sat here. Two of the cushions belong to Tony and are not for sharing.'],
-      ['toybox',5,6,1,1,'Toy pile','Blocks, a plastic dinosaur missing its tail, and the TV remote. Mateo hid it again.'],
-      ['photo',6,8,1,1,'Coat hooks','Eleven coats on six hooks. Nobody knows whose the green one is. It has been here since 2019.'],
-      ['shelf',8,8,1,1,'Shoe shelf','Forty shoes. Zero pairs. Tony\'s boots are the only ones that match.'],
-      ['bench',10,1,3,1,'Bunk bed','The top bunk is an exercise bike. The bottom bunk is a laundry basket with a pillow. Kevin sleeps wherever there is room.']]},
-  {id:'loftlobby',name:'The Lofts Lobby',w:12,h:10,
+      ['table',6,3,4,2,'Kitchen island',"Tamales, homework, a diaper bag, three phones charging off one outlet, and a sign in Mrs. Alvarez's handwriting: NO."],
+      ['counter',5,2,1,2,'Stove','Four pots on four burners. A pot of beans that\'s been simmering since 1998.',{variant:'bread'}],
+      ['pot',9,1,2,3,'Fridge','Magnets from eleven countries. Nobody in this house has been to any of them. A tamale count in marker on the door: 38.'],
+      ['table',6,5,3,2,'Dining table','Sunflowers in a jar, a half-finished jigsaw puzzle and Daisy\'s storyboard. Scene one is the bathroom line.'],
+      ['bench',10,6,4,4,'Green sofa','Four generations have sat here. Two of the cushions belong to Tony and are not for sharing.'],
+      ['toybox',2,6,3,2,'Toy pile','Blocks, a plastic dinosaur missing its tail, and the TV remote. Mateo hid it again.'],
+      ['photo',6,10,2,3,'Coat hooks','Eleven coats on six hooks. Nobody knows whose the green one is. It has been here since 2019.'],
+      ['shelf',9,10,2,2,'Shoe shelf','Forty shoes. Zero pairs. Tony\'s boots are the only ones that match.'],
+      ['bench',11,1,3,3,'Bunk bed','The top bunk is an exercise bike. The bottom bunk is a laundry basket with a pillow. Kevin sleeps wherever there is room.']]},
+  {id:'loftlobby',name:'The Lofts Lobby',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],spawn:{x:8,y:14},
     style:{floor:'#d8b57a',alt:'#e0c08a',wall:'#8a5a44',trim:'#d9c0a0',pattern:'tile',rug:'#7a4a3a'},
     rug:[4,4,4,2],
-    // Painted plate (art/loftlobby.webp, engine/plate.js). Street gate at the bottom (door 6,9 and 5,9). The brass elevator doors (5,1 and 6,1) are scenery: the call button beside them (7,2) asks to go up to TNB's loft.
-    // Mailboxes top left, package desk top right, leather sofa left, monstera right. The mask is the walk map: '#' blocks, '.' walks.
+
+    // Square painted plate (art/loftlobby.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Mailboxes back left, elevator doors back centre (the call button at (11,3) asks to go up), package desk right, leather sofa left, monstera right. The gap between the door leaves (x7 to x9) is the way out.
     plateMask:[
-      '############',
-      '############',
-      '############',
-      '##......####',
-      '###.......##',
-      '###.......##',
-      '###.......##',
-      '#####..#####',
-      '#####..#####',
-      '#####..#####'],
-    door:[6,9],door2:[5,9],spawn:{x:6,y:8},
+      '################',
+      '################',
+      '################',
+      '################',
+      '####...#....####',
+      '####........####',
+      '####........####',
+      '#####........###',
+      '#####........###',
+      '#####........###',
+      '#####.#...#..###',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######'],
     npcs:[],
     objects:[
-      ['photo',7,2,1,1,'Elevator button',"The brass call button. A tiny label under it says: TNB, TOP FLOOR, MIND THE KILN.",{ride:['lofts',6,8,'up'],ridePrompt:"Go up to TNB's loft?"}],
-      ['shelf',2,1,3,2,'Mailboxes',"Thirty brass mailboxes. TNB's just says CLAY in marker, because the real label fell off in 2022. It is full of glaze catalogs."],
-      ['table',8,2,3,2,'Package desk','A box stamped FRAGILE: POTTERY, addressed to TNB. Every neighbor has shaken it once. Nobody has admitted it.'],
-      ['couch',0,4,3,3,'Leather sofa','For people waiting on someone. A handbag and yesterday\'s paper sit on it. Nobody has claimed either.'],
-      ['pot',10,4,2,3,'Monstera','Taller than the mailboxes. A tag on the pot says WATER ME THURSDAYS. It looks like it has opinions about the other days.']]},
-  {id:'lofts',w:12,h:10,
-    exitTo:['loftlobby',5,3,'down'],
+      ['photo',11,3,1,1,'Elevator button',"The brass call button. A tiny label under it says: TNB, TOP FLOOR, MIND THE KILN.",{ride:['lofts',8,14,'up'],ridePrompt:"Go up to TNB's loft?"}],
+      ['shelf',3,1,4,3,'Mailboxes',"Thirty brass mailboxes. TNB's just says CLAY in marker, because the real label fell off in 2022. It is full of glaze catalogs."],
+      ['table',12,4,3,3,'Package desk','A box stamped FRAGILE: POTTERY, addressed to TNB. Every neighbor has shaken it once. Nobody has admitted it.'],
+      ['couch',0,6,5,4,'Leather sofa','For people waiting on someone. A handbag and yesterday\'s paper sit on it. Nobody has claimed either.'],
+      ['pot',13,6,3,5,'Monstera','Taller than the mailboxes. A tag on the pot says WATER ME THURSDAYS. It looks like it has opinions about the other days.']]},
+  {id:'lofts',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
+    exitTo:['loftlobby',9,5,'down'],
     style:{floor:'#b98a6a',alt:'#c49878',wall:'#8a5a44',trim:'#d9c0a0',pattern:'wood',rug:'#3f4650'},
     rug:[3,5,5,2],
-    // Painted plate (art/lofts.webp, engine/plate.js). Kiln and clothes rack top left, pottery shelf top right, wheel left, coffee table on the rug,
-    // longboard wall right, sofa left, door bottom centre (6,9; the way down is the elevator to the lobby). '#' blocks, '.' walks.
+
+    // Square painted plate (art/lofts.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Kiln and wheel back left, garment rack, pottery shelf back right, longboard wall right, horror couch left, coffee table on the rug. The gap at the bottom (x7 to x9) is the elevator down to the lobby.
     plateMask:[
-      '############',
-      '############',
-      '#######.####',
-      '###........#',
-      '####.##.####',
-      '##......####',
-      '#####......#',
-      '#####.....##',
-      '######.#####',
-      '######.#####'],
+      '################',
+      '################',
+      '################',
+      '#####.##########',
+      '#####.####..####',
+      '#####........###',
+      '####.........###',
+      '####...###...###',
+      '####...###...###',
+      '######........##',
+      '######........##',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######'],
     npcs:[
-      {name:'TNB',x:6,y:5,look:'kit',sheet:'tnb',partner:true,duration:0.68,lines:[
+      {name:'TNB',x:6,y:6,look:'kit',sheet:'tnb',partner:true,duration:0.68,lines:[
         'Well, well, well...',
         'Hey, you. Did you eat? I made a bowl. I also made a bowl. Pottery joke.',
         'Welcome to the loft. Kiln by one window, wheel by the other, garment bags everywhere else. Spring Street, baby.',
@@ -1322,7 +1336,7 @@ const LA_ROOMS=[
           'Be careful out there. I like you un-cracked.']},
       // Jojo: TNB's sister (Tom 2026-10-30; painted from his photo, data/jojo-hires.js). Slow, easy, never in a hurry (why stays unstated).
       // Disc golf with TNB on Sundays; her battle cameo is Round with Jojo (engine/tnb-moves.js).
-      {name:'Jojo',x:8,y:6,look:'sage',sheet:'jojo',duration:0.75,lines:[
+      {name:'Jojo',x:5,y:8,look:'sage',sheet:'jojo',duration:0.75,lines:[
         'Oh. Hi. You must be Tom. I\'m Jojo. TNB\'s sister.',
         'He talks about you a lot. Mostly "Tom said" and then a very long pause. Pottery pause. I know it well.',
         'I stopped by to borrow a mug. That was a while ago. I\'m still on the couch. It\'s a good couch.',
@@ -1333,45 +1347,50 @@ const LA_ROOMS=[
           'No rush on anything. That\'s kind of my whole thing.',
           'Nice to finally have you in the family. Or near it. We\'ll see how the Sundays go.']}],
     objects:[
-      ['oven',2,1,2,2,'The kiln','Cone six, firing tonight. A sign on it: DO NOT OPEN. VERY HOT. SO ARE YOU.'],
-      ['rack',4,1,3,2,'Garment rack',"Bagged costumes for tomorrow's shoot, tagged by scene. One bag just says: SHOE BACKUP."],
-      ['shelf',8,1,3,2,'Pottery shelf','Mugs in sunset colors. TNB says LA light changes the glaze. Tom has no idea how glaze works. He believes him completely.'],
-      ['wheel',1,3,2,2,'Pottery wheel','Still a little clay on it. Centered. Everything starts with centering.'],
-      ['boardwall',8,4,3,2,'Longboard wall','Three longboards and a Metro map with every line he\'s ridden circled. Every line is circled.'],
-      ['couch',1,6,3,2,'Horror couch','Facing a projector screen. The last movie paused mid-scream. Tom won\'t ask which one.'],
-      ['table',5,4,2,1,'Coffee table','A plant, a stack of glaze books and one mug with a chip. TNB says the chip is the best part.'],
-      ['table',4,6,1,2,'Side tables','A lamp, and a bowl of popcorn that has been there since the last movie. Nobody is brave enough to ask how long.']]},
-  {id:'tower',w:11,h:9,
+      ['oven',3,1,2,3,'The kiln','Cone six, firing tonight. A sign on it: DO NOT OPEN. VERY HOT. SO ARE YOU.'],
+      ['rack',6,1,4,4,'Garment rack',"Bagged costumes for tomorrow's shoot, tagged by scene. One bag just says: SHOE BACKUP."],
+      ['shelf',11,1,4,3,'Pottery shelf','Mugs in sunset colors. TNB says LA light changes the glaze. Tom has no idea how glaze works. He believes him completely.'],
+      ['wheel',2,4,3,1,'Pottery wheel','Still a little clay on it. Centered. Everything starts with centering.'],
+      ['boardwall',13,4,3,5,'Longboard wall','Three longboards and a Metro map with every line he\'s ridden circled. Every line is circled.'],
+      ['couch',1,6,3,6,'Horror couch','Facing a projector screen. The last movie paused mid-scream. Tom won\'t ask which one.'],
+      ['table',7,7,3,2,'Coffee table','A plant, a stack of glaze books and one mug with a chip. TNB says the chip is the best part.'],
+      ['table',4,9,2,3,'Side tables','A lamp, and a bowl of popcorn that has been there since the last movie. Nobody is brave enough to ask how long.']]},
+  {id:'tower',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#cfd6de',alt:'#dde3ea',wall:'#3f5a74',trim:'#c9d6de',pattern:'tile',rug:'#6f9fc4'},
     rug:[3,5,5,2],
-    // Painted plate (art/tower.webp, engine/plate.js), area 49. The mask is the walk map: '#' blocks, '.' walks.
-    // Rows 0 and 1 are the window wall. Sofa and chaise back left (cols 1 to 3), standing desk back right (cols 7 and 8), the two stone pillars
-    // (3,3) and (8,3), the TV unit down the left wall (col 1), the kitchen island and stools (cols 2 to 4, rows 5 and 6), the dining set (cols 6 and 7),
-    // the armchair and side nook down the right (col 9). The open floor runs down the middle to a one-tile lane at x 5 between the planters.
+
+    // Square painted plate (art/tower.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Sofa and TV back left, dining table and desk back right, kitchen island left, armchair and corner nook right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '###########',
-      '###########',
-      '####...####',
-      '##....##.##',
-      '##....##.##',
-      '#####....##',
-      '#####.#####',
-      '#####.#####',
-      '#####.#####'],
+      '################',
+      '################',
+      '################',
+      '########...#####',
+      '#######..#######',
+      '#######..#######',
+      '##.......#######',
+      '#######......###',
+      '#######......###',
+      '#######......###',
+      '#######......###',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Priya',x:6,y:2,look:'priya',lines:[
+      {name:'Priya',x:10,y:8,look:'priya',lines:[
         '34th floor. From my desk I can see Griffith Park. I\'ve never been to Griffith Park.',
         'My dog is named Bagel. He has more friends in this building than I do.',
         'The pool is on the roof. Nobody swims. Everyone takes photos of the pool.']}],
     objects:[
-      ['couch',1,2,3,1,'Gray couch','It came in a box. Most things in this building came in a box.'],
-      ['desk',7,2,2,1,'Standing desk','Three monitors. A sticky note: GO OUTSIDE. Under it: LATER.'],
-      ['tv',1,3,1,4,'The TV',"A slideshow of somebody else's vacation. It came with the apartment."],
-      ['counter',2,5,3,2,'Kitchen island','Four stools, one sink, and a bowl of oranges nobody has ever peeled. Priya says it is for decoration. The oranges agree.'],
-      ['table',6,3,2,2,'Dining table','Set for four. Priya says she has never once had four people over. The fruit bowl is doing its best.'],
-      ['pot',9,3,1,2,'Fiddle-leaf fig','Thriving. Gets more sun than anyone in the building.'],
-      ['couch',9,5,1,1,'Armchair','A book left open on the side table. The page has not changed in weeks.'],
-      ['table',8,6,2,1,'Corner nook','A framed beach photo and a lamp left on. Somebody wants this to feel like home.']]},
+      ['couch',2,2,5,4,'Gray couch','It came in a box. Most things in this building came in a box.'],
+      ['desk',11,1,4,3,'Standing desk','Three monitors. A sticky note: GO OUTSIDE. Under it: LATER.'],
+      ['tv',0,3,2,4,'The TV',"A slideshow of somebody else's vacation. It came with the apartment."],
+      ['counter',2,7,5,4,'Kitchen island','Four stools, one sink, and a bowl of oranges nobody has ever peeled. Priya says it is for decoration. The oranges agree.'],
+      ['table',9,4,4,3,'Dining table','Set for four. Priya says she has never once had four people over. The fruit bowl is doing its best.'],
+      ['couch',13,6,3,3,'Armchair','A book left open on the side table. The page has not changed in weeks.'],
+      ['table',13,9,3,3,'Corner nook','A framed beach photo and a lamp left on. Somebody wants this to feel like home.']]},
   {id:'creole',w:12,h:9,
     style:{floor:'#c9a87a',alt:'#d6b688',wall:'#7a3a5a',trim:'#e8c060',pattern:'check',rug:'#4a7a3a'},
     rug:[4,5,4,2],

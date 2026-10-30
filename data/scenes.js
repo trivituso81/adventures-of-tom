@@ -236,8 +236,8 @@ SCENES.ch2Arrive=[
 // 2. The loft: the heart-kiss greeting. TNB joins.
 SCENES.ch2Loft=[
   {flag:'ch2-tnb'},
-  {place:'TNB',at:[6,5],dir:'down'},
-  {walk:'tom',to:routeTo('tom',6,6),speed:.22}, {face:'tom',dir:'up'},
+  {place:'TNB',at:[8,9],dir:'down'},
+  {walk:'tom',to:routeTo('tom',8,10),speed:.22}, {face:'tom',dir:'up'},
   {call:()=>{ const t=sceneActor('TNB'); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   {talk:'TNB',lines:['Look who flew three thousand miles to see me.']},
