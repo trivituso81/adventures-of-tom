@@ -22,7 +22,7 @@ JS="""(a)=>{ const [fx,fy]=a; const out=[]; const T_=T;
     const mw=m.w*T_,mh=m.h*T_;
     for(const [px,py] of [[0,0],[m.w-1,0],[0,m.h-1],[m.w-1,m.h-1],[(m.w-1)/2,0],[(m.w-1)/2,m.h-1],[0,(m.h-1)/2],[m.w-1,(m.h-1)/2],[m.w/2,m.h/2]]){
       player.x=px; player.y=py; camera.snap=true; updateCamera(1);
-      out.push({id,px,py,cx:camera.x,cy:camera.y,W,H,mw,mh,scale,outside:!!m.outside,cover:!!(m.outside&&PLATES[m.id]),cap:OUTDOOR_COVER_CAP,sT:safeTop,sB:safeBottom,T:T_,mid:px===m.w/2&&py===m.h/2});
+      out.push({id,px,py,cx:camera.x,cy:camera.y,W,H,mw,mh,scale,outside:!!m.outside,sq:!!(!m.outside&&PLATES[m.id]&&PLATES[m.id].square),cover:!!(m.outside&&PLATES[m.id]),cap:OUTDOOR_COVER_CAP,sT:safeTop,sB:safeBottom,T:T_,mid:px===m.w/2&&py===m.h/2});
     } }
   return out; }"""
 with sync_playwright() as pw:
@@ -53,8 +53,8 @@ with sync_playwright() as pw:
                 ok=r['cx']>=-0.01 and r['cx']+r['W']<=r['mw']+0.01
                 check(f"{label} {r['id']} x at ({r['px']},{r['py']}): cam {r['cx']:.1f} W {r['W']} mw {r['mw']}",ok)
             if r['mh']>=r['H']:
-                if r['outside']:
-                    # Outdoor: space past the top or bottom edge may only fall inside the title bar and controls bands, and only to keep
+                if r['outside'] or r['sq']:
+                    # Outdoor maps and square painted rooms: space past the top or bottom edge may only fall inside the title bar and controls bands, and only to keep
                     # Tom's tile inside the safe band (the painting must never put him under the controls).
                     ok=r['cy']>=-r['sT']-0.01 and r['cy']+r['H']<=r['mh']+r['sB']+0.01
                     check(f"{label} {r['id']} y within HUD bands at ({r['px']},{r['py']}): cam {r['cy']:.1f} H {r['H']} mh {r['mh']}",ok)
