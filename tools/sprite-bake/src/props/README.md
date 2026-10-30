@@ -22,3 +22,4 @@ Notes for the future bake: cells carry a white number in the top-left corner (cr
 | tombo-sheet01-of-10.png | Tombo props 1 to 14 (Gift Box ... Bodyguard Sunglasses) | Cells 1 to 8 match (gift box, dice squishy, LIKE button, biplane wings, goggles, cloud, hair tuft, blue gym mat). Cells 9 to 14 are invented (gavel, genie lamp, hourglass, barrel, ship wheel, treasure chest): redo Judge's Desk, Carry-On Suitcase, Pink Blanket Lump, Pink Sneakers, Gold Tiara, Bodyguard Sunglasses and Earpiece |
 | tombo-sheet02-of-10.png | Tombo props 15 to 28 (Gold Scepter Stick ... Mustard Bottle) | 14 of 14 match |
 | tombo-sheet03-of-10.png | Tombo props 29 to 42 (Whole Lemon ... Blue Cushion) | 14 of 14 match |
+| tombo-sheet04-of-10.png | Tombo props 43 to 56 (Pink Slipper ... Italy Wall Map) | Cells 1 to 13 match. Cell 14 is a pencil: redo Italy Wall Map. Row gaps set by hand in ROWCUTS |

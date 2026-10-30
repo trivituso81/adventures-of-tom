@@ -43,11 +43,13 @@ SHEETS = [
     ('tombo-sheet01-of-10.png', 'tombo', rng(1, 8)),
     ('tombo-sheet02-of-10.png', 'tombo', rng(15, 28)),
     ('tombo-sheet03-of-10.png', 'tombo', rng(29, 42)),
+    ('tombo-sheet04-of-10.png', 'tombo', rng(43, 55)),
     # redo sheet: cell -> (character, item)
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
-TOTAL = {'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+TOTAL = {'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+ROWCUTS = {'tombo-sheet04-of-10.png': [325, 635, 935]}   # sheets where the row gaps are not the emptiest places (a hanging cord, tall props)
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
 
 
@@ -69,7 +71,7 @@ def valleys(profile, k, min_gap):
     return sorted(cuts)
 
 
-def cut_sheet(sheet, count, cols, rows):
+def cut_sheet(sheet, count, cols, rows, rowcuts=None):
     """Return `count` trimmed RGBA crops in reading order. The AI sheets are not an exact grid, so rows and columns are
     found from the ink: corner numbers are dropped, then each row is cut at the emptiest places of the row profile and each
     row's columns at the emptiest places of its column profile. Props that touch a neighbour are split at the valley."""
@@ -90,7 +92,7 @@ def cut_sheet(sheet, count, cols, rows):
             isnum[i] = True
     ink = mask & ~isnum[lab] & (area[lab] >= MIN_SPECK)
     nrows = (count + cols - 1) // cols
-    ycuts = [0] + valleys(ink.sum(axis=1), nrows - 1, H / rows * .45) + [H]
+    ycuts = [0] + (rowcuts or valleys(ink.sum(axis=1), nrows - 1, H / rows * .45)) + [H]
     notes = []
     cells = []
     for r in range(nrows):
@@ -151,7 +153,7 @@ def main():
             continue
         sheet = Image.open(os.path.join(SRC, fn)).convert('RGBA')
         cols, rows = GRID[sheet.size]
-        crops, notes = cut_sheet(sheet, TOTAL.get(fn, max(c for c, _ in cells)), cols, rows)
+        crops, notes = cut_sheet(sheet, TOTAL.get(fn, max(c for c, _ in cells)), cols, rows, ROWCUTS.get(fn))
         for nn in notes:
             report.append(f'{fn}: {nn}')
         for cell, item in cells:

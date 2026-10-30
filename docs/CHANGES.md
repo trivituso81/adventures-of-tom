@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 4 of 10 (source and cut)
+- Saved `tombo-sheet04-of-10.png`; cells 1 to 13 match (slipper, TV remote, elevator car, call button, rooftop ledge, slab chunk, bistro table, kitchen sink, rhubarb stalk and root, lattice crust tin, serving tray, Italy binder) and are cut. Cell 14 came back as a pencil, so Italy Wall Map goes on the redo sheet. `bake_prop_sheets.py` gained `ROWCUTS` (hand-set row gaps) for this sheet. 49 of 138 painted. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 3 of 10 (source and cut)
 - Saved `tombo-sheet03-of-10.png`; all 14 match (lemon, sock, Ymamot sign, stepladder, birthday banner, banner pole, pink balloon, cake, balloon trio, purple couch, floor lamp, MOM placard, two cushions). Cut to `art/props/tombo/`; 36 of 138 painted. Not wired yet.
 
