@@ -441,6 +441,7 @@ SC.tm_stophand=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const sc=ez(u
   R(-14,-10,28,28,OUT); R(-12,-8,24,24,'#f2c79a'); for(let k=0;k<4;k++) { R(-13+k*7,-26,7,18,OUT); R(-12+k*7,-25,5,17,'#f2c79a'); } R(12,0,10,8,OUT); R(12,2,8,4,'#f2c79a');
   if(u>.15) { gfx.globalAlpha*=.5; for(let k=0;k<3;k++) Ln(-24-k*6,-20+k*14,-30-k*6,-20+k*14,3,SKY); } gfx.restore(); };
 SC.tm_placard=(s,u)=>{ const d=ez(u/.2),bob=u<.2?0:Math.sin(cl((u-.2)/.12)*Math.PI)*3,x=s.x,y=s.y-14*(1-d)-bob; gfx.globalAlpha=fade(u,.85)*d;
+  if(PROPART.draw('tom/no_touching_sign',x,y-8,{h:56})) return;   // painted sign on its post; the drawn placard is the fallback
   R(x-2,y-6,4,18,OUT); R(x-1,y-5,2,16,WOOD); R(x-30,y-28,60,24,OUT); R(x-28,y-26,56,20,CREAM); R(x-28,y-26,56,4,RED); label('NO',x,y-20,'#7a1a14',1); label('TOUCHING',x,y-12,'#7a1a14',1); };
 SC.tm_sleeve=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const x=st.x-18,y=st.y-TH()*.5; gfx.globalAlpha=fade(u,.5); label('*',x-4,y-u*10,GOLD,2); Ln(x,y,x+12,y,2,CREAM); };
 Tm.defendShow=(u,t,resolve)=>{ const fx=battle.fx[u.idx],self=t===u,H=ST.unit(t),me=ST.unit(u);
@@ -787,8 +788,20 @@ SC.tm_cart=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(!s.img) s.img=grab();
   gfx.save(); gfx.setTransform(1,0,0,1,0,0);
   gfx.globalAlpha=q; R(0,0,576,324,'#0b0d12');
   // The console the cartridge goes back into.
-  if(ms>P.ins-200) { const k=ez((ms-P.ins+200)/300); R(118,324-70*k,340,74,OUT); R(122,328-70*k,332,70,'#4a4c54'); R(122,328-70*k,332,8,'#6a6c74'); R(178,322-70*k,220,10,'#14161c'); R(132,340-70*k,40,6,RED); }
+  if(ms>P.ins-200) { const k=ez((ms-P.ins+200)/300);
+   if(!PROPART.draw('tom/retro_console',288,328-70*k+100,{w:340,src:[0,38,160,94]})) {   // painted console (top face), the drawn one is the fallback
+    R(118,324-70*k,340,74,OUT); R(122,328-70*k,332,70,'#4a4c54'); R(122,328-70*k,332,8,'#6a6c74'); R(178,322-70*k,220,10,'#14161c'); R(132,340-70*k,40,6,RED); } }
   gfx.globalAlpha=q; gfx.translate(cx,cy); gfx.scale(sc,sc*(1-tip*.12));
+  if(PROPART.ready('tom/game_cartridge')) {   // painted cartridge; the live battle plays in its tilted label window
+    PROPART.draw('tom/game_cartridge',0,0,{w:250}); const kk=250/160,pt=(u,v)=>({x:(u-80)*kk,y:(v-67)*kk}),TL=pt(42,15),TR=pt(116,27),BL=pt(38,58);
+    const W=gfx.getTransform().multiply(new DOMMatrix([(TR.x-TL.x)/576,(TR.y-TL.y)/576,(BL.x-TL.x)/324,(BL.y-TL.y)/324,TL.x,TL.y]));
+    gfx.save(); gfx.setTransform(1,0,0,1,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=true; gfx.beginPath();
+    [[0,0],[576,0],[576,324],[0,324]].forEach(([x,y],i)=>{ const ax=lerp(x,W.a*x+W.c*y+W.e,q),ay=lerp(y,W.b*x+W.d*y+W.f,q); i?gfx.lineTo(ax,ay):gfx.moveTo(ax,ay); }); gfx.closePath(); gfx.clip();
+    gfx.setTransform(lerp(1,W.a,q),lerp(0,W.b,q),lerp(0,W.c,q),lerp(1,W.d,q),lerp(0,W.e,q),lerp(0,W.f,q)); gfx.drawImage(s.img,0,0);
+    R(0,0,576,58,NAVY); label('THE ADVENTURES',288,8,CREAM,3); label('OF TOM',288,32,GOLD,3);
+    if(blow>0) for(let k=0;k<5;k++) { const yy=((k*23+s.t*260)%96+2)*3.27; gfx.globalAlpha=q*.7; R(0,yy,576,(4+(k%2)*3)*3.27,RAINBOW[(k+Math.floor(s.t*12))%6]); }
+    gfx.restore(); }
+  else {
   PO([[-116,-102],[116,-102],[116,94],[102,104],[-102,104],[-116,94]],'#9a9ca4',3);
   R(-116,-102,232,12,'#b8bac2'); for(let k=0;k<4;k++) { R(-110+k*6,-80,3,52,'#82848c'); R(98+k*6-12,-80,3,52,'#82848c'); }
   R(-80,104,160,12,OUT); for(let k=0;k<19;k++) R(-77+k*8,106,5,9,'#e8c84a');
@@ -800,6 +813,7 @@ SC.tm_cart=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(!s.img) s.img=grab();
   gfx.drawImage(s.img,lerp(0,tx,q),lerp(0,ty,q),lerp(576,tw,q),lerp(324,th,q)); gfx.restore();
   R(-88,-68,176,18,NAVY); label('THE ADVENTURES',0,-66,CREAM,1); label('OF TOM',0,-59,GOLD,1);
   if(blow>0) for(let k=0;k<5;k++) { const yy=-48+((k*23+s.t*260)%96); gfx.globalAlpha=q*.7; R(-88,yy,176,4+(k%2)*3,RAINBOW[(k+Math.floor(s.t*12))%6]); }
+  }
   gfx.restore();
   // Tom's giant hands, holding it from outside the game.
   if(q>.5) { gfx.globalAlpha=cl((q-.5)*2); gripHand(cx-118*sc,cy+10,1); gripHand(cx+118*sc,cy+10,-1); }
@@ -1097,7 +1111,8 @@ Tm.window_seat=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(
 const card=(x,y,sc,k,rot)=>{ const pics=['#ffd166',BLUE,RED,GREEN]; gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc); RO(-10,-14,20,28,CREAM); E(0,-4,5,5,pics[k%4]); R(-6,6,12,2,'#2b2a26'); R(-3,9,6,2,'#2b2a26'); gfx.restore(); };
 SC.tv_deck=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.94); const left=Math.max(0,P.n-Math.floor(Math.max(0,ms-P.c0)/P.step)); for(let k=Math.min(3,left);k>0;k--) card(h.x-12-k*2,h.y-14-k*2,1.4,k,0); };
 SC.tv_stuck=(s,u)=>{ gfx.globalAlpha=fade(u,.7); card(s.x,s.y,1.4,s.k,s.rot); if(u<.4) { gfx.globalAlpha=1-u/.4; bigWord(s.w,s.x,s.y-30,CREAM,1); } };
-SC.tv_q=(s,u)=>{ const ms=s.t*1000,done=ms>s.flip,x=s.x,y=s.y,sq=done&&ms<s.flip+200?Math.abs(Math.cos((ms-s.flip)/200*Math.PI)):1; gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(x,y); gfx.scale(sq,1); EO(0,0,17,17,done?(s.kind?GOLD2:GOLD):'#cfd8d6'); if(s.kind&&done) star(0,0,11,CREAM); else bigWord(done?'!':'?',1,-5,done?'#7a1a14':'#2b2a26',3); gfx.restore(); };
+SC.tv_q=(s,u)=>{ const ms=s.t*1000,done=ms>s.flip,x=s.x,y=s.y,sq=done&&ms<s.flip+200?Math.abs(Math.cos((ms-s.flip)/200*Math.PI)):1; gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(x,y); gfx.scale(sq,1); if(!done&&PROPART.draw('tom/question_tile',0,0,{h:36})) { gfx.restore(); return; }   // painted ? tile until it flips to the gold !
+  EO(0,0,17,17,done?(s.kf?GOLD2:GOLD):'#cfd8d6'); if(s.kf&&done) star(0,0,11,CREAM); else bigWord(done?'!':'?',1,-5,done?'#7a1a14':'#2b2a26',3); gfx.restore(); };
 Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m),all=b2LiveFoes(),Gp=ST.group(all),kind=!!(B2.move&&B2.move.kindOnFoe);
   const sx=Math.max(Gp.x1+70,Math.min(me.x-40,Gp.x1+150)),sy=Math.min(316,me.base+6),n=6,c0=1150,step=170;
   const order=[]; for(let k=0;k<n-1;k++) order.push(all[k%all.length]); order.push(t);
@@ -1109,7 +1124,7 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
   const throws=order.map((o,k)=>[c0+k*step,()=>{ const O=ST.unit(o),h=hand(),rot=(k%2?-.3:.3); sfx.whoosh(); ST.fly((x,y,uu)=>card(0,0,1.4,k,uu*9),h.x-12,h.y-14,O.x,O.mid,.26,30);
     b7Later(()=>{ sfx.select(); ST.jolt(o,.18); scene('tv_stuck',1.2,{x:O.x+((k*13)%20)-10,y:O.mid-((k*7)%14),k,rot,w:o===t&&k===n-1?'?':words[k%5]}); },260); }]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Tom steps out with a deck of flashcards.'); say(m.id,'flashcard_flurry'); scene('tv_deck',(c0+n*step+200)/1000,{plan:{c0,step,n}}); scene('tv_q',3.4,{x:Math.min(560,F.x+F.w*.5+20),y:F.mid-6,flip:reveal,kind}); }],
+    [0,()=>{ setMessage('Tom steps out with a deck of flashcards.'); say(m.id,'flashcard_flurry'); scene('tv_deck',(c0+n*step+200)/1000,{plan:{c0,step,n}}); scene('tv_q',3.4,{x:Math.min(560,F.x+F.w*.5+20),y:F.mid-6,flip:reveal,kf:kind}); }],
     [900,()=>{ scene('tv_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'POP QUIZ!',c:CREAM,sc:3}); sfx.select(); }],
     [c0,()=>{ setMessage(kind?'Flashcards for everybody. '+t.name+' gets the easy ones.':'Flashcards for everybody. Fast. No peeking.'); }],
     ...throws,
@@ -1123,8 +1138,12 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
 // On A: flash, 30 LIVES, and a 1UP over every friend.
 const KSEQ=['U','U','D','D','L','R','L','R','B','A'];
 const arrow=(x,y,sc,k,c)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate({U:0,R:Math.PI/2,D:Math.PI,L:-Math.PI/2}[k]); gfx.scale(sc,sc); poly([[0,-14],[12,0],[5,0],[5,12],[-5,12],[-5,0],[-12,0]],c); gfx.restore(); };
-const glyph=(x,y,sc,k)=>{ if(k==='A'||k==='B') { EO(x,y,9*sc,9*sc,k==='A'?RED:'#f0c040'); bigWord(k,x+sc,y-3*sc,CREAM,Math.max(1,Math.round(sc*1.4))); } else arrow(x,y,sc,k,SKY); };
+const GLY={U:[0,0],B:[53,0],A:[107,0]};   // thirds of the painted glyph_tiles sheet (up arrow, B, A); the other arrows are the up tile turned
+const glyph=(x,y,sc,k)=>{ const g=GLY[k]||GLY.U; if(PROPART.draw('tom/glyph_tiles',x,y,{h:27*sc,rot:{R:Math.PI/2,D:Math.PI,L:-Math.PI/2}[k]||0,src:[g[0],0,g[0]===107?53:54,92]})) return;
+  if(k==='A'||k==='B') { EO(x,y,9*sc,9*sc,k==='A'?RED:'#f0c040'); bigWord(k,x+sc,y-3*sc,CREAM,Math.max(1,Math.round(sc*1.4))); } else arrow(x,y,sc,k,SKY); };
 SC.tv_konmat=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; gfx.globalAlpha=fin(u,.06)*fade(u,.93); const k=P.times.findIndex((tt,i)=>ms>=tt&&ms<tt+180),lit=k>=0?KSEQ[k]:null;
+  if(PROPART.ready('tom/giant_floor_controller')) { PROPART.draw('tom/giant_floor_controller',x,y,{w:172,sy:.5});   // painted floor pad, squashed flat; lit buttons glow gold on top of it
+    const dp0=P.dpad; if(lit&&lit!=='A'&&lit!=='B') { const o={U:[0,-8],D:[0,8],L:[-14,0],R:[14,0]}[lit]; gfx.globalAlpha*=.6; E(dp0+o[0],y+o[1]*.6,8,5,GOLD); } else if(lit) { gfx.globalAlpha*=.6; E(lit==='B'?P.bx:P.ax,y+(lit==='B'?2:-2),11,7,GOLD); } return; }
   poly([[x-84,y+14],[x+84,y+14],[x+70,y-14],[x-70,y-14]],GREY); poly([[x-74,y+8],[x+74,y+8],[x+64,y-10],[x-64,y-10]],GREY2);
   const dp=P.dpad; for(const [k2,dx,dy] of [['U',0,-8],['D',0,8],['L',-14,0],['R',14,0]]) { gfx.save(); gfx.translate(dp+dx,y+dy); gfx.scale(1,.55); RO(-7,-7,14,14,lit===k2?GOLD:INK); gfx.restore(); }
   EO(P.bx,y+2,10,6,lit==='B'?GOLD:'#f0c040'); EO(P.ax,y-2,10,6,lit==='A'?GOLD:RED); label('B',P.bx,y,'#2b2a26',1); label('A',P.ax,y-4,CREAM,1); };
@@ -1191,7 +1210,8 @@ SC.tv_kanji=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y,S=P.S; if(ms>P.
   let tip=null; const done=[]; KANJI.forEach((pts,k)=>{ const q=cl((ms-P.strokes[k])/P.dur); if(q<=0) return; const pp=q<1?partial(pts,ez(q)):pts; done.push(pp); if(q<1) tip=pp[pp.length-1]; });
   gfx.globalAlpha=.35; for(const pp of done) stroke(pp,x,y,S,S*.24,flare>0?'#ffffff':FIRE);
   gfx.globalAlpha=1; for(const pp of done) stroke(pp,x,y,S,S*.15+6,INK); for(const pp of done) stroke(pp,x,y,S,S*.15,flare>0?'#fff4c0':GOLD2);
-  if(tip) { const tx=x+tip[0]*S,ty=y+tip[1]*S; gfx.save(); gfx.translate(tx,ty); gfx.rotate(-.6); gfx.scale(1.5,1.5); R(-5,-60,10,50,OUT); R(-3,-58,6,46,'#c8a060'); for(let k=0;k<4;k++) R(-3,-50+k*10,6,2,'#8a6a3a'); poly([[-6,-12],[6,-12],[2,6],[0,10],[-2,6]],INK); gfx.restore(); } };
+  if(tip) { const tx=x+tip[0]*S,ty=y+tip[1]*S; gfx.save(); gfx.translate(tx,ty); if(PROPART.draw('tom/calligraphy_brush',-45,-39,{h:100,flip:true,rot:-.2+Math.sin(ms*.02)*.04})) { gfx.restore(); return; }   // painted brush, tip on the stroke; the drawn one is the fallback
+    gfx.rotate(-.6); gfx.scale(1.5,1.5); R(-5,-60,10,50,OUT); R(-3,-58,6,46,'#c8a060'); for(let k=0;k<4;k++) R(-3,-50+k*10,6,2,'#8a6a3a'); poly([[-6,-12],[6,-12],[2,6],[0,10],[-2,6]],INK); gfx.restore(); } };
 SC.tv_fire=(s,u)=>{ for(let k=0;k<16;k++) { const q=cl(u*1.5-((k*7)%16)/40),a=-Math.PI/2+((k*37)%16-8)*.12,d=ez(q)*(s.r||70); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; const x=s.x+Math.cos(a)*d*.7,y=s.y+Math.sin(a)*d-q*20,r=(10-q*7)*(1+(k%3)*.3); E(x,y,r+2,r*1.3+2,OUT); E(x,y,r,r*1.3,k%3?FIRE:'#ffd14a'); E(x,y+r*.3,r*.4,r*.5,'#fff4c0'); } };
 Tm.kanji_strike=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,104),me=ST.unit(m);
   const S=Math.round(cl(F.h*1.05,74,96)),strokes=[1150,1450,1750,2150],dur=330,flare=2550,slam=2800;
@@ -1263,7 +1283,8 @@ SC.t3_spark=(s,u)=>{ for(let k=0;k<(s.n||6);k++) { const q=((u*(s.sp||2))+k/(s.n
 
 // A whole boule with a scored ear (sc 1 = 44 x 28).
 const loaf=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); EO(0,-10,22,14,CRUST); E(-4,-17,13,5,'#e0a868'); LnO(-12,-19,10,-13,2,CRUMB); E(-14,-6,3,2,'#a86a34'); E(10,-4,3,2,'#a86a34'); gfx.restore(); };
-const slice=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); EO(0,0,10,9,CRUMB); ring(0,0,10,9,3,CRUST); for(const [hx,hy,r] of [[-3,-3,2],[3,1,1.6],[-1,3,1.3],[4,-4,1.2]]) E(hx,hy,r,r*1.2,'#d8b888'); gfx.restore(); };
+const slice=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tom/bread_slice',0,-1,{w:24})) { gfx.restore(); return; }   // painted slice (steam wisps included)
+  EO(0,0,10,9,CRUMB); ring(0,0,10,9,3,CRUST); for(const [hx,hy,r] of [[-3,-3,2],[3,1,1.6],[-1,3,1.3],[4,-4,1.2]]) E(hx,hy,r,r*1.2,'#d8b888'); gfx.restore(); };
 
 // ---------- Sourdough Snob (A2) ----------
 // Tom carries a huge warm boule to the friend and an easel chart pops up: WILD YEAST 101. He tears off a slice and feeds
@@ -1271,6 +1292,9 @@ const slice=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); g
 // the friend; he holds the boule up high, sparkling: ADMIRE THE CRUST! Nobody asked.
 SC.t3_chart=(s,u)=>{ const ms=s.t*1000,P=s.plan,a=ez((ms-P.c0)/280)*(ms>P.c1?1-ez((ms-P.c1)/300):1); if(a<=0) return;
   const x=P.cx,y=P.cy-(1-a)*30,W=180,H=128; gfx.globalAlpha=a;
+  if(PROPART.ready('tom/easel_chart')) { PROPART.draw('tom/easel_chart',x,y+8,{h:150});   // painted easel with its WILD YEAST 101 board; the three steps go on a plaque in front
+    if(ms>=P.steps[0]) RO(x-58,y+26,116,46,CREAM); const steps0=['FLOUR+WATER','WAIT 48 HRS','ADMIRE CRUST'];
+    steps0.forEach((t,k)=>{ if(ms<P.steps[k]) return; const q=ez((ms-P.steps[k])/200); gfx.globalAlpha=a*q; label((k+1)+' '+t,x-6,y+32+k*13,k===2?'#a8401c':'#2b2a26',2); }); return; }
   LnO(x-50,y+H/2-6,x-70,y+H/2+40,4,WOOD); LnO(x+50,y+H/2-6,x+70,y+H/2+40,4,WOOD);
   RO(x-W/2,y-H/2,W,H,CREAM); R(x-W/2,y-H/2,W,20,'#2d5a3a'); label('WILD YEAST 101',x,y-H/2+5,CREAM,2);
   // The diagram: a yeast cell budding, bubbles, an arrow, a loaf.
@@ -1315,19 +1339,25 @@ SC.t3_gbox=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y-(1-ez((ms-P.set)/220)
   const lift=ms<P.lid0?0:ms<P.lid1?ez((ms-P.lid0)/(P.lid1-P.lid0))*.35:(.35+ez((ms-P.lid1)/250)*.65);
   const beams=ms>P.lid1&&ms<P.rc0?cl((ms-P.lid1)/250)*(ms>P.rc0-300?(P.rc0-ms)/300:1):0;
   if(beams>0) { gfx.globalAlpha=beams*.45; for(let k=0;k<7;k++) { const a=-Math.PI/2+(k-3)*.26+Math.sin(ms*.003+k)*.04; gfx.beginPath(); gfx.moveTo(x,y-58); gfx.lineTo(x+Math.cos(a-.08)*190,y-58+Math.sin(a-.08)*190); gfx.lineTo(x+Math.cos(a+.08)*190,y-58+Math.sin(a+.08)*190); gfx.closePath(); gfx.fillStyle=k%2?'#fff4c0':GOLD; gfx.fill(); } gfx.globalAlpha=fade(u,.95); }
-  RO(x-48,y-58,96,58,'#22242a'); R(x-48,y-58,96,4,'#3a3d46'); label('MAX',x,y-34,'#6a6f7a',3);
+  // Painted MAX box (price tag already on it): body and lid are two crops of one image so the lid still slides off.
+  const BX=PROPART.ready('tom/max_gadget_box');
+  if(BX) { const bh=84,k=bh/160,lh=68*k; PROPART.draw('tom/max_gadget_box',x,y-(bh-68*k)/2,{w:bh*.99,src:[0,68,158,92]});
+    if(lift>0) R(x-30,y-bh+lh-4,60,8,'#15161a'); }
+  else { RO(x-48,y-58,96,58,'#22242a'); R(x-48,y-58,96,4,'#3a3d46'); label('MAX',x,y-34,'#6a6f7a',3); }
   // The price tag on a string.
-  const sw=Math.sin(ms*.006)*.35; gfx.save(); gfx.translate(x+48,y-50); gfx.rotate(sw); Ln(0,0,0,20,2,'#d8d0c0'); RO(-22,20,44,18,'#fff4c0'); E(-17,29,2,2,OUT); label('$1499',2,26,RED,1); gfx.restore();
+  const sw=Math.sin(ms*.006)*.35; if(!BX) { gfx.save(); gfx.translate(x+48,y-50); gfx.rotate(sw); Ln(0,0,0,20,2,'#d8d0c0'); RO(-22,20,44,18,'#fff4c0'); E(-17,29,2,2,OUT); label('$1499',2,26,RED,1); gfx.restore(); }
   // The lid slides up and away.
-  if(lift<1) { const ly=y-58-lift*30,lx=x+(lift>.35?(lift-.35)/.65*120:0); gfx.save(); gfx.translate(lx,ly); gfx.rotate(lift>.35?(lift-.35)*1.4:0); RO(-52,-16,104,20,'#2c2f36'); R(-52,-16,104,4,'#454954'); gfx.restore(); if(ms>P.lid0&&ms<P.lid1) bigWord('FWOOOMP...',x,y-102,CREAM,2); }
+  if(lift<1) { const ly=y-58-lift*30,lx=x+(lift>.35?(lift-.35)/.65*120:0); gfx.save(); gfx.translate(lx,ly); gfx.rotate(lift>.35?(lift-.35)*1.4:0); if(!(BX&&PROPART.draw('tom/max_gadget_box',0,-8.1,{w:83.2,src:[0,0,158,68]}))) { RO(-52,-16,104,20,'#2c2f36'); R(-52,-16,104,4,'#454954'); } gfx.restore(); if(ms>P.lid0&&ms<P.lid1) bigWord('FWOOOMP...',x,y-102,CREAM,2); }
   // Once he has looked at it, the gadget lies on the box.
   if(ms>P.rc0) gadget(x,y-66,1.4,0,Math.PI/2);
   // The receipt unrolls from his hand to the floor and piles up.
   if(ms>P.rc0&&P.st&&P.st.x!=null) { const h={x:P.st.x-24,y:head(P.st).y-18},top=h.y+2,fl=P.floor,L=ez((ms-P.rc0)/(P.rc1-P.rc0))*(fl-top+90),hang=Math.min(L,fl-top),pile=Math.max(0,L-hang);
     R(h.x-9,top,18,hang+2,OUT); R(h.x-7,top,14,hang,'#ffffff'); for(let k=0;k<hang/9;k++) R(h.x-5,top+4+k*9,6+((k*3)%5),2,'#9aa0aa');
     for(let k=0;k<Math.min(6,pile/14);k++) { gfx.save(); gfx.translate(h.x-10+k*7,fl-4-(k%2)*4); gfx.rotate(k%2?.5:-.4); RO(-9,-3,18,6,'#ffffff'); gfx.restore(); }
+    PROPART.draw('tom/receipt_roll',h.x,top-4,{h:30});   // painted roll in his hand (the drawn strip comes off it)
     if(L>30) bigWord('$1499.99',h.x-46,top+6,RED,2); } };
-const gadget=(x,y,sc,ms,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot!=null?rot:Math.sin(ms*.008)*.06); gfx.scale(sc,sc); rrO(-12,-19,24,38,4,'#1a1b20'); R(-10,-17,20,34,'#2c2f36');
+const gadget=(x,y,sc,ms,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot!=null?rot:Math.sin(ms*.008)*.06); gfx.scale(sc,sc); if(PROPART.draw('tom/gadget',0,0,{w:34,rot:rot!=null?0:-Math.PI/2})) { gfx.restore(); return; }   // painted (lies flat when rot is given, held upright otherwise)
+  rrO(-12,-19,24,38,4,'#1a1b20'); R(-10,-17,20,34,'#2c2f36');
   EO(-3,-10,7,7,'#3a3d46'); E(-5,-12,2.2,2.2,'#0b0c10'); E(-1,-12,2.2,2.2,'#0b0c10'); E(-5,-8,2.2,2.2,'#0b0c10'); E(-1,-8,1.4,1.4,'#e8e0a0'); gfx.restore(); };
 SC.t3_gadget=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=P.st; if(!st||st.x==null||ms<P.up||ms>P.rc0) return; const q=ez((ms-P.up)/250),h=hand(),p=head(st,-44);
   const x=lerp(h.x,p.x,q),y=lerp(h.y,p.y,q); gfx.globalAlpha=1; gadget(x,y,2.2,ms); for(let k=0;k<5;k++) { const a=ms*.005+k*1.25; star(x+Math.cos(a)*50,y+Math.sin(a)*28,4+Math.sin(ms*.02+k)*2,k%2?'#ffffff':GOLD,a); } };
@@ -1402,14 +1432,17 @@ Tm.seat_1a=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p
 const STEPS=['CLEANSE','OIL','TONER','ESSENCE','SERUM','AMPOULE','SHEET','EYE','MOIST','SPF'];
 SC.t3_pause=(s,u)=>{ const ms=s.t*1000,a=ez(ms/250)*(ms>s.off?1-ez((ms-s.off)/300):1); if(a<=0) return; gfx.globalAlpha=a*.42; R(0,0,576,324,'#6a6a6a');
   gfx.globalAlpha=a; RO(208,8,160,30,INK); R(222,15,6,16,CREAM); R(232,15,6,16,CREAM); label('PAUSED',306,16,CREAM,3); };
-const bottle=(x,y,sc,k)=>{ const c=['#ffd0e0','#c8f0ff','#fff4c0','#d8c8ff','#c8ffd8'][k%5]; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); RO(-5,-10,10,16,c); RO(-3,-15,6,5,k%2?'#3a3d46':'#c9a23a'); R(-3,-4,6,4,'#ffffff'); gfx.restore(); };
+const bottle=(x,y,sc,k)=>{ if(PROPART.draw('tom/skincare_bottles',x,y,{h:16*sc*1.05})) return;   // painted 1-2-3 bottle set pops up each step
+  const c=['#ffd0e0','#c8f0ff','#fff4c0','#d8c8ff','#c8ffd8'][k%5]; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); RO(-5,-10,10,16,c); RO(-3,-15,6,5,k%2?'#3a3d46':'#c9a23a'); R(-3,-4,6,4,'#ffffff'); gfx.restore(); };
 SC.t3_routine=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.r0||ms>P.mask) return; const n=Math.min(10,1+Math.floor((ms-P.r0)/P.step)),x=P.x,y=P.y; gfx.globalAlpha=1;
   bigWord('STEP '+n+' OF 10',x,y-30,CREAM,3); bigWord(STEPS[n-1],x,y-8,PINK,2);
   const q=((ms-P.r0)%P.step)/P.step; bottle(P.fx+30+Math.sin(n*2.1)*8,P.fy+10-q*26,2.4,n); };
 SC.t3_led=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.mask||ms>P.off+300) return; const on=ez((ms-P.mask)/200),off=ms>P.off?ez((ms-P.off)/300):0,x=P.fx,y=P.fy-off*40;
   gfx.globalAlpha=(1-off); const pulse=.5+Math.sin(ms*.012)*.2; gfx.globalAlpha=(1-off)*pulse*.5; E(x,y,46,46,'#ff3a3a'); gfx.globalAlpha=(1-off)*pulse*.35; E(x,y,72,66,'#ff6a5a');
-  gfx.globalAlpha=1-off; gfx.save(); gfx.translate(x,y-(1-on)*30); rrO(-17,-20,34,40,10,'#f4f4f6'); R(-11,-8,8,4,INK); R(3,-8,8,4,INK);
-  for(let r=0;r<5;r++) for(let c=0;c<4;c++) { if(r===1) continue; const lx=-10+c*6.7,ly=-15+r*7; E(lx,ly,1.8,1.8,Math.sin(ms*.02+r+c)>-.3?'#ff2a2a':'#a01a1a'); } gfx.restore();
+  gfx.globalAlpha=1-off; gfx.save(); gfx.translate(x,y-(1-on)*30);
+  if(PROPART.draw('tom/led_face_mask',3,0,{h:50})) { gfx.globalAlpha*=.25+.2*Math.sin(ms*.02); E(-6,-2,18,22,'#ff2a2a'); }   // painted mask (strap and 10 timer included); a soft pulse sits on it
+  else { rrO(-17,-20,34,40,10,'#f4f4f6'); R(-11,-8,8,4,INK); R(3,-8,8,4,INK);
+  for(let r=0;r<5;r++) for(let c=0;c<4;c++) { if(r===1) continue; const lx=-10+c*6.7,ly=-15+r*7; E(lx,ly,1.8,1.8,Math.sin(ms*.02+r+c)>-.3?'#ff2a2a':'#a01a1a'); } } gfx.restore();
   if(ms>P.t0&&ms<P.off) { const secs=Math.max(0,Math.round(1200*(1-cl((ms-P.t0)/(P.off-P.t0-150))))),mm=Math.floor(secs/60),ss=secs%60; bigWord(mm+':'+(ss<10?'0':'')+ss,x,y-72,ms>P.off-200?'#7dff8a':CREAM,3); } };
 Tm.skincare_10=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,me=ST.unit(m),foeT=t.side==='foe',sp=foeT?spotFor(m,t,30):{x:Math.max(220,H.x-H.w*.5-20),y:Math.min(316,H.base+4)},A=foeT?'act':'flip',X=foeT?'expr':'flip',sg=foeT?-1:1;
   const r0=1100,step=150,mask=r0+10*step+100,hit=mask+150,t0=mask+400,off=t0+1300,end=self?off+900:off+1700;
@@ -1437,6 +1470,7 @@ const CLAIMS=['BREAD IS EASY','PLANES ARE SLOW','I AM SCARY','1+1=3','KANJI IS E
 SC.t3_claim=(s,u)=>{ const ms=s.t*1000,a=fin(u,.06)*(ms>s.gone?1-ez((ms-s.gone)/200):1); if(a<=0) return; const w=(s.txt.length*4-1)*2+20,x=cl(s.x,w/2+6,570-w/2),y=Math.max(30,s.y);
   gfx.globalAlpha=a; rrO(x-w/2,y-16,w,24,8,'#ffffff'); poly([[x-6,y+8],[x+6,y+8],[x,y+18]],'#ffffff'); label(s.txt,x,y-9,INK,2); };
 SC.t3_stamp=(s,u)=>{ const q=u<.12?ez(u/.12):1,sc=lerp(1.8,.82,q),a=fade(u,.75); gfx.globalAlpha=a; gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.18); gfx.scale(sc,sc);
+  if(PROPART.draw('tom/false_stamp',0,-6,{w:124})) { label('FACT CHECK',-6,-52,RED,2); gfx.restore(); return; }   // painted stamp, pad and FALSE imprint; the drawn plate is the fallback
   gfx.globalAlpha=a*.55; R(-60,-28,120,56,'#ffffff'); gfx.globalAlpha=a; gfx.strokeStyle=OUT; gfx.lineWidth=9; gfx.strokeRect(-60,-28,120,56); gfx.strokeStyle=RED; gfx.lineWidth=5; gfx.strokeRect(-60,-28,120,56); label('FACT CHECK',0,-21,RED,2); R(-50,-7,100,3,RED); label('FALSE',0,0,RED,4); gfx.restore(); };
 SC.t3_blush=(s,u)=>{ gfx.globalAlpha=fin(u,.15)*fade(u,.75); for(const F of s.list) { E(F.x-F.w*.22,F.top+F.h*.42,8,4,'#ff6a7a'); E(F.x+F.w*.12,F.top+F.h*.42,8,4,'#ff6a7a'); EO(F.x+F.w*.36,F.top+10-ez(u)*6,4,6,'#9fe8ff'); } };
 Tm.know_it_all=E2=>{ const {m,fx}=E2,list=foes(E2).length?foes(E2):b2LiveFoes(),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,72),n=list.length;
@@ -1531,7 +1565,7 @@ const KANA=[['SUN',[[[-.3,-.5],[.3,-.5],[.3,.5],[-.3,.5],[-.3,-.5]],[[-.3,0],[.3
 const card=(x,y,sc,k,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc); RO(-13,-17,26,34,CREAM); R(-13,11,26,6,'#d8e8ff');
   gfx.strokeStyle=INK; gfx.lineWidth=2.3; gfx.lineCap='round'; gfx.lineJoin='round'; for(const pts of KANA[k%6][1]) { gfx.beginPath(); pts.forEach(([a,b],i)=>{ const px=a*20,py=b*20-3; i?gfx.lineTo(px,py):gfx.moveTo(px,py); }); gfx.stroke(); }
   gfx.restore(); };
-SC.tp_deck=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.94); const left=Math.max(0,P.n-Math.floor(Math.max(0,ms-P.c0)/P.step)); for(let k=Math.min(3,left);k>0;k--) card(h.x-10-k*2,h.y-14-k*2,1.1,(P.n-left+k-1)%6,0); };
+SC.tp_deck=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.94); const left=Math.max(0,P.n-Math.floor(Math.max(0,ms-P.c0)/P.step)); if(left>0&&PROPART.draw('tom/kanji_flashcards',h.x-12,h.y-16,{w:Math.min(40,22+left*3.2)})) return; for(let k=Math.min(3,left);k>0;k--) card(h.x-10-k*2,h.y-14-k*2,1.1,(P.n-left+k-1)%6,0); };
 SC.tp_stuck=(s,u)=>{ gfx.globalAlpha=fade(u,.7); card(s.x,s.y,1.3,s.k,s.rot); if(u<.55) { gfx.globalAlpha=1-u/.55; bigWord(KANA[s.k%6][0],s.x,s.y-34,CREAM,2); } };
 Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m),all=b2LiveFoes(),Gp=ST.group(all),kind=!!(B2.move&&B2.move.kindOnFoe);
   const sx=Math.max(Gp.x1+70,Math.min(me.x-40,Gp.x1+150)),sy=Math.min(316,me.base+6),n=6,c0=1150,step=190;
@@ -1543,7 +1577,7 @@ Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.uni
   const throws=order.map((o,k)=>[c0+k*step,()=>{ const O=ST.unit(o),h=hand(),rot=(k%2?-.25:.25),ox=((k*17)%28)-14,oy=((k*11)%18)-9; S('whoosh'); ST.fly((x,y,uu)=>card(0,0,1.3,k,uu*9),h.x-10,h.y-14,O.x+ox,O.mid+oy,.26,30);
     b7Later(()=>{ S('select'); ST.jolt(o,.18); scene('tp_stuck',1.3,{x:O.x+ox,y:O.mid+oy,k,rot}); },260); }]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Tom steps out with a deck of kanji flashcards.'); say(m.id,'flashcard_flurry'); scene('tp_deck',(c0+n*step+200)/1000,{plan:{c0,step,n}}); scene('tv_q',3.5,{x:Math.min(560,F.x+F.w*.5+24),y:F.mid-16,flip:reveal,kind}); }],
+    [0,()=>{ setMessage('Tom steps out with a deck of kanji flashcards.'); say(m.id,'flashcard_flurry'); scene('tp_deck',(c0+n*step+200)/1000,{plan:{c0,step,n}}); scene('tv_q',3.5,{x:Math.min(560,F.x+F.w*.5+24),y:F.mid-16,flip:reveal,kf:kind}); }],
     [900,()=>{ scene('tv_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'POP QUIZ!',c:CREAM,sc:3}); S('select'); }],
     [c0,()=>{ setMessage(kind?'Flashcards for everybody. '+t.name+' gets the easy ones.':'Sun. Moon. Fire. Water. Tree. Mountain. No peeking.'); }],
     ...throws,
@@ -1557,6 +1591,7 @@ const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.w
 // Painted controller (art/chars/prop-controller.webp, tools/sprite-bake/bake_props.py); the drawn one below is the fallback until it loads.
 const CTL_IMG=new Image(); CTL_IMG.src='art/chars/prop-controller.webp?v=tom4';
 const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc);
+  if(PROPART.draw('tom/wireless_game_controller',0,0,{w:44})) { if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.restore(); return; }   // painted; the older painted controller and the drawn one are fallbacks
   if(CTL_IMG.complete&&CTL_IMG.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.drawImage(CTL_IMG,-21,-14,42,Math.round(42*CTL_IMG.naturalHeight/CTL_IMG.naturalWidth));
     if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.imageSmoothingEnabled=sm; gfx.restore(); return; }
   RO(-5,-12,10,5,'#3a3f46'); R(-3,-11,6,2,GREY2);
