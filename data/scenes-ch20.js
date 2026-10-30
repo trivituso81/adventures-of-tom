@@ -136,7 +136,7 @@ SCENES.ch20Open=()=>[
   {fade:'out',time:.8},
   {call:()=>{ setChapter(20,{apply:false}); STORY.override=null; ch20Assemble('amy'); sfx.travel&&sfx.travel(); }},
   {card:20,time:3.4},
-  {call:()=>{ ch17Place('stillcore',12,14,'up'); }},
+  {call:()=>{ ch17Place('stillcore',13,14,'up'); }},
   {fade:'in',time:.8},
   {talk:'Stillness Core',lines:['The lift opens into a round chamber of brass and glass, behind the face of the sky clock. Every wall is a gear, and every gear is turning very slowly. Eight round doors stand sealed around a lift in the middle. Each keyhole is shaped like somebody.']},
   {talk:'Rose',lines:['I get a door too?']},
@@ -326,7 +326,7 @@ pressAction=function() {
     // The Pinnacle lift in the Vault: after chapter 19, the door in the ceiling is open.
     if(v&&v.kind==='glelev'&&currentMap.id==='towervault'&&((STORY.chapter===19&&flag('ch19-done'))||STORY.chapter===20)&&!flag('ch20-done')) {
       openChoice('Pinnacle lift',[flag('ch20-open')?'The gold lift is waiting. The round door in the ceiling is still ticking.':'The gold lift is open. Above it, in the ceiling, a round brass door with a clock for a keyhole is ticking very slowly.'],[
-        {label:'GO UP',fn:()=>{ if(!flag('ch20-open')) playScene('ch20Open'); else ch17Place('stillcore',12,14,'up'); }},{label:'NOT YET',fn:()=>{}}]);
+        {label:'GO UP',fn:()=>{ if(!flag('ch20-open')) playScene('ch20Open'); else ch17Place('stillcore',13,14,'up'); }},{label:'NOT YET',fn:()=>{}}]);
       return;
     }
     if(STORY.chapter===20) {

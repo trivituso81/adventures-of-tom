@@ -21,7 +21,27 @@ function ceGear(cx,cy,r,n,spin,col,hole) {
   ellipse(cx,cy,r*.55,r*.55,CE_BRASS_D); ellipse(cx,cy,r*.4,r*.4,hole||'#0c0a12'); rect(cx-1,cy-1,3,3,CE_BRASS_L);
   for(let k=0;k<3;k++) { const a=spin+k*Math.PI*2/3; rect(Math.round(cx+Math.cos(a)*r*.3)-1,Math.round(cy+Math.sin(a)*r*.3)-1,2,2,col); }
 }
+// On the painted Core (art/stillcore.webp) the doors and the lift are painted closed. These two draw only what changes: a glow in the member's
+// colour over the arch when its door is open, and the eight lamps and the gold glow on the lift dais. Coordinates are 32 px per tile.
+const cePainted=()=>currentMap&&currentMap.id==='stillcore'&&typeof plateFor==='function'&&!!plateFor(currentMap);
+function cePaintedDoor(o,time) {
+  if(!ceFlag('door-'+o.who)) return;
+  const col=CE_COL[o.who]||'#fff',cx=(o.x+o.w/2)*T,cy=(o.y<5?4.6:7.7)*T;
+  gfx.globalAlpha=.22+.08*Math.sin(time*3+o.x); ellipse(cx,cy,T*1.1,T*1.0,col);
+  gfx.globalAlpha=.28; ellipse(cx,cy,T*.75,T*.65,col);
+  gfx.globalAlpha=.22+.1*Math.sin(time*4+o.x); ellipse(cx,cy,T*.45,T*.4,'#fff6d0'); gfx.globalAlpha=1;
+}
+function cePaintedLift(o,time) {
+  const names=['tom','grace','rose','amy','deedee','boppy','tnb','nara'];
+  if(ceFlag('ch20-core')) { gfx.globalAlpha=.30+.15*Math.sin(time*4); ellipse(13.75*T,10.65*T,T*1.75,T*.95,'#ffe9a0'); gfx.globalAlpha=1; }
+  for(let k=0;k<8;k++) {
+    const lx=Math.round(402+k*10.9),ly=380,on=ceFlag('door-'+names[k]);
+    rect(lx-2,ly-2,5,5,'#0c0a12'); rect(lx-1,ly-1,3,3,on?CE_COL[names[k]]:'#3a3020');
+    if(on) { gfx.globalAlpha=.35; ellipse(lx,ly,5,5,CE_COL[names[k]]); gfx.globalAlpha=1; }
+  }
+}
 function ceDoor(o,time) {
+  if(cePainted()) return cePaintedDoor(o,time);
   const x=o.x*T,y=o.y*T,w=o.w*T,h=o.h*T,cx=x+w/2,cy=y+h/2+2,open=ceFlag('door-'+o.who),col=CE_COL[o.who]||'#fff';
   rect(x+2,y+h-4,w-4,4,'#00000040');
   ellipse(cx,cy,w/2-2,h/2+2,CE_BRASS_D); ellipse(cx,cy,w/2-4,h/2,CE_BRASS); ellipse(cx,cy,w/2-8,h/2-4,open?'#fff6d0':'#2a2012');
@@ -31,6 +51,7 @@ function ceDoor(o,time) {
   rect(cx-3,y+h+1,6,2,col);
 }
 function ceLift(o,time) {
+  if(cePainted()) return cePaintedLift(o,time);
   const x=o.x*T,y=o.y*T,w=o.w*T,h=o.h*T,open=ceFlag('ch20-core'),n=['tom','grace','rose','amy','deedee','boppy','tnb','nara'].filter(k=>ceFlag('door-'+k)).length;
   rect(x,y+4,w,h-4,'#0c0a12'); rect(x+2,y+6,w-4,h-10,CE_BRASS_D); rect(x+4,y+8,w-8,h-14,open?'#fff6d0':CE_BRASS);
   if(open) { gfx.globalAlpha=.4+.2*Math.sin(time*4); rect(x+w/2-10,y+8,20,h-14,'#ffe9a0'); gfx.globalAlpha=1; }
