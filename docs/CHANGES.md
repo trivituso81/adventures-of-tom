@@ -1,5 +1,12 @@
 ## 2026-10-30: Battle prop sheets, redo sheet (source only)
 - Saved `tools/sprite-bake/src/props/redo-sheet1.png`. All 14 redo props match the list. Every character's props now exist as painted source images (starter pistol for Boppy reuses Amy's). Not wired into the game.
+## 2026-10-30: Painted Julian Vance and Nine Scoops enemies
+- Tom sent ch18_19monster.zip: Julian Vance, Slushie Slug, Cone Head, Brain Freeze. Matched to ids `vance`, `slushslug`, `conehead`, `brainfreeze` (the last is the Nine Scoops two-phase boss). All show painted in a test fight; old sprites stay as fallback until Tom approves on his phone.
+- Julian Vance is one man in two fights (`vance` in chapter 18, `julian` in chapter 20, both on the same old sprite). One painted sheet serves both: `data/foes/use.js` aliases `FOE_HIRES.julian` to `FOE_HIRES.vance`. Tested both ids.
+- Fix: the Nine Scoops monsters are defined in `data/bonus-nine-scoops.js`, which loads after `data/foes/use.js`, so the first pass skipped them. `index.html` now loads `use.js` a second time after that file; `use.js` skips enemies already painted.
+- Not in the zip: the Sprinkle Gremlin (`sprinklegremlin`). Its note says the original file was not available. It still uses its old sprite. Needs a sheet from Tom.
+- Known small flaws in the source art: Brain Freeze attack1 has its right arm slightly clipped and attack4 a thin sliver at its left edge (neighbouring frames overlap).
+- Tests: `tools/foes_test.py vance,julian,slushslug,conehead,brainfreeze` 0 fails; `tools/smoke.py` FAILS: [].
 
 ## 2026-10-30: Battle prop sheets, TNB 31-item sheet (source only)
 - Saved `tools/sprite-bake/src/props/tnb-sheet1-items1-31.png`. Items 1 to 23 match the prompt list. Items 24 to 31 drifted into invented props and need a redo (longboard, painted curb, rocking platform, spirit level, clay wedge, brick kiln, stoneware mugs, street signs). Not wired into the game.

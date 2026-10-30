@@ -110,6 +110,10 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | pausesprite | foe-pausesprite-v1.png (Pause Sprite, 4 frames, `--cut-y 375`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | paperweight | foe-paperweight-v1.png (Paperweight, 4 frames, lone stance on row 2, `--cut-y 389`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | curator | foe-curator-v1.png (Curator, 4 frames, lone stance on row 2, `--cut-y 383`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| vance | foe-vance-v1.png (Julian Vance, chapter 18, 6 frames, `--cut-y 416`; the same sheet serves chapter 20's `julian` through an alias at the top of `data/foes/use.js`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| slushslug | foe-slushslug-v1.png (Slushie Slug, Nine Scoops, 4 frames, `--cut-y 390`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| conehead | foe-conehead-v1.png (Cone Head, Nine Scoops, 4 frames, `--cut-y 390`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| brainfreeze | foe-brainfreeze-v1.png (Brain Freeze, Nine Scoops boss, 6 frames, `--cut-y 430 --cuts 381,721,1056,1374,1838 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
@@ -122,3 +126,6 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 - The painted Big One already wears a rusty tin, so Deedee's pie tin overlay is drawn lower (`tinY`) on it instead of floating above.
 - Sheets can arrive with colored fringe on almost-transparent pixels (alpha 1 to 9); bake_foe zeroes alpha under 10, so it never shows. A second row is detected by a tall run below a gap of 4 rows or more. Hovering or standing enemies keep the shadow painted in their sheet, so a faint second shadow can show under the engine's own ellipse.
 - Test: `python3 tools/foes_test.py [ids]` writes `tools/shots/foes-<id>.png` (stance, hurt, attacks in a real battle); look at it.
+
+
+Note (2026-10-30): enemies defined in `data/bonus-nine-scoops.js` (slushslug, conehead, brainfreeze, sprinklegremlin) are created after the first `data/foes/use.js` runs, so `index.html` loads `use.js` a second time right after that file. `use.js` skips any enemy already painted, so running twice is safe. Any future enemy defined in a late-loading file needs the same second pass or an earlier load order.

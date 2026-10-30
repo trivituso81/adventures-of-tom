@@ -8,8 +8,10 @@
 //             or FOE_PAINT_OFF={log:true} to turn off one enemy.
 (function() {
   if(typeof FOE_HIRES==='undefined') return;
+  // Julian Vance in chapter 20 (id julian) is the same man in the same coat as chapter 18's (id vance): one painted sheet serves both.
+  if(FOE_HIRES.vance&&!FOE_HIRES.julian) FOE_HIRES.julian=FOE_HIRES.vance;
   for(const id of Object.keys(FOE_HIRES)) {
-    const H=FOE_HIRES[id],d=MONSTERS[id]; if(!d) continue;
+    const H=FOE_HIRES[id],d=MONSTERS[id]; if(!d||d.painted) continue;   // d.painted: already installed (this file runs twice, see index.html)
     if(typeof FOE_PAINT_OFF!=='undefined'&&(FOE_PAINT_OFF===true||FOE_PAINT_OFF[id])) continue;
     const aid='foe_'+id;
     paintedAtlas(aid,H.src,H.rects,H.k);
