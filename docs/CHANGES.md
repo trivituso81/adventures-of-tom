@@ -6,6 +6,11 @@
 
 ## 2026-10-30: Battle prop sheets, Amy sheet 2 of 3 (source only)
 - Saved `tools/sprite-bake/src/props/amy-sheet2-of-3.png`. All 13 props match the prompt list. Not wired into the game.
+## 2026-10-30: Painted Chapter 17 enemies
+- Tom sent ch17monsters.zip twice (identical by md5; installed once): The Archivist's Twin Lenses (boss, id `twinlens`), Pause Sprite, Paperweight, Curator. All four show painted in a test fight; old sprites stay as fallback until Tom approves on his phone.
+- Twin Lenses frames 5 and 6 touch (the beam crosses into the next frame), so it uses `--cuts`. Paperweight and Curator have no clean gap above their second-row stance, so `--cut-y` was set by eye (389 and 383).
+- Known small flaw: Paperweight attack1 has a faint dark sliver of shadow at its bottom left edge.
+- Tests: `tools/foes_test.py twinlens,pausesprite,paperweight,curator` 0 fails; `tools/smoke.py` FAILS: [].
 
 ## 2026-10-30: Battle prop sheets, Amy sheet 1 of 3 (source only)
 - Saved `tools/sprite-bake/src/props/amy-sheet1-of-3.png`. All 13 props match the prompt list. Not wired into the game.

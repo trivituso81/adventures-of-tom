@@ -106,6 +106,10 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | hush9final | foe-hush9final-v1.png (HUSH-9 Final Form, chapter 15 boss, 6 frames, `--cut-y 386 --cuts 318,692,1037,1466,1884 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 | marlowe16 | foe-marlowe16-v1.png (Marlowe Transformed, chapter 16 boss, 6 frames, `--cut-y 356 --cuts 312,645,1002,1399,1870 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 | greynote | foe-greynote-v1.png (Grey Note, chapter 16, 4 frames, `--cut-y 380`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| twinlens | foe-twinlens-v1.png (The Archivist's Twin Lenses, chapter 17 boss, 6 frames, `--cut-y 350 --cuts 359,695,1033,1392,1842 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| pausesprite | foe-pausesprite-v1.png (Pause Sprite, 4 frames, `--cut-y 375`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| paperweight | foe-paperweight-v1.png (Paperweight, 4 frames, lone stance on row 2, `--cut-y 389`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| curator | foe-curator-v1.png (Curator, 4 frames, lone stance on row 2, `--cut-y 383`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
