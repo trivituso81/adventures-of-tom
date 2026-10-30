@@ -38,11 +38,11 @@ with sync_playwright() as pw:
     check('inside the lobby',adv(pg,60,"()=>currentMap.id==='towerlobby'")); pg.wait_for_timeout(700)
     check('lobby scene',adv(pg,200,"()=>flag('ch17-lobby')===true&&!dialog.active")); pg.wait_for_timeout(500); shot(pg,'lobby')
     # the stairs
-    pg.evaluate("()=>{ ch17Place('towerstairs',2,38,'up'); }"); pg.wait_for_timeout(600); shot(pg,'stairs-bottom')
-    pg.evaluate("()=>{ ch17Place('towerstairs',4,5,'up'); }"); pg.wait_for_timeout(900)
+    pg.evaluate("()=>{ ch17Place('towerstairs',4,39,'up'); }"); pg.wait_for_timeout(600); shot(pg,'stairs-bottom')
+    pg.evaluate("()=>{ ch17Place('towerstairs',4,3,'up'); }"); pg.wait_for_timeout(900)
     check('landing scene',adv(pg,200,"()=>flag('ch17-landing')===true&&!dialog.active")); pg.wait_for_timeout(500); shot(pg,'landing')
     # the hatch
-    pg.evaluate("()=>{ player.x=2; player.y=3; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
+    pg.evaluate("()=>{ player.x=14; player.y=3; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
     pg.keyboard.press('Enter'); pg.wait_for_timeout(200)
     check('through the hatch to the shelf hall',adv(pg,80,"()=>currentMap.id==='towershelves'&&!intro.active&&!dialog.active")); pg.wait_for_timeout(500)
     check('first-time Archive scene',adv(pg,200,"()=>!dialog.active&&!intro.active")); pg.wait_for_timeout(300); shot(pg,'shelves')
@@ -67,7 +67,7 @@ with sync_playwright() as pw:
     check('back at the stairs',adv(pg,80,"()=>currentMap.id==='towerstairs'&&!intro.active&&!dialog.active")); pg.wait_for_timeout(500)
     check('final team: Tom Grace Rose Amy',pg.evaluate("()=>party.length===4&&['tom','grace','rose','amy'].every(i=>party.some(p=>p.id===i))&&STORY.bench.includes('tnb')&&STORY.bench.includes('nara')"))
     check('no girl NPCs left on the landing',pg.evaluate("()=>worlds.towerstairs.npcs.filter(n=>n.girlAtHome).length===0"))
-    pg.evaluate("()=>{ player.x=8; player.y=3; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
+    pg.evaluate("()=>{ player.x=11; player.y=3; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
     check('race starts',adv(pg,60,"()=>CH17FX.race!==null")); pg.wait_for_timeout(2500); shot(pg,'race')
     check('race ends in the vault',adv(pg,400,"()=>flag('ch17-race')===true")); pg.wait_for_timeout(600); shot(pg,'vault')
     check('Tombo unlocked',pg.evaluate("()=>flag('tombo:amy3')===true"))

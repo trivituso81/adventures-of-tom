@@ -25,7 +25,7 @@ function ch17Girls() {
     m.npcs=m.npcs.filter(n=>!n.girlAtHome);
     for(const g of gs) {
       if(room.npcs.some(n=>n.girlAtHome&&n.name===g.name)) continue;
-      Object.assign(g,{x:g.name==='Grace'?4:6,y:4,move:null,path:[],lines:CH17_GIRL_LINES[g.name]||g.lines,visitedOnce:false});
+      Object.assign(g,{x:g.name==='Grace'?4:6,y:3,move:null,path:[],lines:CH17_GIRL_LINES[g.name]||g.lines,visitedOnce:false});
       room.npcs.push(g);
     }
   }
@@ -149,7 +149,7 @@ const ch17CrossOps=to=>()=>{
   return [
     {fade:'out',time:.5},
     {call:()=>{ sfx.doorIn&&sfx.doorIn(); setFlag('ch17-hatch',true); ch17Team(team);
-      if(toShelves) ch17Place('towershelves',1,6,'right'); else ch17Place('towerstairs',2,3,'down'); }},
+      if(toShelves) ch17Place('towershelves',1,6,'right'); else ch17Place('towerstairs',13,3,'down'); }},
     {fade:'in',time:.5},
     ...(first?[
       {talk:'Tom',lines:['The Archive. A long hall of glass shelves, and on every shelf a whole tiny town under a dome, each one paused on its happiest afternoon.']},
@@ -285,7 +285,7 @@ SCENES.ch17After=()=>[
 
 TRIGGERS.push(
   {id:'ch17-lobby',map:'towerlobby',when:{...CH17,flag:'ch17-open',notFlag:'ch17-lobby'},scene:'ch17Lobby'},
-  {id:'ch17-landing',map:'towerstairs',at:[1,3,16,5],when:{...CH17,flag:'ch17-lobby',notFlag:'ch17-landing'},scene:'ch17Landing'},
+  {id:'ch17-landing',map:'towerstairs',at:[2,3,14,3],when:{...CH17,flag:'ch17-lobby',notFlag:'ch17-landing'},scene:'ch17Landing'},
   {id:'ch17-locks',map:'towershelves',when:{...CH17,flag:{'ch17-smashed':6},notFlag:'ch17-locks'},scene:'ch17Locks'},
   {id:'ch17-vault',map:'towervault',when:{...CH17,flag:'ch17-race',notFlag:'ch17-vault'},scene:'ch17Vault'},
   {id:'ch17-after',map:'towervault',when:{...CH17,flag:{'battle:twinlens':'win'},notFlag:'ch17-after'},scene:'ch17After'}

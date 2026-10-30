@@ -116,6 +116,6 @@ Object.assign(MONSTERS,{
     hint:'A museum guard with a label gun. Every third turn he labels one person NOT FOR SALE (PEP down). Kinetic and Chatter work; he loves Tom’s starter and Rose’s SILLY.'}
 });
 // Map spots: the lower stairwell (floors 2 to 30) and the shelf hall (floors 30 to 36). The boss waits in the vault (data/scenes-ch17.js, ch17Vault).
-const CH17_STAIR_SPOTS=[['pausesprite',10,39],['paperweight',8,34],['curator',6,29],['pausesprite',10,24],['paperweight',7,19],['curator',11,14],['pausesprite',6,9]];
+const CH17_STAIR_SPOTS=[['pausesprite',10,39],['paperweight',9,34],['curator',9,29],['pausesprite',10,23],['paperweight',7,19],['curator',6,13],['pausesprite',6,8]];
 const CH17_SHELF_SPOTS=[['paperweight',7,6],['curator',13,5],['pausesprite',19,8],['curator',23,6],['paperweight',16,8]];
 const CH17_VAULT_SPOTS=[['twinlens',10,4]];
