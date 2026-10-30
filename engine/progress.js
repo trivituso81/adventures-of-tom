@@ -343,42 +343,39 @@ function b8Row(m,slot,core) {
   const node=b8Node(m.id,slot),v=b8Ver(m,slot),cur=node[v],other=node[v==='p'?'r':'p'];
   const st=core?'stamped':b6NodeState(m,slot),rank=b8Rank(m,slot),ult=!core&&b8Pos(slot)===5;
   const row=el('div','sc-node '+st+(ult?' cap':'')+(core?' core':''));
-  const stamp=el('span','sc-stamp');
-  stamp.innerHTML=core?'<b>'+(slot==='basic'?'B':'S')+'</b><small>'+(slot==='basic'?'BASIC':'SIG')+'</small>':st==='stamped'?'<b>✓</b>':'<b>'+b8Cost(slot)+'</b><small>SP</small>';
+  const K='sc-'+slot,unlocked=(m.remix||[]).includes(slot),ps=b8PolishState(m,slot);
+  // The circle on the left is the row's main button: STAMP while the move is next in line, POLISH once stamped.
+  const face=core?'<b>'+(slot==='basic'?'B':'S')+'</b><small>'+(slot==='basic'?'BASIC':'SIG')+'</small>':st==='stamped'?'<b>✓</b>':'<b>'+b8Cost(slot)+'</b><small>SP</small>';
+  let stamp;
+  if(!core&&st==='next') stamp=btn('sc-stamp act go',K,face,()=>{ if(b6Stamp(m,slot)) { sfx.equip(); showToast(m.name+' learns '+cur.name+'!',2); menuFocusNext=K; renderMenu(); } });
+  else if(ps==='polish') stamp=btn('sc-stamp act pol',K,face+'<i class="sc-plus">+</i>',()=>{ if(b8Polish(m,slot)) { sfx.levelChime(); showToast(cur.name+(b8Rank(m,slot)>=3?' is Polished: 1 VP cheaper.':'+ hits and heals 15% harder.'),2.4); menuFocusNext=K; renderMenu(); } });
+  else stamp=el('span','sc-stamp',face);
   row.appendChild(stamp);
   const copy=el('span','sc-copy');
-  const t=el('span','sc-title'); t.textContent=cur.name+(rank>=2?' +':'')+(ult?' ★':''); copy.appendChild(t);
+  const hd=el('span','sc-hd'); const t=el('span','sc-title'); t.textContent=cur.name+(rank>=2?' +':'')+(ult?' ★':''); hd.appendChild(t); copy.appendChild(hd);
   const tags=el('span','sc-tags');
   const tag=(txt,cls)=>{ const g=el('span','sc-tag'+(cls?' '+cls:'')); g.textContent=txt; tags.appendChild(g); };
-  tag(core?(slot==='basic'?'BASIC':'SIGNATURE'):slot+' · LV '+b8Gate(m,slot),!core&&m.level<b8Gate(m,slot)?'warn':'');
-  tag(v==='r'?'REMIX':'PRIMARY',v==='r'?'rx':'pr');
+  if(!core) tag('LV '+b8Gate(m,slot),m.level<b8Gate(m,slot)?'warn':'');
   // Until a version's own move is built, the numbers shown are the move that actually plays (what battle charges).
   const live=b8Move(m.id,slot,v)||cur;
   if(live.vp) tag(Math.max(1,live.vp-(rank>=3&&live.vp>1?1:0))+' VP');
   for(const e of [].concat(live.elem||[])) if(B2_ELEMS[e]) { const c=el('span','sc-tag elem'); c.textContent=B2_ELEMS[e].name; c.style.color=B2_ELEMS[e].color; tags.appendChild(c); }
   if(rank>=2) tag(B8_RANK_TAG[rank],'rank');
+  // Small side actions: UNDO a stamp, REMIX (spend a ticket) or SWAP versions.
+  const mini=el('span','sc-mini-wrap');
+  if(!core&&st==='stamped') mini.appendChild(btn('sc-mini',K+'-u','UNDO',()=>{ b6Unstamp(m,slot); sfx.unequip(); menuFocusNext=K; renderMenu(); }));
+  if(unlocked) mini.appendChild(btn('sc-mini rx',K+'-v','SWAP',()=>{ b8Equip(m,slot,v==='p'?'r':'p'); sfx.equip(); showToast(m.name+' equips '+other.name+'.',2); menuFocusNext=K+'-v'; renderMenu(); }));
+  else if(b8CanRemix(m,slot)) { const sure=b6Sure==='rx-'+m.id+'-'+slot;
+    mini.appendChild(btn('sc-mini rx'+(sure?' sure':''),K+'-r',sure?'USE TICKET?':'REMIX',()=>{
+      if(!sure) { b6AskSure('rx-'+m.id+'-'+slot); return; }
+      b6Sure=null; b8UnlockRemix(m,slot); sfx.levelChime(); showToast('Remix unlocked: '+other.name+'. SWAP to equip it.',2.6); menuFocusNext=K+'-v'; renderMenu(); })); }
+  if(mini.children.length) hd.appendChild(mini);
   copy.appendChild(tags);
   const d=el('span','sc-desc'); d.textContent=cur.desc; copy.appendChild(d);
-  const unlocked=(m.remix||[]).includes(slot);
-  const alt=el('span','sc-alt'); alt.textContent=(v==='p'?'Remix: ':'Primary: ')+other.name+(v==='p'&&!unlocked?(m.level<B8.ticketFrom?' (Remix Tickets from Lv '+B8.ticketFrom+')':' (needs a Remix Ticket)'):''); copy.appendChild(alt);
   const plays=b8Move(m.id,slot,v);
   if(!plays) { const s=el('span','sc-soon'); s.textContent='Arrives in a later update.'; copy.appendChild(s); }
   else if(!b8Built(m.id,slot,v)&&plays.name.toLowerCase()!==cur.name.toLowerCase()) { const s=el('span','sc-soon'); s.textContent='Plays as '+plays.name+' for now.'; copy.appendChild(s); }
   row.appendChild(copy);
-  const bx=el('span','sc-btns'),K='sc-'+slot;
-  if(!core) {
-    if(st==='next') bx.appendChild(btn('save-btn sc-btn go',K,'STAMP',()=>{ if(b6Stamp(m,slot)) { sfx.equip(); showToast(m.name+' learns '+cur.name+'!',2); menuFocusNext=K+'-u'; renderMenu(); } }));
-    else if(st==='stamped') bx.appendChild(btn('save-btn sc-btn',K+'-u','UNDO',()=>{ b6Unstamp(m,slot); sfx.unequip(); menuFocusNext=K; renderMenu(); }));
-    else bx.appendChild(el('span','sc-why',st==='level'?'AT LV '+b8Gate(m,slot):st==='sp'?'NEED '+b8Cost(slot)+' SP':'SOON'));
-  }
-  const ps=b8PolishState(m,slot);
-  if(ps==='polish') bx.appendChild(btn('save-btn sc-btn pol',K+'-p',rank>=2?'POLISH ✦':'POLISH +',()=>{ if(b8Polish(m,slot)) { sfx.levelChime(); showToast(cur.name+(b8Rank(m,slot)>=3?' is Polished: 1 VP cheaper.':'+ hits and heals 15% harder.'),2.4); menuFocusNext=K+'-p'; renderMenu(); } }));
-  if(unlocked) bx.appendChild(btn('save-btn sc-btn',K+'-v','SWAP',()=>{ b8Equip(m,slot,v==='p'?'r':'p'); sfx.equip(); showToast(m.name+' equips '+other.name+'.',2); menuFocusNext=K+'-v'; renderMenu(); }));
-  else if(b8CanRemix(m,slot)) { const sure=b6Sure==='rx-'+m.id+'-'+slot;
-    bx.appendChild(btn('save-btn sc-btn tk'+(sure?' sure':''),K+'-r',sure?'USE TICKET?':'REMIX',()=>{
-      if(!sure) { b6AskSure('rx-'+m.id+'-'+slot); return; }
-      b6Sure=null; b8UnlockRemix(m,slot); sfx.levelChime(); showToast('Remix unlocked: '+other.name+'. SWAP to equip it.',2.6); menuFocusNext=K+'-v'; renderMenu(); })); }
-  if(bx.children.length) row.appendChild(bx);
   return row;
 }
 const b2MoveNameFor=(id,key)=>{ const k=B2_SKILLS[id]; if(!k) return null; const s=[k.basic,k.special,...k.skills,...(k.o3||[])].find(x=>x&&x.key===key); return s?s.name:null; };
