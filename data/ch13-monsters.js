@@ -110,5 +110,5 @@ Object.assign(MONSTERS,{
 });
 // Map spots. The tunnel: a Hushling, a Signal Fault and a Turnstile Grump drift along each stretch. The boss waits in the chamber under the
 // dome (hidden until chapter 13's chamber scene, data/scenes-ch13.js).
-const CH13_TUNNEL_SPOTS=[['hushling',7,8],['signalfault',12,3],['turnstile',17,5],['hushling',31,8],['signalfault',35,3],['turnstile',41,5]];
+const CH13_TUNNEL_SPOTS=[['hushling',7,7],['signalfault',12,3],['turnstile',18,5],['hushling',27,10],['signalfault',31,3],['turnstile',24,6]];
 const CH13_CHAMBER_SPOTS=[['drillworm',12,6]];

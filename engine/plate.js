@@ -32,6 +32,7 @@ PLATES.jordansam={src:'art/jordansam.webp?v=20261029',px:64,img:null,ready:false
 PLATES.tower={src:'art/tower.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.gate00={src:'art/gate00.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towerlobby={src:'art/towerlobby.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.subtunnel={src:'art/subtunnel.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.dakota={src:'art/dakota.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.concourse={src:'art/concourse.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.flightzero={src:'art/flightzero.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};

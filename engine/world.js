@@ -172,6 +172,8 @@ function buildArea(spec) {
       if(within(map,nx,ny)&&!own.has(key(nx,ny))&&map.tiles[ny][nx]==='grass') tile(map,nx,ny,p.shore);
     }
   }
+  // Sub-Rail maps lay their wall pool after the exits, which walls the exits shut: re-open them so they can be walked into.
+  if(spec.ground==='sub') for(const [x,y,,,,,ground] of spec.exits||[]) tile(map,x,y,ground||'path');
   for(const p of spec.patches||[]) for(const [x,y] of p.cells) if(within(map,x,y)&&map.tiles[y][x]==='grass') tile(map,x,y,p.tile);
   placeObjects(map,spec.objects);
   for(const s of spec.npcs||[]) map.npcs.push(npcFromSpec(s,false));

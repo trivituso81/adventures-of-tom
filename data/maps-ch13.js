@@ -3,7 +3,7 @@
 // data/maps-p2.js (planMerge, pools, tiles, objects, exits). Loaded after data/maps-p2.js, before engine/world.js builds the areas.
 //   subdepot    Sub-Rail Depot (ground 'sub'): the platform under Downtown LA, behind the Metro stairs. Sol's dispatch desk, a coffee machine,
 //               eleven years of smuggled letters. The west edge climbs back to the boulevard; the tracks run east into the tunnel.
-//   subtunnel   The Transcontinental Sub-Rail: a long dark tunnel, 48 wide, with stalled train cars, mile signs, rubble and Friction Sprites.
+//   subtunnel   The Transcontinental Sub-Rail: a long dark tunnel, 36 wide, painted (art/subtunnel.webp), with stalled train cars, mile signs, rubble and Friction Sprites.
 //               HUSH-9 debuts halfway along (scene ch13Hush).
 //   subchamber  Under the Amber: a cavern at the end of the bore. The Dual-Coast Drill Worm drills at a wall of amber (Long Island's dome seen
 //               from below). Past the amber is a little pocket where Sal and Penny wait. Boss scene ch13Worm; the coin melt is ch13After.
@@ -25,7 +25,7 @@ const SUBDEPOT_PLAN=(()=>{
 })();
 const SUBTUNNEL_PLAN=(()=>{
   const rows=[];
-  for(let y=0;y<12;y++) { let r=''; for(let x=0;x<48;x++) r+=(y<2||y>=10||x===0||x===47)?'W':(y>=4&&y<=7)?'t':'f'; rows.push(r); }
+  for(let y=0;y<12;y++) { let r=''; for(let x=0;x<36;x++) r+=(y<2||y>=10||x===0||x===35)?'W':(y>=4&&y<=7)?'t':'f'; rows.push(r); }
   return rows;
 })();
 // The chamber, 26 x 14: the cave is x 1 to 19; the amber plate is x 20 (y 3 to 10); the pocket behind it is x 21 to 24 (y 4 to 9).
@@ -54,7 +54,7 @@ LE_AREAS.push(
     spawn:{x:4,y:4},
     // The stairs up to the boulevard are bottom left (x 1 and 2, row 4); the tunnel mouth is top right (x 23, rows 3 and 4).
     exits:[[1,4,'blvd',21,24,'down','subfloor'],[2,4,'blvd',21,24,'down','subfloor'],
-           [23,3,'subtunnel',1,5,'right','subtrack'],[23,4,'subtunnel',1,6,'right','subtrack']],
+           [23,3,'subtunnel',2,3,'right','subfloor'],[23,4,'subtunnel',2,3,'right','subfloor']],
     // Painted plate (art/subdepot.webp, engine/plate.js). '#' blocks, '.' walks. The upper platform (rows 3 and 4) and the lower platform
     // (rows 8 to 10) are joined by the track bed between them (rows 5 to 8), which walks like the old rails did. Blocked: the wall and
     // stairs, Sol's desk and cabinets, both benches, the handcar, both piles of mail crates, the fence and lamp post at the far right,
@@ -84,41 +84,60 @@ LE_AREAS.push(
       ['subbench',14,3,3,1,'Platform bench','A bench. Somebody has left a half-eaten sandwich on it, very neatly, for later.'],
       ['subhandcar',12,5,3,2,'Handcar','A little handcar with a pump handle. A tag: CAB 7.5. IT IS NOT A CAB. IT HAS A HORN.'],
       ['sublamp',20,2,1,1,'Work lamp','A tripod work lamp, on. It lights up the tunnel mouth and not one inch farther.']]}),
-  planMerge({id:'subtunnel',name:'The Transcontinental Sub-Rail',w:48,h:12,ground:'sub',wild:true,
+  planMerge({id:'subtunnel',name:'The Transcontinental Sub-Rail',w:36,h:12,ground:'sub',wild:true,
     tag:'Forty feet long. Two thousand four hundred and fifty miles. Do not question the sign.',
     eyebrow:'THE SUB-RAIL / UNDER THE LAYOVER',
-    hint:'Follow the rails east. Stalled cars block the tracks, so use the ledges. The coffee machines are restore points.',
-    spawn:{x:2,y:5},
-    exits:[[0,5,'subdepot',22,3,'left','subtrack'],[0,6,'subdepot',22,4,'left','subtrack'],
-           [47,5,'subchamber',1,6,'right','subtrack'],[47,6,'subchamber',1,7,'right','subtrack']],
+    hint:'Follow the tunnel east to the far door. Stalled cars block the tracks, so use the platforms. The coffee machines are restore points.',
+    spawn:{x:3,y:3},
+    exits:[[0,2,'subdepot',22,3,'left','subfloor'],[1,2,'subdepot',22,4,'left','subfloor'],
+           [34,2,'subchamber',1,6,'right','subfloor'],[35,2,'subchamber',1,7,'right','subfloor']],
+    // Painted plate (art/subtunnel.webp, engine/plate.js, 36 x 12 tiles). '#' blocks, '.' walks. The wall and its decor (rows 0 to 2), the track
+    // ends, the four stalled cars (the foot line of a tile has to sit in front of the car, so the upper cars block one row, the lower two block two),
+    // the generator box, the ledge lamp, and the wall face under the ledge block. Walk: top platform (row 3), the track bed (rows 4 to 6),
+    // the ledge (row 7), the lower walkway (row 10), both stairs, and the two tunnel doors (tiles 0,2 / 1,2 west, 34,2 / 35,2 east).
+    plateMask:[
+      '####################################',
+      '####################################',
+      '..################################..',
+      '....................................',
+      '##..######..........######........##',
+      '#........########.........##########',
+      '#........########.........##########',
+      '.....#.............#................',
+      '#..###############################.#',
+      '##.##############################..#',
+      '##................................##',
+      '####################################'],
     monsters:CH13_TUNNEL_SPOTS},
     planSub(SUBTUNNEL_PLAN),
     {objects:[
       ['subsign',3,2,3,1,'Mile sign',SUB_MILE_TEXT[0],{sign:'MILE 0'}],
-      ['subsign',14,2,3,1,'Mile sign',SUB_MILE_TEXT[1],{sign:'MILE 600'}],
-      ['subsign',24,2,3,1,'Mile sign',SUB_MILE_TEXT[2],{sign:'MILE 1,250'}],
-      ['subsign',34,2,3,1,'Mile sign',SUB_MILE_TEXT[3],{sign:'MILE 1,800'}],
-      ['subsign',43,2,3,1,'Mile sign',SUB_MILE_TEXT[4],{sign:'MILE 2,450'}],
-      ['subtrain',8,4,4,2,'Stalled car','A commuter car, dark, stopped dead on the rails. Every seat is empty. A newspaper on one says IT WAS A VERY NICE DAY. It is yesterday’s.'],
-      ['subtrain',17,6,4,2,'Stalled car','A silver car with the doors open. A little sign inside: PLEASE DO NOT STAND IN THE DOORWAY. There is a very small stone in the doorway, standing.'],
-      ['subtrain',27,4,4,2,'Stalled car','A car with its lights flickering. The route display says NEXT STOP: AND THEN WHAT. A coffee cup rolls back and forth on the floor. Nobody is rolling it.'],
-      ['subtrain',37,6,4,2,'Stalled car','The last car. Its headlight points east, at the dark, at a very particular spot. Somebody has hung a hard hat on the coupler.'],
-      ['subvend',21,9,1,1,'Coffee machine','A coffee machine somebody bolted to the wall. A sticky note on it: SAL WAS HERE. SOL WAS HERE FIRST. Everyone is completely restored.',{restore:true,restoreText:'Hot coffee, in a tunnel, under the sea of clouds. Everyone is completely restored.'}],
-      ['subvend',44,9,1,1,'Coffee machine','The last coffee machine before the chamber. A sticky note: IF YOU CAN READ THIS, DRINK UP. Everyone is completely restored.',{restore:true,restoreText:'The last coffee before the Worm. Everyone is completely restored.'}],
-      ['subcable',6,3,5,1,'Cable bundle','A fat bundle of cables running the whole length of the tunnel. Taped to it, in Sol’s handwriting: THE NETWORK. DO NOT CUT. DO NOT SIT ON.'],
-      ['subcable',30,9,6,1,'Cable bundle','A fat bundle of cables. A note: THIS ONE IS SAL’S. IT GOES UNDER THE DOME. IT IS THE ONLY THING THAT DOES.'],
-      ['subrubble',12,9,1,1,'Rubble','A pile of rock. Somebody has stacked three of them very carefully and drawn a smiley face on the top one.'],
-      ['subrubble',19,2,1,1,'Rubble','A pile of rock from the cave-in. A tiny paper flag in the middle: CLAIMED FOR LOS ANGELES.'],
-      ['subrubble',37,9,1,1,'Rubble','A pile of rock. Another tiny paper flag, a little further on: CLAIMED FOR LONG ISLAND.'],
-      ['subrubble',40,3,1,1,'Rubble','A pile of rock. Between the two flags, a third one: LET’S NOT FIGHT ABOUT THIS.'],
-      ['sublamp',6,9,1,1,'Work lamp','A tripod work lamp, on. A little battery light blinks at the base. Good for another eleven years, probably.'],
-      ['sublamp',46,3,1,1,'Work lamp','A tripod work lamp, on, pointing east. The light stops at the dark. The dark does not give an inch.']]}),
+      ['subsign',10,2,3,1,'Mile sign',SUB_MILE_TEXT[1],{sign:'MILE 600'}],
+      ['subsign',17,2,3,1,'Mile sign',SUB_MILE_TEXT[2],{sign:'MILE 1,250'}],
+      ['subsign',24,2,3,1,'Mile sign',SUB_MILE_TEXT[3],{sign:'MILE 1,800'}],
+      ['subsign',30,2,2,1,'Mile sign',SUB_MILE_TEXT[4],{sign:'MILE 2,450'}],
+      ['subtrain',4,4,6,1,'Stalled car','A commuter car, dark, stopped dead on the rails. Every seat is empty. A newspaper on one says IT WAS A VERY NICE DAY. It is yesterday’s.'],
+      ['subtrain',9,5,8,2,'Stalled car','A silver car with the doors open. A little sign inside: PLEASE DO NOT STAND IN THE DOORWAY. There is a very small stone in the doorway, standing.'],
+      ['subtrain',20,4,6,1,'Stalled car','A car with its lights flickering. The route display says NEXT STOP: AND THEN WHAT. A coffee cup rolls back and forth on the floor. Nobody is rolling it.'],
+      ['subtrain',26,5,8,2,'Stalled car','The last car. Its headlight points east, at the dark, at a very particular spot. Somebody has hung a hard hat on the coupler.'],
+      ['subvend',15,9,1,1,'Coffee machine','A coffee machine somebody bolted to the wall. A sticky note on it: SAL WAS HERE. SOL WAS HERE FIRST. Everyone is completely restored.',{restore:true,restoreText:'Hot coffee, in a tunnel, under the sea of clouds. Everyone is completely restored.'}],
+      ['subvend',23,9,1,1,'Coffee machine','The last coffee machine before the chamber. A sticky note: IF YOU CAN READ THIS, DRINK UP. Everyone is completely restored.',{restore:true,restoreText:'The last coffee before the Worm. Everyone is completely restored.'}],
+      ['subcable',6,2,3,1,'Cable bundle','A fat bundle of cables running the whole length of the tunnel. Taped to it, in Sol’s handwriting: THE NETWORK. DO NOT CUT. DO NOT SIT ON.'],
+      ['subcable',27,9,3,1,'Cable bundle','A fat bundle of cables. A note: THIS ONE IS SAL’S. IT GOES UNDER THE DOME. IT IS THE ONLY THING THAT DOES.'],
+      ['subrubble',10,9,2,1,'Rubble','A pile of rock. Somebody has stacked three of them very carefully and drawn a smiley face on the top one.'],
+      ['subrubble',13,2,2,1,'Rubble','A pile of rock from the cave-in. A tiny paper flag in the middle: CLAIMED FOR LOS ANGELES.'],
+      ['subrubble',27,2,2,1,'Rubble','A pile of rock. Another tiny paper flag, a little further on: CLAIMED FOR LONG ISLAND.'],
+      ['subrubble',32,2,2,1,'Rubble','A pile of rock. Between the two flags, a third one: LET’S NOT FIGHT ABOUT THIS.'],
+      ['subrubble',25,9,2,1,'Rubble','A pile of rock with a tiny green paper flag: CLAIMED FOR SOMEWHERE ELSE. Nobody has asked where that is.'],
+      ['sublamp',30,9,1,1,'Work lamp','A tripod work lamp, on. A little battery light blinks at the base. Good for another eleven years, probably.'],
+      ['sublamp',19,7,1,1,'Work lamp','A lamp on a post, lit. The light stops at the edge of the platform. The dark below does not give an inch.']
+]}),
   planMerge({id:'subchamber',name:'Under the Amber',w:26,h:14,ground:'sub',wild:true,
     tag:'A cavern at the end of the bore. A wall of amber the size of a house. The sound of something that will not stop.',
     eyebrow:'THE SUB-RAIL / UNDER THE AMBER',
     hint:'The amber is Long Island’s dome, seen from below. The Drill Worm has been digging at it for years.',
     spawn:{x:2,y:6},
-    exits:[[0,6,'subtunnel',46,5,'left','subtrack'],[0,7,'subtunnel',46,6,'left','subtrack']],
+    exits:[[0,6,'subtunnel',33,3,'left','subfloor'],[0,7,'subtunnel',33,3,'left','subfloor']],
     monsters:CH13_CHAMBER_SPOTS},
     planSub(SUBCHAMBER_PLAN),
     {objects:[

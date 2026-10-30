@@ -878,3 +878,10 @@ Painted frames for her level-5 moves (src tools/sprite-bake/src/grace-poses-b.pn
 
 ## Squishy Delivery painted begging sequence (2026-10-29)
 Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq_kneel, sq_hop, sq_pout, sq_gasp, sq_squeal, sq_joy. B2_TOMBO_ANIM.grace1 (engine/battle2-kind.js, GQ helper) plays kneel, hop, pout, kneel, gasp at the gift box, squeal on the landing, then a happy bounce. Falls back to the old kneel and celebrate frames if the painted set is missing.
+
+## Sub-Rail tunnel painted plate (2026-10-29)
+- Map `subtunnel` (The Transcontinental Sub-Rail, ch13) is now a painted plate: art/subtunnel.webp (36 x 12 tiles at 64 px, cropped from subtunnel_final.png, which came padded with 6 blank tiles each side), PLATES entry, plateMask and objects in data/maps-ch13.js. Tom sent two pairs; used the one with the grid.
+- The map shrank from 48 to 36 wide to fit the art. West door (tiles 0,2 / 1,2) to the Depot, east door (34,2 / 35,2) to Under the Amber; Depot now lands at (2,3), the chamber lands at (33,3). Spawn (3,3). Monster spots moved onto the new floor (data/ch13-monsters.js).
+- Walk: top platform, track bed, ledge, lower walkway, both stairs. The four cars block (upper two one row, lower two two rows), the wall face blocks. Objects re-laid: 5 mile signs on the lit wall panels, 4 cars, 2 coffee machines (red at 15, green at 23, the green one keeps the "last coffee" text), 2 cable bundles, 5 rubble piles (new: green flag pile, "CLAIMED FOR SOMEWHERE ELSE"), 2 lamps. The old "pointing east" lamp text now reads as a post lamp at the platform edge.
+- Fix (engine/world.js buildArea): on ground 'sub' maps the wall pool covered the exit tiles, so the Depot east exit and Chamber west exit could not be walked into. Exits are re-opened after the pools.
+- Test: tools/subtunnel_test.py (0 fails). ch13_test positions moved to row 10. Smoke, ch13, gate00, bg tests 0 fails.
