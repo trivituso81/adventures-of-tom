@@ -980,7 +980,7 @@ Rm.floor_is_lava=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(
 // ---------- Piggyback Pounce (B2) ----------
 // Rose climbs up onto Tom's shoulders (or a cushion tower if he is away), springs off in a big flip and double-stomps
 // the monster. The wind-up is cancelled and the most hurt friend gets a nudge.
-SC.rv_tower=(s,u)=>{ gfx.globalAlpha=fade(u,.9); const g=ez(u/.1); for(let k=0;k<3;k++) EO(s.x,s.y-6-k*13*g,30-k*3,7,[PURP,PINK,SKY][k]); };
+SC.rv_tower=(s,u)=>{ gfx.globalAlpha=fade(u,.9); const g=ez(u/.1); if(PROPART.draw('rose/stack_of_cushions',s.x,s.y+1-22*g,{h:46*g+.1})) return; for(let k=0;k<3;k++) EO(s.x,s.y-6-k*13*g,30-k*3,7,[PURP,PINK,SKY][k]); };
 Rm.piggyback_pounce=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),tom=tomUp(),me=ST.unit(m),top={x:F.x,y:F.top+8},fp=front(F,20);
   const TU=tom?ST.unit(tom):null;
   const perch=tom?(()=>ride(tom)):(()=>({x:me.x,y:me.base-40}));
@@ -1011,7 +1011,9 @@ SC.rv_night=(s,u)=>{ const ms=s.t*1000+(s.t0||0),g=ez((ms-(s.t0||0))/400)*(ms>s.
   for(let k=0;k<14;k++) { const tw=(Math.sin(ms/220+k*1.7)+1)/2; star(30+(k*41)%520,18+(k*29)%80,2+tw*3,'#fff4c8',0); } };
 SC.rv_book=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.sit; if(ms<P.sit) return; const g=ez((ms-P.sit)/250),x=P.bx,y=P.by;
   const page=ms<P.turn1?0:(ms<P.turn2?1:2),flip=(at)=>ms>at&&ms<at+300?Math.cos(cl((ms-at)/300)*Math.PI):1;
-  gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(x,y); gfx.scale(g,g); RO(-46,-30,92,60,'#5a8ad0'); R(-43,-27,42,54,CREAM); R(1,-27,42,54,CREAM); R(-1,-30,2,60,OUT);
+  gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(x,y); gfx.scale(g,g);
+  if(PROPART.draw('rose/picture_book',0,0,{w:94})) { if(page===2) { RO(-24,-20,48,36,CREAM); label('THE',0,-16,'#5a3a8a',2); label('END',0,0,'#5a3a8a',2); } gfx.restore(); plush(x-62,y+14,1.05,{pose:'held',rot:Math.sin(ms/500)*.05}); return; }
+  RO(-46,-30,92,60,'#5a8ad0'); R(-43,-27,42,54,CREAM); R(1,-27,42,54,CREAM); R(-1,-30,2,60,OUT);
   if(page===0) { E(-22,-6,10,10,'#ffe08a'); E(-18,-9,8,8,CREAM); for(let k=0;k<3;k++) R(8,-16+k*10,28,3,'#9aa3b8'); }
   else if(page===1) { gfx.save(); gfx.translate(-22,4); plush(0,0,.55,{pose:'held'}); gfx.restore(); for(let k=0;k<3;k++) R(8,-16+k*10,28,3,'#9aa3b8'); }
   else { label('THE',22,-14,'#5a3a8a',2); label('END',22,2,'#5a3a8a',2); heart(-22,0,9,'#ff6b9a'); }
@@ -1153,17 +1155,21 @@ SC.r5_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||36,
 // own chair at the head of the party in a red bow tie. Rose walks round with a big plastic teapot pouring invisible tea into
 // a toy cup at every place, claps DRINK UP!, every monster lifts its cup with the pinky out, and the pretend tea goes off
 // like rainbow fireworks that launch the tables. P: the plan (timings in absolute ms, places).
-const teacup=(x,y,sc=1,pinky=false)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+const CUPSRC=[[0,0,88,52],[82,24,76,66],[0,58,88,68]];   // pink, blue and purple cup cut out of the painted toy_teacups set
+const teacup=(x,y,sc=1,pinky=false,vr=0)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  if(PROPART.draw('rose/toy_teacups',0,1,{w:21,src:CUPSRC[vr%3]})) { if(pinky) { LnO(10,-5,13,-11,2,'#f0c8a8'); EO(13,-11,1.4,1.4,'#f0c8a8'); } gfx.restore(); return; }
   EO(0,4,9,2.5,CREAM); PO([[-7,-6],[7,-6],[5,3],[-5,3]],'#ffffff',2); R(-6,-4,12,2,PINK2); heart(0,-.5,1.6,PINK2);
   gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.beginPath(); gfx.arc(8,-2,3.5,-1.3,1.3); gfx.stroke(); gfx.strokeStyle='#ffffff'; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(8,-2,3.5,-1.3,1.3); gfx.stroke();
   if(pinky) { LnO(10,-5,13,-11,2,'#f0c8a8'); EO(13,-11,1.4,1.4,'#f0c8a8'); } gfx.restore(); };
 // The big pink plastic teapot: lid knob, spout (left), handle, a white heart.
 const teapot=(x,y,sc,tilt)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(sc,sc);
+  if(PROPART.draw('rose/pink_teapot',-1,-4,{w:40})) { gfx.restore(); return; }
   gfx.strokeStyle=OUT; gfx.lineWidth=5; gfx.beginPath(); gfx.arc(9,-1,6,-1.4,1.4); gfx.stroke(); gfx.strokeStyle=PINK2; gfx.lineWidth=2.5; gfx.beginPath(); gfx.arc(9,-1,6,-1.4,1.4); gfx.stroke();
   PO([[-8,-2],[-17,-10],[-19,-9],[-11,3]],PINK2,2);
   EO(0,0,11,9,PINK2); E(-3,-3,5,3,'#ffd0e4'); RO(-7,-11,14,3,HOT); EO(0,-13,2.5,2,HOT); heart(2,2,3,'#ffffff'); gfx.restore(); };
 // A tiny pink chair (seat, back, legs). sd: which side the back is on.
 const chair=(x,y,sc=1,sd=-1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  if(PROPART.draw('rose/tiny_pink_chair',0,-7,{h:38,flip:sd<0})) { gfx.restore(); return; }
   for(const lx of [-9,7]) { R(lx-1,-2,5,14,OUT); R(lx,-1,3,12,HOT); } R(sd*11-2,-24,6,24,OUT); R(sd*11-1,-23,4,22,HOT); RO(sd*11-5,-26,12,5,PINK2); RO(-12,-6,24,5,PINK2); gfx.restore(); };
 // One place: a little table in front of the enemy (cloth, scallops, dots), its chair, and the cup once it is poured.
 SC.r5_tables=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+(s.t0||0); gfx.globalAlpha=1;
@@ -1173,17 +1179,19 @@ SC.r5_tables=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+(s.t0||0); gfx.globalAlph
     if(!up) chair(c.chx,c.chy+(1-ez((ms-c.at)/200))*20,1,-1);
     const x0=c.x0,x1=lerp(c.x0+8,c.x1,g),y=c.y+dy;
     gfx.save(); gfx.translate((x0+x1)/2,y); gfx.rotate(rot); gfx.translate(-(x0+x1)/2,-y);
+    { const tw=Math.max(56,Math.min(90,(c.x1-c.x0)*.6))*(.4+.6*g),th=tw/1.19;   // painted lace-cloth kids' table under the cup
+      if(PROPART.draw('rose/lacy_kids_table',c.cx,y-2+th*.28,{w:tw,h:th})) { if(ms>c.pour&&!(ms>P.drink+c.k*90)) teacup(c.cx,y-9,1.5,false,c.k); if(up) teacup(c.cx,y-9,1.5,false,c.k); gfx.restore(); continue; } }
     for(const lx of [x0+6,x1-8]) { R(lx-3,y,6,16,OUT); R(lx-2,y,4,15,'#f0e2d2'); }
     RO(x0,y-5,x1-x0,6,'#f6ead8');
     R(x0-2,y,x1-x0+4,10,OUT); R(x0,y,x1-x0,9,PINK);
     for(let x=x0;x<x1-4;x+=10) { E(x+5,y+9,6,4.5,OUT); E(x+5,y+9,5,3.5,PINK); E(x+5,y+10,1.6,1.2,'#ffffff'); }
     for(let x=x0+5;x<x1-3;x+=9) E(x,y+4,1.3,1.3,'#ffffff');
-    if(ms>c.pour&&!(ms>P.drink+c.k*90)) teacup(c.cx,y-9,1.5);
-    if(up) teacup(c.cx,y-9,1.5);
+    if(ms>c.pour&&!(ms>P.drink+c.k*90)) teacup(c.cx,y-9,1.5,false,c.k);
+    if(up) teacup(c.cx,y-9,1.5,false,c.k);
     gfx.restore(); } });
 // Raised cups: they float up to each enemy's mouth with the pinky out, and wobble as it sips.
 SC.r5_sip=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.drink; if(ms>P.boom) return; for(const c of P.places) { const q=ez((ms-P.drink-c.k*90)/400); if(q<=0) continue;
-  const x=lerp(c.cx,c.mx+12,q),y=lerp(c.y-9,c.my+4,q)+Math.sin(ms/150+c.k)*1.5*q; teacup(x,y,1.7,q>.5);
+  const x=lerp(c.cx,c.mx+12,q),y=lerp(c.y-9,c.my+4,q)+Math.sin(ms/150+c.k)*1.5*q; teacup(x,y,1.7,q>.5,c.k);
   if(q>=1&&Math.floor(ms/260+c.k)%2) label('SIP',c.mx+34,c.my-22,PINK2,2); } });
 // The teapot in her hand, tilted while she pours; invisible tea is a little trickle of sparkles.
 SC.r5_pot=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.potUp; if(ms>P.potDown) return; const h=hand(),pouring=P.places.find(c=>ms>c.pour0&&ms<c.pour);
@@ -1264,18 +1272,19 @@ SC.r5_armor=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000+P.t0,b=baseOf(P.tom,P.st),
     if(ms<at) { const q=ez(1-(at-ms)/300); x=lerp(p.from[0],p.x,q); y=lerp(p.from[1],p.y,q); rot=(1-q)*3; }
     else if(ms>P.off+i*70) { const q=(ms-P.off-i*70)/700; if(q>1.2) return; x=p.x+(i-2)*q*34; y=p.y+q*q*160-Math.sin(Math.min(1,q)*Math.PI)*30; rot=q*(i%2?4:-4); }
     else { x=p.x; y=p.y+(ms<at+120?-Math.sin((ms-at)/120*Math.PI)*4:0); }
-    gfx.save(); gfx.translate(x,y); gfx.rotate(rot); box(0,0,p.w,p.h,{arrow:p.k==='armF'||p.k==='legB',scrib:!p.chest});
+    gfx.save(); gfx.translate(x,y); gfx.rotate(rot); const paintedChest=p.chest&&PROPART.draw('rose/cardboard_chest_armor',0,0,{w:p.w*1.1,h:p.h*1.1}); if(!paintedChest) box(0,0,p.w,p.h,{arrow:p.k==='armF'||p.k==='legB',scrib:!p.chest});
     if(p.chest) { const gl=ms>P.charge0&&ms<P.off?.5+.5*Math.sin(ms/60):0; if(gl) { gfx.globalAlpha=gl*.8; E(0,2,16*sm,12*sm,'#ffffff'); gfx.globalAlpha=1; }
-      EO(0,2,10*sm,9*sm,ms>P.charge0&&ms<P.off?GOLD:'#ffe8b0'); star(0,2,6*sm,ms>P.charge0&&ms<P.off?'#ffffff':PINK2);
+      if(!paintedChest) { EO(0,2,10*sm,9*sm,ms>P.charge0&&ms<P.off?GOLD:'#ffe8b0'); star(0,2,6*sm,ms>P.charge0&&ms<P.off?'#ffffff':PINK2);
       label('TA-TA 01',0,-p.h/2+5,'#3a5ad8',1);
-      for(const sd of [-1,1]) { EO(sd*16*sm,10*sm,3.5*sm,3.5*sm,sd<0?'#e0402e':'#2fa84a'); Ln(sd*16*sm,10*sm,sd*16*sm+2,7*sm,1.5,OUT); } }
+      for(const sd of [-1,1]) { EO(sd*16*sm,10*sm,3.5*sm,3.5*sm,sd<0?'#e0402e':'#2fa84a'); Ln(sd*16*sm,10*sm,sd*16*sm+2,7*sm,1.5,OUT); } } }
     gfx.restore(); });
   // the box visor on Rose's head: a cereal-size box with a crayon crosshair window
   if(ms>P.visor&&ms<P.off+300) { const r=P.st&&P.st.x!=null?head(P.st,4):{x:b.x,y:b.base-H}; const q=ez((ms-P.visor)/200),dy=(1-q)*-40,fall=ms>P.off?(ms-P.off)/300:0;
-    gfx.save(); gfx.translate(r.x,r.y+dy+fall*fall*60); gfx.rotate(fall*2); box(0,0,28,24,{}); RO(-11,-4,22,11,'#1c2448'); ring(0,1,5,5,1.5,'#ff5a5a'); Ln(-9,1,9,1,1,'#ff5a5a'); Ln(0,-4,0,7,1,'#ff5a5a');
+    gfx.save(); gfx.translate(r.x,r.y+dy+fall*fall*60); gfx.rotate(fall*2); if(!PROPART.draw('rose/cereal_box_visor',0,1,{w:34})) { box(0,0,28,24,{}); RO(-11,-4,22,11,'#1c2448'); } ring(0,1,5,5,1.5,'#ff5a5a'); Ln(-9,1,9,1,1,'#ff5a5a'); Ln(0,-4,0,7,1,'#ff5a5a');
       if(ms>P.lock&&ms<P.fire) { gfx.globalAlpha=.5+.5*Math.sin(ms/50); E(0,1,3,3,'#ff5a5a'); gfx.globalAlpha=1; } gfx.restore(); }
   // the paper-towel-tube levers, one in each of Rose's hands, pulled down while it charges
   if(ms>P.charge0-200&&ms<P.off) { const r=P.st&&P.st.x!=null?head(P.st,0):{x:b.x,y:b.base-H}; const pull=ms>P.charge0?ez((ms-P.charge0)/250):0;
+    if(PROPART.draw('rose/paper_tube_levers',r.x+2,r.y+20+pull*7,{w:56,rot:(pull-.5)*.25})) {} else
     for(const sd of [-1,1]) { const bx=r.x+sd*22,by=r.y+18; const a=-Math.PI/2+sd*(.5+pull*.7); LnO(bx,by,bx+Math.cos(a)*24,by+Math.sin(a)*24,6,'#f4ecdc'); EO(bx+Math.cos(a)*24,by+Math.sin(a)*24,4,4,sd<0?'#e0402e':'#3a7ad8'); } }
   });
 // Crayon crosshairs on every enemy (scribbly red circles).
@@ -1294,7 +1303,7 @@ SC.r5_laser=inBox((s,u)=>{ const P=s.plan,b=baseOf(P.tom,P.st),c={x:b.x-6,y:b.ba
   for(let k=0;k<26;k++) { const q=((s.t*2.4)+k/26)%1,x=lerp(c.x,xe,q),y=lerp(c.y,lerp(ya,yb,(k*7%26)/26),q); gfx.globalAlpha=g*(1-q*.5); star(x,y,2+(k%3),k%2?'#ffffff':GOLD,k); }
   gfx.globalAlpha=1; EO(c.x,c.y,10+Math.sin(s.t*40)*2,10,'#ffffff'); });
 SC.r5_fist=inBox((s,u)=>{ const x=lerp(s.x0,-60,ez(u)),y=s.y+Math.sin(u*Math.PI*3)*6; for(let k=0;k<4;k++) { gfx.globalAlpha=.7-k*.15; E(x+36+k*16,y,15-k*3,10-k*2,k%2?'#ffb04a':'#ff5a3a'); }
-  gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.scale(1.6,1.6); box(0,0,30,24,{scrib:true}); for(let k=0;k<3;k++) RO(-17,-9+k*7,6,5,BOXL); gfx.restore(); });
+  gfx.globalAlpha=1; if(PROPART.draw('rose/cardboard_rocket_fist',x,y,{w:66})) return; gfx.save(); gfx.translate(x,y); gfx.scale(1.6,1.6); box(0,0,30,24,{scrib:true}); for(let k=0;k<3;k++) RO(-17,-9+k*7,6,5,BOXL); gfx.restore(); });
 SC.r5_stars=(s,u)=>{ for(const F of s.list) { for(let k=0;k<4;k++) { const a=s.t*5+k/4*Math.PI*2; gfx.globalAlpha=fade(u,.75); star(F.x+Math.cos(a)*F.w*.35,F.top-8+Math.sin(a)*6,5,k%2?GOLD:'#ffffff',a); } } gfx.globalAlpha=1; };
 Rm.mecha_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),tom=tomUp(),me=ST.unit(m);
   const TU=tom?ST.unit(tom):null,perch=()=>tom?ride(tom):{x:me.x,y:me.base};
@@ -1608,6 +1617,7 @@ Rm.boo=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t);
 SC.rf_feathers=(s,u)=>{ const G=s.G,ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.85);
   for(let k=0;k<9;k++) { const q=((ms/1100)+k/9)%1,x=G.x0-10+((k*61)%100)/100*(G.w+20)+Math.sin(ms/260+k)*16,y=Math.max(40,G.top-30)+q*(G.base-G.top+20),a=Math.sin(ms/180+k*2)*.9+.6;
     gfx.save(); gfx.translate(x,y); gfx.rotate(a);
+    if(PROPART.draw('rose/rainbow_feather',0,0,{h:36,rot:.87})) { gfx.restore(); continue; }
     gfx.beginPath(); gfx.ellipse(0,0,15,5,0,0,Math.PI*2); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=k%3?PINK:PURP; gfx.fill();
     for(let j=-2;j<=2;j++) Ln(j*5,-4,j*5+2,4,1,'#ffffff88'); Ln(-18,0,15,0,1.5,'#7a4a6a'); gfx.restore(); } };
 SC.rf_wiggle=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,10),ms=s.t*1000; gfx.globalAlpha=fade(u,.85);
@@ -1797,7 +1807,9 @@ const drawCathy=(k,cx,base,flip,alpha=1)=>{ const CATHY=cathy(); if(!CATHY) retu
   for(const c0 of [19,28]) { const a=Math.min(gx(c0),gx(c0+3)),b=Math.max(gx(c0),gx(c0+3)); gfx.strokeRect(a+.5,gy(25.5),b-a+s-1,s*3); }
   const l1=Math.max(gx(22),gx(19)),r1=Math.min(gx(28),gx(31)); gfx.beginPath(); gfx.moveTo(Math.min(l1,r1)+s,gy(26.5)); gfx.lineTo(Math.max(l1,r1),gy(26.5)); gfx.stroke(); gfx.globalAlpha=1; };
 const TREATS=['cookie','cupcake','candy','donut','cookie','cupcake'];
+const TREATSRC={cookie:[4,27,76,58,19],cupcake:[77,0,70,80,15],candy:[0,68,84,64,28],donut:[82,86,74,58,21]};   // each treat cut out of the painted treat_set
 const treat=(kind,x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  { const t=TREATSRC[kind]; if(t&&PROPART.draw('rose/treat_set',0,0,{w:t[4],src:t.slice(0,4)})) { gfx.restore(); return; } }
   if(kind==='cookie') { EO(0,0,9,9,'#d9a35a'); for(const [a,b] of [[-3,-3],[3,-1],[-1,4],[4,4],[-5,2]]) E(a,b,1.6,1.4,'#5a3420'); }
   else if(kind==='cupcake') { gfx.beginPath(); gfx.moveTo(-7,0); gfx.lineTo(7,0); gfx.lineTo(5,10); gfx.lineTo(-5,10); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#8ac6e8'; gfx.fill();
     EO(0,-2,9,6,'#ff9cc8'); E(0,-8,2.6,2.6,'#e83a3a'); for(let k=0;k<4;k++) R(-6+k*4,-4,2,1,['#fff','#ffe08a','#9be39a','#9fd8ff'][k]); }
@@ -1811,7 +1823,7 @@ SC.rf_cathy=(s,u)=>{ const ms=s.t*1000,P=s.plan,CATHY=cathy(); if(!CATHY) return
   else { const q=ez((ms-P.leave)/(P.gone-P.leave)); x=lerp(P.cx,640,q); k=Math.floor(ms/150)%2?'run1':'run2'; flip=true; }
   if(!CATHY.sp[k]) k='idle';
   E(x,P.y+3,22,5,'rgba(0,0,0,.18)'); drawCathy(k,x,P.y,flip);
-  if(ms>P.arrive-200&&ms<P.throwEnd&&k!=='throw') { const hx=x-16,hy=P.y-52; RO(hx-16,hy,32,5,'#c9c9d4'); treat('cupcake',hx-8,hy-6,.7,0); treat('cookie',hx+7,hy-4,.7,.3); }
+  if(ms>P.arrive-200&&ms<P.throwEnd&&k!=='throw') { const hx=x-16,hy=P.y-52; if(!PROPART.draw('rose/snack_tray',hx,hy-7,{w:38})) { RO(hx-16,hy,32,5,'#c9c9d4'); treat('cupcake',hx-8,hy-6,.7,0); treat('cookie',hx+7,hy-4,.7,.3); } }
   if(ms>P.arrive&&ms<P.arrive+900) { gfx.globalAlpha=fade((ms-P.arrive)/900,.7); label('MS. CATHY',x,P.y-138,CREAM,2); gfx.globalAlpha=1; } };
 Rm.lamby_boomerang=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,64),order=list.slice().sort((a,b)=>ST.foe(b).x-ST.foe(a).x);
   const cx=Math.min(548,p.x+78),plan={arrive:1400,throw0:1600,gap:240,cx,y:Math.min(316,p.y+4)}; const n=6; plan.throwEnd=plan.throw0+n*plan.gap+200; plan.wave=plan.throwEnd+500; plan.leave=plan.throwEnd+900; plan.gone=plan.leave+800;
@@ -1896,15 +1908,15 @@ Rm.boo=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m);
 const RB=['#ff5a5a','#ffa040','#ffe060','#6ad06a','#5aa0ff','#a070e0'];
 // The art, centred on (0,0) in a 64 x 50 box. pr: rb 0..1 (rainbow), uni 0..1 (unicorn parts), cut 0..1, done (cut out).
 const art=(x,y,sc,pr,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc);
-  const done=pr.done,cx=0,cy=14;
+  const done=pr.done,cx=0,cy=14,painted=done&&PROPART.draw('rose/unicorn_cut_out',0,-2,{h:62});   // painted cut-out replaces the drawn rainbow + unicorn once she has cut it out
   if(!done) { RO(-34,-26,68,52,'#fffdf6'); for(let k=0;k<4;k++) R(-34,-14+k*11,68,1,'#e6eef8'); }
   // Rainbow: six arcs over the bottom of the page, drawn left to right
-  const rb=pr.rb||0; if(rb>0) { const a0=Math.PI,a1=Math.PI+Math.PI*rb;
+  const rb=pr.rb||0; if(rb>0&&!painted) { const a0=Math.PI,a1=Math.PI+Math.PI*rb;
     if(done) { gfx.strokeStyle='#ffffff'; gfx.lineWidth=26; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(cx,cy,19,a0,a1); gfx.stroke(); gfx.strokeStyle=OUT; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(cx,cy,32,a0,a1); gfx.stroke(); }
     gfx.lineCap='butt'; RB.forEach((c,i)=>{ gfx.strokeStyle=c; gfx.lineWidth=3.2; gfx.beginPath(); gfx.arc(cx,cy,29-i*3,a0,a1); gfx.stroke(); });
     if(rb>=1) for(const sx of [-21,21]) { if(done) E(cx+sx,cy+3,9,5,'#ffffff'); E(cx+sx-3,cy+2,5,4,'#f4f8ff'); E(cx+sx+3,cy+2,5,4,'#f4f8ff'); E(cx+sx,cy,5,4.5,'#ffffff'); } }
   // Unicorn standing on top of the rainbow (white body, pink mane, gold horn)
-  const un=pr.uni||0; if(un>0) { const ux=2,uy=-14,o=(k)=>un*6>k;
+  const un=pr.uni||0; if(un>0&&!painted) { const ux=2,uy=-14,o=(k)=>un*6>k;
     if(done) { gfx.globalAlpha*=1; E(ux,uy,15,10,'#ffffff'); E(ux-13,uy-9,9,8,'#ffffff'); }
     if(o(1)) { for(const [lx,sw] of [[-7,-1],[-3,1],[5,-1],[9,1]]) { Ln(ux+lx,uy+2,ux+lx+sw,uy+11,4.2,OUT); Ln(ux+lx,uy+2,ux+lx+sw,uy+11,2.2,'#fdfaff'); E(ux+lx+sw,uy+11,1.6,1,'#c98ae8'); } }   // legs (behind the body), lilac hooves
     if(o(0)) EO(ux,uy,11,6.5,'#fdfaff');                                                     // body
@@ -1918,6 +1930,7 @@ const art=(x,y,sc,pr,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); 
   if(done&&pr.glit) { const t=battle.time||0; for(let k=0;k<8;k++) { const tw=(Math.sin(t*8+k*1.9)+1)/2; if(tw<.35) continue; star(-26+((k*29)%52),-26+((k*17)%40),1.4+tw*2.2,k%2?GOLD:PINK,t*3+k); } }
   gfx.restore(); };
 const scissors=(x,y,open,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
+  if(PROPART.draw('rose/safety_scissors',-1,0,{h:28,rot:.7+open*.1})) { gfx.restore(); return; }
   for(const sd of [-1,1]) { gfx.save(); gfx.rotate(sd*open*.35); RO(-1,-1,14,3,'#c8ccd6'); EO(-5,sd*3,4.2,3.2,'#4a8ae8'); E(-5,sd*3,2,1.4,'#fffdf6'); gfx.restore(); } E(0,0,1.2,1.2,OUT); gfx.restore(); };
 SC.rg_craft=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=ST.unit(s.f),st=s.st; if(!st||st.x==null) return;
   const pr={rb:cl((ms-P.rb)/(P.uni-P.rb)),uni:cl((ms-P.uni)/(P.cut-P.uni)),cut:cl((ms-P.cut)/(P.up-P.cut-100)),done:ms>=P.up-100,glit:ms>=P.up-100};
@@ -1928,7 +1941,7 @@ SC.rg_craft=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=ST.unit(s.f),st=s.st; if(!st||
   gfx.globalAlpha=fade(u,.94); art(x,y,sc,pr,rot);
   // A crayon scribbling (rainbow colors in turn), then the scissors working round the page
   if(ms>P.rb&&ms<P.cut) { const t=(ms-P.rb)/(P.cut-P.rb),c=ms<P.uni?RB[Math.min(5,Math.floor(t*12))]:'#ff7fb3',cx=px-20+((ms/40)%40)+Math.sin(ms/35)*3,cy=py-4+Math.cos(ms/45)*6;
-    gfx.save(); gfx.translate(cx,cy); gfx.rotate(-.7); RO(-2,-15,5,16,c); R(-2,-15,5,4,'#ffe0c0'); gfx.restore(); }
+    if(!PROPART.draw('rose/crayon',cx-10,cy-12,{h:26,flip:true})) { gfx.save(); gfx.translate(cx,cy); gfx.rotate(-.7); RO(-2,-15,5,16,c); R(-2,-15,5,4,'#ffe0c0'); gfx.restore(); } else E(cx,cy+1,2.2,1.6,c); }
   if(ms>=P.cut&&ms<P.up-100) { const a=Math.PI+Math.PI*2*pr.cut; scissors(px+Math.cos(a)*38,py-2+Math.sin(a)*26,Math.abs(Math.sin(ms/70)),a+Math.PI/2);
     for(let k=0;k<5;k++) { const q=((ms-P.cut)/700+k/5)%1; gfx.globalAlpha=.9*(1-q); gfx.save(); gfx.translate(px-30+k*15,py+20+q*20); gfx.rotate(q*4+k); R(-3,-2,6,4,'#fffdf6'); gfx.restore(); } gfx.globalAlpha=1; } };
 Rm.dress_up_tiara=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,48),plan={rb:1000,uni:1800,cut:2500,up:3200,toss:3550,on:3850};
@@ -2034,6 +2047,7 @@ SC.rv_fort=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.92);
 
 // ---------- Tea Party with Lamby (A6): Backup Lamby holds the teapot ----------
 const teapot=(x,y,s,tilt)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(s,s);
+  if(PROPART.draw('rose/white_teapot',-1,-3,{w:32})) { gfx.restore(); return; }
   EO(0,0,8,6.5,'#ffffff'); E(-2,-2,3,2,'#ffd6e4'); RO(-3,-9,6,3,'#ffffff'); E(0,-10,1.6,1.6,'#ff7fb3');
   gfx.beginPath(); gfx.moveTo(-7,1); gfx.lineTo(-14,-5); gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.lineWidth=3; gfx.strokeStyle='#ffffff'; gfx.stroke();
   gfx.beginPath(); gfx.arc(9,-1,4,-1.4,1.4); gfx.lineWidth=4.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.lineWidth=2.5; gfx.strokeStyle='#ffffff'; gfx.stroke(); gfx.restore(); };
@@ -2079,6 +2093,7 @@ const throwPillow=(x,y,s,rot,c0,c1,c2)=>{ gfx.save(); gfx.translate(x,y); gfx.ro
 // ---------- Floor Is Lava!: a real couch seat cushion floating on lava ----------
 // Drawn in the back layer, so Rose stands ON it. y is the floor spot under her (her feet are at y-9).
 const seatCush=(x,y,ms,lit)=>{ const bob=Math.sin(ms/260)*1.2,w=64; y+=bob;
+  if(PROPART.draw('rose/couch_cushion',x,y-6,{w:68,h:38})) return;   // painted couch cushion
   // front band (the cushion's thickness) with piping top and bottom
   gfx.save(); gfx.lineJoin='round';
   const bt=y-9,bb=y+5; gfx.beginPath(); gfx.moveTo(x-w/2,bt); gfx.lineTo(x+w/2,bt); gfx.quadraticCurveTo(x+w/2+3,(bt+bb)/2,x+w/2-2,bb); gfx.quadraticCurveTo(x,bb+3,x-w/2+2,bb); gfx.quadraticCurveTo(x-w/2-3,(bt+bb)/2,x-w/2,bt); gfx.closePath();
@@ -2096,6 +2111,7 @@ const seatCush=(x,y,ms,lit)=>{ const bob=Math.sin(ms/260)*1.2,w=64; y+=bob;
   tuft(-21,-1,1.8); tuft(21,-1,1.8); gfx.restore(); gfx.restore(); };
 // Lava pool: a blobby molten sheet from the cushion over to the monsters' feet, bubbling, with a dark crust edge.
 const lavaSheet=(P,g,ms)=>{ const pts=[],N=26,cx=(P.xa+P.xb)/2,cy=(P.ya+P.yb)/2,rx=(P.xb-P.xa)/2*g,ry=(P.yb-P.ya)/2*g;
+  if(g>.02&&PROPART.draw('rose/lava_pool',cx,cy,{w:rx*2.08,h:ry*2.08,rot:Math.sin(ms/900)*.01})) return;   // painted lava pool
   for(let i=0;i<N;i++) { const a=i/N*Math.PI*2,w=1+.06*Math.sin(a*5+ms/400)+.04*Math.sin(a*3-ms/300); pts.push([cx+Math.cos(a)*rx*w,cy+Math.sin(a)*ry*w]); }
   const path=k=>{ gfx.beginPath(); pts.forEach(([px,py],i)=>{ const qx=cx+(px-cx)*k,qy=cy+(py-cy)*k; i?gfx.lineTo(qx,qy):gfx.moveTo(qx,qy); }); gfx.closePath(); };
   gfx.lineJoin='round'; path(1.04); gfx.fillStyle=CRUST; gfx.fill(); path(1); const gr=gfx.createRadialGradient(cx,cy,2,cx,cy,Math.max(rx,ry)); gr.addColorStop(0,LAVA2); gr.addColorStop(.6,LAVA); gr.addColorStop(1,'#d8360e'); gfx.fillStyle=gr; gfx.fill();
@@ -2120,6 +2136,9 @@ SC.rv_cush=()=>{};
     b7Later(()=>RFX.scene('rh_lava',3.05,{P,drainAt:2100,back:true}),1250); }; }
 
 // ---------- Pillow Fort: real couch cushions ----------
+// A wall unit of the fort: painted couch cushions stacked straight up (false until the painting has loaded).
+const wallStack=(x,y,h,rot,sq)=>{ if(!PROPART.ready('rose/couch_cushion')) return false; const k=Math.max(1,Math.ceil(h/26)),st=h/k;
+  gfx.save(); gfx.translate(x,y); gfx.rotate(rot); for(let j=0;j<k;j++) PROPART.draw('rose/couch_cushion',(j%2?2:-2),h/2-st*(j+.5),{w:40,h:31*sq,rot:(j%2?.03:-.03)}); gfx.restore(); return true; };
 SC.rv_fort=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.92);
   const base=Math.min(318,Math.max(...P.U.map(q=>q.base))+4),left=Math.min(...P.U.map(q=>q.x-q.w*.5)),right=Math.max(...P.U.map(q=>q.x+q.w*.5));
   const W=27,roofY=Math.max(30,Math.min(...P.U.map(q=>q.top))-16),xl=Math.max(W/2+5,left-W/2-7),xr=Math.min(576-W/2-5,right+W/2+7);
@@ -2127,14 +2146,18 @@ SC.rv_fort=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.92);
   const COLS=[[SOFAL,SOFA,SOFAD],['#e2cfae','#c3a478','#957650']];
   for(let i=0;i<n;i++) for(const [side,cx] of [[0,xl],[1,xr]]) { const at=(i*2+side)*110,q=ez((ms-P.fly-at)/300); if(q<=0) continue;
     const cy=base-hh*(i+.5),land=ms-P.fly-at-300,sq=land>0&&land<160?1-Math.sin(land/160*Math.PI)*.1:1,fx=side?cx+150:cx-150;
-    backCush(lerp(fx,cx,q)+(i%2?3:-3)*(side?-1:1),lerp(-40,cy,q)-Math.sin(q*Math.PI)*30,W,hh+6,(i%2?.05:-.05)*(side?-1:1)+(1-q)*3,sq,COLS[(i+side)%2]); }
+    { const wx=lerp(fx,cx,q)+(i%2?3:-3)*(side?-1:1),wy=lerp(-40,cy,q)-Math.sin(q*Math.PI)*30,wr=(i%2?.05:-.05)*(side?-1:1)+(1-q)*3;
+      if(!wallStack(wx+(side?6:-6),wy,hh+6,wr,sq)) backCush(wx,wy,W,hh+6,wr,sq,COLS[(i+side)%2]); } }
   const dq=ez((ms-P.drape)/350); if(dq>0) { const xa=xl-W/2-8,xb=xr+W/2+8,yt=roofY,yb=lerp(yt-6,yt+4,dq);
+    if(PROPART.ready('rose/patchwork_quilt')) { const nq=Math.max(2,Math.ceil((xb-xa)/46));   // painted patchwork quilts laid side by side as the blanket roof
+      for(let i=0;i<nq;i++) PROPART.draw('rose/patchwork_quilt',xa+(i+.5)*(xb-xa)/nq,yt-14+(1-dq)*-8-Math.sin((i+.5)/nq*Math.PI)*6*dq,{w:56,h:46,rot:(i%2?.03:-.03)}); }
+    else {
     gfx.beginPath(); gfx.moveTo(xa,yb+12); gfx.lineTo(xa+6,yt); gfx.quadraticCurveTo((xa+xb)/2,yt-20*dq,xb-6,yt); gfx.lineTo(xb,yb+12);
     for(let k=10;k>=0;k--) { const xx=xa+(xb-xa)*k/10; gfx.lineTo(xx,yb+(k%2?10:4)-((k>0&&k<10)?8*dq:0)); }
     gfx.closePath(); gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.stroke(); gfx.fillStyle='#f3b0c8'; gfx.fill();
-    gfx.save(); gfx.clip(); for(let i=0;i<14;i++) for(let j=0;j<3;j++) if((i+j)%2) gfx.fillStyle='#ffd6e4',gfx.fillRect(xa+i*(xb-xa)/14,yt-30+j*14,(xb-xa)/14,14); gfx.restore();
-    if(ms>P.sign) { const g=ez((ms-P.sign)/200),sxx=(xa+xb)/2,syy=yt-20*dq; gfx.fillStyle=OUT; gfx.fillRect(sxx-3,syy-24*g-2,7,24*g+4); gfx.fillStyle='#8a5a30'; gfx.fillRect(sxx-1,syy-24*g,3,24*g);
-      gfx.save(); gfx.translate(sxx,syy-24*g); gfx.scale(g,g); gfx.fillStyle=OUT; gfx.fillRect(-36,-18,72,22); gfx.fillStyle=CREAM_; gfx.fillRect(-34,-16,68,18); label('PASSWORD?',0,-12,'#5a3a8a',1); gfx.restore(); } }
+    gfx.save(); gfx.clip(); for(let i=0;i<14;i++) for(let j=0;j<3;j++) if((i+j)%2) gfx.fillStyle='#ffd6e4',gfx.fillRect(xa+i*(xb-xa)/14,yt-30+j*14,(xb-xa)/14,14); gfx.restore(); }
+    if(ms>P.sign) { const g=ez((ms-P.sign)/200),sxx=(xa+xb)/2,syy=yt-20*dq; const sgnY=syy-23*g; if(!PROPART.draw('rose/password_sign',sxx,sgnY,{w:56*g+.1,h:50*g+.1})) { gfx.fillStyle=OUT; gfx.fillRect(sxx-3,syy-24*g-2,7,24*g+4); gfx.fillStyle='#8a5a30'; gfx.fillRect(sxx-1,syy-24*g,3,24*g);
+      gfx.save(); gfx.translate(sxx,syy-24*g); gfx.scale(g,g); gfx.fillStyle=OUT; gfx.fillRect(-36,-18,72,22); gfx.fillStyle=CREAM_; gfx.fillRect(-34,-16,68,18); label('PASSWORD?',0,-12,'#5a3a8a',1); gfx.restore(); } } }
   // throw pillows plopped on the roof's two corners
   for(const [side,cx,c] of [[0,xl,['#ffd6e4','#ff9ec0','#e07098']],[1,xr,['#fff1b8','#ffd75a','#d9a62a']]]) { const at=n*2*110+side*90,q=ez((ms-P.fly-at)/280); if(q<=0) continue;
     throwPillow(lerp(side?cx+120:cx-120,cx,q),lerp(-30,roofY-12,q),22,(side?.25:-.25)+(1-q)*2,...c); }
