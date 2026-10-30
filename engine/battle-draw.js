@@ -434,9 +434,14 @@ function canOccupy(map,x,y,who) {
     for(const f of followers) if(occupied(f,x,y)) return false;
 
   for(const n of map.npcs)
-    if(n!==who&&occupied(n,x,y)) return false;
+    if(n!==who&&occupied(n,x,y)&&!restingPassable(n,who)) return false;
 
   return true;
+}
+// A monster that was just beaten dozes where it fell (engine/feel.js, 25 s). Tom and the party walk through it, so a monster
+// that ends up on a one-tile boardwalk (the Whispering Marsh) can never wall off the route for good.
+function restingPassable(n,who) {
+  return !!(n.monster&&(who.isPlayer||who.follower)&&performance.now()<n.defeatedUntil);
 }
 
 function directionTo(dx,dy) {

@@ -5,6 +5,11 @@
 ## 2026-10-29: Six more painted townsfolk, Los Angeles (Mateo, Daisy, Kevin, Claudia, Yesenia, Tony)
 - Sheets `tools/sprite-bake/src/{mateo,daisy,kevin,claudia,yesenia,tony}-walk-v1.png` added to `CAST` (heights 36, 38, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`. All matched BY NAME (`TOWN_PAINTED`). Tom's screenshot also listed "Magenta Teen Character Turnaround", not selected and not sent, so skipped.
 - Checks: `tools/townsfolk_test.py` (47 characters) 0 fails, smoke 0 fails.
+## 2026-10-29: Fix: a beaten monster on a one-tile path no longer walls off the route (Whispering Marsh softlock)
+- Bug (Tom): in the Whispering Marsh the monsters on the boardwalk blocked the only path, so the game was stuck for good. Cause: map monsters are solid NPCs and the marsh route is one tile wide in places (Bobber at 16,12 on the long boardwalk, Tangle in the neck at 10,8). Winning only puts the monster to sleep ("resting", 25 s, `defeatedUntil`) on the same tile, still solid, and it wakes and fights again, so Tom could never pass. From the entry platform only 15 of 50 walkable tiles were reachable.
+- Fix: `engine/battle-draw.js` `canOccupy` now lets Tom and the party walk through a monster that is resting (`restingPassable`). An awake monster is still solid and still fights on touch. The tile map, spots and story scenes are unchanged.
+- Same bug existed in 20 maps with monsters on narrow paths (worst: carbarn 24 of 111 tiles reachable, concourse 242/405, backlot 47/86, reeds 15/50); all are covered by the same rule.
+- Test: new `tools/marsh_test.py` (awake monster blocks; dozing one is walked through, party follows; whole marsh route reachable; lists the maps a solid monster cuts). Marsh, pier, jpark, boards, oak, carbarn tests and smoke: 0 fails.
 
 ## 2026-10-29: Six more painted townsfolk, Los Angeles (Don Beto, Sol, Dash, Dolores, Marguerite, Nickel)
 - Sheets `tools/sprite-bake/src/{beto,sol,dash,dolores,marguerite,nickel}-walk-v1.png` added to `CAST` (heights 42, 40, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`.
