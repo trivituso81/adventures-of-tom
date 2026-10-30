@@ -1827,7 +1827,19 @@ const jojo=(x,y,t,ph)=>{ // ph: 'walk' | 'aim' | 'thumb'. Feet at (x,y). About 8
   else { RO(-20,-40,8,14,'#f1c9a4'); RO(12,-40,8,14,'#f1c9a4'); }
   gfx.restore(); };
 SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P; let x,ph='walk'; if(ms<P.in) x=lerp(P.x0,P.xs,ez(ms/P.in)); else if(ms<P.out) { x=P.xs; ph=ms<P.throw?'aim':(ms<P.out?'thumb':'walk'); if(ms>=P.throw&&ms<P.throw+200) ph='walk'; } else x=lerp(P.xs,P.x0,ez((ms-P.out)/(P.gone-P.out)));
-  gfx.globalAlpha=1; jojo(x,P.y,s.t,ph); s.x=x;
+  gfx.globalAlpha=1; s.x=x;
+  // Painted Jojo (data/jojo-hires-use.js; Tom's photo sheet, Oct 2026). Walk in facing left, line it up (reach-back), x-step, release at P.throw, follow through,
+  // hop at CHAINS, high-five, walk out facing right. Falls back to the drawn stand-in while the art loads.
+  const J=typeof JOJO_BT!=='undefined'&&JOJO_BT.ready()&&P.hs;
+  if(J) { const hs=P.hs,y=P.y,step=['right_step1','right_stand','right_step2','right_stand'][Math.floor(s.t*5)%4];
+    if(ms<P.in) JOJO_BT.drawOw(step,x,y-Math.abs(Math.sin(s.t*10))*2,hs,true);
+    else if(ms>=P.out) JOJO_BT.drawOw(step,x,y-Math.abs(Math.sin(s.t*10))*2,hs,false);
+    else { const bob=Math.sin(s.t*1.3)*1.2; let f='b_reach',dx=0,dy=-bob;
+      if(ms>=P.throw+1000) f='b_high'; else if(ms>=P.chains) { f='b_celeb2'; dy=-Math.abs(Math.sin((ms-P.chains)/110))*10; }
+      else if(ms>=P.throw+200) f='b_follow'; else if(ms>=P.throw-100) f='b_release'; else if(ms>=P.throw-350) { f='b_xstep'; dx=-6; }
+      JOJO_BT.draw(f,x+dx,y+dy,hs,true); }
+    if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,P.y-P.hs-10,CREAM,1); return; }
+  jojo(x,P.y,s.t,ph);
   if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,P.y-96,CREAM,1); if(ms>P.in&&ms<P.throw) disc(x+30,P.y-48+Math.sin(s.t*2)*2,1); };
 const disc=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,14,5,'#ff6a3c'); E(0,-1,9,3,'#ff8a5c'); gfx.restore(); };
 const basket=(x,y,ms,P)=>{ RO(x-3,y-90,6,90,CHROME); RO(x-30,y-96,60,6,CHROME2); for(let k=-24;k<=24;k+=8) { const sw=ms>P.chains&&ms<P.chains+500?Math.sin((ms-P.chains)/30+k)*3:0; Ln(x+k,y-90,x+k*.6+sw,y-44,2,CHROME); }
@@ -1836,7 +1848,8 @@ SC.t6_basket=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.93);
 SC.t6_discfly=(s,u)=>{ const q=u,x=lerp(s.x0,s.x1,q),y=lerp(s.y0,s.y1,q)-Math.sin(q*Math.PI)*s.arc; gfx.globalAlpha=1; for(let k=1;k<4;k++) { const qq=cl(q-k*.04),xx=lerp(s.x0,s.x1,qq),yy=lerp(s.y0,s.y1,qq)-Math.sin(qq*Math.PI)*s.arc; gfx.globalAlpha=.3-k*.08; disc(xx,yy,1.2); } gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(Math.sin(q*Math.PI)*.5); disc(0,0,1.4); gfx.restore(); };
 T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m),hit=2900;
   const kx=Math.max(28,G.x0-70),ky=Math.min(312,G.base+4),jx=Math.max(G.x1+120,Math.min(me.x-70,470)),jy=Math.min(314,me.y+4);
-  const P={x0:620,xs:jx+60,y:jy,in:1300,throw:2500,giggle:1800,out:3900,gone:4800},BP={chains:3100};
+  const HU=ST.unit(m),hs=Math.round(((HU&&HU.h)||80)*.93),P={x0:620,xs:jx+60,y:jy,in:1300,throw:2500,giggle:1800,out:3900,gone:4800,chains:3100,hs},BP={chains:3100};
+  P.hx=P.xs-Math.round(hs*.62); P.hy=jy-Math.round(hs*.74);
   const sorted=list.map(f=>({f,x:ST.foe(f).x})).sort((a,b)=>b.x-a.x),span=jx+90-kx,spins=sorted.map((o,k)=>({f:o.f,t:2500+450*((jx+90-o.x)/span),k}));
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:300,x:jx-10,y:jy,f:'point'},{t:1300,f:'aim'},{t:1900,f:'hip'},{t:2300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1},{t:2500,f:'spread'},{t:2900,f:'celeb',hop:8},{t:3400,f:'clap'},{t:3900,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
@@ -1844,12 +1857,12 @@ T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=home
     [1300,()=>{ setMessage('Jojo wanders in. She is in no hurry. She has never been in a hurry.'); }],
     [1800,()=>{ S('select'); setMessage('She lines it up. She is still lining it up.'); }],
     [2300,()=>{ scene('t6_big',.5,{x:jx-10,y:jy-110,txt:'...',c:CREAM,sc:3}); setMessage('TNB checks his watch.'); }],
-    [2500,()=>{ S('whoosh'); scene('t6_discfly',.6,{x0:jx+90,y0:jy-48,x1:kx,y1:ky-60,arc:90}); setMessage('One throw. It never came down.'); }],
+    [2500,()=>{ S('whoosh'); scene('t6_discfly',.6,{x0:P.hx,y0:P.hy,x1:kx,y1:ky-60,arc:90}); setMessage('One throw. It never came down.'); }],
     ...spins.map(sp=>[sp.t,()=>{ ST.jolt(sp.f,.4); S('bonk'); }]),
     ['hf',hit],
     [hit,()=>{ landHit(100); scene('t6_big',1.0,{x:G.x,y:Math.max(40,G.top-70),txt:'THROUGH!',c:GOLD,sc:3}); }],
     [3100,()=>{ S('clang'); S('jangle'); scene('t6_big',1.0,{x:kx+20,y:ky-120,txt:'CHAINS!',c:GOLD,sc:4}); setMessage('CHAINS. Ace. First throw.'); }],
-    [3500,()=>{ S('ding'); scene('t6_big',1.0,{x:jx+60,y:jy-120,txt:'NICE.',c:CREAM,sc:3}); setMessage('Jojo gives a slow thumbs up. "Nice."'); }],
+    [3500,()=>{ S('ding'); scene('t6_big',1.0,{x:jx+60,y:Math.max(40,jy-hs-30),txt:'NICE.',c:CREAM,sc:3}); setMessage('Jojo gives a slow high-five to the air. "Nice."'); }],
     [3900,()=>{ setMessage('She wanders off the way she came. Possibly for snacks.'); }],
     [4600,'end',res(E2)+'She does this every Sunday.']]); };
 

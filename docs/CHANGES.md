@@ -1,8 +1,18 @@
+## 2026-10-30: Jojo (TNB's sister) painted, in the overworld, and in Round with Jojo
+- Tom sent a painted sheet made from his photo of her: 12 walk frames (down, up, left, right) and 8 disc golf poses (run, x-step, reach-back, release, follow-through, two cheers, high-five).
+- `tools/sprite-bake/bake_jojo.py` (source `tools/sprite-bake/src/jojo-sheet-v1.png`) slices and bakes it: `art/chars/jojo-ow.webp`, `art/chars/jojo-bt.webp`, `data/jojo-hires.js` (generated). The head is enlarged by hand (1.5 front and back, 1.4 side) to the family proportion; the auto-sizer reads her chin too high.
+- `data/jojo-hires-use.js` (new, after Justin's): `OW.jojo` (the sheet's right-facing row is 'side', left is its mirror) and `JOJO_BT.draw` / `JOJO_BT.drawOw`, which draw the painted battle and walk frames and mirror them to face the wanted way.
+- Overworld: Jojo is an NPC in TNB's Loft (`data/maps-la.js`, map `lofts`, 8,6; wanders like the other NPCs), four first-visit lines that say she is TNB's sister and one that mentions Sunday disc golf, four revisit lines. Her lines have no baked voice (silent until baked).
+- Battle: Round with Jojo (TNB B3, unchanged numbers and name) now draws her painted frames in `SC.t6_jojo` (`engine/tnb-moves.js`): walks in, reach-back while she lines it up, x-step, release at the throw, follow-through, a hop at CHAINS, a high-five, walks out. The drawn stand-in stays as the fallback while the art loads. The disc now leaves her hand; the on-screen line at the end says "slow high-five" instead of "thumbs up"; NICE sits above her head.
+- Test: `tools/jojo_test.py` (new, 0 fails), `tools/loft_test.py` 0 fails, `kit_test tnb --only=round_with_jojo` at 1x and 2x 0 fails, smoke FAILS: []. Cache tags `jojo1` on maps-la.js, tnb-moves.js and the two new scripts. Not yet seen on Tom's phone.
+- Not done: Jojo has no portrait for the dialogue box and no recorded voice; the 'run' and 'celebrate 1' battle frames are baked but unused (room for a "Fore!" call-in).
+
 ## 2026-10-30: Stamps screen rows slimmed down and enlarged
 - Tom: remove extra info (Primary, the Remix description line, A1), make the remaining text bigger, and fold Polish and Remix into the check on the left instead of separate buttons.
 - Rows now show: name, LV, VP, element, description. Gone: the PRIMARY/REMIX tag, the "Remix: ..." line, the A1 slot code, the BASIC/SIGNATURE tag. Text sizes up (title 14 to 17, description 11 to 13, tags 9 to 11).
 - The circle on the left is the main button: tap to STAMP (shows the SP cost), and once stamped a cyan "+" badge means tap to POLISH. UNDO, REMIX and SWAP are small buttons beside the move name. Remix is not folded into the circle: it is rare (Lv 28+) and spends a ticket, so it keeps a small confirm button.
 - `b8Row` in `engine/progress.js`, `.sc-*` styles in `index.html`; cache tag `progress.js?v=stamps2`. Smoke FAILS: []. Not yet seen on Tom's phone.
+
 
 ## 2026-10-29: Dizzy stars over knocked-out characters line up with the new sprites and get the painted star style
 - Tom: "in chapter 2 when people have stars over their head it's not aligning correctly because we changed the character sprites, and the star style should match the updated style of the game." The stars are the dizzy ring over a character at 0 HP (`koDizzy` in `engine/battle-draw.js`, used in every fight). It found the head as "the top six rows of the sprite", which was right for the old kneeling pose and wrong for the new painted KO poses (lying on the back, head to one side), so the ring floated off to the side or above the feet.

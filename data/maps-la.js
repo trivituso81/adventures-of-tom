@@ -1287,7 +1287,19 @@ const LA_ROOMS=[
           'Rode the train to the clay studio. Forty minutes. Best forty minutes of my day. Met a man who knows every line.',
           'The slime? It just needs someone to mold it. I have more of these. You know I do.',
           'Long day on set. Eleven costume changes. One actor lost a shoe. I found it. I always find it.',
-          'Be careful out there. I like you un-cracked.']}],
+          'Be careful out there. I like you un-cracked.']},
+      // Jojo: TNB's sister (Tom 2026-10-30; painted from his photo, data/jojo-hires.js). Slow, easy, never in a hurry (why stays unstated).
+      // Disc golf with TNB on Sundays; her battle cameo is Round with Jojo (engine/tnb-moves.js).
+      {name:'Jojo',x:8,y:6,look:'sage',sheet:'jojo',duration:0.75,lines:[
+        'Oh. Hi. You must be Tom. I\'m Jojo. TNB\'s sister.',
+        'He talks about you a lot. Mostly "Tom said" and then a very long pause. Pottery pause. I know it well.',
+        'I stopped by to borrow a mug. That was a while ago. I\'m still on the couch. It\'s a good couch.',
+        'We play disc golf on Sundays. He calls it a friendly round. I call it a round.'],
+        revisit:[
+          'Sunday. Disc golf. Eighteen holes. He stops for a snack at every one. I let him. I have time.',
+          'My brother made this mug. It is a very good mug. Don\'t tell him I said that. He will make me three more.',
+          'No rush on anything. That\'s kind of my whole thing.',
+          'Nice to finally have you in the family. Or near it. We\'ll see how the Sundays go.']}],
     objects:[
       ['oven',2,1,2,2,'The kiln','Cone six, firing tonight. A sign on it: DO NOT OPEN. VERY HOT. SO ARE YOU.'],
       ['rack',4,1,3,2,'Garment rack',"Bagged costumes for tomorrow's shoot, tagged by scene. One bag just says: SHOE BACKUP."],
