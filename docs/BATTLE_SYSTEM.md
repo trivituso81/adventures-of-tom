@@ -30,6 +30,7 @@ Every move is a timeline on a stage of real canvas coordinates (576 x 324). Help
 - `ST.fly(draw,x0,y0,x1,y1,dur,arc,delay)` flies any drawn object along an arc.
 - `scene(name, fn, {back})` registers a drawing layer: back scenes draw after the background and before monsters and party; front scenes draw over everyone. Scene order = creation order within a layer.
 - `landHit(100)` or `landHit(share)` applies damage, warmth and kindness for a hit. A last `landHit` applies the move's effects; call `E2.apply()` earlier if the scene needs the result at once.
+- Painted props: `PROPART.draw(id,x,y,{h|w,rot,flip})` in `engine/prop-art.js` paints a prop from `art/props/` and returns false if it is not loaded, so a draw helper can paint first and fall back to its drawn version. See `docs/PROP_ART.md`.
 - Per-body `battle.fx[i]` timers and `battle.props` thrown objects still exist from the older system.
 - `pathOf(fx, ms, fn)` in Tombo code sets a body path; return `{cx,base,frame,rot,sc,hide,noShadow}`.
 - Sprite frames available on every party member: `idle, act, celeb, expr, kneel, flip, celebFlip` (Tom and Grace and Rose); Amy, Deedee, Boppy, TNB, Nara add `idle2, run1, run2, wind, throw, aim, spread, clap, hip, sit`. All face left.

@@ -180,7 +180,7 @@ SC.credits=(s,u)=>{
 // Wardrobe pieces he throws.
 const shirtOn=(c,c2)=>{ gfx.strokeStyle=OUT; gfx.lineWidth=5; gfx.beginPath(); gfx.moveTo(-14,-14); gfx.quadraticCurveTo(0,-30,14,-14); gfx.stroke(); gfx.strokeStyle='#aeb3ba'; gfx.lineWidth=2.5; gfx.stroke(); E(0,-26,3,3,'#aeb3ba'); poly([[-16,-14],[16,-14],[24,-4],[16,0],[14,20],[-14,20],[-16,0],[-24,-4]],c,true); R(-2,-12,4,30,c2); };
 PROP2.shirt=(q,u)=>shirtOn(q.c||'#e0402e',q.c2||'#fff6dc');
-PROP2.tophat=(q,u)=>{ RO(-18,-26,36,26,'#2b2a26'); R(-16,-8,32,5,'#c0402e'); RO(-26,0,52,6,'#2b2a26'); };
+PROP2.tophat=(q,u)=>{ if(PROPART.draw('tnb/top_hat',0,-10,{h:36})) return; RO(-18,-26,36,26,'#2b2a26'); R(-16,-8,32,5,'#c0402e'); RO(-26,0,52,6,'#2b2a26'); };
 PROP2.boa=(q,u)=>{ for(let k=0;k<9;k++) { const a=k/8*Math.PI; E(Math.cos(a)*26,Math.sin(a)*14-4,8,7,k%2?'#ff8fb8':'#ff6b9a'); } };
 PROP2.bowtie=(q,u)=>{ poly([[0,0],[-18,-10],[-18,10]],'#e0402e',true); poly([[0,0],[18,-10],[18,10]],'#e0402e',true); E(0,0,5,5,OUT); E(0,0,3,3,'#ff8a7a'); };
 // The rolling wardrobe rack, beside TNB.
@@ -722,6 +722,7 @@ const S=k=>{ if(sfx[k]) sfx[k](); };
 // ---------- Mug Toss (basic; key mug_toss; same numbers as Clay Offcut) ----------
 // He pulls a slightly crooked test mug out of his tote (a second, it says so), lobs it, CLUNK, and it lands upright.
 const mug=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.scale(sc,sc);
+  if(PROPART.draw('tnb/test_mug',0,-1,{h:26})) { gfx.restore(); return; }   // painted stoneware mug
   ring(9,-1,5,6,5,OUT); ring(9,-1,5,6,2.4,'#e8d2b0');
   poly([[-8,-10],[9,-11.5],[7.5,10],[-7,10]],'#e8d2b0',2.2); R(-8,-10,16.5,4,'#5fae9a'); E(-4,-4,2,3,'#5fae9a'); E(3,-5,1.6,2.4,'#5fae9a'); R(-6,6,12,2,'#c9a07a'); gfx.restore(); };
 SC.tv2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1; mug(h.x-6,h.y-14,Math.sin(ms/260)*.08,2.3);
@@ -1135,6 +1136,7 @@ SC.tp2_burst=(s,u)=>{ const q=ez(u/.4); gfx.globalAlpha=fade(u,.5); for(let k=0;
 // ---------- Mug Toss: a much bigger mug, a spin blur and a big CLUNK ----------
 const MS=2.0;
 const mug=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.scale(sc,sc);
+  if(PROPART.draw('tnb/test_mug',0,-1,{h:26})) { gfx.restore(); return; }   // painted stoneware mug
   ring(9,-1,5,6,5.4,OUT); ring(9,-1,5,6,2.6,'#e8d2b0'); ring(9.6,-1.6,4.4,5,.8,'#fff6e6');                                  // handle, with a highlight
   poly([[-8,-10],[9,-11.5],[7.5,10],[-7,10]],'#e8d2b0',2.2);                                                                   // slightly crooked body
   R(3.5,-9,4,18,'rgba(140,96,52,.22)'); R(-6,-6,1.8,11,'rgba(255,255,255,.6)');                                                // shade side, highlight
@@ -1321,6 +1323,7 @@ const shirt=(x,y,sc,c,c2,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ro
   PO([[-14,-14],[14,-14],[22,-5],[15,-1],[13,18],[-13,18],[-15,-1],[-22,-5]],c,2); R(-2,-12,4,28,c2); R(-14,-14,28,3,'rgba(255,255,255,.35)'); gfx.restore(); };
 // A speckled stoneware mug (one of his seconds).
 const mug=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.scale(sc,sc);
+  if(PROPART.draw('tnb/test_mug',0,-1,{h:26})) { gfx.restore(); return; }   // painted stoneware mug
   ring(9,-1,5,6,5,OUT); ring(9,-1,5,6,2.4,CLAY2);
   PO([[-8,-10],[9,-11.5],[7.5,10],[-7,10]],CLAY2,2.2); R(-8,-10,16.5,4,GLZ); E(-4,-4,2,3,GLZ); E(3,-5,1.6,2.4,GLZ); R(-6,6,12,2,'#c9a07a'); R(-6,-6,2,10,'rgba(255,255,255,.45)'); gfx.restore(); };
 

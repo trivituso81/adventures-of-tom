@@ -90,6 +90,7 @@ HELD.dmop=(h,u,hx,hy)=>{
 };
 // A glass baking dish of rhubarb crisp, in two oven mitts.
 const crispDish=(x,y,t,steam=true)=>{
+  if(PROPART.draw('deedee/crisp_pan',x,y-4,{w:76})) return;   // painted pan with its own steam
   R(x-34,y-12,68,22,OUT); R(x-32,y-10,64,18,'rgba(220,240,255,.55)');
   R(x-30,y-4,60,11,'#c73a5a'); R(x-30,y+2,60,5,'#9e2846');
   for(let k=0;k<5;k++) { const bx=x-24+k*12,by=y-4+Math.sin(t*6+k)*1; E(bx,by,3,2,'#ff6f8f'); }
@@ -1229,7 +1230,8 @@ const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of 
 // ---------- Corner-Piece Privilege: bigger pan, glowing golden corner ----------
 const PS=1.35;
 const bigSteam=(x,y,t,n,c,h=110)=>{ const a0=gfx.globalAlpha; for(let k=0;k<n;k++) { const q=(t*.8+k*.17)%1; gfx.globalAlpha=a0*(1-q)*.85; E(x-(n-1)*12+k*24+Math.sin(q*6+k)*10,y-q*h,9+q*12,9+q*12,c); } gfx.globalAlpha=a0; };
-const bigPan=(lift,regrow,rot)=>{ gfx.rotate(rot); RO(-62,-6,12,8,'#9a948a'); RO(50,-6,12,8,'#9a948a'); RO(-52,-20,104,40,'#c9c2b8'); R(-47,-15,94,30,CRUST);
+const bigPan=(lift,regrow,rot)=>{ gfx.rotate(rot); if(PROPART.draw('deedee/crisp_pan',0,-4,{w:132})) return;   // painted pan (its cut corner is painted in); the drawn one with the growing corner is the fallback
+  RO(-62,-6,12,8,'#9a948a'); RO(50,-6,12,8,'#9a948a'); RO(-52,-20,104,40,'#c9c2b8'); R(-47,-15,94,30,CRUST);
   for(let k=0;k<14;k++) R(-42+(k%7)*13,-11+Math.floor(k/7)*12+(k%2)*3,7,5,'#b0483a'); for(let k=0;k<8;k++) R(-40+k*12,-14,6,3,'#f0c070');
   const cw=26*(1-lift)+26*regrow; if(cw>.5) { R(21+(26-cw),-15,cw,cw*.9,'#f0b860'); R(21+(26-cw),-15,cw,3,'#ffd890'); } };
 SC.dv_pan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),lift=ez((ms-P.lift)/250),regrow=ez((ms-P.regrow)/400),cx=h.x-44,cy=h.y-20,rot=ms>P.angle&&ms<P.lift?-.28:-.08; gfx.globalAlpha=fade(u,.96);

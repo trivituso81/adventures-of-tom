@@ -315,7 +315,7 @@ SC.av_hearts=(s,u)=>{ for(let k=0;k<5;k++) { const q=cl(u*1.4-k*.08); if(q<=0) c
 
 // ---------- Kettlebell Swing (basic) ----------
 // She runs over with a big kettlebell, hikes it back between her knees, and swings it up into the monster. WHUMP.
-const bell=(x,y,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); ring(0,-16,9,9,9,OUT); ring(0,-16,9,9,5,IRON2); EO(0,0,15,14,IRON); E(-5,-5,5,4,IRON2); label('35',1,-2,CREAM,1); gfx.restore(); };
+const bell=(x,y,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(PROPART.draw('amy/kettlebell',0,-5,{h:44})) { gfx.restore(); return; } ring(0,-16,9,9,9,OUT); ring(0,-16,9,9,5,IRON2); EO(0,0,15,14,IRON); E(-5,-5,5,4,IRON2); label('35',1,-2,CREAM,1); gfx.restore(); };
 SC.av_bell=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=P.st; if(st.x==null) return; gfx.globalAlpha=1;
   const px=st.x+4,py=st.y-AH()*.42,r=36;
   let a=null;

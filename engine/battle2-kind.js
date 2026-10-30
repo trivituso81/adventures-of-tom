@@ -3061,7 +3061,7 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       if(ms>P.puff) { const k=seg(ms,P.puff,P.puffEnd); la=1-k; m=1-k; cy-=k*50; a=1-k; } }
     if(ms>P.cloud&&ms<P.puffEnd) {
       if(la<1||ms>P.puff) cloudAt(cx,cy,m,a*(ms>P.puff?1:1));
-      if(la>0) { gfx.globalAlpha=la; RFX.plush(cx,cy,lsc,{pose,rot}); gfx.save(); gfx.translate(cx,cy); gfx.rotate(rot); lambyHair(0,0,lsc); gfx.restore(); gfx.globalAlpha=1;
+      if(la>0) { gfx.globalAlpha=la; RFX.plush(cx,cy,lsc,{pose,rot,drawn:1}); gfx.save(); gfx.translate(cx,cy); gfx.rotate(rot); lambyHair(0,0,lsc); gfx.restore(); gfx.globalAlpha=1;
         // a fluffy cloud rim still hugging it
         if(ms<P.puff) for(const [i,L] of LAMBP.entries()) if(i%3===0) puff(cx+L[0]*lsc,cy+L[1]*lsc+4,L[2]*lsc*.45,la*.35); }
       // the monster squashes a little while Lamby sits on it
@@ -3072,7 +3072,7 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>P.tb0&&ms<P.tb1) { const k=ms<P.tb1-200?seg(ms,P.tb0,P.tb0+250):1-seg(ms,P.tb1-200,P.tb1);
       bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250),126,82,sT.x-16,sb-TH+14,k,()=>{ boule(0,4,3.1,false); }); }
     if(ms>P.rb0&&ms<P.rb1) { const k=ms<P.rb1-200?seg(ms,P.rb0,P.rb0+250):1-seg(ms,P.rb1-200,P.rb1);
-      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ RFX.plush(4,8,1.75,{pose:'held'}); lambyHair(4,8,1.75); }); }
+      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ RFX.plush(4,8,1.75,{pose:'held',drawn:1}); lambyHair(4,8,1.75); }); }
   }});
   const steps=[
     [0,()=>{ setMessage('DIRECTOR’S CUT! Rose climbs up on Tom’s shoulders. Cloud safari.'); B2.aim=null; S('boing'); }],
@@ -4529,7 +4529,7 @@ B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<P.end-100) { const a=ms>P.end-300?seg(P.end-100-ms,0,200):1;
       if(g>0) { const r=18+g*70; gfx.save(); gfx.translate(L.x,L.y); const gr=gfx.createRadialGradient(0,0,0,0,0,r); gr.addColorStop(0,'rgba(255,240,180,'+(.75*g*a)+')'); gr.addColorStop(1,'rgba(255,240,180,0)'); gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(0,0,r,0,Math.PI*2); gfx.fill();
         gfx.globalAlpha=g*.55*a; for(let j=0;j<10;j++) { const an=j/10*Math.PI*2+ms/900,r0=20+g*10,r1=r0+16+g*42+Math.sin(ms/120+j)*5; Ln(Math.cos(an)*r0,Math.sin(an)*r0,Math.cos(an)*r1,Math.sin(an)*r1,2.5,GOLD); } gfx.restore(); gfx.globalAlpha=1; }
-      if(!skinNow) { gfx.globalAlpha=a; RFX.plush(L.x,L.y,L.sc,{pose:'held',glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; } }
+      if(!skinNow) { gfx.globalAlpha=a; RFX.plush(L.x,L.y,L.sc,{pose:'held',drawn:1,glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; } }
     // the dark runs away: a few shadow wisps with eyes scurry off to the left once the light grows
     if(ms>G0+300&&ms<G1+700) for(let j=0;j<5;j++) { const q=seg(ms,G0+300+j*120,G1+300+j*80); if(q<=0||q>=1) continue;
       const y=90+j*38,x=lerp(Math.min(560,L.x-80-j*10),-60,ez(q)); gfx.globalAlpha=(1-q)*.9; E(x,y,22,13,'#0c0d1a'); E(x+16,y+4,10,7,'#0c0d1a');

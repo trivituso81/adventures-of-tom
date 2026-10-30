@@ -507,6 +507,7 @@ SC.bp_ticket=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.95);
 // ---------- Pepper Breath (B1; key pepper_breath; same numbers as One Pepper, Sensible Size) ----------
 // One homegrown cayenne at lunch. Crunch. His face goes red, steam comes out of his ears, and he breathes a cone of fire.
 const cayenne=(x,y,rot,sc,c='#e0402e')=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc);
+  if(c==='#e0402e'&&PROPART.draw('boppy/cayenne_pepper',0,0,{h:50})) { gfx.restore(); return; }   // painted; other colours stay drawn
   gfx.beginPath(); gfx.moveTo(-3,-14); gfx.quadraticCurveTo(10,-4,6,10); gfx.quadraticCurveTo(2,20,-6,24); gfx.quadraticCurveTo(-2,12,-6,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill();
   Ln(0,-8,3,6,1.5,'rgba(255,255,255,.6)'); RO(-5,-19,6,5,'#4f8a3a'); R(-3,-24,2,6,'#3f7a2a'); gfx.restore(); };
 SC.bv_pepper=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const h=hand(),mo=mouth(st); gfx.globalAlpha=1;
@@ -738,6 +739,7 @@ SC.bp_ticket=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.95); c
 
 // ---------- Seeds of Trouble: a bigger packet, fiery seeds, big sparks ----------
 const cayenne=(x,y,rot,sc,c='#e0402e')=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc);
+  if(c==='#e0402e'&&PROPART.draw('boppy/cayenne_pepper',0,0,{h:50})) { gfx.restore(); return; }   // painted; other colours stay drawn
   gfx.beginPath(); gfx.moveTo(-3,-14); gfx.quadraticCurveTo(10,-4,6,10); gfx.quadraticCurveTo(2,20,-6,24); gfx.quadraticCurveTo(-2,12,-6,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill();
   Ln(0,-8,3,6,1.5,'rgba(255,255,255,.6)'); RO(-5,-19,6,5,'#4f8a3a'); R(-3,-24,2,6,'#3f7a2a'); gfx.restore(); };
 const pk=()=>{ const h=hand(); return {x:h.x-34,y:h.y-64}; };

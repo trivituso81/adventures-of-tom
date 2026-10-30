@@ -68,6 +68,7 @@ function plush(x,y,sc=1,o={}) {
   // Two lambs (canon, 26 Oct): Lamby, the original, worn and a bit grubby (the default); Backup Lamby (o.v 'backup'),
   // newer, bright and clean. o.v 'new' is the old clean palette.
   const V=o.v||'worn',worn=V==='worn';
+  if(!o.drawn&&(pose==='held'||pose==='fly')&&(V==='worn'||V==='backup')&&PROPART.draw(V==='backup'?'rose/backup_lamby':'rose/lamby',0,0,{h:32})) { gfx.restore(); return; }   // painted Lamby; o.drawn forces the drawn one (Tom's hair is drawn onto it)
   const PL=V==='backup'?['#fffdf7','#e9e0cf','#ffffff','#f6ead6','#e6d3b6']:(worn?['#ddd1ba','#bfae92','#e9e0cc','#d6c1a0','#bca37f']:['#eee5d4','#d6c9b2','#faf6ec','#ecdcc3','#d9c3a3']);
   const fur=PL[0],furD=PL[1],furL=PL[2],muz=PL[3],muzD=PL[4],bead='#16110e',st='#5a4636';
   const tube=(x0,y0,a,len,w)=>{ const x1=x0+Math.cos(a)*len,y1=y0+Math.sin(a)*len; Ln(x0,y0,x1,y1,w+3,OUT); E(x1,y1,w/2+1.8,w/2+1.6,OUT); Ln(x0,y0,x1,y1,w,fur); E(x1,y1,w/2+.3,w/2,furD); E(x1-.6,y1-.6,w/2-1,w/2-1.2,fur); };
@@ -109,7 +110,7 @@ function plush(x,y,sc=1,o={}) {
   gfx.restore();
 }
 RFX.plush=plush; RFX.lamb=lamb;   // the set pieces at the end of this file draw Lamby too
-PROP2.lamby=(q,u)=>{ const tumble=q.tumble?Math.sin(u*Math.PI*2.2)*.7-u*.6:0; if(q.lines) for(let k=0;k<3;k++) R(22+k*8,-6+k*5,10-k*2,2,'rgba(255,246,220,'+(.7-k*.2)+')'); plush(0,0,1.5,{flip:q.flip,pose:'fly',rot:tumble}); };
+PROP2.lamby=(q,u)=>{ const tumble=q.tumble?Math.sin(u*Math.PI*2.2)*.7-u*.6:0; if(q.lines) for(let k=0;k<3;k++) R(22+k*8,-6+k*5,10-k*2,2,'rgba(255,246,220,'+(.7-k*.2)+')'); if(PROPART.draw('rose/lamby',0,0,{h:46,flip:!!q.flip,rot:tumble})) return; plush(0,0,1.5,{flip:q.flip,pose:'fly',rot:tumble}); };
 PROP2.bow=(q,u)=>{ const c='#ff6b9a',c2='#ffb3cf'; for(const sd of [-1,1]) poly([[0,0],[sd*30,-18],[sd*26,16]],c,true); for(const sd of [-1,1]) poly([[sd*8,-2],[sd*24,-12],[sd*22,10]],c2); E(0,0,7,7,OUT); E(0,0,5,5,c); for(const sd of [-1,1]) poly([[sd*2,4],[sd*18,22],[sd*8,24]],c,true); };
 PROP2.tutu=(q,u)=>{ const c='#ffb3cf',c2='#ff8fb8'; gfx.globalAlpha*=.92; for(let k=0;k<2;k++) { gfx.beginPath(); for(let a=0;a<=Math.PI*2+.01;a+=Math.PI/12) { const r=(k?44:52)+Math.sin(a*6)*5; gfx.lineTo(Math.cos(a)*r,Math.sin(a)*r*.38+k*3); } gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=k?c2:c; gfx.fill(); } E(0,-3,30,8,'#ffd3e0'); };
 PROP2.tiara=(q,u)=>{ const g='#ffd166',g2='#fff1b0'; poly([[-30,10],[-22,-10],[-14,2],[0,-20],[14,2],[22,-10],[30,10]],g,true); poly([[-26,10],[-21,-2],[-16,6],[0,-8],[16,6],[21,-2],[26,10]],g2); R(-30,8,60,6,OUT); R(-29,9,58,4,g); for(const [jx,jy] of [[0,-10],[-22,-2],[22,-2]]) { E(jx,jy,4,4,OUT); E(jx,jy,2.6,2.6,'#8fd0ff'); } };

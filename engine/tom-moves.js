@@ -25,7 +25,7 @@ const Tm=RECRUIT_MOVES.tom;
 
 // ================= Props =================
 PROP2.abtn=(q,u)=>{ E(0,0,11,11,OUT); E(0,0,9,9,'#e0402e'); E(-3,-3,4,3,'#ff8a7a'); label('A',0,-2,'#fff8e8',1); };
-PROP2.jar=(q,u)=>{ R(-14,-16,28,34,OUT); R(-12,-14,24,30,'#cfe6ee'); R(-12,-14,24,8,'#9fc8d8'); R(-14,-22,28,8,OUT); R(-12,-20,24,5,'#c9a03e'); R(-12,-2,24,18,'#efe3c8'); for(let k=0;k<5;k++) { const a=((k*37)%20)-10,b=((u*90+k*13)%16); E(a,12-b,2,2,'#fff8e8'); } R(-10,-8,3,20,'rgba(255,255,255,.5)'); };
+PROP2.jar=(q,u)=>{ if(PROPART.draw('tom/sourdough_starter_jar',0,-2,{h:42})) return; R(-14,-16,28,34,OUT); R(-12,-14,24,30,'#cfe6ee'); R(-12,-14,24,8,'#9fc8d8'); R(-14,-22,28,8,OUT); R(-12,-20,24,5,'#c9a03e'); R(-12,-2,24,18,'#efe3c8'); for(let k=0;k<5;k++) { const a=((k*37)%20)-10,b=((u*90+k*13)%16); E(a,12-b,2,2,'#fff8e8'); } R(-10,-8,3,20,'rgba(255,255,255,.5)'); };
 PROP2.card=(q,u)=>{ R(-17,-22,34,44,OUT); R(-15,-20,30,40,'#fff8e8'); R(-15,-20,30,5,'#e0402e'); kanji(q.ch,0,3,24,'#2b2a26'); };
 PROP2.tag=(q,u)=>{ poly([[-22,-8],[14,-8],[22,0],[14,8],[-22,8]],'#f1d58c',true); E(16,0,2.5,2.5,OUT); label('$$$',-5,-2,'#7a1a14',1); };
 PROP2.pass=(q,u)=>{ R(-30,-13,60,26,OUT); R(-28,-11,56,22,'#fff8e8'); R(-28,-11,56,6,'#1d3a8a'); R(-28,-5,16,16,'#c9ccd4'); label('SEAT 38E',12,-2,'#2b2a26',1); label('BASIC',12,5,'#e0402e',1); };
@@ -964,6 +964,7 @@ Tm.starter_splash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m
 // Tom kneels by the friend with a cutting board and a warm boule. He saws it open; steam pours out of the crumb and
 // curls over them (the heal). Then he holds up his phone for the crumb shot. Flash.
 const boule=(x,y,sc,cut,open)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  if(!cut&&PROPART.draw('tom/sourdough_boule',0,-12,{w:46})) { gfx.restore(); return; }   // painted whole loaf; the cut loaf stays drawn
   if(!cut) { EO(0,-10,22,14,CRUST); E(-4,-16,12,5,'#e0a868'); LnO(-10,-18,8,-14,2,'#f1d9a8'); }
   else { const o=open*10; gfx.save(); gfx.translate(-o,0); EO(-2,-10,13,14,CRUST); E(-4,-14,6,4,'#e0a868'); gfx.restore();
     gfx.save(); gfx.translate(6+o,-2); gfx.rotate(open*.5); EO(0,-8,13,14,CRUMB); for(const [hx,hy,r] of [[-4,-12,2.5],[3,-6,2],[-2,-3,1.6],[5,-14,1.6],[-6,-6,1.4]]) E(hx,hy,r,r*1.2,'#d8b888'); ring(0,-8,13,14,3,CRUST); gfx.restore(); }
@@ -1021,7 +1022,8 @@ Tm.mint_unboxing=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
 // ---------- Noise-Canceling (A4) ----------
 // The monster is loud: jagged noise and BLAH bubbles. Tom walks up, puts on his big flight headphones, taps ANC on, and
 // a quiet blue wave rolls out from him. The noise freezes and pops; the monster's yell is muted. Ahh.
-const phones=(x,y,sc,on)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); gfx.strokeStyle=OUT; gfx.lineWidth=8; gfx.beginPath(); gfx.arc(0,0,16,Math.PI*1.05,Math.PI*1.95); gfx.stroke();
+const phones=(x,y,sc,on)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(PROPART.draw('tom/headphones',0,-1,{w:48})) { if(on) E(16,9,1.5,1.5,'#7dff8a'); gfx.restore(); return; }   // painted; the drawn pair is the fallback
+  gfx.strokeStyle=OUT; gfx.lineWidth=8; gfx.beginPath(); gfx.arc(0,0,16,Math.PI*1.05,Math.PI*1.95); gfx.stroke();
   gfx.strokeStyle='#3a3f46'; gfx.lineWidth=4; gfx.beginPath(); gfx.arc(0,0,16,Math.PI*1.05,Math.PI*1.95); gfx.stroke(); RO(-21,-4,9,15,'#3a3f46'); RO(12,-4,9,15,'#3a3f46'); R(-19,-2,3,11,GREY2); R(18,-2,3,11,GREY2); E(16,9,1.5,1.5,on?'#7dff8a':'#555'); gfx.restore(); };
 SC.tv_noise=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F,mx=F.x+F.w*.3,my=F.mid-F.h*.1; const frz=ms>P.quiet?cl((ms-P.quiet)/300):0;
   if(ms<P.quiet+350) for(let k=0;k<4;k++) { const q=((ms/700)+k/4)%1,d=frz?lerp(30+q*120,0,frz):30+q*120; gfx.globalAlpha=(1-q)*(1-frz); gfx.strokeStyle=frz?'#aaaaaa':(k%2?RED:FIRE); gfx.lineWidth=4; gfx.beginPath(); for(let j=-4;j<=4;j++) { const a=j*.16,r=d+(j%2?6:-6); const px=mx+Math.cos(a)*r,py=my+Math.sin(a)*r; j===-4?gfx.moveTo(px,py):gfx.lineTo(px,py); } gfx.stroke(); }
@@ -1474,7 +1476,8 @@ const go=(x,me)=>x<me.x?'walk':'walkR';
 const back=(x,me)=>x<me.x?'walkR':'walk';
 
 // ---------- Noise-Canceling: huge headphones, the sound wave cut off mid-air ----------
-const phones=(x,y,sc,on)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); gfx.strokeStyle=OUT; gfx.lineWidth=8; gfx.beginPath(); gfx.arc(0,0,16,Math.PI*1.05,Math.PI*1.95); gfx.stroke();
+const phones=(x,y,sc,on)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(PROPART.draw('tom/headphones',0,-1,{w:48})) { if(on) E(16,9,1.5,1.5,'#7dff8a'); gfx.restore(); return; }   // painted; the drawn pair is the fallback
+  gfx.strokeStyle=OUT; gfx.lineWidth=8; gfx.beginPath(); gfx.arc(0,0,16,Math.PI*1.05,Math.PI*1.95); gfx.stroke();
   gfx.strokeStyle='#3a3f46'; gfx.lineWidth=4; gfx.beginPath(); gfx.arc(0,0,16,Math.PI*1.05,Math.PI*1.95); gfx.stroke(); RO(-22,-5,10,17,'#3a3f46'); RO(12,-5,10,17,'#3a3f46'); R(-20,-3,3,13,GREY2); R(19,-3,3,13,GREY2); E(17,10,1.8,1.8,on?'#7dff8a':'#555'); gfx.restore(); };
 SC.tv_phones=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=P.st; if(!st||st.x==null) return; gfx.globalAlpha=1;
   const top={x:st.x-2,y:st.y-TH()*(st.sc||1)+20}; let x,y,sc;

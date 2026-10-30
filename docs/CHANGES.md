@@ -13,6 +13,12 @@
 - Known small flaws: faint light specks remain in the golden swirl effects (attack2 and attack3), and a few in the hurt frame's sparks, left over from the checkerboard.
 - Tests: `tools/foes_test.py leviathan` 0 fails; `tools/smoke.py` FAILS: [].
 
+## 2026-10-30: Painted battle props are cut and the first seven are in the game
+- All 202 painted props (every Primary move prop for Tom, Grace, Rose, Amy, Deedee, Boppy, TNB) are cut into single transparent images in `art/props/<character>/` by `tools/sprite-bake/bake_prop_sheets.py` (corner numbers and halos removed; check contact sheets in tools/shots/props-*.png). See `docs/PROP_ART.md`.
+- New `engine/prop-art.js` (`PROPART.draw`) lets any draw helper paint a prop first and fall back to the drawn one. Trial, one move each: Tom's headphones (Noise-Canceling), Grace's gold dumpling (Squishy Squeeze), Rose's Lamby and Backup Lamby (every move that shows them), Amy's kettlebell (Kettlebell Swing), Deedee's crisp pan (Corner Piece), Boppy's cayenne (Pepper Breath), TNB's stoneware mug (Mug Toss). Look for these in a fight.
+- Deedee's Corner Piece pan no longer regrows its corner (the painted pan has the cut corner painted in). Tom's hair on Lamby (Tombo moves) still uses the drawn Lamby.
+- `tools/kit_test.py` prints `PAINTED_PROPS={...}` per move. Script version tags bumped on every changed script.
+
 ## 2026-10-30: Battle prop sheets, redo sheet (source only)
 - Saved `tools/sprite-bake/src/props/redo-sheet1.png`. All 14 redo props match the list. Every character's props now exist as painted source images (starter pistol for Boppy reuses Amy's). Not wired into the game.
 ## 2026-10-30: Painted Julian Vance and Nine Scoops enemies

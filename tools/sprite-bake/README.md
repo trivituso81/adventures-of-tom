@@ -77,3 +77,7 @@ Deedee Brisk Walk tracksuit set: bake_deedee_brisk.py (src/deedee-brisk-v1.png, 
 ## Justin (2026-10-29)
 
 Overworld only. `src/justin-walk-v1.png` (3x4) -> `python3 tools/sprite-bake/bake_justin.py [--ratio 0.42 --ratio-side 0.40 --ow-h 53]` writes `art/chars/justin-ow.webp` and `data/justin-hires.js`; `data/justin-hires-use.js` builds `OW.justin`. Head factor is solved per view so hair-to-chin matches TNB and Boppy; `CHIN_FIX` hand-corrects the side-view chin of `w_left_stand2`. 53 rows tall (Michael 50, Tom 42), `--contact PATH` saves a contact sheet.
+
+## Battle props (2026-10-30)
+
+Single painted props are cut from the AI prop sheets in `src/props/` by `python3 tools/sprite-bake/bake_prop_sheets.py [--check]` into `art/props/<char>/<slug>.webp`. Details, the hook for using them in a move, and what is wired: `docs/PROP_ART.md`.

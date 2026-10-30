@@ -36,6 +36,7 @@ if(!sfx.ding) sfx.ding=()=>{ tone({type:'sine',f0:1320,dur:.5,vol:.12}); tone({t
 // Grace's sparkling diamond gold soup dumpling squishy, the same pixel art as the opening (SQUISHY in intro.js).
 // sq is how squeezed it is (0 round, 1 flat). Drawn centered on x,y, about 54x42 at sc=1.
 const dumpling=(x,y,sq,sc=1)=>{
+  if(PROPART.draw('grace/gold_dumpling_squishy',x,y,{h:46*sc,sx:1+sq*.5,sy:1-sq*.45})) return;   // painted (art/props/grace); the drawn one below is the fallback
   const sx=sc*(1+sq*.5),sy=sc*(1-sq*.45),P=3,rows=SQUISHY,w=rows[0].length,h=rows.length;
   gfx.save(); gfx.translate(x,y); gfx.scale(sx,sy);
   for(let r=0;r<h;r++) for(let c=0;c<w;c++) {

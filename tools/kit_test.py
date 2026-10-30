@@ -90,6 +90,8 @@ with sync_playwright() as pw:
                 dmg=sum(1 for i,f in enumerate(r['foes']) if f[1]<pre[np+i]); warm=sum(1 for i,f in enumerate(r['foes']) if f[3]>r['prew'][i])
                 heal=sum(1 for i,p in enumerate(r['party']) if p[1]>pre[i])
                 rep=f"{cid}.{key}{'/'+var['pick'] if var.get('pick') else ''} -> {label}: {dur:.1f}s line={line} dmg={dmg} warm={warm} heal={heal} said={r['said']} party={[(p[0],p[1],p[3]) for p in r['party']]} foes={[(f[0],f[4]) for f in r['foes']]}"
+                ph=pg.evaluate("()=>{ if(typeof PROPART==='undefined') return {}; const h=Object.assign({},PROPART.hits); for(const k in PROPART.hits) delete PROPART.hits[k]; return h; }")
+                if ph: rep+=f' PAINTED_PROPS={ph}'
                 report.append(rep); print(rep,flush=True)
                 if not line: fails.append(f'{cid}.{key}: no line')
                 sheet.append((f'{key}{"/"+var.get("pick","") if var.get("pick") else ""} {dur:.1f}s',frames))

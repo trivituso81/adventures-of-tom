@@ -1,0 +1,1026 @@
+{
+"tom": [
+[
+1,
+"wireless_game_controller",
+"Wireless game controller"
+],
+[
+2,
+"no_touching_sign",
+"NO TOUCHING sign"
+],
+[
+3,
+"sourdough_starter_jar",
+"Sourdough starter jar"
+],
+[
+4,
+"sourdough_boule",
+"Sourdough boule"
+],
+[
+5,
+"bread_slice",
+"Bread slice"
+],
+[
+6,
+"easel_chart",
+"Easel chart"
+],
+[
+7,
+"max_gadget_box",
+"MAX gadget box"
+],
+[
+8,
+"gadget",
+"Gadget"
+],
+[
+9,
+"receipt_roll",
+"Receipt roll"
+],
+[
+10,
+"headphones",
+"Headphones"
+],
+[
+11,
+"boarding_group_5_sign",
+"BOARDING GROUP 5 sign"
+],
+[
+12,
+"airline_suite_door",
+"Airline suite door"
+],
+[
+13,
+"duvet",
+"Duvet"
+],
+[
+14,
+"sleep_mask",
+"Sleep mask"
+],
+[
+15,
+"phone_and_boarding_passes",
+"Phone and boarding passes"
+],
+[
+16,
+"gate_scanner",
+"Gate scanner"
+],
+[
+17,
+"red_carpet_runner",
+"Red carpet runner"
+],
+[
+18,
+"gate_0_door",
+"GATE 0 door"
+],
+[
+19,
+"lie_flat_pod",
+"Lie-flat pod"
+],
+[
+20,
+"airliner",
+"Airliner"
+],
+[
+21,
+"hot_towel",
+"Hot towel"
+],
+[
+22,
+"kanji_flashcards",
+"Kanji flashcards"
+],
+[
+23,
+"question_tile",
+"Question tile"
+],
+[
+24,
+"giant_floor_controller",
+"Giant floor controller"
+],
+[
+25,
+"glyph_tiles",
+"Glyph tiles"
+],
+[
+26,
+"skincare_bottles",
+"Skincare bottles"
+],
+[
+27,
+"led_face_mask",
+"LED face mask"
+],
+[
+28,
+"calligraphy_brush",
+"Calligraphy brush"
+],
+[
+29,
+"false_stamp",
+"FALSE stamp"
+],
+[
+30,
+"game_cartridge",
+"Game cartridge"
+],
+[
+31,
+"retro_console",
+"Retro console"
+]
+],
+"grace": [
+[
+1,
+"gold_dumpling_squishy",
+"Gold dumpling squishy"
+],
+[
+2,
+"plush_squishies",
+"Plush squishies"
+],
+[
+3,
+"pink_nail_polish_bottle",
+"Pink nail polish bottle"
+],
+[
+4,
+"giant_glitter_nail",
+"Giant glitter nail"
+],
+[
+5,
+"hairbrush_microphone",
+"Hairbrush microphone"
+],
+[
+6,
+"phone_on_mini_tripod",
+"Phone on mini tripod"
+],
+[
+7,
+"subscribe_button",
+"SUBSCRIBE button"
+],
+[
+8,
+"notification_bell",
+"Notification bell"
+],
+[
+9,
+"play_button_plaque",
+"Play button plaque"
+],
+[
+10,
+"like_thumbs_up",
+"LIKE thumbs-up"
+],
+[
+11,
+"green_up_arrow",
+"Green up arrow"
+],
+[
+12,
+"balance_beam",
+"Balance beam"
+],
+[
+13,
+"scorecards",
+"Scorecards"
+],
+[
+14,
+"gold_trophy_cup",
+"Gold trophy cup"
+],
+[
+15,
+"spring_floor_mat",
+"Spring floor mat"
+]
+],
+"rose": [
+[
+1,
+"unicorn_cut_out",
+"Unicorn cut-out"
+],
+[
+2,
+"crayon",
+"Crayon"
+],
+[
+3,
+"safety_scissors",
+"Safety scissors"
+],
+[
+4,
+"rainbow_feather",
+"Rainbow feather"
+],
+[
+5,
+"lamby",
+"Lamby"
+],
+[
+6,
+"backup_lamby",
+"Backup Lamby"
+],
+[
+7,
+"couch_cushion",
+"Couch cushion"
+],
+[
+8,
+"stack_of_cushions",
+"Stack of cushions"
+],
+[
+9,
+"lava_pool",
+"Lava pool"
+],
+[
+10,
+"pink_teapot",
+"Pink teapot"
+],
+[
+11,
+"white_teapot",
+"White teapot"
+],
+[
+12,
+"lacy_kids_table",
+"Lacy kids' table"
+],
+[
+13,
+"tiny_pink_chair",
+"Tiny pink chair"
+],
+[
+14,
+"toy_teacups",
+"Toy teacups"
+],
+[
+15,
+"ribbons",
+"Ribbons"
+],
+[
+16,
+"picture_book",
+"Picture book"
+],
+[
+17,
+"snack_tray",
+"Snack tray"
+],
+[
+18,
+"treat_set",
+"Treat set"
+],
+[
+19,
+"patchwork_quilt",
+"Patchwork quilt"
+],
+[
+20,
+"password_sign",
+"PASSWORD? sign"
+],
+[
+21,
+"throw_pillows",
+"Throw pillows"
+],
+[
+22,
+"cardboard_chest_armor",
+"Cardboard chest armor"
+],
+[
+23,
+"cereal_box_visor",
+"Cereal-box visor"
+],
+[
+24,
+"paper_tube_levers",
+"Paper-tube levers"
+],
+[
+25,
+"cardboard_rocket_fist",
+"Cardboard rocket fist"
+]
+],
+"amy": [
+[
+1,
+"kettlebell",
+"Kettlebell"
+],
+[
+2,
+"coach_whistle",
+"Coach whistle"
+],
+[
+3,
+"giant_quiz_paper",
+"Giant quiz paper"
+],
+[
+4,
+"giant_red_marker",
+"Giant red marker"
+],
+[
+5,
+"lunch_tray",
+"Lunch tray"
+],
+[
+6,
+"lunch_table",
+"Lunch table"
+],
+[
+7,
+"sticker_chart",
+"Sticker chart"
+],
+[
+8,
+"recess_handbell",
+"Recess handbell"
+],
+[
+9,
+"ceiling_lamp",
+"Ceiling lamp"
+],
+[
+10,
+"wall_light_switch",
+"Wall light switch"
+],
+[
+11,
+"student_desks",
+"Student desks"
+],
+[
+12,
+"pencils",
+"Pencils"
+],
+[
+13,
+"paper_stack",
+"Paper stack"
+],
+[
+14,
+"quiz_timer",
+"Quiz timer"
+],
+[
+15,
+"answer_key_packet",
+"Answer-key packet"
+],
+[
+16,
+"school_bell",
+"School bell"
+],
+[
+17,
+"chalkboard",
+"Chalkboard"
+],
+[
+18,
+"wall_clock",
+"Wall clock"
+],
+[
+19,
+"podium_with_apple",
+"Podium with apple"
+],
+[
+20,
+"pointer_stick",
+"Pointer stick"
+],
+[
+21,
+"chalk_and_erasers",
+"Chalk and erasers"
+],
+[
+22,
+"report_cards",
+"Report cards"
+],
+[
+23,
+"hill_with_flag",
+"Hill with flag"
+],
+[
+24,
+"grumpy_lunch_pair",
+"Grumpy lunch pair"
+],
+[
+25,
+"oat_latte",
+"Oat latte"
+],
+[
+26,
+"starting_line",
+"Starting line"
+],
+[
+27,
+"starter_pistol",
+"Starter pistol"
+],
+[
+28,
+"red_card",
+"Red card"
+],
+[
+29,
+"track_section",
+"Track section"
+],
+[
+30,
+"pace_clock",
+"Pace clock"
+],
+[
+31,
+"finish_arch",
+"Finish arch"
+],
+[
+32,
+"crowd_barriers",
+"Crowd barriers"
+],
+[
+33,
+"finish_tape",
+"Finish tape"
+],
+[
+34,
+"stopwatch",
+"Stopwatch"
+],
+[
+35,
+"course_map_card",
+"Course map card"
+],
+[
+36,
+"street_signs",
+"Street signs"
+],
+[
+37,
+"bq_stamp",
+"BQ stamp"
+],
+[
+38,
+"finisher_medal",
+"Finisher medal"
+],
+[
+39,
+"foil_blankets",
+"Foil blankets"
+]
+],
+"deedee": [
+[
+1,
+"dish_towel",
+"Dish towel"
+],
+[
+2,
+"moon",
+"Moon"
+],
+[
+3,
+"measuring_tape",
+"Measuring tape"
+],
+[
+4,
+"stethoscope",
+"Stethoscope"
+],
+[
+5,
+"rn_badge",
+"RN badge"
+],
+[
+6,
+"bandage",
+"Bandage"
+],
+[
+7,
+"crisp_pan",
+"Crisp pan"
+],
+[
+8,
+"plate_with_corner_piece",
+"Plate with corner piece"
+],
+[
+9,
+"mop",
+"Mop"
+],
+[
+10,
+"mop_bucket",
+"Mop bucket"
+],
+[
+11,
+"wet_floor_sign",
+"WET FLOOR sign"
+],
+[
+12,
+"wine_glass",
+"Wine glass"
+],
+[
+13,
+"spoon",
+"Spoon"
+],
+[
+14,
+"oven_mitts",
+"Oven mitts"
+],
+[
+15,
+"hanging_rail",
+"Hanging rail"
+],
+[
+16,
+"dinner_bell",
+"Dinner bell"
+],
+[
+17,
+"apron",
+"Apron"
+],
+[
+18,
+"stove",
+"Stove"
+],
+[
+19,
+"pot_colander_and_carrot",
+"Pot, colander and carrot"
+],
+[
+20,
+"kitchen_utensils",
+"Kitchen utensils"
+],
+[
+21,
+"pie",
+"Pie"
+],
+[
+22,
+"dining_table",
+"Dining table"
+],
+[
+23,
+"roast_turkey",
+"Roast turkey"
+],
+[
+24,
+"side_dishes",
+"Side dishes"
+],
+[
+25,
+"hand_weights",
+"Hand weights"
+],
+[
+26,
+"sightseeing_sign",
+"SIGHTSEEING sign"
+],
+[
+27,
+"garden_hose",
+"Garden hose"
+],
+[
+28,
+"window_with_shade",
+"Window with shade"
+],
+[
+29,
+"patchwork_quilt",
+"Patchwork quilt"
+],
+[
+30,
+"kiss_mark",
+"Kiss mark"
+]
+],
+"boppy": [
+[
+1,
+"baseball_cap",
+"Baseball cap"
+],
+[
+2,
+"walking_speed_sign",
+"Walking speed sign"
+],
+[
+3,
+"stop_sign",
+"STOP sign"
+],
+[
+4,
+"fishing_rod",
+"Fishing rod"
+],
+[
+5,
+"bobber",
+"Bobber"
+],
+[
+6,
+"pond",
+"Pond"
+],
+[
+7,
+"recliner",
+"Recliner"
+],
+[
+8,
+"reserved_card",
+"RESERVED card"
+],
+[
+9,
+"key_ring",
+"Key ring"
+],
+[
+10,
+"jail_cell_door",
+"Jail cell door"
+],
+[
+11,
+"big_key",
+"Big key"
+],
+[
+12,
+"ticket_dispenser",
+"Ticket dispenser"
+],
+[
+13,
+"family_first_ticket",
+"FAMILY FIRST ticket"
+],
+[
+14,
+"pier",
+"Pier"
+],
+[
+15,
+"giant_catfish",
+"Giant catfish"
+],
+[
+16,
+"pier_rail",
+"Pier rail"
+],
+[
+17,
+"cayenne_pepper",
+"Cayenne pepper"
+],
+[
+18,
+"seed_packet",
+"Seed packet"
+],
+[
+19,
+"pot_of_broth",
+"Pot of broth"
+],
+[
+20,
+"hot_mild_sign",
+"HOT MILD sign"
+],
+[
+21,
+"bowl_of_broth",
+"Bowl of broth"
+],
+[
+22,
+"stool",
+"Stool"
+],
+[
+23,
+"1970_card",
+"1970 card"
+],
+[
+24,
+"folding_chair",
+"Folding chair"
+],
+[
+25,
+"jar_of_ghost_peppers",
+"Jar of ghost peppers"
+],
+[
+26,
+"ghost_pepper",
+"Ghost pepper"
+],
+[
+27,
+"fire_alarm",
+"Fire alarm"
+],
+[
+28,
+"cardigan",
+"Cardigan"
+],
+[
+29,
+"starter_pistol",
+"Starter pistol"
+],
+[
+30,
+"finish_arch",
+"Finish arch"
+],
+[
+31,
+"race_bib",
+"Race bib"
+]
+],
+"tnb": [
+[
+1,
+"test_mug",
+"Test mug"
+],
+[
+2,
+"wardrobe_rack",
+"Wardrobe rack"
+],
+[
+3,
+"top_hat",
+"Top hat"
+],
+[
+4,
+"velvet_jacket",
+"Velvet jacket"
+],
+[
+5,
+"feather_boa",
+"Feather boa"
+],
+[
+6,
+"needle_and_thread",
+"Needle and thread"
+],
+[
+7,
+"safety_pins",
+"Safety pins"
+],
+[
+8,
+"metro_card",
+"Metro card"
+],
+[
+9,
+"card_reader",
+"Card reader"
+],
+[
+10,
+"light_rail_train",
+"Light-rail train"
+],
+[
+11,
+"flashlight",
+"Flashlight"
+],
+[
+12,
+"slasher_standee",
+"Slasher standee"
+],
+[
+13,
+"red_sleeve",
+"Red sleeve"
+],
+[
+14,
+"walkie_talkie",
+"Walkie-talkie"
+],
+[
+15,
+"stage_light",
+"Stage light"
+],
+[
+16,
+"painted_flat",
+"Painted flat"
+],
+[
+17,
+"shirts_on_hangers",
+"Shirts on hangers"
+],
+[
+18,
+"director_s_chair",
+"Director's chair"
+],
+[
+19,
+"coffee_mug",
+"Coffee mug"
+],
+[
+20,
+"slip_bucket",
+"Slip bucket"
+],
+[
+21,
+"clay_pigeon",
+"Clay pigeon"
+],
+[
+22,
+"kiln_cone",
+"Kiln cone"
+],
+[
+23,
+"celadon_glaze",
+"Celadon glaze"
+],
+[
+24,
+"longboard",
+"Longboard"
+],
+[
+25,
+"painted_curb",
+"Painted curb"
+],
+[
+26,
+"rocking_platform",
+"Rocking platform"
+],
+[
+27,
+"spirit_level",
+"Spirit level"
+],
+[
+28,
+"clay_wedge",
+"Clay wedge"
+],
+[
+29,
+"brick_kiln",
+"Brick kiln"
+],
+[
+30,
+"stoneware_mugs",
+"Stoneware mugs"
+],
+[
+31,
+"street_signs",
+"Street signs"
+]
+]
+}
