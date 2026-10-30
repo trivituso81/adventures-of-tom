@@ -1,3 +1,9 @@
+## 2026-10-30: Room paintings, batch 6 (Odette's Creole Kitchen, Pupuseria La Ceiba, Jordan and Sam's, Dakota and Ryan's)
+- rooms6.zip: `creole`, `pupuseria`, `jordansam`, `dakota` installed as square plates (`art/<id>.webp`, 16 x 16 tiles, `px:78`, actorScale 1.98). All four images were square and clean, no redo needed.
+- Walk masks, objects and NPC positions rewritten in `data/maps-la.js`; all NPC names and object texts kept, except two Jordan and Sam objects: the slat divider kept, but `Mug shelf` was dropped (its shelf sits behind the espresso bar, unreachable) and `Window planter` now sits on the big foreground planter as `Big planter`. No scene uses these rooms' coordinates.
+- Removed old hard-coded tests creole_test, dakota_test, jordansam_test, pupuseria_test; `rooms_test.py` and `tap_test.py` cover the rooms.
+- Tests: rooms_test 4 rooms FAILS []; smoke, camera_clamp, ch12_test FAILS []; tap_test on the 4 rooms PASS.
+
 ## 2026-10-30: Room paintings, batch 5 (Casa Alvarez, Lofts Lobby, TNB's Loft, Grand Tower apartment)
 - rooms5.zip: `casa`, `loftlobby`, `lofts`, `tower` installed as square plates (`art/<id>.webp`, 16 x 16 tiles, `px:78`, actorScale 1.98). Image 21 (Primary Suite) was already live as `tomsuite`.
 - Walk masks, objects and NPC positions rewritten in `data/maps-la.js`; every old object text and NPC name kept (Casa Alvarez still has all nine residents, so `ch12Alvarez` and STORY_WORLD are untouched).
