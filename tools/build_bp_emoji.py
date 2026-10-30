@@ -15,7 +15,7 @@ MAP={
 # Grace
 'grace.cartwheel':'🤸','grace.squishy_squeeze':'🧸','grace.glitter_nails':'💅','grace.welcome_back':'📹','grace.like_subscribe':'👍','grace.dumpling_drop':'🥟','grace.viral_ult':'🔔','grace.dance_battle':'🕺','grace.beam_dismount':'🙌','grace.handstand_contest':'🙃','grace.split_leap':'🩰','grace.chalk_up':'🖍️','grace.olympic_ult':'💎','grace.instax':'📸',
 # Rose
-'rose.boop':'👃','rose.boo':'👻','rose.dress_up_tiara':'🦄','rose.giggle_storm':'🤣','rose.lamby_hug':'🐑','rose.floor_is_lava':'🌋','rose.teaparty_ult':'🫖','rose.lookout_lamby':'🪃','rose.piggyback_pounce':'🐷','rose.bedtime_story':'📖','rose.lamby_boomerang':'🍪','rose.pillow_fort':'🏰','rose.mecha_ult':'🤖',
+'rose.boop':'👆','rose.boo':'👻','rose.dress_up_tiara':'🦄','rose.giggle_storm':'🤣','rose.lamby_hug':'🐑','rose.floor_is_lava':'🌋','rose.teaparty_ult':'🫖','rose.lookout_lamby':'🪃','rose.piggyback_pounce':'🐷','rose.bedtime_story':'📖','rose.lamby_boomerang':'🍪','rose.pillow_fort':'🏰','rose.mecha_ult':'🤖',
 # Amy
 'amy.kettlebell_swing':'🏋️','amy.red_pen':'🖊️','amy.hot_lunch_tray':'🍽️','amy.goldstar_recess':'⭐','amy.inside_voices':'🤫','amy.pop_quiz':'❓','amy.detention_ult':'🚪','amy.burpee_blitz':'💪','amy.hill_repeats':'⛰️','amy.oat_milk_please':'🥛','amy.false_start':'🏃','amy.negative_split':'⏱️','amy.marathon_ult':'🏅',
 # Deedee

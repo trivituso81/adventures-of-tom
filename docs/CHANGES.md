@@ -1,3 +1,8 @@
+## 2026-10-30: Rose Mode Boop icon is a pointing finger
+- Tom: in Rose Mode the Boop icon should be a pointer finger (a boop is a poke).
+- Was the nose emoji. `tools/build_bp_emoji.py` MAP `rose.boop` is now the pointing-up finger (U+1F446), `data/battle-emoji.js` regenerated (regen of the old map reproduced the old file byte for byte first, so only Boop changed). The Nose Boop move (`rx_boop`) has no picture of its own and is untouched.
+- Cache tag `?v=boop1` on `data/battle-emoji.js` in `index.html`. Checked headless in Rose Mode: Boop tile shows the finger, no console errors; smoke FAILS: []. No spoken lines changed. Not yet seen on Tom's phone.
+
 ## 2026-10-30: RELOAD button on the welcome page
 - Tom: the iPhone home-screen app has no refresh button and sometimes holds on to old files, and he cannot clear the cache from inside the app.
 - New small RELOAD button (refresh icon) on the welcome page, left of ADMIN, same outline style, portrait and landscape (`engine/splash.js` `splashReload`, CSS in `index.html`; the launch row is now a wrapping flex row, landscape stays on one row).
