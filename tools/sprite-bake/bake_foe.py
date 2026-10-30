@@ -53,8 +53,13 @@ MARK = {
     'glitterglue': {'eyes': [(.58, .61), (.70, .61)], 'mouth': (.64, .72)},
     'dodgeball': {'eyes': [(.59, .35), (.72, .39)], 'mouth': (.53, .57)},
     'redpen': {'eyes': [(.49, .27), (.58, .27)], 'mouth': (.53, .33)},
+    'chairman': {'eyes': [(.57, .50), (.70, .50)], 'mouth': (.65, .57)},
+    'peanutgallery': {'eyes': [(.48, .32), (.59, .34)], 'mouth': (.50, .50)},
+    'shusher': {'eyes': [(.80, .41), (.90, .41)], 'mouth': (.88, .55)},
+    'stickysap': {'eyes': [(.56, .47), (.66, .47)], 'mouth': (.62, .59)},
+    'twigspy': {'eyes': [(.63, .43), (.70, .45)], 'mouth': (.66, .52)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
@@ -63,7 +68,8 @@ ap.add_argument('--frames', default=None)
 ap.add_argument('--cells', type=int, default=None)      # stance width in row cells (44 regular, 42 boss: what the old sprites used)
 ap.add_argument('--atlas-w', type=int, default=None)    # stance width in atlas pixels (288 regular, 480 boss)
 ap.add_argument('--colors', type=int, default=24)
-ap.add_argument('--trim-edges', action='store_true')  # drop small slivers of a neighbour frame's effects clipped onto this frame's cut edge
+ap.add_argument('--by-pieces', type=int, default=0)   # frames overlap in x: give each connected piece of ink to the frame holding its centre, instead of cutting at the column
+ap.add_argument('--trim-edges', type=int, nargs='?', const=2, default=0)  # px from a cut edge; above 2 it also uses raw (undilated) pieces  # drop small slivers of a neighbour frame's effects clipped onto this frame's cut edge
 ap.add_argument('--extra-ok', action='store_true')    # more frames on the sheet than needed: keep the first ones
 ap.add_argument('--drop-grey', action='store_true')   # remove small detached grey-white specks (AI artifacts, e.g. beside the Tar Pit Blob)
 args = ap.parse_args()
@@ -127,14 +133,34 @@ if len(big) > n:
 edges = [0] + [(big[i][1] + big[i + 1][0]) // 2 for i in range(n - 1)] + [W]
 cells = {}
 for i, nm in enumerate(frames):
-    sub = A[:cut, edges[i]:edges[i + 1]].copy()
+    if args.by_pieces:
+        # Frames overlap in x (chairman: acorns fly in front of the next frame's throne). Big shapes are cut at the column as usual;
+        # each small loose piece goes to the frame holding its centre, or to the frame on its left when it sits within N px of the cut.
+        lab_all, nl_all = ndi.label(alpha_r > 10)
+        tot_all = (alpha_r > 10).sum()
+        sub = np.zeros_like(A[:cut])
+        colmask = np.zeros(W, bool); colmask[edges[i]:edges[i + 1]] = True
+        for j in range(1, nl_all + 1):
+            mm = lab_all == j
+            sz = mm.sum()
+            if sz > tot_all * .03:
+                sub[mm & colmask[None, :]] = A[:cut][mm & colmask[None, :]]
+            else:
+                cx_ = np.where(mm.any(0))[0].mean()
+                k = max(q for q in range(n) if edges[q] <= cx_)
+                if k > 0 and cx_ - edges[k] < args.by_pieces: k -= 1
+                if k == i: sub[mm] = A[:cut][mm]
+        offx = 0
+    else:
+        sub = A[:cut, edges[i]:edges[i + 1]].copy()
+        offx = edges[i]
     if args.trim_edges:
-        lab_, nl_ = ndi.label(ndi.binary_dilation(sub[:, :, 3] > 10, iterations=2))
+        lab_, nl_ = ndi.label(ndi.binary_dilation(sub[:, :, 3] > 10, iterations=2) if args.trim_edges <= 2 else sub[:, :, 3] > 10)
         tot_ = (sub[:, :, 3] > 10).sum()
         for j in range(1, nl_ + 1):
             mm = lab_ == j
             cols = np.where(mm.any(0))[0]
-            if (cols[0] <= 1 or cols[-1] >= sub.shape[1] - 2) and (mm & (sub[:, :, 3] > 10)).sum() < tot_ * .03:
+            if (cols[0] <= args.trim_edges or cols[-1] >= sub.shape[1] - 1 - args.trim_edges) and (mm & (sub[:, :, 3] > 10)).sum() < tot_ * .03:
                 sub[mm] = 0
     ys_, xs_ = np.where(sub[:, :, 3] > 10)
     box = (xs_.min(), ys_.min(), xs_.max() + 1, ys_.max() + 1)

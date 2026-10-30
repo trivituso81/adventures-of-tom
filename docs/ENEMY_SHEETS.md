@@ -72,6 +72,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | glitterglue | foe-glitterglue-v1.png (Glitter Glue) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | dodgeball | foe-dodgeball-v1.png (Dodgeball Dread) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | redpen | foe-redpen-v1.png (The Red Pen, boss, 6 frames, baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| chairman | foe-chairman-v1.png (Chairman Cheeks, boss, 6 frames; lone stance on a second row ignored; `--trim-edges 60`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| peanutgallery | foe-peanutgallery-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| shusher | foe-shusher-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| stickysap | foe-stickysap-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| twigspy | foe-twigspy-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 

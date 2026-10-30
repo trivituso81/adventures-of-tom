@@ -1,3 +1,10 @@
+## 2026-10-30: Painted Chapter 6 enemies
+- Tom sent ch6_monsters.zip. Installed painted frames for Peanut Gallery, Shusher, Sticky Sap, Twig Spy and the boss Chairman Cheeks (id `chairman`, four attack frames). Second-row lone stances ignored; all face right.
+- `bake_foe.py`: `--trim-edges` now takes an optional pixel width (default 2; above 2 it also uses undilated pieces). `--by-pieces N` also exists but is unused (it did not help here).
+- Known flaw: in the source sheet the Chairman's acorn volley overlaps the next frame, so attack3 has one clipped acorn at its right edge and attack4 has one stray acorn at its left. Small; a corrected sheet would fix it.
+- Not installed: Acorn Agent (image missing from the zip again; id `acornagent`).
+- Test: `tools/foes_test.py` on all five, contact sheets looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Painted Chapter 5 school enemies
 - Tom sent chapter5_monster_sprites.zip. Installed painted frames for Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread and the boss The Red Pen (four attack frames). All five sheets face right, so nothing is mirrored (the F on Pop Quiz reads correctly).
 - Baked with `tools/sprite-bake/bake_foe.py` (Red Pen with `--trim-edges`); script tags added before `data/foes/use.js`. Old pixel rows stay as the fallback.
