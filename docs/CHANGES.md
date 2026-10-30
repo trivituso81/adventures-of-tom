@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Deedee sheet 2 of 2 (source only)
+- Saved `tools/sprite-bake/src/props/deedee-sheet2-of-2.png`. All 15 props match the prompt list. Deedee is complete (30 of 30). Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Deedee sheet 1 of 2 (source only)
 - Saved `tools/sprite-bake/src/props/deedee-sheet1-of-2.png`. All 15 props match the prompt list. Not wired into the game.
 

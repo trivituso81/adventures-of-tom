@@ -13,5 +13,6 @@ Painted prop sheets Tom generated from claude prompts (the Project doc claude/pr
 | amy-sheet2-of-3.png | 4x4, 1254x1254. All 13 cells match the list in order (quiz timer through starting line). Cells 14 to 16 empty as asked | Source only, complete |
 | amy-sheet3-of-3.png | 4x4, 1254x1254. All 13 cells match the list in order (starter pistol through foil blankets). Cells 14 to 16 empty as asked. Amy is complete (39 of 39) | Source only, complete |
 | deedee-sheet1-of-2.png | 4x4, 1254x1254. All 15 cells match the list in order (dish towel through hanging rail). Cell 16 empty as asked | Source only, complete |
+| deedee-sheet2-of-2.png | 4x4, 1254x1254. All 15 cells match the list in order (dinner bell through kiss mark). Cell 16 empty as asked. Deedee is complete (30 of 30) | Source only, complete |
 
 Notes for the future bake: cells carry a white number in the top-left corner (crop off). Edges have light and colored halos from background removal. Cell numbers restart at 1 on every sheet; match by the order in the prompt file.
