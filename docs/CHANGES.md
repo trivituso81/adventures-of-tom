@@ -1042,3 +1042,7 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 
 ## 2026-10-29: Battle Voice Baker
 - New tools/battle-baker/ (build.py, tpl_head.html, tpl_body.js, handscripts.txt, dump.js, merge.js, test.py, README.md). One page, tab per character, preview current clip, make new take, save only ticked lines. No game files changed.
+
+## Justin smaller head (2026-10-30)
+- Tom: Justin's head was proportionally as big as everyone else's, which on a 53 row body made it too big (20.7 rows vs Tom 16). bake_justin.py defaults are now --ratio 0.33 and --ratio-side 0.315 (head about 17 rows, only slightly bigger than Tom's). Rebaked art/chars/justin-ow.webp and data/justin-hires.js; atlas src carries ?v=head2 and the two Justin script tags in index.html carry ?v=head2 so cached copies are not mixed.
+- Body height unchanged (53 rows, still taller than Michael 50 and Tom 42). tools/justin_test.py 0 fails, smoke 0 fails. The welcome screen cast and the Gregori house both use this same sheet.

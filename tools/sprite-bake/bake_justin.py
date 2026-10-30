@@ -25,8 +25,8 @@ KW = 3                          # painted resolution multiple on the overworld
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=int, default=53)       # standing height of the overworld sprite in rows (Tom 43, Michael 50: Justin is the tallest)
 ap.add_argument('--colors', type=int, default=46)
-ap.add_argument('--ratio', type=float, default=0.42)   # hair-to-chin over figure height, front and back (TNB .433, Boppy .40)
-ap.add_argument('--ratio-side', type=float, default=0.40)
+ap.add_argument('--ratio', type=float, default=0.33)   # hair-to-chin over figure height, front and back (Tom .38; Justin is smaller than that on purpose, 2026-10-30: head about 17 rows vs Tom 16 on a 53 row body)
+ap.add_argument('--ratio-side', type=float, default=0.315)
 ap.add_argument('--contact', default=None)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -265,7 +265,7 @@ js = ["'use strict';",
       "// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js).",
       "const JUSTIN_HIRES={",
       "  meta:" + json.dumps(meta) + ",",
-      "  atlas:" + json.dumps({'ow': {'src': 'art/chars/justin-ow.webp', 'k': KW, 'rects': ow_rects}}) + ",",
+      "  atlas:" + json.dumps({'ow': {'src': 'art/chars/justin-ow.webp?v=head2', 'k': KW, 'rects': ow_rects}}) + ",",
       "  ow:{pal:" + json.dumps(ow_pal) + ","]
 for d in ('down', 'up', 'left'):
     for n in ('stand', 'step1', 'step2'):
