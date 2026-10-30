@@ -81,7 +81,7 @@ SCENES.ch13Open=[
   {call:()=>sfx.whoosh&&sfx.whoosh()},
   {fade:'out',time:.8},
   {card:13,time:3.2},
-  {call:()=>{ setChapter(13); setFlag('ch13-open','pending'); ch13Girls(); sfx.travel&&sfx.travel(); ch13Place('subdepot',8,5,'left'); }},
+  {call:()=>{ setChapter(13); setFlag('ch13-open','pending'); ch13Girls(); sfx.travel&&sfx.travel(); ch13Place('subdepot',8,4,'left'); }},
   {join:'tnb',quiet:true},{join:'nara',quiet:true},{call:()=>placeFollowers()},
   {flag:'ch13-open'},
   {wait:.5},
@@ -100,7 +100,7 @@ SCENES.ch13Depot=[
   {talk:'Tom',lines:['...There’s a pretzel in my left pocket.']},
   {give:'pretzels'},
   {spawn:{name:'Nickel',look:'nickel',at:[1,5],dir:'right'}},
-  {walk:'Nickel',to:[[2,5],[3,5],[4,5],[5,5],[6,5]],speed:.28}, {face:'Nickel',dir:'right'},
+  {walk:'Nickel',to:[[2,5],[3,5],[4,5],[4,4],[5,4],[6,4]],speed:.28}, {face:'Nickel',dir:'right'},
   {talk:'Nickel',lines:['Tom! Good. Okay. Before you go in, I have to tell you something, and I have to say it fast, because Penny made me promise.']},
   {talk:'Tom',lines:['Nickel. You’re shaking.']},
   {talk:'Nickel',lines:['A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off.']},
@@ -114,7 +114,7 @@ SCENES.ch13Depot=[
   {talk:'Nickel',lines:['I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run.']},
   {talk:'Amy',lines:['You don’t have to do this.']},
   {talk:'Nickel',lines:['Yes, I do. Somebody gave me a shop. I’d like to be somebody who gave something back.']},
-  {walk:'Nickel',to:[[5,5],[4,5],[3,5],[2,5],[1,5]],speed:.28}, {despawn:'Nickel'},
+  {walk:'Nickel',to:[[5,4],[4,4],[4,5],[3,5],[2,5],[1,5]],speed:.28}, {despawn:'Nickel'},
   {talk:'Tom',lines:['The tracks run east. We follow the rails.']},
   {talk:'Amy',lines:['Stay together. Nobody falls behind. I’ll be counting.']},
   {trace:'ch13-depot'}, {hearts:'tom'},
@@ -332,7 +332,7 @@ pressAction=function() {
     const t=facingTarget(),v=t&&t.value;
     if(t&&t.kind==='object'&&v.kind==='metro') {
       openChoice('Metro stairs',['EMPLOYEES ONLY. The door to the Sub-Rail is just past the turnstile.'],[
-        {label:'GO DOWN',fn:()=>playScene(()=>[{fade:'out',time:.5},{call:()=>{ sfx.travel&&sfx.travel(); ch13Place('subdepot',3,5,'right'); }},{fade:'in',time:.5}],{keep:false})},
+        {label:'GO DOWN',fn:()=>playScene(()=>[{fade:'out',time:.5},{call:()=>{ sfx.travel&&sfx.travel(); ch13Place('subdepot',3,4,'right'); }},{fade:'in',time:.5}],{keep:false})},
         {label:'NOT NOW',fn:()=>{}}]);
       return;
     }
