@@ -941,8 +941,17 @@ SC.dv_rings=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.3-k*.15); if(q<=0||q>
 SC.dv_drops=(s,u)=>{ for(let k=0;k<(s.n||10);k++) { const a=Math.PI*(1.1+k/((s.n||10)-1)*.8),d=ez(u)*(s.r||36),x=s.x+Math.cos(a)*d,y=s.y+Math.sin(a)*d+u*u*30; gfx.globalAlpha=1-u; E(x,y,3,4,s.c||WATER); } };
 if(!sfx.ting) sfx.ting=(d=0)=>{ tone({type:'sine',f0:2637,dur:.6,vol:.16,delay:d}); tone({type:'triangle',f0:5274,dur:.35,vol:.05,delay:d}); };
 if(!sfx.heartbeat) sfx.heartbeat=(d=0)=>{ tone({type:'sine',f0:70,f1:50,dur:.12,vol:.35,delay:d}); tone({type:'sine',f0:62,f1:45,dur:.14,vol:.3,delay:d+.17}); };
-// Beanie Master's toot: a sound effect, never speech. A wobbling low buzz with a breathy tail. Kid-safe silly.
-if(!sfx.toot) sfx.toot=(d=0)=>{ for(let k=0;k<9;k++) tone({type:'sawtooth',f0:96-k*4+(k%2?9:-9),f1:80-k*4,dur:.1,vol:.2,delay:d+k*.075,filter:520,sweep:'lin'}); noise({dur:.8,vol:.1,delay:d,f0:420,f1:160,type:'lowpass'}); tone({type:'square',f0:70,f1:52,dur:.25,vol:.12,delay:d+.66,filter:400}); };
+// Beanie Master's toot: a sound effect, never speech. A real fart: an air "pfft", a fast flutter of low buzzes that sags in pitch,
+// a rumbling body under it, then three little sputters. Loud on purpose (about 3x the old one). Kid-safe silly.
+sfx.toot=(d=0)=>{
+  noise({dur:.16,vol:.85,delay:d,f0:1900,f1:450,type:'bandpass',q:.7});
+  let t=d+.04;
+  for(let k=0;k<26;k++) { const q=k/26,f=150-q*98+((k%3)-1)*11*(1-q*.4);
+    tone({type:'sawtooth',f0:f,f1:f*.84,dur:.07,vol:.8-q*.22,delay:t,filter:950-q*380,q:3,attack:.003}); t+=.028+q*.01; }
+  tone({type:'square',f0:80,f1:44,dur:1.0,vol:.45,delay:d+.03,filter:380,q:2,sweep:'lin'});
+  noise({dur:1.05,vol:.58,delay:d+.03,f0:750,f1:170,type:'lowpass'});
+  [.9,1.0,1.12].forEach((o,i)=>{ tone({type:'sawtooth',f0:86-i*12,f1:56-i*8,dur:.1,vol:.7,delay:d+o,filter:520,q:2}); noise({dur:.09,vol:.34,delay:d+o,f0:650,f1:200,type:'lowpass'}); });
+};
 
 // ---------- Dish-Towel Flick (basic, kept: only the towel is bigger) ----------
 SC.dv_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.globalAlpha=fade(u,.96);
@@ -1161,9 +1170,20 @@ D.rise_and_shine=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
 // ---------- Beanie Master (B4; key beanie_master; same numbers as Spotless Record) ----------
 // Tom's name for it. Deedee walks up, stops, turns around... PFFFT. A big green cloud rolls over the monster; it gags,
 // and its good mood blows right over to her. She covers her mouth: "Oh my!" (the toot is a sound effect, not speech).
-SC.dv_cloud=(s,u)=>{ const ms=s.t*1000,g=ez(u/.35),x0=s.x,y0=s.y,tx=s.tx; for(let k=0;k<22;k++) { const q=cl(g*1.25-k*.02),a=k*2.4,dx=lerp(0,tx-x0,q*(.6+(k%5)*.12))+Math.cos(a)*q*24,dy=Math.sin(a)*q*28-q*10,r=(10+(k%4)*5)*(.3+q*.9);
-    gfx.globalAlpha=(.75)*fade(u,.6); E(x0+dx,y0+dy,r+2,r+2,'#5f9a3a'); E(x0+dx,y0+dy,r,r,k%3?STINK:'#c6ec8a'); }
-  gfx.globalAlpha=fade(u,.6); for(let k=0;k<4;k++) { const ox=lerp(x0,tx,.3+k*.2),oy=y0-30-((s.t*40+k*12)%40); gfx.strokeStyle='#5f9a3a'; gfx.lineWidth=3; gfx.beginPath(); for(let j=0;j<=6;j++) { const yy=oy-j*5,xx=ox+Math.sin(j*1.4+s.t*8)*4; if(j) gfx.lineTo(xx,yy); else gfx.moveTo(xx,yy); } gfx.stroke(); } };
+SC.dv_cloud=(s,u)=>{ const x0=s.x,y0=s.y,tx=s.tx,g=ez(cl(u/.4));
+  // outlined, shaded puffs roll out from her to the monster, like the painted effects in the newer moves
+  for(let k=0;k<15;k++) { const q=cl(g*1.3-k*.04); if(q<=0) continue; const row=(k%5)-2,a=k*2.4,
+      x=x0+(tx-x0)*q*(.55+(k%4)*.14)+Math.cos(a)*q*18,y=y0+row*9-q*14+Math.sin(a+u*4)*5*q,r=(8+(k%4)*4)*(.35+q)*(1+Math.sin(u*9+k)*.05);
+    gfx.globalAlpha=.96*fade(u,.55); EO(x,y,r,r*.9,'#7fbf4a'); E(x+r*.18,y+r*.22,r*.72,r*.6,'#5f9a3a'); E(x-r*.3,y-r*.34,r*.38,r*.28,'#d6f59a'); }
+  gfx.globalAlpha=fade(u,.6); for(let k=0;k<4;k++) { const ox=lerp(x0,tx,.3+k*.2),oy=y0-30-((s.t*40+k*12)%40); gfx.lineCap='round';
+    for(const [w,c] of [[6,OUT],[3,'#c6ec8a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); for(let j=0;j<=6;j++) { const yy=oy-j*5,xx=ox+Math.sin(j*1.4+s.t*8)*4; if(j) gfx.lineTo(xx,yy); else gfx.moveTo(xx,yy); } gfx.stroke(); } }
+  if(u>.3) { const q=cl((u-.3)/.2); gfx.globalAlpha=q*(1-u)*.55; E(tx,y0,30+q*8,36,'#6fd13a'); gfx.globalAlpha=q*(1-u)*.35; E(tx,y0-4,20,26,'#c6ec8a'); }
+  gfx.globalAlpha=1; };
+// The blast at her back: a pop of air, two shock rings and jagged speed lines.
+SC.dv_toot=(s,u)=>{ const x=s.x,y=s.y;
+  for(let k=0;k<2;k++) { const q=cl(u*1.6-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.9; const rx=8+q*34,ry=6+q*26; ring(x,y,rx,ry,9-q*5,OUT); ring(x,y,rx,ry,5-q*3,k?'#ffffff':'#a8e868'); }
+  gfx.globalAlpha=fade(u,.5); for(let k=0;k<9;k++) { const a=Math.PI+(k-4)*.34,d0=8+ez(u)*14,d1=d0+10+ez(u)*30; LnO(x+Math.cos(a)*d0,y+Math.sin(a)*d0*.7,x+Math.cos(a)*d1,y+Math.sin(a)*d1*.7,3,k%2?'#d6f59a':'#7fbf4a'); }
+  const p=ez(cl(u/.5)); gfx.globalAlpha=1-u*u; EO(x-6,y,10+p*14,9+p*11,'#9ed86a'); E(x-10,y-4,5+p*6,4+p*4,'#d6f59a'); gfx.globalAlpha=1; };
 SC.dv_buff=(s,u)=>{ const st=s.st,ms=s.t*1000; let x=s.fx,y=s.fy; if(ms>s.go&&st&&st.x!=null) { const q=ez((ms-s.go)/600); x=lerp(s.fx,st.x,q); y=lerp(s.fy,st.y-DH()*.6,q)-Math.sin(q*Math.PI)*40; } gfx.globalAlpha=fade(u,.9);
   EO(x,y,9,9,GOLD); for(let k=0;k<6;k++) { const a=s.t*5+k*Math.PI/3; Ln(x+Math.cos(a)*12,y+Math.sin(a)*12,x+Math.cos(a)*17,y+Math.sin(a)*17,2,GOLD); } if(ms>s.go+600) bigWord('MINE NOW',x,y-26,GOLD,1); };
 D.beanie_master=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),me=ST.unit(m);
@@ -1171,7 +1191,7 @@ D.beanie_master=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks up to have a word with '+f.name+'.'); }],
     [900,()=>{ setMessage('She stops. She turns around. Uh oh. There were beans at lunch.'); scene('dv_text',.9,{st,txt:'...',c:CREAM,sc:3}); }],
-    [1900,()=>{ sfx.toot(); scene('dv_cloud',2.4,{x:p.x-22,y:p.y-DH()*.32,tx:F.x}); scene('dv_text',1.2,{x:p.x+10,y:p.y-DH()-40,txt:'PFFFT!',c:STINK,sc:4}); setMessage('PFFFT! A truly heroic toot.'); }],
+    [1900,()=>{ sfx.toot(); hopOf(m); scene('dv_toot',.8,{x:p.x-22,y:p.y-DH()*.32}); scene('dv_cloud',2.4,{x:p.x-22,y:p.y-DH()*.32,tx:F.x}); scene('dv_big',1.2,{x:p.x+10,y:p.y-DH()-40,txt:'PFFFT!',c:STINK,sc:4,rot:-.08}); setMessage('PFFFT! A truly heroic toot.'); }],
     ['hf',2250],
     [2250,()=>{ sfx.bonk(); ST.jolt(f,.5); landHit(100); ST.draw((s,u)=>lift(f,0,Math.sin(u*30)*.12*(1-u),Math.sin(u*26)*6*(1-u)),1.1); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'GAG!',c:STINK,sc:4}); scene('dv_buff',2.0,{st,fx:F.x+F.w*.3,fy:F.top-8,go:400}); }],
     [2700,()=>{ say(m.id,'beanie_master'); scene('dv_text',1.3,{st,txt:'OH MY!',c:ROSE,sc:3}); setMessage('Deedee covers her mouth. Oh my!'); }],
@@ -1901,6 +1921,6 @@ D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(
 // ---------- Beanie Master: opens with "I am the Beanie Master!" before the cloud ----------
 const bm=D.beanie_master;
 D.beanie_master=E2=>{ const {m}=E2,play=ST.play;
-  ST.play=(e,list)=>{ ST.play=play; return play(e,[...list,[250,()=>{ say(m.id,'beanie_master_open'); setMessage('"I am the Beanie Master!" says Deedee, with great dignity.'); }]]); };
+  ST.play=(e,list)=>{ ST.play=play; return play(e,[...list,[250,()=>{ say(m.id,'beanie_master_open',0,null,{text:'I am the Beanie Master!',len:85320,from:0,to:2.85}); setMessage('"I am the Beanie Master!" says Deedee, with great dignity.'); }]]); };
   try { return bm(E2); } finally { ST.play=play; } };
 })();

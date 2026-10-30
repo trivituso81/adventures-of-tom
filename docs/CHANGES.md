@@ -1,3 +1,9 @@
+## 2026-10-30: Beanie Master: louder fart, painted puffs, no repeated line
+
+- Deedee's Beanie Master (`engine/deedee-moves.js`): `sfx.toot` is now a real fart (air "pfft", fast fluttering buzz that sags in pitch, rumbling body, three sputters). Measured peak is about 5x the old toot and above the laser, with no clipping.
+- The green cloud (`SC.dv_cloud`) now uses outlined, shaded, highlighted puffs and outlined stink lines, plus a new blast at her back (`SC.dv_toot`: shock rings, jagged lines, a pop) and an outlined "PFFFT!". Same timing, hit and numbers.
+- The repeat: the baked "I am the Beanie Master!" clip is 3.97 s and holds a stray third burst (3.06 s on) that sounded like she started again, overlapping "Oh my!". The move now plays only the first 2.85 s of that clip (the slice applies only while the clip length is 85320; a re-bake plays whole). The clip itself is untouched; a re-bake would remove the stray burst for good.
+
 ## 2026-10-30: Sourdough Snob uses the painted loaf
 
 - The whole boule Tom carries and lifts for "ADMIRE THE CRUST" (`loaf()` in the Sourdough Snob section of `engine/tom-moves.js`) was still the code-drawn loaf. It now draws `art/props/tom/sourdough_boule.webp` (same art as Crumb Shot); the drawn loaf stays as the fallback. The slice and the easel chart were already painted. Script version `?v=tom10`. Tests: kit_test tom sourdough_snob (painted boule hits 327), smoke, frames looked at.
