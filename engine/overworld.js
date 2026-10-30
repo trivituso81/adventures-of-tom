@@ -338,13 +338,13 @@ function updateCamera(dt) {
   let ty;
   if(mh>=H) {
     ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H);
-    // Outdoor maps and square painted rooms (rooms of the older fit keep their own). Near the top or bottom edge the painting is flush with the screen, which would put
-    // Tom's tile under the title bar or the controls. Scroll past the map edge just far enough to keep his tile inside the safe band;
-    // that strip, only ever behind the title bar and controls, shows the soft backdrop (engine/draw.js plateBackdrop) and only
-    // while he is next to an edge.
+    // Square painted rooms only (rooms of the older fit keep their own): near the top or bottom edge the painting would be flush with the
+    // screen and put Tom's tile under the title bar or the controls, so scroll past the edge just far enough to keep his tile in the safe
+    // band; that strip shows the soft backdrop (engine/draw.js plateBackdrop). Outdoor maps do NOT do this (Tom, 2026-10-30): the camera
+    // stops flush at the edge and Tom keeps walking, so he can end up behind the controls on the last rows of the map.
     const lo=(p.y+1)*T-(H-safeBottom),hi=p.y*T-safeTop;
     const sqRoom=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
-    if((currentMap.outside||sqRoom)&&lo<=hi) ty=clamp(ty,lo,hi);
+    if(sqRoom&&lo<=hi) ty=clamp(ty,lo,hi);
   } else ty=mh<=available
       ? -(safeTop+(available-mh)/2)
       : clamp((p.y+.5)*T-available/2,0,mh-available)-safeTop;

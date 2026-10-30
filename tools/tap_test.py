@@ -15,8 +15,13 @@ MAPS=['town','row','hollow','jpark','blvd','tomhouse','bakery','library','greenh
 JS='''(id)=>{ __LE.go(id); const m=currentMap; return new Promise(res=>setTimeout(()=>{
   const r=canvas.getBoundingClientRect(); let t=null;
   // A tile under the title bar or the on-screen controls cannot be tapped (the painting now runs under them), so pick targets inside the safe band.
-  const inBand=(y)=>{ const sy=(y+.5)*T-Math.round(camera.y); return sy>=safeTop&&sy<=H-safeBottom; };
-  for(let d=2;d<=4&&!t;d++) for(const [dx,dy] of [[d,0],[-d,0],[0,d],[0,-d]]){ const x=player.x+dx,y=player.y+dy; if(within(m,x,y)&&walkable(m,x,y)&&canOccupy(m,x,y,player)&&!m.portals.has(key(x,y))&&inBand(y)){t={x,y};break;} }
+  const inBand=(y)=>{ const sy=(y+.5)*T-Math.round(camera.y); return sy>=safeTop+T&&sy<=H-safeBottom-T; };
+  // The tap must land on the canvas itself, not on a HUD overlay (hint box, title bar, controls) that the flush camera can put over a tile.
+  const clearAt=(x,y)=>{ const sx=(x+.5)*T-Math.round(camera.x), sy=(y+.5)*T-Math.round(camera.y); let cx,cy;
+    if(layout.rotated){ const lw=canvas.offsetWidth,lh=canvas.offsetHeight; const lx=sx*lw/W, ly=sy*lh/H; cy=r.top+r.height/2+(lx-lw/2); cx=r.left+r.width/2-(ly-lh/2); }
+    else { cx=r.left+sx*r.width/W; cy=r.top+sy*r.height/H; }
+    const e=document.elementFromPoint(cx,cy); return e===canvas; };
+  for(let d=2;d<=4&&!t;d++) for(const [dx,dy] of [[d,0],[-d,0],[0,d],[0,-d]]){ const x=player.x+dx,y=player.y+dy; if(within(m,x,y)&&walkable(m,x,y)&&canOccupy(m,x,y,player)&&!m.portals.has(key(x,y))&&inBand(y)&&clearAt(x,y)&&!twActorAt((x+.5)*T,(y+.5)*T)){t={x,y};break;} }
   if(!t) return res(null);
   const sx=(t.x+.5)*T-Math.round(camera.x), sy=(t.y+.5)*T-Math.round(camera.y);   // logical px (W x H), not backing-store px
   let cx,cy;
@@ -34,6 +39,7 @@ def run(pw,name,vp,dsf,rot):
     if rot: pg.evaluate("()=>toggleLayout()")
     bad=[]
     for id in MAPS:
+        pg.evaluate("()=>{ try{ if(typeof dialog!=='undefined'&&dialog) dialog.active=false; }catch(e){} }")
         i=pg.evaluate(JS,id)
         if not i: print(name,id,'no tile'); continue
         pg.wait_for_timeout(600)   # plate decode + k switch

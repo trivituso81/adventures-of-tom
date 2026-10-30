@@ -1,3 +1,9 @@
+## 2026-10-30: Outdoor maps stop flush at the edge (no soft strip at the bottom)
+- Tom (Downtown LA screenshot): the dark strip under the painting at the bottom looked like dead space; the screen should stop panning when the area's edge reaches the screen edge and Tom should keep walking.
+- Outdoor maps no longer scroll past the top or bottom edge (the safe-band scroll added earlier today is now for square painted rooms only; that rule came from the rooms session and is untouched). The camera is flush on all four sides. Cost: on the last rows next to the top or bottom edge Tom can walk behind the title bar or the controls; an exit on the bottom row (Downtown LA to Jefferson Park) is used from behind the A button. The real fix is painting margin (docs/MAP_SIZES.md).
+- The soft backdrop now only shows on the 7 maps at the zoom cap and in square rooms. In portrait the town and Downtown LA are exactly one screen tall at 1.15x, so they do not pan vertically at all.
+- Test: `tools/camera_clamp_test.py` now asserts the screen is fully covered at every corner and edge of every uncapped outdoor map (8 phone sizes, 0 fails). Cache tag `cover3` on `engine/overworld.js`. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Battle prop sheets, Boppy 31-item sheet (source only)
 - Saved `tools/sprite-bake/src/props/boppy-sheet1-items1-31.png`. Items 1 to 25 match the prompt list. Item 26 (ghost pepper) has the wrong color, items 27 to 31 drifted into invented props (fire alarm, cardigan, starter pistol, finish arch, race bib are missing). Redo list noted. Not wired into the game.
 

@@ -7,8 +7,8 @@ The phone shows a canvas of up to 440 x 956 (portrait) or 956 x 440 (landscape) 
 
 - **Zoom to cover.** `outdoorCover` (engine/overworld.js) zooms an outdoor painted map just enough that the painting covers the whole screen in the current layout (never below 1.0, never above `OUTDOOR_COVER_CAP` = 2.25). One painting serves both orientations; the zoom differs per layout.
 - **Edges flush.** The camera stops at the map edges sideways, so the painting meets the screen edge. Mid-map the whole screen is painting.
-- **Safe band.** Next to the top or bottom edge the camera scrolls a little past the map, only into the title bar and controls bands, so Tom's tile is never under the controls (top 82 px, bottom 170 px in portrait; 57 and 106 in landscape). That strip shows `plateBackdrop` (engine/draw.js): the painting shrunk, stretched and darkened.
-- **Cap.** A map that would need more than 2.25x keeps 2.25x and shows the same soft backdrop around the painting on some phones.
+- **Edges stop flush.** The camera stops at every edge (sides, top and bottom): the painting meets the screen on all four sides and Tom keeps walking when it stops panning (Tom's call, 2026-10-30). So on the last rows next to the top edge (title bar, top 82 px in portrait, 57 in landscape) or the bottom edge (controls, bottom 170 px in portrait, 106 in landscape) he can end up partly behind them. Square painted rooms differ: they scroll a little past the edge to keep him clear (docs/ROOM_PAINTINGS.md).
+- **Cap.** A map that would need more than 2.25x keeps 2.25x and shows a soft backdrop (`plateBackdrop` in engine/draw.js: the painting shrunk, stretched and darkened) around the painting on some phones.
 - Rooms and houses (maps with `outside: false`) are not touched; they keep their own fit.
 - `python3 tools/camera_clamp_test.py` checks all of this at eight phone sizes and lists the capped maps.
 
@@ -32,7 +32,7 @@ The size that needs no zoom at all, and so keeps the world at its drawn scale on
 ## Painting rules for any new or repainted outdoor map
 
 - At least 30 x 30 tiles if the map should look the same in both layouts with no zoom (smaller is fine, the engine zooms up to 2.25x).
-- Keep the walkable area at least 6 tiles in from the bottom edge and 3 tiles in from the top edge (at zoom 1), with scenery (trees, water, walls) beyond it. That art sits under the controls and the title bar, so nothing you can walk on is hidden.
+- Keep the walkable area at least 6 tiles in from the bottom edge and 3 tiles in from the top edge (at zoom 1), with scenery (trees, water, walls) beyond it. That art sits under the controls and the title bar, so nothing you can walk on is hidden. Exits on the bottom or top row are the ones that suffer today: Tom walks behind the controls to use them.
 - Sideways the painting meets the screen edge, so no margin is needed there.
 
 ## Zoom the engine applies to the other outdoor maps (largest phone)

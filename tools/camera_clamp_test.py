@@ -1,9 +1,9 @@
 # Camera clamp: on every map, with Tom at each corner and edge, the visible canvas must never show space outside the map
 # (in any axis where the map is at least as big as the canvas). Maps smaller than the canvas on an axis stay centred.
-# Outdoor painted maps are zoomed to cover the screen (engine/overworld.js outdoorCover): sideways they never show space past an edge, and
-# mid-map the whole screen is painting. Next to the top or bottom edge the camera may scroll past the edge, but only into the title bar and
-# controls bands and only to keep Tom's tile inside the safe band. Maps that hit the zoom cap are listed at the end: they need a bigger
-# painting (docs/MAP_SIZES.md).
+# Outdoor painted maps are zoomed to cover the screen (engine/overworld.js outdoorCover) and the camera stops flush at every edge: no space
+# past the map on any side, Tom keeps walking when the painting stops panning (he can end up behind the controls on the last rows). Square
+# painted rooms instead scroll a little past the top or bottom edge, only into the title bar and controls bands, to keep Tom's tile in the
+# safe band. Maps that hit the zoom cap are listed at the end: they need a bigger painting (docs/MAP_SIZES.md).
 # Usage: python3 tools/camera_clamp_test.py
 import threading, http.server, socketserver, functools, os
 from playwright.sync_api import sync_playwright
@@ -46,15 +46,14 @@ with sync_playwright() as pw:
             if r['cover']:
                 if r['scale']>=r['cap']-1e-6: capped.add(r['id'])
                 else:
-                    # Painted outdoor map zoomed to cover: sideways it never shows space past an edge; mid-map the whole screen is painting.
-                    check(f"{label} {r['id']} covers sideways at ({r['px']},{r['py']}): cam {r['cx']:.1f} view {r['W']} map {r['mw']}",r['cx']>=-0.01 and r['cx']+r['W']<=r['mw']+0.01)
-                    if r['mid']: check(f"{label} {r['id']} covers screen mid-map: cam y {r['cy']:.1f} view {r['H']} map {r['mh']}",r['cy']>=-0.01 and r['cy']+r['H']<=r['mh']+0.01)
+                    # Painted outdoor map zoomed to cover: the whole screen is painting at every position, corners and edges included.
+                    check(f"{label} {r['id']} covers screen at ({r['px']},{r['py']}): cam {r['cx']:.1f},{r['cy']:.1f} view {r['W']}x{r['H']} map {r['mw']}x{r['mh']}",r['cx']>=-0.01 and r['cx']+r['W']<=r['mw']+0.01 and r['cy']>=-0.01 and r['cy']+r['H']<=r['mh']+0.01)
             if r['mw']>=r['W']:
                 ok=r['cx']>=-0.01 and r['cx']+r['W']<=r['mw']+0.01
                 check(f"{label} {r['id']} x at ({r['px']},{r['py']}): cam {r['cx']:.1f} W {r['W']} mw {r['mw']}",ok)
             if r['mh']>=r['H']:
-                if r['outside'] or r['sq']:
-                    # Outdoor maps and square painted rooms: space past the top or bottom edge may only fall inside the title bar and controls bands, and only to keep
+                if r['sq']:
+                    # Square painted rooms (outdoor maps stop flush, checked below): space past the top or bottom edge may only fall inside the title bar and controls bands, and only to keep
                     # Tom's tile inside the safe band (the painting must never put him under the controls).
                     ok=r['cy']>=-r['sT']-0.01 and r['cy']+r['H']<=r['mh']+r['sB']+0.01
                     check(f"{label} {r['id']} y within HUD bands at ({r['px']},{r['py']}): cam {r['cy']:.1f} H {r['H']} mh {r['mh']}",ok)
