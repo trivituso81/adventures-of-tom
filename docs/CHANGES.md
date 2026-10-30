@@ -38,6 +38,11 @@
 - Twin Lenses frames 5 and 6 touch (the beam crosses into the next frame), so it uses `--cuts`. Paperweight and Curator have no clean gap above their second-row stance, so `--cut-y` was set by eye (389 and 383).
 - Known small flaw: Paperweight attack1 has a faint dark sliver of shadow at its bottom left edge.
 - Tests: `tools/foes_test.py twinlens,pausesprite,paperweight,curator` 0 fails; `tools/smoke.py` FAILS: [].
+## 2026-10-30: Square painted rooms, batch 4 (Backlot Wardrobe, The Starlite, Board Room, Angel City Cab Co.)
+- Tom sent rooms4.zip (16_Backlot_Wardrobe, 17_The_Starlite, 18_Board_Room, 19_Angel_City_Cab_Co; the guide says Tom's House is excluded). Matched to ids `wardrobe`, `cinema` (art file `art/starlite.webp`), `boards`, `lacab`. All 1254 px squares, full bleed, no people or text, standard gate gap (x6 to x9). Installed 16 x 16, `square:true`, actors 1.98 (x1.2 boost).
+- Residents stand on open floor: Marguerite (8,6), Dolores (9,9), Dash (8,6), Sol (6,6). Story spots still valid: lacab (7,6) for chapters 16 and 17, the girls at the cab stand at (3,5) and (4,6).
+- Starlite: the aisle (x7 to x8) runs from the stage to the lobby; the seat blocks are painted only. Dropped (unreachable): Starlite's ticket desk, Board Room's cactus and shelf unit. Their lines are gone.
+- Tests: `rooms_test.py` on all four 0 fails; old per-room tests (wardrobe, starlite, boards, lacab) deleted; tap_test covers them; smoke, camera_clamp, ch13 0 fails.
 
 ## 2026-10-30: Battle prop sheets, Amy sheet 1 of 3 (source only)
 - Saved `tools/sprite-bake/src/props/amy-sheet1-of-3.png`. All 13 props match the prompt list. Not wired into the game.

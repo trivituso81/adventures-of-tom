@@ -990,122 +990,148 @@ const LA_ROOMS=[
   // Backlot Wardrobe, painted plate (art/wardrobe.webp, engine/plate.js), 12 x 10 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
   // Western rack and hat shelf back left, the call sheet and the space rack across the back, the continuity desk down the left side,
   // the prop plant and trunks down the right. The two tiles of purple carpet between the gate posts (x5 and x6, rows 8 and 9) are the way out.
-  {id:'wardrobe',w:12,h:10,
+  {id:'wardrobe',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#cfc3d6',alt:'#dcd2e2',wall:'#6a4f7a',trim:'#e3d6e8',pattern:'tile',rug:'#8a6aa0'},
     rug:[3,5,6,2],
+
+    // Square painted plate (art/wardrobe.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Western rack and hat shelf back left, call sheet and the space rack across the back, the continuity desk down the left, prop plant and trunks right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '############',
-      '############',
-      '############',
-      '#####.######',
-      '####.....###',
-      '#####...####',
-      '####....####',
-      '##........##',
-      '##..#..#..##',
-      '#####..#####'],
-    doors:[[5,9]],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '#####......#####',
+      '######......####',
+      '#####.......####',
+      '#####.......####',
+      '####........####',
+      '##..........####',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Marguerite',x:6,y:5,look:'marguerite',lines:[
+      {name:'Marguerite',x:8,y:6,look:'marguerite',lines:[
         'Backlot Wardrobe. If it was worn on screen, it lived here first.',
         "You're Tom? TNB's Tom! He found a shoe for us once. A lead actor's shoe. Four minutes before the take.",
         'We still talk about the shoe. Tell him there\'s always a rack here with his name on it.']}],
     objects:[
-      ['rack',1,1,4,3,'Rack A: Westerns','A shelf of cowboy hats, a rack of fringe, and a lasso. One cowboy. The cowboy is very tired.'],
-      ['rack',8,1,3,3,'Rack B: Space','Silver jumpsuits in every size. Even yours.'],
-      ['desk',0,4,4,3,'Continuity desk','Polaroids of every actor in every scene. Scene 12, the scarf was on the LEFT.'],
-      ['photo',6,2,2,2,'Call sheet','Crew call at 8. Western at 10:30, space at 1, horse stand-in at 3. The horse has a stand-in. The stand-in has opinions.'],
-      ['pot',9,5,2,2,'Prop plant','It\'s fake. It\'s been in four movies. It has an agent.'],
-      ['roadcase',10,7,2,2,'Hat case','A purple hat with gold buckles sits on a road case. It has been in more movies than Tom.']]},
+      ['rack',3,1,5,4,'Rack A: Westerns','A shelf of cowboy hats, a rack of fringe, and a lasso. One cowboy. The cowboy is very tired.'],
+      ['rack',11,2,5,4,'Rack B: Space','Silver jumpsuits in every size. Even yours.'],
+      ['desk',0,5,5,5,'Continuity desk','Polaroids of every actor in every scene. Scene 12, the scarf was on the LEFT.'],
+      ['photo',8,2,3,3,'Call sheet','Crew call at 8. Western at 10:30, space at 1, horse stand-in at 3. The horse has a stand-in. The stand-in has opinions.'],
+      ['pot',12,5,3,4,'Prop plant','It\'s fake. It\'s been in four movies. It has an agent.'],
+      ['roadcase',12,9,4,3,'Hat case','A purple hat with gold buckles sits on a road case. It has been in more movies than Tom.']]},
   // The Starlite, painted plate (art/starlite.webp, engine/plate.js), 13 x 11 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
   // Stage and screen across the top, two blocks of seats with the center aisle (x6) between them, the concession bar down the right,
   // and the front strip (row 7) across the seat rows. The ticket desk and fern are bottom left; the velvet-rope nook (8,8) fronts the right fern.
   // The two tiles on the red-carpet stairs (x5 and x6, rows 8 to 10) are the way out.
-  {id:'cinema',w:13,h:11,
+  {id:'cinema',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#7a3a3a',alt:'#843f3f',wall:'#2c2c33',trim:'#a8453a',pattern:'night',rug:'#a8453a'},
     rug:[4,8,5,2],
+
+    // Square painted plate (art/cinema.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Screen and curtains across the top, two blocks of red seats with the aisle (x7 to x8) between them, ticket booth and lobby fern left, concessions right, velvet rope lower right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '#############',
-      '#############',
-      '#############',
-      '#############',
-      '######.######',
-      '######.######',
-      '######.######',
-      '#.........###',
-      '#####.....###',
-      '#####..######',
-      '#####..######'],
+      '################',
+      '################',
+      '################',
+      '################',
+      '#######..#######',
+      '#######..#######',
+      '#######..#######',
+      '#######..#######',
+      '######.......###',
+      '######.....#####',
+      '######.....#####',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Dolores',x:3,y:7,look:'dolores',lines:[
+      {name:'Dolores',x:9,y:9,look:'dolores',lines:[
         'Welcome to the Starlite. Built in 1931. The popcorn is newer. A little.',
         'I have run the projector here for forty years. I\'ve seen every movie twice.',
         'Tonight it\'s a horror double feature. Your boyfriend would love it. You\'d watch it through your fingers.']}],
     objects:[
-      ['screen',4,2,5,2,'The big screen','Velvet curtains, gold trim, and one stubborn stain from 1987.'],
-      ['couch',1,5,5,2,'Row F','The good seats. Somebody already put a coat on three of them.'],
-      ['couch',7,4,4,3,'Row G','A sticky floor under it. A historic stickiness. Someone left a plaid blanket behind.'],
-      ['counter',10,5,3,4,'Concessions','Popcorn and hot dogs a quarter, candy and soda less. The prices are from 1931. The hot dog is not.',{variant:'bread'}],
-      ['desk',0,8,2,2,'Ticket desk','A stack of old programs. The top one says NIGHT OF THE GIANT LOBSTER, ONE SHOW ONLY. The lobster is the reason.'],
-      ['pot',2,8,2,2,'Lobby fern','It has been in the lobby since the talkies. It has seen every movie too, but from the side.'],
-      ['pot',8,9,2,2,'Velvet rope','A rope, a brass post and a fern. Nobody is allowed past it. Nobody can say what is past it.']]},
-  {id:'boards',w:11,h:9,
+      ['screen',5,1,6,3,'The big screen','Velvet curtains, gold trim, and one stubborn stain from 1987.'],
+      ['couch',1,5,6,3,'Row F','The good seats. Somebody already put a coat on three of them.'],
+      ['couch',9,5,5,3,'Row G','A sticky floor under it. A historic stickiness. Someone left a plaid blanket behind.'],
+      ['counter',13,5,3,6,'Concessions','Popcorn and hot dogs a quarter, candy and soda less. The prices are from 1931. The hot dog is not.',{variant:'bread'}],
+      ['pot',3,8,3,4,'Lobby fern','It has been in the lobby since the talkies. It has seen every movie too, but from the side.'],
+      ['pot',11,9,4,3,'Velvet rope','A rope, a brass post and a fern. Nobody is allowed past it. Nobody can say what is past it.']]},
+  {id:'boards',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#b6c3c8',alt:'#c6d1d4',wall:'#2f4e6a',trim:'#d6e6ec',pattern:'wood',rug:'#e2793a'},
     rug:[3,5,5,2],
-    // Painted plate (art/boards.webp, engine/plate.js), area 44. The mask is the walk map: '#' blocks, '.' walks.
-    // Deck wall and the cat painting across the top, the grip tape counter (row 3), wheel wall and bench down the left,
-    // the board and wheel rack and the helmeted cactus on the right. The doormat (x 4 to 6, rows 7 and 8) is the way out.
+
+    // Square painted plate (art/boards.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Deck wall and the grip tape counter across the back, wheel wall and bench down the left, the longboard rack right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '###########',
-      '###########',
-      '###########',
-      '########.##',
-      '##........#',
-      '##.....####',
-      '##.....####',
-      '####...####',
-      '####...####'],
-    doors:[[4,8],[6,8]],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '###.############',
+      '##..........####',
+      '###.........####',
+      '###.........####',
+      '###.........####',
+      '###.........####',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Dash',x:3,y:6,look:'dash',roam:0,lines:[
+      {name:'Dash',x:8,y:6,look:'dash',roam:0,lines:[
         'Board Room. We sell boards. We also sit on them.',
         'TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend.',
         'If you see him, tell him the wheels he ordered came in. The green ones.']}],
     objects:[
-      ['counter',2,3,6,1,'Grip tape counter','Stickers, wax, wheels, and a jar labeled LOST TEETH. Don\'t ask. Behind it, the cat deck on the wall is the most expensive one.',{variant:'letters'}],
-      ['shelf',0,2,2,3,'Wheel wall','Wheels on pegs, sorted by color, then hardness, then mood. A black shirt hangs on the end.'],
-      ['table',0,5,2,2,'Bench','A bench by the rug for people waiting while Dash looks for the right bolt. Nobody has seen the right bolt.'],
-      ['shelf',7,5,4,2,'Longboard rack','Decks on edge, wheels in bins below, sorted by color. One bin is all green. Someone wrote TNB on the label.'],
-      ['pot',9,2,2,2,'Cactus','It wears a tiny helmet. Safety first.']]},
-  {id:'lacab',w:11,h:9,
+      ['counter',4,3,6,3,'Grip tape counter','Stickers, wax, wheels, and a jar labeled LOST TEETH. Don\'t ask. Behind it, the cat deck on the wall is the most expensive one.',{variant:'letters'}],
+      ['shelf',0,2,3,4,'Wheel wall','Wheels on pegs, sorted by color, then hardness, then mood. A black shirt hangs on the end.'],
+      ['table',0,7,3,4,'Bench','A bench by the rug for people waiting while Dash looks for the right bolt. Nobody has seen the right bolt.'],
+      ['shelf',12,4,4,7,'Longboard rack','Decks on edge, wheels in bins below, sorted by color. One bin is all green. Someone wrote TNB on the label.']]},
+  {id:'lacab',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#c9c3b4',alt:'#d7d1c2',wall:'#a99a6e',trim:'#efe0b0',pattern:'check',rug:'#d9a43a'},
     rug:[3,5,5,2],
-    // Painted plate (art/lacab.webp, engine/plate.js), area 45. The mask is the walk map: '#' blocks, '.' walks.
-    // The dispatch desk (row 3), red sofa and magazine table on the left, water cooler, lost and found and green sofa on the right.
-    // The doormat (x 4 to 6, rows 7 and 8) between the gate posts is the way out.
+
+    // Square painted plate (art/lacab.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Dispatch desk across the back, red sofa and magazine table left, water cooler, lost and found and green sofa right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '###########',
-      '###########',
-      '###########',
-      '###########',
-      '##.......##',
-      '###......##',
-      '###......##',
-      '####...####',
-      '####...####'],
-    doors:[[4,8],[6,8]],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '###.########.###',
+      '###..........###',
+      '#####........###',
+      '#####........###',
+      '####.........###',
+      '###..........###',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Sol',x:5,y:5,look:'sol',driver:true,lines:[
+      {name:'Sol',x:6,y:6,look:'sol',driver:true,lines:[
         "Angel City Cab Co. I'm Sol. Sal's cousin. Also one cab.",
         'Cab eight. Sal has cab seven. We don\'t talk about what happened to the other six.',
         'I go to the airport, the airport, and sometimes the airport.']}],
     objects:[
-      ['counter',3,3,5,1,'Dispatch desk','A radio crackles: "Cab eight, there\'s traffic everywhere." Sol nods. There\'s always traffic everywhere. Above it, a map of LA covered in pins, and a key board with eight hooks and one key.',{variant:'letters'}],
-      ['pot',8,2,1,2,'Water cooler','Full. Nobody has ever seen it get refilled. Sol says that is how you know it works.'],
-      ['desk',9,3,2,2,'Lost and found','Sunglasses, sunglasses, sunglasses, and one Oscar. It\'s probably fake. Probably. Above it, the Driver of the month: Sol, in sunglasses, at sunset. Professionally done.'],
-      ['table',9,5,2,2,'Green sofa','Two green leather seats and a side table of magazines. The waiting room has never had more than one person waiting.'],
-      ['table',0,3,2,2,'Red leather sofa','Red leather, worn smooth by every driver who ever said five more minutes.'],
-      ['table',1,5,2,2,'Magazine table','Magazines from three different decades. The newest cover is a hurricane. The palm beside it is waiting for a cab to the beach.']]},
+      ['counter',4,3,8,3,'Dispatch desk','A radio crackles: "Cab eight, there\'s traffic everywhere." Sol nods. There\'s always traffic everywhere. Above it, a map of LA covered in pins, and a key board with eight hooks and one key.',{variant:'letters'}],
+      ['pot',13,2,1,4,'Water cooler','Full. Nobody has ever seen it get refilled. Sol says that is how you know it works.'],
+      ['desk',13,5,3,3,'Lost and found','Sunglasses, sunglasses, sunglasses, and one Oscar. It\'s probably fake. Probably. Above it, the Driver of the month: Sol, in sunglasses, at sunset. Professionally done.'],
+      ['table',13,8,3,4,'Green sofa','Two green leather seats and a side table of magazines. The waiting room has never had more than one person waiting.'],
+      ['table',0,5,3,3,'Red leather sofa','Red leather, worn smooth by every driver who ever said five more minutes.'],
+      ['table',1,7,4,3,'Magazine table','Magazines from three different decades. The newest cover is a hurricane. The palm beside it is waiting for a cab to the beach.']]},
   // Tom's house, 3468 2nd Ave. Main floor: square painted plate art/tomhouse.webp (engine/plate.js), 16 x 16 tiles, the whole ground floor cut away
   // with the garden path in front. The mask is the walk map: '#' blocks, '.' walks. The exit is the bottom of the garden path (7 to 8, 15); the front door is
   // painted at (7 to 8, 10). The doorway at the top middle (7,1) is an edge portal to the primary suite (map id tomsuite).
