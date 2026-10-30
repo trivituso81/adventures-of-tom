@@ -902,10 +902,13 @@ G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotF
 
 // ---------- Glitter Nails (A2) ----------
 // Grace visits everyone with a big bottle of glitter polish and paints their nails; each gets a giant sparkly nail. Glitter burst.
-const polish=(x,y,a,c)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a||0); R(-11,-6,22,30,OUT); R(-9,-4,18,26,c||PINK); R(-6,0,4,18,'#ffd0e6'); for(let k=0;k<4;k++) R(-6+k*4,6+(k%2)*8,2,2,CREAM);
+const polish=(x,y,a,c)=>{ if(PROPART.draw('grace/pink_nail_polish_bottle',x,y+6,{h:50,rot:a||0})) return;   // painted bottle; drawn one below is the fallback
+  gfx.save(); gfx.translate(x,y); gfx.rotate(a||0); R(-11,-6,22,30,OUT); R(-9,-4,18,26,c||PINK); R(-6,0,4,18,'#ffd0e6'); for(let k=0;k<4;k++) R(-6+k*4,6+(k%2)*8,2,2,CREAM);
   R(-6,-24,12,20,OUT); R(-4,-22,8,16,'#2b2a26'); gfx.restore(); };
 SC.gv_bottle=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.95); polish(h.x-6,h.y-6,-.3+Math.sin(s.t*12)*.15,PINK); };
-SC.gv_bignail=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.82); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g*1.6,g*1.6);
+SC.gv_bignail=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.82);
+  if(PROPART.draw('grace/giant_glitter_nail',s.x,s.y,{h:50*g})) return;   // painted giant glitter nail (pink); the drawn one below is the fallback
+  gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g*1.6,g*1.6);
   R(-11,-4,22,22,OUT); E(0,-6,11,11,OUT); R(-9,-4,18,20,'#f6d4b8'); E(0,-6,9,9,s.c||PINK); R(-9,-6,18,4,s.c||PINK); R(-5,-12,3,8,CREAM); const gl=(s.t*2)%1; star(5,-12+gl*14,1.5+gl*2,CREAM); gfx.restore(); };
 G.glitter_nails=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m);
   const order=foe?[foe]:who.filter(u=>u!==m).sort((a,b)=>(a.id==='rose'?-1:0)-(b.id==='rose'?-1:0));
@@ -1325,7 +1328,7 @@ SC.gv_bottle=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.95); const x=h.x-8
 const glitterHand=(x,y,sc,c,t)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   EO(0,6,10,9,SKIN); for(const [fx,fy,h] of [[-8,-2,10],[-3,-6,13],[2,-6,14],[7,-4,12]]) { RO(fx-2,fy-h,5,h+6,SKIN); E(fx+.5,fy-h+2,2.6,3,c); E(fx-.4,fy-h+1,.9,1.2,'#ffffff'); }
   RO(9,2,7,5,SKIN); E(14,3,2.4,2.2,c); gfx.restore(); };
-SC.gv_bignail=(s,u)=>{ const g=u<.15?ez(u/.15)*1.3:lerp(1.3,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.82); glitterHand(s.x,s.y,2.2*g,s.c||PINK,s.t);
+SC.gv_bignail=(s,u)=>{ const g=u<.15?ez(u/.15)*1.3:lerp(1.3,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.82); if(!PROPART.draw('grace/giant_glitter_nail',s.x,s.y,{h:58*g})) glitterHand(s.x,s.y,2.2*g,s.c||PINK,s.t);   // painted giant glitter nail (pink); the drawn hand is the fallback
   for(let k=0;k<8;k++) { const q=((s.t*1.4)+k/8)%1,a=k*.8; gfx.globalAlpha=fade(u,.82)*Math.sin(q*Math.PI); star(s.x+Math.cos(a)*(22+q*22),s.y-10+Math.sin(a)*(18+q*14)-q*12,2+Math.sin(q*Math.PI)*4,CONF[k%CONF.length]); } };
 
 // ---------- Like and Subscribe: a huge button ----------

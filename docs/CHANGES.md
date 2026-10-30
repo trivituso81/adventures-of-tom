@@ -1,3 +1,8 @@
+## 2026-10-30: Glitter Nails now shows the painted nail
+
+- A later override of `gv_bignail` in `engine/grace-moves.js` still drew a pixel hand on each friend, so the first wiring never reached the live move. It now draws `grace/giant_glitter_nail` (the drawn hand stays as fallback). The painted bottle was already in. `grace-moves.js?v=pa3g`.
+- Lesson: several moves are defined twice and the last definition wins; PAINTED_PROPS listing a slug for a move does not prove every drawn part of that move is painted.
+
 ## 2026-10-30: Starter Splash wave matches the painted look
 
 - The wave of starter, the flying drops and the floor puddles in Tom's Starter Splash (`SC.tv_wave`, `SC.tv_goo` in `engine/tom-moves.js`) were flat cream shapes with a hard black outline. They now use the painted jar's dough: smooth gradient, glossy bubble holes, warm brown outline, rounded blob edges, foam balls on the crest. Timing, damage and sounds unchanged.
