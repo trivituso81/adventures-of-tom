@@ -1,3 +1,8 @@
+## 2026-10-30: Home-screen icon shows Tom much bigger
+- Tom: make Tom more prominent in the iPhone icon.
+- New `icon-v6.png` (180x180): the painted icon cropped in tight around Tom's face, scenery kept as backdrop. `index.html` now points at it (new filename so iOS does not serve the cached icon). No code or spoken lines changed.
+- Limit: the only source is the 180px painted icon, so the crop is slightly soft. A larger painting of Tom would be sharper.
+
 ## 2026-10-30: Old Oak door no longer gets stuck when the last scrap scene is cut short
 - Tom: no way to knock at the old oak tree, stuck in the game.
 - Cause: `ch6-scraps` is only set at the end of the third dig scene (`ch6DigScene`). If that scene was cut short (app closed, old save), all three `ch6-dig-*` flags exist but `ch6-scraps` does not, so the door said "We have 3 of 3 scraps" forever and never offered a knock.

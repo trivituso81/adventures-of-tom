@@ -42,7 +42,7 @@ You are deploying a finished static web game. Do not change any game code. Your 
 
 ## For Tom's iPhone
 
-- In Safari, open the URL, tap Share, then Add to Home Screen. The page already declares the icon (`icon-v5.png`) and full-screen web-app mode, so it opens without the Safari bar.
+- In Safari, open the URL, tap Share, then Add to Home Screen. The page already declares the icon (`icon-v6.png`) and full-screen web-app mode, so it opens without the Safari bar.
 
 ## Updating later
 
