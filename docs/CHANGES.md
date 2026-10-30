@@ -2,6 +2,9 @@
 - Cause: a 12 second watchdog in `index.html` showed the error card whenever the game had not started yet. The game loads 196 scripts (about 122 MB of baked voice), so a slow first load passed 12 s and the card stayed on screen even after the game booted.
 - New `#boot` loading screen (navy, gold flower, moving bar, "Loading the town...") covers the stage immediately and fades out on the first frame (`js-running`). After 15 s it adds a "still going" line. The retry screen shows only if a game file fails to download (8 s grace) or 90 s pass with no start. It no longer links to the claude.ai artifact.
 - Checked in headless Chromium: normal boot, 20 s delayed script (no error at 12 s, clears on boot), blocked `main.js` (retry shows). Smoke 0 fails.
+## 2026-10-29: Six more painted townsfolk, Los Angeles (Mateo, Daisy, Kevin, Claudia, Yesenia, Tony)
+- Sheets `tools/sprite-bake/src/{mateo,daisy,kevin,claudia,yesenia,tony}-walk-v1.png` added to `CAST` (heights 36, 38, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`. All matched BY NAME (`TOWN_PAINTED`). Tom's screenshot also listed "Magenta Teen Character Turnaround", not selected and not sent, so skipped.
+- Checks: `tools/townsfolk_test.py` (47 characters) 0 fails, smoke 0 fails.
 
 ## 2026-10-29: Six more painted townsfolk, Los Angeles (Don Beto, Sol, Dash, Dolores, Marguerite, Nickel)
 - Sheets `tools/sprite-bake/src/{beto,sol,dash,dolores,marguerite,nickel}-walk-v1.png` added to `CAST` (heights 42, 40, 40, 38, 38, 38). Files arrived as "image.png" with a names screenshot; matched by palette in `data/maps-la.js`.
