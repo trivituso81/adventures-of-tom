@@ -710,10 +710,16 @@ function drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx) {
     const rows=K.left||(K.left=m.id==='nara'?K.rows:mirrorRows(K.rows)),kx=Math.round(cx-kw/2),ky=Math.round(base-kh)+bob;
     drawSprite(rows,K.pal,kx,ky,K.scale,{flash:fx.flash>0});
     koDust(cx,base,koE);
-    // Dizzy stars circle over the head (the head is the top few rows of the sprite).
-    if(!K.head) { let top=0; while(top<rows.length&&!/[^.]/.test(rows[top])) top++; let L=1e9,R=-1;
-      for(let r=top;r<Math.min(rows.length,top+6);r++) for(let c=0;c<rows[r].length;c++) if(rows[r][c]!=='.') { L=Math.min(L,c); R=Math.max(R,c); }
-      K.head={col:(L+R+1)/2,row:top}; }
+    // Dizzy stars circle over the head. The painted KO poses lie on their backs with the head to one side, so the head
+    // comes from KO_HEAD (below); a pose with no entry falls back to the top rows of the sprite.
+    if(!K.head||K.headRows!==rows) {
+      const hd=KO_HEAD[m.id],W=rows[0].length;
+      if(hd) K.head={col:m.id==='nara'?hd[0]+.5:W-hd[0]-.5,row:hd[1]};   // KO_HEAD is measured on the sprite as authored; the family are mirrored, Nara is not
+      else { let top=0; while(top<rows.length&&!/[^.]/.test(rows[top])) top++; let L=1e9,R=-1;
+        for(let r=top;r<Math.min(rows.length,top+6);r++) for(let c=0;c<rows[r].length;c++) if(rows[r][c]!=='.') { L=Math.min(L,c); R=Math.max(R,c); }
+        K.head={col:(L+R+1)/2,row:top}; }
+      K.headRows=rows;
+    }
     koDizzy(kx+K.head.col*K.scale,ky+K.head.row*K.scale,koE,t,i);
     return;
   }
@@ -773,19 +779,36 @@ function drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx) {
   koDust(cx,base,koE);
   if(settled) koDizzy(ox+pcx,oy+top*sc+8,koE,t,i);
 }
-// Cartoon dizzy stars: three little pixel stars orbiting a flat ring above the head. The ones behind the head are smaller and dimmer.
-const KO_STAR=['..#..','.###.','#####','.###.','.#.#.'];
+// Where the head is on each painted KO pose, as [column, top row] of the sprite as authored (data/*-hires-*.js). The family
+// were authored head to the right and are mirrored in the fight; Nara is authored head to the left and is not.
+// A new KO pose needs its head measured here, or the stars fall back to the top rows of the sprite.
+const KO_HEAD={tom:[46,2],grace:[61,1],rose:[50,0],amy:[82,1],deedee:[88,1],boppy:[63,1],tnb:[68,2],nara:[11,14]};
+// Dizzy stars: three smooth gold stars with the game's dark outline circling a flat ring above the head, in the same
+// painted style as the other star effects. The ones behind the head are smaller and dimmer.
+function koStar(x,y,r,rot,a) {
+  gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.globalAlpha=a;
+  gfx.beginPath(); for(let k=0;k<10;k++) { const ang=-Math.PI/2+k*Math.PI/5,q=k%2?r*.48:r; gfx.lineTo(Math.cos(ang)*q,Math.sin(ang)*q); } gfx.closePath();
+  gfx.lineJoin='round'; gfx.lineWidth=Math.max(1.4,r*.34); gfx.strokeStyle=OUT; gfx.stroke();
+  const g=gfx.createLinearGradient(0,-r,0,r); g.addColorStop(0,'#fff4b8'); g.addColorStop(.5,'#ffd24a'); g.addColorStop(1,'#f2a526');
+  gfx.fillStyle=g; gfx.fill();
+  gfx.beginPath(); gfx.arc(-r*.22,-r*.2,Math.max(.7,r*.14),0,Math.PI*2); gfx.fillStyle='#ffffff'; gfx.fill();   // glint
+  gfx.restore();
+}
 function koDizzy(hx,hy,koE,t,i) {
   if(koE<.45) return;
-  const fade=Math.min(1,(koE-.45)/.4),cy=hy-11,spin=t*3.2+i*1.3;
-  const stars=[0,1,2].map(k=>{ const a=spin+k*Math.PI*2/3; return {k,x:hx+Math.cos(a)*21,y:cy+Math.sin(a)*6,front:Math.sin(a)}; }).sort((a,b)=>a.front-b.front);
-  gfx.globalAlpha=fade*.35; ellipse(hx,cy,22,6.5,'rgba(255,240,190,.35)'); 
+  const fade=Math.min(1,(koE-.45)/.4),cy=hy-12,spin=t*3.2+i*1.3;
+  const stars=[0,1,2].map(k=>{ const a=spin+k*Math.PI*2/3; return {k,x:hx+Math.cos(a)*22,y:cy+Math.sin(a)*6.5,front:Math.sin(a)}; }).sort((a,b)=>a.front-b.front);
+  gfx.save(); gfx.globalAlpha=fade;
+  const glow=gfx.createRadialGradient(hx,cy,2,hx,cy,26); glow.addColorStop(0,'rgba(255,236,160,.30)'); glow.addColorStop(1,'rgba(255,236,160,0)');
+  gfx.fillStyle=glow; gfx.beginPath(); gfx.ellipse(hx,cy,26,10,0,0,Math.PI*2); gfx.fill();
+  gfx.restore();
   for(const st of stars) {
-    const ps=st.front>0?2.6:1.9,tw=(Math.sin(t*9+st.k*2)+1)/2;
-    gfx.globalAlpha=fade*(st.front>0?1:.6);
-    const col=st.k===1?'#fff6c8':'#ffd24a',ox=Math.round(st.x-2.5*ps),oy=Math.round(st.y-2.5*ps);
-    for(let r=0;r<5;r++) for(let c=0;c<5;c++) if(KO_STAR[r][c]==='#') rect(ox+c*ps,oy+r*ps,ps,ps,(r===1&&c===2)?'#ffffff':col);
-    if(tw>.75&&st.front>0) { rect(ox+5*ps+1,oy-2,2,2,'#ffffff'); }
+    const front=st.front>0,r=front?5.4:3.8,tw=(Math.sin(t*9+st.k*2)+1)/2;
+    koStar(st.x,st.y,r,t*1.6+st.k*1.7,fade*(front?1:.65));
+    if(front&&tw>.8) {   // a quick twinkle
+      gfx.save(); gfx.globalAlpha=fade*(tw-.8)*5; gfx.fillStyle='#ffffff';
+      const sx=st.x+r+2,sy=st.y-r*.7; gfx.fillRect(sx-.5,sy-2.5,1,5); gfx.fillRect(sx-2.5,sy-.5,5,1); gfx.restore();
+    }
   }
   gfx.globalAlpha=1;
 }
