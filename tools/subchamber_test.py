@@ -60,10 +60,10 @@ with sync_playwright() as pw:
     stand(pg,3,4,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft')
     pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('tunnel mouth leads to the Sub-Rail tunnel',pg.evaluate("()=>currentMap.id==='subtunnel'"))
-    skip_intro(pg,800); stand(pg,45,5,'right'); skip_intro(pg,800)
-    pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(1800); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2200); skip_intro(pg)
+    skip_intro(pg,800); stand(pg,34,3,'up'); skip_intro(pg,800)
+    pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(1200); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2200); skip_intro(pg)
     print(pg.evaluate("()=>({m:currentMap.id,x:player.x,y:player.y,px:Math.round(player.x),solid:currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]})"))
-    check('east end returns to the chamber on walkable floor',pg.evaluate("()=>currentMap.id==='subchamber'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
+    check('the tunnel east door returns to the chamber on walkable floor',pg.evaluate("()=>currentMap.id==='subchamber'&&currentMap.solid[Math.round(player.y)*currentMap.w+Math.round(player.x)]===0"))
     # after the melt the glass doorway opens and glows
     pg.evaluate("()=>{ window.__LE.setFlag('ch13-melted',true); storyWorld(); }"); stand(pg,21,7,'up'); pg.wait_for_timeout(500); shot(pg,'melted')
     check('doorway open after melt',pg.evaluate("()=>[21,22].every(x=>currentMap.solid[5*currentMap.w+x]===0)"))
