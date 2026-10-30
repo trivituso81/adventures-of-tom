@@ -2082,6 +2082,13 @@ function ch6Mound(o) {
 const CH6_KNOCKS=['TAP TAP','SCRATCH','CHITTER','LET NARA BARK'];
 function ch6Knock(o) {
   if(STORY.mode!=='full'||STORY.chapter!==6||flag('ch6-door')) return false;
+  // ch6-scraps is only set at the end of the last dig scene. If that scene was cut short (app closed, old save), all three
+  // digs are still recorded, so the door works it out itself and recaps the knock.
+  let recap=null;
+  if(!flag('ch6-scraps')&&CH6_CACHES.every(k=>ch6Dug(k.c))) {
+    setFlag('ch6-scraps',true);
+    recap='TNB: "We have all three scraps, babe. One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER."';
+  }
   if(!flag('ch6-scraps')) {
     const n=CH6_CACHES.filter(k=>ch6Dug(k.c)).length;
     openDialog(o.name,['A little round door with an acorn for a knocker. Somebody behind it\'s chittering.',
@@ -2089,7 +2096,7 @@ function ch6Knock(o) {
     return true;
   }
   const seq=[];
-  const ask=()=>openChoice('Little door',[seq.length?'Knock '+(seq.length+1)+' of 3. (So far: '+seq.join(', ')+'.)':'Tom lifts the acorn knocker. Knock 1 of 3.'],
+  const ask=()=>openChoice('Little door',[...(recap&&!seq.length?[recap]:[]),seq.length?'Knock '+(seq.length+1)+' of 3. (So far: '+seq.join(', ')+'.)':'Tom lifts the acorn knocker. Knock 1 of 3.'],
     CH6_KNOCKS.map(k=>({label:k,fn:()=>{
       if(k==='LET NARA BARK') { sfx.bark&&sfx.bark(); openDialog('Little door',['WOOF!','From inside, a tiny voice: "Was that a DOG? Nobody open the door! NOBODY!"','TNB: "Okay. That was on us."']); return; }
       seq.push(k); sfx.bonk&&sfx.bonk();

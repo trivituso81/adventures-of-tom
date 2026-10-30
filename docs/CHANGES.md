@@ -1,3 +1,8 @@
+## 2026-10-30: Old Oak door no longer gets stuck when the last scrap scene is cut short
+- Tom: no way to knock at the old oak tree, stuck in the game.
+- Cause: `ch6-scraps` is only set at the end of the third dig scene (`ch6DigScene`). If that scene was cut short (app closed, old save), all three `ch6-dig-*` flags exist but `ch6-scraps` does not, so the door said "We have 3 of 3 scraps" forever and never offered a knock.
+- Fix: `ch6Knock` (data/scenes.js) sets `ch6-scraps` itself when all three digs are recorded, and opens with a recap (TAP TAP, SCRATCH, CHITTER). Repro and fix checked headless; smoke FAILS: []. No spoken lines changed. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Rose Mode spends stamps and polish, and wears the best gear, by itself
 - Tom: Rose cannot pick stamps and polish, so level ups must apply Auto-Stamp automatically; best gear must go on whenever a new item arrives (gift, win, purchase) or a character joins.
 - Rose Mode only (Grace and Director Mode unchanged). `engine/progress.js`: `roseAuto()` is true when `B7.diff==='rose'`; `b6GainXp` and `b6Sync` run `b6AutoStamp(m,true)` after every level up (stamps, Polish ranks, Remix unlocks; `force` ignores the OPTIONS "spend" switch). Members who catch up while away are covered by `b6Sync`.
