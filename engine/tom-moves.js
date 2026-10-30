@@ -1299,7 +1299,8 @@ SC.t3_hearts=(s,u)=>{ for(let k=0;k<5;k++) { const q=cl(u*1.4-k*.08); if(q<=0) c
 SC.t3_spark=(s,u)=>{ for(let k=0;k<(s.n||6);k++) { const q=((u*(s.sp||2))+k/(s.n||6))%1,a=k*2.4; gfx.globalAlpha=Math.sin(q*Math.PI)*fade(u,.8); star(s.x+Math.cos(a)*(s.r||30)*(.5+q*.5),s.y+Math.sin(a)*(s.r||30)*.6-q*10,3+Math.sin(q*Math.PI)*4,k%2?'#ffffff':GOLD,q*3); } };
 
 // A whole boule with a scored ear (sc 1 = 44 x 28).
-const loaf=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); EO(0,-10,22,14,CRUST); E(-4,-17,13,5,'#e0a868'); LnO(-12,-19,10,-13,2,CRUMB); E(-14,-6,3,2,'#a86a34'); E(10,-4,3,2,'#a86a34'); gfx.restore(); };
+const loaf=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tom/sourdough_boule',0,-12,{w:46})) { gfx.restore(); return; }   // painted boule (same art as Crumb Shot)
+  EO(0,-10,22,14,CRUST); E(-4,-17,13,5,'#e0a868'); LnO(-12,-19,10,-13,2,CRUMB); E(-14,-6,3,2,'#a86a34'); E(10,-4,3,2,'#a86a34'); gfx.restore(); };
 const slice=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tom/bread_slice',0,-1,{w:24})) { gfx.restore(); return; }   // painted slice (steam wisps included)
   EO(0,0,10,9,CRUMB); ring(0,0,10,9,3,CRUST); for(const [hx,hy,r] of [[-3,-3,2],[3,1,1.6],[-1,3,1.3],[4,-4,1.2]]) E(hx,hy,r,r*1.2,'#d8b888'); gfx.restore(); };
 

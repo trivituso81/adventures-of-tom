@@ -1,3 +1,7 @@
+## 2026-10-30: Sourdough Snob uses the painted loaf
+
+- The whole boule Tom carries and lifts for "ADMIRE THE CRUST" (`loaf()` in the Sourdough Snob section of `engine/tom-moves.js`) was still the code-drawn loaf. It now draws `art/props/tom/sourdough_boule.webp` (same art as Crumb Shot); the drawn loaf stays as the fallback. The slice and the easel chart were already painted. Script version `?v=tom10`. Tests: kit_test tom sourdough_snob (painted boule hits 327), smoke, frames looked at.
+
 ## 2026-10-30: Glitter Nails now shows the painted nail
 
 - A later override of `gv_bignail` in `engine/grace-moves.js` still drew a pixel hand on each friend, so the first wiring never reached the live move. It now draws `grace/giant_glitter_nail` (the drawn hand stays as fallback). The painted bottle was already in. `grace-moves.js?v=pa3g`.
