@@ -267,7 +267,7 @@ SCENES.ch12After=()=>[
 
 TRIGGERS.push(
   {id:'ch12-arrive',map:'jpark',when:{...CH12,flag:'ch12-open',notFlag:'ch12-arrive'},scene:'ch12Arrive'},
-  {id:'ch12-house',map:'tomhouse',at:[2,5,13,17],when:{...CH12,flag:'ch12-arrive',notFlag:'ch12-house'},scene:'ch12House'},
+  {id:'ch12-house',map:'tomhouse',at:[7,9,8,12],when:{...CH12,flag:'ch12-arrive',notFlag:'ch12-house'},scene:'ch12House'},
   {id:'ch12-loft',map:'lofts',when:{...CH12,flag:'ch12-arrive',notFlag:'ch12-studio'},scene:'ch12Loft'},
   {id:'ch12-marlowe',map:'jpark',at:[12,8,17,11],when:{...CH12,flag:['ch12-house','ch12-studio'],notFlag:'ch12-marlowe'},scene:'ch12Marlowe'},
   {id:'ch12-carmen',map:'pupuseria',when:{...CH12,flag:'ch12-marlowe',notFlag:'ch12-carmen'},scene:'ch12Carmen'},

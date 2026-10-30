@@ -23,7 +23,7 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(500)
     pg.evaluate("()=>window.__LE.go('tomhouse')"); pg.wait_for_timeout(1500)
     # park Tom beside the island so the camera shows the kitchen
-    pg.evaluate("()=>{ player.x=8; player.y=8; player.facing='right'; player.move=null; placeFollowers(); camera.snap=true; }"); pg.wait_for_timeout(800)
+    pg.evaluate("()=>{ player.x=8; player.y=5; player.facing='right'; player.move=null; placeFollowers(); camera.snap=true; }"); pg.wait_for_timeout(800)
     def island_text():
         return pg.evaluate("()=>{ const o=currentMap.objects.find(o=>o.name==='Kitchen island'); return storyVariant(o,'text')||o.text||o.desc||null; }")
     # chapter 0 / demo: jar drawn

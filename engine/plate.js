@@ -13,12 +13,12 @@ PLATES.crown={src:'art/crown.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.lofts={src:'art/lofts.webp',px:64,img:null,ready:false};
 PLATES.loftlobby={src:'art/loftlobby.webp',px:64,img:null,ready:false};
 // Tom's house: two painted rooms, the main floor (16 x 24 tiles) and the primary suite (16 x 15), both 64 art px per tile.
-PLATES.tomhouse={src:'art/tomhouse.webp',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.tomhouse={src:'art/tomhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08};
 PLATES.carbarn={src:'art/carbarn.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.coffee={src:'art/coffee.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.boiler={src:'art/boilerroom.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.ramen={src:'art/ramen.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
-PLATES.tomsuite={src:'art/tomsuite.webp',px:64,img:null,ready:false,actorScale:1.98};
+PLATES.tomsuite={src:'art/tomsuite.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08};
 PLATES.juicebar={src:'art/juicebar.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.cinema={src:'art/starlite.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.boards={src:'art/boards.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
@@ -114,7 +114,7 @@ function drawBreadyJar(cx,by,u,time) {
 }
 function plateLive(map,time) {
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
-  if(map&&map.id==='tomhouse'&&!(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'}))) drawBreadyJar(606*T/64,499*T/64,1.2*T/64,time);
+  if(map&&map.id==='tomhouse'&&!(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'}))) drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
   if(!map||map.id!=='gate00'||typeof infFlag!=='function'||!infFlag('ch11-closed')) return;
   const s=T/64, cx=478*s, cy=98*s, r=96*s;
   ctx.save();

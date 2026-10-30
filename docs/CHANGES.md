@@ -1,6 +1,12 @@
 ## 2026-10-30: Battle prop sheets, Tom's first two (source only)
 - Tom ran the image AI on the first prop prompts. Saved the two returned sheets under `tools/sprite-bake/src/props/` with a README saying which cells are right. 30 of Tom's 31 props are usable; the retro console is still to redo.
 - Not wired into the game. No code change.
+## 2026-10-30: Tom's House (square paintings: main floor and primary suite)
+- Tom sent tomshouse.zip: "Cozy Dusk Home and Garden Cutaway" (whole ground floor with the garden path) and "Cozy Isometric Bedroom Suite Retreat". Installed as `tomhouse` and `tomsuite`, both 16 x 16, `square:true`, 1254 px, actors at 1.08 scale (x1.2 interior boost), same call as Amy's House.
+- Main floor: exit is the garden path (7 to 8, 15), spawn (8,14); the doorway at the top middle (7,1) leads to the suite. Walkable: the front hall, the open floor between the dining rug and the sofa (x6 to x8), the hall to the suite. Kitchen, living room corner and the TV wall are dressing only (the island and sofa block every way in). Objects kept: wet bar, island (Bready Mercury text and the ch6 variant), dining table, rubber plant, The couch (still the chapter 12 bench menu). Dropped (unreachable): fridge, range, counter, photo wall, console table, coffee table, big TV, PS5, TV console, pouf, corner plant. Their lines are gone.
+- Suite: the white door on the left wall (3,7) is the way back (spawn (3,8)); the bathroom is entered through the open wooden door (x5). Shower and bed keep the full restore behavior. Closet is dressing only (a plant blocks it), so the two closet objects and the closet shelves are gone.
+- Scenes: ch2Starter and ch6Kitchen now stand Tom at (8,5) beside the island (TNB at (7,5)); triggers ch2-starter and ch12-house use zone [7,9,8,12]. Bready jar redrawn in `engine/plate.js` at the new island spot.
+- Tests: `rooms_test.py tomhouse tomsuite` 0 fails; `tools/tomhouse_test.py` rewritten (doorway both ways, garden path to 2nd Ave, ch2Starter and ch6Kitchen); bready_test, smoke, camera_clamp, tap_test, ch12, ch15 0 fails.
 
 ## 2026-10-30: Slimmer dialogue box, part 2 (portrait height)
 - Part 1 only removed the divider and hint; the box stayed tall. Portrait now shrinks the box itself: face 89 to 56 px, text 18 to 16 px, AUTO and the page count sit in the text column beside the face instead of in a row below it, less top and bottom padding (half the home-bar inset). Box is about 87 px plus the home-bar inset, down from about 197 px on Tom's phone.
