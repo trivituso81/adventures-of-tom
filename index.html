@@ -948,6 +948,13 @@ html.landscape #dialog-portrait{top:12px;width:56px;height:56px}
 html.landscape #dialog.has-portrait #dialog-text,html.landscape #dialog.has-portrait #dialog-choices{margin-left:68px}
 html.landscape #dialog-text,html.landscape #dialog.has-portrait #dialog-text{flex:none;min-height:56px;font-size:14px;line-height:1.4}
 html.landscape .dialog-footer{margin-top:4px;padding-top:3px}
+/* Slim dialogue box (2026-10-30): no divider line, no "tap to continue" hint; AUTO and the page count sit right under the text. Dialogue box only (the splash panel has its own footer). */
+#dialog .dialog-footer{margin-top:4px;padding-top:0;border-top:none;justify-content:flex-end}
+#dialog #dialog-cue{display:none}
+html:not(.landscape) #dialog{padding-top:16px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+html:not(.landscape) #dialog-portrait{top:16px}
+html:not(.landscape) #dialog #dialog-auto{min-height:26px}
+html.landscape #dialog .dialog-footer{margin-top:2px;padding-top:0}
 main:has(#dialog:not([hidden])) #controls{visibility:hidden}
 
 /* Back frame under the menu commands */

@@ -1,3 +1,7 @@
+## 2026-10-30: Slimmer dialogue box
+- Removed the divider line and the "Tap here or A / Enter to continue" hint from the dialogue box. AUTO and the page count now sit right under the text. Portrait top and bottom padding trimmed, and the portrait face moved up with it. Portrait box is about 52 px shorter (197 to 145 px with a portrait face); landscape box is tighter too.
+- CSS only, in `index.html` after the landscape dialogue rules. The hint element still exists but is hidden, so `engine/overworld.js` is untouched. The camera and area changes are untouched (`engine/intro.js` reads the box height, so it just gets more room). The splash panel keeps its own footer.
+
 ## 2026-10-30: Painted Chapter 11 and 12 enemies
 - Tom sent ch11_12monsters.zip. Installed lostluggage, redeye, standbysprite, finalcall (chapter 11 boss) and gridlockprime (chapter 12 boss). All five show painted in a test fight; old sprites kept as fallback until Tom approves on his phone.
 - New bake flag `--cut-y N` forces where the first row of frames ends, for sheets whose lone second-row stance is not auto-detected (redeye, gridlockprime, both 385).
