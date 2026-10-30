@@ -165,11 +165,12 @@ function drawStretchPainted(time) {
   const u=Math.min(1,intro.stretch.t/5.2);
   let name='tired'; for(const [n,a] of STRETCH_SEQ) if(u>=a) name=n;
   player.hidden=true;
-  const rows=TOM_STRETCH[name],p=position(player),w=rows[0].length,h=rows.length;
-  const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),bob=name==='exhale'?Math.round(Math.sin(intro.stretch.t*5)*1):0;
-  ellipse(cx,base+1,Math.round(w*.4),4,'#2f493640');
-  drawSprite(rows,OW.tom.pal,cx-Math.floor(w/2),base-h+bob,1);
-  if(name==='full') { const k=(u-.22)/.2; gfx.globalAlpha=Math.max(0,1-Math.abs(k-.5)*2); label('~',cx+22,base-h+16-Math.round(k*10),'#fff1cb',2); label('~',cx-23,base-h+22-Math.round(k*10),'#fff1cb',2); gfx.globalAlpha=1; }
+  // Same scale as his walk sprite (actorK: 1.2 on outdoor maps), or he shrinks when the stretch starts.
+  const rows=TOM_STRETCH[name],p=position(player),w=rows[0].length,h=rows.length,ak=actorK()*(OW.tom.k||1),wk=w*ak,hk=h*ak;
+  const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),bob=name==='exhale'?Math.round(Math.sin(intro.stretch.t*5)*ak):0;
+  ellipse(cx,base+1,Math.round(wk*.4),Math.round(4*ak),'#2f493640');
+  drawSprite(rows,OW.tom.pal,cx-Math.floor(wk/2),Math.round(base-hk+bob),ak);
+  if(name==='full') { const k=(u-.22)/.2; gfx.globalAlpha=Math.max(0,1-Math.abs(k-.5)*2); label('~',cx+Math.round(22*ak),base-Math.round(hk)+Math.round(16*ak)-Math.round(k*10),'#fff1cb',2); label('~',cx-Math.round(23*ak),base-Math.round(hk)+Math.round(22*ak)-Math.round(k*10),'#fff1cb',2); gfx.globalAlpha=1; }
   if(name==='fresh'&&u>=.97) player.hidden=false;
 }
 function drawStretch(time) {
@@ -177,10 +178,10 @@ function drawStretch(time) {
   const u=Math.min(1,intro.stretch.t/1.6),pose=stretchPose(u);
   if(!pose) { player.hidden=false; return; }
   player.hidden=true;
-  const p=position(player),f=stretchFrame(pose),w=f.rows[0].length,h=f.rows.length;
+  const p=position(player),f=stretchFrame(pose),ak=actorK()*(OW.tom.k||1),w=f.rows[0].length*ak,h=f.rows.length*ak;
   const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),lift=pose===2?2:0;
-  ellipse(cx,base+1,Math.round(w*.45),4,'#2f493640');
-  drawSprite(f.rows,OW.tom.pal,cx-Math.floor(w/2),base-h-lift,1);
+  ellipse(cx,base+1,Math.round(w*.45),Math.round(4*ak),'#2f493640');
+  drawSprite(f.rows,OW.tom.pal,cx-Math.floor(w/2),Math.round(base-h-lift*ak),ak);
   if(pose===2) { const k=(u-.26)/.54; gfx.globalAlpha=Math.max(0,1-Math.abs(k-.5)*2); label('~',cx+20,base-h+10-Math.round(k*10),'#fff1cb',2); label('~',cx-21,base-h+16-Math.round(k*10),'#fff1cb',2); gfx.globalAlpha=1; }
 }
 
