@@ -96,20 +96,15 @@ function actorK() {
 
 // Live touches drawn over a painting. Gate 00: after chapter 11 the Long Island dome (left window) goes amber, as it did on the tile version.
 // Bready Mercury, Tom's sourdough starter, sitting on the kitchen island in Tom's house. Painted live over the plate (the painting has an empty counter).
-// Same jar as the starter moves: glass, cream starter, gold lid, a MERCURY label (here with a tiny face and mustache), plus a crown. cx, by = jar centre and base in map px.
 function drawBreadyJar(cx,by,u,time) {
-  const R=(x,y,w,h,c)=>{ ctx.fillStyle=c; ctx.fillRect(cx+x*u,by+y*u,w*u,h*u); };
-  const OUT='#2b2a26', top=-19+1.2*Math.sin(time*1.3);
+  // Painted prop (art/props/tom/sourdough_starter_jar.webp, the same jar the Starter Splash move uses). cx, by = jar centre and base; u scales it.
+  const im=PROPART.get('tom/sourdough_starter_jar');
+  if(!(im.complete&&im.naturalWidth)) return;
+  const h=50*u, w=h*im.naturalWidth/im.naturalHeight;
   ctx.save();
-  ctx.fillStyle='rgba(60,40,20,.30)'; ctx.beginPath(); ctx.ellipse(cx+2*u,by+1*u,17*u,3.6*u,0,0,Math.PI*2); ctx.fill();
-  R(-14,-31,28,32,OUT); R(-13,-30,26,30,'#cfe6ee');
-  R(-13,top,26,-top,'#efe3c8'); R(-13,top-1,26,1,'#fff8e8');
-  for(let k=0;k<4;k++) { const t=(time*.45+k*.27)%1, bx=-9+k*6, byy=-2+t*(top+3); ctx.globalAlpha=t>.8?(1-t)*5:1; R(bx,byy,2,2,'#fff8e8'); }
-  ctx.globalAlpha=1;
-  R(-11,-28,2,22,'rgba(255,255,255,.55)');
-  R(-14,-38,28,7,OUT); R(-13,-37,26,5,'#c9a03e'); R(-11,-37,22,1,'#e6c46a');
-  R(-6,-43,12,5,OUT); R(-5,-42,10,3,'#e8b923'); R(-5,-45,2,3,'#e8b923'); R(-1,-46,2,4,'#e8b923'); R(3,-45,2,3,'#e8b923');
-  R(-9,-15,18,10,OUT); R(-8,-14,16,8,'#f6efdc'); R(-5,-12,2,2,OUT); R(3,-12,2,2,OUT); R(-5,-8,10,2,OUT); R(-6,-7,2,1,OUT); R(4,-7,2,1,OUT);
+  ctx.fillStyle='rgba(60,40,20,.30)'; ctx.beginPath(); ctx.ellipse(cx+1*u,by,w*.42,3.4*u,0,0,Math.PI*2); ctx.fill();
+  ctx.imageSmoothingEnabled=true; if('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality='high';
+  ctx.drawImage(im,cx-w/2,by-h+1*u,w,h);
   ctx.restore();
 }
 // Painted sign boards that the game letters live, so the spelling is always right and the letters stay sharp on a phone.

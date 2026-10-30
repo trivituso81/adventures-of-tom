@@ -5,7 +5,7 @@
 // Images load the first time they are asked for (or from PROPART.preload); until then draw() returns false so the
 // drawn pixel version shows. Size by h (height) or w (width) in stage units; sx and sy squash or stretch afterwards.
 const PROPART=(()=>{
-  const V='pa2', imgs={}, hits={};
+  const V='pa4', imgs={}, hits={};
   const get=id=>{ let im=imgs[id]; if(!im) { im=new Image(); im.src='art/props/'+id+'.webp?v='+V; imgs[id]=im; } return im; };
   const ready=id=>{ const im=get(id); return !!(im.complete&&im.naturalWidth); };
   const draw=(id,x,y,o)=>{
@@ -21,4 +21,4 @@ const PROPART=(()=>{
   return {draw,ready,preload,get,hits};
 })();
 // Props that moves already use; fetched shortly after start so the first fight shows them, not the drawn fallback.
-setTimeout(()=>PROPART.preload(['tom/headphones','tom/sourdough_boule','grace/gold_dumpling_squishy','rose/lamby','rose/backup_lamby','amy/kettlebell','deedee/crisp_pan','boppy/cayenne_pepper','tnb/test_mug','tom/airliner','tom/lie_flat_pod','tom/airline_suite_door','tom/boarding_group_5_sign','tom/duvet','tom/sleep_mask','tom/phone_and_boarding_passes','tom/gate_scanner','tom/gate_0_door','tom/hot_towel']),2500);
+setTimeout(()=>PROPART.preload(['tom/headphones','tom/sourdough_boule','grace/gold_dumpling_squishy','rose/lamby','rose/backup_lamby','amy/kettlebell','deedee/crisp_pan','boppy/cayenne_pepper','tnb/test_mug','tom/airliner','tom/lie_flat_pod','tom/airline_suite_door','tom/boarding_group_5_sign','tom/duvet','tom/sleep_mask','tom/phone_and_boarding_passes','tom/gate_scanner','tom/gate_0_door','tom/hot_towel','tom/sourdough_starter_jar']),2500);

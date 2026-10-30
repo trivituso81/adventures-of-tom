@@ -1,3 +1,8 @@
+## 2026-10-30: Bready Mercury on Tom's counter now uses the painted jar prop
+
+- The jar on the kitchen island in Tom's house (`drawBreadyJar` in `engine/plate.js`) was a code-drawn pixel jar. It now draws `art/props/tom/sourdough_starter_jar.webp` (the DAY 3 jar, same art the Starter Splash move uses), same spot and size, with a soft shadow. Still hidden in chapter 6 until `ch6-clear`.
+- Prop cache version bumped to `pa4` (`engine/prop-art.js`, its tag in `index.html`) so phones fetch the newest image; `?v=bready2` on `engine/plate.js`. `tools/bready_test.py` passes.
+
 ## 2026-10-30: Tombo redo sheet 2: the last seven Tombo props cut (all 138 painted)
 
 - `tombo-redo-sheet2-of-2.png` saved in `tools/sprite-bake/src/props/` and added to `bake_prop_sheets.py` (cells 1 to 7 = Tombo items 97, 98, 110, 111, 112, 124, 125). New images in `art/props/tombo/`: `palm_tree`, `new_york_skyline`, `drinking_glass`, `hanging_pendant_lamp`, `sourdough_bite`, `nurse_cap`, `red_striped_family_table`.
