@@ -25,7 +25,7 @@ SETUP="""(cfg)=>{ const L=window.__LE; try{ B7.speed=cfg.speed; }catch(e){}
   return true; }"""
 READY="()=>{ const L=window.__LE; return L.battle.state==='command'&&L.B2.actor&&L.B2.actor.side==='party'; }"
 FIRE="""(cfg)=>{ const L=window.__LE,B2=L.B2; const act=L.B2_TOMBOS.find(a=>a.id===cfg.id);
-  const u=B2.party.find(p=>p.id==='tom');
+  const u=B2.party.find(p=>p.id==='tom')||B2.party[0];
   for(const p of B2.party){ p.hp=Math.round(p.maxHp*0.6); p.st={}; }
   for(const f of B2.foes){ f.hp=f.maxHp; f.st={}; f.warm=0; f.dead=false; }
   B2.heart=100; B2.actor=u; L.battle.actor=u.idx;

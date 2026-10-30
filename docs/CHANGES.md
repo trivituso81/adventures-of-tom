@@ -1,3 +1,10 @@
+## 2026-10-30: Painted props wired into all Tombos, Director's Cuts and Family Finishes
+
+- 46 of the 48 Tombo animations in `B2_TOMBO_ANIM` now draw the painted props from `art/props/tombo/` (plus reused character props such as Lamby, the sourdough boule, the cayenne pepper and the longboard). Each hook falls back to the drawn version until the image loads. Visuals only: no damage, timing or story changes. `amy1`, `nara2_dc` and `nara3` have no props mapped, so they are unchanged.
+- Some painted props replace animated drawn parts: the ff3 hourglass sand level, the ff1 fort's disco lights, the tnb1_dc fan box flap. Kintsugi cup is painted only once mended.
+- New test tool `tools/tombo_test.py` fires any Tombo (or `--char=grace`) in a lab fight, saves frames and a contact sheet, and prints `PAINTED_PROPS`. `tools/tombo_props_map.json` lists the props each Tombo uses. `__LE.B2_TOMBOS` is now exposed.
+- Tested: every Tombo run, every mapped prop draws, smoke green. Tags `?v=pa4` (prop-art.js), `?v=tom7` (battle2-kind.js).
+
 ## 2026-10-30: Tombo redo sheet 2: the last seven Tombo props cut (all 138 painted)
 
 - `tombo-redo-sheet2-of-2.png` saved in `tools/sprite-bake/src/props/` and added to `bake_prop_sheets.py` (cells 1 to 7 = Tombo items 97, 98, 110, 111, 112, 124, 125). New images in `art/props/tombo/`: `palm_tree`, `new_york_skyline`, `drinking_glass`, `hanging_pendant_lamp`, `sourdough_bite`, `nurse_cap`, `red_striped_family_table`.

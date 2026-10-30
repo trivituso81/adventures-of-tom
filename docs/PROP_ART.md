@@ -28,6 +28,8 @@ Options: `h` or `w` (stage units), `rot`, `flip`, `sx`, `sy`. It returns false u
 | Boppy | Pepper Breath (pepper_breath) | cayenne pepper | `cayenne()` in boppy-moves.js (other pepper colours stay drawn) |
 | TNB | Mug Toss (mug_toss) | stoneware mug (has a steam wisp and the 2ND tag) | `mug()` in tnb-moves.js |
 
+Tom's Delta One family (Seat 1A, Boarding Group Zero, Delta One) and all Tombos, Director's Cuts and Family Finishes (see `tools/tombo_props_map.json`, test with `tools/tombo_test.py`) are also wired.
+
 Also hooked but not drawn by a current Primary move (kept as harmless fallbacks): Tom's sourdough jar and boule, TNB's top hat, Grace's squishy in older throws.
 
 ## Next
