@@ -1,3 +1,9 @@
+## 2026-10-30: Painted Chapter 4 backlot enemies
+- Tom sent ch4_monsters.zip. Installed painted frames for Boom Mic Moth, Clapper Snapper, Cue Card Crab, Fog Wisp and the boss The Director's Cut (four attack frames). Fog Wisp now faces right like the others.
+- `bake_foe.py` gained `--trim-edges` (drops slivers of a neighbour frame's burst effects; used for the Director's Cut). Script tags added before `data/foes/use.js`. Old pixel rows stay as the fallback.
+- Not installed: Extra Extra (image missing from the zip) and a pizza monster concept image (three poses on a gradient background, no matching enemy in the game, not a sheet).
+- Test: `tools/foes_test.py` on all five, contact sheets looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Rose Mode Boop icon is a pointing finger
 - Tom: in Rose Mode the Boop icon should be a pointer finger (a boop is a poke).
 - Was the nose emoji. `tools/build_bp_emoji.py` MAP `rose.boop` is now the pointing-up finger (U+1F446), `data/battle-emoji.js` regenerated (regen of the old map reproduced the old file byte for byte first, so only Boop changed). The Nose Boop move (`rx_boop`) has no picture of its own and is untouched.

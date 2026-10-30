@@ -43,8 +43,13 @@ MARK = {
     'tangle':  {'eyes': [(.62, .41), (.71, .41)], 'mouth': (.64, .59)},
     'snag':    {'eyes': [(.59, .67), (.71, .67)], 'mouth': (.65, .74)},
     'irongill': {'eyes': [(.70, .59), (.89, .61)], 'mouth': (.80, .72)},
+    'boommoth': {'eyes': [(.66, .51), (.75, .56)], 'mouth': (.72, .61)},
+    'clapper': {'eyes': [(.52, .48), (.67, .49)], 'mouth': (.50, .64)},
+    'cuecrab': {'eyes': [(.53, .49), (.62, .48)], 'mouth': (.53, .62)},
+    'fogwisp': {'eyes': [(.82, .39), (.91, .39)], 'mouth': (.87, .51)},
+    'directorscut': {'eyes': [(.70, .33), (.76, .32)], 'mouth': (.67, .49)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
@@ -53,6 +58,7 @@ ap.add_argument('--frames', default=None)
 ap.add_argument('--cells', type=int, default=None)      # stance width in row cells (44 regular, 42 boss: what the old sprites used)
 ap.add_argument('--atlas-w', type=int, default=None)    # stance width in atlas pixels (288 regular, 480 boss)
 ap.add_argument('--colors', type=int, default=24)
+ap.add_argument('--trim-edges', action='store_true')  # drop small slivers of a neighbour frame's effects clipped onto this frame's cut edge
 ap.add_argument('--extra-ok', action='store_true')    # more frames on the sheet than needed: keep the first ones
 ap.add_argument('--drop-grey', action='store_true')   # remove small detached grey-white specks (AI artifacts, e.g. beside the Tar Pit Blob)
 args = ap.parse_args()
@@ -117,6 +123,14 @@ edges = [0] + [(big[i][1] + big[i + 1][0]) // 2 for i in range(n - 1)] + [W]
 cells = {}
 for i, nm in enumerate(frames):
     sub = A[:cut, edges[i]:edges[i + 1]].copy()
+    if args.trim_edges:
+        lab_, nl_ = ndi.label(ndi.binary_dilation(sub[:, :, 3] > 10, iterations=2))
+        tot_ = (sub[:, :, 3] > 10).sum()
+        for j in range(1, nl_ + 1):
+            mm = lab_ == j
+            cols = np.where(mm.any(0))[0]
+            if (cols[0] <= 1 or cols[-1] >= sub.shape[1] - 2) and (mm & (sub[:, :, 3] > 10)).sum() < tot_ * .03:
+                sub[mm] = 0
     ys_, xs_ = np.where(sub[:, :, 3] > 10)
     box = (xs_.min(), ys_.min(), xs_.max() + 1, ys_.max() + 1)
     cells[nm] = Image.fromarray(sub).crop(box)

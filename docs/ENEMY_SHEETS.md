@@ -62,6 +62,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | tangle | foe-tangle-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | snag | foe-snag-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | irongill | foe-irongill-v1.png (boss, 6 frames; lone stance on a second row ignored) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| boommoth | foe-boommoth-v1.png (Boom Mic Moth) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| clapper | foe-clapper-v1.png (Clapper Snapper) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| cuecrab | foe-cuecrab-v1.png (Cue Card Crab) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| fogwisp | foe-fogwisp-v1.png (Fog Wisp, now faces right as asked) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| directorscut | foe-directorscut-v1.png (boss, 6 frames; lone stance on a second row ignored; baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
