@@ -1,3 +1,8 @@
+## 2026-10-30: Painted Chapter 8 enemies
+- Tom sent chapter8_monster_sprites.zip. Installed painted frames for The Draft, The Picky Eater, Wet Blanket and the boss Old Ironbelly (four attack frames). All face right.
+- Not installed: Lukewarm and Leftover (images missing from the zip; ids `lukewarm`, `leftover`). A second variant of The Draft was mentioned but not included.
+- Test: `tools/foes_test.py` on all four, contact sheets and a boss battle screenshot looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Painted Chapter 7 enemies
 - Tom sent chapter7_monster_sprites_and_prompts.zip. Installed painted frames for The Cliffhanger, Pop-Up Panic and the boss The Unread (four attack frames).
 - Not installed: the file named Know-It-All_sprite_sheet.png actually shows a red tasseled bookmark ghost (the Shusher design), not the navy encyclopedia in the Know-It-All prompt, so `knowitall` keeps its old art. Shusher_idle.png is a lone stance (Shusher is already installed from chapter 6). Dog-Ear's image is missing from the zip.

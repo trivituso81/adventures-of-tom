@@ -80,6 +80,10 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | cliffhanger | foe-cliffhanger-v1.png (The Cliffhanger) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | popup | foe-popup-v1.png (Pop-Up Panic) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | unread | foe-unread-v1.png (The Unread, boss, 6 frames, baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| thedraft | foe-thedraft-v1.png (The Draft) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| pickyeater | foe-pickyeater-v1.png (The Picky Eater) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| wetblanket | foe-wetblanket-v1.png (Wet Blanket) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| ironbelly | foe-ironbelly-v1.png (Old Ironbelly, boss, 6 frames, baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
