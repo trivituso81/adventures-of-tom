@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 7 of 10 (source and cut)
+- Saved `tombo-sheet07-of-10.png` (items 85 to 98; sheet 6 still outstanding). Cells 1 to 12 match (velvet couch, mustard pillow, MIDNIGHT HOUSE screen, popcorn bowl and piece, turbo fan and box, garden hose, Red Line train, METRO sign, TAP card, Last Train car) and are cut. Cells 13 and 14 came back as a bench and a street lamp: Palm Tree and New York Skyline go on the redo sheet. 75 of 138 painted. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 5 of 10 (source and cut)
 - Saved `tombo-sheet05-of-10.png`; all 14 match (espresso cup, gelato, red Vespa, Italy brochure, white counter, blue cloth, broom, party table, string lights, gumbo pot, pupusa plate, landing net, cattail reeds, crust bait) and are cut. `bake_prop_sheets.py` gained `COLCUTS` (hand-set column gaps for one row). 63 of 138 painted. Not wired yet.
 
