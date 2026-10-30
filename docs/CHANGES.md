@@ -1,3 +1,8 @@
+## 2026-10-30: Painted Chapter 5 school enemies
+- Tom sent chapter5_monster_sprites.zip. Installed painted frames for Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread and the boss The Red Pen (four attack frames). All five sheets face right, so nothing is mirrored (the F on Pop Quiz reads correctly).
+- Baked with `tools/sprite-bake/bake_foe.py` (Red Pen with `--trim-edges`); script tags added before `data/foes/use.js`. Old pixel rows stay as the fallback.
+- Test: `tools/foes_test.py` on all five, contact sheets and a boss battle screenshot looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Painted Chapter 4 backlot enemies
 - Tom sent ch4_monsters.zip. Installed painted frames for Boom Mic Moth, Clapper Snapper, Cue Card Crab, Fog Wisp and the boss The Director's Cut (four attack frames). Fog Wisp now faces right like the others.
 - `bake_foe.py` gained `--trim-edges` (drops slivers of a neighbour frame's burst effects; used for the Director's Cut). Script tags added before `data/foes/use.js`. Old pixel rows stay as the fallback.

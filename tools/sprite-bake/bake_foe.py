@@ -48,8 +48,13 @@ MARK = {
     'cuecrab': {'eyes': [(.53, .49), (.62, .48)], 'mouth': (.53, .62)},
     'fogwisp': {'eyes': [(.82, .39), (.91, .39)], 'mouth': (.87, .51)},
     'directorscut': {'eyes': [(.70, .33), (.76, .32)], 'mouth': (.67, .49)},
+    'popquiz': {'eyes': [(.49, .47), (.63, .48)], 'mouth': (.51, .62)},
+    'tardybell': {'eyes': [(.48, .43), (.62, .44)], 'mouth': (.52, .58)},
+    'glitterglue': {'eyes': [(.58, .61), (.70, .61)], 'mouth': (.64, .72)},
+    'dodgeball': {'eyes': [(.59, .35), (.72, .39)], 'mouth': (.53, .57)},
+    'redpen': {'eyes': [(.49, .27), (.58, .27)], 'mouth': (.53, .33)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()

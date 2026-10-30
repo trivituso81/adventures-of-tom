@@ -67,6 +67,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | cuecrab | foe-cuecrab-v1.png (Cue Card Crab) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | fogwisp | foe-fogwisp-v1.png (Fog Wisp, now faces right as asked) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | directorscut | foe-directorscut-v1.png (boss, 6 frames; lone stance on a second row ignored; baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| popquiz | foe-popquiz-v1.png (Pop Quiz) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| tardybell | foe-tardybell-v1.png (Tardy Bell) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| glitterglue | foe-glitterglue-v1.png (Glitter Glue) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| dodgeball | foe-dodgeball-v1.png (Dodgeball Dread) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| redpen | foe-redpen-v1.png (The Red Pen, boss, 6 frames, baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
