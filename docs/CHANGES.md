@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Grace's sheet (source only)
+- Saved Grace's returned sheet as `tools/sprite-bake/src/props/grace-sheet1-of-1.png`. All 15 props match the prompt list. Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Tom's first two (source only)
 - Tom ran the image AI on the first prop prompts. Saved the two returned sheets under `tools/sprite-bake/src/props/` with a README saying which cells are right. 30 of Tom's 31 props are usable; the retro console is still to redo.
 - Not wired into the game. No code change.
