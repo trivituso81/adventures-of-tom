@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Boppy 31-item sheet (source only)
+- Saved `tools/sprite-bake/src/props/boppy-sheet1-items1-31.png`. Items 1 to 25 match the prompt list. Item 26 (ghost pepper) has the wrong color, items 27 to 31 drifted into invented props (fire alarm, cardigan, starter pistol, finish arch, race bib are missing). Redo list noted. Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Deedee sheet 2 of 2 (source only)
 - Saved `tools/sprite-bake/src/props/deedee-sheet2-of-2.png`. All 15 props match the prompt list. Deedee is complete (30 of 30). Not wired into the game.
 
