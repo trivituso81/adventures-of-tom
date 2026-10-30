@@ -1,3 +1,8 @@
+## 2026-10-29: Chapter 1 intro, Tom no longer shrinks when he stretches
+- Cause: the painted stretch frames (`TOM_STRETCH`, art/chars/tom-stretch.webp) are the same body size as his walk frames (k 3, about 42 rows), but `drawStretchPainted` and the old pixel fallback in `engine/intro.js` drew them at scale 1 while the walk sprite is drawn at `actorK()` (1.2 on outdoor maps such as the opening Square). So Tom dropped to 83% height as soon as the stretch began and grew back after.
+- Fix: both stretch drawers now use `actorK()*(OW.tom.k||1)` for the sprite, shadow, bob and the `~` puffs.
+- Checked: before/after frames of all poses against the walk sprite after the stretch (same height); smoke FAILS: [].
+
 ## 2026-10-29: Painted Justin (overworld)
 - Tom sent Justin's walk sheet (3 rows of 4, magenta) with the word "Justin" and then: head to body ratio like TNB and Boppy, a bit taller than everyone (6'5" in real life). Installed as the painted overworld set `OW.justin` (replaces the old traced set; the ch5 map NPC and the ch10 ending spawn both use `sheet:'justin'`).
 - `tools/sprite-bake/bake_justin.py` (copy of bake_ellie.py) writes `art/chars/justin-ow.webp` and `data/justin-hires.js`; `data/justin-hires-use.js` wires it (tags added in `index.html` after ellie-hires-use). The sheet's head was 26 percent of his height, so the baker solves a head factor per view (front 2.07, back 2.27, side 1.80) to put hair-to-chin at 0.42 of the figure front and back and 0.40 in profile (TNB 0.433, Boppy 0.40), tapered below the chin. Pink hair-tip halo pulled out (`despill_pink`).
