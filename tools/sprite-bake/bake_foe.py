@@ -93,11 +93,25 @@ MARK = {
     'conehead': {'eyes': [(.34, .33), (.44, .33)], 'mouth': (.39, .41)},
     'brainfreeze': {'eyes': [(.52, .45), (.70, .45)], 'mouth': (.60, .61)},
     'leviathan': {'eyes': [(.66, .19), (.71, .20)], 'mouth': (.76, .32)},
+    'gremlin': {'eyes': [(.52, .43), (.73, .42)], 'mouth': (.65, .54)},
+    'censor': {'eyes': [(.42, .17), (.51, .17)], 'mouth': (.50, .27)},
+    'rubberstamp': {'eyes': [(.52, .22), (.69, .22)], 'mouth': (.62, .32)},
+    'signalfault': {'eyes': [(.39, .20), (.49, .20)], 'mouth': (.44, .27)},
+    'longline': {'eyes': [(.46, .29), (.60, .29)], 'mouth': (.53, .34)},
+    'wallflower': {'eyes': [(.51, .33), (.61, .33)], 'mouth': (.57, .41)},
+    'leftover': {'eyes': [(.43, .54), (.64, .52)], 'mouth': (.54, .65)},
+    'lukewarm': {'eyes': [(.45, .66), (.58, .66)], 'mouth': (.51, .72)},
+    'knowitall': {'eyes': [(.55, .47), (.71, .45)], 'mouth': (.62, .56)},
+    'dogear': {'eyes': [(.74, .36), (.82, .37)], 'mouth': (.84, .52)},
+    'acorncache': {'eyes': [(.64, .48), (.77, .48)], 'mouth': (.70, .58)},
+    'cheekstuffer': {'eyes': [(.59, .27), (.66, .26)], 'mouth': (.67, .33)},
+    'acornagent': {'eyes': [(.52, .48), (.71, .48)], 'mouth': (.63, .59)},
+    'extra': {'eyes': [(.55, .30), (.69, .29)], 'mouth': (.61, .39)},
     'lostluggage': {'eyes': [(.62, .38), (.78, .37)], 'mouth': (.62, .56)},
     'redeye': {'eyes': [(.70, .35), (.80, .37)], 'mouth': (.86, .55)},
     'standbysprite': {'eyes': [(.44, .38), (.62, .36)], 'mouth': (.52, .56)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm', 'warden', 'hush9final', 'marlowe16', 'twinlens', 'vance', 'brainfreeze', 'leviathan'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm', 'warden', 'hush9final', 'marlowe16', 'twinlens', 'vance', 'brainfreeze', 'leviathan', 'censor'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()

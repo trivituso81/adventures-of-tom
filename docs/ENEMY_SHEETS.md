@@ -115,6 +115,20 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | conehead | foe-conehead-v1.png (Cone Head, Nine Scoops, 4 frames, `--cut-y 390`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | brainfreeze | foe-brainfreeze-v1.png (Brain Freeze, Nine Scoops boss, 6 frames, `--cut-y 430 --cuts 381,721,1056,1374,1838 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 | leviathan | foe-leviathan-v1.png (The Chronos-Leviathan, chapter 20 boss, 6 frames; arrived as a pasted image with a checkerboard baked into the pixels, no alpha, so the background was keyed out into the saved source; `--cut-y 374 --cuts 356,737,1076,1420,1847 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| gremlin | foe-gremlin-v1.png (Sprinkle Gremlin, Nine Scoops, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| censor | foe-censor-v1.png (The Oblivion Censor, chapter 19 boss, 6 frames; `--cuts 335,720,1010,1365,1932 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| rubberstamp | foe-rubberstamp-v1.png (Rubber Stamp, chapter 19, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| signalfault | foe-signalfault-v1.png (Signal Fault, chapter 13, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| longline | foe-longline-v1.png (The Long Line, terminal, 4 frames; matched by look: a yellow robot holding a stanchion and blue belt) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| wallflower | foe-wallflower-v1.png (The Wallflower, club, 4 frames; `--cuts 487,1032,1559`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| leftover | foe-leftover-v1.png (Leftover, barn, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| lukewarm | foe-lukewarm-v1.png (Lukewarm, barn, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| knowitall | foe-knowitall-v1.png (The Know-It-All, library, 4 frames; the real sheet, replacing the Shusher-design file that arrived earlier) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| dogear | foe-dogear-v1.png (Dog-Ear, library, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| acorncache | foe-acorncache-v1.png (Acorn Cache, oak, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| cheekstuffer | foe-cheekstuffer-v1.png (Cheek Stuffer, oak, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| acornagent | foe-acornagent-v1.png (Acorn Agent, oak, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| extra | foe-extra-v1.png (Extra Extra, backlot, 4 frames) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
@@ -130,3 +144,5 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 
 
 Note (2026-10-30): enemies defined in `data/bonus-nine-scoops.js` (slushslug, conehead, brainfreeze, sprinklegremlin) are created after the first `data/foes/use.js` runs, so `index.html` loads `use.js` a second time right after that file. `use.js` skips any enemy already painted, so running twice is safe. Any future enemy defined in a late-loading file needs the same second pass or an earlier load order.
+
+Note (2026-10-30): sheets pasted as chat images arrive with no file name; match them by looking at them against the enemy's description in `data/*-monsters.js` and say which one was matched to which id. As of this date every enemy has a painted sheet except `deadletter` (Dead Letter, chapter 19).

@@ -1,5 +1,10 @@
 ## 2026-10-30: Tombo prop sheet 2 of 10 (source and cut)
 - Saved `tombo-sheet02-of-10.png`; all 14 match (scepter, reading lamp, 8-bit music note, director's chair, megaphone, top hat, cane, stage curtains, kitchen counter, mixing bowl, ketchup, pickles, cereal box, mustard). Cut to `art/props/tombo/`; 22 of 138 Tombo props painted. Not wired yet.
+## 2026-10-30: Painted enemies from 14 pasted sheets (the last missing ones)
+- Tom pasted 14 sheet images with no words. Matched by looking at each against its description in the monster files: gremlin (Sprinkle Gremlin), censor (The Oblivion Censor, ch19 boss), rubberstamp, signalfault, longline, wallflower, leftover, lukewarm, knowitall (the real one this time), dogear, acorncache, cheekstuffer, acornagent, extra. The Long Line is the one judged by look alone (a yellow robot with a stanchion and blue belt; Velvet Rope was already installed from a different sheet).
+- All 14 show painted in a test fight; old sprites stay as fallback until Tom approves on his phone. Tests: `tools/foes_test.py` on all 14, 0 fails; `tools/smoke.py` FAILS: [].
+- Still without a painted sheet: `deadletter` (Dead Letter, chapter 19). Not among the 14.
+- Censor needed `--cuts` (the ink swishes overlap the next frame); Wallflower needed `--cuts` (its petal spray joins attack1 to attack2). No flaws worth logging on the other 12.
 
 ## 2026-10-30: Rivituso Row repainted: every house and both exits labeled
 
