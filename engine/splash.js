@@ -89,14 +89,15 @@ function splashChapterChoices(from,to) {
     const built=splashBuilt(n);
     if(!built) { out.push({name:'CH '+n,title:c.title,sub:'Still being built.',cls:'locked',why:'Chapter '+n+' is still being built.'}); continue; }
     let act,sub='';
-    if(n===1) act=()=>splashGo(confirmNew);
+    if(n===1) act=()=>splashDifficulty(()=>splashGo(confirmNew));
     else if(n===PARTS[2].from) {
       const clr=partClearSlots();
       sub=clr.length?'From your Part 1 clear data.':'Test: as if Part 1 were done.';
-      act=()=>splashGo(clr.length?()=>confirmPart2(splashNewestClear(clr)):()=>confirmChapter(n));
+      // Continuing from clear data keeps the difficulty already saved there; a test jump asks.
+      act=clr.length?()=>splashGo(()=>confirmPart2(splashNewestClear(clr))):()=>splashDifficulty(()=>splashGo(()=>confirmChapter(n)));
     } else {
       sub=(chselRegion(n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[n];
-      act=()=>splashGo(()=>confirmChapter(n));
+      act=()=>splashDifficulty(()=>splashGo(()=>confirmChapter(n)));
     }
     out.push({name:'CH '+n,title:c.title,cast:splashChapterCast(n),sub,act});
   }
@@ -104,6 +105,17 @@ function splashChapterChoices(from,to) {
   return out;
 }
 const splashNewestClear=slots=>slots.slice().sort((a,b)=>(readSave(b).when||0)-(readSave(a).when||0))[0];
+// Difficulty picker: portrait, label and the B7_DIFF mode it sets (engine/feel.js).
+const SPLASH_DIFF=[
+  {id:'rose',name:'EASY',who:'rose',blurb:'Softer monsters, a hint each turn.'},
+  {id:'grace',name:'MEDIUM',who:'grace',blurb:'The game as designed.'},
+  {id:'director',name:'HARD',who:'tom',blurb:'Tougher, faster monsters.'}];
+function splashDifficulty(next) {
+  splash.diffNext=next; splash.diffFrom=splash.mode; splash.diffSel=splash.sel;
+  SPLASH_PARENT.diff=splash.mode;
+  sfx.select();
+  splashSetMode('diff',Math.max(0,SPLASH_DIFF.findIndex(d=>d.id===B7.diff)));
+}
 const SPLASH_MODES={
   launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',layout:'launch',choices:()=>{
     const n=splashSaveCount();
@@ -123,8 +135,15 @@ const SPLASH_MODES={
   // Bonus chapters (data/bonus-nine-scoops.js): standalone, no Part 1 or Part 2 save needed.
   bonus:{tab:'Bonus Chapter',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     {name:'NINE SCOOPS',sub:'Grace’s 9th birthday on Long Island. Tom, Grace and Rose. About 80 minutes.',
-      act:()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew)},
+      act:()=>splashDifficulty(()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew))},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
+  // Shown after a new game is picked and before its warning or opening: Rose is Easy, Grace is Medium, Tom is Hard.
+  diff:{tab:'Choose your difficulty',cue:'A / Enter to pick. B / Esc to go back',
+    text:'How tough should the monsters be? You can change this any time in Options.',
+    choices:()=>[
+      ...SPLASH_DIFF.map(d=>({name:d.name,cast:[d.who],sub:B7_DIFF[d.id].sub+'. '+d.blurb,
+        act:()=>{ b7SetDiff(d.id); const go=splash.diffNext; splash.diffNext=null; if(go) go(); }})),
+      {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
     {name:'BATTLE LAB',sub:'Try every move and Tombo.',to:'lab'},
@@ -181,6 +200,7 @@ function splashBack() {
   splashSetMode(up);
   const i=(splash.list||[]).findIndex(c=>c.to===from);
   if(i>=0) { splash.sel=i; splashMark(); }
+  else if(from==='diff'&&splash.diffSel!=null) { splash.sel=Math.min(splash.diffSel,(splash.list||[]).length-1); splashMark(); }
 }
 // Pick from the welcome page. The prompts that follow (new game warning, load list, chapter jump) are shown on this same
 // page, in the same panel (titleAsk). BACK returns to the menu and choice the player came from (splashReturn). If the pick
