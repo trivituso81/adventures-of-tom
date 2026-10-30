@@ -1,3 +1,9 @@
+## 2026-10-30: Painted Chapter 16 enemies, and a second HUSH-9 sheet
+- Tom sent ch15_16monsters.zip: Marlowe Transformed (chapter 16 boss, id `marlowe16`), Grey Note (`greynote`) and a second HUSH-9 Final Form sheet. Marlowe and Grey Note show painted in a test fight; old sprites stay as fallback until Tom approves on his phone.
+- The new HUSH-9 sheet is a different design from the one installed on the ch14 zip (round capsule, two warning lights, thumbs-up glove at its side; the installed one has a speaker grille with a white glove held to its lips, which matches `data/ch15-monsters.js`). Kept the installed one live and saved the new sheet as `tools/sprite-bake/src/foe-hush9final-v2-unused.png`. To swap: copy it over `foe-hush9final-v1.png` and rebake with `--cut-y` and `--cuts` set for its frame positions.
+- Known small flaw in the source art: Marlowe attack3 has its beam tip cut flat at the right (the next frame's halo overlaps it).
+- Tests: `tools/foes_test.py marlowe16,greynote` 0 fails; `tools/smoke.py` FAILS: [].
+
 ## 2026-10-30: Battle prop sheets, Rose sheet 2 of 2 (source only)
 - Saved `tools/sprite-bake/src/props/rose-sheet2-of-2.png`. All 12 props match the prompt list. Rose is now complete (25 of 25). Not wired into the game.
 

@@ -82,11 +82,13 @@ MARK = {
     'drillworm': {'eyes': [(.58, .25), (.69, .24)], 'mouth': (.60, .53)},
     'warden': {'eyes': [(.57, .41), (.68, .41)], 'mouth': (.62, .50)},
     'hush9final': {'eyes': [(.70, .40), (.84, .40)], 'mouth': (.72, .60)},
+    'marlowe16': {'eyes': [(.74, .37), (.84, .36)], 'mouth': (.81, .42)},
+    'greynote': {'eyes': [(.30, .41), (.63, .42)], 'mouth': (.46, .52)},
     'lostluggage': {'eyes': [(.62, .38), (.78, .37)], 'mouth': (.62, .56)},
     'redeye': {'eyes': [(.70, .35), (.80, .37)], 'mouth': (.86, .55)},
     'standbysprite': {'eyes': [(.44, .38), (.62, .36)], 'mouth': (.52, .56)},
 }
-BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm', 'warden', 'hush9final'}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm', 'warden', 'hush9final', 'marlowe16'}
 DROP_GREY = {'tarblob'}      # sheets with stray grey specks (AI artifacts) that bake_foe removes
 
 ap = argparse.ArgumentParser()
