@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 8 of 10 (source and cut)
+- Saved `tombo-sheet08-of-10.png` (items 99 to 112). Cells 1 to 11 match (kintsugi cup, pottery shelf, kintsugi brush, dog treat, giant paw, puzzle toy, tug rope, dining table, checked tablecloth, dinner plate, candle) and are cut. Cells 12 to 14 came back as a fork, a red napkin and a wooden chair: Drinking Glass, Hanging Pendant Lamp and Sourdough Bite go on the redo sheet. 86 of 138 painted. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 7 of 10 (source and cut)
 - Saved `tombo-sheet07-of-10.png` (items 85 to 98; sheet 6 still outstanding). Cells 1 to 12 match (velvet couch, mustard pillow, MIDNIGHT HOUSE screen, popcorn bowl and piece, turbo fan and box, garden hose, Red Line train, METRO sign, TAP card, Last Train car) and are cut. Cells 13 and 14 came back as a bench and a street lamp: Palm Tree and New York Skyline go on the redo sheet. 75 of 138 painted. Not wired yet.
 

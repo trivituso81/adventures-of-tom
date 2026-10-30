@@ -46,11 +46,12 @@ SHEETS = [
     ('tombo-sheet04-of-10.png', 'tombo', rng(43, 55)),
     ('tombo-sheet05-of-10.png', 'tombo', rng(57, 70)),
     ('tombo-sheet07-of-10.png', 'tombo', rng(85, 96)),
+    ('tombo-sheet08-of-10.png', 'tombo', rng(99, 109)),
     # redo sheet: cell -> (character, item)
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
-TOTAL = {'tombo-sheet07-of-10.png': 14, 'tombo-sheet05-of-10.png': 14, 'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+TOTAL = {'tombo-sheet08-of-10.png': 14, 'tombo-sheet07-of-10.png': 14, 'tombo-sheet05-of-10.png': 14, 'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
 ROWCUTS = {'tombo-sheet04-of-10.png': [325, 635, 935]}   # sheets where the row gaps are not the emptiest places (a hanging cord, tall props)
 COLCUTS = {'tombo-sheet05-of-10.png': {2: [328, 641, 940]}}   # hand-set column gaps for one row (row index from 0) where props touch or one prop spans two columns
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
