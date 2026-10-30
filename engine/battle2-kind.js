@@ -338,16 +338,18 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   // squishy die: pink glittery cube, four pips and a squishy little face in the middle
   const rrp=(x,y,w,h,r)=>{ gfx.beginPath(); gfx.moveTo(x+r,y); gfx.arcTo(x+w,y,x+w,y+h,r); gfx.arcTo(x+w,y+h,x,y+h,r); gfx.arcTo(x,y+h,x,y,r); gfx.arcTo(x,y,x+w,y,r); gfx.closePath(); };
   const dieSq=(x,y,s,rot,sq,ms)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s*(1+sq*.3),s*(1-sq*.36));
-    rrp(-22,-22,44,44,11); gfx.fillStyle='#ff7fb8'; gfx.fill(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke();
+    const _pd=PROPART.draw('tombo/dice_squishy',0,0,{h:50});
+    if(!_pd) { rrp(-22,-22,44,44,11); gfx.fillStyle='#ff7fb8'; gfx.fill(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke();
     gfx.save(); rrp(-22,-22,44,44,11); gfx.clip(); gfx.fillStyle='#ffb3d6'; gfx.fillRect(-22,-22,44,14); gfx.fillRect(-22,-22,12,44); gfx.fillStyle='#e0568f'; gfx.fillRect(-22,14,44,8); gfx.fillRect(14,-22,8,44); gfx.restore();
     for(const [px,py] of [[-11,-11],[11,-11],[-11,11],[11,11]]) { E(px,py,4.8,4.8,'#b8386f'); E(px,py,3.6,3.6,'#fff6fb'); }
     E(-5,-2,2.2,2.8,OUT); E(5,-2,2.2,2.8,OUT); E(-4.4,-3,.8,.8,'#ffffff'); E(5.6,-3,.8,.8,'#ffffff'); E(-9,4,3,1.8,'#ff4f8f'); E(9,4,3,1.8,'#ff4f8f');
-    gfx.strokeStyle=OUT; gfx.lineWidth=1.6; gfx.beginPath(); gfx.arc(0,3,3.2,.15*Math.PI,.85*Math.PI); gfx.stroke();
+    gfx.strokeStyle=OUT; gfx.lineWidth=1.6; gfx.beginPath(); gfx.arc(0,3,3.2,.15*Math.PI,.85*Math.PI); gfx.stroke(); }
     gfx.restore();
     for(let j=0;j<9;j++) { const a=ms/420+j*.7,r=(30+(j%3)*7)*s,tw=(Math.sin(ms/90+j*2.1)+1)/2; gfx.globalAlpha=.35+.65*tw;
       star(x+Math.cos(a)*r,y+Math.sin(a)*r*.8,1.8+tw*2.4,j%3===0?'#aef0ff':(j%3===1?'#fffbe6':'#ffd0ea')); }
     gfx.globalAlpha=1; };
   const giftBox=(x,y,s,open,wob)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(wob); gfx.scale(s,s);
+    if(PROPART.draw('tombo/gift_box',4,-6,{h:54})) { gfx.restore(); return; }
     RO(-22,-8,44,30,'#4fc3d8'); R(-4,-8,8,30,'#ffd166'); R(-22,4,44,5,'#3aa0b5');
     gfx.save(); gfx.translate(open*28,-8-open*36); gfx.rotate(-open*1.1); RO(-26,-12,52,12,'#6fd8ea'); R(-4,-12,8,12,'#ffd166');
     EO(-8,-17,7,5,'#ffd166'); EO(8,-17,7,5,'#ffd166'); EO(0,-14,4,4,'#ffb43a'); gfx.restore(); gfx.restore(); };
@@ -419,7 +421,7 @@ function mirrorRowsCached(sp,k) { const key=sp[k]; if(!mirCache.has(key)) mirCac
 // sprints a loop through the monsters, banking, contrails streaming; the wings clip the target twice. Then he stops in
 // front of it, Rose leans all the way down and BOOPS its nose. Effects unchanged: big Kinetic hit, it loses its next
 // turn, and Rose stays up on Tom's shoulders (Shoulder Ride).
-const goggles=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a);
+const goggles=(x,y,a)=>{ if(PROPART.draw('tombo/aviator_goggles',x,y,{w:34,rot:a})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(a);
   Ln(-16,0,16,0,4,OUT); Ln(-16,0,16,0,2,'#6a4a2a');
   for(const dx of [-7,6]) { EO(dx,0,6.5,5.5,'#c9a23a'); E(dx,0,4.6,3.8,'#9fe0ff'); E(dx-1.6,-1.4,1.6,1.2,'#ffffff'); }
   gfx.restore(); };
@@ -474,9 +476,11 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       for(let j=0;j<4;j++) for(let i=1;i<trail.length;i++) { const a=trail[i-1],c2=trail[i],q=1-(ms-c2.t)/650; gfx.globalAlpha=Math.max(0,q)*.8; Ln(a.pts[j][0],a.pts[j][1],c2.pts[j][0],c2.pts[j][1],2+q*4,'#ffffff'); }
       gfx.globalAlpha=1; }
     if(wk>0&&!skinOn(ms)) { gfx.save(); gfx.translate(cx,lowY); gfx.rotate(b); gfx.scale(wk,1);
-      const up=upY-lowY; for(const sx of [-38,38]) { Ln(sx,up,sx,0,6,OUT); Ln(sx,up,sx,0,3,'#8a5a30'); }
+      const up=upY-lowY;
+      if(!PROPART.draw('tombo/biplane_wings',-4,up/2,{w:176,h:Math.abs(up)+30})) {
+      for(const sx of [-38,38]) { Ln(sx,up,sx,0,6,OUT); Ln(sx,up,sx,0,3,'#8a5a30'); }
       wing(0,0,160,14); wing(2,up,132,12);
-      if(ms>P.go&&ms<P.arrive) { const pr=Math.floor(ms/40)%2; E(-86,0,3,pr?11:4,'#dddddd'); }
+      if(ms>P.go&&ms<P.arrive) { const pr=Math.floor(ms/40)%2; E(-86,0,3,pr?11:4,'#dddddd'); } }
       gfx.restore(); }
     // goggles on Rose's head, rotating with her
     if(!skinOn(ms)) { const t=S0.rrot,f=S0.dir>0&&ms>P.go?-1:1,px=S0.rx,py=S0.rb-RH/2; goggles(px-3*f*Math.cos(t)+HD*Math.sin(t),py-3*f*Math.sin(t)-HD*Math.cos(t),t); }
@@ -1020,6 +1024,7 @@ B2_TOMBO_ANIM.amy1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // Effects: a sure critical Kinetic hit that splashes the neighbors; Tom gets Choreographed (1 VP, a quicker next turn).
 SC.tb_mat=(s,u)=>{ const ms=s.t*1000,k=ez(ms/450)*(ms>s.off?1-ez((ms-s.off)/300):1); if(k<=0) return;
   const w=s.w*k,x=s.x1-w,y=s.y,h=16;
+  { gfx.save(); gfx.beginPath(); gfx.rect(x-8,y-24,w+16,48); gfx.clip(); const okp=PROPART.draw('tombo/blue_gym_mat',x+w/2,y-1,{w:w+10,h:22}); gfx.restore(); if(okp) return; }
   RO(x,y-h/2,w,h,'#3c6cc8'); R(x,y-h/2,w,3,'#6a96e8'); for(let j=1;j<5;j++) R(x+w*j/5-1,y-h/2,2,h,'#2a4c96');
   if(k<1) EO(x,y,9,10,'#3c6cc8'); };
 B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
@@ -1433,6 +1438,11 @@ const CASE='#2f5a8a',CASE2='#4a7cb0',CASE3='#1f3e64',BLANK='#ff9ac0',BLANK2='#e8
 // The carry-on: body bottom-centre at (x,by); the handle runs from its top right corner to (hx,hy). lump: 0..1 blanket
 // and sneakers on top; wig: the lump's wiggle.
 const carryOn=(x,by,hx,hy,lump,wig,t)=>{ const w=64,h=46,b=by-6,top=b-h;
+  const paintedCase=PROPART.draw('tombo/carry_on_suitcase',x,by-30,{w:52,h:62});   // painted case brings its own handle and wheels
+  if(paintedCase) { if(lump<=0) return;
+    gfx.save(); gfx.globalAlpha=lump; const ly=top-2,s=1+Math.sin(wig)*.06;
+    PROPART.draw('tombo/pink_sneakers',x-w/2-4+Math.sin(wig*1.3)*3,ly-4,{w:30});
+    PROPART.draw('tombo/pink_blanket_lump',x,ly-12,{w:w+6,sy:s}); gfx.restore(); return; }
   if(hx!=null) { Ln(x+w/2-6,top+4,hx,hy,6,OUT); Ln(x+w/2-6,top+4,hx,hy,3,'#9aa1ae'); RO(hx-5,hy-3,10,6,'#3a3e46'); }
   for(const wx of [x-w/2+10,x+w/2-10]) { const sp=t*14; EO(wx,b+2,5,5,'#2a2c32'); Ln(wx,b+2,wx+Math.cos(sp)*3,b+2+Math.sin(sp)*3,1.5,'#8a8e98'); }
   RO(x-w/2,top,w,h,CASE); R(x-w/2,top,w,4,CASE2); for(const dx of [-16,0,16]) R(x+dx-1,top+6,2,h-10,CASE3);
@@ -1772,8 +1782,9 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     const k=seg(ms,P.flat+300,P.burst); return {x:sT.x,y:sT.b-TH*.55-ez(k)*(TH*.9),sc:1.9+k*.7,a:1,sq:(1-k)*.45,face:1,shout:1}; };
   const dumpling=(d,ms)=>{ const img=ghostDumpling(),sx=d.sc*(1+d.sq*.5),sy=d.sc*(1-d.sq*.45),w=img.width*sx,h=img.height*sy;
     gfx.globalAlpha=d.a*.35; E(d.x,d.y,w*.75,h*.8,GOLD); gfx.globalAlpha=d.a;
-    const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=false; gfx.drawImage(img,d.x-w/2,d.y-h/2,w,h); gfx.imageSmoothingEnabled=sm;
-    if(d.face) { const ex=w*.17,ey=d.y-h*.05,blink=Math.sin(ms/400)>.93; // grumpy genie: heavy brows, small mouth
+    const pnt=PROPART.draw('grace/gold_dumpling_squishy',d.x,d.y,{h:img.height*d.sc*1.05,sx:1+d.sq*.5,sy:1-d.sq*.45});   // painted dumpling, its own smiling face
+    if(!pnt) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=false; gfx.drawImage(img,d.x-w/2,d.y-h/2,w,h); gfx.imageSmoothingEnabled=sm; }
+    if(d.face&&!pnt) { const ex=w*.17,ey=d.y-h*.05,blink=Math.sin(ms/400)>.93; // grumpy genie: heavy brows, small mouth
       R(Math.round(d.x-ex-2),Math.round(ey-1),4,blink?1:3,'#3a2210'); R(Math.round(d.x+ex-2),Math.round(ey-1),4,blink?1:3,'#3a2210');
       R(Math.round(d.x-ex-3),Math.round(ey-4),6,2,'#3a2210'); R(Math.round(d.x+ex-3),Math.round(ey-4),6,2,'#3a2210');
       if(d.shout) { R(Math.round(d.x-4),Math.round(ey+h*.2),8,5,'#3a2210'); R(Math.round(d.x-2),Math.round(ey+h*.2+3),4,2,'#e0707a'); }
@@ -1828,7 +1839,8 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // Effects: Chatter hit on every enemy (they lose time and warm up), party heals 50%, Rose rides on Tom's shoulders.
 let darkC=null;
 const NOTE=['...##.','...#.#','...#..','...#..','...#..','.###..','####..','.##...'];
-const note8=(x,y,u,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
+const note8=(x,y,u,c,rot=0)=>{ if(u>=5&&PROPART.draw('tombo/giant_8_bit_music_note',x,y-u*3.6,{h:u*9,rot})) return;   // the big rain notes are painted; the tiny floating ones stay pixel
+  gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
   for(const pass of [0,1]) for(let r=0;r<NOTE.length;r++) for(let q=0;q<6;q++) if(NOTE[r][q]==='#') {
     const X=(q-3)*u,Y=(r-8)*u; if(pass===0) R(X-1.5,Y-1.5,u+3,u+3,OUT); else R(X,Y,u,u,(r>=5&&q===1&&r===6)?'#ffffff':c); }
   gfx.restore(); };
@@ -1864,6 +1876,7 @@ B2_TOMBO_ANIM.rose3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   // Rose's headphones: a silver band over her head and two glowing cups (drawn on her seat once she is up).
   // cx,cy: the middle of her head at ear height; r: half the head's width.
   const phones=(cx,cy,r,a)=>{ if(a<=0) return; gfx.globalAlpha=a; gfx.lineCap='round';
+    if(PROPART.draw('tom/headphones',cx,cy-r*.3,{w:2*r+16})) { gfx.globalAlpha=1; return; }
     for(const [w,c] of [[6,OUT],[3,'#c9d2e0']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.arc(cx,cy,r,Math.PI*1.08,Math.PI*1.92); gfx.stroke(); }
     const pulse=.5+.5*Math.sin(performance.now()/140);
     for(const [dx,c] of [[-r,'#ff9ac0'],[r,'#8fd0ff']]) { gfx.globalAlpha=a; EO(cx+dx,cy+2,4.5,6,'#5a6270'); gfx.globalAlpha=a*(.6+.4*pulse); E(cx+dx,cy+2,2.6,3.8,c); } gfx.globalAlpha=1; };
@@ -2916,6 +2929,7 @@ const rr=(x,y,w,h,r,c,o=2)=>{ const p=(x0,y0,w0,h0,r0)=>{ gfx.beginPath(); gfx.m
   if(o) { p(x-o,y-o,w+o*2,h+o*2,r+o); gfx.fillStyle=OUT; gfx.fill(); } p(x,y,w,h,r); gfx.fillStyle=c; gfx.fill(); };
 // A thumbs-up on a round red badge, about 56 px across at s=1, centred on x,y. sq squashes it flat (0..1).
 const thumbsUp=(x,y,s,rot=0,sq=0,badge=true)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s*(1+sq*.4),s*(1-sq*.55));
+  if(badge&&PROPART.draw('grace/like_thumbs_up',0,0,{h:58})) { gfx.restore(); return; }
   if(badge) { E(0,0,28,28,OUT); E(0,0,26,26,RED); E(-8,-10,12,8,'#ff7a5e'); }
   rr(-19,-2,7,20,2,'#3c6cc8',1.5);                                  // cuff
   rr(-12,-4,24,22,6,'#fffbf2',1.5);                                 // fist
@@ -2925,6 +2939,7 @@ const thumbsUp=(x,y,s,rot=0,sq=0,badge=true)=>{ gfx.save(); gfx.translate(x,y); 
 // The arcade-style LIKE button: base bottom at by. press 0..1 squashes the dome; glow pulses a ring when it is ready.
 const likeBtn=(x,by,press,glow)=>{ const h=26*(1-press*.62);
   if(glow>0) { gfx.globalAlpha=glow*(.35+.25*Math.sin(performance.now()/120)); E(x,by-20,48,30,GOLD); gfx.globalAlpha=1; }
+  { const ph=64*(1-press*.3); if(PROPART.draw('tombo/arcade_like_button',x,by-ph/2+2,{w:76,h:ph})) return; }
   EO(x,by-18,31,h,RED); E(x-10,by-18-h*.55,10,Math.max(1,h*.22),'#ff8a6a');
   thumbsUp(x+1,by-18-h*.55,.32*(1-press*.4),0,press*.5,false);
   RO(x-37,by-19,74,19,'#2c2a36'); R(x-37,by-19,74,3,'#4a4656'); label('LIKE',x,by-13,CREAM,2); };
@@ -3044,7 +3059,11 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     const bob=ms>P.rline&&ms<P.rline+500?-Math.abs(Math.sin(seg(ms,P.rline,P.rline+500)*Math.PI*2))*5:(ms>P.sit&&ms<P.sit+500?-Math.abs(Math.sin(seg(ms,P.sit,P.sit+500)*Math.PI*2))*5:0);
     return {cx:s.x,base:s.y+bob,frame:sp.idle,noShadow:true}; });
   const puff=(x,y,r,a)=>{ if(a<=0||r<=0) return; gfx.globalAlpha=a; E(x,y+3,r+2,r*.82+2,'#b8c6dc'); E(x,y,r,r*.82,'#ffffff'); E(x-r*.25,y-r*.3,r*.45,r*.28,'#ffffff'); gfx.globalAlpha=1; };
+  // painted Lamby (+ Tom's painted hair tuft on her head) for the giant cloud Lamby and the thought bubble; false until the art loads
+  const lambyP=(x,y,sc,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); const ok=PROPART.draw('rose/lamby',0,0,{h:34*sc});
+    if(ok) PROPART.draw('tombo/lamby_hair_tuft',-1*sc,-12*sc,{w:13*sc}); gfx.restore(); return ok; };
   const cloudAt=(cx,cy,m,a)=>{ // m: 0 = cloud, 1 = puffs hugging Lamby's outline
+    gfx.globalAlpha=a*(1-ez(m)); const cp=PROPART.draw('tombo/fluffy_cloud',cx,cy+4,{w:164}); gfx.globalAlpha=1; if(cp&&m<=0) return;
     for(const [i,[px,py,r]] of CLOUDP.entries()) { const L=LAMBP[i],x=lerp(px,L[0]*LS,ez(m)),y=lerp(py,L[1]*LS,ez(m)),rad=lerp(r,L[2]*LS*.75,ez(m));
       E(cx+x,cy+y+6,rad*.9,rad*.5,'rgba(150,170,200,'+(a*.18*(1-m))+')'); puff(cx+x,cy+y,rad,a*(1-m*.7)); } };
   scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
@@ -3061,7 +3080,7 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       if(ms>P.puff) { const k=seg(ms,P.puff,P.puffEnd); la=1-k; m=1-k; cy-=k*50; a=1-k; } }
     if(ms>P.cloud&&ms<P.puffEnd) {
       if(la<1||ms>P.puff) cloudAt(cx,cy,m,a*(ms>P.puff?1:1));
-      if(la>0) { gfx.globalAlpha=la; RFX.plush(cx,cy,lsc,{pose,rot,drawn:1}); gfx.save(); gfx.translate(cx,cy); gfx.rotate(rot); lambyHair(0,0,lsc); gfx.restore(); gfx.globalAlpha=1;
+      if(la>0) { gfx.globalAlpha=la; if(!lambyP(cx,cy,lsc,rot)) { RFX.plush(cx,cy,lsc,{pose,rot,drawn:1}); gfx.save(); gfx.translate(cx,cy); gfx.rotate(rot); lambyHair(0,0,lsc); gfx.restore(); } gfx.globalAlpha=1;
         // a fluffy cloud rim still hugging it
         if(ms<P.puff) for(const [i,L] of LAMBP.entries()) if(i%3===0) puff(cx+L[0]*lsc,cy+L[1]*lsc+4,L[2]*lsc*.45,la*.35); }
       // the monster squashes a little while Lamby sits on it
@@ -3070,9 +3089,9 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     // the two thought bubbles
     const s0=seatPt(),rHead={x:s0.x-2,y:s0.y-20-RIDE.ay*RS};
     if(ms>P.tb0&&ms<P.tb1) { const k=ms<P.tb1-200?seg(ms,P.tb0,P.tb0+250):1-seg(ms,P.tb1-200,P.tb1);
-      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250),126,82,sT.x-16,sb-TH+14,k,()=>{ boule(0,4,3.1,false); }); }
+      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250),126,82,sT.x-16,sb-TH+14,k,()=>{ if(!PROPART.draw('tom/sourdough_boule',0,4,{w:82})) boule(0,4,3.1,false); }); }
     if(ms>P.rb0&&ms<P.rb1) { const k=ms<P.rb1-200?seg(ms,P.rb0,P.rb0+250):1-seg(ms,P.rb1-200,P.rb1);
-      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ RFX.plush(4,8,1.75,{pose:'held',drawn:1}); lambyHair(4,8,1.75); }); }
+      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ if(!lambyP(4,8,1.75,0)) { RFX.plush(4,8,1.75,{pose:'held',drawn:1}); lambyHair(4,8,1.75); } }); }
   }});
   const steps=[
     [0,()=>{ setMessage('DIRECTOR’S CUT! Rose climbs up on Tom’s shoulders. Cloud safari.'); B2.aim=null; S('boing'); }],
@@ -3617,9 +3636,10 @@ B2_TOMBO_ANIM.nara1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // tuck, aerial, twisting flip kick on the row), sticks the landing and holds up a 10. Effects: a Kinetic hit on one row
 // (crit +25%), Hooked (cannot dodge) for 2 turns.
 const scoreCard=(x,y,num,s=1,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+  if(num==='10'&&PROPART.draw('grace/scorecards',0,-6,{h:58})) { gfx.restore(); return; }
   RO(-1.5,0,3,26,'#c9a06a'); rr(-17,-30,34,32,4,'#fffbf2',2); R(-15,-28,30,4,num==='10'?'#ffd84a':'#e8e0d0');
   bigWord(num,0,-20,num==='10'?'#e8a020':RED,num==='10'?3:4); gfx.restore(); };
-const judgeDesk=(x,b,w=60,h=30)=>{ RO(x-w/2,b-h,w,h,'#5a6ab8'); R(x-w/2,b-h,w,4,'#8a9ae0'); RO(x-w/2-4,b-h-5,w+8,6,'#f4f0e6'); label('JUDGE',x,b-h+12,CREAM,1); };
+const judgeDesk=(x,b,w=60,h=30)=>{ if(PROPART.draw('tombo/judge_s_desk',x,b-h*.62,{w:w+14})) return; RO(x-w/2,b-h,w,h,'#5a6ab8'); R(x-w/2,b-h,w,4,'#8a9ae0'); RO(x-w/2-4,b-h-5,w+8,6,'#f4f0e6'); label('JUDGE',x,b-h+12,CREAM,1); };
 B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),tl=(E2.targets||[]).filter(t=>t.side==='foe'),row=tl.length?tl:[list[0]];
   const front=row.reduce((m,f)=>ST.foe(f).x>ST.foe(m).x?f:m,row[0]),F=ST.foe(front);
@@ -3730,16 +3750,19 @@ B2_TOMBO_ANIM.grace2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // mind troubles, and she rides home on Tom's shoulders.
 // Tom's sunglasses and earpiece, drawn over his drawn body. Sprite pixel spots (scale 2.6): facing left (idle, act, expr)
 // lens cols 8.6-16.6 rows 10.6-13.4, ear col 21.5 row 11.6; front (celeb) two lenses; facing right (flip) mirrored.
-const shades=(sp,fk,x,b)=>{ const sc=sp.scale,W=sp.idle[0].length*sc,H=sp.idle.length*sc,px=c=>x-W/2+c*sc,py=r=>b-H+r*sc;
+const shades=(sp,fk,x,b,dd)=>{ const sc=sp.scale,W=sp.idle[0].length*sc,H=sp.idle.length*sc,px=c=>x-W/2+c*sc,py=r=>b-H+r*sc;
   const lens=(c0,c1,r0,r1)=>{ rr(px(c0),py(r0),(c1-c0)*sc,(r1-r0)*sc,3,'#14161c',1.5); R(px(c0)+3,py(r0)+2,Math.max(2,(c1-c0)*sc*.3),2,'#6a7488'); };
   const bud=(c,r,dir)=>{ EO(px(c),py(r),2.6,2.6,'#2a2c34'); gfx.lineWidth=1.4; gfx.strokeStyle='#d8dce4'; gfx.beginPath(); gfx.moveTo(px(c),py(r)+2);
     for(let k=1;k<=5;k++) gfx.lineTo(px(c)+dir*(k%2?2.4:-.6),py(r)+2+k*3.4); gfx.stroke(); };
+  if(fk!=='kneel'&&dd&&dd.h) { const dir=fk==='flip'?1:(fk==='celeb'?0:-1);   // painted Tom: glasses on the painted face, found from the drawn size
+    if(PROPART.draw('tombo/bodyguard_sunglasses_and_earpiece',dd.cx+dir*dd.h*.03+dd.h*.03,dd.base-dd.h*.68,{w:dd.h*.3,flip:fk==='flip'})) return; }
   if(fk==='celeb') { lens(12.4,16.8,9.4,12.2); lens(19.3,23.6,9.4,12.2); R(px(16.8),py(10.2),px(19.3)-px(16.8),2,'#14161c'); return; }
   if(fk==='flip') { lens(12.4,20.4,10.6,13.4); Ln(px(12.4),py(11.4),px(7.8),py(11.4),2,'#14161c'); bud(7.5,11.8,1); return; }
   if(fk==='kneel') return;
   lens(8.6,16.6,10.6,13.4); Ln(px(16.6),py(11.4),px(21.2),py(11.4),2,'#14161c'); bud(21.5,11.8,-1); };
 const carpet=(x0,x1,y,k)=>{ if(k<=0) return; const xa=lerp(x1,x0,ez(k)); R(xa,y-9,x1-xa,18,'#a8203a'); R(xa,y-9,x1-xa,3,'#ffd166'); R(xa,y+6,x1-xa,3,'#ffd166');
-  if(k<1) { EO(xa,y,7,11,'#a8203a'); E(xa,y,3,6,'#7a1428'); } };
+  if(k<1) { EO(xa,y,7,11,'#a8203a'); E(xa,y,3,6,'#7a1428'); }
+  else PROPART.draw('tom/red_carpet_runner',xa+10,y-14,{h:46}); };   // painted velvet-rope posts at the monsters' end of the runner
 B2_TOMBO_ANIM.rose2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list);
   const tsp=BATTLE_SPRITES.tom,rsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,RH=rsp.idle.length*rsp.scale,RW=rsp.idle[0].length*rsp.scale;
@@ -3782,7 +3805,7 @@ B2_TOMBO_ANIM.rose2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
     const d=battle.drawnAt&&battle.drawnAt[tom.idx];
     // Tom's sunglasses and earpiece
-    if(ms>200&&d) { gfx.globalAlpha=ez(seg(ms,200,450)); shades(tsp,sT.fk,d.cx,d.base); gfx.globalAlpha=1; }
+    if(ms>200&&d) { gfx.globalAlpha=ez(seg(ms,200,450)); shades(tsp,sT.fk,d.cx,d.base,d); gfx.globalAlpha=1; }
     // the earpiece crackle while he talks into it
     if(ms>P.tline-150&&ms<P.tline+500&&d) { const q=seg(ms,P.tline-150,P.tline+500); for(let j=0;j<3;j++) { gfx.globalAlpha=(1-q)*.8; ring(d.cx+24,d.base-TH*.68,5+j*5+q*6,4+j*4+q*5,1.5,'#9fd8ff'); } gfx.globalAlpha=1; }
     // Rose's tiara (drops onto her head) and Lamby the scepter
@@ -3790,11 +3813,11 @@ B2_TOMBO_ANIM.rose2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>P.tiara-300) { const fr=sR.f,fh=fr.length,fw=fr[0].length,dsc=rd&&rd.h?rd.h/fh:rsp.scale;   // head top from the pixels of the frame being drawn: arms-up frames are taller than idle, and a fixed offset put the tiara over her eyes
       let r0=0; scan:for(;r0<fh;r0++) for(let c=Math.floor(fw*.36);c<=Math.ceil(fw*.64);c++) if(fr[r0][c]!=='.'&&fr[r0][c]!==' ') break scan;
       const q=ez(seg(ms,P.tiara-300,P.tiara)),top=rB-fh*dsc+r0*dsc,hx=rX+(flip?2:-2),hy=top+9-(1-q)*40;
-      gfx.globalAlpha=q; gfx.save(); gfx.translate(hx,hy); gfx.scale(.42,.42); PROP2.tiara({},0); gfx.restore(); gfx.globalAlpha=1;
+      gfx.globalAlpha=q; if(!PROPART.draw('tombo/gold_tiara',hx,hy-2,{w:28})) { gfx.save(); gfx.translate(hx,hy); gfx.scale(.42,.42); PROP2.tiara({},0); gfx.restore(); } gfx.globalAlpha=1;
       if(ms>P.tiara&&ms<P.tiara+500) { const g=seg(ms,P.tiara,P.tiara+500); for(let j=0;j<4;j++) { const a=j*1.57+g*2; star(hx+Math.cos(a)*16*g,hy-4+Math.sin(a)*10*g,3.5*(1-g)+1,GOLD); } } }
     if(ms>P.walk&&ms<P.hop) { const sw=swing(ms),dir=flip?1:-1,hx=rX+dir*RW*.34,hy=rB-RH*.55,ang=lerp(-.5,1.25,sw)*dir,L=22+sw*10;
       const lx=hx+Math.sin(ang)*L*.2+dir*sw*16,ly=hy-L*Math.cos(ang*.6)+sw*14;
-      Ln(hx,hy,lx,ly+6,3,OUT); Ln(hx,hy,lx,ly+6,1.6,'#ffd166');
+      { const dx=lx-hx,dy=ly+6-hy,len=Math.hypot(dx,dy); if(!PROPART.draw('tombo/gold_scepter_stick',(hx+lx)/2,(hy+ly+6)/2,{h:len+10,rot:Math.atan2(dx,-dy)-.35})) { Ln(hx,hy,lx,ly+6,3,OUT); Ln(hx,hy,lx,ly+6,1.6,'#ffd166'); } }
       gfx.save(); gfx.translate(lx,ly); gfx.rotate(dir*sw*.6+(flip?0:0)); gfx.scale(.42,.42); PROP2.lamby({flip:flip},0); gfx.restore(); }
     // the monsters: lean in curious, lean back when Tom steps in, then bow and back out of her way
     for(const o of o3) { const f=o.f,q=o.q; let ox=0,oy=0,sp=0;
@@ -4360,7 +4383,7 @@ const shBunny=(x,y,s,wob,a)=>{ if(a<=0) return; gfx.save(); gfx.translate(x,y); 
   gfx.save(); gfx.translate(12,-9); gfx.rotate(.4); E(0,-8,5.5,10,SHADE); gfx.translate(0,-16); gfx.rotate(1.25+wob); E(0,-6,5,8,SHADE); gfx.restore();
   E(-8,-3,2.2,2,LAMPLIT); gfx.restore(); gfx.globalAlpha=1; };
 // the reading lamp on the floor, its shade tipped up and to the left. Returns where the light comes out.
-const readLamp=(x0,b0,on)=>{ gfx.save(); gfx.translate(x0,b0); gfx.scale(1.35,1.35); const x=0,b=0; E(x,b-2,14,4,OUT); E(x,b-3,12,3,'#5a6270'); Ln(x,b-4,x+4,b-30,5,OUT); Ln(x,b-4,x+4,b-30,2.5,'#8a92a0');
+const readLamp=(x0,b0,on)=>{ if(PROPART.draw('tombo/reading_lamp',x0,b0-34,{h:68})) { if(on) { gfx.globalAlpha=.8; E(x0-17,b0-52,5,10,LAMPLIT); gfx.globalAlpha=1; } return {x:x0-17,y:b0-51}; } gfx.save(); gfx.translate(x0,b0); gfx.scale(1.35,1.35); const x=0,b=0; E(x,b-2,14,4,OUT); E(x,b-3,12,3,'#5a6270'); Ln(x,b-4,x+4,b-30,5,OUT); Ln(x,b-4,x+4,b-30,2.5,'#8a92a0');
   gfx.save(); gfx.translate(x+4,b-32); gfx.rotate(-.7); gfx.beginPath(); gfx.moveTo(-4,-6); gfx.lineTo(-18,-12); gfx.lineTo(-18,12); gfx.lineTo(-4,6); gfx.closePath();
   gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#3c7a6a'; gfx.fill(); if(on) { gfx.globalAlpha=.9; E(-18,0,3,11,LAMPLIT); gfx.globalAlpha=1; } gfx.restore(); gfx.restore();
   return {x:x0+(4-18*Math.cos(.7))*1.35,y:b0+(-32+18*Math.sin(.7))*1.35}; };
@@ -4529,7 +4552,7 @@ B2_TOMBO_ANIM.rose3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<P.end-100) { const a=ms>P.end-300?seg(P.end-100-ms,0,200):1;
       if(g>0) { const r=18+g*70; gfx.save(); gfx.translate(L.x,L.y); const gr=gfx.createRadialGradient(0,0,0,0,0,r); gr.addColorStop(0,'rgba(255,240,180,'+(.75*g*a)+')'); gr.addColorStop(1,'rgba(255,240,180,0)'); gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(0,0,r,0,Math.PI*2); gfx.fill();
         gfx.globalAlpha=g*.55*a; for(let j=0;j<10;j++) { const an=j/10*Math.PI*2+ms/900,r0=20+g*10,r1=r0+16+g*42+Math.sin(ms/120+j)*5; Ln(Math.cos(an)*r0,Math.sin(an)*r0,Math.cos(an)*r1,Math.sin(an)*r1,2.5,GOLD); } gfx.restore(); gfx.globalAlpha=1; }
-      if(!skinNow) { gfx.globalAlpha=a; RFX.plush(L.x,L.y,L.sc,{pose:'held',drawn:1,glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; } }
+      if(!skinNow) { gfx.globalAlpha=a; if(!PROPART.draw('rose/lamby',L.x,L.y,{h:34*L.sc,rot:ms<P.lift?Math.sin(ms/28)*.04:0})) RFX.plush(L.x,L.y,L.sc,{pose:'held',drawn:1,glow:g>.2,rot:ms<P.lift?Math.sin(ms/28)*.04:0}); gfx.globalAlpha=1; } }
     // the dark runs away: a few shadow wisps with eyes scurry off to the left once the light grows
     if(ms>G0+300&&ms<G1+700) for(let j=0;j<5;j++) { const q=seg(ms,G0+300+j*120,G1+300+j*80); if(q<=0||q>=1) continue;
       const y=90+j*38,x=lerp(Math.min(560,L.x-80-j*10),-60,ez(q)); gfx.globalAlpha=(1-q)*.9; E(x,y,22,13,'#0c0d1a'); E(x+16,y+4,10,7,'#0c0d1a');
