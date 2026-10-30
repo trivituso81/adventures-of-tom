@@ -57,7 +57,7 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 
-window.__LE={intro,splash,startSplash,splashPick,startTitle,beginOpening,get coins(){return coins;},set coins(v){coins=v;},openShop,closeShop,items,party,battle,bag,sfx,say,sound,town,player,followers,startBattle,openDialog,toggleLayout,layout,RECRUITS,recruitJoin,recruitLeave,offerRecruit,dialog,pickChoice,saveGame,loadGame,readSave,ATTACKS,B2,B2_SKILLS,B2_FOES,b2Start,b2Lab,b2Do,b2Dir,b2A,b2Back,b2Forecast,b2Damage,b2TargetOptions,B2_LAB,BATTLE_SPRITES,get map(){return currentMap;},worlds,findGrump,findMonster,allMonsters,MONSTERS,go:(id)=>{ const m=worlds[id]; if(!m) return false; currentMap=m; player.x=m.spawn.x; player.y=m.spawn.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; return true; },refresh:()=>b2Render()};
+window.__LE={intro,splash,startSplash,splashPick,startTitle,beginOpening,get coins(){return coins;},set coins(v){coins=v;},openShop,closeShop,items,party,battle,bag,sfx,say,sound,town,player,followers,startBattle,openDialog,toggleLayout,layout,RECRUITS,recruitJoin,recruitLeave,offerRecruit,dialog,pickChoice,saveGame,loadGame,readSave,ATTACKS,B2,B2_SKILLS,B2_TOMBOS,B2_FOES,b2Start,b2Lab,b2Do,b2Dir,b2A,b2Back,b2Forecast,b2Damage,b2TargetOptions,B2_LAB,BATTLE_SPRITES,get map(){return currentMap;},worlds,findGrump,findMonster,allMonsters,MONSTERS,go:(id)=>{ const m=worlds[id]; if(!m) return false; currentMap=m; player.x=m.spawn.x; player.y=m.spawn.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; return true; },refresh:()=>b2Render()};
 requestAnimationFrame(frame);
 startSplash();
 

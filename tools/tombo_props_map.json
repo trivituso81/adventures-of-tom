@@ -1,0 +1,582 @@
+{
+ "grace1": {
+  "new": [
+   "gift_box",
+   "dice_squishy"
+  ],
+  "reuse": []
+ },
+ "grace1_dc": {
+  "new": [
+   "arcade_like_button"
+  ],
+  "reuse": [
+   {
+    "slug": "like_thumbs_up",
+    "char": "grace"
+   }
+  ]
+ },
+ "rose1": {
+  "new": [
+   "biplane_wings",
+   "aviator_goggles"
+  ],
+  "reuse": []
+ },
+ "rose1_dc": {
+  "new": [
+   "fluffy_cloud",
+   "lamby_hair_tuft"
+  ],
+  "reuse": [
+   {
+    "slug": "lamby",
+    "char": "rose"
+   },
+   {
+    "slug": "sourdough_boule",
+    "char": "tom"
+   }
+  ]
+ },
+ "grace2": {
+  "new": [
+   "blue_gym_mat"
+  ],
+  "reuse": []
+ },
+ "grace2_dc": {
+  "new": [
+   "blue_gym_mat",
+   "judge_s_desk"
+  ],
+  "reuse": [
+   {
+    "slug": "scorecards",
+    "char": "grace"
+   }
+  ]
+ },
+ "rose2": {
+  "new": [
+   "carry_on_suitcase",
+   "pink_blanket_lump",
+   "pink_sneakers"
+  ],
+  "reuse": [
+   {
+    "slug": "lamby",
+    "char": "rose"
+   }
+  ]
+ },
+ "rose2_dc": {
+  "new": [
+   "gold_tiara",
+   "bodyguard_sunglasses_and_earpiece",
+   "gold_scepter_stick"
+  ],
+  "reuse": [
+   {
+    "slug": "lamby",
+    "char": "rose"
+   },
+   {
+    "slug": "red_carpet_runner",
+    "char": "tom"
+   }
+  ]
+ },
+ "grace3_dc": {
+  "new": [
+   "reading_lamp"
+  ],
+  "reuse": []
+ },
+ "rose3": {
+  "new": [
+   "giant_8_bit_music_note"
+  ],
+  "reuse": [
+   {
+    "slug": "headphones",
+    "char": "tom"
+   }
+  ]
+ },
+ "amy1_dc": {
+  "new": [
+   "director_s_chair_amy",
+   "red_megaphone",
+   "black_top_hat",
+   "gold_handled_cane",
+   "red_stage_curtains"
+  ],
+  "reuse": []
+ },
+ "amy2": {
+  "new": [
+   "kitchen_counter",
+   "giant_mixing_bowl",
+   "ketchup_bottle",
+   "pickle_jar",
+   "cereal_box",
+   "mustard_bottle",
+   "whole_lemon",
+   "lone_sock",
+   "ymamot_creation_sign"
+  ],
+  "reuse": []
+ },
+ "amy2_dc": {
+  "new": [
+   "stepladder",
+   "happy_birthday_banner",
+   "banner_pole",
+   "pink_balloon",
+   "birthday_cake",
+   "party_balloon_trio"
+  ],
+  "reuse": []
+ },
+ "amy3": {
+  "new": [
+   "purple_couch",
+   "floor_lamp",
+   "mom_placard",
+   "cream_pillow",
+   "blue_cushion",
+   "pink_slipper",
+   "tv_remote"
+  ],
+  "reuse": []
+ },
+ "amy3_dc": {
+  "new": [
+   "glass_elevator_car",
+   "elevator_call_button",
+   "rooftop_ledge",
+   "concrete_slab_chunk"
+  ],
+  "reuse": [
+   {
+    "slug": "stopwatch",
+    "char": "amy"
+   }
+  ]
+ },
+ "deedee1": {
+  "new": [
+   "bistro_table"
+  ],
+  "reuse": [
+   {
+    "slug": "wine_glass",
+    "char": "deedee"
+   },
+   {
+    "slug": "crisp_pan",
+    "char": "deedee"
+   }
+  ]
+ },
+ "deedee1_dc": {
+  "new": [
+   "kitchen_sink"
+  ],
+  "reuse": []
+ },
+ "deedee2": {
+  "new": [
+   "rhubarb_stalk",
+   "giant_rhubarb_root",
+   "lattice_crust_tin",
+   "silver_serving_tray"
+  ],
+  "reuse": []
+ },
+ "ff4": {
+  "new": [
+   "lattice_crust_tin",
+   "string_lights",
+   "dinner_plate",
+   "candle",
+   "red_striped_family_table",
+   "wooden_dining_chair",
+   "guest_place_card",
+   "cream_kids_cup"
+  ],
+  "reuse": [
+   {
+    "slug": "sourdough_boule",
+    "char": "tom"
+   },
+   {
+    "slug": "wine_glass",
+    "char": "deedee"
+   }
+  ]
+ },
+ "deedee2_dc": {
+  "new": [
+   "italy_binder",
+   "italy_wall_map",
+   "espresso_cup",
+   "gelato_cone",
+   "tiny_red_vespa",
+   "italy_brochure"
+  ],
+  "reuse": []
+ },
+ "deedee3": {
+  "new": [
+   "white_kitchen_counter",
+   "blue_kitchen_cloth",
+   "straw_broom"
+  ],
+  "reuse": [
+   {
+    "slug": "sourdough_boule",
+    "char": "tom"
+   }
+  ]
+ },
+ "deedee3_dc": {
+  "new": [
+   "party_table",
+   "string_lights",
+   "gumbo_pot",
+   "pupusa_plate"
+  ],
+  "reuse": [
+   {
+    "slug": "sourdough_boule",
+    "char": "tom"
+   },
+   {
+    "slug": "crisp_pan",
+    "char": "deedee"
+   },
+   {
+    "slug": "dish_towel",
+    "char": "deedee"
+   }
+  ]
+ },
+ "boppy1": {
+  "new": [
+   "landing_net",
+   "cattail_reeds"
+  ],
+  "reuse": [
+   {
+    "slug": "fishing_rod",
+    "char": "boppy"
+   },
+   {
+    "slug": "pier",
+    "char": "boppy"
+   }
+  ]
+ },
+ "boppy1_dc": {
+  "new": [
+   "cattail_reeds",
+   "sourdough_crust_bait"
+  ],
+  "reuse": [
+   {
+    "slug": "fishing_rod",
+    "char": "boppy"
+   },
+   {
+    "slug": "pier",
+    "char": "boppy"
+   }
+  ]
+ },
+ "boppy2": {
+  "new": [
+   "deputy_cap"
+  ],
+  "reuse": [
+   {
+    "slug": "key_ring",
+    "char": "boppy"
+   },
+   {
+    "slug": "jail_cell_door",
+    "char": "boppy"
+   }
+  ]
+ },
+ "boppy2_dc": {
+  "new": [
+   "under_sink_pipe"
+  ],
+  "reuse": []
+ },
+ "boppy3": {
+  "new": [
+   "raised_garden_bed",
+   "garden_stake",
+   "tomato_seedling",
+   "watering_can",
+   "tomato_vine",
+   "giant_tomato"
+  ],
+  "reuse": [
+   {
+    "slug": "cayenne_pepper",
+    "char": "boppy"
+   }
+  ]
+ },
+ "boppy3_dc": {
+  "new": [
+   "card_table",
+   "plate_of_peppers",
+   "scoville_meter",
+   "paper_hand_fan",
+   "milk_carton",
+   "newspaper"
+  ],
+  "reuse": []
+ },
+ "tnb1": {
+  "new": [
+   "rust_velvet_couch",
+   "mustard_throw_pillow",
+   "movie_screen",
+   "popcorn_bowl",
+   "popcorn_piece"
+  ],
+  "reuse": [
+   {
+    "slug": "slasher_standee",
+    "char": "tnb"
+   }
+  ]
+ },
+ "tnb1_dc": {
+  "new": [
+   "turbo_fan",
+   "turbo_fan_box",
+   "green_garden_hose"
+  ],
+  "reuse": [
+   {
+    "slug": "longboard",
+    "char": "tnb"
+   }
+  ]
+ },
+ "tnb2": {
+  "new": [
+   "red_line_subway_train",
+   "metro_sign",
+   "gold_transfer_card"
+  ],
+  "reuse": [
+   {
+    "slug": "longboard",
+    "char": "tnb"
+   }
+  ]
+ },
+ "tnb2_dc": {
+  "new": [
+   "metro_sign",
+   "last_train_subway_car"
+  ],
+  "reuse": [
+   {
+    "slug": "longboard",
+    "char": "tnb"
+   }
+  ]
+ },
+ "tnb3": {
+  "new": [
+   "palm_tree",
+   "new_york_skyline"
+  ],
+  "reuse": [
+   {
+    "slug": "stoneware_mugs",
+    "char": "tnb"
+   }
+  ]
+ },
+ "tnb3_dc": {
+  "new": [
+   "kintsugi_cup",
+   "pottery_shelf",
+   "kintsugi_brush"
+  ],
+  "reuse": []
+ },
+ "nara1": {
+  "new": [
+   "dog_treat",
+   "giant_paw"
+  ],
+  "reuse": []
+ },
+ "nara1_dc": {
+  "new": [
+   "dog_treat",
+   "puzzle_toy"
+  ],
+  "reuse": []
+ },
+ "nara2": {
+  "new": [
+   "tug_rope"
+  ],
+  "reuse": []
+ },
+ "nara3_dc": {
+  "new": [
+   "wooden_dining_table",
+   "red_check_tablecloth",
+   "dinner_plate",
+   "candle",
+   "drinking_glass",
+   "hanging_pendant_lamp",
+   "sourdough_bite"
+  ],
+  "reuse": [
+   {
+    "slug": "sourdough_boule",
+    "char": "tom"
+   }
+  ]
+ },
+ "ff4_dc": {
+  "new": [
+   "dinner_plate",
+   "cream_eight_seat_table"
+  ],
+  "reuse": []
+ },
+ "ff1": {
+  "new": [
+   "blanket_fort_castle",
+   "no_grown_ups_sign",
+   "popcorn_snack_bag"
+  ],
+  "reuse": [
+   {
+    "slug": "throw_pillows",
+    "char": "rose"
+   },
+   {
+    "slug": "flashlight",
+    "char": "tnb"
+   }
+  ]
+ },
+ "ff2": {
+  "new": [
+   "wall_of_clocks",
+   "iron_chains",
+   "yellow_finish_tape"
+  ],
+  "reuse": [
+   {
+    "slug": "paper_stack",
+    "char": "amy"
+   },
+   {
+    "slug": "ribbons",
+    "char": "rose"
+   },
+   {
+    "slug": "lamby",
+    "char": "rose"
+   }
+  ]
+ },
+ "ff3": {
+  "new": [
+   "amber_hourglass",
+   "film_reel_screen",
+   "gold_picture_frame",
+   "red_rose",
+   "gold_wedding_ring",
+   "nurse_cap"
+  ],
+  "reuse": [
+   {
+    "slug": "cayenne_pepper",
+    "char": "boppy"
+   }
+  ]
+ },
+ "ff1_dc": {
+  "new": [
+   "pottery_wheel",
+   "clay_pot"
+  ],
+  "reuse": [
+   {
+    "slug": "brick_kiln",
+    "char": "tnb"
+   }
+  ]
+ },
+ "ff2_dc": {
+  "new": [
+   "bed",
+   "bed_pillow",
+   "morning_window",
+   "breakfast_tray",
+   "pancake_stack",
+   "syrup_bottle"
+  ],
+  "reuse": []
+ },
+ "ff3_dc": {
+  "new": [
+   "street_lamp"
+  ],
+  "reuse": [
+   {
+    "slug": "moon",
+    "char": "deedee"
+   }
+  ]
+ },
+ "grace3": {
+  "new": [],
+  "reuse": [
+   {
+    "slug": "gold_dumpling_squishy",
+    "char": "grace"
+   }
+  ]
+ },
+ "rose3_dc": {
+  "new": [],
+  "reuse": [
+   {
+    "slug": "lamby",
+    "char": "rose"
+   }
+  ]
+ },
+ "amy1": {
+  "new": [],
+  "reuse": []
+ },
+ "nara2_dc": {
+  "new": [],
+  "reuse": []
+ },
+ "nara3": {
+  "new": [],
+  "reuse": []
+ }
+}
