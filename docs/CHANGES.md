@@ -13,6 +13,9 @@
 - Removed old hard-coded tests creole_test, dakota_test, jordansam_test, pupuseria_test; `rooms_test.py` and `tap_test.py` cover the rooms.
 - Tests: rooms_test 4 rooms FAILS []; smoke, camera_clamp, ch12_test FAILS []; tap_test on the 4 rooms PASS.
 
+## 2026-10-30: Tombo prop sheet 1 of 10 (source and cut)
+- Saved `tools/sprite-bake/src/props/tombo-sheet01-of-10.png`. Cells 1 to 8 match their prompt and are cut to `art/props/tombo/` (item numbers 1 to 138 over the ten sheets are in props.json group `tombo`; `bake_prop_sheets.py` skips sheets that have not arrived). Cells 9 to 14 came back as unrelated props (gavel, lamp, hourglass, barrel, wheel, chest) and go on a redo sheet. Not wired into any Tombo yet.
+
 ## 2026-10-30: Room paintings, batch 5 (Casa Alvarez, Lofts Lobby, TNB's Loft, Grand Tower apartment)
 - rooms5.zip: `casa`, `loftlobby`, `lofts`, `tower` installed as square plates (`art/<id>.webp`, 16 x 16 tiles, `px:78`, actorScale 1.98). Image 21 (Primary Suite) was already live as `tomsuite`.
 - Walk masks, objects and NPC positions rewritten in `data/maps-la.js`; every old object text and NPC name kept (Casa Alvarez still has all nine residents, so `ch12Alvarez` and STORY_WORLD are untouched).

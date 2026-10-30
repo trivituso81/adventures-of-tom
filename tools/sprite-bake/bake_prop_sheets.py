@@ -38,11 +38,14 @@ SHEETS = [
     ('deedee-sheet2-of-2.png', 'deedee', rng(16, 30)),
     ('boppy-sheet1-items1-31.png', 'boppy', rng(1, 25)),
     ('tnb-sheet1-items1-31.png', 'tnb', rng(1, 23)),
+    # Tombo props (group 'tombo'): item numbers run 1..138 over the 10 sheets in order (14 each, last two 13). Only the cells that
+    # matched their prompt are listed; the rest go on a redo sheet. Sheets not returned yet are skipped.
+    ('tombo-sheet01-of-10.png', 'tombo', rng(1, 8)),
     # redo sheet: cell -> (character, item)
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
-TOTAL = {'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+TOTAL = {'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
 
 
@@ -142,6 +145,8 @@ def main():
     done = {}
     report = []
     for fn, ch, cells in SHEETS:
+        if not os.path.exists(os.path.join(SRC, fn)):
+            continue
         sheet = Image.open(os.path.join(SRC, fn)).convert('RGBA')
         cols, rows = GRID[sheet.size]
         crops, notes = cut_sheet(sheet, TOTAL.get(fn, max(c for c, _ in cells)), cols, rows)
@@ -167,8 +172,8 @@ def main():
         done[(sc, ss)].save(os.path.join(OUT, dc, ds + '.webp'), 'WEBP', lossless=True, quality=100, method=4)
         done[(dc, ds)] = done[(sc, ss)]
     want = {(c, s) for c, lst in names.items() for _, (s, _) in lst.items()}
-    miss = sorted(want - set(done))
-    print('wrote', len(done), 'props;', 'missing:', miss or 'none')
+    miss = sorted(x for x in want - set(done) if x[0] != 'tombo')
+    print('wrote', len(done), 'props;', 'missing:', miss or 'none', '; tombo painted', sum(1 for k in done if k[0] == 'tombo'), 'of', sum(1 for k in want if k[0] == 'tombo'))
     for r in report: print(' ', r)
     total = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(OUT) for f in fs)
     print('total bytes', total)
