@@ -45,4 +45,20 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 
 | id | sheet | frames | date | Tom approved |
 |---|---|---|---|---|
-| (none yet) | | | | |
+| mudling | foe-mudling-v1.png (Mudling_Battle_Sprite_Sheet) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| skeeter | foe-skeeter-v1.png (Pixel-Art_Mosquito_Swarm_Sprite_Sheet; lone second-row stance ignored) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| grump | foe-grump-v1.png (Mossy_Toad_Action_Sprite_Sheet) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| toad | foe-toad-v1.png (Four-Frame_Lily-Pad_Frog_Sprite_Sheet) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| log | foe-log-v1.png (Log_Monster_Attack_Sprite_Sheet) | stance, hurt, attack1, attack2 | 2026-10-29 | no |
+| bigone | foe-bigone-v1.png (Chubby_Sea_Monster_Sprite_Sheet) | stance, hurt, attack1 to attack4 (6th frame reads as a follow-through close to the stance) | 2026-10-29 | no |
+
+## How it is installed (built 2026-10-29, first six sheets)
+
+- Real sheets arrive about 2170 x 725 (not 640 x 160), transparent background, one row, frames of unequal width (a tongue or splash makes one wider). `tools/sprite-bake/bake_foe.py <id>` cuts them at the emptiest columns, so no cell size is assumed.
+- One command per enemy: `python3 tools/sprite-bake/bake_foe.py <id>`. Source goes in `tools/sprite-bake/src/foe-<id>-v1.png`. It writes `art/foes/<id>.webp`, `data/foes/<id>-hires.js` and a contact sheet `tools/shots/foe-<id>-bake.png`.
+- Eye and mouth points (what Boop, Flashcard Flurry and the lock reticle aim at) are hand set as fractions of the stance in the `MARK` table at the top of bake_foe.py. Add the new id there; check them on the contact sheet (red = eyes, cyan = mouth).
+- Stance width is 44 cells (boss 42), which keeps the on-screen width the old pixel sprite had (b2LayoutFoes scales by width); the painted height follows the painting.
+- Wiring is shared: add the `<id>-hires.js` script tag before `data/foes/use.js` in index.html (after nara-hires-use.js). use.js installs every FOE_HIRES entry; it keeps the old rows as `sprite0`. `FOE_PAINT_OFF=true` (or `{log:true}`) before use.js turns painting off.
+- Frame choice is `b2FoeFrame` in engine/battle2-ui.js: hurt while hit or dying, attack frames in order across a lunge, otherwise stance; calm (un-grumped) hop uses the stance. Overworld and the turn ribbon use the stance.
+- The painted Big One already wears a rusty tin, so Deedee's pie tin overlay is drawn lower (`tinY`) on it instead of floating above.
+- Test: `python3 tools/foes_test.py [ids]` writes `tools/shots/foes-<id>.png` (stance, hurt, attacks in a real battle); look at it.

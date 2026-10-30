@@ -940,3 +940,8 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 - Walk: top platform, track bed, ledge, lower walkway, both stairs. The four cars block (upper two one row, lower two two rows), the wall face blocks. Objects re-laid: 5 mile signs on the lit wall panels, 4 cars, 2 coffee machines (red at 15, green at 23, the green one keeps the "last coffee" text), 2 cable bundles, 5 rubble piles (new: green flag pile, "CLAIMED FOR SOMEWHERE ELSE"), 2 lamps. The old "pointing east" lamp text now reads as a post lamp at the platform edge.
 - Fix (engine/world.js buildArea): on ground 'sub' maps the wall pool covered the exit tiles, so the Depot east exit and Chamber west exit could not be walked into. Exits are re-opened after the pools.
 - Test: tools/subtunnel_test.py (0 fails). ch13_test positions moved to row 10. Smoke, ch13, gate00, bg tests 0 fails.
+
+## Painted enemies: Mudling, Skeeter Swarm, Pond Grump, Bog Toad, Log Lump, The Big One (2026-10-29)
+- Six painted enemy sheets (tools/sprite-bake/src/foe-<id>-v1.png) baked by the new tools/sprite-bake/bake_foe.py into art/foes/<id>.webp and data/foes/<id>-hires.js, installed by data/foes/use.js (script tags added after nara-hires-use.js). Old rows kept as MONSTERS.<id>.sprite0.
+- Battle: engine/battle2-ui.js b2FoeFrame shows the hurt frame when hit or dying and the attack frames in order during a lunge (2 for regulars, 4 for the Big One). New painted enemies reuse the same path.
+- Test: tools/foes_test.py (0 fails); smoke 0 fails.

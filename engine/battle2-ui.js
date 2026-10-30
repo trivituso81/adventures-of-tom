@@ -83,13 +83,24 @@ function b2Aim0() { B2.foeTarget=null; }
 // Old scripts shake, flash, knock, wobble and lift "the enemy": that means everyone the move is aimed at.
 const b2Aimed=f=>!!(B2.aim&&B2.aim.targets.includes(f));
 
+// Painted enemies (data/foes/use.js) carry def.frames={hurt,attack:[...]}. A hit (or a death) shows the hurt frame; while the enemy
+// lunges the attack frames play in order across the lunge; otherwise the stance. Enemies without frames always draw their stance.
+function b2FoeFrame(f,R0) {
+  const FR=f.def.frames; if(!FR) return R0;
+  if(f.lunge>0) { if(f.lunge>(f._lm||0)) f._lm=f.lunge; } else f._lm=0;
+  if(f.lunge>0&&FR.attack.length) { const p=1-f.lunge/(f._lm||f.lunge); return FR.attack[Math.min(FR.attack.length-1,Math.floor(p*FR.attack.length))]; }
+  const aimed=b2Aimed(f);
+  if(f.dying>=0||f.flash>0||f.shake>0||(aimed&&(battle.shakeEnemy>0||battle.enemyKnock>0))) return FR.hurt;
+  return R0;
+}
 function b2DrawEnemies(t) {
   const list=B2.foes.slice().sort((a,b)=>a.py-b.py);
   const liftY=battle.lift?(()=>{ const q=battle.lift.t/battle.lift.dur; return q<.7?Math.round(Math.sin(q/.7*Math.PI/2)*120):Math.round(120*(1-(q-.7)/.3)); })():0;
   battle.liftNow=liftY;
   for(const f of list) {
     if(f.dead) continue;
-    const R=f.def.sprite,P=f.def.pal,sc=f.sc,w=R[0].length*sc,h=R.length*sc;
+    const R0=f.def.sprite,P=f.def.pal,sc=f.sc,sw=R0[0].length*sc;
+    const R=f.calm?R0:b2FoeFrame(f,R0),w=R[0].length*sc,h=R.length*sc;
     if(f.calm) {
       // Un-Grumped: a happy wiggle, then little hops off the left edge with a heart overhead.
       const k=f.calmT,go=Math.max(0,k-.5),hx=Math.round(f.px-w/2-go*go*190),hy=Math.round(f.py-h-Math.abs(Math.sin(k*(k<.5?16:9)))*(k<.5?6:18));
@@ -115,7 +126,7 @@ function b2DrawEnemies(t) {
       sy-=liftY;
     }
     const x=Math.round(f.px-w/2+lq*lungeX+(f.shake>0?rand(-4,4):0)+sx),y=Math.round(f.py-h+bob-lq*10-q*30+sy+(1-spawn)*40);
-    if(!dying) ellipse(f.px,f.py+2,w*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
+    if(!dying) ellipse(f.px,f.py+2,sw*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
     const flash=f.flash>0||(dying&&q>.1)||(aimed&&battle.flashEnemy>0);
     const sway=(f.st.goofed||f.st.staggered)&&!dying?Math.sin(t*5+f.idx)*.14:0;
     // A set piece can spin a monster about its middle and shift it (f.spin, f.ox, f.oy). They count only while the
@@ -127,7 +138,7 @@ function b2DrawEnemies(t) {
     if(dying) continue;
     const top=y+(f.def._top||0)*sc;
     // Deedee's pie tin, worn like a helmet.
-    if(f.st.pietin) { const hx=x+w/2,hy=top+4; ellipse(hx,hy,w*.26+4,9,OUT); ellipse(hx,hy,w*.26+2,7,'#c9ccd4'); ellipse(hx,hy-3,w*.2,5,'#e8ecf2'); rect(hx-w*.2,hy-2,w*.4,2,'#9aa0aa'); }
+    if(f.st.pietin) { const hx=x+w/2,hy=f.def.tinY!=null?y+h*f.def.tinY:top+4; ellipse(hx,hy,w*.26+4,9,OUT); ellipse(hx,hy,w*.26+2,7,'#c9ccd4'); ellipse(hx,hy-3,w*.2,5,'#e8ecf2'); rect(hx-w*.2,hy-2,w*.4,2,'#9aa0aa'); }
     // Goofed: spinning stars and question marks. Smitten: hearts. Staggered: stars. Grumbled: a sulky "...".
     if(f.st.goofed) for(let k=0;k<4;k++) { const a=t*4+k*1.57; label(k%2?'+':'?',x+w/2+Math.round(Math.cos(a)*w*.42),top-8+Math.round(Math.sin(a)*8),k%2?'#ffe08a':'#fff1cb',3); }
     if(f.st.smitten) for(let k=0;k<3;k++) { const ph=(t*1.2+k/3)%1; gfx.globalAlpha=1-ph; label('<3',x+w/2-20+k*20,top-6-Math.round(ph*30),'#ff9ac0',2); gfx.globalAlpha=1; }
