@@ -129,7 +129,7 @@ const CHAPTERS=[
       :{lines:['Airport? Tom. Dinner is at six. Five means four thirty.']}},
   // Chapter 16 (tragedy): the photograph in the Square. The scene itself runs on a party override (Tom, Grace, Rose, Amy out front, TNB and Nara on
   // the bench); once Deedee and Boppy are stone and the girls run for Cab 7, these are the rules: Tom, Amy, TNB and Nara fight, nobody else.
-  {n:16,title:'The Amber Eclipse',start:{map:'town',x:11,y:12},
+  {n:16,title:'The Amber Eclipse',start:{map:'town',x:11,y:13},
     party:{lock:['tom','amy','tnb','nara'],allow:['amy','tnb','nara'],bar:['deedee','boppy','grace','rose'],homes:{amy:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch16-done')?{lines:['Chapter 17 is coming. Long Island is under glass, and the cab stand has coffee nobody is drinking.']}
       :{lines:['Airport? Tom. Not today. Not this.']}},

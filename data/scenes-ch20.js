@@ -242,7 +242,7 @@ SCENES.ch20Calm=()=>[
 // ---------- Epilogue, Long Island: the mail, the train ----------
 SCENES.ch20Epi1=()=>[
   {flag:'ch20-epi',value:'pending'},
-  {call:()=>{ sfx.travel&&sfx.travel(); ch17Place('town',11,12,'up'); }},
+  {call:()=>{ sfx.travel&&sfx.travel(); ch17Place('town',11,13,'up'); }},
   {fade:'in',time:1.1},
   {talk:'Tom',lines:['Long Island is a town again. The fountain is running. The library door is open. Someone has already started a pie, which is how you know it is real.']},
   {talk:'Rose',lines:['Look! Look who is delivering!']},
