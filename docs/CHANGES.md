@@ -1,3 +1,6 @@
+## 2026-10-29: Rose hops off Tom's shoulders before a Tombo
+- When Rose is riding Tom (Shoulder Ride) and any Tombo or Tom Family Finish starts, `b2Dismount()` in `engine/battle2-kind.js` ends the ride, plays a short hop from his shoulders back to her place in the line (about 0.6 s), shows a message, refreshes the RIDE badge, and only then does the normal step-out and animation begin. No effect when she is not riding. No spoken lines changed.
+- Checked in headless Chromium: Tom + Rose (Double-Decker Airplane) and Tom + Grace (Squishy Delivery), portrait and landscape, ride ends, no page errors; frames looked at. Smoke 0 fails.
 ## 2026-10-29: Loading screen replaces the "The game did not load" card
 - Cause: a 12 second watchdog in `index.html` showed the error card whenever the game had not started yet. The game loads 196 scripts (about 122 MB of baked voice), so a slow first load passed 12 s and the card stayed on screen even after the game booted.
 - New `#boot` loading screen (navy, gold flower, moving bar, "Loading the town...") covers the stage immediately and fades out on the first frame (`js-running`). After 15 s it adds a "still going" line. The retry screen shows only if a game file fails to download (8 s grace) or 90 s pass with no start. It no longer links to the claude.ai artifact.

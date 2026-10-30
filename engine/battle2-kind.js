@@ -154,11 +154,25 @@ function b2RunTombo(u,act,opt) {
   const fn=B2_TOMBO_ANIM[act.id];
   // Both step out in front of the party first (b2StageOut), so neither crosses or overlaps Grace and Rose; the scene
   // then starts from those spots, and b2Unstage walks them home when the move finishes.
-  b2StageOut(tom,pt);
+  // If Rose is up on Tom's shoulders, she hops down and gets back in line first.
+  const dm=b2Dismount();
+  if(dm) enqueue(dm,()=>b2StageOut(tom,pt)); else b2StageOut(tom,pt);
   enqueue(B2_STAGE.ms,()=>{
     try { if(fn) fn(E); else b2TomboPlain(E); }
     catch(err) { console.error('tombo '+act.id,err); clearBattleQueue(); b2TomboPlain(E); }
   });
+}
+// Rose riding Tom's shoulders (Shoulder Ride) hops down to her place in the line. Returns the ms it takes (0 if she was not
+// riding). The ride ends, since a Tombo starts from the party's own spots.
+function b2Dismount() {
+  const rose=B2.party.find(p=>p.id==='rose');
+  if(!rose||!b2Riding(rose)) return 0;
+  const rp=b2RidePos(rose,rose.idx); if(!rp) return 0;
+  delete rose.st.shoulder; b2Render();   // the RIDE badge goes too
+  const fx=battle.fx[rose.idx],sp=BATTLE_SPRITES.rose,home=BATTLE_POS[rose.idx],x1=home.x*3,b1=home.base*3,ms=520;
+  fx.path={t:0,dur:ms/1000,fn:(q)=>{ const e=q*q*(3-2*q); return {cx:rp.cx+(x1-rp.cx)*e,base:rp.base+(b1-rp.base)*e-Math.sin(q*Math.PI)*46,frame:q<.88?sp.celeb:sp.idle,noShadow:q<.4}; }};
+  try { sfx.boing(); } catch(e) {} setMessage('Rose hops down off Tom’s shoulders and gets back in line.');
+  return ms+60;
 }
 // Tombo staging spots (stage units): Tom on the near side, the partner a step back, side by side with no overlap.
 const B2_STAGE={tom:{x:92,base:86},pt:{x:117,base:100},ms:460};
@@ -195,8 +209,10 @@ function b2RunFinish(u,act,opt) {
   b2Fx({kind:'banner',name:act.name,head:act.dc?"DIRECTOR'S CUT!":'FAMILY FINISH!',t:0,dur:1.8});
   sfx.levelUp();
   const fn=B2_TOMBO_ANIM[act.id];
-  try { if(fn) fn(E); else b2FinishPlain(E); }
-  catch(err) { console.error('finish '+act.id,err); clearBattleQueue(); for(const f of E.fx) f.path=null; b2FinishPlain(E); }
+  const run=()=>{ try { if(fn) fn(E); else b2FinishPlain(E); }
+    catch(err) { console.error('finish '+act.id,err); clearBattleQueue(); for(const f of E.fx) f.path=null; b2FinishPlain(E); } };
+  const dm=tom?b2Dismount():0;   // Rose hops down off Tom's shoulders first
+  if(dm) enqueue(dm,run); else run();
 }
 function b2FinishPlain(E) {
   enqueue(()=>{ setMessage((E.act.dc?"DIRECTOR'S CUT! ":'FAMILY FINISH! ')+E.act.name+'!'); for(const f of E.fx) f.hop=.4; },700,()=>{ landHit(100); E.apply(); },700,E.result||E.act.desc,()=>checkEnemy());
