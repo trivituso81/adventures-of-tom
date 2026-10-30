@@ -24,7 +24,7 @@ SCENES.part2Open=()=>[
   {toast:'Goal: follow the boarding pass.',time:4},
   {flag:'ch11-start'},
   {fade:'out',time:.8},
-  {call:()=>{ sfx.travel&&sfx.travel(); beginTransition({kind:'edge',to:'flightzero',spawn:{x:3,y:2},facing:'down'}); }},
+  {call:()=>{ sfx.travel&&sfx.travel(); beginTransition({kind:'edge',to:'flightzero',spawn:{x:3,y:3},facing:'down'}); }},
   {wait:.5},
   {fade:'in',time:.6}
 ];
