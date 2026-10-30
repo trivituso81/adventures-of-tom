@@ -4,6 +4,12 @@
 - Style: the blocky 5x5 pixel stars are now smooth five-point gold stars with the game's dark round outline (`OUT`), a light-to-amber gradient, a white glint, a slow spin, a soft glow under the ring, and an occasional twinkle. Same orbit and timing as before, back stars smaller and dimmer.
 - Cache tag bumped (`battle-draw.js?v=kostar1`).
 - Checked: each of the eight characters knocked out alone, close-up before and after (stars now ring the head for all eight); smoke FAILS: []. Not yet seen on Tom's phone. If a ring sits too high or low on one character, change that character's row in `KO_HEAD`.
+## 2026-10-29: Casa Alvarez opened up (23 to 42 walkable tiles)
+- Tom: the Casa Alvarez grid should be about 3x as navigable. Result is 1.8x: the painted plate is mostly furniture and closed rooms, and the walk mask can only use floor that is drawn.
+- `plateMask` in `data/maps-la.js` (map `casa`): added the bunk room (row 2, x 9 to 12, through the gap past the kitchen desk), the foyer's second column (8,7), and the front yard strip (row 10) on both sides of the steps, reached through (5,9) and (8,9). Exits stay at (6,10) and (7,10).
+- Kevin moved from the dining room to the bunk room (11,2) so the crowd spreads out. New inspect object: Bunk bed (10,1, 3 wide).
+- Still closed because the painting has no doorway: laundry, bath, back hall, bedroom. Reaching 3x needs a new plate with wider floor or painted doorways there.
+- Test: `tools/casa_test.py` 0 fails (new checks for bunk, yard, foyer column); smoke FAILS: []; townsfolk and ch12 tests 0 fails. Cache tag `maps-la.js?v=casa2`. Not yet seen on Tom's phone.
 
 ## 2026-10-29: Bready Mercury on Tom's kitchen island
 - Tom: Bready Mercury should be visible in the game world, e.g. sitting on the counter, using the starter move art as the reference. The painted house plate had an empty island.

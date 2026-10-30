@@ -30,7 +30,7 @@ REACH="""()=>{ const m=worlds.casa, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
     if(!ok) bad.push(o.name+'@'+o.x+','+o.y); }
   const npcBad=m.npcs.filter(n=>!seen.has(n.x+','+n.y)).map(n=>n.name+'@'+n.x+','+n.y);
   const exits=[...m.portals].filter(([k,p])=>!seen.has(k)).map(([k])=>k);
-  const scene=[[7,10],[6,10],[7,9],[6,9],[7,8],[7,7],[7,6],[9,6],[12,6]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
+  const scene=[[7,10],[6,10],[7,9],[6,9],[7,8],[7,7],[8,7],[7,6],[9,6],[12,6],[9,2],[12,2],[5,9],[8,9],[0,10],[5,10],[8,10],[13,10]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   const open=[]; for(let y=0;y<H;y++) for(let x=0;x<W;x++) if(m.solid[y*W+x]===0&&!seen.has(x+','+y)) open.push(x+','+y);
   return {badObjects:bad,npcBad,exits,scene,cut:open,reachable:seen.size,objects:m.objects.map(o=>o.name+'@'+o.x+','+o.y)}; }"""
 with sync_playwright() as pw:
@@ -49,20 +49,20 @@ with sync_playwright() as pw:
     check('exit reachable',not r['exits']); check('door lane, foyer, living room walkable',not r['scene'])
     check('no walkable pocket cut off from the door',not r['cut'])
     shot(pg,'entry')
-    spots={'island':(8,3,'left'),'stove':(5,3,'up'),'fridge':(8,2,'up'),'table':(6,5,'up'),'wall':(8,4,'right'),'tv':(12,6,'up'),'sofa':(10,6,'up'),'toys':(6,6,'left'),'hooks':(7,8,'left'),'shoes':(7,8,'right'),'foyer':(7,7,'up'),'living':(11,6,'right'),'stairs':(7,9,'down')}
+    spots={'island':(8,3,'left'),'stove':(5,3,'up'),'fridge':(8,2,'up'),'table':(6,5,'up'),'wall':(8,4,'right'),'tv':(12,6,'up'),'sofa':(10,6,'up'),'toys':(6,6,'left'),'hooks':(7,8,'left'),'shoes':(7,8,'right'),'foyer':(7,7,'up'),'living':(11,6,'right'),'stairs':(7,9,'down'),'bunk':(11,2,'up'),'yardL':(2,10,'right'),'yardR':(11,10,'left')}
     for n,(x,y,d) in spots.items():
         stand(pg,x,y,d); shot(pg,n)
     # A at each prop opens a dialogue (NPCs are put away first so the prop is what answers)
     pg.evaluate("()=>{ for(const n of currentMap.npcs){ n.x=0; n.y=0; n.move=null; n.hidden=true; } }")
     for n,(x,y,d) in spots.items():
-        if n in ('foyer','living','stairs'): continue
+        if n in ('foyer','living','stairs','yardL','yardR'): continue
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
         check('A opens dialogue: '+n,pg.evaluate("()=>dialog.active")); skip_intro(pg)
     pg.evaluate("()=>{ for(const n of currentMap.npcs){ n.hidden=false; } }")
     # every NPC answers from a walkable neighbour: put it on its home tile, the others away
     home=pg.evaluate("()=>window.__casaHome=currentMap.npcs.map(n=>[n.name,n.x,n.y])") if False else None
     names=pg.evaluate("()=>currentMap.npcs.map(n=>n.name)")
-    SPEC={'Mrs. Alvarez':(7,5),'Don Beto':(12,6),'Tony':(5,5),'Yesenia':(8,2),'Claudia':(10,6),'Kevin':(5,4),'Daisy':(4,4),'Mateo':(6,6),'Sofi':(8,5)}
+    SPEC={'Mrs. Alvarez':(7,5),'Don Beto':(12,6),'Tony':(5,5),'Yesenia':(8,2),'Claudia':(10,6),'Kevin':(11,2),'Daisy':(4,4),'Mateo':(6,6),'Sofi':(8,5)}
     for nm in names:
         kx,ky=SPEC[nm]
         pg.evaluate("([nm,kx,ky])=>{ for(const n of currentMap.npcs){ n.move=null; n.roam=0; n.wait=1e9; if(n.name===nm){ n.x=kx; n.y=ky; } else { n.x=0; n.y=0; } } }",[nm,kx,ky])

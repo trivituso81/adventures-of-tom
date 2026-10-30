@@ -1174,20 +1174,21 @@ const LA_ROOMS=[
     style:{floor:'#d8b48a',alt:'#e2c39c',wall:'#c98a5a',trim:'#f4e6c8',pattern:'tile',rug:'#2f8a8a'},
     rug:[4,4,6,4],
     // Painted plate (art/casa.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // The painting shows no doorway into the west rooms (laundry, bath, bedroom) or the bunk room, so they are scenery. Kitchen and dining room in the middle,
-    // the living room to the east (reached along the bottom row, 9 to 12), and the front door lane at x 7 (rows 7 to 10, two wide at the stairs).
+    // The painting shows no doorway into the west rooms (laundry, bath, bedroom), so they stay scenery. Walkable: kitchen and dining room in the middle,
+    // the living room to the east (reached along row 6, 9 to 12), the bunk room through the gap past the kitchen desk (row 2, 9 to 12),
+    // the foyer (x 7 and 8) down to the front steps (x 5 to 8), and the front yard strip along the bottom row either side of the steps (exits stay at 6 and 7).
     plateMask:[
       '##############',
       '##############',
-      '########.#####',
+      '########.....#',
       '#####.##.#####',
       '####..##.#####',
       '#####....#####',
       '######.......#',
+      '#######..#####',
       '#######.######',
-      '#######.######',
-      '######..######',
-      '######..######'],
+      '#####....#####',
+      '..............'],
     door:[7,10],door2:[6,10],spawn:{x:7,y:9},
     npcs:[
       {name:'Mrs. Alvarez',x:7,y:5,look:'alvarez',lines:[
@@ -1206,7 +1207,7 @@ const LA_ROOMS=[
       {name:'Claudia',x:10,y:6,look:'claudia',lines:[
         'Night shift nurse. I sleep in the bathtub. It\'s the only room with a lock.',
         'Until somebody needs the bathroom. Somebody always needs the bathroom.']},
-      {name:'Kevin',x:5,y:4,look:'kevin',lines:[
+      {name:'Kevin',x:11,y:2,look:'kevin',lines:[
         "I share the bunk bed with Uncle Tony's exercise bike.",
         'It\'s not a metaphor. The bike is on the top bunk.']},
       {name:'Daisy',x:4,y:4,look:'daisy',lines:[
@@ -1228,7 +1229,8 @@ const LA_ROOMS=[
       ['bench',9,5,3,1,'Green sofa','Four generations have sat here. Two of the cushions belong to Tony and are not for sharing.'],
       ['toybox',5,6,1,1,'Toy pile','Blocks, a plastic dinosaur missing its tail, and the TV remote. Mateo hid it again.'],
       ['photo',6,8,1,1,'Coat hooks','Eleven coats on six hooks. Nobody knows whose the green one is. It has been here since 2019.'],
-      ['shelf',8,8,1,1,'Shoe shelf','Forty shoes. Zero pairs. Tony\'s boots are the only ones that match.']]},
+      ['shelf',8,8,1,1,'Shoe shelf','Forty shoes. Zero pairs. Tony\'s boots are the only ones that match.'],
+      ['bench',10,1,3,1,'Bunk bed','The top bunk is an exercise bike. The bottom bunk is a laundry basket with a pillow. Kevin sleeps wherever there is room.']]},
   {id:'loftlobby',name:'The Lofts Lobby',w:12,h:10,
     style:{floor:'#d8b57a',alt:'#e0c08a',wall:'#8a5a44',trim:'#d9c0a0',pattern:'tile',rug:'#7a4a3a'},
     rug:[4,4,4,2],
