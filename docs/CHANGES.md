@@ -1,3 +1,8 @@
+## 2026-10-29: Enemy hurt frame holds longer
+- Tom: the enemy's damage frame flashed too quickly. The hurt frame only showed while the hit's shake or flash timer ran (about 0.35 s for most hits), and the white flash lasted 0.16 s.
+- Fix in `engine/battle2-ui.js` (`b2FoeFrame`, `B2_HURT_HOLD` = 700 ms): once a hit starts, the hurt frame is held for at least 0.7 s, for every move, since it is decided in one place. White flash on a plain hit raised from 0.16 s to 0.3 s (`engine/battle2.js`, `engine/battle2-traits.js`). Party member flash unchanged.
+- Checked: hurt frame measured on a painted Grump, last hurt frame at 710 ms, idle at 727 ms (was about 350 ms); smoke FAILS: []. Not yet seen on Tom's phone. To tune, change `B2_HURT_HOLD`.
+
 ## 2026-10-29: Chapter 1 intro, Tom no longer shrinks when he stretches
 - Cause: the painted stretch frames (`TOM_STRETCH`, art/chars/tom-stretch.webp) are the same body size as his walk frames (k 3, about 42 rows), but `drawStretchPainted` and the old pixel fallback in `engine/intro.js` drew them at scale 1 while the walk sprite is drawn at `actorK()` (1.2 on outdoor maps such as the opening Square). So Tom dropped to 83% height as soon as the stretch began and grew back after.
 - Fix: both stretch drawers now use `actorK()*(OW.tom.k||1)` for the sprite, shadow, bob and the `~` puffs.

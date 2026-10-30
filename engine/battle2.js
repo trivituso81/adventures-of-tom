@@ -363,7 +363,7 @@ function b2ApplyEntry(e,amt) {
   if(e.miss) { e.done=e.dmg; return; }
   amt=Math.max(0,Math.min(amt,e.dmg-e.done)); if(!amt) return;
   e.done+=amt;
-  t.hp=Math.max(0,t.hp-amt); t.shake=.35; t.flash=.16;
+  t.hp=Math.max(0,t.hp-amt); t.shake=.35; t.flash=.3;
   pop(String(amt),p.x+rand(-3,3),p.y,e.crit?'#ffe08a':'#fff1cb');
   sfx.hitEnemy();
   if(t.hp<=0) b2FoeDown(t); else b2CheckPhase(t);
@@ -510,7 +510,7 @@ function b2FoeDown(t) {
 // Item and old-style instant damage on one enemy (no plan).
 function b2Hit(a,act,t,mult) {
   const r=b2Damage(a,act,t,mult); b8Landed(t);
-  t.hp=Math.max(0,t.hp-r.dmg); t.shake=.35; t.flash=.16;
+  t.hp=Math.max(0,t.hp-r.dmg); t.shake=.35; t.flash=.3;
   const p=b2FoePoint(t);
   pop(String(r.dmg),p.x,p.y,r.crit?'#ffe08a':'#fff1cb');
   b2Burst(t,act.elem&&act.elem[0]||'kinetic');
@@ -566,7 +566,7 @@ function b2ItemSteps(u,id,opt) {
   const steps=[()=>{ b2Msg(u.name+' uses the '+it.name+'.'); sfx.select(); battle.fx[u.idx].hop=.3; }];
   const t=opt.targets[0];
   if(it.dmg) {
-    steps.push(()=>b2Proj(u,t,'splash'),420,()=>{ const p=b2FoePoint(t),d=it.dmg; t.hp=Math.max(0,t.hp-d); t.shake=.35; t.flash=.16; pop(String(d),p.x,p.y,'#fff1cb'); sfx.splat(); if(t.hp<=0) b2FoeDown(t); else b2CheckPhase(t); b2Render(); },500);
+    steps.push(()=>b2Proj(u,t,'splash'),420,()=>{ const p=b2FoePoint(t),d=it.dmg; t.hp=Math.max(0,t.hp-d); t.shake=.35; t.flash=.3; pop(String(d),p.x,p.y,'#fff1cb'); sfx.splat(); if(t.hp<=0) b2FoeDown(t); else b2CheckPhase(t); b2Render(); },500);
   } else if(it.confuse) {
     steps.push(500,()=>{ sfx.raspberry&&sfx.raspberry(); b2TrySkip(u,t,'goofed',1); b2Render(); },700);
   } else if(it.atkDown) {

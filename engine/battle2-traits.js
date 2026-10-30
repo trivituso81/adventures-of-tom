@@ -160,7 +160,7 @@ function b2Rack(u,t) {
 function b2Reflect(e,act,t,dmg) {
   const r=b2Sum(t,'reflect'); if(!r||act.stat!=='warmth'||!b2Alive(e)) return;
   const n=Math.max(1,Math.round(dmg*r));
-  e.hp=Math.max(0,e.hp-n); e.flash=.16;
+  e.hp=Math.max(0,e.hp-n); e.flash=.3;
   const p=b2FoePoint(e); pop(String(n),p.x,p.y,'#ffe27a');
   battle.texts.push({txt:'REFLECT',x:p.x,y:p.y-12,color:'#ffe27a',sc:1,t:0,dur:1});
   if(e.hp<=0) b2FoeDown(e);

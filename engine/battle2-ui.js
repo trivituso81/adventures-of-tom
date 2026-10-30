@@ -85,12 +85,16 @@ const b2Aimed=f=>!!(B2.aim&&B2.aim.targets.includes(f));
 
 // Painted enemies (data/foes/use.js) carry def.frames={hurt,attack:[...]}. A hit (or a death) shows the hurt frame; while the enemy
 // lunges the attack frames play in order across the lunge; otherwise the stance. Enemies without frames always draw their stance.
+const B2_HURT_HOLD=700;
 function b2FoeFrame(f,R0) {
   const FR=f.def.frames; if(!FR) return R0;
   if(f.lunge>0) { if(f.lunge>(f._lm||0)) f._lm=f.lunge; } else f._lm=0;
   if(f.lunge>0&&FR.attack.length) { const p=1-f.lunge/(f._lm||f.lunge); return FR.attack[Math.min(FR.attack.length-1,Math.floor(p*FR.attack.length))]; }
   const aimed=b2Aimed(f);
-  if(f.dying>=0||f.flash>0||f.shake>0||(aimed&&(battle.shakeEnemy>0||battle.enemyKnock>0))) return FR.hurt;
+  // The hurt frame is held for at least B2_HURT_HOLD ms after a hit starts, however short the move's own shake or flash is.
+  const now=performance.now(), hit=f.dying>=0||f.flash>0||f.shake>0||(aimed&&(battle.shakeEnemy>0||battle.enemyKnock>0));
+  if(hit) { if(!f._hurtOn) { f._hurtOn=true; f._hurtUntil=now+B2_HURT_HOLD; } } else f._hurtOn=false;
+  if(f._hurtOn||now<(f._hurtUntil||0)) return FR.hurt;
   return R0;
 }
 function b2DrawEnemies(t) {
