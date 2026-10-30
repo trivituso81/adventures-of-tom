@@ -1,3 +1,8 @@
+## 2026-10-30: Painted Chapter 7 enemies
+- Tom sent chapter7_monster_sprites_and_prompts.zip. Installed painted frames for The Cliffhanger, Pop-Up Panic and the boss The Unread (four attack frames).
+- Not installed: the file named Know-It-All_sprite_sheet.png actually shows a red tasseled bookmark ghost (the Shusher design), not the navy encyclopedia in the Know-It-All prompt, so `knowitall` keeps its old art. Shusher_idle.png is a lone stance (Shusher is already installed from chapter 6). Dog-Ear's image is missing from the zip.
+- Test: `tools/foes_test.py` on all three, contact sheets looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Painted Chapter 6 enemies
 - Tom sent ch6_monsters.zip. Installed painted frames for Peanut Gallery, Shusher, Sticky Sap, Twig Spy and the boss Chairman Cheeks (id `chairman`, four attack frames). Second-row lone stances ignored; all face right.
 - `bake_foe.py`: `--trim-edges` now takes an optional pixel width (default 2; above 2 it also uses undilated pieces). `--by-pieces N` also exists but is unused (it did not help here).

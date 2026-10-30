@@ -77,6 +77,9 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | shusher | foe-shusher-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | stickysap | foe-stickysap-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | twigspy | foe-twigspy-v1.png | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| cliffhanger | foe-cliffhanger-v1.png (The Cliffhanger) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| popup | foe-popup-v1.png (Pop-Up Panic) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| unread | foe-unread-v1.png (The Unread, boss, 6 frames, baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
