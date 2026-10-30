@@ -851,116 +851,142 @@ LA_AREAS.push(
 
 // ---------- Rooms ----------
 const LA_ROOMS=[
-  {id:'coffee',w:11,h:9,
+  {id:'coffee',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#d9c4a8',alt:'#e6d3b8',wall:'#b98a5a',trim:'#f0d9b5',pattern:'wood',rug:'#c98a4a'},
     rug:[4,4,3,2],
-    // Painted plate (art/coffee.webp, engine/plate.js), 11 x 9 tiles. Door and mosaic mat bottom centre (5,8). Counter, pastry case and monstera along the back,
-    // laptop table left, window table and book table right, low front walls with plants either side of the entry. '#' blocks, '.' walks.
+
+    // Square painted plate (art/coffee.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Espresso bar and pastry case across the back, laptop table and shelf down the left, window and book tables right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '###########',
-      '###########',
-      '###########',
-      '####...####',
-      '###.....###',
-      '####....###',
-      '####...####',
-      '####...####',
-      '####...####'],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '####.######..###',
+      '####.........###',
+      '####........####',
+      '####........####',
+      '###.........####',
+      '###.........####',
+      '###.........####',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Juniper',x:5,y:3,look:'juniper',lines:[
+      {name:'Juniper',x:8,y:6,look:'juniper',lines:[
         'Welcome to Golden Hour. Every hour is golden hour if you believe.',
         'Our oat milk is oat-adjacent.',
         'Your name is Tom? I wrote TAM. It\'s basically the same.']}],
     objects:[
-      ['counter',4,2,3,1,'Espresso bar','A machine with eleven knobs. Juniper uses two of them.',{variant:'tea'}],
-      ['counter',7,2,2,2,'Pastry case','Croissants, a lemon bar the size of a paperback, and a card that says PASTRY 4.0. Nobody has seen the pastry for 4.0.',{variant:'tea'}],
-      ['pot',3,2,1,2,'Monstera','It has more Instagram followers than Skye.'],
-      ['table',0,3,3,3,'Laptop table','Someone has been writing a screenplay here since 2016. The sign on the wall says SAME SCRIPT, DIFFERENT YEAR.'],
-      ['table',8,3,2,2,'Window table','A man is having a very loud meeting about a podcast. Two microphones, one cup of tea.'],
-      ['table',8,5,2,1,'Book table','A sketchbook and a stack of magazines. The shelf sign says ART, TRAVEL, MUSIC, FILM, IDEAS. Mostly ideas.']]},
+      ['counter',5,3,6,3,'Espresso bar','A machine with eleven knobs. Juniper uses two of them.',{variant:'tea'}],
+      ['counter',11,2,2,3,'Pastry case','Croissants, a lemon bar the size of a paperback, and a card that says PASTRY 4.0. Nobody has seen the pastry for 4.0.',{variant:'tea'}],
+      ['pot',2,2,3,3,'Monstera','It has more Instagram followers than Skye.'],
+      ['table',0,4,4,5,'Laptop table','Someone has been writing a screenplay here since 2016. The sign on the wall says SAME SCRIPT, DIFFERENT YEAR.'],
+      ['table',13,4,3,3,'Window table','A man is having a very loud meeting about a podcast. Two microphones, one cup of tea.'],
+      ['table',12,7,4,5,'Book table','A sketchbook and a stack of magazines. The shelf sign says ART, TRAVEL, MUSIC, FILM, IDEAS. Mostly ideas.']]},
   // Ramen Ramen, painted plate (art/ramen.webp, engine/plate.js), 12 x 9 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
   // Kitchen, broth pot and the five-stool counter along the back; sake shelf back right; bamboo pot and raised lantern step on the left;
   // the corner booth table on the right. The two tiles under the noren curtain (x5 and x6) are the way out.
-  {id:'ramen',w:12,h:9,
+  {id:'ramen',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#cbb89c',alt:'#d8c6aa',wall:'#7a3a33',trim:'#e8c8a0',pattern:'wood',rug:'#b9483f'},
     rug:[4,5,4,2],
+
+    // Square painted plate (art/ramen.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Kitchen and the six-stool counter across the back, sake shelf back right, lantern step left, corner booth right. The gap under the noren curtain (x7 to x9) is the way out.
     plateMask:[
-      '############',
-      '############',
-      '############',
-      '##.#########',
-      '##.......###',
-      '####.....###',
-      '#####..#####',
-      '#####..#####',
-      '#####..#####'],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '###########..###',
+      '#####........###',
+      '#####........###',
+      '#####.........##',
+      '#####.........##',
+      '#####.#...#...##',
+      '###...#...##..##',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######'],
     npcs:[
-      {name:'Kenji',x:5,y:4,look:'kenji',lines:[
+      {name:'Kenji',x:7,y:6,look:'kenji',lines:[
         'Irasshaimase! Welcome!',
         'Tom-san, your Japanese is very good.',
         'It\'s not. But you\'re trying very hard, and I respect that.']}],
     objects:[
-      ['counter',3,2,5,2,'Ramen counter','Five stools. A pot of broth that\'s been simmering since Tuesday.',{variant:'tea'}],
-      ['table',9,4,3,2,'Corner table','A tiny sign: PLEASE SLURP. IT IS POLITE.'],
-      ['shelf',8,2,3,2,'Sake shelf','The bottles are labeled in kanji. Tom can read two. He\'s very proud.'],
-      ['pot',1,3,1,2,'Lucky bamboo','The pot has a soft-boiled egg painted on it. One stalk for broth, one for noodles, one for the egg, and the rest for luck.'],
-      ['table',0,5,4,1,'Lantern step','A low wooden step with a lantern on it. Nobody sits here. Kenji says the lantern has seniority.']]},
-  {id:'juicebar',w:11,h:9,
+      ['counter',3,3,8,3,'Ramen counter','Five stools. A pot of broth that\'s been simmering since Tuesday.',{variant:'tea'}],
+      ['shelf',12,1,3,4,'Sake shelf','The bottles are labeled in kanji. Tom can read two. He\'s very proud.'],
+      ['table',13,5,3,6,'Corner table','A tiny sign: PLEASE SLURP. IT IS POLITE.'],
+      ['table',1,6,4,5,'Lantern step','A low wooden step with a lantern on it. Nobody sits here. Kenji says the lantern has seniority.']]},
+  {id:'juicebar',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#dfe8d0',alt:'#eaf0de',wall:'#6fb35a',trim:'#f4fbe8',pattern:'tile',rug:'#9ccf7a'},
     rug:[3,5,5,2],
-    // Painted plate (art/juicebar.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // Juice counter and blender wall across the back (Sage works behind it; A on the counter in front of him talks to him),
-    // wheatgrass beds and the herb table down the sunny left side, the big fern and the supplement shelf on the right.
-    // The doormat (x 4 to 6, rows 7 and 8) between the two gate posts is the way out.
+
+    // Square painted plate (art/juicebar.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Juice counter and blender wall across the back, herb table down the left, fern and bistro tables right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '###########',
-      '###########',
-      '###########',
-      '########.##',
-      '###......##',
-      '###......##',
-      '##.......##',
-      '####...####',
-      '####...####'],
-    doors:[[4,8],[6,8]],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '############.###',
+      '############.###',
+      '####.........###',
+      '####.........###',
+      '####.........###',
+      '####.........###',
+      '####.........###',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
-      {name:'Sage',x:5,y:2,look:'sage',roam:0,lines:[
+      {name:'Sage',x:8,y:7,look:'sage',roam:0,lines:[
         'Welcome. Breathe in. Now order.',
         'We opened in March. The pupuseria next door has been here since 1994. We\'re learning a lot.',
         "Today's special is celery. Doña Carmen says that's not a meal. She's right."]}],
     objects:[
-      ['counter',3,3,5,1,'Juice bar','A blender the size of a car engine. It sounds like one too.',{variant:'tea',across:true}],
-      ['planter',1,2,2,4,'Wheatgrass','Grown on site. Harvested on site. Judged on site.'],
-      ['pot',1,6,1,1,'Herb table','Basil, mint and a tag that says BE GENTLE. The basil looks like it took that personally.'],
-      ['pot',8,2,2,1,'Fern','It\'s thriving. It\'s the only thing here that\'s not stressed.'],
-      ['shelf',9,3,2,4,'Supplement shelf','Powders. So many powders. One just says ENERGY in capital letters.']]},
-  {id:'nickels',w:11,h:9,
+      ['counter',4,4,8,3,'Juice bar','A blender the size of a car engine. It sounds like one too.',{variant:'tea',across:true}],
+      ['pot',12,2,3,3,'Fern','It\'s thriving. It\'s the only thing here that\'s not stressed.'],
+      ['pot',0,7,4,5,'Herb table','Basil, mint and a tag that says BE GENTLE. The basil looks like it took that personally.']]},
+  {id:'nickels',w:16,h:16,door:[8,15],door2:[7,15],doors:[[6,15],[9,15]],
     style:{floor:'#d9c49c',alt:'#e6d3ad',wall:'#3a9ca0',trim:'#f1d9b5',pattern:'check',rug:'#2f6f73'},
     rug:[3,6,5,2],
-    // Painted plate (art/nickels.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // Sweater wall, window and helmet shelf down the left, the long counter across the back (the painted shopkeeper stands behind it),
-    // crates and the ball display front left, snack shelf back right, the cactus and a fern front right.
-    // The floor opens into a short lane at x 5 (rows 6 to 8): the doorway and the mat below it.
+
+    // Square painted plate (art/nickels.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Long shop counter across the back, ball rack and battle bin left, snack shelves and cactus right. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
-      '###########',
-      '###########',
-      '###########',
-      '###########',
-      '########.##',
-      '####.....##',
-      '##.......##',
-      '#####.#####',
-      '#####.#####'],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '#####........###',
+      '#####........###',
+      '#####.........##',
+      '###...........##',
+      '####.........###',
+      '####.........###',
+      '######....######',
+      '######....######',
+      '######....######',
+      '######....######'],
     npcs:[
       // The keeper is painted into the plate, so the sprite stays hidden; A on the counter still opens the shop.
-      {name:'Nickel',x:5,y:2,look:'nickel',shopkeeper:true,hidden:true,roam:0,shopLines:NICKEL,shopName:"Nickel's",lines:[]}],
+      {name:'Nickel',x:12,y:6,look:'nickel',shopkeeper:true,hidden:true,roam:0,shopLines:NICKEL,shopName:"Nickel's",lines:[]}],
     objects:[
-      ['counter',4,3,4,2,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. NO, WE DO NOT VALIDATE.',{variant:'letters',shop:true}],
-      ['shelf',8,1,2,3,'Snack shelf','Juice boxes, picnic baskets, and a very expensive bottle of water.'],
-      ['toybox',1,4,2,2,'Battle bin','Water balloons, kazoos and party poppers. A label says: FOR MONSTERS ONLY. AND COYOTES.'],
-      ['toybox',3,4,1,2,'Ball display','Star balls, party bottles and a little palm tree sign: THIS WAY TO FUN. FUN IS NOT REFUNDABLE.'],
-      ['pot',1,6,1,1,'Shop fern','It has a price tag too. The tag just says: IT\'S FINE.'],
-      ['pot',9,4,1,3,'Shop cactus','It has a price tag. The price is "no." Penny taught her well.']]},
+      ['counter',5,4,7,2,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. NO, WE DO NOT VALIDATE.',{variant:'letters',shop:true}],
+      ['shelf',13,2,3,6,'Snack shelf','Juice boxes, picnic baskets, and a very expensive bottle of water.'],
+      ['toybox',1,6,3,3,'Battle bin','Water balloons, kazoos and party poppers. A label says: FOR MONSTERS ONLY. AND COYOTES.'],
+      ['toybox',4,5,1,4,'Ball display','Star balls, party bottles and a little palm tree sign: THIS WAY TO FUN. FUN IS NOT REFUNDABLE.'],
+      ['pot',2,10,2,3,'Shop fern','It has a price tag too. The tag just says: IT\'S FINE.'],
+      ['pot',14,8,2,6,'Shop cactus','It has a price tag. The price is "no." Penny taught her well.']]},
   // Backlot Wardrobe, painted plate (art/wardrobe.webp, engine/plate.js), 12 x 10 tiles at 64 art px per tile. Mask: '#' blocks, '.' walks.
   // Western rack and hat shelf back left, the call sheet and the space rack across the back, the continuity desk down the left side,
   // the prop plant and trunks down the right. The two tiles of purple carpet between the gate posts (x5 and x6, rows 8 and 9) are the way out.

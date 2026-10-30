@@ -11,7 +11,7 @@ class Q(http.server.SimpleHTTPRequestHandler):
 socketserver.TCPServer.allow_reuse_address=True
 srv=socketserver.TCPServer(('127.0.0.1',0),functools.partial(Q,directory=ROOT)); port=srv.server_address[1]
 threading.Thread(target=srv.serve_forever,daemon=True).start()
-MAPS=['town','row','hollow','jpark','blvd','tomhouse','bakery','library','greenhouse','post','tea','observatory','shop','taxi','grands']
+MAPS=['town','row','hollow','jpark','blvd','tomhouse','bakery','library','greenhouse','post','tea','observatory','shop','taxi','grands','elliehouse','coffee','ramen','juicebar','nickels']
 JS='''(id)=>{ __LE.go(id); const m=currentMap; return new Promise(res=>setTimeout(()=>{
   const r=canvas.getBoundingClientRect(); let t=null;
   // A tile under the title bar or the on-screen controls cannot be tapped (the painting now runs under them), so pick targets inside the safe band.

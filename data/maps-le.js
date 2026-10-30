@@ -1513,26 +1513,32 @@ const LE_ROOMS=[
       ['counter',1,7,5,4,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
       ['pot',10,3,2,4,'Pepper plant',"Boppy's pride. The label just says NO."],
       ['table',12,6,4,4,'Dining table','Set for dinner already. Deedee sets it at noon, just in case. There is always one more chair than people. There is always someone to fill it.']]},
-  {id:'elliehouse',w:12,h:10,
+  {id:'elliehouse',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#cdb9c6',alt:'#d8c6d2',wall:'#7a5a78',trim:'#eadcea',pattern:'wood',rug:'#6a3a8a'},
     rug:[3,4,6,3],
-    // Painted plate (art/elliehouse.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // Hutch and photo wall top left, kitchen top right, green sofa centre, tea table on the rug, dining table right,
-    // armchair and basket lower right, vanity and umbrella stand left, entry stairs bottom centre (door at 6,9).
+
+    // Square painted plate (art/elliehouse.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
+    // Hutch and photo wall top left, kitchen and dining top right (painted only), green sofa centre, tea table on the rug, armchair lower right, vanity and umbrella stand left. The gap between the gate posts (x7 to x9) is the way out.
     plateMask:[
-      '############',
-      '############',
-      '############',
-      '######...###',
-      '######...###',
-      '##.....#####',
-      '##.....#####',
-      '##......####',
-      '##.##..#####',
-      '############'],
+      '################',
+      '################',
+      '################',
+      '################',
+      '################',
+      '########....####',
+      '#######.....####',
+      '####.....#######',
+      '###......#######',
+      '###......#######',
+      '###........#####',
+      '###........#####',
+      '#######...######',
+      '#######...######',
+      '#######...######',
+      '#######...######'],
     npcs:[
       // Aunt Ellie: Deedee's aunt. Cosmopolitan, fashionable, sharp, wise, takes no nonsense. Lives here; visits the Rivituso house in chapters 9 and 10.
-      {name:'Aunt Ellie',x:5,y:5,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,away:ELLIE_VISIT,lines:[
+      {name:'Aunt Ellie',x:7,y:8,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,away:ELLIE_VISIT,lines:[
         'Tom. Stand up straight. There. Now you look like someone I\'m related to.',
         'Yes, Deedee has an aunt. Yes, I\'m older. No, you may not ask by how much.',
         'I\'ve been to Paris eleven times. Long Island is charming. Like a hat you wear once.'],
@@ -1548,13 +1554,11 @@ const LE_ROOMS=[
           'A good scarf fixes almost anything. Not Boppy. But almost anything.',
           'Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.']}],
     objects:[
-      ['shelf',5,2,2,1,'Writing cabinet','Cream stationery, a fountain pen, and a thank-you note for a favor nobody has done yet. A white orchid watches from the corner, alive for nine years out of pure intimidation.'],
-      ['counter',7,2,2,1,'Kettle and fruit bowl','The kettle is always warm. Ellie says a kettle that waits is a kettle that judges.'],
-      ['sofa',3,3,3,2,'Green sofa','Lace on the back, six cushions, zero crumbs. Nobody has ever been allowed to find out why.'],
-      ['pot',2,3,1,2,'Lamp table','A tiny framed photo of Ellie on a ship deck in a wide white hat, 1968. The caption says: Arrived fashionably late.'],
-      ['counter',7,5,2,2,'Tea table','One silver teapot, two cups, and a plate of cookies. A note on the saucer: The good china is not for Boppy.',{variant:'letters'}],
-      ['pot',9,3,2,2,'Dining table','Set for two, in case Deedee drops by. Deedee has been told to call first.'],
-      ['pot',8,7,1,1,'Side table','A book about Paris. Eleven trips, and she is still on the introduction.'],
-      ['pot',1,6,1,1,'Umbrella stand','Six umbrellas, none for rain. Ellie says rain should dress better.'],
-      ['recliner',0,7,2,2,"Ellie's vanity",'A silver brush, a pink shawl, and a mirror that has only ever agreed with her. Her wardrobe is upstairs. Every hanger faces the same way, and one hanger is empty. Ellie will not say why.']]}
+      ['shelf',7,3,2,2,'Writing cabinet','Cream stationery, a fountain pen, and a thank-you note for a favor nobody has done yet. A white orchid watches from the corner, alive for nine years out of pure intimidation.'],
+      ['counter',9,3,3,2,'Kettle and fruit bowl','The kettle is always warm. Ellie says a kettle that waits is a kettle that judges.'],
+      ['sofa',2,3,5,4,'Green sofa','Lace on the back, six cushions, zero crumbs. Nobody has ever been allowed to find out why.'],
+      ['counter',9,7,3,3,'Tea table','One silver teapot, two cups, and a plate of cookies. A note on the saucer: The good china is not for Boppy.',{variant:'letters'}],
+      ['pot',11,9,2,3,'Side table','A book about Paris. Eleven trips, and she is still on the introduction.'],
+      ['pot',2,7,1,2,'Umbrella stand','Six umbrellas, none for rain. Ellie says rain should dress better.'],
+      ['recliner',0,9,3,3,"Ellie's vanity",'A silver brush, a pink shawl, and a mirror that has only ever agreed with her. Her wardrobe is upstairs. Every hanger faces the same way, and one hanger is empty. Ellie will not say why.']]}
 ];

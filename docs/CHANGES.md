@@ -8,6 +8,11 @@
 - New bake flag `--cuts x1,x2,...` forces the column between each pair of frames, for sheets whose frames overlap in x with no clean gap (the Warden's swoosh and the HUSH-9 sound waves reach into the next frame).
 - Known small flaws in the source art: Warden attack2 has a stray halberd tip at its left edge and a speck under the stance; Warden attack4 has a thin sliver of attack3's flash at its left edge; HUSH-9 attack3 has its left foot slightly clipped. A corrected sheet would fix them.
 - Tests: `tools/foes_test.py warden,hush9final` 0 fails; `tools/smoke.py` FAILS: [].
+## 2026-10-30: Square painted rooms, batch 3 (Aunt Ellie's House, Golden Hour Coffee, Ramen Ramen, Very Green Juice, Nickel's)
+- Tom sent rooms3.zip (01_Aunt_Ellies_House, 02_Golden_Hour_Coffee, 03_Ramen_Ramen, 04_Very_Green_Juice, 05_Nickels). Matched to ids `elliehouse`, `coffee`, `ramen`, `juicebar`, `nickels`. All five are 1254 px squares, full bleed, no people or text, standard gate-gap layout. Installed as 16 x 16, `square:true`, actors at 1.98 (x1.2 boost).
+- Exits: Ellie, Ramen use the 3-tile gap (x7 to x9: door (8,15), door2 (7,15), doors (9,15)); Coffee, Juice, Nickel's the usual x6 to x9. Spawn (8,14).
+- Residents stand on the floor in front of their counters (Juniper (8,6), Kenji (7,6), Sage (8,7), Ellie (7,8)); Nickel stays hidden at (12,6) and the shop still opens from the counter. Objects re-placed to the paintings; Dropped as unreachable: Ellie's lamp table and dining table, Coffee's none, Ramen's lucky bamboo, Juice's wheatgrass and supplement shelf. Their lines are gone.
+- Tests: `rooms_test.py` on all five 0 fails; old per-room tests (coffee, ellie, juicebar, nickels, ramen) deleted (hard-coded to the old layouts); `tap_test` covers the five; smoke, camera_clamp, ch12, ch15 0 fails. Shopkeeper and resident dialogue opened by hand in each room.
 
 ## 2026-10-30: Battle prop sheets, Grace's sheet (source only)
 - Saved Grace's returned sheet as `tools/sprite-bake/src/props/grace-sheet1-of-1.png`. All 15 props match the prompt list. Not wired into the game.
