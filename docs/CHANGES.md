@@ -1,3 +1,6 @@
+## 2026-10-30: Tombo prop sheet 9 of 10 (source and cut)
+- Saved `tombo-sheet09-of-10.png` (items 113 to 125). Cells 1 to 11 match (blanket fort castle, NO GROWN-UPS sign, popcorn bag, wall of clocks, chains, yellow tape, hourglass, film reel, picture frame, red rose, wedding ring) and are cut. Nurse Cap and Red Striped Family Table came back as a handkerchief and an envelope: redo. 97 of 138 painted. Not wired yet.
+
 ## 2026-10-30: Tombo prop sheet 8 of 10 (source and cut)
 - Saved `tombo-sheet08-of-10.png` (items 99 to 112). Cells 1 to 11 match (kintsugi cup, pottery shelf, kintsugi brush, dog treat, giant paw, puzzle toy, tug rope, dining table, checked tablecloth, dinner plate, candle) and are cut. Cells 12 to 14 came back as a fork, a red napkin and a wooden chair: Drinking Glass, Hanging Pendant Lamp and Sourdough Bite go on the redo sheet. 86 of 138 painted. Not wired yet.
 
