@@ -30,7 +30,7 @@ function b6GainXp(m,n) {
   const before=m.level,ups=[];
   b6SetTotal(m,b6Total(m)+n);
   for(let L=before+1;L<=m.level;L++) ups.push(L);
-  if(ups.length) b6Refresh(m,true);
+  if(ups.length) { b6Refresh(m,true); if(roseAuto()) b6AutoStamp(m,true); }
   return ups;
 }
 // Shared story XP: everyone matches Tom (never lowered). Members who catch up while away keep a note for when they rejoin.
@@ -39,7 +39,7 @@ function b6Sync() {
   for(const m of ALL_MEMBERS()) {
     if(m===hero||b6Total(m)>=t) continue;
     const was=m.level; b6SetTotal(m,t);
-    if(m.level>was) { b6Refresh(m,true); if(!inParty(m)) m.caughtUp=(m.caughtUp||0)+(m.level-was); }
+    if(m.level>was) { b6Refresh(m,true); if(roseAuto()) b6AutoStamp(m,true); if(!inParty(m)) m.caughtUp=(m.caughtUp||0)+(m.level-was); }
   }
 }
 // XP for the fight just won: each monster's B6_XP (+5% per time it has been beaten, up to +50%), or a flat level for a boss.
@@ -185,7 +185,11 @@ const b8Mastery=m=>m.level>=B8.masteryLvl;
 // Polish Points (signature, basic, then stamped slots in route order; all to "+" before any "Polished") and Remix
 // Tickets (unlocks only; the equipped version does not change).
 const b8AutoSpend=()=>!(typeof B7==='object'&&B7.autoSpend===false);
-function b6AutoStamp(m) {
+// Rose Mode: Rose cannot pick stamps or polish, so every level up spends the new points by itself (same route as
+// Auto-Stamp, and it ignores the OPTIONS switch that turns spending off). Also see autoGear in engine/menu.js.
+const roseAuto=()=>typeof B7==='object'&&B7.diff==='rose';
+function roseSpendAll() { for(const m of ALL_MEMBERS()) b6AutoStamp(m,true); }
+function b6AutoStamp(m,force) {
   let made=0;
   for(const slot of (b8Kit(m.id).auto||B8_SLOTS)) {
     const st=b6NodeState(m,slot);
@@ -193,7 +197,7 @@ function b6AutoStamp(m) {
     if(st==='sp') break;
     b6Stamp(m,slot); made++;
   }
-  if(b8AutoSpend()) {
+  if(force||b8AutoSpend()) {
     const order=['sig','basic'].concat((b8Kit(m.id).auto||B8_SLOTS).filter(sl=>b8Has(m,sl)));
     for(const want of [2,3]) for(const sl of order) if(b8Rank(m,sl)<want&&b8Polish(m,sl)) made++;
     for(const sl of order) if(b8UnlockRemix(m,sl)) made++;
@@ -314,6 +318,7 @@ function b6AfterLoad(sv) {
     else { b8St(m); b6Trim(m); }
     b6Refresh(m);
   }
+  if(roseAuto()) { roseSpendAll(); if(typeof autoGear==='function') autoGear(ALL_MEMBERS()); }   // a save made in another mode catches up
   if(pre4&&!old&&sv.members&&typeof showToast==='function') setTimeout(()=>showToast('New Stampcards! Moves kept, passives refunded. Menu, then STAMPS.',3.6),600);
 }
 // What a save keeps for every member, in the party or not.

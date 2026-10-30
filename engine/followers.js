@@ -77,6 +77,7 @@ function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
   if(replace) recruitLeave(replace,silent);
   if(party.length>=PARTY_MAX) return;
   party.push(m);
+  if(typeof autoGear==='function') autoGear([m]);   // Rose Mode: the newcomer puts on the best gear in the pockets
   if(!silent) { m.hp=m.maxHp; m.mp=m.maxMp; }
   m.homeNpc=npc; m.homeMap=map;
   npc.homeX=npc.homeX??npc.x; npc.homeY=npc.homeY??npc.y;

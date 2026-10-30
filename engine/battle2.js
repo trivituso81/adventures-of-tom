@@ -1448,7 +1448,7 @@ function b2RewardsData() {
   b6Sync();
   let drop=null;
   const dr=d.drop;
-  if(dr&&!(B2.stolen||[]).includes(npc.monster)&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); drop={id:dr.id,name:(items[dr.id]||{}).name||dr.id,msg:dr.msg}; }
+  if(dr&&!(B2.stolen||[]).includes(npc.monster)&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); const put=typeof autoGear==='function'?autoGear():[]; drop={id:dr.id,name:(items[dr.id]||{}).name||dr.id,msg:put.length?((dr.msg||'')+' '+put.join(' ')).trim():dr.msg}; }
   const stamp=members.some(m=>m.rw&&m.rw.length)&&party.some(m=>b6Stampable(m)||b8PpLeft(m)>0||b8TkLeft(m)>0);
   return {xp:gain,purse,calm:calm.length,drop,members,stamp,heart:Math.floor(B2.heart||0)};
 }

@@ -40,7 +40,10 @@ const b7FoeHp=()=>b7Diff().foeHp||1;
 const b7FoeSpeed=()=>b7Diff().foeSpeed||1;
 // Timers inside move animations follow the battle speed.
 function b7Later(fn,ms) { return setTimeout(fn,(ms||0)/b7Speed()); }
-function b7SetDiff(id) { if(!B7_DIFF[id]) return; B7.diff=id; b7Save(); }
+function b7SetDiff(id) {
+  if(!B7_DIFF[id]) return; B7.diff=id; b7Save();
+  if(id==='rose') { roseSpendAll(); if(typeof autoGear==='function') autoGear(ALL_MEMBERS()); if(typeof b6Badge==='function') b6Badge(); }   // switching to Rose Mode spends anything waiting
+}
 // Options also ride along in every save (engine/followers.js): Safari can wipe this frame's browser storage when the
 // app closes, which used to put the game back on Grace Mode at every launch. Loading a save brings them back.
 const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,autoSpend:B7.autoSpend!==false,volMusic:sound.vol.music,volFx:sound.vol.fx});
@@ -379,7 +382,7 @@ function b7InstantWin(n) {
   b6Sync();
   let got='';
   const dr=d.drop;
-  if(dr&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); got=' Found: '+((items[dr.id]||{}).name||dr.id)+'.'; }
+  if(dr&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); const put=typeof autoGear==='function'?autoGear():[]; got=' Found: '+((items[dr.id]||{}).name||dr.id)+'.'+(put.length?' '+put.join(' '):''); }
   const x=(n.x+.5)*T,y=(n.y+1)*T-18,cols=d.vapor||['#ffe08a','#ff9ac0','#9fe8ff','#9be39a'];
   const parts=[]; for(let k=0;k<26;k++) { const a=Math.random()*Math.PI*2,s=40+Math.random()*90; parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-70,c:k%3?cols[k%cols.length]:['#ffe08a','#ff9ac0','#9fe8ff'][k%3],s:3+Math.floor(Math.random()*3)}); }
   B7.mapFx.push({x,y,t:0,t0:performance.now(),dur:1.5,parts,txt:'+'+xp+' XP'});

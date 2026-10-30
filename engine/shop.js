@@ -150,8 +150,9 @@ function buyItem(id) {
   if(coins<cost) { sfx.nope(); shopNote=pick((SHOPK||PENNY).broke); renderShop(); return; }
   coins-=cost;
   bag.push(id);
+  const put=typeof autoGear==='function'?autoGear():[];   // Rose Mode dresses the party
   sfx.coin();
-  shopNote=cost?'Bought '+item.name+' for '+cost+' coins. '+pick((SHOPK||PENNY).bought):item.name+' is on the house. '+pick((SHOPK||PENNY).free||['Happy birthday. No charge. Don\'t tell the other shelves.']);
+  shopNote=(cost?'Bought '+item.name+' for '+cost+' coins. '+pick((SHOPK||PENNY).bought):item.name+' is on the house. '+pick((SHOPK||PENNY).free||['Happy birthday. No charge. Don\'t tell the other shelves.']))+(put.length?' '+put.join(' '):'');
   renderShop();
 }
 function wearItem(m,id) {

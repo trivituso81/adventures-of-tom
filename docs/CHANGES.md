@@ -1,3 +1,10 @@
+## 2026-10-30: Rose Mode spends stamps and polish, and wears the best gear, by itself
+- Tom: Rose cannot pick stamps and polish, so level ups must apply Auto-Stamp automatically; best gear must go on whenever a new item arrives (gift, win, purchase) or a character joins.
+- Rose Mode only (Grace and Director Mode unchanged). `engine/progress.js`: `roseAuto()` is true when `B7.diff==='rose'`; `b6GainXp` and `b6Sync` run `b6AutoStamp(m,true)` after every level up (stamps, Polish ranks, Remix unlocks; `force` ignores the OPTIONS "spend" switch). Members who catch up while away are covered by `b6Sync`.
+- `engine/menu.js`: `autoGear(list)` equips `bestFor` in every slot and returns toast sentences ("Grace wears the Hoodie."). Called from `grantItem` (data/party.js, covers story gifts and souvenirs), `buyItem` (shop), both battle drop paths (engine/battle2.js, engine/feel.js), `recruitJoin` (engine/followers.js, also silent story joins) and `chapterJump`.
+- Catch-up: switching to Rose Mode (`b7SetDiff`) and loading a save in Rose Mode spend whatever is waiting and dress everyone.
+- Test: Grace Mode level up leaves points unspent and gifts in the pocket; Rose Mode spends all Polish Points and stamps the route, wears gifted and bought gear, and Amy joins wearing her best set. Smoke FAILS: []. Cache tag `rose1` on the 8 changed scripts. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Jojo (TNB's sister) painted, in the overworld, and in Round with Jojo
 - Tom sent a painted sheet made from his photo of her: 12 walk frames (down, up, left, right) and 8 disc golf poses (run, x-step, reach-back, release, follow-through, two cheers, high-five).
 - `tools/sprite-bake/bake_jojo.py` (source `tools/sprite-bake/src/jojo-sheet-v1.png`) slices and bakes it: `art/chars/jojo-ow.webp`, `art/chars/jojo-bt.webp`, `data/jojo-hires.js` (generated). The head is enlarged by hand (1.5 front and back, 1.4 side) to the family proportion; the auto-sizer reads her chin too high.

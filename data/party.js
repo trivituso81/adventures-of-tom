@@ -419,8 +419,9 @@ function unequipSlot(slot) {
 
 function grantItem(id) {
   bag.push(id);
+  const put=typeof autoGear==='function'?autoGear():[];   // Rose Mode dresses the party (engine/menu.js)
   sfx.pickup();
-  showToast('Got '+items[id].name+'. It went in a pocket.',2.6);
+  showToast('Got '+items[id].name+'. '+(put.length?put.join(' '):'It went in a pocket.'),put.length?3.2:2.6);
 }
 
 function itemRow(id,tag,onClick,isStatic) {

@@ -56,6 +56,7 @@ function chapterJump(n) {
   Object.assign(STORY.flags,st.flags);
   for(const id of st.gives) if(items[id]&&!bag.includes(id)) bag.push(id);
   b6Prep(CHSEL_LEVEL[n]||1);
+  if(typeof autoGear==='function') autoGear(ALL_MEMBERS());   // Rose Mode: best gear on
   coins=25+60*(n-1);
   if(n>=20) { chselTwenty(); return; }
   if(n>=19) { chselNineteen(); return; }

@@ -102,6 +102,15 @@ function equipBest(m) {
   showToast(m.name+' puts on '+put.join(', ')+'.'+(ch?' '+ch+'.':''),3.2);
   menuSlot=null; renderMenu();
 }
+// Rose Mode: nobody has to open GEAR. The best gear goes on by itself whenever something new arrives (gift, win, shop,
+// story) and whenever someone joins the party. list = who to dress (default: the party). Returns toast sentences.
+function autoGear(list) {
+  const put=[];
+  if(!roseAuto()) return put;
+  for(const m of list||party) for(const s of wearSlots(m)) { const id=bestFor(m,s); if(id&&equipTo(m,id)) put.push(m.name+' wears the '+items[id].name+'.'); }
+  if(put.length&&typeof syncHeroHat==='function') syncHeroHat();
+  return put;
+}
 function removeAll(m) {
   const off=wearSlots(m).filter(s=>m.equipment[s]);
   if(!off.length) { sfx.nope(); return; }
