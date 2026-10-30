@@ -756,12 +756,13 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // GIANT paw slams down on the enemy. She gets the treat, and Tom gets a lick. Effect: a sure critical Kinetic hit,
 // Tracked Scent for 3 turns, and Tom and Nara each heal 20%. Nara stands beside Tom (her black fur reads badly in
 // front of his dark shirt), facing him.
-const treat=(x,y,s,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a||0); gfx.scale(s,s);
+const treat=(x,y,s,a)=>{ if(PROPART.draw('tombo/dog_treat',x,y,{w:27*s,rot:(a||0)+.5})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(a||0); gfx.scale(s,s);
   for(const [c,g] of [[OUT,2],['#d9a35a',0]]) { E(-11,-4,5+g,5+g,c); E(-11,4,5+g,5+g,c); E(11,-4,5+g,5+g,c); E(11,4,5+g,5+g,c); R(-11-g,-4-g,22+g*2,8+g*2,c); }
   R(-11,-4,22,3,'#f0c47e'); E(-12,-5,2,1.5,'#f6dcac'); E(10,-5,2,1.5,'#f6dcac'); gfx.restore(); };
 // The giant paw, pads toward us, coming down out of the sky on a long furry leg. (x,y) = bottom of the palm.
 const FUR='#2c2a33',FUR2='#4a4656',RIM='#7a768a',PAD='#f4a0b4',PAD2='#ffc8d4';
 const bigPaw=(x,y,w)=>{ const r=w/2,ry=w*.36,top=-40;
+  { const pw=w*.95,ph=pw*160/152; if(PROPART.draw('tombo/giant_paw',x+pw*.2,y-ph*.45,{w:pw})) return; }
   R(x-r*.62-3,top,r*1.24+6,y-ry*.4-top,'#6a6676'); R(x-r*.62,top,r*1.24,y-ry*.4-top,FUR); R(x-r*.62,top,r*.22,y-ry*.4-top,FUR2);
   for(let j=0;j<5;j++) Ln(x-r*.4+j*r*.2,y-ry*1.4-j*9,x-r*.34+j*r*.2,y-ry*1.4-j*9-14,2,FUR2);
   const toes=[[-.62,-.55],[-.22,-.82],[.22,-.82],[.62,-.55]];
@@ -1228,6 +1229,8 @@ B2_TOMBO_ANIM.tnb2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // on one enemy that steals its buffs and lowers its GRIT for 3 turns. Nara stands between the monster and Tom, facing him.
 // A braided rope from a to b with a sag; red, white and blue stripes, knots at both ends.
 const rope=(ax,ay,bx,by,sag,t)=>{ const mx=(ax+bx)/2,my=(ay+by)/2+sag;
+  { const dx=bx-ax,dy=by-ay,L=Math.hypot(dx,dy)+14,sc=cl(L/170,.5,1.05),ang=Math.atan2(dy,dx)+.62;
+    if(PROPART.draw('tombo/tug_rope',(ax+bx)/2,(ay+by)/2+sag*.4,{w:160*sc,rot:Math.abs(ang)>1.6&&dx<0?ang-Math.PI:ang,flip:false})) return; }
   const pth=()=>{ gfx.beginPath(); gfx.moveTo(ax,ay); gfx.quadraticCurveTo(mx,my,bx,by); };
   gfx.lineCap='round'; pth(); gfx.lineWidth=10; gfx.strokeStyle=OUT; gfx.stroke();
   pth(); gfx.lineWidth=6; gfx.strokeStyle='#f4f0e6'; gfx.stroke();
@@ -2436,12 +2439,14 @@ const ffHop=(ms,a,b)=>ms>a&&ms<b?-Math.abs(Math.sin(ms/75))*6:0;   // a little b
 // The girls' first night at Tom and TNB's. Rose builds a blanket fort, Grace starts a dance party in it, Tom hands
 // out snacks, TNB tells a scary story with a flashlight. The fort grows into a castle and topples onto the monsters.
 // Effects: Sparkle hit on every enemy (warms them), party heals 60%, fresh costumes, Rose rides Tom, Trending locks 2.
-const snackBag=(x,y,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(s,s); RO(-6,-6,12,13,'#e0402e'); R(-3,-6,3,13,CREAM); R(3,-6,2,13,CREAM);
+const snackBag=(x,y,s=1)=>{ if(PROPART.draw('tombo/popcorn_snack_bag',x,y-1,{h:21*s})) return; gfx.save(); gfx.translate(x,y); gfx.scale(s,s); RO(-6,-6,12,13,'#e0402e'); R(-3,-6,3,13,CREAM); R(3,-6,2,13,CREAM);
   for(const [a,b2] of [[-4,-8],[1,-10],[4,-8],[-1,-7]]) popcorn(a,b2,2.6); gfx.restore(); };
 // The fort: a quilt wall over two chairs with a lit doorway. k 0..1 grows it into a castle (crenellations, three
 // turrets with flags, H tall). Drawn about its left bottom corner (px,by), rotated by rot, squashed across by sq.
 const fortCastle=(px,by,W,H,o)=>{ const k=o.k||0,ms=o.ms||0,sq=o.sq==null?1:o.sq,wh=lerp(100,H*.7,k),th=lerp(100,H,k);
   gfx.save(); gfx.translate(px,by); gfx.rotate(o.rot||0); gfx.scale(sq,1);
+  { const fh=lerp(.62,1,ez(k))*W*.97; if(PROPART.draw('tombo/blanket_fort_castle',W/2,-fh/2,{w:W,h:fh})) {
+      PROPART.draw('tombo/no_grown_ups_sign',-6,-20,{w:44,rot:-.12}); gfx.restore(); return; } }
   if(k<.6) { gfx.globalAlpha*=1; for(const x of [8,W-8]) { RO(x-3,-wh-26,6,wh+26,'#8a5a30'); R(x-9,-wh*.55,18,4,'#6a4220'); } }
   gfx.beginPath(); gfx.moveTo(0,0); gfx.lineTo(0,-wh);
   if(k<.3) gfx.quadraticCurveTo(W/2,-wh+22*(1-k/.3),W,-wh);
@@ -2508,7 +2513,7 @@ B2_TOMBO_ANIM.ff1=E2=>{ B2.aim=null;
     // pillows and cushions flying into place while Rose builds
     if(ms>P.build0&&ms<P.build1) for(let j=0;j<5;j++) { const q2=seg(ms,P.build0+j*150,P.build0+j*150+450); if(q2<=0||q2>=1) continue;
       const x=lerp(px+W+40,px+20+j*45,q2),y=lerp(by-160,by-110,q2)-Math.sin(q2*Math.PI)*40; gfx.save(); gfx.translate(x,y); gfx.rotate(q2*6);
-      RO(-14,-9,28,18,['#e88aa8','#ffd27a','#8ad0a8','#9fb8ff','#ffb07a'][j]); E(-8,-3,3,2,CREAM); gfx.restore(); }
+      if(!PROPART.draw('rose/throw_pillows',0,0,{w:34})) { RO(-14,-9,28,18,['#e88aa8','#ffd27a','#8ad0a8','#9fb8ff','#ffb07a'][j]); E(-8,-3,3,2,CREAM); } gfx.restore(); }
     // the story: lights out, one flashlight under TNB's chin
     if(ms>P.story0&&ms<P.story1+200) { const dk=Math.min(1,seg(ms,P.story0,P.story0+250))*(1-seg(ms,P.story1,P.story1+200)),c=tnbChin();
       if(!darkC) { darkC=document.createElement('canvas'); darkC.width=576; darkC.height=324; }
@@ -2518,7 +2523,7 @@ B2_TOMBO_ANIM.ff1=E2=>{ B2.aim=null;
       const gr2=g.createRadialGradient(c.x,c.y-22,6,c.x,c.y-22,40); gr2.addColorStop(0,'rgba(0,0,0,1)'); gr2.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr2; g.beginPath(); g.arc(c.x,c.y-22,40,0,Math.PI*2); g.fill();
       g.globalCompositeOperation='source-over'; gfx.globalAlpha=.9*dk; gfx.drawImage(darkC,0,0);
       gfx.globalAlpha=dk*.25*fl; gfx.fillStyle='#ffe9a0'; gfx.beginPath(); gfx.moveTo(c.x,c.y+4); gfx.lineTo(c.x-24,c.y-58); gfx.lineTo(c.x+24,c.y-58); gfx.closePath(); gfx.fill();
-      gfx.globalAlpha=dk; RO(c.x-3,c.y,6,12,'#3a3a44'); E(c.x,c.y,4,2,'#fff2a0'); gfx.globalAlpha=1; }
+      gfx.globalAlpha=dk; if(!PROPART.draw('tnb/flashlight',c.x,c.y+5,{w:24,rot:Math.PI/2})) { RO(c.x-3,c.y,6,12,'#3a3a44'); E(c.x,c.y,4,2,'#fff2a0'); } gfx.globalAlpha=1; }
     // the castle topples onto the monsters, squashing flat like a big soft heap
     if(ms>=T0&&ms<P.home) { const th=fall(ms),sq=lerp(1,.38,seg(ms,T0,T1)),bounce=ms>T1?Math.sin(seg(ms,T1,T1+260)*Math.PI)*.04:0;
       gfx.globalAlpha=fortA(ms); fortCastle(px,by,W,H,{k:1,rot:-th+bounce,sq,ms}); gfx.globalAlpha=1;
@@ -2609,23 +2614,26 @@ B2_TOMBO_ANIM.ff2=E2=>{ B2.aim=null;
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
     // the wall of clocks: rises from the floor, shatters when they run through it
     if(ms>P.wall0&&ms<P.smash) { const rk=ez(seg(ms,P.wall0,P.wall1)),top=by-WH*rk; gfx.save(); gfx.beginPath(); gfx.rect(wx-40,0,80,by+4); gfx.clip();
-      RO(wx-22,top,44,WH,'#6a6e78'); for(let y=top+10;y<by-6;y+=22) { R(wx-20,y,40,2,'#585c66'); E(wx-16,y+6,1.6,1.6,'#8a8e98'); E(wx+16,y+6,1.6,1.6,'#8a8e98'); }
+      const wPaint=PROPART.draw('tombo/wall_of_clocks',wx,top+WH/2,{w:WH*92/160,h:WH});
+      if(!wPaint) { RO(wx-22,top,44,WH,'#6a6e78'); for(let y=top+10;y<by-6;y+=22) { R(wx-20,y,40,2,'#585c66'); E(wx-16,y+6,1.6,1.6,'#8a8e98'); E(wx+16,y+6,1.6,1.6,'#8a8e98'); }
       clockFace(wx,top+28,11,ms,120); clockFace(wx-4,top+78,9,ms,90); clockFace(wx+3,top+124,10,ms,150);
-      gfx.save(); gfx.translate(wx+8,top+52); gfx.rotate(.2); RO(-8,-6,16,12,'#fbf8ee'); R(-5,-2,10,1.2,RED); gfx.restore();
+      gfx.save(); gfx.translate(wx+8,top+52); gfx.rotate(.2); RO(-8,-6,16,12,'#fbf8ee'); R(-5,-2,10,1.2,RED); gfx.restore(); }
       if(ms>P.pull) { const ck=seg(ms,P.pull,P.smash); gfx.strokeStyle='#2a2c32'; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(wx+4,top+20); gfx.lineTo(wx-6,top+60*ck+20); gfx.lineTo(wx+8,top+120*ck+30); gfx.stroke(); }
       gfx.restore(); }
     if(ms>P.smash&&ms<P.smash+900) { const q2=seg(ms,P.smash,P.smash+900); gfx.globalAlpha=1-q2;
       for(let j=0;j<16;j++) { const yy=by-WH+j/16*WH,dir=j%2?-1:1,dx=dir*(8+q2*(40+j*5))-q2*60; gfx.save(); gfx.translate(wx+dx,yy+q2*q2*70); gfx.rotate(q2*7+j); R(-7,-5,14,10,j%4?'#6a6e78':'#f4f0e6'); gfx.restore(); } gfx.globalAlpha=1; }
     // chains from the wall over Amy's shoulders until the smash; then the two ends turn into yellow finish tape
     if(ms>P.chain0&&ms<P.smash) { const ck=ez(seg(ms,P.chain0,P.chain1)),top=by-WH,lift=ms>P.stand?-6:0;
-      for(const [y0,s] of [[top+58,-1],[top+104,1]]) { const e=shoulder(s); chainLine(wx+20,y0,lerp(wx+20,e.x,ck),lerp(y0,e.y+lift,ck),10,'#9aa0aa',ck); } }
+      for(const [y0,s] of [[top+58,-1],[top+104,1]]) { const e=shoulder(s); if(!(s>0)||!PROPART.ready('tombo/iron_chains')) chainLine(wx+20,y0,lerp(wx+20,e.x,ck),lerp(y0,e.y+lift,ck),10,'#9aa0aa',ck); }
+      if(PROPART.ready('tombo/iron_chains')) { const e0=shoulder(0),cw=Math.max(30,(e0.x-wx-14)*ck); gfx.globalAlpha=ck; PROPART.draw('tombo/iron_chains',wx+14+cw/2,top+82+lift*ck,{w:cw,h:Math.min(96,cw*.8)}); gfx.globalAlpha=1; } }
     if(ms>P.smash&&ms<P.home+400) { const a=1-seg(ms,P.home,P.home+400),c=shoulder(0);
-      for(const s of [-1,1]) { gfx.globalAlpha=a; gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath();
+      if(PROPART.ready('tombo/yellow_finish_tape')) { gfx.globalAlpha=a; PROPART.draw('tombo/yellow_finish_tape',c.x+48,c.y+Math.sin(ms/90)*2,{w:96,sy:1}); gfx.globalAlpha=1; }
+      else for(const s of [-1,1]) { gfx.globalAlpha=a; gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath();
         for(let j=0;j<=12;j++) { const q=j/12,x=c.x+8+q*70,y=c.y+s*6+Math.sin(q*9-ms/50+s)*6*q; j?gfx.lineTo(x,y):gfx.moveTo(x,y); } gfx.stroke();
         gfx.strokeStyle='#ffe04a'; gfx.lineWidth=3.5; gfx.stroke(); } gfx.globalAlpha=1; }
     // the stack of ungraded papers on her back; it slides off when she stands
     if(ms>P.paper0&&ms<P.stand+500) { const fk=ez(seg(ms,P.paper0,P.paper1)),off=seg(ms,P.stand,P.stand+500),s=shoulder(1);
-      gfx.globalAlpha=1-off; paperStack(s.x+off*30,lerp(s.y-90,s.y-2,fk)+off*off*40,7,off*1.2); gfx.globalAlpha=1; }
+      gfx.globalAlpha=1-off; { const px2=s.x+off*30,py2=lerp(s.y-90,s.y-2,fk)+off*off*40; if(!PROPART.draw('amy/paper_stack',px2,py2-12,{w:36,rot:off*1.2})) paperStack(px2,py2,7,off*1.2); } gfx.globalAlpha=1; }
     // Grace's gold star: flies to Mom's forehead and stays
     if(ms>P.star0) { const h=head(); let x=h.x,y=h.y,a=1-seg(ms,P.home,P.home+500);
       if(ms<P.star1) { const g=handPt(SP(gr.id),SP(gr.id).act,gx,by-6,-1),q=ez(seg(ms,P.star0,P.star1)); x=lerp(g.x,h.x,q); y=lerp(g.y,h.y,q)-Math.sin(q*Math.PI)*30; }
@@ -2635,8 +2643,8 @@ B2_TOMBO_ANIM.ff2=E2=>{ B2.aim=null;
       gfx.globalAlpha=a;
       if(ms<P.rib1) { const hR=handPt(SP(ro.id),mirrorRowsCached(SP(ro.id),'act'),rx,by+6,1); gfx.strokeStyle='#ff7ab0'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(hR.x,hR.y);
         gfx.quadraticCurveTo((hR.x+hA.x)/2,Math.min(hR.y,hA.y)-16+Math.sin(ms/60)*4,lerp(hR.x,hA.x,q),lerp(hR.y,hA.y,q)); gfx.stroke(); }
-      else { EO(hA.x-4,hA.y,3,2.4,'#ff7ab0'); EO(hA.x+4,hA.y,3,2.4,'#ff7ab0'); E(hA.x,hA.y,1.6,1.6,'#d84a8a');
-        gfx.save(); gfx.translate(hA.x-6,hA.y-10); gfx.scale(.45,.45); PROP2.lamby({flip:false},0); gfx.restore(); }
+      else { if(!PROPART.draw('rose/ribbons',hA.x,hA.y,{w:15})) { EO(hA.x-4,hA.y,3,2.4,'#ff7ab0'); EO(hA.x+4,hA.y,3,2.4,'#ff7ab0'); E(hA.x,hA.y,1.6,1.6,'#d84a8a'); }
+        if(!PROPART.draw('rose/lamby',hA.x-6,hA.y-10,{h:20})) { gfx.save(); gfx.translate(hA.x-6,hA.y-10); gfx.scale(.45,.45); PROP2.lamby({flip:false},0); gfx.restore(); } }
       gfx.globalAlpha=1; }
     gfx.globalAlpha=1; bars(show(ms)); }});
   const steps=[
@@ -2668,9 +2676,9 @@ B2_TOMBO_ANIM.ff2=E2=>{ B2.aim=null;
 // Tom frames their picture behind them. They swing their joined hands forward and a gold wedding-ring shockwave
 // shatters the hourglass into roses and hot peppers over the monsters. Effects: Cozy hit on every enemy (warms them);
 // fallen friends get up at 50%, the party heals 60% and is Tucked In and Shielded for 3 turns.
-const flower=(x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+const flower=(x,y,s,rot)=>{ if(PROPART.draw('tombo/red_rose',x,y,{w:13*s,rot})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
   E(5,4,4,2,'#3a8a3a'); EO(0,0,5,5,'#d8304a'); E(0,0,3.2,3.2,'#a81e36'); E(-1,-1,1.4,1.4,'#f05a6a'); gfx.restore(); };
-const pepper=(x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
+const pepper=(x,y,s,rot)=>{ if(PROPART.draw('boppy/cayenne_pepper',x,y,{w:16*s,rot:rot-.5})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
   gfx.beginPath(); gfx.moveTo(-8,0); gfx.quadraticCurveTo(-2,-5,6,-3); gfx.quadraticCurveTo(9,0,6,2); gfx.quadraticCurveTo(-2,4,-8,0); gfx.closePath();
   gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#e0302a'; gfx.fill(); E(-2,-1.6,3,.9,'#ff8a6a');
   Ln(6,-1,10,-5,2.6,'#3a8a3a'); gfx.restore(); };
@@ -2681,6 +2689,7 @@ const bloom=(x,y,k,n,dx,spread)=>{ if(k<=0||k>=1) return; gfx.globalAlpha=k>.8?(
     (j%2?pepper:flower)(px,py,1.1,r); } gfx.globalAlpha=1; };
 // The amber hourglass wall: wooden caps, two glass bulbs, sand running from the top into a pile.
 const hourglass=(x,b,H,ms,sand)=>{ const w=50,top=b-H,mid=b-H/2;
+  if(PROPART.ready('tombo/amber_hourglass')) { gfx.globalAlpha*=.95; PROPART.draw('tombo/amber_hourglass',x,b-H/2,{w:H*94/160*.85,h:H}); return; }
   gfx.save(); gfx.globalAlpha*=.92;
   const shape=()=>{ gfx.beginPath(); gfx.moveTo(x-w/2+4,top+12); gfx.lineTo(x+w/2-4,top+12); gfx.quadraticCurveTo(x+w/2-2,mid-24,x+4,mid); gfx.quadraticCurveTo(x+w/2-2,mid+24,x+w/2-4,b-12);
     gfx.lineTo(x-w/2+4,b-12); gfx.quadraticCurveTo(x-w/2+2,mid+24,x-4,mid); gfx.quadraticCurveTo(x-w/2+2,mid-24,x-w/2+4,top+12); gfx.closePath(); };
@@ -2733,10 +2742,11 @@ B2_TOMBO_ANIM.ff3=E2=>{ B2.aim=null;
     if(ms>P.hands) { gfx.globalAlpha=.18*k*(1-seg(ms,P.home,P.end)); E(cx,by-50,130,90,'#ffcf7a'); gfx.globalAlpha=1; }
     const fk=frameK(ms); if(fk>0) { const mx=(fx0+fx1)/2,my=(fy0+fy1)/2,w=(fx1-fx0)*lerp(.6,1,fk),h=(fy1-fy0)*lerp(.6,1,fk);
       gfx.globalAlpha=fk; gfx.lineJoin='miter';
+      if(!PROPART.draw('tombo/gold_picture_frame',mx,my,{w:w+20,h:h+20})) {
       gfx.strokeStyle=OUT; gfx.lineWidth=14; gfx.strokeRect(mx-w/2,my-h/2,w,h);
       gfx.strokeStyle='#d8a838'; gfx.lineWidth=9; gfx.strokeRect(mx-w/2,my-h/2,w,h);
       gfx.strokeStyle='#ffe08a'; gfx.lineWidth=2; gfx.strokeRect(mx-w/2-2,my-h/2-2,w+4,h+4);
-      for(const [px2,py2] of [[mx-w/2,my-h/2],[mx+w/2,my-h/2],[mx-w/2,my+h/2],[mx+w/2,my+h/2]]) EO(px2,py2,6,6,'#ffd04a');
+      for(const [px2,py2] of [[mx-w/2,my-h/2],[mx+w/2,my-h/2],[mx-w/2,my+h/2],[mx+w/2,my+h/2]]) EO(px2,py2,6,6,'#ffd04a'); }
       gfx.globalAlpha=1; }
   }});
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
@@ -2757,17 +2767,18 @@ B2_TOMBO_ANIM.ff3=E2=>{ B2.aim=null;
     const ra=reelA(ms);
     if(ra>0) { const W2=132,H2=104,sx=cl(cx,W2/2+26,550-W2/2),sy=36,m=morph(ms),gk=ez(seg(ms,P.reel0,P.reel1));
       gfx.save(); gfx.globalAlpha=ra; gfx.translate(sx,sy+H2/2); gfx.scale(gk,gk); gfx.translate(-sx,-(sy+H2/2));
+      if(!PROPART.draw('tombo/film_reel_screen',sx,sy+H2/2,{w:W2*1.5,h:H2*1.38})) {
       RO(sx-W2/2-6,sy-10,W2+12,H2+20,'#2a1e14');
       for(const s4 of [-1,1]) { const rx2=sx+s4*(W2/2+4),ry2=sy+H2/2; EO(rx2,ry2,15,15,'#3a2a1a'); E(rx2,ry2,11,11,'#c9a23a'); E(rx2,ry2,3,3,'#3a2a1a');
         for(let j=0;j<3;j++) { const a2=ms/(s4>0?160:-160)+j*2.09; E(rx2+Math.cos(a2)*6.5,ry2+Math.sin(a2)*6.5,3,3,'#3a2a1a'); } }
-      for(let j=0;j<10;j++) { const hx=sx-W2/2+((j*16-ms/12)%(W2+8)+W2+8)%(W2+8)-2; R(hx,sy-7,6,4,'#e8c27a'); R(hx,sy+H2+3,6,4,'#e8c27a'); }
+      for(let j=0;j<10;j++) { const hx=sx-W2/2+((j*16-ms/12)%(W2+8)+W2+8)%(W2+8)-2; R(hx,sy-7,6,4,'#e8c27a'); R(hx,sy+H2+3,6,4,'#e8c27a'); } }
       gfx.save(); gfx.beginPath(); gfx.rect(sx-W2/2,sy,W2,H2); gfx.clip();
       R(sx-W2/2,sy,W2,H2,m<1?'#c89a62':'#c89a62'); if(m>0) { gfx.globalAlpha=ra*m; R(sx-W2/2,sy,W2,H2,'#6a8ac8'); R(sx-W2/2,sy+H2-16,W2,16,'#5aa05a'); gfx.globalAlpha=ra; }
       const a=ms/420,sc=1.05,fb=sy+H2-6,bx=sx+Math.cos(a)*26,dx2=sx-Math.cos(a)*26,beat=Math.floor(ms/260)%2;
       const pair=[[bsp,beat?bsp.celeb:bsp.flip,bx,Math.sin(a)],[dsp,beat?(dsp.celeb2||dsp.celeb):dsp.celeb,dx2,-Math.sin(a)]].sort((p,q)=>p[3]-q[3]);
       for(const [sp,fr,x,z] of pair) { const yb=fb-Math.abs(Math.sin(ms/130+x))*3+z*3;
         drawAt(sp,fr,x,yb,sp.pal,ra,sc); if(m<1) drawAt(sp,fr,x,yb,sepia(sp),ra*(1-m),sc);
-        if(sp===dsp&&m<1) { const top=yb-fr.length*sc; gfx.globalAlpha=ra*(1-m); RO(x-6,top+1,11,5,'#fbf8ee'); R(x-1,top+1,2,5,RED); R(x-3,top+2.5,6,2,RED); gfx.globalAlpha=ra; } }
+        if(sp===dsp&&m<1) { const top=yb-fr.length*sc; gfx.globalAlpha=ra*(1-m); if(!PROPART.draw('tombo/nurse_cap',x-1,top+3,{w:15})) { RO(x-6,top+1,11,5,'#fbf8ee'); R(x-1,top+1,2,5,RED); R(x-3,top+2.5,6,2,RED); } gfx.globalAlpha=ra; } }
       if(m<1) for(let j=0;j<14;j++) { gfx.globalAlpha=ra*(1-m)*.35; R(sx-W2/2+((j*53+ms*.7)%W2),sy+((j*31+ms*.3)%H2),1.5,1.5,'#3a2a1a'); }
       gfx.restore(); gfx.restore(); gfx.globalAlpha=1; }
     // Tom's camera flash when the picture is framed
@@ -2776,8 +2787,9 @@ B2_TOMBO_ANIM.ff3=E2=>{ B2.aim=null;
     if(ms>P.launch&&ms<last+500) { const x=launchX-(ms-P.launch)*V,y=by-56; if(x>-40) {
       for(let j=3;j>=1;j--) { gfx.globalAlpha=.25/j; ring(x+j*26,y,10+j*3,52+j*6,4,GOLD); }
       gfx.globalAlpha=.3; E(x,y,30,70,'#ffd04a'); gfx.globalAlpha=1;
-      ring(x,y,16,62,12,OUT); ring(x,y,16,62,8,'#e8b830'); ring(x-2,y,14,60,2,'#fff2b0');
-      const dy=y-64; gfx.save(); gfx.translate(x,dy); gfx.rotate(Math.PI/4); RO(-6,-6,12,12,'#cfefff'); R(-6,-6,6,6,'#ffffff'); gfx.restore();
+      const rp=PROPART.draw('tombo/gold_wedding_ring',x,y,{h:112,sx:1.15});
+      if(!rp) { ring(x,y,16,62,12,OUT); ring(x,y,16,62,8,'#e8b830'); ring(x-2,y,14,60,2,'#fff2b0'); }
+      const dy=y-64; if(!rp) { gfx.save(); gfx.translate(x,dy); gfx.rotate(Math.PI/4); RO(-6,-6,12,12,'#cfefff'); R(-6,-6,6,6,'#ffffff'); gfx.restore(); }
       star(x+Math.sin(ms/60)*4,dy-12,5,'#ffffff'); } }
     gfx.globalAlpha=1; bars(show(ms)); }});
   const steps=[
@@ -2841,10 +2853,10 @@ B2_TOMBO_ANIM.ff4=E2=>{ B2.aim=null;
   const sitK=ms=>ez(seg(ms,P.sit0,P.sit1));
   // Behind everyone: evening, string lights, chair backs.
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#1e1428',.5);
-    gfx.globalAlpha=k; for(let j=0;j<3;j++) { const x0=j*200-20,x1=x0+230; gfx.strokeStyle='#3a3020'; gfx.lineWidth=1.5; gfx.beginPath(); gfx.moveTo(x0,30); gfx.quadraticCurveTo((x0+x1)/2,62,x1,30); gfx.stroke();
+    gfx.globalAlpha=k; for(let j=0;j<3;j++) { const x0=j*200-20,x1=x0+230; if(PROPART.draw('tombo/string_lights',(x0+x1)/2,48,{w:230,h:48})) continue; gfx.strokeStyle='#3a3020'; gfx.lineWidth=1.5; gfx.beginPath(); gfx.moveTo(x0,30); gfx.quadraticCurveTo((x0+x1)/2,62,x1,30); gfx.stroke();
       for(let q=1;q<8;q++) { const t=q/8,x=lerp(x0,x1,t),y=30+64*t*(1-t)*.5*2; E(x,y+3,3,3.4,(Math.floor(ms/350)+q+j)%4?['#ffd04a','#ff9ac0','#9fd8ff','#ffb07a'][(q+j)%4]:'#7a6a5a'); } }
     const tk=tableK(ms); if(tk>0) { gfx.globalAlpha=tk;
-      const chair=x=>{ RO(x-14,tTop-50,4,52,'#7a4a24'); RO(x+10,tTop-50,4,52,'#7a4a24'); RO(x-14,tTop-50,28,8,'#8a5a30'); RO(x-14,tTop-34,28,5,'#8a5a30'); };
+      const chair=x=>{ if(PROPART.draw('tombo/wooden_dining_chair',x,tTop-22,{h:58,w:38})) return; RO(x-14,tTop-50,4,52,'#7a4a24'); RO(x+10,tTop-50,4,52,'#7a4a24'); RO(x-14,tTop-50,28,8,'#8a5a30'); RO(x-14,tTop-34,28,5,'#8a5a30'); };
       for(const p of seated) chair(spot[p.id].x); if(placeK(ms)>0) { gfx.globalAlpha=tk*placeK(ms); chair(gx); } }
     gfx.globalAlpha=1; }});
   // In front: the table and everything on it, Nara under it, the glasses, the CLINK.
@@ -2859,13 +2871,16 @@ B2_TOMBO_ANIM.ff4=E2=>{ B2.aim=null;
       gfx.beginPath(); gfx.moveTo(tL,tTop+4); gfx.lineTo(tR,tTop+4); gfx.lineTo(tR,tBot); 
       if(nara) { gfx.lineTo(ux+30,tBot); gfx.quadraticCurveTo(ux+30,tTop+14,ux,tTop+14); gfx.quadraticCurveTo(ux-30,tTop+14,ux-30,tBot); }
       gfx.lineTo(tL,tBot); gfx.closePath(); gfx.fillStyle='#c84a4a'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
-      gfx.save(); gfx.clip(); for(let x=tL;x<tR;x+=18) R(x,tTop+4,9,tBot-tTop,'#e8e0cc'); for(let y=tTop+10;y<tBot;y+=14) { gfx.globalAlpha=tk*.35; R(tL,y,tR-tL,6,'#ffffff'); gfx.globalAlpha=tk; } gfx.restore();
+      gfx.save(); gfx.clip(); if(!PROPART.draw('tombo/red_striped_family_table',(tL+tR)/2,(tTop-4+tBot)/2,{w:tR-tL+6,h:tBot-tTop+8})) { for(let x=tL;x<tR;x+=18) R(x,tTop+4,9,tBot-tTop,'#e8e0cc'); for(let y=tTop+10;y<tBot;y+=14) { gfx.globalAlpha=tk*.35; R(tL,y,tR-tL,6,'#ffffff'); gfx.globalAlpha=tk; } } gfx.restore();
       if(nara) { gfx.fillStyle='#1a1420'; gfx.beginPath(); gfx.moveTo(ux+27,tBot); gfx.quadraticCurveTo(ux+27,tTop+17,ux,tTop+17); gfx.quadraticCurveTo(ux-27,tTop+17,ux-27,tBot); gfx.closePath(); gfx.fill(); }
       // plates, the bread and the crisp, a candle
-      for(const p of seated) { const x=spot[p.id].x; EO(x-14,tTop-3,9,2.6,'#ffffff'); E(x-14,tTop-3,5,1.4,'#e8e0cc'); }
-      boule(cx-10,tTop-10,.8,false); crustTin(cx+40,tTop-8,.7); RO(cx+14,tTop-26,4,20,'#fbf8ee'); E(cx+16,tTop-30+Math.sin(ms/80),2.4,4,'#ffb04a'); E(cx+16,tTop-29,1.2,2,'#fff2a0');
+      for(const p of seated) { const x=spot[p.id].x; if(!PROPART.draw('tombo/dinner_plate',x-14,tTop-4,{w:24})) { EO(x-14,tTop-3,9,2.6,'#ffffff'); E(x-14,tTop-3,5,1.4,'#e8e0cc'); } }
+      if(!PROPART.draw('tom/sourdough_boule',cx-10,tTop-14,{w:26})) boule(cx-10,tTop-10,.8,false);
+      if(!PROPART.draw('tombo/lattice_crust_tin',cx+40,tTop-12,{w:28})) crustTin(cx+40,tTop-8,.7);
+      if(!PROPART.draw('tombo/candle',cx+14,tTop-18,{h:26})) { RO(cx+14,tTop-26,4,20,'#fbf8ee'); E(cx+16,tTop-30+Math.sin(ms/80),2.4,4,'#ffb04a'); E(cx+16,tTop-29,1.2,2,'#fff2a0'); }
       // the extra place: a plate, a cup and a little card
-      const pk=placeK(ms); if(pk>0) { gfx.globalAlpha=tk*pk; EO(gx+14,tTop-3,9,2.6,'#ffffff'); E(gx+14,tTop-3,5,1.4,'#e8e0cc'); RO(gx+28,tTop-18,10,10,'#fbf8ee'); label('GUEST',gx+33,tTop-16,'#8a3a3a',1);
+      const pk=placeK(ms); if(pk>0) { gfx.globalAlpha=tk*pk; if(!PROPART.draw('tombo/dinner_plate',gx+14,tTop-4,{w:24})) { EO(gx+14,tTop-3,9,2.6,'#ffffff'); E(gx+14,tTop-3,5,1.4,'#e8e0cc'); }
+        if(!PROPART.draw('tombo/guest_place_card',gx+33,tTop-12,{w:22})) { RO(gx+28,tTop-18,10,10,'#fbf8ee'); label('GUEST',gx+33,tTop-16,'#8a3a3a',1); }
         if(ms<P.place+700) { const q=seg(ms,P.place,P.place+700); gfx.globalAlpha=tk*(1-q); for(let j=0;j<5;j++) star(gx+14+Math.cos(j*1.26)*q*24,tTop-10+Math.sin(j*1.26)*q*16,4,GOLD); }
         gfx.globalAlpha=tk; }
       gfx.restore(); gfx.globalAlpha=1; }
@@ -2876,8 +2891,8 @@ B2_TOMBO_ANIM.ff4=E2=>{ B2.aim=null;
     // the glasses, raised from the raise to the clink
     if(ms>P.raise&&ms<P.home) { const lift=ez(seg(ms,P.raise,P.raise+300)),tilt=ms>P.clink-200&&ms<P.clink+150?.35:0;
       for(const p of seated) { const s3=st[p.id]; if(!s3||!s3.f) continue; const h=handPt(SP(p.id),s3.f,s3.x,s3.b,-1);
-        gfx.globalAlpha=lift; if(kidCup(p)) { gfx.save(); gfx.translate(h.x,h.y-6); gfx.rotate(-tilt); RO(-5,-6,10,11,'#fbf8ee'); R(-4,-5,8,3,'#f4f0e6'); gfx.restore(); } else glass(h.x,h.y-6,-tilt); }
-      if(guest&&!guest.f.dead) { glass(gx-22,tTop+2-guest.q.h*.5,-tilt); }
+        gfx.globalAlpha=lift; if(kidCup(p)) { if(!PROPART.draw('tombo/cream_kids_cup',h.x,h.y-6,{h:13,rot:-tilt})) { gfx.save(); gfx.translate(h.x,h.y-6); gfx.rotate(-tilt); RO(-5,-6,10,11,'#fbf8ee'); R(-4,-5,8,3,'#f4f0e6'); gfx.restore(); } } else if(!PROPART.draw('deedee/wine_glass',h.x,h.y-8,{h:17,rot:-tilt})) glass(h.x,h.y-6,-tilt); }
+      if(guest&&!guest.f.dead) { if(!PROPART.draw('deedee/wine_glass',gx-22,tTop+2-guest.q.h*.5,{h:17,rot:-tilt})) glass(gx-22,tTop+2-guest.q.h*.5,-tilt); }
       gfx.globalAlpha=1;
       if(ms>P.clink-60&&ms<P.clink+300) for(const p of seated) { const s3=st[p.id],h=handPt(SP(p.id),s3.f,s3.x,s3.b,-1); star(h.x,h.y-14,lerp(10,2,seg(ms,P.clink-60,P.clink+300)),'#ffffff'); } }
     // the CLINK: a flash and a shockwave that rolls across the whole stage
@@ -3516,6 +3531,12 @@ B2_TOMBO_ANIM.tnb1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 const WOOD='#c98a4a',WOOD2='#9a6232',WOOD3='#e8b07a',LIDC=['#3fb8a8','#f08a3a','#e86a9a'];
 // The toy: a rounded wooden board, base at b, three holes with colored lids. lids[i] = {open 0..1, treat, pop 0..1}.
 const puzzleToy=(cx,b,lids,sh=0)=>{ const x=cx+sh,W=136,H=24,y=b-H;
+  if(PROPART.ready('tombo/puzzle_toy')) { const pw=150,ph=pw*98/160,cy=b-ph*.5; PROPART.draw('tombo/puzzle_toy',x,cy,{w:pw});
+    lids.forEach((l,i)=>{ const lx=x-40+i*40,ly=cy-ph*.02,o=ez(l.open); if(o<=0) return;
+      E(lx,ly,12,6,OUT); E(lx,ly,10,4.5,'#4a2a12');
+      EO(lx,ly-8-o*8,10,lerp(4,9,o),LIDC[i]); E(lx-3,ly-10-o*9,3,lerp(1.2,3,o),'#ffffff');
+      if(l.treat) treat(lx,ly-1-l.pop*14,.8,0); });
+    return; }
   rr(x-W/2,y,W,H,8,WOOD,2); R(x-W/2+8,y+3,W-16,3,WOOD3); R(x-W/2+6,b-7,W-12,3,WOOD2);
   for(const dx of [-60,60]) EO(x+dx,b-12,3,3,WOOD2);
   lids.forEach((l,i)=>{ const lx=x-44+i*44,ly=y+9,o=ez(l.open);
@@ -5061,6 +5082,7 @@ const clothPath=(c,ms)=>{ const {x0,x1,yT,yB,peak,flare,wave}=c; gfx.beginPath()
   for(let i=1;i<=n;i++) { const u2=i/n,x=lerp(x1+flare,x0-flare,u2),y=yB+Math.sin(u2*Math.PI*n*.5+ms/(wave>2?60:140))*wave; gfx.lineTo(x,y); }
   gfx.closePath(); };
 const cloth=(c,ms,a=1)=>{ if(a<=0) return; gfx.save(); gfx.globalAlpha=a; clothPath(c,ms); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#fffaf0'; gfx.fill(); gfx.clip();
+  { const L2=Math.min(c.x0,c.x0-c.flare)-6,R2=c.x1+c.flare+6,T2=c.yT-c.peak-4,B2_=c.yB+c.wave+6; if(PROPART.draw('tombo/red_check_tablecloth',(L2+R2)/2,(T2+B2_)/2,{w:R2-L2,h:B2_-T2})) { gfx.restore(); clothPath(c,ms); gfx.lineWidth=1.5; gfx.strokeStyle=OUT; gfx.globalAlpha=a*.6; gfx.stroke(); gfx.globalAlpha=1; return; } }
   gfx.globalAlpha=a*.42; gfx.fillStyle='#d83a3a'; const L=Math.min(c.x0,c.x0-c.flare)-2,Rr=c.x1+c.flare+2,T0=c.yT-c.peak-2;
   for(let x=L+4;x<Rr;x+=12) gfx.fillRect(x,T0,5,c.yB+c.wave+4-T0); for(let y=T0+4;y<c.yB+c.wave+4;y+=12) gfx.fillRect(L,y,Rr-L,5);
   gfx.restore(); };
@@ -5111,11 +5133,14 @@ B2_TOMBO_ANIM.nara3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const mouth=()=>({x:sN.x-NW*.4,y:sN.b-NH*.55});
   // Behind everyone: a warm dining room, a hanging lamp over the table.
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#2a1a10',.5);
-    gfx.globalAlpha=k*.2; E(fc+12,tY-30,120,70,'#ffcf8a'); gfx.globalAlpha=k; Ln(fc+12,BARH,fc+12,tY-TH*.9,2,'#2a2018'); EO(fc+12,tY-TH*.9,12,6,'#c88a3a'); E(fc+12,tY-TH*.9+5,8,3,'#fff2c0'); gfx.globalAlpha=1; }});
+    gfx.globalAlpha=k*.2; E(fc+12,tY-30,120,70,'#ffcf8a'); gfx.globalAlpha=k;
+    { const lh=Math.max(60,tY-TH*.9+10-BARH); gfx.save(); gfx.globalAlpha=k; const okL=PROPART.draw('tombo/hanging_pendant_lamp',fc+12,BARH+lh/2,{h:lh}); gfx.restore(); if(!okL) { Ln(fc+12,BARH,fc+12,tY-TH*.9,2,'#2a2018'); EO(fc+12,tY-TH*.9,12,6,'#c88a3a'); E(fc+12,tY-TH*.9+5,8,3,'#fff2c0'); } }
+    gfx.globalAlpha=1; }});
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
     const ti=tIn(ms),to=tOut(ms),yo=(1-ti)*-70,a=Math.min(ti*1.5,to),jy=jig(ms);
     // the bare table (seen once the cloth is gone): wooden top and legs
-    if(a>0) { gfx.globalAlpha=a; RO(tL+4,tY+yo+4,6,by-tY-6,'#6a4428'); RO(tR-10,tY+yo+4,6,by-tY-6,'#6a4428'); RO(tL,tY+yo-2+jy*.3,tR-tL,7,'#8a5a30'); R(tL,tY+yo-2+jy*.3,tR-tL,2,'#a8723e'); gfx.globalAlpha=1; }
+    if(a>0) { gfx.globalAlpha=a; const tyy=tY+yo-3+jy*.3,thh=by-tyy+2;
+      if(!PROPART.draw('tombo/wooden_dining_table',(tL+tR)/2,tyy+thh/2,{w:tR-tL+10,h:thh})) { RO(tL+4,tY+yo+4,6,by-tY-6,'#6a4428'); RO(tR-10,tY+yo+4,6,by-tY-6,'#6a4428'); RO(tL,tY+yo-2+jy*.3,tR-tL,7,'#8a5a30'); R(tL,tY+yo-2+jy*.3,tR-tL,2,'#a8723e'); } gfx.globalAlpha=1; }
     // Nara under the table: only the part of her sticking out past the left end shows (the rest is under the cloth)
     if(ms>P.run&&ms<P.pop) { gfx.save(); gfx.beginPath(); gfx.rect(0,0,tL-2,324); gfx.clip(); drawAt(nsp,sN.f,sN.x,sN.b,nsp.pal,1); gfx.restore(); }
     // the tablecloth: on the table, then lifted by Nara, flying, and draped over every monster
@@ -5124,14 +5149,16 @@ B2_TOMBO_ANIM.nara3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>=P.land&&ms<P.home) drawAt(nsp,sN.f,sN.x,sN.b,nsp.pal,1);   // sitting proud, in front of the draped cloth
     // dishes on the table (they stay put when the cloth flies, of course)
     if(a>0) { gfx.globalAlpha=a; const top=tY+yo-1+(ms<P.pop?jy*.3:0),hop=i=>ms>P.wig0&&ms<P.pop?-Math.abs(Math.sin(ms/50+i*1.7))*3:0;
-      EO(fc-6,top-2+hop(0),15,3.5,'#f4f0e6'); boule(fc-6,top-9+hop(0),.8,false);
-      EO(tL+18,top-2+hop(1),11,3,'#f4f0e6'); boule(tL+18,top-6+hop(1),.45,true);
-      RO(fc+40,top-16+hop(2),4,14,'#fff6dc'); E(fc+42,top-21+hop(2)+Math.sin(ms/70),2.4,4,'#ffb030'); E(fc+42,top-20+hop(2),1,2,'#fff2a0');
-      RO(fc+60,top-12+hop(3),7,10,'#bfe0ef'); R(fc+60,top-8+hop(3),7,5,'#d84a5a'); gfx.globalAlpha=1; }
+      if(!PROPART.draw('tombo/dinner_plate',fc-6,top-4+hop(0),{w:36})) EO(fc-6,top-2+hop(0),15,3.5,'#f4f0e6');
+      if(!PROPART.draw('tom/sourdough_boule',fc-6,top-13+hop(0),{w:24})) boule(fc-6,top-9+hop(0),.8,false);
+      if(!PROPART.draw('tombo/dinner_plate',tL+18,top-3+hop(1),{w:26})) EO(tL+18,top-2+hop(1),11,3,'#f4f0e6');
+      if(!PROPART.draw('tombo/sourdough_bite',tL+18,top-8+hop(1),{w:15})) boule(tL+18,top-6+hop(1),.45,true);
+      if(!PROPART.draw('tombo/candle',fc+42,top-13+hop(2),{h:26})) { RO(fc+40,top-16+hop(2),4,14,'#fff6dc'); E(fc+42,top-21+hop(2)+Math.sin(ms/70),2.4,4,'#ffb030'); E(fc+42,top-20+hop(2),1,2,'#fff2a0'); }
+      if(!PROPART.draw('tombo/drinking_glass',fc+63,top-9+hop(3),{h:19})) { RO(fc+60,top-12+hop(3),7,10,'#bfe0ef'); R(fc+60,top-8+hop(3),7,5,'#d84a5a'); } gfx.globalAlpha=1; }
     // the sourdough bits, down to Nara
-    for(const t of BITS) { const m=mouth(),b=bitAt(t,ms,m.x,m.y); if(b) { gfx.save(); gfx.translate(b.x,b.y); gfx.rotate(b.r); EO(0,0,3.5,2.6,'#d89a52'); E(-1,-1,1.6,1,'#f0c88a'); gfx.restore(); }
+    for(const t of BITS) { const m=mouth(),b=bitAt(t,ms,m.x,m.y); if(b) { if(!PROPART.draw('tombo/sourdough_bite',b.x,b.y,{w:11,rot:b.r})) { gfx.save(); gfx.translate(b.x,b.y); gfx.rotate(b.r); EO(0,0,3.5,2.6,'#d89a52'); E(-1,-1,1.6,1,'#f0c88a'); gfx.restore(); } }
       if(ms>t+260&&ms<t+900) { const q=seg(ms,t+260,t+900); gfx.globalAlpha=1-q; heart(m.x+4,m.y-14-q*22,4,PINK); gfx.globalAlpha=1; } }
-    { const m=mouth(),b=bitAt(P.treat,ms,m.x+2,m.y); if(b) { gfx.save(); gfx.translate(b.x,b.y); gfx.rotate(b.r); EO(0,0,3.5,2.6,'#d89a52'); gfx.restore(); }
+    { const m=mouth(),b=bitAt(P.treat,ms,m.x+2,m.y); if(b) { if(!PROPART.draw('tombo/sourdough_bite',b.x,b.y,{w:11,rot:b.r})) { gfx.save(); gfx.translate(b.x,b.y); gfx.rotate(b.r); EO(0,0,3.5,2.6,'#d89a52'); gfx.restore(); } }
       if(ms>P.treat+260&&ms<P.treat+1100) { const q=seg(ms,P.treat+260,P.treat+1100); gfx.globalAlpha=q>.8?(1-q)/.2:1; heart(sN.x,sN.b-NH-10-q*26,6,PINK); gfx.globalAlpha=1; } }
     // monsters wriggle under the cloth
     if(ms>P.drape&&ms<P.end-60) for(const o of o3) { const f=o.f,wk=ms<P.home?1:1-seg(ms,P.home,P.home+300); f.ox=Math.sin(ms/55+o.q.x)*2.5*wk; f.spin=Math.sin(ms/90+o.q.x)*.05*wk; f.spinAt=performance.now(); }
@@ -5178,7 +5205,7 @@ const dcFoeBurst=(steps,o3,t0,gap,sfxName,col,first)=>o3.forEach((o,i)=>steps.pu
 const dcHeartPath=(g,cx,cy,r)=>{ gfx.beginPath(); gfx.moveTo(cx,cy+r*.95); gfx.bezierCurveTo(cx-r*1.7,cy-r*.1,cx-r*.8,cy-r*1.5,cx,cy-r*.5); gfx.bezierCurveTo(cx+r*.8,cy-r*1.5,cx+r*1.7,cy-r*.1,cx,cy+r*.95); gfx.closePath(); };
 
 // A pot: stacked rows with a profile. h 0..1 grows it, bulge shapes the belly, squash flattens it.
-const dcPot=(x,b,H,W,col,bulge,wob)=>{ if(H<=1) return; for(const pass of [0,1]) for(let y=0;y<H;y+=2) { const q=y/H,w=W*(.55+bulge*Math.sin(Math.PI*Math.min(1,q*.9+.05))+(q>.85?.18:0))+Math.sin(q*6+wob)*(wob?1.2:0),
+const dcPot=(x,b,H,W,col,bulge,wob)=>{ if(H<=1) return; if(PROPART.draw('tombo/clay_pot',x,b-H/2,{w:W*(.82+bulge*.55),h:H,rot:wob?Math.sin(wob)*.05:0})) return; for(const pass of [0,1]) for(let y=0;y<H;y+=2) { const q=y/H,w=W*(.55+bulge*Math.sin(Math.PI*Math.min(1,q*.9+.05))+(q>.85?.18:0))+Math.sin(q*6+wob)*(wob?1.2:0),
       yy=b-y-2; if(pass===0) R(x-w/2-2,yy-1,w+4,4,OUT); else R(x-w/2,yy,w,2,q>.9?'#ffffff66'.slice(0,7):col); }
   gfx.globalAlpha*=.35; R(x-W*.3,b-H+2,3,Math.max(0,H-6),'#ffffff'); gfx.globalAlpha=1; };
 
@@ -5210,14 +5237,17 @@ B2_TOMBO_ANIM.ff1_dc=E2=>{ B2.aim=null;
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
     // kiln: brick dome with a glowing door and a chimney
     const ki=ez(seg(ms,500,1000)),fireK=ms>P.fire?ez(seg(ms,P.fire,P.fire+300))*(1-ez(seg(ms,P.apply,P.home))):0;
-    if(ki>0) { gfx.globalAlpha=ki; E(kx,by-14,26,26,OUT); E(kx,by-14,24,24,'#a8553a'); R(kx-24,by-14,48,18,OUT); R(kx-22,by-14,44,16,'#a8553a');
+    const kPaint=ki>0&&PROPART.draw('tnb/brick_kiln',kx,by+4-31,{w:58,h:62});
+    if(kPaint&&fireK>0) { gfx.globalAlpha=fireK*.3; E(kx,by-16,50,40,'#ffb030'); gfx.globalAlpha=1; }
+    else if(ki>0) { gfx.globalAlpha=ki; E(kx,by-14,26,26,OUT); E(kx,by-14,24,24,'#a8553a'); R(kx-24,by-14,48,18,OUT); R(kx-22,by-14,44,16,'#a8553a');
       for(let j=0;j<4;j++) R(kx-22,by-12+j*4,44,1,'#7a3a28'); RO(kx+10,by-48,8,16,'#6a3a2a');
       RO(kx-9,by-14,18,13,'#241410'); gfx.globalAlpha=ki*(.25+fireK*.75); R(kx-7,by-12,14,9,'#ffb030'); R(kx-4,by-10,8,6,'#fff2a0'); gfx.globalAlpha=1;
       if(fireK>0) { gfx.globalAlpha=fireK*.3; E(kx,by-16,50,40,'#ffb030'); gfx.globalAlpha=1; } }
     // wheels and pots
     for(const id of ['rose','grace','tom','tnb']) { const w=ez(seg(ms,500+['rose','grace','tom','tnb'].indexOf(id)*90,1000)); if(w<=0) continue;
-      const x=wx(id),y=wy; gfx.globalAlpha=w; RO(x-3,y,6,by-y,'#6a4a2a'); EO(x,y,16,4,'#7a828e');
-      const sp2=ms>P.grow0&&ms<P.carry?spin(ms):0; for(let j=0;j<5;j++) R(x-14+((j*7+sp2)%28),y-1,2,2,'#a8b0bc'); gfx.globalAlpha=1;
+      const x=wx(id),y=wy; gfx.globalAlpha=w; const wPaint=PROPART.draw('tombo/pottery_wheel',x,y+9,{w:32,h:31});
+      if(!wPaint) { RO(x-3,y,6,by-y,'#6a4a2a'); EO(x,y,16,4,'#7a828e'); }
+      const sp2=ms>P.grow0&&ms<P.carry?spin(ms):0; if(!wPaint) for(let j=0;j<5;j++) R(x-14+((j*7+sp2)%28),y-1,2,2,'#a8b0bc'); gfx.globalAlpha=1;
       if(ms<P.grow0) continue;
       let h=potH(id,ms),sq=0,px=x,py=y-1,col=PO[id],bulge=.28,wob=0;
       if(id==='rose') { if(ms>P.fly) h=0; else wob=ms*.01; }
@@ -5267,24 +5297,25 @@ B2_TOMBO_ANIM.ff2_dc=E2=>{ B2.aim=null;
   const stackTop=ms=>ty-4-stk(ms)*3.2;
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#3a2230',.4);
     // morning light through a window
-    gfx.globalAlpha=k*(.2+.2*ez(seg(ms,P.wake-300,P.wake+400))); R(ax-30,40,60,80,'#ffe9a8'); gfx.globalAlpha=k; RO(ax-20,48,40,50,'#bfe0ef'); R(ax-1,48,2,50,OUT); R(ax-20,72,40,2,OUT); gfx.globalAlpha=1;
-    const bi=ez(seg(ms,300,800)); gfx.globalAlpha=bi*k; RO(ax-10,by-48,48,14,'#fff6dc'); R(ax-6,by-46,40,3,'#ffffff'); gfx.globalAlpha=1; }});
+    gfx.globalAlpha=k*(.2+.2*ez(seg(ms,P.wake-300,P.wake+400))); R(ax-30,40,60,80,'#ffe9a8'); gfx.globalAlpha=k; if(!PROPART.draw('tombo/morning_window',ax,73,{w:50,h:52})) { RO(ax-20,48,40,50,'#bfe0ef'); R(ax-1,48,2,50,OUT); R(ax-20,72,40,2,OUT); } gfx.globalAlpha=1;
+    const bi=ez(seg(ms,300,800)); gfx.globalAlpha=bi*k; if(!PROPART.draw('tombo/bed_pillow',ax+14,by-42,{w:46,h:28})) { RO(ax-10,by-48,48,14,'#fff6dc'); R(ax-6,by-46,40,3,'#ffffff'); } gfx.globalAlpha=1; }});
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; const bi=ez(seg(ms,300,800));
     // the bed: frame, blanket, tray
-    if(bi>0) { gfx.globalAlpha=bi; RO(ax-34,by-22,90,26,'#8a5a30'); R(ax-34,by-22,90,3,'#a8723e'); RO(ax-30,by-30,80,16,'#ff9ac0'); R(ax-30,by-30,80,3,'#ffc4dc');
-      for(let j=0;j<5;j++) { R(ax-24+j*16,by-26,5,5,'#ffdbe9'); } RO(ax+54,by-36,6,38,'#8a5a30'); gfx.globalAlpha=1; }
+    if(bi>0) { gfx.globalAlpha=bi; if(!PROPART.draw('tombo/bed',ax+11,by+6-32,{w:96,h:64})) { RO(ax-34,by-22,90,26,'#8a5a30'); R(ax-34,by-22,90,3,'#a8723e'); RO(ax-30,by-30,80,16,'#ff9ac0'); R(ax-30,by-30,80,3,'#ffc4dc');
+      for(let j=0;j<5;j++) { R(ax-24+j*16,by-26,5,5,'#ffdbe9'); } RO(ax+54,by-36,6,38,'#8a5a30'); } gfx.globalAlpha=1; }
     // the Zs, then a heart when Mom wakes
     if(ms>P.walk&&ms<P.wake) { const z=Math.floor(ms/450)%3; for(let j=0;j<=z;j++) label('Z',ax+22+j*7,by-88-j*10-((ms/90)%6),'#cfe0ff',1+j%2); }
     if(ms>P.wake&&ms<P.wake+900) { const q=seg(ms,P.wake,P.wake+900); gfx.globalAlpha=1-q; heart(ax+8,by-100-q*22,6,PINK); gfx.globalAlpha=1; }
     // the tray and the pancake stack
     if(bi>0) { const lift=ms>P.tip?0:0,tiltQ=ms>P.tip&&ms<P.fly?ez(seg(ms,P.tip,P.fly)):0,w=Math.sin(ms/70)*tiltQ*2;
-      gfx.save(); gfx.translate(tx,ty); gfx.rotate(tiltQ*-.5+w*.01); RO(-26,0,52,5,'#c8a060');
-      if(ms<P.fly+600) { for(let j=0;j<stk(ms);j++) { const jy=-4-j*3.2,sh=Math.sin(ms/60+j)*tiltQ*3; EO(sh,jy,17-j%2,3.2,j%2?'#e8b868':'#f0c878'); }
+      gfx.save(); gfx.translate(tx,ty); gfx.rotate(tiltQ*-.5+w*.01); const trP=PROPART.draw('tombo/breakfast_tray',0,3,{w:56,h:22}); if(!trP) RO(-26,0,52,5,'#c8a060');
+      if(ms<P.fly+600) { const n0=stk(ms),pP=n0>0&&PROPART.ready('tombo/pancake_stack'); if(pP) { const hh=Math.max(12,n0*4.2),sh=Math.sin(ms/60)*tiltQ*3; PROPART.draw('tombo/pancake_stack',sh,2-hh/2,{w:18+n0*2.5,h:hh}); }
+        if(!pP) for(let j=0;j<stk(ms);j++) { const jy=-4-j*3.2,sh=Math.sin(ms/60+j)*tiltQ*3; EO(sh,jy,17-j%2,3.2,j%2?'#e8b868':'#f0c878'); }
         const sy=seg(ms,P.syr0,P.syr1); if(sy>0&&stk(ms)>0) { const topY=-4-(stk(ms)-1)*3.2; gfx.globalAlpha=.9; E(0,topY-1,15*sy,2.6,'#8a4a1a'); for(let j=0;j<5;j++) { const dx=-12+j*6,dl=Math.min(1,sy*1.2)*(6+((j*5)%7)); R(dx,topY,2,dl,'#8a4a1a'); } gfx.globalAlpha=1; }
-        if(stk(ms)>=NP-1) { EO(0,-4-(NP)*3.2,4,3,'#fff2a0'); } }
+        if(stk(ms)>=NP-1&&!PROPART.ready('tombo/pancake_stack')) { EO(0,-4-(NP)*3.2,4,3,'#fff2a0'); } }
       gfx.restore();
       // the syrup bottle in Rose's hand
-      const sy=seg(ms,P.syr0,P.syr1); if(sy>0&&sy<1) { gfx.save(); gfx.translate(tx+14,ty-40-stk(ms)*3); gfx.rotate(-2.2); RO(-4,-8,8,14,'#a8561e'); R(-2,-12,4,4,'#f6f0dc'); gfx.restore(); } }
+      const sy=seg(ms,P.syr0,P.syr1); if(sy>0&&sy<1) { gfx.save(); gfx.translate(tx+14,ty-40-stk(ms)*3); gfx.rotate(-2.2); if(!PROPART.draw('tombo/syrup_bottle',0,-2,{h:22})) { RO(-4,-8,8,14,'#a8561e'); R(-2,-12,4,4,'#f6f0dc'); } gfx.restore(); } }
     // pancakes fly over the monsters
     o3.forEach((o,i)=>{ const q=seg(ms,P.fly+i*80,P.hit+i*70-0); if(q>0&&q<1) { const x=lerp(tx,o.q.x,ez(q)),y=lerp(ty-20,o.q.mid,q)-Math.sin(q*Math.PI)*56; gfx.save(); gfx.translate(x,y); gfx.rotate(q*14); EO(0,0,14,4,'#f0c878'); E(0,-1,9,2,'#8a4a1a'); gfx.restore(); }
       const sp=seg(ms,P.hit+i*70,P.hit+i*70+1300); if(sp>0&&sp<1) { gfx.globalAlpha=1-sp*sp; for(let j=0;j<6;j++) E(o.q.x+Math.cos(j*1.05)*(10+sp*18),o.q.mid-4+Math.sin(j*1.05)*(8+sp*12)+sp*sp*20,3.2,2.6,j%2?'#8a4a1a':'#f0c878'); gfx.globalAlpha=1; } });
@@ -5325,10 +5356,12 @@ B2_TOMBO_ANIM.ff3_dc=E2=>{ B2.aim=null;
   const fl=Array.from({length:14},(_,j)=>({a:j*1.7,r:20+(j*13)%50,y:by-70-(j*17)%60,sp:.6+(j%4)*.2}));
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return; dim(k,'#14183a',.6);
     gfx.globalAlpha=k*.7; for(let j=0;j<26;j++) R((j*61)%576,(j*37)%110,2,2,j%3?'#cfd8ff':'#fff6dc'); gfx.globalAlpha=1;
-    E(480,56,16,16,'#fff6dc'); E(488,52,15,15,'#14183a'.length?'#1c2250':'#1c2250');
+    if(!PROPART.draw('deedee/moon',480,56,{h:36})) { E(480,56,16,16,'#fff6dc'); E(488,52,15,15,'#1c2250'); }
     const sc=ms>P.go?(ms-P.go)*.016:0;   // street lamps drift past as they walk
     for(const L of lamps) { const lx=((L.x-sc)%660+660)%660-40,lit=ez(seg(ms,600+L.i*350,1000+L.i*350));
-      RO(lx-2,by-96,4,98,'#3a3a46'); RO(lx-8,by-100,16,6,'#3a3a46'); if(lit>0) { gfx.globalAlpha=k*lit*.25; E(lx,by-90,40,44,'#ffd27a'); gfx.globalAlpha=k*lit; E(lx,by-95,5,3,'#fff2b0'); gfx.globalAlpha=1; } } }});
+      const lP=PROPART.draw('tombo/street_lamp',lx+18,by+3-52,{h:104,w:61});
+      if(!lP) { RO(lx-2,by-96,4,98,'#3a3a46'); RO(lx-8,by-100,16,6,'#3a3a46'); }
+      if(lit>0) { gfx.globalAlpha=k*lit*.25; E(lx+(lP?30:0),by-(lP?84:90),40,44,'#ffd27a'); if(!lP) { gfx.globalAlpha=k*lit; E(lx,by-95,5,3,'#fff2b0'); } gfx.globalAlpha=1; } } }});
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
     // the path
     gfx.globalAlpha=k*.5; R(0,by+2,576,6,'#4a3c30'); for(let x=-((ms-P.go)*.016*1.0)%40;x<576;x+=40) R(x,by+4,14,2,'#6a5a48'); gfx.globalAlpha=1;
@@ -5376,8 +5409,8 @@ B2_TOMBO_ANIM.ff4_dc=E2=>{ B2.aim=null;
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms); if(k<=0) return;
     const ti=ez(seg(ms,P.table,P.table+500)),yo=(1-ti)*-60; gfx.globalAlpha=ti;
     // the long table: cloth, legs, plates and candles
-    RO(x0,by-36+yo,x1-x0,6,'#8a5a30'); R(x0,by-36+yo,x1-x0,2,'#a8723e'); RO(x0+2,by-30+yo,x1-x0-4,32,'#f4efe2'); for(let x=x0+6;x<x1-6;x+=12) R(x,by-30+yo,2,30,'#e6ddc8');
-    for(let i=0;i<8;i++) { EO(seatX(i),by-34+yo,9,2.6,'#fffbe6'); }
+    if(!PROPART.draw('tombo/cream_eight_seat_table',tcx,by+4-30+yo,{w:x1-x0+8,h:62})) { RO(x0,by-36+yo,x1-x0,6,'#8a5a30'); R(x0,by-36+yo,x1-x0,2,'#a8723e'); RO(x0+2,by-30+yo,x1-x0-4,32,'#f4efe2'); for(let x=x0+6;x<x1-6;x+=12) R(x,by-30+yo,2,30,'#e6ddc8'); }
+    for(let i=0;i<8;i++) { if(!PROPART.draw('tombo/dinner_plate',seatX(i),by-33+yo,{w:20})) EO(seatX(i),by-34+yo,9,2.6,'#fffbe6'); }
     gfx.globalAlpha=1;
     // the orbs: seat lights, rise into a rainbow ring, then fold into a heart
     for(let i=0;i<8;i++) { const o=orb(i,ms); if(o.a<=0) continue; const al=o.a*(ms>P.beam?1-ez(seg(ms,P.beam,P.beam+500)):1);
