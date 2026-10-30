@@ -1,3 +1,9 @@
+## 2026-10-30: Rose's remaining 20 painted props wired into her moves
+
+- Unicorn cut-out, safety scissors and crayon (Dress-Up Tiara); rainbow feather (Tickle Storm); couch cushion and lava pool (Floor Is Lava); cushions, quilt and password sign (Pillow Fort); stack of cushions (Piggyback Pounce, shows when Tom is down); picture book (Bedtime Story); snack tray and treat set (Ms. Cathy's Snack Attack); two teapots, teacups, tiny chairs and lacy table (Tea Party ult); chest armor, visor, tube levers and rocket fist (Mecha ult). Drawn versions stay as fallbacks. Visuals only.
+- `PROPART.draw` takes an optional `src:[sx,sy,sw,sh]` crop (used to cut single cups and treats out of a set). Tags `?v=pa4r`, `rose-moves.js?v=pa2r`.
+- Tested with kit_test per move (every slug in PAINTED_PROPS), smoke green.
+
 ## 2026-10-30: Chapter 2 smog trance: pixel squares replaced with drawn stars above the head
 
 - Tom: in chapter 2 the stars over people's heads were still pixels and not over the head. These are not the knocked-out stars (those were fixed on 10-29); they are the smog trance on the neighbors (Mr. Washington, Marisol, Larry, Miss Odette, Dona Carmen). The old effect was eight 3 by 3 pixel squares at a fixed 10 px above the feet, which landed on the face of the taller painted figures.
