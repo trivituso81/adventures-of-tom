@@ -1,3 +1,8 @@
+## 2026-10-30: Painted Chapter 9 enemies
+- Tom sent ch9_monster.zip. Installed painted frames for Velvet Rope, Stuffed Shirt, The Hanger-On (id `coathanger`), The Sore Loser and the boss The Mirrorball (four attack frames). All face right.
+- Not installed: The Wallflower (no image in the zip; id `wallflower`).
+- Stuffed Shirt is tall (78 rows), like the Soggy Sock. Test: `tools/foes_test.py` on all five, contact sheets looked at, smoke FAILS: []. Not yet seen on Tom's phone.
+
 ## 2026-10-30: Painted Chapter 8 enemies
 - Tom sent chapter8_monster_sprites.zip. Installed painted frames for The Draft, The Picky Eater, Wet Blanket and the boss Old Ironbelly (four attack frames). All face right.
 - Not installed: Lukewarm and Leftover (images missing from the zip; ids `lukewarm`, `leftover`). A second variant of The Draft was mentioned but not included.

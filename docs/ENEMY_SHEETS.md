@@ -84,6 +84,11 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | pickyeater | foe-pickyeater-v1.png (The Picky Eater) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | wetblanket | foe-wetblanket-v1.png (Wet Blanket) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | ironbelly | foe-ironbelly-v1.png (Old Ironbelly, boss, 6 frames, baked with `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| velvetrope | foe-velvetrope-v1.png (Velvet Rope) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| stuffedshirt | foe-stuffedshirt-v1.png (Stuffed Shirt; 78 rows tall) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| coathanger | foe-coathanger-v1.png (The Hanger-On) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| soreloser | foe-soreloser-v1.png (The Sore Loser) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
+| mirrorball | foe-mirrorball-v1.png (The Mirrorball, boss, 6 frames, `--trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 
 ## How it is installed (built 2026-10-29, first six sheets)
 
