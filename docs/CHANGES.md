@@ -1,3 +1,6 @@
+## 2026-10-30: Battle prop sheets, Rose sheet 2 of 2 (source only)
+- Saved `tools/sprite-bake/src/props/rose-sheet2-of-2.png`. All 12 props match the prompt list. Rose is now complete (25 of 25). Not wired into the game.
+
 ## 2026-10-30: Battle prop sheets, Rose sheet 1 of 2 (source only)
 - Saved `tools/sprite-bake/src/props/rose-sheet1-of-2.png`. All 13 props match the prompt list. Not wired into the game.
 

@@ -8,5 +8,6 @@ Painted prop sheets Tom generated from claude prompts (the Project doc claude/pr
 | tom-sheet2-items16-31.png | 4x4, 1254x1254. Cells 1 to 15 match the list (gate scanner through game cartridge, in list order). Cell 16 is a jade roller, WRONG, the retro console is still missing | Source only |
 | grace-sheet1-of-1.png | 4x4, 1254x1254. All 15 cells match the list in order (gold dumpling squishy through spring floor mat). Cell 16 empty as asked | Source only, complete |
 | rose-sheet1-of-2.png | 4x4, 1254x1254. All 13 cells match the list in order (unicorn cut-out through tiny pink chair). Cells 14 to 16 empty as asked | Source only, complete |
+| rose-sheet2-of-2.png | 4x4, 1254x1254. All 12 cells match the list in order (teacups through cardboard rocket fist). Cell 13 empty as asked | Source only, complete |
 
 Notes for the future bake: cells carry a white number in the top-left corner (crop off). Edges have light and colored halos from background removal. Cell numbers restart at 1 on every sheet; match by the order in the prompt file.
