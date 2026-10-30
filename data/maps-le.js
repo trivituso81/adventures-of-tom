@@ -218,7 +218,7 @@ const LE_AREAS=[
       when:[{chapter:3,lines:['The path south goes to Cattail Pier.','Going fishing without Boppy? He\'d never, ever let you hear the end of it.']}]}],
     objects:[
       ['sign',14,1,1,1,'Row signpost',"THE SQUARE, back that way. Shops, fountain, Pip's rock."],
-      ['sign',15,17,1,1,'Pier signpost','CATTAIL PIER, south. Catch and release. Mostly release.'],
+      ['sign',14,19,1,1,'Pier signpost','CATTAIL PIER, south. Catch and release. Mostly release.'],
       ['sign',7,9,2,1,'Family notice',"Rivituso Row. Cookies at Deedee's. Juice at Amy's. Opinions at Ellie's. Peace and quiet at nobody's."],
       ['sign',7,7,1,1,'Chalk drawings',"Grace and Rose's chalk drawings cover the path. Step around the sunshine. Step carefully. Step colorfully."],
       ['bench',3,10,3,1,'The other bench','Boppy sat here once in 2019. It\'s still his.'],

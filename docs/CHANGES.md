@@ -1,3 +1,12 @@
+## 2026-10-30: Rivituso Row repainted: every house and both exits labeled
+
+- New painting installed as `art/row.webp` (1536 x 1408, from Tom's image, kept in `docs/reference/row_v2_from_tom.png`). Built by `tools/row_signs.py <source.png>`: scales to the plate size and repaints the three house boards larger (240 x 96) and the two exit boards taller, because the generator drew them too small for a phone.
+- The game letters every board live (`PLATE_SIGNS.row` in `engine/plate.js`): GREGORI / HOUSE, RIVITUSO / HOUSE, AUNT ELLIE / HOUSE; north exit THE SQUARE / SHOPS; south exit CATTAIL / PIER. The painting carries blank boards, so spelling never depends on the art.
+- The old painted direction signposts are gone from the art. 'Row signpost' stays at (14,1), under the north board; 'Pier signpost' moved from (15,17) to (14,19), at the south board. The south path still closes with the fallen branch until chapter 3.
+- Walk map unchanged (the new posts sit on tiles that were already solid). `?v=row1` on `engine/plate.js` and `data/maps-le.js`, `?v=20261030c` on the plate.
+- Known limitation: in portrait, when Tom stands right at an exit the title bar or D-pad covers part of that exit board (the camera stops flush at the map edge). Tom's sprite also draws over the board while he walks under it (no foreground layer).
+- Tests: reach_test row 0 fails, smoke clean, camera_clamp clean, phone-size shots portrait and landscape (`tools/shots/row-*.png`, not committed).
+
 ## 2026-10-30: Room paintings, batch 6 (Odette's Creole Kitchen, Pupuseria La Ceiba, Jordan and Sam's, Dakota and Ryan's)
 - rooms6.zip: `creole`, `pupuseria`, `jordansam`, `dakota` installed as square plates (`art/<id>.webp`, 16 x 16 tiles, `px:78`, actorScale 1.98). All four images were square and clean, no redo needed.
 - Walk masks, objects and NPC positions rewritten in `data/maps-la.js`; all NPC names and object texts kept, except two Jordan and Sam objects: the slat divider kept, but `Mug shelf` was dropped (its shelf sits behind the espresso bar, unreachable) and `Window planter` now sits on the big foreground planter as `Big planter`. No scene uses these rooms' coordinates.

@@ -1,7 +1,7 @@
 'use strict';
 // engine/plate.js — Painted "plate" scenes (32-bit look). A plate replaces the tile/house/object
 // drawing for one map; the tile grid stays as the invisible logic layer (collision, doors, exits, NPCs).
-const PLATES={ town:{src:'art/town.webp?v=20261030b',px:64,img:null,ready:false}, row:{src:'art/row.webp',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp',px:64,img:null,ready:false}, dome:{src:'art/dome.webp',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=20261029',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp',px:64,img:null,ready:false} };
+const PLATES={ town:{src:'art/town.webp?v=20261030b',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=20261030c',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp',px:64,img:null,ready:false}, dome:{src:'art/dome.webp',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=20261029',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp',px:64,img:null,ready:false} };
 PLATES.pier={src:'art/pier.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.studio={src:'art/studio.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
@@ -113,7 +113,7 @@ function drawBreadyJar(cx,by,u,time) {
   ctx.restore();
 }
 // Painted sign boards that the game letters live, so the spelling is always right and the letters stay sharp on a phone.
-// The painting leaves each board blank (tools/town_signs.py). x, y, w, h = the board's writing face in art px (64 per tile);
+// The painting leaves each board blank (tools/town_signs.py, tools/row_signs.py). x, y, w, h = the board's writing face in art px (64 per tile);
 // t = one or two lines; light = cream letters on a dark board (the green exit boards), otherwise dark ink on cream.
 const PLATE_SIGNS={ town:[
   {x:135,y:303,w:216,h:72,t:['CRUMB','BAKERY']},
@@ -128,6 +128,14 @@ const PLATE_SIGNS={ town:[
   {x:455,y:33,w:204,h:60,t:['GRUMP','HOLLOW'],light:true},
   {x:868,y:1376,w:192,h:62,t:['RIVITUSO','ROW'],light:true},
   {x:1783,y:445,w:123,h:55,t:['SCHOOL'],light:true}
+],
+// Rivituso Row (tools/row_signs.py): three house boards, then the north and south exit boards
+row:[
+  {x:490,y:240,w:216,h:72,t:['GREGORI','HOUSE']},
+  {x:1078,y:290,w:216,h:72,t:['RIVITUSO','HOUSE']},
+  {x:640,y:777,w:216,h:72,t:['AUNT ELLIE','HOUSE']},
+  {x:736,y:40,w:232,h:72,t:['THE SQUARE','SHOPS'],light:true},
+  {x:660,y:1226,w:282,h:72,t:['CATTAIL','PIER'],light:true}
 ] };
 function drawPlateSigns(list) {
   const s=T/64;
