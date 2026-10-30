@@ -153,6 +153,7 @@ function arrivalNow(dir) {
 }
 
 function talkToDriver(n) {
+  if(typeof flightArtLoad==='function') flightArtLoad();   // painted flight art (engine/flight-art.js)
   const inLA=regionOf(currentMap)==='la';
   const pages=n.visitedOnce?[]:npcLines(n);
   n.visitedOnce=true;
@@ -170,6 +171,7 @@ function runScene(steps) {
 }
 
 function startTrip(n,dir) {
+  if(typeof flightArtLoad==='function') flightArtLoad();
   const steps=[],d=departureNow(),arr=arrivalNow(dir);
   if(dir==='west') {
     if(!girlsAway()&&memberHome('grace')!=='any') steps.push(
@@ -208,7 +210,10 @@ function flightPhase(mode,dur) {
     update(dt){ this.t+=dt; intro.flight.t=this.t; return this.t>=dur; }};
 }
 function flightSound(mode,dir) {
-  if(mode==='takeoff') {
+  if(mode==='cabin') {
+    tone({type:'sine',f0:660,dur:.3,vol:.05}); tone({type:'sine',f0:880,dur:.5,vol:.05,delay:.3});
+    noise({dur:2.8,vol:.012,f0:200,f1:260,type:'lowpass'});
+  } else if(mode==='takeoff') {
     noise({dur:3.4,vol:.05,f0:250,f1:1400,type:'lowpass'});
     tone({type:'sawtooth',f0:70,f1:160,dur:3.2,vol:.03,sweep:'linear'});
   } else if(mode==='map') {
@@ -224,6 +229,7 @@ function flightSteps(dir,talk,arr) {
   const west=dir==='west';
   return [
     S.call(()=>{ intro.flight={dir,mode:'board',t:0}; $('area-name').textContent='In flight'; $('eyebrow').textContent='DELTA ONE / SEAT 1A'; }),
+    ...(typeof flightArtReady==='function'&&flightArtReady()?[flightPhase('cabin',2.6)]:[]),   // engine/flight-art.js: seat 1A, a painted beat before takeoff
     flightPhase('takeoff',4),
     S.all(flightPhase('map',8),
       S.seq(S.wait(1.6),S.talk('Tom',talk||(west
@@ -411,10 +417,13 @@ function flightBox(vw,vh,talk=true) {
 function drawFlight(time) {
   const F=intro.flight; if(!F) return;
   if(F.mode==='board') { rect(0,0,W,H,'#141c1a'); return; }
-  if(F.mode==='map') drawFlightMap(F,time);
-  else drawFlightSide(F,time);
+  // Painted art (engine/flight-art.js) when it has loaded, the pixel drawing below when not.
+  const painted=typeof flightArtReady==='function'&&flightArtReady();
+  if(F.mode==='cabin') { if(!painted||!flightPaintedCabin(F,time)) rect(0,0,W,H,'#141c1a'); }
+  else if(F.mode==='map') { if(!(painted&&flightPaintedMap(F,time))) drawFlightMap(F,time); }
+  else if(!(painted&&flightPaintedSide(F,time))) drawFlightSide(F,time);
   // Fade in and out of each phase.
-  const dur=F.mode==='map'?8:(F.mode==='takeoff'?4:4.2);
+  const dur=F.mode==='cabin'?2.6:F.mode==='map'?8:(F.mode==='takeoff'?4:4.2);
   const a=Math.max(0,1-F.t/.45,(F.t-(dur-.45))/.45);
   if(a>0) { gfx.globalAlpha=Math.min(1,a); rect(0,0,W,H,'#141c1a'); gfx.globalAlpha=1; }
 }

@@ -15,6 +15,13 @@
 - The jar on the kitchen island in Tom's house (`drawBreadyJar` in `engine/plate.js`) was a code-drawn pixel jar. It now draws `art/props/tom/sourdough_starter_jar.webp` (the DAY 3 jar, same art the Starter Splash move uses), same spot and size, with a soft shadow. Still hidden in chapter 6 until `ch6-clear`.
 - Prop cache version bumped to `pa4` (`engine/prop-art.js`, its tag in `index.html`) so phones fetch the newest image; `?v=bready2` on `engine/plate.js`. `tools/bready_test.py` passes.
 
+## 2026-10-30: Flight makeover: painted cabin, takeoff, map and landing
+
+- 12 images from Tom baked by `tools/sprite-bake/bake_flight.py` (sources in `tools/sprite-bake/src/flight/`) into `art/flight/*.webp` and the generated `data/flight-art.js`. `engine/flight-art.js` (new) draws them; `engine/travel.js` calls it and keeps the old pixel drawing as the fallback if the art has not loaded.
+- New 2.6 second cabin-window beat before takeoff (portrait pans from the seat to the window). Takeoff and landing are painted skyline, runway and foreground plants with parallax, a painted plane in 9 poses, tire smoke and a shadow. The map is the painted USA with pins, clouds, a dot trail and a plane that banks near the ends.
+- Both directions work (Long Island to Los Angeles, and back). Portrait and landscape both checked with `python3 tools/flight_test.py` (shots in `tools/shots/flight-*`).
+- Art loads 2.5 seconds after boot and when the cab driver is talked to. `?v=fl2` on `data/flight-art.js`, `engine/flight-art.js`, `engine/travel.js`.
+
 ## 2026-10-30: Tombo redo sheet 2: the last seven Tombo props cut (all 138 painted)
 
 - `tombo-redo-sheet2-of-2.png` saved in `tools/sprite-bake/src/props/` and added to `bake_prop_sheets.py` (cells 1 to 7 = Tombo items 97, 98, 110, 111, 112, 124, 125). New images in `art/props/tombo/`: `palm_tree`, `new_york_skyline`, `drinking_glass`, `hanging_pendant_lamp`, `sourdough_bite`, `nurse_cap`, `red_striped_family_table`.
