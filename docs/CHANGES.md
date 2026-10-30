@@ -1,3 +1,8 @@
+## 2026-10-30: Tombo redo sheet 2: the last seven Tombo props cut (all 138 painted)
+
+- `tombo-redo-sheet2-of-2.png` saved in `tools/sprite-bake/src/props/` and added to `bake_prop_sheets.py` (cells 1 to 7 = Tombo items 97, 98, 110, 111, 112, 124, 125). New images in `art/props/tombo/`: `palm_tree`, `new_york_skyline`, `drinking_glass`, `hanging_pendant_lamp`, `sourdough_bite`, `nurse_cap`, `red_striped_family_table`.
+- All seven match the list. The cutter reports 138 of 138 Tombo props painted, none missing. Not wired into any Tombo animation yet (wiring is the later step in `docs/PROP_ART.md`).
+
 ## 2026-10-30: Grump Hollow repainted: signs lettered, south exit labeled, north-west trail closed
 
 - New painting installed as `art/hollow.webp` (1536 x 1408, from Tom's image, kept in `docs/reference/hollow_v2_from_tom.png`). `tools/hollow_signs.py <source.png>` scales it to the plate size. The generator drew the three wooden signs and the green exit board large enough, so nothing is repainted.
