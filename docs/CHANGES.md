@@ -2,6 +2,12 @@
 
 - Tom: the lava was small and hidden behind the enemies. The painted pool in `engine/rose-moves.js` (`Rm.floor_is_lava` wrapper) now spans from 52 px left of the row to 84 px right of Rose's cushion, 30 px above the rear enemy's feet to 30 px below the front one, and is drawn 15 percent larger (2.4x instead of 2.08x). Lava now shows around every enemy's feet and under Rose. Cache tag `rose-moves.js?v=lv2`.
 
+## 2026-10-30 (night, 2): Square walk-behind, second pass
+
+- `PLATE_BEHIND` now also covers the two plaza lamp posts (head, pole and foot as separate shapes), the Taxi Co. roof edge and side wall over the alley beside Moon Club (new polygon shape, `pts`), and the plaza east tree (tighter ellipse than the first attempt). `?v=behind2` on `engine/plate.js`.
+- SCHOOL board and shop awnings need nothing: nobody can stand north of the SCHOOL board's posts, and no walkable tile lies under a shop awning. The lamp by Taxi Co. sits on the door-step row, so it is left alone.
+- Checks: smoke clean, reach_test town 0 fails, phone screenshots at both lamps, the Taxi alley and the east tree.
+
 ## 2026-10-30: Konami Code controller draws under Tom
 
 - The giant floor controller (`SC.tv_konmat`) was a front scene, so it painted over Tom while he hopped from button to button. It is now a `back:true` scene (drawn before the party and foes, like the lie-flat pod), so Tom stands on it. The code readout at the top (`tv_code`) stays in front. Nothing else about the move changed.
