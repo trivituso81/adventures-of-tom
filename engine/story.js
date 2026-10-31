@@ -306,7 +306,9 @@ const SCENE_OPS={
   trace:o=>S.call(()=>heartTrace(o.trace)),
   // A "Goal: ..." toast is a quest update: it is stored silently (no popup, nothing waits on it) and the location label
   // pulses until the player taps it (watchObjective below). Every other toast shows as before.
-  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { setFlag('goal',o.toast.slice(6)); refreshObjective(); return; } return; /* scene toasts are silent: objectives pulse the label, nothing pops up */ }),
+  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { const prev=flag('goal'),nt=o.toast.slice(6);
+    if(prev&&prev!==nt) { const Lg=Array.isArray(flag('goalLog'))?flag('goalLog').slice():[]; Lg.push({c:flag('goalCh')||STORY.chapter,t:prev}); setFlag('goalLog',Lg.slice(-80)); }
+    setFlag('goal',nt); setFlag('goalCh',STORY.chapter); refreshObjective(); return; } return; /* scene toasts are silent: objectives pulse the label, nothing pops up */ }),
   sfx:o=>S.call(()=>{ const f=sfx[o.sfx]; if(f) f(); }),
   say:o=>S.call(()=>say(o.say[0],o.say[1],o.say[2])),
   save:o=>S.call(()=>saveGame('auto',true)),
@@ -697,33 +699,75 @@ saveSummary=function(sv) {
 };
 
 
-// ---------- Objective: tap the location label on the HUD to see what to do next ----------
+// ---------- Quest tracker (top left HUD) ----------
+// The HUD frame is a permanent quest tracker: chapter title, the next step, and progress pips for multi-part steps.
+// Tap it to open the quest log: the current step with a checklist of its parts, then every finished step with a check mark.
 // The current goal is the latest "Goal: ..." toast a scene showed, kept in STORY.flags.goal (so it saves with the game).
+// Each goal it replaces moves into STORY.flags.goalLog ({c:chapter,t:text}), which is the "Completed" list.
+const QUEST_SUBS=[
+  {re:/^clear the three sets/,items:[['Western street','ch4-west'],['New York','ch4-ny'],['Main Street','ch4-main']]},
+  {re:/^clear the Art room/,items:[['Art room','ch5-art'],['Music room','ch5-music'],['Gym','ch5-gym']]},
+  {re:/^clear the playground/,items:[['Playground','ch6-play'],['Garden','ch6-garden'],['Picnic tables','ch6-picnic']]},
+  {re:/^Fiction \(top left\)/,items:[['Fiction','ch7-fic'],['Nonfiction','ch7-non'],['Picture Books','ch7-pic']]},
+  {re:/^the Paint Shop/,items:[['Paint Shop','ch8-paint'],['Machine Shop','ch8-shop'],['Lunchroom','ch8-lunch']]},
+  {re:/^find the three mirrors/,items:[['Coat Check','ch9-coat'],['Card Room','ch9-cards'],['Ballroom','ch9-ball']]},
+  {re:/^find the gate clock/,items:[['Security','ch10-sec'],['Baggage Claim','ch10-bag'],['The Lounge','ch10-lounge']]}
+];
+function questSubs(text) {
+  for(const q of QUEST_SUBS) if(q.re.test(text||'')) return q.items.map(([label,f])=>({label,done:flag(f)===true}));
+  return null;
+}
+function questShort(text) {
+  const m=/^(.*?[.!?])(\s|$)/.exec(text||''),s=(m?m[1]:text||'').trim();
+  return s?s.charAt(0).toUpperCase()+s.slice(1):s;
+}
 function currentObjective() {
   if(STORY.mode!=='full') {
     const dc=typeof doorCount==='function'&&currentMap?doorCount(regionOf(currentMap)):null;
-    return {head:'Demo',text:'Free play. Explore Long Island and Los Angeles, meet everyone, and take on the monsters.'+(dc?' Doors visited here: '+dc.seen+' of '+dc.total+'.':'')};
+    return {head:'Free play',eyebrow:'FREE PLAY',text:'Explore Long Island and Los Angeles, meet everyone, and take on the monsters.'+(dc?' Doors visited here: '+dc.seen+' of '+dc.total+'.':''),subs:null,done:[],complete:false};
   }
-  const c=chapterInfo(),head='Chapter '+c.n+': '+c.title;
+  const c=chapterInfo(),head='Chapter '+c.n+': '+c.title,eyebrow='CH '+c.n+' · '+String(c.title||'').toUpperCase();
+  const log=(Array.isArray(flag('goalLog'))?flag('goalLog'):[]).filter(e=>e&&e.c===c.n).map(e=>e.t);
+  const goal=flag('goal');
   if(flag('ch'+c.n+'-done')===true) {
-    if(c.n===1&&!flag('ch2-sal')) return {head,text:'Chapter complete. Talk to Sal at the taxi stand to keep going.'};
-    if(c.n===2) return {head,text:'Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home and keep going.'};
-    if(c.n===3) return {head,text:'Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 4.'};
-    if(c.n===4) return {head,text:'Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 5.'};
-    if(c.n===7) return {head,text:'Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 8.'};
-    if(c.n===8) return {head,text:'Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 9.'};
-    if(c.n===9) return {head,text:'Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) for chapter 10.'};
-    if(c.n===10) return {head,text:'Part 1 complete! PART 2 is open on the title screen. Its chapters are still being built. Explore as much as you like.'};
-    return {head,text:'Chapter complete. The next chapter is still being built. Explore as much as you like.'};
+    let text='Chapter complete. The next chapter is still being built. Explore as much as you like.';
+    if(c.n===1&&!flag('ch2-sal')) text='Chapter complete. Talk to Sal at the taxi stand to keep going.';
+    else if(c.n===2) text='Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home and keep going.';
+    else if(c.n===3) text='Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 4.';
+    else if(c.n===4) text='Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 5.';
+    else if(c.n===7) text='Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 8.';
+    else if(c.n===8) text='Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 9.';
+    else if(c.n===9) text='Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) for chapter 10.';
+    else if(c.n===10) text='Part 1 complete! PART 2 is open on the title screen. Its chapters are still being built. Explore as much as you like.';
+    const done=log.slice(); if(goal&&flag('goalCh')===c.n&&done[done.length-1]!==goal) done.push(goal);
+    return {head,eyebrow,text,subs:null,done,complete:true};
   }
-  return {head,text:flag('goal')||'Look around. The story will find you.'};
+  const text=goal||'Look around. The story will find you.';
+  return {head,eyebrow,text,subs:goal?questSubs(goal):null,done:log,complete:false};
 }
-let objectiveOpen=false,objectiveTimer=0;
+let objectiveOpen=false,objectiveTimer=0,qtFlash=0;
+function qEl(tag,cls,txt) { const e=document.createElement(tag); if(cls) e.className=cls; if(txt!==undefined) e.textContent=txt; return e; }
 function refreshObjective() {
   const box=document.getElementById('objective'); if(!box) return;
   const o=currentObjective();
-  box.querySelector('.obj-head').textContent=o.head;
-  box.querySelector('.obj-text').textContent=o.text;
+  // collapsed tracker
+  const eb=document.getElementById('qt-eyebrow'),tx=document.getElementById('qt-text'),pp=document.getElementById('qt-pips'),brand=document.querySelector('#hud .brand');
+  if(eb) eb.textContent=o.eyebrow;
+  if(tx&&!qtFlash) tx.textContent=o.complete?'Chapter complete':questShort(o.text);
+  if(pp) {
+    pp.textContent='';
+    if(o.subs&&!qtFlash) { const n=o.subs.filter(s=>s.done).length; for(const s of o.subs) pp.appendChild(qEl('i',s.done?'on':'')); pp.appendChild(qEl('b','',n+'/'+o.subs.length)); }
+  }
+  if(brand) brand.classList.toggle('qt-complete',!!o.complete);
+  // quest log (open view)
+  box.textContent='';
+  box.appendChild(qEl('div','obj-head',o.head));
+  const now=qEl('div','q-now'); now.appendChild(qEl('span','q-mark',o.complete?'✓':'▶')); now.appendChild(qEl('span','',o.text.charAt(0).toUpperCase()+o.text.slice(1))); box.appendChild(now);
+  if(o.subs) { const ul=qEl('ul','q-subs'); for(const s of o.subs) { const li=qEl('li',s.done?'done':''); li.appendChild(qEl('span','q-box',s.done?'✓':'')); li.appendChild(qEl('span','',s.label)); ul.appendChild(li); } box.appendChild(ul); }
+  if(o.done.length) {
+    box.appendChild(qEl('div','q-sep','Completed · '+o.done.length));
+    const ul=qEl('ul','q-done'); for(const t of o.done.slice(-8).reverse()) { const li=qEl('li'); li.appendChild(qEl('span','q-box','✓')); li.appendChild(qEl('span','',questShort(t))); ul.appendChild(li); } box.appendChild(ul);
+  }
 }
 function toggleObjective(open=!objectiveOpen) {
   objectiveOpen=open; clearTimeout(objectiveTimer);
@@ -731,33 +775,48 @@ function toggleObjective(open=!objectiveOpen) {
   if(open) { refreshObjective(); setObjectivePulse(false); }   // opening it counts as seeing the new objective
   brand.classList.toggle('open',open); brand.setAttribute('aria-expanded',open);
   document.getElementById('objective').hidden=!open;
-  if(open) { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); objectiveTimer=setTimeout(()=>toggleObjective(false),12000); }
+  if(open) { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); objectiveTimer=setTimeout(()=>toggleObjective(false),15000); }
 }
 (function wireObjective() {
   const brand=document.querySelector('#hud .brand'); if(!brand) return;
   brand.setAttribute('role','button'); brand.setAttribute('tabindex','0'); brand.setAttribute('aria-expanded','false');
-  brand.setAttribute('aria-label','Location. Tap to see your next objective');
+  brand.setAttribute('aria-label','Quest tracker. Tap for the quest log');
   brand.addEventListener('click',e=>{ e.stopPropagation(); toggleObjective(); });
 })();
 
-// ---------- New-objective pulse ----------
-// When the objective changes to something new (a "Goal:" step in a scene, or a chapter-complete message), the location
-// label frame pulses until the player taps it. It never pauses the game or opens anything by itself.
-// The first look after a new game or a loaded save only records the objective (STORY.flags is replaced by both, so a
-// new object means a fresh baseline). The fallback text and Demo mode never pulse.
+// ---------- Quest updates ----------
+// When the step changes, the tracker shows the finished step with a check for a moment, then swaps to the new step and
+// pulses until the player taps it. When a part of a step is finished (a pip fills), the pips pop. It never pauses the
+// game or opens anything by itself. The first look after a new game or a loaded save only records the state (STORY.flags is
+// replaced by both, so a new object means a fresh baseline). The fallback text and Free play never pulse.
 const OBJ_DEFAULT_TEXT='Look around. The story will find you.';
-let objectiveSig=null,objectiveFlagsRef=null;
+let objectiveSig=null,objectiveFlagsRef=null,objectiveSubN=-1,objectiveShort='';
 function setObjectivePulse(on) {
   const brand=document.querySelector('#hud .brand'); if(!brand) return;
   brand.classList.toggle('obj-new',!!on);
-  brand.setAttribute('aria-label',on?'Location. New objective. Tap to see it':'Location. Tap to see your next objective');
+  brand.setAttribute('aria-label',on?'Quest tracker. New step. Tap to see it':'Quest tracker. Tap for the quest log');
+}
+function questFlash(prevShort) {
+  const brand=document.querySelector('#hud .brand'),tx=document.getElementById('qt-text'); if(!brand||!tx) return;
+  qtFlash=1; brand.classList.add('qt-done'); tx.textContent='✓ '+prevShort;
+  if(typeof sfx!=='undefined'&&sfx.levelChime) try { sfx.levelChime(); } catch(e) {}
+  setTimeout(()=>{ qtFlash=0; brand.classList.remove('qt-done'); refreshObjective(); },1500);
 }
 function watchObjective() {
-  if(STORY.mode!=='full') { objectiveSig=null; if(document.querySelector('#hud .brand.obj-new')) setObjectivePulse(false); return; }
-  const o=currentObjective(),sig=o.head+'|'+o.text;
-  if(objectiveFlagsRef!==STORY.flags) { objectiveFlagsRef=STORY.flags; objectiveSig=sig; setObjectivePulse(false); return; }
-  if(sig===objectiveSig) return;
-  objectiveSig=sig;
-  if(!objectiveOpen&&o.text!==OBJ_DEFAULT_TEXT) setObjectivePulse(true);
+  const tx=document.getElementById('qt-text'); if(!tx) return;
+  const o=currentObjective(),sub=o.subs?o.subs.filter(s=>s.done).length:-1,sig=o.head+'|'+o.text+'|'+o.done.length;
+  if(STORY.mode!=='full') { if(objectiveSig!=='free') { objectiveSig='free'; refreshObjective(); } if(document.querySelector('#hud .brand.obj-new')) setObjectivePulse(false); return; }
+  if(objectiveFlagsRef!==STORY.flags) { objectiveFlagsRef=STORY.flags; objectiveSig=sig; objectiveSubN=sub; objectiveShort=questShort(o.text); setObjectivePulse(false); refreshObjective(); return; }
+  if(sig!==objectiveSig) {
+    const prev=objectiveShort; objectiveSig=sig; objectiveSubN=sub; objectiveShort=questShort(o.text);
+    refreshObjective();
+    if(!objectiveOpen&&o.text!==OBJ_DEFAULT_TEXT&&prev&&prev!==objectiveShort) { questFlash(prev); setObjectivePulse(true); }
+    else if(!objectiveOpen&&o.text!==OBJ_DEFAULT_TEXT) setObjectivePulse(true);
+    return;
+  }
+  if(sub!==objectiveSubN) {
+    const grew=sub>objectiveSubN&&objectiveSubN>=0; objectiveSubN=sub; refreshObjective();
+    if(grew) { const brand=document.querySelector('#hud .brand'); brand.classList.add('qt-pop'); setTimeout(()=>brand.classList.remove('qt-pop'),600); if(typeof sfx!=='undefined'&&sfx.select) try { sfx.select(); } catch(e) {} }
+  }
 }
 setInterval(watchObjective,250);
