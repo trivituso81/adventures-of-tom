@@ -5670,7 +5670,7 @@ B2_TOMBO_ANIM.amy1_dc=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 
 // ---------- Ymamot Creation (Tom + Amy, tier 2): the kitchen flashback ----------
 // Years ago. Little Tom and little Amy at the kitchen counter with a huge mixing bowl. In go ketchup, pickles, cereal,
-// mustard, a whole lemon and one sock. It bubbles green. They name it, carry the bowl between them, and sling the whole
+// mustard, a whole lemon and one sock. It bubbles green. They name it, explain it, and sling the whole
 // thing across every monster. Effects unchanged: Kinetic hit on all, all to the back row and lose time, party PEP +30%.
 const bottle=(x,y,c,t)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(t); RO(-6,-16,12,30,c); R(-4,-22,8,6,'#e8e4dc'); R(-4,-6,8,10,'#ffffff'); gfx.restore(); };
 const ING=[['KETCHUP',(x,y,t)=>{ if(!PROPART.draw('tombo/ketchup_bottle',x,y,{h:36,rot:t})) bottle(x,y,'#d8302e',t); }],['PICKLES',(x,y,t)=>{ if(PROPART.draw('tombo/pickle_jar',x,y,{h:32,rot:t})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(t); RO(-9,-12,18,26,'#9fd090'); R(-9,-16,18,5,'#5a5a60'); for(const [a,b] of [[-5,-6],[2,-2],[-2,6]]) EO(a,b,3,6,'#5a9a3a'); gfx.restore(); }],
@@ -5680,12 +5680,13 @@ const bowl=(x,y,fill,t,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc)
   if(fill>0) { gfx.globalAlpha*=1; E(0,-20,36*fill+4,7,'#5fc04a'); for(let k=0;k<5;k++) { const q=(t*1.5+k/5)%1; E(-26+k*13+Math.sin(k*3+t*4)*4,-20-q*22,3+(k%2),3+(k%2),'#9ef07a'); } } gfx.restore(); };
 B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
-  const by=300,cx=cl(GR.x1+110,220,330),kT={x:cx+52,y:by},kA={x:cx-52,y:by};   // the counter sits between the kids
+  const by=300,cx=cl(GR.x1+110,220,330),kT={x:cx+72,y:by},kA={x:cx-72,y:by};   // the counter sits between the kids
   // Timing follows the two voice clips so the lines never overlap and every beat lands on its words. Speech measured inside
   // each clip (ms): Amy says ketchup 110, pickles 1130, cereal 1880, sock 2680, then "It's a Ymamot Creation!" 3490 to 7010 (Ymamot 4260).
   // Tom says "Yama-Mott." 90 to 960, "It's Tom backwards." 1310 to 2770, "We were six." 3240 to 4070. The timeline runs K
   // times faster than the audio at 2x (engine/main.js), so every span that waits on a voice is multiplied by K.
   const K=b7Speed(),A0=1000,ING_T=[110,1130,1880,2400,2540,2680].map(v=>A0+v*K);   // mustard and lemon go in during Amy's pauses
+  const AMY_ING=[1,4,5];   // Amy handles pickles, lemon, sock; Tom ketchup, cereal, mustard
   const AMY_LINE="Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!",TOM_LINE="Yama-Mott. It's Tom backwards. We were six.";
   const P={fb:300,in:ING_T[0],name:A0+4260*K,lift:A0+(7010+150)*K,sling:0,hit:0,back:0,end:0};
   P.sling=P.lift+3350*K; P.hit=P.sling+380*K; P.back=P.hit+1100; P.end=P.back+1100;
@@ -5702,15 +5703,16 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>P.lift&&ms<P.sling) { const q=ez(seg(ms,P.lift,P.lift+700)),w=seg(ms,P.lift+700,P.sling); bx=cx+Math.sin(t*9)*w*5; bY=by-36-q*40+Math.sin(t*13)*w*3; }   // carried higher and wobblier
     else if(ms>=P.sling&&ms<P.hit) { const q=seg(ms,P.sling,P.hit); bx=cx; bY=by-76; bs=1; }
     // ingredients flying in from the kids' hands
-    ING.forEach(([nm,draw],k)=>{ const t0=ING_T[k]; if(ms<t0||ms>t0+380) return; const q=ez((ms-t0)/380),fromA=k%2===0,x0=fromA?kA.x-20:kT.x+20,y0=by-60; draw(lerp(x0,cx,q),lerp(y0,by-62,q)-Math.sin(q*Math.PI)*40,q*6*(fromA?1:-1)); });
+    ING.forEach(([nm,draw],k)=>{ const t0=ING_T[k]; if(ms<t0||ms>t0+380) return; const q=ez((ms-t0)/380),fromA=AMY_ING.includes(k),x0=fromA?kA.x-20:kT.x+20,y0=by-60; draw(lerp(x0,cx,q),lerp(y0,by-62,q)-Math.sin(q*Math.PI)*40,q*6*(fromA?1:-1)); });
     // the slung goop
     if(ms>=P.sling) { const q=seg(ms,P.sling,P.hit); for(let k=0;k<12;k++) { const a=k/12,x=lerp(cx,GR.x0+a*(GR.x1-GR.x0),q),y=lerp(by-80,GR.base-30-(k%3)*20,q)-Math.sin(q*Math.PI)*60*(1-a*.5); if(q<1) E(x,y,8+(k%3)*3,7+(k%3)*2,'#5fc04a'); else if(ms<P.hit+900) { gfx.globalAlpha=1-seg(ms,P.hit,P.hit+900); E(x,y+seg(ms,P.hit,P.hit+900)*30,10,8,'#5fc04a'); gfx.globalAlpha=1; } } }
     if(ms<P.sling) bowl(bx,bY,fill,t,bs); else if(ms<P.hit+600) bowl(bx,bY,0,t,bs);
     // the kids
-    const posT=ms<P.in?'idle':(ms<P.name?(ING.findIndex((_,k)=>ms>=ING_T[k]&&ms<ING_T[k]+380)%2===1?'throw':'idle'):(ms<P.lift?'cheer':(ms<P.hit?'hold':'cheer')));
-    const posA=ms<P.in?'stir':(ms<P.name?(ING.findIndex((_,k)=>ms>=ING_T[k]&&ms<ING_T[k]+380)%2===0?'throw':'stir'):(ms<P.lift?'cheer':(ms<P.hit?'hold':'cheer')));
-    const lift=ms>P.lift&&ms<P.hit?-ez(seg(ms,P.lift,P.lift+700))*6:0;
-    kid(kT.x,by+lift,'tom',posT,t,-1,{mouth:ms>P.name&&ms<P.lift?'o':null}); kid(kA.x,by+lift,'amy',posA,t,1,{mouth:ms>P.name&&ms<P.lift?'o':null});
+    const ik=ING.findIndex((_,k)=>ms>=ING_T[k]&&ms<ING_T[k]+380),stirring=ms>=ING_T[ING.length-1]+380&&ms<P.name,fl=ms>=P.sling-250&&ms<P.hit+150;
+    const posT=ms<P.in?'ym_ready':fl?'ym_fling':(ms<P.name?(ik>=0&&!AMY_ING.includes(ik)?(ik===2?'ym_cereal':'ym_ketchup'):(stirring?(Math.floor(t*5)%2?'ym_stirA':'ym_stirB'):'ym_ready')):(ms<P.lift?'ym_proud':(ms<P.sling?'ym_explain':'ym_proud')));
+    const posA=ms<P.in?'ym_announce':fl?'ym_fling':(ms<P.name?(ik>=0&&AMY_ING.includes(ik)?(ik===5?'ym_sock':'ym_pickle'):(stirring?'ym_stir':'ym_announce')):(ms<P.lift?'ym_delight':(ms<P.sling?'ym_taste':'ym_delight')));
+    const lift=0;
+    kid(kT.x,by+lift,'tom',posT,t,-1,{}); kid(kA.x,by+lift,'amy',posA,t,1,{});
     if(ms>P.name&&ms<P.lift) { gfx.save(); gfx.translate(cx,by-124); gfx.rotate(-.06); if(!PROPART.draw('tombo/ymamot_creation_sign',0,0,{w:112})) { RO(-70,-12,140,24,CREAM); label('YMAMOT CREATION',0,-6,'#2b2a26',2); } gfx.restore(); } }});
   const steps=[
     [0,()=>{ setMessage('TOMBO! Tom and Amy look at each other. They remember something.'); S('harp'); if(typeof warmLine==='function') { warmLine('amy',AMY_LINE); warmLine('tom',TOM_LINE); } }],   // decode both clips now so they start on cue
@@ -5806,11 +5808,16 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>P.mom) { gfx.save(); gfx.translate(cx-150,by-110); if(!PROPART.draw('tombo/mom_placard',0,-12,{h:62})) { RO(-6,-10,12,20,'#c9c2b8'); R(-14,-30,28,22,'#e8e4dc'); label('MOM',0,-26,OUT,1); } gfx.restore(); } }});
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{ if(ms<P.fb||ms>P.back) return; const t=s2.t;
     const k=Math.floor((ms-P.sw0)/P.each),w=ms-P.sw0-k*P.each,swinging=ms>=P.sw0&&k<SWINGS.length;
-    const posT=ms<P.sit?'run':(ms<P.sw0?(ms>P.bick[0]&&ms<P.bick[1]?'point':'sit'):(ms<P.mom?(swinging&&k%2===1?'swing':'idle'):'cry'));
-    const posA=ms<P.sit?'run':(ms<P.sw0?(ms>P.bick[1]&&ms<P.bick[2]?'point':'sit'):(ms<P.mom?(swinging&&k%2===0?'swing':'idle'):'idle'));
+    const bob=ms<P.sw0&&ms>=P.sit?Math.abs(Math.sin(t*7))*3:0;
+    const bT=ms>P.bick[0]&&ms<P.bick[1],bA=ms>P.bick[1]&&ms<P.bick[2],last=k===SWINGS.length-1&&swinging;
+    // the swinger raises the cushion; the other kid is shoved; the last swing is BOTH, so both tumble
+    const swT=swinging&&k%2===1,swA=swinging&&k%2===0,sw=Math.min(1,w/260);
+    const posT=ms<P.sit?'ko_sulk':ms<P.sw0?(bT?'ko_tattle':'ko_sulk'):(swinging?(last?'ko_tumble':(swT?(sw<.5?'ko_cushionUp':'ko_cushionSwing'):'ko_shoved')):(ms<P.mom?'ko_shoved':(ms<P.mom+900?'ko_shoved':'ko_flop')));
+    const posA=ms<P.sit?'ko_glare':ms<P.sw0?(bA?'ko_tattle':'ko_glare'):(swinging?(last?'ko_tumble':(swA?'ko_cushionUp':'ko_shoved')):(ms<P.mom?'ko_stomp':(ms<P.mom+900?'ko_shoved':'ko_smug')));
     const freeze=ms>P.mom; const kx=ms<P.sit?lerp(cx+140,kT.x,ez(seg(ms,P.fb,P.sit))):kT.x,kax=ms<P.sit?lerp(cx-140,kA.x,ez(seg(ms,P.fb,P.sit))):kA.x;
-    kid(kx,by-(ms<P.sw0&&ms>=P.sit?8:0),'tom',posT,freeze?0:t,-1,{mouth:freeze?'o':(ms>P.bick[0]&&ms<P.sw0?'grr':null)});
-    kid(kax,by-(ms<P.sw0&&ms>=P.sit?8:0),'amy',posA,freeze?0:t,1,{mouth:freeze?'o':(ms>P.bick[0]&&ms<P.sw0?'grr':null)});
+    const air=last?Math.sin(seg(w,0,P.each)*Math.PI)*22:0;
+    kid(kx,by-bob-air,'tom',posT,freeze?0:t,-1,{});
+    kid(kax,by-bob-air,'amy',posA,freeze?0:t,1,{});
     // the flying object of this swing: from the swinger's hand, past the sibling, into the monster
     if(swinging&&w>120) { const q=seg(w,120,400),from=k%2?kT:kA,x=lerp(from.x,Q.x+Q.w*.2,ez(q)),y=lerp(by-50,Q.mid,q)-Math.sin(q*Math.PI)*50; if(q<1) SWINGS[k][1](x,y,q*8); }
     if(freeze) { const q=seg(ms,P.mom,P.mom+400); gfx.globalAlpha=1; bigWord('KNOCK IT OFF!',Math.max(120,cx-120),Math.max(40,by-180-q*10),RED,4); } }});

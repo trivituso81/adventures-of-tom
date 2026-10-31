@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 22): painted child Tom and child Amy in the two flashback Tombos
+
+- Tom's painted sheets replace the pixel kid sprites in Ymamot Creation (`amy2`) and Knock It Off! (`amy3`). 32 frames baked by `tools/sprite-bake/bake_kids.py` into `art/chars/kids.webp` and `data/kid-sprites.js` (generated, do not hand-edit). Sources in `tools/sprite-bake/src/kid-*.png`. Rebake: `python3 tools/sprite-bake/bake_kids.py`. The flashback sepia is still applied by the game.
+- Ymamot: Tom does ketchup, cereal, mustard and stirs; Amy counts and does pickles, lemon, sock; Tom explains the name while Amy tastes; both fling the spoon. The kids stand 14 units apart wider so the bowl no longer hides them. The "carry the bowl together" beat is gone (no carry frames were painted).
+- Knock It Off!: sulk and glare, tattle, swing and get shoved in turn, both tumble on the BOTH! swing, freeze, then Tom flops and Amy goes smug. Amy has no separate cushion-swing frame, so she uses cushion-up.
+- No spoken line changed, no re-bake needed. Numbers, costs and effects unchanged. Kids are 66 stage units tall.
+- Test: `python3 tools/tombo_test.py amy2 amy3 --speed2` and `python3 tools/smoke.py`, no failures; frames checked.
 ## 2026-10-31 (night, 23): tap a stampcard tag to see what it means
 
 - Tom asked that tags like Sparkle and Cozy on the Stampcard explain themselves when tapped. Each tag on a move row (LV, VP, element such as Kinetic, Cozy, Splash, Sparkle, Chatter, Amber, and POLISHED) now has a small dotted underline. Tapping one opens a one-line tip under the row; tapping it again, or another tag, changes or closes it. Only the tag is the tap target, so the row's buttons are untouched.
