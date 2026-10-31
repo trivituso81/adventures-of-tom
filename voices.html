@@ -45,7 +45,9 @@ button.danger{background:#5a2233}
 .row .pick{width:24px;height:24px;flex:none;margin-top:6px;accent-color:#ffd34d}
 .row .body{flex:1;min-width:0}
 .row .meta{font-size:12px;color:#a9a2dc;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.row .txt{margin-top:2px;overflow-wrap:anywhere;cursor:pointer}
+.row textarea.line{margin-top:6px;min-height:0;padding:9px 10px;font-size:16px;line-height:1.35;resize:none;overflow:hidden}
+.rowacts{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px}
+button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight:600;font-size:14px}
 .tag{font-size:11px;padding:1px 7px;border-radius:9px;border:1px solid #3a3566;color:#b9b3e6}
 .tag.phone{color:#ffd34d;border-color:#8f7637}
 .tag.none{color:#ff8b97;border-color:#7a3a44}
@@ -302,13 +304,14 @@ function rowHtml(it){
   h+='<div class="body"><div class="meta"><b>'+esc(whoName(it))+'</b>'+(it.t==='b'?'<span class="tag">'+esc(it.k[0])+(it.k.length>1?' +'+(it.k.length-1):'')+'</span>':'')+
      (it.c.length?'<span class="tag">'+it.c.map(n=>n===21?'Bonus':'Ch '+n).join(', ')+'</span>':'')+(it.w&&it.t==='d'?'<span>'+esc(it.w)+'</span>':'')+
      (loc?'<span class="tag phone">phone take</span>':'')+(it.f<0&&!loc?'<span class="tag none">'+(it.nv?'no clip · no voice yet':'no clip')+'</span>':'')+'</div>';
-  h+='<div class="txt" data-act="open">'+esc(it.x)+'</div>';
+  // The text box IS the line: what ElevenLabs reads (or Nara's sound description). Edits save as you type and drive every new take.
+  h+='<textarea class="line" data-act="script" rows="1" spellcheck="false">'+esc(scriptOf(it))+'</textarea>';
+  h+='<div class="rowacts"><button class="link" data-act="open">'+(open?'Close':'Takes and record &#8250;')+'</button>'+
+     (SCRIPTS[key]!=null?'<span class="hint">edited</span><button class="link" data-act="resetscript">Undo edits</button>':'')+
+     (BUSY[key]&&!open?'<span class="hint">'+esc(BUSY[key])+'</span>':'')+(ERR[key]&&!open?'<span class="err">'+esc(ERR[key])+'</span>':'')+'</div>';
   if(open){
     h+='<div class="edit">';
-    if(dog) h+='<label>Sound description (ElevenLabs Sound Effects)</label><textarea data-act="script">'+esc(scriptOf(it))+'</textarea><label>Seconds</label><input type="number" min="0.5" max="22" step="0.1" value="'+dogOf(it)+'" data-act="doglen" style="width:110px">';
-    else h+='<label>Direction and words ElevenLabs reads'+(it.auto?' (no written direction on file yet; edit the brackets)':'')+'</label><textarea data-act="script">'+esc(scriptOf(it))+'</textarea>'+
-      '<div class="hint">Put directions in [brackets] before the words they change. CAPS for emphasis. "Tah Tah" for Ta-ta. Change only the brackets, not the words, or the game will not match it.</div>';
-    if(SCRIPTS[key]!=null) h+='<div><button class="small" data-act="resetscript">Back to the written direction</button></div>';
+    if(dog) h+='<label>Seconds</label><input type="number" min="0.5" max="22" step="0.1" value="'+dogOf(it)+'" data-act="doglen" style="width:110px">';
     if(it.fx) h+='<div class="fxnote">This voice gets a sound effect (pitch or creature filter) when Claude builds it into the game. On the phone it plays without it.</div>';
     h+='<div class="acts">';
     if(it.nv) h+='<div class="err" style="width:100%">No voice is chosen for '+esc(whoName(it))+' yet, so this line cannot be recorded. Ask Claude to cast a voice for this character.</div>';
@@ -334,9 +337,16 @@ function renderList(){
   CUR=visible();
   if(!CUR.length){ $('list').innerHTML='<div class="empty">No lines match. Try Clear filters.</div>'; return; }
   $('list').innerHTML=CUR.slice(0,shown).map(rowHtml).join('')+(CUR.length>shown?'<button class="more" data-act="more">Show more ('+(CUR.length-shown).toLocaleString()+' left)</button>':'');
+  growAll($('list'));
 }
 function itemByKey(k){ return IDX.items.find(it=>lk(it)===k); }
-function repaint(it){ const el=document.querySelector('.row[data-k="'+CSS.escape(lk(it))+'"]'); if(el){ const d=document.createElement('div'); d.innerHTML=rowHtml(it); el.replaceWith(d.firstChild); } }
+// Rebuild one row. If its text box has the cursor (typing while a take is made), the cursor stays where it was.
+function repaint(it){ const el=document.querySelector('.row[data-k="'+CSS.escape(lk(it))+'"]'); if(!el) return;
+  const a=document.activeElement, keep=a&&el.contains(a)&&a.tagName==='TEXTAREA'?{s:a.selectionStart,e:a.selectionEnd}:null;
+  const d=document.createElement('div'); d.innerHTML=rowHtml(it); const n=d.firstChild; el.replaceWith(n); growAll(n);
+  if(keep){ const ta=n.querySelector('textarea.line'); if(ta){ ta.focus({preventScroll:true}); try{ ta.setSelectionRange(keep.s,keep.e); }catch(e){} } } }
+function grow(ta){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
+function growAll(root){ (root||document).querySelectorAll('textarea.line').forEach(grow); }
 function renderAll(){ renderFilters(); renderSum(); renderList(); }
 function renderBar(){
   const bar=$('bar');
@@ -415,7 +425,7 @@ document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='q'){ F.q=t.value; saveF(); clearTimeout(window.__qT); window.__qT=setTimeout(()=>{ shown=PAGE; renderAll(); },200); return; }
   const row=t.closest('.row'); const it=row&&itemByKey(row.dataset.k); if(!it) return;
-  if(t.dataset.act==='script'){ SCRIPTS[lk(it)]=t.value; saveScripts(); }
+  if(t.dataset.act==='script'){ SCRIPTS[lk(it)]=t.value; saveScripts(); if(t.classList.contains('line')) grow(t); }
   if(t.dataset.act==='doglen'){ DOGLEN[lk(it)]=+t.value||2; try{ localStorage.setItem('aot-vl-doglen',JSON.stringify(DOGLEN)); }catch(err){} }
 });
 
@@ -437,7 +447,7 @@ async function exportClips(){
   try{ const r=await fetch('data/voice-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IDX=await r.json(); }
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   IDX.who.forEach(w=>WHO[w.id]=w);
-  $('howto').textContent='Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
+  $('howto').textContent='Each box holds what ElevenLabs reads: change the words or the [directions] right there; edits save as you type and every new take uses them (CAPS for emphasis, Tah Tah for Ta-ta). The subtitle in the game stays as it is until Claude changes it. Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
   renderAll();
   if(window.__VL_READY) window.__VL_READY();
 })();

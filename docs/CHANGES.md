@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 7): Voice Library rows are text boxes (`vlib3`)
+
+- Tom (13:08): every line's text must be editable on the spot; show the text box, not static text. Each row now is the text box with what ElevenLabs reads (words and [directions]; Nara: the sound description), grown to fit, saved as he types (localStorage `aot-vl-scripts`), with "edited" and Undo edits. Takes and record opens New take, Record my voice and the takes. Regenerate (bulk) and New take use the edited text. Typing keeps its cursor even if a take finishes on that row.
+- Changing words only changes what is spoken: the clip still plays for that line; the on-screen subtitle stays until Claude edits the game text (said in the page's help line).
+- Tested: `tools/voice-library/test.py` (every row has a box, edit saves, the take request carries the edited text), smoke default and grace,rose. Stamp `build vlib3`. Not tried on the phone.
+
 ## 2026-10-31 (day, 9): Ymamot Creation: kids sized to Grace and Rose, about 6 seconds (`ymamot3`)
 
 - Tom (12:54): the kids were too small and the move too long. Little Tom is now as tall as Grace and little Amy as tall as Rose (`kid()` takes `sc`; scale is each party sprite's height over the painted kid's). Knock It Off! kids are unchanged.

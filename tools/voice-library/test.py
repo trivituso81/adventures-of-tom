@@ -19,9 +19,9 @@ async def main():
         b = await p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None, args=['--headless=new', '--autoplay-policy=no-user-gesture-required'])
         ctx = await b.new_context(viewport={'width': 390, 'height': 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
         page = await ctx.new_page()
-        calls = []
+        calls = []; bodies = []
         async def el(route):
-            calls.append(route.request.url)
+            calls.append(route.request.url); bodies.append(route.request.post_data or '')
             await route.fulfill(status=200, body=MP3, headers={'Content-Type': 'audio/mpeg', 'Access-Control-Allow-Origin': '*'})
         await page.route('https://api.elevenlabs.io/**', el)
         errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
@@ -62,13 +62,17 @@ async def main():
         await page.click('.chip[data-g="who"][data-v="grace"]'); await page.click('.chip[data-g="type"][data-v="b"]')
         row = page.locator('.row').first
         key = await row.get_attribute('data-k')
-        await row.locator('.txt').click()
-        await page.wait_for_selector('.row.open textarea')
+        ok(await page.locator('.row textarea.line').count() == await page.locator('.row').count(), 'every row shows its text box')
+        await row.locator('textarea.line').fill('[whispering] Ow, testing.')
+        ok(await J(f"JSON.parse(localStorage.getItem('aot-vl-scripts'))[{json.dumps(key)}]") == '[whispering] Ow, testing.', 'edit in the row is saved')
+        await row.locator('[data-act="open"]').click()
+        await page.wait_for_selector('.row.open [data-act="take"]')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-open.png'))
         await page.locator('.row.open [data-act="take"]').click()
         await page.wait_for_function("__VL.LOCAL.size>0", timeout=10000)
         nk = await J(f"__VL.itemByKey({json.dumps(key)}).k.length")
         ok(await J("__VL.LOCAL.size") == nk and len(calls) >= 1, f'new take saved as phone clip ({nk} row(s)), {len(calls)} call')
+        ok('Ow, testing.' in bodies[0], 'new take sends the edited text')
         ok(await page.locator('.row.open .take.use').count() == 1 and 'playing in the game' in await page.locator('.row.open .take.use').inner_text(), 'new take marked as playing in the game')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-take.png'))
         # Use built-in again.
@@ -95,7 +99,7 @@ async def main():
         vn = await J("__VL.visible().length"); ok(vn == nn and vn > 1000, f'No clip yet: {vn} = {nn}')
         ok(await page.locator('.row .tag.none').count() > 0, 'no-clip rows tagged')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-noclip.png'))
-        await page.locator('.row .txt').first.click(); await page.wait_for_selector('.row.open')
+        await page.locator('.row [data-act="open"]').first.click(); await page.wait_for_selector('.row.open')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-noclip-open.png'))
         # Show: re-recorded on this phone.
         await page.click('#clear'); await page.click('.chip[data-g="show"][data-v="phone"]')
