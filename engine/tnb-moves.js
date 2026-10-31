@@ -850,7 +850,8 @@ T.metro_tap=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foe=t.side==='
 // ---------- Slasher Jump Scare (A4; key slasher_scare; same numbers as Practical Effects) ----------
 // Lights out. A flashlight under TNB's chin. Heartbeat. Then a masked slasher lunges out from behind the enemy: scream,
 // flash, the enemy jumps out of its skin. Lights up: the slasher waves and backs away into the dark. Kid-safe, no blood.
-const slasher=(x,y,sc,arms)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+const slasher=(x,y,sc,arms)=>{ if(PROPART.ready('tnb/slasher_standee')) { const hh=82*sc; PROPART.draw('tnb/slasher_standee',x,y-hh/2,{h:hh,rot:arms>0?Math.sin(performance.now()/70)*.05*Math.min(1,arms):0}); return; }   // painted slasher standee; the drawn figure below is the fallback
+  gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   poly([[-20,0],[-16,-48],[-24,-40],[-30,-22],[-26,-16],[-18,-34],[18,-34],[26,-16],[30,-22],[24,-40],[16,-48],[20,0]],'#2a2830');
   const a=arms; poly([[-16,-46],[-30-a*10,-62-a*16],[-24-a*10,-68-a*16],[-10,-50]],'#2a2830'); poly([[16,-46],[30+a*10,-62-a*16],[24+a*10,-68-a*16],[10,-50]],'#2a2830');
   for(const sx of [-1,1]) { const hx=sx*(28+a*10),hy=-66-a*16; for(let k=-1;k<=1;k++) LnO(hx,hy,hx+sx*3+k*4,hy-9,2,'#e8e0d0'); }
@@ -864,7 +865,7 @@ SC.tv2_dark=(s,u)=>{ const ms=s.t*1000,P=s.P; let a=0;
   const st=s.st; if(st&&st.x!=null&&ms>P.on+150&&ms<P.up) { const p=head(st,40),r=1+.04*Math.sin(ms/45); gfx.ellipse(p.x-4,p.y,30*r,40*r,0,0,Math.PI*2); }
   gfx.fill('evenodd'); };
 SC.tv2_torch=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null||ms<P.on||ms>P.up) return; const p=head(st,40); gfx.globalAlpha=.22+.05*Math.sin(ms/50); E(p.x-4,p.y,30,40,'#ffe9a0');
-  gfx.globalAlpha=.95; RO(p.x-14,p.y+30,9,18,'#5e6670'); E(p.x-9.5,p.y+29,6,3,'#fff6c8'); if(ms>P.on+300&&ms<P.lunge-200) bigWord('SHHH',p.x,p.y-30,CREAM,2); };
+  gfx.globalAlpha=.95; if(!PROPART.draw('tnb/flashlight',p.x-9.5,p.y+39,{w:24,rot:Math.PI/2})) { RO(p.x-14,p.y+30,9,18,'#5e6670'); E(p.x-9.5,p.y+29,6,3,'#fff6c8'); } if(ms>P.on+300&&ms<P.lunge-200) bigWord('SHHH',p.x,p.y-30,CREAM,2); };
 SC.tv2_slasher=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.peek) return; let x,y,sc,a=1,arms=0;
   if(ms<P.lunge) { const q=cl((ms-P.peek)/(P.lunge-P.peek)); x=P.bx+Math.sin(ms/400)*4; y=P.by; sc=.9+q*.15; a=.3+q*.4; }
   else if(ms<P.lunge+220) { const q=ez((ms-P.lunge)/220); x=lerp(P.bx,P.fx,q); y=lerp(P.by,P.fy,q); sc=lerp(.9,2.0,q); arms=q; }
@@ -940,7 +941,15 @@ SC.tn_platform=(s,u)=>{ const fixed=u>s.fixAt,a=fixed?0:Math.sin(s.t*7)*.08; gfx
 // ---------- Kiln Door Policy (B5, kept name and numbers: the animation is now a big roaring cone six kiln) ----------
 // A full-size brick kiln drops in. He dials it to CONE 6, it rumbles and glows, he swings the door open: FWOOM, the heat
 // rolls over the enemy and melts its shield. He closes the door. Policy.
-const kiln=(x,y,P,ms)=>{ const W=96,Hh=118,top=y-Hh,heat=cl((ms-P.dial)/(P.open-P.dial)),sh=ms>P.dial&&ms<P.shut?Math.sin(ms/22)*heat*2:0; gfx.save(); gfx.translate(sh,0);
+// Painted kiln (tnb/brick_kiln, door faces left toward the enemy). Image px 147x160: door x 16..95, y 55..140, chimney top at x 127.
+const paintedKiln=(x,y,P,ms)=>{ const k=118/160,heat=cl((ms-P.dial)/(P.open-P.dial)),sh=ms>P.dial&&ms<P.shut?Math.sin(ms/22)*heat*2:0,X=ix=>x+sh+(ix-73.5)*k,Y=iy=>y-59+(iy-80)*k;
+  gfx.save(); E(x+4,y+1,58,8,'rgba(0,0,0,.3)'); PROPART.draw('tnb/brick_kiln',x+sh,y-59,{h:118});
+  const a0=gfx.globalAlpha; if(heat>0) { gfx.globalAlpha=a0*(.1+heat*.28+.05*Math.sin(ms/60)); E(X(70),Y(95),64,54,'#ffb04a'); gfx.globalAlpha=a0; steam(X(127),Y(2),ms/1000,3,'#d8d0c8',40); }
+  const dO=ms<P.open?0:ms<P.shut?ez((ms-P.open)/140):1-ez((ms-P.shut)/140);
+  if(dO>0) { const dx=X(20),dy=Y(62),dw=70*k,dh=74*k; E(dx+dw*.5,dy+dh*.5,dw*.62,dh*.62,'#ffd27a'); R(dx,dy,dw,dh,'#ffb04a'); for(let q=0;q<5;q++) { const t=(ms/300+q*.2)%1; E(dx+8+q*10,dy+dh-6-t*40,5*(1-t)+2,7*(1-t)+2,q%2?'#fff1b0':'#ff8a2a'); }
+    RO(X(14),dy-2,5,dh+4,'#4a4f58'); }
+  gfx.restore(); };
+const kiln=(x,y,P,ms)=>{ if(PROPART.ready('tnb/brick_kiln')) return paintedKiln(x,y,P,ms); const W=96,Hh=118,top=y-Hh,heat=cl((ms-P.dial)/(P.open-P.dial)),sh=ms>P.dial&&ms<P.shut?Math.sin(ms/22)*heat*2:0; gfx.save(); gfx.translate(sh,0);
   RO(x-W*.5,top,W,Hh,BRICK); for(let r=0;r<9;r++) { const yy=top+6+r*12; R(x-W*.5,yy,W,2,BRICKD); for(let c=0;c<5;c++) { const xx=x-W*.5+((r%2)?10:0)+c*22; R(xx,yy+2,2,10,BRICKD); } }
   if(heat>0) { gfx.globalAlpha*=1; const g=.15+heat*.5+.1*Math.sin(ms/60); const a0=gfx.globalAlpha; gfx.globalAlpha=a0*g; for(let r=0;r<9;r++) R(x-W*.5,top+6+r*12,W,2,'#ffb04a'); gfx.globalAlpha=a0; }
   RO(x-W*.5-6,top-8,W+12,10,'#4a4f58'); RO(x-W*.5-6,y-6,W+12,8,'#4a4f58'); RO(x+W*.5-12,top+6,8,Hh-14,'#4a4f58');
@@ -1058,6 +1067,8 @@ SC.t3n_wheel=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.drop) return;
   const shake=ms>P.fast&&ms<P.launch+400?Math.sin(ms/22)*lerp(.5,2.2,cl((ms-P.fast)/(P.launch-P.fast))):0;
   gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(P.x+shake,by); gfx.scale(1.5,1.5);
   E(0,3,40,7,'rgba(0,0,0,.28)');
+  const wPaint=PROPART.draw('tombo/pottery_wheel',0,-34,{w:70,h:74});   // painted wheel; the drawn electric wheel below is the fallback
+  if(wPaint) { if(sp>16) { gfx.globalAlpha*=.5; ring(0,-54,16,4.6,2,'rgba(255,255,255,.6)'); gfx.globalAlpha=fade(u,.94); } } else {
   // electric wheel: housing, dial, pedal on a cable
   RO(-28,-32,56,30,'#59636e'); R(-28,-32,56,4,'#7c8794'); R(-28,-6,56,3,'#3f4852'); for(const bx of [-24,24]) { E(bx,-26,1.2,1.2,'#cfd5dc'); E(bx,-8,1.2,1.2,'#cfd5dc'); }
   label('POT-5',-18,-20,'#d8dce2',1);
@@ -1067,6 +1078,7 @@ SC.t3n_wheel=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.drop) return;
   // splash pan and the wheel head on its shaft
   R(-3,-50,6,20,'#59636e'); EO(0,-46,35,9.5,'#aeb3ba'); E(0,-47,30,7.4,'#7d8892'); E(0,-46,27,6,'#b58a64'); E(-8,-48,10,1.6,'rgba(255,255,255,.35)');
   wheelHead(s.ang,sp);
+  }
   if(ms>P.clay&&ms<P.launch) { const prog=cl((ms-P.clay)/(P.shape-P.clay)),wob=ms>P.fast?Math.sin(ms/30)*lerp(.4,4,cl((ms-P.fast)/(P.launch-P.fast))):Math.sin(ms/200)*.3; clayOn(prog,wob,ms);
     if(ms>P.tap&&ms<P.launch) { const n=ms>P.fast?14:6; for(let k=0;k<n;k++) { const q=((ms/(ms>P.fast?260:520))+k/n)%1,a=k/n*Math.PI*2+ms/90,r=14+q*(ms>P.fast?64:30); gfx.globalAlpha=fade(u,.94)*(1-q)*.9;
         E(Math.cos(a)*r,-66+Math.sin(a)*r*.45-q*8,1.6,1.3,k%2?'#8fd0ff':'#b99a78'); } gfx.globalAlpha=fade(u,.94); } }
@@ -1674,7 +1686,7 @@ T.foraged_at_dawn=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotF
 // ---------- Don't Split Up (A2; key dont_split_up; Continuity Pins' numbers) ----------
 // Lights drop. TNB sprints to the friend, flashlight under his chin: rule one. They stand back to back inside a glowing
 // ring (the guard). A twig snaps offstage; both jump. If the friend is Tom, a quick heart before the lights come up.
-SC.t6_torch=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1; RO(h.x-4,h.y-6,8,16,INK);
+SC.t6_torch=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1; if(!PROPART.draw('tnb/flashlight',h.x,h.y+2,{w:24,rot:Math.PI/2})) RO(h.x-4,h.y-6,8,16,INK);   // painted flashlight, lens up
   gfx.globalAlpha=.35; PO([[h.x,h.y-6],[h.x-26,h.y-70],[h.x+26,h.y-70]],'#fff2b0',0); gfx.globalAlpha=1; E(h.x,h.y-6,5,3,'#fff2b0'); };
 SC.t6_guardring=(s,u)=>{ const k=fin(u,.15)*fade(u,.85); gfx.globalAlpha=k*.9; ring(s.x,s.y,s.rx+Math.sin(s.t*8)*2,s.ry,4,'#9be39a'); gfx.globalAlpha=k*.25; E(s.x,s.y,s.rx,s.ry,'#9be39a'); gfx.globalAlpha=1; };
 T.dont_split_up=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p)),foe=t.side==='foe',self=t===m,hit=2300;

@@ -1,3 +1,9 @@
+## 2026-10-30 (night, 12): TNB moves use painted props (flashlight, slasher, kiln, wheel)
+
+- Tom (23:36): TNB's abilities mainly use old graphics. Audit with kit_test (PAINTED_PROPS) showed 9 of 14 TNB moves drew no painted props. Wired the four that already had painted art: Don't Split Up and Slasher Jump Scare use `tnb/flashlight`; Slasher Jump Scare's figure is the painted `tnb/slasher_standee` (`slasher()`); Kiln Door Policy uses `tnb/brick_kiln` (`paintedKiln()`: painted body, soft heat glow, glowing open door, chimney steam; the animated drawn kiln stays as fallback); Throw Down uses `tombo/pottery_wheel` (the spin smear ring stays; the drawn electric wheel is the fallback). All preloaded in engine/prop-art.js.
+- Still code-drawn, need custom images (list in the project doc claude/tnb-custom-art-needed.md): Scope Creep (laptop, Gantt chart), Round with Jojo (disc golf basket, flying disc), Tasting Menu (cloche, long table, plates, the check folder), Just Around the Bend (trail sign, hill backdrop, snack), Throw Down (clay lump stages, finished bowl), Baxter Street Bomb hill backdrop.
+- Tests: kit_test for the four moves (frames looked at, PAINTED_PROPS confirmed), IDS=tnb smoke clean. Tags `?v=tpa1` on prop-art.js, tnb-moves.js, main.js; title stamp `build tpa1`.
+
 ## 2026-10-30 (night, 13): Nara's painted props
 
 - Tom (23:26) sent Nara's prop sheet, the Chairman Cheeks sheet and the HUMAN EYES face. 17 props cut to `art/props/nara/` (gold coins, muddy paw print, tennis ball, sandwich whole and bitten, happy puddle, fancy and homemade covered dishes, HOMEMADE stamp, oak tree, park bench, squirrel x4, face eyes open and closed). Sheet 1 cells 12 to 15 came back wrong (dog house, red bow, gift box, bouquet): acorns, oak leaves, tennis ball pile and golden crumb still need a redo sheet (prompt: claude/nara-props-redo.txt).
