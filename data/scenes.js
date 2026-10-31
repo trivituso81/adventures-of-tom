@@ -1805,9 +1805,11 @@ SCENES.ch6Arrive=[
 // 2. Tom's kitchen: the jar is gone. The heart-kiss. TNB joins.
 SCENES.ch6Kitchen=[
   {flag:'ch6-tnb'},
-  {join:'tnb',quiet:true}, {hide:'tnb'},
+  {join:'tnb',quiet:true},
+  // TNB is already in the kitchen (he has a key), back to the door, studying the island, before Tom walks in.
+  {place:'tnb',at:[7,5],dir:'up'}, {show:'tnb'},
   {walk:'tom',to:routeTo('tom',8,5),speed:.2}, {face:'tom',dir:'left'},
-  {place:'tnb',at:[7,5],dir:'right'}, {show:'tnb'},
+  {wait:.5}, {face:'tnb',dir:'right'}, {wait:.3},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
   {talk:'TNB',lines:['Okay. Hi. Missed you. Don\'t panic. Look at the island.']},

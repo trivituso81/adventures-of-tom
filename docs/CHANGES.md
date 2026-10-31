@@ -1,3 +1,8 @@
+## 2026-10-30 (night, 12): Chapter 6 kitchen, TNB is already there
+
+- Tom (23:16): in chapter 6 TNB was not in the house when Tom arrived, then appeared out of nowhere. Cause: `SCENES.ch6Kitchen` in data/scenes.js hid TNB and only placed him at the island after Tom had walked in. Now TNB is placed at the island (back to the door, looking at the flour) before Tom walks in, turns to face Tom when he arrives, then says his line.
+- Tests: ch6Kitchen played in a headless run (frames looked at), smoke IDS=tnb clean. Tags `?v=kit1` on scenes.js and main.js; title stamp `build kit1`.
+
 ## 2026-10-30 (night, 9): Garden Shower is a hard jet, not a lob
 
 - Tom: the spray looped up and drifted down; it should blast the enemies directly. `SC.df_hose` (engine/deedee-moves.js, last definition) is rebuilt as a pressure jet: three layered streams plus four thin side jets shot nearly straight from the nozzle to a target that sweeps across the row (only a 6 px droop), a nozzle blast, 26 fast droplets racing down the jet, and an impact burst at the target (white blob, ring, droplets thrown back off the monsters, mist). The old arching fan, rainbow and glints are gone. Each monster now flinches (`ST.jolt`) as the jet passes over it, then the existing SPLOOSH hit and damage land as before (numbers, hit time, line unchanged, no re-bake).
