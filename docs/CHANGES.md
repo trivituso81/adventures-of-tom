@@ -1,3 +1,6 @@
+## 2026-10-30 (night, 9): Rose: "YOU NEXT" marker no longer a long pink string
+
+- Tom (22:36): at the end of Piggyback Pounce a weird string seemed to pull Rose back. It was the "YOU NEXT" arrow (scene `ro_tip`, engine/rose-moves.js), a line drawn from Rose's hand to the most hurt friend, so it stretched across the screen and followed her home. Now it is a short "YOU NEXT" tag with a small down arrow and hearts that bounces in over that friend. Same timing, same game effect. Also used by Ribbon Rescue, which shares the scene. Tag `?v=rt1` on rose-moves.js. Tests: kit_test rose piggyback_pounce (frames looked at), smoke IDS=rose clean.
 ## 2026-10-30 (night, 8): Open Strings: quicker tail after the screech
 
 - Tom (22:35): after the notes, the rest of the animation should be faster. The tail (string snap, push through, big finish, listen, shrug, six lessons, bow, proud, walk home) now runs from 3.75 s to 6.8 s instead of 3.9 s to 8.0 s (`T` table in `G.open_strings`, engine/grace-moves.js). Tag `?v=gx2` on grace-moves.js. Tests: kit_test grace open_strings (tail frames looked at).

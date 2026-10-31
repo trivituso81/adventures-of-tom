@@ -686,7 +686,7 @@ SC.ro_ribbon=(s,u)=>{ const ms=s.t*1000,h=hand(),cx=s.cx,cy=s.cy,rx=s.rx,ry=s.ry
   if(lap>=1) { for(const [w,c] of [[6,OUT],[3,PINK]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(ex,ey); gfx.quadraticCurveTo((ex+h.x)/2,Math.max(ey,h.y)+(tug?2:18),h.x,h.y); gfx.stroke(); } }
   else if(lap<=0&&s.st&&s.st.x!=null) { const q=ez(ms/s.lapAt),x=Math.max(cx+rx,s.st.x-34-q*30); Ln(h.x,h.y,x,cy-2,3,PINK); gfx.save(); gfx.translate(x,cy-8); gfx.rotate(q*10); RO(-8,-8,16,16,PINK); R(-8,-3,16,6,PINK2); gfx.restore(); }
   if(ms>s.bowAt) { const b=ez((ms-s.bowAt)/200),bx=cx,by=cy-s.lift-2; EO(bx-10,by,9*b,6*b,PINK); EO(bx+10,by,9*b,6*b,PINK); E(bx,by,4*b,4*b,OUT); E(bx,by,2.5*b,2.5*b,PINK2); if(b>.9&&ms<s.tugAt+500) label('TIED',bx,by-18,PINK,1); } };
-SC.ro_tip=(s,u)=>{ const h=hand(),g=ez(u/.3),x=lerp(h.x,s.x,g),y=lerp(h.y,s.y,g); gfx.globalAlpha=fade(u,.8); LnO(h.x,h.y,x,y,3,PINK); LnO(x,y,x+7,y-5,3,PINK); LnO(x,y,x+7,y+5,3,PINK); if(g>.9) label('YOU NEXT',s.x,s.y-22,PINK,1); };
+SC.ro_tip=(s,u)=>{ const g=ez(u/.2),b=Math.abs(Math.sin(u*Math.PI*4))*(1-u)*5,ty=s.y-30-b+(1-g)*10,cx=Math.max(34,Math.min(542,s.x)); gfx.globalAlpha=fade(u,.8)*g; label('YOU NEXT',cx,ty,PINK,1); LnO(cx,ty+9,cx,ty+16,2,PINK); LnO(cx,ty+17,cx-4,ty+12,2,PINK); LnO(cx,ty+17,cx+4,ty+12,2,PINK); for(let k=0;k<3;k++) heart(cx-14+k*14,s.y-8-((u*30+k*7)%12),2+((k+Math.floor(u*8))%2),'#ffd0e4'); };
 Rm.ribbon_rescue=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),rx=F.w*.5+24,ry=14,cx=F.x,cy=Math.min(312,F.base+3),me=ST.unit(m);
   const lapStart=750,lapLen=900;
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:lapStart,x:cx+rx,y:cy,f:u=>Math.sin(u*Math.PI*2)>0?'run':'runR',dx:u=>Math.cos(u*Math.PI*2)*rx-rx,dy:u=>Math.sin(u*Math.PI*2)*ry},
