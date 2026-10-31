@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 11): Rose's Boo!! faces the monster when she pops out (`roseboo1`)
+
+- Tom (13:49): when Rose reappears behind the monster in Boo!!, she faced left (away from it). She now faces right, toward it, through the kneel, the BOO pose and the little celebration hop.
+- How: her painted frames all face left, so `data/rose-hires-use.js` now also makes right-facing `kneelFlip` and `booFlip` (mirrors, same way `flip` and `celebFlip` already work), and the Boo!! keyframes in `engine/rose-moves.js` use them (with `celebFlip`) only while she is behind the monster. Her start and return to her own spot still face left, as before.
+- Tested: `kit_test.py rose --only=boo --speed2` (contact sheet looked at, she faces the monster), `IDS=grace,rose smoke.py`. Not played on the phone. Stamp `build roseboo1`.
+
 ## 2026-10-31 (day, 10): Amy's 36 re-recorded battle clips are merged (`amyv1`)
 
 - Tom (13:39) sent `local-clips-export_3.json` (68 clips). 28 were already in the repo (the `clips1` dialogue and battle takes and the 4 Ymamot clips) and were skipped. The 40 Amy battle entries are 36 new takes made in the Voice Library between 13:18 and 13:39 (burpee, redpen and pep aliases share one take each), all with "heavy Long Island accent" directions. Merged with `tools/battle-baker/merge.js` into `data/voice/amy.js`; her bake scripts went into the voice settings (`data/voice-clips.js`). Her greet, join, quiz and praise clips are unchanged (not in the export).
