@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 23): five stale ch27 clips removed; stricter clip audit
+
+- Removed 5 ch27 dialogue clips whose lines were reworded (Olivia "My lasagna is a brick... Michael is holding it...", Michael "I have Isla, the diaper bag...", "Hey, Tom. I'd wave...", "I heard Olivia say Michael...", "Yes, Olivia. Got him..."). Dialogue clips 2257 to 2252. New wordings need a re-bake.
+- Stricter audit (new, `__LE`-free): ran `tools/clip-audit/harvest.js` in the page (3,613 spoken lines with speaker) and matched every dialogue clip key (voice|text) against what the game says for that speaker. 2,212 of 2,252 match; of the other 40, 36 are live lines built in engine/travel.js and similar (Sal, cab stand, flights, the girls' greetings; harvest cannot see them, source search finds all 36) and 4 are stale: `boomie|...` clips for the Boomie NPC lines in `data/maps-la.js`, which now use voice `boomie2` (same four texts exist under `boomie2`). Flagged, not removed.
+- Also checked: no duplicate clip keys across dialog files, no voices without clips, no battle clips with the same text under two kinds. Nine bake-script notes in `data/voice-clips.js` voices.*.scripts point at lines that no longer exist (tom tomboamy3, dcdeedee2, bday_cow; boppy hurt, dc2; amy dc1, dc2; tnb bigbowl; rose bday_six is still live in data/bonus-nine-scoops.js). Notes only, no audio; left in place.
+- Test: page load, 2252 dialogue clips, no page errors, no 4xx.
+
 ## 2026-10-31 (night, 22): dialogue clip audit, chapters 11 to 28, four stale clips removed
 
 - Tom asked to remove the four stale clips found in chapters 6 and 8 and to check chapters 11 to 28. Removed: ch6 `michael|I have both kids and zero car keys. Wait. Keys. Gutter. Right.` (line is now "Zero car keys and one very sticky toddler...") and the three ch8 Tom pilot-light clips that say "That is the ..." while the scene text is "That's the ..." (`data/scenes.js` ~2640). Dialogue clips 2261 to 2257.
