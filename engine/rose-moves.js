@@ -2129,6 +2129,7 @@ SC.rh_lava=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=1;
   seatCush(P.cx,lerp(P.cy-120,P.cy,drop),ms,g); gfx.restore();
   if(g>0) { gfx.globalAlpha=.5*g; E(P.cx,P.cy+7,36,4,CRUST); gfx.globalAlpha=1; } };   // the cushion's shadow on the lava
 SC.rv_cush=()=>{};
+SC.rv_lava=()=>{};   // the old flat orange ovals; the painted lava pool (rh_lava) replaces them
 { const lava=Rm.floor_is_lava; Rm.floor_is_lava=E2=>{ lava(E2);
     const list=(E2.targets||[]).filter(t=>t.side==='foe'),G=ST.group(list),p={x:Math.min(552,G.x1+46),y:Math.min(314,G.base+6)};
     const tops=list.map(f=>ST.foe(f)),ya=Math.min(...tops.map(F=>F.base))-8,yb=Math.max(p.y+12,...tops.map(F=>F.base+10));

@@ -1,3 +1,6 @@
+## 2026-10-30: Floor Is Lava: old drawn lava removed
+
+- Rose's Floor Is Lava still played the old flat orange ovals (`SC.rv_lava` in `engine/rose-moves.js`) on top of the new painted lava pool. `SC.rv_lava` is now a no-op, so only the painted pool and painted couch cushion show. The "THE FLOOR IS LAVA!" and "HOT HOT!" text callouts and the HOT labels are unchanged. Cache tag `rose-moves.js?v=lv1`.
 ## 2026-10-30: Deedee's victory cheer uses the painted Deedee
 
 - Tom: in the win animation, some frames showed her old pixel character. Cause: `data/deedee-hires-battle.js` swapped in the painted `celeb` and `celebFlip` frames but left `sp.cheer` (the pair `engine/battle-draw.js` plays for victory and level-up cheers) pointing at the old pixel pair from `data/deedee-poses.js`. Amy, Boppy and TNB already reset it.
