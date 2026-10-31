@@ -699,11 +699,16 @@ const chair=(x,base,foot,sc=1)=>{ gfx.save(); gfx.translate(x,base); gfx.scale(s
   RO(-18,-24,34,14,'#8a5a36'); R(-15,-22,28,3,'#9c6a42'); RO(-22,-34,8,22,LEATHER); RO(12,-34,8,22,LEATHER);
   if(foot>0) RO(16,-20,22*foot,8,'#8a5a36');
   gfx.restore(); };
+const RECL=[];   // who is sitting in the chair right now: {m,st,t0,t1} (st = their ST.keys state), filled by the move below
 SC.bp_chair=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.drop) return; const land=P.drop+450,d=cl((ms-P.drop)/450),y=lerp(P.y-330,P.y,d*d); gfx.globalAlpha=fade(u,.95);
   const a0=gfx.globalAlpha;
   if(d<1) { gfx.globalAlpha=a0*.45; E(P.x,P.y,36*d+8,6,'#000'); gfx.globalAlpha=a0; }
   const sq=ms>land&&ms<land+300?Math.sin((ms-land)/300*Math.PI)*.14:0;
   gfx.save(); gfx.translate(P.x,y); gfx.scale(1+sq,1-sq); gfx.translate(-P.x,-y); chair(P.x,y,ez((ms-P.foot)/400),CS); gfx.restore();
+  // the chair is drawn over the party, so whoever sits in it is drawn again on top
+  for(const r of RECL) { const st=r.st,sp=st&&st.sp,fr=st&&st.frame; if(ms<r.t0||ms>=r.t1||!sp||!fr||st.x==null) continue;
+    const w=fr[0].length*sp.scale,h=fr.length*sp.scale; gfx.save(); gfx.globalAlpha=1; gfx.translate(st.x,st.y-h/2); rideBodyDraw(r.m,fr,sp.pal,-w/2,-h/2,sp.scale,{}); gfx.restore(); }
+  gfx.globalAlpha=a0;
   const top=y-62*CS;
   if(ms<P.card) { if(!PROPART.draw('boppy/reserved_card',P.x,top-14,{w:84})) { RO(P.x-40,top-30,80,22,CREAM); label('RESERVED',P.x,top-24,RED,2); } }
   else if(ms<P.card+700) { const q=(ms-P.card)/700; gfx.save(); gfx.translate(P.x+q*110,top-19-Math.sin(q*Math.PI)*60); gfx.rotate(q*5); if(!PROPART.draw('boppy/reserved_card',0,5,{w:84})) { RO(-40,-11,80,22,CREAM); label('RESERVED',0,-5,RED,2); } gfx.restore(); }
@@ -712,7 +717,13 @@ SC.bp_chair=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.drop) return; const lan
 // the thump itself: dust and a shake, started by the move timeline (added here so the move function stays as it was)
 const oldRecliner=B.recliner_reservation;
 B.recliner_reservation=E2=>{ const t=E2.targets[0]||E2.m,H=ST.unit(t),self=t===E2.m,cx=Math.round(H.x-H.w*.5-6),cy=Math.min(316,H.base+2),land=(self?300:900)+450;
-  oldRecliner(E2); scene('bp2_thump',(land+700)/1000,{x:cx,y:cy,land}); };
+  oldRecliner(E2); scene('bp2_thump',(land+700)/1000,{x:cx,y:cy,land});
+  const keep=ST.cur; RECL.length=0;
+  if(self) RECL.push({m:E2.m,st:keep,t0:2700,t1:3900});
+  // the ally he sets it up for walks into the chair the moment it lands, sits through the heal, then gets up and goes home
+  else if(t.side!=='foe'&&b2Alive(t)&&battle.fx[t.idx]) { const tsp=BATTLE_SPRITES[t.id],sitF=tsp&&tsp.sit?'sit':'kneel';
+    const tst=ST.keys(battle.fx[t.idx],[{t:0,x:'home',y:'home',f:'idle'},{t:land,x:'home',y:'home',f:'walk',hop:2,hn:3},{t:land+500,x:cx+2,y:cy,f:sitF},{t:3100,f:sitF},{t:3200,f:'walkR',hop:2,hn:3},{t:3800,x:'home',y:'home',f:'idle'},{t:4300,x:'home',y:'home',f:'idle'}]);
+    ST.cur=keep; RECL.push({m:t,st:tst,t0:land+500,t1:3200}); } };
 SC.bp2_thump=(s,u)=>{ const ms=s.t*1000; if(ms<s.land) return; if(!s.done) { s.done=1; sfx.bonk&&sfx.bonk(); } const q=cl((ms-s.land)/700);
   for(let k=0;k<14;k++) { const side=k%2?1:-1,d=(24+(k%7)*10)*ez(q); gfx.globalAlpha=(1-q)*.85; E(s.x+side*(40+d),s.y-4-Math.sin(ez(q)*Math.PI)*(6+(k%3)*7),7+q*10,5+q*7,k%3?'#d8cbb0':'#f0e6d0'); }
   gfx.globalAlpha=(1-q)*.8; ring(s.x,s.y,20+q*90,4+q*16,4,CREAM); };

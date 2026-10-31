@@ -8,6 +8,11 @@
 - `Rm.giggle_storm` (end of `engine/rose-moves.js`) now plays: flex fingers, tiptoe sneak, crouch, pounce in an arc, four-pose tickle blur, pull out the rainbow feather, swish, twirl in the feather storm, ta-da, doubled-over laugh, then runs home. Hits (34, 33, 33 at 1.9, 2.3, 2.7 s), the spoken line and the damage are unchanged. The move now lasts about 5.6 s (was 4.4).
 - Cache tags: `rose-moves.js?v=tk1`, `rose-hires.js?v=tk1`, `rose-hires-use.js?v=tk1`. Tests: kit_test rose giggle_storm (12 frames looked at), smoke IDS=rose clean.
 
+## 2026-10-30: Boppy's Recliner Reservation: the target sits in the chair
+
+- Tom: when Boppy uses the recliner on someone, that person now walks into the chair the moment it lands (THUMP), sits while the heal and shield play, then gets up and walks back to their spot. Self-target is unchanged except Boppy is now drawn on top of the chair while he sits (the chair scene is drawn over the party, so he was hidden behind it).
+- Change in `engine/boppy-moves.js` only: the later `B.recliner_reservation` wrapper poses the target through `ST.keys(battle.fx[t.idx], ...)` (same idea as Grace's dance) and `SC.bp_chair` redraws seated units over the chair (`RECL`). Seated pose is each character's `sit` frame if they have one, else their `kneel` frame (Tom, Grace, Rose, Amy, Deedee use kneel). Not done when the target is KO'd or an enemy (Kindness). Cache tag `boppy-moves.js?v=rc1`.
+
 ## 2026-10-30: Floor Is Lava: old drawn lava removed
 
 - Rose's Floor Is Lava still played the old flat orange ovals (`SC.rv_lava` in `engine/rose-moves.js`) on top of the new painted lava pool. `SC.rv_lava` is now a no-op, so only the painted pool and painted couch cushion show. The "THE FLOOR IS LAVA!" and "HOT HOT!" text callouts and the HOT labels are unchanged. Cache tag `rose-moves.js?v=lv1`.
