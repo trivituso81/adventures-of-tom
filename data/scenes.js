@@ -2532,6 +2532,8 @@ function ch7OpenDoors() {
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   if(flag('ch7-door')||STORY.chapter>7) ch7OpenDoors();
+  // Until the password works the two door tiles are solid, so the party cannot walk around the catalog lock (they are exits).
+  else { const M=worlds.stacks; if(M&&!M.doorsOpen) for(const x of [14,15]) M.solid[1*M.w+x]=1; }
   // The Unread stays out of sight until the party walks into the Reading Room, and settles on the lectern after.
   const b=findMonster('unread'); if(!b) return;
   b.mscale=1.5;

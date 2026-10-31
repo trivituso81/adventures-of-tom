@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 35): Reading Room doors can no longer be walked through without the password (`gate1`)
+
+- Tom (01:55): the Reading Room could be entered without clearing the prerequisite. Cause: the two door tiles at the top of the Stacks hall (14,1 and 15,1) are exits and were walkable, so walking up from the hall went straight into the room and skipped the catalog lock (the lock only worked when pressing A on it).
+- Fix: `STORY_WORLD` in `data/scenes.js` keeps those two tiles solid until `ch7-door` is set (or after chapter 7), when `ch7OpenDoors` opens them as before. The lock still talks when you face it.
+- Tested: walking up with no password stops at (14,2); after `ch7-door` it enters the Reading Room; `tools/readroom_test.py` passes.
+- Tags `scenes.js?v=gate1`, `main.js?v=gate1`, title stamp `build gate1`.
+
 ## 2026-10-31 (night, 34): Director mode, monsters keep up with Tom's level
 
 - Tom (01:50): still easy in chapter 6 at level 16; one ability takes out an enemy. Diagnosis: the pace table (`B2_LAB`) puts the chapter 6 boss at level 9, so level 16 is about 7 levels ahead. Map monsters stay at their base level (chapter 6: 6 and 7, plus 1 per win), so they never catch up. At level 16 an Acorn Agent had 72 HP in Grace mode while Tom's free basic move does about 89, and `b7Overlevel` (5+ levels over) turns such fights into instant wins.
