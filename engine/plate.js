@@ -160,7 +160,9 @@ const PLATE_BEHIND={ town:[
   // Taxi Co. roof edge and side wall, which hang over the alley beside Moon Club (alley column 22)
   {pts:[[1434,944],[1470,926],[1560,880],[1560,1080],[1478,1080],[1470,1000]],base:1285},
   // tree canopies: plaza east, between the south shops and the two big trees at the bottom
-  {cx:1700,cy:690,rx:88,ry:72,base:800},
+  {cx:1700,cy:690,rx:92,ry:74,base:800},
+  // fountain top: upper bowl and the jets above it (ground behind it, row 9, is walkable)
+  {cx:866,cy:632,rx:88,ry:46,base:700},{x:830,y:548,w:72,h:56,base:700},
   {cx:490,cy:902,rx:75,ry:64,base:975},
   {cx:1377,cy:905,rx:78,ry:66,base:985},
   {cx:467,cy:1395,rx:190,ry:115,base:1592},

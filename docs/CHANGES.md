@@ -5,6 +5,13 @@
 - NEEDS RE-BAKE: the baked Amy clip for the old line no longer matches, so the line plays with the speech-synthesis fallback until re-baked. New script is in `tools/battle-baker/handscripts.txt` (amy, oat_milk_please).
 - Cache tags `almond1` on lines.js, amy-moves.js, battle2-data.js, abilities.js, maps-le.js.
 
+## 2026-10-30 (night, 3): Square walk-behind, third pass (fountain top, east tree)
+
+- Characters can now stand behind the top of the wish fountain (row 9) and under the east plaza tree's canopy (rows 10 and 11, cols 25 to 29 only where painted ground is open). Mask rows 9 to 11 edited in `data/maps-le.js`; the `Wish fountain` touch object now covers rows 10 to 12 (was 9 to 12) so the ground behind it is walkable. `?v=square5` on maps-le.js.
+- New `PLATE_BEHIND` zones in `engine/plate.js` (`?v=behind3`): the fountain's upper bowl and jets, and a slightly wider east tree ellipse.
+- Lamp posts: confirmed working in the current build (head, pole and foot redrawn over an actor standing north of the lamp). Tom's phone screenshot at 9:50 showed the pre-lamp version, so the phone had a cached build.
+- Checks: smoke clean, reach_test town 0 fails, camera clamp clean, screenshots at the fountain, the east tree and the lamp with Tom walking.
+
 ## 2026-10-30: Floor Is Lava: bigger lava pool under everyone
 
 - Tom: the lava was small and hidden behind the enemies. The painted pool in `engine/rose-moves.js` (`Rm.floor_is_lava` wrapper) now spans from 52 px left of the row to 84 px right of Rose's cushion, 30 px above the rear enemy's feet to 30 px below the front one, and is drawn 15 percent larger (2.4x instead of 2.08x). Lava now shows around every enemy's feet and under Rose. Cache tag `rose-moves.js?v=lv2`.

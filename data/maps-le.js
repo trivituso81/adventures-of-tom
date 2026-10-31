@@ -117,9 +117,9 @@ const LE_AREAS=[
       '#######..#####.######.########',
       '#######..#####.######.########',
       '##........................####',
-      '##..........###...............',
-      '##..####...#####...####..###..',
-      '########..#######..####.####.#',
+      '##............................',
+      '##..####...#####...####.......',
+      '########..#######..####.#.#..#',
       '##........######.........###.#',
       '##.................##....###.#',
       '##############..##############',
@@ -150,7 +150,7 @@ const LE_AREAS=[
     objects:[
       ['sign',6,1,1,1,'North signpost','GRUMP HOLLOW, this way. Mind the mud. Mind the Grump. Mostly the Grump.'],
       ['sign',13,22,1,1,'South signpost','RIVITUSO ROW, this way. Cookies likely. Quiet unlikely.'],
-      ['fountain',11,9,5,4,'Wish fountain','A coin reads: "Please don\'t wish for more coins."'],
+      ['fountain',11,10,5,3,'Wish fountain','A coin reads: "Please don\'t wish for more coins."'],
       // Placed on the painted props (the benches and their planters, the shop's hanging sign and barrel) so they match the painting.
       ['bench',5,11,2,1,'An important bench','Reserved for people with very important sitting to do.'],
       ['bench',20,11,2,1,'The sunny bench','Warm from the sun. Or from Gus. Hard to say.'],
