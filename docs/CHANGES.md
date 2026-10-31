@@ -16,6 +16,13 @@
 - ADMIN > BATTLE LAB now asks for a difficulty first (Easy, Medium, Hard), then lists one fight per chapter boss, chapters 1 to 20 (chapter 20 has two: Leviathan and Julian), six to a page with PREV PAGE and NEXT PAGE. Chapter 18's boss is a survival fight that cannot be won, and its row says so. The old crew fights and Family Finish test are gone from the list.
 - Fixed the cut-off top: the title panel is now capped to the screen height and its list scrolls if it is ever taller.
 - Files: data/battle2-data.js (B2_LAB), engine/splash.js, index.html (CSS, ?v=lab2).
+## 2026-10-30 (evening): The Square, lettered painting installed
+
+- `art/town.webp` is Tom's lettered painting (`docs/reference/town_v4_from_tom.png`, 1347 x 1167, scaled to 1920 x 1664) with the LARGE fountain composited back from the previous plate (feathered ellipse, x 640 to 1100, y 540 to 880). The small notice board went with it.
+- Game-drawn lettering off for the Square (`PLATE_SIGNS.town = []`); the generator paints all eleven boards, spelled correctly.
+- Walk map: the north-east street (cols 27 to 28, rows 1 to 8) is now blocked, because the painting closes it with a fence and trees. West edge was already blocked. `Town notice` object removed.
+- Known, Tom accepted: a few shop boards still sit close to their awnings (Crumb, Penny's, Kettle, Taxi); the A-frame chalkboard by Kettle Cottage is still painted. Redo prompt is in claude/next.md history if wanted.
+- Tests: reach_test town 0 fails, smoke clean, camera clamp unchanged.
 
 ## 2026-10-30: Sourdough Snob uses the painted loaf
 
