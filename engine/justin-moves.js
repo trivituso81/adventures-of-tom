@@ -126,22 +126,27 @@ J.bad_call=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
 // ---------- Fresh Fit ----------
 SC.jv_dazzle=(s,u)=>{ gfx.globalAlpha=fade(u,.3)*.8; R(0,0,576,324,'#ffffff'); gfx.globalAlpha=fade(u,.7); for(let k=0;k<12;k++) { const a=k*Math.PI/6+u,d=ez(u)*(24+k%3*14); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,5+k%3*3,k%2?'#fff3a0':'#ffd6f0',u*5); } for(let k=0;k<8;k++) { const a=k*Math.PI/4; Ln(s.x,s.y,s.x+Math.cos(a)*(30+u*40),s.y+Math.sin(a)*(30+u*40),3,'#fff8c0'); } };
 J.fresh_fit=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),mid={x:Math.max(me.x-130,F.x+F.w*.5+90),y:me.base};
+  // sheet 04 redo (lwire1 session): frames 1 to 5 everyday clothes, 6 the swap spin, 7 to 16 the green suit
   const walk=(u,t)=>Math.floor(t*7)%2?'ff_walkA':'ff_walkB';
   const K=[{t:0,x:'home',y:'home',f:'idle'},{t:300,f:walk,ease:'lin'},{t:1000,x:mid.x,y:mid.y,f:'ff_stop'}];
-  K.push(...seq([['ff_stop',260],['ff_collar',320],['ff_sleeve',280],['ff_shades',380],['ff_poseA',280],['ff_poseB',280],['ff_turn',260],['ff_poseC',280],['ff_cuff',260],['ff_poseD',420],['ff_lookBack',260],['ff_wink',420]],1000,mid.x,mid.y));
-  K.push({t:4700,x:mid.x,y:mid.y,f:'ff_strutR',ease:'lin'},{t:5500,x:'home',y:'home',f:'ff_strutR'},{t:5800,f:'idle'});
+  K.push(...seq([['ff_stop',260],['ff_collar',320],['ff_snap',300],['ff_swap',380],['ff_reveal',360],['ff_shadesOn',300],['ff_hip',280],['ff_turn',260],['ff_bow',260],['ff_cuff',260],['ff_shrug',300],['ff_lookBack',280],['ff_shadesOff',420],['ff_strut',380]],1000,mid.x,mid.y));
+  K.push({t:5360,x:mid.x,y:mid.y,f:'ff_strutR',ease:'lin'},{t:6200,x:'home',y:'home',f:'ff_strutR'},{t:6500,f:'idle'});
   ST.keys(fx,K);
+  const body={x:mid.x,y:mid.y-me.h*.5};
   ST.play(E2,[
     [0,()=>{ setMessage('Justin walks it out like a runway.'); say(m.id,'fresh_fit_runway'); }],
     [300,()=>sfx.step&&sfx.step()],
     [1250,()=>say(m.id,'fresh_fit_shades')],
-    [1800,()=>{ setMessage('Collar. Cuff. Shades.'); sfx.ding&&sfx.ding(); }],
-    ['hf',3600],
-    [3300,()=>{ setMessage('Pose.'); say(m.id,'fresh_fit'); }],
-    [3600,()=>{ sfx.ding&&sfx.ding(); sfx.whoosh&&sfx.whoosh(); jitter(f); landHit(100); scene('jv_dazzle',.9,{x:F.x,y:F.mid}); }],
-    [4100,()=>scene('jv_text',1,{x:mid.x,y:mid.y-me.h-8,txt:'DESIGNER',c:'#ffd6f0',sc:2})],
-    [5200,()=>say(m.id,'fresh_fit_wink')],
-    [5800,'end',res(E2)+'It cost more than the pond.']]); };
+    [1300,()=>setMessage('Collar. Cuff. Shades.')],
+    [1580,()=>sfx.ding&&sfx.ding()],
+    [1880,()=>{ setMessage('Quick change.'); sfx.whoosh&&sfx.whoosh(); scene('jv_flash',.22,{a:.55,c:'#fff3a0'}); scene('jv_poof',.5,{x:body.x,y:body.y,n:10,r:34,c:'#fff8e8'}); scene('jv_sparks',.6,{x:body.x,y:body.y,n:12,r:44,c:GOLD}); }],
+    [2260,()=>{ setMessage('Fresh fit.'); sfx.ding&&sfx.ding(); scene('jv_sparks',.5,{x:body.x,y:body.y,n:10,r:30,c:'#9fe6a8',seed:.4}); }],
+    [2950,()=>{ setMessage('Pose.'); say(m.id,'fresh_fit'); }],
+    ['hf',4700],
+    [4700,()=>{ sfx.ding&&sfx.ding(); sfx.whoosh&&sfx.whoosh(); jitter(f); landHit(100); scene('jv_dazzle',.9,{x:F.x,y:F.mid}); }],
+    [4900,()=>scene('jv_text',1,{x:mid.x,y:mid.y-me.h-8,txt:'DESIGNER',c:'#ffd6f0',sc:2})],
+    [5000,()=>say(m.id,'fresh_fit_wink')],
+    [6500,'end',res(E2)+'It cost more than the pond.']]); };
 
 // ---------- Demo Day ----------
 SC.jv_wall=(s,u)=>{ const x=s.x,y0=s.top-18,w=s.w+30,h=s.h+30,a=fin(u,.12)*(u>.86?(1-u)/.14:1);

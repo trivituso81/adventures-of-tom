@@ -41,7 +41,7 @@ SHEETS = {
     'lw': ('loosewire', 4, 'spot grab pull present jab zap drop smirk'),
     'wn': ('wirenuts', 4, 'walkA walkB reach grab show wind throwA throwB throwC reload windB throwD throwE dust pocket nod'),
     'bc': ('badcall', 4, 'watch lean shock rise point yellA yellB yellC pace armsOut headGrab stomp yellD huff sit mutter'),
-    'ff': ('freshfit', 4, 'walkA walkB stop collar sleeve shades poseA poseB turn poseC cuff poseD lookBack wink shadesOff strut'),
+    'ff': ('freshfit', 4, 'walkA walkB stop collar snap swap reveal shadesOn hip turn bow cuff shrug lookBack shadesOff strut'),
     'dd': ('demoday', 4, 'walkA walkB lookUp crack lift shoulder windA windB swingA swingB impact recoil swingC impactB rest wipe'),
     'bf': ('breakerflip', 4, 'walkA walkB open scan trace found grip flipOff dark wait count flipOn flash brace close salute'),
     'gs': ('giantsneeze', 4, 'walkA twitch sniff rub buildA buildB buildC peak sneezeA sneezeB sneezeC recoil stagger sniffB wipe excuse'),
@@ -284,7 +284,7 @@ def contact(path):
 contact(args.contact)
 
 # ---------------------------------------------------------------- data file
-AV = '?v=jstance1'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
+AV = '?v=ffsuit1'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
 atlas = {'bt': {'src': 'art/chars/justin-battle.webp' + AV, 'k': KB, 'rects': core_rects},
          'ko': {'src': 'art/chars/justin-ko.webp' + AV, 'k': KO_, 'rects': ko_rects}}
 for sk, s in sets.items(): atlas[sk] = {'src': f'art/chars/justin-{s["file"]}.webp' + AV, 'k': KB, 'rects': s['rects']}

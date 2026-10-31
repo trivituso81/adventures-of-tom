@@ -1,3 +1,11 @@
+## 2026-10-31 (day, 22): Fresh Fit is now an outfit change into a green suit (`ffsuit1`)
+
+- Tom (16:58): the redo sheet for Fresh Fit came back (`tools/sprite-bake/src/justin-freshfit-v1.png`, replaced in place; the old sheet is in git history). Frames 1 to 5 are everyday clothes, 6 is the blurred swap spin, 7 to 16 are the emerald green suit with red and green trouser stripes, cream bow shirt, gold buckle loafers and round gold sunglasses.
+- Baked with `bake_justin_battle.py` (frame keys renamed to match the new content: ff_snap, ff_swap, ff_reveal, ff_shadesOn, ff_hip, ff_bow, ff_shrug replace ff_sleeve, ff_shades, ff_poseA to D, ff_wink).
+- `J.fresh_fit` (engine/justin-moves.js) rewired: runway walk, stop, collar flick, snap, then the swap with a gold flash, poof and sparks (game fx), reveal with green sparks, shades and poses, shades off for the dazzle hit, wink strut home. Total 6.5 s (was 5.8 s). Message lines: "Quick change." and "Fresh fit." added.
+- Spoken lines are unchanged on purpose so the baked clips still play. "This shirt cost more than your pond." now plays while he wears the suit (he still has a silk shirt under it); changing it to "suit" would need a re-bake.
+- Tested: `kit_test.py justin` all nine moves, frames recorded in the page across the whole move and looked at (casual frames, swap flash, suit poses, dazzle, strut), `IDS=justin smoke.py` and `smoke.py` no fails. Not played on the phone. Stamp `build ffsuit1`.
+
 ## 2026-10-31 (day, 21): Loose Wire keeps its distance and zaps for real (`lwire1`)
 
 - Tom (16:43): Justin gets too close to the enemy when applying the loose wire, and the electric effect should be much bigger.

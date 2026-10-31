@@ -15,7 +15,7 @@ Tom will drop a zip of Justin's painted animation sheets into a conversation, of
 | Basic | loose_wire | Loose Wire | 0 | spots it "Who left THIS here?" / holds out the copper "Loose wire. Not my problem any more." / after it bites him "Ow. Okay. A little bit my problem." |
 | Start | wire_nuts | Wire Nuts | 3 | digging "Wire nuts! Never have enough of these." / "Yellow!" / "Red!" / overhand "And BLUE!" / nod "Color coded." |
 | Start | bad_call | Bad Call | 4 | on the couch "He was IN." / up and pointing "ARE YOU KIDDING ME WITH THAT CALL?" / "WHO IS PAYING YOU?!" / sits "Unbelievable." |
-| Start | fresh_fit | Fresh Fit | 5 | "Clear the runway." / "Collar. Cuff. Shades." / pose "This shirt cost more than your pond." / strut "You're welcome." |
+| Start | fresh_fit | Fresh Fit (strides in everyday clothes, snaps, swaps into an emerald green suit with a flash, poses, shades off for the dazzle hit, wink strut) | 5 | "Clear the runway." / "Collar. Cuff. Shades." / pose "This shirt cost more than your pond." / strut "You're welcome." |
 | Lv 2 | demo_day | Demo Day | 6 | "Demo day! Wall's coming down!" / looks up "Nobody liked this wall." / "ONE!" / "TWO!" / wipe "Open floor plan." |
 | Lv 3 | breaker_flip | Breaker Flip | 7 | "Which one of you is it." / "There you are." / "Breaker's off." / whispered "Three. Two. One." / "Breaker's... on." / salute "Licensed and insured." |
 | Lv 4 | giant_sneeze | Giant Sneeze | 8 | twitch "Hang on. Hang on." / build "Ah... ah... ah..." / "AH CHOOOOO!" / "Excuse me." |
@@ -36,14 +36,14 @@ Ten PNG sheets, magenta background, square cells of about 256 px, Justin facing 
 | 01 loose wire | 4 x 2 | lw_spot, lw_grab, lw_pull, lw_present, lw_jab, lw_zap, lw_drop, lw_smirk |
 | 02 wire nuts | 4 x 4 | wn_walkA, wn_walkB, wn_reach, wn_grab, wn_show, wn_wind, wn_throwA, wn_throwB, wn_throwC, wn_reload, wn_windB, wn_throwD, wn_throwE, wn_dust, wn_pocket, wn_nod |
 | 03 bad call | 4 x 4 | bc_watch, bc_lean, bc_shock, bc_rise, bc_point, bc_yellA, bc_yellB, bc_yellC, bc_pace, bc_armsOut, bc_headGrab, bc_stomp, bc_yellD, bc_huff, bc_sit, bc_mutter |
-| 04 fresh fit | 4 x 4 | ff_walkA, ff_walkB, ff_stop, ff_collar, ff_sleeve, ff_shades, ff_poseA, ff_poseB, ff_turn, ff_poseC, ff_cuff, ff_poseD, ff_lookBack, ff_wink, ff_shadesOff, ff_strut |
+| 04 fresh fit | 4 x 4 | ff_walkA, ff_walkB, ff_stop, ff_collar, ff_snap, ff_swap, ff_reveal, ff_shadesOn, ff_hip, ff_turn, ff_bow, ff_cuff, ff_shrug, ff_lookBack, ff_shadesOff, ff_strut (redone 2026-10-31: frames 1 to 5 everyday clothes, 6 the swap spin, 7 to 16 the emerald green suit; sunglasses on in 8 to 14, in hand in 15, on his head in 16) |
 | 05 demo day | 4 x 4 | dd_walkA, dd_walkB, dd_lookUp, dd_crack, dd_lift, dd_shoulder, dd_windA, dd_windB, dd_swingA, dd_swingB, dd_impact, dd_recoil, dd_swingC, dd_impactB, dd_rest, dd_wipe |
 | 06 breaker flip | 4 x 4 | bf_walkA, bf_walkB, bf_open, bf_scan, bf_trace, bf_found, bf_grip, bf_flipOff, bf_dark, bf_wait, bf_count, bf_flipOn, bf_flash, bf_brace, bf_close, bf_salute |
 | 07 giant sneeze | 4 x 4 | gs_walkA, gs_twitch, gs_sniff, gs_rub, gs_buildA, gs_buildB, gs_buildC, gs_peak, gs_sneezeA, gs_sneezeB, gs_sneezeC, gs_recoil, gs_stagger, gs_sniffB, gs_wipe, gs_excuse |
 | 08 foot tap | 4 x 4 | ft_idle, ft_notice, ft_wave, ft_glance, ft_tapped, ft_freeze, ft_screamA, ft_screamB, ft_screamC, ft_hop, ft_clutch, ft_hopB, ft_screamD, ft_pant, ft_point, ft_fine |
 | 09 drywall | 4 x 4 | dw_walkA, dw_walkB, dw_reach, dw_lift, dw_carryA, dw_carryB, dw_swing, dw_set, dw_lean, dw_driverA, dw_driverB, dw_driverC, dw_tap, dw_step, dw_admire, dw_thumbs |
 
-Props painted into the sheets (do not add PROPART copies for these): wire (01, frames 2 to 6), wire nuts in hand (02, frames 4 to 6 and 11; the thrown ones are game props), sunglasses (04, frames 6 to 16), sledgehammer (05, frames 5 to 16), breaker panel and glove (06, frames 3 to 16), drywall sheet and drill (09). Bad Call has no couch: the seated frames sit on air.
+Props painted into the sheets (do not add PROPART copies for these): wire (01, frames 2 to 6), wire nuts in hand (02, frames 4 to 6 and 11; the thrown ones are game props), sunglasses (04, frames 8 to 16), sledgehammer (05, frames 5 to 16), breaker panel and glove (06, frames 3 to 16), drywall sheet and drill (09). Bad Call has no couch: the seated frames sit on air.
 
 ## Install steps (follow the Boppy pattern; he is the closest kit)
 
