@@ -5717,21 +5717,21 @@ addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window._
 B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const by=300,cx=cl(GR.x1+110,220,330),kT={x:cx+72,y:by},kA={x:cx-72,y:by};   // the counter sits between the kids
-  const AMY_LINE="Ketchup, pickles, cereal, sock. Ymamot Creation!",TOM_LINE="Yama-Mott. It's Tom backwards.",FLASH='Flashback!';
+  const AMY_LINE="Ketchup, pickles, cereal, sock. Ymamot Creation!",FLASH='Flashback!';
   // Little Tom is as tall as Grace and little Amy as tall as Rose.
   const hOf=id=>BATTLE_SPRITES[id].idle.length*BATTLE_SPRITES[id].scale,kh=w=>KIDS.rects[w].ym_ready[3]/2,scT=hOf('grace')/kh('tom'),scA=hOf('rose')/kh('amy');
   // Voices. Little Amy speaks in Grace's voice (LINES.grace.ymamot) and little Tom in Rose's (LINES.rose.ymamot); both grown-ups shout
   // Flashback! together first (amy.flashback, tom.flashback). Each stays silent until its clip is baked (tools/bake-page/pending.json).
-  // The whole move runs about 6 s. Beats are fixed times; a kid clip that is longer or shorter than the target (Amy 3.0 s, Tom 2.0 s) stretches
-  // its own spans (FA, FT). The timeline runs K times faster than the audio at 2x (engine/main.js), so spans that wait on a voice are multiplied by K.
-  const kidA=ymClip('grace',AMY_LINE),kidT=ymClip('rose',TOM_LINE),shA=ymClip('amy',FLASH),shT=ymClip('tom',FLASH);
-  const sayAmy=()=>{ if(kidA) say('grace','ymamot',0,AMY_LINE); },sayTom=()=>{ if(kidT) say('rose','ymamot',0,TOM_LINE); };
-  const K=b7Speed(),FA=kidA?cl(ymSecs(kidA)/3,.6,1.6)||1:1,FT=kidT?cl(ymSecs(kidT)/2,.6,1.6)||1:1;
+  // The whole move runs about 6 s. Beats are fixed times; a kid clip that is longer or shorter than the target (Amy 3.0 s) stretches
+  // its own span (FA). The timeline runs K times faster than the audio at 2x (engine/main.js), so spans that wait on a voice are multiplied by K.
+  const kidA=ymClip('grace',AMY_LINE),shA=ymClip('amy',FLASH),shT=ymClip('tom',FLASH);
+  const sayAmy=()=>{ if(kidA) say('grace','ymamot',0,AMY_LINE); };
+  const K=b7Speed(),FA=kidA?cl(ymSecs(kidA)/3,.6,1.6)||1:1;
   const SH=100,SHOUT=Math.round(cl(Math.max(0,ymSecs(shA||{mp3:''})*1000,ymSecs(shT||{mp3:''})*1000)||800,600,1500));   // the shout, then the flashback starts
   const fb=SH+SHOUT*K+100,A0=fb+250,ING_T=[0,400,750,1000,1150,1300].map(v=>A0+v*K*FA);   // mustard and lemon go in during Amy's pauses
   const AMY_ING=[1,4,5];   // Amy handles pickles, lemon, sock; Tom ketchup, cereal, mustard
   const P={fb,in:ING_T[0],name:A0+1550*K*FA,lift:A0+2000*K*FA,sling:0,hit:0,back:0,end:0};
-  P.sling=P.lift+900*K*FT; P.hit=P.sling+300; P.back=P.hit+650; P.end=P.back+400;
+  P.sling=P.lift+600*K; P.hit=P.sling+300; P.back=P.hit+650; P.end=P.back+400;
   // grown-ups shout together and hop, then hide for the flashback (they stay at the staging spots)
   const hideAt=ms=>ms>P.fb&&ms<P.back,shouting=ms=>ms>=SH&&ms<P.fb-150,hop=ms=>shouting(ms)?Math.abs(Math.sin((ms-SH)/110))*7:0;
   const gone=(ms,c)=>({cx:hideAt(ms)?-400:c.origX,base:c.origBase-hop(ms),frame:ms>=P.back||shouting(ms)?c.sp.celeb:c.sp.idle,hide:hideAt(ms),noShadow:hideAt(ms)});
@@ -5759,13 +5759,13 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     kid(kT.x,by+lift,'tom',posT,t,-1,{sc:scT}); kid(kA.x,by+lift,'amy',posA,t,1,{sc:scA});
     if(ms>P.name&&ms<P.lift) { gfx.save(); gfx.translate(cx,by-124); gfx.rotate(-.06); if(!PROPART.draw('tombo/ymamot_creation_sign',0,0,{w:112})) { RO(-70,-12,140,24,CREAM); label('YMAMOT CREATION',0,-6,'#2b2a26',2); } gfx.restore(); } }});
   const steps=[
-    [0,()=>{ setMessage('TOMBO! Tom and Amy look at each other. They remember something.'); S('harp'); if(typeof warmLine==='function') { if(kidA) warmLine('grace',AMY_LINE); if(kidT) warmLine('rose',TOM_LINE); warmLine('amy',FLASH); warmLine('tom',FLASH); } }],   // decode the clips now so they start on cue
+    [0,()=>{ setMessage('TOMBO! Tom and Amy look at each other. They remember something.'); S('harp'); if(typeof warmLine==='function') { if(kidA) warmLine('grace',AMY_LINE); warmLine('amy',FLASH); warmLine('tom',FLASH); } }],   // decode the clips now so they start on cue
     [SH,()=>{ S('whoosh'); S('select'); if(shA) say('amy','flashback',0,FLASH); if(shT) say('tom','flashback',0,FLASH); word('FLASHBACK!',(UT.x+UP.x)/2,shoutY,GOLD,5,SHOUT*K/1000+.5,-.05); setMessage('Tom and Amy, at exactly the same time: Flashback!'); }],   // together, before the move starts
     [P.fb,()=>{ scene('tu_flashback',(P.back-P.fb)/1000,{txt:'MOM WAS OUT'}); if(sfx.projector) sfx.projector(0,30); S('whoosh'); setMessage('The kitchen. A bowl. No supervision.'); }],
     [A0,()=>{ sayAmy(); }],
     ...ING.map(([nm],k)=>[ING_T[k],()=>{ S(k%2?'thud':'splat'); word(nm,cx,by-170,k%2?CREAM:MINT,3,.22); if(k===ING.length-1) setMessage('And one sock. For body.'); }]),
     [P.name,()=>{ S('ding'); word('A YMAMOT CREATION!',cx,Math.max(122,by-176),GOLD,4,1); setMessage('They name it. Very official.'); }],
-    [P.lift,()=>{ S('whoosh'); sayTom(); setMessage('Tom spelled backwards. Pronounced Yama-Mott. They were six.'); }],
+    [P.lift,()=>{ S('whoosh'); setMessage('Tom spelled backwards. Pronounced Yama-Mott. They were six.'); }],
     [P.sling,()=>{ S('whoosh'); S('splat'); }],
     ['hf',P.hit],
     [P.hit,()=>{ S('splat'); S('bonk'); scene('tu_flash',.2,{a:.4,c:'#9ef07a'}); hitFoes(tgts,share); for(const f of tgts) { const q=ST.foe(f); scene('tu_dust',.5,{x:q.x,y:q.base,r:30,n:8}); } word('SPLAT!',GR.x,Math.max(118,GR.top-44),MINT,6,1); setMessage('It goes everywhere. The monsters are not the same after.'); }],

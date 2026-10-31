@@ -76,5 +76,4 @@ for(const [id,k,v] of [
 // Until they are baked the move keeps playing the old grown-up clips (engine/battle2-kind.js kidSay).
 for(const [id,k,v] of [
   ['amy','flashback','Flashback!'],['tom','flashback','Flashback!'],
-  ['grace','ymamot','Ketchup, pickles, cereal, sock. Ymamot Creation!'],
-  ['rose','ymamot','Yama-Mott. It\'s Tom backwards.']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }
+  ['grace','ymamot','Ketchup, pickles, cereal, sock. Ymamot Creation!']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }

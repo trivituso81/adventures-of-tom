@@ -1,3 +1,7 @@
+## 2026-10-31 (day, 10): Ymamot Creation: little Tom's spoken line removed (`ymamot4`)
+- Little Tom no longer says "Yama-Mott. It's Tom backwards." The move now holds 600 ms there instead of waiting on a voice. The matching line is gone from `data/lines.js`, `tools/bake-page/pending.json` and `tools/clip-audit/extra-battle.json`; bake list and Voice Library index rebuilt. Nothing to bake for little Tom. Little Amy's line (Grace's voice) still needs baking.
+- Measured: 7.2 s at 1x (fire to command menu, including walk-out and walk-back), 5.1 s at 2x.
+
 ## 2026-10-31 (day, 7): Justin joins the party from the Gregori house (`justin1`)
 
 - Tom (12:36): Justin can now be recruited into the fourth slot by talking to him in the Gregori house (Amy's house) on Long Island, no storyline changes. Same prompt as Amy, Deedee and Boppy: YES, COME ALONG or NOT RIGHT NOW; a full party offers SWAP OUT (Amy, Deedee, Boppy, or whoever is in the fourth slot and not locked by the chapter); with only Tom, Grace and Rose he just joins. He can leave and rejoin any time, and he goes home when the party leaves Long Island.
