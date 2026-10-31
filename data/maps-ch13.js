@@ -54,7 +54,7 @@ LE_AREAS.push(
     hint:'The tracks run east into the tunnel. Sol’s coffee machine fixes everybody.',
     spawn:{x:4,y:4},
     // The stairs up to the boulevard are bottom left (x 1 and 2, row 4); the tunnel mouth is top right (x 23, rows 3 and 4).
-    exits:[[1,4,'blvd',21,24,'down','subfloor'],[2,4,'blvd',21,24,'down','subfloor'],
+    exits:[[1,4,'blvd',24,22,'down','subfloor'],[2,4,'blvd',24,22,'down','subfloor'],
            [23,3,'subtunnel',2,3,'right','subfloor'],[23,4,'subtunnel',2,3,'right','subfloor']],
     // Painted plate (art/subdepot.webp, engine/plate.js). '#' blocks, '.' walks. The upper platform (rows 3 and 4) and the lower platform
     // (rows 8 to 10) are joined by the track bed between them (rows 5 to 8), which walks like the old rails did. Blocked: the wall and

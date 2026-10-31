@@ -103,7 +103,7 @@ SCENES.ch17Open=()=>[
   {talk:'Sol',lines:['I’ll keep the meter off and the engine on. Go get your folks, Tommy.']},
   {fade:'out',time:.8},
   {card:17,time:3.2},
-  {call:()=>{ setChapter(17,{apply:false}); setFlag('ch17-open','pending'); sfx.travel&&sfx.travel(); ch17Team('stairs'); ch17Place('blvd',14,9,'up'); }},
+  {call:()=>{ setChapter(17,{apply:false}); setFlag('ch17-open','pending'); sfx.travel&&sfx.travel(); ch17Team('stairs'); ch17Place('blvd',14,10,'up'); }},
   {fade:'in',time:.8},
   {talk:'Tom',lines:['The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.']},
   {talk:'Rose',lines:['It’s so tall. Tata, it’s TALLER than the Starlite.']},
@@ -295,7 +295,7 @@ TRIGGERS.push(
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   // The tower's front doors stand on the boulevard from chapter 17 on.
-  if(STORY.chapter>=17) ch17Add('blvd','towerfront',13,8,4,1,'The Glass Tower','Sixty floors of glass. The doors are lit like a window at dinnertime. Every clock inside says 4:59.'); else ch17Remove('blvd','towerfront');
+  if(STORY.chapter>=17) ch17Add('blvd','towerfront',13,9,4,1,'The Glass Tower','Sixty floors of glass. The doors are lit like a window at dinnertime. Every clock inside says 4:59.'); else ch17Remove('blvd','towerfront');
   // While Team Shelves works, the girls hold the landing.
   if(STORY.chapter===17&&flag('ch17-team')==='shelves'&&girlsAway()) ch17Girls();
   // The Twin Lenses stay out of sight until the Vault scene (and again once they are beaten).

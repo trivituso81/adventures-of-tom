@@ -55,7 +55,7 @@ LE_AREAS.push(
     eyebrow:'LOS ANGELES / THE GLASS TOWER · FLOOR 1',
     hint:'The stairs are through the east door. The lifts are out of order. Everything is out of order. Nothing is moving.',
     spawn:{x:10,y:11},
-    exits:[[10,13,'blvd',12,9,'down','glfloor'],[11,13,'blvd',14,9,'down','glfloor'],[21,7,'towerstairs',4,39,'right','glfloor'],[21,8,'towerstairs',5,39,'right','glfloor']],
+    exits:[[10,13,'blvd',14,10,'down','glfloor'],[11,13,'blvd',15,10,'down','glfloor'],[21,7,'towerstairs',4,39,'right','glfloor'],[21,8,'towerstairs',5,39,'right','glfloor']],
     // Painted plate (art/towerlobby.webp, engine/plate.js). '#' blocks, '.' walks. The window wall, back wall, reception desk, coffee cabinet and both
     // back planters (row 4) block; the lift wall runs down the left on a diagonal (the nook at 2,6 and the strip at 3 to 4,5 walk); both lounge benches,
     // the corner planters and lanterns, and the glass fence block. The gate doors (8 to 12, rows 11 to 13) and the carpet beyond them walk. The east door

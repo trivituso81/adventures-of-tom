@@ -1,3 +1,13 @@
+## 2026-10-31 (night, 27): Downtown LA repainted (v3), walk map rebuilt
+
+- Installed Tom's new Downtown LA painting (`art/blvd.webp`, 1920x1664; original saved at `docs/reference/blvd_v3_signs_from_tom.png`). Fixed camera, skyline with City Hall, Griffith Observatory and Angels Flight, each shop with its own sign style.
+- New walk map (`plateMask` in `data/maps-la.js`). Doors: Coffee (5,9), Ramen (10,9), Starlite (17,9), Nickel's (22,9); Wardrobe (4,21), TNB's Loft (11,21), Grand Tower (18,21), Cab Co (25,21). Three one-tile walkways (columns 8, 14, 21, rows 14 to 21) join the south sidewalk to the plaza.
+- Exits: Griffith steps (1,4) and (2,4); Jefferson Park arch (13 to 16, 25); studio road east (29,11) and (29,12). Arrivals from Jefferson Park, Griffith, the studio, the Sub-Rail stairs and the chapter 17 tower lobby all re-pointed. Chapter 4 TNB arrival and the chapter 17 tower front moved to match.
+- The arch posts and board are a walk-behind layer (`PLATE_BEHIND.blvd`, `engine/plate.js`): Tom walks behind the posts and under the board. First pass-under object on this map.
+- Taco truck, bus shelter, Metro canopy and the taxi are interactive objects on the painted spots. The taxi tiles in front of the cab door walk like open floor.
+- Tests: `tools/reach_test.py blvd` 0 fails; `tools/blvd_test.py` updated to the new tiles, all pass except the old `BG_FILES` page error that also fails before this change; smoke and camera clamp pass. Screenshots in `tools/shots/blvd-*.png`. Not played on phone yet.
+
+
 ## 2026-10-31 (night, 26): Nickel is back behind her counter
 
 - Tom reported Nickel missing from her shop. Cause: the 2026-10-30 room painting of Nickel's has no people in it, but her sprite was still flagged hidden (left over from the earlier painting that had her in it), parked at (12,6), and hidden characters cannot be talked to.
