@@ -1,3 +1,12 @@
+## 2026-10-31 (day, 3): the 26 phone-baked voice clips are merged into the game (`clips1`)
+
+- Tom (09:50) sent `local-clips-export.json` from the bake page ("Missing voice clips"): 15 battle lines and 11 dialogue lines, exactly the 26 on the bake list.
+- Battle (15): Amy 1 (Almond milk), Grace 3 (Bedazzle Blast, Open Strings, Portrait Mode), TNB 9 (Around the Bend, Coffee Run, Don't Split Up, Foraged at Dawn, praise, Round with Jojo, Scope Creep, Tasting Ult, Throw Down), Tom 2 (Ladder, praise). Merged with `tools/battle-baker/merge.js` into `data/voice/amy|grace|tnb|tom.js`; each clip text matches its `data/lines.js` entry and key. Their bake scripts are kept in the voice settings.
+- Dialogue (11): Amy 1, Boppy 1, Deedee 1, Michael 5, Olivia 3 (chapter 6 Olivia and Michael lines). Silence trimmed, Boppy deepened (rubberband pitch 0.9), mono 32 kHz 48 kbps, added to `data/voice/dialog-ch28.js`.
+- The bake list is empty now (`tools/bake-page/pending.json` is `[]`, `data/bake-list.json` rebuilt). Phone clips stay in the phone until cleared and still win over these, which are the same takes.
+- Tags: `?v=clips1` on the four battle voice files, `dialog-ch28.js` and `main.js`; title stamp `build clips1`.
+- Test: clip lookup check in headless Chromium (battle clips present with audio, dialogue keys loaded, no page errors); `tools/smoke.py` passes.
+
 ## 2026-10-31 (day, 2): Jojo stays away until chapter 3 (`jojo2`)
 
 - Tom (09:38): Jojo should not be in TNB's loft until after chapter 2, and in chapter 2 she should not be anywhere in the overworld.

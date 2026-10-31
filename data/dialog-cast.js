@@ -7,7 +7,7 @@
 // Baked clips live in DIALOG_CLIPS (one file per chapter, DIALOG_CAST.files, loaded after startup by engine/dialog-voice.js).
 // A line is spoken only if its exact text has a clip for that speaker's voice. Objects and signs stay silent.
 const DIALOG_CAST={
-  files:['data/voice/dialog-ch22.js','data/voice/dialog-ch23.js','data/voice/dialog-ch24.js','data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js','data/voice/dialog-ch25.js','data/voice/dialog-ch26.js','data/voice/dialog-ch27.js','data/voice/dialog-ch28.js'],
+  files:['data/voice/dialog-ch22.js','data/voice/dialog-ch23.js','data/voice/dialog-ch24.js','data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js','data/voice/dialog-ch25.js','data/voice/dialog-ch26.js','data/voice/dialog-ch27.js','data/voice/dialog-ch28.js?v=clips1'],
   speakers:{
     Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Deedee:'deedee',Boppy:'boppy',TNB:'tnb',
     Pip:'pip',Moss:'moss',Dot:'dot',Gus:'gus',Bean:'bean',Bun:'bun',Page:'page',Fern:'fern',Kit:'kit',Oolong:'oolong',
