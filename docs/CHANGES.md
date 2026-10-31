@@ -1,3 +1,8 @@
+## 2026-10-30: Deedee's victory cheer uses the painted Deedee
+
+- Tom: in the win animation, some frames showed her old pixel character. Cause: `data/deedee-hires-battle.js` swapped in the painted `celeb` and `celebFlip` frames but left `sp.cheer` (the pair `engine/battle-draw.js` plays for victory and level-up cheers) pointing at the old pixel pair from `data/deedee-poses.js`. Amy, Boppy and TNB already reset it.
+- Fix: `sp.cheer=[sp.celeb,sp.celebFlip]` and `sp.idle2=sp.idle` (same leftover, used by Nara's sniff scene). Script tag bumped to `?v=dcheer1`.
+
 ## 2026-10-30: Rose is painted again in the overworld (was pixelated)
 
 - `data/recruit-sprites.js` scaled Rose's overworld set by a fixed 0.82. That scaling rebuilds each frame as plain pixel rows and drops the painted-frame tag, so her painted art fell back to chunky blocks. It now follows the same rule as everyone else: `ROSE_OW.hires?1:.82`, so the painted Rose is drawn untouched at full size (36 rows next to Grace's 39). The 0.82 stays only as the fallback for the old pixel Rose. `engine/gear.js` already expected scale 1 for painted Rose.

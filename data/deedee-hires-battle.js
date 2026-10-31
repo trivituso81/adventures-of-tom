@@ -28,6 +28,8 @@
   sp.hurtPose=P('hurt'); sp.defend=P('defend'); sp.castPose=P('cast'); sp.kneel=P('kneel');
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.runFlip=sp.run.map(mir);
+  // data/deedee-poses.js left a pixel cheer pair and idle2; the victory and level-up cheers (engine/battle-draw.js) play sp.cheer, so point both at the painted frames.
+  sp.cheer=[sp.celeb,sp.celebFlip]; sp.idle2=sp.idle;
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.deedee={scale:.8,pal:DEEDEE_HIRES.ko.pal,rows:paintRows(DEEDEE_HIRES.ko.rows.slice(),'deedeeKo','ko',true)};
   // Extra painted poses (attack sheet x_* and story sheet), baked by tools/sprite-bake/bake_deedee_extra.py. Hand points come from the bake.
