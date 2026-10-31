@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 20): two dead battle clips removed
+
+- Tom asked whether any battle voice clips are unused. Audit: every clip in `data/voice/*.js` was checked against `LINES` (same kind) and the rest of the game source (comments and the baker sample text in `data/dialog-cast.js` ignored). 458 of 460 are live; 2 were dead and are removed.
+- Removed `amy.oat_milk_please` (old line for the Almond Milk kick; the line was reworded, so the clip could never match) and `tnb.dadjoke_pottery` (the move became Throw Down, `throw_down`, so the key is gone). About 120 KB.
+- Still needs a re-bake (not new): `amy.oat_milk_please` new line, `tnb.throw_down` "I was throwing a bowl. Literally. ...Wait, come back, I have more!". Both use speech synthesis until then.
+- Done with a script that checks each file round-trips byte for byte; every other clip is unchanged. Tests: re-audit 458 of 458 live; `IDS=amy,tnb python3 tools/smoke.py` FAILS: [].
+
 ## 2026-10-31 (night, 20): Acorn Agent drawn smaller
 
 - Tom (00:27): the Acorn Agent should be smaller in the overworld and in battle. New per-monster fields in `data/oak-monsters.js`: `owScale:.7` (map; `placeMonsters` in engine/world.js sets `mscale`) and `shrink:.7` (battle; multiplies the size in `b2LayoutFoes`, engine/battle2-ui.js). Both are 70 percent; change those two numbers to tune. Only the Acorn Agent uses them, so Chairman Cheeks' summoned agents shrink too.
