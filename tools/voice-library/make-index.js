@@ -157,6 +157,56 @@ for(const it of items) if(it.v[0]==='?'){ /* listed under the speaker's own name
 // Every Justin script, battle and dialogue, carries the accent (Tom, 2026-10-31).
 const ACC='thick New York accent';
 for(const it of items) if(it.v==='justin'&&it.s){ const m=it.s.match(/^\[([^\]]*)\]\s*([\s\S]*)$/); it.s=m?(m[1].toLowerCase().includes(ACC.toLowerCase())?it.s:'['+ACC+', '+m[1]+'] '+m[2]):'['+ACC+'] '+it.s; }
+// ---------- which ability or combo a battle line belongs to (Tom, 2026-10-31) ----------
+// Every battle line whose kind is an ability key, a Tombo, a Director's Cut or a Family Finish gets it.mv = [[type, name, with]]
+// so the Voice Library can say, on the row itself, which move the clip belongs to. Names come from data/abilities.js (B8_KITS)
+// and data/battle2-data.js (B2_TOMBOS), never typed here. Kinds like hurt, low, ko, win have no move and get no label.
+const mctx={console,window:{}}; vm.createContext(mctx);
+for(const f of ['data/progress.js','data/abilities.js','data/battle2-data.js']) vm.runInContext(src(f),mctx,{filename:f});
+const KITS=vm.runInContext('B8_KITS',mctx), TOMBOS=vm.runInContext('B2_TOMBOS',mctx);
+const TB={}; for(const t of TOMBOS) TB[t.id]=t;
+const ABIL={}, PLAY={};   // ABIL[char][key] = {name,slot,rx,base}; PLAY[char][legacy play kind] = same as the Primary of that slot
+for(const ch in KITS){ ABIL[ch]={}; PLAY[ch]={};
+  for(const slot in KITS[ch]){ const e=KITS[ch][slot]; if(!e||!e.p) continue;
+    const base={name:e.p.name,slot,rx:false}; ABIL[ch][e.p.key]=base; if(e.play) PLAY[ch][e.play]=base;
+    if(e.r&&e.r.key) ABIL[ch][e.r.key]={name:e.r.name,slot,rx:true,base:e.p.name}; } }
+// Older move names that are still spoken: the move file lists its first-generation moves in slot order (basic, A1 to A5, B1 to B5),
+// and tom-moves.js (Round 3 note) names the renames. Each old kind belongs to the slot it was written for, so it takes that
+// slot's current name.
+const SLOT_ALIAS={
+  tom:{controller_tap:'basic',starter_inspection:'A1',proofing_drawer:'A2',crumb_shot:'A2',toast_negotiations:'A3',mint_unboxing:'A3',warranty_void:'A4',crumb_barrier:'A5',window_seat:'A5',five_minute_review:'B1',dpad_detour:'B2',save_sandwich:'B3',radical_solutions:'B4',patch_notes:'B5',block:'sig'},
+  boppy:{cap_check:'basic',closing_time:'A4',sensible_pepper:'B1',jar_lid_negotiations:'B5',roar:'sig'},
+  tnb:{clay_offcut:'basic',lost_found_warmth:'A3',practical_effects:'A4',clay_pigeon:'B1'}};
+const bySlot=(ch,slot)=>{ const e=slot&&KITS[ch]&&KITS[ch][slot]; return e&&e.p?{name:e.p.name,slot,rx:false}:null; };
+// A Remix move whose spoken kind is its own name (beam_dismount = Beam Dismount) is that Remix.
+const RXSLUG={}; for(const ch in KITS) for(const slot in KITS[ch]){ const e=KITS[ch][slot]; if(e&&e.r&&e.r.key){ RXSLUG[ch+'|'+e.r.name.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')]={name:e.r.name,slot,rx:true,base:e.p.name}; } }
+const LEGACY_PARTNER={decker:'rose',fetch:'nara',pier:'boppy'};
+const PARTNERS='grace|rose|amy|deedee|boppy|tnb|nara';
+const slotType=(slot,rx)=>(rx?'Remix ':'')+(slot==='basic'?'Basic move':slot==='sig'?'Signature':/6$/.test(slot)?'Ultimate':'Ability');
+function comboOf(id){ const t=TB[id]; if(!t) return null;
+  const who=t.who==='all'?'whole family':Array.isArray(t.who)?t.who.map(w=>NAMES[w]||w).join(', '):t.partner?'Tom + '+(NAMES[t.partner]||t.partner):'';
+  const type=t.tier==='ff'?(t.dc?"Family Finish, Director's Cut":'Family Finish'):t.dc?"Director's Cut, Tombo "+t.tier:'Tombo '+t.tier;
+  return [type,t.name,who]; }
+function moveOf(v,k){
+  let m;
+  if((m=k.match(/^tombo([23])?$/))&&TB[v+(m[1]||1)]) return comboOf(v+(m[1]||1));
+  if((m=k.match(/^dc([123])$/))&&TB[v+m[1]+'_dc']) return comboOf(v+m[1]+'_dc');
+  if((m=k.match(/^(ff|dcff)([1-4])$/))) return comboOf('ff'+m[2]+(m[1]==='dcff'?'_dc':''));
+  if((m=k.match(new RegExp('^tombo('+PARTNERS+'|decker|fetch|pier)([23])?$')))){ const p=LEGACY_PARTNER[m[1]]||m[1]; return comboOf(p+(m[2]||1)); }
+  if((m=k.match(new RegExp('^dc('+PARTNERS+')([123])(ow)?$')))) return comboOf(m[1]+m[2]+'_dc');
+  if(k==='ymamot') return comboOf('amy2');                       // Grace's line inside Amy and Tom's Ymamot Creation
+  if(k==='foot_tap_tap') return ['Ability','Foot Tap','Justin'];  // spoken by the girls inside Justin's Foot Tap
+  const A=ABIL[v]||{}, P=PLAY[v]||{};
+  let a=A[k]||P[k]||bySlot(v,SLOT_ALIAS[v]&&SLOT_ALIAS[v][k])||RXSLUG[v+'|'+k];
+  if(!a){ let best=''; for(const key in A) if(k.startsWith(key+'_')&&key.length>best.length) best=key; if(best) a=A[best]; }   // Justin: loose_wire_spot belongs to loose_wire
+  if(!a&&/_ult$/.test(k)) return null;
+  return a?[slotType(a.slot,a.rx),a.name,a.rx?'Remix of '+a.base:'']:null;
+}
+const unresolved=new Map();
+for(const it of items){ if(it.t!=='b'||it.ty!=='b') continue;
+  const mv=[]; for(const k of it.k){ const r=moveOf(it.v,k); if(r){ if(!mv.some(x=>x[0]===r[0]&&x[1]===r[1])) mv.push(r); } else if(!/^(hurt|low|ko|win|attack|flashback|introshout|tombo[23]?|dc[123]|basic)$/.test(k)) unresolved.set(it.v+'.'+k,1); }
+  if(mv.length) it.mv=mv; }
+console.log('lines labelled with a move:',items.filter(x=>x.mv).length,'| kinds with no move found:',[...unresolved.keys()].join(' ')||'none');
 items.forEach((it,i)=>it.i=i);
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }

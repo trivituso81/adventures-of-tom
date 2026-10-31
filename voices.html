@@ -51,6 +51,9 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
 .tag{font-size:11px;padding:1px 7px;border-radius:9px;border:1px solid #3a3566;color:#b9b3e6}
 .tag.phone{color:#ffd34d;border-color:#8f7637}
 .tag.none{color:#ff8b97;border-color:#7a3a44}
+.tag.mv{color:#9ef0c4;border-color:#3f8f6c;background:#17332a;font-weight:600}
+.tag.mv i{font-style:normal;font-weight:400;opacity:.8}
+.tag.mv.combo{color:#ffb3e0;border-color:#9a4a7e;background:#341a2c}
 .play{flex:none;width:44px;height:44px;border-radius:50%;background:#3a3566;font-size:15px;padding:0;min-height:0}
 .play.on{background:#ffd34d;color:#241b00}
 .edit{margin-top:10px;display:flex;flex-direction:column;gap:8px}
@@ -277,7 +280,7 @@ function passShow(it){ if(F.show==='phone') return !!localFor(it); if(F.show==='
 function lev(a,b){ if(Math.abs(a.length-b.length)>2) return 9; let p=[...Array(b.length+1).keys()];
   for(let i=1;i<=a.length;i++){ const c=[i]; for(let j=1;j<=b.length;j++) c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1)); p=c; } return p[b.length]; }
 const SEARCHTXT=new Map();
-function hay(it){ let h=SEARCHTXT.get(it); if(!h){ const s=[it.x,whoName(it),it.w||'',it.t==='b'?it.k.join(' '):'',it.s||'',it.p||''].join(' ').toLowerCase().replace(/[’']/g,'');
+function hay(it){ let h=SEARCHTXT.get(it); if(!h){ const s=[it.x,whoName(it),it.w||'',it.t==='b'?it.k.join(' '):'',(it.mv||[]).map(m=>m.join(' ')).join(' '),it.s||'',it.p||''].join(' ').toLowerCase().replace(/[’']/g,'');
   h={s,words:[...new Set(s.split(/[^a-z0-9]+/).filter(w=>w.length>2))]}; SEARCHTXT.set(it,h); } return h; }
 let QMEMO={q:null,m:new Map()};
 function passQ(it){ const q=F.q.trim().toLowerCase().replace(/[’']/g,''); if(!q) return true;
@@ -310,11 +313,14 @@ function toggle(g,v){
 }
 
 // ---------- list ----------
+// Which ability or combo a clip belongs to (it.mv = [[type, name, with]], built by tools/voice-library/make-index.js).
+const isCombo=m=>/Tombo|Family Finish|Director/.test(m[0]);
+function mvTags(it){ return it.mv.map(m=>'<span class="tag mv'+(isCombo(m)?' combo':'')+'" title="'+esc(it.k.join(', '))+'">'+esc(m[0].toUpperCase())+': '+esc(m[1])+(m[2]?' <i>('+esc(m[2])+')</i>':'')+'</span>').join(''); }
 function rowHtml(it){
   const key=lk(it), open=openKey===key, loc=localFor(it), dog=isDog(it);
   let h='<div class="row'+(open?' open':'')+'" data-k="'+esc(key)+'">';
   if(selMode) h+='<input type="checkbox" class="pick" data-act="sel"'+(SEL.has(key)?' checked':'')+'>';
-  h+='<div class="body"><div class="meta"><b>'+esc(whoName(it))+'</b>'+(it.t==='b'?'<span class="tag">'+esc(it.k[0])+(it.k.length>1?' +'+(it.k.length-1):'')+'</span>':'')+
+  h+='<div class="body"><div class="meta"><b>'+esc(whoName(it))+'</b>'+(it.t==='b'?(it.mv?mvTags(it):'<span class="tag">'+esc(it.k[0])+(it.k.length>1?' +'+(it.k.length-1):'')+'</span>'):'')+
      (it.c.length?'<span class="tag">'+it.c.map(n=>n===21?'Bonus':'Ch '+n).join(', ')+'</span>':'')+(it.w&&it.t==='d'?'<span>'+esc(it.w)+'</span>':'')+
      (loc?'<span class="tag phone">phone take</span>':'')+(it.f<0&&!loc?'<span class="tag none">'+(it.nv?'no clip · no voice yet':'no clip')+'</span>':'')+'</div>';
   // The text box IS the line: what ElevenLabs reads (or Nara's sound description). Edits save as you type and drive every new take.
