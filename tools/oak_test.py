@@ -1,4 +1,4 @@
-# Inside the Old Oak plate (art/oak.webp, map id oak, Los Angeles): every object is touchable from a walkable tile, no NPC or monster stands
+# Inside the Old Oak plate (the 2026-10-31 repaint, art/oak.webp, map id oak, Los Angeles): every object is touchable from a walkable tile, no NPC or monster stands
 # on a blocked tile, the bottom stairs and every walk-map island are reachable from the spawn, the ladder gap holds until Nara has ridden the
 # bucket and then opens the way up, the exits are walked with real keys.
 # Shots: tools/shots/oak-*.png.   Usage: python3 tools/oak_test.py
@@ -47,15 +47,15 @@ with sync_playwright() as pw:
     r=pg.evaluate(REACH); print(r)
     print('island:',r['island'],'bad objects:',r['badObjects'])
     check('every object touchable',not r['badObjects']); check('no NPC or monster on a blocked tile',not r['npcBad'])
-    above=set(['11,0','12,0','10,1','11,1','12,1','13,1','10,3','11,3','12,3','13,3'])
+    above=set(['11,0','12,0','11,1','12,1','10,2','11,2','12,2','13,2'])
     check('every walkable tile below the ladder gap is reachable from the spawn',not [t for t in r['island'] if t not in above])
-    check('only the top bridge and the middle bridge are cut off before the ladder',set(r['island'])==above)
+    check('only the crown landing and the sky opening above the shaft are cut off before the ladder',set(r['island'])==above)
     check('bottom stairs reachable',pg.evaluate("()=>{const m=worlds.oak; return [[11,19],[12,19]].every(([x,y])=>m.portals.has(x+','+y));}"))
     # the way up is shut until the ladder is down
-    check('ladder gap is solid before the ladder',pg.evaluate("()=>{const m=worlds.oak; return [[12,2],[12,4],[12,5]].every(([x,y])=>m.solid[y*m.w+x]===1);}"))
+    check('ladder gap is solid before the ladder',pg.evaluate("()=>{const m=worlds.oak; return [[11,3],[12,3],[11,4],[12,4],[11,5],[12,5]].every(([x,y])=>m.solid[y*m.w+x]===1);}"))
     check('top exit not reachable before the ladder',pg.evaluate("()=>{const m=worlds.oak; const W=m.w; const seen=new Set([m.spawn.x+','+m.spawn.y]),q=[[m.spawn.x,m.spawn.y]]; while(q.length){const [x,y]=q.shift(); for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=nx+','+ny; if(nx>=0&&ny>=0&&nx<W&&ny<m.h&&!seen.has(k)&&m.solid[ny*W+nx]===0){seen.add(k);q.push([nx,ny]);}}} return !seen.has('12,0')&&!seen.has('11,0');}"))
     pg.evaluate("()=>{ worlds.oak.npcs=worlds.oak.npcs.filter(n=>!n.monster); }")   # no monster walks up and starts a fight during the key tests
-    for n,(x,y,d) in {'stairs':(11,18,'up'),'floor':(8,13,'up'),'tea':(7,13,'up'),'rightfloor':(18,14,'up'),'walkway':(17,6,'up'),'stairsright':(22,10,'down'),'bridge3':(12,6,'up'),'warlane':(4,5,'up'),'warlane2':(8,5,'right'),'pulley':(16,5,'right'),'pantry':(20,6,'up')}.items():
+    for n,(x,y,d) in {'stairs':(11,18,'up'),'floor':(8,13,'up'),'tea':(7,13,'up'),'rightfloor':(18,14,'up'),'walkway':(17,5,'up'),'stairsright':(22,10,'down'),'bridge3':(12,6,'up'),'warlane':(4,5,'up'),'warlane2':(8,5,'right'),'pulley':(20,5,'right'),'pantry':(19,6,'up')}.items():
         stand(pg,x,y,d); shot(pg,n)
     # out the bottom stairs
     stand(pg,11,17,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(1500); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(1800); skip_intro(pg)
@@ -66,15 +66,15 @@ with sync_playwright() as pw:
     # the corkboard starts the board scene; the bucket answers (it needs Nara in the party)
     stand(pg,4,5,'up'); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
     check('corkboard starts the board scene',pg.evaluate("()=>!!flag('ch6-board')")); skip_intro(pg)
-    stand(pg,16,5,'right'); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    stand(pg,20,5,'right'); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
     check('bucket answers',pg.evaluate("()=>dialog.active")); skip_intro(pg)
     # the ladder scene lowers the ladder
     pg.evaluate("()=>{ playScene('ch6Ladder'); }"); pg.wait_for_timeout(500); skip_intro(pg,900)
     check('ladder scene lowers the ladder',pg.evaluate("()=>!!worlds.oak.ladderDown"))
     # lower the ladder (flag + map) and check the way up
     pg.evaluate("()=>{ setFlag('ch6-board',true); setFlag('ch6-ladder',true); ch6LowerLadder(); storyWorld(); }"); pg.wait_for_timeout(500)   # idempotent
-    stand(pg,12,6,'up'); shot(pg,'ladder-bottom'); stand(pg,12,3,'up'); shot(pg,'ladder-mid'); stand(pg,12,1,'up'); shot(pg,'ladder-top')
-    check('ladder opens the way up',pg.evaluate("()=>{const m=worlds.oak; return [[12,2],[12,4],[12,5]].every(([x,y])=>m.solid[y*m.w+x]===0);}"))
+    stand(pg,12,6,'up'); shot(pg,'ladder-bottom'); stand(pg,12,4,'up'); shot(pg,'ladder-mid'); stand(pg,12,1,'up'); shot(pg,'ladder-top')
+    check('ladder opens the way up',pg.evaluate("()=>{const m=worlds.oak; return [[11,3],[12,3],[11,4],[12,4],[11,5],[12,5]].every(([x,y])=>m.solid[y*m.w+x]===0);}"))
     check('top exit reachable after the ladder',pg.evaluate("()=>{const m=worlds.oak; const W=m.w; const seen=new Set([m.spawn.x+','+m.spawn.y]),q=[[m.spawn.x,m.spawn.y]]; while(q.length){const [x,y]=q.shift(); for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=nx+','+ny; if(nx>=0&&ny>=0&&nx<W&&ny<m.h&&!seen.has(k)&&m.solid[ny*W+nx]===0){seen.add(k);q.push([nx,ny]);}}} return seen.has('12,0')&&seen.has('11,0');}"))
     pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,12,6,'up'); shot(pg,'landscape')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)

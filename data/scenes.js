@@ -2141,10 +2141,12 @@ function ch6SealDoor() {
   for(const x of [12,13]) { const k=key(x,4); if(M.portals.has(k)) { M.sealedDoor.set(k,M.portals.get(k)); M.portals.delete(k); } M.solid[4*M.w+x]=1; }
   M.mini=null;
 }
-// The rope ladder up the middle of the Old Oak (the gap in column 12, rows 2, 4 and 5, between the top bridge, the middle bridge and the
-// war room bridge; the `ladder` cells in the oak spec) comes down once Nara rides the bucket. It is drawn live over the painting (below).
+// The rope ladder up the middle of the Old Oak (the shaft in columns 11 and 12, rows 3 to 5, between the crown landing and the middle landing;
+// the `ladder` cells in the oak spec) comes down once Nara rides the bucket. It is drawn live over the painting (below).
 function ch6LowerLadder() {
   const M=worlds.oak; if(!M||M.ladderDown) return;
+  const gap=M.objects.find(o=>o.kind==='oakgap');   // the "drop" sign above the middle landing goes once there is a ladder
+  if(gap) { M.objects.splice(M.objects.indexOf(gap),1); for(let y=gap.y;y<gap.y+gap.h;y++) for(let x=gap.x;x<gap.x+gap.w;x++) M.objectAt.delete(key(x,y)); }
   for(const [x,y] of (M.spec&&M.spec.ladder)||[]) tile(M,x,y,'ladder');
   M.ladderDown=true; M.mini=null;
 }
@@ -2236,22 +2238,31 @@ pressAction=function() {
   }
   return LE_pressAction_ch6();
 };
-// The Old Oak is painted and lit by its own lanterns, so the dark is a soft pool around Tom, not a blackout. Once Nara has lowered the
-// ladder it is drawn live over the painting: a rope ladder from the top bridge down to the war room bridge, swaying a little.
+// The Old Oak is painted and lit by its own lanterns, so the dark is a soft pool around Tom, not a blackout. In chapter 6 one soft golden pulse always
+// marks the next thing to do: the corkboard, then the bucket, then the hooks above the shaft. Once Nara has lowered the ladder it is drawn live over the
+// painting: a rope ladder from the hooks on the crown landing down to the middle landing, swaying a little.
 STORY_MAPFX.push(time=>{
   const M=currentMap; if(M.id!=='oak') return;
   const p=position(player),px=(p.x+.5)*T,py=(p.y+.5)*T,c=gfx;
   const g=c.createRadialGradient(px,py,T*3,px,py,T*9); g.addColorStop(0,'rgba(20,12,6,0)'); g.addColorStop(1,'rgba(20,12,6,.32)');
   c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
+  if(STORY.mode==='full'&&STORY.chapter===6&&!flag('ch6-boss')) {
+    const t=!flag('ch6-board')?[5.8,2.2,2.3]:!flag('ch6-ladder')?[23,4.3,1.5]:[11.95,2.7,2.0];   // x, y (tiles), radius
+    const k=.5+.5*Math.sin(time*3.2),r=t[2]*T*(.92+.14*k),gx=t[0]*T,gy=t[1]*T;
+    const h=c.createRadialGradient(gx,gy,0,gx,gy,r); h.addColorStop(0,'rgba(255,226,140,'+(.34+.3*k)+')'); h.addColorStop(.55,'rgba(255,196,90,'+(.14+.14*k)+')'); h.addColorStop(1,'rgba(255,190,80,0)');
+    c.save(); c.globalCompositeOperation='lighter'; c.fillStyle=h; c.fillRect(gx-r,gy-r,r*2,r*2); c.restore();
+    for(let i=0;i<4;i++) { const a=time*.9+i*1.57,q=.5+.5*Math.sin(time*4+i*2.1); c.globalAlpha=.35+.5*q; rect(Math.round(gx+Math.cos(a)*r*.55)-1,Math.round(gy+Math.sin(a)*r*.4)-1,3,3,'#fff1b8'); }
+    c.globalAlpha=1;
+  }
   if(!M.ladderDown) return;
-  const cx=12.5*T,half=.3*T,top=1.75*T,bot=6.3*T,sway=Math.sin(time*1.3)*.04*T;
+  const cx=11.95*T,half=1.0*T,top=2.7*T,bot=6.15*T,sway=Math.sin(time*1.3)*.04*T;
   // This draws over the actors, so it fades out where the party is climbing, otherwise the rungs would hide them.
-  const climbers=[player,...followers].map(a=>position(a)).filter(q=>Math.abs(q.x-12)<.7).map(q=>[(q.y+1)*T-1.7*T,(q.y+1)*T+2]);
+  const climbers=[player,...followers].map(a=>position(a)).filter(q=>Math.abs(q.x-11.5)<1.1).map(q=>[(q.y+1)*T-1.7*T,(q.y+1)*T+2]);
   const fade=y=>climbers.some(([a,b])=>y>=a&&y<=b)?.12:1;
   for(const s of [-1,1]) for(let y=top;y<bot;y+=4) { gfx.globalAlpha=fade(y); rect(cx+s*half-1+sway*.4,y,4,4,'#2b1d12'); rect(cx+s*half+sway*.4,y,2,4,'#d9bd8a'); }
   for(let y=top+.12*T;y<bot-.05*T;y+=.26*T) { const sw=sway*(1-(y-top)/(bot-top)*.6); gfx.globalAlpha=fade(y); rect(cx-half+sw*.4,y,half*2+2,4,'#2b1d12'); rect(cx-half+sw*.4,y+1,half*2+2,2,'#b98a52'); }
   gfx.globalAlpha=1;
-  rect(cx-half-3,top-3,half*2+8,6,'#2b1d12'); rect(cx-half-2,top-2,half*2+6,3,'#8a8f98');   // the hooks on the top bridge
+  rect(cx-half-3,top-3,half*2+8,6,'#2b1d12'); rect(cx-half-2,top-2,half*2+6,3,'#8a8f98');   // the hooks on the crown landing
 });
 
 // Tips for the chapter 6 story fights and Chairman Cheeks.

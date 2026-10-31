@@ -8,7 +8,7 @@ PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stageset={src:'art/stageset.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.oakpark={src:'art/oakpark.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stage7={src:'art/stage7.webp?v=20261029',px:64,img:null,ready:false};
-PLATES.oak={src:'art/oak.webp?v=20261029',px:64,img:null,ready:false};
+PLATES.oak={src:'art/oak.webp?v=20261031',px:64,img:null,ready:false};
 PLATES.crown={src:'art/crown.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.lofts={src:'art/lofts.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 PLATES.loftlobby={src:'art/loftlobby.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
