@@ -1,3 +1,11 @@
+## 2026-10-31 (day, 21): Loose Wire keeps its distance and zaps for real (`lwire1`)
+
+- Tom (16:43): Justin gets too close to the enemy when applying the loose wire, and the electric effect should be much bigger.
+- Distance: he now stops 84 px from the foe's edge (was 36), so there is a clear gap between him and the foe at the jab.
+- Electric effect: a forked lightning arc (`jv_arc`, wide blue glow, white core, two yellow forks, redrawn jagged every frame) now travels from the copper in his hand to the foe, a second arc follows 130 ms later, plus a short white-blue screen flash (`jv_flash`), a blue spark burst and a bigger impact ring on the foe, and shock crackle arcs around Justin when it bites him back (`jv_crackle`, with the existing ZZT).
+- Naming note: `jv_bolt` already belongs to the vertical sky bolt later in `engine/justin-moves.js`, so the new arc is `jv_arc`.
+- Tested: frame burst captured inside the page across the strike and looked at (arc, flash, ring and crackle all visible), `kit_test.py justin` for all nine moves, `IDS=justin smoke.py` no fails. Not played on the phone. Stamp `build lwire1`.
+
 ## 2026-10-31 (day, 20): Justin's redo props: wall, standing drywall sheet, debris (`jprops2`)
 
 - Tom (16:35): the redo sheet came back (`tools/sprite-bake/src/props/justin-sheet2.png`), all 5 cells matched: basement wall, standing drywall sheet with four screws, drywall chunk, splintered stud, dust puff. Baked to `art/props/justin/`.
