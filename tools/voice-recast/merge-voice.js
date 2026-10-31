@@ -14,7 +14,7 @@ const ff=(af,sr,br,b64)=>{fs.writeFileSync(tmp+'/i.mp3',Buffer.from(b64,'base64'
   cp.execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',tmp+'/i.mp3',...(af?['-af',af]:[]),'-ac','1','-ar',sr,'-c:a','libmp3lame','-b:a',br,tmp+'/o.mp3']);
   return fs.readFileSync(tmp+'/o.mp3').toString('base64');};
 const out={battle:{replaced:0,added:0},dialogue:{}};
-const FAM=['tom','grace','rose','amy','deedee','boppy','tnb'];
+const FAM=['tom','grace','rose','amy','deedee','boppy','tnb','justin'];
 const bc=(J.clips||{})[VOICE];
 if(FAM.includes(VOICE)&&bc){
   eval(strip(fs.readFileSync(DATA+'/voice-clips.js','utf8'))+';global.VC=VOICE_CLIPS;');

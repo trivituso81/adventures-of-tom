@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 15): Justin recast page (deeper, thick New York accent, a direction per line)
+
+- Tom (14:56): no accent in the justinv1 takes, dialogue directions all "natural", voice should be deeper. Fact: the accent and pitch come from the ElevenLabs voice itself; the AoT Justin voice was designed with a "slight country twang", so a bracket tag cannot add a Long Island accent to it. Decision: recast.
+- `tools/voice-recast/build-justin.js` builds `justin-recast.html` from the live repo (same page as the Deedee and Ellie recast): voice description asks for a deep chest voice and a thick Nassau County accent (dropped Rs, aw vowels, no twang), every one of his 75 lines (48 battle, 23 dialogue, 4 recruit) has its own hand-written direction, and the page puts the accent into every bracket. The old voice is not deleted (Kenji shares it). Merge the export with `node tools/voice-recast/merge-voice.js recast.json data out1 justin` (FAM now includes justin).
+- The 27 dialogue directions also went into the Voice Library (`tools/voice-library/scripts/justin-dialogue.json`, index rebuilt), so his dialogue rows no longer read "natural, conversational".
+
 ## 2026-10-31 (day, 14): Justin's voice is in the game (`justinv1`)
 
 - Tom (14:25) sent `local-clips-export_4.json` (139 clips). 68 were already in the repo (the clips1 and amyv1 takes, re-encoded, so skipped). The 71 new ones are all Justin, made in the Voice Library at 14:24 with the thick New York accent scripts: 48 battle lines into the new `data/voice/justin.js` (every kit beat, join, greet, hurt, low, ko, win; `basic` and `loose_wire` each keep their clip) and his 23 dialogue lines into `data/voice/dialog-ch28.js` (silence trimmed, mono 32 kHz 48 kbps; loaded last, so these accented takes win over the old chapter 1 ones). Voice settings for `battle|justin` (AoT Justin, direction thick New York accent, scripts) are in `data/voice-clips.js`.
