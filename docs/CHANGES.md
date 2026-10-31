@@ -1,3 +1,7 @@
+## 2026-10-31 (day, 24): standing recipe for new characters and ability pose sheets (docs only)
+
+- Tom (17:56): he was rewriting the image prompt every time. `docs/CHARACTER_PIPELINE.md` now holds it: spec from a photo, the three standard sheets (one large hero pose, 3 x 3 walk, 4 x 4 battle), the ability poses rule (4 to 7 poses, keep critical frames, about 2 lines), prompt templates and the install steps. Standing rule added to CLAUDE.md. No game code changed, no stamp change.
+
 ## 2026-10-31 (day, 23): Justin's nine abilities trimmed to 4 to 7 poses each (`jtrim1`)
 
 - Tom (17:25, approved): Justin's abilities had far more frames than the other characters, with long prep and aftermath. Cut each move to its critical poses and held them longer.

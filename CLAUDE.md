@@ -45,6 +45,10 @@ Tom is redoing every Long Island outdoor area (Square, Rivituso Row, Grump Hollo
 
 Justin (Amy's husband) is becoming a party member. Tom will drop a zip of his painted battle and ability animation sheets into a conversation, often with no words. That means "install Justin with his kit". Follow `docs/JUSTIN_ABILITIES.md`: it holds the approved kit (moves, MP, lines, special), the frame keys for every sheet, and the install steps (bake, party data, `engine/justin-moves.js`, recruiting at GREGORI, tests, push). Never ask him to unpack, rename or resize anything.
 
+## New characters and ability pose sheets (standing rule, 2026-10-31)
+
+When Tom gives a photo of a new character, or asks for poses for an ability, do not ask him to describe the image prompt requirements and never make him rewrite them. Follow `docs/CHARACTER_PIPELINE.md`: write the character spec from the photo, then the three standard prompts (ONE large full-body hero pose, a 3 x 3 walking sheet, a 4 x 4 standard battle sheet), and for any ability a sheet of **4 to 7 poses only** (keep the critical frames, no walking in or out, no prep or aftermath filler, about 2 spoken lines, painted props only when held, effects left to the game). Send the prompts as files, hero pose first. When the sheets come back, install them per section 6 of that doc.
+
 ## How to work
 
 1. Read only the files the task needs. The repo is large (`engine/battle2-kind.js` alone is 400 KB). Use search to find the section; do not open whole files.
