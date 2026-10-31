@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 28): Konami Code voice now lands on the button presses
+
+- Tom reported the Konami Code voice lags. Two causes: the line "Up, up, down, down, left, right, left, right, B, A!" started at the very beginning of the move, about 1.1 s before the first button press and finished before the last one; and the clip was decoded the first time it played, which can be late on a phone.
+- Fix (`engine/tom-moves.js`, `Tm.konami_code`): the clip is pre-decoded (`warmLine`) at the start of the move, the voice starts 1.1 s later, and each of the ten presses lands on its own word (`WORD`, measured onsets inside the baked clip, scaled by battle speed). No spoken line reworded, so the baked clip still plays.
+- Measured in a headless run: press minus word onset is 2 to 37 ms at 1x and 24 to 143 ms at 2x. The move runs about 150 ms longer at 1x. Contact sheet checked.
+- Tests: `kit_test.py tom --only=konami_code --speed2` 0 fails, `smoke.py` and `IDS=tom smoke.py` 0 fails. Tags `tom-moves.js?v=kv1`, `main.js?v=kv1`, title stamp `build kv1`. Not played on phone; the live site was not checked from here.
+
 ## 2026-10-31 (night, 27): Downtown LA repainted (v3), walk map rebuilt
 
 - Installed Tom's new Downtown LA painting (`art/blvd.webp`, 1920x1664; original saved at `docs/reference/blvd_v3_signs_from_tom.png`). Fixed camera, skyline with City Hall, Griffith Observatory and Angels Flight, each shop with its own sign style.
@@ -6,7 +13,6 @@
 - The arch posts and board are a walk-behind layer (`PLATE_BEHIND.blvd`, `engine/plate.js`): Tom walks behind the posts and under the board. First pass-under object on this map.
 - Taco truck, bus shelter, Metro canopy and the taxi are interactive objects on the painted spots. The taxi tiles in front of the cab door walk like open floor.
 - Tests: `tools/reach_test.py blvd` 0 fails; `tools/blvd_test.py` updated to the new tiles, all pass except the old `BG_FILES` page error that also fails before this change; smoke and camera clamp pass. Screenshots in `tools/shots/blvd-*.png`. Not played on phone yet.
-
 
 ## 2026-10-31 (night, 26): Nickel is back behind her counter
 

@@ -1176,7 +1176,10 @@ SC.tv_drop=(s,u)=>{ const q=ez(u/.25),sq=u>.25&&u<.45?1-Math.sin((u-.25)/.2*Math
 SC.tv_1up=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.7); bigWord('1UP',s.x,s.y-ez(u)*26,'#7dff8a',2); };
 Tm.konami_code=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m);
   const mx=Math.round(Math.max(Gp.x1+90,Math.min(me.x-70,(Gp.x1+me.x)/2+10))),my=Math.min(310,Math.max(Gp.base,me.base)+4),dpad=mx-40,bx=mx+28,ax=mx+52;
-  const step=230,t0=1150,times=KSEQ.map((_,k)=>t0+k*step),boom=times[9]+350;
+  // Tom's baked line is voiced, so each press lands on its word: WORD is where each button word starts inside the clip (ms,
+  // measured), and every span that waits on the voice is multiplied by the battle speed SP (the timeline runs SP times faster).
+  const SP=b7Speed(),LINE='Up, up, down, down, left, right, left, right, B, A!',WORD=[30,165,400,760,1190,1420,1640,1850,2050,2250];
+  const t0=1150,times=WORD.map(w=>t0+(w-WORD[0])*SP),sayAt=t0-WORD[0]*SP,boom=times[9]+350;
   const spot=k=>{ const c=KSEQ[k]; return c==='U'?[dpad,my-8]:c==='D'?[dpad,my+8]:c==='L'?[dpad-14,my]:c==='R'?[dpad+14,my]:c==='B'?[bx,my+2]:[ax,my-2]; };
   const K=[{t:0,x:'home',y:'home',f:go(mx,me)},{t:900,x:mx+20,y:my,f:'expr'},{t:times[0]-220,x:mx+20,y:my,f:'expr',hop:22}];
   times.forEach((tt,k)=>{ const [x,y]=spot(k); K.push({t:tt,x,y:y+6,f:k%2?'act':'expr',hop:20}); });
@@ -1186,7 +1189,8 @@ Tm.konami_code=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(
   const hits={1:15,3:15,5:15,7:15};
   const presses=times.map((tt,k)=>[tt,()=>{ const o=list[k%list.length]; if(!o) return; const O=ST.unit(o); (k>=8?sfx.boing:sfx.select)(); scene('tv_drop',.7,{x:O.x,y:O.top-12,k:KSEQ[k]}); b7Later(()=>{ ST.jolt(o,.3); sfx.bonk(); },60); if(hits[k]) landHit(hits[k]); }]);
   ST.play(E2,[
-    [0,()=>{ setMessage('A giant controller unrolls on the floor. Tom has been waiting his whole life for this.'); say(m.id,'konami_code'); scene('tv_konmat',(boom+1300)/1000,{plan,back:true}); scene('tv_code',(boom+900)/1000,{plan}); }],
+    [0,()=>{ setMessage('A giant controller unrolls on the floor. Tom has been waiting his whole life for this.'); if(typeof warmLine==='function') warmLine(m.id,LINE); scene('tv_konmat',(boom+1300)/1000,{plan,back:true}); scene('tv_code',(boom+900)/1000,{plan}); }],
+    [sayAt,()=>{ say(m.id,'konami_code',0,LINE); }],
     [t0,()=>{ setMessage('Up. Up. Down. Down. Left. Right. Left. Right. B. A.'); }],
     ...presses,
     ['hf',boom],
