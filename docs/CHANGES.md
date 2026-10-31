@@ -1,3 +1,8 @@
+## 2026-10-31 (night, 24): victory celebration a little slower
+
+- Tom asked for the end-of-battle celebration to be just a little slower. The cheer pose cycle, hop and "LEVEL UP" bounce now run at 6 beats a second instead of 8 (about 25% slower), and the rising sparkles drift a bit slower to match. Applies to win cheers, level-up cheers and Nara's puddle wiggle, which share the cheer. Numbers only; the cheer lasts the same time.
+- Files: `engine/battle-draw.js?v=cel1`, `engine/main.js?v=cel1`, stamp `build cel1`.
+
 ## 2026-10-31 (night, 24): four stale Boomie clips removed
 
 - Removed the four `boomie|...` dialogue clips in `data/voice/dialog-ch2.js` ("TOM! Get over here. Hug...", "La la LAAA! Oops. A car alarm...", "You text me when you land...", "I sang in the shower this morning..."). The Boomie NPC speaks with voice `boomie2` and the same four texts are baked there; the old `boomie` takes could never play. Dialogue clips 2252 to 2248.

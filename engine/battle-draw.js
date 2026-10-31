@@ -85,7 +85,7 @@ function drawBattle() {
     const hurt=alive(m)&&m.hp/m.maxHp<=.25;
     const punching=lunge>.35||fx.punch>0;
     const twirling=fx.twirl>0,spinFrame=Math.floor(t*10)%2===1;
-    const cheering=fx.cheer>0,cheerStep=Math.floor(t*8)%4;
+    const cheering=fx.cheer>0,cheerStep=Math.floor(t*6)%4;
     if(!cheering) fx.levelUp=false;
     const cheerFrame=cheering?(sp.cheer?sp.cheer[cheerStep%sp.cheer.length]:(sp.celeb?[sp.celeb,sp.celebFlip,sp.celeb,sp.idle][cheerStep]:[sp.idle,sp.flip,sp.idle,sp.flip][cheerStep])):null;
     const dancing=twirling&&sp.celeb,danceStep=Math.floor(t*9)%8;
@@ -120,7 +120,7 @@ function drawBattle() {
     }
     if(!down&&battle.v2&&roseSeatBattle(m,i,frame,sp,fx,hurt,t)) { activeTint=null; return; }   // sitting on Tom (engine/rose-ride.js)
     const w=frame[0].length*sp.scale,h=frame.length*sp.scale;
-    let hop=cheering?Math.round(Math.abs(Math.sin(t*8))*20):dancing?Math.round(Math.abs(Math.sin(t*9))*16):(twirling?Math.round(Math.abs(Math.sin(t*9))*10):(silly?Math.round(Math.abs(Math.sin(t*10))*22):0));
+    let hop=cheering?Math.round(Math.abs(Math.sin(t*6))*20):dancing?Math.round(Math.abs(Math.sin(t*9))*16):(twirling?Math.round(Math.abs(Math.sin(t*9))*10):(silly?Math.round(Math.abs(Math.sin(t*10))*22):0));
     if(coaching) hop=Math.round(Math.abs(Math.sin(t*7))*14);
     if(burpee&&burpeeFrame===sp.celeb) hop=Math.round(Math.abs(Math.sin(t*12))*24);
     if(fx.hop>0) hop=Math.round(Math.abs(Math.sin(t*9))*18);
@@ -277,10 +277,10 @@ function drawBattle() {
     }
     if(cheering) {
       for(let k=0;k<6;k++) {
-        const ph=(t*1.6+k/6)%1,sx=cx-34+k*14+Math.round(Math.sin(t*6+k)*5),sy=y-4-Math.round(ph*52);
+        const ph=(t*1.2+k/6)%1,sx=cx-34+k*14+Math.round(Math.sin(t*4.5+k)*5),sy=y-4-Math.round(ph*52);
         gfx.globalAlpha=1-ph; label(k%2?'+':'*',sx,sy,k%3?'#ffe08a':'#fff6c8',2); gfx.globalAlpha=1;
       }
-      if(fx.levelUp) label('LEVEL UP',cx,y-26-Math.round(Math.abs(Math.sin(t*8))*6),'#ffe08a',2);   // only real level-ups; heals and Nara's wiggles reuse the cheer without it
+      if(fx.levelUp) label('LEVEL UP',cx,y-26-Math.round(Math.abs(Math.sin(t*6))*6),'#ffe08a',2);   // only real level-ups; heals and Nara's wiggles reuse the cheer without it
     }
     if(dancing) {
       const dc=['#ff9ac0','#ffe08a','#9be39a','#8fd0ff','#c9b3e6'];
