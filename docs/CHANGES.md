@@ -1,3 +1,8 @@
+## 2026-10-30 (night, 5): every Amy jump uses the new painted frame
+
+- Tom: replace any other jump animations with the new Burpee Blitz jump. In `data/amy-hires-extra-use.js` the stock frame `jump` is now the painted arms-up pose (`s13_bjump`, was `s12_jump`), and `bjump` is the same frame, so Burpee Blitz, Gold-Star Recess, Pop Quiz, Negative Split and anything else that asks Amy for `jump` get it. The old `s12_jump` art is still baked in `AMY_HIRES_X.bs` but unused. Her `leap` (sprint) pose is a different frame and was left alone.
+- Cache tag `amy-hires-extra-use.js?v=bj2`. Tests: kit_test amy burpee_blitz, kettlebell_swing, goldstar_recess, false_start, negative_split, pop_quiz (frames looked at), smoke IDS=amy clean, in-page check that `BATTLE_SPRITES.amy.jump` is the new frame.
+
 ## 2026-10-30 (night, 4): Burpee Blitz: new painted final jump
 
 - Tom's painted jump (arms up, hands clapped overhead, hair and whistle flying) replaces Amy's stretched rig jump in Burpee Blitz only. Source `tools/sprite-bake/src/amy-burpee-jump.png`, baked by `bake_amy_extra.py` as pose `s_s13_bjump` (pre-scaled so chin to soles matches her standing frame, head factor 1.6, no distortion) into `art/chars/amy-bs.webp` and `AMY_HIRES_X.bs` (`data/amy-hires-extra.js`). Registered as frame `bjump` in `data/amy-hires-extra-use.js`; the last `A.burpee_blitz` in `engine/amy-moves.js` uses `bjump` for the jump after each rep and for the final uppercut leap. Her other moves still use `jump`.
