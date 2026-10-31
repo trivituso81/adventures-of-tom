@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 6): Downtown LA: walk behind the south row (behind13)
+
+- Tom asked to walk behind the bottom-row buildings, between the taco truck and the bus shelter, and past the shelter below it. Row 14 (art y 896 to 960, the roofs' back edge) is now walkable end to end (`data/maps-la.js?v=dtla10`), joining the three alleys, so Tom walks along the back of Backlot Wardrobe, TNB's Loft, the Grand Tower and Nickel's with only his head above the roof line.
+- `PLATE_BEHIND.blvd` (`engine/plate.js?v=behind13`): four building-face zones (roof line to door row, base 1000) redraw the painting over anyone on row 14; alley walkers and doorways are untouched. The lane between truck and shelter (row 12) and the sidewalk past the shelter were already open since pass 2; row 14 adds the way round below the shelter (the bench object still blocks its own two tiles, row 13, so it can be touched).
+- Shots: `tools/blvd_behind_shots.py` spots roofW, roofGT, shelterS, lane. reach_test 0 fails; blvd_test and smoke (default, grace,rose) pass. Not played on phone.
+
 ## 2026-10-31 (day, 4): Voice Library on the phone (`vlib1`)
 
 - Tom (11:37): a way to browse and filter every existing sound and re-record any of them. New `voices.html` (title screen > ADMIN > VOICE LIBRARY): all 2,709 spoken lines (450 battle, 2,259 dialogue) with search and chip filters (Who, Battle/Dialogue, Chapter, re-recorded or not). Play hears what the game plays now; tap a line to edit its direction and make a New take (ElevenLabs) or Record my voice (speech to speech); Select for many at once. The chosen take goes into `aot-local-clips`, so the game plays it on that phone at once (`engine/local-clips.js`, unchanged); every take is kept to switch back; Export phone clips gives the usual `local-clips-export.json`.

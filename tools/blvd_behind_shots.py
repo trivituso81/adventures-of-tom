@@ -34,7 +34,7 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
   const arrivals=[[24,22],[14,10],[15,10],[28,11],[28,12],[1,5],[2,5],[20,22],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 
-SPOTS={'cabN':(22,10,'up'),'nickS':(25,22,'up'),'lampN':(8,10,'down'),'starlite':(17,9,'up'),'lampS':(7,21,'down'),'arch':(13,23,'down'),'gate':(1,4,'up'),'truck':(12,10,'down')}
+SPOTS={'cabN':(22,10,'up'),'nickS':(25,22,'up'),'lampN':(8,10,'down'),'starlite':(17,9,'up'),'lampS':(7,21,'down'),'arch':(13,23,'down'),'gate':(1,4,'up'),'truck':(12,10,'down'),'roofW':(3,14,'down'),'roofGT':(17,14,'down'),'shelterS':(12,14,'right'),'lane':(12,12,'right')}
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']

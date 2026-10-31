@@ -104,7 +104,7 @@ const LA_AREAS=[
     paths:[[0,10,29,12]],
     houseRoad:[10,22],
     // Painted plate (art/blvd.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks. DTLA v3 (2026-10-31): doors at (5,9) (10,9) (17,9) (22,9) and (4,21) (11,21) (18,21) (25,21); three one-tile walkways
-    // (cols 8, 14, 21, rows 14 to 21) join the south sidewalk (row 13) to the plaza (row 22); Griffith steps cols 1 and 2; south arch cols 13 to 16.
+    // (cols 8, 14, 21, rows 15 to 21) join the roof walk (row 14, behind the south row's roofs, `PLATE_BEHIND.blvd` building faces) and the south sidewalk (row 13) to the plaza (row 22); Griffith steps cols 1 and 2; south arch cols 13 to 16.
     plateMask:[
       '##############################',
       '##############################',
@@ -120,7 +120,7 @@ const LA_AREAS=[
       '...........####...............',
       '..............................',
       '............##................',
-      '########.#####.######.########',
+      '..............................',
       '########.#####.######.########',
       '########.#####.######.########',
       '########.#####.######.########',

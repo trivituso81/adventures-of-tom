@@ -201,6 +201,9 @@ blvd:[
   {x:165,y:1240,w:297,h:60,base:1410,fg:true},{x:612,y:1238,w:283,h:62,base:1410,fg:true},{x:1488,y:1240,w:302,h:65,base:1410,fg:true},
   // taco truck: the sidewalk is behind it
   {x:708,y:641,w:256,h:145,base:780,fg:true},
+  // the four south-row building faces, roof to door row (plain painting slices: the faces are solid). base 1000 so only row 14, the
+  // walk behind the roofs, is covered; alley walkers (rows 15 to 20) and doorways are not.
+  {x:145,y:905,w:367,h:503,base:1000},{x:598,y:905,w:324,h:503,base:1000},{x:960,y:898,w:410,h:510,base:1000},{x:1448,y:925,w:344,h:483,base:1000},
   // 12 lamp posts (six on the north curb, six in the plaza), head to foot
   {x:151,y:464,w:68,h:206,base:658,fg:true},{x:173,y:529,w:68,h:199,base:716,fg:true},{x:491,y:529,w:68,h:199,base:716,fg:true},{x:786,y:534,w:68,h:134,base:656,fg:true},{x:946,y:521,w:68,h:207,base:716,fg:true},{x:1241,y:536,w:68,h:192,base:716,fg:true},{x:88,y:1254,w:68,h:214,base:1456,fg:true},{x:450,y:1254,w:68,h:214,base:1456,fg:true},{x:553,y:1254,w:68,h:214,base:1456,fg:true},{x:958,y:1254,w:68,h:210,base:1452,fg:true},{x:1331,y:1264,w:68,h:200,base:1452,fg:true},{x:1798,y:1259,w:68,h:158,base:1452,fg:true},
   // cutouts from art/blvd-fg.webp (tools/make_blvd_fg.py): palms, bushes, planters in the plaza ...
