@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 5): Shopkeepers stand behind their counters (`counter1`)
+
+- Tom (11:49): people behind store counters need to sit properly behind the counter. Penny (Long Island shop) and Nickel (Nickel's, Downtown LA) were drawn standing on top of the counter. Each counter is now a cutout (`art/shop-fg.webp`, `art/nickels-fg.webp`, made by `tools/make_counter_fg.py`) drawn over the shopkeeper through `PLATE_BEHIND.shop` and `.nickels` in `engine/plate.js`, so the counter top and front hide her legs.
+- Penny moved one tile left (8 to 7) to clear the pencil cup and register; both shopkeepers got `lift:-4` (a few pixels lower). Other clerks (bakery, tea, coffee, ramen, juice bar, post, taxi) already stand on the customer side of their counters, so they were not changed.
+- Tested: `rooms_test.py shop nickels`, smoke (default and grace,rose). Tags `?v=counter1` on `maps-le.js`, `maps-la.js`, `plate.js`; stamp `build counter1`. Not tried on the phone yet.
 ## 2026-10-31 (day, 7): Ymamot Creation: pinned time banner, Flashback! shout, kid voices (`ymamot1`)
 
 - Tom (11:41): in Ymamot Creation the time banner stays fixed at the top for the whole flashback, with much larger art in the game's style, little Amy speaks in Grace's voice, little Tom in an existing voice, and Tom and Amy shout "Flashback!" together before the move starts.

@@ -226,6 +226,10 @@ PLATE_BEHIND.stacks=[
   {x:696,y:468,w:55,h:201,base:666,fg:true},{x:653,y:516,w:50,h:133,base:648,fg:true},
   {x:1013,y:526,w:136,h:135,base:658,fg:true},{x:1171,y:471,w:58,h:200,base:666,fg:true},{x:1219,y:516,w:69,h:122,base:640,fg:true}
 ];
+// SHOP COUNTERS (2026-10-31): Penny (shop) and Nickel (nickels) stand behind their counters. art/<room>-fg.webp (tools/make_counter_fg.py) holds only the
+// painted counter, drawn over the shopkeeper so the top and front hide her legs. Rect zones in art px (64 per tile); base = the counter's front edge.
+PLATE_BEHIND.shop=[{x:255,y:296,w:502,h:152,base:448,fg:true}];
+PLATE_BEHIND.nickels=[{x:305,y:255,w:430,h:155,base:410,fg:true}];
 function plateWalkBehind(map,plate) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
   const s=T/64, list=[...map.npcs,...followers,player];
@@ -248,7 +252,7 @@ function plateWalkBehind(map,plate) {
     if(z.pts) { z.pts.forEach((q,i)=>i?ctx.lineTo(q[0]*s,q[1]*s):ctx.moveTo(q[0]*s,q[1]*s)); ctx.closePath(); }
     else if(z.cx!==undefined) ctx.ellipse(z.cx*s,z.cy*s,z.rx*s,z.ry*s,0,0,Math.PI*2); else ctx.rect(z.x*s,z.y*s,z.w*s,z.h*s);
     ctx.clip();
-    if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031e'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
+    if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031f'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
     else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
     ctx.restore();
   }

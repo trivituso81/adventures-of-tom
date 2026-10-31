@@ -983,7 +983,7 @@ const LA_ROOMS=[
       '######....######'],
     npcs:[
       // The painting has no people, so Nickel's own sprite stands behind the counter, left of the register. A on the counter opens the shop.
-      {name:'Nickel',x:7,y:4,look:'nickel',shopkeeper:true,roam:0,shopLines:NICKEL,shopName:"Nickel's",lines:[]}],
+      {name:'Nickel',x:7,y:4,look:'nickel',shopkeeper:true,roam:0,lift:-4,shopLines:NICKEL,shopName:"Nickel's",lines:[]}],
     objects:[
       ['counter',5,4,7,2,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. NO, WE DO NOT VALIDATE.',{variant:'letters',shop:true}],
       ['shelf',13,2,3,6,'Snack shelf','Juice boxes, picnic baskets, and a very expensive bottle of water.'],

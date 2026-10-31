@@ -1340,7 +1340,7 @@ const LE_ROOMS=[
       '######....######',
       '################'],
     npcs:[
-      {name:'Penny',x:8,y:4,look:'penny',shopkeeper:true,roam:0,lines:[]}],
+      {name:'Penny',x:7,y:4,look:'penny',shopkeeper:true,roam:0,lift:-4,lines:[]}],
     objects:[
       ['counter',4,4,8,3,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. BROWSE. MOSTLY BUY.',{variant:'letters',shop:true}],
       ['shelf',1,1,3,5,'Gear shelf','Folded sweaters, tiny leotards and one fishing vest with twelve pockets.'],
