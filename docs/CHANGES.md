@@ -1,3 +1,9 @@
+## 2026-10-31 (night, 29): TNB's Throw Down wheel shrunk to fit him (`tnbw1`)
+
+- Tom: the wheel in Throw Down did not fit TNB, make it smaller and check the proportions. The painted pottery wheel was drawn at 1.5x and stood as tall as TNB. It is now 0.9x (`TW_S` in engine/tnb-moves.js), so the wheel head sits about at his chest while he kneels. The clay, the bowl and the water spray scale with it.
+- Moved to match: TNB kneels closer to the wheel, the bowl launches from the new wheel head, the JUST A TAP / TOO FAST / WHOOPS words sit lower, FASTER moved to the left of the wheel so it no longer collides with WHOOPS, and the flying bowl is smaller (still bigger than a bowl on the wheel head so it reads). The bowl that lands on the enemy's head is unchanged. Numbers and spoken lines unchanged.
+- Tests: `kit_test.py tnb --only=throw_down --speed2` frames checked, smoke runs 0 fails (default, grace+rose, tnb). Tags `tnb-moves.js?v=tnbw1`, `main.js?v=tnbw1`, title stamp `build tnbw1`. Not played on phone; the live site was not checked from here.
+
 ## 2026-10-31 (night, 28): Konami Code voice now lands on the button presses
 
 - Tom reported the Konami Code voice lags. Two causes: the line "Up, up, down, down, left, right, left, right, B, A!" started at the very beginning of the move, about 1.1 s before the first button press and finished before the last one; and the clip was decoded the first time it played, which can be late on a phone.

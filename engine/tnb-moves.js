@@ -1042,6 +1042,7 @@ SC.t3n_pun=(s,u)=>{ const P=s.plan; for(let k=0;k<4;k++) { const q=cl(u*1.6-k*.1
 SC.t3n_lean=(s,u)=>{ const q=u<.2?ez(u/.2):u>.85?1-ez((u-.85)/.15):1; lift(s.f,-q*4,-q*.22,-q*26); };
 // ---- Throw Down, take two (Tom's feedback 2026-10-28): he throws a bowl on the wheel, the wheel spins out of control, and the bowl
 // flies off and lands on the enemy's head. "Throwing a bowl. Literally." Numbers unchanged.
+const TW_S=.9;   // Throw Down wheel, clay and bowl scale (was 1.5: the wheel stood as tall as TNB; a real wheel is about waist height)
 const wheelHead=(ang,speed)=>{ // wheel head ellipse at (0,-54): grooves, plus spin marks that smear when fast
   EO(0,-54,19,5.6,'#9aa3ad'); ring(0,-54,13,3.9,1,'#6e7882'); ring(0,-54,7,2.1,1,'#6e7882');
   for(let k=0;k<3;k++) { const a=ang+k*2.094,mx=Math.cos(a)*16,my=-54+Math.sin(a)*4.6;
@@ -1068,7 +1069,7 @@ SC.t3n_wheel=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.drop) return;
   s.ang=(s.ang||0)+sp*dt;
   const dq=ez((ms-P.drop)/350),by=P.y-(1-dq)*130+(ms>P.drop+350&&ms<P.drop+500?-Math.sin((ms-P.drop-350)/150*Math.PI)*6:0);
   const shake=ms>P.fast&&ms<P.launch+400?Math.sin(ms/22)*lerp(.5,2.2,cl((ms-P.fast)/(P.launch-P.fast))):0;
-  gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(P.x+shake,by); gfx.scale(1.5,1.5);
+  gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(P.x+shake,by); gfx.scale(TW_S,TW_S);
   E(0,3,40,7,'rgba(0,0,0,.28)');
   const wPaint=PROPART.draw('tombo/pottery_wheel',0,-34,{w:70,h:74});   // painted wheel; the drawn electric wheel below is the fallback
   if(wPaint) { if(sp>16) { gfx.globalAlpha*=.5; ring(0,-54,16,4.6,2,'rgba(255,255,255,.6)'); gfx.globalAlpha=fade(u,.94); } } else {
@@ -1087,25 +1088,25 @@ SC.t3n_wheel=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.drop) return;
         E(Math.cos(a)*r,-66+Math.sin(a)*r*.45-q*8,1.6,1.3,k%2?'#8fd0ff':'#b99a78'); } gfx.globalAlpha=fade(u,.94); } }
   if(ms>P.launch&&ms<P.launch+900) { gfx.globalAlpha=fade(u,.94)*(1-(ms-P.launch)/900); E(0,-54,12,3.2,'#8a4526'); }   // wet ring left behind
   gfx.restore();
-  if(ms>P.fast&&ms<P.launch) { gfx.globalAlpha=fade(u,.94); label('FASTER',P.x-20,by-118,CREAM,2); } gfx.globalAlpha=1; };
+  if(ms>P.fast&&ms<P.launch) { gfx.globalAlpha=fade(u,.94); label('FASTER',P.x-62,by-52,CREAM,2); } gfx.globalAlpha=1; };
 SC.t3n_hat=(s,u)=>{ const f=u>.7?ez((u-.7)/.3):0,rot=Math.sin(s.t*17)*.3*(1-f*.6); gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(s.x,s.y+f*34); gfx.rotate(rot); bowlProp(0,0,1.9,true); gfx.restore();
   if(u<.75) for(let k=0;k<3;k++) { const q=(s.t*3+k/3)%1; gfx.globalAlpha=(1-q)*.8; E(s.x-14+k*14,s.y-16-q*12,2,1.6,'#8fd0ff'); } gfx.globalAlpha=1; };
 T.throw_down=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.round(Math.min(me.x-60,F.x+F.w*.5+120)),wy=Math.min(316,F.base+4);
   const set=900,pedal=2000,fast=2400,launch=2800,hit=3350,pun=3700,psy=4400,more=5250,home=5850,end=6650;
-  const wheelX=wx-52,P={x:wheelX,y:wy+2,drop:200,clay:1000,shape:2000,tap:pedal,fast,launch};
-  const hx=wheelX,hy=wy+2-54*1.5-14,tx=F.x+F.w*.05,ty=F.top+6;
+  const wheelX=wx-36,P={x:wheelX,y:wy+2,drop:200,clay:1000,shape:2000,tap:pedal,fast,launch};
+  const hx=wheelX,hy=wy+2-54*TW_S-10,tx=F.x+F.w*.05,ty=F.top+6;
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:set,x:wx,y:wy,f:'kneel'},{t:1000,f:'kneel',dy:(u,tt)=>Math.sin(tt*16)*1.2},{t:pedal,f:'aim',dx:-2},{t:fast,f:'wind',dx:u=>ez(u)*10},{t:launch,f:'spread',dx:-4},{t:launch+500,f:'spread',hop:5},{t:hit+300,f:'idle'},{t:pun,f:'aim'},{t:psy,f:'hip'},{t:more,f:'celeb'},{t:home-150,f:'idle'},{t:home,f:'walkR'},{t:home+800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('TNB sets up his pottery wheel. A lump of clay, a calm bowl.'); say(m.id,'throw_down'); scene('t3n_wheel',(home+100)/1000,{P}); S('whoosh'); }],
     [P.drop+350,()=>{ S('thud'); scene('tn_poof',.5,{x:wheelX,y:wy+2,c:'#c9a070'}); }],
     [1000,()=>{ S('splat'); setMessage('He centers the clay. Pulls the walls up. It is a lovely bowl.'); }],
     [1700,()=>{ S('select'); }],
-    [pedal,()=>{ S('charge'); scene('t3n_big',.7,{x:wheelX,y:wy-130,txt:'JUST A TAP',c:CREAM,sc:2}); setMessage('He taps the pedal. Just a little.'); }],
-    [fast,()=>{ S('charge'); scene('t3n_big',.7,{x:wheelX,y:wy-130,txt:'TOO FAST',c:GOLD,sc:3}); setMessage('The wheel is going a bit faster than the pedal said.'); }],
+    [pedal,()=>{ S('charge'); scene('t3n_big',.7,{x:wheelX,y:wy-96,txt:'JUST A TAP',c:CREAM,sc:2}); setMessage('He taps the pedal. Just a little.'); }],
+    [fast,()=>{ S('charge'); scene('t3n_big',.7,{x:wheelX,y:wy-96,txt:'TOO FAST',c:GOLD,sc:3}); setMessage('The wheel is going a bit faster than the pedal said.'); }],
     [2600,()=>{ S('charge'); setMessage('Water is flying everywhere. The bowl is holding on.'); }],
     [launch,()=>{ S('whoosh'); S('boing'); setMessage('The bowl lets go.'); const dx=tx-hx,dy=ty-hy,n=Math.hypot(dx,dy)||1;
-      ST.fly((x,y,uu)=>{ for(const [k,al] of [[3,.15],[2,.25],[1,.4]]) { gfx.globalAlpha=al; bowlProp(-dx/n*k*14,-dy/n*k*14,1.6); } gfx.globalAlpha=1; gfx.save(); gfx.rotate(uu*Math.PI*14); bowlProp(0,0,1.6); gfx.restore(); },hx,hy,tx,ty,(hit-launch)/1000,70);
-      scene('t3n_big',.7,{x:wheelX,y:wy-130,txt:'WHOOPS',c:'#ffb04a',sc:3}); }],
+      ST.fly((x,y,uu)=>{ for(const [k,al] of [[3,.15],[2,.25],[1,.4]]) { gfx.globalAlpha=al; bowlProp(-dx/n*k*10,-dy/n*k*10,1.1); } gfx.globalAlpha=1; gfx.save(); gfx.rotate(uu*Math.PI*14); bowlProp(0,0,1.1); gfx.restore(); },hx,hy,tx,ty,(hit-launch)/1000,70);
+      scene('t3n_big',.7,{x:wheelX,y:wy-96,txt:'WHOOPS',c:'#ffb04a',sc:3}); }],
     ['hf',hit],
     [hit,()=>{ S('bonk'); S('thud'); ST.jolt(f,.6); landHit(100); scene('t3n_hat',1.7,{x:tx,y:ty+4}); scene('t3n_big',1.1,{x:F.x,y:F.top-74,txt:'CLONK!',c:'#f0a070',sc:4}); setMessage(f.name+' is now wearing a bowl.'); }],
     [pun,()=>{ scene('t3n_text',1.5,{st,txt:'I WAS THROWING A BOWL.',c:CREAM,sc:2,dy:16}); setMessage('He waits. He makes eye contact.'); }],
