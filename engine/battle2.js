@@ -1439,7 +1439,7 @@ function b2RewardsData() {
   for(const f of calm) setFlag('kind:'+f.id,(flag('kind:'+f.id)||0)+1);   // Grace's Kindness Scrapbook
   const coinPerk=B2.party.reduce((a,u)=>a+((u.perk&&u.perk.coins)||0),0);
   const purse=b2Purse(B2.foes,npc,coinPerk)+B2.coinsWon;
-  npc.tier++; npc.maxHp+=d.hpStep; npc.defeatedUntil=performance.now()+25000;
+  npc.tier++; npc.maxHp+=d.hpStep; npc.defeatedUntil=performance.now()+25000; monsterFall(npc);
   coins+=purse;
   b2WriteBack();
   const members=B2.party.map((u,i)=>{

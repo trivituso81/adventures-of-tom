@@ -536,7 +536,7 @@ function choosePath(n) {
 }
 
 function updateNPCs(dt) {
-  for(const n of currentMap.npcs) {
+  for(const n of currentMap.npcs.slice()) {   // a copy: a beaten monster removes itself from the list mid-loop (monsterFall)
     if(n.held) continue;   // moved by a cutscene (engine/story.js); the scene steps it
     if(n.move&&!advanceMove(n,dt)) continue;
     if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
@@ -601,6 +601,7 @@ function switchMap(portal) {
     showToast('Back out on '+currentMap.name+'.',1.7);
   }
 
+  monstersReturn(currentMap);   // monsters beaten here earlier are back now that the player has re-entered
   player.move=null;
   player.walkClock=0;
   placeFollowers();

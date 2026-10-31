@@ -375,7 +375,7 @@ function b7InstantWin(n) {
   const xp=b6BattleXp(foes,n);
   const coinPerk=party.reduce((a,m)=>a+((b6Perks(m).coins)||0),0);
   const purse=b2Purse(foes,n,coinPerk);
-  n.tier++; n.maxHp+=d.hpStep; n.defeatedUntil=performance.now()+25000; n.chasing=false;
+  n.tier++; n.maxHp+=d.hpStep; n.defeatedUntil=performance.now()+25000; n.chasing=false; monsterFall(n);
   coins+=purse;
   const ups=[];
   for(const m of party) { const r=b2GainFor(m,xp); if(r.ups) ups.push(m.name+' is now Lv '+r.lvl1); }

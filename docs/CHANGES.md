@@ -1,3 +1,12 @@
+## 2026-10-31 (night, 23): beaten monsters stay gone until you leave the area
+
+- Tom asked that a defeated map monster never reappears while he stays in the area; it should come back only after he leaves and returns. Before, a beaten monster only napped for 25 seconds (Z's overhead), then woke and chased again.
+- Now a monster beaten in a real fight, or popped by the overlevel rule, is removed from the map at once (`monsterFall`, `engine/world.js`) and waits in that map's `fallen` list. Walking into the map again through a door or exit puts it back at its home spot (`monstersReturn`, called from `switchMap` in `engine/battle-draw.js`). Its tier and HP step still go up, so it returns tougher, as before.
+- Story actors (scripted) are untouched. Saves still see fallen monsters (`findMonster`, `allMonsters`). A save reloaded from the title screen rebuilds the world, so every monster is back.
+- The monster update loop now iterates a copy of the list so a monster leaving mid-frame cannot skip another.
+- Test: new `tools/monster_gone_test.py` (real battle win, wait in the area, leave, re-enter, instant-win path), plus both smoke runs, 0 fails. Build stamp `build gone1`. Not played on phone yet; the live site was not checked from here.
+
+
 ## 2026-10-31 (night, 24): victory celebration a little slower
 
 - Tom asked for the end-of-battle celebration to be just a little slower. The cheer pose cycle, hop and "LEVEL UP" bounce now run at 6 beats a second instead of 8 (about 25% slower), and the rising sparkles drift a bit slower to match. Applies to win cheers, level-up cheers and Nara's puddle wiggle, which share the cheer. Numbers only; the cheer lasts the same time.
