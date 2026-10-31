@@ -1710,13 +1710,13 @@ SC.gx_gems=(s,u)=>{ const P=s.plan,ms=u*s.dur*1000; const fa=fade(u,.88);
     if(g.sharp&&t1<700) { const k=Math.sin(Math.min(1,t1/700)*Math.PI); gfx.globalAlpha=a*k; prop('sparkle_star',g.x+6,g.y-10,{h:g.h*1.7*(0.6+k),rot:t1/400}); }
     else if(t1>300&&((t1/260)|0)%3===(g.k%3)) { gfx.globalAlpha=a*.9; prop('sparkle_star',g.x+g.h*.3,g.y-g.h*.3,{h:g.h*.6}); } }
   gfx.globalAlpha=1; };
-G.bedazzle_blast=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,84),U=list.map(f=>ST.unit(f));
+G.bedazzle_blast=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p={x:Math.max(Gp.x1+60,me.x-64),y:me.base},U=list.map(f=>ST.unit(f));   // a small step forward from her own spot (Tom 10/31)
   const waves=(B2.move&&B2.move.waves||[]).flat(),critOf=f=>waves.some(e=>e.t===f&&e.crit);
-  const T={in:700,draw:1000,load:1300,safety:1650,aim:1950,fireA:2250,low:2550,high:2850,fireB:3150,one:3450,blow:3950,inspect:4350,more:4750,topup:5150,admire:5600,pose:6050,back:6550,home:7350};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'bz_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'bz_draw'},{t:T.load,f:'bz_load'},{t:T.safety,f:'bz_safety'},{t:T.aim,f:'bz_aim'},
+  const T={in:450,draw:750,load:1050,safety:1400,aim:1700,fireA:2000,low:2300,high:2600,fireB:2900,one:3200,blow:3700,inspect:4100,more:4500,topup:4900,admire:5350,pose:5800,back:6300,home:6700};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'bz_arrive',hop:3,hn:2},{t:T.in,x:p.x,y:p.y,f:'bz_draw'},{t:T.load,f:'bz_load'},{t:T.safety,f:'bz_safety'},{t:T.aim,f:'bz_aim'},
     {t:T.fireA,f:'bz_fireA',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.low,f:'bz_sweeplow',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.high,f:'bz_sweephigh',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.fireB,f:'bz_fireB',dx:(u,tt)=>Math.sin(tt*70)*2},
     {t:T.one,f:'bz_onehand',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.blow,f:'bz_blow'},{t:T.inspect,f:'bz_inspect'},{t:T.more,f:'bz_notenough'},{t:T.topup,f:'bz_topup',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.admire,f:'bz_admire',hop:8},{t:T.pose,f:'bz_pose'},
-    {t:T.back,f:'bz_arriveR',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
+    {t:T.back,f:'bz_arriveR',hop:3,hn:2},{t:T.home,x:'home',y:'home',f:'idle'}]);
   const gems=[]; let gk=0;
   const stick=(at,n,sharp)=>{ U.forEach((q,i)=>{ const crit=critOf(list[i]); for(let j=0;j<n;j++) { const k=gk++; const id=sharp&&crit?'gem_sharp':['gem_pink','gem_blue','gem_gold'][k%3];
     gems.push({id,k,at:at+i*60+j*45,x:q.x-q.w*.35+rnd(k,7)*q.w*.7,y:q.top+q.h*.12+rnd(k,8)*q.h*.7,h:sharp&&crit?Math.max(22,q.h*.26):12+rnd(k,9)*8,rot:(rnd(k,10)-.5)*.8,sharp:sharp&&crit}); } }); };

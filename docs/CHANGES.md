@@ -1,3 +1,6 @@
+## 2026-10-31 (morning, 2): Bedazzle Blast: a small step forward, not a walk across
+
+- Tom (09:28): same as Open Strings. Grace steps about 64 px left of her own spot, fires the rhinestone gun from there, and steps back; timeline 6.7 s (was 7.35 s). Gems still fly to the row. Tag `?v=gx4` on grace-moves.js. Tests: kit_test grace bedazzle_blast (frames looked at), smoke IDS=grace.
 ## 2026-10-31 (morning, 37): the top-left frame is now a quest tracker (`qt1`)
 
 - Tom (09:05): remove the location frame; make it a persistent display of the next quest step, tap for details with sub-steps and check marks, using best-in-class RPG quest display.
