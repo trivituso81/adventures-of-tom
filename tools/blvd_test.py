@@ -48,7 +48,7 @@ with sync_playwright() as pw:
     check('every object touchable',not r['badObjects']); check('every NPC on reachable floor',not r['npcBad']); check('story arrival tiles walkable',not r['arrivals'])
     # shots of the painted street
     for n,(x,y,d) in {'spawn':(20,22,'up'),'coffee':(5,10,'up'),'starlite':(17,10,'up'),'nickels':(22,10,'up'),'taco':(12,10,'down'),'bus':(15,13,'left'),
-                      'wardrobe':(4,22,'up'),'lofts':(11,22,'up'),'tower':(18,22,'up'),'cab':(25,22,'up'),'metro':(24,22,'down'),'west':(2,6,'up'),'south':(14,24,'down'),'walkA':(8,16,'down'),'walkB':(14,16,'down'),'walkC':(21,16,'down')}.items():
+                      'wardrobe':(4,22,'up'),'lofts':(11,22,'up'),'tower':(18,22,'up'),'cab':(25,22,'up'),'metro':(25,24,'down'),'west':(2,6,'up'),'south':(14,24,'down'),'walkA':(8,16,'down'),'walkB':(14,16,'down'),'walkC':(21,16,'down')}.items():
         stand(pg,x,y,d); shot(pg,n)
     pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,17,10,'up'); shot(pg,'landscape')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
@@ -78,7 +78,7 @@ with sync_playwright() as pw:
     print('after studio exit:',pg.evaluate("()=>[currentMap.id,player.x,player.y,worlds.blvd.solid[player.y*worlds.blvd.w+player.x]]"))
     check('studio brings Tom back to the east road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=24&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     # A on a prop opens its text
-    for nm,(x,y,d) in {'Taco truck':(12,10,'down'),'Metro stairs':(24,22,'down'),'Cab 8':(26,22,'right'),'Bus bench':(14,13,'left'),'Shop sign':(23,10,'up')}.items():
+    for nm,(x,y,d) in {'Taco truck':(12,10,'down'),'Metro stairs':(25,24,'down'),'Cab 8':(26,22,'right'),'Bus bench':(12,12,'down'),'Shop sign':(23,10,'up')}.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(700); skip_intro(pg)
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
         got=pg.evaluate("()=>dialog.active||(typeof choice!=='undefined'&&!!choice&&choice.active)||!!document.querySelector('#toast:not([hidden])')")

@@ -206,6 +206,10 @@ blvd:[
   {x:0,y:1462,w:225,h:202,base:1652,fg:true},{x:235,y:1490,w:107,h:92,base:1580,fg:true},{x:412,y:1466,w:90,h:156,base:1620,fg:true},{x:488,y:1515,w:100,h:95,base:1608,fg:true},
   {x:660,y:1466,w:120,h:96,base:1562,fg:true},{x:632,y:1562,w:180,h:102,base:1664,fg:true},{x:1128,y:1466,w:92,h:96,base:1562,fg:true},{x:1116,y:1562,w:124,h:102,base:1664,fg:true},
   {x:1260,y:1495,w:104,h:95,base:1588,fg:true},{x:1408,y:1466,w:92,h:156,base:1620,fg:true},{x:1718,y:1560,w:74,h:82,base:1640,fg:true},{x:1768,y:1462,w:152,h:202,base:1652,fg:true},
+  // pass 2: Metro canopy and bus shelter (cutouts), the screen-edge palms, and small curb props you can walk behind
+  {x:1520,y:1488,w:172,h:112,base:1660,fg:true},{x:783,y:780,w:134,h:105,base:884,fg:true},{x:1836,y:690,w:84,h:320,base:1010,fg:true},{x:0,y:840,w:175,h:300,base:1140,fg:true},
+  {x:745,y:822,w:34,h:70,base:892},{x:938,y:826,w:38,h:66,base:892},{x:1312,y:818,w:36,h:77,base:895},{x:1462,y:822,w:36,h:73,base:895},{x:1503,y:805,w:55,h:90,base:895},{x:1568,y:818,w:60,h:77,base:895},
+  {x:664,y:845,w:26,h:37,base:884},{x:697,y:848,w:25,h:34,base:884},{x:512,y:848,w:20,h:34,base:884},
   // ... and the rooftops that stand over the south sidewalk: water tanks, roof gardens, the Grand Tower crown (everyone north of the south row is behind them)
   {x:236,y:832,w:81,h:118,base:1400,fg:true},{x:330,y:820,w:100,h:92,base:1400,fg:true},{x:635,y:860,w:85,h:52,base:1400,fg:true},{x:735,y:860,w:115,h:52,base:1400,fg:true},
   {x:1015,y:850,w:65,h:62,base:1400,fg:true},{x:1090,y:768,w:182,h:142,base:1400,fg:true},{x:1262,y:860,w:38,h:55,base:1400,fg:true},{x:1590,y:850,w:70,h:62,base:1400,fg:true},{x:1664,y:868,w:114,h:94,base:1400,fg:true}

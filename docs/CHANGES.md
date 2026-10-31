@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 2): Downtown LA pass 2: open road lane, walk under the Metro canopy, more cutouts
+
+- The south lane of the boulevard is open past the taco truck and bus shelter (cols 11 to 14, row 12); the truck body itself still blocks its own lane. Small curb props (trash cans, mailbox, hydrant, scooter, bike racks, bollards) no longer block: you walk behind them (small cutout zones in `PLATE_BEHIND.blvd`). The bus bench object is now just the shelter bench (12,13).
+- Metro: Tom can walk under the canopy to the stairs (row 24, tiles 24 to 26); the stairs object is at (25,25), press A facing down from (25,24). The canopy and sign are a cutout.
+- More cutouts in `art/blvd-fg.webp` (`tools/make_blvd_fg.py`): bus shelter roof and posts, Metro canopy, palms and bushes on the left and right screen edges. Edge tiles (0,13), (1,13), (29,10), (29,13) are open.
+- Files: `engine/plate.js?v=behind9`, `data/maps-la.js?v=dtla7`, fg layer `?v=20261031c`. blvd_test (Metro and bench positions updated) and smoke pass; reach test 0 fails. Not played on phone.
+
 ## 2026-10-31 (day, 5): the Stacks walk map is opened up (`stacks1`)
 
 - Tom: fix the walkable pathways in the Stacks (too many blocked areas and narrow paths) and make sure all 3 quest items can be reached on foot. Reading of the request: the three quest items are the three chapter 7 catalog cards, held by the wing bosses The Cliffhanger (Fiction), The Know-It-All (Nonfiction) and Pop-Up Panic (Picture Books).
