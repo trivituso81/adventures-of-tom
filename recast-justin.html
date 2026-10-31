@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Justin Recast</title>
+<style>
+:root{--bg:#171a21;--win1:#3b4252;--win2:#232833;--line:#dfe4ec;--text:#f1f3f7;--label:#9db1cc;--dim:#b3bac7;--faint:#7f8798;--gold:#f0c75a;--mint:#7fdc9f;--coral:#ff8f80;--blue:#86a9ff;--sel1:#5d687e;--sel2:#465063}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+.win{background:linear-gradient(var(--win1),var(--win2));border:2px solid var(--line);border-radius:8px}
+header{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:#11141a;border-bottom:1px solid #2c3240}
+header h1{font-size:17px;margin:0 8px 0 0}header h1 span{color:var(--gold)}
+.grow{flex:1}
+input[type=text],input[type=password],textarea{background:#11141a;border:1px solid #4a5263;border-radius:5px;padding:6px 8px}
+textarea{width:100%;resize:vertical;min-height:38px}
+.btn{background:linear-gradient(var(--sel1),var(--sel2));border:1px solid var(--line);border-radius:5px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.gold{background:linear-gradient(#f6d77e,#d9a93a);color:#241a05;border-color:#fff1c4;font-weight:600}
+.btn.small{padding:3px 8px;font-size:12px}
+.layout{display:grid;grid-template-columns:340px 1fr;gap:16px;padding:16px;align-items:start}
+aside{position:sticky;top:66px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 82px);overflow:auto}
+.panel{padding:12px 14px}.panel h2{font-size:13px;color:var(--label);text-transform:uppercase;letter-spacing:1px;margin:0 0 8px}
+.chars{display:flex;flex-direction:column;gap:4px}
+.char{display:flex;justify-content:space-between;padding:6px 10px;border-radius:5px;cursor:pointer;border:1px solid transparent}
+.char.on{background:linear-gradient(var(--sel1),var(--sel2));border-color:var(--line)}
+.char .n{font-weight:600}.char .c{font-size:12px;color:var(--dim)}
+.field{display:flex;flex-direction:column;gap:3px;margin-bottom:9px}.field label{font-size:12px;color:var(--label)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:flex;border:1px solid #4a5263;border-radius:5px;overflow:hidden;flex-wrap:wrap}
+.seg button{background:#11141a;border:0;padding:5px 10px;cursor:pointer;color:var(--dim)}
+.seg button+button{border-left:1px solid #4a5263}.seg button.on{background:linear-gradient(var(--sel1),var(--sel2));color:var(--text)}
+.hint{font-size:12px;color:var(--faint)}.note{font-size:12.5px;color:var(--dim)}.note b{color:var(--text)}
+main{display:flex;flex-direction:column;gap:12px;min-width:0}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 14px}
+.kindhead{font-size:12px;color:var(--label);text-transform:uppercase;letter-spacing:1px;margin:14px 2px 0}
+.card{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.card .top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.card .game{font-size:15px;font-weight:600}
+.tag{font-size:11px;padding:1px 7px;border-radius:9px;border:1px solid;white-space:nowrap}
+.tag.old{color:var(--blue);border-color:#4f6496}.tag.new{color:var(--mint);border-color:#4f8f66}.tag.kind{color:var(--dim);border-color:#4a5263}.tag.kept{color:var(--gold);border-color:#8f7637}
+.sent{font-size:12px;color:var(--faint);font-family:ui-monospace,Menlo,monospace;word-break:break-word}.sent b{color:var(--blue);font-weight:500}
+.takes{display:flex;flex-wrap:wrap;gap:8px}
+.take{display:flex;align-items:center;gap:6px;padding:4px 8px 4px 4px;border:1px solid #4a5263;border-radius:6px;background:#11141a}
+.take.keep{border-color:var(--gold)}.take .lbl{font-size:11px;color:var(--dim)}
+.play{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:linear-gradient(var(--sel1),var(--sel2));cursor:pointer;font-size:11px}
+.play.on{background:var(--gold);color:#241a05}
+.x{background:none;border:0;color:var(--faint);cursor:pointer}.x:hover{color:var(--coral)}
+.err{color:var(--coral);font-size:12px}.busy{color:var(--blue);font-size:12px}
+.previews{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.pv{display:flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid #4a5263;border-radius:6px;background:#11141a}
+.empty{padding:30px;text-align:center;color:var(--faint)}.progress{font-size:12px;color:var(--dim)}
+@media (max-width:900px){.layout{grid-template-columns:1fr}aside{position:static;max-height:none}}
+</style>
+</head>
+<body>
+<header>
+  <a class="btn" href="index.html" style="text-decoration:none">&#8249; Game</a><h1>Adventures of Tom <span>Justin Recast</span></h1>
+  <div class="row"><label class="hint" for="key">ElevenLabs API key</label><input id="key" type="password" size="34" placeholder="paste once; stays in this browser" autocomplete="off"></div>
+  <div class="grow"></div>
+  <span id="progress" class="progress"></span>
+  <button class="btn gold" id="save">Save recast.json</button>
+</header>
+<div class="layout">
+  <aside>
+    <div class="win panel"><h2>Characters</h2><div class="chars" id="chars"></div></div>
+    <div class="win panel" id="voicePanel"></div>
+    <div class="win panel"><h2>How to do this</h2><div class="note">
+      <p style="margin-top:0"><b>Why:</b> Justin has no New York accent and his voice is too light. This page designs a deeper Long Island voice and re-records every line with its own direction.</p><p><b>1.</b> Paste your API key. <b>2.</b> Press <b>Design 3 options</b>, play all three, press <b>Use this voice</b> on the one with the thickest accent (none right? press it again for 3 more, or edit the description first). <b>3.</b> Press <b>Bake all</b> and keep the screen on. <b>4.</b> Play through, re-take any line, then <b>Export</b> and send me the file.</p><p><b>Directions</b> in [square brackets] tell the voice how to act. Edit one if a line misses. Every bracket also carries the accent, which keeps it from fading mid-line.</p>
+      <p style="margin-bottom:0"><b>Voice slots:</b> if your account is full, the old Justin voice is kept (Kenji uses it too). Lines already in the game keep playing.</p>
+    </div></div>
+  </aside>
+  <main>
+    <div class="win toolbar">
+      <div class="seg" id="filter"><button data-f="todo">To do</button><button data-f="kept">Has kept take</button><button data-f="all">All lines</button></div>
+      <input type="text" id="search" placeholder="Search lines" style="min-width:180px">
+      <div class="grow"></div><span id="bulkMsg" class="busy"></span>
+      <button class="btn gold" id="genAll">Generate all</button>
+    </div>
+    <div id="errBox" class="win panel" style="display:none;border-color:var(--coral)"></div>
+    <div id="list"></div>
+  </main>
+</div>
+<script>
+'use strict';
+const LINES={"justin":{"join":["Halftime. I have a minute. Let's go."],"greet":["Hold this. No, the other end."],"basic":["Loose wire. Not my problem any more."],"loose_wire_spot":["Who left THIS here?"],"loose_wire_zap":["Ow. Okay. A little bit my problem."],"wire_nuts":["Wire nuts! Never have enough of these."],"wire_nuts_1":["Yellow!"],"wire_nuts_2":["Red!"],"wire_nuts_3":["And BLUE!"],"wire_nuts_nod":["Color coded."],"bad_call_couch":["He was IN."],"bad_call":["ARE YOU KIDDING ME WITH THAT CALL?"],"bad_call_yell":["WHO IS PAYING YOU?!"],"bad_call_sit":["Unbelievable."],"fresh_fit_runway":["Clear the runway."],"fresh_fit_shades":["Collar. Cuff. Shades."],"fresh_fit":["This shirt cost more than your pond."],"fresh_fit_wink":["You're welcome."],"demo_day":["Demo day! Wall's coming down!"],"demo_day_look":["Nobody liked this wall."],"demo_day_one":["ONE!"],"demo_day_two":["TWO!"],"demo_day_done":["Open floor plan."],"breaker_flip_which":["Which one of you is it."],"breaker_flip_found":["There you are."],"breaker_flip":["Breaker's off."],"breaker_flip_count":["Three. Two. One."],"breaker_flip_on":["Breaker's... on."],"breaker_flip_salute":["Licensed and insured."],"giant_sneeze_twitch":["Hang on. Hang on."],"giant_sneeze_build":["Ah... ah... ah..."],"giant_sneeze":["AH CHOOOOO!"],"giant_sneeze_excuse":["Excuse me."],"foot_tap_idle":["Nobody touch anything."],"foot_tap_wave":["Rosie. No."],"foot_tap_ouch":["OUCH!!!!!!"],"foot_tap":["MY FOOT! WHO TOUCHED MY FOOT?!"],"foot_tap_light":["IT WAS SO LIGHT!"],"foot_tap_fine":["I'm fine. I'm FINE."],"drywall_sheet":["Everybody behind me."],"drywall":["Drywall's up."],"drywall_screws":["Four screws."],"drywall_tap":["Solid."],"drywall_dry":["Let it dry."],"hurt":["Not the jacket!"],"low":["Somebody turn the game back on."],"ko":["Tell the basement I loved it."],"win":["And THAT is how you close out a game."],"dlg-ch1":["Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.","Grace, you were amazing out there. Rose, you were also amazing. Also, why are you sticky?","Fixed the porch light, the garbage disposal and the bunk bed. Before lunch.","Every country song is about a truck, a dog or a girl. I got a truck and two girls. Living the song.","Amy says I never sit down. I sat down once. It was a playoff game. We lost.","Those two girls are the best thing I ever built. And I built that deck.","Take some for the road. Don't tell Gary.","Every conference night. Twelve years. It's the only reason Gary shows up.","It's store-bought.","The banner's done. Hold this. No, the other end. Don't touch the copper.","It lights up. Every letter. I'm an electrician, Gracie. It was never going to just hang there.","Hold this. No, the other end. It's the OTHER banner. Don't touch the copper.","Conference night is over. I survived. I'm going to sit on this couch until Field Day.","Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.","Don't tell Gary. Gary eats the whole thing.","Halverson. Fourth grade. I'm hiding in the staff room. That's allowed. It's in the contract.","If you're hungry, the fridge is a minefield. Every lunch in there has a name on it. Read the labels.","Tom. Hey. Hold this. No, the other end. Don't touch the copper.","Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.","Long Island born. Country music raised. Don't ask me how. Nobody knows.","Big game tonight. If you hear yelling, that's me. If you hear crying, that's also me.","Watch your step, Tom. That board is loose. I know. It's on the list.","Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.","Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.","No problem. The hallway light won't finish itself. It's been almost done since June.","Somebody has to tag out. I'll wait. I'll be on the ladder."],"dlg-ch10":["Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread."]}};
+const SCRIPTS={"justin|join|Halftime. I have a minute. Let's go.":"[warm, easygoing dad, a little distracted, still half watching the game] Halftime. I have a minute. Let's go.","justin|greet|Hold this. No, the other end.":"[mildly impatient, hands full, friendly] Hold this. No, the OTHER end.","justin|basic|Loose wire. Not my problem any more.":"[dry, deadpan, handing the problem over with a shrug] Loose wire. [beat] Not my problem any more.","justin|loose_wire_spot|Who left THIS here?":"[spotting something, mild professional alarm, half amused] Who left THIS here?","justin|loose_wire_zap|Ow. Okay. A little bit my problem.":"[small yelp, then sheepish, shaking the hand out] Ow. [beat] Okay. A little bit my problem.","justin|wire_nuts|Wire nuts! Never have enough of these.":"[cheerful, mid-project, rummaging in a tool belt pouch] Wire nuts! Never have enough of these.","justin|wire_nuts_1|Yellow!":"[quick, bright, calling the color as he throws] Yellow!","justin|wire_nuts_2|Red!":"[quick, brighter, second throw] Red!","justin|wire_nuts_3|And BLUE!":"[big wind-up, gleeful, the overhand finisher] And BLUE!","justin|wire_nuts_nod|Color coded.":"[satisfied, matter of fact, a small nod] Color coded.","justin|bad_call_couch|He was IN.":"[leaning in at the TV, fast disbelief] He was IN.","justin|bad_call|ARE YOU KIDDING ME WITH THAT CALL?":"[full-throated sports yell at the TV, standing, pointing, rising to a roar] ARE YOU KIDDING ME WITH THAT CALL?","justin|bad_call_yell|WHO IS PAYING YOU?!":"[hoarse, outraged, one last blast with a cupped hand] WHO IS PAYING YOU?!","justin|bad_call_sit|Unbelievable.":"[deflated, muttered, dropping back onto the couch] Unbelievable.","justin|fresh_fit_runway|Clear the runway.":"[smooth, low, amused at himself] Clear the runway.","justin|fresh_fit_shades|Collar. Cuff. Shades.":"[clipped, precise, a checklist with a tiny pause between each word] Collar. [beat] Cuff. [beat] Shades.","justin|fresh_fit|This shirt cost more than your pond.":"[smug, smooth, a wink in the voice, looking down his nose] This shirt cost more than your pond.","justin|fresh_fit_wink|You're welcome.":"[cool, quiet, over the shoulder] You're welcome.","justin|demo_day|Demo day! Wall's coming down!":"[gleeful, pumped, shouting over the noise] Demo day! Wall's coming down!","justin|demo_day_look|Nobody liked this wall.":"[sizing it up, dry, a little sinister] Nobody liked this wall.","justin|demo_day_one|ONE!":"[grunt of effort, shouted on the swing] ONE!","justin|demo_day_two|TWO!":"[bigger grunt, shouted, the wall gives] TWO!","justin|demo_day_done|Open floor plan.":"[breathless, pleased with himself, wiping his brow] Open floor plan.","justin|breaker_flip_which|Which one of you is it.":"[calm, talking to the breaker panel, scanning] Which one of you is it.","justin|breaker_flip_found|There you are.":"[quiet, pleased, finger landing on the switch] There you are.","justin|breaker_flip|Breaker's off.":"[calm and flat, a statement of fact] Breaker's off.","justin|breaker_flip_count|Three. Two. One.":"[whispered in the dark, even, slightly menacing countdown] Three. [beat] Two. [beat] One.","justin|breaker_flip_on|Breaker's... on.":"[the same calm voice, a held pause before the last word, then a quiet grin] Breaker's... [beat] on.","justin|breaker_flip_salute|Licensed and insured.":"[dry, a two finger salute, mock professional] Licensed and insured.","justin|giant_sneeze_twitch|Hang on. Hang on.":"[nose twitching, nasal, a warning to everyone] Hang on. Hang on.","justin|giant_sneeze_build|Ah... ah... ah...":"[a quick rising build, each ah bigger and higher, breath catching, about one second] Ah... ah... AH...","justin|giant_sneeze|AH CHOOOOO!":"[a huge explosive sneeze, the loudest thing in the game, full body] AH CHOOOOO!","justin|giant_sneeze_excuse|Excuse me.":"[small, sheepish, sniffing, polite] Excuse me.","justin|foot_tap_idle|Nobody touch anything.":"[relaxed, content, a tiny edge of warning] Nobody touch anything.","justin|foot_tap_wave|Rosie. No.":"[gentle dad warning, seeing her coming, a little nervous] Rosie. No.","justin|foot_tap_ouch|OUCH!!!!!!":"[a huge drawn-out scream of pain, arms spread, red in the face, as long and loud as the word allows] OOOUUUCH!!!!!!","justin|foot_tap|MY FOOT! WHO TOUCHED MY FOOT?!":"[a piercing, high-pitched scream of betrayal, way out of proportion] MY FOOT! WHO TOUCHED MY FOOT?!","justin|foot_tap_light|IT WAS SO LIGHT!":"[still screaming, hopping, outraged that a tap could hurt this much] IT WAS SO LIGHT!","justin|foot_tap_fine|I'm fine. I'm FINE.":"[tight, strained, pretending, voice cracking on the second one] I'm fine. [beat] I'm FINE.","justin|drywall_sheet|Everybody behind me.":"[workmanlike, a little strained carrying it, in charge] Everybody behind me.","justin|drywall|Drywall's up.":"[satisfied tradesman, standing it in place] Drywall's up.","justin|drywall_screws|Four screws.":"[counting under his breath, focused, drill in hand] Four screws.","justin|drywall_tap|Solid.":"[knocking on it, listening, approving] Solid.","justin|drywall_dry|Let it dry.":"[thumbs up, done, warm and final] Let it dry.","justin|hurt|Not the jacket!":"[offended gasp, protective of the jacket] Not the jacket!","justin|low|Somebody turn the game back on.":"[tired, bargaining, flat, on one knee] Somebody turn the game back on.","justin|ko|Tell the basement I loved it.":"[dramatic and fading, a little wry] Tell the basement I loved it.","justin|win|And THAT is how you close out a game.":"[triumphant sports-announcer swagger, fist pump] And THAT is how you close out a game.","justin|dlg-ch1|Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.":"[busy, cheerful, husband who knows the rules] Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.","justin|dlg-ch1|Grace, you were amazing out there. Rose, you were also amazing. Also, why are you sticky?":"[beaming dad, warm, then puzzled and a little grossed out] Grace, you were amazing out there. Rose, you were also amazing. Also, why are you sticky?","justin|dlg-ch1|Fixed the porch light, the garbage disposal and the bunk bed. Before lunch.":"[casual brag, counting on fingers, smug on the last two words] Fixed the porch light, the garbage disposal and the bunk bed. Before lunch.","justin|dlg-ch1|Every country song is about a truck, a dog or a girl. I got a truck and two girls. Living the song.":"[easy, amused, singing the last three words a little] Every country song is about a truck, a dog or a girl. I got a truck and two girls. Living the song.","justin|dlg-ch1|Amy says I never sit down. I sat down once. It was a playoff game. We lost.":"[dry, deadpan, a little proud of the story, grim on the last two words] Amy says I never sit down. I sat down once. It was a playoff game. We lost.","justin|dlg-ch1|Those two girls are the best thing I ever built. And I built that deck.":"[soft, sincere, then a proud joke about the deck] Those two girls are the best thing I ever built. And I built that deck.","justin|dlg-ch10|Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread.":"[cheerful, relieved, a little sheepish about the bread] Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread.","justin|dlg-ch1|Take some for the road. Don't tell Gary.":"[generous, then a conspiratorial whisper] Take some for the road. Don't tell Gary.","justin|dlg-ch1|Every conference night. Twelve years. It's the only reason Gary shows up.":"[tired teacher, counting the years, dry on Gary] Every conference night. Twelve years. It's the only reason Gary shows up.","justin|dlg-ch1|It's store-bought.":"[flat confession, a little guilty] It's store-bought.","justin|dlg-ch1|The banner's done. Hold this. No, the other end. Don't touch the copper.":"[satisfied, then hands full and impatient, sharp on the copper] The banner's done. Hold this. No, the other end. Don't touch the copper.","justin|dlg-ch1|It lights up. Every letter. I'm an electrician, Gracie. It was never going to just hang there.":"[proud, a little offended at the question, fond on Gracie] It lights up. Every letter. I'm an electrician, Gracie. It was never going to just hang there.","justin|dlg-ch1|Hold this. No, the other end. It's the OTHER banner. Don't touch the copper.":"[hands full, impatient, then sharp warning about the copper] Hold this. No, the other end. It's the OTHER banner. Don't touch the copper.","justin|dlg-ch1|Conference night is over. I survived. I'm going to sit on this couch until Field Day.":"[exhausted teacher, slumping, deadpan relief] Conference night is over. I survived. I'm going to sit on this couch until Field Day.","justin|dlg-ch1|Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.":"[perking up, reverent, like describing a holiday] Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.","justin|dlg-ch1|Don't tell Gary. Gary eats the whole thing.":"[conspiratorial whisper, then flat disapproval of Gary] Don't tell Gary. Gary eats the whole thing.","justin|dlg-ch1|Halverson. Fourth grade. I'm hiding in the staff room. That's allowed. It's in the contract.":"[low, hiding, conspiratorial, a tired teacher who has read the contract] Halverson. Fourth grade. I'm hiding in the staff room. That's allowed. It's in the contract.","justin|dlg-ch1|If you're hungry, the fridge is a minefield. Every lunch in there has a name on it. Read the labels.":"[warning, deadpan, like a safety briefing] If you're hungry, the fridge is a minefield. Every lunch in there has a name on it. Read the labels.","justin|dlg-ch1|Tom. Hey. Hold this. No, the other end. Don't touch the copper.":"[friendly greeting mid-task, hands full, quick warning] Tom. Hey. Hold this. No, the other end. Don't touch the copper.","justin|dlg-ch1|Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.":"[goofy proud dad, calling them over, quick quiz voice, then sending them off with a clap] Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.","justin|dlg-ch1|Long Island born. Country music raised. Don't ask me how. Nobody knows.":"[shrugging, amused at himself, matter of fact] Long Island born. Country music raised. Don't ask me how. Nobody knows.","justin|dlg-ch1|Big game tonight. If you hear yelling, that's me. If you hear crying, that's also me.":"[grinning, hyped, then mock-serious on the crying part] Big game tonight. If you hear yelling, that's me. If you hear crying, that's also me.","justin|dlg-ch1|Watch your step, Tom. That board is loose. I know. It's on the list.":"[calm heads-up, then sheepish, it has been on the list a while] Watch your step, Tom. That board is loose. I know. It's on the list.","justin|dlg-ch1|Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.":"[easygoing, eager, goofy proud dad, deadpan on the strong opinion] Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.","justin|dlg-ch1|Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.":"[warm, cheerful, a little distracted, firm on the ladder] Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.","justin|dlg-ch1|No problem. The hallway light won't finish itself. It's been almost done since June.":"[easygoing, dry, a little rueful, it has been June for a while] No problem. The hallway light won't finish itself. It's been almost done since June.","justin|dlg-ch1|Somebody has to tag out. I'll wait. I'll be on the ladder.":"[relaxed, amused, no hard feelings] Somebody has to tag out. I'll wait. I'll be on the ladder."};
+const CFG={"justin":{"accent":"thick New York accent, Long Island, dropped Rs, long aw vowels","direction":"deep relaxed voice","stability":0.5,"similarity":0.85,"old_id":"","old_name":"AoT Justin (Long Island)","desc":"A man in his early forties with a deep, relaxed, slightly gravelly chest voice and a thick, unmistakable Long Island New York accent, the kind you hear in Nassau County: dropped Rs (fathah, togethah), long drawn-out aw vowels (cawfee, tawk, dawg, cawl), a little nasal, fast and casual. Definitely not Southern, not country, not Midwestern, no twang at all. An electrician and goofy proud dad who yells at the TV during the game, easygoing and warm, quick to laugh at himself, dry when he complains. Clean studio recording.","sample":"Hold this. No, the other end. Don't touch the copper. Amy says I never sit down. I sat down once. It was a playoff game. We lost. Are you kidding me with that call? Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.","dlg":{"justin|dlg-ch1|Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Grace, you were amazing out there. Rose, you were also amazing. Also, why are you sticky?":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Fixed the porch light, the garbage disposal and the bunk bed. Before lunch.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Every country song is about a truck, a dog or a girl. I got a truck and two girls. Living the song.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Amy says I never sit down. I sat down once. It was a playoff game. We lost.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Those two girls are the best thing I ever built. And I built that deck.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch10|Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread.":{"chapter":10,"speaker":"Justin"},"justin|dlg-ch1|Take some for the road. Don't tell Gary.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|Every conference night. Twelve years. It's the only reason Gary shows up.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|It's store-bought.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|The banner's done. Hold this. No, the other end. Don't touch the copper.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|It lights up. Every letter. I'm an electrician, Gracie. It was never going to just hang there.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Hold this. No, the other end. It's the OTHER banner. Don't touch the copper.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Conference night is over. I survived. I'm going to sit on this couch until Field Day.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|Don't tell Gary. Gary eats the whole thing.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|Halverson. Fourth grade. I'm hiding in the staff room. That's allowed. It's in the contract.":{"chapter":1,"speaker":"Mr. Halverson"},"justin|dlg-ch1|If you're hungry, the fridge is a minefield. Every lunch in there has a name on it. Read the labels.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Tom. Hey. Hold this. No, the other end. Don't touch the copper.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Long Island born. Country music raised. Don't ask me how. Nobody knows.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Big game tonight. If you hear yelling, that's me. If you hear crying, that's also me.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Watch your step, Tom. That board is loose. I know. It's on the list.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|No problem. The hallway light won't finish itself. It's been almost done since June.":{"chapter":1,"speaker":"Justin"},"justin|dlg-ch1|Somebody has to tag out. I'll wait. I'll be on the ladder.":{"chapter":1,"speaker":"Justin"}}}};
+const BUILT='2026-10-31';
+const NAMES={justin:'Justin'};
+const ORDER=['justin'];
+const STAB=[{v:0,n:'Creative'},{v:0.5,n:'Natural'},{v:1,n:'Robust'}];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lkey=(ch,kind,text)=>ch+'|'+kind+'|'+text;
+
+const STORE='aot-justin-recast-v1';
+let S={chars:{},scripts:{},filter:'todo',char:'justin',search:''};
+try{const s=JSON.parse(localStorage.getItem(STORE)||'null');if(s)S=Object.assign(S,s);}catch(e){}
+const saveState=()=>{try{localStorage.setItem(STORE,JSON.stringify(S));}catch(e){}};
+try{$('key').value=localStorage.getItem('aot-el-key')||localStorage.getItem('aot-baker-key')||'';}catch(e){}
+$('key').addEventListener('input',()=>{try{localStorage.setItem('aot-el-key',$('key').value.trim());}catch(e){}});
+const apiKey=()=>$('key').value.trim();
+const need=()=>{if(!apiKey())throw new Error('Paste your ElevenLabs API key at the top first.');};
+
+function cfg(ch){
+  if(!S.chars[ch]){const d=CFG[ch];S.chars[ch]={voice_id:'',name:'',stability:d.stability,similarity:d.similarity,desc:d.desc,sample:d.sample};}
+  return S.chars[ch];
+}
+
+// takes live in IndexedDB so a refresh loses nothing
+let db=null;const TAKES=new Map();
+function openDB(){return new Promise(res=>{try{const r=indexedDB.open('aot-justin-recast',1);r.onupgradeneeded=()=>r.result.createObjectStore('takes',{keyPath:'id'});r.onsuccess=()=>{db=r.result;res();};r.onerror=()=>res();}catch(e){res();}});}
+const dbPut=t=>{try{if(db)db.transaction('takes','readwrite').objectStore('takes').put(t);}catch(e){}};
+const dbDel=id=>{try{if(db)db.transaction('takes','readwrite').objectStore('takes').delete(id);}catch(e){}};
+const dbAll=()=>new Promise(res=>{if(!db)return res([]);try{const r=db.transaction('takes').objectStore('takes').getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>res([]);}catch(e){res([]);}});
+const takesFor=k=>[...TAKES.values()].filter(t=>t.line===k).sort((a,b)=>a.t-b.t);
+const addTake=t=>{TAKES.set(t.id,t);dbPut(t);};
+
+let playing=null;
+function stopPlay(){if(playing){playing.a.pause();playing.btn&&playing.btn.classList.remove('on');playing=null;}}
+function playSrc(src,btn){const same=playing&&playing.btn===btn;stopPlay();if(same)return;const a=new Audio(src);playing={a,btn};btn&&btn.classList.add('on');a.onended=()=>{if(playing&&playing.a===a){btn&&btn.classList.remove('on');playing=null;}};a.play().catch(()=>{});}
+function b64(buf){const u=new Uint8Array(buf);let s='';for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);}
+
+async function apiErr(r){let t='';try{t=await r.text();const j=JSON.parse(t);t=(j.detail&&(j.detail.message||j.detail.status||JSON.stringify(j.detail)))||t;}catch(e){}return 'ElevenLabs '+r.status+': '+String(t).slice(0,240);}
+const vs=c=>({stability:+c.stability,similarity_boost:+c.similarity});
+async function tts(ch,text,voiceId){
+  need();const c=cfg(ch);const id=voiceId||c.voice_id;if(!id)throw new Error('Pick a voice for '+NAMES[ch]+' first.');
+  const r=await fetch('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(id)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify({text,model_id:'eleven_v4',voice_settings:vs(c)})});
+  if(!r.ok)throw new Error(await apiErr(r));
+  return b64(await r.arrayBuffer());
+}
+
+// direction sent to ElevenLabs: the accent goes into EVERY bracket so it holds through a whole line
+function finalText(l){
+  const d=CFG[l.ch];let sc=(S.scripts[l.key]!=null?S.scripts[l.key]:SCRIPTS[l.key]||'[natural] '+l.text).trim();
+  if(!/^\[/.test(sc))sc='[natural] '+sc;
+  let first=true;
+  return sc.replace(/\[([^\]]*)\]/g,(m,inner)=>{const parts=[];if(first&&d.direction)parts.push(d.direction);first=false;if(d.accent)parts.push(d.accent);if(inner.trim())parts.push(inner.trim());return '['+parts.join(', ')+']';});
+}
+const sentHtml=l=>'Sent: '+esc(finalText(l)).replace(/\[([^\]]*)\]/g,'<b>[$1]</b>');
+
+function allLines(){const o=[];for(const ch of ORDER)for(const kind in LINES[ch])for(const text of LINES[ch][kind])o.push({ch,kind,text,key:lkey(ch,kind,text)});return o;}
+const hasKept=l=>takesFor(l.key).some(t=>t.keep);
+const kindLabel=k=>{const m=/^dlg-ch(\d+)$/.exec(k);return m?'Dialogue, chapter '+m[1]:k;};
+let INDEX=new Map();const lineByKey=k=>INDEX.get(k);
+
+// ---------- voices ----------
+const PREV={},busy={},errs={};
+function setVoice(ch,id,name){const c=cfg(ch);c.voice_id=id;c.name=name||'';saveState();for(const t of TAKES.values())if(t.ch===ch&&t.keep&&t.voice_id!==id){t.keep=false;dbPut(t);}renderChars();renderVoice();renderList();}
+async function design(ch){
+  need();const c=cfg(ch);let sample=(c.sample||'').trim();if(sample.length<100)sample=(sample+' '+allLines().filter(l=>l.ch===ch).map(l=>l.text).join(' ')).trim().slice(0,900);
+  const send=model=>fetch('https://api.elevenlabs.io/v1/text-to-voice/design?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify({voice_description:c.desc,model_id:model,text:sample,guidance_scale:5})});
+  let r=await send('eleven_ttv_v3');
+  if(!r.ok&&(r.status===400||r.status===422)){const m=await apiErr(r);if(/model/i.test(m))r=await send('eleven_multilingual_ttv_v2');else throw new Error(m);}
+  if(!r.ok)throw new Error(await apiErr(r));
+  const j=await r.json();return(j.previews||[]).map(p=>({gid:p.generated_voice_id,mp3:p.audio_base_64}));
+}
+async function createVoice(ch,gid){
+  need();const c=cfg(ch),nm='AoT '+NAMES[ch]+' (Long Island, '+BUILT+')';
+  const make=()=>fetch('https://api.elevenlabs.io/v1/text-to-voice',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json'},body:JSON.stringify({voice_name:nm,voice_description:c.desc,generated_voice_id:gid})});
+  let r=await make();
+  if(!r.ok){const m=await apiErr(r);
+    // Account full: remove the old voice this one replaces (its lines already in the game keep playing), then retry once.
+    if(/limit|maximum|slot|quota/i.test(m)&&CFG[ch].old_id){
+      const d=await fetch('https://api.elevenlabs.io/v1/voices/'+encodeURIComponent(CFG[ch].old_id),{method:'DELETE',headers:{'xi-api-key':apiKey()}});
+      if(d.ok||d.status===404)r=await make();else throw new Error(m);
+    }else throw new Error(m);
+  }
+  if(!r.ok)throw new Error(await apiErr(r));
+  const j=await r.json();if(!j.voice_id)throw new Error('No voice ID came back.');
+  setVoice(ch,j.voice_id,nm);return j.voice_id;
+}
+async function tryLine(ch,btn){
+  need();const key='cast:'+ch;delete errs[key];const l=allLines().find(x=>x.ch===ch&&x.text.length>40)||allLines().find(x=>x.ch===ch);
+  busy[key]='Reading a line...';renderVoice();
+  try{const mp3=await tts(ch,finalText(l));delete busy[key];renderVoice();playSrc('data:audio/mpeg;base64,'+mp3,null);}catch(e){errs[key]=e.message||String(e);delete busy[key];renderVoice();}
+}
+function renderVoice(){
+  const ch=S.char,c=cfg(ch),key='cast:'+ch,d=CFG[ch];
+  let h='<h2>'+NAMES[ch]+'\'s new voice</h2>';
+  h+='<div class="hint" style="margin-bottom:6px">Old voice: '+esc(d.old_name)+'</div>';
+  h+='<div class="field"><label>Voice description (what Voice Design builds from)</label><textarea id="vdesc" rows="6">'+esc(c.desc)+'</textarea></div>';
+  h+='<div class="field"><label>Sample the options read (100+ characters)</label><textarea id="vsample" rows="3">'+esc(c.sample)+'</textarea></div>';
+  h+='<div class="row"><button class="btn" id="vdesign"'+(busy[key]?' disabled':'')+'>'+(c.voice_id?'Re-cast: design 3 options':'Design 3 options')+'</button></div>';
+  const P=PREV[ch]||[];
+  if(P.length)h+='<div class="previews">'+P.map((p,i)=>'<div class="pv"><button class="play" data-act="dplay" data-i="'+i+'">&#9654;</button><span class="hint">Option '+(i+1)+'</span><div class="grow"></div><button class="btn small" data-act="duse" data-i="'+i+'">Use this voice</button></div>').join('')+'</div>';
+  if(busy[key])h+='<div class="busy" style="margin-top:6px">'+esc(busy[key])+'</div>';
+  if(errs[key])h+='<div class="err" style="margin-top:6px">'+esc(errs[key])+'</div>';
+  h+='<div class="note" style="margin:10px 0 8px">'+(c.voice_id?'<span style="color:var(--mint)">Voice set:</span> <b>'+esc(c.name||c.voice_id)+'</b> <button class="btn small" data-act="try">Try a line</button>':'<span style="color:var(--coral)">No voice yet.</span> Press Design 3 options above, or paste a voice ID below.')+'</div>';
+  h+='<div class="field"><label>Voice ID</label><input type="text" id="vid" value="'+esc(c.voice_id)+'" placeholder="or paste a voice ID"></div>';
+  h+='<div class="field"><label>Stability (how much each take varies)</label><div class="seg" id="stab">'+STAB.map(s=>'<button data-v="'+s.v+'"'+(+c.stability===s.v?' class="on"':'')+'>'+s.n+'</button>').join('')+'</div></div>';
+  h+='<div class="field"><label>Similarity: <span id="simv">'+c.similarity+'</span> (raise toward 1 if the accent fades)</label><input type="range" min="0" max="1" step="0.05" value="'+c.similarity+'" id="sim"></div>';
+  $('voicePanel').innerHTML=h;
+  $('vdesc').oninput=e=>{c.desc=e.target.value;saveState();};$('vsample').oninput=e=>{c.sample=e.target.value;saveState();};
+  $('vdesign').onclick=async()=>{busy[key]='Designing 3 options...';delete errs[key];renderVoice();try{PREV[ch]=await design(ch);if(!PREV[ch].length)throw new Error('No options came back. Try again.');delete busy[key];}catch(e){errs[key]=e.message||String(e);delete busy[key];}renderVoice();};
+  $('vid').onchange=e=>setVoice(ch,e.target.value.trim(),'');
+  $('stab').onclick=e=>{const b=e.target.closest('button');if(!b)return;c.stability=+b.dataset.v;saveState();renderVoice();};
+  $('sim').oninput=e=>{c.similarity=+e.target.value;$('simv').textContent=c.similarity;saveState();};
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act,ch=S.char,i=+b.dataset.i;
+  if(act==='dplay'){const p=(PREV[ch]||[])[i];if(p)playSrc('data:audio/mpeg;base64,'+p.mp3,b);}
+  else if(act==='duse'){const p=(PREV[ch]||[])[i];if(!p)return;const key='cast:'+ch;busy[key]='Saving this voice...';delete errs[key];renderVoice();
+    createVoice(ch,p.gid).then(()=>{delete busy[key];PREV[ch]=[];renderVoice();}).catch(er=>{errs[key]=er.message||String(er);delete busy[key];renderVoice();});}
+  else if(act==='try')tryLine(ch,b);
+});
+
+// ---------- list ----------
+function renderChars(){
+  const lines=allLines();
+  $('chars').innerHTML=ORDER.map(ch=>{const L=lines.filter(l=>l.ch===ch),todo=L.filter(l=>!hasKept(l)).length;
+    return '<div class="char'+(S.char===ch?' on':'')+'" data-ch="'+ch+'"><span class="n">'+NAMES[ch]+'</span><span class="c">'+L.length+' lines · '+(todo?'<span style="color:var(--coral)">'+todo+' to do</span>':'<span style="color:var(--mint)">done</span>')+'</span></div>';}).join('');
+  const kept=lines.filter(hasKept).length;$('progress').innerHTML='<b style="color:var(--gold)">'+kept+'</b> of '+lines.length+' lines have a new take';
+}
+function visible(){const q=S.search.trim().toLowerCase();return allLines().filter(l=>l.ch===S.char).filter(l=>{if(S.filter==='todo'&&hasKept(l))return false;if(S.filter==='kept'&&!hasKept(l))return false;if(q&&!(l.text.toLowerCase().includes(q)||l.kind.toLowerCase().includes(q)))return false;return true;});}
+function renderList(){
+  INDEX=new Map(allLines().map(l=>[l.key,l]));const L=visible();
+  if(!L.length){$('list').innerHTML='<div class="win empty">'+(S.filter==='todo'?'Every '+NAMES[S.char]+' line has a new take. Pick the other character, or Save recast.json.':'No lines match.')+'</div>';return;}
+  let h='',last='';for(const l of L){if(l.kind!==last){h+='<div class="kindhead">'+esc(kindLabel(l.kind))+'</div>';last=l.kind;}h+=cardHtml(l);}
+  $('list').innerHTML=h;
+}
+function cardHtml(l){
+  const takes=takesFor(l.key),kept=takes.filter(t=>t.keep).length,k=esc(l.key);
+  let h='<div class="win card" data-k="'+k+'"><div class="top"><span class="game">'+esc(l.text)+'</span><span class="tag kind">'+esc(kindLabel(l.kind))+'</span>'+(kept?'<span class="tag kept">kept</span>':'<span class="tag old">old voice in game</span>')+'</div>';
+  h+='<div><div class="hint">Direction and script (what ElevenLabs reads)</div><textarea data-act="script" data-k="'+k+'" rows="2">'+esc(S.scripts[l.key]!=null?S.scripts[l.key]:SCRIPTS[l.key]||'[natural] '+l.text)+'</textarea></div>';
+  h+='<div class="sent" data-k="'+k+'">'+sentHtml(l)+'</div><div class="row"><button class="btn" data-act="gen" data-k="'+k+'"'+(busy[l.key]?' disabled':'')+'>'+(takes.length?'Redo':'Generate')+'</button>';
+  if(busy[l.key])h+='<span class="busy">'+esc(busy[l.key])+'</span>';if(errs[l.key])h+='<span class="err">'+esc(errs[l.key])+'</span>';h+='</div>';
+  if(takes.length){h+='<div class="takes">';takes.forEach((t,i)=>{h+='<div class="take'+(t.keep?' keep':'')+'"><button class="play" data-act="play" data-id="'+t.id+'">&#9654;</button><label class="row" style="gap:4px"><input type="checkbox" data-act="keep" data-id="'+t.id+'"'+(t.keep?' checked':'')+'><span class="lbl">Take '+(i+1)+'</span></label><button class="x" data-act="del" data-id="'+t.id+'">&#10005;</button></div>';});h+='</div>';}
+  return h+'</div>';
+}
+function refreshCard(key){const l=lineByKey(key),el=document.querySelector('.card[data-k="'+CSS.escape(key)+'"]');if(l&&el){const d=document.createElement('div');d.innerHTML=cardHtml(l);el.replaceWith(d.firstChild);}renderChars();}
+let BULK=null;
+async function generate(l){
+  if(busy[l.key])return false;delete errs[l.key];busy[l.key]='Generating...';refreshCard(l.key);let ok=false;
+  for(let tries=0;tries<4&&!ok;tries++){
+    try{const c=cfg(l.ch),before=new Set(takesFor(l.key).map(x=>x.id));const mp3=await tts(l.ch,finalText(l));
+      addTake({id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),line:l.key,ch:l.ch,kind:l.kind,text:l.text,mp3,keep:true,voice_id:c.voice_id,t:Date.now()});
+      for(const x of takesFor(l.key))if(before.has(x.id)&&x.keep){x.keep=false;dbPut(x);}ok=true;}
+    catch(e){const m=e&&e.message||String(e);if(/ 429|too many|concurrent/i.test(m)&&tries<3){busy[l.key]='Busy, retrying...';refreshCard(l.key);await new Promise(r=>setTimeout(r,2000*(tries+1)));}else{errs[l.key]=m;if(BULK&&!BULK.firstErr)BULK.firstErr=m;break;}}
+  }
+  delete busy[l.key];refreshCard(l.key);return ok;
+}
+document.addEventListener('click',e=>{
+  const c=e.target.closest('.char');if(c){S.char=c.dataset.ch;saveState();renderChars();renderVoice();renderList();window.scrollTo(0,0);return;}
+  const f=e.target.closest('#filter button');if(f){S.filter=f.dataset.f;saveState();document.querySelectorAll('#filter button').forEach(b=>b.classList.toggle('on',b===f));renderList();return;}
+  const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act,l=b.dataset.k&&lineByKey(b.dataset.k);
+  if(act==='gen'&&l)generate(l);
+  else if(act==='play'){const t=TAKES.get(b.dataset.id);if(t)playSrc('data:audio/mpeg;base64,'+t.mp3,b);}
+  else if(act==='del'){const t=TAKES.get(b.dataset.id);if(t){TAKES.delete(t.id);dbDel(t.id);refreshCard(t.line);}}
+});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.act!=='keep')return;const tk=TAKES.get(t.dataset.id);if(!tk)return;tk.keep=t.checked;dbPut(tk);refreshCard(tk.line);});
+document.addEventListener('input',e=>{const t=e.target,l=t.dataset.k&&lineByKey(t.dataset.k);if(l&&t.dataset.act==='script'){S.scripts[l.key]=t.value;saveState();const el=document.querySelector('.sent[data-k="'+CSS.escape(l.key)+'"]');if(el)el.innerHTML=sentHtml(l);}});
+$('search').value=S.search||'';$('search').addEventListener('input',e=>{S.search=e.target.value;saveState();renderList();});
+document.querySelectorAll('#filter button').forEach(b=>b.classList.toggle('on',b.dataset.f===S.filter));
+function showErr(m){let hint='';
+  if(/Failed to fetch|NetworkError|Load failed/i.test(m))hint='The page could not reach ElevenLabs. Download this file and open it in Chrome or Safari, not inside a preview.';
+  else if(/ 401|invalid_api_key|unauthor/i.test(m))hint='ElevenLabs did not accept the API key. Paste it again at the top.';
+  else if(/quota|credits|insufficient/i.test(m))hint='Your ElevenLabs account is out of credits for this month.';
+  $('errBox').style.display='block';$('errBox').innerHTML='<b style="color:var(--coral)">Generating failed.</b> '+esc(hint)+'<div class="sent" style="margin-top:6px">ElevenLabs said: '+esc(m)+'</div>';}
+$('genAll').addEventListener('click',async()=>{
+  if(BULK){BULK.stop=true;$('genAll').textContent='Stopping...';return;}
+  if(!apiKey()){alert('Paste your ElevenLabs API key at the top first.');return;}
+  const miss=ORDER.filter(c=>!cfg(c).voice_id);if(miss.length){alert('Pick a voice for '+miss.map(c=>NAMES[c]).join(' and ')+' first (Design 3 options, then Use this voice).');S.char=miss[0];saveState();renderChars();renderVoice();renderList();return;}
+  const todo=allLines().filter(l=>!hasKept(l));if(!todo.length){alert('Nothing left to do. Save recast.json.');return;}
+  const chars=todo.reduce((n,l)=>n+finalText(l).length,0);
+  if(!confirm('Generate one take for '+todo.length+' lines? About '+chars.toLocaleString()+' characters of ElevenLabs credit. Each take is kept automatically; you can Redo any line after.'))return;
+  BULK={stop:false,done:0,fail:0};$('genAll').textContent='Stop';let i=0;const total=todo.length;
+  const msg=()=>{$('bulkMsg').textContent=BULK.done+' of '+total+' done'+(BULK.fail?' · '+BULK.fail+' failed (see red notes)':'');};msg();
+  const worker=async()=>{while(!BULK.stop&&i<todo.length){const l=todo[i++];const ok=await generate(l);ok?BULK.done++:BULK.fail++;msg();}};
+  await Promise.all([worker(),worker(),worker()]);
+  const stopped=BULK.stop,fe=BULK.firstErr;BULK=null;$('genAll').textContent='Generate all';
+  $('bulkMsg').textContent+=stopped?' · stopped':' · finished. Listen, Redo any you dislike, then Save recast.json.';
+  if(fe)showErr(fe);if(!stopped&&!fe){S.filter='kept';saveState();document.querySelectorAll('#filter button').forEach(b=>b.classList.toggle('on',b.dataset.f==='kept'));}
+  renderChars();renderList();
+});
+// ---------- export (same shape merge-voice.js reads) ----------
+$('save').addEventListener('click',()=>{
+  const scope=new Set(allLines().map(l=>l.key)),kept=[...TAKES.values()].filter(t=>t.keep&&scope.has(t.line));
+  if(!kept.length){alert('Keep at least one take first.');return;}
+  const clips={},dclips=[];
+  for(const t of kept){const d=CFG[t.ch].dlg[t.line];
+    if(d)dclips.push({chapter:d.chapter,voice:t.ch,speaker:d.speaker,text:t.text,mp3:t.mp3,model:'eleven_v4'});
+    else((clips[t.ch]=clips[t.ch]||{})[t.kind]=clips[t.ch][t.kind]||[]).push({text:t.text,mp3:t.mp3,model:'eleven_v4'});}
+  const voices={},dvoices={},dscripts={};
+  for(const ch of ORDER){const c=cfg(ch),v={voice_id:c.voice_id,name:c.name,model:'eleven_v4',settings:vs(c),direction:CFG[ch].direction,sts_model:'eleven_english_sts_v2',scripts:{},desc:c.desc};
+    for(const l of allLines().filter(x=>x.ch===ch)){const sc=S.scripts[l.key]!=null?S.scripts[l.key]:SCRIPTS[l.key];if(!sc)continue;if(CFG[ch].dlg[l.key])dscripts[ch+'|'+l.text]=sc;else v.scripts[l.kind+'|'+l.text]=sc;}
+    if(ch==='ellie')dvoices[ch]=Object.assign(v,{designed:true});else voices[ch]=v;}
+  const blob=new Blob([JSON.stringify({recast:'de1',built:BUILT,clips,voices,dialog:{voices:dvoices,scripts:dscripts,clips:dclips}})],{type:'application/json'});
+  (async()=>{ try{ const file=new File([blob],'recast.json',{type:'application/json'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'Justin recast'}); return; } }catch(e){} const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='recast.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},4000); })();
+});
+openDB().then(dbAll).then(all=>{for(const t of all)TAKES.set(t.id,t);if(!LINES[S.char])S.char='justin';renderChars();renderVoice();renderList();});
+</script>
+</body>
+</html>

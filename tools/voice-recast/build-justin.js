@@ -1,11 +1,11 @@
-// node tools/voice-recast/build-justin.js <out.html>   (run from the repo root)
+// node tools/voice-recast/build-justin.js [out.html]   (run from the repo root; default recast-justin.html, the page ADMIN > RECAST JUSTIN opens)
 // Builds the Justin Recast Baker: a new deeper voice with a thick New York accent (Voice Design), then every Justin line re-recorded
 // with its own hand-written direction. Tom (2026-10-31, 14:56): the first voice had no accent and every dialogue line read "natural".
 // Lines: every justin battle line in data/lines.js, his dialogue lines that have a clip (data/voice/dialog-ch*.js) and the recruit
 // talk on the bake list. The page puts the accent into EVERY bracket, so the scripts below carry only the emotion.
 // Merge the export with: node tools/voice-recast/merge-voice.js recast.json data out1 justin
 const fs=require('fs'),path=require('path');
-const R=path.resolve(__dirname,'../..')+'/', OUT=process.argv[2]||'justin-recast.html';
+const R=path.resolve(__dirname,'../..')+'/', OUT=process.argv[2]||'recast-justin.html';
 const strip=s=>s.replace(/^\s*['"]use strict['"];/,'');
 eval(strip(fs.readFileSync(R+'data/lines.js','utf8'))+';global.L=LINES;');
 eval(strip(fs.readFileSync(R+'data/voice-clips.js','utf8'))+';global.VC=VOICE_CLIPS');
@@ -81,6 +81,15 @@ const how=/<p style="margin-top:0"><b>1\.<\/b>[\s\S]*?<\/p>\s*<p><b>Directions<\
 if(!how.test(t)) throw new Error('how-to not found');
 t=t.replace(how,()=>'<p style="margin-top:0"><b>Why:</b> Justin has no New York accent and his voice is too light. This page designs a deeper Long Island voice and re-records every line with its own direction.</p><p><b>1.</b> Paste your API key. <b>2.</b> Press <b>Design 3 options</b>, play all three, press <b>Use this voice</b> on the one with the thickest accent (none right? press it again for 3 more, or edit the description first). <b>3.</b> Press <b>Bake all</b> and keep the screen on. <b>4.</b> Play through, re-take any line, then <b>Export</b> and send me the file.</p><p><b>Directions</b>');
 sub('saving a new voice removes the old Deedee or Ellie voice for you','the old Justin voice is kept (Kenji uses it too)');
+
+// ---- lives in the game: ADMIN > RECAST JUSTIN opens recast-justin.html inside the app (phone), so share the key with the
+// bake page and the Voice Library, share the export through the phone's share sheet, and give it a way back to the game.
+sub("try{$('key').value=localStorage.getItem('aot-baker-key')||'';}catch(e){}","try{$('key').value=localStorage.getItem('aot-el-key')||localStorage.getItem('aot-baker-key')||'';}catch(e){}");
+sub("$('key').addEventListener('input',()=>{try{localStorage.setItem('aot-baker-key',$('key').value.trim());}catch(e){}});","$('key').addEventListener('input',()=>{try{localStorage.setItem('aot-el-key',$('key').value.trim());}catch(e){}});");
+sub("const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='recast.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);",
+    "(async()=>{ try{ const file=new File([blob],'recast.json',{type:'application/json'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'Justin recast'}); return; } }catch(e){} const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='recast.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},4000); })();");
+sub('<h1>Adventures of Tom <span>Justin Recast</span></h1>','<a class="btn" href="index.html" style="text-decoration:none">&#8249; Game</a><h1>Adventures of Tom <span>Justin Recast</span></h1>');
+sub(' Search the library above, or paste a voice ID below.',' Press Design 3 options above, or paste a voice ID below.');
 const J=v=>JSON.stringify(v).replace(/<\/script/gi,'<\\/script');
 const put=(k,v)=>{ if(!t.includes(k)) throw new Error('missing '+k); t=t.split(k).join(v); };
 put('/*__LINES__*/',J(LINES_)); put('/*__SCRIPTS__*/',J(SCRIPTS)); put('/*__CFG__*/',J(CFG)); put('/*__BUILT__*/',new Date().toISOString().slice(0,10));

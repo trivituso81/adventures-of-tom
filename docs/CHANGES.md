@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 16): RECAST JUSTIN lives in ADMIN (`recast1`)
+
+- Tom (15:32): the recast page should be in the admin section. `recast-justin.html` is now in the repo (built by `node tools/voice-recast/build-justin.js`, no argument) and title screen > ADMIN > RECAST JUSTIN opens it inside the app. It shares the ElevenLabs key with the bake page and the Voice Library (`aot-el-key`), the export goes out through the phone share sheet as `recast.json`, and a Game button goes back. Works on a phone-width screen (one column).
+- Rebuild the page after any change to Justin's lines or scripts: `node tools/voice-recast/build-justin.js`, commit it.
+
 ## 2026-10-31 (day, 15): Justin recast page (deeper, thick New York accent, a direction per line)
 
 - Tom (14:56): no accent in the justinv1 takes, dialogue directions all "natural", voice should be deeper. Fact: the accent and pitch come from the ElevenLabs voice itself; the AoT Justin voice was designed with a "slight country twang", so a bracket tag cannot add a Long Island accent to it. Decision: recast.
