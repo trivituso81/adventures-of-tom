@@ -5,7 +5,7 @@
 ## 2026-10-30 (night, 5): Square walk-behind, roof tips
 
 - `PLATE_BEHIND` now covers the roof peaks and chimneys of Snail Mail, Kettle Cottage, Moon Club (roof and gold sphere) and Taxi Co., so anyone standing on the walkway just north of them (row 13) is behind the roof, not drawn on top of it. Base 940 keeps the alley (col 22, row 14) and the south street unaffected. `plate.js?v=behind4`.
-- Title stamp now `build walk4` (`main.js?v=walk4`).
+- Title stamp is unchanged (`build grace3` from the Grace session); roof tips ship as `plate.js?v=behind4`.
 - Checks: smoke clean, reach_test town 0 fails, phone screenshots with Tom at each shop's peak.
 
 ## 2026-10-30: Beanie Master: fart one second longer, soft golden good-mood glow
