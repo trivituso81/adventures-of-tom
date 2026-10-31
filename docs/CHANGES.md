@@ -1,3 +1,9 @@
+## 2026-10-31 (night, 16): House interiors zoomed out a little in portrait
+
+- Tom (23:48): the house interiors feel a bit too zoomed in; can it be fixed without adding dead space. Cause: a square room painting was scaled so its full height filled the whole phone screen, which crops it to the middle 46% of its width. Now in portrait the painting ends where the control strip begins (`ROOM_STRIP` = 116 px, engine/overworld.js `resize()`), which shows about 53% of the width (393 x 852: scale 1.66 to 1.44). The strip under it gets the existing soft backdrop, so it reads as a shadow behind the controls. The camera has no vertical scroll in portrait now (`updateCamera`, top flush).
+- Landscape is unchanged: the painting already spans the full width there, so zooming out further would leave bars at the sides.
+- Tests: rooms_test (bakery, tomhouse, amyhouse, observatory, creole) screenshots looked at in portrait and landscape; `tomsuite: door leads out` fails the same way before this change; smoke 0 fails. Tag `overworld.js?v=rz1`.
+
 ## 2026-10-30 (night, 15): Tom walks at half speed inside houses and shops
 
 - Tom (23:50): when walking inside a house interior, halve the walking speed. Each step indoors now takes 0.28 s instead of 0.14 s (`indoorSlow()` next to `startMove`, engine/battle-draw.js); the party follows at the same slower pace (engine/followers.js). Outdoor maps are unchanged. It applies to every map where `outside` is false (houses, shops, school, cafetorium). Cutscene walks that set their own step time are untouched.

@@ -287,6 +287,7 @@ function update(dt) {
 // that would need more (small rooms, strips) keeps the cap and shows a soft backdrop instead (engine/draw.js plateBackdrop),
 // and wants a bigger painting (docs/MAP_SIZES.md).
 const OUTDOOR_COVER_CAP=2.25;
+const ROOM_STRIP=116;   // portrait: height in px of the control strip at the bottom that a square room painting does not need to cover
 function outdoorCover(map,width,height) {
   if(!map||!map.outside||typeof PLATES==='undefined'||!PLATES[map.id]) return 1;
   return Math.min(OUTDOOR_COVER_CAP,Math.max(1,width/(map.w*T),height/(map.h*T)));
@@ -304,7 +305,9 @@ function resize() {
   const sq=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
   if(sq) {
     const mw=currentMap.w*T,mh=currentMap.h*T;
-    scale=Math.max(width/mw,height/mh);
+    // Portrait: the painting ends where the control strip begins (ROOM_STRIP px from the bottom) instead of running under it, which shows
+    // about 53% of the width instead of 46% on a 393x852 phone. The strip below it gets the soft backdrop, which sits behind the controls.
+    scale=Math.max(width/mw,(height-(layout.landscape?0:ROOM_STRIP))/mh);
     W=Math.ceil(width/scale-1e-6);
     H=Math.ceil(height/scale-1e-6);
   } else if(!currentMap.outside&&!layout.landscape&&width<900) {
@@ -336,7 +339,9 @@ function updateCamera(dt) {
   // canvas so the map always fills the screen and never shows blank space past its edges.
   // Map shorter than the canvas: keep it centred in the safe band (blank space is unavoidable).
   let ty;
-  if(mh>=H) {
+  const sqFit=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
+  if(sqFit&&mh<H) ty=0;   // whole painting height fits (portrait): top flush, no vertical scroll
+  else if(mh>=H) {
     ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H);
     // Square painted rooms only (rooms of the older fit keep their own): near the top or bottom edge the painting would be flush with the
     // screen and put Tom's tile under the title bar or the controls, so scroll past the edge just far enough to keep his tile in the safe
