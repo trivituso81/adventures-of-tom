@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 4): Downtown LA cutouts made here, no generator (behind12)
+
+- Tom asked whether the cutout layers could be made without sending prompts to an image generator. They can: `tools/make_blvd_fg.py` pass 3 cuts the hard-edged objects out of `art/blvd.webp` itself, by colour (lamp poles) and OpenCV GrabCut (lantern heads and feet, taco truck, Starlite marquee with its sunburst, Griffith Park gate, Jefferson Park arch) plus hand polygons for the six awnings. `claude/dtla-cutout-layers-prompt.txt` is no longer needed.
+- `PLATE_BEHIND.blvd` (`engine/plate.js?v=behind12`): the arch, gate, awnings, marquee, truck and all 12 lamp posts are now `fg:true` zones drawn from the rebuilt `art/blvd-fg.webp` (`?v=20261031e`), so only the object's own pixels cover Tom; the old painting-slice rects (which redrew paving and wall beside poles and posts) are gone. The three south awnings cover anyone in a south doorway (base 1410).
+- `tools/blvd_behind_shots.py` has six more spots (north lamp, Starlite door, plaza lamp, arch, gate, truck). Shots in `tools/shots/blvd-behind-*.png`. blvd_test, smoke (default and grace,rose) pass; blvd_test exit checks flaked once on timing and passed on rerun. Not played on phone.
+
 ## 2026-10-31 (day, 3): Downtown LA v4 painting installed (Cab Co. north, Nickel's south)
 
 - Tom sent a new Downtown LA painting (`docs/reference/blvd_v4_from_tom.png`, art `?v=20261031d`): the same street, with Angel City Cab Co. now on the north row (door 22,9) and Nickel's on the south row (door 25,21). Walk map, exits, walkways and cutouts are unchanged; only the two buildings swapped places in `data/maps-la.js` (`nickels` x23,y17; `lacab` x20,y5).

@@ -190,18 +190,19 @@ const PLATE_BEHIND={ town:[
 ],
 // DOWNTOWN LA: the JEFFERSON PARK arch (board and both posts with their globe lamps), so Tom walks behind the posts and under the board.
 blvd:[
+  // Everything below is a cutout from art/blvd-fg.webp (tools/make_blvd_fg.py, pass 3: lamps, truck, marquee, gate, arch and awnings cut by
+  // colour and GrabCut), so the rects can be loose: only the object's own pixels are drawn over Tom.
   // Jefferson Park arch: board and both posts with their globe lamps
-  {x:812,y:1420,w:274,h:90,base:1568},{x:766,y:1402,w:56,h:170,base:1568},{x:1078,y:1402,w:56,h:170,base:1568},
+  {x:800,y:1410,w:300,h:106,base:1568,fg:true},{x:754,y:1390,w:80,h:186,base:1568,fg:true},{x:1066,y:1390,w:80,h:186,base:1568,fg:true},
   // Griffith Park gate: board and both posts (Tom climbs the steps and disappears under the board)
-  {x:46,y:248,w:158,h:72,base:340},{x:14,y:238,w:44,h:128,base:340},{x:198,y:222,w:40,h:130,base:340},
-  // shop awnings and the Starlite marquee: anyone on the sidewalk or in a doorway is under them
-  {x:250,y:546,w:236,h:58,base:690},{x:551,y:546,w:254,h:56,base:690},{x:923,y:494,w:330,h:104,base:690},{x:1343,y:578,w:290,h:48,base:690},
+  {x:32,y:236,w:186,h:96,base:340,fg:true},{x:0,y:224,w:70,h:144,base:340,fg:true},{x:186,y:208,w:66,h:146,base:340,fg:true},
+  // shop awnings and the Starlite marquee (with its sunburst): anyone on the sidewalk or in a doorway is under them
+  {x:250,y:566,w:237,h:37,base:690,fg:true},{x:580,y:535,w:225,h:47,base:690,fg:true},{x:909,y:406,w:358,h:206,base:690,fg:true},{x:1343,y:585,w:287,h:43,base:690,fg:true},
+  {x:165,y:1240,w:297,h:60,base:1410,fg:true},{x:612,y:1238,w:283,h:62,base:1410,fg:true},{x:1488,y:1240,w:302,h:65,base:1410,fg:true},
   // taco truck: the sidewalk is behind it
-  {pts:[[722,712],[748,692],[760,672],[790,664],[810,658],[900,657],[935,661],[943,670],[946,700],[949,745],[941,766],[900,769],[780,769],[740,765],[725,752],[722,735]],base:780},
-  // sidewalk lamps (head, pole, foot) on the north curb
-  ...BLVD_LAMP(185,478,658),...BLVD_LAMP(207,543,716),...BLVD_LAMP(537,543,716),...BLVD_LAMP(817,548,656),...BLVD_LAMP(980,535,716),...BLVD_LAMP(1275,557,716),
-  // plaza lamps in front of the south row
-  ...BLVD_LAMP(120,1268,1456),...BLVD_LAMP(483,1268,1456),...BLVD_LAMP(587,1268,1456),...BLVD_LAMP(1002,1268,1452),...BLVD_LAMP(1368,1278,1452),...BLVD_LAMP(1868,1273,1452),
+  {x:708,y:641,w:256,h:145,base:780,fg:true},
+  // 12 lamp posts (six on the north curb, six in the plaza), head to foot
+  {x:151,y:464,w:68,h:206,base:658,fg:true},{x:173,y:529,w:68,h:199,base:716,fg:true},{x:491,y:529,w:68,h:199,base:716,fg:true},{x:786,y:534,w:68,h:134,base:656,fg:true},{x:946,y:521,w:68,h:207,base:716,fg:true},{x:1241,y:536,w:68,h:192,base:716,fg:true},{x:88,y:1254,w:68,h:214,base:1456,fg:true},{x:450,y:1254,w:68,h:214,base:1456,fg:true},{x:553,y:1254,w:68,h:214,base:1456,fg:true},{x:958,y:1254,w:68,h:210,base:1452,fg:true},{x:1331,y:1264,w:68,h:200,base:1452,fg:true},{x:1798,y:1259,w:68,h:158,base:1452,fg:true},
   // cutouts from art/blvd-fg.webp (tools/make_blvd_fg.py): palms, bushes, planters in the plaza ...
   {x:0,y:1462,w:225,h:202,base:1652,fg:true},{x:235,y:1490,w:107,h:92,base:1580,fg:true},{x:412,y:1466,w:90,h:156,base:1620,fg:true},{x:488,y:1515,w:100,h:95,base:1608,fg:true},
   {x:660,y:1466,w:120,h:96,base:1562,fg:true},{x:632,y:1562,w:180,h:102,base:1664,fg:true},{x:1128,y:1466,w:92,h:96,base:1562,fg:true},{x:1116,y:1562,w:124,h:102,base:1664,fg:true},
@@ -244,7 +245,7 @@ function plateWalkBehind(map,plate) {
     if(z.pts) { z.pts.forEach((q,i)=>i?ctx.lineTo(q[0]*s,q[1]*s):ctx.moveTo(q[0]*s,q[1]*s)); ctx.closePath(); }
     else if(z.cx!==undefined) ctx.ellipse(z.cx*s,z.cy*s,z.rx*s,z.ry*s,0,0,Math.PI*2); else ctx.rect(z.x*s,z.y*s,z.w*s,z.h*s);
     ctx.clip();
-    if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031b'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
+    if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031e'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
     else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
     ctx.restore();
   }

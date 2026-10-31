@@ -34,7 +34,7 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
   const arrivals=[[24,22],[14,10],[15,10],[28,11],[28,12],[1,5],[2,5],[20,22],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 
-SPOTS={'cabN':(22,10,'up'),'nickS':(25,22,'up')}
+SPOTS={'cabN':(22,10,'up'),'nickS':(25,22,'up'),'lampN':(8,10,'down'),'starlite':(17,9,'up'),'lampS':(7,21,'down'),'arch':(13,23,'down'),'gate':(1,4,'up'),'truck':(12,10,'down')}
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -44,4 +44,9 @@ with sync_playwright() as pw:
     skip_intro(pg); pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(1800); skip_intro(pg)
     for n,(x,y,d) in SPOTS.items():
         stand(pg,x,y,d); pg.evaluate("()=>{ for(const f of followers) f.hidden=true; }"); pg.wait_for_timeout(300); shot(pg,'behind-'+n)
+        # crop around Tom (canvas px -> screenshot px) for a close look
+        r=pg.evaluate("()=>{ const c=document.querySelector('canvas'), b=c.getBoundingClientRect(); return {sx:b.width/c.width, sy:b.height/c.height, bx:b.left, by:b.top, px:(player.x+.5)*T-camera.x, py:(player.y+1)*T-camera.y}; }")
+        from PIL import Image
+        im=Image.open(os.path.join(SHOTS,f'blvd-behind-{n}.png')); cx=(r['bx']+r['px']*r['sx'])*2; cy=(r['by']+r['py']*r['sy'])*2
+        im.crop((int(cx-180),int(cy-260),int(cx+180),int(cy+60))).save(os.path.join(SHOTS,f'blvd-behind-{n}-tom.png'))
     br.close()
