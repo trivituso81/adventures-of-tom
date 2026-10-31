@@ -2026,5 +2026,87 @@
    "face_eyes_closed",
    "Nara face, human eyes closed"
   ]
+ ],
+ "justin": [
+  [
+   1,
+   "couch",
+   "Living room couch"
+  ],
+  [
+   2,
+   "wire_nut_red",
+   "Wire nut, red"
+  ],
+  [
+   3,
+   "wire_nut_yellow",
+   "Wire nut, yellow"
+  ],
+  [
+   4,
+   "wire_nut_blue",
+   "Wire nut, blue"
+  ],
+  [
+   5,
+   "wire_nut_pink",
+   "Wire nut, pink"
+  ],
+  [
+   6,
+   "wire_nut_green",
+   "Wire nut, green"
+  ],
+  [
+   7,
+   "extension_cord",
+   "Orange extension cord"
+  ],
+  [
+   8,
+   "cordless_drill",
+   "Yellow cordless drill"
+  ],
+  [
+   9,
+   "drywall_sheet_leaning",
+   "Drywall sheet, leaning"
+  ],
+  [
+   10,
+   "joint_compound_bucket",
+   "Joint compound bucket with putty knife"
+  ],
+  [
+   11,
+   "stepladder",
+   "Stepladder"
+  ],
+  [
+   12,
+   "drywall_square_patched",
+   "Drywall square with a patch"
+  ],
+  [
+   13,
+   "tv_off",
+   "Wide TV, off"
+  ],
+  [
+   14,
+   "tv_basketball",
+   "Wide TV, basketball game"
+  ],
+  [
+   15,
+   "tv_football",
+   "Wide TV, football game"
+  ],
+  [
+   16,
+   "plaster_chunk",
+   "Plaster chunk and crumbs"
+  ]
  ]
 }

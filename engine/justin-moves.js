@@ -25,7 +25,9 @@ const jitter=f=>ST.jolt(f,.45);
 // a run of frames: seq([['lw_grab',300],...],t0) -> keys at x,y
 const seq=(list,t0,x,y,extra={})=>{ const out=[]; let t=t0; for(const [f,d,o] of list) { out.push(Object.assign({t,x,y,f},extra,o||{})); t+=d; } return out; };
 const wob=(a,b)=>u=>Math.sin(u*Math.PI*2*(b||1))*a;
-const hexNut=(x,y,r,c)=>{ gfx.beginPath(); for(let k=0;k<6;k++) { const a=k*Math.PI/3; gfx[k?'lineTo':'moveTo'](x+Math.cos(a)*r,y+Math.sin(a)*r); } gfx.closePath(); gfx.fillStyle='#17110d'; gfx.fill(); gfx.beginPath(); for(let k=0;k<6;k++) { const a=k*Math.PI/3; gfx[k?'lineTo':'moveTo'](x+Math.cos(a)*(r-2),y+Math.sin(a)*(r-2)); } gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+// wire nuts are painted (art/props/justin/wire_nut_*); the drawn hexagon is only the fallback until the image loads
+const NUT_ART={'#e84a3a':'red','#f0c030':'yellow','#3a8ae8':'blue','#e86aa8':'pink','#50c868':'green'};
+const hexNut=(x,y,r,c)=>{ if(NUT_ART[c]&&PROPART.draw('justin/wire_nut_'+NUT_ART[c],x,y,{h:r*3.4})) return; gfx.beginPath(); for(let k=0;k<6;k++) { const a=k*Math.PI/3; gfx[k?'lineTo':'moveTo'](x+Math.cos(a)*r,y+Math.sin(a)*r); } gfx.closePath(); gfx.fillStyle='#17110d'; gfx.fill(); gfx.beginPath(); for(let k=0;k<6;k++) { const a=k*Math.PI/3; gfx[k?'lineTo':'moveTo'](x+Math.cos(a)*(r-2),y+Math.sin(a)*(r-2)); } gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
 
 // ---------- shared scenes ----------
 SC.jv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); label(s.txt,s.x,s.y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
@@ -86,8 +88,17 @@ J.bad_call=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   K.push({t:5200,x:'home',y:'home',f:'idle'},{t:5500,f:'idle'});
   ST.keys(fx,K);
   SC.jv_callwave=SC.jv_callwave||((s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.4-k*.1); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; const x=lerp(s.x0,s.x1,q); gfx.strokeStyle='#ffd27a'; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(x,s.y,4+q*10,10+q*24,0,0,Math.PI*2); gfx.stroke(); } });
+  // The couch and the wide TV are painted props in the back layer (behind him). The TV shows football until he rises; then the
+  // play is replaced by a yellow flag on the field (drawn here, so it lines up with the painted screen).
+  SC.jv_couch=SC.jv_couch||((s,u)=>{ gfx.globalAlpha=fin(u,.05)*fade(u,.94); const w=s.w,h=w*78/160;
+    if(!PROPART.draw('justin/couch',s.x,s.base-h/2,{w})) { R(s.x-w/2,s.base-h*.75,w,h*.75,'#e6d8bd'); R(s.x-w/2,s.base-h*.4,w,h*.4,'#d4c4a4'); R(s.x-w/2,s.base-h*.75,10,h*.75,'#c8b894'); R(s.x+w/2-10,s.base-h*.75,10,h*.75,'#c8b894'); } });
+  SC.jv_tv=SC.jv_tv||((s,u,t)=>{ gfx.globalAlpha=fin(u,.05)*fade(u,.94); const w=s.w,h=w*123/160,cy=s.base-h/2;
+    const ok=PROPART.draw('justin/tv_football',s.x,cy,{w}),x0=s.x-w/2+w*.056,y0=cy-h/2+h*.065,sw=w*.88,sh=h*.715;   // the screen inside the bezel
+    if(!ok) { R(s.x-w/2,cy-h/2,w,h*.86,'#1a1a22'); R(x0,y0,sw,sh,'#3f8a3a'); }
+    if(t>=s.flag) { R(x0,y0,sw,sh,'#3f8a3a'); for(let k=1;k<4;k++) R(x0+sw*k/4-1,y0,2,sh,'#e8f0e0'); const a=x0+sw*.5,b=y0+sh*.55;
+      R(a-9,b-6,18,12,'#ffe14a'); R(a-9,b-6,18,3,'#fff7b0'); R(a-9,b+3,18,3,'#e0b020'); R(a+9,b-1,5,4,'#e0b020'); R(a+13,b+1,3,3,'#b88810'); R(a-12,b+4,4,3,'#e0b020'); } });
   ST.play(E2,[
-    [0,()=>setMessage('Justin is on the couch. The game is on.')],
+    [0,()=>{ setMessage('Justin is on the couch. The game is on.'); scene('jv_couch',3.8,{back:true,x:Math.min(me.x,576-79-3),base:me.base-2,w:158}); scene('jv_tv',3.8,{back:true,x:Math.max(70,me.x-175),base:me.base-26,w:104,flag:.4}); }],
     [150,()=>say(m.id,'bad_call_couch')],
     [960,()=>{ setMessage('He is up. He is pointing.'); sfx.whoosh&&sfx.whoosh(); }],
     ['hf',1700],
@@ -124,7 +135,7 @@ SC.jv_wall=(s,u)=>{ const x=s.x,y0=s.top-18,w=s.w+30,h=s.h+30,a=fin(u,.12)*(u>.8
   gfx.globalAlpha=a*.92; R(x-w/2,y0,w,h,'#c9bfb0'); R(x-w/2,y0,w,5,'#e6dccd'); for(let r=0;r<4;r++) R(x-w/2+6,y0+14+r*(h/4),w-12,2,'#a89d8c');
   const c=cl((u-s.t1)/.06); if(c>0) { gfx.strokeStyle='#4a4238'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(x-6,y0+4); gfx.lineTo(x+8,y0+h*.3); gfx.lineTo(x-10,y0+h*.55); gfx.lineTo(x+6,y0+h*.8); gfx.stroke(); }
   const c2=cl((u-s.t2)/.06); if(c2>0) { gfx.strokeStyle='#4a4238'; gfx.beginPath(); gfx.moveTo(x-w*.4,y0+h*.35); gfx.lineTo(x,y0+h*.4); gfx.lineTo(x+w*.4,y0+h*.3); gfx.moveTo(x-w*.3,y0+h*.7); gfx.lineTo(x+w*.3,y0+h*.65); gfx.stroke(); } };
-SC.jv_chunks=(s,u)=>{ for(let k=0;k<12;k++) { const q=cl(u*1.25-k*.03); if(q<=0||q>=1) continue; const x=s.x+(k-6)*(s.w/12),y=s.top+q*q*(s.h+30)-12; gfx.globalAlpha=1-q*.5; gfx.save(); gfx.translate(x,y); gfx.rotate(q*5+k); R(-5,-4,10,8,k%2?'#c9bfb0':'#a89d8c'); gfx.restore(); } };
+SC.jv_chunks=(s,u)=>{ for(let k=0;k<12;k++) { const q=cl(u*1.25-k*.03); if(q<=0||q>=1) continue; const x=s.x+(k-6)*(s.w/12),y=s.top+q*q*(s.h+30)-12; gfx.globalAlpha=1-q*.5; gfx.save(); gfx.translate(x,y); gfx.rotate(q*5+k); if(!PROPART.draw('justin/plaster_chunk',0,0,{h:9+(k%3)*3,flip:k%2===0})) R(-5,-4,10,8,k%2?'#c9bfb0':'#a89d8c'); gfx.restore(); } };
 J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST.unit(m);
   const walk=(u,t)=>Math.floor(t*7)%2?'dd_walkA':'dd_walkB';
   const K=[{t:0,x:'home',y:'home',f:'idle'},{t:250,f:walk,ease:'lin'},{t:1000,x:p.x,y:p.y,f:'dd_lookUp'}];
@@ -221,7 +232,7 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     [6150,'end',res(E2)+'He is fine. He is fine.']]); };
 
 // ---------- DRYWALL (special): carries a sheet in, screws it up in front of the party, all damage halved ----------
-SC.jv_sheet=(s,u)=>{ const x=s.x,base=s.base,h=s.h,w=s.w,q=s.up?1:ez(u/.2),a=fin(u,.06)*(u>.9?(1-u)/.1:1); gfx.globalAlpha=a;
+SC.jv_sheet=(s,u)=>{ const x=s.x,base=s.base,h=s.h,w=s.w,q=1,a=fin(u,.06)*(u>.9?(1-u)/.1:1); gfx.globalAlpha=a;
   gfx.save(); gfx.translate(x,base); gfx.rotate(-(1-q)*1.2); R(-w/2,-h,w,h,'#ebe4d6'); R(-w/2,-h,w,4,'#fff9ec'); R(-w/2,-h,3,h,'#cfc6b4'); R(w/2-3,-h,3,h,'#cfc6b4');
   for(let k=1;k<4;k++) R(-w/2+6,-h+k*h/4-1,w-12,2,'#d8d0c0');
   const sc=cl((u-.3)/.5); for(let k=0;k<4;k++) if(sc>k/4) E(-w/2+7+(k%2)*(w-14),-h+10+Math.floor(k/2)*(h-20),2.5,2.5,'#8a8f98');
