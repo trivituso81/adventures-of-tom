@@ -1,3 +1,9 @@
+## 2026-10-31 (night, 23): tap a stampcard tag to see what it means
+
+- Tom asked that tags like Sparkle and Cozy on the Stampcard explain themselves when tapped. Each tag on a move row (LV, VP, element such as Kinetic, Cozy, Splash, Sparkle, Chatter, Amber, and POLISHED) now has a small dotted underline. Tapping one opens a one-line tip under the row; tapping it again, or another tag, changes or closes it. Only the tag is the tap target, so the row's buttons are untouched.
+- Element tips reuse `B2_ELEM_WHAT` (`engine/battle2-ui.js`). Stampcard only for now: in battle the element chips sit inside move buttons where a tap picks the move.
+- Files: `engine/progress.js?v=tip1`, `index.html` (tip styles), `engine/main.js?v=tip1`, stamp `build tip1`.
+
 ## 2026-10-31 (night, 23): five stale ch27 clips removed; stricter clip audit
 
 - Removed 5 ch27 dialogue clips whose lines were reworded (Olivia "My lasagna is a brick... Michael is holding it...", Michael "I have Isla, the diaper bag...", "Hey, Tom. I'd wave...", "I heard Olivia say Michael...", "Yes, Olivia. Got him..."). Dialogue clips 2257 to 2252. New wordings need a re-bake.

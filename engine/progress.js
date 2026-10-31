@@ -359,13 +359,26 @@ function b8Row(m,slot,core) {
   const copy=el('span','sc-copy');
   const hd=el('span','sc-hd'); const t=el('span','sc-title'); t.textContent=cur.name+(rank>=2?' +':'')+(ult?' ★':''); hd.appendChild(t); copy.appendChild(hd);
   const tags=el('span','sc-tags');
-  const tag=(txt,cls)=>{ const g=el('span','sc-tag'+(cls?' '+cls:'')); g.textContent=txt; tags.appendChild(g); };
-  if(!core) tag('LV '+b8Gate(m,slot),m.level<b8Gate(m,slot)?'warn':'');
+  // Tap a tag for a one-line explanation under the row. Tap it again, or another tag, to change or close it.
+  const tipBox=el('span','sc-tip'); tipBox.hidden=true;
+  const tipOn=(g,name,text)=>{
+    g.classList.add('tappable'); g.setAttribute('role','button');
+    g.addEventListener('click',e=>{ e.stopPropagation();
+      const open=!tipBox.hidden&&tipBox.dataset.k===name;
+      for(const x of tags.children) x.classList.remove('open');
+      if(open) { tipBox.hidden=true; tipBox.dataset.k=''; return; }
+      tipBox.innerHTML='<b></b> <span></span>'; tipBox.firstChild.textContent=name; tipBox.lastChild.textContent=text;
+      tipBox.dataset.k=name; tipBox.hidden=false; g.classList.add('open'); sfx.select(); });
+  };
+  const tag=(txt,cls,name,text)=>{ const g=el('span','sc-tag'+(cls?' '+cls:'')); g.textContent=txt; tags.appendChild(g); if(text) tipOn(g,name||txt,text); };
+  if(!core) { const gate=b8Gate(m,slot); tag('LV '+gate,m.level<gate?'warn':'','LEVEL '+gate,m.level<gate?m.name+' needs to reach level '+gate+' before this move can be stamped.':m.name+' is high enough level for this move.'); }
   // Until a version's own move is built, the numbers shown are the move that actually plays (what battle charges).
   const live=b8Move(m.id,slot,v)||cur;
-  if(live.vp) tag(Math.max(1,live.vp-(rank>=3&&live.vp>1?1:0))+' VP');
-  for(const e of [].concat(live.elem||[])) if(B2_ELEMS[e]) { const c=el('span','sc-tag elem'); c.textContent=B2_ELEMS[e].name; c.style.color=B2_ELEMS[e].color; tags.appendChild(c); }
-  if(rank>=2) tag(B8_RANK_TAG[rank],'rank');
+  if(live.vp) { const vp=Math.max(1,live.vp-(rank>=3&&live.vp>1?1:0)); tag(vp+' VP','','VP COST','Costs '+vp+' VP to use in battle. VP is the move points each fighter spends on moves. Basic moves give 1 back.'); }
+  for(const e of [].concat(live.elem||[])) if(B2_ELEMS[e]) { const c=el('span','sc-tag elem'); c.textContent=B2_ELEMS[e].name; c.style.color=B2_ELEMS[e].color; tags.appendChild(c);
+    const what=(typeof B2_ELEM_WHAT!=='undefined'&&B2_ELEM_WHAT[e])||'a kind of move';
+    tipOn(c,B2_ELEMS[e].name.toUpperCase(),'A type of move: '+what+'. Monsters weak to '+B2_ELEMS[e].name+' take +50% from it.'); }
+  if(rank>=2) tag(B8_RANK_TAG[rank],'rank',rank>=3?'POLISHED':'POLISH +',rank>=3?'Fully polished: hits and heals 15% harder and costs 1 VP less.':'Polished once: hits and heals 15% harder. One more polish makes it cost 1 VP less.');
   // Small side actions: UNDO a stamp, REMIX (spend a ticket) or SWAP versions.
   const mini=el('span','sc-mini-wrap');
   if(!core&&st==='stamped') mini.appendChild(btn('sc-mini',K+'-u','UNDO',()=>{ b6Unstamp(m,slot); sfx.unequip(); menuFocusNext=K; renderMenu(); }));
@@ -375,7 +388,7 @@ function b8Row(m,slot,core) {
       if(!sure) { b6AskSure('rx-'+m.id+'-'+slot); return; }
       b6Sure=null; b8UnlockRemix(m,slot); sfx.levelChime(); showToast('Remix unlocked: '+other.name+'. SWAP to equip it.',2.6); menuFocusNext=K+'-v'; renderMenu(); })); }
   if(mini.children.length) hd.appendChild(mini);
-  copy.appendChild(tags);
+  copy.appendChild(tags); copy.appendChild(tipBox);
   const d=el('span','sc-desc'); d.textContent=cur.desc; copy.appendChild(d);
   const plays=b8Move(m.id,slot,v);
   if(!plays) { const s=el('span','sc-soon'); s.textContent='Arrives in a later update.'; copy.appendChild(s); }

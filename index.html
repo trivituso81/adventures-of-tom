@@ -873,6 +873,11 @@ html.landscape .stat-grid.six{grid-template-columns:repeat(3,1fr)}
 .sc-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .sc-tag{padding:2px 7px;border-radius:5px;background:#ffffff12;font-size:11px;font-weight:800;letter-spacing:.6px;color:var(--ink-dim)}
 .sc-tag.warn{color:var(--hp-low)}.sc-tag.pas{color:var(--pc)}.sc-tag.elem{background:#0003}
+.sc-tag.tappable{cursor:pointer;text-decoration:underline dotted #ffffff55;text-underline-offset:3px;-webkit-tap-highlight-color:transparent}
+.sc-tag.tappable.open{background:#ffffff30;text-decoration:none}
+.sc-tip{display:block;position:relative;padding:6px 9px;border-radius:7px;border:1px solid #ffffff40;background:#0b0d12;color:var(--ink);font-size:12px;line-height:1.35}
+.sc-tip[hidden]{display:none}
+.sc-tip b{color:var(--gold);letter-spacing:.8px;font-size:11px}
 .sc-desc{font-size:13px;line-height:1.35;color:var(--ink-dim)}
 .sc-btn{min-width:62px;padding:8px 6px}
 .sc-btn.go{background:var(--w-deep);border-color:var(--gold);color:var(--gold)}
@@ -1230,7 +1235,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/rose-ride.js"></script>
 <script src="engine/rose-ride.js?v=ride6"></script>
 <script src="engine/battle2-effects.js"></script>
-<script src="engine/progress.js?v=rose1"></script>
+<script src="engine/progress.js?v=tip1"></script>
 <script src="engine/feel.js?v=dir2"></script>
 <script src="data/battle-icons.js"></script>
 <script src="data/battle-emoji.js?v=boop1"></script>
@@ -1437,7 +1442,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/dialog-voice.js"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js"></script><!-- tap to walk -->
-<script src="engine/main.js?v=ag1"></script>
+<script src="engine/main.js?v=tip1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js"></script>
