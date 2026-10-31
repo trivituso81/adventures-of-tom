@@ -11,7 +11,7 @@ Slots: basic (free), sig (the signature special), A1 to A5 and B1 to B5 (the two
 | Deedee | dish_towel_flick | moon_back | registered_nut | corner_piece | wet_floor | wine | oven_mitt_ultimatum | brisk_means_brisk | garden_shower | rise_and_shine | beanie_master | grandma_squeeze |
 | Boppy | cap_swat | grumble | patient_angler | recliner_reservation | headcount_again | lockdown | everybody_waits | pepper_breath | seeds_of_trouble | mild_for_company | nineteen_seventy | five_alarm_jar |
 | TNB | mug_toss | wardrobe | foraged_at_dawn | dont_split_up | metro_tap | slasher_scare | scope_creep | throw_down | around_the_bend | round_with_jojo | coffee_run | kiln_door_policy |
-| Nara | jump_up | puppy_eyes (shown as PUOPY DOG EYES) | tennis_ball_fetch | dont_leave_me | just_one_bite | counter_surfer | stranger_alert | doodle_fluff | shake_everyone | not_leaving | happy_puddle | food_inspector |
+| Nara | jump_up | puppy_eyes (shown as PUPPY DOG EYES) | tennis_ball_fetch | dont_leave_me | just_one_bite | counter_surfer | stranger_alert | doodle_fluff | shake_everyone | not_leaving | happy_puddle | food_inspector |
 
 ## Ultimates (A6 / B6)
 

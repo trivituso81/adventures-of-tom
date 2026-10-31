@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 7): Puppy Dog Eyes spelling fixed (`eyes2`)
+
+- Tom (10:07): the earlier rename was meant to be "Puppy Dog Eyes"; "Puopy" was a typo. Corrected in the same places (`data/abilities.js`, `data/battle2-data.js`, `data/ch20-battle.js`, `data/scenes.js`, `engine/nara.js`, `docs/CANON.md`, `docs/MOVE_KEYS.md`). Key `puppy_eyes` unchanged, no spoken lines affected.
+- Layout: since the new ATTACK/HEAL pad, the special's name under HEAL was cut off with "..." ("PUPPY DOG..."). Names over 11 characters now wrap to two lines at 9px (`small.long`, `engine/battle2-ui.js` and `index.html`); shorter names are unchanged.
+- Tests: `kit_test.py nara --only=puppy_eyes`, smoke (default and grace,rose), pad checked in portrait and landscape. Tags `?v=eyes2` on the five scripts, `battle2-ui.js` and `main.js`, title stamp `build eyes2`.
+
 ## 2026-10-31 (morning, 39): battle UI ability names in Title Case and larger (`cross2`)
 
 - Tom (10:07): put the labels in the battle UI in title case and make the font bigger; his follow-up (10:08) was cut off after "For the ability names, I mean", so I took it as the ability names. Call made: ability names only; the cross buttons (ATTACK, TOMBO, HEAL, BAG, INSPECT) and the small HEART, TURN and HP labels are unchanged. Say the word to convert those too.

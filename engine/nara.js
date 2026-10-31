@@ -2,7 +2,7 @@
 // engine/nara.js — Nara, cousin Olivia's Labradoodle (Olivia and Michael's dog; their kids are Lachlan, 4, and Isla, 1).
 // 40 pounds, seven years old, playful and full of energy. Loves fetch. Separation anxiety. Very picky eater. Pees when she gets too excited.
 // She roams Jefferson Park in Los Angeles. The first time Tom gets close she spots him and comes running (meeting scene),
-// then she can join the party (alongside TNB; she stays in LA). This file holds her attacks, her special PUOPY DOG EYES (formerly PUPPY EYES), the meeting scene,
+// then she can join the party (alongside TNB; she stays in LA). This file holds her attacks, her special PUPPY DOG EYES (formerly PUPPY EYES), the meeting scene,
 // her overworld talk, the excited-puddle decal, and her travel line. Sprites live in data/nara.js; stats, moves and gear in data/party.js.
 // Battle rules for her traits live in engine/battle.js (picky items, frantic when Tom is down, victory puddle).
 // Loaded after engine/travel.js.
@@ -106,7 +106,7 @@ N.squirrel=E2=>{ const {i,m,fx}=E2;
     700,()=>{ battle.enemyKnock=.5; battle.flashEnemy=.4; sfx.fanfare(); scene('confetti',1.4,{x0:70,x1:290,n:34}); scene('ring',.6,{x:GX,y:264,r:90}); },
     900,E2.result+' The squirrel got away. The Grump didn\'t.',()=>checkEnemy()); };
 
-// ================= Special: PUOPY DOG EYES (key puppy) =================
+// ================= Special: PUPPY DOG EYES (key puppy) =================
 // Nara sits and looks up. The enemy is Smitten and skips its next turn (E2.apply rolls it; bosses resist more).
 N.puppy=E2=>{ const {i,m,fx}=E2; const t=E2.targets[0];
   pose(fx,'sit',2.2); sfx.whine(); say(m.id,'puppy',.2);
@@ -454,7 +454,7 @@ update=function(dt) {
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
 // Nara's review: things Nara actually does (jumps on people, fetch, separation panic, begging, counter surfing, barking
-// at the window, the Labradoodle coat, happy puddles). One big readable moment per move. Jump Up (basic), PUOPY DOG EYES (the
+// at the window, the Labradoodle coat, happy puddles). One big readable moment per move. Jump Up (basic), PUPPY DOG EYES (the
 // signature show; key puppy_eyes), Tennis Ball Fetch, Don't Leave Me!, Just One Bite?, Counter Surfer, Stranger Alert,
 // Doodle Fluff, Shake It Off, Everyone (kept; a big spray across the screen), Happy Puddle. Same numbers as the slots
 // they replace. Scenes prefix nv_ (no warp). The older functions above stay for the old keys.
@@ -519,7 +519,7 @@ N.jump_up=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.min(556,F.x+
     [2950,()=>{ setMessage('She drops down. Tail going. Not sorry.'); scene('nv_text',1.2,{x:px,y:py-NH()-24,txt:'WAG WAG',c:GOLD,sc:2}); }],
     [4400,'end',res(E2)+'Nara greets everybody the same way. Paws first.']]); };
 
-// ---------- PUOPY DOG EYES (signature show; key puppy_eyes) ----------
+// ---------- PUPPY DOG EYES (signature show; key puppy_eyes) ----------
 // She sits mid-room; the screen cuts to a close-up of her face: the eyes are eerily, completely human. Eyebrows and all.
 // Back to the room: the monster looks away, looks back (double take), then melts.
 SC.nv_closeup=(s,u)=>{ const op=ez(u/.12)*(1-ez((u-.88)/.12)),H=170*op,cy=150; if(H<1) return;
@@ -544,7 +544,7 @@ N.puppyEyesShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=t?ST.unit(t):{x:168,top:
   ST.play(E2,[
     [0,()=>{ setMessage('Nara trots to the middle of the room and sits.'); say(m.id,'puppy_eyes'); sfx.whine(); }],
     [850,()=>{ scene('nv_closeup',1.8,{}); sfx.charge(); setMessage('She looks up. Those aren\'t dog eyes. Those are PEOPLE eyes.'); }],
-    [1000,()=>{ scene('nv_big',1.5,{x:288,y:58,txt:'PUOPY DOG EYES',c:CREAM,sc:3}); }],
+    [1000,()=>{ scene('nv_big',1.5,{x:288,y:58,txt:'PUPPY DOG EYES',c:CREAM,sc:3}); }],
     [2700,()=>{ if(!t) return; setMessage(cap(t.def.the)+' looks away. Then looks back. Wait. WHAT?'); ST.draw((s,u)=>{ const q=cl(u/.93);
         const ox=q<.35?-ez(q/.35)*16:lerp(-16,6,ez((q-.35)/.15))*(1-ez((q-.7)/.3)),sp=q<.35?-.12*ez(q/.35):lerp(-.12,.08,ez((q-.35)/.15))*(1-ez((q-.7)/.3)); lift(t,0,sp,ox); },.75); }],
     [3000,()=>{ if(t) { scene('nv_text',.9,{x:F.x,y:F.top-14,txt:'!?',c:GOLD,sc:3}); sfx.boing(); } }],

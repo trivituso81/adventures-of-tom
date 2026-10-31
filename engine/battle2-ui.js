@@ -505,7 +505,7 @@ function b2RenderCmd() {
       '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar"></span>ATTACK<small>'+pu.vp+' VP</small></button>'+
       '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar"></span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
-      '<button type="button" class="b2-x right'+(healOn?off:' off')+'" data-d="right"><span class="ar"></span>HEAL<small>'+(sp?b2Esc(b2Title(sp.name)):'NONE')+'</small></button>'+
+      '<button type="button" class="b2-x right'+(healOn?off:' off')+'" data-d="right"><span class="ar"></span>HEAL<small'+(sp&&sp.name.length>11?' class="long"':'')+'>'+(sp?b2Esc(b2Title(sp.name)):'NONE')+'</small></button>'+
       '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar"></span>BAG<small>'+B2.bag.length+' items'+(B2.cfg&&B2.cfg.lab?' · EXIT':'')+'</small></button></div>';
     return;
   }
