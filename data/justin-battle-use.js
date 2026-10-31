@@ -9,8 +9,8 @@
 (function() {
   if(typeof JUSTIN_BT==='undefined'||(typeof JUSTIN_BT_OFF!=='undefined'&&JUSTIN_BT_OFF)) return;
   const BT=JUSTIN_BT;
-  if(typeof BATTLE_SIZE!=='undefined') BATTLE_SIZE.justin=BATTLE_SIZE.justin||.97;   // painted idle is 75 rows: .97 (x2) gives about 145 px, taller than Tom (130)
-  const SZ=(typeof BATTLE_SIZE!=='undefined'&&BATTLE_SIZE.justin)||.97;
+  if(typeof BATTLE_SIZE!=='undefined') BATTLE_SIZE.justin=BATTLE_SIZE.justin||.823;   // Tom: 10% taller than Tom (idle figure 86 rows x 2 x .823 = 142 px vs Tom 129) with his head about Tom's size (bake enlarges it 45%)
+  const SZ=(typeof BATTLE_SIZE!=='undefined'&&BATTLE_SIZE.justin)||.823;
   const pal={}; let n=0;
   const sp={pal,scale:2*SZ,hires:true,noShift:true,eyeAt:new Map(),handAt:new Map(),skin:'#e3a47c'};
   const lum=c=>{ const h=pal[c]; if(!h) return 0; return parseInt(h.slice(1,3),16)*.3+parseInt(h.slice(3,5),16)*.59+parseInt(h.slice(5,7),16)*.11; };

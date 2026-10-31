@@ -65,11 +65,11 @@ J.wire_nuts=E2=>{ const {m,fx}=E2,me=ST.unit(m),f0=waveFoe(0)||firstFoe(E2),f1=w
     [0,()=>{ setMessage('Justin digs in his pocket.'); say(m.id,'wire_nuts'); }],
     [900,()=>{ setMessage('Fistfuls of wire nuts.'); sfx.whoosh&&sfx.whoosh(); }],
     ['hf',1900],
-    [1280,()=>{ for(let k=0;k<3;k++) ST.fly((x,y)=>hexNut(x,y,5,cols[k]),me.x-30,me.base-me.h*.5,ST.unit(f0).x+(k-1)*8,ST.unit(f0).mid+(k-1)*6,.4,30+k*8,k*.05,{spin:2}); }],
+    [1280,()=>{ for(let k=0;k<3;k++) ST.fly((x,y)=>hexNut(x,y,5,cols[k]),me.x-30,me.base-me.h*.5,ST.unit(f0).x+(k-1)*8,ST.unit(f0).mid+(k-1)*6,.26,30+k*8,k*.05,{spin:2}); }],
     [1700,()=>{ sfx.bonk&&sfx.bonk(); jitter(f0); landHit(34); scene('jv_sparks',.4,{x:ST.unit(f0).x,y:ST.unit(f0).mid,n:5,r:16,c:'#f0c030'}); }],
-    [1900,()=>{ for(let k=0;k<3;k++) ST.fly((x,y)=>hexNut(x,y,5,cols[k+1]),me.x-30,me.base-me.h*.5,ST.unit(f1).x+(k-1)*8,ST.unit(f1).mid+(k-1)*6,.4,30+k*8,k*.05,{spin:3}); }],
+    [1900,()=>{ for(let k=0;k<3;k++) ST.fly((x,y)=>hexNut(x,y,5,cols[k+1]),me.x-30,me.base-me.h*.5,ST.unit(f1).x+(k-1)*8,ST.unit(f1).mid+(k-1)*6,.26,30+k*8,k*.05,{spin:3}); }],
     [2300,()=>{ sfx.bonk&&sfx.bonk(); jitter(f1); landHit(33); scene('jv_sparks',.4,{x:ST.unit(f1).x,y:ST.unit(f1).mid,n:5,r:16,c:'#e86aa8'}); }],
-    [2700,()=>{ ST.fly((x,y)=>hexNut(x,y,7,'#3a8ae8'),me.x-30,me.base-me.h*.6,ST.unit(f2).x,ST.unit(f2).mid,.45,50,0,{spin:4}); }],
+    [2700,()=>{ ST.fly((x,y)=>hexNut(x,y,7,'#3a8ae8'),me.x-30,me.base-me.h*.6,ST.unit(f2).x,ST.unit(f2).mid,.3,50,0,{spin:4}); }],
     [3150,()=>{ sfx.bonk&&sfx.bonk(); sfx.ding&&sfx.ding(); jitter(f2); landHit(33); scene('jv_sparks',.5,{x:ST.unit(f2).x,y:ST.unit(f2).mid,n:7,r:22,c:'#50c868'}); }],
     [4300,'end',res(E2)+'Never enough of these.']]); };
 
@@ -123,7 +123,7 @@ J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST
   ST.play(E2,[
     [0,()=>{ setMessage('Justin spots a basement wall that has to go.'); say(m.id,'demo_day'); }],
     [250,()=>sfx.step&&sfx.step()],
-    [1000,()=>scene('jv_wall',4.2,{x:F.x,top:F.top,w:F.w,h:F.h,t1:.5,t2:.78})],
+    [1000,()=>scene('jv_wall',3.4,{x:F.x,top:F.top,w:F.w,h:F.h,t1:.31,t2:.57})],
     [1300,()=>setMessage('He hoists the sledgehammer.')],
     ['hf',2600],
     [2600,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.4); landHit(45); scene('jv_poof',.5,{x:F.x,y:F.top+10,r:30}); }],
@@ -143,7 +143,7 @@ J.breaker_flip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin finds the panel. Which breaker is it.'); say(m.id,'breaker_flip'); }],
     [2000,()=>setMessage('He finds it. Hand on the switch.')],
-    [2520,()=>{ sfx.thud&&sfx.thud(); setMessage('Breaker off.'); scene('jv_dark',2.15,{a:.74}); }],
+    [2520,()=>{ sfx.thud&&sfx.thud(); setMessage('Breaker off.'); scene('jv_dark',1.5,{a:.74}); }],
     [3300,()=>setMessage('Three. Two. One.')],
     ['hf',4300],
     [4000,()=>sfx.whoosh&&sfx.whoosh()],
@@ -152,46 +152,47 @@ J.breaker_flip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     [6100,'end',res(E2)+'Back on. Mostly.']]); };
 
 // ---------- Giant Sneeze ----------
+// Quick build, then the sneeze frames are held long (Tom, 13:51); everything around them is fast. Already timed: not scaled below.
 J.giant_sneeze=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const K=[{t:0,x:'home',y:'home',f:'gs_walkA'}];
-  K.push(...seq([['gs_walkA',260],['gs_twitch',300],['gs_sniff',320],['gs_rub',320],['gs_buildA',320],['gs_buildB',340],['gs_buildC',380],['gs_peak',640],['gs_sneezeA',200],['gs_sneezeB',200],['gs_sneezeC',320],['gs_recoil',360],['gs_stagger',380],['gs_sniffB',320],['gs_wipe',380],['gs_excuse',520]],0,'home','home'));
-  K.push({t:5600,x:'home',y:'home',f:'idle'},{t:5900,f:'idle'});
+  K.push(...seq([['gs_walkA',170],['gs_twitch',200],['gs_sniff',210],['gs_rub',210],['gs_buildA',210],['gs_buildB',220],['gs_buildC',250],['gs_peak',400],['gs_sneezeA',300],['gs_sneezeB',800],['gs_sneezeC',500],['gs_recoil',230],['gs_stagger',250],['gs_sniffB',200],['gs_wipe',250],['gs_excuse',350]],0,'home','home'));
+  K.push({t:4750,x:'home',y:'home',f:'idle'},{t:5050,f:'idle'});
   ST.keys(fx,K);
   const x0=f.px,slideMax=Math.min(90,Math.max(30,x0-F.w*.5-12));
   const back=()=>{ f.px=x0; };
   SC.jv_gale=SC.jv_gale||((s,u)=>{ gfx.globalAlpha=fade(u,.5)*.8; for(let k=0;k<9;k++) { const q=cl(u*1.5-k*.03),x=s.x0-q*(s.x0-s.x1),y=s.y+(k-4)*9+Math.sin(q*8+k)*3; Ln(x,y,x-22-k%3*8,y,3-k%2,k%2?'#ffffff':'#bfe4ff'); } });
   ST.play(E2,[
     [0,()=>{ setMessage('Justin\'s nose twitches.'); say(m.id,'giant_sneeze'); }],
-    [1500,()=>setMessage('Ah...')],
-    [2300,()=>{ setMessage('Ah...'); sfx.whoosh&&sfx.whoosh(); }],
-    ['hf',3900],
-    [3860,()=>{ setMessage('AH CHOOOOO!'); sfx.sneeze&&sfx.sneeze(); scene('jv_gale',.7,{x0:me.x-34,x1:F.x+F.w*.4,y:me.base-me.h*.7}); scene('jv_text',.9,{x:me.x-20,y:me.base-me.h-4,txt:'CHOO!',c:'#bfe4ff',sc:3}); battle.shake=Math.max(battle.shake||0,.5); }],
-    [4000,()=>{ jitter(f); landHit(100); ST.draw((s,u)=>{ f.px=x0-ez(u/.8)*slideMax; if(u>=1) back(); },.9); }],
-    [4950,()=>{ back(); setMessage(f.name+' is blown across the room.'); }],
-    [5900,'end',res(E2)+'Bless him.']]); };
+    [900,()=>setMessage('Ah...')],
+    [1470,()=>{ setMessage('Ah...'); sfx.whoosh&&sfx.whoosh(); }],
+    ['hf',2170],
+    [2170,()=>{ setMessage('AH CHOOOOO!'); sfx.sneeze&&sfx.sneeze(); scene('jv_gale',.8,{x0:me.x-34,x1:F.x+F.w*.4,y:me.base-me.h*.7}); scene('jv_text',1.1,{x:me.x-20,y:me.base-me.h-4,txt:'CHOO!',c:'#bfe4ff',sc:3}); battle.shake=Math.max(battle.shake||0,.5); }],
+    [2300,()=>{ jitter(f); landHit(100); ST.draw((s,u)=>{ f.px=x0-ez(u/.7)*slideMax; if(u>=1) back(); },1.1); }],
+    [3600,()=>{ back(); setMessage(f.name+' is blown across the room.'); }],
+    [5050,'end',res(E2)+'Bless him.']]); };
 
 // ---------- Foot Tap ----------
-// Rose (Grace if Rose is down) walks over and taps his sneaker toe. The scream is the hit.
+// Rose (Grace if Rose is down) walks over and taps his sneaker toe. The scream is the hit, and its pained faces are held long
+// (Tom, 13:51); the rest is fast. Already timed: not scaled below.
 J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const alive=id=>B2.party.find(p=>p.id===id&&p.hp>0&&!p.dead&&!p.calm);
   const tp=alive('rose')||alive('grace')||B2.party.find(p=>p!==m&&p.hp>0&&!p.dead&&!p.calm)||null,tn=tp?tp.name:'Rose';
-  let st2=null,T=null;
-  if(tp) { T=ST.unit(tp); const spot={x:me.x-58,y:me.base+2},tfx=battle.fx[tp.idx],go=T.x<spot.x?'runR':'run',bk=T.x<spot.x?'run':'runR';
-    st2=ST.keys(tfx,[{t:0,x:'home',y:'home',f:'idle'},{t:700,x:'home',y:'home',f:'idle'},{t:1700,x:spot.x,y:spot.y,f:go,ease:'lin'},{t:2000,x:spot.x,y:spot.y,f:'flip'},{t:2800,x:spot.x,y:spot.y,f:'kneel'},{t:3100,x:spot.x,y:spot.y,f:'flip'},{t:3500,x:spot.x,y:spot.y,f:'flip'},{t:4300,x:'home',y:'home',f:bk,ease:'lin'},{t:4500,x:'home',y:'home',f:'idle'},{t:6600,f:'idle'}]); }
+  if(tp) { const T=ST.unit(tp),spot={x:me.x-58,y:me.base+2},tfx=battle.fx[tp.idx],go=T.x<spot.x?'runR':'run',bk=T.x<spot.x?'run':'runR';
+    ST.keys(tfx,[{t:0,x:'home',y:'home',f:'idle'},{t:300,x:'home',y:'home',f:'idle'},{t:900,x:spot.x,y:spot.y,f:go,ease:'lin'},{t:1000,x:spot.x,y:spot.y,f:'flip'},{t:1250,x:spot.x,y:spot.y,f:'kneel'},{t:1500,x:spot.x,y:spot.y,f:'flip'},{t:1900,x:spot.x,y:spot.y,f:'flip'},{t:2500,x:'home',y:'home',f:bk,ease:'lin'},{t:2650,x:'home',y:'home',f:'idle'},{t:5600,f:'idle'}]); }
   const K=[{t:0,x:'home',y:'home',f:'ft_idle'}];
-  K.push(...seq([['ft_idle',800],['ft_notice',420],['ft_wave',500],['ft_glance',420],['ft_tapped',260],['ft_freeze',420],['ft_screamA',200],['ft_screamB',200],['ft_screamC',240],['ft_hop',240],['ft_clutch',260],['ft_hopB',240],['ft_screamD',260],['ft_pant',360],['ft_point',420],['ft_fine',560]],0,'home','home'));
-  K.push({t:6200,x:'home',y:'home',f:'idle'},{t:6500,f:'idle'});
+  K.push(...seq([['ft_idle',500],['ft_notice',280],['ft_wave',330],['ft_glance',280],['ft_tapped',170],['ft_freeze',270],['ft_screamA',250],['ft_screamB',700],['ft_screamC',700],['ft_hop',160],['ft_clutch',170],['ft_hopB',160],['ft_screamD',450],['ft_pant',250],['ft_point',280],['ft_fine',380]],0,'home','home'));
+  K.push({t:5330,x:'home',y:'home',f:'idle'},{t:5600,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin is just standing there in the nicest sneakers.'); say(m.id,'foot_tap'); }],
-    [1300,()=>setMessage(tn+' comes over, very quietly.')],
-    [2500,()=>setMessage(tn+' taps his toe. Lightly.')],
-    [2900,()=>{ sfx.step&&sfx.step(); }],
-    ['hf',3700],
-    [2960,()=>{ sfx.bump&&sfx.bump(); scene('jv_ring',.4,{x:me.x-34,y:me.base-6,r:14,c:'#ffffff'}); }],
-    [3700,()=>{ sfx.bonk&&sfx.bonk(); sfx.thud&&sfx.thud(); battle.shake=Math.max(battle.shake||0,.7); jitter(f); landHit(100); scene('jv_text',1.2,{x:me.x-12,y:me.base-me.h-6,txt:'MY FOOT!',c:'#ff7a5a',sc:3}); scene('jv_ring',.7,{x:me.x-20,y:me.base-me.h*.5,r:70,c:'#ffd27a'}); scene('jv_ring',.9,{x:me.x-20,y:me.base-me.h*.5,r:120,c:'#ffffff'}); }],
-    [4300,()=>ST.jolt(f,.5)],
-    [6500,'end',res(E2)+'He is fine. He is fine.']]); };
+    [700,()=>setMessage(tn+' comes over, very quietly.')],
+    [1200,()=>setMessage(tn+' taps his toe. Lightly.')],
+    [1350,()=>sfx.step&&sfx.step()],
+    ['hf',2080],
+    [1390,()=>{ sfx.bump&&sfx.bump(); scene('jv_ring',.4,{x:me.x-34,y:me.base-6,r:14,c:'#ffffff'}); }],
+    [2080,()=>{ sfx.bonk&&sfx.bonk(); sfx.thud&&sfx.thud(); battle.shake=Math.max(battle.shake||0,.7); jitter(f); landHit(100); scene('jv_text',1.5,{x:me.x-12,y:me.base-me.h-6,txt:'MY FOOT!',c:'#ff7a5a',sc:3}); scene('jv_ring',.7,{x:me.x-20,y:me.base-me.h*.5,r:70,c:'#ffd27a'}); scene('jv_ring',.9,{x:me.x-20,y:me.base-me.h*.5,r:120,c:'#ffffff'}); }],
+    [2500,()=>ST.jolt(f,.5)],
+    [5600,'end',res(E2)+'He is fine. He is fine.']]); };
 
 // ---------- DRYWALL (special): carries a sheet in, screws it up in front of the party, all damage halved ----------
 SC.jv_sheet=(s,u)=>{ const x=s.x,base=s.base,h=s.h,w=s.w,q=s.up?1:ez(u/.2),a=fin(u,.06)*(u>.9?(1-u)/.1:1); gfx.globalAlpha=a;
@@ -212,10 +213,18 @@ J.drywall=E2=>{ const {m,fx}=E2,me=ST.unit(m);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin has a sheet of drywall under his arm.'); say(m.id,'drywall'); }],
     [1200,()=>sfx.whoosh&&sfx.whoosh()],
-    [2300,()=>{ sfx.thud&&sfx.thud(); scene('jv_sheet',4.6,{x:sx,base:by+2,h:sh,w:sw}); setMessage('He stands it in front of everyone.'); }],
+    [2300,()=>{ sfx.thud&&sfx.thud(); scene('jv_sheet',3.9,{x:sx,base:by+2,h:sh,w:sw}); setMessage('He stands it in front of everyone.'); }],
     [3000,()=>{ sfx.drill&&sfx.drill(); }],
     ['hf',3600],
     [4000,()=>{ sfx.drill&&sfx.drill(); }],
     [4600,()=>{ sfx.ding&&sfx.ding(); scene('jv_sparks',.7,{x:sx,y:by-sh*.5,n:9,r:34,c:'#ebe4d6'}); scene('jv_text',1.1,{x:sx+20,y:by-sh-8,txt:'HALF DAMAGE',c:'#ebe4d6',sc:2}); }],
     [6600,'end',res(E2)+'Let it dry.']]); };
+
+// Tom (13:51): his moves should be faster. Every move except the two hand-timed ones above plays at about 1.5x.
+(function(){ const S=.66,skip=new Set(['giant_sneeze','foot_tap']);
+  for(const key of Object.keys(J)) { if(skip.has(key)) continue; const fn=J[key];
+    J[key]=E2=>{ const k0=ST.keys,p0=ST.play;
+      ST.keys=(fx,K)=>k0(fx,K.map(o=>Object.assign({},o,{t:o.t*S})));
+      ST.play=(e,list)=>p0(e,list.map(it=>it[0]==='hf'?['hf',it[1]*S]:[it[0]*S,...it.slice(1)]));
+      try { return fn(E2); } finally { ST.keys=k0; ST.play=p0; } }; } })();
 })();

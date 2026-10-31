@@ -17,6 +17,12 @@
 - Why this way: the hand-written dialogue scripts live in 17 large Project docs; copying them through Claude would take several sessions. History holds the exact script of every clip, including the 2026-10-27/28 re-bakes.
 - Tested: `tools/voice-library/test.py` with a mocked history (an uncontracted old script lands on the contracted line with its tags; words match the screen). Not run against the real account (the key lives on Tom's phone). Stamp `build vlib5`.
 
+## 2026-10-31 (day, 11): Justin is 10% taller than Tom, head the size of Tom's (`justin3`)
+
+- Tom (13:45): Justin must be 10% taller than Tom and his head the same size as Tom's. His idle figure is now 142 px against Tom's 129 (+10%). His painted head was about 70% of Tom's, so the bake (`bigger_head` in `tools/sprite-bake/bake_justin_battle.py`) enlarges the head 45% in every frame (found by skin colour, grown from the chin), then the whole figure is sized so the total is +10% (`BATTLE_SIZE.justin` .823 in `data/justin-battle-use.js`). All nine move sheets re-baked. His knocked-out pose is the old rotated frame and was not enlarged.
+- Measured in battle pixels from the sprite, and looked at side by side in a test fight. Not played on the phone.
+- Tom (13:51): his moves were too slow. Seven moves now play at about 1.5x (a 0.66 time factor at the end of `engine/justin-moves.js`). GIANT SNEEZE and FOOT TAP are timed by hand: the sneeze frames are held about 1.6 s (the big sneeze frame alone 0.8 s) and the pained-face frames of Foot Tap about 1.4 s, with everything around them fast. Totals at 1x: sneeze about 5.0 s, foot tap about 5.6 s, the others 3 to 4.5 s.
+
 ## 2026-10-31 (day, 10): Justin's kit: painted battle sprite, nine moves, test boss fight (`justin2`)
 
 - Tom (13:3x) sent `justin_9_animation_sheets.zip` (nine ability sheets; no stance sheet 00). Justin now fights in slot 4 with his full kit: Loose Wire (basic), DRYWALL (special, 2 VP, halves damage to the whole party until each friend's next turn), Wire Nuts, Bad Call, Fresh Fit, Demo Day, Breaker Flip, Giant Sneeze (enemy loses its next turn and slides back), Foot Tap (Rose taps his toe, Grace if Rose is down; biggest hit).

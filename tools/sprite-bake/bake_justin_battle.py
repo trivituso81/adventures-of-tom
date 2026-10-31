@@ -9,8 +9,8 @@ Output: art/chars/justin-battle.webp, justin-ko.webp, justin-<sheet>.webp   (pai
         data/justin-battle-hires.js  (JUSTIN_BT: rows, palettes, atlas rects; do not hand-edit)
         tools/shots/justin-bake.png  (contact sheet of every frame, grey background)
 
-Frames are cut by the gaps between figures (sheet.py), never by fixed pixel positions. The painted heads already have the
-caricature proportions, so no head warp. Frames sit on a common canvas per set: feet (the white sneakers) on the centre column,
+Frames are cut by the gaps between figures (sheet.py), never by fixed pixel positions. Heads are enlarged 45% (bigger_head, Tom's request) so
+his head matches Tom's. Frames sit on a common canvas per set: feet (the white sneakers) on the centre column,
 soles on the bottom row; all sets share one scale so Justin never changes size between moves.
 
 Usage : python3 tools/sprite-bake/bake_justin_battle.py [--battle-h 72] [--colors 44]
@@ -125,8 +125,31 @@ def swirl_eye(img, cx, cy, r):
 # ---------------------------------------------------------------- scale and placement
 ref_h = poses[CORE['idle']].height * SHEET_F.get(CORE['idle'].split('_')[0], 1.0)
 FB = args.battle_h * KB / ref_h                       # painted pixels per source pixel in battle
+HEAD_K = 1.45   # Tom asked for a head the size of Tom's (his is a big caricature head); the painted head is about 70% of that
+def bigger_head(im, k):
+    from scipy import ndimage
+    a = np.array(im); al = a[:, :, 3] > 40; ys, xs = np.where(al)
+    if not len(ys): return im
+    top, H = ys.min(), ys.max() - ys.min() + 1
+    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
+    skin = al & (r > 150) & (r > g + 22) & (g > b + 12) & (r - b > 55); skin[top + int(H * .5):] = False
+    lab, n = ndimage.label(ndimage.binary_closing(skin, iterations=2))
+    if not n: return im
+    sizes = ndimage.sum(skin, lab, range(1, n + 1)); c = int(np.argmax(sizes)) + 1
+    if sizes[c - 1] < H * H * .01: return im
+    cy, cx = np.where(lab == c); y0c, y1c, x0c, x1c = cy.min(), cy.max(), cx.min(), cx.max()
+    hh = y1c - y0c + 1; pad = int((x1c - x0c) * .14)
+    y0 = top if (y0c - top) < hh * .7 else int(y0c - hh * .45)
+    y1 = min(a.shape[0], y1c + int(hh * .06)); x0 = max(0, x0c - pad); x1 = min(a.shape[1], x1c + pad + 1)
+    head = im.crop((x0, y0, x1, y1)); ow, oh = head.size; nw, nh = int(round(ow * k)), int(round(oh * k))
+    head = head.resize((nw, nh), Image.LANCZOS); extra = nh - oh
+    out = Image.new('RGBA', (im.width + max(0, nw - ow), im.height + extra), (0, 0, 0, 0)); dx = max(0, (nw - ow) // 2)
+    out.alpha_composite(im, (dx, extra))
+    px = dx + (x0 + x1) // 2 - nw // 2; py = extra + y1 - nh
+    out.alpha_composite(head, (px, py)); return out
 def fit(name, paint=False):
     im = scaled_to(poses[name], FB * SHEET_F.get(name.split('_')[0], 1.0))
+    im = bigger_head(im, HEAD_K)
     if paint and name in BRUISE:
         bb = im.getbbox(); W, H = bb[2] - bb[0], bb[3] - bb[1]; fx, fy, fr = BRUISE[name]
         im = black_eye(im, bb[0] + fx * W, bb[1] + fy * H, fr * W * 1.2, fr * W * .85)
