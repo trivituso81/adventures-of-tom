@@ -268,8 +268,17 @@ function passWho(it,s){ s=s||F.who; return !s.size||s.has(it.v); }
 function passType(it,s){ s=s||F.type; return !s.size||s.has(it.ty); }
 function passCh(it,s){ s=s||F.ch; if(!s.size) return true; return it.c.length?it.c.some(n=>s.has(n)):s.has(0); }
 function passShow(it){ if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); return true; }
-function passQ(it){ const q=F.q.trim().toLowerCase(); if(!q) return true;
-  return it.x.toLowerCase().includes(q)||whoName(it).toLowerCase().includes(q)||(it.w||'').toLowerCase().includes(q)||(it.t==='b'&&it.k.join(' ').includes(q)); }
+// Search forgives spelling: every word typed must appear in the line, its speaker, place, move name or direction, either inside a
+// word or within one typo (two for long words), so "yamamot" finds "Ymamot".
+function lev(a,b){ if(Math.abs(a.length-b.length)>2) return 9; let p=[...Array(b.length+1).keys()];
+  for(let i=1;i<=a.length;i++){ const c=[i]; for(let j=1;j<=b.length;j++) c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1)); p=c; } return p[b.length]; }
+const SEARCHTXT=new Map();
+function hay(it){ let h=SEARCHTXT.get(it); if(!h){ const s=[it.x,whoName(it),it.w||'',it.t==='b'?it.k.join(' '):'',it.s||'',it.p||''].join(' ').toLowerCase().replace(/[’']/g,'');
+  h={s,words:[...new Set(s.split(/[^a-z0-9]+/).filter(w=>w.length>2))]}; SEARCHTXT.set(it,h); } return h; }
+let QMEMO={q:null,m:new Map()};
+function passQ(it){ const q=F.q.trim().toLowerCase().replace(/[’']/g,''); if(!q) return true;
+  if(QMEMO.q!==q) QMEMO={q,m:new Map()}; if(QMEMO.m.has(it)) return QMEMO.m.get(it); const h=hay(it);
+  const r=q.split(/\s+/).every(w=>h.s.includes(w)||(w.length>=4&&h.words.some(x=>lev(w,x)<=(w.length>=7?2:1)))); QMEMO.m.set(it,r); return r; }
 function visible(skip){ return IDX.items.filter(it=>passQ(it)&&passShow(it)&&(skip==='who'||passWho(it))&&(skip==='type'||passType(it))&&(skip==='ch'||passCh(it))); }
 function chip(g,v,label,on,n){ return '<button class="chip'+(on?' on':'')+(n===0&&!on?' zero':'')+'" data-g="'+g+'" data-v="'+esc(v)+'">'+esc(label)+(n!=null?'<span class="n">'+n+'</span>':'')+'</button>'; }
 function renderFilters(){

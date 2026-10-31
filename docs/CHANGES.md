@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 8): Voice Library search forgives spelling (`vlib4`)
+
+- Tom (13:20) could not find "yamamot". The line is there (Grace, kind `ymamot`, "Ketchup, pickles, cereal, sock. Ymamot Creation!", no clip yet; little Tom's line was removed in `ymamot4`), but search only matched exact letters. Search now matches every typed word inside the line, speaker, place, move name or direction, or within one typo (two for words of 7+ letters), so "yamamot" finds Ymamot. Results are memoized per query.
+- Tested: `tools/voice-library/test.py` (search yamamot finds it), smoke. Stamp `build vlib4`.
+
 ## 2026-10-31 (day, 10): Ymamot Creation: little Tom's spoken line removed (`ymamot4`)
 - Little Tom no longer says "Yama-Mott. It's Tom backwards." The move now holds 600 ms there instead of waiting on a voice. The matching line is gone from `data/lines.js`, `tools/bake-page/pending.json` and `tools/clip-audit/extra-battle.json`; bake list and Voice Library index rebuilt. Nothing to bake for little Tom. Little Amy's line (Grace's voice) still needs baking.
 - Measured: 7.2 s at 1x (fire to command menu, including walk-out and walk-back), 5.1 s at 2x.

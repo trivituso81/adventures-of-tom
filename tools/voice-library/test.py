@@ -50,6 +50,8 @@ async def main():
         # Search.
         await page.click('#clear'); await page.fill('#q', 'UNCALLED'); await page.wait_for_timeout(400)
         v = await J("__VL.visible().length"); ok(v >= 1, f'search UNCALLED: {v}')
+        await page.fill('#q', 'yamamot'); await page.wait_for_timeout(400)
+        ym = await J("__VL.visible().some(i=>/Ymamot/.test(i.x))"); ok(ym, 'search yamamot finds the Ymamot lines')
         await page.click('#clear')
         # Play a built-in battle clip and a dialogue clip (loads the clip files).
         bt = await J("(()=>{const it=__VL.IDX.items.find(i=>i.t==='b'&&i.v==='tom'&&i.f>=0);return __VL.builtIn(it).then(m=>!!m&&m.length>100);})()")
