@@ -1,3 +1,9 @@
+## 2026-10-30 (night, 6): Tom's Defend uses his painted poses
+
+- Tom: Defend still used old graphics. Cause: `Tm.defendShow` in `engine/tom-moves.js` held the punch frame (`act`) while he guarded, and drew a hand-made pixel stop hand on top of him. He now uses the painted `proud` pose while he tidies his sleeve and the painted `defend` bodyguard pose (open stop hands) for the stance, with the painted run and walk to reach the ally and return. The pixel hand (`tm_stophand`) is replaced by a soft blue guard shimmer in front of his hands. The painted NO TOUCHING sign was already in place.
+- Known: the drawn sign only shows if a fight starts in the first few seconds after the page loads, before the sign image has preloaded.
+- Tests: kit_test tom defend (frames looked at, zoomed), smoke IDS=tom clean. No spoken lines changed. Cache tag `?v=df1` on tom-moves.js.
+
 ## 2026-10-30 (night, 5): Battle Lab: a way out of every fight
 
 - Tom: no way to leave a Battle Lab fight and get back to the lab list. Cause: boss fights are flagged no-run, so the bag's RUN only said the boss "blocks the way out". Lab fights (`b2Lab`, `lab:true` in the `b2Start` config) now show EXIT LAB in the bag where RUN was, and it always works, boss or not: "Leaving the Battle Lab." then `b2End('run')` returns to the lab list on the same page (`splashToLab`). The command cross BAG button reads "N items . EXIT" in lab fights so it can be found. Story fights are unchanged (RUN still blocked by bosses).

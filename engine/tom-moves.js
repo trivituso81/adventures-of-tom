@@ -437,9 +437,13 @@ Tm.controller_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40
     [4000,'end',res(E2)+'One button. Entirely sufficient.']]); };
 
 // ---------- DEFEND ----------
-SC.tm_stophand=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const sc=ez(u/.15),x=st.x-TSP().idle[0].length*TSP().scale*.5-14,y=st.y-TH()*.62; gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
-  R(-14,-10,28,28,OUT); R(-12,-8,24,24,'#f2c79a'); for(let k=0;k<4;k++) { R(-13+k*7,-26,7,18,OUT); R(-12+k*7,-25,5,17,'#f2c79a'); } R(12,0,10,8,OUT); R(12,2,8,4,'#f2c79a');
-  if(u>.15) { gfx.globalAlpha*=.5; for(let k=0;k<3;k++) Ln(-24-k*6,-20+k*14,-30-k*6,-20+k*14,3,SKY); } gfx.restore(); };
+// The painted defend pose already shows Tom's open stop hands, so this is only a soft guard shimmer in front of him (no drawn hand).
+SC.tm_stophand=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const grow=ez(u/.2),x=st.x-TSP().idle[0].length*TSP().scale*.5-8,y=st.y-TH()*.5; gfx.save(); gfx.globalAlpha=fade(u,.75)*.85;
+  const g=gfx.createRadialGradient(x,y,2,x,y,40*grow+1); g.addColorStop(0,'rgba(159,232,255,0.05)'); g.addColorStop(.7,'rgba(159,232,255,0.28)'); g.addColorStop(1,'rgba(159,232,255,0)');
+  gfx.fillStyle=g; gfx.beginPath(); gfx.ellipse(x,y,24*grow+1,46*grow+1,0,0,Math.PI*2); gfx.fill();
+  ring(x,y,20*grow+1,40*grow+1,2,'rgba(220,246,255,0.8)');
+  for(let k=0;k<3;k++) { const q=cl(u*1.6-k*.18); gfx.globalAlpha=(1-q)*fade(u,.75); R(x-6+k*5,y-26+k*22-q*8,3,3,CREAM); }
+  gfx.restore(); };
 SC.tm_placard=(s,u)=>{ const d=ez(u/.2),bob=u<.2?0:Math.sin(cl((u-.2)/.12)*Math.PI)*3,x=s.x,y=s.y-14*(1-d)-bob; gfx.globalAlpha=fade(u,.85)*d;
   if(PROPART.draw('tom/no_touching_sign',x,y-8,{h:56})) return;   // painted sign on its post; the drawn placard is the fallback
   R(x-2,y-6,4,18,OUT); R(x-1,y-5,2,16,WOOD); R(x-30,y-28,60,24,OUT); R(x-28,y-26,56,20,CREAM); R(x-28,y-26,56,4,RED); label('NO',x,y-20,'#7a1a14',1); label('TOUCHING',x,y-12,'#7a1a14',1); };
@@ -448,8 +452,9 @@ Tm.defendShow=(u,t,resolve)=>{ const fx=battle.fx[u.idx],self=t===u,H=ST.unit(t)
   const spot=self?{x:me.x,y:me.base}:{x:H.x-H.w*.5-26,y:Math.min(314,H.base+4)};
   let st=null;
   return [()=>{ b2Msg(self?'Tom notices the lock-on. He straightens one sleeve.':'Tom notices the lock-on on '+t.name+'. He straightens one sleeve.');
-      st=ST.keys(fx,self?[{t:0,x:'home',y:'home',f:'expr'},{t:600,f:'idle',rot:(q,tt)=>Math.sin(q*Math.PI*2)*.04},{t:900,f:'act',dx:-6},{t:2300,f:'act'},{t:2700,x:'home',y:'home',f:'idle'}]
-        :[{t:0,x:'home',y:'home',f:'expr'},{t:600,f:spot.x<me.x?'run':'runR'},{t:1100,x:spot.x,y:spot.y,f:'act',dx:u2=>-ez(u2/.3)*6},{t:2300,f:'act',dx:-6},{t:2550,f:spot.x<me.x?'walkR':'walk'},{t:3300,x:'home',y:'home',f:'idle'}]);
+      // painted poses: 'proud' (calm, tidying) then 'defend' (the bodyguard stance with open stop hands); 'act' is the punch, wrong for a guard
+      st=ST.keys(fx,self?[{t:0,x:'home',y:'home',f:'proud'},{t:600,f:'idle',rot:(q,tt)=>Math.sin(q*Math.PI*2)*.04},{t:900,f:'defend',dx:-6},{t:2300,f:'defend',dx:-6},{t:2700,x:'home',y:'home',f:'idle'}]
+        :[{t:0,x:'home',y:'home',f:'proud'},{t:600,f:spot.x<me.x?'run':'runR'},{t:1100,x:spot.x,y:spot.y,f:'defend',dx:u2=>-ez(u2/.3)*6},{t:2300,f:'defend',dx:-6},{t:2550,f:spot.x<me.x?'walkR':'walk'},{t:3300,x:'home',y:'home',f:'idle'}]);
       scene('tm_sleeve',.6,{st}); sfx.select(); },
     self?900:1100,()=>{ resolve(); scene('tm_stophand',1.3,{st}); },
     450,()=>{ scene('tm_placard',1.6,{x:(st&&st.x!=null?st.x:spot.x)+(self?-60:-34),y:spot.y}); sfx.select(); },
