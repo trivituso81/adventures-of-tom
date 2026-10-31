@@ -58,6 +58,11 @@ const RECRUIT_TALK={
        bye:'TNB heads back to Spring Street to check the kiln. It\'s fine. He checks anyway.',
        lines:['Tom, your shoelace. No, the other one. Got it.','Well, well... a foggy canyon at dusk. This is how every horror movie starts.','If a coyote jumps out at us, I\'ve seen this movie. Stay together. Nobody go in the basement.','After this, clay. Any two colors. I\'ll make them get along.']}
 ,
+  justin:{ask:'Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you\'re about to fight.',
+       yes:'Great. Let me grab my jacket. And the ladder. Don\'t ask about the ladder.',no:'No problem. The hallway light won\'t finish itself. It\'s been almost done since June.',
+       swap:'Somebody has to tag out. I\'ll wait. I\'ll be on the ladder.',
+       bye:'Justin heads home to the hallway light. It\'s almost done.',
+       lines:['Hold this. No, the other end. Don\'t touch the copper.','Every country song is about a truck, a dog or a girl. I got a truck and two girls. Living the song.','Watch your step, Tom. That board is loose. I know. It\'s on the list.','Grace, Rose, come here. Who\'s Daddy\'s favorite? Both. Correct. Go get \'em.']},
   nara:{ask:'Nara leans her whole body against Tom\u2019s legs. She\'s not letting him out of her sight. Take her along?',
        yes:'Nara spins in three happy circles. Then a fourth, for luck. Then she checks Tom is still there.',no:'Nara lies down on Tom\u2019s foot. She\'ll wait. She\'ll wait RIGHT here.',
        swap:'Nara won\'t go anywhere without Tom. Somebody else has to sit this one out.',
@@ -130,7 +135,7 @@ function saveGame(slot,quiet=false) {
 function readSave(slot) { try { const raw=saveRaw(slot); return raw?JSON.parse(raw):null; } catch(e) { return null; } }
 function loadGame(slot) {
   const sv=readSave(slot); if(!sv) return false;
-  const allMembers={tom:hero,grace,rose,amy,deedee,boppy,tnb,nara};
+  const allMembers={tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin};
   // Send any recruit home first, then rebuild the party in saved order.
   for(const m of party.slice()) if(m!==hero&&m!==grace&&m!==rose) recruitLeave(m,true);
   // Grace and Rose stay home while Tom is in Los Angeles; the save says whether they were in the party.

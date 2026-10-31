@@ -27,7 +27,7 @@ function heartTrace(id) {
 }
 
 // ---------- 2. Chapters and party rules ----------
-const TOWN_HOMES={grace:'le',rose:'le',amy:'le',deedee:'le',boppy:'le',tnb:'la',nara:'la'};
+const TOWN_HOMES={grace:'le',rose:'le',amy:'le',deedee:'le',boppy:'le',justin:'le',tnb:'la',nara:'la'};
 const DEFAULT_RULES={lock:['tom','grace','rose'],force:[],bar:[],allow:null,homes:TOWN_HOMES,decline:{}};
 // Chapter 0 is the demo (Long Island and Los Angeles, free play). Chapters 1 to 20 follow the story bible;
 // each chapter session (C1 to C20) fills in its rules and scenes.
@@ -158,7 +158,7 @@ const CHAPTERS=[
     noFlight:()=>flag('ch20-done')?{lines:['The train runs both coasts now. Sal is thrilled and very confused about his job.']}
       :{lines:['Airport? Tom. Not now. There is a man in a clock who needs dinner.']}}
 ];
-const MEMBERS=()=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara});
+const MEMBERS=()=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin});
 function chapterInfo(n=STORY.chapter) { return CHAPTERS[n]||CHAPTERS[0]; }
 function partyRules() {
   const c=chapterInfo(),o=STORY.override||{};
@@ -168,11 +168,23 @@ function partyRules() {
   return r;
 }
 function memberHome(id) { return partyRules().homes[id]||'any'; }
+// Justin (Tom, 31 Oct): can be recruited from the Gregori house on Long Island in ANY chapter, so the chapters' `allow` lists do not apply to him.
+// Only a `bar`, the region (his home is 'le') and justinStays() keep him out. He swaps with Amy or anyone unlocked in the fourth slot, or joins freely when it is empty.
+// justinStays: the chapters where a scene already stages Justin himself (he is at work in chapter 5 until the conferences end, and in chapter 10 until
+// he walks in at the midnight dinner; the Nine Scoops bonus uses him as a scripted character), so he cannot be pulled into the party there.
+function justinStays() {
+  const c=chapterInfo();
+  if(c.bonus) return true;
+  if(STORY.chapter===5&&flag('ch5-done')!==true) return true;
+  if(STORY.chapter===10&&flag('ch10-done')!==true) return true;
+  return false;
+}
 // Can this member be in the party right here, right now?
 function canBeHere(m) {
   const r=partyRules();
   if(r.bar.includes(m.id)) return false;
-  if(r.allow&&!r.allow.includes(m.id)&&m!==hero&&m!==grace&&m!==rose&&!r.force.includes(m.id)) return false;
+  if(m===justin) { if(justinStays()) return false; }
+  else if(r.allow&&!r.allow.includes(m.id)&&m!==hero&&m!==grace&&m!==rose&&!r.force.includes(m.id)) return false;
   const h=memberHome(m.id);
   return h==='any'||h===regionOf(currentMap);
 }

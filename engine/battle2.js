@@ -1460,8 +1460,10 @@ function b2RewardsData() {
 function startBattle(npc,opts={}) {
   const id=npc.monster,d=monsterDef(npc),lvl=opts.level||b7MonLevel(npc);   // base level plus wins; Director mode keeps it near Tom's level (engine/feel.js)
   const F=B2_FORMATIONS[id],form=((typeof F==='function'?F():F)||[[id,'front']]).map(f=>[f[0],f[1],lvl]);   // a function: crowds of a random size
-  const levels={}; for(const p of party) levels[p.id]=p.level;
-  b2Start({party:party.map(p=>p.id),levels,foes:form,bag,npc,carry:true,onEnd:null,tut:opts.tut||null});
+  // noBattle members (Justin, until his kit is built) follow Tom on the map but sit fights out.
+  const fighters=party.filter(p=>!p.noBattle);
+  const levels={}; for(const p of fighters) levels[p.id]=p.level;
+  b2Start({party:fighters.map(p=>p.id),levels,foes:form,bag,npc,carry:true,onEnd:null,tut:opts.tut||null});
 }
 
 // ---------- Battle Lab (title screen) ----------

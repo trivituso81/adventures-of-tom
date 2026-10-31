@@ -107,7 +107,7 @@ function b8Gate(m,slot) {
 // ---- Points ----
 const b6SpEarned=m=>B8.spStart+Math.floor(m.level/2)+(m.spBonus||0);
 const b6SpSpent=m=>b8St(m).reduce((a,sl)=>a+b8Cost(sl),0);
-const b6SpLeft=m=>b6SpEarned(m)-b6SpSpent(m);
+const b6SpLeft=m=>m.noBattle?0:b6SpEarned(m)-b6SpSpent(m);   // noBattle (Justin, until his kit exists): no Stampcard, so no Stamp Points
 const b8PpEarned=m=>m.level>=B8.polishFrom?Math.floor((m.level-1)/2):0;
 const b8PpSpent=m=>Object.values(m.ranks||{}).reduce((a,r)=>a+Math.max(0,(r||1)-1),0);
 const b8PpLeft=m=>b8PpEarned(m)-b8PpSpent(m);
@@ -135,7 +135,7 @@ function b6NodeState(m,slot) {
   if(b6SpLeft(m)<b8Cost(slot)) return 'sp';
   return 'next';
 }
-const b6Stampable=m=>B8_SLOTS.some(sl=>b6NodeState(m,sl)==='next');
+const b6Stampable=m=>!m.noBattle&&B8_SLOTS.some(sl=>b6NodeState(m,sl)==='next');
 function b6Stamp(m,slot) { if(b6NodeState(m,slot)!=='next') return false; b8St(m).push(slot); return true; }
 function b6Unstamp(m,slot) {
   const s=b8St(m),i=s.indexOf(slot); if(i<0) return false;
@@ -398,6 +398,7 @@ function b8Row(m,slot,core) {
 }
 const b2MoveNameFor=(id,key)=>{ const k=B2_SKILLS[id]; if(!k) return null; const s=[k.basic,k.special,...k.skills,...(k.o3||[])].find(x=>x&&x.key===key); return s?s.name:null; };
 function renderStampsTab(body,m) {
+  if(m.noBattle) { $('menu-foot').textContent='A Stampcard is built from a character’s moves.'; const soon=el('div','mcard'); soon.appendChild(el('div','slot-label','STAMPCARD')); const tx=el('div','stat-note'); tx.textContent=m.name+'’s Stampcard is coming soon.'; soon.appendChild(tx); body.appendChild(soon); return; }
   b8St(m);
   $('menu-foot').textContent='Stamp Points every even level, Polish Points every odd level from 3, Remix Tickets from level 28. Undo and Respec are free.';
   const left=b6SpLeft(m),pp=b8PpLeft(m),tk=b8TkLeft(m);
@@ -475,6 +476,7 @@ function renderStatusTab(body,m) {
     (m.hp/m.maxHp<=.25?'Below a quarter. '+m.name+' is kneeling in battle. ':'')+(top?'Top level. ':(B6.xpPerLevel-m.xp)+' XP to level '+(m.level+1)+'. ')+(left>0?left+' Stamp Point'+(left>1?'s':'')+' to spend.':'');
   vit.appendChild(note);
   body.appendChild(card);
+  if(m.noBattle) { note.textContent=''; const soon=el('div','mcard trait-card'); soon.appendChild(el('div','slot-label','MOVES')); const tx=el('div','stat-note'); tx.textContent=m.name+'’s stats and moves are coming soon. Until then he follows along and sits fights out.'; soon.appendChild(tx); body.appendChild(soon); return; }
 
   const grid=el('div','stat-grid six');
   for(const k of STAT_NAMES) {

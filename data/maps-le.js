@@ -1409,7 +1409,7 @@ const LE_ROOMS=[
     npcs:[
       // Justin: Amy's husband, Grace and Rose's dad. Electrician, always mid-project. Away at work during chapter 5's
       // conferences (he texts Amy at the end); data/scenes.js AWAY rule.
-      {name:'Justin',x:8,y:4,look:'bean',sheet:'justin',kin:true,trace:'justin-hello',duration:0.7,
+      {name:'Justin',x:8,y:4,look:'bean',sheet:'justin',kin:true,dad:true,trace:'justin-hello',duration:0.7,
         away:[{chapter:5,notFlag:'ch5-done'}],lines:[
         'Tom. Hey. Hold this. No, the other end. Don\'t touch the copper.',
         'Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.',

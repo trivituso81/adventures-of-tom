@@ -289,7 +289,15 @@ const nara=makeMember({id:'nara',name:'Nara',title:'Cousin Olivia\u2019s dog',hp
   equipment:{Tool:'y_stick',Outfit:null,Charm:null},
   commands:['attack','puppy','item','run'],
   look:{hair:'#2a2424',skin:'#2a2424',shirt:'#2a2424'}});
-const RECRUITS={amy,deedee,boppy,tnb,nara};
+// Justin: Amy's husband, the girls' dad. Joins the fourth slot from the Gregori house on Long Island, in any chapter that allows it (engine/story.js).
+// PLACEHOLDER until Tom sends his abilities: noBattle keeps him out of fights (engine/battle2.js startBattle), and he is not in ALL_MEMBERS,
+// so he has no Stampcard, shared XP or saved level yet. When his kit arrives: add him to ALL_MEMBERS, B2 tables, B6 tables, then drop noBattle.
+const justin=makeMember({id:'justin',name:'Justin',title:'Brother-in-law',hp:14,maxHp:14,mp:8,maxMp:8,power:3,
+  base:{Curiosity:2,Charm:3,Pace:2,Luck:2},
+  equipment:{Tool:null,Outfit:null,Charm:null},
+  commands:['attack','item','run'],noBattle:true,
+  look:{hair:'#4a3626',skin:'#efbc8e',shirt:'#3a4a5a'}});
+const RECRUITS={amy,deedee,boppy,tnb,nara,justin};
 const party=[hero,grace,rose];
 const PARTY_MAX=4;
 const inParty=m=>party.includes(m);
@@ -348,7 +356,7 @@ const fieldUsable=item=>!!(item.heal||item.healAll||item.revive);
 // Selling pays half the shop price. Family things have no price and cannot be sold.
 const sellValue=item=>item.price?Math.max(1,Math.floor(item.price/2)):(item.sell||0);
 const canWear=(m,item)=>!item.who||item.who===m.id;
-const memberById=id=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara})[id];
+const memberById=id=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin})[id];
 const ALL_MEMBERS=()=>[hero,grace,rose,amy,deedee,boppy,tnb,nara];
 // Equip from the pockets onto the menu character's slot. Whatever was worn there goes back in the pockets.
 function equipTo(m,id) {

@@ -391,7 +391,7 @@ function b7InstantWin(n) {
   n.tier++; n.maxHp+=d.hpStep; n.defeatedUntil=performance.now()+25000; n.chasing=false; monsterFall(n);
   coins+=purse;
   const ups=[];
-  for(const m of party) { const r=b2GainFor(m,xp); if(r.ups) ups.push(m.name+' is now Lv '+r.lvl1); }
+  for(const m of party) { if(m.noBattle) continue; const r=b2GainFor(m,xp); if(r.ups) ups.push(m.name+' is now Lv '+r.lvl1); }   // noBattle members sit fights out: no XP
   b6Sync();
   let got='';
   const dr=d.drop;
