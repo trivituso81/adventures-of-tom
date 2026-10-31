@@ -5540,11 +5540,32 @@ SC.tu_flashback=(s,u)=>{ const k=ez(u/.06)*(u>.95?(1-u)/.05:1); if(k<=0) return;
   const g=gfx.createRadialGradient(288,162,120,288,162,330); g.addColorStop(0,'rgba(40,24,8,0)'); g.addColorStop(1,'rgba(40,24,8,0.55)'); gfx.globalAlpha=k; gfx.fillStyle=g; gfx.fillRect(0,0,576,324);
   gfx.globalAlpha=1; R(0,0,576,BARH*k,'#000'); R(0,324-BARH*k,576,BARH*k,'#000');
   if(k>.9) { const o=(ms/8)%28; for(let x=-28+o;x<590;x+=28) { R(x,7,14,10,'#e8dcc4'); R(x,307,14,10,'#e8dcc4'); } }
-  if(s.t<1.6) { const a=cl(s.t/.1)*cl((1.6-s.t)/.3); gfx.globalAlpha=a*.92; RO(128,40,320,108,'#f4ead4'); R(134,46,308,96,'#2a2016'); gfx.globalAlpha=a;
-    const q=cl(s.t/.5);
-    if(q<1) { gfx.strokeStyle='#f4ead4'; gfx.lineWidth=3; gfx.beginPath(); gfx.arc(288,94,34,0,Math.PI*2); gfx.stroke(); gfx.beginPath(); gfx.moveTo(288,94); gfx.lineTo(288+Math.cos(q*Math.PI*2-Math.PI/2)*34,94+Math.sin(q*Math.PI*2-Math.PI/2)*34); gfx.stroke(); bigWord(String(3-Math.floor(q*3)),288,86,'#f4ead4',3); }
-    else { bigWord('BACK IN 1989',288,66,'#f4ead4',4); label(s.txt||'',288,108,'#c8b090',2); }
-    gfx.globalAlpha=1; } };
+  flashbackBanner(s); };
+// The time banner: one big plaque pinned under the top bar for the WHOLE flashback (it drops in with the projector and lifts out when the
+// flashback ends). The game's dark panel with gold rules and drop-shadow pixel type; a clock whose hands run backwards at the left and a
+// film reel that spins backwards at the right. s.txt is the line under BACK IN 1989. Words that pop up during a flashback stay below y=112.
+const flashbackBanner=s=>{
+  const q=Math.min(ez(s.t/.3),ez((s.dur-s.t)/.3)); if(q<=0) return;
+  const Y0=26,H=82,t=s.t,cy=Y0+41,TXT='#fff1cb',GLD='#ffe08a',INK='#0b0805';
+  const title=(txt,x,y,c,sc)=>{ for(const [ox,oy] of [[-2,0],[2,0],[0,-2],[0,2],[-2,-2],[2,2],[-2,2],[2,-2],[3,3]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+  gfx.save(); gfx.translate(0,-Math.round((1-q)*(Y0+H+6)));
+  gfx.globalAlpha=.92+.04*Math.sin(t*47); R(0,Y0,576,H,'#1c1209'); gfx.globalAlpha=1;
+  R(0,Y0,576,2,GLD); R(0,Y0+H-2,576,2,GLD); R(0,Y0+4,576,1,'#8a6a3a'); R(0,Y0+H-5,576,1,'#8a6a3a'); R(0,Y0+H,576,3,'rgba(0,0,0,.4)');
+  // clock, hands running backwards
+  const kx=62; E(kx,cy,29,29,OUT); E(kx,cy,27,27,GLD); E(kx,cy,22,22,OUT); E(kx,cy,20,20,TXT);
+  for(let k=0;k<12;k++) { const a=k/12*Math.PI*2,d=k%3?2:4; R(Math.round(kx+Math.cos(a)*15-d/2),Math.round(cy+Math.sin(a)*15-d/2),d,d,'#5a4228'); }
+  const am=-t*3.2,ah=-t*.27; Ln(kx,cy,kx+Math.sin(am)*15,cy-Math.cos(am)*15,3,'#2a2016'); Ln(kx,cy,kx+Math.sin(ah)*10,cy-Math.cos(ah)*10,4.5,'#2a2016'); E(kx,cy,3.5,3.5,'#d8302e');
+  // film reel, spinning backwards
+  const rx=514; E(rx,cy,29,29,OUT); E(rx,cy,27,27,'#8a8a96'); E(rx,cy,23,23,'#2a2a34');
+  for(let k=0;k<5;k++) { const a=-t*2.4+k/5*Math.PI*2; E(rx+Math.cos(a)*14,cy+Math.sin(a)*14,6,6,'#1c1209'); E(rx+Math.cos(a)*14-1,cy+Math.sin(a)*14-1,4,4,'#4a4a56'); }
+  E(rx,cy,6,6,OUT); E(rx,cy,4,4,GLD);
+  // title and the line under it
+  const sc=7,w1=(7*4-1)*sc,w2=(4*4-1)*sc,gap=4*sc,left=288-Math.round((w1+gap+w2)/2),jit=((Math.floor(t*18)*7)%3)-1;
+  title('BACK IN',left+w1/2,Y0+10+jit,TXT,sc); title('1989',left+w1+gap+w2/2,Y0+10+jit,GLD,sc);
+  const sub=String(s.txt||''),sw=(sub.length*4-1)*4;
+  label(sub,288+2,Y0+53+2,INK,4); label(sub,288,Y0+53,TXT,4);
+  for(const sd of [-1,1]) { const x0=288+sd*(sw/2+14),x1=x0+sd*46; R(Math.min(x0,x1),Y0+62,46,2,GLD); PO([[x1+sd*8,Y0+63],[x1+sd*2,Y0+57],[x1-sd*4,Y0+63],[x1+sd*2,Y0+69]],GLD,0); }
+  gfx.restore(); };
 const runFr=(sp,t,dir)=>dir>0?(sp.runFlip?sp.runFlip[Math.floor(t*12)%2]:sp.flip):(sp.run?sp.run[Math.floor(t*12)%2]:sp.idle);
 const pathOf=(fx,dur,fn)=>{ fx.path={t:0,dur:dur/1000,fn:(q,c)=>fn(q*dur,c)}; };
 const glowOn=u=>{ const h=ST.unit(u); scene('glow',.9,{x:h.x,y:h.mid,rx:38,ry:52,c:GOLD,a:.35}); };
@@ -5678,22 +5699,47 @@ const ING=[['KETCHUP',(x,y,t)=>{ if(!PROPART.draw('tombo/ketchup_bottle',x,y,{h:
   ['A WHOLE LEMON',(x,y,t)=>{ if(PROPART.draw('tombo/whole_lemon',x,y,{w:24,rot:t})) return; EO(x,y,9,7,'#f8e040'); R(x-10,y-1,3,2,'#6fae5a'); }],['ONE SOCK',(x,y,t)=>{ if(PROPART.draw('tombo/lone_sock',x,y,{h:30,rot:t})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(t); RO(-5,-14,10,20,'#f4f0e6'); RO(-5,2,16,8,'#f4f0e6'); R(-5,-14,10,3,'#4f86d8'); gfx.restore(); }]];
 const bowl=(x,y,fill,t,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(!PROPART.draw('tombo/giant_mixing_bowl',0,-6,{w:92})) { PO([[-40,-20],[40,-20],[32,16],[-32,16]],'#d8dce8'); R(-42,-24,84,6,OUT); R(-40,-23,80,4,'#eef0f8'); }
   if(fill>0) { gfx.globalAlpha*=1; E(0,-20,36*fill+4,7,'#5fc04a'); for(let k=0;k<5;k++) { const q=(t*1.5+k/5)%1; E(-26+k*13+Math.sin(k*3+t*4)*4,-20-q*22,3+(k%2),3+(k%2),'#9ef07a'); } } gfx.restore(); };
+// Length in seconds of a baked mp3 (base64), read from its first audio frame: the Xing/Info frame count when there is one, else the
+// constant bitrate. 0 when it cannot be read. Used to stretch the timeline to a freshly baked kid clip.
+const ymSecs=c=>{ try {
+  const bin=atob(c.mp3),n=bin.length,at=k=>bin.charCodeAt(k); let i=0;
+  if(bin.slice(0,3)==='ID3') i=10+((at(6)&127)<<21|(at(7)&127)<<14|(at(8)&127)<<7|(at(9)&127));
+  while(i+4<n&&!(at(i)===255&&(at(i+1)&224)===224)) i++;
+  const ver=(at(i+1)>>3)&3,layer=(at(i+1)>>1)&3; if(ver===1||layer!==1) return 0;   // MPEG layer III only
+  const v1=ver===3,kbps=(v1?[0,32,40,48,56,64,80,96,112,128,160,192,224,256,320]:[0,8,16,24,32,40,48,56,64,80,96,112,128,144,160])[at(i+2)>>4];
+  const sr=[44100,48000,32000][(at(i+2)>>2)&3]/(v1?1:(ver===2?2:4)),mono=((at(i+3)>>6)&3)===3; if(!kbps||!sr) return 0;
+  const so=i+4+(v1?(mono?17:32):(mono?9:17)),tag=bin.slice(so,so+4);
+  if((tag==='Xing'||tag==='Info')&&(at(so+7)&1)) return ((at(so+8)<<24|at(so+9)<<16|at(so+10)<<8|at(so+11))>>>0)*(v1?1152:576)/sr;
+  return (n-i)*8/(kbps*1000);
+} catch(e) { return 0; } };
+const ymClip=(id,line)=>{ const all=VOICE_CLIPS&&VOICE_CLIPS.clips&&VOICE_CLIPS.clips[id]; if(all) for(const k in all) for(const c of all[k]) if(c&&c.text===line) return c; return null; };
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{ymSecs}); });
 B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const by=300,cx=cl(GR.x1+110,220,330),kT={x:cx+72,y:by},kA={x:cx-72,y:by};   // the counter sits between the kids
+  const AMY_LINE="Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!",TOM_LINE="Yama-Mott. It's Tom backwards. We were six.",FLASH='Flashback!';
+  // Voices. Little Amy speaks in Grace's voice (LINES.grace.ymamot) and little Tom in Rose's (LINES.rose.ymamot). Until those two lines are baked
+  // (tools/bake-page/pending.json) the grown-up clips play instead, so the move is never silent. Both grown-ups shout Flashback! together first
+  // (amy.flashback, tom.flashback); that shout stays silent until its clips are baked.
+  const kidA=ymClip('grace',AMY_LINE),kidT=ymClip('rose',TOM_LINE),shA=ymClip('amy',FLASH),shT=ymClip('tom',FLASH);
+  const sayAmy=()=>kidA?say('grace','ymamot',0,AMY_LINE):say('amy','tombo2',0,AMY_LINE),sayTom=()=>kidT?say('rose','ymamot',0,TOM_LINE):say('tom','tomboamy2',0,TOM_LINE);
   // Timing follows the two voice clips so the lines never overlap and every beat lands on its words. Speech measured inside
-  // each clip (ms): Amy says ketchup 110, pickles 1130, cereal 1880, sock 2680, then "It's a Ymamot Creation!" 3490 to 7010 (Ymamot 4260).
-  // Tom says "Yama-Mott." 90 to 960, "It's Tom backwards." 1310 to 2770, "We were six." 3240 to 4070. The timeline runs K
+  // the grown-up clips (ms): Amy says ketchup 110, pickles 1130, cereal 1880, sock 2680, then "It's a Ymamot Creation!" 3490 to 7010 (Ymamot 4260);
+  // the clip is 7520 long. Tom says "Yama-Mott." 90 to 960, "It's Tom backwards." 1310 to 2770, "We were six." 3240 to 4070; 4240 long.
+  // A kid clip has its own pace, so every beat is scaled by its length over the grown-up clip's (FA, FT). The timeline runs K
   // times faster than the audio at 2x (engine/main.js), so every span that waits on a voice is multiplied by K.
-  const K=b7Speed(),A0=1000,ING_T=[110,1130,1880,2400,2540,2680].map(v=>A0+v*K);   // mustard and lemon go in during Amy's pauses
+  const K=b7Speed(),FA=kidA?cl(ymSecs(kidA)/7.52,.45,2.2)||1:1,FT=kidT?cl(ymSecs(kidT)/4.24,.45,2.2)||1:1;
+  const SH=250,SHOUT=Math.round(cl(Math.max(0,ymSecs(shA||{mp3:''})*1000,ymSecs(shT||{mp3:''})*1000)||1300,900,2200));   // the shout, then the flashback starts
+  const fb=SH+SHOUT*K+250,A0=fb+700,ING_T=[110,1130,1880,2400,2540,2680].map(v=>A0+v*K*FA);   // mustard and lemon go in during Amy's pauses
   const AMY_ING=[1,4,5];   // Amy handles pickles, lemon, sock; Tom ketchup, cereal, mustard
-  const AMY_LINE="Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!",TOM_LINE="Yama-Mott. It's Tom backwards. We were six.";
-  const P={fb:300,in:ING_T[0],name:A0+4260*K,lift:A0+(7010+150)*K,sling:0,hit:0,back:0,end:0};
-  P.sling=P.lift+3350*K; P.hit=P.sling+380*K; P.back=P.hit+1100; P.end=P.back+1100;
-  // grown-ups hide for the flashback (they stay at the staging spots)
-  const hideAt=ms=>ms>P.fb&&ms<P.back;
-  pathOf(fxT,P.end,(ms,c)=>({cx:hideAt(ms)?-400:c.origX,base:c.origBase,frame:ms>=P.back?c.sp.celeb:c.sp.idle,hide:hideAt(ms),noShadow:hideAt(ms)}));
-  pathOf(fxP,P.end,(ms,c)=>({cx:hideAt(ms)?-400:c.origX,base:c.origBase,frame:ms>=P.back?c.sp.celeb:c.sp.idle,hide:hideAt(ms),noShadow:hideAt(ms)}));
+  const P={fb,in:ING_T[0],name:A0+4260*K*FA,lift:A0+(7010+150)*K*FA,sling:0,hit:0,back:0,end:0};
+  P.sling=P.lift+3350*K*FT; P.hit=P.sling+380*K; P.back=P.hit+1100; P.end=P.back+1100;
+  // grown-ups shout together and hop, then hide for the flashback (they stay at the staging spots)
+  const hideAt=ms=>ms>P.fb&&ms<P.back,shouting=ms=>ms>=SH&&ms<P.fb-150,hop=ms=>shouting(ms)?Math.abs(Math.sin((ms-SH)/110))*7:0;
+  const gone=(ms,c)=>({cx:hideAt(ms)?-400:c.origX,base:c.origBase-hop(ms),frame:ms>=P.back||shouting(ms)?c.sp.celeb:c.sp.idle,hide:hideAt(ms),noShadow:hideAt(ms)});
+  pathOf(fxT,P.end,gone);
+  pathOf(fxP,P.end,gone);
+  const UT=ST.unit(tom),UP=ST.unit(pt),tsp=BATTLE_SPRITES.tom,shoutY=Math.max(116,Math.min(UT.base,UP.base)-tsp.idle.length*tsp.scale-48);
   const thrown=[];
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{ if(ms<P.fb||ms>P.back) return; const t=s2.t;
     // the counter
@@ -5715,16 +5761,17 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     kid(kT.x,by+lift,'tom',posT,t,-1,{}); kid(kA.x,by+lift,'amy',posA,t,1,{});
     if(ms>P.name&&ms<P.lift) { gfx.save(); gfx.translate(cx,by-124); gfx.rotate(-.06); if(!PROPART.draw('tombo/ymamot_creation_sign',0,0,{w:112})) { RO(-70,-12,140,24,CREAM); label('YMAMOT CREATION',0,-6,'#2b2a26',2); } gfx.restore(); } }});
   const steps=[
-    [0,()=>{ setMessage('TOMBO! Tom and Amy look at each other. They remember something.'); S('harp'); if(typeof warmLine==='function') { warmLine('amy',AMY_LINE); warmLine('tom',TOM_LINE); } }],   // decode both clips now so they start on cue
+    [0,()=>{ setMessage('TOMBO! Tom and Amy look at each other. They remember something.'); S('harp'); if(typeof warmLine==='function') { warmLine(kidA?'grace':'amy',AMY_LINE); warmLine(kidT?'rose':'tom',TOM_LINE); warmLine('amy',FLASH); warmLine('tom',FLASH); } }],   // decode the clips now so they start on cue
+    [SH,()=>{ S('whoosh'); S('select'); if(shA) say('amy','flashback',0,FLASH); if(shT) say('tom','flashback',0,FLASH); word('FLASHBACK!',(UT.x+UP.x)/2,shoutY,GOLD,5,SHOUT*K/1000+.5,-.05); setMessage('Tom and Amy, at exactly the same time: Flashback!'); }],   // together, before the move starts
     [P.fb,()=>{ scene('tu_flashback',(P.back-P.fb)/1000,{txt:'MOM WAS OUT'}); if(sfx.projector) sfx.projector(0,30); S('whoosh'); setMessage('The kitchen. A bowl. No supervision.'); }],
-    [A0,()=>{ say('amy','tombo2',0,AMY_LINE); }],
+    [A0,()=>{ sayAmy(); }],
     ...ING.map(([nm],k)=>[ING_T[k],()=>{ S(k%2?'thud':'splat'); word(nm,cx,by-170,k%2?CREAM:MINT,3,.5); if(k===ING.length-1) setMessage('And one sock. For body.'); }]),
-    [P.name,()=>{ S('ding'); word('A YMAMOT CREATION!',cx,Math.max(56,by-200),GOLD,4,1.3); setMessage('They name it. Very official.'); }],
-    [P.lift,()=>{ S('whoosh'); say('tom','tomboamy2',0,TOM_LINE); setMessage('Tom spelled backwards. Pronounced Yama-Mott. They were six.'); }],
-    [P.lift+1500*K,()=>{ setMessage('They carry it together. Very carefully. Then not carefully.'); }],
+    [P.name,()=>{ S('ding'); word('A YMAMOT CREATION!',cx,Math.max(122,by-176),GOLD,4,1.3); setMessage('They name it. Very official.'); }],
+    [P.lift,()=>{ S('whoosh'); sayTom(); setMessage('Tom spelled backwards. Pronounced Yama-Mott. They were six.'); }],
+    [P.lift+1500*K*FT,()=>{ setMessage('They carry it together. Very carefully. Then not carefully.'); }],
     [P.sling,()=>{ S('whoosh'); S('splat'); }],
     ['hf',P.hit],
-    [P.hit,()=>{ S('splat'); S('bonk'); scene('tu_flash',.2,{a:.4,c:'#9ef07a'}); hitFoes(tgts,share); for(const f of tgts) { const q=ST.foe(f); scene('tu_dust',.5,{x:q.x,y:q.base,r:30,n:8}); } word('SPLAT!',GR.x,Math.max(56,GR.top-70),MINT,6,1); setMessage('It goes everywhere. The monsters are not the same after.'); }],
+    [P.hit,()=>{ S('splat'); S('bonk'); scene('tu_flash',.2,{a:.4,c:'#9ef07a'}); hitFoes(tgts,share); for(const f of tgts) { const q=ST.foe(f); scene('tu_dust',.5,{x:q.x,y:q.base,r:30,n:8}); } word('SPLAT!',GR.x,Math.max(118,GR.top-44),MINT,6,1); setMessage('It goes everywhere. The monsters are not the same after.'); }],
     [P.hit+600,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); }],
     [P.back,()=>{ scene('tu_flash',.3,{a:.5}); setMessage('Back to now. Tom can still taste it.'); }],
     [P.end,'end',()=>(E2.result||'')+' The monsters crawl to the back row. The family moves faster, mostly away from the smell.']];
@@ -5820,7 +5867,7 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     kid(kax,by-bob-air,'amy',posA,freeze?0:t,1,{});
     // the flying object of this swing: from the swinger's hand, past the sibling, into the monster
     if(swinging&&w>120) { const q=seg(w,120,400),from=k%2?kT:kA,x=lerp(from.x,Q.x+Q.w*.2,ez(q)),y=lerp(by-50,Q.mid,q)-Math.sin(q*Math.PI)*50; if(q<1) SWINGS[k][1](x,y,q*8); }
-    if(freeze) { const q=seg(ms,P.mom,P.mom+400); gfx.globalAlpha=1; bigWord('KNOCK IT OFF!',Math.max(120,cx-120),Math.max(40,by-180-q*10),RED,4); } }});
+    if(freeze) { const q=seg(ms,P.mom,P.mom+400); gfx.globalAlpha=1; bigWord('KNOCK IT OFF!',Math.max(120,cx-120),Math.max(118,by-182-q*2),RED,4); } }});
   const steps=[
     [0,()=>{ setMessage('TOMBO! The look on Amy\'s face says 1990-something.'); S('harp'); }],
     [P.fb,()=>{ scene('tu_flashback',(P.back-P.fb)/1000,{txt:'THE COUCH'}); if(sfx.projector) sfx.projector(0,30); S('whoosh'); }],
@@ -5830,7 +5877,7 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.bick[2],()=>{ word('WAS NOT!',cx+40,by-120,CREAM,3,.5); S('squeak'); setMessage('It escalates. It always escalates.'); }],
     ['hf',P.sw0+400]];
   SWINGS.forEach(([nm],k)=>{ const t0=P.sw0+k*P.each; steps.push([t0,()=>{ S('whoosh'); word(nm,k%2?cx+40:cx-40,by-130,k%2?CREAM:PINK,3,.45); }]);
-    steps.push([t0+400,()=>{ S('bonk'); S('thud'); ST.jolt(tgt,.5); battle.shakeEnemy=.35; scene('tu_rings',.5,{x:Q.x,y:Q.mid,r:40}); word(['WHAP!','SMACK!','POOF!','CLACK!','WHUMP!','DOUBLE!'][k],Q.x+10,Math.max(50,Q.top-70-(k%2)*20),GOLD,4,.5); landHit(k<5?16:20); if(k===0) setMessage('Every swing misses the sibling. Every swing hits the monster.'); }]); });
+    steps.push([t0+400,()=>{ S('bonk'); S('thud'); ST.jolt(tgt,.5); battle.shakeEnemy=.35; scene('tu_rings',.5,{x:Q.x,y:Q.mid,r:40}); word(['WHAP!','SMACK!','POOF!','CLACK!','WHUMP!','DOUBLE!'][k],Q.x+10,Math.max(118,Q.top-44-(k%2)*18),GOLD,4,.5); landHit(k<5?16:20); if(k===0) setMessage('Every swing misses the sibling. Every swing hits the monster.'); }]); });
   steps.push(
     [P.mom,()=>{ S('stun'); setMessage('From the next room: KNOCK IT OFF. Both of them freeze.'); }],
     [P.mom+700,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); }],

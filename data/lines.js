@@ -70,3 +70,11 @@ for(const [id,k,v] of [
   ['grace','dcff2','It\'s dairy-free, Mom! Don\'t get up!'],['rose','dcff2','I did the syrup! ALL of it!'],
   ['boppy','dcff3','Where\'s the fire? Everybody walks too fast!'],['deedee','dcff3','Keep up, honey! Arms at ninety!'],
   ['tom','dcff4','One more chair. There\'s always one more chair.'],['rose','dcff4','Everybody get in the heart!']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }
+
+// Ymamot Creation (Tombo amy2): the shout before the flashback, and the two kids. New lines: bake them (tools/bake-page/pending.json) before their clips play.
+// Tom and Amy shout Flashback! together as grown-ups. In the flashback little Amy speaks in Grace's voice and little Tom in Rose's, so those two lines live under grace and rose.
+// Until they are baked the move keeps playing the old grown-up clips (engine/battle2-kind.js kidSay).
+for(const [id,k,v] of [
+  ['amy','flashback','Flashback!'],['tom','flashback','Flashback!'],
+  ['grace','ymamot','Ketchup, pickles, cereal, one sock. It\'s a Ymamot Creation!'],
+  ['rose','ymamot','Yama-Mott. It\'s Tom backwards. We were six.']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }
