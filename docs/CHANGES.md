@@ -1,3 +1,8 @@
+## 2026-10-31 (morning, 40): Battle Lab EXIT button at the top of the battle (`labx1`)
+
+- Tom (10:34): in Battle Lab fights only, an exit button at the top of the screen returns to boss select. EXIT now sits left of 1x and AUTO on the battle picture (portrait and landscape). One tap ends the fight right away, even mid-animation (clears the step queue, stops speech) and opens the lab list, same path as Exit Lab in the bag. Story fights never show it.
+- Files: `engine/feel.js` (button in the `b7-tools` row, shown when `B2.cfg.lab`), `engine/battle2-ui.js` (`b2LabExit`), `index.html` (button style). Tested: lab fights 0 and 5 in portrait, fight 0 in landscape, tap returns to the lab list with lab flags cleared, a story fight after it hides EXIT; smoke (default and grace,rose) pass. Tags `?v=labx1`, stamp `build labx1`.
+
 ## 2026-10-31 (day, 7): Puppy Dog Eyes spelling fixed (`eyes2`)
 
 - Tom (10:07): the earlier rename was meant to be "Puppy Dog Eyes"; "Puopy" was a typo. Corrected in the same places (`data/abilities.js`, `data/battle2-data.js`, `data/ch20-battle.js`, `data/scenes.js`, `engine/nara.js`, `docs/CANON.md`, `docs/MOVE_KEYS.md`). Key `puppy_eyes` unchanged, no spoken lines affected.
