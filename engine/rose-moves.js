@@ -2148,7 +2148,7 @@ const seatCush=(x,y,ms,lit)=>{ const bob=Math.sin(ms/260)*1.2,w=64; y+=bob;
   tuft(-21,-1,1.8); tuft(21,-1,1.8); gfx.restore(); gfx.restore(); };
 // Lava pool: a blobby molten sheet from the cushion over to the monsters' feet, bubbling, with a dark crust edge.
 const lavaSheet=(P,g,ms)=>{ const pts=[],N=26,cx=(P.xa+P.xb)/2,cy=(P.ya+P.yb)/2,rx=(P.xb-P.xa)/2*g,ry=(P.yb-P.ya)/2*g;
-  if(g>.02&&PROPART.draw('rose/lava_pool',cx,cy,{w:rx*2.08,h:ry*2.08,rot:Math.sin(ms/900)*.01})) return;   // painted lava pool
+  if(g>.02&&PROPART.draw('rose/lava_pool',cx,cy,{w:rx*2.4,h:ry*2.4,rot:Math.sin(ms/900)*.01})) return;   // painted lava pool
   for(let i=0;i<N;i++) { const a=i/N*Math.PI*2,w=1+.06*Math.sin(a*5+ms/400)+.04*Math.sin(a*3-ms/300); pts.push([cx+Math.cos(a)*rx*w,cy+Math.sin(a)*ry*w]); }
   const path=k=>{ gfx.beginPath(); pts.forEach(([px,py],i)=>{ const qx=cx+(px-cx)*k,qy=cy+(py-cy)*k; i?gfx.lineTo(qx,qy):gfx.moveTo(qx,qy); }); gfx.closePath(); };
   gfx.lineJoin='round'; path(1.04); gfx.fillStyle=CRUST; gfx.fill(); path(1); const gr=gfx.createRadialGradient(cx,cy,2,cx,cy,Math.max(rx,ry)); gr.addColorStop(0,LAVA2); gr.addColorStop(.6,LAVA); gr.addColorStop(1,'#d8360e'); gfx.fillStyle=gr; gfx.fill();
@@ -2169,8 +2169,8 @@ SC.rv_cush=()=>{};
 SC.rv_lava=()=>{};   // the old flat orange ovals; the painted lava pool (rh_lava) replaces them
 { const lava=Rm.floor_is_lava; Rm.floor_is_lava=E2=>{ lava(E2);
     const list=(E2.targets||[]).filter(t=>t.side==='foe'),G=ST.group(list),p={x:Math.min(552,G.x1+46),y:Math.min(314,G.base+6)};
-    const tops=list.map(f=>ST.foe(f)),ya=Math.min(...tops.map(F=>F.base))-8,yb=Math.max(p.y+12,...tops.map(F=>F.base+10));
-    const P={cx:p.x,cy:p.y,xa:Math.min(...tops.map(F=>F.x-F.w*.5))-24,xb:p.x+48,ya,yb};
+    const tops=list.map(f=>ST.foe(f)),ya=Math.min(...tops.map(F=>F.base))-30,yb=Math.max(p.y+30,...tops.map(F=>F.base+30));
+    const P={cx:p.x,cy:p.y,xa:Math.min(...tops.map(F=>F.x-F.w*.5))-52,xb:p.x+84,ya,yb};   // wide pool: lava shows around every enemy's feet and Rose's cushion
     b7Later(()=>RFX.scene('rh_lava',3.05,{P,drainAt:2100,back:true}),1250); }; }
 
 // ---------- Pillow Fort: real couch cushions ----------
