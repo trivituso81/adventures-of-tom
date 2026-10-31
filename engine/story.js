@@ -270,7 +270,7 @@ const SCENE_OPS={
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
   // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
   cam:o=>S.call(()=>{ sceneCam=o.cam||null; }),
-  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f) a.scenePose={f:o.f,dir:o.dir||'left'}; else { a.scenePose=null; a.lift=0; } }),
+  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f) a.scenePose={f:o.f,dir:o.dir||'left',fps:o.fps}; else { a.scenePose=null; a.lift=0; } }),
   // {knock:'tom',to:[x,y],delay,fly,arc,dir}: thrown to a spot (hurt frame in the air), lands with a bounce, then lies there (KO frame) until a getup.
   knock:o=>lazy(()=>{ const a=sceneActor(o.knock),to=scenePos(o.to),fly=o.fly||.42,dl=o.delay||0,arc=o.arc||22; let t=0,from=null,dir='left';
     return {start(){ t=0; storyHold(a); const p=position(a); from=[p.x,p.y]; dir=o.dir||(to[0]<from[0]?'left':'right'); a.move=null; a.scr={x:from[0],y:from[1]}; },
@@ -485,6 +485,21 @@ b7MonsterTick=function(n,dt) {
   return LE_b7MonsterTick_story(n,dt);
 };
 // Drawing: props an actor carries or wears (STORY_PROPS), and gate branches.
+// The Mudling's pie-heist frames (data/mudling-heist.js, painted, faces LEFT). a.scenePose={f:'mh_spot'|[frames],fps,dir} on a story monster;
+// an array of frames cycles at fps. dir 'right' mirrors it. Returns true when it drew (the caller then skips the plain sprite).
+const MH_ROWS={};
+function mudlingHeistDraw(a,cx,base) {
+  const P=a.scenePose,H=typeof MUDLING_HEIST!=='undefined'?MUDLING_HEIST:null; if(!P||!H||!P.f) return false;
+  const f=Array.isArray(P.f)?P.f[Math.floor(elapsedTime*(P.fps||6))%P.f.length]:P.f; if(!H.rows[f]) return false;
+  if(!MH_ROWS.atlas) MH_ROWS.atlas=paintedAtlas('mudlingHeist',H.src,H.rects,H.k);
+  const flip=P.dir==='right',key=f+(flip?'R':'L');
+  if(!MH_ROWS[key]) { const r=paintRows(H.rows[f].slice(),MH_ROWS.atlas,f,false); MH_ROWS[key]=flip?mirrorRows(r):r; }
+  const rows=MH_ROWS[key],m=H.meta[f],s=a.mscale||1,w=rows[0].length,h=rows.length,ax=flip?w-m.ax:m.ax;
+  const lift=(m.lift+(a.lift||0))*s;
+  ellipse(cx,base+1,Math.round(w*s*.42*(1-Math.min(.35,lift/60))),5*s,'#2f493640');
+  drawSprite(rows,H.pal,cx-Math.round(ax*s),Math.round(base-h*s-lift),s);
+  return true;
+}
 function drawActorExtra(a,cx,top,w,h) {
   if(typeof STORY_PROPS==='undefined') return;
   const P=a.carry&&STORY_PROPS[a.carry]; if(P) P(cx,top+Math.round(h*.62),a);   // held in front of its belly

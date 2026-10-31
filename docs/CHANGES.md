@@ -1,3 +1,9 @@
+## 2026-10-30 (night, 14): Chapter 1 pie theft: the Mudling acts it out with 16 painted frames
+
+- Tom (23:47) dropped the Mudling heist sheet. Baked by `tools/sprite-bake/bake_mudling_heist.py` into `art/foes/mudling-heist.webp` and `data/mudling-heist.js` (`MUDLING_HEIST`, frames `mh_*`, same size as the old Big Mudling; lift only on the charge and the first scurry frame).
+- `engine/story.js` `mudlingHeistDraw` draws them on a story monster (`{pose:'Big Mudling',f:'mh_spot'}` or an array with `fps` to cycle, `dir:'right'` mirrors); hook in `drawActor` (town-render.js). `SCENES.ch1Theft` now plays: ooze in, spot, windup, charge, shove, barrel, wobble, reach, grab (tin is in the frame, game tin prop unused), hug, side-eye, scurry out mirrored, giggle, sneak. Family knock and getup timings pushed later so nobody stands up into the blob. Spoken lines unchanged (no re-bake).
+- Tests: scene played in portrait and landscape (frames looked at), smoke 0 fails. Tags `?v=mh1` on story.js, town-render.js, scenes.js, mudling-heist.js; stamp `build mh1`.
+
 ## 2026-10-30 (night, 12): TNB moves use painted props (flashlight, slasher, kiln, wheel)
 
 - Tom (23:36): TNB's abilities mainly use old graphics. Audit with kit_test (PAINTED_PROPS) showed 9 of 14 TNB moves drew no painted props. Wired the four that already had painted art: Don't Split Up and Slasher Jump Scare use `tnb/flashlight`; Slasher Jump Scare's figure is the painted `tnb/slasher_standee` (`slasher()`); Kiln Door Policy uses `tnb/brick_kiln` (`paintedKiln()`: painted body, soft heat glow, glowing open door, chimney steam; the animated drawn kiln stays as fallback); Throw Down uses `tombo/pottery_wheel` (the spin smear ring stays; the drawn electric wheel is the fallback). All preloaded in engine/prop-art.js.

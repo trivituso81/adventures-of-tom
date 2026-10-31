@@ -539,6 +539,7 @@ function drawActor(a) {
     const p=position(a);
     const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
     const bob=Math.round(Math.sin(elapsedTime*3))*1;
+    if(a.scenePose&&typeof mudlingHeistDraw==='function'&&mudlingHeistDraw(a,cx,base)) return;   // painted heist frames (engine/story.js)
     const d=monsterDef(a),s=a.mscale||1,w=d.sprite[0].length*s,h=d.sprite.length*s;   // mscale: drawn bigger (a story monster)
     ellipse(cx,base+1,Math.round(w*.47),5*s,'#2f493640');
     drawSprite(d.sprite,d.pal,cx-Math.round(w/2),base-h+bob,s);

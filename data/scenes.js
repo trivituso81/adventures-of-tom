@@ -93,35 +93,51 @@ SCENES.ch1Theft=[
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
   {sfx:'doorIn'},
   {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[8,12],dir:'up'}},
-  {walk:'Big Mudling',to:[[8,11]],speed:.32,onStep:()=>sfx.splat()},
-  {face:'Big Mudling',dir:'up'},
-  {sfx:'look'}, {wait:.4},
+  // The painted heist frames (mh_*, data/mudling-heist.js) give the blob its acting: ooze in, spot the pie, wind up, charge, shove, squeeze through,
+  // wobble, reach, grab, hug, side-eye, scurry out, giggle, sneak out. The frames already hold the tin, so the game's own tin prop is not used.
+  {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
+  {walk:'Big Mudling',to:[[8,11]],speed:.4,onStep:()=>sfx.splat()},
+  {pose:'Big Mudling',f:'mh_spot',dir:'left'},
+  {sfx:'look'}, {wait:.5},
+  {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
   // The shove (Tom, 2026-10-30): the blob charges up the middle and bowls Tom, Grace and Rose over (battle hurt, then lying KO frames),
   // Deedee hops out of its way, and it squelches on to the counter. Nobody is overlapped: the three land clear of its path (the diagonal
   // from the corridor to the island) and it never walks through anyone.
   {cam:[8,10]},
   {all:[
-    {seq:[{walk:'Big Mudling',to:[[8,10.1]],speed:.2},
-          {walk:'Big Mudling',to:[[7,9],[5.6,8]],speed:.26,onStep:()=>sfx.splat()}]},
+    {seq:[{pose:'Big Mudling',f:'mh_charge',dir:'left'},
+          {walk:'Big Mudling',to:[[8,10.1]],speed:.2},
+          {pose:'Big Mudling',f:'mh_shove',dir:'left'}, {wait:.3},
+          {pose:'Big Mudling',f:'mh_barrel',dir:'left'},
+          {walk:'Big Mudling',to:[[7,9]],speed:.26,onStep:()=>sfx.splat()},
+          {pose:'Big Mudling',f:'mh_wobble',dir:'left'},
+          {walk:'Big Mudling',to:[[6.3,8]],speed:.3,onStep:()=>sfx.splat()}]},
     {seq:[{wait:.12},{sfx:'whoosh'},{wait:.1},{sfx:'bonk'},{wait:.35},{sfx:'thud'}]},
     {knock:'tom',to:[9.6,9],delay:.17,dir:'right'},
     {knock:'grace',to:[10.5,10.4],delay:.22,dir:'right'},
     {knock:'rose',to:[5.8,10.6],delay:.2,dir:'left'},
-    {seq:[{wait:.4},{face:'Deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[8,7],time:.35,arc:14}]}
+    {seq:[{wait:.5},{face:'Deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[8,7],time:.35,arc:14}]}
   ]},
   {place:'Deedee',at:[8,7],dir:'down'},
-  {face:'Big Mudling',dir:'left'},
   {wait:.3},
-  {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry='tin'; sfx.pickup(); }},
-  {wait:.35},
+  {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
+  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {wait:.5},
+  {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Rose',lines:['Deedee! A mud blob is taking your PIE!']},
-  // The blob squelches back down the middle; once it has cleared the corridor the three scramble up (kneel, then stand) and Deedee hops back to her counter.
+  {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
+  // The blob scurries back down the middle (mirrored, it travels right), giggles once it is past the corridor mouth, and sneaks out the door;
+  // then the three scramble up (kneel, then stand) and Deedee hops back to her counter.
   {all:[
-    {seq:[{walk:'Big Mudling',to:[[7,9.2],[8,10.2],[8,11.3],[8,12.4]],speed:.2,onStep:()=>sfx.splat()},{sfx:'doorOut'},{despawn:'Big Mudling'}]},
-    {getup:'tom',to:[8,10],delay:.6,dir:'down'},
-    {getup:'rose',to:[7,10],delay:.7,dir:'down'},
-    {getup:'grace',to:[9,10],delay:.8,dir:'down'},
-    {seq:[{wait:.7},{hop:'Deedee',from:()=>[8,7],to:[7,9],time:.4,arc:10}]}
+    {seq:[{pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'right'},
+          {walk:'Big Mudling',to:[[7,9.2],[8,10.2],[8,11.3]],speed:.22,onStep:()=>sfx.splat()},
+          {pose:'Big Mudling',f:'mh_giggle',dir:'right'}, {wait:.5},
+          {pose:'Big Mudling',f:'mh_sneak',dir:'right'},
+          {walk:'Big Mudling',to:[[8,12.4]],speed:.3},
+          {sfx:'doorOut'},{despawn:'Big Mudling'}]},
+    {getup:'tom',to:[8,10],delay:1.15,dir:'down'},
+    {getup:'rose',to:[7,10],delay:1.25,dir:'down'},
+    {getup:'grace',to:[9,10],delay:1.35,dir:'down'},
+    {seq:[{wait:1.2},{hop:'Deedee',from:()=>[8,7],to:[7,9],time:.4,arc:10}]}
   ]},
   {place:'Deedee',at:[7,9],dir:'down'},
   {cam:null},
