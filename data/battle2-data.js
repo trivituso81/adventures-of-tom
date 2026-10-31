@@ -1254,6 +1254,7 @@ const B2_TOMBOS=[
 // Battle Lab: one fight per chapter boss, chapters 1 to 20 (chapter 20 has two). Paged in engine/splash.js. Chapter 18's boss cannot be beaten by design.
 const B2_LAB=[
   {ch:0,name:'JUSTIN’S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Justin, every move unlocked.',party:['tom','grace','rose','justin'],level:12,foes:[['irongill','front']]},
+  {ch:0,name:'JUSTIN SOLO',sub:'Test fight. Justin alone, every move unlocked.',party:['justin'],level:12,foes:[['irongill','front']]},
   {ch:1,name:'THE BIG ONE',sub:'Chapter 1. Tom, Grace, Rose and Deedee.',party:['tom','grace','rose','deedee'],level:4,foes:[['bigone','front']]},
   {ch:2,name:'THE BIG SHAKE',sub:'Chapter 2. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:4,la:true,foes:[['bigshake','front']]},
   {ch:3,name:'OLD IRON-GILL',sub:'Chapter 3. Tom, Grace, Rose and Boppy.',party:['tom','grace','rose','boppy'],level:6,foes:[['irongill','front']]},

@@ -207,9 +207,9 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin is just standing there in the nicest sneakers.'); say(m.id,'foot_tap_idle'); }],
-    [700,()=>{ setMessage(tn+' comes over, very quietly.'); say(m.id,'foot_tap_wave'); }],
+    [700,()=>{ setMessage(tp?tn+' comes over, very quietly.':'Nobody is near, so the floor does it for them.'); say(m.id,'foot_tap_wave'); }],
     [1300,()=>{ if(tp) say(tp.id,'foot_tap_tap'); }],
-    [1200,()=>setMessage(tn+' taps his toe. Lightly.')],
+    [1200,()=>setMessage(tp?tn+' taps his toe. Lightly.':'Something taps his toe. Lightly.')],
     [1350,()=>sfx.step&&sfx.step()],
     ['hf',1850],
     [1390,()=>{ sfx.bump&&sfx.bump(); scene('jv_ring',.4,{x:me.x-34,y:me.base-6,r:14,c:'#ffffff'}); }],
