@@ -1,3 +1,10 @@
+## 2026-10-31 (morning, 39): battle UI ability names in Title Case and larger (`cross2`)
+
+- Tom (10:07): put the labels in the battle UI in title case and make the font bigger; his follow-up (10:08) was cut off after "For the ability names, I mean", so I took it as the ability names. Call made: ability names only; the cross buttons (ATTACK, TOMBO, HEAL, BAG, INSPECT) and the small HEART, TURN and HP labels are unchanged. Say the word to convert those too.
+- Ability names (Attack and Heal lists, Tombo list, Bag items, the Heal button's special name, the hint line) are Title Case and 15 px (was 12 px, caps); landscape 11 px (was 9.5). Names that were stored in all caps in the data (DEFEND, DANCE, MOON & BACK) are converted by `b2Title` in `engine/battle2-ui.js`; mixed-case names are shown as written. Small caps were switched off for these names so real capitals show. BACK, Run, Exit Lab, Warm Crust and Hot Dish are Title Case too. Rose Mode picture captions (`bpWord`) are Title Case and 11 px.
+- No spoken line changed. Tested: `smoke.py` and `IDS=grace,rose smoke.py` pass; portrait and landscape screenshots of the Attack and Heal lists checked. A nine-move Attack list is taller now and scrolls; Back is below the fold on the longest list. Not confirmed on phone.
+- Tags `battle2-ui.js`, `battle-pictures.js`, `main.js` `?v=cross2`, title stamp `build cross2`.
+
 ## 2026-10-31 (day, 2): Downtown LA pass 2: open road lane, walk under the Metro canopy, more cutouts
 
 - The south lane of the boulevard is open past the taco truck and bus shelter (cols 11 to 14, row 12); the truck body itself still blocks its own lane. Small curb props (trash cans, mailbox, hydrant, scooter, bike racks, bollards) no longer block: you walk behind them (small cutout zones in `PLATE_BEHIND.blvd`). The bus bench object is now just the shelter bench (12,13).
