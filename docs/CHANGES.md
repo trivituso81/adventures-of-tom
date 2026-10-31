@@ -1,3 +1,6 @@
+## 2026-10-30 (night, 8): Open Strings: quicker tail after the screech
+
+- Tom (22:35): after the notes, the rest of the animation should be faster. The tail (string snap, push through, big finish, listen, shrug, six lessons, bow, proud, walk home) now runs from 3.75 s to 6.8 s instead of 3.9 s to 8.0 s (`T` table in `G.open_strings`, engine/grace-moves.js). Tag `?v=gx2` on grace-moves.js. Tests: kit_test grace open_strings (tail frames looked at).
 ## 2026-10-30 (night, 7): Grace: three gymnastics primaries replaced (Open Strings, Portrait Mode, Bedazzle Blast)
 
 - Tom (21:35): too many gymnastics moves. Three Primary slots re-themed to her real interests; every number, target, element, VP cost, status effect and crit bonus is unchanged (only key, name, description, spoken line and animation changed). Director's Cut versions untouched.

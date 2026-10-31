@@ -1633,7 +1633,7 @@ SC.gx_screech=(s,u)=>{ const P=s.plan,q=ez(u/.25),a=fade(u,.6); gfx.globalAlpha=
     if(!prop('ear_rings',F.x+w,F.top+F.h*.18,{w:Math.max(44,F.w*.7)*(.7+.4*g),rot:t1/900})) { for(let r=1;r<=3;r++) { gfx.strokeStyle=GOLD; gfx.lineWidth=2; gfx.beginPath(); gfx.ellipse(F.x,F.top+F.h*.2,r*10*g,r*7*g,0,0,Math.PI*2); gfx.stroke(); } } }
   gfx.globalAlpha=1; };
 G.open_strings=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,72),U=list.map(f=>ST.unit(f));
-  const T={in:700,tuck:1050,breath:1400,stroke:1750,wince:2000,saw1:2250,saw2:2500,saw3:2750,saw4:3000,screech:3250,slip:3900,push:4200,finish:4550,listen:4950,shrug:5400,lessons:5800,bow:6350,proud:6850,back:7200,home:8000};
+  const T={in:700,tuck:1050,breath:1400,stroke:1750,wince:2000,saw1:2250,saw2:2500,saw3:2750,saw4:3000,screech:3250,slip:3750,push:3980,finish:4250,listen:4520,shrug:4820,lessons:5100,bow:5520,proud:5850,back:6120,home:6800};   // after the screech the tail runs quick (Tom 22:35)
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'os_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'os_tuck'},{t:T.breath,f:'os_breath',sc:1.04},{t:T.stroke,f:'os_stroke'},{t:T.wince,f:'os_wince'},
     {t:T.saw1,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*2},{t:T.saw2,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*2},{t:T.saw3,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*3},{t:T.saw4,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*3},
     {t:T.screech,f:'os_screech',dx:(u,tt)=>Math.sin(tt*60)*2,sc:1.06},{t:T.slip,f:'os_slip'},{t:T.push,f:'os_push',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:T.finish,f:'os_finish',hop:8},{t:T.listen,f:'os_listen'},
@@ -1649,7 +1649,7 @@ G.open_strings=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(
     [T.saw3,()=>{ sfx.screech(); sfx.screech(.25); note('cracked_note',4,0); note('wobbly_notes',5,0,.9); setMessage('A scale. Allegedly.'); }],
     ['hf',T.screech],
     [T.screech,()=>{ sfx.screech(); sfx.screech(.12); sfx.screech(.24); all(list,.6); landHit(100); E2.apply(); scene('gx_screech',.9,{plan}); scene('gx_big',.9,{x:Gp.x,y:Gp.top-60,txt:'SCREEEE!',c:GOLD,sc:4}); setMessage('The open strings. Every monster covers its ears. Nobody is dodging anything.'); }],
-    [T.slip,()=>{ sfx.click(); fly('snapped_string',st,-36,-GH()*.7,st.x-70,p.y-10,.7,{arc:40,spin:2,h:22}); scene('gx_text',.6,{st,txt:'TWANG',c:LIME}); }],
+    [T.slip,()=>{ sfx.click(); fly('snapped_string',st,-36,-GH()*.7,st.x-70,p.y-10,.55,{arc:40,spin:2,h:22}); scene('gx_text',.6,{st,txt:'TWANG',c:LIME}); }],
     [T.push,()=>{ sfx.screech(); note('sour_note',6,0,.7); setMessage('A string snaps. She keeps going. That is showmanship.'); }],
     [T.finish,()=>{ sfx.ding(); scene('gx_big',.8,{st,txt:'BIG FINISH',c:PINK,sc:3}); }],
     [T.listen,()=>{ setMessage('She listens for applause.'); }],
