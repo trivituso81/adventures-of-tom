@@ -8,5 +8,9 @@
  ["tnb","coffee_run","Coffee run. I got you the usual.","[warm, easy smile, handing over a cup] Coffee run. [fond] I got you the usual."],
  ["tnb","tasting_ult","Fourteen courses. Four seconds. And the check.","[smooth fine-dining server, quick and proud] Fourteen courses. Four seconds. [beat, deadpan, sliding the bill over] And the check."],
  ["tom","tombograce","Fine.","[dry, deadpan, long-suffering uncle, giving in with a sigh] Fine."],
- ["grace","tombo","Ta-Ta, I need a new squishy!","[bossy nine-year-old begging, hands clasped, drawing it out] Tah Tah, I need a new squishy!"]
+ ["grace","tombo","Ta-Ta, I need a new squishy!","[bossy nine-year-old begging, hands clasped, drawing it out] Tah Tah, I need a new squishy!"],
+ ["amy","flashback","Flashback!","[shouting together with Tom, playful, dramatic movie-trailer voice, drawn out] [emphasized] FLASHBAAAAACK!"],
+ ["tom","flashback","Flashback!","[shouting together with Amy, playful, dramatic movie-trailer voice, drawn out] [emphasized] FLASHBAAAAACK!"],
+ ["grace","ymamot","Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!","[gleeful six-year-old announcing a recipe, bossy and proud; Ymamot is said YAH-mah-mott] Ketchup, [pause] pickles, [pause] cereal, [pause] one sock. [beat] It's a Ymamot Creation!"],
+ ["rose","ymamot","Yama-Mott. It's Tom backwards. We were six.","[dry, matter-of-fact six-year-old explaining something very important; Yama-Mott is said YAH-mah-mott] Yama-Mott. [beat] It's Tom backwards. [beat] We were six."]
 ]
