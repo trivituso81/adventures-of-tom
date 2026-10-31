@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 12): Justin speaks on the beat, Voice Library and Bake page carry his lines (`justin3`)
+
+- Every Justin move now has a setup line, the main line on the key frame, and a payoff line (`<move>_<beat>` keys in `data/lines.js`; timings in `engine/justin-moves.js`, placed on the faster justin2 timeline). Rose or Grace says "Tap." in Foot Tap. 50 Justin battle lines plus the two taps have emotive scripts in `tools/bake-page/pending.json`; every Justin script (battle and dialogue) is tagged thick New York accent (Tom, 14:04).
+- Voice Library and Bake page: Justin had no battle voice in `VOICE_CLIPS.voices`, so `make-index.js` and `make-list.js` skipped or crashed on his battle lines. Both now fall back to his dialogue voice (AoT Justin) with the accent direction; `make-index.js` also reads scripts from pending.json for unbaked lines. `data/voice-index.json` (70 Justin lines) and `data/bake-list.json` (54) rebuilt.
+- Text changes to unbaked lines: breaker_flip split into "Breaker's off." and breaker_flip_on "Breaker's... on."; giant_sneeze split into giant_sneeze_build "Ah... ah... ah..." and "AH CHOOOOO!"; drywall split into "Drywall's up." and drywall_dry "Let it dry."
 ## 2026-10-31 (day, 12): Justin has his painted portrait (`jportrait1`)
 
 - Tom (13:59) sent Justin's oil-painting portrait. `portraits/justin.png` is now that painting, cropped square around the head so the face fills the frame like Tom, Amy and Boppy (replaces the cartoon placeholder).

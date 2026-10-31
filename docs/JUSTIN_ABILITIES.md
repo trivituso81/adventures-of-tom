@@ -8,23 +8,23 @@ Tom will drop a zip of Justin's painted animation sheets into a conversation, of
 - Recruiting: he is usually at work. He is found at home (GREGORI) on the couch watching the game, and joins as a fourth option for the fourth slot alongside Amy, Deedee and Boppy, with the same yes/no and swap-out prompts. Chapter availability follows `CHAPTERS` in `engine/story.js`; add him to the same lists as Amy.
 - Interface and messages say Justin. Nobody calls him Dad in menus.
 
-## Kit
+## Kit and speech (lines cut to the animation beats 2026-10-31; emotive scripts in tools/bake-page/pending.json, every one tagged thick New York accent)
 
-| Slot | Key | Move | MP | What happens | Spoken line (data/lines.js) |
-|---|---|---|---|---|---|
-| Basic | loose_wire | Loose Wire | 0 | Yanks a loose wire from an invisible wall, jabs the bare copper end at the enemy, spark (game fx), gets a little zap himself, drops it, smirks | "Loose wire. Not my problem any more." |
-| Start | wire_nuts | Wire Nuts | 3 | Flings fistfuls of colored wire nuts, underhand burst then an overhand throw, three quick hits (game draws the nuts in flight as props) | "Wire nuts! Never have enough of these." |
-| Start | bad_call | Bad Call | 4 | Jumps up from the couch, points at the enemy like a ref, yells with his whole body, stomps, sits back down muttering | "ARE YOU KIDDING ME WITH THAT CALL?" |
-| Start | fresh_fit | Fresh Fit | 5 | Runway walk, collar fix, sunglasses on, fashion poses, a dazzle flash (game fx) hits the enemy, wink, strut back | "This shirt cost more than your pond." |
-| Lv 2 | demo_day | Demo Day | 6 | Hoists a sledgehammer, two swings into a basement wall (game draws the wall, crack and chunks falling on the enemy) | "Demo day! Wall's coming down!" |
-| Lv 3 | breaker_flip | Breaker Flip | 7 | Opens a breaker panel, flips one OFF (screen goes dark), counts down, flips ON, lightning (game fx) strikes the enemy | "Breaker's off. Breaker's... on." |
-| Lv 4 | giant_sneeze | Giant Sneeze | 8 | Slow exaggerated build, then a deafening sneeze. Enemy slides backwards across the screen and loses its next turn (enemyStunned 1, same timer as confusion). New sfx: very loud sneeze. | "Ah... ah... AH CHOOOOO!" |
-| Lv 5 | foot_tap | Foot Tap | 10 | Rose walks over (her own sprites) and taps his sneaker toe as lightly as possible. He screams; the scream is the hit. Biggest damage in his kit. Grace taps if Rose is KO. | "MY FOOT! WHO TOUCHED MY FOOT?!" |
-| Special | drywall | DRYWALL | 0 | Carries in a drywall sheet, stands it in front of the party, screws it in with a drill. All damage to the party halved for one round. | "Drywall's up. Let it dry." |
+| Slot | Key | Move | MP | Beats in order and what he says (exact ms live in engine/justin-moves.js) |
+|---|---|---|---|---|
+| Basic | loose_wire | Loose Wire | 0 | spots it "Who left THIS here?" / holds out the copper "Loose wire. Not my problem any more." / after it bites him "Ow. Okay. A little bit my problem." |
+| Start | wire_nuts | Wire Nuts | 3 | digging "Wire nuts! Never have enough of these." / "Yellow!" / "Red!" / overhand "And BLUE!" / nod "Color coded." |
+| Start | bad_call | Bad Call | 4 | on the couch "He was IN." / up and pointing "ARE YOU KIDDING ME WITH THAT CALL?" / "WHO IS PAYING YOU?!" / sits "Unbelievable." |
+| Start | fresh_fit | Fresh Fit | 5 | "Clear the runway." / "Collar. Cuff. Shades." / pose "This shirt cost more than your pond." / strut "You're welcome." |
+| Lv 2 | demo_day | Demo Day | 6 | "Demo day! Wall's coming down!" / looks up "Nobody liked this wall." / "ONE!" / "TWO!" / wipe "Open floor plan." |
+| Lv 3 | breaker_flip | Breaker Flip | 7 | "Which one of you is it." / "There you are." / "Breaker's off." / whispered "Three. Two. One." / "Breaker's... on." / salute "Licensed and insured." |
+| Lv 4 | giant_sneeze | Giant Sneeze | 8 | twitch "Hang on. Hang on." / build "Ah... ah... ah..." / "AH CHOOOOO!" / "Excuse me." |
+| Lv 5 | foot_tap | Foot Tap | 10 | "Nobody touch anything." / "Rosie. No." / Rose (Grace if Rose is down) "Tap." / "MY FOOT! WHO TOUCHED MY FOOT?!" / hopping "IT WAS SO LIGHT!" / "I'm fine. I'm FINE." |
+| Special | drywall | DRYWALL | 0 | "Everybody behind me." / stands it "Drywall's up." / drill "Four screws." / knocks "Solid." / thumbs up "Let it dry." Party damage halved until each friend's next turn. |
 
-Other lines: hurt "Not the jacket!", low "Somebody turn the game back on.", ko "Tell the basement I loved it.", win "And THAT is how you close out a game."
+Other lines: join "Halftime. I have a minute. Let's go.", greet "Hold this. No, the other end.", hurt "Not the jacket!", low "Somebody turn the game back on.", ko "Tell the basement I loved it.", win "And THAT is how you close out a game."
 
-Damage multipliers follow the standard cost ladder (see Boppy's entry in `data/abilities.js` and `data/party.js`). No em dashes in any of it.
+Extra beat keys live in `data/lines.js` under `LINES.justin` (`<move>_<beat>`), plus `LINES.rose.foot_tap_tap` and `LINES.grace.foot_tap_tap`. Timing lives in `engine/justin-moves.js`. All of them are unbaked. They are in the Bake page list (`data/bake-list.json`, `node tools/bake-page/make-list.js`) and the Voice Library (`data/voice-index.json`, `node tools/voice-library/make-index.js`), both using his dialogue voice (AoT Justin, Long Island) with the direction thick New York accent until a battle voice is baked. No em dashes in any of it.
 
 ## The zip that arrives
 

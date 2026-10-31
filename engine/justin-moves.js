@@ -44,12 +44,14 @@ J.loose_wire=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,36),me=
   K.push({t:3300,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:3900,x:'home',y:'home',f:'idle'},{t:4100,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin spots a loose wire in a wall that is not there.'); say(m.id,'loose_wire'); }],
+    [0,()=>setMessage('Justin spots a loose wire in a wall that is not there.')],
+    [700,()=>say(m.id,'loose_wire_spot')],
     [380,()=>sfx.whoosh&&sfx.whoosh()],
     ['hf',2300],
-    [1500,()=>sfx.bump&&sfx.bump()],
+    [1500,()=>{ sfx.bump&&sfx.bump(); say(m.id,'loose_wire'); }],
     [2200,()=>{ setMessage('He jabs the bare copper end at it.'); sfx.zap&&sfx.zap(); jitter(f); landHit(100); scene('jv_wirespark',.6,{x:F.x+F.w*.3,y:F.mid,seed:0}); }],
     [2400,()=>{ sfx.zap&&sfx.zap(); scene('jv_zapfx',.5,{x:p.x-4,y:p.y-80}); scene('jv_text',.9,{x:p.x,y:p.y-130,txt:'ZZT',c:SPARK,sc:2}); }],
+    [3000,()=>say(m.id,'loose_wire_zap')],
     [3300,'end',res(E2)+'Not his problem any more.']]); };
 
 // ---------- Wire Nuts (three quick throws) ----------
@@ -65,12 +67,16 @@ J.wire_nuts=E2=>{ const {m,fx}=E2,me=ST.unit(m),f0=waveFoe(0)||firstFoe(E2),f1=w
     [0,()=>{ setMessage('Justin digs in his pocket.'); say(m.id,'wire_nuts'); }],
     [900,()=>{ setMessage('Fistfuls of wire nuts.'); sfx.whoosh&&sfx.whoosh(); }],
     ['hf',1900],
+    [1250,()=>say(m.id,'wire_nuts_1')],
     [1280,()=>{ for(let k=0;k<3;k++) ST.fly((x,y)=>hexNut(x,y,5,cols[k]),me.x-30,me.base-me.h*.5,ST.unit(f0).x+(k-1)*8,ST.unit(f0).mid+(k-1)*6,.26,30+k*8,k*.05,{spin:2}); }],
     [1700,()=>{ sfx.bonk&&sfx.bonk(); jitter(f0); landHit(34); scene('jv_sparks',.4,{x:ST.unit(f0).x,y:ST.unit(f0).mid,n:5,r:16,c:'#f0c030'}); }],
+    [1870,()=>say(m.id,'wire_nuts_2')],
     [1900,()=>{ for(let k=0;k<3;k++) ST.fly((x,y)=>hexNut(x,y,5,cols[k+1]),me.x-30,me.base-me.h*.5,ST.unit(f1).x+(k-1)*8,ST.unit(f1).mid+(k-1)*6,.26,30+k*8,k*.05,{spin:3}); }],
     [2300,()=>{ sfx.bonk&&sfx.bonk(); jitter(f1); landHit(33); scene('jv_sparks',.4,{x:ST.unit(f1).x,y:ST.unit(f1).mid,n:5,r:16,c:'#e86aa8'}); }],
+    [2600,()=>say(m.id,'wire_nuts_3')],
     [2700,()=>{ ST.fly((x,y)=>hexNut(x,y,7,'#3a8ae8'),me.x-30,me.base-me.h*.6,ST.unit(f2).x,ST.unit(f2).mid,.3,50,0,{spin:4}); }],
     [3150,()=>{ sfx.bonk&&sfx.bonk(); sfx.ding&&sfx.ding(); jitter(f2); landHit(33); scene('jv_sparks',.5,{x:ST.unit(f2).x,y:ST.unit(f2).mid,n:7,r:22,c:'#50c868'}); }],
+    [3850,()=>say(m.id,'wire_nuts_nod')],
     [4300,'end',res(E2)+'Never enough of these.']]); };
 
 // ---------- Bad Call ----------
@@ -81,13 +87,16 @@ J.bad_call=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   ST.keys(fx,K);
   SC.jv_callwave=SC.jv_callwave||((s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.4-k*.1); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; const x=lerp(s.x0,s.x1,q); gfx.strokeStyle='#ffd27a'; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(x,s.y,4+q*10,10+q*24,0,0,Math.PI*2); gfx.stroke(); } });
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin is on the couch. The game is on.'); say(m.id,'bad_call'); }],
+    [0,()=>setMessage('Justin is on the couch. The game is on.')],
+    [150,()=>say(m.id,'bad_call_couch')],
     [960,()=>{ setMessage('He is up. He is pointing.'); sfx.whoosh&&sfx.whoosh(); }],
     ['hf',1700],
-    [1500,()=>{ scene('jv_callwave',.9,{x0:me.x-50,x1:F.x+F.w*.4,y:F.mid}); sfx.bump&&sfx.bump(); }],
+    [1500,()=>{ scene('jv_callwave',.9,{x0:me.x-50,x1:F.x+F.w*.4,y:F.mid}); sfx.bump&&sfx.bump(); say(m.id,'bad_call'); }],
     [1700,()=>{ sfx.bonk&&sfx.bonk(); jitter(f); landHit(100); scene('jv_text',1,{x:me.x-20,y:me.base-me.h-6,txt:'WHAT?!',c:'#ff7a5a',sc:3}); scene('jv_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:40,c:'#ffd27a'}); }],
     [2900,()=>{ sfx.thud&&sfx.thud(); ST.jolt(f,.2); scene('jv_poof',.5,{x:me.x,y:me.base,r:30}); }],
+    [3550,()=>say(m.id,'bad_call_yell')],
     [4000,()=>setMessage('He sits back down, muttering.')],
+    [4500,()=>say(m.id,'bad_call_sit')],
     [5500,'end',res(E2)+'The ref has been told.']]); };
 
 // ---------- Fresh Fit ----------
@@ -99,13 +108,15 @@ J.fresh_fit=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),mid=
   K.push({t:4700,x:mid.x,y:mid.y,f:'ff_strutR',ease:'lin'},{t:5500,x:'home',y:'home',f:'ff_strutR'},{t:5800,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin walks it out like a runway.'); say(m.id,'fresh_fit'); }],
+    [0,()=>{ setMessage('Justin walks it out like a runway.'); say(m.id,'fresh_fit_runway'); }],
     [300,()=>sfx.step&&sfx.step()],
+    [1250,()=>say(m.id,'fresh_fit_shades')],
     [1800,()=>{ setMessage('Collar. Cuff. Shades.'); sfx.ding&&sfx.ding(); }],
     ['hf',3600],
-    [3300,()=>{ setMessage('Pose.'); }],
+    [3300,()=>{ setMessage('Pose.'); say(m.id,'fresh_fit'); }],
     [3600,()=>{ sfx.ding&&sfx.ding(); sfx.whoosh&&sfx.whoosh(); jitter(f); landHit(100); scene('jv_dazzle',.9,{x:F.x,y:F.mid}); }],
     [4100,()=>scene('jv_text',1,{x:mid.x,y:mid.y-me.h-8,txt:'DESIGNER',c:'#ffd6f0',sc:2})],
+    [5200,()=>say(m.id,'fresh_fit_wink')],
     [5800,'end',res(E2)+'It cost more than the pond.']]); };
 
 // ---------- Demo Day ----------
@@ -124,12 +135,16 @@ J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST
     [0,()=>{ setMessage('Justin spots a basement wall that has to go.'); say(m.id,'demo_day'); }],
     [250,()=>sfx.step&&sfx.step()],
     [1000,()=>scene('jv_wall',3.4,{x:F.x,top:F.top,w:F.w,h:F.h,t1:.31,t2:.57})],
+    [1000,()=>say(m.id,'demo_day_look')],
     [1300,()=>setMessage('He hoists the sledgehammer.')],
+    [2450,()=>say(m.id,'demo_day_one')],
     ['hf',2600],
     [2600,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.4); landHit(45); scene('jv_poof',.5,{x:F.x,y:F.top+10,r:30}); }],
     [3000,()=>scene('jv_chunks',1.1,{x:F.x,top:F.top-20,w:F.w,h:F.h})],
+    [3820,()=>say(m.id,'demo_day_two')],
     [3960,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.6); landHit(55); scene('jv_poof',.6,{x:F.x,y:F.top+20,r:40}); }],
     [4100,()=>{ scene('jv_chunks',1.3,{x:F.x,top:F.top-30,w:F.w+20,h:F.h}); scene('jv_text',1,{x:F.x,y:F.top-14,txt:'DEMO DAY',c:'#ffe08a',sc:2}); }],
+    [4750,()=>say(m.id,'demo_day_done')],
     [6400,'end',res(E2)+'The wall is coming down.']]); };
 
 // ---------- Breaker Flip ----------
@@ -141,14 +156,18 @@ J.breaker_flip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   K.push({t:5800,x:'home',y:'home',f:'idle'},{t:6100,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin finds the panel. Which breaker is it.'); say(m.id,'breaker_flip'); }],
+    [0,()=>{ setMessage('Justin finds the panel. Which breaker is it.'); say(m.id,'breaker_flip_which'); }],
+    [1400,()=>say(m.id,'breaker_flip_found')],
     [2000,()=>setMessage('He finds it. Hand on the switch.')],
+    [2300,()=>say(m.id,'breaker_flip')],
     [2520,()=>{ sfx.thud&&sfx.thud(); setMessage('Breaker off.'); scene('jv_dark',1.5,{a:.74}); }],
-    [3300,()=>setMessage('Three. Two. One.')],
+    [3300,()=>{ setMessage('Three. Two. One.'); say(m.id,'breaker_flip_count'); }],
     ['hf',4300],
     [4000,()=>sfx.whoosh&&sfx.whoosh()],
+    [4150,()=>say(m.id,'breaker_flip_on')],
     [4300,()=>{ sfx.thud&&sfx.thud(); setMessage('Breaker on.'); }],
     [4560,()=>{ sfx.zap&&sfx.zap(); sfx.bonk&&sfx.bonk(); jitter(f); landHit(100); scene('jv_bolt',.6,{x:F.x,y:F.mid}); scene('flash',.35,{a:.6}); scene('jv_zapfx',.6,{x:F.x,y:F.mid}); scene('jv_text',.9,{x:F.x,y:F.top-8,txt:'ZAP',c:'#9fd8ff',sc:3}); }],
+    [5150,()=>say(m.id,'breaker_flip_salute')],
     [6100,'end',res(E2)+'Back on. Mostly.']]); };
 
 // ---------- Giant Sneeze ----------
@@ -162,13 +181,16 @@ J.giant_sneeze=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const back=()=>{ f.px=x0; };
   SC.jv_gale=SC.jv_gale||((s,u)=>{ gfx.globalAlpha=fade(u,.5)*.8; for(let k=0;k<9;k++) { const q=cl(u*1.5-k*.03),x=s.x0-q*(s.x0-s.x1),y=s.y+(k-4)*9+Math.sin(q*8+k)*3; Ln(x,y,x-22-k%3*8,y,3-k%2,k%2?'#ffffff':'#bfe4ff'); } });
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin\'s nose twitches.'); say(m.id,'giant_sneeze'); }],
-    [900,()=>setMessage('Ah...')],
+    [0,()=>setMessage('Justin\'s nose twitches.')],
+    [100,()=>say(m.id,'giant_sneeze_twitch')],
+    [900,()=>{ setMessage('Ah...'); say(m.id,'giant_sneeze_build'); }],
     [1470,()=>{ setMessage('Ah...'); sfx.whoosh&&sfx.whoosh(); }],
     ['hf',2170],
+    [2120,()=>say(m.id,'giant_sneeze')],
     [2170,()=>{ setMessage('AH CHOOOOO!'); sfx.sneeze&&sfx.sneeze(); scene('jv_gale',.8,{x0:me.x-34,x1:F.x+F.w*.4,y:me.base-me.h*.7}); scene('jv_text',1.1,{x:me.x-20,y:me.base-me.h-4,txt:'CHOO!',c:'#bfe4ff',sc:3}); battle.shake=Math.max(battle.shake||0,.5); }],
     [2300,()=>{ jitter(f); landHit(100); ST.draw((s,u)=>{ f.px=x0-ez(u/.7)*slideMax; if(u>=1) back(); },1.1); }],
     [3600,()=>{ back(); setMessage(f.name+' is blown across the room.'); }],
+    [4400,()=>say(m.id,'giant_sneeze_excuse')],
     [5050,'end',res(E2)+'Bless him.']]); };
 
 // ---------- Foot Tap ----------
@@ -184,14 +206,18 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   K.push({t:5330,x:'home',y:'home',f:'idle'},{t:5600,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin is just standing there in the nicest sneakers.'); say(m.id,'foot_tap'); }],
-    [700,()=>setMessage(tn+' comes over, very quietly.')],
+    [0,()=>{ setMessage('Justin is just standing there in the nicest sneakers.'); say(m.id,'foot_tap_idle'); }],
+    [700,()=>{ setMessage(tn+' comes over, very quietly.'); say(m.id,'foot_tap_wave'); }],
+    [1300,()=>{ if(tp) say(tp.id,'foot_tap_tap'); }],
     [1200,()=>setMessage(tn+' taps his toe. Lightly.')],
     [1350,()=>sfx.step&&sfx.step()],
     ['hf',2080],
     [1390,()=>{ sfx.bump&&sfx.bump(); scene('jv_ring',.4,{x:me.x-34,y:me.base-6,r:14,c:'#ffffff'}); }],
+    [2000,()=>say(m.id,'foot_tap')],
     [2080,()=>{ sfx.bonk&&sfx.bonk(); sfx.thud&&sfx.thud(); battle.shake=Math.max(battle.shake||0,.7); jitter(f); landHit(100); scene('jv_text',1.5,{x:me.x-12,y:me.base-me.h-6,txt:'MY FOOT!',c:'#ff7a5a',sc:3}); scene('jv_ring',.7,{x:me.x-20,y:me.base-me.h*.5,r:70,c:'#ffd27a'}); scene('jv_ring',.9,{x:me.x-20,y:me.base-me.h*.5,r:120,c:'#ffffff'}); }],
     [2500,()=>ST.jolt(f,.5)],
+    [3970,()=>say(m.id,'foot_tap_light')],
+    [4950,()=>say(m.id,'foot_tap_fine')],
     [5600,'end',res(E2)+'He is fine. He is fine.']]); };
 
 // ---------- DRYWALL (special): carries a sheet in, screws it up in front of the party, all damage halved ----------
@@ -211,13 +237,15 @@ J.drywall=E2=>{ const {m,fx}=E2,me=ST.unit(m);
   K.push({t:5800,x:px,y:by+2,f:'runR',ease:'lin'},{t:6400,x:'home',y:'home',f:'idle'},{t:6600,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin has a sheet of drywall under his arm.'); say(m.id,'drywall'); }],
+    [0,()=>{ setMessage('Justin has a sheet of drywall under his arm.'); say(m.id,'drywall_sheet'); }],
     [1200,()=>sfx.whoosh&&sfx.whoosh()],
-    [2300,()=>{ sfx.thud&&sfx.thud(); scene('jv_sheet',3.9,{x:sx,base:by+2,h:sh,w:sw}); setMessage('He stands it in front of everyone.'); }],
-    [3000,()=>{ sfx.drill&&sfx.drill(); }],
+    [2300,()=>{ sfx.thud&&sfx.thud(); scene('jv_sheet',3.9,{x:sx,base:by+2,h:sh,w:sw}); setMessage('He stands it in front of everyone.'); say(m.id,'drywall'); }],
+    [3000,()=>{ sfx.drill&&sfx.drill(); say(m.id,'drywall_screws'); }],
     ['hf',3600],
     [4000,()=>{ sfx.drill&&sfx.drill(); }],
+    [4200,()=>say(m.id,'drywall_tap')],
     [4600,()=>{ sfx.ding&&sfx.ding(); scene('jv_sparks',.7,{x:sx,y:by-sh*.5,n:9,r:34,c:'#ebe4d6'}); scene('jv_text',1.1,{x:sx+20,y:by-sh-8,txt:'HALF DAMAGE',c:'#ebe4d6',sc:2}); }],
+    [5250,()=>say(m.id,'drywall_dry')],
     [6600,'end',res(E2)+'Let it dry.']]); };
 
 // Tom (13:51): his moves should be faster. Every move except the two hand-timed ones above plays at about 1.5x.

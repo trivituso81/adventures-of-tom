@@ -13,7 +13,8 @@ const BV=vm.runInContext('VOICE_CLIPS',ctx).voices, DV=vm.runInContext('DIALOG_C
 const items=JSON.parse(fs.readFileSync('tools/bake-page/pending.json','utf8'));
 const voices={};
 for(const it of items){
-  const key=it.kind+'|'+it.voice, src=(it.kind==='dialog'?DV:BV)[it.voice];
+  const key=it.kind+'|'+it.voice; let src=(it.kind==='dialog'?DV:BV)[it.voice]||DV[it.voice];
+  if(it.voice==='justin'&&src&&!/new york/i.test(src.direction||'')) src=Object.assign({},src,{direction:'thick New York accent'});   // a battle voice not baked yet (Justin) uses the dialogue voice
   if(!src||!src.voice_id) throw new Error('no voice settings for '+key);
   voices[key]={voice_id:src.voice_id,model:src.model||'eleven_v4',stability:src.settings.stability,similarity:src.settings.similarity_boost,direction:src.direction||''};
 }

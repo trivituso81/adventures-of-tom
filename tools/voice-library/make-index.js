@@ -70,19 +70,21 @@ for(const sf of SFILES){
     DS[k]=it.script; if(it.ctx) DCTX[k]=it.ctx; if(j.chapter) DCH[k]=j.chapter; }
 }
 function plain(voice,text){
-  const d=[]; if(voice==='boppy') d.push('thick New York accent');
+  const d=[]; if(voice==='boppy'||voice==='justin') d.push('thick New York accent');
   d.push(/!/.test(text)?'animated':/\?/.test(text)?'curious':'natural, conversational');
   return '['+d.join(', ')+'] '+text.replace(/\bTa-?ta\b/gi,m=>m===m.toUpperCase()?'TAH TAH':'Tah Tah');
 }
 
 // ---------- voices ----------
-const NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',tnb:'TNB',nara:'Nara'};
+const NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',tnb:'TNB',nara:'Nara',justin:'Justin'};
 const voices={};
 function vset(kind,id,v){ if(!v) return; const st=v.settings||{};
   voices[kind+'|'+id]={voice_id:v.voice_id||'',model:v.model||'eleven_v4',stability:st.stability!=null?st.stability:.5,similarity:st.similarity_boost!=null?st.similarity_boost:.85,direction:v.direction||'',
     sfx:!!v.sfx,prompt_influence:v.prompt_influence||.5}; }
 for(const ch in BC.voices) vset('battle',ch,BC.voices[ch]);
 for(const id in DC.voices) vset('dialog',id,DC.voices[id]);
+// A character with battle lines but no battle voice yet (Justin, 2026-10-31) uses the same voice as his dialogue.
+for(const ch in LINES) if(!voices['battle|'+ch]&&DC.voices[ch]) vset('battle',ch,Object.assign({},DC.voices[ch],ch==='justin'?{direction:'thick New York accent'}:{}));
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
 const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
@@ -90,7 +92,9 @@ const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.spea
 // ---------- items ----------
 const files=[], fidx=f=>{ let i=files.indexOf(f); if(i<0){ files.push(f); i=files.length-1; } return i; };
 const items=[];
-const ORDER=['tom','grace','rose','amy','deedee','boppy','tnb','nara'];
+const ORDER=['tom','grace','rose','amy','deedee','boppy','tnb','justin','nara'];
+// Scripts for lines not yet baked can also come from the Bake page list (tools/bake-page/pending.json: {voice,kind:'battle',text,script}).
+const PS={}; if(fs.existsSync('tools/bake-page/pending.json')){ const pj=JSON.parse(fs.readFileSync('tools/bake-page/pending.json','utf8')); for(const it of (Array.isArray(pj)?pj:pj.items||[])) if(it.kind==='battle'&&it.voice&&it.text&&it.script) PS[it.voice+'|'+it.text]=it.script; }
 for(const ch of ORDER){ const L=LINES[ch]; if(!L) continue;
   const byText=new Map();
   for(const kind in L) for(const t of L[kind]){ if(!byText.has(t)) byText.set(t,[]); const a=byText.get(t); if(!a.includes(kind)) a.push(kind); }
@@ -100,7 +104,7 @@ for(const ch of ORDER){ const L=LINES[ch]; if(!L) continue;
     const ks=[...(textCh[norm(t)]||[])].sort((a,b)=>a-b);
     const it={t:'b',v:ch,k:kinds,x:t,ty:kinds.every(k=>DIALOG_KIND.test(k))?'d':'b',c:ks,w:kinds.join(', '),f:has?fidx(bfile[ch]||'data/voice-clips.js'):-1};
     if(ch==='nara'){ const pr=(BC.voices.nara||{}).prompts||{}; const p=kinds.map(k=>pr[k+'|'+t]).find(Boolean); it.p=p?p.p:'Friendly medium-size dog, happy excited barks.'; it.d=p?p.d:2; }
-    else it.s=kinds.map(k=>BS[ch+'|'+k+'|'+t]).find(Boolean)||plain(ch,t);
+    else it.s=PS[ch+'|'+t]||kinds.map(k=>BS[ch+'|'+k+'|'+t]).find(Boolean)||plain(ch,t);
     if(fxOf(ch,null,true)) it.fx=1;
     items.push(it);
   }
@@ -150,6 +154,9 @@ for(const l of H){
   items.push(it); nNo++;
 }
 for(const it of items) if(it.v[0]==='?'){ /* listed under the speaker's own name */ }
+// Every Justin script, battle and dialogue, carries the accent (Tom, 2026-10-31).
+const ACC='thick New York accent';
+for(const it of items) if(it.v==='justin'&&it.s){ const m=it.s.match(/^\[([^\]]*)\]\s*([\s\S]*)$/); it.s=m?(m[1].toLowerCase().includes(ACC.toLowerCase())?it.s:'['+ACC+', '+m[1]+'] '+m[2]):'['+ACC+'] '+it.s; }
 items.forEach((it,i)=>it.i=i);
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }

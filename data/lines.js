@@ -84,14 +84,18 @@ VOICE.justin={pitch:.62,rate:1,prefer:['Daniel','Alex','Fred','Arthur','Google U
 for(const [k,v] of [
   ['join','Halftime. I have a minute. Let\'s go.'],
   ['greet','Hold this. No, the other end.'],
-  ['basic','Loose wire. Not my problem any more.'],['loose_wire','Loose wire. Not my problem any more.'],
-  ['wire_nuts','Wire nuts! Never have enough of these.'],
-  ['bad_call','ARE YOU KIDDING ME WITH THAT CALL?'],
-  ['fresh_fit','This shirt cost more than your pond.'],
-  ['demo_day','Demo day! Wall\'s coming down!'],
-  ['breaker_flip','Breaker\'s off. Breaker\'s... on.'],
-  ['giant_sneeze','Ah... ah... AH CHOOOOO!'],
-  ['foot_tap','MY FOOT! WHO TOUCHED MY FOOT?!'],
-  ['drywall','Drywall\'s up. Let it dry.'],
+  ['basic','Loose wire. Not my problem any more.'],
+  ['loose_wire_spot','Who left THIS here?'],['loose_wire','Loose wire. Not my problem any more.'],['loose_wire_zap','Ow. Okay. A little bit my problem.'],
+  ['wire_nuts','Wire nuts! Never have enough of these.'],['wire_nuts_1','Yellow!'],['wire_nuts_2','Red!'],['wire_nuts_3','And BLUE!'],['wire_nuts_nod','Color coded.'],
+  ['bad_call_couch','He was IN.'],['bad_call','ARE YOU KIDDING ME WITH THAT CALL?'],['bad_call_yell','WHO IS PAYING YOU?!'],['bad_call_sit','Unbelievable.'],
+  ['fresh_fit_runway','Clear the runway.'],['fresh_fit_shades','Collar. Cuff. Shades.'],['fresh_fit','This shirt cost more than your pond.'],['fresh_fit_wink','You\'re welcome.'],
+  ['demo_day','Demo day! Wall\'s coming down!'],['demo_day_look','Nobody liked this wall.'],['demo_day_one','ONE!'],['demo_day_two','TWO!'],['demo_day_done','Open floor plan.'],
+  ['breaker_flip_which','Which one of you is it.'],['breaker_flip_found','There you are.'],['breaker_flip','Breaker\'s off.'],['breaker_flip_count','Three. Two. One.'],['breaker_flip_on','Breaker\'s... on.'],['breaker_flip_salute','Licensed and insured.'],
+  ['giant_sneeze_twitch','Hang on. Hang on.'],['giant_sneeze_build','Ah... ah... ah...'],['giant_sneeze','AH CHOOOOO!'],['giant_sneeze_excuse','Excuse me.'],
+  ['foot_tap_idle','Nobody touch anything.'],['foot_tap_wave','Rosie. No.'],['foot_tap','MY FOOT! WHO TOUCHED MY FOOT?!'],['foot_tap_light','IT WAS SO LIGHT!'],['foot_tap_fine','I\'m fine. I\'m FINE.'],
+  ['drywall_sheet','Everybody behind me.'],['drywall','Drywall\'s up.'],['drywall_screws','Four screws.'],['drywall_tap','Solid.'],['drywall_dry','Let it dry.'],
   ['hurt','Not the jacket!'],['low','Somebody turn the game back on.'],
   ['ko','Tell the basement I loved it.'],['win','And THAT is how you close out a game.']]) { (LINES.justin=LINES.justin||{})[k]=[v]; }
+// Rose (Grace when Rose is down) taps Justin's sneaker in Foot Tap.
+(LINES.rose=LINES.rose||{}).foot_tap_tap=['Tap.'];
+(LINES.grace=LINES.grace||{}).foot_tap_tap=['Tap.'];
