@@ -944,13 +944,13 @@ if(!sfx.heartbeat) sfx.heartbeat=(d=0)=>{ tone({type:'sine',f0:70,f1:50,dur:.12,
 // Beanie Master's toot: a sound effect, never speech. A real fart: an air "pfft", a fast flutter of low buzzes that sags in pitch,
 // a rumbling body under it, then three little sputters. Loud on purpose (about 3x the old one). Kid-safe silly.
 sfx.toot=(d=0)=>{
-  noise({dur:.16,vol:.85,delay:d,f0:1900,f1:450,type:'bandpass',q:.7});
+  noise({dur:.16,vol:1.2,delay:d,f0:1900,f1:450,type:'bandpass',q:.7});
   let t=d+.04;
   for(let k=0;k<26;k++) { const q=k/26,f=150-q*98+((k%3)-1)*11*(1-q*.4);
-    tone({type:'sawtooth',f0:f,f1:f*.84,dur:.07,vol:.8-q*.22,delay:t,filter:950-q*380,q:3,attack:.003}); t+=.028+q*.01; }
-  tone({type:'square',f0:80,f1:44,dur:1.0,vol:.45,delay:d+.03,filter:380,q:2,sweep:'lin'});
-  noise({dur:1.05,vol:.58,delay:d+.03,f0:750,f1:170,type:'lowpass'});
-  [.9,1.0,1.12].forEach((o,i)=>{ tone({type:'sawtooth',f0:86-i*12,f1:56-i*8,dur:.1,vol:.7,delay:d+o,filter:520,q:2}); noise({dur:.09,vol:.34,delay:d+o,f0:650,f1:200,type:'lowpass'}); });
+    tone({type:'sawtooth',f0:f,f1:f*.84,dur:.07,vol:1.15-q*.3,delay:t,filter:950-q*380,q:3,attack:.003}); t+=.028+q*.01; }
+  tone({type:'square',f0:80,f1:44,dur:1.0,vol:.65,delay:d+.03,filter:380,q:2,sweep:'lin'});
+  noise({dur:1.05,vol:.85,delay:d+.03,f0:750,f1:170,type:'lowpass'});
+  [.9,1.0,1.12].forEach((o,i)=>{ tone({type:'sawtooth',f0:86-i*12,f1:56-i*8,dur:.1,vol:1.0,delay:d+o,filter:520,q:2}); noise({dur:.09,vol:.34,delay:d+o,f0:650,f1:200,type:'lowpass'}); });
 };
 
 // ---------- Dish-Towel Flick (basic, kept: only the towel is bigger) ----------
@@ -1170,20 +1170,23 @@ D.rise_and_shine=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
 // ---------- Beanie Master (B4; key beanie_master; same numbers as Spotless Record) ----------
 // Tom's name for it. Deedee walks up, stops, turns around... PFFFT. A big green cloud rolls over the monster; it gags,
 // and its good mood blows right over to her. She covers her mouth: "Oh my!" (the toot is a sound effect, not speech).
-SC.dv_cloud=(s,u)=>{ const x0=s.x,y0=s.y,tx=s.tx,g=ez(cl(u/.4));
-  // outlined, shaded puffs roll out from her to the monster, like the painted effects in the newer moves
-  for(let k=0;k<15;k++) { const q=cl(g*1.3-k*.04); if(q<=0) continue; const row=(k%5)-2,a=k*2.4,
-      x=x0+(tx-x0)*q*(.55+(k%4)*.14)+Math.cos(a)*q*18,y=y0+row*9-q*14+Math.sin(a+u*4)*5*q,r=(8+(k%4)*4)*(.35+q)*(1+Math.sin(u*9+k)*.05);
-    gfx.globalAlpha=.96*fade(u,.55); EO(x,y,r,r*.9,'#7fbf4a'); E(x+r*.18,y+r*.22,r*.72,r*.6,'#5f9a3a'); E(x-r*.3,y-r*.34,r*.38,r*.28,'#d6f59a'); }
-  gfx.globalAlpha=fade(u,.6); for(let k=0;k<4;k++) { const ox=lerp(x0,tx,.3+k*.2),oy=y0-30-((s.t*40+k*12)%40); gfx.lineCap='round';
-    for(const [w,c] of [[6,OUT],[3,'#c6ec8a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); for(let j=0;j<=6;j++) { const yy=oy-j*5,xx=ox+Math.sin(j*1.4+s.t*8)*4; if(j) gfx.lineTo(xx,yy); else gfx.moveTo(xx,yy); } gfx.stroke(); } }
-  if(u>.3) { const q=cl((u-.3)/.2); gfx.globalAlpha=q*(1-u)*.55; E(tx,y0,30+q*8,36,'#6fd13a'); gfx.globalAlpha=q*(1-u)*.35; E(tx,y0-4,20,26,'#c6ec8a'); }
+// A soft radial blob: the building block of the mist.
+const haze=(x,y,r,al,rgb)=>{ if(al<=0) return; const gr=gfx.createRadialGradient(x,y,0,x,y,r); gr.addColorStop(0,'rgba('+rgb+','+al+')'); gr.addColorStop(1,'rgba('+rgb+',0)'); gfx.globalAlpha=1; gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(x,y,r,0,Math.PI*2); gfx.fill(); };
+// The cloud is a fine green mist: many faint soft blobs, a spray of tiny specks and thin curling wisps, no outlines. It drifts to the monster and settles on it.
+SC.dv_cloud=(s,u)=>{ const x0=s.x,y0=s.y,tx=s.tx,g=ez(cl(u/.45)),env=fade(u,.45)*fin(u,.05);
+  for(let k=0;k<30;k++) { const q=cl(g*1.25-k*.015); if(q<=0) continue; const a=k*2.399,x=x0+(tx-x0)*q*(.5+(k%5)*.12)+Math.cos(a)*q*10,y=y0+Math.sin(a)*q*(.25+(k%6)*.1)*60-q*10+Math.sin(u*3+k)*4,r=(12+(k%4)*5)*(.5+q*1.1);
+    haze(x,y,r,.2*env,k%3?'140,210,80':'190,235,120'); }
+  for(let k=0;k<80;k++) { const q=cl(g*1.3-k*.007); if(q<=0) continue; const a=k*1.7+k*k*.013,x=x0+(tx-x0)*q*(.35+(k%9)*.08)+Math.cos(a*3)*q*26,y=y0+Math.sin(a*2.3)*q*34*(.4+(k%5)*.15)-q*8+Math.sin(u*5+k)*2;
+    gfx.globalAlpha=(.35+(k%4)*.1)*env; gfx.fillStyle=k%2?'#d6f59a':'#8fd05a'; gfx.beginPath(); gfx.arc(x,y,.8+(k%3)*.7,0,Math.PI*2); gfx.fill(); }
+  gfx.globalAlpha=.35*env; gfx.strokeStyle='#bff08a'; gfx.lineWidth=1.5; gfx.lineCap='round';
+  for(let k=0;k<5;k++) { const yy=y0-14+k*8; gfx.beginPath(); for(let j=0;j<=14;j++) { const f=j/14,x=lerp(x0,tx,f*g),y=yy-f*10+Math.sin(f*9+s.t*5+k)*5*f; if(j) gfx.lineTo(x,y); else gfx.moveTo(x,y); } gfx.stroke(); }
+  if(u>.25) { const q=cl((u-.25)/.25),e=q*fade(u,.5); haze(tx,y0-4,46,.38*e,'120,200,60'); haze(tx,y0-6,28,.3*e,'190,235,120'); }
   gfx.globalAlpha=1; };
-// The blast at her back: a pop of air, two shock rings and jagged speed lines.
+// The blast at her back: a pop of mist, a thin shock ring and a few fine speed lines.
 SC.dv_toot=(s,u)=>{ const x=s.x,y=s.y;
-  for(let k=0;k<2;k++) { const q=cl(u*1.6-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.9; const rx=8+q*34,ry=6+q*26; ring(x,y,rx,ry,9-q*5,OUT); ring(x,y,rx,ry,5-q*3,k?'#ffffff':'#a8e868'); }
-  gfx.globalAlpha=fade(u,.5); for(let k=0;k<9;k++) { const a=Math.PI+(k-4)*.34,d0=8+ez(u)*14,d1=d0+10+ez(u)*30; LnO(x+Math.cos(a)*d0,y+Math.sin(a)*d0*.7,x+Math.cos(a)*d1,y+Math.sin(a)*d1*.7,3,k%2?'#d6f59a':'#7fbf4a'); }
-  const p=ez(cl(u/.5)); gfx.globalAlpha=1-u*u; EO(x-6,y,10+p*14,9+p*11,'#9ed86a'); E(x-10,y-4,5+p*6,4+p*4,'#d6f59a'); gfx.globalAlpha=1; };
+  for(let k=0;k<2;k++) { const q=cl(u*1.6-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.7; ring(x,y,8+q*34,6+q*26,3-q*2,k?'#ffffff':'#bff08a'); }
+  gfx.globalAlpha=fade(u,.5)*.8; for(let k=0;k<9;k++) { const a=Math.PI+(k-4)*.34,d0=8+ez(u)*14,d1=d0+10+ez(u)*30; Ln(x+Math.cos(a)*d0,y+Math.sin(a)*d0*.7,x+Math.cos(a)*d1,y+Math.sin(a)*d1*.7,2,k%2?'#d6f59a':'#9ed86a'); }
+  const p=ez(cl(u/.5)); haze(x-6,y,16+p*22,.6*(1-u*u),'150,215,90'); haze(x-8,y-2,8+p*10,.5*(1-u*u),'210,245,150'); gfx.globalAlpha=1; };
 SC.dv_buff=(s,u)=>{ const st=s.st,ms=s.t*1000; let x=s.fx,y=s.fy; if(ms>s.go&&st&&st.x!=null) { const q=ez((ms-s.go)/600); x=lerp(s.fx,st.x,q); y=lerp(s.fy,st.y-DH()*.6,q)-Math.sin(q*Math.PI)*40; } gfx.globalAlpha=fade(u,.9);
   EO(x,y,9,9,GOLD); for(let k=0;k<6;k++) { const a=s.t*5+k*Math.PI/3; Ln(x+Math.cos(a)*12,y+Math.sin(a)*12,x+Math.cos(a)*17,y+Math.sin(a)*17,2,GOLD); } if(ms>s.go+600) bigWord('MINE NOW',x,y-26,GOLD,1); };
 D.beanie_master=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),me=ST.unit(m);

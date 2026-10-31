@@ -1,12 +1,21 @@
 ## 2026-10-30: Seat 1A: Tom now lies on the lie-flat pod
 
 - At the end of Seat 1A Tom tipped over in mid-air with nothing under him (and the sleep mask landed on the wrong spot). The painted lie-flat pod now slides in beside the party and Tom rests on its mattress, with the sleep mask and Zs, same placement as Boarding Group Zero. When Tom tucks himself in, the pod's own bedding replaces the separate duvet. `tom-moves.js?v=tom9`.
+## 2026-10-30: Beanie Master cloud is a fine mist, toot louder again
+
+- `SC.dv_cloud` in `engine/deedee-moves.js` is now a fine green mist (many faint soft blobs, a spray of tiny specks, thin curling wisps, no outlines) that drifts to the monster and settles on it. The blast at her back (`SC.dv_toot`) is a soft mist pop with a thin ring and fine lines instead of outlined puffs.
+- `sfx.toot` is about 1.45x louder than the first fix: measured peak 0.76, about 8x the original toot, no clipping.
 
 ## 2026-10-30: Beanie Master: louder fart, painted puffs, no repeated line
 
 - Deedee's Beanie Master (`engine/deedee-moves.js`): `sfx.toot` is now a real fart (air "pfft", fast fluttering buzz that sags in pitch, rumbling body, three sputters). Measured peak is about 5x the old toot and above the laser, with no clipping.
 - The green cloud (`SC.dv_cloud`) now uses outlined, shaded, highlighted puffs and outlined stink lines, plus a new blast at her back (`SC.dv_toot`: shock rings, jagged lines, a pop) and an outlined "PFFFT!". Same timing, hit and numbers.
 - The repeat: the baked "I am the Beanie Master!" clip is 3.97 s and holds a stray third burst (3.06 s on) that sounded like she started again, overlapping "Oh my!". The move now plays only the first 2.85 s of that clip (the slice applies only while the clip length is 85320; a re-bake plays whole). The clip itself is untouched; a re-bake would remove the stray burst for good.
+
+## 2026-10-30: Battle Lab is bosses only, with a difficulty step and pages
+- ADMIN > BATTLE LAB now asks for a difficulty first (Easy, Medium, Hard), then lists one fight per chapter boss, chapters 1 to 20 (chapter 20 has two: Leviathan and Julian), six to a page with PREV PAGE and NEXT PAGE. Chapter 18's boss is a survival fight that cannot be won, and its row says so. The old crew fights and Family Finish test are gone from the list.
+- Fixed the cut-off top: the title panel is now capped to the screen height and its list scrolls if it is ever taller.
+- Files: data/battle2-data.js (B2_LAB), engine/splash.js, index.html (CSS, ?v=lab2).
 
 ## 2026-10-30: Sourdough Snob uses the painted loaf
 
