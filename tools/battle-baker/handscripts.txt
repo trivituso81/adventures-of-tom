@@ -141,7 +141,7 @@ amy ::: [coach voice, firm] Kettlebell swing! Hips, not back!
 amy ::: [teacher, brisk, warm] Hot lunch! Soup first, then recess.
 amy ::: [warm teacher, approving] Gold-star recess. Rest counts as good work.
 amy ::: [calm, icy teacher stare] Inside voices, please. [pause] I will wait.
-amy ::: [polite but firm, cheerful] No dairy, thank you. Oat milk, please!
+amy ::: [polite but firm, cheerful] No dairy, thank you. Almond milk, please!
 amy ::: [referee, stern] False start. Back behind the line.
 amy ::: [warm, resolute, standing in the doorway] Nobody leaves this room until every single one of you knows how good you are.
 amy ::: [racing, breathless, triumphant] Right on Hereford, left on Boylston! [shouting] Sprint to the tape!

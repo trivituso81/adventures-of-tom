@@ -1,3 +1,10 @@
+## 2026-10-30 (night, 3): Amy drinks almond milk, not oat milk
+
+- Tom: Amy's "Oat Milk, Please" is now "Almond Milk, Please". Changed: the move name (`data/battle2-data.js`, `data/abilities.js`), its description, the battle messages in `engine/amy-moves.js`, her Gel Pack description, the Gregori kitchen island line (`data/maps-le.js`) and the spoken line in `data/lines.js` ("No dairy, thank you. Almond milk, please!").
+- Move key `oat_milk_please` and `rx_oatgel` are unchanged (saves, icons and emoji map use them). Left alone on purpose: TNB's coffee order, the Oat Milk Latte shop item in LA, Juniper's café joke.
+- NEEDS RE-BAKE: the baked Amy clip for the old line no longer matches, so the line plays with the speech-synthesis fallback until re-baked. New script is in `tools/battle-baker/handscripts.txt` (amy, oat_milk_please).
+- Cache tags `almond1` on lines.js, amy-moves.js, battle2-data.js, abilities.js, maps-le.js.
+
 ## 2026-10-30: Floor Is Lava: bigger lava pool under everyone
 
 - Tom: the lava was small and hidden behind the enemies. The painted pool in `engine/rose-moves.js` (`Rm.floor_is_lava` wrapper) now spans from 52 px left of the row to 84 px right of Rose's cushion, 30 px above the rear enemy's feet to 30 px below the front one, and is drawn 15 percent larger (2.4x instead of 2.08x). Lava now shows around every enemy's feet and under Rose. Cache tag `rose-moves.js?v=lv2`.

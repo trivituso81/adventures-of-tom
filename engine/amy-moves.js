@@ -262,7 +262,7 @@ A.shakeout_mile=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LivePa
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
 // Tom's review: things Amy actually does (teacher, runner, dairy-free, fiercely competitive), one big readable moment per move.
 // Kettlebell Swing (basic), Red Pen, Hot Lunch Tray, Gold-Star Recess (bigger stars), Inside Voices!, Pop Quiz, Burpee Blitz,
-// Hill Repeats, Oat Milk, Please, False Start (big line and blocks), Negative Split. Same numbers as the slots they replace.
+// Hill Repeats, Almond Milk, Please, False Start (big line and blocks), Negative Split. Same numbers as the slots they replace.
 // Same engine/stage.js standard; scenes prefix av_. The older functions above stay for the superseded keys.
 (function(){
 const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
@@ -489,8 +489,8 @@ A.hill_repeats=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),h
     [hit,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.55); for(const n of nbs) ST.jolt(n,.35); landHit(100); scene('av_dust',.6,{x:F.x,y:F.base,r:60,n:12}); scene('av_big',1.2,{x:F.x,y:F.top-74,txt:'HILL REPEATS!',c:GOLD,sc:3}); }],
     [hit+1800,'end',res(E2)+'Three repeats and a bonus one. Of course.']]); };
 
-// ---------- Oat Milk, Please (B3; Water-Station Truce numbers) ----------
-// A cheese pizza slice and a milk carton roll up. Amy waves them off, NO THANKS, and hands the friend her oat milk latte.
+// ---------- Almond Milk, Please (B3; Water-Station Truce numbers) ----------
+// A cheese pizza slice and a milk carton roll up. Amy waves them off, NO THANKS, and hands the friend her almond milk latte.
 const pizza=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); poly([[-22,-16],[22,-16],[0,26]],'#ffd24a'); R(-24,-20,48,8,OUT); R(-22,-18,44,5,'#c8843a'); E(-6,-4,4,3,'#ffb030'); E(7,2,3,3,'#ffb030');
   E(-6,-8,2,3,OUT); E(5,-8,2,3,OUT); gfx.restore(); };
 const carton=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); RO(-14,-14,28,34,'#ffffff'); poly([[-14,-14],[0,-26],[14,-14]],'#f4f4f4'); R(-14,-2,28,10,'#4f86d8'); label('MILK',0,0,'#ffffff',1); E(-6,-9,2,3,OUT); E(5,-9,2,3,OUT); gfx.restore(); };
@@ -515,7 +515,7 @@ A.oat_milk_please=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=(t===
     [900,()=>{ sfx.boing?sfx.boing():sfx.select(); setMessage('A cheese pizza and a milk carton roll right up to her.'); }],
     [1700,()=>{ sfx.nope?sfx.nope():sfx.select(); scene('av_big',1,{x:sx-50,y:sy-AH()-24,txt:'NO THANKS!',c:'#ff6a60',sc:3}); setMessage('She waves them off. Firmly. Very firmly.'); }],
     [2300,()=>{ sfx.whoosh(); }],
-    [2500,()=>{ setMessage('Out comes her oat milk latte instead.'); }],
+    [2500,()=>{ setMessage('Out comes her almond milk latte instead.'); }],
     ['hf',3200],
     [3200,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0'}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
     [end,'end',kindLine(t,'Dairy-free and delicious. She was right.')]]); };
@@ -805,7 +805,7 @@ A.marathon_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2L
 
 // ================= Polish pass (2026-10-24, claude/move-review.md) =================
 // Hot Lunch Tray: a bigger tray with tall rising steam. Inside Voices!: the whole screen flickers dark and light. Pop Quiz:
-// a thick packet that slams down, PENCILS DOWN. Burpee Blitz: a burpee counter and a big final jump. Oat Milk, Please:
+// a thick packet that slams down, PENCILS DOWN. Burpee Blitz: a burpee counter and a big final jump. Almond Milk, Please:
 // bigger pizza and carton and a huge NO THANKS. False Start: big starting blocks and a big red flag. Negative Split: a
 // stopwatch on screen and speed lines in the second half. Same numbers, same beats. Overrides SC.av_lunch, SC.av_lights,
 // SC.av_packet, SC.av_dairy, SC.av_latte, SC.av_start, SC.av_flag, SC.av_watch, A.pop_quiz, A.burpee_blitz and
@@ -906,7 +906,7 @@ A.burpee_blitz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,52),k
     [hit,()=>{ sfx.bonk(); sfx.ding(); ST.jolt(f,.65); landHit(100); scene('av_big',1.1,{x:F.x,y:F.top-74,txt:'BURPEE!',c:GOLD,sc:5}); scene('av_burst',.7,{x:F.x+F.w*.3,y:F.mid,n:10,r:56}); }],
     [leap+1900,'end',res(E2)+'She\'s not even out of breath. She says.']]); };
 
-// ---------- Oat Milk, Please: bigger pizza and carton, a huge NO THANKS ----------
+// ---------- Almond Milk, Please: bigger pizza and carton, a huge NO THANKS ----------
 const DS=1.8;
 const pizza=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(DS,DS);
   // a cheese pizza slice: outlined wedge, glossy orange cheese, a thick golden crust, pepperoni, bubbles and a drip
@@ -926,7 +926,7 @@ const carton=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale
   E(-5,-5,1.6,2.4,OUT); E(5,-5,1.6,2.4,OUT);
   gfx.restore(); };
 const latte=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(PROPART.draw('amy/oat_latte',0,-6,{h:58})) { gfx.restore(); return; }
-  // an oat-milk latte in a tall glass: layers of espresso and milk, foam with latte art, a paper sleeve, a green straw,
+  // an almond-milk latte in a tall glass: layers of espresso and milk, foam with latte art, a paper sleeve, a green straw,
   // a cookie on the saucer
   EO(0,22,16,4,OUT); EO(0,21,14,3,'#e8e2d4');
   poly([[-12,-18],[12,-18],[9,20],[-9,20]],OUT); poly([[-10,-16],[10,-16],[7,18],[-7,18]],'#e9dcc4');
@@ -959,7 +959,7 @@ A.oat_milk_please=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=(t===
     [900,()=>{ sfx.boing?sfx.boing():sfx.select(); setMessage('A cheese pizza and a milk carton roll right up to her.'); }],
     [1700,()=>{ sfx.nope?sfx.nope():sfx.select(); scene('av_flash',.15,{a:.3,c:'#ff6a60'}); scene('av_big',1.1,{x:sx-70,y:Math.max(46,sy-AH()-52),txt:'NO THANKS!',c:'#ff6a60',sc:5,rot:-.05}); setMessage('She waves them off. Firmly. Very firmly.'); }],
     [2300,()=>{ sfx.whoosh(); }],
-    [2500,()=>{ setMessage('Out comes her oat milk latte instead.'); }],
+    [2500,()=>{ setMessage('Out comes her almond milk latte instead.'); }],
     ['hf',3200],
     [3200,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0'}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
     [end,'end',kindLine(t,'Dairy-free and delicious. She was right.')]]); };
@@ -1172,7 +1172,7 @@ A.false_start=E2=>{ poses(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front
     [5900,'end',res(E2)+'The enemy is sent back to its starting block.']]); };
 
 // ---------- Hot Lunch Tray (A2): a real cafeteria lunch ----------
-// She carries a full tray with both hands (tomato soup, grilled cheese triangles, green beans, an apple, an oat-milk
+// She carries a full tray with both hands (tomato soup, grilled cheese triangles, green beans, an apple, an almond-milk
 // carton and a cookie) over to the friend, sets it on a pop-up lunch table, and the steam does the rest.
 const SOUP='#d8452e',TRAYC='#e9a04a';
 const trayDraw=(x,y,sc,t)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(PROPART.draw('amy/lunch_tray',0,-10,{w:78})) { gfx.restore(); return; }
@@ -1209,7 +1209,7 @@ A.hot_lunch_tray=E2=>{ poses(); const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Amy carries a full hot lunch tray. For herself. Teachers eat too.':'Amy carries a full hot lunch tray over to '+t.name+'. Both hands. Careful.'); say(m.id,'hot_lunch_tray'); scene('a6_table',(end-100)/1000,{plan:tp}); scene('a6_tray',(end-100)/1000,{plan}); }],
     [1300,()=>{ sfx.thud(); setMessage('A lunch table pops up. She sets the tray down.'); }],
-    [give,()=>{ sfx.select(); setMessage('Tomato soup. Grilled cheese triangles. Green beans. An apple, a cookie and oat milk.'); }],
+    [give,()=>{ sfx.select(); setMessage('Tomato soup. Grilled cheese triangles. Green beans. An apple, a cookie and almond milk.'); }],
     ['hf',hit],
     [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('a6_glow',1,{x:H.x,y:H.mid,c:'#ffb45a'}); scene('a6_melt',1.2,{x:H.x,top:H.top,w:H.w,h:H.h}); scene('a6_big',1.2,{x:H.x,y:H.top-60,txt:'HOT LUNCH!',c:'#ffb45a',sc:3}); hopOf(t!==m?t:null); }],
     [2600,'Dip the sandwich in the soup. That is the correct order.'],

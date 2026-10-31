@@ -1439,7 +1439,7 @@ const LE_ROOMS=[
       ['photo',4,5,2,1,'Family photos','Amy, Justin, Grace and Rose at a 5K. Amy won. Justin carried both girls across the finish anyway.'],
       ['counter',2,3,2,1,"Amy's desk",'A stack of graded spelling tests, a race bib for Sunday, and three running medals used as coasters.',{variant:'letters'}],
       ['bed',5,3,2,1,"Amy and Justin's bed",'Neatly made. A duffel bag packed for a race. Justin\'s side has a level on it.'],
-      ['counter',10,4,5,1,'Kitchen island','A bowl of fruit, a loaf of bread, and a carton of oat milk. Amy keeps it exactly where she can see it from the track.']]},
+      ['counter',10,4,5,1,'Kitchen island','A bowl of fruit, a loaf of bread, and a carton of almond milk. Amy keeps it exactly where she can see it from the track.']]},
   {id:'grands',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#cbb089',alt:'#d7be98',wall:'#9a8f78',trim:'#e6dcc3',pattern:'wood',rug:'#9c6e62'},
     rug:[3,5,6,3],
