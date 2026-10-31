@@ -1087,10 +1087,10 @@ SC.a6_leap=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=f
 A.burpee_blitz=E2=>{ poses(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,56),k=front(F,12),me=ST.unit(m);
   const K=[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:700,x:p.x,y:p.y,f:'hip'}]; let t=900; const marks=[],beats=[],PX=p.x,PY=p.y;
   // the plank lies with its head toward the monster: the turn point sits a little right of the standing spot
-  const rep=(t0,last)=>{ K.push({t:t0,f:'squat',dy:u=>ez(u)*2},{t:t0+150,f:'plant',x:PX,y:PY+16},{t:t0+280,f:'plank',x:PX-8,y:PY+16,ease:'out'},{t:t0+440,f:'pushup',x:PX-8,y:PY+16},{t:t0+580,f:'plank2',x:PX-8,y:PY+16},{t:t0+720,f:'tuck',x:PX,y:PY+16,ease:'out'}); if(!last) K.push({t:t0+860,f:'jump',x:PX,y:PY,hop:34}); beats.push([t0,'SQUAT'],[t0+150,'HANDS'],[t0+280,'PLANK'],[t0+440,'PUSH'],[t0+580,'UP'],[t0+720,'IN'],[t0+860,last?'LAST ONE':'JUMP!']); };
+  const rep=(t0,last)=>{ K.push({t:t0,f:'squat',dy:u=>ez(u)*2},{t:t0+150,f:'plant',x:PX,y:PY+16},{t:t0+280,f:'plank',x:PX-8,y:PY+16,ease:'out'},{t:t0+440,f:'pushup',x:PX-8,y:PY+16},{t:t0+580,f:'plank2',x:PX-8,y:PY+16},{t:t0+720,f:'tuck',x:PX,y:PY+16,ease:'out'}); if(!last) K.push({t:t0+860,f:'bjump',x:PX,y:PY,hop:34}); beats.push([t0,'SQUAT'],[t0+150,'HANDS'],[t0+280,'PLANK'],[t0+440,'PUSH'],[t0+580,'UP'],[t0+720,'IN'],[t0+860,last?'LAST ONE':'JUMP!']); };
   for(let i=0;i<3;i++) { rep(t,false); marks.push([t+880,String(i+1)]); t+=1200; }
   rep(t,true); const leap=t+860; marks.push([leap+140,'4']);
-  K.push({t:leap,f:'jump',hop:120,x:k.x,y:k.y,ease:'lin',ns:1},{t:leap+520,x:k.x,y:k.y,f:'jump',hop:8},{t:leap+950,f:'hip'},{t:leap+1250,f:back(k.x,me)},{t:leap+1950,x:'home',y:'home',f:'idle'});
+  K.push({t:leap,f:'bjump',hop:120,x:k.x,y:k.y,ease:'lin',ns:1},{t:leap+520,x:k.x,y:k.y,f:'bjump',hop:8},{t:leap+950,f:'hip'},{t:leap+1250,f:back(k.x,me)},{t:leap+1950,x:'home',y:'home',f:'idle'});
   const st=ST.keys(fx,K),hit=leap+330,bx=Math.min(522,Math.max(54,p.x+100)),by=44;
   ST.play(E2,[
     [0,()=>{ setMessage('Amy drops right in front of it. Burpees. Real ones.'); say(m.id,'burpee_blitz'); scene('a6_count',(leap+1400)/1000,{plan:{marks,show:700,x:bx,y:by}}); scene('a6_beat',(leap+300)/1000,{plan:{beats,x:Math.max(60,Math.min(500,p.x-40)),y:Math.max(44,p.y-AH()-34)}}); }],

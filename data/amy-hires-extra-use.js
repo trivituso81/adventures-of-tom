@@ -30,7 +30,7 @@
     carry:ba('k4_carry'), hold:ba('k2_swingup'), grab:ba('k4_carry'), dazed:ba('k6_dazed'),                                // Kettlebell Swing and others
     hip:bs('s1_hips'), point:bs('s2_point'), clap:bs('s3_clap'), whistle:bs('s4_whistle'), shh:bs('s5_shh'), shrug:bs('s6_shrug'), spread:bs('s6_shrug'),
     write:bs('s7_write'), card:bs('s8_card'), pistol:bs('s8_card'), reach:bs('s8_card'), squat:bs('s9_squat'), plant:bs('s9_squat'), bend:bs('s9_squat'), tuck:bs('s9_squat'),
-    jump:bs('s12_jump'), plank:bp('s10_plank'), plank2:bp('s10_plank'), pushup:bp('s11_pushup')
+    jump:bs('s12_jump'), bjump:bs('s13_bjump'), plank:bp('s10_plank'), plank2:bp('s10_plank'), pushup:bp('s11_pushup')
   };
   for(const nm of ['plank','plank2','pushup','squat','plant','tuck','bend']) F[nm].cut=1;   // engine/amy-moves.js burpeeFrames(): "already built", keeps these
   const keepExpr=sp.expr;                                                                    // portraits keep the old strike face

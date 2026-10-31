@@ -1,3 +1,10 @@
+## 2026-10-30 (night, 4): Burpee Blitz: new painted final jump
+
+- Tom's painted jump (arms up, hands clapped overhead, hair and whistle flying) replaces Amy's stretched rig jump in Burpee Blitz only. Source `tools/sprite-bake/src/amy-burpee-jump.png`, baked by `bake_amy_extra.py` as pose `s_s13_bjump` (pre-scaled so chin to soles matches her standing frame, head factor 1.6, no distortion) into `art/chars/amy-bs.webp` and `AMY_HIRES_X.bs` (`data/amy-hires-extra.js`). Registered as frame `bjump` in `data/amy-hires-extra-use.js`; the last `A.burpee_blitz` in `engine/amy-moves.js` uses `bjump` for the jump after each rep and for the final uppercut leap. Her other moves still use `jump`.
+- Her head is a little smaller than in her other frames: the art was drawn with realistic proportions, and a bigger head factor stretched the arms. A redraw in the attack-sheet proportions would match better.
+- Cache tags `?v=bj1` on `amy-moves.js`, `amy-hires-extra.js`, `amy-hires-extra-use.js`, and on the `amy-bs.webp` atlas path.
+- Tests: kit_test amy burpee_blitz (6 frames looked at), smoke IDS=amy clean.
+
 ## 2026-10-30 (night, 3): Amy drinks almond milk, not oat milk
 
 - Tom: Amy's "Oat Milk, Please" is now "Almond Milk, Please". Changed: the move name (`data/battle2-data.js`, `data/abilities.js`), its description, the battle messages in `engine/amy-moves.js`, her Gel Pack description, the Gregori kitchen island line (`data/maps-le.js`) and the spoken line in `data/lines.js` ("No dairy, thank you. Almond milk, please!").
