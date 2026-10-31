@@ -1,3 +1,11 @@
+## 2026-10-31 (day, 23): Justin's nine abilities trimmed to 4 to 7 poses each (`jtrim1`)
+
+- Tom (17:25, approved): Justin's abilities had far more frames than the other characters, with long prep and aftermath. Cut each move to its critical poses and held them longer.
+- Kept poses: Loose Wire 3 (pull, jab, zap), Wire Nuts 5, Bad Call 5, Fresh Fit 6 (swap and reveal kept), Demo Day 6, Breaker Flip 5, Giant Sneeze 5 (long sneeze hold kept), Foot Tap 5 (long scream hold kept), DRYWALL 4 plus the carry walk.
+- Effects, hit markers, scenes and the tapper (Rose or Grace) were retimed to the new poses. Moves now run about 2 to 3 s at normal speed after the scale wrapper (was 5 to 6 s).
+- Spoken lines: each move now says 2 lines (one fewer in Loose Wire, Wire Nuts, Demo Day and others). Line text unchanged, so no re-bake; the dropped lines are simply not triggered.
+- Tested: `kit_test.py justin` all nine moves (lines, damage, statuses, no errors), contact sheet looked at, `IDS=justin smoke.py` and `smoke.py` no fails. Not played on the phone. Stamp `build jtrim1`.
+
 ## 2026-10-31 (day, 22): Fresh Fit is now an outfit change into a green suit (`ffsuit1`)
 
 - Tom (16:58): the redo sheet for Fresh Fit came back (`tools/sprite-bake/src/justin-freshfit-v1.png`, replaced in place; the old sheet is in git history). Frames 1 to 5 are everyday clothes, 6 is the blurred swap spin, 7 to 16 are the emerald green suit with red and green trouser stripes, cream bow shirt, gold buckle loafers and round gold sunglasses.
