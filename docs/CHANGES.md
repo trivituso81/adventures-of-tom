@@ -1,3 +1,8 @@
+## 2026-10-30: Rose is painted again in the overworld (was pixelated)
+
+- `data/recruit-sprites.js` scaled Rose's overworld set by a fixed 0.82. That scaling rebuilds each frame as plain pixel rows and drops the painted-frame tag, so her painted art fell back to chunky blocks. It now follows the same rule as everyone else: `ROSE_OW.hires?1:.82`, so the painted Rose is drawn untouched at full size (36 rows next to Grace's 39). The 0.82 stays only as the fallback for the old pixel Rose. `engine/gear.js` already expected scale 1 for painted Rose.
+- Cache param bumped: `data/recruit-sprites.js?v=rose1`.
+
 ## 2026-10-30: Seat 1A: Tom now lies on the lie-flat pod
 
 - At the end of Seat 1A Tom tipped over in mid-air with nothing under him (and the sleep mask landed on the wrong spot). The painted lie-flat pod now slides in beside the party and Tom rests on its mattress, with the sleep mask and Zs, same placement as Boarding Group Zero. When Tom tucks himself in, the pod's own bedding replaces the separate duvet. `tom-moves.js?v=tom9`.
