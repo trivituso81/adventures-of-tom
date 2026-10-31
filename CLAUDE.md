@@ -41,6 +41,10 @@ Tom is redoing every interior as one square painting per room that fills the iPh
 
 Tom is redoing every Long Island outdoor area (Square, Rivituso Row, Grump Hollow, Cattail Pier, Whispering Marsh, Sundial Hollow, the school yard) one at a time. **Do not install them one by one.** When all are finished he will upload the pictures (a zip or a batch, often with no words). That means "install these areas". Follow `docs/AREA_PAINTINGS.md`: identify each picture, scale to the plate size, check every painted word letter by letter, check no sign overlaps a door, re-derive each walk mask (`python3 tools/mask_overlay.py <id>`), close dead-end paths, fix exits, objects and scene coordinates, restore the Square's large fountain if the new painting reverted it, test portrait and landscape with screenshots, push to `main`, and tell Tom which areas are live and which need a redo. The generator paints the sign lettering; the game does not draw words on boards any more. Never ask him to unpack or resize anything.
 
+## Justin's ability sheets (standing rule, 2026-10-31)
+
+Justin (Amy's husband) is becoming a party member. Tom will drop a zip of his painted battle and ability animation sheets into a conversation, often with no words. That means "install Justin with his kit". Follow `docs/JUSTIN_ABILITIES.md`: it holds the approved kit (moves, MP, lines, special), the frame keys for every sheet, and the install steps (bake, party data, `engine/justin-moves.js`, recruiting at GREGORI, tests, push). Never ask him to unpack, rename or resize anything.
+
 ## How to work
 
 1. Read only the files the task needs. The repo is large (`engine/battle2-kind.js` alone is 400 KB). Use search to find the section; do not open whole files.
