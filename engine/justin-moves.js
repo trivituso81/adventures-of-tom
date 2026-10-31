@@ -132,10 +132,11 @@ J.fresh_fit=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),mid=
 
 // ---------- Demo Day ----------
 SC.jv_wall=(s,u)=>{ const x=s.x,y0=s.top-18,w=s.w+30,h=s.h+30,a=fin(u,.12)*(u>.86?(1-u)/.14:1);
-  gfx.globalAlpha=a*.92; R(x-w/2,y0,w,h,'#c9bfb0'); R(x-w/2,y0,w,5,'#e6dccd'); for(let r=0;r<4;r++) R(x-w/2+6,y0+14+r*(h/4),w-12,2,'#a89d8c');
+  gfx.globalAlpha=a*.92; if(!PROPART.draw('justin/wall_intact',x,y0+h/2,{w,h})) { R(x-w/2,y0,w,h,'#c9bfb0'); R(x-w/2,y0,w,5,'#e6dccd'); for(let r=0;r<4;r++) R(x-w/2+6,y0+14+r*(h/4),w-12,2,'#a89d8c'); }   // painted wall; the cracks below stay drawn
   const c=cl((u-s.t1)/.06); if(c>0) { gfx.strokeStyle='#4a4238'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(x-6,y0+4); gfx.lineTo(x+8,y0+h*.3); gfx.lineTo(x-10,y0+h*.55); gfx.lineTo(x+6,y0+h*.8); gfx.stroke(); }
   const c2=cl((u-s.t2)/.06); if(c2>0) { gfx.strokeStyle='#4a4238'; gfx.beginPath(); gfx.moveTo(x-w*.4,y0+h*.35); gfx.lineTo(x,y0+h*.4); gfx.lineTo(x+w*.4,y0+h*.3); gfx.moveTo(x-w*.3,y0+h*.7); gfx.lineTo(x+w*.3,y0+h*.65); gfx.stroke(); } };
-SC.jv_chunks=(s,u)=>{ for(let k=0;k<12;k++) { const q=cl(u*1.25-k*.03); if(q<=0||q>=1) continue; const x=s.x+(k-6)*(s.w/12),y=s.top+q*q*(s.h+30)-12; gfx.globalAlpha=1-q*.5; gfx.save(); gfx.translate(x,y); gfx.rotate(q*5+k); if(!PROPART.draw('justin/plaster_chunk',0,0,{h:9+(k%3)*3,flip:k%2===0})) R(-5,-4,10,8,k%2?'#c9bfb0':'#a89d8c'); gfx.restore(); } };
+SC.jv_chunks=(s,u)=>{ for(let k=0;k<12;k++) { const q=cl(u*1.25-k*.03); if(q<=0||q>=1) continue; const x=s.x+(k-6)*(s.w/12),y=s.top+q*q*(s.h+30)-12; gfx.globalAlpha=1-q*.5; gfx.save(); gfx.translate(x,y); gfx.rotate(q*5+k); if(!PROPART.draw(['justin/drywall_chunk','justin/plaster_chunk','justin/splintered_stud'][k%3],0,0,{h:9+(k%3)*3,flip:k%2===0})) R(-5,-4,10,8,k%2?'#c9bfb0':'#a89d8c'); gfx.restore(); } };
+SC.jv_dust=(s,u)=>{ const q=ez(u/.8); gfx.globalAlpha=fade(u,.35)*.9; if(!PROPART.draw('justin/dust_puff',s.x,s.y-q*8,{w:(s.r||30)*2*(.5+q*.7)})) SC.jv_poof(s,u); };
 J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST.unit(m);
   const walk=(u,t)=>Math.floor(t*7)%2?'dd_walkA':'dd_walkB';
   const K=[{t:0,x:'home',y:'home',f:'idle'},{t:250,f:walk,ease:'lin'},{t:1000,x:p.x,y:p.y,f:'dd_lookUp'}];
@@ -150,10 +151,10 @@ J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST
     [1300,()=>setMessage('He hoists the sledgehammer.')],
     [2450,()=>say(m.id,'demo_day_one')],
     ['hf',2600],
-    [2600,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.4); landHit(45); scene('jv_poof',.5,{x:F.x,y:F.top+10,r:30}); }],
+    [2600,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.4); landHit(45); scene('jv_dust',.5,{x:F.x,y:F.top+10,r:30}); }],
     [3000,()=>scene('jv_chunks',1.1,{x:F.x,top:F.top-20,w:F.w,h:F.h})],
     [3820,()=>say(m.id,'demo_day_two')],
-    [3960,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.6); landHit(55); scene('jv_poof',.6,{x:F.x,y:F.top+20,r:40}); }],
+    [3960,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.6); landHit(55); scene('jv_dust',.6,{x:F.x,y:F.top+20,r:40}); }],
     [4100,()=>{ scene('jv_chunks',1.3,{x:F.x,top:F.top-30,w:F.w+20,h:F.h}); scene('jv_text',1,{x:F.x,y:F.top-14,txt:'DEMO DAY',c:'#ffe08a',sc:2}); }],
     [4750,()=>say(m.id,'demo_day_done')],
     [6400,'end',res(E2)+'The wall is coming down.']]); };
@@ -233,7 +234,8 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
 
 // ---------- DRYWALL (special): carries a sheet in, screws it up in front of the party, all damage halved ----------
 SC.jv_sheet=(s,u)=>{ const x=s.x,base=s.base,h=s.h,w=s.w,q=1,a=fin(u,.06)*(u>.9?(1-u)/.1:1); gfx.globalAlpha=a;
-  gfx.save(); gfx.translate(x,base); gfx.rotate(-(1-q)*1.2); R(-w/2,-h,w,h,'#ebe4d6'); R(-w/2,-h,w,4,'#fff9ec'); R(-w/2,-h,3,h,'#cfc6b4'); R(w/2-3,-h,3,h,'#cfc6b4');
+  gfx.save(); gfx.translate(x,base); gfx.rotate(-(1-q)*1.2); if(PROPART.draw('justin/drywall_sheet',0,-h/2,{h,w:Math.min(h*.49,w+12)})) { gfx.restore(); return; }   // painted sheet with its four screws; the drawn one below is the fallback
+  R(-w/2,-h,w,h,'#ebe4d6'); R(-w/2,-h,w,4,'#fff9ec'); R(-w/2,-h,3,h,'#cfc6b4'); R(w/2-3,-h,3,h,'#cfc6b4');
   for(let k=1;k<4;k++) R(-w/2+6,-h+k*h/4-1,w-12,2,'#d8d0c0');
   const sc=cl((u-.3)/.5); for(let k=0;k<4;k++) if(sc>k/4) E(-w/2+7+(k%2)*(w-14),-h+10+Math.floor(k/2)*(h-20),2.5,2.5,'#8a8f98');
   gfx.restore(); };

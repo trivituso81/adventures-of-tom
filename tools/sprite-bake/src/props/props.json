@@ -2107,6 +2107,31 @@
    16,
    "plaster_chunk",
    "Plaster chunk and crumbs"
+  ],
+  [
+   17,
+   "wall_intact",
+   "Basement wall, intact"
+  ],
+  [
+   18,
+   "drywall_sheet",
+   "Drywall sheet, standing"
+  ],
+  [
+   19,
+   "drywall_chunk",
+   "Drywall chunk"
+  ],
+  [
+   20,
+   "splintered_stud",
+   "Splintered stud"
+  ],
+  [
+   21,
+   "dust_puff",
+   "Dust puff"
   ]
  ]
 }

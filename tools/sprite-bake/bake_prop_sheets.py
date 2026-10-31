@@ -45,6 +45,7 @@ SHEETS = [
     ('tnb-sheet1-items1-31.png', 'tnb', rng(1, 23)),
     ('tnb-sheet2-custom.png', 'tnb', rng(32, 46)),   # TNB custom sheet 2 (2026-10-31): laptop through clay bowl, keyed from a fake checkerboard by key_checker.py
     ('justin-sheet1.png', 'justin', rng(1, 16)),   # Justin sheet 1 (2026-10-31): the generator ignored the list for cells 7 to 14 and 16, so those hold what it drew (cord, drill, leaning drywall, bucket, ladder, drywall square, TV off, basketball TV, plaster chunk); cells 1 to 6 and 15 matched
+    ('justin-sheet2.png', 'justin', rng(17, 21)),   # Justin sheet 2 (2026-10-31, redo): basement wall, standing drywall sheet, drywall chunk, splintered stud, dust puff; all 5 matched
     ('nara-sheet1-of-2.png', 'nara', rng(1, 11)),         # Nara (Oct 30): coins through park bench; cells 12 to 15 came back wrong (dog house, bow, gift box, bouquet): redo acorns, oak leaves, tennis ball pile, golden crumb
     ('nara-squirrel-sheet.png', 'nara', rng(16, 19)),     # Chairman Cheeks, 4 poses
     ('nara-human-eyes.png', 'nara', rng(20, 21)),         # HUMAN EYES close-up, two panels (cut larger, see MAXSIDE_BY)
