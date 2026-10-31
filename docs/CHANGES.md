@@ -2,6 +2,11 @@
 
 - Tom: the lava was small and hidden behind the enemies. The painted pool in `engine/rose-moves.js` (`Rm.floor_is_lava` wrapper) now spans from 52 px left of the row to 84 px right of Rose's cushion, 30 px above the rear enemy's feet to 30 px below the front one, and is drawn 15 percent larger (2.4x instead of 2.08x). Lava now shows around every enemy's feet and under Rose. Cache tag `rose-moves.js?v=lv2`.
 
+## 2026-10-30: Konami Code controller draws under Tom
+
+- The giant floor controller (`SC.tv_konmat`) was a front scene, so it painted over Tom while he hopped from button to button. It is now a `back:true` scene (drawn before the party and foes, like the lie-flat pod), so Tom stands on it. The code readout at the top (`tv_code`) stays in front. Nothing else about the move changed.
+- Cache tag `tom-moves.js?v=kc1`. Tests: kit_test tom konami_code, smoke IDS=tom.
+
 ## 2026-10-30: Pepper Breath rebuilt from a painted 16-frame sheet
 
 - Tom's sheet `tools/sprite-bake/src/boppy-pepper-v1.png` (4 x 4, magenta) baked by `bake_boppy_extra.py` into `art/chars/boppy-pepper.webp` and `BOPPY_PEPPER` in `data/boppy-extra.js` (frames `pb_walkA, pb_walkB, pb_present, pb_admire, pb_raise, pb_crunch, pb_chew, pb_burn, pb_fan, pb_inhale, pb_breathA..C, pb_gasp, pb_grumble, pb_smug`, plus mirrored walks), registered in `data/boppy-hires-battle.js`. Smug frame is 75 rows tall so his head matches his idle.

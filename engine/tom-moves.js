@@ -1181,7 +1181,7 @@ Tm.konami_code=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(
   const hits={1:15,3:15,5:15,7:15};
   const presses=times.map((tt,k)=>[tt,()=>{ const o=list[k%list.length]; if(!o) return; const O=ST.unit(o); (k>=8?sfx.boing:sfx.select)(); scene('tv_drop',.7,{x:O.x,y:O.top-12,k:KSEQ[k]}); b7Later(()=>{ ST.jolt(o,.3); sfx.bonk(); },60); if(hits[k]) landHit(hits[k]); }]);
   ST.play(E2,[
-    [0,()=>{ setMessage('A giant controller unrolls on the floor. Tom has been waiting his whole life for this.'); say(m.id,'konami_code'); scene('tv_konmat',(boom+1300)/1000,{plan}); scene('tv_code',(boom+900)/1000,{plan}); }],
+    [0,()=>{ setMessage('A giant controller unrolls on the floor. Tom has been waiting his whole life for this.'); say(m.id,'konami_code'); scene('tv_konmat',(boom+1300)/1000,{plan,back:true}); scene('tv_code',(boom+900)/1000,{plan}); }],
     [t0,()=>{ setMessage('Up. Up. Down. Down. Left. Right. Left. Right. B. A.'); }],
     ...presses,
     ['hf',boom],
