@@ -24,14 +24,15 @@ function drawSheetActor(a,set) {
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0&&ph<.55?1+(a.stepN%2):0;
-  const fr=frames[fi];
-  const w=fr[0].length,h=fr.length,hk=h*k,wk=w*k;
+  const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
+  const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
+  const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
   if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round(wk*.45),Math.round(4*k),'#2f493640');
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
-  activeTint=painted?null:(m?garmentTint('ow',m.id,memberTopColor(m)):null);
+  activeTint=painted?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,true,k);
-  activeTint=painted?null:(m?garmentTint('ow',m.id,memberTopColor(m)):null);
-  drawSprite(fr,set.pal,cx-Math.floor(wk/2),Math.round(base-hk),k);
+  activeTint=painted?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
+  drawSprite(fr,bp?bp.pal:set.pal,cx-Math.floor(wk/2),Math.round(base-hk),kd);
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,false,k);
   activeTint=null;
 }

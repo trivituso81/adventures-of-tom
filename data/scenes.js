@@ -93,14 +93,38 @@ SCENES.ch1Theft=[
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
   {sfx:'doorIn'},
   {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[8,12],dir:'up'}},
-  {walk:'Big Mudling',to:[[8,11],[7,11],[7,10]],speed:.32,onStep:()=>sfx.splat()},
+  {walk:'Big Mudling',to:[[8,11]],speed:.32,onStep:()=>sfx.splat()},
   {face:'Big Mudling',dir:'up'},
+  {sfx:'look'}, {wait:.4},
+  // The shove (Tom, 2026-10-30): the blob charges up the middle and bowls Tom, Grace and Rose over (battle hurt, then lying KO frames),
+  // Deedee hops out of its way, and it squelches on to the counter. Nobody is overlapped: the three land clear of its path (the diagonal
+  // from the corridor to the island) and it never walks through anyone.
+  {cam:[8,10]},
+  {all:[
+    {seq:[{walk:'Big Mudling',to:[[8,10.1]],speed:.2},
+          {walk:'Big Mudling',to:[[7,9],[5.6,8]],speed:.26,onStep:()=>sfx.splat()}]},
+    {seq:[{wait:.12},{sfx:'whoosh'},{wait:.1},{sfx:'bonk'},{wait:.35},{sfx:'thud'}]},
+    {knock:'tom',to:[9.6,9],delay:.17,dir:'right'},
+    {knock:'grace',to:[10.5,10.4],delay:.22,dir:'right'},
+    {knock:'rose',to:[5.8,10.6],delay:.2,dir:'left'},
+    {seq:[{wait:.4},{face:'Deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[8,7],time:.35,arc:14}]}
+  ]},
+  {place:'Deedee',at:[8,7],dir:'down'},
+  {face:'Big Mudling',dir:'left'},
   {wait:.3},
   {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry='tin'; sfx.pickup(); }},
-  {face:'rose',dir:'left'}, {face:'grace',dir:'left'}, {face:'tom',dir:'left'},
+  {wait:.35},
   {talk:'Rose',lines:['Deedee! A mud blob is taking your PIE!']},
-  {walk:'Big Mudling',to:[[7,11],[8,11],[8,12]],speed:.22,onStep:()=>sfx.splat()},
-  {sfx:'doorOut'}, {despawn:'Big Mudling'},
+  // The blob squelches back down the middle; once it has cleared the corridor the three scramble up (kneel, then stand) and Deedee hops back to her counter.
+  {all:[
+    {seq:[{walk:'Big Mudling',to:[[7,9.2],[8,10.2],[8,11.3],[8,12.4]],speed:.2,onStep:()=>sfx.splat()},{sfx:'doorOut'},{despawn:'Big Mudling'}]},
+    {getup:'tom',to:[8,10],delay:.6,dir:'down'},
+    {getup:'rose',to:[7,10],delay:.7,dir:'down'},
+    {getup:'grace',to:[9,10],delay:.8,dir:'down'},
+    {seq:[{wait:.7},{hop:'Deedee',from:()=>[8,7],to:[7,9],time:.4,arc:10}]}
+  ]},
+  {place:'Deedee',at:[7,9],dir:'down'},
+  {cam:null},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
   {talk:'Deedee',lines:['That\'s my GOOD tin! Grab your shoes. I\'m coming with you.']},
   {talk:'Boppy',lines:['I TOLD you something lives in that pond. Twenty years I\'ve been saying it. Nobody listens to Boppy.','I\'d come, but the stomach. Bring me back that fish.']},

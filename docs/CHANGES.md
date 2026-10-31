@@ -1,3 +1,10 @@
+## 2026-10-30 (night, 10): Chapter 1 pie theft: the mud blob now shoves everyone aside
+
+- Tom (22:59): the blob walked onto Rose's tile and overlapped the party. Now (scene `ch1Theft`, data/scenes.js): the blob charges up the middle and bowls over Tom, Grace and Rose, who fly back in their battle hurt frames and land lying down in the KO frames (bounce, thud). Deedee hops out of its way. The blob squelches diagonally to the counter, grabs the tin, and Rose, still on the floor, says her line. As the blob leaves down the middle, Tom, Rose and Grace kneel (painted kneel frames) and stand back in their original line, and Deedee hops back to her spot. Nobody is overlapped at any point.
+- New scene steps (engine/story.js): `{pose:id,f,dir}` (hold a battle frame), `{knock:id,to,delay,dir}` (thrown and lands lying), `{getup:id,to,delay,dir}` (kneel, slide to a tile, stand), `{cam:[x,y]|null}` (hold the camera still so a fling does not drag the screen). `scenePoseDraw` scales battle frames to match the overworld figure; `drawSheetActor` (engine/town-render.js) draws them. `updateCamera` honours `sceneCam`.
+- No spoken line changed (no re-bake). New tool: `tools/scene_frames.py` plays a scene and saves frames (`FROM=doorIn SCENE=ch1Theft python3 tools/scene_frames.py`, `LAND=1 VIEW=860x430` for landscape).
+- Title stamp `build shove1`; tags `?v=shove1` on overworld.js, town-render.js, story.js, scenes.js, main.js.
+- Not changed: the painted pie on the baking island stays in the painting after the theft.
 ## 2026-10-30 (night, 11): Foraged at Dawn uses a painted plate
 
 - Tom (23:08): TNB's forage move still used old graphics. The plate and pea were drawn with code shapes while everything else in the battle is painted. New painted prop `art/props/tnb/pea_plate.webp` (the painted dinner plate with a gold rim, herb-oil swoosh, microgreens, a flower and one glossy pea), built by `python3 tools/sprite-bake/build_pea_plate.py`. `peaPlate()` in engine/tnb-moves.js draws it for both the carried plate and the one set down at the friend; the drawn plate stays as the fallback and for the other dishes. Preloaded in engine/prop-art.js.

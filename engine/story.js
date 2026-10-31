@@ -257,6 +257,7 @@ function sceneActor(a) {
   return currentMap.npcs.find(n=>n.name===a||n.name.toLowerCase()===String(a).toLowerCase())||null;
 }
 const scenePos=p=>typeof p==='function'?p():p;
+let sceneCam=null;   // {cam:[x,y]} holds the camera on a tile while a scene flings people about; {cam:null} lets it follow Tom again (also cleared when a scene ends)
 const lazy=fn=>({start(){ this.s=fn(); this.s.start(); },update(dt){ return this.s.update(dt); }});
 const SCENE_OPS={
   wait:o=>S.wait(o.wait),
@@ -267,6 +268,22 @@ const SCENE_OPS={
   face:o=>S.call(()=>{ const a=sceneActor(o.face); if(a) a.facing=o.dir; }),
   place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
+  // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
+  cam:o=>S.call(()=>{ sceneCam=o.cam||null; }),
+  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f) a.scenePose={f:o.f,dir:o.dir||'left'}; else { a.scenePose=null; a.lift=0; } }),
+  // {knock:'tom',to:[x,y],delay,fly,arc,dir}: thrown to a spot (hurt frame in the air), lands with a bounce, then lies there (KO frame) until a getup.
+  knock:o=>lazy(()=>{ const a=sceneActor(o.knock),to=scenePos(o.to),fly=o.fly||.42,dl=o.delay||0,arc=o.arc||22; let t=0,from=null,dir='left';
+    return {start(){ t=0; storyHold(a); const p=position(a); from=[p.x,p.y]; dir=o.dir||(to[0]<from[0]?'left':'right'); a.move=null; a.scr={x:from[0],y:from[1]}; },
+      update(dt){ t+=dt; if(t<dl) return false;
+        const u=Math.min(1,(t-dl)/fly),e=ease(u);
+        if(u<1) { a.scr={x:lerp1(from[0],to[0],e),y:lerp1(from[1],to[1],e)}; a.lift=Math.sin(Math.PI*u)*arc; a.scenePose={f:'hurtPose',dir:dir==='left'?'right':'left'}; return false; }
+        const b=(t-dl-fly)/.16; a.scr={x:to[0],y:to[1]}; a.scenePose={f:'ko',dir}; a.lift=b<1?Math.sin(Math.PI*b)*5:0; return b>=1; }}; }),
+  // {getup:'tom',to:[x,y],delay,kneel,dir}: kneels (sliding to the tile it will stand on), then stands facing dir (default down).
+  getup:o=>lazy(()=>{ const a=sceneActor(o.getup),to=scenePos(o.to),dl=o.delay||0,kn=o.kneel||.5; let t=0,from=null,dir='left';
+    return {start(){ t=0; const p=position(a); from=[p.x,p.y]; dir=a.scenePose?a.scenePose.dir:'left'; },
+      update(dt){ t+=dt; if(t<dl) return false; const r=(t-dl)/kn;
+        if(r<1) { const e=ease(r); a.scr={x:lerp1(from[0],to[0],e),y:lerp1(from[1],to[1],e)}; a.lift=0; a.scenePose={f:'kneel',dir}; return false; }
+        a.scenePose=null; a.lift=0; a.scr=null; a.move=null; a.x=to[0]; a.y=to[1]; a.facing=o.dir||'down'; return true; }}; }),
   show:o=>S.call(()=>{ const a=sceneActor(o.show); if(a) a.hidden=false; }),
   hide:o=>S.call(()=>{ const a=sceneActor(o.hide); if(a) a.hidden=true; }),
   fade:o=>({t:0,start(){ this.t=0; intro.fadeLock=true; this.a=o.fade==='out'?intro.fade:Math.max(intro.fade,1); },
@@ -304,6 +321,23 @@ const SCENE_OPS={
   seq:o=>S.seq(...compileScene(o.seq)),
   if:o=>lazy(()=>{ const ok=typeof o.if==='function'?o.if():!!flag(o.if); return S.seq(...compileScene((ok?o.then:o.else)||[])); })
 };
+// A battle pose borrowed for a cutscene: a.scenePose={f:'hurtPose'|'kneel'|'ko'|...,dir:'left'|'right'} (set by the pose, knock and getup steps above).
+// Called by drawSheetActor (engine/town-render.js) with the overworld set and its scale k. Returns {rows,k,pal}, or null to draw the normal overworld frame.
+// Battle frames are about twice the overworld figure's height in rows, so they are drawn at k * (overworld rows / battle idle rows) to match Tom's size.
+// Battle frames face left; the KO frame faces right. A frame facing the wrong way is mirrored (cached on the rows).
+const SCENE_POSE_RATIO={};
+function scenePoseDraw(a,set,k) {
+  const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member,P=a.scenePose; if(!m||!P) return null;
+  const sp=BATTLE_SPRITES[m.id]; if(!sp) return null;
+  let rows,native='left',pal=sp.pal,rel=1;
+  if(P.f==='ko') { const ko=typeof KO_SPRITES!=='undefined'&&KO_SPRITES[m.id]; if(!ko) return null; rows=ko.rows; native='right'; pal=ko.pal||pal; rel=(ko.scale||sp.scale)/sp.scale; }
+  else rows=sp[P.f];
+  if(!rows) return null;
+  const vis=r=>{ let t=0,b=r.length-1; while(t<b&&!/[^.]/.test(r[t])) t++; while(b>t&&!/[^.]/.test(r[b])) b--; return b-t+1; };
+  const ratio=SCENE_POSE_RATIO[m.id]||(SCENE_POSE_RATIO[m.id]=vis(set.down[0])/vis(sp.idle));
+  if(P.dir&&P.dir!==native) rows=rows._mir||(rows._mir=mirrorRows(rows));
+  return {rows,k:k*ratio*rel,pal};
+}
 function compileScene(list) {
   return list.filter(Boolean).map(st=>{
     if(typeof st.start==='function'&&typeof st.update==='function') return st;
@@ -437,6 +471,7 @@ function storySpawn(o) {
 function storyDespawn(name) { for(const m of Object.values(worlds)) m.npcs=m.npcs.filter(n=>!(n.scripted&&n.name===name)); }
 const LE_endIntro_story=endIntro;
 endIntro=function() {
+  sceneCam=null;
   // Map monsters a scene walked out go back to their spots (so they never block a path afterwards).
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];

@@ -324,7 +324,7 @@ function resize() {
 }
 
 function updateCamera(dt) {
-  const p=position(player);
+  const p=(typeof sceneCam!=='undefined'&&sceneCam)?{x:sceneCam[0],y:sceneCam[1]}:position(player);   // sceneCam: a cutscene holds the camera still (engine/story.js, {cam:[x,y]})
   const mw=currentMap.w*T,mh=currentMap.h*T;
   const available=Math.max(T*2,H-safeTop-safeBottom);
 
