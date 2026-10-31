@@ -1,3 +1,6 @@
+## 2026-10-30: Floor Is Lava: cushion twice as big
+
+- Tom: the cushion Rose stands on was too small. The painted `rose/couch_cushion` in `seatCush` (engine/rose-moves.js) is now drawn 136 x 76 (was 68 x 38), re-centred so her feet stay on its top face; its shadow on the lava is doubled and the lava pool grows 26 px right and 16 px down to cover it. Cache tag `rose-moves.js?v=lv3`.
 ## 2026-10-30 (night, 7): Tom's NO TOUCHING sign faces the monsters
 
 - Tom: the sign faced the party, it should face the monster. The painted sign was drawn in three-quarter view turned to the right (its board edge shows on the left). New art `art/props/tom/no_touching_sign_l.webp` is the same sign turned to the left (board edge on the right) with the lettering and hand still reading the right way round; it was built from the original by re-fitting the unwrapped face into the mirrored frame. Defend (`tm_placard` in `engine/tom-moves.js`) and the preload list (`engine/prop-art.js`) now use it. The old `no_touching_sign.webp` stays in the repo, unused.

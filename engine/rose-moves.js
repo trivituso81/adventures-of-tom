@@ -2130,7 +2130,7 @@ const throwPillow=(x,y,s,rot,c0,c1,c2)=>{ gfx.save(); gfx.translate(x,y); gfx.ro
 // ---------- Floor Is Lava!: a real couch seat cushion floating on lava ----------
 // Drawn in the back layer, so Rose stands ON it. y is the floor spot under her (her feet are at y-9).
 const seatCush=(x,y,ms,lit)=>{ const bob=Math.sin(ms/260)*1.2,w=64; y+=bob;
-  if(PROPART.draw('rose/couch_cushion',x,y-6,{w:68,h:38})) return;   // painted couch cushion
+  if(PROPART.draw('rose/couch_cushion',x,y-3,{w:136,h:76})) return;   // painted couch cushion
   // front band (the cushion's thickness) with piping top and bottom
   gfx.save(); gfx.lineJoin='round';
   const bt=y-9,bb=y+5; gfx.beginPath(); gfx.moveTo(x-w/2,bt); gfx.lineTo(x+w/2,bt); gfx.quadraticCurveTo(x+w/2+3,(bt+bb)/2,x+w/2-2,bb); gfx.quadraticCurveTo(x,bb+3,x-w/2+2,bb); gfx.quadraticCurveTo(x-w/2-3,(bt+bb)/2,x-w/2,bt); gfx.closePath();
@@ -2164,13 +2164,13 @@ SC.rh_lava=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=1;
   const drop=ez(ms/180),land=ms-180,sq=land>0&&land<160?1-Math.sin(land/160*Math.PI)*.1:1;
   gfx.save(); gfx.globalAlpha=fade(u,.94); gfx.translate(P.cx,P.cy); gfx.scale(1,sq); gfx.translate(-P.cx,-P.cy);
   seatCush(P.cx,lerp(P.cy-120,P.cy,drop),ms,g); gfx.restore();
-  if(g>0) { gfx.globalAlpha=.5*g; E(P.cx,P.cy+7,36,4,CRUST); gfx.globalAlpha=1; } };   // the cushion's shadow on the lava
+  if(g>0) { gfx.globalAlpha=.5*g; E(P.cx,P.cy+22,72,8,CRUST); gfx.globalAlpha=1; } };   // the cushion's shadow on the lava
 SC.rv_cush=()=>{};
 SC.rv_lava=()=>{};   // the old flat orange ovals; the painted lava pool (rh_lava) replaces them
 { const lava=Rm.floor_is_lava; Rm.floor_is_lava=E2=>{ lava(E2);
     const list=(E2.targets||[]).filter(t=>t.side==='foe'),G=ST.group(list),p={x:Math.min(552,G.x1+46),y:Math.min(314,G.base+6)};
-    const tops=list.map(f=>ST.foe(f)),ya=Math.min(...tops.map(F=>F.base))-30,yb=Math.max(p.y+30,...tops.map(F=>F.base+30));
-    const P={cx:p.x,cy:p.y,xa:Math.min(...tops.map(F=>F.x-F.w*.5))-52,xb:p.x+84,ya,yb};   // wide pool: lava shows around every enemy's feet and Rose's cushion
+    const tops=list.map(f=>ST.foe(f)),ya=Math.min(...tops.map(F=>F.base))-30,yb=Math.max(p.y+46,...tops.map(F=>F.base+30));
+    const P={cx:p.x,cy:p.y,xa:Math.min(...tops.map(F=>F.x-F.w*.5))-52,xb:p.x+110,ya,yb};   // wide pool: lava shows around every enemy's feet and Rose's cushion
     b7Later(()=>RFX.scene('rh_lava',3.05,{P,drainAt:2100,back:true}),1250); }; }
 
 // ---------- Pillow Fort: real couch cushions ----------
