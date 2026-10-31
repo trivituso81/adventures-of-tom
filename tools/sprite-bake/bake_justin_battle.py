@@ -59,6 +59,12 @@ BATTLE_SHEET = os.path.join(SRC, 'justin-battle-v1.png')
 if os.path.exists(BATTLE_SHEET):
     CORE.update({'idle': 'ju_idleA', 'idle2': 'ju_idleB', 'run1': 'ju_walkA', 'run2': 'ju_walkB', 'hurt': 'ju_hurt', 'kneel': 'ju_low', 'celeb': 'ju_win'})
     KO_SRC = 'ju_ko'
+# single starting-stance painting (Tom, 2026-10-31): src/justin-idle-v1.png, one figure on magenta. It replaces idle/idle2 until the full
+# Battle Stances sheet arrives (then that sheet wins). Body is scaled to the other frames' body, head to their head (see stance_fit).
+STANCE = os.path.join(SRC, 'justin-idle-v1.png')
+SCALE_REF = CORE['idle']                      # sheet-wide scale stays tied to the old idle, so adding the stance never resizes any other frame
+if os.path.exists(STANCE) and not os.path.exists(BATTLE_SHEET):
+    CORE['idle'], CORE['idle2'] = 'ju_stance', 'ju_stanceB'
 
 # bruise and swirl positions as fractions of the frame's own bounding box: (fx, fy, radius as a fraction of the frame width).
 # They are painted onto the stance copies only (kneel, ko), never onto the move-sheet frames.
@@ -100,7 +106,9 @@ for sk, (fname, cols, nm) in SHEETS.items():
 if os.path.exists(BATTLE_SHEET):
     for k, v in cut_sheet(BATTLE_SHEET, ['ju_idleA', 'ju_idleB', 'ju_walkA', 'ju_walkB', 'ju_hurt', 'ju_low', 'ju_ko', 'ju_win'], 4).items():
         poses[k] = despill_pink(v)
-need = set(CORE.values()) | {KO_SRC}
+if os.path.exists(STANCE):
+    poses['ju_stance'] = despill_pink(cut_sheet(STANCE, ['ju_stance'], 1)['ju_stance']); poses['ju_stanceB'] = poses['ju_stance'].copy()
+need = set(CORE.values()) | {KO_SRC, SCALE_REF}
 missing = [n for n in need if n not in poses]
 if missing: raise SystemExit('missing frames: ' + ', '.join(missing))
 
@@ -123,7 +131,7 @@ def swirl_eye(img, cx, cy, r):
         d.line(pts, fill=(70, 34, 30, 255), width=max(2, int(r / 4)))
     return _layer(img, sp, .6)
 # ---------------------------------------------------------------- scale and placement
-ref_h = poses[CORE['idle']].height * SHEET_F.get(CORE['idle'].split('_')[0], 1.0)
+ref_h = poses[SCALE_REF].height * SHEET_F.get(SCALE_REF.split('_')[0], 1.0)
 FB = args.battle_h * KB / ref_h                       # painted pixels per source pixel in battle
 HEAD_K = 1.60   # Tom asked for a head the size of Tom's (his is a big caricature head); the painted head is about 70% of that
 def bigger_head(im, k):
@@ -147,7 +155,28 @@ def bigger_head(im, k):
     out.alpha_composite(im, (dx, extra))
     px = dx + (x0 + x1) // 2 - nw // 2; py = extra + y1 - nh
     out.alpha_composite(head, (px, py)); return out
+def face_width(im):
+    """Width of the largest skin patch in the top 38% of the figure (ears to ears). Width, not height, because an open collar fools any chin search."""
+    from scipy import ndimage
+    a = np.array(im); al = a[:, :, 3] > 40; ys, xs = np.where(al); top, bot = ys.min(), ys.max(); H = bot - top + 1
+    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
+    skin = al & (r > 150) & (r > g + 22) & (g > b + 12) & (r - b > 55); skin[top + int(H * .38):] = False
+    lab, n = ndimage.label(ndimage.binary_closing(skin, iterations=2)); sizes = ndimage.sum(skin, lab, range(1, n + 1))
+    cy, cx = np.where(lab == int(np.argmax(sizes)) + 1)
+    return cx.max() - cx.min() + 1, H
+STANCE_HEAD_FRAC = 0.33   # the painting's head (hair to chin) is about a third of its height
+FACE_MATCH = 0.88         # measured face width over-reads on this painting (wide smile, ear), eyeballed against the move frames
+def stance_fit(name):
+    rw, rH = face_width(fit('ft_idle')); w0, H0 = face_width(poses[name]); rw *= FACE_MATCH
+    s = rH / H0
+    for _ in range(4):                                   # head grows from the chin, so the figure gets taller: solve for body scale s and head k together
+        k = rw / (w0 * s); s = rH / (H0 * (1 + STANCE_HEAD_FRAC * (k - 1)))
+    print('stance: body scale %.3f, head enlarge %.2f (ref face %d px, ref height %d px)' % (s, k, rw, rH))
+    im = bigger_head(scaled_to(poses[name], s), k)
+    if name.endswith('B'): im = im.resize((im.width, round(im.height * .98)), Image.LANCZOS)   # idle2 is the same pose a touch shorter: a breath
+    return im
 def fit(name, paint=False):
+    if name.startswith('ju_stance'): return stance_fit(name)
     im = scaled_to(poses[name], FB * SHEET_F.get(name.split('_')[0], 1.0))
     im = bigger_head(im, HEAD_K)
     if paint and name in BRUISE:
@@ -255,7 +284,7 @@ def contact(path):
 contact(args.contact)
 
 # ---------------------------------------------------------------- data file
-AV = '?v=jhead1'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
+AV = '?v=jstance1'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
 atlas = {'bt': {'src': 'art/chars/justin-battle.webp' + AV, 'k': KB, 'rects': core_rects},
          'ko': {'src': 'art/chars/justin-ko.webp' + AV, 'k': KO_, 'rects': ko_rects}}
 for sk, s in sets.items(): atlas[sk] = {'src': f'art/chars/justin-{s["file"]}.webp' + AV, 'k': KB, 'rects': s['rects']}
