@@ -254,7 +254,7 @@ function b7SnackLock(u) {
   return 'One snack per round. Waiting on '+[...B2.snackWait].filter(b2Alive).map(p=>p.name).join(', ')+'.';
 }
 
-// ---------- Speed and AUTO buttons (top right of the battle picture) ----------
+// ---------- EXIT (Battle Lab), speed and AUTO buttons (top right of the battle picture) ----------
 function b7SyncTools() {
   const T=$('b7-tools'),cv=$('battle-canvas'); if(!T||!cv) return;
   T.hidden=!B2.active;
@@ -262,7 +262,8 @@ function b7SyncTools() {
   const st=T.parentElement;
   T.style.top=(cv.offsetTop+6)+'px';
   T.style.right=Math.max(4,st.clientWidth-(cv.offsetLeft+cv.offsetWidth)+6)+'px';
-  const s=$('b7-speed'),a=$('b7-auto');
+  const s=$('b7-speed'),a=$('b7-auto'),x=$('b7-exit');
+  if(x) x.hidden=!(B2.cfg&&B2.cfg.lab);   // EXIT: Battle Lab fights only, back to boss select
   s.textContent=B7.speed+'x'; s.classList.toggle('on',B7.speed===2);
   a.textContent=B7.auto?'AUTO ON':'AUTO'; a.classList.toggle('on',B7.auto);
 }
@@ -463,8 +464,9 @@ function b7RenderOptions(body) {
   const st=document.querySelector('#battle .battle-stage'),cv=$('battle-canvas'),B=$('battle');
   if(!st||!cv||!B) return;
   const tools=document.createElement('div'); tools.id='b7-tools'; tools.className='b7-tools'; tools.hidden=true;
-  tools.innerHTML='<button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
+  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
   st.appendChild(tools);
+  $('b7-exit').addEventListener('click',e=>{ e.stopPropagation(); if(typeof b2LabExit==='function') b2LabExit(); });   // Battle Lab only
   $('b7-speed').addEventListener('click',e=>{ e.stopPropagation(); b7ToggleSpeed(); });
   $('b7-auto').addEventListener('click',e=>{ e.stopPropagation(); b7ToggleAuto(); });
   cv.addEventListener('pointerdown',()=>{ if(B2.active&&battle.state!=='command') b7Tap(); });

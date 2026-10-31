@@ -783,3 +783,11 @@ function b2TargetAt(cx,cy) {
     const b=e.target.closest('.b2-btn'); if(b&&b.dataset.i!=null&&Number(b.dataset.i)!==B2.sel) b2Hover(Number(b.dataset.i));
   });
 })();
+
+// Battle Lab: the EXIT button (left of 1x and AUTO, engine/feel.js) leaves the fight at once, mid-animation too, back to the lab list.
+function b2LabExit() {
+  if(!B2.active||!B2.cfg||!B2.cfg.lab) return;
+  if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
+  if(typeof stopSpeech==='function') stopSpeech();
+  b2End('run');
+}
