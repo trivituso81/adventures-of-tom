@@ -687,7 +687,7 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-cross{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6px;height:100%;max-height:270px;aspect-ratio:1/1;max-width:100%;margin:auto}
 .b2-x{min-width:0;border:2px solid #ffffff2e;border-radius:7px;background:#ffffff12;color:var(--ink);font:inherit;font-weight:800;font-size:14px;letter-spacing:.5px;line-height:1.1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:2px;text-align:center;touch-action:manipulation}
 .b2-x .ar{display:block;flex:none;width:13px;height:13px;background:var(--gold);clip-path:polygon(50% 6%,95% 90%,5% 90%)}.b2-x.right .ar{transform:rotate(90deg)}.b2-x.down .ar{transform:rotate(180deg)}.b2-x.left .ar{transform:rotate(270deg)}
-.b2-x small{font-size:11px;font-weight:700;color:var(--ink-dim);letter-spacing:.2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b2-x small{font-size:12px;font-weight:700;color:var(--ink-dim);letter-spacing:.2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .b2-x:active{background:var(--sel);border-color:var(--edge)}
 .b2-x.up{grid-area:1/2}.b2-x.left{grid-area:2/1}.b2-x.right{grid-area:2/3}.b2-x.down{grid-area:3/2}
 .b2-x.off{opacity:.38}
@@ -696,7 +696,7 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .b2-list{display:grid;gap:5px}
 .b2-btn{min-width:0;border:2px solid #ffffff26;border-radius:5px;background:#ffffff0d;color:var(--ink);font:inherit;text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:7px 9px;touch-action:manipulation}
-.b2-btn span{font-size:12px;font-weight:800;letter-spacing:.6px}
+.b2-btn span{font-size:15px;font-weight:800;letter-spacing:.2px;font-variant-caps:normal}
 .b2-btn em{font-size:10px;font-style:normal;color:var(--ink-dim);display:flex;align-items:center;flex-wrap:wrap;gap:3px}
 .b2-btn.sel{background:var(--sel);border-color:var(--edge);color:#fff}
 .b2-btn.no{opacity:.42}
@@ -734,7 +734,7 @@ html.landscape #battle.v2 .battle-stage{justify-content:center}
 html.landscape .b2-msg{min-height:0;font-size:12px;padding:5px 9px}
 html.landscape .b2-pc{grid-template-columns:28px minmax(0,1fr);padding:2px 4px}
 html.landscape .b2-pc img,html.landscape .b2-ph{width:28px;height:28px}
-html.landscape .b2-btn{padding:5px 7px}html.landscape .b2-btn span{font-size:11px}
+html.landscape .b2-btn{padding:5px 7px}html.landscape .b2-btn span{font-size:12.5px}
 html.landscape .b2-ribbon{min-height:40px;padding:4px 6px}
 @media(max-width:600px){#battle.v2 #battle-canvas{max-height:36vh}}
 /* Landscape battle: the scene takes all the room, the menu is a slim right-hand strip (Tom, 2026-10-29).
@@ -761,9 +761,9 @@ html.landscape #battle.v2 .b2-vp{gap:1px;flex:none}html.landscape #battle.v2 .b2
 html.landscape #battle.v2 .b2-cmd{padding:3px}
 html.landscape #battle.v2 .b2-cross{gap:3px;max-height:none;height:auto;width:min(100%,calc(100cqh));margin:auto}
 html.landscape #battle.v2 .b2-x{font-size:10px;letter-spacing:.1px;border-width:1px;border-radius:5px}
-html.landscape #battle.v2 .b2-x .ar{width:9px;height:9px}html.landscape #battle.v2 .b2-x small{font-size:8px}
+html.landscape #battle.v2 .b2-x .ar{width:9px;height:9px}html.landscape #battle.v2 .b2-x small{font-size:9px}
 html.landscape #battle.v2 .b2-grid{grid-template-columns:1fr;gap:3px}html.landscape #battle.v2 .b2-list{gap:3px}
-html.landscape #battle.v2 .b2-btn{padding:3px 6px;gap:1px;border-width:1px}html.landscape #battle.v2 .b2-btn span{font-size:9.5px}html.landscape #battle.v2 .b2-btn em{font-size:8px}
+html.landscape #battle.v2 .b2-btn{padding:3px 6px;gap:1px;border-width:1px}html.landscape #battle.v2 .b2-btn span{font-size:11px}html.landscape #battle.v2 .b2-btn em{font-size:8px}
 html.landscape #battle.v2 .b2-back{padding:3px 6px}
 html.landscape #battle.v2 .bp-grid .bp-btn{height:62px}html.landscape #battle.v2 .bp-list .bp-row{min-height:38px;padding:3px 6px}
 
@@ -781,7 +781,7 @@ html.landscape #battle.v2 .bp-grid .bp-btn{height:62px}html.landscape #battle.v2
 .bp-grid .bp-btn{align-items:center;gap:3px;padding:6px 5px 4px;height:138px;min-height:0}
 .bp-ic{position:relative;display:flex;flex:1 1 0;min-height:0;width:100%;line-height:0}.bp-ic .bi{width:100%;height:100%;object-fit:contain}.bp-btn .bp-w{flex:none;line-height:11px}
 .bp-cross .b2-x,.bp-cross .bp-mid{padding:4px 3px 3px}.bp-cross .bi{flex:1 1 0;min-height:0;width:100%;height:0;object-fit:contain}.bp-cross .bp-mid .bi{width:100%}.bp-lock{position:absolute;right:-6px;bottom:-4px;line-height:0}
-.bp-w{font-size:9px!important;font-weight:800;letter-spacing:.4px;color:var(--ink-dim)}
+.bp-w{font-size:11px!important;font-weight:800;letter-spacing:.4px;color:var(--ink-dim)}
 .bp-m{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px;line-height:0}
 .bp-cost,.bp-fists{display:inline-flex;align-items:center;gap:1px;flex-wrap:wrap;justify-content:center}.bp-fists b{font-size:7px;letter-spacing:.3px;margin-left:2px;color:#ffd0a0;line-height:8px}
 .bp-n{position:absolute;left:-4px;bottom:-2px;font-size:10px;line-height:11px;background:#0b0d12e6;border-radius:3px;padding:0 3px;color:#fff;box-shadow:0 0 0 1px #ffffff40}
@@ -1077,7 +1077,7 @@ button,input,select{font-family:inherit}
 .choice.sel::before{content:'\25B6\00a0';font-size:.8em;vertical-align:1px}
 
 /* Command names in small caps, like the title menu */
-.mcmd,.choice,.battle-cmd,.mtab,.party-btn,.shop-tab,.menu-act,.save-btn,.b2-btn>span,.b2-x,#speaker,.menu-title h2{font-variant-caps:small-caps}
+.mcmd,.choice,.battle-cmd,.mtab,.party-btn,.shop-tab,.menu-act,.save-btn,.b2-x,#speaker,.menu-title h2{font-variant-caps:small-caps}
 
 /* Touch controls */
 .dir{border:1px solid #b8914a99;background:#141924c4}

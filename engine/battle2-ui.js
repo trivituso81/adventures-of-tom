@@ -481,10 +481,11 @@ function b2Brief(a) {
 }
 function b2BriefLine(name,cost,a) {
   const roles=b2Roles(a).map(k=>B2_ROLES[k].tag).join(' + '),B=b2Brief(a);
-  return [name,cost,roles,B.scope,B.tags.join(', ')].filter(Boolean).join(' · ');
+  return [b2Title(name),cost,roles,B.scope,B.tags.join(', ')].filter(Boolean).join(' · ');
 }
 // The command cross has two move lists. ▲ ATTACK: the free basic move, then every skill that aims at enemies. ▶ HEAL: the
 // character's special first, then every skill that aims at friends (heals, buffs, party boosts). B2.tab says which one is open.
+const b2Title=s=>{ s=String(s); return /[a-z]/.test(s)?s:s.toLowerCase().replace(/(^|[\s(\/-])([a-z])/g,(m,a,b)=>a+b.toUpperCase()); };
 function b2IsHeal(u,s) { return !!s&&(s===u.kit.special||(s!==u.kit.basic&&!!s.target&&!B2_FOE_TGT.includes(s.target))); }
 function b2TabRows(u,tab) {
   if(!u||!u.kit) return [];
@@ -504,14 +505,14 @@ function b2RenderCmd() {
       '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar"></span>ATTACK<small>'+pu.vp+' VP</small></button>'+
       '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar"></span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
-      '<button type="button" class="b2-x right'+(healOn?off:' off')+'" data-d="right"><span class="ar"></span>HEAL<small>'+(sp?b2Esc(sp.name):'NONE')+'</small></button>'+
+      '<button type="button" class="b2-x right'+(healOn?off:' off')+'" data-d="right"><span class="ar"></span>HEAL<small>'+(sp?b2Esc(b2Title(sp.name)):'NONE')+'</small></button>'+
       '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar"></span>BAG<small>'+B2.bag.length+' items'+(B2.cfg&&B2.cfg.lab?' · EXIT':'')+'</small></button></div>';
     return;
   }
-  const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>BACK</span><em>B / Esc</em></button>';
+  const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>Back</span><em>B / Esc</em></button>';
   if(B2.ui==='skills') {
     box.innerHTML='<div class="b2-grid">'+b2SkillRows(u).map((s,i)=>{ const c=b2Cost(u,s);
-      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(s.name.toUpperCase())+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join('')+back+'</div>';
+      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(b2Title(s.name))+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join('')+back+'</div>';
   } else if(B2.ui==='bag') {
     const rows=b2BagList(u);
     box.innerHTML='<div class="b2-grid">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.name)+'</span><em>'+(r.role?'<span class="b2-role" style="background:'+B2_ROLES[r.role].color+'">'+B2_ROLES[r.role].tag+'</span>':'')+b2Esc(r.sub)+'</em></button>').join('')+back+'</div>';
@@ -519,7 +520,7 @@ function b2RenderCmd() {
     // Only Tombos the HEART meter can pay for; each shows the face of who the actor teams up with.
     const rows=b2TomboRows(u);
     const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
-    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span class="b2-sn">'+b2Esc(r.T.name.toUpperCase())+b2RoleIcons(r.T)+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART'+((r.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(r.T.elem)+'</span>':'')+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
+    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span class="b2-sn">'+b2Esc(b2Title(r.T.name))+b2RoleIcons(r.T)+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART'+((r.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(r.T.elem)+'</span>':'')+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
   } else if(B2.ui==='inspect') {
     box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='target') {
@@ -535,11 +536,11 @@ function b2BagList(u) {
   // COMPLIMENT / GREAT TAKE! when a monster here wants one (B2_FOES praise, engine/battle2.js b2PraiseSteps).
   const pf=b2LiveFoes().find(f=>f.D.praise);
   if(pf) rows.push({name:pf.D.praise.label,sub:pf.D.praise.sub,praise:true});
-  if(B2.crust) rows.push({name:B2.hot?'HOT DISH':'WARM CRUST',role:'heal',sub:u.ateCrust?'Already had one this turn':'Free · '+B2.crust+' on the tray'+(B2.hot?' · heals more, cures one':''),crust:true,no:!!u.ateCrust});
+  if(B2.crust) rows.push({name:B2.hot?'Hot Dish':'Warm Crust',role:'heal',sub:u.ateCrust?'Already had one this turn':'Free · '+B2.crust+' on the tray'+(B2.hot?' · heals more, cures one':''),crust:true,no:!!u.ateCrust});
   const lock=b7SnackLock(u);   // Director Mode: one snack per round
-  for(const r of b2BagRows()) rows.push({name:r.it.icon+' '+r.it.name.toUpperCase(),role:b2ItemRole(r.it),sub:r.sub+' · x'+r.n,item:r,lock,no:!!lock});
-  if(B2.cfg&&B2.cfg.lab) rows.push({name:'EXIT LAB',sub:'Leave this fight and go back to the lab list',run:true});
-  else rows.push({name:'RUN',sub:'Back away slowly',run:true});
+  for(const r of b2BagRows()) rows.push({name:r.it.icon+' '+b2Title(r.it.name),role:b2ItemRole(r.it),sub:r.sub+' · x'+r.n,item:r,lock,no:!!lock});
+  if(B2.cfg&&B2.cfg.lab) rows.push({name:'Exit Lab',sub:'Leave this fight and go back to the lab list',run:true});
+  else rows.push({name:'Run',sub:'Back away slowly',run:true});
   return rows;
 }
 const b2ItemRole=it=>it.dmg?'dmg':it.confuse||it.atkDown?'debuff':it.pep||it.vp?'buff':'heal';

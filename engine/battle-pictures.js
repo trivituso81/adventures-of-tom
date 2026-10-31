@@ -12,7 +12,7 @@ const bpIcon=(id,px,cls,grey)=>{
   const be=typeof BE_MAP!=='undefined'&&BE_MAP[id];
   if(be) return '<img class="bi be '+(cls||'')+(grey?' grey':'')+'" alt="" src="'+BE_SVG[be]+'" width="'+px+'" height="'+px+'">';
   const u=biIcon(id,grey?'grey':''); return u?'<img class="bi '+(cls||'')+'" alt="" src="'+u+'" width="'+px+'" height="'+px+'">':''; };
-const bpWord=s=>String(s||'').replace(/[^A-Za-z0-9' ]/g,' ').trim().split(/\s+/)[0].toUpperCase().slice(0,9);
+const bpWord=s=>{ const w=String(s||'').replace(/[^A-Za-z0-9' ]/g,' ').trim().split(/\s+/)[0].slice(0,9); return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase(); };
 // Strength: 1, 2 or 3 fists from the move's damage multiplier.
 function bpFists(a) {
   if(!(a&&a.stat&&a.mult)) return '';
@@ -72,7 +72,7 @@ function bpBag(u) {
   const rows=b2BagList(u);
   return '<div class="b2-grid bp-grid">'+rows.map((r,i)=>{
     let ic,w;
-    if(r.run) { ic='x_run'; w='RUN'; } else if(r.praise) { ic='x_praise'; w=r.name; } else if(r.crust) { ic='x_crust'; w=r.name; } else if(r.benchcall) { ic='x_bench'; w=r.name; }
+    if(r.run) { ic='x_run'; w='Run'; } else if(r.praise) { ic='x_praise'; w=r.name; } else if(r.crust) { ic='x_crust'; w=r.name; } else if(r.benchcall) { ic='x_bench'; w=r.name; }
     else { ic=r.item.id; w=r.item.it.name; }
     return bpBtn(i,i===B2.sel,r.no,false,bpIcon(ic,96,'',!!r.no)||bpIcon('x_bag',96),bpWord(w)); }).join('')+bpBack()+'</div>';
 }
