@@ -1,3 +1,14 @@
+## 2026-10-31 (day, 4): skill lists use icons instead of text tags (`icons1`)
+
+- Tom (09:49): in the battle skill list, replace the labels with an icon system. Type icons right after the skill name, element icons in one row beneath, icons only, no text.
+- Type icons (colored tile, dark glyph, in this order after the name): attack = sword (red), heal = plus (green), buff = up arrow (blue), debuff = down arrow (purple). A long name wraps them together so none sits alone on a line.
+- Element icons (dark tile, colored glyph and outline, one row under the name): kinetic = speed ball, cozy = steaming mug, splash = water drop, sparkle = four-point star, chatter = speech bubble, amber = golden gem. A move with no element shows no row.
+- Built in `engine/battle2-ui.js` (`B2_ICON_GRID` pixel grids, `b2IconSvg`, `b2RoleIcons`, `b2ElemIcons`); CSS `.b2-ic`, `.b2-ics`, `.b2-els` in `index.html`, smaller in landscape. Roles and elements still come from the move data, so new moves get icons for free. Each icon has an aria-label; the words still appear in the message line when a move is highlighted.
+- Same icons on the Tombo list. Left as text on purpose: the Bag and the weakness tags on the Inspect and target screens.
+- No spoken line changed, so no clip needs a re-bake.
+- Tested: `smoke.py` and `IDS=grace,rose smoke.py` pass; portrait and landscape screenshots of the Attack and Heal lists checked.
+- Tags `battle2-ui.js` and `main.js` `?v=icons1`, title stamp `build icons1`.
+
 ## 2026-10-31 (day, 3): the 26 phone-baked voice clips are merged into the game (`clips1`)
 
 - Tom (09:50) sent `local-clips-export.json` from the bake page ("Missing voice clips"): 15 battle lines and 11 dialogue lines, exactly the 26 on the bake list.
