@@ -1,3 +1,12 @@
+## 2026-10-31 (morning, 37): the top-left frame is now a quest tracker (`qt1`)
+
+- Tom (09:05): remove the location frame; make it a persistent display of the next quest step, tap for details with sub-steps and check marks, using best-in-class RPG quest display.
+- Collapsed: gold quest diamond, chapter line (CH 6 and its title), the next step (first sentence of the current goal, two lines max), and progress pips with a count (for example 1/3) when the step has parts. The old area name and place line are gone from the HUD (the elements stay hidden because battle and flight code still write to them; the pause menu still shows the location).
+- Tap: quest log with the chapter title, the current step in full, a checklist of its parts, and a Completed list (newest first, last 8) with green checks. Tap again to close (also closes itself after 15 s).
+- Quest updates: when a step finishes the tracker shows it in green with a check and a chime for 1.5 s, then swaps to the new step with the diamond bobbing and the frame pulsing until tapped. When a part finishes, the pips pop.
+- Data: each `Goal:` toast now moves the goal it replaces into `STORY.flags.goalLog` (`{c: chapter, t: text}`, saves with the game). Saves from before this show only the current step until the next goal arrives. Multi-part steps come from `QUEST_SUBS` in `engine/story.js` (ch 4 sets, ch 5 rooms, ch 6 park, ch 7 wings, ch 8 shops, ch 9 mirrors, ch 10 terminal) and read the existing room flags. Not covered: the ch 4 light rig boxes and the ch 9 mirror stands (no per-part flag), and the Nine Scoops bonus invitations (they set `goal` directly, so no log).
+- Files: `engine/story.js`, `index.html` (markup, CSS, `story.js?v=qt1`), `engine/main.js` (stamp `build qt1`), new `tools/quest_test.py` (all pass; shots in `tools/shots/quest-*.png`, portrait and landscape). `smoke.py` passes for the default party and grace,rose.
+
 ## 2026-10-31 (morning): Open Strings: a small step forward, not a walk across
 
 - Tom (09:10): she only needs to step forward a little. Grace now steps about 64 px left of her own spot (never past the row), plays there, and steps back; the walk-in and walk-home are short (timeline 6.25 s, was 6.8 s). Words over her head (gx_text, gx_big) are clamped inside the stage so they are not cut at the right edge. Tag `?v=gx3` on grace-moves.js. Tests: kit_test grace open_strings (frames looked at).
