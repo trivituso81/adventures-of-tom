@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 12): Justin has his painted portrait (`jportrait1`)
+
+- Tom (13:59) sent Justin's oil-painting portrait. `portraits/justin.png` is now that painting, cropped square around the head so the face fills the frame like Tom, Amy and Boppy (replaces the cartoon placeholder).
+- Every place that shows a portrait reads the one `PORTRAITS` table in `engine/menu.js` (dialogue box, battle UI, character menu), so all of them pick it up; its `?v=` went to 2.
+- Tested: side-by-side against Tom, Amy and Boppy, and a headless menu and dialogue check. Not played on the phone. Stamp `build jportrait1`.
+
 ## 2026-10-31 (day, 11): Rose's Boo!! faces the monster when she pops out (`roseboo1`)
 
 - Tom (13:49): when Rose reappears behind the monster in Boo!!, she faced left (away from it). She now faces right, toward it, through the kneel, the BOO pose and the little celebration hop.
