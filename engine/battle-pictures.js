@@ -44,13 +44,13 @@ function bpHp(f) { const r=Math.max(0,f.hp)/f.maxHp; return '<span class="bp-hp"
 
 function bpCross(u,cmdOn,off) {
   const pu=u&&u.side==='party'?u:B2.party[0],k=pu.kit,sp=k.special;
-  const spOff=sp&&!(cmdOn&&pu.vp<b2Cost(pu,sp))?off:' off';
+  const hr=b2TabRows(pu,'heal'),spOff=hr.length&&!(cmdOn&&hr.every(s=>pu.vp<b2Cost(pu,s)))?off:' off';
   // One big picture per button and one small word under it. No counts, no markers.
   return '<div class="b2-cross bp-cross">'+
-    '<button type="button" class="b2-x up'+off+'" data-d="up">'+bpIcon('x_moves',64)+'<small>MOVES</small></button>'+
+    '<button type="button" class="b2-x up'+off+'" data-d="up">'+bpIcon('x_moves',64)+'<small>ATTACK</small></button>'+
     '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left">'+bpIcon('x_tombo',64)+'<small>TOMBO</small></button>'+
     '<button type="button" class="b2-mid bp-mid'+off+'" data-insp="1" aria-label="Look">'+bpIcon('m_magnify',64)+'<small>LOOK</small></button>'+
-    '<button type="button" class="b2-x right'+spOff+'" data-d="right">'+(sp?bpIcon(pu.id+'.'+sp.key,64)||bpIcon('x_moves',64):'')+'<small>'+(sp?bpWord(sp.name):'')+'</small></button>'+
+    '<button type="button" class="b2-x right'+spOff+'" data-d="right">'+(sp?bpIcon(pu.id+'.'+sp.key,64)||bpIcon('x_moves',64):'')+'<small>HEAL</small></button>'+
     '<button type="button" class="b2-x down'+off+'" data-d="down">'+bpIcon('x_bag',64)+'<small>BAG</small></button></div>';
 }
 // Move, Tombo and bag buttons: the picture fills the box, a small caption sits under it.

@@ -455,21 +455,29 @@ function b2BriefLine(name,cost,a) {
   const roles=b2Roles(a).map(k=>B2_ROLES[k].tag).join(' + '),B=b2Brief(a);
   return [name,cost,roles,B.scope,B.tags.join(', ')].filter(Boolean).join(' · ');
 }
-// The ▲ Skills list: the free basic move first, then every skill.
-function b2SkillRows(u) { return u&&u.kit?[u.kit.basic,...u.kit.skills].filter(Boolean):[]; }
+// The command cross has two move lists. ▲ ATTACK: the free basic move, then every skill that aims at enemies. ▶ HEAL: the
+// character's special first, then every skill that aims at friends (heals, buffs, party boosts). B2.tab says which one is open.
+function b2IsHeal(u,s) { return !!s&&(s===u.kit.special||(s!==u.kit.basic&&!!s.target&&!B2_FOE_TGT.includes(s.target))); }
+function b2TabRows(u,tab) {
+  if(!u||!u.kit) return [];
+  const k=u.kit;
+  return (tab==='heal'?[k.special,...k.skills.filter(s=>b2IsHeal(u,s))]:[k.basic,...k.skills.filter(s=>!b2IsHeal(u,s))]).filter(Boolean);
+}
+function b2SkillRows(u) { return b2TabRows(u,B2.tab||'attack'); }
 function b2CostTag(u,s) { if(s===u.kit.basic) return '<b class="b2-gain">+1 VP</b>'; return b2Diamond(u,s)?'<b class="b2-free">FREE</b>':b2Cost(u,s)+' VP'; }
 function b2RenderCmd() {
   const box=$('b2-cmd'),low=$('b2-low'),u=B2.actor; if(!box) return;
   const cmdOn=battle.state==='command';
   if(!cmdOn||B2.ui==='cross'||B2.ui==='busy'||!u||u.side!=='party') {
     const pu=u&&u.side==='party'?u:B2.party[0],k=pu.kit,off=!cmdOn?' off':'';
-    const img=b2Portrait(pu.id),sp=k.special;
+    const img=b2Portrait(pu.id),sp=k.special,hr=b2TabRows(pu,'heal');
+    const healOn=hr.length&&!(cmdOn&&hr.every(s=>pu.vp<b2Cost(pu,s)));
     box.innerHTML='<div class="b2-cross">'+
-      '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar">▲</span>SKILLS<small>'+pu.vp+' VP</small></button>'+
-      '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar">◀</span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
+      '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar"></span>ATTACK<small>'+pu.vp+' VP</small></button>'+
+      '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar"></span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
-      '<button type="button" class="b2-x right'+(sp&&!(cmdOn&&pu.vp<b2Cost(pu,sp))?off:' off')+'" data-d="right"><span class="ar">▶</span>'+(sp?b2Esc(sp.name):'SPECIAL')+'<small>'+(sp?(b2Diamond(pu,sp)?'FREE':b2Cost(pu,sp)+' VP')+' · '+b2RoleWords(sp):'NONE')+'</small></button>'+
-      '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar">▼</span>BAG<small>'+B2.bag.length+' items'+(B2.cfg&&B2.cfg.lab?' · EXIT':'')+'</small></button></div>';
+      '<button type="button" class="b2-x right'+(healOn?off:' off')+'" data-d="right"><span class="ar"></span>HEAL<small>'+(sp?b2Esc(sp.name):'NONE')+'</small></button>'+
+      '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar"></span>BAG<small>'+B2.bag.length+' items'+(B2.cfg&&B2.cfg.lab?' · EXIT':'')+'</small></button></div>';
     return;
   }
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>BACK</span><em>B / Esc</em></button>';
@@ -545,7 +553,7 @@ function b2Info() {
     else if(boss) b2Msg(cap(boss.def.the)+' will hit everyone next.'+(boss.shield?' Break its guard: '+(boss.shield.need-boss.shield.hits)+' more '+boss.shield.elems.map(e=>B2_ELEMS[e].name).join(' or ')+' hits.':' Heal up or GRUMBLE.'));
     else if(b2LiveFoes().some(f=>f.call&&b2Alive(f.call)&&f.call.st.boarding)) { const c=b2LiveFoes().find(f=>f.call).call; b2Msg('NOW BOARDING: '+c.name+'. '+(c===u?'You are called: anything you do now boards you (+2 VP).':c.name+' must act before the Last Call’s next turn, or the gate closes on them.'+(u.id==='tom'?' DEFEND them to walk them on.':''))); }
     else if(b2LiveFoes().some(f=>f.mirror)) { const m=b2LiveFoes().find(f=>f.mirror); b2Msg(u.name+'’s turn. MIRROR SIDE: '+B2_ELEMS[m.mirror].name.toUpperCase()+'. Those hits bounce back; anything else gets through.'); }
-    else b2Msg(u.name+'’s turn. ▲ Skills  ▶ '+(u.kit.special?u.kit.special.name:'Special')+'  ◀ Tombo  ▼ Bag  B Inspect'+b2TraitHint(u));
+    else b2Msg(u.name+'’s turn. Attack, Heal, Tombo or Bag. B to Inspect.'+b2TraitHint(u));
   }
 }
 
@@ -553,11 +561,11 @@ function b2Info() {
 function b2Choose(act) {
   const u=B2.actor;
   if(b2Cost(u,act)>u.vp) { sfx.nope(); b2Msg('Not enough VP. '+act.name+' costs '+act.vp+'; '+u.name+' has '+u.vp+'.'); return; }
-  if(b2Shushed(u,act)) { sfx.nope(); b2Msg(u.st.silenced&&u.kit.skills.includes(act)?u.name+' is Silenced: no skills for now. Only the free basic move works under ▲ Skills; ▶ '+(u.kit.special?u.kit.special.name:'the special')+' and ▼ Bag still work.':u.name+' is Shushed and cannot use Chatter moves right now.'); return; }
+  if(b2Shushed(u,act)) { sfx.nope(); b2Msg(u.st.silenced&&u.kit.skills.includes(act)?u.name+' is Silenced: no skills for now. Only the free basic move works under Attack; the special under Heal and the Bag still work.':u.name+' is Shushed and cannot use Chatter moves right now.'); return; }
   const opts=b2TargetOptions(act,u);
   if(!opts.length) { sfx.nope(); b2Msg('Nobody to use that on.'); return; }
   sfx.select();
-  if(act===u.kit.basic||u.kit.skills.includes(act)) B2.lastSkill[u.id]=act;
+  if(act===u.kit.basic||act===u.kit.special||u.kit.skills.includes(act)) B2.lastSkill[u.id]=act;
   if(opts.length===1) { b2Do(act,opts[0]); return; }
   B2.pending=act; B2.opts=opts; B2.prevUi=B2.ui; B2.prevSel=B2.sel;
   let s=0; if(!opts[0].ally&&B2.lastTarget) { const k=opts.findIndex(o=>o.targets.includes(B2.lastTarget)); if(k>=0) s=k; }
@@ -565,8 +573,8 @@ function b2Choose(act) {
 }
 function b2Cross(d) {
   const u=B2.actor;
-  if(d==='up') { sfx.select(); b2Open('skills'); }
-  else if(d==='right') { if(!u.kit.special) { sfx.nope(); return; } b2Choose(u.kit.special); }
+  if(d==='up') { sfx.select(); B2.tab='attack'; b2Open('skills'); }
+  else if(d==='right') { if(!b2TabRows(u,'heal').length) { sfx.nope(); return; } sfx.select(); B2.tab='heal'; b2Open('skills'); }
   else if(d==='left') { sfx.select(); b2Open('tombo'); }
   else if(d==='down') { sfx.select(); b2Open('bag'); }
 }

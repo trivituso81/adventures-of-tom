@@ -615,7 +615,7 @@ b2End=function(result) {
 };
 
 // Story fights with tips (TUTORIALS in data/scenes.js). A tip: {id, who (member id, a list, or '*'), when(unit) optional, dir ('up',
-// 'right','down','left': the command it points at; ▲ Skills, ▶ signature, ◀ Tombo, ▼ Bag), care (1: light the Bag's
+// 'right','down','left': the command it points at; ▲ Attack, ▶ Heal, ◀ Tombo, ▼ Bag), care (1: light the Bag's
 // COMPLIMENT-style row), text}. One tip per turn, each once;
 // it shows in the message line with the same gold glow Rose Mode uses. A tutorial's setup() runs when the fight starts.
 const LE_b2Start_story=b2Start;
@@ -643,6 +643,7 @@ b7AfterRender=function() {
   if(B2.ui==='cross') { b2Msg('★ '+tip.text); if(tip.dir) glow('.b2-x[data-d="'+tip.dir+'"]'); }
   else if(B2.ui==='bag'&&tip.dir==='down'&&tip.care!=null) { const k=b2BagList(B2.actor).findIndex(r=>r.praise); if(k>=0) glow('.b2-btn[data-i="'+k+'"]'); }
   else if(B2.ui==='tombo'&&tip.dir==='left') glow('.b2-btn[data-i="0"]');
+  else if(B2.ui==='skills'&&B2.tab==='heal'&&tip.dir==='right') { const k=tip.keys?b2SkillRows(B2.actor).findIndex(s=>tip.keys.includes(s.key)):0; glow('.b2-btn[data-i="'+Math.max(0,k)+'"]'); }
 };
 
 // Debug handle for tests.

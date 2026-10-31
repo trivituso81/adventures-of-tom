@@ -269,7 +269,7 @@ Object.assign(MONSTERS,{
     again:['Bzzz. I\'m back in frame.','Round {n}. I can hear you breathing.'],
     drop:{id:'windsock',chance:1,once:true,msg:'The moth left its fuzzy windscreen behind. It went in a pocket.'},
     vapor:['#d9d4c8','#8a8478','#9aa3a8','#ffffff'],
-    hint:'Swoops in and Silences people (only the free basic move under ▲ Skills works for a while).'},
+    hint:'Swoops in and Silences people (only the free basic move under ▲ Attack works for a while).'},
   clapper:{id:'clapper',la:true,coins:12,coinStep:3,name:'Clapper Snapper',the:'the Clapper Snapper',short:'Clapper',sprite:CLAPPER_SPRITE,pal:CLAPPER_PAL,scale:3,eyes:[[16,8],[28,8]],mouth:[22,13],
     hp:22,hpStep:4,atk:2,xp:12,xpStep:3,level:5,rank:'TRICKY',
     intro:'A Clapper Snapper claps itself into the scene! It\'s already moving.',

@@ -206,13 +206,20 @@ function b7Recommend(u) {
 }
 function b7RecFor(u) {
   if(!b7Diff().recommend||!u||u.side!=='party') return null;
-  // b7Recommend speaks the old layout (up basic, right skill i, down signature); map it onto the new cross:
-  // ▲ Skills (basic is row 0, skill i is row i+1), ▶ the signature.
-  if(!B7.rec||B7.rec.u!==u||B7.rec.round!==B2.round) { const r=b7Recommend(u);
-    B7.rec={u,round:B2.round,r:!r?r:r.dir==='down'?{...r,dir:'right',i:0}:r.dir==='right'?{...r,dir:'up',i:r.i+1}:r.dir==='up'?{...r,i:0}:r}; }
+  // b7Recommend speaks the old layout (up basic, right skill i, down signature); map it onto the cross: find the move itself,
+  // then point at ▲ Attack or ▶ Heal (whichever list holds it) and its row in that list.
+  if(!B7.rec||B7.rec.u!==u||B7.rec.round!==B2.round) { const r=b7Recommend(u); B7.rec={u,round:B2.round,r:b7RecMap(u,r)}; }
   return B7.rec.r;
 }
-function b7RecSkill(u,def) { const r=b7RecFor(u); return r&&r.dir==='up'?r.i:def; }
+function b7RecMap(u,r) {
+  if(!r||r.dir==='left') return r;
+  const k=u.kit,act=r.dir==='down'?k.special:r.dir==='right'?k.skills[r.i]:k.basic;
+  if(!act) return r;
+  const tab=b2IsHeal(u,act)?'heal':'attack';
+  return {...r,dir:tab==='heal'?'right':'up',i:Math.max(0,b2TabRows(u,tab).indexOf(act))};
+}
+const b7TabDir=()=>B2.tab==='heal'?'right':'up';
+function b7RecSkill(u,def) { const r=b7RecFor(u); return r&&r.dir===b7TabDir()?r.i:def; }
 function b7AfterRender() {
   b7SyncTools();
   const box=$('b2-cmd'); if(!box) return;
@@ -225,7 +232,7 @@ function b7AfterRender() {
     const boss=b2LiveFoes().find(f=>f.intent||f.st.staggered);
     if(!boss||/lock|shield|pie/.test(r.why)) b2Msg('★ Try '+r.name+'. '+r.why);
     else { const el=$('b2-msg'); if(el&&el.textContent.indexOf('★')<0) el.textContent+=' ★ Try '+r.name+'.'; }
-  } else if((B2.ui==='skills'&&r.dir==='up')||(B2.ui==='tombo'&&r.dir==='left')) {
+  } else if((B2.ui==='skills'&&r.dir===b7TabDir())||(B2.ui==='tombo'&&r.dir==='left')) {
     const b=box.querySelector('.b2-btn[data-i="'+r.i+'"]'); if(b) b.classList.add('rec');
   }
 }
