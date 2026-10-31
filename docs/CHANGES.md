@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 3): Downtown LA v4 painting installed (Cab Co. north, Nickel's south)
+
+- Tom sent a new Downtown LA painting (`docs/reference/blvd_v4_from_tom.png`, art `?v=20261031d`): the same street, with Angel City Cab Co. now on the north row (door 22,9) and Nickel's on the south row (door 25,21). Walk map, exits, walkways and cutouts are unchanged; only the two buildings swapped places in `data/maps-la.js` (`nickels` x23,y17; `lacab` x20,y5).
+- Nickel's shop sign object moved to the south front (24,21), touched from (24,22). The north gold awning cutout in `PLATE_BEHIND.blvd` now matches the Cab Co. awning. Cutout layer rebuilt (`tools/make_blvd_fg.py`).
+- Cab arrivals (flights, `arriveAt` the cab) now land at the north door (22,9). `tools/blvd_test.py` updated; reach 0 fails; blvd_test and smoke pass. Not played on phone.
+
 ## 2026-10-31 (morning, 40): Battle Lab EXIT button at the top of the battle (`labx1`)
 
 - Tom (10:34): in Battle Lab fights only, an exit button at the top of the screen returns to boss select. EXIT now sits left of 1x and AUTO on the battle picture (portrait and landscape). One tap ends the fight right away, even mid-animation (clears the step queue, stops speech) and opens the lab list, same path as Exit Lab in the bag. Story fights never show it.

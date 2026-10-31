@@ -53,7 +53,7 @@ with sync_playwright() as pw:
     pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,17,10,'up'); shot(pg,'landscape')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
     # every door: walk up from the pad, land in the right building, walk back out
-    pads={'coffee':(5,10),'ramen':(10,10),'cinema':(17,10),'nickels':(22,10),'wardrobe':(4,22),'lofts':(11,22),'tower':(18,22),'lacab':(25,22)}
+    pads={'coffee':(5,10),'ramen':(10,10),'cinema':(17,10),'nickels':(25,22),'wardrobe':(4,22),'lofts':(11,22),'tower':(18,22),'lacab':(22,10)}
     for hid,(px,py) in pads.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
         stand(pg,px,py,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(700); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(1600); skip_intro(pg)
@@ -78,7 +78,7 @@ with sync_playwright() as pw:
     print('after studio exit:',pg.evaluate("()=>[currentMap.id,player.x,player.y,worlds.blvd.solid[player.y*worlds.blvd.w+player.x]]"))
     check('studio brings Tom back to the east road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=24&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     # A on a prop opens its text
-    for nm,(x,y,d) in {'Taco truck':(12,10,'down'),'Metro stairs':(25,24,'down'),'Cab 8':(26,22,'right'),'Bus bench':(12,12,'down'),'Shop sign':(23,10,'up')}.items():
+    for nm,(x,y,d) in {'Taco truck':(12,10,'down'),'Metro stairs':(25,24,'down'),'Cab 8':(26,22,'right'),'Bus bench':(12,12,'down'),'Shop sign':(24,22,'up')}.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(700); skip_intro(pg)
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
         got=pg.evaluate("()=>dialog.active||(typeof choice!=='undefined'&&!!choice&&choice.active)||!!document.querySelector('#toast:not([hidden])')")

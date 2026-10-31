@@ -34,7 +34,7 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
   const arrivals=[[24,22],[14,10],[15,10],[28,11],[28,12],[1,5],[2,5],[20,22],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 
-SPOTS={'lane':(13,12,'right'),'shelter':(14,13,'up'),'metro':(25,24,'down'),'edge':(28,12,'right'),'props':(24,13,'up'),'leftedge':(1,13,'up')}
+SPOTS={'cabN':(22,10,'up'),'nickS':(25,22,'up')}
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
