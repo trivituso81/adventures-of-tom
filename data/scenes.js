@@ -1850,9 +1850,15 @@ SCENES.ch6Nara=[
   {flag:'ch6-nara'},
   {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.2); }},
   {walk:'Olivia',to:routeBeside('Olivia'),speed:.2},
-  {talk:'Olivia',lines:['Tom! Oh, thank goodness. Can you take her? Please? She hasn\'t slept since Sunday.']},
-  {walk:'Nara',to:routeBeside('Nara'),speed:.1},
-  {talk:'Nara',lines:['Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.','Then she spins around and growls at the jacaranda.']},
+  // Tom may have met Nara first (she waits on the porch and joins when asked). Then Olivia only fills him in.
+  {if:()=>inParty(nara),
+    then:[
+      {talk:'Olivia',lines:['Tom! Oh, thank goodness. You already have her. She hasn\'t slept since Sunday.']},
+      {talk:'Nara',lines:['Nara leans on Tom with all forty pounds.','Then she spins around and growls at the jacaranda.']}],
+    else:[
+      {talk:'Olivia',lines:['Tom! Oh, thank goodness. Can you take her? Please? She hasn\'t slept since Sunday.']},
+      {walk:'nara',to:routeBeside('nara'),speed:.1},
+      {talk:'Nara',lines:['Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.','Then she spins around and growls at the jacaranda.']}]},
   {hearts:'tom'},
   {talk:'Olivia',lines:['That. All night. And it\'s not just us. Lachlan’s toy truck is gone. Mr. Washington’s reading glasses. Marisol says every tennis ball on the block.']},
   {talk:'Michael',lines:['I found my car keys in the gutter. With three peanuts. Arranged in a triangle.']},
@@ -2095,7 +2101,7 @@ SCENES.ch6End=[
 TRIGGERS.push(
   {id:'ch6-arrive',map:'blvd',when:{...CH6,notFlag:'ch6-goal'},scene:'ch6Arrive'},
   {id:'ch6-kitchen',map:'tomhouse',when:{...CH6,flag:'ch6-goal',notFlag:'ch6-tnb'},scene:'ch6Kitchen'},
-  {id:'ch6-nara',map:'jpark',when:{...CH6,flag:'ch6-tnb',notFlag:'ch6-nara',test:()=>!inParty(nara)},scene:'ch6Nara'},
+  {id:'ch6-nara',map:'jpark',when:{...CH6,flag:'ch6-tnb',notFlag:'ch6-nara'},scene:'ch6Nara'},
   {id:'ch6-park',map:'oakpark',when:{...CH6,flag:'ch6-nara',notFlag:'ch6-park',test:()=>inParty(nara)},scene:'ch6Park'},
   {id:'ch6-play',map:'oakpark',at:[1,4,10,10],when:{...CH6,flag:'ch6-park',notFlag:'ch6-play'},scene:'ch6Gallery'},
   {id:'ch6-garden',map:'oakpark',at:[15,4,24,10],when:{...CH6,flag:'ch6-park',notFlag:'ch6-garden'},scene:'ch6Spy'},

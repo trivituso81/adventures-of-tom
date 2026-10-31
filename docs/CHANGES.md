@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 17): Chapter 6 story no longer stalls when Nara is recruited first
+
+- Tom (23:53): if you recruit Nara in chapter 6 before talking to Olivia and Michael, the next story event never starts. Cause: the `ch6-nara` trigger (data/scenes.js `TRIGGERS`) only ran when Nara was NOT in the party (`test:()=>!inParty(nara)`). Nara waits on Tom's porch and joins when asked, so recruiting her first meant the scene never ran, `ch6-nara` was never set, and the Old Oak Park briefing (`ch6-park`) never unlocked.
+- Fix: the trigger now runs either way. `SCENES.ch6Nara` branches with `{if:()=>inParty(nara)}`: if Nara is already with Tom, Olivia says "You already have her" and Nara leans on him; otherwise the original hand-over with the three laps. Everything after (Michael, TNB, the squirrel clues, Tug of War unlock, goal toast) is shared. Her walk uses the lowercase actor id so it finds her whether she is an NPC or a follower.
+- Two new spoken lines (Olivia "You already have her", Nara's lean) have no baked clips yet and fall back to speech synthesis until re-baked.
+- Tests: headless A/B with Nara recruited first. Original code: `ch6-nara` and `ch6-park` stay unset. Fixed: `ch6-nara` and `tombo:nara2` set, `ch6-park` set after walking into Old Oak Park. Normal order (Olivia first) still works. Smoke 0 fails, no page errors. Tags `scenes.js?v=nf1`, `main.js?v=nf1`, title stamp `build nf1`. Live URL not checked.
+
 ## 2026-10-31 (night, 16): House interiors zoomed out a little in portrait
 
 - Tom (23:48): the house interiors feel a bit too zoomed in; can it be fixed without adding dead space. Cause: a square room painting was scaled so its full height filled the whole phone screen, which crops it to the middle 46% of its width. Now in portrait the painting ends where the control strip begins (`ROOM_STRIP` = 116 px, engine/overworld.js `resize()`), which shows about 53% of the width (393 x 852: scale 1.66 to 1.44). The strip under it gets the existing soft backdrop, so it reads as a shadow behind the controls. The camera has no vertical scroll in portrait now (`updateCamera`, top flush).
