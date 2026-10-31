@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 14): Justin's voice is in the game (`justinv1`)
+
+- Tom (14:25) sent `local-clips-export_4.json` (139 clips). 68 were already in the repo (the clips1 and amyv1 takes, re-encoded, so skipped). The 71 new ones are all Justin, made in the Voice Library at 14:24 with the thick New York accent scripts: 48 battle lines into the new `data/voice/justin.js` (every kit beat, join, greet, hurt, low, ko, win; `basic` and `loose_wire` each keep their clip) and his 23 dialogue lines into `data/voice/dialog-ch28.js` (silence trimmed, mono 32 kHz 48 kbps; loaded last, so these accented takes win over the old chapter 1 ones). Voice settings for `battle|justin` (AoT Justin, direction thick New York accent, scripts) are in `data/voice-clips.js`.
+- `index.html` loads `data/voice/justin.js` after tnb.js; `tools/battle-baker/merge.js` and `tools/bake-page/make-list.js` know him as a battle voice. Bake list down to 8 (the recruit talk, OUCH, the two taps, kid Amy). Voice Library rebuilt: 70 of his 71 lines show a built-in clip.
+- Tags `?v=justinv1` on voice-clips.js, voice/justin.js, dialog-ch28.js (dialog-cast files), main.js; stamp `build justinv1`.
 ## 2026-10-31 (day, 14): Justin's starting stance is Tom's new painting (`jstance1`)
 
 - Tom (14:18) sent one painting of Justin in his fighting stance (fists up, tool belt, big grin) and asked for it to be his battle starting stance with the head enlarged to match the other frames. It is now his idle in battle. His second idle frame is the same painting 2% shorter, so he still breathes.

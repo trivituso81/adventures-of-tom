@@ -7,7 +7,7 @@ const fs=require('fs'),cp=require('child_process');
 const [IN,DATA,OUT]=process.argv.slice(2);
 const strip=s=>s.replace(/^\s*['"]use strict['"];/,'');
 const J=JSON.parse(fs.readFileSync(IN,'utf8'));
-const FAM=['tom','grace','rose','amy','deedee','boppy','tnb'];
+const FAM=['tom','grace','rose','amy','deedee','boppy','tnb','justin'];
 fs.mkdirSync(OUT+'/data/voice',{recursive:true});
 eval(strip(fs.readFileSync(DATA+'/voice-clips.js','utf8'))+';global.VC=VOICE_CLIPS;');
 for(const ch of FAM) eval(strip(fs.readFileSync(DATA+'/voice/'+ch+'.js','utf8')).replace('VOICE_CLIPS.','VC.'));

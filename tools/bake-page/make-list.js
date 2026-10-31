@@ -6,7 +6,7 @@ const fs=require('fs'),vm=require('vm');
 const ctx={console};vm.createContext(ctx);
 const run=f=>vm.runInContext(fs.readFileSync(f,'utf8').replace(/^'use strict';/,'')+'\n',ctx,{filename:f});
 run('data/voice-clips.js');
-for(const c of ['tom','grace','rose','amy','deedee','boppy','tnb']) run('data/voice/'+c+'.js');
+for(const c of ['tom','grace','rose','amy','deedee','boppy','tnb','justin']) run('data/voice/'+c+'.js');
 vm.runInContext('var DIALOG_CLIPS={clips:{},voices:{},scripts:{}};',ctx);
 for(const f of fs.readdirSync('data/voice').filter(f=>/^dialog-ch/.test(f)).sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))) run('data/voice/'+f);
 const BV=vm.runInContext('VOICE_CLIPS',ctx).voices, DV=vm.runInContext('DIALOG_CLIPS',ctx).voices;
