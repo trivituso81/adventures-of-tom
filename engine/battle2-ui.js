@@ -395,6 +395,34 @@ function b2Roles(a) {
   return out;
 }
 function b2RoleChip(a) { return b2Roles(a).map(k=>'<span class="b2-role" style="background:'+B2_ROLES[k].color+'">'+B2_ROLES[k].tag+'</span>').join(''); }
+// ---------- Icon system for the skill lists (no text) ----------
+// Type icons (damage, heal, buff, debuff) are dark glyphs on a colored tile and sit right after the move name.
+// Element icons (kinetic, cozy, splash, sparkle, chatter, amber) are colored glyphs on a dark tile in one row under the name.
+// Each glyph is a 9x9 pixel grid: # = solid, + = highlight, . = empty. The words still show in the message line when a move is highlighted.
+const B2_ICON_GRID={
+  dmg:['....#....','...###...','...###...','...###...','...###...','...###...','#########','....#....','....#....'],
+  heal:['...###...','...###...','...###...','#########','#########','#########','...###...','...###...','...###...'],
+  buff:['....#....','...###...','..#####..','.#######.','#########','...###...','...###...','...###...','...###...'],
+  debuff:['...###...','...###...','...###...','...###...','#########','.#######.','..#####..','...###...','....#....'],
+  kinetic:['.........','....####.','##.######','...######','##.######','...######','##.######','....####.','.........'],
+  cozy:['.#..#....','..#..#...','.#..#....','######...','######.##','######..#','######.##','.#####...','.........'],
+  splash:['....#....','....#....','...###...','...###...','..#####..','.+######.','.+######.','.#######.','..#####..'],
+  sparkle:['....#....','....#....','...###...','..#####..','#########','..#####..','...###...','....#....','....#....'],
+  chatter:['.........','.#######.','#########','##.#.#.##','#########','.#######.','..##.....','..#......','.........'],
+  amber:['.........','..#####..','.++#####.','#+#######','#########','#########','.#######.','..#####..','.........']
+};
+const B2_ICON_NAME={dmg:'Attack',heal:'Heal',buff:'Buff',debuff:'Debuff',kinetic:'Kinetic',cozy:'Cozy',splash:'Splash',sparkle:'Sparkle',chatter:'Chatter',amber:'Amber'};
+const B2_ICON_CACHE={};
+function b2IconSvg(k) {
+  if(B2_ICON_CACHE[k]) return B2_ICON_CACHE[k];
+  const g=B2_ICON_GRID[k]; if(!g) return '';
+  let main='',hi='';
+  g.forEach((row,y)=>{ for(let x=0;x<row.length;x++) { const c=row[x],cell='M'+x+' '+y+'h1v1h-1z'; if(c==='#'||c==='+') main+=cell; if(c==='+') hi+=cell; } });
+  return B2_ICON_CACHE[k]='<svg viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="'+main+'"/>'+(hi?'<path fill="#fff" fill-opacity=".6" d="'+hi+'"/>':'')+'</svg>';
+}
+// The type icons are grouped so a long name wraps them together instead of stranding one on its own line.
+function b2RoleIcons(a) { const r=b2Roles(a); return r.length?'<i class="b2-ics">'+r.map(k=>'<i class="b2-ic r" role="img" aria-label="'+B2_ICON_NAME[k]+'" style="background:'+B2_ROLES[k].color+'">'+b2IconSvg(k)+'</i>').join('')+'</i>':''; }
+function b2ElemIcons(els) { return (els||[]).map(e=>'<i class="b2-ic e" role="img" aria-label="'+B2_ICON_NAME[e]+'" style="color:'+B2_ELEMS[e].color+'">'+b2IconSvg(e)+'</i>').join(''); }
 function b2RoleWords(a) { const r=b2Roles(a).map(k=>B2_ROLES[k].name); return r.length?r.join(' + '):'SPECIAL'; }
 function b2ElemNote(a) {
   const e=(a&&a.elem)||[]; if(!e.length) return '';
@@ -483,7 +511,7 @@ function b2RenderCmd() {
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>BACK</span><em>B / Esc</em></button>';
   if(B2.ui==='skills') {
     box.innerHTML='<div class="b2-grid">'+b2SkillRows(u).map((s,i)=>{ const c=b2Cost(u,s);
-      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span>'+b2Esc(s.name.toUpperCase())+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div><em>'+b2RoleChip(s)+b2ElemChip(s.elem)+'</em></button>'; }).join('')+back+'</div>';
+      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(s.name.toUpperCase())+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join('')+back+'</div>';
   } else if(B2.ui==='bag') {
     const rows=b2BagList(u);
     box.innerHTML='<div class="b2-grid">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.name)+'</span><em>'+(r.role?'<span class="b2-role" style="background:'+B2_ROLES[r.role].color+'">'+B2_ROLES[r.role].tag+'</span>':'')+b2Esc(r.sub)+'</em></button>').join('')+back+'</div>';
@@ -491,7 +519,7 @@ function b2RenderCmd() {
     // Only Tombos the HEART meter can pay for; each shows the face of who the actor teams up with.
     const rows=b2TomboRows(u);
     const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
-    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span>'+b2Esc(r.T.name.toUpperCase())+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART · '+b2RoleChip(r.T)+b2ElemChip(r.T.elem)+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
+    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span class="b2-sn">'+b2Esc(r.T.name.toUpperCase())+b2RoleIcons(r.T)+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART'+((r.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(r.T.elem)+'</span>':'')+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
   } else if(B2.ui==='inspect') {
     box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='target') {
