@@ -1177,7 +1177,7 @@ SC.tp2_mugrest=(s,u)=>{ gfx.globalAlpha=fade(u,.85); mug(s.x,s.y,0,MS); if(s.t>.
 T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.max(F.x+F.w*.5+130,Math.min(me.x-40,F.x+200));
   const P={show:900,throw:1950},hit=2500;
   const pp=mugPainted();
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:800,x:wx,f:pp?'mugPull':'act'},{t:1650,f:pp?'mugWind':'wind',dx:u=>ez(u)*8},{t:1950,f:pp?'mugRel':'throw',dx:-6},{t:2400,f:'aim'},{t:3300,f:'celeb',hop:6},{t:3600,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:800,x:'home',y:'home',f:pp?'mugPull':'act'},{t:1650,f:pp?'mugWind':'wind',dx:u=>ez(u)*8},{t:1950,f:pp?'mugRel':'throw',dx:-6},{t:2400,f:'aim'},{t:3300,f:'celeb',hop:6},{t:3600,x:'home',y:'home',f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // throws from his place in the line, no step forward (Oct 31)
   const lx=F.x+F.w*.5+34,ly=F.base-38;
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls a slightly crooked mug out of his tote.'); say(m.id,'mug_toss'); scene('tp2_mugheld',2.0,{P}); }],

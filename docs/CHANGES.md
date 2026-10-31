@@ -1,3 +1,8 @@
+## 2026-10-31 (night, 19): Mug Toss thrown from the party line
+
+- Tom (00:25): TNB does not need to step forward for Mug Toss. `T.mug_toss` (last definition, engine/tnb-moves.js) keeps him at `home` for the whole move; the mug still flies to the enemy and lands upright.
+- Tests: kit_test mug_toss frames looked at (throw from the line, clunk, mug rests); smoke tnb 0 fails. Tag `tnb-moves.js?v=mug1`.
+
 ## 2026-10-31 (night, 19): demo audio purge
 
 - Tom asked for voice clips used only by the demo to be found, then the dead ones removed. `demo/data/voice-clips.js` is the demo's own frozen copy: 225 clips. 168 have the same text in the main game; 57 exist only in the demo. 28 of those 57 are still played by the demo (its `lines.js`, `engine/world.js`, `engine/la.js`) and were kept.
