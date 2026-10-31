@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 30): Nara's special renamed to PUOPY DOG EYES
+
+- Tom (01:24) asked to rename Nara's human eyes to "Puopy Dog Eyes". Spelling used exactly as typed (PUOPY). The move key `puppy_eyes` is unchanged, so saves and tests are unaffected.
+- Renamed everywhere the move is named: the command pad and skill data (`data/abilities.js`, `data/battle2-data.js`), the close-up title card (`engine/nara.js`), tutorial and hint text (`data/scenes.js`), the Julian Vance fight menu and messages (`data/ch20-battle.js`), and `docs/CANON.md`, `docs/MOVE_KEYS.md`. Prose that says her eyes look human (not the move name) is left alone.
+- No spoken line mentions the move, so no re-bake is needed.
+- Tests: `kit_test.py nara --only=puppy_eyes` 0 fails, title card checked; command pad checked in portrait and landscape (name wraps to two lines, fits). Tags `?v=eyes1` on the five changed scripts plus ch20-battle.js (it had no tag), title stamp `build eyes1`.
+
 ## 2026-10-31 (night, 29): TNB's Throw Down wheel shrunk to fit him (`tnbw1`)
 
 - Tom: the wheel in Throw Down did not fit TNB, make it smaller and check the proportions. The painted pottery wheel was drawn at 1.5x and stood as tall as TNB. It is now 0.9x (`TW_S` in engine/tnb-moves.js), so the wheel head sits about at his chest while he kneels. The clay, the bowl and the water spray scale with it.

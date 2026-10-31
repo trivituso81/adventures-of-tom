@@ -536,7 +536,7 @@ const B2_SKILLS={
   nara:{
     basic:{key:'basic',name:'Jump Up',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',fx:[['coins',5,15]],
       desc:'Muddy paws. Free, +1 VP, and she steals a few coins.'},
-    special:{key:'puppy',name:'HUMAN EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',fx:[['smit',1,'t']],
+    special:{key:'puppy',name:'PUOPY DOG EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',fx:[['smit',1,'t']],
       desc:'The head tilt. The enemy is Smitten and skips its next turn (bosses: 45%).'},
     skills:[
       {key:'fetch',name:'Fetch',vp:2,elem:['kinetic'],stat:'pow',mult:1.6,target:'enemy',weight:'standard',critAfterTom:true,
@@ -554,13 +554,13 @@ const B2_SKILLS={
       {key:'howl',name:'Lonely Howl',vp:4,elem:['chatter'],target:'all',weight:'standard',fx:[['st','cooldown',3,'t',.3],['ct',-2,'tom']],
         desc:'A pack howl. Enemy COOL -30%, and Tom (or TNB) jumps to the front of the ribbon.'}
     ],
-    // Option 3 Primary kit (phase 4). Cards: adventures-of-tom-ability-revamp.md (Nara). HUMAN EYES (sig:true, renamed from PUPPY EYES) keeps its
+    // Option 3 Primary kit (phase 4). Cards: adventures-of-tom-ability-revamp.md (Nara). PUOPY DOG EYES (sig:true, renamed from PUPPY EYES) keeps its
     // legacy resolver (smit). Signature key: the doc names it puppy_eyes (legacy key puppy), so RECRUIT_MOVES.nara.puppy_eyes
     // and LINES.nara.puppy_eyes exist (same words as puppy, so its baked clips play). Nara never speaks words.
     o3:[
       {key:'jump_up',name:'Jump Up',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'quick',o3:true,fx:[['coins',5,15]],
         desc:'Both front paws, right on it. Her worst habit. Free, +1 VP, and she shakes loose a few coins.'},
-      {key:'puppy_eyes',sig:true,name:'HUMAN EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',o3:true,fx:[['smit',1,'t']],
+      {key:'puppy_eyes',sig:true,name:'PUOPY DOG EYES',vp:2,elem:['sparkle'],target:'enemy',weight:'standard',kind:'signature',o3:true,fx:[['smit',1,'t']],
         desc:'Her eyes look eerily human. A regular enemy is Smitten and skips its next turn (bosses: 45%).'},
       {key:'tennis_ball_fetch',name:'Tennis Ball Fetch',vp:2,elem:['kinetic'],stat:'pow',mult:1.5,target:'enemy',weight:'quick',critAfterTom:true,o3:true,
         desc:'She rockets after the ball, straight through one enemy. Always crits if Tom acted right before Nara.'},

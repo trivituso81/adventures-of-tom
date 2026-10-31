@@ -629,7 +629,7 @@ const TUTORIALS={
     setup() { B2.heart=Math.max(B2.heart,30); b2Render(); },
     tips:[
       {id:'wardrobe',who:'tnb',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.8),text:'TNB’s WARDROBE (▶) heals one person a lot, dresses them in the next costume on his rack, and gets them back up if they\'re knocked out.'},
-      {id:'puppy',who:'nara',dir:'right',text:'Nara’s HUMAN EYES (▶): the monster is Smitten and skips its next turn. Its Warmth bar fills too.'},
+      {id:'puppy',who:'nara',dir:'right',text:'Nara’s PUOPY DOG EYES (▶): the monster is Smitten and skips its next turn. Its Warmth bar fills too.'},
       {id:'tombo',who:['tom','tnb'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='tnb1'&&!r.why),text:'◀ TOMBO: Popcorn Jump. Tom and TNB rain popcorn on every enemy at once, and the whole party glows.'},
       {id:'fetch',who:['tom','nara'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='nara1'&&!r.why),text:'◀ TOMBO: Sit. Paw. Treat. Always a critical hit, and Nara marks the monster with her scent.'}]},
   ch2flurry:{tips:[
@@ -648,7 +648,7 @@ const TUTORIALS={
       {id:'wardrobe2',who:'tnb',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.6),text:'Someone is hurting. WARDROBE heals half and adds a costume.'}]},
   bigshake:{tips:[
     {id:'after',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'&&!f.shield),text:'An Aftershock is coming (!! on the turn ribbon). It hits everyone. Save WARDROBE and HEART for right after.'},
-    {id:'clog',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'The pipes are clogged! 2 Splash or Sparkle hits break the clog before the Big Rumble. HUMAN EYES is Sparkle. Any Tombo breaks it at once.'},
+    {id:'clog',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'The pipes are clogged! 2 Splash or Sparkle hits break the clog before the Big Rumble. PUOPY DOG EYES is Sparkle. Any Tombo breaks it at once.'},
     {id:'tombo',who:'tom',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ◀ TOMBO: Popcorn Jump hits everything; Sit. Paw. Treat. is a sure critical hit.'}]}
 };
 
@@ -2259,7 +2259,7 @@ TUTORIALS.ch6spy={tips:[
   {id:'spotted',who:'*',when:()=>b2LiveParty().some(p=>p.st.spotted),text:'Spotted: that person takes 35% more damage for a while. Tom can DEFEND them (▶).'}]};
 TUTORIALS.ch6stuffer={tips:[
   {id:'vp',who:'*',text:'The Cheek Stuffer is tough and steals VP. Splash and Chatter work; it shrugs off Kinetic. Tom’s Starter Splash is Splash.'},
-  {id:'kind',who:'nara',dir:'up',text:'Squirrel crews love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
+  {id:'kind',who:'nara',dir:'up',text:'Squirrel crews love Nara’s Puopy Dog Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
 TUTORIALS.chairman={tips:[
   {id:'cache',who:'nara',when:()=>B2.foes.some(f=>f.D.inert&&b2Alive(f)),text:'An Acorn Cache! Nara digs it up for DOUBLE damage. Break it before the Chairman eats it and heals.'},
   {id:'cache2',who:'*',when:()=>B2.foes.some(f=>f.D.inert&&b2Alive(f)),text:'DIG UP is coming: break the Acorn Cache (back row) before the Chairman’s next turn, or it eats it and heals.'},
@@ -3007,7 +3007,7 @@ TUTORIALS.ch8draft={tips:[
   {id:'dodge',who:'*',text:'The Draft dodges a lot of single hits. Hits on everyone never miss, like Popcorn Jump. It\'s weak to Cozy and Sparkle.'}]};
 TUTORIALS.ch8picky={tips:[
   {id:'vp',who:'*',text:'The Picky Eater is tough and steals VP. Chatter and Splash work; it shrugs off Kinetic. Tom’s Starter Splash is Splash.'},
-  {id:'kind',who:'nara',dir:'up',text:'Car Barn things love Nara’s Human Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
+  {id:'kind',who:'nara',dir:'up',text:'Car Barn things love Nara’s Puopy Dog Eyes and TNB’s moves. A full Warmth bar sends it home happy.'}]};
 TUTORIALS.ironbelly={tips:[
   {id:'heat',who:'*',text:'Old Ironbelly heats up every turn: WARM, HOT, HOTTER, BROIL. At BROIL she hits everyone. Splash cools her one step; Cozy stokes her up.'},
   {id:'broil',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='broil'),text:'BROIL is coming! One Splash hit calls it off: Tom’s Starter Splash or Nara’s Happy Puddle.'},
