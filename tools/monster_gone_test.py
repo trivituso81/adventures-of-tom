@@ -55,7 +55,12 @@ with sync_playwright() as pw:
         print('after re-entry',st)
         check(st['back'],'monster is back after re-entering'); check(st['fallen']==0,'fallen list cleared')
     # 4) instant-win path
-    pg.evaluate("""()=>{ const n=currentMap.npcs.find(x=>x.monster&&!x.scripted&&!b7IsBoss(x)); window.__m=n; b7InstantWin(n); }""")
+    pg.evaluate("""()=>{ const n=currentMap.npcs.find(x=>x.monster&&!x.scripted&&!b7IsBoss(x)); window.__m=n; B7.mapFx.length=0;
+      const d=monsterDef(n),lvl=(d.level||1)+(n.tier||0),F=B2_FORMATIONS[n.monster],foes=((typeof F==='function'?F():F)||[[n.monster,'front']]).map(f=>({id:f[0],lvl,boss:false}));
+      window.__full=b6BattleXp(foes,n); b7InstantWin(n); }""")
+    popTxt=pg.evaluate("()=>B7.mapFx.length?B7.mapFx[0].txt:''"); full=pg.evaluate("()=>window.__full")
+    print('pop xp',popTxt,'full',full)
+    check(popTxt=='+'+str(max(1,round(full*0.5)))+' XP','tap-kill pays half the XP of a real win (full '+str(full)+')')
     pg.wait_for_timeout(2500)
     check(not pg.evaluate("()=>currentMap.npcs.includes(window.__m)"),'instant-win monster also removed')
     real=[e for e in errs if 'AudioContext' not in e]

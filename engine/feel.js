@@ -18,7 +18,7 @@ const B7_DIFF={
 // Every mode multiplies the finished numbers (damage taken, monster HP, monster turn speed), so the gap between modes is
 // the same size in every chapter. (It used to scale monster POW, which the damage formula mostly cancelled out.)
 const B7_HF={mult:1.15,heart:5,open:.5,len:.6};               // the High-Five window, in battle seconds after a move starts
-const B7_MON={radius:2,leash:5,sight:4,chaseStep:.3,wanderStep:.62,over:5};
+const B7_MON={radius:2,leash:5,sight:4,chaseStep:.3,wanderStep:.62,over:5,popXp:.5};   // popXp: a tap-kill (overlevel instant win) pays this share of a real win's XP
 const B7={diff:'grace',speed:1,hf:true,auto:false,last:{},rec:null,hfWin:null,autoTimer:0,card:null,cardTimers:[],mapFx:[],noEngage:0,lastMap:null};
 
 // ---------- Settings ----------
@@ -372,7 +372,7 @@ function b7Engage(n) {
 function b7InstantWin(n) {
   const id=n.monster,d=monsterDef(n),lvl=(d.level||1)+(n.tier||0);
   const F=B2_FORMATIONS[id],foes=((typeof F==='function'?F():F)||[[id,'front']]).map(f=>({id:f[0],lvl,boss:false}));   // a function: crowds of a random size
-  const xp=b6BattleXp(foes,n);
+  const xp=Math.max(1,Math.round(b6BattleXp(foes,n)*B7_MON.popXp));   // reduced: no fight, so less reward
   const coinPerk=party.reduce((a,m)=>a+((b6Perks(m).coins)||0),0);
   const purse=b2Purse(foes,n,coinPerk);
   n.tier++; n.maxHp+=d.hpStep; n.defeatedUntil=performance.now()+25000; n.chasing=false; monsterFall(n);

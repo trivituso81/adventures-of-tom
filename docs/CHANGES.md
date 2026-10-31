@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 25): tap-kills pay half XP; fixed broken script tags in index.html
+
+- Tom asked that XP from defeating a monster by walking into it (the overlevel instant win, Tom 5+ levels above) be reduced. It now pays 50% of what a real fight pays (`popXp:.5` in `B7_MON`, `engine/feel.js`; used in `b7InstantWin`). Coins and drops are unchanged. The pop text and toast show the reduced number.
+- Fix: the previous push left unresolved merge-conflict lines (`<<<<<<<`, `=======`, `>>>>>>>`) in `index.html`, so `battle-draw.js` and `main.js` were each listed twice. Resolved to one tag each. If the live game acted strangely after `gone1`, that was why.
+- Test: `tools/monster_gone_test.py` now checks the pop XP is half of the full-fight XP (24 full, 12 pop). Smoke 0 fails. Build stamp `build pop1`. Not played on phone; the live site was not checked from here.
+- Files: `engine/feel.js?v=pop1`, `engine/battle-draw.js?v=pop1`, `engine/main.js?v=pop1`.
+
 ## 2026-10-31 (night, 23): beaten monsters stay gone until you leave the area
 
 - Tom asked that a defeated map monster never reappears while he stays in the area; it should come back only after he leaves and returns. Before, a beaten monster only napped for 25 seconds (Z's overhead), then woke and chased again.
