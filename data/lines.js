@@ -92,7 +92,7 @@ for(const [k,v] of [
   ['demo_day','Demo day! Wall\'s coming down!'],['demo_day_look','Nobody liked this wall.'],['demo_day_one','ONE!'],['demo_day_two','TWO!'],['demo_day_done','Open floor plan.'],
   ['breaker_flip_which','Which one of you is it.'],['breaker_flip_found','There you are.'],['breaker_flip','Breaker\'s off.'],['breaker_flip_count','Three. Two. One.'],['breaker_flip_on','Breaker\'s... on.'],['breaker_flip_salute','Licensed and insured.'],
   ['giant_sneeze_twitch','Hang on. Hang on.'],['giant_sneeze_build','Ah... ah... ah...'],['giant_sneeze','AH CHOOOOO!'],['giant_sneeze_excuse','Excuse me.'],
-  ['foot_tap_idle','Nobody touch anything.'],['foot_tap_wave','Rosie. No.'],['foot_tap','MY FOOT! WHO TOUCHED MY FOOT?!'],['foot_tap_light','IT WAS SO LIGHT!'],['foot_tap_fine','I\'m fine. I\'m FINE.'],
+  ['foot_tap_idle','Nobody touch anything.'],['foot_tap_wave','Rosie. No.'],['foot_tap_ouch','OUCH!!!!!!'],['foot_tap','MY FOOT! WHO TOUCHED MY FOOT?!'],['foot_tap_light','IT WAS SO LIGHT!'],['foot_tap_fine','I\'m fine. I\'m FINE.'],
   ['drywall_sheet','Everybody behind me.'],['drywall','Drywall\'s up.'],['drywall_screws','Four screws.'],['drywall_tap','Solid.'],['drywall_dry','Let it dry.'],
   ['hurt','Not the jacket!'],['low','Somebody turn the game back on.'],
   ['ko','Tell the basement I loved it.'],['win','And THAT is how you close out a game.']]) { (LINES.justin=LINES.justin||{})[k]=[v]; }

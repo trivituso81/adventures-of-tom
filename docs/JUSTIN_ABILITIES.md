@@ -19,7 +19,7 @@ Tom will drop a zip of Justin's painted animation sheets into a conversation, of
 | Lv 2 | demo_day | Demo Day | 6 | "Demo day! Wall's coming down!" / looks up "Nobody liked this wall." / "ONE!" / "TWO!" / wipe "Open floor plan." |
 | Lv 3 | breaker_flip | Breaker Flip | 7 | "Which one of you is it." / "There you are." / "Breaker's off." / whispered "Three. Two. One." / "Breaker's... on." / salute "Licensed and insured." |
 | Lv 4 | giant_sneeze | Giant Sneeze | 8 | twitch "Hang on. Hang on." / build "Ah... ah... ah..." / "AH CHOOOOO!" / "Excuse me." |
-| Lv 5 | foot_tap | Foot Tap | 10 | "Nobody touch anything." / "Rosie. No." / Rose (Grace if Rose is down) "Tap." / "MY FOOT! WHO TOUCHED MY FOOT?!" / hopping "IT WAS SO LIGHT!" / "I'm fine. I'm FINE." |
+| Lv 5 | foot_tap | Foot Tap | 10 | "Nobody touch anything." / "Rosie. No." / Rose (Grace if Rose is down) "Tap." / spread-arms scream frame, held 1.1 s, the hit lands on it "OUCH!!!!!!" / "MY FOOT! WHO TOUCHED MY FOOT?!" / hopping "IT WAS SO LIGHT!" / "I'm fine. I'm FINE." |
 | Special | drywall | DRYWALL | 0 | "Everybody behind me." / stands it "Drywall's up." / drill "Four screws." / knocks "Solid." / thumbs up "Let it dry." Party damage halved until each friend's next turn. |
 
 Other lines: join "Halftime. I have a minute. Let's go.", greet "Hold this. No, the other end.", hurt "Not the jacket!", low "Somebody turn the game back on.", ko "Tell the basement I loved it.", win "And THAT is how you close out a game."

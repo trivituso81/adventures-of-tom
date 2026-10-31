@@ -200,10 +200,10 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const alive=id=>B2.party.find(p=>p.id===id&&p.hp>0&&!p.dead&&!p.calm);
   const tp=alive('rose')||alive('grace')||B2.party.find(p=>p!==m&&p.hp>0&&!p.dead&&!p.calm)||null,tn=tp?tp.name:'Rose';
   if(tp) { const T=ST.unit(tp),spot={x:me.x-58,y:me.base+2},tfx=battle.fx[tp.idx],go=T.x<spot.x?'runR':'run',bk=T.x<spot.x?'run':'runR';
-    ST.keys(tfx,[{t:0,x:'home',y:'home',f:'idle'},{t:300,x:'home',y:'home',f:'idle'},{t:900,x:spot.x,y:spot.y,f:go,ease:'lin'},{t:1000,x:spot.x,y:spot.y,f:'flip'},{t:1250,x:spot.x,y:spot.y,f:'kneel'},{t:1500,x:spot.x,y:spot.y,f:'flip'},{t:1900,x:spot.x,y:spot.y,f:'flip'},{t:2500,x:'home',y:'home',f:bk,ease:'lin'},{t:2650,x:'home',y:'home',f:'idle'},{t:5600,f:'idle'}]); }
+    ST.keys(tfx,[{t:0,x:'home',y:'home',f:'idle'},{t:300,x:'home',y:'home',f:'idle'},{t:900,x:spot.x,y:spot.y,f:go,ease:'lin'},{t:1000,x:spot.x,y:spot.y,f:'flip'},{t:1250,x:spot.x,y:spot.y,f:'kneel'},{t:1500,x:spot.x,y:spot.y,f:'flip'},{t:1900,x:spot.x,y:spot.y,f:'flip'},{t:2500,x:'home',y:'home',f:bk,ease:'lin'},{t:2650,x:'home',y:'home',f:'idle'},{t:6150,f:'idle'}]); }
   const K=[{t:0,x:'home',y:'home',f:'ft_idle'}];
-  K.push(...seq([['ft_idle',500],['ft_notice',280],['ft_wave',330],['ft_glance',280],['ft_tapped',170],['ft_freeze',270],['ft_screamA',250],['ft_screamB',700],['ft_screamC',700],['ft_hop',160],['ft_clutch',170],['ft_hopB',160],['ft_screamD',450],['ft_pant',250],['ft_point',280],['ft_fine',380]],0,'home','home'));
-  K.push({t:5330,x:'home',y:'home',f:'idle'},{t:5600,f:'idle'});
+  K.push(...seq([['ft_idle',500],['ft_notice',280],['ft_wave',330],['ft_glance',280],['ft_tapped',170],['ft_freeze',270],['ft_screamA',1100],['ft_screamB',500],['ft_screamC',400],['ft_hop',160],['ft_clutch',170],['ft_hopB',160],['ft_screamD',450],['ft_pant',250],['ft_point',280],['ft_fine',380]],0,'home','home'));
+  K.push({t:5880,x:'home',y:'home',f:'idle'},{t:6150,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin is just standing there in the nicest sneakers.'); say(m.id,'foot_tap_idle'); }],
@@ -211,14 +211,14 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     [1300,()=>{ if(tp) say(tp.id,'foot_tap_tap'); }],
     [1200,()=>setMessage(tn+' taps his toe. Lightly.')],
     [1350,()=>sfx.step&&sfx.step()],
-    ['hf',2080],
+    ['hf',1850],
     [1390,()=>{ sfx.bump&&sfx.bump(); scene('jv_ring',.4,{x:me.x-34,y:me.base-6,r:14,c:'#ffffff'}); }],
-    [2000,()=>say(m.id,'foot_tap')],
-    [2080,()=>{ sfx.bonk&&sfx.bonk(); sfx.thud&&sfx.thud(); battle.shake=Math.max(battle.shake||0,.7); jitter(f); landHit(100); scene('jv_text',1.5,{x:me.x-12,y:me.base-me.h-6,txt:'MY FOOT!',c:'#ff7a5a',sc:3}); scene('jv_ring',.7,{x:me.x-20,y:me.base-me.h*.5,r:70,c:'#ffd27a'}); scene('jv_ring',.9,{x:me.x-20,y:me.base-me.h*.5,r:120,c:'#ffffff'}); }],
-    [2500,()=>ST.jolt(f,.5)],
-    [3970,()=>say(m.id,'foot_tap_light')],
-    [4950,()=>say(m.id,'foot_tap_fine')],
-    [5600,'end',res(E2)+'He is fine. He is fine.']]); };
+    [1830,()=>say(m.id,'foot_tap_ouch')],
+    [1850,()=>{ sfx.bonk&&sfx.bonk(); sfx.thud&&sfx.thud(); battle.shake=Math.max(battle.shake||0,.7); jitter(f); landHit(100); scene('jv_text',1.1,{x:me.x-12,y:me.base-me.h-6,txt:'OUCH!',c:'#ff7a5a',sc:3}); scene('jv_ring',.7,{x:me.x-20,y:me.base-me.h*.5,r:70,c:'#ffd27a'}); scene('jv_ring',.9,{x:me.x-20,y:me.base-me.h*.5,r:120,c:'#ffffff'}); }],
+    [2930,()=>{ say(m.id,'foot_tap'); ST.jolt(f,.5); scene('jv_text',1.2,{x:me.x-12,y:me.base-me.h-6,txt:'MY FOOT!',c:'#ff7a5a',sc:3}); }],
+    [4320,()=>say(m.id,'foot_tap_light')],
+    [5300,()=>say(m.id,'foot_tap_fine')],
+    [6150,'end',res(E2)+'He is fine. He is fine.']]); };
 
 // ---------- DRYWALL (special): carries a sheet in, screws it up in front of the party, all damage halved ----------
 SC.jv_sheet=(s,u)=>{ const x=s.x,base=s.base,h=s.h,w=s.w,q=s.up?1:ez(u/.2),a=fin(u,.06)*(u>.9?(1-u)/.1:1); gfx.globalAlpha=a;

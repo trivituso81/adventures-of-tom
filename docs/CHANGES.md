@@ -1,3 +1,7 @@
+## 2026-10-31 (day, 13): Foot Tap: the spread-arms scream frame is the long one, with OUCH (`justin4`)
+
+- Tom (14:21): frame 7 of the Foot Tap sheet (ft_screamA, arms spread, red face) is now held 1.1 s, the longest frame in the move, and the hit lands on it with a new line foot_tap_ouch "OUCH!!!!!!" (script tagged thick New York accent). "MY FOOT! WHO TOUCHED MY FOOT?!" follows on the next scream frames. Move ends at 6.15 s. Bake list 55, Voice Library rebuilt.
+
 ## 2026-10-31 (day, 12): Justin speaks on the beat, Voice Library and Bake page carry his lines (`justin3`)
 
 - Every Justin move now has a setup line, the main line on the key frame, and a payoff line (`<move>_<beat>` keys in `data/lines.js`; timings in `engine/justin-moves.js`, placed on the faster justin2 timeline). Rose or Grace says "Tap." in Foot Tap. 50 Justin battle lines plus the two taps have emotive scripts in `tools/bake-page/pending.json`; every Justin script (battle and dialogue) is tagged thick New York accent (Tom, 14:04).

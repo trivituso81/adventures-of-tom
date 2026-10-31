@@ -321,11 +321,19 @@
   "script": "[thick New York accent, gentle dad warning, seeing her coming, a little nervous] Rosie. No."
  },
  {
+  "id": "justin-foot_tap_ouch",
+  "kind": "battle",
+  "voice": "justin",
+  "text": "OUCH!!!!!!",
+  "where": "Foot Tap, the big spread-arms scream frame (held 1.1 s), the hit lands on it",
+  "script": "[thick New York accent, a huge drawn-out scream of pain, arms spread, red in the face, as long and loud as the word allows] OOOUUUCH!!!!!!"
+ },
+ {
   "id": "justin-foot_tap",
   "kind": "battle",
   "voice": "justin",
   "text": "MY FOOT! WHO TOUCHED MY FOOT?!",
-  "where": "Foot Tap, 3.4s, the scream, hit at 3.7s",
+  "where": "Foot Tap, the scream frames after the OUCH, hit already landed",
   "script": "[thick New York accent, a piercing, high-pitched scream of betrayal, way out of proportion] MY FOOT! WHO TOUCHED MY FOOT?!"
  },
  {
