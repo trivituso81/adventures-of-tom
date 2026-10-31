@@ -2015,31 +2015,43 @@ Rm.lamby_hug=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,
 // ---------- Lamby Boomerang (B1, key lookout_lamby): thrown from the party row ----------
 // Rose stays at her own spot. She whirls both Lambys on their ribbons and lets go: one loops high, one loops low, out past
 // the monster (bonk, bonk) and back to her. Then she hops onto Tom's shoulders (Guards herself if he is down).
+// Painted frames: Rose bm_windA, bm_windB, bm_throw, bm_follow, bm_watch, bm_reach, bm_catch, bm_cheer (data/rose-hires.js bm) and the lamb
+// flight frames in art/props/rose/lamby_fly.webp (front, side, flip, squash for each lamb, 160 px cells). She holds a lamb in each hand
+// (painted in the wind-up frames, so the code draws none), throws, both fly a loop through the monster (squash on the hit), she watches,
+// reaches and catches both (painted in her arms), cheers, then hops up onto Tom.
+const LFR={lamby:{front:[0,0,160,160],side:[160,0,160,160],flip:[320,0,160,160],squash:[480,0,160,160]},
+  backup:{front:[0,160,160,160],side:[160,160,160,160],flip:[320,160,160,160],squash:[480,160,160,160]}};
 SC.rg_boom=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; if(!st||st.x==null) return;
-  const hs=[st.x-RW()*.5,st.y-RH()*.45],hb=[st.x+RW()*.45,st.y-RH()*.45];
-  const one=(hi,v,delay,h0)=>{ let x,y,rot=0,sc=1.25,pose='held',fl=!hi;
-    if(ms<P.swing) { x=h0[0]; y=h0[1]; rot=hi?.3:-.3; }
-    else if(ms<P.go+delay) { const a=(ms-P.swing)/1000*13+(hi?0:Math.PI),p=head(st,-14); x=p.x+Math.cos(a)*38; y=p.y-10+Math.sin(a)*12; rot=a; pose='fly'; LnO(st.x,st.y-RH()*.7,x,y,2,hi?PINK2:SKY); }
-    else if(ms<P.back+delay) { const q=(ms-P.go-delay)/(P.back-P.go); [x,y]=P.path(q,hi); rot=q*20*(hi?1:-1); sc=1.8; pose='fly';
-      for(let k=1;k<10;k++) { const qq=q-k*.018; if(qq<0) break; const [px,py]=P.path(qq,hi); gfx.globalAlpha=.55-k*.05; E(px,py,5-k*.35,5-k*.35,hi?PINK2:SKY); } gfx.globalAlpha=1; }
-    else { if(ms>P.mountAt) return; x=h0[0]; y=h0[1]; rot=hi?.2:-.2; }
-    gfx.globalAlpha=1; plush(x,y,sc,{pose,rot,v,flip:fl}); };
-  one(false,'backup',140,hb); one(true,undefined,0,hs); };
+  const hs=[st.x-RW()*.5,st.y-RH()*.45],hb=[st.x+RW()*.45,st.y-RH()*.45],hl=[st.x-RW()*.55,st.y-RH()*.62];
+  const lamb=(who,k,x,y,rot,fl)=>{ gfx.globalAlpha=1; if(PROPART.draw('rose/lamby_fly',x,y,{src:LFR[who][k],h:64,rot,flip:fl})) return; plush(x,y,1.8,{pose:'fly',rot,v:who==='backup'?'backup':undefined,flip:fl}); };
+  const one=(hi,who,delay,h0)=>{
+    if(ms<P.go) return;                                     // in her hands, painted in the wind-up frames
+    if(ms<P.go+delay) { lamb(who,'front',hl[0],hl[1]+(hi?0:6),0,false); return; }
+    if(ms<P.back+delay) { const q=(ms-P.go-delay)/(P.back-P.go),[x,y]=P.path(q,hi);
+      for(let k=1;k<10;k++) { const qq=q-k*.018; if(qq<0) break; const [px,py]=P.path(qq,hi); gfx.globalAlpha=.5-k*.045; E(px,py,5-k*.35,5-k*.35,hi?PINK2:SKY); }
+      const sq=Math.abs(q-P.qHit)<.04,cyc=['front','side','flip','side'][Math.floor(ms/75+(hi?0:2))%4],k=sq?'squash':cyc;
+      lamb(who,k,x,y,sq?0:(hi?1:-1)*Math.sin(q*Math.PI*2)*.3,k==='side'&&q>.5); return; }
+    if(ms<P.hold||ms>P.mountAt) return;                     // in her arms, painted in the catch and cheer frames
+    gfx.globalAlpha=1; plush(h0[0],h0[1],1.25,{pose:'held',rot:hi?.2:-.2,v:hi?undefined:'backup',flip:!hi}); };
+  one(false,'backup',60,hb); one(true,'lamby',0,hs); };
 Rm.lookout_lamby=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),tom=tomUp(),TU=tom?ST.unit(tom):null;
   // The loop: out from above Rose's head to just past the monster's far side and back, high or low.
   const sx=me.x-10,sy=me.base-RH()*.8,far=Math.max(14,F.x-F.w*.5-34),cx=(sx+far)/2,rx=(sx-far)/2,ry=Math.max(34,F.h*.5);
   const path=(q,hi)=>{ const a=q*Math.PI*2; return [cx+Math.cos(a)*rx,lerp(sy,F.mid,Math.sin(q*Math.PI))+(hi?-1:1)*Math.sin(a)*ry*.6]; };
-  const plan={swing:300,go:1100,back:2400,path,mountAt:tom?2900:99999};
   // The out-bound pass reaches the monster's middle at q where cos(2*pi*q) = (F.x-cx)/rx
-  const qHit=Math.acos(cl((F.x-cx)/rx,-1,1))/(Math.PI*2),hitA=Math.round(plan.go+qHit*(plan.back-plan.go)),hitB=hitA+140;
-  const K=[{t:0,x:'home',y:'home',f:'expr'},{t:plan.swing,f:(u,tt)=>Math.floor(tt*10)%2?'throwWind':'throwRel'},{t:plan.go,f:'throwRel',dx:u=>-ez(u/.3)*8},{t:plan.go+300,f:'idle'},{t:plan.back,f:'celeb',hop:16}];
+  const qHit=Math.acos(cl((F.x-cx)/rx,-1,1))/(Math.PI*2);
+  const plan={swing:600,go:1100,back:2400,hold:2900,path,qHit,mountAt:tom?2900:99999};
+  const hitA=Math.round(plan.go+qHit*(plan.back-plan.go)),hitB=hitA+60;
+  const K=[{t:0,x:'home',y:'home',f:'bm_windA',dx:(u,tt)=>Math.sin(tt*30)*.8},{t:plan.swing,f:'bm_windB',dx:u=>ez(u)*5},{t:plan.go,f:'bm_throw',dx:u=>-ez(u)*8},
+    {t:plan.go+150,f:'bm_follow',dx:-8},{t:plan.go+400,f:'bm_watch',dx:-8},{t:2050,f:'bm_reach',dx:-8},{t:plan.back+60,f:'bm_catch',dx:u=>-8+ez(u)*8,hop:10},
+    {t:2600,x:'home',y:'home',f:'bm_cheer',hop:14}];
   if(tom) K.push({t:2900,x:TU.x+30,y:TU.base+3,f:'celeb',hop:50,ns:true},{t:3300,x:()=>ride(tom).x,y:()=>ride(tom).y,f:'idle',ns:true},{t:4200,x:()=>ride(tom).x,y:()=>ride(tom).y,f:'idle',ns:true});
   else K.push({t:3000,x:'home',y:'home',f:'kneel'},{t:3300,f:'celeb',hop:8},{t:3700,f:'idle'});
   const st=ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose holds Lamby and Backup Lamby up by their ribbons. Right from where she stands.'); say(m.id,'lookout_lamby'); scene('rg_boom',(tom?2.95:3.9),{st,plan}); }],
-    [plan.swing,()=>{ sfx.spin?sfx.spin():sfx.whoosh(); setMessage('Round and round and round...'); }],
-    [plan.go,()=>{ sfx.whoosh(); scene('rv_big',.9,{st,txt:'WHEEE!',c:PINK2,sc:3}); }],
+    [0,()=>{ setMessage('Rose picks up Lamby and Backup Lamby. A lamb in each hand. Right from where she stands.'); say(m.id,'lookout_lamby'); scene('rg_boom',(tom?2.95:3.9),{st,plan}); }],
+    [plan.swing,()=>{ sfx.spin?sfx.spin():sfx.whoosh(); setMessage('Wind up...'); }],
+    [plan.go,()=>{ sfx.whoosh(); scene('rv_big',.9,{st,txt:'WHEEE!',c:PINK2,sc:3}); setMessage('Both lambs go flying.'); }],
     ['hf',hitA],
     [hitA,()=>{ sfx.baa(); sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rv_burst',.5,{x:F.x,y:F.top+8,n:8,r:40,c:PINK2,c2:GOLD}); }],
     [hitB,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rg_word',.7,{x:F.x,y:F.top-60,txt:'BONK BONK',c:GOLD,sc:3}); }],

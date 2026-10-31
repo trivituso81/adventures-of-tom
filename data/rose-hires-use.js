@@ -30,6 +30,8 @@ let ROSE_RIDE_PAL=ROSE_OW.pal;
   for(const k in ROSE_HIRES.x) sp[k]=tag(ROSE_HIRES.x[k].slice(),'roseBattleX',k,false);
   // Tickle Storm frames (own atlas): tk_ready, tk_creepA, tk_creepB, tk_launch, tk_air, tk_land, tk_tickleA to D, tk_feather_draw, tk_feather_swish, tk_feather_twirl, tk_finale, tk_doubled, tk_proud.
   if(ROSE_HIRES.tk) { paintedAtlas('roseBattleT',AT.btt.src,AT.btt.rects,AT.btt.k).tintMode='coral'; for(const k in ROSE_HIRES.tk) sp[k]=tag(ROSE_HIRES.tk[k].slice(),'roseBattleT',k,false); }
+  // Lamby Boomerang frames (own atlas): bm_windA, bm_windB, bm_throw, bm_follow, bm_watch, bm_reach, bm_catch, bm_cheer (the lamb flight frames are a prop atlas, art/props/rose/lamby_fly.webp).
+  if(ROSE_HIRES.bm) { paintedAtlas('roseBattleB',AT.btb.src,AT.btb.rects,AT.btb.k).tintMode='coral'; for(const k in ROSE_HIRES.bm) sp[k]=tag(ROSE_HIRES.bm[k].slice(),'roseBattleB',k,false); }
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
   // Knocked out: napping with Lamby. The KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.rose={scale:1,pal:ROSE_HIRES.ko.pal,rows:tag(ROSE_HIRES.ko.rows.slice(),'roseKo','ko',true)};

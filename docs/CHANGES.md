@@ -1,3 +1,9 @@
+## 2026-10-30: Lamby Boomerang rebuilt from a painted 16-frame sheet
+
+- Tom's sheet `tools/sprite-bake/src/rose-boomerang-v1.png` (4 x 4, magenta): cells 1 to 8 are Rose, 9 to 16 are Lamby and Backup Lamby in flight. `bake_rose.py` bakes Rose into her own atlas `art/chars/rose-battle-bm.webp` and `ROSE_HIRES.bm` (frames `bm_windA, bm_windB, bm_throw, bm_follow, bm_watch, bm_reach, bm_catch, bm_cheer`, registered in `data/rose-hires-use.js`), and the lambs into a prop atlas `art/props/rose/lamby_fly.webp` (4 x 2 cells of 160 px: front, side, flip, squash for each lamb; preloaded in `engine/prop-art.js`).
+- `Rm.lookout_lamby` and `SC.rg_boom` (the live version, near the end of `engine/rose-moves.js`): Rose stays in her spot with a lamb in each hand (painted in the wind-up frames), winds up, throws, the lambs spin through the monster on their loops (front, side and tumble frames, a flat squash on each hit), she watches, reaches, catches both (painted in her arms), cheers, then hops onto Tom's shoulders as before. Hit times, damage, effect, line and the shoulder ride are unchanged (hits are 60 ms apart instead of 140).
+- Known flaw in the art: in cell 2 (`bm_windB`) the second lamb looks cream instead of lavender-grey. Cache tags `rose-moves.js?v=bm3`, `rose-hires.js?v=bm1`, `rose-hires-use.js?v=bm1`, `prop-art.js?v=pa6`. Tests: kit_test rose lookout_lamby (12 frames looked at), smoke IDS=rose clean.
+
 ## 2026-10-30: Retail Therapy: old drawn graphics replaced
 
 - Tom: Retail Therapy still showed old pixel art. In `Tm.overpriced_gadget` (`engine/tom-moves.js`) the painted box, gadget and roll were fine, but three effects were still hard-edged drawn shapes: the light rays (flat triangles), the sparkles around the gadget (pixel stars), and the receipt (a flat white rectangle with black outline and dashes, covering Tom's face, with a pile of little white rectangles).

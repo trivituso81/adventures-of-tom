@@ -81,11 +81,19 @@ def head_cx(img):
     band = al[top: top + max(4, int((ys.max() - top) * 0.30))]
     return float(np.where(band)[1].mean())
 
+def torso_cx(img):
+    """x of the torso: centroid of the 45 to 70 percent band of the figure height (steady when something is held above the head)."""
+    al = np.array(img)[:, :, 3] > 0
+    ys, xs = np.where(al)
+    top, h = ys.min(), ys.max() - ys.min()
+    band = al[top + int(h * .45): top + int(h * .70)]
+    return float(np.where(band)[1].mean())
+
 def place(frames, k, anchor='head'):
     """Put frames on one common canvas (size a multiple of k): head on the centre column, feet on the bottom row."""
     items = {}
     for nm, im_ in frames.items():
-        ax = head_cx(im_) if anchor == 'head' else im_.width / 2.0
+        ax = head_cx(im_) if anchor == 'head' else (torso_cx(im_) if anchor == 'torso' else im_.width / 2.0)
         items[nm] = (im_, ax)
     left = max(ax for _, ax in items.values())
     right = max(im_.width - ax for im_, ax in items.values())
@@ -240,6 +248,24 @@ def rows_in_palette(frames, k, palette):
 tk_rows = rows_in_palette(tk_big, KB, bt_pal)
 tk_rects = pack(tk_big, os.path.join(ART, 'rose-battle-tk.webp'))
 
+# Lamby Boomerang sheet (Oct 30, 4 x 4): Rose in cells 1 to 8 (own atlas, same rules as the tickle group, torso anchor because the lambs
+# go over her head), the two lambs in cells 9 to 16 (a prop atlas art/props/rose/lamby_fly.webp, 4 x 2 cells of 160 px).
+BM_NAMES = ['bm_windA', 'bm_windB', 'bm_throw', 'bm_follow', 'bm_watch', 'bm_reach', 'bm_catch', 'bm_cheer']
+LF_NAMES = [f'{w}_{v}' for w in ('lamby', 'backup') for v in ('front', 'side', 'flip', 'squash')]
+_bm = slice_sheet(os.path.join(SRC, 'rose-boomerang-v1.png'), [BM_NAMES[0:4], BM_NAMES[4:8], LF_NAMES[0:4], LF_NAMES[4:8]])
+rBM = poses['b_idle'].height / _bm['bm_watch'].height
+bm_big = tighten(place({k: scaled_to(_bm[k], fb * rBM) for k in BM_NAMES}, KB, 'torso'), KB)
+bm_rows = rows_in_palette(bm_big, KB, bt_pal)
+bm_rects = pack(bm_big, os.path.join(ART, 'rose-battle-bm.webp'))
+LFC = 160                                                          # lamb cell size in px
+_sl = (LFC - 4) / max(max(_bm[k].size) for k in LF_NAMES)          # one scale for all eight, so Lamby and Backup stay in proportion
+lf_atlas = Image.new('RGBA', (LFC * 4, LFC * 2), (0, 0, 0, 0)); lf_rects = {}
+for i, k in enumerate(LF_NAMES):
+    im_ = scaled_to(_bm[k], _sl); cx, cy = (i % 4) * LFC, (i // 4) * LFC
+    lf_atlas.alpha_composite(im_, (cx + (LFC - im_.width) // 2, cy + (LFC - im_.height) // 2)); lf_rects[k] = [cx, cy, LFC, LFC]
+_lf_path = os.path.join(ROOT, 'art/props/rose/lamby_fly.webp'); lf_atlas.save(_lf_path, 'WEBP', lossless=True, quality=100, method=6)
+print('wrote', os.path.relpath(_lf_path, ROOT), lf_atlas.size, json.dumps(lf_rects))
+
 # knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
@@ -319,6 +345,7 @@ atlas = {'bt': {'src': 'art/chars/rose-battle.webp', 'k': KB, 'rects': bt_rects}
          'ow': {'src': 'art/chars/rose-ow.webp', 'k': KW, 'rects': ow_rects},
          'btx': {'src': 'art/chars/rose-battle-x.webp', 'k': KB, 'rects': x_rects},
          'btt': {'src': 'art/chars/rose-battle-tk.webp', 'k': KB, 'rects': tk_rects},
+         'btb': {'src': 'art/chars/rose-battle-bm.webp', 'k': KB, 'rects': bm_rects},
          'rideBt': {'src': 'art/chars/rose-ride-bt.webp', 'k': KB, 'rects': rd_bt_rects},
          'rideOw': {'src': 'art/chars/rose-ride-ow.webp', 'k': KW, 'rects': rd_ow_rects}}
 # ride anchors: tuned values live in tools/sprite-bake/rose-ride-anchors.json (rows); defaults are a guess
@@ -359,6 +386,10 @@ js.append("  },")
 js.append("  tk:{")
 for k in TK_NAMES:
     js.append(f"    {k}:" + fmt_rows(tk_rows[k]) + ",")
+js.append("  },")
+js.append("  bm:{")
+for k in BM_NAMES:
+    js.append(f"    {k}:" + fmt_rows(bm_rows[k]) + ",")
 js.append("  },")
 js.append("  ride:{pal:" + json.dumps(ride['pal']) + ",")
 for key in ('bt_idle', 'bt_celeb', 'ow_down', 'ow_up', 'ow_left'):
