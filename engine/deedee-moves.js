@@ -1195,16 +1195,16 @@ SC.dv_buff=(s,u)=>{ const st=s.st,ms=s.t*1000; let x=s.fx,y=s.fy; if(ms>s.go&&st
     gfx.globalAlpha=Math.max(0,(.45+.45*Math.sin(ms/70+k*1.3))*e); Ln(px-w,py,px+w,py,1.4,'#fff3b0'); Ln(px,py-w,px,py+w,1.4,'#fff3b0'); }
   if(landed) bigWord('MINE NOW',x,y-26,GOLD,1); gfx.globalAlpha=1; };
 D.beanie_master=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'idle'},{t:1300,f:'flip'},{t:1900,f:'flip',hop:7,dx:(u,tt)=>Math.sin(tt*50)*2*(1-u)},{t:3700,f:'expr'},{t:4500,f:'hip'},{t:4800,f:back(p.x,me),hop:3,hn:6},{t:5700,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'idle'},{t:1300,f:'flip'},{t:1900,f:'flip',hop:7,dx:(u,tt)=>Math.sin(tt*50)*2*(1-u)},{t:4200,f:'expr'},{t:5000,f:'hip'},{t:5300,f:back(p.x,me),hop:3,hn:6},{t:6200,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks up to have a word with '+f.name+'.'); }],
     [900,()=>{ setMessage('She stops. She turns around. Uh oh. There were beans at lunch.'); scene('dv_text',.9,{st,txt:'...',c:CREAM,sc:3}); }],
     [1900,()=>{ sfx.toot(); hopOf(m); scene('dv_toot',.8,{x:p.x-22,y:p.y-DH()*.32}); scene('dv_cloud',3.4,{x:p.x-22,y:p.y-DH()*.32,tx:F.x}); scene('dv_big',1.2,{x:p.x+10,y:p.y-DH()-40,txt:'PFFFT!',c:STINK,sc:4,rot:-.08}); setMessage('PFFFT! A truly heroic toot.'); }],
     ['hf',2250],
     [2250,()=>{ sfx.bonk(); ST.jolt(f,.5); landHit(100); ST.draw((s,u)=>lift(f,0,Math.sin(u*30)*.12*(1-u),Math.sin(u*26)*6*(1-u)),1.1); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'GAG!',c:STINK,sc:4}); scene('dv_buff',3.0,{st,fx:F.x+F.w*.3,fy:F.top-8,go:1400}); }],
-    [3700,()=>{ say(m.id,'beanie_master'); scene('dv_text',1.3,{st,txt:'OH MY!',c:ROSE,sc:3}); setMessage('Deedee covers her mouth. Oh my!'); }],
+    [4200,()=>{ say(m.id,'beanie_master'); scene('dv_text',1.3,{st,txt:'OH MY!',c:ROSE,sc:3}); setMessage('Deedee covers her mouth. Oh my!'); }],
     [4250,()=>{ sfx.levelChime(); setMessage('Its good mood blows right over to her.'); }],
-    [5800,'end',res(E2)+'Deedee is the Beanie Master. Nobody will speak of this.']]); };
+    [6300,'end',res(E2)+'Deedee is the Beanie Master. Nobody will speak of this.']]); };
 
 // ---------- Grandma Squeeze (B5; key grandma_squeeze; same numbers as Take a Breather) ----------
 // Arms out from across the room, one big squeezy hug, and a lipstick kiss on the cheek to finish.

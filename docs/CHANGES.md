@@ -4,6 +4,10 @@
 - Portrait looks right with Tom at the counter. Landscape: the camera crops the back of the room, so only her feet show at the edge. Tell Tom if he wants the landscape camera nudged for this room.
 - Build stamp `build penny1`, `maps-le.js?v=penny1`, `main.js?v=penny1`. No spoken lines changed.
 
+## 2026-10-30 (night): Beanie Master: "Oh my!" half a second later
+
+- Deedee's "Oh my!" (and her covered-mouth pose, `engine/deedee-moves.js`) now comes at 4.2 s instead of 3.7 s, so it lands as the golden glow reaches her face (4.25 s). Her walk back and the end of the move moved back 0.5 s with it. Hit and fart timing unchanged.
+
 ## 2026-10-30 (night, 9): Rose: "YOU NEXT" marker no longer a long pink string
 
 - Tom (22:36): at the end of Piggyback Pounce a weird string seemed to pull Rose back. It was the "YOU NEXT" arrow (scene `ro_tip`, engine/rose-moves.js), a line drawn from Rose's hand to the most hurt friend, so it stretched across the screen and followed her home. Now it is a short "YOU NEXT" tag with a small down arrow and hearts that bounces in over that friend. Same timing, same game effect. Also used by Ribbon Rescue, which shares the scene. Tag `?v=rt1` on rose-moves.js. Tests: kit_test rose piggyback_pounce (frames looked at), smoke IDS=rose clean.
