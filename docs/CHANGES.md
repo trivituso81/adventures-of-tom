@@ -1,3 +1,12 @@
+## 2026-10-31 (day, 5): the Stacks walk map is opened up (`stacks1`)
+
+- Tom: fix the walkable pathways in the Stacks (too many blocked areas and narrow paths) and make sure all 3 quest items can be reached on foot. Reading of the request: the three quest items are the three chapter 7 catalog cards, held by the wing bosses The Cliffhanger (Fiction), The Know-It-All (Nonfiction) and Pop-Up Panic (Picture Books).
+- Walkable tiles 199 to 232. Fiction and Nonfiction aisles are 2 wide, the hall has lanes behind (rows 7 to 8) and in front (row 10) of the globe and cart, Picture Books gained a ring around the rocker, the floor in front of the low shelves, and a channel to the puppet corner.
+- Dog-Ear moved from (26,5) to (24,5): it sealed the Know-It-All nook. Object footprints trimmed to their real bases (globe 12,9 2x1; cart 16,9 2x1; low shelf 8,18).
+- Walk-behind: `art/stacks-fg.webp` (cutout of globe, stacks, pedestals, plants, cart; built by `tools/make_stacks_fg.py`) and `PLATE_BEHIND.stacks` zones in `engine/plate.js`, so Tom reads as behind the props on row 8.
+- New test `tools/stacks_walk_test.py` (flood fill with other monsters blocking, every object touchable, no long one-tile corridors, real keyboard walks, screenshots `tools/shots/swalk-*.png`).
+- No spoken line changed. Tested: walk test, `stacks_test.py`, `smoke.py` and `IDS=grace,rose smoke.py` pass. Tags `maps-le.js`, `library-monsters.js`, `plate.js`, `main.js` `?v=stacks1`, stamp `build stacks1`.
+
 ## 2026-10-31 (day, 4): skill lists use icons instead of text tags (`icons1`)
 
 - Tom (09:49): in the battle skill list, replace the labels with an icon system. Type icons right after the skill name, element icons in one row beneath, icons only, no text.
