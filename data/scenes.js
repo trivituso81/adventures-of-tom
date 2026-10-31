@@ -2049,6 +2049,7 @@ SCENES.ch6Boss=[
 // 13. After the boss (won in the scene, or on a retry with A): Bready Mercury comes home, with a gold coin.
 SCENES.ch6AfterBoss=()=>[
   {flag:'ch6-clear'},
+  {flag:'ch6-take',value:'pending'},   // keeps the painted jar on the chest (engine/plate.js crownJarState) until Tom lifts it below
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:chairman')?[
     {talk:'Chairman Cheeks',lines:['...Shared. You shared with me. Three times. Nobody has ever... I\'m going to need a minute.','Take the jar. And... could I maybe have a slice? Sometimes?']},
@@ -2057,6 +2058,12 @@ SCENES.ch6AfterBoss=()=>[
     {talk:'Chairman Cheeks',lines:['Fine. FINE. This meeting is adjourned. I\'m going to go stare at a bird feeder.']}]),
   {call:()=>{ setFlag('ch6-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The hoard',lines:['Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.']},
+  // Tom walks up to the chest and lifts Bready Mercury off the hoard himself.
+  {walk:'tom',to:routeTo('tom',10,5),speed:.25}, {face:'tom',dir:'up'},
+  {wait:.4},
+  {call:()=>{ CROWN_JAR_T0=performance.now(); setFlag('ch6-take'); sfx.pickup&&sfx.pickup(); }},
+  {hearts:'tom'},
+  {wait:.9},
   {give:'bready'},
   {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You were on an adventure.','You\'re going to be extremely sour about this.']},
   {talk:'TNB',lines:['Was that a pun? Babe. Did you just make a PUN?']},

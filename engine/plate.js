@@ -96,16 +96,29 @@ function actorK() {
 
 // Live touches drawn over a painting. Gate 00: after chapter 11 the Long Island dome (left window) goes amber, as it did on the tile version.
 // Bready Mercury, Tom's sourdough starter, sitting on the kitchen island in Tom's house. Painted live over the plate (the painting has an empty counter).
-function drawBreadyJar(cx,by,u,time) {
+function drawBreadyJar(cx,by,u,time,lift=0,alpha=1) {
   // Painted prop (art/props/tom/sourdough_starter_jar.webp, the same jar the Starter Splash move uses). cx, by = jar centre and base; u scales it.
+  // lift = pixels the jar has risen off its spot, alpha = fade (the crown pickup, see crownJarShown).
   const im=PROPART.get('tom/sourdough_starter_jar');
   if(!(im.complete&&im.naturalWidth)) return;
   const h=50*u, w=h*im.naturalWidth/im.naturalHeight;
   ctx.save();
-  ctx.fillStyle='rgba(60,40,20,.30)'; ctx.beginPath(); ctx.ellipse(cx+1*u,by,w*.42,3.4*u,0,0,Math.PI*2); ctx.fill();
+  ctx.globalAlpha=alpha;
+  ctx.fillStyle='rgba(60,40,20,'+(.30*(1-Math.min(1,lift/(40*u))*.6))+')'; ctx.beginPath(); ctx.ellipse(cx+1*u,by,w*.42,3.4*u,0,0,Math.PI*2); ctx.fill();
   ctx.imageSmoothingEnabled=true; if('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality='high';
-  ctx.drawImage(im,cx-w/2,by-h+1*u,w,h);
+  ctx.drawImage(im,cx-w/2,by-h+1*u-lift,w,h);
   ctx.restore();
+}
+// Chapter 6: Bready Mercury sits on the chest in the middle of the hoard in the Crown of the Oak (the painting has no jar) until Tom takes him
+// (SCENES.ch6AfterBoss sets CROWN_JAR_T0 and the flag ch6-take; the jar then lifts and fades over CROWN_JAR_PICKUP seconds). ch6-take is 'pending'
+// while that scene runs, so the jar stays through the Chairman's goodbye even though ch6-clear is already set. Saves from before this fix have
+// ch6-clear and no ch6-take, so they never show it.
+let CROWN_JAR_T0=0; const CROWN_JAR_PICKUP=.8;
+function crownJarState() {
+  if(typeof storyMatch!=='function'||!storyMatch({mode:'full',chapter:6})) return null;
+  const take=STORY.flags['ch6-take'];
+  if(take===true) { const k=(performance.now()-CROWN_JAR_T0)/1000/CROWN_JAR_PICKUP; return k<1?k:null; }
+  return (take==='pending'||!STORY.flags['ch6-clear'])?0:null;
 }
 // Painted sign boards that the game letters live, so the spelling is always right and the letters stay sharp on a phone.
 // The painting leaves each board blank (tools/town_signs.py, tools/row_signs.py). x, y, w, h = the board's writing face in art px (64 per tile);
@@ -221,6 +234,8 @@ function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse'&&!(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'}))) drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
+  // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).
+  if(map&&map.id==='crown') { const k=crownJarState(); if(k!==null) { const s=T/64; drawBreadyJar(672*s,258*s,1.24*s,time,k*34*s,1-k); } }
   if(!map||map.id!=='gate00'||typeof infFlag!=='function'||!infFlag('ch11-closed')) return;
   const s=T/64, cx=478*s, cy=98*s, r=96*s;
   ctx.save();
