@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 1): Downtown LA is layered: walk behind palms, bushes, planters, rooftops, the tower crown
+
+- Tom asked for a 3D feel with the party walking behind buildings, trees and bushes, and no blocked-off ground. New foreground layer `art/blvd-fg.webp` (cutouts of the painting with transparency, built by `tools/make_blvd_fg.py`): 6 palms, 4 bushes, 5 planters and pots in the plaza, plus the water tanks, roof gardens and Grand Tower crown that stand over the south sidewalk. `PLATE_BEHIND.blvd` zones with `fg:true` draw it over anyone standing behind them; `engine/plate.js` loads the layer lazily.
+- Walk map: the whole plaza is open now (only the base of each object is blocked, 1 or 2 tiles); the Grand Tower crown tiles and the road beside it are open. Reachability test 0 fails with no NPC-pluggable chokepoints left.
+- Not made walkable (painted as walls, slopes, fences or building faces): the west and east edges beside the south row, the north row facades, the Angels Flight hillside, rooftops. Files: `engine/plate.js?v=behind7`, `data/maps-la.js?v=dtla5`. blvd_test and smoke pass. Not played on phone.
+
+
 ## 2026-10-31 (morning, 2): Bedazzle Blast: a small step forward, not a walk across
 
 - Tom (09:28): same as Open Strings. Grace steps about 64 px left of her own spot, fires the rhinestone gun from there, and steps back; timeline 6.7 s (was 7.35 s). Gems still fly to the row. Tag `?v=gx4` on grace-moves.js. Tests: kit_test grace bedazzle_blast (frames looked at), smoke IDS=grace.

@@ -34,7 +34,7 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
   const arrivals=[[24,22],[14,10],[15,10],[28,11],[28,12],[1,5],[2,5],[20,22],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 
-SPOTS={'truck':(12,10,'up'),'awning':(5,10,'up'),'door':(10,9,'up'),'lampN':(8,10,'right'),'griffith':(1,4,'up'),'steps':(2,6,'up'),'lampP':(7,22,'right'),'arch':(14,22,'down'),'archpost':(12,22,'right'),'marquee':(17,10,'up')}
+SPOTS={'truck':(12,10,'up'),'awning':(5,10,'up'),'griffith':(1,4,'up'),'lampP':(7,22,'right'),'arch':(14,22,'down'),'palmL':(1,24,'up'),'potpalm':(6,24,'up'),'bushL':(10,24,'right'),'crown':(18,13,'up'),'tank':(4,13,'up'),'palmR':(28,24,'up'),'bushR':(19,24,'left')}
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']

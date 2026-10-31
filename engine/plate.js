@@ -201,7 +201,14 @@ blvd:[
   // sidewalk lamps (head, pole, foot) on the north curb
   ...BLVD_LAMP(185,478,658),...BLVD_LAMP(207,543,716),...BLVD_LAMP(537,543,716),...BLVD_LAMP(817,548,656),...BLVD_LAMP(980,535,716),...BLVD_LAMP(1275,557,716),
   // plaza lamps in front of the south row
-  ...BLVD_LAMP(120,1268,1456),...BLVD_LAMP(483,1268,1456),...BLVD_LAMP(587,1268,1456),...BLVD_LAMP(1002,1268,1452),...BLVD_LAMP(1368,1278,1452),...BLVD_LAMP(1868,1273,1452)
+  ...BLVD_LAMP(120,1268,1456),...BLVD_LAMP(483,1268,1456),...BLVD_LAMP(587,1268,1456),...BLVD_LAMP(1002,1268,1452),...BLVD_LAMP(1368,1278,1452),...BLVD_LAMP(1868,1273,1452),
+  // cutouts from art/blvd-fg.webp (tools/make_blvd_fg.py): palms, bushes, planters in the plaza ...
+  {x:0,y:1462,w:225,h:202,base:1652,fg:true},{x:235,y:1490,w:107,h:92,base:1580,fg:true},{x:412,y:1466,w:90,h:156,base:1620,fg:true},{x:488,y:1515,w:100,h:95,base:1608,fg:true},
+  {x:660,y:1466,w:120,h:96,base:1562,fg:true},{x:632,y:1562,w:180,h:102,base:1664,fg:true},{x:1128,y:1466,w:92,h:96,base:1562,fg:true},{x:1116,y:1562,w:124,h:102,base:1664,fg:true},
+  {x:1260,y:1495,w:104,h:95,base:1588,fg:true},{x:1408,y:1466,w:92,h:156,base:1620,fg:true},{x:1718,y:1560,w:74,h:82,base:1640,fg:true},{x:1768,y:1462,w:152,h:202,base:1652,fg:true},
+  // ... and the rooftops that stand over the south sidewalk: water tanks, roof gardens, the Grand Tower crown (everyone north of the south row is behind them)
+  {x:236,y:832,w:81,h:118,base:1400,fg:true},{x:330,y:820,w:100,h:92,base:1400,fg:true},{x:635,y:860,w:85,h:52,base:1400,fg:true},{x:735,y:860,w:115,h:52,base:1400,fg:true},
+  {x:1015,y:850,w:65,h:62,base:1400,fg:true},{x:1090,y:768,w:182,h:142,base:1400,fg:true},{x:1262,y:860,w:38,h:55,base:1400,fg:true},{x:1590,y:850,w:70,h:62,base:1400,fg:true},{x:1664,y:868,w:114,h:94,base:1400,fg:true}
 ] };
 function plateWalkBehind(map,plate) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
@@ -225,7 +232,8 @@ function plateWalkBehind(map,plate) {
     if(z.pts) { z.pts.forEach((q,i)=>i?ctx.lineTo(q[0]*s,q[1]*s):ctx.moveTo(q[0]*s,q[1]*s)); ctx.closePath(); }
     else if(z.cx!==undefined) ctx.ellipse(z.cx*s,z.cy*s,z.rx*s,z.ry*s,0,0,Math.PI*2); else ctx.rect(z.x*s,z.y*s,z.w*s,z.h*s);
     ctx.clip();
-    ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
+    if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031b'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
+    else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
     ctx.restore();
   }
   if(ctxDone) ctx.imageSmoothingEnabled=false;
