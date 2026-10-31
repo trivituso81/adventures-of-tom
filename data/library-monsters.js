@@ -404,5 +404,5 @@ Object.assign(MONSTERS,{
 });
 // Map spots. The Stacks: Shushers and Dog-Ears roam the hall and the aisles (they hold still until the girls hear the
 // whispers). Each wing's troublemaker holds still until its story fight. The Unread waits on the Reading Room dais.
-const STACKS_MONSTER_SPOTS=[['shusher',8,10],['shusher',21,9],['dogear',6,6],['dogear',26,5],['cliffhanger',6,4],['knowitall',26,3],['popup',16,17]];
+const STACKS_MONSTER_SPOTS=[['shusher',8,10],['shusher',21,9],['dogear',6,6],['dogear',24,5],['cliffhanger',6,4],['knowitall',26,3],['popup',16,17]];
 const READROOM_MONSTER_SPOTS=[['unread',9,3]];

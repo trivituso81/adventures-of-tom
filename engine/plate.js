@@ -210,6 +210,14 @@ blvd:[
   {x:236,y:832,w:81,h:118,base:1400,fg:true},{x:330,y:820,w:100,h:92,base:1400,fg:true},{x:635,y:860,w:85,h:52,base:1400,fg:true},{x:735,y:860,w:115,h:52,base:1400,fg:true},
   {x:1015,y:850,w:65,h:62,base:1400,fg:true},{x:1090,y:768,w:182,h:142,base:1400,fg:true},{x:1262,y:860,w:38,h:55,base:1400,fg:true},{x:1590,y:850,w:70,h:62,base:1400,fg:true},{x:1664,y:868,w:114,h:94,base:1400,fg:true}
 ] };
+// THE STACKS: the hall props, cut out in art/stacks-fg.webp (tools/make_stacks_fg.py). Row 8 runs behind the globe, the book stacks, the cart,
+// both lamp pedestals and both plants (their bases are row 9), so anyone standing on row 8 or 7 there is behind them. The globe is two zones: its
+// upper half (base 520) only covers row 7, so Tom stays visible on row 8; the stand and lower half (base 636) cover row 8.
+PLATE_BEHIND.stacks=[
+  {x:743,y:470,w:126,h:72,base:520,fg:true},{x:743,y:540,w:126,h:101,base:636,fg:true},{x:743,y:569,w:41,h:84,base:650,fg:true},{x:856,y:544,w:53,h:89,base:632,fg:true},
+  {x:696,y:468,w:55,h:201,base:666,fg:true},{x:653,y:516,w:50,h:133,base:648,fg:true},
+  {x:1013,y:526,w:136,h:135,base:658,fg:true},{x:1171,y:471,w:58,h:200,base:666,fg:true},{x:1219,y:516,w:69,h:122,base:640,fg:true}
+];
 function plateWalkBehind(map,plate) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
   const s=T/64, list=[...map.npcs,...followers,player];
