@@ -1641,7 +1641,8 @@ const DISH={
     E(0,1,11,3,'rgba(40,20,10,.3)'); EO(0,-5,10,7.6,'#3a1c14'); E(-4,-8,3.2,2,'#8a5a48'); PO([[2,-11],[7,-9],[4,-5]],'#ffd24a',1); PO([[-1,-4],[3,-5],[0,-1]],'#ffd24a',0);
     EO(15,-3,3.4,3.2,'#e0305a'); E(14,-4,1,.8,'#ff9ab0'); leaf(-15,-3,-2.8,7); leaf(-14,-3,-2,6); bloom(-19,0,1.4,'#f7f7f2'); }
 };
-const plate=(x,y,sc,dish='pea')=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+const peaPlate=(x,y,sc)=>{ if(!PROPART.ready('tnb/pea_plate')) return false; const w=74*sc,k=w/160; E(x+2*sc,y+4*sc,32*sc,9*sc,'rgba(0,0,0,.25)'); return PROPART.draw('tnb/pea_plate',x,y-17*k,{w}); };   // painted plate with the one pea (tools/sprite-bake/build_pea_plate.py); plate centre sits at (x,y)
+const plate=(x,y,sc,dish='pea')=>{ if((dish===true||dish==='pea')&&peaPlate(x,y,sc)) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   E(2,3,35,12,'rgba(0,0,0,.25)'); EO(0,0,34,12,'#c9a13e'); E(0,0,31,10.6,'#f2d27a'); E(0,-.5,29,9.6,WHITE); ring(0,-.5,22,7.2,1.2,'#d8b14a'); ring(0,-.5,26.5,8.6,.8,'#e6c66a'); E(-16,-5.5,6,1.1,'rgba(255,255,255,.8)');
   if(dish) (DISH[dish===true?'pea':dish]||DISH.pea)(); gfx.restore(); };
 SC.t6_plateheld=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1; plate(h.x+4,h.y-12,1.5,'pea'); };

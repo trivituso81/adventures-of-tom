@@ -1,3 +1,9 @@
+## 2026-10-30 (night, 11): Foraged at Dawn uses a painted plate
+
+- Tom (23:08): TNB's forage move still used old graphics. The plate and pea were drawn with code shapes while everything else in the battle is painted. New painted prop `art/props/tnb/pea_plate.webp` (the painted dinner plate with a gold rim, herb-oil swoosh, microgreens, a flower and one glossy pea), built by `python3 tools/sprite-bake/build_pea_plate.py`. `peaPlate()` in engine/tnb-moves.js draws it for both the carried plate and the one set down at the friend; the drawn plate stays as the fallback and for the other dishes. Preloaded in engine/prop-art.js.
+- Not changed: the speech bubble and its pixel-font words (UI, not a prop). Tell Tom if he wants those painted too.
+- Tests: kit_test tnb foraged_at_dawn (frames looked at), smoke IDS=tnb clean. Tags `?v=pea1` on prop-art.js, tnb-moves.js and main.js; title stamp `build pea1`.
+
 ## 2026-10-30 (night, 8): Garden Shower uses painted Deedee
 
 - Tom: Garden Shower was showing a frame of her old graphic. Cause: while she aimed the hose (walk-up and the whole spray hold) the move used the base `aim` frame, which the painted set never replaced, so she shrank to the old pixel sprite. The last `D.garden_shower` in engine/deedee-moves.js now uses the painted `x_flick` pose (arm thrust toward the row, wide stance) via `DD_XF('flick','aim')`; the old frame is only a fallback if the painted set is missing. Hose prop, spray, timings, damage and lines unchanged (no re-bake).
