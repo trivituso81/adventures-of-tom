@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 25): Voice Library labels every ability and combo clip with its move (`vlmove1`)
+
+- Tom (18:00): clips for an ability or a combo now say which one they belong to, on the row itself. A green chip reads the move type and name (BASIC MOVE, ABILITY, SIGNATURE, ULTIMATE, REMIX ABILITY: Press Start, Sourdough Snob, DEFEND, Boarding Group Zero). A pink chip does the same for combos with who is in it (TOMBO 2: Uncle Spotter Toss (Tom + Grace), DIRECTOR'S CUT, TOMBO 1: Smash That Like Button, FAMILY FINISH: The Extra Place). Hurt, low, KO and win lines keep their plain tag.
+- 346 battle lines carry a label. Names come from `data/abilities.js` and `data/battle2-data.js`, so a rename shows up on the next index rebuild. Older spoken keys (controller_tap, crumb_shot, closing_time and so on) take the name of the slot they were written for. Search also finds a clip by its move name.
+- Files: `tools/voice-library/make-index.js` (new `mv` field), `voices.html` (chips, search), `data/voice-index.json` rebuilt. Game code untouched; no `?v=` or stamp change.
+
 ## 2026-10-31 (day, 24): standing recipe for new characters and ability pose sheets (docs only)
 
 - Tom (17:56): he was rewriting the image prompt every time. `docs/CHARACTER_PIPELINE.md` now holds it: spec from a photo, the three standard sheets (one large hero pose, 3 x 3 walk, 4 x 4 battle), the ability poses rule (4 to 7 poses, keep critical frames, about 2 lines), prompt templates and the install steps. Standing rule added to CLAUDE.md. No game code changed, no stamp change.
