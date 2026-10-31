@@ -159,6 +159,11 @@ const PLATE_BEHIND={ town:[
   {x:1554,y:596,w:42,h:56,base:772},{x:1568,y:650,w:16,h:78,base:772},{x:1550,y:726,w:52,h:46,base:772},
   // Taxi Co. roof edge and side wall, which hang over the alley beside Moon Club (alley column 22)
   {pts:[[1434,944],[1470,926],[1560,880],[1560,1080],[1478,1080],[1470,1000]],base:1285},
+  // roof tips and chimneys of the four south shops, so anyone standing on the walkway just north of them is behind the roof (feet row 13)
+  {pts:[[118,932],[118,923],[172,923],[200,918],[302,850],[458,920],[458,932]],base:940},{x:168,y:874,w:42,h:56,base:940},          // Snail Mail
+  {pts:[[572,975],[572,936],[642,922],[700,904],[760,882],[800,896],[890,938],[890,975]],base:940},{x:592,y:868,w:50,h:108,base:940}, // Kettle Cottage
+  {pts:[[1030,940],[1030,934],[1095,908],[1177,864],[1323,931],[1323,945]],base:940},{cx:1254,cy:910,rx:50,ry:58,base:940},         // Moon Club roof and gold sphere
+  {pts:[[1432,960],[1432,954],[1500,924],[1540,902],[1600,906],[1750,912],[1754,932],[1754,960]],base:940},{x:1500,y:874,w:40,h:54,base:940}, // Taxi Co.
   // tree canopies: plaza east, between the south shops and the two big trees at the bottom
   {cx:1700,cy:690,rx:92,ry:74,base:800},
   // fountain top: upper bowl and the jets above it (ground behind it, row 9, is walkable)

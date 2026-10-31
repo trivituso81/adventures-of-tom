@@ -2,6 +2,12 @@
 
 - Tom (22:36): at the end of Piggyback Pounce a weird string seemed to pull Rose back. It was the "YOU NEXT" arrow (scene `ro_tip`, engine/rose-moves.js), a line drawn from Rose's hand to the most hurt friend, so it stretched across the screen and followed her home. Now it is a short "YOU NEXT" tag with a small down arrow and hearts that bounces in over that friend. Same timing, same game effect. Also used by Ribbon Rescue, which shares the scene. Tag `?v=rt1` on rose-moves.js. Tests: kit_test rose piggyback_pounce (frames looked at), smoke IDS=rose clean.
 
+## 2026-10-30 (night, 5): Square walk-behind, roof tips
+
+- `PLATE_BEHIND` now covers the roof peaks and chimneys of Snail Mail, Kettle Cottage, Moon Club (roof and gold sphere) and Taxi Co., so anyone standing on the walkway just north of them (row 13) is behind the roof, not drawn on top of it. Base 940 keeps the alley (col 22, row 14) and the south street unaffected. `plate.js?v=behind4`.
+- Title stamp now `build walk4` (`main.js?v=walk4`).
+- Checks: smoke clean, reach_test town 0 fails, phone screenshots with Tom at each shop's peak.
+
 ## 2026-10-30: Beanie Master: fart one second longer, soft golden good-mood glow
 
 - The fart now runs about 2.3 s (was about 1.3 s): `sfx.toot` has twice the flutter and a longer rumble and sputters, the mist (`SC.dv_cloud`, 3.4 s) streams out continuously instead of in one burst, and the beats after it moved back 1 s (Oh my 3.7 s, chime 4.25 s, end 5.8 s). The hit (GAG) is unchanged at 2.25 s. Peak level 0.78, no clipping.
