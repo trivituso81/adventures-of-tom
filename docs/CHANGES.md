@@ -13,6 +13,9 @@
 - Tom: when Boppy uses the recliner on someone, that person now walks into the chair the moment it lands (THUMP), sits while the heal and shield play, then gets up and walks back to their spot. Self-target is unchanged except Boppy is now drawn on top of the chair while he sits (the chair scene is drawn over the party, so he was hidden behind it).
 - Change in `engine/boppy-moves.js` only: the later `B.recliner_reservation` wrapper poses the target through `ST.keys(battle.fx[t.idx], ...)` (same idea as Grace's dance) and `SC.bp_chair` redraws seated units over the chair (`RECL`). Seated pose is each character's `sit` frame if they have one, else their `kneel` frame (Tom, Grace, Rose, Amy, Deedee use kneel). Not done when the target is KO'd or an enemy (Kindness). Cache tag `boppy-moves.js?v=rc1`.
 
+## 2026-10-30: Rose's Bedtime Story outlasts her voice line
+
+- Tom: the animation finished when the voice clip did. The baked clip is about 7.2 s; the move ended at 4.6 s (3.9 s when Rose reads to herself), so the line was cut off by the result. `Rm.bedtime_story` in `engine/rose-moves.js` is retimed: page turns at 3.2 s and 5.0 s, heal at 6.0 s, THE END at 6.5 s, celebration at 7.0 s, finish at 8.8 s (8.2 s solo). Night overlay, Zzz and Backup Lamby's Z follow the new times. Spoken line unchanged. Cache tag `rose-moves.js?v=bs2`.
 ## 2026-10-30: Floor Is Lava: old drawn lava removed
 
 - Rose's Floor Is Lava still played the old flat orange ovals (`SC.rv_lava` in `engine/rose-moves.js`) on top of the new painted lava pool. `SC.rv_lava` is now a no-op, so only the painted pool and painted couch cushion show. The "THE FLOOR IS LAVA!" and "HOT HOT!" text callouts and the HOT labels are unchanged. Cache tag `rose-moves.js?v=lv1`.

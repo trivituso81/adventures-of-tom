@@ -1021,20 +1021,22 @@ SC.rv_book=(s,u)=>{ const P=s.plan,ms=s.t*1000+P.sit; if(ms<P.sit) return; const
   gfx.restore(); plush(x-62,y+14,1.05,{pose:'held',rot:Math.sin(ms/500)*.05}); };
 SC.rv_zzz=(s,u)=>{ for(let k=0;k<3;k++) { const q=((s.t*1000/900)+k/3)%1; gfx.globalAlpha=(1-q)*fade(u,.85); label('Z',s.x+8+q*22+Math.sin(q*6)*4,s.y-q*40,'#cfe0ff',2+(k===1?1:0)); } };
 Rm.bedtime_story=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,34),self=t===m;
-  const sit=self?400:1000,end=self?3900:4600;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:sit,f:'sitStory'},{t:3300,f:'celeb',hop:8},{t:3600,f:'idle'},{t:3800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:6},{t:sit,x:sp.x,y:sp.y,f:'sitStory'},{t:3400,f:'celeb',hop:8},{t:3700,f:'walkR',hop:4,hn:5},{t:4500,x:'home',y:'home',f:'idle'}];
+  // The spoken line is about 7.2 s long (baked clip), so the whole story runs past it: page turns at 3.2 s and 5.0 s,
+  // heal at 6.0 s, THE END at 6.5 s, Rose finishes and walks home by about 8.8 s.
+  const sit=self?400:1000,end=self?8200:8800,turn1=3200,turn2=5000,healAt=6000,endAt=6500;
+  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:sit,f:'sitStory'},{t:7000,f:'celeb',hop:8},{t:7500,f:'idle'},{t:7900,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:6},{t:sit,x:sp.x,y:sp.y,f:'sitStory'},{t:7000,f:'celeb',hop:8},{t:7500,f:'walkR',hop:4,hn:5},{t:8400,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),bx=Math.min(520,sp.x+(self?-40:-48)),by=sp.y-34;
-  const plan={sit,turn1:1900,turn2:2700,bx,by};
+  const plan={sit,turn1,turn2,bx,by};
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Rose sits down with Lamby and her favorite book.':'Rose brings Lamby and her favorite book over to '+t.name+'.'); say(m.id,'bedtime_story'); scene('ro_carry',sit/1000,{dy:8,sc:1}); }],
-    [sit,()=>{ scene('rv_book',(end-sit-200)/1000,{plan}); scene('rv_night',2.9,{x:(bx+H.x)/2,y:H.mid,upAt:3000,t0:sit}); sfx.select(); setMessage('Lights down. Once upon a time...'); }],
-    [1600,()=>{ scene('rv_zzz',1.9,{x:H.x+H.w*.25,y:H.top}); }],
-    [1900,()=>{ sfx.whoosh(); }],
-    ['hf',2400],
-    [2400,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:'#ffd27a'}); scene('ro_flakes',1,{x:H.x,y:H.base,h:H.h}); hopOf(t!==m?t:null); }],
-    [2700,()=>{ sfx.whoosh(); }],
-    [2800,()=>{ scene('rv_big',1.2,{x:bx,y:by-46,txt:'THE END',c:PURP,sc:3}); sfx.ding(); }],
+    [sit,()=>{ scene('rv_book',(end-sit-200)/1000,{plan}); scene('rv_night',(endAt+400-sit)/1000,{x:(bx+H.x)/2,y:H.mid,upAt:endAt,t0:sit}); sfx.select(); setMessage('Lights down. Once upon a time...'); }],
+    [2200,()=>{ scene('rv_zzz',(healAt-2200)/1000,{x:H.x+H.w*.25,y:H.top}); }],
+    [turn1,()=>{ sfx.whoosh(); }],
+    ['hf',healAt],
+    [healAt,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:'#ffd27a'}); scene('ro_flakes',1,{x:H.x,y:H.base,h:H.h}); hopOf(t!==m?t:null); }],
+    [turn2,()=>{ sfx.whoosh(); }],
+    [endAt,()=>{ scene('rv_big',1.2,{x:bx,y:by-46,txt:'THE END',c:PURP,sc:3}); sfx.ding(); }],
     [end,'end',kindLine(t,'Lamby fell asleep first. He always does.')]]); };
 
 // ---------- Lamby Boomerang (B4) ----------
@@ -1688,7 +1690,7 @@ Rm.lamby_hug=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,
 { const book=SC.rv_book;
   SC.rv_book=(s,u)=>{ book(s,u); const P=s.plan,ms=s.t*1000+P.sit; if(ms<P.sit) return; const g=ez((ms-P.sit)/250);
     gfx.globalAlpha=fade(u,.95); plush(P.bx+62,P.by+14,1.0*g+.01,{pose:'held',rot:-Math.sin(ms/520)*.05,v:'backup',flip:true});
-    if(ms>2400&&ms<3400) { gfx.globalAlpha=1-(ms-2400)/1000; label('Z',P.bx+74,P.by-14-(ms-2400)/40,'#cfe0ff',2); } }; }
+    if(ms>5600&&ms<6600) { gfx.globalAlpha=1-(ms-5600)/1000; label('Z',P.bx+74,P.by-14-(ms-5600)/40,'#cfe0ff',2); } }; }
 { const carry=SC.ro_carry; if(carry) SC.ro_carry=(s,u)=>{ carry(s,u); const h=hand(); gfx.globalAlpha=1; plush(h.x+14,h.y+10,1.0,{pose:'held',rot:-.25,v:'backup'}); }; }
 { const bed=Rm.bedtime_story; Rm.bedtime_story=E2=>{ bed(E2); const t=E2.targets[0]||E2.m;
     b7Later(()=>setMessage(t===E2.m?'Rose sits down with Lamby, Backup Lamby and her favorite book.':'Rose brings Lamby, Backup Lamby and her favorite book over to '+t.name+'.'),30); }; }
