@@ -3,6 +3,13 @@
 - Every Justin move now has a setup line, the main line on the key frame, and a payoff line (`<move>_<beat>` keys in `data/lines.js`; timings in `engine/justin-moves.js`, placed on the faster justin2 timeline). Rose or Grace says "Tap." in Foot Tap. 50 Justin battle lines plus the two taps have emotive scripts in `tools/bake-page/pending.json`; every Justin script (battle and dialogue) is tagged thick New York accent (Tom, 14:04).
 - Voice Library and Bake page: Justin had no battle voice in `VOICE_CLIPS.voices`, so `make-index.js` and `make-list.js` skipped or crashed on his battle lines. Both now fall back to his dialogue voice (AoT Justin) with the accent direction; `make-index.js` also reads scripts from pending.json for unbaked lines. `data/voice-index.json` (70 Justin lines) and `data/bake-list.json` (54) rebuilt.
 - Text changes to unbaked lines: breaker_flip split into "Breaker's off." and breaker_flip_on "Breaker's... on."; giant_sneeze split into giant_sneeze_build "Ah... ah... ah..." and "AH CHOOOOO!"; drywall split into "Drywall's up." and drywall_dry "Let it dry."
+
+## 2026-10-31 (day, 13): Justin's head is a bit bigger in battle (`jhead1`)
+
+- Tom (14:01): in battle Justin's head a bit bigger, body unchanged. The head enlargement in `tools/sprite-bake/bake_justin_battle.py` went from 45% to 60% (`HEAD_K` 1.45 to 1.60), grown from the chin so the neck, shoulders and body stay the same size. All frames re-baked (stances and the nine move sheets). His idle figure is now 95 rows instead of 90, all of it head.
+- The painted atlas paths now carry `?v=jhead1`, so a phone cannot show the old picture with the new frame sizes.
+- Tested: `kit_test.py justin --speed2` (all nine moves, no fails, contact sheet and a battle frame looked at), `IDS=justin smoke.py`. Not played on the phone. Stamp `build jhead1`.
+
 ## 2026-10-31 (day, 12): Justin has his painted portrait (`jportrait1`)
 
 - Tom (13:59) sent Justin's oil-painting portrait. `portraits/justin.png` is now that painting, cropped square around the head so the face fills the frame like Tom, Amy and Boppy (replaces the cartoon placeholder).
