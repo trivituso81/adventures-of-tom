@@ -28,6 +28,8 @@ let ROSE_RIDE_PAL=ROSE_OW.pal;
   sp.kneel=P('kneel');   // painted kneel (the black eye is painted in by the baker), so battle-draw skips its bruise overlay
   // Extra battle poses (sheet A), faces left like the rest: boop, boopBack, raspberry, boo, tiara, hug, balance, lookout, throwWind, throwRel, sitStory, sitTea.
   for(const k in ROSE_HIRES.x) sp[k]=tag(ROSE_HIRES.x[k].slice(),'roseBattleX',k,false);
+  // Tickle Storm frames (own atlas): tk_ready, tk_creepA, tk_creepB, tk_launch, tk_air, tk_land, tk_tickleA to D, tk_feather_draw, tk_feather_swish, tk_feather_twirl, tk_finale, tk_doubled, tk_proud.
+  if(ROSE_HIRES.tk) { paintedAtlas('roseBattleT',AT.btt.src,AT.btt.rects,AT.btt.k).tintMode='coral'; for(const k in ROSE_HIRES.tk) sp[k]=tag(ROSE_HIRES.tk[k].slice(),'roseBattleT',k,false); }
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
   // Knocked out: napping with Lamby. The KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.rose={scale:1,pal:ROSE_HIRES.ko.pal,rows:tag(ROSE_HIRES.ko.rows.slice(),'roseKo','ko',true)};

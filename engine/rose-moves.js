@@ -1622,18 +1622,41 @@ SC.rf_feathers=(s,u)=>{ const G=s.G,ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade
     for(let j=-2;j<=2;j++) Ln(j*5,-4,j*5+2,4,1,'#ffffff88'); Ln(-18,0,15,0,1.5,'#7a4a6a'); gfx.restore(); } };
 SC.rf_wiggle=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,10),ms=s.t*1000; gfx.globalAlpha=fade(u,.85);
   for(const sd of [-1,1]) for(let k=0;k<4;k++) Ln(p.x-14+sd*10+k*3,p.y+14,p.x-14+sd*10+k*3+Math.sin(ms/40+k)*2,p.y+6,2,SKIN); };
-Rm.giggle_storm=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,52),lie=lieDy();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'act',dx:(u,tt)=>Math.sin(tt*40)*1.5},
-    {t:1400,f:'idle',rot:u=>-ez(u/.15)*1.45,dy:(u,tt)=>ez(u/.15)*lie-Math.abs(Math.sin(tt*16))*4},{t:3300,f:'celeb',hop:16},{t:3600,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
+// Painted frames (data/rose-hires.js tk): ready, creepA/B, launch, air, land, tickleA to D, feather_draw, feather_swish, feather_twirl, finale, doubled, proud.
+// Beats: sneak (0.5 to 1.35 s), crouch and pounce (1.35 to 1.75), tickle blur (1.75 to 2.45), feather (2.45 to 3.6), finale, laugh, proud, run home.
+// Hits and the spoken line keep their old times (1.9, 2.3, 2.7 s).
+Rm.giggle_storm=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,52),me=ST.unit(m);
+  const s1={x:lerp(me.x,p.x,.62),y:lerp(me.base,p.y,.62)},TK=['tk_tickleA','tk_tickleB','tk_tickleC','tk_tickleD'];
+  const st=ST.keys(fx,[
+    {t:0,x:'home',y:'home',f:'tk_ready',dx:(u,tt)=>Math.sin(tt*34)*.8},
+    {t:500,x:s1.x,y:s1.y,f:(u)=>Math.floor(u*7)%2?'tk_creepB':'tk_creepA',hop:3,hn:7},
+    {t:1350,f:'tk_launch',dy:u=>Math.sin(u*40)*.6},
+    {t:1500,x:p.x,y:p.y,f:'tk_air',ease:'lin',dy:u=>-Math.sin(u*Math.PI)*44},
+    {t:1750,f:'tk_land'},
+    {t:1850,f:u=>TK[Math.floor(u*14)%4],dx:(u,tt)=>Math.sin(tt*52)*1.4,dy:(u,tt)=>-Math.abs(Math.sin(tt*20))*1.5},
+    {t:2450,f:'tk_feather_draw'},
+    {t:2650,f:'tk_feather_swish',dx:u=>-ez(u)*4},
+    {t:3100,f:'tk_feather_twirl',dx:u=>-4+ez(u)*4,dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*5},
+    {t:3650,f:'tk_finale',hop:12,hn:2},
+    {t:4050,f:'tk_doubled',dy:(u,tt)=>-Math.abs(Math.sin(tt*18))*2.5,dx:(u,tt)=>Math.sin(tt*30)*1},
+    {t:4550,f:'tk_proud'},
+    {t:4900,f:'runR'},
+    {t:5550,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose runs over wiggling her fingers. Tickle fingers.'); say(m.id,'giggle_storm'); }],
-    [700,()=>{ scene('rf_wiggle',.7,{st}); scene('rf_word',.7,{st,txt:'TICKLE TICKLE',c:PINK,sc:2}); sfx.giggle(); }],
-    [1400,()=>{ sfx.giggle(); scene('rv_storm',2.4,{G}); scene('rf_feathers',2.4,{G}); setMessage('The tickles turn into a storm of feathers.'); }],
+    [0,()=>{ setMessage('Rose flexes her tickle fingers. Then she starts to sneak.'); say(m.id,'giggle_storm'); }],
+    [500,()=>{ sfx.select(); }],
+    [1350,()=>{ sfx.boing(); setMessage('She crouches. She is going to pounce.'); }],
+    [1500,()=>{ sfx.boing(); }],
+    [1750,()=>{ scene('rf_word',.8,{st,txt:'TICKLE TICKLE',c:PINK,sc:2}); sfx.giggle(); setMessage('POUNCE. Tickle fingers, everywhere.'); }],
     [1900,()=>{ sfx.giggle(); sfx.bonk(); all(list); landHit(34); scene('rv_laughs',1.6,{list}); }],
     [2300,()=>{ sfx.giggle(); sfx.bonk(); all(list); landHit(33); }],
+    [2450,()=>{ sfx.select(); setMessage('She pulls out a rainbow feather.'); }],
+    [2600,()=>{ scene('rv_storm',2.2,{G}); scene('rf_feathers',2.2,{G}); setMessage('The tickles turn into a storm of feathers.'); }],
     ['hf',2700],
     [2700,()=>{ sfx.giggle(); sfx.bonk(); all(list); landHit(33); scene('rv_big',1.2,{x:G.x,y:G.top-74,txt:'TICKLE STORM!',c:PINK2,sc:3}); }],
-    [4400,'end',res(E2)+'Nobody can keep a straight face. Not even the monsters.']]); };
+    [3650,()=>{ sfx.giggle(); }],
+    [4050,()=>{ sfx.giggle(); sfx.giggle(.15); }],
+    [5600,'end',res(E2)+'Nobody can keep a straight face. Not even the monsters.']]); };
 
 // ---------- Lamby Hug (A4): Lamby and Backup Lamby, a double squish ----------
 SC.rv_hug=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); let x=h.x-2,y=h.y+2,sc=1.35,rot=.3,sx=1,sy=1,bx=h.x+14,by=h.y+8,bsc=1.2,brot=-.3;

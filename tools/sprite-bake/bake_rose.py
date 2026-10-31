@@ -222,6 +222,24 @@ x_rows = {k: _rows['x_' + k] for k in x_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'rose-battle.webp'))
 x_rects = pack(x_big, os.path.join(ART, 'rose-battle-x.webp'))
 
+# Tickle Storm sheet (Oct 30, 4 x 4, 16 frames): own canvas and atlas so the other extra poses keep their layout. The rows use
+# the existing battle palette (nearest colour), so no other frame changes. Scaled so her upright 'proud' pose matches the idle pose.
+TK_NAMES = ['tk_ready', 'tk_creepA', 'tk_creepB', 'tk_launch', 'tk_air', 'tk_land', 'tk_tickleA', 'tk_tickleB', 'tk_tickleC', 'tk_tickleD',
+            'tk_feather_draw', 'tk_feather_swish', 'tk_feather_twirl', 'tk_finale', 'tk_doubled', 'tk_proud']
+_tk = slice_sheet(os.path.join(SRC, 'rose-tickle-v2.png'), [TK_NAMES[0:4], TK_NAMES[4:8], TK_NAMES[8:12], TK_NAMES[12:16]])
+rT = poses['b_idle'].height / _tk['tk_proud'].height
+tk_big = tighten(place({k: scaled_to(_tk[k], fb * rT) for k in TK_NAMES}, KB, 'head'), KB)
+def rows_in_palette(frames, k, palette):
+    keys = list(palette); pf = np.array([[int(palette[c][i:i + 2], 16) for i in (1, 3, 5)] for c in keys]).astype(int)
+    out = {}
+    for nm, v in frames.items():
+        arr = np.array(hard(scaled_to(v, 1.0 / k))); h, w = arr.shape[:2]
+        d = ((arr[:, :, :3].astype(int).reshape(-1, 1, 3) - pf[None, :, :]) ** 2).sum(2).argmin(1).reshape(h, w)
+        out[nm] = [''.join(keys[d[y, x]] if arr[y, x, 3] > 0 else '.' for x in range(w)) for y in range(h)]
+    return out
+tk_rows = rows_in_palette(tk_big, KB, bt_pal)
+tk_rects = pack(tk_big, os.path.join(ART, 'rose-battle-tk.webp'))
+
 # knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
@@ -300,6 +318,7 @@ atlas = {'bt': {'src': 'art/chars/rose-battle.webp', 'k': KB, 'rects': bt_rects}
          'ko': {'src': 'art/chars/rose-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/rose-ow.webp', 'k': KW, 'rects': ow_rects},
          'btx': {'src': 'art/chars/rose-battle-x.webp', 'k': KB, 'rects': x_rects},
+         'btt': {'src': 'art/chars/rose-battle-tk.webp', 'k': KB, 'rects': tk_rects},
          'rideBt': {'src': 'art/chars/rose-ride-bt.webp', 'k': KB, 'rects': rd_bt_rects},
          'rideOw': {'src': 'art/chars/rose-ride-ow.webp', 'k': KW, 'rects': rd_ow_rects}}
 # ride anchors: tuned values live in tools/sprite-bake/rose-ride-anchors.json (rows); defaults are a guess
@@ -336,6 +355,10 @@ js.append("  },")
 js.append("  x:{")
 for k in X_NAMES:
     js.append(f"    {k}:" + fmt_rows(x_rows[k]) + ",")
+js.append("  },")
+js.append("  tk:{")
+for k in TK_NAMES:
+    js.append(f"    {k}:" + fmt_rows(tk_rows[k]) + ",")
 js.append("  },")
 js.append("  ride:{pal:" + json.dumps(ride['pal']) + ",")
 for key in ('bt_idle', 'bt_celeb', 'ow_down', 'ow_up', 'ow_left'):

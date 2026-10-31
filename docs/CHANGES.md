@@ -2,6 +2,11 @@
 
 - Tom: Retail Therapy still showed old pixel art. In `Tm.overpriced_gadget` (`engine/tom-moves.js`) the painted box, gadget and roll were fine, but three effects were still hard-edged drawn shapes: the light rays (flat triangles), the sparkles around the gadget (pixel stars), and the receipt (a flat white rectangle with black outline and dashes, covering Tom's face, with a pile of little white rectangles).
 - Now: rays fade out with a gradient, sparkles are soft glints, the receipt is shaded paper with faint printed lines and a torn end hanging beside Tom, and the floor pile uses the painted receipt roll. Text callouts (RETAIL THERAPY, WORTH IT., $1499.99) are the shared pixel text and were left. Script tag bumped to `?v=rt1`.
+## 2026-10-30: Tickle Storm rebuilt from a painted 16-frame sheet
+
+- Tom's new sheet `tools/sprite-bake/src/rose-tickle-v2.png` (4 x 4, magenta, Rose facing left) is baked by `bake_rose.py` into its own atlas `art/chars/rose-battle-tk.webp` and `ROSE_HIRES.tk` (rows use the existing battle palette, so no other Rose frame changed). `data/rose-hires-use.js` registers the frames as `tk_ready, tk_creepA, tk_creepB, tk_launch, tk_air, tk_land, tk_tickleA to D, tk_feather_draw, tk_feather_swish, tk_feather_twirl, tk_finale, tk_doubled, tk_proud`.
+- `Rm.giggle_storm` (end of `engine/rose-moves.js`) now plays: flex fingers, tiptoe sneak, crouch, pounce in an arc, four-pose tickle blur, pull out the rainbow feather, swish, twirl in the feather storm, ta-da, doubled-over laugh, then runs home. Hits (34, 33, 33 at 1.9, 2.3, 2.7 s), the spoken line and the damage are unchanged. The move now lasts about 5.6 s (was 4.4).
+- Cache tags: `rose-moves.js?v=tk1`, `rose-hires.js?v=tk1`, `rose-hires-use.js?v=tk1`. Tests: kit_test rose giggle_storm (12 frames looked at), smoke IDS=rose clean.
 
 ## 2026-10-30: Floor Is Lava: old drawn lava removed
 
