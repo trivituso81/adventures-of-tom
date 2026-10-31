@@ -1911,8 +1911,10 @@ SC.rg_word=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,
 // ---------- Boo!! (A1): gone from the party row, out from behind the monster ----------
 Rm.boo=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m);
   const pB={x:Math.max(22,F.x-F.w*.5-18),y:Math.min(314,F.base+2)},OUT1=700,IN=1400,BOO=1650,BACK=3050;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'kneel'},{t:OUT1,x:'home',y:'home',f:'idle',hide:true},{t:IN,x:pB.x,y:pB.y,f:'kneel'},
-    {t:BOO,f:'boo',hop:34,sc:u=>1+ez(u/.3)*.35},{t:2200,f:'celeb',sc:1.3,dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*4},{t:2650,f:'boo',hop:10,hn:2},
+  // Behind the monster she faces right, toward it (her painted frames face left, so use the mirrored ones).
+  const RS=BATTLE_SPRITES.rose,fr=n=>RS&&RS[n+'Flip']?n+'Flip':n;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'kneel'},{t:OUT1,x:'home',y:'home',f:'idle',hide:true},{t:IN,x:pB.x,y:pB.y,f:fr('kneel')},
+    {t:BOO,f:fr('boo'),hop:34,sc:u=>1+ez(u/.3)*.35},{t:2200,f:fr('celeb'),sc:1.3,dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*4},{t:2650,f:fr('boo'),hop:10,hn:2},
     {t:BACK,x:pB.x,y:pB.y,f:'idle',hide:true},{t:BACK+120,x:'home',y:'home',f:'idle',hide:true},{t:BACK+140,x:'home',y:'home',f:'celeb',hop:10},{t:BACK+600,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose crouches down right where she\'s and winks.'); }],

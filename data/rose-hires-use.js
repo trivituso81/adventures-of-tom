@@ -33,6 +33,8 @@ let ROSE_RIDE_PAL=ROSE_OW.pal;
   // Lamby Boomerang frames (own atlas): bm_windA, bm_windB, bm_throw, bm_follow, bm_watch, bm_reach, bm_catch, bm_cheer (the lamb flight frames are a prop atlas, art/props/rose/lamby_fly.webp).
   if(ROSE_HIRES.bm) { paintedAtlas('roseBattleB',AT.btb.src,AT.btb.rects,AT.btb.k).tintMode='coral'; for(const k in ROSE_HIRES.bm) sp[k]=tag(ROSE_HIRES.bm[k].slice(),'roseBattleB',k,false); }
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
+  // Right-facing kneel and boo, for Boo!! (she pops out behind the monster and must face it).
+  sp.kneelFlip=mirror(sp.kneel); if(sp.boo) sp.booFlip=mirror(sp.boo);
   // Knocked out: napping with Lamby. The KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.rose={scale:1,pal:ROSE_HIRES.ko.pal,rows:tag(ROSE_HIRES.ko.rows.slice(),'roseKo','ko',true)};
 })();
