@@ -11,6 +11,13 @@
 ## 2026-10-30: Seat 1A: Tom now lies on the lie-flat pod
 
 - At the end of Seat 1A Tom tipped over in mid-air with nothing under him (and the sleep mask landed on the wrong spot). The painted lie-flat pod now slides in beside the party and Tom rests on its mattress, with the sleep mask and Zs, same placement as Boarding Group Zero. When Tom tucks himself in, the pod's own bedding replaces the separate duvet. `tom-moves.js?v=tom9`.
+## 2026-10-30 (night): Square walk-behind (first map with a foreground effect)
+
+- New `PLATE_BEHIND` zones and `plateWalkBehind()` in `engine/plate.js`, called from `engine/draw.js` right after the actors are drawn. When an actor's feet are north of a zone's base line and the body overlaps the zone, that slice of the painting is drawn over the actor again, so Tom, the family and townspeople walk behind it.
+- Square zones: GRUMP HOLLOW board and its two posts, RIVITUSO ROW board and its two posts, the tree between Snail Mail and Kettle Cottage, the tree between Moon Club and Taxi Co., and the two big trees at the bottom edge. The east plaza tree was left out (no walkable ground behind it).
+- Not covered yet: shop awnings and roof eaves along the alleys, lamp posts, every other map. Zones are defined per map id in `PLATE_BEHIND`; add them as each area is installed.
+- Checks: smoke clean, reach_test town 0 fails, phone screenshots at the south board, both mid trees and the bottom tree looked at.
+
 ## 2026-10-30: Beanie Master cloud is a fine mist, toot louder again
 
 - `SC.dv_cloud` in `engine/deedee-moves.js` is now a fine green mist (many faint soft blobs, a spray of tiny specks, thin curling wisps, no outlines) that drifts to the monster and settles on it. The blast at her back (`SC.dv_toot`) is a soft mist pop with a thin ring and fine lines instead of outlined puffs.

@@ -145,6 +145,46 @@ function drawPlateSigns(list) {
   }
   ctx.restore();
 }
+// Walk-behind (2026-10-30, Square first): zones are the painted pixels of tall things (exit boards and posts, tree canopies) in art px
+// (64 per tile). base = art y where the thing stands on the ground. An actor whose feet are north of base (on screen: behind it) and whose
+// body overlaps the zone gets that slice of the painting drawn over it again, so Tom walks behind the tree and under the board.
+// Zones hold only the tall object, never the ground in front of it. rect: x,y,w,h. ellipse: cx,cy,rx,ry.
+const PLATE_BEHIND={ town:[
+  // GRUMP HOLLOW exit board and its posts (north steps)
+  {x:440,y:28,w:152,h:72,base:112},{x:418,y:4,w:28,h:108,base:112},{x:582,y:4,w:30,h:108,base:112},
+  // RIVITUSO ROW exit board and its posts (south street)
+  {x:850,y:1362,w:186,h:70,base:1525},{x:818,y:1336,w:30,h:190,base:1525},{x:1038,y:1336,w:30,h:190,base:1525},
+  // tree canopies: between the south shops and the two big trees at the bottom (the plaza east tree has no walkable ground behind it)
+  {cx:490,cy:902,rx:75,ry:64,base:975},
+  {cx:1377,cy:905,rx:78,ry:66,base:985},
+  {cx:467,cy:1395,rx:190,ry:115,base:1592},
+  {cx:1407,cy:1408,rx:205,ry:120,base:1600}
+] };
+function plateWalkBehind(map,plate) {
+  const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
+  const s=T/64, list=[...map.npcs,...followers,player];
+  let ctxDone=false;
+  for(const z of zones) {
+    const x0=z.cx!==undefined?z.cx-z.rx:z.x, x1=z.cx!==undefined?z.cx+z.rx:z.x+z.w;
+    const y0=z.cy!==undefined?z.cy-z.ry:z.y, y1=z.cy!==undefined?z.cy+z.ry:z.y+z.h;
+    let hit=false;
+    for(const a of list) {
+      const p=position(a), fx=(p.x+.5)*64, fy=(p.y+1)*64;
+      if(fy>z.base) continue;                       // feet south of the base: in front of it
+      if(fx+36<x0||fx-36>x1||fy+4<y0||fy-130>y1) continue;   // body box (about 72 x 130 art px) misses the zone
+      hit=true; break;
+    }
+    if(!hit) continue;
+    if(!ctxDone) { ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctxDone=true; }
+    ctx.save();
+    ctx.beginPath();
+    if(z.cx!==undefined) ctx.ellipse(z.cx*s,z.cy*s,z.rx*s,z.ry*s,0,0,Math.PI*2); else ctx.rect(z.x*s,z.y*s,z.w*s,z.h*s);
+    ctx.clip();
+    ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
+    ctx.restore();
+  }
+  if(ctxDone) ctx.imageSmoothingEnabled=false;
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).

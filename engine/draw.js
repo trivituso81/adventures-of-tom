@@ -85,6 +85,7 @@ function draw(time) {
     else if(typeof drawActorSpaced==='function') drawActorSpaced(item.value);
     else drawActor(item.value);
   }
+  if(plate&&!hold&&typeof plateWalkBehind==='function') plateWalkBehind(currentMap,plate);   // engine/plate.js: tall painted things cover actors standing behind them
 
   if(intro.active) drawIntroWorld(time); else { drawTarget(facingTarget()); if(typeof twDraw==='function') twDraw(time); }
   if(kiss) {
