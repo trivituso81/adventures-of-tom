@@ -1,3 +1,7 @@
+## 2026-10-31 (night, 20): Acorn Agent drawn smaller
+
+- Tom (00:27): the Acorn Agent should be smaller in the overworld and in battle. New per-monster fields in `data/oak-monsters.js`: `owScale:.7` (map; `placeMonsters` in engine/world.js sets `mscale`) and `shrink:.7` (battle; multiplies the size in `b2LayoutFoes`, engine/battle2-ui.js). Both are 70 percent; change those two numbers to tune. Only the Acorn Agent uses them, so Chairman Cheeks' summoned agents shrink too.
+- Tests: screenshots of Old Oak Park (agents smaller than Tom) and a three-agent battle looked at; smoke 0 fails; oakpark_test clean. Tags `ag1` on oak-monsters.js, world.js, battle2-ui.js, main.js (stamp `build ag1`).
 ## 2026-10-31 (night, 20): Director mode much harder
 
 - Tom (00:30): Director mode needs to be decently harder. `B7_DIFF.director` in `engine/feel.js`: monster hits x1.6 to x2, monster HP x1.3 to x1.6, monster turn speed x1.25 to x1.4. Shield, Tombo and snack rules unchanged. Rose and Grace modes untouched. Call made: numbers only, no new rules; if still too easy, add rules next.

@@ -31,7 +31,7 @@ function b2LayoutFoes() {
   const live=B2.foes.filter(f=>!f.dead);
   const F=live.filter(f=>f.row==='front'),Bk=live.filter(f=>f.row==='back'),n=live.length;
   const want=[0,96,80,68,60][n]||60;
-  const size=(f,k,wn=want)=>{ const base=f.def.scale||3,w=f.def.sprite[0].length; return Math.max(base*.7,Math.min(base*(f.boss?1.5:1.3),(f.boss?wn*1.35:wn)/w))*k; };
+  const size=(f,k,wn=want)=>{ const base=f.def.scale||3,w=f.def.sprite[0].length; return Math.max(base*.7,Math.min(base*(f.boss?1.5:1.3),(f.boss?wn*1.35:wn)/w))*k*(f.def.shrink||1); };   // shrink: a monster drawn smaller in battle (Acorn Agent)
   const fy={1:[264],2:[224,302],3:[218,262,306]},fx={1:[168],2:[184,156],3:[188,158,188]};
   const by={1:[236],2:[214,268]},bx={1:[84],2:[92,70]};
   // A boss holds the middle of the front row.

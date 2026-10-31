@@ -142,6 +142,7 @@ function placeMonsters(map,spots) {
   for(const [id,x,y] of spots||[]) {
     const d=MONSTERS[id];
     const mon=actor(d.name,x,y,'moss',[]);
+    if(d.owScale) mon.mscale=d.owScale;   // a monster drawn smaller on the map (Acorn Agent)
     mon.monster=id; mon.roam=0; mon.tier=0; mon.maxHp=d.hp; mon.defeatedUntil=0;
     map.npcs.push(mon);
   }

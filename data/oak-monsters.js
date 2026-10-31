@@ -355,7 +355,7 @@ const CACHE_PAL={a:'#e7974c',b:'#b1833e',c:'#ad6b38',d:'#916436',e:'#9d5c2f',f:'
 const CHAIR_PAL={a:'#f8dcb2',b:'#ddb78e',c:'#d4965d',d:'#b28a6e',e:'#c26d32',f:'#996b4b',g:'#b85c2b',h:'#91572f',i:'#a34c27',j:'#924522',k:'#7e4522',l:'#7b351c',m:'#633e2b',n:'#921a1d',o:'#60301b',p:'#5a2917',q:'#561512',r:'#34140c'};
 
 Object.assign(MONSTERS,{
-  acornagent:{id:'acornagent',la:true,coins:7,coinStep:2,name:'Acorn Agent',the:'the Acorn Agent',short:'Agent',sprite:AGENT_SPRITE,pal:AGENT_PAL,scale:3,eyes:[[10,13],[17,13]],mouth:[14,20],
+  acornagent:{id:'acornagent',la:true,coins:7,coinStep:2,name:'Acorn Agent',the:'the Acorn Agent',short:'Agent',sprite:AGENT_SPRITE,pal:AGENT_PAL,scale:3,owScale:.7,shrink:.7,eyes:[[10,13],[17,13]],mouth:[14,20],
     hp:18,hpStep:3,atk:1,xp:8,xpStep:2,level:6,rank:'EASY',
     intro:'An Acorn Agent drops out of a tree, touching its earpiece!',
     attacks:['The agent bonks {t}.','The agent pelts {t} with a pebble.','The agent whispers into its earpiece about {t}.'],
