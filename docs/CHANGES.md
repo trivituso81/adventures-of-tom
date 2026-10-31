@@ -1,3 +1,8 @@
+## 2026-10-30 (night, 8): Garden Shower uses painted Deedee
+
+- Tom: Garden Shower was showing a frame of her old graphic. Cause: while she aimed the hose (walk-up and the whole spray hold) the move used the base `aim` frame, which the painted set never replaced, so she shrank to the old pixel sprite. The last `D.garden_shower` in engine/deedee-moves.js now uses the painted `x_flick` pose (arm thrust toward the row, wide stance) via `DD_XF('flick','aim')`; the old frame is only a fallback if the painted set is missing. Hose prop, spray, timings, damage and lines unchanged (no re-bake).
+- Tests: `kit_test.py deedee --only=garden_shower --speed2` 0 fails, frames looked at; `IDS=deedee smoke.py` 0 fails. Live URL not checked (sandbox cannot reach github.io). Stamp unchanged; `deedee-moves.js?v=gs1`.
+
 ## 2026-10-30: Floor Is Lava: cushion twice as big
 
 - Tom: the cushion Rose stands on was too small. The painted `rose/couch_cushion` in `seatCush` (engine/rose-moves.js) is now drawn 136 x 76 (was 68 x 38), re-centred so her feet stay on its top face; its shadow on the lava is doubled and the lava pool grows 26 px right and 16 px down to cover it. Cache tag `rose-moves.js?v=lv3`.

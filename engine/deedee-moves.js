@@ -1916,7 +1916,8 @@ SC.df_hose=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-8,y=h.y-2,P=s.P,t=s.t; gfx.
     for(const p of P.list) if(Math.abs(p.x-tx)<p.w*.9) { gfx.globalAlpha=.55*env; E(p.x,p.base+2,p.w*.55,7,'#6aa8e0'); } }
   if(ms<P.s0) { gfx.globalAlpha=1; bigWord('GENTLE',x-6,y-30,'#8ef0a0',1); } gfx.globalAlpha=1; };
 D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,150),me=ST.unit(m);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim'},{t:1500,f:'aim',dx:u=>-Math.sin(u*Math.PI)*14,dy:u=>Math.sin(u*Math.PI*2)*3},{t:2900,f:'hip'},{t:3300,f:'walkR',hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
+  const AIM=DD_XF('flick','aim');   // painted arm-out pose for aiming the hose; the old pixel 'aim' frame only if the painted set is missing
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:AIM},{t:1500,f:AIM,dx:u=>-Math.sin(u*Math.PI)*14,dy:u=>Math.sin(u*Math.PI*2)*3},{t:2900,f:'hip'},{t:3300,f:'walkR',hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
   const P={s0:1500,s1:2900,x0:Gp.x0,x1:Gp.x1,yl:Gp.top+Math.max(10,(Gp.base-Gp.top)*.3),fl:p.y,list:list.map(f=>ST.foe(f))},hit=2200;
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks over with the garden hose. She checks the nozzle. GENTLE. Good.'); say(m.id,'garden_shower'); scene('df_hose',3.6,{P}); }],
