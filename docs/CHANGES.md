@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 9): Voice Library loads the directions the baked clips were made with (`vlib5`)
+
+- Tom (13:24): most dialogue boxes lacked the emotive [annotations] the baked clips used; he wants to bulk-remake with them. New gold button on the key card, "Load the directions used for the baked clips": reads his ElevenLabs history (text only), matches each request to a line by voice and words (contraction and number tolerant), and puts that script in the line's box, rebuilt on the line's current words (tags and CAPS kept, old wording never). His own edits still win. Then Select all shown and Regenerate remakes them with those directions.
+- Why this way: the hand-written dialogue scripts live in 17 large Project docs; copying them through Claude would take several sessions. History holds the exact script of every clip, including the 2026-10-27/28 re-bakes.
+- Tested: `tools/voice-library/test.py` with a mocked history (an uncontracted old script lands on the contracted line with its tags; words match the screen). Not run against the real account (the key lives on Tom's phone). Stamp `build vlib5`.
+
 ## 2026-10-31 (day, 8): Voice Library search forgives spelling (`vlib4`)
 
 - Tom (13:20) could not find "yamamot". The line is there (Grace, kind `ymamot`, "Ketchup, pickles, cereal, sock. Ymamot Creation!", no clip yet; little Tom's line was removed in `ymamot4`), but search only matched exact letters. Search now matches every typed word inside the line, speaker, place, move name or direction, or within one typo (two for words of 7+ letters), so "yamamot" finds Ymamot. Results are memoized per query.

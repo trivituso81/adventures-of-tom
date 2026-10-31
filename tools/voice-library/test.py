@@ -20,7 +20,10 @@ async def main():
         ctx = await b.new_context(viewport={'width': 390, 'height': 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
         page = await ctx.new_page()
         calls = []; bodies = []
+        HIST = {'history': [], 'has_more': False}
         async def el(route):
+            if '/v1/history' in route.request.url:
+                await route.fulfill(status=200, body=json.dumps(HIST), headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}); return
             calls.append(route.request.url); bodies.append(route.request.post_data or '')
             await route.fulfill(status=200, body=MP3, headers={'Content-Type': 'audio/mpeg', 'Access-Control-Allow-Origin': '*'})
         await page.route('https://api.elevenlabs.io/**', el)
@@ -106,6 +109,17 @@ async def main():
         # Show: re-recorded on this phone.
         await page.click('#clear'); await page.click('.chip[data-g="show"][data-v="phone"]')
         ok(await J("__VL.visible().length") == 3, 'Re-recorded filter shows the 3 lines')
+        # Directions from ElevenLabs history: a dialogue line baked from an older, uncontracted script gets its tags back on the
+        # current words.
+        await page.click('#clear')
+        pick = await J("(()=>{const it=__VL.IDX.items.find(i=>i.t==='d'&&i.f>=0&&/\\b(I'm|It's|don't)\\b/.test(i.x)&&i.x.split(' ').length>4); const v=__VL.IDX.voices['dialog|'+it.v]; return {key:__VL.lk(it),x:it.x,vid:v.voice_id};})()")
+        old_script = '[sly, delighted] ' + pick['x'].replace("I'm", 'I am').replace("It's", 'It is').replace("don't", 'do not').replace(' ', ' [beat] ', 1)
+        HIST['history'] = [{'history_item_id': 'h1', 'voice_id': pick['vid'], 'text': old_script, 'date_unix': 1}]
+        await page.click('#hist'); await page.wait_for_function("document.getElementById('histmsg').textContent.includes('baked clips')", timeout=10000)
+        got = await J(f"JSON.parse(localStorage.getItem('aot-vl-hist'))[{json.dumps(pick['key'])}]")
+        ok(bool(got) and got.startswith('[sly, delighted]') and '[beat]' in got, f'history direction applied: {got}')
+        words_ok = await J(f"(()=>{{const g={json.dumps(got or '')}.replace(/\\[[^\\]]*\\]/g,' ').replace(/\\s+/g,' ').trim(); return g==={json.dumps(pick['x'])}.replace(/’/g,\"'\");}})()")
+        ok(words_ok, 'history direction keeps the current words (contractions as on screen)')
         ok(not errs, 'no page errors: ' + '; '.join(errs[:3]))
         # The game reads the phone clip at startup.
         text = await J(f"__VL.itemByKey({json.dumps(key)}).x")

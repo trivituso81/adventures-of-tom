@@ -28,6 +28,10 @@ Title screen > ADMIN > VOICE LIBRARY opens `voices.html` inside the app.
 
 Whenever clips are merged, lines change or scripts are added: `python3 tools/voice-library/battle-scripts.py && python3 tools/voice-library/harvest.py && node tools/voice-library/make-index.js`, bump nothing else (the page fetches the index with no cache), commit.
 
+## Baked directions from ElevenLabs history (`vlib5`)
+
+The key card has "Load the directions used for the baked clips". It reads the account's ElevenLabs history (`GET /v1/history`, 1,000 per page, text only), keeps requests that contain [tags], indexes them by voice id and canonical words (tags stripped, contractions expanded, numbers and Tah Tah spelled out, stretched vowels folded), and for each line takes the newest exact match, else the best LCS match at 85% or more. `retag()` then rebuilds the script on the CURRENT line words: each old tag goes before the line word its next old word matched; matching words keep the old spelling (CAPS). Boppy gets "thick New York accent". Stored in localStorage `aot-vl-hist`; order of use: Tom's edit, history direction, index script. Needs the key to allow History (read).
+
 ## Open item
 
 Dialogue scripts: only battle lines have hand-written directions in the index so far. The Project holds the hand-written dialogue scripts (`claude/dialogue-scripts-ch1..10.json`, `-ch21`, `-arrivals`, `-boppy`, `-deedee`, `-amy-rewrite`, `-scene-lines`, `-boomie`; format `{chapter, lines:[{voice,speaker,text,ctx,script}]}`). Copy them into `tools/voice-library/scripts/` and rebuild: make-index matches them by voice and text (contraction-tolerant matching still to add, see `tools/clip-audit/keepscript.py`; the rule is always rebuild the words from the current line text, keep the tags). Until then dialogue lines start from a plain direction and say so on the card.

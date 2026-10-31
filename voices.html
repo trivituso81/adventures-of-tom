@@ -125,7 +125,11 @@ const lk=it=>(it.t==='b'?'b|':'d|')+it.v+'|'+it.x;
 const kinds=it=>it.t==='b'?it.k:[''];
 const rowId=(it,k)=>[it.t==='b'?'battle':'dialog',it.v,k,it.x].join('|');   // bake.html clipId
 const isDog=it=>it.v==='nara'&&it.t==='b';
-const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(isDog(it)?it.p:it.s);
+// Direction order: Tom's own edit here, then the direction the baked clip was actually made with (read from his ElevenLabs
+// history, see loadHistory), then the written one in the index.
+let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}; }catch(e){}
+const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null?HIST[lk(it)]:(isDog(it)?it.p:it.s));
+const hasWritten=it=>HIST[lk(it)]!=null||!it.auto;
 const voiceOf=it=>IDX.voices[(it.t==='b'?'battle|':'dialog|')+it.v];
 const whoName=it=>it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;
 function finalText(it){
@@ -391,8 +395,68 @@ async function runBulk(){
 function paintKey(){
   const has=!!apiKey();
   $('keybox').innerHTML=has
-    ?'<div class="keyrow"><span class="ok" style="flex:1">ElevenLabs key saved on this phone.</span><button class="small" id="chg">Change key</button></div>'
+    ?'<div class="keyrow"><span class="ok" style="flex:1">ElevenLabs key saved on this phone.</span><button class="small" id="chg">Change key</button></div>'+
+     '<div class="keyrow" style="margin-top:10px"><button class="small gold" id="hist">Load the directions used for the baked clips</button><span class="hint" id="histmsg">'+histNote()+'</span></div>'
     :'<label for="key">ElevenLabs API key (saved on this phone only)</label><input id="key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste it here"><div class="keyrow" style="margin-top:8px"><button class="small" id="savekey">Save key</button></div>';
+}
+
+// ---------- directions from ElevenLabs history ----------
+// Every clip in the game was made from a script with [directions]. ElevenLabs keeps each request in the account's history, so
+// this reads the history (text only, no audio), matches each request to a line by voice and words, and keeps the newest match
+// as that line's direction. The words always come from the game's current line: only the [tags] and the emphasis of matching
+// words are taken from the old script, so a line reworded since (contractions, numbers) still says what the screen shows.
+function histNote(){ const n=Object.keys(HIST).length; return n?n.toLocaleString()+' lines use the directions from their baked clips.':''; }
+const ONES='zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen'.split(' ');
+const TENS=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+function numWords(n){ if(n<20) return ONES[n]; if(n<100) return TENS[Math.floor(n/10)]+(n%10?'-'+ONES[n%10]:''); if(n<1000) return ONES[Math.floor(n/100)]+' hundred'+(n%100?' '+numWords(n%100):''); return String(n); }
+function speakText(t){ return t.replace(/\bTa-?ta\b/gi,m=>m===m.toUpperCase()?'TAH TAH':'Tah Tah').replace(/\bMr\./g,'Mister').replace(/\bMrs\./g,'Missus').replace(/\bDr\./g,'Doctor')
+  .replace(/\b(1[0-9]{3}|20[0-9]{2})\b/g,m=>{ const a=+m.slice(0,2),b=+m.slice(2); return numWords(a)+' '+(b===0?'hundred':b<10?'oh '+numWords(b):numWords(b)); })
+  .replace(/\b\d{1,3}\b/g,m=>numWords(+m)).replace(/[’]/g,"'").replace(/\s+—\s+|—/g,', '); }
+const CONTR=[["won't",'will not'],["can't",'can not'],["let's",'let us'],["n't",' not'],["'re",' are'],["'ve",' have'],["'ll",' will'],["'m",' am'],["it's",'it is'],["that's",'that is'],["there's",'there is'],["here's",'here is'],["what's",'what is'],["who's",'who is'],["he's",'he is'],["she's",'she is']];
+const nw=w=>w.toLowerCase().replace(/[’]/g,"'").replace(/[^a-z0-9']/g,'').replace(/^'+|'+$/g,'');
+function canonWords(t){ let s=speakText(t.replace(/\[[^\]]*\]/g,' ')).toLowerCase(); for(const [a,b] of CONTR) s=s.split(a).join(b);
+  s=s.replace(/([aeiou])\1{2,}/g,'$1').replace(/-/g,' '); return s.split(/\s+/).map(nw).filter(Boolean); }
+// Longest common subsequence of two word lists: pairs [i in a, j in b].
+function lcsPairs(a,b){ const n=a.length,m=b.length,D=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--) for(let j=m-1;j>=0;j--) D[i][j]=a[i]===b[j]?D[i+1][j+1]+1:Math.max(D[i+1][j],D[i][j+1]);
+  const out=[]; let i=0,j=0; while(i<n&&j<m){ if(a[i]===b[j]){ out.push([i,j]); i++; j++; } else if(D[i+1][j]>=D[i][j+1]) i++; else j++; } return out; }
+// Rebuild an old script onto the current line: line words in order, each old [tag] placed before the line word its next old
+// word matched, matching words keep the old script's spelling (CAPS, stretched vowels).
+function retag(script,line){
+  const toks=script.match(/\[[^\]]*\]|[^\s\[]+/g)||[]; const lw=speakText(line).split(/\s+/).filter(Boolean);
+  const sIdx=[]; toks.forEach((t,k)=>{ if(t[0]!=='[') sIdx.push(k); });
+  const a=sIdx.map(k=>nw(toks[k].replace(/([aeiouAEIOU])\1{2,}/g,'$1'))), b=lw.map(nw);
+  const pairs=lcsPairs(a,b); if(!b.length||pairs.length<Math.max(1,Math.ceil(b.length*.6))) return null;
+  const s2l=new Map(pairs), surf=lw.slice(); pairs.forEach(([i,j])=>{ const o=toks[sIdx[i]]; if(/[A-Z]{2}/.test(o)&&!/[A-Z]{2}/.test(lw[j])) surf[j]=o.replace(/[.,!?;:…]+$/,'')+lw[j].replace(/^.*?([.,!?;:…]*)$/,'$1'); });
+  const before=lw.map(()=>[]); const tail=[];
+  toks.forEach((t,k)=>{ if(t[0]!=='[') return; let si=sIdx.findIndex(x=>x>k); let j=-1;
+    for(let q=si;q>=0&&q<sIdx.length;q++){ if(s2l.has(q)){ j=s2l.get(q); break; } }
+    if(j<0) tail.push(t); else before[j].push(t); });
+  return lw.map((w,j)=>before[j].concat([surf[j]]).join(' ')).join(' ')+(tail.length?' '+tail.join(' '):'');
+}
+async function loadHistory(){
+  if(!apiKey()) return toast('Paste your ElevenLabs API key at the top first.');
+  const msg=$('histmsg'), btn=$('hist'); btn.disabled=true; msg.textContent='Reading your ElevenLabs history...';
+  const byVoice=new Map(); let after=null, pages=0, total=0;
+  try{
+    for(;;){ const u='https://api.elevenlabs.io/v1/history?page_size=1000'+(after?'&start_after_history_item_id='+encodeURIComponent(after):'');
+      const r=await retry(()=>fetch(u,{headers:{'xi-api-key':apiKey()}}).then(async r=>{ if(!r.ok) throw await apiErr(r); return r.json(); }));
+      for(const h of (r.history||[])){ if(!h.text||!h.voice_id||!/\[/.test(h.text)) continue; if(!byVoice.has(h.voice_id)) byVoice.set(h.voice_id,[]); byVoice.get(h.voice_id).push(h); total++; }
+      pages++; msg.textContent='Reading your ElevenLabs history... '+total.toLocaleString()+' scripts';
+      if(!r.has_more||!r.last_history_item_id||pages>60) break; after=r.last_history_item_id; }
+  }catch(e){ btn.disabled=false; msg.textContent=''; return toast(/ 401|403|permission/i.test(e.message)?'The key cannot read history. In ElevenLabs, allow "History" (read) for this key, then try again.':e.message); }
+  // Index the history by voice and words, newest first.
+  const idx=new Map(); for(const [vid,list] of byVoice){ list.sort((x,y)=>(y.date_unix||0)-(x.date_unix||0)); const m=new Map(); for(const h of list){ const k=canonWords(h.text).join(' '); if(!m.has(k)) m.set(k,h); } idx.set(vid,{m,list}); }
+  let got=0; const next={};
+  for(const it of IDX.items){ if(isDog(it)) continue; const v=voiceOf(it); if(!v||!v.voice_id||!idx.has(v.voice_id)) continue; const V=idx.get(v.voice_id);
+    const want=canonWords(it.x).join(' '); let h=V.m.get(want);
+    if(!h){ const ww=want.split(' '); let best=null,bs=0; for(const c of V.list){ const cw=canonWords(c.text); if(Math.abs(cw.length-ww.length)>3) continue; const p=lcsPairs(cw,ww).length/Math.max(cw.length,ww.length); if(p>bs){ bs=p; best=c; } } if(bs>=.85) h=best; }
+    if(!h) continue; const sc=retag(h.text,it.x); if(!sc) continue;
+    let out=sc; if(it.v==='boppy'&&!/new york/i.test(out)){ out=/^\[/.test(out)?out.replace(/^\[/,'[thick New York accent, '):'[thick New York accent] '+out; }
+    next[lk(it)]=out; got++; }
+  HIST=next; try{ localStorage.setItem('aot-vl-hist',JSON.stringify(HIST)); }catch(e){}
+  btn.disabled=false; msg.textContent=histNote(); renderList();
+  toast('Found the baked directions for '+got.toLocaleString()+' of '+IDX.items.length.toLocaleString()+' lines ('+total.toLocaleString()+' scripts in your history). Lines you edited here keep your edits.');
 }
 
 // ---------- events ----------
@@ -400,6 +464,7 @@ document.addEventListener('click',async e=>{
   const t=e.target.closest('button,[data-act]'); if(!t) return;
   if(t.id==='savekey'){ const v=($('key').value||'').trim(); if(!v) return toast('Paste the key first.'); try{ localStorage.setItem(KEYNAME,v); }catch(err){ return toast('This browser would not save the key.'); } paintKey(); return; }
   if(t.id==='chg'){ try{ localStorage.removeItem(KEYNAME); }catch(err){} paintKey(); return; }
+  if(t.id==='hist'){ loadHistory(); return; }
   if(t.id==='clear'){ F.who.clear(); F.type.clear(); F.ch.clear(); F.show='all'; F.q=''; $('q').value=''; saveF(); shown=PAGE; renderAll(); return; }
   if(t.id==='selmode'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
   if(t.id==='exp') return exportClips();
