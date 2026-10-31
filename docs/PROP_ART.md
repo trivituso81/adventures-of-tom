@@ -36,7 +36,7 @@ Also hooked but not drawn by a current Primary move (kept as harmless fallbacks)
 
 ## Justin (2026-10-31)
 
-Sheet 1 is baked to `art/props/justin/` (see the README in `tools/sprite-bake/src/props/`). Wired: `couch` and `tv_football` (Bad Call, back-layer scenes `jv_couch` and `jv_tv` in `engine/justin-moves.js`; the flag on the field is drawn in code), `wire_nut_*` (Wire Nuts, `hexNut`), `plaster_chunk` (Demo Day, `jv_chunks`). Waiting on the redo sheet: basement wall (Demo Day, cracks stay code), standing drywall sheet (DRYWALL), drywall chunk, stud, dust puff.
+Sheet 1 is baked to `art/props/justin/` (see the README in `tools/sprite-bake/src/props/`). Wired: `couch` and `tv_football` (Bad Call, back-layer scenes `jv_couch` and `jv_tv` in `engine/justin-moves.js`; the flag on the field is drawn in code), `wire_nut_*` (Wire Nuts, `hexNut`), `plaster_chunk` (Demo Day, `jv_chunks`). Sheet 2 (the redo) is also wired: `wall_intact` (Demo Day, `jv_wall`, cracks stay drawn), `drywall_sheet` (DRYWALL, `jv_sheet`), `drywall_chunk`, `splintered_stud` and `plaster_chunk` (`jv_chunks`), `dust_puff` (Demo Day, `jv_dust`).
 
 ## Next
 

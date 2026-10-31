@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 20): Justin's redo props: wall, standing drywall sheet, debris (`jprops2`)
+
+- Tom (16:35): the redo sheet came back (`tools/sprite-bake/src/props/justin-sheet2.png`), all 5 cells matched: basement wall, standing drywall sheet with four screws, drywall chunk, splintered stud, dust puff. Baked to `art/props/justin/`.
+- Wired in `engine/justin-moves.js`: Demo Day now shows the painted wall (the cracks are still drawn over it), mixed painted debris (drywall chunk, plaster chunk, splintered stud) and a painted dust puff on each hit (`jv_dust`). DRYWALL stands the painted sheet with its screws in front of the party (the drawn sheet and drawn screws are only the fallback). Drawn versions stay as fallbacks.
+- Not used yet: basketball TV, TV off, cord, drill, bucket, ladder, leaning drywall, drywall square (all baked).
+- Tested: `kit_test.py justin` for demo_day and drywall (`PAINTED_PROPS` shows the wall, dust, three debris pieces and the sheet drawn), frames looked at (no doubled sheet), `IDS=justin smoke.py` and `smoke.py` no fails. Not played on the phone. Stamp `build jprops2`.
+
 ## 2026-10-31 (day, 19): Justin's first painted props: couch, wide TV, wire nuts (`jprops1`)
 
 - Tom (16:09): Bad Call needs a wide TV with sports on it, and a prompt for all of Justin's props. The sheet came back (`tools/sprite-bake/src/props/justin-sheet1.png`). Cells 1 to 6 (couch, five wire nuts) and 15 (football TV) matched the list. Cells 7 to 14 and 16 did not: the generator drew an extension cord, a drill, a leaning drywall sheet, a joint compound bucket, a stepladder, a drywall square, a TV that is off, a basketball TV and a plaster chunk. All 16 are baked to `art/props/justin/` (`props.json` names what is really drawn). The redo prompt is the Project doc `claude/justin-props-redo-prompt.txt` (5 cells: basement wall, standing drywall sheet, drywall chunk, splintered stud, dust puff).
