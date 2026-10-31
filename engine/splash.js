@@ -146,13 +146,28 @@ const SPLASH_MODES={
       {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
-    {name:'BATTLE LAB',sub:'Try every move and Tombo.',to:'lab'},
+    {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
-  // Test fights for the new battle (engine/battle2.js, B2_LAB in data/battle2-data.js).
-  lab:{tab:'Battle Lab',cue:'A / Enter to fight. B / Esc to go back',choices:()=>[
-    ...B2_LAB.map((L,i)=>({name:L.name,sub:L.sub,act:()=>splashLab(i)})),
-    {name:'BACK',sub:'',cls:'back',act:splashBack}]}
+  // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
+  lab:{get tab(){ return splashLabTab(); },cue:'A / Enter to fight. B / Esc to go back',choices:()=>{
+    const per=SPLASH_LAB_PER,pages=Math.ceil(B2_LAB.length/per),pg=Math.max(0,Math.min(pages-1,splash.labPage||0));
+    const from=pg*per,list=B2_LAB.slice(from,from+per).map((L,k)=>({name:L.name,sub:L.sub,act:()=>splashLab(from+k)}));
+    list.push({name:'PREV PAGE',sub:'Page '+(((pg+pages-1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg-1,per,per)},
+              {name:'NEXT PAGE',sub:'Page '+(((pg+1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg+1,per,per+1)},
+              {name:'BACK',sub:'',cls:'back',act:splashBack});
+    return list; }}
 };
+const SPLASH_LAB_PER=6;
+function splashLabPage(p,per,sel) {
+  const pages=Math.ceil(B2_LAB.length/per); splash.labPage=(p+pages)%pages;
+  sfx.move(); splashSetMode('lab',sel);
+}
+// The tab names the difficulty and the chapters on this page.
+function splashLabTab() {
+  const per=SPLASH_LAB_PER,pg=splash.labPage||0,a=B2_LAB[pg*per],b=B2_LAB[Math.min(B2_LAB.length,pg*per+per)-1];
+  const d=(SPLASH_DIFF.find(x=>x.id===B7.diff)||{}).name||'';
+  return 'Battle Lab: '+d+'. Chapter'+(a.ch===b.ch?' '+a.ch:'s '+a.ch+' to '+b.ch);
+}
 function splashSetMode(mode,sel=0) {
   splash.mode=mode;
   const M=SPLASH_MODES[mode],el=$('splash'),box=el.querySelector('.sp-choices');

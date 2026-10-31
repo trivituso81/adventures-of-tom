@@ -339,9 +339,9 @@ html.landscape .rrow{padding:3px 8px;min-height:calc(var(--pz) + 6px)}
 #splash.out{opacity:0;pointer-events:none}
 #splash-art{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
 #splash-rotate{position:absolute;top:calc(14px + env(safe-area-inset-top));right:calc(14px + env(safe-area-inset-right));width:38px;height:38px;border:1px solid #dbe6c078;border-radius:11px;background:#294c3ee8;color:#fff3cf;font-size:20px;box-shadow:0 3px 0 #203e3933}
-#splash-panel{position:absolute;left:0;right:0;bottom:0;padding:24px 20px calc(14px + env(safe-area-inset-bottom));border:3px solid #64725a;border-bottom:none;border-radius:20px 20px 0 0;background:#fff5dc;box-shadow:0 -4px 0 #263b3233,0 0 0 3px #fff3d5bd}
+#splash-panel{position:absolute;left:0;right:0;bottom:0;max-height:calc(100% - 44px - env(safe-area-inset-top));display:flex;flex-direction:column;box-sizing:border-box;padding:24px 20px calc(14px + env(safe-area-inset-bottom));border:3px solid #64725a;border-bottom:none;border-radius:20px 20px 0 0;background:#fff5dc;box-shadow:0 -4px 0 #263b3233,0 0 0 3px #fff3d5bd}
 .sp-tab{position:absolute;top:-15px;left:20px;padding:5px 13px;border:2px solid #fff3d5;border-radius:9px;background:#385540;color:#fff4d3;font-weight:800;font-size:12px;letter-spacing:.3px}
-.sp-choices{display:flex;gap:10px}
+.sp-choices{display:flex;gap:10px;min-height:0}#splash-panel .sp-choices.grid{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:2px 2px 4px}#splash-panel .sp-choices.grid .sp-choice{flex:none}#splash-panel .sp-choice.nav .sp-name{font-size:13px}
 .sp-choices.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sp-choices.grid .sp-choice{padding:9px 11px}
 .sp-choice{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:4px;padding:12px 12px 11px;border:2px solid #64725a;border-radius:12px;background:#f3e6c6;color:#324235;text-align:left}
 .sp-choice .sp-name{font-size:15px;font-weight:900;letter-spacing:1.5px}
@@ -1217,7 +1217,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/boppy-moves.js?v=pa3"></script>
 <script src="data/amy-burpee.js"></script>
 <script src="engine/amy-moves.js?v=pa2xa"></script>
-<script src="data/battle2-data.js"></script>
+<script src="data/battle2-data.js?v=lab2"></script>
 <script src="data/p2-battle.js"></script>
 <script src="data/progress.js"></script>
 <script src="data/abilities.js"></script>
@@ -1425,7 +1425,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=diff1"></script>
+<script src="engine/splash.js?v=lab2"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js?v=rose1"></script>

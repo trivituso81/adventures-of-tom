@@ -1221,29 +1221,28 @@ const B2_TOMBOS=[
 ];
 
 // ---- Battle Lab: test fights reached from the title screen until the full game opens. ----
+// Battle Lab: one fight per chapter boss, chapters 1 to 20 (chapter 20 has two). Paged in engine/splash.js. Chapter 18's boss cannot be beaten by design.
 const B2_LAB=[
-  {name:'1 MUDLING',sub:'Tom, one on one.',party:['tom'],level:1,foes:[['mudling','front']]},
-  {name:'MUDLING GANG',sub:'Four, in two rows.',party:['tom','grace'],level:4,foes:[['mudling','front',3],['mudling','front',3],['mudling','back',3],['mudling','back',3]]},
-  {name:'THE BIG ONE',sub:'Tom, Grace, Rose, Deedee. The chapter 1 boss.',party:['tom','grace','rose','deedee'],level:4,foes:[['bigone','front']]},
-  {name:'POND PATROL',sub:'Tom, Grace, Amy, Boppy.',party:['tom','grace','amy','boppy'],level:4,foes:[['grump','front',2],['toad','front',3],['skeeter','back',3]]},
-  {name:'THE BIG SHAKE',sub:'Tom, TNB, Nara. The chapter 2 boss.',party:['tom','tnb','nara'],level:4,la:true,foes:[['bigshake','front']]},
-  {name:'CATTAIL CREW',sub:'Tom, Grace, Rose, Boppy in the marsh.',party:['tom','grace','rose','boppy'],level:5,foes:[['tangle','front',4],['bobber','front',4],['soggysock','back',3]]},
-  {name:'OLD IRON-GILL',sub:'Tom, Grace, Rose, Boppy. The chapter 3 boss.',party:['tom','grace','rose','boppy'],level:6,foes:[['irongill','front']]},
-  {name:'BACKLOT CREW',sub:'Tom, TNB, Nara on the Backlot.',party:['tom','tnb','nara'],level:6,la:true,studio:true,foes:[['clapper','front',5],['cuecrab','front',5],['boommoth','back',5]]},
-  {name:'THE DIRECTOR’S CUT',sub:'Tom, TNB, Nara. The chapter 4 boss.',party:['tom','tnb','nara'],level:7,la:true,studio:true,foes:[['directorscut','front']]},
-  {name:'SCHOOL NIGHT',sub:'Tom, Grace, Rose, Amy in the hallway.',party:['tom','grace','rose','amy'],level:7,school:true,foes:[['tardybell','front',6],['glitterglue','front',6],['popquiz','back',6],['dodgeball','back',6]]},
-  {name:'THE RED PEN',sub:'Tom, Grace, Rose, Amy. The chapter 5 boss.',party:['tom','grace','rose','amy'],level:8,school:true,cafe:true,foes:[['redpen','front']]},
-  {name:'OLD OAK CREW',sub:'Tom, TNB, Nara in Old Oak Park.',party:['tom','tnb','nara'],level:8,la:true,oak:true,foes:[['peanutgallery','front',7],['twigspy','front',7],['acornagent','back',7],['cheekstuffer','back',7]]},
-  {name:'CHAIRMAN CHEEKS',sub:'Tom, TNB, Nara. The chapter 6 boss.',party:['tom','tnb','nara'],level:9,la:true,oak:true,crown:true,foes:[['chairman','front']]},
-  {name:'STACKS CREW',sub:'Tom, Grace, Rose in the Stacks.',party:['tom','grace','rose'],level:9,stacks:true,foes:[['cliffhanger','front',8],['knowitall','front',8],['shusher','back',8],['popup','back',8]]},
-  {name:'THE UNREAD',sub:'Tom, Grace, Rose. The chapter 7 boss.',party:['tom','grace','rose'],level:10,stacks:true,readroom:true,foes:[['unread','front']]},
-  {name:'CAR BARN CREW',sub:'Tom, TNB, Nara in the Car Barn.',party:['tom','tnb','nara'],level:10,la:true,barn:true,foes:[['wetblanket','front',9],['thedraft','front',9],['leftover','back',9],['pickyeater','back',9]]},
-  {name:'OLD IRONBELLY',sub:'Tom, TNB, Nara. The chapter 8 boss.',party:['tom','tnb','nara'],level:11,la:true,barn:true,boiler:true,foes:[['ironbelly','front']]},
-  {name:'MOON CLUB CREW',sub:'Tom, Deedee, Boppy in the Moon Club.',party:['tom','deedee','boppy'],level:11,club:true,foes:[['coathanger','front',10],['soreloser','front',10],['velvetrope','back',10],['wallflower','back',10]]},
-  {name:'THE MIRRORBALL',sub:'Tom, Deedee, Boppy. The chapter 9 boss.',party:['tom','deedee','boppy'],level:12,club:true,dome:true,foes:[['mirrorball','front']]},
-  {name:'TERMINAL CREW',sub:'Tom, Grace, Rose, Amy in Terminal Zero.',party:['tom','grace','rose','amy'],level:12,term:true,foes:[['longline','front',11],['unclaimed','front',11],['carryon','back',11],['armresthog','back',11]]},
-  {name:'THE LAST CALL',sub:'Tom, Grace, Rose, Amy. The chapter 10 boss.',party:['tom','grace','rose','amy'],level:13,term:true,gate:true,foes:[['lastcall','front']]},
-  {name:'LA CREW',sub:'Tom, TNB, Nara in Griffith Park.',party:['tom','tnb','nara'],level:4,la:true,foes:[['smoglet','front',3],['gridlock','front',4],['coyote','back',4]]},
-  {name:'SLEEPOVER',sub:'Tom, TNB, Grace, Rose. Family Finish test.',party:['tom','tnb','grace','rose'],level:12,la:true,foes:[['smoglet','front',11],['gridlock','front',11],['coyote','back',11]]}
+  {ch:1,name:'THE BIG ONE',sub:'Chapter 1. Tom, Grace, Rose and Deedee.',party:['tom','grace','rose','deedee'],level:4,foes:[['bigone','front']]},
+  {ch:2,name:'THE BIG SHAKE',sub:'Chapter 2. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:4,la:true,foes:[['bigshake','front']]},
+  {ch:3,name:'OLD IRON-GILL',sub:'Chapter 3. Tom, Grace, Rose and Boppy.',party:['tom','grace','rose','boppy'],level:6,foes:[['irongill','front']]},
+  {ch:4,name:'THE DIRECTOR’S CUT',sub:'Chapter 4. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:7,la:true,studio:true,foes:[['directorscut','front']]},
+  {ch:5,name:'THE RED PEN',sub:'Chapter 5. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:8,school:true,cafe:true,foes:[['redpen','front']]},
+  {ch:6,name:'CHAIRMAN CHEEKS',sub:'Chapter 6. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:9,la:true,oak:true,crown:true,foes:[['chairman','front']]},
+  {ch:7,name:'THE UNREAD',sub:'Chapter 7. Tom, Grace and Rose.',party:['tom','grace','rose'],level:10,stacks:true,readroom:true,foes:[['unread','front']]},
+  {ch:8,name:'OLD IRONBELLY',sub:'Chapter 8. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:11,la:true,barn:true,boiler:true,foes:[['ironbelly','front']]},
+  {ch:9,name:'THE MIRRORBALL',sub:'Chapter 9. Tom, Deedee and Boppy.',party:['tom','deedee','boppy'],level:12,club:true,dome:true,foes:[['mirrorball','front']]},
+  {ch:10,name:'THE LAST CALL',sub:'Chapter 10. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:13,term:true,gate:true,foes:[['lastcall','front']]},
+  {ch:11,name:'FINAL CALL',sub:'Chapter 11. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:14,term:true,gate:true,foes:[['finalcall','front']]},
+  {ch:12,name:'GRIDLOCK PRIME',sub:'Chapter 12. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:15,la:true,foes:[['gridlockprime','front']]},
+  {ch:13,name:'DRILL WORM',sub:'Chapter 13. Tom, Amy, TNB and Nara.',party:['tom','amy','tnb','nara'],level:17,la:true,foes:[['drillworm','front']]},
+  {ch:14,name:'WARDEN BOPPY',sub:'Chapter 14. Tom, Amy, Grace and Rose.',party:['tom','amy','grace','rose'],level:19,foes:[['warden','front']]},
+  {ch:15,name:'HUSH-9 FINAL FORM',sub:'Chapter 15. Tom, Amy, Grace and Rose.',party:['tom','amy','grace','rose'],level:20,foes:[['hush9final','front']]},
+  {ch:16,name:'MARLOWE TRANSFORMED',sub:'Chapter 16. Tom, Amy, TNB and Nara.',party:['tom','amy','tnb','nara'],level:22,la:true,foes:[['marlowe16','front']]},
+  {ch:17,name:'THE TWIN LENSES',sub:'Chapter 17. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:24,la:true,foes:[['twinlens','front']]},
+  {ch:18,name:'JULIAN VANCE',sub:'Chapter 18. Survival fight, cannot be won. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:25,la:true,foes:[['vance','front']]},
+  {ch:19,name:'THE OBLIVION CENSOR',sub:'Chapter 19. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:25,la:true,foes:[['censor','front']]},
+  {ch:20,name:'THE CHRONOS-LEVIATHAN',sub:'Chapter 20. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:27,foes:[['leviathan','front']]},
+  {ch:20,name:'JULIAN, LAST FIGHT',sub:'Chapter 20. Tom, Grace, Rose and Amy.',party:['tom','grace','rose','amy'],level:27,foes:[['julian','front']]}
 ];
 const B2_LAB_BAG=['bandage','bandage','juice','lemonade','balloon','cushion','goldstar','whistle'];

@@ -9,6 +9,11 @@
 - The green cloud (`SC.dv_cloud`) now uses outlined, shaded, highlighted puffs and outlined stink lines, plus a new blast at her back (`SC.dv_toot`: shock rings, jagged lines, a pop) and an outlined "PFFFT!". Same timing, hit and numbers.
 - The repeat: the baked "I am the Beanie Master!" clip is 3.97 s and holds a stray third burst (3.06 s on) that sounded like she started again, overlapping "Oh my!". The move now plays only the first 2.85 s of that clip (the slice applies only while the clip length is 85320; a re-bake plays whole). The clip itself is untouched; a re-bake would remove the stray burst for good.
 
+## 2026-10-30: Battle Lab is bosses only, with a difficulty step and pages
+- ADMIN > BATTLE LAB now asks for a difficulty first (Easy, Medium, Hard), then lists one fight per chapter boss, chapters 1 to 20 (chapter 20 has two: Leviathan and Julian), six to a page with PREV PAGE and NEXT PAGE. Chapter 18's boss is a survival fight that cannot be won, and its row says so. The old crew fights and Family Finish test are gone from the list.
+- Fixed the cut-off top: the title panel is now capped to the screen height and its list scrolls if it is ever taller.
+- Files: data/battle2-data.js (B2_LAB), engine/splash.js, index.html (CSS, ?v=lab2).
+
 ## 2026-10-30: Sourdough Snob uses the painted loaf
 
 - The whole boule Tom carries and lifts for "ADMIRE THE CRUST" (`loaf()` in the Sourdough Snob section of `engine/tom-moves.js`) was still the code-drawn loaf. It now draws `art/props/tom/sourdough_boule.webp` (same art as Crumb Shot); the drawn loaf stays as the fallback. The slice and the easel chart were already painted. Script version `?v=tom10`. Tests: kit_test tom sourdough_snob (painted boule hits 327), smoke, frames looked at.
