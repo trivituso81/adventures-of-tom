@@ -1,3 +1,8 @@
+## 2026-10-30: Beanie Master cloud is a fine mist, toot louder again
+
+- `SC.dv_cloud` in `engine/deedee-moves.js` is now a fine green mist (many faint soft blobs, a spray of tiny specks, thin curling wisps, no outlines) that drifts to the monster and settles on it. The blast at her back (`SC.dv_toot`) is a soft mist pop with a thin ring and fine lines instead of outlined puffs.
+- `sfx.toot` is about 1.45x louder than the first fix: measured peak 0.76, about 8x the original toot, no clipping.
+
 ## 2026-10-30: Beanie Master: louder fart, painted puffs, no repeated line
 
 - Deedee's Beanie Master (`engine/deedee-moves.js`): `sfx.toot` is now a real fart (air "pfft", fast fluttering buzz that sags in pitch, rumbling body, three sputters). Measured peak is about 5x the old toot and above the laser, with no clipping.
