@@ -1,3 +1,8 @@
+## 2026-10-30 (night, 7): Tom's NO TOUCHING sign faces the monsters
+
+- Tom: the sign faced the party, it should face the monster. The painted sign was drawn in three-quarter view turned to the right (its board edge shows on the left). New art `art/props/tom/no_touching_sign_l.webp` is the same sign turned to the left (board edge on the right) with the lettering and hand still reading the right way round; it was built from the original by re-fitting the unwrapped face into the mirrored frame. Defend (`tm_placard` in `engine/tom-moves.js`) and the preload list (`engine/prop-art.js`) now use it. The old `no_touching_sign.webp` stays in the repo, unused.
+- Tests: kit_test tom defend (frames looked at, zoomed), smoke IDS=tom clean. Tags `?v=ns1` on tom-moves.js and prop-art.js.
+
 ## 2026-10-30 (night, 10): Penny stands behind her shop counter
 
 - Tom (22:55): in Penny's Pockets, Penny should be behind the counter. She stood on the customer side (tile 8,7); she is now one row behind the counter's back edge (tile 8,4) in `data/maps-le.js` (room `shop`), so she faces you across the register. The counter object (tiles 4,4 to 11,6, `shop:true`) still takes the A button from the row in front of it, checked: facing it from (8,7) opens her shop. No walk-mask change (she is not on a walkable tile, and `roam:0`).

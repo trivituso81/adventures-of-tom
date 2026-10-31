@@ -445,7 +445,7 @@ SC.tm_stophand=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const grow=ez
   for(let k=0;k<3;k++) { const q=cl(u*1.6-k*.18); gfx.globalAlpha=(1-q)*fade(u,.75); R(x-6+k*5,y-26+k*22-q*8,3,3,CREAM); }
   gfx.restore(); };
 SC.tm_placard=(s,u)=>{ const d=ez(u/.2),bob=u<.2?0:Math.sin(cl((u-.2)/.12)*Math.PI)*3,x=s.x,y=s.y-14*(1-d)-bob; gfx.globalAlpha=fade(u,.85)*d;
-  if(PROPART.draw('tom/no_touching_sign',x,y-8,{h:56})) return;   // painted sign on its post; the drawn placard is the fallback
+  if(PROPART.draw('tom/no_touching_sign_l',x,y-8,{h:56})) return;   // painted sign on its post; the drawn placard is the fallback
   R(x-2,y-6,4,18,OUT); R(x-1,y-5,2,16,WOOD); R(x-30,y-28,60,24,OUT); R(x-28,y-26,56,20,CREAM); R(x-28,y-26,56,4,RED); label('NO',x,y-20,'#7a1a14',1); label('TOUCHING',x,y-12,'#7a1a14',1); };
 SC.tm_sleeve=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const x=st.x-18,y=st.y-TH()*.5; gfx.globalAlpha=fade(u,.5); label('*',x-4,y-u*10,GOLD,2); Ln(x,y,x+12,y,2,CREAM); };
 Tm.defendShow=(u,t,resolve)=>{ const fx=battle.fx[u.idx],self=t===u,H=ST.unit(t),me=ST.unit(u);
