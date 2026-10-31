@@ -43,6 +43,7 @@ SHEETS = [
     ('deedee-sheet2-of-2.png', 'deedee', rng(16, 30)),
     ('boppy-sheet1-items1-31.png', 'boppy', rng(1, 25)),
     ('tnb-sheet1-items1-31.png', 'tnb', rng(1, 23)),
+    ('tnb-sheet2-custom.png', 'tnb', rng(32, 46)),   # TNB custom sheet 2 (2026-10-31): laptop through clay bowl, keyed from a fake checkerboard by key_checker.py
     ('nara-sheet1-of-2.png', 'nara', rng(1, 11)),         # Nara (Oct 30): coins through park bench; cells 12 to 15 came back wrong (dog house, bow, gift box, bouquet): redo acorns, oak leaves, tennis ball pile, golden crumb
     ('nara-squirrel-sheet.png', 'nara', rng(16, 19)),     # Chairman Cheeks, 4 poses
     ('nara-human-eyes.png', 'nara', rng(20, 21)),         # HUMAN EYES close-up, two panels (cut larger, see MAXSIDE_BY)
@@ -65,8 +66,8 @@ SHEETS = [
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
 TOTAL = {'nara-sheet1-of-2.png': 15, 'tombo-sheet06-of-10.png': 14, 'tombo-sheet10-of-10.png': 13, 'tombo-sheet09-of-10.png': 13, 'tombo-sheet08-of-10.png': 14, 'tombo-sheet07-of-10.png': 14, 'tombo-sheet05-of-10.png': 14, 'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
-ROWCUTS = {'tombo-sheet04-of-10.png': [325, 635, 935]}   # sheets where the row gaps are not the emptiest places (a hanging cord, tall props)
-COLCUTS = {'tombo-sheet05-of-10.png': {2: [328, 641, 940]}}   # hand-set column gaps for one row (row index from 0) where props touch or one prop spans two columns
+ROWCUTS = {'tnb-sheet2-custom.png': [313, 627, 940], 'tombo-sheet04-of-10.png': [325, 635, 935]}   # sheets where the row gaps are not the emptiest places (a hanging cord, tall props)
+COLCUTS = {'tnb-sheet2-custom.png': {0: [313, 627, 940], 1: [313, 627, 940], 2: [313, 627, 940], 3: [313, 627, 940]}, 'tombo-sheet05-of-10.png': {2: [328, 641, 940]}}   # hand-set column gaps for one row (row index from 0) where props touch or one prop spans two columns
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
 
 
@@ -160,6 +161,19 @@ def cut_sheet(sheet, count, cols, rows, rowcuts=None, colcuts=None):
     return out, notes
 
 
+def drop_specks(im, frac=.02):
+    """Remove loose bits smaller than frac of the biggest piece (a left-over corner-number dot) and re-trim. Used for the keyed TNB sheet 2."""
+    a = np.array(im)
+    lab, n = ndimage.label(a[..., 3] > 0, structure=np.ones((3, 3)))
+    if n < 2: return im
+    area = np.bincount(lab.ravel(), minlength=n + 1)
+    keep = area >= frac * area[1:].max()
+    keep[0] = False
+    a[~keep[lab]] = 0
+    out = Image.fromarray(a)
+    return out.crop(out.getchannel('A').getbbox())
+
+
 def main():
     check = '--check' in sys.argv
     names = {c: {n: (s, nm) for n, s, nm in lst} for c, lst in json.load(open(os.path.join(SRC, 'props.json'))).items()}
@@ -181,6 +195,7 @@ def main():
             if im is None:
                 report.append(f'{c}#{n}: empty cell {cell} in {fn}'); continue
             slug = names[c][n][0]
+            if fn == 'tnb-sheet2-custom.png': im = drop_specks(im)
             s = MAXSIDE_BY.get(slug, MAXSIDE) / max(im.size)
             if s < 1:
                 im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)

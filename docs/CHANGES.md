@@ -1,3 +1,12 @@
+## 2026-10-31 (night, 18): TNB custom props and hill backdrop installed
+
+- Tom dropped the TNB 15-prop sheet and the golden-hour LA hill painting. Props baked to `art/props/tnb/` (tools/sprite-bake: `key_checker.py` keys the fake checkerboard, `tnb-sheet2-custom.png` is the keyed source, `bake_prop_sheets.py` and `props.json` register it). Backdrop at `art/props/tnb/hill_backdrop.webp` (1152x648).
+- Around the Bend: painted hill replaces the drawn sky, ridge, skyline and hill. TNB now walks the painted switchbacks; painted `0.2 MI` signs, drawn TOP sign at the summit.
+- Baxter Street Bomb: painted sky, skyline and hillside behind the drawn street, houses and signs.
+- Scope Creep (laptop), Round with Jojo (basket, disc), Tasting Menu (cloches, three course plates, THE CHECK folder), Throw Down (clay lump, cylinder, bowl) now draw painted props. Every hook falls back to the drawn version until the image loads.
+- Not painted yet: the Gantt board in Scope Creep (it resizes with each step), the receipt (drawn receipt text stays over the old shape), the tasting table. Images exist for gantt, receipt, table if wanted later.
+- Tests: kit_test for around_the_bend, hillbomb_ult, scope_creep, round_with_jojo, tasting_ult, throw_down (frames looked at, PAINTED_PROPS confirmed); `IDS=tnb python3 tools/smoke.py` 0 fails. Tags: prop-art, tnb-moves, main.js `tpa2`.
+
 ## 2026-10-31 (night, 17): Chapter 6 story no longer stalls when Nara is recruited first
 
 - Tom (23:53): if you recruit Nara in chapter 6 before talking to Olivia and Michael, the next story event never starts. Cause: the `ch6-nara` trigger (data/scenes.js `TRIGGERS`) only ran when Nara was NOT in the party (`test:()=>!inParty(nara)`). Nara waits on Tom's porch and joins when asked, so recruiting her first meant the scene never ran, `ch6-nara` was never set, and the Old Oak Park briefing (`ch6-park`) never unlocked.

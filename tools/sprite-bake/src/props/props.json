@@ -1151,6 +1151,81 @@
    31,
    "street_signs",
    "Street signs"
+  ],
+  [
+   32,
+   "laptop",
+   "Laptop"
+  ],
+  [
+   33,
+   "gantt_board",
+   "Gantt chart board"
+  ],
+  [
+   34,
+   "disc_golf_basket",
+   "Disc golf basket"
+  ],
+  [
+   35,
+   "flying_disc",
+   "Flying disc"
+  ],
+  [
+   36,
+   "cloche",
+   "Silver cloche"
+  ],
+  [
+   37,
+   "tasting_table",
+   "Tasting table"
+  ],
+  [
+   38,
+   "check_folder",
+   "Check folder"
+  ],
+  [
+   39,
+   "receipt",
+   "Receipt"
+  ],
+  [
+   40,
+   "course_scallops",
+   "Plated course, scallops"
+  ],
+  [
+   41,
+   "course_beet",
+   "Plated course, beet"
+  ],
+  [
+   42,
+   "course_choc",
+   "Plated course, chocolate"
+  ],
+  [
+   43,
+   "trail_sign",
+   "Trail sign"
+  ],
+  [
+   44,
+   "clay_lump",
+   "Clay lump"
+  ],
+  [
+   45,
+   "clay_cylinder",
+   "Clay cylinder"
+  ],
+  [
+   46,
+   "clay_bowl",
+   "Clay bowl"
   ]
  ],
  "tombo": [

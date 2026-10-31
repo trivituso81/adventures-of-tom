@@ -1046,7 +1046,10 @@ const wheelHead=(ang,speed)=>{ // wheel head ellipse at (0,-54): grooves, plus s
   EO(0,-54,19,5.6,'#9aa3ad'); ring(0,-54,13,3.9,1,'#6e7882'); ring(0,-54,7,2.1,1,'#6e7882');
   for(let k=0;k<3;k++) { const a=ang+k*2.094,mx=Math.cos(a)*16,my=-54+Math.sin(a)*4.6;
     if(speed>16) { gfx.globalAlpha*=.5; ring(0,-54,16,4.6,2,'rgba(255,255,255,.6)'); gfx.globalAlpha/=.5; } else E(mx,my,1.6,1,'#ffffff'); } };
-const clayOn=(prog,wob,ms)=>{ // lump -> centered cylinder -> opened bowl, standing on the wheel head (surface at y=-54)
+const clayOn=(prog,wob,ms)=>{ { const id=prog<.3?'tnb/clay_lump':prog<.55?'tnb/clay_cylinder':'tnb/clay_bowl';   // painted clay stages (Oct 31)
+    const hh=prog<.3?lerp(9,17,prog/.3):prog<.55?lerp(18,26,(prog-.3)/.25):lerp(26,20,cl((prog-.55)/.45));
+    if(PROPART.ready(id)) { PROPART.draw(id,wob,-54-hh/2,{h:hh}); return; } }
+  // lump -> centered cylinder -> opened bowl, standing on the wheel head (surface at y=-54)
   const open=ez(cl((prog-.3)/.3)),flare=ez(cl((prog-.55)/.45)),w=lerp(8,15,flare),h=lerp(lerp(8,22,ez(cl(prog/.5))),17,flare);
   gfx.save(); gfx.translate(wob,-54);
   poly([[-w*.72,0],[w*.72,0],[w,-h],[-w,-h]],'#d9784a',2);
@@ -1054,7 +1057,7 @@ const clayOn=(prog,wob,ms)=>{ // lump -> centered cylinder -> opened bowl, stand
   for(let k=1;k<4;k++) Ln(-w*.9,-h*k/4,w*.9,-h*k/4,.8,'rgba(150,70,35,.5)');                         // throwing rings
   E(0,-h,w,Math.max(.6,w*.3*open),'#e89a6a'); if(prog>.32) { E(0,-h,w-2,Math.max(.4,(w-2)*.3*open),'#8a4526'); E(0,-h+.5,w-4,Math.max(.3,(w-4)*.22*open),'#a85a34'); }
   gfx.restore(); };
-const bowlProp=(x,y,sc,flip=false)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,flip?-sc:sc);  // a finished clay bowl, side view
+const bowlProp=(x,y,sc,flip=false)=>{ if(PROPART.draw('tnb/clay_bowl',x,y-1*sc,{w:32*sc,rot:flip?Math.PI:0})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,flip?-sc:sc);  // a finished clay bowl, side view
   gfx.fillStyle=OUT; gfx.beginPath(); gfx.moveTo(-14,-9); gfx.quadraticCurveTo(-14,8,0,8); gfx.quadraticCurveTo(14,8,14,-9); gfx.closePath(); gfx.fill();
   gfx.fillStyle='#d9784a'; gfx.beginPath(); gfx.moveTo(-12,-8); gfx.quadraticCurveTo(-12,6,0,6); gfx.quadraticCurveTo(12,6,12,-8); gfx.closePath(); gfx.fill();
   R(-11,-5,22,2.5,'#fff6dc'); R(-9,-2,18,1.2,'#5fae9a'); R(-10,-8,2,9,'rgba(255,255,255,.35)'); R(6,-8,5,12,'rgba(120,60,30,.28)');
@@ -1487,9 +1490,10 @@ T.wrap_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
 // Baxter Street at sunset (back layer): sky, the hills, a steep street from the top right down to the flat where the monsters
 // stand, sidewalk, houses stepped down the hill, palms, the BAXTER ST and 32% signs.
 SC.t5_hill=(s,u)=>{ const P=s.plan,ms=s.t*1000,k=ez(ms/400)*(u>.92?(1-u)/.08:1),grow=ez(ms/600); if(k<=0) return; gfx.globalAlpha=k;
+  const PH=PROPART.ready('tnb/hill_backdrop'); if(PH) PROPART.draw('tnb/hill_backdrop',288,162,{w:576,h:324}); else {
   const g=gfx.createLinearGradient(0,0,0,220); g.addColorStop(0,'#5a3a7a'); g.addColorStop(.55,'#e8786a'); g.addColorStop(1,'#ffc87a'); gfx.fillStyle=g; gfx.fillRect(0,0,576,324);
   E(150,208,46,46,'#ffe08a'); E(150,208,36,36,'#fff2b0');
-  gfx.fillStyle='#7a4a72'; gfx.beginPath(); gfx.moveTo(0,214); for(let x=0;x<=576;x+=24) gfx.lineTo(x,196+Math.sin(x/70)*12+Math.sin(x/23)*4); gfx.lineTo(576,324); gfx.lineTo(0,324); gfx.fill();
+  gfx.fillStyle='#7a4a72'; gfx.beginPath(); gfx.moveTo(0,214); for(let x=0;x<=576;x+=24) gfx.lineTo(x,196+Math.sin(x/70)*12+Math.sin(x/23)*4); gfx.lineTo(576,324); gfx.lineTo(0,324); gfx.fill(); }
   const A=P.A,B=P.B,ay=lerp(B.y,A.y,grow),top=x=>x>=A.x?ay:(x>=B.x?lerp(B.y,ay,(x-B.x)/(A.x-B.x)):B.y);
   // the hillside under the street, and the flat pavement at the bottom
   gfx.fillStyle='#9a7a6a'; gfx.beginPath(); gfx.moveTo(576,ay-22); gfx.lineTo(A.x,ay-22); gfx.lineTo(B.x,B.y-22); gfx.lineTo(0,B.y-58); gfx.lineTo(0,324); gfx.lineTo(576,324); gfx.fill();
@@ -1627,7 +1631,7 @@ SC.t6_dust=(s,u)=>{ for(let k=0;k<(s.n||10);k++) { const a=k/(s.n||10)*Math.PI*2
 SC.t6_spin=(s,u)=>{ const ms=s.t*1000+s.t0; for(const b of s.list) { if(ms<b.t) continue; const q=(ms-b.t)/600; if(q>=1) { if(!b.done) { b.done=1; lift(b.f,0,0,0); } continue; }
   lift(b.f,-Math.sin(q*Math.PI)*(s.h||20),q*Math.PI*2*(b.k%2?-1:1),-Math.sin(q*Math.PI)*(s.ox||6)); } };
 // A laptop in his hands (open) that follows the actor's hand.
-const laptop=(x,y,open=1)=>{ gfx.save(); gfx.translate(x,y); RO(-18,-2,36,5,CHROME); R(-14,0,28,2,INK); const h=4+22*open; RO(-16,-2-h,30,h,CHROME); if(open>.3) { R(-13,-h+1,24,h-6,'#3d6fb5'); R(-11,-h+3,20,2,WHITE); R(-11,-h+7,14,2,'#9bd2ff'); R(-11,-h+11,18,2,'#9bd2ff'); } gfx.restore(); };
+const laptop=(x,y,open=1)=>{ if(open>.6&&PROPART.draw('tnb/laptop',x,y-17,{h:36})) return; gfx.save(); gfx.translate(x,y); RO(-18,-2,36,5,CHROME); R(-14,0,28,2,INK); const h=4+22*open; RO(-16,-2-h,30,h,CHROME); if(open>.3) { R(-13,-h+1,24,h-6,'#3d6fb5'); R(-11,-h+3,20,2,WHITE); R(-11,-h+7,14,2,'#9bd2ff'); R(-11,-h+11,18,2,'#9bd2ff'); } gfx.restore(); };
 SC.t6_laptop=(s,u)=>{ const ms=s.t*1000; if(s.until&&ms>s.until) return; const h=hand(); gfx.globalAlpha=1; laptop(h.x-4,h.y-6,s.closeAt&&ms>s.closeAt?1-ez((ms-s.closeAt)/250):1); };
 
 // ---------- Foraged at Dawn (A1; key foraged_at_dawn; Quick Change's numbers) ----------
@@ -1654,7 +1658,9 @@ const DISH={
     EO(15,-3,3.4,3.2,'#e0305a'); E(14,-4,1,.8,'#ff9ab0'); leaf(-15,-3,-2.8,7); leaf(-14,-3,-2,6); bloom(-19,0,1.4,'#f7f7f2'); }
 };
 const peaPlate=(x,y,sc)=>{ if(!PROPART.ready('tnb/pea_plate')) return false; const w=74*sc,k=w/160; E(x+2*sc,y+4*sc,32*sc,9*sc,'rgba(0,0,0,.25)'); return PROPART.draw('tnb/pea_plate',x,y-17*k,{w}); };   // painted plate with the one pea (tools/sprite-bake/build_pea_plate.py); plate centre sits at (x,y)
-const plate=(x,y,sc,dish='pea')=>{ if((dish===true||dish==='pea')&&peaPlate(x,y,sc)) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+const courseId={scallop:'tnb/course_scallops',beet:'tnb/course_beet',choc:'tnb/course_choc'};
+const plate=(x,y,sc,dish='pea')=>{ if((dish===true||dish==='pea')&&peaPlate(x,y,sc)) return;
+  if(courseId[dish]&&PROPART.ready(courseId[dish])) { E(x+2*sc,y+5*sc,34*sc,9*sc,'rgba(0,0,0,.25)'); if(PROPART.draw(courseId[dish],x,y-2*sc,{w:76*sc})) return; } gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   E(2,3,35,12,'rgba(0,0,0,.25)'); EO(0,0,34,12,'#c9a13e'); E(0,0,31,10.6,'#f2d27a'); E(0,-.5,29,9.6,WHITE); ring(0,-.5,22,7.2,1.2,'#d8b14a'); ring(0,-.5,26.5,8.6,.8,'#e6c66a'); E(-16,-5.5,6,1.1,'rgba(255,255,255,.8)');
   if(dish) (DISH[dish===true?'pea':dish]||DISH.pea)(); gfx.restore(); };
 SC.t6_plateheld=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1; plate(h.x+4,h.y-12,1.5,'pea'); };
@@ -1731,7 +1737,7 @@ T.scope_creep=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m
 // ---------- Tasting Menu (A6 ult; key tasting_ult; That's a Wrap!'s numbers) ----------
 // Tablecloths unroll under the family, cloches drop and lift (fourteen courses in four seconds: heal, costume), TNB clears
 // every plate in one arm, then presents the check: a leather folder the size of a door lands on every monster.
-const cloche=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); PO([[-26,0],[-24,-10],[-16,-20],[0,-26],[16,-20],[24,-10],[26,0]],CHROME,2); R(-20,-14,8,10,'rgba(255,255,255,.4)'); EO(0,-28,4,3,CHROME2); RO(-30,0,60,4,CHROME2); gfx.restore(); };
+const cloche=(x,y,sc)=>{ if(PROPART.draw('tnb/cloche',x,y-19*sc,{w:62*sc})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); PO([[-26,0],[-24,-10],[-16,-20],[0,-26],[16,-20],[24,-10],[26,0]],CHROME,2); R(-20,-14,8,10,'rgba(255,255,255,.4)'); EO(0,-28,4,3,CHROME2); RO(-30,0,60,4,CHROME2); gfx.restore(); };
 SC.t6_cloths=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.05)*fade(u,.92);
   for(const c of s.list) { const q=ez((ms-c.t)/300); if(q<=0) continue; const w=c.w*q,x0=c.x-w/2;
     E(c.x,c.y+24,w*.55,5,'rgba(0,0,0,.3)');
@@ -1747,7 +1753,7 @@ SC.t6_cloches=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fade(u,.92);
     if(plated) { plate(c.x,c.y,1.05,['scallop','beet','choc'][Math.max(0,beats.filter(b=>ms>=b.lift).length-1)]); }
     if(show&&dy>-119) cloche(c.x,c.y+dy,1.1); }
   gfx.globalAlpha=1; };
-const folder=(x,y,w,h,open)=>{ gfx.save(); gfx.translate(x,y); RO(-w/2,-h,w,h,LEATHER); R(-w/2+6,-h+6,w-12,h-12,LEATHER2); ring(-w/2+w*.5,-h*.5,w*.18,h*.14,3,GOLD); label('THE CHECK',0,-h*.5-5,GOLD,2); gfx.restore(); };
+const folder=(x,y,w,h,open)=>{ if(PROPART.draw('tnb/check_folder',x,y-h/2,{w:h*.97*1.0,h:h*1.0})) return; gfx.save(); gfx.translate(x,y); RO(-w/2,-h,w,h,LEATHER); R(-w/2+6,-h+6,w-12,h-12,LEATHER2); ring(-w/2+w*.5,-h*.5,w*.18,h*.14,3,GOLD); label('THE CHECK',0,-h*.5-5,GOLD,2); gfx.restore(); };
 SC.t6_check=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.in) return; const q=ez((ms-P.in)/(P.slam-P.in)),y=lerp(-40,P.yb,q),sh=ms>=P.slam&&ms<P.slam+300?Math.sin(ms/18)*3:0;
   gfx.globalAlpha=fade(u,.94); folder(P.x+sh,y,P.w,P.h,0);
   if(ms>=P.slam) { for(const f of P.feet) { RO(f-6,P.yb-2,5,10,f%2?'#6a5a4a':'#4a3a3a'); RO(f+4,P.yb-2,5,10,f%2?'#6a5a4a':'#4a3a3a'); } }
@@ -1784,6 +1790,12 @@ const palm=(x,y,h,lean)=>{ gfx.strokeStyle=OUT; gfx.lineWidth=7; gfx.lineCap='ro
   const tx=x+lean,ty=y-h; for(let k=0;k<7;k++) { const a=-Math.PI+k*Math.PI/6; const ex=tx+Math.cos(a)*26,ey=ty+Math.sin(a)*14+(k<1||k>5?10:0)+4; LnO(tx,ty,ex,ey,3,'#3f9a48'); } E(tx,ty+1,3,3,'#6b4a2a'); };
 SC.t6_trail=(s,u)=>{ const ms=s.t*1000,P=s.P; const q=ez(ms/700); const A=fin(u,.05)*fade(u,.93); gfx.globalAlpha=A;
   const px=P.pts[3][0],py=P.pts[3][1],dir=px>288?-1:1,ox=cl(px+dir*46,44,532);
+  if(PROPART.ready('tnb/hill_backdrop')) {   // painted golden-hour LA hill (Oct 31); the drawn hill below is the fallback
+    PROPART.draw('tnb/hill_backdrop',288,162,{w:576,h:324});
+    if(ms>P.gold) { const g=cl((ms-P.gold)/500); gfx.globalAlpha=A*g*.18; R(0,0,576,324,'#ffb060'); gfx.globalAlpha=A; }
+    P.pts.slice(1).forEach(([x,y],k)=>{ if(ms<P.signs[k]) return; const ok=k<2&&PROPART.draw('tnb/trail_sign',x+(k?-18:18),y-4,{h:50}); if(ok) return;
+      RO(x-2,y-30,4,30,'#8a6436'); RO(x-18,y-42,36,14,WHITE); label(k<2?'0.2 MI':'TOP',x,y-39,INK,1); });
+    gfx.globalAlpha=1; return; }
   const sky=gfx.createLinearGradient(0,0,0,250); sky.addColorStop(0,'#5fa6e8'); sky.addColorStop(.65,'#bfd8ea'); sky.addColorStop(1,'#ffd9a8'); gfx.fillStyle=sky; gfx.fillRect(0,0,576,324);
   E(60+(px<288?400:0),70,22,10,'rgba(255,255,255,.8)'); E(100+(px<288?330:0),52,16,7,'rgba(255,255,255,.7)');
   // far ridge with the sign
@@ -1817,6 +1829,7 @@ T.around_the_bend=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foe=t.si
   const bx=Math.max(70,Math.min(500,H.x+(foe?80:-10))),by=H.base-4;
   const pts=[[bx,by],[Math.min(540,bx+90),by-50],[Math.max(36,bx-10),by-96],[Math.min(540,bx+110),by-142]];
   pts[3][1]=Math.max(96,pts[3][1]); pts[2][1]=Math.max(132,pts[2][1]); pts[1][1]=Math.max(172,pts[1][1]);
+  if(PROPART.ready('tnb/hill_backdrop')) { pts[1]=[440,168]; pts[2]=[508,120]; pts[3]=[470,64]; }   // walk the painted switchbacks
   const P={pts,signs:[1100,1700,2300],gold:2800};
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:600,x:bx+34,y:by+4,f:'point'},{t:800,x:bx+34,y:by+4,f:'walk',ease:'lin'},{t:1100,x:pts[1][0],y:pts[1][1]+4,f:'walkR',ease:'lin'},{t:1700,x:pts[2][0],y:pts[2][1]+4,f:'walk',ease:'lin'},{t:2300,x:pts[3][0],y:pts[3][1]+4,f:'walkR',ease:'lin'},{t:2800,f:'cheer',hop:6},{t:3150,f:'throw'},{t:3600,f:'celeb'},{t:3900,x:pts[3][0]+10,y:pts[3][1]+4,f:'idle',rot:.3},{t:4000,x:'home',y:'home',f:'idle',rot:u=>.3*(1-u),ease:'in'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
@@ -1864,8 +1877,9 @@ SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P; let x,ph='walk'; if(ms<P.in) x=lerp
     if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,P.y-P.hs-10,CREAM,1); return; }
   jojo(x,P.y,s.t,ph);
   if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,P.y-96,CREAM,1); if(ms>P.in&&ms<P.throw) disc(x+30,P.y-48+Math.sin(s.t*2)*2,1); };
-const disc=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,14,5,'#ff6a3c'); E(0,-1,9,3,'#ff8a5c'); gfx.restore(); };
-const basket=(x,y,ms,P)=>{ RO(x-3,y-90,6,90,CHROME); RO(x-30,y-96,60,6,CHROME2); for(let k=-24;k<=24;k+=8) { const sw=ms>P.chains&&ms<P.chains+500?Math.sin((ms-P.chains)/30+k)*3:0; Ln(x+k,y-90,x+k*.6+sw,y-44,2,CHROME); }
+const disc=(x,y,sc)=>{ if(PROPART.draw('tnb/flying_disc',x,y,{w:30*sc})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,14,5,'#ff6a3c'); E(0,-1,9,3,'#ff8a5c'); gfx.restore(); };
+const basket=(x,y,ms,P)=>{ if(PROPART.draw('tnb/disc_golf_basket',x,y-50,{h:100})) { if(ms>P.chains+150) disc(x,y-34,.9); return; }
+  RO(x-3,y-90,6,90,CHROME); RO(x-30,y-96,60,6,CHROME2); for(let k=-24;k<=24;k+=8) { const sw=ms>P.chains&&ms<P.chains+500?Math.sin((ms-P.chains)/30+k)*3:0; Ln(x+k,y-90,x+k*.6+sw,y-44,2,CHROME); }
   RO(x-28,y-44,56,22,CHROME); R(x-24,y-40,48,14,'#3a3f46'); for(let k=-20;k<=20;k+=10) Ln(x+k,y-40,x+k,y-26,2,CHROME2); if(ms>P.chains+150) disc(x,y-36,.9); };
 SC.t6_basket=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.93); basket(s.x,s.y,ms,s.P); gfx.globalAlpha=1; };
 SC.t6_discfly=(s,u)=>{ const q=u,x=lerp(s.x0,s.x1,q),y=lerp(s.y0,s.y1,q)-Math.sin(q*Math.PI)*s.arc; gfx.globalAlpha=1; for(let k=1;k<4;k++) { const qq=cl(q-k*.04),xx=lerp(s.x0,s.x1,qq),yy=lerp(s.y0,s.y1,qq)-Math.sin(qq*Math.PI)*s.arc; gfx.globalAlpha=.3-k*.08; disc(xx,yy,1.2); } gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(Math.sin(q*Math.PI)*.5); disc(0,0,1.4); gfx.restore(); };
