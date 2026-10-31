@@ -1,3 +1,9 @@
+## 2026-10-30 (night, 10): Penny stands behind her shop counter
+
+- Tom (22:55): in Penny's Pockets, Penny should be behind the counter. She stood on the customer side (tile 8,7); she is now one row behind the counter's back edge (tile 8,4) in `data/maps-le.js` (room `shop`), so she faces you across the register. The counter object (tiles 4,4 to 11,6, `shop:true`) still takes the A button from the row in front of it, checked: facing it from (8,7) opens her shop. No walk-mask change (she is not on a walkable tile, and `roam:0`).
+- Portrait looks right with Tom at the counter. Landscape: the camera crops the back of the room, so only her feet show at the edge. Tell Tom if he wants the landscape camera nudged for this room.
+- Build stamp `build penny1`, `maps-le.js?v=penny1`, `main.js?v=penny1`. No spoken lines changed.
+
 ## 2026-10-30 (night, 9): Rose: "YOU NEXT" marker no longer a long pink string
 
 - Tom (22:36): at the end of Piggyback Pounce a weird string seemed to pull Rose back. It was the "YOU NEXT" arrow (scene `ro_tip`, engine/rose-moves.js), a line drawn from Rose's hand to the most hurt friend, so it stretched across the screen and followed her home. Now it is a short "YOU NEXT" tag with a small down arrow and hearts that bounces in over that friend. Same timing, same game effect. Also used by Ribbon Rescue, which shares the scene. Tag `?v=rt1` on rose-moves.js. Tests: kit_test rose piggyback_pounce (frames looked at), smoke IDS=rose clean.

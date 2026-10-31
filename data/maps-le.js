@@ -1316,7 +1316,7 @@ const LE_ROOMS=[
     style:{floor:'#d9c49c',alt:'#e6d3ad',wall:'#c27a62',trim:'#f1d9b5',pattern:'check',rug:'#c9a24d'},
     rug:[3,6,5,2],
     // Square painted plate (art/shop.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
-    // Gear shelf back left, snack shelf and porthole door back right, the long counter across the middle (Penny stands in front of it),
+    // Gear shelf back left, snack shelf and porthole door back right, the long counter across the middle (Penny stands behind it),
     // battle bin and barrels left, big plant right, the yellow rug in the middle. The gap between the gate posts (x6 to x9) is the way out.
     plateMask:[
       '################',
@@ -1336,7 +1336,7 @@ const LE_ROOMS=[
       '######....######',
       '################'],
     npcs:[
-      {name:'Penny',x:8,y:7,look:'penny',shopkeeper:true,roam:0,lines:[]}],
+      {name:'Penny',x:8,y:4,look:'penny',shopkeeper:true,roam:0,lines:[]}],
     objects:[
       ['counter',4,4,8,3,'Shop counter','A brass bell, a tin of coins and a sign: BUY. SELL. BROWSE. MOSTLY BUY.',{variant:'letters',shop:true}],
       ['shelf',1,1,3,5,'Gear shelf','Folded sweaters, tiny leotards and one fishing vest with twelve pockets.'],
