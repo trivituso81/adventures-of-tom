@@ -208,6 +208,12 @@ function portraitBox(m,cls) {
   else { box.classList.add('ph'); box.innerHTML='<b></b><small>PORTRAIT</small>'; box.querySelector('b').textContent=m.name[0]; }
   return box;
 }
+// Big gold level badge: the Party roster and the top of the Stampcard (engine/progress.js) use it.
+function levelBadge(p) {
+  const b=el('span','lv-badge'); b.setAttribute('aria-label','Level '+p.level);
+  b.appendChild(el('small','','LEVEL')); const v=el('b'); v.textContent=p.level; b.appendChild(v);
+  return b;
+}
 // HOME: the roster. Tap someone to see their status.
 function renderHome(body) {
   const list=el('div','roster');
@@ -215,14 +221,14 @@ function renderHome(body) {
     const row=btn('rrow'+(i===menuChar?' active':'')+(p.hp<=0?' ko':''),'roster-'+i,'',()=>{ menuChar=i; setMenuTab('status'); });
     row.setAttribute('aria-label',p.name+', status');
     row.appendChild(portraitBox(p));
-    const who=el('span','r-who');
-    const t=el('span','r-title'); t.textContent=p.title; who.appendChild(t);
-    const n=el('span','r-name'); n.textContent=p.name+(p.hp<=0?' \u00b7 KO':''); who.appendChild(n);
+    const who=el('span','r-who'), id=el('span','r-id');
+    const t=el('span','r-title'); t.textContent=p.title; id.appendChild(t);
+    const n=el('span','r-name'); n.textContent=p.name+(p.hp<=0?' \u00b7 KO':''); id.appendChild(n);
+    who.appendChild(id); who.appendChild(levelBadge(p));
     row.appendChild(who);
     const st=el('span','r-stats');
     const line=(lbl,val,cls)=>{ const l=el('span','r-line'+(cls?' '+cls:'')); l.appendChild(el('span','r-lbl',lbl)); const v=el('span','r-val'); v.textContent=val; l.appendChild(v); st.appendChild(l); };
     line('HP',p.hp+' / '+p.maxHp,p.hp<=0?'ko':(p.hp/p.maxHp<=.25?'low':''));
-    line('Lv.',String(p.level));
     { const sp=b6SpLeft(p); line('Stamps',sp?sp+' SP':'—',sp&&b6Stampable(p)?'gold':''); }
     row.appendChild(st);
     const nx=el('span','r-next'); nx.appendChild(el('span','r-lbl','Next level in')); const nv=el('span','r-val'); nv.textContent=p.level>=B6.maxLevel?'MAX':Math.max(0,B6.xpPerLevel-p.xp); nx.appendChild(nv);

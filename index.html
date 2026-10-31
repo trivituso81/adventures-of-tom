@@ -307,7 +307,17 @@ html.landscape .menu-foot{padding:5px 12px 6px;font-size:9px}
 .rrow.active .pbox{border-color:#fffaec;box-shadow:0 0 0 2px #c9a24d,0 0 0 4px #f1d58c}
 .rrow.ko .pbox{filter:grayscale(1);opacity:.7}
 .pbox.sm{width:34px;height:34px;flex:none;border-radius:6px;box-shadow:0 0 0 1px #64725a}.pbox.sm.ph small{display:none}.pbox.sm.ph b{font-size:15px}
-.r-who{grid-area:who;display:grid;min-width:0;padding-top:2px}
+.r-who{grid-area:who;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:center;min-width:0;padding-top:2px}
+.r-id{display:contents}
+.r-who .r-title{grid-column:1/-1}
+.r-who .r-name{grid-column:1;grid-row:2}
+.r-who .lv-badge{grid-column:2;grid-row:2}
+.lv-badge{flex:none;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:38px;padding:4px 5px 5px;border:2px solid #fff5dc;border-radius:8px;background:linear-gradient(#f6dc96,#c9a24d);color:#2a2208;line-height:1;box-shadow:0 0 0 2px #64725a,0 2px 0 2px #0003}
+.lv-badge small{font-size:8px;font-weight:800;letter-spacing:1px}
+.lv-badge b{font-size:28px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.sc-who{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sc-id{display:grid;min-width:0}
+html.landscape .lv-badge b{font-size:30px}
 .r-title{font-size:10px;font-weight:700;color:#6a7462;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .r-name{font-size:17px;font-weight:800;line-height:1.15}
 .rrow.ko .r-name{color:#b0563f}
@@ -1189,7 +1199,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/maps-la.js?v=dtla4"></script>
 <script src="data/maps-ch12.js"></script>
 <script src="engine/la.js"></script>
-<script src="engine/menu.js?v=rose1"></script>
+<script src="engine/menu.js?v=lv1"></script>
 <script src="engine/followers.js?v=slow2"></script>
 <script src="engine/shop.js?v=rose1"></script>
 <script src="engine/audio.js"></script>
@@ -1235,7 +1245,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/rose-ride.js"></script>
 <script src="engine/rose-ride.js?v=ride6"></script>
 <script src="engine/battle2-effects.js"></script>
-<script src="engine/progress.js?v=tip1"></script>
+<script src="engine/progress.js?v=lv1"></script>
 <script src="engine/feel.js?v=pop1"></script>
 <script src="data/battle-icons.js"></script>
 <script src="data/battle-emoji.js?v=boop1"></script>
@@ -1443,7 +1453,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/local-clips.js?v=bake1"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js"></script><!-- tap to walk -->
-<script src="engine/main.js?v=jar1"></script>
+<script src="engine/main.js?v=lv1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js"></script>

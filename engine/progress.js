@@ -402,6 +402,9 @@ function renderStampsTab(body,m) {
   $('menu-foot').textContent='Stamp Points every even level, Polish Points every odd level from 3, Remix Tickets from level 28. Undo and Respec are free.';
   const left=b6SpLeft(m),pp=b8PpLeft(m),tk=b8TkLeft(m);
   const head=el('div','mcard sc-head');
+  const who=el('div','sc-who'), wid=el('span','sc-id');
+  wid.appendChild(el('span','r-title',m.title||'')); wid.appendChild(el('span','r-name',m.name));
+  who.appendChild(wid); who.appendChild(levelBadge(m)); head.appendChild(who);
   const cnt=el('div','sc-counts');
   const counter=(lbl,n,sub,cls)=>{ const c=el('div','sc-points '+cls); c.appendChild(el('span','slot-label',lbl)); const v=el('span','sc-left'+(n>0?' has':'')); v.textContent=n; c.appendChild(v); const s=el('span','sc-sub'); s.textContent=sub; c.appendChild(s); cnt.appendChild(c); };
   counter('STAMP',left,b6SpEarned(m)+' earned','sp');
@@ -424,7 +427,7 @@ function renderStampsTab(body,m) {
     const lo=el('div','sc-acts sc-lo');
     for(const i of [0,1]) lo.appendChild(btn('menu-act'+((m.loadout||0)===i?' on':''),'sc-lo'+i,'LOADOUT '+(i+1),()=>{ if((m.loadout||0)===i) return; b8SwapLoadout(m); sfx.equip(); showToast(m.name+' switches to Loadout '+(i+1)+'.',2); menuFocusNext='sc-lo'+i; renderMenu(); }));
     head.appendChild(lo);
-  } else { const n=el('div','sc-sub'); n.textContent='Lv '+m.level+' · Two Loadouts at Lv '+B8.loadoutLvl+'.'; head.appendChild(n); }
+  } else { const n=el('div','sc-sub'); n.textContent='Two Loadouts at Lv '+B8.loadoutLvl+'.'; head.appendChild(n); }
   body.appendChild(head);
   const core=el('div','mcard sc-card sc-core');
   const ct=el('div','sc-top'); ct.appendChild(el('span','sc-path','CORE')); const cn=el('span','sc-name'); cn.textContent='Basic and Signature'; ct.appendChild(cn);

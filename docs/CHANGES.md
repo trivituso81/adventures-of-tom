@@ -1,3 +1,9 @@
+## 2026-10-31 (night, 33): Character level is now a big gold badge (`lv1`)
+
+- Tom (01:41): on the Party screen the level should be much more prominent, and also visible from the Stamps screen. The small "Lv." line in each Party row is gone; each row now has a gold LEVEL badge (28px number) at the right of the name. The Stamps screen has a new header row with the character's name and the same badge, above the Stamp, Polish and Tickets counters.
+- Code: `levelBadge(p)` in engine/menu.js (shared), `.lv-badge` styles in index.html, header row in `renderStampsTab` (engine/progress.js). Status and Gear views unchanged (not asked).
+- Tags `menu.js?v=lv1`, `progress.js?v=lv1`, `main.js?v=lv1`, title stamp `build lv1`.
+
 ## 2026-10-31 (night, 32): Chapter 6, Bready Mercury is on the Crown chest and Tom picks him up
 
 - Tom: in chapter 6 the starter was not visible in the Oak at all, and Tom never retrieved it. Cause: the Crown became a painted plate (Area 35) and the old code-drawn jar on the hoard (`hoard` in `engine/oak-render.js`) is no longer drawn, so nothing showed. The after-boss scene also just handed over the item without Tom touching it.
