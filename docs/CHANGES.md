@@ -1,3 +1,11 @@
+## 2026-10-31 (night, 34): Director mode, monsters keep up with Tom's level
+
+- Tom (01:50): still easy in chapter 6 at level 16; one ability takes out an enemy. Diagnosis: the pace table (`B2_LAB`) puts the chapter 6 boss at level 9, so level 16 is about 7 levels ahead. Map monsters stay at their base level (chapter 6: 6 and 7, plus 1 per win), so they never catch up. At level 16 an Acorn Agent had 72 HP in Grace mode while Tom's free basic move does about 89, and `b7Overlevel` (5+ levels over) turns such fights into instant wins.
+- Call made: new `catchUp:2` in `B7_DIFF.director` (engine/feel.js). `b7MonLevel(n)` now returns max(base level, Tom's level minus 2) for regular monsters in Director mode; `startBattle` (engine/battle2.js) uses it, and the instant win can no longer trigger. Bosses and story fights keep their set levels. Stats grow by each monster's `step` per level, as before.
+- Director HP bonus trimmed 1.6 to 1.3 because level scaling now adds HP. Hits x2 and monster speed x1.4 stay.
+- Measured at level 16 (Director): Acorn Agent level 14, 218 HP, about 3 basic hits, hits Grace for about 83 of 309. Cheek Stuffer level 14, 411 HP, 127 per hit (a tank by design: grit grows with level). Grace and Rose modes unchanged.
+- Tests: smoke default and IDS=grace,rose 0 fails. Tags `feel.js?v=dir3`, `battle2.js?v=dir3`, `main.js?v=dir3`, stamp `build dir3`.
+
 ## 2026-10-31 (night, 33): Character level is now a big gold badge (`lv1`)
 
 - Tom (01:41): on the Party screen the level should be much more prominent, and also visible from the Stamps screen. The small "Lv." line in each Party row is gone; each row now has a gold LEVEL badge (28px number) at the right of the name. The Stamps screen has a new header row with the character's name and the same badge, above the Stamp, Polish and Tickets counters.

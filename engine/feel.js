@@ -12,8 +12,8 @@ const B7_DIFF={
   grace:{id:'grace',name:'GRACE MODE',sub:'Classic, the standard game',
     text:'The game as designed: monsters at full strength, boss shields as written, snacks whenever you like.'},
   director:{id:'director',name:'DIRECTOR MODE',sub:'Tactical challenge',
-    text:'Monsters hit twice as hard, have 60% more HP and take turns 40% more often. Boss shields need one more hit, and a Tombo counts as one hit instead of breaking them. One snack per round.',
-    taken:2,foeHp:1.6,foeSpeed:1.4,shieldPlus:1,tomboHit:true,snackRound:true}
+    text:'Monsters hit twice as hard, have 30% more HP and take turns 40% more often. Regular monsters level up to stay within 2 levels of Tom, so grinding never makes them easy. Boss shields need one more hit, and a Tombo counts as one hit instead of breaking them. One snack per round.',
+    taken:2,foeHp:1.3,foeSpeed:1.4,catchUp:2,shieldPlus:1,tomboHit:true,snackRound:true}
 };
 // Every mode multiplies the finished numbers (damage taken, monster HP, monster turn speed), so the gap between modes is
 // the same size in every chapter. (It used to scale monster POW, which the damage formula mostly cancelled out.)
@@ -317,7 +317,12 @@ function b7CloseCard(force) {
 // Normal monsters drift around their spot and come after Tom when he is within 4 tiles (a "!" pops first). Touching
 // one starts the fight (its lines, then the battle). Bosses hold their ground and wait for Tom to press A.
 function b7IsBoss(n) { const D=b2FoeDef(n.monster); return !!(D&&D.boss)||monsterDef(n).rank==='BOSS'; }
-function b7MonLevel(n) { const d=monsterDef(n),D=b2FoeDef(n.monster); return Math.max((D&&D.level)||1,(d.level||1)+(n.tier||0)); }
+// Director mode (catchUp): a regular monster is never more than catchUp levels below Tom, so over-levelling does not make
+// the map monsters easy. Bosses and story fights keep their set levels. Used by startBattle and the overlevel check.
+function b7MonLevel(n) {
+  const d=monsterDef(n),D=b2FoeDef(n.monster),base=Math.max((D&&D.level)||1,(d.level||1)+(n.tier||0)),c=b7Diff().catchUp;
+  return (c!=null&&!b7IsBoss(n))?Math.max(base,hero.level-c):base;
+}
 function b7Overlevel(n) {
   if(b7IsBoss(n)||performance.now()<n.defeatedUntil) return false;
   return hero.level>=b7MonLevel(n)+B7_MON.over;

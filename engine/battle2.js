@@ -1458,7 +1458,7 @@ function b2RewardsData() {
 // ---------- The full game: walking into a monster on the map ----------
 // opts (story fights, engine/story.js): tut (a TUTORIALS key: tips and a setup for the fight), level (the monster's level).
 function startBattle(npc,opts={}) {
-  const id=npc.monster,d=monsterDef(npc),lvl=opts.level||((d.level||1)+(npc.tier||0));
+  const id=npc.monster,d=monsterDef(npc),lvl=opts.level||b7MonLevel(npc);   // base level plus wins; Director mode keeps it near Tom's level (engine/feel.js)
   const F=B2_FORMATIONS[id],form=((typeof F==='function'?F():F)||[[id,'front']]).map(f=>[f[0],f[1],lvl]);   // a function: crowds of a random size
   const levels={}; for(const p of party) levels[p.id]=p.level;
   b2Start({party:party.map(p=>p.id),levels,foes:form,bag,npc,carry:true,onEnd:null,tut:opts.tut||null});
