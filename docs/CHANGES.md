@@ -2,6 +2,7 @@
 
 - Tom: no way to leave a Battle Lab fight and get back to the lab list. Cause: boss fights are flagged no-run, so the bag's RUN only said the boss "blocks the way out". Lab fights (`b2Lab`, `lab:true` in the `b2Start` config) now show EXIT LAB in the bag where RUN was, and it always works, boss or not: "Leaving the Battle Lab." then `b2End('run')` returns to the lab list on the same page (`splashToLab`). The command cross BAG button reads "N items . EXIT" in lab fights so it can be found. Story fights are unchanged (RUN still blocked by bosses).
 - Files: `engine/battle2.js` (`b2Lab`, `b2RunSteps`), `engine/battle2-ui.js` (`b2BagList`, `b2RenderCmd`). Cache tags `labx1` on both.
+- Title stamp now reads `build lab1` (`main.js?v=lab1`) so Tom can confirm his phone has this build.
 
 ## 2026-10-30 (night, 5): every Amy jump uses the new painted frame
 
