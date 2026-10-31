@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 19): demo audio purge
+
+- Tom asked for voice clips used only by the demo to be found, then the dead ones removed. `demo/data/voice-clips.js` is the demo's own frozen copy: 225 clips. 168 have the same text in the main game; 57 exist only in the demo. 28 of those 57 are still played by the demo (its `lines.js`, `engine/world.js`, `engine/la.js`) and were kept.
+- Removed the other 29: no line in the demo plays them and the main game has no clip for them. Rose (7: pogo, tickle, flop, raspberry, cannonball, noodle, gigglestorm), Boppy (11: 2 greets, 2 basic, cast, 2 grumble, 2 hurt, low, win), TNB (11: 2 greets, wheel, wrench, glaze, duct, bigbowl, masterpiece, 2 fix, win "Fixed. What is next?"). They were old takes for lines since reworded.
+- Result: demo clips 225 to 196, `demo/data/voice-clips.js` 7.09 MB to 6.54 MB. Done with a script that checks the file round-trips byte for byte before removing; the 196 survivors are unchanged.
+- Tests: demo page load: no page errors, no 4xx, 196 clips; `say()` on the removed keys (rose pogo, tickle; boppy greet, win; tnb wheel, fix) and kept keys does not throw. Main game untouched. No tag bump (the demo script tags carry no `?v=`).
+
 ## 2026-10-31 (night, 18): TNB custom props and hill backdrop installed
 
 - Tom dropped the TNB 15-prop sheet and the golden-hour LA hill painting. Props baked to `art/props/tnb/` (tools/sprite-bake: `key_checker.py` keys the fake checkerboard, `tnb-sheet2-custom.png` is the keyed source, `bake_prop_sheets.py` and `props.json` register it). Backdrop at `art/props/tnb/hill_backdrop.webp` (1152x648).
