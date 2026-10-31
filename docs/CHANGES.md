@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 27): Olivia walks the town in painted art (`olivia1`)
+
+- Tom (18:29): sent Olivia's hero pose (the caricature in the Halloween dress, `tools/sprite-bake/src/olivia-hero-v1.png`, already on file) and asked to get her walking around the town. Her 3 x 3 painted walk sheet (`src/olivia-walk-v1.png`, white blouse and olive trousers) was on file but never baked; it is baked now.
+- New `tools/sprite-bake/bake_olivia.py` (townsfolk recipe, 42-row standing height like Amy, no head enlargement) writes `art/chars/olivia-ow.webp`, `data/olivia-hires.js` and `portraits/olivia.png` (128 x 128 head of the hero pose). New `data/olivia-hires-use.js` replaces `OW.olivia` (the 2nd Ave Olivia uses `sheet:'olivia'`, so no map edit). Both scripts load after `data/justin-hires-use.js`.
+- Her walk sheet shows the blouse outfit, the hero shows the dress: when Tom re-runs the walk prompt with this hero attached, drop the new sheet over `src/olivia-walk-v1.png` and re-run the bake. Spec and the three standard prompts: Project docs `claude/olivia-character-spec.md`, `claude/olivia-*-prompt.txt`. No battle art, moves, lines or party entry yet.
+- Tested: 2nd Ave screenshot in portrait and landscape (chapter 7), `smoke.py` pass. Stamp `build olivia1`.
+
 ## 2026-10-31 (day, 26): Justin's trimmed moves slowed down, Bad Call watches first (`jtrim2`)
 
 - Tom (18:16): after the trim the moves played too fast, key frames most of all. The Justin speed wrapper at the bottom of `engine/justin-moves.js` now stretches the timeline by 1.6 (was 0.66; Giant Sneeze and Foot Tap, which were unscaled, now stretch 1.4). Moves run about 5 to 7 s including the turn wrap-up (kit_test timings), with the same poses.
