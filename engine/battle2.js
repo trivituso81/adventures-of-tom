@@ -129,8 +129,15 @@ function b2End(result) {
 }
 
 // ---------- Turn order ----------
+// Battle Lab fights (cfg.infinite): VP and the HEART meter are always full, so every move and Tombo can be tried freely.
+function b2Infinite() {
+  if(!B2.active||!B2.cfg||!B2.cfg.infinite) return;
+  for(const p of B2.party) p.vp=B2_VP.cap;
+  B2.heart=B2_HEART.cap;
+}
 function b2Advance() {
   if(!B2.active) return;
+  b2Infinite();
   if(B2.foes.some(f=>f.boss&&!b2Alive(f))) for(const c of b2LiveFoes()) if(c.D.inert) { c.hp=0; b2FoeDown(c); }   // buried acorns go with their boss
   if(!b2LiveFoes().length) return b2Win();
   if(!b2LiveParty().length) return b2Lose();
@@ -261,7 +268,7 @@ function b2Do(act,opt) {
   battle.state='busy'; B2.ui='busy'; B2.pending=null;
   // Tom's Diamond Medallion pays for a skill: free and instant (engine/battle2-traits.js).
   const diamond=b2Diamond(u,act);
-  u.vp=Math.max(0,u.vp-b2Cost(u,act));
+  u.vp=Math.max(0,u.vp-b2Cost(u,act)); b2Infinite();
   u.ct=b2Delay(u,diamond?'instant':(act.weight||'standard'));
   if(diamond) { u.miles=0; battle.texts.push({txt:'DIAMOND MEDALLION',x:96,y:30,color:'#9fe8ff',sc:2,t:0,dur:1.4}); }
   if(opt&&opt.primary&&!opt.ally) B2.lastTarget=opt.primary;
@@ -1470,5 +1477,5 @@ function startBattle(npc,opts={}) {
 function b2Lab(i) {
   const L=B2_LAB[i]; if(!L) return;
   B2.labLA=!!L.la; B2.labStudio=!!L.studio; B2.labSchool=!!L.school; B2.labCafe=!!L.cafe; B2.labOak=!!L.oak; B2.labCrown=!!L.crown; B2.labStacks=!!L.stacks; B2.labRead=!!L.readroom; B2.labBarn=!!L.barn; B2.labBoiler=!!L.boiler; B2.labClub=!!L.club; B2.labDome=!!L.dome; B2.labTerm=!!L.term; B2.labGate=!!L.gate;
-  b2Start({lab:true,party:L.party,level:L.level,foes:L.foes,bag:B2_LAB_BAG.slice(),heart:75,tombos:'all',allSkills:true,onEnd:()=>{ B2.labLA=false; B2.labStudio=false; B2.labSchool=false; B2.labCafe=false; B2.labOak=false; B2.labCrown=false; B2.labStacks=false; B2.labRead=false; B2.labBarn=false; B2.labBoiler=false; B2.labClub=false; B2.labDome=false; B2.labTerm=false; B2.labGate=false; if(typeof splashToLab==='function') splashToLab(); }});
+  b2Start({lab:true,party:L.party,level:L.level,foes:L.foes,bag:B2_LAB_BAG.slice(),heart:100,infinite:true,tombos:'all',allSkills:true,onEnd:()=>{ B2.labLA=false; B2.labStudio=false; B2.labSchool=false; B2.labCafe=false; B2.labOak=false; B2.labCrown=false; B2.labStacks=false; B2.labRead=false; B2.labBarn=false; B2.labBoiler=false; B2.labClub=false; B2.labDome=false; B2.labTerm=false; B2.labGate=false; if(typeof splashToLab==='function') splashToLab(); }});
 }
