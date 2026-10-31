@@ -1,3 +1,11 @@
+## 2026-10-31 (night, 21): dialogue clip audit, chapters 1 to 10, one stale clip removed
+
+- Tom asked which dialogue clips in chapters 1 to 10 are unused. Method: each clip's exact text in `data/voice/dialog-ch1..10.js` checked against every string the game source can produce (comments and the baker sample text in `data/dialog-cast.js` ignored; `{n}` and string-built lines checked against their templates).
+- Removed 1: `olivia|Michael! Isla is near the curb. Okay. He has her. He always has her.` (ch2, 40 KB). Olivia's line in `data/maps-la.js` now reads "...Okay. Never mind. Thank you, babe." so the clip could never match. The new wording has no clip yet (needs a re-bake).
+- Flagged, not removed (Tom said flag only): ch6 `michael|I have both kids and zero car keys. Wait. Keys. Gutter. Right.` (line is now "Zero car keys and one very sticky toddler. Wait. Keys. Gutter. Right."); ch8 three Tom pilot-light clips say "That is the ..." but the scene text is "That's the ..." (`data/scenes.js` ~2640), so they never play.
+- Everything else is live: chapters 1 to 10 have the monster "Round N." template lines (rounds 2 to 5), the ch7 catalog-card lines, ch9 mirror lines and ch10 clock-hand lines, all built from templates.
+- Done with a script that checks the file round-trips byte for byte. Test: page load, 2261 dialogue clips, no page errors, no 4xx.
+
 ## 2026-10-31 (night, 20): two dead battle clips removed
 
 - Tom asked whether any battle voice clips are unused. Audit: every clip in `data/voice/*.js` was checked against `LINES` (same kind) and the rest of the game source (comments and the baker sample text in `data/dialog-cast.js` ignored). 458 of 460 are live; 2 were dead and are removed.
