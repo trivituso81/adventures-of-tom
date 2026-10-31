@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 26): Justin's trimmed moves slowed down, Bad Call watches first (`jtrim2`)
+
+- Tom (18:16): after the trim the moves played too fast, key frames most of all. The Justin speed wrapper at the bottom of `engine/justin-moves.js` now stretches the timeline by 1.6 (was 0.66; Giant Sneeze and Foot Tap, which were unscaled, now stretch 1.4). Moves run about 5 to 7 s including the turn wrap-up (kit_test timings), with the same poses.
+- Scene lengths that span the move were stretched to match: Demo Day wall, DRYWALL sheet, Breaker Flip dark screen, Bad Call couch and TV, flying wire nuts. Short bursts (sparks, rings, text) keep their length.
+- Tom (18:18): Bad Call now has him seated on the couch watching the game for about 2.5 s, then leaning in (bc_lean added, 6 poses), before he rises and gets frustrated. The yellow flag on the TV shows when he starts to rise.
+- Tested: `kit_test.py justin` all nine moves, contact sheets looked at for Bad Call, Demo Day, DRYWALL, Breaker Flip (props last the whole move), `IDS=justin smoke.py` and `smoke.py`. Not played on the phone. Stamp `build jtrim2`.
+
 ## 2026-10-31 (day, 25): Voice Library labels every ability and combo clip with its move (`vlmove1`)
 
 - Tom (18:00): clips for an ability or a combo now say which one they belong to, on the row itself. A green chip reads the move type and name (BASIC MOVE, ABILITY, SIGNATURE, ULTIMATE, REMIX ABILITY: Press Start, Sourdough Snob, DEFEND, Boarding Group Zero). A pink chip does the same for combos with who is in it (TOMBO 2: Uncle Spotter Toss (Tom + Grace), DIRECTOR'S CUT, TOMBO 1: Smash That Like Button, FAMILY FINISH: The Extra Place). Hurt, low, KO and win lines keep their plain tag.
