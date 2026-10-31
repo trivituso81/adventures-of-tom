@@ -34,6 +34,7 @@ SHEETS = [
     ('amy-sheet1-of-3.png', 'amy', rng(1, 13)),
     ('amy-sheet2-of-3.png', 'amy', rng(14, 26)),
     ('amy-sheet3-of-3.png', 'amy', rng(27, 39)),
+    ('amy-milk-sheet.png', 'amy', rng(40, 45)),   # Almond Milk, Please kick (Oct 30): carton, kicked, burst, splat, crown, puddle
     ('deedee-sheet1-of-2.png', 'deedee', rng(1, 15)),
     ('deedee-sheet2-of-2.png', 'deedee', rng(16, 30)),
     ('boppy-sheet1-items1-31.png', 'boppy', rng(1, 25)),

@@ -31,3 +31,4 @@ Notes for the future bake: cells carry a white number in the top-left corner (cr
 | tombo-sheet06-of-10.png | Tombo props 71 to 84 (Deputy Cap ... Newspaper) | 14 of 14 match. All ten Tombo sheets are now in; only the 14-prop redo is left |
 | tombo-redo-sheet1-of-2.png | Tombo redo 1: Judge's Desk, Carry-On Suitcase, Pink Blanket Lump, Pink Sneakers, Gold Tiara, Bodyguard Sunglasses and Earpiece, Italy Wall Map | 7 of 7 match |
 | tombo-redo-sheet2-of-2.png | Tombo redo 2: Palm Tree, New York Skyline, Drinking Glass, Hanging Pendant Lamp, Sourdough Bite, Nurse Cap, Red Striped Family Table | 7 of 7 match. All 138 Tombo props are now painted |
+| amy-milk-sheet.png | 4x4, 1254x1254, transparent. All 6 cells match the list in order (milk carton through milk puddle). Cells 7 to 16 empty as asked. Amy props 40 to 45 | Cut and wired (Almond Milk, Please kick) |

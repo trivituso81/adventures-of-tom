@@ -932,7 +932,7 @@ const latte=(x,y,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); if(PRO
   poly([[-12,-18],[12,-18],[9,20],[-9,20]],OUT); poly([[-10,-16],[10,-16],[7,18],[-7,18]],'#e9dcc4');
   poly([[-8,-2],[8,-2],[7,18],[-7,18]],'#6b4226'); poly([[-9,-9],[9,-9],[8,-2],[-8,-2]],'#c79868'); R(-9,-16,18,6,'#f7f0e0');
   R(-6,-14,2,16,'#ffffff55'); E(0,-14,6,1.8,'#d9b98a'); R(-2,-15,4,2,'#8a5a30');
-  R(-10,2,20,9,'#c28a52'); R(-10,2,20,1,'#d9a46a'); label('OAT',0,5,'#fff6e4',1);
+  R(-10,2,20,9,'#c28a52'); R(-10,2,20,1,'#d9a46a'); label('ALM',0,5,'#fff6e4',1);
   R(3,-38,3,26,OUT); R(4,-38,1.5,26,'#6ab85a'); R(1,-39,6,2,'#6ab85a');
   EO(15,22,4,2.6,OUT); EO(15,21,3,1.8,'#b98a4e');
   gfx.restore(); };
@@ -947,22 +947,55 @@ SC.av_dairy=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.roll) return; gfx.globa
 SC.av_latte=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.done) return; gfx.globalAlpha=1; let x,y,sc=1.6;
   if(ms<P.give) { const h=hand(); x=h.x-8; y=h.y-18; } else { const q=ez((ms-P.give)/300),h=hand(); x=lerp(h.x-8,P.tx,q); y=lerp(h.y-18,P.ty,q); sc=lerp(1.6,2.2,q); }
   if(ms>P.show) latte(x,y,sc); };
+// ---------- Almond Milk, Please: a carton of cow's milk appears, Amy boots it at the foes, then dairy-free treats for a friend ----------
+// Painted frames mk_* (data/amy-hires-extra.js 'mk', art/chars/amy-mk.webp, wired in data/amy-hires-extra-use.js) and props amy/milk_* (art/props/amy).
+// Kindness on a foe (kindFoe) skips the kick and goes straight to the latte. The kick is visual only: numbers, heal and spoken line are unchanged.
+SC.mk_carton=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.pop) return; if(ms>=P.hit-50) { if(!P.fired) { P.fired=true; P.onHit(); } return; } gfx.globalAlpha=1; let x=P.x0,y=P.y0,rot=0,sc=1,dent=false;
+  if(ms<P.kick) { const q=ez((ms-P.pop)/300); sc=q*(1+.2*Math.sin(q*Math.PI)); y-=Math.abs(Math.sin((ms-P.pop)/95))*16*(1-q); if(ms>P.line) x+=Math.sin(ms/55)*.9; }   // pops in, then trembles
+  else { const q=cl((ms-P.kick)/(P.hit-P.kick)); x=lerp(P.x0,P.x1,q); y=lerp(P.y0,P.y1,q)-Math.sin(q*Math.PI)*P.arc; rot=-q*Math.PI*5; dent=true; }
+  gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
+  if(!PROPART.draw(dent?'amy/milk_carton_dented':'amy/milk_carton',0,0,{h:P.h,rot})) carton(0,0,rot);
+  gfx.restore(); };
+SC.mk_splash=(s,u)=>{ const ms=s.t*1000,P=s.plan;
+  if(ms<800) { const q=ms/800; gfx.globalAlpha=1-ez((q-.35)/.65); const k=.55+.8*ez(q*1.6); if(!PROPART.draw('amy/milk_burst',P.ix,P.iy,{h:P.bh*k})) E(P.ix,P.iy,P.bh*.45*k,P.bh*.35*k,'#f4f7ff'); }
+  for(const F of P.F) { const t1=ms-F.d; if(t1<0) continue; const fa=1-ez((ms-P.fade)/800);
+    { const q=ez(t1/260),a=1-ez((t1-380)/520); if(a>0) { gfx.globalAlpha=a; if(!PROPART.draw('amy/milk_crown',F.x,F.base-4-q*6,{w:F.cw*(.5+.6*q)})) E(F.x,F.base-6,F.cw*.4*q,6*q,'#f4f7ff'); } }   // crown at the feet
+    { const q=ez((t1-60)/220); if(q>0) { gfx.globalAlpha=fa*q; const dy=ez((t1-100)/2200)*7;                                                                   // splat on the body, sliding down
+      if(!PROPART.draw('amy/milk_splat',F.x-F.w*.04,F.mid-F.sh*.12+dy,{h:F.sh*(.6+.4*q),rot:F.rot})) E(F.x,F.mid+dy,F.sh*.4,F.sh*.35,'#f4f7ff'); } } }
+  gfx.globalAlpha=1; };
+SC.mk_puddle=(s,u)=>{ const ms=s.t*1000,P=s.plan;   // drawn behind the foes (back:true)
+  for(const F of P.F) { const t1=ms-F.d-250; if(t1<0) continue; const q=ez(t1/400),fa=1-ez((ms-P.fade-300)/800); gfx.globalAlpha=fa*q;
+    if(!PROPART.draw('amy/milk_puddle',F.x+4,F.base+2,{w:F.pw*q})) E(F.x+4,F.base+2,F.pw*.5*q,6*q,'#f4f7ff'); }
+  gfx.globalAlpha=1; };
 A.oat_milk_please=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=(t===m?spotFor(m,t,30):{x:H.x-12,y:Math.min(316,H.base+30)}),self=t===m,me=ST.unit(m);
-  const sx=self?me.x:sp.x,sy=self?me.base:sp.y,end=self?4000:4500;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'}]:[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:800,x:sp.x,y:sp.y,f:'idle'}];
-  K.push({t:1500,f:'hip'},{t:1700,f:'spread',dx:(u,tt)=>Math.sin(tt*18)*3},{t:2600,f:'aim'},{t:2900,f:'throw',dx:-6},{t:3300,f:'celeb',hop:8},{t:3700,f:self?'idle':back(sx,me)});
-  if(!self) K.push({t:4400,x:'home',y:'home',f:'idle'}); else K.push({t:4000,f:'idle'});
+  const kick=t.side!=='foe'&&b2LiveFoes().length>0,lf=b2LiveFoes().sort((a,b)=>ST.unit(b).x-ST.unit(a).x),live=lf.map(f=>ST.unit(f));
+  const o=kick?4200:0,sx=self?me.x:sp.x,sy=self?me.base:sp.y;
+  const lt=self?{show:100,give:400,apply:700,wink:800,rest:1400,end:1500}:{show:800,give:1050,apply:1300,wink:1400,back:1800,home:2400,end:2500},end=o+lt.end;
+  const K=[];
+  if(kick) K.push({t:0,x:'home',y:'home',f:'mk_spot'},{t:350,f:'mk_glare'},{t:700,f:'mk_nope'},{t:1050,f:'mk_line'},{t:1350,f:'mk_back'},{t:1600,f:'mk_windA'},{t:1800,f:'mk_windB'},
+    {t:1950,f:'mk_kick'},{t:2150,f:'mk_follow'},{t:2400,f:'mk_balance'},{t:2650,f:'mk_watch'},{t:2850,f:'mk_goal',hop:6},{t:3250,f:'mk_laugh'},{t:3650,f:'mk_dust'},{t:3950,f:'mk_hair'});
+  if(self) K.push({t:o,x:'home',y:'home',f:'aim'},{t:o+lt.give,f:'throw',dx:-6},{t:o+lt.wink,f:'mk_wink'},{t:o+lt.rest,x:'home',y:'home',f:'idle'});
+  else K.push({t:o,x:'home',y:'home',f:go(sp.x,me)},{t:o+700,x:sp.x,y:sp.y,f:'idle'},{t:o+lt.show,f:'aim'},{t:o+lt.give,f:'throw',dx:-6},{t:o+lt.wink,f:'mk_wink'},{t:o+lt.back,f:back(sx,me)},{t:o+lt.home,x:'home',y:'home',f:'idle'});
   ST.keys(fx,K);
-  const plan={roll:900,no:1700,away:2300,x:sx-20,y:sy},lp={show:2500,give:2900,done:end-200,tx:self?me.x-26:H.x+H.w*.15,ty:self?me.base-50:H.mid};
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Amy reaches for something to drink.':'Amy jogs over to '+t.name+' with a drink.'); say(m.id,'oat_milk_please'); scene('av_dairy',2.9,{plan}); scene('av_latte',end/1000,{plan:lp}); }],
-    [900,()=>{ sfx.boing?sfx.boing():sfx.select(); setMessage('A cheese pizza and a milk carton roll right up to her.'); }],
-    [1700,()=>{ sfx.nope?sfx.nope():sfx.select(); scene('av_flash',.15,{a:.3,c:'#ff6a60'}); scene('av_big',1.1,{x:sx-70,y:Math.max(46,sy-AH()-52),txt:'NO THANKS!',c:'#ff6a60',sc:5,rot:-.05}); setMessage('She waves them off. Firmly. Very firmly.'); }],
-    [2300,()=>{ sfx.whoosh(); }],
-    [2500,()=>{ setMessage('Out comes her almond milk latte instead.'); }],
-    ['hf',3200],
-    [3200,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0'}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
-    [end,'end',kindLine(t,'Dairy-free and delicious. She was right.')]]); };
+  const lp={show:o+lt.show,give:o+lt.give,done:end-200,tx:self?me.x-26:H.x+H.w*.15,ty:self?me.base-50:H.mid};
+  const F0=live[0]||{x:me.x-200,mid:me.base-60,w:60,h:90,base:me.base};
+  const cp={pop:100,line:1050,kick:1980,hit:2750,x0:Math.max(30,me.x-62),y0:me.base-28,h:56,x1:F0.x+F0.w*.1,y1:F0.mid,arc:60};
+  const sp2={ix:cp.x1,iy:cp.y1,bh:Math.min(130,Math.max(84,F0.h)),fade:1900,F:live.map((u2,k)=>({x:u2.x,w:u2.w,mid:u2.mid,base:u2.base,d:k*90,cw:Math.max(64,u2.w*1.05),sh:cl(u2.h*.62,32,80),pw:Math.max(70,u2.w*1.3),rot:(k%2?.25:-.2)}))};
+  cp.onHit=()=>{ sfx.thud(); for(const f of lf) ST.jolt(f,.4); scene('mk_splash',3.2,{plan:sp2}); scene('mk_puddle',3.2,{plan:sp2,back:true}); scene('av_text',.9,{x:cp.x1,y:Math.max(40,cp.y1-60),txt:'SPLASH!',c:CREAM}); setMessage('The carton bursts. Every monster is now very damp and very dairy.'); };   // fired by the carton scene on arrival, so it stays in step with the flight
+  const items=[[0,()=>{ say(m.id,'oat_milk_please'); scene('av_latte',end/1000,{plan:lp});
+      if(kick) { setMessage('A carton of cow\'s milk appears at Amy\'s feet.'); scene('mk_carton',2.9,{plan:cp}); sfx.boing?sfx.boing():sfx.select(); }
+      else setMessage(self?'Amy reaches for something to drink.':'Amy jogs over to '+t.name+' with a drink.'); }]];
+  if(kick) items.push(
+    [1050,()=>{ sfx.nope?sfx.nope():sfx.select(); setMessage('Amy does not do dairy. She lines up the kick.'); }],
+    [1950,()=>{ sfx.whoosh(); setMessage('BOOT! The carton goes flying.'); }],
+    [2850,()=>{ sfx.select(); setMessage('GOAL! Amy pumps her fist.'); }],
+    [o-200,()=>{ setMessage('Then she hands out the dairy-free snacks.'); }]);
+  items.push(
+    [o+lt.show,()=>{ sfx.whoosh(); setMessage('Out comes her almond milk latte instead.'); }],
+    ['hf',o+lt.apply],
+    [o+lt.apply,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0'}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
+    [end,'end',kindLine(t,'Dairy-free and delicious. She was right.')]);
+  ST.play(E2,items); };
 
 // ---------- False Start: big blocks, big red flag ----------
 const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };

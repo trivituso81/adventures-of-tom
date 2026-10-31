@@ -555,6 +555,36 @@
 39,
 "foil_blankets",
 "Foil blankets"
+],
+[
+40,
+"milk_carton",
+"Milk carton"
+],
+[
+41,
+"milk_carton_dented",
+"Kicked milk carton"
+],
+[
+42,
+"milk_burst",
+"Burst milk carton"
+],
+[
+43,
+"milk_splat",
+"Milk splat"
+],
+[
+44,
+"milk_crown",
+"Milk crown splash"
+],
+[
+45,
+"milk_puddle",
+"Milk puddle"
 ]
 ],
 "deedee": [
