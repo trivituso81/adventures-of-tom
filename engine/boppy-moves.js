@@ -346,7 +346,9 @@ const rowSpot=(Gp,gap=56)=>({x:Math.min(552,Gp.x1+gap),y:Math.min(316,Gp.base+6)
 const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
 const BSP=()=>BATTLE_SPRITES.boppy,BH=()=>BSP().idle.length*BSP().scale;
 const head=(st,dy=0)=>({x:st.x,y:st.y-BH()*(st.sc||1)*.72+dy});   // the cap brim line; his rig has blank rows above it
-const mouth=st=>({x:st.x-10,y:st.y-BH()*(st.sc||1)*.53});
+const mouth=st=>{ const sp=st.sp,fr=st.frame,q=sp&&sp.mouthAt&&fr&&sp.mouthAt.get(fr);   // painted frames know where their mouth is
+  if(q) { const sc=sp.scale*(st.sc||1); return {x:st.x-fr[0].length*sc/2+q.col*sc,y:st.y-fr.length*sc+q.row*sc}; }
+  return {x:st.x-10,y:st.y-BH()*(st.sc||1)*.53}; };
 const back=(x,me)=>x<me.x?'walkR':'walk';
 const amble=(x,me)=>x<me.x?'walk':'walkR';
 const all=list=>{ for(const f of list) ST.jolt(f,.45); };
@@ -512,12 +514,321 @@ const cayenne=(x,y,rot,sc,c='#e0402e')=>{ gfx.save(); gfx.translate(x,y); gfx.ro
   if(c==='#e0402e'&&PROPART.draw('boppy/cayenne_pepper',0,0,{h:50})) { gfx.restore(); return; }   // painted; other colours stay drawn
   gfx.beginPath(); gfx.moveTo(-3,-14); gfx.quadraticCurveTo(10,-4,6,10); gfx.quadraticCurveTo(2,20,-6,24); gfx.quadraticCurveTo(-2,12,-6,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill();
   Ln(0,-8,3,6,1.5,'rgba(255,255,255,.6)'); RO(-5,-19,6,5,'#4f8a3a'); R(-3,-24,2,6,'#3f7a2a'); gfx.restore(); };
-SC.bv_pepper=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const h=hand(),mo=mouth(st); gfx.globalAlpha=1;
-  if(ms<P.eat) { cayenne(h.x-10,h.y-14,.5+Math.sin(ms/300)*.08,2.2); if(ms>P.show) bigWord('HOMEGROWN',h.x-10,h.y-68,GOLD,2); }
-  else if(ms<P.eat+220) { const q=ez((ms-P.eat)/220); cayenne(lerp(h.x-10,mo.x,q),lerp(h.y-14,mo.y,q),.5,2.2*(1-q*.7)); }
+SC.bv_pepper=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const mo=mouth(st); gfx.globalAlpha=1;   // the painted frames hold the pepper themselves
+  if(ms>P.show&&ms<P.eat) bigWord('HOMEGROWN',mo.x+4,mo.y-62,GOLD,2);
   if(ms>P.eat+200&&ms<P.eat+800) bigWord('CRUNCH',mo.x-6,mo.y-48,CREAM,2);
-  if(ms>P.red&&ms<P.done) { const hp=head(st,16),pulse=.35+.15*Math.sin(ms/80); gfx.globalAlpha=pulse; E(hp.x-4,hp.y+4,17,15,'#ff2a1a'); gfx.globalAlpha=1;
-    if(ms<P.fire) { steam(hp.x-26,hp.y-4,s.t,3,'#ffd0b0',34); steam(hp.x+20,hp.y-4,s.t+.4,3,'#ffd0b0',34); } } };
+  if(ms>P.red&&ms<P.fire) { steam(mo.x+16,mo.y-24,s.t,3,'#ffd0b0',34); steam(mo.x+40,mo.y-26,s.t+.4,3,'#ffd0b0',34); } };
+SC.bv_cone=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const mo=mouth(st),tx=P.tx,ty=P.ty,dx=tx-mo.x,dy=ty-mo.y,L=Math.hypot(dx,dy)+30,a0=Math.atan2(dy,dx);
+  const grow=ez(ms/220),shrink=u>.8?(1-u)/.2:1,len=L*grow,spread=lerp(.1,.3,ez(ms/500))*shrink;
+  const layer=(f,c,jit)=>{ const pts=[[mo.x,mo.y]]; for(let k=0;k<=8;k++) { const q=k/8,a=a0+lerp(-spread,spread,q)*f,r=len*(.92+.08*Math.sin(s.t*40+k*1.7))+Math.sin(s.t*55+k*2.3)*jit; pts.push([mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r]); } gfx.globalAlpha=shrink*.95; poly(pts,c,f===1?3:0); };
+  layer(1,'#e0402e',8); layer(.7,'#ff8a2a',6); layer(.38,'#ffe070',4);
+  for(let k=0;k<10;k++) { const q=((s.t*2.2)+k/10)%1,a=a0+Math.sin(k*2.1)*spread*.8,r=len*q; gfx.globalAlpha=(1-q)*shrink; E(mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r-q*10,3+q*4,3+q*4,k%2?'#ffd040':'#ff6a2a'); } };
+B.pepper_breath=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),me=ST.unit(m);
+  const P={show:1350,eat:1700,red:1950,fire:2400,done:3500,tx:F.x+F.w*.15,ty:F.mid},hit=2600;
+  const wk=(R)=>(u,t)=>'pb_'+(Math.floor(t*6)%2?'walkB':'walkA')+R;   // painted walk, left-facing going out, mirrored coming back
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:p.x<me.x?wk(''):wk('R'),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'pb_present'},{t:1300,f:'pb_admire'},{t:1550,f:'pb_raise'},{t:1700,f:'pb_crunch'},
+    {t:1850,f:'pb_chew'},{t:1950,f:'pb_burn',dx:(u,tt)=>Math.sin(tt*40)*2},{t:2150,f:'pb_fan',dx:(u,tt)=>Math.sin(tt*40)*2},{t:2350,f:'pb_inhale'},
+    {t:2400,f:'pb_breathA',dx:u=>-ez(u*4)*8},{t:2500,f:'pb_breathB'},{t:2600,f:'pb_breathC'},{t:3200,f:'pb_gasp'},{t:3450,f:'pb_grumble',dx:(u,tt)=>Math.sin(tt*30)*1.5},
+    {t:3800,f:'pb_smug'},{t:4050,f:p.x<me.x?wk('R'):wk(''),hop:2,hn:6},{t:5000,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over with one homegrown cayenne pepper.'); say(m.id,'pepper_breath'); scene('bv_pepper',3.6,{P,st}); }],
+    [1300,()=>{ setMessage('He holds it up. He grew it himself. He\'s very proud of it.'); }],
+    [1900,()=>{ sfx.crunch(); setMessage('Crunch.'); }],
+    [1950,()=>{ sfx.stun(); setMessage('His face goes red. Steam comes out of his ears.'); }],
+    [2400,()=>{ sfx.flame(0,1.0); scene('bv_cone',1.1,{P,st}); setMessage('HAAAH! A cone of pepper fire!'); }],
+    ['hf',hit],
+    [hit,()=>{ sfx.fireball?sfx.fireball():sfx.bonk(); ST.jolt(f,.55); landHit(100); scene('bv_big',1.2,{x:F.x,y:F.top-74,txt:'HAAAH!',c:'#ffb040',sc:4}); }],
+    [3300,()=>{ sfx.sulk&&sfx.sulk(); scene('bv_smoke',1.2,{x:F.x,y:F.mid,h:56}); scene('bv_text',1.2,{st,txt:'MY STOMACH',c:CREAM,sc:2}); setMessage('Ooh. His stomach has notes.'); }],
+    [5100,'end',res(E2)+'He did warn everybody at lunch.']]); };
+
+// ---------- Seeds of Trouble ----------
+SC.bp_packet=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.pocket) return; gfx.globalAlpha=fade(u,.96);
+  const tap=ms>P.t0&&ms<P.t1?Math.abs(Math.sin((ms-P.t0)/(P.t1-P.t0)*Math.PI*3))*6:0,shake=ms>P.shake&&ms<P.pocket?Math.sin(ms/30)*3:0;
+  const x=h.x-10+shake,y=h.y-20+tap; RO(x-11,y-14,22,28,'#f6e2b8'); R(x-11,y-14,22,6,'#4f8a3a'); label('HOT',x,y-2,RED,1); E(x,y+8,4,3,'#e0402e');
+  if(ms>P.show&&ms<P.t0) label('HOMEGROWN',x,y-30,GOLD,1);
+  if(ms>P.shake+200) { E(x+16,y+14,2,3,'#f0d27a'); label('ONE LEFT',x,y-30,CREAM,1); } };
+B.seeds_of_trouble=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,66),me=ST.unit(m);
+  const plan={show:1100,t0:1700,t1:2300,shake:2700,pocket:3200},hit=2300;
+  const aims=[0,1,2].map(k=>{ const f=list[k%list.length],q=ST.foe(f); return {x:q.x+(list.length<3?(k-1)*14:0),y:q.mid}; });
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'celeb'},{t:1700,f:'act',dx:(u,tt)=>Math.sin(tt*20)*2},{t:2300,f:'aim'},{t:2700,f:'kneel'},{t:3200,f:'hip'},{t:3500,f:back(p.x,me),hop:2,hn:6},{t:4500,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over and shows off a seed packet. Handwritten label. HOT.'); say(m.id,'seeds_of_trouble'); scene('bp_packet',3.3,{plan}); }],
+    ...aims.map((a,k)=>[1750+k*120,()=>{ const h=hand(); ST.fly((x,y,uu)=>{ E(x,y,4,5,'#ffb04a'); E(x,y,2,3,'#fff1b0'); },h.x-10,h.y-20,a.x,a.y,.45,30); sfx.whoosh(); }]),
+    ['hf',hit],
+    [hit,()=>{ sfx.fireball?sfx.fireball():sfx.bonk(); sfx.splat(); all(list); landHit(100); for(const a of aims) scene('bp_poof',.6,{x:a.x,y:a.y,c:'#ffb04a',n:8}); }],
+    [2700,()=>{ setMessage('He shakes the packet. One seed left. He pockets it carefully.'); sfx.select(); }],
+    [4600,'end',res(E2)+'The crop is performing above expectations.']]); };
+
+// ---------- Mild for Company ----------
+SC.bp_pot=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.give) return; gfx.globalAlpha=fade(u,.96);
+  const x=h.x-10,y=h.y-6; EO(x,y+4,14,9,'#c9c2b8'); E(x,y-2,11,3,'#e88a4a'); steam(x,y-4,s.t,3,'#ffd9a0');
+  const flip=cl((ms-P.flip)/400),sc=Math.cos(flip*Math.PI); gfx.save(); gfx.translate(x,y-26); gfx.scale(Math.abs(sc),1); RO(-14,-6,28,12,CREAM); label(sc>0?'HOT':'MILD',0,-3,sc>0?RED:'#2f6b3a',1); gfx.restore();
+  if(ms>P.test&&ms<P.test+500) { RO(x+10,y-16,4,14,'#c9c2b8'); label('TINY',x+12,y-40,CREAM,1); } };
+B.mild_for_company=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,26),self=t===m,me=ST.unit(m);
+  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:'aim'},{t:1200,f:'act'},{t:1700,f:'throw'},{t:2400,f:'celeb',hop:6},{t:2900,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:amble(sp.x,me),hop:2,hn:6},{t:1100,x:sp.x,y:sp.y,f:'aim'},{t:1700,f:'act'},{t:2200,f:'throw',dx:-6},{t:2700,f:'celeb',hop:6},{t:3100,f:back(sp.x,me),hop:2,hn:6},{t:4100,x:'home',y:'home',f:'idle'}];
+  ST.keys(fx,K);
+  const plan={flip:self?400:1200,test:self?1200:1700,give:self?1700:2200},hit=plan.give+350,end=self?3100:4200;
+  ST.play(E2,[
+    [0,()=>{ setMessage(self?'Boppy turns the label on his broth around. HOT. Then MILD.':'Boppy walks over to '+t.name+' with a pot of broth.'); say(m.id,'mild_for_company'); scene('bp_pot',(plan.give+100)/1000,{plan}); }],
+    [plan.flip,()=>{ sfx.select(); if(!self) setMessage('He turns the label around. HOT becomes MILD, in careful handwriting.'); }],
+    [plan.test,()=>{ setMessage('He tests one tiny spoonful like a safety inspector.'); }],
+    [plan.give,()=>{ const h=hand(); ST.fly((x,y)=>{ EO(x,y,8,5,'#c9c2b8'); E(x,y-2,6,2,'#e88a4a'); },h.x-10,h.y-6,H.x+(self?-30:6),H.mid,.35,24); sfx.whoosh(); }],
+    ['hf',hit],
+    [hit,()=>{ E2.apply(); sfx.heal(); scene('bp_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('bp_glow',.9,{x:H.x,y:H.mid,c:'#ffd9a0'}); hopOf(t!==m?t:null); }],
+    [hit+300,()=>{ setMessage('The label was accurate. Boppy looks relieved.'); }],
+    [end,'end',kindLine(t,'The warning label has been honestly adjusted.')]]); };
+
+// ---------- In Nineteen Seventy ----------
+SC.bp_1970=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.92);
+  if(ms>P.stool-100) { const x=P.sx,y=P.sy; if(PROPART.draw('boppy/stool',x,y-14,{h:34})) {} else { R(x-12,y-14,24,4,WOOD); Ln(x-10,y-10,x+8,y,3,'#8a5a30'); Ln(x+10,y-10,x-8,y,3,'#8a5a30'); } }
+  if(ms>P.card) { const d=ez((ms-P.card)/400),y=lerp(-40,P.cy,d),x=P.cx; if(!PROPART.draw('boppy/1970_card',x,y,{w:116})) { RO(x-62,y-26,124,52,SEPIA); R(x-58,y-22,116,44,'#e8cf98'); label('1970',x,y-12,'#5a3a1a',4); } }
+  if(ms>P.card2) { const d=ez((ms-P.card2)/350),x=lerp(P.cx+260,P.cx,d),y=P.cy+44; RO(x-58,y-10,116,20,CREAM); label('FIRST SOME CONTEXT',x,y-3,'#5a3a1a',1); }
+  if(ms>P.chairs) for(const q of P.list) { const g=ez((ms-P.chairs)/300),x=q.x+q.w*.5+4,y=q.base; gfx.save(); gfx.translate(x,y); gfx.scale(g,g); if(!PROPART.draw('boppy/folding_chair',0,-17,{h:34})) { RO(-6,-16,12,4,WOOD); R(-6,-12,2,12,'#8a5a30'); R(4,-12,2,12,'#8a5a30'); RO(4,-28,2,14,'#8a5a30'); } gfx.restore(); }
+  if(ms>P.also&&ms<P.also+900) { const h=hand(); label('ALSO',h.x,h.y-40,GOLD,2); } };
+B.nineteen_seventy=E2=>{ const {m,fx}=E2,list=foes(E2).length?foes(E2):b2LiveFoes(),Gp=ST.group(list),p=rowSpot(Gp,84),me=ST.unit(m);
+  const plan={stool:1000,sx:p.x,sy:p.y,card:1500,card2:2200,chairs:2800,also:3400,cx:Gp.x,cy:Math.max(40,Gp.top-58),list:list.map(f=>ST.foe(f))},hit=2800;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1000,x:p.x,y:p.y,f:'sit'},{t:1300,f:'aim'},{t:2200,f:'sit',dx:(u,tt)=>Math.sin(tt*5)*1},{t:3400,f:'aim'},{t:3900,f:'sit'},{t:4100,f:back(p.x,me),hop:2,hn:6},{t:5100,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over and sits down. This takes a while.'); say(m.id,'nineteen_seventy'); scene('bp_1970',4.6,{plan}); }],
+    [1300,()=>{ setMessage('He raises one finger. A title card arrives.'); }],
+    [1500,()=>{ sfx.thud(); }],
+    [2200,()=>{ sfx.whoosh(); setMessage('Then a second card. The introduction has introductory remarks.'); }],
+    ['hf',hit],
+    [hit,()=>{ E2.apply(); sfx.ding(); for(const f of list) { const q=ST.foe(f); scene('bp_heart',.9,{x:q.x,y:q.top-4,r:5}); } }],
+    [3000,()=>{ setMessage('Every enemy finds a little chair and settles in.'); }],
+    [3400,()=>{ sfx.select(); setMessage('He prepares another finger.'); }],
+    [5200,'end','The story hasn\'t started yet. Everyone is waiting for it.']]); };
+
+// ---------- Jar-Lid Negotiations ----------
+SC.bp_jar=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.96);
+  const lid=(x,y,a=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); RO(-12,-4,24,8,'#c9a23a'); R(-10,-2,20,2,'#f0d27a'); gfx.restore(); };
+  const x=h.x-10,y=h.y-4;
+  if(ms<P.pop) { const shake=ms>P.strain?Math.sin(ms/25)*1.5:0; RO(x-11+shake,y-12,22,26,'#cfe8ee'); R(x-8+shake,y-4,16,14,'#e0402e'); lid(x+shake,y-16,ms>P.strain?Math.sin(ms/30)*.1:0); if(ms>P.strain) label('TIGHT',x,y-36,CREAM,1); return; }
+  RO(x-11,y-12,22,26,'#cfe8ee'); R(x-8,y-4,16,14,'#e0402e');
+  if(ms<P.guard) { const q=ez((ms-P.pop)/(P.guard-P.pop)); lid(lerp(x,x-30,q),y-16-Math.sin(q*Math.PI)*60,q*12); }
+  else { lid(x-14,y-30,-1.2); if(ms>P.guard+100) label('EASY',x-14,y-56,GOLD,2); } };
+SC.bp_ringwave=(s,u)=>{ const q=ez(u/.6); gfx.globalAlpha=fade(u,.5)*(1-q*.5); ring(s.x,s.y,s.rx*(.3+q*.8),s.ry*(.3+q*.8),6,'#f0d27a'); ring(s.x,s.y,s.rx*(.2+q*.6),s.ry*(.2+q*.6),3,CREAM); };
+B.jar_lid_negotiations=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,50),me=ST.unit(m),hitList=waveFoes().length?waveFoes():[f],Gh=ST.group(hitList);
+  const plan={strain:1500,pop:2400,guard:2900};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1500,f:'act',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2400,f:'throw',dx:-6},{t:2900,f:'spread'},{t:3500,f:'hip'},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over with a stubborn jar. The lid is one pixel too tight.'); say(m.id,'jar_lid_negotiations'); scene('bp_jar',4.0,{plan}); }],
+    [1500,()=>{ setMessage('He was being polite before.'); sfx.charge&&sfx.charge(); }],
+    ['hf',plan.pop],
+    [plan.pop,()=>{ sfx.thud(); sfx.bonk(); all(hitList); landHit(100); scene('bp_ringwave',.9,{x:Gh.x,y:(Gh.top+Gh.base)/2,rx:Gh.w*.5+30,ry:(Gh.base-Gh.top)*.5+14}); }],
+    [2900,()=>{ sfx.select(); setMessage('He holds up the lid as a small guard. It was easy. Apparently.'); }],
+    [4900,'end',res(E2)+'The lid accepts the revised terms.']]); };
+})();
+
+// ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
+// Boppy's review: things Boppy actually does (wears that cap, fishes, counts heads like the Rikers deputy warden he was,
+// eats one pepper too many, pickles ghost peppers). One big readable moment per move, props 2 to 3x larger.
+// New on the same numbers: Cap Swat (basic, key cap_swat: the cap comes off and he swats like it is a mosquito),
+// Lockdown (A4, key lockdown: cell bars slam down, keys jangle), Pepper Breath (B1, key pepper_breath: a cone of pepper
+// fire), Five-Alarm Jar (B5, key five_alarm_jar: his pickled ghost peppers set off the alarm). Kept, bigger: Patient
+// Angler (splash and reel), Headcount, Again (big numbers), Seeds of Trouble (pepper sparks); Everybody Waits and Mild
+// for Company keep their pieces with larger props. Scenes prefix bv_ (no warp). The older functions above stay.
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST,HELD=RFX.HELD;
+const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1;
+const fin=(u,a=.12)=>u<a?u/a:1;
+const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
+const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
+const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
+const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
+const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
+const poly=(pts,c,o=3)=>{ gfx.beginPath(); pts.forEach(([x,y],k)=>k?gfx.lineTo(x,y):gfx.moveTo(x,y)); gfx.closePath(); if(o) { gfx.lineWidth=o; gfx.strokeStyle=OUT; gfx.stroke(); } gfx.fillStyle=c; gfx.fill(); };
+const steam=(x,y,t,n=4,c='#fff6dc',h=40)=>{ const a0=gfx.globalAlpha; for(let k=0;k<n;k++) { const q=(t*1.1+k*.23)%1; gfx.globalAlpha=a0*(1-q); E(x-(n-1)*5+k*10+Math.sin(q*6+k)*5,y-q*h,5+q*5,5+q*5,c); } gfx.globalAlpha=a0; };
+const B=RECRUIT_MOVES.boppy;
+const CREAM='#fff8e8',GOLD='#ffe08a',RED='#e0402e',BLUE='#9fc4f0',WATER='#7cc4f4',IRON='#4a4f58',IRONL='#8a929e',BRASS='#d8b24a',CAPC='#525053',GHOST='#f4f1ff';
+ST.nw('bv_');
+const res=E2=>E2.result?E2.result+' ':'';
+const kindLine=(t,ally)=>t&&t.side==='foe'?t.name+' warms up a little.':ally;
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const foes=E2=>(E2.targets||[]).filter(t=>t.side==='foe');
+const waveFoes=()=>{ const M=B2.move; return M?[...new Set(M.waves.flat().map(e=>e.t))].filter(t=>t.side==='foe'):[]; };
+const front=(F,gap=34)=>({x:Math.min(560,F.x+F.w*.5+gap),y:Math.min(316,F.base+3)});
+const rowSpot=(Gp,gap=56)=>({x:Math.min(552,Gp.x1+gap),y:Math.min(316,Gp.base+6)});
+const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
+const BSP=()=>BATTLE_SPRITES.boppy,BH=()=>BSP().idle.length*BSP().scale;
+const head=(st,dy=0)=>({x:st.x,y:st.y-BH()*(st.sc||1)*.72+dy});   // the cap brim line; his rig has blank rows above it
+const mouth=st=>{ const sp=st.sp,fr=st.frame,q=sp&&sp.mouthAt&&fr&&sp.mouthAt.get(fr);   // painted frames know where their mouth is
+  if(q) { const sc=sp.scale*(st.sc||1); return {x:st.x-fr[0].length*sc/2+q.col*sc,y:st.y-fr.length*sc+q.row*sc}; }
+  return {x:st.x-10,y:st.y-BH()*(st.sc||1)*.53}; };
+const back=(x,me)=>x<me.x?'walkR':'walk';
+const amble=(x,me)=>x<me.x?'walk':'walkR';
+const all=list=>{ for(const f of list) ST.jolt(f,.45); };
+const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+SC.bv_big=(s,u)=>{ let x=s.x,y=s.y; const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
+  x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+8,y);
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||GOLD,sc); gfx.restore(); };
+SC.bv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-34); x=p.x; y=p.y; } const sc=s.sc||2,w=(s.txt.length*4-1)*sc; x=Math.max(w/2+6,Math.min(570-w/2,x)); bigWord(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,sc); };
+SC.bv_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.6); R(0,0,576,324,s.c||'#ffffff'); };
+SC.bv_rings=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.3-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; ring(s.x,s.y,6+q*(s.r||40),4+q*(s.r||40)*.7,3,s.c||CREAM); } };
+SC.bv_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); };
+SC.bv_shield=(s,u)=>{ const g=ez(u/.25); gfx.globalAlpha=fade(u,.7)*.9; ring(s.x,s.y,(s.rx||32)*g,(s.ry||48)*g,4,s.c||BLUE); gfx.globalAlpha*=.25; E(s.x,s.y,(s.rx||32)*g,(s.ry||48)*g,s.c||BLUE); };
+SC.bv_smoke=(s,u)=>{ for(let k=0;k<(s.n||7);k++) { const q=cl(u*1.2-k*.05); if(q<=0) continue; gfx.globalAlpha=(1-q)*.75; E(s.x-24+k*8+Math.sin(k*3+q*5)*6,s.y-q*(s.h||50),7+q*9,7+q*9,s.c||'#6a6460'); } };
+if(!sfx.clang) sfx.clang=(d=0)=>{ tone({type:'square',f0:520,f1:470,dur:.55,vol:.13,delay:d,filter:2400}); tone({type:'triangle',f0:1310,dur:.7,vol:.08,delay:d}); noise({dur:.25,vol:.26,delay:d,f0:3200,f1:900}); };
+if(!sfx.jangle) sfx.jangle=(d=0,n=6)=>{ for(let k=0;k<n;k++) tone({type:'triangle',f0:2300+((k*577)%900),dur:.07,vol:.07,delay:d+k*.07}); };
+if(!sfx.siren) sfx.siren=(d=0)=>{ for(let k=0;k<4;k++) tone({type:'sawtooth',f0:k%2?660:880,f1:k%2?880:660,dur:.3,vol:.08,delay:d+k*.3,filter:1800,sweep:'lin'}); for(let k=0;k<12;k++) tone({type:'square',f0:1900,dur:.035,vol:.05,delay:d+k*.06}); };
+if(!sfx.crunch) sfx.crunch=(d=0)=>{ noise({dur:.11,vol:.3,delay:d,f0:2600,f1:900}); noise({dur:.1,vol:.25,delay:d+.13,f0:2200,f1:800}); };
+if(!sfx.flame) sfx.flame=(d=0,dur=.8)=>{ noise({dur,vol:.28,delay:d,f0:400,f1:1500,type:'lowpass'}); tone({type:'sawtooth',f0:90,f1:60,dur,vol:.08,delay:d,filter:300}); };
+
+// Bare-headed frames for Cap Swat: the cap pixels become a bald dome with his grey fringe at the back (made once).
+const BARE=['act','throw','aim','hip','wind'];
+const bareRows=fr=>{ const rows=fr.map(r=>r.split('')),r21=fr[21]; let c0=99,c1=-1; for(let x=0;x<r21.length;x++) if(r21[x]!=='.') { c0=Math.min(c0,x); c1=Math.max(c1,x); }
+  const cx=Math.round((c0+c1)/2)+1,hw=r=>{ const q=(22.8-r)/8.8; return Math.round(10.5*Math.sqrt(Math.max(0,1-q*q))); };
+  for(let r=11;r<=22;r++) for(let x=c0-4;x<=c1+3;x++) if(rows[r][x]!==undefined) rows[r][x]='.';
+  for(let r=14;r<=22;r++) { const w=hw(r),wp=hw(r-1); if(w<2) continue;
+    for(let x=cx-w;x<=cx+w;x++) { let ch='o'; if(x===cx-w||x===cx+w||r===14||Math.abs(x-cx)>wp) ch='a'; else if(r<=17&&x<cx-1&&x>cx-6) ch='p'; else if(x>cx+3&&r>=18) ch=(x+r)%3===0?'j':'g'; else if(x<cx-7&&r>=20) ch='g'; rows[r][x]=ch; } }
+  return rows.map(r=>r.join('')); };
+const ensureBare=()=>{ const sp=BSP(); if(sp.bare_act) return; for(const k of BARE) { const fr=bareRows(sp[k]); sp['bare_'+k]=fr; if(sp.eyeAt) sp.eyeAt.set(fr,sp.eyeAt.get(sp[k])); if(sp.handAt) sp.handAt.set(fr,sp.handAt.get(sp[k])); } };
+
+// ---------- Cap Swat (basic; key cap_swat; same numbers as Cap Check) ----------
+// He walks over, takes the cap off (bald head, grey fringe), and swats at the monster like it is a mosquito: miss, miss, SWAT.
+const bigCap=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.scale(sc,sc);
+  poly([[-4,4],[-40,2],[-42,9],[-6,10]],'#403b3c',2.5); EO(-12,-2,15,11,CAPC); E(-15,-6,8,4,'#68676c'); Ln(-18,-1,-6,-3,2,'#d2d1d1'); Ln(-14,1,-8,2,1.5,'#d2d1d1'); E(-12,-13,2.5,2,'#68676c'); gfx.restore(); };
+SC.bv_cap=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.off||ms>P.on) return; const h=hand(); let ang=-1.25;
+  for(const [a,b] of P.sw) { if(ms>=a&&ms<b) ang=lerp(-1.25,.55,ez((ms-a)/(b-a))); else if(ms>=b&&ms<b+200) ang=lerp(.55,-1.25,ez((ms-b)/200)); }
+  if(ms>=P.sw[2][1]) ang=lerp(.55,.15,ez((ms-P.sw[2][1])/300));
+  if(ms<P.off+200) ang=lerp(-2.4,-1.25,ez((ms-P.off)/200));
+  gfx.globalAlpha=1; bigCap(h.x+4,h.y,ang,1.9);
+  const st=s.st; if(st&&st.x!=null&&ms<P.off+600) { const p=head(st,8),q=(ms-P.off)/600; gfx.globalAlpha=1-q; Ln(p.x-8-q*4,p.y-8,p.x-8+q*4,p.y-8,2,'#ffffff'); Ln(p.x-8,p.y-12-q*4,p.x-8,p.y-12+q*4,2,'#ffffff'); } };
+SC.bv_dodge=(s,u)=>{ const ms=s.t*1000,P=s.P,f=s.f; if(!f) return;
+  const q1=cl((ms-P.d1)/450),q2=cl((ms-P.d2)/450);
+  if(q1>0&&q1<1) lift(f,Math.sin(q1*Math.PI)*16,0,0); else if(q2>0&&q2<1) lift(f,0,-Math.sin(q2*Math.PI)*.18,-Math.sin(q2*Math.PI)*18); };
+B.cap_swat=E2=>{ ensureBare(); const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
+  const sw=[[1800,1950],[2150,2300],[2500,2650]],hit=2650;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1200,x:p.x,y:p.y,f:'hip'},{t:1450,f:'bare_act'},
+    {t:1800,f:'bare_throw',dx:-6},{t:1950,f:'bare_act'},{t:2150,f:'bare_throw',dx:-8},{t:2300,f:'bare_act'},{t:2500,f:'bare_throw',dx:u=>-6-ez(u)*8},{t:2950,f:'bare_hip'},
+    {t:3200,f:'hip'},{t:3450,f:back(p.x,me),hop:2,hn:6},{t:4400,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over. At his own pace. Something is pestering his family.'); say(m.id,'cap_swat'); scene('bv_cap',3.3,{st,P:{off:1450,on:3200,sw}}); scene('bv_dodge',2.6,{f,P:{d1:1850,d2:2200}}); }],
+    [1450,()=>{ sfx.select(); setMessage('He takes the cap off. Here we go.'); }],
+    [1800,()=>{ sfx.whoosh(); }],
+    [1950,()=>{ setMessage('Swat! Missed.'); scene('bv_text',.6,{x:F.x,y:F.top-20,txt:'MISS',c:CREAM,sc:2}); }],
+    [2150,()=>{ sfx.whoosh(); }],
+    [2300,()=>{ setMessage('Swat! Missed again. It\'s quick.'); scene('bv_text',.6,{x:F.x-16,y:F.top-20,txt:'MISS',c:CREAM,sc:2}); }],
+    [2500,()=>{ sfx.whoosh(); }],
+    ['hf',hit],
+    [hit,()=>{ sfx.slash(); sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('bv_rings',.5,{x:F.x+8,y:F.mid,c:CREAM,r:40}); scene('bv_big',1.1,{x:F.x,y:F.top-74,txt:'SWAT!',c:GOLD,sc:4}); }],
+    [3200,()=>{ sfx.select(); setMessage('The cap goes back on. Same angle as always.'); }],
+    [4500,'end',res(E2)+'Like a mosquito. A big one.']]); };
+
+// ---------- Patient Angler (A1, kept: bigger splash and reel) ----------
+SC.bv_pond=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.on) return; const g=ez((ms-P.on)/300); gfx.globalAlpha=fade(u,.9)*g*.9;
+  if(!PROPART.draw('boppy/pond',P.x,P.y-6,{w:128*g,h:70*g})) { E(P.x,P.y,56*g,13*g,'#4f8fc8'); E(P.x-8,P.y-2,34*g,6*g,'#8fc8f4'); } for(let k=0;k<2;k++) { const q=(s.t*.7+k*.5)%1; gfx.globalAlpha=fade(u,.9)*g*(1-q)*.8; ring(P.x,P.y,10+q*48,3+q*11,2,'#d8f0ff'); } };
+SC.bv_rod=(s,u)=>{ const ms=s.t*1000,P=s.P,h=hand(); gfx.globalAlpha=fade(u,.97);
+  let ang=1.4,bend=0;
+  if(ms>P.sit&&ms<P.tug) ang=.5+Math.sin(ms/700)*.02;
+  else if(ms>=P.tug&&ms<P.reel1) { const q=ez((ms-P.tug)/220); ang=lerp(.5,1.55,q); bend=.8*(1-ez((ms-P.tug-300)/400)); }
+  else if(ms>=P.reel1) ang=lerp(1.55,1.1,ez((ms-P.reel1)/300));
+  if(ms>P.home) ang=1.4;
+  const PN=!!BSP().x_sit1,H={ang,len:132,bend}; if(PN) { H.tx=h.x; H.ty=h.y; } else HELD.rod(H,u,h.x,h.y);   // painted fishing poses already hold the rod; h is its tip
+  if(ms>P.reel0&&ms<P.reel1+200) { const cx=h.x-6,cy=h.y+14,a=(ms-P.reel0)/70; if(!PN) { EO(cx,cy,13,13,'#aeb3ba'); E(cx,cy,5,5,'#5e6670'); LnO(cx,cy,cx+Math.cos(a)*16,cy+Math.sin(a)*16,3,'#d8dce2'); EO(cx+Math.cos(a)*16,cy+Math.sin(a)*16,4,4,RED); }
+    if(ms>P.reel0+150) bigWord('REEL REEL',cx,h.y-58,GOLD,2); }
+  if(ms>P.sit&&ms<P.home) { let fx2=P.fx,fy=P.fy+Math.sin(ms/260)*1.5;
+    if(ms>P.nudge&&ms<P.nudge+300) fy+=Math.sin((ms-P.nudge)/300*Math.PI)*7;
+    if(ms>P.tug) { const q=ez((ms-P.tug)/350); fx2=lerp(P.fx,P.fx+50,q); fy=lerp(P.fy,P.fy-70,q); }
+    if(ms<P.tug+350) { gfx.strokeStyle='rgba(255,255,255,.85)'; gfx.lineWidth=1.5; gfx.beginPath(); gfx.moveTo(H.tx,H.ty); gfx.quadraticCurveTo((H.tx+fx2)/2,ms>P.tug?(H.ty+fy)/2:Math.max(H.ty,fy)+14,fx2,fy); gfx.stroke();
+      if(!PROPART.draw('boppy/bobber',fx2+3,fy-6,{h:32})) { EO(fx2,fy,7,9,CREAM); R(fx2-7,fy-2,14,5,RED); } }
+    else { gfx.strokeStyle='rgba(255,255,255,.85)'; gfx.lineWidth=2; const ty=P.ft+ (ms<P.reel1?0:-ez((ms-P.reel1)/300)*10); gfx.beginPath(); gfx.moveTo(H.tx,H.ty); gfx.lineTo(P.fx+10,ty); gfx.stroke(); }
+    if(ms>P.sit+200&&ms<P.nudge) bigWord('PATIENCE',h.x-30,h.y-58,CREAM,2);
+    if(ms>P.nudge&&ms<P.tug) bigWord('NUDGE',P.fx,P.fy-34,CREAM,2); } };
+SC.bv_splash=(s,u)=>{ const x=s.x,y=s.y; gfx.globalAlpha=fade(u,.6);
+  for(let k=0;k<16;k++) { const a=Math.PI*(1.06+k/15*.88),sp=56+(k%4)*16,q=ez(u*1.4),px=x+Math.cos(a)*sp*q*.9,py=y+Math.sin(a)*sp*q*1.5+u*u*90; EO(px,py,4,6,k%2?WATER:'#d8f0ff'); }
+  const col=Math.sin(cl(u*1.6)*Math.PI); if(col>0) { E(x,y-col*40,14,col*44,'#bfe6ff'); E(x,y-col*40,8,col*34,'#ffffff'); }
+  gfx.globalAlpha=fade(u,.5)*.8; ring(x,y,20+u*60,5+u*14,3,'#d8f0ff'); };
+SC.bv_yank=(s,u)=>{ const ms=s.t*1000,q=cl(ms/700); if(q<1) lift(s.f,-Math.sin(q*Math.PI)*34,Math.sin(q*Math.PI*2)*.25,Math.sin(q*Math.PI)*14); };
+B.patient_angler=E2=>{ const FA=!!BSP().x_sit1; const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
+  const P={sit:1150,nudge:2000,tug:2500,reel0:2850,reel1:3500,home:3700,fx:F.x+F.w*.5+20,fy:F.base-2,ft:F.mid};
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1150,x:p.x,y:p.y,f:FA?'x_fish1':'sit'},{t:1450,f:FA?'x_sit1':'sit'},{t:1850,f:FA?'x_sit2':'sit'},{t:2200,f:FA?'x_sit1':'sit'},{t:2500,f:FA?'x_fish4':'wind',dx:u=>ez(u)*8},{t:2850,f:FA?((u,tt)=>Math.floor(tt*7)%2?'x_fish3':'x_fish2'):'act',dx:(u,tt)=>6+Math.sin(tt*30)*2},{t:3500,f:'celeb',hop:6},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over with his rod and sits down. The fish can wait for him.'); say(m.id,'patient_angler'); scene('bv_rod',3.8,{P}); scene('bv_pond',3.7,{P:{on:1100,x:P.fx,y:P.fy+3}}); }],
+    [2000,()=>{ ST.jolt(f,.12); sfx.boop?sfx.boop():sfx.select(); setMessage(cap(f.def?f.def.the:'it')+' gets impatient and nudges the float.'); }],
+    ['hf',2500],
+    [2500,()=>{ sfx.whoosh(); sfx.splat(); ST.jolt(f,.5); landHit(100); scene('bv_splash',1.1,{x:P.fx,y:P.fy}); scene('bv_yank',.8,{f}); scene('bv_big',1.1,{x:F.x,y:F.top-74,txt:'SPLASH!',c:'#bfe6ff',sc:4}); setMessage('Hook set! The whole pond jumps.'); }],
+    [2850,()=>{ for(let k=0;k<6;k++) tone({type:'square',f0:900,dur:.03,vol:.06,delay:k*.1}); setMessage('He reels it in. Slow and steady. His pace.'); }],
+    [3500,()=>{ sfx.ding(); }],
+    [4900,'end',res(E2)+'The patience was a trap.']]); };
+
+// ---------- Headcount, Again (A3, kept: big numbers over each enemy) ----------
+SC.bv_count=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.9);
+  const badge=(x,y,n,pop,c)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(pop,pop); EO(0,0,17,17,c); label(''+n,1,-7,OUT,3); gfx.restore(); };
+  P.list.forEach((q,k)=>{ const t0=P.c0+k*P.step; if(ms<t0) return; const a=(ms-t0)/180,pop=a<1?ez(a)*1.3:lerp(1.3,1,cl(a-1)); badge(q.x,q.top-30,k+1,pop,ms>P.reveal?GOLD:CREAM); });
+  const st=s.st; if(ms>P.extra&&st&&st.x!=null) { if(ms<P.cross+80) { const p=head(st,-26); P.hx=p.x; P.hy=p.y; } const x=P.hx,y=P.hy,a=(ms-P.extra)/180,pop=a<1?ez(a)*1.3:lerp(1.3,1,cl(a-1)); badge(x,y,P.list.length+1,pop,CREAM);
+    if(ms>P.cross) { const q=ez((ms-P.cross)/200); LnO(x-16,y-16,lerp(x-16,x+16,q),lerp(y-16,y+16,q),4,RED); LnO(x+16,y-16,lerp(x+16,x-16,q),lerp(y-16,y+16,q),4,RED); }
+    if(ms<P.cross) bigWord('HIM?',x,y-36,CREAM,2); } };
+B.headcount_again=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,62),me=ST.unit(m),n=list.length;
+  const c0=1300,step=360,extra=c0+n*step+150,cross=extra+650,reveal=cross+350;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'aim'},{t:c0,f:'aim',dx:(u,tt)=>-Math.sin(u*Math.PI)*6},{t:extra,f:'hip'},{t:cross,f:'act',dx:-4},{t:reveal,f:'aim'},{t:reveal+400,f:'celeb',hop:6},{t:reveal+800,f:back(p.x,me),hop:2,hn:6},{t:reveal+1800,x:'home',y:'home',f:'idle'}]);
+  const P={list:list.map(f=>ST.foe(f)),c0,step,extra,cross,reveal,gx:Gp.x,gy:Math.max(40,Gp.top-74)};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over. Headcount. Nobody move while he counts.'); say(m.id,'headcount_again'); scene('bv_count',(reveal+1300)/1000,{P,st}); }],
+    ...list.map((f,k)=>[c0+k*step,()=>{ sfx.select(); ST.jolt(f,.1); lift(f,-6); }]),
+    [extra,()=>{ sfx.boop?sfx.boop():sfx.select(); setMessage('One extra. He counted himself.'); }],
+    [cross,()=>{ sfx.thud(); setMessage('He crosses himself out. Headcount, again.'); }],
+    ['hf',reveal],
+    [reveal,()=>{ E2.apply(); sfx.ding(); for(const f of list) { const q=ST.foe(f); scene('bv_glow',.8,{x:q.x,y:q.mid,c:GOLD}); } }],
+    [reveal+400,()=>{ setMessage('Everybody is accounted for. He gives the row a friendly nod.'); }],
+    [reveal+1900,'end','Boppy has included himself by mistake. Twice.']]); };
+
+// ---------- Lockdown (A4; key lockdown; same numbers as Closing Time) ----------
+// The Rikers deputy warden: he points, cell bars slam down around the monster, he jangles his big key ring and locks it.
+const keyRing=(x,y,t,shake)=>{ const sw=Math.sin(t*(shake?28:6))*(shake?.5:.2); ring(x,y,12,12,5,OUT); ring(x,y,12,12,3,BRASS);
+  for(let k=0;k<4;k++) { const a=Math.PI*(.25+k*.17)+sw*(1+k*.3),kx=x+Math.cos(a)*12,ky=y+Math.sin(a)*12,ex=kx+Math.cos(a)*24,ey=ky+Math.sin(a)*24; LnO(kx,ky,ex,ey,4,k%2?'#c9ced6':BRASS); LnO(ex,ey,ex+Math.cos(a+1.4)*6,ey+Math.sin(a+1.4)*6,3,k%2?'#c9ced6':BRASS); } };
+SC.bv_cell=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.94);
+  const h=hand(); if(ms<P.turn) keyRing(h.x-6,h.y+4,s.t,ms>P.jang&&ms<P.turn);
+  if(ms<P.drop) return;
+  const d=ez((ms-P.drop)/(P.slam-P.drop)),bounce=ms>P.slam?Math.sin(cl((ms-P.slam)/250)*Math.PI)*-6:0,oy=lerp(-(P.base+30),0,d*d)+bounce;
+  const w=P.x1-P.x0,n=6;
+  gfx.save(); gfx.translate(0,oy);
+  for(let k=0;k<n;k++) { const x=P.x0+k*w/(n-1); RO(x-4,P.top,8,P.base-P.top,IRON); R(x-2,P.top+2,2,P.base-P.top-4,IRONL); }
+  RO(P.x0-10,P.top-12,w+20,14,IRON); R(P.x0-8,P.top-10,w+16,3,IRONL); for(let k=0;k<5;k++) EO(P.x0-4+k*(w+8)/4,P.top-5,2.5,2.5,IRONL);
+  RO(P.x0-6,P.base-8,w+12,8,IRON);
+  const lx=P.x1-4,ly=(P.top+P.base)/2; RO(lx-10,ly-14,20,26,BRASS); E(lx,ly-3,3,3,OUT); R(lx-1,ly-1,3,8,OUT);
+  gfx.restore();
+  if(ms>P.turn&&ms<P.turn+900) { const q=ez((ms-P.turn)/250),kx=P.x1+4,ky=(P.top+P.base)/2-3; gfx.save(); gfx.translate(kx,ky); gfx.rotate(-q*Math.PI/2); if(!PROPART.draw('boppy/big_key',20,0,{h:36,rot:Math.PI/4})) { LnO(0,0,26,0,4,BRASS); EO(30,0,7,7,BRASS); E(30,0,3,3,OUT); } gfx.restore(); bigWord('CLICK',kx+10,ky-30,CREAM,2); }
+  if(ms>P.slam&&ms<P.slam+1300) { const q=(ms-P.slam)/1300; gfx.globalAlpha=(1-q)*.22*(Math.sin(q*Math.PI*6)>0?1:.3); R(0,0,576,324,'#ff2a2a'); } };
+B.lockdown=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,70),me=ST.unit(m);
+  const P={jang:2200,drop:1500,slam:1800,turn:2700,x0:F.x-F.w*.5-12,x1:F.x+F.w*.5+12,top:Math.max(26,F.top-18),base:F.base+4};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'spread'},{t:1900,f:'hip'},{t:2200,f:'act',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2700,f:'throw',dx:-6},{t:3000,f:'hip'},{t:3400,f:back(p.x,me),hop:2,hn:6},{t:4400,x:'home',y:'home',f:'idle'}]);
+  ST.play(E2,[
+    [0,()=>{ setMessage('Boppy walks over. Keys jingling. The deputy warden is on duty.'); say(m.id,'lockdown'); scene('bv_cell',4.3,{P}); sfx.jangle(0,4); }],
+    [1100,()=>{ setMessage('He points. YOU.'); scene('bv_text',1,{st,txt:'YOU.',c:CREAM,sc:2}); }],
+    [1500,()=>{ sfx.whoosh(); setMessage('Cell bars come down out of nowhere.'); }],
+    ['hf',P.slam],
+    [P.slam,()=>{ sfx.clang(); sfx.thud(); ST.jolt(f,.55); landHit(100); scene('bv_big',1.3,{x:F.x,y:F.top-74,txt:'LOCKDOWN!',c:'#ff6a5a',sc:4}); }],
+    [P.jang,()=>{ sfx.jangle(0,8); setMessage('He jangles his big key ring. Very slowly.'); }],
+    [P.turn,()=>{ sfx.click?sfx.click():sfx.select(); setMessage('Click. That plan isn\'t going anywhere.'); }],
+    [4500,'end',res(E2)+'Nobody gets out on his watch.']]); };
+
+// ---------- Everybody Waits (A5, kept: the dispenser and the FAMILY FIRST ticket are bigger) ----------
+SC.bp_ticket=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.95);
+  if(ms<P.pull+200) { const h=hand(); RO(h.x-18,h.y-22,26,30,'#d8343a'); R(h.x-14,h.y-28,18,6,CREAM); EO(h.x-5,h.y-8,4,4,'#a82a2a'); if(ms>P.pull-500) bigWord('TAKE A NUMBER',h.x,h.y-50,CREAM,2); }
+  if(ms<P.pull) return;
+  const q=ez((ms-P.pull)/(P.unroll-P.pull)),top=P.y0,len=(P.y1-P.y0)*q,x=P.x;
+  RO(x-15,top,30,Math.max(2,len),CREAM); for(let y=top+6;y<top+len-4;y+=14) { R(x-15,y,3,2,'#c9c2b8'); R(x+12,y,3,2,'#c9c2b8'); }
+  const word=['F','A','M','I','L','Y',' ','F','I','R','S','T'],gap=(P.y1-P.y0-16)/word.length,sc=gap>=12?2:1;
+  word.forEach((ch,k)=>{ const y=top+6+k*gap; if(y<top+len-sc*5) label(ch,x,y,RED,sc); });
+  if(ms>P.unroll) { const g=ez((ms-P.unroll)/300); gfx.globalAlpha*=.14*g; R(x+15,top,P.wide,P.y1-P.y0,'#9fc4f0'); } };
+
+// ---------- Pepper Breath (B1; key pepper_breath; same numbers as One Pepper, Sensible Size) ----------
+// One homegrown cayenne at lunch. Crunch. His face goes red, steam comes out of his ears, and he breathes a cone of fire.
+const cayenne=(x,y,rot,sc,c='#e0402e')=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc);
+  if(c==='#e0402e'&&PROPART.draw('boppy/cayenne_pepper',0,0,{h:50})) { gfx.restore(); return; }   // painted; other colours stay drawn
+  gfx.beginPath(); gfx.moveTo(-3,-14); gfx.quadraticCurveTo(10,-4,6,10); gfx.quadraticCurveTo(2,20,-6,24); gfx.quadraticCurveTo(-2,12,-6,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill();
+  Ln(0,-8,3,6,1.5,'rgba(255,255,255,.6)'); RO(-5,-19,6,5,'#4f8a3a'); R(-3,-24,2,6,'#3f7a2a'); gfx.restore(); };
+SC.bv_pepper=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const mo=mouth(st); gfx.globalAlpha=1;   // the painted frames hold the pepper themselves
+  if(ms>P.show&&ms<P.eat) bigWord('HOMEGROWN',mo.x+4,mo.y-62,GOLD,2);
+  if(ms>P.eat+200&&ms<P.eat+800) bigWord('CRUNCH',mo.x-6,mo.y-48,CREAM,2);
+  if(ms>P.red&&ms<P.fire) { steam(mo.x+16,mo.y-24,s.t,3,'#ffd0b0',34); steam(mo.x+40,mo.y-26,s.t+.4,3,'#ffd0b0',34); } };
 SC.bv_cone=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null) return; const mo=mouth(st),tx=P.tx,ty=P.ty,dx=tx-mo.x,dy=ty-mo.y,L=Math.hypot(dx,dy)+30,a0=Math.atan2(dy,dx);
   const grow=ez(ms/220),shrink=u>.8?(1-u)/.2:1,len=L*grow,spread=lerp(.1,.3,ez(ms/500))*shrink;
   const layer=(f,c,jit)=>{ const pts=[[mo.x,mo.y]]; for(let k=0;k<=8;k++) { const q=k/8,a=a0+lerp(-spread,spread,q)*f,r=len*(.92+.08*Math.sin(s.t*40+k*1.7))+Math.sin(s.t*55+k*2.3)*jit; pts.push([mo.x+Math.cos(a)*r,mo.y+Math.sin(a)*r]); } gfx.globalAlpha=shrink*.95; poly(pts,c,f===1?3:0); };

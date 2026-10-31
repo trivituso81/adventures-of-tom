@@ -61,6 +61,15 @@
     for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,m5);
     sp.yg_run1R=mir(sp.yg_run1); sp.yg_run2R=mir(sp.yg_run2);
   }
+  // Pepper Breath (data/boppy-extra.js BOPPY_PEPPER): pb_walkA, pb_walkB, pb_present, pb_admire, pb_raise, pb_crunch, pb_chew, pb_burn, pb_fan, pb_inhale, pb_breathA..C, pb_gasp, pb_grumble, pb_smug
+  // (+ pb_walkAR, pb_walkBR mirrored). sp.mouthAt maps each frame's rows to its painted mouth point, where the fire cone and the red-face glow are drawn.
+  if(typeof BOPPY_PEPPER!=='undefined') {
+    const PX=BOPPY_PEPPER; paintedAtlas('boppyPepper',PX.atlas.src,PX.atlas.rects,PX.atlas.k);
+    const m6={}; let n6=0; for(const k in PX.pal) { const c=String.fromCharCode(0x0800+n6++); m6[k]=c; pal[c]=PX.pal[k]; }
+    m6['.']='.'; sp.mouthAt=new Map();
+    for(const k in PX.rows) { const r=sp['pb_'+k]=P2(PX.rows[k],'boppyPepper',k,m6); const q=PX.mouth[k]; if(q) sp.mouthAt.set(r,{col:q[0],row:q[1]}); }
+    for(const k of ['walkA','walkB']) { const o=sp['pb_'+k],r=sp['pb_'+k+'R']=mir(o),q=sp.mouthAt.get(o); if(q) sp.mouthAt.set(r,{col:o[0].length-1-q.col,row:q.row}); }
+  }
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.boppy={scale:.8*2*SZ,pal:BOPPY_HIRES.ko.pal,rows:paintRows(BOPPY_HIRES.ko.rows.slice(),'boppyKo','ko',true)};
   // His cardigan is not a dark tee, so outfit recolouring does not apply to the painted Boppy.

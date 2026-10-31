@@ -1,3 +1,9 @@
+## 2026-10-30: Pepper Breath rebuilt from a painted 16-frame sheet
+
+- Tom's sheet `tools/sprite-bake/src/boppy-pepper-v1.png` (4 x 4, magenta) baked by `bake_boppy_extra.py` into `art/chars/boppy-pepper.webp` and `BOPPY_PEPPER` in `data/boppy-extra.js` (frames `pb_walkA, pb_walkB, pb_present, pb_admire, pb_raise, pb_crunch, pb_chew, pb_burn, pb_fan, pb_inhale, pb_breathA..C, pb_gasp, pb_grumble, pb_smug`, plus mirrored walks), registered in `data/boppy-hires-battle.js`. Smug frame is 75 rows tall so his head matches his idle.
+- `tools/sprite-bake/boppy_pepper_mouth.json` holds each frame's mouth point (`sp.mouthAt`); the fire cone, CRUNCH and steam follow it. `B.pepper_breath` in `engine/boppy-moves.js`: walks over, presents, admires, raises, crunch, chew, burn, fan, inhale, three breath frames with the cone (hit still at 2600 ms), gasp, grumble (MY STOMACH), smug, walks back. The code-drawn pepper and red-face overlay are no longer used here. Line, damage and sounds unchanged; move is about 1 s longer.
+- Cache tags `boppy-moves.js?v=pb1`, `boppy-extra.js?v=pb1`, `boppy-hires-battle.js?v=pb1`. Tests: kit_test boppy pepper_breath (14 frames looked at), smoke IDS=boppy clean.
+
 ## 2026-10-30: Lamby Boomerang rebuilt from a painted 16-frame sheet
 
 - Tom's sheet `tools/sprite-bake/src/rose-boomerang-v1.png` (4 x 4, magenta): cells 1 to 8 are Rose, 9 to 16 are Lamby and Backup Lamby in flight. `bake_rose.py` bakes Rose into her own atlas `art/chars/rose-battle-bm.webp` and `ROSE_HIRES.bm` (frames `bm_windA, bm_windB, bm_throw, bm_follow, bm_watch, bm_reach, bm_catch, bm_cheer`, registered in `data/rose-hires-use.js`), and the lambs into a prop atlas `art/props/rose/lamby_fly.webp` (4 x 2 cells of 160 px: front, side, flip, squash for each lamb; preloaded in `engine/prop-art.js`).
