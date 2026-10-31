@@ -73,6 +73,7 @@ function setGirlsAway(away) {
 // Recruits never leave their own town: whoever is along says goodbye at the cab and heads home.
 const TRAVEL_TALK={
   amy:{stay:['Los Angeles? On a school night? I have thirty second-graders at eight.','Go. I\'ll race you when you get back. And I\'ll win.'],toast:'Amy jogs home. She has papers to grade.'},
+  justin:{stay:['Los Angeles? I have a hallway, a basement and a playoff game.','Go. Text me if you see a bad outlet. I will know.'],toast:'Justin heads home. The game is on.'},
   deedee:{stay:['Oh, Tommy. Somebody has to stay with my angels. And the pies.','Here. Cookies for the flight. To the moon and back, honey.'],toast:'Deedee heads home to the Rivituso house. The pies need her.'},
   boppy:{stay:['Six hours in a seat? My stomach says no. I say no. We agree for once.','Go on. The recliner and I\'ll hold down the fort.'],toast:'Boppy shuffles home to the recliner.'},
   nara:{stay:['Nara stops at the curb. She looks at the cab. She looks at Tom.','Tom kneels down. "I\'ll be back. I promise. You keep 2nd Ave safe."','Nara licks his whole face. Then she trots back to 2nd Ave to wait at the corner.'],toast:'Nara heads back to 2nd Ave. She\'ll be waiting.',narrate:true}

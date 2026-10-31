@@ -1,7 +1,178 @@
 [
-  {"id":"ym-kid-amy","kind":"battle","voice":"grace","lineKind":"ymamot","text":"Ketchup, pickles, cereal, sock. Ymamot Creation!","where":"Ymamot Creation: little Amy in the flashback (Grace's voice)","script":"[gleeful six-year-old announcing a recipe, bossy and proud, quick; Ymamot is said YAH-mah-mott] Ketchup, pickles, cereal, sock. [beat] Ymamot Creation!"},
-  {"id":"justin-recruit-ask","kind":"dialog","voice":"justin","text":"Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.","where":"Justin offers to join the party (Gregori house talk)","script":"[easygoing, friendly, goofy proud dad] Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight."},
-  {"id":"justin-recruit-yes","kind":"dialog","voice":"justin","text":"Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.","where":"Justin joins the party","script":"[warm, cheerful, a little distracted] Great. Let me grab my jacket. And the ladder. Don't ask about the ladder."},
-  {"id":"justin-recruit-no","kind":"dialog","voice":"justin","text":"No problem. The hallway light won't finish itself. It's been almost done since June.","where":"Justin when Tom says not right now","script":"[easygoing, dry, a little rueful] No problem. The hallway light won't finish itself. It's been almost done since June."},
-  {"id":"justin-recruit-swap","kind":"dialog","voice":"justin","text":"Somebody has to tag out. I'll wait. I'll be on the ladder.","where":"Justin when the party is full and Tom must swap someone out","script":"[easygoing, relaxed, amused] Somebody has to tag out. I'll wait. I'll be on the ladder."}
+ {
+  "id": "ym-kid-amy",
+  "kind": "battle",
+  "voice": "grace",
+  "lineKind": "ymamot",
+  "text": "Ketchup, pickles, cereal, sock. Ymamot Creation!",
+  "where": "Ymamot Creation: little Amy in the flashback (Grace's voice)",
+  "script": "[gleeful six-year-old announcing a recipe, bossy and proud, quick; Ymamot is said YAH-mah-mott] Ketchup, pickles, cereal, sock. [beat] Ymamot Creation!"
+ },
+ {
+  "id": "justin-recruit-ask",
+  "kind": "dialog",
+  "voice": "justin",
+  "text": "Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.",
+  "where": "Justin offers to join the party (Gregori house talk)",
+  "script": "[easygoing, friendly, goofy proud dad] Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight."
+ },
+ {
+  "id": "justin-recruit-yes",
+  "kind": "dialog",
+  "voice": "justin",
+  "text": "Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.",
+  "where": "Justin joins the party",
+  "script": "[warm, cheerful, a little distracted] Great. Let me grab my jacket. And the ladder. Don't ask about the ladder."
+ },
+ {
+  "id": "justin-recruit-no",
+  "kind": "dialog",
+  "voice": "justin",
+  "text": "No problem. The hallway light won't finish itself. It's been almost done since June.",
+  "where": "Justin when Tom says not right now",
+  "script": "[easygoing, dry, a little rueful] No problem. The hallway light won't finish itself. It's been almost done since June."
+ },
+ {
+  "id": "justin-recruit-swap",
+  "kind": "dialog",
+  "voice": "justin",
+  "text": "Somebody has to tag out. I'll wait. I'll be on the ladder.",
+  "where": "Justin when the party is full and Tom must swap someone out",
+  "script": "[easygoing, relaxed, amused] Somebody has to tag out. I'll wait. I'll be on the ladder."
+ },
+ {
+  "id": "justin-join",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "join",
+  "text": "Halftime. I have a minute. Let's go.",
+  "where": "Justin battle line: join",
+  "script": "[warm, easygoing dad, a little distracted, still half watching a game] Halftime. I have a minute. Let's go."
+ },
+ {
+  "id": "justin-greet",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "greet",
+  "text": "Hold this. No, the other end.",
+  "where": "Justin battle line: greet",
+  "script": "[mildly impatient, hands full, friendly] Hold this. No, the other end."
+ },
+ {
+  "id": "justin-loose_wire",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "loose_wire",
+  "text": "Loose wire. Not my problem any more.",
+  "where": "Justin battle line: loose_wire",
+  "script": "[dry, deadpan, tossing it over his shoulder] Loose wire. Not my problem any more."
+ },
+ {
+  "id": "justin-wire_nuts",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "wire_nuts",
+  "text": "Wire nuts! Never have enough of these.",
+  "where": "Justin battle line: wire_nuts",
+  "script": "[cheerful, mid-project, rummaging in his pocket] Wire nuts! Never have enough of these."
+ },
+ {
+  "id": "justin-bad_call",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "bad_call",
+  "text": "ARE YOU KIDDING ME WITH THAT CALL?",
+  "where": "Justin battle line: bad_call",
+  "script": "[full-throated sports yell at the TV, rising to a roar] ARE YOU KIDDING ME WITH THAT CALL?"
+ },
+ {
+  "id": "justin-fresh_fit",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "fresh_fit",
+  "text": "This shirt cost more than your pond.",
+  "where": "Justin battle line: fresh_fit",
+  "script": "[smug, smooth, a wink in the voice] This shirt cost more than your pond."
+ },
+ {
+  "id": "justin-demo_day",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "demo_day",
+  "text": "Demo day! Wall's coming down!",
+  "where": "Justin battle line: demo_day",
+  "script": "[gleeful, pumped, shouting over the noise] Demo day! Wall's coming down!"
+ },
+ {
+  "id": "justin-breaker_flip",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "breaker_flip",
+  "text": "Breaker's off. Breaker's... on.",
+  "where": "Justin battle line: breaker_flip",
+  "script": "[calm and measured, a beat of silence in the middle, then a flip] Breaker's off. Breaker's... on."
+ },
+ {
+  "id": "justin-giant_sneeze",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "giant_sneeze",
+  "text": "Ah... ah... AH CHOOOOO!",
+  "where": "Justin battle line: giant_sneeze",
+  "script": "[slow exaggerated build, then a huge explosive sneeze] Ah... ah... AH CHOOOOO!"
+ },
+ {
+  "id": "justin-foot_tap",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "foot_tap",
+  "text": "MY FOOT! WHO TOUCHED MY FOOT?!",
+  "where": "Justin battle line: foot_tap",
+  "script": "[a piercing, high-pitched scream of betrayal] MY FOOT! WHO TOUCHED MY FOOT?!"
+ },
+ {
+  "id": "justin-drywall",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "drywall",
+  "text": "Drywall's up. Let it dry.",
+  "where": "Justin battle line: drywall",
+  "script": "[satisfied tradesman, wiping his hands] Drywall's up. Let it dry."
+ },
+ {
+  "id": "justin-hurt",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "hurt",
+  "text": "Not the jacket!",
+  "where": "Justin battle line: hurt",
+  "script": "[offended gasp, protective of the jacket] Not the jacket!"
+ },
+ {
+  "id": "justin-low",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "low",
+  "text": "Somebody turn the game back on.",
+  "where": "Justin battle line: low",
+  "script": "[tired, bargaining, flat] Somebody turn the game back on."
+ },
+ {
+  "id": "justin-ko",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "ko",
+  "text": "Tell the basement I loved it.",
+  "where": "Justin battle line: ko",
+  "script": "[dramatic and fading, a little wry] Tell the basement I loved it."
+ },
+ {
+  "id": "justin-win",
+  "kind": "battle",
+  "voice": "justin",
+  "lineKind": "win",
+  "text": "And THAT is how you close out a game.",
+  "where": "Justin battle line: win",
+  "script": "[triumphant sports-announcer swagger, fist pump] And THAT is how you close out a game."
+ }
 ]

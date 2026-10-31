@@ -4,6 +4,16 @@
 - Why this way: the hand-written dialogue scripts live in 17 large Project docs; copying them through Claude would take several sessions. History holds the exact script of every clip, including the 2026-10-27/28 re-bakes.
 - Tested: `tools/voice-library/test.py` with a mocked history (an uncontracted old script lands on the contracted line with its tags; words match the screen). Not run against the real account (the key lives on Tom's phone). Stamp `build vlib5`.
 
+## 2026-10-31 (day, 10): Justin's kit: painted battle sprite, nine moves, test boss fight (`justin2`)
+
+- Tom (13:3x) sent `justin_9_animation_sheets.zip` (nine ability sheets; no stance sheet 00). Justin now fights in slot 4 with his full kit: Loose Wire (basic), DRYWALL (special, 2 VP, halves damage to the whole party until each friend's next turn), Wire Nuts, Bad Call, Fresh Fit, Demo Day, Breaker Flip, Giant Sneeze (enemy loses its next turn and slides back), Foot Tap (Rose taps his toe, Grace if Rose is down; biggest hit).
+- Stamp slots: A1 Wire Nuts, A2 Bad Call, A3 Fresh Fit, A4 Demo Day, A5 Breaker Flip, B1 Giant Sneeze, B2 Foot Tap. A6 and B3 to B6 are empty placeholders until more moves exist (`tools/smoke.py` allows those five to be unbuilt for Justin only).
+- No stance sheet (00) arrived, so his idle, hurt, kneel and so on borrow frames from the ability sheets and his KO is a rotated frame. Send sheet 00 to replace them.
+- New: `engine/justin-moves.js`, `data/justin-battle-use.js`, `data/justin-battle-hires.js` (generated), `art/chars/justin-*.webp`, `tools/sprite-bake/bake_justin_battle.py`, `portraits/justin.png`; sfx `zap`, `drill`, `sneeze`. Shop tab, menu portrait, travel line, story lists.
+- Test fight: Battle Lab first entry, JUSTIN'S TRYOUT (Tom, Grace, Rose, Justin vs Old Iron-Gill, every move unlocked).
+- Voice: all his battle lines are new and listed in `tools/bake-page/pending.json`; speech synthesis plays until baked.
+- Tested: `kit_test.py justin --speed2` (all moves), `smoke.py`, `IDS=justin smoke.py`, `recruit_justin_test.py` (updated: he now fights). Not played on the phone.
+
 ## 2026-10-31 (day, 8): Voice Library search forgives spelling (`vlib4`)
 
 - Tom (13:20) could not find "yamamot". The line is there (Grace, kind `ymamot`, "Ketchup, pickles, cereal, sock. Ymamot Creation!", no clip yet; little Tom's line was removed in `ymamot4`), but search only matched exact letters. Search now matches every typed word inside the line, speaker, place, move name or direction, or within one typo (two for words of 7+ letters), so "yamamot" finds Ymamot. Results are memoized per query.

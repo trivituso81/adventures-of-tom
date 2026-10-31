@@ -30,7 +30,10 @@ with sync_playwright() as pw:
     built=pg.evaluate("""(ids)=>{ const L=window.__LE,o={}; for(const id of ids) o[id]=['basic','sig','A1','A2','A3','A4','A5','B1','B2','B3','B4','B5','A6','B6'].map(s=>s+':'+(L.b8Built(id,s,'p')?'Y':'n')).join(' '); return o; }""",IDS)
     print('built',built)
     for id,v in built.items():
-        if ':n' in v: fails.append(f'{id} not all built: {v}')
+        # Justin's approved kit has nine moves; the other five stamp slots are placeholders until Tom sends more.
+        PARTIAL={'justin':{'A6','B3','B4','B5','B6'}}.get(id,set())
+        miss=[x for x in v.split() if x.endswith(':n') and x[:-2].split(':')[-1] not in PARTIAL]
+        if miss: fails.append(f'{id} not all built: {v}')
     party=['tom']+[i for i in IDS if i!='tom']
     party=party[:4]
     pg.evaluate("""(party)=>{ const L=window.__LE; splash.active=false; document.getElementById('splash').hidden=true;

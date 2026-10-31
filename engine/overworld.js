@@ -14,7 +14,7 @@ function loadDialogLine() {
 
 // Party members show their portrait beside the text (images from PORTRAITS in engine/menu.js); everyone else gets the
 // plain box. Keyed by the speaker name exactly as scenes and NPCs pass it, lowercased.
-const DIALOG_PORTRAIT_IDS={tom:'tom',grace:'grace',rose:'rose',amy:'amy',deedee:'deedee',boppy:'boppy',tnb:'tnb',nara:'nara',boomie:'boomie','aunt ellie':'ellie',ellie:'ellie'};
+const DIALOG_PORTRAIT_IDS={tom:'tom',grace:'grace',rose:'rose',amy:'amy',justin:'justin',deedee:'deedee',boppy:'boppy',tnb:'tnb',nara:'nara',boomie:'boomie','aunt ellie':'ellie',ellie:'ellie'};
 for(const id of Object.values(DIALOG_PORTRAIT_IDS)) if(PORTRAITS[id]) new Image().src=PORTRAITS[id];   // preload so the face never pops in late
 function setDialogPortrait(name) {
   const box=$('dialog-portrait'); if(!box) return;
@@ -171,6 +171,7 @@ function pressAction() {
     if(n.grandma) say('deedee','greet');
     if(n.grandpa) say('boppy','greet');
     if(n.mom) say('amy','greet');
+    if(n.husband) say('justin','greet');
     if(n.partner) say('tnb','greet',.4);
     // Heart-Traces (engine/story.js): warm family moments the story remembers.
     if(typeof heartTrace==='function') { if(n.grandma) heartTrace('deedee-hug'); if(n.grandpa&&n.visitedOnce) heartTrace('boppy-story'); if(n.partner) heartTrace('tnb-hello'); if(n.mom) heartTrace('amy-hello'); }

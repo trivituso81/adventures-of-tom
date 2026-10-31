@@ -9,7 +9,7 @@
 const DIALOG_CAST={
   files:['data/voice/dialog-ch22.js','data/voice/dialog-ch23.js','data/voice/dialog-ch24.js','data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js','data/voice/dialog-ch25.js','data/voice/dialog-ch26.js','data/voice/dialog-ch27.js','data/voice/dialog-ch28.js?v=clips1'],
   speakers:{
-    Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Deedee:'deedee',Boppy:'boppy',TNB:'tnb',
+    Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Justin:'justin',Deedee:'deedee',Boppy:'boppy',TNB:'tnb',
     Pip:'pip',Moss:'moss',Dot:'dot',Gus:'gus',Bean:'bean',Bun:'bun',Page:'page',Fern:'fern',Kit:'kit',Oolong:'oolong',
     Luna:'luna',Penny:'penny',Sal:'sal',Justin:'justin','Aunt Ellie':'ellie',
     Mudling:'mudling','Big Mudling':'mudling','Skeeter Swarm':'skeeter','Pond Grump':'grump','Bog Toad':'toad',
@@ -138,7 +138,7 @@ const DIALOG_CAST={
     Reel:'lower',Kevin:'higher',Sol:'sol','Don Beto':'older',Ryan:'lower',Jordan:'lower',Claudia:'lower',Dakota:'lower',Sam:'higher',Mateo:'toddler',
     Sofi:'little',Smoglet:'smoglet','Ticket Flurry':'tickets','Canyon Coyote':'coyote',Gridlock:'gridlock','Tar Pit Blob':'tarblob',
     'The Big Shake':'bigshake','Soggy Sock':'soggysock',Bobber:'bobber',Tangle:'tangle',Snag:'snag','Old Iron-Gill':'irongill'},
-  family:['tom','grace','rose','amy','deedee','boppy','tnb'],
+  family:['tom','grace','rose','amy','justin','deedee','boppy','tnb'],
   voices:{
     // ---- Townsfolk (Long Island) ----
     pip:{name:'Pip',type:'Townsfolk: earnest oddball',stability:.5,

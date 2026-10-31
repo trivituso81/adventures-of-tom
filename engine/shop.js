@@ -6,6 +6,7 @@ const SHOP_STOCK={
   grace:['g_headband','g_leotard','g_leggings','g_squishy'],
   rose:['r_ears','r_raincoat','r_boots','r_lamby'],
   amy:['a_visor','a_singlet','a_flats','a_redpen'],
+  justin:['j_stripper','j_cap','j_jacket','j_sneakers'],
   deedee:['d_hat','d_apron','d_clogs','d_mitt'],
   boppy:['b_hat','b_vest','b_shoes','b_pad'],
   tnb:['n_helmet','n_apron','n_shoes','n_lintroller'],
@@ -14,7 +15,7 @@ const SHOP_STOCK={
   battle:['balloon','popper','cushion','kazoo','goldstar']
 };
 const SHOP_TABS=[
-  {id:'tom',label:'TOM'},{id:'grace',label:'GRACE'},{id:'rose',label:'ROSE'},{id:'amy',label:'AMY'},
+  {id:'tom',label:'TOM'},{id:'grace',label:'GRACE'},{id:'rose',label:'ROSE'},{id:'amy',label:'AMY'},{id:'justin',label:'JUSTIN'},
   {id:'deedee',label:'DEEDEE'},{id:'boppy',label:'BOPPY'},{id:'tnb',label:'TNB'},{id:'nara',label:'NARA'},
   {id:'healing',label:'\u{1FA79} HEALING',cat:true},{id:'battle',label:'\u{1F388} BATTLE',cat:true}
 ];
@@ -26,7 +27,7 @@ const PENNY={
   tab:{healing:'Snacks and fixes. Eat them in battle or from the menu.',battle:'For monsters only. Don\'t pop the poppers in here.',
     sell:'Half price, no haggling. Okay, a little haggling. No.'},
   gear:id=>({tom:'For the uncle. Comfy, nerdy, and a little bit Delta One.',grace:'Gymnastics approved. Glitter included.',rose:'Bouncy, brave and puddle-proof.',
-    amy:'Built for speed. She tried everything on twice.',deedee:'Garden to oven and back. To the moon and back, she says.',boppy:'Twelve pockets and extra arch support.',
+    amy:'Built for speed. She tried everything on twice.',justin:'Tools, a team cap and sneakers that cost more than the pond.',deedee:'Garden to oven and back. To the moon and back, she says.',boppy:'Twelve pockets and extra arch support.',
     tnb:'Skate, glaze, wardrobe. He likes the apron.',nara:'For the dog. She\'ll chew at least one of these.'})[id],
   bought:['Pleasure doing business.','Good choice. I\'d have picked that one too.','Into the pockets it goes.','Ka-ching. That\'s my favorite sound.'],
   sold:['Sold! I know just the shelf.','A fine addition to my collection.','Half price, full gratitude.'],

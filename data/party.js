@@ -165,7 +165,12 @@ const items={
   d_pin:{who:'deedee',name:'Rolling Pin',icon:'\u{1F9C1}',slot:'Tool',desc:'Fifty years of pie crust. Also very good for pointing.',stats:{pow:1,warmth:3}},
   b_rod:{who:'boppy',name:'Rikers Bass Rod',icon:'\u{1F3A3}',slot:'Tool',desc:'Twenty years on the same rod. The fish all know it by name.',stats:{pow:3,warmth:1}},
   n_rib:{who:'tnb',name:'Pottery Rib',icon:'\u{1F3FA}',slot:'Tool',desc:'A worn wooden rib from his first wheel class. Shapes clay. Shapes opinions.',stats:{pow:1,warmth:3}},
-  y_stick:{who:'nara',name:'The Best Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Nara found it on 2nd Ave. It\'s the best stick. Everyone must see the stick.',stats:{pow:3,warmth:1}}
+  y_stick:{who:'nara',name:'The Best Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Nara found it on 2nd Ave. It\'s the best stick. Everyone must see the stick.',stats:{pow:3,warmth:1}},
+  j_tester:{who:'justin',name:'Voltage Tester',icon:'\u{1F527}',slot:'Tool',desc:'Beeps when something is live. Beeps at Tom a lot. Justin says that is a good sign.',stats:{pow:3,warmth:1}},
+  j_cap:{who:'justin',price:20,name:'Team Cap',icon:'\u{1F9E2}',slot:'Charm',desc:'Worn backwards during the game. Worn forwards when the team is losing. Same cap.',perk:{stat:{pep:.1}}},
+  j_jacket:{who:'justin',price:34,name:'Designer Jacket',icon:'\u{1F9E5}',slot:'Outfit',color:'#3a4a63',desc:'Costs more than the ladder. He still climbs the ladder in it.',stats:{hp:24,grit:3,cool:3}},
+  j_sneakers:{who:'justin',price:24,name:'Cushioned Sneakers',icon:'\u{1F45F}',slot:'Charm',desc:'Triple soles. His feet have filed a formal complaint about everything else.',perk:{stat:{grit:.1}}},
+  j_stripper:{who:'justin',price:28,name:'Wire Strippers',icon:'\u{2702}',slot:'Tool',desc:'Orange handles, worn grip. He strips wire faster than he talks, which is saying something.',stats:{pow:4,warmth:1}}
 };
 // ---------- Shop tiers (engine/shop.js) ----------
 // Penny's and Nickel's stock grows with the story: a better Tool, Outfit and Charm for each member, a stronger heal and
@@ -208,7 +213,11 @@ const SHOP_TIER_GEAR={
   nara:['power',[14,26,16],'pep',[.12,.14,.16],
     [['Tug Rope','\u{1FAA2}','Three knots. Four teeth marks. Very proud.'],['Squeaky Ball Deluxe','\u{1F3BE}','Squeaks at two pitches. Nara has opinions about both.'],['Giant Best Stick','\u{1FAB5}','A stick so big it needs a permit.']],
     [['Reflective Harness','\u{1F9BA}','Hi-vis. Hi-fur.'],['Rain Slicker for Dogs','\u{2614}','Bright yellow. She wears it with shame and speed.'],['Working Dog Vest','\u{1F9E5}','Says WORKING DOG. Mostly works on the sofa.']],
-    [['Racing Bandana','\u{1F9E3}','Silk, striped, fast.'],['Jingle Collar','\u{1F514}','Every step announces her. She doesn’t mind.'],['Bacon Treat Pouch','\u{1F953}','Smells like victory. And bacon.']]]
+    [['Racing Bandana','\u{1F9E3}','Silk, striped, fast.'],['Jingle Collar','\u{1F514}','Every step announces her. She doesn’t mind.'],['Bacon Treat Pouch','\u{1F953}','Smells like victory. And bacon.']]],
+  justin:['power',[22,34,20],'pep',[.10,.12,.14],
+    [['Insulated Screwdriver Set','\u{1FA9B}','Rubber grips, rated for a thousand volts. Justin tests that rating regularly.'],['Cordless Drill Pro','\u{1F529}','Two batteries and a holster. He wears it like a sidearm.'],['Heavy Sledgehammer','\u{1F528}','For the basement wall. The wall has not agreed to this.']],
+    [['Work Jacket Supreme','\u{1F9E5}','Canvas, a dozen pockets, one stain he calls character.'],['Insulated Gloves','\u{1F9E4}','Orange rubber. The panel respects them.'],['Fitted Designer Blazer','\u{1F454}','Tailored, expensive, completely wrong for drywall.']],
+    [['Ref Whistle','\u{1F4E3}','He blows it at the TV. The TV does not review the play.'],['Gel Insoles','\u{1F9B6}','For the feet. Do not mention the feet.'],['Lucky Game Jersey','\u{1F3C8}','Never washed. Superstition and science agree.']]]
 };
 // Heals and throwables: [id, name, icon, desc, effect, base price of the first shelf item].
 const SHOP_TIER_ITEMS={
@@ -289,14 +298,12 @@ const nara=makeMember({id:'nara',name:'Nara',title:'Cousin Olivia\u2019s dog',hp
   equipment:{Tool:'y_stick',Outfit:null,Charm:null},
   commands:['attack','puppy','item','run'],
   look:{hair:'#2a2424',skin:'#2a2424',shirt:'#2a2424'}});
-// Justin: Amy's husband, the girls' dad. Joins the fourth slot from the Gregori house on Long Island, in any chapter that allows it (engine/story.js).
-// PLACEHOLDER until Tom sends his abilities: noBattle keeps him out of fights (engine/battle2.js startBattle), and he is not in ALL_MEMBERS,
-// so he has no Stampcard, shared XP or saved level yet. When his kit arrives: add him to ALL_MEMBERS, B2 tables, B6 tables, then drop noBattle.
-const justin=makeMember({id:'justin',name:'Justin',title:'Brother-in-law',hp:14,maxHp:14,mp:8,maxMp:8,power:3,
-  base:{Curiosity:2,Charm:3,Pace:2,Luck:2},
-  equipment:{Tool:null,Outfit:null,Charm:null},
-  commands:['attack','item','run'],noBattle:true,
-  look:{hair:'#4a3626',skin:'#efbc8e',shirt:'#3a4a5a'}});
+// Justin: Amy's husband, the girls' dad. Electrician, 6'5", yells at the game, refinishing the basement, extremely sensitive feet.
+const justin=makeMember({id:'justin',name:'Justin',title:'Brother-in-law, the girls\u2019 dad',hp:12,maxHp:12,mp:12,maxMp:12,power:3,
+  base:{Curiosity:2,Charm:3,Pace:3,Luck:2},
+  equipment:{Tool:'j_tester',Outfit:null,Charm:null},
+  commands:['attack','drywall','item','run'],
+  look:{hair:'#7a4f2e',skin:'#e3a47c',shirt:'#b9bfd3'}});
 const RECRUITS={amy,deedee,boppy,tnb,nara,justin};
 const party=[hero,grace,rose];
 const PARTY_MAX=4;
@@ -357,7 +364,7 @@ const fieldUsable=item=>!!(item.heal||item.healAll||item.revive);
 const sellValue=item=>item.price?Math.max(1,Math.floor(item.price/2)):(item.sell||0);
 const canWear=(m,item)=>!item.who||item.who===m.id;
 const memberById=id=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin})[id];
-const ALL_MEMBERS=()=>[hero,grace,rose,amy,deedee,boppy,tnb,nara];
+const ALL_MEMBERS=()=>[hero,grace,rose,amy,deedee,boppy,tnb,nara,justin];
 // Equip from the pockets onto the menu character's slot. Whatever was worn there goes back in the pockets.
 function equipTo(m,id) {
   const item=items[id],idx=bag.indexOf(id);

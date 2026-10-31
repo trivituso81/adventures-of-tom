@@ -230,3 +230,10 @@ const sfx={
   grumpDie(){ tone({type:'sawtooth',f0:200,f1:40,dur:1.2,vol:.22,filter:600}); [400,330,250,180].forEach((f,i)=>tone({type:'sine',f0:f,f1:f*.6,dur:.25,vol:.12,delay:i*.25})); }
 };
 
+
+// Justin's sound effects (engine/justin-moves.js)
+Object.assign(sfx,{
+  zap(){ noise({dur:.22,vol:.14,f0:3000,f1:900,type:'bandpass',q:1.5}); tone({type:'sawtooth',f0:1400,f1:200,dur:.18,vol:.1}); tone({type:'square',f0:90,f1:60,dur:.2,vol:.08,delay:.04}); },
+  drill(){ for(let k=0;k<6;k++) tone({type:'sawtooth',f0:300+k*14,f1:520+k*14,dur:.07,vol:.07,delay:k*.075}); noise({dur:.5,vol:.05,f0:2000,f1:3200,type:'bandpass',q:2}); },
+  sneeze(){ tone({type:'sawtooth',f0:300,f1:900,dur:.18,vol:.1}); noise({dur:.5,vol:.34,f0:1800,f1:300,type:'lowpass',delay:.2}); tone({type:'sawtooth',f0:700,f1:80,dur:.55,vol:.3,delay:.2,filter:1800}); tone({type:'square',f0:120,f1:40,dur:.6,vol:.28,delay:.22}); }
+});

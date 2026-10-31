@@ -67,9 +67,9 @@ with sync_playwright() as pw:
     E("()=>{ menuChar=0; setMenuTab('home'); }"); pg.wait_for_timeout(300); pg.screenshot(path=os.path.join(SHOTS,'recruit-justin-menu.png'))
     E("()=>closeMenu()"); pg.wait_for_timeout(200)
     check('no errors opening every menu tab',not [e for e in errs if 'AudioContext' not in e and 'Failed to load' not in e],errs[:3])
-    # ---- 3. A fight with Justin along: he sits it out, nobody breaks ----
+    # ---- 3. A fight with Justin along: he fights in slot 4 ----
     E("()=>{ const m=allMonsters()[0]; startBattle(m,{}); }"); pg.wait_for_timeout(2500)
-    fighters=E("()=>B2.active?B2.party.map(p=>p.id):null"); check('fight runs with Tom, Grace, Rose only',fighters==['tom','grace','rose'],fighters)
+    fighters=E("()=>B2.active?B2.party.map(p=>p.id):null"); check('fight runs with Justin as the fourth fighter',fighters==['tom','grace','rose','justin'],fighters)
     E("()=>{ for(const f of B2.foes) f.hp=1; }")
     for i in range(40):
         if not E("()=>B2.active"): break

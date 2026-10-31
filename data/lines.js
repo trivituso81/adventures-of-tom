@@ -77,3 +77,21 @@ for(const [id,k,v] of [
 for(const [id,k,v] of [
   ['amy','flashback','Flashback!'],['tom','flashback','Flashback!'],
   ['grace','ymamot','Ketchup, pickles, cereal, sock. Ymamot Creation!']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }
+
+// Justin (installed 2026-10-31, docs/JUSTIN_ABILITIES.md). New character, so no baked clips yet: the speech-synthesis fallback plays until his
+// voice is baked (his lines are listed in tools/bake-page/pending.json). Move keys match data/battle2-data.js B2_SKILLS.justin.
+VOICE.justin={pitch:.62,rate:1,prefer:['Daniel','Alex','Fred','Arthur','Google UK English Male','Microsoft David','Male'],blip:[230,160]};
+for(const [k,v] of [
+  ['join','Halftime. I have a minute. Let\'s go.'],
+  ['greet','Hold this. No, the other end.'],
+  ['basic','Loose wire. Not my problem any more.'],['loose_wire','Loose wire. Not my problem any more.'],
+  ['wire_nuts','Wire nuts! Never have enough of these.'],
+  ['bad_call','ARE YOU KIDDING ME WITH THAT CALL?'],
+  ['fresh_fit','This shirt cost more than your pond.'],
+  ['demo_day','Demo day! Wall\'s coming down!'],
+  ['breaker_flip','Breaker\'s off. Breaker\'s... on.'],
+  ['giant_sneeze','Ah... ah... AH CHOOOOO!'],
+  ['foot_tap','MY FOOT! WHO TOUCHED MY FOOT?!'],
+  ['drywall','Drywall\'s up. Let it dry.'],
+  ['hurt','Not the jacket!'],['low','Somebody turn the game back on.'],
+  ['ko','Tell the basement I loved it.'],['win','And THAT is how you close out a game.']]) { (LINES.justin=LINES.justin||{})[k]=[v]; }

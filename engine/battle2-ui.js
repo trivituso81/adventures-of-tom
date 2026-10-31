@@ -379,7 +379,7 @@ function b2Roles(a) {
     // Who it lands on: the last word in the effect ('t' means the move's own targets).
     const w=f.slice(op==='st'?2:1).filter(x=>typeof x==='string').pop()||'t';
     const party=typeof B2!=='undefined'&&B2.party?B2.party.map(p=>p.id):[];
-    const onAlly=w==='t'?!foeT:(B2_ALLY_WHO.includes(w)||party.includes(w)||['tom','grace','rose','amy','deedee','boppy','tnb','nara'].includes(w));
+    const onAlly=w==='t'?!foeT:(B2_ALLY_WHO.includes(w)||party.includes(w)||['tom','grace','rose','amy','justin','deedee','boppy','tnb','nara'].includes(w));
     if(op==='heal'||op==='revive'||op==='cure'||op==='cont') { if(onAlly) r.add('heal'); }
     else if(op==='st') {
       const ids=typeof b8StId==='function'?b8StId(f[1]):[f[1]],S=B2_STATUS[ids[0]]||B2_STATUS[f[1]]||{};

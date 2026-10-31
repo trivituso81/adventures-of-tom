@@ -14,7 +14,8 @@ const B2_STATS={
   deedee:{hp:[ 96,860],pow:[10,68],grit:[13,86],warmth:[16,99],cool:[13,88],pep:[11,72]},
   boppy: {hp:[120,999],pow:[15,94],grit:[16,99],warmth:[10,70],cool:[11,76],pep:[ 9,60]},
   tnb:   {hp:[100,880],pow:[12,80],grit:[11,76],warmth:[15,94],cool:[16,99],pep:[12,78]},
-  nara:  {hp:[ 92,800],pow:[15,94],grit:[10,68],warmth:[11,74],cool:[10,66],pep:[17,99]}
+  nara:  {hp:[ 92,800],pow:[15,94],grit:[10,68],warmth:[11,74],cool:[10,66],pep:[17,99]},
+  justin:{hp:[112,960],pow:[15,96],grit:[12,78],warmth:[10,72],cool:[11,74],pep:[13,86]}
 };
 function b2Stat(id,key,lvl) { const r=(B2_STATS[id]||B2_STATS.tom)[key]; return Math.round(r[0]+(r[1]-r[0])*(Math.max(1,Math.min(50,lvl))-1)/49); }
 
@@ -45,6 +46,7 @@ const B2_STATUS={
   tucked:  {name:'Tucked In',short:'TUCKED',color:'#ff9ac0',buff:true,regen:.15,mod:{grit:.25,cool:.25}},
   fresh:   {name:'Wardrobe Fresh',short:'FRESH',color:'#9fd8ff',buff:true,autoRevive:.5,immune:true},
   shield:  {name:'Nobody Gets Past',short:'SAFE',color:'#9fd8ff',buff:true,taken:-.4},
+  drywall: {name:'Drywall Up',short:'DRYWALL',color:'#d9cfc2',buff:true,taken:-.5},
   powup:   {name:'POW Up',short:'POW+',color:'#ffb070',buff:true,mod:{pow:.3}},
   gritup:  {name:'GRIT Up',short:'GRIT+',color:'#c9d6a0',buff:true,mod:{grit:.3}},
   pepup:   {name:'PEP Up',short:'PEP+',color:'#9be39a',buff:true,mod:{pep:.3}},
@@ -591,6 +593,34 @@ const B2_SKILLS={
       {key:'pack_ult',name:'The Unsent Scent',vp:8,elem:['cozy'],stat:'hybrid',mult:3.8,target:'all',weight:'heavy',o3:true,
         fx:[['revive',.5,'tom'],['heal',.45,.4,'party'],['scent',3,'t']],
         desc:'Ultimate. Alone in the grey, Nara catches one golden crumb of home and follows the scent through every enemy (huge hit on all, Tracked Scent for 3 turns) into Tom\'s arms: Tom gets back up at 50% if he was down, and the party heals 45%.'}
+    ]},
+  // Justin (Amy's husband, 6'5", electrician): installed 2026-10-31 from his nine painted sheets (docs/JUSTIN_ABILITIES.md). Animations: engine/justin-moves.js (jv_).
+  // Legacy basic, special and skills are stand-ins only (the kit below is all o3). Slots A1 to A5 and B1, B2 are built; the rest wait (data/abilities.js play:null).
+  justin:{
+    basic:{key:'basic',name:'Loose Wire',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
+      desc:'Pulls a loose wire out of the wall and jabs it. Free, and gives +1 VP.'},
+    special:{key:'drywall',name:'DRYWALL',vp:2,elem:[],target:'party',weight:'standard',kind:'signature',fx:[['st','drywall',1,'party']],
+      desc:'Carries in a sheet of drywall and screws it up in front of the party. All damage to the party is halved until each friend\'s next turn.'},
+    skills:[],
+    o3:[
+      {key:'loose_wire',name:'Loose Wire',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
+        desc:'He yanks a loose wire out of an invisible wall and jabs the bare copper. It zaps him a little too. Free, and gives +1 VP.'},
+      {key:'drywall',sig:true,name:'DRYWALL',vp:2,elem:[],target:'party',weight:'standard',kind:'signature',o3:true,fx:[['st','drywall',1,'party']],
+        desc:'He carries in a sheet of drywall, stands it up in front of the party and screws it in. All damage to the party is halved until each friend\'s next turn.'},
+      {key:'wire_nuts',name:'Wire Nuts',vp:2,elem:['kinetic'],stat:'pow',mult:.5,hits:3,target:'multi',weight:'quick',o3:true,
+        desc:'Fistfuls of colored wire nuts, underhand then overhand: three quick hits on random enemies. He never has enough of them.'},
+      {key:'bad_call',name:'Bad Call',vp:3,elem:['chatter'],stat:'pow',mult:1.6,target:'enemy',weight:'standard',o3:true,fx:[['st','pep_down',2,'t']],
+        desc:'He jumps up off the couch and points at the enemy like a referee who has seen enough. Hits one enemy and rattles it: PEP down for 2 turns.'},
+      {key:'fresh_fit',name:'Fresh Fit',vp:4,elem:['sparkle'],stat:'warmth',mult:1.8,target:'enemy',weight:'standard',o3:true,fx:[['st','cool_down',2,'t']],
+        desc:'Runway walk, collar fix, sunglasses on. The dazzle hits one enemy and its COOL drops for 2 turns.'},
+      {key:'demo_day',name:'Demo Day',vp:4,elem:['kinetic'],stat:'pow',mult:2.1,target:'enemy',weight:'heavy',o3:true,fx:[['shieldBreak','t']],
+        desc:'A sledgehammer, two swings, one basement wall. Rubble falls on one enemy and breaks its shield.'},
+      {key:'breaker_flip',name:'Breaker Flip',vp:5,elem:['sparkle','kinetic'],stat:'hybrid',mult:2.5,target:'enemy',weight:'heavy',o3:true,fx:[['interrupt','t']],
+        desc:'He opens the panel, flips one OFF and the screen goes dark. Counts down, flips it back ON, and lightning hits one enemy and cancels its wind-up.'},
+      {key:'giant_sneeze',name:'Giant Sneeze',vp:4,elem:['splash'],stat:'pow',mult:1.4,target:'enemy',weight:'standard',o3:true,fx:[['st','stunned',1,'t']],
+        desc:'A slow, exaggerated build, then a deafening sneeze. The enemy slides across the screen and loses its next turn.'},
+      {key:'foot_tap',name:'Foot Tap',vp:5,elem:['kinetic','chatter'],stat:'pow',mult:3,target:'enemy',weight:'heavy',o3:true,
+        desc:'Rose walks over and taps his sneaker as lightly as she can. He screams. The scream is the hit, and it is the biggest in his kit (Grace taps if Rose is down).'}
     ]}
 };
 function b2Kit(id) { return B2_SKILLS[id]||B2_SKILLS.tom; }
@@ -1223,6 +1253,7 @@ const B2_TOMBOS=[
 // ---- Battle Lab: test fights reached from the title screen until the full game opens. ----
 // Battle Lab: one fight per chapter boss, chapters 1 to 20 (chapter 20 has two). Paged in engine/splash.js. Chapter 18's boss cannot be beaten by design.
 const B2_LAB=[
+  {ch:0,name:'JUSTIN’S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Justin, every move unlocked.',party:['tom','grace','rose','justin'],level:12,foes:[['irongill','front']]},
   {ch:1,name:'THE BIG ONE',sub:'Chapter 1. Tom, Grace, Rose and Deedee.',party:['tom','grace','rose','deedee'],level:4,foes:[['bigone','front']]},
   {ch:2,name:'THE BIG SHAKE',sub:'Chapter 2. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:4,la:true,foes:[['bigshake','front']]},
   {ch:3,name:'OLD IRON-GILL',sub:'Chapter 3. Tom, Grace, Rose and Boppy.',party:['tom','grace','rose','boppy'],level:6,foes:[['irongill','front']]},
