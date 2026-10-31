@@ -946,11 +946,11 @@ if(!sfx.heartbeat) sfx.heartbeat=(d=0)=>{ tone({type:'sine',f0:70,f1:50,dur:.12,
 sfx.toot=(d=0)=>{
   noise({dur:.16,vol:1.2,delay:d,f0:1900,f1:450,type:'bandpass',q:.7});
   let t=d+.04;
-  for(let k=0;k<26;k++) { const q=k/26,f=150-q*98+((k%3)-1)*11*(1-q*.4);
+  for(let k=0;k<52;k++) { const q=k/52,f=150-q*98+((k%3)-1)*11*(1-q*.4);
     tone({type:'sawtooth',f0:f,f1:f*.84,dur:.07,vol:1.15-q*.3,delay:t,filter:950-q*380,q:3,attack:.003}); t+=.028+q*.01; }
-  tone({type:'square',f0:80,f1:44,dur:1.0,vol:.65,delay:d+.03,filter:380,q:2,sweep:'lin'});
-  noise({dur:1.05,vol:.85,delay:d+.03,f0:750,f1:170,type:'lowpass'});
-  [.9,1.0,1.12].forEach((o,i)=>{ tone({type:'sawtooth',f0:86-i*12,f1:56-i*8,dur:.1,vol:1.0,delay:d+o,filter:520,q:2}); noise({dur:.09,vol:.34,delay:d+o,f0:650,f1:200,type:'lowpass'}); });
+  tone({type:'square',f0:80,f1:44,dur:2.0,vol:.5,delay:d+.03,filter:380,q:2,sweep:'lin'});
+  noise({dur:2.05,vol:.62,delay:d+.03,f0:750,f1:170,type:'lowpass'});
+  [1.8,1.9,2.02].forEach((o,i)=>{ tone({type:'sawtooth',f0:86-i*12,f1:56-i*8,dur:.1,vol:1.0,delay:d+o,filter:520,q:2}); noise({dur:.09,vol:.34,delay:d+o,f0:650,f1:200,type:'lowpass'}); });
 };
 
 // ---------- Dish-Towel Flick (basic, kept: only the towel is bigger) ----------
@@ -1173,33 +1173,38 @@ D.rise_and_shine=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
 // A soft radial blob: the building block of the mist.
 const haze=(x,y,r,al,rgb)=>{ if(al<=0) return; const gr=gfx.createRadialGradient(x,y,0,x,y,r); gr.addColorStop(0,'rgba('+rgb+','+al+')'); gr.addColorStop(1,'rgba('+rgb+',0)'); gfx.globalAlpha=1; gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(x,y,r,0,Math.PI*2); gfx.fill(); };
 // The cloud is a fine green mist: many faint soft blobs, a spray of tiny specks and thin curling wisps, no outlines. It drifts to the monster and settles on it.
-SC.dv_cloud=(s,u)=>{ const x0=s.x,y0=s.y,tx=s.tx,g=ez(cl(u/.45)),env=fade(u,.45)*fin(u,.05);
-  for(let k=0;k<30;k++) { const q=cl(g*1.25-k*.015); if(q<=0) continue; const a=k*2.399,x=x0+(tx-x0)*q*(.5+(k%5)*.12)+Math.cos(a)*q*10,y=y0+Math.sin(a)*q*(.25+(k%6)*.1)*60-q*10+Math.sin(u*3+k)*4,r=(12+(k%4)*5)*(.5+q*1.1);
+SC.dv_cloud=(s,u)=>{ const ms=s.t*1000,x0=s.x,y0=s.y,tx=s.tx,env=fade(u,.6)*fin(u,.04),T=900,gw=ez(cl(ms/T));
+  for(let k=0;k<44;k++) { const q=ez(cl((ms-k*50)/T)); if(q<=0) continue; const a=k*2.399,x=x0+(tx-x0)*q*(.5+(k%5)*.12)+Math.cos(a)*q*10,y=y0+Math.sin(a)*q*(.25+(k%6)*.1)*60-q*10+Math.sin(ms/330+k)*4,r=(12+(k%4)*5)*(.5+q*1.1);
     haze(x,y,r,.2*env,k%3?'140,210,80':'190,235,120'); }
-  for(let k=0;k<80;k++) { const q=cl(g*1.3-k*.007); if(q<=0) continue; const a=k*1.7+k*k*.013,x=x0+(tx-x0)*q*(.35+(k%9)*.08)+Math.cos(a*3)*q*26,y=y0+Math.sin(a*2.3)*q*34*(.4+(k%5)*.15)-q*8+Math.sin(u*5+k)*2;
+  for(let k=0;k<110;k++) { const q=cl((ms-k*20)/T); if(q<=0) continue; const a=k*1.7+k*k*.013,x=x0+(tx-x0)*q*(.35+(k%9)*.08)+Math.cos(a*3)*q*26,y=y0+Math.sin(a*2.3)*q*34*(.4+(k%5)*.15)-q*8+Math.sin(ms/200+k)*2;
     gfx.globalAlpha=(.35+(k%4)*.1)*env; gfx.fillStyle=k%2?'#d6f59a':'#8fd05a'; gfx.beginPath(); gfx.arc(x,y,.8+(k%3)*.7,0,Math.PI*2); gfx.fill(); }
   gfx.globalAlpha=.35*env; gfx.strokeStyle='#bff08a'; gfx.lineWidth=1.5; gfx.lineCap='round';
-  for(let k=0;k<5;k++) { const yy=y0-14+k*8; gfx.beginPath(); for(let j=0;j<=14;j++) { const f=j/14,x=lerp(x0,tx,f*g),y=yy-f*10+Math.sin(f*9+s.t*5+k)*5*f; if(j) gfx.lineTo(x,y); else gfx.moveTo(x,y); } gfx.stroke(); }
-  if(u>.25) { const q=cl((u-.25)/.25),e=q*fade(u,.5); haze(tx,y0-4,46,.38*e,'120,200,60'); haze(tx,y0-6,28,.3*e,'190,235,120'); }
+  for(let k=0;k<5;k++) { const yy=y0-14+k*8; gfx.beginPath(); for(let j=0;j<=14;j++) { const f=j/14,x=lerp(x0,tx,f*gw),y=yy-f*10+Math.sin(f*9+s.t*5+k)*5*f; if(j) gfx.lineTo(x,y); else gfx.moveTo(x,y); } gfx.stroke(); }
+  if(ms>900) { const q=cl((ms-900)/500),e=q*fade(u,.7); haze(tx,y0-4,46,.38*e,'120,200,60'); haze(tx,y0-6,28,.3*e,'190,235,120'); }
   gfx.globalAlpha=1; };
 // The blast at her back: a pop of mist, a thin shock ring and a few fine speed lines.
 SC.dv_toot=(s,u)=>{ const x=s.x,y=s.y;
   for(let k=0;k<2;k++) { const q=cl(u*1.6-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.7; ring(x,y,8+q*34,6+q*26,3-q*2,k?'#ffffff':'#bff08a'); }
   gfx.globalAlpha=fade(u,.5)*.8; for(let k=0;k<9;k++) { const a=Math.PI+(k-4)*.34,d0=8+ez(u)*14,d1=d0+10+ez(u)*30; Ln(x+Math.cos(a)*d0,y+Math.sin(a)*d0*.7,x+Math.cos(a)*d1,y+Math.sin(a)*d1*.7,2,k%2?'#d6f59a':'#9ed86a'); }
   const p=ez(cl(u/.5)); haze(x-6,y,16+p*22,.6*(1-u*u),'150,215,90'); haze(x-8,y-2,8+p*10,.5*(1-u*u),'210,245,150'); gfx.globalAlpha=1; };
-SC.dv_buff=(s,u)=>{ const st=s.st,ms=s.t*1000; let x=s.fx,y=s.fy; if(ms>s.go&&st&&st.x!=null) { const q=ez((ms-s.go)/600); x=lerp(s.fx,st.x,q); y=lerp(s.fy,st.y-DH()*.6,q)-Math.sin(q*Math.PI)*40; } gfx.globalAlpha=fade(u,.9);
-  EO(x,y,9,9,GOLD); for(let k=0;k<6;k++) { const a=s.t*5+k*Math.PI/3; Ln(x+Math.cos(a)*12,y+Math.sin(a)*12,x+Math.cos(a)*17,y+Math.sin(a)*17,2,GOLD); } if(ms>s.go+600) bigWord('MINE NOW',x,y-26,GOLD,1); };
+// The good mood: a soft golden glow with fine twinkles drifts from the monster to her face and settles there (no hard outline, like the mist).
+SC.dv_buff=(s,u)=>{ const st=s.st,ms=s.t*1000; let x=s.fx,y=s.fy; if(ms>s.go&&st&&st.x!=null) { const q=ez((ms-s.go)/600); x=lerp(s.fx,st.x,q); y=lerp(s.fy,st.y-DH()*.6,q)-Math.sin(q*Math.PI)*40; }
+  const e=fade(u,.8)*fin(u,.05),landed=ms>s.go+600,pu=1+Math.sin(ms/90)*.08;
+  haze(x,y,(landed?34:24)*pu,.55*e,'255,214,90'); haze(x,y,13*pu,.85*e,'255,246,200');
+  for(let k=0;k<9;k++) { const an=ms/300+k*Math.PI*2/9,d=(landed?12+(ms-s.go-600)/45:13)+Math.sin(ms/120+k*2)*4,px=x+Math.cos(an)*d,py=y+Math.sin(an)*d-(landed?(ms-s.go-600)/70:0),w=2+(k%3);
+    gfx.globalAlpha=Math.max(0,(.45+.45*Math.sin(ms/70+k*1.3))*e); Ln(px-w,py,px+w,py,1.4,'#fff3b0'); Ln(px,py-w,px,py+w,1.4,'#fff3b0'); }
+  if(landed) bigWord('MINE NOW',x,y-26,GOLD,1); gfx.globalAlpha=1; };
 D.beanie_master=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'idle'},{t:1300,f:'flip'},{t:1900,f:'flip',hop:7,dx:(u,tt)=>Math.sin(tt*50)*2*(1-u)},{t:2700,f:'expr'},{t:3500,f:'hip'},{t:3800,f:back(p.x,me),hop:3,hn:6},{t:4700,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'idle'},{t:1300,f:'flip'},{t:1900,f:'flip',hop:7,dx:(u,tt)=>Math.sin(tt*50)*2*(1-u)},{t:3700,f:'expr'},{t:4500,f:'hip'},{t:4800,f:back(p.x,me),hop:3,hn:6},{t:5700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks up to have a word with '+f.name+'.'); }],
     [900,()=>{ setMessage('She stops. She turns around. Uh oh. There were beans at lunch.'); scene('dv_text',.9,{st,txt:'...',c:CREAM,sc:3}); }],
-    [1900,()=>{ sfx.toot(); hopOf(m); scene('dv_toot',.8,{x:p.x-22,y:p.y-DH()*.32}); scene('dv_cloud',2.4,{x:p.x-22,y:p.y-DH()*.32,tx:F.x}); scene('dv_big',1.2,{x:p.x+10,y:p.y-DH()-40,txt:'PFFFT!',c:STINK,sc:4,rot:-.08}); setMessage('PFFFT! A truly heroic toot.'); }],
+    [1900,()=>{ sfx.toot(); hopOf(m); scene('dv_toot',.8,{x:p.x-22,y:p.y-DH()*.32}); scene('dv_cloud',3.4,{x:p.x-22,y:p.y-DH()*.32,tx:F.x}); scene('dv_big',1.2,{x:p.x+10,y:p.y-DH()-40,txt:'PFFFT!',c:STINK,sc:4,rot:-.08}); setMessage('PFFFT! A truly heroic toot.'); }],
     ['hf',2250],
-    [2250,()=>{ sfx.bonk(); ST.jolt(f,.5); landHit(100); ST.draw((s,u)=>lift(f,0,Math.sin(u*30)*.12*(1-u),Math.sin(u*26)*6*(1-u)),1.1); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'GAG!',c:STINK,sc:4}); scene('dv_buff',2.0,{st,fx:F.x+F.w*.3,fy:F.top-8,go:400}); }],
-    [2700,()=>{ say(m.id,'beanie_master'); scene('dv_text',1.3,{st,txt:'OH MY!',c:ROSE,sc:3}); setMessage('Deedee covers her mouth. Oh my!'); }],
-    [3250,()=>{ sfx.levelChime(); setMessage('Its good mood blows right over to her.'); }],
-    [4800,'end',res(E2)+'Deedee is the Beanie Master. Nobody will speak of this.']]); };
+    [2250,()=>{ sfx.bonk(); ST.jolt(f,.5); landHit(100); ST.draw((s,u)=>lift(f,0,Math.sin(u*30)*.12*(1-u),Math.sin(u*26)*6*(1-u)),1.1); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'GAG!',c:STINK,sc:4}); scene('dv_buff',3.0,{st,fx:F.x+F.w*.3,fy:F.top-8,go:1400}); }],
+    [3700,()=>{ say(m.id,'beanie_master'); scene('dv_text',1.3,{st,txt:'OH MY!',c:ROSE,sc:3}); setMessage('Deedee covers her mouth. Oh my!'); }],
+    [4250,()=>{ sfx.levelChime(); setMessage('Its good mood blows right over to her.'); }],
+    [5800,'end',res(E2)+'Deedee is the Beanie Master. Nobody will speak of this.']]); };
 
 // ---------- Grandma Squeeze (B5; key grandma_squeeze; same numbers as Take a Breather) ----------
 // Arms out from across the room, one big squeezy hug, and a lipstick kiss on the cheek to finish.
