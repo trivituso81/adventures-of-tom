@@ -1,3 +1,10 @@
+## 2026-10-31 (night, 24): Old Oak little door can no longer be walked around; anyone already inside gets unstuck
+
+- Tom was stuck inside the Old Oak with the goal card still saying "Knock the way the scraps say". Cause: the little door's two tiles are exits into the tree, and the painted-plate walk mask clears solid on every exit tile, so Tom could walk straight in without the knock. The "inside the Old Oak" scene only fired when the door flag was set, so it never ran, no "find a way up" goal appeared, and the goal card stayed on the knock.
+- Fix 1 (`data/scenes.js`): `ch6SealDoor` makes the door tiles solid and removes their exits in chapter 6 until the knock works; `ch6OpenDoor` gives the exits back.
+- Fix 2: the `ch6-oak` trigger no longer needs the door flag. Entering the tree sets the door flag itself, so saves already inside get the scene and the goal "find a way up. The war room is on the left, the pantry on the right" (corkboard, then the bucket in the pantry with Nara, then the rope ladder up the middle).
+- Tested: door solid and walking into it stays in the park; arriving in the oak without the door flag plays the scene and sets the flags; `tools/oak_test.py` and `tools/oakpark_test.py` 0 fails. Files: `data/scenes.js?v=door1`, `engine/main.js?v=door1`, stamp `build door1`.
+
 ## 2026-10-31 (night, 25): tap-kills pay half XP; fixed broken script tags in index.html
 
 - Tom asked that XP from defeating a monster by walking into it (the overlevel instant win, Tom 5+ levels above) be reduced. It now pays 50% of what a real fight pays (`popXp:.5` in `B7_MON`, `engine/feel.js`; used in `b7InstantWin`). Coins and drops are unchanged. The pop text and toast show the reduced number.

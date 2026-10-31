@@ -1983,6 +1983,7 @@ SCENES.ch6Door=[
 // 9. Inside the Old Oak.
 SCENES.ch6Oak=[
   {flag:'ch6-oak'},
+  {call:()=>{ if(!flag('ch6-door')) { setFlag('ch6-door',true); ch6OpenDoor(); storyWorld(); } }},   // anyone already inside (old saves) counts as past the door
   {talk:'TNB',lines:['Babe. We\'re inside a tree. This is the second act of every horror movie I\'ve ever seen.']},
   {talk:'Tom',lines:['Then we stay together.']},
   {talk:'TNB',lines:['That\'s what they always say in the second act.']},
@@ -2106,7 +2107,7 @@ TRIGGERS.push(
   {id:'ch6-play',map:'oakpark',at:[1,4,10,10],when:{...CH6,flag:'ch6-park',notFlag:'ch6-play'},scene:'ch6Gallery'},
   {id:'ch6-garden',map:'oakpark',at:[15,4,24,10],when:{...CH6,flag:'ch6-park',notFlag:'ch6-garden'},scene:'ch6Spy'},
   {id:'ch6-picnic',map:'oakpark',at:[1,13,10,20],when:{...CH6,flag:'ch6-park',notFlag:'ch6-picnic'},scene:'ch6Stuffer'},
-  {id:'ch6-oak',map:'oak',when:{...CH6,flag:'ch6-door',notFlag:'ch6-oak'},scene:'ch6Oak'},
+  {id:'ch6-oak',map:'oak',when:{...CH6,notFlag:'ch6-oak'},scene:'ch6Oak'},
   {id:'ch6-boss',map:'crown',when:{...CH6,flag:'ch6-ladder',notFlag:'ch6-boss'},scene:'ch6Boss'},
   {id:'ch6-after',map:'crown',when:{...CH6,flag:{'battle:chairman':'win'},notFlag:'ch6-clear'},scene:'ch6AfterBoss'},
   {id:'ch6-end',map:'jpark',when:{...CH6,flag:'ch6-clear',notFlag:'ch6-done'},scene:'ch6End'}
@@ -2122,7 +2123,16 @@ function ch6OpenDoor() {
   const o=M.objects.find(o=>o.kind==='oakdoor');
   if(o) { M.objects.splice(M.objects.indexOf(o),1); for(const x of [12,13]) M.objectAt.delete(key(x,4)); }
   for(const x of [12,13]) tile(M,x,4,'path');
+  if(M.sealedDoor) { for(const [k,p] of M.sealedDoor) M.portals.set(k,p); M.sealedDoor=null; }   // give the doorway back (see ch6SealDoor)
   M.doorOpen=true; M.mini=null;
+}
+// Until the knock works the little door must be solid. Its two tiles are exits into the Old Oak, and the plate mask clears solid on every
+// exit tile, so without this Tom could walk straight in around the puzzle (phone report, 2026-10-31: stuck inside with the stale knock goal).
+function ch6SealDoor() {
+  const M=worlds.oakpark; if(!M||M.doorOpen||M.sealedDoor) return;
+  M.sealedDoor=new Map();
+  for(const x of [12,13]) { const k=key(x,4); if(M.portals.has(k)) { M.sealedDoor.set(k,M.portals.get(k)); M.portals.delete(k); } M.solid[4*M.w+x]=1; }
+  M.mini=null;
 }
 // The rope ladder up the middle of the Old Oak (the gap in column 12, rows 2, 4 and 5, between the top bridge, the middle bridge and the
 // war room bridge; the `ladder` cells in the oak spec) comes down once Nara rides the bucket. It is drawn live over the painting (below).
@@ -2133,7 +2143,7 @@ function ch6LowerLadder() {
 }
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
-  if(flag('ch6-door')||STORY.chapter>6) ch6OpenDoor();
+  if(flag('ch6-door')||STORY.chapter>6) ch6OpenDoor(); else if(STORY.chapter===6) ch6SealDoor();
   if(flag('ch6-ladder')||STORY.chapter>6) ch6LowerLadder();
   // Chairman Cheeks stays out of sight until the party climbs into the crown, and leaves after.
   const b=findMonster('chairman'); if(!b) return;
