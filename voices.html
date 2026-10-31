@@ -82,7 +82,7 @@ button.danger{background:#5a2233}
     <div class="frow" id="fType"></div>
     <div class="frow" id="fChap"></div>
     <div class="frow" id="fShow"></div>
-    <div class="sum"><span id="count"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small" id="selmode">Select</button></div>
+    <div class="sum"><span id="count"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small gold" id="selmode">Select all shown</button></div>
   </div>
   <div class="list" id="list"><div class="empty">Loading every voice line...</div></div>
   <div class="pad">
@@ -107,7 +107,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const KEYNAME='aot-el-key';
 const apiKey=()=>{try{return localStorage.getItem(KEYNAME)||'';}catch(e){return '';}};
 const PAGE=50;
-let IDX=null, WHO={}, shown=PAGE, openKey=null, selMode=false, BULK=null, playing=null;
+let IDX=null, WHO={}, shown=PAGE, openKey=null, selMode=true, BULK=null, playing=null;
 const SEL=new Set();
 const BUSY={}, ERR={}, REC={};
 // Filters: empty Set = every value. Groups combine with AND, chips in a group with OR.
@@ -285,7 +285,7 @@ function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(
 function renderSum(){
   const v=visible().length, n=nFilters();
   $('count').innerHTML='<b>'+v.toLocaleString()+'</b> line'+(v===1?'':'s')+(n?' · '+n+' filter'+(n>1?'s':''):' · every line in the game');
-  $('clear').disabled=!n; $('selmode').textContent=selMode?'Done':'Select';
+  $('clear').disabled=!n; $('selmode').textContent='Select all '+v.toLocaleString()+' shown';
   renderBar();
 }
 function toggle(g,v){
@@ -340,11 +340,11 @@ function repaint(it){ const el=document.querySelector('.row[data-k="'+CSS.escape
 function renderAll(){ renderFilters(); renderSum(); renderList(); }
 function renderBar(){
   const bar=$('bar');
-  if(!selMode&&!BULK){ bar.hidden=true; return; }
+  if(!SEL.size&&!BULK){ bar.hidden=true; return; }
   bar.hidden=false;
   if(BULK){ bar.innerHTML='<span class="grow">'+BULK.done+' of '+BULK.total+' done'+(BULK.fail?' · '+BULK.fail+' failed':'')+'</span><button class="danger" data-act="stopbulk">Stop</button>'; return; }
-  bar.innerHTML='<button class="small" data-act="selall">All '+visible().length.toLocaleString()+'</button><button class="small" data-act="selnone"'+(SEL.size?'':' disabled')+'>None</button><span class="grow"></span>'+
-    '<button class="gold small" data-act="bulk"'+(SEL.size?'':' disabled')+'>New take for '+SEL.size+'</button>';
+  bar.innerHTML='<span class="grow"><b>'+SEL.size.toLocaleString()+'</b> selected</span><button class="small" data-act="selnone">Clear</button>'+
+    '<button class="gold" data-act="bulk">Regenerate '+SEL.size.toLocaleString()+'</button>';
 }
 let toastT=null;
 function toast(m){ let el=$('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.style.cssText='position:fixed;left:16px;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));background:#2c2852;color:#fff;padding:12px 14px;border-radius:12px;z-index:9;font-size:14px'; document.body.appendChild(el); }
@@ -382,7 +382,7 @@ document.addEventListener('click',async e=>{
   if(t.id==='savekey'){ const v=($('key').value||'').trim(); if(!v) return toast('Paste the key first.'); try{ localStorage.setItem(KEYNAME,v); }catch(err){ return toast('This browser would not save the key.'); } paintKey(); return; }
   if(t.id==='chg'){ try{ localStorage.removeItem(KEYNAME); }catch(err){} paintKey(); return; }
   if(t.id==='clear'){ F.who.clear(); F.type.clear(); F.ch.clear(); F.show='all'; F.q=''; $('q').value=''; saveF(); shown=PAGE; renderAll(); return; }
-  if(t.id==='selmode'){ selMode=!selMode; if(!selMode) SEL.clear(); renderSum(); renderList(); return; }
+  if(t.id==='selmode'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
   if(t.id==='exp') return exportClips();
   if(t.id==='clr'){ if(BULK) return; if(confirm('Remove every clip made on this phone (here and on the Bake page)? The game goes back to the voices built into it. Your takes stay in the library.')){ await tx(LDB,'clips',s=>s.clear()).catch(()=>{}); LOCAL.clear(); renderAll(); toast('Removed.'); } return; }
   if(t.classList.contains('chip')) return toggle(t.dataset.g,t.dataset.v);
@@ -394,7 +394,7 @@ document.addEventListener('click',async e=>{
   if(act==='stopbulk'){ if(BULK) BULK.stop=true; t.textContent='Stopping...'; return; }
   const row=t.closest('.row'); const it=row&&itemByKey(row.dataset.k); if(!it) return;
   const key=lk(it);
-  if(act==='open'){ if(selMode){ SEL.has(key)?SEL.delete(key):SEL.add(key); repaint(it); renderBar(); return; } const prev=openKey&&itemByKey(openKey); openKey=openKey===key?null:key; if(prev) repaint(prev); if(openKey) repaint(it); return; }
+  if(act==='open'){ const prev=openKey&&itemByKey(openKey); openKey=openKey===key?null:key; if(prev) repaint(prev); if(openKey) repaint(it); return; }
   if(act==='play') return playNow(it,t);
   if(act==='playbuiltin'){ t.textContent='...'; try{ const b=await builtIn(it); t.innerHTML='&#9654;'; b?playB64(b,t):toast('No built-in clip.'); }catch(err){ t.innerHTML='&#9654;'; toast(err.message); } return; }
   if(act==='playlocal'){ const l=localFor(it); if(l) playB64(l.mp3,t); return; }
@@ -437,7 +437,7 @@ async function exportClips(){
   try{ const r=await fetch('data/voice-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IDX=await r.json(); }
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   IDX.who.forEach(w=>WHO[w.id]=w);
-  $('howto').textContent='Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
+  $('howto').textContent='Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
   renderAll();
   if(window.__VL_READY) window.__VL_READY();
 })();

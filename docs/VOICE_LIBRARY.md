@@ -11,7 +11,7 @@ Title screen > ADMIN > VOICE LIBRARY opens `voices.html` inside the app.
 | Hear it | Play on any row plays what the game plays now (his phone take if he picked one, else the built-in clip). |
 | Re-record | Tap the line: edit the direction (brackets), then New take (ElevenLabs, same voice and settings as the game, best of three if a take loops) or Record my voice (speech to speech). Nara uses Sound Effects with a description and length. |
 | Choose | The newest take plays in the game on this phone at once. Use on any older take, or on Built into the game, switches. Takes are never lost unless he deletes one. |
-| Many at once | Select, tick lines (or All), New take for N. Two at a time; Stop works. |
+| Many at once | Every row has a checkbox; Select all N shown (under the filters) ticks everything the filters show. The bottom bar then reads N selected, Clear, Regenerate N (a new take for each, two at a time; Stop works). |
 | Keep for good | Export phone clips shares `local-clips-export.json` (same format as the Bake page). Merge it as `docs/BAKE_PAGE.md` says. |
 
 ## How it works

@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 6): the four Ymamot clips are baked and merged; the move is timed to them (`ymamot2`)
+
+- Tom (12:52) sent `local-clips-export.json` (30 clips). 26 were the takes already merged in `clips1`; the 4 new ones are exactly the Ymamot list: `amy.flashback`, `tom.flashback` (the Flashback! shout), `grace.ymamot` (little Amy), `rose.ymamot` (little Tom). Merged with `tools/battle-baker/merge.js` into `data/voice/amy|tom|grace|rose.js` (and voice-clips.js voice settings, scripts kept). `tools/bake-page/pending.json` is empty again, list rebuilt; Voice Library index rebuilt (those 4 no longer show under No clip yet).
+- `B2_TOMBO_ANIM.amy2` (engine/battle2-kind.js) now uses the measured word times of the kid clips (`tools/speech_windows.py`): ingredients land on ketchup, pickles, cereal, one sock; the YMAMOT CREATION sign on "Ymamot"; little Tom starts after little Amy finishes; the sling lands on "We were six." A re-recorded take (Voice Library) still rescales by its length.
+- Voice Library (Tom 12:57, could not find bulk regenerate): every row now has a checkbox all the time (no Select mode), a gold "Select all N shown" button sits under the filters, and the bottom bar reads N selected, Clear, Regenerate N. `tools/voice-library/test.py` covers it.
+- Tested: the move fired in a lab fight at 1x: shouts 3 ms apart, little Amy, then little Tom with no overlap; frames checked (flashback banner, bowl, carry). Smoke default and grace,rose pass. Stamp `build ymamot2`. Not played on the phone.
+
 ## 2026-10-31 (day, 7): Downtown LA: the lane between the taco truck and the bus shelter (behind14)
 
 - Tom (12:40): still cannot walk between the taco truck and the shelter. Cause: the truck object was 4 x 2 tiles (rows 11 and 12), and objects block their tiles whatever the walk map says, so row 12 under it stayed solid. Now 4 x 1 (row 11 only; `data/maps-la.js?v=dtla11`). The truck is still touchable from row 10 above and now from row 12 below (checked in the lane: Tom walks (10,12) to (15,12), A at (12,12) facing up opens the taco text). Shot `tools/shots/blvd-lane-walk.png`. reach 0 fails; blvd_test and smoke pass.

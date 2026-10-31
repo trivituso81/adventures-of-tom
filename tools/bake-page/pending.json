@@ -1,6 +1,1 @@
-[
-  {"id":"ym-flash-amy","kind":"battle","voice":"amy","lineKind":"flashback","text":"Flashback!","where":"Ymamot Creation: Amy's shout before the flashback (Tom says it at the same time)","script":"[shouting together with Tom, playful, dramatic movie-trailer voice, drawn out] [emphasized] FLASHBAAAAACK!"},
-  {"id":"ym-flash-tom","kind":"battle","voice":"tom","lineKind":"flashback","text":"Flashback!","where":"Ymamot Creation: Tom's shout before the flashback (Amy says it at the same time)","script":"[shouting together with Amy, playful, dramatic movie-trailer voice, drawn out] [emphasized] FLASHBAAAAACK!"},
-  {"id":"ym-kid-amy","kind":"battle","voice":"grace","lineKind":"ymamot","text":"Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!","where":"Ymamot Creation: little Amy in the flashback (Grace's voice)","script":"[gleeful six-year-old announcing a recipe, bossy and proud; Ymamot is said YAH-mah-mott] Ketchup, [pause] pickles, [pause] cereal, [pause] one sock. [beat] It's a Ymamot Creation!"},
-  {"id":"ym-kid-tom","kind":"battle","voice":"rose","lineKind":"ymamot","text":"Yama-Mott. It's Tom backwards. We were six.","where":"Ymamot Creation: little Tom in the flashback (Rose's voice)","script":"[dry, matter-of-fact six-year-old explaining something very important; Yama-Mott is said YAH-mah-mott] Yama-Mott. [beat] It's Tom backwards. [beat] We were six."}
-]
+[]
