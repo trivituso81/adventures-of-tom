@@ -152,7 +152,7 @@ const LA_AREAS=[
       ['sign',27,9,1,1,'Downtown notice',"Downtown LA. Eight doors: shops below, people living above. Nickel's sells things, east end. Look for the coin."],
       ['sign',3,8,1,1,'Trail signpost','GRIFFITH PARK, up the steps. Watch for coyotes. Watch for tar. Watch the ground.'],
       ['sign',12,22,1,1,'South signpost','JEFFERSON PARK, this way. Craftsman houses from 1910, Jefferson Boulevard, pupusas.'],
-      ['tacotruck',11,11,4,2,'Taco truck','A taco truck called TACOS TACOS. The menu says: TACOS.',{restore:true,
+      ['tacotruck',11,11,4,1,'Taco truck','A taco truck called TACOS TACOS. The menu says: TACOS.',{restore:true,
         restoreText:'Al pastor for everyone. Everybody is completely restored. Tom tips well.'}],
       ['bench',12,13,2,1,'Bus bench','An ad for a lawyer covers the whole bench. He\'s smiling at you. He\'s always smiling at you.'],
       ['metro',25,25,1,1,'Metro stairs','Down to the train. TNB knows every line, every stop, and which car has the best seats.'],

@@ -1,3 +1,7 @@
+## 2026-10-31 (day, 7): Downtown LA: the lane between the taco truck and the bus shelter (behind14)
+
+- Tom (12:40): still cannot walk between the taco truck and the shelter. Cause: the truck object was 4 x 2 tiles (rows 11 and 12), and objects block their tiles whatever the walk map says, so row 12 under it stayed solid. Now 4 x 1 (row 11 only; `data/maps-la.js?v=dtla11`). The truck is still touchable from row 10 above and now from row 12 below (checked in the lane: Tom walks (10,12) to (15,12), A at (12,12) facing up opens the taco text). Shot `tools/shots/blvd-lane-walk.png`. reach 0 fails; blvd_test and smoke pass.
+
 ## 2026-10-31 (day, 5): Voice Library lists lines with no clip, plus a No clip yet filter (`vlib2`)
 
 - Tom (12:29): the library showed only lines that already had a clip. It now lists every line the game can show: 3,956 lines, of which 1,247 have no clip yet (4 battle lines, 1,243 dialogue lines, mostly chapters 11 to 20). New Show chip "No clip yet" with its count; those rows are tagged "no clip" and the button reads Make a clip. Play on them says there is nothing yet.
