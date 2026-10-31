@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 17): Battle Lab JUSTIN SOLO, Justin alone (`jsolo1`)
+
+- Tom (15:44): make a battle test with only Justin in it, no other characters. Battle Lab now has JUSTIN SOLO as the first entry (party: Justin only, level 12, every move unlocked, vs Old Iron-Gill). The old JUSTIN'S TRYOUT with Tom, Grace, Rose and Justin is the second entry.
+- Foot Tap with no partner in the party no longer says Rose taps his toe; it says nobody is near and something taps it. With a partner, nothing changes.
+- Tested: new lab fight in portrait and landscape (screenshots in `tools/shots/justin-solo-*.png`), Foot Tap and DRYWALL fired solo, `PARTY=justin kit_test.py justin --speed2` (all nine moves, no fails), `IDS=justin smoke.py`. Not played on the phone. Stamp `build jsolo1`.
+
 ## 2026-10-31 (day, 16): RECAST JUSTIN lives in ADMIN (`recast1`)
 
 - Tom (15:32): the recast page should be in the admin section. `recast-justin.html` is now in the repo (built by `node tools/voice-recast/build-justin.js`, no argument) and title screen > ADMIN > RECAST JUSTIN opens it inside the app. It shares the ElevenLabs key with the bake page and the Voice Library (`aot-el-key`), the export goes out through the phone share sheet as `recast.json`, and a Game button goes back. Works on a phone-width screen (one column).
