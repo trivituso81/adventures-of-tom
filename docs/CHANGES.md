@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 18): Battle Lab has infinite VP and HEART (`infinite1`)
+
+- Tom (16:06): in battle test there should be infinite hearts and MP. Every Battle Lab fight (`cfg.infinite`, set in `b2Lab`) now keeps every party member's VP at 10 and the HEART meter at 100: refilled at the start of each turn and right after a move is paid for (`b2Infinite` in engine/battle2.js). Tombos and every skill can be fired every turn. Real story fights are unchanged. HP is not infinite (not asked).
+- Tested: lab fight with Tom, Grace, Rose, Justin starts full, a drained meter refills, `python3 tools/smoke.py` no fails.
+
 ## 2026-10-31 (day, 17): Battle Lab JUSTIN SOLO, Justin alone (`jsolo1`)
 
 - Tom (15:44): make a battle test with only Justin in it, no other characters. Battle Lab now has JUSTIN SOLO as the first entry (party: Justin only, level 12, every move unlocked, vs Old Iron-Gill). The old JUSTIN'S TRYOUT with Tom, Grace, Rose and Justin is the second entry.
