@@ -1,3 +1,8 @@
+## 2026-10-31 (night, 24): four stale Boomie clips removed
+
+- Removed the four `boomie|...` dialogue clips in `data/voice/dialog-ch2.js` ("TOM! Get over here. Hug...", "La la LAAA! Oops. A car alarm...", "You text me when you land...", "I sang in the shower this morning..."). The Boomie NPC speaks with voice `boomie2` and the same four texts are baked there; the old `boomie` takes could never play. Dialogue clips 2252 to 2248.
+- Test: page load, 2248 dialogue clips (`boomie` 0, `boomie2` 14 kept), no page errors, no 4xx.
+
 ## 2026-10-31 (night, 22): painted child Tom and child Amy in the two flashback Tombos
 
 - Tom's painted sheets replace the pixel kid sprites in Ymamot Creation (`amy2`) and Knock It Off! (`amy3`). 32 frames baked by `tools/sprite-bake/bake_kids.py` into `art/chars/kids.webp` and `data/kid-sprites.js` (generated, do not hand-edit). Sources in `tools/sprite-bake/src/kid-*.png`. Rebake: `python3 tools/sprite-bake/bake_kids.py`. The flashback sepia is still applied by the game.
