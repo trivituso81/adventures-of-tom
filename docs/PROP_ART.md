@@ -34,6 +34,10 @@ Every character's painted props are now wired except the leftovers listed in doc
 
 Also hooked but not drawn by a current Primary move (kept as harmless fallbacks): Tom's sourdough jar and boule, TNB's top hat, Grace's squishy in older throws.
 
+## Justin (2026-10-31)
+
+Sheet 1 is baked to `art/props/justin/` (see the README in `tools/sprite-bake/src/props/`). Wired: `couch` and `tv_football` (Bad Call, back-layer scenes `jv_couch` and `jv_tv` in `engine/justin-moves.js`; the flag on the field is drawn in code), `wire_nut_*` (Wire Nuts, `hexNut`), `plaster_chunk` (Demo Day, `jv_chunks`). Waiting on the redo sheet: basement wall (Demo Day, cracks stay code), standing drywall sheet (DRYWALL), drywall chunk, stud, dust puff.
+
 ## Next
 
 Hook the rest one helper at a time (most moves draw props in their own local helper, so each is a small edit like the ones above). Remix moves have no animation code of their own yet. Note: Tom's retro console is close to a real console but has differences Tom is happy with (decided 2026-10-30).

@@ -1,3 +1,11 @@
+## 2026-10-31 (day, 19): Justin's first painted props: couch, wide TV, wire nuts (`jprops1`)
+
+- Tom (16:09): Bad Call needs a wide TV with sports on it, and a prompt for all of Justin's props. The sheet came back (`tools/sprite-bake/src/props/justin-sheet1.png`). Cells 1 to 6 (couch, five wire nuts) and 15 (football TV) matched the list. Cells 7 to 14 and 16 did not: the generator drew an extension cord, a drill, a leaning drywall sheet, a joint compound bucket, a stepladder, a drywall square, a TV that is off, a basketball TV and a plaster chunk. All 16 are baked to `art/props/justin/` (`props.json` names what is really drawn). The redo prompt is the Project doc `claude/justin-props-redo-prompt.txt` (5 cells: basement wall, standing drywall sheet, drywall chunk, splintered stud, dust puff).
+- Wired: Bad Call now has the painted couch behind him and the wide football TV beside the party (back-layer scenes `jv_couch`, `jv_tv`); the TV swaps to a yellow flag on the field the moment he reacts (the flag is drawn in code over the painted screen). Wire Nuts throws painted cone wire nuts in five colors (were hexagons). Demo Day debris is the painted plaster chunk. Drawn versions stay as fallbacks.
+- DRYWALL: the drawn sheet no longer swings in. His painted frames already carry and stand a sheet, so two sheets were on screen for about half a second.
+- Baked but not used yet: basketball TV, TV off, cord, drill, bucket, ladder, leaning drywall, drywall square. Still drawn in code: the Demo Day wall (cracks stay code, it needs the redo sheet's wall) and the standing DRYWALL sheet.
+- Tested: `kit_test.py justin` for bad_call, wire_nuts, demo_day, drywall (`PAINTED_PROPS` shows the couch, TV, nuts and chunk drawn), `IDS=justin smoke.py`, frames looked at (football state, flag state, couch fully on screen). Not played on the phone. Stamp `build jprops1`.
+
 ## 2026-10-31 (day, 18): Battle Lab has infinite VP and HEART (`infinite1`)
 
 - Tom (16:06): in battle test there should be infinite hearts and MP. Every Battle Lab fight (`cfg.infinite`, set in `b2Lab`) now keeps every party member's VP at 10 and the HEART meter at 100: refilled at the start of each turn and right after a move is paid for (`b2Infinite` in engine/battle2.js). Tombos and every skill can be fired every turn. Real story fights are unchanged. HP is not infinite (not asked).
