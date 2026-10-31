@@ -661,7 +661,7 @@ function b2FoeAct(e,act,forced,next) {
 function b2HitParty(e,act,t,extra,coveredFor) {
   if(!b2Alive(t)) return;
   const r=b2Damage(e,act,t); b8Landed(t);
-  const dmg=Math.max(1,Math.round(r.dmg*(extra||1)*b7Taken()));   // Rose Mode x0.5, Director Mode x1.6
+  const dmg=Math.max(1,Math.round(r.dmg*(extra||1)*b7Taken()));   // Rose Mode x0.5, Director Mode x2
   t.hp=Math.max(0,t.hp-dmg); B2.hurtNow=true;
   const fx=battle.fx[t.idx]; fx.shake=.35; fx.flash=.2;
   const q=coveredFor?BATTLE_POS[coveredFor.idx]:BATTLE_POS[t.idx];

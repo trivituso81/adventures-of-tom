@@ -12,8 +12,8 @@ const B7_DIFF={
   grace:{id:'grace',name:'GRACE MODE',sub:'Classic, the standard game',
     text:'The game as designed: monsters at full strength, boss shields as written, snacks whenever you like.'},
   director:{id:'director',name:'DIRECTOR MODE',sub:'Tactical challenge',
-    text:'Monsters hit 60% harder, have 30% more HP and take turns 25% more often. Boss shields need one more hit, and a Tombo counts as one hit instead of breaking them. One snack per round.',
-    taken:1.6,foeHp:1.3,foeSpeed:1.25,shieldPlus:1,tomboHit:true,snackRound:true}
+    text:'Monsters hit twice as hard, have 60% more HP and take turns 40% more often. Boss shields need one more hit, and a Tombo counts as one hit instead of breaking them. One snack per round.',
+    taken:2,foeHp:1.6,foeSpeed:1.4,shieldPlus:1,tomboHit:true,snackRound:true}
 };
 // Every mode multiplies the finished numbers (damage taken, monster HP, monster turn speed), so the gap between modes is
 // the same size in every chapter. (It used to scale monster POW, which the damage formula mostly cancelled out.)

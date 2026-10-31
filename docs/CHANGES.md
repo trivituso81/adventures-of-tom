@@ -1,3 +1,9 @@
+## 2026-10-31 (night, 20): Director mode much harder
+
+- Tom (00:30): Director mode needs to be decently harder. `B7_DIFF.director` in `engine/feel.js`: monster hits x1.6 to x2, monster HP x1.3 to x1.6, monster turn speed x1.25 to x1.4. Shield, Tombo and snack rules unchanged. Rose and Grace modes untouched. Call made: numbers only, no new rules; if still too easy, add rules next.
+- Checked: a Mudling at level 5 has 60 HP in Grace mode and 96 in Director; monster turn delay 30 to 21 against 26 for Tom. Party HP is 146 to 195 at level 5, so a doubled hit does not one-shot anyone. smoke default and `IDS=grace,rose` 0 fails.
+- Tags: `feel.js?v=dir2`, `battle2.js?v=dir2` (comment only), `main.js?v=dir2`, title stamp `build dir2`.
+
 ## 2026-10-31 (night, 19): Mug Toss thrown from the party line
 
 - Tom (00:25): TNB does not need to step forward for Mug Toss. `T.mug_toss` (last definition, engine/tnb-moves.js) keeps him at `home` for the whole move; the mug still flies to the enemy and lands upright.
