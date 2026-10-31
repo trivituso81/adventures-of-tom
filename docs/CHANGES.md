@@ -1,3 +1,10 @@
+## 2026-10-30 (night, 13): Nara's painted props
+
+- Tom (23:26) sent Nara's prop sheet, the Chairman Cheeks sheet and the HUMAN EYES face. 17 props cut to `art/props/nara/` (gold coins, muddy paw print, tennis ball, sandwich whole and bitten, happy puddle, fancy and homemade covered dishes, HOMEMADE stamp, oak tree, park bench, squirrel x4, face eyes open and closed). Sheet 1 cells 12 to 15 came back wrong (dog house, red bow, gift box, bouquet): acorns, oak leaves, tennis ball pile and golden crumb still need a redo sheet (prompt: claude/nara-props-redo.txt).
+- Wired in `engine/nara.js` (painted first, drawn version is the fallback): every tennis ball helper, coins and muddy paws in Jump Up, sandwich in Just One Bite, puddle in Happy Puddle, both dishes and the stamp in Family Food Inspector, the full-screen face (blinks to the closed one) in HUMAN EYES, and in CHAIRMAN CHEEKS! the squirrel (peek, run, tip hat, on branch), oak tree and flying bench. The puddle is now blue water, not yellow.
+- `tools/sprite-bake/bake_prop_sheets.py`: new sheets, a 2 x 1 grid for the face sheet, `MAXSIDE_BY` (faces are cut at 560 px), `TOTAL` for sheet 1.
+- Tests: kit_test nara (tennis_ball_fetch, just_one_bite, happy_puddle, food_inspector, puppy_eyes, jump_up, squirrel_ult) 0 fails, frames looked at; smoke (default and IDS=nara) 0 fails. Tags `nara.js?v=np1`, `prop-art.js?v=pea2`, `main.js?v=np1`, title stamp `build np1`. Live URL not checked.
+
 ## 2026-10-30 (night, 12): Chapter 6 kitchen, TNB is already there
 
 - Tom (23:16): in chapter 6 TNB was not in the house when Tom arrived, then appeared out of nowhere. Cause: `SCENES.ch6Kitchen` in data/scenes.js hid TNB and only placed him at the island after Tom had walked in. Now TNB is placed at the island (back to the door, looking at the flour) before Tom walks in, turns to face Tom when he arrives, then says his line.

@@ -1844,5 +1844,112 @@
    "cream_eight_seat_table",
    "Cream Eight-Seat Table"
   ]
+ ],
+ "nara": [
+  [
+   1,
+   "gold_coins",
+   "Gold coins"
+  ],
+  [
+   2,
+   "muddy_paw_print",
+   "Muddy paw print"
+  ],
+  [
+   3,
+   "tennis_ball",
+   "Tennis ball"
+  ],
+  [
+   4,
+   "sandwich_plate",
+   "Sandwich on a plate"
+  ],
+  [
+   5,
+   "sandwich_bitten",
+   "Bitten sandwich on a plate"
+  ],
+  [
+   6,
+   "happy_puddle",
+   "Happy puddle"
+  ],
+  [
+   7,
+   "fancy_covered_dish",
+   "Fancy covered dish"
+  ],
+  [
+   8,
+   "homemade_covered_dish",
+   "Homemade covered dish"
+  ],
+  [
+   9,
+   "homemade_stamp",
+   "HOMEMADE stamp mark"
+  ],
+  [
+   10,
+   "oak_tree",
+   "Oak tree"
+  ],
+  [
+   11,
+   "park_bench",
+   "Park bench"
+  ],
+  [
+   12,
+   "acorns",
+   "Acorns"
+  ],
+  [
+   13,
+   "oak_leaves",
+   "Oak leaves"
+  ],
+  [
+   14,
+   "tennis_ball_pile",
+   "Pile of tennis balls"
+  ],
+  [
+   15,
+   "golden_crumb",
+   "Golden crumb"
+  ],
+  [
+   16,
+   "squirrel_peek",
+   "Chairman Cheeks peeking"
+  ],
+  [
+   17,
+   "squirrel_run",
+   "Chairman Cheeks running"
+  ],
+  [
+   18,
+   "squirrel_tip_hat",
+   "Chairman Cheeks tipping his hat"
+  ],
+  [
+   19,
+   "squirrel_on_branch",
+   "Chairman Cheeks on a branch"
+  ],
+  [
+   20,
+   "face_eyes_open",
+   "Nara face, human eyes open"
+  ],
+  [
+   21,
+   "face_eyes_closed",
+   "Nara face, human eyes closed"
+  ]
  ]
 }

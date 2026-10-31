@@ -18,9 +18,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src/props')
 OUT = os.path.join(ROOT, 'art/props')
 MAXSIDE = 160
+MAXSIDE_BY = {'face_eyes_open': 560, 'face_eyes_closed': 560}   # full-screen close-up, not a small prop
 ALPHA_CUT = 128          # below this a pixel is halo, not object
 MIN_SPECK = 14           # smaller loose bits are noise
-GRID = {(1484, 1060): (7, 5), (1254, 1254): (4, 4)}
+GRID = {(1484, 1060): (7, 5), (1254, 1254): (4, 4), (1774, 887): (2, 1)}
 
 # (sheet file, character, [(cell index 1-based, item number)])
 def rng(a, b, start=1):  # item numbers a..b land in cells start.. in order
@@ -42,6 +43,9 @@ SHEETS = [
     ('deedee-sheet2-of-2.png', 'deedee', rng(16, 30)),
     ('boppy-sheet1-items1-31.png', 'boppy', rng(1, 25)),
     ('tnb-sheet1-items1-31.png', 'tnb', rng(1, 23)),
+    ('nara-sheet1-of-2.png', 'nara', rng(1, 11)),         # Nara (Oct 30): coins through park bench; cells 12 to 15 came back wrong (dog house, bow, gift box, bouquet): redo acorns, oak leaves, tennis ball pile, golden crumb
+    ('nara-squirrel-sheet.png', 'nara', rng(16, 19)),     # Chairman Cheeks, 4 poses
+    ('nara-human-eyes.png', 'nara', rng(20, 21)),         # HUMAN EYES close-up, two panels (cut larger, see MAXSIDE_BY)
     # Tombo props (group 'tombo'): item numbers run 1..138 over the 10 sheets in order (14 each, last two 13). Only the cells that
     # matched their prompt are listed; the rest go on a redo sheet. Sheets not returned yet are skipped.
     ('tombo-sheet01-of-10.png', 'tombo', rng(1, 8)),
@@ -60,7 +64,7 @@ SHEETS = [
     ('redo-sheet1.png', None, [(1, ('tom', 31)), (2, ('boppy', 26)), (3, ('boppy', 27)), (4, ('boppy', 28)),
                                (5, ('boppy', 30)), (6, ('boppy', 31))] + [(7 + i, ('tnb', 24 + i)) for i in range(8)]),
 ]
-TOTAL = {'tombo-sheet06-of-10.png': 14, 'tombo-sheet10-of-10.png': 13, 'tombo-sheet09-of-10.png': 13, 'tombo-sheet08-of-10.png': 14, 'tombo-sheet07-of-10.png': 14, 'tombo-sheet05-of-10.png': 14, 'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
+TOTAL = {'nara-sheet1-of-2.png': 15, 'tombo-sheet06-of-10.png': 14, 'tombo-sheet10-of-10.png': 13, 'tombo-sheet09-of-10.png': 13, 'tombo-sheet08-of-10.png': 14, 'tombo-sheet07-of-10.png': 14, 'tombo-sheet05-of-10.png': 14, 'tombo-sheet04-of-10.png': 14, 'tombo-sheet03-of-10.png': 14, 'tombo-sheet02-of-10.png': 14, 'tombo-sheet01-of-10.png': 14, 'tom-sheet1-items1-15.png': 31, 'tom-sheet2-items16-31.png': 16, 'boppy-sheet1-items1-31.png': 31, 'tnb-sheet1-items1-31.png': 31}   # sheets that hold more cells than are used
 ROWCUTS = {'tombo-sheet04-of-10.png': [325, 635, 935]}   # sheets where the row gaps are not the emptiest places (a hanging cord, tall props)
 COLCUTS = {'tombo-sheet05-of-10.png': {2: [328, 641, 940]}}   # hand-set column gaps for one row (row index from 0) where props touch or one prop spans two columns
 COPIES = [(('amy', 'starter_pistol'), ('boppy', 'starter_pistol'))]   # Boppy's starter pistol is Amy's
@@ -177,7 +181,7 @@ def main():
             if im is None:
                 report.append(f'{c}#{n}: empty cell {cell} in {fn}'); continue
             slug = names[c][n][0]
-            s = MAXSIDE / max(im.size)
+            s = MAXSIDE_BY.get(slug, MAXSIDE) / max(im.size)
             if s < 1:
                 im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
             os.makedirs(os.path.join(OUT, c), exist_ok=True)

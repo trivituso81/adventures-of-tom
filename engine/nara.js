@@ -35,7 +35,7 @@ sfx.whine=sfx.whine||function(){ tone({type:'sine',f0:900,f1:1250,dur:.35,vol:.0
 const barks=(n,gap=.14)=>{ for(let k=0;k<n;k++) sfx.bark(k*gap); };
 
 // ================= Props and scenes =================
-PROP2.tball=(q,u)=>{ E(0,0,10,10,OUT); E(0,0,8,8,'#d8ef4a'); E(-2,-2,3,3,'#f2ffa0'); gfx.strokeStyle='#fff8e8'; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(-9,0,9,-.9,.9); gfx.stroke(); gfx.beginPath(); gfx.arc(9,0,9,Math.PI-.9,Math.PI+.9); gfx.stroke(); };
+PROP2.tball=(q,u)=>{ if(PROPART.draw('nara/tennis_ball',0,0,{h:24})) return; E(0,0,10,10,OUT); E(0,0,8,8,'#d8ef4a'); E(-2,-2,3,3,'#f2ffa0'); gfx.strokeStyle='#fff8e8'; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(-9,0,9,-.9,.9); gfx.stroke(); gfx.beginPath(); gfx.arc(9,0,9,Math.PI-.9,Math.PI+.9); gfx.stroke(); };
 // Muddy paw prints stamped across the enemy.
 SC.paws=(s,u)=>{ gfx.globalAlpha=env(u,.05,.75); const n=s.n||4; for(let k=0;k<n;k++) { if(u<k/(n+2)) continue; const x=GX-40+k*24+(k%2)*6,y=200-k*10+(k%2)*14; E(x,y,7,6,'#5a3a24'); for(let t=0;t<3;t++) E(x-6+t*6,y-9,2.6,2.6,'#5a3a24'); } };
 // Hearts drifting up around Nara (puppy eyes).
@@ -152,7 +152,7 @@ const spotFor=(m,t)=>{ if(!t||t===m) return {x:'home',y:'home',self:true}; const
 const wag=(u,tt)=>Math.sin(tt*26)*.07;
 
 // ---------- Props ----------
-const ball=(x,y,r=8)=>{ E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); };
+const ball=(x,y,r=8)=>{ if(PROPART.draw('nara/tennis_ball',x,y,{h:(r+2)*2.2})) return; E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); };
 SC.na_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); label(s.txt,s.x,s.y-ez(u/.3)*8,s.c||CREAM,s.sc||1); };
 SC.na_poof=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+s.seed,d=ez(u)*(s.r||28); gfx.globalAlpha=1-u; E(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.6,4*(1-u)+1,4*(1-u)+1,s.c||'#d8b384'); } };
 SC.na_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||40,s.ry||56,s.c||'#ffd27a'); };
@@ -490,7 +490,7 @@ const NH=()=>BATTLE_SPRITES.nara.idle.length*BATTLE_SPRITES.nara.scale;
 const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
 const hopOf=u=>{ if(u&&u.side==='party') battle.fx[u.idx].hop=.35; else if(u) ST.jolt(u,.15); };
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
-const ball=(x,y,r=14)=>{ E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=Math.max(2,r*.2); gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); gfx.beginPath(); gfx.arc(x+r,y,r,Math.PI-.9,Math.PI+.9); gfx.stroke(); };
+const ball=(x,y,r=14)=>{ if(PROPART.draw('nara/tennis_ball',x,y,{h:(r+2)*2.2})) return; E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=Math.max(2,r*.2); gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); gfx.beginPath(); gfx.arc(x+r,y,r,Math.PI-.9,Math.PI+.9); gfx.stroke(); };
 const paw=(x,y,r,c)=>{ E(x,y+r*.3,r*.75,r*.6,c); for(let k=0;k<4;k++) E(x-r*.9+k*r*.6,y-r*.55-(k===1||k===2?r*.2:0),r*.28,r*.32,c); };
 // Big outlined words; keep them at F.top-74 over a monster so they clear the damage number.
 SC.nv_big=(s,u)=>{ let x=s.x,y=s.y; const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
@@ -501,7 +501,7 @@ SC.nv_hearts=(s,u)=>{ for(let k=0;k<(s.n||5);k++) { const q=cl(u*1.4-k*.08); if(
 SC.nv_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); };
 SC.nv_dust=(s,u)=>{ for(let k=0;k<(s.n||10);k++) { const a=Math.PI+k/((s.n||10)-1)*Math.PI,d=ez(u)*(s.r||34); gfx.globalAlpha=(1-u)*.85; E(s.x+Math.cos(a)*d*1.4,s.y+Math.sin(a)*d*.5,5*(1-u)+2,4*(1-u)+2,s.c||'#e8dcc4'); } };
 SC.nv_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.6); R(0,0,576,324,s.c||'#ffffff'); };
-SC.nv_coins=(s,u)=>{ for(let k=0;k<7;k++) { const q=cl(u*1.2-k*.05),dir=(k-3)/3,x=s.x+dir*60*q,y=s.y-Math.sin(q*Math.PI)*60+q*q*40; gfx.globalAlpha=1-cl((u-.8)/.2); EO(x,y,8,8,'#ffd24a'); R(x-1.5,y-5,3,10,'#c99a20'); } };
+SC.nv_coins=(s,u)=>{ for(let k=0;k<7;k++) { const q=cl(u*1.2-k*.05),dir=(k-3)/3,x=s.x+dir*60*q,y=s.y-Math.sin(q*Math.PI)*60+q*q*40; gfx.globalAlpha=1-cl((u-.8)/.2); if(k<4&&PROPART.ready('nara/gold_coins')) { PROPART.draw('nara/gold_coins',x,y,{h:20,rot:q*5+k}); continue; } EO(x,y,8,8,'#ffd24a'); R(x-1.5,y-5,3,10,'#c99a20'); } };
 
 // ---------- Jump Up (basic) ----------
 // She spots it, runs over, rears up and plants both front paws on it; coins shake loose. Tom calls out from his spot.
@@ -523,6 +523,7 @@ N.jump_up=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.min(556,F.x+
 // She sits mid-room; the screen cuts to a close-up of her face: the eyes are eerily, completely human. Eyebrows and all.
 // Back to the room: the monster looks away, looks back (double take), then melts.
 SC.nv_closeup=(s,u)=>{ const op=ez(u/.12)*(1-ez((u-.88)/.12)),H=170*op,cy=150; if(H<1) return;
+  if(PROPART.ready('nara/face_eyes_open')&&PROPART.ready('nara/face_eyes_closed')) { gfx.globalAlpha=.6*op; R(0,0,576,324,'#0a0814'); gfx.globalAlpha=op; const bl=u>.56&&u<.64, z=.92+.08*ez(u/.5); PROPART.draw(bl?'nara/face_eyes_closed':'nara/face_eyes_open',288,156,{h:276*z}); gfx.globalAlpha=1; return; }
   gfx.globalAlpha=.55*op; R(0,0,576,324,'#0a0814'); gfx.globalAlpha=1;
   gfx.save(); gfx.beginPath(); gfx.rect(0,cy-H/2,576,H); gfx.clip();
   R(0,cy-H/2,576,H,FUR);
@@ -764,7 +765,7 @@ const homeOf=m=>({x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3});
 const NH=()=>BATTLE_SPRITES.nara.idle.length*BATTLE_SPRITES.nara.scale;
 const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
 const hopOf=u=>{ if(u&&u.side==='party') battle.fx[u.idx].hop=.35; else if(u) ST.jolt(u,.15); };
-const ball=(x,y,r=14)=>{ E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=Math.max(2,r*.2); gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); gfx.beginPath(); gfx.arc(x+r,y,r,Math.PI-.9,Math.PI+.9); gfx.stroke(); };
+const ball=(x,y,r=14)=>{ if(PROPART.draw('nara/tennis_ball',x,y,{h:(r+2)*2.2})) return; E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=Math.max(2,r*.2); gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); gfx.beginPath(); gfx.arc(x+r,y,r,Math.PI-.9,Math.PI+.9); gfx.stroke(); };
 const paw=(x,y,r,c)=>{ E(x,y+r*.3,r*.75,r*.6,c); for(let k=0;k<4;k++) E(x-r*.9+k*r*.6,y-r*.55-(k===1||k===2?r*.2:0),r*.28,r*.32,c); };
 // A speech bubble with a tail pointing down at the speaker.
 SC.np_say=(s,u)=>{ const sc=s.sc||2,w=(s.txt.length*4-1)*sc+22,h=sc*5+16,pop=u<.1?ez(u/.1)*1.15:lerp(1.15,1,cl((u-.1)/.1)); let x=Math.max(w/2+6,Math.min(570-w/2,s.x)),y=Math.max(h/2+6,s.y);
@@ -775,7 +776,7 @@ SC.np_streaks=(s,u)=>{ const p=ST.cur; if(!p||p.x==null) return; gfx.globalAlpha
   for(let k=0;k<4;k++) { const q=(s.t*3+k/4)%1; gfx.globalAlpha=(1-q)*.7; E(p.x+dir*(24+q*50),p.y-2-q*10,5+q*8,4+q*5,'#e8dcc4'); } };
 
 // ---------- Jump Up: a bigger rear-up, big paws, a held pose for Tom's line ----------
-SC.nv_paws=(s,u)=>{ const p=ez(u/.1); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(p,p); for(const [dx,dy] of [[-24,10],[24,-8]]) { paw(dx,dy,22,OUT); paw(dx,dy,18,'#5a3a24'); E(dx,dy+6,7,5,'#7a5038'); } gfx.restore(); };
+SC.nv_paws=(s,u)=>{ const p=ez(u/.1); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(p,p); for(const [dx,dy] of [[-24,10],[24,-8]]) { if(PROPART.draw('nara/muddy_paw_print',dx,dy,{h:50,rot:dx<0?-.25:.25})) continue; paw(dx,dy,22,OUT); paw(dx,dy,18,'#5a3a24'); E(dx,dy+6,7,5,'#7a5038'); } gfx.restore(); };
 N.jump_up=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.min(556,F.x+F.w*.5+30),py=Math.min(316,F.base+3),tom=tomU(),T=tom&&ST.unit(tom);
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'celeb',rot:wag,hop:8,hn:3},{t:500,f:'run'},{t:1100,x:px+18,y:py,f:'wind',rot:(u,tt)=>Math.sin(tt*40)*.04},{t:1350,x:px,f:'act',rot:u=>ez(u/.6)*.8,dy:u=>-ez(u/.6)*30},
     {t:1700,f:'act',rot:.8,dy:-30},{t:3200,f:'act',rot:(u,tt)=>.8+Math.sin(tt*18)*.05,dy:(u,tt)=>-30+Math.sin(tt*18)*2},{t:3450,f:'idle',rot:u=>.8*(1-ez(u)),dy:u=>-30*(1-ez(u))},{t:3750,f:'celeb',rot:wag,hop:5,hn:2},{t:4150,f:'runR'},{t:4750,x:'home',y:'home',f:'idle'}]);
@@ -810,6 +811,8 @@ N.tennis_ball_fetch=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),H0=homeOf(
 
 // ---------- Just One Bite?: a bigger sandwich and a long drool drip ----------
 SC.np_plate=(s,u)=>{ const x=s.x,y=s.y,bit=s.biteAt!=null&&s.t*1000>s.biteAt; gfx.globalAlpha=fin(u,.08)*fade(u,.92);
+  if(PROPART.ready('nara/sandwich_plate')&&PROPART.ready('nara/sandwich_bitten')) { PROPART.draw(bit?'nara/sandwich_bitten':'nara/sandwich_plate',x,y-24,{w:104});
+    if(s.t>.3&&!bit) for(let k=0;k<3;k++) { const q=(s.t*.9+k*.33)%1; gfx.globalAlpha=(1-q)*.6; E(x-16+k*16+Math.sin(q*6+k)*4,y-52-q*30,5+q*4,5+q*4,'#ffffff'); } return; }
   EO(x,y,48,11,'#f4f2ea'); E(x,y-2,34,6,'#e2ded2');
   RO(x-36,y-34,72,12,'#e8b878'); R(x-34,y-32,68,3,'#f4d09a'); poly([[x-38,y-22],[x+38,y-22],[x+34,y-16],[x+20,y-20],[x+6,y-15],[x-10,y-20],[x-24,y-15],[x-38,y-18]],'#7fc46a',2);
   RO(x-34,y-16,68,5,'#e05a4a'); R(x-30,y-15,10,2,'#ff8a7a'); R(x-4,y-15,10,2,'#ff8a7a'); RO(x-36,y-10,72,10,'#e8b878');
@@ -882,7 +885,7 @@ N.not_leaving=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t)
 
 // ---------- Happy Puddle: a bigger puddle and a cartoon slip ----------
 SC.nv_puddle=(s,u)=>{ const a=fin(u,.05)*fade(u,.92)*.92; s.spots.forEach((p,k)=>{ const g=ez((u-k*.06)/.25); if(g<=0) return; const x=lerp(s.sx,p.x,g),rx=lerp(8,p.w*.5+42,g),ry=16*g;
-  gfx.globalAlpha=a; E(x,p.y,rx+3,ry+3,'#b8ac38'); E(x,p.y,rx,ry,PEE); E(x-rx*.3,p.y-ry*.3,rx*.45,ry*.32,'#f6f0b0'); E(x+rx*.35,p.y+ry*.2,rx*.15,ry*.15,'#f6f0b0');
+  gfx.globalAlpha=a; if(PROPART.ready('nara/happy_puddle')) { const w=rx*2.1; PROPART.draw('nara/happy_puddle',x,p.y,{w,sy:cl(2*ry/(w/1.8),.3,1)}); } else { E(x,p.y,rx+3,ry+3,'#b8ac38'); E(x,p.y,rx,ry,PEE); E(x-rx*.3,p.y-ry*.3,rx*.45,ry*.32,'#f6f0b0'); E(x+rx*.35,p.y+ry*.2,rx*.15,ry*.15,'#f6f0b0'); }
   for(let j=0;j<2;j++) { const q=(s.t*.9+j*.5+k*.2)%1; gfx.globalAlpha=(1-q)*a*.8; ring(x,p.y,rx*(.3+q*.6),ry*(.3+q*.6),2,'#fffbd0'); } }); };
 SC.np_dizzy=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.75); for(let k=0;k<3;k++) { const a=s.t*7+k*2.09; star(s.x+Math.cos(a)*22,s.y+Math.sin(a)*7,6,k%2?GOLD:CREAM,s.t*5); } };
 N.happy_puddle=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),px=Math.min(530,G.x1+44),py=Math.min(316,G.base+6),Ps=list.map(f=>ST.unit(f));
@@ -904,13 +907,13 @@ const cloche=(x,y,c,lid)=>{ EO(x,y+4,46,9,'#f4f2ea'); E(x,y+2,34,5,'#e2ded2');
   if(lid<1) { gfx.save(); gfx.translate(x,y-lid*40); gfx.rotate(-lid*.5); gfx.beginPath(); gfx.ellipse(0,0,38,32,0,Math.PI,0); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill();
     E(-14,-16,8,5,'rgba(255,255,255,.55)'); EO(0,-34,6,5,c); R(-38,-2,76,4,'rgba(0,0,0,.15)'); gfx.restore(); } };
 SC.np_dishes=(s,u)=>{ const ms=s.t*1000,lid=ez((ms-s.openAt)/300),rej=ez((ms-s.rejectAt)/300),st=ms>s.stampAt; gfx.globalAlpha=fin(u,.06)*fade(u,.94); const a0=gfx.globalAlpha;
-  gfx.save(); gfx.translate(s.x0-rej*34,s.y); gfx.rotate(-rej*.3); gfx.globalAlpha=a0*(1-rej*.55); cloche(0,0,'#e8c84a',0); bigWord('FANCY',0,-60,'#c9a23a',2); gfx.restore(); gfx.globalAlpha=a0;
+  gfx.save(); gfx.translate(s.x0-rej*34,s.y); gfx.rotate(-rej*.3); gfx.globalAlpha=a0*(1-rej*.55); if(!PROPART.draw('nara/fancy_covered_dish',0,-30,{h:72})) cloche(0,0,'#e8c84a',0); bigWord('FANCY',0,-84,'#c9a23a',2); gfx.restore(); gfx.globalAlpha=a0;
   if(rej>.5&&ms<s.stampAt+200) bigWord('NOPE',s.x0-34,s.y-84,RED,3);
   if(lid>0) { E(s.x1,s.y-4,30,8,'#d9a05a'); E(s.x1-8,s.y-7,10,3,'#f0c070'); for(let k=0;k<4;k++) { const q=(s.t*1.1+k*.25)%1; gfx.globalAlpha=a0*(1-q)*.85; E(s.x1-18+k*12,s.y-14-q*50,7+q*6,7+q*6,'#ffffff'); } gfx.globalAlpha=a0; }
-  cloche(s.x1,s.y,'#dfe6ee',lid); bigWord('HOMEMADE',s.x1,s.y+20,CREAM,2);
+  if(!PROPART.draw('nara/homemade_covered_dish',s.x1,s.y-34,{h:72})) { cloche(s.x1,s.y,'#dfe6ee',lid); bigWord('HOMEMADE',s.x1,s.y+20,CREAM,2); }
   // the stamp: a big paw comes down onto the homemade dish, leaves a print, rings out
   if(ms>s.stampAt-250&&ms<s.stampAt+250) { const q=ez((ms-s.stampAt+250)/250),py=lerp(s.y-150,s.y-30,q),sc=lerp(1.6,1,q); gfx.save(); gfx.translate(s.x1,py); gfx.scale(sc,sc); paw(0,0,24,OUT); paw(0,0,20,'#2e2627'); E(0,7,8,6,'#5a4c4c'); gfx.restore(); }
-  if(st) { const ly=s.y-30-lid*40; gfx.globalAlpha=a0*(1-lid); paw(s.x1,ly,15,'#e05a6a');
+  if(st) { const ly=s.y-30-lid*40; gfx.globalAlpha=a0*(1-lid); if(!PROPART.draw('nara/homemade_stamp',s.x1,ly,{h:44})) paw(s.x1,ly,15,'#e05a6a');
     const q=(ms-s.stampAt)/400; if(q<1) { gfx.globalAlpha=a0*(1-q); ring(s.x1,s.y-20,20+q*60,10+q*30,4,GOLD); }
     if(ms<s.stampAt+1300) { gfx.globalAlpha=a0; gfx.save(); gfx.translate(s.x1,s.y-104); gfx.rotate(-.14); RO(-62,-16,124,32,'#fff6ee'); gfx.strokeStyle=RED; gfx.lineWidth=4; gfx.strokeRect(-58,-12,116,24); label('APPROVED',0,-7,RED,3); gfx.restore(); } } };
 N.food_inspector=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });
@@ -979,13 +982,15 @@ SC.nu_spin=(s,u)=>{ const ms=s.t*1000+s.t0; for(const b of s.list) { if(ms<b.t) 
 // A Nara speech-free bubble for Tom (he talks; she does not).
 SC.nu_say=inBox((s,u)=>{ const a=fin(u,.08)*fade(u,.85),w=(s.txt.length*4-1)*2+24,x=Math.max(w/2+8,Math.min(568-w/2,s.x)),y=Math.max(BAR+22,s.y); gfx.globalAlpha=a;
   RO(x-w/2,y-14,w,26,'#ffffff'); PO([[s.x-6,y+12],[s.x+6,y+12],[s.x+2,y+24]],'#ffffff',0); Ln(s.x-6,y+13,s.x+2,y+24,2.5,OUT); Ln(s.x+6,y+13,s.x+2,y+24,2.5,OUT); label(s.txt,x,y-5,'#2b2a26',2); });
-const ball=(x,y,r=8)=>{ E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); };
+const ball=(x,y,r=8)=>{ if(PROPART.draw('nara/tennis_ball',x,y,{h:(r+2)*2.2})) return; E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); };
 const pawPrint=(x,y,r,c)=>{ E(x,y,r,r*.85,c); for(let k=0;k<3;k++) E(x-r+k*r,y-r*1.3,r*.38,r*.38,c); };
 
 // ---------- CHAIRMAN CHEEKS! (A6) ----------
 // Chairman Cheeks: a smug squirrel, feet at (0,0), facing left (dir 1 faces right). Puffed cheeks, a little top hat with
 // a gold band, a monocle on a chain. tw: tail waggle.
-const cheeks=(x,y,sc,dir,t,tw=1,tip=0)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc*(dir>0?-1:1),sc);
+const cheeks=(x,y,sc,dir,t,tw=1,tip=0,pose)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc*(dir>0?-1:1),sc);
+  { const PA={peek:['squirrel_peek',{w:36,dy:-15}],run:['squirrel_run',{w:48,dy:-19}],tip:['squirrel_tip_hat',{h:44,dy:-22}],branch:['squirrel_on_branch',{h:40,dy:-14}]}[pose];
+    if(PA&&PROPART.draw('nara/'+PA[0],0,PA[1].dy,PA[1])) { gfx.restore(); return; } }
   const wa=Math.sin(t*14)*.25*tw;
   gfx.save(); gfx.translate(8,-10); gfx.rotate(wa); EO(6,-12,8,14,FUR2); EO(10,-28,8,9,FUR2); E(4,-14,4,9,'#c8824a'); E(9,-29,4,4,'#c8824a'); gfx.restore();
   EO(0,-11,10,11,FUR); E(-3,-9,5,7,BELLY);
@@ -1004,7 +1009,7 @@ SC.nu_park=(s,u)=>{ const P=s.plan,ms=s.t*1000,k=ez(ms/400)*(u>.93?(1-u)/.07:1);
   // a far bench and a path
   gfx.fillStyle='#e8d8b0'; gfx.beginPath(); gfx.moveTo(250,324); gfx.quadraticCurveTo(330,220,480,172); gfx.lineTo(500,172); gfx.quadraticCurveTo(360,230,300,324); gfx.fill();
   // the oak
-  const tx=P.tx; R(tx-15,P.treeTop-6,30,P.ground-P.treeTop+6,OUT); R(tx-13,P.treeTop-4,26,P.ground-P.treeTop+4,'#7a5232'); for(let j=0;j<6;j++) R(tx-9+(j%2)*10,P.treeTop+20+j*30,3,14,'#5a3a22');
+  const tx=P.tx; if(PROPART.draw('nara/oak_tree',tx+6,P.ground-96,{w:210})) { gfx.globalAlpha=1; return; } R(tx-15,P.treeTop-6,30,P.ground-P.treeTop+6,OUT); R(tx-13,P.treeTop-4,26,P.ground-P.treeTop+4,'#7a5232'); for(let j=0;j<6;j++) R(tx-9+(j%2)*10,P.treeTop+20+j*30,3,14,'#5a3a22');
   LnO(tx,P.branch,tx+52,P.branch-18,7,'#7a5232');
   for(const [dx,dy,r] of [[-10,-30,46],[34,-46,40],[70,-26,34],[-36,0,30],[52,0,30],[18,-8,38]]) EO(tx+dx,P.treeTop+dy,r,r*.72,dx%20?'#4f9a48':'#5aa852');
   gfx.globalAlpha=1; };
@@ -1012,14 +1017,14 @@ SC.nu_park=(s,u)=>{ const P=s.plan,ms=s.t*1000,k=ez(ms/400)*(u>.93?(1-u)/.07:1);
 // and bolts; runs just ahead of Nara for five laps; zips up the oak and sits on the branch looking smug.
 SC.nu_cheeks=inBox((s,u)=>{ const P=s.plan,ms=s.t*1000,a=u>.95?(1-u)/.05:1; gfx.globalAlpha=a;
   if(ms<P.run) { const F=P.peekF,up=ez((ms-P.peek)/350); if(ms<P.peek) return; const x=F.x+F.w*.18,y=F.top+36-up*32;
-    gfx.save(); gfx.beginPath(); gfx.rect(0,0,576,F.top+6); gfx.clip(); cheeks(x,y,1.5,1,s.t,ms>P.peek+500?1:0,ms>P.run-400?Math.sin((ms-P.run+400)/400*Math.PI)*.6:0); gfx.restore();
+    gfx.save(); gfx.beginPath(); gfx.rect(0,0,576,F.top+6); gfx.clip(); cheeks(x,y,1.5,1,s.t,ms>P.peek+500?1:0,ms>P.run-400?Math.sin((ms-P.run+400)/400*Math.PI)*.6:0,'peek'); gfx.restore();
     if(ms>P.peek+600&&ms<P.run-300) { gfx.globalAlpha=a*fin((ms-P.peek-600)/1000,.2); label('CHITTER',x+30,y-52,CREAM,1); } return; }
   if(ms<P.climb) { const q=cl((ms-P.run)/(P.climb-P.run)),c=P.chase(Math.min(1,q+.06)),d=P.dir(Math.min(1,q+.06)),hop=Math.abs(Math.sin(ms/55))*6;
-    cheeks(c.x,c.y-hop,1.4,d,s.t*1.6,1.6); return; }
+    cheeks(c.x,c.y-hop,1.4,d,s.t*1.6,1.6,0,'run'); return; }
   const q=cl((ms-P.climb)/320),x=lerp(P.tx+8,P.tx+30,ez(q)),y=lerp(P.ground-4,P.branch-6,ez(q));
-  if(q<1) { gfx.save(); gfx.translate(x,y); gfx.rotate(-Math.PI/2*(1-q)); cheeks(0,0,1.5,1,s.t*2,1.4); gfx.restore(); return; }
+  if(q<1) { gfx.save(); gfx.translate(x,y); gfx.rotate(-Math.PI/2*(1-q)); cheeks(0,0,1.5,1,s.t*2,1.4,0,'run'); gfx.restore(); return; }
   const tip=ms>P.climb+700&&ms<P.climb+1300?Math.sin((ms-P.climb-700)/600*Math.PI)*.8:0;
-  cheeks(x,y,1.5,1,s.t,1,tip); if(ms>P.climb+500) { gfx.globalAlpha=a*.9; label('CHITTER',x+14,y-50,CREAM,1); } });
+  cheeks(x,y,1.5,1,s.t,1,tip,tip>.05?'tip':'branch'); if(ms>P.climb+500) { gfx.globalAlpha=a*.9; label('CHITTER',x+14,y-50,CREAM,1); } });
 // Her eyes lock on: a red scope ring over the squirrel and TARGET: SQUIRREL!!
 SC.nu_scope=inBox((s,u)=>{ const P=s.plan,F=P.peekF,x=F.x+F.w*.18,y=F.top-14,lk=ez(u/.35),r=lerp(70,28,lk); gfx.globalAlpha=fin(u,.08)*fade(u,.88);
   ring(x,y,r+2,r+2,6,OUT); ring(x,y,r,r,3,'#ff3a3a'); for(let k=0;k<4;k++) { const a=k*Math.PI/2+s.t*(1-lk)*6; Ln(x+Math.cos(a)*(r-8),y+Math.sin(a)*(r-8),x+Math.cos(a)*(r+12),y+Math.sin(a)*(r+12),3,'#ff3a3a'); }
@@ -1033,7 +1038,7 @@ SC.nu_whirl=inBox((s,u)=>{ const st=s.st,ms=s.t*1000; s.bits=s.bits||[]; const a
     gfx.restore(); }
   if(st&&st.x!=null&&ms<s.stop) for(let k=0;k<8;k++) { const an=s.t*16+k*Math.PI/4,rx=44,x=st.x+Math.cos(an)*rx,y=st.y-36+Math.sin(an)*20; gfx.globalAlpha=a*.85; gfx.save(); gfx.translate(x,y); gfx.rotate(an);
     if(k%4===0) ball(0,0,6); else { gfx.fillStyle=k%2?'#e88a3a':'#5aa852'; gfx.beginPath(); gfx.ellipse(0,0,8,3.5,0,0,Math.PI*2); gfx.fill(); } gfx.restore(); } });
-const bench=(x,y,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); RO(-30,-14,60,6,'#3f7a4a'); RO(-30,-4,60,6,'#3f7a4a'); RO(-26,4,4,14,'#2b2a26'); RO(22,4,4,14,'#2b2a26'); RO(-30,-24,60,6,'#3f7a4a'); gfx.restore(); };
+const bench=(x,y,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); if(PROPART.draw('nara/park_bench',0,0,{w:72})) { gfx.restore(); return; } RO(-30,-14,60,6,'#3f7a4a'); RO(-30,-4,60,6,'#3f7a4a'); RO(-26,4,4,14,'#2b2a26'); RO(22,4,4,14,'#2b2a26'); RO(-30,-24,60,6,'#3f7a4a'); gfx.restore(); };
 N.squirrel_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m);
   const peek=list.slice().sort((a,b)=>ST.foe(a).base-ST.foe(b).base||ST.foe(b).x-ST.foe(a).x)[0],peekF=ST.foe(peek);
   const bases=Gp.list.map(p=>p.base),yT=Math.max(BAR+120,Math.min(...bases)-12),yB=Math.min(298,Math.max(...bases)+6);
