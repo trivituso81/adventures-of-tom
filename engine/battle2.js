@@ -589,6 +589,8 @@ function b2ItemSteps(u,id,opt) {
 // Nara is a picky eater: store-bought food is not for her (Chicken Jerky is).
 const b2Eats=(p,it)=>p.id!=='nara'||!!it.dogOk||!(it.heal||it.healAll||it.vp);
 function b2RunSteps(u) {
+  // Battle Lab fights can always be left: EXIT LAB in the bag goes straight back to the lab list, even from a boss.
+  if(B2.cfg&&B2.cfg.lab) return [()=>{ b2Msg('Leaving the Battle Lab.'); sfx.run(); },700,()=>b2End('run')];
   const boss=b2LiveFoes().find(f=>f.D.noRun);
   if(boss) return [()=>{ b2Msg(cap(boss.def.the)+' blocks the way out!'); sfx.blocked&&sfx.blocked(); },1000];
   return [()=>{ b2Msg('Everyone backs away slowly.'); sfx.run(); },900,()=>b2End('run')];
@@ -1466,5 +1468,5 @@ function startBattle(npc,opts={}) {
 function b2Lab(i) {
   const L=B2_LAB[i]; if(!L) return;
   B2.labLA=!!L.la; B2.labStudio=!!L.studio; B2.labSchool=!!L.school; B2.labCafe=!!L.cafe; B2.labOak=!!L.oak; B2.labCrown=!!L.crown; B2.labStacks=!!L.stacks; B2.labRead=!!L.readroom; B2.labBarn=!!L.barn; B2.labBoiler=!!L.boiler; B2.labClub=!!L.club; B2.labDome=!!L.dome; B2.labTerm=!!L.term; B2.labGate=!!L.gate;
-  b2Start({party:L.party,level:L.level,foes:L.foes,bag:B2_LAB_BAG.slice(),heart:75,tombos:'all',allSkills:true,onEnd:()=>{ B2.labLA=false; B2.labStudio=false; B2.labSchool=false; B2.labCafe=false; B2.labOak=false; B2.labCrown=false; B2.labStacks=false; B2.labRead=false; B2.labBarn=false; B2.labBoiler=false; B2.labClub=false; B2.labDome=false; B2.labTerm=false; B2.labGate=false; if(typeof splashToLab==='function') splashToLab(); }});
+  b2Start({lab:true,party:L.party,level:L.level,foes:L.foes,bag:B2_LAB_BAG.slice(),heart:75,tombos:'all',allSkills:true,onEnd:()=>{ B2.labLA=false; B2.labStudio=false; B2.labSchool=false; B2.labCafe=false; B2.labOak=false; B2.labCrown=false; B2.labStacks=false; B2.labRead=false; B2.labBarn=false; B2.labBoiler=false; B2.labClub=false; B2.labDome=false; B2.labTerm=false; B2.labGate=false; if(typeof splashToLab==='function') splashToLab(); }});
 }

@@ -1,12 +1,20 @@
+## 2026-10-30 (night, 5): Battle Lab: a way out of every fight
+
+- Tom: no way to leave a Battle Lab fight and get back to the lab list. Cause: boss fights are flagged no-run, so the bag's RUN only said the boss "blocks the way out". Lab fights (`b2Lab`, `lab:true` in the `b2Start` config) now show EXIT LAB in the bag where RUN was, and it always works, boss or not: "Leaving the Battle Lab." then `b2End('run')` returns to the lab list on the same page (`splashToLab`). The command cross BAG button reads "N items . EXIT" in lab fights so it can be found. Story fights are unchanged (RUN still blocked by bosses).
+- Files: `engine/battle2.js` (`b2Lab`, `b2RunSteps`), `engine/battle2-ui.js` (`b2BagList`, `b2RenderCmd`). Cache tags `labx1` on both.
+
 ## 2026-10-30 (night, 5): every Amy jump uses the new painted frame
 
 - Tom: replace any other jump animations with the new Burpee Blitz jump. In `data/amy-hires-extra-use.js` the stock frame `jump` is now the painted arms-up pose (`s13_bjump`, was `s12_jump`), and `bjump` is the same frame, so Burpee Blitz, Gold-Star Recess, Pop Quiz, Negative Split and anything else that asks Amy for `jump` get it. The old `s12_jump` art is still baked in `AMY_HIRES_X.bs` but unused. Her `leap` (sprint) pose is a different frame and was left alone.
 - Cache tag `amy-hires-extra-use.js?v=bj2`. Tests: kit_test amy burpee_blitz, kettlebell_swing, goldstar_recess, false_start, negative_split, pop_quiz (frames looked at), smoke IDS=amy clean, in-page check that `BATTLE_SPRITES.amy.jump` is the new frame.
 
+
+
 ## 2026-10-30 (night, 4): build stamp shows the build name
 
 - The title-screen stamp (bottom left, `engine/main.js`) now reads `build walk3` (was a fixed `build ride 6`) so Tom can say which copy his phone runs. Change the word on any push that Tom needs to confirm. `?v=walk3` on main.js.
 - Square walk-behind re-verified with real key presses: Tom walks across row 9 behind the fountain top and is hidden by the bowl and jets; he walks to (26,10), (24,10), (23,10) under the east tree canopy and is hidden. Tom's 10:00 phone screenshot still showed the old build (GitHub Pages serves files with a 10 minute cache and the home-screen app keeps old pages); RELOAD on the title screen clears it.
+
 
 ## 2026-10-30 (night, 4): Burpee Blitz: new painted final jump
 

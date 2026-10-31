@@ -469,7 +469,7 @@ function b2RenderCmd() {
       '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar">◀</span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
       '<button type="button" class="b2-x right'+(sp&&!(cmdOn&&pu.vp<b2Cost(pu,sp))?off:' off')+'" data-d="right"><span class="ar">▶</span>'+(sp?b2Esc(sp.name):'SPECIAL')+'<small>'+(sp?(b2Diamond(pu,sp)?'FREE':b2Cost(pu,sp)+' VP')+' · '+b2RoleWords(sp):'NONE')+'</small></button>'+
-      '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar">▼</span>BAG<small>'+B2.bag.length+' items</small></button></div>';
+      '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar">▼</span>BAG<small>'+B2.bag.length+' items'+(B2.cfg&&B2.cfg.lab?' · EXIT':'')+'</small></button></div>';
     return;
   }
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>BACK</span><em>B / Esc</em></button>';
@@ -502,7 +502,8 @@ function b2BagList(u) {
   if(B2.crust) rows.push({name:B2.hot?'HOT DISH':'WARM CRUST',role:'heal',sub:u.ateCrust?'Already had one this turn':'Free · '+B2.crust+' on the tray'+(B2.hot?' · heals more, cures one':''),crust:true,no:!!u.ateCrust});
   const lock=b7SnackLock(u);   // Director Mode: one snack per round
   for(const r of b2BagRows()) rows.push({name:r.it.icon+' '+r.it.name.toUpperCase(),role:b2ItemRole(r.it),sub:r.sub+' · x'+r.n,item:r,lock,no:!!lock});
-  rows.push({name:'RUN',sub:'Back away slowly',run:true});
+  if(B2.cfg&&B2.cfg.lab) rows.push({name:'EXIT LAB',sub:'Leave this fight and go back to the lab list',run:true});
+  else rows.push({name:'RUN',sub:'Back away slowly',run:true});
   return rows;
 }
 const b2ItemRole=it=>it.dmg?'dmg':it.confuse||it.atkDown?'debuff':it.pep||it.vp?'buff':'heal';
