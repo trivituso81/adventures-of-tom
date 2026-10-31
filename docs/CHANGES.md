@@ -4,6 +4,10 @@
 - Her head is a little smaller than in her other frames: the art was drawn with realistic proportions, and a bigger head factor stretched the arms. A redraw in the attack-sheet proportions would match better.
 - Cache tags `?v=bj1` on `amy-moves.js`, `amy-hires-extra.js`, `amy-hires-extra-use.js`, and on the `amy-bs.webp` atlas path.
 - Tests: kit_test amy burpee_blitz (6 frames looked at), smoke IDS=amy clean.
+## 2026-10-30 (night, 4): Grace faces the way she walks in Squishy Squeeze
+
+- Tom: Grace walked backwards at the end of Squishy Squeeze. Her walk out and back was fixed as left-out, right-back, but the ally's spot (for Tom, Rose and Amy) sits right of her own home, so both legs faced the wrong way. `G.squishy_squeeze` in `engine/grace-moves.js` now picks the facing from where she is going. Self-squeeze is unchanged.
+- Checked with kit_test frames (out and back, zoomed) and smoke for Grace. Cache tag `sq1` on grace-moves.js.
 
 ## 2026-10-30 (night, 3): Amy drinks almond milk, not oat milk
 

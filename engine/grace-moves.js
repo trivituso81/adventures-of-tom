@@ -887,9 +887,9 @@ SC.gv_squish=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=.75,sq=0;
   if(ms>P.back) { const q=ez((ms-P.back)/250),h=hand(); x=lerp(P.x,h.x-10,q); y=lerp(P.y,h.y-10,q); sc=lerp(1.35,.75,q); sq=0; }
   gfx.globalAlpha=1; dumpling(x,y,sq,sc);
   if(sq>.5) { gfx.globalAlpha=.8; for(let k=0;k<6;k++) { const a=k*Math.PI/3; Ln(x+Math.cos(a)*44,y+Math.sin(a)*28,x+Math.cos(a)*58,y+Math.sin(a)*38,3,CREAM); } } };
-G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m;
+G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,goL=sp.x<ST.unit(m).x;   // goL: the ally's spot is left of her home; face the way she walks
   const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'expr'},{t:1100,f:'act',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2600,f:'celeb',hop:10},{t:3000,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:6},{t:1000,x:sp.x,y:sp.y,f:'expr'},{t:1200,f:'act',dx:u=>-ez(u)*6},{t:2600,f:'celeb',hop:10},{t:2900,f:'walkR',hop:3,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
+    :[{t:0,x:'home',y:'home',f:goL?'walk':'walkR',hop:4,hn:6},{t:1000,x:sp.x,y:sp.y,f:'expr'},{t:1200,f:'act',dx:u=>-ez(u)*6},{t:2600,f:'celeb',hop:10},{t:2900,f:goL?'walkR':'walk',hop:3,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),hold=self?1100:1200,end=self?3400:4000;
   const plan={hold,sq:hold+350,back:2600,x:self?H.x-32:H.x+H.w*.25,y:H.mid-4};
   ST.play(E2,[
