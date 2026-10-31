@@ -1,3 +1,12 @@
+## 2026-10-31 (night, 22): dialogue clip audit, chapters 11 to 28, four stale clips removed
+
+- Tom asked to remove the four stale clips found in chapters 6 and 8 and to check chapters 11 to 28. Removed: ch6 `michael|I have both kids and zero car keys. Wait. Keys. Gutter. Right.` (line is now "Zero car keys and one very sticky toddler...") and the three ch8 Tom pilot-light clips that say "That is the ..." while the scene text is "That's the ..." (`data/scenes.js` ~2640). Dialogue clips 2261 to 2257.
+- Chapters 11 to 20 have no baked dialogue files (not baked yet per the C11 to C20 docs), so there is nothing to audit; chapters 21, 22, 24 and 28 have 0 unused clips, 23 has none baked.
+- Chapters 25 and 26 matches that look unused are live: the ch6 scrap-of-paper and "Those are Marisol's" lines and the ch8 pilot-light lines are built from templates in `data/scenes.js`.
+- Flagged, not removed: five ch27 clips whose lines were reworded in `data/maps-la.js` (Olivia "My lasagna is a brick... Michael is holding it. He's holding everything."; Michael "I have Isla, the diaper bag, and a cold lasagna...", "Hey, Tom. I'd wave, but I'm out of arms.", "I heard Olivia say Michael...", "Yes, Olivia. Got him. Got her. Got both..."). The new wordings have no clips (need a re-bake).
+- Needs re-bake: ch6 Michael keys line, ch8 Tom pilot-light lines ("That's the gumbo / lasagna / forty loaves"), ch2 Olivia curb line, ch8 Olivia and Michael lines, amy.oat_milk_please, tnb.throw_down.
+- Done with a script that round-trips each file byte for byte. Test: page load, 2257 dialogue clips, no page errors, no 4xx.
+
 ## 2026-10-31 (night, 21): dialogue clip audit, chapters 1 to 10, one stale clip removed
 
 - Tom asked which dialogue clips in chapters 1 to 10 are unused. Method: each clip's exact text in `data/voice/dialog-ch1..10.js` checked against every string the game source can produce (comments and the baker sample text in `data/dialog-cast.js` ignored; `{n}` and string-built lines checked against their templates).
