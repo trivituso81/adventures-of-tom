@@ -27,7 +27,7 @@ function movePlayer(dir) {
     if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
     if(f.x===t.x&&f.y===t.y) return;
     f.facing=directionTo(t.x-f.x,t.y-f.y);
-    f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:player.duration,fresh:true};
+    f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:player.duration*indoorSlow(),fresh:true};
   });
   return true;
 }

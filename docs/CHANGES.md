@@ -1,3 +1,8 @@
+## 2026-10-30 (night, 15): Tom walks at half speed inside houses and shops
+
+- Tom (23:50): when walking inside a house interior, halve the walking speed. Each step indoors now takes 0.28 s instead of 0.14 s (`indoorSlow()` next to `startMove`, engine/battle-draw.js); the party follows at the same slower pace (engine/followers.js). Outdoor maps are unchanged. It applies to every map where `outside` is false (houses, shops, school, cafetorium). Cutscene walks that set their own step time are untouched.
+- Tests: step duration probe (town and row 0.14, amyhouse, grands, bakery 0.28), smoke 0 fails. Tags `battle-draw.js?v=slow1`, `followers.js?v=slow1`, `main.js?v=slow1`, title stamp `build slow1`.
+
 ## 2026-10-30 (night, 14): Chapter 1 pie theft: the Mudling acts it out with 16 painted frames
 
 - Tom (23:47) dropped the Mudling heist sheet. Baked by `tools/sprite-bake/bake_mudling_heist.py` into `art/foes/mudling-heist.webp` and `data/mudling-heist.js` (`MUDLING_HEIST`, frames `mh_*`, same size as the old Big Mudling; lift only on the charge and the first scurry frame).

@@ -454,9 +454,11 @@ function startMove(a,dir) {
   a.facing=dir;
   const d=DIR[dir],x=a.x+d.x,y=a.y+d.y;
   if(!canOccupy(currentMap,x,y,a)) return false;
-  a.move={fx:a.x,fy:a.y,tx:x,ty:y,elapsed:0,duration:a.duration};
+  a.move={fx:a.x,fy:a.y,tx:x,ty:y,elapsed:0,duration:a.duration*(a.isPlayer?indoorSlow():1)};
   return true;
 }
+// Inside a house or shop Tom walks at half speed (Tom, 2026-10-30): each step takes twice as long. Outside it is unchanged.
+function indoorSlow() { return (typeof currentMap!=='undefined'&&currentMap&&!currentMap.outside)?2:1; }
 
 function advanceMove(a,dt) {
   if(!a.move) return true;
