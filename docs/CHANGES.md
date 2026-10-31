@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 14): Justin's starting stance is Tom's new painting (`jstance1`)
+
+- Tom (14:18) sent one painting of Justin in his fighting stance (fists up, tool belt, big grin) and asked for it to be his battle starting stance with the head enlarged to match the other frames. It is now his idle in battle. His second idle frame is the same painting 2% shorter, so he still breathes.
+- How: `tools/sprite-bake/src/justin-idle-v1.png` (the painting, magenta background) is read by `bake_justin_battle.py`, which scales the body to the other frames and grows the head from the chin until the face width matches theirs (head enlarge 1.16 on this painting, because its caricature head was already bigger than the old sources). The scale of every other frame stays tied to the old idle, so nothing else changed size. When the full Battle Stances sheet (`justin-battle-v1.png`) arrives it takes over idle again.
+- Still borrowed from move sheets: hurt, kneel, KO, win and run poses (Tom has not sent those). The painted atlas paths now carry `?v=jstance1`.
+- Tested: `kit_test.py justin --speed2` (all nine moves, no fails, contact sheet looked at), `IDS=justin smoke.py`, side-by-side of old and new idle. Not played on the phone. Stamp `build jstance1`.
+
 ## 2026-10-31 (day, 13): Foot Tap: the spread-arms scream frame is the long one, with OUCH (`justin4`)
 
 - Tom (14:21): frame 7 of the Foot Tap sheet (ft_screamA, arms spread, red face) is now held 1.1 s, the longest frame in the move, and the hit lands on it with a new line foot_tap_ouch "OUCH!!!!!!" (script tagged thick New York accent). "MY FOOT! WHO TOUCHED MY FOOT?!" follows on the next scream frames. Move ends at 6.15 s. Bake list 55, Voice Library rebuilt.
