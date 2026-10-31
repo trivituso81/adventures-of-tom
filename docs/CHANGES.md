@@ -1,3 +1,11 @@
+## 2026-10-31 (day, 9): Ymamot Creation: kids sized to Grace and Rose, about 6 seconds (`ymamot3`)
+
+- Tom (12:54): the kids were too small and the move too long. Little Tom is now as tall as Grace and little Amy as tall as Rose (`kid()` takes `sc`; scale is each party sprite's height over the painted kid's). Knock It Off! kids are unchanged.
+- Runtime: the animation proper is about 5.5 s (was about 13 s): the shout 0.8 s, ingredients in 1.3 s, name, sling, splat, back. About 6.8 s at 1x counting the walk-out and walk-back, 5.3 s at 2x.
+- The two kid lines are shorter so they fit: "Ketchup, pickles, cereal, sock. Ymamot Creation!" (Grace's voice) and "Yama-Mott. It's Tom backwards." (Rose's voice). Both were never baked, so nothing is lost; they are in `tools/bake-page/pending.json` (bake with ADMIN > BAKE VOICES). The old grown-up clips are no longer used as a stand-in (they ran 7.5 s and 4.2 s), so the kids are silent until baked.
+- Words and the ingredient labels were shortened so they no longer overlap. Tested at 1x and 2x, smoke and `IDS=grace,rose` smoke pass. Not played on the phone.
+- Note: Tom's just-baked kid clips (little Amy 6.6 s, little Tom 7.3 s, about 12 s in a row) cannot fit a 6 s move, so the two kid lines were shortened and need one more bake (they are the only two items in `pending.json`). The Flashback! shout clips from `ymamot2` are kept and play.
+
 ## 2026-10-31 (day, 6): the four Ymamot clips are baked and merged; the move is timed to them (`ymamot2`)
 
 - Tom (12:52) sent `local-clips-export.json` (30 clips). 26 were the takes already merged in `clips1`; the 4 new ones are exactly the Ymamot list: `amy.flashback`, `tom.flashback` (the Flashback! shout), `grace.ymamot` (little Amy), `rose.ymamot` (little Tom). Merged with `tools/battle-baker/merge.js` into `data/voice/amy|tom|grace|rose.js` (and voice-clips.js voice settings, scripts kept). `tools/bake-page/pending.json` is empty again, list rebuilt; Voice Library index rebuilt (those 4 no longer show under No clip yet).
