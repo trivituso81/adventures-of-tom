@@ -62,6 +62,7 @@ button.danger{background:#5a2233}
 .fxnote{font-size:12px;color:#ffcf7a}
 .more{display:block;margin:14px auto;width:calc(100% - 32px)}
 .bar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:nowrap;z-index:6}
+.bar[hidden]{display:none}
 .bar .grow{flex:1}
 .bar .msg{width:100%;font-size:13px;color:#b9b3e6}
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
@@ -188,6 +189,7 @@ function playB64(b64,btn){
 async function playNow(it,btn){
   const loc=localFor(it);
   if(loc) return playB64(loc.mp3,btn);
+  if(it.f<0) return toast(it.nv?'No clip yet, and this character has no voice chosen yet.':'No clip yet. Tap the line to make one.');
   btn.textContent='...';
   try{ const b=await builtIn(it); btn.innerHTML='&#9654;'; if(!b) return toast('This line has no clip yet.'); playB64(b,btn); }
   catch(e){ btn.innerHTML='&#9654;'; toast(e.message||String(e)); }
@@ -229,7 +231,7 @@ const mp3Sec=b=>Math.round(b.length*0.75*8/128000*10)/10;
 async function newTake(it){
   const key=lk(it); if(BUSY[key]) return false;
   if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); return false; }
-  const v=voiceOf(it); if(!v||!v.voice_id){ ERR[key]='This voice has no ElevenLabs voice ID.'; repaint(it); return false; }
+  const v=voiceOf(it); if(!v||!v.voice_id){ ERR[key]=it.nv?'No voice is chosen for '+whoName(it)+' yet. Ask Claude to cast one.':'This voice has no ElevenLabs voice ID.'; repaint(it); return false; }
   delete ERR[key]; BUSY[key]='Making a take...'; repaint(it);
   let ok=false;
   try{
@@ -263,7 +265,7 @@ async function startRec(it){
 function passWho(it,s){ s=s||F.who; return !s.size||s.has(it.v); }
 function passType(it,s){ s=s||F.type; return !s.size||s.has(it.ty); }
 function passCh(it,s){ s=s||F.ch; if(!s.size) return true; return it.c.length?it.c.some(n=>s.has(n)):s.has(0); }
-function passShow(it){ if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it); return true; }
+function passShow(it){ if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); return true; }
 function passQ(it){ const q=F.q.trim().toLowerCase(); if(!q) return true;
   return it.x.toLowerCase().includes(q)||whoName(it).toLowerCase().includes(q)||(it.w||'').toLowerCase().includes(q)||(it.t==='b'&&it.k.join(' ').includes(q)); }
 function visible(skip){ return IDX.items.filter(it=>passQ(it)&&passShow(it)&&(skip==='who'||passWho(it))&&(skip==='type'||passType(it))&&(skip==='ch'||passCh(it))); }
@@ -276,8 +278,8 @@ function renderFilters(){
   const cc={}; vc.forEach(it=>(it.c.length?it.c:[0]).forEach(n=>cc[n]=(cc[n]||0)+1));
   const chs=IDX.chapters.filter(c=>IDX.items.some(it=>it.c.includes(c.n)));
   $('fChap').innerHTML='<span class="lab">Chapter</span>'+chip('ch','*','All',!F.ch.size,vc.length)+chs.map(c=>chip('ch',c.n,(c.n===21?'Bonus':'Ch '+c.n),F.ch.has(c.n),cc[c.n]||0)).join('')+chip('ch','0','No chapter',F.ch.has(0),cc[0]||0);
-  const p=IDX.items.filter(it=>localFor(it)).length;
-  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All clips',F.show==='all')+chip('show','phone','Re-recorded on this phone',F.show==='phone',p)+chip('show','builtin','Not re-recorded',F.show==='builtin');
+  const p=IDX.items.filter(it=>localFor(it)).length, nn=IDX.items.filter(it=>it.f<0&&!localFor(it)).length;
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this phone',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin');
 }
 function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(F.show!=='all'?1:0)+(F.q.trim()?1:0); }
 function renderSum(){
@@ -299,7 +301,7 @@ function rowHtml(it){
   if(selMode) h+='<input type="checkbox" class="pick" data-act="sel"'+(SEL.has(key)?' checked':'')+'>';
   h+='<div class="body"><div class="meta"><b>'+esc(whoName(it))+'</b>'+(it.t==='b'?'<span class="tag">'+esc(it.k[0])+(it.k.length>1?' +'+(it.k.length-1):'')+'</span>':'')+
      (it.c.length?'<span class="tag">'+it.c.map(n=>n===21?'Bonus':'Ch '+n).join(', ')+'</span>':'')+(it.w&&it.t==='d'?'<span>'+esc(it.w)+'</span>':'')+
-     (loc?'<span class="tag phone">phone take</span>':'')+(it.f<0&&!loc?'<span class="tag none">no clip</span>':'')+'</div>';
+     (loc?'<span class="tag phone">phone take</span>':'')+(it.f<0&&!loc?'<span class="tag none">'+(it.nv?'no clip · no voice yet':'no clip')+'</span>':'')+'</div>';
   h+='<div class="txt" data-act="open">'+esc(it.x)+'</div>';
   if(open){
     h+='<div class="edit">';
@@ -309,8 +311,9 @@ function rowHtml(it){
     if(SCRIPTS[key]!=null) h+='<div><button class="small" data-act="resetscript">Back to the written direction</button></div>';
     if(it.fx) h+='<div class="fxnote">This voice gets a sound effect (pitch or creature filter) when Claude builds it into the game. On the phone it plays without it.</div>';
     h+='<div class="acts">';
-    h+='<button class="purple" data-act="take"'+(BUSY[key]?' disabled':'')+'>New take</button>';
-    if(!dog) h+=REC[key]?'<button class="rec" data-act="stoprec"><span class="dot"></span>Stop recording</button>':'<button data-act="rec"'+(BUSY[key]?' disabled':'')+'>&#127908; Record my voice</button>';
+    if(it.nv) h+='<div class="err" style="width:100%">No voice is chosen for '+esc(whoName(it))+' yet, so this line cannot be recorded. Ask Claude to cast a voice for this character.</div>';
+    h+='<button class="purple" data-act="take"'+(BUSY[key]||it.nv?' disabled':'')+'>'+(it.f<0&&!loc&&!takesFor(key).length?'Make a clip':'New take')+'</button>';
+    if(!dog&&!it.nv) h+=REC[key]?'<button class="rec" data-act="stoprec"><span class="dot"></span>Stop recording</button>':'<button data-act="rec"'+(BUSY[key]?' disabled':'')+'>&#127908; Record my voice</button>';
     h+='</div>';
     if(BUSY[key]) h+='<div class="hint">'+esc(BUSY[key])+'</div>';
     if(ERR[key]) h+='<div class="err">'+esc(ERR[key])+'</div>';

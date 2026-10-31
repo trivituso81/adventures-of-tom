@@ -84,7 +84,16 @@ async def main():
         await page.wait_for_function(f"__VL.TAKES.size>={before+2}", timeout=15000); await page.wait_for_timeout(300)
         ok(await J("__VL.TAKES.size") == before + 2, 'bulk made 2 takes')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-select.png'))
-        await page.click('#selmode')
+        await page.click('#selmode'); await page.wait_for_timeout(200)
+        ok(not await page.locator('#bar').is_visible(), 'select bar hides after Done')
+        # Show: no clip yet.
+        await page.click('#clear'); await page.click('.chip[data-g="show"][data-v="none"]')
+        nn = await J("__VL.IDX.items.filter(i=>i.f<0&&!__VL.LOCAL.has(['dialog',i.v,'',i.x].join('|'))&&!(i.t==='b'&&i.k.some(k=>__VL.LOCAL.has(['battle',i.v,k,i.x].join('|'))))).length")
+        vn = await J("__VL.visible().length"); ok(vn == nn and vn > 1000, f'No clip yet: {vn} = {nn}')
+        ok(await page.locator('.row .tag.none').count() > 0, 'no-clip rows tagged')
+        await page.screenshot(path=os.path.join(SHOTS, 'vl-noclip.png'))
+        await page.locator('.row .txt').first.click(); await page.wait_for_selector('.row.open')
+        await page.screenshot(path=os.path.join(SHOTS, 'vl-noclip-open.png'))
         # Show: re-recorded on this phone.
         await page.click('#clear'); await page.click('.chip[data-g="show"][data-v="phone"]')
         ok(await J("__VL.visible().length") == 3, 'Re-recorded filter shows the 3 lines')

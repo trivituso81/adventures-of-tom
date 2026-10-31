@@ -45,6 +45,8 @@ for(const f of fs.readdirSync('data').filter(f=>/^scenes.*\.js$/.test(f)||f==='b
     const t=s.match(/Chapter \d+ "([^"]+)"/); if(t) titles[n]=t[1]; if(n===21) titles[21]=titles[21]||'Nine Scoops (bonus)'; segs.push({n,s}); }
 }
 const textCh={}, textWho={};   // norm(text) -> [chapters], -> speaker shown
+const sceneCh={};
+for(const {n,s} of segs) for(const m of s.matchAll(/SCENES\.(\w+)\s*=/g)) sceneCh[m[1]]=sceneCh[m[1]]||n;
 for(const {n,s} of segs){
   for(const m of s.matchAll(/talk:\s*'([^']+)'\s*,\s*lines:\s*\[/g)){
     let i=m.index+m[0].length, depth=1, q=null; const st=i;
@@ -60,8 +62,10 @@ const DIALOG_KIND=/^(greet|join|praise|intro.*|nara_no_jump)$/;
 const BS=fs.existsSync('tools/voice-library/battle-scripts.json')?JSON.parse(fs.readFileSync('tools/voice-library/battle-scripts.json','utf8')):{};
 const DS={}, DCTX={}, DCH={};
 const SD='tools/voice-library/scripts';
-if(fs.existsSync(SD)) for(const f of fs.readdirSync(SD).filter(f=>f.endsWith('.json')).sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))){
-  const j=JSON.parse(fs.readFileSync(SD+'/'+f,'utf8')); const list=Array.isArray(j)?j:(j.lines||[]);
+const SFILES=[];
+for(const d of ['docs',SD]) if(fs.existsSync(d)) fs.readdirSync(d).filter(f=>d===SD?f.endsWith('.json'):/^dialogue-scripts-.*\.json$/.test(f)).sort((a,b)=>a.localeCompare(b,undefined,{numeric:true})).forEach(f=>SFILES.push(d+'/'+f));
+for(const sf of SFILES){
+  const j=JSON.parse(fs.readFileSync(sf,'utf8')); const list=Array.isArray(j)?j:(j.lines||[]);
   for(const it of list){ if(!it||!it.voice||!it.text||!it.script) continue; const k=it.voice+'|'+norm(it.text);
     DS[k]=it.script; if(it.ctx) DCTX[k]=it.ctx; if(j.chapter) DCH[k]=j.chapter; }
 }
@@ -79,7 +83,7 @@ function vset(kind,id,v){ if(!v) return; const st=v.settings||{};
     sfx:!!v.sfx,prompt_influence:v.prompt_influence||.5}; }
 for(const ch in BC.voices) vset('battle',ch,BC.voices[ch]);
 for(const id in DC.voices) vset('dialog',id,DC.voices[id]);
-const vname=id=>NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id;
+const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
 const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
 
@@ -114,7 +118,40 @@ for(const key of Object.keys(DC.clips)){
   if(fxOf(v,speaker)) it.fx=1;
   items.push(it);
 }
+// Dialogue the game shows that has no clip yet (tools/voice-library/harvest.json from harvest.py). Speakers with no voice in
+// DIALOG_CAST are listed too (they cannot be voiced until Claude casts one); Nara's dialogue is her bark sound, not a voice.
+run('data/contraction-alias.js'); const CO=vm.runInContext('CONTRACT_OLD',ctx);
+const MONCH={'monsters.js':1,'la-monsters.js':2,'marsh-monsters.js':3,'backlot-monsters.js':4,'school-monsters.js':5,'oak-monsters.js':6,'library-monsters.js':7,'barn-monsters.js':8,'club-monsters.js':9,'terminal-monsters.js':10,'p2-monsters.js':11};
+const monCh={};
+for(const f of fs.readdirSync('data').filter(f=>/monsters\.js$/.test(f))){ const m=f.match(/^ch(\d+)-monsters\.js$/); const n=m?+m[1]:MONCH[f]; if(!n) continue;
+  for(const x of fs.readFileSync('data/'+f,'utf8').matchAll(/^\s{2}(\w+):\{/gm)) monCh[x[1]]=monCh[x[1]]||n; }
+const H=fs.existsSync('tools/voice-library/harvest.json')?JSON.parse(fs.readFileSync('tools/voice-library/harvest.json','utf8')).lines:[];
+const seenKey=new Set(items.map(it=>(it.t==='b'?'b|':'d|')+it.v+'|'+it.x));
+const btext={}; for(const ch in BC.clips){ btext[ch]=new Set(); for(const k in BC.clips[ch]) for(const c of BC.clips[ch][k]||[]) if(c&&c.text) btext[ch].add(c.text); }
+let nNo=0, nNoVoice=0;
+for(const l of H){
+  if(l.speaker==='Nara') continue;
+  const v=CAST.speakers[String(l.speaker).trim()]||null, t=l.text;
+  if(!t||!t.trim()) continue;
+  const key=v?v+'|'+t:'?'+l.speaker+'|'+t;
+  if(v&&(DC.clips[key]||(CO[t]&&DC.clips[v+'|'+CO[t]]))) continue;            // has a dialogue clip
+  if(v&&btext[v]&&btext[v].has(t)) continue;                                 // the scene plays the battle clip with these words
+  if(seenKey.has('d|'+(v||'?'+l.speaker)+'|'+t)) continue; seenKey.add('d|'+(v||'?'+l.speaker)+'|'+t);
+  const n=norm(t), src=l.src||'', parts=src.split(':');
+  let ks=[...(textCh[n]||[])].sort((a,b)=>a-b);
+  if(parts[0]==='scene'&&sceneCh[parts[1]]) ks=[sceneCh[parts[1]]];
+  if(!ks.length&&parts[0]==='monster'&&monCh[parts[1]]) ks=[monCh[parts[1]]];
+  if(!ks.length&&DCH[(v||'')+'|'+n]) ks=[DCH[(v||'')+'|'+n]];
+  const where=DCTX[(v||'')+'|'+n]||(parts[0]==='scene'?'Scene '+parts[1]:parts[0]==='npc'?'Talking to '+l.speaker+(l.map?' ('+l.map+')':''):parts[0]==='monster'?'Monster talk':parts[0]);
+  const it={t:'d',v:v||('?'+l.speaker),x:t,ty:'d',c:ks,w:where,f:-1,sp:l.speaker,s:DS[(v||'')+'|'+n]||plain(v||'',t)};
+  if(!DS[(v||'')+'|'+n]) it.auto=1;
+  if(!v){ it.nv=1; nNoVoice++; }
+  if(v&&fxOf(v,l.speaker)) it.fx=1;
+  items.push(it); nNo++;
+}
+for(const it of items) if(it.v[0]==='?'){ /* listed under the speaker's own name */ }
 items.forEach((it,i)=>it.i=i);
+console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }
 const out={made:new Date().toISOString().slice(0,10),files,voices,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};

@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 5): Voice Library lists lines with no clip, plus a No clip yet filter (`vlib2`)
+
+- Tom (12:29): the library showed only lines that already had a clip. It now lists every line the game can show: 3,956 lines, of which 1,247 have no clip yet (4 battle lines, 1,243 dialogue lines, mostly chapters 11 to 20). New Show chip "No clip yet" with its count; those rows are tagged "no clip" and the button reads Make a clip. Play on them says there is nothing yet.
+- 323 of those lines belong to characters with no voice cast yet (Vance, Marlowe, Part 2 monsters): listed and tagged "no voice yet"; recording is off with a note to ask Claude to cast one. Nara's dialogue is left out (her bark sound plays).
+- How: new `tools/voice-library/harvest.py` runs `tools/clip-audit/harvest.js` in the game (headless) and writes `harvest.json`; `make-index.js` adds the lines that have neither a dialogue clip nor a battle clip with the same words; chapter from the scene that speaks it or the monster's chapter file. Fixed: the Select bar now hides after Done (CSS `display:flex` beat `hidden`).
+- Tested: `tools/voice-library/test.py` (now 22 checks), smoke default and grace,rose. Stamp `build vlib2`, `?v=vlib2` on main.js. Not tried on the phone yet.
+
 ## 2026-10-31 (day, 5): Shopkeepers stand behind their counters (`counter1`)
 
 - Tom (11:49): people behind store counters need to sit properly behind the counter. Penny (Long Island shop) and Nickel (Nickel's, Downtown LA) were drawn standing on top of the counter. Each counter is now a cutout (`art/shop-fg.webp`, `art/nickels-fg.webp`, made by `tools/make_counter_fg.py`) drawn over the shopkeeper through `PLATE_BEHIND.shop` and `.nickels` in `engine/plate.js`, so the counter top and front hide her legs.
