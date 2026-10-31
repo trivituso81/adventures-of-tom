@@ -1,0 +1,225 @@
+[
+ {
+  "kind": "dialog",
+  "voice": "olivia",
+  "text": "Tom! Oh, thank goodness. You already have her. She hasn't slept since Sunday.",
+  "where": "Chapter 6, Olivia hands Nara over",
+  "script": "[relieved, fast-talking, frazzled mom] Tom! Oh, thank [emphasized] GOOODNESS. You already have her. [exhausted laugh] She hasn't slept since Sunday.",
+  "id": "d01"
+ },
+ {
+  "kind": "dialog",
+  "voice": "olivia",
+  "text": "Michael! Isla is near the curb. Okay. Never mind. Thank you, babe.",
+  "where": "Los Angeles, Olivia, repeat visit",
+  "script": "[calling out, alarmed, then sheepish] [shouting] Michael! Isla is near the curb. [beat] Okay. [relieved] Never mind. Thank you, babe.",
+  "id": "d02"
+ },
+ {
+  "kind": "dialog",
+  "voice": "olivia",
+  "text": "My lasagna is a brick. A cold lasagna brick. Michael is guarding it with his life.",
+  "where": "Chapter 8, Olivia at the block party",
+  "script": "[wry, deadpan, exhausted] My lasagna is a brick. A [emphasized] COOOLD lasagna brick. [dry] Michael is guarding it with his life.",
+  "id": "d03"
+ },
+ {
+  "kind": "dialog",
+  "voice": "michael",
+  "text": "Zero car keys and one very sticky toddler. Wait. Keys. Gutter. Right.",
+  "where": "Chapter 6, Michael",
+  "script": "[tired, deadpan] Zero car keys and one very sticky toddler. [pause] Wait. [realizing] Keys. [beat] Gutter. [flat] Right.",
+  "id": "d04"
+ },
+ {
+  "kind": "dialog",
+  "voice": "michael",
+  "text": "Cold lasagna, one diaper bag, and Isla eating the tablecloth. We're thriving.",
+  "where": "Chapter 8, Michael at the block party",
+  "script": "[calm, deadpan, tired dad] Cold lasagna, one diaper bag, and Isla eating the tablecloth. [dry] We're thriving.",
+  "id": "d05"
+ },
+ {
+  "kind": "dialog",
+  "voice": "michael",
+  "text": "Hey, Tom. Good to see you. Please ignore the cracker crumbs. They live here now.",
+  "where": "Los Angeles, Michael, first visit",
+  "script": "[warm, deadpan, tired] Hey, Tom. Good to see you. [dry] Please ignore the cracker crumbs. They live here now.",
+  "id": "d06"
+ },
+ {
+  "kind": "dialog",
+  "voice": "michael",
+  "text": "I heard Olivia say Michael. Whatever it is, I'm on it. Isla, that is not a snack.",
+  "where": "Los Angeles, Michael, first visit",
+  "script": "[calm, tired, then firm] I heard Olivia say Michael. Whatever it is, I'm on it. [firmly, to a toddler] Isla, that is not a snack.",
+  "id": "d07"
+ },
+ {
+  "kind": "dialog",
+  "voice": "michael",
+  "text": "Yes, Olivia. Heard you. Handled. Lachlan, we do not lick the fence.",
+  "where": "Los Angeles, Michael, repeat visit",
+  "script": "[calm, deadpan] Yes, Olivia. Heard you. Handled. [patient, to a toddler] Lachlan, we do not lick the fence.",
+  "id": "d08"
+ },
+ {
+  "kind": "dialog",
+  "voice": "amy",
+  "text": "Go. GO. I have a house to decorate and a cake to hide from your father. Take the girls and get the scoops.",
+  "where": "Chapter 21, Amy stays home",
+  "script": "[heavy Long Island accent, bossy, hurried, laughing] Go. [emphasized] GOOO. I have a house to decorate and a cake to hide from your father. Take the girls and get the scoops.",
+  "id": "d09"
+ },
+ {
+  "kind": "dialog",
+  "voice": "deedee",
+  "text": "Not today, honey. The cake is in the oven and the oven doesn't care that it's a birthday.",
+  "where": "Chapter 21, Deedee stays home",
+  "script": "[warm, gently teasing] Not today, honey. The cake is in the oven and the oven doesn't care that it's a birthday.",
+  "id": "d10"
+ },
+ {
+  "kind": "dialog",
+  "voice": "boppy",
+  "text": "Ice cream? My knee says sit. My knee has been saying sit since 1994.",
+  "where": "Chapter 21, Boppy stays home",
+  "script": "[deep gravelly voice, thick New York accent, grumbling] Ice cream? My knee says sit. [dry] My knee has been saying sit since [emphasized] NINETEEN NINETY-FOUR.",
+  "id": "d11"
+ },
+ {
+  "kind": "battle",
+  "voice": "tom",
+  "lineKind": "praise",
+  "text": "Present. Window seat, please. I won't be reclining.",
+  "where": "Battle, Tom, praise",
+  "script": "[dry, calm, smug] Present. [beat] Window seat, please. [deadpan] I won't be [emphasized] RECLIIINING.",
+  "id": "b12"
+ },
+ {
+  "kind": "battle",
+  "voice": "tom",
+  "lineKind": "dcamy2",
+  "text": "But I've been on this ladder for an hour!",
+  "where": "Battle, Tom, dcamy2",
+  "script": "[exasperated, wobbling, pleading] But I've been on this [emphasized] LAAADDER for an hour!",
+  "id": "b13"
+ },
+ {
+  "kind": "battle",
+  "voice": "grace",
+  "lineKind": "open_strings",
+  "text": "I've only had six lessons, okay?",
+  "where": "Battle, Grace, open strings",
+  "script": "[defensive, bossy, embarrassed nine-year-old] I've only had [emphasized] SIIIX lessons, okay?",
+  "id": "b14"
+ },
+ {
+  "kind": "battle",
+  "voice": "grace",
+  "lineKind": "portrait_mode",
+  "text": "Hold that pose. Perfect, don't move.",
+  "where": "Battle, Grace, portrait mode",
+  "script": "[bossy, bright, directing a photo shoot] Hold that pose. [emphasized] PERFECT, don't move.",
+  "id": "b15"
+ },
+ {
+  "kind": "battle",
+  "voice": "grace",
+  "lineKind": "bedazzle_blast",
+  "text": "Hold still, you need more sparkle!",
+  "where": "Battle, Grace, bedazzle blast",
+  "script": "[bossy, bright, gleeful] Hold still, you need more [emphasized] SPAAARKLE!",
+  "id": "b16"
+ },
+ {
+  "kind": "battle",
+  "voice": "amy",
+  "lineKind": "oat_milk_please",
+  "text": "No dairy, thank you. Almond milk, please!",
+  "where": "Battle, Amy, oat milk please",
+  "script": "[heavy Long Island accent, prim and polite, then fierce] No dairy, thank you. [sharp] [emphasized] AAALMOND milk, please!",
+  "id": "b17"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "praise",
+  "text": "Great take. I wouldn't change a single stitch.",
+  "where": "Battle, TNB, praise",
+  "script": "[warm, sincere, easygoing] Great take. [soft chuckle] I wouldn't change a single stitch.",
+  "id": "b18"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "foraged_at_dawn",
+  "text": "A single pea. Foraged at dawn. Finished with the chef's intention.",
+  "where": "Battle, TNB, foraged at dawn",
+  "script": "[hushed, fancy waiter, reverent] A single pea. [whispering] Foraged at dawn. [proud] Finished with the chef's [emphasized] INTEEENTION.",
+  "id": "b19"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "dont_split_up",
+  "text": "Rule one: we do NOT split up. Rule two: see rule one.",
+  "where": "Battle, TNB, dont split up",
+  "script": "[calm, horror-movie buff, deadpan] Rule one: we do [emphasized] NOOOT split up. Rule two: [dry] see rule one.",
+  "id": "b20"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "scope_creep",
+  "text": "Tiny change. Just one more thing. And one more. And...",
+  "where": "Battle, TNB, scope creep",
+  "script": "[innocent, then increasingly frantic project manager] Tiny change. [cheerful] Just one more thing. [faster] And one more. [trailing off] And...",
+  "id": "b21"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "throw_down",
+  "text": "I was throwing a bowl. Literally. ...Wait, come back, I have more!",
+  "where": "Battle, TNB, throw down",
+  "script": "[laughing, cheerful potter] I was throwing a bowl. [emphasized] LITERRRALLY. [beat] [panicked laugh] ...Wait, come back, I have more!",
+  "id": "b22"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "around_the_bend",
+  "text": "It's just around the bend. ...This bend. Okay, THAT bend.",
+  "where": "Battle, TNB, around the bend",
+  "script": "[easygoing hiker, cheerful, then sheepish] It's just around the bend. [beat] ...This bend. [mock-confident] Okay, [emphasized] THAAAT bend.",
+  "id": "b23"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "round_with_jojo",
+  "text": "Jojo, you're up. ...Jojo. JOJO. ...Nice.",
+  "where": "Battle, TNB, round with jojo",
+  "script": "[easygoing, calling to his sister, then louder] Jojo, you're up. [beat] ...Jojo. [shouting] [emphasized] JOOOJO. [beat] [relieved, impressed] ...Nice.",
+  "id": "b24"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "coffee_run",
+  "text": "Coffee run. I got you the usual.",
+  "where": "Battle, TNB, coffee run",
+  "script": "[warm, easygoing, casual] Coffee run. [affectionate] I got you the usual.",
+  "id": "b25"
+ },
+ {
+  "kind": "battle",
+  "voice": "tnb",
+  "lineKind": "tasting_ult",
+  "text": "Fourteen courses. Four seconds. And the check.",
+  "where": "Battle, TNB, tasting ult",
+  "script": "[crisp, elegant waiter, deadpan] Fourteen courses. Four seconds. [dry, slow] And the [emphasized] CHEEECK.",
+  "id": "b26"
+ }
+]

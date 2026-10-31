@@ -146,6 +146,7 @@ const SPLASH_MODES={
       {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
+    {name:'BAKE VOICES',sub:'Make new voice clips on this phone.',act:openBake},
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
@@ -255,6 +256,12 @@ function openDemo() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('demo/index.html',location.href).href; },250);
+}
+// The voice baker (bake.html) opens inside the app so its clips are saved where the game can read them.
+function openBake() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('bake.html',location.href).href; },250);
 }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {
