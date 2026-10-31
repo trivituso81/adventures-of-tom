@@ -30,7 +30,7 @@ INFO="""(id)=>{ const m=worlds[id], W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
     for(let y=o.y-1;y<=o.y+o.h&&!st;y++) for(let x=o.x-1;x<=o.x+o.w&&!st;x++){ const inside=x>=o.x&&x<o.x+o.w&&y>=o.y&&y<o.y+o.h; const edge=(x>=o.x&&x<o.x+o.w)||(y>=o.y&&y<o.y+o.h);
       if(!inside&&edge&&seen.has(x+','+y)){ const d=y<o.y?'down':y>=o.y+o.h?'up':x<o.x?'right':'left'; st=[x,y,d]; } }
     objs.push({name:o.name,stand:st}); }
-  const npcs=m.npcs.map(n=>({name:n.name,x:n.x,y:n.y,ok:seen.has(n.x+','+n.y),stand:[n.x,n.y+1,'up']}));
+  const npcs=m.npcs.map(n=>({name:n.name,x:n.x,y:n.y,ok:seen.has(n.x+','+n.y)||!!n.shopkeeper,stand:[n.x,n.y+1,'up']}));
   return {spawn:[m.spawn.x,m.spawn.y],objs,npcs,reach:seen.size}; }"""
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}

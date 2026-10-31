@@ -1,3 +1,9 @@
+## 2026-10-31 (night, 26): Nickel is back behind her counter
+
+- Tom reported Nickel missing from her shop. Cause: the 2026-10-30 room painting of Nickel's has no people in it, but her sprite was still flagged hidden (left over from the earlier painting that had her in it), parked at (12,6), and hidden characters cannot be talked to.
+- Fix (`data/maps-la.js`): Nickel is visible and stands at (7,4) behind the counter, left of the register. A on the counter still opens the shop. No spoken lines changed.
+- `tools/rooms_test.py`: a shopkeeper behind a counter no longer counts as standing on unreachable floor (Penny's shop is placed the same way).
+- Test: `tools/rooms_test.py nickels` 0 fails, portrait and landscape shots checked; smoke runs 0 fails. Build stamp `build nick1`. Not played on phone; the live site was not checked from here.
 ## 2026-10-31 (night, 26): Indoor walking a touch faster, overworld a touch slower
 
 - Tom (01:13): half speed indoors went too far. Indoor steps are now 1.6x the outdoor step time (0.224 s instead of 0.28 s; outdoors stays 0.14 s). Tune `INDOOR_STEP_X` beside `indoorSlow()` in engine/battle-draw.js. Followers use the same value. Tom (01:13, second message): the overworld a touch slower too: outdoor steps are now 1.15x (0.161 s instead of 0.14 s), `OUTDOOR_STEP_X` beside `INDOOR_STEP_X`. The player's base step time stays .14 in engine/world.js; cutscene walks with their own step time are untouched.
