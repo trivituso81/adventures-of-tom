@@ -1340,7 +1340,8 @@ const LA_ROOMS=[
           'Be careful out there. I like you un-cracked.']},
       // Jojo: TNB's sister (Tom 2026-10-30; painted from his photo, data/jojo-hires.js). Slow, easy, never in a hurry (why stays unstated).
       // Disc golf with TNB on Sundays; her battle cameo is Round with Jojo (engine/tnb-moves.js).
-      {name:'Jojo',x:5,y:8,look:'sage',sheet:'jojo',duration:0.75,lines:[
+      // Away through chapter 2 (Tom 2026-10-31): she is not in the loft, or anywhere in the overworld, until chapter 3 (see `away` in data/scenes.js).
+      {name:'Jojo',x:5,y:8,look:'sage',sheet:'jojo',duration:0.75,away:[{until:2}],lines:[
         'Oh. Hi. You must be Tom. I\'m Jojo. TNB\'s sister.',
         'He talks about you a lot. Mostly "Tom said" and then a very long pause. Pottery pause. I know it well.',
         'I stopped by to borrow a mug. That was a while ago. I\'m still on the couch. It\'s a good couch.',

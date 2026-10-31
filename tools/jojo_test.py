@@ -29,6 +29,14 @@ with sync_playwright() as pw:
     skip_intro(pg); pg.evaluate("()=>window.__LE.go('lofts')"); pg.wait_for_timeout(1800); skip_intro(pg,800); pg.wait_for_timeout(800)
     check('painted Jojo atlas loaded',pg.evaluate("()=>!!(PAINTED.jojoOw&&PAINTED.jojoOw.ready)"))
     check('OW.jojo has four views',pg.evaluate("()=>['down','up','side','left'].every(d=>OW.jojo[d]&&OW.jojo[d].length===3)"))
+    # Tom 2026-10-31: not in the loft until after chapter 2, and not anywhere in the overworld in chapter 2 (or earlier).
+    for ch in (0,1,2):
+        gone=pg.evaluate(f"()=>{{ STORY.chapter={ch}; syncAwayNpcs(); return Object.values(worlds).every(w=>!w.npcs.some(n=>n.name==='Jojo')); }}")
+        check(f'chapter {ch}: Jojo is in no map',gone)
+    check('chapter 2: the loft has no Jojo',pg.evaluate("()=>!worlds.lofts.npcs.some(n=>n.name==='Jojo')"))
+    pg.evaluate("()=>{ STORY.chapter=3; syncAwayNpcs(); }")
+    check('chapter 3: Jojo is in the loft',pg.evaluate("()=>worlds.lofts.npcs.some(n=>n.name==='Jojo')"))
+    check('chapter 3: Jojo is only in the loft',pg.evaluate("()=>Object.entries(worlds).filter(([id,w])=>w.npcs.some(n=>n.name==='Jojo')).map(e=>e[0]).join()==='lofts'"))
     check('Jojo is in the loft',pg.evaluate("()=>currentMap.npcs.some(n=>n.name==='Jojo')"))
     check('battle frames loaded',pg.evaluate("()=>JOJO_BT.ready()&&['b_run','b_xstep','b_reach','b_release','b_follow','b_celeb1','b_celeb2','b_high'].every(n=>JOJO_BT.has(n))"))
     # freeze everyone, put Tom next to Jojo, talk

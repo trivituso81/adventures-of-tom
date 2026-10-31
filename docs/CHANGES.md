@@ -1,3 +1,11 @@
+## 2026-10-31 (day, 2): Jojo stays away until chapter 3 (`jojo2`)
+
+- Tom (09:38): Jojo should not be in TNB's loft until after chapter 2, and in chapter 2 she should not be anywhere in the overworld.
+- Fix: Jojo now has `away:[{until:2}]` in the loft spec (`data/maps-la.js`), the same setting Olivia, Michael and Justin use. She is removed from every map through chapter 2 (she only ever stood in the loft, so nowhere else needed a change) and appears in the loft from chapter 3 on. The sync runs every frame outside cutscenes (`syncAwayNpcs` in `data/scenes.js`), so a chapter jump or a load puts her in the right place.
+- Test: `tools/jojo_test.py` now checks chapters 0, 1 and 2 (no Jojo in any map), chapter 3 (in the loft only), then her talk lines and walk views as before. Also checked by real `chapterJump` to 1, 2, 3, 5 and back to 2, and by loft screenshots in chapters 2 and 3.
+- Not changed: her lines, art, and the Round with Jojo battle cameo (a battle move, not the overworld).
+- Tags `maps-la.js?v=jojo2`, `main.js?v=jojo2`, title stamp `build jojo2`.
+
 ## 2026-10-31 (morning, 38): battle cross: ATTACK and HEAL, same-style arrows, bigger names (`cross1`)
 
 - Tom (09:14): the arrows on the battle cross should all look the same, the name and level should be bigger, the top button should say Attack instead of Skills, the right button should say Heal instead of the special's name, and the moves should be sorted to match (specials go in Heal).
