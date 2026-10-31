@@ -1428,7 +1428,9 @@ Tm.seat_1a=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p
   let tuck=3300,end,lie;
   if(LU&&!selfL) { const tx=Math.max(220,LU.x-LU.w*.5-18); K.push({t:2800,f:tx>p.x?'walkR':'walk'},{t:tuck,x:tx,y:LU.base+4,f:'flip',dx:u=>Math.sin(u*Math.PI)*6},{t:tuck+600,f:'flip'},{t:tuck+700,f:me.x>tx?'walkR':'walk'},{t:tuck+1300,x:'home',y:'home',f:'idle'}); lie=tuck+1350; }
   else { K.push({t:2800,f:back(p.x,me)},{t:3600,x:'home',y:'home',f:'idle'}); tuck=3650; lie=3650; }
-  const dy=TH()/2-16; K.push({t:lie,f:'idle',rot:u=>ez(u/.4)*Math.PI/2,dy:u=>ez(u/.4)*dy,dx:u=>-ez(u/.4)*28},{t:lie+1300,f:'idle',rot:u=>(1-ez(u))*Math.PI/2,dy:u=>(1-ez(u))*dy,dx:u=>-(1-ez(u))*28},{t:lie+1650,f:'idle'});
+  // Tom lies down on a real lie-flat pod (same placement as Boarding Group Zero): the pod slides in under him, he rests on the mattress.
+  const lieSc=.72,podP={x:Math.round(Math.max(Gp.x1+70,me.x-80)),y:Math.min(312,me.base+4)},lieBase=podP.y-22+TH()*lieSc/2;
+  const lieK={x:podP.x+8,y:lieBase,f:'idle',rot:Math.PI/2,sc:lieSc,ns:true}; K.push(Object.assign({t:lie},lieK),Object.assign({t:lie+1150},lieK),{t:lie+1300,x:'home',y:'home',f:'idle'},{t:lie+1650,f:'idle'});
   end=lie+1750;
   const st=ST.keys(fx,K),plan={x0,x1,top,bot,d0,slam,shade,open,gone};
   ST.play(E2,[
@@ -1439,8 +1441,8 @@ Tm.seat_1a=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p
     [slam,()=>{ S('thud'); S('bonk'); for(const f of list) ST.jolt(f,.45); landHit(100); scene('t3_big',1.2,{x:Math.min(560,x1+40),y:top+80,txt:'SLAM!',c:CREAM,sc:4}); }],
     [shade,()=>{ S('charge'); setMessage('The privacy door is shut. The shade comes down. Seat 1A.'); }],
     [open,()=>{ S('whoosh'); }],
-    [tuck,()=>{ E2.apply(); S('select'); if(LU) { const H=selfL?me:LU; if(selfL) scene('t3_duvet',(end-tuck)/1000,{H:{x:me.x-28+TH()*.1,w:TH()*.85,h:26,base:me.base},lie:true}); else { scene('t3_duvet',1.8,{H:LU}); scene('t3_text',1.3,{x:LU.x,y:LU.top-22,txt:'TUCKED IN',c:'#c8d8ff',sc:2}); } } setMessage(L?(selfL?'He tucks himself in. Duvet. Lie flat.':'He tucks '+L.name+' in under a plush duvet. Guarded.'):'Lights down.'); }],
-    [lie,()=>{ S('select'); scene('t3_mask',1.3,{st,lie:true}); scene('t3_text',1.2,{x:me.x,y:me.top-30,txt:'LIE FLAT',c:'#c8d8ff',sc:2}); }],
+    [tuck,()=>{ E2.apply(); S('select'); if(LU) { const H=selfL?me:LU; if(selfL) { /* the pod's own bedding is the duvet */ } else { scene('t3_duvet',1.8,{H:LU}); scene('t3_text',1.3,{x:LU.x,y:LU.top-22,txt:'TUCKED IN',c:'#c8d8ff',sc:2}); } } setMessage(L?(selfL?'He tucks himself in. Duvet. Lie flat.':'He tucks '+L.name+' in under a plush duvet. Guarded.'):'Lights down.'); }],
+    [lie,()=>{ S('select'); scene('tm_pod',(end-lie)/1000,{plan:{x:podP.x,y:podP.y,lay:100},back:true}); scene('tm_pod',(end-lie)/1000,{plan:{x:podP.x,y:podP.y,lay:100},front:true}); scene('t3_text',1.2,{x:me.x,y:me.top-30,txt:'LIE FLAT',c:'#c8d8ff',sc:2}); }],
     [end,'end',res(E2)+'Wait your turn, Group 5.']]); };
 
 // ---------- 10-Step Skincare (B3) ----------

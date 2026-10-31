@@ -1,3 +1,7 @@
+## 2026-10-30: Seat 1A: Tom now lies on the lie-flat pod
+
+- At the end of Seat 1A Tom tipped over in mid-air with nothing under him (and the sleep mask landed on the wrong spot). The painted lie-flat pod now slides in beside the party and Tom rests on its mattress, with the sleep mask and Zs, same placement as Boarding Group Zero. When Tom tucks himself in, the pod's own bedding replaces the separate duvet. `tom-moves.js?v=tom9`.
+
 ## 2026-10-30: Beanie Master: louder fart, painted puffs, no repeated line
 
 - Deedee's Beanie Master (`engine/deedee-moves.js`): `sfx.toot` is now a real fart (air "pfft", fast fluttering buzz that sags in pitch, rumbling body, three sputters). Measured peak is about 5x the old toot and above the laser, with no clipping.
