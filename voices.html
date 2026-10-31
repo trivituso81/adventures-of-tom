@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#14122b">
+<title>Voice Library</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#14122b;color:#f4f1ff;font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;position:sticky;top:0;background:#14122b;border-bottom:1px solid #2c2852;z-index:5}
+header h1{font-size:20px;margin:0;flex:1}
+a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
+main{max-width:720px;margin:0 auto;padding:12px 0 120px}
+.pad{padding:0 16px}
+.card{background:#1d1a3d;border:1px solid #2c2852;border-radius:14px;padding:12px 14px}
+label{display:block;font-size:13px;color:#b9b3e6;margin-bottom:6px}
+input[type=password],input[type=search],input[type=number],textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px}
+textarea{min-height:76px;resize:vertical;line-height:1.35}
+button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:#3a3566;color:#fff;font-weight:600;cursor:pointer}
+button:disabled{opacity:.45}
+button.gold{background:#ffd34d;color:#241b00}
+button.purple{background:#7b6cff}
+button.rec{background:#c8414f}
+button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
+button.danger{background:#5a2233}
+.hint{color:#b9b3e6;font-size:13px}.err{color:#ff8b97;font-size:13px}.ok{color:#7be0a6}
+.keyrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.filters{padding:10px 0 8px;border-bottom:1px solid #2c2852}
+.frow{display:flex;gap:6px;overflow-x:auto;padding:4px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.frow::-webkit-scrollbar{display:none}
+.frow .lab{flex:none;font-size:11px;color:#8f88c4;text-transform:uppercase;letter-spacing:1px;align-self:center;width:62px}
+.chip{flex:none;font-size:14px;padding:6px 12px;border-radius:16px;border:1px solid #3a3566;background:#0f0d24;color:#d9d4ff;white-space:nowrap;min-height:34px;font-weight:500}
+.chip.on{background:#7b6cff;border-color:#a89dff;color:#fff}
+.chip .n{font-size:11px;opacity:.7;margin-left:5px}
+.chip.zero{opacity:.4}
+.sum{display:flex;gap:8px;align-items:center;padding:6px 16px 0;font-size:13px;color:#b9b3e6;flex-wrap:wrap}
+.sum b{color:#ffd34d}
+.sum .grow{flex:1}
+.list{margin-top:8px}
+.row{border-bottom:1px solid #2c2852;padding:10px 16px;display:flex;gap:10px;align-items:flex-start}
+.row.open{background:#1a1738}
+.row .pick{width:24px;height:24px;flex:none;margin-top:6px;accent-color:#ffd34d}
+.row .body{flex:1;min-width:0}
+.row .meta{font-size:12px;color:#a9a2dc;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.row .txt{margin-top:2px;overflow-wrap:anywhere;cursor:pointer}
+.tag{font-size:11px;padding:1px 7px;border-radius:9px;border:1px solid #3a3566;color:#b9b3e6}
+.tag.phone{color:#ffd34d;border-color:#8f7637}
+.tag.none{color:#ff8b97;border-color:#7a3a44}
+.play{flex:none;width:44px;height:44px;border-radius:50%;background:#3a3566;font-size:15px;padding:0;min-height:0}
+.play.on{background:#ffd34d;color:#241b00}
+.edit{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.takes{display:flex;flex-direction:column;gap:6px}
+.take{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid #3a3566;border-radius:10px;background:#0f0d24}
+.take.use{border-color:#ffd34d;box-shadow:inset 0 0 0 1px #ffd34d}
+.take .lbl{flex:1;font-size:13px;color:#d9d4ff}
+.take .play{width:36px;height:36px;font-size:12px}
+.x{background:none;color:#8f88c4;min-height:0;padding:4px 8px;font-size:16px}
+.fxnote{font-size:12px;color:#ffcf7a}
+.more{display:block;margin:14px auto;width:calc(100% - 32px)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:nowrap;z-index:6}
+.bar .grow{flex:1}
+.bar .msg{width:100%;font-size:13px;color:#b9b3e6}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.tools button{flex:1 1 150px}
+.empty{padding:30px 16px;text-align:center;color:#8f88c4}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;animation:blink 1s infinite;margin-right:6px}
+@keyframes blink{50%{opacity:.2}}
+</style>
+</head>
+<body>
+<header><a class="back" href="index.html">&#8249; Game</a><h1>Voice Library</h1></header>
+<main>
+  <div class="pad"><section id="keybox" class="card"></section></div>
+  <div class="filters" id="filters">
+    <div class="pad"><input type="search" id="q" placeholder="Search words, characters, moves" autocomplete="off"></div>
+    <div class="frow" id="fWho"></div>
+    <div class="frow" id="fType"></div>
+    <div class="frow" id="fChap"></div>
+    <div class="frow" id="fShow"></div>
+    <div class="sum"><span id="count"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small" id="selmode">Select</button></div>
+  </div>
+  <div class="list" id="list"><div class="empty">Loading every voice line...</div></div>
+  <div class="pad">
+    <p class="hint" id="howto"></p>
+    <div class="tools">
+      <button class="small" id="exp">Export phone clips</button>
+      <button class="small danger" id="clr">Remove all phone clips</button>
+    </div>
+    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export sends them to Claude to build into the game for good.</p>
+  </div>
+</main>
+<div class="bar" id="bar" hidden></div>
+<script>
+'use strict';
+// voices.html: the Voice Library. Browse every spoken line in the game (data/voice-index.json, built by
+// tools/voice-library/make-index.js), hear the clip the game plays now, and re-record any line: a new ElevenLabs take from
+// an editable direction, or Tom's own read turned into the character's voice (speech to speech). The take Tom picks is kept
+// in this browser's IndexedDB 'aot-local-clips' (same store and row shape as bake.html), which engine/local-clips.js loads
+// at startup, so the game plays it on this phone right away. All takes are kept in 'aot-voice-library' so he can switch back.
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEYNAME='aot-el-key';
+const apiKey=()=>{try{return localStorage.getItem(KEYNAME)||'';}catch(e){return '';}};
+const PAGE=50;
+let IDX=null, WHO={}, shown=PAGE, openKey=null, selMode=false, BULK=null, playing=null;
+const SEL=new Set();
+const BUSY={}, ERR={}, REC={};
+// Filters: empty Set = every value. Groups combine with AND, chips in a group with OR.
+const F={who:new Set(),type:new Set(),ch:new Set(),show:'all',q:''};
+try{ const s=JSON.parse(localStorage.getItem('aot-vl-filters')||'null'); if(s){ F.who=new Set(s.who||[]); F.type=new Set(s.type||[]); F.ch=new Set(s.ch||[]); F.show=s.show||'all'; F.q=s.q||''; } }catch(e){}
+function saveF(){ try{ localStorage.setItem('aot-vl-filters',JSON.stringify({who:[...F.who],type:[...F.type],ch:[...F.ch],show:F.show,q:F.q})); }catch(e){} }
+let SCRIPTS={}; try{ SCRIPTS=JSON.parse(localStorage.getItem('aot-vl-scripts')||'{}')||{}; }catch(e){}
+const saveScripts=()=>{ try{ localStorage.setItem('aot-vl-scripts',JSON.stringify(SCRIPTS)); }catch(e){} };
+
+// ---------- lines ----------
+// Stable key for a line (the index position can change between builds).
+const lk=it=>(it.t==='b'?'b|':'d|')+it.v+'|'+it.x;
+const kinds=it=>it.t==='b'?it.k:[''];
+const rowId=(it,k)=>[it.t==='b'?'battle':'dialog',it.v,k,it.x].join('|');   // bake.html clipId
+const isDog=it=>it.v==='nara'&&it.t==='b';
+const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(isDog(it)?it.p:it.s);
+const voiceOf=it=>IDX.voices[(it.t==='b'?'battle|':'dialog|')+it.v];
+const whoName=it=>it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;
+function finalText(it){
+  const v=voiceOf(it)||{}, d=(v.direction||'').trim().replace(/^\[|\]$/g,'');
+  const sc=scriptOf(it).trim().replace(/’/g,"'"), m=sc.match(/^\[([^\]]*)\]/), have=m?m[1]:'';
+  if(!d||have.toLowerCase().includes(d.toLowerCase())) return sc;
+  if(m) return '['+[d].concat(have.trim()?[have.trim()]:[]).join(', ')+']'+sc.slice(m[0].length);
+  return '['+d+'] '+sc;
+}
+
+// ---------- storage ----------
+function idb(name,store){return new Promise(res=>{try{const r=indexedDB.open(name,1);r.onupgradeneeded=()=>{try{r.result.createObjectStore(store,{keyPath:'id'});}catch(e){}};r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);}catch(e){res(null);}});}
+const all=(db,st)=>new Promise(res=>{if(!db)return res([]);try{const q=db.transaction(st).objectStore(st).getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>res([]);}catch(e){res([]);}});
+const tx=(db,st,fn)=>new Promise((res,rej)=>{if(!db)return rej(new Error('This browser would not let me save clips.'));try{const t=db.transaction(st,'readwrite');fn(t.objectStore(st));t.oncomplete=()=>res();t.onerror=()=>rej(t.error||new Error('Save failed'));t.onabort=()=>rej(t.error||new Error('Save failed'));}catch(e){rej(e);}});
+let LDB=null, TDB=null;
+const LOCAL=new Map();   // aot-local-clips rows by id
+const TAKES=new Map();   // take id -> {id,line,mp3,label,script,t}
+const takesFor=key=>[...TAKES.values()].filter(t=>t.line===key).sort((a,b)=>a.t-b.t);
+const localFor=it=>LOCAL.get(rowId(it,kinds(it)[0]));
+async function useTake(it,take){
+  const rows=kinds(it).map(k=>({id:rowId(it,k),kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3:take.mp3,script:take.script,takeId:take.id,t:Date.now()}));
+  await tx(LDB,'clips',s=>rows.forEach(r=>s.put(r))); rows.forEach(r=>LOCAL.set(r.id,r));
+}
+async function useBuiltIn(it){
+  const ids=kinds(it).map(k=>rowId(it,k));
+  await tx(LDB,'clips',s=>ids.forEach(id=>s.delete(id))); ids.forEach(id=>LOCAL.delete(id));
+}
+async function addTake(it,mp3,label,script){
+  const t={id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),line:lk(it),mp3,label,script,t:Date.now()};
+  await tx(TDB,'takes',s=>s.put(t)); TAKES.set(t.id,t); await useTake(it,t); return t;
+}
+async function delTake(id){ await tx(TDB,'takes',s=>s.delete(id)); TAKES.delete(id); }
+
+// ---------- the clip the game plays now ----------
+// Clip files are plain scripts that fill VOICE_CLIPS / DIALOG_CLIPS. Each is loaded once, on first play, into its own table.
+// VOICE_CLIPS is declared by data/voice-clips.js (const, loaded on first battle play); DIALOG_CLIPS is ours.
+const DIALOG_CLIPS={clips:{},voices:{}};
+const FILE={}; let loadQ=Promise.resolve();
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=()=>rej(new Error('Could not load '+src));document.head.appendChild(s);});}
+function loadFile(f){
+  if(FILE[f]) return FILE[f];
+  return FILE[f]=loadQ=loadQ.catch(()=>{}).then(async()=>{
+    if(/dialog-ch/.test(f)){ const keep=DIALOG_CLIPS.clips; DIALOG_CLIPS.clips={}; try{ await loadScript(f); return DIALOG_CLIPS.clips; } finally { const got=DIALOG_CLIPS.clips; DIALOG_CLIPS.clips=keep; FILE[f]=Promise.resolve(got); } }
+    if(typeof VOICE_CLIPS==='undefined') await loadScript('data/voice-clips.js');
+    if(f!=='data/voice-clips.js') await loadScript(f);
+    return VOICE_CLIPS.clips;
+  });
+}
+async function builtIn(it){
+  if(it.f<0) return null;
+  const tab=await loadFile(IDX.files[it.f]);
+  if(it.t==='d') return tab[it.v+'|'+it.x]||null;
+  const c=tab[it.v]||{}; for(const k in c) for(const x of c[k]||[]) if(x&&x.text===it.x&&x.mp3) return x.mp3;
+  return null;
+}
+function stopPlay(){ if(playing){ try{playing.a.pause();}catch(e){} playing.btn&&playing.btn.classList.remove('on'); playing=null; } }
+function playB64(b64,btn){
+  const same=playing&&playing.btn===btn; stopPlay(); if(same||!b64) return;
+  const a=new Audio('data:audio/mpeg;base64,'+b64); playing={a,btn}; btn&&btn.classList.add('on');
+  a.onended=()=>{ if(playing&&playing.a===a){ btn&&btn.classList.remove('on'); playing=null; } };
+  a.play().catch(()=>{ btn&&btn.classList.remove('on'); toast('Could not play that. Turn the ring switch on and try again.'); });
+}
+async function playNow(it,btn){
+  const loc=localFor(it);
+  if(loc) return playB64(loc.mp3,btn);
+  btn.textContent='...';
+  try{ const b=await builtIn(it); btn.innerHTML='&#9654;'; if(!b) return toast('This line has no clip yet.'); playB64(b,btn); }
+  catch(e){ btn.innerHTML='&#9654;'; toast(e.message||String(e)); }
+}
+
+// ---------- ElevenLabs ----------
+function b64(buf){const u=new Uint8Array(buf);let s='';for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);}
+async function apiErr(r){let t='';try{t=await r.text();const j=JSON.parse(t);const d=j.detail;if(d&&typeof d==='object'&&!Array.isArray(d))t=d.message||d.status||JSON.stringify(d);else if(Array.isArray(d))t=d.map(x=>x.msg).join('; ');else if(d)t=String(d);}catch(e){}
+  const code=r.status;const hint=code===401?' (the API key was not accepted)':code===402||code===403?' (check the ElevenLabs plan and credits)':'';
+  return new Error('ElevenLabs '+code+hint+': '+String(t).slice(0,160));}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const retry=async(fn,tries=4)=>{for(let k=0;;k++){try{return await fn();}catch(e){const m=e&&e.message||String(e);if(k<tries-1&&/ 429| 409|too many|concurrent|in progress/i.test(m)){await wait(2500*(k+1));continue;}throw e;}}};
+async function tts(v,text){
+  const url='https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(v.voice_id)+'?output_format=mp3_44100_128';
+  const body={text,model_id:v.model||'eleven_v4',voice_settings:{stability:+v.stability,similarity_boost:+v.similarity},seed:Math.floor(Math.random()*4294967295)};
+  const send=()=>fetch(url,{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)});
+  let r=await send();
+  if(!r.ok&&(r.status===400||r.status===422)){const e=await apiErr(r);if(/seed/i.test(e.message)){delete body.seed;r=await send();}else throw e;}
+  if(!r.ok) throw await apiErr(r);
+  return b64(await r.arrayBuffer());
+}
+async function sfxGen(prompt,secs,influence){
+  const r=await fetch('https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},
+    body:JSON.stringify({text:prompt,duration_seconds:+secs,prompt_influence:+influence,model_id:'eleven_text_to_sound_v2'})});
+  if(!r.ok) throw await apiErr(r); return b64(await r.arrayBuffer());
+}
+async function sts(v,blob){
+  const f=new FormData();
+  f.append('audio',blob,'take.'+(blob.type.includes('mp4')?'mp4':blob.type.includes('ogg')?'ogg':'webm'));
+  f.append('model_id','eleven_english_sts_v2');
+  f.append('voice_settings',JSON.stringify({stability:+v.stability,similarity_boost:+v.similarity}));
+  f.append('remove_background_noise','true');
+  const r=await fetch('https://api.elevenlabs.io/v1/speech-to-speech/'+encodeURIComponent(v.voice_id)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey()},body:f});
+  if(!r.ok) throw await apiErr(r); return b64(await r.arrayBuffer());
+}
+// A take far longer than the words need usually means the voice looped: try again (best of three).
+function expectedSec(text){const w=text.replace(/\[[^\]]*\]/g,' ').split(/\s+/).filter(Boolean).length,s=(text.match(/[.!?]+/g)||[]).length||1;return 0.42*w+0.2*s;}
+const mp3Sec=b=>Math.round(b.length*0.75*8/128000*10)/10;
+async function newTake(it){
+  const key=lk(it); if(BUSY[key]) return false;
+  if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); return false; }
+  const v=voiceOf(it); if(!v||!v.voice_id){ ERR[key]='This voice has no ElevenLabs voice ID.'; repaint(it); return false; }
+  delete ERR[key]; BUSY[key]='Making a take...'; repaint(it);
+  let ok=false;
+  try{
+    if(isDog(it)){ const d=dogOf(it); const mp3=await retry(()=>sfxGen(scriptOf(it),d,v.prompt_influence||.5)); await addTake(it,mp3,'new take',scriptOf(it)); }
+    else { const sent=finalText(it); let best=null;
+      for(let k=0;k<3;k++){ const mp3=await retry(()=>tts(v,sent)); const sec=mp3Sec(mp3); if(!best||sec<best.sec) best={mp3,sec}; if(sec<=expectedSec(sent)*1.45+0.8) break; }
+      await addTake(it,best.mp3,'new take',sent); }
+    ok=true;
+  }catch(e){ ERR[key]=e.message||String(e); }
+  delete BUSY[key]; repaint(it); renderSum(); return ok;
+}
+let DOGLEN={}; try{ DOGLEN=JSON.parse(localStorage.getItem('aot-vl-doglen')||'{}')||{}; }catch(e){}
+const dogOf=it=>DOGLEN[lk(it)]||it.d||2;
+async function startRec(it){
+  const key=lk(it); stopPlay();
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:true}});
+    const mr=new MediaRecorder(stream), chunks=[];
+    mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+    mr.onstop=async()=>{ stream.getTracks().forEach(t=>t.stop()); const blob=new Blob(chunks,{type:mr.mimeType||'audio/mp4'}); delete REC[key];
+      if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); repaint(it); return; }
+      BUSY[key]='Turning your read into '+whoName(it)+'’s voice...'; repaint(it);
+      try{ const mp3=await retry(()=>sts(voiceOf(it),blob)); await addTake(it,mp3,'my read','(recording)'); delete ERR[key]; }
+      catch(e){ ERR[key]=e.message||String(e); }
+      delete BUSY[key]; repaint(it); renderSum(); };
+    REC[key]=mr; mr.start(); delete ERR[key]; repaint(it);
+  }catch(e){ ERR[key]='The microphone is not available: '+(e.message||e)+'. Allow the microphone for this app and try again.'; repaint(it); }
+}
+
+// ---------- filters ----------
+function passWho(it,s){ s=s||F.who; return !s.size||s.has(it.v); }
+function passType(it,s){ s=s||F.type; return !s.size||s.has(it.ty); }
+function passCh(it,s){ s=s||F.ch; if(!s.size) return true; return it.c.length?it.c.some(n=>s.has(n)):s.has(0); }
+function passShow(it){ if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it); return true; }
+function passQ(it){ const q=F.q.trim().toLowerCase(); if(!q) return true;
+  return it.x.toLowerCase().includes(q)||whoName(it).toLowerCase().includes(q)||(it.w||'').toLowerCase().includes(q)||(it.t==='b'&&it.k.join(' ').includes(q)); }
+function visible(skip){ return IDX.items.filter(it=>passQ(it)&&passShow(it)&&(skip==='who'||passWho(it))&&(skip==='type'||passType(it))&&(skip==='ch'||passCh(it))); }
+function chip(g,v,label,on,n){ return '<button class="chip'+(on?' on':'')+(n===0&&!on?' zero':'')+'" data-g="'+g+'" data-v="'+esc(v)+'">'+esc(label)+(n!=null?'<span class="n">'+n+'</span>':'')+'</button>'; }
+function renderFilters(){
+  const vw=visible('who'), vt=visible('type'), vc=visible('ch');
+  const cw={}; vw.forEach(it=>cw[it.v]=(cw[it.v]||0)+1);
+  $('fWho').innerHTML='<span class="lab">Who</span>'+chip('who','*','Everyone',!F.who.size,vw.length)+IDX.who.map(w=>chip('who',w.id,w.name,F.who.has(w.id),cw[w.id]||0)).join('');
+  $('fType').innerHTML='<span class="lab">Type</span>'+chip('type','*','Both',!F.type.size,vt.length)+chip('type','b','Battle',F.type.has('b'),vt.filter(i=>i.ty==='b').length)+chip('type','d','Dialogue',F.type.has('d'),vt.filter(i=>i.ty==='d').length);
+  const cc={}; vc.forEach(it=>(it.c.length?it.c:[0]).forEach(n=>cc[n]=(cc[n]||0)+1));
+  const chs=IDX.chapters.filter(c=>IDX.items.some(it=>it.c.includes(c.n)));
+  $('fChap').innerHTML='<span class="lab">Chapter</span>'+chip('ch','*','All',!F.ch.size,vc.length)+chs.map(c=>chip('ch',c.n,(c.n===21?'Bonus':'Ch '+c.n),F.ch.has(c.n),cc[c.n]||0)).join('')+chip('ch','0','No chapter',F.ch.has(0),cc[0]||0);
+  const p=IDX.items.filter(it=>localFor(it)).length;
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All clips',F.show==='all')+chip('show','phone','Re-recorded on this phone',F.show==='phone',p)+chip('show','builtin','Not re-recorded',F.show==='builtin');
+}
+function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(F.show!=='all'?1:0)+(F.q.trim()?1:0); }
+function renderSum(){
+  const v=visible().length, n=nFilters();
+  $('count').innerHTML='<b>'+v.toLocaleString()+'</b> line'+(v===1?'':'s')+(n?' · '+n+' filter'+(n>1?'s':''):' · every line in the game');
+  $('clear').disabled=!n; $('selmode').textContent=selMode?'Done':'Select';
+  renderBar();
+}
+function toggle(g,v){
+  if(g==='show'){ F.show=v; }
+  else { const s=F[g]; if(v==='*') s.clear(); else { const val=g==='ch'?+v:v; s.has(val)?s.delete(val):s.add(val); } }
+  saveF(); shown=PAGE; renderAll();
+}
+
+// ---------- list ----------
+function rowHtml(it){
+  const key=lk(it), open=openKey===key, loc=localFor(it), dog=isDog(it);
+  let h='<div class="row'+(open?' open':'')+'" data-k="'+esc(key)+'">';
+  if(selMode) h+='<input type="checkbox" class="pick" data-act="sel"'+(SEL.has(key)?' checked':'')+'>';
+  h+='<div class="body"><div class="meta"><b>'+esc(whoName(it))+'</b>'+(it.t==='b'?'<span class="tag">'+esc(it.k[0])+(it.k.length>1?' +'+(it.k.length-1):'')+'</span>':'')+
+     (it.c.length?'<span class="tag">'+it.c.map(n=>n===21?'Bonus':'Ch '+n).join(', ')+'</span>':'')+(it.w&&it.t==='d'?'<span>'+esc(it.w)+'</span>':'')+
+     (loc?'<span class="tag phone">phone take</span>':'')+(it.f<0&&!loc?'<span class="tag none">no clip</span>':'')+'</div>';
+  h+='<div class="txt" data-act="open">'+esc(it.x)+'</div>';
+  if(open){
+    h+='<div class="edit">';
+    if(dog) h+='<label>Sound description (ElevenLabs Sound Effects)</label><textarea data-act="script">'+esc(scriptOf(it))+'</textarea><label>Seconds</label><input type="number" min="0.5" max="22" step="0.1" value="'+dogOf(it)+'" data-act="doglen" style="width:110px">';
+    else h+='<label>Direction and words ElevenLabs reads'+(it.auto?' (no written direction on file yet; edit the brackets)':'')+'</label><textarea data-act="script">'+esc(scriptOf(it))+'</textarea>'+
+      '<div class="hint">Put directions in [brackets] before the words they change. CAPS for emphasis. "Tah Tah" for Ta-ta. Change only the brackets, not the words, or the game will not match it.</div>';
+    if(SCRIPTS[key]!=null) h+='<div><button class="small" data-act="resetscript">Back to the written direction</button></div>';
+    if(it.fx) h+='<div class="fxnote">This voice gets a sound effect (pitch or creature filter) when Claude builds it into the game. On the phone it plays without it.</div>';
+    h+='<div class="acts">';
+    h+='<button class="purple" data-act="take"'+(BUSY[key]?' disabled':'')+'>New take</button>';
+    if(!dog) h+=REC[key]?'<button class="rec" data-act="stoprec"><span class="dot"></span>Stop recording</button>':'<button data-act="rec"'+(BUSY[key]?' disabled':'')+'>&#127908; Record my voice</button>';
+    h+='</div>';
+    if(BUSY[key]) h+='<div class="hint">'+esc(BUSY[key])+'</div>';
+    if(ERR[key]) h+='<div class="err">'+esc(ERR[key])+'</div>';
+    const takes=takesFor(key), useId=loc&&loc.takeId;
+    h+='<div class="takes">';
+    if(it.f>=0) h+='<div class="take'+(!loc?' use':'')+'"><button class="play" data-act="playbuiltin">&#9654;</button><span class="lbl">Built into the game'+(!loc?' · playing in the game':'')+'</span>'+(loc?'<button class="small" data-act="usebuiltin">Use</button>':'')+'</div>';
+    if(loc&&!takes.some(t=>t.id===useId)) h+='<div class="take use"><button class="play" data-act="playlocal">&#9654;</button><span class="lbl">Phone clip from the Bake page · playing in the game</span></div>';
+    takes.forEach((t,i)=>{ const u=t.id===useId;
+      h+='<div class="take'+(u?' use':'')+'"><button class="play" data-act="playtake" data-id="'+t.id+'">&#9654;</button><span class="lbl">Take '+(i+1)+' · '+esc(t.label)+(u?' · playing in the game':'')+'</span>'+
+         (u?'':'<button class="small" data-act="usetake" data-id="'+t.id+'">Use</button>')+'<button class="x" data-act="deltake" data-id="'+t.id+'" aria-label="Delete take">&#10005;</button></div>'; });
+    h+='</div></div>';
+  }
+  h+='</div><button class="play" data-act="play" aria-label="Play">&#9654;</button></div>';
+  return h;
+}
+let CUR=[];
+function renderList(){
+  CUR=visible();
+  if(!CUR.length){ $('list').innerHTML='<div class="empty">No lines match. Try Clear filters.</div>'; return; }
+  $('list').innerHTML=CUR.slice(0,shown).map(rowHtml).join('')+(CUR.length>shown?'<button class="more" data-act="more">Show more ('+(CUR.length-shown).toLocaleString()+' left)</button>':'');
+}
+function itemByKey(k){ return IDX.items.find(it=>lk(it)===k); }
+function repaint(it){ const el=document.querySelector('.row[data-k="'+CSS.escape(lk(it))+'"]'); if(el){ const d=document.createElement('div'); d.innerHTML=rowHtml(it); el.replaceWith(d.firstChild); } }
+function renderAll(){ renderFilters(); renderSum(); renderList(); }
+function renderBar(){
+  const bar=$('bar');
+  if(!selMode&&!BULK){ bar.hidden=true; return; }
+  bar.hidden=false;
+  if(BULK){ bar.innerHTML='<span class="grow">'+BULK.done+' of '+BULK.total+' done'+(BULK.fail?' · '+BULK.fail+' failed':'')+'</span><button class="danger" data-act="stopbulk">Stop</button>'; return; }
+  bar.innerHTML='<button class="small" data-act="selall">All '+visible().length.toLocaleString()+'</button><button class="small" data-act="selnone"'+(SEL.size?'':' disabled')+'>None</button><span class="grow"></span>'+
+    '<button class="gold small" data-act="bulk"'+(SEL.size?'':' disabled')+'>New take for '+SEL.size+'</button>';
+}
+let toastT=null;
+function toast(m){ let el=$('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.style.cssText='position:fixed;left:16px;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));background:#2c2852;color:#fff;padding:12px 14px;border-radius:12px;z-index:9;font-size:14px'; document.body.appendChild(el); }
+  el.textContent=m; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,4000); }
+
+// ---------- bulk ----------
+async function runBulk(){
+  const list=IDX.items.filter(it=>SEL.has(lk(it)));
+  if(!list.length) return;
+  if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); return; }
+  const chars=list.reduce((n,it)=>n+(isDog(it)?0:finalText(it).length),0);
+  if(!confirm('Make a new take for '+list.length+' line'+(list.length>1?'s':'')+'? About '+chars.toLocaleString()+' characters of ElevenLabs credit. Each new take plays in the game on this phone; the old ones stay here so you can switch back.')) return;
+  let wake=null; try{ if(navigator.wakeLock) wake=await navigator.wakeLock.request('screen'); }catch(e){}
+  BULK={done:0,fail:0,total:list.length,stop:false}; renderBar();
+  let i=0;
+  const worker=async()=>{ while(BULK&&!BULK.stop&&i<list.length){ const it=list[i++]; const ok=await newTake(it); if(!BULK) return; ok?BULK.done++:BULK.fail++; renderBar();
+    if(!ok&&/ 401|API key|credit|quota/i.test(ERR[lk(it)]||'')){ BULK.stop=true; toast(ERR[lk(it)]); } } };
+  await Promise.all([worker(),worker()]);
+  const r=BULK; BULK=null; try{ wake&&wake.release(); }catch(e){}
+  toast(r.stop?'Stopped after '+r.done+'.':'Done: '+r.done+' new take'+(r.done===1?'':'s')+(r.fail?', '+r.fail+' failed (tap a line to see why)':'')+'.');
+  renderAll();
+}
+
+// ---------- key ----------
+function paintKey(){
+  const has=!!apiKey();
+  $('keybox').innerHTML=has
+    ?'<div class="keyrow"><span class="ok" style="flex:1">ElevenLabs key saved on this phone.</span><button class="small" id="chg">Change key</button></div>'
+    :'<label for="key">ElevenLabs API key (saved on this phone only)</label><input id="key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste it here"><div class="keyrow" style="margin-top:8px"><button class="small" id="savekey">Save key</button></div>';
+}
+
+// ---------- events ----------
+document.addEventListener('click',async e=>{
+  const t=e.target.closest('button,[data-act]'); if(!t) return;
+  if(t.id==='savekey'){ const v=($('key').value||'').trim(); if(!v) return toast('Paste the key first.'); try{ localStorage.setItem(KEYNAME,v); }catch(err){ return toast('This browser would not save the key.'); } paintKey(); return; }
+  if(t.id==='chg'){ try{ localStorage.removeItem(KEYNAME); }catch(err){} paintKey(); return; }
+  if(t.id==='clear'){ F.who.clear(); F.type.clear(); F.ch.clear(); F.show='all'; F.q=''; $('q').value=''; saveF(); shown=PAGE; renderAll(); return; }
+  if(t.id==='selmode'){ selMode=!selMode; if(!selMode) SEL.clear(); renderSum(); renderList(); return; }
+  if(t.id==='exp') return exportClips();
+  if(t.id==='clr'){ if(BULK) return; if(confirm('Remove every clip made on this phone (here and on the Bake page)? The game goes back to the voices built into it. Your takes stay in the library.')){ await tx(LDB,'clips',s=>s.clear()).catch(()=>{}); LOCAL.clear(); renderAll(); toast('Removed.'); } return; }
+  if(t.classList.contains('chip')) return toggle(t.dataset.g,t.dataset.v);
+  const act=t.dataset.act;
+  if(act==='more'){ shown+=PAGE*2; renderList(); return; }
+  if(act==='selall'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
+  if(act==='selnone'){ SEL.clear(); renderList(); renderBar(); return; }
+  if(act==='bulk') return runBulk();
+  if(act==='stopbulk'){ if(BULK) BULK.stop=true; t.textContent='Stopping...'; return; }
+  const row=t.closest('.row'); const it=row&&itemByKey(row.dataset.k); if(!it) return;
+  const key=lk(it);
+  if(act==='open'){ if(selMode){ SEL.has(key)?SEL.delete(key):SEL.add(key); repaint(it); renderBar(); return; } const prev=openKey&&itemByKey(openKey); openKey=openKey===key?null:key; if(prev) repaint(prev); if(openKey) repaint(it); return; }
+  if(act==='play') return playNow(it,t);
+  if(act==='playbuiltin'){ t.textContent='...'; try{ const b=await builtIn(it); t.innerHTML='&#9654;'; b?playB64(b,t):toast('No built-in clip.'); }catch(err){ t.innerHTML='&#9654;'; toast(err.message); } return; }
+  if(act==='playlocal'){ const l=localFor(it); if(l) playB64(l.mp3,t); return; }
+  if(act==='playtake'){ const tk=TAKES.get(t.dataset.id); if(tk) playB64(tk.mp3,t); return; }
+  if(act==='usetake'){ const tk=TAKES.get(t.dataset.id); if(tk){ await useTake(it,tk).catch(err=>ERR[key]=err.message); repaint(it); renderFilters(); } return; }
+  if(act==='usebuiltin'){ await useBuiltIn(it).catch(err=>ERR[key]=err.message); repaint(it); renderFilters(); return; }
+  if(act==='deltake'){ const tk=TAKES.get(t.dataset.id); if(!tk) return; const loc=localFor(it); if(loc&&loc.takeId===tk.id) await useBuiltIn(it).catch(()=>{}); await delTake(tk.id).catch(()=>{}); repaint(it); renderFilters(); return; }
+  if(act==='take'){ newTake(it); return; }
+  if(act==='rec'){ startRec(it); return; }
+  if(act==='stoprec'){ const mr=REC[key]; if(mr) mr.stop(); return; }
+  if(act==='resetscript'){ delete SCRIPTS[key]; saveScripts(); repaint(it); return; }
+});
+document.addEventListener('change',e=>{
+  const t=e.target; if(t.dataset.act!=='sel') return;
+  const row=t.closest('.row'); if(!row) return; t.checked?SEL.add(row.dataset.k):SEL.delete(row.dataset.k); renderBar();
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='q'){ F.q=t.value; saveF(); clearTimeout(window.__qT); window.__qT=setTimeout(()=>{ shown=PAGE; renderAll(); },200); return; }
+  const row=t.closest('.row'); const it=row&&itemByKey(row.dataset.k); if(!it) return;
+  if(t.dataset.act==='script'){ SCRIPTS[lk(it)]=t.value; saveScripts(); }
+  if(t.dataset.act==='doglen'){ DOGLEN[lk(it)]=+t.value||2; try{ localStorage.setItem('aot-vl-doglen',JSON.stringify(DOGLEN)); }catch(err){} }
+});
+
+// ---------- export ----------
+async function exportClips(){
+  const rows=[...LOCAL.values()]; if(!rows.length) return toast('No phone clips yet.');
+  const blob=new Blob([JSON.stringify({made:new Date().toISOString(),clips:rows})],{type:'application/json'});
+  const file=new File([blob],'local-clips-export.json',{type:'application/json'});
+  try{ if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'Phone voice clips'}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='local-clips-export.json'; document.body.appendChild(a); a.click(); a.remove();
+}
+
+// ---------- start ----------
+(async()=>{
+  paintKey(); $('q').value=F.q;
+  [LDB,TDB]=await Promise.all([idb('aot-local-clips','clips'),idb('aot-voice-library','takes')]);
+  for(const r of await all(LDB,'clips')) LOCAL.set(r.id,r);
+  for(const t of await all(TDB,'takes')) TAKES.set(t.id,t);
+  try{ const r=await fetch('data/voice-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IDX=await r.json(); }
+  catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
+  IDX.who.forEach(w=>WHO[w.id]=w);
+  $('howto').textContent='Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
+  renderAll();
+  if(window.__VL_READY) window.__VL_READY();
+})();
+window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey};
+</script>
+</body>
+</html>
