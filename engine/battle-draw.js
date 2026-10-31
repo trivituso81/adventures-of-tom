@@ -457,8 +457,11 @@ function startMove(a,dir) {
   a.move={fx:a.x,fy:a.y,tx:x,ty:y,elapsed:0,duration:a.duration*(a.isPlayer?indoorSlow():1)};
   return true;
 }
-// Inside a house or shop Tom walks at half speed (Tom, 2026-10-30): each step takes twice as long. Outside it is unchanged.
-function indoorSlow() { return (typeof currentMap!=='undefined'&&currentMap&&!currentMap.outside)?2:1; }
+// Inside a house or shop Tom walks slower (Tom, 2026-10-30: half speed; 2026-10-31: "a touch faster", so 1.6x the outdoor step
+// time, about 62% speed). Outside it is unchanged. Change INDOOR_STEP_X to tune.
+// 2026-10-31: the overworld (outdoors) is "a touch slower" too: 1.15x, so 0.16 s per step. Change OUTDOOR_STEP_X to tune.
+const INDOOR_STEP_X=1.6,OUTDOOR_STEP_X=1.15;
+function indoorSlow() { return (typeof currentMap!=='undefined'&&currentMap&&!currentMap.outside)?INDOOR_STEP_X:OUTDOOR_STEP_X; }
 
 function advanceMove(a,dt) {
   if(!a.move) return true;

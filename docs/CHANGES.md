@@ -1,3 +1,8 @@
+## 2026-10-31 (night, 26): Indoor walking a touch faster, overworld a touch slower
+
+- Tom (01:13): half speed indoors went too far. Indoor steps are now 1.6x the outdoor step time (0.224 s instead of 0.28 s; outdoors stays 0.14 s). Tune `INDOOR_STEP_X` beside `indoorSlow()` in engine/battle-draw.js. Followers use the same value. Tom (01:13, second message): the overworld a touch slower too: outdoor steps are now 1.15x (0.161 s instead of 0.14 s), `OUTDOOR_STEP_X` beside `INDOOR_STEP_X`. The player's base step time stays .14 in engine/world.js; cutscene walks with their own step time are untouched.
+- Tests: step probe, smoke. Tags `battle-draw.js?v=slow2`, `followers.js?v=slow2`, `main.js?v=slow2`, title stamp `build slow2`.
+
 ## 2026-10-31 (night, 25): one-tap voice baker on the phone (`bake1`)
 
 - Tom asked for a way to bake clips from his iPhone in one click. New `bake.html`: title screen > ADMIN > BAKE VOICES opens it inside the app, he pastes his ElevenLabs key once, taps Bake, and the lines in `data/bake-list.json` are baked with the same call, model and voice settings as the other bakers (direction added, three tries if a take loops). Clips are kept in the phone's IndexedDB (`aot-local-clips`); `engine/local-clips.js` loads them at startup so they play like baked lines (dialogue through `dvClip`, battle through `VOICE_CLIPS` and `say()`). No file to send and no merge.
