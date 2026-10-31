@@ -1613,9 +1613,9 @@ if(!sfx.pew) sfx.pew=(d=0)=>{ tone({type:'square',f0:2200,f1:700,dur:.09,vol:.08
 const head=(st,dy=0)=>({x:st.x,y:st.y-GH()*(st.sc||1)*.84+dy});
 SC.gx_big=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-34); x=p.x; y=p.y; }
   const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
-  x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+8,y);
+  x=Math.max(w*.65+8,Math.min(568-w*.65,x)); y=Math.max(sc*5+8,y);
   gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||PINK,sc); gfx.restore(); };
-SC.gx_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
+SC.gx_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } const w=(s.txt.length*4-1)*(s.sc||2); x=Math.max(w/2+6,Math.min(570-w/2,x)); label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 // A painted prop flying along an arc from a point near the actor (or a fixed point) to a target, spinning a little, fading at the end.
 SC.gx_fly=(s,u)=>{ const e=s.ease==='lin'?u:ez(u),x0=s.st&&s.st.x!=null&&s.ax!=null?s.st.x+s.ax:s.x0,y0=s.st&&s.st.y!=null&&s.ay!=null?s.st.y+s.ay:s.y0;
   if(s.fix==null&&s.st) { s.fix=[x0,y0]; } const fx0=s.fix?s.fix[0]:x0,fy0=s.fix?s.fix[1]:y0;
@@ -1632,12 +1632,12 @@ SC.gx_screech=(s,u)=>{ const P=s.plan,q=ez(u/.25),a=fade(u,.6); gfx.globalAlpha=
   for(const F of P.F) { const t1=u*s.dur*1000-F.d; if(t1<0) continue; const g=ez(t1/260),w=Math.sin(t1/70)*3; gfx.globalAlpha=a*Math.min(1,g*1.2);
     if(!prop('ear_rings',F.x+w,F.top+F.h*.18,{w:Math.max(44,F.w*.7)*(.7+.4*g),rot:t1/900})) { for(let r=1;r<=3;r++) { gfx.strokeStyle=GOLD; gfx.lineWidth=2; gfx.beginPath(); gfx.ellipse(F.x,F.top+F.h*.2,r*10*g,r*7*g,0,0,Math.PI*2); gfx.stroke(); } } }
   gfx.globalAlpha=1; };
-G.open_strings=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,72),U=list.map(f=>ST.unit(f));
-  const T={in:700,tuck:1050,breath:1400,stroke:1750,wince:2000,saw1:2250,saw2:2500,saw3:2750,saw4:3000,screech:3250,slip:3750,push:3980,finish:4250,listen:4520,shrug:4820,lessons:5100,bow:5520,proud:5850,back:6120,home:6800};   // after the screech the tail runs quick (Tom 22:35)
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'os_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'os_tuck'},{t:T.breath,f:'os_breath',sc:1.04},{t:T.stroke,f:'os_stroke'},{t:T.wince,f:'os_wince'},
+G.open_strings=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p={x:Math.max(Gp.x1+60,me.x-64),y:me.base},U=list.map(f=>ST.unit(f));   // a small step forward from her own spot (Tom 10/31), not a walk across the stage
+  const T={in:450,tuck:800,breath:1150,stroke:1500,wince:1750,saw1:2000,saw2:2250,saw3:2500,saw4:2750,screech:3000,slip:3500,push:3730,finish:4000,listen:4270,shrug:4570,lessons:4850,bow:5270,proud:5600,back:5870,home:6250};   // after the screech the tail runs quick (Tom 22:35)
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'os_arrive',hop:3,hn:2},{t:T.in,x:p.x,y:p.y,f:'os_tuck'},{t:T.breath,f:'os_breath',sc:1.04},{t:T.stroke,f:'os_stroke'},{t:T.wince,f:'os_wince'},
     {t:T.saw1,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*2},{t:T.saw2,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*2},{t:T.saw3,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*3},{t:T.saw4,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*3},
     {t:T.screech,f:'os_screech',dx:(u,tt)=>Math.sin(tt*60)*2,sc:1.06},{t:T.slip,f:'os_slip'},{t:T.push,f:'os_push',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:T.finish,f:'os_finish',hop:8},{t:T.listen,f:'os_listen'},
-    {t:T.shrug,f:'os_shrug'},{t:T.lessons,f:'os_lessons'},{t:T.bow,f:'os_bow'},{t:T.proud,f:'os_proud'},{t:T.back,f:'os_arriveR',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
+    {t:T.shrug,f:'os_shrug'},{t:T.lessons,f:'os_lessons'},{t:T.bow,f:'os_bow'},{t:T.proud,f:'os_proud'},{t:T.back,f:'os_arriveR',hop:3,hn:2},{t:T.home,x:'home',y:'home',f:'idle'}]);
   const note=(id,k,at,dur=.75)=>{ const tx=Gp.x0+rnd(k,1)*Math.max(40,Gp.w),ty=Gp.top-10+rnd(k,2)*(Gp.base-Gp.top)*.7; fly(id,st,-30,-GH()*.62,tx,ty,dur,{arc:24+rnd(k,3)*30,spin:(rnd(k,4)-.5)*3,h:26+rnd(k,5)*10,rot0:(rnd(k,6)-.5)*.6}); };
   const plan={x:Gp.x1-4,y:Gp.top+(Gp.base-Gp.top)*.45,w:Math.max(80,Math.min(140,Gp.w*.8)),F:U.map((q,k)=>({x:q.x,top:q.top,h:q.h,w:q.w,d:k*70}))};
   ST.play(E2,[

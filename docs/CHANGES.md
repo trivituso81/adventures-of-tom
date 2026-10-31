@@ -1,3 +1,6 @@
+## 2026-10-31 (morning): Open Strings: a small step forward, not a walk across
+
+- Tom (09:10): she only needs to step forward a little. Grace now steps about 64 px left of her own spot (never past the row), plays there, and steps back; the walk-in and walk-home are short (timeline 6.25 s, was 6.8 s). Words over her head (gx_text, gx_big) are clamped inside the stage so they are not cut at the right edge. Tag `?v=gx3` on grace-moves.js. Tests: kit_test grace open_strings (frames looked at).
 ## 2026-10-31 (night, 36): the Old Oak repainted, with a walk map that follows it
 
 - Tom judged the old Old Oak too hard to navigate (paths off the painting, the "corkboard" on the table, two baskets and no bucket, nothing marking the key spots) and repainted it (his own prompt, third try). New painting installed as `art/oak.webp` (1374 x 1145 scaled to 1536 x 1280, still 24 x 20 tiles).
