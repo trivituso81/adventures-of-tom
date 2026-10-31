@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 10): Amy's 36 re-recorded battle clips are merged (`amyv1`)
+
+- Tom (13:39) sent `local-clips-export_3.json` (68 clips). 28 were already in the repo (the `clips1` dialogue and battle takes and the 4 Ymamot clips) and were skipped. The 40 Amy battle entries are 36 new takes made in the Voice Library between 13:18 and 13:39 (burpee, redpen and pep aliases share one take each), all with "heavy Long Island accent" directions. Merged with `tools/battle-baker/merge.js` into `data/voice/amy.js`; her bake scripts went into the voice settings (`data/voice-clips.js`). Her greet, join, quiz and praise clips are unchanged (not in the export).
+- Five of the new takes say different words from the old on-screen line, so `data/lines.js` now shows what Amy says: hills "Up the hill, down the hill!" (was slime), marathon "Straight through the finish line!" (was slime), marathon_ult "Twenty-six point two miles complete! Sprint to the finish!" (was Right on Hereford, left on Boylston), hurt "Ow! Okay. I'm okay." (Deep breath dropped), tombo2 "Ketchup, pickles, chocolate. It's a Ymamot Creation!" (was cereal, one sock). The five old clips were removed. Every Amy line has a clip.
+- Voice Library index rebuilt (`battle-scripts.json`, `harvest.json`, `data/voice-index.json`). `pending.json` unchanged (grace.ymamot still waiting).
+- Tags `?v=amyv1` on lines.js, voice-clips.js, voice/amy.js, main.js; stamp `build amyv1`.
+
 ## 2026-10-31 (day, 9): Voice Library loads the directions the baked clips were made with (`vlib5`)
 
 - Tom (13:24): most dialogue boxes lacked the emotive [annotations] the baked clips used; he wants to bulk-remake with them. New gold button on the key card, "Load the directions used for the baked clips": reads his ElevenLabs history (text only), matches each request to a line by voice and words (contraction and number tolerant), and puts that script in the line's box, rebuilt on the line's current words (tags and CAPS kept, old wording never). His own edits still win. Then Select all shown and Regenerate remakes them with those directions.
