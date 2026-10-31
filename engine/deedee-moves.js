@@ -1894,26 +1894,26 @@ const RB=['#ff6a6a','#ffb04a','#ffe85a','#7ae07a','#5ac8ff','#7a7aff','#c07aff']
 SC.df_hose=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-8,y=h.y-2,P=s.P,t=s.t; gfx.globalAlpha=fade(u,.96);
   gfx.lineCap='round'; for(const [w,c] of [[9,OUT],[5,'#4f9a4a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(x+10,y+2); gfx.quadraticCurveTo(x+60,P.fl+30,600,P.fl-10); gfx.stroke(); }
   if(!PROPART.draw('deedee/garden_hose',x-2,y+6,{h:40,flip:true})) { RO(x-12,y-8,26,14,'#5fa05a'); RO(x-26,y-5,14,8,'#9aa3c8'); R(x-10,y-6,3,10,'#8ee08a'); }   // painted coiled hose with brass nozzle and GENTLE tag
-  if(ms>P.s0&&ms<P.s1) { const q=(ms-P.s0)/(P.s1-P.s0),tx=lerp(P.x1+20,P.x0-20,q),ty=P.yl,sx=x-28,sy=y-2,N=9,env=Math.min(1,(ms-P.s0)/150,(P.s1-ms)/200);
-    // soft nozzle mist
-    gfx.globalAlpha=.4*env; E(sx-2,sy,7,5,'#e8f6ff');
-    const pts=[];
-    for(let k=0;k<N;k++) { const f=(k-(N-1)/2),tk={x:tx+f*13,y:ty+((k*37)%5-2)*7},mx=(sx+tk.x)/2+f*7,my=Math.min(sy,tk.y)-52-Math.abs(f)*4;
-      // translucent arcing stream under the droplets
-      for(const [w,c,a] of [[8,'#7cc0f4',.25],[4,'#e6f7ff',.35]]) { gfx.globalAlpha=a*env; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(sx,sy); gfx.quadraticCurveTo(mx,my,tk.x,tk.y); gfx.stroke(); }
-      for(let j=0;j<9;j++) { const v=((t*1.9+j/9+k*.13)%1),ix=(1-v)*(1-v)*sx+2*(1-v)*v*mx+v*v*tk.x,iy=(1-v)*(1-v)*sy+2*(1-v)*v*my+v*v*tk.y; gfx.globalAlpha=env*(.5+.5*Math.sin(v*Math.PI)); E(ix,iy,2.4,3,j%3?WATER2:'#ffffff'); E(ix-.6,iy-.8,.9,.9,'#ffffff'); }
-      // loose spray flung off the streams
-      for(let j=0;j<4;j++) { const v=((t*1.3+j/4+k*.31)%1),a=-Math.PI*(.15+.7*((k*7+j*3)%10)/10),d=v*26; const bx=lerp(sx,tk.x,.55+.4*((j+k)%3)/3),by=lerp(sy,tk.y,.55)-30+((k*5)%7); gfx.globalAlpha=env*(1-v)*.8; E(bx+Math.cos(a)*d,by+Math.sin(a)*d+v*v*22,1.6,2,WATER2); }
-      // splash crown where it lands on the row
-      const sp=((t*2.1+k*.37)%1); gfx.globalAlpha=env*(1-sp)*.9; ring(tk.x,tk.y,4+sp*15,2+sp*6,2,'#e6f7ff');
-      for(let j=0;j<5;j++) { const a=Math.PI*(1.1+j*.2),dd=sp*17; E(tk.x+Math.cos(a)*dd,tk.y+Math.sin(a)*dd*1.1+sp*sp*14,1.8,2.2,WATER2); }
-      pts.push(tk); }
-    // mist drifting over the row
-    for(let k=0;k<10;k++) { const q2=((t*.45+k*.173)%1),mxp=tx+(k-5)*17+Math.sin(t*2+k)*8,myp=ty-8-q2*30; gfx.globalAlpha=env*(1-q2)*.2; E(mxp,myp,12+q2*14,7+q2*9,'#eaf6ff'); }
-    // a faint rainbow arc and glints
-    gfx.globalAlpha=.3*env; for(let b=0;b<RB.length;b++) { gfx.strokeStyle=RB[b]; gfx.lineWidth=3; gfx.beginPath(); gfx.arc(tx,ty+34,64-b*3.4,Math.PI*1.12,Math.PI*1.88); gfx.stroke(); }
-    for(let k=0;k<7;k++) { const ph=((t*1.7+k*.29)%1),gx=tx+Math.cos(k*2.4+t)*50,gy=ty-14-Math.abs(Math.sin(k*1.7))*34; gfx.globalAlpha=env*Math.sin(ph*Math.PI); twk(gx,gy,3+ph*4,RB[k%7]); }
-    for(const p of P.list) if(Math.abs(p.x-tx)<p.w*.9) { gfx.globalAlpha=.55*env; E(p.x,p.base+2,p.w*.55,7,'#6aa8e0'); } }
+  if(ms>P.s0&&ms<P.s1) { const q=(ms-P.s0)/(P.s1-P.s0),tx=lerp(P.x1+20,P.x0-20,q),ty=P.yl,sx=x-28,sy=y-2,env=Math.min(1,(ms-P.s0)/90,(P.s1-ms)/160),
+      dx=tx-sx,dy=ty-sy,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len,DR=6;
+    // pressure jet: shot nearly straight from the nozzle into the target, only a small droop, swept across the row
+    const bz=(v,off)=>{ const mx=(sx+tx)/2+nx*off*.5,my=(sy+ty)/2+ny*off*.5-DR,ex=tx+nx*off,ey=ty+ny*off; return {x:(1-v)*(1-v)*sx+2*(1-v)*v*mx+v*v*ex,y:(1-v)*(1-v)*sy+2*(1-v)*v*my+v*v*ey}; };
+    const jet=(off,w,c,a)=>{ const m=bz(.5,off),e2=bz(1,off); gfx.globalAlpha=a*env; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(sx,sy); gfx.quadraticCurveTo(2*m.x-(sx+e2.x)/2,2*m.y-(sy+e2.y)/2,e2.x,e2.y); gfx.stroke(); };
+    gfx.lineCap='round';
+    jet(0,18,'#7cc0f4',.3); jet(0,10,'#bfe6ff',.55); jet(0,4,'#ffffff',.9);
+    for(const off of [-13,-7,7,13]) jet(off,3,'#e6f7ff',.5);
+    // nozzle blast
+    gfx.globalAlpha=.7*env; E(sx-3,sy,9,6,'#e8f6ff'); gfx.globalAlpha=.45*env; E(sx-8,sy,15,9,'#bfe6ff');
+    // fast droplets racing down the jet
+    for(let j=0;j<26;j++) { const v=((t*5.5+j/26)%1),off=((j*53)%9-4)*3.2,pt=bz(v,off); gfx.globalAlpha=env*(.55+.45*Math.sin(v*Math.PI)); E(pt.x,pt.y,2.3,2.7,j%3?WATER2:'#ffffff'); }
+    // impact: white burst, ring, droplets thrown back off the monsters
+    const sp=((t*4.2)%1),back=Math.atan2(-dy,-dx);
+    gfx.globalAlpha=.75*env; E(tx,ty,13+sp*5,10+sp*4,'#ffffff'); gfx.globalAlpha=.45*env; E(tx,ty,24,17,'#cfeaff');
+    gfx.globalAlpha=env*(1-sp); ring(tx,ty,8+sp*26,5+sp*13,3,'#e6f7ff');
+    for(let j=0;j<16;j++) { const a=back+(((j*37)%100)/100-.5)*2.4,v=((t*5+j*.19)%1),d=8+v*40; gfx.globalAlpha=env*(1-v); E(tx+Math.cos(a)*d,ty+Math.sin(a)*d*.85+v*v*18,2.1,2.5,j%2?WATER2:'#ffffff'); }
+    // mist boiling off the hit
+    for(let k=0;k<7;k++) { const q2=((t*.9+k*.19)%1); gfx.globalAlpha=env*(1-q2)*.28; E(tx+(k-3)*9+Math.sin(t*3+k)*5,ty-4-q2*26,10+q2*13,7+q2*8,'#eaf6ff'); }
+    for(const p of P.list) if(Math.abs(p.x-tx)<p.w*.9) { gfx.globalAlpha=.6*env; E(p.x,p.base+2,p.w*.58,7,'#6aa8e0'); } }
   if(ms<P.s0) { gfx.globalAlpha=1; bigWord('GENTLE',x-6,y-30,'#8ef0a0',1); } gfx.globalAlpha=1; };
 D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,150),me=ST.unit(m);
   const AIM=DD_XF('flick','aim');   // painted arm-out pose for aiming the hose; the old pixel 'aim' frame only if the painted set is missing
@@ -1921,7 +1921,8 @@ D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(
   const P={s0:1500,s1:2900,x0:Gp.x0,x1:Gp.x1,yl:Gp.top+Math.max(10,(Gp.base-Gp.top)*.3),fl:p.y,list:list.map(f=>ST.foe(f))},hit=2200;
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks over with the garden hose. She checks the nozzle. GENTLE. Good.'); say(m.id,'garden_shower'); scene('df_hose',3.6,{P}); }],
-    [1500,()=>{ for(let k=0;k<7;k++) b7Later(()=>sfx.spray&&sfx.spray(),k*200); setMessage('One big spray. Right across the whole row.'); }],
+    [1500,()=>{ for(let k=0;k<7;k++) b7Later(()=>sfx.spray&&sfx.spray(),k*200); setMessage('One big spray. Right across the whole row.');
+      P.list.forEach((F,i)=>{ const u=Math.min(1,Math.max(0,(P.x1+20-F.x)/Math.max(1,P.x1-P.x0+40))); b7Later(()=>ST.jolt(list[i],.3),u*(P.s1-P.s0)); }); }],   // each monster flinches as the jet sweeps over it
     ['hf',hit],
     [hit,()=>{ sfx.splat(); for(const f of list) ST.jolt(f,.4); landHit(100); scene('dv_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'SPLOOSH!',c:WATER,sc:4}); for(const f of list) { const U=ST.unit(f); scene('dv_drops',.8,{x:U.x,y:U.top+6,r:40}); } }],
     [2900,()=>{ setMessage('She checks the nozzle again. Still says gentle.'); }],

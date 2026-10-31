@@ -1,3 +1,8 @@
+## 2026-10-30 (night, 9): Garden Shower is a hard jet, not a lob
+
+- Tom: the spray looped up and drifted down; it should blast the enemies directly. `SC.df_hose` (engine/deedee-moves.js, last definition) is rebuilt as a pressure jet: three layered streams plus four thin side jets shot nearly straight from the nozzle to a target that sweeps across the row (only a 6 px droop), a nozzle blast, 26 fast droplets racing down the jet, and an impact burst at the target (white blob, ring, droplets thrown back off the monsters, mist). The old arching fan, rainbow and glints are gone. Each monster now flinches (`ST.jolt`) as the jet passes over it, then the existing SPLOOSH hit and damage land as before (numbers, hit time, line unchanged, no re-bake).
+- Tests: `kit_test.py deedee --only=garden_shower --speed2` 0 fails, frames looked at; `IDS=deedee smoke.py` 0 fails. Live URL not checked. `deedee-moves.js?v=gs2`.
+
 ## 2026-10-30 (night, 10): Chapter 1 pie theft: the mud blob now shoves everyone aside
 
 - Tom (22:59): the blob walked onto Rose's tile and overlapped the party. Now (scene `ch1Theft`, data/scenes.js): the blob charges up the middle and bowls over Tom, Grace and Rose, who fly back in their battle hurt frames and land lying down in the KO frames (bounce, thud). Deedee hops out of its way. The blob squelches diagonally to the counter, grabs the tin, and Rose, still on the floor, says her line. As the blob leaves down the middle, Tom, Rose and Grace kneel (painted kneel frames) and stand back in their original line, and Deedee hops back to her spot. Nobody is overlapped at any point.
