@@ -1580,3 +1580,167 @@ G.handstand_contest=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2Li
     [TROPHY,()=>{ scene('gf_trophy',1.4,{x:me.x,y:me.base+18}); scene('gv_text',1.3,{x:me.x,y:me.base-GH()-60,txt:'GRACE WINS',c:GOLD}); sfx.fanfare(); }],
     [END,'end',foe?foe.name+' warms up a little.':'Grace wins. She was always going to win.']]); };
 })();
+
+// ================= Open Strings, Portrait Mode, Bedazzle Blast (2026-10-30) =================
+// Three gymnastics primaries replaced with Grace's new interests, same numbers and effects as the moves they replace
+// (claude/grace-open-strings-prompt.md, grace-portrait-mode-prompt.md, grace-bedazzle-blast-prompt.md):
+//   open_strings   (was beam_dismount): row hit, foes Hooked (no dodging) 2 turns. A first-year violin screech.
+//   portrait_mode  (was split_leap): one foe hit, its wind-up cancelled, the most hurt friend Guarded. She draws the monster.
+//   bedazzle_blast (was chalk_up): row hit, +25% crit. Rhinestone gun; the foes that crit get the sharp gem.
+// Painted frames os_*, pm_*, bz_* (data/grace-extra.js, art/chars/grace-extra.webp, wired in data/grace-hires-use.js) and
+// props art/props/grace (screech_burst, sour_note, ... gem_hopper). Scenes prefix gx_ (no aim warp).
+(function(){
+const SC=RFX.SC,{scene}=RFX,ST=RFX.ST,G=RECRUIT_MOVES.grace;
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t,ez=u=>{ u=cl(u); return u*u*(3-2*u); };
+const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1,fin=(u,a=.12)=>u<a?u/a:1;
+const PINK='#ff7fb3',GOLD='#ffe08a',CREAM='#fff8e8',SKYC='#9fe8ff',LIME='#b6e85a',PURP='#b48fe0';
+const res=E2=>E2.result?E2.result+' ':'';
+const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.waves[0]&&B2.move.waves[0][0]&&B2.move.waves[0][0].t);
+const foes=E2=>{ const l=(E2.targets||[]).filter(t=>t.side==='foe'); return l.length?l:b2LiveFoes(); };
+const front=(F,gap=30)=>({x:Math.min(560,F.x+F.w*.5+gap),y:Math.min(314,F.base+3)});
+const rowSpot=(Gp,gap=50)=>({x:Math.min(552,Gp.x1+gap),y:Math.min(314,Gp.base+6)});
+const GSP=()=>BATTLE_SPRITES.grace,GH=()=>GSP().idle.length*GSP().scale;
+const all=(list,k=.4)=>{ for(const f of list) ST.jolt(f,k); };
+const lowest=()=>b2LiveParty().slice().sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0];
+const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
+const prop=(id,x,y,o)=>PROPART.draw('grace/'+id,x,y,o);
+const rnd=(k,s=0)=>{ const v=Math.sin(k*127.1+s*311.7)*43758.5453; return v-Math.floor(v); };
+ST.nw('gx_');
+if(!sfx.screech) sfx.screech=(d=0)=>{ tone({type:'sawtooth',f0:1500,f1:2100,dur:.32,vol:.07,delay:d}); tone({type:'sawtooth',f0:1490,f1:2080,dur:.32,vol:.05,delay:d}); noise({dur:.3,vol:.05,f0:3000,f1:5000,type:'bandpass',q:1.2,delay:d}); };
+if(!sfx.scribble) sfx.scribble=(d=0)=>{ for(let k=0;k<4;k++) noise({dur:.05,vol:.1,f0:2400,f1:1800,type:'bandpass',q:1.5,delay:d+k*.07}); };
+if(!sfx.pew) sfx.pew=(d=0)=>{ tone({type:'square',f0:2200,f1:700,dur:.09,vol:.08,delay:d}); noise({dur:.08,vol:.08,f0:5000,f1:7000,type:'bandpass',q:1,delay:d}); };
+// Words and big words that follow the actor's head or sit at a point (same look as gv_big / gv_text).
+const head=(st,dy=0)=>({x:st.x,y:st.y-GH()*(st.sc||1)*.84+dy});
+SC.gx_big=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-34); x=p.x; y=p.y; }
+  const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc;
+  x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+8,y);
+  gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||PINK,sc); gfx.restore(); };
+SC.gx_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
+// A painted prop flying along an arc from a point near the actor (or a fixed point) to a target, spinning a little, fading at the end.
+SC.gx_fly=(s,u)=>{ const e=s.ease==='lin'?u:ez(u),x0=s.st&&s.st.x!=null&&s.ax!=null?s.st.x+s.ax:s.x0,y0=s.st&&s.st.y!=null&&s.ay!=null?s.st.y+s.ay:s.y0;
+  if(s.fix==null&&s.st) { s.fix=[x0,y0]; } const fx0=s.fix?s.fix[0]:x0,fy0=s.fix?s.fix[1]:y0;
+  const x=lerp(fx0,s.x1,e),y=lerp(fy0,s.y1,e)-Math.sin(u*Math.PI)*(s.arc||30); gfx.globalAlpha=fin(u,.08)*(s.keep?1:fade(u,.8));
+  if(!prop(s.id,x,y,{h:s.h||30,rot:(s.rot0||0)+u*(s.spin||0)})) { ellipse(x,y,8,8,s.c||GOLD); } gfx.globalAlpha=1; };
+const fly=(id,st,ax,ay,x1,y1,dur,o={})=>scene('gx_fly',dur,Object.assign({id,st,ax,ay,x1,y1},o));
+
+// ---------- Open Strings (B2) ----------
+// Grace marches up with her violin, tucks it under her chin, saws out a screeching scale at the row (sour notes fly), the big
+// SCREECH hits everyone (ear rings, they cannot hear themselves dodge), a string snaps, she pushes through, big finish, listens
+// for applause, shrugs, explains she has only had six lessons, takes a recital bow and walks home proud.
+SC.gx_screech=(s,u)=>{ const P=s.plan,q=ez(u/.25),a=fade(u,.6); gfx.globalAlpha=a;
+  if(!prop('screech_burst',P.x-26-q*16,P.y,{w:P.w*(.5+.5*q)})) { for(let k=0;k<3;k++) label('SCREE',P.x-20,P.y-20+k*14,GOLD,2); }
+  for(const F of P.F) { const t1=u*s.dur*1000-F.d; if(t1<0) continue; const g=ez(t1/260),w=Math.sin(t1/70)*3; gfx.globalAlpha=a*Math.min(1,g*1.2);
+    if(!prop('ear_rings',F.x+w,F.top+F.h*.18,{w:Math.max(44,F.w*.7)*(.7+.4*g),rot:t1/900})) { for(let r=1;r<=3;r++) { gfx.strokeStyle=GOLD; gfx.lineWidth=2; gfx.beginPath(); gfx.ellipse(F.x,F.top+F.h*.2,r*10*g,r*7*g,0,0,Math.PI*2); gfx.stroke(); } } }
+  gfx.globalAlpha=1; };
+G.open_strings=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,72),U=list.map(f=>ST.unit(f));
+  const T={in:700,tuck:1050,breath:1400,stroke:1750,wince:2000,saw1:2250,saw2:2500,saw3:2750,saw4:3000,screech:3250,slip:3900,push:4200,finish:4550,listen:4950,shrug:5400,lessons:5800,bow:6350,proud:6850,back:7200,home:8000};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'os_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'os_tuck'},{t:T.breath,f:'os_breath',sc:1.04},{t:T.stroke,f:'os_stroke'},{t:T.wince,f:'os_wince'},
+    {t:T.saw1,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*2},{t:T.saw2,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*2},{t:T.saw3,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*3},{t:T.saw4,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*3},
+    {t:T.screech,f:'os_screech',dx:(u,tt)=>Math.sin(tt*60)*2,sc:1.06},{t:T.slip,f:'os_slip'},{t:T.push,f:'os_push',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:T.finish,f:'os_finish',hop:8},{t:T.listen,f:'os_listen'},
+    {t:T.shrug,f:'os_shrug'},{t:T.lessons,f:'os_lessons'},{t:T.bow,f:'os_bow'},{t:T.proud,f:'os_proud'},{t:T.back,f:'os_arriveR',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
+  const note=(id,k,at,dur=.75)=>{ const tx=Gp.x0+rnd(k,1)*Math.max(40,Gp.w),ty=Gp.top-10+rnd(k,2)*(Gp.base-Gp.top)*.7; fly(id,st,-30,-GH()*.62,tx,ty,dur,{arc:24+rnd(k,3)*30,spin:(rnd(k,4)-.5)*3,h:26+rnd(k,5)*10,rot0:(rnd(k,6)-.5)*.6}); };
+  const plan={x:Gp.x1-4,y:Gp.top+(Gp.base-Gp.top)*.45,w:Math.max(80,Math.min(140,Gp.w*.8)),F:U.map((q,k)=>({x:q.x,top:q.top,h:q.h,w:q.w,d:k*70}))};
+  ST.play(E2,[
+    [0,()=>{ setMessage('Grace marches up with her violin. First year. Six lessons.'); }],
+    [T.in,()=>{ sfx.select(); setMessage('Under the chin. Elbows up. Very professional.'); }],
+    [T.breath,()=>{ scene('gx_text',.5,{st,txt:'...',c:CREAM}); }],
+    [T.stroke,()=>{ sfx.screech(); note('sour_note',1,0); setMessage('The first note. It is not a note anyone asked for.'); }],
+    [T.saw1,()=>{ sfx.screech(); sfx.screech(.25); note('wobbly_notes',2,0); note('sour_note',3,0,.9); }],
+    [T.saw3,()=>{ sfx.screech(); sfx.screech(.25); note('cracked_note',4,0); note('wobbly_notes',5,0,.9); setMessage('A scale. Allegedly.'); }],
+    ['hf',T.screech],
+    [T.screech,()=>{ sfx.screech(); sfx.screech(.12); sfx.screech(.24); all(list,.6); landHit(100); E2.apply(); scene('gx_screech',.9,{plan}); scene('gx_big',.9,{x:Gp.x,y:Gp.top-60,txt:'SCREEEE!',c:GOLD,sc:4}); setMessage('The open strings. Every monster covers its ears. Nobody is dodging anything.'); }],
+    [T.slip,()=>{ sfx.click(); fly('snapped_string',st,-36,-GH()*.7,st.x-70,p.y-10,.7,{arc:40,spin:2,h:22}); scene('gx_text',.6,{st,txt:'TWANG',c:LIME}); }],
+    [T.push,()=>{ sfx.screech(); note('sour_note',6,0,.7); setMessage('A string snaps. She keeps going. That is showmanship.'); }],
+    [T.finish,()=>{ sfx.ding(); scene('gx_big',.8,{st,txt:'BIG FINISH',c:PINK,sc:3}); }],
+    [T.listen,()=>{ setMessage('She listens for applause.'); }],
+    [T.shrug,()=>{ sfx.select(); }],
+    [T.lessons,()=>{ say(m.id,'open_strings'); scene('gx_text',1,{st,txt:'SIX LESSONS',c:CREAM}); }],
+    [T.bow,()=>{ sfx.ding(); scene('gx_text',.8,{st,txt:'THANK YOU',c:GOLD}); }],
+    [T.home+100,'end',res(E2)+'Her teacher says she is improving. Her teacher is very kind.']]); };
+
+// ---------- Portrait Mode (B4) ----------
+// Sketchbook out. She measures the monster with her pencil, orders it to hold still (its wind-up is cancelled), draws it at
+// lightning speed (scribbles, shavings, eraser crumbs), signs with a flourish, jabs the pencil at it like a tiny fencer (the hit),
+// rips the page out, admires it, and turns to hold the drawing up in front of the most hurt friend (Guard).
+SC.gx_page=(s,u)=>{ const P=s.plan,ms=u*s.dur*1000; let x,y,h,a=1,rot=0;
+  if(ms<P.show) return;
+  if(ms<P.turn) { const q=ez((ms-P.show)/300); const hd=head(P.st,-10); x=hd.x+6; y=hd.y-30-q*26; h=lerp(30,78,q); rot=Math.sin(ms/400)*.06; }
+  else { const q=ez((ms-P.turn)/450); const hd=head(P.st,-10); x=lerp(hd.x+6,P.gx,q); y=lerp(hd.y-56,P.gy,q); h=lerp(78,P.gh,q); a=fade(u,.9); }
+  gfx.globalAlpha=a; if(!prop('portrait_page',x,y,{h,rot})) { rect(x-h*.35,y-h*.5,h*.7,h,'#fffaf0'); label('ART',x,y,'#444',2); } gfx.globalAlpha=1; };
+SC.gx_sketchfx=(s,u)=>{ const P=s.plan,ms=u*s.dur*1000; gfx.globalAlpha=1;
+  for(const b of P.bits) { const t1=ms-b.at; if(t1<0||t1>b.len) continue; const q=t1/b.len,h=s.st.x!=null?s.st.x:0; const hd=head(s.st,0);
+    const x=hd.x+b.dx+(b.vx||0)*q*60,y=hd.y+b.dy+(b.vy||0)*q*60+(b.g?ez(q)*b.g:0); gfx.globalAlpha=fin(q,.1)*fade(q,.7);
+    prop(b.id,x,y,{h:b.h,rot:(b.spin||0)*q}); }
+  gfx.globalAlpha=1; };
+G.portrait_mode=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),p=front(F,62),L=lowest(),LU=L?ST.unit(L):null,selfL=!L||L===m;
+  const T={in:700,open:1000,measure:1350,pose:1750,sketchA:2250,sketchB:2550,compare:2850,sketchC:3100,erase:3450,sign:3800,jab:4150,tear:4600,admire:4950,shield:5550,wink:6250,back:6650,home:7450};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'pm_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'pm_open'},{t:T.measure,f:'pm_measure'},{t:T.pose,f:'pm_pose'},{t:T.sketchA,f:'pm_sketchA',dx:(u,tt)=>Math.sin(tt*50)*1.2},
+    {t:T.sketchB,f:'pm_sketchB',dx:(u,tt)=>Math.sin(tt*50)*1.2},{t:T.compare,f:'pm_compare'},{t:T.sketchC,f:'pm_sketchC',dx:(u,tt)=>Math.sin(tt*60)*1.5},{t:T.erase,f:'pm_erase',dx:(u,tt)=>Math.sin(tt*40)*2},{t:T.sign,f:'pm_sign'},
+    {t:T.jab,f:'pm_jab',dx:u=>-ez(Math.min(1,u*3))*26*(1-ez((u-.7)/.3)),ease:'out'},{t:T.tear,f:'pm_tear'},{t:T.admire,f:'pm_admire'},{t:T.shield,f:'pm_shield'},{t:T.wink,f:'pm_wink'},{t:T.back,f:'pm_leaveR',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
+  const gx=Math.min(528,selfL?me.x-44:LU.x-LU.w*.5-18),gy=selfL?me.mid:LU.mid,gh=Math.max(56,Math.min(90,(selfL?me.h:LU.h)*.8));
+  const page={show:0,turn:T.shield-T.admire,st,gx,gy,gh};   // times from the scene start (T.admire)
+  const bits=[{id:'scribble_cloud',at:T.sketchA,len:650,dx:-34,dy:44,h:40,spin:.4},{id:'pencil_shavings',at:T.sketchA+200,len:700,dx:-16,dy:34,h:22,vx:-.6,g:40,spin:3},{id:'scribble_cloud',at:T.sketchC,len:420,dx:-30,dy:40,h:46,spin:-.5},
+    {id:'pencil_shavings',at:T.sketchC+100,len:700,dx:-20,dy:32,h:20,vx:.5,g:44,spin:-3},{id:'eraser_crumbs',at:T.erase+80,len:700,dx:-36,dy:44,h:26,vx:-.9,g:38},{id:'blank_page',at:T.tear+80,len:900,dx:-10,dy:-10,h:40,vx:-.5,vy:-1.1,spin:1.2}];
+  ST.play(E2,[
+    [0,()=>{ setMessage('Grace walks up with her sketchbook. '+f.name+' is about to get drawn.'); }],
+    [T.in,()=>{ sfx.select(); }],
+    [T.measure,()=>{ sfx.click(); scene('gx_text',.5,{st,txt:'HMM',c:CREAM}); setMessage('One eye closed. Pencil out. She is measuring it.'); }],
+    [T.pose,()=>{ say(m.id,'portrait_mode'); sfx.stun(); ST.jolt(f,.2); scene('gx_fly',.5,{id:'sketch_burst',x0:F.x,y0:F.mid,x1:F.x,y1:F.mid,h:F.h*.7,keep:true}); scene('gx_big',1,{x:F.x,y:F.top-54,txt:'HOLD IT!',c:SKYC,sc:3}); setMessage(f.name+' freezes mid pose. Whatever it was winding up is cancelled.'); }],
+    [T.sketchA,()=>{ sfx.scribble(); scene('gx_sketchfx',(T.tear+1000-T.sketchA)/1000,{st,plan:{bits:bits.map(b=>Object.assign({},b,{at:b.at-T.sketchA}))}}); }],
+    [T.sketchB,()=>{ sfx.scribble(); setMessage('Scribble scribble scribble. Tongue out. Very serious.'); }],
+    [T.compare,()=>{ scene('gx_text',.5,{st,txt:'HMM',c:CREAM}); }],
+    [T.sketchC,()=>{ sfx.scribble(); sfx.scribble(.2); }],
+    [T.erase,()=>{ sfx.chalk?sfx.chalk():sfx.click(); setMessage('A little eraser. Blow the crumbs off.'); }],
+    [T.sign,()=>{ sfx.ding(); scene('gx_text',.7,{st,txt:'SIGNED',c:GOLD}); }],
+    ['hf',T.jab+120],
+    [T.jab+120,()=>{ sfx.bonk(); ST.jolt(f,.6); landHit(100); E2.apply(); scene('gx_fly',.5,{id:'sketch_burst',x0:F.x+F.w*.3,y0:F.mid,x1:F.x+F.w*.3,y1:F.mid,h:F.h*.7,keep:true,spin:1}); scene('gx_big',.8,{x:F.x,y:F.top-60,txt:'POKE!',c:PINK,sc:4}); setMessage('And a pencil jab. For the art.'); }],
+    [T.tear,()=>{ sfx.crunch?sfx.crunch():sfx.click(); setMessage('RIP. Out comes the page.'); }],
+    [T.admire,()=>{ sfx.ding(); scene('gx_page',(T.home-T.admire)/1000,{plan:page}); scene('gx_text',.9,{st,txt:'OOH',c:CREAM}); }],
+    [T.shield,()=>{ sfx.whoosh(); if(!selfL) { scene('gx_text',1.1,{x:LU.x,y:LU.top-24,txt:'GUARDED',c:SKYC,sc:1}); } else scene('gx_text',1.1,{st,txt:'GUARDED',c:SKYC,sc:1}); setMessage(selfL?'She holds the drawing up like a shield.':'She holds the drawing up in front of '+L.name+'. A shield. Signed.'); }],
+    [T.wink,()=>{ sfx.select(); }],
+    [T.home+100,'end',res(E2)+'It is actually a really good drawing. The monster did not deserve it.']]); };
+
+// ---------- Bedazzle Blast (B5) ----------
+// Out comes the pink rhinestone gun. Load, safety off, aim, and she sprays the whole row with gems, sweeping low and high. Gems
+// stick to every monster; the ones that crit get the sharp teardrop gem point first with a big sparkle. She blows on the tip,
+// inspects, decides they need MORE sparkle, tops them up, admires, poses.
+SC.gx_gems=(s,u)=>{ const P=s.plan,ms=u*s.dur*1000; const fa=fade(u,.88);
+  for(const g of P.gems) { const t1=ms-g.at; if(t1<0) continue; const q=ez(t1/180),a=fa; gfx.globalAlpha=a*Math.min(1,q*1.4);
+    if(!prop(g.id,g.x,g.y-(1-q)*6,{h:g.h*(g.sharp?1:(.6+.4*q)),rot:g.rot})) ellipse(g.x,g.y,g.h*.4,g.h*.4,g.c||PINK);
+    if(g.sharp&&t1<700) { const k=Math.sin(Math.min(1,t1/700)*Math.PI); gfx.globalAlpha=a*k; prop('sparkle_star',g.x+6,g.y-10,{h:g.h*1.7*(0.6+k),rot:t1/400}); }
+    else if(t1>300&&((t1/260)|0)%3===(g.k%3)) { gfx.globalAlpha=a*.9; prop('sparkle_star',g.x+g.h*.3,g.y-g.h*.3,{h:g.h*.6}); } }
+  gfx.globalAlpha=1; };
+G.bedazzle_blast=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,84),U=list.map(f=>ST.unit(f));
+  const waves=(B2.move&&B2.move.waves||[]).flat(),critOf=f=>waves.some(e=>e.t===f&&e.crit);
+  const T={in:700,draw:1000,load:1300,safety:1650,aim:1950,fireA:2250,low:2550,high:2850,fireB:3150,one:3450,blow:3950,inspect:4350,more:4750,topup:5150,admire:5600,pose:6050,back:6550,home:7350};
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'bz_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'bz_draw'},{t:T.load,f:'bz_load'},{t:T.safety,f:'bz_safety'},{t:T.aim,f:'bz_aim'},
+    {t:T.fireA,f:'bz_fireA',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.low,f:'bz_sweeplow',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.high,f:'bz_sweephigh',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.fireB,f:'bz_fireB',dx:(u,tt)=>Math.sin(tt*70)*2},
+    {t:T.one,f:'bz_onehand',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.blow,f:'bz_blow'},{t:T.inspect,f:'bz_inspect'},{t:T.more,f:'bz_notenough'},{t:T.topup,f:'bz_topup',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.admire,f:'bz_admire',hop:8},{t:T.pose,f:'bz_pose'},
+    {t:T.back,f:'bz_arriveR',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
+  const gems=[]; let gk=0;
+  const stick=(at,n,sharp)=>{ U.forEach((q,i)=>{ const crit=critOf(list[i]); for(let j=0;j<n;j++) { const k=gk++; const id=sharp&&crit?'gem_sharp':['gem_pink','gem_blue','gem_gold'][k%3];
+    gems.push({id,k,at:at+i*60+j*45,x:q.x-q.w*.35+rnd(k,7)*q.w*.7,y:q.top+q.h*.12+rnd(k,8)*q.h*.7,h:sharp&&crit?Math.max(22,q.h*.26):12+rnd(k,9)*8,rot:(rnd(k,10)-.5)*.8,sharp:sharp&&crit}); } }); };
+  const spray=(k,yk)=>{ const tx=Gp.x0+rnd(k,11)*Math.max(40,Gp.w),ty=Gp.top+(Gp.base-Gp.top)*yk; fly('gem_spray',st,-44,-GH()*.58,tx,ty,.42,{arc:8,h:34,ease:'lin',rot0:-.2}); for(let j=0;j<3;j++) fly(['gem_pink','gem_blue','gem_gold'][(k+j)%3],st,-46,-GH()*.58-4,tx+(rnd(k+j,12)-.5)*60,ty+(rnd(k+j,13)-.5)*50,.4+j*.05,{arc:10,h:12,ease:'lin',spin:3}); };
+  stick(T.fireA+420,2,false); stick(T.low+420,2,false); stick(T.high+420,2,false); stick(T.fireB+420,2,false); stick(T.one+420,1,true); stick(T.topup+420,2,false);
+  const sharpAny=list.some(critOf);
+  ST.play(E2,[
+    [0,()=>{ say(m.id,'bedazzle_blast'); setMessage('Grace reaches for the rhinestone gun. Everyone knows what that means.'); }],
+    [T.draw,()=>{ sfx.whoosh(); }],
+    [T.load,()=>{ sfx.click(); fly('gem_hopper',st,-20,-GH()-30,st.x-20,st.y-GH()-10,.5,{arc:0,h:34,keep:false}); setMessage('Hopper in. Fully loaded. Extra sparkly.'); }],
+    [T.safety,()=>{ sfx.click(); scene('gx_text',.5,{st,txt:'CLICK',c:CREAM}); }],
+    [T.aim,()=>{ sfx.select(); setMessage('One eye closed. Aim. Hold still, everybody.'); scene('gx_gems',(T.home-T.aim)/1000,{plan:{gems:gems.map(g=>Object.assign({},g,{at:g.at-T.aim}))}}); }],
+    [T.fireA,()=>{ sfx.pew(); sfx.pew(.12); sfx.spray(); spray(1,.45); all(list,.4); landHit(34); setMessage('Gems. Gems everywhere.'); }],
+    [T.low,()=>{ sfx.pew(); sfx.pew(.12); spray(2,.8); all(list,.3); }],
+    [T.high,()=>{ sfx.pew(); sfx.pew(.12); spray(3,.15); all(list,.3); }],
+    [T.fireB,()=>{ sfx.pew(); sfx.pew(.1); sfx.pew(.2); spray(4,.5); all(list,.4); landHit(33); }],
+    ['hf',T.one+300],
+    [T.one,()=>{ sfx.pew(); sfx.spray(); spray(5,.4); U.forEach((q,i)=>{ if(critOf(list[i])) fly('gem_sharp',st,-48,-GH()*.58,q.x,q.mid,.3,{arc:0,h:30,ease:'lin',rot0:-.6,keep:true}); }); }],
+    [T.one+300,()=>{ sfx.bonk(); sfx.ding(); all(list,.6); landHit(33); E2.apply(); scene('gx_big',.9,{x:Gp.x,y:Gp.top-60,txt:sharpAny?'SHARP ONE!':'BEDAZZLED!',c:sharpAny?SKYC:PINK,sc:4}); setMessage(sharpAny?'A sharp one lands point first. That one hurt.':'Every monster is now mostly rhinestone.'); }],
+    [T.blow,()=>{ sfx.blow?sfx.blow():sfx.whoosh(); setMessage('She blows on the tip. Like a cowboy.'); }],
+    [T.inspect,()=>{ scene('gx_text',.5,{st,txt:'HMM',c:CREAM}); }],
+    [T.more,()=>{ sfx.nope?sfx.nope():sfx.select(); scene('gx_big',.8,{st,txt:'MORE SPARKLE',c:PINK,sc:3}); setMessage('She squints at them. Not enough sparkle.'); }],
+    [T.topup,()=>{ sfx.pew(); sfx.pew(.1); sfx.spray(); spray(6,.5); all(list,.25); }],
+    [T.admire,()=>{ sfx.ding(); sfx.fanfare(); scene('gx_text',.9,{st,txt:'PERFECT',c:GOLD}); }],
+    [T.pose,()=>{ sfx.select(); }],
+    [T.home+100,'end',res(E2)+'They sparkle now. They will sparkle for weeks. Rhinestones do not come off.']]); };
+})();

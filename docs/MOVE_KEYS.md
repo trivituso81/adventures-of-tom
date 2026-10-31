@@ -5,7 +5,7 @@ Slots: basic (free), sig (the signature special), A1 to A5 and B1 to B5 (the two
 | Who | basic | sig | A1 | A2 | A3 | A4 | A5 | B1 | B2 | B3 | B4 | B5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Tom | button_mash | defend | starter_splash | sourdough_snob | overpriced_gadget | noise_canceling | seat_1a | flashcard_flurry | konami_code | skincare_10 | kanji_strike | know_it_all |
-| Grace | cartwheel | dance | squishy_squeeze | glitter_nails | welcome_back | like_subscribe | dumpling_drop | dance_battle | beam_dismount | handstand_contest | split_leap | chalk_up |
+| Grace | cartwheel | dance | squishy_squeeze | glitter_nails | welcome_back | like_subscribe | dumpling_drop | dance_battle | open_strings | handstand_contest | portrait_mode | bedazzle_blast |
 | Rose | boop | silly (RASPBERRY) | boo | dress_up_tiara | giggle_storm | lamby_hug | floor_is_lava | lookout_lamby | piggyback_pounce | bedtime_story | lamby_boomerang | pillow_fort |
 | Amy | kettlebell_swing | pep_talk | red_pen | hot_lunch_tray | goldstar_recess | inside_voices | pop_quiz | burpee_blitz | hill_repeats | oat_milk_please | false_start | negative_split |
 | Deedee | dish_towel_flick | moon_back | registered_nut | corner_piece | wet_floor | wine | oven_mitt_ultimatum | brisk_means_brisk | garden_shower | rise_and_shine | beanie_master | grandma_squeeze |

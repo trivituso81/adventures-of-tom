@@ -13,7 +13,7 @@ MAP={
 # Tom
 'tom.button_mash':'🎮','tom.starter_splash':'💦','tom.sourdough_snob':'🍞','tom.overpriced_gadget':'🛍️','tom.noise_canceling':'🎧','tom.seat_1a':'💺','tom.delta_ult':'✈️','tom.flashcard_flurry':'🃏','tom.konami_code':'🕹️','tom.skincare_10':'🧴','tom.kanji_strike':'🈶','tom.know_it_all':'🤓','tom.cart_ult':'👾',
 # Grace
-'grace.cartwheel':'🤸','grace.squishy_squeeze':'🧸','grace.glitter_nails':'💅','grace.welcome_back':'📹','grace.like_subscribe':'👍','grace.dumpling_drop':'🥟','grace.viral_ult':'🔔','grace.dance_battle':'🕺','grace.beam_dismount':'🙌','grace.handstand_contest':'🙃','grace.split_leap':'🩰','grace.chalk_up':'🖍️','grace.olympic_ult':'💎','grace.instax':'📸',
+'grace.cartwheel':'🤸','grace.squishy_squeeze':'🧸','grace.glitter_nails':'💅','grace.welcome_back':'📹','grace.like_subscribe':'👍','grace.dumpling_drop':'🥟','grace.viral_ult':'🔔','grace.dance_battle':'🕺','grace.beam_dismount':'🙌','grace.handstand_contest':'🙃','grace.split_leap':'🩰','grace.chalk_up':'🖍️','grace.open_strings':'🎵','grace.portrait_mode':'🎨','grace.bedazzle_blast':'✨','grace.olympic_ult':'💎','grace.instax':'📸',
 # Rose
 'rose.boop':'👆','rose.boo':'👻','rose.dress_up_tiara':'🦄','rose.giggle_storm':'🤣','rose.lamby_hug':'🐑','rose.floor_is_lava':'🌋','rose.teaparty_ult':'🫖','rose.lookout_lamby':'🪃','rose.piggyback_pounce':'🐷','rose.bedtime_story':'📖','rose.lamby_boomerang':'🍪','rose.pillow_fort':'🏰','rose.mecha_ult':'🤖',
 # Amy

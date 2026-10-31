@@ -29,6 +29,9 @@ SHEETS = [
     ('tom-sheet1-items1-15.png', 'tom', rng(1, 15)),
     ('tom-sheet2-items16-31.png', 'tom', rng(16, 30)),
     ('grace-sheet1-of-1.png', 'grace', rng(1, 15)),
+    ('grace-violin-sheet.png', 'grace', rng(16, 21)),      # Open Strings (Oct 30): screech burst, sour note, wobbly notes, cracked note, snapped string, ear rings
+    ('grace-portrait-sheet.png', 'grace', rng(22, 27)),    # Portrait Mode (Oct 30): portrait page, blank page, scribble cloud, eraser crumbs, pencil shavings, sketch burst
+    ('grace-bedazzle-sheet.png', 'grace', rng(28, 35)),    # Bedazzle Blast (Oct 30): pink, blue, gold, sharp gem, spray, cluster, sparkle star, hopper
     ('rose-sheet1-of-2.png', 'rose', rng(1, 13)),
     ('rose-sheet2-of-2.png', 'rose', rng(14, 25)),
     ('amy-sheet1-of-3.png', 'amy', rng(1, 13)),
