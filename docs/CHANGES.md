@@ -1,3 +1,8 @@
+## 2026-10-31 (night, 31): Downtown LA walk-behind cutouts
+
+- Tom asked for a 3D feel with cutouts Tom can go under. `PLATE_BEHIND.blvd` (`engine/plate.js?v=behind6`) now redraws pieces of the painting over anyone standing behind them: Jefferson arch (done before), Griffith gate board and posts (Tom disappears under the board on the steps), the four shop awnings and the Starlite marquee (doorways and sidewalk), the taco truck (the sidewalk behind it), and 12 lamp posts (6 on the north curb, 6 in the plaza) built with the new `BLVD_LAMP` helper.
+- No walk map change. New shot tool `tools/blvd_behind_shots.py` (shots `tools/shots/blvd-behind-*.png`). blvd_test and smoke pass. Not played on phone yet.
+
 ## 2026-10-31 (night, 30): Nara's special renamed to PUOPY DOG EYES
 
 - Tom (01:24) asked to rename Nara's human eyes to "Puopy Dog Eyes". Spelling used exactly as typed (PUOPY). The move key `puppy_eyes` is unchanged, so saves and tests are unaffected.

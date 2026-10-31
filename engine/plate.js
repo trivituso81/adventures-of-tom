@@ -149,6 +149,8 @@ function drawPlateSigns(list) {
 // (64 per tile). base = art y where the thing stands on the ground. An actor whose feet are north of base (on screen: behind it) and whose
 // body overlaps the zone gets that slice of the painting drawn over it again, so Tom walks behind the tree and under the board.
 // Zones hold only the tall object, never the ground in front of it. rect: x,y,w,h. ellipse: cx,cy,rx,ry. polygon: pts [[x,y],...].
+// A lamp post as three small shapes (head, pole, foot) so no paving is redrawn beside the pole. cx is the pole centre, y0 the top of the head, base the foot.
+const BLVD_LAMP=(cx,y0,base)=>[{x:cx-20,y:y0,w:40,h:52,base},{x:cx-8,y:y0+50,w:16,h:Math.max(10,base-y0-80),base},{x:cx-22,y:base-34,w:44,h:34,base}];
 const PLATE_BEHIND={ town:[
   // GRUMP HOLLOW exit board and its posts (north steps)
   {x:440,y:28,w:152,h:72,base:112},{x:418,y:4,w:28,h:108,base:112},{x:582,y:4,w:30,h:108,base:112},
@@ -175,7 +177,18 @@ const PLATE_BEHIND={ town:[
 ],
 // DOWNTOWN LA: the JEFFERSON PARK arch (board and both posts with their globe lamps), so Tom walks behind the posts and under the board.
 blvd:[
-  {x:812,y:1420,w:274,h:90,base:1568},{x:766,y:1402,w:56,h:170,base:1568},{x:1078,y:1402,w:56,h:170,base:1568}
+  // Jefferson Park arch: board and both posts with their globe lamps
+  {x:812,y:1420,w:274,h:90,base:1568},{x:766,y:1402,w:56,h:170,base:1568},{x:1078,y:1402,w:56,h:170,base:1568},
+  // Griffith Park gate: board and both posts (Tom climbs the steps and disappears under the board)
+  {x:46,y:248,w:158,h:72,base:340},{x:14,y:238,w:44,h:128,base:340},{x:198,y:222,w:40,h:130,base:340},
+  // shop awnings and the Starlite marquee: anyone on the sidewalk or in a doorway is under them
+  {x:250,y:546,w:236,h:58,base:690},{x:551,y:546,w:254,h:56,base:690},{x:923,y:494,w:330,h:104,base:690},{x:1336,y:548,w:312,h:56,base:690},
+  // taco truck: the sidewalk is behind it
+  {pts:[[722,712],[748,692],[760,672],[790,664],[810,658],[900,657],[935,661],[943,670],[946,700],[949,745],[941,766],[900,769],[780,769],[740,765],[725,752],[722,735]],base:780},
+  // sidewalk lamps (head, pole, foot) on the north curb
+  ...BLVD_LAMP(185,478,658),...BLVD_LAMP(207,543,716),...BLVD_LAMP(537,543,716),...BLVD_LAMP(817,548,656),...BLVD_LAMP(980,535,716),...BLVD_LAMP(1275,557,716),
+  // plaza lamps in front of the south row
+  ...BLVD_LAMP(120,1268,1456),...BLVD_LAMP(483,1268,1456),...BLVD_LAMP(587,1268,1456),...BLVD_LAMP(1002,1268,1452),...BLVD_LAMP(1368,1278,1452),...BLVD_LAMP(1868,1273,1452)
 ] };
 function plateWalkBehind(map,plate) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
