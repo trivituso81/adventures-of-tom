@@ -1356,7 +1356,9 @@ Tm.sourdough_snob=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
 SC.t3_gbox=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y-(1-ez((ms-P.set)/220))*40; if(ms<P.set) return; gfx.globalAlpha=fade(u,.95);
   const lift=ms<P.lid0?0:ms<P.lid1?ez((ms-P.lid0)/(P.lid1-P.lid0))*.35:(.35+ez((ms-P.lid1)/250)*.65);
   const beams=ms>P.lid1&&ms<P.rc0?cl((ms-P.lid1)/250)*(ms>P.rc0-300?(P.rc0-ms)/300:1):0;
-  if(beams>0) { gfx.globalAlpha=beams*.45; for(let k=0;k<7;k++) { const a=-Math.PI/2+(k-3)*.26+Math.sin(ms*.003+k)*.04; gfx.beginPath(); gfx.moveTo(x,y-58); gfx.lineTo(x+Math.cos(a-.08)*190,y-58+Math.sin(a-.08)*190); gfx.lineTo(x+Math.cos(a+.08)*190,y-58+Math.sin(a+.08)*190); gfx.closePath(); gfx.fillStyle=k%2?'#fff4c0':GOLD; gfx.fill(); } gfx.globalAlpha=fade(u,.95); }
+  if(beams>0) { gfx.globalAlpha=beams; for(let k=0;k<7;k++) { const a=-Math.PI/2+(k-3)*.26+Math.sin(ms*.003+k)*.04,x2=x+Math.cos(a)*190,y2=y-58+Math.sin(a)*190,gr=gfx.createLinearGradient(x,y-58,x2,y2);   // soft rays that fade out, no hard edges
+      gr.addColorStop(0,k%2?'rgba(255,246,206,.62)':'rgba(255,214,120,.55)'); gr.addColorStop(1,'rgba(255,224,140,0)');
+      gfx.beginPath(); gfx.moveTo(x,y-58); gfx.lineTo(x+Math.cos(a-.08)*190,y-58+Math.sin(a-.08)*190); gfx.lineTo(x+Math.cos(a+.08)*190,y-58+Math.sin(a+.08)*190); gfx.closePath(); gfx.fillStyle=gr; gfx.fill(); } gfx.globalAlpha=fade(u,.95); }
   // Painted MAX box (price tag already on it): body and lid are two crops of one image so the lid still slides off.
   const BX=PROPART.ready('tom/max_gadget_box');
   if(BX) { const bh=84,k=bh/160,lh=68*k; PROPART.draw('tom/max_gadget_box',x,y-(bh-68*k)/2,{w:bh*.99,src:[0,68,158,92]});
@@ -1370,15 +1372,21 @@ SC.t3_gbox=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y-(1-ez((ms-P.set)/220)
   if(ms>P.rc0) gadget(x,y-66,1.4,0,Math.PI/2);
   // The receipt unrolls from his hand to the floor and piles up.
   if(ms>P.rc0&&P.st&&P.st.x!=null) { const h={x:P.st.x-24,y:head(P.st).y-18},top=h.y+2,fl=P.floor,L=ez((ms-P.rc0)/(P.rc1-P.rc0))*(fl-top+90),hang=Math.min(L,fl-top),pile=Math.max(0,L-hang);
-    R(h.x-9,top,18,hang+2,OUT); R(h.x-7,top,14,hang,'#ffffff'); for(let k=0;k<hang/9;k++) R(h.x-5,top+4+k*9,6+((k*3)%5),2,'#9aa0aa');
-    for(let k=0;k<Math.min(6,pile/14);k++) { gfx.save(); gfx.translate(h.x-10+k*7,fl-4-(k%2)*4); gfx.rotate(k%2?.5:-.4); RO(-9,-3,18,6,'#ffffff'); gfx.restore(); }
+    // Painted-style paper ribbon (soft shading, faint printed lines, torn end), hanging to the left of Tom's face instead of over it.
+    const rx=h.x-14,sway=Math.sin(ms*.004)*1.2,pg=gfx.createLinearGradient(rx-7,0,rx+7,0); pg.addColorStop(0,'#e9e4d6'); pg.addColorStop(.5,'#fffdf6'); pg.addColorStop(1,'#d9d3c3');
+    gfx.save(); gfx.globalAlpha=1; gfx.shadowColor='rgba(0,0,0,.28)'; gfx.shadowBlur=3; gfx.shadowOffsetX=1.5; gfx.fillStyle=pg;
+    gfx.beginPath(); gfx.moveTo(rx-7,top); gfx.lineTo(rx+7,top); gfx.lineTo(rx+7+sway,top+hang); for(let k=0;k<=7;k++) gfx.lineTo(rx+7-k*2+sway,top+hang+(k%2?3:0)); gfx.lineTo(rx-7+sway,top+hang); gfx.closePath(); gfx.fill(); gfx.restore();
+    gfx.fillStyle='rgba(88,94,112,.5)'; for(let k=0;k<hang/8;k++) gfx.fillRect(rx-5+sway*(k/(hang/8||1)),top+5+k*8,5+((k*3)%6),1.2);
+    PROPART.ready('tom/receipt_roll'); for(let k=0;k<Math.min(5,pile/16);k++) { const px=rx-14+k*9,py=fl-5-(k%2)*3; if(!PROPART.draw('tom/receipt_roll',px,py,{h:15+(k%2)*3,rot:k%2?.5:-.4})) { gfx.save(); gfx.translate(px,py); gfx.rotate(k%2?.5:-.4); gfx.fillStyle='#f6f2e6'; gfx.fillRect(-9,-3,18,6); gfx.restore(); } }
     PROPART.draw('tom/receipt_roll',h.x,top-4,{h:30});   // painted roll in his hand (the drawn strip comes off it)
     if(L>30) bigWord('$1499.99',h.x-46,top+6,RED,2); } };
 const gadget=(x,y,sc,ms,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot!=null?rot:Math.sin(ms*.008)*.06); gfx.scale(sc,sc); if(PROPART.draw('tom/gadget',0,0,{w:34,rot:rot!=null?0:-Math.PI/2})) { gfx.restore(); return; }   // painted (lies flat when rot is given, held upright otherwise)
   rrO(-12,-19,24,38,4,'#1a1b20'); R(-10,-17,20,34,'#2c2f36');
   EO(-3,-10,7,7,'#3a3d46'); E(-5,-12,2.2,2.2,'#0b0c10'); E(-1,-12,2.2,2.2,'#0b0c10'); E(-5,-8,2.2,2.2,'#0b0c10'); E(-1,-8,1.4,1.4,'#e8e0a0'); gfx.restore(); };
 SC.t3_gadget=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=P.st; if(!st||st.x==null||ms<P.up||ms>P.rc0) return; const q=ez((ms-P.up)/250),h=hand(),p=head(st,-44);
-  const x=lerp(h.x,p.x,q),y=lerp(h.y,p.y,q); gfx.globalAlpha=1; gadget(x,y,2.2,ms); for(let k=0;k<5;k++) { const a=ms*.005+k*1.25; star(x+Math.cos(a)*50,y+Math.sin(a)*28,4+Math.sin(ms*.02+k)*2,k%2?'#ffffff':GOLD,a); } };
+  const x=lerp(h.x,p.x,q),y=lerp(h.y,p.y,q); gfx.globalAlpha=1; gadget(x,y,2.2,ms); for(let k=0;k<5;k++) { const a=ms*.005+k*1.25,sx=x+Math.cos(a)*50,sy=y+Math.sin(a)*28,r=3+Math.sin(ms*.02+k)*1.5,gr=gfx.createRadialGradient(sx,sy,0,sx,sy,r*2.6);   // soft glints instead of hard pixel stars
+    gr.addColorStop(0,k%2?'rgba(255,255,255,.95)':'rgba(255,226,130,.95)'); gr.addColorStop(1,'rgba(255,226,130,0)'); gfx.fillStyle=gr; gfx.beginPath(); gfx.arc(sx,sy,r*2.6,0,7); gfx.fill();
+    gfx.fillStyle='rgba(255,255,255,.9)'; gfx.fillRect(sx-r*2,sy-.5,r*4,1); gfx.fillRect(sx-.5,sy-r*2,1,r*4); } };
 Tm.overpriced_gadget=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),U=who.map(u=>ST.unit(u)),me=ST.unit(m),dee=B2.party.find(p=>p.id==='deedee'&&b2Alive(p));
   const px=foe?Math.min(548,U[0].x+U[0].w*.5+130):Math.max(250,Math.min(...U.map(q=>q.x-q.w*.5))-4),py=foe?Math.min(316,U[0].base+3):Math.min(314,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+14);
   const set=950,lid0=1250,lid1=2150,up=2400,hit=2600,rc0=3000,rc1=3700,look=3800,done=4400;

@@ -1,3 +1,8 @@
+## 2026-10-30: Retail Therapy: old drawn graphics replaced
+
+- Tom: Retail Therapy still showed old pixel art. In `Tm.overpriced_gadget` (`engine/tom-moves.js`) the painted box, gadget and roll were fine, but three effects were still hard-edged drawn shapes: the light rays (flat triangles), the sparkles around the gadget (pixel stars), and the receipt (a flat white rectangle with black outline and dashes, covering Tom's face, with a pile of little white rectangles).
+- Now: rays fade out with a gradient, sparkles are soft glints, the receipt is shaded paper with faint printed lines and a torn end hanging beside Tom, and the floor pile uses the painted receipt roll. Text callouts (RETAIL THERAPY, WORTH IT., $1499.99) are the shared pixel text and were left. Script tag bumped to `?v=rt1`.
+
 ## 2026-10-30: Floor Is Lava: old drawn lava removed
 
 - Rose's Floor Is Lava still played the old flat orange ovals (`SC.rv_lava` in `engine/rose-moves.js`) on top of the new painted lava pool. `SC.rv_lava` is now a no-op, so only the painted pool and painted couch cushion show. The "THE FLOOR IS LAVA!" and "HOT HOT!" text callouts and the HOT labels are unchanged. Cache tag `rose-moves.js?v=lv1`.
