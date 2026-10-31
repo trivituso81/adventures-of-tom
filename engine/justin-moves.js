@@ -40,7 +40,19 @@ SC.jv_zapfx=(s,u)=>{ gfx.globalAlpha=fade(u,.6); for(let k=0;k<5;k++) { const a=
 // ---------- Loose Wire (basic) ----------
 // spot the wire, yank it, jab it at the foe, zap himself, drop it, smirk
 SC.jv_wirespark=(s,u)=>{ gfx.globalAlpha=fade(u,.5); for(let k=0;k<10;k++) { const a=-Math.PI/2+(k/10-.5)*3.2+s.seed,d=ez(u)*(16+k%3*8); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,3+(k%2)*2,k%2?SPARK:'#ffb040',u*4+k); } };
-J.loose_wire=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,36),me=ST.unit(m);
+// forked lightning from (x0,y0) to (x1,y1): redrawn jagged every frame, wide blue glow under a white core, two short forks, a flash at the far end
+SC.jv_arc=(s,u)=>{ const n=9,fl=Math.floor(u*28),on=fade(u,.7); const pts=[]; for(let k=0;k<=n;k++) { const q=k/n,amp=k===0||k===n?0:(s.amp||14); const r1=Math.sin((k*12.9898+fl*78.233)*43758.5453)*.5+.5,r2=Math.sin((k*39.346+fl*11.135)*24634.6345)*.5+.5; pts.push([lerp(s.x0,s.x1,q)+(r1-.5)*2*amp,lerp(s.y0,s.y1,q)+(r2-.5)*2*amp]); }
+  const path=P=>{ gfx.beginPath(); P.forEach((q,k)=>k?gfx.lineTo(q[0],q[1]):gfx.moveTo(q[0],q[1])); };
+  gfx.lineCap='round'; gfx.lineJoin='round'; gfx.globalAlpha=.35*on; gfx.strokeStyle=BLUE; gfx.lineWidth=14; path(pts); gfx.stroke();
+  gfx.globalAlpha=.8*on; gfx.lineWidth=7; path(pts); gfx.stroke();
+  gfx.globalAlpha=on; gfx.strokeStyle='#ffffff'; gfx.lineWidth=3; path(pts); gfx.stroke();
+  for(let b=0;b<2;b++) { const i=3+b*3,q=pts[i],a=(b?1:-1)*(.7+((fl+b)%3)*.25),L=26+b*8,tx=q[0]+Math.cos(Math.atan2(s.y1-s.y0,s.x1-s.x0)+a)*L,ty=q[1]+Math.sin(Math.atan2(s.y1-s.y0,s.x1-s.x0)+a)*L,mx=(q[0]+tx)/2+(b?5:-5),my=(q[1]+ty)/2-4; gfx.globalAlpha=.9*on; gfx.strokeStyle=SPARK; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(q[0],q[1]); gfx.lineTo(mx,my); gfx.lineTo(tx,ty); gfx.stroke(); }
+  gfx.globalAlpha=.55*on; E(s.x1,s.y1,18+(fl%3)*4,14+(fl%2)*4,BLUE); gfx.globalAlpha=on; E(s.x1,s.y1,8,6,'#ffffff'); };
+// brief white-blue screen flash (the strike)
+SC.jv_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.4); R(0,0,576,324,s.c||'#dff3ff'); };
+// crackling arcs around a body (the shock back on Justin)
+SC.jv_crackle=(s,u)=>{ const fl=Math.floor(u*22); gfx.lineCap='round'; for(let k=0;k<7;k++) { const a=k*0.9+fl*1.7,d=10+((k*7+fl*3)%5)*5,x0=s.x+Math.cos(a)*d*.6,y0=s.y+Math.sin(a)*d*.9,x1=s.x+Math.cos(a+.5)*(d+12),y1=s.y+Math.sin(a+.5)*(d+12)*1.1; gfx.globalAlpha=fade(u,.6); gfx.strokeStyle=k%2?SPARK:BLUE; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo((x0+x1)/2+(k%2?4:-4),(y0+y1)/2-3); gfx.lineTo(x1,y1); gfx.stroke(); } };
+J.loose_wire=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
   const K=[{t:0,x:'home',y:'home',f:'idle'},{t:380,f:'run',ease:'in'},{t:900,x:p.x,y:p.y,f:'lw_spot'}];
   K.push(...seq([['lw_grab',260],['lw_pull',300],['lw_present',300],['lw_jab',260],['lw_zap',420],['lw_drop',320],['lw_smirk',520]],900,p.x,p.y));
   K.push({t:3300,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:3900,x:'home',y:'home',f:'idle'},{t:4100,f:'idle'});
@@ -51,8 +63,9 @@ J.loose_wire=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,36),me=
     [380,()=>sfx.whoosh&&sfx.whoosh()],
     ['hf',2300],
     [1500,()=>{ sfx.bump&&sfx.bump(); say(m.id,'loose_wire'); }],
-    [2200,()=>{ setMessage('He jabs the bare copper end at it.'); sfx.zap&&sfx.zap(); jitter(f); landHit(100); scene('jv_wirespark',.6,{x:F.x+F.w*.3,y:F.mid,seed:0}); }],
-    [2400,()=>{ sfx.zap&&sfx.zap(); scene('jv_zapfx',.5,{x:p.x-4,y:p.y-80}); scene('jv_text',.9,{x:p.x,y:p.y-130,txt:'ZZT',c:SPARK,sc:2}); }],
+    [2200,()=>{ setMessage('He jabs the bare copper end at it.'); sfx.zap&&sfx.zap(); jitter(f); landHit(100); scene('jv_flash',.18,{a:.45}); scene('jv_arc',.8,{x0:p.x-38,y0:p.y-me.h*.5,x1:F.x+F.w*.25,y1:F.mid,amp:15}); scene('jv_wirespark',.7,{x:F.x+F.w*.3,y:F.mid,seed:0}); scene('jv_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:12,r:34,c:BLUE}); scene('jv_ring',.5,{x:F.x+F.w*.3,y:F.mid,r:46,c:BLUE}); }],
+    [2330,()=>{ jitter(f); sfx.zap&&sfx.zap(); scene('jv_arc',.6,{x0:p.x-38,y0:p.y-me.h*.5,x1:F.x+F.w*.3,y1:F.mid+8,amp:18}); scene('jv_sparks',.5,{x:F.x+F.w*.2,y:F.mid,n:10,r:28,c:SPARK,seed:.5}); }],
+    [2400,()=>{ sfx.zap&&sfx.zap(); scene('jv_crackle',.7,{x:p.x,y:p.y-me.h*.5}); scene('jv_zapfx',.6,{x:p.x-4,y:p.y-80}); scene('jv_text',.9,{x:p.x,y:p.y-130,txt:'ZZT',c:SPARK,sc:2}); }],
     [3000,()=>say(m.id,'loose_wire_zap')],
     [3300,'end',res(E2)+'Not his problem any more.']]); };
 
