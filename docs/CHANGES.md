@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 44): New home-screen icon (`icon1`)
+
+- Tom (11:53): the iPhone home-screen icon should show the game logo at the top with just the word TOM on the banner, and Tom's new head centered below it.
+- New `icon-v7.png` (180x180): the painted logo's TOM row (compass and vines) on a wooden plaque, Tom's painted portrait in a gold ring below it, the welcome-screen harbor as backdrop. Built from `art/welcome.webp` and `portraits/tom.png`. `index.html` points at it (new filename so iOS does not serve the cached icon); `launch/apple-touch-icon.png` and `CURSOR-DEPLOY.md` updated to match.
+- iOS reads the icon only when the shortcut is added: Tom must delete the old home-screen shortcut and add it again from Safari (Share, Add to Home Screen).
+- Tested: `smoke.py`; icon looked at at 720 px and at the real 180 px. Stamp `build icon1`.
+
 ## 2026-11-01 (day, 43): Welcome screen, everyone stands further back (`back1`)
 
 - Tom (11:53): on the welcome screen make everyone stand back a bit further.
