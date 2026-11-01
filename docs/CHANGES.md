@@ -1,3 +1,7 @@
+## 2026-11-01 (day, 34): Olivia's battle sheet saved for install (`olivia4src`)
+
+- Tom (00:35): sent Olivia's 4 x 4 standard battle sheet in the fruit-print dress. Saved as `tools/sprite-bake/src/olivia-battle-v1.png` (source art only). No game code or sprites changed yet, so no `?v=` bump or new stamp. The ability prompts (outline plus 11 prompts) went to Tom as a zip and are in the Project doc claude/olivia-ability-prompts.md.
+
 ## 2026-11-01 (day, 34): Chapter title cards show the chapter's own starting area (`cardbg1`)
 
 - Tom (00:31): the chapter title card always showed Long Island Square behind it; it should show the area where that chapter starts.
