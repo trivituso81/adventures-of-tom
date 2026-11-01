@@ -211,7 +211,7 @@ function pressAction() {
       if(n.visitedOnce) { const l=again(); if(l) lines=[l]; }
       n.visitedOnce=true;
     }
-    const rm=n.mom?amy:(n.grandma?deedee:(n.grandpa?boppy:(n.partner?tnb:(n.dad?justin:null))));
+    const rm=n.mom?amy:(n.grandma?deedee:(n.grandpa?boppy:(n.partner?tnb:(n.dad?justin:(n.cousin?olivia:null)))));
     if(rm&&!inParty(rm)) {
       const prev=n.onClose;
       n.onClose=()=>{ if(prev) prev(); offerRecruit(rm,n); };

@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 38): Olivia can be recruited in Jefferson Park from chapter 6 (`olivia7`)
+
+- Tom (01:32): Olivia is recruitable only from chapter 6 onward, in Jefferson Park. Talk to her at 2nd Ave (she is `cousin:true`) and she offers to join, with the yes/no prompt and the swap-out prompt when the party is full. Before chapter 6 (including the demo) she talks as before and never asks. She goes home when the party leaves Los Angeles, except from chapter 11 on, when she can travel (like Justin).
+- `RECRUIT_TALK.olivia` (ask, yes, no, swap, bye, four follower lines) in `engine/followers.js`; rule in `canBeHere` (`engine/story.js`); `n.cousin` in `engine/overworld.js`; her NPC in `data/maps-la.js`. The new ask and follower lines are spoken by speech synthesis until baked.
+- Tested with new `tools/recruit_olivia_test.py`: not offered in chapters 0 and 5, offered in 6, 7, 12, 13; joins, and a save then load keeps her; dialogue box shown with her portrait. Not played on the phone. Stamp `build olivia7`.
+
 ## 2026-11-01 (day, 38): NEW GAME opens one chapter list (`newlist1`)
 
 - Tom (01:37) asked to drop the Start New step (PART 1 / PART 2 / BONUS). NEW GAME now goes straight to "Pick a chapter": CH 1 to CH 20, then BONUS (Nine Scoops), then BACK, in the same two-column scrolling list. BACK returns to the welcome panel with NEW GAME selected. The difficulty picker, chapter 11 clear-data rule and bonus start are unchanged; the difficulty screen's BACK returns to this list.

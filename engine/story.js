@@ -27,7 +27,7 @@ function heartTrace(id) {
 }
 
 // ---------- 2. Chapters and party rules ----------
-const TOWN_HOMES={grace:'le',rose:'le',amy:'le',deedee:'le',boppy:'le',justin:'le',tnb:'la',nara:'la'};
+const TOWN_HOMES={grace:'le',rose:'le',amy:'le',deedee:'le',boppy:'le',justin:'le',tnb:'la',nara:'la',olivia:'la'};
 const DEFAULT_RULES={lock:['tom','grace','rose'],force:[],bar:[],allow:null,homes:TOWN_HOMES,decline:{}};
 // Chapter 0 is the demo (Long Island and Los Angeles, free play). Chapters 1 to 20 follow the story bible;
 // each chapter session (C1 to C20) fills in its rules and scenes.
@@ -184,8 +184,9 @@ function canBeHere(m) {
   const r=partyRules();
   if(r.bar.includes(m.id)) return false;
   if(m===justin) { if(justinStays()) return false; }
+  else if(m===olivia) { if(STORY.chapter<6) return false; }
   else if(r.allow&&!r.allow.includes(m.id)&&m!==hero&&m!==grace&&m!==rose&&!r.force.includes(m.id)) return false;
-  const h=memberHome(m.id);
+  const h=(m===olivia&&STORY.chapter>=11)?'any':memberHome(m.id);
   return h==='any'||h===regionOf(currentMap);
 }
 function canLeave(m) { const r=partyRules(); return m!==hero&&!r.lock.includes(m.id)&&!r.force.includes(m.id); }

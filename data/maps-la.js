@@ -246,7 +246,7 @@ const LA_AREAS=[
     npcs:[
       // Olivia and Michael (and Lachlan, 4, and Isla, 1): Nara's family. Away on their desert trip while Tom has Nara
       // (chapters 2 and 4 until the chapter is done); data/scenes.js AWAY rule.
-      {name:'Olivia',x:11,y:19,look:'marisol',sheet:'olivia',kin:true,trace:'olivia-hello',duration:0.75,away:NARA_TRIP,
+      {name:'Olivia',x:11,y:19,look:'marisol',sheet:'olivia',kin:true,cousin:true,trace:'olivia-hello',duration:0.75,away:NARA_TRIP,
         when:[{test:NARA_BACK,lines:[
           'Tom! You kept Nara alive! Did she eat? She didn\'t eat, did she.',
           'The desert was gorgeous. Lachlan found a rock. Isla ate a rock. Different rock.',
