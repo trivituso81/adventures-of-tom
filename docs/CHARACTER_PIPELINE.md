@@ -223,7 +223,7 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 
 ### Carried children (Michael with Lachlan and Isla; Tom, 2026-11-01)
 
-Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in every frame. Rules: Michael's face matches the other adults (head row); Michael's whole figure follows his real height (walk 53 to 54 rows like Justin, top of cap to feet); **Lachlan's head is Grace's head size and Isla's head is Rose's head size**, measured top of hair to chin at the same scale on the head row (in walk frames about 80% and 75% of Michael's head). The prompt asks for those sizes (claude/michael-walk-sheet-prompt.txt, v2); when the sheet returns, check all three heads on a head row and fix any of them with `kidhead.grow_head` on that head's own box (head boxes hand-set, as in bake_jojo.py). Michael is never drawn in battle (Olivia's MICHAEL! move keeps him off screen). Until his painted sheet arrives the game shows his old traced pixel sprite (`MICHAEL_OW` in data/npc-sprites.js); do not resize that one.
+Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in every frame. Rules: Michael's face matches the other adults (head row); Michael's whole figure follows his real height (walk 53 to 54 rows like Justin, top of cap to feet); **Lachlan's head is Grace's head size and Isla's head is Rose's head size**, measured top of hair to chin at the same scale on the head row (in walk frames about 80% and 75% of Michael's head). Installed 2026-11-01 (`michael1`): `tools/sprite-bake/bake_michael.py` (sheet `src/michael-walk-v1.png` from prompt v4 of claude/michael-walk-sheet-prompt.txt) grows the three heads as separate layers: each head is a hand-set box (`HEADS`) or, in profile where the three overlap, a hand-drawn outline (`POLY`); a head in front owns the overlap, so no neighbour pixels are copied. Factors are solved per view so the heads land on target after the figure scales to 54 rows (front: Michael x1.25, Lachlan x1.44, Isla x1.47; back x1.18 / 1.41 / 1.35); the profile heads are painted small, so growth there is capped at x1.5 (`KMAX`) and they stay a little under target. Output `art/chars/michael-ow.webp`, `data/michael-hires.js`, wired by `data/michael-hires-use.js` (OW.michael; side = mirrored left row). Michael is never drawn in battle (Olivia's MICHAEL! move keeps him off screen). The old traced pixel sprite (`MICHAEL_OW` in data/npc-sprites.js) is now only the fallback while the atlas loads.
 
 ### Current reference values (after `olivia8` and `jojoart1`)
 
@@ -237,7 +237,7 @@ Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in ever
 | Deedee | 5'5" | 131 | 43 | 278 |
 | Olivia | 5'5" assumed (not given yet) | 130 | 45 | not on it |
 | Jojo | 5'6" | 133 | 42 | not on it |
-| Michael (carrying Lachlan and Isla) | 6'4" | never in battle | 50 (old pixel sprite; 53 to 54 when painted) | not on it |
+| Michael (carrying Lachlan and Isla) | 6'4" | never in battle | 55 (painted, `michael1`; his cap top; the figure solves to 54 and grows one row from Lachlan's hair) | not on it |
 | Grace | 4'2" | 126 | 39 | 230 |
 | Rose | 3'4" | 126 | 37 | 205 |
 

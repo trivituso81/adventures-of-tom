@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Michael's painted walk sheet, carrying Lachlan and Isla (`michael1`)
+
+- Tom (14:25): the sheet came back from prompt v4 (both kids in every frame; v2 and v3 had lost them). Installed as his overworld set.
+- `tools/sprite-bake/bake_michael.py` (new): slices the 3 x 3 sheet, grows the three heads as separate layers (hand-set boxes per view; hand-drawn outlines in profile where the heads overlap; a head in front owns the overlap), solves the growth so Michael's head matches Justin's walk head and Lachlan's and Isla's match Grace's and Rose's after the figure scales to 54 rows (docs/CHARACTER_PIPELINE.md section 7, Carried children). Profile growth capped at x1.5 because the generator drew the side heads small. Result 28 x 55 rows, 46 colours, `art/chars/michael-ow.webp` (140 KB), `data/michael-hires.js`.
+- `data/michael-hires-use.js` (new, after jojo-hires-use.js in index.html) sets OW.michael from the atlas; side = mirrored left row. `MICHAEL_OW` (npc-sprites.js) stays as the fallback. Source saved as `tools/sprite-bake/src/michael-walk-v1.png`.
+- ART_V `michael1`; `?v=` bumps on painted.js and main.js. docs/CHARACTER_PIPELINE.md: Carried children paragraph and the reference table row updated.
+- Tested: `smoke.py` FAILS: [], `jpark_test.py` FAILS: [], `recruit_olivia_test.py`; Michael looked at on 2nd Ave in all four facings (portrait) and in landscape; head row with Justin, Amy, Grace, Rose looked at. Stamp `build michael1`.
 ## 2026-11-01 (day, 43): Frisbee Golf, Jojo deeper into the monster plus a crash cloud (`fgolf2`)
 
 - Tom (14:34): "looks good", but Jojo should end up further back, overlapping the monster (she in front of it, never the monster over her), and add a cartoon crash cloud at the moment of contact.
