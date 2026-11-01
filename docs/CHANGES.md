@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Tom's phone clips merged, Olivia has her voice (`clips5`)
+
+- Tom (14:46) sent `local-clips-export_5.json` (178 clips; 5 repeats of the same line, newest kept = 173). New tool `tools/bake-page/merge-local.js` does the merge (battle into `data/voice/<id>.js`, dialogue into the chapter file that holds the key, silence trim and speaker fx on dialogue, mono 32 kHz 48 kbps).
+- Battle: Olivia 31 new (new `data/voice/olivia.js`, loaded after justin.js), Amy 31 replaced and 5 added, Justin 47 replaced and 1 added, TNB 9 replaced (includes "Hey, Jojo! Catch!"), Grace 4 and 2, Tom 3, Rose 1 and 1. Dialogue: 38 clips into `dialog-ch28.js` (Justin, Michael, Olivia, Amy, Boppy, Deedee).
+- Bake list and `pending.json` now empty (all 39 items were in the export). `make-list.js` and `battle-baker/merge.js` know Olivia as a battle voice. Voice Library index rebuilt.
+- Tags `?v=clips5` on the changed voice files, dialog-ch28 (dialog-cast.js) and main.js; stamp `build clips5`. Tested: `smoke.py` FAILS: [], `battle_sound_test.py` FAILS: [], page load shows Olivia 31, Justin 48, Amy 51 battle clips and 34 Michael/Olivia dialogue clips, no page errors.
 ## 2026-11-01 (day, 43): Michael's painted walk sheet, carrying Lachlan and Isla (`michael1`)
 
 - Tom (14:25): the sheet came back from prompt v4 (both kids in every frame; v2 and v3 had lost them). Installed as his overworld set.
