@@ -56,7 +56,7 @@ function startSplash() {
 //   admin:  DEMO / BATTLE LAB / BACK.          lab: the Battle Lab fights.
 // Chapter 1 is a true new game; later chapters fast-forward the story (engine/chapter-select.js). Part 2 chapter 11
 // continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none.
-const SPLASH_PARENT={new:'launch',admin:'launch',lab:'admin'};
+const SPLASH_PARENT={new:'launch',admin:'launch',lab:'admin',solo:'lab'};
 // RELOAD (welcome page, left of ADMIN): a hard reload for the iPhone home-screen app, which has no refresh button and can
 // hold on to old files. It re-downloads the page and every script (skipping the big baked voice files, which rarely change),
 // then reloads on a fresh address. Saves live in localStorage for this site, so they are kept.
@@ -147,12 +147,19 @@ const SPLASH_MODES={
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
   lab:{get tab(){ return splashLabTab(); },cue:'A / Enter to fight. B / Esc to go back',choices:()=>{
     const per=SPLASH_LAB_PER,pages=Math.ceil(B2_LAB.length/per),pg=Math.max(0,Math.min(pages-1,splash.labPage||0));
-    const from=pg*per,list=B2_LAB.slice(from,from+per).map((L,k)=>({name:L.name,sub:L.sub,act:()=>splashLab(from+k)}));
+    const from=pg*per,list=B2_LAB.slice(from,from+per).map((L,k)=>({name:L.name,sub:L.sub,act:()=>L.solo?splashSoloOpen(from+k):splashLab(from+k)}));
     list.push({name:'PREV PAGE',sub:'Page '+(((pg+pages-1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg-1,per,per)},
               {name:'NEXT PAGE',sub:'Page '+(((pg+1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg+1,per,per+1)},
               {name:'BACK',sub:'',cls:'back',act:splashBack});
     return list; }}
 };
+// SOLO test: pick any playable character, then fight alone with every move unlocked and nobody able to be hurt.
+// EXIT (top of the battle) returns to this picker. SPLASH_SOLO_CAST is every playable member, in family order.
+const SPLASH_SOLO_CAST=['tom','grace','rose','amy','deedee','boppy','tnb','nara','justin','olivia'];
+SPLASH_MODES.solo={tab:'Solo: pick a fighter',cue:'A / Enter to fight. B / Esc to go back',choices:()=>[
+  ...SPLASH_SOLO_CAST.map(id=>{ const m=memberById(id); return {name:m?m.name.toUpperCase():id.toUpperCase(),cast:[id],sub:'Alone vs Old Iron-Gill.',act:()=>splashLab(splash.soloIdx,id)}; }),
+  {name:'BACK',sub:'',cls:'back',act:splashBack}]};
+function splashSoloOpen(i) { splash.soloIdx=i; splashOpen('solo'); }
 const SPLASH_LAB_PER=6;
 function splashLabPage(p,per,sel) {
   const pages=Math.ceil(B2_LAB.length/per); splash.labPage=(p+pages)%pages;
@@ -242,11 +249,11 @@ function titleAsk(name,text,options,cue) {
   splashSetMode('ask');
   if(!was) { splash.last=performance.now(); requestAnimationFrame(splashFrame); }
 }
-function splashLab(i) {
-  sfx.select(); unlockAudio(); splash.active=false;
+function splashLab(i,who) {
+  sfx.select(); unlockAudio(); splash.active=false; splash.soloBack=!!who;
   const el=$('splash'); el.classList.add('out');
   setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
-  b2Lab(i);
+  b2Lab(i,who);
 }
 // The demo is its own frozen copy of the game in demo/, with its own saves (the le-save-* keys).
 function openDemo() {
@@ -276,7 +283,7 @@ function openRecast() {
 function splashToLab() {
   const el=$('splash'); if(!el) return;
   el.hidden=false; el.classList.remove('out');
-  splash.active=true; splashSetMode('lab');
+  splash.active=true; splashSetMode(splash.soloBack?'solo':'lab'); splash.soloBack=false;
   splash.last=performance.now(); requestAnimationFrame(splashFrame);
 }
 // Fade the title screen out over the town and run next there.

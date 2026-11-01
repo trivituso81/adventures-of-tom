@@ -17,7 +17,7 @@ def bag_exit(pg,tag):
     pg.screenshot(path=os.path.join(SHOTS,f'labexit-{tag}-bag.png'))
     pg.evaluate("()=>{ B2.sel=b2BagList(B2.actor).length-1; b2Render(); }"); pg.wait_for_timeout(200)
     pg.keyboard.press('Enter')
-    return names
+    return [n.upper() for n in names]
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
