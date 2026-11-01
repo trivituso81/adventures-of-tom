@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 32): Amy's house gets the 3D treatment (`amyhouse3d`)
+
+- Tom: do the 3D effect to all of Amy's house too. Same method as Tom's house (feet must land on bare floor), plus depth cutouts.
+- Walk map: the aisle behind the kitchen island (row 3, x9 to x14) is now open and reached up the east side (x14, rows 3 to 5). The island footprint is now 4 wide `[10,4,4,1]`. Fact: a complete ring around Amy's island is not possible, because a wall block closes its west end. It walks as a U (north aisle, east side, south side).
+- 3D: `art/amyhouse-fg.webp` (new, `tools/make_amyhouse_fg.py`) cuts out the island top, the three north dining chair backs and the living room sofa. `PLATE_BEHIND.amyhouse` in `engine/plate.js` draws them over anyone standing behind, so legs are hidden.
+- Tested: `tools/amyhouse_walk_test.py` (new), `amy_scenes_test`, `justin_test`, `reach_test amyhouse` (0 cut off), `smoke` all pass; portrait and landscape screenshots viewed. `recruit_justin_test` fails with a null menu error, the same on the untouched tree (existing, not from this change). Not played on the phone. Stamp `build amyhouse3d`.
 ## 2026-11-01 (day, 32): Hearts redrawn in the painted style (`hearts1`)
 
 - Tom (23:48): the hearts for kisses, hugs and so on must match the new painted look. There is now one shared painted heart (`paintHeart` in `engine/town-render.js`): soft warm glow, lit gradient (lighter top left, deeper bottom right), dark-rose edge instead of black, rim light, glossy highlight. It is built from whatever colour the caller passes, so the old pink, rose and gold variants all keep their tint.

@@ -1389,11 +1389,15 @@ const LE_ROOMS=[
     // (x8 to x9, y13 to y15) up to the blue front door (9,12). The mask is the walk map: '#' blocks, '.' walks.
     // One hall (x9) from the door to the cross hall (row 8). West along row 8 to the stair hall (x3) for the study and bath; the corridor (x7) leads to the
     // bedroom. East side: x10 up to the kitchen row (y5), the dining table in the middle. Living room and reading nook are painted dressing only.
+    // 3D (amyhouse3d, 2026-11-01): row 3 is the aisle behind the kitchen island, reached up the east side (x14, y3 to y5) and ending at (9,3). Its floor is hidden by the
+    // island top, so art/amyhouse-fg.webp (tools/make_amyhouse_fg.py, PLATE_BEHIND.amyhouse) is drawn over Tom there and the top hides his legs. The island ends at x13, so
+    // x14 is open beside it. The west end stays closed: a wall block stands against the island's west end, so there is no full ring here. The cutout also covers the three
+    // north dining chairs (row 5) and the sofa (row 8), which Tom walks behind.
     plateMask:[
       '################',
       '################',
       '################',
-      '#######.######.#',
+      '#######.#......#',
       '##..##...#####.#',
       '###.###..#.....#',
       '###.###.##.###.#',
@@ -1443,7 +1447,7 @@ const LE_ROOMS=[
       ['photo',4,5,2,1,'Family photos','Amy, Justin, Grace and Rose at a 5K. Amy won. Justin carried both girls across the finish anyway.'],
       ['counter',2,3,2,1,"Amy's desk",'A stack of graded spelling tests, a race bib for Sunday, and three running medals used as coasters.',{variant:'letters'}],
       ['bed',5,3,2,1,"Amy and Justin's bed",'Neatly made. A duffel bag packed for a race. Justin\'s side has a level on it.'],
-      ['counter',10,4,5,1,'Kitchen island','A bowl of fruit, a loaf of bread, and a carton of almond milk. Amy keeps it exactly where she can see it from the track.']]},
+      ['counter',10,4,4,1,'Kitchen island','A bowl of fruit, a loaf of bread, and a carton of almond milk. Amy keeps it exactly where she can see it from the track.']]},
   {id:'grands',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#cbb089',alt:'#d7be98',wall:'#9a8f78',trim:'#e6dcc3',pattern:'wood',rug:'#9c6e62'},
     rug:[3,5,6,3],
