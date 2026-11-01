@@ -26,7 +26,7 @@ OUT = os.path.join(ROOT, 'data/olivia-battle-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KB, KO_ = 2, 2
-AV = '?v=olivia5'   # cache string: bump with the ?v= tag in index.html whenever frame sizes change
+AV = ''   # was '?v=olivia5'; engine/painted.js adds ?v=ART_V to atlases without a tag (2026-11-01).  Old note: cache string: bump with the ?v= tag in index.html whenever frame sizes change
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=float, default=97)   # idle height in grid rows
@@ -124,6 +124,14 @@ def fmt_rows(rows, indent='    '):
 
 # ---------------------------------------------------------------- core battle set
 FB = args.battle_h * KB / poses['idleA'].height          # one scale for every frame
+# Head (2026-11-01, Tom: same head rule as the other adults): face was about 17% smaller than Amy's; head x HEAD_K grown about the chin,
+# body unchanged (FB comes from the unwarped idle). Chin sits at CHIN_SHARE of the idle height on the battle sheet.
+import kidhead as _kh
+HEAD_K, CHIN_SHARE = 1.25, 0.385
+_HEAD_PX = CHIN_SHARE * poses['idleA'].height
+NO_GROW = {'ko'}
+for _n in list(poses):
+    if _n not in NO_GROW: poses[_n] = _kh.grow_head(poses[_n], HEAD_K, _HEAD_PX)
 core_big = tighten(place_feet({k: scaled_to(poses[v], FB) for k, v in CORE.items()}, KB), KB)
 core_pal, core_rows = rows_of(core_big, KB, args.colors)
 core_rects = pack(core_big, os.path.join(ART, 'olivia-battle.webp'))
@@ -209,12 +217,13 @@ def place_feet_lift(frames, lifts, k):
         c = Image.new('RGBA', (half * 2, Hc), (0, 0, 0, 0)); c.alpha_composite(im, (int(round(half - axs[n])), Hc - im.height - int(round(lifts[n])))); out[n] = c
     return out
 
+NO_GROW_SETS = set()   # ability frames left as painted (head not on top, or a prop above the head)
 sets = {}
 for sk, (fname, layout, nm) in SHEETS.items():
     r = cut_set(sk)
     if r is None: continue
     names, got, lift, f = r
-    fr = {n: scaled_to(got[n], FB * f) for n in names}
+    fr = {n: scaled_to(_kh.grow_head(got[n], HEAD_K, _HEAD_PX / f) if n not in NO_GROW_SETS else got[n], FB * f) for n in names}
     lf = {n: lift[n] * f * FB for n in names}
     big = tighten(place_feet_lift(fr, lf, KB), KB)
     pal, rows = rows_of(big, KB, args.colors)

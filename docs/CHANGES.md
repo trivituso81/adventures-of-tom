@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 43): Olivia follows the head rule (`olivia8`)
+
+- Tom (12:12): everyone looks good now; apply the same rule to Olivia (Jojo later, her art is being redone).
+- Measured next to Amy (same height assumed, 5'5"; Olivia's height is not on record): face about 17% smaller in battle and 16% smaller walking; body below the chin already matched Amy's.
+- Head grown about the chin, body unchanged, using tools/sprite-bake/kidhead.py `grow_head`: battle x 1.25 (bake_olivia_battle.py `HEAD_K`, `CHIN_SHARE` .385; every ability sheet too; KO unchanged), walk x 1.18 (bake_olivia.py `WALK_HEAD_K`, `WALK_CHIN` .344). Battle height now 130 px (Amy 131).
+- Both bakes dropped their fixed atlas tags (`?v=olivia5`, `?v=olivia3`) so ART_V reaches them; bake_olivia.py no longer overwrites portraits/olivia.png (the `face8` painting) unless run with PORTRAIT=1. ART_V `olivia8`.
+- Tested: `smoke.py`; full `kit_test.py olivia`; `recruit_olivia_test.py`; head rows (walk at welcome scale, battle) and every Olivia battle frame looked at. Stamp `build olivia8`.
+
 ## 2026-11-01 (day, 43): New painted portrait for Olivia (`face8`)
 
 - Tom sent a new painted portrait of Olivia (blonde, center part, big smile, cream top). Tight face crop 128x128 into portraits/olivia.png, framed like Amy, Grace and the others; replaces the old cutout.
