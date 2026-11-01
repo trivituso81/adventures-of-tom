@@ -1,0 +1,194 @@
+{
+"tag": "v4",
+"lines": [
+{
+"voice": "justin",
+"speaker": "",
+"text": "Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.",
+"ctx": "v4 override",
+"script": "[busy, cheerful] Rewiring the hallway. Amy wanted a dimmer. [easy, knowing] Amy gets a dimmer."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Tom. Hey. Hold this. No, the other end. Don't touch the copper.",
+"ctx": "v4 override",
+"script": "[friendly, distracted] Tom. Hey. Hold this. No, the other end. [quick, warning] Don't touch the copper."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.",
+"ctx": "v4 override",
+"script": "[goofy, proud] Grace, Rose, come here. Who's Daddy's favorite? [brisk, pleased] Both. Correct. Go get 'em."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Grace, you were amazing out there. Rose, you were also amazing. Also, why are you sticky?",
+"ctx": "v4 override",
+"script": "[beaming, warm] Grace, you were amazing out there. Rose, you were also amazing. [puzzled, wary] Also, why are you sticky?"
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Fixed the porch light, the garbage disposal and the bunk bed. Before lunch.",
+"ctx": "v4 override",
+"script": "[casual, bragging] Fixed the porch light, the garbage disposal and the bunk bed. [smug, easy] Before lunch."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Every country song is about a truck, a dog or a girl. I got a truck and two girls. Living the song.",
+"ctx": "v4 override",
+"script": "[easy, amused] Every country song is about a truck, a dog or a girl. [warm, pleased] I got a truck and two girls. [lilting, fond] Living the song."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Amy says I never sit down. I sat down once. It was a playoff game. We lost.",
+"ctx": "v4 override",
+"script": "[dry, deadpan] Amy says I never sit down. I sat down once. [proud, easy] It was a playoff game. [grim, flat] We lost."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Those two girls are the best thing I ever built. And I built that deck.",
+"ctx": "v4 override",
+"script": "[soft, sincere] Those two girls are the best thing I ever built. [proud, amused] And I built that deck."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Long Island born. Country music raised. Don't ask me how. Nobody knows.",
+"ctx": "v4 override",
+"script": "[easy, matter-of-fact] Long Island born. Country music raised. [amused, dry] Don't ask me how. Nobody knows."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Big game tonight. If you hear yelling, that's me. If you hear crying, that's also me.",
+"ctx": "v4 override",
+"script": "[hyped, bright] Big game tonight. [gleeful, easy] If you hear yelling, that's me. [mock-serious, deadpan] If you hear crying, that's also me."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Watch your step, Tom. That board is loose. I know. It's on the list.",
+"ctx": "v4 override",
+"script": "[calm, easy] Watch your step, Tom. That board is loose. [sheepish, rueful] I know. It's on the list."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Halverson. Fourth grade. I'm hiding in the staff room. That's allowed. It's in the contract.",
+"ctx": "v4 override",
+"script": "[low, conspiratorial] Halverson. Fourth grade. I'm hiding in the staff room. [tired, flat] That's allowed. [dry, certain] It's in the contract."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "If you're hungry, the fridge is a minefield. Every lunch in there has a name on it. Read the labels.",
+"ctx": "v4 override",
+"script": "[warning, deadpan] If you're hungry, the fridge is a minefield. [flat, grave] Every lunch in there has a name on it. [firm, dry] Read the labels."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Conference night is over. I survived. I'm going to sit on this couch until Field Day.",
+"ctx": "v4 override",
+"script": "[exhausted, relieved] Conference night is over. I survived. [deadpan, weary] I'm going to sit on this couch until Field Day."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.",
+"ctx": "v4 override",
+"script": "[brightening, reverent] Deedee’s plate? Oh, everybody waits for Deedee’s plate. [warm, fond] She brings one every conference night."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Don't tell Gary. Gary eats the whole thing.",
+"ctx": "v4 override",
+"script": "[hushed, conspiratorial] Don't tell Gary. [flat, disapproving] Gary eats the whole thing."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Heading out? I can come. I have a tool belt, a flashlight and a strong opinion about whatever you're about to fight.",
+"ctx": "v4 override",
+"script": "[easygoing, eager] Heading out? I can come. [warm, goofy] I have a tool belt, a flashlight and a strong opinion [deadpan, easy] about whatever you're about to fight."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "No problem. The hallway light won't finish itself. It's been almost done since June.",
+"ctx": "v4 override",
+"script": "[easygoing, dry] No problem. The hallway light won't finish itself. [rueful, flat] It's been almost done since June."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Somebody has to tag out. I'll wait. I'll be on the ladder.",
+"ctx": "v4 override",
+"script": "[relaxed, amused] Somebody has to tag out. I'll wait. [easy, warm] I'll be on the ladder."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Great. Let me grab my jacket. And the ladder. Don't ask about the ladder.",
+"ctx": "v4 override",
+"script": "[warm, cheerful] Great. Let me grab my jacket. And the ladder. [firm, dry] Don't ask about the ladder."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread.",
+"ctx": "v4 override",
+"script": "[cheerful, relieved] Hey, everybody. The lights all came back on at twelve oh one. [warm, easy] So I came back too. [sheepish, quiet] I brought bread."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "It's store-bought.",
+"ctx": "v4 override",
+"script": "[flat, guilty] It's store-bought."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Take some for the road. Don't tell Gary.",
+"ctx": "v4 override",
+"script": "[generous, warm] Take some for the road. [hushed, conspiratorial] Don't tell Gary."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Every conference night. Twelve years. It's the only reason Gary shows up.",
+"ctx": "v4 override",
+"script": "[tired, fond] Every conference night. Twelve years. [dry, flat] It's the only reason Gary shows up."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "The banner's done. Hold this. No, the other end. Don't touch the copper.",
+"ctx": "v4 override",
+"script": "[satisfied, easy] The banner's done. Hold this. No, the other end. [sharp, warning] Don't touch the copper."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "It lights up. Every letter. I'm an electrician, Gracie. It was never going to just hang there.",
+"ctx": "v4 override",
+"script": "[proud, bright] It lights up. Every letter. [fond, mock-offended] I'm an electrician, Gracie. [easy, certain] It was never going to just hang there."
+},
+{
+"voice": "justin",
+"speaker": "",
+"text": "Hold this. No, the other end. It's the OTHER banner. Don't touch the copper.",
+"ctx": "v4 override",
+"script": "[brisk, distracted] Hold this. No, the other end. [emphatic, quick] It's the OTHER banner. [sharp, warning] Don't touch the copper."
+}
+]
+}

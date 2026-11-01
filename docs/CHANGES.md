@@ -1,3 +1,9 @@
+## 2026-11-01 (evening, 51): The last 263 scripts rewritten; every Voice Library line is now v4 style (`vtag3`)
+
+- Done: the 236 battle lines whose only script was the baked record (`battle-scripts.json`) and the 27 Justin dialogue lines (`justin-dialogue.json`) got new scripts in the layer the Library reads first (`battle-overrides.json`; new `scripts/zz-v4-overrides.json`, which sorts last and so wins). The record files are untouched. Also the pending Disconnected Controller line (`tools/bake-page/pending.json`). Checker: 0 of 263 rejected; the index now has 0 old-style scripts (no stacked qualifiers, no [beat], no accent words).
+- Checker fix: stretched words that already had a double letter (CHEEEERS, LOOOOK) now count as the same word.
+- Tested: `unused_voice.py` 0 on all four; Voice Library test ALL PASS; `smoke.py` FAILS: []. Not heard on the phone.
+
 ## 2026-11-01 (evening, 49): Every Voice Library script rewritten to the v4 tag rules (`vtag2`)
 
 - Tom (17:25): approved the 10 samples, "now do every single line".

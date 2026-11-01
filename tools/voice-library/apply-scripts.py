@@ -24,7 +24,7 @@ def words(s): return re.sub(r'[^a-z0-9]+',' ',s.lower()).split()
 def canon(s):
     s = re.sub(r'\bTah Tah\b','tata',s,flags=re.I); s = re.sub(r'\bTa-?ta\b','tata',s,flags=re.I)
     s = s.replace('...',' ')
-    return [re.sub(r'(.)\1{2,}',r'\1',w) for w in words(s)]
+    return [re.sub(r'(.)\1+',r'\1',w) for w in words(s)]   # collapse any repeated letter so CHEEEERS matches cheers
 def check(text, script):
     errs = []
     if '—' in script: errs.append('em dash')
