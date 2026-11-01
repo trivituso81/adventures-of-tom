@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 52): TNB's lobby elevator button is easy to press (`elev1`)
+
+- Tom (17:35): the press area for the elevator in TNB's loft building is too small, and he had to stand far to the right of the button to use it.
+- Fact (cause): the invisible trigger sat on one tile (x11, row 3), but the brass button is painted on tile x10, beside the elevator doors. Standing under the painted button did nothing.
+- Call made: the trigger now covers the whole elevator, doors and button together (x8 to x11 on row 3, four tiles wide). Pressing A facing up from any of the four floor tiles under it asks "Go up to TNB's loft?".
+- Changed: `data/maps-la.js` (map `loftlobby`, object 'Elevator button'). No art changed.
+- Tested: pressed A at each of the four tiles (all ask to ride; the wall tiles either side do not); `rooms_test` loftlobby and lofts, `reach_test`, `tap_test`, `smoke` all pass; portrait and landscape screenshots looked at. NOT seen on the phone.
+
 ## 2026-11-01 (evening, 51): The last 263 scripts rewritten; every Voice Library line is now v4 style (`vtag3`)
 
 - Done: the 236 battle lines whose only script was the baked record (`battle-scripts.json`) and the 27 Justin dialogue lines (`justin-dialogue.json`) got new scripts in the layer the Library reads first (`battle-overrides.json`; new `scripts/zz-v4-overrides.json`, which sorts last and so wins). The record files are untouched. Also the pending Disconnected Controller line (`tools/bake-page/pending.json`). Checker: 0 of 263 rejected; the index now has 0 old-style scripts (no stacked qualifiers, no [beat], no accent words).
