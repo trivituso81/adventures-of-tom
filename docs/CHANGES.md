@@ -1,3 +1,7 @@
+## 2026-11-01 (day, 43): Chapter 1 intro, Tom's stretch cut to under half (`stretch1`)
+
+- Tom (15:05): the stretch in the chapter 1 intro is way too long. The painted stretch ran 5.2 seconds; it now runs 2.4 (`STRETCH_DUR` in `engine/intro.js`). Same eight poses, same order, each pose proportionally shorter; the second exhale sound now fires at 75% of the stretch instead of at a fixed 3.9 s.
+- Tag `?v=stretch1` on intro.js and main.js; stamp `build stretch1`. Tested: `smoke.py` FAILS: []; real chapter 1 intro timed at 2.42 s wall clock, no page errors, mid-stretch and the line "Oof, I'm finally here!" both looked at.
 ## 2026-11-01 (day, 43): Playable characters and Michael 15% bigger on the map (`big1`)
 
 - Tom (15:02): all characters 15% larger in the overworld; then narrowed to playable characters and Michael only, not NPCs.
