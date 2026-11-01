@@ -60,19 +60,29 @@ const DIALOG_KIND=/^(greet|join|praise|intro.*|nara_no_jump)$/;
 
 // ---------- scripts ----------
 const BS=fs.existsSync('tools/voice-library/battle-scripts.json')?JSON.parse(fs.readFileSync('tools/voice-library/battle-scripts.json','utf8')):{};
+// Rewritten battle directions ('voice|text' -> script) from merge-directions.py: they replace stock tags that did not fit the move or the moment.
+const BO=fs.existsSync('tools/voice-library/battle-overrides.json')?JSON.parse(fs.readFileSync('tools/voice-library/battle-overrides.json','utf8')):{};
 const DS={}, DCTX={}, DCH={};
 const SD='tools/voice-library/scripts';
 const SFILES=[];
 for(const d of ['docs',SD]) if(fs.existsSync(d)) fs.readdirSync(d).filter(f=>d===SD?f.endsWith('.json'):/^dialogue-scripts-.*\.json$/.test(f)).sort((a,b)=>a.localeCompare(b,undefined,{numeric:true})).forEach(f=>SFILES.push(d+'/'+f));
 for(const sf of SFILES){
   const j=JSON.parse(fs.readFileSync(sf,'utf8')); const list=Array.isArray(j)?j:(j.lines||[]);
-  for(const it of list){ if(!it||!it.voice||!it.text||!it.script) continue; const k=it.voice+'|'+norm(it.text);
+  for(const it of list){ if(!it||it.voice==null||!it.text||!it.script) continue; const k=it.voice+'|'+norm(it.text);
     DS[k]=it.script; if(it.ctx) DCTX[k]=it.ctx; if(j.chapter) DCH[k]=j.chapter; }
 }
+// Fallback direction for a line with no written script (a brand-new line). Written scripts always win (scripts/*.json).
+// Never "natural, conversational": it says nothing. Start from who is speaking and what the punctuation and caps say, so the
+// first take is at least in character; the Library marks these lines "plain direction" so they get a real script when Claude next
+// writes directions (tools/voice-library/merge-directions.py).
+const BASE={tom:'dry, calm',grace:'bright, bossy',rose:'small, earnest, silly',amy:'brisk, coach voice',deedee:'warm, bustling',boppy:'gruff but kind',tnb:'easy, amused',justin:'easygoing, warm',sal:'quick, friendly'};
 function plain(voice,text){
-  const d=[]; if(voice==='boppy'||voice==='justin') d.push('thick New York accent');
-  d.push(/!/.test(text)?'animated':/\?/.test(text)?'curious':'natural, conversational');
-  return '['+d.join(', ')+'] '+text.replace(/\bTa-?ta\b/gi,m=>m===m.toUpperCase()?'TAH TAH':'Tah Tah');
+  const t=text.replace(/\bTa-?ta\b/gi,m=>m===m.toUpperCase()?'TAH TAH':'Tah Tah');
+  const d=[]; if(BASE[voice]) d.push(BASE[voice]);
+  const caps=/\b[A-Z]{3,}\b/.test(t.replace(/\bTAH TAH\b/g,''));
+  const mood=/^\W*\.\.\./.test(t)?'trailing off':/\?\s*$/.test(t)?(caps?'incredulous':'asking'):/!\s*$/.test(t)?(caps?'emphatic, loud':'bright, energetic'):caps?'emphasizing':'';
+  if(mood) d.push(mood); else if(!d.length) d.push('matter-of-fact');
+  return '['+d.join(', ')+'] '+t;
 }
 
 // ---------- voices ----------
@@ -104,7 +114,7 @@ for(const ch of ORDER){ const L=LINES[ch]; if(!L) continue;
     const ks=[...(textCh[norm(t)]||[])].sort((a,b)=>a-b);
     const it={t:'b',v:ch,k:kinds,x:t,ty:kinds.every(k=>DIALOG_KIND.test(k))?'d':'b',c:ks,w:kinds.join(', '),f:has?fidx(bfile[ch]||'data/voice-clips.js'):-1};
     if(ch==='nara'){ const pr=(BC.voices.nara||{}).prompts||{}; const p=kinds.map(k=>pr[k+'|'+t]).find(Boolean); it.p=p?p.p:'Friendly medium-size dog, happy excited barks.'; it.d=p?p.d:2; }
-    else it.s=PS[ch+'|'+t]||kinds.map(k=>BS[ch+'|'+k+'|'+t]).find(Boolean)||plain(ch,t);
+    else it.s=PS[ch+'|'+t]||BO[ch+'|'+t]||kinds.map(k=>BS[ch+'|'+k+'|'+t]).find(Boolean)||plain(ch,t);
     if(fxOf(ch,null,true)) it.fx=1;
     items.push(it);
   }
