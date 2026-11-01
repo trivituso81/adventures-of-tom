@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Welcome screen, everyone stands further back (`back1`)
+
+- Tom (11:53): on the welcome screen make everyone stand back a bit further.
+- Call made: everyone about 9% smaller (`SPLASH_ALL` 1.1 to 1.0, undoing the 2026-10-29 bump) and feet lifted 35 picture px (`SPLASH_BACK`, engine/splash.js). Relative heights unchanged, so the real-height canon still holds.
+- Tested: welcome screen at 390x844 before and after looked at; `smoke.py`. Stamp `build back1`.
+
 ## 2026-11-01 (day, 43): Grace's and Rose's heads grown to the adults' head-to-body ratio (`kids1`)
 
 - Tom (11:44): check the head-to-body ratio for Tom and TNB and apply it to Grace and Rose, bigger heads, same bodies.
