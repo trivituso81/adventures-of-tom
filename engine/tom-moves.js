@@ -18,7 +18,7 @@ const kanji=(ch,x,y,size,c,o)=>{ gfx.save(); gfx.font='bold '+size+'px "Hiragino
 const bt=(txt,x,y,c,sc,dur=1)=>battle.texts.push({txt,x,y,color:c,sc,t:0,dur});
 const hit=E2=>landHit(E2.dmg,E2.crit);
 const tomPos=()=>battle.actorPos||{cx:399,base:246,h:105};
-const hand=()=>{ const p=tomPos(); return {x:p.cx-35,y:p.base-Math.round(p.h*.51)}; };   // .51 since 2026-11-01 (bigger head, same body): the hand stays 73 px up
+const hand=()=>{ const p=tomPos(); return {x:p.cx-50,y:p.base-Math.round(p.h*.51)}; };   // .51 since 2026-11-01 (bigger head, same body): the hand stays 73 px up
 const toss=(kind,x0,y0,x1,y1,delay,dur,arc=60,extra={})=>battle.props.push(Object.assign({kind,x0,y0,x1,y1,arc,spin:true,t:-delay,dur},extra));
 const act=(fx,d)=>{ fx.punch=d; };
 const Tm=RECRUIT_MOVES.tom;
@@ -194,7 +194,7 @@ const check=(x,y,s,c)=>{ LnO(x-s,y,x-s*.3,y+s*.7,s*.45,c); LnO(x-s*.3,y+s*.7,x+s
 const bt=(txt,x,y,c,sc,dur=1)=>battle.texts.push({txt,x,y,color:c,sc,t:0,dur});
 const hit=E2=>landHit(E2.dmg,E2.crit);
 const tomPos=()=>battle.actorPos||{cx:399,base:246,h:105};
-const hand=()=>{ const p=tomPos(); return {x:p.cx-35,y:p.base-Math.round(p.h*.51)}; };   // .51 since 2026-11-01 (bigger head, same body): the hand stays 73 px up
+const hand=()=>{ const p=tomPos(); return {x:p.cx-50,y:p.base-Math.round(p.h*.51)}; };   // .51 since 2026-11-01 (bigger head, same body): the hand stays 73 px up
 const toss=(kind,x0,y0,x1,y1,delay,dur,arc=60,extra={})=>battle.props.push(Object.assign({kind,x0,y0,x1,y1,arc,spin:true,t:-delay,dur},extra));
 // Where a unit stands on the canvas (kind moves can be aimed at a monster, so foes work too).
 const home=u=>{ if(u.side==='foe') { const p=b2FoeCanvasPos(u); return {x:p.x,base:p.y,h:p.h}; } const q=BATTLE_POS[u.idx],sp=BATTLE_SPRITES[u.id]; return {x:q.x*3,base:q.base*3,h:sp?sp.idle.length*sp.scale:90}; };

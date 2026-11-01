@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Tom's body as wide as TNB's (`width2`)
+
+- Tom (11:12, on `build width1`): Tom's body looks half the width of TNB's. Measured at chest level on the welcome screen: Tom 97, TNB 158 (TNB's loose sleeves and apron make his chest the widest part; `width1` had matched the waist).
+- Fix: Tom's `BODY_W` 1.18 to 1.83 (bake_tom.py), so his chest now matches TNB's; head unchanged. `hand()` x offset 35 to 50 px (engine/tom-moves.js) for the wider arm. ART_V `width2`.
+- Tested: `smoke.py`; `kit_test.py tom` (starter_splash, sourdough_snob, overpriced_gadget); `tomhouse_walk_test.py`; welcome screen and every Tom battle frame looked at. Stamp `build width2`.
+
 ## 2026-11-01 (day, 43): Tom wider, Boppy slimmer (`width1`)
 
 - Tom (10:42): Tom should be wider to match TNB, Boppy should be skinnier.
