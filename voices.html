@@ -81,6 +81,7 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
 <header><a class="back" href="index.html">&#8249; Game</a><h1>Voice Library</h1></header>
 <main>
   <div class="pad"><section id="keybox" class="card"></section></div>
+  <div class="pad"><section id="safe" class="card" hidden></section></div>
   <div class="filters" id="filters">
     <div class="pad"><input type="search" id="q" placeholder="Search words, characters, moves" autocomplete="off"></div>
     <div class="frow" id="fWho"></div>
@@ -147,14 +148,27 @@ function finalText(it){
 function idb(name,store){return new Promise(res=>{try{const r=indexedDB.open(name,1);r.onupgradeneeded=()=>{try{r.result.createObjectStore(store,{keyPath:'id'});}catch(e){}};r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);}catch(e){res(null);}});}
 const all=(db,st)=>new Promise(res=>{if(!db)return res([]);try{const q=db.transaction(st).objectStore(st).getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>res([]);}catch(e){res([]);}});
 const tx=(db,st,fn)=>new Promise((res,rej)=>{if(!db)return rej(new Error('This browser would not let me save clips.'));try{const t=db.transaction(st,'readwrite');fn(t.objectStore(st));t.oncomplete=()=>res();t.onerror=()=>rej(t.error||new Error('Save failed'));t.onabort=()=>rej(t.error||new Error('Save failed'));}catch(e){rej(e);}});
+// Clips and takes are big base64 audio strings. Keeping every one in memory ran a phone with thousands of takes out of memory
+// before the page could draw (the game stayed frozen behind the title). So LOCAL and TAKES hold only the small fields; the
+// audio stays in IndexedDB and is read for one row when it is played or put in use.
+function slim(r){ const m={}; for(const k in r) if(k!=='mp3') m[k]=r[k]; return m; }
+// Reads a store a few rows at a time (never all at once) and hands each batch to fn. Batches of getAll, not one long cursor.
+function eachBatch(db,st,size,fn){ return new Promise(res=>{ if(!db) return res();
+  const step=last=>{ let q; try{ q=db.transaction(st).objectStore(st).getAll(last===null?null:IDBKeyRange.lowerBound(last,true),size); }catch(e){ return res(); }
+    q.onsuccess=()=>{ const rows=q.result||[]; try{ fn(rows); }catch(e){} if(rows.length<size) return res(); step(rows[rows.length-1].id); }; q.onerror=()=>res(); };
+  step(null); }); }
+async function allSlim(db,st){ const out=[]; await eachBatch(db,st,25,rows=>rows.forEach(r=>out.push(slim(r)))); return out; }
+function getOne(db,st,id){ return new Promise(res=>{ if(!db) return res(null); try{ const q=db.transaction(st).objectStore(st).get(id); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }catch(e){ res(null); } }); }
+const mp3Of=async(db,st,id)=>{ const r=await getOne(db,st,id); return r?r.mp3:null; };
 let LDB=null, TDB=null;
-const LOCAL=new Map();   // aot-local-clips rows by id
-const TAKES=new Map();   // take id -> {id,line,mp3,label,script,t}
+const LOCAL=new Map();   // aot-local-clips rows by id, without the audio
+const TAKES=new Map();   // take id -> {id,line,label,script,t}, without the audio
 const takesFor=key=>[...TAKES.values()].filter(t=>t.line===key).sort((a,b)=>a.t-b.t);
 const localFor=it=>LOCAL.get(rowId(it,kinds(it)[0]));
 async function useTake(it,take){
-  const rows=kinds(it).map(k=>({id:rowId(it,k),kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3:take.mp3,script:take.script,takeId:take.id,t:Date.now()}));
-  await tx(LDB,'clips',s=>rows.forEach(r=>s.put(r))); rows.forEach(r=>LOCAL.set(r.id,r));
+  const mp3=take.mp3||await mp3Of(TDB,'takes',take.id); if(!mp3) throw new Error('That take is no longer saved on this phone.');
+  const rows=kinds(it).map(k=>({id:rowId(it,k),kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3,script:take.script,takeId:take.id,t:Date.now()}));
+  await tx(LDB,'clips',s=>rows.forEach(r=>s.put(r))); rows.forEach(r=>LOCAL.set(r.id,slim(r)));
 }
 async function useBuiltIn(it){
   const ids=kinds(it).map(k=>rowId(it,k));
@@ -162,7 +176,7 @@ async function useBuiltIn(it){
 }
 async function addTake(it,mp3,label,script){
   const t={id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),line:lk(it),mp3,label,script,t:Date.now()};
-  await tx(TDB,'takes',s=>s.put(t)); TAKES.set(t.id,t); await useTake(it,t); return t;
+  await tx(TDB,'takes',s=>s.put(t)); TAKES.set(t.id,slim(t)); await useTake(it,t); return slim(t);
 }
 async function delTake(id){ await tx(TDB,'takes',s=>s.delete(id)); TAKES.delete(id); }
 
@@ -189,15 +203,23 @@ async function builtIn(it){
   return null;
 }
 function stopPlay(){ if(playing){ try{playing.a.pause();}catch(e){} playing.btn&&playing.btn.classList.remove('on'); playing=null; } }
+// One audio element for every clip. iPhones only let an element play from a tap, and a clip now starts a moment after the tap
+// (its audio is read from storage first), so the first tap of the visit unlocks this element and later clips reuse it.
+const AUD=new Audio(); let audOk=false;
+const SILENT_WAV='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=';
+function unlockAudio(){ if(audOk) return; audOk=true; try{ AUD.muted=true; AUD.src=SILENT_WAV; const p=AUD.play();
+  if(p&&p.then) p.then(()=>{ AUD.pause(); AUD.muted=false; }).catch(()=>{ audOk=false; AUD.muted=false; }); else AUD.muted=false; }catch(e){ audOk=false; AUD.muted=false; } }
+document.addEventListener('pointerdown',unlockAudio,{capture:true,passive:true});
+document.addEventListener('touchend',unlockAudio,{capture:true,passive:true});
 function playB64(b64,btn){
   const same=playing&&playing.btn===btn; stopPlay(); if(same||!b64) return;
-  const a=new Audio('data:audio/mpeg;base64,'+b64); playing={a,btn}; btn&&btn.classList.add('on');
+  const a=AUD; a.muted=false; a.src='data:audio/mpeg;base64,'+b64; playing={a,btn}; btn&&btn.classList.add('on');
   a.onended=()=>{ if(playing&&playing.a===a){ btn&&btn.classList.remove('on'); playing=null; } };
   a.play().catch(()=>{ btn&&btn.classList.remove('on'); toast('Could not play that. Turn the ring switch on and try again.'); });
 }
 async function playNow(it,btn){
   const loc=localFor(it);
-  if(loc) return playB64(loc.mp3,btn);
+  if(loc){ const m=await mp3Of(LDB,'clips',loc.id); return m?playB64(m,btn):toast('That clip is no longer saved on this phone.'); }
   if(it.f<0) return toast(it.nv?'No clip yet, and this character has no voice chosen yet.':'No clip yet. Tap the line to make one.');
   btn.textContent='...';
   try{ const b=await builtIn(it); btn.innerHTML='&#9654;'; if(!b) return toast('This line has no clip yet.'); playB64(b,btn); }
@@ -471,6 +493,7 @@ document.addEventListener('click',async e=>{
   if(t.id==='savekey'){ const v=($('key').value||'').trim(); if(!v) return toast('Paste the key first.'); try{ localStorage.setItem(KEYNAME,v); }catch(err){ return toast('This browser would not save the key.'); } paintKey(); return; }
   if(t.id==='chg'){ try{ localStorage.removeItem(KEYNAME); }catch(err){} paintKey(); return; }
   if(t.id==='hist'){ loadHistory(); return; }
+  if(t.id==='loadphone'){ t.disabled=true; t.textContent='Loading...'; await loadPhone(true); return; }
   if(t.id==='clear'){ F.who.clear(); F.type.clear(); F.ch.clear(); F.show='all'; F.q=''; $('q').value=''; saveF(); shown=PAGE; renderAll(); return; }
   if(t.id==='selmode'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
   if(t.id==='exp') return exportClips();
@@ -487,8 +510,8 @@ document.addEventListener('click',async e=>{
   if(act==='open'){ const prev=openKey&&itemByKey(openKey); openKey=openKey===key?null:key; if(prev) repaint(prev); if(openKey) repaint(it); return; }
   if(act==='play') return playNow(it,t);
   if(act==='playbuiltin'){ t.textContent='...'; try{ const b=await builtIn(it); t.innerHTML='&#9654;'; b?playB64(b,t):toast('No built-in clip.'); }catch(err){ t.innerHTML='&#9654;'; toast(err.message); } return; }
-  if(act==='playlocal'){ const l=localFor(it); if(l) playB64(l.mp3,t); return; }
-  if(act==='playtake'){ const tk=TAKES.get(t.dataset.id); if(tk) playB64(tk.mp3,t); return; }
+  if(act==='playlocal'){ const l=localFor(it); if(l) playB64(await mp3Of(LDB,'clips',l.id),t); return; }
+  if(act==='playtake'){ const tk=TAKES.get(t.dataset.id); if(tk) playB64(await mp3Of(TDB,'takes',tk.id),t); return; }
   if(act==='usetake'){ const tk=TAKES.get(t.dataset.id); if(tk){ await useTake(it,tk).catch(err=>ERR[key]=err.message); repaint(it); renderFilters(); } return; }
   if(act==='usebuiltin'){ await useBuiltIn(it).catch(err=>ERR[key]=err.message); repaint(it); renderFilters(); return; }
   if(act==='deltake'){ const tk=TAKES.get(t.dataset.id); if(!tk) return; const loc=localFor(it); if(loc&&loc.takeId===tk.id) await useBuiltIn(it).catch(()=>{}); await delTake(tk.id).catch(()=>{}); repaint(it); renderFilters(); return; }
@@ -511,8 +534,11 @@ document.addEventListener('input',e=>{
 
 // ---------- export ----------
 async function exportClips(){
-  const rows=[...LOCAL.values()]; if(!rows.length) return toast('No phone clips yet.');
-  const blob=new Blob([JSON.stringify({made:new Date().toISOString(),clips:rows})],{type:'application/json'});
+  if(!LOCAL.size||!LDB) return toast('No phone clips yet.');
+  // Read the clips one at a time into a growing Blob, so the whole export is never one giant string in memory.
+  let blob=new Blob(['{"made":'+JSON.stringify(new Date().toISOString())+',"clips":['],{type:'application/json'}), n=0;
+  await eachBatch(LDB,'clips',20,rows=>{ blob=new Blob([blob,...rows.map(r=>(n++?',':'')+JSON.stringify(r))],{type:'application/json'}); });
+  blob=new Blob([blob,']}'],{type:'application/json'});
   const file=new File([blob],'local-clips-export.json',{type:'application/json'});
   try{ if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'Phone voice clips'}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='local-clips-export.json'; document.body.appendChild(a); a.click(); a.remove();
@@ -522,15 +548,34 @@ async function exportClips(){
 (async()=>{
   paintKey(); $('q').value=F.q;
   [LDB,TDB]=await Promise.all([idb('aot-local-clips','clips'),idb('aot-voice-library','takes')]);
-  for(const r of await all(LDB,'clips')) LOCAL.set(r.id,r);
-  for(const t of await all(TDB,'takes')) TAKES.set(t.id,t);
   try{ const r=await fetch('data/voice-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IDX=await r.json(); }
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   IDX.who.forEach(w=>WHO[w.id]=w);
   $('howto').textContent='Each box holds what ElevenLabs reads: change the words or the [directions] right there; edits save as you type and every new take uses them (CAPS for emphasis, Tah Tah for Ta-ta). The subtitle in the game stays as it is until Claude changes it. Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
   renderAll();
+  await loadPhone(false);
   if(window.__VL_READY) window.__VL_READY();
 })();
+// The phone's clips and takes load after the list is on screen. If the last visit never finished this step (the browser ran
+// out of memory and restarted the page), the next visit starts without them and says so, instead of crashing again.
+// Leaving the page on purpose (back to the game, reload) never counts as a crash: a crash does not fire pagehide.
+addEventListener('pagehide',()=>{ try{ localStorage.removeItem('aot-vl-boot'); }catch(e){} });
+async function loadPhone(force){
+  const box=$('safe'); let crashed=false;
+  try{ const t=+localStorage.getItem('aot-vl-boot')||0; crashed=!force&&t&&Date.now()-t<120000; }catch(e){}
+  if(crashed){
+    try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
+    box.hidden=false; box.innerHTML='<p style="margin:0 0 10px">The last time this page opened it stopped before it finished reading the clips saved on this phone, so they are not loaded this time. Your clips and takes are still saved and the game still plays them.</p><button class="gold" id="loadphone">Load the saved clips now</button>';
+    return;
+  }
+  box.hidden=true;
+  try{ localStorage.setItem('aot-vl-boot',String(Date.now())); }catch(e){}
+  LOCAL.clear(); TAKES.clear();
+  for(const r of await allSlim(LDB,'clips')) LOCAL.set(r.id,r);
+  for(const t of await allSlim(TDB,'takes')) TAKES.set(t.id,t);
+  try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
+  renderAll();
+}
 window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey};
 </script>
 </body>

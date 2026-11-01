@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 44): Voice Library opens again on a phone full of takes (`vlmem1`)
+
+- Tom (14:50): ADMIN > VOICE LIBRARY fades the title out to the Long Island Square, then freezes. Cause found by measurement: `voices.html` loaded every saved clip and take, audio included, into memory before it drew anything (and kept each new take's audio in memory too, so a bulk Regenerate grew it further). With 1,500 saved lines the page held 242 MB (6 MB with none); on a phone with thousands of regenerated lines it ran out of memory, so the new page never appeared and the old one stayed frozen behind the faded title. Not reproducible from a clean browser, so this is the cause the numbers support, not one seen on the phone.
+- `voices.html`: the page draws first, then reads the phone's clips and takes in small batches keeping only the small fields (the audio stays in IndexedDB and is read for one line when it is played or put in use). New takes are saved and then dropped from memory. One shared audio element, unlocked by the first tap, so playing a clip still works on an iPhone after the short storage read. Export streams the clips into a Blob in batches.
+- Safe mode: if a visit never finishes reading the phone data (the browser killed the page), the next visit skips it, says so in a notice at the top, and offers "Load the saved clips now". Leaving on purpose never triggers it. Nothing saved is removed.
+- Note for a future fix: a long IndexedDB cursor over big clips crashed headless Chromium here, so reads use batches of `getAll` instead. The game's own `engine/local-clips.js` still loads every phone clip at startup (the game needs them in memory to play them); it was not changed.
+- `tools/voice-library/test.py` grew a heavy-data run (300 lines of 100 KB audio in both stores): rows hold no audio, memory 26 MB, play, export, safe mode and recovery. All checks pass; `smoke.py` FAILS: []. Game code untouched; no `?v=` or stamp change.
+
 ## 2026-11-01 (day, 43): Welcome-screen RELOAD also refreshes the home-screen icon (`icon1`)
 
 - Tom (15:05): reloading on the welcome screen should also refresh the save-to-home-screen app icon.

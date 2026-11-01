@@ -9,6 +9,19 @@ from playwright.async_api import async_playwright
 BASE = os.environ.get('BASE', 'http://localhost:8000/')
 SHOTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 MP3 = base64.b64decode('SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABhgC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7')
+# Fills both phone stores with N lines of K KB audio each (what bulk Regenerate leaves behind).
+SEED_HEAVY = """async ([N,KB])=>{
+  const open=(n,s)=>new Promise(r=>{const q=indexedDB.open(n,1);q.onupgradeneeded=()=>q.result.createObjectStore(s,{keyPath:'id'});q.onsuccess=()=>r(q.result);});
+  const L=await open('aot-local-clips','clips'), T=await open('aot-voice-library','takes');
+  const items=(await (await fetch('data/voice-index.json')).json()).items.filter(i=>i.t==='d'||(i.k&&i.k.length)).slice(0,N);
+  const chunk=Array.from({length:1024},()=>'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'[Math.random()*64|0]).join('');
+  const put=(db,st,rows)=>new Promise(r=>{const t=db.transaction(st,'readwrite');const s=t.objectStore(st);rows.forEach(x=>s.put(x));t.oncomplete=()=>r();});
+  for(let i=0;i<items.length;i+=50){ const rows=[],takes=[];
+    for(const it of items.slice(i,i+50)){ const mp3=chunk.repeat(KB); const k=it.t==='b'?it.k[0]:'';
+      rows.push({id:(it.t==='b'?'battle':'dialog')+'|'+it.v+'|'+k+'|'+it.x,kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3,script:'x',takeId:'seed'+i,t:Date.now()});
+      takes.push({id:'seed'+i+'-'+takes.length,line:(it.t==='b'?'b|':'d|')+it.v+'|'+it.x,mp3,label:'x',script:'x',t:Date.now()}); }
+    await put(L,'clips',rows); await put(T,'takes',takes); }
+  return items.length; }"""
 fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
@@ -130,6 +143,43 @@ async def main():
         has = await J("(()=>{try{return SPLASH_MENUS? true:true}catch(e){return true}})()")
         src = await J("fetch('engine/splash.js').then(r=>r.text()).then(t=>t.includes(\"'VOICE LIBRARY'\")&&t.includes('openVoices'))")
         ok(src, 'admin menu has VOICE LIBRARY')
+        # Heavy phone data (vlmem1): a phone that bulk-regenerated thousands of lines kept every take's audio in memory at startup
+        # and the page never drew. LOCAL and TAKES now hold only the small fields; the audio is read from IndexedDB when played.
+        c2 = await b.new_context(viewport={'width': 390, 'height': 844}, has_touch=True, is_mobile=True, accept_downloads=True)
+        p2 = await c2.new_page(); errs2 = []; p2.on('pageerror', lambda e: errs2.append(str(e)))
+        await p2.goto(BASE + 'voices.html'); await p2.wait_for_selector('.row')
+        N2 = 300
+        await p2.evaluate(SEED_HEAVY, [N2, 100])
+        await p2.reload(); await p2.wait_for_selector('.row')
+        await p2.wait_for_function(f"__VL.LOCAL.size>={N2}&&__VL.TAKES.size>={N2}", timeout=60000)
+        ok(await p2.evaluate("[...__VL.LOCAL.values()].every(r=>r.mp3===undefined)&&[...__VL.TAKES.values()].every(t=>t.mp3===undefined)"), 'phone clips and takes are held without their audio')
+        heap = await p2.evaluate("performance.memory.usedJSHeapSize/1048576")
+        ok(heap < 80, f'page memory with {N2} lines of phone audio stored (about 60 MB of audio): {heap:.0f} MB')
+        ok(await p2.evaluate("document.getElementById('safe').hidden"), 'no safe-mode notice after a normal load')
+        ok(await p2.evaluate("localStorage.getItem('aot-vl-boot')") is None, 'load flag cleared after a normal load')
+        # Play a saved clip: its audio is read from storage, then the shared audio element is given it.
+        await p2.click('.chip[data-g="show"][data-v="phone"]')
+        await p2.locator('.row [data-act="play"]').first.click(); await p2.wait_for_timeout(600)
+        ok(await p2.evaluate("AUD.src.startsWith('data:audio/mpeg;base64,')&&AUD.src.length>50000"), 'play reads the saved audio and hands it to the audio element')
+        # Export streams the clips out and keeps every audio string.
+        async with p2.expect_download(timeout=60000) as dl:
+            await p2.click('#exp')
+        dfile = await dl.value; pth = os.path.join(SHOTS, 'vl-export-test.json'); await dfile.save_as(pth)
+        exp = json.load(open(pth)); os.remove(pth)
+        ok(len(exp['clips']) >= N2 and all(len(c.get('mp3', '')) > 50000 for c in exp['clips'][:20]), f"export has {len(exp['clips'])} clips with audio")
+        # A page that was killed while reading the phone data starts in safe mode and offers to load it.
+        # (A real crash does not fire pagehide, so the flag is planted before the page's own scripts run.)
+        p3 = await c2.new_page(); await p3.add_init_script("try{localStorage.setItem('aot-vl-boot',String(Date.now()))}catch(e){}")
+        await p3.goto(BASE + 'voices.html'); await p3.wait_for_selector('#loadphone', timeout=15000)  # (the saved 'Re-recorded' filter shows no rows while nothing is loaded)
+        ok(await p3.evaluate("__VL.LOCAL.size") == 0 and not await p3.evaluate("document.getElementById('safe').hidden"), 'after a killed load: safe-mode notice shown, nothing loaded')
+        await p3.screenshot(path=os.path.join(SHOTS, 'vl-safe.png'))
+        await p3.click('#loadphone'); await p3.wait_for_function(f"__VL.LOCAL.size>={N2}", timeout=60000)
+        ok(await p3.evaluate("document.getElementById('safe').hidden"), 'Load the saved clips now loads them and hides the notice')
+        await p3.close()
+        p4 = await c2.new_page(); await p4.goto(BASE + 'voices.html'); await p4.wait_for_selector('.row'); await p4.wait_for_function(f"__VL.LOCAL.size>={N2}", timeout=60000)
+        ok(await p4.evaluate("document.getElementById('safe').hidden"), 'next visit loads normally again')
+        ok(not errs2, 'no page errors in the heavy-data run: ' + '; '.join(errs2[:3]))
+        await c2.close()
         await b.close()
     print('FAILED:' if fails else 'ALL PASS', fails); sys.exit(1 if fails else 0)
 asyncio.run(main())
