@@ -1,3 +1,6 @@
+## 2026-11-01 (evening, 47): Baked clips no longer say the phrase twice (`vdir2`)
+Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voice Library and the bake page only compared clip length with word count, and a doubled short line fits inside that allowance, so the doubled take was kept. Fix (voices.html and bake.html): after each take the sound is decoded and checked for a repeat (it splits at a pause into two halves of similar length whose loudness shape matches); a doubled take is rejected and the page makes another, up to three, keeping the best one. Tested on 120 real baked clips as they are (0 flagged) and each doubled (119 caught). Not tested against the live ElevenLabs service (no key here), so the first new takes on Tom's phone are the real test.
+
 ## 2026-11-01 (day, 46): Voice Library directions that fit the scene and the move (`vdir1`)
 
 - Tom (16:02): the emotion directions in the Voice Library were awful and did not fit the situation or the ability.
