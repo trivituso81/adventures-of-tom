@@ -164,9 +164,8 @@ for(const l of H){
   items.push(it); nNo++;
 }
 for(const it of items) if(it.v[0]==='?'){ /* listed under the speaker's own name */ }
-// Every Justin script, battle and dialogue, carries the accent (Tom, 2026-10-31).
-const ACC='thick New York accent';
-for(const it of items) if(it.v==='justin'&&it.s){ const m=it.s.match(/^\[([^\]]*)\]\s*([\s\S]*)$/); it.s=m?(m[1].toLowerCase().includes(ACC.toLowerCase())?it.s:'['+ACC+', '+m[1]+'] '+m[2]):'['+ACC+'] '+it.s; }
+// Justin's scripts no longer carry an accent tag (Tom, 2026-11-01: tags describe the voice only, no accent words; the cast
+// voice carries the accent). Until 2026-11-01 every Justin script was prefixed with 'thick New York accent'.
 // ---------- which ability or combo a battle line belongs to (Tom, 2026-10-31) ----------
 // Every battle line whose kind is an ability key, a Tombo, a Director's Cut or a Family Finish gets it.mv = [[type, name, with]]
 // so the Voice Library can say, on the row itself, which move the clip belongs to. Names come from data/abilities.js (B8_KITS)

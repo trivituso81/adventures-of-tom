@@ -118,7 +118,7 @@
 "speaker": "Deedee",
 "text": "Tom, you're skin and bones. Sit. The crisp needs ten minutes on the counter.",
 "ctx": "",
-"script": "[fussing, scolding sweetly] Tom, you're skin and bones. [bossy, ushering him to a chair] Sit. [brisk, kitchen mode] The crisp needs ten minutes on the counter."
+"script": "[warm, fussing] Tom, you're skin and bones. [brisk, firm] Sit. The crisp needs ten minutes on the counter."
 },
 {
 "voice": "deedee",
@@ -132,7 +132,7 @@
 "speaker": "Grace",
 "text": "Deedee. They're on your head.",
 "ctx": "",
-"script": "[flat, patient, matter of fact] Deedee. They're on your head."
+"script": "[flat, patient] Deedee. They're on your head."
 },
 {
 "voice": "deedee",
@@ -146,7 +146,7 @@
 "speaker": "Tom",
 "text": "I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.",
 "ctx": "",
-"script": "[dry, proud, setting the loaf down] I brought you a sourdough loaf. Baked it yesterday. [deadpan] It flew here on my lap."
+"script": "[dry, proud] I brought you a sourdough loaf. Baked it yesterday. [deadpan] It flew here on my lap."
 },
 {
 "voice": "deedee",
@@ -188,7 +188,7 @@
 "speaker": "Rose",
 "text": "Deedee! A mud blob is taking your PIE!",
 "ctx": "",
-"script": "[alarmed, shrieking, pointing] Deedee! A mud blob is taking your PIE!"
+"script": "[alarmed, breathless] Deedee! [shrill, urgent] A mud blob is taking your PIE!"
 },
 {
 "voice": "tom",
@@ -216,7 +216,7 @@
 "speaker": "Boppy",
 "text": "I'd come, but the stomach. Bring me back that fish.",
 "ctx": "",
-"script": "[settling back into the recliner, groaning] I'd come, but... the stomach. [perking up, gruff] Bring me back that fish."
+"script": "[gruff, pained] I'd come, but... the stomach. [brighter, gruff] Bring me back that fish."
 },
 {
 "voice": "deedee",
@@ -566,7 +566,7 @@
 "speaker": "TNB",
 "text": "Also, your starter was bubbling out of the jar, so I baked a boule with it. Don't be mad.",
 "ctx": "",
-"script": "[sheepish, casual, bracing] Also, your starter was bubbling out of the jar, so I baked a boule with it. [coaxing, quick] Don't be mad."
+"script": "[easy, sheepish] Also, your starter was bubbling out of the jar, so I baked a boule with it. [quick, coaxing] Don't be mad."
 },
 {
 "voice": "tom",
@@ -19396,7 +19396,7 @@
 "speaker": "grump",
 "text": "Grrrumble. You're standing in my puddle.",
 "ctx": "",
-"script": "[low, gravelly, offended] Grrrumble. [cranky, accusing] You're standing in my puddle."
+"script": "[low, gravelly] Grrrumble. [cranky, offended] You're standing in my puddle."
 },
 {
 "voice": "grump",
@@ -19410,7 +19410,7 @@
 "speaker": "grump",
 "text": "I've been doing push-ups in the pond.",
 "ctx": "",
-"script": "[sulky, huffing, trying to sound tough] I've been doing push-ups in the pond."
+"script": "[gravelly, boastful] I've been doing push-ups in the pond."
 },
 {
 "voice": "grump",

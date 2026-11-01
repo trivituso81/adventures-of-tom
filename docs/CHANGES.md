@@ -1,3 +1,12 @@
+## 2026-11-01 (evening, 48): ElevenLabs v4 tag rules and 10 sample scripts for Tom to approve (`vtag1`)
+
+- Tom (17:11): new takes said their phrase twice, [yelp] produced an actual yelp, and tags described what the body does (pointing, shrugging, hands on hips) instead of how the voice sounds.
+- Rule set (from ElevenLabs "Prompting Eleven v4"): a tag describes the voice only (emotion, delivery, voice quality, in the style of [low, gravelly voice]); no gestures, props, places, roles or sound nouns ([yelp], [beat], [pause]); 1 tag up to 4 words, 2 up to about 14, 3 beyond; at most 2 descriptors of 1 or 2 words per tag; ellipses and CAPS for pacing; never contradict the words; no accent words.
+- Call made: 10 sample scripts (11 lines: Tom, Deedee, Grace, Rose, Boppy, TNB dialogue; Amy, Justin, Rose battle; Pond Grump first meeting and rematch) rewritten to the rules and installed in the Voice Library so Tom can regenerate them and listen for doubled phrases before the other 3,700 lines are rewritten. Baked clips are untouched.
+- Call made: Justin's scripts no longer get the automatic "thick New York accent" prefix (the cast voice carries the accent; `tools/voice-library/make-index.js`). His baked scripts in `justin-dialogue.json` and `battle-scripts.json` keep it, since baked clips keep the script they were made with.
+- New tool: `tools/voice-library/apply-scripts.py <list.json>` checks every script against the rules (words equal the line text, tag count, descriptor count, body, prop and sound words, em dashes) and writes it into `directions-20261101.json` or `battle-overrides.json`; it never touches a hand-written chapter script.
+- Tested: `tools/voice-library/test.py` ALL PASS; `smoke.py` FAILS: []. Not heard on the phone.
+
 ## 2026-11-01 (late afternoon, 47): Painted maps load on demand instead of all at boot (`plate1`)
 
 - Tom (16:27): the overworld maps do not load instantly, or at all.
