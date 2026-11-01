@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Tom's head 8% larger (`tomhead1`)
+
+- Tom (14:57): "Tom's head needs to be 8% larger."
+- `tools/sprite-bake/bake_tom.py`: new `HEAD_UP = 1.08` multiplies both head-growth targets (`FACE_GROW` for battle and custom poses, `FACE_GROW_W` for walk and stretch), so his head share of the figure is 8% higher everywhere. Battle head factor 1.434 to 1.549 (share .341 to .368); walk 1.641 to 1.772. Body, height and width unchanged (the figure is refit to the same height).
+- Re-baked `art/chars/tom-*.webp` and `data/tom-hires.js`. ART_V `tomhead1`; `?v=` bumps on painted.js, tom-hires.js, main.js. The Tom-carrying-Rose ride set (`bake_tomride.py`) has no head-growth step and is NOT changed.
+- Tested: `smoke.py` FAILS: [], full `kit_test.py tom` FAILS: []; contact sheet and welcome screen looked at. Stamp `build tomhead1`.
+
 ## 2026-11-01 (day, 44): Voice Library opens again on a phone full of takes (`vlmem1`)
 
 - Tom (14:50): ADMIN > VOICE LIBRARY fades the title out to the Long Island Square, then freezes. Cause found by measurement: `voices.html` loaded every saved clip and take, audio included, into memory before it drew anything (and kept each new take's audio in memory too, so a bulk Regenerate grew it further). With 1,500 saved lines the page held 242 MB (6 MB with none); on a phone with thousands of regenerated lines it ran out of memory, so the new page never appeared and the old one stayed frozen behind the faded title. Not reproducible from a clean browser, so this is the cause the numbers support, not one seen on the phone.

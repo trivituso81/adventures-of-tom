@@ -67,7 +67,8 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3]
 from headwarp import _warp_head, body_width
 # Body width (2026-11-01, Tom: "Tom should be wider to match TNB"): every upright pose's body below the chin x BODY_W before the head warp.
 BODY_W = 1.25   # Tom 11:25: shoulders like Justin's (152 -> 104 welcome px at 1.83). Before that 1.83: was 1.18; Tom 11:12: "half the width of TNB". Chest measured 97 vs TNB 158 welcome px at 1.18, so x 1.55 more
-FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12 * .94   # x .94 bald-scalp nudge, as FACE_GROW_W; x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
+HEAD_UP = 1.08   # Tom 2026-11-01 14:57: "head needs to be 8% larger" (battle, custom, walk and stretch)
+FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12 * .94 * HEAD_UP   # x .94 bald-scalp nudge, as FACE_GROW_W; x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
 TAPER = 16
 def _auto_head(img):
     a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
@@ -160,7 +161,7 @@ for _n in list(poses):
     if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
 # Walk and arrival stretch (2026-11-01): the welcome screen draws the front walk frame at real height (Tom 5'11" = 308 picture px next to
 # Justin 6'4" = 330). Tom's walk face was .168 of his height, Justin's .270; to match Justin's face it must be .270 x 330 / 308 = .289, so x 1.72.
-FACE_GROW_W = 1.72 * .85 * .94   # x .94 (2026-11-01, Tom: still looked bigger than Justin; his bald scalp reads as face, so his visible face was 13% taller at equal head outline); x .85 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
+FACE_GROW_W = 1.72 * .85 * .94 * HEAD_UP   # x .94 (2026-11-01, Tom: still looked bigger than Justin; his bald scalp reads as face, so his visible face was 13% taller at equal head outline); x .85 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
 _tw, _cw, _, _ = head_box(poses['w_down_stand'], 'w_down_stand'); _rw = (_cw - _tw) / poses['w_down_stand'].height
 def _ratio_w(k): return (_cw - _tw) * k / bigger_head(poses['w_down_stand'], 'w_down_stand', k).height
 _lo, _hi = 1.0, 4.0
