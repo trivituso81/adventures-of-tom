@@ -1,3 +1,8 @@
+## 2026-11-01 (day, 43): New painted portrait for Olivia (`face8`)
+
+- Tom sent a new painted portrait of Olivia (blonde, center part, big smile, cream top). Tight face crop 128x128 into portraits/olivia.png, framed like Amy, Grace and the others; replaces the old cutout.
+- `PORTRAITS.olivia` `?v=1` to `?v=2`, menu.js tag and build stamp bumped (`face8`).
+
 ## 2026-11-01 (day, 43): Adult faces evened out again on the welcome screen (`faces7`)
 
 - Tom (11:59): approved shrinking TNB, Boppy and Deedee to match Justin; said Amy's head looks bigger than the rest and he doubts the measuring.
