@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 33): Olivia's dress is the fruit-print dress (`olivia3`)
+
+- Tom (00:25): use the fruit-print dress instead of the Halloween one. New hero pose and new 3 x 3 walk sheet (cream dress printed with cherries, apples, grapes, strawberries and lemons, bell sleeves, tiered skirt, brown flats with a gold medallion), saved as `tools/sprite-bake/src/olivia-hero-v1.png` and `olivia-walk-v1.png`.
+- Re-baked with `bake_olivia.py`: walk sprite (`art/chars/olivia-ow.webp`, `data/olivia-hires.js`) and menu portrait (`portraits/olivia.png`, cut from the new hero). `AV` and the `?v=` tags are now `olivia3`; frame size and 42-row height unchanged. Replaces the Halloween dress from `olivia2`.
+- Tested: `smoke.py`, plus a 2nd Ave screenshot. Not played on the phone. Stamp `build olivia3`.
+
 ## 2026-11-01 (day, 32): New painted Tom in a graphic tee, jeans and sneakers (`tompaint1`)
 
 - Tom: new character art for Tom (from his photos: navy controller-and-heart tee, charcoal jeans, white sneakers) overrides the existing art for the matching poses, including the welcome screen, the overworld and battle.
