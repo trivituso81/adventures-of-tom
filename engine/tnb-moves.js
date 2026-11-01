@@ -1866,8 +1866,16 @@ const jojo=(x,y,t,ph)=>{ // stand-in while the painted frames load. ph: 'walk' |
 const disc=(x,y,sc)=>{ if(PROPART.draw('tnb/flying_disc',x,y,{w:30*sc})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,14,5,'#ff6a3c'); E(0,-1,9,3,'#ff8a5c'); gfx.restore(); };
 // Where Jojo's reaching hand is in her painted b_release frame (facing right), as fractions of her standing height hs from her feet.
 const JOJO_HAND={dx:.335,dy:.64};
+// Cartoon crash cloud: a small lumpy dust ball with stars that pops out fast and thins away. q is 0 to 1.
+const crashCloud=(x,y,r0,q)=>{ const g=ez(cl(q/.3)),a=q<.55?1:Math.max(0,1-(q-.55)/.45),r=r0*(.55+.55*g),a0=gfx.globalAlpha; gfx.globalAlpha=a;
+  const pf=[]; for(let k=0;k<9;k++) { const an=k/9*Math.PI*2+.4+q*.5,d=r*(k%2?.62:.5); pf.push([x+Math.cos(an)*d*1.2,y+Math.sin(an)*d*.85,r*(.36+((k*37)%10)/55),k%3?'#f6f2e8':'#e2ddd0']); }
+  for(const [px,py,pr] of pf) E(px,py,pr+2,pr*.9+2,OUT); E(x,y,r*.52+2,r*.46+2,OUT);
+  for(const [px,py,pr,c] of pf) E(px,py,pr,pr*.9,c); E(x,y,r*.52,r*.46,'#fbf8f0');
+  for(let k=0;k<5;k++) { const an=k*1.26+q*4,d=r*(.95+g*.8),sx=x+Math.cos(an)*d*1.2,sy=y+Math.sin(an)*d*.8,R2=5+(k%2)*2; PO([[sx,sy-R2*1.6],[sx+R2*.5,sy-R2*.5],[sx+R2*1.6,sy],[sx+R2*.5,sy+R2*.5],[sx,sy+R2*1.6],[sx-R2*.5,sy+R2*.5],[sx-R2*1.6,sy],[sx-R2*.5,sy-R2*.5]],GOLD,1); }
+  gfx.globalAlpha=a0; };
 SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P,hs=P.hs,y=P.y,walk=['right_step1','right_stand','right_step2','right_stand'],stp=walk[Math.floor(s.t*(ms>=P.go&&ms<P.catch?9:5))%4];
   gfx.globalAlpha=1; let x,dy=0,held=false;
+  if(ms>=P.catch&&ms<P.catch+650) crashCloud(P.cx-hs*.18,P.y-hs*.26,hs*.4,(ms-P.catch)/650);   // behind her, over the monster
   const J=typeof JOJO_BT!=='undefined'&&JOJO_BT.ready();
   if(ms<P.in) { x=lerp(P.x0,P.xs,ez(ms/P.in)); if(J) JOJO_BT.drawOw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,true); else jojo(x,y,s.t,'walk'); }                  // wanders in, facing left
   else if(ms<P.go) { x=P.xs; if(J) JOJO_BT.drawOw('right_stand',x,y-Math.sin(s.t*1.3)*1.2,hs,false); else jojo(x,y,s.t,'aim'); }                                    // turns to TNB
@@ -1884,8 +1892,8 @@ SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P,hs=P.hs,y=P.y,walk=['right_step1','r
 SC.t6_discfly=(s,u)=>{ const q=u,x=lerp(s.x0,s.x1,q),y=lerp(s.y0,s.y1,q)-Math.sin(q*Math.PI)*s.arc; gfx.globalAlpha=1; for(let k=1;k<4;k++) { const qq=cl(q-k*.04),xx=lerp(s.x0,s.x1,qq),yy=lerp(s.y0,s.y1,qq)-Math.sin(qq*Math.PI)*s.arc; gfx.globalAlpha=.3-k*.08; disc(xx,yy,1.2); } gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(q*Math.PI*6); disc(0,0,1.4); gfx.restore(); };
 T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m),hit=2600;
   const HU=ST.unit(m),hs=Math.round(((HU&&HU.h)||80)*66/70),jy=Math.min(314,me.y+4),xs=Math.min(540,me.x-60);
-  const cx=Math.round(Math.min(G.x1+hs*.2,xs-130));
-  const P={x0:620,xs,y:jy,in:900,go:1000,catch:hit,out:3700,gone:4700,giggle:3300,hs,cx,bump:22};
+  const cx=Math.round(Math.min(G.x1-hs*.3,xs-130));          // her back is well inside the nearest monster; she is drawn in front of it
+  const P={x0:620,xs,y:jy,in:900,go:1000,catch:hit,out:3700,gone:4700,giggle:3300,hs,cx,bump:16};
   const hx=cx+hs*JOJO_HAND.dx,hy=jy-hs*JOJO_HAND.dy;                                                       // where the frisbee has to arrive
   const sorted=list.map(f=>({f,x:ST.foe(f).x})).sort((a,b)=>b.x-a.x),spins=sorted.map((o,k)=>({f:o.f,t:hit+110*k,k}));
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'point'},{t:1500,f:'wind'},{t:1800,f:'throw'},{t:2300,f:'aim'},{t:2900,f:'hip'},{t:3300,f:'clap'},{t:3900,f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // he never leaves the line

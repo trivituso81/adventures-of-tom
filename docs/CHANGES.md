@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Frisbee Golf, Jojo deeper into the monster plus a crash cloud (`fgolf2`)
+
+- Tom (14:34): "looks good", but Jojo should end up further back, overlapping the monster (she in front of it, never the monster over her), and add a cartoon crash cloud at the moment of contact.
+- engine/tnb-moves.js: her stop point is now 30% of her height INSIDE the nearest monster's box (was 20% outside), stumble back trimmed 22 to 16 px. New `crashCloud` (drawn inside `SC.t6_jojo` so it sits over the monster but behind her): a small lumpy dust ball with gold stars that pops out fast and thins away in 0.65 s. Spoken line, numbers and timing unchanged.
+- Tested: `kit_test tnb --only=round_with_jojo` (frames at 2.55, 2.7, 2.85, 3.05 s looked at), `IDS=tnb smoke.py` FAILS: []. Tag `fgolf2`, stamp `build fgolf2`.
+
 ## 2026-11-01 (day, 43): Olivia rebalanced and re-gauged (`olivkit2`)
 
 - Tom (14:24): the `olivkit1` pass used no real gauge for splendor or funniness and only fixed duration; and Olivia's kit was almost all attacks while every other kit is balanced.
