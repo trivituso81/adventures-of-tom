@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 37): Shorter "Choose how to play" panel (`welcome1`)
+
+- Tom (01:27) asked to shrink the welcome panel. Removed the footer line ("Tap one, or use the arrows and A / Enter") and the two subtitle lines under NEW GAME and LOAD, so each button is one line. Launch buttons use less padding (9 px instead of 12). The panel is now 112 px tall in portrait. The footer still appears for the RELOAD message and on the other screens.
+- Call made: the saved-game count under LOAD went too (the LOAD screen itself lists the saves).
+- Files: `engine/splash.js` (launch mode, `splashSetMode`, `splashReload`), `index.html` (launch CSS, splash.js tag `welcome1`). Tested: portrait and rotated landscape screenshots, `smoke.py`. Not played on the phone. Stamp `build welcome1`.
+
+## 2026-11-01 (day, 36): Amy's portrait cropped tighter (`amyportrait1`)
+
 ## 2026-11-01 (day, 36): Olivia is a party member with all 11 moves (`olivia6`)
 
 - Olivia (HP 12, MP 12, Quick Talker trait) is wired as a full member on Justin's pattern: `data/party.js` (member, `o_phone`, RECRUITS), `data/progress.js`, `engine/story.js`, `engine/followers.js`, `engine/overworld.js`, `engine/menu.js`, `engine/battle2-ui.js`, `data/battle2-data.js` (stats, 11 moves, two test fights), `data/abilities.js` (kit; slots B4, B5, B6 are empty placeholders).

@@ -64,7 +64,7 @@ const SPLASH_RELOAD_ICON='<svg class="sp-ico" viewBox="0 0 16 16" width="11" hei
 function splashReload() {
   if(splash.reloading) return;
   splash.reloading=true; sfx.select();
-  const cue=$('sp-cue'); if(cue) cue.textContent='Reloading the game. Your saves are kept.';
+  const cue=$('sp-cue'); if(cue) { cue.textContent='Reloading the game. Your saves are kept.'; cue.parentElement.style.display=''; }
   const urls=[location.href,...Array.from(document.scripts).map(s=>s.src).filter(u=>u&&u.indexOf('/data/voice')<0)];
   const done=()=>{ const u=new URL(location.href); u.searchParams.set('r',Date.now().toString(36)); location.replace(u.toString()); };
   const timer=setTimeout(done,8000);
@@ -117,11 +117,10 @@ function splashDifficulty(next) {
   splashSetMode('diff',Math.max(0,SPLASH_DIFF.findIndex(d=>d.id===B7.diff)));
 }
 const SPLASH_MODES={
-  launch:{tab:'Choose how to play',cue:'Tap one, or use the arrows and A / Enter',layout:'launch',choices:()=>{
-    const n=splashSaveCount();
+  launch:{tab:'Choose how to play',cue:'',layout:'launch',choices:()=>{
     return [
-      {name:'NEW GAME',sub:'Pick a Part and a chapter.',to:'new'},
-      {name:'LOAD',sub:(n?(n===1?'1 saved game.':n+' saved games.'):'No saved games yet.')+(typeof cloudShort==='function'?' '+cloudShort():''),act:()=>splashGo(loadMenu)},
+      {name:'NEW GAME',to:'new'},
+      {name:'LOAD',act:()=>splashGo(loadMenu)},
       {name:SPLASH_RELOAD_ICON+'RELOAD',cls:'admin reload',act:splashReload},
       {name:'ADMIN',cls:'admin',to:'admin'}]; }},
   new:{tab:'Start New',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
@@ -176,6 +175,7 @@ function splashSetMode(mode,sel=0) {
   const M=SPLASH_MODES[mode],el=$('splash'),box=el.querySelector('.sp-choices');
   el.querySelector('.sp-tab').textContent=M.tab;
   $('sp-cue').textContent=M.cue;
+  $('sp-cue').parentElement.style.display=M.cue?'':'none'; // the welcome page has no footer line
   const tx=el.querySelector('.sp-text'); if(tx) { tx.textContent=M.text||''; tx.hidden=!M.text; }
   const list=M.choices(); splash.list=list;
   splash.sel=Math.max(0,Math.min(list.length-1,sel));
