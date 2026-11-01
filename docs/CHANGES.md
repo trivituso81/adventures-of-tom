@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 39): Load screen, save details inside each button (`loadsubs1`)
+
+- Tom (01:38) asked to move the save information from above the buttons into each button and drop the extra text. Each AUTOSAVE / SLOT button now carries its own line (place, level, party size, coins, date). The text block above the buttons ("Autosave: ...", "Slot 1: ...") and the footer hint are gone. The "No saved games yet." message still shows when there are no saves.
+- `titleAsk` (engine/splash.js) takes an optional `sub` per option and an optional footer `cue` ('' hides it); `loadMenu` (engine/intro.js) uses both. Other prompts are unchanged.
+- Tested: Load screen with three saves in portrait and rotated landscape (screenshots looked at), `smoke.py`. Not played on the phone. Stamp `build loadsubs1` (it also includes the `newlist1` chapter list).
+
 ## 2026-11-01 (day, 38): Olivia can be recruited in Jefferson Park from chapter 6 (`olivia7`)
 
 - Tom (01:32): Olivia is recruitable only from chapter 6 onward, in Jefferson Park. Talk to her at 2nd Ave (she is `cousin:true`) and she offers to join, with the yes/no prompt and the swap-out prompt when the party is full. Before chapter 6 (including the demo) she talks as before and never asks. She goes home when the party leaves Los Angeles, except from chapter 11 on, when she can travel (like Justin).

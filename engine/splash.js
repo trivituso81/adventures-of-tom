@@ -228,16 +228,17 @@ function splashFade() {
   setTimeout(()=>{ if(!splash.active) el.hidden=true; },450);
 }
 // A prompt (same shape as openChoice: name, text, [{label,fn}]) drawn on the welcome page instead of the dialogue box.
-function titleAsk(name,text,options) {
+// An option may carry `sub` (a second line inside its button). `cue` overrides the footer hint ('' hides the footer).
+function titleAsk(name,text,options,cue) {
   const el=$('splash');
   if(!el||!splash.wired) { openChoice(name,text,options); return; }
   splash.asked=true;
   const was=splash.active&&!el.hidden;
   el.hidden=false; el.classList.remove('out'); splash.active=true;
-  SPLASH_MODES.ask={tab:name,cue:'A / Enter to pick. B / Esc to go back',text:Array.isArray(text)?text.join('\n'):text,
+  SPLASH_MODES.ask={tab:name,cue:cue===undefined?'A / Enter to pick. B / Esc to go back':cue,text:Array.isArray(text)?text.join('\n'):text,
     choices:()=>options.map(o=>o.label==='BACK'
       ?{name:o.label,cls:'back',act:()=>{ sfx.move(); o.fn(); }}
-      :{name:o.label,act:()=>{ sfx.select(); splash.asked=false; o.fn(); if(!splash.asked) splashFade(); }})};
+      :{name:o.label,sub:o.sub,act:()=>{ sfx.select(); splash.asked=false; o.fn(); if(!splash.asked) splashFade(); }})};
   splashSetMode('ask');
   if(!was) { splash.last=performance.now(); requestAnimationFrame(splashFrame); }
 }

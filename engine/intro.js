@@ -60,8 +60,9 @@ function loadMenu() {
     return;
   }
   const nm=s=>s==='auto'?'Autosave':'Slot '+s;
-  titleAsk('Load',slots.map(s=>nm(s)+': '+saveSummary(readSave(s))).join('\n'),
-    slots.map(s=>({label:nm(s).toUpperCase(),fn:()=>{ endIntro(); loadGame(s); }})).concat([{label:'BACK',fn:titleMenu}]));
+  // Each save's details sit inside its own button; no text block above the buttons and no footer hint.
+  titleAsk('Load','',
+    slots.map(s=>({label:nm(s).toUpperCase(),sub:saveSummary(readSave(s)),fn:()=>{ endIntro(); loadGame(s); }})).concat([{label:'BACK',fn:titleMenu}]),'');
 }
 function endIntro() {
   intro.active=false; intro.phase=''; intro.steps=[]; intro.cur=null;
