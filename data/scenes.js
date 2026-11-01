@@ -990,42 +990,49 @@ STORY_PROPS.jar=(cx,y)=>{ const yy=Math.round(y-8);
   rect(cx-5,yy-1,10,12,OUT); rect(cx-4,yy,8,10,'#e8f0e0'); rect(cx-4,yy+3,8,6,'#d94a3a'); rect(cx-2,yy+4,2,4,'#f48a5a'); rect(cx+1,yy+5,2,3,'#7aa05a');
   rect(cx-5,yy-3,10,3,OUT); rect(cx-4,yy-2,8,1,'#c9a85a'); rect(cx-3,yy+1,1,2,'#ffffff'); };
 
-// Boppy catches his breath (story bible section 5, chapter 3 on). Walking with the family outdoors on Long Island,
-// every so often he stops for a moment (he falls one tile behind, hand on his stomach, puffing) and catches up when
-// everyone stops walking. Only while he is the last follower, so nobody walks through him.
-const BOPPY_WIND={lag:false,steps:0,next:16,last:0,puff:0,say:0};
+// Boppy catches his breath (story bible section 5, chapter 3 on). Walking with the family outdoors on Long Island he drifts
+// a little further behind with every step (f.lag, a fractional distance in tiles, so he glides back instead of snapping).
+// When he is BOPPY_WIND.max tiles behind, the whole party is forced to stop (movePlayer refuses, see partyHalted) until he
+// has walked back up to within BOPPY_WIND.resume tiles. If Tom just stops, he catches up too. Only while he is the last follower.
+// Tune: rate (tiles of drift per step, picked per stretch), max (tiles behind that stops the party), resume, catch (tiles per second).
+const BOPPY_WIND={lag:0,halt:false,rate:.15,max:3,resume:.7,catchStep:.6,catchTime:.25,last:0,puff:0,say:0};
 function boppyWindFollower() {
   if(STORY.mode!=='full'||STORY.chapter<3||!inParty(boppy)||!currentMap.outside||regionOf(currentMap)!=='le'||intro.active||battle.active) return null;
   const f=followers[followers.length-1]; return f&&f.member===boppy?f:null;
 }
 const LE_movePlayer_ch3=movePlayer;
 movePlayer=function(dir) {
-  const f=boppyWindFollower();
-  const ok=LE_movePlayer_ch3(dir);
-  if(!ok||!f) { if(!f) BOPPY_WIND.lag=false; return ok; }
-  const W=BOPPY_WIND; W.last=performance.now();
-  if(!W.lag&&++W.steps>=W.next&&party.includes(grace)) { W.lag=true; W.steps=0; W.next=14+Math.floor(Math.random()*10); W.say=performance.now()+1500; f.move=null; return ok; }
-  if(W.lag) {   // stay one tile further back along Tom's trail
-    const t=trail[0];
-    if(f.move) { f.x=f.move.tx; f.y=f.move.ty; }
-    f.move=null;
-    if(t&&(t.x!==f.x||t.y!==f.y)&&Math.abs(t.x-f.x)+Math.abs(t.y-f.y)===1) { f.facing=directionTo(t.x-f.x,t.y-f.y); f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:player.duration*1.3,fresh:true}; }
+  const f=boppyWindFollower(),W=BOPPY_WIND;
+  if(!f) { W.lag=0; W.halt=false; for(const x of followers) x.lag=0; return LE_movePlayer_ch3(dir); }
+  if(W.halt) return false;   // the party waits for Boppy
+  if(party.includes(grace)&&W.lag<W.max) {
+    if(W.lag===0) W.rate=.12+Math.random()*.06;   // a new stretch: a slightly different drift each time
+    W.lag=Math.min(W.max,W.lag+W.rate);
   }
+  f.lag=W.lag;
+  const ok=LE_movePlayer_ch3(dir);
+  if(!ok) { W.lag=Math.max(0,W.lag-W.rate); f.lag=W.lag; return ok; }   // a blocked step does not count
+  W.last=performance.now();
+  if(W.lag>=W.max) { W.halt=true; W.say=performance.now()+1800; }
   return ok;
 };
 const LE_placeFollowers_ch3=placeFollowers;
-placeFollowers=function() { BOPPY_WIND.lag=false; return LE_placeFollowers_ch3(); };
+placeFollowers=function() { BOPPY_WIND.lag=0; BOPPY_WIND.halt=false; return LE_placeFollowers_ch3(); };
 STORY_WORLD.push(()=>{
-  const W=BOPPY_WIND; if(!W.lag) return;
-  const f=boppyWindFollower(); if(!f) { W.lag=false; return; }
-  if(player.move||f.move||performance.now()-W.last<650) return;
-  const t=trail[1]; W.lag=false; W.puff=performance.now()+900;
-  if(t&&Math.abs(t.x-f.x)+Math.abs(t.y-f.y)===1) { f.facing=directionTo(t.x-f.x,t.y-f.y); f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:.42,fresh:true}; }
+  const W=BOPPY_WIND; if(W.lag<=0&&!W.halt) return;
+  const f=boppyWindFollower(); if(!f) { W.lag=0; W.halt=false; return; }
+  if(player.move||f.move) return;
+  // Catch up when the party is halted, or when Tom has simply stopped for a moment.
+  if(!W.halt&&performance.now()-W.last<650) return;
+  W.lag=Math.max(0,W.lag-W.catchStep); f.lag=W.lag;
+  if(W.halt&&W.lag<=W.resume) { W.halt=false; W.lag=Math.min(W.lag,W.resume); f.lag=W.lag; W.puff=performance.now()+900; }
+  if(W.lag===0) W.puff=performance.now()+900;
+  followerToSpot(f,followers.indexOf(f),W.catchTime);
 });
 STORY_MAPFX.push(time=>{
   // Props a follower carries in a scene (only monsters draw their own).
   for(const f of followers) if(f.carry&&STORY_PROPS[f.carry]&&!f.hidden) { const p=position(f); STORY_PROPS[f.carry](Math.round((p.x+.5)*T)+9,Math.round((p.y+1)*T-12),f); }
-  const W=BOPPY_WIND,now=performance.now(); if(!W.lag&&now>W.puff) return;
+  const W=BOPPY_WIND,now=performance.now(); if(W.lag<1&&!W.halt&&now>W.puff) return;
   const f=boppyWindFollower(); if(!f||f.hidden) return;
   const p=position(f),cx=Math.round((p.x+.5)*T),top=Math.round(p.y*T)-14;
   for(let k=0;k<3;k++) { const ph=(time*1.6+k/3)%1; gfx.globalAlpha=(1-ph)*.85; ellipse(cx+10+ph*10,top+6-ph*16,2+ph*4,2+ph*3,'#ffffff'); }

@@ -19,9 +19,11 @@ function movePlayer(dir) {
   // Indoors (houses and shops) the line is spread out: 1.5 tiles between party members (it was 2; Tom asked for 25% less).
   // Outside it stays one tile. A fractional gap lands between two trail tiles, so the spot is interpolated along the trail.
   const gap=(currentMap&&!currentMap.outside)?1.5:1;
-  while(trail.length>followers.length*2+2) trail.shift();
+  // The trail is kept long enough for a straggling follower (f.lag, in tiles: Boppy catching his breath, data/scenes.js BOPPY_WIND).
+  while(trail.length>followers.length*2+6) trail.shift();
   followers.forEach((f,k)=>{
-    const at=trail.length-1-gap*(k+1),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
+    // f.lag is a fractional extra distance behind the trail; interpolation below turns it into a smooth drift, not a one-tile snap.
+    const at=Math.max(0,trail.length-1-gap*(k+1)-(f.lag||0)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
     if(!a||!b) return;
     const fr=at-lo,t={x:a.x+(b.x-a.x)*fr,y:a.y+(b.y-a.y)*fr};
     if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
@@ -30,6 +32,20 @@ function movePlayer(dir) {
     f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:player.duration*indoorSlow(),fresh:true};
   });
   return true;
+}
+
+// True while the whole party is stopped waiting for a straggler (Boppy). Walking input is ignored; it is not a bump.
+function partyHalted() { return typeof BOPPY_WIND!=='undefined'&&BOPPY_WIND.halt; }
+// Start follower f (index k in `followers`) walking to its spot on the trail, which honors f.lag. Used for catch-up steps.
+function followerToSpot(f,k,duration) {
+  const gap=(currentMap&&!currentMap.outside)?1.5:1;
+  const at=Math.max(0,trail.length-1-gap*(k+1)-(f.lag||0)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
+  if(!a||!b) return;
+  const fr=at-lo,t={x:a.x+(b.x-a.x)*fr,y:a.y+(b.y-a.y)*fr};
+  if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
+  if(f.x===t.x&&f.y===t.y) return;
+  f.facing=directionTo(t.x-f.x,t.y-f.y);
+  f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration,fresh:true};
 }
 
 // ---------- Recruiting ----------
@@ -222,6 +238,6 @@ function offerRecruit(m,npc) {
 function placeFollowers() {
   trail.length=0;
   trail.push({x:player.x,y:player.y});
-  for(const f of followers) { f.x=player.x; f.y=player.y; f.move=null; f.facing=player.facing; }
+  for(const f of followers) { f.x=player.x; f.y=player.y; f.move=null; f.facing=player.facing; f.lag=0; }
 }
 

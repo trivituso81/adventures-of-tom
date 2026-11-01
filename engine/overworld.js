@@ -274,7 +274,7 @@ function update(dt) {
     if(dir) {
       if(typeof twCancel==='function') twCancel();
       if(movePlayer(dir)) sfx.step();
-      else if(performance.now()-lastBump>260) { lastBump=performance.now(); sfx.bump(); }
+      else if(!partyHalted()&&performance.now()-lastBump>260) { lastBump=performance.now(); sfx.bump(); }
     } else if(typeof twStep==='function') twStep(dt);
   }
   // A follower step started this frame waits a frame, so it stays in lockstep with Tom instead of finishing early.

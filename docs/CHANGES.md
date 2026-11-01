@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 45): Boppy falls behind gradually; the party stops for him (`wind1`)
+
+- Tom (08:58): Boppy slowing down on the overworld is funny but jumpy. He should gradually fall behind, and when he is far enough back the whole party is forced to stop until he catches up.
+- Before: every 14 to 23 steps he snapped one whole tile back. Now he drifts back a little on every step (0.12 to 0.18 of a tile, picked per stretch) as a smooth glide, so the gap opens slowly. At 3 tiles behind, the party stops (SLOW DOWN! bubble and puffs), walking input is ignored with no bump sound and tap-to-walk does not give up, and Boppy walks back up at his own pace (about 0.7 s). The party moves again once he is within 0.7 of a tile. If Tom simply stops walking, Boppy still catches up fully.
+- Code: `BOPPY_WIND` in data/scenes.js (knobs `rate`, `max`, `resume`, `catchStep`, `catchTime`); followers take a fractional `f.lag` in engine/followers.js (`followerToSpot`, `partyHalted`; trail kept 4 tiles longer); engine/overworld.js and engine/tapwalk.js ignore the wait. Same conditions as before: chapter 3 on, outdoors on Long Island, Boppy last follower, Grace along.
+- Tested: `tools/boppy_wind_test.py` (22 s walk: largest per-frame move 0.08 tile, 5 to 6 forced stops, lag capped at 3, Tom cannot move while stopped, release after about 0.7 s); screenshot of the stop with the bubble; `smoke.py` passes. Not played on the phone. Stamp `build wind1`.
+
 ## 2026-11-01 (day, 43): Phones now load the new Tom and Amy art (`heads3`)
 
 - Tom (09:10): on `build heads2` the welcome screen still showed Tom's old small walking head. Cause: data/tom-hires-use.js added a fixed `?v=tom6` to all five of Tom's atlas images, and engine/painted.js skips its `?v=ART_V` tag when an address already has one, so the phone kept its saved copies. Amy's stance sheet had the same problem (`?v=bj1` in bake_amy_extra.py).
@@ -17,6 +24,7 @@
 - Landscape: strip across the top, grid left, drawer right and pinned at the top while the grid scrolls (six rows do not fit the sideways screen at readable size, about 4 show at once). Rose Mode is read-only (no action, AUTO, RESPEC or loadout buttons; the grid, toggle and pin still work). Characters without a kit yet show their missing moves as `Soon` and the drawer says `Arrives in a later update.`.
 - Files: `engine/progress.js` (`renderStampsTab`, `b8Row` replaced by `scChip`, `scActions`, `scDrawer`, `scPane`, `scBack`; every `b6*` and `b8*` rule function untouched), `index.html` (old `.sc-*` block replaced), `engine/menu.js` (Back hook). New test `tools/stampgrid_test.py` (levels 1, 30, 50 in portrait and landscape, stamp, polish, pin, compare, Remix, keyboard cursor, Rose Mode, every member renders). `smoke.py` passes. Not played on the phone.
 - Fix: the `solo1` push left merge-conflict lines in `index.html` around the `splash.js` tag (two tags, one stale). Resolved to `splash.js?v=solo1`.
+
 ## 2026-11-01 (day, 42): Battle Lab SOLO: pick any fighter, nobody can be hurt (`solo1`)
 
 - Tom (08:45): in the battle test, JUSTIN SOLO is now just SOLO. Picking it opens a fighter list (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara, Justin, Olivia); the pick fights Old Iron-Gill alone at level 12 with every move unlocked. The separate OLIVIA SOLO entry is gone (SOLO covers her). The two TRYOUT entries are unchanged.

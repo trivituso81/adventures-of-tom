@@ -192,7 +192,7 @@ function twStep(dt) {
     if(movePlayer(nm)) { I.dir=nm; I.stuck=0; sfx.step(); return; }
   }
   I.hold=.12;
-  if(++I.stuck>8) { TW.I=null; sfx.nope(); }
+  if(!partyHalted()&&++I.stuck>8) { TW.I=null; sfx.nope(); }   // waiting for Boppy is not being stuck
 }
 
 function twInteract(dir) {
