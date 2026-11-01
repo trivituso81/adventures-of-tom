@@ -125,7 +125,7 @@ const B2_TRAIT={miles:3,trend:[1,1.2,1.5],ride:4,rideHit:.4,cadence:.05,cadenceM
 // Until F6 (Stampcards) everyone knows every path skill.
 const B2_SKILLS={
   tom:{
-    basic:{key:'mash',name:'Press Start',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
+    basic:{key:'mash',name:'Disconnected Controller',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',
       desc:'Fast controller combo. Free, and gives +1 VP.'},
     special:{key:'defend',name:'DEFEND',vp:1,target:'ally',weight:'quick',kind:'defend',
       desc:'Step in front of an ally for 2 turns. Hits aimed at them go to Tom, 40% softer.'},
@@ -150,7 +150,7 @@ const B2_SKILLS={
     // DEFEND keeps its legacy resolver (engine/battle2.js b2DefendSteps); only the animation is new.
     // data/abilities.js B8_KITS says which slot each key belongs to (engine/progress.js b8Move picks the version).
     o3:[
-      {key:'button_mash',name:'Press Start',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
+      {key:'button_mash',name:'Disconnected Controller',elem:['kinetic'],stat:'pow',mult:1,target:'enemy',weight:'standard',o3:true,
         desc:'Tom presses one button. Nothing connects. He throws the controller. Free, and gives +1 VP.'},
       {key:'defend',sig:true,name:'DEFEND',vp:1,target:'ally',weight:'quick',kind:'defend',o3:true,
         desc:'Step in front of an ally for 2 turns. Hits aimed at them go to Tom, 40% softer.'},

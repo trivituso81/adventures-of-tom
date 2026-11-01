@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Rose's head 10% smaller, Press Start is now Disconnected Controller (`tomrose1`)
+
+- Tom (15:07): "Make Rose's head 10% smaller." `tools/sprite-bake/bake_rose.py`: new `HEAD_DOWN = 0.90` multiplies both head factors (battle 1.679 to 1.511, walk 1.140 to 1.026); body and height unchanged; Grace untouched. Re-baked all Rose atlases and `data/rose-hires.js`.
+- Tom (15:08): Tom's Press Start move is renamed **Disconnected Controller** (key `button_mash` unchanged, so saves, icons and animation still work; also the basic `mash` slot in `data/party.js`, `B2_SKILLS.basic`, and `rx_mash`; tutorial text in `data/scenes.js`, which is not voiced). Spoken line is now "Ugh it's not connecting!!" (was "Ugh, it's not charged!"). **This line needs a voice bake**: queued in `tools/bake-page/pending.json` and `tools/voice-library/battle-scripts.json`; until then it uses speech synthesis.
+- Tom's head 8% larger is in the same push (entry below, `tomhead1`).
+- Tested: `smoke.py`, `IDS=rose,grace smoke.py`, `kit_test.py tom --only=button_mash` FAILS: []; frames looked at. Stamp `build tomrose1`.
+
 ## 2026-11-01 (day, 43): Tom's head 8% larger (`tomhead1`)
 
 - Tom (14:57): "Tom's head needs to be 8% larger."

@@ -203,7 +203,8 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
 fb = args.battle_h * KB / poses['b_idle'].height
 import kidhead as _kh   # bigger head, same body (2026-11-01): every scale factor below comes from unwarped reference heights
 S_BT, S_OW = 0.31, 0.343
-K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT), _kh.factor(_kh.T_WALK, S_OW)
+HEAD_DOWN = 0.90   # Tom 2026-11-01 15:07: "make Rose's head 10% smaller" (battle and walk; Grace unchanged)
+K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT) * HEAD_DOWN, _kh.factor(_kh.T_WALK, S_OW) * HEAD_DOWN
 _IDLE_H, _STAND_H = poses['b_idle'].height, poses['w_down_stand'].height
 _DEF_H, _HOLD_H, _HUG_H = poses['b_defend'].height, poses['y_hold'].height, poses['x_hug'].height
 print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))

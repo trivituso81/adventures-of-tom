@@ -599,7 +599,7 @@ function drawTranceStars(n,time) {
 // Tips for the three tutorial fights (engine/story.js b2TutTip). ▲ Attack (basic move first), ▶︎ Heal (the special first), ◀︎ Tombo, ▼ Bag, B Inspect.
 const TUTORIALS={
   basics:{tips:[
-    {id:'tom',who:'tom',dir:'up',text:'Tom’s turn. Tap ▲ Attack (or press A). His free basic move, Press Start, is first; basic moves also earn 1 VP.'},
+    {id:'tom',who:'tom',dir:'up',text:'Tom’s turn. Tap ▲ Attack (or press A). His free basic move, Disconnected Controller, is first; basic moves also earn 1 VP.'},
     {id:'grace',who:'grace',dir:'up',text:'See the pink bar under each Mudling? That\'s Warmth. Kind moves fill it, and a full bar sends a monster home happy. ▲ Attack, then Cartwheel, for now.'},
     {id:'rose',who:'rose',dir:'right',text:'Rose’s RASPBERRY is under the ▶︎ HEAL button. A Goofed monster loses its next turn, and Mudlings love a raspberry (lots of Warmth).'},
     {id:'deedee',who:'deedee',text:'B, or tapping the portrait in the middle, Inspects a monster: why it\'s grumpy, what it likes, and what it\'s weak to.'},

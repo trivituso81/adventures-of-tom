@@ -317,7 +317,7 @@ const PARTY_MAX=4;
 const inParty=m=>party.includes(m);
 // The old battle's move tables (before F3). Nothing in the main build reads them now; kits live in B2_SKILLS (data/battle2-data.js) and the Stampcards in data/progress.js.
 const ATTACKS={
-  tom:[{key:'mash',name:'Press Start',mp:0,mult:1},{key:'starter',name:'Starter Splash',mp:3,mult:1.3},{key:'flashcard',name:'Flashcard Flurry',mp:4,mult:1.5},{key:'unbox',name:'Unboxing',mp:5,mult:1.7},
+  tom:[{key:'mash',name:'Disconnected Controller',mp:0,mult:1},{key:'starter',name:'Starter Splash',mp:3,mult:1.3},{key:'flashcard',name:'Flashcard Flurry',mp:4,mult:1.5},{key:'unbox',name:'Unboxing',mp:5,mult:1.7},
        {key:'dutch',name:'Dutch Oven',mp:6,mult:2.0,lvl:2},{key:'kanji',name:'Kanji Strike',mp:7,mult:2.3,lvl:3},{key:'delta',name:'Delta One',mp:8,mult:2.6,lvl:4},{key:'finalboss',name:'Final Boss',mp:10,mult:3.2,lvl:5}],
   grace:[{key:'cartwheel',name:'Cartwheel',mp:0,mult:1},{key:'squishy',name:'Squishy Squeeze',mp:3,mult:1.3},{key:'polish',name:'Glitter Nails',mp:4,mult:1.5},{key:'runway',name:'Runway Walk',mp:5,mult:1.7},
        {key:'dancebattle',name:'Dance Battle',mp:6,mult:2.0,lvl:2},{key:'subscribe',name:'Like and Subscribe',mp:7,mult:2.3,lvl:3},{key:'beam',name:'Beam Dismount',mp:8,mult:2.6,lvl:4},{key:'perfect10',name:'Perfect 10',mp:10,mult:3.2,lvl:5}],

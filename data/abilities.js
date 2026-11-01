@@ -16,8 +16,8 @@ const B8_SLOTS=['A1','A2','A3','A4','A5','A6','B1','B2','B3','B4','B5','B6'];
 const B8_KITS={
   tom:{
     basic:{play:'mash',
-      p:{key:"button_mash",name:"Press Start",src:1,vp:0,elem:["kinetic"],desc:"Tom presses one button. Nothing connects. He throws the controller. Recover 1 VP."},
-      r:{key:"rx_mash",name:"Press Start",src:2,vp:0,elem:["kinetic"],desc:"Tom calmly taps a wireless controller while a 16-bit cursor bonks the target. Costs 0 VP."}},
+      p:{key:"button_mash",name:"Disconnected Controller",src:1,vp:0,elem:["kinetic"],desc:"Tom presses one button. Nothing connects. He throws the controller. Recover 1 VP."},
+      r:{key:"rx_mash",name:"Disconnected Controller",src:2,vp:0,elem:["kinetic"],desc:"Tom calmly taps a wireless controller while a 16-bit cursor bonks the target. Costs 0 VP."}},
     sig:{play:'defend',
       p:{key:"defend",name:"DEFEND",src:1,vp:1,elem:[],desc:"Tom steps in front of an ally. No touching, please."},
       r:{key:"rx_defend",name:"DEFEND",src:2,vp:1,elem:["kinetic"],desc:"Tom steps straight in front of an ally, taking their hits for 1 turn and earning 1 Upgrade Mile."}},
