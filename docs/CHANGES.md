@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Grace's and Rose's heads grown to the adults' head-to-body ratio (`kids1`)
+
+- Tom (11:44): check the head-to-body ratio for Tom and TNB and apply it to Grace and Rose, bigger heads, same bodies.
+- Head share (top of head to chin over total height): Tom battle .43 / walk .35, TNB .45 / .40 (average .43 / .373). Grace was .34 / .36, Rose .31 / .343.
+- New tools/sprite-bake/kidhead.py (`grow_head`, factor so the body keeps its size and the figure grows by the head). Grace x 1.46 battle, 1.06 walk (bake_grace.py, bake_grace_extra.py); Rose x 1.68 battle, 1.14 walk (bake_rose.py: battle, extras, jab, tickle, boomerang sheets, walk and overworld extras). KO and Grace's gymnastics wheel poses (head not on top) unchanged; Rose's ride-on-shoulders frames unchanged. Outfit-recolour and eye-search bands remapped (`body_frac`, `head_frac`). Welcome heights Grace 225 to 230, Rose 196 to 205 so their bodies stay the same size there.
+- ART_V `kids1`. Tested: `smoke.py`; full `kit_test.py grace` and `rose`; every Grace and Rose battle frame, the welcome screen and the battle lineup looked at. Stamp `build kids1`.
+
 ## 2026-11-01 (day, 43): Tom's and TNB's shoulders as wide as Justin's (`width3`)
 
 - Tom (11:25): make both Tom's and TNB's shoulder width like Justin's.

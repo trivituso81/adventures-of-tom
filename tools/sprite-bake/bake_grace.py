@@ -226,6 +226,12 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel', 'beg': 'b_beg'}
 fb = args.battle_h * KB / poses['b_idle'].height
+import kidhead as _kh   # bigger head, same body (2026-11-01): fb above comes from the unwarped idle, so the body keeps its size
+S_BT, S_OW = 0.34, 0.36
+K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT), _kh.factor(_kh.T_WALK, S_OW)
+_hb = S_BT * poses['b_idle'].height
+for _n in [n for n in poses if n.startswith('b_') and n != 'b_ko']: poses[_n] = _kh.grow_head(poses[_n], K_BT, _hb)
+print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
@@ -239,6 +245,8 @@ ko_rects = pack(ko_big, os.path.join(ART, 'grace-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
+_hw = S_OW * poses['w_down_stand'].height
+for _n in [n for n in poses if n.startswith('w_')]: poses[_n] = _kh.grow_head(poses[_n], K_OW, _hw)
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
@@ -248,15 +256,15 @@ def mirror(rows):
     return [r[::-1] for r in rows]
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
-bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .27, .62)
-ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .30, .62)
+bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], _kh.body_frac(.27, K_BT, S_BT), _kh.body_frac(.62, K_BT, S_BT))
+ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], _kh.body_frac(.30, K_OW, S_OW), _kh.body_frac(.62, K_OW, S_OW))
 
 # ---------------------------------------------------------------- eyes (for the low-health bruise and KO overlays)
 def find_eye(rows, pal):
     """The near eye: darkest small blob with a bright neighbour, in the upper head. Falls back to a guess."""
     n = len(rows)
     best = None
-    for y in range(int(n * .08), int(n * .35)):
+    for y in range(int(n * _kh.head_frac(.08, K_BT, S_BT)), int(n * _kh.head_frac(.35, K_BT, S_BT))):
         row = rows[y]
         for x in range(2, len(row) - 2):
             ch = row[x]

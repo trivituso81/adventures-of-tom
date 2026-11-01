@@ -39,7 +39,9 @@ for fn, names, ref in SHEETS:
     cut_ = slice_sheet(os.path.join(SRC, fn), [names[0:4], names[4:8], names[8:12], names[12:16]], robust=True)
     r = poses['b_idle'].height / body_h(cut_[ref])
     print(fn, 'scale', round(fb * r, 3), 'ref', ref, cut_[ref].size, 'idle', poses['b_idle'].size)
-    for k in names: big[k] = scaled_to(cut_[k], fb * r)
+    import kidhead as _kh
+    _kb = _kh.factor(_kh.T_BATTLE, 0.34); _hp = 0.34 * poses['b_idle'].height / r   # same head growth as bake_grace.py, in this sheet's pixels
+    for k in names: big[k] = scaled_to(_kh.grow_head(cut_[k], _kb, _hp), fb * r)
 big = tighten(place(big, KB, 'head'), KB)
 pal, rows = rows_of(big, KB, 46)
 rects = pack(big, os.path.join(ART, 'grace-extra.webp'))

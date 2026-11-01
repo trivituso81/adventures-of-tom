@@ -536,9 +536,9 @@ const TITLE_TOM_RIDE=false,TITLE_TOM_H=308;   // TITLE_TOM_H: standing Tom's hei
 const SPLASH_SPOTS=[
   {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
   {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'4", tallest) stands just behind Amy and Deedee, listed early so they draw over him
-  {id:'grace',x:425,feet:1175,h:225},   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
+  {id:'grace',x:425,feet:1175,h:230},   // 2026-11-01: 225 to 230, her walk head grew (kidhead.py), body stays the same size   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
   {id:'tom',x:287,feet:1222,h:335},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose
-  {id:'rose',x:372,feet:1244,h:196,solo:true},   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
+  {id:'rose',x:372,feet:1244,h:205,solo:true},   // 2026-11-01: 196 to 205, head grew, body same   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
   {id:'tnb',x:170,feet:1198,h:330},   // Tom 2026-11-01: body (chin to feet) follows real height; his big hair sits on top, so the top of his hair reaches Justin's
   {id:'boppy',x:768,feet:1222,h:299},
   {id:'amy',x:566,feet:1222,h:298},

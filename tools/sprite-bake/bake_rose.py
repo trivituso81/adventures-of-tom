@@ -201,7 +201,14 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
                 'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
 fb = args.battle_h * KB / poses['b_idle'].height
-bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
+import kidhead as _kh   # bigger head, same body (2026-11-01): every scale factor below comes from unwarped reference heights
+S_BT, S_OW = 0.31, 0.343
+K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT), _kh.factor(_kh.T_WALK, S_OW)
+_IDLE_H, _STAND_H = poses['b_idle'].height, poses['w_down_stand'].height
+_DEF_H, _HOLD_H, _HUG_H = poses['b_defend'].height, poses['y_hold'].height, poses['x_hug'].height
+print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))
+_bt_src = {n: _kh.grow_head(poses[n], K_BT, S_BT * _IDLE_H) for n in poses if n.startswith('b_') and n != 'b_ko'}
+bt_big = {k: scaled_to(_bt_src[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 
 # The sheets avoid injury wording, so the black eye is painted in here: the kneel frame (under 25 percent HP) gets a soft
@@ -221,7 +228,7 @@ def paint_bruise(img, cx, cy, rx, ry):
 bt_big['kneel'] = paint_bruise(bt_big['kneel'], 66, 67.5, 7.5, 6)
 # Sheet A poses: scaled so her standing hug matches the guard pose of the main sheet; own canvas (head on the centre column, feet on the bottom row).
 rA = poses['b_defend'].height / poses['x_hug'].height
-x_big = {k: scaled_to(poses['x_' + k], fb * rA) for k in X_NAMES}
+x_big = {k: scaled_to(_kh.grow_head(poses['x_' + k], K_BT, S_BT * _IDLE_H / rA), fb * rA) for k in X_NAMES}
 x_big = tighten(place(x_big, KB, 'head'), KB)
 _all = dict(bt_big); _all.update({'x_' + k: v for k, v in x_big.items()})
 bt_pal, _rows = rows_of(_all, KB, args.colors)
@@ -236,7 +243,7 @@ TK_NAMES = ['tk_ready', 'tk_creepA', 'tk_creepB', 'tk_launch', 'tk_air', 'tk_lan
             'tk_feather_draw', 'tk_feather_swish', 'tk_feather_twirl', 'tk_finale', 'tk_doubled', 'tk_proud']
 _tk = slice_sheet(os.path.join(SRC, 'rose-tickle-v2.png'), [TK_NAMES[0:4], TK_NAMES[4:8], TK_NAMES[8:12], TK_NAMES[12:16]])
 rT = poses['b_idle'].height / _tk['tk_proud'].height
-tk_big = tighten(place({k: scaled_to(_tk[k], fb * rT) for k in TK_NAMES}, KB, 'head'), KB)
+tk_big = tighten(place({k: scaled_to(_kh.grow_head(_tk[k], K_BT, S_BT * _IDLE_H / rT), fb * rT) for k in TK_NAMES}, KB, 'head'), KB)
 def rows_in_palette(frames, k, palette):
     keys = list(palette); pf = np.array([[int(palette[c][i:i + 2], 16) for i in (1, 3, 5)] for c in keys]).astype(int)
     out = {}
@@ -254,7 +261,7 @@ BM_NAMES = ['bm_windA', 'bm_windB', 'bm_throw', 'bm_follow', 'bm_watch', 'bm_rea
 LF_NAMES = [f'{w}_{v}' for w in ('lamby', 'backup') for v in ('front', 'side', 'flip', 'squash')]
 _bm = slice_sheet(os.path.join(SRC, 'rose-boomerang-v1.png'), [BM_NAMES[0:4], BM_NAMES[4:8], LF_NAMES[0:4], LF_NAMES[4:8]])
 rBM = poses['b_idle'].height / _bm['bm_watch'].height
-bm_big = tighten(place({k: scaled_to(_bm[k], fb * rBM) for k in BM_NAMES}, KB, 'torso'), KB)
+bm_big = tighten(place({k: scaled_to(_kh.grow_head(_bm[k], K_BT, S_BT * _IDLE_H / rBM), fb * rBM) for k in BM_NAMES}, KB, 'torso'), KB)
 bm_rows = rows_in_palette(bm_big, KB, bt_pal)
 bm_rects = pack(bm_big, os.path.join(ART, 'rose-battle-bm.webp'))
 LFC = 160                                                          # lamb cell size in px
@@ -274,10 +281,10 @@ ko_rects = pack(ko_big, os.path.join(ART, 'rose-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
-ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
+ow_big = {n[2:]: scaled_to(_kh.grow_head(v, K_OW, S_OW * _STAND_H), fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 rOW = poses['w_down_stand'].height / poses['y_hold'].height          # standing hug on sheet B matches the walk sheet's stand
 for k in ('crouch', 'jump', 'wave', 'hold'):
-    ow_big['e_' + k] = scaled_to(poses['y_' + k], fo * rOW)
+    ow_big['e_' + k] = scaled_to(_kh.grow_head(poses['y_' + k], K_OW, S_OW * _STAND_H / rOW), fo * rOW)
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
 ow_rects = pack(ow_big, os.path.join(ART, 'rose-ow.webp'))
@@ -312,15 +319,15 @@ def mirror(rows):
     return [r[::-1] for r in rows]
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
-bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .41, .68)
-ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .33, .64)
+bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], _kh.body_frac(.41, K_BT, S_BT), _kh.body_frac(.68, K_BT, S_BT))
+ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], _kh.body_frac(.33, K_OW, S_OW), _kh.body_frac(.64, K_OW, S_OW))
 
 # ---------------------------------------------------------------- eyes (for the low-health bruise and KO overlays)
 def find_eye(rows, pal):
     """The near eye: darkest small blob with a bright neighbour, in the upper head. Falls back to a guess."""
     n = len(rows)
     best = None
-    for y in range(int(n * .08), int(n * .35)):
+    for y in range(int(n * _kh.head_frac(.08, K_BT, S_BT)), int(n * _kh.head_frac(.35, K_BT, S_BT))):
         row = rows[y]
         for x in range(2, len(row) - 2):
             ch = row[x]
