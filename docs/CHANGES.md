@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 45): Bosses stand at the far left of the battle screen (`bossleft1`)
+
+- Tom (15:17): "In boss battles, the boss should be the further left of the screen as possible without cutting off graphics."
+- `engine/battle2-ui.js` `b2LayoutFoes`: a boss's left edge now sits `B2_BOSS_EDGE` (6 canvas pixels, room for its shake and wobble) from the screen edge, so its centre is half its drawn width plus 6, never right of the old spot (168). Applies to every boss alone or with helpers; the old 100 floor on the helpers case is gone. Helpers keep x 272 and 294. Move animations follow through the existing aim warp.
+- Measured all 20 bosses alone and with two helpers: left edge 5.8 to 6.4 px, none clipped, tallest (Ironbelly, Red Pen, Censor) still fit. Looked at frames; party moves against Big One land on it. `smoke.py` FAILS: []. Stamp `build bossleft1`.
+
 ## 2026-11-01 (day, 45): Party members flinch when an enemy hits them (`hurt1`)
 
 - Animation audit fix 1 (claude/battle-animation-audit.md): a party member hit by an enemy stayed in the idle pose (only a shake and a white flash). Now `b2HitParty` (engine/battle2.js) puts the target into their own `hurtPose` frame for 0.35 s. It does not fire when the hit knocks them out (the KO drop takes over) and never cuts into a pose a move has already set. Under 25% HP the kneel still shows after the flinch.
