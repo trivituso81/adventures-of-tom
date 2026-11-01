@@ -625,6 +625,7 @@ const B2_SKILLS={
     ]},
   // Olivia (Tom's cousin, journalist, mom): installed 2026-11-01 from her eleven painted sheets (claude/olivia-ability-prompts.md). Animations: engine/olivia-moves.js (ov_).
   // Legacy basic, special and skills are stand-ins only (the kit below is all o3). B4 to B6 wait (data/abilities.js play:null).
+  // Balance (Tom, 2026-11-01): 7 damage, 4 support (Snack Bag heal, LivNews party VP, Story Time sleep, Marine Layer debuff), like the 14-move kits' 7 and 7.
   olivia:{
     basic:{key:'basic',name:'Fact Check',elem:['chatter'],stat:'warmth',mult:1,target:'enemy',weight:'standard',
       desc:'Flips open her notebook, clicks her pen and jabs it at the enemy like a microphone. Free, and gives +1 VP.'},
@@ -636,22 +637,22 @@ const B2_SKILLS={
         desc:'She flips open a reporter\'s notebook, clicks her pen and jabs it at the enemy like a microphone. "SOURCE?" Free, and gives +1 VP.'},
       {key:'snack_bag',sig:true,name:'SNACK BAG',vp:2,elem:['cozy'],target:'party',weight:'standard',kind:'signature',o3:true,fx:[['heal',.25,.4,'party'],['cure','dizzy','party']],
         desc:'She digs through her overstuffed mom tote, pulls out a snack pouch and tosses one to every friend. Heals the party 25% and clears Dizzy. One each.'},
-      {key:'livnews_live',name:'LivNews Live',vp:2,elem:['chatter'],stat:'warmth',mult:.7,target:'all',weight:'quick',o3:true,
-        desc:'Phone up selfie-style, hair fixed, then she swings it around and reports the enemies live to her followers. A wave of notifications lands on every enemy.'},
+      {key:'livnews_live',name:'LivNews Live',vp:2,elem:['chatter'],target:'party',weight:'quick',o3:true,fx:[['vp',2,'party']],
+        desc:'Phone up selfie-style, hair fixed, then she swings it around and reports the fight live. The chat cheers the family on: everybody gains 2 VP. No damage.'},
       {key:'inverted_pyramid',name:'Inverted Pyramid',vp:3,elem:['kinetic'],stat:'pow',mult:1.7,target:'enemy',weight:'standard',o3:true,fx:[['st','grit_down',2,'t']],
         desc:'She becomes a journalism professor, sketches the inverted pyramid in the air and slams the point down on one enemy. Its GRIT drops for 2 turns.'},
       {key:'double_under',name:'Double Under',vp:4,elem:['kinetic'],stat:'pow',mult:1.35,hits:2,target:'enemy',weight:'standard',o3:true,
         desc:'A jump rope, a rusty first jump that trips her up, then the teen champion comes back: two big double-unders and a whip of the rope on one enemy.'},
-      {key:'story_time',name:'Story Time',vp:4,elem:['cozy'],stat:'warmth',mult:.8,target:'enemy',weight:'standard',o3:true,fx:[['st','stunned',1,'t'],['warm',15,'t']],
-        desc:'She sits cross-legged, opens her own children\'s book and reads the first page in a soft voice. The enemy nods off and loses its next turn.'},
+      {key:'story_time',name:'Story Time',vp:4,elem:['cozy'],target:'enemy',weight:'standard',o3:true,kindFoe:25,fx:[['st','stunned',1,'t'],['warm',15,'t']],
+        desc:'She sits cross-legged, opens her own children\'s book and reads the first page in a soft voice. The enemy nods off and loses its next turn. No damage.'},
       {key:'michael',name:'MICHAEL!',vp:5,elem:['kinetic'],stat:'pow',mult:2.7,target:'enemy',weight:'heavy',o3:true,fx:[['st','pep_down',2,'t']],
         desc:'She cups her hands and yells for Michael. Nothing. Louder. A diaper bag flies in from off screen and flattens one enemy. Its PEP drops for 2 turns.'},
       {key:'better_than_bobby',name:'Better Than Bobby',vp:8,elem:['chatter','sparkle'],stat:'warmth',mult:.75,hits:5,target:'multi',weight:'heavy',o3:true,
         desc:'Ultimate. She counts on her fingers everything she beats her brother Bobby at: jump rope, grades, parallel parking, cooking, Mario Kart. Five rising hits spread across the enemies, then a mic drop.'},
       {key:'is_this_real',name:'Is This Real?',vp:3,elem:['chatter'],stat:'warmth',mult:1.3,target:'enemy',weight:'standard',o3:true,fx:[['st','dizzy',2,'t']],
         desc:'She holds her phone up to the enemy and scans it. Too many fingers. Fake. It hits one enemy and leaves it Dizzy for 2 turns.'},
-      {key:'marine_layer',name:'Marine Layer',vp:4,elem:['splash'],stat:'warmth',mult:1,target:'all',weight:'standard',o3:true,fx:[['st','cool_down',2,'t'],['st','pep_down',2,'t']],
-        desc:'It is sixty-two degrees. She pulls a hoodie on over her dress, declares a crisis, and gray coastal fog rolls over every enemy: COOL and PEP drop for 2 turns.'},
+      {key:'marine_layer',name:'Marine Layer',vp:4,elem:['splash'],target:'all',weight:'standard',o3:true,fx:[['st','cool_down',2,'t'],['st','pep_down',2,'t']],
+        desc:'It is sixty-two degrees. She pulls a hoodie on over her dress, declares a crisis, and gray coastal fog rolls over every enemy: COOL and PEP drop for 2 turns. No damage.'},
       {key:'lachlan_no',name:'LACHLAN, NO!',vp:5,elem:['kinetic'],stat:'pow',mult:2.6,target:'enemy',weight:'heavy',o3:true,fx:[['interrupt','t']],
         desc:'She spots Lachlan about to climb something dangerous and sprints through the enemy at full mom speed. A big hit that cancels its wind-up.'}
     ]}
