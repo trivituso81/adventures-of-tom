@@ -1,11 +1,11 @@
 [
- {
-  "id": "tom-button-mash",
-  "kind": "battle",
-  "voice": "tom",
-  "lineKind": "button_mash",
-  "text": "Ugh it's not connecting!!",
-  "where": "Disconnected Controller (Tom's first move)",
-  "script": "[dry, calm, animated, exasperated] Ugh it's not connecting!!"
- }
+{
+"id": "tom-button-mash",
+"kind": "battle",
+"voice": "tom",
+"lineKind": "button_mash",
+"text": "Ugh it's not connecting!!",
+"where": "Disconnected Controller (Tom's first move)",
+"script": "[exasperated, dry] Ugh it's not connecting!!"
+}
 ]
