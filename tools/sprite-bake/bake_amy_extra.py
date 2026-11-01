@@ -21,7 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src'); ART = os.path.join(ROOT, 'art/chars'); OUT = os.path.join(ROOT, 'data/amy-hires-extra.js')
 KB, KW = 2, 3
 TOM_HEAD_RATIO, BATTLE_H, WALK_H = 0.40, 99.5, 41.7
-WALK_HEAD_RATIO = 0.376     # overworld sheet, same as bake_amy.py walk (2026-11-01)
+WALK_HEAD_RATIO = 0.44     # overworld sheet, same as bake_amy.py walk (2026-11-01)
 BATTLE_HEAD_RATIO = 0.438   # battle sheets only, same as bake_amy.py (face = Justin's 49 battle px, 2026-11-01); the overworld sheet keeps 0.40
 
 ATK = ['t1_start', 't2_sprint', 't3_windup', 't4_hit', 't5_recover', 't6_win', 'k1_hike', 'k2_swingup', 'k3_top', 'k4_carry', 'k5_throw', 'k6_dazed']

@@ -81,7 +81,7 @@ bigY = tighten(place_feet(bigY, KB), KB)
 outY, rowsY = emit('BOPPY_YOUNG', bigY, 'boppy-young.webp')
 # Pepper sheet head (2026-11-01): his core head grew so the face is Justin's 49 battle px; grow these heads to match. Face rows must grow by
 # (49/33 face px) / (2.014/1.94 battle scale) at the same 75-row smug height; the factor is solved on the upright smug frame and used for all 16.
-PEP_GROW = (49 / 33) / (2.014 / 1.94) * .87   # x .87: cap correction (2026-11-01), as bake_boppy.py
+PEP_GROW = (49 / 33) / (2.014 / 1.94) * .87 * .85   # x .87 cap correction, x .85 battle perceived-size check (2026-11-01), as bake_boppy.py
 _t, _c, _, _ = g['_auto_head'](exP['smug']); _r0 = (_c - _t) / exP['smug'].height
 def _pr(k): return (_c - _t) * k / g['bigger_head'](exP['smug'], 'p_smug', k=k).height
 _lo, _hi = 1.0, 4.0

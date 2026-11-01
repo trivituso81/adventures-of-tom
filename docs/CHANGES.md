@@ -1,3 +1,12 @@
+## 2026-11-01 (day, 43): Adult faces equalized by how big they look, welcome screen as the guide (`heads5`)
+
+- Tom (09:38): on the welcome screen Tom's and Boppy's heads looked bigger than the rest and Justin's smallest; fix them all using the welcome screen as the guide.
+- Cause: earlier passes matched face HEIGHT only (hairline to chin). How big a face looks depends on width too: Tom's and Boppy's faces are wide, Justin's, Amy's and Deedee's narrow. New measure: face height x cheek-to-cheek width at eye level (square root), read by hand on each front walking frame at welcome-screen size (Boppy's height from eye line to chin x 1.9, the cap hides his forehead). Before: Tom 97, Boppy 91, TNB 84, Justin 78, Deedee 76, Amy 71. After: all 77 to 85 (reading error about 5%).
+- Walk and welcome screen: Justin x 1.06 (bake_justin.py `--ratio` .35, `--ratio-side` .334), Tom x .85 (`FACE_GROW_W`), Boppy x .91 (`WALK_HEAD_RATIO` .404), Deedee x 1.09 (.42), Amy x 1.17 (.44, also bake_amy_extra.py overworld sheet), TNB unchanged.
+- Battle, same measure on the idles: Tom 35 px vs the group's 39, so x 1.12 (`FACE_GROW`); Boppy 46 px, so x .85 (`BATTLE_HEAD_RATIO` .417, `PEP_GROW`, hand band `HR` .417); Justin, TNB, Amy, Deedee within 3%, unchanged. Heights unchanged everywhere.
+- Justin's walk atlas lost its fixed `?v=head2` (bake_justin.py), so ART_V reaches it. ART_V `heads5`.
+- Tested: `smoke.py`; `kit_test.py tom` (starter_splash, sourdough_snob, overpriced_gadget, noise_canceling) and `boppy` (cap_swat, patient_angler, pepper_breath, five_alarm_jar); `tomhouse_walk_test.py`; welcome screen before and after, both battle lineups looked at. Not played on the phone. Stamp `build heads5`.
+
 ## 2026-11-01 (day, 43): Boppy's head brought in line (`heads4`)
 
 - Tom (09:28): Boppy's head looked much bigger than everyone else's, and different from Deedee's.

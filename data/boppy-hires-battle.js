@@ -16,7 +16,7 @@
   // HR = head (hair to chin) share of the idle height set by the bake (was .40; bigger since 2026-11-01). Bands keep their place relative to head and body:
   // eye band .2 to .85 of the head, arm band from just above the chin to just over half the body (both give the old .08-.34 and .35-.72 at HR .40).
   // The young runner (yg_) keeps realistic proportions, so he passes .40 (the old bands).
-  const meta=(rows,HR=0.491)=>{ const EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR); const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
+  const meta=(rows,HR=0.417)=>{ const EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR); const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
     for(let y=Math.floor(H*EY0);y<Math.floor(H*EY1);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
     const eye=c?{col:Math.round(sx/c),row:Math.round(sy/c)}:{col:Math.round(W*.38),row:Math.round(H*.2)};
     let lx=W,ly=Math.round(H*.5),rx=0,ry=Math.round(H*.5);
