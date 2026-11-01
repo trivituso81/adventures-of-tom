@@ -65,7 +65,7 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3]
 # Battle and custom poses only (walk and stretch unchanged). Each head is cut out, enlarged about the chin and pasted back, as in bake_deedee.py;
 # then the whole figure is refit to the same battle_h. The face had 38 px at scale 1.3, so its share of the figure grows by (49/38)/(1.43/1.3).
 from headwarp import _warp_head
-FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12   # x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
+FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12 * .94   # x .94 bald-scalp nudge, as FACE_GROW_W; x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
 TAPER = 16
 def _auto_head(img):
     a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
@@ -148,7 +148,7 @@ for _n in list(poses):
     if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
 # Walk and arrival stretch (2026-11-01): the welcome screen draws the front walk frame at real height (Tom 5'11" = 308 picture px next to
 # Justin 6'4" = 330). Tom's walk face was .168 of his height, Justin's .270; to match Justin's face it must be .270 x 330 / 308 = .289, so x 1.72.
-FACE_GROW_W = 1.72 * .85   # x .85 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
+FACE_GROW_W = 1.72 * .85 * .94   # x .94 (2026-11-01, Tom: still looked bigger than Justin; his bald scalp reads as face, so his visible face was 13% taller at equal head outline); x .85 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
 _tw, _cw, _, _ = head_box(poses['w_down_stand'], 'w_down_stand'); _rw = (_cw - _tw) / poses['w_down_stand'].height
 def _ratio_w(k): return (_cw - _tw) * k / bigger_head(poses['w_down_stand'], 'w_down_stand', k).height
 _lo, _hi = 1.0, 4.0

@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Tom's head nudged down to match Justin's (`heads6`)
+
+- Tom (09:51): Justin's head still looked smaller than Tom's. Measured on the welcome screen: both head outlines are the same (crown to chin 128 vs 130, cheek to cheek 70 vs 75), but Tom is bald, so his scalp reads as face: his visible skin is 115 tall against Justin's 102 (Justin's top fifth is hair).
+- Fix: Tom's head x .94 in walk, welcome screen and battle (`FACE_GROW_W`, `FACE_GROW` in bake_tom.py), splitting the difference so his visible face sits close to Justin's without his whole head becoming smaller. ART_V `heads6`.
+- Tested: `smoke.py`; `kit_test.py tom` (starter_splash, noise_canceling); welcome screen before and after looked at. Stamp `build heads6`.
+
 ## 2026-11-01 (day, 43): Adult faces equalized by how big they look, welcome screen as the guide (`heads5`)
 
 - Tom (09:38): on the welcome screen Tom's and Boppy's heads looked bigger than the rest and Justin's smallest; fix them all using the welcome screen as the guide.
