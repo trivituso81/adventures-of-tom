@@ -125,8 +125,15 @@ def _drop_slivers(im, er=5, grow=7):
             if v < .03 * big_: a[lab == i + 1, 3] = 0
     return Image.fromarray(a, 'RGBA')
 
+# Body width (2026-11-01, Tom: "Boppy should be skinnier"): body below the chin x BODY_W before the head warp, every pose but the lying KO.
+# Narrowing keeps the canvas, so HEAD_BOX, KEEP and hand coordinates stay valid.
+from headwarp import body_width
+BODY_W = 0.80
 def bigger_head(img, name, k=None, pad=160, taper=TAPER):
     if k is None: k = HEAD_KB if name[:2] in ('b_', 'x_', 'f_', 's_') else HEAD_KW
+    if name != 'b_ko':
+        _bx = HEAD_BOX.get(name) or _auto_head(img)
+        img, _ = body_width(img, _bx[1], BODY_W)
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)

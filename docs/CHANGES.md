@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Tom wider, Boppy slimmer (`width1`)
+
+- Tom (10:42): Tom should be wider to match TNB, Boppy should be skinnier.
+- Measured on the welcome screen at waist and hip level (arms included, welcome px): Boppy 142, Deedee 111, Justin 108, TNB 101, Tom 87, Amy 85.
+- New step `body_width` (tools/sprite-bake/headwarp.py): the body below the chin is scaled sideways about its centre, easing in over 14 rows at the neck; the head is untouched. Runs inside each pose's head warp, so walk, welcome, battle and every extra sheet follow. Tom x 1.18 (`BODY_W` in bake_tom.py; lying, face-down, cartwheel, KO and cower poses skipped); Boppy x .80 (`BODY_W` in bake_boppy.py, so extras, fishing, stock and pepper sheets follow; lying KO and the young runner skipped). Result: Tom 103, Boppy 115 at the waist. Tom's `hand()` x offset 30 to 35 px (engine/tom-moves.js) to follow his wider arm; Boppy's hand, eye and mouth points are found on the new frames.
+- ART_V `width1`. Tested: `smoke.py`; `kit_test.py tom` (starter_splash, sourdough_snob, overpriced_gadget), `boppy` (patient_angler, pepper_breath, five_alarm_jar); `tomhouse_walk_test.py`; every Tom and Boppy battle frame and the welcome screen looked at. Not played on the phone. Stamp `build width1`.
+
 ## 2026-11-01 (day, 43): Welcome screen bodies follow real height (`body1`)
 
 - Tom (09:56 to 09:59): compared adult body lengths and widths, approved counting real height to the top of the head, not the top of the hair or cap.

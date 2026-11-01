@@ -64,7 +64,9 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3]
 # Every adult's face (hairline to chin) is Justin's 49 battle px, and Tom stands 5'11" = 143 px next to Justin's 6'4" = 153 px (BATTLE_SIZE.tom 1.43).
 # Battle and custom poses only (walk and stretch unchanged). Each head is cut out, enlarged about the chin and pasted back, as in bake_deedee.py;
 # then the whole figure is refit to the same battle_h. The face had 38 px at scale 1.3, so its share of the figure grows by (49/38)/(1.43/1.3).
-from headwarp import _warp_head
+from headwarp import _warp_head, body_width
+# Body width (2026-11-01, Tom: "Tom should be wider to match TNB"): every upright pose's body below the chin x BODY_W before the head warp.
+BODY_W = 1.18
 FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12 * .94   # x .94 bald-scalp nudge, as FACE_GROW_W; x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
 TAPER = 16
 def _auto_head(img):
@@ -99,6 +101,16 @@ def head_box(img, name):
 def bigger_head(img, name, k, pad=160, taper=TAPER):
     if name in NOWARP or k == 1: return img
     if name in REGION: return region_head(img, name, k)
+    if not name.endswith('#rot') and name not in SIDE:
+        _t0, _c0, _a0, _a1 = head_box(img, name)
+        img, _P = body_width(img, _c0, BODY_W)
+        if _P and name in HEAD_BOX:
+            t_, c_, x0_, x1_ = HEAD_BOX[name]; _saved = HEAD_BOX[name]; HEAD_BOX[name] = (t_, c_, x0_ + _P, x1_ + _P)
+            try: return _bigger_core(img, name, k, pad, taper)
+            finally: HEAD_BOX[name] = _saved
+        return _bigger_core(img, name, k, pad, taper)
+    return _bigger_core(img, name, k, pad, taper)
+def _bigger_core(img, name, k, pad=160, taper=TAPER):
     if name in SIDE:
         return _unrot(bigger_head(_rot(img, SIDE[name]), name + '#rot', k, pad, taper), SIDE[name])
     W, H = img.size

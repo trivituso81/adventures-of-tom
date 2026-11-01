@@ -214,3 +214,33 @@ def bigger_head(img, top, chin, x0, x1, k, taper=30, pad=420, two_layer=True, pi
         aa = np.array(img); aa[:, :, 3] = np.where(ARMS, aa[:, :, 3], 0)
         big.alpha_composite(Image.fromarray(aa, 'RGBA'), (pad, pad))
     return big.crop(big.getbbox())
+
+
+def body_width(img, chin, factor, taper=14):
+    """Scale the body (rows below `chin`) horizontally by `factor` about the body's centre column, easing from 1 at the chin to `factor`
+    over `taper` rows so the neck joins cleanly; the head rows are untouched. Widening pads the canvas by P columns on each side and
+    returns (image, P); narrowing keeps the canvas (P = 0) so every x coordinate stays valid. 2026-11-01 (Tom: Tom wider, Boppy skinnier)."""
+    if factor == 1: return img, 0
+    a = np.array(img).astype(float); H, W = a.shape[:2]
+    al = a[:, :, 3] > 40
+    body = al[min(H - 1, chin + taper):]
+    xs = np.where(body)[1]
+    cx = float(xs.mean()) if len(xs) else W / 2.0
+    P = int(np.ceil(W * (factor - 1) / 2.0)) + 2 if factor > 1 else 0
+    pm = a.copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
+    out = np.zeros((H, W + 2 * P, 4))
+    xd = np.arange(W + 2 * P) - P + .0                      # destination column in source coordinates (before scaling)
+    for y in range(H):
+        if y < chin:
+            s = 1.0
+        else:
+            s = 1.0 + (factor - 1.0) * min(1.0, (y - chin) / float(taper))
+        src = cx + (xd - cx) / s
+        x0 = np.floor(src).astype(int); f = src - x0
+        ok0 = (x0 >= 0) & (x0 < W); ok1 = (x0 + 1 >= 0) & (x0 + 1 < W)
+        row = pm[y]
+        v0 = np.where(ok0[:, None], row[np.clip(x0, 0, W - 1)], 0); v1 = np.where(ok1[:, None], row[np.clip(x0 + 1, 0, W - 1)], 0)
+        out[y] = v0 * (1 - f[:, None]) + v1 * f[:, None]
+    alo = out[:, :, 3:4]
+    out[:, :, :3] = np.where(alo > 1, out[:, :, :3] / np.maximum(alo, 1) * 255.0, 0)
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8), 'RGBA'), P
