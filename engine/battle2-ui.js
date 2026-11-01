@@ -145,7 +145,7 @@ function b2DrawEnemies(t) {
     if(f.st.pietin) { const hx=x+w/2,hy=f.def.tinY!=null?y+h*f.def.tinY:top+4; ellipse(hx,hy,w*.26+4,9,OUT); ellipse(hx,hy,w*.26+2,7,'#c9ccd4'); ellipse(hx,hy-3,w*.2,5,'#e8ecf2'); rect(hx-w*.2,hy-2,w*.4,2,'#9aa0aa'); }
     // Goofed: spinning stars and question marks. Smitten: hearts. Staggered: stars. Grumbled: a sulky "...".
     if(f.st.goofed) for(let k=0;k<4;k++) { const a=t*4+k*1.57; label(k%2?'+':'?',x+w/2+Math.round(Math.cos(a)*w*.42),top-8+Math.round(Math.sin(a)*8),k%2?'#ffe08a':'#fff1cb',3); }
-    if(f.st.smitten) for(let k=0;k<3;k++) { const ph=(t*1.2+k/3)%1; gfx.globalAlpha=1-ph; label('<3',x+w/2-20+k*20,top-6-Math.round(ph*30),'#ff9ac0',2); gfx.globalAlpha=1; }
+    if(f.st.smitten) for(let k=0;k<3;k++) { const ph=(t*1.2+k/3)%1; gfx.globalAlpha=1-ph; paintHeart(x+w/2-20+k*20,top-1-Math.round(ph*30),5.5,'#ff9ac0'); gfx.globalAlpha=1; }
     if(f.st.staggered) for(let k=0;k<3;k++) { const a=t*5+k*2.1; label('*',x+w/2+Math.round(Math.cos(a)*w*.35),top-10+Math.round(Math.sin(a)*6),'#ffe08a',3); }
     if(f.st.grumbled) label('...',x+w/2+w*.32,top-10-Math.round(Math.abs(Math.sin(t*4))*3),'#cfd8d6',2);
     // A boss's shield: a bubble with one pip per hit still needed.
@@ -264,13 +264,8 @@ function b2DrawFx(e,t) {
   }
 }
 
-// A chunky pixel heart with an outline, centered on x,y. s = pixel size.
-const B2_HEART_BM=['.XX.XX.','XXXXXXX','XXXXXXX','.XXXXX.','..XXX..','...X...'];
-function b2PixHeart(x,y,s,c) {
-  const ox=Math.round(x-3.5*s),oy=Math.round(y-3*s);
-  for(let r=0;r<6;r++) for(let k=0;k<7;k++) if(B2_HEART_BM[r][k]==='X') rect(ox+k*s-1,oy+r*s-1,s+2,s+2,'#2b1d2b');
-  for(let r=0;r<6;r++) for(let k=0;k<7;k++) if(B2_HEART_BM[r][k]==='X') rect(ox+k*s,oy+r*s,s,s,(r===1&&(k===1||k===2))?'#ffe0ec':c);
-}
+// A painted heart (engine/town-render.js paintHeart), centered on x,y. s = the old pixel size, kept so callers do not change (width about 7 s).
+function b2PixHeart(x,y,s,c) { paintHeart(x,y,3.9*s,c); }
 function b2Update(dt) {
   for(const f of B2.foes) {
     if(f.warmFlash>0) f.warmFlash-=dt;

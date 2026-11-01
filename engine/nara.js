@@ -39,7 +39,7 @@ PROP2.tball=(q,u)=>{ if(PROPART.draw('nara/tennis_ball',0,0,{h:24})) return; E(0
 // Muddy paw prints stamped across the enemy.
 SC.paws=(s,u)=>{ gfx.globalAlpha=env(u,.05,.75); const n=s.n||4; for(let k=0;k<n;k++) { if(u<k/(n+2)) continue; const x=GX-40+k*24+(k%2)*6,y=200-k*10+(k%2)*14; E(x,y,7,6,'#5a3a24'); for(let t=0;t<3;t++) E(x-6+t*6,y-9,2.6,2.6,'#5a3a24'); } };
 // Hearts drifting up around Nara (puppy eyes).
-SC.pupHearts=(s,u)=>{ const p=battle.fx&&BATTLE_POS[s.i]; if(!p) return; const cx=p.x*3,by=p.base*3-60; for(let k=0;k<6;k++) { const ph=(u*1.8+k/6)%1; gfx.globalAlpha=(1-ph)*env(u,.1,.85); label('<3',cx-36+k*14+Math.round(Math.sin(s.t*5+k)*6),by-Math.round(ph*60),k%2?'#ff9ac0':'#ffd3e0',2); } };
+SC.pupHearts=(s,u)=>{ const p=battle.fx&&BATTLE_POS[s.i]; if(!p) return; const cx=p.x*3,by=p.base*3-60; for(let k=0;k<6;k++) { const ph=(u*1.8+k/6)%1; gfx.globalAlpha=(1-ph)*env(u,.1,.85); paintHeart(cx-36+k*14+Math.round(Math.sin(s.t*5+k)*6),by+5-Math.round(ph*60),5.5,k%2?'#ff9ac0':'#ffd3e0'); } };
 // Big shiny eyes over the enemy's head, so you can see what it is looking at.
 SC.bigEyes=(s,u)=>{ gfx.globalAlpha=env(u,.12,.8); const x=GX+90,y=120; R(x-34,y-18,68,36,OUT); R(x-32,y-16,64,32,'#fff1cb'); for(const ex of [x-14,x+14]) { E(ex,y,11,12,OUT); E(ex,y,9,10,'#3a2418'); E(ex-3,y-4,3.4,3.4,'#ffffff'); E(ex+3,y+3,1.6,1.6,'#ffffff'); } };
 // A pale puddle under someone. i: party slot (Nara herself after a win), or the enemy when i is undefined.
@@ -136,7 +136,7 @@ const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(
 const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
 const poly=(pts,c,o=true)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); if(o) { gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.stroke(); } gfx.fillStyle=c; gfx.fill(); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
 const N=RECRUIT_MOVES.nara;
 const CREAM='#fff6dc',GOLD='#ffe08a',PINK='#ff9ac0',BALL='#d8ef4a',JERKY='#a8582e',WATER='#8fd0ff',RED='#e0402e',WOOD='#b88848';
 ST.nw('na_');
@@ -471,7 +471,7 @@ const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
 const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
 const N=RECRUIT_MOVES.nara;
 const CREAM='#fff6dc',GOLD='#ffe08a',PINK='#ff9ac0',BALL='#d8ef4a',WATER='#8fd0ff',RED='#e0402e',WOOD='#b88848',FUR='#1c1718',FUR2='#2e2627',FUR3='#463b3b',PEE='#e9e07a',ICE='#bfe8ff';
 ST.nw('nv_');
@@ -744,8 +744,8 @@ const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(
 const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
 const poly=(pts,c,o=3)=>{ gfx.beginPath(); pts.forEach(([x,y],k)=>k?gfx.lineTo(x,y):gfx.moveTo(x,y)); gfx.closePath(); if(o) { gfx.lineJoin='round'; gfx.lineWidth=o; gfx.strokeStyle=OUT; gfx.stroke(); } gfx.fillStyle=c; gfx.fill(); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
-const heartO=(x,y,r,c)=>{ heart(x,y,r+2.5,OUT); heart(x,y,r,c); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
+const heartO=(x,y,r,c)=>heart(x,y,r+1.2,c);   // the painted heart carries its own edge
 const star=(x,y,r,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.beginPath(); for(let k=0;k<10;k++) { const a=k*Math.PI/5-Math.PI/2,q=k%2?r*.45:r; gfx.lineTo(Math.cos(a)*q,Math.sin(a)*q); } gfx.closePath(); gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=3; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); gfx.restore(); };
 const bigWord=(txt,x,y,c,sc)=>{ const w=(txt.length*4-1)*sc; x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(8,y); const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 const N=RECRUIT_MOVES.nara;
@@ -956,8 +956,7 @@ const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
 const PO=(pts,c,o=2)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); if(o) { gfx.strokeStyle=OUT; gfx.lineWidth=o; gfx.lineJoin='round'; gfx.stroke(); } };
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
-const heart=(x,y,r,c)=>{ gfx.beginPath(); gfx.moveTo(x,y+r*.9); gfx.bezierCurveTo(x-r*1.6,y-r*.2,x-r*.7,y-r*1.4,x,y-r*.45); gfx.bezierCurveTo(x+r*.7,y-r*1.4,x+r*1.6,y-r*.2,x,y+r*.9); gfx.closePath();
-  gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y,r,c);   // painted heart (engine/town-render.js paintHeart)
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 const N=RECRUIT_MOVES.nara;
 const CREAM='#fff6dc',GOLD='#ffe08a',PINK='#ff9ac0',BALL='#d8ef4a',RED='#e0402e',FUR='#8a5226',FUR2='#a8642e',BELLY='#d9b98a',CLAY2='#e8d2b0',GLZ='#5fae9a',BREAD='#d8a050';

@@ -521,7 +521,7 @@ function splashScene(W,H,panelH,time) {
   if(tnb&&tp) for(const hrt of splash.hearts) {
     if(hrt.t<0) continue;
     const u=hrt.t/1.6,x=Math.round((tp.x+tnb.x)/2+hrt.dx*S*20+Math.sin(hrt.t*6)*S*2),y=Math.round(frontFy-S*62-u*S*30);
-    gfx.globalAlpha=1-u; drawHeart(x,y,Math.max(1,S)); gfx.globalAlpha=1;
+    gfx.globalAlpha=1-u; drawHeart(x,y,Math.max(1,S*.5)); gfx.globalAlpha=1;
   }
 }
 // Painted welcome art (Tom, 2026-10-29): the family stands where the shadows fall on the plaza in art/welcome.webp.

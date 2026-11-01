@@ -241,7 +241,7 @@ function drawBattle() {
     if(hugging&&m.id==='deedee') {
       for(let k=0;k<7;k++) {
         const ph=(t*1.2+k/7)%1,hx=cx-70+k*24+Math.round(Math.sin(t*5+k)*6),hy=y+10-Math.round(ph*70);
-        gfx.globalAlpha=1-ph; label('<3',hx,hy,k%2?'#ff9ac0':'#ffd3e0',2); gfx.globalAlpha=1;
+        gfx.globalAlpha=1-ph; paintHeart(hx,hy+5,5.5,k%2?'#ff9ac0':'#ffd3e0'); gfx.globalAlpha=1;
       }
     }
     if(grumbling) {

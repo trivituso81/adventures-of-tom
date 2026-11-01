@@ -239,7 +239,7 @@ function drawIntroWorld(time) {
   }
   for(const hh of intro.hearts) {
     gfx.globalAlpha=Math.max(0,1-hh.t/1.2);
-    drawHeart(Math.round(hh.x*T),Math.round(hh.y*T-hh.t*30),1+(hh.t<.3?1:0));
+    drawHeart(Math.round(hh.x*T),Math.round(hh.y*T-hh.t*30-14-44*(actorK()-1)),1+Math.max(0,1-hh.t/.3)*.6);   // pops in above his head (same lift as the kiss hearts), then settles
     gfx.globalAlpha=1;
   }
   // The squishy over a girl's head: Grace's dumpling by default; a scene may pass its own {sprite, pal, who:'rose'} (Nine Scoops).

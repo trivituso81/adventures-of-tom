@@ -93,12 +93,12 @@ function draw(time) {
     if(t>2.6) kiss=null;
     else {
       const mx=Math.round(((player.x+kiss.npc.x)/2+.5)*T),my=Math.round(Math.min(player.y,kiss.npc.y)*T-20-Math.round(44*(actorK()-1)));
-      const rise=Math.round(Math.min(1,t/1.6)*26),pulse=1+(Math.sin(t*9)>0?1:0);
+      const rise=Math.round(Math.min(1,t/1.6)*26),pulse=1.45+Math.sin(t*9)*.2;   // soft pulse (painted heart, engine/town-render.js paintHeart)
       const alpha=t<2?1:1-(t-2)/.6;
       gfx.globalAlpha=alpha;
       drawHeart(mx,my-rise,pulse);
-      if(t>.5) { drawHeart(mx-14,my-rise+10-Math.round((t-.5)*14),1); }
-      if(t>.9) { drawHeart(mx+13,my-rise+14-Math.round((t-.9)*12),1); }
+      if(t>.5) { drawHeart(mx-16,my-rise+10-Math.round((t-.5)*14),.9+Math.sin(t*8+1)*.08); }
+      if(t>.9) { drawHeart(mx+16,my-rise+14-Math.round((t-.9)*12),.9+Math.sin(t*8+2)*.08); }
       gfx.globalAlpha=1;
     }
   }

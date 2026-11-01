@@ -278,8 +278,7 @@ const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 const star=(x,y,r,c)=>{ if(RFX.gStar) RFX.gStar(x,y,r,c); else E(x,y,r,r,c); };
-const heart=(x,y,r,c)=>{ gfx.beginPath(); gfx.moveTo(x,y+r*.9); gfx.bezierCurveTo(x-r*1.6,y-r*.2,x-r*.7,y-r*1.4,x,y-r*.45); gfx.bezierCurveTo(x+r*.7,y-r*1.4,x+r*1.6,y-r*.2,x,y+r*.9); gfx.closePath();
-  gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y,r,c);   // painted heart (engine/town-render.js paintHeart)
 const S=(k,...a)=>{ try { if(sfx[k]) sfx[k](...a); } catch(e){} };
 const CREAM='#fff6dc',GOLD='#ffe08a',PINK='#ff9ac0',RED='#e0402e',SKIN='#f0b892',SKIN2='#d8946e';
 ST.nw('tb_');
@@ -5471,8 +5470,8 @@ B2_TOMBO_ANIM.ff4_dc=E2=>{ B2.aim=null;
       gfx.globalAlpha=al*.3; E(o.x,o.y,9,9,COL[i]); gfx.globalAlpha=al; EO(o.x,o.y,3.4,3.4,COL[i]); R(o.x-1,o.y-2,1,1,'#ffffff');
       if(ms>P.rise&&ms<P.beam) { gfx.globalAlpha=al*.4; E(o.x-Math.sin(ms/900+i)*5,o.y+3,2,2,COL[i]); } gfx.globalAlpha=1; }
     // the heart that forms, then fires a beam at the monsters
-    if(ms>P.heart&&ms<P.beam+500) { const q=ez(seg(ms,P.heart,P.beam)),pul=1+Math.sin(ms/80)*.05; gfx.globalAlpha=q*(1-ez(seg(ms,P.beam,P.beam+500))); dcHeartPath(0,tcx,ring,26*q*pul); gfx.fillStyle='#ff9ac0'; gfx.fill(); gfx.globalAlpha*=.6; dcHeartPath(0,tcx-4,ring-4,12*q); gfx.fillStyle='#ffe0ee'; gfx.fill(); gfx.globalAlpha=1; }
-    o3.forEach((o,i)=>{ const q=seg(ms,P.beam+i*60,P.hit+i*70); if(q>0&&q<1) { const x=lerp(tcx,o.q.x,ez(q)),y=lerp(ring,o.q.mid,ez(q))-Math.sin(q*Math.PI)*34; gfx.save(); gfx.translate(x,y); dcHeartPath(0,0,0,9); gfx.fillStyle='#ff9ac0'; gfx.fill(); gfx.restore(); for(let j=1;j<5;j++) { gfx.globalAlpha=.5-j*.1; E(x+j*5,y+j*2,3,3,COL[(i+j)%8]); } gfx.globalAlpha=1; }
+    if(ms>P.heart&&ms<P.beam+500) { const q=ez(seg(ms,P.heart,P.beam)),pul=1+Math.sin(ms/80)*.05; gfx.globalAlpha=q*(1-ez(seg(ms,P.beam,P.beam+500))); paintHeart(tcx,ring,26*q*pul,'#ff9ac0'); gfx.globalAlpha=1; }
+    o3.forEach((o,i)=>{ const q=seg(ms,P.beam+i*60,P.hit+i*70); if(q>0&&q<1) { const x=lerp(tcx,o.q.x,ez(q)),y=lerp(ring,o.q.mid,ez(q))-Math.sin(q*Math.PI)*34; paintHeart(x,y,9,'#ff9ac0'); for(let j=1;j<5;j++) { gfx.globalAlpha=.5-j*.1; E(x+j*5,y+j*2,3,3,COL[(i+j)%8]); } gfx.globalAlpha=1; }
       const sp=seg(ms,P.hit+i*70,P.hit+i*70+900); if(sp>0&&sp<1) { gfx.globalAlpha=1-sp; for(let j=0;j<8;j++) { const an=j*.78+sp; star(o.q.x+Math.cos(an)*(14+sp*22),o.q.mid+Math.sin(an)*(14+sp*18),2.6,COL[j]); } gfx.globalAlpha=1; } });
     bars(k); }});
   const steps=[
@@ -5510,7 +5509,7 @@ const PO=(pts,c,o=2)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(le
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 const star=(x,y,r,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.beginPath(); for(let k=0;k<10;k++) { const a=k*Math.PI/5-Math.PI/2,q=k%2?r*.45:r; gfx.lineTo(Math.cos(a)*q,Math.sin(a)*q); } gfx.closePath(); gfx.lineJoin='round'; gfx.strokeStyle=OUT; gfx.lineWidth=2; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); gfx.restore(); };
-const heart=(x,y,r,c)=>{ gfx.beginPath(); gfx.moveTo(x,y+r*.9); gfx.bezierCurveTo(x-r*1.6,y-r*.2,x-r*.7,y-r*1.4,x,y-r*.45); gfx.bezierCurveTo(x+r*.7,y-r*1.4,x+r*1.6,y-r*.2,x,y+r*.9); gfx.closePath(); gfx.lineWidth=2.5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y,r,c);   // painted heart (engine/town-render.js paintHeart)
 const S=(k,...a)=>{ try { if(sfx[k]) sfx[k](...a); } catch(e){} };
 const CREAM='#fff6dc',GOLD='#ffe08a',GOLD2='#ffc23a',PINK='#ff9ac0',RED='#e0402e',SKY='#9fd8ff',MINT='#8ef0a0',BLUE='#1f4fae',WOOD='#9a6a3a',WOOD2='#c48a4a',WOOD3='#6e4824',GREEN='#6fae5a',GREEN2='#3f8a4a';
 const CONF=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff','#ffffff'];

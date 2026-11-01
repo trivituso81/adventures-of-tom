@@ -591,10 +591,48 @@ function drawActorSpaced(a) {
   gfx.save(); gfx.translate(dx,dy); drawActor(a); gfx.restore();
 }
 
-const HEART=['.OO.OO.','OHhHOHO','OHHHHHO','.OHHHO.','..OHO..','...O...'];
+// Painted heart (Tom, 2026-10-31: hearts must match the painted art). One shared painter for every heart in the game: the kiss and hug
+// hearts, story and title hearts (drawHeart below), and the hearts in battle moves (each move file's local `heart` calls this).
+// (x,y) is the heart's centre, r its size (width about 1.8 r), c its base colour. It is drawn from c: a soft warm glow, a lit
+// gradient (lighter top left, deeper bottom right), a dark-rose edge instead of black, a rim light and a glossy highlight.
+// Respects the current globalAlpha, draws on `gfx` (whichever canvas is active) and leaves the canvas state as it found it.
+function paintHeartRGB(c) {
+  if(typeof c!=='string') return null;
+  let m=/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(c.trim());
+  if(m) { let h=m[1]; if(h.length===3) h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2]; const n=parseInt(h,16); return [n>>16&255,n>>8&255,n&255]; }
+  m=/^rgba?\(\s*(\d+)[ ,]+(\d+)[ ,]+(\d+)/i.exec(c);
+  return m?[+m[1],+m[2],+m[3]]:null;
+}
+function paintHeartMix(a,b,t) { return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+Math.round(a[1]+(b[1]-a[1])*t)+','+Math.round(a[2]+(b[2]-a[2])*t)+')'; }
+function paintHeart(x,y,r,c) {
+  if(!(r>0.5)) return;
+  const base=paintHeartRGB(c)||[238,84,116];
+  const lite=paintHeartMix(base,[255,236,238],.55),mid=paintHeartMix(base,[255,150,170],.12),deep=paintHeartMix(base,[96,18,48],.5),edge=paintHeartMix(base,[70,14,36],.72);
+  gfx.save();
+  // Warm glow behind it, like the golden light in the paintings.
+  const gl=gfx.createRadialGradient(x,y,r*.2,x,y,r*2.1);
+  gl.addColorStop(0,'rgba('+base[0]+','+base[1]+','+base[2]+',.42)'); gl.addColorStop(.55,'rgba(255,196,170,.16)'); gl.addColorStop(1,'rgba(255,196,170,0)');
+  gfx.fillStyle=gl; gfx.beginPath(); gfx.arc(x,y,r*2.1,0,Math.PI*2); gfx.fill();
+  const path=()=>{ gfx.beginPath(); gfx.moveTo(x,y+r*.95); gfx.bezierCurveTo(x-r*1.7,y-r*.1,x-r*.8,y-r*1.5,x,y-r*.5); gfx.bezierCurveTo(x+r*.8,y-r*1.5,x+r*1.7,y-r*.1,x,y+r*.95); gfx.closePath(); };
+  // Body: lit from the top left.
+  const g=gfx.createRadialGradient(x-r*.45,y-r*.55,r*.1,x+r*.1,y+r*.1,r*1.5);
+  g.addColorStop(0,lite); g.addColorStop(.38,mid); g.addColorStop(1,deep);
+  path(); gfx.fillStyle=g; gfx.fill();
+  // Rim light low on the right, clipped inside the heart, then the dark-rose edge on top.
+  gfx.save(); path(); gfx.clip();
+  gfx.strokeStyle=paintHeartMix(base,[255,200,190],.45); gfx.globalAlpha*=.55; gfx.lineWidth=Math.max(1,r*.34);
+  gfx.beginPath(); gfx.arc(x+r*.15,y-r*.3,r*1.12,Math.PI*.12,Math.PI*.62); gfx.stroke();
+  gfx.restore();
+  path(); gfx.lineJoin='round'; gfx.lineWidth=Math.max(1,r*.2); gfx.strokeStyle=edge; gfx.stroke();
+  // Glossy highlight on the left lobe, and a small spark beside it.
+  gfx.fillStyle='rgba(255,255,255,.82)'; gfx.beginPath(); gfx.ellipse(x-r*.58,y-r*.46,r*.3,r*.17,-.62,0,Math.PI*2); gfx.fill();
+  gfx.fillStyle='rgba(255,255,255,.7)'; gfx.beginPath(); gfx.arc(x-r*.2,y-r*.7,Math.max(.6,r*.08),0,Math.PI*2); gfx.fill();
+  gfx.restore();
+}
+// Overworld hearts: (x centre, y top, sc). sc is a size multiplier and may be fractional (callers ease it for a soft pulse).
 function drawHeart(x,y,sc) {
-  const pal={O:'#5a1f2e',H:'#e8536a',h:'#ffb3bf'};
-  drawSprite(HEART,pal,x-Math.round(3.5*sc),y,sc);
+  const r=6.1*sc;
+  paintHeart(x,y+r*.93,r,'#ee5474');
 }
 function drawTarget(target) {
   if(!target||dialog.active||player.move||transition) return;

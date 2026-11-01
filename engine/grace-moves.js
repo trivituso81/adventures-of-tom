@@ -115,7 +115,7 @@ SC.recframe=(s,u)=>{
   if(Math.floor(s.t*2)%2===0) { E(40,44,6,6,'#e0402e'); } label('REC',66,42,'#ffffff',2);
   R(470,30,80,20,'#e0402e'); label('LIVE',510,38,'#ffffff',2);
   const views=Math.round((s.views||1000000)*Math.pow(ez(cl((u-.1)/.75)),2)); label((views.toLocaleString?views.toLocaleString('en-US'):String(views))+' VIEWS',288,42,GOLD,2);
-  for(let k=0;k<3;k++) { const ph=(s.t*.7+k/3)%1; gfx.globalAlpha=env(u,.06,.94)*(1-ph); label('<3',540-ph*10+Math.sin(ph*9)*10,290-ph*120,PINK,2); }
+  for(let k=0;k<3;k++) { const ph=(s.t*.7+k/3)%1; gfx.globalAlpha=env(u,.06,.94)*(1-ph); paintHeart(540-ph*10+Math.sin(ph*9)*10,295-ph*120,5.5,PINK); }
 };
 SC.beamapp=(s,u)=>{
   // The balance beam rises under Grace's starting spot.
@@ -228,7 +228,7 @@ const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='r
 const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
 const check=(x,y,s,c)=>{ LnO(x-s,y,x-s*.3,y+s*.7,s*.45,c); LnO(x-s*.3,y+s*.7,x+s,y-s*.8,s*.45,c); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
 const bt=(txt,x,y,c,sc,dur=1)=>battle.texts.push({txt,x,y,color:c,sc,t:0,dur});
 const hit=E2=>landHit(E2.dmg,E2.crit);
 const gpos=()=>battle.actorPos||{cx:462,base:279,h:78};
@@ -460,7 +460,7 @@ const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(
 const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
 const check=(x,y,s,c)=>{ LnO(x-s,y,x-s*.3,y+s*.7,s*.45,c); LnO(x-s*.3,y+s*.7,x+s,y-s*.8,s*.45,c); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
 const G=RECRUIT_MOVES.grace,star=RFX.gStar,dumpling=RFX.gDumpling;
 const PINK='#ff7fb3',PINK2='#ffc1dc',PURP='#b48fe0',GOLD='#ffe08a',CREAM='#fff8e8',BLUE='#4f86d8';
 ST.nw('gr_');
@@ -766,7 +766,7 @@ const LnO=(x0,y0,x1,y1,w,c)=>{ Ln(x0,y0,x1,y1,w+4,OUT); Ln(x0,y0,x1,y1,w,c); };
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
 const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
 const G=RECRUIT_MOVES.grace,star=RFX.gStar,dumpling=RFX.gDumpling;
 const PINK='#ff7fb3',PINK2='#ffc1dc',PURP='#b48fe0',GOLD='#ffe08a',CREAM='#fff8e8',BLUE='#4f86d8',RED='#e8402e',MINT='#9be39a',SKYC='#9fe8ff';
 const CONF=[PINK,PURP,GOLD,SKYC,MINT,'#ffb45a'];
@@ -1128,7 +1128,7 @@ const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
 const EO=(x,y,rx,ry,c)=>{ E(x,y,rx+2,ry+2,OUT); E(x,y,rx,ry,c); };
 const PO=(pts,c,o=2)=>{ gfx.beginPath(); gfx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) gfx.lineTo(pts[i][0],pts[i][1]); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); if(o) { gfx.strokeStyle=OUT; gfx.lineWidth=o; gfx.lineJoin='round'; gfx.stroke(); } };
 const ring=(x,y,rx,ry,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2); gfx.stroke(); };
-const heart=(x,y,r,c)=>{ E(x-r*.5,y-r*.2,r*.6,r*.6,c); E(x+r*.5,y-r*.2,r*.6,r*.6,c); gfx.beginPath(); gfx.moveTo(x-r*1.05,y); gfx.lineTo(x,y+r*1.1); gfx.lineTo(x+r*1.05,y); gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
+const heart=(x,y,r,c)=>paintHeart(x,y+r*.3,r*1.15,c);   // painted heart (engine/town-render.js paintHeart)
 const G=RECRUIT_MOVES.grace,star=RFX.gStar;
 const PINK='#ff7fb3',PINK2='#ffc1dc',PURP='#b48fe0',GOLD='#ffe08a',CREAM='#fff8e8',RED='#e8402e',MINT='#9be39a',SKYC='#9fe8ff',FOIL='#d8dde6',FOILD='#9aa2b0',MAT='#2f5fd0',MATD='#244bb0';
 const RAINBOW=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff'];

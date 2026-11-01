@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 32): Hearts redrawn in the painted style (`hearts1`)
+
+- Tom (23:48): the hearts for kisses, hugs and so on must match the new painted look. There is now one shared painted heart (`paintHeart` in `engine/town-render.js`): soft warm glow, lit gradient (lighter top left, deeper bottom right), dark-rose edge instead of black, rim light, glossy highlight. It is built from whatever colour the caller passes, so the old pink, rose and gold variants all keep their tint.
+- Overworld: the TNB kiss, the girls' hug, story-scene hearts and the title hearts use it (`drawHeart`). Hearts pulse smoothly instead of snapping between two sizes, and the hug hearts now start above Tom's head instead of on his face.
+- Battle: every move file's own heart helper (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara, the Pottery Lesson set piece) now calls the painter, as do the Heart effect over calmed foes, the smitten and hug text hearts (`<3`) and Deedee's heart outline and heartbeat (dark rose edge, light inner line). The old pixel heart bitmap in `battle2-ui.js` is gone.
+- Not changed: the pixel heart in the old canvas title logo (not shown with the painted welcome art).
+- Tested: kiss, hug and a size ladder in screenshots; battle heart moves played for every character with no errors; `smoke.py`. Not played on the phone. Stamp `build hearts1`.
+
 ## 2026-10-31 (day, 31): Olivia walks in the Halloween dress (`olivia2`)
 
 - Tom (23:49): the old Olivia was showing; she should wear the Halloween dress. Her walk sprite was the blouse and olive trousers from the first sheet, only her menu portrait had the dress.
