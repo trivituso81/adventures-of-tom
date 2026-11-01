@@ -460,7 +460,8 @@ function startMove(a,dir) {
 // Inside a house or shop Tom walks slower (Tom, 2026-10-30: half speed; 2026-10-31: "a touch faster", so 1.6x the outdoor step
 // time, about 62% speed). Outside it is unchanged. Change INDOOR_STEP_X to tune.
 // 2026-10-31: the overworld (outdoors) is "a touch slower" too: 1.15x, so 0.16 s per step. Change OUTDOOR_STEP_X to tune.
-const INDOOR_STEP_X=1.6,OUTDOOR_STEP_X=1.15;
+// 2026-10-31 (22:16): "increase walking speed inside houses": 1.6x down to 1.3x (0.187 s per step, about 23% faster than before).
+const INDOOR_STEP_X=1.3,OUTDOOR_STEP_X=1.15;
 function indoorSlow() { return (typeof currentMap!=='undefined'&&currentMap&&!currentMap.outside)?INDOOR_STEP_X:OUTDOOR_STEP_X; }
 
 function advanceMove(a,dt) {

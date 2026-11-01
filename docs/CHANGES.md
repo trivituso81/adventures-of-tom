@@ -1,3 +1,8 @@
+## 2026-10-31 (day, 28): Faster walking inside houses (`indoor1`)
+
+- Tom (22:16): increase walking speed inside houses. Indoor steps are now 1.3x the base step time (was 1.6x): 0.182 s per step instead of 0.224 s, about 23% faster. Outdoors is unchanged (1.15x). Followers use the same value, so the party stays in lockstep. Tune `INDOOR_STEP_X` beside `indoorSlow()` in engine/battle-draw.js.
+- Tested: `smoke.py` pass. Not played on the phone. Stamp `build indoor1`.
+
 ## 2026-10-31 (day, 27): Olivia walks the town in painted art (`olivia1`)
 
 - Tom (18:29): sent Olivia's hero pose (the caricature in the Halloween dress, `tools/sprite-bake/src/olivia-hero-v1.png`, already on file) and asked to get her walking around the town. Her 3 x 3 painted walk sheet (`src/olivia-walk-v1.png`, white blouse and olive trousers) was on file but never baked; it is baked now.
