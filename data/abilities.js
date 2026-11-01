@@ -317,7 +317,7 @@ const B8_KITS={
       p:{key:"around_the_bend",name:"Just Around the Bend",src:1,vp:4,elem:["cozy"],desc:"Three bends, a summit at golden hour and a snack thrown down. Heal a friend, clear Amber-Stuck, and raise WARMTH and COOL."},
       r:{key:"rx_wheel",name:"Center the Clay",src:2,vp:3,elem:["splash"],desc:"TNB spins an enemy on his electric pottery wheel at 300 RPM while splashing slip water, leaving the foe Dizzy and Slowed. Counts as an art lesson for monsters (kindFoe)!"}},
     B3:{play:'kiln',
-      p:{key:"round_with_jojo",name:"Round with Jojo",src:1,vp:4,elem:["kinetic"],desc:"His sister Jojo lines up one disc for a very long time, then throws it through the whole row. Hit and delay them."},
+      p:{key:"round_with_jojo",name:"Frisbee Golf",src:1,vp:4,elem:["kinetic"],desc:"TNB stays in line and throws a frisbee to his sister Jojo, who runs out backwards and catches it with the whole row. Hit and delay them."},
       r:{key:"rx_kiln",name:"Cone Six Kiln",src:2,vp:4,elem:["cozy"],desc:"TNB opens his studio kiln at peak Cone Six firing temperature ($2200^\\circ\\text{F}$), shattering boss shields, splashing foes, thawing party Amber, and granting himself Kiln Glow (+25% WARMTH/COOL)."}},
     B4:{play:null,
       p:{key:"coffee_run",name:"Coffee Run",src:1,vp:3,elem:["cozy"],desc:"TNB sprints off for a coffee run and brings back the friend's order, exactly right. Heal at least 20% HP and restore 2 VP."},

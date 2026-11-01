@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 43): Frisbee Golf, TNB's Jojo move rebuilt (`fgolf1`)
+
+- Tom (14:14): rename the move Frisbee Golf (was Round with Jojo, disc golf). New animation from existing frames: TNB stays in the line and calls "Hey, Jojo! Catch!"; Jojo runs out at the enemies backwards; he throws the frisbee to her; she catches it as her back collides with the enemies.
+- engine/tnb-moves.js `T.round_with_jojo` (key unchanged, so saves and MOVE_KEYS hold): TNB never leaves his spot (poses point, wind, throw). Jojo uses only her existing painted frames: right-facing walk row moving left for the backward run, `b_release` for the catch, `b_follow` for the stumble, `b_celeb2`, `b_high`, then the walk row back. Frisbee arcs from TNB's hand to her reaching hand and lands exactly at the hit. Basket scene removed. Same numbers (row hit, delay).
+- Renamed to Frisbee Golf in `data/abilities.js`, `data/battle2-data.js` (name and desc), Jojo's loft lines and comment (`data/maps-la.js`, unvoiced), docs/CANON.md. Icon (`data/battle-icons.js`) is now a frisbee instead of a basket.
+- SPOKEN LINE CHANGED: `round_with_jojo` is now "Hey, Jojo! Catch!" (`data/lines.js`; also `tools/clip-audit/extra-battle.json` and `tools/voice-library/battle-scripts.json`). The old baked clip no longer matches, so TNB is silent on this move until the line is re-baked.
+- Tested: `kit_test tnb --only=round_with_jojo` (frames looked at), `IDS=tnb smoke.py` FAILS: [], `jojo_test.py` FAILS: []. Tags `fgolf1`, stamp `build fgolf1`.
+
 ## 2026-11-01 (day, 43): Welcome screen, a little bit further back (`back2`)
 
 - Tom (14:15): "just a little bit further".

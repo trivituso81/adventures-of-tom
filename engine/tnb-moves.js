@@ -1845,10 +1845,11 @@ T.around_the_bend=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foe=t.si
     [3900,()=>{ S('whoosh'); setMessage('He slides back down. The way down is always shorter.'); }],
     [4600,'end',kindLine(t,'It was, in fact, around a bend.')]]); };
 
-// ---------- Round with Jojo (B3; key round_with_jojo; Curb Appeal's numbers) ----------
-// A disc golf basket appears past the row. Jojo (his sister) wanders in: long face, rectangular glasses, long straight
-// light brown hair, very relaxed. She takes a very long time to line it up. One disc through every monster. CHAINS.
-const jojo=(x,y,t,ph)=>{ // ph: 'walk' | 'aim' | 'thumb'. Feet at (x,y). About 88 px tall: a long face, rectangular glasses, long straight hair.
+// ---------- Frisbee Golf (B3; key round_with_jojo, name was Round with Jojo; Curb Appeal's numbers) ----------
+// TNB stays in his place in the line. Jojo (his sister: long face, rectangular glasses, long straight light brown hair, very relaxed) wanders in.
+// He calls "Hey, Jojo! Catch!", she sprints at the enemies BACKWARDS (her right-facing walk frames, moving left, eyes on him), he lobs the frisbee
+// from the line, and she catches it just as her back hits the row. One bump through every monster, delays them. Nov 1: was a disc golf basket and one long throw.
+const jojo=(x,y,t,ph)=>{ // stand-in while the painted frames load. ph: 'walk' | 'aim' | 'thumb'. Feet at (x,y). About 88 px tall.
   gfx.save(); gfx.translate(x,y); const bob=ph==='walk'?Math.abs(Math.sin(t*7))*3:Math.sin(t*1.3)*1.2; gfx.translate(0,-bob);
   const step=ph==='walk'?Math.sin(t*14)*4:0;
   RO(-10+step,-16,7,16,'#3f4a63'); RO(3-step,-16,7,16,'#3f4a63'); RO(-12+step,-2,10,3,WHITE); RO(2-step,-2,10,3,WHITE);   // legs, sneakers
@@ -1862,45 +1863,43 @@ const jojo=(x,y,t,ph)=>{ // ph: 'walk' | 'aim' | 'thumb'. Feet at (x,y). About 8
   else if(ph==='aim') { RO(-20,-40,8,14,'#f1c9a4'); RO(12,-50,18,7,'#f1c9a4'); }
   else { RO(-20,-40,8,14,'#f1c9a4'); RO(12,-40,8,14,'#f1c9a4'); }
   gfx.restore(); };
-SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P; let x,ph='walk'; if(ms<P.in) x=lerp(P.x0,P.xs,ez(ms/P.in)); else if(ms<P.out) { x=P.xs; ph=ms<P.throw?'aim':(ms<P.out?'thumb':'walk'); if(ms>=P.throw&&ms<P.throw+200) ph='walk'; } else x=lerp(P.xs,P.x0,ez((ms-P.out)/(P.gone-P.out)));
-  gfx.globalAlpha=1; s.x=x;
-  // Painted Jojo (data/jojo-hires-use.js; Tom's photo sheet, Oct 2026). Walk in facing left, line it up (reach-back), x-step, release at P.throw, follow through,
-  // hop at CHAINS, high-five, walk out facing right. Falls back to the drawn stand-in while the art loads.
-  const J=typeof JOJO_BT!=='undefined'&&JOJO_BT.ready()&&P.hs;
-  if(J) { const hs=P.hs,y=P.y,step=['right_step1','right_stand','right_step2','right_stand'][Math.floor(s.t*5)%4];
-    if(ms<P.in) JOJO_BT.drawOw(step,x,y-Math.abs(Math.sin(s.t*10))*2,hs,true);
-    else if(ms>=P.out) JOJO_BT.drawOw(step,x,y-Math.abs(Math.sin(s.t*10))*2,hs,false);
-    else { const bob=Math.sin(s.t*1.3)*1.2; let f='b_reach',dx=0,dy=-bob;
-      if(ms>=P.throw+1000) f='b_high'; else if(ms>=P.chains) { f='b_celeb2'; dy=-Math.abs(Math.sin((ms-P.chains)/110))*10; }
-      else if(ms>=P.throw+200) f='b_follow'; else if(ms>=P.throw-100) f='b_release'; else if(ms>=P.throw-350) { f='b_xstep'; dx=-6; }
-      JOJO_BT.draw(f,x+dx,y+dy,hs,true); }
-    if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,P.y-P.hs-10,CREAM,1); return; }
-  jojo(x,P.y,s.t,ph);
-  if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,P.y-96,CREAM,1); if(ms>P.in&&ms<P.throw) disc(x+30,P.y-48+Math.sin(s.t*2)*2,1); };
 const disc=(x,y,sc)=>{ if(PROPART.draw('tnb/flying_disc',x,y,{w:30*sc})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,14,5,'#ff6a3c'); E(0,-1,9,3,'#ff8a5c'); gfx.restore(); };
-const basket=(x,y,ms,P)=>{ if(PROPART.draw('tnb/disc_golf_basket',x,y-50,{h:100})) { if(ms>P.chains+150) disc(x,y-34,.9); return; }
-  RO(x-3,y-90,6,90,CHROME); RO(x-30,y-96,60,6,CHROME2); for(let k=-24;k<=24;k+=8) { const sw=ms>P.chains&&ms<P.chains+500?Math.sin((ms-P.chains)/30+k)*3:0; Ln(x+k,y-90,x+k*.6+sw,y-44,2,CHROME); }
-  RO(x-28,y-44,56,22,CHROME); R(x-24,y-40,48,14,'#3a3f46'); for(let k=-20;k<=20;k+=10) Ln(x+k,y-40,x+k,y-26,2,CHROME2); if(ms>P.chains+150) disc(x,y-36,.9); };
-SC.t6_basket=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.93); basket(s.x,s.y,ms,s.P); gfx.globalAlpha=1; };
-SC.t6_discfly=(s,u)=>{ const q=u,x=lerp(s.x0,s.x1,q),y=lerp(s.y0,s.y1,q)-Math.sin(q*Math.PI)*s.arc; gfx.globalAlpha=1; for(let k=1;k<4;k++) { const qq=cl(q-k*.04),xx=lerp(s.x0,s.x1,qq),yy=lerp(s.y0,s.y1,qq)-Math.sin(qq*Math.PI)*s.arc; gfx.globalAlpha=.3-k*.08; disc(xx,yy,1.2); } gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(Math.sin(q*Math.PI)*.5); disc(0,0,1.4); gfx.restore(); };
-T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m),hit=2900;
-  const kx=Math.max(28,G.x0-70),ky=Math.min(312,G.base+4),jx=Math.max(G.x1+120,Math.min(me.x-70,470)),jy=Math.min(314,me.y+4);
-  const HU=ST.unit(m),hs=Math.round(((HU&&HU.h)||80)*66/70),P={x0:620,xs:jx+60,y:jy,in:1300,throw:2500,giggle:1800,out:3900,gone:4800,chains:3100,hs},BP={chains:3100};
-  P.hx=P.xs-Math.round(hs*.62); P.hy=jy-Math.round(hs*.74);
-  const sorted=list.map(f=>({f,x:ST.foe(f).x})).sort((a,b)=>b.x-a.x),span=jx+90-kx,spins=sorted.map((o,k)=>({f:o.f,t:2500+450*((jx+90-o.x)/span),k}));
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:300,x:jx-10,y:jy,f:'point'},{t:1300,f:'aim'},{t:1900,f:'hip'},{t:2300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1},{t:2500,f:'spread'},{t:2900,f:'celeb',hop:8},{t:3400,f:'clap'},{t:3900,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);
+// Where Jojo's reaching hand is in her painted b_release frame (facing right), as fractions of her standing height hs from her feet.
+const JOJO_HAND={dx:.335,dy:.64};
+SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P,hs=P.hs,y=P.y,walk=['right_step1','right_stand','right_step2','right_stand'],stp=walk[Math.floor(s.t*(ms>=P.go&&ms<P.catch?9:5))%4];
+  gfx.globalAlpha=1; let x,dy=0,held=false;
+  const J=typeof JOJO_BT!=='undefined'&&JOJO_BT.ready();
+  if(ms<P.in) { x=lerp(P.x0,P.xs,ez(ms/P.in)); if(J) JOJO_BT.drawOw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,true); else jojo(x,y,s.t,'walk'); }                  // wanders in, facing left
+  else if(ms<P.go) { x=P.xs; if(J) JOJO_BT.drawOw('right_stand',x,y-Math.sin(s.t*1.3)*1.2,hs,false); else jojo(x,y,s.t,'aim'); }                                    // turns to TNB
+  else if(ms<P.catch) { const q=(ms-P.go)/(P.catch-P.go); x=lerp(P.xs,P.cx,q); dy=-Math.abs(Math.sin(s.t*9*Math.PI/2))*3;                                         // runs backward: moving left, facing right
+    if(J) { if(ms>=P.catch-260) JOJO_BT.draw('b_release',x,y+dy,hs,false); else JOJO_BT.drawOw(stp,x,y+dy,hs,false); } else jojo(x,y+dy,s.t,'walk'); }
+  else if(ms<P.catch+380) { const q=cl((ms-P.catch)/380); x=P.cx+ez(q)*P.bump; dy=-Math.sin(q*Math.PI)*8; held=true;                                                       // caught it, bumped into the row, stumbles back
+    if(J) JOJO_BT.draw('b_follow',x,y+dy,hs,false); else jojo(x,y+dy,s.t,'thumb'); }
+  else if(ms<P.out) { x=P.cx+P.bump; const hop=ms<P.catch+1100?-Math.abs(Math.sin((ms-P.catch-380)/110))*10:0;                                                       // cheers, then a high-five
+    if(J) JOJO_BT.draw(ms<P.catch+1100?'b_celeb2':'b_high',x,y+hop,hs,true); else jojo(x,y+hop,s.t,'thumb'); }
+  else { x=lerp(P.cx+P.bump,P.x0,ez(cl((ms-P.out)/(P.gone-P.out)))); held=true; if(J) JOJO_BT.drawOw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,false); else jojo(x,y,s.t,'walk'); }   // walks back toward TNB with the frisbee
+  if(held&&ms<P.catch+380) disc(x+hs*JOJO_HAND.dx,y+dy-hs*JOJO_HAND.dy,1.1);
+  else if(held) disc(x+hs*.2,y-hs*.42,1.0);
+  if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,y-hs-10,CREAM,1); s.x=x; };
+SC.t6_discfly=(s,u)=>{ const q=u,x=lerp(s.x0,s.x1,q),y=lerp(s.y0,s.y1,q)-Math.sin(q*Math.PI)*s.arc; gfx.globalAlpha=1; for(let k=1;k<4;k++) { const qq=cl(q-k*.04),xx=lerp(s.x0,s.x1,qq),yy=lerp(s.y0,s.y1,qq)-Math.sin(qq*Math.PI)*s.arc; gfx.globalAlpha=.3-k*.08; disc(xx,yy,1.2); } gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(q*Math.PI*6); disc(0,0,1.4); gfx.restore(); };
+T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m),hit=2600;
+  const HU=ST.unit(m),hs=Math.round(((HU&&HU.h)||80)*66/70),jy=Math.min(314,me.y+4),xs=Math.min(540,me.x-60);
+  const cx=Math.round(Math.min(G.x1+hs*.2,xs-130));
+  const P={x0:620,xs,y:jy,in:900,go:1000,catch:hit,out:3700,gone:4700,giggle:3300,hs,cx,bump:22};
+  const hx=cx+hs*JOJO_HAND.dx,hy=jy-hs*JOJO_HAND.dy;                                                       // where the frisbee has to arrive
+  const sorted=list.map(f=>({f,x:ST.foe(f).x})).sort((a,b)=>b.x-a.x),spins=sorted.map((o,k)=>({f:o.f,t:hit+110*k,k}));
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'point'},{t:1500,f:'wind'},{t:1800,f:'throw'},{t:2300,f:'aim'},{t:2900,f:'hip'},{t:3300,f:'clap'},{t:3900,f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // he never leaves the line
   ST.play(E2,[
-    [0,()=>{ setMessage('A disc golf basket appears. TNB looks off to the right. "Jojo, you\'re up."'); say(m.id,'round_with_jojo'); scene('t6_basket',4.7,{x:kx,y:ky,P:BP}); scene('t6_jojo',4.8,{P}); scene('t6_spin',2.0,{list:spins,t0:2000,delay:2.0,h:22}); }],
-    [1300,()=>{ setMessage('Jojo wanders in. She is in no hurry. She has never been in a hurry.'); }],
-    [1800,()=>{ S('select'); setMessage('She lines it up. She is still lining it up.'); }],
-    [2300,()=>{ scene('t6_big',.5,{x:jx-10,y:jy-110,txt:'...',c:CREAM,sc:3}); setMessage('TNB checks his watch.'); }],
-    [2500,()=>{ S('whoosh'); scene('t6_discfly',.6,{x0:P.hx,y0:P.hy,x1:kx,y1:ky-60,arc:90}); setMessage('One throw. It never came down.'); }],
+    [0,()=>{ setMessage('Jojo wanders in. She is in no hurry. She has never been in a hurry.'); scene('t6_jojo',4.8,{P}); scene('t6_spin',2.4,{list:spins,t0:2000,delay:2.0,h:22}); }],
+    [600,()=>{ say(m.id,'round_with_jojo'); setMessage('TNB stays right where he is. "Hey, Jojo! Catch!"'); }],
+    [1000,()=>{ S('select'); setMessage('Jojo takes off at the enemies. Backwards. Eyes on TNB.'); }],
+    [1800,()=>{ const h=hand(); S('whoosh'); scene('t6_discfly',(hit-1800)/1000,{x0:h.x,y0:h.y,x1:hx,y1:hy,arc:70}); setMessage('The frisbee sails over the whole party.'); }],
     ...spins.map(sp=>[sp.t,()=>{ ST.jolt(sp.f,.4); S('bonk'); }]),
     ['hf',hit],
-    [hit,()=>{ landHit(100); scene('t6_big',1.0,{x:G.x,y:Math.max(40,G.top-70),txt:'THROUGH!',c:GOLD,sc:3}); }],
-    [3100,()=>{ S('clang'); S('jangle'); scene('t6_big',1.0,{x:kx+20,y:ky-120,txt:'CHAINS!',c:GOLD,sc:4}); setMessage('CHAINS. Ace. First throw.'); }],
-    [3500,()=>{ S('ding'); scene('t6_big',1.0,{x:jx+60,y:Math.max(40,jy-hs-30),txt:'NICE.',c:CREAM,sc:3}); setMessage('Jojo gives a slow high-five to the air. "Nice."'); }],
-    [3900,()=>{ setMessage('She wanders off the way she came. Possibly for snacks.'); }],
+    [hit,()=>{ landHit(100); S('ding'); scene('t6_dust',.5,{x:cx,y:jy-4,n:10,r:28}); scene('t6_big',1.0,{x:cx+50,y:Math.max(40,jy-hs-34),txt:'CATCH!',c:GOLD,sc:4}); setMessage('She catches it. She does not see the enemies. Now she has hit all of them.'); }],
+    [hit+380,()=>{ scene('t6_big',.9,{x:G.x,y:Math.max(40,G.top-70),txt:'OOF!',c:CREAM,sc:3}); }],
+    [3300,()=>{ S('ding'); setMessage('Jojo holds it up. Perfect catch. Terrible stop.'); }],
+    [3700,()=>{ setMessage('She jogs back to TNB with the frisbee. Possibly for snacks.'); }],
     [4600,'end',res(E2)+'She does this every Sunday.']]); };
 
 // ---------- Coffee Run (B4; key coffee_run; replaces Status: Green; Fix the Wobble's numbers) ----------
