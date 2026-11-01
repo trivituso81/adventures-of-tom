@@ -1453,24 +1453,32 @@ const LE_ROOMS=[
     rug:[3,5,6,3],
     // Square painted plate (art/grands.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
     // Recliner and lamp table back left, TV, plaid sofa and pepper plant across the back centre, baking island left, dining table right.
-    // Everything behind the sofa is reached by touching the sofa side (the objects reach down to the floor). The gap between the gate posts (x7 to x9) is the way out.
+    // 3D (grands3d, 2026-11-01): a tile walks when Tom's feet (tile centre, tile bottom) land on bare floor, or on something a cutout hides (art/grands-fg.webp,
+    // tools/make_grands_fg.py, PLATE_BEHIND.grands). Lanes: the gate lane (x7 to x9, rows 11 to 14) is the way out. The open floor (rows 7 to 10, x6 to x11) leads
+    // west along row 10 in front of the stools (x2 to x5), east along row 10 in front of the dining table (x12 to x14), and west to the cook's aisle behind the
+    // cookie counter (row 7, x2 to x5, legs hidden by the counter top). From the aisle the kitchen nook (x3 to x5, rows 5 and 6) opens onto row 5, the aisle behind
+    // the sofa (x6 to x10, legs hidden by the sofa), which turns up at x10 to the hall arch (x12 and x13, row 3) and down the east side to (12,5). It is a
+    // loop: floor, counter aisle, nook, sofa aisle, arch, and the east side ends at (12,5) because the end table and the dining chair close it. The ivy plants
+    // on the half-wall cover Tom's legs on row 10.
     plateMask:[
       '################',
       '################',
       '################',
-      '################',
-      '################',
-      '################',
-      '################',
+      '############..##',
+      '##########....##',
+      '###........#.###',
+      '###...##########',
+      '##..........####',
       '######......####',
       '######......####',
-      '######......####',
-      '######.......###',
+      '##.............#',
       '#######...######',
       '#######...######',
       '#######...######',
       '#######...######',
       '################'],
+    // NPCs never stand on the one-tile links (kitchen link, sofa aisle, arch, both ends of row 10), so a wanderer cannot shut a lane.
+    noGo:[[6,7],[5,7],[5,6],[5,5],[6,5],[10,5],[10,4],[11,4],[12,4],[6,10],[5,10],[11,10],[12,10],[13,10],[14,10]],
     npcs:[
       {name:'Deedee',x:7,y:9,look:'pip',sheet:'deedee',grandma:true,duration:0.84,lines:[
         "There's my Tommy! And my girls! Come here, come here.",
@@ -1514,12 +1522,21 @@ const LE_ROOMS=[
           'Deedee says I\'m not allowed near the pond. The pond says otherwise.',
           'Grace, Rose, who\'s the strongest grandpa? Correct. Now help me up.',
           'She\'s looking for her glasses again. They\'re on her head. I\'m not saying anything. I\'m saying it to you.']}],
+    // Footprints match the painted furniture (grands3d): each one blocks only the floor the painting covers, so the lanes between them stay open.
     objects:[
-      ['recliner',3,2,4,5,"Boppy's recliner",'Don\'t sit in it. Everyone has tried. Everyone has been told. There\'s a heating pad. And one pair of Deedee’s reading glasses, down the side. She\'s looked for these.'],
-      ['tv',7,3,3,4,'The TV','The fishing channel. It\'s been on since 1994.'],
-      ['counter',1,7,5,4,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
-      ['pot',10,3,2,4,'Pepper plant',"Boppy's pride. The label just says NO."],
-      ['table',12,6,4,4,'Dining table','Set for dinner already. Deedee sets it at noon, just in case. There is always one more chair than people. There is always someone to fill it.']]},
+      ['recliner',3,3,4,2,"Boppy's recliner",'Don\'t sit in it. Everyone has tried. Everyone has been told. There\'s a heating pad. And one pair of Deedee’s reading glasses, down the side. She\'s looked for these.'],
+      ['tv',7,3,4,1,'The TV','The fishing channel. It\'s been on since 1994.'],
+      ['table',7,4,3,1,'Coffee table','Three fishing magazines, a coaster shaped like a trout and a bowl of nuts nobody remembers buying. Deedee dusts around it. Boppy dusts nothing.'],
+      ['sofa',6,6,5,1,'Plaid sofa','Plaid, under the afghan Deedee crocheted in 1989. Boppy naps here on Sundays and says he was only resting his eyes. The afghan has seen things.'],
+      ['pot',11,5,1,2,'End table','Crossword books, every one of them half done, and a pen that works only for Deedee.'],
+      ['pot',11,3,1,1,'Pepper plant',"Boppy's pride. The label just says NO."],
+      ['pot',14,3,1,2,'Big fern','Deedee waters it on Tuesdays and talks to it every other day. It has never once disagreed with her.'],
+      ['table',13,2,1,1,'Hall table','Spare keys and a jar of pennies. Boppy can never find the keys. They are in the jar. Every time.'],
+      ['table',13,5,1,1,'Hall chair','The chair nearest the hall. Boppy sits here so he can hear the oven timer and pretend he didn\'t.'],
+      ['table',12,6,4,4,'Dining table','Set for dinner already. Deedee sets it at noon, just in case. There is always one more chair than people. There is always someone to fill it.'],
+      ['counter',1,7,1,1,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
+      ['counter',1,8,5,2,'Cookie counter','A cookie jar labeled DO NOT. The lid is off. Three pies cooling behind it.',{variant:'bread'}],
+      ['counter',1,4,2,3,'Sideboard','Deedee\'s lace runner, one good candlestick and a drawer of takeout menus from 1998. Nobody is allowed to throw them out.']]},
   {id:'elliehouse',w:16,h:16,door:[8,15],door2:[7,15],doors:[[9,15]],
     style:{floor:'#cdb9c6',alt:'#d8c6d2',wall:'#7a5a78',trim:'#eadcea',pattern:'wood',rug:'#6a3a8a'},
     rug:[3,4,6,3],

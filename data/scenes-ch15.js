@@ -23,8 +23,15 @@ function ch15AddTable() {
 function ch15RemoveTable() {
   const g=worlds.grands; if(!g) return;
   for(const o of g.objects.filter(o=>o.ch15)) {
-    for(let yy=o.y;yy<o.y+o.h;yy++) for(let xx=o.x;xx<o.x+o.w;xx++) if(within(g,xx,yy)) { g.solid[yy*g.w+xx]=0; g.objectAt.delete(key(xx,yy)); }
     g.objects.splice(g.objects.indexOf(o),1);
+    // Give each freed tile back to what the map says it is: another object that still covers it (the sofa), else the painted walk mask (grands3d).
+    for(let yy=o.y;yy<o.y+o.h;yy++) for(let xx=o.x;xx<o.x+o.w;xx++) if(within(g,xx,yy)) {
+      g.objectAt.delete(key(xx,yy));
+      const under=g.objects.find(q=>xx>=q.x&&xx<q.x+q.w&&yy>=q.y&&yy<q.y+q.h);
+      if(under) { g.objectAt.set(key(xx,yy),under); g.solid[yy*g.w+xx]=1; }
+      else if(g.portals.has(key(xx,yy))) g.solid[yy*g.w+xx]=0;
+      else g.solid[yy*g.w+xx]=(((g.spec.plateMask||[])[yy]||'')[xx]||'#')==='#'?1:0;
+    }
   }
 }
 // Everyone sits: chapter 15 rules, the four extras on the bench, the table, and the eight seats.

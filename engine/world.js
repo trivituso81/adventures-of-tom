@@ -238,6 +238,7 @@ function makeRoom(spec) {
   placeObjects(map,spec.objects);
   for(const s of spec.npcs||[]) map.npcs.push(npcFromSpec(s,true));
   if(spec.plateMask) applyPlateMask(map,spec.plateMask);   // painted plate: the mask is the walk map
+  for(const [x,y] of spec.noGo||[]) map.npcNoGo.add(key(x,y));   // tiles NPCs never wander onto (keeps lanes open)
 
   finishMap(map);
   if(house.region==='la') map.region='la';
