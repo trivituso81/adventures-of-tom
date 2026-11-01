@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Adult faces evened out again on the welcome screen (`faces7`)
+
+- Tom (11:59): approved shrinking TNB, Boppy and Deedee to match Justin; said Amy's head looks bigger than the rest and he doubts the measuring.
+- Walk and welcome only (battle unchanged): TNB head x .89 (bake_tnb.py `TARGET_OW`/`TARGET_OWL`), Boppy x .92 (`WALK_HEAD_RATIO` .362), Deedee x .92 (.372), Amy x .92 (.383, also bake_amy_extra.py). Welcome heights lowered so bodies stay the same size: TNB 330 to 309, Boppy 299 to 284, Amy 298 to 282, Deedee 293 to 278 (SPLASH_SPOTS, engine/splash.js).
+- Measuring note: face-only numbers (hairline to chin x width; pupil spacing x eye to chin) disagree with each other because each painting has different proportions (Deedee wide-set eyes and short chin, Boppy wide face, Amy tall face with a big smile). Tom's eye is the judge; tools to give him: a side-by-side of heads cut from the welcome screen at their real size on one chin line.
+- ART_V `faces7`. Tested: `smoke.py`, `amyhouse_walk_test.py`; welcome screen and the head row looked at. Stamp `build faces7`.
+
 ## 2026-11-01 (day, 44): New home-screen icon (`icon1`)
 
 - Tom (11:53): the iPhone home-screen icon should show the game logo at the top with just the word TOM on the banner, and Tom's new head centered below it.
