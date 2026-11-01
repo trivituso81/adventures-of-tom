@@ -21,7 +21,7 @@ BAD = {'standing','grinning','pacing','pointing','shrugging','hands','hand','arm
        'ladder','couch','tv','screen','stopwatch','kettlebell','pliers','toolbox','sledgehammer','drill','flashlight'}
 def words(s): return re.sub(r'[^a-z0-9]+',' ',s.lower()).split()
 def canon(s):
-    s = re.sub(r'\bTah Tah\b','tata',s); s = re.sub(r'\bTa-?ta\b','tata',s,flags=re.I)
+    s = re.sub(r'\bTah Tah\b','tata',s,flags=re.I); s = re.sub(r'\bTa-?ta\b','tata',s,flags=re.I)
     s = s.replace('...',' ')
     return [re.sub(r'(.)\1{2,}',r'\1',w) for w in words(s)]
 def check(text, script):
