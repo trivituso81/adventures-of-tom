@@ -625,18 +625,23 @@ talkToDriver=function(n) {
   return LE_talkToDriver_story(n);
 };
 // Steps added to the airport run right before the flight (engine/travel.js startTrip). Leaving Long Island after
-// chapter 1 starts chapter 2: the chapter card plays before takeoff.
+// chapter 1 starts chapter 2: the chapter changes at takeoff, but its title card waits until Tom has landed and is
+// standing in the new area (storyArrivalCard, played by engine/travel.js arriveLA and arriveHome). Tom, 1 Nov.
+// The chapter this airport run starts, or 0 if it starts none. Chapters 2, 4, 6, 8 fly west; 3, 5, 7, 9 fly east.
+function storyTripChapter(dir) {
+  if(STORY.mode!=='full') return 0;
+  const n=STORY.chapter+1;
+  if(n<2||n>9||!flag('ch'+STORY.chapter+'-done')) return 0;
+  return (dir==='west')===(n%2===0)?n:0;
+}
 function storyTripSteps(dir) {
-  if(STORY.mode!=='full') return [];
-  if(STORY.chapter===1&&flag('ch1-done')&&dir==='west') return compileScene([{chapter:2},{card:2,time:3.2}]);
-  if(STORY.chapter===2&&flag('ch2-done')&&dir==='east') return compileScene([{chapter:3},{card:3,time:3.2}]);
-  if(STORY.chapter===3&&flag('ch3-done')&&dir==='west') return compileScene([{chapter:4},{card:4,time:3.2}]);
-  if(STORY.chapter===4&&flag('ch4-done')&&dir==='east') return compileScene([{chapter:5},{card:5,time:3.2}]);
-  if(STORY.chapter===5&&flag('ch5-done')&&dir==='west') return compileScene([{chapter:6},{card:6,time:3.2}]);
-  if(STORY.chapter===6&&flag('ch6-done')&&dir==='east') return compileScene([{chapter:7},{card:7,time:3.2}]);
-  if(STORY.chapter===7&&flag('ch7-done')&&dir==='west') return compileScene([{chapter:8},{card:8,time:3.2}]);
-  if(STORY.chapter===8&&flag('ch8-done')&&dir==='east') return compileScene([{chapter:9},{card:9,time:3.2}]);
-  return [];
+  const n=storyTripChapter(dir);
+  return n?compileScene([{chapter:n}]):[];
+}
+// The title card for the chapter this flight started, played after landing (empty if the flight starts no chapter).
+function storyArrivalCard(dir) {
+  const n=storyTripChapter(dir);
+  return n?compileScene([{card:n,time:3.2}]):[];
 }
 // After any boss fight in the full game the story remembers the result (battle:<id> 'win' or 'lose'), so a retry
 // started by pressing A on the boss counts the same as the scripted one.

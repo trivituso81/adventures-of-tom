@@ -228,6 +228,8 @@ function flightSound(mode,dir) {
 }
 function flightSteps(dir,talk,arr) {
   const west=dir==='west';
+  // The new chapter's title card (engine/story.js): shown after landing, once Tom is standing in the new area, never before the flight.
+  const card=typeof storyArrivalCard==='function'?storyArrivalCard(dir):[];
   return [
     S.call(()=>{ intro.flight={dir,mode:'board',t:0}; $('area-name').textContent='In flight'; $('eyebrow').textContent='DELTA ONE / SEAT 1A'; }),
     ...(typeof flightArtReady==='function'&&flightArtReady()?[flightPhase('cabin',2.6)]:[]),   // engine/flight-art.js: seat 1A, a painted beat before takeoff
@@ -238,7 +240,7 @@ function flightSteps(dir,talk,arr) {
         :['Six hours. Then two small people will jump on me at full speed.','Worth it.'])))),
     flightPhase('landing',4.2),
     S.call(()=>{ intro.flight=null; }),
-    ...(west?arriveLA(arr):arriveHome(arr))
+    ...(west?arriveLA(arr,card):arriveHome(arr,card))
   ];
 }
 
@@ -252,7 +254,7 @@ function arriveAt(map,houseId) {
   intro.fade=1;
   return h;
 }
-function arriveLA(arr) {
+function arriveLA(arr,card=[]) {
   let h=null;
   return [
     S.call(()=>{ h=arriveAt(worlds.blvd,'lacab'); }),
@@ -260,6 +262,7 @@ function arriveLA(arr) {
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[h.door.x,h.door.y+1]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     S.call(()=>{ for(const f of followers) { f.hidden=false; f.x=h.door.x; f.y=h.door.y; f.facing='down'; } }),
+    ...card,
     S.talk('Tom',(arr&&arr.tom)||['Downtown LA. Seventy-two and sunny. It\'s always seventy-two and sunny.']),
     S.call(()=>{
       endIntro(); placeFollowers();
@@ -270,7 +273,7 @@ function arriveLA(arr) {
   ];
 }
 // Back on Long Island: Tom steps out of the taxi depot and the girls come running.
-function arriveHome(arr) {
+function arriveHome(arr,card=[]) {
   const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
   const welcome=[];
   let g=null,r=null;
@@ -285,6 +288,7 @@ function arriveHome(arr) {
     S.wait(.6),
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[dx,dy+1],[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
+    ...card,
     S.talk('Tom',(arr&&arr.tom)||['Long Island. Nice and quiet. For about four more seconds.']),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
     S.wait(.6),
