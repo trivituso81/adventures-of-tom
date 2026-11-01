@@ -4,7 +4,7 @@ Read this first. It is the working agreement for Claude in this repo. Claude run
 
 ## What this is
 
-A 16-bit JRPG starring Tom's real family, written as plain browser JavaScript (no framework, no bundler, no npm build).
+A JRPG starring Tom's real family, with hand-painted realistic caricature characters (the "32-bit realistic" look; the old 16-bit pixel style is retired for characters), written as plain browser JavaScript (no framework, no bundler, no npm build).
 Chapters 1 to 10 are built (the story bible plans 20 chapters in two Parts). It runs as a static site on GitHub Pages, played from an iPhone home-screen app.
 Title: **The Adventures of Tom**. Home towns: Long Island and Los Angeles. (Older files and docs still say "Little Elsewhere"; that was the demo town name.)
 
@@ -47,7 +47,7 @@ Justin (Amy's husband) is becoming a party member. Tom will drop a zip of his pa
 
 ## New characters and ability pose sheets (standing rule, 2026-10-31)
 
-When Tom gives a photo of a new character, or asks for poses for an ability, do not ask him to describe the image prompt requirements and never make him rewrite them. Follow `docs/CHARACTER_PIPELINE.md`: write the character spec from the photo, then the three standard prompts (ONE large full-body hero pose, a 3 x 3 walking sheet, a 4 x 4 standard battle sheet), and for any ability a sheet of **4 to 7 poses only** (keep the critical frames, no walking in or out, no prep or aftermath filler, about 2 spoken lines, painted props only when held, effects left to the game). Send the prompts as files, hero pose first. When the sheets come back, install them per section 6 of that doc.
+When Tom gives photos of a new character, or asks for poses for an ability, do not ask him to describe the image prompt requirements and never make him rewrite them. **Real height in feet and inches is required before anything else; ask if it is missing.** Every adult's face must look the same size as the other adults'; children follow Grace and Rose's head share (section 7). Follow `docs/CHARACTER_PIPELINE.md`: write the character spec from the photo, then the three standard prompts (ONE large full-body hero pose, a 3 x 3 walking sheet, a 4 x 4 standard battle sheet), and for any ability a sheet of **4 to 7 poses only** (keep the critical frames, no walking in or out, no prep or aftermath filler, about 2 spoken lines, painted props only when held, effects left to the game). Send the prompts as files, hero pose first. When the sheets come back, install them per section 6 of that doc.
 
 ## How to work
 

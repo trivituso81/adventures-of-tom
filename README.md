@@ -1,6 +1,6 @@
 # The Adventures of Tom
 
-A 16-bit JRPG starring Tom's real family. Plain browser JavaScript, no build step. Chapters 1 to 10 are built.
+A JRPG starring Tom's real family, with hand-painted realistic caricature characters. Plain browser JavaScript, no build step. Chapters 1 to 10 are built.
 
 This repo is the source of the game (everything except the baked voice audio). If you are Claude, start with [`CLAUDE.md`](CLAUDE.md).
 

@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Character build instructions match the painted style; heads, heights and widths rules written down (`docs1`)
+
+- Tom (13:41): write the character size specs into the build instructions as rules for future adults and children (adult faces always the same size, children like Grace and Rose, height required to proceed), and fix the build instructions, which still described the old 16-bit style instead of the new painted realistic style.
+- docs/CHARACTER_PIPELINE.md: 16-bit wording removed; STYLE BLOCK and PHOTO FIDELITY BLOCK (from the Project's newer copy) now in section 0, with a child variant; real height in feet and inches is required input; new section 7 (adult faces match by head row and Tom's eye, battle height 2.01 px per inch, welcome body scale, walk rows, shoulders; children's head share .43 battle and .373 walk; current reference table; where every knob lives); install steps updated (Olivia bakes as the template, ART_V cache rule, bakes never overwrite portraits).
+- CLAUDE.md and README.md no longer call the game 16-bit; CLAUDE.md's character rule now says height first and the head rules. No game code changed.
+
 ## 2026-11-01 (day, 44): Sound settings in battle, with their own voice volume (`sound1`)
 
 - Tom: a special settings icon in battles where music and voice volume can be changed, also in the battle test (Battle Lab).
