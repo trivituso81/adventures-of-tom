@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 50): Rose's face no longer stretches in Boop and her other extra poses (`rosefix1`)
+
+- Tom: "Rose's face became distorted with Boop."
+- Cause (fact): this afternoon's head-growth step (`kidhead.grow_head`) was also run on Rose's extra, jab, tickle and boomerang sheets. Those four sheets were painted with the big head already (head about .40 of her height; the main battle sheet is .31). The step enlarges a fixed band of rows from the top of her figure, so it cut through her mouth and stretched the pointing arm into a long streak. Boop, Boo!!, Floor Is Lava (balance), Bedtime Story, Tickle Storm and Lamby Boomerang all had some of this.
+- Fix: `tools/sprite-bake/bake_rose.py` no longer grows the head on those four sheets. They are scaled by `G_BT` (1.158, the height the grown idle gains), so their head and body match the idle. Idle, walk, KO and ride art are unchanged. Re-baked `rose-battle-x.webp`, `rose-battle-tk.webp`, `rose-battle-bm.webp`, `data/rose-hires.js`.
+- Boop: the new jab frames put the fingertip 38 px left of her centre and 54 px above her feet (old art 33 and 47, inflated by the stretch), so `jy` in `Rm.boopShow` (engine/rose-moves.js) uses 54. Looked at the contact frames: the finger lands on the nose.
+- Tested: `kit_test.py rose` (all 18 moves) FAILS: []; `smoke.py` FAILS: []; `unused_voice.py` 0 for all four checks. Not seen on the phone. ART_V and `?v=` tags on `rose-hires.js` and `rose-moves.js` bumped to `rosefix1`.
+
 ## 2026-11-01 (evening, 48): ElevenLabs v4 tag rules and 10 sample scripts for Tom to approve (`vtag1`)
 
 - Tom (17:11): new takes said their phrase twice, [yelp] produced an actual yelp, and tags described what the body does (pointing, shrugging, hands on hips) instead of how the voice sounds.

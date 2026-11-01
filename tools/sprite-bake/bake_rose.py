@@ -208,6 +208,12 @@ K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT) * HEAD_DOWN, _kh.factor(_kh.T_WALK, 
 _IDLE_H, _STAND_H = poses['b_idle'].height, poses['w_down_stand'].height
 _DEF_H, _HOLD_H, _HUG_H = poses['b_defend'].height, poses['y_hold'].height, poses['x_hug'].height
 print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))
+# The extra, jab, tickle and boomerang sheets were painted with the big head already (head about .40 of the figure, the idle sheet is .31),
+# so grow_head must NOT run on them: its fixed head band cuts through the face and stretches any arm held at head height (Tom 2026-11-01,
+# "Rose's face became distorted with boop"). They are scaled by the height the grown idle gains instead (G_BT), which puts their head
+# and body at the same size as the idle.
+G_BT = 1 + (K_BT - 1) * S_BT
+print('big-head sheet scale gain: %.3f' % G_BT)
 _bt_src = {n: _kh.grow_head(poses[n], K_BT, S_BT * _IDLE_H) for n in poses if n.startswith('b_') and n != 'b_ko'}
 bt_big = {k: scaled_to(_bt_src[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
@@ -229,7 +235,7 @@ def paint_bruise(img, cx, cy, rx, ry):
 bt_big['kneel'] = paint_bruise(bt_big['kneel'], 66, 67.5, 7.5, 6)
 # Sheet A poses: scaled so her standing hug matches the guard pose of the main sheet; own canvas (head on the centre column, feet on the bottom row).
 rA = poses['b_defend'].height / poses['x_hug'].height
-x_big = {k: scaled_to(_kh.grow_head(poses['x_' + k], K_BT, S_BT * _IDLE_H / rA), fb * rA) for k in X_NAMES}
+x_big = {k: scaled_to(poses['x_' + k], fb * rA * G_BT) for k in X_NAMES}
 x_big = tighten(place(x_big, KB, 'head'), KB)
 _all = dict(bt_big); _all.update({'x_' + k: v for k, v in x_big.items()})
 bt_pal, _rows = rows_of(_all, KB, args.colors)
@@ -244,7 +250,7 @@ TK_NAMES = ['tk_ready', 'tk_creepA', 'tk_creepB', 'tk_launch', 'tk_air', 'tk_lan
             'tk_feather_draw', 'tk_feather_swish', 'tk_feather_twirl', 'tk_finale', 'tk_doubled', 'tk_proud']
 _tk = slice_sheet(os.path.join(SRC, 'rose-tickle-v2.png'), [TK_NAMES[0:4], TK_NAMES[4:8], TK_NAMES[8:12], TK_NAMES[12:16]])
 rT = poses['b_idle'].height / _tk['tk_proud'].height
-tk_big = tighten(place({k: scaled_to(_kh.grow_head(_tk[k], K_BT, S_BT * _IDLE_H / rT), fb * rT) for k in TK_NAMES}, KB, 'head'), KB)
+tk_big = tighten(place({k: scaled_to(_tk[k], fb * rT * G_BT) for k in TK_NAMES}, KB, 'head'), KB)
 def rows_in_palette(frames, k, palette):
     keys = list(palette); pf = np.array([[int(palette[c][i:i + 2], 16) for i in (1, 3, 5)] for c in keys]).astype(int)
     out = {}
@@ -262,7 +268,7 @@ BM_NAMES = ['bm_windA', 'bm_windB', 'bm_throw', 'bm_follow', 'bm_watch', 'bm_rea
 LF_NAMES = [f'{w}_{v}' for w in ('lamby', 'backup') for v in ('front', 'side', 'flip', 'squash')]
 _bm = slice_sheet(os.path.join(SRC, 'rose-boomerang-v1.png'), [BM_NAMES[0:4], BM_NAMES[4:8], LF_NAMES[0:4], LF_NAMES[4:8]])
 rBM = poses['b_idle'].height / _bm['bm_watch'].height
-bm_big = tighten(place({k: scaled_to(_kh.grow_head(_bm[k], K_BT, S_BT * _IDLE_H / rBM), fb * rBM) for k in BM_NAMES}, KB, 'torso'), KB)
+bm_big = tighten(place({k: scaled_to(_bm[k], fb * rBM * G_BT) for k in BM_NAMES}, KB, 'torso'), KB)
 bm_rows = rows_in_palette(bm_big, KB, bt_pal)
 bm_rects = pack(bm_big, os.path.join(ART, 'rose-battle-bm.webp'))
 LFC = 160                                                          # lamb cell size in px
