@@ -26,6 +26,7 @@ function b2Open(mode,sel) {
 // The front row centers on the old Grump spot (x 168, feet at y 264), where every move animation was drawn,
 // so a single enemy lines up exactly. The back row stands behind it, further left. Slots stay put when someone falls.
 const B2_REF={x:168,y:264};
+const B2_BOSS_EDGE=6;   // gap in canvas pixels between a boss's left edge and the screen edge
 const B2_BOSS_GROW=1.5;   // how much bigger a boss is drawn than a regular monster of the same art
 function b2LayoutFoes() {
   const live=B2.foes.filter(f=>!f.dead);
@@ -51,9 +52,12 @@ function b2LayoutFoes() {
   // of it on the right, so none of them is hidden behind it. Helpers sit lower than the boss, so they draw on top.
   if(crowd) {
     const others=fr.filter(f=>f!==boss),half=boss.def.sprite[0].length*boss.sc/2;
-    boss.px=Math.min(168,Math.max(100,Math.round(half+4)));
     others.forEach((f,k)=>{ f.px=[272,294][k]; f.py=others.length===1?288:[266,302][k]; });
   }
+  // Every boss stands as far left as its art allows: its left edge sits B2_BOSS_EDGE pixels from the screen edge
+  // (room for its shake and wobble), never past the old centre spot. Move animations follow through the aim warp.
+  const lb=B2.foes.find(f=>f.boss&&!f.dead&&f.row!=='back');
+  if(lb) lb.px=Math.min(B2_REF.x,Math.round(lb.def.sprite[0].length*lb.sc/2+B2_BOSS_EDGE));
 }
 function b2FoeCanvasPos(f) { const R=f.def.sprite; return {x:f.px,y:f.py,w:R[0].length*f.sc,h:R.length*f.sc}; }
 // Point over the enemy's head in the 192x108 stage units that pop() and battle.texts use.
