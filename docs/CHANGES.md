@@ -1,3 +1,9 @@
+## 2026-10-31 (day, 31): Olivia walks in the Halloween dress (`olivia2`)
+
+- Tom (23:49): the old Olivia was showing; she should wear the Halloween dress. Her walk sprite was the blouse and olive trousers from the first sheet, only her menu portrait had the dress.
+- New 3 x 3 painted walk sheet in the dress (cream print of pumpkins, ghosts, bats and webs, bell sleeves, tiered skirt, brown flats) saved as `tools/sprite-bake/src/olivia-walk-v1.png` and re-baked with `bake_olivia.py` (`AV` and the `?v=` tags are now `olivia2`). Frame size and standing height (42 rows) unchanged. The portrait is unchanged (it was already the dress).
+- Tested: `smoke.py`, plus a 2nd Ave screenshot of her in the dress. Not played on the phone. Stamp `build olivia2`.
+
 ## 2026-10-31 (day, 30): Menu button beside Save, A button in the D-pad center (`ctl1`)
 
 - Tom (23:46): make the Menu button the same size as the Save button and put it to the left of Save; move the A button to the center of the D-pad.
