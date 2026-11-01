@@ -1,3 +1,8 @@
+## 2026-11-01 (day, 45): Big Mudling holds the tin when he walks up to the party in the pond scene (`pond1`)
+
+- Tom (15:15): in chapter 1 the Big Mudling approached the party facing the wrong way. `SCENES.ch1Pond` (data/scenes.js) now uses the painted heist frames from the pie theft: `mh_scurry_a/b` while he walks in (they face left, toward the party), then `mh_hug` (clutching the tin) while Grace shouts and the Big One surfaces. The frames already hold the tin, so the separate `carry:'tin'` prop is removed (it would have drawn twice). After the handoff the pose clears and he faces right toward the Big One as he leaves.
+- Tested: `scene_frames.py` on `ch1Pond` in `hollow` (frames looked at), smoke 0 fails.
+
 ## 2026-11-01 (day, 43): Rose's head 10% smaller, Press Start is now Disconnected Controller (`tomrose1`)
 
 - Tom (15:07): "Make Rose's head 10% smaller." `tools/sprite-bake/bake_rose.py`: new `HEAD_DOWN = 0.90` multiplies both head factors (battle 1.679 to 1.511, walk 1.140 to 1.026); body and height unchanged; Grace untouched. Re-baked all Rose atlases and `data/rose-hires.js`.
