@@ -54,3 +54,15 @@ Justin: these were the extra spoken beats written in the approved kit (see `docs
 | tnb | round_with_jojo | Jojo, you're up. ...Jojo. JOJO. ...Nice. |
 | tom | button_mash | Ugh, it's not charged! |
 | justin | (no kind) | OUCH!!!!!! |
+
+
+## 2026-11-01 (`fish1`): four dialogue clips removed because their lines were reworded
+
+Tom: Boppy catches fish all the time; the joke is that he exaggerates how big they were. The four lines that said he never catches anything were rewritten, so their clips no longer matched any live line (the audit's source check matches on the first 40 characters, which the new lines share, so these were removed by hand). Audio is in git history (parent commit of `fish1`).
+
+| Voice | File | Old words |
+|---|---|---|
+| rose | data/voice/dialog-ch25.js | He said if you were late he'd catch the fish without you. He's never caught a fish. |
+| tom | data/voice/dialog-ch3.js | Then we had better go help him not catch one. |
+| gus (Reel) | data/voice/dialog-ch3.js | Your father has been fishing this pier since before the pier. He has caught nothing. Very consistent. |
+| boppy | data/voice/dialog-ch1.js | Here, take my spare cap. For luck. I caught nothing in it, so the luck is all still inside. |

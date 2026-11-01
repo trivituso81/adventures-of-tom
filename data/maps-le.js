@@ -274,7 +274,7 @@ const LE_AREAS=[
       ['sign',6,11,1,1,'Crooked sign','GRUMP HOLLOW. Trespassers will be squelched. Start with the Mudling. Save the fish for last.'],
       ['sign',9,4,1,1,'Pond sign','NO SWIMMING. The pond signed this itself.'],
       ['bench',2,12,4,2,'Soggy bench','Nobody has sat here since the Grump moved in. The bench misses company.'],
-      ['bench',18,13,4,1,"Boppy's fishing spot",'A thermos, a bucket, zero fish. Boppy swears the big one lives here.'],
+      ['bench',18,13,4,1,"Boppy's fishing spot",'A thermos, a bucket, one bass. Boppy will tell you it was two feet long. It was not.'],
       ['sign',15,11,1,1,'Warning stake','THE GRUMP IS NOT A FROG. It\'d like that noted.']],
     npcs:[],
     monsters:MONSTER_SPOTS},
@@ -315,7 +315,7 @@ const LE_AREAS=[
     npcs:[
       {name:'Reel',x:19,y:5,look:'reel',lines:[
         'Bait shack is open. Worms, minnows, and a sandwich I\'m not selling.',
-        'Your father has been fishing this pier since before the pier. He has caught nothing. Very consistent.',
+        'Your father has been fishing this pier since before the pier. He catches something every day. The size, I round down.',
         'They say a catfish lives out there older than the boards. I say they say a lot.'],
         when:[{from:3,flag:'ch3-clear',lines:['Your father caught Old Iron-Gill? And let him GO? Forty years of telling that story, and now it\'s true.','He came by the shack this morning. The fish, not your father. Just floated there. I think he wanted to say hello.']},
               {chapter:3,flag:'ch3-jar',lines:['You saw it? Old Iron-Gill? Forty years I have run this shack. I thought it was a story.','It went west, into the marsh. The Whispering Marsh. The reeds talk out there. Mostly nonsense.']}]}]},
@@ -1511,7 +1511,7 @@ const LE_ROOMS=[
         'Tom! Good. I\'m not feeling good. Something with the stomach. Sit, I\'ll tell you about it.',
         'Grace, Rose, come give Boppy a hug. Gently. The stomach. And slow down, you two walk too fast.',
         'Did I ever tell you I was a champion cross country runner in college? Your mother has heard it. Sit down.',
-        'Here, take my spare cap. For luck. I caught nothing in it, so the luck is all still inside.'],
+        'Here, take my spare cap. For luck. I caught a twelve pounder in it. Nine. It was a big six.'],
         revisit:[
           'Assistant Deputy Warden at Rikers. All those years, nobody got past me. Except that fish.',
           'At Rikers we did headcounts. Grace, one. Rose, two. Tom, you\'re dragging.',

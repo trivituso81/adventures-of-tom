@@ -73,5 +73,6 @@ def main():
         seen = {}
         for l in zz: seen[(l['voice'], l['text'])] = l
         json.dump({'tag': 'v4', 'lines': list(seen.values())}, open(zpath, 'w'), ensure_ascii=False, indent=0)
+        zz = list(seen.values())
     print('applied', len(items) - bad, 'scripts;', len(zz), 'dialogue overrides in zz-v4-overrides.json')
 if __name__ == '__main__': main()

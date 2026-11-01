@@ -1,3 +1,10 @@
+## 2026-11-01 (evening, 52): Boppy catches fish all the time, he just exaggerates the size (`fish1`)
+
+- Tom (17:54): change the dialogue about Boppy never catching a fish. He catches them all the time; the joke is that he exaggerates how big they are.
+- Changed (canon, one line in claude/canon-addendum.md): Rose, chapter 3 arrival: "He catches one every time. It's always THIS big." Tom's reply: "Then we'd better hurry, before it gets any bigger." Reel at the bait shack: "He catches something every day. The size, I round down." (and the matching sample in data/dialog-cast.js). Boppy's spare cap: "I caught a twelve pounder in it. Nine. It was a big six." Boppy's fishing spot on the pier: "A thermos, a bucket, one bass. Boppy will tell you it was two feet long. It was not." Bucket Hat description: "Every one of them caught something enormous, according to Boppy." The battle lines ("It was THIIIS big!") already had the joke and are unchanged. The frozen demo keeps its old text.
+- Four baked clips went silent and were removed (docs/PURGED_VOICE.md): the four reworded lines play through speech synthesis until Tom records them in the Voice Library, where they now carry v4 scripts (`scripts/zz-v4-overrides.json`).
+- Tested: `unused_voice.py` 0 on all four; Voice Library test ALL PASS; `smoke.py` FAILS: []. Not seen on the phone.
+
 ## 2026-11-01 (evening, 51): NPCs inside houses 15% larger (`size4`)
 
 - Tom (17:41): NPCs inside of houses should be 15% larger.

@@ -229,7 +229,7 @@ const DIALOG_CAST={
     // ---- Chapter 3 (Cattail Pier) ----
     reel:{name:'Reel',type:'Townsfolk: bait shack keeper',stability:.5,
       desc:'A man in his sixties with a gravelly, dry, deadpan Long Island voice. Runs the bait shack on the pier, unimpressed by everything, quietly fond of Boppy. Clean studio recording.',
-      sample:'Bait shack is open. Worms, minnows, and a sandwich I am not selling. Your father has been fishing this pier since before the pier. He has caught nothing. Very consistent. They say a catfish lives out there older than the boards. I say they say a lot.'},
+      sample:'Bait shack is open. Worms, minnows, and a sandwich I am not selling. Your father has been fishing this pier since before the pier. He catches something every day. The size, I round down. They say a catfish lives out there older than the boards. I say they say a lot.'},
     // ---- Grump Hollow monsters (one voice per kind of monster) ----
     mudling:{name:'Mudling',type:'Monster: mud blob',stability:0,fx:'mudling',
       desc:'A small, silly cartoon creature made of mud, gloopy gurgling voice with wet bubbly consonants, slow and sulky, childlike and a little sad. Animated character voice.',

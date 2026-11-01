@@ -686,8 +686,8 @@ const routeBeside=a=>()=>{
 SCENES.ch3Arrive=[
   {flag:'ch3-goal'},
   {talk:'Grace',lines:['Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.']},
-  {talk:'Rose',lines:['He said if you were late he\'d catch the fish without you. He\'s never caught a fish.']},
-  {talk:'Tom',lines:['Then we had better go help him not catch one.']},
+  {talk:'Rose',lines:['He said if you were late he\'d catch the fish without you. He catches one every time. It\'s always THIS big.']},
+  {talk:'Tom',lines:['Then we\'d better hurry, before it gets any bigger.']},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5}
 ];
 // 2. Deedee and Boppy's house: the Whisker Perch, the pepper jar. Boppy joins; Deedee stays to bake.

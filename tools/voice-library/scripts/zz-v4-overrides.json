@@ -189,6 +189,34 @@
 "text": "Hold this. No, the other end. It's the OTHER banner. Don't touch the copper.",
 "ctx": "v4 override",
 "script": "[brisk, distracted] Hold this. No, the other end. [emphatic, quick] It's the OTHER banner. [sharp, warning] Don't touch the copper."
+},
+{
+"voice": "rose",
+"speaker": "Rose",
+"text": "He said if you were late he'd catch the fish without you. He catches one every time. It's always THIS big.",
+"ctx": "v4 override",
+"script": "[earnest, hushed] He said if you were late he'd catch the fish without you. [bright, certain] He catches one every time. [proud, loud] It's always THIS big."
+},
+{
+"voice": "tom",
+"speaker": "Tom",
+"text": "Then we'd better hurry, before it gets any bigger.",
+"ctx": "v4 override",
+"script": "[dry, calm] Then we'd better hurry... before it gets any bigger."
+},
+{
+"voice": "gus",
+"speaker": "Reel",
+"text": "Your father has been fishing this pier since before the pier. He catches something every day. The size, I round down.",
+"ctx": "v4 override",
+"script": "[slow, fond] Your father has been fishing this pier since before the pier. [matter-of-fact] He catches something every day. [dry, knowing] The size, I round down."
+},
+{
+"voice": "boppy",
+"speaker": "Boppy",
+"text": "Here, take my spare cap. For luck. I caught a twelve pounder in it. Nine. It was a big six.",
+"ctx": "v4 override",
+"script": "[gruff, tender] Here, take my spare cap. For luck. [proud, boastful] I caught a twelve pounder in it. [grudging, quieter] Nine. It was a big six."
 }
 ]
 }

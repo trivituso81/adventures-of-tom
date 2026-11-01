@@ -143,7 +143,7 @@ const items={
   d_apron:{who:'deedee',price:28,name:'Floral Apron',icon:'\u{1F33A}',slot:'Outfit',color:'#e59aa8',desc:'Flour, frosting and forty tomatoes worth of stains.',stats:{hp:18,grit:2,cool:3}},
   d_clogs:{who:'deedee',price:18,name:'Garden Clogs',icon:'\u{1F97F}',slot:'Charm',desc:'Muddy forever. Comfortable forever.',perk:{stat:{grit:.1}}},
   d_mitt:{who:'deedee',price:20,name:'Oven Mitt',icon:'\u{1F9E4}',slot:'Tool',desc:'Four hundred and fifty degrees of protection.',stats:{pow:1,warmth:5}},
-  b_hat:{who:'boppy',price:20,name:'Bucket Hat',icon:'\u{1F3A3}',slot:'Charm',desc:'Seven lures hooked in the brim. None of them have caught anything.',perk:{coins:.2}},
+  b_hat:{who:'boppy',price:20,name:'Bucket Hat',icon:'\u{1F3A3}',slot:'Charm',desc:'Seven lures hooked in the brim. Every one of them caught something enormous, according to Boppy.',perk:{coins:.2}},
   b_vest:{who:'boppy',price:32,name:'Fishing Vest',icon:'\u{1F9BA}',slot:'Outfit',color:'#6b7a4a',desc:'Twelve pockets. Eleven have peppers in them.',stats:{hp:22,grit:4,cool:2}},
   b_shoes:{who:'boppy',price:22,name:'Comfy Sneakers',icon:'\u{1F45E}',slot:'Charm',desc:'Extra arch support. The knee approves. The hip has notes.',perk:{stat:{pep:.1}}},
   b_pad:{who:'boppy',price:26,name:'Heating Pad',icon:'\u{1F525}',slot:'Charm',desc:'Plugged into nothing. Still works. Boppy says it\'s mental.',perk:{regen:.06}},
