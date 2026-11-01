@@ -30,6 +30,7 @@
 - Tom (08:45): in the battle test, JUSTIN SOLO is now just SOLO. Picking it opens a fighter list (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara, Justin, Olivia); the pick fights Old Iron-Gill alone at level 12 with every move unlocked. The separate OLIVIA SOLO entry is gone (SOLO covers her). The two TRYOUT entries are unchanged.
 - In SOLO both sides have infinite HP (`b2Invincible` in engine/battle2.js: HP always reads full and ignores every hit, drain or instant KO), plus the existing infinite VP and HEART. The fight never ends on its own. RUN does nothing and the bag has no EXIT LAB row; the only way out is EXIT at the top of the battle, which returns to the fighter list so the next character can be tried. Other Battle Lab fights are unchanged.
 - Tested: new `tools/solo_test.py` runs all ten fighters (starts alone, HP locked after forced hits and three played turns, RUN keeps the fight, EXIT returns to the picker, no console errors); picker and fight frames looked at in portrait and landscape. `smoke.py` run. Not played on the phone. Stamp `build solo1`.
+- Fix: the first `solo1` push left merge-conflict lines in index.html (a doubled `splash.js` tag, page failed to load); removed within minutes, one tag `?v=solo1`.
 
 ## 2026-11-01 (day, 41): Walking sprites and the welcome screen follow the head rule (`heads2`)
 
