@@ -22,7 +22,7 @@ OUT = os.path.join(ROOT, 'data/olivia-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = 3
-AV = 'olivia2'   # atlas cache string: bump with the ?v= tag in index.html whenever frame sizes change
+AV = 'olivia3'   # atlas cache string: bump with the ?v= tag in index.html whenever frame sizes change
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=float, default=42)   # standing height in rows (Tom 42, Amy 41.7, Michael 50)
