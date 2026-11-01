@@ -312,7 +312,7 @@ const MONSTERS={
     drop:{id:'barkslab',chance:1,once:true,msg:'A slab of bark came loose. Sturdy. It went in a pocket, barely.'},
     vapor:['#7a5536','#6fa04e','#b58a5c','#2b1d12','#d9c3a0'],
     hint:'Lots of HP and thick bark, but it confuses easily. Sleepy.'},
-  bigone:{id:'bigone',coins:40,coinStep:8,name:'The Big One',the:'the Big One',short:'Big One',sprite:BIGONE_SPRITE,pal:BIGONE_PAL,scale:3,eyes:[[11,9],[19,9]],mouth:[14,14],
+  bigone:{id:'bigone',coins:40,coinStep:8,name:'The Big One',the:'the Big One',short:'Big One',sprite:BIGONE_SPRITE,pal:BIGONE_PAL,scale:3,owScale:3,eyes:[[11,9],[19,9]],mouth:[14,14],
     hp:78,hpStep:12,atk:4,xp:34,xpStep:8,level:5,rank:'BOSS',
     regen:4,regenMsg:'The Big One dips under the water. +4 HP.',
     intro:'Something enormous surfaces. It\'s The Big One. Boppy was right.',

@@ -1,3 +1,8 @@
+## 2026-11-01 (evening, 48): Overworld sizes, The Big One 3x and the pie-thief Big Mudling 33% smaller (`size1`)
+
+- Tom (17:25): "The big one in the overworld maps should be 3x its current size. And the mudslinger that steals the one should be 33% smaller."
+- Call made: The Big One on the Grump Hollow map now draws at 3x (`owScale:3` on `bigone` in data/monsters.js; was 1x). Call made: "the mudslinger that steals the one" is the Big Mudling in the pond scene (the pie-tin thief); its scene size went from 2x to 1.34x (a third smaller) in both spawns in data/scenes.js (`ch1Theft` and `ch1Pond`). Plain Mudlings on the map and the battle sprites are unchanged.
+- Looked at the pond scene frames: Big One, thief and Tom read in proportion. Tested: smoke FAILS: []. Not seen on the phone. Knobs: `owScale` (Big One), `mscale` in the two Big Mudling spawns.
 ## 2026-11-01 (evening, 50): Rose's face no longer stretches in Boop and her other extra poses (`rosefix1`)
 
 - Tom: "Rose's face became distorted with Boop."

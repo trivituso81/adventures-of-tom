@@ -92,7 +92,7 @@ SCENES.ch1Theft=[
   {flag:'tombo:deedee1'},
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
   {sfx:'doorIn'},
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[8,12],dir:'up'}},
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,12],dir:'up'}},
   // The painted heist frames (mh_*, data/mudling-heist.js) give the blob its acting: ooze in, spot the pie, wind up, charge, shove, squeeze through,
   // wobble, reach, grab, hug, side-eye, scurry out, giggle, sneak out. The frames already hold the tin, so the game's own tin prop is not used.
   {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
@@ -203,7 +203,7 @@ SCENES.ch1Pond=[
   {flag:'ch1-pond'}, {call:()=>storyWorld()},
   {hide:'The Big One'},
   // The painted heist frames (mh_*) face LEFT, toward the party, and already hold the tin, so no separate tin prop here.
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[21,15],dir:'left'}},
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[21,15],dir:'left'}},
   {pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'left'},
   {walk:'Big Mudling',to:[[21,14],[20,14],[20,13],[19,13],[19,12]],speed:.3,onStep:()=>sfx.splat()},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
