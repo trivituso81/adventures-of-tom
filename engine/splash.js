@@ -65,7 +65,9 @@ function splashReload() {
   if(splash.reloading) return;
   splash.reloading=true; sfx.select();
   const cue=$('sp-cue'); if(cue) { cue.textContent='Reloading the game. Your saves are kept.'; cue.parentElement.style.display=''; }
-  const urls=[location.href,...Array.from(document.scripts).map(s=>s.src).filter(u=>u&&u.indexOf('/data/voice')<0)];
+  // The home-screen icon files are re-downloaded too (iOS caches them hard), so Add to Home Screen after a reload gets the newest icon.
+  const icons=Array.from(document.querySelectorAll('link[rel~="icon"],link[rel~="apple-touch-icon"]')).map(l=>l.href.split('?')[0]);
+  const urls=[location.href,...icons,...Array.from(document.scripts).map(s=>s.src).filter(u=>u&&u.indexOf('/data/voice')<0)];
   const done=()=>{ const u=new URL(location.href); u.searchParams.set('r',Date.now().toString(36)); location.replace(u.toString()); };
   const timer=setTimeout(done,8000);
   Promise.all(urls.map(u=>fetch(u,{cache:'reload'}).catch(()=>null))).then(()=>{ clearTimeout(timer); done(); });

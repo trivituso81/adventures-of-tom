@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Welcome-screen RELOAD also refreshes the home-screen icon (`icon1`)
+
+- Tom (15:05): reloading on the welcome screen should also refresh the save-to-home-screen app icon.
+- engine/splash.js `splashReload`: the icon files named by the page's icon and apple-touch-icon links are now re-downloaded with the page and scripts (cache bypassed). index.html: a tiny head script gives the icon links the same `?r=` address the reload uses, so Add to Home Screen cannot reuse a stale cached icon.
+- Fact: iOS fixes a home-screen icon at the moment it is added; no web page can swap an already-installed icon. To get a new icon, press RELOAD, then remove the old shortcut and Add to Home Screen again.
+- Tags `?v=icon1` on splash.js and main.js; stamp `build icon1`.
+
 ## 2026-11-01 (day, 43): Chapter 1 intro, Tom's stretch cut to under half (`stretch1`)
 
 - Tom (15:05): the stretch in the chapter 1 intro is way too long. The painted stretch ran 5.2 seconds; it now runs 2.4 (`STRETCH_DUR` in `engine/intro.js`). Same eight poses, same order, each pose proportionally shorter; the second exhale sound now fires at 75% of the stretch instead of at a fixed 3.9 s.
