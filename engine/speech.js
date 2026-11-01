@@ -6,8 +6,8 @@ function playClip(cl,part) {
   if(!c) return false;
   const go=buf=>{
     const src=c.createBufferSource(); src.buffer=buf;
-    if(part) { const g=c.createGain(); g.gain.value=part.gain||1; src.connect(g); g.connect(sound.master); src.start(0,part.from,part.to-part.from); }
-    else { src.connect(sound.master); src.start(); }
+    if(part) { const g=c.createGain(); g.gain.value=part.gain||1; src.connect(g); g.connect(sound.voiceBus||sound.master); src.start(0,part.from,part.to-part.from); }
+    else { src.connect(sound.voiceBus||sound.master); src.start(); }
   };
   if(clipCache.has(cl.mp3)) { go(clipCache.get(cl.mp3)); return true; }
   const bin=atob(cl.mp3),u=new Uint8Array(bin.length);
@@ -75,7 +75,7 @@ function say(id,kind,delay=0,only=null,slice=null) {
     if('speechSynthesis'in window) {
       try {
         const u=new SpeechSynthesisUtterance(line);
-        u.pitch=v.pitch; u.rate=v.rate; u.volume=volGain(sound.vol.fx);
+        u.pitch=v.pitch; u.rate=v.rate; u.volume=volGain(sound.vol.voice);
         const voice=pickVoice(id);
         if(voice) u.voice=voice;
         speechSynthesis.speak(u);

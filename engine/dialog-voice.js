@@ -37,7 +37,7 @@ function dvPlay(b64) {
   guard(6000);
   const go=buf=>{
     if(tok!==DV.token||dvMuted()) { if(tok===DV.token) DV.playing=false; return; }
-    const src=c.createBufferSource(); src.buffer=buf; src.connect(sound.master);
+    const src=c.createBufferSource(); src.buffer=buf; src.connect(sound.voiceBus||sound.master);
     src.onended=()=>{ if(DV.src===src) { DV.src=null; DV.playing=false; } };
     DV.src=src; src.start(); guard(Math.round(buf.duration*1000)+1200);
   };

@@ -18,7 +18,7 @@ function pollGamepad() {
   if(battle.active) {
     input.padDir=null;
     b2Pad(dir,dirEdge,A,B);
-    if(R1) b7ToggleSpeed(); if(Y) b7ToggleAuto();   // engine/feel.js: 1x / 2x and Smart Repeat
+    if(R1) b7ToggleSpeed(); if(Y) b7ToggleAuto(); if(SEL) b7SetToggle();   // engine/feel.js: 1x / 2x and Smart Repeat
     return;
   }
   // Cutscenes: B toggles FAST, Start or Select skips (engine/skip.js).
@@ -83,7 +83,7 @@ startSplash();
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
-  d.textContent='build jojoart1';
+  d.textContent='build sound1';
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
 })();

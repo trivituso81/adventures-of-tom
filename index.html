@@ -770,6 +770,19 @@ html.landscape #battle.v2 .bp-grid .bp-btn{height:62px}html.landscape #battle.v2
 .battle-stage{position:relative}
 .b7-tools{position:absolute;z-index:3;display:flex;gap:4px}
 .b7-tools button{min-width:36px;height:26px;padding:0 8px;border:2px solid #fff1c766;border-radius:5px;background:#0b0d12bf;color:#fff1cb;font:inherit;font-size:10px;font-weight:900;letter-spacing:.6px;touch-action:manipulation;cursor:pointer}
+.b7-tools button.gear{display:grid;place-items:center;min-width:30px;padding:0 6px}
+.b7-setcard{z-index:32;cursor:default}
+.b7-sbox{width:min(360px,100%)}
+.b7-sttl{text-align:center;font-size:18px;font-weight:900;letter-spacing:3px;color:#ffe08a;text-shadow:0 2px 0 #000;margin-bottom:8px}
+.b7-srow{padding:6px 6px 8px;border-radius:6px;border:2px solid transparent}
+.b7-srow.sel{border-color:var(--edge);background:#ffffff10}
+.b7-slab{font-size:11px;font-weight:900;letter-spacing:1.4px;margin-bottom:4px}
+.b7-sctl{display:flex;align-items:center;gap:6px}
+.b7-sbtn{flex:none;width:40px;height:36px;border:2px solid #fff1c766;border-radius:6px;background:#0b0d12bf;color:#fff1cb;font:inherit;font-size:20px;font-weight:900;line-height:1;touch-action:manipulation;cursor:pointer}
+.b7-sbtn.dim{opacity:.35}
+.b7-sctl .b7-vbar{height:26px}
+.b7-snote{font-size:10px;color:var(--ink-dim);margin-top:4px}
+.b7-sdone{display:block;margin:8px auto 0;min-width:120px;height:36px;border:2px solid #fff8df;border-radius:6px;background:var(--gold);color:#1a1e26;font:inherit;font-size:13px;font-weight:900;letter-spacing:1.5px;touch-action:manipulation;cursor:pointer}
 .b7-tools button.exit{border-color:#ff9a8a;color:#ffd6cf}
 .b7-tools button.exit:active{background:#c0392b;color:#fff}
 .b7-tools button.on{background:var(--gold);color:#1a1e26;border-color:#fff8df}
@@ -1245,7 +1258,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/menu.js?v=face8"></script>
 <script src="engine/followers.js?v=wind1"></script>
 <script src="engine/shop.js?v=justin2"></script>
-<script src="engine/audio.js"></script>
+<script src="engine/audio.js?v=sound1"></script>
 <script src="data/lines.js?v=justin4"></script>
 <script src="data/voice-clips.js?v=justinv1"></script>
 <script src="data/voice/tom.js?v=clips1"></script>
@@ -1257,7 +1270,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/voice/tnb.js?v=clips1"></script>
 <script src="data/voice/justin.js?v=justinv1"></script>
 <script src="data/contraction-alias.js"></script>
-<script src="engine/speech.js"></script>
+<script src="engine/speech.js?v=sound1"></script>
 <script src="engine/battle-state.js"></script>
 <script src="data/battle-sprites.js?v=tom4"></script>
 <script src="data/ko-sprites.js"></script>
@@ -1283,7 +1296,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/progress.js"></script>
 <script src="data/abilities.js?v=justin2"></script>
 <script src="engine/battle2.js?v=solo1"></script>
-<script src="engine/battle2-ui.js?v=solo1"></script>
+<script src="engine/battle2-ui.js?v=sound1"></script>
 <script src="engine/battle2-moves.js"></script>
 <script src="data/kid-sprites.js"></script>
 <script src="engine/battle2-kind.js?v=hearts1"></script>
@@ -1292,7 +1305,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/rose-ride.js?v=ride6"></script>
 <script src="engine/battle2-effects.js"></script>
 <script src="engine/progress.js?v=stampgrid1"></script>
-<script src="engine/feel.js?v=justin1"></script>
+<script src="engine/feel.js?v=sound1"></script>
 <script src="data/battle-icons.js"></script>
 <script src="data/battle-emoji.js?v=boop1"></script>
 <script src="engine/battle-pictures.js?v=cross2"></script>
@@ -1501,11 +1514,11 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/bonus-nine-scoops.js?v=amy1"></script>
 <script src="data/foes/use.js"></script>   <!-- second pass: installs the painted Nine Scoops enemies, which data/bonus-nine-scoops.js defines after the first pass ran -->
 <script src="data/dialog-cast.js"></script>
-<script src="engine/dialog-voice.js"></script>
+<script src="engine/dialog-voice.js?v=sound1"></script>
 <script src="engine/local-clips.js?v=bake1"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js?v=wind1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=jojoart1"></script>
+<script src="engine/main.js?v=sound1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js"></script>

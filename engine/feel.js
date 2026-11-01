@@ -46,7 +46,7 @@ function b7SetDiff(id) {
 }
 // Options also ride along in every save (engine/followers.js): Safari can wipe this frame's browser storage when the
 // app closes, which used to put the game back on Grace Mode at every launch. Loading a save brings them back.
-const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,autoSpend:B7.autoSpend!==false,volMusic:sound.vol.music,volFx:sound.vol.fx});
+const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,autoSpend:B7.autoSpend!==false,volMusic:sound.vol.music,volFx:sound.vol.fx,volVoice:sound.vol.voice});
 function b7ApplyOpts(o) {
   if(!o) return;
   if(B7_DIFF[o.diff]) B7.diff=o.diff;
@@ -55,6 +55,7 @@ function b7ApplyOpts(o) {
   if(typeof o.autoSpend==='boolean') B7.autoSpend=o.autoSpend;
   if(o.volMusic>=1&&o.volMusic<=10) setVolume('music',o.volMusic);
   if(o.volFx>=1&&o.volFx<=10) setVolume('fx',o.volFx);
+  if(o.volVoice>=1&&o.volVoice<=10) setVolume('voice',o.volVoice);
   b7Save();
 }
 function b7ToggleSpeed() { B7.speed=B7.speed===2?1:2; b7Save(); sfx.select(); b7SyncTools(); if(B2.active) b2Msg('Battle speed '+B7.speed+'x.'); }
@@ -67,12 +68,12 @@ function b7ToggleAuto() {
 
 // ---------- Battle start and end ----------
 function b7BattleStart() {
-  B7.auto=false; B7.rec=null; B7.hfWin=null; clearTimeout(B7.autoTimer); b7CloseCard(true);
+  B7.auto=false; B7.rec=null; B7.hfWin=null; clearTimeout(B7.autoTimer); b7CloseCard(true); b7SetClose();
   b7SyncTools();
 }
 function b7AfterBattle(result) {
   const now=performance.now();
-  B7.auto=false; B7.hfWin=null; clearTimeout(B7.autoTimer); b7CloseCard(true);
+  B7.auto=false; B7.hfWin=null; clearTimeout(B7.autoTimer); b7CloseCard(true); b7SetClose();
   const T=$('b7-tools'); if(T) T.hidden=true;
   // A breather before map monsters can engage again; a monster that won or was run from leaves Tom alone a while.
   B7.noEngage=now+3500;
@@ -442,7 +443,8 @@ function b7RenderOptions(body) {
     r.appendChild(minus); r.appendChild(bar); r.appendChild(num); r.appendChild(plus);
   };
   vol('music','MUSIC VOLUME','1 is a whisper, 10 is full.'+(music.on?'':' Music is switched off; the music button below turns it back on.'));
-  vol('fx','EFFECTS AND VOICES VOLUME','Sound effects, battle shouts and story voices.'+(sound.enabled?'':' Sound is muted; the sound button below turns it back on.'));
+  vol('voice','VOICE VOLUME','Battle shouts and story voices.'+(sound.enabled?'':' Sound is muted; the sound button below turns it back on.'));
+  vol('fx','EFFECTS VOLUME','Hits, chimes and menu sounds.');
   const D=b7Diff();
   const r1=card('DIFFICULTY',D.sub+'. '+D.text);
   for(const id of ['rose','grace','director']) r1.appendChild(opt('opt-'+id,B7_DIFF[id].name.replace(' MODE',''),B7.diff===id,()=>b7SetDiff(id)));
@@ -459,19 +461,78 @@ function b7RenderOptions(body) {
   body.appendChild(c4);
 }
 
+// ---------- Battle settings: gear button, MUSIC and VOICE volume (also in the Battle Lab) ----------
+// The gear sits in the top-right tool bar. It opens a small panel over the fight; the fight keeps running underneath.
+// Keys: O or Select opens; Up/Down pick a row, Left/Right change it, Enter, Esc or B close. Taps work on the buttons and pips.
+const B7S={open:false,row:0,sample:0};
+const B7S_ROWS=[['music','MUSIC','Background music.'],['voice','VOICE','Battle shouts and story voices.']];
+function b7SetRender() {
+  const box=$('b7-set-box'); if(!box) return;
+  box.innerHTML='<div class="b7-sttl">SOUND</div>';
+  B7S_ROWS.forEach(([kind,title,note],ri)=>{
+    const row=document.createElement('div'); row.className='b7-srow'+(ri===B7S.row?' sel':'');
+    const lab=document.createElement('div'); lab.className='b7-slab'; lab.textContent=title; row.appendChild(lab);
+    const ctl=document.createElement('div'); ctl.className='b7-sctl';
+    const mk=(txt,d,label)=>{ const b=document.createElement('button'); b.type='button'; b.className='b7-sbtn'+((d<0&&sound.vol[kind]<=1)||(d>0&&sound.vol[kind]>=10)?' dim':''); b.textContent=txt; b.setAttribute('aria-label',title+' '+label); b.addEventListener('click',e=>{ e.stopPropagation(); B7S.row=ri; b7SetVol(kind,sound.vol[kind]+d); }); return b; };
+    ctl.appendChild(mk('−',-1,'down'));
+    const bar=document.createElement('div'); bar.className='b7-vbar'; bar.setAttribute('role','img'); bar.setAttribute('aria-label',title+' level '+sound.vol[kind]+' of 10');
+    for(let i=1;i<=10;i++) { const p=document.createElement('span'); p.className='b7-vpip'+(i<=sound.vol[kind]?' on':''); p.addEventListener('click',e=>{ e.stopPropagation(); B7S.row=ri; b7SetVol(kind,i); }); bar.appendChild(p); }
+    ctl.appendChild(bar);
+    const num=document.createElement('div'); num.className='b7-vnum'; num.textContent=String(sound.vol[kind]); ctl.appendChild(num);
+    ctl.appendChild(mk('+',1,'up'));
+    row.appendChild(ctl);
+    const nt=document.createElement('div'); nt.className='b7-snote'; nt.textContent=note+(kind==='music'&&!music.on?' (Music is switched off.)':'')+(kind==='voice'&&!sound.enabled?' (Sound is muted.)':''); row.appendChild(nt);
+    box.appendChild(row);
+  });
+  const done=document.createElement('button'); done.type='button'; done.className='b7-sdone'; done.textContent='DONE';
+  done.addEventListener('click',e=>{ e.stopPropagation(); b7SetClose(); });
+  box.appendChild(done);
+}
+function b7SetVol(kind,n) {
+  setVolume(kind,n);
+  if(kind==='voice') { clearTimeout(B7S.sample); B7S.sample=setTimeout(()=>{ try { say('grace','attack'); } catch(e) {} },260); }   // a little shout so the level can be judged
+  else sfx.select();
+  b7SetRender();
+}
+function b7SetOpen() {
+  const c=$('b7-set'); if(!c||!B2.active) return;
+  B7S.open=true; B7S.row=0; c.hidden=false; b7SetRender(); sfx.select();
+}
+function b7SetClose() {
+  const c=$('b7-set'); B7S.open=false; clearTimeout(B7S.sample);
+  if(c&&!c.hidden) { c.hidden=true; sfx.select(); }
+}
+function b7SetToggle() { if(B7S.open) b7SetClose(); else b7SetOpen(); }
+// Keyboard and controller while the panel is open. Returns true when the panel took the input.
+function b7SetKey(code) {
+  if(!B7S.open) return false;
+  if(code==='ArrowUp'||code==='KeyW') B7S.row=(B7S.row+B7S_ROWS.length-1)%B7S_ROWS.length;
+  else if(code==='ArrowDown'||code==='KeyS') B7S.row=(B7S.row+1)%B7S_ROWS.length;
+  else if(code==='ArrowLeft'||code==='KeyA') { const k=B7S_ROWS[B7S.row][0]; b7SetVol(k,sound.vol[k]-1); return true; }
+  else if(code==='ArrowRight'||code==='KeyD') { const k=B7S_ROWS[B7S.row][0]; b7SetVol(k,sound.vol[k]+1); return true; }
+  else if(code==='Enter'||code==='Space'||code==='Escape'||code==='Backspace'||code==='KeyX'||code==='KeyO') { b7SetClose(); return true; }
+  b7SetRender(); return true;
+}
+
 // ---------- Wiring: battle buttons, taps on the picture, the card ----------
 (function b7Wire() {
   const st=document.querySelector('#battle .battle-stage'),cv=$('battle-canvas'),B=$('battle');
   if(!st||!cv||!B) return;
   const tools=document.createElement('div'); tools.id='b7-tools'; tools.className='b7-tools'; tools.hidden=true;
-  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
+  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-set-btn" class="gear" aria-label="Sound settings: music and voice volume"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M9.4 1h-2.8l-.4 1.9a5.6 5.6 0 0 0-1.4.8L3 3.1 1.6 5.5l1.5 1.3a5.600 5.600 0 0 0 0 1.4L1.600 9.500 3 11.900l1.800-.600c.4.300.9.600 1.400.800L6.600 14h2.800l.4-1.900c.5-.2 1-.5 1.400-.8l1.800.6 1.400-2.400-1.500-1.300a5.600 5.600 0 0 0 0-1.400l1.500-1.300L13 3.100l-1.800.6a5.600 5.600 0 0 0-1.400-.8zM8 5.500a2.500 2.500 0 1 1 0 5 2.500 2.500 0 0 1 0-5z"/></svg></button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
   st.appendChild(tools);
   $('b7-exit').addEventListener('click',e=>{ e.stopPropagation(); if(typeof b2LabExit==='function') b2LabExit(); });   // Battle Lab only
+  $('b7-set-btn').addEventListener('click',e=>{ e.stopPropagation(); b7SetToggle(); });
   $('b7-speed').addEventListener('click',e=>{ e.stopPropagation(); b7ToggleSpeed(); });
   $('b7-auto').addEventListener('click',e=>{ e.stopPropagation(); b7ToggleAuto(); });
   cv.addEventListener('pointerdown',()=>{ if(B2.active&&battle.state!=='command') b7Tap(); });
   const card=document.createElement('div'); card.id='b7-card'; card.className='b7-card'; card.hidden=true;
   card.addEventListener('click',()=>b7CloseCard());
   B.appendChild(card);
+  const set=document.createElement('div'); set.id='b7-set'; set.className='b7-card b7-setcard'; set.hidden=true;
+  set.innerHTML='<div class="b7-cbox b7-sbox" id="b7-set-box" role="dialog" aria-label="Sound settings"></div>';
+  set.addEventListener('click',e=>{ if(e.target===set) b7SetClose(); });
+  set.querySelector('#b7-set-box').addEventListener('click',e=>e.stopPropagation());
+  B.appendChild(set);
   addEventListener('resize',()=>{ if(B2.active) b7SyncTools(); });
 })();

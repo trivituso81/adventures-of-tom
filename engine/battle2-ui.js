@@ -699,6 +699,8 @@ function b2A() {
   if(B2.ui==='cross') b2Cross('up'); else b2Pick(B2.sel);
 }
 function b2Key(e) {
+  if(typeof b7SetKey==='function'&&B7S.open) { if(!e.repeat||/Arrow|Key[WASD]/.test(e.code)) { e.preventDefault(); b7SetKey(e.code); } return; }   // sound panel (engine/feel.js)
+  if(e.code==='KeyO'&&!e.repeat) { b7SetToggle(); return; }
   const c=e.code,dirs={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',KeyW:'up',KeyS:'down',KeyA:'left',KeyD:'right'};
   if(c==='KeyL') { if(!e.repeat) toggleLayout(); return; }
   if(c==='KeyF') { if(!e.repeat) b7ToggleSpeed(); return; }   // 1x / 2x
@@ -708,6 +710,7 @@ function b2Key(e) {
   else if((c==='Escape'||c==='Backspace'||c==='KeyX')&&!e.repeat) { e.preventDefault(); b2Back(); }
 }
 function b2Pad(dir,dirEdge,A,B) {
+  if(B7S.open) { if(dirEdge&&dir) b7SetKey({up:'ArrowUp',down:'ArrowDown',left:'ArrowLeft',right:'ArrowRight'}[dir]); if(A||B) b7SetKey('Escape'); return; }
   if(dirEdge&&dir) b2Dir(dir);
   if(A) b2A(); else if(B) b2Back();
 }

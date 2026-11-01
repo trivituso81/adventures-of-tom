@@ -3,9 +3,10 @@
 // ---------- Sound: synthesized effects plus spoken lines ----------
 const sound={ctx:null,master:null,enabled:true,voices:[],unlocked:false};
 try { sound.enabled=localStorage.getItem('le-sound')!=='off'; } catch(e) {}
-// Volume levels 1 to 10 (10 = full). Music has its own bus; effects, voices and dialogue share sound.master.
-sound.vol={music:10,fx:10};
-try { for(const k of ['music','fx']) { const n=+localStorage.getItem('le-vol-'+k); if(n>=1&&n<=10) sound.vol[k]=Math.round(n); } } catch(e) {}
+// Volume levels 1 to 10 (10 = full). Music and voices (battle shouts, story dialogue) each have their own bus; sound effects use sound.master.
+// Voices used to share the effects level, so a voice level never saved starts at the saved effects level.
+sound.vol={music:10,fx:10,voice:10};
+try { for(const k of ['music','fx','voice']) { const n=+localStorage.getItem('le-vol-'+(k==='voice'&&localStorage.getItem('le-vol-voice')==null?'fx':k)); if(n>=1&&n<=10) sound.vol[k]=Math.round(n); } } catch(e) {}
 // Ears hear loudness on a curve, so each step sounds about as big as the last: 10 is 1, 5 is about .3, 1 is about .02.
 const MUSIC_TRIM=.315; // music bus base gain: .45 reduced by 30% (2026-10-27)
 const volGain=n=>Math.pow(Math.max(1,Math.min(10,n))/10,1.7);
@@ -13,7 +14,7 @@ function setVolume(kind,n) {
   if(!(kind in sound.vol)) return;
   sound.vol[kind]=Math.max(1,Math.min(10,Math.round(n)));
   try { localStorage.setItem('le-vol-'+kind,String(sound.vol[kind])); } catch(e) {}
-  const bus=kind==='music'?sound.musicBus:sound.master;
+  const bus=kind==='music'?sound.musicBus:kind==='voice'?sound.voiceBus:sound.master;
   if(bus&&sound.ctx) { const t=sound.ctx.currentTime; bus.gain.cancelScheduledValues(t); bus.gain.setTargetAtTime((kind==='music'?MUSIC_TRIM:.45)*volGain(sound.vol[kind]),t,.03); }
 }
 // Portrait / landscape: 'auto' follows the device; a forced mode rotates the whole stage when the device disagrees.
@@ -44,6 +45,9 @@ function buildAudio() {
   sound.musicBus=sound.ctx.createGain();
   sound.musicBus.gain.value=MUSIC_TRIM*volGain(sound.vol.music);
   sound.musicBus.connect(sound.ctx.destination);
+  sound.voiceBus=sound.ctx.createGain();
+  sound.voiceBus.gain.value=.45*volGain(sound.vol.voice);
+  sound.voiceBus.connect(sound.ctx.destination);
 }
 
 function audio() {

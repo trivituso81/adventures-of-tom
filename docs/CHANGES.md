@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 44): Sound settings in battle, with their own voice volume (`sound1`)
+
+- Tom: a special settings icon in battles where music and voice volume can be changed, also in the battle test (Battle Lab).
+- New gear button in the top-right tool bar of every fight (left of 1x and AUTO, right of EXIT in the Battle Lab). It opens a SOUND panel over the fight with MUSIC and VOICE rows (minus, 10 pips, plus; tap a pip to jump). The fight keeps running underneath. DONE, tapping outside, Escape or controller B close it. Keyboard: O opens, Up/Down pick a row, Left/Right change it. Controller: Select opens, D-pad changes, A or B closes. Voice changes play a short Grace shout so the level can be judged.
+- Voice now has its own bus and level (`sound.vol.voice`, `sound.voiceBus`, engine/audio.js): battle shouts (engine/speech.js, incl. the speech-synthesis fallback) and story dialogue (engine/dialog-voice.js). Before, voices shared the effects level. A voice level never saved starts at the saved effects level, so nothing sounds different until it is changed. Effects stay on their own level.
+- Pause menu OPTIONS: the old "EFFECTS AND VOICES VOLUME" row is now VOICE VOLUME and EFFECTS VOLUME. Levels are saved in browser storage and ride along in every save (`volVoice`).
+- Test: new `tools/battle_sound_test.py` (taps, keys, controller, bus gains, saves, portrait and landscape, leaving the lab). Tested: it, `smoke.py`, `lab_exit_test.py`; panel looked at in portrait and landscape. Stamp `build sound1`.
+
 ## 2026-11-01 (day, 43): Jojo redone from the new sheet at adult proportions (`jojoart1`)
 
 - Tom (12:08): new painted Jojo sheet (new face, wave shirt print); update her standing, walking and battle frames, with the adult head size and body proportions, she is 5'6".
