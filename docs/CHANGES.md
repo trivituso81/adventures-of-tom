@@ -1,3 +1,13 @@
+## 2026-11-01 (late afternoon, 47): Painted maps load on demand instead of all at boot (`plate1`)
+
+- Tom (16:27): the overworld maps do not load instantly, or at all.
+- Fact (cause): at startup the game began downloading and decoding all 77 painted maps at once, 41 MB of files that become about 520 MB of pictures in the phone's memory. An iPhone cannot hold that, so the map you were standing on came up late, or never.
+- Call made: load the map you are on first; then, one at a time, the maps you can walk into (outdoor neighbours first, then the 7 nearest doors in total); keep only the 8 most recent paintings in memory and drop the rest (they reload from the browser cache if you go back). A painting that fails to download now retries (4 tries) instead of giving up for the session, and shows the plain backdrop meanwhile, never the old tile art.
+- Measured (desktop test): boot now fetches 9 paintings, 5.7 MB (was 77, 41 MB); walking Square, Row, Hollow, School yard, Pier: each map was ready in 60 to 190 ms, never more than 8 paintings held.
+- Changed: `engine/plate.js` (`plateFocus`, `plateNeighbours`, `platePump`, `plateDrop`, new `plateLoad` with retry; knobs `PLATE_KEEP` 8, `PLATE_AHEAD` 7, `PLATE_TRIES` 4). No art changed.
+- Tested: `smoke.py` FAILS: []; `camera_clamp_test`, `reach_test`, `rooms_test`, `grands_walk_test`, `jpark_test` all pass; looked at the Square (portrait and landscape) and Deedee and Boppy's house (portrait). Not played on the phone.
+- Not fixed, found while measuring: on a cold download (first install, RELOAD, or after the browser cache expires) the game pulls 59 MB of scripts before anything can draw, and 42.5 MB of that is the baked voice files, which load as blocking scripts. At 5 Mbps both the old and new build take about 200 s to reach the first map. Next step is loading the voice files without blocking (after checking nothing reads them at startup).
+
 ## 2026-11-01 (day, 47): New Tom-carrying-Rose art, and Tom tosses Rose off before his moves (`ride7`)
 
 - Tom: installed the seven new ride sheets (no words). Wanted: Tom keeps Rose on his shoulders only for Press Start, DEFEND and the combos that need her up; for every other Tom move he tosses her off and she lands on her feet.

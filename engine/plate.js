@@ -50,24 +50,70 @@ PLATES.deadletter={src:'art/deadletter.webp?v=20261029',px:64,img:null,ready:fal
 PLATES.schoolyard={src:'art/schoolyard.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.foreverheart={src:'art/foreverheart.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.stillcore={src:'art/stillcore.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
+// Painted maps load on demand (2026-11-01, `plate1`). The old code started all 77 paintings at boot: 41 MB of files and about 520 MB once the
+// phone decodes them into pictures, which an iPhone cannot hold, so the first map came up late or not at all. Now: the map you are on loads
+// first, then the maps you can walk into (its exits, house doors and the way back out), one at a time, and only the last PLATE_KEEP
+// paintings stay in memory (about 100 MB). Anything else is dropped and loads again from the browser cache if you return.
+const PLATE_KEEP=8, PLATE_TRIES=4;
+const PLATE_RECENT=[];   // map ids, most recently focused first
+// The maps one step away (exits, house doors, the way back out), outdoor ones first then nearest door, at most PLATE_AHEAD of them: the Square has 11 doors and
+// loading every interior would bring back the memory problem. A farther door just loads when you walk in.
+const PLATE_AHEAD=7;   // outdoor neighbours (edge openings) always come first, then the nearest house doors
+function plateNeighbours(map) {
+  const best=new Map(), pl=typeof player!=='undefined'?player:null;
+  if(map&&map.portals) for(const [k,q] of map.portals) {
+    let id=null;
+    if(q.kind==='enter'&&q.house) id=q.house.enterMap||q.house.id;
+    else if(q.kind==='edge'&&q.to) id=q.to;
+    else if(q.kind==='exit'&&q.house&&q.house.area) id=q.house.area;
+    if(!id||!PLATES[id]||id===map.id) continue;
+    const [x,y]=k.split(',').map(Number), d=(pl?Math.abs(pl.x-x)+Math.abs(pl.y-y):0)+(q.kind==='edge'?0:1000);
+    if(!best.has(id)||d<best.get(id)) best.set(id,d);
+  }
+  return [...best].sort((a,b)=>a[1]-b[1]).slice(0,PLATE_AHEAD).map(e=>e[0]);
+}
+// Called every frame from plateFor; does its work only when the map changes.
+function plateFocus(map) {
+  if(!map||plateFocus.id===map.id) return;
+  plateFocus.id=map.id;
+  const i=PLATE_RECENT.indexOf(map.id); if(i>=0) PLATE_RECENT.splice(i,1);
+  PLATE_RECENT.unshift(map.id);
+  plateFocus.queue=plateNeighbours(map);
+  const keep=new Set([...PLATE_RECENT.slice(0,PLATE_KEEP),...plateFocus.queue]);
+  for(const k in PLATES) if(!keep.has(k)) plateDrop(PLATES[k]);
+}
+function plateDrop(p) { if(!p.img&&!p.fgImg) return; p.img=null; p.ready=false; p.failed=false; p.tries=0; p.fgImg=null; }
+// Load one queued neighbour at a time, and only once the current map's painting is on screen, so a neighbour never slows the map you are on.
+function platePump(map) {
+  const cur=map&&PLATES[map.id];
+  if(cur&&!cur.ready&&!cur.failed) return;
+  for(const k in PLATES) { const p=PLATES[k]; if(p.img&&!p.ready&&!p.failed) return; }
+  const q=plateFocus.queue; if(!q) return;
+  while(q.length) { const p=PLATES[q.shift()]; if(p&&!p.img&&!p.failed) { plateLoad(p); return; } }
+}
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;
+  plateFocus(map);
   plateLoad(p);
+  platePump(map);
   return p.ready?p:null;
 }
 function plateLoad(p) {
-  if(p.img) return;
-  p.img=new Image();
-  const done=()=>{p.ready=true;};
-  p.img.onload=()=>{ if(p.img.decode) p.img.decode().then(done,done); else done(); };
-  p.img.onerror=()=>{p.failed=true;};
-  p.img.src=p.src;
+  if(p.img||p.failed||performance.now()<(p.retryAt||0)) return;
+  const im=new Image();
+  p.img=im;
+  const done=()=>{ if(p.img===im) p.ready=true; };
+  im.onload=()=>{ if(im.decode) im.decode().then(done,done); else done(); };
+  // A failed download (a dropped connection, a phone short of memory) tries again after a pause instead of giving up for the whole session.
+  im.onerror=()=>{ if(p.img!==im) return; p.img=null; p.ready=false; p.tries=(p.tries||0)+1; if(p.tries>=PLATE_TRIES) p.failed=true; else p.retryAt=performance.now()+1000*p.tries; };
+  im.src=p.src;
 }
-// True while a painted map's art is still loading: draw a plain backdrop, never the old tile version.
+// True while a painted map's art is still loading (or waiting to retry): draw a plain backdrop, never the old tile version.
 function plateHold(map) { const p=map&&PLATES[map.id]; return !!(p&&!p.ready&&!p.failed); }
-// Start every plate loading at boot so it is decoded long before the player walks there.
-for(const k in PLATES) plateLoad(PLATES[k]);
+// Boot: only the starting map. Neighbours follow once it is ready (platePump).
+try { if(typeof currentMap!=='undefined') plateFocus(currentMap); } catch(e) {}
+if(typeof currentMap!=='undefined'&&currentMap&&PLATES[currentMap.id]) plateLoad(PLATES[currentMap.id]);
 // Render the backing store at device resolution on plate maps so the painting stays sharp.
 function plateSetK(want) {
   if(want===plateSetK.k) return;
