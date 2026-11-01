@@ -1799,7 +1799,7 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     const k=seg(ms,P.flat+300,P.burst); return {x:sT.x,y:sT.b-TH*.55-ez(k)*(TH*.9),sc:1.9+k*.7,a:1,sq:(1-k)*.45,face:1,shout:1}; };
   const dumpling=(d,ms)=>{ const img=ghostDumpling(),sx=d.sc*(1+d.sq*.5),sy=d.sc*(1-d.sq*.45),w=img.width*sx,h=img.height*sy;
     gfx.globalAlpha=d.a*.35; E(d.x,d.y,w*.75,h*.8,GOLD); gfx.globalAlpha=d.a;
-    const pnt=PROPART.draw('grace/gold_dumpling_squishy',d.x,d.y,{h:img.height*d.sc*1.05,sx:1+d.sq*.5,sy:1-d.sq*.45});   // painted dumpling, its own smiling face
+    const pnt=PROPART.draw('grace/gold_dumpling_hero',d.x,d.y,{h:img.height*d.sc*1.05,sx:1+d.sq*.5,sy:1-d.sq*.45});   // painted dumpling, its own smiling face
     if(!pnt) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=false; gfx.drawImage(img,d.x-w/2,d.y-h/2,w,h); gfx.imageSmoothingEnabled=sm; }
     if(d.face&&!pnt) { const ex=w*.17,ey=d.y-h*.05,blink=Math.sin(ms/400)>.93; // grumpy genie: heavy brows, small mouth
       R(Math.round(d.x-ex-2),Math.round(ey-1),4,blink?1:3,'#3a2210'); R(Math.round(d.x+ex-2),Math.round(ey-1),4,blink?1:3,'#3a2210');

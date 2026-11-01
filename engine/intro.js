@@ -22,6 +22,9 @@ const SQUISHY=[
   '..oddddddddddddo..',
   '...oooooooooooo...'
 ];
+// Painted hero version (art/props/grace/gold_dumpling_hero.webp, 2026-11-01). Used whenever a scene does not pass its own sprite; the pixel SQUISHY stays as the fallback until it loads.
+const SQUISHY_HERO='grace/gold_dumpling_hero';
+if(typeof PROPART!=='undefined') PROPART.preload([SQUISHY_HERO]);
 const SQUISHY_PAL={o:'#5a3a10',g:'#f2c44a',l:'#ffe08a',d:'#c98a1e',w:'#fffbe6',k:'#b0741a',b:'#aef0ff',e:'#3a2a1a',p:'#ff9ac0',m:'#a8452f'};
 
 const IA=()=>({g:followers.find(f=>f.member===grace),r:followers.find(f=>f.member===rose)});
@@ -250,7 +253,7 @@ function drawIntroWorld(time) {
     const p=position(sqA),u=Math.min(1,intro.squishy.t/.35),SQ=intro.squishy.sprite||SQUISHY,SP=intro.squishy.pal||SQUISHY_PAL;
     const fr=OW[sqA===r?'rose':'grace'].down[0],gh=fr.length;
     const cx=Math.round((p.x+.5)*T),top=Math.round((p.y+1)*T-2-gh-6-u*8+Math.sin(time*4)*1.5);
-    drawSprite(SQ,SP,cx-Math.round(SQ[0].length/2),top-SQ.length,1);
+    if(intro.squishy.sprite||typeof PROPART==='undefined'||!PROPART.draw(SQUISHY_HERO,cx,top-12,{h:26})) drawSprite(SQ,SP,cx-Math.round(SQ[0].length/2),top-SQ.length,1);   // painted unless the scene brings its own pixel prop
     if(!intro.squishy.plain) sparkles(cx,top-7,14,time,1);
   }
 }
@@ -286,8 +289,9 @@ function drawIntroScreen(time) {
     // Squish: it gets a little wider and shorter on a slow pulse. A scene may show its own {sprite, pal, lines} (Nine Scoops).
     const SQ=intro.showcase.sprite||SQUISHY,SP=intro.showcase.pal||SQUISHY_PAL,L2=intro.showcase.lines||['SPARKLING DIAMOND GOLD','SOUP DUMPLING SQUISHY'];
     const hw=SQ[0].length/2,hh=SQ.length/2;
-    drawSprite(SQ,SP,cx-Math.round(hw*s),cy-Math.round(hh*s)+bob,s);
+    const hero=!intro.showcase.sprite&&typeof PROPART!=='undefined'&&PROPART.ready(SQUISHY_HERO),HH=hero?hh*s*1.4:hh*s;   // painted version is drawn about 40% larger than the old 18x14 sprite
+    if(!(hero&&PROPART.draw(SQUISHY_HERO,cx,cy+bob,{h:HH*2}))) drawSprite(SQ,SP,cx-Math.round(hw*s),cy-Math.round(hh*s)+bob,s);
     sparkles(cx,cy+bob,13*s,time,Math.max(1,Math.round(s/2)));
-    if(u>=1) L2.forEach((l,i)=>{ label(l,cx+1,cy+Math.round(hh*s)+14+i*15,'#1b2d27',2); label(l,cx,cy+Math.round(hh*s)+13+i*15,'#ffd968',2); });
+    if(u>=1) L2.forEach((l,i)=>{ label(l,cx+1,cy+Math.round(HH)+14+i*15,'#1b2d27',2); label(l,cx,cy+Math.round(HH)+13+i*15,'#ffd968',2); });
   }
 }
