@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 35): Tom's painted portrait (`tomportrait1`)
+
+- Tom (01:14) sent a new oil-painting portrait of himself. `portraits/tom.png` is now that painting, cropped square to match Justin, Amy and Boppy: hair near the top edge, chin about 90% down, shoulders showing (replaces the old cut-out with a transparent background).
+- Every portrait spot (dialogue box, battle UI, character menu) reads the one `PORTRAITS` table in `engine/menu.js`; Tom's `?v=` went to 15 and the menu.js tag to `tomportrait1`.
+- Tested: side by side against the others, `smoke.py`, headless dialogue and menu screenshots. Not played on the phone. Stamp `build tomportrait1`.
+
 ## 2026-11-01 (day, 34): Olivia's painted battle stances (`olivia4`)
 
 - Tom's 4 x 4 battle sheet (fruit dress) is baked and loaded: `tools/sprite-bake/bake_olivia_battle.py` writes `art/chars/olivia-battle.webp`, `olivia-ko.webp` and `data/olivia-battle-hires.js` (OLIVIA_BT). `data/olivia-battle-use.js` (modelled on Justin's) builds `BATTLE_SPRITES.olivia` and `KO_SPRITES.olivia`; script tags sit after the Justin lines in `index.html` (`?v=olivia4`, AV in the bake script matches).
