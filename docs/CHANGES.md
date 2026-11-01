@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 41): Walking sprites and the welcome screen follow the head rule (`heads2`)
+
+- Tom (08:51, 08:53): on the welcome screen the adult heads and bodies were all different sizes, and inside houses Tom was not updated like the other adults. Both use the walking sprites, which `heads1` had left alone.
+- Walking art re-baked so each adult's front face matches Justin's when drawn at real height: `WALK_HEAD_RATIO` in bake_deedee .385, bake_amy .376 (and bake_amy_extra's overworld sheet), bake_boppy .51; bake_tnb `TARGET_OW`/`TARGET_OWL` x .97; bake_tom gets a walk head warp (factor 2.308; his walk head was by far the smallest) for walk and arrival-stretch frames, with hand-set boxes on the four stretch frames that have arms by the head. Battle art byte for byte unchanged.
+- Welcome screen (engine/splash.js): adults at real height with Justin 6'4" = 330 picture px: Tom 308, TNB 304, Boppy 291, Amy and Deedee 282. Grace, Rose and Nara unchanged.
+- bake_tom.py no longer overwrites portraits/tom.png (the painted portrait) unless run with PORTRAIT=1. ART_V `heads2`.
+- Tested: `smoke.py`, `tomhouse_walk_test.py`; welcome screen at 390x844 and Grands and Amy's house screenshots looked at. Not played on the phone. Stamp `build heads2`.
+
 ## 2026-11-01 (day, 41): Party no longer hidden by Penny's and Nickel's counters (`counter1`)
 
 - Tom (08:54): after Penny was fixed to stand behind her counter, the playable characters standing in front of it were being covered by the counter too (heads and bodies cut off at its front edge).

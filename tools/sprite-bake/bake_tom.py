@@ -75,7 +75,8 @@ def _auto_head(img):
     chin = lo + int(np.argmin(ws[lo:hi]))
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, max(0, int(xs.min()) - 6), int(xs.max()) + 6
-HEAD_BOX = {'b_win': (0, 74, 62, 140), 'b_leap': (0, 73, 42, 122), 'b_kneel': (0, 106, 12, 90)}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
+HEAD_BOX = {'b_win': (0, 74, 62, 140), 'b_leap': (0, 73, 42, 122), 'b_kneel': (0, 106, 12, 90),
+            's_full': (55, 185, 122, 232), 's_side': (85, 225, 70, 205), 's_neck': (15, 178, 35, 190), 's_crack': (5, 160, 140, 282)}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
 SIDE = {}
 # Heads that are not on top (lying, face down, cartwheel, all fours, hands over the face): the region (x0, y0, x1, y1) is scaled by k about the
 # neck point (ax, ay), chosen so the head grows away from the floor and the body. Source px, read off rulers.
@@ -122,7 +123,7 @@ print('head factor solved: battle', HEAD_KB, '(head share', round(_r0, 3), '->',
 if os.environ.get('HEADSHEET'):          # contact sheet: each battle/custom source pose with its head box
     from PIL import ImageDraw
     tiles = []
-    for n in [n for n in poses if n[:2] in ('b_', 'c_')]:
+    for n in [n for n in poses if n[:2] in ('b_', 'c_', 'w_', 's_')]:
         im = poses[n] if n not in SIDE else _rot(poses[n], SIDE[n])
         t0, c0, a0, a1 = head_box(im, n + ('#rot' if n in SIDE else ''))
         tl = Image.new('RGBA', im.size, (90, 90, 100, 255)); tl.alpha_composite(im); d = ImageDraw.Draw(tl)
@@ -145,6 +146,20 @@ if os.environ.get('RULER'):               # RULER=name,name DIR=...: source pose
     sys.exit(0)
 for _n in list(poses):
     if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
+# Walk and arrival stretch (2026-11-01): the welcome screen draws the front walk frame at real height (Tom 5'11" = 308 picture px next to
+# Justin 6'4" = 330). Tom's walk face was .168 of his height, Justin's .270; to match Justin's face it must be .270 x 330 / 308 = .289, so x 1.72.
+FACE_GROW_W = 1.72
+_tw, _cw, _, _ = head_box(poses['w_down_stand'], 'w_down_stand'); _rw = (_cw - _tw) / poses['w_down_stand'].height
+def _ratio_w(k): return (_cw - _tw) * k / bigger_head(poses['w_down_stand'], 'w_down_stand', k).height
+_lo, _hi = 1.0, 4.0
+for _ in range(14):
+    _m = (_lo + _hi) / 2
+    if _ratio_w(_m) < _rw * FACE_GROW_W: _lo = _m
+    else: _hi = _m
+HEAD_KW = round((_lo + _hi) / 2, 3)
+print('head factor solved: walk', HEAD_KW)
+for _n in list(poses):
+    if _n[:2] in ('w_', 's_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -335,8 +350,9 @@ hcx = int(np.where(hband)[1].mean()); hs = int(hh * 0.27); hcy = htop + int(hs *
 crop = hero.crop((hcx - hs // 2, hcy - hs // 2, hcx + hs // 2, hcy + hs // 2)).resize((128, 128), Image.LANCZOS)
 ca = np.array(crop.convert('RGBA'))
 ca[(np.minimum(ca[:, :, 0], ca[:, :, 2]).astype(int) - ca[:, :, 1]) >= 120, 3] = 0
-Image.fromarray(ca, 'RGBA').save(os.path.join(ROOT, 'portraits/tom.png'))
-print('wrote portraits/tom.png')
+if os.environ.get('PORTRAIT'):   # the menu portrait is now a separate painting Tom supplied; only overwrite it when asked
+    Image.fromarray(ca, 'RGBA').save(os.path.join(ROOT, 'portraits/tom.png'))
+    print('wrote portraits/tom.png')
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
 bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .27, .68)

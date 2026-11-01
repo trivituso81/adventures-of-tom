@@ -197,7 +197,8 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
 # The figure height after the warp is what the bake later refits to 100 (battle) or 42 (overworld) rows, so the head factor is solved on the
 # idle / down-stand frame (bisection on the real warp) and every other frame gets the factor that gives the same head height in rows.
 # TARGET_BT was 0.445; face (hairline to chin) = Justin's 49 battle px (Tom's call 2026-11-01): 0.445 x 49/47 x 1.3/1.409 (old face px, old/new battle scale)
-TARGET_BT, TARGET_OW, TARGET_OWL = 0.428, 18.2 / 42, 17.5 / 42
+# TARGET_OW / TARGET_OWL x .97 (2026-11-01): walk face = Justin's when drawn at real height on the welcome screen
+TARGET_BT, TARGET_OW, TARGET_OWL = 0.428, 18.2 / 42 * .97, 17.5 / 42 * .97
 def head_cc(img, name):
     if name == 'b_ko': return 0, 105
     return tuple((HEAD_BOX.get(name) or _auto_head(img))[:2])

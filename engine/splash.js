@@ -525,17 +525,17 @@ function splashScene(W,H,panelH,time) {
 const SPLASH_IMG={w:941,h:1671};
 const SPLASH_ALL=1.1;   // Tom 2026-10-29: everyone on the welcome art 10% bigger (feet stay planted)
 // Tom 2026-11-01: the title uses the new painted standing Tom. Set TITLE_TOM_RIDE=true to bring back the old painted Tom carrying Rose (needs a new ride sheet to match).
-const TITLE_TOM_RIDE=false,TITLE_TOM_H=290;   // TITLE_TOM_H: standing Tom's height in picture pixels (Amy 278, Justin 330)
+const TITLE_TOM_RIDE=false,TITLE_TOM_H=308;   // TITLE_TOM_H: standing Tom's height in picture pixels. Tom 2026-11-01: adults at real height, Justin 6'4" = 330 (Tom 5'11" 308, TNB 5'10" 304, Boppy 5'7" 291, Amy and Deedee 5'5" 282); kids unchanged
 const SPLASH_SPOTS=[
   {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
-  {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'5", tallest) stands just behind Amy and Deedee, listed early so they draw over him
+  {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'4", tallest) stands just behind Amy and Deedee, listed early so they draw over him
   {id:'grace',x:425,feet:1175,h:225},   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
   {id:'tom',x:287,feet:1222,h:335},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose
   {id:'rose',x:372,feet:1244,h:196,solo:true},   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
-  {id:'tnb',x:170,feet:1198,h:250},
-  {id:'boppy',x:768,feet:1222,h:255},
-  {id:'amy',x:566,feet:1222,h:278},
-  {id:'deedee',x:672,feet:1258,h:278}
+  {id:'tnb',x:170,feet:1198,h:304},
+  {id:'boppy',x:768,feet:1222,h:291},
+  {id:'amy',x:566,feet:1222,h:282},
+  {id:'deedee',x:672,feet:1258,h:282}
 ];
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
