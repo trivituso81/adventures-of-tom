@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 45): Painted gold dumpling squishy (`squishy1`)
+
+- Tom (15:33): the sparkling diamond gold dumpling squishy in the chapter 1 intro still used an old pixel graphic. He generated a new painted one from the prompt I wrote (claude/squishy-intro-prompt.txt) and sent it.
+- New `art/props/grace/gold_dumpling_hero.webp` (360 x 322, transparent, cut from his 1254 px image). `engine/intro.js`: the squishy over Grace's head and the full-screen close-up now draw it (`SQUISHY_HERO`, about 40% larger than the old 18 x 14 sprite in the close-up, label moved down to match). Scenes that pass their own sprite (Nine Scoops cow and dice) are unchanged; the pixel SQUISHY stays as the fallback until the image loads.
+- Same art now used by Squishy Squeeze (`engine/grace-moves.js`) and the chapter 19 dumpling (`engine/battle2-kind.js` `dumpling`), replacing the older painted prop `gold_dumpling_squishy`. Not changed: the pale ghost and shadow versions of the dumpling in chapter 19 still use the pixel shape.
+- Tested: played the real opening and looked at the over-the-head frame and the close-up; `IDS=grace,rose smoke.py` FAILS: []; `kit_test.py grace` FAILS: [] with `grace/gold_dumpling_hero` hits in Squishy Squeeze and Dumpling Drop; looked at the Squishy Squeeze frame. Not seen on the phone. Tags `prop-art.js`, `grace-moves.js`, `battle2-kind.js`, `intro.js` `?v=squishy1`; stamp `build squishy1`.
+
 ## 2026-11-01 (day, 43): Deedee and Boppy's house, clear paths and the 3D treatment (`grands3d`)
 
 - Tom (14:58): make Deedee and Boppy's house more navigable (no clear paths in, out and around the furniture, nooks and crannies) and use cutouts for a 3D effect.
