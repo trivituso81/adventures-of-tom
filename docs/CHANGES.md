@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Michael and the kids under the size rules (`docs2`)
+
+- Tom (13:49): apply the head and body rules to Michael (6'4") and the kids he holds: Lachlan's head Grace's size, Isla's head Rose's size.
+- Michael is still the old traced pixel-art sprite (MICHAEL_OW, data/npc-sprites.js, thick outlines), the only character not yet painted; his painted walk sheet was prompted but has not come back. Resizing heads on the pixel sprite would not make him match, so the rules go into his prompt and the pipeline instead.
+- claude/michael-walk-sheet-prompt.txt v2 (Project): 6'4" (was 6'5"), a HEAD SIZES block (Lachlan's head about 80% of Michael's, Isla's about 75%, the Grace and Rose ratios on the walk frames), same sizes in every frame.
+- docs/CHARACTER_PIPELINE.md section 7: "Carried children" rules and Michael's row. No game files changed.
+
 ## 2026-11-01 (day, 43): Olivia kit audit, every move escalates (`olivkit1`)
 
 - Tom (13:30): audit Olivia's abilities for visual splendor, duration and funniness; all three should rise with each move.

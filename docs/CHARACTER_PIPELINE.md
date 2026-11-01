@@ -221,6 +221,10 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 | Head share | Top of head to chin divided by total height = **0.43 in battle, 0.373 walking** (the Tom and TNB average), same as Grace and Rose. Grow the head only with `kidhead.factor(target, current_share)` and `grow_head`; the body keeps its size and the figure grows by the head. |
 | Height | Real height required. Kids are drawn larger than the adult scale on purpose so they read well (Tom approved Grace and Rose as they are). Place a new child between Rose and Grace by real height in battle px and walk rows; outside that range, ask Tom. |
 
+### Carried children (Michael with Lachlan and Isla; Tom, 2026-11-01)
+
+Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in every frame. Rules: Michael's face matches the other adults (head row); Michael's whole figure follows his real height (walk 53 to 54 rows like Justin, top of cap to feet); **Lachlan's head is Grace's head size and Isla's head is Rose's head size**, measured top of hair to chin at the same scale on the head row (in walk frames about 80% and 75% of Michael's head). The prompt asks for those sizes (claude/michael-walk-sheet-prompt.txt, v2); when the sheet returns, check all three heads on a head row and fix any of them with `kidhead.grow_head` on that head's own box (head boxes hand-set, as in bake_jojo.py). Michael is never drawn in battle (Olivia's MICHAEL! move keeps him off screen). Until his painted sheet arrives the game shows his old traced pixel sprite (`MICHAEL_OW` in data/npc-sprites.js); do not resize that one.
+
 ### Current reference values (after `olivia8` and `jojoart1`)
 
 | Character | Real height | Battle px (top to feet) | Walk rows | Welcome px (top to feet) |
@@ -233,6 +237,7 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 | Deedee | 5'5" | 131 | 43 | 278 |
 | Olivia | 5'5" assumed (not given yet) | 130 | 45 | not on it |
 | Jojo | 5'6" | 133 | 42 | not on it |
+| Michael (carrying Lachlan and Isla) | 6'4" | never in battle | 50 (old pixel sprite; 53 to 54 when painted) | not on it |
 | Grace | 4'2" | 126 | 39 | 230 |
 | Rose | 3'4" | 126 | 37 | 205 |
 
