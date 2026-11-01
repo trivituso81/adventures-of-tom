@@ -2,9 +2,10 @@
 """Apply hand-written ElevenLabs v4 scripts to the Voice Library sources (Claude runs this; Tom never does).
 
 Input: a JSON list of {t: 'd'|'b', voice, text, script}. Dialogue ('d') entries replace the matching line in
-tools/voice-library/scripts/directions-<tag>.json (matched by voice + text); battle ('b') entries replace the
-'voice|text' entry in tools/voice-library/battle-overrides.json. An entry whose line is not in either file is reported
-and skipped (hand-written chapter scripts and battle-scripts.json are never touched: a baked clip keeps its script).
+tools/voice-library/scripts/directions-<tag>.json (matched by voice + text); a dialogue line not in that file goes into
+tools/voice-library/scripts/zz-v4-overrides.json, which sorts last so it wins over any older hand-written script file.
+Battle ('b') entries replace or add the 'voice|text' entry in tools/voice-library/battle-overrides.json, which wins over
+battle-scripts.json. The older files are never touched, so the script a baked clip was made with stays on record.
 
 Every script is checked against claude/voice-rules.md and the v4 tag rules (2026-11-01): spoken words equal the line
 text (Tah Tah, spelled-out numbers, stretched vowels and added ellipses allowed), no em dashes, tag count by length
@@ -12,7 +13,7 @@ text (Tah Tah, spelled-out numbers, stretched vowels and added ellipses allowed)
 Usage (repo root): python3 tools/voice-library/apply-scripts.py <scripts.json> [tag]   (add --check to validate only, writing nothing)
 Then: python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js
 """
-import json, re, sys, glob
+import json, os, re, sys, glob
 TAG = re.compile(r'\[([^\]]*)\]')
 BAD = {'standing','grinning','pacing','pointing','shrugging','hands','hand','arms','arm','finger','fingers','hips','foot',
        'mouth','eyes','eye','head','shoulders','leaning','sitting','slumping','bouncing','hopping','leaping','clutching',
@@ -52,20 +53,25 @@ def main():
     tag = args[1] if len(args) > 1 else sorted(glob.glob('tools/voice-library/scripts/directions-*.json'))[-1][-13:-5]
     dpath = 'tools/voice-library/scripts/directions-%s.json' % tag
     d = json.load(open(dpath)); bo = json.load(open('tools/voice-library/battle-overrides.json'))
+    zpath = 'tools/voice-library/scripts/zz-v4-overrides.json'
+    zz = json.load(open(zpath))['lines'] if os.path.exists(zpath) else []
     bad = 0
     for it in items:
         e = check(it['text'], it['script'])
         if e: bad += 1; print('REJECT', it['voice'], '|', it['text'][:50], '|', '; '.join(e)); continue
         if it['t'] == 'b':
             k = it['voice'] + '|' + it['text']
-            if k not in bo: print('SKIP (not an override)', k[:70]); continue
             bo[k] = it['script']
         else:
             hit = [l for l in d['lines'] if l['voice'] == it['voice'] and l['text'] == it['text']]
-            if not hit: print('SKIP (not in directions)', it['voice'], '|', it['text'][:60]); continue
+            if not hit: zz.append({'voice': it['voice'], 'speaker': it.get('speaker', ''), 'text': it['text'], 'ctx': 'v4 override', 'script': it['script']}); continue
             for l in hit: l['script'] = it['script']
     if bad: print('%d rejected; nothing written' % bad); sys.exit(1)
     json.dump(d, open(dpath, 'w'), ensure_ascii=False, indent=0)
     json.dump(bo, open('tools/voice-library/battle-overrides.json', 'w'), ensure_ascii=False, indent=0)
-    print('applied', len(items) - bad, 'scripts')
+    if zz:
+        seen = {}
+        for l in zz: seen[(l['voice'], l['text'])] = l
+        json.dump({'tag': 'v4', 'lines': list(seen.values())}, open(zpath, 'w'), ensure_ascii=False, indent=0)
+    print('applied', len(items) - bad, 'scripts;', len(zz), 'dialogue overrides in zz-v4-overrides.json')
 if __name__ == '__main__': main()

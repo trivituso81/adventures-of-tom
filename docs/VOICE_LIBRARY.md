@@ -36,6 +36,21 @@ The key card has "Load the directions used for the baked clips". It reads the ac
 
 Every dialogue line now has a written direction in `tools/voice-library/scripts/directions-20261101.json` (and every battle line whose stock tag did not fit its move has one in `tools/voice-library/battle-overrides.json`). They were written scene by scene with the neighbouring lines as context, not generated from punctuation. To rewrite or add some: build packets (id, voice, speaker, text, scene, previous and next lines) from `data/voice-index.json`, write `{id: script}`, check the spoken words still equal the line text, then run `python3 tools/voice-library/merge-directions.py <workdir> <tag>` followed by the rebuild command above. New lines with no script get a fallback (speaker base plus punctuation and caps cues) and show as "plain direction" until written. The original hand-written chapter scripts (`claude/dialogue-scripts-ch1..10.json` and others in the Project) cannot be copied to disk through the Project tool; ElevenLabs history ("Load the directions used for the baked clips") still shows what the baked clips were actually made from and wins over these on Tom's phone.
 
+## v4 tag rules and how to change a script (2026-11-01, `vtag2`)
+
+Every script in the Library now follows ElevenLabs' "Prompting Eleven v4" guidance as Tom set it: a tag describes the voice only (emotion, delivery, voice quality: [low, gravelly], [flat, patient], [shrill, urgent]); never a gesture, expression, posture, action, prop, place, role or accent word; no sound nouns ([yelp], [beat], [pause], [chime]) and no [sighs] or [laughs]; 1 tag for lines of 4 words or fewer, 2 up to about 14 words, 3 at most beyond; 1 or 2 descriptors of 1 or 2 words per tag; ellipses and CAPS for pacing; the spoken words equal the line text (Tah Tah, spelled-out numbers, stretched vowels and an added ellipsis are the only differences); no em dashes. Deadpan stays deadpan; a monster's rematch lines are more worked up than its first-meeting lines.
+
+Where scripts live, in the order the index applies them (later wins):
+
+| Layer | File | Notes |
+|---|---|---|
+| Battle, baked record | `tools/voice-library/battle-scripts.json` | The scripts the baked clips were made with. Never edited. |
+| Battle, current | `tools/voice-library/battle-overrides.json` | `"voice\|text": script`. Wins over the record. |
+| Dialogue, baked record | `tools/voice-library/scripts/justin-dialogue.json` and the Project chapter scripts | Never edited. |
+| Dialogue, current | `tools/voice-library/scripts/directions-20261101.json`, then `scripts/zz-v4-overrides.json` | Files load in name order and the last wins, so `zz-` beats the record. |
+
+To change scripts: write a JSON list of `{t: 'b' or 'd', voice, text, script}` and run `python3 -I tools/voice-library/apply-scripts.py <list.json>` (add `--check` to validate without writing). It rejects any script that breaks the rules (words differ, too many tags, too many descriptors, body, prop or sound words, em dash), then writes into the current-layer files above. Follow with `python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js`. Baked audio never changes: a line only sounds new after Tom records a new take.
+
 ## Limits
 
 - Phone takes are raw ElevenLabs output: no silence trim, no merge effects (Boppy deepening, Grace shrink, monster and walk-on filters). The card says so for voices that get one; Claude applies them when merging an export.

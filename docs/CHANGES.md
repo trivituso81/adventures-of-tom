@@ -1,3 +1,10 @@
+## 2026-11-01 (evening, 49): Every Voice Library script rewritten to the v4 tag rules (`vtag2`)
+
+- Tom (17:25): approved the 10 samples, "now do every single line".
+- Done: all 4,060 current-layer scripts rewritten (3,835 dialogue directions in `scripts/directions-20261101.json`, 225 battle overrides) with the scene (previous and next lines, the speaker, the move) in hand, every one passed through `apply-scripts.py` (0 rejected): voice-only tags, 1 or 2 descriptors each, tag count by line length, no body, prop, sound or accent words, spoken words equal the line text. 27 lines purged in `purge1` were skipped. Sound-like descriptors (chuckling, sobbing, gasping, groaning, panting) swapped for tone words so v4 does not add the sound.
+- Still old style: 263 lines whose script is the baked record itself (236 battle hand scripts in `battle-scripts.json`, 27 Justin dialogue in `justin-dialogue.json`). Those files are never edited; their new scripts go into a layer that wins in the Library (`battle-overrides.json`, new `scripts/zz-v4-overrides.json`) in the next push.
+- Docs: `docs/VOICE_LIBRARY.md` has the rules, the layer table and the apply-scripts procedure.
+- Tested: `tools/clip-audit/unused_voice.py` 0 on all four; `tools/voice-library/test.py` ALL PASS; `smoke.py` FAILS: []. Baked audio unchanged; a line sounds new only after Tom records a new take. Not heard on the phone.
 ## 2026-11-01 (evening, 50): Main characters 25% smaller inside houses, 10% bigger on the streets (`size2`)
 
 - Tom (17:19): the size of main characters inside houses must be reduced by 25%; in the overworld increase by 10%.
