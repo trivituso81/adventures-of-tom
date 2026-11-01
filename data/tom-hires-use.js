@@ -8,11 +8,11 @@ let TOM_STRETCH=null;
   // Outfit recolour for the navy graphic tee (Nov 2026 art): navy pixels only, so hair, skin, jeans, shoes and the print stay as painted.
   const NAVY=(r,g,b)=>{ if(Math.max(r,g,b)>170||b<r+14||b<g) return 0; return Math.min(1.12,.32+((r*.3+g*.59+b*.11)/255)*3.0); };
   const AT=TOM_HIRES.atlas,mirror=rows=>{ const m=rows.map(r=>r.split('').reverse().join('')); if(rows._paint) m._paint={a:rows._paint.a,f:rows._paint.f,flip:!rows._paint.flip}; return m; };
-  paintedAtlas('tomBattle',AT.bt.src+'?v=tom5',AT.bt.rects,AT.bt.k,NAVY);
-  paintedAtlas('tomPose',AT.pose.src+'?v=tom5',AT.pose.rects,AT.pose.k).tintFrac=[.47,.77];
-  paintedAtlas('tomStretch',AT.stretch.src+'?v=tom5',AT.stretch.rects,AT.stretch.k);
-  paintedAtlas('tomKo',AT.ko.src+'?v=tom5',AT.ko.rects,AT.ko.k,NAVY);
-  paintedAtlas('tomOw',AT.ow.src+'?v=tom5',AT.ow.rects,AT.ow.k,NAVY);
+  paintedAtlas('tomBattle',AT.bt.src+'?v=tom6',AT.bt.rects,AT.bt.k,NAVY);
+  paintedAtlas('tomPose',AT.pose.src+'?v=tom6',AT.pose.rects,AT.pose.k).tintFrac=[.47,.77];
+  paintedAtlas('tomStretch',AT.stretch.src+'?v=tom6',AT.stretch.rects,AT.stretch.k);
+  paintedAtlas('tomKo',AT.ko.src+'?v=tom6',AT.ko.rects,AT.ko.k,NAVY);
+  paintedAtlas('tomOw',AT.ow.src+'?v=tom6',AT.ow.rects,AT.ow.k,NAVY);
   const tag=(rows,a,f,flip)=>paintRows(rows,a,f,flip);
   // Overworld: same shape as the old TOM_OW (pal, down/up/side with [stand, step, step]); recruit-sprites.js preps it at scale 1.
   // The sheet draws Tom facing LEFT; the game's 'side' set faces RIGHT (its 'left' is the mirror), so side = flipped left frames.
@@ -25,7 +25,7 @@ let TOM_STRETCH=null;
   const B=TOM_HIRES.bt,M=TOM_HIRES.meta.bt,P=(k,n)=>tag(B[k].slice(),'tomBattle',n||k,false);
   const sp={idle:P('idle'),act:P('act','act'),celeb:P('celeb','celeb'),pal:B.pal,scale:1,eye:{col:M.eye[0],row:M.eye[1]},
     windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true};
-  for(const k of ['hold','annoyed','tw_windup','tw_follow','lift','fling','unbox','flick','brush','limit','startled','direct','carry','raise','lidpop','splash','goo','proud','bowlsit','spook','scream','bowlthrow','cower','frozen']) sp[k]=tag(TOM_HIRES.pose[k].slice(),'tomPose',k,false);   // custom poses: f:'hold' etc. in a move's keys
+  for(const k of ['hold','annoyed','tw_windup','tw_follow','lift','fling','unbox','flick','brush','limit','startled','direct','carry','raise','lidpop','splash','goo','proud','bowlsit','spook','scream','bowlthrow','cower','frozen','finger','headphones','mask','shade','floorsit','lying','cartwheel','facedown','rope','stirrup','strain','toast','plates']) sp[k]=tag(TOM_HIRES.pose[k].slice(),'tomPose',k,false);   // custom poses: f:'hold' etc. in a move's keys
   sp.expr=sp.act; sp.run=[P('run1'),P('run2')];
   sp.kneel=P('kneel');   // painted kneel (already has the black eye), so battle-draw skips its bruise overlay for hires sprites
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);

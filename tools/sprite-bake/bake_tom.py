@@ -39,15 +39,23 @@ NEW_TO_OLD = {'idleA': 'idle', 'wind': 'windup', 'swing': 'strike', 'walkA': 'ru
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v3.png'), [NB[0:4], NB[4:8], NB[8:12], NB[12:16]]).items():
     if nm in NEW_TO_OLD:
         poses['b_' + NEW_TO_OLD[nm]] = im
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v1.png'),
-        [['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling'], ['unbox', 'flick', 'brush', 'limit', 'startled', 'direct']]).items():
-    poses['c_' + nm] = im
+# Extra poses and the arrival stretch: nine 5-frame sheets (Nov 2026, painted, same character as the battle sheet), tom-xposes-N-v1.png.
+# Prefix c = custom battle pose (f:'<name>' in a move's keys), s = arrival stretch frame.
 STRETCH = ['tired', 'start', 'full', 'side', 'crack', 'neck', 'exhale', 'fresh']
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-stretch-v1.png'), [STRETCH[:4], STRETCH[4:]]).items():
-    poses['s_' + nm] = im
-CUSTOM2 = ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v2.png'), [CUSTOM2[:6], CUSTOM2[6:]], dilate=1).items():
-    poses['c_' + nm] = im
+XSHEETS = [
+    ['c:hold', 'c:annoyed', 'c:tw_windup', 'c:tw_follow', 'c:limit'],
+    ['c:carry', 'c:raise', 'c:lidpop', 'c:splash', 'c:goo'],
+    ['c:proud', 'c:fling', 'c:lift', 'c:finger', 'c:unbox'],
+    ['c:flick', 'c:brush', 'c:headphones', 'c:mask', 'c:shade'],
+    ['c:bowlsit', 'c:spook', 'c:scream', 'c:cower', 'c:frozen'],
+    ['c:bowlthrow', 'c:startled', 'c:direct', 'c:floorsit', 'c:lying'],
+    ['c:cartwheel', 'c:facedown', 'c:rope', 'c:stirrup', 'c:strain'],
+    ['c:toast', 'c:plates', 's:tired', 's:start', 's:full'],
+    ['s:side', 's:crack', 's:neck', 's:exhale', 's:fresh'],
+]
+for i, names in enumerate(XSHEETS, 1):
+    for nm, im in slice_sheet(os.path.join(SRC, f'tom-xposes-{i}-v1.png'), [[n.split(':')[1] for n in names]]).items():
+        poses[next(n for n in names if n.split(':')[1] == nm).replace(':', '_')] = im
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'step2')]
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3], walk_names[3:6], walk_names[6:9]]).items():
     poses['w_' + nm] = im
@@ -193,15 +201,15 @@ battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'cele
                 'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
 CUSTOM = ['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling', 'unbox', 'flick', 'brush', 'limit', 'startled', 'direct']
 CUSTOM += ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
+CUSTOM += ['finger', 'headphones', 'mask', 'shade', 'floorsit', 'lying', 'cartwheel', 'facedown', 'rope', 'stirrup', 'strain', 'toast', 'plates']
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
-# custom poses: their own canvas (some are taller than the idle), feet on the bottom row and head on the centre column
-# (these extra poses are still the older sheets, drawn at the old sheet's scale: keep their old size factor)
-OLD_IDLE_H = slice_sheet(os.path.join(SRC, 'tom-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']])['idle'].height
-fb_old = args.battle_h * KB / OLD_IDLE_H
-cu_big = tighten(place({c: scaled_to(poses['c_' + c], fb_old) for c in CUSTOM}, KB, 'head'), KB)
+# custom poses: their own canvas (some are taller than the idle), feet on the bottom row and head on the centre column.
+# The extra sheets draw an upright figure about 632 px tall; the battle sheet's upright 'hip' frame is 292 px, so scale by 292/632
+# (a touch more, 0.476 instead of 0.462, so the heads do not end up smaller than the battle sheet's).
+XS = 0.476
+cu_big = tighten(place({c: scaled_to(poses['c_' + c], fb * XS) for c in CUSTOM} if False else {c: scaled_to(poses['c_' + c], fb * XS) for c in CUSTOM}, KB, 'head'), KB)
 bt_pal, all_rows = rows_of({**bt_big, **cu_big}, KB, args.colors)      # one shared palette
 bt_rows = {k: all_rows[k] for k in bt_big}
 cu_rows = {k: all_rows[k] for k in cu_big}
