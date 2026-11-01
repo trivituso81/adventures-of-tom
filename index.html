@@ -1089,6 +1089,17 @@ button,input,select{font-family:inherit}
 #action{background:radial-gradient(circle at 50% 35%,#2a62ad,#143a6e)}
 #action.pressed{background:radial-gradient(circle at 50% 35%,#1f5393,#0f2d58)}
 
+/* Menu button sits in the top bar left of Save, same size and look; A sits at the center of the D-pad */
+#hud-btns{display:flex;align-items:flex-start;gap:8px;flex:none;pointer-events:none}
+#hud #menu-button{pointer-events:auto;display:grid;place-items:center;flex:none;width:38px;height:38px;margin-top:9px;padding:0;border:2px solid var(--edge);border-radius:8px;background:var(--win);color:var(--ink);font-size:18px;line-height:1;box-shadow:var(--bevel),0 3px 0 #0006}
+#hud #menu-button.pressed{transform:translateY(2px);box-shadow:var(--bevel),0 1px 0 #0006}
+html.landscape #hud #menu-button{width:34px;height:34px;margin-top:3px}
+#action-wrap{left:auto;right:calc(69px + env(safe-area-inset-right));bottom:calc(76px + env(safe-area-inset-bottom));width:46px}
+#action{width:46px;height:46px;font-size:20px;border-width:2px}
+#action-label{display:none}
+html.landscape #action-wrap{left:auto;right:calc(56px + env(safe-area-inset-right));bottom:calc(61px + env(safe-area-inset-bottom));width:38px}
+html.landscape #action{width:38px;height:38px;font-size:17px}
+
 /* Shop buttons */
 .shop-btn{border-color:var(--sel-edge)}
 .shop-btn.ghost,.shop-btn.wear{background:#f2e6cc;border-color:#fff6e0;color:#1b212e}
@@ -1108,7 +1119,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
   <header id="hud">
     <div class="brand"><div class="brand-mark" aria-hidden="true">&#9670;</div><div class="brand-copy"><span id="eyebrow" hidden></span><span id="area-name" hidden></span><div class="eyebrow" id="qt-eyebrow">CHAPTER</div><div class="qt-text" id="qt-text">Look around. The story will find you.</div><div class="qt-pips" id="qt-pips"></div><div id="objective" hidden></div></div><span class="brand-chev" aria-hidden="true">&#9662;</span></div>
     <div class="progress" aria-label="Buildings visited"><div id="visitCount">0 / 10</div><div class="progress-label">DOORS</div></div>
-    <button id="save-hud" class="rotate-btn" type="button" aria-label="Save game">&#128190;</button>
+    <div id="hud-btns"><button id="menu-button" type="button" aria-label="Open character menu">&#9776;</button><button id="save-hud" class="rotate-btn" type="button" aria-label="Save game">&#128190;</button></div>
   </header>
   <div id="minimap-wrap" aria-hidden="true"><canvas id="minimap" width="48" height="68"></canvas><div class="mini-label">YOU ARE HERE</div></div>
   <div id="toast" role="status"></div>
@@ -1123,7 +1134,6 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
       <span class="pad-caption">HOLD + SLIDE</span>
     </div>
     <div id="action-wrap"><button id="action" type="button" aria-label="Interact or advance dialogue">A</button><div id="action-label">INTERACT</div></div>
-    <div id="menu-wrap"><button id="menu-button" type="button" aria-label="Open character menu">&#9776;</button><div id="menu-label">MENU</div></div>
     <div id="desktop-help">ARROWS / WASD TO WANDER &nbsp; &middot; &nbsp; ENTER TO CHAT &nbsp; &middot; &nbsp; M FOR MENU</div>
   </div>
   <section id="dialog" role="dialog" aria-labelledby="speaker" hidden>
