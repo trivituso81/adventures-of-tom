@@ -221,7 +221,7 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 | Head share | Top of head to chin divided by total height = **0.43 in battle, 0.373 walking** (the Tom and TNB average), same as Grace and Rose. Grow the head only with `kidhead.factor(target, current_share)` and `grow_head`; the body keeps its size and the figure grows by the head. |
 | Height | Real height required. Kids are drawn larger than the adult scale on purpose so they read well (Tom approved Grace and Rose as they are). Place a new child between Rose and Grace by real height in battle px and walk rows; outside that range, ask Tom. |
 
-### Current reference values (after `olivia8`)
+### Current reference values (after `olivia8` and `jojoart1`)
 
 | Character | Real height | Battle px (top to feet) | Walk rows | Welcome px (top to feet) |
 |---|---|---|---|---|
@@ -232,10 +232,10 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 | Amy | 5'5" | 131 | 43 | 282 |
 | Deedee | 5'5" | 131 | 43 | 278 |
 | Olivia | 5'5" assumed (not given yet) | 130 | 45 | not on it |
-| Jojo | 5'6" | not yet (new art in progress; apply this section when it lands) | | |
+| Jojo | 5'6" | 133 | 42 | not on it |
 | Grace | 4'2" | 126 | 39 | 230 |
 | Rose | 3'4" | 126 | 37 | 205 |
 
 ### Where the knobs live
 
-`BATTLE_SIZE` (data/battle-size.js; `BATTLE_SIZE.olivia` in data/olivia-battle-use.js); `SPLASH_SPOTS`, `TITLE_TOM_H`, `SPLASH_ALL`, `SPLASH_BACK` (engine/splash.js); `BATTLE_HEAD_RATIO`, `WALK_HEAD_RATIO` (bake_amy, bake_deedee, bake_boppy, bake_amy_extra); `TARGET_BT`, `TARGET_OW`, `TARGET_OWL`, `BODY_W`, `BODY_FADE`, `BODY_KX` (bake_tnb); `FACE_GROW`, `FACE_GROW_W`, `BODY_W`, `HEAD_BOX`, `REGION` (bake_tom); `BODY_W` (bake_boppy); `PEP_GROW` (bake_boppy_extra); `--ratio`, `--ratio-side` (bake_justin, walk); `HEAD_K`, `CHIN_SHARE` (bake_olivia_battle); `WALK_HEAD_K`, `WALK_CHIN` (bake_olivia); `S_BT`, `S_OW` (bake_grace, bake_rose); hand and eye bands `HR` (amy, deedee, boppy -hires-battle.js). The full history of each change is in docs/CHANGES.md (`heads1` to `heads6`, `body1`, `width1` to `width3`, `kids1`, `faces7`, `olivia8`).
+`BATTLE_SIZE` (data/battle-size.js; `BATTLE_SIZE.olivia` in data/olivia-battle-use.js); `SPLASH_SPOTS`, `TITLE_TOM_H`, `SPLASH_ALL`, `SPLASH_BACK` (engine/splash.js); `BATTLE_HEAD_RATIO`, `WALK_HEAD_RATIO` (bake_amy, bake_deedee, bake_boppy, bake_amy_extra); `TARGET_BT`, `TARGET_OW`, `TARGET_OWL`, `BODY_W`, `BODY_FADE`, `BODY_KX` (bake_tnb); `FACE_GROW`, `FACE_GROW_W`, `BODY_W`, `HEAD_BOX`, `REGION` (bake_tom); `BODY_W` (bake_boppy); `PEP_GROW` (bake_boppy_extra); `--ratio`, `--ratio-side` (bake_justin, walk); `HEAD_K`, `CHIN_SHARE` (bake_olivia_battle); `WALK_HEAD_K`, `WALK_CHIN` (bake_olivia); `S_BT`, `S_OW` (bake_grace, bake_rose); `--bt-h`, `--ow-h`, `--ratio`, `--ratio-side`, `--ratio-bt`, `HEAD_BOX`, `CHIN_FIX` (bake_jojo); hand and eye bands `HR` (amy, deedee, boppy -hires-battle.js). The full history of each change is in docs/CHANGES.md (`heads1` to `heads6`, `body1`, `width1` to `width3`, `kids1`, `faces7`, `olivia8`).
