@@ -52,11 +52,11 @@ function startSplash() {
 
 // Panel menus. Each choice carries its own action (act) or a locked reason (why).
 //   launch: START NEW / LOAD, plus a small ADMIN button.
-//   new:    PART 1 / PART 2 / BONUS / BACK.   part1: chapters 1 to 10.   part2: chapters 11 to 20.   bonus: Nine Scoops.
+//   new:    chapters 1 to 20, BONUS (Nine Scoops), BACK, all in one list.
 //   admin:  DEMO / BATTLE LAB / BACK.          lab: the Battle Lab fights.
 // Chapter 1 is a true new game; later chapters fast-forward the story (engine/chapter-select.js). Part 2 chapter 11
 // continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none.
-const SPLASH_PARENT={new:'launch',admin:'launch',part1:'new',part2:'new',bonus:'new',lab:'admin'};
+const SPLASH_PARENT={new:'launch',admin:'launch',lab:'admin'};
 // RELOAD (welcome page, left of ADMIN): a hard reload for the iPhone home-screen app, which has no refresh button and can
 // hold on to old files. It re-downloads the page and every script (skipping the big baked voice files, which rarely change),
 // then reloads on a fresh address. Saves live in localStorage for this site, so they are kept.
@@ -123,19 +123,13 @@ const SPLASH_MODES={
       {name:'LOAD',act:()=>splashGo(loadMenu)},
       {name:SPLASH_RELOAD_ICON+'RELOAD',cls:'admin reload',act:splashReload},
       {name:'ADMIN',cls:'admin',to:'admin'}]; }},
-  new:{tab:'Start New',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
-    FULL_GAME_OPEN?{name:'PART 1',sub:'Chapters 1 to 10. Start here.',to:'part1'}
-      :{name:'PART 1',sub:'Coming soon. Still being built.',cls:'locked',why:'Part 1 is still being built.'},
-    {name:'PART 2',sub:'Chapters 11 to 20.',to:'part2'},
-    {name:'BONUS',sub:'Nine Scoops: Grace’s 9th birthday. Tom, Grace and Rose.',to:'bonus'},
-    {name:'BACK',sub:'',cls:'back',act:splashBack}]},
-  part1:{tab:'Part 1: pick a chapter',cue:'A / Enter to start. B / Esc to go back',choices:()=>splashChapterChoices(PARTS[1].from,PARTS[1].to)},
-  part2:{tab:'Part 2: pick a chapter',cue:'A / Enter to start. B / Esc to go back',choices:()=>splashChapterChoices(PARTS[2].from,PARTS[2].to)},
-  // Bonus chapters (data/bonus-nine-scoops.js): standalone, no Part 1 or Part 2 save needed.
-  bonus:{tab:'Bonus Chapter',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
-    {name:'NINE SCOOPS',sub:'Grace’s 9th birthday on Long Island. Tom, Grace and Rose. About 80 minutes.',
-      act:()=>splashDifficulty(()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew))},
-    {name:'BACK',sub:'',cls:'back',act:splashBack}]},
+  // NEW GAME goes straight to one list: chapters 1 to 20, then the bonus chapter (no Part picker in between).
+  // The bonus (data/bonus-nine-scoops.js) is standalone, no Part 1 or Part 2 save needed.
+  new:{tab:'Pick a chapter',cue:'A / Enter to start. B / Esc to go back',choices:()=>{
+    const list=splashChapterChoices(PARTS[1].from,PARTS[2].to),back=list.pop();
+    list.push({name:'BONUS',title:'Nine Scoops',cast:['tom','grace','rose'],sub:'Grace’s 9th birthday.',
+      act:()=>splashDifficulty(()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew))},back);
+    return list; }},
   // Shown after a new game is picked and before its warning or opening: Rose is Easy, Grace is Medium, Tom is Hard.
   diff:{tab:'Choose your difficulty',cue:'A / Enter to pick. B / Esc to go back',
     text:'How tough should the monsters be? You can change this any time in Options.',

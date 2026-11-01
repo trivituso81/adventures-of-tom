@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 38): NEW GAME opens one chapter list (`newlist1`)
+
+- Tom (01:37) asked to drop the Start New step (PART 1 / PART 2 / BONUS). NEW GAME now goes straight to "Pick a chapter": CH 1 to CH 20, then BONUS (Nine Scoops), then BACK, in the same two-column scrolling list. BACK returns to the welcome panel with NEW GAME selected. The difficulty picker, chapter 11 clear-data rule and bonus start are unchanged; the difficulty screen's BACK returns to this list.
+- Removed the `part1`, `part2` and `bonus` modes from `SPLASH_MODES` in `engine/splash.js` (nothing else used them). The Part labels are gone from the screen only; `PARTS` data is untouched.
+- Tested: clicked NEW GAME in portrait and rotated landscape, 22 entries, looked at top and bottom of the list, BACK path, `smoke.py`. Not played on the phone. Tom's earlier "no change on live site" report for `welcome1` is still open: check the stamp after RELOAD. Stamp `build newlist1`.
+
 ## 2026-11-01 (day, 37): Shorter "Choose how to play" panel (`welcome1`)
 
 - Tom (01:27) asked to shrink the welcome panel. Removed the footer line ("Tap one, or use the arrows and A / Enter") and the two subtitle lines under NEW GAME and LOAD, so each button is one line. Launch buttons use less padding (9 px instead of 12). The panel is now 112 px tall in portrait. The footer still appears for the RELOAD message and on the other screens.
