@@ -609,6 +609,7 @@ function menuBack(fromCmd) {
   if(fromCmd) { menuItem=null; menuSlot=null; menuConfirm=null; }
   if(menuConfirm) { menuConfirm=null; renderMenu(); return; }
   if(typeof b6Sure!=='undefined'&&b6Sure) { b6Sure=null; renderMenu(); return; }
+  if(!fromCmd&&menuTab==='stamps'&&typeof scBack==='function'&&scBack()) return;
   if(menuItem) { const id=menuItem; menuItem=null; sfx.tab(); menuFocusNext=menuKeyNav?'use-'+id:null; renderMenu(); return; }
   if(menuSlot) { const s=menuSlot; menuSlot=null; sfx.tab(); menuFocusNext=menuKeyNav?'slot-'+s:null; renderMenu(); return; }
   if(menuTab!=='home') { const t=menuTab; menuLeaveStamps(); menuTab='home'; sfx.tab(); menuFocusNext=menuKeyNav?'cmd-'+t:null; renderMenu(); return; }

@@ -337,114 +337,170 @@ b6RefreshAll(true);
 // A gold dot on the MENU button while someone in the party has a Stamp Point they can spend right now.
 function b6Badge() { const b=typeof $==='function'&&$('menu-button'); if(b) b.classList.toggle('sp-dot',party.some(b6Stampable)); }
 
-// ---------- Menu: the Stampcard screen ----------
-// Header: Stamp Points, Polish Points, Remix Tickets, Auto-Stamp, Respec, and the loadout switch (level 27).
-// A CORE card (basic and signature) and the two path cards. Each row shows the equipped version, the other version,
-// and its buttons: STAMP or UNDO, POLISH (rank up), REMIX (spend a ticket) or SWAP (change the equipped version).
+// ---------- Menu: the Stampcard screen (stampgrid1) ----------
+// One screen: a strip (points, AUTO, RESPEC, loadouts), a CORE row, two columns of six chips (Path A and Path B), and a drawer under
+// the grid for the selected move. The drawer holds the one action that fits the move (STAMP, POLISH, UNDO, REMIX or SWAP) and PIN TO COMPARE.
 let b6Sure=null,b6SureTimer=0;
 function b6AskSure(key) { b6Sure=key; clearTimeout(b6SureTimer); b6SureTimer=setTimeout(()=>{ if(b6Sure===key) { b6Sure=null; if(menuOpen) renderMenu(); } },3500); sfx.select(); renderMenu(); }
 const B8_RANK_TAG=['','','+','POLISHED'];
-function b8Row(m,slot,core) {
-  const node=b8Node(m.id,slot),v=b8Ver(m,slot),cur=node[v],other=node[v==='p'?'r':'p'];
-  const st=core?'stamped':b6NodeState(m,slot),rank=b8Rank(m,slot),ult=!core&&b8Pos(slot)===5;
-  const row=el('div','sc-node '+st+(ult?' cap':'')+(core?' core':''));
-  const K='sc-'+slot,unlocked=(m.remix||[]).includes(slot),ps=b8PolishState(m,slot);
-  // The circle on the left is the row's main button: STAMP while the move is next in line, POLISH once stamped.
-  const face=core?'<b>'+(slot==='basic'?'B':'S')+'</b><small>'+(slot==='basic'?'BASIC':'SIG')+'</small>':st==='stamped'?'<b>✓</b>':'<b>'+b8Cost(slot)+'</b><small>SP</small>';
-  let stamp;
-  if(!core&&st==='next') stamp=btn('sc-stamp act go',K,face,()=>{ if(b6Stamp(m,slot)) { sfx.equip(); showToast(m.name+' learns '+cur.name+'!',2); menuFocusNext=K; renderMenu(); } });
-  else if(ps==='polish') stamp=btn('sc-stamp act pol',K,face+'<i class="sc-plus">+</i>',()=>{ if(b8Polish(m,slot)) { sfx.levelChime(); showToast(cur.name+(b8Rank(m,slot)>=3?' is Polished: 1 VP cheaper.':'+ hits and heals 15% harder.'),2.4); menuFocusNext=K; renderMenu(); } });
-  else stamp=el('span','sc-stamp',face);
-  row.appendChild(stamp);
-  const copy=el('span','sc-copy');
-  const hd=el('span','sc-hd'); const t=el('span','sc-title'); t.textContent=cur.name+(rank>=2?' +':'')+(ult?' ★':''); hd.appendChild(t); copy.appendChild(hd);
-  const tags=el('span','sc-tags');
-  // Tap a tag for a one-line explanation under the row. Tap it again, or another tag, to change or close it.
-  const tipBox=el('span','sc-tip'); tipBox.hidden=true;
-  const tipOn=(g,name,text)=>{
-    g.classList.add('tappable'); g.setAttribute('role','button');
-    g.addEventListener('click',e=>{ e.stopPropagation();
-      const open=!tipBox.hidden&&tipBox.dataset.k===name;
-      for(const x of tags.children) x.classList.remove('open');
-      if(open) { tipBox.hidden=true; tipBox.dataset.k=''; return; }
-      tipBox.innerHTML='<b></b> <span></span>'; tipBox.firstChild.textContent=name; tipBox.lastChild.textContent=text;
-      tipBox.dataset.k=name; tipBox.hidden=false; g.classList.add('open'); sfx.select(); });
-  };
-  const tag=(txt,cls,name,text)=>{ const g=el('span','sc-tag'+(cls?' '+cls:'')); g.textContent=txt; tags.appendChild(g); if(text) tipOn(g,name||txt,text); };
-  if(!core) { const gate=b8Gate(m,slot); tag('LV '+gate,m.level<gate?'warn':'','LEVEL '+gate,m.level<gate?m.name+' needs to reach level '+gate+' before this move can be stamped.':m.name+' is high enough level for this move.'); }
-  // Until a version's own move is built, the numbers shown are the move that actually plays (what battle charges).
-  const live=b8Move(m.id,slot,v)||cur;
-  if(live.vp) { const vp=Math.max(1,live.vp-(rank>=3&&live.vp>1?1:0)); tag(vp+' VP','','VP COST','Costs '+vp+' VP to use in battle. VP is the move points each fighter spends on moves. Basic moves give 1 back.'); }
-  for(const e of [].concat(live.elem||[])) if(B2_ELEMS[e]) { const c=el('span','sc-tag elem'); c.textContent=B2_ELEMS[e].name; c.style.color=B2_ELEMS[e].color; tags.appendChild(c);
-    const what=(typeof B2_ELEM_WHAT!=='undefined'&&B2_ELEM_WHAT[e])||'a kind of move';
-    tipOn(c,B2_ELEMS[e].name.toUpperCase(),'A type of move: '+what+'. Monsters weak to '+B2_ELEMS[e].name+' take +50% from it.'); }
-  if(rank>=2) tag(B8_RANK_TAG[rank],'rank',rank>=3?'POLISHED':'POLISH +',rank>=3?'Fully polished: hits and heals 15% harder and costs 1 VP less.':'Polished once: hits and heals 15% harder. One more polish makes it cost 1 VP less.');
-  // Small side actions: UNDO a stamp, REMIX (spend a ticket) or SWAP versions.
-  const mini=el('span','sc-mini-wrap');
-  if(!core&&st==='stamped') mini.appendChild(btn('sc-mini',K+'-u','UNDO',()=>{ b6Unstamp(m,slot); sfx.unequip(); menuFocusNext=K; renderMenu(); }));
-  if(unlocked) mini.appendChild(btn('sc-mini rx',K+'-v','SWAP',()=>{ b8Equip(m,slot,v==='p'?'r':'p'); sfx.equip(); showToast(m.name+' equips '+other.name+'.',2); menuFocusNext=K+'-v'; renderMenu(); }));
-  else if(b8CanRemix(m,slot)) { const sure=b6Sure==='rx-'+m.id+'-'+slot;
-    mini.appendChild(btn('sc-mini rx'+(sure?' sure':''),K+'-r',sure?'USE TICKET?':'REMIX',()=>{
-      if(!sure) { b6AskSure('rx-'+m.id+'-'+slot); return; }
-      b6Sure=null; b8UnlockRemix(m,slot); sfx.levelChime(); showToast('Remix unlocked: '+other.name+'. SWAP to equip it.',2.6); menuFocusNext=K+'-v'; renderMenu(); })); }
-  if(mini.children.length) hd.appendChild(mini);
-  copy.appendChild(tags); copy.appendChild(tipBox);
-  const d=el('span','sc-desc'); d.textContent=cur.desc; copy.appendChild(d);
-  const plays=b8Move(m.id,slot,v);
-  if(!plays) { const s=el('span','sc-soon'); s.textContent='Arrives in a later update.'; copy.appendChild(s); }
-  else if(!b8Built(m.id,slot,v)&&plays.name.toLowerCase()!==cur.name.toLowerCase()) { const s=el('span','sc-soon'); s.textContent='Plays as '+plays.name+' for now.'; copy.appendChild(s); }
-  row.appendChild(copy);
-  return row;
+const SC={sel:{},pin:{},view:{}};   // per character: the selected slot, the pinned slot, and which version the drawer shows ('p' or 'r')
+const SC_RULES='Stamp Points every even level, Polish Points every odd level from 3, Remix Tickets from level 28. Undo and Respec are free.';
+const scCore=slot=>slot==='basic'||slot==='sig';
+// What a slot shows: the version's own numbers once built, else the move that actually plays (what battle charges).
+function scInfo(m,slot,v) {
+  const node=b8Node(m.id,slot),rank=b8Rank(m,slot),cur=node[v],live=b8Move(m.id,slot,v)||cur;
+  const vp=live.vp?Math.max(1,live.vp-(rank>=3&&live.vp>1?1:0)):0;
+  const elems=[].concat(live.elem||[]).filter(e=>B2_ELEMS[e]).map(e=>B2_ELEMS[e].name);
+  return {cur,live,rank,vp,elems,plays:b8Move(m.id,slot,v)};
+}
+function scChipFact(m,slot,st,inf) {
+  const vp=inf.vp?inf.vp+' VP':'';
+  if(st==='soon') return 'Soon';
+  if(st==='level') return 'Lv '+b8Gate(m,slot);
+  if(st==='sp') return b8Cost(slot)+' SP'+(vp?' · '+vp:'');
+  if(st==='next') return b8Cost(slot)+' SP to stamp'+(vp?' · '+vp:'');
+  const tag=inf.rank>=3?'++':inf.rank>=2?'+':'';
+  return [vp,inf.elems.join('/'),tag].filter(Boolean).join(' · ')||(scCore(slot)?'Known':'Stamped');
+}
+function scChip(m,slot) {
+  const core=scCore(slot),st=core?'stamped':b6NodeState(m,slot),ult=!core&&b8Pos(slot)===5;
+  const inf=scInfo(m,slot,b8Ver(m,slot));
+  const c=btn('sc-chip '+st+(core?' core':' p'+(slot[0]==='B'?1:0))+(ult?' cap':''),'sc-'+slot,'',()=>scTap(m,slot));
+  c.dataset.sc=slot;
+  const n=el('span','sc-cn');
+  if(st==='stamped'&&!core) n.appendChild(el('i','sc-ck','✓'));
+  if(st==='level') n.appendChild(el('i','sc-lk'));
+  n.appendChild(document.createTextNode(inf.cur.name+(ult?' ★':'')));
+  const f=el('span','sc-cf'); f.textContent=scChipFact(m,slot,st,inf);
+  c.appendChild(n); c.appendChild(f);
+  c.addEventListener('focus',()=>{ if(menuKeyNav&&SC.sel[m.id]!==slot) scSelect(m,slot); });   // the cursor drives the drawer
+  return c;
+}
+// The actions that fit this move right now, best first: the first one is the drawer's big button, the rest sit beside PIN.
+function scActions(m,slot) {
+  const core=scCore(slot),node=b8Node(m.id,slot),eq=b8Ver(m,slot),v=SC.view[m.id]||eq;
+  const st=core?'stamped':b6NodeState(m,slot),K='sc-'+slot,unlocked=(m.remix||[]).includes(slot);
+  const cur=node[eq],other=node[eq==='p'?'r':'p'];
+  const done=()=>{ menuFocusNext=K; SC.view[m.id]=null; renderMenu(); };
+  const A={};
+  if(st==='next') A.stamp={label:'STAMP',cls:'',run:()=>{ if(b6Stamp(m,slot)) { sfx.equip(); showToast(m.name+' learns '+cur.name+'!',2); done(); } }};
+  if(b8PolishState(m,slot)==='polish') A.polish={label:'POLISH',cls:'pol',run:()=>{ if(b8Polish(m,slot)) { sfx.levelChime(); showToast(cur.name+(b8Rank(m,slot)>=3?' is Polished: 1 VP cheaper.':'+ hits and heals 15% harder.'),2.4); done(); } }};
+  if(!core&&st==='stamped') A.undo={label:'UNDO',cls:'undo',run:()=>{ b6Unstamp(m,slot); sfx.unequip(); done(); }};
+  if(unlocked) A.swap={label:'SWAP',cls:'rx',run:()=>{ b8Equip(m,slot,eq==='p'?'r':'p'); sfx.equip(); showToast(m.name+' equips '+other.name+'.',2); done(); }};
+  else if(b8CanRemix(m,slot)) {
+    const key='rx-'+m.id+'-'+slot,sure=b6Sure===key;
+    A.remix={label:sure?'USE TICKET?':'REMIX',cls:'rx'+(sure?' sure':''),run:()=>{
+      if(!sure) { menuFocusNext=K; b6AskSure(key); return; }
+      b6Sure=null; b8UnlockRemix(m,slot); sfx.levelChime(); showToast('Remix unlocked: '+other.name+'. SWAP to equip it.',2.6); done(); }};
+  }
+  const order=v==='r'?['swap','remix','stamp','polish','undo']:['stamp','polish','undo','swap','remix'];
+  return order.filter(k=>A[k]).map(k=>A[k]);
+}
+function scTap(m,slot) {
+  // A second press on the cursor's move (keyboard or controller) runs its main action; a tap only selects.
+  if(SC.sel[m.id]===slot&&menuKeyNav&&!roseAuto()) { const a=scActions(m,slot)[0]; if(a) { a.run(); return; } }
+  sfx.select(); scSelect(m,slot);
+}
+function scMark(m) {
+  for(const c of document.querySelectorAll('.sc-chip')) { c.classList.toggle('sel',c.dataset.sc===SC.sel[m.id]); c.classList.toggle('pin',c.dataset.sc===SC.pin[m.id]); }
+}
+function scSelect(m,slot) {
+  if(SC.sel[m.id]!==slot) { SC.sel[m.id]=slot; SC.view[m.id]=null; }
+  scMark(m); scRedraw(m);
+}
+function scRedraw(m,focusKey) {
+  const old=$('sc-drawer'); if(!old) return;
+  const d=scDrawer(m); old.replaceWith(d);
+  if(focusKey&&menuKeyNav) { const f=d.querySelector('[data-k="'+focusKey+'"]'); if(f) f.focus({preventScroll:true}); }
+}
+// Back (B): clear the pin, then close the drawer, then the menu goes back a tab as usual.
+function scBack() {
+  const m=party[menuChar]; if(!m||menuTab!=='stamps'||m.noBattle) return false;
+  if(SC.pin[m.id]) { SC.pin[m.id]=null; sfx.tab(); scMark(m); scRedraw(m); return true; }
+  if(SC.sel[m.id]&&menuKeyNav) { SC.sel[m.id]=null; sfx.tab(); scMark(m); scRedraw(m); return true; }
+  return false;
+}
+// One move in the drawer. mode: solo, pin (the pinned half) or cmp (the live half beside a pin).
+function scPane(m,slot,mode) {
+  const core=scCore(slot),eq=b8Ver(m,slot),v=mode==='pin'?eq:(SC.view[m.id]||eq),inf=scInfo(m,slot,v),unlocked=(m.remix||[]).includes(slot);
+  const p=el('div','sc-pane');
+  if(mode==='pin') p.appendChild(el('div','sc-pt','PINNED'));
+  const hd=el('div','sc-dh'); const nm=el('span','sc-dn'); nm.textContent=inf.cur.name+(!core&&b8Pos(slot)===5?' ★':''); hd.appendChild(nm);
+  if(mode!=='pin') {
+    const vt=el('span','sc-vt');
+    for(const w of ['p','r']) vt.appendChild(btn('sc-vb'+(v===w?' on':'')+(w==='r'&&!unlocked?' dim':''),'sc-v'+w,w==='p'?'PRIMARY':(unlocked?'REMIX':'TICKET'),()=>{ SC.view[m.id]=w; sfx.tab(); scRedraw(m,'sc-v'+w); }));
+    hd.appendChild(vt);
+  }
+  p.appendChild(hd);
+  const fl=el('div','sc-df'); fl.textContent=[core?'':'Lv '+b8Gate(m,slot),inf.vp?inf.vp+' VP':'',inf.elems.join('/'),inf.rank>=3?'POLISHED':inf.rank>=2?'POLISH +':''].filter(Boolean).join(' · ');
+  p.appendChild(fl);
+  const dd=el('div','sc-dd'); dd.textContent=inf.cur.desc; p.appendChild(dd);
+  if(!inf.plays) p.appendChild(el('div','sc-soon','Arrives in a later update.'));
+  else if(!b8Built(m.id,slot,v)&&inf.plays.name.toLowerCase()!==inf.cur.name.toLowerCase()) { const s=el('div','sc-soon'); s.textContent='Plays as '+inf.plays.name+' for now.'; p.appendChild(s); }
+  return p;
+}
+function scDrawer(m) {
+  const d=el('div','sc-drawer'); d.id='sc-drawer';
+  const slot=SC.sel[m.id],pin=SC.pin[m.id];
+  if(!slot) { d.classList.add('empty'); d.appendChild(el('div','sc-hint','Tap a move to see it here.')); return d; }
+  d.style.setProperty('--pc',scCore(slot)?'#b9a6e8':slot[0]==='B'?'#7fa7d9':'#e0a84a');
+  if(pin) {
+    const c=el('div','sc-cmp'); c.appendChild(scPane(m,pin,'pin'));
+    if(pin!==slot) c.appendChild(scPane(m,slot,'cmp')); else c.appendChild(el('div','sc-pane sc-hint','Tap another move to compare.'));
+    d.appendChild(c);
+  } else d.appendChild(scPane(m,slot,'solo'));
+  const row=el('div','sc-da');
+  (roseAuto()?[]:scActions(m,slot)).forEach((a,i)=>row.appendChild(btn((i?'sc-sm ':'sc-go ')+a.cls,'sc-act'+i,a.label,a.run)));
+  row.appendChild(btn('sc-sm','sc-pin',pin?'UNPIN':'PIN TO COMPARE',()=>{ SC.pin[m.id]=pin?null:slot; sfx.select(); scMark(m); scRedraw(m,'sc-pin'); }));
+  d.appendChild(row);
+  return d;
 }
 const b2MoveNameFor=(id,key)=>{ const k=B2_SKILLS[id]; if(!k) return null; const s=[k.basic,k.special,...k.skills,...(k.o3||[])].find(x=>x&&x.key===key); return s?s.name:null; };
 function renderStampsTab(body,m) {
   if(m.noBattle) { $('menu-foot').textContent='A Stampcard is built from a character’s moves.'; const soon=el('div','mcard'); soon.appendChild(el('div','slot-label','STAMPCARD')); const tx=el('div','stat-note'); tx.textContent=m.name+'’s Stampcard is coming soon.'; soon.appendChild(tx); body.appendChild(soon); return; }
   b8St(m);
-  $('menu-foot').textContent='Stamp Points every even level, Polish Points every odd level from 3, Remix Tickets from level 28. Undo and Respec are free.';
-  const left=b6SpLeft(m),pp=b8PpLeft(m),tk=b8TkLeft(m);
-  const head=el('div','mcard sc-head');
-  const who=el('div','sc-who'), wid=el('span','sc-id');
-  wid.appendChild(el('span','r-title',m.title||'')); wid.appendChild(el('span','r-name',m.name));
-  who.appendChild(wid); who.appendChild(levelBadge(m)); head.appendChild(who);
-  const cnt=el('div','sc-counts');
-  const counter=(lbl,n,sub,cls)=>{ const c=el('div','sc-points '+cls); c.appendChild(el('span','slot-label',lbl)); const v=el('span','sc-left'+(n>0?' has':'')); v.textContent=n; c.appendChild(v); const s=el('span','sc-sub'); s.textContent=sub; c.appendChild(s); cnt.appendChild(c); };
-  counter('STAMP',left,b6SpEarned(m)+' earned','sp');
-  counter('POLISH',pp,m.level<B8.polishFrom?'from Lv '+B8.polishFrom:b8PpEarned(m)+' earned','pp');
-  counter('TICKETS',tk,m.level<B8.ticketFrom?'from Lv '+B8.ticketFrom:b8TkEarned(m)+' earned','tk');
-  head.appendChild(cnt);
-  const acts=el('div','sc-acts');
-  const can=b8AutoHas(m);
-  acts.appendChild(btn('menu-act primary'+(can?'':' dim'),'sc-auto','★ AUTO-STAMP',()=>{
-    const n=b6AutoStamp(m);
-    if(!n) { sfx.nope(); showToast(left?'Nothing to stamp yet. Saving up for the next one.':'Nothing to spend yet.',2.2); return; }
-    sfx.levelChime(); showToast(m.name+': '+n+(n===1?' choice made.':' choices made.'),2); menuFocusNext='sc-auto'; renderMenu(); }));
-  const sure=b6Sure==='clear-'+m.id,spent=b6SpSpent(m)+b8PpSpent(m);
-  acts.appendChild(btn('menu-act'+(sure?' sure':'')+(spent?'':' dim'),'sc-clear',sure?'CLEAR ALL?':'RESPEC',()=>{
-    if(!spent) { sfx.nope(); return; }
-    if(!sure) { b6AskSure('clear-'+m.id); return; }
-    b6Sure=null; b6ClearStamps(m); sfx.unequip(); showToast('Stamps and Polish back in the pocket. Remixes stay unlocked.',2.6); menuFocusNext='sc-clear'; renderMenu(); }));
-  head.appendChild(acts);
-  if(b8Loadouts(m)) {
-    const lo=el('div','sc-acts sc-lo');
-    for(const i of [0,1]) lo.appendChild(btn('menu-act'+((m.loadout||0)===i?' on':''),'sc-lo'+i,'LOADOUT '+(i+1),()=>{ if((m.loadout||0)===i) return; b8SwapLoadout(m); sfx.equip(); showToast(m.name+' switches to Loadout '+(i+1)+'.',2); menuFocusNext='sc-lo'+i; renderMenu(); }));
-    head.appendChild(lo);
-  } else { const n=el('div','sc-sub'); n.textContent='Two Loadouts at Lv '+B8.loadoutLvl+'.'; head.appendChild(n); }
-  body.appendChild(head);
-  const core=el('div','mcard sc-card sc-core');
-  const ct=el('div','sc-top'); ct.appendChild(el('span','sc-path','CORE')); const cn=el('span','sc-name'); cn.textContent='Basic and Signature'; ct.appendChild(cn);
-  const cs=el('span','sc-psub'); cs.textContent=b8Mastery(m)?'Mastery: swap versions once per battle.':'Always known. Polish and Remix them like any node.'; ct.appendChild(cs);
-  core.appendChild(ct); core.appendChild(b8Row(m,'basic',true)); core.appendChild(b8Row(m,'sig',true));
-  body.appendChild(core);
+  $('menu-foot').textContent='';
+  if(SC.sel[m.id]===undefined) SC.sel[m.id]=B8_SLOTS.find(s=>b6NodeState(m,s)==='next')||'basic';
+  const rose=roseAuto(),left=b6SpLeft(m),pp=b8PpLeft(m),tk=b8TkLeft(m);
+  const wrap=el('div','sc-wrap');
+  // Strip: who, points, and the small controls.
+  const strip=el('div','sc-strip');
+  const nm=el('span','sc-nm'); nm.textContent=m.name; strip.appendChild(nm);
+  const lv=el('span','sc-lv'); lv.textContent='LV '+m.level+(b8Mastery(m)?' ★':''); if(b8Mastery(m)) lv.title='Mastery: swap versions once per battle.'; strip.appendChild(lv);
+  const cts=el('span','sc-cts');
+  const ct=(n,u,cls)=>{ const s=el('span','sc-ct '+cls+(n>0?' has':'')); s.textContent=n+' '+u; return s; };
+  cts.appendChild(ct(left,'SP','sp'));
+  cts.appendChild(btn('sc-q','sc-q','?',()=>{ sfx.select(); showToast(SC_RULES,4.4); }));
+  cts.appendChild(ct(pp,'PP','pp')); cts.appendChild(ct(tk,'TK','tk'));
+  strip.appendChild(cts);
+  if(!rose) {
+    const can=b8AutoHas(m);
+    strip.appendChild(btn('sc-sm go'+(can?'':' dim'),'sc-auto','★ AUTO',()=>{
+      const n=b6AutoStamp(m);
+      if(!n) { sfx.nope(); showToast(left?'Nothing to stamp yet. Saving up for the next one.':'Nothing to spend yet.',2.2); return; }
+      sfx.levelChime(); showToast(m.name+': '+n+(n===1?' choice made.':' choices made.'),2); menuFocusNext='sc-auto'; renderMenu(); }));
+    const sure=b6Sure==='clear-'+m.id,spent=b6SpSpent(m)+b8PpSpent(m);
+    strip.appendChild(btn('sc-sm'+(sure?' sure':'')+(spent?'':' dim'),'sc-clear',sure?'CLEAR ALL?':'RESPEC',()=>{
+      if(!spent) { sfx.nope(); return; }
+      if(!sure) { menuFocusNext='sc-clear'; b6AskSure('clear-'+m.id); return; }
+      b6Sure=null; b6ClearStamps(m); sfx.unequip(); showToast('Stamps and Polish back in the pocket. Remixes stay unlocked.',2.6); menuFocusNext='sc-clear'; renderMenu(); }));
+    if(b8Loadouts(m)) for(const i of [0,1]) strip.appendChild(btn('sc-sm'+((m.loadout||0)===i?' on':''),'sc-lo'+i,'L'+(i+1),()=>{
+      if((m.loadout||0)===i) return; b8SwapLoadout(m); sfx.equip(); showToast(m.name+' switches to Loadout '+(i+1)+'.',2); menuFocusNext='sc-lo'+i; renderMenu(); }));
+  }
+  wrap.appendChild(strip);
+  // Core row, then Path A and Path B side by side.
+  const main=el('div','sc-main');
+  const core=el('div','sc-corerow'); for(const s of ['basic','sig']) core.appendChild(scChip(m,s)); main.appendChild(core);
+  const grid=el('div','sc-grid');
   b6Paths(m.id).forEach((P,p)=>{
-    const card=el('div','mcard sc-card sc-p'+p);
-    const top=el('div','sc-top');
-    top.appendChild(el('span','sc-path',p?'PATH B':'PATH A'));
-    const nm=el('span','sc-name'); nm.textContent=P.name; top.appendChild(nm);
-    const ps=el('span','sc-psub'); ps.textContent=P.sub; top.appendChild(ps);
-    card.appendChild(top);
-    for(const slot of B8_SLOTS.filter(s=>s[0]===(p?'B':'A'))) card.appendChild(b8Row(m,slot,false));
-    body.appendChild(card);
+    const col=el('div','sc-col p'+p); const h=el('div','sc-ph'); h.textContent=P.name; col.appendChild(h);
+    for(const s of B8_SLOTS.filter(x=>x[0]===(p?'B':'A'))) col.appendChild(scChip(m,s));
+    grid.appendChild(col);
   });
+  main.appendChild(grid); wrap.appendChild(main);
+  wrap.appendChild(scDrawer(m));
+  body.appendChild(wrap);
+  scMark(m);
 }
 
 // ---------- Menu: the Status page ----------
