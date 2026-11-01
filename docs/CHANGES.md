@@ -1,3 +1,10 @@
+## 2026-10-31 (day, 30): Menu button beside Save, A button in the D-pad center (`ctl1`)
+
+- Tom (23:46): make the Menu button the same size as the Save button and put it to the left of Save; move the A button to the center of the D-pad.
+- Menu is now in the top bar, left of Save, same size and look (38 px portrait, 34 px landscape, 8 px gap). The two sit together in a new `#hud-btns` group in index.html. The `menu-button` id is unchanged, so touch, click, the `M` key and the stamp badge dot still work. The bottom-left MENU button and its label are gone.
+- A now sits on the center cell of the D-pad (46 px portrait, 38 px landscape, the size of one D-pad cell). The INTERACT / CONTINUE caption under it is hidden to avoid covering the down arrow (the text still updates, it is just not shown). Tune the placement in the CSS block headed "Menu button sits in the top bar" near the end of index.html.
+- Tested: `smoke.py` pass; portrait (390 x 844) and landscape (844 x 390) screenshots, button boxes measured (Menu = Save size, A centered on the D-pad to the pixel). Not played on the phone. Stamp `build ctl1`.
+
 ## 2026-10-31 (day, 29): Tom's house is walkable all the way round, with depth behind the kitchen island (`tomhouse3d`)
 
 - Tom (23:34): apply a 3D effect through his home so he can walk the narrow spaces between the furniture, starting with a complete path around the kitchen island. The old walk map only had one corridor down the middle, so the island, the dining table and the wet bar front were all unreachable.
