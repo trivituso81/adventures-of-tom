@@ -5,6 +5,7 @@ Reports (1) line kinds in LINES whose name appears in no source file as a quoted
         (2) kinds only reachable through the generic attack/basic fallback in say() (engine/speech.js), for characters whose every move has its own line,
         (3) baked battle clips whose words match no live line (old audio for a reworded line),
         (4) baked dialogue clips whose text is not in tools/voice-library/harvest.json or the source (templated 'Round N.' monster lines are live and ignored).
+(5) lines for a REPLACED move: the kind has an old animation function in engine/*-moves.js (so check 1 passes) but is no longer a key in any kit, Stampcard version or combo table.
 --write-spec writes a spec for: node tools/clip-audit/purge_unused.js <spec> --apply   (then remove the kinds from data/lines.js by hand,
 rebuild the index: python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js, bump the ?v= tags, add a docs/CHANGES.md entry).
 A kind used only through dynamic code (a name built by string concatenation) shows as a candidate: check it by hand before purging."""
@@ -46,8 +47,26 @@ print('3. baked battle clips with no live line:', len(orph)); [print('   ', o['i
 h = {x['text'] for x in json.load(open(os.path.join(ROOT, 'tools/voice-library/harvest.json')))['lines']}
 od = [k for k in D['dkeys'] if k.split('|', 1)[1] not in h and not re.match(r'^[^|]+\|Round \d+\. ', k) and k.split('|', 1)[1][:40] not in src]
 print('4. dialogue clips not in harvest or source:', len(od)); [print('   ', k[:120]) for k in od]
+
+import glob
+live_keys = set()
+for t in D['kits'].values(): live_keys |= set(t)
+for f in ('data/abilities.js', 'data/battle2-data.js', 'data/progress.js', 'data/party.js'):
+    txt = open(os.path.join(ROOT, f), encoding='utf8', errors='ignore').read()
+    live_keys |= set(re.findall(r'key\s*:\s*["\'](\w+)["\']', txt)) | set(re.findall(r'play\s*:\s*["\'](\w+)["\']', txt))
+live_keys |= {k[3:] for k in list(live_keys) if k.startswith('rx_')}
+funcs = set()
+for f in glob.glob(os.path.join(ROOT, 'engine', '*-moves.js')) + [os.path.join(ROOT, 'engine', 'nara.js')]:
+    funcs |= set(re.findall(r'\b[A-Z][A-Za-z0-9_]{0,3}\.(\w+)\s*=\s*E2\s*=>', open(f, encoding='utf8', errors='ignore').read()))
+replaced = {}
+for cid, kinds in L.items():
+    for k in kinds:
+        if k in funcs and k not in live_keys and k not in dead.get(cid, []) and not any(k.startswith(x + '_') for x in live_keys if len(x) > 3):
+            replaced.setdefault(cid, []).append(k)
+print('5. lines for replaced moves (old animation code still exists):', replaced)
 if '--write-spec' in sys.argv:
     out = sys.argv[sys.argv.index('--write-spec') + 1]
     dk = {c: list(v) for c, v in dead.items()}
     for c in fallback: dk.setdefault(c, []).append('attack')
+    for c, v in replaced.items(): dk.setdefault(c, []).extend(v)
     json.dump({'deadKinds': dk, 'orphanClips': orph}, open(out, 'w'), indent=1); print('spec written', out)

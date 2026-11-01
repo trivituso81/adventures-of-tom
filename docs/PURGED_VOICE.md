@@ -66,3 +66,33 @@ Tom: Boppy catches fish all the time; the joke is that he exaggerates how big th
 | tom | data/voice/dialog-ch3.js | Then we had better go help him not catch one. |
 | gus (Reel) | data/voice/dialog-ch3.js | Your father has been fishing this pier since before the pier. He has caught nothing. Very consistent. |
 | boppy | data/voice/dialog-ch1.js | Here, take my spare cap. For luck. I caught nothing in it, so the luck is all still inside. |
+
+## Second pass (same day): lines for moves that were replaced
+
+Tom found `chalk_up` (Grace) still in the Voice Library. These moves were replaced by new ones (for example chalk_up became bedazzle_blast) but their lines stayed, because the old animation code still mentions the name, so the first audit counted them as used. 23 lines and their 23 clips removed. The old animation functions in `engine/*-moves.js` are dead code and were left in place.
+
+| Character | Kind | Words |
+|---|---|---|
+| tom | controller_tap | One button. Entirely sufficient. |
+| tom | crumb_shot | Still warm. The steam is the BEST part. |
+| tom | mint_unboxing | It just arrived. It was NOT cheap! |
+| tom | window_seat | Window seat. Shade down. Do NOT disturb. |
+| tom | proofing_drawer | A proofing drawer. For emotional support. |
+| tom | toast_negotiations | Both halves are EXACTLY fair. |
+| tom | warranty_void | That warranty was holding us BACK. |
+| tom | crumb_barrier | The crumbs are STRUCTURAL. |
+| tom | five_minute_review | Five-minute review. This WILL be useful. |
+| tom | dpad_detour | The D-pad says take the SCENIC route. |
+| tom | save_sandwich | Save first. Sandwich second. BOTH essential. |
+| tom | radical_solutions | A radical solution. Very LITERALLY. |
+| tom | patch_notes | Patch notes: touching has been REMOVED. |
+| grace | split_leap | Split leap! All the way over! |
+| grace | chalk_up | Chalk up! Clap clap! Now my tumbling pass! |
+| boppy | cap_check | Cap check. Not past me. |
+| boppy | closing_time | Closing time. That nonsense is closed. |
+| boppy | sensible_pepper | One pepper. Sensible size. Stomach may disagree. |
+| boppy | jar_lid_negotiations | Jar-lid negotiations. I was being polite before. |
+| tnb | clay_offcut | Clay offcut. Waste not, bonk not. |
+| tnb | lost_found_warmth | Lost warmth. Found scarf. Nice connection. |
+| tnb | practical_effects | Practical effects. The string is part of the charm. |
+| tnb | clay_pigeon | Clay pigeon. Literally. I worked on that pun. |

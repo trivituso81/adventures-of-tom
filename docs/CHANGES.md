@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 49): Purged lines for replaced moves (`purge2`)
+
+- Tom: "Why is the chalk up voice clip still there." Fact (cause): Grace's chalk_up was replaced by bedazzle_blast, but its spoken line and clip stayed. The first audit (`purge1`) treated any kind whose name appears in the code as used, and the old animation function and an icon still mention it.
+- Removed 23 lines and 23 clips (about 1.3 MB) for replaced moves: Tom 13 (controller_tap, crumb_shot, mint_unboxing, window_seat, proofing_drawer, toast_negotiations, warranty_void, crumb_barrier, five_minute_review, dpad_detour, save_sandwich, radical_solutions, patch_notes), Grace 2 (split_leap, chalk_up), Boppy 4 (cap_check, closing_time, sensible_pepper, jar_lid_negotiations), TNB 4 (clay_offcut, lost_found_warmth, practical_effects, clay_pigeon). Battle clips 525 to 502; Voice Library battle lines 473 to 451; 22 hand directions dropped; 13 bake-script notes removed.
+- `tools/clip-audit/unused_voice.py` has a new check 5 (a kind with an old animation function that is no longer a key in any kit, Stampcard version or combo table). Audit now reports 0 on all five checks.
+- Left on purpose: the dead animation functions in engine/*-moves.js (harmless, not called) and the old per-character `skills` tier.
+- Tests: smoke tom,grace,boppy,tnb FAILS: []; kit_test grace, tom, boppy, tnb every move says its line. Tags `purge2` on lines.js, voice-clips.js, tom, grace, boppy, tnb voice files.
+
 ## 2026-11-01 (evening, 54): Chapter title card waits until Tom lands (`cardfix1`)
 
 - Tom (17:54): the new chapter banner should only appear after Tom reaches the area with the new chapter, not before the flight.

@@ -17,7 +17,7 @@ Test runs are slow with the real audio loaded. For quick tests copy the repo to 
 
 ## Rules for you
 
-0. No unused voice (2026-11-01): run `python3 tools/clip-audit/unused_voice.py` before pushing any line or voice change; it must report 0. Details in CLAUDE.md, record in `docs/PURGED_VOICE.md`. Battle clips are now 525 (after the 2026-11-01 purge).
+0. No unused voice (2026-11-01): run `python3 tools/clip-audit/unused_voice.py` before pushing any line or voice change; it must report 0. Details in CLAUDE.md, record in `docs/PURGED_VOICE.md`. Battle clips are now 502 (after the 2026-11-01 purges).
 
 1. Avoid rewording existing spoken lines unless asked. If you must, list each changed line in `docs/CHANGES.md` under "Lines to bake" with the character, kind, old text and new text.
 2. New moves need a spoken line each (`data/lines.js`). They will be silent until Tom bakes.

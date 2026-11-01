@@ -1,0 +1,36 @@
+{
+ "deadKinds": {
+  "tom": [
+   "controller_tap",
+   "crumb_shot",
+   "mint_unboxing",
+   "window_seat",
+   "proofing_drawer",
+   "toast_negotiations",
+   "warranty_void",
+   "crumb_barrier",
+   "five_minute_review",
+   "dpad_detour",
+   "save_sandwich",
+   "radical_solutions",
+   "patch_notes"
+  ],
+  "grace": [
+   "split_leap",
+   "chalk_up"
+  ],
+  "boppy": [
+   "cap_check",
+   "closing_time",
+   "sensible_pepper",
+   "jar_lid_negotiations"
+  ],
+  "tnb": [
+   "clay_offcut",
+   "lost_found_warmth",
+   "practical_effects",
+   "clay_pigeon"
+  ]
+ },
+ "orphanClips": []
+}
