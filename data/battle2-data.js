@@ -15,7 +15,8 @@ const B2_STATS={
   boppy: {hp:[120,999],pow:[15,94],grit:[16,99],warmth:[10,70],cool:[11,76],pep:[ 9,60]},
   tnb:   {hp:[100,880],pow:[12,80],grit:[11,76],warmth:[15,94],cool:[16,99],pep:[12,78]},
   nara:  {hp:[ 92,800],pow:[15,94],grit:[10,68],warmth:[11,74],cool:[10,66],pep:[17,99]},
-  justin:{hp:[112,960],pow:[15,96],grit:[12,78],warmth:[10,72],cool:[11,74],pep:[13,86]}
+  justin:{hp:[112,960],pow:[15,96],grit:[12,78],warmth:[10,72],cool:[11,74],pep:[13,86]},
+  olivia:{hp:[100,880],pow:[12,80],grit:[11,74],warmth:[14,90],cool:[13,86],pep:[16,96]}
 };
 function b2Stat(id,key,lvl) { const r=(B2_STATS[id]||B2_STATS.tom)[key]; return Math.round(r[0]+(r[1]-r[0])*(Math.max(1,Math.min(50,lvl))-1)/49); }
 
@@ -621,6 +622,38 @@ const B2_SKILLS={
         desc:'A slow, exaggerated build, then a deafening sneeze. The enemy slides across the screen and loses its next turn.'},
       {key:'foot_tap',name:'Foot Tap',vp:5,elem:['kinetic','chatter'],stat:'pow',mult:3,target:'enemy',weight:'heavy',o3:true,
         desc:'Rose walks over and taps his sneaker as lightly as she can. He screams. The scream is the hit, and it is the biggest in his kit (Grace taps if Rose is down).'}
+    ]},
+  // Olivia (Tom's cousin, journalist, mom): installed 2026-11-01 from her eleven painted sheets (claude/olivia-ability-prompts.md). Animations: engine/olivia-moves.js (ov_).
+  // Legacy basic, special and skills are stand-ins only (the kit below is all o3). B4 to B6 wait (data/abilities.js play:null).
+  olivia:{
+    basic:{key:'basic',name:'Fact Check',elem:['chatter'],stat:'warmth',mult:1,target:'enemy',weight:'standard',
+      desc:'Flips open her notebook, clicks her pen and jabs it at the enemy like a microphone. Free, and gives +1 VP.'},
+    special:{key:'snack_bag',name:'SNACK BAG',vp:2,elem:['cozy'],target:'party',weight:'standard',kind:'signature',fx:[['heal',.25,.4,'party'],['cure','dizzy','party']],
+      desc:'Digs through her mom tote and tosses a snack to every friend. Heals the party 25% and clears Dizzy.'},
+    skills:[],
+    o3:[
+      {key:'fact_check',name:'Fact Check',elem:['chatter'],stat:'warmth',mult:1,target:'enemy',weight:'standard',o3:true,
+        desc:'She flips open a reporter\'s notebook, clicks her pen and jabs it at the enemy like a microphone. "SOURCE?" Free, and gives +1 VP.'},
+      {key:'snack_bag',sig:true,name:'SNACK BAG',vp:2,elem:['cozy'],target:'party',weight:'standard',kind:'signature',o3:true,fx:[['heal',.25,.4,'party'],['cure','dizzy','party']],
+        desc:'She digs through her overstuffed mom tote, pulls out a snack pouch and tosses one to every friend. Heals the party 25% and clears Dizzy. One each.'},
+      {key:'livnews_live',name:'LivNews Live',vp:2,elem:['chatter'],stat:'warmth',mult:.7,target:'all',weight:'quick',o3:true,
+        desc:'Phone up selfie-style, hair fixed, then she swings it around and reports the enemies live to her followers. A wave of notifications lands on every enemy.'},
+      {key:'inverted_pyramid',name:'Inverted Pyramid',vp:3,elem:['kinetic'],stat:'pow',mult:1.7,target:'enemy',weight:'standard',o3:true,fx:[['st','grit_down',2,'t']],
+        desc:'She becomes a journalism professor, sketches the inverted pyramid in the air and slams the point down on one enemy. Its GRIT drops for 2 turns.'},
+      {key:'double_under',name:'Double Under',vp:4,elem:['kinetic'],stat:'pow',mult:1.35,hits:2,target:'enemy',weight:'standard',o3:true,
+        desc:'A jump rope, a rusty first jump that trips her up, then the teen champion comes back: two big double-unders and a whip of the rope on one enemy.'},
+      {key:'story_time',name:'Story Time',vp:4,elem:['cozy'],stat:'warmth',mult:.8,target:'enemy',weight:'standard',o3:true,fx:[['st','stunned',1,'t'],['warm',15,'t']],
+        desc:'She sits cross-legged, opens her own children\'s book and reads the first page in a soft voice. The enemy nods off and loses its next turn.'},
+      {key:'michael',name:'MICHAEL!',vp:5,elem:['kinetic'],stat:'pow',mult:2.7,target:'enemy',weight:'heavy',o3:true,fx:[['st','pep_down',2,'t']],
+        desc:'She cups her hands and yells for Michael. Nothing. Louder. A diaper bag flies in from off screen and flattens one enemy. Its PEP drops for 2 turns.'},
+      {key:'better_than_bobby',name:'Better Than Bobby',vp:8,elem:['chatter','sparkle'],stat:'warmth',mult:.75,hits:5,target:'multi',weight:'heavy',o3:true,
+        desc:'Ultimate. She counts on her fingers everything she beats her brother Bobby at: jump rope, grades, parallel parking, cooking, Mario Kart. Five rising hits spread across the enemies, then a mic drop.'},
+      {key:'is_this_real',name:'Is This Real?',vp:3,elem:['chatter'],stat:'warmth',mult:1.3,target:'enemy',weight:'standard',o3:true,fx:[['st','dizzy',2,'t']],
+        desc:'She holds her phone up to the enemy and scans it. Too many fingers. Fake. It hits one enemy and leaves it Dizzy for 2 turns.'},
+      {key:'marine_layer',name:'Marine Layer',vp:4,elem:['splash'],stat:'warmth',mult:1,target:'all',weight:'standard',o3:true,fx:[['st','cool_down',2,'t'],['st','pep_down',2,'t']],
+        desc:'It is sixty-two degrees. She pulls a hoodie on over her dress, declares a crisis, and gray coastal fog rolls over every enemy: COOL and PEP drop for 2 turns.'},
+      {key:'lachlan_no',name:'LACHLAN, NO!',vp:5,elem:['kinetic'],stat:'pow',mult:2.6,target:'enemy',weight:'heavy',o3:true,fx:[['interrupt','t']],
+        desc:'She spots Lachlan about to climb something dangerous and sprints through the enemy at full mom speed. A big hit that cancels its wind-up.'}
     ]}
 };
 function b2Kit(id) { return B2_SKILLS[id]||B2_SKILLS.tom; }
@@ -1255,6 +1288,8 @@ const B2_TOMBOS=[
 const B2_LAB=[
   {ch:0,name:'JUSTIN’S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Justin, every move unlocked.',party:['tom','grace','rose','justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'JUSTIN SOLO',sub:'Test fight. Justin alone, every move unlocked.',party:['justin'],level:12,foes:[['irongill','front']]},
+  {ch:0,name:'OLIVIA\u2019S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Olivia, every move unlocked.',party:['tom','grace','rose','olivia'],level:12,foes:[['irongill','front']]},
+  {ch:0,name:'OLIVIA SOLO',sub:'Test fight. Olivia alone, every move unlocked.',party:['olivia'],level:12,foes:[['irongill','front']]},
   {ch:1,name:'THE BIG ONE',sub:'Chapter 1. Tom, Grace, Rose and Deedee.',party:['tom','grace','rose','deedee'],level:4,foes:[['bigone','front']]},
   {ch:2,name:'THE BIG SHAKE',sub:'Chapter 2. Tom, TNB and Nara.',party:['tom','tnb','nara'],level:4,la:true,foes:[['bigshake','front']]},
   {ch:3,name:'OLD IRON-GILL',sub:'Chapter 3. Tom, Grace, Rose and Boppy.',party:['tom','grace','rose','boppy'],level:6,foes:[['irongill','front']]},

@@ -158,7 +158,7 @@ const CHAPTERS=[
     noFlight:()=>flag('ch20-done')?{lines:['The train runs both coasts now. Sal is thrilled and very confused about his job.']}
       :{lines:['Airport? Tom. Not now. There is a man in a clock who needs dinner.']}}
 ];
-const MEMBERS=()=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin});
+const MEMBERS=()=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin,olivia});
 function chapterInfo(n=STORY.chapter) { return CHAPTERS[n]||CHAPTERS[0]; }
 function partyRules() {
   const c=chapterInfo(),o=STORY.override||{};

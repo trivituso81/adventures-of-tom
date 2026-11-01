@@ -21,7 +21,8 @@ const B6_PATHS={
   boppy:[{name:'Rikers Warden',sub:'Fishing, the recliner, headcounts'},{name:'Pepper Champion',sub:'Peppers and the 1970 story'}],
   tnb:[{name:'Set Costumer',sub:'Wardrobe, the Metro, horror'},{name:'Kiln & Longboard',sub:'Pottery and steep LA streets'}],
   nara:[{name:'Goodest Girl',sub:'Fetch, zoomies, tug of war'},{name:'Pack Heart',sub:'Puddles, shakes and howls'}],
-  justin:[{name:'Licensed Electrician',sub:'Wire nuts, fits, breakers, drywall'},{name:'Game Day',sub:'Bad calls, sneezes and sore feet'}]
+  justin:[{name:'Licensed Electrician',sub:'Wire nuts, fits, breakers, drywall'},{name:'Game Day',sub:'Bad calls, sneezes and sore feet'}],
+  olivia:[{name:'Reporter Mom',sub:'Notebooks, lectures, snacks, Michael'},{name:'Native Californian',sub:'Fake photos, fog and Lachlan'}]
 };
 
 // ---- Battle XP per monster at its base level (normal fights add up to about 20 to 35; bosses give B6.bossXp). ----
@@ -40,8 +41,9 @@ const B6_TRAITS={
   boppy:{name:'Heartburn',text:'Peppers and hits he takes while guarding add Heartburn. At 3 his next attack or GRUMBLE lets out the Warden’s Counter-Roar and stuns whoever hit him.'},
   tnb:{name:'Quick-Change Rack',text:'Quick Change and WARDROBE dress the target in the next costume on the rack: Action Hero, Cozy Cardigan, then Final Girl.'},
   nara:{name:'Frantic, Picky, Puddles',text:'POW +50% and PEP +30% while Tom is knocked out. Only eats Chicken Jerky and homemade food. Sometimes leaves a happy puddle after a win.'},
-  justin:{name:'Mid-Project',text:'Always in the middle of something. DRYWALL halves all damage to the party for one round, and Giant Sneeze costs an enemy its next turn.'}
+  justin:{name:'Mid-Project',text:'Always in the middle of something. DRYWALL halves all damage to the party for one round, and Giant Sneeze costs an enemy its next turn.'},
+  olivia:{name:'Quick Talker',text:'Always mid-sentence. Her chatter moves hit fast and leave enemies Dizzy or off balance, and SNACK BAG heals the party and clears Dizzy.'}
 };
 
 // ---- Starting Signature Tools (data/party.js has the items). Members start holding these. ----
-const B6_STARTER={tom:'k_keyboard',grace:'g_dumpling',rose:'r_lambytoy',amy:'a_whistle',deedee:'d_pin',boppy:'b_rod',tnb:'n_rib',nara:'y_stick',justin:'j_tester'};
+const B6_STARTER={tom:'k_keyboard',grace:'g_dumpling',rose:'r_lambytoy',amy:'a_whistle',deedee:'d_pin',boppy:'b_rod',tnb:'n_rib',nara:'y_stick',justin:'j_tester',olivia:'o_phone'};

@@ -98,4 +98,20 @@ for(const [k,v] of [
   ['ko','Tell the basement I loved it.'],['win','And THAT is how you close out a game.']]) { (LINES.justin=LINES.justin||{})[k]=[v]; }
 // Rose (Grace when Rose is down) taps Justin's sneaker in Foot Tap.
 (LINES.rose=LINES.rose||{}).foot_tap_tap=['Tap.'];
+
+// Olivia (installed 2026-11-01, claude/olivia-ability-prompts.md). New character, so no baked battle clips yet: the speech-synthesis fallback plays until her
+// battle voice is baked (her lines are in tools/bake-page/pending.json). Move keys match data/battle2-data.js B2_SKILLS.olivia.
+VOICE.olivia={pitch:1.35,rate:1.18,prefer:['Samantha','Karen','Flo','Shelley','Google US English','Microsoft Zira','Female'],blip:[480,380]};
+for(const [k,v] of [
+  ['join','Michael\'s got the kids. Let\'s go, I have forty minutes.'],['greet','Tom! Hi! Sorry, I\'m mid-sentence in my head.'],['basic','SOURCE?'],
+  ['fact_check_open','Quick question.'],['fact_check','SOURCE?'],['snack_bag_dig','Hang on, I\'ve got snacks.'],
+  ['snack_bag','Everybody gets one. ONE.'],['livnews_live','LivNews, we\'re live.'],['livnews_live_chat','Chat, look at this thing.'],
+  ['inverted_pyramid_lecture','Most important thing FIRST.'],['inverted_pyramid','That\'s the lede. Bury that.'],['double_under_ready','I was a champion, you know.'],
+  ['double_under_trip','Okay, that was a while ago.'],['double_under','There it is!'],['story_time','Once upon a time, in a very quiet house...'],
+  ['story_time_end','And everybody went to sleep.'],['michael_1','MICHAEL!'],['michael','MICHAEL, HANDLE THIS!'],
+  ['michael_thanks','Thank you, honey.'],['better_than_bobby_a','Jump rope. Grades. Parallel parking.'],['better_than_bobby_b','Cooking. Mario Kart.'],
+  ['better_than_bobby','Sorry, Bobby.'],['is_this_real_hold','Hold still, I\'m checking.'],['is_this_real','Too many fingers. Fake.'],
+  ['marine_layer','It\'s sixty-two degrees.'],['marine_layer_crisis','This is a crisis.'],['lachlan_no','LACHLAN, NO!'],
+  ['lachlan_no_got','Got him. Got him. We\'re fine.'],['hurt','Christine would have a note about this.'],['low','Don\'t tell Christine.'],
+  ['ko','Tell my followers I was right.'],['win','Put THAT on TikTok.']]) { (LINES.olivia=LINES.olivia||{})[k]=[v]; }
 (LINES.grace=LINES.grace||{}).foot_tap_tap=['Tap.'];

@@ -165,6 +165,7 @@ const items={
   d_pin:{who:'deedee',name:'Rolling Pin',icon:'\u{1F9C1}',slot:'Tool',desc:'Fifty years of pie crust. Also very good for pointing.',stats:{pow:1,warmth:3}},
   b_rod:{who:'boppy',name:'Rikers Bass Rod',icon:'\u{1F3A3}',slot:'Tool',desc:'Twenty years on the same rod. The fish all know it by name.',stats:{pow:3,warmth:1}},
   n_rib:{who:'tnb',name:'Pottery Rib',icon:'\u{1F3FA}',slot:'Tool',desc:'A worn wooden rib from his first wheel class. Shapes clay. Shapes opinions.',stats:{pow:1,warmth:3}},
+  o_phone:{who:'olivia',name:'LivNews Phone',icon:'\u{1F4F1}',slot:'Tool',desc:'Coral case, three notifications and a cracked corner. She films the news with it. Sometimes the news is Isla eating a leaf.',stats:{pow:1,warmth:3}},
   y_stick:{who:'nara',name:'The Best Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Nara found it on 2nd Ave. It\'s the best stick. Everyone must see the stick.',stats:{pow:3,warmth:1}},
   j_tester:{who:'justin',name:'Voltage Tester',icon:'\u{1F527}',slot:'Tool',desc:'Beeps when something is live. Beeps at Tom a lot. Justin says that is a good sign.',stats:{pow:3,warmth:1}},
   j_cap:{who:'justin',price:20,name:'Team Cap',icon:'\u{1F9E2}',slot:'Charm',desc:'Worn backwards during the game. Worn forwards when the team is losing. Same cap.',perk:{stat:{pep:.1}}},
@@ -304,7 +305,13 @@ const justin=makeMember({id:'justin',name:'Justin',title:'Brother-in-law, the gi
   equipment:{Tool:'j_tester',Outfit:null,Charm:null},
   commands:['attack','drywall','item','run'],
   look:{hair:'#7a4f2e',skin:'#e3a47c',shirt:'#b9bfd3'}});
-const RECRUITS={amy,deedee,boppy,tnb,nara,justin};
+// Olivia: Tom's cousin, a journalist and mom of Lachlan and Isla. Teaches journalism at USC, reports AI stories as LivNews, ex jump rope champ.
+const olivia=makeMember({id:'olivia',name:'Olivia',title:'Cousin, journalist, mom',hp:12,maxHp:12,mp:12,maxMp:12,power:3,
+  base:{Curiosity:4,Charm:4,Pace:3,Luck:2},
+  equipment:{Tool:'o_phone',Outfit:null,Charm:null},
+  commands:['attack','snack','item','run'],
+  look:{hair:'#c9a063',skin:'#f0c4a0',shirt:'#f3e6c4'}});
+const RECRUITS={amy,deedee,boppy,tnb,nara,justin,olivia};
 const party=[hero,grace,rose];
 const PARTY_MAX=4;
 const inParty=m=>party.includes(m);
@@ -363,8 +370,8 @@ const fieldUsable=item=>!!(item.heal||item.healAll||item.revive);
 // Selling pays half the shop price. Family things have no price and cannot be sold.
 const sellValue=item=>item.price?Math.max(1,Math.floor(item.price/2)):(item.sell||0);
 const canWear=(m,item)=>!item.who||item.who===m.id;
-const memberById=id=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin})[id];
-const ALL_MEMBERS=()=>[hero,grace,rose,amy,deedee,boppy,tnb,nara,justin];
+const memberById=id=>({tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin,olivia})[id];
+const ALL_MEMBERS=()=>[hero,grace,rose,amy,deedee,boppy,tnb,nara,justin,olivia];
 // Equip from the pockets onto the menu character's slot. Whatever was worn there goes back in the pockets.
 function equipTo(m,id) {
   const item=items[id],idx=bag.indexOf(id);

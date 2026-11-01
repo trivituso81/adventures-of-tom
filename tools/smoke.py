@@ -31,7 +31,7 @@ with sync_playwright() as pw:
     print('built',built)
     for id,v in built.items():
         # Justin's approved kit has nine moves; the other five stamp slots are placeholders until Tom sends more.
-        PARTIAL={'justin':{'A6','B3','B4','B5','B6'}}.get(id,set())
+        PARTIAL={'justin':{'A6','B3','B4','B5','B6'},'olivia':{'B4','B5','B6'}}.get(id,set())
         miss=[x for x in v.split() if x.endswith(':n') and x[:-2].split(':')[-1] not in PARTIAL]
         if miss: fails.append(f'{id} not all built: {v}')
     party=['tom']+[i for i in IDS if i!='tom']

@@ -1,4 +1,11 @@
-## 2026-11-01 (day, 36): Amy's portrait cropped tighter (`amyportrait1`)
+## 2026-11-01 (day, 36): Olivia is a party member with all 11 moves (`olivia6`)
+
+- Olivia (HP 12, MP 12, Quick Talker trait) is wired as a full member on Justin's pattern: `data/party.js` (member, `o_phone`, RECRUITS), `data/progress.js`, `engine/story.js`, `engine/followers.js`, `engine/overworld.js`, `engine/menu.js`, `engine/battle2-ui.js`, `data/battle2-data.js` (stats, 11 moves, two test fights), `data/abilities.js` (kit; slots B4, B5, B6 are empty placeholders).
+- New `engine/olivia-moves.js`: all 11 moves as animated set pieces (Fact Check, SNACK BAG, LivNews Live, Inverted Pyramid, Double Under, Story Time, MICHAEL!, Better Than Bobby, Is This Real?, Marine Layer, LACHLAN, NO!), 1.6x slow like Justin's. Michael and Lachlan are never drawn.
+- Her 31 new lines are in `data/lines.js` and `tools/bake-page/pending.json`; they use speech synthesis until Tom's next voice bake.
+- Not yet reachable in the story: no recruiting spot yet. Tested: `kit_test.py olivia --speed2` (11 of 11 play, contact sheet checked), `smoke.py` for olivia and the default cast. Not played on the phone. Stamp `build olivia6`.
+
+## 2026-11-01 (day, 37): Amy's portrait cropped tighter (`amyportrait1`)
 
 - Tom (01:19) asked for Amy cropped in so she reads like the girls. `portraits/amy.png` is re-cut from the existing painting (about 108 of 128 px, face and hair filling the frame like Grace and Rose). The original large painting is not in the repo, so this is an upscale of the 128 px file and a little softer; a re-send of the original would give a sharper one.
 - Amy's `?v=` in the `PORTRAITS` table (engine/menu.js) went to 12 and the menu.js tag to `amyportrait1`.

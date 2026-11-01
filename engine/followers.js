@@ -140,7 +140,7 @@ function saveGame(slot,quiet=false) {
 function readSave(slot) { try { const raw=saveRaw(slot); return raw?JSON.parse(raw):null; } catch(e) { return null; } }
 function loadGame(slot) {
   const sv=readSave(slot); if(!sv) return false;
-  const allMembers={tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin};
+  const allMembers={tom:hero,grace,rose,amy,deedee,boppy,tnb,nara,justin,olivia};
   // Send any recruit home first, then rebuild the party in saved order.
   for(const m of party.slice()) if(m!==hero&&m!==grace&&m!==rose) recruitLeave(m,true);
   // Grace and Rose stay home while Tom is in Los Angeles; the save says whether they were in the party.
