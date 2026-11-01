@@ -155,6 +155,11 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
+# Shoulders (2026-11-01, Tom: "TNB's shoulder width like Justin's"): upper body x BODY_W, easing back to full width between 25% and 45%
+# of the body so his waist and legs (already Justin's width) stay. Runs after the head warp and bulk_body (before, it punched holes in the
+# sleeves that cross the head box). Narrowing keeps the canvas.
+from headwarp import body_width
+BODY_W, BODY_FADE = float(os.environ.get("TNB_W", 0.67)), (0.25, 0.45)
 def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
@@ -268,6 +273,7 @@ for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n, k=_k)
     _kx = BODY_KD if _n.startswith('d_') else (BODY_KXL if 'left' in _n else BODY_KX)
     if _kx != 1.0: poses[_n] = bulk_body(poses[_n], _n, int(round((_c - _t) * _k)), _kx)
+    if _n != 'b_ko': poses[_n], _ = body_width(poses[_n], int(round((_c - _t) * _k)), BODY_W, fade=BODY_FADE)
 if os.environ.get('HEADSHEET'):                      # debug: all head-warped frames on grey
     _it = list(poses.items()); _cw = max(i.width for _, i in _it) + 10; _ch = max(i.height for _, i in _it) + 10
     _sh = Image.new('RGBA', (_cw * 6, _ch * -(-len(_it) // 6)), (128, 128, 128, 255))

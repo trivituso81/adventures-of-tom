@@ -66,7 +66,7 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3]
 # then the whole figure is refit to the same battle_h. The face had 38 px at scale 1.3, so its share of the figure grows by (49/38)/(1.43/1.3).
 from headwarp import _warp_head, body_width
 # Body width (2026-11-01, Tom: "Tom should be wider to match TNB"): every upright pose's body below the chin x BODY_W before the head warp.
-BODY_W = 1.83   # was 1.18; Tom 11:12: "half the width of TNB". Chest measured 97 vs TNB 158 welcome px at 1.18, so x 1.55 more
+BODY_W = 1.25   # Tom 11:25: shoulders like Justin's (152 -> 104 welcome px at 1.83). Before that 1.83: was 1.18; Tom 11:12: "half the width of TNB". Chest measured 97 vs TNB 158 welcome px at 1.18, so x 1.55 more
 FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12 * .94   # x .94 bald-scalp nudge, as FACE_GROW_W; x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
 TAPER = 16
 def _auto_head(img):

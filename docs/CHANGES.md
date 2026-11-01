@@ -1,3 +1,13 @@
+## 2026-11-01 (day, 43): Tom's and TNB's shoulders as wide as Justin's (`width3`)
+
+- Tom (11:25): make both Tom's and TNB's shoulder width like Justin's.
+- Measured at shoulder level on the welcome screen (welcome px): Justin 104, Tom 152 (after `width2`), TNB 155.
+- Tom: whole body was wide, so `BODY_W` 1.83 to 1.25 (bake_tom.py); his waist now also matches Justin's. `hand()` x offset 50 to 38 px.
+- TNB: only his shoulders and sleeves were wide (waist already 102), so his upper body is narrowed x .67, easing back to full width between 25% and 45% of the body (`BODY_W`, `BODY_FADE` in bake_tnb.py; `body_width` in headwarp.py got a `fade` option). It runs after his head warp and bulk step (run before them it punched holes in the sleeves). Env `TNB_W` overrides for testing.
+- Result (welcome px, shoulder to chest): Justin 98 to 110, Tom 100 to 115, TNB 102 to 120.
+- Known, already live before this change (TNB_W=1 rebake equals the old files byte for byte): small see-through gaps on TNB's sleeves next to his hair in some battle poses (act, throw, wind, kneel, push, ollie). They come from his head-warp step; not fixed yet.
+- ART_V `width3`. Tested: `smoke.py`; `kit_test.py tom` (starter_splash, overpriced_gadget) and the full `tnb` kit; `tomhouse_walk_test.py`; welcome screen and every Tom and TNB battle frame looked at. Stamp `build width3`.
+
 ## 2026-11-01 (day, 43): Tom's body as wide as TNB's (`width2`)
 
 - Tom (11:12, on `build width1`): Tom's body looks half the width of TNB's. Measured at chest level on the welcome screen: Tom 97, TNB 158 (TNB's loose sleeves and apron make his chest the widest part; `width1` had matched the waist).

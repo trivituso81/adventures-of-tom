@@ -216,7 +216,7 @@ def bigger_head(img, top, chin, x0, x1, k, taper=30, pad=420, two_layer=True, pi
     return big.crop(big.getbbox())
 
 
-def body_width(img, chin, factor, taper=14):
+def body_width(img, chin, factor, taper=14, fade=None):
     """Scale the body (rows below `chin`) horizontally by `factor` about the body's centre column, easing from 1 at the chin to `factor`
     over `taper` rows so the neck joins cleanly; the head rows are untouched. Widening pads the canvas by P columns on each side and
     returns (image, P); narrowing keeps the canvas (P = 0) so every x coordinate stays valid. 2026-11-01 (Tom: Tom wider, Boppy skinnier)."""
@@ -235,6 +235,10 @@ def body_width(img, chin, factor, taper=14):
             s = 1.0
         else:
             s = 1.0 + (factor - 1.0) * min(1.0, (y - chin) / float(taper))
+            if fade is not None:                                   # fade=(f0, f1): fractions of the body (chin to feet); factor eases back to 1 between them
+                feet = int(np.where(al.any(1))[0].max()); L = max(1, feet - chin)
+                u = (y - chin) / float(L)
+                if u > fade[0]: s = 1.0 + (s - 1.0) * max(0.0, 1.0 - (u - fade[0]) / max(1e-6, fade[1] - fade[0]))
         src = cx + (xd - cx) / s
         x0 = np.floor(src).astype(int); f = src - x0
         ok0 = (x0 >= 0) & (x0 < W); ok1 = (x0 + 1 >= 0) & (x0 + 1 < W)
