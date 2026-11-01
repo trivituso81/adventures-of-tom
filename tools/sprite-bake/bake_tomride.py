@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Bake Tom carrying Rose on his shoulders (two painted pose sheets) into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom carrying Rose on his shoulders (seven painted pose sheets) into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tomride-battle-v2.png and tomride-walk-v2.png (flat magenta background, see README.md)
-Output: art/chars/tomride-battle.webp, tomride-ko.webp, tomride-ow.webp  (painted frames, K x the size of the rows)
+Input : tools/sprite-bake/src/tomride-s1..s7-*-v3.png (seven sheets, flat magenta background, see README.md; 2026-11-01)
+Output: art/chars/tomride-battle.webp, tomride-rose.webp (Rose alone, after the toss), tomride-ow.webp, tomride-hero.webp (title)
         data/tomride-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
 The rows are a downscaled, quantized copy of each painted frame. The game's logic (hand points, Rose's seat, outfit keys,
@@ -22,10 +22,10 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tomride-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
+KB, KW = 2, 3          # painted resolution multiples: battle, overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=int, default=128)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
+ap.add_argument('--battle-h', type=int, default=140)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
 ap.add_argument('--ow-h', type=int, default=57)        # standing height of the overworld sprite in rows
 ap.add_argument('--combo-k', type=float, default=1.0)   # fine tune for the combo sheet size
 ap.add_argument('--colors', type=int, default=46)
@@ -34,50 +34,18 @@ COMBO_K = args.combo_k
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'tomride-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
-    poses['b_' + nm] = im
-for nm, im in slice_sheet(os.path.join(SRC, 'tomride-combo.png'),
-        [['biplane', 'biplane2', 'cloud'], ['cloud2', 'phones', 'night']]).items():
-    poses['c_' + nm] = im
+def _load(fn, rows, pre):
+    for nm, im in slice_sheet(os.path.join(SRC, fn), rows).items(): poses[pre + nm] = im
+_load('tomride-s1-battle-v3.png', [['idle', 'run1', 'run2', 'hurt', 'kneel']], 'b_')
+_load('tomride-s2-defend-v3.png', [['defend', 'proud', 'win', 'leap']], 'b_')
+_load('tomride-s3-start-v3.png', [['hold', 'annoyed', 'tw_windup', 'tw_follow']], 'b_')
+_load('tomride-s4-toss-v3.png', [['grab', 'rlift', 'toss', 'roseair', 'roseland']], 'b_')
+_load('tomride-s5-combo-v3.png', [['hoist', 'biplane', 'biplane2', 'boop'], ['cloud', 'phones', 'night']], 'c_')
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'tomride-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
-
+_load('tomride-s6-walk-v3.png', [walk_names[0:4], walk_names[4:8], walk_names[8:12]], 'w_')
+poses['hero'] = Image.open(os.path.join(SRC, 'tomride-s7-hero-v3.png')).convert('RGBA')
+# The new art already faces left (Rose looks toward the enemy), so no mirroring is needed (the old ROSE_FLIP table is gone).
 H0b, H0w = poses['b_idle'].height, poses['w_down_stand'].height
-
-# ---------------------------------------------------------------- Rose faces the other way (2026-10-29, Tom)
-# The sheets draw Rose's head turned to the right; battle sprites face left (toward the enemy), so her head and upper body are
-# mirrored in place. Box per pose in source pixels: head centre cx, half width hw (symmetric so the head stays put), ycut = the row
-# where Tom's head starts (nothing of Tom is above it). The bottom 8 rows blend back to the original so the hair has no seam.
-# The two cloud poses are mirrored whole (Tom looks up at the cloud and Rose points at it, so both must turn together).
-ROSE_FLIP = {'b_idle': (85, 66, 98), 'b_windup': (100, 70, 100), 'b_strike': (240, 68, 96), 'b_run1': (112, 70, 98),
-             'b_run2': (116, 66, 98), 'b_leap': (168, 130, 98), 'b_hurt': (188, 128, 112), 'b_kneel': (92, 80, 105),
-             'b_win': (158, 110, 98), 'b_defend': (124, 76, 112), 'b_cast': (207, 111, 104), 'c_biplane': (275, 150, 108),
-             'c_biplane2': (255, 145, 112), 'c_phones': (128, 80, 108), 'c_night': (128, 88, 112)}
-WHOLE_FLIP = ('c_cloud', 'c_cloud2')
-def flip_rose(img, cx, hw, yc, feather=8):
-    a = np.array(img).astype(float)
-    H, W = a.shape[:2]
-    x0, x1 = int(max(0, cx - hw)), int(min(W, cx + hw))
-    cx_ = (x0 + x1) / 2.0
-    hw_ = min(cx_ - x0, x1 - cx_); x0, x1 = int(round(cx_ - hw_)), int(round(cx_ + hw_))
-    yc = min(yc, H)
-    pm = a.copy(); pm[:, :, :3] *= (a[:, :, 3:4] / 255.0)          # premultiplied, so blending keeps clean edges
-    box = pm[:yc, x0:x1]; mir = box[:, ::-1]
-    w = np.ones((yc, 1, 1))
-    for i in range(feather): w[yc - feather + i] = 1.0 - (i + 1) / float(feather + 1)
-    pm[:yc, x0:x1] = w * mir + (1 - w) * box
-    al = pm[:, :, 3:4]
-    rgb = np.where(al > 1, pm[:, :, :3] / np.maximum(al / 255.0, 1e-3), 0)
-    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), al]).astype(np.uint8), 'RGBA')
-for _k, (_cx, _hw, _yc) in ROSE_FLIP.items(): poses[_k] = flip_rose(poses[_k], _cx, _hw, _yc)
-for _k in WHOLE_FLIP: poses[_k] = poses[_k].transpose(Image.FLIP_LEFT_RIGHT)
-if os.environ.get('RIDE_DEBUG'):
-    _t = [poses[k].crop((0, 0, poses[k].width, min(poses[k].height, 230))) for k in list(ROSE_FLIP) + list(WHOLE_FLIP)]
-    _W = sum(t.width + 6 for t in _t); _s = Image.new('RGB', (_W, 230), (90, 90, 110)); _x = 0
-    for t in _t: _s.paste(t, (_x, 0), t); _x += t.width + 6
-    _s.save(os.environ['RIDE_DEBUG']); print('debug sheet', _s.size)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -215,40 +183,31 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+# Sheets 2 and 3 were drawn about 9 percent larger than sheet 1 (compared on the standing pose), and sheet 5 (combos) 32 percent
+# smaller, so each sheet is brought to sheet 1's size before the common scale.
+SHEET_K = {'b_defend': 689 / 755., 'b_proud': 689 / 755., 'b_win': 689 / 755., 'b_leap': 689 / 755.,
+           'b_hold': 689 / 754., 'b_annoyed': 689 / 754., 'b_tw_windup': 689 / 754., 'b_tw_follow': 689 / 754.}
 fb = args.battle_h * KB / H0b
-# Combo poses (Tom and Rose for Double-Decker Airplane, That Cloud Is Lamby, Headphones in the Dark, Lamby Night-Light).
-# That sheet was drawn at a slightly different size, so scale it from the standing 'night' pose to match the idle pose.
 fc = fb * poses['b_idle'].height / poses['c_night'].height * COMBO_K
-for k in ('biplane', 'biplane2', 'cloud', 'cloud2', 'phones', 'night'): battle_names[k] = 'c_' + k
-bt_big = {k: scaled_to(poses[v], fc if v.startswith('c_') else fb) for k, v in battle_names.items()}
+battle_names = {'idle': 'b_idle', 'run1': 'b_run1', 'run2': 'b_run2', 'hurt': 'b_hurt', 'kneel': 'b_kneel', 'defend': 'b_defend',
+                'proud': 'b_proud', 'celeb': 'b_win', 'leap': 'b_leap', 'hold': 'b_hold', 'annoyed': 'b_annoyed',
+                'tw_windup': 'b_tw_windup', 'tw_follow': 'b_tw_follow', 'grab': 'b_grab', 'rlift': 'b_rlift', 'toss': 'b_toss',
+                'hoist': 'c_hoist', 'biplane': 'c_biplane', 'biplane2': 'c_biplane2', 'boop': 'c_boop', 'cloud': 'c_cloud',
+                'phones': 'c_phones', 'night': 'c_night'}
+bt_big = {k: scaled_to(poses[v], fc if v.startswith('c_') else fb * SHEET_K.get(v, 1.0)) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
-
-# The sheets avoid injury wording, so the black eye is painted in here: Tom's kneel frame (under 25 percent HP) gets a soft
-# purple bruise round her near eye. Coordinates are in painted pixels of the final battle frame (168 x 146).
-def paint_bruise(img, cx, cy, rx, ry):
-    a = np.array(img).astype(float)
-    h, w = a.shape[:2]
-    yy, xx = np.mgrid[0:h, 0:w]
-    d = np.sqrt(((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2)
-    outer = np.clip(1.0 - d, 0, 1) ** 0.7 * 0.55
-    inner = np.clip(1.0 - d / 0.55, 0, 1) ** 0.8 * 0.5
-    cov = (a[:, :, 3] / 255.0)
-    for wgt, col in ((outer, (118, 70, 150)), (inner, (52, 28, 70))):
-        k = (wgt * cov)[:, :, None]
-        a[:, :, :3] = a[:, :, :3] * (1 - k) + np.array(col, float) * k
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-bt_big['kneel'] = paint_bruise(bt_big['kneel'], 116, 164, 11, 8)   # Tom's near eye in the kneel pose (looked up on the sliced frame)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'tomride-battle.webp'))
 
-# knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
-ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
-ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
-ko_rows = ko_rows['ko']
-ko_rects = pack(ko_big, os.path.join(ART, 'tomride-ko.webp'))
+# Rose alone (after Tom tosses her off his shoulders): in the air, then landing on her feet. Same scale as the sheet 1 frames.
+rz_big = tighten(place({'air': scaled_to(poses['b_roseair'], fb), 'land': scaled_to(poses['b_roseland'], fb)}, KB, 'center'), KB)
+rz_pal, rz_rows = rows_of(rz_big, KB, 28)
+rz_rects = pack(rz_big, os.path.join(ART, 'tomride-rose.webp'))
+
+# Title hero pose (single large painting, welcome screen)
+hero = scaled_to(poses['hero'], min(1.0, 1100.0 / poses['hero'].height))
+hero.save(os.path.join(ART, 'tomride-hero.webp'), 'WEBP', lossless=False, quality=92, method=6)
+print('wrote art/chars/tomride-hero.webp', hero.size)
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / H0w
@@ -289,23 +248,23 @@ meta = {
     'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand']), 'keys': ow_keys, 'rows': ow_rg},
     'colors': {'bt': len(bt_pal), 'ow': len(ow_pal)},
 }
-atlas = {'bt': {'src': 'art/chars/tomride-battle.webp?v=6', 'k': KB, 'rects': bt_rects},
-         'ko': {'src': 'art/chars/tomride-ko.webp?v=6', 'k': KO_, 'rects': ko_rects},
-         'ow': {'src': 'art/chars/tomride-ow.webp?v=6', 'k': KW, 'rects': ow_rects}}
+atlas = {'bt': {'src': 'art/chars/tomride-battle.webp', 'k': KB, 'rects': bt_rects},
+         'rz': {'src': 'art/chars/tomride-rose.webp', 'k': KB, 'rects': rz_rects},
+         'ow': {'src': 'art/chars/tomride-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
 
 js = []
 js.append("'use strict';")
-js.append("// data/tomride-hires.js — Tom carrying Rose, from two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_tomride.py; do not hand-edit.")
+js.append("// data/tomride-hires.js — Tom carrying Rose, from seven painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_tomride.py; do not hand-edit.")
 js.append("// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js).")
 js.append("const TOMRIDE_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel', 'biplane', 'biplane2', 'cloud', 'cloud2', 'phones', 'night'):
+for k in battle_names:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
-js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
+js.append("  rz:{pal:" + json.dumps(rz_pal) + ",air:" + fmt_rows(rz_rows['air']) + ",land:" + fmt_rows(rz_rows['land']) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):
     for n in ('stand', 'step1', 'step2'):

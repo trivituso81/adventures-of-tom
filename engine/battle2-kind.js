@@ -174,6 +174,25 @@ function b2Dismount() {
   try { sfx.boing(); } catch(e) {} setMessage('Rose hops down off Tom’s shoulders and gets back in line.');
   return ms+60;
 }
+// Tom's moves other than Press Start and DEFEND: he grabs Rose, lifts her off his shoulders and tosses her; she lands on her feet
+// in her place in the line and the ride ends (Tom 2026-11-01). Returns enqueue steps (empty when she is not riding).
+const B2_TOSS_KEEP={button_mash:1};
+function b2TossSteps(u,act) {
+  const rose=B2.party.find(p=>p.id==='rose');
+  if(!u||u.id!=='tom'||!act||act.kind==='defend'||act.run||act.item||act.praise||act.tombo||B2_TOSS_KEEP[act.key]) return [];
+  if(!rose||!b2Riding(rose)||typeof TOMRIDE==='undefined'||!TOMRIDE.ok||!TOMRIDE.bt.rz) return [];
+  const T=TOMRIDE.bt,fxT=battle.fx[u.idx],fxR=battle.fx[rose.idx],home=BATTLE_POS[u.idx],hr=BATTLE_POS[rose.idx];
+  const cx=home.x*3,base=home.base*3,t1=300,t2=620,t3=980;   // grab, lift, toss (ms)
+  return [()=>{
+      fxT.path={t:0,dur:t3/1000,fn:(q)=>{ const ms=q*t3; return {cx,base,frame:ms<t1?T.sk.grab:ms<t2?T.sk.lift:T.sk.toss}; }};
+      setMessage('Tom picks Rose up off his shoulders.'); try { sfx.whoosh(); } catch(e) {}
+    },t3,()=>{
+      const rp=b2RidePos(rose,rose.idx)||{cx:cx+2,base:base-130}; delete rose.st.shoulder; b2Render();
+      const x0=rp.cx,b0=rp.base,x1=hr.x*3,b1=hr.base*3,dur=560;
+      fxR.path={t:0,dur:dur/1000,fn:(q)=>{ const e=q*q*(3-2*q); return {cx:x0+(x1-x0)*e,base:b0+(b1-b0)*e-(q<.8?Math.sin(q/.8*Math.PI)*40:0),frame:q<.7?T.rz.air:T.rz.land}; }};
+      try { sfx.boing(); } catch(e) {} setMessage('Rose lands on her feet. The ride is over.');
+    },620];
+}
 // Tombo staging spots (stage units): Tom on the near side, the partner a step back, side by side with no overlap.
 const B2_STAGE={tom:{x:92,base:86},pt:{x:117,base:100},ms:460};
 function b2StageOut(tom,pt) {

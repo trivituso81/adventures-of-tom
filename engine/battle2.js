@@ -288,6 +288,8 @@ function b2Do(act,opt) {
   if(act.kind==='defend') { enqueue(...b2DefendSteps(u,opt,act),()=>b2AfterAction()); return; }
   if(act.praise) { enqueue(...b2PraiseSteps(u,opt),()=>b2AfterAction()); return; }
   if(act.tombo) { b2RunTombo(u,act,opt); return; }   // engine/battle2-kind.js
+  const toss=typeof b2TossSteps==='function'?b2TossSteps(u,act):[];   // Rose rides Tom: he tosses her off first (engine/battle2-kind.js)
+  if(toss.length) { enqueue(...toss,()=>{ b2BeginMove(u,act,opt); b2Animate(u,act,opt); }); return; }
   b2BeginMove(u,act,opt);
   b2Animate(u,act,opt);   // engine/battle2-moves.js; its last step calls checkEnemy(), which ends the move
 }
