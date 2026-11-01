@@ -1,3 +1,9 @@
+## 2026-11-01 (evening, 51): NPCs inside houses 15% larger (`size4`)
+
+- Tom (17:41): NPCs inside of houses should be 15% larger.
+- Call made: every non-main character (Deedee, Boppy, shopkeepers, residents) drawn in a painted house interior is 15% bigger (`OW_NPC_INDOOR` 1.15 in `engine/town-render.js`); main characters keep the `size2` sizes; streets and rooms without a house painting are unchanged. Speech bubbles over them follow the new size.
+- Tested: `smoke.py` FAILS: []; `rooms_test`, `grands_walk_test` pass; looked at Deedee and Boppy's house in portrait (Boppy clearly larger beside Tom). Not played on the phone. Knob: `OW_NPC_INDOOR`.
+
 ## 2026-11-01 (evening, 52): TNB's lobby elevator button is easy to press (`elev1`)
 
 - Tom (17:35): the press area for the elevator in TNB's loft building is too small, and he had to stand far to the right of the button to use it.

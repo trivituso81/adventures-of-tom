@@ -19,12 +19,15 @@ function walkPhase(a) {
 const OW_PLAYABLE_BOOST=1.15*1.10;           // outdoor maps
 const OW_PLAYABLE_BOOST_OLD=1.15;
 const OW_PLAYABLE_BOOST_INDOOR=1.15*0.75;    // painted interiors (the maps that use INTERIOR_ACTOR_SCALE in engine/plate.js)
+const OW_NPC_INDOOR=1.15;   // 2026-11-01 (Tom): townspeople and family NPCs inside the painted houses are 15% larger
+function owMain(a) { return !!(a.isPlayer||a.kid||a.sheet==='michael'); }
+function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap.id]:null; return !!(p&&p.actorScale); }
+function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the size before the 11-01 evening changes
 function owBoost(a) {
-  if(!(a.isPlayer||a.kid||a.sheet==='michael')) return 1;
+  if(!owMain(a)) return owInHouse()?OW_NPC_INDOOR:1;
   if(!currentMap) return OW_PLAYABLE_BOOST_OLD;
   if(currentMap.outside) return OW_PLAYABLE_BOOST;
-  const p=PLATES[currentMap.id];
-  return (p&&p.actorScale)?OW_PLAYABLE_BOOST_INDOOR:OW_PLAYABLE_BOOST_OLD;   // rooms without a house painting (school rooms, dome, moon club) stay as they were
+  return owInHouse()?OW_PLAYABLE_BOOST_INDOOR:OW_PLAYABLE_BOOST_OLD;   // rooms without a house painting (school rooms, dome, moon club) stay as they were
 }
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
@@ -652,7 +655,7 @@ function drawTarget(target) {
   if(target.kind==='npc') {
     const p=position(target.value);
     x=(p.x+.5)*T;
-    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK()*owBoost(target.value)/1.15-1)):52));
+    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK()*owBoost(target.value)/owBoostOld(target.value)-1)):52));
   } else if(target.kind==='object') {
     x=(target.value.x+target.value.w/2)*T;
     y=target.value.y*T-(target.value.kind==='tree'?70:28);
