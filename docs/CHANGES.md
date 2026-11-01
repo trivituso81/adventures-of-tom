@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 43): Welcome screen bodies follow real height (`body1`)
+
+- Tom (09:56 to 09:59): compared adult body lengths and widths, approved counting real height to the top of the head, not the top of the hair or cap.
+- Measured on the welcome screen (chin to feet, welcome px): Justin 208, Tom 196 matched their heights; TNB 164 (should be 192), Amy 160 (178), Deedee 165 (178), Boppy 172 (183), because hair and caps ate into their height.
+- Fix (welcome screen and walking art): heights TNB 304 to 330, Boppy 291 to 299, Amy 282 to 298, Deedee 282 to 293 (SPLASH_SPOTS, engine/splash.js); walk head shares lowered by old/new height so heads stay the same size (bake_tnb `TARGET_OW`/`TARGET_OWL` x .921, bake_boppy .393, bake_amy and bake_amy_extra .416, bake_deedee .404). Result: bodies TNB 194, Boppy 182, Amy 176, Deedee 176. The top of TNB's hair now reaches Justin's height on the welcome screen.
+- Not changed: battle heights (in battle TNB's head with hair is much bigger than Justin's, so a full-length body would make him look as tall as Justin), widths (as painted), Tom and Justin. On the overworld these four keep their row height, so their heads are about 4 to 8 percent smaller there than before. ART_V `body1`.
+- Tested: `smoke.py`, `amyhouse_walk_test.py`; welcome screen before and after, bodies side by side re-measured. Not played on the phone. Stamp `build body1`.
+
 ## 2026-11-01 (day, 43): Tom's head nudged down to match Justin's (`heads6`)
 
 - Tom (09:51): Justin's head still looked smaller than Tom's. Measured on the welcome screen: both head outlines are the same (crown to chin 128 vs 130, cheek to cheek 70 vs 75), but Tom is bald, so his scalp reads as face: his visible skin is 115 tall against Justin's 102 (Justin's top fifth is hair).

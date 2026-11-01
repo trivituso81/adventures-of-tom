@@ -539,10 +539,10 @@ const SPLASH_SPOTS=[
   {id:'grace',x:425,feet:1175,h:225},   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
   {id:'tom',x:287,feet:1222,h:335},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose
   {id:'rose',x:372,feet:1244,h:196,solo:true},   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
-  {id:'tnb',x:170,feet:1198,h:304},
-  {id:'boppy',x:768,feet:1222,h:291},
-  {id:'amy',x:566,feet:1222,h:282},
-  {id:'deedee',x:672,feet:1258,h:282}
+  {id:'tnb',x:170,feet:1198,h:330},   // Tom 2026-11-01: body (chin to feet) follows real height; his big hair sits on top, so the top of his hair reaches Justin's
+  {id:'boppy',x:768,feet:1222,h:299},
+  {id:'amy',x:566,feet:1222,h:298},
+  {id:'deedee',x:672,feet:1258,h:293}
 ];
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;

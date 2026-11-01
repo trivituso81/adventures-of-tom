@@ -147,7 +147,7 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
 TOM_HEAD_RATIO = 0.40
 # Battle only (walk keeps 0.40): face (hairline to chin) = Justin's 49 battle px, Tom's call 2026-11-01. Final head rows = ratio x battle_h, so ratio = 0.40 x 49/39 x 1.3/1.322 (old face px, old/new battle scale).
 # Walk (front face on the welcome screen, drawn at real height with Justin 6'4" = 330 picture px): face = Justin's share x 330 / own height (2026-11-01, Tom).
-WALK_HEAD_RATIO = 0.42   # was .385; x 1.09 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
+WALK_HEAD_RATIO = 0.404   # x .962 (2026-11-01, Tom: body chin-to-feet follows real height, hair or cap counted on top; welcome height went up, so head share goes down by old/new height and the head stays the same size); before that .42 # was .385; x 1.09 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
 BATTLE_HEAD_RATIO = 0.494
 HEAD_KB = HEAD_KW = HEAD_K
 def _head_ratio(name, k):
