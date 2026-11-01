@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 36): Amy's portrait cropped tighter (`amyportrait1`)
+
+- Tom (01:19) asked for Amy cropped in so she reads like the girls. `portraits/amy.png` is re-cut from the existing painting (about 108 of 128 px, face and hair filling the frame like Grace and Rose). The original large painting is not in the repo, so this is an upscale of the 128 px file and a little softer; a re-send of the original would give a sharper one.
+- Amy's `?v=` in the `PORTRAITS` table (engine/menu.js) went to 12 and the menu.js tag to `amyportrait1`.
+- Tested: side by side with Grace, Rose and Justin, `smoke.py`, character menu screenshot. Not played on the phone. Stamp `build amyportrait1`.
+
 ## 2026-11-01 (day, 34): Olivia's 11 ability sheets baked (`olivia5`)
 
 - All 11 painted ability sheets are cut and loaded as sprite keys on `BATTLE_SPRITES.olivia` (59 frames, each with a mirrored `R` copy): `fc_` Fact Check, `sb_` SNACK BAG, `ln_` LivNews Live, `ip_` Inverted Pyramid, `du_` Double Under, `st_` Story Time, `mi_` MICHAEL!, `bb_` Better Than Bobby, `ir_` Is This Real?, `ml_` Marine Layer, `lk_` LACHLAN, NO!. Frame names follow `claude/olivia-ability-prompts.md` (for example `fc_jab`, `du_jump_a`, `mi_yell_2`).
