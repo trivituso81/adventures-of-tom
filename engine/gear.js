@@ -43,9 +43,10 @@ function garmentTint(kind,id,color,raw=false) {
   tintCache.set(ck,t);
   return t;
 }
+// Tom 11-01 (`nolook1`): equipped items never change a character's clothes or colors. Gear still gives stats.
+// Every recolor path (battle, overworld, painted frames, Rose's ride seat, menu portrait) asks this, so null here turns them all off.
 function memberTopColor(m) {
-  const id=m&&m.equipment&&m.equipment.Outfit;
-  return id&&items[id]&&items[id].color||null;
+  return null;
 }
 // Set while a party member's sprite is being drawn; drawSprite reads it.
 let activeTint=null;
