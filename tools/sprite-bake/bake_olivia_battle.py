@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bake Olivia's painted 4 x 4 battle sheet into the game (battle stances only; the 11 ability sheets come with her kit).
+"""Bake Olivia's painted 4 x 4 battle sheet and her 11 ability sheets into the game.
 
 Input : tools/sprite-bake/src/olivia-battle-v1.png, flat magenta background, frames left to right, top to bottom:
           idleA idleB walkA walkB / hip act wind swing / spread guard hurt low / ko cheerA cheerB sig
@@ -26,7 +26,7 @@ OUT = os.path.join(ROOT, 'data/olivia-battle-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KB, KO_ = 2, 2
-AV = '?v=olivia4'   # cache string: bump with the ?v= tag in index.html whenever frame sizes change
+AV = '?v=olivia5'   # cache string: bump with the ?v= tag in index.html whenever frame sizes change
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=float, default=97)   # idle height in grid rows
@@ -108,13 +108,14 @@ def quantize(frames, ncolors):
 def rows_of(frames, k, ncolors):
     return quantize({n: hard(scaled_to(v, 1.0 / k)) for n, v in frames.items()}, ncolors)
 
-def pack(frames, path):
+def pack(frames, path, lossy=False):
     names = list(frames); w0, h0 = frames[names[0]].size
     per = max(1, 2048 // w0); nrows = -(-len(names) // per)
     atlas = Image.new('RGBA', (min(per, len(names)) * w0, nrows * h0), (0, 0, 0, 0)); rects = {}
     for i, n in enumerate(names):
         x, y = (i % per) * w0, (i // per) * h0; atlas.paste(frames[n], (x, y)); rects[n] = [x, y, w0, h0]
-    atlas.save(path, 'WEBP', lossless=True, quality=100, method=6)
+    if lossy: atlas.save(path, 'WEBP', lossless=False, quality=93, alpha_quality=100, method=6)
+    else: atlas.save(path, 'WEBP', lossless=True, quality=100, method=6)
     print('wrote', os.path.relpath(path, ROOT), atlas.size, os.path.getsize(path) // 1024, 'KB')
     return rects
 
@@ -134,11 +135,98 @@ ko_big = {'ko': _c}
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rects = pack(ko_big, os.path.join(ART, 'olivia-ko.webp'))
 
+
+# ---------------------------------------------------------------- ability sheets
+# key -> (file, row layout, frame names). Figures are found by blob detection and assigned to rows by vertical centre (by_position).
+SHEETS = {
+    'fc': ('factcheck', [4], 'open squint jab smug'),
+    'sb': ('snackbag', [4, 1], 'dig found toss_wind toss one_each'),
+    'ln': ('livnews', [4, 1], 'selfie turn live tapping check'),
+    'ip': ('pyramid', [4, 2], 'lecture top_edge slope point slam nod'),
+    'du': ('doubleunder', [4, 3], 'ready trip laugh focus jump_a jump_b whip'),
+    'st': ('storytime', [3, 2], 'sit show read shhh close'),
+    'mi': ('michael', [4, 1], 'breath yell_1 wait yell_2 thanks'),
+    'bb': ('bobby', [4, 3], 'one two three four_and_five crossed mic drop'),
+    'ir': ('isreal', [4, 1], 'scan squint gasp fake sigh'),
+    'ml': ('marine', [4, 1], 'shiver hoodie hood_up crisis sulk'),
+    'lk': ('lachlan', [3, 2], 'gasp sprint_wind sprint skid relief'),
+}
+
+def despill_pink(img):
+    a = np.array(img).astype(float); R, G, B = a[:, :, 0], a[:, :, 1], a[:, :, 2]
+    m = (R > G + 60) & (B > G * 0.95) & (a[:, :, 3] > 0)
+    a[:, :, 2] = np.where(m, np.minimum(B, G * 0.62), B); a[:, :, 0] = np.where(m, np.minimum(R, G * 1.75 + 10), R)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
+
+def face_h(im):
+    """Height of the face (largest skin patch in the top 40 percent after an opening that drops arms and fingers). Head size is constant inside a
+    sheet, so the top two readings (upright frames) give the factor that matches a sheet to the battle sheet."""
+    from scipy import ndimage
+    a = np.array(im); al = a[:, :, 3] > 40; ys, xs = np.where(al)
+    if not len(ys): return 1.0
+    top, bot = ys.min(), ys.max(); H = bot - top + 1
+    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
+    skin = al & (r > 170) & (r > g + 14) & (g > b + 8) & (r - b > 40); skin[top + int(H * .40):] = False
+    op = ndimage.binary_opening(skin, iterations=max(3, int(H * .03)))
+    lab, n = ndimage.label(op)
+    if not n: return 1.0
+    sizes = ndimage.sum(op, lab, range(1, n + 1)); cy, cx = np.where(lab == int(np.argmax(sizes)) + 1)
+    return float(cy.max() - cy.min() + 1)
+
+def face_ref(frames):
+    v = sorted((face_h(f) for f in frames), reverse=True)[:2]
+    return float(np.mean(v))
+
+ref_face = face_ref([poses[n] for n in ('idleA', 'idleB', 'hip', 'act', 'spread', 'cheerA')])
+print('battle sheet face height (top two) %.0f px' % ref_face)
+
+def cut_set(sk):
+    fname, layout, nm = SHEETS[sk]
+    names = [f'{sk}_{n}' for n in nm.split()]; rows, i = [], 0
+    for c in layout: rows.append(names[i:i + c]); i += c
+    p = os.path.join(SRC, f'olivia-{sk}-v1.png')
+    if not os.path.exists(p): print('MISSING sheet', p); return None
+    got = slice_sheet(p, rows, by_position=True)
+    pos = dict(slice_sheet.pos)
+    # lift: how far each frame's lowest pixel sits above the row's ground (jumps, sprint), in sheet pixels
+    lift = {}
+    for r in rows:
+        bots = {n: pos[n][1] + got[n].height for n in r}; g = max(bots.values())
+        for n in r: lift[n] = g - bots[n]
+    got = {n: despill_pink(v) for n, v in got.items()}
+    fw = face_ref(list(got.values()))
+    f = ref_face / fw                       # source pixels of this sheet -> source pixels of the battle sheet
+    print('%s: %d frames, face h %.0f px -> scale %.3f, lifts %s' % (sk, len(got), fw, f, {n[3:]: round(l * f * FB) for n, l in lift.items() if l > 6}))
+    return names, got, lift, f
+
+def place_feet_lift(frames, lifts, k):
+    axs = {n: feet_cx(im) for n, im in frames.items()}
+    left = max(axs.values()); right = max(im.width - axs[n] for n, im in frames.items())
+    half = up(int(np.ceil(max(left, right))) + 1, k)
+    Hc = up(max(im.height + int(round(lifts[n])) for n, im in frames.items()), k)
+    out = {}
+    for n, im in frames.items():
+        c = Image.new('RGBA', (half * 2, Hc), (0, 0, 0, 0)); c.alpha_composite(im, (int(round(half - axs[n])), Hc - im.height - int(round(lifts[n])))); out[n] = c
+    return out
+
+sets = {}
+for sk, (fname, layout, nm) in SHEETS.items():
+    r = cut_set(sk)
+    if r is None: continue
+    names, got, lift, f = r
+    fr = {n: scaled_to(got[n], FB * f) for n in names}
+    lf = {n: lift[n] * f * FB for n in names}
+    big = tighten(place_feet_lift(fr, lf, KB), KB)
+    pal, rows = rows_of(big, KB, args.colors)
+    rects = pack(big, os.path.join(ART, f'olivia-{fname}.webp'), lossy=True)
+    sets[sk] = {'file': fname, 'pal': pal, 'rows': rows, 'rects': rects, 'big': big, 'h': len(next(iter(rows.values()))), 'w': len(next(iter(rows.values()))[0])}
+
 # ---------------------------------------------------------------- contact sheet
 def contact(path):
     items = [(k, v) for k, v in core_big.items()] + [('ko', ko_big['ko'])]
+    for sk, st in sets.items(): items += list(st['big'].items())
     cw = max(i.width for _, i in items) // 2 + 4; ch = max(i.height for _, i in items) // 2 + 14
-    per = 8; rws = -(-len(items) // per)
+    per = 12; rws = -(-len(items) // per)
     sh = Image.new('RGBA', (per * cw, rws * ch), (128, 128, 128, 255)); d = ImageDraw.Draw(sh)
     for i, (n, im) in enumerate(items):
         x, y = (i % per) * cw, (i // per) * ch
@@ -151,11 +239,17 @@ contact(args.contact)
 # ---------------------------------------------------------------- data file
 atlas = {'bt': {'src': 'art/chars/olivia-battle.webp' + AV, 'k': KB, 'rects': core_rects},
          'ko': {'src': 'art/chars/olivia-ko.webp' + AV, 'k': KO_, 'rects': ko_rects}}
+for sk, st in sets.items(): atlas[sk] = {'src': f'art/chars/olivia-{st["file"]}.webp' + AV, 'k': KB, 'rects': st['rects']}
 js = ["'use strict';",
       "// data/olivia-battle-hires.js: Olivia's painted battle stances from her 4 x 4 battle sheet (Nov 2026). GENERATED by tools/sprite-bake/bake_olivia_battle.py; do not hand-edit.",
       "// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js). Used by data/olivia-battle-use.js.",
       "const OLIVIA_BT={", "  atlas:" + json.dumps(atlas) + ",", "  core:{pal:" + json.dumps(core_pal) + ","]
 for k in CORE: js.append(f"    {k}:" + fmt_rows(core_rows[k]) + ",")
-js += ["  },", "  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows([r[::-1] for r in ko_rows['ko']]) + "}", "};"]
+js += ["  },", "  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows([r[::-1] for r in ko_rows['ko']]) + "},", "  sets:{"]
+for sk, st in sets.items():
+    js.append(f"  {sk}:{{pal:" + json.dumps(st['pal']) + ",rows:{")
+    for n, r in st['rows'].items(): js.append(f"    {n}:" + fmt_rows(r) + ",")
+    js.append("  }},")
+js += ["  }", "};"]
 open(OUT, 'w').write('\n'.join(js) + '\n')
 print('wrote', os.path.relpath(OUT, ROOT), os.path.getsize(OUT) // 1024, 'KB', '| idle rows', len(core_rows['idle']), 'x', len(core_rows['idle'][0]))

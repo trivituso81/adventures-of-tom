@@ -16,6 +16,7 @@ with sync_playwright() as pw:
     pg.on('pageerror',lambda e: errs.append(str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
     print('has olivia sprite:',pg.evaluate("()=>typeof BATTLE_SPRITES.olivia+' '+typeof KO_SPRITES.olivia+' scale '+BATTLE_SPRITES.olivia.scale"))
+    print('ability frames:',pg.evaluate("()=>{ const sp=BATTLE_SPRITES.olivia; const ks=Object.keys(sp).filter(k=>/^(fc|sb|ln|ip|du|st|mi|bb|ir|ml|lk)_/.test(k)); return ks.length+' keys, '+ks.filter(k=>!k.endsWith('R')).length+' frames; missing: '+['fc_jab','sb_toss','ln_live','ip_slam','du_whip','st_read','mi_yell_2','bb_drop','ir_fake','ml_crisis','lk_sprint'].filter(k=>!sp[k]).join(',') }"))
     pg.evaluate("""()=>{ BATTLE_SPRITES.grace=BATTLE_SPRITES.olivia; KO_SPRITES.grace=KO_SPRITES.olivia; if(typeof KO_HEAD!=='undefined') KO_HEAD.grace=KO_HEAD.olivia;
       const L=window.__LE; splash.active=false; document.getElementById('splash').hidden=true;
       L.b2Start({party:['tom','grace','rose','amy'],level:30,foes:[['mudling','front']],bag:[],heart:0,allSkills:true});
