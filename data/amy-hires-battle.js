@@ -13,11 +13,14 @@
   const rk=rows=>rows.map(r=>{ let s=''; for(const ch of r) s+=map[ch]; return s; });
   const lum=c=>{ const h=pal[c]; if(!h) return 0; return parseInt(h.slice(1,3),16)*.3+parseInt(h.slice(3,5),16)*.59+parseInt(h.slice(5,7),16)*.11; };
   // eye: centroid of dark pixels in the face band; hands: outermost pixels in the arm band (logic reads these)
+  // HR = head (hair to chin) share of the idle height set by the bake (was .40; bigger since 2026-11-01). Bands keep their place relative to head and body:
+  // eye band .2 to .85 of the head, arm band from just above the chin to just over half the body (both give the old .08-.34 and .35-.72 at HR .40).
+  const HR=0.438,EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR);
   const meta=rows=>{ const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
-    for(let y=Math.floor(H*.08);y<Math.floor(H*.34);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
+    for(let y=Math.floor(H*EY0);y<Math.floor(H*EY1);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
     const eye=c?{col:Math.round(sx/c),row:Math.round(sy/c)}:{col:Math.round(W*.38),row:Math.round(H*.2)};
     let lx=W,ly=Math.round(H*.5),rx=0,ry=Math.round(H*.5);
-    for(let y=Math.floor(H*.35);y<Math.floor(H*.72);y++) for(let x=0;x<W;x++) if(rows[y][x]!=='.') { if(x<lx) { lx=x; ly=y; } if(x>rx) { rx=x; ry=y; } }
+    for(let y=Math.floor(H*AR0);y<Math.floor(H*AR1);y++) for(let x=0;x<W;x++) if(rows[y][x]!=='.') { if(x<lx) { lx=x; ly=y; } if(x>rx) { rx=x; ry=y; } }
     return {eye,hand:{n:[lx+1,ly],f:[rx-1,ry]}}; };
   const reg=(rows)=>{ const m=meta(rows); if(sp.eyeAt) sp.eyeAt.set(rows,m.eye); if(sp.handAt) sp.handAt.set(rows,m.hand); return rows; };
   const P=(k,name)=>reg(paintRows(rk(B[k]),'amyBattle',name||k,false));

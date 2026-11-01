@@ -161,19 +161,21 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
     return big.crop(big.getbbox())
 # Same proportions as Deedee (and Tom): head (hair to chin) is 0.40 of figure height. The head factor is solved per set (battle idle, walk down).
 TOM_HEAD_RATIO = 0.40
+# Battle only (walk keeps 0.40): face (hairline to chin) = Justin's 49 battle px, Tom's call 2026-11-01. Final head rows = ratio x battle_h, so ratio = 0.40 x 49/33 x 1.94/2.044 (old face px, old/new battle scale).
+BATTLE_HEAD_RATIO = 0.564
 HEAD_KB = HEAD_KW = HEAD_K
 def _head_ratio(name, k):
     top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name])
     if name.startswith('w_down'): chin = 126
     return (chin - top) * k / bigger_head(poses[name], name, k=k).height
-def _solve(name):
+def _solve(name, ratio=TOM_HEAD_RATIO):
     lo, hi = 1.0, 4.0
     for _ in range(14):
         mid = (lo + hi) / 2
-        if _head_ratio(name, mid) < TOM_HEAD_RATIO: lo = mid
+        if _head_ratio(name, mid) < ratio: lo = mid
         else: hi = mid
     return round((lo + hi) / 2, 3)
-HEAD_KB, HEAD_KW = _solve('b_idle'), _solve('w_down_stand')
+HEAD_KB, HEAD_KW = _solve('b_idle', BATTLE_HEAD_RATIO), _solve('w_down_stand')
 print('head factors solved: battle', HEAD_KB, 'walk', HEAD_KW)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)

@@ -60,6 +60,92 @@ walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'ste
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3], walk_names[3:6], walk_names[6:9]]).items():
     poses['w_' + nm] = im
 
+# ---------------------------------------------------------------- head size (2026-11-01, Tom's call)
+# Every adult's face (hairline to chin) is Justin's 49 battle px, and Tom stands 5'11" = 143 px next to Justin's 6'4" = 153 px (BATTLE_SIZE.tom 1.43).
+# Battle and custom poses only (walk and stretch unchanged). Each head is cut out, enlarged about the chin and pasted back, as in bake_deedee.py;
+# then the whole figure is refit to the same battle_h. The face had 38 px at scale 1.3, so its share of the figure grows by (49/38)/(1.43/1.3).
+from headwarp import _warp_head
+FACE_GROW = (49 / 38) / (1.43 / 1.3)
+TAPER = 16
+def _auto_head(img):
+    a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
+    top = int(np.where(a.any(1))[0].min())
+    ws = np.convolve(a.sum(1).astype(float), np.ones(7) / 7, 'same')
+    lo, hi = int(top + .18 * (H - top)), int(top + .40 * (H - top))
+    chin = lo + int(np.argmin(ws[lo:hi]))
+    cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
+    return top, chin, max(0, int(xs.min()) - 6), int(xs.max()) + 6
+HEAD_BOX = {'b_win': (0, 74, 62, 140), 'b_leap': (0, 73, 42, 122), 'b_kneel': (0, 106, 12, 90)}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
+SIDE = {}
+# Heads that are not on top (lying, face down, cartwheel, all fours, hands over the face): the region (x0, y0, x1, y1) is scaled by k about the
+# neck point (ax, ay), chosen so the head grows away from the floor and the body. Source px, read off rulers.
+REGION = {'b_ko': (0, 0, 92, 100, 88, 60), 'c_cower': (0, 0, 150, 185, 110, 185), 'c_lying': (370, 0, 541, 135, 385, 130),
+          'c_cartwheel': (75, 260, 245, 445, 220, 320), 'c_facedown': (135, 0, 295, 135, 285, 128)}
+def region_head(img, name, k, pad=200):
+    x0, y0, x1, y1, ax, ay = REGION[name]
+    big = Image.new('RGBA', (img.width + 2 * pad, img.height + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
+    part = img.crop((x0, y0, x1, y1)); part = part.resize((max(1, round(part.width * k)), max(1, round(part.height * k))), Image.LANCZOS)
+    a = np.array(big); a[y0 + pad:y1 + pad, x0 + pad:x1 + pad, 3] = 0; big = Image.fromarray(a, 'RGBA')
+    big.alpha_composite(part, (int(round(pad + ax - (ax - x0) * k)), int(round(pad + ay - (ay - y0) * k))))
+    return big.crop(big.getbbox())
+NOWARP = set()     # poses left as painted
+def _rot(img, side):
+    return {'left': img.transpose(Image.ROTATE_270), 'right': img.transpose(Image.ROTATE_90), 'down': img.transpose(Image.ROTATE_180)}[side]
+def _unrot(img, side):
+    return {'left': img.transpose(Image.ROTATE_90), 'right': img.transpose(Image.ROTATE_270), 'down': img.transpose(Image.ROTATE_180)}[side]
+def head_box(img, name):
+    return HEAD_BOX.get(name) or _auto_head(img)
+def bigger_head(img, name, k, pad=160, taper=TAPER):
+    if name in NOWARP or k == 1: return img
+    if name in REGION: return region_head(img, name, k)
+    if name in SIDE:
+        return _unrot(bigger_head(_rot(img, SIDE[name]), name + '#rot', k, pad, taper), SIDE[name])
+    W, H = img.size
+    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
+    arr = np.array(big)
+    top, chin, x0, x1 = head_box(img, name)
+    ax = (x0 + x1) / 2.0
+    X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
+    out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
+    arr[Y0:AY, X0:X1, 3] = 0
+    big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
+    return big.crop(big.getbbox())
+_t, _c, _, _ = head_box(poses['b_idle'], 'b_idle'); _r0 = (_c - _t) / poses['b_idle'].height
+def _ratio(k): return (_c - _t) * k / bigger_head(poses['b_idle'], 'b_idle', k).height
+_lo, _hi = 1.0, 4.0
+for _ in range(14):
+    _m = (_lo + _hi) / 2
+    if _ratio(_m) < _r0 * FACE_GROW: _lo = _m
+    else: _hi = _m
+HEAD_KB = round((_lo + _hi) / 2, 3)
+print('head factor solved: battle', HEAD_KB, '(head share', round(_r0, 3), '->', round(_ratio(HEAD_KB), 3), ')')
+if os.environ.get('HEADSHEET'):          # contact sheet: each battle/custom source pose with its head box
+    from PIL import ImageDraw
+    tiles = []
+    for n in [n for n in poses if n[:2] in ('b_', 'c_')]:
+        im = poses[n] if n not in SIDE else _rot(poses[n], SIDE[n])
+        t0, c0, a0, a1 = head_box(im, n + ('#rot' if n in SIDE else ''))
+        tl = Image.new('RGBA', im.size, (90, 90, 100, 255)); tl.alpha_composite(im); d = ImageDraw.Draw(tl)
+        d.rectangle([a0, t0, a1, c0], outline=(255, 0, 0, 255), width=3); d.text((4, 4), n, fill=(255, 255, 0, 255))
+        tiles.append(tl.resize((max(1, tl.width * 260 // tl.height), 260)))
+    Wt = sum(t.width for t in tiles); sh = Image.new('RGB', (min(Wt, 3200), 260 * (1 + Wt // 3200)), (30, 30, 30)); x = y = 0
+    for t in tiles:
+        if x + t.width > 3200: x = 0; y += 260
+        sh.paste(t.convert('RGB'), (x, y)); x += t.width
+    sh.save(os.environ['HEADSHEET']); print('head sheet', os.environ['HEADSHEET'])
+if os.environ.get('RULER'):               # RULER=name,name DIR=...: source poses with a 20 px grid, to read head boxes off
+    from PIL import ImageDraw
+    for n in os.environ['RULER'].split(','):
+        im = poses[n]; tl = Image.new('RGBA', im.size, (90, 90, 100, 255)); tl.alpha_composite(im); d = ImageDraw.Draw(tl)
+        for x in range(0, im.width, 20): d.line([(x, 0), (x, im.height)], fill=(0, 255, 255, 120 if x % 100 else 255))
+        for y in range(0, im.height, 20): d.line([(0, y), (im.width, y)], fill=(255, 255, 0, 120 if y % 100 else 255))
+        for x in range(0, im.width, 100): d.text((x + 2, 2), str(x), fill=(0, 255, 255, 255))
+        for y in range(0, im.height, 100): d.text((2, y + 2), str(y), fill=(255, 255, 0, 255))
+        tl.convert('RGB').save(os.path.join(os.environ['DIR'], 'ruler_' + n + '.png'))
+    sys.exit(0)
+for _n in list(poses):
+    if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
+
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k

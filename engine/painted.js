@@ -9,12 +9,14 @@
 // mirrorRows (engine/tiles.js) keeps the tag and toggles `flip`, so every mirrored frame stays painted.
 //
 // Atlas: one image of equally sized frames at K times the rows' resolution (K = 2 in battle, 3 on the overworld).
+// ART_V: cache tag for every painted atlas image (2026-11-01, heads1: all adult battle heads re-baked).
+const ART_V='heads1';
 const PAINTED={};
 function paintedAtlas(id,src,rects,k,tintFn) {
   const a={id,rects,k,tintFn,img:new Image(),ready:false,failed:false};
   a.img.onload=()=>{ a.ready=true; };
   a.img.onerror=()=>{ a.failed=true; };
-  a.img.src=src;
+  a.img.src=src+(src.includes('?')?'':'?v='+ART_V);   // atlases carry no version of their own; bump ART_V whenever a baked .webp changes
   PAINTED[id]=a;
   return a;
 }

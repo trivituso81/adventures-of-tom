@@ -13,17 +13,20 @@
   const rk=rows=>rows.map(r=>{ let s=''; for(const ch of r) s+=map[ch]; return s; });
   const lum=c=>{ const h=pal[c]; if(!h) return 0; return parseInt(h.slice(1,3),16)*.3+parseInt(h.slice(3,5),16)*.59+parseInt(h.slice(5,7),16)*.11; };
   // eye: centroid of dark pixels in the face band; hands: outermost pixels in the arm band (logic reads these)
-  const meta=rows=>{ const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
-    for(let y=Math.floor(H*.08);y<Math.floor(H*.34);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
+  // HR = head (hair to chin) share of the idle height set by the bake (was .40; bigger since 2026-11-01). Bands keep their place relative to head and body:
+  // eye band .2 to .85 of the head, arm band from just above the chin to just over half the body (both give the old .08-.34 and .35-.72 at HR .40).
+  // The young runner (yg_) keeps realistic proportions, so he passes .40 (the old bands).
+  const meta=(rows,HR=0.564)=>{ const EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR); const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
+    for(let y=Math.floor(H*EY0);y<Math.floor(H*EY1);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
     const eye=c?{col:Math.round(sx/c),row:Math.round(sy/c)}:{col:Math.round(W*.38),row:Math.round(H*.2)};
     let lx=W,ly=Math.round(H*.5),rx=0,ry=Math.round(H*.5);
-    for(let y=Math.floor(H*.35);y<Math.floor(H*.72);y++) for(let x=0;x<W;x++) if(rows[y][x]!=='.') { if(x<lx) { lx=x; ly=y; } if(x>rx) { rx=x; ry=y; } }
+    for(let y=Math.floor(H*AR0);y<Math.floor(H*AR1);y++) for(let x=0;x<W;x++) if(rows[y][x]!=='.') { if(x<lx) { lx=x; ly=y; } if(x>rx) { rx=x; ry=y; } }
     return {eye,hand:{n:[lx+1,ly],f:[rx-1,ry]}}; };
-  const reg=(rows)=>{ const m=meta(rows); if(sp.eyeAt) sp.eyeAt.set(rows,m.eye); if(sp.handAt) sp.handAt.set(rows,m.hand); return rows; };
+  const reg=(rows,hr)=>{ const m=meta(rows,hr); if(sp.eyeAt) sp.eyeAt.set(rows,m.eye); if(sp.handAt) sp.handAt.set(rows,m.hand); return rows; };
   const P=(k,name)=>reg(paintRows(rk(B[k]),'boppyBattle',name||k,false));
   const mir=rows=>{ const r=mirrorRows(rows),W=rows[0].length,e=sp.eyeAt&&sp.eyeAt.get(rows),h=sp.handAt&&sp.handAt.get(rows);
     if(e) sp.eyeAt.set(r,{col:W-1-e.col,row:e.row}); if(h) sp.handAt.set(r,{n:[W-1-h.f[0],h.f[1]],f:[W-1-h.n[0],h.n[1]]}); return r; };
-  const P2=(rows,atlas,name,mp)=>reg(paintRows(rows.map(q=>{ let o=''; for(const ch of q) o+=mp[ch]; return o; }),atlas,name,false));
+  const P2=(rows,atlas,name,mp,hr)=>reg(paintRows(rows.map(q=>{ let o=''; for(const ch of q) o+=mp[ch]; return o; }),atlas,name,false),hr);
   const SZ=(typeof BATTLE_SIZE!=='undefined'&&BATTLE_SIZE.boppy)||1;
   sp.scale=2*SZ; sp.hires=true; sp.eye={col:M.eye[0],row:M.eye[1]};
   sp.idle=P('idle'); sp.act=P('act'); sp.celeb=P('celeb'); sp.windup=P('windup'); sp.leap=P('leap');
@@ -58,7 +61,7 @@
     const YX=BOPPY_YOUNG; paintedAtlas('boppyYoung',YX.atlas.src,YX.atlas.rects,YX.atlas.k);
     const m5={}; let n5=0; for(const k in YX.pal) { const c=String.fromCharCode(0x0700+n5++); m5[k]=c; pal[c]=YX.pal[k]; }
     m5['.']='.';
-    for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,m5);
+    for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,m5,.40);
     sp.yg_run1R=mir(sp.yg_run1); sp.yg_run2R=mir(sp.yg_run2);
   }
   // Pepper Breath (data/boppy-extra.js BOPPY_PEPPER): pb_walkA, pb_walkB, pb_present, pb_admire, pb_raise, pb_crunch, pb_chew, pb_burn, pb_fan, pb_inhale, pb_breathA..C, pb_gasp, pb_grumble, pb_smug

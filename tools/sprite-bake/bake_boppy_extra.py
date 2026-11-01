@@ -79,10 +79,44 @@ fy = 76 * KB / poses['y_celebr'].height                       # young runner: ta
 bigY = {n[2:]: scaled_to(poses[n], fy) for n in poses if n.startswith('y_')}
 bigY = tighten(place_feet(bigY, KB), KB)
 outY, rowsY = emit('BOPPY_YOUNG', bigY, 'boppy-young.webp')
-fP = 75 * KB / exP['smug'].height                              # upright smug frame = 75 rows (idle 66.7, young runner 76); head width then matches his idle
+# Pepper sheet head (2026-11-01): his core head grew so the face is Justin's 49 battle px; grow these heads to match. Face rows must grow by
+# (49/33 face px) / (2.014/1.94 battle scale) at the same 75-row smug height; the factor is solved on the upright smug frame and used for all 16.
+PEP_GROW = (49 / 33) / (2.014 / 1.94)
+_t, _c, _, _ = g['_auto_head'](exP['smug']); _r0 = (_c - _t) / exP['smug'].height
+def _pr(k): return (_c - _t) * k / g['bigger_head'](exP['smug'], 'p_smug', k=k).height
+_lo, _hi = 1.0, 4.0
+for _ in range(14):
+    _m = (_lo + _hi) / 2
+    if _pr(_m) < _r0 * PEP_GROW: _lo = _m
+    else: _hi = _m
+PEP_K = round((_lo + _hi) / 2, 3); print('pepper head factor', PEP_K)
+exP_src = dict(exP)
+exP = {n: g['bigger_head'](v, 'p_' + n, k=PEP_K) for n, v in exP.items()}
+fP = 75 * KB / exP['smug'].height                              # upright smug frame = 75 rows (idle 66.7, young runner 76)
 bigP = {n: scaled_to(v, fP) for n, v in exP.items()}
 bigP = tighten(place_feet(bigP, KB), KB)
 MOUTH = json.load(open(os.path.join(here, 'boppy_pepper_mouth.json'))) if os.path.exists(os.path.join(here, 'boppy_pepper_mouth.json')) else {}
+# The mouth points were set by eye on the pre-2026-11-01 frames (no head warp). Carry each one through the warp: map it back to the source frame
+# (old pipeline = scale fP0 + a shift found from the alpha bounding boxes), paint a green marker there, run the new pipeline on the marked copy, find the marker.
+if MOUTH:
+    fP0 = 75 * KB / exP_src['smug'].height
+    old_sc = {n: scaled_to(v, fP0) for n, v in exP_src.items()}
+    old_big = tighten(place_feet(dict(old_sc), KB), KB)
+    marked = {}
+    for n, v in exP_src.items():
+        if n not in MOUTH: continue
+        bo = old_big[n].getbbox(); bs = old_sc[n].getbbox()
+        sx = ((MOUTH[n][0] + .5) * KB - (bo[0] - bs[0])) / fP0; sy = ((MOUTH[n][1] + .5) * KB - (bo[1] - bs[1])) / fP0
+        a = np.array(v).copy(); r = 5; y0, x0 = int(round(sy)), int(round(sx))
+        blk = a[max(0, y0 - r):y0 + r + 1, max(0, x0 - r):x0 + r + 1]; blk[:, :, :3] = (0, 255, 0); blk[:, :, 3] = np.maximum(blk[:, :, 3], 255)
+        marked[n] = g['bigger_head'](Image.fromarray(a, 'RGBA'), 'p_' + n, k=PEP_K)
+    mk_big = tighten(place_feet({n: scaled_to(marked.get(n, v), fP) for n, v in exP.items()}, KB), KB)
+    for n in marked:
+        q = np.array(mk_big[n]).astype(int); m = (q[:, :, 1] > 170) & (q[:, :, 0] < 110) & (q[:, :, 2] < 110) & (q[:, :, 3] > 100)
+        ys, xs = np.where(m)
+        if len(xs): MOUTH[n] = [int(xs.mean() // KB), int(ys.mean() // KB)]
+        else: print('mouth marker lost for', n)
+    print('mouth points now', MOUTH)
 outP, rowsP = emit('BOPPY_PEPPER', bigP, 'boppy-pepper.webp', ',mouth:' + json.dumps(MOUTH))
 if os.environ.get('SHEETP'):
     W = sum(v.width for v in bigP.values()); H = max(v.height for v in bigP.values())

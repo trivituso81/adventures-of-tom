@@ -21,6 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src'); ART = os.path.join(ROOT, 'art/chars'); OUT = os.path.join(ROOT, 'data/amy-hires-extra.js')
 KB, KW = 2, 3
 TOM_HEAD_RATIO, BATTLE_H, WALK_H = 0.40, 99.5, 41.7
+BATTLE_HEAD_RATIO = 0.438   # battle sheets only, same as bake_amy.py (face = Justin's 49 battle px, 2026-11-01); the overworld sheet keeps 0.40
 
 ATK = ['t1_start', 't2_sprint', 't3_windup', 't4_hit', 't5_recover', 't6_win', 'k1_hike', 'k2_swingup', 'k3_top', 'k4_carry', 'k5_throw', 'k6_dazed']
 STN = ['s1_hips', 's2_point', 's3_clap', 's4_whistle', 's5_shh', 's6_shrug', 's7_write', 's8_card', 's9_squat', 's10_plank', 's11_pushup', 's12_jump']
@@ -72,20 +73,24 @@ def warp(name, k):
     top, chin, x0, x1 = box(name)
     return bigger_head(poses[name], top, chin, x0, x1, k, two_layer=False, keep_arms=name in ARMS)
 
-def solve(name):
+def solve(name, ratio=TOM_HEAD_RATIO):
     top, chin, _, _ = box(name); lo, hi = 1.0, 4.0
     for _ in range(14):
         mid = (lo + hi) / 2
-        if (chin - top) * mid / warp(name, mid).height < TOM_HEAD_RATIO: lo = mid
+        if (chin - top) * mid / warp(name, mid).height < ratio: lo = mid
         else: hi = mid
     return round((lo + hi) / 2, 3)
 
 factor, scale = {}, {}
 for key, ref in REF.items():
-    k = solve(ref); h = warp(ref, k).height
+    k = solve(ref, TOM_HEAD_RATIO if key == 'o' else BATTLE_HEAD_RATIO); h = warp(ref, k).height
     target = (BATTLE_H * KB) if key != 'o' else (WALK_H * KW)
     factor[key] = k; scale[key] = target / h
     print(f'sheet {key}: reference {ref}: head factor {k}, scale {scale[key]:.3f}')
+# FACTOR_OVERRIDE values were set against the 0.40 factor; keep them in the same proportion to their sheet's new factor
+_old_s = solve(REF['s'])
+FACTOR_OVERRIDE = {n: v * factor[n[0]] / (_old_s if n[0] == 's' else factor[n[0]]) for n, v in FACTOR_OVERRIDE.items()}
+print('overrides now', FACTOR_OVERRIDE)
 done = {}
 for n in poses:
     done[n] = scaled_to(warp(n, FACTOR_OVERRIDE.get(n, factor[n[0]])), scale[n[0]])
