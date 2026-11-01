@@ -7,6 +7,17 @@
 - New tool: `tools/voice-library/apply-scripts.py <list.json>` checks every script against the rules (words equal the line text, tag count, descriptor count, body, prop and sound words, em dashes) and writes it into `directions-20261101.json` or `battle-overrides.json`; it never touches a hand-written chapter script.
 - Tested: `tools/voice-library/test.py` ALL PASS; `smoke.py` FAILS: []. Not heard on the phone.
 
+## 2026-11-01 (late afternoon, 48): Purged voice lines and clips the full game never plays
+
+- Tom: "I've asked so many times to purge voice clips that are not used in the full game... it wastes space, adds complexity, and wastes ElevenLabs credits."
+- Fact (method): every line kind in `LINES` was checked against every place the game can call it (moves, scenes, dialogue, fallback). Every baked battle clip was checked against the live line table read from the running game. Every dialogue clip was checked against the harvested dialogue list. New tool: `python3 tools/clip-audit/unused_voice.py` repeats this audit in one command; `node tools/clip-audit/purge_unused.js <spec> --apply` removes what it finds (checks each file round-trips byte for byte first).
+- Removed 31 unused lines from `data/lines.js`: 24 Justin extra beats (Yellow! / Red! / And BLUE!, Four screws., Solid., Let it dry., Excuse me., Rosie. No., and so on), plus the generic attack shout pools for Tom (3), Grace (3: Hi-yah!, Take that, Kevin!, Watch me, Ta-Ta!) and Rose (1: Boop!). Every live move has its own line, so nothing played them. Grace's Move Lab volume sample now uses her `dance` line.
+- Removed 39 baked clips (about 1.8 MB): 30 for the lines above, 9 old takes for lines since reworded (Amy hurt, Hill repeats, Marathon, Marathon ult, Ymamot x3, Tnb Round with Jojo, Tom button mash), plus one stray no-kind Justin clip. Also 29 matching bake-script notes. Battle clips 564 to 525. Dialogue clips: 0 unused (the monster "Round N." lines are templated and live).
+- Rebuilt `data/voice-index.json` (Voice Library and Bake page lists) and dropped 27 hand directions for the removed lines, so none of them can be selected for a paid re-record.
+- Record of every removed line and clip: `docs/PURGED_VOICE.md`. The audio is still in git history (commit `6624b03`).
+- Not touched on purpose: the older per-character `skills` kit tier (still the fallback for any Stampcard slot whose new move is not built), and `demo/`. Lines that are live but have no clip yet are not dead; they are the real bake list.
+- Tests: `IDS=tom,grace,rose,justin python3 tools/smoke.py` FAILS: []; `python3 tools/kit_test.py justin --speed2` all 9 moves play, each says its kept lines; full game page load with all real audio: no page errors, no 4xx, 525 battle clips; `say()` on removed kinds does not throw; audit re-run reports 0 unused. Tags: `purge1` on lines.js, voice-clips.js, tom/grace/rose/amy/tnb/justin voice files, feel.js.
+
 ## 2026-11-01 (late afternoon, 47): Painted maps load on demand instead of all at boot (`plate1`)
 
 - Tom (16:27): the overworld maps do not load instantly, or at all.

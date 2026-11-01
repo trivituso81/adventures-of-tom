@@ -490,7 +490,7 @@ function b7SetRender() {
 }
 function b7SetVol(kind,n) {
   setVolume(kind,n);
-  if(kind==='voice') { clearTimeout(B7S.sample); B7S.sample=setTimeout(()=>{ try { say('grace','attack'); } catch(e) {} },260); }   // a little shout so the level can be judged
+  if(kind==='voice') { clearTimeout(B7S.sample); B7S.sample=setTimeout(()=>{ try { say('grace','dance'); } catch(e) {} },260); }   // a little shout so the level can be judged
   else sfx.select();
   b7SetRender();
 }

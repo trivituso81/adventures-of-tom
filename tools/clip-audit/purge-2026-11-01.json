@@ -1,0 +1,93 @@
+{
+ "date": "2026-11-01",
+ "why": "Tom asked: purge voice clips and lines the full game never plays",
+ "deadKinds": {
+  "justin": [
+   "loose_wire_zap",
+   "wire_nuts_1",
+   "wire_nuts_2",
+   "wire_nuts_3",
+   "bad_call_yell",
+   "bad_call_sit",
+   "fresh_fit_shades",
+   "fresh_fit_wink",
+   "demo_day_look",
+   "demo_day_one",
+   "demo_day_two",
+   "breaker_flip_which",
+   "breaker_flip_found",
+   "breaker_flip_count",
+   "breaker_flip_salute",
+   "giant_sneeze_twitch",
+   "giant_sneeze_excuse",
+   "foot_tap_wave",
+   "foot_tap_ouch",
+   "foot_tap_light",
+   "foot_tap_fine",
+   "drywall_screws",
+   "drywall_tap",
+   "drywall_dry"
+  ],
+  "tom": [
+   "attack"
+  ],
+  "grace": [
+   "attack"
+  ],
+  "rose": [
+   "attack"
+  ]
+ },
+ "orphanClips": [
+  {
+   "id": "amy",
+   "k": "hurt",
+   "text": "Ow. Okay. I'm okay. Deep breath."
+  },
+  {
+   "id": "amy",
+   "k": "tombo2",
+   "text": "Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!"
+  },
+  {
+   "id": "amy",
+   "k": "hills",
+   "text": "Hill repeats! Up the slime, down the slime!"
+  },
+  {
+   "id": "amy",
+   "k": "marathon",
+   "text": "Twenty-six point two! Straight through the slime!"
+  },
+  {
+   "id": "amy",
+   "k": "marathon_ult",
+   "text": "Right on Hereford, left on Boylston! Sprint to the tape!"
+  },
+  {
+   "id": "grace",
+   "k": "ymamot",
+   "text": "Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!"
+  },
+  {
+   "id": "rose",
+   "k": "ymamot",
+   "text": "Yama-Mott. It's Tom backwards. We were six."
+  },
+  {
+   "id": "tnb",
+   "k": "round_with_jojo",
+   "text": "Jojo, you're up. ...Jojo. JOJO. ...Nice."
+  },
+  {
+   "id": "tom",
+   "k": "button_mash",
+   "text": "Ugh, it's not charged!"
+  },
+  {
+   "id": "justin",
+   "k": "",
+   "text": "OUCH!!!!!!"
+  }
+ ]
+}

@@ -23,7 +23,7 @@ Tom is a product director. He designs and directs; he does **not** code and does
 1. **Everything is a classic script in one shared global scope.** No ES modules, no import/export, no bundler. Files load in the order of the `<script>` tags in `index.html`. A new file must be added to `index.html` at the right point. See `docs/ARCHITECTURE.md` for the load order and what each group depends on.
 2. **Keep the game runnable at every commit.** Run `python3 tools/smoke.py` before you finish. Look at the screenshots it writes to `tools/shots/`. A change you did not look at is not done.
 3. **Phone first.** Portrait is the main layout; landscape is a toggle that rotates the whole stage. Keep both working. Controls: on-screen D-pad and A button, keyboard (arrows or WASD, Enter, M, L), any standard gamepad.
-4. **Do not hand-edit generated or baked data.** `data/voice-clips.js` and `data/voice/*.js` hold the baked audio (full set, see `docs/VOICE.md`). Change them only when Tom sends a `voices.json` and asks for a merge.
+4. **Do not hand-edit generated or baked data.** `data/voice-clips.js` and `data/voice/*.js` hold the baked audio (full set, see `docs/VOICE.md`). Change them only when Tom sends a `voices.json` and asks for a merge, or to purge unused clips (see No unused voice).
 5. **Changing a spoken line silences it.** Baked clips play only when the clip text exactly matches the line in `data/lines.js` or the dialogue text. If you reword a line, say so; it needs a re-bake. Prefer not to reword spoken lines unless asked.
 6. **Canon is in `docs/CANON.md`.** Characters, voice and tone, and what is decided. Read it before writing any dialogue, move or scene.
 7. **Reuse the battle animation primitives** before inventing new systems (`docs/BATTLE_SYSTEM.md`).
@@ -48,6 +48,15 @@ Justin (Amy's husband) is becoming a party member. Tom will drop a zip of his pa
 ## New characters and ability pose sheets (standing rule, 2026-10-31)
 
 When Tom gives photos of a new character, or asks for poses for an ability, do not ask him to describe the image prompt requirements and never make him rewrite them. **Real height in feet and inches is required before anything else; ask if it is missing.** Every adult's face must look the same size as the other adults'; children follow Grace and Rose's head share (section 7). Follow `docs/CHARACTER_PIPELINE.md`: write the character spec from the photo, then the three standard prompts (ONE large full-body hero pose, a 3 x 3 walking sheet, a 4 x 4 standard battle sheet), and for any ability a sheet of **4 to 7 poses only** (keep the critical frames, no walking in or out, no prep or aftermath filler, about 2 spoken lines, painted props only when held, effects left to the game). Send the prompts as files, hero pose first. When the sheets come back, install them per section 6 of that doc.
+
+## No unused voice (standing rule, 2026-11-01)
+
+Tom has asked repeatedly: voice lines and clips the full game never plays must not exist in this repo. Every line in `data/lines.js` and every baked clip shows up in the Voice Library and bake lists and can cost him ElevenLabs credits. So:
+
+- Never add a line that nothing plays. Every new line is wired to a move, scene or dialogue in the same change. If an animation drops a line, delete the line in the same change.
+- Before every push that touches `data/lines.js`, a move animation, a scene or any voice file, run `python3 tools/clip-audit/unused_voice.py`. It must report 0 for all four checks. Fix anything it finds (`node tools/clip-audit/purge_unused.js <spec> --apply`, remove the lines from `data/lines.js`, rebuild the index with `python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js`, bump `?v=`).
+- Record what you removed in `docs/PURGED_VOICE.md` and `docs/CHANGES.md`. Git history keeps the audio, so deleting is safe. This is the one exception to hard rule 4: purging unused clips does not need a `voices.json`.
+- Lines that are live but have no clip yet are not dead. They are the bake list.
 
 ## How to work
 
