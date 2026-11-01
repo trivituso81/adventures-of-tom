@@ -1,3 +1,12 @@
+## 2026-11-01 (day, 43): Olivia kit audit, every move escalates (`olivkit1`)
+
+- Tom (13:30): audit Olivia's abilities for visual splendor, duration and funniness; all three should rise with each move.
+- Audit found: durations were out of order (Double Under 9.1 s beat MICHAEL 6.4 s and the ultimate 8.3 s; the basic ran 5.7 s), the hit effects were the same small sparks plus a white poof on every move, and the ultimate unlocked before LACHLAN.
+- Fix (engine/olivia-moves.js): every timeline rebuilt on a ladder by unlock order. Real durations now 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 9.0, 10.6 s (Fact Check, Snack Bag, LivNews, Is This Real, Pyramid, Marine Layer, Double Under, Story Time, MICHAEL, LACHLAN, Better Than Bobby). Effects grow with the rung: LivNews gains a view counter climbing to 48,000; Is This Real a glitch on the enemy and an ANALYZING, 7 FINGERS readout; Pyramid a bigger pyramid, ground ring and chalk poof; Marine Layer denser fog plus drizzle, BRRR and 62 DEGREES; Double Under rope rings on each jump, an OOF on the trip and a whip crack; Story Time night sky with moon and stars; MICHAEL a longer wait with crickets, a faint WHAT? from off screen, a bigger WHAM; LACHLAN speed lines, dust, a THROUGH shockwave; Better Than Bobby a dark stage with a spotlight, hits that grow per finger, a white shockwave on the mic drop, confetti and a BETTER THAN BOBBY banner.
+- Funnier tails (messages only, no spoken line changed): "Found one. Under the wipes.", "Chat is not kind.", "It is trying to count its own fingers.", "Who, what, when, where, WHAM.", "Everyone is cold now. Spiritually.", "Page two is never needed.", "He was in the car the whole time.", "He was holding a stick. Just a stick.", "Bobby was not asked for comment."
+- data/abilities.js: Olivia's auto unlock order now ends with the ultimate (B3 LACHLAN before A6 Better Than Bobby).
+- Tested: full `kit_test.py olivia` (all pass), `smoke.py`; hit frames of every move looked at. Stamp `build olivkit1`.
+
 ## 2026-11-01 (day, 43): Character build instructions match the painted style; heads, heights and widths rules written down (`docs1`)
 
 - Tom (13:41): write the character size specs into the build instructions as rules for future adults and children (adult faces always the same size, children like Grace and Rose, height required to proceed), and fix the build instructions, which still described the old 16-bit style instead of the new painted realistic style.

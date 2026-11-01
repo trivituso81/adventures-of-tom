@@ -426,7 +426,7 @@ const B8_KITS={
     sig:{play:"snack_bag",
       p:{key:"snack_bag",name:"SNACK BAG",src:1,vp:2,elem:["cozy"],desc:"She digs through her overstuffed mom tote and tosses a snack to every friend. Heals the party 25% and clears Dizzy."},
       r:{key:"rx_snack_bag",name:"SNACK BAG",src:2,vp:2,elem:["cozy"],desc:"She digs through her overstuffed mom tote and tosses a snack to every friend. Heals the party 25% and clears Dizzy."}},
-    auto:['A1', 'B1', 'A2', 'B2', 'A3', 'A4', 'A5', 'A6', 'B3'],
+    auto:['A1', 'B1', 'A2', 'B2', 'A3', 'A4', 'A5', 'B3', 'A6'],
     A1:{play:"livnews_live",
       p:{key:"livnews_live",name:"LivNews Live",src:1,vp:2,elem:["chatter"],desc:"Phone up selfie-style, then she reports the enemies live to her followers. Notifications land on every enemy."},
       r:{key:"rx_livnews_live",name:"LivNews Live",src:2,vp:2,elem:["chatter"],desc:"Phone up selfie-style, then she reports the enemies live to her followers. Notifications land on every enemy."}},
