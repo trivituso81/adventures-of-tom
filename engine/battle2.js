@@ -681,6 +681,7 @@ function b2HitParty(e,act,t,extra,coveredFor) {
   const dmg=Math.max(1,Math.round(r.dmg*(extra||1)*b7Taken()));   // Rose Mode x0.5, Director Mode x2
   t.hp=Math.max(0,t.hp-dmg); B2.hurtNow=true;
   const fx=battle.fx[t.idx]; fx.shake=.35; fx.flash=.2;
+  if(t.hp>0&&!(fx.pose>0)) { fx.poseK='hurtPose'; fx.pose=.35; }   // flinch: the member's own hurt frame (audit fix 1); never cuts into a move pose
   const q=coveredFor?BATTLE_POS[coveredFor.idx]:BATTLE_POS[t.idx];
   pop(String(dmg),q.x-(coveredFor?14:0),q.base-34,'#f3a08c');
   sfx.hitParty();
