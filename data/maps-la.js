@@ -1277,7 +1277,7 @@ const LA_ROOMS=[
     rug:[4,4,4,2],
 
     // Square painted plate (art/loftlobby.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
-    // Mailboxes back left, elevator doors back centre (the call button at (11,3) asks to go up), package desk right, leather sofa left, monstera right. The gap between the door leaves (x7 to x9) is the way out.
+    // Mailboxes back left, elevator doors back centre (the call button is painted at x10; the trigger covers the doors and the button, x8 to x11 on row 3, so pressing A from any of those tiles facing up asks to go up), package desk right, leather sofa left, monstera right. The gap between the door leaves (x7 to x9) is the way out.
     plateMask:[
       '################',
       '################',
@@ -1297,7 +1297,7 @@ const LA_ROOMS=[
       '#######...######'],
     npcs:[],
     objects:[
-      ['photo',11,3,1,1,'Elevator button',"The brass call button. A tiny label under it says: TNB, TOP FLOOR, MIND THE KILN.",{ride:['lofts',8,14,'up'],ridePrompt:"Go up to TNB's loft?"}],
+      ['photo',8,3,4,1,'Elevator button',"The brass call button. A tiny label under it says: TNB, TOP FLOOR, MIND THE KILN.",{ride:['lofts',8,14,'up'],ridePrompt:"Go up to TNB's loft?"}],
       ['shelf',3,1,4,3,'Mailboxes',"Thirty brass mailboxes. TNB's just says CLAY in marker, because the real label fell off in 2022. It is full of glaze catalogs."],
       ['table',12,4,3,3,'Package desk','A box stamped FRAGILE: POTTERY, addressed to TNB. Every neighbor has shaken it once. Nobody has admitted it.'],
       ['couch',0,6,5,4,'Leather sofa','For people waiting on someone. A handbag and yesterday\'s paper sit on it. Nobody has claimed either.'],
