@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 41): Party no longer hidden by Penny's and Nickel's counters (`counter1`)
+
+- Tom (08:54): after Penny was fixed to stand behind her counter, the playable characters standing in front of it were being covered by the counter too (heads and bodies cut off at its front edge).
+- Cause: the painted counter foreground (`art/shop-fg.webp`, `art/nickels-fg.webp`) is drawn over a rectangle whenever the shopkeeper is behind it, and that rectangle also covers the tall sprites of anyone standing in front whose body reaches up into it.
+- Fix (`plateWalkBehind`, engine/plate.js): zones flagged `front:true` (shop, nickels) draw everyone whose feet are south of the counter's front edge again on top of the foreground, in depth order. Penny and Nickel still hide behind the counter. Other rooms (Tom's island, Amy's house, the stacks) are unchanged.
+- Tested: Penny's Pockets with the party on rows 7 and 8 at iPhone size, 2x density, looked at before and after; `smoke.py`. Not played on the phone. Stamp `build counter1`.
+
 ## 2026-11-01 (day, 40): Adult battle heads: every face as tall as Justin's, heights from real heights (`heads1`)
 
 - Tom (01:24, 01:30): every adult's face (hairline to chin, hair not counted) should be Justin's height, head scaled to match per person, and figure heights from real heights (Justin 6'4", Tom 5'11", TNB 5'10", Boppy 5'7", Amy and Deedee 5'5"), whole figure = real height ("option A"). Grace and Rose left exactly as they were. Justin is the reference and is unchanged.

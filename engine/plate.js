@@ -228,8 +228,8 @@ PLATE_BEHIND.stacks=[
 ];
 // SHOP COUNTERS (2026-10-31): Penny (shop) and Nickel (nickels) stand behind their counters. art/<room>-fg.webp (tools/make_counter_fg.py) holds only the
 // painted counter, drawn over the shopkeeper so the top and front hide her legs. Rect zones in art px (64 per tile); base = the counter's front edge.
-PLATE_BEHIND.shop=[{x:255,y:296,w:502,h:152,base:448,fg:true}];
-PLATE_BEHIND.nickels=[{x:305,y:255,w:430,h:155,base:410,fg:true}];
+PLATE_BEHIND.shop=[{x:255,y:296,w:502,h:152,base:448,fg:true,front:true}];
+PLATE_BEHIND.nickels=[{x:305,y:255,w:430,h:155,base:410,fg:true,front:true}];
 // TOM'S KITCHEN ISLAND (2026-10-31, tomhouse3d): row 3 is the aisle behind the island. art/tomhouse-fg.webp (tools/make_tomhouse_fg.py) holds only the countertop,
 // sink, limes and flowers; drawn over anyone standing on row 3 so the top hides their legs. Rect in art px (64 per tile): plate x 676 to 940, y 244 to 343.
 // base 280 = the countertop's lower edge: row 3 (feet 256) is behind it, row 4 (feet 320) and the stools are in front.
@@ -242,7 +242,7 @@ let plateTime=0;   // last frame time, so the island zone can redraw Bready Merc
 function plateWalkBehind(map,plate) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
   const s=T/64, list=[...map.npcs,...followers,player];
-  let ctxDone=false, jarOver=false;
+  let ctxDone=false, jarOver=false; const redraw=[];
   for(const z of zones) {
     if(z.pts&&!z.bb) z.bb=[Math.min(...z.pts.map(q=>q[0])),Math.min(...z.pts.map(q=>q[1])),Math.max(...z.pts.map(q=>q[0])),Math.max(...z.pts.map(q=>q[1]))];
     const x0=z.pts?z.bb[0]:z.cx!==undefined?z.cx-z.rx:z.x, x1=z.pts?z.bb[2]:z.cx!==undefined?z.cx+z.rx:z.x+z.w;
@@ -265,6 +265,18 @@ function plateWalkBehind(map,plate) {
     else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
     ctx.restore();
     if(z.jar) jarOver=true;
+    // front:true (shop counters): the painted counter is tall, so anyone standing in FRONT of it (feet south of the base) but with a body that
+    // reaches up into the zone would be covered too. Tom 2026-11-01: the party was hidden by the counter. Draw those actors again on top.
+    if(z.front) for(const a of list) {
+      const p=position(a), fx=(p.x+.5)*64, fy=(p.y+1)*64;
+      if(fy<=z.base||fx+36<x0||fx-36>x1||fy-130>y1) continue;
+      if(!redraw.includes(a)) redraw.push(a);
+    }
+  }
+  if(redraw.length) {
+    redraw.sort((a,b)=>position(a).y-position(b).y);
+    ctx.imageSmoothingEnabled=false;
+    for(const a of redraw) { if(typeof drawActorSpaced==='function') drawActorSpaced(a); else drawActor(a); }
   }
   if(ctxDone) ctx.imageSmoothingEnabled=false;
   if(jarOver&&map.id==='tomhouse') drawHomeJar(plateTime);   // the jar stands on the island top, so it is in front of anyone behind the island
