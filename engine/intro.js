@@ -119,9 +119,10 @@ function hugStep() {
 }
 
 // Tom stretches after six hours in the cab line: arms up over his head, up on his toes, a long exhale.
+const STRETCH_DUR=2.4; // seconds for the painted stretch (was 5.2, too long)
 function stretchStep() {
   return {t:0,start(){ this.t=0; this.s2=false; player.facing='down'; intro.stretch={t:0}; snd.stretch(); },
-    update(dt){ this.t+=dt; if(TOM_STRETCH&&!this.s2&&this.t>3.9) { this.s2=true; snd.stretch(); } const u=Math.min(1,this.t/(TOM_STRETCH?5.2:1.6));
+    update(dt){ this.t+=dt; if(TOM_STRETCH&&!this.s2&&this.t>STRETCH_DUR*.75) { this.s2=true; snd.stretch(); } const u=Math.min(1,this.t/(TOM_STRETCH?STRETCH_DUR:1.6));
       intro.stretch.t=this.t;
       if(u>=1) { intro.stretch=null; player.hidden=false; return true; } return false; }};
 }
@@ -160,10 +161,10 @@ function stretchFrame(pose) {
   return (stretchFrames[pose]={rows:g.map(r=>r.join('')),pad:P});
 }
 function stretchPose(u) { return u<.12||u>.92?0:(u<.26||u>.8?1:2); }
-// Painted Tom (data/tom-hires-use.js): tired, start, full, side, crack, neck, exhale, fresh over 5.2 seconds.
+// Painted Tom (data/tom-hires-use.js): tired, start, full, side, crack, neck, exhale, fresh over STRETCH_DUR seconds.
 const STRETCH_SEQ=[['tired',0],['start',.1],['full',.22],['side',.42],['crack',.54],['neck',.66],['exhale',.76],['fresh',.88]];
 function drawStretchPainted(time) {
-  const u=Math.min(1,intro.stretch.t/5.2);
+  const u=Math.min(1,intro.stretch.t/STRETCH_DUR);
   let name='tired'; for(const [n,a] of STRETCH_SEQ) if(u>=a) name=n;
   player.hidden=true;
   // Same scale as his walk sprite (actorK: 1.2 on outdoor maps), or he shrinks when the stretch starts.
