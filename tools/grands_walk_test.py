@@ -22,6 +22,7 @@ def stand(pg,x,y,d):
 def pos(pg): return tuple(pg.evaluate("()=>[player.x,player.y]"))
 def step(pg,key):
     pg.keyboard.down(key); pg.wait_for_timeout(110); pg.keyboard.up(key); pg.wait_for_timeout(420)
+def freeze(pg): pg.evaluate("()=>{ for(const n of currentMap.npcs){ n.roam=0; n.move=null; } }")
 def walk(pg,start,moves,facing='down'):
     stand(pg,start[0],start[1],facing); trail=[pos(pg)]
     for key,n in moves:
@@ -32,7 +33,7 @@ with sync_playwright() as p:
     pg=b.new_page(viewport={'width':393,'height':852},device_scale_factor=2); pg.on('pageerror',lambda e:errs.append(str(e)))
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }")
-    pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1800); skip(pg)
+    pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1800); skip(pg); freeze(pg)
     solid=pg.evaluate("()=>{const m=currentMap; return [...Array(m.h).keys()].map(y=>[...Array(m.w).keys()].map(x=>m.solid[y*m.w+x]?'#':'.').join(''));}")
     print('\n'.join(solid))
     wk=lambda x,y:0<=y<len(solid) and 0<=x<len(solid[0]) and solid[y][x]=='.'
@@ -63,7 +64,7 @@ with sync_playwright() as p:
     t=walk(pg,(8,10),(('ArrowRight',6),),'right'); check('east along the dining table to %s'%(t[-1],),t[-1]==(14,10))
     t=walk(pg,(8,8),(('ArrowDown',7),),'down'); print('gate trail',t); pg.wait_for_timeout(900); skip(pg)
     check('walk out through the gate lane and the door to the street (trail %s)'%(t[-1],),pg.evaluate("()=>currentMap.id")=='row' and (8,14) in t)
-    pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1500); skip(pg)
+    pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1500); skip(pg); freeze(pg)
     # touching the furniture from the lanes
     TOUCH=[(3,7,'down','cookie counter from the aisle'),(4,10,'up','cookie counter from the stool lane'),(8,5,'down','sofa from behind'),(8,7,'up','sofa from the front'),
            (8,5,'up','coffee table'),(10,4,'up','TV'),(11,4,'up','pepper plant'),(13,4,'right','fern'),(13,3,'up','hall table'),(12,5,'right','hall chair'),
