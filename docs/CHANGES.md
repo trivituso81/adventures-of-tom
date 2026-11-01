@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 45): Party members flinch when an enemy hits them (`hurt1`)
+
+- Animation audit fix 1 (claude/battle-animation-audit.md): a party member hit by an enemy stayed in the idle pose (only a shake and a white flash). Now `b2HitParty` (engine/battle2.js) puts the target into their own `hurtPose` frame for 0.35 s. It does not fire when the hit knocks them out (the KO drop takes over) and never cuts into a pose a move has already set. Under 25% HP the kneel still shows after the flinch.
+- All ten party members have a `hurtPose` frame already (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Justin, Olivia, Nara); none needed art. Boppy, TNB and Nara read subtler than the rest; if Tom wants a stronger flinch for them, that is a new pose sheet (audit fix A-battle-states).
+- Tested: a hit on each of the ten checked for the pose and its 0.35 s timer, frames looked at after the flash faded; `smoke.py` and `IDS=grace,rose,amy smoke.py` FAILS: []; `kit_test.py justin --only=basic` FAILS: []. Not seen on the phone. Tags `battle2.js` and `main.js` `?v=hurt1`; stamp `build hurt1`.
+
 ## 2026-11-01 (day, 45): Big Mudling holds the tin when he walks up to the party in the pond scene (`pond1`)
 
 - Tom (15:15): in chapter 1 the Big Mudling approached the party facing the wrong way. `SCENES.ch1Pond` (data/scenes.js) now uses the painted heist frames from the pie theft: `mh_scurry_a/b` while he walks in (they face left, toward the party), then `mh_hug` (clutching the tin) while Grace shouts and the Big One surfaces. The frames already hold the tin, so the separate `carry:'tin'` prop is removed (it would have drawn twice). After the handoff the pose clears and he faces right toward the Big One as he leaves.
