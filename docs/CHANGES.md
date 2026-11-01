@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 54): Chapter title card waits until Tom lands (`cardfix1`)
+
+- Tom (17:54): the new chapter banner should only appear after Tom reaches the area with the new chapter, not before the flight.
+- Fact (cause): `storyTripSteps` (engine/story.js) queued the chapter card right before takeoff, so CHAPTER 2 to 9 showed over the departure map.
+- Call made: the chapter number still advances at takeoff, but the card now plays after landing, once Tom has stepped out and is standing in the new area (cab stand in LA, taxi depot on Long Island), just before his arrival line. New `storyTripChapter` and `storyArrivalCard` in engine/story.js; `flightSteps`, `arriveLA` and `arriveHome` in engine/travel.js take the card steps. Chapter select (`arriveLA()` with no card) is unchanged.
+- Tested: new flight test (chapter 1 west and chapter 2 east): old code showed the card 160 frames before and during takeoff; new code shows none until the last flight frame has passed, then on the arrival map with the new chapter set. `smoke.py` FAILS: []. Looked at the card over the LA cab stand in portrait. Not played on the phone. Chapters 4 to 9 use the same path.
+- Changed: `engine/story.js`, `engine/travel.js`, tags `story.js`, `travel.js` and `main.js` at `?v=cardfix1`, stamp `build cardfix1`. No art or voice changed.
+
 ## 2026-11-01 (evening, 52): Boppy catches fish all the time, he just exaggerates the size (`fish1`)
 
 - Tom (17:54): change the dialogue about Boppy never catching a fish. He catches them all the time; the joke is that he exaggerates how big they are.
