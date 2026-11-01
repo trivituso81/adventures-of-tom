@@ -54,11 +54,11 @@ PLATES.stillcore={src:'art/stillcore.webp?v=20261029',px:64,img:null,ready:false
 // phone decodes them into pictures, which an iPhone cannot hold, so the first map came up late or not at all. Now: the map you are on loads
 // first, then the maps you can walk into (its exits, house doors and the way back out), one at a time, and only the last PLATE_KEEP
 // paintings stay in memory (about 100 MB). Anything else is dropped and loads again from the browser cache if you return.
-const PLATE_KEEP=8, PLATE_TRIES=4;
+const PLATE_KEEP=5, PLATE_TRIES=4;
 const PLATE_RECENT=[];   // map ids, most recently focused first
 // The maps one step away (exits, house doors, the way back out), outdoor ones first then nearest door, at most PLATE_AHEAD of them: the Square has 11 doors and
 // loading every interior would bring back the memory problem. A farther door just loads when you walk in.
-const PLATE_AHEAD=7;   // outdoor neighbours (edge openings) always come first, then the nearest house doors
+const PLATE_AHEAD=12;   // every door and edge on the map, nearest first. Rooms are small (1254 px square, about 6 MB decoded), so all of them are cheap to hold; the big outdoor paintings are only the 2 to 4 edge neighbours.
 function plateNeighbours(map) {
   const best=new Map(), pl=typeof player!=='undefined'?player:null;
   if(map&&map.portals) for(const [k,q] of map.portals) {
@@ -67,7 +67,7 @@ function plateNeighbours(map) {
     else if(q.kind==='edge'&&q.to) id=q.to;
     else if(q.kind==='exit'&&q.house&&q.house.area) id=q.house.area;
     if(!id||!PLATES[id]||id===map.id) continue;
-    const [x,y]=k.split(',').map(Number), d=(pl?Math.abs(pl.x-x)+Math.abs(pl.y-y):0)+(q.kind==='edge'?0:1000);
+    const [x,y]=k.split(',').map(Number), d=(pl?Math.abs(pl.x-x)+Math.abs(pl.y-y):0)+(q.kind==='edge'?6:0);
     if(!best.has(id)||d<best.get(id)) best.set(id,d);
   }
   return [...best].sort((a,b)=>a[1]-b[1]).slice(0,PLATE_AHEAD).map(e=>e[0]);
@@ -108,6 +108,7 @@ function plateLoad(p) {
   // A failed download (a dropped connection, a phone short of memory) tries again after a pause instead of giving up for the whole session.
   im.onerror=()=>{ if(p.img!==im) return; p.img=null; p.ready=false; p.tries=(p.tries||0)+1; if(p.tries>=PLATE_TRIES) p.failed=true; else p.retryAt=performance.now()+1000*p.tries; };
   im.src=p.src;
+  if(p.fgSrc&&!p.fgImg) { p.fgImg=new Image(); p.fgImg.src=p.fgSrc; }
 }
 // True while a painted map's art is still loading (or waiting to retry): draw a plain backdrop, never the old tile version.
 function plateHold(map) { const p=map&&PLATES[map.id]; return !!(p&&!p.ready&&!p.failed); }

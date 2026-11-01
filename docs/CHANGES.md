@@ -1,3 +1,13 @@
+## 2026-11-01 (evening, 48): Rooms are ready before you walk in (`rooms1`)
+
+- Tom (17:17): loading the inside of a house takes way too long.
+- Fact (cause): after `plate1` the game only got ahead on 7 neighbours, and outdoor edge maps (big paintings) took the first slots. In the Square, 4 of the 8 shops (post office, observatory, taxi, shop) were never loaded ahead, so walking in waited for a fresh download. Measured on a 6 Mbps test connection: about 0.9 to 1.0 s each; the 4 that were loaded ahead took 1 to 2 ms.
+- Call made: get ahead on every door and edge of the map you are on, nearest first (rooms are small, 1254 px square, about 6 MB each once open, so all of them are cheap). To stay inside memory, only the 5 most recent maps are kept (was 8); the way back out is always in the get-ahead list anyway. The cutout layer of a room (the sofa and counter you walk behind) now loads with its room instead of popping in at the first draw.
+- Measured after: all 8 Square shops ready before Tom reaches them (0 to 2 ms on entry, same 6 Mbps test).
+- Changed: `engine/plate.js` (`PLATE_KEEP` 5, `PLATE_AHEAD` 12, nearest-first order, cutout preload). No art changed.
+- Tested: `smoke.py` FAILS: []; `camera_clamp_test`, `reach_test`, `rooms_test`, `grands_walk_test`, `jpark_test` all pass. NOT seen on the phone.
+- Still open: the 42.5 MB of voice scripts that block a cold start (see `plate1`).
+
 ## 2026-11-01 (evening, 48): Overworld sizes, The Big One 3x and the pie-thief Big Mudling 33% smaller (`size1`)
 
 - Tom (17:25): "The big one in the overworld maps should be 3x its current size. And the mudslinger that steals the one should be 33% smaller."
