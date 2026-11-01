@@ -96,3 +96,13 @@ Tom found `chalk_up` (Grace) still in the Voice Library. These moves were replac
 | tnb | lost_found_warmth | Lost warmth. Found scarf. Nice connection. |
 | tnb | practical_effects | Practical effects. The string is part of the charm. |
 | tnb | clay_pigeon | Clay pigeon. Literally. I worked on that pun. |
+
+
+## Third pass (`dead1`, 2026-11-01 night)
+
+Lines whose only player was an old animation deleted in this pass:
+
+| Character | Kind | Line |
+|---|---|---|
+| tom | starter_inspection | Bready Mercury has NOTES. |
+| grace | beam_dismount | Beam dismount! Ten out of ten! |

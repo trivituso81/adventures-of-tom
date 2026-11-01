@@ -53,15 +53,6 @@ SC.bp_cap=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.
   HELD.cap({ang},u,h.x,h.y);
   if(ms>P.fuss&&ms<P.sw0) label('ADJUSTING',h.x,h.y-36,CREAM,1);
   if(ms>P.ok) { label('SAME ANGLE',h.x,h.y-40,GOLD,1); } };
-B.cap_check=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,42),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1300,x:p.x,y:p.y,f:'hip'},{t:1700,f:'aim',dx:u=>-ez(u)*4},{t:1850,f:'throw',dx:-10},{t:2200,f:'act'},{t:2600,f:'hip'},{t:3000,f:back(p.x,me),hop:2,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Boppy walks over. At his own pace. He appears to be adjusting his cap.'); say(m.id,'cap_check'); scene('bp_cap',3.0,{plan:{fuss:1300,sw0:1700,sw1:1950,ok:2350}}); }],
-    [1700,()=>{ sfx.whoosh(); }],
-    ['hf',1950],
-    [1950,()=>{ sfx.slash(); sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('bp_poof',.5,{x:F.x+10,y:F.mid,c:BLUE,n:8}); scene('bp_text',1,{txt:'SWAT',x:F.x,y:F.top-8,c:GOLD,sc:2}); }],
-    [2350,()=>{ sfx.select(); setMessage('The cap goes back to exactly the same angle.'); }],
-    [4200,'end',res(E2)+'Boppy has noticed the attempted shortcut.']]); };
 
 // ---------- GRUMBLE ----------
 SC.bp_arrow=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; if(ms<P.on) return; gfx.globalAlpha=fade(u,.9);
@@ -174,16 +165,6 @@ SC.bp_rail=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.94);
   const px=P.px,py=P.py; RO(px-3,py,6,P.base-py,'#c9a23a'); EO(px,py,5,5,'#f0d27a');
   gfx.save(); gfx.translate(px,py); gfx.rotate(Math.PI+a); RO(0,-5,P.len,10,'#c8463a'); for(let k=1;k<5;k++) R(P.len*k/5,-5,2,10,'#e8685a'); gfx.restore();
   if(ms>P.hit&&ms<P.hit+900) label('CLOSED',P.px-P.len*.5,P.py-30,GOLD,2); };
-B.closing_time=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,56),me=ST.unit(m);
-  const plan={set:2500,sx:F.x+F.w*.5+30,sy:F.base-22,swing:1700,hit:2050,test:2200,px:F.x+F.w*.5+12,py:F.mid-6,base:F.base,len:Math.max(50,F.w+10)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'aim'},{t:1700,f:'throw',dx:-8},{t:2200,f:'act',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2600,f:'hip'},{t:3000,f:back(p.x,me),hop:2,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Boppy walks over and checks a small clock-shaped sign. CLOSED.'); say(m.id,'closing_time'); scene('bp_rail',3.8,{plan}); }],
-    [1700,()=>{ sfx.whoosh(); setMessage('A padded rail swings across the dangerous plan.'); }],
-    ['hf',2050],
-    [2050,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.45); landHit(100); }],
-    [2200,()=>{ setMessage('He tests the rail once, then folds his arms.'); }],
-    [4100,'end',res(E2)+'The plan has missed its opening hours.']]); };
 
 // ---------- Everybody Waits ----------
 SC.bp_ticket=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.95);
@@ -216,19 +197,6 @@ SC.bp_pepper=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st,h=hand(); gfx.globalAlp
   if(ms>P.ears&&ms<P.ears+1300&&st&&st.x!=null) { const p=head(st,-6); steam(p.x-16,p.y,s.t,3,'#ffd0b0'); steam(p.x+18,p.y,s.t+.4,3,'#ffd0b0'); if(ms>P.ears+200) label('!',p.x+20,p.y-30,RED,2); }
   if(ms>P.sus) { pep(h.x-8,h.y-12,.4,.4+Math.sin(ms/200)*.1); label('SUSPICIOUS',h.x-8,h.y-34,CREAM,1); } };
 const kettle=(x,y)=>{ EO(0+x,0+y,10,8,CREAM); R(x-6,y-11,12,4,OUT); R(x-4,y-10,8,2,CREAM); gfx.save(); gfx.translate(x-9,y-2); gfx.rotate(-.6); RO(-8,-2,8,4,CREAM); gfx.restore(); R(x+6,y-4,6,2,OUT); };
-B.sensible_pepper=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,52),me=ST.unit(m);
-  const plan={measure:1300,eat:1800,ears:2100,puff:2500,hit:2850,sus:3100};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1300,f:'aim'},{t:1800,f:'act'},{t:2100,f:'hip',dx:(u,tt)=>Math.sin(tt*36)*1.5},{t:2500,f:'throw',dx:-6},{t:3100,f:'aim'},{t:3600,f:back(p.x,me),hop:2,hn:6},{t:4600,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Boppy walks over with one very small pepper.'); say(m.id,'sensible_pepper'); scene('bp_pepper',3.7,{plan,st}); }],
-    [1300,()=>{ setMessage('He measures it between two fingers. Sensible size.'); }],
-    [1800,()=>{ sfx.select(); setMessage('He tastes it.'); }],
-    [2100,()=>{ sfx.stun(); setMessage('The pepper has its own opinion of sensible.'); }],
-    [2500,()=>{ const mo=head(st,14); ST.fly((x,y)=>kettle(x,y),mo.x-10,mo.y,F.x+8,F.mid,.35,20); sfx.whoosh(); }],
-    ['hf',plan.hit],
-    [plan.hit,()=>{ sfx.fireball?sfx.fireball():sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('bp_poof',.6,{x:F.x+8,y:F.mid,c:'#ffb070',n:10,r:30}); scene('bp_text',1,{txt:'WHEW',x:F.x,y:F.top-8,c:'#ffb070',sc:2}); }],
-    [3100,()=>{ setMessage('He looks at the rest of the pepper with deep personal suspicion.'); }],
-    [4700,'end',res(E2)+'The pepper has its own opinion of sensible.']]); };
 
 // ---------- Seeds of Trouble ----------
 SC.bp_packet=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.pocket) return; gfx.globalAlpha=fade(u,.96);
@@ -298,16 +266,6 @@ SC.bp_jar=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.
   if(ms<P.guard) { const q=ez((ms-P.pop)/(P.guard-P.pop)); lid(lerp(x,x-30,q),y-16-Math.sin(q*Math.PI)*60,q*12); }
   else { lid(x-14,y-30,-1.2); if(ms>P.guard+100) label('EASY',x-14,y-56,GOLD,2); } };
 SC.bp_ringwave=(s,u)=>{ const q=ez(u/.6); gfx.globalAlpha=fade(u,.5)*(1-q*.5); ring(s.x,s.y,s.rx*(.3+q*.8),s.ry*(.3+q*.8),6,'#f0d27a'); ring(s.x,s.y,s.rx*(.2+q*.6),s.ry*(.2+q*.6),3,CREAM); };
-B.jar_lid_negotiations=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,50),me=ST.unit(m),hitList=waveFoes().length?waveFoes():[f],Gh=ST.group(hitList);
-  const plan={strain:1500,pop:2400,guard:2900};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1500,f:'act',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2400,f:'throw',dx:-6},{t:2900,f:'spread'},{t:3500,f:'hip'},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Boppy walks over with a stubborn jar. The lid is one pixel too tight.'); say(m.id,'jar_lid_negotiations'); scene('bp_jar',4.0,{plan}); }],
-    [1500,()=>{ setMessage('He was being polite before.'); sfx.charge&&sfx.charge(); }],
-    ['hf',plan.pop],
-    [plan.pop,()=>{ sfx.thud(); sfx.bonk(); all(hitList); landHit(100); scene('bp_ringwave',.9,{x:Gh.x,y:(Gh.top+Gh.base)/2,rx:Gh.w*.5+30,ry:(Gh.base-Gh.top)*.5+14}); }],
-    [2900,()=>{ sfx.select(); setMessage('He holds up the lid as a small guard. It was easy. Apparently.'); }],
-    [4900,'end',res(E2)+'The lid accepts the revised terms.']]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
@@ -609,16 +567,6 @@ SC.bp_jar=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.
   if(ms<P.guard) { const q=ez((ms-P.pop)/(P.guard-P.pop)); lid(lerp(x,x-30,q),y-16-Math.sin(q*Math.PI)*60,q*12); }
   else { lid(x-14,y-30,-1.2); if(ms>P.guard+100) label('EASY',x-14,y-56,GOLD,2); } };
 SC.bp_ringwave=(s,u)=>{ const q=ez(u/.6); gfx.globalAlpha=fade(u,.5)*(1-q*.5); ring(s.x,s.y,s.rx*(.3+q*.8),s.ry*(.3+q*.8),6,'#f0d27a'); ring(s.x,s.y,s.rx*(.2+q*.6),s.ry*(.2+q*.6),3,CREAM); };
-B.jar_lid_negotiations=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,50),me=ST.unit(m),hitList=waveFoes().length?waveFoes():[f],Gh=ST.group(hitList);
-  const plan={strain:1500,pop:2400,guard:2900};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:amble(p.x,me),hop:2,hn:6},{t:1100,x:p.x,y:p.y,f:'hip'},{t:1500,f:'act',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2400,f:'throw',dx:-6},{t:2900,f:'spread'},{t:3500,f:'hip'},{t:3800,f:back(p.x,me),hop:2,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Boppy walks over with a stubborn jar. The lid is one pixel too tight.'); say(m.id,'jar_lid_negotiations'); scene('bp_jar',4.0,{plan}); }],
-    [1500,()=>{ setMessage('He was being polite before.'); sfx.charge&&sfx.charge(); }],
-    ['hf',plan.pop],
-    [plan.pop,()=>{ sfx.thud(); sfx.bonk(); all(hitList); landHit(100); scene('bp_ringwave',.9,{x:Gh.x,y:(Gh.top+Gh.base)/2,rx:Gh.w*.5+30,ry:(Gh.base-Gh.top)*.5+14}); }],
-    [2900,()=>{ sfx.select(); setMessage('He holds up the lid as a small guard. It was easy. Apparently.'); }],
-    [4900,'end',res(E2)+'The lid accepts the revised terms.']]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================

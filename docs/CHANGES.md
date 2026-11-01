@@ -1,3 +1,10 @@
+## 2026-11-01 (night, 50): Deleted the dead move animations (`dead1`)
+
+- Tom: "Why would we leave the old animation code." No good reason; it was dead weight and it is what fooled the first audit. Fact: removed 69 old animation functions (48 replaced moves, 84 KB) from engine/tom-moves.js, tnb-moves.js, amy-moves.js, boppy-moves.js, grace-moves.js and nara.js. A function was removed only if its key is in no kit, Stampcard version or combo table and nothing else in the game names it (found with a real JavaScript parser, not a text search).
+- Removed with them (their code was the only thing that played them): Tom's `starter_inspection` and Grace's `beam_dismount` lines, plus their 2 clips (about 111 KB). Record in docs/PURGED_VOICE.md. Voice Library battle lines 451 to 450. Audit reports 0 on all five checks.
+- Tested: smoke (tom, grace, boppy, tnb and amy, nara, tom, grace) FAILS: [], kit_test for tom, grace, boppy, tnb, amy and nara every move FAILS: []. Not seen on the phone.
+- Still there on purpose: about 30 old moves for Grace, Rose and Deedee that a loop at the end of their move files still wraps by name (tiny_tap, heel_click, windows_open and the like). They need the loop edited with them; next cleanup. Also the older `skills` kit tier and icon entries in data/battle-icons.js.
+
 ## 2026-11-01 (evening, 55): Grace's battle voice clips updated (`gclips6`)
 
 - Tom sent `local-clips-export_6.json` (217 clips) and asked for Grace's battle clips to be updated. Merged only her 44 with `tools/bake-page/merge-local.js`: 37 existing clips replaced by the new takes, 0 added (`data/voice/grace.js`). Other voices in the export were not touched.

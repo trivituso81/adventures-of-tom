@@ -49,15 +49,6 @@ SC.am_ringhit=(s,u)=>{ const q=ez(u/.5); gfx.globalAlpha=fade(u,.4)*(1-q*.4); ri
 
 // ---------- Starting Step ----------
 SC.am_tick=(s,u)=>{ gfx.globalAlpha=fade(u,.9); R(s.x-14,s.y,28,3,CREAM); if(s.t*1000<500) label('LACE',s.x,s.y-58,CREAM,1); };
-A.starting_step=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'kneel'},{t:450,f:'run',ease:'in'},{t:1050,x:p.x,y:p.y,f:'act',dx:u=>-Math.sin(u*Math.PI)*12},{t:1350,f:jog,hop:4,hn:6},{t:2250,f:back(p.x,me),ease:'lin'},{t:2850,x:'home',y:'home',f:jog,hop:3,hn:4},{t:3200,f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Amy checks one shoelace without stopping.'); say(m.id,'starting_step'); scene('am_tick',1,{x:me.x,y:me.base+2}); }],
-    [450,()=>{ sfx.run&&sfx.run(); sfx.whoosh(); }],
-    ['hf',1150],
-    [1150,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('am_ringhit',.5,{x:F.x+8,y:F.mid,r:30}); }],
-    [1350,()=>{ scene('am_text',1,{st,txt:'ON THE MOVE',c:GOLD,sc:2}); setMessage('She\'s already jogging in place when it notices.'); }],
-    [3300,'end',res(E2)+'Amy doesn\'t waste the first second.']]); };
 
 // ---------- PEP TALK ----------
 SC.am_arrow=(s,u)=>{ const g=ez(u/.2),b=Math.sin(s.t*8)*2; gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(s.x,s.y+b); gfx.scale(g,g);
@@ -90,34 +81,12 @@ SC.am_bracket=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; gfx.globalAlpha=fade(u,
   if(ms>P.draw) { Ln(x,y0,x+6,y0,3,PEN); Ln(x,y0,x,ym,3,PEN); if(q>=1) Ln(x,y1,x+6,y1,3,PEN); }
   if(ms>P.tick) { const k=ez((ms-P.tick)/200),cx=F.x,cy=F.mid; Ln(cx-10,cy,lerp(cx-10,cx-2,k),lerp(cy,cy+8,k),4,PEN); if(k>=1) Ln(cx-2,cy+8,lerp(cx-2,cx+14,ez((ms-P.tick-200)/200)),lerp(cy+8,cy-12,ez((ms-P.tick-200)/200)),4,PEN); }
   if(ms>P.note) { const g=ez((ms-P.note)/250); gfx.save(); gfx.translate(F.x-F.w*.3,F.top-6); gfx.rotate(-.12); gfx.scale(g,g); RO(-26,-10,52,20,'#fff27a'); label('PLEASE',0,-7,'#2b2a26',1); label('EXPLAIN',0,1,'#2b2a26',1); gfx.restore(); } };
-A.margin_notes=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
-  const plan={draw:1100,tick:1800,note:2300,put:3000,F};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'aim'},{t:1100,f:'act',dx:(u,tt)=>Math.sin(tt*12)*1.5},{t:1800,f:'throw',dx:-6},{t:2300,f:'hip'},{t:2900,f:back(p.x,me)},{t:3600,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Amy jogs over, red pen already uncapped.'); say(m.id,'margin_notes'); scene('am_pen',3.0,{plan}); scene('am_bracket',3.6,{plan}); }],
-    [1100,()=>{ sfx.select(); setMessage('A neat red bracket beside one armor section.'); }],
-    ['hf',1800],
-    [1800,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.4); landHit(100); }],
-    [2300,()=>{ sfx.select(); setMessage('A note sticks to the least convincing piece.'); }],
-    [3700,'end',res(E2)+'The feedback is thorough and legible.']]); };
 
 // ---------- Hall Pass Home ----------
 SC.am_door=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.on) return; const g=ez((ms-P.on)/300); gfx.globalAlpha=fade(u,.9)*g; const x=P.x,b=P.y,h=P.h;
   RO(x-14,b-h,28,h,WOOD); gfx.globalAlpha*=.9; R(x-11,b-h+3,22,h-3,'#ffd27a'); E(x,b-h*.5,10,h*.35,'#fff1b0'); if(ms>P.on+200) label('HOME',x,b-h-12,GOLD,1); };
 SC.am_pass=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.95); let x=h.x-8,y=h.y-10; gfx.save(); gfx.translate(x,y); gfx.rotate(-.15); RO(-14,-8,28,16,WOOD); label('HOME',0,-3,CREAM,1); R(-1,-14,2,6,OUT); gfx.restore();
   if(ms>P.stamp) { const g=ez((ms-P.stamp)/200); gfx.save(); gfx.translate(x,y-26); gfx.scale(lerp(1.6,1,g),lerp(1.6,1,g)); gfx.rotate(-.1); gfx.strokeStyle=RED; gfx.lineWidth=2; gfx.strokeRect(-36,-8,72,16); label('RETURN WHEN',0,-6,RED,1); label('READY',0,1,RED,1); gfx.restore(); } };
-A.hall_pass_home=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,24),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:'aim'},{t:1500,f:'throw'},{t:2100,f:'celeb',hop:8},{t:2600,f:'hip'},{t:3200,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:800,x:sp.x,y:sp.y,f:'aim'},{t:1500,f:'throw',dx:-6},{t:2100,f:'celeb',hop:8},{t:2600,f:'hip'},{t:3100,f:back(sp.x,me)},{t:3800,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const plan={on:self?400:800,x:Math.round(H.x-H.w*.5-14),y:H.base,h:Math.round(Math.min(90,H.h*.95)),stamp:2600},hit=1700,end=self?3300:3900;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Amy writes herself a HOME hall pass. Allowed, apparently.':'Amy runs over to '+t.name+' with a HOME hall pass.'); say(m.id,'hall_pass_home'); scene('am_pass',(end-100)/1000,{plan}); scene('am_door',(end-100)/1000,{plan}); }],
-    [plan.on,()=>{ sfx.doorIn?sfx.doorIn():sfx.select(); setMessage('A narrow warm doorway opens beside them.'); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); scene('am_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('am_glow',.9,{x:H.x,y:H.mid,c:'#ffd27a'}); hopOf(t!==m?t:null); }],
-    [2600,()=>{ sfx.thud(); setMessage('The pass gets a cheerful stamp.'); }],
-    [end,'end',kindLine(t,'The pass includes a warm place to go.')]]); };
 
 // ---------- Gold-Star Recess ----------
 SC.am_card=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.done+900) return; gfx.globalAlpha=1; const x=h.x-14,y=h.y-28; RO(x-20,y-14,40,28,CREAM); R(x-16,y-10,10,10,'#2b2a26'); R(x-14,y-8,6,6,CREAM); label('RECESS',x+6,y-8,'#2b2a26',1);
@@ -159,31 +128,10 @@ SC.am_tiles=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; gfx.globalAlpha=fade(u,.9
   if(ms<P.hit) ['A','B','C','D'].forEach((ch,k)=>{ const a=s.t*2.4+k*Math.PI/2,r=lerp(F.w*.6+20,4,conv),x=F.x+Math.cos(a)*r,y=F.mid+Math.sin(a)*r*.55; RO(x-8,y-8,16,16,CREAM); label(ch,x+1,y-3,'#2b2a26',1); });
   else if(ms<P.hit+700) { const g=ez((ms-P.hit)/200); gfx.save(); gfx.translate(F.x,F.mid); gfx.scale(g*1.6,g*1.6); label('?',1,-8,GOLD,4); gfx.restore(); }
   const h=hand(); if(ms<P.hit) { const f=cl((ms-P.flip)/250),sc=Math.cos(f*Math.PI); gfx.save(); gfx.translate(h.x-10,h.y-24); gfx.scale(Math.abs(sc),1); RO(-14,-10,28,20,CREAM); label(sc>0?'Q':'?',0,-3,sc>0?'#2b2a26':PEN,sc>0?1:2); gfx.restore(); } };
-A.better_question=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),me=ST.unit(m);
-  const girls=['grace','rose'].map(id=>B2.party.find(q=>q.id===id&&b2Alive(q))).filter(Boolean);
-  const plan={flip:1500,hit:2050,F};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'hip'},{t:1300,f:'aim'},{t:1500,f:'throw',dx:-6},{t:2200,f:'hip'},{t:2700,f:'celeb',hop:6},{t:3000,f:back(p.x,me)},{t:3700,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Amy jogs over. Four answer tiles orbit '+(f.def?f.def.the:'it')+'.'); say(m.id,'better_question'); scene('am_tiles',3.0,{plan}); }],
-    [1500,()=>{ sfx.whoosh(); setMessage('She flips the question card.'); }],
-    ['hf',plan.hit],
-    [plan.hit,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.45); landHit(100); }],
-    [2600,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('am_heart',1,{x:q.x,y:q.top-4}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage('A quick nod to '+girls.map(g=>g.name).join(' and ')+'.'); } else setMessage('It prepared answers to the wrong question.'); }],
-    [3800,'end',res(E2)+'Amy changes the question, not her standards.']]); };
 
 // ---------- Lace, Then Race ----------
 SC.am_lace=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.snap+500) return; gfx.globalAlpha=1; const x=P.x,y=P.y,tight=ez((ms-P.pull)/(P.snap-P.pull)),r=lerp(14,6,tight);
   ring(x-r,y-4,r,r*.6,3,CREAM); ring(x+r,y-4,r,r*.6,3,CREAM); EO(x,y-4,3,3,CREAM); if(ms>P.snap) label('KNOT OK',x,y-30,GOLD,1); else label('LACE',x,y-30,CREAM,1); };
-A.lace_then_race=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30),me=ST.unit(m);
-  const plan={pull:200,snap:900,x:me.x-10,y:me.base-4};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'kneel',dx:(u,tt)=>Math.sin(tt*14)*1},{t:950,f:'run',ease:'in'},{t:1450,x:p.x,y:p.y,f:'act',dx:u=>-Math.sin(u*Math.PI)*12},{t:1750,f:jog,hop:4,hn:4},{t:2300,f:back(p.x,me),ease:'lin'},{t:2900,x:'home',y:'home',f:'hip'},{t:3300,f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Amy pulls one shoelace into a crisp loop.'); say(m.id,'lace_then_race'); scene('am_lace',1.5,{plan}); }],
-    [900,()=>{ sfx.select(); setMessage('Knot snapped shut. Race.'); }],
-    [950,()=>{ sfx.run&&sfx.run(); sfx.whoosh(); }],
-    ['hf',1500],
-    [1500,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('am_ringhit',.6,{x:F.x+8,y:F.mid,r:34,c:GOLD}); }],
-    [3400,'end',res(E2)+'The preparation took less time than the hit.']]); };
 
 // ---------- Hill Math ----------
 SC.am_route=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms>P.put) return; const x=h.x-12,y=h.y-24; gfx.globalAlpha=1; RO(x-18,y-12,36,24,CREAM); const q=ez((ms-P.draw)/400);
@@ -192,34 +140,12 @@ SC.am_hill=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.rise-200) return; const 
   const x=P.x,b=P.b,w=P.w,h=36*g; gfx.beginPath(); gfx.moveTo(x-w,b+4); gfx.lineTo(x,b+4-h); gfx.lineTo(x+w,b+4); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#6fae5a'; gfx.fill();
   if(g>.5) label('STEEP',x,b-h-14,CREAM,1);
   if(ms>P.flat) { const q=ez((ms-P.flat)/300); Ln(P.fx0,P.fy,lerp(P.fx0,P.fx1,q),P.fy,4,CREAM); if(q>=1) label('FLAT',(P.fx0+P.fx1)/2,P.fy-14,GOLD,1); } };
-A.hill_math=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m),hitList=waveFoes().length?waveFoes():[f],nbs=hitList.filter(x=>x!==f);
-  const plan={draw:1000,put:1700,rise:1700,sink:3200,flat:2500,x:F.x,b:F.base,w:Math.max(28,F.w*.6),fx0:F.x+F.w*.5+8,fx1:p.x-8,fy:p.y+6};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'aim'},{t:1000,f:'act',dx:(u,tt)=>Math.sin(tt*10)*1},{t:1700,f:'throw',dx:-6},{t:2200,f:'hip'},{t:2500,f:'aim'},{t:3100,f:back(p.x,me)},{t:3800,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Amy jogs over and draws one steep contour line on a route card.'); say(m.id,'hill_math'); scene('am_route',1.8,{plan}); scene('am_hill',3.6,{plan}); }],
-    ['hf',1900],
-    [1900,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.5); for(const n of nbs) ST.jolt(n,.3); landHit(100); setMessage('The steep part goes under the enemy. The neighbors roll outward.'); }],
-    [2500,()=>{ sfx.select(); setMessage('She points out the perfectly flat path beside it. Hers.'); }],
-    [3900,'end',res(E2)+'Amy has distributed the elevation unfairly.']]); };
 
 // ---------- Water-Station Truce ----------
 SC.am_tray=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.set) return; gfx.globalAlpha=fade(u,.94); const x=P.x,y=P.y;
   R(x-2,y-20,4,20,'#c9c2b8'); RO(x-16,y-24,32,5,'#c9c2b8'); if(ms<P.give) { RO(x-5,y-36,10,12,'#cfe8ee'); R(x-3,y-32,6,6,'#6cb0e0'); }
   if(ms<P.arrow+400) { const q=ez((ms-P.arrow)/400),ax=lerp(x+24,x+90,q); gfx.globalAlpha*=1-q; RO(ax-14,y-44,28,10,'#c8463a'); label('FINISH',ax,y-43,CREAM,1); gfx.globalAlpha=fade(u,.94); }
   if(ms>P.watch) { const h=hand(); EO(h.x-8,h.y-6,7,7,'#2b2a26'); label('NOT A RACE',h.x-8,h.y-30,CREAM,1); } };
-A.water_truce=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'kneel'},{t:600,f:'aim'},{t:1200,f:'throw'},{t:1700,f:'act'},{t:2300,f:'kneel'},{t:2900,f:'hip'},{t:3300,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:800,x:sp.x,y:sp.y,f:'kneel'},{t:1200,f:'throw',dx:6},{t:1700,f:'act',dx:-6},{t:2300,f:'kneel'},{t:2900,f:'hip'},{t:3200,f:back(sp.x,me)},{t:3900,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const plan={set:self?300:800,arrow:1200,give:1700,watch:2300,x:self?me.x-40:Math.round((H.x+sp.x)/2)+4,y:self?me.base:sp.y},hit=2000,end=self?3400:4000;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Amy sets out one plain cup of water. For herself.':'Amy runs over to '+t.name+' and sets out a water station.'); say(m.id,'water_truce'); scene('am_tray',(end-100)/1000,{plan}); }],
-    [1200,()=>{ sfx.whoosh(); setMessage('She pushes the finish line away from the tray.'); }],
-    [1700,()=>{ ST.fly((x,y)=>{ RO(x-4,y-5,8,10,'#cfe8ee'); R(x-2,y-2,4,5,'#6cb0e0'); },plan.x,plan.y-30,H.x+(self?-10:4),H.mid,.3,20); sfx.select(); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); scene('am_glow',.9,{x:H.x,y:H.mid,c:'#9fd8ff'}); hopOf(t!==m?t:null); }],
-    [2300,()=>{ setMessage('She turns her stopwatch face down. On purpose.'); }],
-    [end,'end',kindLine(t,'Nobody has to win the water break.')]]); };
 
 // ---------- False Start ----------
 SC.am_block=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; gfx.globalAlpha=fade(u,.94); const g=ez((ms-P.on)/250); if(ms<P.on) return;
@@ -242,21 +168,6 @@ SC.am_slider=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.9); co
   const q=ez((ms-P.push)/500),kx=lerp(x+42,x-42,q)+(ms<P.push?Math.sin(ms/60)*2:0); RO(kx-5,y-9,10,18,GOLD); };
 SC.am_steps=(s,u)=>{ const ms=s.t*1000,st=s.st; if(!st||st.x==null) return; const L=s.list; if(ms>s.from&&ms<s.to&&(!L.length||Math.hypot(L[L.length-1].x-st.x,L[L.length-1].y-st.y)>14)) L.push({x:st.x,y:st.y+2,t:ms});
   for(const p of L) { const a=1-cl((ms-p.t)/1500); if(a<=0) continue; gfx.globalAlpha=a*.8; E(p.x-3,p.y,3,2,'#ffb45a'); E(p.x+4,p.y-2,3,2,'#ffb45a'); } };
-A.shakeout_mile=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m);
-  const loop=(foe?[foe]:who.filter(u=>u!==m));
-  const K=[{t:0,x:'home',y:'home',f:'act'},{t:900,f:'aim'},{t:1100,f:'walk',hop:2,hn:3}];
-  let t=1100;
-  for(const o of loop) { const q=ST.unit(o); K.push({t,f:(uu,tt)=>Math.floor(tt*6)%2?'run':'idle',hop:2,hn:3}); t+=520; K.push({t,x:Math.max(30,q.x-q.w*.5-12),y:Math.min(318,q.base+10)}); }
-  K.push({t,f:'walkR',hop:2,hn:3}); t+=600; const homeAt=t; K.push({t,x:'home',y:'home',f:'spread'},{t:t+700,f:'celeb'},{t:t+1000,f:'idle'});
-  const st=ST.keys(fx,K),hit=Math.max(1700,homeAt-200);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Amy sets a pace slider between EASY and RACE. It\'s drifting toward RACE.'); say(m.id,'shakeout_mile'); scene('am_slider',2.2,{plan:{x:me.x-60,y:Math.max(30,me.top-20),push:400}}); scene('am_steps',(homeAt+1200)/1000,{st,from:1100,to:homeAt,list:[]}); }],
-    [400,()=>{ sfx.select(); setMessage('She pushes it firmly to EASY. Easy means actually easy.'); }],
-    [1100,()=>{ setMessage('A gentle jog. Warm footprints follow her round.'); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); for(const u of who) { const q=ST.unit(u); scene('am_glow',.9,{x:q.x,y:q.mid,c:'#ffb45a'}); scene('am_flakes',1,{x:q.x,y:q.base,h:q.h}); hopOf(u!==m?u:null); } }],
-    [homeAt,()=>{ setMessage('She finishes with a relaxed stretch. Reluctantly.'); }],
-    [homeAt+1100,'end',foe?kindLine(foe):'Amy demonstrates a sustainable pace. The party speeds up.']]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================

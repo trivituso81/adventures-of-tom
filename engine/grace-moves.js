@@ -1027,20 +1027,6 @@ SC.gv_beam=(s,u)=>{ const P=s.plan,ms=s.t*1000,g=ez(ms/350),x=lerp(600,P.x0,g),w
   R(x-2,y-6,w+4,12,OUT); R(x,y-4,w,8,'#e8cfa0'); R(x,y-4,w,3,'#f6e6c4'); for(const lx of [x+12,x+w-18]) { R(lx,y+6,6,P.h-6,OUT); R(lx+1,y+6,4,P.h-7,'#8a5a30'); R(lx-6,y+P.h-4,18,6,OUT); } };
 SC.gv_card=(s,u)=>{ const g=u<.15?ez(u/.15)*1.3:lerp(1.3,1,cl((u-.15)/.12)); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(.1); gfx.scale(g,g);
   R(-30,-24,60,44,OUT); R(-28,-22,56,40,CREAM); R(-28,-22,56,7,PINK); label('10.0',0,-6,'#2b2a26',3); R(-3,20,6,26,OUT); R(-2,20,4,25,'#8a5a30'); gfx.restore(); };
-G.beam_dismount=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),bx0=Math.min(470,Gp.x1+40),bw=86,by=Math.min(300,Gp.base)-46,top={x:Gp.x,y:Gp.top+6},land=rowSpot(Gp,30);
-  const onB={x:bx0+bw*.55,y:by-4};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:800,x:bx0+bw+18,y:Math.min(314,by+46),f:'celeb',hop:30},{t:1100,x:onB.x,y:onB.y,f:'celeb',rot:(u,tt)=>Math.sin(tt*5)*.07,ns:true},
-    {t:1700,f:'kneel',ns:true},{t:1900,f:'idle',rot:wheelR(2),dy:u=>-Math.sin(u*Math.PI)*120,sc:1.1,ease:'lin',ns:true},{t:2600,x:top.x,y:top.y,f:'kneel',ns:true},{t:2800,f:'celeb',ns:true,hop:30},
-    {t:3150,x:land.x,y:land.y,f:'celeb',sc:1.12},{t:3500,f:'runR'},{t:4200,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('A balance beam rolls in beside them. Grace runs at it.'); say(m.id,'beam_dismount'); scene('gv_beam',3.3,{plan:{x0:bx0,w:bw,y:by,h:46}}); }],
-    [800,()=>{ sfx.jumpWhistle(); }],
-    [1100,()=>{ sfx.thud(); setMessage('Up on the beam. Arms up. Perfectly still.'); scene('gv_text',.7,{st,txt:'ARMS UP',c:PINK2}); }],
-    [1900,()=>{ sfx.whoosh(); b7Later(()=>sfx.whoosh(),300); scene('gr_trail',.7,{st}); setMessage('Double back tuck. Off the beam. Onto them.'); }],
-    ['hf',2600],
-    [2600,()=>{ sfx.thud(); sfx.bonk(); all(list,.55); landHit(100); scene('gv_big',.9,{x:Gp.x,y:Gp.top-74,txt:'STUCK IT!',c:GOLD,sc:4}); }],
-    [3150,()=>{ scene('gv_card',1.2,{x:land.x-6,y:land.y-GH()-56}); sfx.ding(); }],
-    [4300,'end',res(E2)+'The judges give it a ten. The judges are her sister.']]); };
 
 // ---------- Handstand Contest (B3) ----------
 // Grace calls a handstand contest. Everybody goes upside down. One by one they wobble and fall. Grace stays up. She wins, obviously.
@@ -1071,41 +1057,12 @@ SC.gv_flipfoe=(s,u)=>{ const ms=s.t*1000,up=ms<1400?ez(ms/300):1-ez((ms-1400)/40
 SC.gv_leap=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; if(ms<s.from||ms>s.to) return; const y=st.y-GH()*.5; gfx.globalAlpha=.8;
   for(let k=1;k<5;k++) Ln(st.x+k*14,y-10+k*2,st.x+k*14+18,y-10+k*2,3,k%2?PINK2:CREAM);
   gfx.globalAlpha=.9; LnO(st.x-26,y+12,st.x+26,y+12,5,'#f6d4b8'); };
-G.split_leap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),list=b2LiveFoes(),Gp=ST.group(list.length?list:[f]),F=ST.unit(f),me=ST.unit(m),L=lowest(),LU=L?ST.unit(L):null;
-  const start=rowSpot(Gp,60),far={x:Math.max(26,Gp.x0-34),y:Math.min(314,Gp.base+6)},topY=Math.max(60,Gp.top-40);
-  const span=start.x-far.x,hitQ=cl((start.x-F.x)/Math.max(1,span),.1,.9);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:start.x,y:start.y,f:'run'},{t:900,f:'act',dy:u=>-Math.sin(u*Math.PI)*(start.y-topY),sc:1.15,ease:'lin',ns:true},
-    {t:2100,x:far.x,y:far.y,f:'celeb',hop:10},{t:2500,f:'flip'},{t:2800,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}]);
-  const hit=Math.round(900+hitQ*1200);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace takes a running start.'); say(m.id,'split_leap'); scene('gv_leap',2.2,{st,from:900,to:2100}); }],
-    [900,()=>{ sfx.jumpWhistle(); scene('gv_big',1,{x:Gp.x,y:topY-36,txt:'SPLIT LEAP!',c:PINK,sc:3}); setMessage('A split leap over the whole row.'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.bonk(); ST.jolt(f,.55); landHit(100); scene('gv_burst',.6,{x:F.x,y:F.top,n:8,r:40}); }],
-    [2100,()=>{ sfx.thud(); E2.apply(); if(LU) { scene('gr_heart',1.1,{x:LU.x,y:LU.top-8,r:8}); scene('gv_text',1,{x:LU.x,y:LU.top-24,txt:'GUARDED',c:SKYC,sc:1}); } }],
-    [2500,()=>{ scene('gv_text',.8,{st,txt:'TA-DA',c:GOLD}); sfx.ding(); }],
-    [3900,'end',res(E2)+'Clean over the top. Not one toe touched them. Well, one did.']]); };
 
 // ---------- Chalk Up (B5) ----------
 // Lights down, spotlight on. Grace claps her chalky hands: a big white POOF. Then a tumbling pass down the row and she sticks it.
 SC.gv_chalk=(s,u)=>{ const g=ez(u/.25); for(let k=0;k<14;k++) { const a=k*.9,d=g*(30+(k%4)*10); gfx.globalAlpha=fade(u,.5)*.85; E(s.x+Math.cos(a)*d,s.y-12+Math.sin(a)*d*.6,10+(k%3)*4,8+(k%3)*3,'#f4f4f0'); }
   if(u<.6) { gfx.globalAlpha=fade(u,.4); label('CLAP',s.x,s.y-58,CREAM,2); } };
 SC.gv_prints=(s,u)=>{ for(const f of s.L) { const F=ST.unit(f); gfx.globalAlpha=fade(u,.85)*.9; for(const dx of [-8,8]) { E(F.x+dx,F.mid,4,5,'#f4f4f0'); for(let k=0;k<4;k++) E(F.x+dx-4+k*2.6,F.mid-6,1.2,2,'#f4f4f0'); } } };
-G.chalk_up=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,46),xl=Math.max(30,Gp.x0-16),c={x:Math.min(546,Gp.x1+44),y:Math.min(312,Gp.base+10)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:p.x,y:p.y,f:'expr'},{t:900,f:'act',dy:(u,tt)=>-Math.abs(Math.sin(tt*14))*3},{t:1500,f:'celeb'},
-    {t:1700,x:p.x,y:Math.min(314,Gp.base+14),f:'idle',rot:wheel(3),hop:22,hn:3,ns:true},{t:2700,x:xl,y:Math.min(314,Gp.base+14),f:'celeb',sc:1.1},{t:3000,f:'idle',rot:wheelR(1),hop:50,ns:true},
-    {t:3400,x:c.x,y:c.y,f:'celeb'},{t:3800,f:'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Lights down. One spotlight. Grace walks to the chalk bowl.'); say(m.id,'chalk_up'); scene('gr_dark',4.2,{a:.42,back:true}); }],
-    [650,()=>{ scene('gr_beam',1.0,{x:p.x,y:p.y,w:36}); }],
-    [1100,()=>{ sfx.click(); b7Later(()=>sfx.click(),160); scene('gv_chalk',1.3,{x:p.x-6,y:p.y-GH()*.5}); scene('gv_big',.9,{x:p.x-30,y:p.y-GH()-60,txt:'POOF!',c:CREAM,sc:4}); }],
-    [1700,()=>{ sfx.whoosh(); setMessage('Tumbling pass. Round-off, handspring, handspring.'); scene('gr_trail',1,{st}); for(let k=0;k<3;k++) b7Later(()=>sfx.whoosh(),k*330); }],
-    [2000,()=>{ sfx.bonk(); all(list); landHit(34); }],
-    [2350,()=>{ sfx.bonk(); all(list); landHit(33); }],
-    ['hf',2700],
-    [2700,()=>{ sfx.bonk(); sfx.ding(); all(list); landHit(33); scene('gv_prints',1.6,{L:list}); }],
-    [3400,()=>{ scene('gr_beam',1.0,{x:c.x,y:c.y,w:32}); scene('gv_big',1,{x:c.x-30,y:c.y-GH()-50,txt:'STUCK IT',c:GOLD,sc:3}); sfx.ding(); }],
-    [4500,'end',res(E2)+'Chalk handprints everywhere. That\'s how you know it was good.']]); };
 })();
 
 // ================= Option 3 Ultimates (phase 5b, 2026-10-24) =================
@@ -1355,20 +1312,6 @@ SC.gp_slow=(s,u)=>{ const ms=s.t*1000,a=ez(ms/150)*(ms>s.len-150?ez((s.len-ms)/1
   gfx.globalAlpha=a*.32; R(0,0,576,324,'#2a2060'); gfx.globalAlpha=a; R(0,0,576,18,'#0b0a12'); R(0,306,576,18,'#0b0a12');
   bigWord('SLOW-MO',288,26,PINK2,3); if(st&&st.x!=null) { const y=st.y-GH()*.55; for(let k=0;k<7;k++) { const q=((ms/700)+k/7)%1,a2=k*.9; gfx.globalAlpha=a*Math.sin(q*Math.PI); star(st.x+Math.cos(a2)*(40+q*20),y+Math.sin(a2)*(30+q*10),3+Math.sin(q*Math.PI)*4,CONF[k%CONF.length]); }
     gfx.globalAlpha=a*.85; for(let k=1;k<5;k++) Ln(st.x+18+k*16,y-16+k*6,st.x+40+k*16,y-16+k*6,3,k%2?PINK2:CREAM); } };
-G.split_leap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),list=b2LiveFoes(),Gp=ST.group(list.length?list:[f]),F=ST.unit(f),me=ST.unit(m),L=lowest(),LU=L?ST.unit(L):null;
-  const start={x:Math.min(552,Gp.x1+60),y:Math.min(314,Gp.base+6)},far={x:Math.max(26,Gp.x0-34),y:Math.min(314,Gp.base+6)},topY=Math.max(70,F.top-24),ax=F.x+18;
-  const up=900,apex=1350,go2=2250,land=2700,hit=2350;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:start.x,y:start.y,f:'run'},{t:up,f:'act',sc:1.15,ease:'out',ns:true},{t:apex,x:ax,y:topY,f:'act',sc:1.3,dx:u=>-u*8,dy:u=>-Math.sin(u*Math.PI)*3,ease:'lin',ns:true},
-    {t:go2,x:ax-8,y:topY,f:'act',sc:1.15,ease:'in',ns:true},{t:land,x:far.x,y:far.y,f:'celeb',hop:10},{t:land+350,f:'flip'},{t:land+650,f:'runR'},{t:land+1650,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace takes a running start.'); say(m.id,'split_leap'); scene('gv_leap',(land+100)/1000,{st,from:up,to:land}); }],
-    [up,()=>{ S('jumpWhistle'); setMessage('A split leap over the whole row.'); }],
-    [apex,()=>{ S('click'); scene('gp_slow',(go2-apex)/1000,{st,len:go2-apex}); scene('gv_big',(go2-apex)/1000,{x:288,y:310,txt:'SPLIT LEAP!',c:PINK,sc:3}); setMessage('She freezes at the top. Perfect split. Hold it. Hold it.'); }],
-    ['hf',hit],
-    [hit,()=>{ S('bonk'); ST.jolt(f,.55); landHit(100); scene('gv_burst',.6,{x:F.x,y:F.top,n:8,r:40}); }],
-    [land,()=>{ S('thud'); E2.apply(); if(LU) { scene('gr_heart',1.1,{x:LU.x,y:LU.top-8,r:8}); scene('gv_text',1,{x:LU.x,y:LU.top-24,txt:'GUARDED',c:SKYC,sc:1}); } }],
-    [land+350,()=>{ scene('gv_text',.8,{st,txt:'TA-DA',c:GOLD}); S('ding'); }],
-    [land+1750,'end',res(E2)+'Clean over the top. Not one toe touched them. Well, one did.']]); };
 })();
 
 // ================= Tom's move feedback (2026-10-26, claude/grace-moves-feedback.md) =================

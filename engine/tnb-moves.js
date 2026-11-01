@@ -482,18 +482,6 @@ SC.tn_heat=(s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.4-k*.1); gfx.globalAlp
 
 // ---------- Moves ----------
 // Clay Offcut (Basic): a curl of spare clay, flicked; it comes back to the REUSE tray.
-T.clay_offcut=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:600,f:'run'},{t:1050,x:420,f:'wind'},{t:1350,f:'throw'},{t:1750,f:'idle'},{t:2200,f:'spread'},{t:2750,hop:8,f:'celeb'},{t:2950,f:'runR'},{t:3550,x:'home',y:'home',f:'idle'}]);
-  let curlOn=true;
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB notices one little curl of spare clay on his thumb.'); say(m.id,'clay_offcut'); ST.draw(()=>{ if(!curlOn) return; const h=hand(); clayCurl(h.x-4,h.y-12,9,battle.time*2); },1.4); }],
-    [1350,()=>{ curlOn=false; const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>clayCurl(x,y,10,u*12),h.x,h.y-10,F.x+10,F.mid,.45,70); }],
-    ['hf',1800],
-    [1800,()=>{ sfx.bonk(); ST.jolt(f); scene('tn_poof',.5,{x:F.x+10,y:F.mid,c:CLAY}); scene('tn_text',.9,{x:F.x+62,y:F.top-2,txt:'BONK NOT',c:GOLD,sc:2,y:F.top-34}); landHit(100); }],
-    [1900,()=>{ const h=hand(); ST.fly((x,y,u)=>clayCurl(x,y,6,u*8),F.x+10,F.mid,h.x-6,h.y,.5,60); }],
-    [2200,()=>{ ST.draw(()=>{ const h=hand(); tray(h.x-8,h.y+2); },.75); }],
-    [2450,()=>{ sfx.ding(); }],
-    [3650,'end',res(E2)+'The offcut has found a second career.']]); };
 
 // WARDROBE (Signature, Primary animation): out for the rack, roll it into the light, the next costume drops on, collar fixed.
 T.wardrobeShow=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t),self=t===m;
@@ -515,129 +503,22 @@ T.wardrobeShow=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t
 { const legacy=T.wardrobe; T.wardrobe=E2=>(E2.act&&E2.act.o3&&T.wardrobeShow)?T.wardrobeShow(E2):legacy(E2); }
 
 // Quick Change (A1): a lap with the measuring tape, the loop unzips, a debuff falls out, new pockets.
-T.quick_change=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe';
-  const rx=H.w*.5+30,ry=16,cx=sp.self?null:H.x;
-  const lap=sp.self?{t:700,f:'idle',rot:u=>Math.sin(u*Math.PI*2)*.15}:{t:700,f:u=>Math.sin(u*Math.PI*2)>0?'run':'runR',dx:u=>(H.x+Math.cos(u*Math.PI*2)*rx)-(H.x+rx),dy:u=>Math.sin(u*Math.PI*2)*ry,x:H.x+rx,y:H.base+3};
-  const K=sp.self?[{t:0,x:'home',y:'home',f:'aim'},lap,{t:1550,f:'aim'},{t:2100,f:'celeb'},{t:2700,f:'idle'},{t:3300,x:'home',y:'home'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:700,x:H.x+rx,y:H.base+3},lap,{t:1550,x:sp.x,y:sp.y,f:'aim'},{t:2100,f:'celeb'},{t:2650,f:'runR'},{t:3300,x:'home',y:'home',f:'idle'}];
-  K[1].x=K[1].x??H.x+rx; ST.keys(fx,K);
-  const loopX=sp.self?BATTLE_POS[m.idx].x*3:H.x,loopY=(sp.self?BATTLE_POS[m.idx].base*3:H.base)-H.h*.45;
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB pulls out a measuring tape. One loop, very fast.'); say(m.id,'quick_change'); }],
-    [700,()=>{ scene('tn_tape',1.6,{x:loopX,cy:loopY,rx:H.w*.5+18,ry:H.h*.55,trace:.5,unzip:.65}); sfx.whoosh(); }],
-    ['hf',1750],
-    [1750,()=>{ sfx.ding(); E2.apply(); scene('tn_debuff',1.0,{x:H.x+10,y:H.mid,fall:H.base-H.mid}); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#c9b3e6'});
-      if(!foe) { const cur=B2_RACK.find(r=>t.st&&t.st[r.id]); if(cur) scene('tn_tag',1.6,{x:H.x,y:H.top-8,txt:cur.tag,c:cur.c}); } }],
-    [2150,()=>{ scene('tn_pocket',1.1,{x:H.x-14,y:H.mid+10}); if(!foe&&t!==m) battle.fx[t.idx].hop=.4; else if(foe) ST.jolt(t,.2); }],
-    [3400,'end',kindLine(t,'Same person, better pockets. The pockets were the important part.')]]); };
 
 // Continuity Pins (A2): kneels by the loose thread, two big safety pins, a warm outline; a little heart for Tom.
-T.continuity_pins=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p)),foe=t.side==='foe';
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'kneel'},{t:1350,f:'aim'},{t:1900,f:'aim'},{t:2150,f:'celeb',hop:6},{t:2700,f:sp.self?'idle':'runR'},{t:3400,x:'home',y:'home',f:'idle'}]);
-  const tx=H.x+(foe?0:-4),ty=H.top-4;
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB spots a loose thread. He always spots the loose thread.'); say(m.id,'continuity_pins'); scene('tn_thread',2.6,{x:tx,y:ty,pinAt:.62,ox:H.x,oy:H.mid,w:H.w*.9,h:H.h*.95}); }],
-    [1400,()=>{ const h=hand(); for(const k of [0,1]) ST.fly((x,y)=>{ RO(x-3,y-12,6,20,'#dfe6ee'); EO(x,y-12,5,5,'#dfe6ee'); },h.x,h.y,tx+(k?10:-10),ty+2,.35,40,k*.08,{spin:1}); sfx.whoosh(); }],
-    ['hf',1900],
-    [1900,()=>{ sfx.ding(); E2.apply(); sfx.heal(); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#ffd27a'}); if(foe) ST.jolt(t,.15); }],
-    [2250,()=>{ if(tom&&!foe&&t!==tom) { const a=ST.unit(m),b=ST.unit(tom); ST.fly((x,y)=>heart(x,y,6,PINK),(battle.actorPos||{cx:a.x}).cx-10,a.top+20,b.x,b.top+10,.6,40); }
-      else if(tom&&!foe) scene('tn_heart',1,{x:H.x,y:H.top-6}); }],
-    [2850,()=>{ if(tom&&!foe&&t!==tom) { battle.fx[tom.idx].hop=.35; sfxs('kiss'); } }],
-    [3500,'end',kindLine(t,'TNB checks the person before the costume.')]]); };
 
 // Lost-and-Found Warmth (A3): claim ticket, a rummage through the lost-property box, a very long scarf, FOUND.
-T.lost_found_warmth=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),me=ST.unit(m),bx=me.x-74,by=me.base+2,foe=t.side==='foe';
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:800,f:'kneel',dx:(u,tt)=>Math.sin(tt*18)*3},{t:1550,f:'throw'},{t:1700,f:sp.self?'throw':'run'},{t:2400,x:sp.self?'home':sp.x,y:sp.self?'home':sp.y,f:'act'},
-    {t:2900,f:sp.self?'idle':'runR'},{t:3500,x:'home',y:'home',f:'act'},{t:4000,f:'celeb'},{t:4400,f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB checks a claim ticket. It says MISSING WARMTH.'); say(m.id,'lost_found_warmth'); scene('tn_ticket',.9,{}); scene('tn_box',4.4,{x:bx,y:by,outAt:.9,stampAt:.82}); }],
-    [850,()=>{ const items=[(x,y)=>{ RO(x-5,y-8,10,16,'#7a8ca0'); },(x,y)=>{ EO(x,y,7,5,'#e0402e'); },(x,y)=>{ Ln(x-10,y,x+10,y,3,'#2b2a26'); poly([[x-10,y],[x,y-10],[x+10,y]],'#5b7fd0'); }];
-      items.forEach((d,k)=>ST.fly(d,bx,by-30,bx+40+k*30,by-10-k*6,.5,60,k*.2,{spin:1})); setMessage('A sock. One glove. An umbrella. Not those.'); sfxs('select'); }],
-    [1550,()=>{ scene('tn_scarf',2.8,{bx,by,tx:H.x,ty:H.top+30,wrapAt:.36,backAt:.68}); sfx.whoosh(); }],
-    ['hf',2600],
-    [2600,()=>{ E2.apply(); sfx.heal(); scene('tn_flakes',1.0,{x:H.x,y:H.base,h:H.h}); scene('tn_glow',.9,{x:H.x,y:H.mid,c:'#ffb0c0'}); if(!foe&&t!==m) battle.fx[t.idx].hop=.35; if(foe) ST.jolt(t,.15); }],
-    [3700,()=>{ sfx.select(); }],
-    [4500,'end',kindLine(t,'The missing warmth has been turned in.')]]); };
 
 // Practical Effects (A4): lights down, a tiny curtain, a very visible string, a cardboard ghost on a spring. BOO.
-T.practical_effects=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),cx=F.x+F.w*.5+26,cy=F.base;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:cx+44,y:cy+3,f:'act'},{t:1150,f:'walk'},{t:1800,x:400,y:'home',f:'kneel'},{t:2250,f:'throw',dx:8,rot:.12},{t:2650,f:'hip'},{t:3200,f:'runR'},{t:3900,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB dims the lights and sets a tiny curtain next to '+f.name+'.'); say(m.id,'practical_effects'); scene('tn_dark',3.9,{a:.5}); S.drone(2.2); }],
-    [700,()=>{ scene('tn_curtain',3.2,{x:cx,y:cy,fx:F.x+14,popAt:(2250-700)/3200}); sfxs('select'); }],
-    [1150,()=>{ scene('tn_string',1.8,{x:cx,y:cy,tautAt:(1800-1150)/1800}); setMessage('The pull-string is very visible. That\'s part of the charm.'); }],
-    ['hf',2350],
-    [2250,()=>{ S.sting(); }],
-    [2350,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('tn_text',1.1,{x:F.x+62,y:F.top-2,txt:'BOO!',c:'#ff6b6b',sc:3}); landHit(100); }],
-    [2700,()=>{ scene('tn_text',1.2,{x:BATTLE_POS[m.idx].x*3-120,y:BATTLE_POS[m.idx].base*3-150,txt:'NICE STRING',c:GOLD,sc:1}); }],
-    [4000,'end',res(E2)+'The enemy saw the string and jumped anyway.']]); };
 
 // Rush-Hour Racks (A5): wheels a rack in, floor arrows say it fits, one extremely long sleeve sweeps the row.
-T.rush_hour_racks=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),stopX=Math.min(560,G.x1+170),stopY=Math.min(312,G.base+10);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'runR'},{t:400,x:650,f:'runR',hide:true},{t:600,x:740,y:stopY,f:'run'},{t:1500,x:stopX,y:stopY,f:'idle'},{t:1600,f:'wind'},{t:2000,f:'throw'},{t:2500,f:'act'},{t:3000,f:'runR'},
-    {t:3700,x:720,f:'run',hide:true},{t:3900,x:640,y:'home',f:'run'},{t:4400,x:'home',y:'home',f:'idle'}]);
-  const rackSt={get x(){ return st.seg>=8?null:st.x; },get y(){ return st.y; }};
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB wheels in a costume rack. One sleeve is extremely long.'); say(m.id,'rush_hour_racks'); }],
-    [600,()=>{ scene('tn_rack',3.2,{st:rackSt,back:true}); scene('tn_sleeve',3.2,{st:rackSt,sweepAt:(2000-600)/3200,sweepLen:.12,backAt:(2550-600)/3200,reach:G.x0-10,lx:G.x,ly:G.top-26}); S.roll(.9); }],
-    [1100,()=>{ scene('tn_arrows',1.4,{x0:G.x0,x1:G.x1,y:G.base+16}); }],
-    [2000,()=>{ sfx.whoosh(); }],
-    ['hf',2300],
-    [2300,()=>{ sfx.thud(); hitAll(E2,list); battle.enemyKnock=.45; }],
-    [2600,()=>{ setMessage('He folds the sleeve over the rail like he expected this.'); }],
-    [4500,'end',res(E2)+'The rack is wider than its travel clearance.']]); };
 
 // Clay Pigeon, Literally (B1): shapes a little clay bird, throws it, one flap, bonk; it comes back as an indignant lump.
-T.clay_pigeon=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:1000,f:'run'},{t:1400,x:440,f:'wind'},{t:1650,f:'throw'},{t:2100,f:'idle'},{t:2600,f:'aim'},{t:3200,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB shapes a tiny bird out of soft clay.'); say(m.id,'clay_pigeon'); scene('tn_shape',1.65,{}); }],
-    [1650,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>pigeon(x,y,u>.4&&u<.55),h.x,h.y-10,F.x+8,F.mid,.55,80); }],
-    ['hf',2200],
-    [2200,()=>{ sfx.bonk(); ST.jolt(f); scene('tn_poof',.5,{x:F.x+8,y:F.mid}); scene('tn_text',.9,{x:F.x+62,y:F.top-2,txt:'COO',c:GOLD,sc:2}); landHit(100); }],
-    [2250,()=>{ const h0=hand(); ST.fly((x,y,u)=>pigeon(x,y,false,u),F.x+8,F.mid,h0.x-30,h0.y-14,.45,50); }],
-    [2700,()=>{ ST.draw(()=>{ const h=hand(); pigeon(h.x-4,h.y-12,false,1); label('HMPH',h.x-4,h.y-34,CREAM,1); },.6); }],
-    [3900,'end',res(E2)+'The craftsmanship is better than the joke.']]); };
 
 // Cone Six, Please (B2): sets a kiln cone by the friend, conducts a glaze over them, the cone bends and bows.
-T.cone_six=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',conX=H.x+(foe?H.w*.5+8:20);
-  const back=c=>(sp.self?c.origX:sp.x)+22;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'kneel'},{t:1250,f:'walk'},{t:1500,x:back,f:'spread'},{t:2350,f:'idle'},{t:2450,f:'idle',rot:u=>-Math.sin(u*Math.PI)*.25},{t:2900,f:sp.self?'idle':'runR'},{t:3550,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB sets down a tiny kiln cone. Cone six. Precisely.'); say(m.id,'cone_six'); }],
-    [750,()=>{ scene('tn_cone',2.9,{x:conX,y:H.base+2,bendAt:(1700-750)/2900,bowAt:(2450-750)/2900}); sfxs('select'); }],
-    [1500,()=>{ scene('tn_glaze',1.6,{x:H.x,y:H.base,w:H.w*.85,h:H.h}); }],
-    ['hf',2300],
-    [2300,()=>{ E2.apply(); sfx.heal(); scene('tn_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('tn_glow',.9,{x:H.x,y:H.mid,c:'#ffb070'}); if(foe) ST.jolt(t,.15); else if(t!==m) battle.fx[t.idx].hop=.3; }],
-    [2500,()=>{ setMessage('The cone takes a tiny bow. So does TNB.'); }],
-    [3650,'end',kindLine(t,'The warmth has been professionally considered.')]]); };
 
 // Curb Appeal (B3): drops the board, finds the curb line, carves it; the line peels up and sweeps the row, then lies flat.
-T.curb_appeal=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),cy=Math.min(308,G.base+10),x0=G.x0-30,x1=G.x1+70;
-  const wob=(u,tt)=>Math.sin(u*Math.PI*3)*8;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:-.08},{t:500,x:440,f:'idle',rot:-.1},{t:1100,x:x1+30,y:cy-6,f:'idle',dy:wob,rot:u=>Math.sin(u*Math.PI*3)*.08},
-    {t:2300,x:x0-20,y:cy-6,f:'idle',rot:-.12},{t:2600,f:'flip',rot:u=>u*Math.PI*2,hop:30},{t:2900,x:x0-20,f:'flip'},{t:3900,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB drops his board and finds a curb with opinions.'); say(m.id,'curb_appeal'); scene('tn_board',3.95,{st}); scene('tn_curb',3.6,{st,y:cy,x0,x1,peelAt:1100/3600,flatAt:2450/3600}); S.roll(2.2); }],
-    [1150,()=>{ sfx.whoosh(); }],
-    ['hf',1800],
-    [1800,()=>{ sfx.thud(); hitAll(E2,list); }],
-    [2600,()=>{ sfx.select(); }],
-    [4000,'end',res(E2)+'The line was beautiful and inconvenient.']]); };
 
 // Fix the Wobble (B4): the friend's little platform rocks; TNB kneels, slides a clay wedge in, click. Pockets the spare.
-T.fix_wobble=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m,tf=!foe&&!self?battle.fx[t.idx]:null;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:sp.x,y:sp.y,f:'kneel'},{t:1900,f:'kneel'},{t:2050,f:'celeb',hop:6},{t:2450,f:'hip'},{t:2750,f:self?'idle':'runR'},{t:3400,x:'home',y:'home',f:'idle'}]);
-  if(tf) tf.path={t:0,dur:1.9,fn:(q,c)=>({rot:Math.sin(c.t*7)*.07})};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Something is wobbling. TNB can tell from across the room.'); say(m.id,'fix_wobble'); scene('tn_platform',2.9,{x:H.x,y:H.base,w:Math.max(56,H.w*.8),wedgeAt:1300/2900,fixAt:1900/2900}); }],
-    [900,()=>{ scene('tn_text',1,{x:H.x+H.w*.5,y:H.base-6,txt:'SHORT CORNER',c:CREAM}); }],
-    [1300,()=>{ sfxs('select'); }],
-    ['hf',1900],
-    [1900,()=>{ sfx.ding(); E2.apply(); sfx.heal(); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#9be39a'}); if(foe) ST.jolt(t,.15); }],
-    [2100,()=>{ if(tf) tf.hop=.35; }],
-    [2500,()=>{ scene('tn_text',.9,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3-140,txt:'SPARE',c:CREAM}); }],
-    [3500,'end',kindLine(t,'The repair is smaller than the relief.')]]); };
 
 // Kiln Door Policy (B5): a freestanding kiln door; he takes the enemy's shield off it like a test tile, fires it, TRY AGAIN.
 T.kiln_door_policy=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),kx=F.x+F.w*.5+56,ky=F.base+2;
@@ -755,22 +636,6 @@ SC.tv2_outfit=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.86); con
   if(ms>P.land[2]) boa(H.x,cy-h*.5,w*.8,s.t);
   if(ms>P.land[0]) topHat(H.x+2,hy+2,1.8);
   if(ms>P.land[2]+150&&ms<P.land[2]+1000) bigWord('QUICK CHANGE!',H.x,Math.max(22,hy-70),GOLD,2); };
-T.quick_change=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m;
-  const me=homeOf(m),px=sp.self?me.x:sp.x,py=sp.self?me.y:sp.y;
-  const thr=[1000,1400,1800],land=thr.map(x=>x+350),hit=2300;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'idle'},{t:850,f:'wind'},{t:thr[0],f:'throw'},{t:1250,f:'wind'},{t:thr[1],f:'throw'},{t:1650,f:'wind'},{t:thr[2],f:'throw'},{t:2250,f:'aim'},{t:2600,f:'celeb',hop:8},{t:3000,f:self?'idle':'runR'},{t:3700,x:'home',y:'home',f:'idle'}]);
-  const r0=B2_RACK[(t.rack||0)%B2_RACK.length]||B2_RACK[0],hy=headY(t,H),cy=chestY(t,H);
-  const P={land,c:foe?'#284fb4':r0.c,c2:foe?GOLD:r0.c2};
-  const items=[(x,y)=>topHat(x,y,1.8),(x,y)=>jacket(x,y,40,34,P.c,P.c2),(x,y)=>boa(x,y,40,0)],aims=[[H.x+2,hy+2],[H.x,cy],[H.x,cy-12]];
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB rolls out the wardrobe rack. Arms up, '+t.name+'.'); say(m.id,'quick_change'); scene('tn_rack',3.4,{st:{x:px,y:py-34},off:.001,back:true}); scene('tv2_outfit',3.7,{P,tgt:t}); }],
-    ...thr.map((ms,k)=>[ms,()=>{ const h=hand(); sfx.whoosh(); ST.fly(items[k],h.x-4,h.y-20,aims[k][0],aims[k][1],.35,self?110:70,0,{spin:k===2?0:1}); }]),
-    ...land.map((ms,k)=>[ms,()=>{ S('pickup'); if(!foe&&!self) battle.fx[t.idx].hop=.25; else if(foe) ST.jolt(t,.12); }]),
-    ['hf',hit],
-    [hit,()=>{ sfx.ding(); E2.apply(); scene('tn_debuff',1.0,{x:H.x+10,y:H.mid,fall:H.base-H.mid}); scene('tv2_sparkle',.9,{x:H.x,y:H.mid,r:H.h*.5,n:10}); scene('tv2_glow',.8,{x:H.x,y:H.mid,c:'#c9b3e6'});
-      if(!foe) { const cur=B2_RACK.find(r=>t.st&&t.st[r.id]); if(cur) scene('tn_tag',1.4,{x:H.x,y:Math.max(20,hy-28),txt:cur.tag,c:cur.c,delay:.85}); } }],
-    [2650,()=>{ setMessage(foe?'Hat, jacket, boa. It\'s never looked better.':'Hat, jacket, boa. Same person, better pockets.'); }],
-    [3800,'end',kindLine(t,'Same person, better pockets. The pockets were the important part.')]]); };
 
 // ---------- Continuity Pins (A2, kept: a sewing flourish and giant safety pins) ----------
 const needle=(x,y,ang)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); LnO(-18,0,18,0,3,'#dfe6ee'); ring(-13,0,3,1.6,1.5,OUT); poly([[18,-2],[26,0],[18,2]],'#dfe6ee',1.5); gfx.restore(); };
@@ -787,20 +652,6 @@ SC.tv2_sew=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.9); const c
 SC.tv2_pins=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.9);
   P.pins.forEach((p,k)=>{ const t0=P.drop[k]; if(ms<t0) return; const d=ez((ms-t0)/250),y=lerp(p.y-140,p.y,d),snap=ms>t0+450?1:0; bigPin(p.x,y,snap?0:1,3);
     if(snap&&ms<t0+1100) bigWord('SNAP',p.x+(k?34:-34),p.y-60,GOLD,2); }); };
-T.continuity_pins=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p)),foe=t.side==='foe';
-  const P={x:H.x,y:H.mid,rx:H.w*.5+12,ry:H.h*.55+6,s0:800,s1:1700},hit=2600;
-  const pins={pins:[{x:H.x-H.w*.5+2,y:H.mid+10},{x:H.x+H.w*.5-2,y:H.mid+10}],drop:[1800,2150]};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'kneel'},{t:800,f:'aim',dx:(u,tt)=>Math.sin(tt*24)*3},{t:1700,f:'throw'},{t:2150,f:'throw',dx:-4},{t:2600,f:'celeb',hop:8},{t:3100,f:sp.self?'idle':'runR'},{t:3800,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB spots a loose thread. He always spots the loose thread.'); say(m.id,'continuity_pins'); scene('tv2_sew',3.4,{P}); scene('tv2_pins',3.6,{P:pins}); }],
-    [800,()=>{ setMessage('Needle out. A quick running stitch, all the way around.'); for(let k=0;k<6;k++) tone({type:'square',f0:1500+k*40,dur:.03,vol:.05,delay:k*.14}); }],
-    [1800,()=>{ sfx.whoosh(); setMessage('Then the big safety pins. Belt and suspenders.'); }],
-    [2250,()=>{ S('click'); }],[2600,()=>{ S('click'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.ding(); E2.apply(); sfx.heal(); scene('tv2_glow',.9,{x:H.x,y:H.mid,c:'#ffd27a',rx:H.w*.6,ry:H.h*.6}); scene('tv2_big',1.2,{x:H.x,y:Math.max(40,H.top-74),txt:'IN ONE PIECE',c:GOLD,sc:3}); if(foe) ST.jolt(t,.15); }],
-    [2900,()=>{ if(tom&&!foe&&t!==tom) { const a=ST.unit(m),b=ST.unit(tom); ST.fly(()=>heart(0,0,7,PINK),(battle.actorPos||{cx:a.x}).cx-10,a.top+30,b.x,b.top+10,.6,40); } else if(tom&&!foe) ST.fly(()=>heart(0,0,7,PINK),H.x,H.top,H.x,H.top-26,.8,0); }],
-    [3500,()=>{ if(tom&&!foe&&t!==tom) { battle.fx[tom.idx].hop=.35; S('kiss'); } }],
-    [3900,'end',kindLine(t,'TNB checks the person before the costume.')]]); };
 
 // ---------- Metro Tap Card (A3; key metro_tap; same numbers as Lost-and-Found Warmth) ----------
 // He taps his card at the reader (BEEP), a light-rail train glides in behind the line and stops with its doors right at
@@ -897,17 +748,6 @@ const bigBird=(x,y,ph,sc,lump=0)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc
 SC.tv2_shape=(s,u)=>{ const h=hand(),x=h.x-8,y=h.y-20,ms=s.t*1000; gfx.globalAlpha=1;
   if(ms<900) { const q=ms/900; EO(x,y,16-q*3,14,CLAY); for(let k=0;k<4;k++) { const a=s.t*9+k*1.6; R(x+Math.cos(a)*24,y+Math.sin(a)*14,3,3,SLIP); } bigWord('SQUISH',x,y-50,CREAM,2); }
   else { bigBird(x,y,s.t*14,2.2); if(ms<1500) bigWord('COO?',x,y-50,GOLD,2); } };
-T.clay_pigeon=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.max(F.x+F.w*.5+120,Math.min(me.x-30,F.x+200)),hit=2300;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim',dx:(u,tt)=>Math.sin(tt*20)*1.5},{t:1000,f:'walk'},{t:1450,x:wx,f:'wind'},{t:1700,f:'throw',dx:-6},{t:2200,f:'idle'},{t:2750,f:'aim'},{t:3300,f:'walkR'},{t:4000,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB squishes a lump of soft clay into a little bird.'); say(m.id,'clay_pigeon'); scene('tv2_shape',1.7,{}); }],
-    [1700,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u,s)=>{ bigBird(0,0,s.t*22,2.2); },h.x-8,h.y-20,F.x+8,F.mid,.6,90); setMessage('He throws it. It FLAPS.'); }],
-    [1900,()=>{ S('squeak'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('tv2_poof',.55,{x:F.x+8,y:F.mid,c:CLAY}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'COO!',c:GOLD,sc:4}); landHit(100); }],
-    [2350,()=>{ const h0=hand(); ST.fly((x,y,u)=>bigBird(0,0,0,2.2,u),F.x+8,F.mid,h0.x-30,h0.y-18,.45,50); }],
-    [2800,()=>{ ST.draw(()=>{ const h=hand(); bigBird(h.x-8,h.y-18,0,2.2,1); bigWord('HMPH',h.x-8,h.y-56,CREAM,2); },.7); }],
-    [4100,'end',res(E2)+'The craftsmanship is better than the joke.']]); };
 
 // ---------- Cone Six, Please (B2, kept: the cone and the glaze are bigger) ----------
 SC.tn_cone=(s,u)=>{ const bend=cl((u-s.bendAt)/.25),bow=s.bowAt&&u>s.bowAt?Math.sin(cl((u-s.bowAt)/.25)*Math.PI):0; gfx.globalAlpha=fin(u,.06)*fade(u,.93);
@@ -920,17 +760,6 @@ SC.tn_glaze=(s,u)=>{ const d=ez(u/.4),x=s.x,y0=s.y-s.h,h=s.h*d; gfx.globalAlpha=
 SC.tv2_dust=(s,u)=>{ const st=s.st,ms=s.t*1000; s.trail=s.trail||[];
   if(st&&st.x!=null&&ms<s.until) { const l=s.trail[s.trail.length-1]; if(!l||Math.hypot(st.x-l.x,st.y-l.y)>6) s.trail.push({x:st.x+18,y:st.y+6,t:s.t}); }
   for(const p of s.trail) { const a=s.t-p.t; if(a>.7) continue; const q=a/.7; gfx.globalAlpha=(1-q)*.6; E(p.x+q*10,p.y-q*16,5+q*12,4+q*8,'#d8c8a8'); } };
-T.curb_appeal=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),cy=Math.min(308,G.base+10),x0=G.x0-30,x1=G.x1+70,hit=1350;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:-.08},{t:300,x:x1+60,y:cy-6,f:'idle',rot:-.14,ease:'in'},{t:650,x:x1+30,f:'idle'},
-    {t:700,x:x0-20,y:cy-6,f:'idle',ease:'lin',dy:u=>Math.sin(u*Math.PI*5)*12,rot:u=>Math.cos(u*Math.PI*5)*.18},{t:1550,f:'flip',rot:u=>u*Math.PI*2,hop:34},{t:1850,x:x0-20,f:'celeb'},
-    {t:2150,f:'idle',rot:u=>Math.sin(u*Math.PI*3)*.1,dy:u=>Math.sin(u*Math.PI*3)*6},{t:3050,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB drops his board, kicks twice, and carves the curb line. Fast.'); say(m.id,'curb_appeal'); scene('tn_board',3.1,{st}); scene('tn_curb',2.9,{st,y:cy,x0,x1,peelAt:700/2900,flatAt:1650/2900}); scene('tv2_dust',3.1,{st,until:2000}); S('run'); noise({dur:1.6,vol:.1,f0:1800,f1:900,type:'bandpass',q:.7}); }],
-    [700,()=>{ sfx.whoosh(); }],[1000,()=>{ sfx.whoosh(); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.thud(); all(list); landHit(100); scene('tv2_big',1.0,{x:G.x,y:Math.max(40,G.top-74),txt:'SHRED!',c:GOLD,sc:4}); }],
-    [1550,()=>{ S('spin'); }],[1850,()=>{ sfx.select(); }],
-    [3300,'end',res(E2)+'The line was beautiful and inconvenient.']]); };
 
 // ---------- Fix the Wobble (B4, kept: the platform, the wedge and the CLICK are bigger) ----------
 SC.tn_platform=(s,u)=>{ const fixed=u>s.fixAt,a=fixed?0:Math.sin(s.t*7)*.08; gfx.globalAlpha=fin(u,.08)*fade(u,.9); gfx.save(); gfx.translate(s.x,s.y+6); gfx.rotate(a);
@@ -1223,17 +1052,6 @@ SC.tn_cone=(s,u)=>{ const bend=cl((u-s.bendAt)/.25),bow=s.bowAt&&u>s.bowAt?Math.
   for(let k=0;k<5;k++) { const a=s.t*2.4+k*1.26,r=34*CN; gfx.globalAlpha=a0*(.5+.5*Math.sin(s.t*6+k)); star(s.x+Math.cos(a)*r*.7,s.y-30*CN+Math.sin(a)*r*.5,4+pl*2,k%2?GOLD:CREAM,s.t*3+k); }
   gfx.globalAlpha=a0; if(bend>.5) bigWord('CONE 6',s.x-80,s.y-44*CN,GOLD,3); if(bow>.3) bigWord('BOW',s.x-80,s.y-30*CN,CREAM,2); };
 
-T.cone_six=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',conX=foe?Math.min(540,H.x+H.w*.5+34):Math.max(60,H.x-H.w*.5-40);
-  const back=c=>(sp.self?c.origX:sp.x)+22;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:700,x:sp.x,y:sp.y,f:'kneel'},{t:1250,f:'walk'},{t:1500,x:back,f:'spread'},{t:2350,f:'idle'},{t:2450,f:'idle',rot:u=>-Math.sin(u*Math.PI)*.25},{t:2900,f:sp.self?'idle':'runR'},{t:3550,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB sets down a tiny kiln cone. Cone six. Precisely.'); say(m.id,'cone_six'); }],
-    [750,()=>{ scene('tn_cone',2.9,{x:conX,y:H.base+2,bendAt:(1700-750)/2900,bowAt:(2450-750)/2900}); S('select'); }],
-    [1500,()=>{ scene('tn_glaze',1.6,{x:H.x,y:H.base,w:H.w*.85,h:H.h}); }],
-    ['hf',2300],
-    [2300,()=>{ E2.apply(); sfx.heal(); scene('tn_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('tn_glow',.9,{x:H.x,y:H.mid,c:'#ffb070'}); if(foe) ST.jolt(t,.15); else if(t!==m) battle.fx[t.idx].hop=.3; }],
-    [2500,()=>{ setMessage('The cone takes a tiny bow. So does TNB.'); }],
-    [3650,'end',kindLine(t,'The warmth has been professionally considered.')]]); };
 
 // ---------- Curb Appeal: wheel streaks, a big dust spray, a big SHRED ----------
 SC.tv2_dust=(s,u)=>{ const st=s.st,ms=s.t*1000; s.trail=s.trail||[];
@@ -1243,17 +1061,6 @@ SC.tv2_dust=(s,u)=>{ const st=s.st,ms=s.t*1000; s.trail=s.trail||[];
     LnO(p.x,p.y-2,q.x,q.y-2,3,'#ffd27a'); Ln(p.x,p.y+5,q.x,q.y+5,2,'#fff6dc'); }
   // dust spray: big puffs kicked up behind the board, with grit
   for(const p of s.trail) { const a=s.t-p.t; if(a>.8) continue; const q=a/.8; gfx.globalAlpha=(1-q)*.7; E(p.x+16+q*22,p.y-q*28,8+q*18,6+q*12,'#d8c8a8'); gfx.globalAlpha=(1-q); R(p.x+20+q*40,p.y-6-q*40,3,3,'#a8946e'); R(p.x+10+q*30,p.y-q*22,2,2,'#8a7a5a'); } };
-T.curb_appeal=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),cy=Math.min(308,G.base+10),x0=G.x0-30,x1=G.x1+70,hit=1350;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:-.08},{t:300,x:x1+60,y:cy-6,f:'idle',rot:-.14,ease:'in'},{t:650,x:x1+30,f:'idle'},
-    {t:700,x:x0-20,y:cy-6,f:'idle',ease:'lin',dy:u=>Math.sin(u*Math.PI*5)*12,rot:u=>Math.cos(u*Math.PI*5)*.18},{t:1550,f:'flip',rot:u=>u*Math.PI*2,hop:34},{t:1850,x:x0-20,f:'celeb'},
-    {t:2150,f:'idle',rot:u=>Math.sin(u*Math.PI*3)*.1,dy:u=>Math.sin(u*Math.PI*3)*6},{t:3050,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('TNB drops his board, kicks twice, and carves the curb line. Fast.'); say(m.id,'curb_appeal'); scene('tn_board',3.1,{st}); scene('tn_curb',2.9,{st,y:cy,x0,x1,peelAt:700/2900,flatAt:1650/2900}); scene('tv2_dust',3.1,{st,until:2000}); S('run'); noise({dur:1.6,vol:.1,f0:1800,f1:900,type:'bandpass',q:.7}); }],
-    [700,()=>{ sfx.whoosh(); }],[1000,()=>{ sfx.whoosh(); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.thud(); all(list); landHit(100); for(const f of list) { const q=ST.foe(f); scene('tp2_burst',.55,{x:q.x,y:q.base-10,r:44,c:'#d8c8a8',seed:q.x}); } scene('tv2_big',1.1,{x:G.x,y:Math.max(40,G.top-74),txt:'SHRED!',c:GOLD,sc:5}); }],
-    [1550,()=>{ S('spin'); }],[1850,()=>{ sfx.select(); }],
-    [3300,'end',res(E2)+'The line was beautiful and inconvenient.']]); };
 
 // ---------- Fix the Wobble: a big platform that wobbles, then settles; the level reads LEVEL ----------
 SC.tn_platform=(s,u)=>{ const w=Math.max(112,s.w*1.4),fixed=u>s.fixAt,dt=(u-s.fixAt)*2.9;
@@ -1268,18 +1075,6 @@ SC.tn_platform=(s,u)=>{ const w=Math.max(112,s.w*1.4),fixed=u>s.fixAt,dt=(u-s.fi
   const wq=cl((u-s.wedgeAt)/(s.fixAt-s.wedgeAt)); if(u>s.wedgeAt) { const wx=lerp(s.x+w*.5+70,s.x+w*.5-11,ez(wq)); poly([[wx-20,s.y+32],[wx+20,s.y+32],[wx+20,s.y+16]],CLAY); }
   gfx.globalAlpha=a0; if(!fixed&&u>.15) bigWord('WOBBLE',s.x,s.y+30,CREAM,3);
   if(fixed&&u<s.fixAt+.13) bigWord('CLICK',s.x+w*.5,s.y-44,GOLD,4); else if(fixed) bigWord('LEVEL',s.x,s.y+30,'#9be39a',3); };
-T.fix_wobble=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m,tf=!foe&&!self?battle.fx[t.idx]:null;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:sp.x,y:sp.y,f:'kneel'},{t:1900,f:'kneel'},{t:2050,f:'celeb',hop:6},{t:2450,f:'hip'},{t:2750,f:self?'idle':'runR'},{t:3400,x:'home',y:'home',f:'idle'}]);
-  if(tf) tf.path={t:0,dur:2.2,fn:(q,c)=>({rot:c.t<1.9?Math.sin(c.t*8)*.12*(c.t<1.3?1:lerp(1,.4,(c.t-1.3)/.6)):Math.sin(c.t*14)*.05*Math.exp(-(c.t-1.9)*6)})};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Something is wobbling. TNB can tell from across the room.'); say(m.id,'fix_wobble'); scene('tn_platform',2.9,{x:H.x,y:H.base,w:Math.max(56,H.w*.8),wedgeAt:1300/2900,fixAt:1900/2900}); }],
-    [900,()=>{ scene('tv2_text',1,{x:H.x,y:Math.max(30,H.top-30),txt:'SHORT CORNER',c:CREAM,sc:2}); }],
-    [1300,()=>{ S('select'); }],
-    ['hf',1900],
-    [1900,()=>{ sfx.ding(); E2.apply(); sfx.heal(); scene('tn_glow',.8,{x:H.x,y:H.mid,c:'#9be39a'}); if(foe) ST.jolt(t,.15); }],
-    [2100,()=>{ if(tf) tf.hop=.35; }],
-    [2500,()=>{ scene('tv2_text',.9,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3-150,txt:'SPARE',c:CREAM,sc:2}); }],
-    [3500,'end',kindLine(t,'The repair is smaller than the relief.')]]); };
 })();
 
 // ================= Option 3 Ultimates (phase 5b, 2026-10-24) =================
@@ -1441,50 +1236,6 @@ SC.t5_chair=(s,u)=>{ const k=ez(u/.12),x=s.x,y=s.y; gfx.globalAlpha=fade(u,.9); 
   RO(4,-108,5,68,'#c49a62'); RO(50,-108,5,68,'#c49a62'); RO(4,-104,51,26,'#2e5a8a'); label('WARDROBE',30,-95,CREAM,1); R(6,-80,47,2,'#1e3a5a');
   gfx.restore(); gfx.globalAlpha=1; };
 SC.t5_cup=(s,u)=>{ const h=hand(); gfx.globalAlpha=fin(u,.1)*fade(u,.88); mug(h.x+4,h.y-6,0,1.6); steam(h.x,h.y-26,s.t,3,'#ffffff',26); gfx.globalAlpha=1; };
-T.wrap_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),party=b2LiveParty();
-  const yb=Math.round(Math.max(BAR+110,Gp.top-8)),x0=Math.max(10,Math.round(Gp.x0-34)),x1=Math.min(300,Math.round(Gp.x1+56));
-  const H=yb-(BAR+40),D=Math.max(40,Math.min(296,Gp.base-4)-yb);
-  const P={x0,x1,yb,H,D,pipe:BAR+14,creak:3800,fall:4150,fd:380,slam:4530,lift:6250};
-  P.split=P.fall+Math.round(P.fd*Math.sqrt(H/(H+D)));
-  P.lamps=[{x:x0+(x1-x0)*.28,y:BAR+62,ang:.18,drop:4640,land:yb+D*.42,k:0},{x:x0+(x1-x0)*.72,y:BAR+62,ang:-.2,drop:4800,land:yb+D*.6,k:1}];
-  const footC=['#6a4a2a','#4a5a3a','#5a3a4a'];
-  P.feet=list.map((f,k)=>({x:ST.foe(f).x,c:footC[k%3]}));
-  // the rack train: rack 0 rolls in, TNB pushes it from T1 to T2, then the train rolls on and off by itself
-  const cx=Math.round(Math.min(524,me.x)),cy=Math.round(Math.min(me.base,294)),T1=2000,T2=3000,sx=Math.min(560,me.x+40),ex=Math.max(x1+70,Math.min(me.x-150,360)),v=(sx-ex)/(T2-T1),gap=[0,140,250];
-  const xOf=(i,ms)=>{ const lead=sx-72; let x;
-    if(ms<T1) { if(ms<1600) return null; x=lerp(660,lead,ez((ms-1600)/400)); }
-    else if(ms<T2) x=lead-v*(ms-T1);
-    else { const d=ms-T2; x=lead-v*(T2-T1)-(v*d+.002*d*d); }
-    return x+gap[i]; };
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:500,x:me.x-30,y:288,f:'act'},{t:1300,f:'celeb',hop:10,hn:2},{t:1700,f:'walkR'},
-    {t:T1,x:sx,y:292,f:'run',ease:'lin'},{t:T2,x:ex,y:292,f:'hip'},{t:3150,x:ex,y:270,f:'hip'},{t:3400,f:'spread'},{t:3800,f:'aim',dx:(u,tt)=>Math.sin(tt*40)*1.2},
-    {t:4150,f:'hip'},{t:4580,f:'celeb',hop:8},{t:4800,f:'walkR'},{t:5350,x:cx,y:cy,f:'sit'},{t:6350,f:'walkR'},{t:6750,x:'home',y:'home',f:'idle'}]);
-  // who gets which costume: b2Rack hands them out in party order, starting at the rack's current place
-  const base=B2.rack||0,dress=party.map((p,k)=>{ const C=B2_RACK[(base+k)%B2_RACK.length],U=ST.unit(p); let t;
-    if(p===m) t=T2+80; else { const lead=sx-72,need=lead-U.x; t=need<0?1650:T1+need/v; }
-    return {t:Math.round(t),x:p===m?ex:U.x,y:p===m?222:U.mid,x0:p===m?ex-70:U.x,y0:p===m?190:178,c:C.c,c2:C.c2}; });
-  const names=party.filter(p=>p!==m).map(p=>[String(p.name||p.id).toUpperCase(),CREAM]);
-  const lines=[['THAT\'S A WRAP',GOLD],['WARDROBE: TNB',CREAM],['STARRING',CHROME2],...names,['MONSTERS: THEMSELVES',CREAM],['NO MONSTERS WERE HARMED',CREAM],['MUCH',CREAM]];
-  ST.play(E2,[
-    [0,()=>{ scene('t5_bars',6.95,{}); scene('t5_studio',6.75,{plan:P,back:true}); scene('t5_fall',2.6,{plan:P,t0:P.fall,delay:P.fall/1000}); scene('t5_lamps',6.75,{plan:P});
-      scene('t5_walkie',1.55,{t0:150,talk:800,delay:.15}); say(m.id,'wrap_ult'); setMessage('Last setup of the day on Stage 7. TNB has his walkie on.'); }],
-    [800,()=>{ S('walkie'); setMessage('The walkie crackles. "And that\'s a wrap!"'); }],
-    [1300,()=>{ S('cheer'); scene('t5_big',1.1,{x:288,y:BAR+44,txt:'THAT\'S A WRAP!',c:GOLD,sc:4}); }],
-    [1600,()=>{ scene('t5_racks',3.0,{t0:1600,y:300,xOf}); scene('t5_dress',2.0,{t0:1600,list:dress}); S('rumble',0,1.6); setMessage('Wardrobe first. TNB pushes the racks through the family. Arms up, everybody.'); }],
-    ...dress.map(d=>[d.t,()=>{ S('whoosh'); }]),
-    [T2+300,()=>{ E2.apply(); S('ting'); setMessage('Everybody is in fresh wardrobe. Nobody tell continuity.'); }],
-    [3420,()=>{ scene('t5_big',1.0,{x:(x0+x1)/2+30,y:BAR+44,txt:'STRIKE THE SET!',c:CREAM,sc:3}); S('select'); setMessage('"Strike the set!" The crew starts unbolting everything.'); }],
-    [P.creak,()=>{ S('creak'); scene('t5_big',.5,{x:(x0+x1)/2,y:P.yb-P.H*.4,txt:'CREAK',c:CHROME2,sc:2}); }],
-    [P.fall,()=>{ S('whoosh'); setMessage('The flat tips forward. TIMBER.'); }],
-    ['hf',P.slam],
-    [P.slam,()=>{ S('crash'); S('thud'); for(const f of list) ST.jolt(f,.7); landHit(100); scene('t5_flash',.3,{a:.5,c:'#fff2c0'}); scene('t5_dust',1.0,{plan:P});
-      scene('t5_big',.85,{x:288,y:BAR+58,txt:'CRASH!',c:GOLD,sc:5}); setMessage('Face down on every monster. Their little feet stick out.'); }],
-    [P.lamps[0].drop+260,()=>{ S('clang'); S('bonk'); }],
-    [P.lamps[1].drop+260,()=>{ S('clang'); S('bonk'); }],
-    [5250,()=>{ scene('t5_credits',1.75,{lines,x1:Math.max(x1+40,220),y1:yb-4}); setMessage('Roll credits.'); }],
-    [5050,()=>{ scene('t5_chair',1.55,{x:cx,y:cy,back:true}); }],
-    [5550,()=>{ scene('t5_cup',.85,{}); S('ding'); setMessage('TNB sits down in his wardrobe chair with a coffee. In one of his own mugs, obviously.'); }],
-    [6900,'end',()=>res(E2)+'Wrap gift tomorrow. It\'s a mug. It\'s always a mug.']]); };
 
 // ---------- Baxter Street Bomb (B6) ----------
 // Baxter Street at sunset (back layer): sky, the hills, a steep street from the top right down to the flat where the monsters

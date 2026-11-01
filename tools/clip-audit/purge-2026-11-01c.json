@@ -1,0 +1,11 @@
+{
+ "deadKinds": {
+  "tom": [
+   "starter_inspection"
+  ],
+  "grace": [
+   "beam_dismount"
+  ]
+ },
+ "orphanClips": []
+}

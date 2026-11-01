@@ -218,14 +218,6 @@ SC.na_bowl=(s,u)=>{ gfx.globalAlpha=fin(u,.15)*fade(u,.9); EO(s.x,s.y,12,5,'#c96
 
 // ---------- Moves ----------
 // Happy Hip Check (Basic): a whole-rear-half wag, a trot over, one happy sideways hop into it, coins, lands facing the wrong way.
-N.happy_hip_check=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=F.x+F.w*.5+30,py=F.base+3;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'celeb',rot:wag,hop:6,hn:4},{t:700,f:'run'},{t:1300,x:px+24,y:py,f:'flip',rot:wag},{t:1550,f:'flip',rot:u=>-.25*Math.sin(u*Math.PI)},{t:1800,x:px-6,f:'flip',hop:16},{t:2100,x:px+20,f:'flip',rot:wag,hop:4,hn:3},{t:2700,f:'runR'},{t:3300,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara plants her front paws and wags her entire back half.'); say(m.id,'happy_hip_check'); barks(2); }],
-    ['hf',1800],
-    [1800,()=>{ sfx.thud(); ST.jolt(f,.45); scene('na_poof',.5,{x:F.x+F.w*.4,y:F.mid}); scene('na_coins',1.0,{x:F.x,y:F.mid}); scene('na_text',1,{x:F.x+62,y:F.top-2,txt:'BUMP',c:GOLD,sc:2}); landHit(100); }],
-    [2100,()=>{ scene('na_arc',.8,{x:px+6,y:py-30,r:30}); scene('na_text',1,{x:px+20,y:py-100,txt:'?',c:CREAM,sc:2}); }],
-    [3400,'end',res(E2)+'Nara brings her entire greeting.']]); };
 
 // PUPPY EYES (Signature, Primary animation): center stage, sit, head tilt, paws together, the look.
 N.puppyEyesShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=t?ST.unit(t):{x:168,top:180},sx=410,sy=Math.min(312,BATTLE_POS[m.idx].base*3-6);
@@ -241,88 +233,16 @@ N.puppy_eyes=E2=>N.puppyEyesShow(E2);
 const sfxs=k=>{ if(sfx[k]) sfx[k](); };
 
 // Ball, Please (A1): drops a ball by a rebound board, one paw tap, bank shot, then she is waiting where it lands.
-N.ball_please=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),bx=Math.max(F.x+F.w*.5+60,300),by=F.base+6,lx=bx+80,ly=by+8;
-  let held=true;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:800,x:bx+44,y:by,f:'idle'},{t:1150,f:'act'},{t:1500,f:'idle'},{t:1900,f:'run'},{t:2250,x:lx+18,y:ly,f:'celeb',hop:10},{t:2700,f:'sit'},{t:3300,f:'runR'},{t:3900,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara trots out with a tennis ball and a small angled board.'); say(m.id,'ball_please'); ST.draw(()=>{ if(held) { const p=mouth(); ball(p.x-4,p.y+2,7); } },1.0); }],
-    [600,()=>{ scene('na_board',3.0,{x:bx,y:by}); }],
-    [900,()=>{ held=false; const p=mouth(); ST.fly((x,y)=>ball(x,y),p.x-4,p.y+2,bx+14,by-6,.25,10); sfxs('squeak'); }],
-    [1200,()=>{ ST.fly((x,y)=>ball(x,y),bx+14,by-6,bx,by-20,.15,0,0,{ease:'lin'}); }],
-    [1350,()=>{ ST.fly((x,y)=>ball(x,y),bx,by-20,F.x+8,F.mid,.3,30,0,{ease:'lin'}); sfx.whoosh(); }],
-    ['hf',1650],
-    [1650,()=>{ sfx.bonk(); ST.jolt(f); scene('na_poof',.5,{x:F.x+8,y:F.mid,c:BALL}); scene('na_text',1,{x:F.x+62,y:F.top-2,txt:'BANK',c:BALL,sc:2}); landHit(100); }],
-    [1700,()=>{ ST.fly((x,y)=>ball(x,y),F.x+8,F.mid,lx,ly-40,.55,70); }],
-    [2250,()=>{ held=true; ST.draw(()=>{ if(held) { const p=mouth(); ball(p.x-4,p.y+2,7); } },1.7); sfxs('squeak'); barks(1); }],
-    [2700,()=>{ scene('na_text',.9,{x:lx,y:ly-100,txt:'AGAIN?',c:GOLD}); }],
-    [4000,'end',res(E2)+'Nara already knew where the ball would land.']]); };
 
 // Five-Second Zoomies (A2): four checkpoint flags, a streak through four targets, a route line that updates afterwards.
-N.five_second_zoomies=E2=>{ const {m,fx}=E2,M=B2.move,W=(M&&M.waves||[]).map(w=>w[0]&&w[0].t).filter(Boolean),T=W.length?W:foes(E2);
-  const pts=[0,1,2,3].map(k=>{ const f=T[k%T.length],U=ST.unit(f); return {x:U.x+(k%2?-1:1)*(U.w*.5+10),y:U.base+4,f}; });
-  const K=[{t:0,x:'home',y:'home',f:'wind',rot:u=>Math.sin(u*40)*.05},{t:900,f:'run'}];
-  pts.forEach((p,k)=>K.push({t:1250+k*380,x:p.x,y:p.y,f:k%2?'runR':'run',ns:true}));
-  K.push({t:1250+4*380,x:'home',y:'home',f:'celeb',hop:6,hn:3}); K.push({t:3700,f:'celeb'});
-  ST.keys(fx,K);
-  const hitT=[];
-  const flags=scene('na_flags',3.6,{pts,hitT});
-  const steps=[[0,()=>{ setMessage('Four little flags pop up. There are four places, so she\'ll go to all four.'); say(m.id,'five_second_zoomies'); }],
-    [900,()=>{ barks(3,.1); sfxs('run'); }],['hf',1250]];
-  pts.forEach((p,k)=>steps.push([1250+k*380,()=>{ hitT[k]=flags.t; sfx.slash(); ST.jolt(p.f,.35); scene('na_dust',.5,{x:p.x,y:p.y}); scene('na_text',.6,{x:p.x,y:p.y-80,txt:'ZOOM',c:'#9fe8ff'}); landHit(25); }]));
-  steps.push([2900,()=>{ scene('na_route',1.4,{pts:[{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3},...pts,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3}]}); setMessage('The route map updates a moment after she\'s finished it.'); }]);
-  steps.push([4300,'end',res(E2)+'Nara has been everywhere on the map. She\'s panting. She\'s thrilled.']);
-  ST.play(E2,steps); };
 
 // Trade You (A3): carries a CHICKEN JERKY packet over, noses out one piece, almost takes it back, sits proudly.
-N.trade_you=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',pk={x:H.x+(foe?H.w*.5+8:18),y:H.base+2};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:sp.self?'idle':'run'},{t:800,x:sp.x,y:sp.y,f:'idle'},{t:1000,f:'act'},{t:1300,f:'idle'},{t:1800,f:'idle'},{t:2300,dx:u=>-Math.sin(u*Math.PI)*16,f:'act'},{t:2700,f:'idle',rot:u=>Math.sin(u*Math.PI*6)*.12},{t:3000,f:'sit'},{t:3500,f:sp.self?'idle':'runR'},{t:4100,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara brings over her CHICKEN JERKY. Her good food.'); say(m.id,'trade_you'); scene('na_packet',4.0,{x:pk.x,y:pk.y,dropAt:1000/4000}); }],
-    [1300,()=>{ scene('na_piece',2.6,{x0:pk.x,x1:H.x+(foe?0:-6),y:H.base-10,backAt:(2300-1300)/2600}); sfxs('select'); }],
-    ['hf',1800],
-    [1800,()=>{ E2.apply(); sfx.heal(); scene('na_glow',.9,{x:H.x,y:H.mid,c:'#ffb070'}); if(foe) ST.jolt(t,.15); else if(t!==m) battle.fx[t.idx].hop=.3; }],
-    [2350,()=>{ setMessage('She checks twice that she really meant to give that away.'); }],
-    [3000,()=>{ scene('na_hearts',1,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3-90}); }],
-    [4200,'end',kindLine(t,'Nara parts with the good stuff.')]]); };
 
 // Keep-Away Rules (A4): a knotted rope loops the target's wind-up, three tugs leaning back, it pops free; she guards it.
-N.keepaway_rules=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.max(F.x+F.w*.5+90,300),py=F.base+4,ix=F.x,iy=F.top-18,dx=px+40,dy=py-6;
-  const tug=u=>Math.max(0,Math.sin(u*Math.PI*3))*14;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:px,y:py,f:'aim'},{t:1100,f:'aim',dx:tug,rot:u=>Math.max(0,Math.sin(u*Math.PI*3))*.18},{t:2200,f:'idle'},{t:2500,x:px-8,f:'expr'},{t:3400,f:'runR'},{t:4000,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara trots out with her knotted rope toy.'); say(m.id,'keepaway_rules'); }],
-    [800,()=>{ scene('na_rope',1.4,{ix,iy,popAt:(2100-800)/1400}); scene('na_icon',3.0,{ix,iy,dx,dy,popAt:(2100-800)/3000}); setMessage(f.name+' was playing too roughly with that.'); }],
-    [1300,()=>{ sfx.thud(); scene('na_text',.5,{x:px,y:py-90,txt:'TUG',c:'#ffb070'}); }],
-    [1650,()=>{ sfx.thud(); scene('na_text',.5,{x:px,y:py-90,txt:'TUG',c:'#ffb070'}); }],
-    ['hf',2100],
-    [2100,()=>{ sfx.bonk(); ST.jolt(f,.5); scene('na_poof',.5,{x:ix,y:iy,c:'#ffb070'}); scene('na_text',1,{x:F.x+62,y:F.top-2,txt:'YANK',c:'#ffb070',sc:2}); landHit(100); }],
-    [2600,()=>{ setMessage('She sets it down behind her and stands in the way.'); scene('na_text',1,{x:px,y:py-96,txt:'GRR',c:CREAM}); }],
-    [4100,'end',res(E2)+'Nara doesn\'t approve of that game.']]); };
 
 // No Ball Left Behind (A5): flattens to look under the row, sweeps the retriever across their feet, the ball rolls out.
-N.no_ball_left=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),ly=Math.min(318,G.base+8),sx=G.x1+60;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:sx,y:ly,f:'kneel',rot:-.12},{t:1300,f:'kneel'},{t:1500,f:'aim'},{t:2300,x:G.x0+20,f:'run'},{t:2600,f:'celeb',hop:20},{t:2900,f:'idle'},{t:3500,f:'runR'},{t:4200,x:'home',y:'home',f:'idle'}]);
-  const xs=list.map(f=>ST.unit(f)).sort((a,b)=>a.x-b.x).flatMap((u,k,a)=>k<a.length-1?[(u.x+a[k+1].x)/2]:[]).concat([G.x0-6,G.x1+6]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara flattens herself and looks under the whole row.'); say(m.id,'no_ball_left'); }],
-    [900,()=>{ scene('na_text',1,{x:sx,y:ly-70,txt:'?',c:CREAM,sc:2}); }],
-    [1500,()=>{ const P=list.map(f=>ST.unit(f)).sort((a,b)=>a.x-b.x); scene('na_retriever',1.2,{sweepAt:0,len:.6,x0:G.x0,x1:G.x1+20,y:ly,y0:P[0].base+6,y1:P[P.length-1].base+6}); sfx.whoosh(); }],
-    ['hf',2000],
-    [2000,()=>{ sfx.thud(); hitAll(list); battle.enemyKnock=.4; }],
-    [2300,()=>{ scene('na_found',1.4,{x0:G.x,x1:G.x0+10,y:ly}); sfxs('squeak'); }],
-    [2700,()=>{ scene('na_blockers',1.3,{xs,y:ly+6}); setMessage('She blocks every escape gap with very focused paws.'); }],
-    [4300,'end',res(E2)+'Nara checks the place nobody else checked.']]); };
 
 // Paw on Your Shoe (B1): sees the worried thought, trots over, one paw on their shoe; the thought pops. She stays a beat.
-N.paw_on_shoe=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe';
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:-.1},{t:500,f:sp.self?'idle':'run'},{t:1200,x:sp.x,y:sp.y,f:'sit'},{t:1500,dx:u=>-u*8,f:'act'},{t:2700,dx:-8,f:'act'},{t:3100,f:sp.self?'idle':'runR'},{t:3700,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara notices a worried thought over '+(t===m?'herself':t.name)+'.'); say(m.id,'paw_on_shoe'); scene('na_cloud',2.2,{x:H.x-8,y:H.top-16,popAt:(1800-0)/2200}); }],
-    [1500,()=>{ setMessage('One paw, squarely on the shoe.'); }],
-    ['hf',1800],
-    [1800,()=>{ E2.apply(); sfx.heal(); scene('na_pawpulse',1.2,{x:H.x+(foe?0:4),y:H.base+2}); scene('na_glow',.9,{x:H.x,y:H.mid,c:'#ffb45a'}); if(foe) ST.jolt(t,.15); else if(t!==m) battle.fx[t.idx].hop=.3; }],
-    [2400,()=>{ scene('na_hearts',.9,{x:H.x,y:H.top}); }],
-    [3800,'end',kindLine(t,'Nara makes sure her friend knows she\'s there.')]]); };
 
 // Shake It Off, Everyone (B2): stands in front of the party, one twitch nobody notices, a full shake; damp, better friends.
 N.shake_everyone=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });
@@ -349,16 +269,6 @@ N.not_leaving=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t)
     [4400,'end',down?t.name+' is back up. Nara rejected being left behind.':'Nara was never going to leave anyway.']]); };
 
 // Puddle Geography (B4): a happy bounce, a three-pixel puddle, the front row takes an enormous detour into a DETOUR sign.
-N.puddle_geography=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),fs=list.map(f=>ST.unit(f)),px=G.x1+40,py=Math.min(318,G.base+6);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:px+40,y:py,f:'celeb',hop:16,hn:3},{t:1400,f:'idle'},{t:1700,f:'runR'},{t:2600,x:'home',y:'home',f:'flip'},{t:3200,f:'flip',rot:u=>Math.sin(u*Math.PI)*.2},{t:3700,f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Nara is SO excited. Bounce. Bounce. Bounce.'); say(m.id,'puddle_geography'); barks(3,.12); }],
-    [1300,()=>{ scene('na_puddle',3.0,{x:px+8,y:py}); setMessage('A tiny puddle. Visibly tiny.'); sfx.splat&&sfx.splat(); }],
-    [1700,()=>{ scene('na_detour',2.4,{fs,sx:G.x0-24,sy:py,bumpAt:(2300-1700)/2400}); setMessage('The front row takes the long way around. The very long way.'); }],
-    ['hf',2300],
-    [2300,()=>{ sfx.thud(); hitAll(list); }],
-    [2900,()=>{ scene('na_text',1,{x:BATTLE_POS[m.idx].x*3,y:BATTLE_POS[m.idx].base*3-90,txt:'?',c:CREAM,sc:2}); }],
-    [3800,'end',res(E2)+'The puddle is tiny. The detour isn\'t.']]); };
 
 // Family Food Inspector (B5): two covered dishes; sniff, reject the fancy one, stamp HOMEMADE; warm steam for everyone.
 N.food_inspector=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });

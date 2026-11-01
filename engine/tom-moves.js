@@ -298,73 +298,6 @@ SC.patchsheet=(s,u)=>{ const tp=tomPos(),fold=ez(cl((u-.75)/.2)),drop=ez(u/.22);
     gfx.strokeStyle=OUT; gfx.lineWidth=7; gfx.strokeRect(cx-r,cy-r,r*2,r*2); gfx.strokeStyle='#e0402e'; gfx.lineWidth=4; gfx.strokeRect(cx-r,cy-r,r*2,r*2); Ln(cx-r,cy-r,cx+r,cy+r,4,'#e0402e'); Ln(cx+r,cy-r,cx-r,cy+r,4,'#e0402e'); } };
 
 // ---------- Moves ----------
-Tm.controller_tap=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Tom selects the obvious button.'); say('tom','controller_tap'); fx.controller=1.7; },
-    500,()=>{ scene('bigbtn',1.1,{}); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.select(); sfx.bonk(); battle.slash=.18; battle.shakeEnemy=.35; hit(E2); },
-    450,()=>{ bt('ROUTINE',150,40,'#9fe8ff',1,.9); },
-    300,res(E2)+'One button. Entirely sufficient.',()=>checkEnemy()); };
-Tm.starter_inspection=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Tom holds up Bready Mercury. Bready Mercury objects to the temperature.'); say('tom','starter_inspection'); scene('mercury',2.1,{}); },
-    500,()=>{ scene('bubble',.75,{}); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.splat(); battle.shakeEnemy=.4; scene('splashw',.5,{x:GX,y:GY-10,c:'#efe3c8',c2:'#fff8e8',n:10,sp:60}); hit(E2); },
-    500,()=>{ sfx.ding(); },
-    300,res(E2)+'Inspection complete. Notes were taken.',()=>checkEnemy()); };
-Tm.proofing_drawer=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Tom opens a low wooden drawer. A folded cloth. Perfect warmth.'); say('tom','proofing_drawer'); fx.punch=.4; scene('drawer',2.2,{x:h.x,y:h.base,h:h.h}); sfx.thud(); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); sfx.ding(); },
-    500,()=>{ sfx.select(); },
-    300,kindLine(t,'The warmth is carefully controlled.'),()=>checkEnemy()); };
-Tm.toast_negotiations=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty());
-  enqueue(()=>{ setMessage('Tom places two toast halves beside a ruler.'); say('tom','toast_negotiations'); scene('toast',2.2,{}); },
-    500,()=>{ fx.punch=.5; const p=tomPos(); for(const u of who) { const h=home(u); toss('crumb',p.cx-80,p.base-70,h.x,h.base-h.h*.55,(u.idx||0)*.05,.45,40); } sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); sfx.ding(); },
-    500,()=>{ for(const u of who) if(u.side==='party') battle.fx[u.idx].hop=.3; },
-    300,who.some(u=>u.side==='foe')?kindLine(who.find(u=>u.side==='foe')):'Tom has measured the toast. Everyone gets an exactly fair half.',()=>checkEnemy()); };
-Tm.warranty_void=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('A bright peel-tab appears on the enemy. Tom knows that tab.'); say('tom','warranty_void'); scene('peeltab',1.6,{}); },
-    500,()=>{ fx.punch=.6; sfx.whoosh(); },
-    IMPACT,()=>{ sfx.ding(); sfx.slash(); battle.flashEnemy=.3; battle.shakeEnemy=.4; hit(E2); },
-    400,()=>{ scene('film',.9,{}); },
-    400,res(E2)+'The protective film was load-bearing.',()=>checkEnemy()); };
-Tm.crumb_barrier=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Tom taps a neat line of bread crumbs. They line up.'); say('tom','crumb_barrier'); scene('crumbline',1.2,{}); fx.punch=.3; },
-    500,()=>{ scene('crustwall',1.1,{}); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.thud(); battle.shakeEnemy=.6; scene('dust',.6,{x:GX,y:GY+30,n:8,sp:22,up:14}); hit(E2); },
-    300,()=>{ E2.apply(); const g=B2.party.find(p=>p.st.brace&&p.st.brace.by===E2.m)||b2LiveParty().slice().sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0]; if(g) { const h=home(g); scene('crustscreen',1.2,{x:h.x,y:h.base}); } sfx.select(); },
-    500,res(E2)+'Bread meets the building code.',()=>checkEnemy()); };
-Tm.five_minute_review=E2=>{ const {fx}=E2,t=E2.targets[0];
-  enqueue(()=>{ setMessage('Tom opens three flashcards. Five minutes. Picture side first.'); say('tom','five_minute_review'); scene('review',1.8,{}); fx.punch=.3; },
-    500,()=>{ scene('qmark',1.3,{}); battle.enemyWobble=.6; sfx.select(); },
-    IMPACT,()=>{ E2.apply(); sfx.ding(); },
-    500,()=>{ fx.hop=.2; },
-    300,'The enemy considers the vocabulary. It looks pleased with its effort.',()=>checkEnemy()); };
-Tm.dpad_detour=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Four chunky arrows draw a maze under them.'); say('tom','dpad_detour'); scene('dpadmaze',1.9,{}); fx.controller=1.6; },
-    500,()=>{ battle.enemyWobble=.6; sfx.select(); b7Later(()=>sfx.select(),150); b7Later(()=>sfx.select(),300); },
-    IMPACT,()=>{ sfx.bonk(); battle.shakeEnemy=.45; hit(E2); },
-    500,()=>{ sfx.ding(); },
-    300,res(E2)+'The route has become needlessly complicated.',()=>checkEnemy()); };
-Tm.save_sandwich=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('A tiny save crystal rises.'); say('tom','save_sandwich'); scene('savecrystal',2.1,{x:h.x,y:h.base-h.h-34}); sfx.levelChime(); },
-    500,()=>{ fx.punch=.4; sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); },
-    500,()=>{ sfx.ding(); },
-    300,kindLine(t,'Progress saved. Lunch secured.'),()=>checkEnemy()); };
-Tm.radical_solutions=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Three study tiles turn over above Tom.'); say('tom','radical_solutions'); scene('tiles',1.9,{}); fx.punch=.4; },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ sfx.ding(); battle.flashEnemy=.35; battle.shakeEnemy=.4; scene('glow',.6,{x:GX,y:GY-30,c:'#ffe08a',a:.4}); hit(E2); },
-    500,()=>{ sfx.select(); },
-    300,res(E2)+'The pieces finally line up.',()=>checkEnemy()); };
-Tm.patch_notes=E2=>{ const {fx}=E2;
-  if(typeof B2_NOWARP!=='undefined') B2_NOWARP.add('patchsheet');
-  enqueue(()=>{ setMessage('A PATCH NOTES sheet descends over the enemies.'); say('tom','patch_notes'); scene('patchsheet',2.3,{foes:b2LiveFoes()}); },
-    500,()=>{ fx.punch=.6; sfx.select(); },
-    IMPACT,()=>{ sfx.stun(); sfx.ding(); battle.flashEnemy=.35; battle.shakeEnemy=.5; hit(E2); },
-    600,()=>{ sfx.whoosh(); },
-    300,res(E2)+'The update addresses a known issue.',()=>checkEnemy()); };
 // DEFEND (Primary): the same resolver (engine/battle2.js b2DefendSteps), new beats around it.
 Tm.defendShow=(u,t,resolve)=>{ const fx=battle.fx[u.idx],h=home(t),self=t===u;
   return [()=>{ b2Msg('Tom notices the lock-on. He straightens one sleeve.'); scene('sleeve',.5,{}); },
@@ -425,16 +358,6 @@ SC.tm_pad=(s,u)=>{ const ms=s.t*1000,h=hand(); gfx.globalAlpha=fade(u,.94); pad(
 SC.tm_bigbtn=(s,u)=>{ const ms=s.t*1000,drop=ez(ms/450),press=ms>s.press&&ms<s.press+260?7:0,x=s.x,y=lerp(-60,s.y,drop)+press; gfx.globalAlpha=fade(u,.85);
   R(x-26,y+18-press,52,14,OUT); R(x-24,y+20-press,48,10,'#6a6f7a'); R(x-22,y-14,44,34,OUT); R(x-20,y-12,40,30,RED); R(x-20,y-12,40,6,'#ff8a7a'); R(x-6,y-4,12,12,CREAM);
   if(press) label('CLICK',x,y-34,GOLD,2); };
-Tm.controller_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:1100,x:p.x,y:p.y,f:'idle'},{t:1150,f:'expr'},{t:1850,f:'act',dx:-4},{t:2350,f:'idle',rot:(u,tt)=>Math.sin(tt*6)*.03},{t:2950,f:back(p.x,me)},{t:3900,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom walks over and takes out a tiny controller.'); say(m.id,'controller_tap'); scene('tm_pad',3.0,{press:1850}); }],
-    [1150,()=>{ scene('tm_text',.9,{st,txt:'...',sc:2}); setMessage('He studies it. Perfectly still. Tom selects the obvious button.'); }],
-    [1400,()=>{ scene('tm_bigbtn',1.4,{x:F.x,y:F.top-30,press:450}); sfx.whoosh(); }],
-    ['hf',1850],
-    [1850,()=>{ sfx.select(); sfx.bonk(); ST.jolt(f,.35); landHit(100); }],
-    [2400,()=>{ scene('tm_text',1,{st,txt:'ROUTINE',c:SKY}); }],
-    [4000,'end',res(E2)+'One button. Entirely sufficient.']]); };
 
 // ---------- DEFEND ----------
 // The painted defend pose already shows Tom's open stop hands, so this is only a soft guard shimmer in front of him (no drawn hand).
@@ -467,18 +390,6 @@ const jar=(x,y,sc,ok,bub)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); R
   if(bub>0) { const r=4+bub*14; E(0,-24-r,r+2,r+2,OUT); E(0,-24-r,r,r,'#efe3c8'); E(-r*.35,-24-r*1.35,r*.3,r*.25,CREAM); } gfx.restore(); };
 SC.tm_jar=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),raise=ez((ms-P.raise)/400)*(ms>P.lower?1-ez((ms-P.lower)/300):1),bub=ms>P.swell&&ms<P.fire?ez((ms-P.swell)/(P.fire-P.swell)):0;
   gfx.globalAlpha=fade(u,.95); jar(h.x-12,h.y-8-raise*34,.9,ms>P.ok,bub); };
-Tm.starter_inspection=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),p={x:Math.min(520,F.x+F.w*.5+120),y:Math.min(314,F.base+6)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1050,f:'expr'},{t:1700,f:'expr',dx:u=>-Math.sin(u*Math.PI)*6},{t:2200,f:'expr'},{t:2650,f:'act'},{t:3150,f:'idle'},{t:3400,f:back(p.x,me)},{t:4300,x:'home',y:'home',f:'idle'}]);
-  const plan={raise:1050,swell:1700,fire:2200,ok:2900,lower:3150};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom carries Bready Mercury out for an inspection.'); say(m.id,'starter_inspection'); scene('tm_jar',4.3,{plan}); }],
-    [1050,()=>{ setMessage('He lifts the jar to eye level. Bready Mercury objects to the temperature.'); }],
-    [1700,()=>{ sfx.charge(); }],
-    [2200,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,uu)=>{ const r=18; E(x,y,r+2,r+2,OUT); E(x,y,r,r,'#efe3c8'); E(x-6,y-6,5,4,CREAM); },h.x-12,h.y-80,F.x,F.mid,.4,50); }],
-    ['hf',2600],
-    [2600,()=>{ sfx.splat(); ST.jolt(f,.45); landHit(100); scene('tm_poof',.6,{x:F.x,y:F.mid,c:'#efe3c8',n:10,r:34}); scene('tm_text',.9,{x:F.x+62,y:F.top-10,txt:'SPLAT',c:CREAM}); }],
-    [2900,()=>{ sfx.ding(); scene('tm_text',.9,{st,txt:'NOTED',c:GREEN}); }],
-    [4400,'end',res(E2)+'Inspection complete. Notes were taken.']]); };
 
 // ---------- Proofing Drawer ----------
 SC.tm_drawer=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,carry=ms<P.set||ms>P.lift;
@@ -490,19 +401,6 @@ SC.tm_drawer=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,carry=ms<P.set||ms>P.l
   R(-36,-8,72,22,OUT); R(-34,-6,68,18,WOOD); const fx2=-34-open*22; R(fx2-2,-10,40,26,OUT); R(fx2,-8,36,22,'#b8834a'); R(fx2+12,0,12,4,'#5a3a1e'); if(open>.3) R(-30,-12,30*open+8,6,'#fff1cb');
   E(24,3,6,6,OUT); E(24,3,4.5,4.5,'#e8e8f0'); const a=-1+(ms>P.dial?.12:0); Ln(24,3,24+Math.cos(a)*4,3+Math.sin(a)*4,2,RED); gfx.restore();
   if(!carry&&ms>P.dial&&ms<P.dial+700) label('+1',x+24,y-14,GOLD,2); };
-Tm.proofing_drawer=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,52),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'kneel'},{t:1700,f:'act'},{t:2200,f:'kneel'},{t:2700,f:'act',dx:-4},{t:3000,f:'idle'},{t:3400,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk'},{t:1100,x:sp.x,y:sp.y,f:'kneel'},{t:1700,f:'act',dx:-6},{t:2200,f:'kneel'},{t:2700,f:'act',dx:-4},{t:3000,f:'idle'},{t:3300,f:back(sp.x,me)},{t:4300,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const set=self?500:1100,plan={set,open:1700,close:3000,lift:3250,dial:2700,x:self?sp.x-58:H.x+H.w*.5+4,y:(self?sp.y:H.base)-2,h:H.h},end=self?3500:4400;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Tom sets down a low wooden proofing drawer.':'Tom carries a low wooden proofing drawer over to '+t.name+'.'); say(m.id,'proofing_drawer'); scene('tm_drawer',end/1000,{plan}); }],
-    [set,()=>{ sfx.thud(); }],
-    [1700,()=>{ setMessage('A folded cloth. Perfect warmth.'); sfx.whoosh(); }],
-    ['hf',2150],
-    [2150,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('tm_glow',.9,{x:H.x,y:H.mid,c:'#ffb870'}); hopOf(t!==m?t:null); }],
-    [2700,()=>{ sfx.select(); setMessage('He adjusts the dial by one pixel.'); }],
-    [end,'end',kindLine(t,'The warmth is carefully controlled.')]]); };
 
 // ---------- Toast Negotiations ----------
 SC.tm_toast=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; gfx.globalAlpha=fin(u,.06)*fade(u,.92);
@@ -511,18 +409,6 @@ SC.tm_toast=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; gfx.globalAlpha=fin
   const tries=cl((ms-P.turn0)/(P.fair-P.turn0)),rot=.55*(1-tries)+Math.sin(tries*Math.PI*3)*.15*(1-tries);
   if(ms<P.toss) { half(x-14,0); half(x+14,ms<P.turn0?.55:rot); }
   if(ms>P.fair&&ms<P.toss+400) label('FAIR',x,y-34,GREEN,2); };
-Tm.toast_negotiations=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),U=who.map(u=>ST.unit(u)),me=ST.unit(m),dee=B2.party.find(p=>p.id==='deedee'&&b2Alive(p));
-  const px=foe?front(U[0],70).x:Math.round(U.reduce((a,q)=>a+q.x,0)/U.length)-40,py=foe?front(U[0],70).y:Math.min(312,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+20);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR'},{t:900,x:px,y:py,f:'kneel'},{t:1000,f:'kneel',dx:(u,tt)=>u<.8?Math.sin(tt*8)*1.5:0},{t:2100,f:'idle'},{t:2250,f:(u,tt)=>Math.floor(u*4)%2?'act':'idle'},{t:2950,f:'idle'},{t:3250,f:px<me.x?'walkR':'walk'},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const tx=px-58,ty=py-20,plan={x:tx,y:ty,turn0:1150,fair:1950,toss:2250};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom kneels and lays two toast halves beside a ruler.'); say(m.id,'toast_negotiations'); scene('tm_toast',3.0,{plan}); }],
-    [1150,()=>{ setMessage('He rotates one half. Then again. Until the silhouettes match EXACTLY.'); for(let k=0;k<3;k++) b7Later(()=>sfx.select(),k*260); }],
-    [2250,()=>{ who.forEach((u,k)=>{ const q=ST.unit(u); ST.fly((x,y,uu)=>{ gfx.rotate(uu*6); R(-9,-10,18,20,OUT); R(-7,-8,14,16,CRUST); R(-4,-5,8,10,'#f1d9a8'); },tx,ty-6,q.x,q.mid,.4,50,k*.12); }); sfx.whoosh(); }],
-    ['hf',2650],
-    [2650,()=>{ E2.apply(); sfx.ding(); sfx.heal(); for(const u of who) { const q=ST.unit(u); scene('tm_glow',.8,{x:q.x,y:q.mid,c:'#ffd27a',rx:30,ry:40}); hopOf(u!==m?u:null); } }],
-    ...(dee&&!foe?[[2900,()=>{ const q=ST.unit(dee); scene('tm_text',.9,{x:q.x,y:q.top-16,txt:'WARM CRUST',c:'#f3c37a',sc:1}); }]]:[]),
-    [4200,'end',foe?kindLine(foe):'Tom has measured the toast. Everyone gets an exactly fair half.']]); };
 
 // ---------- Warranty Void ----------
 SC.tm_peel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=P.x,y=P.y; gfx.globalAlpha=fade(u,.94);
@@ -531,18 +417,6 @@ SC.tm_peel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=P.x,y=P.y; gfx.globalA
   if(ms<P.grab) { RO(x+10,y-6,16,12,GOLD); R(x+10,y-6,5,12,'#ff8a3a'); return; }
   if(ms<P.fold) { const ex=h.x,ey=h.y; gfx.globalAlpha*=.55; Ln(x-6,y,ex,ey,14,'#dff7ff'); gfx.globalAlpha=fade(u,.94); RO(ex-8,ey-6,16,12,GOLD); R(ex-8,ey-6,5,12,'#ff8a3a'); if(ms<P.snap) label('PEEL',(x+ex)/2,(y+ey)/2-16,CREAM,1); return; }
   const f=ez((ms-P.fold)/600),w=lerp(26,8,f); R(h.x-w/2,h.y-w/2,w,w,'rgba(223,247,255,.75)'); R(h.x-w/2,h.y-w/2,w,2,CREAM); if(f>.95) label('FOLDED',h.x,h.y-24,SKY,1); };
-Tm.warranty_void=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,34),me=ST.unit(m),pull=Math.min(540,p.x+80);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:1000,x:p.x,y:p.y,f:'idle'},{t:1050,f:'expr'},{t:1400,f:'act',dx:u=>-ez(u)*8},{t:1550,x:p.x,f:'act',dx:-8},{t:2300,x:pull,f:'act'},{t:2400,f:'act',dx:u=>Math.sin(u*Math.PI)*8},
-    {t:2900,f:'kneel',dx:(u,tt)=>u<.8?Math.sin(tt*10)*1.2:0},{t:3500,f:'idle'},{t:3650,f:back(pull,me)},{t:4400,x:'home',y:'home',f:'idle'}]);
-  const plan={x:F.x+F.w*.3,y:F.top-14,grab:1500,snap:2350,fold:2900};
-  ST.play(E2,[
-    [0,()=>{ setMessage('A bright peel-tab appears on '+f.name+'. Tom knows that tab.'); say(m.id,'warranty_void'); scene('tm_peel',4.3,{plan}); }],
-    [1500,()=>{ sfx.select(); setMessage('He pinches it. He backs away slowly. A very long strip of film.'); }],
-    [1600,()=>{ sfx.whoosh(); }],
-    ['hf',2350],
-    [2350,()=>{ sfx.ding(); sfx.slash&&sfx.slash(); ST.jolt(f,.45); landHit(100); }],
-    [2900,()=>{ setMessage('He folds the film neatly instead of dropping it.'); }],
-    [4500,'end',res(E2)+'The protective film was load-bearing.']]); };
 
 // ---------- Crumb Barrier ----------
 SC.tm_crumbs=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; (s.drop=s.drop||[]); if(ms>P.d0&&ms<P.d1&&st&&st.x!=null&&(!s.last||Math.abs(s.last-st.x)>9)) { s.drop.push(st.x-6); s.last=st.x; }
@@ -552,37 +426,12 @@ SC.tm_wall=(s,u)=>{ const ms=s.t*1000,P=s.plan,go=ez((ms-P.rise)/500); if(ms<P.r
     gfx.save(); gfx.translate(px,P.y+push*0); gfx.rotate(lean*go); R(-8,-h,16,h,OUT); R(-6,-h+2,12,h-4,CRUST); R(-4,-h+6,8,Math.max(0,h-12),CRUMB); gfx.restore(); }
   if(ms>P.hit&&ms<P.hit+700) label('STRUCTURAL',(P.x0+P.x1)/2,P.y-80,'#f3c37a',2); };
 SC.tm_screen=(s,u)=>{ const f=ez(u/.3); gfx.globalAlpha=fade(u,.85); for(let k=0;k<3;k++) { gfx.save(); gfx.translate(s.x-34+k*14,s.y); gfx.rotate((k%2?-.25:.25)*f); R(-7,-48*f,14,48*f,OUT); R(-5,-46*f,10,44*f,CRUMB); gfx.restore(); } if(u>.3) label('90 DEGREES',s.x-20,s.y-64,'#f3c37a',1); };
-Tm.crumb_barrier=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),y=Math.min(312,Gp.base+16),x1=Math.min(540,Gp.x1+30),x0=Math.max(30,Gp.x0-10);
-  const L=lowest(),LU=L?ST.unit(L):null,selfL=L===m;
-  const K=[{t:0,x:'home',y:'home',f:'walk'},{t:800,x:x1+20,y:y+4,f:'walk'},{t:1800,x:x0+10,y:y+4,f:'kneel'},{t:2050,f:'act',dx:-4},{t:2200,f:'idle'},{t:2800,f:'walkR'}];
-  if(LU&&!selfL) K.push({t:3600,x:Math.min(556,LU.x+LU.w*.5+26),y:LU.base+3,f:'kneel'},{t:3950,f:'idle'},{t:4100,f:back(LU.x+LU.w*.5+26,me)},{t:4600,x:'home',y:'home',f:'idle'});
-  else K.push({t:3600,x:'home',y:'home',f:'kneel'},{t:3950,f:'idle'});
-  const st=ST.keys(fx,K),plan={d0:800,d1:1800,y,rise:2050,hit:2400,x0,x1,n:Math.max(4,Math.round((x1-x0)/20))};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom walks the line in front of them, dropping a neat row of bread crumbs.'); say(m.id,'crumb_barrier'); scene('tm_crumbs',2.2,{st,plan}); scene('tm_wall',3.3,{plan}); }],
-    [1800,()=>{ setMessage('He taps the last crumb with a measuring finger.'); sfx.select(); }],
-    [2050,()=>{ sfx.whoosh(); }],
-    ['hf',2400],
-    [2400,()=>{ sfx.thud(); all(list); landHit(100); }],
-    [2700,()=>{ E2.apply(); }],
-    [3600,()=>{ if(LU) { scene('tm_screen',1.4,{x:selfL?me.x:LU.x,y:LU.base}); sfx.select(); } }],
-    [selfL||!LU?4100:4700,'end',res(E2)+'Bread meets the building code.']]); };
 
 // ---------- Five-Minute Review ----------
 SC.tm_cards=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),k=Math.max(0,Math.min(2,Math.floor((ms-P.c0)/P.step))),pics=['#ffd166','#5c8fe0',RED]; gfx.globalAlpha=fade(u,.9);
   const x=h.x-12,y=h.y-26; gfx.save(); gfx.translate(x,y); gfx.scale(1.4,1.4); RO(-10,-14,20,28,CREAM); E(0,-4,5,5,pics[k]); R(-5,5,10,2,'#2b2a26'); R(-2,8,4,2,'#2b2a26'); gfx.restore();
   if(ms>P.c0) label(['DOG','SUN','HOT'][k],x,y-30,CREAM,1); };
 SC.tm_q=(s,u)=>{ const ms=s.t*1000,done=ms>s.flip,x=s.x,y=s.y; gfx.globalAlpha=fade(u,.85); E(x,y,13,13,OUT); E(x,y,11,11,done?GOLD:'#cfd8d6'); label(done?'!':'?',x,y-4,done?'#7a1a14':'#2b2a26',2); if(done&&ms<s.flip+700) label('WEAK SPOT',x,y-28,GOLD,1); };
-Tm.five_minute_review=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),p=front(F,38),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:1000,x:p.x,y:p.y,f:'kneel'},{t:1100,f:'kneel'},{t:2600,f:'kneel',rot:u=>Math.sin(u*Math.PI*2)*.05},{t:3000,f:'idle'},{t:3200,f:back(p.x,me)},{t:4100,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom sits down next to '+t.name+' with three flashcards. Five minutes.'); say(m.id,'five_minute_review'); scene('tm_cards',2.0,{plan:{c0:1150,step:350}}); scene('tm_q',2.6,{x:F.x,y:F.top-22,flip:1100}); }],
-    [1150,()=>{ sfx.select(); b7Later(()=>sfx.select(),350); b7Later(()=>sfx.select(),700); ST.jolt(t,.12); }],
-    [1700,()=>{ setMessage('The enemy leans toward the answer side. Picture first.'); }],
-    ['hf',2250],
-    [2250,()=>{ E2.apply(); sfx.ding(); ST.jolt(t,.15); }],
-    [2600,()=>{ scene('tm_text',.9,{st,txt:'GOOD',c:GREEN}); }],
-    [4200,'end','The enemy considers the vocabulary. It looks pleased with its effort.']]); };
 
 // ---------- D-Pad Detour ----------
 SC.tm_maze=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y,path=[[0,0],[40,0],[40,-14],[80,-14],[80,4],[P.w,4]],draw=ez(ms/400); gfx.globalAlpha=fade(u,.9);
@@ -590,19 +439,6 @@ SC.tm_maze=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y,path=[[0,0],[40,0],[4
   const w=cl((ms-P.go)/(P.hit-P.go)); if(w>0&&w<1) { const seg=w*(path.length-1),i=Math.floor(seg),q=seg-i,a=path[i],b=path[Math.min(i+1,path.length-1)]; EO(x+lerp(a[0],b[0],q),y+lerp(a[1],b[1],q)-4,5,5,CREAM); }
   if(ms>P.hit) { R(x+P.w+2,y-12,6,20,OUT); R(x+P.w+3,y-11,4,18,RED); } if(ms>P.pin) { R(x-1,y-26,3,22,OUT); EO(x,y-28,5,5,RED); label('HERE',x,y-46,'#fff1cb',2); } };
 SC.tm_bigpad=(s,u)=>{ const ms=s.t*1000,h=hand(),pr=Math.floor((ms-s.p0)/s.step); gfx.globalAlpha=fade(u,.94); pad(h.x-4,h.y-14,1.6,pr>=0&&pr<s.n&&((ms-s.p0)%s.step)<120); };
-Tm.dpad_detour=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,96),step=260,n=4,mx=Math.max(26,Gp.x0-30),my=Math.min(312,Gp.base+12);
-  const K=[{t:0,x:'home',y:'home',f:'walk'},{t:900,x:p.x,y:p.y,f:'expr'}];
-  for(let k=0;k<n;k++) K.push({t:1000+k*step,f:k%2?'act':'expr',dx:[0,-10,8,-6][k]});
-  K.push({t:1000+n*step,f:'expr'},{t:2300,f:'walk'},{t:3000,x:mx+18,y:my+2,f:'kneel'},{t:3300,f:'idle'},{t:3450,f:'walkR'},{t:4500,x:'home',y:'home',f:'idle'});
-  const st=ST.keys(fx,K),hit=1000+n*step+200,plan={x:mx,y:my,w:Math.max(120,Gp.x1-mx+20),go:1000,hit,pin:3000};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom walks out with his controller. Four chunky arrows draw a maze under them.'); say(m.id,'dpad_detour'); scene('tm_maze',4.4,{plan}); scene('tm_bigpad',2.4,{p0:1000,step,n}); }],
-    ...[0,1,2,3].map(k=>[1000+k*step,()=>{ sfx.select(); for(const f of list) ST.jolt(f,.15); }]),
-    [1100,()=>{ setMessage('Right. Up. Right. Down. The scenic route.'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.bonk(); all(list); landHit(100); scene('tm_text',.9,{x:Gp.x,y:Gp.top-30,txt:'DEAD END',c:SKY}); }],
-    [3000,()=>{ sfx.select(); setMessage('He plants a little pin where they started. HERE.'); }],
-    [4600,'end',res(E2)+'The route has become needlessly complicated.']]); };
 
 // ---------- Save Point Sandwich ----------
 SC.tm_save=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y-ez(ms/400)*14; const held=ms>P.grab&&ms<P.give,unf=ez((ms-P.unf)/350);
@@ -611,18 +447,6 @@ SC.tm_save=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y-ez(ms/400)*14; c
   if(unf<1) { const k=1-unf; gfx.save(); gfx.rotate(s.t*2); gfx.scale(k,1); gfx.beginPath(); gfx.moveTo(0,-16); gfx.lineTo(11,0); gfx.lineTo(0,16); gfx.lineTo(-11,0); gfx.closePath(); gfx.fillStyle=OUT; gfx.fill(); gfx.beginPath(); gfx.moveTo(0,-13); gfx.lineTo(8,0); gfx.lineTo(0,13); gfx.lineTo(-8,0); gfx.closePath(); gfx.fillStyle=SKY; gfx.fill(); gfx.restore(); }
   if(unf>0) { const w=30*unf; R(-w/2-2,-8,w+4,22,OUT); R(-w/2,-6,w,18,'#eef4f8'); if(unf>.8) { const bite=ms>P.bite; R(-12,-4,24,4,CRUMB); R(-12,0,24,3,'#7bbf5a'); R(-12,3,24,3,'#e07a5a'); R(-12,6,24,4,CRUMB); if(bite) E(12,1,4,5,'#eef4f8'); } }
   gfx.restore(); if(ms>P.bite) { label('SAVED',x,y-34,SKY,2); check(x+34,y-34,4,GREEN); } };
-Tm.save_sandwich=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'expr'},{t:900,f:'celeb',hop:16},{t:1200,f:'expr'},{t:1800,f:'act',dx:-6},{t:2300,f:'idle'},{t:3000,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk'},{t:1000,x:sp.x,y:sp.y,f:'idle'},{t:1050,f:'celeb',hop:16},{t:1300,f:'expr'},{t:1850,f:'act',dx:u=>-ez(u)*10},{t:2350,f:'act',dx:-10},{t:2800,f:'idle'},{t:3000,f:back(sp.x,me)},{t:4000,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const plan={x:H.x+(self?-30:0),y:H.top-30,grab:self?1000:1150,unf:1350,give:1850,bite:2250,tx:H.x-4,ty:H.mid-6},end=self?3100:4100;
-  ST.play(E2,[
-    [0,()=>{ setMessage('A tiny save crystal rises over '+(self?'Tom':t.name)+'. Tom walks over.'); say(m.id,'save_sandwich'); scene('tm_save',(end-300)/1000,{plan}); sfx.levelChime(); }],
-    [plan.grab,()=>{ sfx.select(); setMessage('He unfolds it. It was sandwich paper all along. Thick homemade bread.'); }],
-    [1850,()=>{ sfx.whoosh(); }],
-    ['hf',2250],
-    [2250,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('tm_glow',.9,{x:H.x,y:H.mid,c:SKY}); hopOf(t!==m?t:null); }],
-    [end,'end',kindLine(t,'Progress saved. Lunch secured.')]]); };
 
 // ---------- Radical Solutions ----------
 const marks=[[[-6,-6,12,3],[-1,-6,3,12]],[[-6,-2,12,3],[-6,3,12,3]],[[-6,-6,3,12],[3,-6,3,12],[-6,4,12,2]]];
@@ -632,18 +456,6 @@ SC.tm_tiles=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; if(!st||st.x==null) ret
     tile(hd.x+Math.cos(s.t*2+k*2.1)*30,hd.y+Math.sin(s.t*2+k*2.1)*10,k,s.t*2+k); }
   if(ms>P.outline) { const snap=ms>P.hit; gfx.strokeStyle=snap?GOLD:'rgba(255,224,138,.6)'; gfx.lineWidth=snap?5:3; gfx.strokeRect(P.tx-36,P.ty-24,72,48); if(snap&&ms<P.hit+500) { gfx.globalAlpha*=.3; R(P.tx-38,P.ty-26,76,52,'#fff0b4'); } }
   if(ms>P.pixel&&ms<P.pixel+800) { const q=ez((ms-P.pixel)/300); gfx.globalAlpha=1; R(P.tx+38-q*4,P.ty-26,3,3,SKY); } };
-Tm.radical_solutions=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,64),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'expr'},{t:400,f:'walk'},{t:1300,x:p.x,y:p.y,f:'expr'},{t:1450,f:'act',dx:-4},{t:1700,f:'expr'},{t:1850,f:'act',dx:-4},{t:2100,f:'expr'},{t:2250,f:'act',dx:u=>-ez(u)*10},{t:2600,f:'idle'},
-    {t:2950,f:'act',dx:-3},{t:3250,f:'idle'},{t:3400,f:back(p.x,me)},{t:4300,x:'home',y:'home',f:'idle'}]);
-  const plan={send:[1450,1850,2250],tx:F.x,ty:F.mid,outline:1300,hit:2550,pixel:2950};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Three study tiles turn over above Tom. He walks them over.'); say(m.id,'radical_solutions'); scene('tm_tiles',3.6,{st,plan}); }],
-    [1300,()=>{ sfx.select(); setMessage('A target outline. One piece. Two pieces.'); }],
-    [1450,()=>{ sfx.whoosh(); }],[1850,()=>{ sfx.whoosh(); }],[2250,()=>{ sfx.whoosh(); }],
-    ['hf',2550],
-    [2550,()=>{ sfx.ding(); ST.jolt(f,.45); landHit(100); }],
-    [2950,()=>{ setMessage('He brushes one stray pixel back into alignment.'); sfx.select(); }],
-    [4400,'end',res(E2)+'The pieces finally line up.']]); };
 
 // ---------- Patch Notes ----------
 SC.tm_sheet=(s,u)=>{ const ms=s.t*1000,P=s.plan,drop=ez(ms/450),fold=ez((ms-P.fold)/600),h0=hand(); gfx.globalAlpha=fade(u,.96);
@@ -652,16 +464,6 @@ SC.tm_sheet=(s,u)=>{ const ms=s.t*1000,P=s.plan,drop=ez(ms/450),fold=ez((ms-P.fo
   if(fold<.3) { R(x-w/2,y-hh/2,w,14,'#1d3a8a'); label('PATCH NOTES 1.1',x,y-hh/2+3,CREAM,1); for(let k=0;k<3;k++) R(x-70,y-28+k*10,100+((k*37)%40),3,'#c9ccd4');
     label('TOUCHING: REMOVED',x,y+10,RED,1); const ul=cl((ms-P.ul0)/(P.ul1-P.ul0)); if(ul>0) Ln(x-56,y+22,x-56+112*ul,y+22,3,RED); }
   if(ms>P.hit&&ms<P.fold) for(const c of P.F) { const q=ez(cl((ms-P.hit)/100)),r=22*q,cx=c.x,cy=c.mid; gfx.strokeStyle=OUT; gfx.lineWidth=7; gfx.strokeRect(cx-r,cy-r,r*2,r*2); gfx.strokeStyle=RED; gfx.lineWidth=4; gfx.strokeRect(cx-r,cy-r,r*2,r*2); Ln(cx-r,cy-r,cx+r,cy+r,4,RED); Ln(cx+r,cy-r,cx-r,cy+r,4,RED); } };
-Tm.patch_notes=E2=>{ const {m,fx}=E2,list=foes(E2).length?foes(E2):b2LiveFoes(),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,70);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:1100,x:p.x,y:p.y,f:'idle'},{t:1150,f:'expr'},{t:1500,f:'act',dx:u=>-u*24},{t:2100,f:'act',dx:-24},{t:2300,f:'act',dx:u=>-24+ez(u)*24},{t:2700,f:'expr'},{t:3300,f:'idle'},{t:3450,f:back(p.x,me)},{t:4400,x:'home',y:'home',f:'idle'}]);
-  const plan={x:Math.max(110,Gp.x),y:Math.max(70,Gp.top-30),ul0:1500,ul1:2100,hit:2300,fold:2700,F:list.map(f=>ST.foe(f))};
-  ST.play(E2,[
-    [0,()=>{ setMessage('A PATCH NOTES sheet descends over the enemies. Tom walks up to present it.'); say(m.id,'patch_notes'); scene('tm_sheet',3.4,{plan}); }],
-    [1500,()=>{ sfx.select(); setMessage('He underlines one line. TOUCHING: REMOVED.'); }],
-    ['hf',2300],
-    [2300,()=>{ sfx.stun&&sfx.stun(); sfx.ding(); all(list); landHit(100); }],
-    [2700,()=>{ sfx.whoosh(); setMessage('He folds the sheet into a neat pocket square.'); }],
-    [4500,'end',res(E2)+'The update addresses a known issue.']]); };
 })();
 
 // ================= Option 3 Ultimates (phase 5a, 2026-10-24) =================
@@ -1021,20 +823,6 @@ SC.tv_bread=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y-(1-ez((ms-P.set)/200
   if(cut) { gfx.globalAlpha=.8*fade(u,.8); for(let k=0;k<4;k++) { const q=((ms-P.cut)/1100+k/4)%1; gfx.strokeStyle='#ffffff'; gfx.lineWidth=5-q*2; gfx.beginPath(); for(let j=0;j<10;j++) { const yy=y-30-j*7-q*30,xx=x+10+Math.sin(j*.8+ms*.006+k)*7-(P.dir*j*q*8); j?gfx.lineTo(xx,yy):gfx.moveTo(xx,yy); } gfx.stroke(); } } };
 SC.tv_phone=(s,u)=>{ const ms=s.t*1000,h=hand(); gfx.globalAlpha=fade(u,.9); RO(h.x-12,h.y-34,16,26,'#2b2f3a'); R(h.x-10,h.y-31,12,19,'#7fb8e8'); E(h.x-4,h.y-21,4,3,CRUST);
   if(ms>s.flash&&ms<s.flash+300) { gfx.globalAlpha=1-(ms-s.flash)/300; star(h.x-4,h.y-22,22,'#ffffff'); } };
-Tm.crumb_shot=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,me=ST.unit(m),sp=self?{x:me.x,y:me.base}:(t.side==='foe'?spotFor(m,t,96):{x:Math.max(150,H.x-H.w*.5-24),y:Math.min(316,H.base+3)});
-  const bx=self?me.x-80:sp.x-82,by=Math.min(318,sp.y+2),cut=2000,hit=2400,snap=3050;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'kneel'},{t:1100,f:'kneel',dx:(u,tt)=>Math.sin(tt*18)*3},{t:cut,f:'kneel'},{t:2650,f:'expr'},{t:snap+450,f:'idle'},{t:3800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:1000,x:sp.x,y:sp.y,f:'kneel'},{t:1100,f:'kneel',dx:(u,tt)=>Math.sin(tt*18)*3},{t:cut,f:'kneel'},{t:2650,f:'expr'},{t:snap+450,f:'idle'},{t:snap+650,f:back(sp.x,me)},{t:snap+1500,x:'home',y:'home',f:'idle'}];
-  const st=ST.keys(fx,K),end=self?4000:snap+1600,plan={x:bx,y:by,set:self?500:950,saw0:1100,cut,dir:(H.x<bx?1:-1)};
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Tom sets down a cutting board and a warm boule.':'Tom carries a cutting board and a warm boule over to '+t.name+'.'); say(m.id,'crumb_shot'); scene('tv_bread',(end-150)/1000,{plan}); }],
-    [1100,()=>{ setMessage('He saws it open. Slowly. The crust crackles.'); for(let k=0;k<4;k++) b7Later(()=>sfx.select(),k*220); }],
-    [cut,()=>{ sfx.whoosh(); scene('tv_text',1,{x:bx,y:by-92,txt:'OPEN CRUMB',c:CRUMB,sc:2}); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('tv_glow',1.1,{x:H.x,y:H.mid,c:'#ffd8a0'}); scene('tv_hearts',1,{x:H.x,y:H.top}); hopOf(t!==m?t:null); setMessage('The steam rolls over '+(self?'him':t.name)+'. It smells like a Sunday.'); }],
-    [2650,()=>{ scene('tv_phone',1.0,{flash:snap-2650}); }],
-    [snap,()=>{ (sfx.shutter||sfx.select)(); scene('tv_flash',.3,{a:.55}); scene('tv_big',1.1,{x:bx,y:by-86,txt:'CRUMB SHOT',c:GOLD,sc:3}); }],
-    [end,'end',kindLine(t,'He\'ll be posting that one.')]]); };
 
 // ---------- Mint Unboxing (A3) ----------
 // A brand-new gadget box. He peels the plastic film off in one long, perfect strip, lifts the lid, and a golden light
@@ -1047,21 +835,6 @@ SC.tv_box=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y-(1-ez((ms-P.set)/200))
   if(ms>P.peel0&&ms<P.peel1+250) { const q=ez((ms-P.peel0)/(P.peel1-P.peel0)),ex=lerp(x+28,h.x,q),ey=lerp(y-30,h.y,q); gfx.globalAlpha*=.6; Ln(x-28,y-30,ex,ey,10,'#dff7ff'); gfx.globalAlpha=fade(u,.95); if(q<1) bigWord('PEEL...',x,y-56,CREAM,2); }
   { gfx.save(); gfx.translate(x-lid*70,y-32-Math.sin(lid*Math.PI)*34+lid*28); RO(-32,-8,64,10,'#ffffff'); R(-32,-2,64,3,BLUE); gfx.restore(); }
   if(ms>P.up&&ms<P.put) { const p={x:P.st.x-4,y:P.st.y-TH()*(P.st.sc||1)-16}; gfx.save(); gfx.translate(p.x,p.y); gfx.rotate(Math.sin(ms*.008)*.08); RO(-11,-17,22,34,'#22252e'); R(-9,-15,18,26,'#7fd8ff'); R(-9,-15,18,6,'#c8f0ff'); E(0,14,2,2,GREY2); gfx.restore(); star(p.x+18,p.y-18,6+Math.sin(ms*.02)*2,'#ffffff',ms*.005); star(p.x-16,p.y+10,4,GOLD,ms*.007); } };
-Tm.mint_unboxing=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),U=who.map(u=>ST.unit(u)),me=ST.unit(m),dee=B2.party.find(p=>p.id==='deedee'&&b2Alive(p));
-  const px=foe?front(U[0],90).x:Math.max(170,Math.min(...U.map(q=>q.x-q.w*.5))-24),py=foe?front(U[0],90).y:Math.min(314,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+14);
-  const peel0=1150,peel1=1950,lid=2150,up=2450,hit=2650,put=3600;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(px,me)},{t:900,x:px,y:py,f:'kneel'},{t:peel0,f:'kneel',dx:u=>ez(u)*6},{t:lid,f:'kneel'},{t:up,f:'celeb',hop:8,hn:2},{t:put-200,f:'expr'},{t:put,f:'kneel'},{t:put+300,f:'idle'},{t:put+400,f:back(px,me)},{t:put+1200,x:'home',y:'home',f:'idle'}]);
-  const plan={x:px-64,y:py,set:900,peel0,peel1,lid,up,put,st};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Tom kneels down with a brand-new box. Still in the plastic.'); say(m.id,'mint_unboxing'); scene('tv_box',(put+250)/1000,{plan}); }],
-    [peel0,()=>{ setMessage('He peels the film off in one long, perfect strip.'); for(let k=0;k<4;k++) b7Later(()=>sfx.select(),k*200); }],
-    [lid,()=>{ sfx.whoosh(); (sfx.fanfare||sfx.levelUp)(); }],
-    [up,()=>{ scene('tv_big',1.3,{x:px-30,y:py-TH()-66,txt:'MINT!',c:GOLD,sc:4}); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.ding(); sfx.heal(); for(const u of who) { const q=ST.unit(u); scene('tv_glow',.9,{x:q.x,y:q.mid,c:GOLD,rx:32,ry:44}); scene('tv_hearts',1,{x:q.x,y:q.top}); hopOf(u!==m?u:null); } setMessage(foe?foe.name+' gets to hold it. Carefully.':'Everyone gets to look at it. Nobody touches the screen.'); }],
-    ...(dee&&!foe?[[hit+300,()=>{ const q=ST.unit(dee); scene('tv_text',.9,{x:q.x,y:q.top-16,txt:'WARM CRUST',c:'#f3c37a',sc:1}); }]]:[]),
-    [put,()=>{ sfx.select(); setMessage('He puts it back in the box. He\'s keeping the box.'); }],
-    [put+1300,'end',foe?kindLine(foe):'The box is being kept. Forever.']]); };
 
 // ---------- Noise-Canceling (A4) ----------
 // The monster is loud: jagged noise and BLAH bubbles. Tom walks up, puts on his big flight headphones, taps ANC on, and
@@ -1107,25 +880,6 @@ SC.tv_window=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y,w=P.w,h=P.h; const 
   gfx.lineWidth=16; gfx.strokeStyle=OUT; gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x-w/2+4,y-h/2+4,w-8,h-8,34); else gfx.rect(x-w/2+4,y-h/2+4,w-8,h-8); gfx.stroke();
   gfx.lineWidth=11; gfx.strokeStyle='#f0ece4'; gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x-w/2+4,y-h/2+4,w-8,h-8,34); else gfx.rect(x-w/2+4,y-h/2+4,w-8,h-8); gfx.stroke(); };
 SC.tv_tag=(s,u)=>{ const d=ez(u/.2),sw=Math.sin(s.t*5)*.12*(1-u); gfx.globalAlpha=fade(u,.85)*d; gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(sw); RO(-16,-2,32,40,'#ffd0e0'); E(0,4,5,5,OUT); E(0,4,3,3,'#ffd0e0'); label('DO NOT',0,14,'#7a1a3a',1); label('DISTURB',0,24,'#7a1a3a',1); gfx.restore(); };
-Tm.window_seat=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m);
-  const w=Math.max(176,Math.min(330,Gp.w+80)),h=Math.max(150,Math.min(210,Gp.base-Gp.top+70)),cx=Math.max(w/2+4,Math.min(572-w/2,Gp.x)),cy=Math.max(h/2+4,Math.min(320-h/2,Gp.base-h/2+20));
-  const p={x:Math.min(552,cx+w/2+50),y:Math.min(316,Gp.base+6)};
-  const L=lowest(),LU=L?ST.unit(L):null,selfL=L===m,pull0=1150,half=1600,slam=1950,up=2900,gone=3400;
-  const K=[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:950,x:p.x,y:p.y,f:'expr'},{t:pull0,f:'act',dx:u=>-ez(u)*8,dy:u=>-ez(u)*4},{t:half,f:'expr'},{t:slam-120,f:'act',dx:-10,dy:u=>ez(u)*6},{t:slam+200,f:'idle'},{t:2600,f:'idle'}];
-  let tagAt=3300,end;
-  if(LU&&!selfL) { const tx=Math.min(556,LU.x+LU.w*.5+26); K.push({t:2700,f:go(tx,{x:p.x})},{t:tagAt,x:tx,y:LU.base+3,f:'expr'},{t:tagAt+500,f:'idle'},{t:tagAt+600,f:back(tx,me)},{t:tagAt+1200,x:'home',y:'home',f:'idle'}); end=tagAt+1300; }
-  else { K.push({t:2700,f:back(p.x,me)},{t:3500,x:'home',y:'home',f:'expr'},{t:3900,f:'idle'}); tagAt=3500; end=4300; }
-  const st=ST.keys(fx,K),plan={x:cx,y:cy,w,h,pull0,half,slam,up,gone};
-  ST.play(E2,[
-    [0,()=>{ setMessage('A giant airplane window appears around the enemies. Tom walks up to the shade.'); say(m.id,'window_seat'); scene('tv_window',(gone+350)/1000,{plan}); }],
-    [pull0,()=>{ setMessage('He pulls the shade down. Halfway. He considers it.'); sfx.select(); }],
-    [slam-150,()=>{ sfx.whoosh(); }],
-    ['hf',slam],
-    [slam,()=>{ sfx.thud(); sfx.bonk(); for(const f of list) ST.jolt(f,.45); landHit(100); scene('tv_big',1.2,{x:cx,y:Gp.top-74,txt:'SHADE DOWN',c:CREAM,sc:3}); }],
-    [slam+250,()=>{ E2.apply(); setMessage('Shade down. Lights off. First class.'); }],
-    [up,()=>{ sfx.whoosh(); }],
-    [tagAt,()=>{ if(LU) { const q=selfL?me:LU; scene('tv_tag',1.4,{x:selfL?me.x-44:q.x-q.w*.5-6,y:q.mid-30}); sfx.select(); } }],
-    [end,'end',res(E2)+'Don\'t disturb.']]); };
 
 // ---------- Flashcard Flurry (B1) ----------
 // POP QUIZ. Tom flicks flashcards from a deck at every monster, one after another; they bonk and stick. Over the target,
@@ -1211,18 +965,6 @@ SC.tv_save=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y-ez(ms/400)*16; c
     if(!held&&ms<P.grab) { bigWord('SAVE',x,y+40,SKY,2); } }
   if(unf>0) { gfx.save(); gfx.translate(x,y); gfx.scale(2.2,2.2); const w=30*unf; R(-w/2-2,-8,w+4,22,OUT); R(-w/2,-6,w,18,'#eef4f8'); if(unf>.8) { const bite=ms>P.bite; R(-12,-4,24,4,CRUMB); R(-12,0,24,3,'#7bbf5a'); R(-12,3,24,3,'#e07a5a'); R(-12,6,24,4,CRUMB); if(bite) E(12,1,4,5,'#eef4f8'); } gfx.restore(); }
   if(ms>P.bite) { bigWord('SAVED',x,y-48,SKY,3); } };
-Tm.save_sandwich=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'expr'},{t:900,f:'celeb',hop:16},{t:1200,f:'expr'},{t:1800,f:'act',dx:-6},{t:2300,f:'idle'},{t:3000,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:go(sp.x,me)},{t:1000,x:sp.x,y:sp.y,f:'idle'},{t:1050,f:'celeb',hop:16},{t:1300,f:'expr'},{t:1850,f:'act',dx:u=>-ez(u)*10},{t:2350,f:'act',dx:-10},{t:2800,f:'idle'},{t:3000,f:back(sp.x,me)},{t:4000,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const plan={x:H.x+(self?-34:0),y:H.top-40,grab:self?1000:1150,unf:1350,give:1850,bite:2250,tx:H.x-4,ty:H.mid-8},end=self?3100:4100;
-  ST.play(E2,[
-    [0,()=>{ setMessage('A big save crystal spins up over '+(self?'Tom':t.name)+'. Tom walks over.'); say(m.id,'save_sandwich'); scene('tv_save',(end-300)/1000,{plan}); sfx.levelChime(); }],
-    [plan.grab,()=>{ sfx.select(); setMessage('He unfolds it. It was sandwich paper all along. Thick homemade bread.'); }],
-    [1850,()=>{ sfx.whoosh(); }],
-    ['hf',2250],
-    [2250,()=>{ E2.apply(); sfx.levelChime(); sfx.heal(); scene('tv_glow',.9,{x:H.x,y:H.mid,c:SKY}); hopOf(t!==m?t:null); }],
-    [end,'end',kindLine(t,'Progress saved. Lunch secured.')]]); };
 
 // ---------- Kanji Strike (B4) ----------
 // Tom raises a giant calligraphy brush and writes the kanji for fire in the air over the monster, four glowing strokes.
