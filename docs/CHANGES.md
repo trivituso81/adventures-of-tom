@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 43): Boppy's head brought in line (`heads4`)
+
+- Tom (09:28): Boppy's head looked much bigger than everyone else's, and different from Deedee's.
+- Cause: his cap hides his forehead, so `heads1`/`heads2` measured his "face" from the cap brim. That undercounted his face, so his head was enlarged too much. Checked with eye line to chin (not affected by hair or hats): with the hidden forehead allowed for, he was about 13% too big.
+- Fix: Boppy's head x .87 in battle, walk and the pepper sheet (`BATTLE_HEAD_RATIO` .564 to .491, `WALK_HEAD_RATIO` .51 to .444 in bake_boppy.py; `PEP_GROW` x .87 in bake_boppy_extra.py; hand band `HR` .491). Heights unchanged (135 battle px, 291 welcome px). ART_V `heads4`.
+- Tested: `smoke.py`; `kit_test.py boppy` (cap_swat, patient_angler, pepper_breath, five_alarm_jar); welcome screen before and after, battle lineup looked at. Stamp `build heads4`.
+
 ## 2026-11-01 (day, 45): Boppy falls behind gradually; the party stops for him (`wind1`)
 
 - Tom (08:58): Boppy slowing down on the overworld is funny but jumpy. He should gradually fall behind, and when he is far enough back the whole party is forced to stop until he catches up.
