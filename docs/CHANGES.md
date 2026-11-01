@@ -1,3 +1,12 @@
+## 2026-11-01 (day, 34): Tom's extra poses and arrival stretch in the new painted style (`tomposes1`)
+
+- Tom (00:58): sent nine 5-frame pose sheets (45 poses) after the standard sheets; installed all at once so the standard Tom and his extras match.
+- Sources `tools/sprite-bake/src/tom-xposes-1-v1.png` to `tom-xposes-9-v1.png`; `tools/sprite-bake/bake_tom.py` now cuts them (old `tom-poses-v1/v2` and `tom-stretch-v1` are no longer used). Extras are scaled at 0.476 of the battle sheet scale (upright 632 px figure matches the battle sheet's 292 px upright frame).
+- The 24 existing custom poses and the 8 arrival stretch frames are replaced in place, so Press Start, Starter Splash, Popcorn Jump and the cab-line stretch use the new art with no code change.
+- 13 new poses are baked and loaded but not wired to a move yet: finger, headphones, mask, shade, floorsit, lying, cartwheel, facedown, rope, stirrup, strain, toast, plates (`f:'<name>'` in a move's keys). Painted but still unwired from before: lift, fling, unbox, flick, brush, limit, startled, direct, bowlthrow, frozen.
+- Known: the sneaker swoosh shows (carried from the reference); the shade pose has an airplane window painted beside him; the arrival stretch frames are three-quarter, not fully front. Rose-on-shoulders art is still the old Tom.
+- Tested: `smoke.py`, `kit_test.py tom` (button_mash, starter_splash), `tombo_test.py tnb1`; frames looked at. Not played on the phone. Stamp `build tomposes1`.
+
 ## 2026-11-01 (day, 34): Olivia's battle sheet saved for install (`olivia4src`)
 
 - Tom (00:35): sent Olivia's 4 x 4 standard battle sheet in the fruit-print dress. Saved as `tools/sprite-bake/src/olivia-battle-v1.png` (source art only). No game code or sprites changed yet, so no `?v=` bump or new stamp. The ability prompts (outline plus 11 prompts) went to Tom as a zip and are in the Project doc claude/olivia-ability-prompts.md.
