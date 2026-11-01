@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 43): Phones now load the new Tom and Amy art (`heads3`)
+
+- Tom (09:10): on `build heads2` the welcome screen still showed Tom's old small walking head. Cause: data/tom-hires-use.js added a fixed `?v=tom6` to all five of Tom's atlas images, and engine/painted.js skips its `?v=ART_V` tag when an address already has one, so the phone kept its saved copies. Amy's stance sheet had the same problem (`?v=bj1` in bake_amy_extra.py).
+- Both fixed tags removed, so every painted atlas of the five re-baked adults now loads with `?v=heads3` (checked in the browser: none left on an old tag). No art changed. ART_V `heads3`.
+- engine/splash.js tag is `?v=heads3` (it carries both the `heads2` heights and the `solo1` changes).
+- Tested: `smoke.py`; atlas addresses listed in the page. Stamp `build heads3`.
+
+
 ## 2026-11-01 (day, 43): Stampcard is one screen: grid, detail drawer, pin to compare (`stampgrid1`)
 
 - Tom (08:55) approved the revamp in `claude/stampcard-revamp.md`. The STAMPS tab used to be 14 full rows (about six phone screens). It is now one screen in portrait: a strip, a Core row (Basic, Signature), Path A (gold) and Path B (blue) side by side with six chips each, and a drawer under the grid. No data or save changes.

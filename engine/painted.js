@@ -10,7 +10,7 @@
 //
 // Atlas: one image of equally sized frames at K times the rows' resolution (K = 2 in battle, 3 on the overworld).
 // ART_V: cache tag for every painted atlas image (2026-11-01, heads1: all adult battle heads re-baked).
-const ART_V='heads2';
+const ART_V='heads3';
 const PAINTED={};
 function paintedAtlas(id,src,rects,k,tintFn) {
   const a={id,rects,k,tintFn,img:new Image(),ready:false,failed:false};
