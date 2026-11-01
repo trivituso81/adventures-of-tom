@@ -5,12 +5,14 @@
 let TOM_STRETCH=null;
 (function() {
   if(typeof TOM_HIRES==='undefined'||(typeof TOM_HIRES_OFF!=='undefined'&&TOM_HIRES_OFF)) return;
+  // Outfit recolour for the navy graphic tee (Nov 2026 art): navy pixels only, so hair, skin, jeans, shoes and the print stay as painted.
+  const NAVY=(r,g,b)=>{ if(Math.max(r,g,b)>170||b<r+14||b<g) return 0; return Math.min(1.12,.32+((r*.3+g*.59+b*.11)/255)*3.0); };
   const AT=TOM_HIRES.atlas,mirror=rows=>{ const m=rows.map(r=>r.split('').reverse().join('')); if(rows._paint) m._paint={a:rows._paint.a,f:rows._paint.f,flip:!rows._paint.flip}; return m; };
-  paintedAtlas('tomBattle',AT.bt.src+'?v=tom4',AT.bt.rects,AT.bt.k);
-  paintedAtlas('tomPose',AT.pose.src+'?v=tom4',AT.pose.rects,AT.pose.k).tintFrac=[.47,.77];
-  paintedAtlas('tomStretch',AT.stretch.src+'?v=tom4',AT.stretch.rects,AT.stretch.k);
-  paintedAtlas('tomKo',AT.ko.src+'?v=tom4',AT.ko.rects,AT.ko.k);
-  paintedAtlas('tomOw',AT.ow.src+'?v=tom4',AT.ow.rects,AT.ow.k);
+  paintedAtlas('tomBattle',AT.bt.src+'?v=tom5',AT.bt.rects,AT.bt.k,NAVY);
+  paintedAtlas('tomPose',AT.pose.src+'?v=tom5',AT.pose.rects,AT.pose.k).tintFrac=[.47,.77];
+  paintedAtlas('tomStretch',AT.stretch.src+'?v=tom5',AT.stretch.rects,AT.stretch.k);
+  paintedAtlas('tomKo',AT.ko.src+'?v=tom5',AT.ko.rects,AT.ko.k,NAVY);
+  paintedAtlas('tomOw',AT.ow.src+'?v=tom5',AT.ow.rects,AT.ow.k,NAVY);
   const tag=(rows,a,f,flip)=>paintRows(rows,a,f,flip);
   // Overworld: same shape as the old TOM_OW (pal, down/up/side with [stand, step, step]); recruit-sprites.js preps it at scale 1.
   // The sheet draws Tom facing LEFT; the game's 'side' set faces RIGHT (its 'left' is the mirror), so side = flipped left frames.

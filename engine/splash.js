@@ -529,11 +529,14 @@ function splashScene(W,H,panelH,time) {
 // h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
 const SPLASH_IMG={w:941,h:1671};
 const SPLASH_ALL=1.1;   // Tom 2026-10-29: everyone on the welcome art 10% bigger (feet stay planted)
+// Tom 2026-11-01: the title uses the new painted standing Tom. Set TITLE_TOM_RIDE=true to bring back the old painted Tom carrying Rose (needs a new ride sheet to match).
+const TITLE_TOM_RIDE=false,TITLE_TOM_H=290;   // TITLE_TOM_H: standing Tom's height in picture pixels (Amy 278, Justin 330)
 const SPLASH_SPOTS=[
   {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
   {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'5", tallest) stands just behind Amy and Deedee, listed early so they draw over him
   {id:'grace',x:425,feet:1175,h:225},   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
-  {id:'tom',x:287,feet:1222,h:335},
+  {id:'tom',x:287,feet:1222,h:335},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose
+  {id:'rose',x:372,feet:1244,h:196,solo:true},   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
   {id:'tnb',x:170,feet:1198,h:250},
   {id:'boppy',x:768,feet:1222,h:255},
   {id:'amy',x:566,feet:1222,h:278},
@@ -549,8 +552,9 @@ function splashCastDraw(time) {
   const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
   try {
     for(const m of SPLASH_SPOTS) {
-      const set=m.id==='tom'&&OW.tomRide?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
-      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*SPLASH_ALL*s/fh;
+      if(m.solo&&TITLE_TOM_RIDE) continue;
+      const set=m.id==='tom'&&OW.tomRide&&TITLE_TOM_RIDE?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=(m.id==='tom'&&!TITLE_TOM_RIDE?TITLE_TOM_H:m.h)*SPLASH_ALL*s/fh;
       const bob=Math.floor((time*1.6+SPLASH_SPOTS.indexOf(m)*.37)%2)*Math.max(1,Math.round(s*2));
       drawSprite(fr,set.pal,Math.round(ox+m.x*s-fw*k/2),Math.round(m.feet*s-fh*k-bob),k);
     }

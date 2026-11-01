@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tom-battle-v2.png and tom-walk-v2.png (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) and tom-walk-v3.png (3 x 3), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
         data/tom-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -32,9 +32,13 @@ args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
-    poses['b_' + nm] = im
+# Battle: the painted 4 x 4 sheet of Nov 2026 (graphic tee, jeans, sneakers). Each new pose fills the old pose slot it corresponds to.
+NB = ['idleA', 'idleB', 'walkA', 'walkB', 'hip', 'act', 'wind', 'swing', 'spread', 'guard', 'hurt', 'low', 'ko', 'cheerA', 'cheerB', 'sig']
+NEW_TO_OLD = {'idleA': 'idle', 'wind': 'windup', 'swing': 'strike', 'walkA': 'run1', 'walkB': 'run2', 'cheerB': 'leap', 'hurt': 'hurt',
+              'low': 'kneel', 'ko': 'ko', 'cheerA': 'win', 'sig': 'defend', 'act': 'cast'}
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v3.png'), [NB[0:4], NB[4:8], NB[8:12], NB[12:16]]).items():
+    if nm in NEW_TO_OLD:
+        poses['b_' + NEW_TO_OLD[nm]] = im
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v1.png'),
         [['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling'], ['unbox', 'flick', 'brush', 'limit', 'startled', 'direct']]).items():
     poses['c_' + nm] = im
@@ -44,8 +48,8 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-stretch-v1.png'), [STRETCH[:4],
 CUSTOM2 = ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-poses-v2.png'), [CUSTOM2[:6], CUSTOM2[6:]], dilate=1).items():
     poses['c_' + nm] = im
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
+walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'step2')]
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-v3.png'), [walk_names[0:3], walk_names[3:6], walk_names[6:9]]).items():
     poses['w_' + nm] = im
 
 # ---------------------------------------------------------------- helpers
@@ -176,7 +180,7 @@ def shirt_info(palette, rows, f0, f1):
     keys = []
     for k, c in sorted(counts.items(), key=lambda kv: -kv[1]):
         r, g, b = hexrgb(palette[k])
-        if max(r, g, b) <= 66 and (max(r, g, b) - min(r, g, b)) <= 40 and c >= 4:
+        if max(r, g, b) <= 150 and b - r >= 12 and b >= g and c >= 4:   # the navy tee (Nov 2026 art)
             keys.append(k)
     return keys, [r0, r1]
 
@@ -193,7 +197,11 @@ fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 # custom poses: their own canvas (some are taller than the idle), feet on the bottom row and head on the centre column
-cu_big = tighten(place({c: scaled_to(poses['c_' + c], fb) for c in CUSTOM}, KB, 'head'), KB)
+# (these extra poses are still the older sheets, drawn at the old sheet's scale: keep their old size factor)
+OLD_IDLE_H = slice_sheet(os.path.join(SRC, 'tom-battle-v2.png'),
+        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']])['idle'].height
+fb_old = args.battle_h * KB / OLD_IDLE_H
+cu_big = tighten(place({c: scaled_to(poses['c_' + c], fb_old) for c in CUSTOM}, KB, 'head'), KB)
 bt_pal, all_rows = rows_of({**bt_big, **cu_big}, KB, args.colors)      # one shared palette
 bt_rows = {k: all_rows[k] for k in bt_big}
 cu_rows = {k: all_rows[k] for k in cu_big}
@@ -222,9 +230,23 @@ ow_rects = pack(ow_big, os.path.join(ART, 'tom-ow.webp'))
 def mirror(rows):
     return [r[::-1] for r in rows]
 
+# ---------------------------------------------------------------- menu portrait: head of the hero pose
+hero = Image.open(os.path.join(SRC, 'tom-hero-v3.png')).convert('RGB')
+ha = np.array(hero).astype(float)
+fgm = (np.minimum(ha[:, :, 0], ha[:, :, 2]) - ha[:, :, 1]) < 120
+hys, hxs = np.where(fgm)
+htop, hh = hys.min(), hys.max() - hys.min()
+hband = fgm[htop: htop + int(hh * 0.30)]
+hcx = int(np.where(hband)[1].mean()); hs = int(hh * 0.27); hcy = htop + int(hs * 0.52)
+crop = hero.crop((hcx - hs // 2, hcy - hs // 2, hcx + hs // 2, hcy + hs // 2)).resize((128, 128), Image.LANCZOS)
+ca = np.array(crop.convert('RGBA'))
+ca[(np.minimum(ca[:, :, 0], ca[:, :, 2]).astype(int) - ca[:, :, 1]) >= 120, 3] = 0
+Image.fromarray(ca, 'RGBA').save(os.path.join(ROOT, 'portraits/tom.png'))
+print('wrote portraits/tom.png')
+
 # ---------------------------------------------------------------- garment (outfit recolour) info
-bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .47, .77)
-ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .45, .72)
+bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .27, .68)
+ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .30, .62)
 
 # ---------------------------------------------------------------- eyes (for the low-health bruise and KO overlays)
 def find_eye(rows, pal):

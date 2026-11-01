@@ -1,3 +1,12 @@
+## 2026-11-01 (day, 32): New painted Tom in a graphic tee, jeans and sneakers (`tompaint1`)
+
+- Tom: new character art for Tom (from his photos: navy controller-and-heart tee, charcoal jeans, white sneakers) overrides the existing art for the matching poses, including the welcome screen, the overworld and battle.
+- Sources: `tools/sprite-bake/src/tom-battle-v3.png` (4 x 4), `tom-walk-v3.png` (3 x 3), `tom-hero-v3.png`. `tools/sprite-bake/bake_tom.py` maps the new battle poses onto the old slots: idle A to idle, wind-up to windup, swing to strike, walk A and B to run, cheer B to leap, hurt, low health to kneel, KO, cheer A to celebrate, DEFEND signature to defend, ACT to cast. Walk sheet gives down, up and side frames. Menu portrait is cut from the hero pose (`portraits/tom.png`).
+- Welcome screen: the old Tom-carrying-Rose art has no new equivalent, so Tom stands in his new outfit and Rose stands beside him (`TITLE_TOM_RIDE=false` in `engine/splash.js`; set true for the old ride art).
+- Outfit recolour (`NAVY` tint in `data/tom-hires-use.js`) now finds the navy tee, so equipped outfit colours still tint his shirt and nothing else.
+- Not replaced (no matching new pose, still the old black-tee art): the 24 custom move poses (`tom-poses.webp`), the arrival stretch, and every sprite where Rose rides on Tom's shoulders (`OW.tomRide`, data/tomride-use.js). Head is the sheet's own size (about 0.3 of height, the old Tom was 0.445).
+- Tested: `smoke.py` (default and IDS=tom), `kit_test.py tom --speed2` (all 14 moves, no fails); title, overworld and battle screenshots viewed. The sandbox cannot reach github.io, so the live URL was not checked. Stamp `build tompaint1`.
+
 ## 2026-11-01 (day, 32): Amy's house gets the 3D treatment (`amyhouse3d`)
 
 - Tom: do the 3D effect to all of Amy's house too. Same method as Tom's house (feet must land on bare floor), plus depth cutouts.
