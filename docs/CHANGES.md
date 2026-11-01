@@ -1,3 +1,10 @@
+## 2026-11-01 (day, 34): Olivia's painted battle stances (`olivia4`)
+
+- Tom's 4 x 4 battle sheet (fruit dress) is baked and loaded: `tools/sprite-bake/bake_olivia_battle.py` writes `art/chars/olivia-battle.webp`, `olivia-ko.webp` and `data/olivia-battle-hires.js` (OLIVIA_BT). `data/olivia-battle-use.js` (modelled on Justin's) builds `BATTLE_SPRITES.olivia` and `KO_SPRITES.olivia`; script tags sit after the Justin lines in `index.html` (`?v=olivia4`, AV in the bake script matches).
+- Slots: idleA idle, idleB idle2, swing act, wind windup, cheerA celeb, cheerB leap, hurt hurtPose, guard defend, spread castPose, low kneel (black eye is painted in), walkA/B run, plus hip and sig, ko as the knocked-out pose. Drawn about 120 px tall (`BATTLE_SIZE.olivia` .62): a touch under Tom, level with Amy.
+- She is NOT a party member yet, so nothing changes in play. Still to do: party data, her 11 moves (all ability sheets are already in the repo), recruiting, lines.
+- Tested: `smoke.py`; new `tools/olivia_battle_test.py` borrows her art into Grace's slot and shoots idle, low health, KO and landscape; frames looked at. Not played on the phone. Stamp `build olivia4`.
+
 ## 2026-11-01 (day, 34): Tom's extra poses and arrival stretch in the new painted style (`tomposes1`)
 
 - Tom (00:58): sent nine 5-frame pose sheets (45 poses) after the standard sheets; installed all at once so the standard Tom and his extras match.
