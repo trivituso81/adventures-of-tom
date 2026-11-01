@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Welcome screen, Rose off the fence post (`back3`)
+
+- Tom (14:27): Rose's feet overlap a post on the welcome screen; move her a little further back.
+- Call made: Rose's own `feet` 1244 to 1204 in SPLASH_SPOTS (engine/splash.js), 40 picture px higher; nobody else moved.
+- Tested: welcome screen at 390x844 looked at; `smoke.py`. Stamp `build back3`.
+
 ## 2026-11-01 (day, 43): Frisbee Golf, TNB's Jojo move rebuilt (`fgolf1`)
 
 - Tom (14:14): rename the move Frisbee Golf (was Round with Jojo, disc golf). New animation from existing frames: TNB stays in the line and calls "Hey, Jojo! Catch!"; Jojo runs out at the enemies backwards; he throws the frisbee to her; she catches it as her back collides with the enemies.
