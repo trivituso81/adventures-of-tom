@@ -1,3 +1,12 @@
+## 2026-11-01 (evening, 50): Main characters 25% smaller inside houses, 10% bigger on the streets (`size2`)
+
+- Tom (17:19): the size of main characters inside houses must be reduced by 25%; in the overworld increase by 10%.
+- Call made: "main characters" means the same group as the last size change (`big1`): whoever Tom is playing, the party followers (the kids) and Michael. Townspeople keep their size. "Houses" means the painted interiors that use the interior scale (bakery, library, greenhouse, shop, observatory, post, tea, taxi, Deedee and Boppy's, Ellie's, Amy's, juice bar, observatory). Rooms with no house painting (school rooms, dome, Moon Club) stay as they were.
+- Numbers: street boost 1.15 became 1.265 (1.15 x 1.10); house boost 1.15 became 0.8625 (1.15 x 0.75). Feet stay on the same tile; the figure grows or shrinks upward.
+- Also changed to match: the speech-bubble height over a main character follows the new size, and the chapter 1 stretch scene uses the same street size as his walk.
+- Changed: `engine/town-render.js` (`OW_PLAYABLE_BOOST`, `OW_PLAYABLE_BOOST_INDOOR`, `owBoost`), `engine/intro.js`. No art changed, no ART_V bump needed.
+- Tested: `smoke.py` FAILS: []; looked at Deedee and Boppy's house, the bakery, the Square and Grump Hollow, portrait and landscape, before and after. Not played on the phone. If a house still reads too big or small: `OW_PLAYABLE_BOOST_INDOOR`.
+
 ## 2026-11-01 (evening, 48): Rooms are ready before you walk in (`rooms1`)
 
 - Tom (17:17): loading the inside of a house takes way too long.

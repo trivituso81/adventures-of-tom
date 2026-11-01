@@ -171,7 +171,7 @@ function drawStretchPainted(time) {
   let name='tired'; for(const [n,a] of STRETCH_SEQ) if(u>=a) name=n;
   player.hidden=true;
   // Same scale as his walk sprite (actorK: 1.2 on outdoor maps), or he shrinks when the stretch starts.
-  const rows=TOM_STRETCH[name],p=position(player),w=rows[0].length,h=rows.length,ak=actorK()*(OW.tom.k||1),wk=w*ak,hk=h*ak;
+  const rows=TOM_STRETCH[name],p=position(player),w=rows[0].length,h=rows.length,ak=actorK()*(OW.tom.k||1)*owBoost(player),wk=w*ak,hk=h*ak;
   const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),bob=name==='exhale'?Math.round(Math.sin(intro.stretch.t*5)*ak):0;
   ellipse(cx,base+1,Math.round(wk*.4),Math.round(4*ak),'#2f493640');
   drawSprite(rows,OW.tom.pal,cx-Math.floor(wk/2),Math.round(base-hk+bob),ak);

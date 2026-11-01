@@ -15,8 +15,17 @@ function walkPhase(a) {
   return clamp(a.move.elapsed/a.move.duration,0,1);
 }
 // Playable characters (Tom or whoever Tom is playing, and the party followers) and Michael are drawn 15% bigger than the NPCs (Tom, 2026-11-01).
-const OW_PLAYABLE_BOOST=1.15;
-function owBoost(a) { return (a.isPlayer||a.kid||a.sheet==='michael')?OW_PLAYABLE_BOOST:1; }
+// 2026-11-01 (Tom): inside the painted houses the main characters are 25% smaller than they were; on the streets 10% bigger.
+const OW_PLAYABLE_BOOST=1.15*1.10;           // outdoor maps
+const OW_PLAYABLE_BOOST_OLD=1.15;
+const OW_PLAYABLE_BOOST_INDOOR=1.15*0.75;    // painted interiors (the maps that use INTERIOR_ACTOR_SCALE in engine/plate.js)
+function owBoost(a) {
+  if(!(a.isPlayer||a.kid||a.sheet==='michael')) return 1;
+  if(!currentMap) return OW_PLAYABLE_BOOST_OLD;
+  if(currentMap.outside) return OW_PLAYABLE_BOOST;
+  const p=PLATES[currentMap.id];
+  return (p&&p.actorScale)?OW_PLAYABLE_BOOST_INDOOR:OW_PLAYABLE_BOOST_OLD;   // rooms without a house painting (school rooms, dome, moon club) stay as they were
+}
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
   const rider=a.isPlayer?roseRider():null;
@@ -643,7 +652,7 @@ function drawTarget(target) {
   if(target.kind==='npc') {
     const p=position(target.value);
     x=(p.x+.5)*T;
-    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK()-1)):52));
+    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK()*owBoost(target.value)/1.15-1)):52));
   } else if(target.kind==='object') {
     x=(target.value.x+target.value.w/2)*T;
     y=target.value.y*T-(target.value.kind==='tree'?70:28);
