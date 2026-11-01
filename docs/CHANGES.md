@@ -1,3 +1,10 @@
+## 2026-11-01 (evening, 55): Grace's battle voice clips updated (`gclips6`)
+
+- Tom sent `local-clips-export_6.json` (217 clips) and asked for Grace's battle clips to be updated. Merged only her 44 with `tools/bake-page/merge-local.js`: 37 existing clips replaced by the new takes, 0 added (`data/voice/grace.js`). Other voices in the export were not touched.
+- Left out on purpose: 3 stale takes whose lines no longer exist (Hi-yah!, Chalk up!, the old "one sock" Ymamot line), and a "Tap." take whose audio script says "Oops!" (words do not match the line; the line is "Tap."). Grace's Foot Tap "Tap." now uses her earlier whispered "Tap." take, which had been saved with no line key and so never played; it is filed under `foot_tap_tap`.
+- Where two moves share words (beam, dance battle), the clip stays under the key the repo already used (`beam_dismount`, `dance_battle`).
+- Tests: `unused_voice.py` 0 on all five checks; smoke FAILS: []; kit_test grace every move says its line. Voice Library index rebuilt. Tag `gclips6` on `data/voice/grace.js`.
+
 ## 2026-11-01 (evening, 49): Purged lines for replaced moves (`purge2`)
 
 - Tom: "Why is the chalk up voice clip still there." Fact (cause): Grace's chalk_up was replaced by bedazzle_blast, but its spoken line and clip stayed. The first audit (`purge1`) treated any kind whose name appears in the code as used, and the old animation function and an icon still mention it.
