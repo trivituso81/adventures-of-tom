@@ -1,3 +1,11 @@
+## 2026-11-01 (day, 43): Jojo redone from the new sheet at adult proportions (`jojoart1`)
+
+- Tom (12:08): new painted Jojo sheet (new face, wave shirt print); update her standing, walking and battle frames, with the adult head size and body proportions, she is 5'6".
+- Source `tools/sprite-bake/src/jojo-sheet-v2.png` (same 20 frames as v1). `bake_jojo.py` now measures head boxes by hand (the auto chin landed on the collar) and sizes heads to the adult canon: walk top-of-hair to chin share .365 front and back, .34 side (adult average .363); battle .42 (Tom .43, TNB .45), about a 49 px face like Justin. Enlargement factors solved per view: front 1.71, back 1.74, side 1.53, battle 2.18.
+- Height: 66 in at 2.013 px per inch = 133 px standing in battle (Justin 153, TNB 141, Amy 131); overworld figure 42 rows (Amy 41.7, Tom 43). `SC.t6_jojo` now sizes her from TNB's height x 66/70; `JOJO_HIRES.meta.bt.stand` is the standing height the draw code scales from.
+- New: the battle atlas also holds her walk row with the battle head (`w_right_*`), so she no longer swaps head size between walking on and the throw. Raised-arm poses keep their arms in front of the bigger head. Neck blend shortened (it stretched the shoulders into wings at the bigger head).
+- ART_V `jojoart1`. Tested: `jojo_test.py`, `kit_test.py tnb --only=round_with_jojo --speed2`, `smoke.py`; every baked Jojo frame and the loft looked at. Stamp `build jojoart1`.
+
 ## 2026-11-01 (day, 43): Olivia follows the head rule (`olivia8`)
 
 - Tom (12:12): everyone looks good now; apply the same rule to Olivia (Jojo later, her art is being redone).

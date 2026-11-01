@@ -1885,7 +1885,7 @@ SC.t6_basket=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.93);
 SC.t6_discfly=(s,u)=>{ const q=u,x=lerp(s.x0,s.x1,q),y=lerp(s.y0,s.y1,q)-Math.sin(q*Math.PI)*s.arc; gfx.globalAlpha=1; for(let k=1;k<4;k++) { const qq=cl(q-k*.04),xx=lerp(s.x0,s.x1,qq),yy=lerp(s.y0,s.y1,qq)-Math.sin(qq*Math.PI)*s.arc; gfx.globalAlpha=.3-k*.08; disc(xx,yy,1.2); } gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(Math.sin(q*Math.PI)*.5); disc(0,0,1.4); gfx.restore(); };
 T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m),hit=2900;
   const kx=Math.max(28,G.x0-70),ky=Math.min(312,G.base+4),jx=Math.max(G.x1+120,Math.min(me.x-70,470)),jy=Math.min(314,me.y+4);
-  const HU=ST.unit(m),hs=Math.round(((HU&&HU.h)||80)*.93),P={x0:620,xs:jx+60,y:jy,in:1300,throw:2500,giggle:1800,out:3900,gone:4800,chains:3100,hs},BP={chains:3100};
+  const HU=ST.unit(m),hs=Math.round(((HU&&HU.h)||80)*66/70),P={x0:620,xs:jx+60,y:jy,in:1300,throw:2500,giggle:1800,out:3900,gone:4800,chains:3100,hs},BP={chains:3100};
   P.hx=P.xs-Math.round(hs*.62); P.hy=jy-Math.round(hs*.74);
   const sorted=list.map(f=>({f,x:ST.foe(f).x})).sort((a,b)=>b.x-a.x),span=jx+90-kx,spins=sorted.map((o,k)=>({f:o.f,t:2500+450*((jx+90-o.x)/span),k}));
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:300,x:jx-10,y:jy,f:'point'},{t:1300,f:'aim'},{t:1900,f:'hip'},{t:2300,f:'hip',dx:(u,tt)=>Math.sin(tt*30)*1},{t:2500,f:'spread'},{t:2900,f:'celeb',hop:8},{t:3400,f:'clap'},{t:3900,f:'walkR'},{t:4400,x:'home',y:'home',f:'idle'}]);

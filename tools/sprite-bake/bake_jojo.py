@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Bake Jojo's painted sheet into the game: overworld walk set (down, up, right; left is the mirror) and the battle poses of Round with Jojo.
 
-Input : tools/sprite-bake/src/jojo-sheet-v1.png (4 rows of 3 walk frames: down, up, left, right; each stand, step, step; then 2 rows of 4 battle
+Input : tools/sprite-bake/src/jojo-sheet-v2.png (4 rows of 3 walk frames: down, up, left, right; each stand, step, step; then 2 rows of 4 battle
         poses facing left: run, x-step, reach-back, release / follow-through, celebrate 1, celebrate 2, high-five; flat magenta)
 Output: art/chars/jojo-ow.webp, art/chars/jojo-bt.webp (painted frames)
         data/jojo-hires.js (overworld rows and palette, atlas rects; do not hand-edit)
-Head: enlarged to the family's chibi proportion (hair-to-chin over figure height, TNB .433 front, Boppy .40 side), tapered at the neck.
+Head: enlarged to the adult canon (2026-11-01, Tom): walk top-of-hair to chin over figure height .365 front and back, .34 side (Justin .35, Amy .383, Deedee .372, Boppy .362, TNB .356);
+      battle .42 (Tom .43, TNB .45), which puts her hairline-to-chin face at Justin's 49 px. Tapered at the neck. Height 5'6" (66 in): battle 133 px (2.013 px per inch, Justin 6'4" = 153), overworld 42 rows.
 
 Usage : python3 tools/sprite-bake/bake_jojo.py [--ow-h 40] [--bt-h 74] [--colors 46] [--contact PATH]
 """
@@ -24,13 +25,15 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = 3                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--ow-h', type=int, default=40)       # standing height of the overworld sprite in rows (Tom 43; Jojo is a little shorter)
-ap.add_argument('--bt-h', type=int, default=74)       # battle: height in game pixels of a standing figure
+ap.add_argument('--ow-h', type=int, default=42)       # standing height of the overworld sprite in rows (Amy 5'5" 41.7, Tom 5'11" 43; Jojo is 5'6")
+ap.add_argument('--bt-h', type=int, default=133)      # battle: height in game pixels of a standing figure (5'6" at 2.013 px per inch: Justin 6'4" = 153, TNB 141, Amy 131)
 ap.add_argument('--colors', type=int, default=46)
-ap.add_argument('--ratio', type=float, default=0.42)   # hair-to-chin over figure height, front and back (TNB .433, Boppy .40)
-ap.add_argument('--ratio-side', type=float, default=0.40)
-ap.add_argument('--k-front', type=float, default=1.5)
-ap.add_argument('--k-side', type=float, default=1.4)
+ap.add_argument('--ratio', type=float, default=0.365)   # walk: top-of-hair to chin over figure height, front and back (adult average .363)
+ap.add_argument('--ratio-side', type=float, default=0.34)
+ap.add_argument('--ratio-bt', type=float, default=0.42) # battle head share (Tom .43, TNB .45); gives a 49 px face at 133 px
+ap.add_argument('--k-front', type=float, default=None)  # override the solved enlargement factors (testing)
+ap.add_argument('--k-side', type=float, default=None)
+ap.add_argument('--k-bt', type=float, default=None)
 ap.add_argument('--contact', default=None)
 ap.add_argument('--bt-contact', default=None)
 args = ap.parse_args()
@@ -39,7 +42,7 @@ os.makedirs(ART, exist_ok=True)
 WALK = [f'{d}_{n}' for d in ('down', 'up', 'left', 'right') for n in ('stand', 'step1', 'step2')]
 BT = ['b_run', 'b_xstep', 'b_reach', 'b_release', 'b_follow', 'b_celeb1', 'b_celeb2', 'b_high']
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'jojo-sheet-v1.png'), [WALK[0:3], WALK[3:6], WALK[6:9], WALK[9:12], BT[0:4], BT[4:8]], by_position=True, min_area=1500).items():
+for nm, im in slice_sheet(os.path.join(SRC, 'jojo-sheet-v2.png'), [WALK[0:3], WALK[3:6], WALK[6:9], WALK[9:12], BT[0:4], BT[4:8]], by_position=True, min_area=1500).items():
     poses[nm] = im
 
 def despill_pink(img):
@@ -52,8 +55,6 @@ for _n in list(poses):
     poses[_n] = despill_pink(poses[_n])
 
 # hand-set head boxes (top, chin, x0, x1) where arms or a ponytail confuse the detector
-HEAD_BOX = {}
-CHIN_FIX = {}
 def _auto_head(img):
     a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
     top = int(np.where(a.any(1))[0].min())
@@ -62,10 +63,16 @@ def _auto_head(img):
     chin = lo + int(np.argmin(ws[lo:hi]))
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, int(xs.min()), int(xs.max())
-# hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
-HEAD_BOX = {}
-CHIN_FIX = {'w_left_stand2': 107}   # auto chin landed on the shirt collar
-def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
+# Hand-set head boxes (top of hair, chin, x0, x1), read off zoomed crops of the v2 sheet. The auto chin lands on the shirt collar.
+HEAD_BOX = {'b_run': (3, 59, 17, 94), 'b_xstep': (3, 58, 40, 116), 'b_reach': (4, 62, 62, 142), 'b_release': (3, 59, 24, 115),
+            'b_follow': (3, 63, 14, 100), 'b_celeb1': (6, 65, 24, 92), 'b_celeb2': (26, 77, 55, 118), 'b_high': (35, 88, 46, 104)}
+ARMS_FRONT = ('b_celeb2', 'b_high')
+HEAD_MARGIN = {'b_celeb1': 3, 'b_celeb2': 0, 'b_high': 0}   # raised arms sit right beside the head: keep them out of the warp box
+CHIN_FIX = {}
+for _v, _c in (('down', 61), ('up', 61), ('left', 58), ('right', 58)):
+    for _n in ('stand', 'step1', 'step2'):
+        CHIN_FIX[f'{_v}_{_n}'] = _c
+def _warp_head(arr, x0, x1, y0, ay, ax, k, taper, xstep=False):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
     from scipy import ndimage as ndi
@@ -80,6 +87,7 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)             # which source row (by sorted order) covers each dest row
     srcdist = dist[order][idx]; sr = ay - srcdist + .0               # source row (y) for each dest row
     sc = s[order][idx]
+    if xstep: sc = np.where(dist >= taper, k, 1.0)[order][idx]   # sideways full k above the chin and none below: no smeared shoulder rows (battle poses)
     Wd = int(np.ceil((x1 - x0) * k)) + 2
     xd = np.arange(Wd) + .0
     xc = (ax - x0) * k                                               # dest x of the anchor column
@@ -92,19 +100,41 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
-def bigger_head(img, name, k, pad=160, taper=22, margin=8):
+def _big_parts(mask, min_area):
+    """Boolean mask of the connected parts of `mask` that have at least min_area pixels."""
+    from scipy import ndimage as ndi
+    lab, n = ndi.label(mask)
+    if not n: return mask
+    areas = ndi.sum(mask, lab, range(1, n + 1))
+    return np.isin(lab, [i + 1 for i, a in enumerate(areas) if a >= min_area])
+def bigger_head(img, name, k, pad=160, taper=None, margin=8):   # taper 6: only the neck blends; a long taper stretched the shoulders into wings
+    if taper is None: taper = 4 if name.startswith('b_') else 6   # battle poses: arms and shoulders sit right under the chin, so blend only the neck
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
     top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
     chin = CHIN_FIX.get(name, chin)
+    margin = HEAD_MARGIN.get(name, margin)
     x0, x1 = max(0, x0 - margin), min(W, x1 + margin)            # keep ears and hair edges inside the box
     ax = (x0 + x1) / 2.0
     # the taper back to scale 1 happens BELOW the chin (in the neck), so the whole face, jaw included, keeps the full enlargement
     X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + taper + pad
-    out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
+    # shirt pixels under the chin stay where they were (stretching them smeared light streaks across the neck): lift them out of the warp, paste them back after
+    q = arr.astype(int); shirt = (q[:, :, 2] >= q[:, :, 0] + 8) & (q[:, :, 2] >= q[:, :, 1] - 4) & (q[:, :, 3] > 20)
+    shirt[:chin + pad - 6] = False
+    keep = arr.copy(); keep[~shirt, 3] = 0
+    arr[shirt, 3] = 0
+    orig = arr.copy()
+    out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper, xstep=name.startswith('b_'))
     arr[Y0:AY, X0:X1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
+    big.alpha_composite(Image.fromarray(keep, 'RGBA'))
+    if name in ARMS_FRONT:      # raised arms beside the head: the bigger head would hide them, so paste them back in front of it
+        fr = orig.copy(); fr[:, :, 3] = np.where(shirt, 0, fr[:, :, 3])
+        cols = np.arange(fr.shape[1])[None, :]; rows = np.arange(fr.shape[0])[:, None]
+        fr[:, :, 3] = np.where(((cols < X0) | (cols >= X1)) & (rows < AY), fr[:, :, 3], 0)
+        fr[:, :, 3] = np.where(_big_parts(fr[:, :, 3] > 20, 150), fr[:, :, 3], 0)      # only the arms, not stray cheek or hair bits
+        big.alpha_composite(Image.fromarray(fr, 'RGBA'))
     return big.crop(big.getbbox())
 def _solve_k(name, ratio):
     t, c = (HEAD_BOX.get(name) or _auto_head(poses[name]))[:2]; c = CHIN_FIX.get(name, c); lo, hi = 1.0, 3.5
@@ -118,17 +148,24 @@ def view_of(name):
     return 'bt' if name.startswith('b_') else name.split('_')[0]
 def ratio_of(view):
     return args.ratio if view in ('down', 'up') else args.ratio_side
-KV = {}
-for v, nm in (('down', 'down_stand'), ('up', 'up_stand'), ('left', 'left_stand'), ('right', 'right_stand')):
-    KV[v] = _solve_k(nm, ratio_of(v))
-KV['bt'] = (KV['left'] + KV['right']) / 2
-# The chin detector lands high on her (glasses and nose narrow the face), so the solved factors run far too large; set by eye to match TNB and Justin.
-KV = {'down': args.k_front, 'up': args.k_front, 'left': args.k_side, 'right': args.k_side, 'bt': args.k_side}
+def _kfor(view, ratio):
+    names = {'down': ['down_stand'], 'up': ['up_stand'], 'side': ['left_stand', 'right_stand']}[view]
+    return sum(_solve_k(n, ratio) for n in names) / len(names)
+KV = {'down': args.k_front or _kfor('down', args.ratio), 'up': args.k_front or _kfor('up', args.ratio),
+      'left': args.k_side or _kfor('side', args.ratio_side), 'right': args.k_side or _kfor('side', args.ratio_side)}
+KV['bt'] = args.k_bt or _kfor('side', args.ratio_bt)
 print('head factors', {k: round(v, 3) for k, v in KV.items()})
 if os.environ.get('NOHEAD'):
     KV = {k: 1.0 for k in KV}
+# Walking frames for the battle (she walks on and off in Round with Jojo): the right-facing walk row with the BATTLE head, so the head does not
+# jump when she switches to the throw poses. Named w_right_stand, w_right_step1, w_right_step2 in the battle atlas.
+BW = {'w_' + n: bigger_head(poses[n], n, KV['bt']) for n in ('right_stand', 'right_step1', 'right_step2')}
+def _despeckle(img, min_area=40):
+    a = np.array(img); a[:, :, 3] = np.where(_big_parts(a[:, :, 3] > 20, min_area), a[:, :, 3], 0)
+    return Image.fromarray(a, 'RGBA')
 for _n in list(poses):
-    poses[_n] = bigger_head(poses[_n], _n, KV[view_of(_n)])
+    poses[_n] = _despeckle(bigger_head(poses[_n], _n, KV[view_of(_n)]))
+BW = {n: _despeckle(v) for n, v in BW.items()}
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -278,8 +315,9 @@ ow_rects = pack(ow_big, os.path.join(ART, 'jojo-ow.webp'))
 
 # ---------------------------------------------------------------- battle poses (painted at 2x, one canvas size, feet on the bottom row)
 BK = 2
-fb = args.bt_h * BK / poses['down_stand'].height * float(os.environ.get('BT_SCALE', '0.92'))   # the battle poses are drawn a little closer than the walk rows
+fb = args.bt_h * BK / BW['w_right_stand'].height       # the standing figure (side view, battle head) is exactly bt_h game pixels tall
 bt_big = {n: scaled_to(poses[n], fb) for n in BT}
+bt_big.update({n: scaled_to(v, fb) for n, v in BW.items()})
 def feet_cx(img):
     """x of the feet: centroid of the lowest 22 percent of the silhouette."""
     al = np.array(img)[:, :, 3] > 0
@@ -300,7 +338,7 @@ for path, frames, cols in ((args.contact, ow_big, 5), (args.bt_contact, bt_canva
             sheet.alpha_composite(frames[n], ((i % cols) * w0, (i // cols) * h0))
         sheet.save(path)
 
-meta = {'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand'])}, 'bt': {'w': Wb // BK, 'h': Hb // BK}, 'colors': len(ow_pal)}
+meta = {'ow': {'w': len(ow_rows['down_stand'][0]), 'h': len(ow_rows['down_stand'])}, 'bt': {'w': Wb // BK, 'h': Hb // BK, 'stand': args.bt_h}, 'colors': len(ow_pal)}
 print(json.dumps(meta))
 js = ["'use strict';",
       "// data/jojo-hires.js: Jojo (TNB's sister), from her painted sheet (Oct 2026). GENERATED by tools/sprite-bake/bake_jojo.py; do not hand-edit.",
