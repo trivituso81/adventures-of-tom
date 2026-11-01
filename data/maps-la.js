@@ -1139,8 +1139,11 @@ const LA_ROOMS=[
   // Tom's house, 3468 2nd Ave. Main floor: square painted plate art/tomhouse.webp (engine/plate.js), 16 x 16 tiles, the whole ground floor cut away
   // with the garden path in front. The mask is the walk map: '#' blocks, '.' walks. The exit is the bottom of the garden path (7 to 8, 15); the front door is
   // painted at (7 to 8, 10). The doorway at the top middle (7,1) is an edge portal to the primary suite (map id tomsuite).
-  // Walkable: path, front hall (x7), the open floor between the dining rug and the sofa (x6 to x8, y4 to y8), the hall to the suite (x7). The kitchen, living
-  // room corner and the TV wall are painted dressing only (the island and the sofa block every way in).
+  // Walkable (tomhouse3d, 2026-10-31): the path, the front door, the hall to the suite (x7), and every gap in the open plan. A tile is walkable when Tom's FEET
+  // (tile centre, tile bottom) land on bare floor in the painting. Row 3 is the aisle between the kitchen counters and the island: its floor is hidden
+  // by the island top, so art/tomhouse-fg.webp (tools/make_tomhouse_fg.py, PLATE_BEHIND.tomhouse) is drawn over Tom there and the countertop hides his legs.
+  // Full ring around the island: (8,3) (9..11,3) (12,3) (12,4) (12,5) (9..11,5) (8,5) (8,4). Also the row behind the dining head chair (row 3), both
+  // ends of the table (3,4) (5,4) and the south side of the dining table (row 8, x3 to x7). The sofa, coffee table, armchairs, lamp and TV wall still block.
   {id:'tomhouse',w:16,h:16,door:[8,15],door2:[7,15],spawn:{x:8,y:14},
     edges:[{at:[7,1],to:'tomsuite',spawn:{x:3,y:8},facing:'down'}],
     style:{floor:'#c9a476',alt:'#d2ad80',wall:'#d8dbde',trim:'#f4f4f2',pattern:'wood',rug:'#e8eaee'},
@@ -1149,12 +1152,12 @@ const LA_ROOMS=[
       '################',
       '#######.########',
       '#######.########',
-      '#######.########',
-      '#####....#######',
+      '###..........###',
+      '###.#....###.###',
+      '######.......###',
       '######...#######',
       '######...#######',
-      '######...#######',
-      '######..########',
+      '###.....########',
       '#######.########',
       '#######..#######',
       '######....######',
@@ -1164,10 +1167,11 @@ const LA_ROOMS=[
       '################'],
     npcs:[],
     objects:[
-      ['wetbar',3,1,4,3,'Wet bar','Blue accent wall, white shaker cabinets, walnut shelves of bottles, a glass cabinet and a wine fridge. TNB made the coasters.'],
-      ['island',9,4,3,2,'Kitchen island','White quartz with gray veins. Bready Mercury sits by the sink in his jar, fed this morning, bubbling with pride.',
+      ['wetbar',3,1,4,2,'Wet bar','Blue accent wall, white shaker cabinets, walnut shelves of bottles, a glass cabinet and a wine fridge. TNB made the coasters.'],
+      ['island',9,4,3,1,'Kitchen island','White quartz with gray veins. Bready Mercury sits by the sink in his jar, fed this morning, bubbling with pride.',
         {when:[{chapter:6,notFlag:'ch6-clear',text:'White quartz with gray veins. A clean round spot in the flour where the jar used to sit, and tiny footprints leading to the open window.'}]}],
-      ['dining',3,5,3,4,'Dining table','Walnut table, gray upholstered chairs, a striped rug and a chandelier of white glass globes.'],
+      ['dining',3,5,3,3,'Dining table','Walnut table, gray upholstered chairs, a striped rug and a chandelier of white glass globes.'],
+      ['dining',4,4,1,1,'Dining table','Walnut table, gray upholstered chairs, a striped rug and a chandelier of white glass globes.'],
       ['pot',8,8,1,2,'Rubber plant','A rubber plant by the photo wall. TNB says it is thriving. Tom says it is thriving because TNB talks to it.'],
       ['couch',9,6,5,4,'The couch','A deep gray sectional, perfect for six-hour gaming sessions. One dent is TNB-shaped, from Saturday horror nights.']]},
   // Tom's house, primary suite: square painted plate art/tomsuite.webp, 16 x 16 tiles. The white door on the left wall (3,7) is the way back to the main floor.

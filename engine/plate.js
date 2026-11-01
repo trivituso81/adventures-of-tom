@@ -13,7 +13,7 @@ PLATES.crown={src:'art/crown.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.lofts={src:'art/lofts.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 PLATES.loftlobby={src:'art/loftlobby.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 // Tom's house: two painted rooms, the main floor (16 x 24 tiles) and the primary suite (16 x 15), both 64 art px per tile.
-PLATES.tomhouse={src:'art/tomhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08};
+PLATES.tomhouse={src:'art/tomhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/tomhouse-fg.webp?v=tomhouse3d'};
 PLATES.carbarn={src:'art/carbarn.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.coffee={src:'art/coffee.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
 PLATES.boiler={src:'art/boilerroom.webp?v=20261029',px:64,img:null,ready:false};
@@ -230,10 +230,15 @@ PLATE_BEHIND.stacks=[
 // painted counter, drawn over the shopkeeper so the top and front hide her legs. Rect zones in art px (64 per tile); base = the counter's front edge.
 PLATE_BEHIND.shop=[{x:255,y:296,w:502,h:152,base:448,fg:true}];
 PLATE_BEHIND.nickels=[{x:305,y:255,w:430,h:155,base:410,fg:true}];
+// TOM'S KITCHEN ISLAND (2026-10-31, tomhouse3d): row 3 is the aisle behind the island. art/tomhouse-fg.webp (tools/make_tomhouse_fg.py) holds only the countertop,
+// sink, limes and flowers; drawn over anyone standing on row 3 so the top hides their legs. Rect in art px (64 per tile): plate x 676 to 940, y 244 to 343.
+// base 280 = the countertop's lower edge: row 3 (feet 256) is behind it, row 4 (feet 320) and the stools are in front.
+PLATE_BEHIND.tomhouse=[{x:552,y:199,w:218,h:82,base:280,fg:true,jar:true}];
+let plateTime=0;   // last frame time, so the island zone can redraw Bready Mercury on top of its own cutout
 function plateWalkBehind(map,plate) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
   const s=T/64, list=[...map.npcs,...followers,player];
-  let ctxDone=false;
+  let ctxDone=false, jarOver=false;
   for(const z of zones) {
     if(z.pts&&!z.bb) z.bb=[Math.min(...z.pts.map(q=>q[0])),Math.min(...z.pts.map(q=>q[1])),Math.max(...z.pts.map(q=>q[0])),Math.max(...z.pts.map(q=>q[1]))];
     const x0=z.pts?z.bb[0]:z.cx!==undefined?z.cx-z.rx:z.x, x1=z.pts?z.bb[2]:z.cx!==undefined?z.cx+z.rx:z.x+z.w;
@@ -255,13 +260,20 @@ function plateWalkBehind(map,plate) {
     if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031f'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
     else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
     ctx.restore();
+    if(z.jar) jarOver=true;
   }
   if(ctxDone) ctx.imageSmoothingEnabled=false;
+  if(jarOver&&map.id==='tomhouse') drawHomeJar(plateTime);   // the jar stands on the island top, so it is in front of anyone behind the island
+}
+// Bready Mercury on Tom's kitchen island, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
+function drawHomeJar(time) {
+  if(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'})) return;
+  drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
 }
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
-  if(map&&map.id==='tomhouse'&&!(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'}))) drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
+  if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).
   if(map&&map.id==='crown') { const k=crownJarState(); if(k!==null) { const s=T/64; drawBreadyJar(672*s,258*s,1.24*s,time,k*34*s,1-k); } }
   if(!map||map.id!=='gate00'||typeof infFlag!=='function'||!infFlag('ch11-closed')) return;
