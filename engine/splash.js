@@ -530,8 +530,8 @@ function splashScene(W,H,panelH,time) {
 // Positions are in the picture's own pixels (941 x 1671) and are mapped through the same "cover, top" fit the CSS uses.
 // h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
 const SPLASH_IMG={w:941,h:1671};
-const SPLASH_ALL=1.0;   // Tom 2026-11-01: everyone stands back a bit further (was 1.1 since 2026-10-29), see SPLASH_BACK
-const SPLASH_BACK=35;   // Tom 2026-11-01: feet lifted this many picture pixels so the family stands further back on the plaza
+const SPLASH_ALL=0.93;   // Tom 2026-11-01: everyone stands back a bit further (was 1.1 since 2026-10-29), see SPLASH_BACK; Tom 14:15 'just a little bit further': 1.0 to 0.93 and lift 35 to 60
+const SPLASH_BACK=60;   // Tom 2026-11-01: feet lifted this many picture pixels so the family stands further back on the plaza
 // Tom 2026-11-01: the title uses the new painted standing Tom. Set TITLE_TOM_RIDE=true to bring back the old painted Tom carrying Rose (needs a new ride sheet to match).
 const TITLE_TOM_RIDE=false,TITLE_TOM_H=308;   // TITLE_TOM_H: standing Tom's height in picture pixels. Tom 2026-11-01: adults at real height, Justin 6'4" = 330 (Tom 5'11" 308, TNB 5'10" 304, Boppy 5'7" 291, Amy and Deedee 5'5" 282); kids unchanged
 const SPLASH_SPOTS=[

@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Welcome screen, a little bit further back (`back2`)
+
+- Tom (14:15): "just a little bit further".
+- Call made: one more notch of the same move as `back1`. `SPLASH_ALL` 1.0 to 0.93 (about 7% smaller) and `SPLASH_BACK` 35 to 60 picture px. Relative heights unchanged.
+- Tested: welcome screen at 390x844 looked at; `smoke.py`. Stamp `build back2`.
+
 ## 2026-11-01 (day, 43): Michael and the kids under the size rules (`docs2`)
 
 - Tom (13:49): apply the head and body rules to Michael (6'4") and the kids he holds: Lachlan's head Grace's size, Isla's head Rose's size.
