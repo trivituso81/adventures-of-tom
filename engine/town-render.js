@@ -14,13 +14,16 @@ function walkPhase(a) {
   if(a.move!==a._stepMove) { a._stepMove=a.move; a.stepN=(a.stepN||0)+1; }
   return clamp(a.move.elapsed/a.move.duration,0,1);
 }
+// Playable characters (Tom or whoever Tom is playing, and the party followers) and Michael are drawn 15% bigger than the NPCs (Tom, 2026-11-01).
+const OW_PLAYABLE_BOOST=1.15;
+function owBoost(a) { return (a.isPlayer||a.kid||a.sheet==='michael')?OW_PLAYABLE_BOOST:1; }
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
   const rider=a.isPlayer?roseRider():null;
   // Rose on his shoulders: one painted figure (OW.tomRide, data/tomride-use.js); falls back to the layered pixel Rose.
   const painted=!!(rider&&OW.tomRide&&(typeof playerMember!=='function'||playerMember().id==='tom'));
   if(painted) set=OW.tomRide;
-  const p=position(a),k=actorK()*(set.k||1);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
+  const p=position(a),k=actorK()*(set.k||1)*owBoost(a);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0&&ph<.55?1+(a.stepN%2):0;
@@ -523,7 +526,7 @@ function actorHeadAnchor(a) {
     else if(v) set=villagerSet(v);
   }
   if(!set) return {cx,top:base-32,w:20};   // the layered pixel figure (drawNpc) is 32 px tall
-  const k=ak*(set.k||1),frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]),fr=(frames||set.down)[0];
+  const k=ak*(set.k||1)*owBoost(a),frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]),fr=(frames||set.down)[0];
   let row=0; while(row<fr.length-1&&typeof fr[row]==='string'&&!/[^. ]/.test(fr[row])) row++;
   return {cx,top:Math.round(base-fr.length*k+row*k),w:fr[0].length*k};
 }

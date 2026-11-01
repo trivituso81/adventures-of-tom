@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 43): Playable characters and Michael 15% bigger on the map (`big1`)
+
+- Tom (15:02): all characters 15% larger in the overworld; then narrowed to playable characters and Michael only, not NPCs.
+- engine/town-render.js: new `owBoost(a)` (1.15 for the player, party followers and Michael, else 1) multiplies the draw scale in `drawSheetActor` and `actorHeadAnchor`. Shadow, kiss lean and carried-Rose scale with it. NPCs unchanged.
+- Tested: `smoke.py`, `jpark_test.py`; town and 2nd Ave looked at in portrait. Tag `big1`, stamp `build big1`.
+
 ## 2026-11-01 (day, 43): Tom's phone clips merged, Olivia has her voice (`clips5`)
 
 - Tom (14:46) sent `local-clips-export_5.json` (178 clips; 5 repeats of the same line, newest kept = 173). New tool `tools/bake-page/merge-local.js` does the merge (battle into `data/voice/<id>.js`, dialogue into the chapter file that holds the key, silence trim and speaker fx on dialogue, mono 32 kHz 48 kbps).
