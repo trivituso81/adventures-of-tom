@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 34): Olivia's 11 ability sheets baked (`olivia5`)
+
+- All 11 painted ability sheets are cut and loaded as sprite keys on `BATTLE_SPRITES.olivia` (59 frames, each with a mirrored `R` copy): `fc_` Fact Check, `sb_` SNACK BAG, `ln_` LivNews Live, `ip_` Inverted Pyramid, `du_` Double Under, `st_` Story Time, `mi_` MICHAEL!, `bb_` Better Than Bobby, `ir_` Is This Real?, `ml_` Marine Layer, `lk_` LACHLAN, NO!. Frame names follow `claude/olivia-ability-prompts.md` (for example `fc_jab`, `du_jump_a`, `mi_yell_2`).
+- `tools/sprite-bake/bake_olivia_battle.py` now cuts every sheet by blob position (rows assigned by vertical centre), scales each sheet by face height so her head never changes size between moves, and keeps jump and sprint heights (`du_jump_b`, `lk_sprint` sit above the ground line). New art: `art/chars/olivia-<sheet>.webp` (lossy), `data/olivia-battle-hires.js` (OLIVIA_BT.sets), and `data/olivia-battle-use.js` builds the keys. `AV` and the `?v=` tags are `olivia5`.
+- She is still not a party member, so nothing changes in play. Not played on the phone. The build stamp now reads `build olivia5` (it includes the `tomportrait1` portrait).
+
 ## 2026-11-01 (day, 35): Tom's painted portrait (`tomportrait1`)
 
 - Tom (01:14) sent a new oil-painting portrait of himself. `portraits/tom.png` is now that painting, cropped square to match Justin, Amy and Boppy: hair near the top edge, chin about 90% down, shoulders showing (replaces the old cut-out with a transparent background).
