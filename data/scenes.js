@@ -202,8 +202,11 @@ SCENES.ch1Grump=[
 SCENES.ch1Pond=[
   {flag:'ch1-pond'}, {call:()=>storyWorld()},
   {hide:'The Big One'},
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[21,15],dir:'up',carry:'tin'}},
+  // The painted heist frames (mh_*) face LEFT, toward the party, and already hold the tin, so no separate tin prop here.
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:2,at:[21,15],dir:'left'}},
+  {pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'left'},
   {walk:'Big Mudling',to:[[21,14],[20,14],[20,13],[19,13],[19,12]],speed:.3,onStep:()=>sfx.splat()},
+  {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Grace',lines:['THERE! The thief! He still has the tin!']},
   {face:'Big Mudling',dir:'left'},
   {call:()=>{ sfx.splat(); sfx.thud(); }},
@@ -211,6 +214,8 @@ SCENES.ch1Pond=[
   {talk:'The Big One',lines:['GLUB. Is that a pie? For me?']},
   {talk:'Big Mudling',lines:['Blub. For you, boss.']},
   {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry=null; setFlag('ch1-crown'); sfx.pickup(); }},
+  {pose:'Big Mudling',f:null},
+  {face:'Big Mudling',dir:'right'},
   {walk:'Big Mudling',to:[[20,12]],speed:.3},
   {call:()=>sfx.splat()}, {despawn:'Big Mudling'},
   {face:'The Big One',dir:'down'},
