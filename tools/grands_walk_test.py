@@ -21,10 +21,22 @@ def stand(pg,x,y,d):
     pg.evaluate(f"()=>{{ player.x={x}; player.y={y}; player.facing='{d}'; player.move=null; placeFollowers(); camera.snap=true; }}"); pg.wait_for_timeout(500)
 def pos(pg): return tuple(pg.evaluate("()=>[player.x,player.y]"))
 def step(pg,key):
-    pg.keyboard.down(key); pg.wait_for_timeout(110); pg.keyboard.up(key); pg.wait_for_timeout(420)
-def freeze(pg): pg.evaluate("()=>{ for(const n of currentMap.npcs){ n.roam=0; n.move=null; } }")
+    # hold the key until the step has really started (a slow software-rendered browser can drop a 110 ms tap), then wait for it to finish
+    p0=pos(pg); pg.keyboard.down(key)
+    for i in range(40):
+        if pg.evaluate("()=>!!player.move")  or pos(pg)!=p0: break
+        pg.wait_for_timeout(25)
+    pg.keyboard.up(key)
+    for i in range(60):
+        if not pg.evaluate("()=>!!player.move"): break
+        pg.wait_for_timeout(25)
+    pg.wait_for_timeout(120)
+def freeze(pg):
+    # park the residents on open rug away from every lane the test walks (a wanderer standing in a lane would block a key walk, which is correct game behaviour, not a bug)
+    pg.evaluate("()=>{ const park=[[6,8],[11,8],[9,9],[7,9]]; currentMap.npcs.forEach((n,i)=>{ const q=park[i%park.length]; n.x=q[0]; n.y=q[1]; if('px' in n)n.px=q[0]*64; if('py' in n)n.py=q[1]*64; n.roam=0; n.path=[]; n.idle=1e9; }); }"); pg.wait_for_timeout(200)
+def who(pg): return pg.evaluate("()=>({npcs:currentMap.npcs.map(n=>[n.name,n.x,n.y]),fol:followers.map(f=>[f.name||(f.member&&f.member.id),f.x,f.y]),dialog:dialog.active})")
 def walk(pg,start,moves,facing='down'):
-    stand(pg,start[0],start[1],facing); trail=[pos(pg)]
+    freeze(pg); stand(pg,start[0],start[1],facing); trail=[pos(pg)]
     for key,n in moves:
         for i in range(n): step(pg,key); trail.append(pos(pg))
     return trail
@@ -62,8 +74,10 @@ with sync_playwright() as p:
     check('floor, counter aisle, nook, sofa aisle, arch, east side: ended at %s'%(t[-1],),t[-1]==(12,5))
     t=walk(pg,(8,10),(('ArrowLeft',6),),'left'); check('west along the stools to %s'%(t[-1],),t[-1]==(2,10))
     t=walk(pg,(8,10),(('ArrowRight',6),),'right'); check('east along the dining table to %s'%(t[-1],),t[-1]==(14,10))
+    if t[-1]!=(14,10): print('   blocked, who is where:',t,who(pg))
     t=walk(pg,(8,8),(('ArrowDown',7),),'down'); print('gate trail',t); pg.wait_for_timeout(900); skip(pg)
     check('walk out through the gate lane and the door to the street (trail %s)'%(t[-1],),pg.evaluate("()=>currentMap.id")=='row' and (8,14) in t)
+    if (8,14) not in t: print('   gate stalled:',t,who(pg),pg.evaluate("()=>({tr:!!transition,intro:intro.active,mv:player.move&&[player.move.tx,player.move.ty],face:player.facing,hid:player.hidden,map:currentMap.id,solid8_9:currentMap.solid[9*16+8]})"))
     pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1500); skip(pg); freeze(pg)
     # touching the furniture from the lanes
     TOUCH=[(3,7,'down','cookie counter from the aisle'),(4,10,'up','cookie counter from the stool lane'),(8,5,'down','sofa from behind'),(8,7,'up','sofa from the front'),
