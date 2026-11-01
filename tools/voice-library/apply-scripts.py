@@ -9,7 +9,7 @@ and skipped (hand-written chapter scripts and battle-scripts.json are never touc
 Every script is checked against claude/voice-rules.md and the v4 tag rules (2026-11-01): spoken words equal the line
 text (Tah Tah, spelled-out numbers, stretched vowels and added ellipses allowed), no em dashes, tag count by length
 (1 tag up to 4 words, 2 up to 14, 3 beyond), at most 2 descriptors per tag, and no body, prop or sound-noun words.
-Usage (repo root): python3 tools/voice-library/apply-scripts.py <scripts.json> [tag]
+Usage (repo root): python3 tools/voice-library/apply-scripts.py <scripts.json> [tag]   (add --check to validate only, writing nothing)
 Then: python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js
 """
 import json, re, sys, glob
@@ -41,8 +41,15 @@ def check(text, script):
             if w in BAD: errs.append('body, prop or sound word %r in [%s]' % (w, t))
     return errs
 def main():
-    items = json.load(open(sys.argv[1]))
-    tag = sys.argv[2] if len(sys.argv) > 2 else sorted(glob.glob('tools/voice-library/scripts/directions-*.json'))[-1][-13:-5]
+    args = [a for a in sys.argv[1:] if a != '--check']; checkonly = '--check' in sys.argv
+    items = json.load(open(args[0]))
+    if checkonly:
+        bad = 0
+        for it in items:
+            e = check(it['text'], it['script'])
+            if e: bad += 1; print('REJECT', it['voice'], '|', it['text'][:50], '|', '; '.join(e))
+        print('%d of %d rejected' % (bad, len(items))); sys.exit(1 if bad else 0)
+    tag = args[1] if len(args) > 1 else sorted(glob.glob('tools/voice-library/scripts/directions-*.json'))[-1][-13:-5]
     dpath = 'tools/voice-library/scripts/directions-%s.json' % tag
     d = json.load(open(dpath)); bo = json.load(open('tools/voice-library/battle-overrides.json'))
     bad = 0
