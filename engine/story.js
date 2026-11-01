@@ -306,7 +306,7 @@ const SCENE_OPS={
   partCard:o=>({t:0,start(){ this.t=0; intro.card={part:o.partCard,title:o.title,t:0,done:!!o.done}; sfx.levelChime&&sfx.levelChime(); },
     update(dt){ this.t+=dt; intro.card.t=this.t; if(this.t>=(o.time||3)) { intro.card=null; return true; } return false; }}),
   partClear:o=>S.call(()=>savePartClear()),
-  card:o=>({t:0,start(){ this.t=0; intro.card={n:o.card,t:0,done:!!o.done}; sfx.levelChime&&sfx.levelChime(); },
+  card:o=>({t:0,start(){ this.t=0; if(!o.done) cardBackdrop(o.card); intro.card={n:o.card,t:0,done:!!o.done}; sfx.levelChime&&sfx.levelChime(); },
     update(dt){ this.t+=dt; intro.card.t=this.t; if(this.t>=(o.time||3)) { intro.card=null; return true; } return false; }}),
   battle:o=>({start(){ this.m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle); this.go=false; if(this.m) { startBattle(this.m,{tut:o.tut,level:o.level}); this.go=true; } },
     update(){ if(!this.go) return true; if(battle.active) return false;
@@ -369,6 +369,26 @@ function playScene(script,opts={}) {
   intro.steps=compileScene(list);
   if(!opts.keep) intro.steps.push(S.call(()=>{ if(intro.active) endIntro(); }));   // scenes end themselves unless told not to
   if(typeof clearInput==='function') clearInput();
+}
+
+// Where a chapter begins, for the title card's backdrop: the chapter's own start {map,x,y} if it has one; otherwise the arrival
+// spot the chapter plays from (LA chapters 2, 4, 6, 8: the Angel City cab stand; home chapters 3, 5, 7, 9: the Long Island taxi
+// depot; chapter 13: the cab stand). Chapters 1 and 10 already play where they start.
+function chapterCardSpot(n) {
+  const st=CHAPTERS[n]&&CHAPTERS[n].start;
+  if(st&&worlds[st.map]) return {map:worlds[st.map],x:st.x,y:st.y};
+  if([2,4,6,8].includes(n)&&worlds.blvd&&houseById.lacab) { const h=houseById.lacab; return {map:worlds.blvd,x:h.door.x,y:h.door.y+1}; }
+  if(n===13&&worlds.lacab) return {map:worlds.lacab,x:7,y:6};
+  if([3,5,7,9].includes(n)&&houseById.taxi) { const h=houseById.taxi; return {map:town,x:h.door.x,y:h.door.y+1}; }
+  return null;
+}
+// The card shows the chapter's starting area behind it, not whatever map was loaded. Only acts when the loaded map is a different one,
+// so a chapter that already starts where it plays is not nudged.
+function cardBackdrop(n) {
+  const sp=chapterCardSpot(n);
+  if(!sp||!sp.map||currentMap===sp.map) return;
+  currentMap=sp.map; player.x=sp.x; player.y=sp.y; player.move=null;
+  placeFollowers(); refreshAreaUI(); resize(); camera.snap=true;
 }
 
 // Chapter title card, drawn over the scene: CHAPTER N and the chapter's name.

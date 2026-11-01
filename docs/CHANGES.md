@@ -1,3 +1,9 @@
+## 2026-11-01 (day, 34): Chapter title cards show the chapter's own starting area (`cardbg1`)
+
+- Tom (00:31): the chapter title card always showed Long Island Square behind it; it should show the area where that chapter starts.
+- Cause: the opening card played before the party was moved, so it drew whatever map was loaded. Now `cardBackdrop(n)` (`engine/story.js`) switches to the chapter's start first: LA chapters 2, 4, 6, 8 show Angel City Boulevard at the cab stand; home chapters 3, 5, 7, 9 show the Square at the taxi depot; chapters 11 and up use their `start` map; chapter 13 shows the cab stand. Chapters 1 and 10, and any card already on its start map, are left alone. "Chapter complete" cards are unchanged.
+- Tested: chapter jumps 2 to 9 (map and screenshot), portrait and landscape; `smoke.py`. Not played on the phone. Stamp `build cardbg1`.
+
 ## 2026-11-01 (day, 33): Olivia's dress is the fruit-print dress (`olivia3`)
 
 - Tom (00:25): use the fruit-print dress instead of the Halloween one. New hero pose and new 3 x 3 walk sheet (cream dress printed with cherries, apples, grapes, strawberries and lemons, bell sleeves, tiered skirt, brown flats with a gold medallion), saved as `tools/sprite-bake/src/olivia-hero-v1.png` and `olivia-walk-v1.png`.
