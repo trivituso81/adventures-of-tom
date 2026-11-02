@@ -308,7 +308,8 @@ canvas.addEventListener('click',()=>{
   if(performance.now()-lastTouchTime>500&&dialog.active) advanceDialog();
 });
 
-game.addEventListener('touchmove',e=>e.preventDefault(),nonPassive);
+// A drag never scrolls the game itself, except inside the welcome page's choice list (the long chapter list scrolls).
+game.addEventListener('touchmove',e=>{ if(e.target.closest&&e.target.closest('#splash .sp-choices')) return; e.preventDefault(); },nonPassive);
 game.addEventListener('contextmenu',e=>e.preventDefault());
 
 const keyboard={

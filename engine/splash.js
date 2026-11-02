@@ -190,6 +190,12 @@ function splashSetMode(mode,sel=0) {
 }
 function splashMark() {
   document.querySelectorAll('#splash .sp-choice').forEach(b=>b.classList.toggle('sel',Number(b.dataset.i)===splash.sel));
+  // Long lists (the chapter list) scroll: keep the highlighted choice on screen when the D-pad or arrow keys move it.
+  const cur=document.querySelector('#splash .sp-choice.sel'),box=cur&&cur.parentElement;
+  if(cur&&box&&box.scrollHeight>box.clientHeight+2) {
+    const t=cur.offsetTop-box.offsetTop,b=t+cur.offsetHeight;
+    if(t<box.scrollTop) box.scrollTop=Math.max(0,t-4); else if(b>box.scrollTop+box.clientHeight) box.scrollTop=b-box.clientHeight+4;
+  }
 }
 // In a 2-column grid, up and down move a whole row (dir is the pressed direction; d is -1 or 1).
 function splashMove(d,dir) {
