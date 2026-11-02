@@ -1,7 +1,7 @@
 'use strict';
 // engine/plate.js — Painted "plate" scenes (32-bit look). A plate replaces the tile/house/object
 // drawing for one map; the tile grid stays as the invisible logic layer (collision, doors, exits, NPCs).
-const PLATES={ town:{src:'art/town.webp?v=20261030c',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=20261030c',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp?v=20261030d',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/amyhouse-fg.webp?v=amyhouse3d'}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/grands-fg.webp?v=grands3d'}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp',px:64,img:null,ready:false}, dome:{src:'art/dome.webp',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=20261029',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp?v=20261031d',px:64,img:null,ready:false} };
+const PLATES={ town:{src:'art/town.webp?v=square3',fgSrc:'art/town-fg.webp?v=square3',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=20261030c',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp?v=20261030d',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/amyhouse-fg.webp?v=amyhouse3d'}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/grands-fg.webp?v=grands3d'}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp',px:64,img:null,ready:false}, dome:{src:'art/dome.webp',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=20261029',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp?v=20261031d',px:64,img:null,ready:false} };
 PLATES.pier={src:'art/pier.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.studio={src:'art/studio.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
@@ -211,30 +211,31 @@ function drawPlateSigns(list) {
 // Zones hold only the tall object, never the ground in front of it. rect: x,y,w,h. ellipse: cx,cy,rx,ry. polygon: pts [[x,y],...].
 // A lamp post as three small shapes (head, pole, foot) so no paving is redrawn beside the pole. cx is the pole centre, y0 the top of the head, base the foot.
 const BLVD_LAMP=(cx,y0,base)=>[{x:cx-20,y:y0,w:40,h:52,base},{x:cx-8,y:y0+50,w:16,h:Math.max(10,base-y0-80),base},{x:cx-22,y:base-34,w:44,h:34,base}];
-const PLATE_BEHIND={ town:[
-  // GRUMP HOLLOW exit board and its posts (north steps)
-  {x:440,y:28,w:152,h:72,base:112},{x:418,y:4,w:28,h:108,base:112},{x:582,y:4,w:30,h:108,base:112},
-  // RIVITUSO ROW exit board and its posts (south street)
-  {x:850,y:1362,w:186,h:70,base:1525},{x:818,y:1336,w:30,h:190,base:1525},{x:1038,y:1336,w:30,h:190,base:1525},
-  // lamp posts in the plaza (head, pole, foot as separate shapes so no cobbles are redrawn beside the pole)
-  {x:175,y:566,w:42,h:62,base:730},{x:189,y:626,w:18,h:72,base:730},{x:176,y:694,w:46,h:38,base:730},
-  {x:1554,y:596,w:42,h:56,base:772},{x:1568,y:650,w:16,h:78,base:772},{x:1550,y:726,w:52,h:46,base:772},
-  // Taxi Co. roof edge and side wall, which hang over the alley beside Moon Club (alley column 22)
-  {pts:[[1434,944],[1470,926],[1560,880],[1560,1080],[1478,1080],[1470,1000]],base:1285},
-  // roof tips and chimneys of the four south shops, so anyone standing on the walkway just north of them is behind the roof (feet row 13)
-  {pts:[[118,932],[118,923],[172,923],[200,918],[302,850],[458,920],[458,932]],base:940},{x:168,y:874,w:42,h:56,base:940},          // Snail Mail
-  {pts:[[572,975],[572,936],[642,922],[700,904],[760,882],[800,896],[890,938],[890,975]],base:940},{x:592,y:868,w:50,h:108,base:940}, // Kettle Cottage
-  {pts:[[1030,940],[1030,934],[1095,908],[1177,864],[1323,931],[1323,945]],base:940},{cx:1254,cy:910,rx:50,ry:58,base:940},         // Moon Club roof and gold sphere
-  {pts:[[1432,960],[1432,954],[1500,924],[1540,902],[1600,906],[1750,912],[1754,932],[1754,960]],base:940},{x:1500,y:874,w:40,h:54,base:940}, // Taxi Co.
-  // tree canopies: plaza east, between the south shops and the two big trees at the bottom
-  {cx:1700,cy:690,rx:92,ry:74,base:800},
-  // fountain top: upper bowl and the jets above it (ground behind it, row 9, is walkable)
-  {cx:866,cy:632,rx:88,ry:46,base:700},{x:830,y:548,w:72,h:56,base:700},
-  {cx:490,cy:902,rx:75,ry:64,base:975},
-  {cx:1377,cy:905,rx:78,ry:66,base:985},
-  {cx:467,cy:1395,rx:190,ry:115,base:1592},
-  {cx:1407,cy:1408,rx:205,ry:120,base:1600}
-],
+const PLATE_BEHIND={ town:[{x:978,y:17,w:404,h:366,base:383,fg:true},
+  {x:337,y:350,w:34,h:67,base:417,fg:true},
+  {x:1222,y:359,w:33,h:66,base:425,fg:true},
+  {x:606,y:384,w:30,h:61,base:445,fg:true},
+  {x:1461,y:394,w:33,h:62,base:456,fg:true},
+  {x:0,y:0,w:1125,h:536,base:536,fg:true},
+  {x:694,y:532,w:125,h:141,base:673,fg:true},
+  {x:287,y:659,w:198,h:97,base:756,fg:true},
+  {x:480,y:539,w:46,h:228,base:767,fg:true},
+  {x:1072,y:541,w:327,h:230,base:771,fg:true},
+  {x:1310,y:0,w:610,h:940,base:940,fg:true},
+  {x:932,y:834,w:405,h:310,base:1144,fg:true},
+  {x:523,y:830,w:385,h:316,base:1146,fg:true},
+  {x:0,y:573,w:473,h:607,base:1180,fg:true},
+  {x:100,y:1111,w:40,h:75,base:1186,fg:true},
+  {x:556,y:1113,w:40,h:75,base:1188,fg:true},
+  {x:1385,y:665,w:479,h:546,base:1211,fg:true},
+  {x:1142,y:1150,w:35,h:72,base:1222,fg:true},
+  {x:0,y:1109,w:85,h:154,base:1263,fg:true},
+  {x:785,y:1397,w:334,h:260,base:1657,fg:true},
+  {x:0,y:1366,w:346,h:298,base:1664,fg:true},
+  {x:281,y:1584,w:303,h:80,base:1664,fg:true},
+  {x:1245,y:1393,w:475,h:271,base:1664,fg:true},
+  {x:1702,y:1371,w:218,h:293,base:1664,fg:true}]
+,
 // DOWNTOWN LA: the JEFFERSON PARK arch (board and both posts with their globe lamps), so Tom walks behind the posts and under the board.
 blvd:[
   // Everything below is a cutout from art/blvd-fg.webp (tools/make_blvd_fg.py, pass 3: lamps, truck, marquee, gate, arch and awnings cut by

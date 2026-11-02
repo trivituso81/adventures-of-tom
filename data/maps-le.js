@@ -57,13 +57,13 @@ const LE_PALETTES={
 // Buildings. `area` is the outdoor map the door is on; x,y,w,h its footprint. The door is the bottom middle tile.
 const LE_HOUSES=[
   {id:'bakery',area:'town',name:'Crumb Bakery',label:'CRUMB',x:2,y:3,w:5,h:5,roof:'#be7051',light:'#dc9264',wall:'#efd3a0'},
-  {id:'library',area:'town',name:'The Hush Library',label:'BOOKS',x:9,y:3,w:5,h:5,roof:'#8d7293',light:'#ad8ba7',wall:'#e8ddbd'},
+  {id:'library',area:'town',name:'The Hush Library',label:'BOOKS',x:8,y:3,w:5,h:5,roof:'#8d7293',light:'#ad8ba7',wall:'#e8ddbd'},
   {id:'greenhouse',area:'town',name:'Sprout House',label:'SPROUT',x:16,y:3,w:5,h:5,roof:'#568879',light:'#9bcab3',wall:'#c0d7b1'},
-  {id:'post',area:'town',name:'Snail Mail',label:'POST',x:2,y:14,w:5,h:5,roof:'#618697',light:'#83a7b2',wall:'#ebdcc0'},
-  {id:'tea',area:'town',name:'Kettle Cottage',label:'KETTLE',x:9,y:14,w:5,h:5,roof:'#b28d4e',light:'#d1b26c',wall:'#e8c3ac'},
-  {id:'observatory',area:'town',name:'Moon Club',label:'MOON',x:16,y:14,w:5,h:5,roof:'#657898',light:'#8b9cba',wall:'#d6d9d4'},
-  {id:'taxi',area:'town',name:'Long Island Taxi Co.',label:'TAXI',x:23,y:14,w:5,h:5,roof:'#d9a43a',light:'#f2c75a',wall:'#efe4cb',taxi:true},
-  {id:'shop',area:'town',name:"Penny's Pockets",label:'SHOP',x:23,y:3,w:5,h:5,roof:'#b9483f',light:'#d9675b',wall:'#f3e3bf',shop:true},
+  {id:'post',area:'town',name:'Snail Mail',label:'POST',x:3,y:16,w:5,h:5,roof:'#618697',light:'#83a7b2',wall:'#ebdcc0'},
+  {id:'tea',area:'town',name:'Kettle Cottage',label:'KETTLE',x:10,y:16,w:5,h:5,roof:'#b28d4e',light:'#d1b26c',wall:'#e8c3ac'},
+  {id:'observatory',area:'town',name:'Moon Club',label:'MOON',x:15,y:16,w:5,h:5,roof:'#657898',light:'#8b9cba',wall:'#d6d9d4'},
+  {id:'taxi',area:'town',name:'Long Island Taxi Co.',label:'TAXI',x:22,y:16,w:5,h:5,roof:'#d9a43a',light:'#f2c75a',wall:'#efe4cb',taxi:true},
+  {id:'shop',area:'town',name:"Penny's Pockets",label:'SHOP',x:22,y:3,w:5,h:5,roof:'#b9483f',light:'#d9675b',wall:'#f3e3bf',shop:true},
   {id:'amyhouse',area:'row',x:7,y:3,name:"Amy's House",label:'GREGORI',w:5,h:5,roof:'#c0707e',light:'#dc9aa5',wall:'#f0e2d6'},
   {id:'grands',area:'row',x:16,y:3,name:"Deedee and Boppy's House",label:'RIVITUSO',w:5,h:5,roof:'#8d7b63',light:'#b59e82',wall:'#ead9b8'},
   {id:'elliehouse',area:'row',x:9,y:11,name:"Aunt Ellie's House",label:'ELLIE',w:5,h:5,roof:'#6e4a7e',light:'#9a76a8',wall:'#eadcea'}
@@ -101,11 +101,12 @@ const LE_AREAS=[
     tag:'Eight doors, one fountain, one place that sells things.',
     eyebrow:'LONG ISLAND / THE SQUARE',
     hint:"Shops up here, Penny's Pockets to the east. Family south. Trouble north.",
-    spawn:{x:9,y:10},
+    spawn:{x:9,y:9},
     paths:[[2,9,29,10],[2,20,27,21],[7,0,8,21],[14,9,15,25],[9,9,13,12]],
     houseRoad:[10,21],
-    // Painted plate (art/town.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks. It follows the painted cobble:
-    // the plaza, the steps north, the south road, the shop-side path in the north-east, the door steps and three narrow alleys.
+    // Painted plate (art/town.webp, the v3 painting, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks. Built by tools/make_town_mask.py from the
+    // painted cobble: the walk in front of the north shops, the plaza, the steps north, the lane between Kettle Cottage and Moon Club, the shopfront street, the
+    // south street and the SCHOOL gate lane. Doors are the bottom-middle tile of each house footprint (rows 7 and 20).
     // Benches, planters, lamps, trees and fences are painted, so the mask blocks them; only things you can touch are objects below.
     plateMask:[
       '#######..#####################',
@@ -113,52 +114,52 @@ const LE_AREAS=[
       '#######..#####################',
       '#######..#####################',
       '#######..#####################',
-      '#######..#####.######.########',
-      '#######..#####.######.########',
-      '#######..#####.######.########',
-      '##........................####',
-      '##............................',
-      '##..####...#####...####.......',
-      '########..#######..####.#.#..#',
-      '##........######.........###.#',
-      '##.................##....###.#',
-      '##############..##############',
-      '##############..######.#######',
-      '##############..######.#######',
-      '##############..######.#######',
-      '#######..#####..######.#######',
-      '####.##..##.##..##.###.#..####',
+      '#######..#####################',
+      '#######..#####################',
+      '#######..#####################',
+      '####........................##',
       '##..........................##',
-      '#############....#############',
-      '##############..##############',
-      '##############..##############',
-      '##############..##############',
+      '##.......#####................',
+      '##..####.######..###########..',
+      '##........###.........########',
+      '##....................########',
+      '##############.###############',
+      '##############.###############',
+      '##############.###############',
+      '##############.###############',
+      '##############.###############',
+      '##############.###############',
+      '##############.###############',
+      '#............................#',
+      '#####................#########',
+      '############......############',
+      '############......############',
       '##############..##############'],
     // One-tile-wide stretches of the painted town (the shopfront street and the neck to the east gate): NPCs never wander onto them,
     // so nobody can plug a door or the school gate (tools/reach_test.py town checks this).
-    noGo:[...Array.from({length:26},(_,i)=>[i+2,20]),[25,9],[26,9],[27,9],[28,9],[28,10],[28,11],[28,12],[28,13]],
-    border:{kind:'tree',open:[[7,0],[8,0],[14,25],[15,25],[29,9],[29,10]]},
+    noGo:[...Array.from({length:28},(_,i)=>[i+1,21]),...Array.from({length:8},(_,i)=>[14,13+i]),[27,10],[28,10],[28,11],[29,10],[29,11]],
+    border:{kind:'tree',open:[[7,0],[8,0],[14,25],[15,25],[29,10],[29,11]]},
     exits:[[7,0,'hollow',9,20,'up'],[8,0,'hollow',10,20,'up'],[14,25,'row',12,1,'down'],[15,25,'row',13,1,'down'],
-      [29,9,'schoolyard',1,8,'right'],[29,10,'schoolyard',1,9,'right']],
+      [29,10,'schoolyard',1,8,'right'],[29,11,'schoolyard',1,9,'right']],
     // Chapter 1: a fallen branch closes the way north until Deedee's crisp is stolen (engine/story.js storyGate).
     gates:[{at:[[7,0],[8,0]],cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
       lines:['A big branch has fallen across the path to Grump Hollow.','Grace pulls on Tom’s sleeve. "Crisp first, Tata. Monsters later."']},
       // The path east to Long Island Elementary (chapter 5) is locked until conference night.
-      {at:[[29,9],[29,10]],look:'schoolgate',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
+      {at:[[29,10],[29,11]],look:'schoolgate',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
         lines:['The path east goes to Long Island Elementary. The gate is locked.','A sign on it: NO SCHOOL TODAY. Grace says it\'s the best sign in the whole town.'],
         when:[{chapter:5,lines:['The path east goes to Long Island Elementary. The gate is locked.','Amy has the key. Amy has every key.']}]}],
     objects:[
       ['sign',6,1,1,1,'North signpost','GRUMP HOLLOW, this way. Mind the mud. Mind the Grump. Mostly the Grump.'],
-      ['sign',13,22,1,1,'South signpost','RIVITUSO ROW, this way. Cookies likely. Quiet unlikely.'],
-      ['fountain',11,10,5,3,'Wish fountain','A coin reads: "Please don\'t wish for more coins."'],
+      ['sign',12,24,1,1,'South signpost','RIVITUSO ROW, this way. Cookies likely. Quiet unlikely.'],
+      ['fountain',9,10,6,3,'Wish fountain','A coin reads: "Please don\'t wish for more coins."'],
       // Placed on the painted props (the benches and their planters, the shop's hanging sign and barrel) so they match the painting.
-      ['bench',5,11,2,1,'An important bench','Reserved for people with very important sitting to do.'],
-      ['bench',20,11,2,1,'The sunny bench','Warm from the sun. Or from Gus. Hard to say.'],
-      ['planter',4,11,1,1,'Square flowers','Planted by Fern. Each one is named Steve.'],
+      ['bench',4,11,2,1,'An important bench','Reserved for people with very important sitting to do.'],
+      ['bench',18,11,2,1,'The sunny bench','Warm from the sun. Or from Gus. Hard to say.'],
+      ['planter',6,11,1,1,'Square flowers','Planted by Fern. Each one is named Steve.'],
       ['sign',26,6,1,1,'Shop sign',"PENNY'S POCKETS. Gear for the whole family. Snacks for fights. We buy almost anything.",{shopSign:true}],
-      ['taxi',26,19,2,1,'Cab 7','The only cab in town. The meter is still running. Tom is choosing not to look at it.'],
-      ['planter',26,8,1,1,'Shop flowers','A pot of marigolds with a price tag on it. Not for sale. Penny checked.'],
-      ['sign',28,8,1,1,'East signpost','LONG ISLAND ELEMENTARY, this way. Home of the Fighting Snails. Go Snails.']],
+      ['taxi',26,20,3,1,'Cab 7','The only cab in town. The meter is still running. Tom is choosing not to look at it.'],
+      ['planter',25,8,1,1,'Shop flowers','A pot of marigolds with a price tag on it. Not for sale. Penny checked.'],
+      ['sign',27,11,1,1,'East signpost','LONG ISLAND ELEMENTARY, this way. Home of the Fighting Snails. Go Snails.']],
     npcs:[
       {name:'Pip',x:3,y:10,look:'pip',lines:[
         "I'm taking my pet rock for a walk.",
@@ -491,7 +492,7 @@ LE_AREAS.push(
       '######......####...#####',
       '#######............#####'],
     border:{kind:'tree',open:[[0,8],[0,9]]},
-    exits:[[0,8,'town',28,9,'left'],[0,9,'town',28,10,'left'],[11,3,'school',14,16,'up','entry'],[12,3,'school',15,16,'up','entry']],
+    exits:[[0,8,'town',28,10,'left'],[0,9,'town',28,11,'left'],[11,3,'school',14,16,'up','entry'],[12,3,'school',15,16,'up','entry']],
     objects:[
       // The two front pillars stand in for the wings (the school face is not walkable).
       ['schoolwing',10,4,1,1,'Long Island Elementary','A brick school with tall windows. Most of them are dark. One of them keeps flickering.',{side:'left'}],
@@ -960,7 +961,7 @@ LE_AREAS.push(
     hint:'Security top left, Baggage Claim top right, the Lounge bottom left. Gate Zero is at the top.',
     spawn:{x:15,y:20},
     wild:true,
-    exits:[[14,21,'town',25,19,'down','curb'],[15,21,'town',25,19,'down','curb'],[14,1,'gatezero',9,12,'up','terrazzo'],[15,1,'gatezero',10,12,'up','terrazzo']],
+    exits:[[14,21,'town',24,21,'down','curb'],[15,21,'town',25,21,'down','curb'],[14,1,'gatezero',9,12,'up','terrazzo'],[15,1,'gatezero',10,12,'up','terrazzo']],
     // Painted plate (art/terminal.webp, engine/plate.js). '#' blocks, '.' walks. The gate clock stays drawn on top of the painting
     // (liveKinds) because its hands and coin slots change with the story. Rows 8 and 9 of the concourse and the lounge furniture are
     // blocked where the painting has benches and armchairs; the plants beside the departure board are left walkable so the corridor

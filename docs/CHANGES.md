@@ -1,3 +1,12 @@
+## 2026-11-01 (night, 69): the approved v3 Square is in, with doors, walk map and cutouts (`square3`)
+
+- Tom sent the approved Long Island Square painting and four generator mask pictures. Installed per claude/square-v3-install.md.
+- Painting: art/town.webp is the v3 art scaled to 1920 x 1664. Original kept at docs/reference/town_v3_from_tom.png. The big fountain is in the painting.
+- Walk map: rebuilt from the painting (tools/make_town_mask.py). Doors moved onto the painted doors (library, shop, post office, tea, observatory, taxi); fountain, benches, planters, Cab 7 and signposts moved to their painted places. East gate to the school is now two tiles at the right edge; arrivals from the school and the terminal updated. The lane tile (14,13) is a no-wander tile so a villager cannot plug the lane.
+- Cutouts: art/town-fg.webp (tools/make_town_fg.py). Trees, lamps, signs and posts, roofs and awnings come from three of the mask pictures, used only as masks over the original painting. The fourth (tall props) came back redrawn and moved, so the two plaza benches with their barrels are cut with GrabCut and the fountain's upper tiers by polygon (tools/town_fg_hand.json). 24 walk-behind zones in engine/plate.js (PLATE_BEHIND.town); old zones deleted. Mask copies are in docs/reference/town_v3_masks/.
+- Tested: reach_test town 0 fails, camera_clamp 0, rooms_test 0, smoke 0; portrait and landscape walk-behind shots (tools/town_behind_shots.py). Not yet played on the phone.
+- Tags: `plate.js`, `maps-le.js` `?v=square3`; ART_V `square3`; town plate and fg `?v=square3`.
+
 ## 2026-11-01 (night, 68): chapter list scrolls by touch (`scroll1`)
 
 - Tom: the chapter select screen has no scroll, so he cannot go back or see all chapters. Fact (cause): the title screen's 22-button list was already built to scroll, but engine/draw.js cancelled every touch drag inside the game (`game.addEventListener('touchmove', e=>e.preventDefault())`), and `button` and `body` are `touch-action:none` in index.html, so a finger drag on the list did nothing (mouse wheel and keyboard still worked). Measured in a touch-enabled browser: the drag moved the list 0 px before, 385 px after (portrait).
