@@ -654,6 +654,7 @@ function doorCount(region) { const list=houses.filter(h=>h.region===region); ret
 // Header, eyebrow, door count and minimap for whatever map is current.
 function refreshAreaUI() {
   $('area-name').textContent=currentMap.name;
+  { const qa=$('qt-area'); if(qa) qa.textContent=currentMap.name||''; }   // current area under the chapter label in the quest tracker
   $('eyebrow').textContent=currentMap.outside
     ? (currentMap.eyebrow||'A POCKET-SIZED PLACE')
     : REGION_NAME[regionOf(currentMap)]+' / INDOORS';

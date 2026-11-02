@@ -1,3 +1,10 @@
+## 2026-11-02 (92): The quest tracker shows the current area under the chapter label (`area1`)
+
+- Tom (11-02 12:55): in the overworld quest tip, below the chapter label, display the current area the player is in.
+- Added a gold area line (`#qt-area`) between the "CH n" label and the step text in the top left tracker. `refreshAreaUI` (engine/battle-draw.js) fills it from `currentMap.name`, so it follows every map change (The Square, Rivituso Row, Deedee and Boppy's House). It hides while the quest log is open (the log has its own header) and shrinks in landscape; a long name is cut with an ellipsis rather than wrapping.
+- Tags: `battle-draw.js?v=area1`, `main.js?v=area1`; stamp `build area1`. index.html markup and CSS only otherwise (served fresh).
+- Tested: smoke FAILS: [] with the tag check ok; looked at portrait (Square, Deedee and Boppy's House, Rivituso Row) and landscape; no page errors. NOT seen on the phone.
+
 ## 2026-11-02 (91): Chapter 2 voice clips merged, ten lines reworded to Tom's takes, the "Round {n}" template out of the Library (`ch2clips`)
 
 - Tom (11-02 12:36) sent `local-clips-export.json` (195 clips: 193 dialogue, 2 battle) as "updated voice clips for chapter 2" and asked that clips the GitHub app never uses be removed for good, and whether some are not from chapter 2.
