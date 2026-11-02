@@ -22,6 +22,7 @@ button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44p
 button:disabled{opacity:.45}
 button.gold{background:#ffd34d;color:#241b00}
 button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
+button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outline:2px solid #ffd34d}
 .hint{color:#b9b3e6;font-size:13px}.err{color:#ff8b97;font-size:13px;white-space:pre-wrap}.ok{color:#7be0a6}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}
@@ -33,8 +34,9 @@ button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
 .ref img{width:84px;height:84px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block}
 .ref input{margin-top:4px}
 .res{display:flex;gap:8px;overflow-x:auto;padding:6px 0}
-.res div{flex:none;width:130px;text-align:center;font-size:11px;color:#b9b3e6}
-.res img{width:130px;height:170px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}
+.res>div{flex:none;width:156px;text-align:center;font-size:11px;color:#b9b3e6}
+.res img{width:156px;height:156px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}
+.res .acts{display:flex;gap:6px;margin-top:6px}.res .acts button{flex:1;padding:4px 2px;min-height:40px;font-size:12px;border-radius:9px}
 #big{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;z-index:20}
 #big img{max-width:100%;max-height:100%;object-fit:contain}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
@@ -47,7 +49,7 @@ button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
 <div class="tabs" id="tabs"></div>
 <div id="list"></div>
 <div class="row"><button id="exp" class="small">EXPORT ZIP (all kept results and prompts)</button></div>
-<p class="hint">Each image costs about $0.04 plus $0.01 per reference picture. Results stay on this phone (last 5 per picture) until you export or approve.</p>
+<p class="hint">Each image costs about $0.04 plus $0.01 per reference picture. Results stay on this phone (last 5 per picture). APPROVE saves a picture and its prompt into the game's files on GitHub; REJECT saves your note for Claude. Both need the GitHub token.</p>
 </main>
 <div id="big"><img alt=""></div>
 <div id="toast"></div>
@@ -63,7 +65,7 @@ const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},s
 const XAI_BASE=()=> (Q.get('xai')||LS.get('aot-art-relay')||'https://api.x.ai').replace(/\/+$/,'');
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let DATA={entries:[]}, TAB='Characters', EDITS={}, USE={}, MSG={};
+let DATA={entries:[]}, TAB='Characters', EDITS={}, USE={}, MSG={}, NOTES={}, ARMED=null;
 try{EDITS=JSON.parse(LS.get('aot-art-edits')||'{}')||{};}catch(e){}
 const saveEdits=()=>LS.set('aot-art-edits',JSON.stringify(EDITS));
 // IndexedDB: results (blobs), key id|n
@@ -113,15 +115,20 @@ async function paintList(){
     '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+esc(e.id)+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
     '<button class="gold" data-gen="'+esc(e.id)+'">GENERATE</button></div>'+
     '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+esc(e.id)+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
-    '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+URL.createObjectURL(r.blob)+'" alt=""><span>v'+r.n+'</span> <button class="small" data-save="'+esc(r.key)+'">Save</button></div>').join('')+'</div></div>';
+    '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+URL.createObjectURL(r.blob)+'" alt=""><span>v'+r.n+'</span> <button class="small" data-save="'+esc(r.key)+'">Save</button><div class="acts"><button class="good" data-ok="'+esc(r.key)+'">APPROVE</button><button class="bad" data-no="'+esc(r.key)+'">REJECT</button></div></div>').join('')+'</div>'+
+    (rs.length?'<label>Note for Claude (required for REJECT: what is wrong, what to change)</label><input type="text" data-note="'+esc(e.id)+'" value="'+esc(NOTES[e.id]||'')+'" placeholder="for example: head too small, background not pure magenta">':'')+
+    ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
+    ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
   }
   $('list').innerHTML=html;
 }
-$('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} });
+$('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} const nid=e.target.dataset&&e.target.dataset.note; if(nid) NOTES[nid]=e.target.value; });
 $('list').addEventListener('change',e=>{ const t=e.target; if(t.dataset.ref) USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; if(t.dataset.ar){const en=DATA.entries.find(x=>x.id===t.dataset.ar); if(en) en.ar=t.value;} });
 $('list').addEventListener('click',async e=>{
   const t=e.target;
   if(t.dataset.gen) return generate(t.dataset.gen,t);
+  if(t.dataset.ok) return decide('ok',t.dataset.ok,t);
+  if(t.dataset.no) return decide('no',t.dataset.no,t);
   if(t.dataset.res){ const r=(await tx('readonly',s=>s.get(t.dataset.res))); if(r){ $('big').firstElementChild.src=URL.createObjectURL(r.blob); $('big').style.display='flex'; } return; }
   if(t.dataset.save){ const r=await tx('readonly',s=>s.get(t.dataset.save)); if(r) download(r.blob,r.id+'-v'+r.n+'.png'); }
 });
@@ -156,6 +163,70 @@ async function generate(id,btn){
     const n=await addResult(id,blob,prompt,refPaths);
     e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; await paintList();
   }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; }
+}
+// --- GitHub: APPROVE commits the picture and the prompt, REJECT commits your note (needs the GitHub token at the top)
+const GH_OWNER='trivituso81', GH_REPO='adventures-of-tom', GH_BRANCH='main', JSON_PATH='data/art-prompts.json';
+const GH_BASE=()=> (Q.get('gh')||'https://api.github.com').replace(/\/+$/,'');
+const ghUrl=p=>GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p.split('/').map(encodeURIComponent).join('/');
+const blobToB64=async b=>(await blobToDataUri(b)).split(',')[1];
+const textToB64=s=>{ const u=new TextEncoder().encode(s); let b=''; for(let i=0;i<u.length;i+=0x8000) b+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000)); return btoa(b); };
+const b64ToText=c=>{ const bin=atob(String(c).replace(/\s/g,'')), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new TextDecoder().decode(u); };
+async function gh(method,path,body){
+  const tok=LS.get('aot-gh-token'); if(!tok) throw new Error('Paste the GitHub token at the top first.');
+  let r; try{ r=await fetch(ghUrl(path)+(method==='GET'?'?ref='+GH_BRANCH:''),{method,headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}); }
+  catch(err){ throw new Error('The browser could not reach GitHub. Check the network and try again.'); }
+  const txt=await r.text(); let j=null; try{j=JSON.parse(txt);}catch(x){}
+  return {status:r.status,ok:r.ok,json:j,text:txt.split(tok).join('[token]').slice(0,300)};
+}
+function ghFail(r,what){
+  if(r.status===401) return new Error('GitHub said the token is wrong or expired. Make a new one and paste it at the top. ('+what+')');
+  if(r.status===403||r.status===404) return new Error('GitHub would not let this token change the game files. The token needs "Contents: Read and write" on the adventures-of-tom repository. ('+what+', '+r.status+')');
+  return new Error('GitHub said '+r.status+' while '+what+': '+r.text);
+}
+// Read data/art-prompts.json, let mutate(doc) change it (return false if the picture is not there), write it back. Retries if someone else changed it first.
+async function commitJson(mutate,message){
+  for(let i=0;i<3;i++){
+    const g=await gh('GET',JSON_PATH); if(!g.ok) throw ghFail(g,'reading the prompts file');
+    const doc=JSON.parse(b64ToText(g.json.content)); if(mutate(doc)===false) throw new Error('That picture is not in the game\'s prompts file any more. Reload the page.');
+    const w=await gh('PUT',JSON_PATH,{message,content:textToB64(JSON.stringify(doc,null,1)+'\n'),branch:GH_BRANCH,sha:g.json.sha});
+    if(w.ok) return; if(w.status!==409&&w.status!==422) throw ghFail(w,'saving the prompts file');
+  }
+  throw new Error('The prompts file kept changing under us. Try again in a minute.');
+}
+async function decide(kind,resKey,btn){
+  const r=await tx('readonly',s=>s.get(resKey)); if(!r) return;
+  const id=r.id, e=DATA.entries.find(x=>x.id===id); if(!e) return;
+  if(!LS.get('aot-gh-token')) return setMsg(id,'Paste the GitHub token at the top first (the second box).',true);
+  const note=(NOTES[id]||'').trim();
+  if(kind==='no'&&!note) return setMsg(id,'Type a note for Claude first (the box under the pictures): what is wrong or what to change.',true);
+  const armKey=kind+'|'+resKey;
+  if(ARMED!==armKey){ ARMED=armKey; btn.classList.add('armed'); btn.textContent='TAP AGAIN'; clearTimeout(decide.h); decide.h=setTimeout(()=>{ARMED=null;paintList();},4000); return; }
+  ARMED=null; clearTimeout(decide.h); document.querySelectorAll('[data-ok],[data-no]').forEach(b=>b.disabled=true);
+  try{
+    const today=new Date().toISOString().slice(0,10);
+    if(kind==='ok'){
+      setMsg(id,'Saving the picture to the game files...');
+      const slug=(e.tab||'misc').toLowerCase(); let k=Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', b64=await blobToB64(r.blob), done=false;
+      for(let tries=0;tries<6&&!done;tries++,k++){
+        path='art/raw/'+slug+'/'+id+'-v'+k+'.png';
+        const w=await gh('PUT',path,{message:'Art Library: approve '+id+' v'+k,content:b64,branch:GH_BRANCH});
+        if(w.ok) done=true; else if(w.status!==409&&w.status!==422) throw ghFail(w,'saving the picture');
+      }
+      if(!done) throw new Error('Could not find a free version number for the picture.');
+      k--;
+      setMsg(id,'Saving the prompt...');
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push({n:k,file:path,date:today,from:'v'+r.n}); },'Art Library: '+id+' approved (v'+k+')');
+      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([{n:k,file:path,date:today,from:'v'+r.n}]); delete EDITS[id]; saveEdits();
+      MSG[id]={text:'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
+    } else {
+      setMsg(id,'Saving your note...');
+      const txt=promptOf(e);
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push({date:today,note,from:'v'+r.n}); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
+      e.rejects=(e.rejects||[]).concat([{date:today,note,from:'v'+r.n}]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
+      MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
+    }
+    await paintList();
+  }catch(err){ setMsg(id,String(err.message||err),true); document.querySelectorAll('[data-ok],[data-no]').forEach(b=>b.disabled=false); }
 }
 // --- zip export (store only)
 const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return b=>{let c=~0;for(let i=0;i<b.length;i++)c=t[(c^b[i])&255]^(c>>>8);return (~c)>>>0;};})();

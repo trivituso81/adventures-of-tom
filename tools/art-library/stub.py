@@ -2,7 +2,7 @@
 """Fake xAI and GitHub endpoints for testing the Art Library (no real keys).
 Run: python3 tools/art-library/stub.py [port]   (default 8765)
 xAI:    POST /v1/images/generations and /v1/images/edits  (Bearer must be 'test'; 401 otherwise; 400 if the body shape is wrong)
-GitHub: PUT /repos/<o>/<r>/contents/<path>, GET same path (404 until put). Calls are logged to /log (GET) for assertions.
+GitHub: PUT /repos/<o>/<r>/contents/<path>, GET same path (404 until put; data/art-prompts.json is pre-seeded from the repo with sha 'seed'; a PUT to an existing path without the right sha answers 409; GET /files lists everything stored). Calls are logged to /log (GET) for assertions.
 CORS is open so a page on another port can call it."""
 import base64, json, sys, zlib, struct
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -18,6 +18,11 @@ def png(w=96, h=128):
     return b'\x89PNG\r\n\x1a\n' + ch(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0)) + ch(b'IDAT', data) + ch(b'IEND', b'')
 
 LOG, FILES = [], {}
+import os
+_seed = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'art-prompts.json')
+if os.path.exists(_seed):
+    _b = base64.b64encode(open(_seed, 'rb').read()).decode()
+    FILES['data/art-prompts.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}   # GitHub wraps base64 lines
 class H(BaseHTTPRequestHandler):
     def log_message(self, *a): pass
     def _send(self, code, obj=None):
@@ -32,6 +37,7 @@ class H(BaseHTTPRequestHandler):
     def do_OPTIONS(self): self._send(204)
     def do_GET(self):
         if self.path == '/log': return self._send(200, LOG)
+        if self.path == '/files': return self._send(200, FILES)
         if self.path.startswith('/repos/'):
             p = self.path.split('/contents/', 1)[-1].split('?')[0]
             if p in FILES: return self._send(200, {'sha': FILES[p]['sha'], 'content': FILES[p]['content'], 'path': p})
