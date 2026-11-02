@@ -92,6 +92,7 @@ const b2Aimed=f=>!!(B2.aim&&B2.aim.targets.includes(f));
 const B2_HURT_HOLD=700;
 function b2FoeFrame(f,R0) {
   const FR=f.def.frames; if(!FR) return R0;
+  if(f.hold>0&&!(f.lunge>0)&&FR.attack.length) return FR.attack[0];   // wind-up (audit fix 2a): first attack frame held before the lunge
   if(f.lunge>0) { if(f.lunge>(f._lm||0)) f._lm=f.lunge; } else f._lm=0;
   if(f.lunge>0&&FR.attack.length) { const p=1-f.lunge/(f._lm||f.lunge); return FR.attack[Math.min(FR.attack.length-1,Math.floor(p*FR.attack.length))]; }
   const aimed=b2Aimed(f);
@@ -133,7 +134,8 @@ function b2DrawEnemies(t) {
       if(battle.enemyKnock>0) sx-=Math.round(Math.sin(Math.PI*(1-battle.enemyKnock/.45))*26);
       sy-=liftY;
     }
-    const x=Math.round(f.px-w/2+lq*lungeX+(f.shake>0?rand(-4,4):0)+sx),y=Math.round(f.py-h+bob-lq*10-q*30+sy+(1-spawn)*40);
+    const hq=f.hold>0&&!dying?Math.sin(Math.PI/2*Math.min(1,(performance.now()-(f.holdT0||0))/(B2_WINDUP/b7Speed()))):0;   // wind-up: lean back 8 px (away from the party) and settle 3 px
+    const x=Math.round(f.px-w/2+lq*lungeX+hq*8+(f.shake>0?rand(-4,4):0)+sx),y=Math.round(f.py-h+bob-lq*10+hq*3-q*30+sy+(1-spawn)*40);
     if(!dying) ellipse(f.px,f.py+2,sw*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
     const flash=f.flash>0||(dying&&q>.1)||(aimed&&battle.flashEnemy>0);
     const sway=(f.st.goofed||f.st.staggered)&&!dying?Math.sin(t*5+f.idx)*.14:0;
@@ -275,7 +277,7 @@ function b2Update(dt) {
     if(f.warmFlash>0) f.warmFlash-=dt;
     if(f.calm&&!f.dead) { f.calmT+=dt; if(f.calmT>=1.9) f.dead=true; }
     if(f.spawnT!=null&&f.spawnT<1) f.spawnT+=dt;
-    f.shake=Math.max(0,f.shake-dt); f.flash=Math.max(0,f.flash-dt); f.lunge=Math.max(0,f.lunge-dt);
+    f.shake=Math.max(0,f.shake-dt); f.flash=Math.max(0,f.flash-dt); f.lunge=Math.max(0,f.lunge-dt); f.hold=Math.max(0,(f.hold||0)-dt);
     if(f.dying>=0&&!f.dead) {
       f.dying+=dt;
       for(const p of f.parts) { if(p.d>0) { p.d-=dt; continue; } p.x+=p.vx*dt; p.y+=p.vy*dt; p.vy-=20*dt; }

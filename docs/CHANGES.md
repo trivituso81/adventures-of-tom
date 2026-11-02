@@ -1,3 +1,12 @@
+## 2026-11-02 (73): Enemies wind up before they attack (`windup1`)
+
+- Tom's standing request from the animation audit (fix 2a, claude/battle-animation-audit.md): every enemy attack was one instant lunge. Now the enemy holds its first attack frame and leans back 8 px and down 3 px for 250 ms (`B2_WINDUP` in engine/battle2.js), then lunges and plays the attack sound. Applies to every normal enemy action and every boss action that goes through `b2FoeAct`; it follows the 1x and 2x speed switch because the pause is a queue delay.
+- Cause of the old flatness (fact): `b2FoeAct` set `e.lunge=.55` and the attack sound in the same step, so there was no anticipation. The hit steps are timed from the lunge step, so damage still lands on the same beat of the lunge as before; the whole enemy turn is about 250 ms longer.
+- Enemies with painted attack frames show attack frame 1 during the hold (`b2FoeFrame` in engine/battle2-ui.js); enemies without frames just lean. `e.hold` stays on until the lunge step clears it (1 s cap), found by test: a first version used its own countdown and the plain stance blinked for about 120 ms in between when the timer ran late.
+- Not changed on purpose: the boss one-off lunges (CUT!, TAKE TWO!, GATE CLOSED!, the idle taps), which are not `b2FoeAct`. Audit fixes 2b, 2c, 3 and 4 are still open (see claude/next.md).
+- Tested: smoke FAILS: [] (twice, before and after the blink fix); timing recorder on a live fight: hold 23 to 271 ms, lunge starts 284 ms, no errors; looked at the enemy mid-hold in portrait and mid-lunge in landscape. No voice, art or data file changed, so no ART_V bump and the unused-voice audit was not needed. Not seen on the phone.
+- Also bumped `data/maps-le.js?v=` to `windup1`: `square5` edited maps-le.js but its index.html change was only the main.js tag, so a phone with the old file cached would have kept the old Square walk map.
+
 ## 2026-11-02 (morning, 71): Square walk map edited by Tom's tile list (`square5`)
 
 - Tom gave edits by spreadsheet id (A1 = top-left tile; column letters across, row numbers down; image from tools/town_grid_image.py). Walkable: A10:A12, B10:B14, H15:H21, V15:V21, W12:AA12, W13:AC15, I15:N15, C15:G15, P15:U15, A22, A23:E23, A24:L24, M25, S24:AD24, V23:AD23. Not walkable: I12. These are the `PAINT_GREEN` and `PAINT_RED` lists in tools/make_town_mask.py (applied last, so reruns keep them).

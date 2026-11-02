@@ -32,7 +32,7 @@ function b2BattleDef(d) {
 function b2FoeUnit(id,row,i,lvl) {
   const D=b2FoeDef(id),def=b2BattleDef(MONSTERS[id]||MONSTERS.mudling),L=Math.max(D.level,lvl||D.level),up=L-D.level;
   const u={side:'foe',id,def,D,name:def.name,lvl:L,idx:i,row,st:{},turns:0,acts:D.acts,weak:D.weak,resist:D.resist,
-    shake:0,flash:0,lunge:0,dying:-1,dead:false,parts:[],boss:D.boss||null,phase:1,intent:null,shield:null,step:0};
+    shake:0,flash:0,lunge:0,hold:0,dying:-1,dead:false,parts:[],boss:D.boss||null,phase:1,intent:null,shield:null,step:0};
   for(const k of B2_STAT_KEYS) u[k]=D[k]+up*(k==='hp'?D.step*6:D.step);
   // Difficulty (engine/feel.js): Rose Mode monsters have less HP, Director Mode more.
   u.hp=Math.max(1,Math.round(u.hp*b7FoeHp())); u.maxHp=u.hp;
@@ -655,12 +655,16 @@ function b2PickTarget(e,forced) {
   return t;
 }
 // One enemy action. next() returns more steps (a boss announcing its next move) to run before the turn ends.
+const B2_WINDUP=250;
 function b2FoeAct(e,act,forced,next) {
   const live=b2LiveParty(); if(!live.length) return b2Lose();
   const orig=act.target==='all'?null:b2PickTarget(e,forced);
   const N=e.name.charAt(0).toUpperCase()+e.name.slice(1);
   const fill=s=>s.split('{e}').join(N).split('{t}').join(orig?orig.name:'everyone');
-  const steps=[()=>{ B2.hurtNow=false; b2Msg(fill(act.msg)); e.lunge=.55; sfx.grumpAttack(); b2AimFoe(e,orig); }];
+  // Audit fix 2a: the enemy holds its first attack frame and leans back for B2_WINDUP ms, then lunges. The hit steps below
+  // are timed from the lunge, so they still land on the same beat of the lunge as before.
+  const steps=[()=>{ B2.hurtNow=false; b2Msg(fill(act.msg)); e.hold=1; e.holdT0=performance.now(); b2AimFoe(e,orig); },B2_WINDUP,()=>{ e.hold=0; e.lunge=.55; sfx.grumpAttack(); }];
+  // e.hold stays on (1 s cap, decays in b2Update) until the lunge step clears it, so a late timer never shows the plain stance between the two.
   if(act.target==='all') steps.push(420,()=>{ for(const t of b2LiveParty()) b2HitParty(e,act,t); },900);
   else {
     // DEFEND: Tom steps in front of whoever he is guarding.
