@@ -540,13 +540,41 @@ const SPLASH_SPOTS=[
   {id:'nara',x:240,feet:1020,h:104},   // Tom 2026-10-29: Nara sits behind Grace by the stairs (first in the list so everyone else draws over her)
   {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'4", tallest) stands just behind Amy and Deedee, listed early so they draw over him
   {id:'grace',x:425,feet:1175,h:230},   // 2026-11-01: 225 to 230, her walk head grew (kidhead.py), body stays the same size   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
-  {id:'tom',x:287,feet:1222,h:335},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose
+  {id:'tom',x:292,feet:1222,h:405},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose. Tom 2026-11-01 19:43: combined figure bigger, 335 to 405
   {id:'rose',x:372,feet:1204,h:205,solo:true},   // 2026-11-01: 196 to 205, head grew, body same   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
   {id:'tnb',x:170,feet:1198,h:309},   // Tom 2026-11-01: body (chin to feet) follows real height; his big hair sits on top, so the top of his hair reaches Justin's
   {id:'boppy',x:768,feet:1222,h:284},
   {id:'amy',x:566,feet:1222,h:282},
   {id:'deedee',x:672,feet:1258,h:278}
 ];
+// Tom 2026-11-01 19:43: on the welcome page Tom carrying Rose needs bigger heads (both) and a bigger combined figure.
+// The ride art has small heads, so the welcome page enlarges each head (about its neck) on a padded copy of the standing frame.
+// Numbers are in the standing frame's own pixels (78 x 171): c = head centre, r = half width/height of the head patch (hair included),
+// a = neck anchor the head grows from, s = head growth. Rose first, then Tom, so Tom's head draws over her legs.
+const RIDE_HEADS=[{cx:38,cy:15,rx:21,ry:18,ax:38,ay:31,s:1.3},{cx:39,cy:55,rx:17,ry:22,ax:39,ay:75,s:1.25}];
+const RIDE_PAD_X=14,RIDE_PAD_TOP=20,RIDE_Q=2;
+let rideBigCache=null;
+function splashRideBig(rows) {
+  if(rideBigCache) return rideBigCache;
+  const c=paintedCanvas(rows); if(!c) return null;
+  const Q=RIDE_Q,W=(c.width+RIDE_PAD_X*2)*Q,H=(c.height+RIDE_PAD_TOP)*Q;
+  const out=document.createElement('canvas'); out.width=W; out.height=H;
+  const g=out.getContext('2d'); g.imageSmoothingEnabled=true; g.imageSmoothingQuality='high';
+  g.drawImage(c,RIDE_PAD_X*Q,RIDE_PAD_TOP*Q,c.width*Q,c.height*Q);
+  for(const h of RIDE_HEADS) {
+    const t=document.createElement('canvas'); t.width=W; t.height=H;
+    const tg=t.getContext('2d'); tg.imageSmoothingEnabled=true; tg.imageSmoothingQuality='high';
+    tg.drawImage(c,(RIDE_PAD_X+h.ax-h.ax*h.s)*Q,(RIDE_PAD_TOP+h.ay-h.ay*h.s)*Q,c.width*h.s*Q,c.height*h.s*Q);
+    // soft oval mask around the grown head so only the head (not the body under it) is replaced
+    const mx=(RIDE_PAD_X+h.ax+(h.cx-h.ax)*h.s)*Q,my=(RIDE_PAD_TOP+h.ay+(h.cy-h.ay)*h.s)*Q,rx=h.rx*h.s*Q;
+    tg.globalCompositeOperation='destination-in'; tg.save(); tg.translate(mx,my); tg.scale(1,h.ry/h.rx);
+    const gr=tg.createRadialGradient(0,0,rx*.78,0,0,rx); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)');
+    tg.fillStyle=gr; tg.fillRect(-rx*2,-rx*2,rx*4,rx*4); tg.restore();
+    g.drawImage(t,0,0);
+  }
+  rideBigCache={cv:out,fw:c.width,fh:c.height};
+  return rideBigCache;
+}
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
   const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
@@ -561,6 +589,15 @@ function splashCastDraw(time) {
       const set=m.id==='tom'&&OW.tomRide&&TITLE_TOM_RIDE?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
       const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=(m.id==='tom'&&!TITLE_TOM_RIDE?TITLE_TOM_H:m.h)*SPLASH_ALL*s/fh;
       const bob=Math.floor((time*1.6+SPLASH_SPOTS.indexOf(m)*.37)%2)*Math.max(1,Math.round(s*2));
+      if(m.id==='tom'&&TITLE_TOM_RIDE&&set===OW.tomRide) {   // bigger heads (see RIDE_HEADS)
+        const big=splashRideBig(fr);
+        if(big) {
+          const kp=m.h*SPLASH_ALL*s/big.fh,Q=RIDE_Q,bottom=Math.round((m.feet-SPLASH_BACK)*s-bob);
+          g.imageSmoothingEnabled=true; g.imageSmoothingQuality='high';
+          g.drawImage(big.cv,Math.round(ox+m.x*s-(RIDE_PAD_X+big.fw/2)*kp),Math.round(bottom-(RIDE_PAD_TOP+big.fh)*kp),Math.round(big.cv.width/Q*kp),Math.round(big.cv.height/Q*kp));
+          g.imageSmoothingEnabled=false; continue;
+        }
+      }
       drawSprite(fr,set.pal,Math.round(ox+m.x*s-fw*k/2),Math.round((m.feet-SPLASH_BACK)*s-fh*k-bob),k);
     }
   } finally { gfx=prev; }
