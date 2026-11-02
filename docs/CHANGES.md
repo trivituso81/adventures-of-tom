@@ -1,3 +1,9 @@
+## 2026-11-02 (100): Grace's hero pose came back painted; cut out locally (`tools/cut_grace_hero.py`; sources only, no game change)
+
+- Fact: the Library's xAI generator missed the painted look three times (smooth, no brushwork) and ignored the school yard reference. Call made: Tom ran `grace-hero-scene.txt` in his other image AI with the four attachments; the result (Tom 11-02 13:57, "looks good") has the brushwork. Saved as `tools/sprite-bake/src/grace-hero-scene-v1.png` (1448 x 1086, Grace standing in the school yard).
+- `tools/cut_grace_hero.py` cuts her out: GrabCut inside a hand-traced envelope, clothes clipped to a hand-traced outline, brick patches between the ankles removed by polygon. Output `tools/sprite-bake/src/grace-hero-cut-v1.png` (RGBA) and previews `tools/shots/grace-cut-{magenta,gray,white}.png`. The Library entry `grace-hero-cut` is no longer needed for this step.
+- NOT done: small specks remain (a sliver left of the left leg, a dark bit right of the sweater, a dark bit at the left hair edge); hair wisps outside the envelope are lost; no bake script runs yet. No tag moved, no game change, smoke not run.
+
 ## 2026-11-02 (99): Grace's hero pose moves to a two-step scene method (`grace-hero-scene`, `grace-hero-cut`; prompts and json only)
 
 - Stop-loss (Tom 11-02 13:33 and 13:38): two generations of `grace-hero` had the right likeness but no brushwork. Fact: the style key got its texture because the people were painted INSIDE the school yard painting. Inference: on a flat magenta background the generator paints one isolated figure in its clean default look. Call made: change the method, not the wording; `grace-hero` stays a draft, likeness reference only.
