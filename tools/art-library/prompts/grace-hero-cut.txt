@@ -1,0 +1,7 @@
+IMAGE REQUEST: ONE SINGLE EDIT. Return exactly one image, nothing else.
+
+The attached picture is a finished painting of a girl standing in a school yard. Keep the girl EXACTLY as painted: do not redraw, repaint, restyle, sharpen or smooth anything about her. Keep her face, hair strands, sweatshirt, sweatpants, glittery sneakers, yellow keychain, pose, size, position, colors, lighting and the visible painted brushwork and texture on her exactly as they are, pixel for pixel in feel.
+
+Change ONLY the background: replace everything that is not the girl (the school, the paving, the sky, the lamps, the planters, every shadow on the ground) with one flat solid pure magenta #FF00FF filling the whole rest of the image. No ground, no shadow, no gradient, no border, no text, no labels.
+
+No magenta on the girl. No magenta glow, spill, tint or fringe on her edges or hair strands. Keep her edges clean and crisp. Draw nothing new and no one else.

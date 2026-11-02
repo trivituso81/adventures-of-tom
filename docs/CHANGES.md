@@ -1,3 +1,10 @@
+## 2026-11-02 (99): Grace's hero pose moves to a two-step scene method (`grace-hero-scene`, `grace-hero-cut`; prompts and json only)
+
+- Stop-loss (Tom 11-02 13:33 and 13:38): two generations of `grace-hero` had the right likeness but no brushwork. Fact: the style key got its texture because the people were painted INSIDE the school yard painting. Inference: on a flat magenta background the generator paints one isolated figure in its clean default look. Call made: change the method, not the wording; `grace-hero` stays a draft, likeness reference only.
+- Step 1 `grace-hero-scene` (shape 4:3, the school yard's shape): refs in order = school yard painting FIRST (output shape follows the first image), old Grace pose (likeness), style key, height chart. Grace alone, large and centered on the paving, cozy sweats.
+- Step 2 `grace-hero-cut` (4:3): one ref, `tools/sprite-bake/src/grace-hero-scene-v1.png` (the step 1 picture Tom approves; Claude saves it there when he sends it back, so no GitHub token is needed). Prompt: keep her exactly as painted, replace everything else with flat pure magenta #FF00FF.
+- `tools/art-library/test.py` expects the three Grace entries. Art Library test and bake_test FAILS: []. No game change, no tag moved. NOT run: real GENERATE; whether step 2 keeps the brushwork is the open question.
+
 ## 2026-11-02 (98): Grace hero prompt v2 after Tom's first generate (`grace-hero`; prompt and json only)
 
 - Tom generated the first picture (11-02 13:33). Looked at it next to the style key. Fact: outfit, face, freckles, hair and keychain right; STYLE missed: smooth, soft, almost 3D-render look, head about a fifth of her height (key's Grace is about a quarter), not the dense brushwork of the key. Cause (mine): the prompt left out the style key prompt's "no airbrushed skin, no glossy plastic look" rule and did not attach the school yard painting.

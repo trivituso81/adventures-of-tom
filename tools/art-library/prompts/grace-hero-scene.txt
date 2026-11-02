@@ -1,0 +1,35 @@
+IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.
+
+WHAT THIS IS
+A painting of GRACE standing alone in the school yard, for "The Adventures of Tom", a family role-playing game. She is painted INSIDE the school yard scene, in the same sitting by the same artist, so that she has exactly the same painted texture as the scene around her.
+
+ATTACHED IMAGES (in this order)
+1. The school yard painting. This is the BACKGROUND and the STYLE TO MATCH. Keep the school building, paths, signs, lamps, parking area and playground exactly as painted, same framing, nothing removed. Match its dense, jewel-toned painted texture, its fine visible brushwork, its deep saturated colors, its warm lamplight and its level of detail in the character.
+2. GRACE's older reference picture. Use it for her FACE, hair and the yellow squishy keychain ONLY. Her outfit there is old, see GRACE'S OUTFIT. Do not copy how it is rendered: it is smooth and glossy, and the new picture must not be.
+3. The STYLE KEY, a finished painting of the family in this same school yard. Match how it paints people and how it draws a child, including Grace's head size and body proportions.
+4. A HEIGHT CHART of grey shapes. It shows SIZE ONLY. Do not copy the grey shapes, the grid or the text. Use it to check that Grace is a 9 year old, 4 feet 2 inches tall.
+The magenta background in attachment 2 is not part of the picture. Ignore it.
+
+STYLE RULE (the most important instruction)
+Attachment 2 is for LIKENESS ONLY. Repaint Grace from scratch in the exact painting style of attachment 1, as if the same artist painted the whole canvas in one sitting: the same dense painted texture on skin, hair and fabric, the same fine visible brushwork, the same crisp dark-edged detail on fabric folds, hair strands and shoe edges, the same deep saturated colors and rich contrast, the same fine detail as the foliage and brick. No airbrushed skin, no smooth gradients, no glossy plastic look, no soft-focus photo look, no 3D render look. Her face keeps the likeness but is painted with the same brushwork as the rest of the picture. The sweatshirt and sweatpants show a knitted, fuzzy fabric texture.
+
+THE SCENE
+Use the school yard painting as the whole background. Grace is the only person in the picture. She stands large and centered on the wide paved walkway in the middle of the picture, full body from the top of her hair to the soles of her sneakers, her feet on the paving. She stands neutral and relaxed, body turned a little (three quarter) toward the viewer, a warm natural smile, face clear and readable, hands empty and relaxed at her sides, both feet flat and fully visible. She is big in the frame, so that her face, hair strands, fabric weave and shoe glitter can be seen in fine detail, while the school yard stays recognizable behind her. She casts a soft shadow on the paving.
+
+GRACE
+A 9 year old girl, real height 4 feet 2 inches. Bright, confident and a little bossy: a playful, self-assured smile.
+
+GRACE'S OUTFIT (overrides her reference picture's clothes)
+Loose, comfy, cozy sweats: an oversized soft lavender sweatshirt with sleeves a little too long and a relaxed fit, and baggy heather-gray sweatpants, slightly bunched at the ankles. Cute glittery sneakers in pink and silver glitter with white soles and bright laces. Her yellow squishy keychain clipped at her hip on the sweatpants waistband, exactly as in attachment 2. No leotard, no gym outfit.
+
+ART STYLE
+- A whimsical storybook illustration of a real person, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the school yard painting. Gently simplified shapes. Slightly stylized features that keep a clear likeness.
+- Caricature proportions for a child: a clearly oversized head, about one quarter of her full height from the top of her hair to her chin, as large relative to her body as the style key's Grace, a small slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression.
+- She is lit by the SAME light as the background: warm orange lamplight from the nearby lamp posts and the school windows, cool blue-violet dusk sky light as fill, with warm rim light on hair and shoulders.
+- Clean, crisp edges with fine detail. No thick or black outlines.
+- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
+
+LIKENESS
+Keep the face of attachment 2: the exact face shape, cheeks, nose, lips, smile, eyebrows, eye shape and color, skin tone and the hair color, length, parting, volume and texture. Exaggerate only the head size and the expression, never the individual features. Do not beautify, age up or age down her.
+
+NEVER substitute. Draw only Grace. No other people, no text, no labels, no captions, no speech balloons. Family friendly for ages 6 and up. If anything is unclear, draw her standing relaxed and smiling in the school yard as described.

@@ -13,6 +13,10 @@ const ENTRIES = [
     prompt: 'IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image.\n\nThe attached picture is the style key. Paint one new picture in exactly its painting style: the same dense painted texture, fine brushwork, deep saturated colors, warm lamplight and crisp detail.\n\nA MUDLING, a small friendly mud monster, knee high: a rounded lump of brown mud with a puddle base, two stubby mud arms, big round shiny eyes, a small open mouth, and a little green sprout with two leaves on top of its head. It stands on a plain flat magenta background, full body, facing the viewer, a curious friendly look. No other characters, no text.' },
   { id: 'grace-hero', tab: 'Characters', title: 'Grace: hero pose (cozy sweats, new style)', ar: '2:3', refs: ['docs/reference/style_key_v1.png', 'docs/reference/school_style_ref.png', 'docs/reference/height_chart_v1.png', 'tools/sprite-bake/src/grace-hero-v2.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero.txt', 'utf8').trim() },
+  { id: 'grace-hero-scene', tab: 'Characters', title: 'Grace: hero pose step 1, painted in the school yard', ar: '4:3', refs: ['docs/reference/school_style_ref.png', 'tools/sprite-bake/src/grace-hero-v2.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-scene.txt', 'utf8').trim() },
+  { id: 'grace-hero-cut', tab: 'Characters', title: 'Grace: hero pose step 2, cut out on magenta (needs step 1 approved)', ar: '4:3', refs: ['tools/sprite-bake/src/grace-hero-scene-v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
 ];
 const keep = Object.fromEntries(old.map(e => [e.id, e]));
 const entries = ENTRIES.map(e => ({ status: 'draft', versions: [], rejects: [], ...(keep[e.id] ? { status: keep[e.id].status, versions: keep[e.id].versions || [], rejects: keep[e.id].rejects || [] } : {}), ...e, status: keep[e.id] ? keep[e.id].status : 'draft' }));
