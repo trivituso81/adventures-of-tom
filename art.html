@@ -46,6 +46,7 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 <header><a class="back" href="index.html" id="back">Back</a><h1>Art Library</h1></header>
 <main>
 <div class="card" id="keys"></div>
+<div class="card" id="spend"></div>
 <div class="tabs" id="tabs"></div>
 <div id="list"></div>
 <div class="row"><button id="exp" class="small">EXPORT ZIP (all kept results and prompts)</button></div>
@@ -137,12 +138,19 @@ function download(blob,name){ const a=document.createElement('a'); a.href=URL.cr
 // --- generate
 const blobToDataUri=b=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=()=>rej(f.error);f.readAsDataURL(b);});
 function setMsg(id,text,err){ MSG[id]={text,err}; const m=$('m-'+id); if(m){m.textContent=text;m.className=err?'err':'hint';} }
+// --- spend meter (estimate: $0.04 per image + $0.01 per reference picture, counted on this phone only)
+const SPEND_PER=0.04, SPEND_REF=0.01;
+function spendGet(){ let o={total:0,count:0,cap:10}; try{ o=Object.assign(o,JSON.parse(LS.get('aot-art-spend')||'{}')); }catch(x){} return o; }
+function spendPaint(){ const o=spendGet(); $('spend').innerHTML='<div class="row"><b style="flex:1">Spent on this phone: about $'+o.total.toFixed(2)+' ('+o.count+' pictures). Stops at $'+o.cap.toFixed(0)+'.</b><button class="small" id="capup">+$10</button><button class="small" id="spreset">RESET</button></div>'; }
+$('spend').addEventListener('click',e=>{ const o=spendGet(); if(e.target.id==='capup'){ o.cap+=10; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); } if(e.target.id==='spreset'){ o.total=0; o.count=0; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); } });
+spendPaint();
 async function generate(id,btn){
   const e=DATA.entries.find(x=>x.id===id), key=LS.get('aot-art-key');
   if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
   const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false);
   if(refPaths.length>5) return setMsg(id,'At most 5 reference pictures. Untick '+(refPaths.length-5)+'.',true);
+  { const o=spendGet(); if(o.total+SPEND_PER+SPEND_REF*refPaths.length>o.cap) return setMsg(id,'Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.',true); }
   btn.disabled=true; setMsg(id,'Working... this takes up to a minute.');
   try{
     const body={model:MODEL,prompt,n:1,aspect_ratio:e.ar||'3:4',resolution:'1k',response_format:'b64_json'};
@@ -160,6 +168,7 @@ async function generate(id,btn){
     if(d.b64_json){ const bin=atob(d.b64_json), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); blob=new Blob([u],{type:d.mime_type||'image/png'}); }
     else if(d.url){ const ir=await fetch(d.url); if(!ir.ok) throw new Error('Could not download the picture.'); blob=await ir.blob(); }
     else throw new Error('The image service sent an unknown picture format.');
+    { const o=spendGet(); o.total+=SPEND_PER+SPEND_REF*refPaths.length; o.count+=1; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); }
     const n=await addResult(id,blob,prompt,refPaths);
     e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; await paintList();
   }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; }

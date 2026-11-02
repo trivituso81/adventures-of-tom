@@ -1,3 +1,8 @@
+## 2026-11-02 (103): Art Library spend meter and cap (art.html only)
+
+- Tom (11-02 14:15) worried the Library would cost hundreds of dollars. Fact: GENERATE makes exactly ONE image per press (`n:1`), about $0.04 plus $0.01 per attached reference picture (4 refs is about $0.08); the plan is sheets (hero, 3 x 3 walk, 4 x 4 battle, 4 to 7 pose ability sheets), not one image per pose. The page had no running total, so spend was invisible.
+- Added a card at the top of art.html: estimated spend on this phone, picture count, a cap that starts at $10 (GENERATE refuses past it, +$10 raises it, RESET zeroes the count). Stored in localStorage `aot-art-spend`; an estimate from the price list, not xAI's invoice. Tested: meter renders, +$10 works, a full cap blocks GENERATE with a message; `tools/art-library/test.py` FAILS: [], tag check ok. art.html carries no `?v=` tag.
+
 ## 2026-11-02 (102): Grace's master hero picture is the image AI's magenta cut, Tom's choice (docs only)
 
 - Tom (11-02 14:09), after seeing my stencil version (CHANGES (101)): "no keep the one I sent you". Decision: Grace's approved hero picture is `tools/sprite-bake/src/grace-hero-cutai-v1.png` (the AI's own cut on magenta, 1448 x 1086, repainted look Tom prefers). `grace-hero-cut-v1.png`, `grace-hero-cut-v2.png`, `tools/cut_grace_hero.py` and `tools/cut_grace_from_ai.py` are NOT the master; leave them, do not bake from them.
