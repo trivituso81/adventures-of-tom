@@ -1,3 +1,7 @@
+## 2026-11-01 (night, 67): TNB's Tombo clip (`nclips10`)
+
+- Tom sent `local-clips-export_10.json` and asked for one TNB battle clip. It is the Tombo line, the only TNB take new in that export. His take says only "Here comes the good part." (no "Well, well, well."), so the line in `data/lines.js` (`tombo`) now reads "Here comes the good part." and the clip is installed under that text; the old 3.5 s take is removed. Voice Library script and index updated to match. No other voice touched.
+
 ## 2026-11-01 (night, 66): all battle backgrounds repainted, 11 new for story places (`bgs2`)
 
 - Tom (21:16): sent the 29 repainted battle backgrounds made from `claude/battle-background-spec.md` (flat matte empty floor so characters stand on the ground, a touch muted so they stand out).
