@@ -35,6 +35,13 @@ if(typeof DEPARTURES!=='undefined') for(const N in DEPARTURES) { const D=DEPARTU
   for(const id in (D.stay||{})) (D.stay[id].stay||[]).forEach(t=>add(NAMES[id]||id,t,'dep:'+N+':stay:'+id));
   (D.flight||[]).forEach(t=>add('Tom',t,'dep:'+N+':flight')); }
 if(typeof ARRIVALS!=='undefined') for(const N in ARRIVALS) { const A=ARRIVALS[N]; (A.tom||[]).forEach(t=>add('Tom',t,'arr:'+N+':tom')); (A.talk||[]).forEach(([sp,pages])=>pages.forEach(t=>add(sp,t,'arr:'+N+':'+sp))); }
+if(typeof TRAVEL_POOLS!=='undefined') { const P=TRAVEL_POOLS;   // rotating airport-run lines (engine/travel.js), 1 Nov
+  P.west.forEach((e,i)=>{ (e.driver||[]).forEach(t=>add('Sal',t,'pool:west:'+i+':driver')); for(const who of ['grace','rose','tom']) (e[who]||[]).forEach(t=>add(NAMES[who],t,'pool:west:'+i+':'+who)); });
+  P.sal.forEach((p,i)=>p.forEach(t=>add('Sal',t,'pool:sal:'+i))); P.sol.forEach((p,i)=>p.forEach(t=>add('Sol',t,'pool:sol:'+i)));
+  P.tnb.forEach((e,i)=>e.lines.forEach(t=>add('TNB',t,'pool:tnb:'+i)));
+  for(const id in P.stay) P.stay[id].forEach((e,i)=>e.stay.forEach(t=>add(NAMES[id]||id,t,'pool:stay:'+id+':'+i)));
+  for(const k of ['flightW','flightE','arrLA','arrHome']) P[k].forEach((p,i)=>p.forEach(t=>add('Tom',t,'pool:'+k+':'+i)));
+  P.welcome.forEach((e,i)=>e.forEach(([sp,pages])=>pages.forEach(t=>add(sp,t,'pool:welcome:'+i+':'+sp)))); }
 const inLines=(sp,t)=>{ const id={Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Deedee:'deedee',Boppy:'boppy',TNB:'tnb'}[sp]; if(!id||!LINES[id]) return false; return Object.values(LINES[id]).some(a=>Array.isArray(a)?a.includes(t):a===t); };
 for(const o of out) o.inLines=inLines(o.speaker,o.text);
 const btexts={}; for(const ch in VOICE_CLIPS.clips) { btexts[ch]=[]; for(const k in VOICE_CLIPS.clips[ch]) for(const c of VOICE_CLIPS.clips[ch][k]||[]) if(c&&c.text) btexts[ch].push(c.text); }

@@ -122,6 +122,148 @@ function departureNow() {
   return DEPARTURES[STORY.chapter+1]||{};
 }
 
+// ---------- Rotating travel lines (Tom, 1 Nov: no repeats, every trip should sound different) ----------
+// Every airport run that is not a story chapter's own flight (and every part a chapter leaves out) draws from these pools.
+// Entry 0 of each pool is the original line that already has a baked clip; the rest are new and stay silent (speech
+// synthesis) until baked. travelPick shuffles a pool into a bag, never repeats a line until the whole pool has played, and
+// never opens a new bag with the line that just played (the last pick is also kept in localStorage across reloads).
+const TRAVEL_POOLS={
+  // Westbound goodbye at the cab: Sal, Grace, Rose, Tom as one exchange so the girls answer each other.
+  west:[
+    {driver:["Los Angeles? You got it. Flights leave whenever I get there.","One thing. The girls stay home. Amy's rule. No flying on a school night."],
+     grace:["Tata, you're leaving AGAIN? You JUST got here!"],
+     rose:["Bring me back a palm tree. A small one. For my room."],
+     tom:["I'll be back before you know it. Go home and listen to your mom.","Rose, I'll see what I can do about the palm tree."]},
+    {driver:["Airport? Hop in. Cab seven has been waiting all day.","The girls stay put. Amy's orders. I follow Amy's orders. Everybody does."],
+     grace:["Tata, text me when you land. I'll check at exactly seven."],
+     rose:["Take a picture of a dolphin. California has dolphins. I looked it up. Sort of."],
+     tom:["Seven o'clock. Got it. You're the strictest boss I've ever had.","Rose, I'll look for dolphins. No promises on the dolphins."]},
+    {driver:["LAX it is. Seat belts. Your niece is giving me the look.","Girls, out you go. No stowaways. I checked the trunk last time."],
+     grace:["I'm not a stowaway. I'm a passenger without a ticket."],
+     rose:["I could fit in his bag. I'm very small. Watch."],
+     tom:["Rose, please don't get in the bag. The bag has my snacks.","Grace, that's the definition of a stowaway. Go. Hug your mom for me."]},
+    {driver:["Off to the airport. I'll take the scenic route. By scenic I mean the only route.","The girls stay home. It's a school night. Even I know that, and I don't have kids."],
+     grace:["Tata, I made you a packing list. It's laminated."],
+     rose:["I put a surprise in your pocket. I'm not telling. It's a rock."],
+     tom:["A laminated list. Impressive. I'm checking it twice.","Rose, thank you. I'll treasure the rock. Probably in my left pocket."]},
+    {driver:["Airport. Los Angeles. Your usual.","Girls, say your goodbyes. I'll keep the meter off. Mostly."],
+     grace:["Okay. Bye. Be good. Don't talk to strangers. Except TNB."],
+     rose:["Tata. Tata. If a seagull talks to you, say hi from me."],
+     tom:["If a seagull talks to me, I'm getting off the plane.","Be good, you two. Back soon."]},
+    {driver:["Los Angeles? Sure. I'll get you there before the sun gets bored.","The girls stay here. Amy's rule number one. There are about forty more."],
+     grace:["I know all forty. I helped write seven of them."],
+     rose:["Rule forty-one is no goodbye without a high five."],
+     tom:["Rule forty-one is excellent. High fives, both of you.","Okay. That's the best goodbye I've had all week."]},
+    {driver:["Another flight, another gold star for cab seven.","The girls head home. Straight home. Do not follow the cab."],
+     grace:["We won't follow the cab. Rose might. I'll hold her hood."],
+     rose:["I'll run really fast. Like a cheetah. A short cheetah."],
+     tom:["Stay put, short cheetah. I'll bring you something good.","Grace, hood duty. You're in charge of cheetah control."]},
+    {driver:["Airport. You've got the look of a man who packed light.","Girls, back to the house. Your grandmother has pie. That's not a rumor."],
+     grace:["Pie! Rose, move. Bye, Tata."],
+     rose:["Bye Tata! Save me the... never mind, pie!"],
+     tom:["Great. I just got outcompeted by pie.","Enjoy it, you two. Save me a slice."]}
+  ],
+  // Westbound with the girls already away: Sal's one line.
+  sal:[["Los Angeles? You got it. Buckle up."],["Los Angeles again. Cab seven is ready."],["LAX. Sit back. The radio is on something calm."],
+       ["Off we go. Don't touch the visor. Everybody touches the visor."],["Airport run. I'll have you there before your coffee gets cold."]],
+  // Eastbound: Sol's one line.
+  sol:[["Airport. Love it. We'll be there in twenty minutes. Or two hours. Nobody knows."],
+       ["Long Island? Sure. I know a shortcut. It's not shorter, but it's mine."],
+       ["Seat belt, please. It's decorative, but I like when people try."],
+       ["Airport run. Cab traffic, cab snacks, cab opinions. All included."],
+       ["East we go. Don't mind the ketchup stain. It's from last Tuesday."],
+       ["Heading home? Say hi to the Atlantic for me. The right ocean."]],
+  // TNB stays in Los Angeles when Tom flies east: his lines and the toast, as one set.
+  tnb:[
+    {lines:["Well, well... this is where I get off. Glaze firing tomorrow, call time at five, and somebody has to water your plants.","Go. Hug the girls for me. I'll be right here, pot-sitive."],toast:"TNB stays in LA. Pottery, a shoot, and Tom’s plants."},
+    {lines:["This is my stop. I have a kiln to babysit and a call time that starts with a four.","Go see the girls. I'll keep your plants alive. Out of spite, mostly."],toast:"TNB stays in LA. The kiln needs him."},
+    {lines:["I'd fly with you, but the longboard doesn't fit in the overhead.","Hug the girls. Tell Rose I'm making her a bowl. She can keep a rock in it."],toast:"TNB stays in LA. A bowl is on the wheel."},
+    {lines:["Okay, babe, this is where I turn into a pumpkin. A glazed one.","Text me when you land. I'll reply in three to five business hours. Kidding. Two."],toast:"TNB heads home to the loft. The glaze is waiting."},
+    {lines:["I'd love to come, but the wardrobe department called. Somebody lost a hat. A whole hat.","Go. Be the fun uncle. I'll be the one who remembers the sunscreen."],toast:"TNB stays in LA. A hat is missing."},
+    {lines:["The wheel's calling. Not the cab wheel. The pottery wheel.","Say hi to everybody. Tell Deedee I'm still dreaming about that pie."],toast:"TNB stays in LA. The wheel is calling."},
+    {lines:["Here's the part where I wave dramatically from the curb.","There. Dramatic wave. Now go, before I get clingy. I'm very clingy. Like clay."],toast:"TNB waves from the curb. Dramatically."}
+  ],
+  // Whoever lives on Long Island says goodbye at the cab when Tom flies west (the first entry of each is TRAVEL_TALK).
+  stay:{
+    amy:[{stay:["Los Angeles? I have a grading pile taller than Rose.","Go. Text me a photo of the plane. I'll rate it."],toast:"Amy heads home. The grading pile won't shrink itself."},
+         {stay:["I'd come, but there's a 5K on Saturday and I plan to win it.","Fly safe. Drink water. I'm serious. Hydrate."],toast:"Amy jogs off. Training doesn't train itself."},
+         {stay:["Not tonight. The girls need bath, books and bedtime, in that order.","Have fun. Don't eat anything you can't pronounce."],toast:"Amy heads home. Bedtime is a whole operation."},
+         {stay:["I have a meeting at seven a.m. I'm prepared. I'm always prepared.","Go on, Tom. Call when you land. I'm not worried. I'm just timing you."],toast:"Amy heads home. The clock is running."}],
+    justin:[{stay:["LA? I've got a basement project and it's at a delicate stage.","Go. Send me a picture of any outlet that looks wrong. I'll diagnose from here."],toast:"Justin heads home. The basement needs him."},
+            {stay:["I'd love to, but the late meeting turned into a later meeting.","Go. I'll catch the highlights. Of whatever game is on."],toast:"Justin heads back to work. Again."},
+            {stay:["I'll stay. Somebody has to be home when the girls get bored.","Bring me a shirt. A nice one. Not from the airport."],toast:"Justin heads home. A shirt order is in."},
+            {stay:["Los Angeles has great weather and terrible parking. I'll pass.","Go. Wave at a palm tree for me."],toast:"Justin waves and walks home."}],
+    deedee:[{stay:["Oh, Tommy, the garden won't water itself. The tomatoes are at a delicate age.","Take this. Banana bread. To the moon and back, honey."],toast:"Deedee heads home. The tomatoes need her."},
+            {stay:["I just put a pie in the oven. A pie doesn't wait for anybody.","Eat something green out there. Not a sprinkle. A real green."],toast:"Deedee hurries home. The pie is timing her."},
+            {stay:["Los Angeles is too bright for me. Everything shines and nobody has a sweater.","Take a sweater, honey. I packed one. It's in the bag."],toast:"Deedee heads home. She packed him a sweater."},
+            {stay:["Somebody has to stay and keep Boppy honest about his peppers.","Go. Call me from the plane. Don't really call me from the plane."],toast:"Deedee heads home to keep Boppy honest."}],
+    boppy:[{stay:["Los Angeles? Too much sun. My back doesn't believe in sun.","Go on. If you find a good pepper, send word. Not a bad pepper. A good one."],toast:"Boppy shuffles home. His back approves."},
+           {stay:["Flying? At my age? My knees filed a complaint.","Go. I'll be fishing. The big one is still out there."],toast:"Boppy heads for the pier. The big one is waiting."},
+           {stay:["Six hours in a seat? You couldn't pay me. You could try. I'd still say no.","Safe trip, son. Wear a coat. Planes are drafty."],toast:"Boppy heads home, muttering about drafts."},
+           {stay:["I've been to California. Once. Never again. Too many people with smoothies.","Go ahead. I'll hold down the recliner."],toast:"Boppy heads home. The recliner has been lonely."}],
+    nara:[{stay:["Nara drops a tennis ball at Tom's feet. Then she looks at the cab.","Tom throws the ball back. \"Hold it for me. I'll be back.\"","Nara wags once and trots home with her chin up."],toast:"Nara heads back to 2nd Ave. She'll be waiting.",narrate:true},
+          {stay:["Nara leans her whole body against Tom's knee. It's a very heavy hug.","\"I know. I know. Back soon. Guard the porch.\"","She sighs, then trots home like it was her idea."],toast:"Nara heads back to 2nd Ave. It was her idea.",narrate:true},
+          {stay:["Nara sits on the curb and watches the cab. She doesn't move.","Tom waves. \"Go home, girl. Treat jar. Second shelf.\"","Nara's ears go up. She's gone before he finishes the sentence."],toast:"Nara heads back to 2nd Ave. The treat jar is calling.",narrate:true},
+          {stay:["Nara follows the cab for exactly eleven steps. Then she remembers her dignity.","She sits. She watches. She lets him go."],toast:"Nara heads back to 2nd Ave. Her dignity is intact.",narrate:true}]
+  },
+  // Tom's two pages in the air, then what he says on landing.
+  flightW:[["Delta One. Lie flat. Six whole hours where nobody asks me for a piggyback.","...I already miss the piggybacks."],
+           ["Seat 1A. Warm nuts. Zero requests for snacks. This is what peace tastes like.","...It tastes a little lonely, actually."],
+           ["Six hours. I could watch a movie. I could sleep. I could do both badly."],
+           ["They gave me a hot towel. I'm wearing it like a hat. Nobody can stop me.","...Rose would love this."],
+           ["Window seat. The clouds look like a save screen. I'm not going to say that out loud.","...Oh, I said it out loud."],
+           ["Lie flat, warm nuts, no sibling clipboards. Why does that feel suspicious?"],
+           ["Six hours. If a kid asks me to carry them, I'll say yes. There are no kids. I checked twice."]],
+  flightE:[["Six hours. Then two small people will jump on me at full speed.","Worth it."],
+           ["Six hours. Then a small tornado in a hoodie. I've got my shoulders ready."],
+           ["Delta One, headed home. They gave me a warm towel. I'm saving it for Rose. She'll wear it."],
+           ["Window seat. The clouds look like loading screens. Almost home."],
+           ["I packed snacks, souvenirs and a plan. The plan is to survive the first hug."],
+           ["East coast bound. Grace has a list. Rose has a plan. I have a nap. I'm winning."],
+           ["The seat reclines all the way. I'm not using it. I'm too excited. Don't tell anyone."]],
+  arrLA:[["Downtown LA. Seventy-two and sunny. It's always seventy-two and sunny."],
+         ["Los Angeles. The air smells like sunscreen and tacos. Good start."],
+         ["Eighty degrees and not a cloud. Long Island is going to hear about this."],
+         ["Back in LA. The cab radio is playing something sunny. Everything here is sunny."],
+         ["LA. Palm trees, traffic, and a sky with no opinions."],
+         ["Downtown LA. Somewhere out here is a pot with my name on it. Probably literally."],
+         ["Los Angeles. Six hours of quiet, and now the quiet's over. Let's go."]],
+  arrHome:[["Long Island. Nice and quiet. For about four more seconds."],
+           ["Long Island. Salt air, a taxi depot, and any second now, small people."],
+           ["Home. It smells like the ocean and somebody's pie."],
+           ["Long Island. Quiet. Suspiciously quiet. Brace yourself, Tom."],
+           ["Back on the Island. My knees are ready. My ears are not."],
+           ["Home sweet home. I give it two seconds before I'm attacked."],
+           ["Long Island. It's cooler here. That's not a complaint. That's a sweater report."]],
+  // The hug-and-hello after landing on Long Island: [speaker, pages] in order.
+  welcome:[
+    [["Grace",["Tata! You're BACK! AGAIN!","Did you miss us? Say a big number."]],["Tom",["A very big number. The biggest one."]],["Rose",["Did you bring me a palm tree?"]],["Tom",["I brought you a picture of a palm tree."]],["Rose",["...That's ALMOST a palm tree."]]],
+    [["Grace",["Tata! You're BACK! I kept a list of what you missed. It's long."]],["Tom",["Read me the first one."]],["Grace",["Number one: Rose lost a sock. Number two: Rose found the sock."]],["Rose",["It was on my head. The whole time."]]],
+    [["Grace",["Tata! Did the plane have a snack cart? Did you get the little pretzels?"]],["Tom",["I got the little pretzels. I saved you eleven."]],["Rose",["Eleven? I want twelve. Tata, that's not fair."]],["Tom",["Fine. Twelve. Don't tell your mom."]]],
+    [["Rose",["TATA!! You're back! Say something in a California accent!"]],["Tom",["Dude. Totally. Palm trees. Whoa."]],["Grace",["That's the worst California accent I've ever heard."]],["Rose",["I LOVED it. Say it again."]]],
+    [["Grace",["Tata. You're back. I made you a welcome sign. It says WELCOME BACK in three colors."]],["Rose",["I did the exclamation point. It's the best exclamation point."]],["Tom",["It's the best welcome sign I've ever gotten. Rose, that exclamation point is art."]],["Rose",["I KNOW."]]],
+    [["Grace",["Tata! Mom says dinner is in an hour. You're on the list."]],["Tom",["An actual list? I feel honored."]],["Rose",["I'm on the list too. At the top. In marker."]],["Tom",["Of course you are."]]],
+    [["Grace",["Welcome back, Tata. I've been in charge. It went fine. Mostly."]],["Rose",["She made me do a spreadsheet."]],["Tom",["A spreadsheet. Of course."]],["Grace",["It was a very good spreadsheet."]]]
+  ]
+};
+const TRAVEL_BAGS={};
+// Next line from a pool: a shuffled bag, no repeat until the pool is used up, never the line that just played.
+function travelPick(id,pool) {
+  if(!pool||!pool.length) return null;
+  if(pool.length===1) return pool[0];
+  let b=TRAVEL_BAGS[id];
+  if(!b) { b=TRAVEL_BAGS[id]={left:[],last:-1}; try { const v=parseInt(localStorage.getItem('aot-travel-'+id),10); if(v>=0&&v<pool.length) b.last=v; } catch(e) {} }
+  if(!b.left.length) {
+    const idx=pool.map((_,i)=>i);
+    for(let i=idx.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [idx[i],idx[j]]=[idx[j],idx[i]]; }
+    if(idx[idx.length-1]===b.last) { const t=idx[0]; idx[0]=idx[idx.length-1]; idx[idx.length-1]=t; }
+    b.left=idx;
+  }
+  const i=b.left.pop(); b.last=i;
+  try { localStorage.setItem('aot-travel-'+id,String(i)); } catch(e) {}
+  return pool[i];
+}
+
 // Story arrivals: what Tom and the girls say when this chapter's flight lands (Tom, 26 Oct: no repeats). Keyed by the chapter the
 // flight starts, like DEPARTURES. Westbound (even chapters) lands in LA: tom = Tom's pages at the cab. Eastbound (odd chapters)
 // lands on Long Island: tom = Tom's landing page, then talk = [speaker, pages] in order after the hug. Chapters 2 and 3 (and any
@@ -175,26 +317,28 @@ function startTrip(n,dir) {
   if(typeof flightArtLoad==='function') flightArtLoad();
   const steps=[],d=departureNow(),arr=arrivalNow(dir);
   if(dir==='west') {
-    if(!girlsAway()&&memberHome('grace')!=='any') steps.push(
-      S.talk('Sal',d.driver||['Los Angeles? You got it. Flights leave whenever I get there.',"One thing. The girls stay home. Amy's rule. No flying on a school night."]),
-      S.talk('Grace',d.grace||['Tata, you\'re leaving AGAIN? You JUST got here!']),
-      S.talk('Rose',d.rose||['Bring me back a palm tree. A small one. For my room.']),
-      S.talk('Tom',d.tom||['I\'ll be back before you know it. Go home and listen to your mom.','Rose, I\'ll see what I can do about the palm tree.']),
+    if(!girlsAway()&&memberHome('grace')!=='any') {
+      const ex=(d.driver&&d.grace&&d.rose&&d.tom)?{}:travelPick('west',TRAVEL_POOLS.west);   // one whole exchange, so the girls answer each other
+      steps.push(
+      S.talk('Sal',d.driver||ex.driver),
+      S.talk('Grace',d.grace||ex.grace),
+      S.talk('Rose',d.rose||ex.rose),
+      S.talk('Tom',d.tom||ex.tom),
       S.call(()=>{ setGirlsAway(true); sfx.doorOut(); showToast('Grace and Rose head home to the Gregori house.',3); }),
-      S.wait(.9)
-    );
-    else steps.push(S.talk('Sal',['Los Angeles? You got it. Buckle up.']));
+      S.wait(.9));
+    }
+    else steps.push(S.talk('Sal',travelPick('sal',TRAVEL_POOLS.sal)));
   } else {
-    steps.push(S.talk('Sol',[d.sol||'Airport. Love it. We\'ll be there in twenty minutes. Or two hours. Nobody knows.']));
+    steps.push(S.talk('Sol',d.sol?[d.sol]:travelPick('sol',TRAVEL_POOLS.sol)));
   }
   const dest=dir==='west'?'la':'le';
   for(const f of extras()) {
     const home=memberHome(f.id); if(home==='any'||home===dest) continue;   // party rules (engine/story.js) say who lives where
-    if(f===tnb) steps.push(
-      S.talk('TNB',d.tnb||['Well, well... this is where I get off. Glaze firing tomorrow, call time at five, and somebody has to water your plants.','Go. Hug the girls for me. I\'ll be right here, pot-sitive.']),
-      S.call(()=>{ const tf=followers.find(x=>x.member===tnb); if(tf) { kiss={npc:tf,start:elapsedTime}; sfx.kiss(); } recruitLeave(tnb,true); showToast(d.tnbToast||'TNB stays in LA. Pottery, a shoot, and Tom\u2019s plants.',3.2); }),
-      S.wait(.8));
-    else if(TRAVEL_TALK[f.id]) { const tt=(d.stay&&d.stay[f.id])||TRAVEL_TALK[f.id]; steps.push(
+    if(f===tnb) { const tp=d.tnb?{}:travelPick('tnb',TRAVEL_POOLS.tnb); steps.push(
+      S.talk('TNB',d.tnb||tp.lines),
+      S.call(()=>{ const tf=followers.find(x=>x.member===tnb); if(tf) { kiss={npc:tf,start:elapsedTime}; sfx.kiss(); } recruitLeave(tnb,true); showToast(d.tnbToast||tp.toast,3.2); }),
+      S.wait(.8)); }
+    else if(TRAVEL_TALK[f.id]) { const tt=(d.stay&&d.stay[f.id])||travelPick('stay-'+f.id,[TRAVEL_TALK[f.id],...((TRAVEL_POOLS.stay[f.id])||[])]); steps.push(
       S.call(()=>{ if(f===nara) { sfx.whine&&sfx.whine(); } }),
       S.talk(tt.narrate?'Nara':f.name,tt.stay),
       S.call(()=>{ recruitLeave(f,true); sfx.doorOut(); showToast(tt.toast,3); }),
@@ -235,9 +379,7 @@ function flightSteps(dir,talk,arr) {
     ...(typeof flightArtReady==='function'&&flightArtReady()?[flightPhase('cabin',2.6)]:[]),   // engine/flight-art.js: seat 1A, a painted beat before takeoff
     flightPhase('takeoff',4),
     S.all(flightPhase('map',8),
-      S.seq(S.wait(1.6),S.talk('Tom',talk||(west
-        ?['Delta One. Lie flat. Six whole hours where nobody asks me for a piggyback.','...I already miss the piggybacks.']
-        :['Six hours. Then two small people will jump on me at full speed.','Worth it.'])))),
+      S.seq(S.wait(1.6),S.talk('Tom',talk||travelPick(west?'flightW':'flightE',west?TRAVEL_POOLS.flightW:TRAVEL_POOLS.flightE)))),
     flightPhase('landing',4.2),
     S.call(()=>{ intro.flight=null; }),
     ...(west?arriveLA(arr,card):arriveHome(arr,card))
@@ -263,7 +405,7 @@ function arriveLA(arr,card=[]) {
     {start(){ this.s=S.walk(player,[[h.door.x,h.door.y+1]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     S.call(()=>{ for(const f of followers) { f.hidden=false; f.x=h.door.x; f.y=h.door.y; f.facing='down'; } }),
     ...card,
-    S.talk('Tom',(arr&&arr.tom)||['Downtown LA. Seventy-two and sunny. It\'s always seventy-two and sunny.']),
+    S.talk('Tom',(arr&&arr.tom)||travelPick('arrLA',TRAVEL_POOLS.arrLA)),
     S.call(()=>{
       endIntro(); placeFollowers();
       sfx.levelChime();
@@ -289,7 +431,7 @@ function arriveHome(arr,card=[]) {
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[dx,dy+1],[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     ...card,
-    S.talk('Tom',(arr&&arr.tom)||['Long Island. Nice and quiet. For about four more seconds.']),
+    S.talk('Tom',(arr&&arr.tom)||travelPick('arrHome',TRAVEL_POOLS.arrHome)),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
     S.wait(.6),
     S.call(()=>{ player.facing='left';
@@ -302,12 +444,7 @@ function arriveHome(arr,card=[]) {
       update(dt){ return this.s.update(dt); }},
     S.call(()=>{ intro.bubble=null; g.facing='right'; r.facing='up'; }),
     hugStep(),
-    ...(arr&&arr.talk?arr.talk.map(([who,pages])=>S.talk(who,pages)):[
-    S.talk('Grace',['Tata! You\'re BACK! AGAIN!','Did you miss us? Say a big number.']),
-    S.talk('Tom',['A very big number. The biggest one.']),
-    S.talk('Rose',['Did you bring me a palm tree?']),
-    S.talk('Tom',['I brought you a picture of a palm tree.']),
-    S.talk('Rose',['...That\'s ALMOST a palm tree.'])]),
+    ...(arr&&arr.talk?arr.talk:travelPick('welcome',TRAVEL_POOLS.welcome)).map(([who,pages])=>S.talk(who,pages)),
     S.call(()=>{
       endIntro();
       g.x=dx-1; g.y=row; g.facing='right'; g.move=null;

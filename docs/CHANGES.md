@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 65): Airport runs, arrivals and goodbyes no longer repeat (`travel1`)
+
+- Tom (21:13): does Tom say the same thing every time he arrives in LA? It should vary, same for departures and for TNB and the others leaving the party. Repeated clips are boring.
+- Fact (cause): only the story flights for chapters 4 to 9 had their own lines (DEPARTURES and ARRIVALS in engine/travel.js). Every other run, and every part a chapter left out (chapters 2 and 3, any trip after the story), used one fixed line: Tom's LA arrival and Long Island arrival, his two flight pages, Sal and Sol, the girls' goodbye, the hug-and-hello, TNB's goodbye, and each recruit's goodbye (Amy, Justin, Deedee, Boppy, Nara).
+- Fix: `TRAVEL_POOLS` in engine/travel.js. Each slot is now a pool of 5 to 8 entries: Tom's LA arrival 7, Long Island arrival 7, flight west 7, flight east 7, the girls' westbound goodbye 8 (a whole exchange, Sal then Grace then Rose then Tom, so they answer each other), the Long Island hello after landing 7 (also whole exchanges), Sal 5, Sol 6, TNB's goodbye and toast 7, and 5 each for Amy, Justin, Deedee, Boppy and Nara. `travelPick` deals each pool as a shuffled bag: nothing repeats until the whole pool has played, and a new round never opens with the line that just played (the last pick is also kept across reloads). The original line is entry 0 of every pool, so it keeps its baked voice. Chapter flights 4 to 9 keep their own lines.
+- New lines (about 100) are silent (speech synthesis) until Tom bakes them. Added `TRAVEL_POOLS` to tools/clip-audit/harvest.js, so they are listed in the Voice Library (Nara's pages are skipped there, as for all Nara dialogue). Rebuilt harvest.json and data/voice-index.json.
+- Tested: pool test (every pool, four full cycles: 0 repeats, every entry used once per round); flight_test both directions; smoke tom,tnb,grace,rose FAILS: []; unused_voice 0 on all five checks; voice-library test ALL PASS. Not played on the phone.
+
 ## 2026-11-01 (evening, 64): Boppy and Justin voice personas, accent visible in the script (`persona1`)
 
 - Tom (21:08): Boppy is not deep or gravelly and definitely not gruff: he is sweet, fun-loving, a joker and a complainer. Justin is not warm: he is direct and serious, and laughs out loud when the time is right. And the accent tag was not visible in the Voice Library.
