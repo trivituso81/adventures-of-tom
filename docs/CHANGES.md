@@ -1,3 +1,10 @@
+## 2026-11-02 (95): Height chart reference image for the art restyle (Phase C step 1; docs and tools only, no game change)
+
+- Fact: `docs/reference/height_chart_v1.png` (1536 x 1024) shows neutral grey figures at real height on one baseline with a 1 ft grid: Justin 6'4", Tom 5'11", TNB 5'10", Boppy 5'7", Amy 5'5", Deedee 5'5", Grace 4'2", Rose 3'4", Mudling 16". Adult head 21.5 percent of height, Grace 25 percent. Built by `python3 -I tools/make_height_chart.py` (edit `CAST` and rerun).
+- Use: attach it to every character, NPC and monster sheet prompt next to `docs/reference/style_key_v1.png`, so the generator fixes the scale slips the key has (Amy too tall, shopkeeper too short, Mudling too high).
+- ASSUMPTIONS, change in the script if Tom disagrees: Rose head share .27 (no approved Rose pose yet), Mudling 16 in tall (about Grace's knee). Olivia is left off (real height not on record). The grey shapes show size only; the chart says so in its caption.
+- NOT done: the chart is not wired into any prompt entry yet (that is the next step, with Grace's first Library entry). No tag moved, no game file changed; smoke not run.
+
 ## 2026-11-02 (94): Deedee's takes doubled the phrase; her voice direction removed (Voice Library index only)
 
 - Tom (11-02 13:07): new Deedee clips repeat the phrase two or three times. Fact (cause, from `finalText` in voices.html): a voice direction is put at the front of the first [tag] of every take, and `89` gave Deedee a 20-word direction ("grounded and natural; warm and loving when the line calls for it, firm and commanding when it calls for that"). That breaks the v4 tag rules (1 or 2 descriptors of 1 or 2 words per tag, voice only, no instructions; docs/VOICE_LIBRARY.md "v4 tag rules", the `vtag1` finding that too many qualifiers double the phrase). It was my change, not the new voice.
