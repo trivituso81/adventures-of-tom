@@ -1,3 +1,9 @@
+## 2026-11-01 (evening, 61): TNB's battle clips from export 9 (`nclips9`)
+
+- Tom sent `local-clips-export_9.json` (420 clips, all voices) and asked for TNB's. Merged only TNB's 23 (18 kept): 16 existing clips replaced, 1 added (`data/voice/tnb.js`, tag `nclips9`). The other voices in the export were not touched.
+- Left out, audio words differ from the line: basic and mug_toss "Heads up! Handmade!" (take stops after "Heads up!"), hurt "Hey! That was glazed!" (says "I just glazed that"), throw_down (stops at "Literally"). Left out, no live line: "Jojo, you're up. ...Jojo. JOJO. ...Nice." Those lines keep their old clips.
+- Tests: `unused_voice.py` 0 on all five checks; smoke tnb,tom,grace,amy FAILS: []; kit_test tnb every move says its line. Voice Library index rebuilt.
+
 ## 2026-11-01 (evening, 60): Last old Grace, Rose and Deedee move code deleted (`dead2`)
 
 - Tom asked twice for dead code to go. Removed the 25 old moves that stayed in `dead1` only because a wrapping loop named them: Grace (heel_click, glitter_checkin, ringlight_rescue, comment_moderation, thumbnail_face, eight_count, beam_borders, warmup_lap, mat_patrol, spotlight_shuffle), Rose (tiny_tap, where_did_i_go, royal_inspection, giggle_echo, lamby_appointment, floor_is_jelly, ribbon_rescue, lamby_ending, pocket_princess, princess_parasol) and Deedee (pepper_free_plate, rolling_pin_rounds, windows_open, spotless_record, take_a_breather). 50 function definitions (each key had an older and a newer version) and 46 KB, from engine/grace-moves.js, rose-moves.js and deedee-moves.js, plus their names in the three wrapping loops. Method: acorn syntax tree, delete by byte range.
