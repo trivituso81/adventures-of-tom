@@ -14,12 +14,12 @@ for(const f of fs.readdirSync(R+'data/voice')) if(/^dialog-ch\d+\.js$/.test(f)) 
 
 const CFG={
   deedee:{
-    accent:'warm Long Island accent',
-    direction:'smiling, affectionate, bright and youthful, never stern',
+    accent:'natural Long Island accent',
+    direction:'firm, brisk, commanding, no-nonsense; warm only when the moment calls for it, never giggly',
     stability:0.5, similarity:0.85,
     old_id:VC.voices.deedee.voice_id, old_name:VC.voices.deedee.name,
-    desc:'A woman in her seventies who sounds about fifty-five. A warm, bright, smiling voice with a rich, sunny tone: soft, affectionate and full of laughter, never raspy, breathy, thin or wobbly. A friendly Long Island New York accent. A retired nurse and doting grandma who hugs first and gives orders second: loving, cheerful, gently teasing, a little goofy. Clean studio recording.',
-    sample:'There is my Tommy! Come here, come here, let me look at you. The rhubarb crisp is cooling on the counter and the floors are just mopped, so shoes off, honey. Grace, Rose, Deedee loves you to the moon and back. Say it back to me. Louder!'
+    desc:'A woman in her seventies who sounds about fifty-five. A strong, clear, confident voice with real authority: a retired nurse and mother who has run a household and a hospital ward for decades and takes no nonsense. Usually brisk, firm and commanding, direct, dry when unimpressed, able to stop a room with one word. Never giggly, breathy, sing-song, gushing, thin or wobbly, and not laughing through her lines. Warm and loving only when the moment calls for it, and then sincere and low-key rather than bubbly. A natural Long Island New York accent. Clean studio recording.',
+    sample:'Tommy, sit down. Shoes off, the floors are just mopped, and I\'m not going to ask you twice. I don\'t care who started it, the two of you will apologize and then we will eat. Now come here, honey. Deedee loves you to the moon and back. Eat your dinner.'
   },
   ellie:{
     accent:'thick old Long Island accent',

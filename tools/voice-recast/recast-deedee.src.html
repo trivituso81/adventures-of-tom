@@ -56,8 +56,8 @@ try{$('key').value=localStorage.getItem('aot-baker-key')||''}catch(e){}
 $('key').oninput=saveKey;saveKey();
 $('curname').textContent=CUR.name;$('curid').textContent=CUR.voice_id;
 let oldId=CUR.voice_id;
-try{$('desc').value=localStorage.getItem('aot-recast-deedee-desc')||DESC}catch(e){$('desc').value=DESC}
-$('desc').oninput=()=>{try{localStorage.setItem('aot-recast-deedee-desc',$('desc').value)}catch(e){}};
+try{$('desc').value=localStorage.getItem('aot-recast-deedee-desc-v2')||DESC}catch(e){$('desc').value=DESC}
+$('desc').oninput=()=>{try{localStorage.setItem('aot-recast-deedee-desc-v2',$('desc').value)}catch(e){}};
 const need=()=>{if(!$('key').value.trim())throw new Error('Paste your ElevenLabs key first.')};
 async function err(r){try{const j=await r.json();const d=j.detail;return typeof d==='string'?d:(d&&d.message)||JSON.stringify(j)}catch(e){return 'HTTP '+r.status}}
 const say=(t,c)=>{$('status').textContent=t;$('status').className='dim '+(c||'')};
