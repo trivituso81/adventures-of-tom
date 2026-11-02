@@ -1,3 +1,9 @@
+## 2026-11-02 (101): Grace's hero cut redone with the image AI's outline as a stencil (`tools/cut_grace_from_ai.py`; sources only, no game change)
+
+- Tom (11-02 14:02) said my GrabCut cut (CHANGES (100)) "looks like shit": paving specks, rough hair. Fact (cause): paving is nearly the same color as her pants and hair. Call made: Tom ran `grace-hero-cut.txt` in his image AI with the approved painting; the result (`tools/sprite-bake/src/grace-hero-cutai-v1.png`) has clean edges but its pixels are repainted (paler colors, pinker shoes, smoother texture), so it is NOT used for pixels.
+- Method (as the Square and Row cutouts): the AI cut is only a stencil. `tools/cut_grace_from_ai.py` keys the magenta, aligns it to the painting (ECC affine, correlation 0.80, scale .991, shift 5.5 px) and takes every pixel from `grace-hero-scene-v1.png`. Output `tools/sprite-bake/src/grace-hero-cut-v2.png` (RGBA); previews `tools/shots/grace2-{magenta,gray,white}.png`, looked at. `grace-hero-cut-v1.png` and `cut_grace_hero.py` (GrabCut) are superseded.
+- NOT done: Tom has not judged v2; no head-share check against the key; no bake. No tag moved, no game change, smoke not run.
+
 ## 2026-11-02 (100): Grace's hero pose came back painted; cut out locally (`tools/cut_grace_hero.py`; sources only, no game change)
 
 - Fact: the Library's xAI generator missed the painted look three times (smooth, no brushwork) and ignored the school yard reference. Call made: Tom ran `grace-hero-scene.txt` in his other image AI with the four attachments; the result (Tom 11-02 13:57, "looks good") has the brushwork. Saved as `tools/sprite-bake/src/grace-hero-scene-v1.png` (1448 x 1086, Grace standing in the school yard).
