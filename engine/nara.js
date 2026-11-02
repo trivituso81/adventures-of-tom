@@ -564,7 +564,7 @@ SC.nv_bark=(s,u)=>{ const q=ez(u); gfx.globalAlpha=1-u; for(let k=0;k<3;k++) { c
 SC.nv_freeze=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); for(const F of s.list) { gfx.strokeStyle=ICE; gfx.lineWidth=3; gfx.setLineDash([6,4]); gfx.strokeRect(F.x-F.w*.5-6,F.top-6,F.w+12,F.h+10); gfx.setLineDash([]);
     for(let k=0;k<4;k++) { const sx=F.x-F.w*.5+k*F.w/3; gfx.beginPath(); gfx.moveTo(sx-5,F.base+4); gfx.lineTo(sx,F.base-12); gfx.lineTo(sx+5,F.base+4); gfx.closePath(); gfx.fillStyle=ICE; gfx.fill(); gfx.lineWidth=2; gfx.strokeStyle=OUT; gfx.stroke(); } } };
 N.stranger_alert=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),H0=homeOf(m),wy=H0.y-NH()-18,nh=NH();
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'sit'},{t:1400,f:'sit',rot:.05},{t:1850,f:'act',rot:u=>Math.sin(u*Math.PI*6)*.08,dy:u=>-Math.abs(Math.sin(u*Math.PI*3))*8},{t:3000,f:'sit'},{t:4300,f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'sit'},{t:1400,f:'sit',rot:.05},{t:1850,f:'act',rot:u=>Math.sin(u*Math.PI*6)*.08,dy:u=>-Math.abs(Math.sin(u*Math.PI*3))*8},{t:3000,f:'sit'},{t:3450,f:'act',dy:u=>-Math.abs(Math.sin(u*Math.PI*2))*7},{t:3900,f:'sit'},{t:4300,f:'idle'}]);
   const hitB=(k,amt)=>()=>{ barks(1); scene('nv_bark',.6,{x:H0.x-40,y:H0.y-nh*.6,r:H0.x-G.x0}); scene('nv_big',.8,{x:G.x+(k-1)*70,y:G.top-60-k*14,txt:'BARK!',c:k%2?CREAM:GOLD,sc:3+(k===2?1:0)}); for(const f of list) ST.jolt(f,.4); landHit(amt); };
   ST.play(E2,[
     [0,()=>{ setMessage('Nara sits at the window. Very still. Ears up.'); say(m.id,'stranger_alert'); scene('nv_window',4.4,{x:H0.x,y:wy,w:Math.max(96,BATTLE_SPRITES.nara.idle[0].length*2+20),h:nh+24}); }],
@@ -573,6 +573,8 @@ N.stranger_alert=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),H0=homeOf(
     ['hf',1900],
     [1900,hitB(0,34)],[2250,hitB(1,33)],[2600,hitB(2,33)],
     [2800,()=>{ scene('nv_freeze',1.5,{list:list.map(f=>ST.unit(f))}); scene('nv_text',1.3,{x:G.x,y:G.base+16,txt:'FROZEN',c:ICE,sc:2}); setMessage('Nobody moves. Nobody even blinks.'); }],
+    // While the street stays frozen Nara does a proud little hop and the ice shivers once.
+    [3450,()=>{ sfx.boing(); scene('nv_text',.9,{x:H0.x,y:wy-14,txt:'WOOF!',c:GOLD,sc:3}); for(const f of list) ST.jolt(f,.15); }],
     [4400,'end',res(E2)+'The street is safe. Nara is very proud of herself.']]); };
 
 // ---------- Doodle Fluff (B1) ----------

@@ -1017,6 +1017,9 @@ T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Mat
     [hit,()=>{ sfx.bonk(); S('ting'); ST.jolt(f,.55); landHit(100); scene('tp2_burst',.6,{x:F.x+6,y:F.top+18,r:56}); scene('tv2_flash',.25,{a:.3}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'CLUNK!',c:GOLD,sc:5}); }],
     [2550,()=>{ ST.fly((x,y,u)=>spinMug(0,0,u,-1,MS),F.x+6,F.top+18,lx,ly,.5,60); }],
     [3050,()=>{ sfx.ding(); scene('tp2_mugrest',1.5,{x:lx,y:ly}); setMessage('It lands upright. Not a chip on it.'); }],
+    // The struck enemy stares at the mug while it sits there: a small flinch at the ding, then a sparkle on the glaze.
+    [3500,()=>{ ST.jolt(f,.2); S('select'); }],
+    [3900,()=>{ scene('tv2_sparkle',.7,{x:lx,y:ly-8,r:26}); sfx.ding(); }],
     [4500,'end',res(E2)+'Handmade. Slightly crooked. Extremely effective.']]); };
 
 // ---------- Continuity Pins: a bigger needle with a thread trail, bigger safety pins ----------

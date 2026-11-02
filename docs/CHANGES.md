@@ -1,3 +1,13 @@
+## 2026-11-02 (75): Four moves no longer freeze mid-animation (`freeze1`)
+
+- Source: claude/battle-animation-audit.md finding 4 (quiet stretches of 1.0 to 3.8 s). Each fix adds one reaction inside the quiet window; no art, no voice line, no clip and no damage timing changed.
+- Rose, Bedtime Story: the enemies doze off one by one (a "Z" rises over each, starting at 2.8 s, 0.65 s apart) while the story runs; before, nothing moved from 2.2 s to 6.0 s except the page. The enemy list comes from `B2.foes` because this move's targets are the party.
+- Tom, Disconnected Controller (`button_mash`): after the BONK the struck enemy sees stars (three stars circle its head, new scene `tp_dizzy`) and wobbles again at 0.9 s.
+- TNB, Mug Toss: while the mug sits on the ground the struck enemy flinches at 3.5 s and the glaze sparkles at 3.9 s with a second ding.
+- Nara, Stranger Alert: during the FROZEN hold Nara does a proud little hop with a WOOF! (3.45 s) and the frozen enemies shiver once.
+- Tested: kit_test on each of the four moves (FAILS: []), frames looked at before and after; smoke tom,rose,tnb,nara FAILS: []; unused_voice 0 on all five checks. Not seen on the phone.
+- Still open from audit finding 4: Tombos rose1_dc, boppy1_dc (may be intentional), and the flagged but unviewed tom.sourdough_snob, skincare_10, seat_1a, nara.puppy_eyes, doodle_fluff, tnb.throw_down, Tombos amy3, tnb3, ff4, deedee1, rose3, ff1. Look at each before touching. Tags bumped: `tom-moves.js`, `rose-moves.js`, `tnb-moves.js`, `nara.js`, `main.js`; stamp `build freeze1`.
+
 ## 2026-11-02 (74): Deedee calls Tom "My favorite son!" and says "You must be starving!" (`deedee1`)
 
 - Tom's request: everywhere in the game, Deedee's "There's my Tommy!" becomes "My favorite son!", and "you're skin and bones" becomes "You must be starving!". Reworded in all live spots: the chapter 1 Rivituso kitchen scene (`ch1Theft`, both lines), the chapter 3 fishing scene return (`ch3Fishing`), Deedee in the Rivituso house on the walking map (data/maps-le.js), the Nine Scoops thaw scene (data/bonus-nine-scoops.js, "My favorite son! And my girls! And my... oh. OH. Why is Rose in an ice cube."), and her battle and street greeting pool (`deedee.greet` in data/lines.js). The kitchen line is now "Tom, you must be starving! Sit. The crisp needs ten minutes on the counter." Other "Tommy" lines (for example "That's love, Tommy.") are untouched on purpose; he asked only for the greeting.

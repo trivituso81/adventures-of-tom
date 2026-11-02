@@ -834,6 +834,8 @@ Rm.bedtime_story=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFo
     [0,()=>{ setMessage(self?'Rose sits down with Lamby and her favorite book.':'Rose brings Lamby and her favorite book over to '+t.name+'.'); say(m.id,'bedtime_story'); scene('ro_carry',sit/1000,{dy:8,sc:1}); }],
     [sit,()=>{ scene('rv_book',(end-sit-200)/1000,{plan}); scene('rv_night',(endAt+400-sit)/1000,{x:(bx+H.x)/2,y:H.mid,upAt:endAt,t0:sit}); sfx.select(); setMessage('Lights down. Once upon a time...'); }],
     [2200,()=>{ scene('rv_zzz',(healAt-2200)/1000,{x:H.x+H.w*.25,y:H.top}); }],
+    // The enemies doze off one by one while the story runs (was one frozen picture from 2.2 s to 6.0 s).
+    ...(B2.foes||[]).filter(f=>!f.dead&&f.hp>0).slice(0,4).map((f,i)=>[2800+i*650,()=>{ const F=ST.unit(f); scene('rv_zzz',(healAt+400-2800-i*650)/1000,{x:F.x+F.w*.2,y:F.top}); }]),
     [turn1,()=>{ sfx.whoosh(); }],
     ['hf',healAt],
     [healAt,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:'#ffd27a'}); scene('ro_flakes',1,{x:H.x,y:H.base,h:H.h}); hopOf(t!==m?t:null); }],

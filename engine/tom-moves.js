@@ -1385,6 +1385,8 @@ SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAl
   if(ms>P.presses[0]+100&&ms<P.wind) { const sx=x+4,sy=y-26,a=Math.min(1,(ms-P.presses[0]-100)/150); gfx.globalAlpha=a;
     gfx.strokeStyle=CREAM; gfx.lineCap='round'; gfx.lineWidth=2.5; for(let k=1;k<=3;k++) { gfx.beginPath(); gfx.arc(sx,sy+8,k*5,Math.PI*1.2,Math.PI*1.8); gfx.stroke(); } E(sx,sy+8,1.8,1.8,CREAM);
     if(ms>P.presses[1]) { Ln(sx-9,sy-6,sx+9,sy+10,3.5,OUT); Ln(sx+9,sy-6,sx-9,sy+10,3.5,OUT); Ln(sx-9,sy-6,sx+9,sy+10,2,RED); Ln(sx+9,sy-6,sx-9,sy+10,2,RED); } } };
+// After the BONK the struck enemy sees stars: three stars circle its head, and it wobbles once more as they fade.
+SC.tp_dizzy=(s,u)=>{ gfx.globalAlpha=fade(u,.8); for(let k=0;k<3;k++) { const a=s.t*7+k*Math.PI*2/3; star(s.x+Math.cos(a)*18,s.y+Math.sin(a)*5,5,GOLD,a); } };
 SC.tp_cdown=(s,u)=>{ const q=ez(u/.35); gfx.globalAlpha=fade(u,.7); ctl(s.x+q*s.dx,s.y+Math.abs(Math.sin(q*Math.PI*2))*-8*(1-q)+q*s.dy,1.25,.5+q*1.4,false,false); };
 Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const presses=[500,900,1300],ugh=1650,wind=2250,thr=2650,fly=360,hit=thr+fly;
@@ -1403,5 +1405,7 @@ Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     ['hf',hit],
     [hit,()=>{ S('bonk'); S('thud'); ST.jolt(f,.6); landHit(100); scene('tv_big',1.0,{x:F.x,y:F.top-62,txt:'BONK!',c:GOLD,sc:4}); scene('tv_burst',.6,{x:F.x,y:F.mid,n:10,r:46}); scene('tv_ring',.6,{x:F.x,y:F.mid,r:42});
       scene('tp_cdown',1.2,{x:F.x,y:F.mid,dx:-26,dy:F.base-F.mid-6}); setMessage('The controller connects. Just not the way it was meant to.'); }],
+    [hit+500,()=>{ scene('tp_dizzy',1.0,{x:F.x,y:F.top-10}); }],
+    [hit+900,()=>{ ST.jolt(f,.25); S('select'); }],
     [hit+1700,'end',res(E2)+'It was the Bluetooth.']]); };
 })();
