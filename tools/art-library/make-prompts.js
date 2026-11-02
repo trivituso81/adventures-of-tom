@@ -2,6 +2,9 @@
 // Builds data/art-prompts.json. Claude edits the ENTRIES list below (or adds files) and reruns: node tools/art-library/make-prompts.js
 // Entry fields: id, tab (Characters|Areas|Rooms|Props|Enemies), title, prompt, refs (repo paths, max 5), ar (aspect ratio), status.
 // Existing statuses, versions and rejects in the current json are kept for ids that still exist.
+// Optional `bake` (B5, read by tools/art-library/art_bake.py in the art-bake Action): { script: 'bake_foe.py', args: ['mudling'], src: 'tools/sprite-bake/src/foe-mudling-v1.png', key: 'corner' }.
+// `src` must sit under tools/sprite-bake/src/; `key: 'corner'` makes the background transparent from the corner colour (the generator's magenta comes out crimson).
+// Only add `bake` when an approval should REPLACE live art; an entry without it is just stored under art/raw/. The test entry has none on purpose.
 const fs = require('fs');
 const out = 'data/art-prompts.json';
 const old = fs.existsSync(out) ? JSON.parse(fs.readFileSync(out, 'utf8')).entries : [];
