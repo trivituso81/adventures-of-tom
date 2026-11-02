@@ -1,3 +1,10 @@
+## 2026-11-02 (72): Art restyle, Phase A: STYLE BLOCK v2 and the style key prompt (docs only, no game change)
+
+- Tom (11-02, 06:57 and 07:07): the party reads too realistic and the NPCs too chibi; he wants illustrated whimsical realism for characters, NPCs and monsters, matching the painted Square and house interiors, with consistent sizes. This is Phase A of the plan in claude/next.md.
+- docs/CHARACTER_PIPELINE.md section 0: STYLE BLOCK v2 replaces the old block (old one kept under "Old STYLE BLOCK, retired 2026-11-02"). Wording: whimsical storybook illustration, gently simplified shapes, soft painted edges with a touch of visible brushwork, slightly stylized features that keep a likeness, warm golden light from the upper left, no thick outlines; NOT photorealistic and NOT a 3D render added; "semi-realistic" and "glossy highlights" dropped. One block for party, NPCs and monsters. Section 3 now says to attach the approved style key image.
+- New docs/reference/style_key_prompt.txt and docs/reference/style_key_square_crop.png (1536 x 1024 crop of art/town.webp, lower plaza with paving for feet). The prompt draws Grace, Amy, Tom, an invented shopkeeper and a Mudling in one row at true relative heights on the Square crop. The picture is a reference only and is never installed.
+- No game code, art or voice file changed, so no ART_V or `?v=` bump. Tom runs the prompt in his current generator with the four attached pictures and sends the result back; no character is regenerated until he approves it.
+
 ## 2026-11-02 (71): Aunt Ellie's bets and prizes, one per chapter (`ellie1`)
 
 - Tom: more optional Aunt Ellie content. After a chapter's first story beat she jokes about it and bets Tom a prize if he finishes the chapter. Each chapter gives a unique item, equipped or used in battle.

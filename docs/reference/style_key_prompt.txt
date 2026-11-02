@@ -1,0 +1,38 @@
+IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.
+
+WHAT THIS IS
+A style reference picture for "The Adventures of Tom", a family role-playing game. It shows five characters standing side by side in a row on the town plaza, so we can check that people, townspeople and monsters all share one illustrated look and that their sizes are right next to each other.
+
+ATTACHED IMAGES (in this order)
+1. The town plaza painting. This is the BACKGROUND and the STYLE TO MATCH. Keep its fountain, paving, benches, lamps and shop fronts exactly as painted. Match its light, its soft brushwork, its colors and its level of detail in every character.
+2. AMY, a full body reference. Draw her exactly like it: same face, hair, clothes, prints and colors.
+3. TOM, a full body reference. Draw him exactly like it.
+4. GRACE, a full body reference. Draw her exactly like it.
+The attached character pictures have a flat magenta background. Ignore that magenta, it is not part of the scene. Only the people matter.
+
+THE SCENE
+Use the plaza painting as the whole background, same framing, nothing removed. Five characters stand in one straight row across the open cobblestone paving in the lower part of the picture (their feet around the paving just below the shop fronts, above the Rivituso Row gate), standing in front of the shops and the fountain, and they may cover parts of them; everything behind them stays as painted. All five face the viewer, feet on the paving, evenly spaced, none overlapping, all fully visible head to feet. Left to right:
+1. GRACE, a 9 year old girl, real height 4 feet 2 inches. A child.
+2. AMY, a woman, real height 5 feet 5 inches.
+3. TOM, a man, real height 5 feet 11 inches. The tallest of the family.
+4. A SHOPKEEPER, an invented townsperson, real height 5 feet 8 inches: a friendly middle aged man with a round kind face, a warm smile, a rolled sleeve shirt, suspenders and a long cream apron with a small pocket. Hands empty.
+5. A MUDLING, a small friendly mud monster, knee high, about 18 inches tall: a rounded lump of brown mud with a puddle base, two stubby mud arms, big round shiny eyes, a small open mouth, and a little green sprout with two leaves growing from the top of its head.
+The four people each stand in a relaxed, natural, friendly pose with a gentle smile. The Mudling looks up at them curiously.
+
+SCALE (strict, this is the point of the picture)
+- Draw all five at true relative heights. Tom is the tallest person. The shopkeeper is a little shorter than Tom. Amy is shorter than the shopkeeper. Grace's head reaches about the middle of Tom's chest. The Mudling reaches only about Grace's knee.
+- Every adult has the same head size: the head is one third of the adult's body height, top of hair to chin. Grace's head is a little under half of her body height. Faces of Tom, Amy and the shopkeeper read as the same size.
+- All five are drawn at one consistent scale on the same paving, with their feet on the same ground area. Nobody floats and nobody is cut off.
+
+ART STYLE
+- A whimsical storybook illustration of a real person, shown full body, painted by hand. Gently simplified shapes, soft painted edges and a touch of visible brushwork, like the illustrated town it lives in. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the reference.
+- Warm golden light from the upper left, a soft warm glow, a gentle rim light, rich warm colors.
+- Clean soft edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
+The shopkeeper and the Mudling use the same style as the people: the same brushwork, the same soft light, the same color richness. They must look like they were painted by the same hand as the plaza.
+
+LIKENESS
+Amy, Tom and Grace must keep a clear likeness of their reference pictures: face shape, hair, skin tone, glasses or facial hair if any, outfit colors and prints. Exaggerate only the head size and the expression, never the individual features. Do not beautify, age up or age down anyone.
+
+NEVER substitute. Draw exactly these five characters. No other people, no text, no labels, no captions, no extra props held in hands, no speech balloons. Family friendly for ages 6 and up. If anything is unclear, follow the scene as written.

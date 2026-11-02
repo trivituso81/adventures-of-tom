@@ -2,26 +2,34 @@
 
 Tom should never have to rewrite an image prompt. This doc holds the requirements and the prompt templates. When he gives photos of a new character, Claude builds the spec and the whole prompt pack from this doc. When he asks for ability poses, Claude uses the ability rules below. Tom pastes the prompts into his external image AI and drops the returned sheets back into a conversation.
 
-The character art style is the painted, realistic caricature look Tom calls "32-bit realistic" (approved on Amy, then used for every character). It is NOT the old 16-bit pixel style. Character prompts never contain the words "16-bit", "32-bit", "SNES", "Super Nintendo", "Final Fantasy", "Chrono Trigger", "pixel art", "retro" or "sprite": those words pull an image AI toward pixel art. The game shrinks and bakes the painted sheets itself (section 6).
+The character art style is now ILLUSTRATED WHIMSICAL REALISM (Tom, 2026-11-02; STYLE BLOCK v2 in section 0). The earlier realistic caricature look Tom called "32-bit realistic" (approved on Amy) is retired for new art, and the 16-bit pixel style stays retired. Character prompts never contain the words "16-bit", "32-bit", "SNES", "Super Nintendo", "Final Fantasy", "Chrono Trigger", "pixel art", "retro" or "sprite": those words pull an image AI toward pixel art. The game shrinks and bakes the painted sheets itself (section 6).
 
 Section 7 (heads, heights, widths) is mandatory for every new adult or child. **Real height in feet and inches is required input: do not write the spec, the prompts or a bake until Tom has given it.**
 
-## 0. Art style: STYLE BLOCK and PHOTO FIDELITY BLOCK
+## 0. Art style: STYLE BLOCK v2 and PHOTO FIDELITY BLOCK
 
 Scope: character prompts (hero pose, walk, battle, ability). Props, enemies and backgrounds keep their own docs (`docs/PROP_ART.md`, `docs/ENEMY_SHEETS.md`, `docs/AREA_PAINTINGS.md`, `docs/ROOM_PAINTINGS.md`). Older prompt files in the Project written in 16-bit wording must be regenerated from this doc before they are re-run; copy their structure, never their style lines.
 
-### STYLE BLOCK (paste verbatim into every character prompt)
+### STYLE BLOCK v2 (Tom, 2026-11-02; paste verbatim into every prompt for a party member, NPC or monster)
+
+Tom's direction: "illustrated whimsical realism", one look for the party, the townspeople and the monsters, matching the painted Square and the house interiors. Every prompt also attaches the style key image (`claude/style-key-prompt.txt` makes it) once Tom has approved it.
 
 ```
 ART STYLE
-- A hand-painted digital caricature illustration of a real person, shown full body. Semi-realistic painterly rendering with smooth soft shading, glossy highlights on skin and hair, and finely painted hair strands. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- A whimsical storybook illustration of a real person, shown full body, painted by hand. Gently simplified shapes, soft painted edges and a touch of visible brushwork, like the illustrated town it lives in. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
 - Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photo.
-- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, rich saturated warm colors.
+- Warm golden light from the upper left, a soft warm glow, a gentle rim light, rich warm colors.
 - Clean soft edges. No thick or black outlines.
-- NOT pixel art, NOT retro game art. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.
+- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
 ```
 
 For a child, replace the second bullet's first sentence with: "Caricature proportions for a child: an oversized head a little under half of the full body height, a small body, small hands and small feet." (Section 7 sets the exact head share in the bake; the prompt only has to get close.)
+
+For an invented NPC or a monster there is no photo: replace "of a real person" with "of a [short description]" and drop the likeness sentences. Enemies keep `docs/ENEMY_SHEETS.md` for frames and grids but take this block for style.
+
+### Old STYLE BLOCK, retired 2026-11-02, do not use
+
+Kept only so old prompt files can be recognised. It said "semi-realistic painterly rendering", "glossy highlights on skin and hair" and "finely painted hair strands". Any prompt file that contains those words is the old look: regenerate it from the block above before it is run.
 
 ### PHOTO FIDELITY BLOCK (paste verbatim into the hero pose prompt, and into every other prompt that has photos attached)
 
@@ -70,7 +78,7 @@ If a photo shows more than one person, ask which one.
 
 All three share these rules. Put them in every prompt.
 
-- Style: the STYLE BLOCK from section 0, pasted verbatim. If Tom attaches a reference in a different style, the reference wins.
+- Style: STYLE BLOCK v2 from section 0, pasted verbatim, plus the approved style key image attached. If Tom attaches a reference in a different style, the reference wins.
 - The attached reference (the hero pose, section 3A) shows the character. Draw EXACTLY like it in every frame: same face, hair, clothes, prints, colors, proportions, art style, level of detail. Also attach the best face close-up photo to the walk and battle prompts, with this line: "The attached photo is a close-up of the real person's face. Keep the face as faithful to it as the hero pose is, in every frame, including from the side and from behind where hair and ears show."
 - Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere in the character. No magenta glow, spill, tint or fringe on the character's edges or hair strands. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
 - Grid of equal square cells, filled left to right, top to bottom, in the numbered order. Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour. The AI will not hit the sizes exactly; the install step cuts by gaps.
