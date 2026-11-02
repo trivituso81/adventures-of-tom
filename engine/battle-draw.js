@@ -2,17 +2,38 @@
 // engine/battle-draw.js — Drawing the battle scene, animations and effects.
 
 // ---------- Battle backdrops ----------
-// Tom's pixel-art pictures live in bgs/ (576x324 PNGs, one per place). battleBgKey picks the picture from the map's
-// ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not loaded yet, the older code-drawn
-// backdrops in the render files (engine/*-render.js, drawLABattleBg / drawLEBattleBg) and the pond code below are used.
+// The painted battle backgrounds live in bgs/ (576x324 WebP, one per place; repainted 2026-11-01 to the layout in
+// claude/battle-background-spec.md: the floor starts about 65% down and is flat, matte and empty so characters stand ON it).
+// battleBgKey picks the picture from the map's ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not
+// loaded yet, the older code-drawn backdrops in the render files (engine/*-render.js, drawLABattleBg / drawLEBattleBg) and
+// the pond code below are used. BG_V is the cache tag: bump it whenever a picture in bgs/ changes, or phones keep the old one.
+const BG_V='bgs2';
 const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-school-classroom',cafe:'04-school-cafetorium',
   stacks:'05-library-stacks',readroom:'06-library-reading-room',club:'07-moon-club',dome:'08-moon-club-dome',barn:'09-car-barn',
   boiler:'10-boiler-room',term:'11-terminal-zero',gate:'12-gate-zero',lot:'13-studio-backlot',stage:'14-soundstage',
-  park:'15-oak-park',oak:'16-inside-the-oak',canopy:'17-oak-crown-canopy'};
+  park:'15-oak-park',oak:'16-inside-the-oak',canopy:'17-oak-crown-canopy',
+  tower:'19-glass-tower',towerarch:'20-glass-tower-shelves',vault:'21-glass-tower-vault',pinnacle:'22-glass-tower-pinnacle',
+  engine:'23a-forever-engine',engine_calm:'23b-forever-engine-calm',sorting:'24-sorting-hall',subway:'25-subway-tunnel',
+  chamber:'26-subway-chamber',infinity:'27-terminal-infinity',cabin:'28-flight-zero-cabin'};
 const BG_IMG={};
-for(const k in BG_FILES) { const im=new Image(); im.src='bgs/'+BG_FILES[k]+'.png'; BG_IMG[k]=im; }
+const bgSrc=name=>'bgs/'+name+'.webp?v='+BG_V;
+for(const k in BG_FILES) { const im=new Image(); im.src=bgSrc(BG_FILES[k]); BG_IMG[k]=im; }
 function battleBgKey() {
   const g=currentMap&&currentMap.style&&currentMap.style.ground,L=B2.active?B2:{};
+  // Story places that used to be code-drawn only (no picture): the Glass Tower, the Forever Engine, the sorting hall, the
+  // subway, Terminal Infinity and the Flight Zero cabin. Chosen by ground and map id.
+  if(g==='glass') {
+    const id=currentMap.id;
+    if(id==='towershelves') return 'towerarch';
+    if(id==='towervault') return 'vault';
+    if(id==='towerpinnacle') return 'pinnacle';
+    if(id==='stillcore'||id==='foreverheart') return (typeof ceFlag==='function'&&ceFlag('ch20-julian'))?'engine_calm':'engine';
+    return 'tower';
+  }
+  if(g==='dead') return 'sorting';
+  if(g==='sub') return currentMap.id==='subchamber'?'chamber':'subway';
+  if(g==='inf') return 'infinity';
+  if(g==='cabin') return 'cabin';
   if(L.labLA||regionOf(currentMap)==='la') {
     if(g==='barn'||g==='boiler') return g;
     if(g==='lot'||g==='backlot') return 'lot';
@@ -34,8 +55,8 @@ function battleBgKey() {
   return 'pond';
 }
 function drawBattleBackdrop(t) {
-  // The Glass Tower (chapters 17 and 18) has code-drawn backdrops (engine/ch17-render.js, ch18-render.js); there is no picture for it, so it must come before the picture lookup.
-  if(typeof glGround==='function'&&glGround(currentMap)&&typeof drawLEBattleBg==='function'&&drawLEBattleBg(t)) return;
+  // Every place now has a painted picture (the Glass Tower and the other story places were code-drawn until 2026-11-01);
+  // the code-drawn backdrops below only show while a picture is still loading.
   const im=BG_IMG[battleBgKey()];
   if(im&&im.complete&&im.naturalWidth) { gfx.imageSmoothingEnabled=false; gfx.drawImage(im,0,0,192,108); return; }
   // Fallback while a picture loads: the code-drawn backdrops.

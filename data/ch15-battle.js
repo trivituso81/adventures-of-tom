@@ -52,9 +52,9 @@ b2Start=function(cfg) {
   return LE_b2Start_ch15(cfg);
 };
 
-// ---------- The dining room picture (bgs/18-dinner-table.png) ----------
+// ---------- The dining room picture (bgs/18-dinner-table.webp) ----------
 Object.assign(BG_FILES,{dinner:'18-dinner-table'});
-{ const im=new Image(); im.src='bgs/'+BG_FILES.dinner+'.png'; BG_IMG.dinner=im; }
+{ const im=new Image(); im.src=bgSrc(BG_FILES.dinner); BG_IMG.dinner=im; }
 const LE_battleBgKey_ch15=battleBgKey;
 battleBgKey=function() {
   if(B2.active&&B2.foes&&B2.foes.some(f=>f.boss==='hush9final')) return 'dinner';
