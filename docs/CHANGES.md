@@ -1,3 +1,9 @@
+## 2026-11-02 (94): Deedee's takes doubled the phrase; her voice direction removed (Voice Library index only)
+
+- Tom (11-02 13:07): new Deedee clips repeat the phrase two or three times. Fact (cause, from `finalText` in voices.html): a voice direction is put at the front of the first [tag] of every take, and `89` gave Deedee a 20-word direction ("grounded and natural; warm and loving when the line calls for it, firm and commanding when it calls for that"). That breaks the v4 tag rules (1 or 2 descriptors of 1 or 2 words per tag, voice only, no instructions; docs/VOICE_LIBRARY.md "v4 tag rules", the `vtag1` finding that too many qualifiers double the phrase). It was my change, not the new voice.
+- Fix (one lever): Deedee's direction in `tools/voice-library/make-index.js` is now empty for battle and dialogue. Her own per-line hand-written tags still carry the acting ([firm, brisk], [delighted, warm]), so warm and stern both come from the line, not from a blanket direction. `data/voice-index.json` rebuilt. Her new voice id is unchanged.
+- NOT verified against live ElevenLabs (no key here). If takes still double after this, the next suspect is the new voice itself (try the same line on a different Deedee option from recast-deedee.html) and then the 30 to 60 word lines (`looksDoubled` in voices.html catches most doubles and retries up to 3 times).
+
 ## 2026-11-02 (93): Music Library (ADMIN > MUSIC LIBRARY) built (`music1`)
 
 - Tom (11-02 12:32) asked for a Music Library like the Voice Library, with filters, for all the music in the game. Spec: docs/MUSIC_LIBRARY.md (section 6 has the as-built notes and what was not verified).
