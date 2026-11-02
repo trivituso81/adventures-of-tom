@@ -1,3 +1,10 @@
+## 2026-11-01 (evening, 60): Last old Grace, Rose and Deedee move code deleted (`dead2`)
+
+- Tom asked twice for dead code to go. Removed the 25 old moves that stayed in `dead1` only because a wrapping loop named them: Grace (heel_click, glitter_checkin, ringlight_rescue, comment_moderation, thumbnail_face, eight_count, beam_borders, warmup_lap, mat_patrol, spotlight_shuffle), Rose (tiny_tap, where_did_i_go, royal_inspection, giggle_echo, lamby_appointment, floor_is_jelly, ribbon_rescue, lamby_ending, pocket_princess, princess_parasol) and Deedee (pepper_free_plate, rolling_pin_rounds, windows_open, spotless_record, take_a_breather). 50 function definitions (each key had an older and a newer version) and 46 KB, from engine/grace-moves.js, rose-moves.js and deedee-moves.js, plus their names in the three wrapping loops. Method: acorn syntax tree, delete by byte range.
+- No voice lines or clips changed (their lines were already purged). No art changed, no game behaviour changed: none of these keys is in any kit, ability list or scene.
+- Tests: `unused_voice.py` 0 on all five checks; kit_test grace, rose, deedee FAILS: []; smoke tom, grace, rose, deedee FAILS: []. Not played on the phone.
+- Not removed: leftover scene helpers and icon entries for these keys (data/battle-icons.js, battle-emoji.js), and the older `skills` kit tier.
+
 ## 2026-11-01 (evening, 59): Tom's and Rose's battle clips from exports 7 and 8 (`tclips8`)
 
 - Tom sent `local-clips-export_7.json` and `local-clips-export_8.json` (exports 7 and 8 overlap; export 8 is the newer and adds Rose's set) and asked for Tom's and Rose's clips. Merged only those two voices, newest take per line: Tom 63 clips replaced and 2 added (one is Disconnected Controller, "Ugh it's not connecting!!", now baked and removed from `tools/bake-page/pending.json`), Rose 20 replaced. Files: `data/voice/tom.js`, `data/voice/rose.js` (tag `tclips8`).

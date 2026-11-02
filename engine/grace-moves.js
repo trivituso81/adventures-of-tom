@@ -365,12 +365,6 @@ SC.g_spots=(s,u)=>{ const F=s.foes&&s.foes.length?s.foes:[],p=gpos(); gfx.global
   if(u>UI+.12) label('WRONG MARK',(B.x0+B.x1)/2,B.y0-26,GOLD,1); };
 
 // ---------- Moves ----------
-G.heel_click=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Grace finds her mark.'); say('grace','heel_click'); pose(fx,'expr',.5); },
-    500,()=>{ scene('g_heelspark',.4,{}); sfx.click(); b7Later(()=>sfx.click(),120); },
-    IMPACT,()=>{ scene('g_shoemark',.9,{}); pose(fx,'act',.4); sfx.bonk(); battle.shakeEnemy=.3; hit(E2); },
-    350,()=>{ pose(fx,'celeb',.6); bt('EYES HERE',150,40,PINK2,1,.9); },
-    400,res(E2)+'It was standing in the wrong spot.',()=>checkEnemy()); };
 G.danceShow=E2=>{ const {m,fx}=E2;
   enqueue(()=>{ setMessage('Grace makes room in the routine.'); say('grace','dance'); scene('g_countmarks',1.9,{}); for(let k=0;k<4;k++) b7Later(()=>sfx.click(),k*110); },
     500,()=>{ fx.twirl=1.0; sfx.dance(); for(const p of b2LiveParty()) { const h=home(p); scene('g_footstep',.9,{x:h.x,y:h.base,h:h.h}); } },
@@ -383,63 +377,8 @@ G.dumpling_consult=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
     IMPACT,()=>{ E2.apply(); sfx.squeak(); },
     500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
     300,kindLine(t,'The consultation is extremely sparkly.'),()=>checkEnemy()); };
-G.glitter_checkin=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),rose=who.find(u=>u.id==='rose');
-  enqueue(()=>{ setMessage('Grace opens a fan of glitter swatches. This is a tactical decision.'); say('grace','glitter_checkin'); scene('g_swatch',1.7,{}); },
-    500,()=>{ const p=hand(); if(rose) { const h=home(rose); toss('g_swatch',p.x-6,p.y-30,h.x,h.base-h.h*.55,0,.4,40,{c:PINK}); } sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); for(const u of who) { const h=home(u); scene('g_nail',1.0,{x:h.x+(u.side==='foe'?30:-30),y:h.base-h.h*.55}); } sfx.ding(); },
-    500,()=>{ for(const u of who) if(u.side==='party') battle.fx[u.idx].hop=.3; },
-    300,who.some(u=>u.side==='foe')?kindLine(who.find(u=>u.side==='foe')):'Grace checks every hand twice.',()=>checkEnemy()); };
-G.ringlight_rescue=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Grace holds up a ring light. The dial says COLD.'); say('grace','ringlight_rescue'); scene('g_ringhold',1.8,{}); pose(fx,'expr',.9); },
-    500,()=>{ sfx.beep(); },
-    IMPACT,()=>{ sfx.click(); scene('g_warmcircle',1.1,{x:h.x,y:h.base-h.h*.45,h:h.h}); E2.apply(); sfx.ding(); },
-    500,()=>{ pose(fx,'celeb',.5); },
-    300,kindLine(t,'The lighting is much kinder now.'),()=>checkEnemy()); };
-G.comment_moderation=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('A rude comment pops up next to the enemy.'); say('grace','comment_moderation'); scene('g_rude',1.9,{}); sfx.beep(); },
-    500,()=>{ pose(fx,'act',.5); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.click(); sfx.bonk(); battle.flashEnemy=.25; battle.shakeEnemy=.35; hit(E2); },
-    500,()=>{ sfx.ding(); },
-    300,res(E2)+'Grace removes the unhelpful comment.',()=>checkEnemy()); };
-G.thumbnail_face=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Grace makes a small surprised face in a tiny frame.'); say('grace','thumbnail_face'); scene('g_thumb',1.9,{foes:foesOf(E2)}); pose(fx,'expr',1.0); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ sfx.bonk(); sfx.click(); battle.flashEnemy=.3; battle.shakeEnemy=.45; hit(E2); },
-    500,()=>{ sfx.ding(); pose(fx,'celeb',.5); },
-    300,res(E2)+'The reaction is slightly larger than necessary.',()=>checkEnemy()); };
-G.eight_count=E2=>{ const {fx}=E2,t=foesOf(E2)[0];
-  enqueue(()=>{ setMessage('Grace counts it out. The enemy is off the beat.'); say('grace','eight_count'); scene('g_eight',1.9,{foe:t}); for(let k=0;k<4;k++) b7Later(()=>sfx.beat(),k*130); },
-    500,()=>{ pose(fx,'act',.6); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.bonk(); battle.slash=.18; battle.shakeEnemy=.35; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
-    300,res(E2)+'Grace borrows the good part.',()=>checkEnemy()); };
-G.beam_borders=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Two low balance beams slide in around them.'); say('grace','beam_borders'); scene('g_beams',1.9,{foes:foesOf(E2)}); sfx.slideWhistle(); },
-    500,()=>{ pose(fx,'celeb',.6); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.thud(); battle.shakeEnemy=.5; hit(E2); },
-    500,()=>{ pose(fx,'expr',.5); },
-    300,res(E2)+'The available wiggle room is precisely zero.',()=>checkEnemy()); };
-G.warmup_lap=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty());
-  enqueue(()=>{ setMessage('Grace draws a little loop with one toe. Warm-up time.'); say('grace','warmup_lap'); scene('g_toeloop',1.4,{}); pose(fx,'expr',.8); },
-    500,()=>{ for(const u of who) { const h=home(u); scene('g_warmring',1.3,{x:h.x,y:h.base}); } sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); for(const u of who) if(u.side==='party') battle.fx[u.idx].hop=.25; sfx.ding(); },
-    500,()=>{ pose(fx,'celeb',.5); },
-    300,who.some(u=>u.side==='foe')?kindLine(who.find(u=>u.side==='foe')):'The warm-up has an unusually strict director.',()=>checkEnemy()); };
-G.mat_patrol=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Grace spots the wind-up. One coach clap.'); say('grace','mat_patrol'); scene('g_mat',1.9,{foe:foesOf(E2)[0]}); sfx.click(); pose(fx,'act',.4); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ sfx.thud(); battle.enemyKnock=.35; battle.shakeEnemy=.45; hit(E2); },
-    300,()=>{ E2.apply(); const g=B2.party.find(p=>p.st.brace&&p.st.brace.by===E2.m); if(g) { const h=home(g); scene('g_matend',1.2,{x:h.x,base:h.base}); } sfx.select(); },
-    500,res(E2)+'The landing has been professionally padded.',()=>checkEnemy()); };
-G.spotlight_shuffle=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Three spotlights start hopping around the floor.'); say('grace','spotlight_shuffle'); scene('g_spots',1.9,{foes:foesOf(E2)}); scene('dark',1.9,{a:.35,back:true}); },
-    500,()=>{ pose(fx,'expr',.6); for(let k=0;k<3;k++) b7Later(()=>sfx.click(),k*140); },
-    IMPACT,()=>{ sfx.ding(); sfx.bonk(); battle.flashEnemy=.35; battle.shakeEnemy=.45; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.6); },
-    300,res(E2)+'The enemies have missed their entrance.',()=>checkEnemy()); };
 // Every move registers the unwarped scenes first (see NW above).
-for(const k of ['heel_click','danceShow','dumpling_consult','glitter_checkin','ringlight_rescue','comment_moderation','thumbnail_face',
-  'eight_count','beam_borders','warmup_lap','mat_patrol','spotlight_shuffle']) { const f=G[k]; G[k]=E2=>{ NW(); return f(E2); }; }
+for(const k of ['danceShow','dumpling_consult']) { const f=G[k]; G[k]=E2=>{ NW(); return f(E2); }; }
 })();
 
 // ================= Option 3 set pieces (animation quality pass, 2026-10-24) =================
@@ -494,17 +433,6 @@ SC.gr_crowd=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.7); for(let k=0;k<5;k++) 
 SC.gr_heels=(s,u)=>{ const x=s.x,y=s.y; gfx.globalAlpha=1-u; for(let k=0;k<6;k++) { const a=-Math.PI+k*Math.PI/5; Ln(x+Math.cos(a)*(6+u*12),y+Math.sin(a)*(6+u*12),x+Math.cos(a)*(10+u*20),y+Math.sin(a)*(10+u*20),2,GOLD); } if(u<.6) label('CLICK',x,y-22,GOLD,1); };
 SC.gr_shoe=(s,u)=>{ const pop=u<.2?ez(u/.2)*1.3:lerp(1.3,1,cl((u-.2)/.15)); gfx.globalAlpha=fade(u,.7); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.35); gfx.scale(pop,pop);
   E(0,-6,12,16,OUT); E(0,-6,10,14,PINK); R(-7,10,14,10,OUT); R(-5,12,10,6,PINK); E(-3,-10,4,6,PINK2); gfx.restore(); };
-G.heel_click=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle',rot:wheel(2),hop:20,hn:2,ns:true},{t:950,x:p.x,y:p.y,f:'idle'},{t:1050,f:'flip'},{t:1400,f:'expr'},{t:1550,f:'celeb',hop:14},{t:1750,f:'act',dx:u=>-ez(u/.4)*12},
-    {t:2050,f:'celeb'},{t:2750,f:'runR'},{t:3400,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace cartwheels in. Twice. She finds her mark.'); say(m.id,'heel_click'); scene('gr_trail',.95,{st}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),450); }],
-    [1050,()=>{ scene('gr_crowd',.75,{x:Math.min(470,me.x-30),y:316}); }],
-    [1550,()=>{ sfx.click(); b7Later(()=>sfx.click(),120); scene('gr_heels',.5,{x:p.x,y:p.y-4}); }],
-    ['hf',1800],
-    [1800,()=>{ sfx.bonk(); ST.jolt(f,.3); scene('gr_shoe',.9,{x:F.x+4,y:F.mid}); landHit(100); }],
-    [2050,()=>{ scene('gr_text',.9,{st,txt:'EYES HERE',c:PINK2}); sfx.ding(); }],
-    [3500,'end',res(E2)+'It was standing in the wrong spot.']]); };
 
 // ---------- DANCE ----------
 SC.gr_marks=(s,u)=>{ const ms=s.t*1000,x0=s.x-48,y=s.y+8; gfx.globalAlpha=fade(u,.9);
@@ -556,22 +484,6 @@ SC.gr_swatch=(s,u)=>{ const h=hand(),x=h.x-6,y=h.y-16,open=ez(u/.15); gfx.global
 SC.gr_nail=(s,u)=>{ const g=ez(u/.2); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g,g);
   if(PROPART.draw('grace/giant_glitter_nail',0,2,{h:38})) { gfx.restore(); if(u>.25) check(s.x+16,s.y-14,4,'#9be39a'); return; }   // painted giant glitter nail; the drawn one below is the fallback
   R(-11,-6,22,24,OUT); E(0,-6,11,10,OUT); R(-9,-6,18,22,s.c||'#ffe27a'); E(0,-6,9,8,s.c||'#ffe27a'); R(-6,-8,5,16,CREAM); const gl=(s.t*2)%1; star(6,-10+gl*20,2+gl*2,CREAM); gfx.restore(); if(u>.25) check(s.x+16,s.y-14,4,'#9be39a'); };
-G.glitter_checkin=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m);
-  const order=foe?[foe]:who.filter(u=>u!==m).sort((a,b)=>(a.id==='rose'?-1:0)-(b.id==='rose'?-1:0));
-  const K=[{t:0,x:'home',y:'home',f:'idle'}],visits=[]; let t=350,cx=me.x;
-  for(const u of order) { const q=ST.unit(u),x=Math.min(560,q.x+q.w*.5+24),y=q.base+3; K.push({t,f:x<cx?'walk':'walkR',hop:3,hn:4}); t+=650; K.push({t,x,y,f:'act'}); visits.push([t,u]); if(foe) K.push({t:t+400,f:'celeb',hop:10,hn:2},{t:t+1000,f:'act'}); t+=foe?1100:350; cx=x; }
-  if(!foe&&who.includes(m)) { K.push({t,f:me.x<cx?'walk':'walkR',hop:3,hn:4}); t+=650; K.push({t,x:'home',y:'home',f:'act'}); visits.push([t,m]); t+=350; }
-  else { K.push({t,f:'walkR',hop:3,hn:4}); t+=700; K.push({t,x:'home',y:'home',f:'idle'}); }
-  const last=visits.length?visits[visits.length-1][0]:t; K.push({t:Math.max(t,last+350),f:'celeb',hop:8},{t:Math.max(t,last+350)+400,x:'home',y:'home',f:'idle'});
-  ST.keys(fx,K);
-  const C=[PINK,PURP,GOLD,'#9fe8ff'];
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace opens a fan of glitter swatches like an operations chart. Rounds.'); say(m.id,'glitter_checkin'); scene('gr_swatch',(last+300)/1000,{}); }],
-    ...visits.map(([ms,u],k)=>[ms,()=>{ const q=ST.unit(u); scene('gr_nail',1.4,{x:q.x+(u.side==='foe'?30:-30),y:q.mid,c:u.id==='rose'?PINK:C[k%4]}); sfx.ding(); if(u!==m) hopOf(u);
-      if(u.id==='rose'&&!foe) scene('gr_text',.9,{x:q.x,y:q.top-16,txt:'FIRST CHOICE',c:PINK,sc:1}); }]),
-    ['hf',last],
-    [last,()=>{ E2.apply(); sfx.heal(); }],
-    [Math.max(last+800,K[K.length-1].t+100),'end',foe?kindLine(foe):'Grace checks every hand twice.']]); };
 
 // ---------- Ring-Light Rescue ----------
 SC.gr_ring=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,carry=ms<P.set||ms>P.fold;
@@ -583,19 +495,6 @@ SC.gr_ring=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,carry=ms<P.set||ms>P.fol
   gfx.restore(); };
 SC.gr_warm=(s,u)=>{ const r=ez(u/.2); gfx.globalAlpha=fade(u,.7); E(s.x,s.y,40*r,52*r,'rgba(255,170,80,.22)'); ring(s.x,s.y,40*r,52*r,4,'#ffb45a');
   for(let k=0;k<6;k++) { const fx2=s.x-24+k*10,fy=s.y-30+u*70+(k%2)*10; gfx.globalAlpha=fade(u,.7)*(1-u); R(fx2,fy,4,4,'#e8b048'); } };
-G.ringlight_rescue=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,52),self=t===m;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:600,f:'kneel'},{t:1100,f:'expr'},{t:1800,f:'act',dx:-6},{t:2050,f:'act'},{t:2500,f:'celeb',hop:10},{t:2900,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'kneel'},{t:1150,f:'expr'},{t:1800,f:'act',dx:-6},{t:2050,f:'act'},{t:2500,f:'celeb',hop:10},{t:2900,f:'kneel'},{t:3150,f:'runR'},{t:3850,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const plan={set:self?600:800,click:1950,fold:self?3000:3000,x:(self?sp.x:sp.x)-28,y:(self?sp.y:sp.y)-66},end=self?3400:3950;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Grace sets up her ring light. The dial says COLD.':'Grace runs a ring light over to '+t.name+'. The dial says COLD.'); say(m.id,'ringlight_rescue'); scene('gr_ring',end/1000,{plan}); }],
-    [plan.set,()=>{ sfx.select(); }],
-    [1150,()=>{ setMessage('She checks the light. Too blue. Obviously.'); sfx.beep(); }],
-    ['hf',1950],
-    [1950,()=>{ sfx.click(); E2.apply(); sfx.ding(); sfx.heal(); scene('gr_warm',1.2,{x:H.x,y:H.mid}); hopOf(t!==m?t:null); }],
-    [2500,()=>{ scene('gr_text',.9,{st:ST.cur,txt:'MUCH KINDER',c:'#ffb45a'}); }],
-    [end,'end',kindLine(t,'The lighting is much kinder now.')]]); };
 
 // ---------- Comment Moderation ----------
 SC.gr_rude=(s,u)=>{ const ms=s.t*1000,P=s.plan;
@@ -604,19 +503,6 @@ SC.gr_rude=(s,u)=>{ const ms=s.t*1000,P=s.plan;
     gfx.beginPath(); gfx.moveTo(x-12,y+h); gfx.lineTo(x-26,y+h+14); gfx.lineTo(x-2,y+h); gfx.closePath(); gfx.fillStyle='#ffb0a0'; gfx.fill(); if(g>.8) label('#!*&',x,y-4,'#7a1a14',2); return; }
   if(ms<P.toss) { const h=hand(),q=ez((ms-P.grab)/(P.crush-P.grab)),w=lerp(22,9,q); RO(h.x-w,h.y-w-6,w*2,w*2,q<.5?'#ffb0a0':'#9be39a'); if(q>.5) { Ln(h.x-w*.5,h.y-6,h.x+w*.4,h.y-6-w*.5,2,'#2f6b3a'); Ln(h.x+w*.4,h.y-6-w*.5,h.x+w*.2,h.y-6+w*.5,2,'#2f6b3a'); } return; }
   if(ms>P.card) { const c=ez((ms-P.card)/200); RO(P.x-34,P.y-12,68*c+.1,24,CREAM); if(c>.9) { R(P.x-32,P.y-10,64,4,'#9aa3c8'); label('COMMENTS',P.x,P.y-4,'#2b2a26',1); label('PAUSED',P.x,P.y+4,'#2b2a26',1); } } };
-G.comment_moderation=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:6},{t:1000,x:p.x,y:p.y,f:'expr'},{t:1050,f:'celeb',hop:30},{t:1350,f:'kneel',dx:(u,tt)=>Math.sin(tt*40)*2},{t:1750,f:'idle',rot:wheel(1),hop:48,ns:true},
-    {t:2150,f:'act',dx:-10},{t:2600,f:(u,tt)=>Math.floor(tt*10)%2?'idle':'expr'},{t:2950,f:'runR'},{t:3650,x:'home',y:'home',f:'idle'}]);
-  const plan={x:F.x+F.w*.5+10,y:F.top-22,grab:1200,crush:1700,toss:2150,card:2350};
-  ST.play(E2,[
-    [0,()=>{ setMessage('A rude comment pops up next to '+f.name+'. Grace marches over.'); say(m.id,'comment_moderation'); scene('gr_rude',3.6,{plan}); sfx.beep(); }],
-    [1200,()=>{ sfx.click(); setMessage('She plucks it right out of the air and crumples it.'); }],
-    [1750,()=>{ sfx.whoosh(); }],
-    [2150,()=>{ const h=hand(); ST.fly((x,y)=>{ RO(x-8,y-8,16,16,'#9be39a'); },h.x,h.y-6,F.x,F.mid,.12,10); }],
-    ['hf',2250],
-    [2250,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gr_text',.9,{x:F.x+62,y:F.top-10,txt:'DELETED',c:'#9be39a'}); }],
-    [2600,()=>{ sfx.ding(); }],
-    [3750,'end',res(E2)+'Grace removes the unhelpful comment.']]); };
 
 // ---------- Thumbnail Face ----------
 SC.gr_frame=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; if(!st||st.x==null) return; const hd=head(st,0),B=P.B;
@@ -626,18 +512,6 @@ SC.gr_frame=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; if(!st||st.x==null) ret
   R(x1-24,y0+3,20,9,'#e0402e'); label('REC',x1-14,y0+5,CREAM,1);
   if(g>.05) { const cx=(x0+x1)/2,cy=(y0+y1)/2,k=lerp(.6,2.4,g); E(cx-10*k,cy-6*k,3*k,4*k,OUT); E(cx+10*k,cy-6*k,3*k,4*k,OUT); E(cx,cy+8*k,5*k,7*k,OUT); E(cx,cy+8*k,3.5*k,5*k,'#7a1a14'); } };
 SC.gr_wow=(s,u)=>{ gfx.globalAlpha=fin(u,.15)*fade(u,.8); const fx2=s.x,fy=s.y; LnO(fx2-34,fy-26,fx2-6,fy-4,4,GOLD); LnO(fx2-6,fy-4,fx2-16,fy-6,4,GOLD); LnO(fx2-6,fy-4,fx2-8,fy-14,4,GOLD); label('WOW',fx2-44,fy-40,GOLD,2); R(fx2-3,fy-2,4,3,'#8a7a6a'); };
-G.thumbnail_face=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p0=rowSpot(Gp,100),p1=rowSpot(Gp,34),B={x0:Gp.x0,x1:Gp.x1,y0:Gp.top,y1:Gp.base};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p0.x,y:p0.y,f:'expr'},{t:1400,f:'celeb',hop:22},{t:1700,f:'run'},{t:2200,x:p1.x,y:p1.y,f:'act'},{t:2700,f:'kneel'},{t:3000,f:'runR'},{t:3700,x:'home',y:'home',f:'idle'}]);
-  const plan={stretch:1700,hit:2200,B};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace holds a tiny frame up to her face. Small surprised face.'); say(m.id,'thumbnail_face'); scene('gr_frame',3.0,{st,plan}); }],
-    [1400,()=>{ setMessage('Bigger. BIGGER.'); sfx.jumpWhistle(); }],
-    [1700,()=>{ sfx.whoosh(); }],
-    ['hf',2200],
-    [2200,()=>{ sfx.bonk(); sfx.click(); all(list); landHit(100); }],
-    [2600,()=>{ scene('gr_wow',1.2,{x:Gp.x0-20,y:Gp.base+16}); sfx.ding(); }],
-    [2700,()=>{ scene('gr_text',.8,{st,txt:'PERFECT',c:PINK}); }],
-    [3800,'end',res(E2)+'The reaction is slightly larger than necessary.']]); };
 
 // ---------- Eight-Count Reset ----------
 const buffIcon=(x,y)=>{ if(PROPART.draw('grace/green_up_arrow',x,y,{h:22})) return;   // painted green up arrow
@@ -646,20 +520,6 @@ SC.gr_dots=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.9);
   for(let k=0;k<8;k++) { const [dx,dy]=P.steps[k],x=P.x+dx,y=P.y+dy+4,on=ms>P.c0+k*P.beat; E(x,y,6,3,OUT); E(x,y,4.5,2,on?(k===7?PINK:GOLD):'#6a6a7a'); }
   const n=Math.floor((ms-P.c0)/P.beat); if(n>=0&&n<8&&ms<P.c0+8*P.beat) { const st=s.st; if(st&&st.x!=null) { const p=head(st,-34); label(''+(n+1),p.x,p.y,n===7?PINK:CREAM,2); } } };
 SC.gr_buff=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y; if(ms<P.hook) { x=P.x; y=P.y+Math.sin(s.t*7.3)*6; } else { const st=s.st,q=ez((ms-P.hook)/300),p=head(st,-14); x=lerp(P.x,p.x,q); y=lerp(P.y,p.y,q)-Math.sin(q*Math.PI)*30; } gfx.globalAlpha=fade(u,.9); buffIcon(x,y); };
-G.eight_count=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),beat=170;
-  const steps=[[0,0],[-14,0],[-14,8],[0,8],[0,0],[-14,0],[-14,8],[-22,4]];
-  const K=[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'idle'}];
-  steps.forEach(([dx,dy],k)=>K.push({t:760+k*beat,x:p.x+dx,y:p.y+dy,f:k%2?'celeb':'idle',hop:k===7?0:6}));
-  K.push({t:760+8*beat,f:'act',dx:u=>-ez(u)*8},{t:760+8*beat+300,f:'act'},{t:2500,f:'celeb',hop:10},{t:2900,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'});
-  const st=ST.keys(fx,K),hookAt=760+7*beat,hit=760+8*beat;
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace counts it out right next to '+f.name+'. It\'s off the beat.'); say(m.id,'eight_count'); scene('gr_dots',2.6,{st,plan:{x:p.x,y:p.y,steps,c0:760,beat}}); scene('gr_buff',3.4,{st,plan:{x:F.x,y:F.top-18,hook:hookAt}}); }],
-    [760,()=>{ for(let k=0;k<8;k++) b7Later(()=>sfx.beat(),k*beat); }],
-    [hookAt,()=>{ sfx.whoosh(); setMessage('One exact side-step. Her finish, its good part.'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('gr_text',.9,{st,txt:'EIGHT',c:PINK}); }],
-    [2500,()=>{ sfx.ding(); }],
-    [3700,'end',res(E2)+'Grace borrows the good part.']]); };
 
 // ---------- Balance-Beam Borders ----------
 SC.gr_beams=(s,u)=>{ const ms=s.t*1000,P=s.plan,slide=ez(ms/450),clap=ms>P.clap-80&&ms<P.clap+250?Math.sin(cl((ms-P.clap+80)/330)*Math.PI):0,gap=lerp(14,3,clap);
@@ -667,20 +527,6 @@ SC.gr_beams=(s,u)=>{ const ms=s.t*1000,P=s.plan,slide=ez(ms/450),clap=ms>P.clap-
   const beam=(y)=>{ if(PROPART.draw('grace/balance_beam',x+w/2,y+2,{w:w,h:26,src:[0,2,160,56]})) { for(const lx of [x+16,x+w-22]) { R(lx,y+12,6,8,OUT); R(lx+1,y+12,4,7,'#8a5a30'); } return; }   // painted plank stretched along the row, drawn legs under it
     R(x,y-6,w,12,OUT); R(x+2,y-4,w-4,8,'#e8cfa0'); R(x+2,y-4,w-4,3,'#f6e6c4'); for(const lx of [x+16,x+w-22]) { R(lx,y+6,6,10,OUT); R(lx+1,y+6,4,9,'#8a5a30'); } };
   if(s.back) beam(P.yb-gap); else beam(P.yf+gap); if(!s.back&&clap>.5) label('BONK',(P.x0+P.x1)/2,P.yb-gap-30,GOLD,2); };
-G.beam_borders=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,60),yf=Math.min(306,Gp.base+12),yb=Gp.top+Math.min(40,(Gp.base-Gp.top)*.6);
-  const onBeam={x:Gp.x,y:yf-5};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:p.x,y:p.y,f:'idle',rot:wheel(2),hop:70,hn:1,ns:true},{t:1250,x:onBeam.x,y:onBeam.y,f:'celeb',rot:(u,tt)=>Math.sin(tt*5)*.09,dx:u=>Math.sin(u*Math.PI*2)*14},
-    {t:2450,f:'idle',rot:wheelR(1),hop:80,ns:true},{t:3050,x:p.x,y:p.y,f:'celeb'},{t:3250,f:'runR'},{t:3900,x:'home',y:'home',f:'idle'}]);
-  const plan={x0:Gp.x0,x1:Gp.x1,yf,yb,clap:1700};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Two low balance beams slide in around them. Grace runs at it.'); say(m.id,'beam_borders'); scene('gr_beams',3.4,{plan,back:true}); scene('gr_beams',3.4,{plan}); sfx.slideWhistle(); }],
-    [650,()=>{ sfx.whoosh(); b7Later(()=>sfx.whoosh(),300); scene('gr_trail',.6,{st}); }],
-    [1250,()=>{ sfx.thud(); setMessage('She lands one foot on the beam. Perfectly comfortable.'); }],
-    ['hf',1700],
-    [1700,()=>{ sfx.thud(); all(list); landHit(100); }],
-    [2000,()=>{ scene('gr_text',.9,{st,txt:'STAY IN LANE',c:GOLD,sc:1}); }],
-    [2450,()=>{ sfx.jumpWhistle(); }],
-    [4000,'end',res(E2)+'The available wiggle room is precisely zero.']]); };
 
 // ---------- Warm-Up Lap ----------
 SC.gr_lapring=(s,u)=>{ const ms=s.t*1000,P=s.plan,d=cl((ms-P.from)/P.len); gfx.globalAlpha=fade(u,.88); if(d<=0) return;
@@ -688,22 +534,6 @@ SC.gr_lapring=(s,u)=>{ const ms=s.t*1000,P=s.plan,d=cl((ms-P.from)/P.len); gfx.g
   if(d>=1) { gfx.globalAlpha=fade(u,.88)*.25; E(P.cx,P.cy,P.rx,P.ry,'#ffb45a'); } };
 SC.gr_warmring=(s,u)=>{ const g=ez(u/.25); gfx.globalAlpha=fade(u,.7); E(s.x,s.y,30*g,9*g,'rgba(255,170,80,.35)'); ring(s.x,s.y,30*g,9*g,3,'#ffb45a');
   for(let k=0;k<4;k++) { const a=s.t*4+k*Math.PI/2; R(s.x+Math.cos(a)*28*g-2,s.y+Math.sin(a)*8*g-2,4,4,CREAM); } };
-G.warmup_lap=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),U=who.map(u=>ST.unit(u)),me=ST.unit(m);
-  const cx=foe?U[0].x:Math.round(U.reduce((a,q)=>a+q.x,0)/U.length),cy=foe?U[0].base:Math.round(U.reduce((a,q)=>a+q.base,0)/U.length);
-  const rx=foe?U[0].w*.5+30:Math.max(...U.map(q=>Math.abs(q.x-cx)))+40,ry=foe?16:Math.max(...U.map(q=>Math.abs(q.base-cy)))+14;
-  const sx=cx+rx,sy=cy,lap0=500,lapLen=1400,check=lowest()&&!foe?lowest():null,C=check?ST.unit(check):null;
-  const K=[{t:0,x:'home',y:'home',f:'run'},{t:lap0,x:sx,y:sy,f:u=>Math.sin(u*Math.PI*2)>0?'run':'runR',dx:u=>Math.cos(u*Math.PI*2)*rx-rx,dy:u=>Math.sin(u*Math.PI*2)*ry},
-    {t:lap0+lapLen,x:sx,y:sy,f:'expr',rot:(u,tt)=>Math.sin(tt*12)*.06},{t:2500,f:'idle'}];
-  if(C) K.push({t:2550,f:'run'},{t:2950,x:C.x+C.w*.5+20,y:C.base+3,f:'kneel'},{t:3350,f:'celeb',hop:8},{t:3600,f:'runR'},{t:4200,x:'home',y:'home',f:'idle'});
-  else K.push({t:2550,f:'celeb',hop:8},{t:2900,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'});
-  const st=ST.keys(fx,K),hit=lap0+lapLen,end=C?4300:3700;
-  ST.play(E2,[
-    [0,()=>{ setMessage('Warm-up lap. Grace leads. Everyone follows. Nobody skips.'); say(m.id,'warmup_lap'); scene('gr_lapring',(end-200)/1000,{plan:{cx,cy:cy-4,rx,ry,from:lap0,len:lapLen}}); }],
-    [lap0,()=>{ sfx.whoosh(); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.ding(); sfx.heal(); for(const u of who) { const q=ST.unit(u); scene('gr_warmring',1.3,{x:q.x,y:q.base}); hopOf(u!==m?u:null); } setMessage('Ankle circles. The smallest ankle gets the most coaching.'); }],
-    ...(C?[[2950,()=>{ scene('gr_text',.9,{x:C.x,y:C.top-16,txt:'GOOD ANKLE',c:GOLD,sc:1}); sfx.select(); }]]:[]),
-    [end,'end',foe?kindLine(foe):'The warm-up has an unusually strict director.']]); };
 
 // ---------- Mat Patrol ----------
 SC.gr_mat=(s,u)=>{ const ms=s.t*1000,P=s.plan,go=ez((ms-P.kick)/(P.drop-P.kick)),x=lerp(P.kx,P.mx,go),y=P.y; gfx.globalAlpha=fade(u,.9); if(ms<P.kick) { const r=14; E(P.kx,y-r,r+2,r+2,OUT); E(P.kx,y-r,r,r,BLUE); ring(P.kx,y-r,r*.55,r*.55,2,'#9fc4f0'); return; }
@@ -713,20 +543,6 @@ SC.gr_mat=(s,u)=>{ const ms=s.t*1000,P=s.plan,go=ez((ms-P.kick)/(P.drop-P.kick))
   else if(flat>0) { const w=P.w*flat; R(P.mx-w/2-2,y-8,w+4,12,OUT); R(P.mx-w/2,y-6,w,8,BLUE); for(let k=1;k<4;k++) R(P.mx-w/2+k*w/4,y-6,2,8,'#3a68b0'); if(ms>P.drop&&ms<P.drop+700) label('PADDED',P.mx,y-P.h-26,'#9fc4f0',2); } };
 SC.gr_matend=(s,u)=>{ const g=ez(u/.3); gfx.globalAlpha=fade(u,.8); const x=s.x,y=s.y; if(PROPART.draw('grace/spring_floor_mat',x,y-2,{w:46*g+.1})) return;   // painted spring floor mat under the guarded friend
   R(x-12,y-6,24*g+.1,8,OUT); R(x-10,y-4,20*g+.1,4,BLUE); if(g>.9) { E(x+12,y-10,8,8,OUT); E(x+12,y-10,6,6,BLUE); ring(x+12,y-10,3,3,2,'#9fc4f0'); } };
-G.mat_patrol=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,56),me=ST.unit(m),L=lowest(),LU=L?ST.unit(L):null,selfL=L===m;
-  const K=[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'idle'},{t:750,f:(u,tt)=>Math.floor(u*4)%2?'celeb':'idle'},{t:1150,f:'act',dx:u=>-ez(u/.5)*14},{t:1450,f:'act'},{t:1800,f:'expr'}];
-  if(LU&&!selfL) K.push({t:2100,f:LU.x<p.x?'run':'runR'},{t:2800,x:Math.min(560,LU.x+LU.w*.5+24),y:LU.base+3,f:'kneel'},{t:3200,f:LU.x+LU.w*.5+24<me.x?'runR':'run'},{t:3800,x:'home',y:'home',f:'idle'});
-  else K.push({t:2100,f:'runR'},{t:2800,x:'home',y:'home',f:'kneel'},{t:3200,f:'idle'});
-  const st=ST.keys(fx,K),plan={kick:1150,drop:1650,kx:p.x-20,mx:F.x,y:F.base+2,w:Math.max(90,F.w+40),h:F.h};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace spots the wind-up and sprints over with a rolled mat.'); say(m.id,'mat_patrol'); scene('gr_mat',2.8,{plan}); }],
-    [750,()=>{ sfx.click(); b7Later(()=>sfx.click(),200); setMessage('One coach clap. Two.'); }],
-    [1150,()=>{ sfx.whoosh(); }],
-    ['hf',1650],
-    [1650,()=>{ sfx.thud(); ST.jolt(f,.5); landHit(100); }],
-    [2000,()=>{ E2.apply(); }],
-    [2800,()=>{ if(LU) { scene('gr_matend',1.2,{x:selfL?me.x-30:LU.x-26,y:LU.base}); sfx.select(); } }],
-    [3900,'end',res(E2)+'The landing has been professionally padded.']]); };
 
 // ---------- Spotlight Shuffle ----------
 SC.gr_spots=(s,u)=>{ const ms=s.t*1000,P=s.plan,B=P.B,y=B.base+6; gfx.globalAlpha=fade(u,.9);
@@ -734,18 +550,6 @@ SC.gr_spots=(s,u)=>{ const ms=s.t*1000,P=s.plan,B=P.B,y=B.base+6; gfx.globalAlph
       gfx.save(); gfx.globalAlpha*=.6; E(x,y-hop,22,7,'#fff6dc'); gfx.restore(); ring(x,y-hop,22,7,2,GOLD); } return; }
   const q=ez(cl((ms-P.snap)/120)); for(const f of P.list) { const c=ST.foe(f),r=lerp(8,26,q); gfx.strokeStyle=OUT; gfx.lineWidth=7; gfx.strokeRect(c.x-r,c.mid-r,r*2,r*2); gfx.strokeStyle=GOLD; gfx.lineWidth=4; gfx.strokeRect(c.x-r,c.mid-r,r*2,r*2); }
   if(ms>P.snap+300) label('WRONG MARK',(B.x0+B.x1)/2,B.top-26,GOLD,2); };
-G.spotlight_shuffle=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,40),c={x:Math.min(546,Gp.x1+44),y:Math.min(312,Gp.base+10)},xl=Math.max(30,Gp.x0-14);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:600,x:p.x,y:Math.min(314,Gp.base+16),f:'idle',rot:wheel(3),hop:16,hn:3,ns:true},{t:1500,x:xl,y:Math.min(314,Gp.base+16),f:'expr'},
-    {t:1600,f:'celeb',rot:wheelR(1),hop:54,ns:true},{t:2000,x:c.x,y:c.y,f:'celeb'},{t:2900,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'}]);
-  const plan={B:Gp,list,from:400,snap:2000};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Lights down. Three spotlights start hopping around the floor.'); say(m.id,'spotlight_shuffle'); scene('gr_dark',3.5,{a:.4,back:true}); scene('gr_spots',3.2,{plan}); }],
-    [600,()=>{ sfx.whoosh(); setMessage('Grace cartwheels along the row swapping the floor marks with one toe.'); for(let k=0;k<3;k++) b7Later(()=>sfx.click(),k*300); scene('gr_trail',.9,{st}); }],
-    [1600,()=>{ sfx.jumpWhistle(); scene('gr_beam',1.9,{x:c.x,y:c.y,w:30}); }],
-    ['hf',2000],
-    [2000,()=>{ sfx.ding(); sfx.bonk(); all(list); landHit(100); }],
-    [2200,()=>{ scene('gr_text',.9,{st,txt:'CENTER',c:GOLD}); }],
-    [3700,'end',res(E2)+'The enemies have missed their entrance.']]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================

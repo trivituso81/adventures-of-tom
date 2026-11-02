@@ -553,18 +553,6 @@ D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
     IMPACT,()=>{ scene('d_dishout',1.1,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); E2.apply(); sfx.heal(); },
     500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
     300,kindLine(t,'Somehow everybody is her favorite.'),()=>checkEnemy()); };
-D.pepper_free_plate=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t),bop=B2.party.find(p=>p.id==='boppy'&&b2Alive(p));
-  enqueue(()=>{ setMessage('The pepper jar goes behind a small card. The card says NOT TODAY.'); say('deedee','pepper_free_plate'); scene('d_nottoday',1.0,{}); pose(fx,'expr',.9); },
-    500,()=>{ scene('d_bowl',1.4,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); sfx.heal(); },
-    500,()=>{ if(bop&&t.side!=='foe') { const b=home(bop); scene('d_plainportion',1.0,{x:b.x,y:b.base,h:b.h}); } pose(fx,'celeb',.5); sfx.ding(); },
-    300,kindLine(t,'The recipe has been adjusted without a fuss.'),()=>checkEnemy()); };
-D.rolling_pin_rounds=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Deedee inspects the wind-up. Uneven. Needs a pass.'); say('deedee','rolling_pin_rounds'); scene('d_pin',1.9,{}); pose(fx,'expr',.5); },
-    500,()=>{ pose(fx,'act',.7); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.thud(); sfx.bonk(); battle.enemyKnock=.3; battle.shakeEnemy=.45; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
-    300,res(E2)+'The dangerous bit is now much flatter.',()=>checkEnemy()); };
 D.oven_mitt_ultimatum=E2=>{ const {fx}=E2;
   enqueue(()=>{ setMessage('Deedee puts on the serious mitts. Slowly.'); say('deedee','oven_mitt_ultimatum'); scene('d_mitts',1.9,{}); pose(fx,'expr',.6); },
     500,()=>{ sfx.charge(); },
@@ -583,28 +571,10 @@ D.garden_shower=E2=>{ const {fx}=E2;
     IMPACT,()=>{ sfx.splat(); battle.shakeEnemy=.3; battle.enemyWobble=.4; hit(E2); },
     500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
     300,res(E2)+'The watering schedule was ambitious.',()=>checkEnemy()); };
-D.windows_open=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty());
-  enqueue(()=>{ setMessage('Deedee unlatches a window that wasn\'t there a moment ago.'); say('deedee','windows_open'); scene('d_window',1.9,{}); pose(fx,'act',.6); sfx.doorIn&&sfx.doorIn(); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ E2.apply(); for(const u of who) scene('glow',.9,{x:home(u).x,y:home(u).base-40,rx:36,ry:50,c:'#9fd8ff',a:.3}); sfx.ding(); },
-    500,()=>{ for(const u of who) if(u.side==='party'&&u!==m) battle.fx[u.idx].hop=.25; pose(fx,'celeb',.5); },
-    300,who.some(u=>u.side==='foe')?kindLine(who.find(u=>u.side==='foe')):'The stale mood goes out first.',()=>checkEnemy()); };
-D.spotless_record=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Deedee holds up a spoon. The shine on that enemy is just surface.'); say('deedee','spotless_record'); scene('d_spoon',1.9,{}); scene('d_reflect',1.1,{}); pose(fx,'expr',.6); },
-    500,()=>{ pose(fx,'act',.6); sfx.whoosh(); },
-    IMPACT,()=>{ sfx.ding(); sfx.bonk(); battle.flashEnemy=.3; battle.shakeEnemy=.35; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.levelChime(); },
-    300,res(E2)+'The shine has found a cleaner home.',()=>checkEnemy()); };
-D.take_a_breather=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Deedee holds up one finger. One breath. Together.'); say('deedee','take_a_breather'); scene('d_breathring',1.8,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); pose(fx,'expr',1.0); },
-    500,()=>{ sfx.vapor&&sfx.vapor(); },
-    IMPACT,()=>{ E2.apply(); sfx.heal(); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
-    300,kindLine(t,'Deedee makes a little space to breathe.'),()=>checkEnemy()); };
 D.moon_back=E2=>D.hugShow(E2);   // the Option 3 signature key (data/abilities.js); the legacy key stays 'hug'
 // Every move registers the unwarped scenes first (see NW above).
-for(const k of ['dish_towel_flick','hugShow','moon_back','registered_nut','corner_piece','pepper_free_plate','rolling_pin_rounds','oven_mitt_ultimatum',
-  'brisk_means_brisk','garden_shower','windows_open','spotless_record','take_a_breather']) { const f=D[k]; D[k]=E2=>{ NW(); return f(E2); }; }
+for(const k of ['dish_towel_flick','hugShow','moon_back','registered_nut','corner_piece','oven_mitt_ultimatum',
+  'brisk_means_brisk','garden_shower']) { const f=D[k]; D[k]=E2=>{ NW(); return f(E2); }; }
 })();
 
 // ================= Option 3 set pieces (animation quality pass, 2026-10-24) =================
@@ -737,39 +707,12 @@ SC.dd_nottoday=(s,u)=>{ const ms=s.t*1000,x=s.x,y=s.y,slide=ez((ms-s.at)/300); g
 SC.dd_bowl=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y; if(ms<P.set) { const h=hand(); x=h.x-6; y=h.y; } else { x=P.x; y=P.y; } gfx.globalAlpha=fade(u,.94);
   EO(x,y+4,16,8,CRUST); E(x,y-2,13,5,'#f6e2b8'); E(x,y-2,9,3,'#f0b860'); steam(x,y-4,s.t,4,'#ffd9a0'); };
 SC.dd_plain=(s,u)=>{ const g=ez(u/.25); gfx.globalAlpha=fade(u,.85); EO(s.x,s.y+4,12*g,5*g,CREAM); R(s.x-5*g,s.y-2,10*g,6,'#f6e2b8'); if(u>.3) label('PLAIN',s.x,s.y-18,CREAM,1); };
-D.pepper_free_plate=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,26),self=t===m,me=ST.unit(m),bop=t.side!=='foe'&&B2.party.find(p=>p.id==='boppy'&&b2Alive(p)&&p!==t),BU=bop?ST.unit(bop):null;
-  const K=[{t:0,x:'home',y:'home',f:'kneel'},{t:700,f:'act',dx:-6},{t:1000,f:'idle'}];
-  if(self) K.push({t:1200,f:'aim'},{t:2200,f:'hip'});
-  else K.push({t:1150,f:'walk',hop:3,hn:6},{t:1900,x:sp.x,y:sp.y,f:'aim',dx:u=>-ez(u)*8},{t:2400,f:'hip'});
-  let t0=self?2600:2800,end;
-  if(BU) { K.push({t:t0,f:BU.x+BU.w*.5+22<(self?me.x:sp.x)?'walk':'walkR'},{t:t0+700,x:Math.min(560,BU.x+BU.w*.5+22),y:Math.min(316,BU.base+3),f:'aim'},{t:t0+1100,f:'celeb',hop:8},{t:t0+1400,f:'walk'},{t:t0+2100,x:'home',y:'home',f:'idle'}); end=t0+2200; }
-  else { K.push({t:t0,f:self?'celeb':back(sp.x,me),hop:3,hn:6},{t:t0+800,x:'home',y:'home',f:'idle'}); end=t0+900; }
-  ST.keys(fx,K);
-  const plan={set:self?1200:1900,x:H.x+(self?-40:4),y:H.mid+6},hit=self?1600:2300;
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee kneels and slides the pepper jar behind a small card.'); say(m.id,'pepper_free_plate'); scene('dd_nottoday',2.4,{x:me.x-60,y:me.base-24,at:600}); scene('dd_bowl',(end-200)/1000,{plan}); }],
-    [self?1200:1150,()=>{ setMessage(self?'A warm baked bread bowl. For her, this time.':'She carries a warm bread bowl over to '+t.name+'. No peppers.'); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); scene('dd_flakes',1,{x:H.x,y:H.base,h:H.h}); scene('dd_glow',.9,{x:H.x,y:H.mid,c:'#ffd9a0'}); hopOf(t!==m?t:null); }],
-    ...(BU?[[t0+700,()=>{ scene('dd_plain',1.2,{x:BU.x-26,y:BU.mid}); battle.fx[bop.idx].hop=.3; sfx.ding(); setMessage('Boppy gets a small plain portion. And a look.'); }]]:[]),
-    [end,'end',kindLine(t,'The recipe has been adjusted without a fuss.')]]); };
 
 // ---------- Rolling-Pin Rounds ----------
 SC.dd_wind=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y,flat=cl((ms-P.hit+80)/160),flip=ez((ms-P.flip)/300); gfx.globalAlpha=fade(u,.9);
   if(ms<P.flip) { if(flat<1) { const h=lerp(22,4,flat); EO(x,y+22-h,18,h,'#f0d8b0'); if(ms<P.hit-500) label('UNEVEN',x,y-16,CREAM,1); } else { EO(x,y+20,26,3,'#f0d8b0'); label('FLAT',x,y-12,GOLD,2); } return; }
   const h=ST.cur?hand():{x,y},fx2=lerp(x,h.x-40,flip),fy=lerp(y+20,h.y-10,flip); gfx.save(); gfx.translate(fx2,fy); gfx.scale(1,Math.cos(flip*Math.PI)); EO(0,0,26,3,'#f0d8b0'); gfx.restore(); };
 SC.dd_pin=(s,u)=>{ const ms=s.t*1000,h=hand(); if(ms>s.put) return; gfx.globalAlpha=1; gfx.save(); gfx.translate(h.x-6,h.y-4); gfx.rotate(ms>s.roll0&&ms<s.roll1?(ms-s.roll0)/60:0); RO(-20,-6,40,12,WOOD); RO(-30,-3,10,6,'#8a5a30'); RO(20,-3,10,6,'#8a5a30'); gfx.restore(); };
-D.rolling_pin_rounds=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m),across=Math.max(30,F.x-F.w*.5+10);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim',dx:u=>-Math.sin(u*Math.PI)*6},{t:1500,f:'wind'},{t:1650,x:p.x,f:'act'},{t:2150,x:across+50,f:'act'},{t:2450,f:'aim'},{t:2850,f:'hip'},{t:3150,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const plan={x:F.x,y:F.top-30,hit:2050,flip:2450};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee marches over with a rolling pin. The wind-up is uneven.'); say(m.id,'rolling_pin_rounds'); scene('dd_wind',3.4,{plan}); scene('dd_pin',3.0,{roll0:1650,roll1:2150,put:2900}); }],
-    [900,()=>{ setMessage('She inspects it like a patch of pastry.'); }],
-    [1650,()=>{ sfx.whoosh(); }],
-    ['hf',2050],
-    [2050,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.45); landHit(100); }],
-    [2450,()=>{ setMessage('She turns it over, checks it, and sets it aside.'); sfx.select(); }],
-    [4200,'end',res(E2)+'The dangerous bit is now much flatter.']]); };
 
 // ---------- Oven Mitt Ultimatum ----------
 SC.dd_mitts=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),on=ez((ms-P.on)/600),clap=ms>P.clap-80&&ms<P.clap+160?Math.sin(cl((ms-P.clap+80)/240)*Math.PI):0,hang=ez((ms-P.hang)/350);
@@ -831,17 +774,6 @@ SC.dd_window=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y,carry=ms<P.set
   gfx.restore(); if(!carry&&ms<P.open) label('LATCH',x,y-50,CREAM,1);
   if(ms>P.out) { for(let k=0;k<5;k++) { const q=cl((ms-P.out-k*120)/700); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; const ix=lerp(P.from[k%P.from.length].x,x+30,ez(q))+q*60,iy=lerp(P.from[k%P.from.length].y,y-10,ez(q))-q*30; if(k%2) RO(ix-6,iy-6,12,12,'#4a4a60'); else R(ix-3,iy-3,6,6,'#e8b048'); } }
   if(ms>P.heart) { gfx.globalAlpha=fade(u,.94); heart(x,y-50,7,'#ff6b9a'); label('FRESH START',x,y+50,ROSE,1); } };
-D.windows_open=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),U=who.map(u=>ST.unit(u)),me=ST.unit(m);
-  const wx=foe?front(U[0],60).x:Math.max(80,Math.min(...U.map(q=>q.x))-70),wy=(foe?U[0].mid:Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length));
-  const sx=Math.min(560,wx+44),sy=foe?front(U[0],60).y:Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+10);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:1000,x:sx,y:sy,f:'kneel'},{t:1300,f:'act',dx:-6},{t:1700,f:(u,tt)=>Math.floor(tt*8)%2?'wind':'throw'},{t:2700,f:'spread'},{t:3100,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const plan={set:1000,open:1350,out:1750,heart:2500,x:wx,y:wy,from:U.map(q=>({x:q.x,y:q.mid}))};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee carries over a freestanding window and sets it down beside everyone.'); say(m.id,'windows_open'); scene('dd_window',3.8,{plan}); }],
-    [1350,()=>{ sfx.doorIn?sfx.doorIn():sfx.select(); sfx.whoosh(); setMessage('She unlatches it. Warm air in. She shoos the stale mood out with her apron.'); }],
-    ['hf',2100],
-    [2100,()=>{ E2.apply(); for(const u of who) { const q=ST.unit(u); scene('dd_glow',.9,{x:q.x,y:q.mid,c:'#9fd8ff'}); hopOf(u!==m?u:null); } sfx.ding(); }],
-    [4200,'end',foe?kindLine(foe):'The stale mood goes out first.']]); };
 
 // ---------- Spotless Record ----------
 SC.dd_spoon=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x-4,y=h.y-24,pol=ms>P.p0&&ms<P.p1?Math.sin((ms-P.p0)/40):0,bright=ez((ms-P.p1)/200); gfx.globalAlpha=fade(u,.94);
@@ -849,34 +781,11 @@ SC.dd_spoon=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x-4,y=h.y-24,pol=ms
   if(pol) Ln(x-12+pol*6,y-16,x+6+pol*6,y-24,3,CREAM); if(ms<P.p0) label('TARNISHED',x,y-34,CREAM,1); };
 SC.dd_buffshine=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.fx,y=P.fy; if(ms>P.p1) { const st=s.st,q=ez((ms-P.p1)/400); if(st&&st.x!=null) { x=lerp(P.fx,st.x+6,q); y=lerp(P.fy,st.y-DH()*.36,q)-Math.sin(q*Math.PI)*30; } } gfx.globalAlpha=fade(u,.94);
   EO(x,y,8,8,GOLD); for(let k=0;k<6;k++) { const a=s.t*5+k*Math.PI/3; Ln(x+Math.cos(a)*11,y+Math.sin(a)*11,x+Math.cos(a)*15,y+Math.sin(a)*15,2,GOLD); } if(ms>P.p1+450) label('SHINE',x,y-22,GOLD,1); };
-D.spotless_record=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim'},{t:1400,f:(u,tt)=>Math.floor(tt*14)%2?'act':'wind',dx:(u,tt)=>Math.sin(tt*30)*2},{t:2200,f:'act',dx:-8},{t:2500,f:'hip'},{t:3000,f:'aim'},{t:3300,f:back(p.x,me),hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
-  const plan={p0:1400,p1:2200,fx:F.x+F.w*.3,fy:F.top-10};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks up with a serving spoon. The shine on that enemy is just surface.'); say(m.id,'spotless_record'); scene('dd_spoon',3.3,{plan}); scene('dd_buffshine',3.4,{st,plan}); }],
-    [1400,()=>{ setMessage('One brisk polish. Then another. Then several.'); for(let k=0;k<5;k++) b7Later(()=>sfx.whoosh(),k*150); }],
-    ['hf',2200],
-    [2200,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.4); landHit(100); }],
-    [2500,()=>{ sfx.levelChime(); setMessage('The shine moves onto her apron. She checks her reflection.'); }],
-    [4300,'end',res(E2)+'The shine has found a cleaner home.']]); };
 
 // ---------- Take a Breather ----------
 SC.dd_breath=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.in-250) return; const ph=ms<P.in?0:(ms<P.peak?ez((ms-P.in)/(P.peak-P.in)):1-ez((ms-P.peak)/(P.out-P.peak))*.7),r=10+ph*22; gfx.globalAlpha=fade(u,.9);
   E(P.x,P.y,r,r,'rgba(255,200,90,.22)'); ring(P.x,P.y,r,r,3,'#ffb45a'); label(ms<P.peak?'IN':'OUT',P.x,P.y-3,'#ffb45a',2);
   if(ms>P.in-200&&ms<P.out) { const h=hand(); RO(h.x-2,h.y-24,4,16,SKIN); EO(h.x,h.y-8,6,6,SKIN); label('ONE',h.x,h.y-38,CREAM,1); } };
-D.take_a_breather=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,24),self=t===m,me=ST.unit(m);
-  const breathe=u=>1+Math.sin(cl(u)*Math.PI)*.06;
-  const K=self?[{t:0,x:'home',y:'home',f:'sit'},{t:600,f:'aim'},{t:1200,f:'sit',sc:breathe},{t:2600,f:'act'},{t:2900,f:'celeb',hop:8},{t:3300,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'sit'},{t:1100,f:'aim'},{t:1500,f:'sit',sc:breathe},{t:2800,f:'act',dx:-6},{t:3100,f:'idle'},{t:3300,f:back(sp.x,me),hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const plan={x:H.x+(self?-50:-40),y:H.top-14,in:self?1200:1500,peak:self?1900:2200,out:self?2600:2900},end=self?3400:4300,hit=plan.peak+150;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee sits down for one proper breath.':'Deedee sits down next to '+t.name+' and holds up one finger.'); say(m.id,'take_a_breather'); scene('dd_breath',(plan.out+300)/1000,{plan}); }],
-    [plan.in,()=>{ setMessage('In. Slowly. She breathes with them.'); sfx.vapor&&sfx.vapor(); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); scene('dd_glow',.9,{x:H.x,y:H.mid,c:'#ffd27a'}); hopOf(t!==m?t:null); }],
-    [plan.out-100,()=>{ scene('dd_heart',1,{x:H.x,y:H.top-6}); sfx.ding(); }],
-    [end,'end',kindLine(t,'Deedee makes a little space to breathe.')]]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================

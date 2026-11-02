@@ -382,83 +382,20 @@ SC.r_warmside=(s,u)=>{ const x=s.x,y=s.y,g=ez(u/.25); gfx.globalAlpha=fade(u,.75
   for(let k=0;k<4;k++) { const a=s.t*3+k*Math.PI/2; R(x+Math.cos(a)*30*g-2,y+Math.sin(a)*40*g-2,4,4,CREAM); } if(s.first&&u>.3) heart(x,y-s.h*.7-6,5,'#ff6b9a'); };
 
 // ---------- Moves ----------
-Rm.tiny_tap=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Rose measures the gap very carefully.'); say('rose','tiny_tap'); scene('r_pinch',.9,{}); pose(fx,'expr',.5); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ scene('r_stamp',.9,{}); pose(fx,'act',.4); sfx.boop?sfx.boop():sfx.bonk(); battle.shakeEnemy=.2; hit(E2); },
-    350,()=>{ pose(fx,'celeb',.6); },
-    400,res(E2)+'Rose considers this a major intervention.',()=>checkEnemy()); };
 Rm.sillyShow=E2=>{ const {m,fx}=E2,t=E2.targets[0];
   enqueue(()=>{ setMessage('Rose takes an extravagantly serious breath.'); say('rose','silly',.6); scene('r_breath',.9,{}); pose(fx,'expr',.8); sfx.charge(); },
     500,()=>{ fx.tongue=1.4; sfx.raspberry(); scene('r_rasp',1.1,{}); b7Later(()=>sfx.raspberry(),420); },
     IMPACT,()=>{ E2.apply(); sfx.boing(); battle.enemyWobble=.6; },
     500,()=>{ pose(fx,'celeb',.6); sfx.giggle(); },
     300,t&&t.st.goofed?'Rose has made an excellent point. Goofed!':(t?cap(t.def.the)+' is unmoved. Mostly.':'Pbbbt.'),()=>checkEnemy()); };
-Rm.where_did_i_go=E2=>{ const {fx}=E2,t=E2.targets[0];
-  enqueue(()=>{ setMessage('Rose hides her eyes. Only her eyes.'); say('rose','where_did_i_go'); scene('r_hands',1.8,{}); pose(fx,'expr',1.0); },
-    500,()=>{ scene('r_qmark',1.1,{}); sfx.slideWhistle(); },
-    IMPACT,()=>{ E2.apply(); sfx.ding(); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.giggle(); },
-    300,kindLine(t,'The disguise is completely transparent.'),()=>checkEnemy()); };
-Rm.royal_inspection=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Rose straightens her tiara. This is official.'); say('rose','royal_inspection'); scene('r_tiara',1.8,{}); pose(fx,'expr',.9); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ scene('r_pokytag',1.0,{}); pose(fx,'act',.4); sfx.bonk(); battle.shakeEnemy=.35; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
-    300,res(E2)+'The armor fails the princess test.',()=>checkEnemy()); };
-Rm.giggle_echo=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Rose giggles into a paper cup held sideways.'); say('rose','giggle_echo'); scene('r_cup',.9,{}); pose(fx,'expr',.9); sfx.giggle(); },
-    500,()=>{ scene('r_giggles',1.3,{foes:foesOf(E2)}); sfx.giggle(); },
-    IMPACT-200,()=>{ sfx.bonk(); battle.shakeEnemy=.25; landHit(34); },
-    200,()=>{ sfx.bonk(); battle.shakeEnemy=.3; landHit(33); },
-    200,()=>{ sfx.bonk(); battle.shakeEnemy=.35; landHit(33); },
-    400,()=>{ pose(fx,'celeb',.5); sfx.giggle(); },
-    300,res(E2)+'The echo finds the joke even funnier.',()=>checkEnemy()); };
-Rm.lamby_appointment=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Lamby is seeing patients. The waiting room is a cushion.'); say('rose','lamby_appointment'); scene('r_appt',1.8,{x:h.x,y:h.base-h.h*.6,foe:t.side==='foe'}); pose(fx,'expr',.9); },
-    500,()=>{ sfx.select(); },
-    IMPACT,()=>{ E2.apply(); sfx.baa(); sfx.heal(); },
-    500,()=>{ scene('r_sticker',1.0,{x:h.x,y:h.base,h:h.h}); pose(fx,'celeb',.5); sfx.ding(); },
-    300,kindLine(t,'The prescription is remarkably soft.'),()=>checkEnemy()); };
-Rm.floor_is_jelly=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Rose stamps once. New rule: the floor is jelly.'); say('rose','floor_is_jelly'); scene('r_jellyfloor',1.9,{foes:foesOf(E2)}); pose(fx,'act',.5); sfx.thud(); },
-    500,()=>{ sfx.charge(); },
-    IMPACT,()=>{ sfx.boing(); sfx.bonk(); battle.enemyWobble=.9; battle.shakeEnemy=.4; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.boing(); },
-    300,res(E2)+'The rule is new but immediately binding.',()=>checkEnemy()); };
 Rm.lookout_lamby=E2=>{ const {m,fx}=E2,tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p));
   enqueue(()=>{ setMessage('Lamby takes the telescope. It\'s backwards. Lamby is confident.'); say('rose','lookout_lamby'); scene('r_telescope',1.0,{}); pose(fx,'expr',.9); },
     500,()=>{ scene('r_pennant',1.1,{}); sfx.whoosh(); },
     IMPACT,()=>{ sfx.bonk(); sfx.baa(); battle.shakeEnemy=.35; hit(E2); },
     400,()=>{ E2.apply(); if(!tom) scene('r_cushion',1.1,{}); pose(fx,'celeb',.6); sfx.boing(); },
     400,res(E2)+(tom?'Lamby has spotted something extremely bonkable. Rose is up on Tom.':'Lamby has spotted something extremely bonkable.'),()=>checkEnemy()); };
-Rm.ribbon_rescue=E2=>{ const {fx}=E2,t=foesOf(E2)[0];
-  enqueue(()=>{ setMessage('A ribbon spool rolls toward the wind-up.'); say('rose','ribbon_rescue'); scene('r_spool',1.9,{foe:t}); pose(fx,'act',.6); sfx.whoosh(); },
-    500,()=>{ sfx.slideWhistle(); },
-    IMPACT,()=>{ sfx.bonk(); battle.enemyKnock=.25; battle.shakeEnemy=.35; hit(E2); },
-    300,()=>{ E2.apply(); const low=b2LiveParty().slice().sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0]; if(low) { const h=home(low); scene('r_ribbontip',1.1,{x:h.x,base:h.base,h:h.h}); } pose(fx,'celeb',.5); sfx.ding(); },
-    500,res(E2)+'The ribbon has become a safety feature.',()=>checkEnemy()); };
-Rm.lamby_ending=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Rose opens a little picture book. The ending looks cold.'); say('rose','lamby_ending'); scene('r_book',1.8,{x:h.x,y:h.base-h.h*.55,foe:t.side==='foe'}); pose(fx,'expr',.9); },
-    500,()=>{ sfx.select(); },
-    IMPACT,()=>{ E2.apply(); sfx.baa(); sfx.heal(); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
-    300,kindLine(t,'The happy ending was facing the wrong way.'),()=>checkEnemy()); };
-Rm.pocket_princess=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Rose pulls a very small fan out of a very small pocket.'); say('rose','pocket_princess'); scene('r_pocketfan',1.9,{foes:foesOf(E2)}); pose(fx,'expr',.6); },
-    500,()=>{ pose(fx,'act',.6); sfx.whoosh(); sfx.charge(); },
-    IMPACT,()=>{ sfx.bonk(); sfx.ding(); battle.flashEnemy=.3; battle.shakeEnemy=.45; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); },
-    300,res(E2)+'The royal entrance exceeds its advertised size.',()=>checkEnemy()); };
-Rm.princess_parasol=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),tom=who.find(u=>u.id==='tom');
-  enqueue(()=>{ setMessage('Rose opens a parasol. The sun is painted on the outside. For now.'); say('rose','princess_parasol'); scene('r_parasol',1.8,{}); pose(fx,'expr',1.0); },
-    500,()=>{ sfx.slideWhistle(); },
-    IMPACT,()=>{ E2.apply(); for(const u of who) { const h=home(u); scene('r_warmside',1.1,{x:h.x,y:h.base-h.h*.5,h:h.h,first:u===tom}); } sfx.ding(); sfx.heal(); },
-    500,()=>{ for(const u of who) if(u.side==='party'&&u!==m) battle.fx[u.idx].hop=.25; pose(fx,'celeb',.5); },
-    300,who.some(u=>u.side==='foe')?kindLine(who.find(u=>u.side==='foe')):'Rose puts the warm part where her friends are.',()=>checkEnemy()); };
 // Every move registers the unwarped scenes first (see NW above).
-for(const k of ['tiny_tap','sillyShow','where_did_i_go','royal_inspection','giggle_echo','lamby_appointment','floor_is_jelly','lookout_lamby',
-  'ribbon_rescue','lamby_ending','pocket_princess','princess_parasol']) { const f=Rm[k]; Rm[k]=E2=>{ NW(); return f(E2); }; }
+for(const k of ['sillyShow','lookout_lamby']) { const f=Rm[k]; Rm[k]=E2=>{ NW(); return f(E2); }; }
 })();
 
 // ================= Option 3 set pieces (animation quality pass, 2026-10-24) =================
@@ -517,17 +454,6 @@ SC.ro_pinch=(s,u)=>{ const p=hand(),x=p.x-8,y=p.y-14,g=ez(u/.3); gfx.globalAlpha
 SC.ro_stamp=(s,u)=>{ const pop=u<.15?ez(u/.15)*1.35:lerp(1.35,1,cl((u-.15)/.12)); gfx.globalAlpha=fade(u,.7); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.18); gfx.scale(pop*.85,pop*.85);
   gfx.strokeStyle=OUT; gfx.lineWidth=10; gfx.strokeRect(-62,-22,124,44); gfx.strokeStyle=RED; gfx.lineWidth=6; gfx.strokeRect(-62,-22,124,44); label('IMPORTANCE',0,-4,RED,2); gfx.restore();
   };
-Rm.tiny_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,22);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:7,hn:7},{t:1150,x:p.x,y:p.y,f:'expr'},{t:1650,f:'expr',dx:u=>-ez(u)*8},{t:1750,f:'act',dx:-10},{t:2050,f:'act',dx:u=>-10+ez(u)*10},
-    {t:2500,f:'idle'},{t:2750,f:'celeb',hop:12},{t:3000,f:'runR'},{t:3650,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose tiptoes over. This requires precision.'); say(m.id,'tiny_tap'); }],
-    [1150,()=>{ scene('ro_pinch',.6,{}); sfx.select(); }],
-    ['hf',1750],
-    [1750,()=>{ sfx.boop?sfx.boop():sfx.bonk(); ST.jolt(f,.2); scene('ro_stamp',1.1,{x:F.x-6,y:F.top-14,back:true}); landHit(100); }],
-    [2050,()=>{ scene('ro_text',.5,{st,txt:'...',sc:2}); }],
-    [2500,()=>{ scene('ro_text',.9,{st,txt:'SETTLED',c:PINK}); sfx.ding(); }],
-    [3750,'end',res(E2)+'Rose considers this a major intervention.']]); };
 
 // ---------- SILLY ----------
 SC.ro_breath=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,6),g=ez(u/.6); gfx.globalAlpha=fade(u,.8)*.8; ring(p.x-10,p.y,8+g*10,7+g*8,3,CREAM); if(u>.4) label('AHEM',p.x,p.y-34,CREAM,1); };
@@ -555,17 +481,6 @@ SC.ro_qmark=(s,u)=>{ const x=s.x,y=s.y,g=ez(u/.2),sw=lerp(-.2,.55,ez((u-.2)/.5))
   E(0,24,7,7,OUT); E(0,24,4,4,GOLD); gfx.restore();
   if(u>.3&&u<.85) { const ax=x+30,ay=y+44; LnO(ax,ay,ax+40,ay,3,CREAM); LnO(ax+40,ay,ax+32,ay-7,3,CREAM); LnO(ax+40,ay,ax+32,ay+7,3,CREAM); label('THAT WAY?',ax+20,ay+10,CREAM,1); } };
 SC.ro_smile=(s,u)=>{ gfx.globalAlpha=fade(u,.75); const y=s.y-ez(u/.3)*8; EO(s.x,y,12,12,GOLD); E(s.x-4,y-3,1.6,1.6,OUT); E(s.x+4,y-3,1.6,1.6,OUT); gfx.strokeStyle=OUT; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(s.x,y+1,5,Math.PI*.15,Math.PI*.85); gfx.stroke(); };
-Rm.where_did_i_go=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),pR=front(F,20),pL={x:Math.max(26,F.x-F.w*.5-20),y:Math.min(314,F.base+6)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:800,x:pR.x,y:pR.y,f:'expr'},{t:1350,f:'walk',hop:4,hn:6,dy:u=>Math.sin(u*Math.PI)*12},{t:2350,x:pL.x,y:pL.y,f:'expr'},
-    {t:2450,f:'celeb',hop:26},{t:2950,f:'runR',dy:u=>Math.sin(u*Math.PI)*14},{t:3950,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose runs right up to '+t.name+' and hides her eyes. Only her eyes.'); say(m.id,'where_did_i_go'); }],
-    [800,()=>{ scene('ro_hands',2.0,{st,until:1650}); sfx.select(); }],
-    [1000,()=>{ scene('ro_qmark',1.8,{x:F.x+10,y:F.top-26}); sfx.slideWhistle(); }],
-    [1350,()=>{ setMessage('She tiptoes right past. In plain view. '+cap(t.def?t.def.the:t.name)+' looks the other way.'); }],
-    ['hf',2450],
-    [2450,()=>{ E2.apply(); sfx.ding(); sfx.giggle(); scene('ro_text',.9,{st,txt:'TA-DA',c:PINK,sc:2}); scene('ro_smile',1.2,{x:F.x+F.w*.5,y:F.top-8}); ST.jolt(t,.12); }],
-    [4050,'end','The disguise is completely transparent.']]); };
 
 // ---------- Royal Inspection ----------
 SC.ro_tiara=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,p=head(st,-RH()*.12),tilt=lerp(.45,0,ez((ms-s.fix)/400)); gfx.globalAlpha=fade(u,.95);
@@ -575,38 +490,10 @@ SC.ro_scepter=(s,u)=>{ const ms=s.t*1000,h=hand(),poke=ms>s.pokeAt&&ms<s.pokeAt+
 SC.ro_poky=(s,u)=>{ const g=ez(u/.15),flip=u>.5?ez((u-.5)/.15):0,w=40*Math.abs(Math.cos(flip*Math.PI)),x=s.x+28,y=s.y-10; gfx.globalAlpha=fade(u,.85);
   Ln(s.x+4,s.y+6,x,y+10,2,'#8a7a90'); gfx.save(); gfx.translate(x,y); gfx.rotate(.25); gfx.scale(g,g); RO(-w/2,-15,w,30,flip>.5?PINK:'#f1d58c'); E(-w/2+6,-9,2.5,2.5,OUT);
   if(w>22) { if(flip<.5) { label('TOO',4,-8,'#7a1a14',1); label('POKY',4,1,'#7a1a14',1); } else heart(2,-2,7,'#ff6b9a'); } gfx.restore(); };
-Rm.royal_inspection=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,30);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6,rot:(u,tt)=>Math.sin(tt*6)*.06},{t:1200,x:p.x,y:p.y,f:'idle'},{t:1300,f:'expr'},
-    {t:1700,f:'walk',hop:3,hn:4,dx:u=>-Math.sin(u*Math.PI)*28,dy:u=>Math.sin(u*Math.PI*2)*6},{t:2400,f:'act',dx:u=>-ez(u)*14},{t:2550,f:'act',dx:-14},
-    {t:2950,f:'kneel'},{t:3300,f:'celeb',hop:8},{t:3550,f:'walkR',hop:3,hn:5,rot:(u,tt)=>Math.sin(tt*6)*.06},{t:4500,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose processes over. Royally. Very slowly.'); say(m.id,'royal_inspection'); scene('ro_tiara',4.5,{st,fix:1300}); scene('ro_scepter',3.0,{pokeAt:2400}); }],
-    [1300,()=>{ setMessage('She straightens her tiara. This inspection is official.'); sfx.select(); }],
-    [1700,()=>{ scene('ro_text',.9,{st,txt:'HMM',c:CREAM}); }],
-    [2400,()=>{ sfx.whoosh(); }],
-    ['hf',2550],
-    [2550,()=>{ sfx.bonk(); ST.jolt(f,.4); scene('ro_poky',1.6,{x:F.x,y:F.mid}); landHit(100); }],
-    [2950,()=>{ sfx.ding(); scene('ro_text',.8,{st,txt:'CURTSEY',c:PINK}); }],
-    [4600,'end',res(E2)+'The armor fails the princess test.']]); };
 
 // ---------- Giggle Echo ----------
 SC.ro_cup=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,10); gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(p.x-16,p.y); gfx.rotate(-1.35+Math.sin(s.t*20)*.05); RO(-7,-12,14,24,CREAM); R(-7,-12,14,4,PINK); gfx.restore(); };
 const bubble=(k)=>(x,y,u)=>{ const r=10+k*3; EO(0,0,r,r*.85,k===1?PINK:CREAM); label(''+(k+1),0,-3,'#2b2a26',1); if(u>.3) label('HA',0,-r-12,PINK2,1); };
-Rm.giggle_echo=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,46),lie=lieDy();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:750,x:p.x,y:p.y,f:'kneel'},{t:1700,f:'kneel',dx:(u,tt)=>Math.sin(tt*30)*1.5},
-    {t:2050,f:'idle',rot:u=>-ez(u/.25)*1.45,dy:(u,tt)=>ez(u/.25)*lie-Math.abs(Math.sin(tt*14))*4},{t:2850,f:'celeb',hop:16},{t:3150,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}]);
-  const from=()=>{ const q=head(st,10); return [q.x-28,q.y]; };
-  const shot=(k,at)=>[at,()=>{ const [x0,y0]=from(); sfx.giggle(); ST.fly(bubble(k),x0,y0,G.x0+10+k*6,G.top+6+k*8,.4,46+k*12); }];
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose sits down and giggles into a paper cup held sideways.'); say(m.id,'giggle_echo'); }],
-    [800,()=>{ scene('ro_cup',1.3,{st}); sfx.giggle(); }],
-    shot(0,1500),shot(1,1700),shot(2,1900),
-    [1900,()=>{ sfx.bonk(); all(list); landHit(34); }],
-    [2100,()=>{ sfx.bonk(); all(list); landHit(33); }],
-    ['hf',2300],
-    [2300,()=>{ sfx.bonk(); all(list); landHit(33); scene('ro_text',1,{x:G.x,y:G.top-30,txt:'HA HA HA',c:PINK,sc:2}); }],
-    [2600,()=>{ scene('ro_poof',.6,{x:G.x0+22,y:G.top+20,c:CREAM,n:12,r:34}); setMessage('The last echo laughs itself into a puff. So does Rose.'); sfx.giggle(); }],
-    [3900,'end',res(E2)+'The echo finds the joke even funnier.']]); };
 
 // ---------- Lamby's Appointment ----------
 SC.ro_clinic=(s,u)=>{ const x=s.x,y=s.y; gfx.globalAlpha=fin(u,.08)*fade(u,.9); RO(x-24,y-14,48,14,'#e8cfa0'); R(x-22,y-12,44,3,'#c9a874'); label('APPTS',x,y-10,'#2b2a26',1); EO(x,y+2,22,5,PURP); };
@@ -618,22 +505,6 @@ SC.ro_lamby=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=.85,pose='held',rot=
 SC.ro_clip=(s,u)=>{ const h=hand(),x=h.x-14,y=h.y-10; gfx.globalAlpha=fade(u,.9); RO(x-12,y-16,24,32,'#9fc4f0'); R(x-9,y-13,18,26,CREAM); R(x-5,y-19,10,5,'#6a6f7a');
   label('CUDDLES',x,y-8,'#2b2a26',1); gfx.strokeStyle='#2b2a26'; gfx.lineWidth=1.5; gfx.strokeRect(x-5,y+1,9,9); if(s.t*1000>s.checkAt) check(x,y+5,4,'#2f9a4a'); };
 SC.ro_sticker=(s,u)=>{ const x=s.x,y=s.y,g=ez(u/.2); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(-.3); gfx.scale(g,g); EO(0,0,14,10,GOLD); label('GOOD',0,-3,'#7a4a10',1); gfx.restore(); heart(x+16,y-12,4,'#ff6b9a'); };
-Rm.lamby_appointment=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'kneel'},{t:1500,f:'expr'},{t:1900,f:'act'},{t:2800,f:'celeb',hop:10},{t:3200,f:'idle'},{t:3600,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:1100,x:sp.x,y:sp.y,f:'kneel'},{t:1500,f:'expr'},{t:1900,f:'act',dx:u=>-ez(u)*8},{t:2700,f:'act',dx:-8},{t:2900,f:'celeb',hop:10},
-      {t:3200,f:'walkR',hop:3,hn:5},{t:4200,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const cx=Math.min(556,sp.x+30),cy=sp.y,plan={seat:self?500:1100,press:1900,back:2800,sx:cx,sy:cy,tx:H.x+6,ty:H.mid+4};
-  const end=self?3700:4300;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Lamby is seeing patients. The patient today is Rose.':'Rose carries Lamby over. Lamby is seeing patients.'); say(m.id,'lamby_appointment'); scene('ro_lamby',end/1000,{plan}); }],
-    [plan.seat,()=>{ scene('ro_clinic',(end-plan.seat-300)/1000,{x:cx,y:cy}); sfx.select(); setMessage('The waiting room is a cushion. There\'s a sign.'); }],
-    [1500,()=>{ scene('ro_clip',1.3,{checkAt:800}); sfx.select(); }],
-    [1900,()=>{ sfx.boing(); }],
-    ['hf',2300],
-    [2300,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',.9,{x:H.x,y:H.mid,c:PINK}); scene('ro_heart',1,{x:H.x,y:H.top-4}); hopOf(t!==m?t:null); }],
-    [2900,()=>{ scene('ro_sticker',1.1,{x:H.x+4,y:H.mid-6}); sfx.ding(); }],
-    [end,'end',kindLine(t,'The prescription is remarkably soft.')]]); };
 
 // ---------- The Floor Is Jelly ----------
 SC.ro_jelly=(s,u)=>{ const B=s.G,cx=(B.x0+B.x1)/2,w=(B.x1-B.x0)/2+34,ms=s.t*1000,draw=ez(ms/350),wq=cl((ms-s.wobAt)/700),wob=ms>s.wobAt?Math.sin(wq*Math.PI*4)*(1-wq):0;
@@ -641,19 +512,6 @@ SC.ro_jelly=(s,u)=>{ const B=s.G,cx=(B.x0+B.x1)/2,w=(B.x1-B.x0)/2+34,ms=s.t*1000
     for(const [lw,c] of [[7,OUT],[4,JELLY]]) { gfx.strokeStyle=c; gfx.lineWidth=lw; gfx.beginPath(); gfx.ellipse(0,0,rx,ry,0,0,Math.PI*2); gfx.stroke(); }
     gfx.globalAlpha*=.35; E(0,0,rx,ry,JELLY); gfx.restore(); }
   if(ms>s.wobAt&&ms<s.wobAt+600) { gfx.globalAlpha=fade(u,.9); const q=cl((ms-s.wobAt)/600); for(const p of B.list) EO(p.x,p.base-4,22*(1+q*.5),8*(1-q*.6)+.1,JELLY); } };
-Rm.floor_is_jelly=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,42);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'celeb',hop:70},{t:1150,f:'kneel'},{t:1350,f:'expr'},{t:1650,f:'celeb',hop:46},
-    {t:2050,f:'celeb',hop:100,rot:u=>-ez(u)*Math.PI*2,ns:true},{t:2650,f:'kneel',dx:(u,tt)=>u<.7?-Math.abs(Math.sin(tt*10))*5:0},{t:3050,f:'celeb',hop:10},{t:3300,f:'runR'},{t:3950,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose runs to the enemies and jumps as high as she can.'); say(m.id,'floor_is_jelly'); sfx.jumpWhistle(); }],
-    [1150,()=>{ sfx.thud(); scene('ro_jelly',2.7,{G,wobAt:900}); scene('ro_poof',.5,{x:p.x,y:p.y,c:JELLY,n:8}); }],
-    [1350,()=>{ setMessage('She stamps once. New rule: the floor is jelly.'); scene('ro_text',.9,{st,txt:'NEW RULE',c:JELLY}); }],
-    [1650,()=>{ sfx.jumpWhistle(); }],
-    ['hf',2050],
-    [2050,()=>{ sfx.boing(); sfx.bonk(); all(list); landHit(100); scene('ro_text',1,{x:G.x,y:G.top-30,txt:'WOBBLE',c:JELLY,sc:2}); }],
-    [2300,()=>{ sfx.boing(); }],
-    [2700,()=>{ sfx.select(); scene('ro_text',.8,{st,txt:'PAT PAT',c:CREAM}); }],
-    [4050,'end',res(E2)+'The rule is new but immediately binding.']]); };
 
 // ---------- Lookout Lamby ----------
 SC.ro_scope=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const p=head(st,-26),x=p.x-4,y=p.y-(s.t<.4?ez(s.t/.4)*10:10); gfx.globalAlpha=fade(u,.9); plush(x,y,.7,{pose:'held'});
@@ -687,18 +545,6 @@ SC.ro_ribbon=(s,u)=>{ const ms=s.t*1000,h=hand(),cx=s.cx,cy=s.cy,rx=s.rx,ry=s.ry
   else if(lap<=0&&s.st&&s.st.x!=null) { const q=ez(ms/s.lapAt),x=Math.max(cx+rx,s.st.x-34-q*30); Ln(h.x,h.y,x,cy-2,3,PINK); gfx.save(); gfx.translate(x,cy-8); gfx.rotate(q*10); RO(-8,-8,16,16,PINK); R(-8,-3,16,6,PINK2); gfx.restore(); }
   if(ms>s.bowAt) { const b=ez((ms-s.bowAt)/200),bx=cx,by=cy-s.lift-2; EO(bx-10,by,9*b,6*b,PINK); EO(bx+10,by,9*b,6*b,PINK); E(bx,by,4*b,4*b,OUT); E(bx,by,2.5*b,2.5*b,PINK2); if(b>.9&&ms<s.tugAt+500) label('TIED',bx,by-18,PINK,1); } };
 SC.ro_tip=(s,u)=>{ const g=ez(u/.2),b=Math.abs(Math.sin(u*Math.PI*4))*(1-u)*5,ty=s.y-30-b+(1-g)*10,cx=Math.max(34,Math.min(542,s.x)); gfx.globalAlpha=fade(u,.8)*g; label('YOU NEXT',cx,ty,PINK,1); LnO(cx,ty+9,cx,ty+16,2,PINK); LnO(cx,ty+17,cx-4,ty+12,2,PINK); LnO(cx,ty+17,cx+4,ty+12,2,PINK); for(let k=0;k<3;k++) heart(cx-14+k*14,s.y-8-((u*30+k*7)%12),2+((k+Math.floor(u*8))%2),'#ffd0e4'); };
-Rm.ribbon_rescue=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),rx=F.w*.5+24,ry=14,cx=F.x,cy=Math.min(312,F.base+3),me=ST.unit(m);
-  const lapStart=750,lapLen=900;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:lapStart,x:cx+rx,y:cy,f:u=>Math.sin(u*Math.PI*2)>0?'run':'runR',dx:u=>Math.cos(u*Math.PI*2)*rx-rx,dy:u=>Math.sin(u*Math.PI*2)*ry},
-    {t:lapStart+lapLen,x:cx+rx+18,y:cy,f:'act',rot:u=>ez(u)*.3,dx:u=>ez(u)*10},{t:2100,f:'act',rot:.3,dx:10},{t:2400,f:'act'},{t:2900,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose rolls a ribbon spool at '+f.name+' and runs after it.'); say(m.id,'ribbon_rescue'); scene('ro_ribbon',3.0,{st,cx,cy,rx,ry,lift:F.h*.45,lapAt:lapStart,lapLen,bowAt:1750,tugAt:2100}); sfx.whoosh(); }],
-    [lapStart,()=>{ sfx.slideWhistle(); setMessage('All the way round. Mind the fancy bit.'); }],
-    [1750,()=>{ sfx.select(); }],
-    ['hf',2100],
-    [2100,()=>{ sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('ro_text',.9,{x:F.x+62,y:F.top-10,txt:'TUG',c:PINK,sc:2}); }],
-    [2400,()=>{ E2.apply(); const low=b2LiveParty().slice().sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0]; if(low) { const L=ST.unit(low); scene('ro_tip',1.0,{x:L.x+L.w*.5+6,y:L.mid}); if(low!==m) battle.fx[low.idx].hop=.3; } sfx.ding(); }],
-    [3700,'end',res(E2)+'The ribbon has become a safety feature.']]); };
 
 // ---------- Lamby Fixes the Ending ----------
 SC.ro_book=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=1,rot=0,open=1;
@@ -710,21 +556,6 @@ SC.ro_book=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=1,rot=0,open=1;
   gfx.restore();
   if(ms>=P.sit&&ms<=P.up) { const reach=ms>P.turn-300&&ms<P.turn+400?Math.sin(cl((ms-P.turn+300)/700)*Math.PI):0,pat=ms>P.pat&&ms<P.pat+400?Math.sin(cl((ms-P.pat)/400)*Math.PI*3)*.08:0;
     plush(P.bx-38+reach*12,P.by+2-reach*4,.62+pat,{pose:'held',rot:-reach*.4}); } };
-Rm.lamby_ending=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m;
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:400,f:'kneel'},{t:2250,f:'celeb',hop:12,hn:2},{t:2750,f:'kneel'},{t:3100,f:'idle'},{t:3400,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:1000,x:sp.x,y:sp.y,f:'kneel'},{t:2250,f:'celeb',hop:12,hn:2},{t:2750,f:'kneel'},{t:3100,f:'walkR',hop:3,hn:5},{t:4100,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K);
-  const sit=self?400:1000,up=3100,end=self?3500:4200,plan={sit,up,turn:1800,pat:2800,bx:sp.x-30,by:sp.y-14};
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Rose sits down with a little picture book.':'Rose brings a little picture book over to '+t.name+'.'); say(m.id,'lamby_ending'); scene('ro_book',end/1000,{plan}); scene('ro_carry',(sit+50)/1000,{dy:10,sc:.7}); }],
-    [sit+100,()=>{ setMessage('She opens it. The ending looks cold. Lamby has a look.'); sfx.select(); }],
-    [1700,()=>{ sfx.whoosh(); }],
-    [1900,()=>{ for(let k=0;k<4;k++) ST.fly((x,y)=>{ E(x,y,4,4,GOLD); },plan.bx,plan.by-6,H.x+(k-1.5)*10,H.mid,.35,30,k*.05); }],
-    ['hf',2250],
-    [2250,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',.9,{x:H.x,y:H.mid,c:'#ffd27a'}); scene('ro_flakes',1,{x:H.x,y:H.base,h:H.h}); hopOf(t!==m?t:null); scene('ro_text',.9,{x:plan.bx,y:plan.by-40,txt:'UPSIDE DOWN',c:GOLD}); }],
-    [2800,()=>{ scene('ro_heart',.9,{x:plan.bx-38,y:plan.by-22}); sfx.ding(); }],
-    [up,()=>{ scene('ro_carry',(end-up)/1000,{dy:10,sc:.7}); }],
-    [end,'end',kindLine(t,'The happy ending was facing the wrong way.')]]); };
 
 // ---------- Pocket Princess ----------
 SC.ro_fan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.95);
@@ -737,19 +568,6 @@ SC.ro_fan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); gfx.globalAlpha=fade(u,.
     gfx.save(); gfx.translate(cx,cy); gfx.rotate((k-1)*.25*sc*(1-clap));
     gfx.beginPath(); gfx.moveTo(0,0); gfx.arc(0,0,r,Math.PI*1.15,Math.PI*1.85); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=k===1?GOLD:PURP; gfx.fill();
     for(let j=0;j<5;j++) { const a=Math.PI*(1.15+j*.175); Ln(0,0,Math.cos(a)*r,Math.sin(a)*r,1.5,OUT); } if(r>24) { E(0,-r*.6,5,5,OUT); E(0,-r*.6,3,3,PINK); } gfx.restore(); } };
-Rm.pocket_princess=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,60);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6,rot:(u,tt)=>Math.sin(tt*7)*.07},{t:1100,x:p.x,y:p.y,f:'idle'},{t:1150,f:'expr',dx:(u,tt)=>u<.5?Math.sin(tt*30)*1.5:0},
-    {t:1550,f:'celeb'},{t:2350,f:(u,tt)=>Math.floor(tt*12)%2?'flip':'idle',hop:12,hn:3},{t:2950,f:'celeb'},{t:3150,f:'kneel'},{t:3450,f:'walkR',hop:3,hn:5,rot:(u,tt)=>Math.sin(tt*7)*.07},{t:4400,x:'home',y:'home',f:'idle'}]);
-  const plan={raise:1550,open:1950,clap:2350,fold:2950,x0:G.x0+14,x1:G.x1-14,y:G.top-4};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose sweeps over like a princess arriving at a ball.'); say(m.id,'pocket_princess'); scene('ro_fan',4.4,{plan}); }],
-    [1150,()=>{ setMessage('She pulls a very small fan out of a very small pocket.'); sfx.select(); }],
-    [1950,()=>{ sfx.whoosh(); sfx.charge(); }],
-    ['hf',2350],
-    [2350,()=>{ sfx.bonk(); sfx.ding(); all(list); landHit(100); scene('ro_text',1.1,{x:G.x,y:G.top-60,txt:'ROYAL',c:GOLD,sc:2}); }],
-    [2400,()=>{ sfx.spin&&sfx.spin(); }],
-    [3150,()=>{ scene('ro_text',.8,{st,txt:'CURTSEY',c:PINK}); }],
-    [4500,'end',res(E2)+'The royal entrance exceeds its advertised size.']]); };
 
 // ---------- Princess Parasol ----------
 SC.ro_parasol=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,P=s.plan; gfx.globalAlpha=fade(u,.96);
@@ -762,22 +580,6 @@ SC.ro_parasol=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1
   gfx.restore(); if(flip>.95&&ms<P.close-200) label('INSIDE OUT',x,y-52,GOLD,1); };
 SC.ro_warmside=(s,u)=>{ const g=ez(u/.25); gfx.globalAlpha=fade(u,.75); E(s.x,s.y,34*g,46*g,'rgba(255,200,90,.2)'); ring(s.x,s.y,34*g,46*g,3,GOLD);
   for(let k=0;k<4;k++) { const a=s.t*3+k*Math.PI/2; R(s.x+Math.cos(a)*30*g-2,s.y+Math.sin(a)*40*g-2,4,4,CREAM); } };
-Rm.princess_parasol=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),tom=!foe&&who.find(u=>u.id==='tom'&&b2Alive(u));
-  const U=who.map(u=>ST.unit(u)),px=foe?front(U[0],26).x:Math.round(U.reduce((a,q)=>a+q.x,0)/U.length)-10,py=foe?front(U[0],26).y:Math.min(314,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+14);
-  const me=ST.unit(m),dir=(a,b)=>b<a?'run':'runR';
-  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:900,x:px,y:py,f:'celeb',hop:4,hn:3},{t:1700,f:'expr'},{t:2050,f:'celeb',hop:10,hn:2}];
-  let end=3900;
-  if(tom) { const TU=ST.unit(tom); K.push({t:2550,f:dir(px,TU.x+26)},{t:3100,x:TU.x+26,y:TU.base+3,f:'act'},{t:3450,f:dir(TU.x+26,me.x)},{t:4100,x:'home',y:'home',f:'idle'}); end=4200; }
-  else K.push({t:2550,f:'celeb',hop:6,hn:2},{t:3000,f:dir(px,me.x)},{t:3800,x:'home',y:'home',f:'idle'});
-  const st=ST.keys(fx,K),plan={flip:1700,close:2650};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Rose carries a parasol to the middle of everyone. The sun is painted on the outside.'); say(m.id,'princess_parasol'); scene('ro_parasol',end/1000,{st,plan}); }],
-    [900,()=>{ sfx.spin&&sfx.spin(); }],
-    [1700,()=>{ sfx.slideWhistle(); setMessage('She turns it inside out. Obviously. The sunshine goes underneath.'); }],
-    ['hf',2050],
-    [2050,()=>{ E2.apply(); for(const u of who) { const q=ST.unit(u); scene('ro_warmside',1.2,{x:q.x,y:q.mid}); if(u.side==='party'&&u!==m) battle.fx[u.idx].hop=.25; else if(u.side==='foe') ST.jolt(u,.15); } sfx.ding(); sfx.heal(); }],
-    ...(tom?[[3100,()=>{ const T=ST.unit(tom); scene('ro_heart',1.1,{x:T.x,y:T.top-6,r:7}); battle.fx[tom.idx].hop=.3; sfx.ding(); }]]:[]),
-    [end,'end',foe?kindLine(foe):'Rose puts the warm part where her friends are.']]); };
 })();
 
 // ================= Move review rebuilds (2026-10-24, claude/move-review.md) =================
