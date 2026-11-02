@@ -1,3 +1,13 @@
+## 2026-11-01 (night, 66): all battle backgrounds repainted, 11 new for story places (`bgs2`)
+
+- Tom (21:16): sent the 29 repainted battle backgrounds made from `claude/battle-background-spec.md` (flat matte empty floor so characters stand on the ground, a touch muted so they stand out).
+- Installed: the 18 old pixel-art pictures are replaced by painted 576 x 324 WebP in `bgs/` (1.1 MB in all, against 7.6 MB had they stayed PNG). Cache tag `BG_V` = `bgs2` is on every picture URL, so phones do not keep showing the old ones.
+- New pictures for places that were code-drawn only: Glass Tower (lobby and stairs, shelves, vault, pinnacle), Forever Engine (normal, and calm once flag `ch20-julian` is set), Dead-Letter sorting hall (also the four memory rooms), subway (depot and tunnel, chamber), Terminal Infinity (Gate 00 and the concourse), Flight Zero cabin. `battleBgKey` picks them by map ground and id; the early return that forced the code-drawn Glass Tower backdrop is gone. The code-drawn backdrops remain as the loading fallback.
+- Checked (fact): all 29 are 16:9 and scale to 576 x 324; floors measure flat (left to right within 0.03 brightness, about 0 edges); every real map id maps to the intended picture (45 maps checked); the Hush9 dinner table still wins for that boss; no page errors.
+- Looked at: every picture in a 4-member party fight with 3 enemies and with a boss (Old Iron-Gill), and portrait plus landscape full-page shots for the subway, calm Forever Engine and dinner table. Every character stands on floor with the game's contact shadow visible.
+- Finding: the generator put the floor edge about 65% down, not the 55% the spec asked for. That suits the game, because the highest enemy feet are at 66%, so every foot lands on floor. The spec's 55% is out of date; the rule that matters is that the floor starts at or above y 66%.
+- Not done: Long Island outdoor maps and house interiors still share the pond picture, LA outdoor maps share Griffith Park.
+
 ## 2026-11-01 (evening, 65): Boppy back to a deep voice, accent in every tag (`persona2`)
 
 - Tom (21:25): Boppy's voice sounds too high now, and Justin has no accent.
