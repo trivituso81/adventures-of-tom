@@ -1,3 +1,8 @@
+## 2026-11-02 (96): Voice Library listed Spit Shine's lines under Dish-Towel Flick (Library index only)
+
+- Tom asked why Dish-Towel Flick shows more than one voice line. Fact: Deedee's Basic move slot has two versions, Dish-Towel Flick (says "Dish-towel flick. You had a spot.") and the Remix Spit Shine (says the two old `basic` lines, "Hold still! You've got a smudge!" and "Spit shine! There. Much better."). The index builder gave the old `basic` lines the Primary's name. All three lines are played by the game, so nothing is purged.
+- Fix: `tools/voice-library/make-index.js` now labels the two `basic` lines as Remix Basic move, Spit Shine. Dish-Towel Flick shows one line. Index rebuilt. No spoken text, clip or game file changed, so no re-bake.
+
 ## 2026-11-02 (95): Height chart reference image for the art restyle (Phase C step 1; docs and tools only, no game change)
 
 - Fact: `docs/reference/height_chart_v1.png` (1536 x 1024) shows neutral grey figures at real height on one baseline with a 1 ft grid: Justin 6'4", Tom 5'11", TNB 5'10", Boppy 5'7", Amy 5'5", Deedee 5'5", Grace 4'2", Rose 3'4", Mudling 16". Adult head 21.5 percent of height, Grace 25 percent. Built by `python3 -I tools/make_height_chart.py` (edit `CAST` and rerun).

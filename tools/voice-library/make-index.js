@@ -189,6 +189,8 @@ for(const ch in KITS){ ABIL[ch]={}; PLAY[ch]={};
   for(const slot in KITS[ch]){ const e=KITS[ch][slot]; if(!e||!e.p) continue;
     const base={name:e.p.name,slot,rx:false}; ABIL[ch][e.p.key]=base; if(e.play) PLAY[ch][e.play]=base;
     if(e.r&&e.r.key) ABIL[ch][e.r.key]={name:e.r.name,slot,rx:true,base:e.p.name}; } }
+// Deedee's old 'basic' lines (smudge, spit shine) belong to the Spit Shine Remix, not to Dish-Towel Flick (which says only its own line).
+if(PLAY.deedee&&ABIL.deedee&&ABIL.deedee.rx_spitshine) PLAY.deedee.basic=ABIL.deedee.rx_spitshine;
 // Older move names that are still spoken: the move file lists its first-generation moves in slot order (basic, A1 to A5, B1 to B5),
 // and tom-moves.js (Round 3 note) names the renames. Each old kind belongs to the slot it was written for, so it takes that
 // slot's current name.
