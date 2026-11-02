@@ -13,6 +13,7 @@
 <script>/* After the welcome-screen RELOAD (address carries ?r=...), point the icon links at a fresh address too, so Add to Home Screen cannot reuse a stale icon. */
 (function(){try{var r=new URLSearchParams(location.search).get('r');if(!r)return;document.querySelectorAll('link[rel~="icon"],link[rel~="apple-touch-icon"]').forEach(function(l){l.href=l.getAttribute('href').split('?')[0]+'?r='+r;});}catch(e){}})();
 </script>
+<script>try{performance.setResourceTimingBufferSize(4000);}catch(e){}  /* the default keeps only 250 loaded files; the service worker below needs the full list (build sw1) */</script>
 <title>The Adventures of Tom</title>
 <style>
 :root{color-scheme:light;font-family:"Trebuchet MS",system-ui,sans-serif;color:#253e34;background:#203b32;-webkit-tap-highlight-color:transparent}
@@ -1525,10 +1526,25 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/local-clips.js?v=bake1"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js?v=wind1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=row3"></script>
+<script src="engine/main.js?v=sw1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js"></script>
+<script>/* Service worker (build sw1, Load time rule in CLAUDE.md): keeps every downloaded file so a home-screen launch does not download it all again. After a load it hands the worker the list of what this page used. Add ?nosw to the address to run without it. See sw.js. */
+(function(){
+  if(!('serviceWorker' in navigator)||/[?&]nosw\b/.test(location.search)) return;
+  var go=function(){
+    navigator.serviceWorker.register('sw.js').then(function(){ return navigator.serviceWorker.ready; }).then(function(reg){
+      var urls=[],add=function(u){ if(u) urls.push(u); };
+      Array.prototype.forEach.call(document.scripts,function(s){ add(s.src); });
+      performance.getEntriesByType('resource').forEach(function(r){ add(r.name); });
+      try{ if(typeof DIALOG_CAST!=='undefined'&&DIALOG_CAST.files) DIALOG_CAST.files.forEach(add); }catch(e){}   // the big chapter voice files last
+      if(reg.active) reg.active.postMessage({type:'precache',urls:urls});
+    }).catch(function(){});
+  };
+  if(document.readyState==='complete') go(); else addEventListener('load',go);
+})();
+</script>
 </body>
 </html>
 

@@ -60,5 +60,9 @@ with sync_playwright() as pw:
     real=[e for e in errs if 'AudioContext' not in e and 'autoplay' not in e.lower() and 'Failed to load resource' not in e]
     if real: fails.append(f'errors: {real[:5]}')
     br.close()
+# Load time rule (CLAUDE.md): the service worker never re-asks for a ?v= file, so every changed file must have moved its tag.
+import subprocess, sys
+tc=subprocess.run([sys.executable,os.path.join(HERE,'tag_check.py')],capture_output=True,text=True); print(tc.stdout.strip())
+if tc.returncode: fails.append('tags not bumped: '+'; '.join(l.strip() for l in tc.stdout.split('\n')[1:] if l.strip()))
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)
