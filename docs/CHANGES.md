@@ -1,3 +1,10 @@
+## 2026-11-02 (97): Art Library gets its first real entry, Grace's hero pose (`grace-hero`; tools and data only, no game change)
+
+- Tom (11-02 13:18): "lets finish art library". Fact: B1 to B5 were already built; what was missing was a real entry to generate. Call made: Grace's hero pose is the first, because every other Grace sheet copies it (Phase C step 2).
+- Entry `grace-hero` (Characters tab, shape 2:3): refs = style key, height chart (`docs/reference/height_chart_v1.png`), `tools/sprite-bake/src/grace-hero-v2.png` (likeness only: face, hair, keychain). Prompt is the file `tools/art-library/prompts/grace-hero.txt` (read by make-prompts.js; edit the file, rerun `node tools/art-library/make-prompts.js`). Content: STYLE BLOCK v2 child wording, cozy sweats outfit (CHANGES (82)), pure magenta #FF00FF background, head about a quarter of height, 4'2", no em dashes. No `bake` field yet on purpose: an approval is stored under `art/raw/characters/` and replaces no live art.
+- `tools/art-library/test.py`: now opens the Enemies tab before the test card and checks the other entries stay draft (it assumed a single entry). Art Library test FAILS: [], bake_test FAILS: [], tag_check ok. Looked at the Grace card in portrait (prompt, three thumbnails, 2:3, GENERATE). NOT run: a real GENERATE with Tom's key, smoke (no game file changed).
+- Open: Tom has no GitHub token yet, so APPROVE and REJECT will refuse until he makes one.
+
 ## 2026-11-02 (96): Voice Library listed Spit Shine's lines under Dish-Towel Flick (Library index only)
 
 - Tom asked why Dish-Towel Flick shows more than one voice line. Fact: Deedee's Basic move slot has two versions, Dish-Towel Flick (says "Dish-towel flick. You had a spot.") and the Remix Spit Shine (says the two old `basic` lines, "Hold still! You've got a smudge!" and "Spit shine! There. Much better."). The index builder gave the old `basic` lines the Primary's name. All three lines are played by the game, so nothing is purged.

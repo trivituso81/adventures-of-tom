@@ -22,6 +22,7 @@ async def main():
                 pg.on('pageerror', lambda e: errs.append(str(e)))
                 await pg.goto('http://localhost:8811/art.html?xai=http://127.0.0.1:8812&gh=http://127.0.0.1:8812')
                 await pg.wait_for_selector('[data-gen]')
+                await pg.click('[data-tab="Enemies"]'); await pg.wait_for_selector('[data-id="test-mudling"]')
                 if name == 'portrait':
                     ok('no key' in await pg.inner_text('#keys'), 'starts with no key')
                     await pg.click('[data-gen]')
@@ -72,7 +73,7 @@ async def main():
                     ok('art/raw/enemies/test-mudling-v1.png' in files and 'art/raw/enemies/test-mudling-v2.png' in files, 'both pictures were committed under art/raw/enemies/')
                     ok(en['status'] == 'approved' and len(en['versions']) == 2 and en['versions'][0]['file'].endswith('-v1.png'), 'json: status approved, two versions listed')
                     ok(len(en['rejects']) == 1 and 'pure magenta' in en['rejects'][0]['note'], 'json: the reject note was saved')
-                    ok(len(doc['entries']) == 1 and doc['version'] == 1, 'json otherwise untouched')
+                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:] == ['grace-hero'] and doc['entries'][1]['status'] == 'draft' and not doc['entries'][1]['versions'], 'json otherwise untouched (other entries still draft)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
                     ok('aot-art-key' in ls, 'key lives in localStorage only')
