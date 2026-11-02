@@ -34,6 +34,10 @@ FOOT = [  # x0, y0, x1, base y, in art px; a tile is blocked when its foot point
 FOUNTAIN = (742, 745, 200, 105)  # centre x, centre y, half width, half height of the basin footprint
 KEEP = [(28, 11), (29, 11)]      # gate lane tiles that stay open (the posts stand just north of them)
 
+# Tom's hand edits of the walk map (2026-11-02), by spreadsheet id (A1 = tile 0,0): applied last, so reruns keep them.
+PAINT_GREEN = [(0, 9, 0, 11), (1, 9, 1, 13), (7, 14, 7, 20), (21, 14, 21, 20), (22, 11, 26, 11), (22, 12, 28, 12), (22, 13, 28, 13), (22, 14, 28, 14), (8, 14, 13, 14), (2, 14, 6, 14), (15, 14, 20, 14), (0, 21, 0, 21), (0, 22, 4, 22), (0, 23, 11, 23), (12, 24, 12, 24), (18, 23, 29, 23), (21, 22, 29, 22), (7, 1, 7, 1), (8, 1, 8, 1), (13, 25, 13, 25), (16, 25, 16, 25)]
+PAINT_RED = [(8, 11, 8, 11)]
+
 def build():
     g = [['#'] * W for _ in range(H)]
     for x0, y0, x1, y1 in OPEN:
@@ -50,6 +54,12 @@ def build():
             ex, ey, rx, ry = FOUNTAIN
             if ((cx - ex) / rx) ** 2 + ((fy - ey) / ry) ** 2 <= 1: g[y][x] = '#'
     for x, y in KEEP: g[y][x] = '.'
+    for x0, y0, x1, y1 in PAINT_GREEN:
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1): g[y][x] = '.'
+    for x0, y0, x1, y1 in PAINT_RED:
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1): g[y][x] = '#'
     return [''.join(r) for r in g]
 
 if __name__ == '__main__':

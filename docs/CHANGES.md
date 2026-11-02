@@ -1,3 +1,11 @@
+## 2026-11-02 (morning, 71): Square walk map edited by Tom's tile list (`square5`)
+
+- Tom gave edits by spreadsheet id (A1 = top-left tile; column letters across, row numbers down; image from tools/town_grid_image.py). Walkable: A10:A12, B10:B14, H15:H21, V15:V21, W12:AA12, W13:AC15, I15:N15, C15:G15, P15:U15, A22, A23:E23, A24:L24, M25, S24:AD24, V23:AD23. Not walkable: I12. These are the `PAINT_GREEN` and `PAINT_RED` lists in tools/make_town_mask.py (applied last, so reruns keep them).
+- Area exits (his "yellow"): N26 and Q26 join O26 and P26 to Rivituso Row (arrivals 12,1 and 13,1); H2 and I2 join H1 and I1 to Grump Hollow. The chapter 1 fallen-branch gate now covers all four north tiles. Hollow's arrivals into the Square moved from row 2 (7,1 and 8,1, now exits) to row 3 (7,2 and 8,2).
+- Doors (his "blue"): Snail Mail door now G21 (was F21), Moon Club Q21 (was R21), Taxi Co. Z21 (was Y21); Kettle Cottage M21 and the north row unchanged. Done by moving the house x in LE_HOUSES.
+- Tested: reach_test town 0 fails (all doors and exits reachable), smoke, camera_clamp, rooms_test FAILS: []. New tool tools/town_grid_image.py draws the labelled map. Not seen on the phone.
+- Tags: `maps-le.js` and `main.js` `?v=square5`, stamp `build square5`.
+
 ## 2026-11-02 (72): Art restyle, Phase A: STYLE BLOCK v2 and the style key prompt (docs only, no game change)
 
 - Tom (11-02, 06:57 and 07:07): the party reads too realistic and the NPCs too chibi; he wants illustrated whimsical realism for characters, NPCs and monsters, matching the painted Square and house interiors, with consistent sizes. This is Phase A of the plan in claude/next.md.
