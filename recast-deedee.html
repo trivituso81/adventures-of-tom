@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recast Deedee</title>
+<style>
+:root{--bg:#1d1a22;--card:#2a2631;--ink:#f3eee6;--dim:#b7afc0;--acc:#f2b84b;--bad:#ff8a7a;--ok:#8fd9a0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,system-ui,sans-serif;padding:14px 14px 60px;max-width:640px;margin:auto}
+h1{font-size:20px;margin:6px 0 2px}h2{font-size:16px;margin:0 0 8px}
+.card{background:var(--card);border-radius:12px;padding:12px;margin:12px 0}
+.dim{color:var(--dim);font-size:14px}.bad{color:var(--bad)}.ok{color:var(--ok)}
+button{background:var(--acc);color:#241c05;border:0;border-radius:10px;padding:12px 14px;font-size:16px;font-weight:600;margin:4px 6px 4px 0}
+button.s{background:#463f52;color:var(--ink)}button.d{background:#7a2e2e;color:#fff}button:disabled{opacity:.45}
+input,textarea{width:100%;background:#15121a;color:var(--ink);border:1px solid #463f52;border-radius:8px;padding:10px;font-size:16px}
+textarea{min-height:110px}
+.opt{border:1px solid #463f52;border-radius:10px;padding:8px;margin:8px 0}
+audio{width:100%;margin:6px 0}
+code{background:#15121a;padding:2px 6px;border-radius:6px;word-break:break-all}
+.vrow{display:flex;gap:8px;align-items:center;justify-content:space-between;border-top:1px solid #3a3444;padding:8px 0}
+.vrow span{flex:1;min-width:0;overflow-wrap:anywhere}
+</style></head><body>
+<h1>Recast Deedee</h1>
+<div class="dim">Built 2026-11-02. Current voice: <b id="curname"></b> <code id="curid"></code></div>
+
+<div class="card"><h2>1. ElevenLabs key</h2>
+<input id="key" type="password" placeholder="Paste your ElevenLabs API key" autocomplete="off">
+<div class="dim" style="margin-top:6px">Stays on this phone. <span id="keystate"></span></div></div>
+
+<div class="card"><h2>2. Describe the voice</h2>
+<textarea id="desc"></textarea>
+<div class="dim">Change the words to change the voice. Designing previews costs credits but never uses a voice slot.</div>
+<button id="design">Design 3 options</button>
+<div id="status" class="dim"></div>
+<div id="opts"></div></div>
+
+<div class="card"><h2>3. Voice slots (30 max)</h2>
+<div class="dim">Saving a new Deedee frees the old Deedee voice for you if the account is full (<b>delete old first</b> is the default below). Lines already baked in the game keep playing. Only delete other voices here if you need more room.</div>
+<label class="dim"><input id="delfirst" type="checkbox" checked style="width:auto"> Delete the old Deedee voice before saving the new one</label><br>
+<button class="s" id="list">Show my custom voices</button>
+<button class="d" id="delold">Delete old Deedee voice now</button>
+<div id="voices"></div></div>
+
+<div class="card" id="result" hidden><h2>Saved</h2>
+<div>New voice id: <code id="newid"></code></div>
+<button class="s" id="copy">Copy voice id</button>
+<div class="dim">Send that id to Claude. It updates the game's Deedee voice and the next Voice Library takes use it. Old baked clips are not changed.</div></div>
+
+<script>
+const CUR={"voice_id":"9UrcxKDUU0pvcnFhdfTU","name":"AoT Deedee (picked 2026-10-28)"};            // {voice_id,name} Deedee today
+const GAME_IDS=["cjVigY5qzO86Huf0OWal","JVVJ6VsnUPJAdfGmEBGP","ocZQ262SsZb9RIxcQBOj","9UrcxKDUU0pvcnFhdfTU","QzTKubutNn9TjrB7Xb2Q","HLSHrV3D7Gp6sEFcHNev","QPmHuIriDGOvu1d9U7wn","Pp9gl3BrnVq62dIWU2sx","E2hOWZ8x3nGJuQURP3SG","3NkCp1SubvPIw3g0s7Rf","moX2FuSiiLmOw0uEq4OU","qDteMRfOWoUEc7kcfWvl","BI45NIQbK17XdpKBL2Kq","7vp7iK3I8DiDLgC90c3t","gYzudf4C0nXnEecqXK5t","CcabrpeMRBXae9HlsCuq","zROpM0X5rfQMe4CN4C7f","FSFvvh3OTPle9DfVJIu3","UnNThlnnIcLaHiWDpFdl","qCj5kMANfHcvCnzG1gVB","2PhKaj7sDKqdDEhqQyhl","C0jocNoR6bwrjLXwelto","gcJ5PkVgShIxtP5HgbZK","hZCpO8frcjUSQcVVhRiz","jcb48kKcDpNXjAxnAP2c","DmA9AOv6Fsic2LQdqVVM","FgGtmhYdBou3a14mKYgx","8ncJvaxiyfELP457mBLS","LyoSZrqTSG25l7i0uBGl","kYM9iwUI7t87mhAOBs1T","rrjdoujYPDo3FGeRqm3Q","eLXwnyHT9UJHbuyheJ9m","24fSFWvKYGI0zVR7L6JQ","3KdkB2LF6PUw0muuS0j7","ARRjeRIXQjOrcraWRDoq","ubIjwev8dFIC3TyJqJPC","5nPpmcfu7pDFPztXuQIJ"];  // voice ids the game uses (marked IN USE in the list)
+const DESC="A woman in her seventies who sounds about fifty-five. A warm, bright, smiling voice with a rich, sunny tone: soft, affectionate and full of laughter, never raspy, breathy, thin or wobbly. A friendly Long Island New York accent. A retired nurse and doting grandma who hugs first and gives orders second: loving, cheerful, gently teasing, a little goofy. Clean studio recording.";
+const SAMPLE="There is my Tommy! Come here, come here, let me look at you. The rhubarb crisp is cooling on the counter and the floors are just mopped, so shoes off, honey. Grace, Rose, Deedee loves you to the moon and back. Say it back to me. Louder!";
+const $=id=>document.getElementById(id);
+const H=()=>({'xi-api-key':$('key').value.trim(),'Content-Type':'application/json'});
+const saveKey=()=>{try{localStorage.setItem('aot-baker-key',$('key').value.trim())}catch(e){}$('keystate').textContent=$('key').value.trim()?'Key set.':'No key.';};
+try{$('key').value=localStorage.getItem('aot-baker-key')||''}catch(e){}
+$('key').oninput=saveKey;saveKey();
+$('curname').textContent=CUR.name;$('curid').textContent=CUR.voice_id;
+let oldId=CUR.voice_id;
+try{$('desc').value=localStorage.getItem('aot-recast-deedee-desc')||DESC}catch(e){$('desc').value=DESC}
+$('desc').oninput=()=>{try{localStorage.setItem('aot-recast-deedee-desc',$('desc').value)}catch(e){}};
+const need=()=>{if(!$('key').value.trim())throw new Error('Paste your ElevenLabs key first.')};
+async function err(r){try{const j=await r.json();const d=j.detail;return typeof d==='string'?d:(d&&d.message)||JSON.stringify(j)}catch(e){return 'HTTP '+r.status}}
+const say=(t,c)=>{$('status').textContent=t;$('status').className='dim '+(c||'')};
+
+async function design(){
+  need();
+  const body=m=>JSON.stringify({voice_description:$('desc').value.trim(),model_id:m,text:SAMPLE,guidance_scale:5});
+  const send=m=>fetch('https://api.elevenlabs.io/v1/text-to-voice/design?output_format=mp3_44100_128',{method:'POST',headers:H(),body:body(m)});
+  let r=await send('eleven_ttv_v3');
+  if(!r.ok&&(r.status===400||r.status===422)){const m=await err(r);if(/model/i.test(m))r=await send('eleven_multilingual_ttv_v2');else throw new Error(m)}
+  if(!r.ok)throw new Error(await err(r));
+  return ((await r.json()).previews||[]).map(p=>({gid:p.generated_voice_id,mp3:p.audio_base_64}));
+}
+function showOpts(list){
+  const box=$('opts');box.innerHTML='';
+  list.forEach((p,i)=>{
+    const d=document.createElement('div');d.className='opt';
+    d.innerHTML='<b>Option '+(i+1)+'</b><audio controls src="data:audio/mpeg;base64,'+p.mp3+'"></audio>';
+    const b=document.createElement('button');b.textContent='Use this voice';b.onclick=()=>use(p.gid,b);
+    d.appendChild(b);box.appendChild(d);
+  });
+}
+async function delVoice(id){
+  const r=await fetch('https://api.elevenlabs.io/v1/voices/'+encodeURIComponent(id),{method:'DELETE',headers:H()});
+  if(!r.ok&&r.status!==404)throw new Error(await err(r));
+}
+async function create(gid,nm){
+  return fetch('https://api.elevenlabs.io/v1/text-to-voice',{method:'POST',headers:H(),body:JSON.stringify({voice_name:nm,voice_description:$('desc').value.trim(),generated_voice_id:gid})});
+}
+async function use(gid,btn){
+  try{
+    need();btn.disabled=true;
+    const nm='AoT Deedee (recast '+new Date().toISOString().slice(0,10)+')';
+    let deleted=false;
+    if($('delfirst').checked&&oldId){say('Deleting the old Deedee voice...');await delVoice(oldId);deleted=true;}
+    say('Saving the new voice...');
+    let r=await create(gid,nm);
+    if(!r.ok){
+      const m=await err(r);
+      if(!deleted&&oldId&&/limit|maximum|slot|quota/i.test(m)){say('Account full. Deleting the old Deedee voice...');await delVoice(oldId);deleted=true;r=await create(gid,nm);}
+      else throw new Error(m);
+    }
+    if(!r.ok)throw new Error(await err(r));
+    const j=await r.json();if(!j.voice_id)throw new Error('No voice id came back.');
+    oldId=j.voice_id;$('curname').textContent=nm;$('curid').textContent=j.voice_id;
+    $('newid').textContent=j.voice_id;$('result').hidden=false;$('opts').innerHTML='';
+    say('Saved'+(deleted?'. Old voice deleted.':'.'),'ok');
+  }catch(e){say(e.message||String(e),'bad');btn.disabled=false;}
+}
+$('design').onclick=async()=>{
+  $('design').disabled=true;say('Designing 3 options...');$('opts').innerHTML='';
+  try{const l=await design();if(!l.length)throw new Error('No options came back. Try again.');showOpts(l);say('Play all three, then press Use this voice.');}
+  catch(e){say(e.message||String(e),'bad')}
+  $('design').disabled=false;
+};
+$('delold').onclick=async()=>{
+  try{need();if(!oldId)throw new Error('No old voice to delete.');
+    if(!confirm('Delete the voice '+$('curname').textContent+'? Baked lines keep playing; new takes need a new voice.'))return;
+    await delVoice(oldId);say('Old Deedee voice deleted. One slot is free.','ok');oldId='';$('curname').textContent='(none)';$('curid').textContent='';
+  }catch(e){say(e.message||String(e),'bad')}
+};
+$('list').onclick=async()=>{
+  const box=$('voices');box.textContent='Loading...';
+  try{need();
+    const r=await fetch('https://api.elevenlabs.io/v1/voices?show_legacy=true',{headers:H()});
+    if(!r.ok)throw new Error(await err(r));
+    const vs=((await r.json()).voices||[]).filter(v=>v.category&&v.category!=='premade');
+    box.innerHTML='<div class="dim" style="margin-top:8px">'+vs.length+' custom voices of 30.</div>';
+    vs.forEach(v=>{
+      const row=document.createElement('div');row.className='vrow';
+      const inuse=GAME_IDS.includes(v.voice_id);
+      row.innerHTML='<span>'+(v.name||'(no name)').replace(/</g,'&lt;')+(inuse?' <b class="ok">IN USE by the game</b>':'')+'</span>';
+      const b=document.createElement('button');b.className='d';b.textContent='Delete';
+      b.onclick=async()=>{
+        if(!confirm('Delete "'+v.name+'"?'+(inuse?'\n\nThe game uses this voice. Baked lines keep playing, but new takes for that character will fail until it is recast.':'')))return;
+        try{await delVoice(v.voice_id);row.remove();say('Deleted '+v.name+'.','ok')}catch(e){say(e.message||String(e),'bad')}
+      };
+      row.appendChild(b);box.appendChild(row);
+    });
+  }catch(e){box.innerHTML='<div class="bad">'+(e.message||e)+'</div>'}
+};
+$('copy').onclick=()=>{const t=$('newid').textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>say('Copied.','ok')).catch(()=>say('Press and hold the id to copy it.'))};
+</script></body></html>

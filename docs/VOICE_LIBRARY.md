@@ -66,3 +66,4 @@ A line is baked from the Library like any other: find it with the "No clip yet" 
 - Phone takes are raw ElevenLabs output: no silence trim, no merge effects (Boppy deepening, Grace shrink, monster and walk-on filters). The card says so for voices that get one; Claude applies them when merging an export.
 - Chapters 11 to 20 have no dialogue clips yet: their lines show under No clip yet. 323 lines belong to characters with no voice cast (Vance, Marlowe, the Part 2 monsters); they are listed but cannot be recorded until Claude casts a voice.
 - The words cannot be edited here (a changed word silences the line in the game). Word changes go through the desktop Voice Baker v2 or a request to Claude.
+- ElevenLabs allows 30 custom voices and Tom's account is full (2026-11-02). A recast must delete the voice it replaces first. Deedee: `recast-deedee.html` (`tools/voice-recast/build-deedee.js`).

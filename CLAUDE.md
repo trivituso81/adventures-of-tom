@@ -58,6 +58,10 @@ Tom has asked repeatedly: voice lines and clips the full game never plays must n
 - Record what you removed in `docs/PURGED_VOICE.md` and `docs/CHANGES.md`. Git history keeps the audio, so deleting is safe. This is the one exception to hard rule 4: purging unused clips does not need a `voices.json`.
 - Lines that are live but have no clip yet are not dead. They are the bake list.
 
+## ElevenLabs voice limit (standing fact, 2026-11-02)
+
+Tom's ElevenLabs account is **maxed out at 30 custom voices** (voices added from the library count too, and every Voice Design save takes one). Never plan a new or recast voice without a slot plan: delete the voice it replaces first, or ask Tom which unused voice to delete. For Deedee use `recast-deedee.html` (built by `node tools/voice-recast/build-deedee.js`); it deletes the old voice for him and shows the new voice id. When Tom sends the id, set `voices.deedee.voice_id` in `data/voice-clips.js`, rebuild the Voice Library index, and note it in `docs/CHANGES.md`. Other recast bakers in `tools/voice-recast/` follow the same delete-old-voice rule.
+
 ## Load time (standing rule, 2026-11-02)
 
 Fact: the title screen waits for 51.5 MB of blocking scripts (306 `<script>` tags), 37 MB of which is voice audio stored as base64 text in `data/voice/*.js` and ~10 MB baked sprite data; after the title, the chapter voice files (`data/voice/dialog-ch*.js`, about 94 MB, mostly untagged) and the art load on demand, about 230 MB in all. Before `sw1` there was no service worker, so an iPhone home-screen app re-downloaded it all whenever Safari dropped its cache. Tom (11-02 10:20) decided:
