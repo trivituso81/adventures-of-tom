@@ -756,8 +756,25 @@ function questSubs(text) {
   for(const q of QUEST_SUBS) if(q.re.test(text||'')) return q.items.map(([label,f])=>({label,done:flag(f)===true}));
   return null;
 }
+// Every step shown to the player reads as an instruction. Scenes write goals as a bare place ("the Reading Room."), a direction
+// ("up the stairs...") or a verb phrase; the tracker turns the first two into "Go to ..." / "Go up ..." so a step is never mistaken for a label.
+// A goal already starting with a verb, or a plain statement ("Chapter 15 is coming."), is left alone. Saved games keep their old text and get the same treatment.
+const QUEST_VERBS=/^(follow|find|take|clear|get|pull|walk|talk|ask|head|go|stand|check|visit|feed|face|press|wheel|turn|pick|bring|ring|search|meet|look|explore|knock|warm|chapter|part|the story is|put|use|open|help|wait|keep|flip|set|give|show|fix|bake|finish|start|try|play|enter|leave|return|climb|run|sit|say|pet|dig|let)\b/i;
+const QUEST_DIRS={up:'Go up',out:'Go out',home:'Head home',back:'Head back',across:'Go across',through:'Go through',into:'Go into',inside:'Go inside',down:'Go down',over:'Go over',along:'Go along',past:'Go past'};
+function questPhrase(text) {
+  const t=String(text||'').trim(); if(!t) return t;
+  const w=(/^[A-Za-z]+/.exec(t)||[''])[0].toLowerCase();
+  if(QUEST_VERBS.test(t)) return t;
+  if(QUEST_DIRS[w]) return QUEST_DIRS[w]+t.slice(w.length);
+  const first=(/^(.*?[.!?])(\s|$)/.exec(t)||[0,t])[1];
+  if(/\b(is|are|was|were|lead|leads|waiting)\b/.test(first)) return t;   // a plain statement
+  if(/^Pip,/.test(t)) return 'Find '+t;
+  if(/^(Miss Odette|Do\u00f1a Carmen next)/.test(t)) return 'Visit '+t;
+  if(/^Fiction \(top left\)/.test(t)) return 'Search '+t;
+  return 'Go to '+t.replace(/^(The|A) /,(m,x)=>x.toLowerCase()+' ');
+}
 function questShort(text) {
-  const m=/^(.*?[.!?])(\s|$)/.exec(text||''),s=(m?m[1]:text||'').trim();
+  const t=questPhrase(text),m=/^(.*?[.!?])(\s|$)/.exec(t||''),s=(m?m[1]:t||'').trim();
   return s?s.charAt(0).toUpperCase()+s.slice(1):s;
 }
 function currentObjective() {
@@ -781,8 +798,10 @@ function currentObjective() {
     const done=log.slice(); if(goal&&flag('goalCh')===c.n&&done[done.length-1]!==goal) done.push(goal);
     return {head,eyebrow,text,subs:null,done,complete:true};
   }
-  const text=goal||'Look around. The story will find you.';
-  return {head,eyebrow,text,subs:goal?questSubs(goal):null,done:log,complete:false};
+  // No goal yet (chapter just started): say what to do HERE instead of a generic line, so it never reads as a label for the area.
+  const here=(currentMap&&currentMap.name)||'around';
+  const text=goal?questPhrase(goal):'Explore '+here+' and talk to people. Your next step shows up here.';
+  return {head,eyebrow,text,fallback:!goal,subs:goal?questSubs(goal):null,done:log,complete:false};
 }
 let objectiveOpen=false,objectiveTimer=0,qtFlash=0;
 function qEl(tag,cls,txt) { const e=document.createElement(tag); if(cls) e.className=cls; if(txt!==undefined) e.textContent=txt; return e; }
@@ -828,7 +847,6 @@ function toggleObjective(open=!objectiveOpen) {
 // pulses until the player taps it. When a part of a step is finished (a pip fills), the pips pop. It never pauses the
 // game or opens anything by itself. The first look after a new game or a loaded save only records the state (STORY.flags is
 // replaced by both, so a new object means a fresh baseline). The fallback text and Free play never pulse.
-const OBJ_DEFAULT_TEXT='Look around. The story will find you.';
 let objectiveSig=null,objectiveFlagsRef=null,objectiveSubN=-1,objectiveShort='';
 function setObjectivePulse(on) {
   const brand=document.querySelector('#hud .brand'); if(!brand) return;
@@ -843,14 +861,14 @@ function questFlash(prevShort) {
 }
 function watchObjective() {
   const tx=document.getElementById('qt-text'); if(!tx) return;
-  const o=currentObjective(),sub=o.subs?o.subs.filter(s=>s.done).length:-1,sig=o.head+'|'+o.text+'|'+o.done.length;
+  const o=currentObjective(),sub=o.subs?o.subs.filter(s=>s.done).length:-1,sig=o.head+'|'+(o.fallback?'':o.text)+'|'+o.done.length;
   if(STORY.mode!=='full') { if(objectiveSig!=='free') { objectiveSig='free'; refreshObjective(); } if(document.querySelector('#hud .brand.obj-new')) setObjectivePulse(false); return; }
   if(objectiveFlagsRef!==STORY.flags) { objectiveFlagsRef=STORY.flags; objectiveSig=sig; objectiveSubN=sub; objectiveShort=questShort(o.text); setObjectivePulse(false); refreshObjective(); return; }
   if(sig!==objectiveSig) {
     const prev=objectiveShort; objectiveSig=sig; objectiveSubN=sub; objectiveShort=questShort(o.text);
     refreshObjective();
-    if(!objectiveOpen&&o.text!==OBJ_DEFAULT_TEXT&&prev&&prev!==objectiveShort) { questFlash(prev); setObjectivePulse(true); }
-    else if(!objectiveOpen&&o.text!==OBJ_DEFAULT_TEXT) setObjectivePulse(true);
+    if(!objectiveOpen&&!o.fallback&&prev&&prev!==objectiveShort) { questFlash(prev); setObjectivePulse(true); }
+    else if(!objectiveOpen&&!o.fallback) setObjectivePulse(true);
     return;
   }
   if(sub!==objectiveSubN) {

@@ -144,7 +144,7 @@ SCENES.ch12Marlowe=[
   {talk:'TNB',lines:['That’s amber. It’s warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd.']},
   {talk:'Tom',lines:['We check on the neighbors first.']},
   {trace:'marlowe-grey'}, {hearts:'amy'},
-  {toast:'Goal: the neighbors are frozen in amber. Check Doña Carmen’s pupuseria and Casa Alvarez.',time:6}
+  {toast:'Goal: check Doña Carmen’s pupuseria and Casa Alvarez. The neighbors are frozen in amber.',time:6}
 ];
 
 SCENES.ch12Carmen=[

@@ -33,6 +33,16 @@
 - Tested: `python3 tools/music-library/test.py` FAILS: [] (38 tracks, chip counts add to 38, filters and search, key never in the page, 401 and no-key messages, two-tap make with the credit estimate, the request the stub saw: edited prompt plus loop wording, 60000 ms, instrumental, `music_v1`; take kept and in the game, second take, Use, Built into the game, Delete, Play and Loop test toggle, many at once, Show chips, Export file contents; the real game page picks the picked take through `mcFetch` and every other track still comes from music/; both orientations looked at). merge-local.py and seam.py run on scratch copies of real tracks (a bad id is refused, the other 36 manifest entries kept). NOT run: the phone, the live ElevenLabs call (no key here), Safari's handling of stored Blobs.
 - Stamp `build music1`; `?v=music1` on splash.js, main.js, music-clips.js and local-music.js (music-clips.js had no tag before; music.html, data/music-index.json and music/*.mp3 need none).
 
+## 2026-11-02 (93): Quest tracker redesigned so the step reads as an instruction, not a label for the area (`area2`)
+
+- Tom (11-02 13:22): "Look around" read as if it belonged to the area label above it; make every clue contextual, refactor the frame if needed, reword clues for clarity. Supersedes the placement in (92).
+- Frame, top to bottom: chapter label (small), then the step with a gold arrow, then progress pips, then a muted "pin + area name" line under a thin rule. The area is now clearly "you are here", separate from "do this". The step may use 3 lines (was 2). Both parts hide while the quest log is open.
+- Every step now reads as an instruction. `questPhrase` (engine/story.js) turns a bare place ("the Reading Room.") into "Go to the Reading Room.", a direction ("up the stairs...") into "Go up the stairs...", people into "Find" / "Visit", and leaves verb-led goals alone. Applies to the tracker, the check-off flash and the quest log, and to goals already in saved games. Checked on all 100+ distinct goals in data/.
+- Ten goals that were statements, not instructions, were rewritten (data/scenes.js x3, scenes-ch12, ch13, ch14, ch19, ch20, scenes-p2 x2): e.g. "Warden Boppy is at the Rivituso door." is now "Go to the Rivituso door. Warden Boppy is waiting there." and "Four doors lead to four rooms..." is now "Pick a door and go in...". No spoken line changed.
+- The generic "Look around. The story will find you." is gone. With no goal yet the tracker says what to do where you are: "Explore Downtown LA and talk to people. Your next step shows up here." (follows the map; no pulse or flash for it).
+- Tags: `?v=area2` on story.js, battle-draw.js, main.js, scenes.js, scenes-ch12/13/14/20.js (scenes-ch19.js and scenes-p2.js carry no tag); stamp `build area2`.
+- Tested: smoke FAILS: [] with the tag check ok; unused_voice 0 on all five; portrait (no goal, place goal, three-part goal with pips) and landscape looked at, no page errors. NOT seen on the phone. Knob: wording of the fallback is in `currentObjective`; a goal that still reads badly: reword its `Goal:` toast or add a rule to `questPhrase`.
+
 ## 2026-11-02 (92): The quest tracker shows the current area under the chapter label (`area1`)
 
 - Tom (11-02 12:55): in the overworld quest tip, below the chapter label, display the current area the player is in.

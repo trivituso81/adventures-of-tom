@@ -2013,7 +2013,7 @@ SCENES.ch6Board=[
   {talk:'TNB',lines:['Everything connects to the jar, babe. That\'s how corkboards work.']},
   {talk:'Corkboard',lines:['A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.','Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY).']},
   {talk:'Nara',lines:['Nara looks at the drawing of herself. She seems pleased with it.']},
-  {toast:'Goal: the pantry (right). The bucket on the rope.',time:4.5}
+  {toast:'Goal: the pantry (right). Look for the bucket on the rope.',time:4.5}
 ];
 // 11. The bucket: Nara is the counterweight. The rope ladder comes down.
 SCENES.ch6Ladder=[
@@ -2870,7 +2870,7 @@ SCENES.ch8AfterBoss=()=>[
   {talk:'Tom',lines:['A gold coin. Same little clock face.','The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. And now an oven nobody has opened since 1963.']},
   {talk:'TNB',lines:['Somebody keeps getting into places nobody gets into. Very neat. Very quiet. Very spooky. I love it. I hate it.']},
   {talk:'Tom',lines:['Look at the corners. Not a speck of ash on it. Somebody put it there after the fire went out. I\'m adding it to the list.']},
-  {toast:'Goal: the bread to the potluck. They closed Jefferson Boulevard for the tables.',time:4.5}
+  {toast:'Goal: take the bread to the potluck. They closed Jefferson Boulevard for the tables.',time:4.5}
 ];
 // 11. Jefferson Boulevard, closed for the 2nd Ave potluck: the feast. Rewards. A letter for Tom. Chapter complete.
 SCENES.ch8End=[
@@ -3674,7 +3674,7 @@ SCENES.ch10AfterBoss=()=>[
   {fade:'out',time:.8},
   {call:()=>{ beginTransition({kind:'edge',to:'row',spawn:{x:14,y:10},facing:'up'}); }},
   {wait:.5}, {fade:'in',time:.6},
-  {toast:'Goal: Sunday dinner at Deedee and Boppy’s house (RIVITUSO). Everyone is waiting.',time:4.5}
+  {toast:'Goal: Deedee and Boppy’s house (RIVITUSO) for Sunday dinner. Everyone is waiting.',time:4.5}
 ];
 // 8. The Rivituso house: Sunday dinner at midnight. Part 1 complete.
 SCENES.ch10End=[

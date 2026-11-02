@@ -112,13 +112,13 @@ SCENES.ch11Stby=[
     {call:()=>setFlag('ch11-stby',true)},
     {talk:'Standby Sprite',lines:['...Seventeen. Somebody called seventeen. Was that me?','It was me. I’m on the plane. I’m on THE PLANE.']},
     {trace:'standby-sprite'}, {hearts:'amy'},
-    {toast:'Goal: the checkpoint is open. Head east to the jet bridge.',time:5}]}
+    {toast:'Goal: head east to the jet bridge. The checkpoint is open.',time:5}]}
 ];
 SCENES.ch11StbyAfter=[
   {flag:'ch11-stby'},
   {talk:'Standby Sprite',lines:['...Seventeen. Somebody called seventeen. Was that me?','It was me. I’m on the plane. I’m on THE PLANE.']},
   {trace:'standby-sprite'}, {hearts:'amy'},
-  {toast:'Goal: the checkpoint is open. Head east to the jet bridge.',time:5}
+  {toast:'Goal: head east to the jet bridge. The checkpoint is open.',time:5}
 ];
 
 SCENES.ch11Meet=[
@@ -155,7 +155,7 @@ SCENES.ch11Meet=[
   {toast:'New Tombo: Sleepover at Tom’s (Tom, TNB, Grace, Rose in front). 50% HEART.',time:4.5},
   {flag:'ch11-met'},
   {toast:'TNB and Nara are on the bench. Sit at a gold Boarding Gate bench to bring them out front.',time:6},
-  {toast:'Goal: Gate Infinity is at the far east end. Look around the Concourse first.',time:5},
+  {toast:'Goal: look around the Concourse, then walk east to Gate Infinity.',time:5},
   {save:true}
 ];
 

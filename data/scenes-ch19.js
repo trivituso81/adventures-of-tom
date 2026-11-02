@@ -115,7 +115,7 @@ SCENES.ch19Hub=()=>[
   {talk:'Rose',lines:['There’s a thermos on it.']},
   {talk:'TNB',lines:['That’s his. I would know that thermos in the dark.']},
   {flag:'ch19-hub'},
-  {toast:'Goal: Four doors lead to four rooms. In each, find three memories, then leave a keepsake on the pedestal.',time:9},
+  {toast:'Goal: pick a door and go in. In each of the four rooms, find three memories, then leave a keepsake on the pedestal.',time:9},
   {save:true}
 ];
 

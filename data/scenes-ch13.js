@@ -276,7 +276,7 @@ SCENES.ch13After=()=>[
   {trace:'ch13-wrap'}, {hearts:'tom'}, {hearts:'amy'}, {hearts:'tnb'},
   {flag:'ch13-gate'},
   {fade:'out',time:.8}, {card:13,done:true,time:3.4}, {flag:'ch13-done'}, {fade:'in',time:.8},
-  {toast:'Goal: Warden Boppy is at the Rivituso door.',time:7},
+  {toast:'Goal: the Rivituso door. Warden Boppy is waiting there.',time:7},
   {call:()=>showToast&&showToast('CHAPTER 13 COMPLETE!',5)},
   {save:true}
 ];

@@ -144,7 +144,7 @@ SCENES.ch20Open=()=>[
   {talk:'TNB',lines:['It is a very good lock. Whoever made it really cared about the mechanism.']},
   {talk:'Tom',lines:['One skill each. Whatever you are best at, that is your door.']},
   {flag:'ch20-open'},
-  {toast:'Goal: Eight doors, eight skills. Press A on a door, then pick the answer that fits.',time:9},
+  {toast:'Goal: press A on any of the eight doors, then pick the answer that fits. Eight doors, eight skills.',time:9},
   {save:true}
 ];
 

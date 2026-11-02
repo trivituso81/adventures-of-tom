@@ -77,7 +77,7 @@ SCENES.ch14Open=[
   {talk:'Amy',lines:['Rose.']},
   {talk:'Rose',lines:['A very small boop.']},
   {trace:'ch14-open'},{hearts:'amy'},
-  {toast:'Goal: Deedee is on the porch (left of the Rivituso door), frozen in amber. Talk to her first. Do not hit Boppy.',time:7},
+  {toast:'Goal: talk to Deedee on the porch (left of the Rivituso door) first. She is frozen in amber. Do not hit Boppy.',time:7},
   {flag:'ch14-open'},
   {save:true}
 ];
