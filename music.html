@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#14122b">
+<title>Music Library</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#14122b;color:#f4f1ff;font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;position:sticky;top:0;background:#14122b;border-bottom:1px solid #2c2852;z-index:5}
+header h1{font-size:20px;margin:0;flex:1}
+a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
+main{max-width:760px;margin:0 auto;padding:12px 16px 140px}
+.card{background:#1d1a3d;border:1px solid #2c2852;border-radius:14px;padding:12px 14px;margin:0 0 12px}
+label{display:block;font-size:13px;color:#b9b3e6;margin:8px 0 6px}
+input[type=password],input[type=text],input[type=search],input[type=number],textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px}
+input[type=number]{width:84px;padding:8px}
+input[type=checkbox]{width:24px;height:24px;flex:none}
+textarea{min-height:104px;resize:vertical;line-height:1.35;font-size:14px}
+button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:#3a3566;color:#fff;font-weight:600;cursor:pointer}
+button:disabled{opacity:.45}
+button.gold{background:#ffd34d;color:#241b00}
+button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
+button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outline:2px solid #ffd34d}
+.hint{color:#b9b3e6;font-size:13px}.err{color:#ff8b97;font-size:13px;white-space:pre-wrap}.ok{color:#7be0a6}
+.suffix{color:#7d78a8;font-size:12px;margin:4px 0 2px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{font-size:12px;border-radius:10px;padding:2px 9px;background:#2c2852;color:#d9d4ff}
+.pill.live{background:#2f9e63;color:#fff}.pill.warn{background:#6b5a1c;color:#ffe9a3}
+.frow{display:flex;gap:6px;overflow-x:auto;align-items:center;padding:4px 0;scrollbar-width:none}
+.lab{flex:none;font-size:12px;color:#b9b3e6;width:46px}
+.chip{flex:none;font-size:14px;padding:6px 12px;border-radius:16px;border:1px solid #3a3566;background:#0f0d24;color:#d9d4ff;white-space:nowrap;min-height:34px;font-weight:500}
+.chip.on{background:#7b6cff;border-color:#a89dff;color:#fff}
+.chip .n{font-size:11px;opacity:.7;margin-left:5px}
+.chip.zero{opacity:.4}
+.sum{display:flex;gap:8px;align-items:center;margin-top:8px}.sum .grow{flex:1}
+.take{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:6px 0;border-top:1px solid #2c2852;font-size:13px;color:#d9d4ff}
+.take .t{flex:1;min-width:150px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;z-index:10;flex-wrap:wrap}
+.bar[hidden]{display:none}.bar .grow{flex:1;min-width:90px}
+#toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
+</style>
+</head>
+<body>
+<header><a class="back" href="index.html" id="back">Back</a><h1>Music Library</h1></header>
+<main>
+<div class="card" id="keys"></div>
+<div class="card">
+  <input type="search" id="q" placeholder="Search tracks by name, place or prompt" autocomplete="off">
+  <div class="frow" id="fGroup"></div>
+  <div class="frow" id="fKind"></div>
+  <div class="frow" id="fUse"></div>
+  <div class="frow" id="fShow"></div>
+  <div class="sum"><span id="count" class="hint"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small gold" id="selall">Select all shown</button></div>
+</div>
+<div id="list"></div>
+<div class="row"><button id="exp" class="small">Export music takes</button></div>
+<p class="hint" id="howto"></p>
+</main>
+<div class="bar" id="bar" hidden></div>
+<div id="toast"></div>
+<script>
+// Music Library. Every track the game plays is one card: hear it, edit its prompt, make a new take with ElevenLabs Music, pick which take
+// the game plays on this phone. Takes live in this browser's IndexedDB 'aot-music-library' (engine/local-music.js reads the same store at
+// startup, so the take marked Use plays in the game at once). The list comes from data/music-index.json (tools/music-library/make-index.js).
+// The key is the same one the Voice Library uses (localStorage 'aot-el-key'); it is never written into the page or logged.
+// Test override: ?el=<base url> points ElevenLabs calls at tools/music-library/stub.py.
+const $=id=>document.getElementById(id);
+const Q=new URLSearchParams(location.search);
+const KEYNAME='aot-el-key', MODEL='music_v1', CREDITS=[11,14];
+const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},set(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}},del(k){try{localStorage.removeItem(k);}catch(e){}}};
+const EL=()=>(Q.get('el')||'https://api.elevenlabs.io').replace(/\/+$/,'');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
+let IDX=null, TAKES={}, USE={}, DB=null, PL=null, AC=null, RUN=null, STOP=false, ARMED=null;
+const SEL=new Set(), OPEN=new Set(), BUSY={}, MSG={};
+let PROMPTS={}, LENS={};
+try{PROMPTS=JSON.parse(LS.get('aot-ml-prompts')||'{}')||{};}catch(e){}
+try{LENS=JSON.parse(LS.get('aot-ml-lens')||'{}')||{};}catch(e){}
+const savePrompts=()=>LS.set('aot-ml-prompts',JSON.stringify(PROMPTS));
+const saveLens=()=>LS.set('aot-ml-lens',JSON.stringify(LENS));
+// Filters: an empty Set means every value. Groups combine with AND, chips inside a group with OR.
+const F={group:new Set(),kind:new Set(),use:new Set(),show:'all',q:''};
+try{const s=JSON.parse(LS.get('aot-ml-filters')||'null');if(s){F.group=new Set(s.group||[]);F.kind=new Set(s.kind||[]);F.use=new Set(s.use||[]);F.show=s.show||'all';}}catch(e){}
+const saveF=()=>LS.set('aot-ml-filters',JSON.stringify({group:[...F.group],kind:[...F.kind],use:[...F.use],show:F.show}));
+const T=id=>IDX.tracks.find(t=>t.id===id);
+const promptOf=t=>PROMPTS[t.id]!==undefined?PROMPTS[t.id]:t.prompt;
+const lenOf=t=>LENS[t.id]!==undefined?LENS[t.id]:t.len;
+const takesOf=id=>TAKES[id]||[];
+const useTake=id=>USE[id]?takesOf(id).find(x=>x.key===USE[id]):null;
+
+// ---------- IndexedDB (same schema as engine/local-music.js) ----------
+const idb=()=>new Promise((res,rej)=>{const q=indexedDB.open('aot-music-library',1);q.onupgradeneeded=()=>{const d=q.result;if(!d.objectStoreNames.contains('takes'))d.createObjectStore('takes',{keyPath:'key'});if(!d.objectStoreNames.contains('use'))d.createObjectStore('use',{keyPath:'trackId'});};q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error);});
+const tx=(store,mode,fn)=>new Promise((res,rej)=>{const t=DB.transaction(store,mode);const r=fn(t.objectStore(store));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error);});
+async function loadDb(){
+  TAKES={};USE={};
+  for(const r of await tx('takes','readonly',s=>s.getAll())||[]) (TAKES[r.trackId]=TAKES[r.trackId]||[]).push(r);
+  for(const k in TAKES) TAKES[k].sort((a,b)=>b.n-a.n);
+  for(const r of await tx('use','readonly',s=>s.getAll())||[]) USE[r.trackId]=r.key;
+}
+async function setUse(id,key){
+  if(!DB) return;
+  if(key){await tx('use','readwrite',s=>s.put({trackId:id,key}));USE[id]=key;}
+  else{await tx('use','readwrite',s=>s.delete(id));delete USE[id];}
+}
+
+// ---------- key card ----------
+function paintKeys(){
+  const k=!!LS.get(KEYNAME);
+  $('keys').innerHTML='<label style="margin-top:0">ElevenLabs key (the same one the Voice Library uses) <span class="'+(k?'ok':'err')+'">'+(k?'key set':'no key')+'</span></label>'+
+  '<div class="row"><input type="password" id="kx" placeholder="paste the ElevenLabs key" autocomplete="off" style="flex:1"><button class="small" id="sx">Save</button>'+(k?'<button class="small" id="dx">Remove</button>':'')+'</div>'+
+  '<div class="hint" style="margin-top:6px">The key needs the Music permission. Listening and picking takes needs no key.</div>';
+}
+$('keys').addEventListener('click',e=>{
+  if(e.target.id==='sx'){const v=($('kx').value||'').trim();if(!v)return toast('Paste it first.');if(!LS.set(KEYNAME,v))return toast('This browser would not save it.');paintKeys();}
+  else if(e.target.id==='dx'){LS.del(KEYNAME);paintKeys();}
+});
+
+// ---------- filters ----------
+function matches(t,skip){
+  if(skip!=='group'&&F.group.size&&!F.group.has(t.group))return false;
+  if(skip!=='kind'&&F.kind.size&&!F.kind.has(t.kind))return false;
+  if(skip!=='use'&&F.use.size&&!F.use.has(t.use))return false;
+  if(skip!=='show'){
+    const n=takesOf(t.id).length;
+    if(F.show==='none'&&n)return false;
+    if(F.show==='phone'&&!n)return false;
+    if(F.show==='builtin'&&USE[t.id])return false;
+  }
+  if(F.q){const h=(t.name+' '+t.id+' '+t.where+' '+promptOf(t)).toLowerCase();if(!F.q.toLowerCase().split(/\s+/).every(w=>h.includes(w)))return false;}
+  return true;
+}
+const shown=()=>IDX.tracks.filter(t=>matches(t));
+function chip(g,v,label,on,n){return '<button class="chip'+(on?' on':'')+(n===0&&!on?' zero':'')+'" data-g="'+g+'" data-v="'+esc(v)+'">'+esc(label)+'<span class="n">'+n+'</span></button>';}
+function paintFilters(){
+  const cnt=(skip,fn)=>IDX.tracks.filter(t=>matches(t,skip)&&fn(t)).length;
+  const vis=skip=>cnt(skip,()=>true);
+  const mk=(g,lab,vals,key,names)=>'<span class="lab">'+lab+'</span>'+chip(g,'*','All',!F[g].size,vis(g))+vals.map(v=>chip(g,v,names?names[v]:v,F[g].has(v),cnt(g,t=>t[key]===v))).join('');
+  $('fGroup').innerHTML=mk('group','Group',['Core','Long Island','Los Angeles','Nine Scoops'],'group');
+  $('fKind').innerHTML=mk('kind','Kind',['loop','jingle'],'kind',{loop:'Loop',jingle:'Jingle'});
+  $('fUse').innerHTML=mk('use','Use',['Area','Boss room','Battle','Title','Jingle'],'use');
+  const nNone=cnt('show',t=>!takesOf(t.id).length),nPh=cnt('show',t=>takesOf(t.id).length),nBi=cnt('show',t=>!USE[t.id]);
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All tracks',F.show==='all',vis('show'))+chip('show','none','No take on this phone',F.show==='none',nNone)+chip('show','phone','Re-made on this phone',F.show==='phone',nPh)+chip('show','builtin','Built-in track plays',F.show==='builtin',nBi);
+  const v=shown().length;
+  $('count').textContent=v+' of '+IDX.tracks.length+' tracks shown';
+  $('selall').textContent='Select all '+v+' shown';
+  $('clear').disabled=!SEL.size;
+}
+function toggle(g,v){
+  if(g==='show'){F.show=v;}
+  else if(v==='*')F[g].clear();
+  else if(F[g].has(v))F[g].delete(v);else F[g].add(v);
+  saveF();paintFilters();paintList();
+}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.chip');if(b&&b.dataset.g)toggle(b.dataset.g,b.dataset.v);});
+$('q').addEventListener('input',()=>{F.q=$('q').value.trim();paintFilters();paintList();});
+$('clear').onclick=()=>{SEL.clear();paintFilters();paintList();paintBar();};
+$('selall').onclick=()=>{for(const t of shown())SEL.add(t.id);paintFilters();paintList();paintBar();};
+
+// ---------- cards ----------
+const fmt=n=>n==null?'?':(Math.round(n*10)/10).toFixed(1);
+const cr=len=>{const a=Math.round(len*CREDITS[0]/10)*10,b=Math.round(len*CREDITS[1]/10)*10;return a+' to '+b;};
+function takeHtml(t,x){
+  const live=USE[t.id]===x.key;
+  return '<div class="take"><span class="t">v'+x.n+', '+esc((x.date||'').slice(0,10))+', asked '+x.len+' s, got '+fmt(x.dur)+' s'+(x.short?' <span class="err" style="display:inline">(came back short)</span>':'')+'</span>'+
+    '<button class="small" data-pid="'+esc(x.key)+'" data-lab="&#9654; Play" data-tplay="'+esc(x.key)+'">&#9654; Play</button>'+
+    (live?'<span class="pill live">In the game</span>':'<button class="small good" data-tuse="'+esc(x.key)+'">Use</button>')+
+    '<button class="small bad" data-tdel="'+esc(x.key)+'">Delete</button></div>';
+}
+function cardHtml(t){
+  const id=esc(t.id),tk=takesOf(t.id),ut=useTake(t.id),busy=!!BUSY[t.id],m=MSG[t.id];
+  const edited=PROMPTS[t.id]!==undefined&&PROMPTS[t.id]!==t.prompt;
+  let h='<div class="card" data-id="'+id+'">'+
+   '<div class="row"><input type="checkbox" data-sel="'+id+'"'+(SEL.has(t.id)?' checked':'')+'><b style="flex:1">'+esc(t.name)+'</b><span class="pill">'+id+'</span></div>'+
+   '<div class="hint">'+esc(t.where)+' | '+esc(t.group)+' | '+(t.kind==='loop'?'Loop':'Jingle')+' | '+esc(t.use)+'</div>'+
+   '<div class="row" style="margin-top:6px"><span class="pill'+(ut?' live':'')+'">'+(ut?'Phone take v'+ut.n+' plays in the game':'Built-in plays ('+fmt(t.sec)+' s, '+Math.round(t.bytes/1024)+' KB)')+'</span>'+(t.auto&&PROMPTS[t.id]===undefined?'<span class="pill warn">auto prompt, written from the track\'s job</span>':'')+(edited?'<button class="small" data-reset="'+id+'">Reset prompt</button>':'')+'</div>'+
+   '<label>Prompt (ElevenLabs reads this; edits save as you type)</label><textarea data-prompt="'+id+'">'+esc(promptOf(t))+'</textarea>'+
+   '<div class="suffix">Added when sent: '+esc(IDX.suffix[t.kind])+'</div>'+
+   '<div class="row" style="margin-top:8px"><label style="margin:0">Length (s)</label><input type="number" data-len="'+id+'" value="'+lenOf(t)+'" min="3" max="120" step="1" inputmode="numeric">'+
+   '<button class="small" data-pid="'+id+'|now" data-lab="&#9654; Play" data-play="'+id+'">&#9654; Play</button>'+
+   (t.kind==='loop'?'<button class="small" data-pid="'+id+'|loop" data-lab="&#9654; Loop test" data-loop="'+id+'">&#9654; Loop test</button>':'')+
+   '<button class="gold" data-make="'+id+'"'+(busy?' disabled':'')+'>'+(busy?'Making...':(ARMED==='make|'+t.id?'TAP AGAIN: about '+cr(lenOf(t))+' credits':'New take'))+'</button>'+
+   '<button class="small" data-tks="'+id+'">Takes ('+tk.length+')</button></div>'+
+   '<div class="'+(m&&m.err?'err':'hint')+'" id="m-'+id+'">'+esc(m?m.text:'')+'</div>';
+  if(OPEN.has(t.id)){
+    h+='<div style="margin-top:6px">'+tk.map(x=>takeHtml(t,x)).join('')+
+     '<div class="take"><span class="t">Built into the game, '+fmt(t.sec)+' s</span><button class="small" data-pid="'+id+'|b" data-lab="&#9654; Play" data-bplay="'+id+'">&#9654; Play</button>'+(USE[t.id]?'<button class="small good" data-builtin="'+id+'">Use</button>':'<span class="pill live">In the game</span>')+'</div></div>';
+  }
+  return h+'</div>';
+}
+function paintList(){
+  const v=shown();
+  $('list').innerHTML=v.length?v.map(cardHtml).join(''):'<div class="card hint">No track matches these filters.</div>';
+  paintPlay();
+}
+function refreshCard(id){
+  const t=T(id),el=document.querySelector('.card[data-id="'+CSS.escape(id)+'"]');
+  if(t&&el){el.outerHTML=cardHtml(t);paintPlay();}
+  paintFilters();
+}
+function setMsg(id,text,err){MSG[id]={text,err};const el=$('m-'+id);if(el){el.textContent=text;el.className=err?'err':'hint';}}
+
+$('list').addEventListener('input',e=>{
+  const p=e.target.dataset.prompt;if(p){PROMPTS[p]=e.target.value;savePrompts();}
+  const l=e.target.dataset.len;if(l){const n=parseFloat(e.target.value);if(n>0){LENS[l]=n;saveLens();}}
+});
+$('list').addEventListener('change',e=>{
+  const s=e.target.dataset.sel;if(s){if(e.target.checked)SEL.add(s);else SEL.delete(s);paintFilters();paintBar();}
+});
+$('list').addEventListener('click',async e=>{
+  const d=e.target.dataset||{};
+  if(d.reset){delete PROMPTS[d.reset];savePrompts();return refreshCard(d.reset);}
+  if(d.tks){if(OPEN.has(d.tks))OPEN.delete(d.tks);else OPEN.add(d.tks);return refreshCard(d.tks);}
+  if(d.play)return play(d.play,'now',USE[d.play]||null);
+  if(d.loop)return play(d.loop,'loop',USE[d.loop]||null);
+  if(d.bplay)return play(d.bplay,'b',null);
+  if(d.tplay){const k=d.tplay;return play(k.split('|')[0],k,k);}
+  if(d.make)return armed('make|'+d.make,()=>refreshCard(d.make),()=>runOne(d.make));
+  if(d.tuse){const k=d.tuse,id=k.split('|')[0];await setUse(id,k);MSG[id]={text:'The game plays this take on this phone now.',err:false};return refreshCard(id);}
+  if(d.builtin){await setUse(d.builtin,null);MSG[d.builtin]={text:'The game plays the built-in track again.',err:false};return refreshCard(d.builtin);}
+  if(d.tdel)return armed('del|'+d.tdel,()=>{e.target.classList.add('armed');e.target.textContent='TAP AGAIN';},()=>delTake(d.tdel));
+});
+// A button that must be tapped twice (credits, deletes): the first tap arms it for 5 s.
+function armed(key,paint,go){
+  if(ARMED===key){ARMED=null;clearTimeout(armed.h);return go();}
+  ARMED=key;paint();clearTimeout(armed.h);
+  armed.h=setTimeout(()=>{const old=ARMED;ARMED=null;if(old&&old.startsWith('make|'))refreshCard(old.slice(5));else if(old)paintList();paintBar();},5000);
+}
+async function delTake(key){
+  const id=key.split('|')[0];
+  await tx('takes','readwrite',s=>s.delete(key));
+  TAKES[id]=takesOf(id).filter(x=>x.key!==key);
+  if(USE[id]===key){const next=TAKES[id][0];await setUse(id,next?next.key:null);}
+  MSG[id]={text:'Take deleted.',err:false};refreshCard(id);
+}
+
+// ---------- hearing ----------
+function ctx(){if(!AC){const C=window.AudioContext||window.webkitAudioContext;AC=new C();}if(AC.state==='suspended')AC.resume();return AC;}
+async function bytesFor(id,key){
+  if(key){const r=await tx('takes','readonly',s=>s.get(key));if(r&&r.mp3)return r.mp3.arrayBuffer();}
+  const r=await fetch('music/'+id+'.mp3');if(!r.ok)throw new Error('Could not load the built-in track ('+r.status+').');return r.arrayBuffer();
+}
+const decode=(c,ab)=>new Promise((res,rej)=>{const p=c.decodeAudioData(ab,res,rej);if(p&&p.catch)p.catch(rej);});
+function stopAll(){if(PL){for(const n of PL.nodes){try{n.stop();}catch(e){}}clearTimeout(PL.h);PL=null;paintPlay();}}
+function paintPlay(){document.querySelectorAll('[data-pid]').forEach(b=>{const on=PL&&PL.pid===b.dataset.pid;b.innerHTML=on?'&#9632; Stop':b.dataset.lab;});}
+async function play(id,mode,key){
+  const pid=mode==='now'?id+'|now':mode==='loop'?id+'|loop':mode==='b'?id+'|b':key;
+  if(PL&&PL.pid===pid)return stopAll();
+  stopAll();
+  const c=ctx(),mine={pid,nodes:[]};PL=mine;paintPlay();
+  try{
+    const buf=await decode(c,await bytesFor(id,mode==='b'?null:key));
+    if(PL!==mine)return;
+    const t0=c.currentTime+.05;
+    const end=()=>{if(PL===mine){PL=null;paintPlay();}};
+    if(mode==='loop'){
+      // The way the game loops a track: the next copy starts XF seconds before the end of this one and the two crossfade.
+      const D=buf.duration,XF=2.5,seg=Math.min(10,D/2),gA=c.createGain(),gB=c.createGain(),a=c.createBufferSource(),b=c.createBufferSource();
+      a.buffer=buf;b.buffer=buf;a.connect(gA);b.connect(gB);gA.connect(c.destination);gB.connect(c.destination);
+      gA.gain.setValueAtTime(1,t0);gA.gain.setValueAtTime(1,t0+seg-XF);gA.gain.linearRampToValueAtTime(0,t0+seg);
+      gB.gain.setValueAtTime(0,t0+seg-XF);gB.gain.linearRampToValueAtTime(1,t0+seg);
+      a.start(t0,D-seg,seg);b.start(t0+seg-XF,0,seg);
+      mine.nodes.push(a,b);b.onended=end;
+    }else{
+      const s=c.createBufferSource(),g=c.createGain();s.buffer=buf;s.connect(g);g.connect(c.destination);s.start(t0);mine.nodes.push(s);s.onended=end;
+    }
+  }catch(e){if(PL===mine){PL=null;paintPlay();}toast(e.message||'Could not play that.');}
+}
+
+// ---------- ElevenLabs Music ----------
+async function apiErr(r){
+  let t='';try{t=await r.text();const j=JSON.parse(t);const d=j.detail;if(d&&typeof d==='object'&&!Array.isArray(d))t=d.message||d.status||JSON.stringify(d);else if(Array.isArray(d))t=d.map(x=>x.msg).join('; ');else if(d)t=String(d);}catch(e){}
+  const c=r.status,hint=c===401?' (the key was not accepted)':c===403?' (the key may lack the Music permission, or the plan does not include Music)':c===402||c===429?' (check the ElevenLabs credits and plan)':c===422?' (the prompt was refused, try other words)':'';
+  return new Error('ElevenLabs '+c+hint+': '+String(t).replace(LS.get(KEYNAME)||'\u0000','[key]').slice(0,160));
+}
+function metaDur(blob){return new Promise(res=>{const a=new Audio(),u=URL.createObjectURL(blob),done=v=>{URL.revokeObjectURL(u);res(v);};a.preload='metadata';a.onloadedmetadata=()=>done(isFinite(a.duration)?Math.round(a.duration*10)/10:null);a.onerror=()=>done(null);setTimeout(()=>done(null),5000);a.src=u;});}
+async function makeTake(id){
+  const t=T(id),key=LS.get(KEYNAME);
+  if(!key)throw new Error('Paste the ElevenLabs key at the top first.');
+  const text=promptOf(t).trim();if(!text)throw new Error('The prompt is empty.');
+  const len=lenOf(t),lim=t.kind==='loop'?[15,120]:[3,15];
+  if(!(len>=lim[0]&&len<=lim[1]))throw new Error('Length must be '+lim[0]+' to '+lim[1]+' seconds for a '+(t.kind==='loop'?'loop':'jingle')+'.');
+  const prompt=text+' '+IDX.suffix[t.kind];
+  let r;
+  try{r=await fetch(EL()+'/v1/music?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':key,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify({prompt,music_length_ms:Math.round(len*1000),model_id:MODEL,force_instrumental:true})});}
+  catch(e){throw new Error('The browser could not reach ElevenLabs. Check the network and try again.');}
+  if(!r.ok)throw await apiErr(r);
+  const ab=await r.arrayBuffer();
+  if(ab.byteLength<2000)throw new Error('ElevenLabs sent back almost nothing ('+ab.byteLength+' bytes).');
+  const blob=new Blob([ab],{type:'audio/mpeg'}),dur=await metaDur(blob),n=(takesOf(id)[0]?takesOf(id)[0].n:0)+1;
+  const row={key:id+'|'+n,trackId:id,n,mp3:blob,prompt,len,model:MODEL,dur,date:new Date().toISOString(),short:!!(dur&&dur<len*.85)};
+  if(!DB)throw new Error('This browser would not keep the take.');
+  await tx('takes','readwrite',s=>s.put(row));
+  (TAKES[id]=TAKES[id]||[]).unshift(row);
+  await setUse(id,row.key);
+  return row;
+}
+async function runOne(id){
+  ctx();BUSY[id]=true;setMsg(id,'Making the take... about a minute.');refreshCard(id);
+  try{const row=await makeTake(id);MSG[id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. It came back shorter than the '+row.len+' s asked for; it is kept, so listen before you trust it as a loop.':'. The game plays it on this phone now.'),err:false};}
+  catch(e){MSG[id]={text:String(e.message||e),err:true};}
+  BUSY[id]=false;refreshCard(id);
+}
+
+// ---------- many at once ----------
+function paintBar(){
+  const b=$('bar'),n=SEL.size;
+  if(!n&&!RUN){b.hidden=true;return;}
+  b.hidden=false;
+  if(RUN){b.innerHTML='<span class="grow">Making '+RUN.done+' of '+RUN.total+'...</span><button class="bad" id="stop">Stop</button>';return;}
+  const secs=[...SEL].reduce((a,id)=>a+(T(id)?lenOf(T(id)):0),0);
+  b.innerHTML='<span class="grow">'+n+' selected</span><button class="small" id="bclear">Clear</button><button class="gold" id="remake">'+(ARMED==='bulk'?'TAP AGAIN: about '+cr(secs)+' credits':'Remake '+n)+'</button>';
+}
+$('bar').addEventListener('click',e=>{
+  if(e.target.id==='bclear'){SEL.clear();paintFilters();paintList();paintBar();}
+  else if(e.target.id==='stop'){STOP=true;e.target.disabled=true;e.target.textContent='Stopping...';}
+  else if(e.target.id==='remake')armed('bulk',paintBar,bulk);
+});
+async function bulk(){
+  const ids=[...SEL].filter(T);if(!ids.length)return;
+  ctx();STOP=false;RUN={total:ids.length,done:0};paintBar();
+  let i=0;
+  const worker=async()=>{
+    while(!STOP&&i<ids.length){
+      const id=ids[i++];BUSY[id]=true;setMsg(id,'Making the take... about a minute.');refreshCard(id);
+      try{const row=await makeTake(id);SEL.delete(id);MSG[id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. Came back shorter than asked.':'.'),err:false};}
+      catch(e){MSG[id]={text:String(e.message||e),err:true};}
+      BUSY[id]=false;RUN.done++;refreshCard(id);paintBar();
+    }
+  };
+  await Promise.all([worker(),worker()]);
+  RUN=null;paintFilters();paintBar();
+}
+
+// ---------- export ----------
+const b64=blob=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(',')[1]);f.onerror=()=>rej(f.error);f.readAsDataURL(blob);});
+$('exp').onclick=async()=>{
+  const out=[];
+  for(const t of IDX.tracks){const u=useTake(t.id);if(u)out.push({id:t.id,mp3:await b64(u.mp3),prompt:u.prompt,len:u.len,model:u.model,dur:u.dur});}
+  if(!out.length)return toast('No phone takes to export yet. Only the take marked "In the game" is exported for each track.');
+  const blob=new Blob([JSON.stringify({tracks:out})],{type:'application/json'}),file=new File([blob],'local-music-export.json',{type:'application/json'});
+  try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});return toast('Shared '+out.length+' tracks.');}}catch(e){if(e&&e.name==='AbortError')return;}
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='local-music-export.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);
+  toast('Exported '+out.length+' tracks.');
+};
+
+// ---------- start ----------
+(async function(){
+  paintKeys();
+  try{const r=await fetch('data/music-index.json',{cache:'no-store'});if(!r.ok)throw 0;IDX=await r.json();}
+  catch(e){$('list').innerHTML='<div class="card err">The track list would not load. Go back and open the Music Library again.</div>';return;}
+  try{DB=await idb();await loadDb();}catch(e){DB=null;toast('This browser would not keep takes. You can still listen.');}
+  $('q').value=F.q;
+  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this phone (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this phone at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. List made '+IDX.made+'.';
+  paintFilters();paintList();paintBar();
+})();
+</script>
+</body>
+</html>

@@ -4,7 +4,8 @@
 // into themselves (the tracks are not seamless). Ducks under speech. engine/music.js calls clipTick() every 40 ms from
 // musicTick(): it returns undefined when no clip covers this moment (the synth song then plays), anything else when
 // clips are in charge (including silence). A track that fails to load is skipped and the synth covers for it.
-// MC_TRACKS: id -> [kind (l loop, j jingle), seconds]. Regenerate from music/manifest.json (claude/music-merge.py).
+// MC_TRACKS: id -> [kind (l loop, j jingle), seconds]. node tools/music-library/make-index.js keeps it in step with music/manifest.json.
+// A take picked in the Music Library on this phone replaces the built-in mp3 for its track (engine/local-music.js, see mcFetch).
 const MC_TRACKS={"title":["l",30.1],"battle":["l",75.1],"boss":["l",90.1],"victory":["j",5.1],"defeat":["j",9.6],"town":["l",60.1],"row":["l",59.7],"hollow":["l",60.1],"pier":["l",60.1],"reeds":["l",60.1],"sundial":["l",60.1],"schoolyard":["l",60.1],"school":["l",60.1],"cafetorium":["l",60.1],"stacks":["l",60.1],"readroom":["l",60.1],"moonclub":["l",60.1],"dome":["l",60.1],"terminal":["l",60.1],"gatezero":["l",75.1],"blvd":["l",60.1],"jpark":["l",60.1],"griffith":["l",60.1],"studio":["l",60.1],"backlot":["l",60.1],"stage7":["l",60.1],"stageset":["l",60.1],"oakpark":["l",60.1],"oak":["l",60.1],"crown":["l",60.1],"carbarn":["l",60.1],"boiler":["l",60.1],"ns_party":["l",60.1],"ns_hunt":["l",60.1],"ns_frozen":["l",60.1],"ns_boss":["l",90.1],"ns_win":["j",9.8],"levelup":["j",4.1]};
 const MC={bufs:new Map(),loading:new Map(),failed:new Set(),cur:null,old:[],jingle:null,jingleDone:false,inBattle:false,
   duck:null,out:null,ducked:false,XF:2.5,MAXLOOPS:3,lastWant:undefined,log:[]};
@@ -20,10 +21,15 @@ function mcChain() {
 }
 
 // ---------- Loading: fetch, decode, keep a few decoded loops (a 60 s stereo track is about 21 MB decoded) ----------
-function mcFetch(id) {
+function mcFetchNet(id) {
   const ac=typeof AbortController==='function'?new AbortController():null,tm=ac?setTimeout(()=>ac.abort(),12000):0;
   return fetch('music/'+id+'.mp3',ac?{signal:ac.signal}:undefined).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.arrayBuffer(); })
     .finally(()=>clearTimeout(tm));
+}
+// A take Tom picked in the Music Library (engine/local-music.js, this phone only) wins over the built-in mp3; any problem with it falls back to the mp3.
+function mcFetch(id) {
+  if(typeof lmTake!=='function') return mcFetchNet(id);
+  return lmTake(id).then(ab=>ab||mcFetchNet(id),()=>mcFetchNet(id));
 }
 // A request that never answers is cut off after 12 s and retried (mcLoad), so one stuck request cannot silence a track.
 MC.tries={}; MC.retryAt={};

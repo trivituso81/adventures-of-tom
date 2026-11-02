@@ -1,0 +1,192 @@
+{
+ "backlot": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "battle": {
+  "kind": "loop",
+  "dur": 75.08,
+  "bytes": 901269
+ },
+ "blvd": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "boiler": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "boss": {
+  "kind": "loop",
+  "dur": 90.07,
+  "bytes": 1081200
+ },
+ "cafetorium": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "carbarn": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "crown": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "defeat": {
+  "kind": "jingle",
+  "dur": 9.61,
+  "bytes": 115715
+ },
+ "dome": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "gatezero": {
+  "kind": "loop",
+  "dur": 75.08,
+  "bytes": 901269
+ },
+ "griffith": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "hollow": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "jpark": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "levelup": {
+  "kind": "jingle",
+  "dur": 4.08,
+  "bytes": 49259
+ },
+ "moonclub": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "ns_boss": {
+  "kind": "loop",
+  "dur": 90.07,
+  "bytes": 1081200
+ },
+ "ns_frozen": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "ns_hunt": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "ns_party": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "ns_win": {
+  "kind": "jingle",
+  "dur": 9.77,
+  "bytes": 117596
+ },
+ "oak": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "oakpark": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "pier": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "readroom": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "reeds": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "row": {
+  "kind": "loop",
+  "dur": 59.72,
+  "bytes": 716949
+ },
+ "school": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "schoolyard": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "stacks": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "stage7": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "stageset": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "studio": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "sundial": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "terminal": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "title": {
+  "kind": "loop",
+  "dur": 30.07,
+  "bytes": 361161
+ },
+ "town": {
+  "kind": "loop",
+  "dur": 60.06,
+  "bytes": 721024
+ },
+ "victory": {
+  "kind": "jingle",
+  "dur": 5.07,
+  "bytes": 61171
+ }
+}

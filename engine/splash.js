@@ -143,6 +143,7 @@ const SPLASH_MODES={
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
     {name:'VOICE LIBRARY',sub:'Hear and re-record any line in the game.',act:openVoices},
     {name:'ART LIBRARY',sub:'Make and approve the game\'s pictures.',act:openArt},
+    {name:'MUSIC LIBRARY',sub:'Hear and re-make any track in the game.',act:openMusic},
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
@@ -279,6 +280,12 @@ function openArt() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('art.html',location.href).href; },250);
+}
+// The Music Library (music.html): hear, re-make and pick the game's music tracks (takes stay on this phone; engine/local-music.js plays them).
+function openMusic() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('music.html',location.href).href; },250);
 }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {

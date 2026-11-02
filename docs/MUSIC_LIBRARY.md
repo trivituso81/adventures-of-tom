@@ -1,8 +1,8 @@
-# Music Library (build spec, written 2026-11-02; NOT built yet)
+# Music Library (BUILT 2026-11-02, `music1`; spec below, with the as-built notes in section 6)
 
 Tom (11-02 12:32): "make a file called music library, same as voice library with filters etc. it's for all the music in the game. add it to the build instructions once the art library is done."
 
-Status: spec only. Build order: after the Art Library (Phase B5 pushed), before Phase C art regeneration. One session, one push. Everything below is a call made for the build; Tom changes nothing by hand.
+Status: built and pushed as `music1`. Everything below is a call made for the build; Tom changes nothing by hand. Not yet seen on the phone and not run against live ElevenLabs (the sandbox has no key); section 6 lists what is and is not verified.
 
 ## 1. What Tom gets
 
@@ -47,8 +47,30 @@ Tags on the push: `music.html` is a page (always from the network); `music-clips
 
 ## 4. Getting phone takes into the repo (Claude)
 
-`python3 -I tools/music-library/merge-local.py <export.json> music` (the Project's `claude/music-merge.py` moved into the repo and pointed at the export shape): two-pass loudnorm to -20 LUFS and -1.5 dBTP, leading silence over 0.12 s trimmed, trailing silence trimmed on jingles only, 96 kbps stereo 44.1 kHz, writes `music/<id>.mp3` and updates `music/manifest.json`; then `node tools/music-library/make-index.js` rewrites `MC_TRACKS` in `engine/music-clips.js` (kind and real seconds) and the index. The mp3 files carry no `?v=` (the service worker asks the server about them), so only `music-clips.js` needs its tag moved. Listen to the loop seam of every merged loop before pushing (`tools/music-library/seam.py <id>` writes a 20 s wav of tail into head).
+`python3 -I tools/music-library/merge-local.py <export.json> music` (the Project's `claude/music-merge.py` moved into the repo and pointed at the export shape): two-pass loudnorm to -20 LUFS and -1.5 dBTP, leading silence over 0.12 s trimmed, trailing silence trimmed on jingles only, 96 kbps stereo 44.1 kHz, writes `music/<id>.mp3` and updates `music/manifest.json`; then `node tools/music-library/make-index.js` rewrites `MC_TRACKS` in `engine/music-clips.js` (kind and real seconds) and the index. The mp3 files carry no `?v=` (the service worker asks the server about them), so only `music-clips.js` needs its tag moved. Listen to the loop seam of every merged loop before pushing (`tools/music-library/seam.py <id>` writes a 17.5 s wav: the last 10 s crossfading into the first 10 s, with the game's 2.5 s crossfade).
 
 ## 5. Not in scope
 
 Per-battle or per-boss unique tracks, dynamic layers, and new track ids need a map or engine change first (ask Tom, then add the id to `MC_TRACKS` and tracks.json in the same push). The synth fallback in `engine/music.js` stays as it is.
+
+## 6. As built (`music1`, 2026-11-02)
+
+| Piece | Where |
+|---|---|
+| Page | `music.html` (ADMIN, fifth entry after ART LIBRARY; `openMusic` in engine/splash.js) |
+| Track list (edit prompts here) | `tools/music-library/tracks.json`: id, group, name, kind, `use` (Area, Boss room, Battle, Title, Jingle), len, where, prompt, `auto` (true for the 7 prompts written for this build: title, levelup, ns_party, ns_hunt, ns_frozen, ns_boss, ns_win), plus the two style suffixes |
+| Real lengths and sizes | `music/manifest.json`, rebuilt from the mp3 files by `python3 tools/music-library/make-manifest.py` (it did not exist before; merge-local.py writes the same shape) |
+| Index the page reads | `data/music-index.json`, by `node tools/music-library/make-index.js` (also refuses a bad group, kind or use, a dash in a prompt, or a track with no mp3; rewrites MC_TRACKS only when a track is new or a length really changed) |
+| Game hook | `engine/local-music.js` (new, loaded after music-clips.js) and `mcFetch` in engine/music-clips.js (a picked phone take, else music/<id>.mp3; any problem falls back to the mp3) |
+| Merge and listen | `tools/music-library/merge-local.py`, `tools/music-library/seam.py` |
+| Test | `python3 tools/music-library/test.py` (own servers, `stub.py` is the fake ElevenLabs; no key) |
+
+Calls made in the build:
+- Show chips: "Re-made on this phone" means the track has at least one take here; "Built-in track plays" means no take is picked for the game (the two differ only after Tom switches back to Built into the game).
+- Every New take and every Remake asks for two taps; the second-tap button shows the credit estimate (11 to 14 credits per second, 60 s about 660 to 840).
+- Length limits sent to ElevenLabs: loops 15 to 120 s, jingles 3 to 15 s. Model id `music_v1`, `force_instrumental` true. A take shorter than 85 percent of the length asked is kept and flagged.
+- Export music takes exports ONE take per track: the one marked In the game. Takes not picked are never exported.
+- The 38 tracks are the ones that exist; `victory` is 5.1 s and `defeat` 9.6 s although tracks.json asks for 12 and 10 (the lengths in tracks.json are what a re-make asks for).
+- A phone take plays raw (no loudness match, no trimming) until merged; the card on the page says so.
+
+Not verified (say so plainly): the phone; the live ElevenLabs Music call (the request shape follows the desktop baker's `makeMusic` and ElevenLabs' music endpoint; a wrong field would answer 400 or 422 and the page shows the message); whether Safari on iPhone stores the take blobs the way Chromium does (the Voice Library stores base64, this page stores Blobs); the share sheet on export (falls back to a download).
