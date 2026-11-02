@@ -1,3 +1,9 @@
+## 2026-11-02 (98): Grace hero prompt v2 after Tom's first generate (`grace-hero`; prompt and json only)
+
+- Tom generated the first picture (11-02 13:33). Looked at it next to the style key. Fact: outfit, face, freckles, hair and keychain right; STYLE missed: smooth, soft, almost 3D-render look, head about a fifth of her height (key's Grace is about a quarter), not the dense brushwork of the key. Cause (mine): the prompt left out the style key prompt's "no airbrushed skin, no glossy plastic look" rule and did not attach the school yard painting.
+- Change (one lever, first miss): STYLE RULE paragraph restored, `docs/reference/school_style_ref.png` attached as the texture target (refs now 4: key, school yard, height chart, old Grace pose), head wording "one quarter of full height, caricature, not a realistic child", fabric texture line. The first take is kept on Tom's phone only (his last 5 results). If this also misses for the same reason: stop-loss, ask Tom for a sample of the look he means or switch method (generate Grace inside a school yard scene like the key, then cut her out).
+- Art Library test FAILS: [] (rerun), no game change, no tag moved. NOT verified: that xAI accepts the 3.4 MB school yard picture (max image size was never confirmed); if GENERATE shows a size error, shrink that reference.
+
 ## 2026-11-02 (97): Art Library gets its first real entry, Grace's hero pose (`grace-hero`; tools and data only, no game change)
 
 - Tom (11-02 13:18): "lets finish art library". Fact: B1 to B5 were already built; what was missing was a real entry to generate. Call made: Grace's hero pose is the first, because every other Grace sheet copies it (Phase C step 2).
