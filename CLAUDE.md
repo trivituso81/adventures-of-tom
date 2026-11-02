@@ -58,6 +58,13 @@ Tom has asked repeatedly: voice lines and clips the full game never plays must n
 - Record what you removed in `docs/PURGED_VOICE.md` and `docs/CHANGES.md`. Git history keeps the audio, so deleting is safe. This is the one exception to hard rule 4: purging unused clips does not need a `voices.json`.
 - Lines that are live but have no clip yet are not dead. They are the bake list.
 
+## Load time (standing rule, 2026-11-02)
+
+Fact: the title screen waits for 51.5 MB of blocking scripts (306 `<script>` tags), 37 MB of which is voice audio stored as base64 text in `data/voice/*.js` and ~10 MB baked sprite data. There is no service worker, so an iPhone home-screen app re-downloads it all whenever Safari drops its cache. Tom (11-02 10:20) decided:
+
+- **NEXT BUILD, do this first:** add a service worker (`sw.js` at the repo root, registered from `index.html`) that caches every `?v=`-tagged script, data and art URL cache-first and always fetches `index.html` from the network. Every file already carries a `?v=` tag, so a bumped tag is a new URL and a fresh download; nothing can go stale as long as tags are bumped (hard rule 2 and docs/CHANGES.md already require it). Add a check to `tools/smoke.py` that fails when a file changed since `origin/main` without its `?v=` tag (or ART_V / BG_V) moving. Test: load twice in Playwright and confirm the second load serves from the cache; portrait and landscape; push.
+- **POST-BUILD ONLY. Do not start these until Tom asks for them by name**, however slow loading looks: (1) voice clips as real `.mp3` files fetched on demand instead of base64 in JS, (2) a loading bar on the title screen, (3) sprite data loaded per party member and per area instead of at boot. Mention them at most once per session if loading comes up, then leave them alone.
+
 ## How to work
 
 1. Read only the files the task needs. The repo is large (`engine/battle2-kind.js` alone is 400 KB). Use search to find the section; do not open whole files.

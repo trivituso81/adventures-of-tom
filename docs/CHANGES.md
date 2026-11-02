@@ -1,3 +1,9 @@
+## 2026-11-02 (76): Load-time plan recorded as a standing rule (`loadplan`, docs only)
+
+- Tom asked why the title screen loads so slowly. Fact: 51.5 MB of blocking scripts in 306 tags, 37 MB of it base64 voice audio, ~10 MB baked sprite data, no service worker. He decided (10:20) to defer the restructure while the game is still being built.
+- CLAUDE.md "Load time (standing rule, 2026-11-02)": the NEXT build adds a service worker (cache-first for `?v=`-tagged files, network for index.html) plus a smoke check that a changed file's tag was bumped. Voice as real mp3 files, a loading bar and per-member sprite loading are POST-BUILD ONLY, started only when Tom asks by name.
+- No game code changed, no stamp or tag bump.
+
 ## 2026-11-02 (75): Four moves no longer freeze mid-animation (`freeze1`)
 
 - Source: claude/battle-animation-audit.md finding 4 (quiet stretches of 1.0 to 3.8 s). Each fix adds one reaction inside the quiet window; no art, no voice line, no clip and no damage timing changed.
