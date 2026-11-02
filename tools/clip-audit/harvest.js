@@ -23,7 +23,9 @@ for(const [mid,map] of Object.entries(worlds)) {
     if(n.shopkeeper) { const K=n.shopLines||PENNY; (K.intro||[]).forEach(t=>add(n.name,t,'shop:intro',{map:mid})); (K.hello||[]).forEach(t=>add(n.name,t,'shop:hello',{map:mid})); }
   }
 }
-for(const id of Object.keys(MONSTERS)) { const d=MONSTERS[id]; for(const k of ['talk','again','rest','win','lose']) (d[k]||[]).forEach(t=>add(d.name,t,'monster:'+id+':'+k,{monster:id})); }
+// Monster 'again' lines carry {n}; the game speaks them filled in (monsterLines, data/monsters.js: tier+1, so 2 and up), never the template.
+// List rounds 2 to 5 (the rounds that get baked) so the Voice Library never offers the literal '{n}' line.
+for(const id of Object.keys(MONSTERS)) { const d=MONSTERS[id]; for(const k of ['talk','again','rest','win','lose']) (d[k]||[]).forEach(t=>{ if(typeof t==='string'&&t.includes('{n}')) { for(let n=2;n<=5;n++) add(d.name,t.split('{n}').join(n),'monster:'+id+':'+k+':'+n,{monster:id}); } else add(d.name,t,'monster:'+id+':'+k,{monster:id}); }); }
 const NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',tnb:'TNB',nara:'Nara'};
 for(const N of Object.keys(CHAPTERS)) { const ch=CHAPTERS[N]; const dec=(ch.party&&ch.party.decline)||{}; for(const id in dec) add(NAMES[id]||id,dec[id],'decline:'+N+':'+id);
   try { const nf=typeof ch.noFlight==='function'?(()=>{ const sv=STORY.flags; STORY.flags={}; const r=ch.noFlight(); STORY.flags=sv; return r; })():ch.noFlight; if(nf&&nf.lines) nf.lines.forEach(t=>add('Sal',t,'noflight:'+N)); } catch(e) {} }

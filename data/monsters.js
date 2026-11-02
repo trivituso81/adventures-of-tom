@@ -335,7 +335,7 @@ function monsterLines(m) {
   const d=monsterDef(m);
   if(performance.now()<m.defeatedUntil) return d.rest;
   const lines=m.tier===0?d.talk:d.again;
-  return lines.map(l=>l.replace('{n}',m.tier+1));
+  return lines.map(l=>l.split('{n}').join(m.tier+1));   // every {n}, not only the first ("Day {n} in the fridge")
 }
 // Battle messages written for the Grump get the current monster's name swapped in.
 function enemyText(s) {

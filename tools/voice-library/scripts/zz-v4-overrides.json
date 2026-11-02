@@ -245,6 +245,76 @@
 "text": "My favorite son! And my girls! And my... oh. OH. Why is Rose in an ice cube.",
 "ctx": "v4 override",
 "script": "[delighted, warm] My favorite son! And my girls! [trailing, puzzled] And my... oh. [alarmed, bewildered] OH. Why is Rose in an ice cube."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "Olivia writes about AI taking jobs. Nobody is coming for the job of a dad. Not even AI wants that!",
+"ctx": "v4 override",
+"script": "[calm, wry] Olivia writes about AI taking jobs. Nobody is coming for the job of a dad. [deadpan, tired] Not even AI wants that!"
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Also, your starter was bubbling out of the jar, so I baked a boule with it.",
+"ctx": "v4 override",
+"script": "[easy, sheepish] Also, your starter was bubbling out of the jar, so I baked a boule with it."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "He's been saying that for a while, babe.",
+"ctx": "v4 override",
+"script": "[low, dry] He's been saying that for a while, babe."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Main event. I'll take it.",
+"ctx": "v4 override",
+"script": "[amused, easy] Main event. I'll take it."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Spooky. I love it. Let's go check on Mr. Washington.",
+"ctx": "v4 override",
+"script": "[amused, uneasy] Spooky. I love it. [cautious, steady] Let's go check on Mr. Washington."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.",
+"ctx": "v4 override",
+"script": "[focused, murmuring] Fifty grams of flour, fifty grams of water. Stir. [soft, delighted] Look at those bubbles."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I flew three thousand miles to see you... and maybe the starter.",
+"ctx": "v4 override",
+"script": "[quickly, warm] I flew three thousand miles to see you... [teasing, low] and maybe the starter."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I'm proud. As long as you didn't spin it on your pottery wheel.",
+"ctx": "v4 override",
+"script": "[dry, mock-offended] I'm proud. [deadpan, grudging] As long as you didn't spin it on your pottery wheel."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Sit, paw, treat. She knows the whole routine. So polite!",
+"ctx": "v4 override",
+"script": "[listing out] Sit, paw, treat. She knows the whole routine. [warm, proud] So polite!"
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "TNB said he'd be home. Spring Street loft.",
+"ctx": "v4 override",
+"script": "[dry, mild] TNB said he'd be home. Spring Street loft."
 }
 ]
 }

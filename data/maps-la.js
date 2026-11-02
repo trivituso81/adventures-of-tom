@@ -272,7 +272,7 @@ const LA_AREAS=[
           'Isla said her first word last week. It was no. She uses it very well.',
           'I took a meeting today with Isla on my lap. She muted me. Best meeting of the quarter.',
           'My arms have never been stronger. I haven\'t lifted a weight in four years.',
-          'Olivia writes about AI taking jobs. Nobody is coming for mine. Nobody wants bedtime.']},
+          'Olivia writes about AI taking jobs. Nobody is coming for the job of a dad. Not even AI wants that!']},
       {name:'Mr. Washington',x:8,y:19,look:'washington',lines:['Bought this house in 1979. Same porch, same chair, same view.','Back then you could hear zydeco from the boulevard on a Saturday night.','You\'re the one fixing up the green house? Keep the old windows. They\'re better than the new ones.'],
         when:[{...CH2_SMOG,lines:['Back in 1979, this whole block...','...','Such a nice afternoon. It should always be this afternoon. Nobody needs to get any older.']},
               {...CH2_CLEAR,lines:['Where was I? Oh. 1979. This whole block smelled like gumbo on a Saturday night.','That smog had me stuck on one sentence for an hour. At my age I don\'t have hours to spare.','Thank you, Tom. And your young man. And the dog. Especially the dog.']}]},

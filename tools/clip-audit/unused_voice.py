@@ -45,7 +45,16 @@ print('1. kinds never called:', {c: v for c, v in dead.items()})
 print('2. attack pool only reachable as a fallback (every move has its own line):', list(fallback), '(check scenes and Move Lab by hand)')
 print('3. baked battle clips with no live line:', len(orph)); [print('   ', o['id'] + '.' + o['k'] + ': ' + o['text']) for o in orph]
 h = {x['text'] for x in json.load(open(os.path.join(ROOT, 'tools/voice-library/harvest.json')))['lines']}
-od = [k for k in D['dkeys'] if k.split('|', 1)[1] not in h and not re.match(r'^[^|]+\|Round \d+\. ', k) and k.split('|', 1)[1][:40] not in src]
+# Dialogue keys come from the files on disk, not the page: engine/dialog-voice.js loads data/voice/dialog-ch*.js one at a time after
+# startup, so the page has only some of them 2.5 s in (ch2clips found this: a 2,288-clip tree showed far fewer keys in the page).
+# A clip is live when its full text (backslashes dropped on both sides, so \' and \" match) is in the harvest or the source.
+import glob
+dkeys = []
+for f in sorted(glob.glob(os.path.join(ROOT, 'data', 'voice', 'dialog-ch*.js'))):
+    for line in open(f, encoding='utf8'):
+        if line.startswith('Object.assign(DIALOG_CLIPS.clips,'): dkeys += list(json.loads(line[len('Object.assign(DIALOG_CLIPS.clips,'):-3]).keys())
+srcnb = src.replace('\\', '')
+od = [k for k in dkeys if k.split('|', 1)[1] not in h and not re.match(r'^[^|]+\|Round \d+\. ', k) and k.split('|', 1)[1].replace('\\', '') not in srcnb]
 print('4. dialogue clips not in harvest or source:', len(od)); [print('   ', k[:120]) for k in od]
 
 import glob
@@ -69,4 +78,4 @@ if '--write-spec' in sys.argv:
     dk = {c: list(v) for c, v in dead.items()}
     for c in fallback: dk.setdefault(c, []).append('attack')
     for c, v in replaced.items(): dk.setdefault(c, []).extend(v)
-    json.dump({'deadKinds': dk, 'orphanClips': orph}, open(out, 'w'), indent=1); print('spec written', out)
+    json.dump({'deadKinds': dk, 'orphanClips': orph, 'orphanDialog': od}, open(out, 'w'), indent=1); print('spec written', out)

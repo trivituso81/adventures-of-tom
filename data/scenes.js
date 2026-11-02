@@ -275,7 +275,7 @@ const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap
 // 1. Landing downtown: where TNB is.
 SCENES.ch2Arrive=[
   {flag:'ch2-goal'},
-  {talk:'Tom',lines:['TNB said he\'d be home. Spring Street loft. He\'s never home.','...He said he\'d be home.']},
+  {talk:'Tom',lines:['TNB said he\'d be home. Spring Street loft.','...He said he\'d be home.']},
   {toast:"Goal: TNB's Loft (LOFTS), Spring Street, bottom middle of Downtown.",time:4.5}
 ];
 // 2. The loft: the heart-kiss greeting. TNB joins.
@@ -286,8 +286,8 @@ SCENES.ch2Loft=[
   {call:()=>{ const t=sceneActor('TNB'); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   {talk:'TNB',lines:['Look who flew three thousand miles to see me.']},
-  {talk:'Tom',lines:['I flew three thousand miles to see you. The starter is the bonus.']},
-  {talk:'TNB',lines:['Main event. I\'ll take it. Sounds premium. Like your seat.']},
+  {talk:'Tom',lines:['I flew three thousand miles to see you... and maybe the starter.']},
+  {talk:'TNB',lines:['Main event. I\'ll take it.']},
   {trace:'tnb-hello'},
   {talk:'TNB',lines:['My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I\'m all yours.',
     'Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.']},
@@ -302,14 +302,14 @@ SCENES.ch2Porch=[
   {join:'nara'},
   {wait:.6},
   {talk:'TNB',lines:['Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.','She\'s been sitting on your porch since eight. I tried to take her to the loft. She refused.']},
-  {talk:'TNB',lines:['Also, your starter was bubbling out of the jar, so I baked a boule with it. Don\'t be mad.']},
-  {talk:'Tom',lines:['Mad? I\'m proud. And a little mad.']},
+  {talk:'TNB',lines:['Also, your starter was bubbling out of the jar, so I baked a boule with it.']},
+  {talk:'Tom',lines:['I\'m proud. As long as you didn\'t spin it on your pottery wheel.']},
   {call:()=>{ sfx.whoosh(); }},
   {talk:'Nara',lines:['Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.','She gets the bread. Tom gets a lick.']},
   {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.15); }},
   {hearts:'nara'},
   {flag:'tombo:nara1'},
-  {talk:'Tom',lines:['Sit, paw, treat. She knows the whole routine. Very polite. Very strong paw.']},
+  {talk:'Tom',lines:['Sit, paw, treat. She knows the whole routine. So polite!']},
   {toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, ◀︎ TOMBO.',time:3.6},
   {toast:'Goal: feed the starter. Kitchen island, inside Tom’s house.',time:4.5}
 ];
@@ -319,7 +319,7 @@ SCENES.ch2Starter=[
   {walk:'tom',to:routeTo('tom',8,5),speed:.22}, {face:'tom',dir:'right'},   // beside the kitchen island, where the jar lives
   {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You missed me.']},
   {call:()=>{ sfx.splat&&sfx.splat(); }},
-  {talk:'Tom',lines:['Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles. Proud of you.']},
+  {talk:'Tom',lines:['Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.']},
   {trace:'starter'}, {hearts:'tom'},
   {talk:'TNB',lines:['You talk to that jar more than you talk to me.']},
   {talk:'Tom',lines:['The jar gets fifty grams of flour. You get the whole week.','...And you steamed my shirts for the flight. You win. You always win.']},
@@ -340,7 +340,7 @@ SCENES.ch2Smog=[
   {talk:'Mr. Washington',lines:['Tom. Back in 1979, this whole block...']},
   {wait:1.2},
   {talk:'Mr. Washington',lines:['...']},
-  {talk:'TNB',lines:['He\'s been on "this whole block" for a while, babe.']},
+  {talk:'TNB',lines:['He\'s been saying that for a while, babe.']},
   {talk:'Mr. Washington',lines:['Such a nice afternoon. It should always be this afternoon.']},
   {talk:'Tom',lines:['Excuse me, smog. That was UNCALLED for.'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
   {spawn:{name:'Smoglet',monster:'smoglet',at:[12,19],dir:'left'}},
@@ -442,7 +442,7 @@ SCENES.ch2AfterBoss=[
     else:[{talk:'The Big Shake',lines:['Rumble. Fine. The pipes are clear. I\'m going back under the hill to think about my choices.']}]},
   {talk:'TNB',lines:['Look. The sky is blue again. LA blue. Slightly brown, but blue.']},
   {talk:'Tom',lines:['Somebody plugged those pipes on purpose. Smog doesn\'t do that by itself.']},
-  {talk:'TNB',lines:['Spooky. I love it. I hate it. Let\'s go check on Mr. Washington.']},
+  {talk:'TNB',lines:['Spooky. I love it. Let\'s go check on Mr. Washington.']},
   {toast:'Goal: back to 2nd Ave in Jefferson Park.',time:4.5}
 ];
 // 11. 2nd Ave: Mr. Washington finishes his sentence. Chapter complete.

@@ -2,6 +2,10 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-02 `ch2clips`: ten dialogue clips with superseded wording
+
+Tom re-recorded chapter 2 and reworded ten lines in the script box; the game text was changed to his words and the old-wording clips were removed (dialog-ch2.js: Michael "Nobody is coming for mine...", Tom "Fifty grams... Proud of you.", "Sit, paw, treat... Very strong paw.", "TNB said he'd be home... He's never home."; dialog-ch25.js: Tom "The starter is the bonus.", "Mad? I'm proud. And a little mad."; TNB "Don't be mad.", "this whole block", "Sounds premium. Like your seat.", "I hate it."). Audio: parent of the `ch2clips` commit.
+
 ## Lines removed from `data/lines.js` (never called by any move, scene or dialogue)
 
 | Character | Kind | Words |
