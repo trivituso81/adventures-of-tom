@@ -1,7 +1,7 @@
 'use strict';
 // engine/plate.js — Painted "plate" scenes (32-bit look). A plate replaces the tile/house/object
 // drawing for one map; the tile grid stays as the invisible logic layer (collision, doors, exits, NPCs).
-const PLATES={ town:{src:'art/town.webp?v=square3',fgSrc:'art/town-fg.webp?v=square3',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=20261030c',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp?v=20261030d',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/amyhouse-fg.webp?v=amyhouse3d'}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/grands-fg.webp?v=grands3d'}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp',px:64,img:null,ready:false}, dome:{src:'art/dome.webp',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=20261029',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp?v=20261031d',px:64,img:null,ready:false} };
+const PLATES={ town:{src:'art/town.webp?v=square4',fgSrc:'art/town-fg.webp?v=square4',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=20261030c',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp?v=20261030d',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/amyhouse-fg.webp?v=amyhouse3d'}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/grands-fg.webp?v=grands3d'}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp',px:64,img:null,ready:false}, dome:{src:'art/dome.webp',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=20261029',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp?v=20261031d',px:64,img:null,ready:false} };
 PLATES.pier={src:'art/pier.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.studio={src:'art/studio.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
@@ -211,30 +211,32 @@ function drawPlateSigns(list) {
 // Zones hold only the tall object, never the ground in front of it. rect: x,y,w,h. ellipse: cx,cy,rx,ry. polygon: pts [[x,y],...].
 // A lamp post as three small shapes (head, pole, foot) so no paving is redrawn beside the pole. cx is the pole centre, y0 the top of the head, base the foot.
 const BLVD_LAMP=(cx,y0,base)=>[{x:cx-20,y:y0,w:40,h:52,base},{x:cx-8,y:y0+50,w:16,h:Math.max(10,base-y0-80),base},{x:cx-22,y:base-34,w:44,h:34,base}];
-const PLATE_BEHIND={ town:[{x:978,y:17,w:404,h:366,base:383,fg:true},
-  {x:337,y:350,w:34,h:67,base:417,fg:true},
-  {x:1222,y:359,w:33,h:66,base:425,fg:true},
-  {x:606,y:384,w:30,h:61,base:445,fg:true},
-  {x:1461,y:394,w:33,h:62,base:456,fg:true},
-  {x:0,y:0,w:1125,h:536,base:536,fg:true},
+const PLATE_BEHIND={ town:[{x:981,y:22,w:402,h:354,base:376,fg:true},
+  {x:338,y:349,w:32,h:63,base:412,fg:true},
+  {x:1224,y:359,w:34,h:61,base:420,fg:true},
+  {x:602,y:381,w:35,h:58,base:439,fg:true},
+  {x:1461,y:390,w:28,h:61,base:451,fg:true},
+  {x:1694,y:510,w:24,h:25,base:535,fg:true},
+  {x:0,y:0,w:1125,h:539,base:539,fg:true},
   {x:694,y:532,w:125,h:141,base:673,fg:true},
-  {x:287,y:659,w:198,h:97,base:756,fg:true},
-  {x:480,y:539,w:46,h:228,base:767,fg:true},
-  {x:1072,y:541,w:327,h:230,base:771,fg:true},
-  {x:1310,y:0,w:610,h:940,base:940,fg:true},
-  {x:932,y:834,w:405,h:310,base:1144,fg:true},
-  {x:523,y:830,w:385,h:316,base:1146,fg:true},
-  {x:0,y:573,w:473,h:607,base:1180,fg:true},
-  {x:100,y:1111,w:40,h:75,base:1186,fg:true},
-  {x:556,y:1113,w:40,h:75,base:1188,fg:true},
-  {x:1385,y:665,w:479,h:546,base:1211,fg:true},
-  {x:1142,y:1150,w:35,h:72,base:1222,fg:true},
-  {x:0,y:1109,w:85,h:154,base:1263,fg:true},
-  {x:785,y:1397,w:334,h:260,base:1657,fg:true},
-  {x:0,y:1366,w:346,h:298,base:1664,fg:true},
-  {x:281,y:1584,w:303,h:80,base:1664,fg:true},
-  {x:1245,y:1393,w:475,h:271,base:1664,fg:true},
-  {x:1702,y:1371,w:218,h:293,base:1664,fg:true}]
+  {x:1304,y:0,w:616,h:758,base:758,fg:true},
+  {x:288,y:536,w:238,h:229,base:765,fg:true},
+  {x:1072,y:537,w:326,h:233,base:770,fg:true},
+  {x:1830,y:745,w:90,h:197,base:942,fg:true},
+  {x:0,y:570,w:268,h:437,base:1007,fg:true},
+  {x:1387,y:717,w:475,h:394,base:1111,fg:true},
+  {x:929,y:833,w:408,h:308,base:1141,fg:true},
+  {x:526,y:826,w:379,h:318,base:1144,fg:true},
+  {x:47,y:808,w:425,h:370,base:1178,fg:true},
+  {x:553,y:1111,w:41,h:73,base:1184,fg:true},
+  {x:99,y:1109,w:39,h:76,base:1185,fg:true},
+  {x:1451,y:1143,w:36,h:64,base:1207,fg:true},
+  {x:1143,y:1154,w:39,h:62,base:1216,fg:true},
+  {x:0,y:1106,w:83,h:162,base:1268,fg:true},
+  {x:777,y:1395,w:342,h:259,base:1654,fg:true},
+  {x:0,y:1363,w:582,h:301,base:1664,fg:true},
+  {x:1246,y:1398,w:477,h:266,base:1664,fg:true},
+  {x:1699,y:1368,w:221,h:296,base:1664,fg:true}]
 ,
 // DOWNTOWN LA: the JEFFERSON PARK arch (board and both posts with their globe lamps), so Tom walks behind the posts and under the board.
 blvd:[

@@ -30,7 +30,6 @@ FOOT = [  # x0, y0, x1, base y, in art px; a tile is blocked when its foot point
     (290, 740, 480, 755),    # west bench and its barrel
     (1075, 745, 1360, 765),  # east bench and its two barrels
     (1741, 731, 1769, 750),  # SCHOOL gate, west post
-    (1886, 731, 1914, 750),  # SCHOOL gate, east post
 ]
 FOUNTAIN = (742, 745, 200, 105)  # centre x, centre y, half width, half height of the basin footprint
 KEEP = [(28, 11), (29, 11)]      # gate lane tiles that stay open (the posts stand just north of them)

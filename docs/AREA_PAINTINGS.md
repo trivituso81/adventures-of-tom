@@ -6,7 +6,7 @@ Tom is redoing every Long Island outdoor area as a new painting, one area at a t
 
 | Map id | Name | Tiles | Plate size (art px, 64 per tile) | Painting now in the game |
 |---|---|---|---|---|
-| town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved v3 painting (2026-11-01, `square3`), lettered by the generator, own cutout layer art/town-fg.webp |
+| town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved v4 painting (2026-11-02, `square4`), lettered by the generator, own cutout layer art/town-fg.webp |
 | row | Rivituso Row | 24 x 22 | 1536 x 1408 | Tom's v2 painting, boards repainted in code, game-drawn lettering (disliked) |
 | hollow | Grump Hollow | 24 x 22 | 1536 x 1408 | Tom's v2 painting, game-drawn lettering (disliked) |
 | pier | Cattail Pier | 24 x 22 | 1536 x 1408 | original painting, not redone yet |

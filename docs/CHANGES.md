@@ -1,3 +1,11 @@
+## 2026-11-02 (morning, 70): Tom's replacement Square painting installed (`square4`)
+
+- Tom sent a new Square painting with "Use this instead". Same layout as `square3` (the walk map and doors are unchanged, checked row by row), new fine detail, and a new SCHOOL arrow sign on one post at the east gate. Original kept at docs/reference/town_v4_from_tom.png; art/town.webp is it scaled to 1920 x 1664.
+- Cutouts: the three generator mask pictures from `square3` still fit, but they were drawn from the old painting, so tools/make_town_fg.py now uses each as a rough area and snaps every piece's edge to the new painting with GrabCut (+-6 px band). The old east gate posts are dropped; the new SCHOOL sign, its post and finial are hand polygons (`native_polys` in tools/town_fg_hand.json). 26 walk-behind zones in `PLATE_BEHIND.town`.
+- Walk map: the second east gate post is gone from tools/make_town_mask.py (no change in the rows).
+- Tested: reach_test town 0 fails, smoke and camera_clamp FAILS: [], portrait and landscape walk-behind shots (tools/town_behind_shots.py). Not seen on the phone.
+- Tags: ART_V, `plate.js`, `maps-le.js`, `main.js` `?v=square4`, stamp `build square4`, town plate and fg `?v=square4`.
+
 ## 2026-11-01 (night, 69): the approved v3 Square is in, with doors, walk map and cutouts (`square3`)
 
 - Tom sent the approved Long Island Square painting and four generator mask pictures. Installed per claude/square-v3-install.md.
