@@ -1,3 +1,8 @@
+## 2026-11-01 (21:25) `size6`: NPCs drawn at the party's height on the map and in houses (Tom)
+- Tom: "in the overworld, scale up NPCs so they are the same height as the party", then "in houses, scale NPCs down so they are the same height as the party".
+- Call made: every character on a map now uses the party's scale (`owBoost` in `engine/town-render.js`): 1.265 on the streets (NPCs were 1.0, so 26% bigger), 0.8625 in painted houses (NPCs were 1.15, so 25% smaller), 1.15 in rooms with no house painting (unchanged). `OW_NPC_INDOOR` is retired. This replaces the 17:41 `size4` request (NPCs 15% larger in houses). Speech bubbles and head anchors follow the new size.
+- Tested: `smoke.py`, `camera_clamp_test.py`, `reach_test.py`, `rooms_test.py` pass; looked at Deedee and Boppy's house and the Square in portrait and landscape (Deedee and Boppy now stand at Tom's scale). Not played on the phone. Knobs: `OW_PLAYABLE_BOOST`, `OW_PLAYABLE_BOOST_INDOOR`. NPC colliders and tiles are unchanged, so a bigger street NPC can overlap a prop visually. Characters keep their real relative heights because each sheet is baked to its own height; only the shared map scale changed.
+
 ## 2026-11-01 (evening, 65): Airport runs, arrivals and goodbyes no longer repeat (`travel1`)
 
 - Tom (21:13): does Tom say the same thing every time he arrives in LA? It should vary, same for departures and for TNB and the others leaving the party. Repeated clips are boring.

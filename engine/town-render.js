@@ -19,12 +19,13 @@ function walkPhase(a) {
 const OW_PLAYABLE_BOOST=1.15*1.10;           // outdoor maps
 const OW_PLAYABLE_BOOST_OLD=1.15;
 const OW_PLAYABLE_BOOST_INDOOR=1.15*0.75;    // painted interiors (the maps that use INTERIOR_ACTOR_SCALE in engine/plate.js)
-const OW_NPC_INDOOR=1.15;   // 2026-11-01 (Tom): townspeople and family NPCs inside the painted houses are 15% larger
+// OW_NPC_INDOOR retired 2026-11-01: NPCs use the party boost (owBoost).
 function owMain(a) { return !!(a.isPlayer||a.kid||a.sheet==='michael'); }
 function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap.id]:null; return !!(p&&p.actorScale); }
 function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the size before the 11-01 evening changes
 function owBoost(a) {
-  if(!owMain(a)) return owInHouse()?OW_NPC_INDOOR:1;
+  // 2026-11-01 (Tom): "scale up NPCs so they are the same height as the party". Everyone on the map now gets the party's boost,
+  // so a painted NPC and a party member drawn from sheets of the same real height stand at the same height. OW_NPC_INDOOR is retired.
   if(!currentMap) return OW_PLAYABLE_BOOST_OLD;
   if(currentMap.outside) return OW_PLAYABLE_BOOST;
   return owInHouse()?OW_PLAYABLE_BOOST_INDOOR:OW_PLAYABLE_BOOST_OLD;   // rooms without a house painting (school rooms, dome, moon club) stay as they were
