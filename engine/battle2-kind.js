@@ -3106,7 +3106,8 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,s=seatPt();
     if(ms<P.hop) { const k=seg(ms,0,P.hop); return {cx:lerp(st0.x,s.x,ez(k)),base:lerp(st0.b,s.y,ez(k))-Math.sin(k*Math.PI)*50,frame:sp.celeb,noShadow:true}; }
     const bob=ms>P.rline&&ms<P.rline+500?-Math.abs(Math.sin(seg(ms,P.rline,P.rline+500)*Math.PI*2))*5:(ms>P.sit&&ms<P.sit+500?-Math.abs(Math.sin(seg(ms,P.sit,P.sit+500)*Math.PI*2))*5:0);
-    return {cx:s.x,base:s.y+bob,frame:sp.idle,noShadow:true}; });
+    const shk=ms>tl+1300*K&&ms<rl-100?Math.sin(seg(ms,tl+1300*K,rl-100)*Math.PI*8)*2.2:0;   // Rose shakes her head "no" while Tom explains the loaf
+    return {cx:s.x+shk,base:s.y+bob,frame:sp.idle,noShadow:true}; });
   const puff=(x,y,r,a)=>{ if(a<=0||r<=0) return; gfx.globalAlpha=a; E(x,y+3,r+2,r*.82+2,'#b8c6dc'); E(x,y,r,r*.82,'#ffffff'); E(x-r*.25,y-r*.3,r*.45,r*.28,'#ffffff'); gfx.globalAlpha=1; };
   // painted Lamby (+ Tom's painted hair tuft on her head) for the giant cloud Lamby and the thought bubble; false until the art loads
   const lambyP=(x,y,sc,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); const ok=PROPART.draw('rose/lamby',0,0,{h:34*sc});
@@ -3122,7 +3123,7 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     // where the cloud / Lamby is
     let cx=sky.x,cy=sky.y,m=0,la=0,lsc=LS,pose='held',rot=0,a=1;
     if(ms<P.still) { const k=ez(seg(ms,P.cloud,P.still)); cx=lerp(sky.x+280,sky.x,k); a=seg(ms,P.cloud,P.cloud+300); cy+=Math.sin(ms/500)*3; }
-    else if(ms<P.morph) cy+=Math.sin(ms/500)*3;
+    else if(ms<P.morph) { cy+=Math.sin(ms/500)*3; cx+=Math.sin(ms/760)*7; }   // the cloud keeps drifting while the two argue
     else if(ms<P.fall) { m=seg(ms,P.morph,P.morphEnd); la=ez(seg(ms,P.morph+150,P.morphEnd)); rot=Math.sin(ms/260)*.05; }
     else if(ms<P.sit) { const k=seg(ms,P.fall,P.sit); m=1; la=1; cx=lerp(sky.x,seat.x,ez(k)); cy=lerp(sky.y,seat.y,k*k); rot=-.08*Math.sin(k*Math.PI); }
     else { m=1; la=1; cx=seat.x; cy=seat.y; const q=seg(ms,P.sit,P.sit+300); lsc=LS*(1+(q<1?Math.sin(q*Math.PI)*.08:0)); rot=Math.sin(ms/300)*.04;
@@ -3138,7 +3139,7 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     // the two thought bubbles
     const s0=seatPt(),rHead={x:s0.x-2,y:s0.y-20-RIDE.ay*RS};
     if(ms>P.tb0&&ms<P.tb1) { const k=ms<P.tb1-200?seg(ms,P.tb0,P.tb0+250):1-seg(ms,P.tb1-200,P.tb1);
-      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250),126,82,sT.x-16,sb-TH+14,k,()=>{ if(!PROPART.draw('tom/sourdough_boule',0,4,{w:82})) boule(0,4,3.1,false); }); }
+      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250)+Math.sin(ms/230)*2,126,82,sT.x-16,sb-TH+14,k,()=>{ if(!PROPART.draw('tom/sourdough_boule',0,4,{w:82})) boule(0,4,3.1,false); }); }
     if(ms>P.rb0&&ms<P.rb1) { const k=ms<P.rb1-200?seg(ms,P.rb0,P.rb0+250):1-seg(ms,P.rb1-200,P.rb1);
       bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ if(!lambyP(4,8,1.75,0)) { RFX.plush(4,8,1.75,{pose:'held',drawn:1}); lambyHair(4,8,1.75); } }); }
   }});

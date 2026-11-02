@@ -1,3 +1,11 @@
+## 2026-11-02 (78): That Cloud Is Lamby no longer holds still for 2.5 seconds (`freeze2`)
+
+- Source: claude/battle-animation-audit.md finding 4, part 2. Looked at frames first (`tools/tombo_test.py`, every 0.5 s). Fact: in the Director's Cut `rose1_dc` Tom, Rose, the cloud and the bread thought bubble were nearly identical from about 2.5 s to 5.0 s while Tom's line plays.
+- Fix (engine/battle2-kind.js, `B2_TOMBO_ANIM.rose1_dc` only): while Tom explains the loaf, Rose shakes her head side to side (about 2 px, from 1.3 s after his line starts until just before hers), the bread bubble bobs 2 px, and the cloud drifts 7 px sideways until it morphs. No voice line, clip, damage or timing value changed; the spans still follow the two clips.
+- Looked at and left alone: `boppy1_dc` (Quiet on Cattail Pier). The still stretch is about 1 s of Boppy hunched at "SHHH!" with Tom chewing the bait; it reads as a held joke, not a freeze.
+- Tested: tombo_test rose1_dc FAILS: [] with frames looked at before and after. Smoke and tag check below. NOT seen on the phone. The other detector-flagged moves (tom.sourdough_snob, skincare_10, seat_1a, nara.puppy_eyes, doodle_fluff, tnb.throw_down, Tombos amy3, tnb3, ff4, deedee1, rose3, ff1) were NOT looked at yet.
+- Stamp `build freeze2`; `battle2-kind.js` and `main.js` `?v=freeze2`.
+
 ## 2026-11-02 (77): Service worker, so the game downloads once (`sw1`)
 
 - New `sw.js` (repo root), registered at the end of `index.html`. Tom decided on 11-02 10:20 that this is the next build (CLAUDE.md "Load time"). Fact (measured with a real load in Playwright): one session touches about 1,000 files and 230 MB. 120 scripts carry a `?v=` tag (50 MB), 184 scripts do not (3.9 MB), and the chapter voice files `data/voice/dialog-ch*.js` (94 MB, up to 13 MB each) are injected after the title with no tag. The plan said every file carries a tag; that was wrong, so untagged files are handled separately.
