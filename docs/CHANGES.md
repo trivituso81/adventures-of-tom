@@ -1,3 +1,7 @@
+## 2026-11-02 (81): style key prompt v2, likeness-only references (docs only)
+
+- Tom saw the first school-based style key picture: likes the head size (about one fifth of body height for adults, a quarter for Grace; approved as the new proportion), but the characters did not match the school painting: smoother, glossier, photo-collage look, no lamp light or contact shadows. Cause (inference): the three hero poses attached for likeness are in the old smooth style and the generator copied their rendering. `docs/reference/style_key_prompt.txt` now has a STYLE RULE (references are likeness only; repaint in the school's dense texture, brushwork and crisp edges) and lights the characters with the scene's lamplight and dusk sky with soft contact shadows. One adjustment only; a second miss for the same reason triggers the stop-loss. No game change.
+
 ## 2026-11-02 (80): the school yard painting is the art style reference (docs only, no game change)
 
 - Tom (11-02 11:40, with a painting of the school yard at dusk: brick school, paw-print crest, flag poles, playground, "THE SQUARE" and "SCHOOL ENTRANCE" boards): "i want the school to be our reference for art style. i know it might mean we need to redraw the square but im ok with that."

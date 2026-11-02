@@ -10,6 +10,9 @@ ATTACHED IMAGES (in this order)
 4. GRACE, a full body reference. Draw her exactly like it.
 The attached character pictures have a flat magenta background. Ignore that magenta, it is not part of the scene. Only the people matter.
 
+STYLE RULE (the most important instruction)
+Attachments 2, 3 and 4 are for LIKENESS ONLY: face, hair, skin tone, clothes, prints and colors. Do NOT copy how they are rendered. They are smooth and glossy; the final picture must NOT be. Repaint all five characters from scratch in the exact painting style of attachment 1, as if the same artist painted the whole canvas in one sitting: the same dense painted texture on skin, hair and fabric, the same fine visible brushwork, the same crisp dark-edged detail on clothing folds, hair strands and shoe edges, the same deep saturated colors and rich contrast, the same level of fine detail as the foliage and brick. No airbrushed skin, no smooth gradients, no glossy plastic look, no photo-collage look. Faces keep the likeness but are painted with the same brushwork as the rest of the picture.
+
 THE SCENE
 Use the school yard painting as the whole background, same framing, nothing removed. Five characters stand in one straight row across the wide paved walkway in the middle of the picture (their feet on the paving just above the yellow curb, below the school entrance path), and they may cover parts of the planters and walkway behind them; everything else stays as painted. All five face the viewer, feet on the paving, evenly spaced, none overlapping, all fully visible head to feet. Left to right:
 1. GRACE, a 9 year old girl, real height 4 feet 2 inches. A child.
@@ -27,7 +30,7 @@ SCALE (strict, this is the point of the picture)
 ART STYLE
 - A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the school yard painting. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
 - Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the reference.
-- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture, in harmony with the warm lamplight of the background.
+- The characters are lit by the SAME light as the background: warm orange lamplight from the nearby lamp posts and the school windows, cool blue-violet dusk sky light as fill, with warm rim light on hair and shoulders. Each character casts a soft shadow on the paving and has warm lamp glow and cool dusk tones on their skin and clothes, so they belong to the scene. Deep saturated colors, rich contrast, fine surface texture.
 - Clean, crisp edges with fine detail. No thick or black outlines.
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
 The shopkeeper and the Mudling use the same style as the people: the same brushwork, the same soft light, the same color richness. They must look like they were painted by the same hand as the school yard.
