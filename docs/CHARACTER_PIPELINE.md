@@ -12,14 +12,14 @@ Scope: character prompts (hero pose, walk, battle, ability). Props, enemies and 
 
 ### STYLE BLOCK v2 (Tom, 2026-11-02; paste verbatim into every prompt for a party member, NPC or monster)
 
-Tom's direction: "illustrated whimsical realism", one look for the party, the townspeople and the monsters, matching the painted Square and the house interiors. Every prompt also attaches the style key image (`claude/style-key-prompt.txt` makes it) once Tom has approved it.
+Tom's direction: "illustrated whimsical realism", one look for the party, the townspeople and the monsters, matching the painted school yard (docs/reference/school_style_ref.png, chosen by Tom 2026-11-02 as THE style reference; the Square and house interiors may be redrawn to match). Every prompt also attaches the style key image (`claude/style-key-prompt.txt` makes it) once Tom has approved it.
 
 ```
 ART STYLE
-- A whimsical storybook illustration of a real person, shown full body, painted by hand. Gently simplified shapes, soft painted edges and a touch of visible brushwork, like the illustrated town it lives in. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
 - Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photo.
-- Warm golden light from the upper left, a soft warm glow, a gentle rim light, rich warm colors.
-- Clean soft edges. No thick or black outlines.
+- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.
+- Clean, crisp edges with fine detail. No thick or black outlines.
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
 ```
 

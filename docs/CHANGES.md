@@ -1,3 +1,9 @@
+## 2026-11-02 (80): the school yard painting is the art style reference (docs only, no game change)
+
+- Tom (11-02 11:40, with a painting of the school yard at dusk: brick school, paw-print crest, flag poles, playground, "THE SQUARE" and "SCHOOL ENTRANCE" boards): "i want the school to be our reference for art style. i know it might mean we need to redraw the square but im ok with that."
+- Call made: the school painting replaces the Square crop as the style reference for characters, NPCs and monsters. Saved as `docs/reference/school_style_ref.png` (1448 x 1086; it is also a candidate for the school yard area painting, installed later by the area method, not now). STYLE BLOCK v2 in docs/CHARACTER_PIPELINE.md section 0 now asks for a rich, dense, jewel-toned painted look with fine brushwork, deep saturated colors, rich contrast and crisp fine edges (still warm golden light from the upper left, still no thick outlines). `docs/reference/style_key_prompt.txt` now attaches the school painting as attachment 1 and puts the five characters on its paved walkway.
+- NOT decided or done: redrawing the Square (and the interiors). Recommendation: only after Tom approves the new style key and sees it beside the Square. Nothing regenerated, no art or script changed, so no tag, ART_V or stamp change.
+
 ## 2026-11-02 (79): Bake Voices and Recast Justin removed (`nobake1`)
 
 - Tom (11-02 11:07): remove Bake Voices from the admin panel and all its code, same for Recast Justin. Fact (checked first): the bake list was empty (`pending.json` was `[]`) and the Voice Library already does everything Bake Voices did (same ElevenLabs call, key, `finalText`, `aot-local-clips` store and export file), so nothing was lost.
