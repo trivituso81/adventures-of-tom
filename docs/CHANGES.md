@@ -1,3 +1,8 @@
+## 2026-11-02 (102): Grace's master hero picture is the image AI's magenta cut, Tom's choice (docs only)
+
+- Tom (11-02 14:09), after seeing my stencil version (CHANGES (101)): "no keep the one I sent you". Decision: Grace's approved hero picture is `tools/sprite-bake/src/grace-hero-cutai-v1.png` (the AI's own cut on magenta, 1448 x 1086, repainted look Tom prefers). `grace-hero-cut-v1.png`, `grace-hero-cut-v2.png`, `tools/cut_grace_hero.py` and `tools/cut_grace_from_ai.py` are NOT the master; leave them, do not bake from them.
+- Fact for later: it is on flat magenta (not transparent), so the bake keys from the corner colour (`key: 'corner'`, see the Art Library B5 notes). Not checked against the head-share rule, not baked, no tag moved, no game change.
+
 ## 2026-11-02 (101): Grace's hero cut redone with the image AI's outline as a stencil (`tools/cut_grace_from_ai.py`; sources only, no game change)
 
 - Tom (11-02 14:02) said my GrabCut cut (CHANGES (100)) "looks like shit": paving specks, rough hair. Fact (cause): paving is nearly the same color as her pants and hair. Call made: Tom ran `grace-hero-cut.txt` in his image AI with the approved painting; the result (`tools/sprite-bake/src/grace-hero-cutai-v1.png`) has clean edges but its pixels are repainted (paler colors, pinker shoes, smoother texture), so it is NOT used for pixels.
