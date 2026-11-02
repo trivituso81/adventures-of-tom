@@ -19,6 +19,11 @@
 - Kept on purpose: Rose's SILLY "Bleh!" take is a raspberry sound (script is only `[raspberry].`), her signature move.
 - Tests: `unused_voice.py` 0 on all five checks; smoke tom,rose,grace,justin FAILS: []; kit_test tom and rose every move says its line. Voice Library index rebuilt.
 
+## 2026-11-01 (night, 59): Welcome page, Rose's hair shows again (`rosehair1`)
+
+- Tom: on the welcome screen, refresh Rose's head so her hair shows, but keep the new face dimensions. Fact (cause): the patch that swaps in her enlarged head in `engine/splash.js` was one small oval, and Rose's curls spread wider and hang lower than it, so the hair outside the oval fell back to the small original and looked sliced off. Call made: her patch is now three soft ovals (the head plus a curl area on each side, `m` list in `RIDE_HEADS`). Her growth (1.3) and neck anchor are unchanged, so her face is exactly the same size. Tom's head is unchanged.
+- Tested: looked at the enlarged frame and the welcome page in portrait (393x852) before and after, no page errors, smoke run. Not seen on the phone. Knob: the `m` ovals in `RIDE_HEADS` (4 numbers each: centre x, centre y, half width, half height, in the 78 x 171 frame). Art files unchanged, no ART_V bump.
+
 ## 2026-11-01 (night, 58): Welcome page, Tom carrying Rose bigger (`bighead1`)
 
 - Tom: on the welcome page, both heads need to be bigger and the combined Tom and Rose figure bigger overall. Fact (cause): the ride art has small heads relative to the body, and the figure was drawn at 335 picture px. Call made: `engine/splash.js` now builds a padded copy of the standing ride frame with Rose's head grown 30% and Tom's grown 25% about their necks (`RIDE_HEADS`, soft oval mask, no seams), and the figure is 405 px tall (was 335) at x 292 (was 287). Art files are unchanged, so no ART_V bump; only the welcome page is affected (overworld, battle and the ride sheets are not).

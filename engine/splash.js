@@ -551,7 +551,9 @@ const SPLASH_SPOTS=[
 // The ride art has small heads, so the welcome page enlarges each head (about its neck) on a padded copy of the standing frame.
 // Numbers are in the standing frame's own pixels (78 x 171): c = head centre, r = half width/height of the head patch (hair included),
 // a = neck anchor the head grows from, s = head growth. Rose first, then Tom, so Tom's head draws over her legs.
-const RIDE_HEADS=[{cx:38,cy:15,rx:21,ry:18,ax:38,ay:31,s:1.3},{cx:39,cy:55,rx:17,ry:22,ax:39,ay:75,s:1.25}];
+// Tom 2026-11-01 20:37: Rose's hair was cut off (her curls spread wider and hang lower than the oval), so her patch is now a union of soft ovals,
+// `m` = [cx,cy,rx,ry] list (the head plus a curl area on each side); the growth (s) and neck anchor (ax,ay) are unchanged, so her face is the same size.
+const RIDE_HEADS=[{cx:38,cy:15,rx:21,ry:18,ax:38,ay:31,s:1.3,m:[[38,17,25,21],[20,33,9,13],[56,33,9,13]]},{cx:39,cy:55,rx:17,ry:22,ax:39,ay:75,s:1.25}];
 const RIDE_PAD_X=14,RIDE_PAD_TOP=20,RIDE_Q=2;
 let rideBigCache=null;
 function splashRideBig(rows) {
@@ -566,10 +568,14 @@ function splashRideBig(rows) {
     const tg=t.getContext('2d'); tg.imageSmoothingEnabled=true; tg.imageSmoothingQuality='high';
     tg.drawImage(c,(RIDE_PAD_X+h.ax-h.ax*h.s)*Q,(RIDE_PAD_TOP+h.ay-h.ay*h.s)*Q,c.width*h.s*Q,c.height*h.s*Q);
     // soft oval mask around the grown head so only the head (not the body under it) is replaced
-    const mx=(RIDE_PAD_X+h.ax+(h.cx-h.ax)*h.s)*Q,my=(RIDE_PAD_TOP+h.ay+(h.cy-h.ay)*h.s)*Q,rx=h.rx*h.s*Q;
-    tg.globalCompositeOperation='destination-in'; tg.save(); tg.translate(mx,my); tg.scale(1,h.ry/h.rx);
-    const gr=tg.createRadialGradient(0,0,rx*.78,0,0,rx); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)');
-    tg.fillStyle=gr; tg.fillRect(-rx*2,-rx*2,rx*4,rx*4); tg.restore();
+    const mk=document.createElement('canvas'); mk.width=W; mk.height=H; const mg=mk.getContext('2d');
+    for(const [ocx,ocy,orx,ory] of (h.m||[[h.cx,h.cy,h.rx,h.ry]])) {
+      const mx=(RIDE_PAD_X+h.ax+(ocx-h.ax)*h.s)*Q,my=(RIDE_PAD_TOP+h.ay+(ocy-h.ay)*h.s)*Q,rx=orx*h.s*Q;
+      mg.save(); mg.translate(mx,my); mg.scale(1,ory/orx);
+      const gr=mg.createRadialGradient(0,0,rx*.78,0,0,rx); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)');
+      mg.fillStyle=gr; mg.fillRect(-rx*2,-rx*2,rx*4,rx*4); mg.restore();
+    }
+    tg.globalCompositeOperation='destination-in'; tg.drawImage(mk,0,0);
     g.drawImage(t,0,0);
   }
   rideBigCache={cv:out,fw:c.width,fh:c.height};
