@@ -1,3 +1,10 @@
+## 2026-11-01 (evening, 63): TNB's walking head enlarged to Tom's (`tnbhead1`)
+
+- Tom (20:48): on the overworld Tom's head is still much bigger than TNB's; enlarge TNB's and list everyone's head size so it can be fixed once and for all.
+- Cause: TNB's walk head was shrunk x .89 on 11-01 (Tom approved it at 11:59) while Tom's head was later enlarged 8% (`tomhead1`, 14:57). Measured by hand on the baked walk frames (one row = 3 art px; hair to chin; reading error about half a row): Tom 16.0 front and 14.6 side, TNB 15.0 and 13.8. His face is also narrower (cheek to cheek 7.5 rows against Tom's 9.7), so the gap read bigger than 6%.
+- Fix: `bake_tnb.py` `G_WALK` 1.20 grows only TNB's walking head (front, back and side); his body from chin to feet keeps its size, so the figure gets 3 rows taller at the top (`--ow-h` 42 to 45; frame 44 to 46 rows). Welcome screen `h` 309 to 331 (`SPLASH_SPOTS`) so his body stays the same size there. Battle art unchanged (`tnb-battle`, `tnb-poses` identical). After: TNB 16.3 front and 15.5 side, face width about 9.3 rows. Files: `art/chars/tnb-ow.webp`, `data/tnb-hires.js`, `engine/splash.js`. ART_V `tnbhead1`.
+- Knob: `G_WALK` in `bake_tnb.py` (1.0 = old size); rebake with `python3 -I tools/sprite-bake/bake_tnb.py`, bump ART_V.
+
 ## 2026-11-01 (evening, 62): Boppy and Justin takes carry "thick New York accent" again (`accent1`)
 
 - Tom (20:09 and 20:34): regenerating Boppy in the Voice Library loses his New York accent; "put that tag in for Boppy and also Justin (thick New York accent)".

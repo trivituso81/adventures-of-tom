@@ -542,7 +542,7 @@ const SPLASH_SPOTS=[
   {id:'grace',x:425,feet:1175,h:230},   // 2026-11-01: 225 to 230, her walk head grew (kidhead.py), body stays the same size   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
   {id:'tom',x:292,feet:1222,h:405},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose. Tom 2026-11-01 19:43: combined figure bigger, 335 to 405
   {id:'rose',x:372,feet:1204,h:205,solo:true},   // 2026-11-01: 196 to 205, head grew, body same   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
-  {id:'tnb',x:170,feet:1198,h:309},   // Tom 2026-11-01: body (chin to feet) follows real height; his big hair sits on top, so the top of his hair reaches Justin's
+  {id:'tnb',x:170,feet:1198,h:331},   // Tom 2026-11-01 (h 309 to 331 in tnbhead1: head grew 20%, body kept): body (chin to feet) follows real height; his big hair sits on top, so the top of his hair reaches Justin's
   {id:'boppy',x:768,feet:1222,h:284},
   {id:'amy',x:566,feet:1222,h:282},
   {id:'deedee',x:672,feet:1258,h:278}

@@ -26,7 +26,7 @@ KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked o
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=100)   # idle height in grid rows
-ap.add_argument('--ow-h', type=int, default=42)        # standing height of the overworld sprite in rows
+ap.add_argument('--ow-h', type=int, default=45)        # standing height of the overworld sprite in rows (was 42 before G_WALK 1.20: +3 rows of head, body unchanged)
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -203,7 +203,13 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
 # idle / down-stand frame (bisection on the real warp) and every other frame gets the factor that gives the same head height in rows.
 # TARGET_BT was 0.445; face (hairline to chin) = Justin's 49 battle px (Tom's call 2026-11-01): 0.445 x 49/47 x 1.3/1.409 (old face px, old/new battle scale)
 # TARGET_OW / TARGET_OWL x .97 (2026-11-01): walk face = Justin's when drawn at real height on the welcome screen
-TARGET_BT, TARGET_OW, TARGET_OWL = 0.428, 18.2 / 42 * .97 * .921 * .89, 17.5 / 42 * .97 * .921 * .89   # walk x .921 (2026-11-01, Tom: body chin-to-feet follows real height, hair or cap counted on top; welcome height went up, so head share goes down by old/new height and the head stays the same size)
+# Walk head growth (Tom 2026-11-01 20:48, `tnbhead1`): on the overworld Tom's head still read much bigger than TNB's (measured hair to chin on the baked walk frames: Tom 16.0 rows front,
+# 14.6 side; TNB 15.0 and 13.8; cheek-to-cheek face width Tom 9.7, TNB 7.5). G_WALK grows ONLY TNB's walk head (absolute size), body chin-to-feet unchanged: the head share is re-solved for the
+# taller figure and --ow-h goes 42 to 45 rows so the body keeps its 27.5 rows. Knob: G_WALK (1.0 = the old size). Battle is untouched.
+_R0W, _R0L, G_WALK = 18.2 / 42 * .97 * .921 * .89, 17.5 / 42 * .97 * .921 * .89, 1.20
+def _grown_share(r0, g, rows=42.0):
+    h0 = r0 * rows; return g * h0 / ((rows - h0) + g * h0)
+TARGET_BT, TARGET_OW, TARGET_OWL = 0.428, _grown_share(_R0W, G_WALK), _grown_share(_R0L, G_WALK)   # old walk shares: _R0W (front/back) and _R0L (side); walk x .921 and x .89 history in docs/CHANGES.md (heads5, heads6, body1)
 def head_cc(img, name):
     if name == 'b_ko': return 0, 105
     return tuple((HEAD_BOX.get(name) or _auto_head(img))[:2])
