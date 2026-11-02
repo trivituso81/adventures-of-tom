@@ -217,6 +217,34 @@
 "text": "Here, take my spare cap. For luck. I caught a twelve pounder in it. Nine. It was a big six.",
 "ctx": "v4 override",
 "script": "[tender] Here, take my spare cap. For luck. [proud, boastful] I caught a twelve pounder in it. [grudging, quieter] Nine. It was a big six."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "My favorite son!",
+"ctx": "v4 override",
+"script": "[delighted, warm] My favorite son!"
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "My favorite son! And my girls! Come here, come here.",
+"ctx": "v4 override",
+"script": "[overjoyed, bustling] My favorite son! And my girls! [warm, urgent] Come here, come here."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.",
+"ctx": "v4 override",
+"script": "[warm, fussing] Tom, you must be starving! [brisk, firm] Sit. The crisp needs ten minutes on the counter."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "My favorite son! And my girls! And my... oh. OH. Why is Rose in an ice cube.",
+"ctx": "v4 override",
+"script": "[delighted, warm] My favorite son! And my girls! [trailing, puzzled] And my... oh. [alarmed, bewildered] OH. Why is Rose in an ice cube."
 }
 ]
 }

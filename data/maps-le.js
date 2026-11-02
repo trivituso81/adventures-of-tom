@@ -1482,7 +1482,7 @@ const LE_ROOMS=[
     noGo:[[6,7],[5,7],[5,6],[5,5],[6,5],[10,5],[10,4],[11,4],[12,4],[6,10],[5,10],[11,10],[12,10],[13,10],[14,10]],
     npcs:[
       {name:'Deedee',x:7,y:9,look:'pip',sheet:'deedee',grandma:true,duration:0.84,lines:[
-        "There's my Tommy! And my girls! Come here, come here.",
+        "My favorite son! And my girls! Come here, come here.",
         'Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?',
         'Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.'],
         revisit:[

@@ -772,7 +772,7 @@ SCENES.nsThaw=[
   {walk:'tom',to:()=>[[currentMap.spawn.x,currentMap.spawn.y-1]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:()=>[currentMap.spawn.x+1,currentMap.spawn.y],dir:'up'}, {place:'rose',at:()=>[currentMap.spawn.x-1,currentMap.spawn.y],dir:'up'},
   {walk:'Deedee',to:()=>[[7,9],[7,10]].filter(t=>walkable(currentMap,t[0],t[1])),speed:.25}, {face:'Deedee',dir:'down'},
-  {talk:'Deedee',lines:['There\'s my Tommy! And my girls! And my... oh. OH. Why is Rose in an ice cube.']},
+  {talk:'Deedee',lines:['My favorite son! And my girls! And my... oh. OH. Why is Rose in an ice cube.']},
   {talk:'Tom',lines:['A freezer did it. Long story. Short version: freezer.']},
   {talk:'Grace',lines:['He stole the scoops AND Moo-rielle AND he froze Rose. On my BIRTHDAY, Deedee.']},
   {talk:'Deedee',lines:['On her BIRTHDAY. Boppy, did you hear that?']},

@@ -106,3 +106,17 @@ Lines whose only player was an old animation deleted in this pass:
 |---|---|---|
 | tom | starter_inspection | Bready Mercury has NOTES. |
 | grace | beam_dismount | Beam dismount! Ten out of ten! |
+
+## Fourth pass (`deedee1`, 2026-11-02)
+
+Deedee's greeting and kitchen line were reworded at Tom's request (see CHANGES 74), so the baked clips of the old words can never play:
+
+| Character | Kind | Line |
+|---|---|---|
+| deedee | greet (battle) | There's my Tommy! |
+| deedee | dialogue (dialog-ch1) | There's my Tommy! |
+| deedee | dialogue (dialog-ch25) | There's my Tommy! And my girls! Come here, come here. |
+| deedee | dialogue (dialog-ch25) | Tom, you're skin and bones. Sit. The crisp needs ten minutes on the counter. |
+| deedee | dialogue (dialog-ch26) | There's my Tommy! And my girls! And my... oh. OH. Why is Rose in an ice cube. |
+
+Audio is in git history (the parent of the `deedee1` commit).
