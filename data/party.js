@@ -109,6 +109,17 @@ const items={
   zeropjs:{name:'Lie-Flat Pajamas',icon:'\u{1F97C}',slot:'Outfit',color:'#3a4a7a',desc:'Navy, with a little gold 0 on the pocket. From the Gate Zero lounge. Tom has opinions about pajamas. These pass.',stats:{hp:38,grit:6,cool:6}},
   barkslab:{sell:15,name:'Bark Slab',icon:'\u{1FAB5}',slot:'Tool',desc:'Came off a Log Lump. Heavy, mossy, and surprisingly good at stopping things.',stats:{pow:5}},
   lure:{name:"Boppy's Lost Lure",icon:'\u{1FA9D}',slot:'Charm',desc:'Twenty years in a fish\u2019s lip. Still shiny. Boppy will want to hear about this.',perk:{coins:.25}},
+  // ---- Aunt Ellie's prizes (data/ellie-quests.js): one per Part 1 chapter. Not for sale. ----
+  e_brooch:{name:"Ellie's Pie Tin Pin",icon:'\u{1F967}',slot:'Charm',desc:'A tiny tin pie from a 1983 church raffle. Ellie says every good outfit needs one thing that survived a war.',perk:{stat:{grit:.12}}},
+  e_scarf:{name:"Ellie's Silk Scarf",icon:'\u{1F9E3}',slot:'Charm',desc:'Pale silk. Nothing gets past it, not even smog.',perk:{immune:['drowsy']}},
+  e_tea:{name:"Ellie's Gossip Tea",icon:'\u2615',slot:null,healAll:64,desc:'Hot, strong and brewed with other people\u2019s business. Heals everyone. The gossip is optional. The tea is not.'},
+  e_cuecards:{name:"Ellie's Cue Cards",icon:'\u{1F3AC}',slot:null,atkDown:true,desc:'CUT. PRINT. BEHAVE. Hold one up and the monster loses its will to hit hard.'},
+  e_hallpass:{name:"Ellie's Hall Pass",icon:'\u{1F3AB}',slot:null,revive:true,desc:'Signed in 1961. Nobody has ever refused it. A fallen friend gets back on their feet.'},
+  e_earrings:{name:"Ellie's Pearl Earrings",icon:'\u{1F48E}',slot:'Charm',desc:'From her eleventh trip to Paris. Squirrels love anything shiny. Now you come out ahead.',perk:{coins:.3}},
+  e_glasses:{name:"Ellie's Reading Glasses",icon:'\u{1F453}',slot:'Charm',desc:'A rhinestone chain and an opinion about everybody. Wear them and you see what people actually mean.',perk:{kind:.15}},
+  e_china:{name:"Ellie's Good China",icon:'\u{1F37D}',slot:null,dmg:150,desc:'It was never for Boppy. It was always for emergencies. Throw it hard.'},
+  e_fan:{name:"Ellie's Silver Fan",icon:'\u{1FAAD}',slot:'Tool',desc:'From the last dance at the Moon Club. Grace asked for a big one. This is a big one.',stats:{pow:4,warmth:6}},
+  e_tag:{name:"Ellie's Luggage Tag",icon:'\u{1F9F3}',slot:'Charm',desc:'Eleven trips to Paris and she never lost a bag. It\u2019s luggage tag luck. It keeps you ahead.',perk:{startVp:3}},
   juice:{price:6,name:'Juice Box',icon:'\u{1F9C3}',slot:null,heal:40,desc:'From the bottom of Amy\'s bag. There\'s always one more.'},
   // ---- Penny's Pockets stock: healing ----
   bandage:{price:15,name:'Dino Bandage',icon:'\u{1FA79}',slot:null,heal:96,desc:'Has a T. rex on it. Rose says that makes it work faster. Rose is right.'},

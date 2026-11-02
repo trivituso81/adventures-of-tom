@@ -1,3 +1,12 @@
+## 2026-11-02 (71): Aunt Ellie's bets and prizes, one per chapter (`ellie1`)
+
+- Tom: more optional Aunt Ellie content. After a chapter's first story beat she jokes about it and bets Tom a prize if he finishes the chapter. Each chapter gives a unique item, equipped or used in battle.
+- New data/ellie-quests.js (10 bets, flags `ellie-offer-N` and `ellie-paid-N`), hooked into the kin branch of engine/overworld.js through `quest:()=>ellieQuest()` on both Ellie NPCs in data/maps-le.js. Full story mode only; the demo is untouched.
+- Call made: chapters 1, 3, 5, 7, 9 are a true bet then prize. Chapters 2, 4, 6, 8, 10 happen in LA or in the air, where Ellie cannot be reached, so she pays on his return and says she bet Deedee he would manage it. Two prizes max per visit; she says to ask again if more are owed.
+- Prizes (data/party.js, ids `e_*`): brooch (Charm, grit), silk scarf (Charm, immune to drowsy), gossip tea x3 (heal all), cue cards x3 (enemy POW down), hall pass (revive), pearl earrings (Charm, more coins), rhinestone glasses (Charm, kindness), good china x3 (150 damage), silver fan (Tool, POW and warmth), luggage tag (Charm, starts with VP). Four battle items have new Rose Mode icons in data/battle-icons.js.
+- New spoken lines are silent until baked. unused_voice.py 0 on all 5 checks. Tested: real Ellie conversation (offer, reminder, pay), battle bag, smoke 0, rooms_test 0.
+- Tags: `party.js`, `battle-icons.js`, `maps-le.js`, `overworld.js`, `ellie-quests.js` `?v=ellie1`; build stamp `ellie1`.
+
 ## 2026-11-02 (morning, 70): Tom's replacement Square painting installed (`square4`)
 
 - Tom sent a new Square painting with "Use this instead". Same layout as `square3` (the walk map and doors are unchanged, checked row by row), new fine detail, and a new SCHOOL arrow sign on one post at the east gate. Original kept at docs/reference/town_v4_from_tom.png; art/town.webp is it scaled to 1920 x 1664.

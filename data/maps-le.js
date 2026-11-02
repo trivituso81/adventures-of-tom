@@ -1504,7 +1504,7 @@ const LE_ROOMS=[
           'Hugs for everyone. There. All better.',
           'Hugs for everyone, just because. To the moon and back.']},
       // Aunt Ellie visiting: in chapter 9 she minds the girls with cards; at the chapter 10 homecoming she wants the airport story.
-      {name:'Aunt Ellie',x:9,y:9,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,
+      {name:'Aunt Ellie',x:9,y:9,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,quest:()=>ellieQuest(),
         away:[{test:S=>!ELLIE_VISIT.some(storyMatch)}],
         lines:['Sit. Tell me about the airport. Leave nothing out. I\'ll know.'],
         when:[{...CH9_ON,flag:'ch9-letter',lines:['The girls and I are playing cards. I\'m winning. I\'m also cheating. They\'re learning a great deal.','Go. Dance. Somebody in this family should get to finish a party at the Moon Club.']}]},
@@ -1563,7 +1563,7 @@ const LE_ROOMS=[
       '#######...######'],
     npcs:[
       // Aunt Ellie: Deedee's aunt. Cosmopolitan, fashionable, sharp, wise, takes no nonsense. Lives here; visits the Rivituso house in chapters 9 and 10.
-      {name:'Aunt Ellie',x:7,y:8,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,away:ELLIE_VISIT,lines:[
+      {name:'Aunt Ellie',x:7,y:8,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,quest:()=>ellieQuest(),away:ELLIE_VISIT,lines:[
         'Tom. Stand up straight. There. Now you look like someone I\'m related to.',
         'Yes, Deedee has an aunt. Yes, I\'m older. No, you may not ask by how much.',
         'I\'ve been to Paris eleven times. Long Island is charming. Like a hat you wear once.'],

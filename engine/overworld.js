@@ -211,6 +211,14 @@ function pressAction() {
       if(n.visitedOnce) { const l=again(); if(l) lines=[l]; }
       n.visitedOnce=true;
     }
+    // Optional bets and prizes (data/ellie-quests.js: Aunt Ellie). `quest()` returns {lines,replace,onClose} or null.
+    if(n.quest) {
+      const q=n.quest();
+      if(q) {
+        lines=q.replace?q.lines.slice():lines.concat(q.lines);
+        if(q.onClose) { const prevQ=n.onClose; n.onClose=()=>{ if(prevQ) prevQ(); q.onClose(); }; }
+      }
+    }
     const rm=n.mom?amy:(n.grandma?deedee:(n.grandpa?boppy:(n.partner?tnb:(n.dad?justin:(n.cousin?olivia:null)))));
     if(rm&&!inParty(rm)) {
       const prev=n.onClose;
