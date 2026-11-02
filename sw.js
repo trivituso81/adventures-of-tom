@@ -2,7 +2,7 @@
    Why: the game is about 230 MB of scripts, art and baked voice. iOS drops Safari's own cache for a home-screen app whenever
    it likes, so everything came down again. Cache Storage (this file) is kept, so a file is downloaded once per version.
    How each request is answered:
-   - A page (index.html, voices.html, bake.html): always the network, so a new push shows at once. The last good copy is kept
+   - A page (index.html, voices.html): always the network, so a new push shows at once. The last good copy is kept
      only so the game can still start with no signal.
    - A file whose address carries ?v= (nearly all art, plus 120 scripts including the 37 MB of baked voice): cache first. A bumped
      tag is a new address, so it downloads fresh; the old copy of the same file is deleted. This is why every change must bump

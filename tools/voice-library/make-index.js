@@ -111,8 +111,6 @@ const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.spea
 const files=[], fidx=f=>{ let i=files.indexOf(f); if(i<0){ files.push(f); i=files.length-1; } return i; };
 const items=[];
 const ORDER=['tom','grace','rose','amy','deedee','boppy','tnb','justin','nara'];
-// Scripts for lines not yet baked can also come from the Bake page list (tools/bake-page/pending.json: {voice,kind:'battle',text,script}).
-const PS={}; if(fs.existsSync('tools/bake-page/pending.json')){ const pj=JSON.parse(fs.readFileSync('tools/bake-page/pending.json','utf8')); for(const it of (Array.isArray(pj)?pj:pj.items||[])) if(it.kind==='battle'&&it.voice&&it.text&&it.script) PS[it.voice+'|'+it.text]=it.script; }
 for(const ch of ORDER){ const L=LINES[ch]; if(!L) continue;
   const byText=new Map();
   for(const kind in L) for(const t of L[kind]){ if(!byText.has(t)) byText.set(t,[]); const a=byText.get(t); if(!a.includes(kind)) a.push(kind); }
@@ -122,7 +120,7 @@ for(const ch of ORDER){ const L=LINES[ch]; if(!L) continue;
     const ks=[...(textCh[norm(t)]||[])].sort((a,b)=>a-b);
     const it={t:'b',v:ch,k:kinds,x:t,ty:kinds.every(k=>DIALOG_KIND.test(k))?'d':'b',c:ks,w:kinds.join(', '),f:has?fidx(bfile[ch]||'data/voice-clips.js'):-1};
     if(ch==='nara'){ const pr=(BC.voices.nara||{}).prompts||{}; const p=kinds.map(k=>pr[k+'|'+t]).find(Boolean); it.p=p?p.p:'Friendly medium-size dog, happy excited barks.'; it.d=p?p.d:2; }
-    else it.s=PS[ch+'|'+t]||BO[ch+'|'+t]||kinds.map(k=>BS[ch+'|'+k+'|'+t]).find(Boolean)||plain(ch,t);
+    else it.s=BO[ch+'|'+t]||kinds.map(k=>BS[ch+'|'+k+'|'+t]).find(Boolean)||plain(ch,t);
     if(fxOf(ch,null,true)) it.fx=1;
     items.push(it);
   }

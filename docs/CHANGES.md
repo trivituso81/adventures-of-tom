@@ -1,3 +1,12 @@
+## 2026-11-02 (79): Bake Voices and Recast Justin removed (`nobake1`)
+
+- Tom (11-02 11:07): remove Bake Voices from the admin panel and all its code, same for Recast Justin. Fact (checked first): the bake list was empty (`pending.json` was `[]`) and the Voice Library already does everything Bake Voices did (same ElevenLabs call, key, `finalText`, `aot-local-clips` store and export file), so nothing was lost.
+- ADMIN now lists DEMO, VOICE LIBRARY, BATTLE LAB, BACK (`engine/splash.js`: both entries and `openBake`, `openRecast` deleted).
+- Deleted: `bake.html`, `recast-justin.html`, `data/bake-list.json`, `tools/bake-page/make-list.js`, `tools/bake-page/pending.json`, `tools/voice-recast/build-justin.js`, `docs/BAKE_PAGE.md`.
+- Moved, not deleted: `tools/bake-page/merge-local.js` is now `tools/voice-library/merge-local.js` (the merge tool for Voice Library exports; same code, header updated). KEPT on purpose: `engine/local-clips.js` (the game reads Voice Library takes through it; only its comment changed) and the other recast bakers in `tools/voice-recast/` (Deedee and Ellie, Grace), which Tom did not ask about.
+- `tools/voice-library/make-index.js` no longer reads `pending.json` (it was `[]`, so `data/voice-index.json` is byte-identical after a rebuild). Comments that pointed at `pending.json` fixed in `data/lines.js` and `engine/battle2-kind.js`; docs/VOICE.md, VOICE_LIBRARY.md (now holds the merge steps), CHARACTER_PIPELINE.md, JUSTIN_ABILITIES.md and the `sw.js` comment updated.
+- Tested: smoke FAILS: [] (includes the tag check), voice-library test ALL PASS, unused_voice 0 on all five, ADMIN screenshots in portrait and landscape show four entries with no page errors. NOT run: the phone. Stamp `build nobake1`; `?v=nobake1` on splash.js, lines.js, battle2-kind.js, local-clips.js, main.js.
+
 ## 2026-11-02 (78): That Cloud Is Lamby no longer holds still for 2.5 seconds (`freeze2`)
 
 - Source: claude/battle-animation-audit.md finding 4, part 2. Looked at frames first (`tools/tombo_test.py`, every 0.5 s). Fact: in the Director's Cut `rose1_dc` Tom, Rose, the cloud and the bread thought bubble were nearly identical from about 2.5 s to 5.0 s while Tom's line plays.

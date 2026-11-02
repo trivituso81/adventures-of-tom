@@ -205,7 +205,7 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 6. Ability timing: authored hold times can run longer than real time because the Justin file scales every move by 0.66 at the bottom of `engine/justin-moves.js` (a new character file should do the same, with long-hold moves excluded). Hold the HIT frame; keep the move to about 2 to 3 seconds.
 7. Cache: atlas image addresses in the generated data carry NO `?v=` tag; `engine/painted.js` adds `?v=ART_V` to every atlas without one. Bump `ART_V` whenever any baked .webp changes, and bump each changed script's `?v=` tag in `index.html`. A hard-coded tag on an atlas address keeps old art on Tom's phone (it hid Tom's new head on 2026-11-01). Bakes never overwrite `portraits/<id>.png` unless run with `PORTRAIT=1`.
 8. Test: `python3 tools/kit_test.py <id> --speed2`, `IDS=<id> python3 tools/smoke.py`, `python3 tools/smoke.py`; look at every contact sheet in portrait and landscape. Push to `main`. Tell Tom in a few lines what landed and what to look for on the phone.
-9. Spoken lines: add to `data/lines.js` and `tools/bake-page/pending.json`; they play through speech synthesis until a voice bake. Never reword a baked line.
+9. Spoken lines: add to `data/lines.js` (and a script in `tools/voice-library/battle-overrides.json`); they play through speech synthesis until a voice bake. Never reword a baked line.
 
 ## 7. Proportions: heads, heights, widths (Tom, 2026-11-01; mandatory for every new adult or child)
 

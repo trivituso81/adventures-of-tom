@@ -5740,7 +5740,7 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   // Little Tom is as tall as Grace and little Amy as tall as Rose.
   const hOf=id=>BATTLE_SPRITES[id].idle.length*BATTLE_SPRITES[id].scale,kh=w=>KIDS.rects[w].ym_ready[3]/2,scT=hOf('grace')/kh('tom'),scA=hOf('rose')/kh('amy');
   // Voices. Little Amy speaks in Grace's voice (LINES.grace.ymamot) and little Tom in Rose's (LINES.rose.ymamot); both grown-ups shout
-  // Flashback! together first (amy.flashback, tom.flashback). Each stays silent until its clip is baked (tools/bake-page/pending.json).
+  // Flashback! together first (amy.flashback, tom.flashback). Each stays silent until its clip is baked (Voice Library).
   // The whole move runs about 6 s. Beats are fixed times; a kid clip that is longer or shorter than the target (Amy 3.0 s) stretches
   // its own span (FA). The timeline runs K times faster than the audio at 2x (engine/main.js), so spans that wait on a voice are multiplied by K.
   const kidA=ymClip('grace',AMY_LINE),shA=ymClip('amy',FLASH),shT=ymClip('tom',FLASH);

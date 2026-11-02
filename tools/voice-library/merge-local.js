@@ -1,5 +1,5 @@
-// node tools/bake-page/merge-local.js <local-clips-export.json> <data dir> <outdir>
-// Merges a bake.html / Voice Library export ({clips:[{kind,voice,lineKind,text,mp3,t}]}) into the game. Writes only changed files under <outdir>/data.
+// node tools/voice-library/merge-local.js <local-clips-export.json> <data dir> <outdir>
+// Merges a Voice Library export ({clips:[{kind,voice,lineKind,text,mp3,t}]}) into the game. Writes only changed files under <outdir>/data.
 // Battle: a new clip replaces every clip with the same text (any kind), then is added under its lineKind, into data/voice/<id>.js (Nara's stay in voice-clips.js).
 // Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else dialog-ch28.js. Audio: silence trim, speaker/voice fx, Grace shrink, mono 32 kHz 48 kbps.
 // Boppy battle clips are deepened (rubberband pitch 0.9, 128k 44100). If one text appears twice in the export, the newest (t) wins. Needs ffmpeg with rubberband.

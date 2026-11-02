@@ -1,6 +1,6 @@
 'use strict';
-// engine/local-clips.js — Voice clips baked on this device with bake.html (title screen > ADMIN > BAKE VOICES).
-// bake.html keeps each clip in this browser's IndexedDB ('aot-local-clips', store 'clips'); this file reads them at startup and
+// engine/local-clips.js — Voice clips recorded on this device in the Voice Library (title screen > ADMIN > VOICE LIBRARY).
+// voices.html keeps each clip in this browser's IndexedDB ('aot-local-clips', store 'clips'); this file reads them at startup and
 // adds them to the game's clip tables, so a line baked on the phone plays like any other baked line:
 //   dialogue clips (kind 'dialog'): looked up by dvClip(speaker, text), exactly like DIALOG_CLIPS (data/voice/dialog-ch*.js)
 //   battle clips (kind 'battle'):   added to VOICE_CLIPS.clips[character][lineKind] (engine/speech.js say())

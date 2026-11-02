@@ -71,7 +71,7 @@ for(const [id,k,v] of [
   ['boppy','dcff3','Where\'s the fire? Everybody walks too fast!'],['deedee','dcff3','Keep up, honey! Arms at ninety!'],
   ['tom','dcff4','One more chair. There\'s always one more chair.'],['rose','dcff4','Everybody get in the heart!']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }
 
-// Ymamot Creation (Tombo amy2): the shout before the flashback, and the two kids. New lines: bake them (tools/bake-page/pending.json) before their clips play.
+// Ymamot Creation (Tombo amy2): the shout before the flashback, and the two kids. New lines: bake them in the Voice Library before their clips play.
 // Tom and Amy shout Flashback! together as grown-ups. In the flashback little Amy speaks in Grace's voice and little Tom in Rose's, so those two lines live under grace and rose.
 // Until they are baked the move keeps playing the old grown-up clips (engine/battle2-kind.js kidSay).
 for(const [id,k,v] of [
@@ -79,7 +79,7 @@ for(const [id,k,v] of [
   ['grace','ymamot','Ketchup, pickles, cereal, sock. Ymamot Creation!']]) { (LINES[id]=LINES[id]||{})[k]=[v]; }
 
 // Justin (installed 2026-10-31, docs/JUSTIN_ABILITIES.md). New character, so no baked clips yet: the speech-synthesis fallback plays until his
-// voice is baked (his lines are listed in tools/bake-page/pending.json). Move keys match data/battle2-data.js B2_SKILLS.justin.
+// voice is baked (his lines are in the Voice Library). Move keys match data/battle2-data.js B2_SKILLS.justin.
 VOICE.justin={pitch:.62,rate:1,prefer:['Daniel','Alex','Fred','Arthur','Google UK English Male','Microsoft David','Male'],blip:[230,160]};
 for(const [k,v] of [
   ['join','Halftime. I have a minute. Let\'s go.'],
@@ -100,7 +100,7 @@ for(const [k,v] of [
 (LINES.rose=LINES.rose||{}).foot_tap_tap=['Tap.'];
 
 // Olivia (installed 2026-11-01, claude/olivia-ability-prompts.md). New character, so no baked battle clips yet: the speech-synthesis fallback plays until her
-// battle voice is baked (her lines are in tools/bake-page/pending.json). Move keys match data/battle2-data.js B2_SKILLS.olivia.
+// battle voice is baked (her lines are in the Voice Library). Move keys match data/battle2-data.js B2_SKILLS.olivia.
 VOICE.olivia={pitch:1.35,rate:1.18,prefer:['Samantha','Karen','Flo','Shelley','Google US English','Microsoft Zira','Female'],blip:[480,380]};
 for(const [k,v] of [
   ['join','Michael\'s got the kids. Let\'s go, I have forty minutes.'],['greet','Tom! Hi! Sorry, I\'m mid-sentence in my head.'],['basic','SOURCE?'],

@@ -106,7 +106,7 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
 // voices.html: the Voice Library. Browse every spoken line in the game (data/voice-index.json, built by
 // tools/voice-library/make-index.js), hear the clip the game plays now, and re-record any line: a new ElevenLabs take from
 // an editable direction, or Tom's own read turned into the character's voice (speech to speech). The take Tom picks is kept
-// in this browser's IndexedDB 'aot-local-clips' (same store and row shape as bake.html), which engine/local-clips.js loads
+// in this browser's IndexedDB 'aot-local-clips' (the game reads the same store), which engine/local-clips.js loads
 // at startup, so the game plays it on this phone right away. All takes are kept in 'aot-voice-library' so he can switch back.
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -127,7 +127,7 @@ const saveScripts=()=>{ try{ localStorage.setItem('aot-vl-scripts',JSON.stringif
 // Stable key for a line (the index position can change between builds).
 const lk=it=>(it.t==='b'?'b|':'d|')+it.v+'|'+it.x;
 const kinds=it=>it.t==='b'?it.k:[''];
-const rowId=(it,k)=>[it.t==='b'?'battle':'dialog',it.v,k,it.x].join('|');   // bake.html clipId
+const rowId=(it,k)=>[it.t==='b'?'battle':'dialog',it.v,k,it.x].join('|');   // clip row id
 const isDog=it=>it.v==='nara'&&it.t==='b';
 // Direction order: Tom's own edit here, then the direction the baked clip was actually made with (read from his ElevenLabs
 // history, see loadHistory), then the written one in the index.
