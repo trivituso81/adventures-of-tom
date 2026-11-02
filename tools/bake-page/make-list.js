@@ -17,8 +17,8 @@ for(const it of items){
   if(it.voice==='justin'&&src&&!/new york/i.test(src.direction||'')) src=Object.assign({},src,{direction:'thick New York accent'});   // a battle voice not baked yet (Justin) uses the dialogue voice
   if(!src||!src.voice_id) throw new Error('no voice settings for '+key);
   let dir=src.direction||'';
-  if(it.voice==='boppy'||it.voice==='justin'){ const parts=dir.split(',').map(s=>s.trim()).filter(Boolean); if(!parts.some(p=>/new york/i.test(p))) parts.push('thick New York accent'); dir=parts.join(', '); }   // Tom 2026-11-01: Boppy and Justin always carry the accent
-  voices[key]={voice_id:src.voice_id,model:src.model||'eleven_v4',stability:src.settings.stability,similarity:src.settings.similarity_boost,direction:dir};
+  if(it.voice==='boppy'||it.voice==='justin') dir='thick New York accent';   // Tom 2026-11-01: accent only (no deep, gravelly or gruff for Boppy; Justin is direct, not warm)
+  voices[key]={voice_id:src.voice_id,model:src.model||'eleven_v4',stability:src.settings.stability,similarity:it.voice==='boppy'?0.75:src.settings.similarity_boost,direction:dir};
 }
 const out={made:new Date().toISOString().slice(0,10),voices,items};
 fs.writeFileSync('data/bake-list.json',JSON.stringify(out));

@@ -2,7 +2,7 @@
 // Merges a bake.html / Voice Library export ({clips:[{kind,voice,lineKind,text,mp3,t}]}) into the game. Writes only changed files under <outdir>/data.
 // Battle: a new clip replaces every clip with the same text (any kind), then is added under its lineKind, into data/voice/<id>.js (Nara's stay in voice-clips.js).
 // Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else dialog-ch28.js. Audio: silence trim, speaker/voice fx, Grace shrink, mono 32 kHz 48 kbps.
-// Boppy battle clips are deepened (rubberband pitch 0.9, 128k 44100). If one text appears twice in the export, the newest (t) wins. Needs ffmpeg with rubberband.
+// Boppy battle clips are NOT deepened any more (Tom 2026-11-01 21:08: Boppy is not deep or gravelly; the old rubberband pitch 0.9 is gone). If one text appears twice in the export, the newest (t) wins. Needs ffmpeg with rubberband.
 const fs=require('fs'),cp=require('child_process'),vm=require('vm');
 const [IN,DATA,OUT]=process.argv.slice(2);
 const FAM=['tom','grace','rose','amy','deedee','boppy','tnb','justin','olivia'];
@@ -31,7 +31,7 @@ for(const c of clips.filter(c=>c.kind==='battle')){
   const ch=c.voice,C=VC.clips[ch]=VC.clips[ch]||{};rep[ch]=rep[ch]||{replaced:0,added:0};
   let removed=0;for(const k in C){const b=C[k].length;C[k]=C[k].filter(x=>!(x&&x.text===c.text));removed+=b-C[k].length;if(!C[k].length)delete C[k];}
   removed?rep[ch].replaced++:rep[ch].added++;
-  (C[c.lineKind]=C[c.lineKind]||[]).push({text:c.text,mp3:ch==='boppy'?ff(c.mp3,'rubberband=pitch=0.9','44100','128k'):c.mp3,model:'eleven_v4'});touched.add(ch);
+  (C[c.lineKind]=C[c.lineKind]||[]).push({text:c.text,mp3:c.mp3,model:'eleven_v4'});touched.add(ch);
 }
 const HEAD="'use strict';\n// data/voice-clips.js — Baked ElevenLabs clips: voice settings and Nara's barks. Each character's clips are in data/voice/<id>.js.\n// Regenerate with the Voice Baker and merge (claude/voice-baking.md); do not hand-edit.\n";
 const core={clips:{},voices:VC.voices};for(const ch in VC.clips)if(!FAM.includes(ch))core.clips[ch]=VC.clips[ch];

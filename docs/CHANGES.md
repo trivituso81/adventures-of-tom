@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 64): Boppy and Justin voice personas, accent visible in the script (`persona1`)
+
+- Tom (21:08): Boppy is not deep or gravelly and definitely not gruff: he is sweet, fun-loving, a joker and a complainer. Justin is not warm: he is direct and serious, and laughs out loud when the time is right. And the accent tag was not visible in the Voice Library.
+- Cause (fact): "gruff" was in 168 of 219 Boppy scripts, "deep gravelly voice" was his voice-wide direction, his Library similarity was 1.0 (pins the cloned voice's gravel), merges deepened his clips with pitch 0.9, and "warm" or "easy" was in 11 and 15 of Justin's 51 scripts. The accent was added only at send time (`accent1`), so the script box never showed it.
+- Fix: 207 scripts rewritten by rule through `apply-scripts.py` (0 rejected): Boppy drops gruff, gravelly, low and the cold or stiff words and gets complaining, hearty, playful, wry and the like (picked from the line: ache and complaint words, exclamation, question); Justin warm to direct, easy to level, casual to matter-of-fact, fond to sincere; funny and happy tags (amused, gleeful, goofy) kept. `make-index.js` writes "thick New York accent" into the first bracket of every Boppy and Justin script, the voice direction is the accent alone, Boppy similarity 0.75, and the base direction for a brand-new line is "playful, joking" (Boppy) and "direct, serious" (Justin). `make-list.js` the same. Pitch 0.9 removed from `merge-local.js` and `merge.py`. CANON.md and docs/VOICE_LIBRARY.md updated.
+- Tested: all 270 Boppy and Justin lines send exactly one "new york" and no gruff or gravel; voice-library test ALL PASS; smoke FAILS: [].
+- Heuristic, not hand-written line by line: the replacement tag for a line that was only "gruff" is chosen by its words, so some will read flat. Not heard: baked clips are unchanged, and a line sounds new only after Tom regenerates it. If Boppy still sounds gravelly the cause is the voice itself (ElevenLabs "Jerry B. - New York Italian Mobster"): a new voice would be needed.
+
 ## 2026-11-01 (evening, 63): TNB's walking head enlarged to Tom's (`tnbhead1`)
 
 - Tom (20:48): on the overworld Tom's head is still much bigger than TNB's; enlarge TNB's and list everyone's head size so it can be fixed once and for all.

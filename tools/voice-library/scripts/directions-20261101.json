@@ -181,7 +181,7 @@
 "speaker": "Boppy",
 "text": "Tom! Good. I'm not feeling good. It's the stomach.",
 "ctx": "",
-"script": "[gruff, grumbling] Tom! Good. I'm not feeling good. [pained, low] It's the stomach."
+"script": "[grumbling] Tom! Good. I'm not feeling good. [pained] It's the stomach."
 },
 {
 "voice": "rose",
@@ -209,14 +209,14 @@
 "speaker": "Boppy",
 "text": "I TOLD you something lives in that pond. Twenty years I've been saying it. Nobody listens to Boppy.",
 "ctx": "",
-"script": "[aggrieved, vindicated] I TOLD you something lives in that pond. [tired, bitter] Twenty years I've been saying it. [sulky, gruff] Nobody listens to Boppy."
+"script": "[aggrieved, vindicated] I TOLD you something lives in that pond. [tired, huffy] Twenty years I've been saying it. [sulky] Nobody listens to Boppy."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "I'd come, but the stomach. Bring me back that fish.",
 "ctx": "",
-"script": "[gruff, pained] I'd come, but... the stomach. [brighter, gruff] Bring me back that fish."
+"script": "[pained] I'd come, but... the stomach. [brighter] Bring me back that fish."
 },
 {
 "voice": "deedee",
@@ -433,7 +433,7 @@
 "speaker": "Boppy",
 "text": "You found the Big One? I TOLD everybody. Twenty years.",
 "ctx": "",
-"script": "[eager, vindicated] You found the Big One? I TOLD everybody. [wistful, gruff] Twenty years."
+"script": "[eager, vindicated] You found the Big One? I TOLD everybody. [wistful] Twenty years."
 },
 {
 "voice": "tom",
@@ -447,14 +447,14 @@
 "speaker": "Boppy",
 "text": "My LURE! I lost that in 2006. Still shiny. Unlike me.",
 "ctx": "",
-"script": "[shocked, delighted] My LURE! I lost that in 2006. [wry, gruff] Still shiny. Unlike me."
+"script": "[shocked, delighted] My LURE! I lost that in 2006. [wry] Still shiny. Unlike me."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Keep it, Tom. For luck. The fish clearly didn't want it.",
 "ctx": "",
-"script": "[gruff, generous] Keep it, Tom. For luck. [dry, amused] The fish clearly didn't want it."
+"script": "[generous] Keep it, Tom. For luck. [dry, amused] The fish clearly didn't want it."
 },
 {
 "voice": "deedee",
@@ -489,7 +489,7 @@
 "speaker": "Boppy",
 "text": "Slow down. Everybody eats too fast. My stomach.",
 "ctx": "",
-"script": "[grumbling, gruff] Slow down. Everybody eats too fast. [pained, low] My stomach."
+"script": "[grumbling] Slow down. Everybody eats too fast. [pained] My stomach."
 },
 {
 "voice": "tom",
@@ -1049,14 +1049,14 @@
 "speaker": "Boppy",
 "text": "Tom. Good. Sit down. No. Don't sit down. We're going fishing.",
 "ctx": "",
-"script": "[gruff, flustered] Tom. Good. Sit down. No. Don't sit down. [gruff, eager] We're going fishing."
+"script": "[flustered] Tom. Good. Sit down. No. Don't sit down. [eager] We're going fishing."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.",
 "ctx": "",
-"script": "[hushed, reverent] The Whisker Perch. Whiskers like a cat. [low, solemn] I saw it at Cattail Pier in 1994. [deflated, bitter] Nobody believes me."
+"script": "[hushed, reverent] The Whisker Perch. Whiskers like a cat. [solemn] I saw it at Cattail Pier in 1994. [deflated, huffy] Nobody believes me."
 },
 {
 "voice": "deedee",
@@ -1077,7 +1077,7 @@
 "speaker": "Boppy",
 "text": "Real as my heartburn, kiddo.",
 "ctx": "",
-"script": "[gruff, solemn] Real as my heartburn, [dry, fond] kiddo."
+"script": "[solemn] Real as my heartburn, [dry, fond] kiddo."
 },
 {
 "voice": "grace",
@@ -1091,7 +1091,7 @@
 "speaker": "Boppy",
 "text": "And I'm bringing THIS. My pepper jar. Homegrown, pickled in 1989. Older than your mother.",
 "ctx": "",
-"script": "[proud, gruff] And I'm bringing THIS. My pepper jar. [boastful, fond] Homegrown, pickled in 1989. [dry, amused] Older than your mother."
+"script": "[proud] And I'm bringing THIS. My pepper jar. [boastful, fond] Homegrown, pickled in 1989. [dry, amused] Older than your mother."
 },
 {
 "voice": "deedee",
@@ -1154,7 +1154,7 @@
 "speaker": "Boppy",
 "text": "The stomach thanks you. The stomach is still complaining. But it thanks you.",
 "ctx": "",
-"script": "[gruff, grateful] The stomach thanks you. The stomach is still complaining. [softer, gruff] But it thanks you."
+"script": "[grateful] The stomach thanks you. The stomach is still complaining. [softer] But it thanks you."
 },
 {
 "voice": "?The kettle",
@@ -1203,14 +1203,14 @@
 "speaker": "Boppy",
 "text": "Then forty-one. First year of college. Cross country. Five miles through the woods, up the big hill, and I never breathed hard.",
 "ctx": "",
-"script": "[undeterred, proud] Then forty-one. [nostalgic, boastful] First year of college. Cross country. Five miles through the woods, up the big hill, [swaggering, gruff] and I never breathed hard."
+"script": "[undeterred, proud] Then forty-one. [nostalgic, boastful] First year of college. Cross country. Five miles through the woods, up the big hill, [swaggering] and I never breathed hard."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Last hill, I passed the whole field. Champion. They put my name on a plaque. The plaque is in a box. Somewhere.",
 "ctx": "",
-"script": "[proud, boastful] Last hill, I passed the whole field. Champion. [gruff, offhand] They put my name on a plaque. [deflated, dry] The plaque is in a box. Somewhere."
+"script": "[proud, boastful] Last hill, I passed the whole field. Champion. [offhand] They put my name on a plaque. [deflated, dry] The plaque is in a box. Somewhere."
 },
 {
 "voice": "rose",
@@ -1245,7 +1245,7 @@
 "speaker": "Boppy",
 "text": "Why is everybody walking like they're going to a fire? Slow down! My stomach is doing flips!",
 "ctx": "",
-"script": "[wheezing, aghast] Why is everybody walking like they're going to a fire? [pleading, gruff] Slow down! [pained, grumbling] My stomach is doing flips!"
+"script": "[wheezing, aghast] Why is everybody walking like they're going to a fire? [pleading] Slow down! [pained, grumbling] My stomach is doing flips!"
 },
 {
 "voice": "tom",
@@ -1259,7 +1259,7 @@
 "speaker": "Boppy",
 "text": "This is the spot. Forty years, this spot. Now everybody be QUIET.",
 "ctx": "",
-"script": "[low, reverent] This is the spot. Forty years, this spot. [stern, hushed] Now everybody be QUIET."
+"script": "[reverent] This is the spot. Forty years, this spot. [mock-stern, hushed] Now everybody be QUIET."
 },
 {
 "voice": "rose",
@@ -1287,14 +1287,14 @@
 "speaker": "Boppy",
 "text": "Tom holds the tackle box. I cast. The fish comes. Nobody talks. That's the system.",
 "ctx": "",
-"script": "[gruff, serious] Tom holds the tackle box. I cast. The fish comes. [firm, hushed] Nobody talks. [proud, gruff] That's the system."
+"script": "[serious] Tom holds the tackle box. I cast. The fish comes. [firm, hushed] Nobody talks. [proud] That's the system."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "...Any minute now.",
 "ctx": "",
-"script": "[low, patient] ...Any minute now."
+"script": "[patient] ...Any minute now."
 },
 {
 "voice": "grace",
@@ -1308,7 +1308,7 @@
 "speaker": "Boppy",
 "text": "Snack. A pickled pepper settles the stomach.",
 "ctx": "",
-"script": "[gruff, casual] Snack. [innocent, hushed] A pickled pepper settles the stomach."
+"script": "[casual] Snack. [innocent, hushed] A pickled pepper settles the stomach."
 },
 {
 "voice": "rose",
@@ -1343,7 +1343,7 @@
 "speaker": "Boppy",
 "text": "That's no perch. That's OLD IRON-GILL. I saw him in 1994! I TOLD everybody!",
 "ctx": "",
-"script": "[hushed, electrified] That's no perch. That's OLD IRON-GILL. [shouting, triumphant] I saw him in 1994! [fierce, loud] I TOLD everybody!"
+"script": "[hushed, electrified] That's no perch. That's OLD IRON-GILL. [shouting, triumphant] I saw him in 1994! [fired up, loud] I TOLD everybody!"
 },
 {
 "voice": "bigone",
@@ -1371,14 +1371,14 @@
 "speaker": "Boppy",
 "text": "Pickled in 1989. Nobody takes Boppy’s peppers. NOBODY.",
 "ctx": "",
-"script": "[seething, low] Pickled in 1989. [furious, rising] Nobody takes Boppy’s peppers. NOBODY."
+"script": "[seething] Pickled in 1989. [furious, rising] Nobody takes Boppy’s peppers. NOBODY."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "He went west. Into the Whispering Marsh. Come on. And nobody walk fast.",
 "ctx": "",
-"script": "[gruff, determined] He went west. Into the Whispering Marsh. [stern, bossy] Come on. And nobody walk fast."
+"script": "[determined] He went west. Into the Whispering Marsh. [mock-stern, bossy] Come on. And nobody walk fast."
 },
 {
 "voice": "mudling",
@@ -1399,21 +1399,21 @@
 "speaker": "Boppy",
 "text": "Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.",
 "ctx": "",
-"script": "[gruff, grumbling] Marsh junk. Everything people drop out here ends up grumpy about it. [dry, wry] Like me, at the DMV."
+"script": "[grumbling] Marsh junk. Everything people drop out here ends up grumpy about it. [dry, wry] Like me, at the DMV."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Up. Everybody up. Headcount. One, two, three, four. Good. Nobody is missing. Again.",
 "ctx": "",
-"script": "[brisk, gruff] Up. Everybody up. Headcount. One, two, three, four. Good. Nobody is missing. [dry, weary] Again."
+"script": "[brisk] Up. Everybody up. Headcount. One, two, three, four. Good. Nobody is missing. [dry, weary] Again."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Socks. Out here. Nobody keeps track of their socks anymore.",
 "ctx": "",
-"script": "[grumbling, disapproving] Socks. Out here. [sour, muttering] Nobody keeps track of their socks anymore."
+"script": "[grumbling, disapproving] Socks. Out here. [huffy, muttering] Nobody keeps track of their socks anymore."
 },
 {
 "voice": "grump",
@@ -1427,7 +1427,7 @@
 "speaker": "Boppy",
 "text": "Excuse me? Nobody gets past ME. That's MY line. I was saying that at Rikers before you were a knot.",
 "ctx": "",
-"script": "[indignant, offended] Excuse me? Nobody gets past ME. [outraged, gruff] That's MY line. [gruff, boastful] I was saying that at Rikers before you were a knot."
+"script": "[indignant, offended] Excuse me? Nobody gets past ME. [outraged] That's MY line. [boastful] I was saying that at Rikers before you were a knot."
 },
 {
 "voice": "grace",
@@ -1455,7 +1455,7 @@
 "speaker": "Boppy",
 "text": "The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.",
 "ctx": "",
-"script": "[musing, nostalgic] The old reeds. [low, mysterious] When I was a kid we said there was a sundial back in there that told the wrong time."
+"script": "[musing, nostalgic] The old reeds. [mysterious] When I was a kid we said there was a sundial back in there that told the wrong time."
 },
 {
 "voice": "grace",
@@ -1504,7 +1504,7 @@
 "speaker": "Boppy",
 "text": "You're sitting on the way to Sundial Hollow. Shove over.",
 "ctx": "",
-"script": "[gruff, impatient] You're sitting on the way to Sundial Hollow. [curt, gruff] Shove over."
+"script": "[impatient] You're sitting on the way to Sundial Hollow. [brisk] Shove over."
 },
 {
 "voice": "log",
@@ -1546,7 +1546,7 @@
 "speaker": "Boppy",
 "text": "Not secret. Just old. Like me. Nobody comes back here anymore.",
 "ctx": "",
-"script": "[gruff, dry] Not secret. Just old. [wry, soft] Like me. Nobody comes back here anymore."
+"script": "[dry] Not secret. Just old. [wry, soft] Like me. Nobody comes back here anymore."
 },
 {
 "voice": "boppy",
@@ -1616,21 +1616,21 @@
 "speaker": "Boppy",
 "text": "Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything.",
 "ctx": "",
-"script": "[gruff, impressed] Old gold. [practical, gruff] Keep that in your pocket, Tom. [dry, amused] Penny will want to hear about it. Penny wants to hear about everything."
+"script": "[impressed] Old gold. [practical] Keep that in your pocket, Tom. [dry, amused] Penny will want to hear about it. Penny wants to hear about everything."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Now. The Deep Pool. That's where Iron-Gill goes to sulk.",
 "ctx": "",
-"script": "[gruff, determined] Now. The Deep Pool. [low, knowing] That's where Iron-Gill goes to sulk."
+"script": "[determined] Now. The Deep Pool. [knowing] That's where Iron-Gill goes to sulk."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "The Deep Pool. Nobody has ever seen the bottom. My father said it goes all the way to Ohio.",
 "ctx": "",
-"script": "[hushed, awed] The Deep Pool. Nobody has ever seen the bottom. [dry, deadpan] My father said it goes [gruff, flat] all the way to Ohio."
+"script": "[hushed, awed] The Deep Pool. Nobody has ever seen the bottom. [dry, deadpan] My father said it goes [flat] all the way to Ohio."
 },
 {
 "voice": "bigone",
@@ -1665,14 +1665,14 @@
 "speaker": "Boppy",
 "text": "He's a FISH, kiddo.",
 "ctx": "",
-"script": "[gruff, exasperated] He's a FISH, [flat, dry] kiddo."
+"script": "[exasperated] He's a FISH, [flat, dry] kiddo."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Tom. Tackle box. We do this the old way.",
 "ctx": "",
-"script": "[low, fierce] Tom. Tackle box. [gruff, steady] We do this the old way."
+"script": "[fired up] Tom. Tackle box. [steady] We do this the old way."
 },
 {
 "voice": "tom",
@@ -1686,14 +1686,14 @@
 "speaker": "Boppy",
 "text": "Headcount. One, two, three, four. Good.",
 "ctx": "",
-"script": "[brisk, gruff] Headcount. One, two, three, four. [satisfied, gruff] Good."
+"script": "[brisk] Headcount. One, two, three, four. [satisfied] Good."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "He belches every third turn, Tom. Heal right after. When he dives, hit the water hard, or do our Tombo.",
 "ctx": "",
-"script": "[low, tactical] He belches every third turn, Tom. [firm, brisk] Heal right after. [brisk, gruff] When he dives, hit the water hard, or do our Tombo."
+"script": "[tactical] He belches every third turn, Tom. [firm, brisk] Heal right after. [brisk] When he dives, hit the water hard, or do our Tombo."
 },
 {
 "voice": "bigone",
@@ -1707,14 +1707,14 @@
 "speaker": "Boppy",
 "text": "My jar. Still sealed. Still hot.",
 "ctx": "",
-"script": "[quiet, relieved] My jar. Still sealed. [gruff, fond] Still hot."
+"script": "[quiet, relieved] My jar. Still sealed. [fond] Still hot."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "And look at that. Forty years, and I finally caught Old Iron-Gill.",
 "ctx": "",
-"script": "[slow, wondering] And look at that. [proud, husky] Forty years, and I finally caught Old Iron-Gill."
+"script": "[slow, wondering] And look at that. [proud] Forty years, and I finally caught Old Iron-Gill."
 },
 {
 "voice": "grace",
@@ -1728,14 +1728,14 @@
 "speaker": "Boppy",
 "text": "Put the date. Put the time. Use the sundial. It works now.",
 "ctx": "",
-"script": "[gruff, pleased] Put the date. Put the time. [proud, gruff] Use the sundial. It works now."
+"script": "[pleased] Put the date. Put the time. [proud] Use the sundial. It works now."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Go on, you old bucket. Catch and release. I'll come by. No hooks.",
 "ctx": "",
-"script": "[gruff, gentle] Go on, you old bucket. Catch and release. I'll come by. [soft, dry] No hooks."
+"script": "[gentle] Go on, you old bucket. Catch and release. I'll come by. [soft, dry] No hooks."
 },
 {
 "voice": "?Deep Pool",
@@ -1763,7 +1763,7 @@
 "speaker": "Boppy",
 "text": "Everything except the pepper part.",
 "ctx": "",
-"script": "[dry, sly] Everything except [low, conspiratorial] the pepper part."
+"script": "[dry, sly] Everything except [conspiratorial] the pepper part."
 },
 {
 "voice": "rose",
@@ -1784,7 +1784,7 @@
 "speaker": "Boppy",
 "text": "Old Iron-Gill. Forty years, Dee. I TOLD everybody.",
 "ctx": "",
-"script": "[proud, husky] Old Iron-Gill. Forty years, Dee. [fierce, firm] I TOLD everybody."
+"script": "[proud] Old Iron-Gill. Forty years, Dee. [fired up, firm] I TOLD everybody."
 },
 {
 "voice": "deedee",
@@ -5753,7 +5753,7 @@
 "speaker": "Boppy",
 "text": "I'm not wearing a tie.",
 "ctx": "",
-"script": "[gruff, grumbling] I'm not wearing a tie."
+"script": "[grumbling] I'm not wearing a tie."
 },
 {
 "voice": "deedee",
@@ -5872,7 +5872,7 @@
 "speaker": "Boppy",
 "text": "Stairs. Of course it's stairs. Nobody take them fast.",
 "ctx": "",
-"script": "[gruff, resigned] Stairs. Of course it's stairs. [pointed, warning] Nobody take them fast."
+"script": "[resigned] Stairs. Of course it's stairs. [pointed, warning] Nobody take them fast."
 },
 {
 "voice": "deedee",
@@ -5893,7 +5893,7 @@
 "speaker": "Boppy",
 "text": "Nobody is here. A party and nobody is here.",
 "ctx": "",
-"script": "[gruff, unimpressed] Nobody is here. [grumbling, flat] A party and nobody is here."
+"script": "[unimpressed] Nobody is here. [grumbling, flat] A party and nobody is here."
 },
 {
 "voice": "tom",
@@ -5942,14 +5942,14 @@
 "speaker": "Boppy",
 "text": "A coat check, a card room, a ballroom. Three rooms. Three stands. I count three suspects.",
 "ctx": "",
-"script": "[gruff, methodical] A coat check, a card room, a ballroom. [measured, steady] Three rooms. Three stands. [flat, certain] I count three suspects."
+"script": "[methodical] A coat check, a card room, a ballroom. [measured, steady] Three rooms. Three stands. [flat, certain] I count three suspects."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Assistant Deputy Warden. Rikers. I know what a lineup looks like.",
 "ctx": "",
-"script": "[gruff, proud] Assistant Deputy Warden. Rikers. [dry, knowing] I know what a lineup looks like."
+"script": "[proud] Assistant Deputy Warden. Rikers. [dry, knowing] I know what a lineup looks like."
 },
 {
 "voice": "log",
@@ -6019,7 +6019,7 @@
 "speaker": "Boppy",
 "text": "Three mirrors. Three stands. One little moonbeam. I didn't drive a car for forty years without learning about mirrors.",
 "ctx": "",
-"script": "[gruff, lecturing] Three mirrors. Three stands. One little moonbeam. [smug, proud] I didn't drive a car for forty years without learning about mirrors."
+"script": "[lecturing] Three mirrors. Three stands. One little moonbeam. [smug, proud] I didn't drive a car for forty years without learning about mirrors."
 },
 {
 "voice": "deedee",
@@ -6047,7 +6047,7 @@
 "speaker": "Boppy",
 "text": "Gin rummy with Deedee, fifty years. I've never won a hand. Not one. I know a sore loser when I see one.",
 "ctx": "",
-"script": "[gruff, rueful] Gin rummy with Deedee, fifty years. [flat, resigned] I've never won a hand. Not one. [dry, wry] I know a sore loser when I see one."
+"script": "[rueful] Gin rummy with Deedee, fifty years. [flat, resigned] I've never won a hand. Not one. [dry, wry] I know a sore loser when I see one."
 },
 {
 "voice": "deedee",
@@ -6075,7 +6075,7 @@
 "speaker": "Boppy",
 "text": "Sunday. My house. Bring your own deck. You'll lose. I'll lose too. We can lose together.",
 "ctx": "",
-"script": "[gruff, warming] Sunday. My house. Bring your own deck. [dry, flat] You'll lose. I'll lose too. [kindly, amused] We can lose together."
+"script": "[warming] Sunday. My house. Bring your own deck. [dry, flat] You'll lose. I'll lose too. [kindly, amused] We can lose together."
 },
 {
 "voice": "deedee",
@@ -6152,7 +6152,7 @@
 "speaker": "Boppy",
 "text": "A slow one. My stomach gets one song. One. Deedee. May I.",
 "ctx": "",
-"script": "[gruff, tender] A slow one. My stomach gets one song. One. [softer, gallant] Deedee. May I."
+"script": "[tender] A slow one. My stomach gets one song. One. [softer, gallant] Deedee. May I."
 },
 {
 "voice": "deedee",
@@ -6208,7 +6208,7 @@
 "speaker": "Boppy",
 "text": "Somebody up there is playing music. Very loud music. In 1971 they called that a nuisance.",
 "ctx": "",
-"script": "[gruff, disapproving] Somebody up there is playing music. [dry, flat] Very loud music. [grumbling, dry] In 1971 they called that a nuisance."
+"script": "[disapproving] Somebody up there is playing music. [dry, flat] Very loud music. [grumbling, dry] In 1971 they called that a nuisance."
 },
 {
 "voice": "deedee",
@@ -6271,7 +6271,7 @@
 "speaker": "Boppy",
 "text": "Forever is a lot of dancing. And everybody dances too fast.",
 "ctx": "",
-"script": "[dry, gruff] Forever is a lot of dancing. [grumbling, low] And everybody dances too fast."
+"script": "[dry] Forever is a lot of dancing. [grumbling] And everybody dances too fast."
 },
 {
 "voice": "tom",
@@ -6376,7 +6376,7 @@
 "speaker": "Boppy",
 "text": "Something fell out of her top. On the bandstand. Something gold.",
 "ctx": "",
-"script": "[gruff, alert] Something fell out of her top. On the bandstand. [curious, low] Something gold."
+"script": "[alert] Something fell out of her top. On the bandstand. [curious] Something gold."
 },
 {
 "voice": "tom",
@@ -6460,7 +6460,7 @@
 "speaker": "Boppy",
 "text": "I wore the tie. Everybody saw. Nobody can say I didn't wear the tie.",
 "ctx": "",
-"script": "[gruff, dignified] I wore the tie. Everybody saw. [firm, deadpan] Nobody can say I didn't wear the tie."
+"script": "[dignified] I wore the tie. Everybody saw. [firm, deadpan] Nobody can say I didn't wear the tie."
 },
 {
 "voice": "deedee",
@@ -7195,14 +7195,14 @@
 "speaker": "Boppy",
 "text": "Every clock in this house started at once. Eleven clocks. I didn't know we'd eleven clocks.",
 "ctx": "",
-"script": "[gruff, amazed] Every clock in this house started at once. [dry, bewildered] Eleven clocks. [gruff, muttering] I didn't know we'd eleven clocks."
+"script": "[amazed] Every clock in this house started at once. [dry, bewildered] Eleven clocks. [muttering] I didn't know we'd eleven clocks."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "My stomach is still on midnight. My stomach is always on midnight.",
 "ctx": "",
-"script": "[gruff, pained] My stomach is still on midnight. [wry, resigned] My stomach is always on midnight."
+"script": "[pained] My stomach is still on midnight. [wry, resigned] My stomach is always on midnight."
 },
 {
 "voice": "ellie",
@@ -7370,14 +7370,14 @@
 "speaker": "Boppy",
 "text": "This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.",
 "ctx": "Chapter 11: part2Open",
-"script": "[gruff, skeptical] This came for the recliner. A gold card. [dry, flat] “Priority Member.” [grumbling, gruff] Junk mail. They send it to the recliner now."
+"script": "[skeptical] This came for the recliner. A gold card. [dry, flat] “Priority Member.” [grumbling] Junk mail. They send it to the recliner now."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.",
 "ctx": "Chapter 11: part2Open",
-"script": "[gruff, wary] Don’t throw it out. [hesitant, puzzled] It’s warm. I think it’s warm. [dry, deadpan] My knee says it’s warm."
+"script": "[wary] Don’t throw it out. [hesitant, puzzled] It’s warm. I think it’s warm. [dry, deadpan] My knee says it’s warm."
 },
 {
 "voice": "tom",
@@ -7398,7 +7398,7 @@
 "speaker": "Boppy",
 "text": "Bring me back a pretzel. A real one. Not the airport kind.",
 "ctx": "Chapter 11: part2Open",
-"script": "[gruff, wistful] Bring me back a pretzel. [dry, firm] A real one. Not the airport kind."
+"script": "[wistful] Bring me back a pretzel. [dry, firm] A real one. Not the airport kind."
 },
 {
 "voice": "deedee",
@@ -10562,7 +10562,7 @@
 "speaker": "Boppy",
 "text": "Halt.",
 "ctx": "Scene ch13After",
-"script": "[flat, rigid] Halt."
+"script": "[flat, dramatic] Halt."
 },
 {
 "voice": "amy",
@@ -10576,14 +10576,14 @@
 "speaker": "Boppy",
 "text": "Warden’s plate. Gold. It hums. I like the hum.",
 "ctx": "Scene ch13After",
-"script": "[hollow, formal] Warden’s plate. Gold. [low, dreamy] It hums. I like the hum."
+"script": "[weary, formal] Warden’s plate. Gold. [dreamy] It hums. I like the hum."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "My back doesn’t hurt, Tommy. It’s been eleven years. I made a deal.",
 "ctx": "Scene ch13After",
-"script": "[steady, distant] My back doesn’t hurt, Tommy. [heavy, haunted] It’s been eleven years. [low, guarded] I made a deal."
+"script": "[steady, distant] My back doesn’t hurt, Tommy. [weary, haunted] It’s been eleven years. [guarded] I made a deal."
 },
 {
 "voice": "tom",
@@ -10604,7 +10604,7 @@
 "speaker": "Boppy",
 "text": "I stand here and the glass stays up. That’s the deal.",
 "ctx": "Scene ch13After",
-"script": "[hollow, solemn] I stand here and the glass stays up. [heavy, final] That’s the deal."
+"script": "[weary, solemn] I stand here and the glass stays up. [weary, final] That’s the deal."
 },
 {
 "voice": "?Warden Boppy",
@@ -10632,7 +10632,7 @@
 "speaker": "Boppy",
 "text": "Go home, Tom. Take your friends. Go back to the good coast.",
 "ctx": "Scene ch13After",
-"script": "[stern, pleading] Go home, Tom. Take your friends. [softer, wistful] Go back to the good coast."
+"script": "[mock-stern, pleading] Go home, Tom. Take your friends. [softer, wistful] Go back to the good coast."
 },
 {
 "voice": "amy",
@@ -10660,7 +10660,7 @@
 "speaker": "Boppy",
 "text": "Go home.",
 "ctx": "Scene ch13After",
-"script": "[dull, strained] Go home."
+"script": "[deadpan, strained] Go home."
 },
 {
 "voice": "tnb",
@@ -10793,7 +10793,7 @@
 "speaker": "Boppy",
 "text": "...Rose. Grace. Go back to the cab.",
 "ctx": "Scene ch14Open",
-"script": "[strained, gruff] ...Rose. Grace. [firm, protective] Go back to the cab."
+"script": "[strained] ...Rose. Grace. [firm, protective] Go back to the cab."
 },
 {
 "voice": "rose",
@@ -10807,7 +10807,7 @@
 "speaker": "Boppy",
 "text": "It’s a helm.",
 "ctx": "Scene ch14Open",
-"script": "[stiff, defensive] It’s a helm."
+"script": "[dramatic, defensive] It’s a helm."
 },
 {
 "voice": "rose",
@@ -10849,7 +10849,7 @@
 "speaker": "Boppy",
 "text": "Inside. She’s fine. She’s making a crisp. Don’t look at the porch.",
 "ctx": "Scene ch14Open",
-"script": "[gruff, evasive] Inside. She’s fine. She’s making a crisp. [low, hurried] Don’t look at the porch."
+"script": "[evasive] Inside. She’s fine. She’s making a crisp. [hurried] Don’t look at the porch."
 },
 {
 "voice": "rose",
@@ -10863,7 +10863,7 @@
 "speaker": "Boppy",
 "text": "That’s a decoration.",
 "ctx": "Scene ch14Open",
-"script": "[flat, gruff] That’s a decoration."
+"script": "[flat] That’s a decoration."
 },
 {
 "voice": "rose",
@@ -11101,7 +11101,7 @@
 "speaker": "Boppy",
 "text": "Then you’re here to leave.",
 "ctx": "Scene ch14Gate",
-"script": "[cold, flat] Then you’re here to leave."
+"script": "[dry, flat] Then you’re here to leave."
 },
 {
 "voice": "tom",
@@ -11122,7 +11122,7 @@
 "speaker": "Boppy",
 "text": "Stand down, Tommy. I don’t want to hurt you.",
 "ctx": "Scene ch14Gate",
-"script": "[heavy, pained] Stand down, Tommy. [low, anguished] I don’t want to hurt you."
+"script": "[weary, pained] Stand down, Tommy. [anguished] I don’t want to hurt you."
 },
 {
 "voice": "tom",
@@ -11136,7 +11136,7 @@
 "speaker": "Boppy",
 "text": "The gold hums. It likes it when somebody swings. I can’t stop it from liking it.",
 "ctx": "Scene ch14Gate",
-"script": "[low, troubled] The gold hums. It likes it when somebody swings. [helpless, ashamed] I can’t stop it from liking it."
+"script": "[troubled] The gold hums. It likes it when somebody swings. [helpless, ashamed] I can’t stop it from liking it."
 },
 {
 "voice": "rose",
@@ -11157,7 +11157,7 @@
 "speaker": "Boppy",
 "text": "...Last warning.",
 "ctx": "Scene ch14Gate",
-"script": "[heavy, resigned] ...Last warning."
+"script": "[weary, resigned] ...Last warning."
 },
 {
 "voice": "tom",
@@ -11192,14 +11192,14 @@
 "speaker": "Boppy",
 "text": "Ow.",
 "ctx": "Scene ch14After",
-"script": "[gruff, pained] Ow."
+"script": "[pained] Ow."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Ow. My back. My back is back.",
 "ctx": "Scene ch14After",
-"script": "[gruff, pained] Ow. My back. [dry, grumbling] My back is back."
+"script": "[pained] Ow. My back. [dry, grumbling] My back is back."
 },
 {
 "voice": "grace",
@@ -11220,14 +11220,14 @@
 "speaker": "Boppy",
 "text": "A man in a long coat came to the door. Very polite. He never took his hat off. He said he could stop the aches. Stop the slowing down.",
 "ctx": "Scene ch14After",
-"script": "[quiet, haunted] A man in a long coat came to the door. Very polite. He never took his hat off. [low, ashamed] He said he could stop the aches. [slow, tempted] Stop the slowing down."
+"script": "[quiet, haunted] A man in a long coat came to the door. Very polite. He never took his hat off. [ashamed] He said he could stop the aches. [slow, tempted] Stop the slowing down."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "He said the girls would be safe. In the good part, forever. All I had to do was stand here.",
 "ctx": "Scene ch14After",
-"script": "[thick, ashamed] He said the girls would be safe. In the good part, forever. [small, broken] All I had to do was stand here."
+"script": "[ashamed] He said the girls would be safe. In the good part, forever. [small, broken] All I had to do was stand here."
 },
 {
 "voice": "tom",
@@ -11255,7 +11255,7 @@
 "speaker": "Boppy",
 "text": "I’m seventy-some years old. Every year the girls get faster and I get slower. I’m not mad about it. I’m just... one day I won’t be able to catch you.",
 "ctx": "Scene ch14After",
-"script": "[gruff, honest] I’m seventy-some years old. Every year the girls get faster and I get slower. [quiet, tender] I’m not mad about it. [small, cracking] I’m just... one day I won’t be able to catch you."
+"script": "[honest] I’m seventy-some years old. Every year the girls get faster and I get slower. [quiet, tender] I’m not mad about it. [small, cracking] I’m just... one day I won’t be able to catch you."
 },
 {
 "voice": "boppy",
@@ -11325,7 +11325,7 @@
 "speaker": "Boppy",
 "text": "Rosie. That’s the best offer I’ve had in eleven years.",
 "ctx": "Scene ch14After",
-"script": "[choked, warm] Rosie. [gruff, tender] That’s the best offer I’ve had in eleven years."
+"script": "[choked, warm] Rosie. [tender] That’s the best offer I’ve had in eleven years."
 },
 {
 "voice": "amy",
@@ -11374,7 +11374,7 @@
 "speaker": "Boppy",
 "text": "Take the key, Tommy. It opens the gate. It also opens the door. It doesn’t matter which. Nobody gets past us.",
 "ctx": "Scene ch14After",
-"script": "[gruff, solemn] Take the key, Tommy. [firm, steady] It opens the gate. It also opens the door. It doesn’t matter which. [proud, steady] Nobody gets past us."
+"script": "[solemn] Take the key, Tommy. [firm, steady] It opens the gate. It also opens the door. It doesn’t matter which. [proud, steady] Nobody gets past us."
 },
 {
 "voice": "tom",
@@ -11388,7 +11388,7 @@
 "speaker": "Boppy",
 "text": "Nobody gets past us.",
 "ctx": "Scene ch16Open",
-"script": "[gruff, solemn] Nobody gets past us."
+"script": "[solemn] Nobody gets past us."
 },
 {
 "voice": "tom",
@@ -11486,14 +11486,14 @@
 "speaker": "Boppy",
 "text": "Nobody touch the peppers. Those came off the plant by the window. They are not for the faint of heart.",
 "ctx": "Scene ch15Open",
-"script": "[gruff, warning] Nobody touch the peppers. [proud, gruff] Those came off the plant by the window. [low, relishing] They are not for the faint of heart."
+"script": "[warning] Nobody touch the peppers. [proud] Those came off the plant by the window. [relishing] They are not for the faint of heart."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "TNB. You work in a fancy restaurant. You eat anything?",
 "ctx": "Scene ch15Open",
-"script": "[gruff, sly] TNB. You work in a fancy restaurant. [challenging, dry] You eat anything?"
+"script": "[sly] TNB. You work in a fancy restaurant. [challenging, dry] You eat anything?"
 },
 {
 "voice": "tnb",
@@ -11521,7 +11521,7 @@
 "speaker": "Boppy",
 "text": "One pepper each. You and me. First one to reach for water loses.",
 "ctx": "Scene ch15Open",
-"script": "[gruff, challenging] One pepper each. You and me. [gleeful, daring] First one to reach for water loses."
+"script": "[challenging] One pepper each. You and me. [gleeful, daring] First one to reach for water loses."
 },
 {
 "voice": "amy",
@@ -11563,7 +11563,7 @@
 "speaker": "Boppy",
 "text": "...Citrus.",
 "ctx": "Scene ch15Open",
-"script": "[hoarse, suspicious] ...Citrus."
+"script": "[suspicious] ...Citrus."
 },
 {
 "voice": "tom",
@@ -11577,7 +11577,7 @@
 "speaker": "Boppy",
 "text": "It’s warm in here. It’s the oven. Deedee, what is the oven doing?",
 "ctx": "Scene ch15Open",
-"script": "[hoarse, flustered] It’s warm in here. It’s the oven. [gruff, accusing] Deedee, what is the oven doing?"
+"script": "[flustered] It’s warm in here. It’s the oven. [accusing] Deedee, what is the oven doing?"
 },
 {
 "voice": "deedee",
@@ -11605,7 +11605,7 @@
 "speaker": "Boppy",
 "text": "It was doing something BEFORE.",
 "ctx": "Scene ch15Open",
-"script": "[hoarse, defensive] It was doing something BEFORE."
+"script": "[defensive] It was doing something BEFORE."
 },
 {
 "voice": "tnb",
@@ -11619,7 +11619,7 @@
 "speaker": "Boppy",
 "text": "...You’ll do.",
 "ctx": "Scene ch15Open",
-"script": "[gruff, grudging] ...You’ll do."
+"script": "[grudging] ...You’ll do."
 },
 {
 "voice": "deedee",
@@ -11724,7 +11724,7 @@
 "speaker": "Boppy",
 "text": "Nobody gets past us. Nobody comes to this table and shushes my wife’s cooking.",
 "ctx": "Scene ch15Open",
-"script": "[gruff, fierce] Nobody gets past us. [indignant, protective] Nobody comes to this table and shushes my wife’s cooking."
+"script": "[fired up] Nobody gets past us. [indignant, protective] Nobody comes to this table and shushes my wife’s cooking."
 },
 {
 "voice": "deedee",
@@ -11738,7 +11738,7 @@
 "speaker": "Boppy",
 "text": "I’ll do it with my back.",
 "ctx": "Scene ch15Open",
-"script": "[gruff, stubborn] I’ll do it with my back."
+"script": "[stubborn] I’ll do it with my back."
 },
 {
 "voice": "tom",
@@ -11864,7 +11864,7 @@
 "speaker": "Boppy",
 "text": "Deedee. Fifty-one years.",
 "ctx": "Scene ch15After",
-"script": "[gruff, tender] Deedee. Fifty-one years."
+"script": "[tender] Deedee. Fifty-one years."
 },
 {
 "voice": "deedee",
@@ -11878,7 +11878,7 @@
 "speaker": "Boppy",
 "text": "Don’t make it weird.",
 "ctx": "Scene ch15After",
-"script": "[gruff, sheepish] Don’t make it weird."
+"script": "[sheepish] Don’t make it weird."
 },
 {
 "voice": "tom",
@@ -11920,7 +11920,7 @@
 "speaker": "Boppy",
 "text": "A grown man in a grey suit on a Tuesday. That’s the whole problem right there.",
 "ctx": "Scene ch16Open",
-"script": "[gruff, unimpressed] A grown man in a grey suit on a Tuesday. [grumbling, dry] That’s the whole problem right there."
+"script": "[unimpressed] A grown man in a grey suit on a Tuesday. [grumbling, dry] That’s the whole problem right there."
 },
 {
 "voice": "?Marlowe",
@@ -12018,7 +12018,7 @@
 "speaker": "Boppy",
 "text": "I AM standing up straight. This is as straight as I go.",
 "ctx": "Scene ch16Open",
-"script": "[indignant, grumbling] I AM standing up straight. [gruff, dry] This is as straight as I go."
+"script": "[indignant, grumbling] I AM standing up straight. [dry] This is as straight as I go."
 },
 {
 "voice": "tom",
@@ -12088,7 +12088,7 @@
 "speaker": "Boppy",
 "text": "That’s the voice. That’s the fella with the deal.",
 "ctx": "Scene ch16Open",
-"script": "[low, gruff] That’s the voice. [bitter, grim] That’s the fella with the deal."
+"script": "[playful] That’s the voice. [huffy, dramatic] That’s the fella with the deal."
 },
 {
 "voice": "?Vance",
@@ -12200,7 +12200,7 @@
 "speaker": "Boppy",
 "text": "...And counting.",
 "ctx": "Scene ch16Open",
-"script": "[gruff, tender] ...And counting."
+"script": "[tender] ...And counting."
 },
 {
 "voice": "rose",
@@ -14244,7 +14244,7 @@
 "speaker": "Boppy",
 "text": "Oh. Oh, my back. My back is going to be talking about this for a week.",
 "ctx": "Scene ch19After",
-"script": "[groggy, creaky] Oh. Oh, my back. [gruff, rueful] My back is going to be talking about this for a week."
+"script": "[groggy, creaky] Oh. Oh, my back. [rueful] My back is going to be talking about this for a week."
 },
 {
 "voice": "deedee",
@@ -14272,7 +14272,7 @@
 "speaker": "Boppy",
 "text": "Which one of you is eating the peppers raw?",
 "ctx": "Scene ch19After",
-"script": "[gruff, suspicious] Which one of you is eating the peppers raw?"
+"script": "[suspicious] Which one of you is eating the peppers raw?"
 },
 {
 "voice": "grace",
@@ -14286,7 +14286,7 @@
 "speaker": "Boppy",
 "text": "Hand me one. For my knees.",
 "ctx": "Scene ch19After",
-"script": "[gruff, hopeful] Hand me one. [dry, deadpan] For my knees."
+"script": "[hopeful] Hand me one. [dry, deadpan] For my knees."
 },
 {
 "voice": "tom",
@@ -14314,7 +14314,7 @@
 "speaker": "Boppy",
 "text": "Then we finish eating first.",
 "ctx": "Scene ch19After",
-"script": "[gruff, unbothered] Then we finish eating first."
+"script": "[unbothered] Then we finish eating first."
 },
 {
 "voice": "?Floor 59",
@@ -14405,7 +14405,7 @@
 "speaker": "Boppy",
 "text": "That is the biggest clock I have ever seen. And I have a lot of clocks. They all run fast, for my stomach.",
 "ctx": "Scene ch20Open",
-"script": "[gruff, impressed] That is the biggest clock I have ever seen. [dry, grumbling] And I have a lot of clocks. [deadpan] They all run fast, for my stomach."
+"script": "[impressed] That is the biggest clock I have ever seen. [dry, grumbling] And I have a lot of clocks. [deadpan] They all run fast, for my stomach."
 },
 {
 "voice": "deedee",
@@ -14552,7 +14552,7 @@
 "speaker": "Boppy",
 "text": "I was a statue for a week and my back did not get a single day off. I would like to file a complaint.",
 "ctx": "Scene ch20Heart",
-"script": "[gruff, aggrieved] I was a statue for a week and my back did not get a single day off. [dry, formal] I would like to file a complaint."
+"script": "[aggrieved] I was a statue for a week and my back did not get a single day off. [dry, formal] I would like to file a complaint."
 },
 {
 "voice": "deedee",
@@ -14748,7 +14748,7 @@
 "speaker": "Boppy",
 "text": "The last one is always the hardest. That is why I put the pepper first.",
 "ctx": "Scene ch20Shatter",
-"script": "[gruff, weary] The last one is always the hardest. [deadpan, wry] That is why I put the pepper first."
+"script": "[weary] The last one is always the hardest. [deadpan, wry] That is why I put the pepper first."
 },
 {
 "voice": "tom",
@@ -14818,7 +14818,7 @@
 "speaker": "Boppy",
 "text": "And the crisp is excellent.",
 "ctx": "Scene ch20Calm",
-"script": "[dry, gruff] And the crisp is excellent."
+"script": "[dry] And the crisp is excellent."
 },
 {
 "voice": "?Vance",
@@ -14916,7 +14916,7 @@
 "speaker": "Boppy",
 "text": "And bring a chair. We are short a chair.",
 "ctx": "Scene ch20Calm",
-"script": "[gruff, kind] And bring a chair. [dry, grumbling] We are short a chair."
+"script": "[kind] And bring a chair. [dry, grumbling] We are short a chair."
 },
 {
 "voice": "amy",
@@ -15091,7 +15091,7 @@
 "speaker": "Boppy",
 "text": "Does it have a recliner?",
 "ctx": "Scene ch20Calm",
-"script": "[gruff, hopeful] Does it have a recliner?"
+"script": "[hopeful] Does it have a recliner?"
 },
 {
 "voice": "?Vance",
@@ -15168,7 +15168,7 @@
 "speaker": "Boppy",
 "text": "Both of those are true.",
 "ctx": "Scene ch20Calm",
-"script": "[dry, gruff] Both of those are true."
+"script": "[dry] Both of those are true."
 },
 {
 "voice": "amy",
@@ -15672,7 +15672,7 @@
 "speaker": "Boppy",
 "text": "I heard. I'm sitting. The knee.",
 "ctx": "",
-"script": "[gruff, flat] I heard. [pained, dry] I'm sitting. The knee."
+"script": "[flat] I heard. [pained, dry] I'm sitting. The knee."
 },
 {
 "voice": "deedee",
@@ -15707,7 +15707,7 @@
 "speaker": "Boppy",
 "text": "I didn't. I said it to Tom.",
 "ctx": "",
-"script": "[innocent, dry] I didn't. [deadpan, gruff] I said it to Tom."
+"script": "[innocent, dry] I didn't. [deadpan] I said it to Tom."
 },
 {
 "voice": "deedee",
@@ -15749,14 +15749,14 @@
 "speaker": "Boppy",
 "text": "My peppers. Out back, in the garden. The hose flinched.",
 "ctx": "",
-"script": "[gruff, grudging] My peppers. Out back, in the garden. [dry, deadpan] The hose flinched."
+"script": "[grudging] My peppers. Out back, in the garden. [dry, deadpan] The hose flinched."
 },
 {
 "voice": "boppy",
 "speaker": "Boppy",
 "text": "Don't take the ghost one. The ghost one is MINE.",
 "ctx": "",
-"script": "[sharp, warning] Don't take the ghost one. [firm, gruff] The ghost one is MINE."
+"script": "[sharp, warning] Don't take the ghost one. [firm] The ghost one is MINE."
 },
 {
 "voice": "grace",
@@ -15770,7 +15770,7 @@
 "speaker": "Boppy",
 "text": "The one that's looking at you.",
 "ctx": "",
-"script": "[low, ominous] The one that's looking at you."
+"script": "[ominous] The one that's looking at you."
 },
 {
 "voice": "tom",
@@ -15812,7 +15812,7 @@
 "speaker": "Boppy",
 "text": "(from the window) That's enough peppers! Leave the ghost one!",
 "ctx": "",
-"script": "[hollering, gruff] (from the window) That's enough peppers! [firm, warning] Leave the ghost one!"
+"script": "[hollering] (from the window) That's enough peppers! [firm, warning] Leave the ghost one!"
 },
 {
 "voice": "rose",
@@ -16302,7 +16302,7 @@
 "speaker": "Boppy",
 "text": "Nine scoops. In my day we got one scoop. And a lecture.",
 "ctx": "",
-"script": "[gruff, nostalgic] Nine scoops. In my day we got one scoop. [dry, wry] And a lecture."
+"script": "[nostalgic] Nine scoops. In my day we got one scoop. [dry, wry] And a lecture."
 },
 {
 "voice": "pip",
@@ -16337,7 +16337,7 @@
 "speaker": "Boppy",
 "text": "Nobody told me there'd be a FREEZER at the table.",
 "ctx": "",
-"script": "[suspicious, gruff] Nobody told me there'd be a FREEZER at the table."
+"script": "[suspicious] Nobody told me there'd be a FREEZER at the table."
 },
 {
 "voice": "deedee",
@@ -17534,21 +17534,21 @@
 "speaker": "boppy",
 "text": "Tom! Good. I'm not feeling good. Something with the stomach. Sit, I'll tell you about it.",
 "ctx": "",
-"script": "[gruff, glad] Tom! Good. [pained] I'm not feeling good. Something with the stomach. [eager, gruff] Sit, I'll tell you about it."
+"script": "[glad] Tom! Good. [pained] I'm not feeling good. Something with the stomach. [eager] Sit, I'll tell you about it."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Grace, Rose, come give Boppy a hug. Gently. The stomach. And slow down, you two walk too fast.",
 "ctx": "",
-"script": "[gentle, fond] Grace, Rose, come give Boppy a hug. [pained, careful] Gently. The stomach. [gruff, grumbling] And slow down, you two walk too fast."
+"script": "[gentle, fond] Grace, Rose, come give Boppy a hug. [pained, careful] Gently. The stomach. [grumbling] And slow down, you two walk too fast."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Did I ever tell you I was a champion cross country runner in college? Your mother has heard it. Sit down.",
 "ctx": "",
-"script": "[proud, gruff] Did I ever tell you I was a champion cross country runner in college? [dry, tired] Your mother has heard it. [firm, commanding] Sit down."
+"script": "[proud] Did I ever tell you I was a champion cross country runner in college? [dry, tired] Your mother has heard it. [firm, bossy] Sit down."
 },
 {
 "voice": "boppy",
@@ -17562,28 +17562,28 @@
 "speaker": "boppy",
 "text": "Assistant Deputy Warden at Rikers. All those years, nobody got past me. Except that fish.",
 "ctx": "",
-"script": "[gravelly, proud] Assistant Deputy Warden at Rikers. All those years, nobody got past me. [rueful, gruff] Except that fish."
+"script": "[proud] Assistant Deputy Warden at Rikers. All those years, nobody got past me. [rueful] Except that fish."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "At Rikers we did headcounts. Grace, one. Rose, two. Tom, you're dragging.",
 "ctx": "",
-"script": "[gruff, clipped] At Rikers we did headcounts. Grace, one. Rose, two. [dry, teasing] Tom, you're dragging."
+"script": "[brisk] At Rikers we did headcounts. Grace, one. Rose, two. [dry, teasing] Tom, you're dragging."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "In college I ran cross country. Champion. Through the woods, up the hills, never breathed hard.",
 "ctx": "",
-"script": "[gruff, proud] In college I ran cross country. Champion. [wistful, warm] Through the woods, up the hills, never breathed hard."
+"script": "[proud] In college I ran cross country. Champion. [wistful, warm] Through the woods, up the hills, never breathed hard."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Did I tell you about the championship race? I did? Sit down. I'll tell you again.",
 "ctx": "",
-"script": "[gruff, eager] Did I tell you about the championship race? [dry, unbothered] I did? [relishing, firm] Sit down. I'll tell you again."
+"script": "[eager] Did I tell you about the championship race? [dry, unbothered] I did? [relishing, firm] Sit down. I'll tell you again."
 },
 {
 "voice": "boppy",
@@ -17597,28 +17597,28 @@
 "speaker": "boppy",
 "text": "Slow down, Tom. Who walks this fast? I was a champion runner and I never walked this fast.",
 "ctx": "",
-"script": "[breathless, grumbling] Slow down, Tom. Who walks this fast? [gruff, proud] I was a champion runner and I never walked this fast."
+"script": "[breathless, grumbling] Slow down, Tom. Who walks this fast? [proud] I was a champion runner and I never walked this fast."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Deedee says I'm not allowed near the pond. The pond says otherwise.",
 "ctx": "",
-"script": "[gruff, sly] Deedee says I'm not allowed near the pond. [dry, amused] The pond says otherwise."
+"script": "[sly] Deedee says I'm not allowed near the pond. [dry, amused] The pond says otherwise."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Grace, Rose, who's the strongest grandpa? Correct. Now help me up.",
 "ctx": "",
-"script": "[gruff, fond] Grace, Rose, who's the strongest grandpa? Correct. [strained, dry] Now help me up."
+"script": "[fond] Grace, Rose, who's the strongest grandpa? Correct. [strained, dry] Now help me up."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "She's looking for her glasses again. They're on her head. I'm not saying anything. I'm saying it to you.",
 "ctx": "",
-"script": "[low, conspiratorial] She's looking for her glasses again. They're on her head. [deadpan, sly] I'm not saying anything. I'm saying it to you."
+"script": "[conspiratorial] She's looking for her glasses again. They're on her head. [deadpan, sly] I'm not saying anything. I'm saying it to you."
 },
 {
 "voice": "ellie",
@@ -23715,7 +23715,7 @@
 "speaker": "boppy",
 "text": "Not today. My stomach is doing something. Take Deedee. She already has her shoes on.",
 "ctx": "",
-"script": "[gruff, queasy] Not today. My stomach is doing something. [dry, coaxing] Take Deedee. [amused, gruff] She already has her shoes on."
+"script": "[queasy] Not today. My stomach is doing something. [dry, coaxing] Take Deedee. [amused] She already has her shoes on."
 },
 {
 "voice": "sal",
@@ -23806,7 +23806,7 @@
 "speaker": "boppy",
 "text": "A school? At night? My stomach says no. My knees say absolutely not.",
 "ctx": "",
-"script": "[gruff, incredulous] A school? At night? [dry, emphatic] My stomach says no. My knees say absolutely not."
+"script": "[incredulous] A school? At night? [dry, emphatic] My stomach says no. My knees say absolutely not."
 },
 {
 "voice": "sal",
@@ -23855,7 +23855,7 @@
 "speaker": "boppy",
 "text": "A library? I read a book once. 1974. It was about fish. It wasn't accurate.",
 "ctx": "",
-"script": "[gruff, scoffing] A library? I read a book once. [dry, deadpan] 1974. It was about fish. [grumbling, flat] It wasn't accurate."
+"script": "[scoffing] A library? I read a book once. [dry, deadpan] 1974. It was about fish. [grumbling, flat] It wasn't accurate."
 },
 {
 "voice": "sal",
@@ -23904,7 +23904,7 @@
 "speaker": "boppy",
 "text": "Not yet. I'm still looking for the tie. I have one tie.",
 "ctx": "",
-"script": "[gruff, flustered] Not yet. I'm still looking for the tie. [dry, deadpan] I have one tie."
+"script": "[flustered] Not yet. I'm still looking for the tie. [dry, deadpan] I have one tie."
 },
 {
 "voice": "sal",
@@ -23932,7 +23932,7 @@
 "speaker": "boppy",
 "text": "An airport? At midnight? I'm still recovering from the tie.",
 "ctx": "",
-"script": "[gruff, disbelieving] An airport? At midnight? [grumbly, wry] I'm still recovering from the tie."
+"script": "[disbelieving] An airport? At midnight? [grumbly, wry] I'm still recovering from the tie."
 },
 {
 "voice": "sal",
@@ -24037,7 +24037,7 @@
 "speaker": "boppy",
 "text": "Ice cream? My knee says sit. My knee has been saying sit since 1994.",
 "ctx": "",
-"script": "[gruff, pained] Ice cream? My knee says sit. [dry, deadpan] My knee has been saying sit since 1994."
+"script": "[pained] Ice cream? My knee says sit. [dry, deadpan] My knee has been saying sit since 1994."
 },
 {
 "voice": "sal",
@@ -24359,28 +24359,28 @@
 "speaker": "boppy",
 "text": "My stomach isn't right and the fish aren't biting. Want an old man along? Just don't walk too fast.",
 "ctx": "",
-"script": "[gruff, pained] My stomach isn't right and the fish aren't biting. [grudging, hopeful] Want an old man along? [dry, warning] Just don't walk too fast."
+"script": "[pained] My stomach isn't right and the fish aren't biting. [grudging, hopeful] Want an old man along? [dry, warning] Just don't walk too fast."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Good. Somebody grab my cap. And slow down. I was a champion, you know.",
 "ctx": "",
-"script": "[gruff, pleased] Good. Somebody grab my cap. And slow down. [boastful, warm] I was a champion, you know."
+"script": "[pleased] Good. Somebody grab my cap. And slow down. [boastful, warm] I was a champion, you know."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Suit yourself. The recliner and I have an understanding.",
 "ctx": "",
-"script": "[gruff, dry] Suit yourself. [fond, deadpan] The recliner and I have an understanding."
+"script": "[dry] Suit yourself. [fond, deadpan] The recliner and I have an understanding."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Somebody has to sit this one out. My stomach volunteers, but the rest of me is coming.",
 "ctx": "",
-"script": "[gruff, wry] Somebody has to sit this one out. [dry, resigned] My stomach volunteers, but the rest of me is coming."
+"script": "[wry] Somebody has to sit this one out. [dry, resigned] My stomach volunteers, but the rest of me is coming."
 },
 {
 "voice": "boppy",
@@ -24394,21 +24394,21 @@
 "speaker": "boppy",
 "text": "At Rikers I did the headcount. One, two, three, Tom. Everybody here.",
 "ctx": "",
-"script": "[gruff, proud] At Rikers I did the headcount. One, two, three, Tom. [satisfied, dry] Everybody here."
+"script": "[proud] At Rikers I did the headcount. One, two, three, Tom. [satisfied, dry] Everybody here."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "My stomach is talking. It says no more peppers. My stomach is wrong.",
 "ctx": "",
-"script": "[gruff, pained] My stomach is talking. It says no more peppers. [defiant, amused] My stomach is wrong."
+"script": "[pained] My stomach is talking. It says no more peppers. [defiant, amused] My stomach is wrong."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "That Grump owes me a fish. Tell him.",
 "ctx": "",
-"script": "[gruff, aggrieved] That Grump owes me a fish. [grumbling, firm] Tell him."
+"script": "[aggrieved] That Grump owes me a fish. [grumbling, firm] Tell him."
 },
 {
 "voice": "tnb",
@@ -24527,14 +24527,14 @@
 "speaker": "boppy",
 "text": "Six hours in a seat? My stomach says no. I say no. We agree for once.",
 "ctx": "",
-"script": "[gruff, pained] Six hours in a seat? My stomach says no. [dry, firm] I say no. [amused, rueful] We agree for once."
+"script": "[pained] Six hours in a seat? My stomach says no. [dry, firm] I say no. [amused, rueful] We agree for once."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Go on. The recliner and I'll hold down the fort.",
 "ctx": "",
-"script": "[gruff, warm] Go on. [dry, easy] The recliner and I'll hold down the fort."
+"script": "[warm] Go on. [dry, easy] The recliner and I'll hold down the fort."
 },
 {
 "voice": "sal",
@@ -24583,14 +24583,14 @@
 "speaker": "boppy",
 "text": "Los Angeles again? My back just got home from the marsh.",
 "ctx": "",
-"script": "[gruff, pained] Los Angeles again? [dry, aggrieved] My back just got home from the marsh."
+"script": "[pained] Los Angeles again? [dry, aggrieved] My back just got home from the marsh."
 },
 {
 "voice": "boppy",
 "speaker": "boppy",
 "text": "Go. If you see a pepper out there, bring it back. I'll judge it.",
 "ctx": "",
-"script": "[gruff, warm] Go. [dry, sly] If you see a pepper out there, bring it back. [deadpan] I'll judge it."
+"script": "[warm] Go. [dry, sly] If you see a pepper out there, bring it back. [deadpan] I'll judge it."
 },
 {
 "voice": "tom",
