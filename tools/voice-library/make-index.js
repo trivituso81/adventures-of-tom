@@ -96,15 +96,16 @@ for(const id in DC.voices) vset('dialog',id,DC.voices[id]);
 // A character with battle lines but no battle voice yet (Justin, 2026-10-31) uses the same voice as his dialogue.
 for(const ch in LINES) if(!voices['battle|'+ch]&&DC.voices[ch]) vset('battle',ch,Object.assign({},DC.voices[ch],ch==='justin'?{direction:'thick New York accent'}:{}));
 // Boppy and Justin always carry "thick New York accent" (Tom, 2026-11-01 20:34: the clips lose the accent without it).
-// Tom 21:08: Boppy is sweet, fun-loving, a joker and a complainer (NOT deep, gravelly or gruff); Justin is direct and serious
-// (NOT warm), and laughs out loud only when the moment is right. So the voice direction is the accent alone (the old
-// "deep gravelly voice" is gone), Boppy's similarity is 0.75 (1.0 pins the cloned voice's gravel, 0.75 lets the tags steer), and the
-// accent is written into the first [bracket] of every Boppy and Justin script at the end of this file so Tom can SEE it.
+// The baked takes that kept the accent repeated it at the start of EVERY [bracket] ("[thick New York accent, hissing] ..."), so the
+// accent is written into every bracket of every Boppy and Justin script (end of this file), and the voice direction carries it too.
+// Tom 21:08: Boppy is sweet, fun-loving, a joker and a complainer (no "gruff", no "gravelly"; scripts say so). Tom 21:25: Boppy then
+// sounded too high, so his voice direction is "thick New York accent, deep voice" and his similarity is back at the voice entry's 1.0
+// (0.75 made him higher); merges deepen his clips again (pitch 0.9). Justin is direct and serious (no "warm").
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
-  v.direction='thick New York accent'; if(id==='boppy') v.similarity=0.75; }
+  v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
-const fxOf=(voice,speaker,battle)=>battle?false:!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
+const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
 
 // ---------- items ----------
 const files=[], fidx=f=>{ let i=files.indexOf(f); if(i<0){ files.push(f); i=files.length-1; } return i; };
@@ -226,10 +227,11 @@ console.log('lines labelled with a move:',items.filter(x=>x.mv).length,'| kinds 
 items.forEach((it,i)=>it.i=i);
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }
-// Show the accent: write it into the first [bracket] of every Boppy and Justin script (finalText skips parts a script already has).
-for(const it of items) if(it.s&&(it.v==='boppy'||it.v==='justin')&&!/new york/i.test(it.s)){
-  const m=it.s.match(/^\s*\[([^\]]*)\]/);
-  it.s=m?'[thick New York accent, '+m[1].trim()+']'+it.s.slice(m[0].length):'[thick New York accent] '+it.s; }
+// Show the accent: write it at the start of EVERY [bracket] of every Boppy and Justin script, the way the baked takes had it
+// (finalText skips parts a script already has).
+for(const it of items) if(it.s&&(it.v==='boppy'||it.v==='justin')){
+  it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>/new york/i.test(t)?m:'[thick New York accent'+(t.trim()?', '+t.trim():'')+']');
+  if(!/^\s*\[/.test(it.s)) it.s='[thick New York accent] '+it.s; }
 const out={made:new Date().toISOString().slice(0,10),files,voices,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};
 fs.writeFileSync('data/voice-index.json',JSON.stringify(out));

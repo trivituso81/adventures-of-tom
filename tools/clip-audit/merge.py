@@ -13,7 +13,7 @@ GRACE='asetrate=32000*1.18,aresample=32000,rubberband=pitch=%s:tempo=%s:formant=
 def fx_for(v,sp):
     sf=SFX.get(sp)
     if sf: return FX.get(sf)
-    # Boppy is no longer deepened (Tom 2026-11-01 21:08)
+    if v=='boppy': return FX['boppy']
     f=(CAST['voices'].get(v) or {}).get('fx'); return FX.get(f) if f else None
 def proc(c):
     d=tempfile.mkdtemp(); i=d+'/i.mp3'; o=d+'/o.mp3'; open(i,'wb').write(base64.b64decode(c['mp3']))

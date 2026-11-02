@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 65): Boppy back to a deep voice, accent in every tag (`persona2`)
+
+- Tom (21:25): Boppy's voice sounds too high now, and Justin has no accent.
+- Cause (fact for the settings, inference for the sound): in `persona1` I lowered Boppy's similarity from 1.0 to 0.75, dropped "deep gravelly voice" from his direction and removed the 0.9 pitch deepening from the merge tools; those three together raise the pitch. For Justin, his baked takes that had the accent wrote "thick New York accent" at the start of EVERY bracket (checked in `justin-dialogue.json` and the baked battle record), while `persona1` put it only in the first bracket and Justin's voice (AoT Justin, a custom voice) has no accent of its own.
+- Fix: the accent is now at the start of every bracket of all 278 Boppy and Justin scripts; Boppy's voice direction is "thick New York accent, deep voice" (no gravelly, no gruff in scripts), similarity back to 1.0 (Library index and bake list), merge deepening (pitch 0.9) restored in `merge-local.js` and `merge.py`. Justin settings unchanged (similarity 0.8). docs/VOICE_LIBRARY.md updated.
+- Tested: every bracket of every Boppy and Justin take sent by the Library starts with the accent, "deep voice" appears once for Boppy, no gruff or gravel; voice-library test ALL PASS; smoke FAILS: [].
+- Not heard. If Justin still has no accent, the voice entry itself is the cause (AoT Justin, id Pp9gl3BrnVq62dIWU2sx): try raising his similarity to 1.0 or a different base voice. If Boppy is still high, the fix is "very deep voice" in his direction.
+
 ## 2026-11-01 (21:25) `size6`: NPCs drawn at the party's height on the map and in houses (Tom)
 - Tom: "in the overworld, scale up NPCs so they are the same height as the party", then "in houses, scale NPCs down so they are the same height as the party".
 - Call made: every character on a map now uses the party's scale (`owBoost` in `engine/town-render.js`): 1.265 on the streets (NPCs were 1.0, so 26% bigger), 0.8625 in painted houses (NPCs were 1.15, so 25% smaller), 1.15 in rooms with no house painting (unchanged). `OW_NPC_INDOOR` is retired. This replaces the 17:41 `size4` request (NPCs 15% larger in houses). Speech bubbles and head anchors follow the new size.
