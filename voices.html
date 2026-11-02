@@ -139,9 +139,11 @@ const whoName=it=>it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;
 function finalText(it){
   const v=voiceOf(it)||{}, d=(v.direction||'').trim().replace(/^\[|\]$/g,'');
   const sc=scriptOf(it).trim().replace(/’/g,"'"), m=sc.match(/^\[([^\]]*)\]/), have=m?m[1]:'';
-  if(!d||have.toLowerCase().includes(d.toLowerCase())) return sc;
-  if(m) return '['+[d].concat(have.trim()?[have.trim()]:[]).join(', ')+']'+sc.slice(m[0].length);
-  return '['+d+'] '+sc;
+  // The voice direction may hold several parts ("deep gravelly voice, thick New York accent"); add only the parts the script lacks.
+  const hl=have.toLowerCase(), add=d.split(',').map(s=>s.trim()).filter(p=>p&&!hl.includes(p.toLowerCase()));
+  if(!add.length) return sc;
+  if(m) return '['+add.concat(have.trim()?[have.trim()]:[]).join(', ')+']'+sc.slice(m[0].length);
+  return '['+add.join(', ')+'] '+sc;
 }
 
 // ---------- storage ----------

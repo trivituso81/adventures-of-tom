@@ -95,6 +95,14 @@ for(const ch in BC.voices) vset('battle',ch,BC.voices[ch]);
 for(const id in DC.voices) vset('dialog',id,DC.voices[id]);
 // A character with battle lines but no battle voice yet (Justin, 2026-10-31) uses the same voice as his dialogue.
 for(const ch in LINES) if(!voices['battle|'+ch]&&DC.voices[ch]) vset('battle',ch,Object.assign({},DC.voices[ch],ch==='justin'?{direction:'thick New York accent'}:{}));
+// Boppy and Justin always carry "thick New York accent" (Tom, 2026-11-01 20:34: the clips lose the accent without it). It rides on
+// the VOICE direction, not in each script: the Library and the bake page put the voice direction first in the first [bracket] of
+// every take, the way the baked clips were made ("[deep gravelly voice, thick New York accent, ...]"), and skip any part a script
+// already has. Scripts stay free of accent words, so tools/voice-library/apply-scripts.py rules are unchanged.
+for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
+  const parts=(v.direction||'').split(',').map(s=>s.trim()).filter(Boolean);
+  if(!parts.some(p=>/new york/i.test(p))) parts.push('thick New York accent');
+  v.direction=parts.join(', '); }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
 const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
@@ -164,8 +172,8 @@ for(const l of H){
   items.push(it); nNo++;
 }
 for(const it of items) if(it.v[0]==='?'){ /* listed under the speaker's own name */ }
-// Justin's scripts no longer carry an accent tag (Tom, 2026-11-01: tags describe the voice only, no accent words; the cast
-// voice carries the accent). Until 2026-11-01 every Justin script was prefixed with 'thick New York accent'.
+// Scripts carry no accent words (Tom, 2026-11-01: tags describe the voice only). Boppy and Justin are the exception, and their
+// accent comes from the voice direction set above ("thick New York accent", Tom 2026-11-01 20:34), not from the scripts.
 // ---------- which ability or combo a battle line belongs to (Tom, 2026-10-31) ----------
 // Every battle line whose kind is an ability key, a Tombo, a Director's Cut or a Family Finish gets it.mv = [[type, name, with]]
 // so the Voice Library can say, on the row itself, which move the clip belongs to. Names come from data/abilities.js (B8_KITS)
