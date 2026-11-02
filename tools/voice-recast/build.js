@@ -15,11 +15,11 @@ for(const f of fs.readdirSync(R+'data/voice')) if(/^dialog-ch\d+\.js$/.test(f)) 
 const CFG={
   deedee:{
     accent:'natural Long Island accent',
-    direction:'firm, brisk, commanding, no-nonsense; warm only when the moment calls for it, never giggly',
+    direction:'grounded and natural; warm and loving when the moment calls for it, firm and commanding when it calls for that; never giggly, never harsh by default',
     stability:0.5, similarity:0.85,
     old_id:VC.voices.deedee.voice_id, old_name:VC.voices.deedee.name,
-    desc:'A woman in her seventies who sounds about fifty-five. A strong, clear, confident voice with real authority: a retired nurse and mother who has run a household and a hospital ward for decades and takes no nonsense. Usually brisk, firm and commanding, direct, dry when unimpressed, able to stop a room with one word. Never giggly, breathy, sing-song, gushing, thin or wobbly, and not laughing through her lines. Warm and loving only when the moment calls for it, and then sincere and low-key rather than bubbly. A natural Long Island New York accent. Clean studio recording.',
-    sample:'Tommy, sit down. Shoes off, the floors are just mopped, and I\'m not going to ask you twice. I don\'t care who started it, the two of you will apologize and then we will eat. Now come here, honey. Deedee loves you to the moon and back. Eat your dinner.'
+    desc:'A woman in her seventies who sounds about fifty-five. A grounded, natural, expressive voice with a clear, steady tone: a retired nurse and mother, capable and in charge, who has a lot of range. Her everyday voice is calm, warm and matter-of-fact. She turns tender and loving when someone needs comforting, and turns firm and commanding, with real authority, when someone needs setting straight, then goes right back to warm. Smiles easily but never giggly, breathy, sing-song or gushing, and never stern all the time. Not thin or wobbly. A natural Long Island New York accent. Clean studio recording.',
+    sample:'Come here, honey, let me look at you. You\'re too thin. Sit down and eat. Now, you two. Shoes off, the floors are just mopped, and I\'m not going to ask twice. I don\'t care who started it, you will both apologize. Good. Come here. Deedee loves you to the moon and back.'
   },
   ellie:{
     accent:'thick old Long Island accent',
