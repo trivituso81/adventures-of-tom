@@ -1,3 +1,13 @@
+## 2026-11-02 (74): Rivituso Row v3 painting installed with cutouts (`row3`)
+
+- Installed Tom's Row v3 painting (1310x1201, scaled to 1536x1408, 24x22 tiles) as art/row.webp, plus art/row-fg.webp, a transparent cutout layer so Tom walks behind trees, lamps, posts, roofs, eaves, awnings and tall props (26 zones in PLATE_BEHIND.row, built by tools/make_row_fg.py).
+- Cutout method (fact): the four generator mask pictures are used only as masks. Each piece is aligned to the painting, snapped to the real edge, and the pixels come from Tom's painting. The masks and original are kept in docs/reference/.
+- Not cut: the five grouped prop clusters (alignment failed) and the thin cafe chair back (only partly cut). Both are minor.
+- Layout rebuilt: walk map from Tom's reviewed map; houses Rivituso (door 9,5), Gregori (two doors 14,8 and 15,8), Ellie (two doors 7,17 and 8,17); north exits to the Square, south exits to Cattail Pier; signs, bench, planters moved; Gus to 4,9. Painted lettering replaces the old drawn signs (PLATE_SIGNS.row is empty).
+- New engine feature: `door2:true` on a house adds a second door tile beside the first (engine/world.js placeHouse).
+- Scripted coordinates updated for ch13, ch14, the Nine Scoops Pier gate and the Pier to Row arrival.
+- Tested: Row reach test 0 fails, camera clamp, rooms test for the three houses, smoke FAILS: [], all five doors enter the right house, Square to Row and Row to Pier to Row transitions, ch14 opening scene played, portrait and landscape looked at. Not seen on the phone. Bumped ?v= tags, ART_V and the stamp to row3.
+
 ## 2026-11-02 (76): Load-time plan recorded as a standing rule (`loadplan`, docs only)
 
 - Tom asked why the title screen loads so slowly. Fact: 51.5 MB of blocking scripts in 306 tags, 37 MB of it base64 voice audio, ~10 MB baked sprite data, no service worker. He decided (10:20) to defer the restructure while the game is still being built.

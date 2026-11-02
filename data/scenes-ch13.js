@@ -244,7 +244,7 @@ SCENES.ch13After=()=>[
   {flag:'ch13-after'},
   {call:()=>sfx.whoosh&&sfx.whoosh()},
   {fade:'out',time:.8},
-  {call:()=>{ ch13Place('row',15,11,'up'); }},
+  {call:()=>{ ch13Place('row',14,11,'up'); }},
   {wait:.6},
   {fade:'in',time:.8},
   {wait:.4},
@@ -306,7 +306,7 @@ STORY_WORLD.push(()=>{
   if(((STORY.chapter===13&&flag('ch13-done'))||(STORY.chapter===14&&!flag('ch14-after')))&&!intro.active) {
     const row=worlds.row;
     if(row&&!row.npcs.some(n=>n.scripted&&n.name==='Boppy')) {
-      const a=actor('Boppy',18,8,'gus',CH13_BOPPY_LINES);
+      const a=actor('Boppy',15,9,'gus',CH13_BOPPY_LINES);
       Object.assign(a,{sheet:'boppy',armor:true,duration:.96,scripted:true,tier:0,maxHp:1,defeatedUntil:0,roam:0,facing:'down',monster:null});
       row.npcs.push(a);
     }

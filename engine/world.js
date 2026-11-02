@@ -113,6 +113,8 @@ function placeHouse(map,h,pathEnd) {
   map.portals.set(key(h.door.x,h.door.y),{kind:'enter',house:h});
   map.npcNoGo.add(key(h.door.x,h.door.y));
   map.npcNoGo.add(key(h.door.x,h.door.y+1));
+  // door2: the painted door is two tiles wide (Rivituso porch, Aunt Ellie's steps), so the tile east of the door enters the house too.
+  if(h.door2) { const x2=h.door.x+1; tile(map,x2,h.door.y,'door'); map.portals.set(key(x2,h.door.y),{kind:'enter',house:h}); map.npcNoGo.add(key(x2,h.door.y)); map.npcNoGo.add(key(x2,h.door.y+1)); }
   map.houses.push(h);
 }
 // An opening on the map edge: stepping onto it carries the party to another area.

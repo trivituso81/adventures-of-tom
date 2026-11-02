@@ -1091,7 +1091,7 @@ STORY_WORLD.push(()=>{
 });
 HOLD_RULES.push(n=>inBonus()&&!n.scripted);
 if(worlds.bakery) for(const n of worlds.bakery.npcs) if(n.name==='Bun') { n.away=(n.away||[]).concat([{chapter:NS}]); AWAY_NPCS.push({map:worlds.bakery,n}); }
-for(const [id,at,name,lines,cond] of [['town',[[29,9],[29,10]],'School gate',['The gate to Long Island Elementary is locked. It\'s Saturday. It\'s a BIRTHDAY.']],['row',[[11,21],[12,21]],'Pier path',['A sign on the branch: CATTAIL PIER. CLOSED. THE FISH ARE AT A PARTY.']],
+for(const [id,at,name,lines,cond] of [['town',[[29,9],[29,10]],'School gate',['The gate to Long Island Elementary is locked. It\'s Saturday. It\'s a BIRTHDAY.']],['row',[[12,21],[13,21],[14,21]],'Pier path',['A sign on the branch: CATTAIL PIER. CLOSED. THE FISH ARE AT A PARTY.']],
   ['town',[[7,0],[8,0]],'Grace','Grace plants her feet. "Invitations FIRST, Tata. It\'s a party. Parties have RULES."',{test:S=>S.flags['ns-invite']&&!S.flags['ns-invites']}],
   ['town',[[7,0],[8,0]],'The path north',['Frost on the path. Brain Freeze is humming up there, and the family isn\'t ready. Not yet.','Rose, Boppy\'s peppers, Mr. Pistachio, your sister. In that order.'],{test:S=>S.flags['ns-fled']&&!S.flags['ns-ready']}]]) {
   const M=worlds[id]; if(M&&M.spec) (M.spec.gates=M.spec.gates||[]).unshift({at,cond:Object.assign({chapter:NS},cond||{}),name,lines});
