@@ -1,3 +1,10 @@
+## 2026-11-02 (89): Deedee's new ElevenLabs voice installed in the Voice Library (no game change)
+
+- Tom (11-02 12:45) picked a recast voice on recast-deedee.html and sent its id, `nh4f8rul91SCFqbXpyM0`. Call made: the id is set in `tools/voice-library/make-index.js` for both `battle|deedee` and `dialog|deedee` (the same way Boppy's accent and similarity are overridden), NOT in `data/voice-clips.js` or the twelve `data/voice/dialog-ch*.js` files, which still carry the old id `9UrcxKDUU0pvcnFhdfTU` as baked data. The game plays baked clips and never reads the id, so only new Voice Library takes use the new voice. `data/voice-index.json` rebuilt.
+- Also changed (call made, tell Tom): Deedee's voice direction is now "grounded and natural; warm and loving when the line calls for it, firm and commanding when it calls for that" (was "smiling, affectionate, bright and youthful, never stern", which contradicts canon: she is warm when it calls for it and stern when it calls for it), and her base script tag for lines with no hand tag is "warm, steady" (was "warm, bustling"). Her hand-written per-line tags are unchanged. If new takes sound off, the direction is the one lever to look at first; the id change and the direction change landed together.
+- The old Deedee voice `9UrcxKDUU0pvcnFhdfTU` is deleted in ElevenLabs if Tom left the delete-first box ticked (default); the baked clips already in the game keep playing either way.
+- Tested: voice-library test ALL PASS; tag check ok. No game script, art or tag changed.
+
 ## 2026-11-02 (88): Art Library step B4, APPROVE and REJECT commit to GitHub (`art.html`, page and test tools only, no game change)
 
 - Tom (11-02 12:35) generated the first test picture (the Mudling) in the Library, so the phone can reach the image service directly (no relay needed; not tested by me). Next step per the plan: B4.

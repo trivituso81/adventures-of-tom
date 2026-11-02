@@ -60,7 +60,7 @@ Tom has asked repeatedly: voice lines and clips the full game never plays must n
 
 ## ElevenLabs voice limit (standing fact, 2026-11-02)
 
-Tom's ElevenLabs account is **maxed out at 30 custom voices** (voices added from the library count too, and every Voice Design save takes one). Never plan a new or recast voice without a slot plan: delete the voice it replaces first, or ask Tom which unused voice to delete. For Deedee use `recast-deedee.html` (built by `node tools/voice-recast/build-deedee.js`); it deletes the old voice for him and shows the new voice id. When Tom sends the id, set `voices.deedee.voice_id` in `data/voice-clips.js`, rebuild the Voice Library index, and note it in `docs/CHANGES.md`. Other recast bakers in `tools/voice-recast/` follow the same delete-old-voice rule.
+Tom's ElevenLabs account is **maxed out at 30 custom voices** (voices added from the library count too, and every Voice Design save takes one). Never plan a new or recast voice without a slot plan: delete the voice it replaces first, or ask Tom which unused voice to delete. For Deedee use `recast-deedee.html` (built by `node tools/voice-recast/build-deedee.js`); it deletes the old voice for him and shows the new voice id. When Tom sends the id, set the new id in the Deedee override in `tools/voice-library/make-index.js` (never in the baked `data/voice-clips.js`), rebuild the Voice Library index, and note it in `docs/CHANGES.md`. Other recast bakers in `tools/voice-recast/` follow the same delete-old-voice rule.
 
 ## Load time (standing rule, 2026-11-02)
 

@@ -75,7 +75,7 @@ for(const sf of SFILES){
 // Never "natural, conversational": it says nothing. Start from who is speaking and what the punctuation and caps say, so the
 // first take is at least in character; the Library marks these lines "plain direction" so they get a real script when Claude next
 // writes directions (tools/voice-library/merge-directions.py).
-const BASE={tom:'dry, calm',grace:'bright, bossy',rose:'small, earnest, silly',amy:'brisk, coach voice',deedee:'warm, bustling',boppy:'playful, joking',tnb:'easy, amused',justin:'direct, serious',sal:'quick, friendly'};
+const BASE={tom:'dry, calm',grace:'bright, bossy',rose:'small, earnest, silly',amy:'brisk, coach voice',deedee:'warm, steady',boppy:'playful, joking',tnb:'easy, amused',justin:'direct, serious',sal:'quick, friendly'};
 function plain(voice,text){
   const t=text.replace(/\bTa-?ta\b/gi,m=>m===m.toUpperCase()?'TAH TAH':'Tah Tah');
   const d=[]; if(BASE[voice]) d.push(BASE[voice]);
@@ -101,6 +101,10 @@ for(const ch in LINES) if(!voices['battle|'+ch]&&DC.voices[ch]) vset('battle',ch
 // Tom 21:08: Boppy is sweet, fun-loving, a joker and a complainer (no "gruff", no "gravelly"; scripts say so). Tom 21:25: Boppy then
 // sounded too high, so his voice direction is "thick New York accent, deep voice" and his similarity is back at the voice entry's 1.0
 // (0.75 made him higher); merges deepen his clips again (pitch 0.9). Justin is direct and serious (no "warm").
+// Deedee recast (Tom, 2026-11-02): new ElevenLabs voice from recast-deedee.html. Baked data keeps the old id, so it is overridden here, as for Boppy.
+// Her direction is warm when the line calls for it and firm when it calls for that (the old "smiling, affectionate, never stern" was wrong).
+for(const k of ['battle|deedee','dialog|deedee']){ const v=voices[k]; if(!v) continue;
+  v.voice_id='nh4f8rul91SCFqbXpyM0'; v.direction='grounded and natural; warm and loving when the line calls for it, firm and commanding when it calls for that'; }
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
   v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
