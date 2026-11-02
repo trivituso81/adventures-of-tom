@@ -1,3 +1,11 @@
+## 2026-11-01 (evening, 59): Tom's and Rose's battle clips from exports 7 and 8 (`tclips8`)
+
+- Tom sent `local-clips-export_7.json` and `local-clips-export_8.json` (exports 7 and 8 overlap; export 8 is the newer and adds Rose's set) and asked for Tom's and Rose's clips. Merged only those two voices, newest take per line: Tom 63 clips replaced and 2 added (one is Disconnected Controller, "Ugh it's not connecting!!", now baked and removed from `tools/bake-page/pending.json`), Rose 20 replaced. Files: `data/voice/tom.js`, `data/voice/rose.js` (tag `tclips8`).
+- Left out, audio words differ from the line text: Rose foot_tap_tap (says "Boop!"), lookout_lamby (stops before "both of you"), tombo (skips "Put your wings out"), win "Yay!" (says "woo hoo") and win "Yay, Ta-Ta!" (adds "we did it"); Tom delta (adds "Lye flat"), delta_ult, overpriced_gadget (says "premium edition"), tomboamy2 (adds "Amy"), tombonara2, tombotnb3 ("nothin"). Those lines keep their old clips.
+- Left out, no live line: Tom controller_tap, crumb_shot, window_seat and Rose's old Yama-Mott take.
+- Kept on purpose: Rose's SILLY "Bleh!" take is a raspberry sound (script is only `[raspberry].`), her signature move.
+- Tests: `unused_voice.py` 0 on all five checks; smoke tom,rose,grace,justin FAILS: []; kit_test tom and rose every move says its line. Voice Library index rebuilt.
+
 ## 2026-11-01 (night, 58): Welcome page, Tom carrying Rose bigger (`bighead1`)
 
 - Tom: on the welcome page, both heads need to be bigger and the combined Tom and Rose figure bigger overall. Fact (cause): the ride art has small heads relative to the body, and the figure was drawn at 335 picture px. Call made: `engine/splash.js` now builds a padded copy of the standing ride frame with Rose's head grown 30% and Tom's grown 25% about their necks (`RIDE_HEADS`, soft oval mask, no seams), and the figure is 405 px tall (was 335) at x 292 (was 287). Art files are unchanged, so no ART_V bump; only the welcome page is affected (overworld, battle and the ride sheets are not).
