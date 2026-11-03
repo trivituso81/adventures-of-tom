@@ -1,3 +1,12 @@
+## 2026-11-03 (121): Grace's new painted walk is in the game (`gwalk1`)
+
+- Fact: Grace's overworld walk now uses the nine accepted frames from (120) instead of the old sheet. Front, back and side stands plus steps; back step B is the mirror of back step A. Her battle and knocked-out art are untouched (byte-identical).
+- Head: NOT resized (Tom, 11-03: "dont resize grace's head"). The earlier plan to grow it to .25 came from older handoff notes, not from Tom; it is removed. Her head stays at the size in the accepted frames (about .20 of height).
+- Bake: `tools/sprite-bake/bake_grace_walk_v3.py` (a copy of bake_grace.py; battle code unchanged, walk rebuilt). Each frame is keyed from its own corner colour, then `tools/sprite-bake/defringe.py` removes pink hair fringe in a thin band along the outline (sweater and shoes untouched). All directions are brought to the front stand's figure height; each step is scaled to its stand's head width, limited to 3 percent either way (head width is noisy on the side frames), feet on one baseline, head on the centre column.
+- Size: stands about 40 rows tall (old art about 39). Atlas `art/chars/grace-ow.webp` 756 x 120, 75 KB.
+- Known: a faint pink rim remains on thin hair wisps at full size; it is not visible at game size. Two defringe attempts (wide, then edge band) did not remove it fully at 1:1, so I stopped there instead of a third variant.
+- Tests: smoke with IDS=grace FAILS [] (tag check ok), walked the party around the Square with real key presses in portrait and landscape (left, right, up, down all show the right Grace frame). Tags: ART_V and painted.js, grace-hires.js and main.js moved to `gwalk1`, build stamp `build gwalk1`.
+
 ## 2026-11-03 (120): Grace walk frames COMPLETE, ready to bake (source pictures only, no game change)
 
 - Front step B accepted (other leg forward, face straight, keychain same hip): `tools/sprite-bake/src/grace-walk-v3-step-front-b.png`.
