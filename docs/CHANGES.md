@@ -1,3 +1,7 @@
+## 2026-11-03 (117): Grace front stand straightened, front step now edits from it (Art Library entry and source picture only, no game change)
+
+- "Grace walk 0" (head-only edit of the levelled stand) came back close to straight on: eyes level, no tilt, shoulders square. Saved as `tools/sprite-bake/src/grace-walk-v3-stand-front-straight.png`; it is the front stand of the walk (replaces cell 1 of sheet 2). `grace-step-front` now uses it as its one reference. Step B will be made from the accepted step A (other leg forward, no mirror).
+
 ## 2026-11-03 (116): Grace front walk, stop-loss on the head turn: straighten the source first (Art Library entry and source pictures only, no game change)
 
 - Two front-step edits (09:40, 09:47) came back with the SAME head tilt and turn, the second despite a prompt that led with a dead-straight-on rule. Cause found: the attached front stand (cell 1 of sheet 2) has that tilt and turn; the edit copies the head pose from its source. Wording does not override it.
