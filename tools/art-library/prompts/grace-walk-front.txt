@@ -1,0 +1,41 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER WALKING STRIP. Return exactly one image, nothing else.
+
+WHAT THIS IS
+One walking strip of GRACE for "The Adventures of Tom", a family role-playing game: three walking frames in a single row, used to walk her around a town.
+
+ATTACHED IMAGES (in this order)
+1. GRACE's master picture: a finished painting of her on a flat magenta background. This is the ONLY source for her face, hair, outfit, colors, painted texture and brushwork. Draw her EXACTLY like this in every frame: same face, same hair, same clothes, same prints and fabric texture, same colors, same painted look and level of detail. The magenta in this picture is the background to use here too.
+2. The STYLE KEY, a finished painting of the family in a school yard. It shows how this game paints people and how it draws a child. Match its dense, jewel-toned painted texture and fine visible brushwork on every part of Grace: skin, hair, fabric and shoes.
+3. A HEIGHT CHART of grey shapes. It shows SIZE ONLY. Do not copy the grey shapes, the grid or the text. Use it to keep Grace a 9 year old, 4 feet 2 inches tall.
+
+STYLE RULE (the most important instruction)
+Every frame must look painted by the same hand as attachments 1 and 2: dense painted texture, fine visible brushwork, deep saturated colors, crisp detail on hair strands, fabric folds and shoe edges. No airbrushed skin, no smooth gradients, no glossy plastic look, no soft-focus look, no 3D render look. The sweatshirt and sweatpants keep the knitted, fuzzy fabric texture of attachment 1.
+
+ART STYLE
+- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting the style key lives in. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions for a child: an oversized head a little under half of the full body height, a small body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The head size in attachment 1 wins over any number in this paragraph: in every frame the head is exactly as large, compared with the body, as it is in attachment 1.
+- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.
+- Clean, crisp edges with fine detail. No thick or black outlines.
+- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
+
+GRACE
+A 9 year old girl. Long, wavy, golden-blond hair past her shoulders. Oversized soft lavender sweatshirt with sleeves a little too long, baggy heather-gray sweatpants bunched at the ankles, pink and silver glitter sneakers with white soles and bright laces, a yellow squishy keychain clipped at her hip on the sweatpants waistband, visible whenever that hip is visible. Keep every detail of attachment 1. For the back view, extend the outfit plainly and consistently: the back of the sweatshirt has the same knitted texture, her long hair falls down her back. Never invent a new accessory, hairstyle or color.
+
+THE STRIP (strict): FRONT VIEW. Grace faces the camera straight on in all three frames, body and head both. Camera at about chest height, full body, no top-down angle.
+- A wide image with exactly 3 frames in a single row, side by side, evenly spaced, each frame in its own equal-width cell. Each frame is fully separated from its neighbours by empty background.
+- Exactly 3 frames, left to right, in the numbered order below. The three frames must be clearly DIFFERENT drawings: the legs and arms are in different positions in each. Never repeat a frame.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on Grace. Her pink sneakers must stay clearly pink, never magenta. No magenta glow, spill, tint or fringe on her edges or hair strands. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every frame. The standing figure is about 150 pixels tall in its cell, from the top of the hair to the soles of the shoes. Feet on the ground rest on one horizontal line about 24 pixels above the cell bottom.
+- Draw ONLY Grace. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.
+- The same head size, hair volume and outfit in every frame. The head is never redrawn smaller or larger from frame to frame.
+- HEAD DIRECTION RULE: in every frame her head faces EXACTLY the same direction as her body. Her face never turns toward the camera unless the body faces the camera. No twisted neck.
+
+THE 3 FRAMES
+1. STAND: facing the viewer, feet together, arms relaxed at her sides, a warm natural smile.
+2. STEP A: facing the viewer straight on, her left leg (on the viewer's right) stepped forward toward the camera, that foot clearly ahead of the other, the other leg straight and behind, her right arm (on the viewer's left) swung forward and her left arm back.
+3. STEP B: the mirror of frame 2, facing the viewer straight on, her right leg (on the viewer's left) stepped forward, that foot clearly ahead, her left arm swung forward and her right arm back.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Grace in the pose described, with the face, hair and outfit exactly as in attachment 1.

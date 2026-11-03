@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
-EXPECT = {'Characters': 53, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
+EXPECT = {'Characters': 56, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
 EXPECT_TOTAL = sum(EXPECT.values())
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
@@ -99,7 +99,7 @@ async def main():
                     ok('art/raw/enemies/test-mudling-v1.png' in files and 'art/raw/enemies/test-mudling-v2.png' in files, 'both pictures were committed under art/raw/enemies/')
                     ok(en['status'] == 'approved' and len(en['versions']) == 2 and en['versions'][0]['file'].endswith('-v1.png'), 'json: status approved, two versions listed')
                     ok(len(en['rejects']) == 1 and 'pure magenta' in en['rejects'][0]['note'], 'json: the reject note was saved')
-                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:6] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-battle'] and [e['id'] for e in doc['entries']][6:10] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == EXPECT_TOTAL and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
+                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:9] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-walk-side', 'grace-walk-front', 'grace-walk-back', 'grace-battle'] and [e['id'] for e in doc['entries']][9:13] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == EXPECT_TOTAL and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
                     ok('aot-art-key' in ls, 'key lives in localStorage only')

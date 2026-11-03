@@ -19,6 +19,12 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
   { id: 'grace-walk', tab: 'Characters', title: 'Grace: walking sheet 3 x 3 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk.txt', 'utf8').trim() },
+  { id: 'grace-walk-side', tab: 'Characters', title: 'Grace: walking strip, side view, facing left (3 frames)', ar: '2:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-side.txt', 'utf8').trim() },
+  { id: 'grace-walk-front', tab: 'Characters', title: 'Grace: walking strip, front view (3 frames)', ar: '2:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-front.txt', 'utf8').trim() },
+  { id: 'grace-walk-back', tab: 'Characters', title: 'Grace: walking strip, back view (3 frames)', ar: '2:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-back.txt', 'utf8').trim() },
   { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];

@@ -1,3 +1,9 @@
+## 2026-11-03 (110): Grace's walk becomes three strips (`grace-walk-side`, `grace-walk-front`, `grace-walk-back`; prompts and json only, no game change)
+
+- Tom (11-03 08:15 to 08:17) judged the first 3 x 3 walk sheet a miss. Facts (looked at the picture): frames 2, 3 and 6 are the same drawing (front three-quarter, walking right; frame 6 was meant to be from behind), frames 8 and 9 are the same drawing, and the head faces the camera on bodies walking sideways (2, 3, 6, 8, 9). The side row faced right, not left. About 6 distinct poses of 9, no mirrored step pairs. My first verdict ("usable") was wrong; Tom's was right.
+- Call made (inference, not proven): the single mixed-view grid is the likely cause. Three 3-frame strips, one view each, in `tools/art-library/prompts/grace-walk-side.txt`, `-front.txt`, `-back.txt` (shape 2:1, same three refs as `grace-walk`). Each frame is described by which leg and arm is forward, says the three frames must be different drawings, and carries a HEAD DIRECTION RULE (head faces the way the body faces). Run the side strip first. STOP-LOSS: if the side strip also repeats frames or turns the head, stop; next method is the scene approach (paint her in the school yard, then cut) or single frames, not another reworded strip. The old `grace-walk` entry stays (draft, unused). The battle sheet is on hold until the strips work.
+- tools/art-library/test.py: Characters 56, Grace slice widened, Tom slice shifted. Art Library test FAILS: []. No game change, no tag moved.
+
 ## 2026-11-03 (109): Art Library gets four more tabs: Battle 29, Title 4, Portraits 12, Flight 12 (342 entries in all; prompts and data only, no game change)
 
 - Tom (11-03 09:30): load every tab of the Art Library now, test later. No `bake` fields, so approving only stores pictures under `art/raw/<tab>/`.
