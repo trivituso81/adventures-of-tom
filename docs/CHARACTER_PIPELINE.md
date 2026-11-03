@@ -76,6 +76,8 @@ If a photo shows more than one person, ask which one.
 
 ## 3. The three standard sheets (every new character gets all three)
 
+BUILD ORDER (Tom, 2026-11-03): walking poses for ALL characters come first. Every character gets an approved hero pose and an approved walk before anyone gets a battle sheet, ability sheet or any other pose. The hero pose stays step one because the walk copies it. Do not write, offer or install battle or ability poses for anyone until every character's walk is done.
+
 All three share these rules. Put them in every prompt.
 
 - Style: STYLE BLOCK v2 from section 0, pasted verbatim, plus the approved style key image attached. If Tom attaches a reference in a different style, the reference wins.
@@ -191,7 +193,7 @@ Frame keys use a short move prefix (for example `pm_` for Portrait Mode). Save t
 1. A short table: id, display name, the spec rows he might want to correct, height, move list.
 2. The prompt files, one per sheet: hero pose, walk, battle (three standard), then one per ability if abilities were asked for. Sent as files so he can download; copies saved in the Project.
 3. One line on the calls made (for example "Maya is 5\'4\", so 129 battle px; cap in every frame").
-4. Which order to run them in: hero pose first (it becomes the reference for all the others), then the rest.
+4. Which order to run them in: hero pose first (it becomes the reference for all the others), then the walk. Battle and ability sheets wait until every character's walk is approved (build order, section 3).
 
 ## 6. When the sheets come back
 

@@ -1,3 +1,8 @@
+## 2026-11-03 (122): Build order: all walking poses first (docs only, no game change)
+
+- Tom (11-03): "I'd like to do all the walking poses of all characters before doing any other poses."
+- docs/CHARACTER_PIPELINE.md section 3 and 5 now say: every character gets an approved hero pose and walk before anyone gets a battle, ability or other pose sheet. The hero pose stays first because the walk copies it. Same rule written into the Project's claude/next.md.
+
 ## 2026-11-03 (121): Grace's new painted walk is in the game (`gwalk1`)
 
 - Fact: Grace's overworld walk now uses the nine accepted frames from (120) instead of the old sheet. Front, back and side stands plus steps; back step B is the mirror of back step A. Her battle and knocked-out art are untouched (byte-identical).
