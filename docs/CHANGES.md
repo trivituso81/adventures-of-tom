@@ -1,7 +1,13 @@
+## 2026-11-03 (123): Standing rule: never resize a head (docs and tool warning only, no game change)
+
+- Tom (11-03 11:33) asked that head resizing never happen again after (121). Added "No head resizing" to CLAUDE.md. Marked `docs/CHARACTER_PIPELINE.md` section 7 as overridden (its head shares .21 to .25, .373 and .43 are no longer bake targets) and changed pipeline step 4 of section 6. `tools/sprite-bake/kidhead.py` now says so in its header and prints a warning to stderr whenever `grow_head` runs with a factor other than 1. Old bake scripts (bake_grace.py battle part, bake_rose.py, bake_olivia*.py) are unchanged so old art can still be reproduced.
+- Not changed: the Project instructions text in claude.ai (section 4 still says children's heads follow Grace and Rose); the old Project copy claude/character-pipeline.md (historical).
+
 ## 2026-11-03 (122): Build order: all walking poses first (docs only, no game change)
 
 - Tom (11-03): "I'd like to do all the walking poses of all characters before doing any other poses."
 - docs/CHARACTER_PIPELINE.md section 3 and 5 now say: every character gets an approved hero pose and walk before anyone gets a battle, ability or other pose sheet. The hero pose stays first because the walk copies it. Same rule written into the Project's claude/next.md.
+
 
 ## 2026-11-03 (121): Grace's new painted walk is in the game (`gwalk1`)
 

@@ -29,6 +29,10 @@ Tom is a product director. He designs and directs; he does **not** code and does
 7. **Reuse the battle animation primitives** before inventing new systems (`docs/BATTLE_SYSTEM.md`).
 8. **This repo is the live app.** Tom plays https://trivituso81.github.io/adventures-of-tom/ from his iPhone home screen (decided 2026-10-27: "the actual app is on GitHub"). Every finished change goes to `main` (which updates GitHub Pages). The claude.ai artifact is only a scratch copy for building and testing; it means nothing to Tom, so never tell him something is "live" because it is on the artifact. Read `docs/WORKFLOW.md` for the exact routine.
 
+## No head resizing (standing rule, 2026-11-03)
+
+Tom (11-03): "dont resize grace's head", and asked that it never happen again. A bake NEVER grows, shrinks or warps a character's head. Heads stay exactly as painted in the approved picture. Older notes that say to grow a head to a target share (.25, .373, .43) are superseded, including the style key's .25 for Grace and the tables in `docs/CHARACTER_PIPELINE.md` section 7. If a head looks wrong next to the cast, say so, show Tom a head row for his eye, and let him decide; the fix is a regenerated picture, not a warp. `tools/sprite-bake/kidhead.py` `grow_head` and the other head tools in `headwarp.py` exist only to reproduce OLD art bakes; do not call them for new art or a new character unless Tom asks for a resize in that conversation. Never put a head-share target into a prompt, a doc or a bake script as an instruction to resize.
+
 ## Enemy sprite sheets (standing rule, 2026-10-29)
 
 Tom may drop a PNG enemy sprite sheet into any conversation, often with no words. That means "install this enemy". Follow `docs/ENEMY_SHEETS.md`: identify the enemy id, bake the sheet (tools/sprite-bake), wire the painted frames, test a fight against it, push, and log it in that doc's table.
@@ -47,7 +51,7 @@ Justin (Amy's husband) is becoming a party member. Tom will drop a zip of his pa
 
 ## New characters and ability pose sheets (standing rule, 2026-10-31)
 
-When Tom gives photos of a new character, or asks for poses for an ability, do not ask him to describe the image prompt requirements and never make him rewrite them. **Real height in feet and inches is required before anything else; ask if it is missing.** Every adult's face must look the same size as the other adults'; children follow Grace and Rose's head share (section 7). Follow `docs/CHARACTER_PIPELINE.md`: write the character spec from the photo, then the three standard prompts (ONE large full-body hero pose, a 3 x 3 walking sheet, a 4 x 4 standard battle sheet), and for any ability a sheet of **4 to 7 poses only** (keep the critical frames, no walking in or out, no prep or aftermath filler, about 2 spoken lines, painted props only when held, effects left to the game). Send the prompts as files, hero pose first. When the sheets come back, install them per section 6 of that doc.
+When Tom gives photos of a new character, or asks for poses for an ability, do not ask him to describe the image prompt requirements and never make him rewrite them. **Real height in feet and inches is required before anything else; ask if it is missing.** Show Tom a head row so he can judge face sizes against the cast, but never resize a head to match (see No head resizing above). Follow `docs/CHARACTER_PIPELINE.md`: write the character spec from the photo, then the three standard prompts (ONE large full-body hero pose, a 3 x 3 walking sheet, a 4 x 4 standard battle sheet), and for any ability a sheet of **4 to 7 poses only** (keep the critical frames, no walking in or out, no prep or aftermath filler, about 2 spoken lines, painted props only when held, effects left to the game). Send the prompts as files, hero pose first. When the sheets come back, install them per section 6 of that doc.
 
 ## No unused voice (standing rule, 2026-11-01)
 
