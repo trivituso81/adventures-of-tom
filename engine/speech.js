@@ -1,5 +1,12 @@
 'use strict';
 // engine/speech.js — Playing clips, speech synthesis fallback.
+// Decoded voice audio is big (about 0.5 MB per line), and before mem1 every line ever played stayed in memory, so a long
+// session on an older iPad kept growing until it ran hot and slow. Now only the most recently played lines are kept;
+// an older one is decoded again from the baked clip the next time it plays (a few milliseconds).
+// lruGet / lruSet: a Map used as a "most recent N" cache (a hit moves the entry to the newest end).
+function lruGet(map,key) { const v=map.get(key); if(v!==undefined) { map.delete(key); map.set(key,v); } return v; }
+function lruSet(map,key,val,max) { map.delete(key); map.set(key,val); while(map.size>max) map.delete(map.keys().next().value); }
+const CLIP_KEEP=40;
 const clipCache=new Map();
 function playClip(cl,part) {
   const c=audio();
@@ -9,10 +16,10 @@ function playClip(cl,part) {
     if(part) { const g=c.createGain(); g.gain.value=part.gain||1; src.connect(g); g.connect(sound.voiceBus||sound.master); src.start(0,part.from,part.to-part.from); }
     else { src.connect(sound.voiceBus||sound.master); src.start(); }
   };
-  if(clipCache.has(cl.mp3)) { go(clipCache.get(cl.mp3)); return true; }
+  if(clipCache.has(cl.mp3)) { go(lruGet(clipCache,cl.mp3)); return true; }
   const bin=atob(cl.mp3),u=new Uint8Array(bin.length);
   for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
-  c.decodeAudioData(u.buffer).then(buf=>{ clipCache.set(cl.mp3,buf); go(buf); }).catch(()=>{});
+  c.decodeAudioData(u.buffer).then(buf=>{ lruSet(clipCache,cl.mp3,buf,CLIP_KEEP); go(buf); }).catch(()=>{});
   return true;
 }
 
@@ -24,7 +31,7 @@ function warmLine(id,line) {
   for(const k in all) for(const cl of all[k]) if(cl&&cl.text===want) {
     if(clipCache.has(cl.mp3)) return;
     const bin=atob(cl.mp3),u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
-    c.decodeAudioData(u.buffer).then(buf=>clipCache.set(cl.mp3,buf)).catch(()=>{}); return;
+    c.decodeAudioData(u.buffer).then(buf=>lruSet(clipCache,cl.mp3,buf,CLIP_KEEP)).catch(()=>{}); return;
   }
 }
 
@@ -45,7 +52,7 @@ function warmClip(id,text) {
   for(const k in all) for(const cl of all[k]) {
     if(!cl||cl.text!==text||clipCache.has(cl.mp3)) continue;
     const bin=atob(cl.mp3),u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
-    c.decodeAudioData(u.buffer).then(buf=>clipCache.set(cl.mp3,buf)).catch(()=>{});
+    c.decodeAudioData(u.buffer).then(buf=>lruSet(clipCache,cl.mp3,buf,CLIP_KEEP)).catch(()=>{});
     return;
   }
 }

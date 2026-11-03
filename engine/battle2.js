@@ -90,7 +90,12 @@ function b2Start(cfg) {
   sfx.intro();
   const first=B2.foes[0].def,n=B2.foes.length;
   const intro=n===1?first.intro:(B2.foes.every(f=>f.id===first.id)?(['','','Two','Three','Four'][n]+' '+first.name+'s show up!'):'Monsters show up!');
-  const steps=[()=>b2Msg(intro),()=>sfx.grumpTaunt(),1300];
+  // mem1: enemy and battle sheets load on demand (engine/painted.js). Hold the opening (the stage shows only the backdrop)
+  // until this fight's sheets are in, at most 5 seconds; after that anything still missing draws as the old rows.
+  B2.artWait=false;
+  if(typeof paintedFightReady==='function') { paintedTick(); B2.artWait=!paintedFightReady(); }
+  const artT0=performance.now(),waitArt=()=>{ if(B2.artWait&&!paintedFightReady()&&performance.now()-artT0<5000) { battle.queue.unshift(100,waitArt); return; } B2.artWait=false; };
+  const steps=[waitArt,()=>b2Msg(intro),()=>sfx.grumpTaunt(),1300];
   for(const f of B2.foes) if(f.boss) steps.push(...b2BossOpen(f));
   enqueue(...steps,()=>b2Advance());
 }

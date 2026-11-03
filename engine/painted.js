@@ -12,13 +12,34 @@
 // ART_V: cache tag for every painted atlas image (2026-11-01, heads1: all adult battle heads re-baked).
 const ART_V='row3';
 const PAINTED={};
+// Cast ids that own painted sheets (paintedOwners, below). Longer prefixes first: tomride before tom.
+const PAINTED_CAST=['tomride','tom','grace','rose','tnb','amy','deedee','boppy','nara','justin','olivia','jojo','michael','ellie'];
+// Memory (mem1, 2026-11-03): enemy sheets and battle sheets are no longer all loaded at boot. An older iPad ran hot and slow
+// after 30 to 60 minutes because every enemy and battle picture, and a canvas copy of every painted frame ever drawn, stayed
+// in memory. Overworld sheets (ids ending in Ow, townsfolk) still load at boot. The rest are "lazy": paintedTick (below)
+// loads what the party, the current map's monsters and the current fight need, and releases the rest once unused.
+function paintedLazy(id) { return /^foe_/.test(id)||(!/Ow$/.test(id)&&paintedOwners(id).length>0); }
 function paintedAtlas(id,src,rects,k,tintFn) {
-  const a={id,rects,k,tintFn,img:new Image(),ready:false,failed:false};
-  a.img.onload=()=>{ a.ready=true; };
-  a.img.onerror=()=>{ a.failed=true; };
-  a.img.src=src+(src.includes('?')?'':'?v='+ART_V);   // atlases carry no version of their own; bump ART_V whenever a baked .webp changes
+  const a={id,rects,k,tintFn,img:null,ready:false,failed:false,src:src+(src.includes('?')?'':'?v='+ART_V),users:new Set(),used:0};   // atlases carry no version of their own; bump ART_V whenever a baked .webp changes
+  a.lazy=paintedLazy(id);
   PAINTED[id]=a;
+  if(!a.lazy) paintedLoad(a);
   return a;
+}
+function paintedLoad(a) {
+  if(a.img||a.failed) return;
+  const im=new Image(); a.img=im; a.ready=false;
+  im.onload=()=>{ if(a.img===im) a.ready=true; };
+  im.onerror=()=>{ if(a.img===im) { a.failed=true; a.img=null; } };
+  im.src=a.src;
+}
+// Drop the picture and every canvas copy of its frames; the next draw (or paintedTick) loads it again.
+function paintedRelease(a) {
+  if(!a.img) return;
+  const im=a.img; im.onload=im.onerror=null; a.img=null; a.ready=false;
+  try { im.src=''; } catch(e) {}
+  for(const rows of a.users) delete rows._pc;
+  a.users.clear();
 }
 function paintRows(rows,atlas,frame,flip) { rows._paint={a:atlas,f:frame,flip:!!flip}; return rows; }
 // Recolour the dark shirt pixels of a painted frame to an outfit colour, keeping the painted shading.
@@ -48,11 +69,13 @@ function paintedTintPixels(g,w,h,rowRange,k,hex,mode,tintFn) {
 // The painted frame for these rows at the current outfit tint and flash, cached per rows array. Null if not ready.
 function paintedCanvas(rows,flash) {
   const p=rows._paint; if(!p) return null;
-  const A=typeof p.a==='string'?PAINTED[p.a]:p.a; if(!A||!A.ready) return null;
+  const A=typeof p.a==='string'?PAINTED[p.a]:p.a; if(!A) return null;
+  A.used=performance.now();
+  if(!A.ready) { paintedLoad(A); return null; }
   const R=A.rects[p.f]; if(!R) return null;
   const t=activeTint;
   const key=(p.flip?'f':'n')+(flash?'F':'')+(t&&!flash?(t.rows.join(',')+t.color):'');
-  const cache=rows._pc||(rows._pc=new Map());
+  const cache=rows._pc||(rows._pc=new Map()); A.users.add(rows);
   let c=cache.get(key); if(c) return c;
   c=document.createElement('canvas'); c.width=R[2]; c.height=R[3];
   const g=c.getContext('2d');
@@ -74,3 +97,43 @@ function drawPainted(rows,x,y,scale,flash,alpha) {
   gfx.globalAlpha=prevA; gfx.imageSmoothingEnabled=sm; gfx.imageSmoothingQuality=q;
   return true;
 }
+
+// ---------- Which lazy sheets to keep (mem1) ----------
+// Owner of an atlas id: the party member or foe it belongs to. Tom-with-Rose-on-his-shoulders belongs to both.
+function paintedOwners(id) {
+  if(/^foe_/.test(id)) return [id];
+  for(const c of PAINTED_CAST) if(id.startsWith(c)) return c==='tomride'?['tom','rose']:[c];
+  return [];
+}
+// The foes a monster on the map can bring into a fight (its formation).
+function paintedFormation(mid) {
+  const out=new Set([mid]);
+  try { const F=typeof B2_FORMATIONS!=='undefined'&&B2_FORMATIONS[mid]; const f=typeof F==='function'?F():F; if(f) for(const x of f) out.add(x[0]); } catch(e) {}
+  return out;
+}
+function paintedWanted() {
+  const want=new Set();
+  try { for(const m of party) if(m&&m.id) want.add(m.id); } catch(e) {}
+  try { if(B2.active) { for(const u of B2.party) want.add(u.id); for(const f of B2.foes) want.add('foe_'+f.id); } } catch(e) {}
+  try { for(const n of (currentMap&&currentMap.npcs)||[]) if(n.monster) for(const id of paintedFormation(n.monster)) want.add('foe_'+id); } catch(e) {}
+  return want;
+}
+// Loads what is wanted. Releases a lazy sheet only when it is not wanted, not in a fight, and not drawn for 20 seconds
+// (a cutscene can draw someone outside the party; that sheet then stays until the scene has moved on).
+const PAINTED_IDLE=20000;
+function paintedTick() {
+  const want=paintedWanted(),now=performance.now(),fight=typeof battle!=='undefined'&&battle.active;
+  for(const id in PAINTED) {
+    const a=PAINTED[id]; if(!a.lazy) continue;
+    const need=paintedOwners(id).some(o=>want.has(o));
+    if(need) paintedLoad(a);
+    else if(a.img&&!fight&&now-a.used>PAINTED_IDLE) paintedRelease(a);
+  }
+}
+// True once every sheet the current fight needs has loaded (or failed, which falls back to the old rows).
+function paintedFightReady() {
+  const want=paintedWanted();
+  for(const id in PAINTED) { const a=PAINTED[id]; if(a.lazy&&paintedOwners(id).some(o=>want.has(o))&&!a.ready&&!a.failed) return false; }
+  return true;
+}
+setInterval(()=>{ try { paintedTick(); } catch(e) {} },1500);

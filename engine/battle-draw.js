@@ -88,6 +88,7 @@ function drawBattle() {
   gfx.scale(3,3);
   drawBattleBackdrop(t);
   gfx.restore();
+  if(battle.v2&&B2.artWait) return;   // mem1: this fight's sheets are still loading (engine/battle2.js b2Start)
   RFX.draw(true);
 
   b2DrawEnemies(t);

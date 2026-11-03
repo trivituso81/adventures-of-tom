@@ -41,11 +41,12 @@ function dvPlay(b64) {
     src.onended=()=>{ if(DV.src===src) { DV.src=null; DV.playing=false; } };
     DV.src=src; src.start(); guard(Math.round(buf.duration*1000)+1200);
   };
-  if(DV.cache.has(b64)) { go(DV.cache.get(b64)); return; }
+  // Only the 20 most recent lines stay decoded (lruSet, engine/speech.js, mem1).
+  if(DV.cache.has(b64)) { go(lruGet(DV.cache,b64)); return; }
   try {
     const bin=atob(b64),u=new Uint8Array(bin.length);
     for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
-    c.decodeAudioData(u.buffer).then(buf=>{ DV.cache.set(b64,buf); go(buf); }).catch(()=>{ if(tok===DV.token) DV.playing=false; });
+    c.decodeAudioData(u.buffer).then(buf=>{ lruSet(DV.cache,b64,buf,20); go(buf); }).catch(()=>{ if(tok===DV.token) DV.playing=false; });
   } catch(e) { DV.playing=false; }
 }
 
