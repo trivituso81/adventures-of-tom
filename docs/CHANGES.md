@@ -1,3 +1,9 @@
+## 2026-11-03 (135): Art Library: Grace big-head TEST 7, grey proportion outline as the body guide (library only, no game change)
+
+- Tom ran TEST 6 (134): "its just not getting the brushed illustrated feel". Saved `tools/sprite-bake/src/grace-stand-front-scene-test6-v1.jpg`. Head grew (about .25) but she is painted smooth, like the big-head picture, and looks pasted onto the scene. Pattern over all runs (fact): every picture with a big head (Run 1, Run 2, TEST 2, TEST 6) is smooth; every brushed one (hero, TEST 5) has a head near .19. The painted big-head picture carried its smooth style along with its proportions.
+- One lever: replace that picture with `docs/reference/proportion_3heads_child.png`, a plain grey outline drawn at head .31 of height (no painting style to copy). Outfit now in words (it came out right from words in her hero). New entries `grace-stand-front-scene-guide` (TEST 7 step 1) and `grace-stand-front-scene-guide-cut` (step 2, chained). Prompt 1,423 characters.
+- tools/art-library/test.py: Characters 70 to 72, id order and tom slice updated. All checks pass.
+
 ## 2026-11-03 (134): Art Library: Grace big-head TEST 6, big-head picture as the body guide (library only, no game change)
 
 - Tom ran TEST 5 step 1 (132, 133). Saved `tools/sprite-bake/src/grace-stand-front-scene-test5-v1.jpg`. Brushwork now matches the school yard and the style key (the scene method works). Head missed for the third time: measured about .19 (hair top 160, chin 290, soles 828 of 864 px), head about half her shoulder width. Not to be approved.

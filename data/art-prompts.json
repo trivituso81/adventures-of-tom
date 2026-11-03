@@ -349,6 +349,40 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "grace-stand-front-scene-guide",
+   "tab": "Characters",
+   "title": "Grace walk 0 TEST 7 step 1: school yard method with a grey proportion outline as the body guide (uses the photo you added)",
+   "ar": "4:3",
+   "own": {
+    "slot": "grace-photo",
+    "label": "Photo of the real Grace (face clear)",
+    "at": 1
+   },
+   "refs": [
+    "docs/reference/school_style_ref.png",
+    "docs/reference/proportion_3heads_child.png"
+   ],
+   "prompt": "Paint one real girl, Grace, age 9, standing INSIDE the first attached picture, the school yard painting, painted by the same artist in one sitting: the same dense visible brushwork, crisp detail, deep color and warm lamplight on her skin, hair and clothes as on the brick and foliage.\n\nShe stands large and centered on the paved walkway, facing and looking straight at the viewer, arms relaxed at her sides, feet a little apart. Full body, feet on the paving.\n\nHer face matches the second attached picture, a photo of the real Grace: face shape, eyes, nose, wide toothy smile, stud earrings, hair color, length and parting. Not its clothes or background.\n\nOutfit: an oversized soft lavender sweater, baggy heather-grey sweatpants bunched at the ankles, glittery pink and silver sneakers, a small yellow squishy smiley keychain clipped at her hip.\n\nHEAD SIZE (most important): a big caricature head. The third attached picture is a plain grey outline that shows ONLY her body proportions: match its big head to small body ratio exactly, but draw nothing grey and copy nothing else from it. Her full height, hair to soles, is only about three of her head heights (one head = top of hair to chin). Her head is as wide as her shoulders, and as tall as her body from chin to the bottom of her sweater. Small slim body, small hands and feet. Grace is the only person. NOT pixel art, NOT photorealistic, NOT a 3D render. No text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-stand-front-scene-guide-cut",
+   "tab": "Characters",
+   "title": "Grace walk 0 TEST 7 step 2: cut her out onto magenta (approve TEST 7 step 1 first)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-stand-front-scene-guide-v1.png"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE EDIT. Return exactly one image, nothing else.\n\nThe attached picture is a finished painting of a girl standing in a school yard. Keep the girl EXACTLY as painted: do not redraw, repaint, restyle, sharpen or smooth anything about her. Keep her face, hair strands, sweatshirt, sweatpants, glittery sneakers, yellow keychain, pose, size, position, colors, lighting and the visible painted brushwork and texture on her exactly as they are, pixel for pixel in feel.\n\nChange ONLY the background: replace everything that is not the girl (the school, the paving, the sky, the lamps, the planters, every shadow on the ground) with one flat solid pure magenta #FF00FF filling the whole rest of the image. No ground, no shadow, no gradient, no border, no text, no labels.\n\nNo magenta on the girl. No magenta glow, spill, tint or fringe on her edges or hair strands. Keep her edges clean and crisp. Draw nothing new and no one else.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-battle",
    "tab": "Characters",
    "title": "Grace: battle sheet 4 x 4 (painted, on magenta)",
