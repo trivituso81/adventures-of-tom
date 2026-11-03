@@ -1,0 +1,857 @@
+{
+"mudling": {
+"name": "Mudling",
+"rank": "EASY",
+"level": 1,
+"acts": [
+"Mud Flick",
+"Wobble",
+"Mud Pie"
+]
+},
+"skeeter": {
+"name": "Skeeter Swarm",
+"rank": "TRICKY",
+"level": 2,
+"acts": [
+"Bite",
+"Whine"
+]
+},
+"grump": {
+"name": "Pond Grump",
+"rank": "MEDIUM",
+"level": 1,
+"acts": [
+"Splash",
+"Grumble",
+"Soggy Slap"
+]
+},
+"toad": {
+"name": "Bog Toad",
+"rank": "MEDIUM",
+"level": 3,
+"acts": [
+"Body Slam",
+"Croak",
+"Tongue Lash"
+]
+},
+"log": {
+"name": "Log Lump",
+"rank": "TOUGH",
+"level": 4,
+"acts": [
+"Roll",
+"Branch",
+"Timber"
+]
+},
+"bigone": {
+"name": "The Big One",
+"rank": "BOSS",
+"level": 5,
+"acts": [
+"Tail Slap",
+"Big Glare"
+]
+},
+"smoglet": {
+"name": "Smoglet",
+"rank": "EASY",
+"level": 2,
+"acts": [
+"Attack",
+"Attack",
+"Brown Haze"
+]
+},
+"tickets": {
+"name": "Ticket Flurry",
+"rank": "TRICKY",
+"level": 2,
+"acts": [
+"Attack",
+"Attack",
+"Late Fee"
+]
+},
+"coyote": {
+"name": "Canyon Coyote",
+"rank": "MEDIUM",
+"level": 3,
+"acts": [
+"Attack",
+"Attack",
+"Pack Howl"
+]
+},
+"gridlock": {
+"name": "Gridlock",
+"rank": "MEDIUM",
+"level": 4,
+"acts": [
+"Attack",
+"Attack",
+"Rush Hour"
+]
+},
+"tarblob": {
+"name": "Tar Pit Blob",
+"rank": "TOUGH",
+"level": 5,
+"acts": [
+"Attack",
+"Attack",
+"Sticky Situation"
+]
+},
+"bigshake": {
+"name": "The Big Shake",
+"rank": "BOSS",
+"level": 5,
+"acts": [
+"Rumble",
+"Boulder Drop",
+"Smog Puff"
+]
+},
+"soggysock": {
+"name": "Soggy Sock",
+"rank": "EASY",
+"level": 3,
+"acts": [
+"Sock Slap",
+"Wring Out",
+"Squelch"
+]
+},
+"bobber": {
+"name": "Bobber",
+"rank": "TRICKY",
+"level": 4,
+"acts": [
+"Bonk",
+"Plunk"
+]
+},
+"tangle": {
+"name": "Tangle",
+"rank": "MEDIUM",
+"level": 4,
+"acts": [
+"Snarl",
+"Wrap Up",
+"Big Knot"
+]
+},
+"snag": {
+"name": "Snag",
+"rank": "TOUGH",
+"level": 5,
+"acts": [
+"Trip",
+"Catch",
+"Undertow"
+]
+},
+"irongill": {
+"name": "Old Iron-Gill",
+"rank": "BOSS",
+"level": 7,
+"acts": [
+"Whisker Whip",
+"Iron Headbutt",
+"Pond Spit"
+]
+},
+"extra": {
+"name": "Extra Extra",
+"rank": "EASY",
+"level": 4,
+"acts": [
+"Elbow",
+"Big Sigh",
+"Walk Into Shot"
+]
+},
+"boommoth": {
+"name": "Boom Mic Moth",
+"rank": "TRICKY",
+"level": 5,
+"acts": [
+"Swoop",
+"Feedback",
+"Boom Drop"
+]
+},
+"clapper": {
+"name": "Clapper Snapper",
+"rank": "TRICKY",
+"level": 5,
+"acts": [
+"Snap",
+"Slate",
+"Marker!"
+]
+},
+"fogwisp": {
+"name": "Fog Wisp",
+"rank": "TRICKY",
+"level": 6,
+"acts": [
+"Damp Chill",
+"Fog Bank",
+"Pea Souper"
+]
+},
+"cuecrab": {
+"name": "Cue Card Crab",
+"rank": "TOUGH",
+"level": 5,
+"acts": [
+"Pinch",
+"Line Reading",
+"Card Toss"
+]
+},
+"directorscut": {
+"name": "The Director\u2019s Cut",
+"rank": "BOSS",
+"level": 7,
+"acts": [
+"Megaphone Blast",
+"Script Smack",
+"Notes"
+]
+},
+"popquiz": {
+"name": "Pop Quiz",
+"rank": "EASY",
+"level": 5,
+"acts": [
+"Paper Cut",
+"Trick Question",
+"Time\u2019s Up"
+]
+},
+"tardybell": {
+"name": "Tardy Bell",
+"rank": "TRICKY",
+"level": 6,
+"acts": [
+"Bonk",
+"You\u2019re Late",
+"Recess Bell"
+]
+},
+"glitterglue": {
+"name": "Glitter Glue",
+"rank": "TRICKY",
+"level": 6,
+"acts": [
+"Squirt",
+"Glue Down",
+"Glitter Bomb"
+]
+},
+"dodgeball": {
+"name": "Dodgeball Dread",
+"rank": "TOUGH",
+"level": 6,
+"acts": [
+"Bounce",
+"Picked Last",
+"Ricochet"
+]
+},
+"redpen": {
+"name": "The Red Pen",
+"rank": "BOSS",
+"level": 8,
+"acts": [
+"Red Ink",
+"Margin Note",
+"Points Off"
+]
+},
+"acornagent": {
+"name": "Acorn Agent",
+"rank": "EASY",
+"level": 6,
+"acts": [
+"Bonk",
+"Pebble",
+"Code Red"
+]
+},
+"stickysap": {
+"name": "Sticky Sap",
+"rank": "EASY",
+"level": 6,
+"acts": [
+"Drip",
+"Stuck",
+"Sap Flow"
+]
+},
+"peanutgallery": {
+"name": "Peanut Gallery",
+"rank": "TRICKY",
+"level": 7,
+"acts": [
+"Boo",
+"Heckle",
+"Standing Boo-vation"
+]
+},
+"twigspy": {
+"name": "Twig Spy",
+"rank": "TRICKY",
+"level": 7,
+"acts": [
+"Poke",
+"Stakeout",
+"Leaf Storm"
+]
+},
+"cheekstuffer": {
+"name": "Cheek Stuffer",
+"rank": "TOUGH",
+"level": 7,
+"acts": [
+"Cheek Bump",
+"Crumb Spray",
+"Snack Snatch"
+]
+},
+"acorncache": {
+"name": "Acorn Cache",
+"rank": "EASY",
+"level": 9,
+"acts": [
+"Sit"
+]
+},
+"chairman": {
+"name": "Chairman Cheeks",
+"rank": "BOSS",
+"level": 9,
+"acts": [
+"Cheek Slam",
+"Acorn Volley",
+"Filibuster"
+]
+},
+"shusher": {
+"name": "Shusher",
+"rank": "EASY",
+"level": 6,
+"acts": [
+"Tassel Flick",
+"SHHH",
+"Hush Hour"
+]
+},
+"dogear": {
+"name": "Dog-Ear",
+"rank": "EASY",
+"level": 6,
+"acts": [
+"Paper Cut",
+"Fold",
+"Crease"
+]
+},
+"cliffhanger": {
+"name": "The Cliffhanger",
+"rank": "TRICKY",
+"level": 7,
+"acts": [
+"Swing",
+"Plot Twist",
+"To Be Continued"
+]
+},
+"knowitall": {
+"name": "The Know-It-All",
+"rank": "TRICKY",
+"level": 7,
+"acts": [
+"Spine Bonk",
+"Actually",
+"Well, Technically"
+]
+},
+"popup": {
+"name": "Pop-Up Panic",
+"rank": "TOUGH",
+"level": 7,
+"acts": [
+"Pop!",
+"Jump Out",
+"Big Reveal"
+]
+},
+"unread": {
+"name": "The Unread",
+"rank": "BOSS",
+"level": 10,
+"acts": [
+"Cover Slam",
+"Whisper",
+"Dust Cloud",
+"SHHHH"
+]
+},
+"lukewarm": {
+"name": "Lukewarm",
+"rank": "EASY",
+"level": 7,
+"acts": [
+"Slosh",
+"Cold Shoulder",
+"Room Temperature"
+]
+},
+"leftover": {
+"name": "Leftover",
+"rank": "EASY",
+"level": 7,
+"acts": [
+"Lid Flip",
+"Mystery Smell",
+"Freezer Burn"
+]
+},
+"wetblanket": {
+"name": "Wet Blanket",
+"rank": "TRICKY",
+"level": 8,
+"acts": [
+"Smother",
+"Why Bother",
+"Damp Spirits"
+]
+},
+"thedraft": {
+"name": "The Draft",
+"rank": "TRICKY",
+"level": 8,
+"acts": [
+"Gust",
+"Cold Shoulder",
+"Slam the Door"
+]
+},
+"pickyeater": {
+"name": "The Picky Eater",
+"rank": "TOUGH",
+"level": 8,
+"acts": [
+"Lid Snap",
+"EW",
+"Push It Away"
+]
+},
+"ironbelly": {
+"name": "Old Ironbelly",
+"rank": "BOSS",
+"level": 11,
+"acts": [
+"Belly Bump",
+"Hot Coal",
+"Soot Puff",
+"Draw the Flame"
+]
+},
+"velvetrope": {
+"name": "Velvet Rope",
+"rank": "EASY",
+"level": 8,
+"acts": [
+"Rope Swing",
+"Not on the List",
+"Members Only"
+]
+},
+"stuffedshirt": {
+"name": "Stuffed Shirt",
+"rank": "EASY",
+"level": 8,
+"acts": [
+"Stiff Arm",
+"Hmph",
+"How Gauche"
+]
+},
+"coathanger": {
+"name": "The Hanger-On",
+"rank": "TRICKY",
+"level": 9,
+"acts": [
+"Hook",
+"Cling",
+"Hang On"
+]
+},
+"soreloser": {
+"name": "The Sore Loser",
+"rank": "TRICKY",
+"level": 9,
+"acts": [
+"Card Flick",
+"Cheater!",
+"Fifty-Two Pickup"
+]
+},
+"wallflower": {
+"name": "The Wallflower",
+"rank": "TOUGH",
+"level": 9,
+"acts": [
+"Sorry!",
+"Do Not Look",
+"Petal Storm"
+]
+},
+"mirrorball": {
+"name": "The Mirrorball",
+"rank": "BOSS",
+"level": 12,
+"acts": [
+"Dazzle",
+"Chain Swing",
+"Glitter Beam"
+]
+},
+"carryon": {
+"name": "Carry-On",
+"rank": "EASY",
+"level": 9,
+"acts": [
+"Wheelie",
+"Overhead Bin",
+"Gate Check"
+]
+},
+"jetlag": {
+"name": "Jet Lag",
+"rank": "EASY",
+"level": 9,
+"acts": [
+"Yawn",
+"Red-Eye",
+"Time Zone"
+]
+},
+"longline": {
+"name": "The Long Line",
+"rank": "TRICKY",
+"level": 10,
+"acts": [
+"Belt Snap",
+"Please Wait",
+"Random Screening"
+]
+},
+"unclaimed": {
+"name": "The Unclaimed",
+"rank": "TRICKY",
+"level": 10,
+"acts": [
+"Heavy Bag",
+"Carousel",
+"Excess Baggage"
+]
+},
+"armresthog": {
+"name": "The Armrest Hog",
+"rank": "TOUGH",
+"level": 10,
+"acts": [
+"Elbow",
+"Recline",
+"Full Recline"
+]
+},
+"lastcall": {
+"name": "The Last Call",
+"rank": "BOSS",
+"level": 13,
+"acts": [
+"Flap Slap",
+"DELAYED",
+"Static"
+]
+},
+"finalcall": {
+"name": "FINAL CALL",
+"rank": "BOSS",
+"level": 15,
+"acts": [
+"Flap Slap",
+"DELAYED",
+"Static"
+]
+},
+"lostluggage": {
+"name": "Lost Luggage",
+"rank": "TRICKY",
+"level": 12,
+"acts": [
+"Wheelie",
+"Handle Swing",
+"Rummage"
+]
+},
+"redeye": {
+"name": "Red-Eye",
+"rank": "TRICKY",
+"level": 13,
+"acts": [
+"Contrail",
+"Yawn",
+"Nap Time"
+]
+},
+"standbysprite": {
+"name": "Standby Sprite",
+"rank": "TOUGH",
+"level": 13,
+"acts": [
+"Clipboard",
+"Paddle Swat",
+"Wait List"
+]
+},
+"gridlockprime": {
+"name": "Gridlock Prime",
+"rank": "BOSS",
+"level": 16,
+"acts": [
+"Honk",
+"Merge",
+"Rubbernecking"
+]
+},
+"drillworm": {
+"name": "Dual-Coast Drill Worm",
+"rank": "BOSS",
+"level": 18,
+"acts": [
+"Grind",
+"Gravel Spray",
+"Bore"
+]
+},
+"hushling": {
+"name": "Hushling",
+"rank": "TRICKY",
+"level": 15,
+"acts": [
+"Shush",
+"Drift",
+"Hush"
+]
+},
+"signalfault": {
+"name": "Signal Fault",
+"rank": "TOUGH",
+"level": 15,
+"acts": [
+"Flash",
+"Stop Arm",
+"Red Light"
+]
+},
+"turnstile": {
+"name": "Turnstile Grump",
+"rank": "TOUGH",
+"level": 16,
+"acts": [
+"Clip",
+"Arm Swing",
+"Tap Out"
+]
+},
+"warden": {
+"name": "Warden Boppy",
+"rank": "BOSS",
+"level": 20,
+"acts": [
+"Halt",
+"Shoulder Check",
+"Stand Firm"
+]
+},
+"hush9final": {
+"name": "HUSH-9 Final Form",
+"rank": "BOSS",
+"level": 21,
+"acts": [
+"Shush",
+"Quiet Roll",
+"Mute"
+]
+},
+"marlowe16": {
+"name": "Marlowe",
+"rank": "BOSS",
+"level": 23,
+"acts": [
+"Strike Through",
+"Desaturate",
+"Marginal Note"
+]
+},
+"greynote": {
+"name": "Grey Note",
+"rank": "TRICKY",
+"level": 21,
+"acts": [
+"Stick",
+"Flutter",
+"Fade"
+]
+},
+"twinlens": {
+"name": "The Archivist\u2019s Twin Lenses",
+"rank": "BOSS",
+"level": 25,
+"acts": [
+"Focus",
+"Snapshot",
+"Rack Focus"
+]
+},
+"pausesprite": {
+"name": "Pause Sprite",
+"rank": "TRICKY",
+"level": 22,
+"acts": [
+"Tap",
+"Float Into",
+"Pause"
+]
+},
+"paperweight": {
+"name": "Paperweight",
+"rank": "TOUGH",
+"level": 23,
+"acts": [
+"Roll",
+"Snow",
+"Hold Down"
+]
+},
+"curator": {
+"name": "Curator",
+"rank": "TOUGH",
+"level": 23,
+"acts": [
+"Label",
+"Straighten",
+"Not For Sale"
+]
+},
+"vance": {
+"name": "Julian Vance",
+"rank": "BOSS",
+"level": 26,
+"acts": [
+"Unwriting Ray"
+]
+},
+"censor": {
+"name": "The Oblivion Censor",
+"rank": "BOSS",
+"level": 26,
+"acts": [
+"Black Out",
+"Return to Sender",
+"No Such Person"
+]
+},
+"deadletter": {
+"name": "Dead Letter",
+"rank": "TOUGH",
+"level": 24,
+"acts": [
+"Paper Cut",
+"Flap Shut",
+"Return"
+]
+},
+"rubberstamp": {
+"name": "Rubber Stamp",
+"rank": "TOUGH",
+"level": 25,
+"acts": [
+"Stamp",
+"Stomp",
+"Denied"
+]
+},
+"leviathan": {
+"name": "The Chronos-Leviathan",
+"rank": "BOSS",
+"level": 28,
+"acts": [
+"Tail Sweep",
+"Gear Bite",
+"Wind Up"
+]
+},
+"julian": {
+"name": "Julian Vance",
+"rank": "BOSS",
+"level": 28,
+"acts": [
+"Reread the Calendar",
+"Amber Glass",
+"Look Away"
+]
+},
+"gremlin": {
+"name": "Sprinkle Gremlin",
+"rank": "EASY",
+"level": 5,
+"acts": [
+"Sprinkle Flick",
+"Tiny Jump",
+"Sprinkle Spray"
+]
+},
+"slushslug": {
+"name": "Slushie Slug",
+"rank": "TOUGH",
+"level": 5,
+"acts": [
+"Ooze",
+"Slush Sneeze",
+"Brain Freeze"
+]
+},
+"conehead": {
+"name": "Cone Head",
+"rank": "MEDIUM",
+"level": 5,
+"acts": [
+"Point Poke",
+"Mint Drip",
+"Scoop Pass"
+]
+},
+"brainfreeze": {
+"name": "Brain Freeze",
+"rank": "BOSS",
+"level": 5,
+"acts": [
+"Cold Shoulder",
+"Frost Breath",
+"Ice Cube"
+]
+}
+}

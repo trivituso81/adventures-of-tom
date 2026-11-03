@@ -1,0 +1,159 @@
+// NPC lineup-sheet prompts for the Art Library (tab NPCs). Required by make-prompts.js.
+// One entry = one 3 x 2 lineup sheet of 4 to 6 non-party NPCs who share a place or story. Looks come from the live game palettes
+// (scratchpad dump of LE_PALETTES / LA_PALETTES); roles, ages and heights are written below. Assumptions are flagged in the title where they matter.
+const fs = require('fs');
+const path = require('path');
+const DUMP = process.env.NPC_DUMP || '/tmp/claude-0/-home-claude/39197478-1f17-5382-8d0f-e8b30b410449/scratchpad/dump/npcs.json';
+const SNAP = path.join(__dirname, 'prompts', 'npc-palettes.json');
+let PAL;
+if (fs.existsSync(DUMP)) { const d = JSON.parse(fs.readFileSync(DUMP, 'utf8')); PAL = { ...d.lepal, ...d.lapal }; }
+else PAL = JSON.parse(fs.readFileSync(SNAP, 'utf8'));
+
+const REF_KEY = 'docs/reference/style_key_v1.png';
+const REF_CHART = 'docs/reference/height_chart_v1.png';
+
+// ---- color words from hex ----
+const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const near = (h, table) => { const c = rgb(h); let best = null, bd = 1e9; for (const [n, x] of table) { const r = rgb(x); const d = (c[0] - r[0]) ** 2 + (c[1] - r[1]) ** 2 + (c[2] - r[2]) ** 2; if (d < bd) { bd = d; best = n; } } return best; };
+const SKIN = [['very fair', '#f3d3b8'], ['fair', '#efbc8e'], ['light peach', '#e8b48e'], ['warm tan', '#d0a07a'], ['golden tan', '#c69878'], ['olive tan', '#c08a64'], ['medium brown', '#b8805c'], ['warm brown', '#9e7056'], ['rich brown', '#8a5a3c'], ['deep brown', '#6a4030'], ['very deep brown', '#4f3225'], ['pale grey-white', '#d8d4cc']];
+const HAIR = [['black', '#2a2220'], ['very dark brown', '#3e3433'], ['dark brown', '#5a4030'], ['chestnut brown', '#754e3c'], ['light brown', '#925f42'], ['dark blond', '#b98a5a'], ['golden blond', '#e8c25a'], ['strawberry blond', '#c98a4a'], ['auburn red', '#a8452f'], ['bright red', '#c9463d'], ['silver grey', '#b7b3ad'], ['white', '#e8e4dc'], ['slate violet', '#626175'], ['teal', '#2f6f73'], ['light blond', '#e3dac2'], ['plum', '#5a3a5a']];
+const CLOTH = [['black', '#1b1b1f'], ['charcoal', '#2c2c33'], ['dark grey', '#4a5868'], ['grey', '#9ea3ab'], ['off-white', '#f4f4f0'], ['cream', '#f4ecd2'], ['beige', '#d9c6a0'], ['tan', '#c9b89a'], ['olive brown', '#8a7a5a'], ['brown', '#8a6a48'], ['rust', '#c0613f'], ['red', '#c0392b'], ['coral pink', '#ca7c75'], ['hot pink', '#d65aa0'], ['rose pink', '#f08aa8'], ['orange', '#e2793a'], ['mustard yellow', '#e7b73e'], ['pale yellow', '#f2e2a0'], ['sage green', '#8ca275'], ['grass green', '#6fb35a'], ['forest green', '#3f6a3f'], ['teal', '#3a9ca0'], ['sky blue', '#9ccfd8'], ['cornflower blue', '#7394ae'], ['royal blue', '#2f6fb3'], ['navy', '#2f3a4a'], ['slate blue', '#4a5a8a'], ['lavender', '#a595b8'], ['purple', '#7a3a5a'], ['violet', '#9a7ad0'], ['plum', '#6a4f7a'], ['khaki', '#b2bf86'], ['steel grey-blue', '#63798c'], ['dusty blue', '#77748e'], ['denim blue', '#3f5a74'], ['slate grey', '#3f4650'], ['mint green', '#82a7aa'], ['burnt orange', '#c0613f']];
+const cw = (h, t) => `${near(h, t)} (${h})`;
+
+// kind: 'adult' | 'child'. sex: m | f. Heights in feet and inches. look = palette key. over = optional palette override.
+const N = {
+  pip: { name: 'Pip', look: 'pip', sex: 'm', kind: 'child', age: 9, ft: `4'1"`, role: "one of Grace's friends from the Square, about her age", acc: 'holding a small smooth grey pet rock in both palms, a proud little grin' },
+  moss: { name: 'Moss', look: 'moss', sex: 'm', kind: 'child', age: 9, ft: `4'3"`, role: "one of Grace's friends from the Square, about her age", acc: 'head tilted back as if asking a tree for directions, one hand holding a small green leaf' },
+  dot: { name: 'Dot', look: 'dot', sex: 'f', kind: 'child', age: 9, ft: `4'0"`, role: "one of Grace's friends from the Square, about her age", acc: 'counting on her fingers, a thoughtful half smile' },
+  gus: { name: 'Gus', look: 'gus', sex: 'm', kind: 'adult', age: 72, ft: `5'6"`, role: 'a retired Rivituso Row neighbour who loves sitting', acc: 'a small folding camp stool tucked under one arm, a slightly stooped, easy posture' },
+  bean: { name: 'Bean', look: 'bean', sex: 'f', kind: 'adult', age: 34, ft: `5'5"`, role: 'a cheerful Rivituso Row wanderer who is never quite lost', acc: 'a rolled-up paper map in one hand, a puzzled but happy smile' },
+  reel: { name: 'Reel', look: 'reel', sex: 'm', kind: 'adult', age: 64, ft: `5'9"`, role: 'the bait shack owner at Cattail Pier', acc: 'a small tin bait bucket in one hand, a weathered, friendly squint' },
+  pruitt: { name: 'Principal Pruitt', look: 'pruitt', sex: 'm', kind: 'adult', age: 62, ft: `5'9"`, role: 'the principal of Long Island Elementary, 31 years on the job', acc: 'a ring of keys clipped to the belt and one hand on the lapel, a calm, seen-it-all look' },
+  delgado: { name: 'Mr. Delgado', look: 'delgado', sex: 'm', kind: 'adult', age: 40, ft: `5'8"`, role: "a parent at the school, Marco's dad", acc: 'one hand lifted in a friendly half wave, a visitor badge on his shirt' },
+  kowalski: { name: 'Mrs. Kowalski', look: 'kowalski', sex: 'f', kind: 'adult', age: 48, ft: `5'4"`, role: 'the PTA president', acc: 'a plate of cookies in one hand and a laminated sheet under the other arm, a bright, organized smile' },
+  ike: { name: 'Grandpa Ike', look: 'ike', sex: 'm', kind: 'adult', age: 78, ft: `5'5"`, role: "a grandfather visiting the school for his grandson", acc: 'a wooden cane in one hand, a proud, nostalgic smile, shoulders a little rounded' },
+  halverson: { name: 'Mr. Halverson', look: 'halverson', sex: 'm', kind: 'adult', age: 41, ft: `5'10"`, role: 'a fourth grade teacher', acc: 'a coffee mug in one hand and a lanyard around his neck, a tired but wry look' },
+  bun: { name: 'Bun', look: 'bun', sex: 'f', kind: 'adult', age: 36, ft: `5'4"`, role: 'the baker at Crumb Bakery', acc: 'holding a fresh loaf of bread in both hands, a warm, floury smile' },
+  page: { name: 'Page', look: 'page', sex: 'f', kind: 'adult', age: 38, ft: `5'6"`, role: 'the librarian at The Hush Library', acc: 'a book held to her chest and one finger raised to her lips, asking for quiet', glasses: true },
+  fern: { name: 'Fern', look: 'fern', sex: 'f', kind: 'adult', age: 45, ft: `5'5"`, role: 'the gardener at Sprout House', acc: 'a small metal watering can in one hand, soil on her gardening gloves' },
+  kit: { name: 'Kit', look: 'kit', sex: 'f', kind: 'adult', age: 29, ft: `5'7"`, role: 'the mail carrier at Snail Mail', acc: 'a brown paper parcel tied with string held under one arm, an unhurried, cheerful stance' },
+  oolong: { name: 'Oolong', look: 'oolong', sex: 'f', kind: 'adult', age: 68, ft: `5'2"`, role: 'the owner of Kettle Cottage tea shop', acc: 'a small porcelain teacup and saucer held in both hands, a gossipy, twinkling smile' },
+  luna: { name: 'Luna', look: 'luna', sex: 'f', kind: 'adult', age: 41, ft: `5'5"`, role: 'the astronomer at the Moon Club observatory', acc: 'a small brass telescope held in one hand, eyes bright with wonder' },
+  penny: { name: 'Penny', look: 'penny', sex: 'f', kind: 'adult', age: 52, ft: `5'4"`, role: "the shopkeeper of Penny's Pockets", acc: 'a small drawstring pouch in one hand, a shrewd, friendly smile' },
+  nickel: { name: 'Nickel', look: 'nickel', sex: 'f', kind: 'adult', age: 50, ft: `5'6"`, role: "the shopkeeper of Nickel's, Penny's partner", acc: 'one hand resting on a shop apron pocket, a confident, businesslike smile' },
+  sal: { name: 'Sal', look: 'sal', sex: 'm', kind: 'adult', age: 50, ft: `5'8"`, role: 'the driver of the Long Island Taxi, cab seven', acc: 'a set of cab keys dangling from one finger, a relaxed, chatty look' },
+  sol: { name: 'Sol', look: 'sol', sex: 'm', kind: 'adult', age: 52, ft: `5'7"`, role: "Sal's cousin, the one driver of Angel City Cab Co.", acc: 'a pair of cab keys in one hand, a dry, knowing smile, family resemblance to Sal' },
+  skye: { name: 'Skye', look: 'skye', sex: 'f', kind: 'adult', age: 24, ft: `5'6"`, role: 'a Downtown LA loft resident who films videos', acc: 'holding a phone out in front of her at arm length as if filming herself, a bright, camera-ready smile' },
+  chet: { name: 'Chet', look: 'chet', sex: 'm', kind: 'adult', age: 30, ft: `5'11"`, role: 'an actor who works as a car valet at a tower', acc: 'a set of car keys held up in one hand, a polished, hopeful, slightly dramatic pose' },
+  wes: { name: 'Wes', look: 'wes', sex: 'm', kind: 'adult', age: 33, ft: `5'10"`, role: 'a screenwriter who lives in the lofts', acc: 'a laptop tucked under one arm and a pencil behind his ear, a distracted, thoughtful look' },
+  boomie: { name: 'Boomie', look: 'boomie', sex: 'f', kind: 'adult', age: 44, ft: `5'6"`, role: "Tom's friend from Downtown LA, a gospel and soul singer about to go on tour (a human woman)", acc: 'one hand pressed to her heart and the other open wide, mid-song, a huge, kind smile', over: { skin: '#6a4030', hair: '#2a2220', shirt: '#e97c2e', pants: '#2a5286', hat: null } },
+  bev: { name: 'Bev', look: 'bev', sex: 'f', kind: 'adult', age: 66, ft: `5'3"`, role: 'a tourist visiting from Ohio', acc: 'a camera on a strap around her neck and a folded tourist map in one hand, an excited smile' },
+  priya: { name: 'Priya', look: 'priya', sex: 'f', kind: 'adult', age: 35, ft: `5'4"`, role: 'an office worker on the 34th floor of the Grand Tower', acc: 'a staff badge on a lanyard and a tablet held to her chest, a polite, slightly wistful look' },
+  juniper: { name: 'Juniper', look: 'juniper', sex: 'f', kind: 'adult', age: 28, ft: `5'6"`, role: 'the barista at Golden Hour Coffee', acc: 'a paper coffee cup held out in one hand, a sunny, dreamy smile' },
+  kenji: { name: 'Kenji', look: 'kenji', sex: 'm', kind: 'adult', age: 45, ft: `5'7"`, role: 'the chef at Ramen Ramen', acc: 'a steaming ramen bowl held in both hands, standing proud in a chef jacket' },
+  sage: { name: 'Sage', look: 'sage', sex: 'f', kind: 'adult', age: 32, ft: `5'8"`, role: 'the owner of Very Green Juice', acc: 'a tall green juice in a glass held up in one hand, a serene, calm smile' },
+  marguerite: { name: 'Marguerite', look: 'marguerite', sex: 'f', kind: 'adult', age: 66, ft: `5'5"`, role: 'the keeper of Backlot Wardrobe', acc: 'a measuring tape draped around her neck and a pincushion on one wrist, a sharp, kind look', glasses: true },
+  dolores: { name: 'Dolores', look: 'dolores', sex: 'f', kind: 'adult', age: 60, ft: `5'4"`, role: 'the owner of the Starlite cinema', acc: 'a paper ticket held between two fingers, an elegant, proud stance' },
+  dash: { name: 'Dash', look: 'dash', sex: 'm', kind: 'adult', age: 27, ft: `5'10"`, role: 'the clerk of the Board Room skate shop', acc: 'a skateboard held under one arm, a laid-back, easy slouch' },
+  washington: { name: 'Mr. Washington', look: 'washington', sex: 'm', kind: 'adult', age: 77, ft: `5'9"`, role: 'a Jefferson Park neighbour who has lived on the same porch since 1979', acc: 'a coffee mug held in one hand, standing relaxed and content, a gentle, settled smile' },
+  marisol: { name: 'Marisol', look: 'marisol', sex: 'f', kind: 'adult', age: 40, ft: `5'6"`, role: 'a Jefferson Park neighbour walking her dog', acc: 'holding the looped end of an empty dog leash in one hand, looking amused and a little distracted' },
+  larry: { name: 'Larry', look: 'larry', sex: 'm', kind: 'adult', age: 55, ft: `5'9"`, role: 'a Jefferson Park neighbour who blows leaves', acc: 'a handheld leaf blower in one hand pointed at the ground, a cheerful, contented look' },
+  bernadette: { name: 'Bernadette', look: 'bernadette', sex: 'f', kind: 'adult', age: 66, ft: `5'4"`, role: 'the Neighborhood Watch Captain of Old Oak Park for 19 years', acc: 'a small pair of binoculars hanging on her chest and a whistle on a cord, arms folded, a stern but fond look' },
+  odette: { name: 'Miss Odette', look: 'odette', sex: 'f', kind: 'adult', age: 70, ft: `5'4"`, role: "the cook of Odette's Creole Kitchen", acc: 'a long wooden spoon held up like a scepter, a warm, welcoming, motherly smile' },
+  carmen: { name: 'Doña Carmen', look: 'carmen', sex: 'f', kind: 'adult', age: 58, ft: `5'3"`, role: 'the owner of Pupuseria La Ceiba', acc: 'a plate of golden pupusas held out with both hands and a clean apron over her clothes, a big welcoming smile' },
+  ray: { name: 'Ray', look: 'ray', sex: 'm', kind: 'adult', age: 45, ft: `5'11"`, role: 'the security guard at the Sunset Gold Studios gate', acc: 'a clipboard held against his chest, a firm but friendly stance, feet planted' },
+  toni: { name: 'Toni', look: 'toni', sex: 'f', kind: 'adult', age: 38, ft: `5'6"`, role: 'the craft services cook at the film studio', acc: 'a tray of fresh bagels held out in front of her, an apron over her white shirt, a generous grin' },
+  kiki: { name: 'Kiki', look: 'kiki', sex: 'f', kind: 'adult', age: 25, ft: `5'4"`, role: 'a production assistant on a film set', acc: 'a headset on her head and two radios clipped to her belt, wide-eyed and a bit frazzled' },
+  dana: { name: 'Dana', look: 'dana', sex: 'f', kind: 'adult', age: 35, ft: `5'6"`, role: 'a first-time film director', acc: 'a small director viewfinder held up in one hand, a nervous, hopeful smile' },
+  alvarez: { name: 'Mrs. Alvarez', look: 'alvarez', sex: 'f', kind: 'adult', age: 66, ft: `5'2"`, role: 'the matriarch of the Casa Alvarez household of ten', acc: 'one hand on her hip and the other holding a wooden spoon, a no-nonsense but loving expression' },
+  beto: { name: 'Don Beto', look: 'beto', sex: 'm', kind: 'adult', age: 80, ft: `5'4"`, role: "the Alvarez family's grandfather, who loves his chair", acc: 'a small transistor radio held in one hand, a mellow, amused smile, standing a little stooped' },
+  tony: { name: 'Tony', look: 'tony', sex: 'm', kind: 'adult', age: 42, ft: `5'8"`, role: 'a member of the Alvarez household, saving for a home with Yesenia', acc: 'arms crossed over his chest, a wry, tired-but-hopeful half smile' },
+  yesenia: { name: 'Yesenia', look: 'yesenia', sex: 'f', kind: 'adult', age: 38, ft: `5'5"`, role: 'a member of the Alvarez household, Tony\'s partner and a busy mother', acc: 'one hand held up like a stop sign and the other on her hip, an alert, frazzled look' },
+  claudia: { name: 'Claudia', look: 'claudia', sex: 'f', kind: 'adult', age: 27, ft: `5'4"`, role: 'a night shift nurse in the Alvarez household', acc: 'a stethoscope around her neck and a sleepy, kind smile, holding a travel pillow under one arm' },
+  kevin: { name: 'Kevin', look: 'kevin', sex: 'm', kind: 'child', age: 11, ft: `4'8"`, role: 'a boy in the Alvarez household', acc: 'a sports water bottle in one hand and a comically resigned shrug' },
+  daisy: { name: 'Daisy', look: 'daisy', sex: 'f', kind: 'child', age: 13, ft: `5'0"`, role: 'a girl in the Alvarez household who is making a documentary', acc: 'a small handheld video camera held up to one eye, a mischievous, serious-filmmaker smile' },
+  mateo: { name: 'Mateo', look: 'mateo', sex: 'm', kind: 'child', age: 5, ft: `3'6"`, role: 'a little boy in the Alvarez household who loves trucks', acc: 'a toy dump truck held up high in both hands, mouth open in a delighted shout' },
+  sofi: { name: 'Sofi', look: 'sofi', sex: 'f', kind: 'child', age: 4, ft: `3'3"`, role: 'the littlest girl in the Alvarez household, who pretends to be a dinosaur', acc: 'both hands curled like little dinosaur claws, a fierce, giggly roar face' },
+  jordan: { name: 'Jordan', look: 'jordan', sex: 'm', kind: 'adult', age: 36, ft: `5'10"`, role: 'a house renovator who lives with Sam', acc: 'a tape measure clipped to his belt and a small hammer in one hand, a proud, handy stance' },
+  sam: { name: 'Sam', look: 'sam', sex: 'f', kind: 'adult', age: 34, ft: `5'7"`, role: 'a house renovator who lives with Jordan and posts everything online', acc: 'a phone held up in one hand, a quick, delighted smile' },
+  dakota: { name: 'Dakota', look: 'dakota', sex: 'f', kind: 'adult', age: 36, ft: `5'8"`, role: 'a homeowner restoring a 1912 house with Ryan', acc: 'a paintbrush held in one hand, a fond, determined smile' },
+  ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one finger pressed to his lips to ask for quiet, a baby monitor in the other hand, exhausted but happy' },
+};
+
+const BATCHES = [
+  { title: 'Square and Pier wanderers', keys: ['pip', 'moss', 'dot', 'gus', 'bean', 'reel'], note: 'Pip, Moss, Dot are children; Pip and Moss boys, Dot a girl (genders and exact heights assumed)' },
+  { title: 'Long Island Elementary people', keys: ['pruitt', 'delgado', 'kowalski', 'ike', 'halverson'], note: 'ages and heights assumed' },
+  { title: 'Long Island shopkeepers', keys: ['bun', 'page', 'fern', 'kit', 'oolong', 'luna'], note: 'ages and heights assumed' },
+  { title: 'Coin sellers and cab cousins', keys: ['penny', 'nickel', 'sal', 'sol'], note: 'ages and heights assumed' },
+  { title: 'Downtown LA locals', keys: ['skye', 'chet', 'wes', 'boomie', 'bev', 'priya'], note: 'Boomie skin and clothes taken from her game sprite, ages and heights assumed' },
+  { title: 'Downtown and Jefferson Park shopkeepers', keys: ['juniper', 'kenji', 'sage', 'marguerite', 'dolores', 'dash'], note: 'ages and heights assumed' },
+  { title: 'Jefferson Park and Old Oak Park neighbours', keys: ['washington', 'marisol', 'larry', 'bernadette', 'odette', 'carmen'], note: 'ages and heights assumed' },
+  { title: 'Studio gate crew', keys: ['ray', 'toni', 'kiki', 'dana'], note: 'ages and heights assumed' },
+  { title: 'Casa Alvarez grown-ups', keys: ['alvarez', 'beto', 'tony', 'yesenia', 'claudia'], note: 'ages and heights assumed' },
+  { title: 'Casa Alvarez kids', keys: ['kevin', 'daisy', 'mateo', 'sofi'], note: 'children; ages and heights assumed' },
+  { title: 'Jordan and Sam, Dakota and Ryan', keys: ['jordan', 'sam', 'dakota', 'ryan'], note: 'ages and heights assumed' },
+];
+
+const ART = `ART STYLE
+- Illustrated whimsical realism: every person is a full-body storybook caricature of a real-looking person, painted by hand in the style of attachment 1, with dense painted texture, fine visible brushwork, deep saturated jewel colors and crisp detail on hair strands, fabric folds and shoe edges.
+- Oversized head with a warm, expressive, slightly exaggerated face, a slim body, small hands and small feet. Realistic body proportions below the head: this is NOT chibi, NOT cartoonish, no tiny stubby body.
+- Warm golden light from the upper left, a soft warm rim light, a gentle soft shadow only. Clean, crisp edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.`;
+
+const PEOPLE = `PROPORTIONS (strict)
+- All adult faces on the sheet are the same size: the head of every adult is about one fifth of that person's full body height, painted at the same scale as the adults in the style key.
+- Children's heads follow Grace and Rose in the style key: an oversized head a little over one quarter of the child's body height, a small body, small hands and small feet.
+- Relative heights follow the real heights given below and the height chart: a 5'11" person stands visibly taller than a 5'2" person, a child stands clearly shorter than the adults. Keep one shared scale for the whole sheet. Heights are measured from the soles of the shoes to the top of the head.`;
+
+function cell(i, k) {
+  const c = N[k];
+  const p = { ...PAL[c.look], ...(c.over || {}) };
+  const sx = c.sex === 'f' ? ['woman', 'her', 'She'] : ['man', 'his', 'He'];
+  const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : sx[0];
+  const him = c.sex === 'f' ? 'her' : 'his';
+  const hair = p.hair ? `${cw(p.hair, HAIR)} hair` : 'no hair visible';
+  const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
+  const old = c.age >= 60 ? ' Older: softer, more lined face, a slightly shorter, gentler posture.' : '';
+  const glasses = c.glasses ? ' Round glasses.' : ' No glasses.';
+  const pants = p.pants === p.shirt ? `matching trousers in the same color` : `trousers in ${cw(p.pants, CLOTH)}`;
+  return `${i}. ${c.name.toUpperCase()}: a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}. Skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, plain simple shoes; ${hat}.${glasses}${old} Pose and accessory: ${acc(c)}.`;
+}
+const acc = c => c.acc;
+
+function sheet(keys) {
+  const n = keys.length;
+  const cells = keys.map((k, i) => cell(i + 1, k)).join('\n');
+  const empty = n < 6 ? ` Cells ${n + 1} to 6 stay empty: flat magenta only, nothing drawn.` : '';
+  return `IMAGE REQUEST: ONE SINGLE LINEUP SHEET. Return exactly one image, nothing else.
+
+WHAT THIS IS
+A lineup sheet of ${n} townsfolk of "The Adventures of Tom", a family role-playing game: each person is painted standing alone, full body, as a character reference. Each person is a distinct individual with their own face, build and style.
+
+ATTACHED IMAGES (in this order)
+1. The STYLE KEY, a finished painting of the family in a school yard. This is THE look to match: how it paints people, their faces, hair, clothes, shoes, and the size of the heads. Do not copy any of its people, only its painting style and head size.
+2. A HEIGHT CHART of grey shapes. It shows SIZE ONLY. Do not copy the grey shapes, the grid or the text. Use it only to judge relative heights. An adult shopkeeper in the style key is 5'8".
+
+${ART}
+
+${PEOPLE}
+
+THE SHEET (strict)
+- A grid of 3 columns by 2 rows of equal cells, 512 x 512 pixels each, so the full image is 1536 x 1024. If your tool offers a larger size, keep exactly 3 columns and 2 rows and the 3:2 shape.
+- Exactly ${n} people, one per cell, filled left to right, then top to bottom, in the numbered order below.${empty}
+- Each person stands alone and full body, from the top of the head to the soles of the shoes, facing the viewer in a relaxed three-quarter pose, feet flat on one shared invisible ground line near the bottom of the cell, with a clear margin of at least 8 percent on every side. Nobody touches a cell edge or overlaps a neighbour.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on any person. No magenta glow, spill, tint or fringe on edges or hair strands. No ground, no floor, no cast shadows, no grid lines, borders or cell backgrounds.
+- NO TEXT AT ALL: no names, no captions, no numbers, no labels, no titles, no lettering on clothes.
+- Hands hold only the accessory named for that person. No other props, no animals, no effects.
+
+THE ${n} PEOPLE (cell number: name, who, look)
+${cells}
+
+NEVER substitute. Draw exactly these ${n} people, one per cell, in this order, with exactly the colors and heights given. Do not add extra people, do not swap faces between cells, do not invent other clothes. If anything is unclear, draw the person standing relaxed and smiling as described. Family friendly for ages 6 and up.`;
+}
+
+const entries = BATCHES.map((b, i) => ({
+  id: 'npc-batch-' + String(i + 1).padStart(2, '0'), tab: 'NPCs',
+  title: `${b.title}: ${b.keys.map(k => N[k].name).join(', ')} (${b.note})`,
+  ar: '3:2', refs: [REF_KEY, REF_CHART], prompt: sheet(b.keys),
+}));
+module.exports = { entries };

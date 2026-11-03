@@ -1,0 +1,56 @@
+Create the actual environment painting for Area 07, Long Island Elementary (the schoolyard), from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1152 pixels (4:3). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
+
+STYLE AND CAMERA
+A richly detailed, polished hand-painted digital illustration of a small-town elementary school and its yard, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on windows, lamps, car roofs and the slide, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the school front, the walks, the parking lot and the playground together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+
+SCALE AND CAMERA DISTANCE (important)
+This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire schoolyard, from the school roof to the parking lot fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
+- A grown-up person standing on a path would be only about one fifteenth of the picture height.
+- Paths are about two people wide, about one twelfth of the picture width.
+- The exit board is about one seventh of the picture width.
+- Each car is about one twelfth of the picture width; the school building spans the full width but is short, about one quarter of the picture height including its roof.
+
+SETTING
+Long Island Elementary at golden hour on a school night, as parents arrive for conferences. Warm low sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, a peach and lavender sky glow, windows and lamps just switched on and glowing warm. Red brick, white trim, neat flower beds, a crisp paved walk, a small parking lot, a fenced playground. Cozy, welcoming and a little sleepy.
+
+THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
+A character must be able to walk from the west entrance to the school doors, the playground, the bike rack, both benches and around every parked car. No hedge, fence, flower bed, car or prop may wall off a route. Every walk is at least two character-widths wide.
+- THE SCHOOL fills the top of the picture: a long one-story red brick building across the full width, its front facing down toward the viewer. Its FRONT DOORS are at the top center under an entrance portico, with a wide paved walk running straight down from them.
+- WEST ENTRANCE: a wide sidewalk enters from the LEFT edge at the middle of the picture height and joins a sidewalk loop in front of the school.
+- The sidewalk loop connects the west entrance, the front walk, the bike rack, the pickup bench, the playground gate and the parking lot.
+- THE PARKING LOT is in the lower left: painted parking spaces with exactly three parked cars, and open asphalt around each car.
+- THE PLAYGROUND is on the right, inside a low black fence with an OPEN GATE facing the sidewalk loop; inside it is open wood chips with room to walk between the equipment.
+- No other exits: the bottom edge and right edge are closed by a low fence, a hedge and trees; the school building closes the top.
+- Benches, the bike rack, lamps, flower beds and cars sit beside the walks, never across them.
+
+ARCHITECTURE: ONE STRONGLY THEMED SCHOOL
+The building must read as an elementary school with no sign: red brick with white trim, tall classroom windows filled with paper snowflakes and children's crayon drawings, one window flickering, a white entrance portico with columns, a small white cupola on the roof with a bell and a round clock, a flagpole with its flag lowered for the night beside the front walk, colorful painted hopscotch and a four-square court on the paving near the doors.
+
+SIGNS: DESIGN AND LETTER EACH ONE YOURSELF
+ALL CAPITALS, two centered lines, large and easy to read, spelled exactly as written, letter by letter.
+1. School name LONG ISLAND / ELEMENTARY (L-O-N-G, a space, I-S-L-A-N-D; E-L-E-M-E-N-T-A-R-Y): raised brass letters mounted on the brick above the portico, never covering the doors.
+2. EXIT BOARD: a green board with carved cream-gold letters, hung HIGH between two tall posts like an archway over the west sidewalk, the board's bottom edge well above head height, a little in from the left edge: LONG ISLAND / SQUARE (L-O-N-G, a space, I-S-L-A-N-D; S-Q-U-A-R-E).
+These two signs are the only words in the image. No freestanding school sign, marquee, banner, notice, price, license plate text or bumper sticker text.
+
+PROPS
+- A bike rack left of the front walk with one old bike that has no wheels.
+- A pickup bench beside the walk, near the bike rack.
+- Iron lamp posts along the walks, glowing.
+- Exactly three parked cars in the lot: a blue minivan with a few round running stickers that have no letters or numbers, a green hatchback with folding chairs piled inside, and a silver sedan with a small gold star sticker.
+- In the playground: a two-seat swing set, a metal slide on a small tower, a tetherball pole with the rope looped all the way around it.
+- A bench outside the playground fence facing the playground.
+- Flower beds with tulips and low hedges along the school front.
+
+LAYERING (the game cuts trees, lamps, the flagpole, the board, the portico, roof edges and tall props out as separate layers)
+Paving, asphalt, grass and wood chips continue unbroken under and behind every tree, lamp, post, car, fence and the roof eaves. Every tall object has a clear visible base with ground showing behind it. Crisp clean silhouettes on trees, lamps, the flagpole, the board, the playground and the roof edge. Nothing floats.
+
+LIGHT AND COLORS
+Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, red brick #A9563F, white trim #F2EBDD, warm paving #E3CFAE, asphalt #5E5A63, leafy sage #608775, light green grass #B4C395, warm shadows #716351. Clear darker contact shadow under the building, cars and props, glowing windows and lamps.
+
+STRICT EXCLUSIONS
+No people, no animals, no monsters. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the two signs. No other buildings, no buses, no more than three cars. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.

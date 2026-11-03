@@ -1,0 +1,50 @@
+Create the actual environment painting for Area 02, Rivituso Row, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
+
+STYLE AND CAMERA
+A richly detailed, polished hand-painted digital illustration of a small residential lane, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on roof tiles, lanterns and windows, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing house fronts, roofs, gardens and walkable paths together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+
+SETTING
+A cozy family lane on Long Island on a clear warm afternoon, the same town as the town square to the north. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade. Honey-cream cobblestone paths, green lawns, vegetable and flower gardens, low wooden fences, mature leafy trees. Three family homes, warm and lived-in, not mansions.
+
+THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
+A character must be able to walk from either exit to every front door and all the way around every house. No house, fence, garden, tree or prop may wall off a route.
+- Every house is FREESTANDING and FULLY INSIDE the picture, about one quarter of the image width, with a wide cobblestone path on EVERY side, including behind it. Leave at least one path-width of cobbles between each house and the picture edge. No two houses touch, and no deck, garden bed or fence closes a gap.
+- A main cobblestone lane loops through the middle of the picture and passes in front of all three front doors, with a short path from the lane to each door step. Behind each house a narrow cobbled path runs around the back and rejoins the lane on both sides.
+- NORTH EXIT: wide stone steps climb from the lane to the TOP edge, just right of the center, toward the town square.
+- SOUTH EXIT: a cobbled path runs from the lane straight down to the BOTTOM edge at the center, toward the fishing pier.
+- No other exits: wherever a path nears the left, right or top edge (other than the north steps), it curves back and ends in a fence, hedge and trees before the edge.
+- Benches, planters, lamps, bikes, trees and garden beds sit beside the paths, never in them.
+
+ARCHITECTURE: EXACTLY THREE DISTINCT, STRONGLY THEMED HOMES
+Each home must say who lives there with no sign: the theme is built into its shape, roofline, windows, trim, porch and yard, not just props by the door. No two silhouettes alike.
+1. The Gregori home (UPPER LEFT), a busy young family's home: a two-story house with rose-red trim and a cheerful red front door, a big wooden deck visibly built by hand on its side (with the path running around the deck), a basement window well, a lawn with a gymnastics mat and a small balance beam, a chalk-drawn hopscotch on the path, a painted mural of flowers and stars on a side wall, two kids' bikes and a scooter by the steps, a running-shoe rack and a sports net on the porch, a violin case on the porch bench, a stuffed toy lamb sitting in the front window.
+2. The Rivituso home (UPPER RIGHT, fully in frame with path on its right side), the grandparents' home: a warm-brown cottage with a deep front porch and two rocking chairs, a kitchen window with pies cooling on the sill, a chimney puffing baking smoke, a big garden beside it with sunflowers and a friendly scarecrow, a tomato trellis, a raised bed of red and green chili peppers, fishing rods and a tackle box leaning by the side door, a crescent moon and stars cut into the window shutters.
+3. Aunt Ellie's home (LOWER LEFT OF CENTER), the glamorous great-aunt's home: a narrow, elegant plum-purple townhouse with a Paris-style curved mansard roof, wrought-iron balcony with flower boxes, tall shuttered French windows, a striped awning, a tiny cafe table for one, a hat stand and a long silk scarf fluttering from the balcony rail, a teal arched front door with brass trim.
+No fourth house, no shop, no tower.
+
+SIGNS: DESIGN AND LETTER EACH ONE YOURSELF
+Each home has one name sign mounted beside or above its door (never covering the door, porch roof or lamp), a unique object in that home's own theme and materials, with lettering designed to match. ALL CAPITALS, large and easy to read. Each home sign shows ONLY the family name, with no other word (never the word HOUSE, HOME or FAMILY). Spell every word EXACTLY as written, letter by letter, with no extra letters:
+1. GREGORI (G-R-E-G-O-R-I), one line: a bright hand-painted wooden board decorated with painted stars and flowers, letters in cheerful red and white.
+2. RIVITUSO (R-I-V-I-T-U-S-O), one line: a carved wooden board shaped like a rolling pin with a small carved fish, letters burned into the wood.
+3. AUNT ELLIE (A-U-N-T, a space, E-L-L-I-E; the first word is exactly four letters, AUNT, never AUNTI or AUNTIE), one line: an oval enamel plaque with a gold frame, like a Paris street sign, letters in elegant gold on deep plum.
+EXIT BOARDS: two matching green boards with carved cream-gold letters, two centered lines, both the SAME design and the SAME height, each hung HIGH between two tall iron posts like an archway over its path, the board's bottom edge well above head height (higher than the front doors), the path open underneath.
+- North: over the stone steps near the top edge: LONG ISLAND / SQUARE.
+- South: NOT at the bottom edge. Place it over the south path right where the path leaves the main lane, about two thirds of the way down the picture, with clear cobbles continuing below it to the bottom edge. It is exactly as tall as the north board: CATTAIL / PIER (C-A-T-T-A-I-L).
+These five signs are the only words in the image.
+
+YARD AND PROPS
+Two wooden benches beside the lane. Iron street lamps along the lane. Flower beds, small hedges and low wooden fences around the yards, each with an opening onto the paths. Dense summer trees along the outer edges, leaving the two exits open. No freestanding signs, notice boards or signposts except the two exit boards.
+
+LAYERING (the game cuts trees, lamps, signs, porches and roofs out as separate layers)
+Paths, lawn and soil continue unbroken under and behind every tree, lamp, bench, sign post, porch roof and eave. Every tall object has a clear visible base with ground showing behind it. Crisp clean silhouettes on tree canopies, lamps, signs and roof edges. Nothing floats.
+
+LIGHT AND COLORS
+Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, cream paving #EED8B5, leafy sage #608775, light green lawn #B4C395, terracotta #CF7954, warm shadows #716351. Clear darker contact shadow under houses and props, open sunlit lane.
+
+STRICT EXCLUSIONS
+No people, no live animals, no monsters, no vehicles. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the five signs; no word HOUSE anywhere. No houses touching each other or the picture edge. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No pond, river, bridge or garden maze. No title card, frame, contact sheet or palette chart.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.

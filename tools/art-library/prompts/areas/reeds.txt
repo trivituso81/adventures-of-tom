@@ -1,0 +1,51 @@
+Create the actual environment painting for Area 05, Whispering Marsh, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1664 x 1472 pixels (26:23). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
+
+STYLE AND CAMERA
+A richly detailed, polished hand-painted digital illustration of a reedy salt marsh crossed by wooden boardwalks, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on the shallow water, wet planks, lily pads and reed tips, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the boardwalks, the water and the reed beds together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+
+SCALE AND CAMERA DISTANCE (important)
+This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire marsh and its whole boardwalk route fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
+- A grown-up person standing on a path would be only about one fifteenth of the picture height.
+- Paths are about two people wide, about one twelfth of the picture width.
+- The exit boards are about one seventh of the picture width.
+- Reed clumps and trees are small islands seen from above; the whole zigzag route is visible from end to end.
+
+SETTING
+A wide Long Island salt marsh on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, a thin glowing mist far away. Shallow teal water, lily pads, tall feathery reeds and cattails that seem to lean and whisper, small grassy islands, mossy old stumps and leaning posts. Mysterious but friendly: a place where small marsh creatures might live.
+
+THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
+This marsh is ONE long connected route on wooden boardwalks and solid ground. A character must be able to walk from the east entrance all the way to the top left exit without ever stepping into water. Every boardwalk is wide enough for two people side by side, with continuous planks: no gaps, no missing or broken planks, no steps down into the water along the route.
+- EAST ENTRANCE: a wide wooden platform at the RIGHT edge, about three fifths of the way down, connected to dry ground at the edge.
+- From the platform, a long straight boardwalk runs WEST across the middle of the marsh, past reed islands, for most of the picture width.
+- Near the left third it turns and ZIGZAGS NORTH in two or three wide right-angle steps, each corner a small square landing.
+- The boardwalk ends on SOLID GROUND in the upper left: a grassy dirt path that climbs to the TOP edge near the left side, about one seventh of the picture width from the left edge.
+- Where the dirt path reaches the top edge it passes between two clumps of very tall old reeds, with the path itself left open.
+- One or two short side boardwalks may branch off to small grassy islands with a mossy stump; they are dead ends but fully walkable.
+- No other exits: the rest of the edges are water, dense reeds and trees.
+- Posts, reeds and stumps stand beside the boardwalks, never on the walking surface.
+
+LANDMARKS AND PROPS
+- Old leaning mooring posts and rope along the boardwalk edges.
+- Mossy stumps and a twisted dead tree on a small island.
+- A half-sunken old wooden rowboat in the reeds, away from the route.
+- Lily pads with a few pink water lilies, dragonfly-free still water, patches of tall cattails.
+
+SIGNS: DESIGN AND LETTER EACH ONE YOURSELF
+EXIT BOARDS only: two matching green boards with carved cream-gold letters, two centered lines, ALL CAPITALS, large and easy to read, spelled exactly as written letter by letter, both the same design and height, each hung HIGH between two tall wooden posts like an archway over its path, the board's bottom edge well above head height, the path open underneath.
+1. East: over the boardwalk just in from the right edge platform: CATTAIL / PIER (C-A-T-T-A-I-L; P-I-E-R).
+2. Top left: over the dirt path a little below the top edge: SUNDIAL / HOLLOW (S-U-N-D-I-A-L; H-O-L-L-O-W).
+These two boards are the only words in the image. No other signs, signposts or notices.
+
+LAYERING (the game cuts reeds, trees, posts and boards out as separate layers)
+Planks, ground and water continue unbroken under and behind every reed clump, post, stump and board. Every tall object has a clear visible base. Crisp clean silhouettes on reed clumps, trees, posts and boards. Nothing floats.
+
+LIGHT AND COLORS
+Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, marsh water teal #4F9A93, weathered planks #A7835A, reed gold #D8B66A, leafy sage #608775, light green grass #B4C395, warm shadows #716351. Clear darker contact shadow under posts and boardwalks, a sunlit open route.
+
+STRICT EXCLUSIONS
+No people, no animals, no birds, no fish visible, no monsters. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the two exit boards. No buildings, bridges over the edge, or boats on the route. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.

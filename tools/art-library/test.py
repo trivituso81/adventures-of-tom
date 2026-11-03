@@ -6,10 +6,35 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
+EXPECT = {'Characters': 53, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87}
+EXPECT_TOTAL = sum(EXPECT.values())
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
+def data_checks():
+    import re
+    d = json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json')))['entries']
+    per = {}
+    for e in d: per[e['tab']] = per.get(e['tab'], 0) + 1
+    ok(per == EXPECT, 'entries per tab %s' % per)
+    ids = [e['id'] for e in d]
+    ok(len(ids) == len(set(ids)), 'ids are unique')
+    bad = []
+    banned = re.compile(r'(?i)\b(16[- ]bit|32[- ]bit|snes|super nintendo|final fantasy|chrono trigger|pixel[- ]?art|retro|sprites?)\b')
+    neg = re.compile(r'(?i)\b(?:not|no|never|nor)\s+(?:an?\s+)?(?:pixel[- ]?art|16[- ]bit(?:\s+era)?(?:\s+tile\s+art)?|32[- ]bit|retro(?:\s+game\s+art)?|sprites?)\b')
+    for e in d:
+        if not e['prompt'] or not e['ar'] or len(e['refs']) > 5 or 'bake' in e: bad.append(e['id'] + ' shape')
+        if banned.search(neg.sub(' ', e['prompt'])): bad.append(e['id'] + ' banned word')
+        if re.search('[\u2014\u2013]', e['prompt'] + e['title']): bad.append(e['id'] + ' dash')
+        for r in e['refs']:
+            m = re.match(r'art/raw/([a-z]+)/([a-z0-9-]+)-v\d+\.png$', r)
+            if m:
+                tgt = [x for x in d if x['id'] == m.group(2)]
+                if not tgt or tgt[0]['tab'].lower() != m.group(1): bad.append(e['id'] + ' chain ' + r)
+            elif not os.path.exists(os.path.join(ROOT, r)): bad.append(e['id'] + ' missing ' + r)
+    ok(not bad, 'every entry has a prompt, ar, <=5 refs that exist or chain to an entry, no banned words or dashes: %s' % bad[:5])
 async def main():
+    data_checks()
     web = subprocess.Popen([sys.executable, '-m', 'http.server', '8811'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8812'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(1.2)
@@ -47,7 +72,7 @@ async def main():
                     import zipfile; z = zipfile.ZipFile(path); names = z.namelist()
                     ok(z.testzip() is None and 'art-prompts-edited.json' in names and sum(n.startswith('art/') for n in names) == 5, 'export zip is valid with 5 pictures and the prompts file')
                     await pg.wait_for_timeout(3600)
-                    await pg.locator('.card[data-id]').screenshot(path=os.path.join(SHOTS, 'art-card-portrait.png'))
+                    await pg.locator('.card[data-id="test-mudling"]').screenshot(path=os.path.join(SHOTS, 'art-card-portrait.png'))
                     # --- B4: approve and reject (GitHub stub)
                     await pg.click('[data-ok]'); await pg.wait_for_function('document.querySelector("[id^=m-]").innerText.includes("GitHub token")')
                     ok(True, 'approve without a GitHub token explains itself')
@@ -73,7 +98,7 @@ async def main():
                     ok('art/raw/enemies/test-mudling-v1.png' in files and 'art/raw/enemies/test-mudling-v2.png' in files, 'both pictures were committed under art/raw/enemies/')
                     ok(en['status'] == 'approved' and len(en['versions']) == 2 and en['versions'][0]['file'].endswith('-v1.png'), 'json: status approved, two versions listed')
                     ok(len(en['rejects']) == 1 and 'pure magenta' in en['rejects'][0]['note'], 'json: the reject note was saved')
-                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:6] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-battle'] and [e['id'] for e in doc['entries']][6:10] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == 34 and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
+                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:6] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-battle'] and [e['id'] for e in doc['entries']][6:10] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == EXPECT_TOTAL and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
                     ok('aot-art-key' in ls, 'key lives in localStorage only')

@@ -1,0 +1,86 @@
+mudling|hollow|16|a squat dome of wet brown mud with one green sprout on its crown, two small bright eyes, a tiny open mouth and stubby dripping mud arms
+skeeter|hollow|20|a ragged swarm of a dozen red-eyed mosquitoes with pale blue wings around one bigger skeeter in the middle
+grump|hollow|24|a fat round-shouldered mossy olive-green toad lump with a pale sagging belly, pondweed hanging like wet hair and a permanent scowl
+toad|hollow|34|a tall yellow-green bog toad on long legs, mouth wide open mid-croak, a big lily pad on its head like a sun hat
+log|hollow|22|a short fat fallen log with two sleepy half-closed eyes, moss, mushrooms and seedlings along its top
+bigone|hollow|60|a bathtub-sized pale blue fish-blob sitting upright on its flat tail, huge white startled eyes, a small round mouth, a pie tin on its head
+smoglet|griffith|18|a puffy pumpkin-sized cloud of brown-grey exhaust with two angry slanted eyes and dirty wisps trailing off
+tickets|griffith|24|a whirl of cream and yellow parking tickets around a scrunched paper face with narrowed eyes
+coyote|griffith|26|a lean tan and cream canyon coyote crouched low with a bushy tail curled up, a sly grin and ears pricked
+gridlock|griffith|30|a battered little red hatchback with a fuming driver face in the windshield and a cloud of exhaust
+tarblob|griffith|18|a low wide puddle of glistening black-purple tar with pale bubbles and two dim sunken glowing eyes
+bigshake|griffith|64|a car-sized brown boulder with a scowling cracked face, a flat mouth and glowing eyes, orbited by small tumbling rocks and orange sparks
+soggysock|marsh|26|a single long white tube sock with two red stripes at the top and red heel and toe, standing on its heel, dripping, with a droopy face
+bobber|marsh|18|a melon-sized red and white fishing bobber with manic wide eyes and a huge grinning mouth, bouncing on a splash of blue water
+tangle|marsh|24|a beach-ball-sized snarl of green-grey fishing line with hooks, a lure and weed, and a happy face in the middle
+snag|marsh|20|a half-sunk mound of dark waterlogged wood and reeds with two broken branches like horns and two narrow glowing eyes
+irongill|marsh|62|a huge catfish squatting in the shallows, body plated in rusty riveted iron, long drooping whiskers, a grim wide mouth and small gold eyes
+extra|backlot|32|a hunched grumpy little man in a crumpled tan overcoat and wide brown fedora, a sour round face and stubbly chin, all beige
+boommoth|backlot|24|a fat fuzzy cream moth with four round wings spotted in brown rings, feathery antennae and tiny sleepy black eyes
+clapper|backlot|26|a wooden film clapperboard on stumpy legs, its top flung open like a mouth full of square white teeth, white gloves raised
+fogwisp|backlot|30|a drifting ghost of pale blue-white fog shaped like a trailing comma, two dark hollow eyes, glowing edges
+cuecrab|backlot|22|a big bright red crab holding a white cue card in each raised claw, a flat grumpy frown
+directorscut|backlot|66|a huge golden brass megaphone on a wooden tripod with a furious face in the bell, a pointing stubby finger, shouting
+popquiz|school|34|a sheet of lined paper standing like a person, a red circled F, a scowling pencil-drawn face, holding a sharpened pencil like a sword
+tardybell|school|26|a shiny brass school bell with a droopy-eyed face, a squat clapper and stubby arms and legs, yellow sound lines
+glitterglue|school|22|a pillow-sized translucent pale blue blob of glitter glue with a red glue-bottle cap on top like a hat and droopy eyes
+dodgeball|school|26|a bright red rubber dodgeball with a furious face and stuck-out tongue on skinny legs with white sneakers and puffy white gloves
+redpen|school|66|a tall slender red fountain pen with a round red cap face, a long red cape and a gleaming gold nib foot, standing in a pool of red ink
+acornagent|oak|18|a small round acorn in a tiny black suit and tie with dark sunglasses and an earpiece
+stickysap|oak|20|a glossy golden-amber melting cone of tree sap with two worried eyes and drips
+peanutgallery|oak|30|a tall peanut in its shell on skinny legs with brown shoes, waving a stick arm and booing with a huge open mouth
+twigspy|oak|32|a thin knobbly twig figure with leaf sprouts and a pointed dead-leaf hat, glowing green eyes, in a sneaky crouch
+cheekstuffer|oak|24|a plump round orange and cream squirrel sitting up with both cheeks stuffed enormously full and a huge bushy tail
+acorncache|oak|30|a barrel-sized dark brown acorn half buried in dirt and leaves with a shy face peeking out under its scaly cap
+chairman|oak|68|a fat smug orange squirrel with a tiny black top hat and gold monocle on a carved red-velvet throne, a white fur-trimmed robe, an enormous bushy tail
+shusher|library|40|a tall red velvet bookmark hanging like a ghost sheet with gold braided tassels, narrowed white eyes and a long disapproving nose
+dogear|library|22|a cheerful cream puppy made of folded paper with a curled page-corner ear and printed text on its face
+cliffhanger|library|34|a thick green hardback book swinging from a wooden crossbar on two chains, a grimacing mouth with a lolling red tongue
+knowitall|library|34|a stout navy encyclopedia volume with a gold K on its spine, a short cape, white gloves, round spectacles and a wooden pointer
+popup|library|32|a paper monster springing from an open pop-up book on a coiled paper spring, a round red spotted head with jagged white teeth
+unread|library|66|an enormous ancient swollen open book with a cracked purple-brown cover, a gnarled angry face pressed into it and torn yellowed pages curling like tentacles
+lukewarm|barn|18|a small cream ceramic coffee mug on stubby legs with a curl of steam, a sad tired face and drips
+leftover|barn|20|a frosty white plastic food tub with a blue snap-on lid on little feet, a grumpy frozen face and ice crystals
+wetblanket|barn|34|a dripping pale blue blanket hanging in a slumped hooded shape with two sad grey eyes and water pooling below
+thedraft|barn|42|a tall twisting spiral gust of icy blue wind with a ghostly hooded face, two slanted glowing eyes and no mouth
+pickyeater|barn|26|a boxy red metal lunchbox on two legs, lid flung open, a furious squinting face, rejected food flying out
+ironbelly|barn|66|a squat cast-iron pot-bellied stove on stubby legs with a rusty riveted belly, a glowing grate mouth, round gauge eyes and a chimney puffing white smoke
+velvetrope|club|36|a polished brass stanchion with a round gold ball top and a snooty face, red velvet ropes swagging out like arms
+stuffedshirt|club|40|a stiff white tuxedo shirt-front and jacket standing on its own with a black bow tie, a long snooty nose and crossed arms
+coathanger|club|40|a grey wire coat hanger with its hook curled like a question mark, draped in a flowing purple 1971 coat, with a small white face
+soreloser|club|34|a square cream playing card on short legs with crossed arms, a furious frown and a floppy dark-purple jester cap
+wallflower|club|30|a big pink flower with a yellow-centered shy face and leafy arms raised to hide, growing from a clay pot
+mirrorball|club|68|a huge glittering silver mirrorball with a wide grinning face in its facets, wearing a swooping purple and cream feathered shawl, hung on a chain
+carryon|terminal|24|a bright blue hard-shell roller bag with brass corners, a happy wide-eyed face, little waving arms and a luggage tag
+jetlag|terminal|26|a soft puffy white cloud wearing a dark blue sleep mask, with a yawning mouth and little Z letters floating up
+longline|terminal|40|a tall yellow and blue stanchion robot with a boxy yellow sign head, a blue retractable belt between its arms and a flashing exclamation mark
+unclaimed|terminal|28|a battered old brown leather suitcase with brass latches, a tired grumpy face and peeling stickers, leaning
+armresthog|terminal|30|a plump pink pig-shaped neck pillow with a smug grin, squinting eyes, a purple sash and both arms out wide
+lastcall|terminal|66|a wide black split-flap departures board on rusty brown spider-like mechanical legs, flaps forming two squinting eyes and a row of teeth
+finalcall|infinity|68|a big navy and gold departures board on two chunky grey robot legs, its screen showing two round white eyes over rows of yellow flap text, and a red antenna
+lostluggage|infinity|30|a teal hard suitcase with brass trim on four little wheels, a worried face, a zipper mouth with a striped sock hanging out and a question-mark tag
+redeye|infinity|38|a small sleepy navy-blue airplane with a red stripe and a striped nightcap with a pom-pom, half-closed cockpit eyes and floating Z letters
+standbysprite|infinity|32|a round yellow gremlin in a blue gate-agent cap with two little horns, worried eyes, a clipboard and a paddle sign, with number 17 pinned on its chest
+gridlockprime|blvd|66|a fat red city bus-car hybrid with a wide windshield showing two round white eyes, a yellow grille mouth, a stop sign on one side, a bank of yellow lights and a flowering traffic-light post on its roof
+drillworm|subrail|68|a huge round grey worm head rising from a pit in a yellow hard hat, two enormous white eyes and a spinning two-tone drill bit nose, orange on one side and green on the other
+hushling|subrail|22|a small grey box-shaped speaker on two little feet with a tiny antenna, a pale face and a finger pressed to its lips in a shush
+signalfault|subrail|42|a tall black railway signal on a grey post with a round red light and a yellow light in its face and a red and white striped stop arm
+turnstile|subrail|40|a grey subway turnstile with a black screen face showing two white eyes and a red mouth, a yellow card slot and three metal bars at its waist
+warden|row|70|Boppy in a suit of glowing gold plate armor with a round golden helmet, a dark visor, big square shoulder plates and a tall halberd, standing square and heavy
+hush9final|dinner|68|a silver railcar standing on two black legs with a red light and a yellow siren dome on its roof, glowing cyan eyes, a cyan stripe and a speaker grille mouth with a white glove raised in a shush
+marlowe16|square|68|a grey-suited man with a sharp side-parted black haircut and a grey scowling face, a clipboard in one hand and a fist of glowing amber glass in the other, amber cracks running up his suit
+greynote|square|18|a small grey square sticky note with a curled corner, two angry little eyes and no limbs
+twinlens|tower|66|a brass gantry on a wide dark base holding two huge lens-eyes in gear-toothed rings, one cold ice blue and one glowing amber, with a red gem and a lever between them
+pausesprite|tower|20|a round blue ball with two vertical white pause bars across its face, dot eyes, pink cheeks and a small smile on two stubby feet
+paperweight|tower|28|a glass snow globe on a wooden base with a tiny red-roofed house inside a swirl of snow, with rosy cheeks and little eyes on the base
+curator|tower|44|a very stiff thin man in a grey cap and jacket and white gloves with small round glasses, holding a white label and a red-tipped label gun
+vance|loom|72|a tall man in a long black coat with gold buttons and a black wide-brimmed hat, a pale grim face, a red tie, a gold pocket watch on a chain and a brass ray gun held low
+censor|deadletter|72|a very tall thin man in a long black suit with a green eyeshade, his whole face a black redaction bar with two white eyes, a striped black and white collar, a black marker raised in one hand and returned envelopes in the other
+deadletter|deadletter|22|a cream envelope with a smiling face, rosy cheeks, closed happy eyes, a red wax seal and scribbled address lines
+rubberstamp|deadletter|32|a wooden-handled rubber stamp standing upright on a red rubber base with X eyes and a flat frown, stomping
+leviathan|core|72|a clockwork serpent of gold with a toothy head, gear-tooth horns and round clock eyes, coiled around a black void with a white clock face in its chest and two giant gold gears at its shoulders
+julian|core|70|a tall man in a long black coat and black hat with a pale softened face, a red tie and a gold pocket watch, holding a brass ray gun loosely at his side, softer in the shoulders, lit by warm gold light
+gremlin|scoops|20|a round fuzzy pink creature covered in rainbow sprinkles with a wide happy grin and four thin pink arms waving
+slushslug|scoops|24|a wide translucent blue slug of slushie ice with sparkling ice chunks, a curled tail, a cheeky one-eyed face and a raised stalk eye
+conehead|scoops|30|two ice cream cones crossed like legs, one with mint chip and one with strawberry, each topped with a cherry and dripping
+brainfreeze|scoops|66|a big blocky frosted pale-blue freezer chest of ice with a furious face, a blue latch on top, ice-crystal fists and a skirt of icicles

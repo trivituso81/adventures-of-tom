@@ -56,7 +56,7 @@ ${headLine(c, sheet)}
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.`;
 
 const WHO = c => `${c.name}
-${c.age ? 'A ' + c.age + ' ' : 'A '}${c.kind === 'child' ? 'girl' : (c.he === 'she' ? 'woman' : 'man')}, real height ${c.ft}. ${c.mood.charAt(0).toUpperCase() + c.mood.slice(1)}.`;
+${c.age ? 'A ' + c.age + ' ' : 'A '}${c.kind === 'child' ? 'girl' : (c.he === 'she' ? 'woman' : 'man')}, real height ${c.ft}. ${c.mood.charAt(0).toUpperCase() + c.mood.slice(1)}.${c.whoExtra ? ' ' + c.whoExtra : ''}`;
 
 function scene(c) {
   return `IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.
@@ -199,12 +199,21 @@ THE 16 FRAMES (each clearly different from the others)
 ${CLOSE(c)}`;
 }
 
-const entries = [];
-for (const c of CAST) {
-  const scenePath = RAW + c.id + '-hero-scene-v1.png', cutPath = RAW + c.id + '-hero-cut-v1.png';
-  entries.push({ id: c.id + '-hero-scene', tab: 'Characters', title: `${c.name[0] + c.name.slice(1).toLowerCase()}: hero pose step 1, painted in the school yard`, ar: '4:3', refs: [REF_YARD, c.hero, REF_KEY, REF_CHART], prompt: scene(c) });
-  entries.push({ id: c.id + '-hero-cut', tab: 'Characters', title: `${c.name[0] + c.name.slice(1).toLowerCase()}: hero pose step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [scenePath], prompt: cut(c) });
-  entries.push({ id: c.id + '-walk', tab: 'Characters', title: `${c.name[0] + c.name.slice(1).toLowerCase()}: walking sheet 3 x 3 (needs step 2 approved)`, ar: '1:1', refs: [cutPath, REF_KEY, REF_CHART], prompt: walk(c) });
-  entries.push({ id: c.id + '-battle', tab: 'Characters', title: `${c.name[0] + c.name.slice(1).toLowerCase()}: battle sheet 4 x 4 (needs step 2 approved)`, ar: '1:1', refs: [cutPath, REF_KEY, REF_CHART], prompt: battle(c) });
+// build(cast) makes the 4 entries per character. Optional per-character fields: label (display name), title (suffix note),
+// whoExtra (added to the WHO block), fix ([find, replace] pairs applied to every prompt of that character), fns ({scene,cut,walk,battle} overrides).
+function build(cast) {
+  const out = [];
+  for (const c of cast) {
+    const scenePath = RAW + c.id + '-hero-scene-v1.png', cutPath = RAW + c.id + '-hero-cut-v1.png';
+    const f = c.fns || { scene, cut, walk, battle };
+    const post = t => (c.fix || []).reduce((x, [a, b]) => x.split(a).join(b), t);
+    const nm = c.label || (c.name[0] + c.name.slice(1).toLowerCase()), sfx = c.title || '';
+    out.push({ id: c.id + '-hero-scene', tab: 'Characters', title: `${nm}: hero pose step 1, painted in the school yard${sfx}`, ar: '4:3', refs: [REF_YARD, c.hero, REF_KEY, REF_CHART], prompt: post(f.scene(c)) });
+    out.push({ id: c.id + '-hero-cut', tab: 'Characters', title: `${nm}: hero pose step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [scenePath], prompt: post(f.cut(c)) });
+    out.push({ id: c.id + '-walk', tab: 'Characters', title: `${nm}: walking sheet 3 x 3 (needs step 2 approved)`, ar: '1:1', refs: [cutPath, REF_KEY, REF_CHART], prompt: post(f.walk(c)) });
+    out.push({ id: c.id + '-battle', tab: 'Characters', title: `${nm}: battle sheet 4 x 4 (needs step 2 approved)`, ar: '1:1', refs: [cutPath, REF_KEY, REF_CHART], prompt: post(f.battle(c)) });
+  }
+  return out;
 }
-module.exports = { CAST, entries };
+const entries = build(CAST);
+module.exports = { CAST, entries, build, scene, cut, walk, battle, ART, STYLE_RULE, ATT, LOOK, CLOSE, WHO, REF_YARD, REF_KEY, REF_CHART, RAW };

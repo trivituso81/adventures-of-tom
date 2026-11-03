@@ -14,7 +14,7 @@ header{display:flex;align-items:center;gap:12px;padding:10px 16px;position:stick
 header h1{font-size:20px;margin:0;flex:1}
 a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
 main{max-width:760px;margin:0 auto;padding:12px 16px 120px}
-.card{background:#1d1a3d;border:1px solid #2c2852;border-radius:14px;padding:12px 14px;margin:0 0 12px}
+.card{background:#1d1a3d;border:1px solid #2c2852;border-radius:14px;padding:12px 14px;margin:0 0 12px;content-visibility:auto;contain-intrinsic-size:auto 760px}
 label{display:block;font-size:13px;color:#b9b3e6;margin:8px 0 6px}
 input[type=password],input[type=text],textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px}
 textarea{min-height:150px;resize:vertical;line-height:1.35;font-size:14px}
@@ -97,7 +97,7 @@ $('keys').addEventListener('click',e=>{
   const del={dx:'aot-art-key',dg:'aot-gh-token',dr:'aot-art-relay'}[id]; if(del){ LS.del(del); paintKeys(); }
 });
 // --- tabs and list
-const TABS=['Characters','Areas','Rooms','Props','Enemies'];
+const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies'];
 function paintTabs(){
   $('tabs').innerHTML=TABS.map(t=>{const n=DATA.entries.filter(e=>e.tab===t).length;return '<button class="tab'+(t===TAB?' on':'')+'" data-tab="'+t+'">'+t+' ('+n+')</button>';}).join('');
 }
@@ -109,7 +109,7 @@ async function paintList(){
   let html='';
   for(const e of list){
     const rs=await results(e.id);
-    const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img src="'+esc(p)+'" alt=""><input type="checkbox" data-ref="'+esc(e.id)+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(p.split('/').pop())+'</label>').join('');
+    const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(p)+'" alt=""><input type="checkbox" data-ref="'+esc(e.id)+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(p.split('/').pop())+'</label>').join('');
     html+='<div class="card" data-id="'+esc(e.id)+'"><div class="row"><b style="flex:1">'+esc(e.title)+'</b><span class="chip">'+esc(e.status||'draft')+'</span></div>'+
     '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+esc(e.id)+'">'+esc(promptOf(e))+'</textarea>'+
     ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+

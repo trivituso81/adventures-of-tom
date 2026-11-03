@@ -1,0 +1,48 @@
+Create the actual environment painting for Area 06, Sundial Hollow, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1408 x 1280 pixels (11:10). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
+
+STYLE AND CAMERA
+A richly detailed, polished hand-painted digital illustration of a hidden mossy forest clearing, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on the deep pool, wet stone, moss and leaves, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the path, the clearing, the stone channel and the pool together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+
+SCALE AND CAMERA DISTANCE (important)
+This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire hollow, channel and pool fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
+- A grown-up person standing on a path would be only about one fifteenth of the picture height.
+- Paths are about two people wide, about one twelfth of the picture width.
+- The exit board is about one seventh of the picture width.
+- The sundial is about one eighth of the picture width; the stone bench about one twelfth; trees stand mostly around the edges with their canopies seen from above.
+
+SETTING
+A secret, magical hollow deep beyond the marsh reeds, on a warm golden afternoon. Golden sunlight from the upper left falls in soft shafts through tall old trees, with dappled shadows falling to the lower right and faint lilac light in the shade. Thick moss, ancient carved stones, twisting roots, ferns, cattails at the water, tiny white flowers. Quiet, old and wondrous, never scary.
+
+THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
+A character must be able to walk from the entrance to the sundial, the stone bench and the pool's edge. No tree, root, rock or prop may wall off a route. Every path is at least two character-widths wide.
+- ENTRANCE: a mossy dirt path enters from the BOTTOM edge at the center.
+- The path climbs into a WIDE ROUND MOSSY CLEARING in the lower middle of the picture, flat and open, with room to walk all the way around the sundial.
+- A short side path runs LEFT from the clearing to a stone bench.
+- THE STONE CHANNEL: about two fifths of the way down, an old carved stone spillway channel runs straight across the whole width of the picture, about one character tall from bank to bank. Paint the channel EMPTY AND DRY: a grey stone floor with damp moss and a few puddles, no flowing water. A single low flat stone crossing (a wide flat slab, level with the banks) crosses the channel a little right of the center, in line with a path from the clearing.
+- Above the channel, a short mossy path leads from the crossing up to a flat rock ledge at the edge of THE DEEP POOL.
+- THE DEEP POOL fills the upper part of the picture: a large, still, very deep blue-green pool with dark depths, lily pads at its edges, mossy boulders and cattails around its shore.
+- No other exits: the left, right and top edges are closed by huge old trees, roots and boulders.
+- Roots, rocks and ferns sit beside the paths, never across them.
+
+LANDMARKS AND PROPS
+- THE SUNDIAL, the heart of the picture: a LARGE ancient stone sundial on a round stepped stone base, about one eighth of the picture width, green with moss, its bronze pointer casting a long shadow, carved with numerals worn smooth into simple marks.
+- Stone bench (left of the clearing): an old carved stone bench with moss on its seat.
+- The flat rock ledge at the pool's edge where someone could kneel and look in.
+- Ancient mossy standing stones along the clearing's edge, glowing mushrooms in the roots, ferns, tiny white flowers.
+
+SIGNS: DESIGN AND LETTER IT YOURSELF
+ONE exit board only: a green board with carved cream-gold letters, two centered lines, ALL CAPITALS, large and easy to read, spelled exactly as written letter by letter: WHISPERING / MARSH (W-H-I-S-P-E-R-I-N-G; M-A-R-S-H). It hangs HIGH between two tall wooden posts like an archway over the entrance path, the board's bottom edge well above head height. Place it NOT at the bottom edge: over the path about four fifths of the way down the picture, with the path continuing below it to the bottom edge. This is the only word in the image. No pool markers, name signs or notices. The sundial numerals are simple carved marks, not letters or digits.
+
+LAYERING (the game cuts trees, standing stones, the sundial, the board and tall props out as separate layers)
+Moss, ground and stone continue unbroken under and behind every tree, standing stone, the sundial, the bench and the board posts. Every tall object has a clear visible base with ground showing behind it. Crisp clean silhouettes. Nothing floats.
+
+LIGHT AND COLORS
+Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, deep pool blue-green #2F6E78, mossy green #6E8F4E, old stone grey #9A9585, warm earth path #A8865A, warm shadows #716351. Clear darker contact shadow under trees, stones and the sundial, a sunlit clearing.
+
+STRICT EXCLUSIONS
+No people, no animals, no fish visible, no monsters. No chests, items, keys, coins, switches or collectibles, and nothing sitting on top of the sundial. No water in the stone channel. No words, numbers or logos other than the exit board. No buildings or bridges other than the flat stone crossing. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.
