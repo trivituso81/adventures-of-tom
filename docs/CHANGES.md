@@ -1,3 +1,9 @@
+## 2026-11-03 (116): Grace front walk, stop-loss on the head turn: straighten the source first (Art Library entry and source pictures only, no game change)
+
+- Two front-step edits (09:40, 09:47) came back with the SAME head tilt and turn, the second despite a prompt that led with a dead-straight-on rule. Cause found: the attached front stand (cell 1 of sheet 2) has that tilt and turn; the edit copies the head pose from its source. Wording does not override it.
+- Changed lever (the input): `tools/sprite-bake/src/grace-walk-v3-stand-front-level.png` is the front stand with the head rotated 10 degrees level (Claude, by script; fixes the tilt, not the turn). New entry `grace-stand-front-straight` ("Grace walk 0") edits ONLY the head to face straight on. When Tom accepts it, it replaces the front stand and becomes the ref of `grace-step-front`; step B is then made from step A (no mirror).
+- Second try saved for the record: `grace-walk-v3-step-front-try2.png`.
+
 ## 2026-11-03 (115): Grace front step prompt: head and body straight to camera (prompt only, no game change)
 
 - Tom (09:42): front step weird, sizes differ and the head faces different directions; both steps must face directly forward. Size is fixed in the bake (scale each frame to the stand's head size). Head: `grace-step-front.txt` now leads with a dead-straight-on head and square shoulders rule. Step B will be its own edit made FROM the accepted step A (other leg forward), not a mirror, so the head and the keychain stay put.

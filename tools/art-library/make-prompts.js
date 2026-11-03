@@ -25,6 +25,8 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-front.txt', 'utf8').trim() },
   { id: 'grace-walk-back', tab: 'Characters', title: 'Grace: walking strip, back view (3 frames)', ar: '2:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-back.txt', 'utf8').trim() },
+  { id: 'grace-stand-front-straight', tab: 'Characters', title: 'Grace walk 0: front stand, face turned straight to camera (run before the front step)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-front-level.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-straight.txt', 'utf8').trim() },
   { id: 'grace-step-front', tab: 'Characters', title: 'Grace walk 1 of 4: front step (edit of her front stand)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-front.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-step-front.txt', 'utf8').trim() },
   { id: 'grace-step-back', tab: 'Characters', title: 'Grace walk 2 of 4: back step (edit of her back stand)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-back.png'],
