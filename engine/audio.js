@@ -20,9 +20,31 @@ function setVolume(kind,n) {
 // Portrait / landscape: 'auto' follows the device; a forced mode rotates the whole stage when the device disagrees.
 const layout={mode:'auto',landscape:false,rotated:false};
 try { layout.mode=localStorage.getItem('le-layout')||'auto'; } catch(e) {}
+// iPad mode (Tom, 2026-11-02): on an iPad (or any big touch screen) the stage fills the whole screen with no frame, follows the
+// device orientation (no rotate toggle), and the landscape HUD, controls, dialog and battle menu are scaled up by --ts (see the
+// html.tablet block at the end of index.html). ?tablet=1 or ?tablet=0 in the address, or le-tablet 'on' or 'off' in localStorage, forces it.
+function detectTablet() {
+  try {
+    const q=new URLSearchParams(location.search).get('tablet');
+    if(q==='1'||q==='0') return q==='1';
+    const s=localStorage.getItem('le-tablet');
+    if(s==='on'||s==='off') return s==='on';
+  } catch(e) {}
+  const touch=navigator.maxTouchPoints||0;
+  const ipad=/iPad/.test(navigator.userAgent||'')||(navigator.platform==='MacIntel'&&touch>1);   // iPadOS Safari reports itself as a Mac
+  const coarse=!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches);
+  return (ipad||coarse)&&Math.min(window.innerWidth,window.innerHeight)>=700;
+}
+const tabletMode={on:false,ts:1};
 function applyLayout() {
   const deviceLandscape=window.innerWidth>window.innerHeight;
-  layout.landscape=layout.mode==='auto'?deviceLandscape:layout.mode==='landscape';
+  const root=document.documentElement;
+  tabletMode.on=detectTablet();
+  tabletMode.ts=Math.max(1.25,Math.min(1.6,window.innerHeight/620));   // 834 px tall (iPad Pro 11) gives 1.34, 1032 (iPad Pro 13) gives 1.6
+  root.classList.toggle('tablet',tabletMode.on);
+  root.style.setProperty('--ts',tabletMode.on?tabletMode.ts.toFixed(3):'1');
+  const mode=tabletMode.on?'auto':layout.mode;   // a tablet always follows how it is held
+  layout.landscape=mode==='auto'?deviceLandscape:mode==='landscape';
   layout.rotated=layout.landscape!==deviceLandscape;
   document.documentElement.classList.toggle('landscape',layout.landscape);
   document.documentElement.classList.toggle('rotated',layout.rotated);
@@ -31,6 +53,7 @@ function applyLayout() {
   if(typeof menuZoom==='function') { menuZoom(); if(typeof menuOpen!=='undefined'&&menuOpen) requestAnimationFrame(sizeRoster); }
 }
 function toggleLayout() {
+  if(tabletMode.on) return;   // iPad mode follows the device, there is nothing to toggle
   layout.mode=layout.landscape?'portrait':'landscape';
   try { localStorage.setItem('le-layout',layout.mode); } catch(e) {}
   applyLayout();

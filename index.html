@@ -1121,6 +1121,42 @@ html.landscape #action{width:38px;height:38px;font-size:17px}
 /* Shop buttons */
 .shop-btn{border-color:var(--sel-edge)}
 .shop-btn.ghost,.shop-btn.wear{background:#f2e6cc;border-color:#fff6e0;color:#1b212e}
+/* ---- iPad mode (html.tablet, set in engine/audio.js applyLayout; Tom 2026-11-02) ----
+   Full-bleed stage (no frame, no width cap) in every orientation. In landscape the HUD, controls, dialog and battle menu are the phone
+   landscape sizes times --ts (1.25 to 1.6 by screen height). Menus and shops keep their phone sizes and just get more room. */
+html.tablet #game{max-width:none;height:100%;max-height:none;border:0;border-radius:0;box-shadow:none}
+html.tablet #rotate-hud,html.tablet #rotate-menu,html.tablet #splash-rotate,html.tablet #rotate-menu+span,html.tablet .hint:has(#rotate-menu){display:none}
+html.tablet.landscape #hud{top:calc(calc(10px*var(--ts)) + env(safe-area-inset-top));left:calc(calc(14px*var(--ts)) + env(safe-area-inset-left));right:calc(calc(14px*var(--ts)) + env(safe-area-inset-right))}
+html.tablet.landscape .brand{padding:calc(5px*var(--ts)) calc(9px*var(--ts));max-width:min(calc(340px*var(--ts)),50%)}html.tablet.landscape .brand-mark{width:calc(27px*var(--ts));height:calc(27px*var(--ts));font-size:calc(24px*var(--ts))}html.tablet.landscape h1{font-size:calc(14px*var(--ts))}html.tablet.landscape .eyebrow{font-size:calc(6px*var(--ts))}html.tablet.landscape .progress{padding:calc(6px*var(--ts)) calc(10px*var(--ts))}
+html.tablet.landscape #save-hud{width:calc(34px*var(--ts));height:calc(34px*var(--ts))}
+html.tablet.landscape #objective{max-width:calc(320px*var(--ts));margin-top:calc(4px*var(--ts));padding-top:calc(4px*var(--ts))}html.tablet.landscape .obj-text,html.tablet.landscape .qt-text,html.tablet.landscape .q-now{font-size:calc(11px*var(--ts))}html.tablet.landscape .qt-area{font-size:calc(8px*var(--ts));margin-top:calc(3px*var(--ts));padding-top:calc(3px*var(--ts))}html.tablet.landscape .q-subs li,html.tablet.landscape .q-done li{font-size:calc(10px*var(--ts));padding:calc(1px*var(--ts)) 0}
+html.tablet.landscape #minimap-wrap{top:calc(62px*var(--ts));right:calc(calc(14px*var(--ts)) + env(safe-area-inset-right))}html.tablet.landscape #minimap{width:calc(44px*var(--ts))}
+html.tablet.landscape #toast{top:calc(62px*var(--ts));font-size:calc(10px*var(--ts));max-width:calc(100% - calc(200px*var(--ts)))}
+html.tablet.landscape #hint{bottom:calc(calc(24px*var(--ts)) + env(safe-area-inset-bottom));left:calc(76px*var(--ts));max-width:calc(100% - calc(235px*var(--ts)));font-size:calc(10px*var(--ts))}
+html.tablet.landscape #dpad{width:calc(120px*var(--ts));height:calc(120px*var(--ts));grid-template-columns:repeat(3,calc(38px*var(--ts)));grid-template-rows:repeat(3,calc(38px*var(--ts)));gap:calc(3px*var(--ts));right:calc(calc(15px*var(--ts)) + env(safe-area-inset-right));bottom:calc(calc(20px*var(--ts)) + env(safe-area-inset-bottom))}
+html.tablet.landscape .dir{font-size:calc(20px*var(--ts))}html.tablet.landscape .pad-caption{bottom:calc(-14px*var(--ts));font-size:calc(7px*var(--ts))}
+html.tablet.landscape #action-wrap{left:calc(calc(73px*var(--ts)) + env(safe-area-inset-left));bottom:calc(calc(20px*var(--ts)) + env(safe-area-inset-bottom));width:calc(46px*var(--ts))}html.tablet.landscape #action{width:calc(46px*var(--ts));height:calc(46px*var(--ts));font-size:calc(20px*var(--ts))}html.tablet.landscape #action-label{margin-top:calc(6px*var(--ts));font-size:calc(7px*var(--ts))}
+html.tablet.landscape #menu-wrap{left:calc(calc(15px*var(--ts)) + env(safe-area-inset-left));bottom:calc(calc(20px*var(--ts)) + env(safe-area-inset-bottom))}html.tablet.landscape #menu-button{width:calc(46px*var(--ts));height:calc(46px*var(--ts));font-size:calc(20px*var(--ts));border-radius:calc(12px*var(--ts))}html.tablet.landscape #menu-label{margin-top:calc(6px*var(--ts));font-size:calc(7px*var(--ts))}
+html.tablet.landscape #dialog{min-height:calc(calc(112px*var(--ts)) + env(safe-area-inset-bottom));padding:calc(18px*var(--ts)) calc(calc(16px*var(--ts)) + env(safe-area-inset-right)) calc(calc(10px*var(--ts)) + env(safe-area-inset-bottom)) calc(calc(16px*var(--ts)) + env(safe-area-inset-left))}
+html.tablet.landscape #dialog-text{font-size:calc(15px*var(--ts));min-height:calc(42px*var(--ts))}html.tablet.landscape .dialog-footer{margin-top:calc(7px*var(--ts));padding-top:calc(5px*var(--ts))}html.tablet.landscape #dialog-cue{font-size:calc(8px*var(--ts))}html.tablet.landscape .choice{padding:calc(7px*var(--ts)) calc(9px*var(--ts));font-size:calc(11px*var(--ts))}
+html.tablet.landscape #splash-panel{padding:calc(18px*var(--ts)) calc(calc(16px*var(--ts)) + env(safe-area-inset-right)) calc(calc(8px*var(--ts)) + env(safe-area-inset-bottom)) calc(calc(16px*var(--ts)) + env(safe-area-inset-left))}
+html.tablet.landscape .sp-choice{padding:calc(8px*var(--ts)) calc(10px*var(--ts))}html.tablet.landscape .sp-choice .sp-name{font-size:calc(13px*var(--ts))}html.tablet.landscape .sp-choice .sp-sub{font-size:calc(10px*var(--ts))}
+html.tablet.landscape #battle.v2{--b2pw:clamp(280px,calc(224px*var(--ts)),360px)}
+html.tablet.landscape #battle.v2 .b2-ui{gap:calc(3px*var(--ts));padding:calc(calc(3px*var(--ts)) + env(safe-area-inset-top)) calc(calc(4px*var(--ts)) + env(safe-area-inset-right)) calc(calc(3px*var(--ts)) + env(safe-area-inset-bottom)) calc(3px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-low{gap:calc(3px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-ribbon{padding:calc(2px*var(--ts)) calc(6px*var(--ts));gap:calc(3px*var(--ts))}html.tablet.landscape #battle.v2 .b2-rib-lbl{font-size:calc(8px*var(--ts));margin-right:calc(2px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-tk{width:calc(22px*var(--ts));height:calc(22px*var(--ts));font-size:calc(9px*var(--ts))}html.tablet.landscape #battle.v2 .b2-tk.now{width:calc(26px*var(--ts));height:calc(26px*var(--ts))}html.tablet.landscape #battle.v2 .b2-tk b{font-size:calc(8px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-msg{font-size:calc(9px*var(--ts));padding:calc(3px*var(--ts)) calc(6px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-party{padding:calc(3px*var(--ts));gap:calc(1px*var(--ts)) calc(3px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-heart{padding:0 calc(2px*var(--ts)) calc(2px*var(--ts));gap:calc(3px*var(--ts))}html.tablet.landscape #battle.v2 .b2-heart .lbl{font-size:calc(7px*var(--ts))}html.tablet.landscape #battle.v2 .b2-heart svg{width:calc(10px*var(--ts));height:calc(9px*var(--ts))}html.tablet.landscape #battle.v2 .b2-heart b{font-size:calc(8px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-pc{grid-template-columns:calc(20px*var(--ts)) minmax(0,1fr);gap:calc(3px*var(--ts));padding:calc(1px*var(--ts)) calc(2px*var(--ts))}html.tablet.landscape #battle.v2 .b2-pc img,html.tablet.landscape #battle.v2 .b2-ph{width:calc(20px*var(--ts));height:calc(20px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-nm{font-size:calc(9.5px*var(--ts))}html.tablet.landscape #battle.v2 .b2-bar{height:calc(4px*var(--ts));margin-top:calc(1px*var(--ts))}html.tablet.landscape #battle.v2 .b2-sub{font-size:calc(7.5px*var(--ts));margin-top:calc(1px*var(--ts));gap:calc(2px*var(--ts))}html.tablet.landscape #battle.v2 .b2-sub>span:first-child{font-size:calc(7px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-vp i{width:calc(1.5px*var(--ts));height:calc(5px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-cmd{padding:calc(3px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-cross{gap:calc(3px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-x{font-size:calc(10px*var(--ts));border-radius:calc(5px*var(--ts))}html.tablet.landscape #battle.v2 .b2-x .ar{width:calc(9px*var(--ts));height:calc(9px*var(--ts))}html.tablet.landscape #battle.v2 .b2-x small{font-size:calc(9px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-grid,html.tablet.landscape #battle.v2 .b2-list{gap:calc(3px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-btn{padding:calc(3px*var(--ts)) calc(6px*var(--ts))}html.tablet.landscape #battle.v2 .b2-btn span{font-size:calc(11px*var(--ts))}html.tablet.landscape #battle.v2 .b2-btn em{font-size:calc(8px*var(--ts))}html.tablet.landscape #battle.v2 .b2-back{padding:calc(3px*var(--ts)) calc(6px*var(--ts))}
 </style>
 <script>(function(){var d=document.documentElement;d.classList.add('js-on');
 function fail(){if(!d.classList.contains('js-running'))d.classList.add('js-failed');}
@@ -1264,7 +1300,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/menu.js?v=face8"></script>
 <script src="engine/followers.js?v=wind1"></script>
 <script src="engine/shop.js?v=justin2"></script>
-<script src="engine/audio.js?v=sound1"></script>
+<script src="engine/audio.js?v=tab1"></script>
 <script src="data/lines.js?v=nobake1"></script>
 <script src="data/voice-clips.js?v=deedee1"></script>
 <script src="data/voice/tom.js?v=tclips8"></script>
@@ -1528,7 +1564,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/local-clips.js?v=nobake1"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js?v=wind1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=area2"></script>
+<script src="engine/main.js?v=tab1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music1"></script>
