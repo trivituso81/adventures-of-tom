@@ -10,7 +10,7 @@ const ARS = ['3:4', '2:3', '1:1', '4:3', '3:2', '16:9', '9:16'];
 const BANNED = /\b(16[- ]bit|32[- ]bit|snes|super nintendo|final fantasy|chrono trigger|pixel[- ]?art|retro|sprites?)\b/gi;
 const NEG = /\b(?:not|no|never|nor)\s+(?:an?\s+)?(?:pixel[- ]?art|16[- ]bit(?:\s+era)?(?:\s+tile\s+art)?|32[- ]bit|retro(?:\s+game\s+art)?|sprites?)\b/gi;
 const SOFT = /\b(hurt|knocked|knock-?out|injur\w*|wound\w*|blood\w*|gore|gory)\b/gi;
-function check(entries, known) {
+function check(entries, known, needGroup) {
   const bad = [], ids = new Set();
   const produced = new Set([...known, ...entries.map(e => e.id)]);
   for (const e of entries) {
@@ -20,6 +20,7 @@ function check(entries, known) {
     if (!TABS.includes(e.tab)) w('bad tab ' + e.tab);
     if (!e.title || e.title.length < 5) w('no title');
     if (!ARS.includes(e.ar)) w('bad ar ' + e.ar);
+    if (needGroup && (typeof e.group !== 'string' || e.group.length < 3 || e.group.length > 40 || /[—–:|]/.test(e.group))) w('bad or missing group ' + JSON.stringify(e.group));
     if (!e.prompt || e.prompt.length < 300) w('prompt missing or too short');
     if (e.prompt && e.prompt.length > 14000) w('prompt very long (' + e.prompt.length + ')');
     if (!Array.isArray(e.refs)) w('refs not a list'); else {
@@ -45,8 +46,9 @@ if (mi > 0) {
   entries = require(path.resolve(process.argv[mi + 1])).entries;
   if (fs.existsSync('data/art-prompts.json')) for (const e of JSON.parse(fs.readFileSync('data/art-prompts.json', 'utf8')).entries) known.add(e.id);
 } else entries = JSON.parse(fs.readFileSync('data/art-prompts.json', 'utf8')).entries;
-const bad = check(entries, known);
+const bad = check(entries, known, mi <= 0);   // modules do not carry `group` (groups.js adds it in make-prompts.js), so only the built json is checked for it
 const per = {}; for (const e of entries) per[e.tab] = (per[e.tab] || 0) + 1;
+if (mi <= 0) { const gs = {}; for (const e of entries) (gs[e.tab] = gs[e.tab] || new Set()).add(e.group); console.log('groups per tab', JSON.stringify(Object.fromEntries(Object.entries(gs).map(([k, v]) => [k, v.size])))); }
 console.log(entries.length + ' entries', JSON.stringify(per));
 if (bad.length) { console.log(bad.length + ' problems:\n' + bad.slice(0, 80).join('\n')); process.exit(1); }
 console.log('OK');

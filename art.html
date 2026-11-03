@@ -37,6 +37,29 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 .res>div{flex:none;width:156px;text-align:center;font-size:11px;color:#b9b3e6}
 .res img{width:156px;height:156px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}
 .res .acts{display:flex;gap:6px;margin-top:6px}.res .acts button{flex:1;padding:4px 2px;min-height:40px;font-size:12px;border-radius:9px}
+/* UX rebuild (CHANGES 110): setup fold, search, filters, groups, one-line rows */
+input[type=search]{width:100%;padding:12px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px;margin:0 0 10px}
+.tab.dim{opacity:.4}
+.tabs.fil .tab{min-height:34px;padding:4px 12px;font-size:14px}
+.grp{margin:0 0 10px}
+.gh{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#26224d;border:1px solid #3a3566;border-radius:12px;min-height:50px;padding:8px 12px}
+.gh .gc{margin-left:auto;font-weight:400;font-size:12px;color:#b9b3e6;text-align:right}
+.car{flex:none;width:9px;height:9px;border-right:2px solid #b9b3e6;border-bottom:2px solid #b9b3e6;transform:rotate(-45deg);transition:transform .12s}
+.open>.car,.ih[aria-expanded=true] .car{transform:rotate(45deg)}
+.gbody{border:1px solid #2c2852;border-radius:12px;overflow:hidden;margin:6px 0 0}
+.item+.item{border-top:1px solid #2c2852}
+.ih{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#1d1a3d;border-radius:0;min-height:52px;padding:8px 12px;font-weight:500}
+.ih .it{flex:1;min-width:0;display:block;line-height:1.3}
+.ih .why{display:block;font-weight:400;font-size:12px;color:#b9b3e6;margin-top:2px}
+.dot{flex:none;width:11px;height:11px;border-radius:50%;background:#7b6cff}
+.s-wait .dot,.c-wait{background:#ffd34d}.s-approved .dot{background:#2f9e63}.s-rejected .dot{background:#b4414f}.s-blocked .dot{background:#6b6790}
+.c-wait{color:#241b00}.c-approved{background:#2f9e63;color:#fff}.c-rejected{background:#b4414f;color:#fff}.c-blocked{background:#2c2852;color:#9a95c8}
+.s-blocked .it{color:#9a95c8}
+.ih .chip{flex:none}
+.item>.card{margin:0;border:0;border-radius:0;border-top:1px solid #2c2852;background:#17152f}
+.blk{background:#3a2a44;border:1px solid #6b4a66;border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:14px}
+.ref img.miss{border-style:dashed;color:#b9b3e6;font-size:11px;padding:4px;overflow:hidden}
+#setupbar{padding:6px 12px}
 #big{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;z-index:20}
 #big img{max-width:100%;max-height:100%;object-fit:contain}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
@@ -45,9 +68,12 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 <body>
 <header><a class="back" href="index.html" id="back">Back</a><h1>Art Library</h1></header>
 <main>
-<div class="card" id="keys"></div>
-<div class="card" id="spend"></div>
+<div class="card row" id="setupbar"><b style="flex:1">Setup <span class="hint" id="setupsum"></span></b><button class="small" id="setuptog">Open</button></div>
+<div id="setupbody"><div class="card" id="keys"></div>
+<div class="card" id="spend"></div></div>
+<input type="search" id="q" placeholder="Search every tab by name or id" autocomplete="off" aria-label="Search">
 <div class="tabs" id="tabs"></div>
+<div class="tabs fil" id="filters"></div>
 <div id="list"></div>
 <div class="row"><button id="exp" class="small">EXPORT ZIP (all kept results and prompts)</button></div>
 <p class="hint">Each image costs about $0.04 plus $0.01 per reference picture. Results stay on this phone (last 5 per picture). APPROVE saves a picture and its prompt into the game's files on GitHub; REJECT saves your note for Claude. Both need the GitHub token.</p>
@@ -66,7 +92,11 @@ const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},s
 const XAI_BASE=()=> (Q.get('xai')||LS.get('aot-art-relay')||'https://api.x.ai').replace(/\/+$/,'');
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let DATA={entries:[]}, TAB='Characters', EDITS={}, USE={}, MSG={}, NOTES={}, ARMED=null;
+let DATA={entries:[]}, EDITS={}, USE={}, MSG={}, NOTES={}, ARMED=null;
+// UX state that survives a reload: last tab and filter, which groups and pictures are open, scroll position per tab (never the search text)
+let UI={tab:'Characters',filter:'todo',q:'',open:{},grp:{},sy:{}};
+try{ const u=JSON.parse(LS.get('aot-art-ui')||'{}'); if(u&&typeof u==='object') Object.assign(UI,u,{q:''}); }catch(e){}
+const saveUI=()=>{ const o=Object.assign({},UI); delete o.q; LS.set('aot-art-ui',JSON.stringify(o)); };
 try{EDITS=JSON.parse(LS.get('aot-art-edits')||'{}')||{};}catch(e){}
 const saveEdits=()=>LS.set('aot-art-edits',JSON.stringify(EDITS));
 // IndexedDB: results (blobs), key id|n
@@ -90,43 +120,137 @@ function paintKeys(){
   '<div class="row"><input type="password" id="kg" placeholder="paste the GitHub token" autocomplete="off" style="flex:1"><button class="small" id="sg">Save</button>'+(g?'<button class="small" id="dg">Remove</button>':'')+'</div>'+
   '<label>Relay address (only if the browser cannot reach xAI directly) <span class="'+(r?'ok':'hint')+'">'+(r?'relay set':'none')+'</span></label>'+
   '<div class="row"><input type="text" id="kr" placeholder="https://..." autocomplete="off" style="flex:1"><button class="small" id="sr">Save</button>'+(r?'<button class="small" id="dr">Remove</button>':'')+'</div>';
+  if(typeof setupSum==='function') setupSum();
 }
 $('keys').addEventListener('click',e=>{
   const id=e.target.id, map={sx:['kx','aot-art-key'],sg:['kg','aot-gh-token'],sr:['kr','aot-art-relay']};
   if(map[id]){ const v=($(map[id][0]).value||'').trim(); if(!v) return toast('Paste it first.'); if(!LS.set(map[id][1],v)) return toast('This browser would not save it.'); paintKeys(); return; }
   const del={dx:'aot-art-key',dg:'aot-gh-token',dr:'aot-art-relay'}[id]; if(del){ LS.del(del); paintKeys(); }
 });
-// --- tabs and list
+// --- setup fold: keys and spend sit under one row that starts closed once both keys are saved
+function setupSum(){ const k=!!LS.get('aot-art-key'), g=!!LS.get('aot-gh-token'), o=spendGet(); $('setupsum').textContent=(k&&g?'keys set':(k?'GitHub token missing':g?'xAI key missing':'keys missing'))+', about $'+o.total.toFixed(2)+' spent'; }
+function setupOpen(open){ $('setupbody').hidden=!open; $('setuptog').textContent=open?'Close':'Open'; setupSum(); }
+$('setuptog').onclick=()=>setupOpen($('setupbody').hidden);
+// --- tabs, filters, groups and one-line rows (UX rebuild, CHANGES 110)
+// Every entry is one collapsed row. Rows sit in groups (the `group` field from make-prompts.js) and groups sit in tabs. Only an open row draws its prompt, references and results.
 const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies','Battle','Title','Portraits','Flight'];
-function paintTabs(){
-  $('tabs').innerHTML=TABS.map(t=>{const n=DATA.entries.filter(e=>e.tab===t).length;return '<button class="tab'+(t===TAB?' on':'')+'" data-tab="'+t+'">'+t+' ('+n+')</button>';}).join('');
-}
-$('tabs').addEventListener('click',e=>{const t=e.target.dataset&&e.target.dataset.tab; if(t){TAB=t;paintTabs();paintList();}});
-const promptOf=e=>EDITS[e.id]!==undefined?EDITS[e.id]:e.prompt;
-async function paintList(){
-  const list=DATA.entries.filter(e=>e.tab===TAB);
-  if(!list.length){ $('list').innerHTML='<div class="card hint">Nothing here yet. Claude adds pictures to this tab.</div>'; return; }
-  let html='';
-  for(const e of list){
-    const rs=await results(e.id);
-    const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(p)+'" alt=""><input type="checkbox" data-ref="'+esc(e.id)+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(p.split('/').pop())+'</label>').join('');
-    html+='<div class="card" data-id="'+esc(e.id)+'"><div class="row"><b style="flex:1">'+esc(e.title)+'</b><span class="chip">'+esc(e.status||'draft')+'</span></div>'+
-    '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+esc(e.id)+'">'+esc(promptOf(e))+'</textarea>'+
-    ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
-    '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+esc(e.id)+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
-    '<button class="gold" data-gen="'+esc(e.id)+'">GENERATE</button></div>'+
-    '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+esc(e.id)+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
-    '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+URL.createObjectURL(r.blob)+'" alt=""><span>v'+r.n+'</span> <button class="small" data-save="'+esc(r.key)+'">Save</button><div class="acts"><button class="good" data-ok="'+esc(r.key)+'">APPROVE</button><button class="bad" data-no="'+esc(r.key)+'">REJECT</button></div></div>').join('')+'</div>'+
-    (rs.length?'<label>Note for Claude (required for REJECT: what is wrong, what to change)</label><input type="text" data-note="'+esc(e.id)+'" value="'+esc(NOTES[e.id]||'')+'" placeholder="for example: head too small, background not pure magenta">':'')+
-    ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
-    ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
+const FILTERS=[['todo','To do'],['all','All'],['ready','Ready'],['wait','Waiting on me'],['rejected','Rejected'],['approved','Approved'],['blocked','Blocked']];
+const STATE_NAME={ready:'Ready',wait:'Waiting on me',rejected:'Rejected',approved:'Approved',blocked:'Blocked'};
+// ready = can be generated now; wait = a picture is generated and not yet approved or rejected; blocked = a reference picture is not made yet
+let RES={}, ENTRY={}, ST={}, EXISTS={};
+const CHAIN=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d+\.png$/;
+const WORKFLOW=/\s*\((?:needs step \d+ approved|same chat[^)]*|fresh generator chat[^)]*)\)/gi;
+const baseTitle=t=>String(t).replace(WORKFLOW,'').trim();
+const shortTitle=t=>baseTitle(t).replace(/\s*\([^)]*\)\s*$/,'');
+function rowLabel(e){ let t=baseTitle(e.title); const g=e.group||''; if(g&&t.toLowerCase().indexOf(g.toLowerCase()+': ')===0) t=t.slice(g.length+2); return t; }
+const URLS=new Map();
+const urlOf=r=>{ const k=r.key+'@'+r.t; if(!URLS.has(k)) URLS.set(k,URL.createObjectURL(r.blob)); return URLS.get(k); };
+async function loadResults(){ RES={}; if(!DB) return; const all=await tx('readonly',s=>s.getAll()); for(const r of all) (RES[r.id]=RES[r.id]||[]).push(r); for(const k in RES) RES[k].sort((a,b)=>b.n-a.n); }
+function undecided(e){ const rs=RES[e.id]||[]; if(!rs.length) return false; const dec=Math.max(0,...[].concat(e.versions||[],e.rejects||[]).map(x=>parseInt(String(x.from||'').slice(1),10)||0)); return rs[0].n>dec; }
+// A ticked reference under art/raw/ is made by approving another entry. Blocked until that entry is approved and its file is published (checked with a HEAD request).
+function blockInfo(e){
+  const rf=e.refs||[];
+  for(let i=0;i<rf.length;i++){
+    if(USE[e.id+'|'+i]===false) continue;
+    const m=CHAIN.exec(rf[i]); if(!m) continue;
+    const dep=ENTRY[m[2]]; if(!dep) continue;
+    if(!(dep.versions||[]).length) return {why:'Approve “'+shortTitle(dep.title)+'” first.'};
+    const x=EXISTS[rf[i]]; if(x&&!x.ok) return {why:'“'+shortTitle(dep.title)+'” is approved but the site has not published it yet. Give it about 2 minutes.'};
   }
-  $('list').innerHTML=html;
+  return null;
 }
+function stateOf(e){ if(undecided(e)) return 'wait'; if(e.status==='approved') return 'approved'; if(blockInfo(e)) return 'blocked'; if(e.status==='rejected') return 'rejected'; return 'ready'; }
+function computeStates(){ ST={}; for(const e of DATA.entries) ST[e.id]=stateOf(e); }
+async function probe(){
+  const need=[], seen=new Set();
+  for(const e of DATA.entries) for(const p of e.refs||[]){
+    const m=CHAIN.exec(p); if(!m||seen.has(p)) continue; seen.add(p);
+    const dep=ENTRY[m[2]]; if(!dep||!(dep.versions||[]).length) continue;
+    const x=EXISTS[p]; if(x&&(x.ok||Date.now()-x.t<15000)) continue;
+    need.push(p);
+  }
+  let changed=false;
+  await Promise.all(need.map(async p=>{ let ok=null; try{ ok=(await fetch(p,{method:'HEAD',cache:'no-store'})).ok; }catch(err){} if(ok===null) return; const was=EXISTS[p]; EXISTS[p]={ok,t:Date.now()}; if(!was||was.ok!==ok) changed=true; }));
+  if(changed) paintList(true);
+}
+const matchQ=(e,q)=>(e.title+' '+e.id+' '+(e.group||'')).toLowerCase().indexOf(q)>=0;
+const qNow=()=>UI.q.trim().toLowerCase();
+function visible(e){ const q=qNow(); if(q) return matchQ(e,q); const s=ST[e.id]; if(UI.filter==='all') return true; if(UI.filter==='todo') return s==='ready'||s==='wait'; return s===UI.filter; }
+function groupsOf(tab){ const m=new Map(); for(const e of DATA.entries){ if(e.tab!==tab) continue; const g=e.group||tab; if(!m.has(g)) m.set(g,[]); m.get(g).push(e); } return m; }
+const gkey=(tab,g)=>tab+'|'+g;
+function groupCount(items){ const done=items.filter(e=>ST[e.id]==='approved').length, wait=items.filter(e=>ST[e.id]==='wait').length; return (wait?wait+' waiting, ':'')+done+' of '+items.length+' approved'; }
+function paintTabs(){
+  const q=qNow();
+  $('tabs').innerHTML=TABS.map(t=>{ const all=DATA.entries.filter(e=>e.tab===t); const hit=q?all.filter(e=>matchQ(e,q)).length:0;
+    return '<button class="tab'+(t===UI.tab?' on':'')+(q&&!hit?' dim':'')+'" data-tab="'+t+'">'+t+' '+(q?hit+' found':all.filter(e=>ST[e.id]==='approved').length+'/'+all.length)+'</button>'; }).join('');
+}
+function paintFilters(){
+  const list=DATA.entries.filter(e=>e.tab===UI.tab), c={}; for(const e of list) c[ST[e.id]]=(c[ST[e.id]]||0)+1;
+  const n=k=>k==='all'?list.length:k==='todo'?(c.ready||0)+(c.wait||0):(c[k]||0);
+  $('filters').style.display=qNow()?'none':'';
+  $('filters').innerHTML=FILTERS.map(f=>'<button class="tab'+(f[0]===UI.filter?' on':'')+'" data-filter="'+f[0]+'">'+f[1]+' '+n(f[0])+'</button>').join('');
+}
+function renderCard(e){
+  const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e);
+  const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(p)+'" alt="" onerror="this.classList.add(\'miss\');this.alt=\'not made yet\'"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(p.split('/').pop())+'</label>').join('');
+  return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
+  (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
+  '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
+  ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
+  '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
+  '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button></div>'+
+  '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
+  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt=""><span>v'+r.n+'</span> <button class="small" data-save="'+esc(r.key)+'">Save</button><div class="acts"><button class="good" data-ok="'+esc(r.key)+'">APPROVE</button><button class="bad" data-no="'+esc(r.key)+'">REJECT</button></div></div>').join('')+'</div>'+
+  (rs.length?'<label>Note for Claude (required for REJECT: what is wrong, what to change)</label><input type="text" data-note="'+id+'" value="'+esc(NOTES[e.id]||'')+'" placeholder="for example: head too small, background not pure magenta">':'')+
+  ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
+  ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
+}
+function renderItem(e){
+  const s=ST[e.id], open=!!UI.open[e.id], blk=s==='blocked'&&!open?blockInfo(e):null;   // an open row shows the reason in its banner instead
+  return '<div class="item s-'+s+'" data-id="'+esc(e.id)+'"><button class="ih" data-toggle="'+esc(e.id)+'" aria-expanded="'+open+'"><span class="dot"></span><span class="it">'+esc(rowLabel(e))+(blk?'<span class="why">'+esc(blk.why)+'</span>':'')+'</span><span class="chip c-'+s+'">'+STATE_NAME[s]+'</span><span class="car"></span></button>'+(open?renderCard(e):'')+'</div>';
+}
+function renderGroup(tab,g,items,single){
+  const shown=items.filter(visible); if(!shown.length) return '';
+  const k=gkey(tab,g), open=single||!!qNow()||!!UI.grp[k];
+  return '<section class="grp" data-gk="'+esc(k)+'">'+(single?'':'<button class="gh'+(open?' open':'')+'" data-grp="'+esc(k)+'" aria-expanded="'+open+'"><span class="car"></span><b>'+esc(g)+'</b><span class="gc">'+groupCount(items)+'</span></button>')+(open?'<div class="gbody">'+shown.map(renderItem).join('')+'</div>':'')+'</section>';
+}
+function paintList(fromProbe){
+  computeStates(); paintTabs(); paintFilters();
+  const groups=groupsOf(UI.tab), single=groups.size===1; let html='';
+  for(const [g,items] of groups) html+=renderGroup(UI.tab,g,items,single);
+  if(!html) html='<div class="card hint">'+(!groups.size?'Nothing here yet. Claude adds pictures to this tab.':qNow()?'Nothing found for “'+esc(UI.q.trim())+'” in this tab. Other tabs show how many they found.':'Nothing in this view. Tap All above to see every picture in this tab.')+'</div>';
+  const y=window.scrollY; $('list').innerHTML=html; if(fromProbe) window.scrollTo(0,y);
+  if(!fromProbe) probe();
+}
+const findBy=(sel,key,val)=>Array.prototype.find.call(document.querySelectorAll(sel),x=>x.dataset[key]===val);
+// Redraw just one row (and the counts), so the page does not jump after GENERATE, APPROVE or REJECT. The row stays in the list even if the filter would now hide it, until the next tab or filter change.
+function refreshItem(id){
+  const e=ENTRY[id]; if(!e) return; computeStates();
+  const el=findBy('.item','id',id); if(el){ const tmp=document.createElement('div'); tmp.innerHTML=renderItem(e); el.replaceWith(tmp.firstElementChild); }
+  const gk=gkey(e.tab,e.group||e.tab), ge=findBy('.grp','gk',gk), gc=ge&&ge.querySelector('.gc'); if(gc) gc.textContent=groupCount(groupsOf(e.tab).get(e.group||e.tab));
+  paintTabs(); paintFilters();
+}
+function toggleItem(id){ if(UI.open[id]) delete UI.open[id]; else UI.open[id]=1; saveUI(); refreshItem(id); }
+function toggleGroup(k){
+  if(UI.grp[k]) delete UI.grp[k]; else UI.grp[k]=1; saveUI();
+  const i=k.indexOf('|'), tab=k.slice(0,i), g=k.slice(i+1), ge=findBy('.grp','gk',k); if(!ge) return;
+  const tmp=document.createElement('div'); tmp.innerHTML=renderGroup(tab,g,groupsOf(tab).get(g),false); if(tmp.firstElementChild) ge.replaceWith(tmp.firstElementChild);
+}
+$('tabs').addEventListener('click',e=>{ const t=e.target.closest('[data-tab]'); if(!t) return; UI.sy[UI.tab]=Math.round(scrollY); UI.tab=t.dataset.tab; saveUI(); paintList(); scrollTo(0,UI.sy[UI.tab]||0); });
+$('filters').addEventListener('click',e=>{ const t=e.target.closest('[data-filter]'); if(!t) return; UI.filter=t.dataset.filter; saveUI(); paintList(); });
+$('q').addEventListener('input',()=>{
+  UI.q=$('q').value; const q=qNow();
+  if(q&&!DATA.entries.some(e=>e.tab===UI.tab&&matchQ(e,q))){ const hit=TABS.find(t=>DATA.entries.some(e=>e.tab===t&&matchQ(e,q))); if(hit) UI.tab=hit; }
+  paintList();
+});
+let scrollT; addEventListener('scroll',()=>{ clearTimeout(scrollT); scrollT=setTimeout(()=>{ UI.sy[UI.tab]=Math.round(scrollY); saveUI(); },400); },{passive:true});
+const promptOf=e=>EDITS[e.id]!==undefined?EDITS[e.id]:e.prompt;
 $('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} const nid=e.target.dataset&&e.target.dataset.note; if(nid) NOTES[nid]=e.target.value; });
-$('list').addEventListener('change',e=>{ const t=e.target; if(t.dataset.ref) USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; if(t.dataset.ar){const en=DATA.entries.find(x=>x.id===t.dataset.ar); if(en) en.ar=t.value;} });
+$('list').addEventListener('change',e=>{ const t=e.target; if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
 $('list').addEventListener('click',async e=>{
   const t=e.target;
+  const g=t.closest('[data-grp]'); if(g) return toggleGroup(g.dataset.grp);
+  const h=t.closest('[data-toggle]'); if(h) return toggleItem(h.dataset.toggle);
   if(t.dataset.gen) return generate(t.dataset.gen,t);
   if(t.dataset.ok) return decide('ok',t.dataset.ok,t);
   if(t.dataset.no) return decide('no',t.dataset.no,t);
@@ -141,12 +265,13 @@ function setMsg(id,text,err){ MSG[id]={text,err}; const m=$('m-'+id); if(m){m.te
 // --- spend meter (estimate: $0.04 per image + $0.01 per reference picture, counted on this phone only)
 const SPEND_PER=0.04, SPEND_REF=0.01;
 function spendGet(){ let o={total:0,count:0,cap:10}; try{ o=Object.assign(o,JSON.parse(LS.get('aot-art-spend')||'{}')); }catch(x){} return o; }
-function spendPaint(){ const o=spendGet(); $('spend').innerHTML='<div class="row"><b style="flex:1">Spent on this phone: about $'+o.total.toFixed(2)+' ('+o.count+' pictures). Stops at $'+o.cap.toFixed(0)+'.</b><button class="small" id="capup">+$10</button><button class="small" id="spreset">RESET</button></div>'; }
+function spendPaint(){ const o=spendGet(); if($('setupsum')&&typeof setupSum==='function') setupSum(); $('spend').innerHTML='<div class="row"><b style="flex:1">Spent on this phone: about $'+o.total.toFixed(2)+' ('+o.count+' pictures). Stops at $'+o.cap.toFixed(0)+'.</b><button class="small" id="capup">+$10</button><button class="small" id="spreset">RESET</button></div>'; }
 $('spend').addEventListener('click',e=>{ const o=spendGet(); if(e.target.id==='capup'){ o.cap+=10; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); } if(e.target.id==='spreset'){ o.total=0; o.count=0; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); } });
 spendPaint();
 async function generate(id,btn){
   const e=DATA.entries.find(x=>x.id===id), key=LS.get('aot-art-key');
   if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
+  const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
   const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false);
   if(refPaths.length>5) return setMsg(id,'At most 5 reference pictures. Untick '+(refPaths.length-5)+'.',true);
@@ -169,8 +294,8 @@ async function generate(id,btn){
     else if(d.url){ const ir=await fetch(d.url); if(!ir.ok) throw new Error('Could not download the picture.'); blob=await ir.blob(); }
     else throw new Error('The image service sent an unknown picture format.');
     { const o=spendGet(); o.total+=SPEND_PER+SPEND_REF*refPaths.length; o.count+=1; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); }
-    const n=await addResult(id,blob,prompt,refPaths);
-    e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; await paintList();
+    const n=await addResult(id,blob,prompt,refPaths); RES[id]=await results(id);
+    e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; refreshItem(id);
   }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; }
 }
 // --- GitHub: APPROVE commits the picture and the prompt, REJECT commits your note (needs the GitHub token at the top)
@@ -209,7 +334,7 @@ async function decide(kind,resKey,btn){
   const note=(NOTES[id]||'').trim();
   if(kind==='no'&&!note) return setMsg(id,'Type a note for Claude first (the box under the pictures): what is wrong or what to change.',true);
   const armKey=kind+'|'+resKey;
-  if(ARMED!==armKey){ ARMED=armKey; btn.classList.add('armed'); btn.textContent='TAP AGAIN'; clearTimeout(decide.h); decide.h=setTimeout(()=>{ARMED=null;paintList();},4000); return; }
+  if(ARMED!==armKey){ ARMED=armKey; btn.classList.add('armed'); btn.textContent='TAP AGAIN'; clearTimeout(decide.h); decide.h=setTimeout(()=>{ARMED=null;refreshItem(id);},4000); return; }
   ARMED=null; clearTimeout(decide.h); document.querySelectorAll('[data-ok],[data-no]').forEach(b=>b.disabled=true);
   try{
     const today=new Date().toISOString().slice(0,10);
@@ -234,7 +359,7 @@ async function decide(kind,resKey,btn){
       e.rejects=(e.rejects||[]).concat([{date:today,note,from:'v'+r.n}]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
-    await paintList();
+    refreshItem(id);
   }catch(err){ setMsg(id,String(err.message||err),true); document.querySelectorAll('[data-ok],[data-no]').forEach(b=>b.disabled=false); }
 }
 // --- zip export (store only)
@@ -263,8 +388,12 @@ $('exp').onclick=async()=>{
   paintKeys();
   try{ DB=await idb(); }catch(e){ toast('This browser would not keep results.'); }
   try{ const r=await fetch('data/art-prompts.json',{cache:'no-store'}); if(r.ok) DATA=await r.json(); }catch(e){}
-  const first=TABS.find(t=>DATA.entries.some(e=>e.tab===t)); if(first&&!DATA.entries.some(e=>e.tab===TAB)) TAB=first;
-  paintTabs(); paintList();
+  for(const e of DATA.entries){ ENTRY[e.id]=e; if(!e.group) e.group=e.tab; }
+  await loadResults();
+  const first=TABS.find(t=>DATA.entries.some(e=>e.tab===t)); if(first&&(!TABS.includes(UI.tab)||!DATA.entries.some(e=>e.tab===UI.tab))) UI.tab=first;
+  if(!FILTERS.some(f=>f[0]===UI.filter)) UI.filter='todo';
+  setupOpen(!(LS.get('aot-art-key')&&LS.get('aot-gh-token')));   // fold the keys and spend cards once both keys are saved
+  paintList(); scrollTo(0,UI.sy[UI.tab]||0);
 })();
 </script>
 </body>

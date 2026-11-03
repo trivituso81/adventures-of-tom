@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds data/art-prompts.json. Claude edits the ENTRIES list below (or adds files) and reruns: node tools/art-library/make-prompts.js
-// Entry fields: id, tab (Characters|NPCs|Areas|Rooms|Props|Enemies), title, prompt, refs (repo paths, max 5), ar (aspect ratio), status.
+// Entry fields: id, tab (Characters|NPCs|Areas|Rooms|Props|Enemies|Battle|Title|Portraits|Flight), title, prompt, refs (repo paths, max 5), ar (aspect ratio), status, group (added here by groups.js; see that file).
 // Existing statuses, versions and rejects in the current json are kept for ids that still exist.
 // Optional `bake` (B5, read by tools/art-library/art_bake.py in the art-bake Action): { script: 'bake_foe.py', args: ['mudling'], src: 'tools/sprite-bake/src/foe-mudling-v1.png', key: 'corner' }.
 // `src` must sit under tools/sprite-bake/src/; `key: 'corner'` makes the background transparent from the corner colour (the generator's magenta comes out crimson).
@@ -32,6 +32,9 @@ const ENTRIES = [
 for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
   if (fs.existsSync(__dirname + '/' + m + '.js')) ENTRIES.push(...require('./' + m + '.js').entries);
 }
+// Every entry gets a `group` (the collapsible section inside its tab in art.html), derived by groups.js from its id and title. An entry that sets its own `group` keeps it.
+const { groupOf } = require('./groups.js');
+for (const e of ENTRIES) if (!e.group) e.group = groupOf(e);
 const keep = Object.fromEntries(old.map(e => [e.id, e]));
 const entries = ENTRIES.map(e => ({ status: 'draft', versions: [], rejects: [], ...(keep[e.id] ? { status: keep[e.id].status, versions: keep[e.id].versions || [], rejects: keep[e.id].rejects || [] } : {}), ...e, status: keep[e.id] ? keep[e.id].status : 'draft' }));
 fs.writeFileSync(out, JSON.stringify({ version: 1, entries }, null, 1) + '\n');
