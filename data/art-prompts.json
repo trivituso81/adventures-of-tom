@@ -131,6 +131,62 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "grace-step-front",
+   "tab": "Characters",
+   "title": "Grace walk 1 of 4: front step (edit of her front stand)",
+   "ar": "1:1",
+   "refs": [
+    "tools/sprite-bake/src/grace-walk-v3-stand-front.png"
+   ],
+   "prompt": "Edit the attached picture. Keep everything about this girl exactly the same: the same face, hair, clothes, keychain, colors, painted brushwork and level of detail, the same size and the same place in the picture, and the same flat magenta background. Change ONLY her pose, as described below.\n\nNEW POSE: one step of a walk straight toward the viewer, caught mid-step.\n- Body, head and eyes face straight at the viewer, the same warm smile as now.\n- One leg steps forward toward us: its knee is bent and that shoe sits a little lower in the picture than the other one.\n- The other leg stays behind her, straight, with its heel lifted off the ground.\n- The arm on the side of the BACK leg swings forward in front of her body. The other arm swings back behind her hip.\n\nOne girl only, full body, feet on the same ground line as before. Nothing added: no shadow, no motion lines, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-step-back",
+   "tab": "Characters",
+   "title": "Grace walk 2 of 4: back step (edit of her back stand)",
+   "ar": "1:1",
+   "refs": [
+    "tools/sprite-bake/src/grace-walk-v3-stand-back.png"
+   ],
+   "prompt": "Edit the attached picture. Keep everything about this girl exactly the same: the same face, hair, clothes, keychain, colors, painted brushwork and level of detail, the same size and the same place in the picture, and the same flat magenta background. Change ONLY her pose, as described below.\n\nNEW POSE: one step of a walk straight away from the viewer, caught mid-step. We still see her from behind.\n- We see only the back of her head, her long hair and the back of her sweatshirt. Her face is not visible.\n- One leg steps away from us: that foot is planted a little higher in the picture than the other one.\n- The other leg stays nearer to us, with its heel lifted so we see the bottom of that sneaker.\n- The arm on the side of the leg nearer to us swings forward, away from us. The other arm swings back toward us.\n\nOne girl only, full body, feet on the same ground line as before. Nothing added: no shadow, no motion lines, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-step-side-a",
+   "tab": "Characters",
+   "title": "Grace walk 3 of 4: side step A, heel down (edit of her side stand)",
+   "ar": "1:1",
+   "refs": [
+    "tools/sprite-bake/src/grace-walk-v3-stand-side.png"
+   ],
+   "prompt": "Edit the attached picture. Keep everything about this girl exactly the same: the same face, hair, clothes, keychain, colors, painted brushwork and level of detail, the same size and the same place in the picture, and the same flat magenta background. Change ONLY her pose, as described below.\n\nNEW POSE: walking to the LEFT, seen exactly from the side, at the moment her front heel touches the ground (a long stride).\n- Her whole body, her head, her nose and her eyes point to the left edge of the picture, a profile exactly like now. She does not turn toward the viewer.\n- Front leg: reaches far forward to the left, almost straight, heel on the ground, toes pointing up.\n- Back leg: stretched out behind her to the right, almost straight, only its toes touching the ground.\n- Arms: the arm nearest us swings back behind her; the far arm swings forward in front of her chest.\n\nOne girl only, full body, feet on the same ground line as before. Nothing added: no shadow, no motion lines, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-step-side-b",
+   "tab": "Characters",
+   "title": "Grace walk 4 of 4: side step B, legs passing (edit of her side stand)",
+   "ar": "1:1",
+   "refs": [
+    "tools/sprite-bake/src/grace-walk-v3-stand-side.png"
+   ],
+   "prompt": "Edit the attached picture. Keep everything about this girl exactly the same: the same face, hair, clothes, keychain, colors, painted brushwork and level of detail, the same size and the same place in the picture, and the same flat magenta background. Change ONLY her pose, as described below.\n\nNEW POSE: walking to the LEFT, seen exactly from the side, at the middle of the stride when one leg passes the other.\n- Her whole body, her head, her nose and her eyes point to the left edge of the picture, a profile exactly like now. She does not turn toward the viewer.\n- Standing leg: straight, directly under her body, foot flat on the ground, carrying her weight.\n- Other leg: knee bent forward, its foot lifted clearly off the ground and held next to the ankle of the standing leg.\n- Arms: close to her sides, elbows a little bent, one hand slightly ahead of the other.\n- Her head is a tiny bit higher than when standing.\n\nOne girl only, full body, feet on the same ground line as before. Nothing added: no shadow, no motion lines, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-battle",
    "tab": "Characters",
    "title": "Grace: battle sheet 4 x 4 (painted, on magenta)",

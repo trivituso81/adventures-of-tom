@@ -1,3 +1,10 @@
+## 2026-11-03 (112): Grace walk, new method: four single-frame edits from her clean stand frames (Art Library entries and source pictures only, no game change)
+
+- Why: two 3 x 3 walk sheets failed the same ways (repeated drawings, face turned to the camera on sideways bodies). Diagnosis: the old prompts were about 6,000 characters with the poses in the last 15 percent, worded as puzzles ("mirror of frame 2", viewer's left and right), and the attached master faces the camera, so its head direction leaked into every cell.
+- New method: one frame per picture. Each prompt is under 1,050 characters, pose first, no left and right, and attaches ONE picture: the clean stand frame facing the same way (cropped from Tom's sheet 2, `tools/sprite-bake/src/grace-walk-sheet2-v1.png`, cells 1, 4 and 7, saved as `grace-walk-v3-stand-front/back/side.png`, upscaled to 1024, borders cleaned).
+- Entries (Characters > Grace): `grace-step-front`, `grace-step-back`, `grace-step-side-a`, `grace-step-side-b` (titles "Grace walk 1 of 4" to "4 of 4"). Front and back step B will be horizontal mirrors of step A; side B is its own picture. Cost about $0.05 each.
+- Tests: `tools/art-library/test.py` counts updated (Characters 60, order list). The "blocked row" check fails on and off in portrait or landscape before and after this change (it failed before on main too).
+
 ## 2026-11-03 (111): Art Library page rebuilt so the lists are short (collapsed rows, groups, filters, blocked state; `art.html` and library tooling only, no game change)
 
 - Tom (11-03): the Art Library lists were far too long (Characters was about 53 phone screens of open cards). Spec and assessment: `claude/art-library-ux.md`; all eight items built.
