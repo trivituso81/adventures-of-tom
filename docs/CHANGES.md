@@ -1,3 +1,11 @@
+## 2026-11-03 (113): Admin libraries work on a computer (Art, Music, Voice Library pages only, no game change)
+
+- Tom (11-03): "support a wider viewport for Admin so I can use it on my computer (all the library features)".
+- At 1000 px wide and up, art.html, music.html and voices.html switch to a two-column layout: keys, search and filters sit in a left column that stays in view while the list scrolls on the right (up to 1680 px wide). Filter chips wrap instead of scrolling sideways. Below 1000 px nothing changes (phone and phone-landscape shots differ only in the wording below).
+- Art Library: open cards use the width (bigger result thumbnails 260 px, bigger reference pictures, taller prompt box, Shape menu no longer full width); Esc closes the full-size picture. Music Library: track cards sit two per row on wide screens. Voice Library: the list is one framed column; the long Who and Chapter chip lists scroll inside a capped box so Type and Show stay reachable.
+- Wording: "this phone" is now "this device" on all three pages, because keys, spend and takes are saved per browser (a computer has its own; approvals and exports work the same from either).
+- DOM: controls wrapped in `<aside class="side">`, export and notes in `.foot`; all ids unchanged.
+- Tests: validate.js OK, music test FAILS: [], voice test ALL PASS, bake_test FAILS: [], art test.py: one check ("a blocked row opens with GENERATE disabled") failed in landscape this run; it also fails on the unchanged main (both orientations) when run here, so it is a timing flake in the blocked-probe test, not this change. Looked at 390, 1024, 1440 and 1920 px shots. No `?v=` tag or stamp moved (these pages carry none; the service worker always fetches .html from the network).
 ## 2026-11-03 (112): Grace walk, new method: four single-frame edits from her clean stand frames (Art Library entries and source pictures only, no game change)
 
 - Why: two 3 x 3 walk sheets failed the same ways (repeated drawings, face turned to the camera on sideways bodies). Diagnosis: the old prompts were about 6,000 characters with the poses in the last 15 percent, worded as puzzles ("mirror of frame 2", viewer's left and right), and the attached master faces the camera, so its head direction leaked into every cell.

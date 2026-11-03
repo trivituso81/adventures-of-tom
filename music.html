@@ -42,11 +42,26 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 .bar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;z-index:10;flex-wrap:wrap}
 .bar[hidden]{display:none}.bar .grow{flex:1;min-width:90px}
 #toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
+/* Computer layout (CHANGES 112): at 1000 px and wider the controls sit in a left column that stays in view, the list fills the rest. Phone layout is unchanged. */
+@media (min-width:1000px){
+main{max-width:1680px;display:grid;grid-template-columns:400px minmax(0,1fr);grid-template-rows:1fr auto;column-gap:28px;padding:18px 28px 140px}
+.side{grid-column:1;grid-row:1;align-self:start;position:sticky;top:76px;max-height:calc(100vh - 160px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+#list{grid-column:2;grid-row:1/3;min-width:0}
+.foot{grid-column:1;grid-row:2;align-self:end}
+header{padding:10px 28px}
+}
+@media (min-width:1000px){
+.frow{flex-wrap:wrap;overflow:visible}
+.frow .lab{width:100%;margin-top:4px}
+#list .card{margin:0}
+#list{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:14px;align-content:start}
+}
 </style>
 </head>
 <body>
 <header><a class="back" href="index.html" id="back">Back</a><h1>Music Library</h1></header>
 <main>
+<aside class="side">
 <div class="card" id="keys"></div>
 <div class="card">
   <input type="search" id="q" placeholder="Search tracks by name, place or prompt" autocomplete="off">
@@ -56,15 +71,18 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
   <div class="frow" id="fShow"></div>
   <div class="sum"><span id="count" class="hint"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small gold" id="selall">Select all shown</button></div>
 </div>
+</aside>
 <div id="list"></div>
+<div class="foot">
 <div class="row"><button id="exp" class="small">Export music takes</button></div>
 <p class="hint" id="howto"></p>
+</div>
 </main>
 <div class="bar" id="bar" hidden></div>
 <div id="toast"></div>
 <script>
 // Music Library. Every track the game plays is one card: hear it, edit its prompt, make a new take with ElevenLabs Music, pick which take
-// the game plays on this phone. Takes live in this browser's IndexedDB 'aot-music-library' (engine/local-music.js reads the same store at
+// the game plays on this device. Takes live in this browser's IndexedDB 'aot-music-library' (engine/local-music.js reads the same store at
 // startup, so the take marked Use plays in the game at once). The list comes from data/music-index.json (tools/music-library/make-index.js).
 // The key is the same one the Voice Library uses (localStorage 'aot-el-key'); it is never written into the page or logged.
 // Test override: ?el=<base url> points ElevenLabs calls at tools/music-library/stub.py.
@@ -143,7 +161,7 @@ function paintFilters(){
   $('fKind').innerHTML=mk('kind','Kind',['loop','jingle'],'kind',{loop:'Loop',jingle:'Jingle'});
   $('fUse').innerHTML=mk('use','Use',['Area','Boss room','Battle','Title','Jingle'],'use');
   const nNone=cnt('show',t=>!takesOf(t.id).length),nPh=cnt('show',t=>takesOf(t.id).length),nBi=cnt('show',t=>!USE[t.id]);
-  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All tracks',F.show==='all',vis('show'))+chip('show','none','No take on this phone',F.show==='none',nNone)+chip('show','phone','Re-made on this phone',F.show==='phone',nPh)+chip('show','builtin','Built-in track plays',F.show==='builtin',nBi);
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All tracks',F.show==='all',vis('show'))+chip('show','none','No take on this device',F.show==='none',nNone)+chip('show','phone','Re-made on this device',F.show==='phone',nPh)+chip('show','builtin','Built-in track plays',F.show==='builtin',nBi);
   const v=shown().length;
   $('count').textContent=v+' of '+IDX.tracks.length+' tracks shown';
   $('selall').textContent='Select all '+v+' shown';
@@ -219,7 +237,7 @@ $('list').addEventListener('click',async e=>{
   if(d.bplay)return play(d.bplay,'b',null);
   if(d.tplay){const k=d.tplay;return play(k.split('|')[0],k,k);}
   if(d.make)return armed('make|'+d.make,()=>refreshCard(d.make),()=>runOne(d.make));
-  if(d.tuse){const k=d.tuse,id=k.split('|')[0];await setUse(id,k);MSG[id]={text:'The game plays this take on this phone now.',err:false};return refreshCard(id);}
+  if(d.tuse){const k=d.tuse,id=k.split('|')[0];await setUse(id,k);MSG[id]={text:'The game plays this take on this device now.',err:false};return refreshCard(id);}
   if(d.builtin){await setUse(d.builtin,null);MSG[d.builtin]={text:'The game plays the built-in track again.',err:false};return refreshCard(d.builtin);}
   if(d.tdel)return armed('del|'+d.tdel,()=>{e.target.classList.add('armed');e.target.textContent='TAP AGAIN';},()=>delTake(d.tdel));
 });
@@ -300,7 +318,7 @@ async function makeTake(id){
 }
 async function runOne(id){
   ctx();BUSY[id]=true;setMsg(id,'Making the take... about a minute.');refreshCard(id);
-  try{const row=await makeTake(id);MSG[id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. It came back shorter than the '+row.len+' s asked for; it is kept, so listen before you trust it as a loop.':'. The game plays it on this phone now.'),err:false};}
+  try{const row=await makeTake(id);MSG[id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. It came back shorter than the '+row.len+' s asked for; it is kept, so listen before you trust it as a loop.':'. The game plays it on this device now.'),err:false};}
   catch(e){MSG[id]={text:String(e.message||e),err:true};}
   BUSY[id]=false;refreshCard(id);
 }
@@ -354,7 +372,7 @@ $('exp').onclick=async()=>{
   catch(e){$('list').innerHTML='<div class="card err">The track list would not load. Go back and open the Music Library again.</div>';return;}
   try{DB=await idb();await loadDb();}catch(e){DB=null;toast('This browser would not keep takes. You can still listen.');}
   $('q').value=F.q;
-  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this phone (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this phone at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. List made '+IDX.made+'.';
+  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this device (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this device at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. List made '+IDX.made+'.';
   paintFilters();paintList();paintBar();
 })();
 </script>

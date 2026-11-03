@@ -75,11 +75,33 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
 .empty{padding:30px 16px;text-align:center;color:#8f88c4}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;animation:blink 1s infinite;margin-right:6px}
 @keyframes blink{50%{opacity:.2}}
+/* Computer layout (CHANGES 112): at 1000 px and wider the controls sit in a left column that stays in view, the list fills the rest. Phone layout is unchanged. */
+@media (min-width:1000px){
+main{max-width:1680px;display:grid;grid-template-columns:400px minmax(0,1fr);grid-template-rows:1fr auto;column-gap:28px;padding:18px 28px 140px}
+.side{grid-column:1;grid-row:1;align-self:start;position:sticky;top:76px;max-height:calc(100vh - 160px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+#list{grid-column:2;grid-row:1/3;min-width:0}
+.foot{grid-column:1;grid-row:2;align-self:end}
+header{padding:10px 28px}
+}
+@media (min-width:1000px){
+.side .pad{padding:0}
+.side .card{margin:0 0 10px}
+.filters{border-bottom:0;padding:4px 0 0}
+.frow{flex-wrap:wrap;overflow:visible;padding:4px 0}
+.frow .lab{width:100%;margin-top:4px}
+#fWho,#fChap{max-height:212px;overflow-y:auto;align-content:flex-start;scrollbar-width:thin}
+#fWho .lab,#fChap .lab{position:sticky;top:0;background:#14122b;z-index:1;padding:2px 0}
+.sum{padding:8px 0 0}
+#list{margin-top:0;border:1px solid #2c2852;border-radius:14px;overflow:hidden;background:#17152f}
+#list .row:last-child{border-bottom:0}
+.foot{padding:0}
+}
 </style>
 </head>
 <body>
 <header><a class="back" href="index.html">&#8249; Game</a><h1>Voice Library</h1></header>
 <main>
+  <aside class="side">
   <div class="pad"><section id="keybox" class="card"></section></div>
   <div class="pad"><section id="safe" class="card" hidden></section></div>
   <div class="filters" id="filters">
@@ -90,8 +112,9 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
     <div class="frow" id="fShow"></div>
     <div class="sum"><span id="count"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small gold" id="selmode">Select all shown</button></div>
   </div>
+  </aside>
   <div class="list" id="list"><div class="empty">Loading every voice line...</div></div>
-  <div class="pad">
+  <div class="pad foot">
     <p class="hint" id="howto"></p>
     <div class="tools">
       <button class="small" id="exp">Export phone clips</button>
@@ -107,7 +130,7 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
 // tools/voice-library/make-index.js), hear the clip the game plays now, and re-record any line: a new ElevenLabs take from
 // an editable direction, or Tom's own read turned into the character's voice (speech to speech). The take Tom picks is kept
 // in this browser's IndexedDB 'aot-local-clips' (the game reads the same store), which engine/local-clips.js loads
-// at startup, so the game plays it on this phone right away. All takes are kept in 'aot-voice-library' so he can switch back.
+// at startup, so the game plays it on this device right away. All takes are kept in 'aot-voice-library' so he can switch back.
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const KEYNAME='aot-el-key';
@@ -168,7 +191,7 @@ const TAKES=new Map();   // take id -> {id,line,label,script,t}, without the aud
 const takesFor=key=>[...TAKES.values()].filter(t=>t.line===key).sort((a,b)=>a.t-b.t);
 const localFor=it=>LOCAL.get(rowId(it,kinds(it)[0]));
 async function useTake(it,take){
-  const mp3=take.mp3||await mp3Of(TDB,'takes',take.id); if(!mp3) throw new Error('That take is no longer saved on this phone.');
+  const mp3=take.mp3||await mp3Of(TDB,'takes',take.id); if(!mp3) throw new Error('That take is no longer saved on this device.');
   const rows=kinds(it).map(k=>({id:rowId(it,k),kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3,script:take.script,takeId:take.id,t:Date.now()}));
   await tx(LDB,'clips',s=>rows.forEach(r=>s.put(r))); rows.forEach(r=>LOCAL.set(r.id,slim(r)));
 }
@@ -221,7 +244,7 @@ function playB64(b64,btn){
 }
 async function playNow(it,btn){
   const loc=localFor(it);
-  if(loc){ const m=await mp3Of(LDB,'clips',loc.id); return m?playB64(m,btn):toast('That clip is no longer saved on this phone.'); }
+  if(loc){ const m=await mp3Of(LDB,'clips',loc.id); return m?playB64(m,btn):toast('That clip is no longer saved on this device.'); }
   if(it.f<0) return toast(it.nv?'No clip yet, and this character has no voice chosen yet.':'No clip yet. Tap the line to make one.');
   btn.textContent='...';
   try{ const b=await builtIn(it); btn.innerHTML='&#9654;'; if(!b) return toast('This line has no clip yet.'); playB64(b,btn); }
@@ -341,7 +364,7 @@ function renderFilters(){
   const chs=IDX.chapters.filter(c=>IDX.items.some(it=>it.c.includes(c.n)));
   $('fChap').innerHTML='<span class="lab">Chapter</span>'+chip('ch','*','All',!F.ch.size,vc.length)+chs.map(c=>chip('ch',c.n,(c.n===21?'Bonus':'Ch '+c.n),F.ch.has(c.n),cc[c.n]||0)).join('')+chip('ch','0','No chapter',F.ch.has(0),cc[0]||0);
   const p=IDX.items.filter(it=>localFor(it)).length, nn=IDX.items.filter(it=>it.f<0&&!localFor(it)).length;
-  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this phone',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin');
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin');
 }
 function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(F.show!=='all'?1:0)+(F.q.trim()?1:0); }
 function renderSum(){
@@ -429,7 +452,7 @@ async function runBulk(){
   if(!list.length) return;
   if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); return; }
   const chars=list.reduce((n,it)=>n+(isDog(it)?0:finalText(it).length),0);
-  if(!confirm('Make a new take for '+list.length+' line'+(list.length>1?'s':'')+'? About '+chars.toLocaleString()+' characters of ElevenLabs credit. Each new take plays in the game on this phone; the old ones stay here so you can switch back.')) return;
+  if(!confirm('Make a new take for '+list.length+' line'+(list.length>1?'s':'')+'? About '+chars.toLocaleString()+' characters of ElevenLabs credit. Each new take plays in the game on this device; the old ones stay here so you can switch back.')) return;
   let wake=null; try{ if(navigator.wakeLock) wake=await navigator.wakeLock.request('screen'); }catch(e){}
   BULK={done:0,fail:0,total:list.length,stop:false}; renderBar();
   let i=0;
@@ -445,9 +468,9 @@ async function runBulk(){
 function paintKey(){
   const has=!!apiKey();
   $('keybox').innerHTML=has
-    ?'<div class="keyrow"><span class="ok" style="flex:1">ElevenLabs key saved on this phone.</span><button class="small" id="chg">Change key</button></div>'+
+    ?'<div class="keyrow"><span class="ok" style="flex:1">ElevenLabs key saved on this device.</span><button class="small" id="chg">Change key</button></div>'+
      '<div class="keyrow" style="margin-top:10px"><button class="small gold" id="hist">Load the directions used for the baked clips</button><span class="hint" id="histmsg">'+histNote()+'</span></div>'
-    :'<label for="key">ElevenLabs API key (saved on this phone only)</label><input id="key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste it here"><div class="keyrow" style="margin-top:8px"><button class="small" id="savekey">Save key</button></div>';
+    :'<label for="key">ElevenLabs API key (saved on this device only)</label><input id="key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste it here"><div class="keyrow" style="margin-top:8px"><button class="small" id="savekey">Save key</button></div>';
 }
 
 // ---------- directions from ElevenLabs history ----------
@@ -519,7 +542,7 @@ document.addEventListener('click',async e=>{
   if(t.id==='clear'){ F.who.clear(); F.type.clear(); F.ch.clear(); F.show='all'; F.q=''; $('q').value=''; saveF(); shown=PAGE; renderAll(); return; }
   if(t.id==='selmode'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
   if(t.id==='exp') return exportClips();
-  if(t.id==='clr'){ if(BULK) return; if(confirm('Remove every clip made on this phone (here and on the Bake page)? The game goes back to the voices built into it. Your takes stay in the library.')){ await tx(LDB,'clips',s=>s.clear()).catch(()=>{}); LOCAL.clear(); renderAll(); toast('Removed.'); } return; }
+  if(t.id==='clr'){ if(BULK) return; if(confirm('Remove every clip made on this device (here and on the Bake page)? The game goes back to the voices built into it. Your takes stay in the library.')){ await tx(LDB,'clips',s=>s.clear()).catch(()=>{}); LOCAL.clear(); renderAll(); toast('Removed.'); } return; }
   if(t.classList.contains('chip')) return toggle(t.dataset.g,t.dataset.v);
   const act=t.dataset.act;
   if(act==='more'){ shown+=PAGE*2; renderList(); return; }
@@ -573,7 +596,7 @@ async function exportClips(){
   try{ const r=await fetch('data/voice-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IDX=await r.json(); }
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   IDX.who.forEach(w=>WHO[w.id]=w);
-  $('howto').textContent='Each box holds what ElevenLabs reads: change the words or the [directions] right there; edits save as you type and every new take uses them (CAPS for emphasis, Tah Tah for Ta-ta). The subtitle in the game stays as it is until Claude changes it. Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this phone at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
+  $('howto').textContent='Each box holds what ElevenLabs reads: change the words or the [directions] right there; edits save as you type and every new take uses them (CAPS for emphasis, Tah Tah for Ta-ta). The subtitle in the game stays as it is until Claude changes it. Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this device at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
   renderAll();
   await loadPhone(false);
   if(window.__VL_READY) window.__VL_READY();
@@ -587,7 +610,7 @@ async function loadPhone(force){
   try{ const t=+localStorage.getItem('aot-vl-boot')||0; crashed=!force&&t&&Date.now()-t<120000; }catch(e){}
   if(crashed){
     try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
-    box.hidden=false; box.innerHTML='<p style="margin:0 0 10px">The last time this page opened it stopped before it finished reading the clips saved on this phone, so they are not loaded this time. Your clips and takes are still saved and the game still plays them.</p><button class="gold" id="loadphone">Load the saved clips now</button>';
+    box.hidden=false; box.innerHTML='<p style="margin:0 0 10px">The last time this page opened it stopped before it finished reading the clips saved on this device, so they are not loaded this time. Your clips and takes are still saved and the game still plays them.</p><button class="gold" id="loadphone">Load the saved clips now</button>';
     return;
   }
   box.hidden=true;
