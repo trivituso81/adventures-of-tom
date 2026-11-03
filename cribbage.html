@@ -671,6 +671,118 @@ td.actions{ text-align:right; width:1%; }
   text-align:center; margin: 8px 0;
 }
 
+
+/* ===== Batch 4: superlatives + pace calculator ===== */
+.superlatives{
+  margin: 0 0 22px;
+}
+.super-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:12px;
+}
+@media (min-width:700px){
+  .super-grid{ grid-template-columns: 1fr 1fr; }
+}
+.super-card{
+  background: var(--cardstock);
+  border:1px solid var(--border-warm);
+  border-radius:16px;
+  padding:16px 16px 14px;
+  box-shadow: var(--shadow);
+  font-variant-numeric: tabular-nums;
+}
+.super-card .eyebrow{
+  margin:0 0 6px;
+  font-family:Fredoka,sans-serif; font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; font-weight:700; color:var(--felt);
+  background:none; border:0; padding:0; box-shadow:none; display:block;
+}
+.super-card h3{
+  margin:0 0 6px;
+  font-family:Fredoka,sans-serif; font-size:22px; color:var(--walnut);
+}
+.super-card .big{
+  font-family:Fredoka,sans-serif; font-weight:700;
+  font-size:clamp(26px, 5vw, 34px); color:var(--felt); line-height:1.05;
+  margin: 8px 0 6px; font-variant-numeric: tabular-nums;
+}
+.super-card.roast .big{ color: var(--coral); }
+.super-card .meta{ margin:0; color:var(--ink-soft); font-weight:700; font-size:13px; }
+.super-card .roast-line{
+  margin:8px 0 0; font-weight:800; color:var(--walnut); font-size:14px;
+}
+
+.pace-card{
+  background: var(--cardstock);
+  border:1px solid var(--border-warm);
+  border-radius:18px;
+  padding:20px 18px 18px;
+  box-shadow: var(--shadow);
+}
+.pace-card h2{
+  margin:0 0 6px;
+  font-family:Fredoka,sans-serif; color:var(--walnut);
+  font-size:clamp(24px, 4vw, 32px);
+}
+.pace-card .lede{
+  margin:0 0 18px; color:var(--ink-soft); font-weight:600; max-width:46ch;
+}
+.pace-controls{ display:grid; gap:16px; margin-bottom:18px; }
+.pace-control{
+  background: var(--paper-edge);
+  border:1px solid var(--border-warm);
+  border-radius:14px;
+  padding:14px;
+}
+.pace-control .row{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-bottom:10px;
+}
+.pace-control label{
+  font-family:Fredoka,sans-serif; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; font-weight:700; color:var(--ink-soft);
+}
+.pace-control .value{
+  font-family:Fredoka,sans-serif; font-weight:700; font-size:28px;
+  color:var(--felt); font-variant-numeric: tabular-nums; min-width:2ch; text-align:right;
+}
+.stepper{ display:flex; align-items:center; gap:8px; }
+.stepper button{
+  appearance:none; border:1px solid var(--border-warm); background:var(--cardstock);
+  width:44px; height:44px; border-radius:12px; cursor:pointer;
+  font:800 22px/1 Nunito,system-ui,sans-serif; color:var(--walnut);
+}
+.stepper button:active{ background: var(--parchment); }
+.pace-control input[type=range]{
+  width:100%; accent-color: var(--felt); height:28px;
+}
+.pace-targets{ display:grid; gap:10px; }
+@media (min-width:720px){
+  .pace-targets{ grid-template-columns: repeat(3, 1fr); }
+}
+.pace-target{
+  border:1px solid var(--border-warm);
+  border-radius:14px;
+  padding:14px;
+  background: var(--parchment);
+  font-variant-numeric: tabular-nums;
+}
+.pace-target.on-pace{ background: #eef6f1; border-color: rgba(27,59,43,.25); }
+.pace-target.danger{ background: #fff1ee; border-color: rgba(224,90,71,.3); }
+.pace-target .k{
+  font-family:Fredoka,sans-serif; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; font-weight:700; color:var(--ink-soft); margin-bottom:6px;
+}
+.pace-target .v{
+  font-family:Fredoka,sans-serif; font-weight:700; font-size:22px; color:var(--felt);
+  margin-bottom:4px;
+}
+.pace-target .s{ font-size:13px; font-weight:700; color:var(--ink-soft); }
+.pace-footnote{
+  margin:14px 0 0; font-size:12px; font-weight:700; color:var(--ink-soft);
+}
+
 </style>
 </head>
 <body>
@@ -799,6 +911,12 @@ td.actions{ text-align:right; width:1%; }
   </div>
 
   <div class="tab-panel" role="tabpanel" id="tab-trophy" aria-labelledby="tab-btn-trophy" data-panel="trophy" hidden>
+  <section id="superlatives" class="superlatives" aria-label="Superlatives and roasts">
+    <p class="section-kicker">Superlatives &amp; Roasts</p>
+    <h2 class="section-title">Auto-generated from the board</h2>
+    <p class="section-note">Computed live from Tom’s tracked Club 257 nights. No committee. No mercy.</p>
+    <div class="super-grid" id="superGrid"></div>
+  </section>
 <section id="grnt" aria-label="Highlights">
     <p class="section-kicker">Board toppers</p>
     <h2 class="section-title">Moments that deserve a standing ovation (or a snack)</h2>
@@ -834,10 +952,38 @@ td.actions{ text-align:right; width:1%; }
 
   <div class="tab-panel" role="tabpanel" id="tab-tools" aria-labelledby="tab-btn-tools" data-panel="tools" hidden>
     <section id="tools" aria-label="Table Tools">
-      <div class="tools-placeholder">
-        <p class="section-kicker">Table Tools</p>
-        <h2>Coming in a later batch</h2>
-        <p>Peg calculators, pairings helpers, and other clubhouse gadgets will live here. Nothing to tap yet.</p>
+      <div class="pace-card">
+        <p class="section-kicker">Grass Roots Night Pace</p>
+        <h2>Nine-game pace calculator</h2>
+        <p class="lede">Dial in games played so far and current game points. We’ll tell Tom what he still needs from the rest of the night.</p>
+
+        <div class="pace-controls">
+          <div class="pace-control">
+            <div class="row">
+              <label for="paceGames">Games played so far</label>
+              <div class="value" id="paceGamesVal">4</div>
+            </div>
+            <div class="stepper">
+              <button type="button" data-pace="games" data-delta="-1" aria-label="Fewer games">−</button>
+              <input id="paceGames" type="range" min="1" max="8" step="1" value="4" aria-valuemin="1" aria-valuemax="8">
+              <button type="button" data-pace="games" data-delta="1" aria-label="More games">+</button>
+            </div>
+          </div>
+          <div class="pace-control">
+            <div class="row">
+              <label for="pacePts">Current game points</label>
+              <div class="value" id="pacePtsVal">8</div>
+            </div>
+            <div class="stepper">
+              <button type="button" data-pace="pts" data-delta="-1" aria-label="Fewer points">−</button>
+              <input id="pacePts" type="range" min="0" max="24" step="1" value="8" aria-valuemin="0" aria-valuemax="24">
+              <button type="button" data-pace="pts" data-delta="1" aria-label="More points">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pace-targets" id="paceTargets" aria-live="polite"></div>
+        <p class="pace-footnote">Assumes a standard 9-game Grass Roots night. Cash line ~14+ pts, podium ~16+ pts, skunk-watch clear line 10+ pts.</p>
       </div>
     </section>
   </div>
@@ -1333,12 +1479,187 @@ function wireTabs(){
   activateFromHash(!!location.hash);
 }
 
+
+function isTopHalfNight(n){
+  if(n.rank == null || !n.field) return false;
+  return n.rank <= Math.ceil(n.field / 2);
+}
+
+function isHeaterNight(n){
+  return (n.rank != null && n.rank <= 2) || isTopHalfNight(n);
+}
+
+function longestHeaterStreak(){
+  const chrono = [...NIGHTS].sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+  let best = 0, bestStart = 0, bestEnd = -1;
+  let cur = 0, curStart = 0;
+  chrono.forEach((n, i) => {
+    if(isHeaterNight(n)){
+      if(cur === 0) curStart = i;
+      cur += 1;
+      if(cur > best){
+        best = cur;
+        bestStart = curStart;
+        bestEnd = i;
+      }
+    } else {
+      cur = 0;
+    }
+  });
+  if(best === 0){
+    return { length: 0, from: null, to: null, nights: [] };
+  }
+  const nights = chrono.slice(bestStart, bestEnd + 1);
+  return { length: best, from: nights[0], to: nights[nights.length - 1], nights };
+}
+
+function renderSuperlatives(){
+  const grid = document.getElementById("superGrid");
+  if(!grid || !NIGHTS.length) return;
+
+  const peak = NIGHTS.reduce((a,n) => n.spread > a.spread ? n : a, NIGHTS[0]);
+  const magnet = NIGHTS.reduce((a,n) => n.pts > a.pts ? n : a, NIGHTS[0]);
+  const rough = NIGHTS.reduce((a,n) => n.spread < a.spread ? n : a, NIGHTS[0]);
+  const heater = longestHeaterStreak();
+
+  const roughRoasts = [
+    "The pegs filed a complaint.",
+    "Board said ‘sit with that.’",
+    "Character arc, not a highlight reel.",
+    "Still showed up. The skunk noticed."
+  ];
+  let rh = 0;
+  for(const c of rough.date) rh = (rh + c.charCodeAt(0) * 13) % roughRoasts.length;
+
+  const heaterMeta = heater.length
+    ? (heater.length + " nights · " + heater.from.label + " → " + heater.to.label)
+    : "No heater yet. The board is patient.";
+
+  grid.innerHTML = `
+    <article class="super-card">
+      <p class="eyebrow">Peak Violence</p>
+      <h3>Highest single-night spread</h3>
+      <div class="big">${signed(peak.spread)}</div>
+      <p class="meta">${peak.label} · ${peak.pts} pts · ${peak.won} wins</p>
+    </article>
+    <article class="super-card">
+      <p class="eyebrow">The Heater</p>
+      <h3>Longest top-half / top-two streak</h3>
+      <div class="big">${heater.length}</div>
+      <p class="meta">${heaterMeta}</p>
+    </article>
+    <article class="super-card">
+      <p class="eyebrow">Card Magnet</p>
+      <h3>Highest single-night game points</h3>
+      <div class="big">${magnet.pts}</div>
+      <p class="meta">${magnet.label} · spread ${signed(magnet.spread)} · ${magnet.won} wins</p>
+    </article>
+    <article class="super-card roast">
+      <p class="eyebrow">Rough Sledding</p>
+      <h3>Lowest single-night spread</h3>
+      <div class="big">${signed(rough.spread)}</div>
+      <p class="meta">${rough.label} · ${rough.pts} pts · finish ${rough.rank == null ? "?" : rough.rank}/${rough.field}</p>
+      <p class="roast-line">${roughRoasts[rh]}</p>
+    </article>`;
+}
+
+const PACE = {
+  games: 4,
+  pts: 8,
+  nightLen: 9,
+  cashLine: 14,
+  podium: 16,
+  skunkClear: 10
+};
+
+function paceNeed(target){
+  const remaining = PACE.nightLen - PACE.games;
+  const need = Math.max(0, target - PACE.pts);
+  return { remaining, need, already: PACE.pts >= target, per: remaining > 0 ? (need / remaining) : need };
+}
+
+function renderPace(){
+  const gamesEl = document.getElementById("paceGames");
+  const ptsEl = document.getElementById("pacePts");
+  const gamesVal = document.getElementById("paceGamesVal");
+  const ptsVal = document.getElementById("pacePtsVal");
+  const targets = document.getElementById("paceTargets");
+  if(!gamesEl || !ptsEl || !targets) return;
+
+  PACE.games = Number(gamesEl.value);
+  PACE.pts = Number(ptsEl.value);
+  if(gamesVal) gamesVal.textContent = String(PACE.games);
+  if(ptsVal) ptsVal.textContent = String(PACE.pts);
+  gamesEl.setAttribute("aria-valuenow", String(PACE.games));
+  ptsEl.setAttribute("aria-valuenow", String(PACE.pts));
+
+  const rows = [
+    {
+      key: "cash",
+      title: "Cash line (~14+)",
+      target: PACE.cashLine,
+      okCopy: "Already on the cash line. Don’t get cute.",
+      needCopy: (n) => "Need " + n.need + " more pt" + (n.need === 1 ? "" : "s") + " in " + n.remaining + " game" + (n.remaining === 1 ? "" : "s")
+    },
+    {
+      key: "podium",
+      title: "Podium / Top Two (~16+)",
+      target: PACE.podium,
+      okCopy: "Podium pace locked. Keep dealing violence.",
+      needCopy: (n) => "Need " + n.need + " more pt" + (n.need === 1 ? "" : "s") + " across " + n.remaining + " left"
+    },
+    {
+      key: "skunk",
+      title: "Clear skunk-watch (10+)",
+      target: PACE.skunkClear,
+      okCopy: "Clear of skunk-watch territory. Breathe.",
+      needCopy: (n) => "Need " + n.need + " more pt" + (n.need === 1 ? "" : "s") + " or the skunk starts warming up"
+    }
+  ];
+
+  targets.innerHTML = rows.map(r => {
+    const n = paceNeed(r.target);
+    const cls = n.already ? "pace-target on-pace" : (r.key === "skunk" && !n.already ? "pace-target danger" : "pace-target");
+    const detail = n.already
+      ? r.okCopy
+      : (r.needCopy(n) + (n.remaining > 0 ? " · ~" + (Math.round(n.per * 10) / 10) + " pts/game" : ""));
+    return `<article class="${cls}">
+      <div class="k">${r.title}</div>
+      <div class="v">${n.already ? "Done" : "+" + n.need}</div>
+      <div class="s">${detail}</div>
+    </article>`;
+  }).join("");
+}
+
+function wirePaceCalculator(){
+  const gamesEl = document.getElementById("paceGames");
+  const ptsEl = document.getElementById("pacePts");
+  if(!gamesEl || !ptsEl) return;
+  const sync = () => renderPace();
+  gamesEl.addEventListener("input", sync);
+  ptsEl.addEventListener("input", sync);
+  document.querySelectorAll("[data-pace]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const kind = btn.getAttribute("data-pace");
+      const delta = Number(btn.getAttribute("data-delta") || 0);
+      const el = kind === "games" ? gamesEl : ptsEl;
+      const next = Math.min(Number(el.max), Math.max(Number(el.min), Number(el.value) + delta));
+      el.value = String(next);
+      renderPace();
+    });
+  });
+  renderPace();
+}
+
+
 fillSeasonSelect();
 wireBoardControls();
 renderSummary();
 applyMoodRing();
 wireAvatarFallback();
 refreshBoard();
+renderSuperlatives();
+wirePaceCalculator();
 wireTabs();
 </script>
 </body>
