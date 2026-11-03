@@ -215,6 +215,20 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "grace-stand-front-bighead",
+   "tab": "Characters",
+   "title": "Grace walk 0 TEST: front stand with a head 50 percent bigger (edit of her straight front stand)",
+   "ar": "1:1",
+   "refs": [
+    "tools/sprite-bake/src/grace-walk-v3-stand-front-straight.png"
+   ],
+   "prompt": "Edit the attached picture. Change ONE thing only: make her head bigger.\n\nMake her head and hair about one and a half times larger than they are now (50 percent bigger), so she has a big caricature head on the same small body. Scale the face and the hair together: the same face, the same happy smile, the same hair, the same dead straight look at the viewer. The neck stays short and the big head may overlap the tops of her shoulders a little.\n\nEverything else stays as it is: her body proportions, arms, legs, feet, clothes, keychain, colors, painted brushwork and the flat magenta background. Draw the whole girl, head included, a little smaller in the picture if needed so that all of her fits with magenta margin above her hair and below her feet. One girl only. Nothing added: no shadow, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-battle",
    "tab": "Characters",
    "title": "Grace: battle sheet 4 x 4 (painted, on magenta)",

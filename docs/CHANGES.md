@@ -1,3 +1,9 @@
+## 2026-11-03 (124): Art Library: Grace pose 0 big-head test entry (library only, no game change)
+
+- Tom (11-03 12:46): thinks the head rule should change so the head is 50 percent bigger, and wants to test it on pose 0 first. New entry `grace-stand-front-bighead` (Characters > Grace, "Grace walk 0 TEST"): an edit of her approved straight front stand (`grace-walk-v3-stand-front-straight.png`) that makes the head and hair about one and a half times larger and leaves the body alone (head share goes from about .205 to about .28). The figure may be drawn a little smaller so it fits the frame; the bake already brings every direction to one height.
+- Nothing else changed: the head rules in the other prompts, the style key and the height chart are untouched until Tom has seen the result. A bigger head comes from a regenerated picture, never from a bake warp (see 123). If Tom approves the look, the head rule in party-prompts.js and the Grace walk and battle entries gets rewritten in one go.
+- tools/art-library/test.py: Characters 62 to 63, id order list includes the new entry. The one failing check is the known flaky "a blocked row opens with GENERATE disabled" (landscape this time).
+
 ## 2026-11-03 (123): Standing rule: never resize a head (docs and tool warning only, no game change)
 
 - Tom (11-03 11:33) asked that head resizing never happen again after (121). Added "No head resizing" to CLAUDE.md. Marked `docs/CHARACTER_PIPELINE.md` section 7 as overridden (its head shares .21 to .25, .373 and .43 are no longer bake targets) and changed pipeline step 4 of section 6. `tools/sprite-bake/kidhead.py` now says so in its header and prints a warning to stderr whenever `grow_head` runs with a factor other than 1. Old bake scripts (bake_grace.py battle part, bake_rose.py, bake_olivia*.py) are unchanged so old art can still be reproduced.
