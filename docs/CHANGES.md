@@ -1,3 +1,9 @@
+## 2026-11-03 (131): Art Library: Grace big-head TEST 4, style key as painting guide (library only, no game change)
+
+- Tom ran TEST 3 (129): "better!" (likeness back) "but needs more of a brushed illustrated feel". Saved as `tools/sprite-bake/src/grace-stand-front-bighead-fresh-v1.jpg`. Measured (fact): head about .19 of full height (hair top 56 px, chin about 237 px, soles 992 px), not the .30 asked; background came out crimson (192, 27, 96), not magenta.
+- One lever: painting-style source. New entry `grace-stand-front-bighead-style` (Characters > Grace, "Grace walk 0 TEST 4"): same photo slot and hero as TEST 3, plus `docs/reference/style_key_v1.png` as a third picture for brushwork only; prompt is TEST 3's with the style sentence moved onto the third picture (1,041 characters). TEST 3 is untouched. Head size and background left alone for this test.
+- tools/art-library/test.py: Characters 65 to 66, id order and tom slice updated. All checks pass.
+
 ## 2026-11-03 (130): Removed unused source pictures (hosting only, no game change)
 
 - Tom (11-03 15:00): "remove anything the Art Library isn't using". Deleted 43 pictures (69 MB) from `tools/sprite-bake/src` and `docs/reference` that no code, bake script, Art Library entry or prompt names, directly or through a file-name pattern: superseded Tom and Grace sheets (tom-poses-v1/v2, tom-sheet-v1, tom-walk-v2, tom-stretch-v1, tomride-*, grace-walk-sheet2-v1, grace-walk-v3 early tries), kid-amy-ref, kid-tom-ref, foe-hush9final-v2-unused, the 12 flight source paintings (the game uses art/flight), and old area paintings and masks in docs/reference (town, row, blvd, hollow versions from Tom, style_key_square_crop).

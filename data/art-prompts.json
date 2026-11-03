@@ -262,6 +262,25 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "grace-stand-front-bighead-style",
+   "tab": "Characters",
+   "title": "Grace walk 0 TEST 4: like TEST 3 plus the game style key as a painting-style guide (uses the photo you added)",
+   "ar": "1:1",
+   "own": {
+    "slot": "grace-photo",
+    "label": "Photo of the real Grace (face clear)"
+   },
+   "refs": [
+    "tools/sprite-bake/src/grace-hero-scene-v1.png",
+    "docs/reference/style_key_v1.png"
+   ],
+   "prompt": "A hand-painted illustration of one real girl, Grace, age 9, standing facing and looking straight at the viewer, arms relaxed at her sides, feet a little apart. Full body, head to shoes, on a flat plain magenta background.\n\nHer face must match the first attached picture, a photo of the real Grace: face shape, eyes, nose, wide toothy smile, small stud earrings, hair color, length and parting. Not the photo's clothes or background.\n\nDress her as in the second attached picture: the same purple sweater, grey sweatpants, pink sneakers and yellow keychain. Use only the girl from it; leave out its school yard.\n\nPaint her in the style of the third attached picture: dense visible brushwork, crisp painted detail in every hair strand and fabric fold, rich color and warm golden light from the upper left. Use only its style; copy none of its people or places.\n\nCaricature proportions: a big head, about 30 percent of her full height, on a slim small body. NOT pixel art, NOT photorealistic, NOT a 3D render. One girl only. No shadow, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-battle",
    "tab": "Characters",
    "title": "Grace: battle sheet 4 x 4 (painted, on magenta)",
