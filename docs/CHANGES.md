@@ -1,3 +1,7 @@
+## 2026-11-03 (126): Art Library: big-head test prompt restored, first picture saved (library only, no game change)
+
+- Tom ran the 125 prompt (added "KEEP IT HAND-PAINTED"): the head grew to about .34 of height (he approved about .30) and the picture looked even less like an illustration. He had liked the FIRST result. Restored `tools/art-library/prompts/grace-stand-front-bighead.txt` to the exact 124 text that made it, and saved that picture as `tools/sprite-bake/src/grace-stand-front-bighead-v1.jpg` (1024 x 1024, head about .30). STOP-LOSS: two pictures in a row lost the painted feel, so no third wording. Next step in claude/next.md.
+
 ## 2026-11-03 (125): Art Library: big-head test prompt, painted-look sentence (library only, no game change)
 
 - Tom ran `grace-stand-front-bighead` (124): proportions good (head about .30 of height by eye, a little more than the .28 planned) but the picture lost the painted feel (smoother skin, mottled sweater instead of woven wool). One lever changed: a short "KEEP IT HAND-PAINTED" paragraph in `tools/art-library/prompts/grace-stand-front-bighead.txt` (now under 1,000 characters). Same single reference. First miss on this lever; a second miss is a stop-loss.
