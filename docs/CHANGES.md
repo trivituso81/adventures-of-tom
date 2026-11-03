@@ -1,3 +1,10 @@
+## 2026-11-03 (129): Art Library: phone-only photo slot, Grace big-head TEST 3 (library only, no game change)
+
+- Tom ran TEST 2 (127): head size good, but it looked less like Grace and lost the brushed illustration feel. Stop-loss: every run so far was an edit of an edit, so likeness and paint drifted each pass. One lever changed: the sources. TEST 3 is one fresh picture from originals only.
+- New entry `grace-stand-front-bighead-fresh` (Characters > Grace, "Grace walk 0 TEST 3"): first picture = Tom's real photo of Grace (face), second = `grace-hero-scene-v1.png` (the painted hero Tom pointed to, for outfit and brushwork). Prompt 1,012 characters, written fresh (no edit words), front stand facing straight, head about 30 percent of her height.
+- art.html: entries can now ask for a picture Tom adds from his phone (`own: {slot, label}`). The photo is kept in that browser only (IndexedDB, key `own|<slot>`), sent first, left out of EXPORT ZIP and never committed. Why: the repo and site are public, and this is a real photo of a child. GENERATE says "Add the picture first" until it is added. Slot `grace-photo` can be reused by later Grace entries.
+- tools/art-library/test.py: Characters 64 to 65, id order list updated. All checks pass. Tested the photo slot with a fake image service: refused without the photo, kept after reload, sent first (2 pictures).
+
 ## 2026-11-03 (128): Pages deploy speed: .nojekyll (hosting only, no game change)
 
 - Tom (11-03) noticed the site taking longer to update. Fact: the published site is about 880 MB in 1,900 files (531 MB of it is `tools/sprite-bake/src` source pictures, 127 MB baked voice), close to the GitHub Pages 1 GB site limit. Deploys went from about 2 to 3 minutes (11-02) to 4 to 10 minutes (11-03), and pushes that land during a deploy cancel it and restart the wait.

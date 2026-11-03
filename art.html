@@ -33,6 +33,7 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 .ref{width:84px;font-size:11px;color:#b9b3e6;text-align:center}
 .ref img{width:84px;height:84px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block}
 .ref input{margin-top:4px}
+.ownadd{display:inline-block;background:#3a3566;color:#fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;margin:2px 0 6px}
 .res{display:flex;gap:8px;overflow-x:auto;padding:6px 0}
 .res>div{flex:none;width:156px;text-align:center;font-size:11px;color:#b9b3e6}
 .res img{width:156px;height:156px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}
@@ -111,6 +112,10 @@ textarea{min-height:230px;font-size:15px}
 const $=id=>document.getElementById(id);
 const Q=new URLSearchParams(location.search);
 const MODEL='grok-imagine-image-2.0', KEEP=5;
+// Pictures Tom adds from his phone (for example a real photo). Kept in this browser only, never committed to the public repo. Entry field own:{slot,label}; the picture is sent FIRST.
+let OWN={};
+const ownOf=e=>e.own&&OWN[e.own.slot]||null;
+const ownUrl=r=>{ const k='own|'+r.slot+'@'+r.t; if(!URLS.has(k)) URLS.set(k,URL.createObjectURL(r.blob)); return URLS.get(k); };
 const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},set(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}},del(k){try{localStorage.removeItem(k);}catch(e){}}};
 const XAI_BASE=()=> (Q.get('xai')||LS.get('aot-art-relay')||'https://api.x.ai').replace(/\/+$/,'');
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
@@ -168,7 +173,7 @@ const shortTitle=t=>baseTitle(t).replace(/\s*\([^)]*\)\s*$/,'');
 function rowLabel(e){ let t=baseTitle(e.title); const g=e.group||''; if(g&&t.toLowerCase().indexOf(g.toLowerCase()+': ')===0) t=t.slice(g.length+2); return t; }
 const URLS=new Map();
 const urlOf=r=>{ const k=r.key+'@'+r.t; if(!URLS.has(k)) URLS.set(k,URL.createObjectURL(r.blob)); return URLS.get(k); };
-async function loadResults(){ RES={}; if(!DB) return; const all=await tx('readonly',s=>s.getAll()); for(const r of all) (RES[r.id]=RES[r.id]||[]).push(r); for(const k in RES) RES[k].sort((a,b)=>b.n-a.n); }
+async function loadResults(){ RES={}; OWN={}; if(!DB) return; const all=await tx('readonly',s=>s.getAll()); for(const r of all){ if(r.id==='__own'){ OWN[r.slot]=r; continue; } (RES[r.id]=RES[r.id]||[]).push(r); } for(const k in RES) RES[k].sort((a,b)=>b.n-a.n); }
 function undecided(e){ const rs=RES[e.id]||[]; if(!rs.length) return false; const dec=Math.max(0,...[].concat(e.versions||[],e.rejects||[]).map(x=>parseInt(String(x.from||'').slice(1),10)||0)); return rs[0].n>dec; }
 // A ticked reference under art/raw/ is made by approving another entry. Blocked until that entry is approved and its file is published (checked with a HEAD request).
 function blockInfo(e){
@@ -219,6 +224,7 @@ function renderCard(e){
   return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
+  (e.own?'<label>'+esc(e.own.label)+' (stays on this device, sent first)</label><div class="refs">'+(ownOf(e)?'<div class="ref"><img src="'+ownUrl(ownOf(e))+'" alt=""><button class="small" data-ownrm="'+esc(e.own.slot)+'" data-id="'+id+'">Remove</button></div>':'<div class="hint">Not added yet.</div>')+'</div><label class="ownadd"><input type="file" accept="image/*" data-ownadd="'+esc(e.own.slot)+'" data-id="'+id+'" style="display:none">'+(ownOf(e)?'Replace photo':'Add photo from this device')+'</label>':'')+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
   '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16','2:1'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
   '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button></div>'+
@@ -269,11 +275,12 @@ $('q').addEventListener('input',()=>{
 let scrollT; addEventListener('scroll',()=>{ clearTimeout(scrollT); scrollT=setTimeout(()=>{ UI.sy[UI.tab]=Math.round(scrollY); saveUI(); },400); },{passive:true});
 const promptOf=e=>EDITS[e.id]!==undefined?EDITS[e.id]:e.prompt;
 $('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} const nid=e.target.dataset&&e.target.dataset.note; if(nid) NOTES[nid]=e.target.value; });
-$('list').addEventListener('change',e=>{ const t=e.target; if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
+$('list').addEventListener('change',async e=>{ const t=e.target; if(t.dataset.ownadd&&t.files&&t.files[0]){ if(!DB) return toast('This browser would not keep the picture.'); const r={key:'own|'+t.dataset.ownadd,id:'__own',slot:t.dataset.ownadd,blob:t.files[0],t:Date.now()}; await tx('readwrite',s=>s.put(r)); OWN[r.slot]=r; refreshItem(t.dataset.id); return; } if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
 $('list').addEventListener('click',async e=>{
   const t=e.target;
   const g=t.closest('[data-grp]'); if(g) return toggleGroup(g.dataset.grp);
   const h=t.closest('[data-toggle]'); if(h) return toggleItem(h.dataset.toggle);
+  if(t.dataset.ownrm){ await tx('readwrite',s=>s.delete('own|'+t.dataset.ownrm)); delete OWN[t.dataset.ownrm]; return refreshItem(t.dataset.id); }
   if(t.dataset.gen) return generate(t.dataset.gen,t);
   if(t.dataset.ok) return decide('ok',t.dataset.ok,t);
   if(t.dataset.no) return decide('no',t.dataset.no,t);
@@ -298,15 +305,17 @@ async function generate(id,btn){
   const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
   const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false);
-  if(refPaths.length>5) return setMsg(id,'At most 5 reference pictures. Untick '+(refPaths.length-5)+'.',true);
-  { const o=spendGet(); if(o.total+SPEND_PER+SPEND_REF*refPaths.length>o.cap) return setMsg(id,'Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.',true); }
+  const own=ownOf(e); if(e.own&&!own) return setMsg(id,'Add the picture first: '+e.own.label+'.',true);
+  const nRef=refPaths.length+(own?1:0);
+  if(nRef>5) return setMsg(id,'At most 5 reference pictures. Untick '+(nRef-5)+'.',true);
+  { const o=spendGet(); if(o.total+SPEND_PER+SPEND_REF*nRef>o.cap) return setMsg(id,'Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.',true); }
   btn.disabled=true; setMsg(id,'Working... this takes up to a minute.');
   try{
     const body={model:MODEL,prompt,n:1,aspect_ratio:e.ar||'3:4',resolution:'1k',response_format:'b64_json'};
     let path='/v1/images/generations';
-    if(refPaths.length){
+    if(nRef){
       path='/v1/images/edits';
-      body.images=[]; for(const p of refPaths){ const r=await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error('Could not load reference '+p+(p.indexOf('art/raw/')===0?'. That picture does not exist yet: approve the earlier step first (give the site about 2 minutes after approving).':'')); body.images.push({type:'image_url',url:await blobToDataUri(await r.blob())}); }
+      body.images=[]; if(own) body.images.push({type:'image_url',url:await blobToDataUri(own.blob)}); for(const p of refPaths){ const r=await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error('Could not load reference '+p+(p.indexOf('art/raw/')===0?'. That picture does not exist yet: approve the earlier step first (give the site about 2 minutes after approving).':'')); body.images.push({type:'image_url',url:await blobToDataUri(await r.blob())}); }
     }
     let r; try{ r=await fetch(XAI_BASE()+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)}); }
     catch(err){ throw new Error('The browser could not reach the image service. Either the network is down or the service blocks browsers; if it is the second, a relay address is needed (the Relay field at the top).'); }
@@ -317,8 +326,8 @@ async function generate(id,btn){
     if(d.b64_json){ const bin=atob(d.b64_json), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); blob=new Blob([u],{type:d.mime_type||'image/png'}); }
     else if(d.url){ const ir=await fetch(d.url); if(!ir.ok) throw new Error('Could not download the picture.'); blob=await ir.blob(); }
     else throw new Error('The image service sent an unknown picture format.');
-    { const o=spendGet(); o.total+=SPEND_PER+SPEND_REF*refPaths.length; o.count+=1; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); }
-    const n=await addResult(id,blob,prompt,refPaths); RES[id]=await results(id);
+    { const o=spendGet(); o.total+=SPEND_PER+SPEND_REF*nRef; o.count+=1; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); }
+    const n=await addResult(id,blob,prompt,(own?['(own picture: '+e.own.slot+')']:[]).concat(refPaths)); RES[id]=await results(id);
     e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; refreshItem(id);
   }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; }
 }
@@ -402,7 +411,7 @@ async function makeZip(files){
   return new Blob([...parts,...cd,end.buffer],{type:'application/zip'});
 }
 $('exp').onclick=async()=>{
-  const all=await tx('readonly',s=>s.getAll()); const files=all.map(r=>({name:'art/'+r.id+'-v'+r.n+'.png',blob:r.blob}));
+  const all=(await tx('readonly',s=>s.getAll())).filter(r=>r.id!=='__own'); const files=all.map(r=>({name:'art/'+r.id+'-v'+r.n+'.png',blob:r.blob}));
   const prompts=DATA.entries.map(e=>({id:e.id,tab:e.tab,title:e.title,prompt:promptOf(e),refs:e.refs,status:e.status}));
   files.push({name:'art-prompts-edited.json',blob:new Blob([JSON.stringify(prompts,null,1)],{type:'application/json'})});
   download(await makeZip(files),'art-library-export.zip'); toast('Exported '+all.length+' pictures.');
