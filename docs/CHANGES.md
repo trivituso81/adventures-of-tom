@@ -1,3 +1,7 @@
+## 2026-11-03 (125): Art Library: big-head test prompt, painted-look sentence (library only, no game change)
+
+- Tom ran `grace-stand-front-bighead` (124): proportions good (head about .30 of height by eye, a little more than the .28 planned) but the picture lost the painted feel (smoother skin, mottled sweater instead of woven wool). One lever changed: a short "KEEP IT HAND-PAINTED" paragraph in `tools/art-library/prompts/grace-stand-front-bighead.txt` (now under 1,000 characters). Same single reference. First miss on this lever; a second miss is a stop-loss.
+
 ## 2026-11-03 (124): Art Library: Grace pose 0 big-head test entry (library only, no game change)
 
 - Tom (11-03 12:46): thinks the head rule should change so the head is 50 percent bigger, and wants to test it on pose 0 first. New entry `grace-stand-front-bighead` (Characters > Grace, "Grace walk 0 TEST"): an edit of her approved straight front stand (`grace-walk-v3-stand-front-straight.png`) that makes the head and hair about one and a half times larger and leaves the body alone (head share goes from about .205 to about .28). The figure may be drawn a little smaller so it fits the frame; the bake already brings every direction to one height.
