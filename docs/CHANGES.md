@@ -1,6 +1,7 @@
 ## 2026-11-03 (125): Art Library: big-head test prompt, painted-look sentence (library only, no game change)
 
 - Tom ran `grace-stand-front-bighead` (124): proportions good (head about .30 of height by eye, a little more than the .28 planned) but the picture lost the painted feel (smoother skin, mottled sweater instead of woven wool). One lever changed: a short "KEEP IT HAND-PAINTED" paragraph in `tools/art-library/prompts/grace-stand-front-bighead.txt` (now under 1,000 characters). Same single reference. First miss on this lever; a second miss is a stop-loss.
+- Tom (11-03 14:26) is happy with the .30 head, so the entry title now says "about 30 percent of her height" instead of "50 percent bigger" (title only; the prompt is unchanged so the style test stays one lever).
 
 ## 2026-11-03 (124): Art Library: Grace pose 0 big-head test entry (library only, no game change)
 
