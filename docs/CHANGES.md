@@ -1,3 +1,9 @@
+## 2026-11-03 (128): Pages deploy speed: .nojekyll (hosting only, no game change)
+
+- Tom (11-03) noticed the site taking longer to update. Fact: the published site is about 880 MB in 1,900 files (531 MB of it is `tools/sprite-bake/src` source pictures, 127 MB baked voice), close to the GitHub Pages 1 GB site limit. Deploys went from about 2 to 3 minutes (11-02) to 4 to 10 minutes (11-03), and pushes that land during a deploy cancel it and restart the wait.
+- Added an empty `.nojekyll` at the repo root so GitHub Pages copies the files as they are instead of running the Jekyll site builder over all 1,900 files. No file in the repo starts with `_` or uses front matter, so nothing served changes.
+- Not done (needs Tom's go-ahead): moving source pictures out of the published site. About 118 files (195 MB) in `tools/sprite-bake/src` and 15 (33 MB) in `docs/reference` are not named by any code or prompt.
+
 ## 2026-11-03 (127): Art Library: repaint entry for the big-head stand, rule: images only in the Library (library and docs only, no game change)
 
 - Tom (11-03 14:49): "I only want to use Art Library to create images. ALWAYS." Claude had recommended his outside AI after two style misses (125, 126); that was wrong. Written into CLAUDE.md ("Images only in the Art Library") and Claude's memory.
