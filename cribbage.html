@@ -791,14 +791,14 @@ td.actions{ text-align:right; width:1%; }
   <header class="hero" aria-label="ACC player card">
     <article class="player-card">
       <div class="player-card-top">
-        <div class="mood-ring mid" id="moodRing" data-kind="mid">
+        <div class="mood-ring mid is-fallback" id="moodRing" data-kind="mid">
           <img
             class="badge-avatar"
             id="playerAvatar"
-            src="[INSERT PHOTO FILENAME HERE]"
             alt="Tom Bergland club badge photo"
             width="118"
             height="118"
+            hidden
           >
           <div class="avatar-fallback" id="avatarFallback" aria-hidden="true">TB</div>
           <div class="mood-skunk" aria-hidden="true" title="Skunk watch">
@@ -812,10 +812,6 @@ td.actions{ text-align:right; width:1%; }
             <span>ACC CA07939</span><span class="sep">·</span><span>Burbank Bombers</span><span class="sep">·</span><span>Club 257</span>
           </p>
           <p class="mood-caption" id="moodCaption" data-kind="mid">Latest night: mid pack</p>
-          <div class="hero-cta">
-            <a class="btn btn-gold" href="#nights">Weekly scores</a>
-            <a class="btn btn-paper" href="#grnt">Highlights</a>
-          </div>
         </div>
       </div>
       <div class="career-bar" id="summaryStats" aria-label="Career summary"></div>
@@ -983,7 +979,7 @@ td.actions{ text-align:right; width:1%; }
         </div>
 
         <div class="pace-targets" id="paceTargets" aria-live="polite"></div>
-        <p class="pace-footnote">Assumes a standard 9-game Grass Roots night. Cash line ~14+ pts, podium ~16+ pts, skunk-watch clear line 10+ pts.</p>
+        <p class="pace-footnote">Assumes a standard 9-game Grass Roots night (max 3 pts/game). Cash line ~14+ pts, podium ~16+ pts, skunk-watch clear line 10+ pts. Current points cap at games × 3.</p>
       </div>
     </section>
   </div>
@@ -1248,15 +1244,23 @@ function wireAvatarFallback(){
   const img = document.getElementById("playerAvatar");
   const ring = document.getElementById("moodRing");
   if(!img || !ring) return;
-  const showFallback = () => { ring.classList.add("is-fallback"); };
-  const showPhoto = () => { ring.classList.remove("is-fallback"); };
+  const showFallback = () => {
+    ring.classList.add("is-fallback");
+    img.hidden = true;
+    img.removeAttribute("src");
+  };
+  const showPhoto = () => {
+    ring.classList.remove("is-fallback");
+    img.hidden = false;
+  };
   img.addEventListener("error", showFallback);
   img.addEventListener("load", showPhoto);
-  // Keep src as instructed; show TB badge until a real photo loads.
-  if(!img.getAttribute("src") || img.getAttribute("src").indexOf("INSERT PHOTO") !== -1){
-    showFallback();
-  } else if(img.complete && img.naturalWidth === 0){
-    showFallback();
+  // Set to "tom-b.jpg" (or another file) when a real photo is in the repo.
+  // Empty string keeps the TB monogram and avoids a 404 request.
+  const photoSrc = "";
+  showFallback();
+  if(photoSrc){
+    img.src = photoSrc;
   }
 }
 
@@ -1569,7 +1573,9 @@ const PACE = {
   nightLen: 9,
   cashLine: 14,
   podium: 16,
-  skunkClear: 10
+  skunkClear: 10,
+  // ACC Grass Roots: win = 2 pts, skunk = 3 pts. Theoretical max for G games = G * 3.
+  maxPtsForGames(g){ return Number(g) * 3; }
 };
 
 function paceNeed(target){
@@ -1587,11 +1593,17 @@ function renderPace(){
   if(!gamesEl || !ptsEl || !targets) return;
 
   PACE.games = Number(gamesEl.value);
+  const maxPts = PACE.maxPtsForGames(PACE.games);
+  ptsEl.max = String(maxPts);
+  // Absolute slider ceiling stays 24 for a full night, but active max tracks games played.
+  const hardCap = Math.min(24, maxPts);
+  if(Number(ptsEl.value) > hardCap) ptsEl.value = String(hardCap);
   PACE.pts = Number(ptsEl.value);
   if(gamesVal) gamesVal.textContent = String(PACE.games);
   if(ptsVal) ptsVal.textContent = String(PACE.pts);
   gamesEl.setAttribute("aria-valuenow", String(PACE.games));
   ptsEl.setAttribute("aria-valuenow", String(PACE.pts));
+  ptsEl.setAttribute("aria-valuemax", String(hardCap));
 
   const rows = [
     {
@@ -1642,9 +1654,14 @@ function wirePaceCalculator(){
     btn.addEventListener("click", () => {
       const kind = btn.getAttribute("data-pace");
       const delta = Number(btn.getAttribute("data-delta") || 0);
-      const el = kind === "games" ? gamesEl : ptsEl;
-      const next = Math.min(Number(el.max), Math.max(Number(el.min), Number(el.value) + delta));
-      el.value = String(next);
+      if(kind === "games"){
+        const next = Math.min(Number(gamesEl.max), Math.max(Number(gamesEl.min), Number(gamesEl.value) + delta));
+        gamesEl.value = String(next);
+      } else {
+        const maxPts = Math.min(24, PACE.maxPtsForGames(Number(gamesEl.value)));
+        const next = Math.min(maxPts, Math.max(Number(ptsEl.min), Number(ptsEl.value) + delta));
+        ptsEl.value = String(next);
+      }
       renderPace();
     });
   });
