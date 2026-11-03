@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
-EXPECT = {'Characters': 66, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
+EXPECT = {'Characters': 68, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
 EXPECT_TOTAL = sum(EXPECT.values())
 EXPECT_GROUPS = {'Characters': 13, 'NPCs': 2, 'Areas': 8, 'Rooms': 10, 'Props': 10, 'Enemies': 22, 'Battle': 2, 'Title': 1, 'Portraits': 1, 'Flight': 1}
 def ok(c, m):
@@ -133,7 +133,7 @@ async def main():
                     ok('art/raw/enemies/test-mudling-v1.png' in files and 'art/raw/enemies/test-mudling-v2.png' in files, 'both pictures were committed under art/raw/enemies/')
                     ok(en['status'] == 'approved' and len(en['versions']) == 2 and en['versions'][0]['file'].endswith('-v1.png'), 'json: status approved, two versions listed')
                     ok(len(en['rejects']) == 1 and 'pure magenta' in en['rejects'][0]['note'], 'json: the reject note was saved')
-                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:19] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-walk-side', 'grace-walk-front', 'grace-walk-back', 'grace-stand-front-straight', 'grace-step-front', 'grace-step-front-b', 'grace-step-back', 'grace-step-side-a', 'grace-step-side-b', 'grace-stand-front-bighead', 'grace-stand-front-bighead-paint', 'grace-stand-front-bighead-fresh', 'grace-stand-front-bighead-style', 'grace-battle'] and [e['id'] for e in doc['entries']][19:23] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == EXPECT_TOTAL and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
+                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:21] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-walk-side', 'grace-walk-front', 'grace-walk-back', 'grace-stand-front-straight', 'grace-step-front', 'grace-step-front-b', 'grace-step-back', 'grace-step-side-a', 'grace-step-side-b', 'grace-stand-front-bighead', 'grace-stand-front-bighead-paint', 'grace-stand-front-bighead-fresh', 'grace-stand-front-bighead-style', 'grace-stand-front-scene', 'grace-stand-front-scene-cut', 'grace-battle'] and [e['id'] for e in doc['entries']][21:25] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == EXPECT_TOTAL and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
                     ok('aot-art-key' in ls, 'key lives in localStorage only')

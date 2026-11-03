@@ -1,3 +1,11 @@
+## 2026-11-03 (132): Art Library: Grace big-head TEST 5, the two-step school yard method (library only, no game change)
+
+- Tom ran TEST 4 (131), no note. Claude's read: same soft texture as TEST 3, not the dense brushwork of the style key; head about .20 (top 41 px, soles 984 px); background crimson again. Saved `tools/sprite-bake/src/grace-stand-front-bighead-style-v1.jpg`. Two brushwork misses in a row (TEST 3, TEST 4): stop-loss.
+- Cause (from CHANGES 99, same failure on Grace's hero): on a flat background the generator paints one figure in its clean default look; the style key and her hero got their brushwork because she was painted INSIDE the school yard painting. Style pictures alone do not carry it.
+- Method changed, not wording: step 1 `grace-stand-front-scene` (4:3): school yard painting first (sets shape and texture), Tom's photo second (own slot, new `at` option), hero third (outfit). Front stand facing straight, head about 30 percent. Prompt 1,113 characters. Step 2 `grace-stand-front-scene-cut` (4:3): the proven `grace-hero-cut.txt` prompt on the approved step 1 picture (`art/raw/characters/grace-stand-front-scene-v1.png`), blocked until step 1 is approved.
+- art.html: `own.at` puts the phone photo at any position in the sent list (default first). Tested with a fake image service: 3 pictures sent, photo second.
+- tools/art-library/test.py: Characters 66 to 68, id order and tom slice updated. All checks pass.
+
 ## 2026-11-03 (131): Art Library: Grace big-head TEST 4, style key as painting guide (library only, no game change)
 
 - Tom ran TEST 3 (129): "better!" (likeness back) "but needs more of a brushed illustrated feel". Saved as `tools/sprite-bake/src/grace-stand-front-bighead-fresh-v1.jpg`. Measured (fact): head about .19 of full height (hair top 56 px, chin about 237 px, soles 992 px), not the .30 asked; background came out crimson (192, 27, 96), not magenta.
