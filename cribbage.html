@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a2a22">
+<meta name="description" content="Tom Bergland cribbage stats, Club 257 Burbank Bombers.">
+<title>Tom Bergland · Cribbage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --felt: #0a2a22;
+  --felt-deep: #061a15;
+  --felt-lift: #0f3a2f;
+  --brass: #d4b36a;
+  --brass-dim: #9a7b3c;
+  --bone: #f3ead7;
+  --bone-dim: #c9bda4;
+  --ink: #10231d;
+  --win: #7dcea0;
+  --loss: #e08a7a;
+  --wood: #5c3a22;
+  --wood-edge: #3a2414;
+  --lane: rgba(243,234,215,.06);
+  --line: rgba(212,179,106,.28);
+  --shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--bone);
+  font:16px/1.45 Outfit,system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 700px at 70% -10%, rgba(212,179,106,.16), transparent 55%),
+    radial-gradient(900px 600px at 10% 20%, rgba(125,206,160,.08), transparent 50%),
+    linear-gradient(180deg, var(--felt-lift), var(--felt) 28%, var(--felt-deep));
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; opacity:.18; z-index:0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.04) 3px),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.015) 3px);
+}
+.wrap{position:relative; z-index:1; max-width:980px; margin:0 auto; padding:0 20px 80px}
+
+/* Hero */
+.hero{
+  position:relative;
+  min-height:88vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:48px 0 56px;
+  isolation:isolate;
+}
+.board{
+  position:absolute;
+  inset:8% -8% auto;
+  height:58vh;
+  max-height:520px;
+  border-radius:28px;
+  background:
+    linear-gradient(145deg, #6b4228 0%, #3f2615 40%, #2a180e 100%);
+  box-shadow: var(--shadow), inset 0 0 0 10px #4a2f1b, inset 0 0 0 14px #8a5a32;
+  transform: rotate(-3.5deg);
+  overflow:hidden;
+  z-index:-1;
+  animation: boardIn 1.1s cubic-bezier(.2,.8,.2,1) both;
+}
+.board-felt{
+  position:absolute; inset:18px;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,.05), transparent 40%),
+    linear-gradient(160deg, #14523f, #0a2f26 60%, #08241d);
+  box-shadow: inset 0 0 40px rgba(0,0,0,.35);
+}
+.pegs{
+  position:absolute; inset:0;
+  display:grid;
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8% 1.5%;
+  padding: 12% 8%;
+}
+.peg{
+  width:10px; height:10px; border-radius:50%;
+  background: radial-gradient(circle at 35% 30%, #fff6e4, #d8c39a 55%, #9c8460);
+  box-shadow: 0 1px 2px rgba(0,0,0,.45);
+  justify-self:center; align-self:center;
+  opacity:0;
+  animation: pegPop .5s ease forwards;
+}
+.peg.on{ background: radial-gradient(circle at 35% 30%, #ffe7a0, var(--brass) 50%, #7a5a22); transform: scale(1.25); }
+.suits{
+  position:absolute; right:7%; bottom:10%;
+  display:flex; gap:10px; font-size:28px; color:rgba(243,234,215,.55);
+  letter-spacing:.05em;
+  animation: fadeUp .9s .4s both;
+}
+.club-mark{
+  position:absolute; left:8%; top:12%;
+  font-family:Fraunces,serif; font-weight:700; font-size:13px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--brass);
+  opacity:.85; animation: fadeUp .8s .2s both;
+}
+.hero-copy{ max-width:640px; animation: fadeUp 1s .15s both; }
+.eyebrow{
+  font-size:13px; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--brass); font-weight:600; margin:0 0 14px;
+}
+.hero h1{
+  font-family:Fraunces,serif;
+  font-weight:700;
+  font-size:clamp(42px, 9vw, 84px);
+  line-height:.95;
+  margin:0 0 18px;
+  letter-spacing:-.02em;
+  text-shadow: 0 8px 40px rgba(0,0,0,.45);
+}
+.hero h1 span{ display:block; color:var(--brass); font-size:.42em; letter-spacing:.08em; margin-top:10px; font-weight:500; }
+.lede{
+  margin:0;
+  max-width:36ch;
+  font-size:clamp(17px, 2.4vw, 20px);
+  color:var(--bone-dim);
+}
+.hero-cta{
+  margin-top:28px;
+  display:flex; flex-wrap:wrap; gap:12px;
+}
+.btn{
+  appearance:none; border:0; cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:12px 18px; border-radius:999px;
+  font:600 14px/1 Outfit,system-ui,sans-serif;
+  letter-spacing:.04em;
+  transition: transform .2s ease, background .2s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn-brass{ background:var(--brass); color:var(--ink); }
+.btn-ghost{ background:transparent; color:var(--bone); box-shadow: inset 0 0 0 1.5px var(--line); }
+
+/* Sections */
+section{ padding:56px 0 8px; }
+.section-kicker{
+  font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--brass); font-weight:600; margin:0 0 8px;
+}
+.section-title{
+  font-family:Fraunces,serif; font-weight:700;
+  font-size:clamp(28px, 5vw, 40px);
+  margin:0 0 10px; letter-spacing:-.02em;
+}
+.section-note{ margin:0 0 28px; color:var(--bone-dim); max-width:52ch; }
+
+/* Summary strip */
+.summary{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:14px;
+}
+@media (min-width:720px){
+  .summary{ grid-template-columns: repeat(4, 1fr); }
+}
+.stat{
+  padding:18px 16px 16px;
+  border-top:1px solid var(--line);
+  background: linear-gradient(180deg, rgba(243,234,215,.04), transparent 70%);
+  animation: fadeUp .7s both;
+}
+.stat:nth-child(1){ animation-delay:.05s }
+.stat:nth-child(2){ animation-delay:.12s }
+.stat:nth-child(3){ animation-delay:.19s }
+.stat:nth-child(4){ animation-delay:.26s }
+.stat .label{
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--bone-dim); margin-bottom:8px;
+}
+.stat .value{
+  font-family:Fraunces,serif; font-weight:700;
+  font-size:clamp(28px, 5vw, 36px); line-height:1;
+  color:var(--bone);
+}
+.stat .sub{ margin-top:6px; font-size:13px; color:var(--brass-dim); }
+
+/* Highlights */
+.highlights{
+  display:grid; gap:20px;
+}
+@media (min-width:760px){
+  .highlights{ grid-template-columns: 1.15fr .85fr; }
+}
+.feature{
+  position:relative;
+  padding:28px 24px 24px;
+  border-radius:20px;
+  background:
+    linear-gradient(145deg, rgba(212,179,106,.14), transparent 45%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.12));
+  box-shadow: inset 0 0 0 1px var(--line);
+  overflow:hidden;
+}
+.feature::after{
+  content:"♣";
+  position:absolute; right:-8px; bottom:-28px;
+  font-size:160px; color:rgba(212,179,106,.08); line-height:1;
+  pointer-events:none;
+}
+.feature h3{
+  font-family:Fraunces,serif; margin:0 0 8px;
+  font-size:26px; font-weight:700;
+}
+.feature p{ margin:0; color:var(--bone-dim); max-width:40ch; }
+.feature .big{
+  margin:18px 0 6px;
+  font-family:Fraunces,serif; font-size:56px; font-weight:700;
+  color:var(--brass); line-height:1;
+}
+.feature .meta{ font-size:13px; color:var(--bone-dim); }
+.pill-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.pill{
+  font-size:12px; font-weight:600; letter-spacing:.04em;
+  padding:7px 11px; border-radius:999px;
+  background:rgba(0,0,0,.25); color:var(--bone);
+  box-shadow: inset 0 0 0 1px rgba(212,179,106,.25);
+}
+
+/* Table */
+.table-shell{
+  border-radius:16px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  overflow:auto;
+  background: rgba(0,0,0,.18);
+  -webkit-overflow-scrolling:touch;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:720px;
+  font-variant-numeric: tabular-nums;
+}
+th, td{
+  padding:12px 14px;
+  text-align:right;
+  white-space:nowrap;
+}
+th:first-child, td:first-child,
+th:nth-child(2), td:nth-child(2){ text-align:left; }
+th{
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass); font-weight:600;
+  background: rgba(0,0,0,.28);
+  position:sticky; top:0;
+}
+tbody tr{
+  border-top:1px solid rgba(243,234,215,.06);
+  transition: background .2s ease;
+}
+tbody tr:hover{ background: rgba(212,179,106,.08); }
+tbody tr.best{ background: rgba(212,179,106,.12); }
+tbody tr.rough{ background: rgba(224,138,122,.07); }
+.rank{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:28px; height:28px; border-radius:8px;
+  background:rgba(243,234,215,.08); font-weight:700; font-size:13px;
+}
+.rank.gold{ background:var(--brass); color:var(--ink); }
+.rank.silver{ background:#b8c0c8; color:#1a2228; }
+.rank.bronze{ background:#c08a5a; color:#1d1208; }
+.pos{ color:var(--win); font-weight:600; }
+.neg{ color:var(--loss); font-weight:600; }
+.cash{ color:var(--brass); font-weight:600; }
+.tag{
+  display:inline-block; margin-left:6px;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  padding:2px 7px; border-radius:999px;
+  background:rgba(212,179,106,.18); color:var(--brass);
+  vertical-align:middle;
+}
+.legend{
+  display:flex; flex-wrap:wrap; gap:14px;
+  margin-top:14px; font-size:13px; color:var(--bone-dim);
+}
+.legend span::before{
+  content:""; display:inline-block; width:10px; height:10px;
+  border-radius:3px; margin-right:6px; vertical-align:-1px;
+}
+.legend .l-best::before{ background:rgba(212,179,106,.45); }
+.legend .l-rough::before{ background:rgba(224,138,122,.45); }
+
+/* Season charts */
+.bars{ display:grid; gap:10px; }
+.bar-row{ display:grid; grid-template-columns: 88px 1fr 48px; gap:10px; align-items:center; }
+.bar-row .d{ font-size:13px; color:var(--bone-dim); }
+.bar-track{
+  height:12px; border-radius:999px;
+  background:rgba(243,234,215,.08);
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%; width:0;
+  border-radius:999px;
+  background: linear-gradient(90deg, #2f7a5c, var(--brass));
+  transition: width 1.1s cubic-bezier(.2,.8,.2,1);
+}
+.bar-row .n{ text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
+
+footer{
+  margin-top:64px; padding-top:24px;
+  border-top:1px solid var(--line);
+  color:var(--bone-dim); font-size:13px;
+  display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:space-between;
+}
+footer a{ color:var(--brass); text-decoration:none; }
+
+@keyframes boardIn{
+  from{ opacity:0; transform: rotate(-6deg) translateY(30px) scale(.96); }
+  to{ opacity:1; transform: rotate(-3.5deg) translateY(0) scale(1); }
+}
+@keyframes pegPop{
+  from{ opacity:0; transform: translateY(8px) scale(.4); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+@media (max-width:640px){
+  .hero{
+    min-height:auto;
+    padding-top:18px;
+    padding-bottom:28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:18px;
+  }
+  .board{
+    position:relative;
+    inset:auto;
+    width:calc(100% + 24px);
+    margin:0 -12px 4px;
+    height:168px;
+    transform: rotate(-2deg);
+    flex:none;
+    animation: boardInMobile 1s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .board-felt{ inset:12px; border-radius:14px; }
+  .pegs{ padding:10% 6%; gap:6% 1.2%; }
+  .peg{ width:8px; height:8px; }
+  .suits{ font-size:18px; right:6%; bottom:8%; }
+  .club-mark{ top:10%; left:7%; font-size:11px; }
+  .hero-copy{ position:relative; z-index:1; }
+  .hero h1{ font-size:clamp(36px, 11vw, 52px); }
+  .bar-row{ grid-template-columns: 72px 1fr 40px; }
+  @keyframes boardInMobile{
+    from{ opacity:0; transform: rotate(-5deg) translateY(16px) scale(.97); }
+    to{ opacity:1; transform: rotate(-2deg) translateY(0) scale(1); }
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation:none !important; transition:none !important;
+  }
+  .bar-fill{ width:var(--w) !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="board" aria-hidden="true">
+      <div class="board-felt">
+        <div class="club-mark">Club 257</div>
+        <div class="pegs" id="pegs"></div>
+        <div class="suits">♠ ♥ ♦ ♣</div>
+      </div>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">Burbank Bombers · ACC Club 257</p>
+      <h1>Tom Bergland<span>Cribbage Stats</span></h1>
+      <p class="lede">Weekly Grass Roots nights at American Lutheran Church, plus the club GRNT board he topped as an unofficial.</p>
+      <div class="hero-cta">
+        <a class="btn btn-brass" href="#nights">See every night</a>
+        <a class="btn btn-ghost" href="#grnt">GRNT highlight</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="summary" aria-label="Career summary">
+    <p class="section-kicker">At a glance</p>
+    <h2 class="section-title">Tracked nights</h2>
+    <p class="section-note">Compiled from Club 257 tournament sheets for Tom Bergland (ACC CA07939). Cash amounts are the prize column from each night’s results.</p>
+    <div class="summary" id="summaryStats"></div>
+  </section>
+
+  <section id="grnt" aria-label="Highlights">
+    <p class="section-kicker">Standouts</p>
+    <h2 class="section-title">Board toppers</h2>
+    <p class="section-note">The nights and reports that stick.</p>
+    <div class="highlights">
+      <article class="feature">
+        <p class="section-kicker">Grass Roots National Tournament</p>
+        <h3>04/12/2025 GRNT</h3>
+        <p>Two sessions that weekend, rolled into one GRNT line. Tom led the Club 257 GRNT sheet on points and wins.</p>
+        <div class="big">12–28</div>
+        <p class="meta">Games won · Game points · Net spread +156 (plus 259 / minus 103)</p>
+        <div class="pill-row">
+          <span class="pill">Rank #84 national sheet</span>
+          <span class="pill">Unofficial · no GRPs or prize</span>
+          <span class="pill">Sessions 7/16/+151 and 5/12/+108</span>
+        </div>
+      </article>
+      <article class="feature">
+        <p class="section-kicker">Club report</p>
+        <h3>Winning percentage</h3>
+        <p>Grass Roots Winning Percentage for Club 257 through Tournament #32. Tom sat in the under-half-games group and still led the page.</p>
+        <div class="big">61.6%</div>
+        <p class="meta">61 wins in 99 games · higher than the qualified leader (60.5%)</p>
+        <div class="pill-row">
+          <span class="pill">Burbank Bombers</span>
+          <span class="pill">Through Tournament #32</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="nights" aria-label="Weekly scores">
+    <p class="section-kicker">Burbank Bombers</p>
+    <h2 class="section-title">Weekly scores</h2>
+    <p class="section-note">Date, finish, games won, game points, net spread, skunks, and cash. Gold row = night win. Warm row = rough night.</p>
+    <div class="table-shell">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Finish</th>
+            <th>Won</th>
+            <th>Pts</th>
+            <th>Spread</th>
+            <th>Skunks</th>
+            <th>Cash</th>
+            <th>Field</th>
+          </tr>
+        </thead>
+        <tbody id="nightRows"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span class="l-best">Won the night or top-two finish</span>
+      <span class="l-rough">Finish in the bottom third</span>
+    </div>
+  </section>
+
+  <section id="form" aria-label="Recent form">
+    <p class="section-kicker">Form</p>
+    <h2 class="section-title">Games won by night</h2>
+    <p class="section-note">Bar length is games won that night (typical Grass Roots night is nine games).</p>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <footer>
+    <div>Club 257 · The Burbank Bombers · American Lutheran Church</div>
+    <div><a href="index.html">The Adventures of Tom</a> · Built for Tom B</div>
+  </footer>
+</div>
+
+<script>
+// Tom Bergland (CA07939), Club 257. Dates and numbers from tournament sheets;
+// when a sheet date disagreed with a handwritten list, the sheet won.
+const NIGHTS = [
+  { date:"2021-11-11", label:"11/11/21", tourney:11, rank:null, field:10, won:3, pts:8,  spread:12,  skunkLost:1, skunkWon:2, cash:0,  note:"Guest" },
+  { date:"2021-12-02", label:"12/02/21", tourney:13, rank:null, field:16, won:5, pts:12, spread:93,  skunkLost:0, skunkWon:2, cash:50, note:"Guest" },
+  { date:"2021-12-16", label:"12/16/21", tourney:15, rank:11,   field:13, won:3, pts:7,  spread:-33, skunkLost:1, skunkWon:1, cash:0,  note:"Guest" },
+  { date:"2022-01-06", label:"01/06/22", tourney:18, rank:2,    field:12, won:5, pts:13, spread:84,  skunkLost:1, skunkWon:3, cash:22, note:"Guest" },
+  { date:"2022-02-17", label:"02/17/22", tourney:23, rank:6,    field:10, won:4, pts:9,  spread:9,   skunkLost:0, skunkWon:1, cash:0,  note:"Guest" },
+  { date:"2022-04-19", label:"04/19/22", tourney:32, rank:2,    field:14, won:6, pts:14, spread:129, skunkLost:0, skunkWon:2, cash:13, note:"" },
+  { date:"2022-05-17", label:"05/17/22", tourney:36, rank:4,    field:13, won:5, pts:10, spread:16,  skunkLost:0, skunkWon:0, cash:0,  note:"Listed as 05/06 on an older note" },
+  { date:"2025-01-21", label:"01/21/25", tourney:17, rank:9,    field:16, won:5, pts:10, spread:-82, skunkLost:2, skunkWon:0, cash:0,  note:"Guest" },
+  { date:"2025-01-28", label:"01/28/25", tourney:18, rank:5,    field:12, won:5, pts:10, spread:9,   skunkLost:0, skunkWon:0, cash:10, note:"Guest" },
+  { date:"2025-02-04", label:"02/04/25", tourney:19, rank:3,    field:13, won:6, pts:14, spread:47,  skunkLost:1, skunkWon:2, cash:21, note:"Guest" },
+  { date:"2025-02-11", label:"02/11/25", tourney:20, rank:4,    field:15, won:7, pts:15, spread:15,  skunkLost:1, skunkWon:1, cash:0,  note:"Guest" },
+  { date:"2025-02-18", label:"02/18/25", tourney:21, rank:15,   field:15, won:2, pts:4,  spread:-93, skunkLost:1, skunkWon:0, cash:5,  note:"" },
+  { date:"2025-03-11", label:"03/11/25", tourney:24, rank:5,    field:15, won:5, pts:11, spread:57,  skunkLost:0, skunkWon:1, cash:0,  note:"Listed as 03/13 on an older note" },
+  { date:"2025-04-12", label:"04/12/25", tourney:30, rank:1,    field:13, won:7, pts:16, spread:151, skunkLost:0, skunkWon:2, cash:0,  note:"Weekly + GRNT day 1", grnt:true },
+  { date:"2025-04-13", label:"04/13/25", tourney:31, rank:4,    field:13, won:5, pts:12, spread:108, skunkLost:1, skunkWon:2, cash:0,  note:"GRNT day 2 / weekly", grnt:true },
+  { date:"2025-04-15", label:"04/15/25", tourney:32, rank:3,    field:17, won:7, pts:14, spread:12,  skunkLost:0, skunkWon:0, cash:10, note:"" },
+  { date:"2026-04-14", label:"04/14/26", tourney:31, rank:3,    field:10, won:5, pts:11, spread:11,  skunkLost:2, skunkWon:1, cash:0,  note:"" }
+];
+
+const money = n => n ? "$" + n : "$0";
+const signed = n => (n > 0 ? "+" : "") + n;
+const fmtSpread = n => {
+  const cls = n >= 0 ? "pos" : "neg";
+  return `<span class="${cls}">${signed(n)}</span>`;
+};
+
+function rankBadge(r){
+  if(r == null) return "—";
+  let cls = "rank";
+  if(r === 1) cls += " gold";
+  else if(r === 2) cls += " silver";
+  else if(r === 3) cls += " bronze";
+  return `<span class="${cls}">${r}</span>`;
+}
+
+function rowClass(n){
+  if(n.rank === 1 || n.rank === 2) return "best";
+  if(n.rank && n.field && n.rank > Math.ceil(n.field * 2 / 3)) return "rough";
+  return "";
+}
+
+function renderSummary(){
+  const nights = NIGHTS.length;
+  const wins = NIGHTS.reduce((a,n)=>a+n.won,0);
+  const pts = NIGHTS.reduce((a,n)=>a+n.pts,0);
+  const spread = NIGHTS.reduce((a,n)=>a+n.spread,0);
+  const cash = NIGHTS.reduce((a,n)=>a+n.cash,0);
+  const skunks = NIGHTS.reduce((a,n)=>a+n.skunkWon,0);
+  const firsts = NIGHTS.filter(n=>n.rank===1).length;
+  const podiums = NIGHTS.filter(n=>n.rank && n.rank<=3).length;
+  const el = document.getElementById("summaryStats");
+  const items = [
+    { label:"Nights tracked", value:String(nights), sub: firsts ? firsts + " night win" + (firsts===1?"":"s") : "Club 257 sheets" },
+    { label:"Games won", value:String(wins), sub: pts + " game points" },
+    { label:"Net spread", value:signed(spread), sub: skunks + " skunks dealt" },
+    { label:"Cash prizes", value:money(cash), sub: podiums + " top-three finishes" }
+  ];
+  el.innerHTML = items.map(i => `
+    <div class="stat">
+      <div class="label">${i.label}</div>
+      <div class="value">${i.value}</div>
+      <div class="sub">${i.sub}</div>
+    </div>`).join("");
+}
+
+function renderTable(){
+  const body = document.getElementById("nightRows");
+  body.innerHTML = NIGHTS.map(n => {
+    const tag = n.grnt ? `<span class="tag">GRNT</span>` : (n.note==="Guest" ? `<span class="tag">Guest</span>` : "");
+    const sk = `${n.skunkWon}W / ${n.skunkLost}L`;
+    const finish = n.rank != null
+      ? `${rankBadge(n.rank)} <span style="color:var(--bone-dim);font-size:12px">/ ${n.field}</span>`
+      : rankBadge(n.rank);
+    return `<tr class="${rowClass(n)}">
+      <td>${n.label}${tag}</td>
+      <td>${finish}</td>
+      <td>${n.won}</td>
+      <td>${n.pts}</td>
+      <td>${fmtSpread(n.spread)}</td>
+      <td>${sk}</td>
+      <td class="cash">${money(n.cash)}</td>
+      <td>${n.field}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderBars(){
+  const max = Math.max(...NIGHTS.map(n=>n.won));
+  const el = document.getElementById("bars");
+  el.innerHTML = NIGHTS.map(n => {
+    const pct = Math.round((n.won / max) * 100);
+    return `<div class="bar-row">
+      <div class="d">${n.label}</div>
+      <div class="bar-track"><div class="bar-fill" style="--w:${pct}%" data-w="${pct}"></div></div>
+      <div class="n">${n.won}</div>
+    </div>`;
+  }).join("");
+  requestAnimationFrame(() => {
+    document.querySelectorAll(".bar-fill").forEach(b => {
+      b.style.width = b.dataset.w + "%";
+    });
+  });
+}
+
+function buildPegs(){
+  const root = document.getElementById("pegs");
+  const total = 24 * 3;
+  const onIdx = new Set([3,4,5, 14,15, 28,29,30,31, 40,41, 52,53,54, 65,66]);
+  for(let i=0;i<total;i++){
+    const d = document.createElement("div");
+    d.className = "peg" + (onIdx.has(i) ? " on" : "");
+    d.style.animationDelay = (0.015 * i) + "s";
+    root.appendChild(d);
+  }
+}
+
+renderSummary();
+renderTable();
+renderBars();
+buildPegs();
+</script>
+</body>
+</html>
