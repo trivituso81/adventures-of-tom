@@ -550,6 +550,127 @@ footer a{ color:var(--felt); text-decoration:none; font-weight:800; }
   .bars-compact{ max-height: 220px; }
 }
 
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* ===== Batch 3: nights filters, sort, copy ===== */
+.nights-controls{
+  display:flex; flex-direction:column; gap:12px;
+  margin: 0 0 14px;
+}
+.filter-pills{
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.filter-pill{
+  appearance:none; border:1px solid var(--border-warm); cursor:pointer;
+  background: var(--cardstock); color: var(--ink);
+  border-radius:999px; padding:8px 12px; min-height:40px;
+  font:800 13px/1.1 Nunito,system-ui,sans-serif;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.filter-pill[aria-pressed="true"]{
+  background: var(--felt); color:#FAF7F2; border-color: var(--felt);
+}
+.filter-pill:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.season-row{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+}
+.season-row label{
+  font-family:Fredoka,sans-serif; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; font-weight:700; color:var(--ink-soft);
+}
+.season-row select,
+.mobile-sort select{
+  appearance:none;
+  border:1px solid var(--border-warm);
+  background: var(--cardstock) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232C221E' d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;
+  padding:10px 36px 10px 12px;
+  border-radius:12px;
+  font:800 14px/1 Nunito,system-ui,sans-serif;
+  color:var(--ink);
+  min-height:44px;
+}
+.mini-banner{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:8px;
+  background: var(--paper-edge);
+  border:1px solid var(--border-warm);
+  border-radius:14px;
+  padding:12px;
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width:720px){
+  .mini-banner{ grid-template-columns: repeat(4, minmax(0,1fr)); }
+}
+.mini-banner .mb{
+  background: var(--cardstock);
+  border-radius:10px;
+  padding:10px 12px;
+  border:1px solid var(--border-warm);
+}
+.mini-banner .mb .k{
+  font-family:Fredoka,sans-serif; font-size:10px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:4px;
+}
+.mini-banner .mb .v{
+  font-family:Fredoka,sans-serif; font-weight:700; font-size:20px; color:var(--felt);
+  font-variant-numeric: tabular-nums;
+}
+.mini-banner .mb .s{ font-size:12px; font-weight:700; color:var(--ink-soft); margin-top:2px; }
+.mobile-sort{
+  display:none; align-items:center; gap:10px; margin: 0 0 12px;
+}
+.mobile-sort label{
+  font-family:Fredoka,sans-serif; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; font-weight:700; color:var(--ink-soft); white-space:nowrap;
+}
+@media (max-width:720px){
+  .mobile-sort{ display:flex; }
+}
+th.sortable{
+  cursor:pointer; user-select:none;
+  position:relative;
+}
+th.sortable:hover{ color: var(--felt); }
+th.sortable .sort-ind{
+  display:inline-block; margin-left:4px; opacity:.45; font-size:10px;
+}
+th.sortable.is-asc .sort-ind,
+th.sortable.is-desc .sort-ind{ opacity:1; color: var(--felt); }
+.copy-line{
+  appearance:none; cursor:pointer;
+  border:1px solid var(--border-warm);
+  background: var(--parchment);
+  color: var(--ink-soft);
+  border-radius:999px;
+  padding:5px 10px;
+  font:800 11px/1 Nunito,system-ui,sans-serif;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.copy-line:hover{ color: var(--felt); border-color: var(--felt); }
+.copy-line:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.night-card .card-actions{
+  display:flex; justify-content:flex-end; margin-top:8px;
+}
+td.actions{ text-align:right; width:1%; }
+.toast{
+  position:fixed; left:50%; bottom: calc(20px + env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(20px);
+  background: var(--felt); color:#FAF7F2;
+  padding:10px 16px; border-radius:999px;
+  font:800 14px/1 Nunito,system-ui,sans-serif;
+  box-shadow: 0 10px 28px rgba(44,34,30,.25);
+  opacity:0; pointer-events:none; z-index:40;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+.nights-empty{
+  padding:18px; border:1px dashed var(--border-warm); border-radius:14px;
+  background: var(--cardstock); color: var(--ink-soft); font-weight:700;
+  text-align:center; margin: 8px 0;
+}
+
 </style>
 </head>
 <body>
@@ -613,23 +734,58 @@ footer a{ color:var(--felt); text-decoration:none; font-weight:800; }
   <section id="nights" aria-label="Weekly scores">
     <p class="section-kicker">Weekly board</p>
     <h2 class="section-title">Every night, newest first</h2>
-    <p class="section-note table-note desktop-only">Gold rows = top two. Coral rows = bottom third (also known as skunk-adjacent vibes).</p>
-    <p class="section-note mobile-only">Each scorecard shows finish, wins, points, spread, and cash. Skunk sticker means a rough night.</p>
+    <p class="section-note table-note desktop-only">Gold rows = top two. Coral rows = bottom third (also known as skunk-adjacent vibes). Tap a column header to sort.</p>
+    <p class="section-note mobile-only">Each scorecard shows finish, wins, points, spread, and cash. Use filters and Sort by below.</p>
+
+    <div class="nights-controls">
+      <div class="filter-pills" role="toolbar" aria-label="Night filters" id="filterPills">
+        <button type="button" class="filter-pill" data-filter="all" aria-pressed="true">All Nights</button>
+        <button type="button" class="filter-pill" data-filter="money" aria-pressed="false">💰 In the Money</button>
+        <button type="button" class="filter-pill" data-filter="top2" aria-pressed="false">🥇 Top Two</button>
+        <button type="button" class="filter-pill" data-filter="skunked" aria-pressed="false">🦨 Skunked</button>
+        <button type="button" class="filter-pill" data-filter="spread100" aria-pressed="false">📈 +100 Spread</button>
+      </div>
+      <div class="season-row">
+        <label for="seasonSelect">Season</label>
+        <select id="seasonSelect" aria-label="Season or year"></select>
+      </div>
+      <div class="mini-banner" id="miniBanner" aria-live="polite"></div>
+    </div>
+
+    <div class="mobile-sort">
+      <label for="mobileSort">Sort by</label>
+      <select id="mobileSort" aria-label="Sort night cards">
+        <option value="date:desc">Date (newest)</option>
+        <option value="date:asc">Date (oldest)</option>
+        <option value="rank:asc">Finish (best)</option>
+        <option value="rank:desc">Finish (worst)</option>
+        <option value="won:desc">Won (high)</option>
+        <option value="won:asc">Won (low)</option>
+        <option value="pts:desc">Pts (high)</option>
+        <option value="pts:asc">Pts (low)</option>
+        <option value="spread:desc">Spread (high)</option>
+        <option value="spread:asc">Spread (low)</option>
+        <option value="cash:desc">Cash (high)</option>
+        <option value="cash:asc">Cash (low)</option>
+      </select>
+    </div>
 
     <div class="night-cards" id="nightCards" aria-label="Night results for phone"></div>
+    <div class="nights-empty" id="nightsEmpty" hidden>No nights match this filter and season.</div>
 
     <div class="table-shell desktop-only" aria-label="Night results table">
       <table>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Finish</th>
-            <th>Won</th>
-            <th>Pts</th>
-            <th>Spread</th>
+            <th class="sortable is-desc" data-sort="date" aria-sort="descending">Date <span class="sort-ind" aria-hidden="true">▼</span></th>
+            <th class="sortable" data-sort="rank" aria-sort="none">Finish <span class="sort-ind" aria-hidden="true">◆</span></th>
+            <th class="sortable" data-sort="won" aria-sort="none">Won <span class="sort-ind" aria-hidden="true">◆</span></th>
+            <th class="sortable" data-sort="pts" aria-sort="none">Pts <span class="sort-ind" aria-hidden="true">◆</span></th>
+            <th class="sortable" data-sort="spread" aria-sort="none">Spread <span class="sort-ind" aria-hidden="true">◆</span></th>
             <th>Skunks</th>
-            <th>Cash</th>
+            <th class="sortable" data-sort="cash" aria-sort="none">Cash <span class="sort-ind" aria-hidden="true">◆</span></th>
             <th>Field</th>
+            <th><span class="sr-only">Copy</span></th>
           </tr>
         </thead>
         <tbody id="nightRows"></tbody>
@@ -694,6 +850,7 @@ footer a{ color:var(--felt); text-decoration:none; font-weight:800; }
     <p>On iPhone: Share → Add to Home Screen. Then you can check the peg race between hands.</p>
   </footer>
 </div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied!</div>
 
 <script>
 // Tom Bergland (CA07939), Club 257.
@@ -742,7 +899,131 @@ const GAMES_PER_NIGHT = 9;
 const money = n => n ? "$" + n : "$0";
 const signed = n => (n > 0 ? "+" : "") + n;
 const fmtSpread = n => `<span class="${n >= 0 ? "pos" : "neg"}">${signed(n)}</span>`;
+
 const newestFirst = () => [...NIGHTS].reverse();
+
+const boardState = {
+  filter: "all",
+  season: "all",
+  sortKey: "date",
+  sortDir: "desc"
+};
+
+function yearOf(n){
+  return Number(String(n.date).slice(0, 4));
+}
+
+function isSkunkedNight(n){
+  return (n.skunkWon + n.skunkLost) > 0 || finishKind(n) === "rough";
+}
+
+function passesFilter(n){
+  switch(boardState.filter){
+    case "money": return n.cash > 0;
+    case "top2": return n.rank != null && n.rank <= 2;
+    case "skunked": return isSkunkedNight(n);
+    case "spread100": return n.spread >= 100;
+    default: return true;
+  }
+}
+
+function passesSeason(n){
+  if(boardState.season === "all") return true;
+  return String(yearOf(n)) === String(boardState.season);
+}
+
+function sortValue(n, key){
+  if(key === "date") return n.date;
+  if(key === "rank") return n.rank == null ? 999 : n.rank;
+  if(key === "won") return n.won;
+  if(key === "pts") return n.pts;
+  if(key === "spread") return n.spread;
+  if(key === "cash") return n.cash;
+  return 0;
+}
+
+function visibleNights(){
+  const rows = NIGHTS.filter(n => passesSeason(n) && passesFilter(n));
+  const dir = boardState.sortDir === "asc" ? 1 : -1;
+  const key = boardState.sortKey;
+  rows.sort((a, b) => {
+    const av = sortValue(a, key);
+    const bv = sortValue(b, key);
+    if(av < bv) return -1 * dir;
+    if(av > bv) return 1 * dir;
+    // Stable tie-break: newer date first
+    if(a.date < b.date) return 1;
+    if(a.date > b.date) return -1;
+    return 0;
+  });
+  return rows;
+}
+
+function copyLineText(n){
+  const finish = n.rank != null ? n.rank : "?";
+  return "📅 " + n.label + " · Club 257: " + n.won + "W / " + n.pts + " Pts / " + signed(n.spread) + " Spread (" + finish + " of " + n.field + ")";
+}
+
+function showToast(msg){
+  const t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = msg || "Copied!";
+  t.classList.add("show");
+  clearTimeout(showToast._h);
+  showToast._h = setTimeout(() => t.classList.remove("show"), 1600);
+}
+
+async function copyNightLine(dateKey){
+  const n = NIGHTS.find(x => x.date === dateKey);
+  if(!n) return;
+  const text = copyLineText(n);
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); ta.remove();
+    }
+    showToast("Copied!");
+  }catch(err){
+    showToast("Copy failed");
+  }
+}
+
+function renderMiniBanner(rows){
+  const el = document.getElementById("miniBanner");
+  if(!el) return;
+  const nights = rows.length;
+  const wins = rows.reduce((a,n)=>a+n.won,0);
+  const pts = rows.reduce((a,n)=>a+n.pts,0);
+  const spread = rows.reduce((a,n)=>a+n.spread,0);
+  const cash = rows.reduce((a,n)=>a+n.cash,0);
+  const top2 = rows.filter(n => n.rank != null && n.rank <= 2).length;
+  el.innerHTML = `
+    <div class="mb"><div class="k">Nights</div><div class="v">${nights}</div><div class="s">in this view</div></div>
+    <div class="mb"><div class="k">Games won</div><div class="v">${wins}</div><div class="s">${pts} game pts</div></div>
+    <div class="mb"><div class="k">Net spread</div><div class="v">${signed(spread)}</div><div class="s">${top2} top-two finishes</div></div>
+    <div class="mb"><div class="k">Cash</div><div class="v">${money(cash)}</div><div class="s">prize column</div></div>`;
+}
+
+function syncSortHeaders(){
+  document.querySelectorAll("th.sortable").forEach(th => {
+    const key = th.getAttribute("data-sort");
+    const on = key === boardState.sortKey;
+    th.classList.toggle("is-asc", on && boardState.sortDir === "asc");
+    th.classList.toggle("is-desc", on && boardState.sortDir === "desc");
+    th.setAttribute("aria-sort", on ? (boardState.sortDir === "asc" ? "ascending" : "descending") : "none");
+    const ind = th.querySelector(".sort-ind");
+    if(ind) ind.textContent = on ? (boardState.sortDir === "asc" ? "▲" : "▼") : "◆";
+  });
+  const ms = document.getElementById("mobileSort");
+  if(ms){
+    const v = boardState.sortKey + ":" + boardState.sortDir;
+    if([...ms.options].some(o => o.value === v)) ms.value = v;
+  }
+}
+
 
 function finishKind(n){
   if(n.rank === 1 || n.rank === 2) return "best";
@@ -834,7 +1115,13 @@ function wireAvatarFallback(){
 }
 
 function renderTable(){
-  document.getElementById("nightRows").innerHTML = newestFirst().map(n => {
+  const rows = visibleNights();
+  const body = document.getElementById("nightRows");
+  const empty = document.getElementById("nightsEmpty");
+  syncSortHeaders();
+  renderMiniBanner(rows);
+  if(empty) empty.hidden = rows.length > 0;
+  body.innerHTML = rows.map(n => {
     const kind = finishKind(n);
     const rowCls = kind === "mid" ? "" : kind;
     const tags = nightTags(n, true);
@@ -850,12 +1137,16 @@ function renderTable(){
       <td>${n.skunkWon}W / ${n.skunkLost}L</td>
       <td class="cash">${money(n.cash)}</td>
       <td>${n.field}</td>
+      <td class="actions"><button type="button" class="copy-line" data-copy="${n.date}">Copy Line</button></td>
     </tr>`;
   }).join("");
 }
 
 function renderCards(){
-  document.getElementById("nightCards").innerHTML = newestFirst().map(n => {
+  const rows = visibleNights();
+  const empty = document.getElementById("nightsEmpty");
+  if(empty) empty.hidden = rows.length > 0;
+  document.getElementById("nightCards").innerHTML = rows.map(n => {
     const kind = finishKind(n);
     const tags = nightTags(n, true);
     const finish = n.rank != null
@@ -878,13 +1169,16 @@ function renderCards(){
       </div>
       <div class="meta">Skunks ${n.skunkWon}W / ${n.skunkLost}L · field ${n.field}</div>
       <div class="quip">${quipFor(n)}</div>
+      <div class="card-actions"><button type="button" class="copy-line" data-copy="${n.date}">Copy Line</button></div>
       ${skunk}
     </article>`;
   }).join("");
 }
 
 function renderBars(){
-  document.getElementById("bars").innerHTML = newestFirst().map(n => {
+  // Form chart follows the active season + filter so Tab 1 stays in sync.
+  const rows = visibleNights();
+  document.getElementById("bars").innerHTML = rows.map(n => {
     const kind = finishKind(n);
     const pct = Math.min(100, Math.round((n.won / GAMES_PER_NIGHT) * 100));
     return `<div class="bar-row">
@@ -892,12 +1186,73 @@ function renderBars(){
       <div class="bar-track"><div class="bar-fill ${kind}" style="--w:${pct}%" data-w="${pct}"></div></div>
       <div class="n">${n.won}</div>
     </div>`;
-  }).join("");
+  }).join("") || `<div class="nights-empty">No nights in this view.</div>`;
   requestAnimationFrame(() => {
     document.querySelectorAll(".bar-fill").forEach(b => { b.style.width = b.dataset.w + "%"; });
   });
 }
 
+function refreshBoard(){
+  renderTable();
+  renderCards();
+  renderBars();
+}
+
+function fillSeasonSelect(){
+  const sel = document.getElementById("seasonSelect");
+  if(!sel) return;
+  const years = [...new Set(NIGHTS.map(yearOf))].sort((a,b)=>b-a);
+  sel.innerHTML = `<option value="all">All-Time</option>` + years.map(y => `<option value="${y}">${y}</option>`).join("");
+  sel.value = boardState.season;
+}
+
+function wireBoardControls(){
+  const pills = document.getElementById("filterPills");
+  if(pills){
+    pills.addEventListener("click", e => {
+      const btn = e.target.closest(".filter-pill");
+      if(!btn) return;
+      boardState.filter = btn.getAttribute("data-filter") || "all";
+      pills.querySelectorAll(".filter-pill").forEach(p => {
+        p.setAttribute("aria-pressed", p === btn ? "true" : "false");
+      });
+      refreshBoard();
+    });
+  }
+  const season = document.getElementById("seasonSelect");
+  if(season){
+    season.addEventListener("change", () => {
+      boardState.season = season.value;
+      refreshBoard();
+    });
+  }
+  const mobileSort = document.getElementById("mobileSort");
+  if(mobileSort){
+    mobileSort.addEventListener("change", () => {
+      const [key, dir] = mobileSort.value.split(":");
+      boardState.sortKey = key;
+      boardState.sortDir = dir;
+      refreshBoard();
+    });
+  }
+  document.querySelectorAll("th.sortable").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.getAttribute("data-sort");
+      if(boardState.sortKey === key){
+        boardState.sortDir = boardState.sortDir === "asc" ? "desc" : "asc";
+      } else {
+        boardState.sortKey = key;
+        boardState.sortDir = key === "rank" ? "asc" : "desc";
+      }
+      refreshBoard();
+    });
+  });
+  document.addEventListener("click", e => {
+    const btn = e.target.closest(".copy-line");
+    if(!btn) return;
+    copyNightLine(btn.getAttribute("data-copy"));
+  });
+}
 
 const TAB_HASH = {
   nights: "nights",
@@ -978,12 +1333,12 @@ function wireTabs(){
   activateFromHash(!!location.hash);
 }
 
+fillSeasonSelect();
+wireBoardControls();
 renderSummary();
 applyMoodRing();
 wireAvatarFallback();
-renderTable();
-renderCards();
-renderBars();
+refreshBoard();
 wireTabs();
 </script>
 </body>
