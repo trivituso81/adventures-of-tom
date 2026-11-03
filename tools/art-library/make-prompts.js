@@ -23,7 +23,7 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
-for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts']) {
+for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
   if (fs.existsSync(__dirname + '/' + m + '.js')) ENTRIES.push(...require('./' + m + '.js').entries);
 }
 const keep = Object.fromEntries(old.map(e => [e.id, e]));

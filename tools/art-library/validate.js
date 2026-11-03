@@ -4,7 +4,7 @@
 //   node tools/art-library/validate.js                                              (everything in data/art-prompts.json)
 // Exit code 1 and a list of problems when anything is wrong. Run from the repo root.
 const fs = require('fs'), path = require('path');
-const TABS = ['Characters', 'NPCs', 'Areas', 'Rooms', 'Props', 'Enemies'];
+const TABS = ['Characters', 'NPCs', 'Areas', 'Rooms', 'Props', 'Enemies', 'Battle', 'Title', 'Portraits', 'Flight'];
 const ARS = ['3:4', '2:3', '1:1', '4:3', '3:2', '16:9', '9:16'];
 // Words that pull the generator toward pixel art. Negations ("NOT pixel art", "not 16-bit") are the approved wording and are allowed.
 const BANNED = /\b(16[- ]bit|32[- ]bit|snes|super nintendo|final fantasy|chrono trigger|pixel[- ]?art|retro|sprites?)\b/gi;

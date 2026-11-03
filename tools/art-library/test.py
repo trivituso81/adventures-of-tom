@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
-EXPECT = {'Characters': 53, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87}
+EXPECT = {'Characters': 53, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
 EXPECT_TOTAL = sum(EXPECT.values())
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
@@ -32,6 +32,7 @@ def data_checks():
                 tgt = [x for x in d if x['id'] == m.group(2)]
                 if not tgt or tgt[0]['tab'].lower() != m.group(1): bad.append(e['id'] + ' chain ' + r)
             elif not os.path.exists(os.path.join(ROOT, r)): bad.append(e['id'] + ' missing ' + r)
+    ok(all('y 590' in e['prompt'] for e in d if e['tab']=='Battle'), 'every Battle prompt names the y 590 horizon')
     ok(not bad, 'every entry has a prompt, ar, <=5 refs that exist or chain to an entry, no banned words or dashes: %s' % bad[:5])
 async def main():
     data_checks()

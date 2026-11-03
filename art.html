@@ -97,7 +97,7 @@ $('keys').addEventListener('click',e=>{
   const del={dx:'aot-art-key',dg:'aot-gh-token',dr:'aot-art-relay'}[id]; if(del){ LS.del(del); paintKeys(); }
 });
 // --- tabs and list
-const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies'];
+const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies','Battle','Title','Portraits','Flight'];
 function paintTabs(){
   $('tabs').innerHTML=TABS.map(t=>{const n=DATA.entries.filter(e=>e.tab===t).length;return '<button class="tab'+(t===TAB?' on':'')+'" data-tab="'+t+'">'+t+' ('+n+')</button>';}).join('');
 }

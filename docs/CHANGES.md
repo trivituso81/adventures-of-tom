@@ -1,3 +1,10 @@
+## 2026-11-03 (109): Art Library gets four more tabs: Battle 29, Title 4, Portraits 12, Flight 12 (342 entries in all; prompts and data only, no game change)
+
+- Tom (11-03 09:30): load every tab of the Art Library now, test later. No `bake` fields, so approving only stores pictures under `art/raw/<tab>/`.
+- Code: `battle-prompts.js` (29 backgrounds from the Project pack claude/battle-background-prompts.txt, shared rules written once, per-file title, scene and floor), `title-prompts.js` (welcome portrait, welcome landscape, logo on magenta, app icon), `portrait-prompts.js` (12 menu portraits, current portrait as likeness reference), `flight-prompts.js` (12 files of art/flight). `art.html`, `validate.js`, `make-prompts.js` and `test.py` know the four new tabs; test.py also checks every Battle prompt names the y 590 horizon.
+- Calls made: the pack's "16-bit era storybook style" and "classic 16-bit RPG battle screen" lines are reworded to the approved painted wording ("NOT pixel art, NOT retro game art"; "a classic role-playing game battle screen"), because those words are banned. Nothing else in the pack changed. The 16 px Rose Mode battle icons stay code-drawn; "icon" means the app icon. The logo is its own picture on magenta; landscape gets its own welcome painting. Memory rooms stay in Rooms. Olivia, Aunt Ellie heights still assumed.
+- Tests: test.py FAILS: [], bake_test FAILS: [], tag_check ok; all ten tabs screenshotted in portrait and landscape, tab switch about 0.8 s, no page errors.
+
 ## 2026-11-03 (108): Art Library loaded for EVERY tab (285 entries: Characters 53, NPCs 11, Areas 39, Rooms 61, Props 34, Enemies 87; prompts and data only, no game change)
 
 - Tom (11-03 07:02): "BUILD THE FULL ART LIBRARY NOW, TEST LATER." Every entry has prompt, reference pictures and aspect ratio and NO `bake` field, so approving only stores a picture under `art/raw/<tab>/`; replacing live art stays a separate step. Nothing has been generated yet.
