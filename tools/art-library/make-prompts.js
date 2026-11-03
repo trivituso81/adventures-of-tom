@@ -49,6 +49,10 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-scene.txt', 'utf8').trim() },
   { id: 'grace-stand-front-scene-cut', tab: 'Characters', title: 'Grace walk 0 TEST 5 step 2: cut her out onto magenta (approve step 1 first)', ar: '4:3', refs: ['art/raw/characters/grace-stand-front-scene-v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
+  { id: 'grace-stand-front-scene-big', tab: 'Characters', title: 'Grace walk 0 TEST 6 step 1: school yard method with the big-head picture as the body guide (uses the photo you added)', ar: '4:3', own: { slot: 'grace-photo', label: 'Photo of the real Grace (face clear)', at: 1 }, refs: ['docs/reference/school_style_ref.png', 'tools/sprite-bake/src/grace-stand-front-bighead-v1.jpg'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-scene-big.txt', 'utf8').trim() },
+  { id: 'grace-stand-front-scene-big-cut', tab: 'Characters', title: 'Grace walk 0 TEST 6 step 2: cut her out onto magenta (approve TEST 6 step 1 first)', ar: '4:3', refs: ['art/raw/characters/grace-stand-front-scene-big-v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
   { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];

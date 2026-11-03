@@ -1,3 +1,10 @@
+## 2026-11-03 (134): Art Library: Grace big-head TEST 6, big-head picture as the body guide (library only, no game change)
+
+- Tom ran TEST 5 step 1 (132, 133). Saved `tools/sprite-bake/src/grace-stand-front-scene-test5-v1.jpg`. Brushwork now matches the school yard and the style key (the scene method works). Head missed for the third time: measured about .19 (hair top 160, chin 290, soles 828 of 864 px), head about half her shoulder width. Not to be approved.
+- Cause (inference): the third picture, her hero, has a head of about .19, and the generator copies the proportions of the attached person over any wording (percentages or comparisons).
+- One lever: swap that third picture for `grace-stand-front-bighead-v1.jpg` (Run 1: same outfit, front facing, head about .29), with one sentence telling it to take only proportions and clothes from it. New entries `grace-stand-front-scene-big` (TEST 6 step 1) and `grace-stand-front-scene-big-cut` (step 2, the proven cut prompt, blocked until step 1 is approved). TEST 5 untouched. Prompt 1,311 characters.
+- tools/art-library/test.py: Characters 68 to 70, id order and tom slice updated. All checks pass.
+
 ## 2026-11-03 (133): Art Library: TEST 5 step 1 head size in comparisons, not a percentage (library only, no game change)
 
 - Tom (11-03 15:45): "dont you think the prompt around head size needs to be more specific". Fact: "about 30 percent of her full height" came back at about .19 and .20 (TEST 3, TEST 4); the generator does not measure percentages. `grace-stand-front-scene.txt` (step 1, not yet run) now says: full height is about three head heights (one head = top of hair to chin), head as wide as her shoulders, head as tall as chin to the bottom of the sweater. Three heads is about .33, a little over .30 on purpose because every run so far came back smaller than asked. Rest of the prompt shortened to keep it about 1,100 characters.
