@@ -29,6 +29,10 @@ Tom is a product director. He designs and directs; he does **not** code and does
 7. **Reuse the battle animation primitives** before inventing new systems (`docs/BATTLE_SYSTEM.md`).
 8. **This repo is the live app.** Tom plays https://trivituso81.github.io/adventures-of-tom/ from his iPhone home screen (decided 2026-10-27: "the actual app is on GitHub"). Every finished change goes to `main` (which updates GitHub Pages). The claude.ai artifact is only a scratch copy for building and testing; it means nothing to Tom, so never tell him something is "live" because it is on the artifact. Read `docs/WORKFLOW.md` for the exact routine.
 
+## Images only in the Art Library (standing rule, 2026-11-03)
+
+Tom (11-02, and again 11-03 14:49 with "ALWAYS"): he creates images only in the Art Library (he presses Generate, then Approve or Reject). Never plan on, suggest or write prompts for him to run in any outside image AI, not even as a fallback after repeated misses. When the Library keeps missing, the options are a different Library method (a reference picture, a different entry shape) or an input he supplies into the Library. Older notes that mention his outside AI are history.
+
 ## No head resizing (standing rule, 2026-11-03)
 
 Tom (11-03): "dont resize grace's head", and asked that it never happen again. A bake NEVER grows, shrinks or warps a character's head. Heads stay exactly as painted in the approved picture. Older notes that say to grow a head to a target share (.25, .373, .43) are superseded, including the style key's .25 for Grace and the tables in `docs/CHARACTER_PIPELINE.md` section 7. If a head looks wrong next to the cast, say so, show Tom a head row for his eye, and let him decide; the fix is a regenerated picture, not a warp. `tools/sprite-bake/kidhead.py` `grow_head` and the other head tools in `headwarp.py` exist only to reproduce OLD art bakes; do not call them for new art or a new character unless Tom asks for a resize in that conversation. Never put a head-share target into a prompt, a doc or a bake script as an instruction to resize.

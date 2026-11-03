@@ -39,6 +39,8 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-step-side-b.txt', 'utf8').trim() },
   { id: 'grace-stand-front-bighead', tab: 'Characters', title: 'Grace walk 0 TEST: front stand with a bigger head, about 30 percent of her height (edit of her straight front stand)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-front-straight.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-bighead.txt', 'utf8').trim() },
+  { id: 'grace-stand-front-bighead-paint', tab: 'Characters', title: 'Grace walk 0 TEST 2: repaint the big-head stand in the painted style (the big-head picture first, her painted hero as the style guide)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-stand-front-bighead-v1.jpg', 'tools/sprite-bake/src/grace-hero-cutai-v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-bighead-paint.txt', 'utf8').trim() },
   { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];

@@ -1,3 +1,9 @@
+## 2026-11-03 (127): Art Library: repaint entry for the big-head stand, rule: images only in the Library (library and docs only, no game change)
+
+- Tom (11-03 14:49): "I only want to use Art Library to create images. ALWAYS." Claude had recommended his outside AI after two style misses (125, 126); that was wrong. Written into CLAUDE.md ("Images only in the Art Library") and Claude's memory.
+- New entry `grace-stand-front-bighead-paint` (Characters > Grace, "Grace walk 0 TEST 2"): a repaint of the picture Tom liked (`grace-stand-front-bighead-v1.jpg`, first reference) with her painted hero (`grace-hero-cutai-v1.png`, second reference) as the style guide. Prompt (756 characters) keeps the head size and changes only the rendering. Different method from 125 (which only added words), so this is not a third wording. `grace-stand-front-bighead` itself is unchanged.
+- tools/art-library/test.py: Characters 63 to 64, id order list updated.
+
 ## 2026-11-03 (126): Art Library: big-head test prompt restored, first picture saved (library only, no game change)
 
 - Tom ran the 125 prompt (added "KEEP IT HAND-PAINTED"): the head grew to about .34 of height (he approved about .30) and the picture looked even less like an illustration. He had liked the FIRST result. Restored `tools/art-library/prompts/grace-stand-front-bighead.txt` to the exact 124 text that made it, and saved that picture as `tools/sprite-bake/src/grace-stand-front-bighead-v1.jpg` (1024 x 1024, head about .30). STOP-LOSS: two pictures in a row lost the painted feel, so no third wording. Next step in claude/next.md.
