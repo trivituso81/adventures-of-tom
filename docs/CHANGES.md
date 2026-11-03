@@ -1,3 +1,10 @@
+## 2026-11-03 (130): Removed unused source pictures (hosting only, no game change)
+
+- Tom (11-03 15:00): "remove anything the Art Library isn't using". Deleted 43 pictures (69 MB) from `tools/sprite-bake/src` and `docs/reference` that no code, bake script, Art Library entry or prompt names, directly or through a file-name pattern: superseded Tom and Grace sheets (tom-poses-v1/v2, tom-sheet-v1, tom-walk-v2, tom-stretch-v1, tomride-*, grace-walk-sheet2-v1, grace-walk-v3 early tries), kid-amy-ref, kid-tom-ref, foe-hush9final-v2-unused, the 12 flight source paintings (the game uses art/flight), and old area paintings and masks in docs/reference (town, row, blvd, hollow versions from Tom, style_key_square_crop).
+- Kept every source picture a bake script reads through a pattern (for example `tom-{n}.png`), so every bake still runs. Git history keeps all 43 files.
+- Checks: Art Library validate OK (354 entries), test.py passes except the known flaky "blocked row opens with GENERATE disabled".
+- Published site is now about 810 MB (GitHub Pages limit 1 GB). The remaining 460 MB of source pictures are used by bake scripts.
+
 ## 2026-11-03 (129): Art Library: phone-only photo slot, Grace big-head TEST 3 (library only, no game change)
 
 - Tom ran TEST 2 (127): head size good, but it looked less like Grace and lost the brushed illustration feel. Stop-loss: every run so far was an edit of an edit, so likeness and paint drifted each pass. One lever changed: the sources. TEST 3 is one fresh picture from originals only.
