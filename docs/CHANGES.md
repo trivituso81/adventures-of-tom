@@ -1,3 +1,7 @@
+## 2026-11-03 (133): Art Library: TEST 5 step 1 head size in comparisons, not a percentage (library only, no game change)
+
+- Tom (11-03 15:45): "dont you think the prompt around head size needs to be more specific". Fact: "about 30 percent of her full height" came back at about .19 and .20 (TEST 3, TEST 4); the generator does not measure percentages. `grace-stand-front-scene.txt` (step 1, not yet run) now says: full height is about three head heights (one head = top of hair to chin), head as wide as her shoulders, head as tall as chin to the bottom of the sweater. Three heads is about .33, a little over .30 on purpose because every run so far came back smaller than asked. Rest of the prompt shortened to keep it about 1,100 characters.
+
 ## 2026-11-03 (132): Art Library: Grace big-head TEST 5, the two-step school yard method (library only, no game change)
 
 - Tom ran TEST 4 (131), no note. Claude's read: same soft texture as TEST 3, not the dense brushwork of the style key; head about .20 (top 41 px, soles 984 px); background crimson again. Saved `tools/sprite-bake/src/grace-stand-front-bighead-style-v1.jpg`. Two brushwork misses in a row (TEST 3, TEST 4): stop-loss.
