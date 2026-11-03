@@ -17,6 +17,10 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-scene.txt', 'utf8').trim() },
   { id: 'grace-hero-cut', tab: 'Characters', title: 'Grace: hero pose step 2, cut out on magenta (needs step 1 approved)', ar: '4:3', refs: ['tools/sprite-bake/src/grace-hero-scene-v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
+  { id: 'grace-walk', tab: 'Characters', title: 'Grace: walking sheet 3 x 3 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk.txt', 'utf8').trim() },
+  { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];
 const keep = Object.fromEntries(old.map(e => [e.id, e]));
 const entries = ENTRIES.map(e => ({ status: 'draft', versions: [], rejects: [], ...(keep[e.id] ? { status: keep[e.id].status, versions: keep[e.id].versions || [], rejects: keep[e.id].rejects || [] } : {}), ...e, status: keep[e.id] ? keep[e.id].status : 'draft' }));

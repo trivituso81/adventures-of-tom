@@ -1,3 +1,8 @@
+## 2026-11-02 (105): Grace's walk and battle sheets registered in the Art Library (`grace-walk`, `grace-battle`; data and tools only, no game change)
+
+- Tom (11-02 18:06) did not want to keep using the outside image AI. Call made: run the same two prompts (CHANGES (104)) from ADMIN > ART LIBRARY, Characters tab, one GENERATE each. Entries added in tools/art-library/make-prompts.js, shape 1:1, refs in order: `grace-hero-cutai-v1.png`, `style_key_v1.png`, `height_chart_v1.png` (the page attaches them itself). data/art-prompts.json rebuilt (6 entries), tools/art-library/test.py expects the two new ids. Art Library test FAILS: [], tag check ok.
+- Honest status: whether the Library's generator keeps the painted look is UNKNOWN. The earlier Grok misses were isolated-figure prompts; the scene method that worked elsewhere was never confirmed on Grok. One GENERATE per sheet; if the look is lost, stop (stop-loss), no reworded variants.
+
 ## 2026-11-02 (104): Grace's walk and battle sheet prompts written (`grace-walk.txt`, `grace-battle.txt`; prompt files only, no game change)
 
 - Phase C, next step after Grace's hero picture (CHANGES (102)). Two prompt files in `tools/art-library/prompts/` for Tom's outside image AI (not registered in data/art-prompts.json on purpose: the Library's Grok route missed the painted look three times, CHANGES (99)). Attach in this order, both prompts: 1 `tools/sprite-bake/src/grace-hero-cutai-v1.png` (likeness, outfit, painted texture, magenta background), 2 `docs/reference/style_key_v1.png`, 3 `docs/reference/height_chart_v1.png`.
