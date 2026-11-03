@@ -1,3 +1,7 @@
+## 2026-11-03 (114): Grace walk step frames saved (source pictures only, no game change)
+
+- Tom ran the four `grace-step-*` entries once each (about $0.20); all four passed on the first try (no duplicates, head follows body). Saved as `tools/sprite-bake/src/grace-walk-v3-step-front.png`, `-step-back.png`, `-step-side-a.png`, `-step-side-b.png` (1024 x 1024 on magenta). Side B came back as a shorter stride, not the passing pose; usable. Front and back step B will be mirrors (the keychain swaps hips on the mirrored front step). Waiting for Tom's acceptance before the bake.
+
 ## 2026-11-03 (113): Admin libraries work on a computer (Art, Music, Voice Library pages only, no game change)
 
 - Tom (11-03): "support a wider viewport for Admin so I can use it on my computer (all the library features)".
