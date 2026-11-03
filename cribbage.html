@@ -469,6 +469,87 @@ footer a{ color:var(--felt); text-decoration:none; font-weight:800; }
   *, *::before, *::after{ animation:none !important; transition:none !important; }
   .bar-fill{ width:var(--w) !important; }
 }
+
+/* ===== Batch 2: sticky club tabs ===== */
+.club-tabs{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 16px 0 8px;
+  padding: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  background: rgba(250,247,242,.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-warm);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(44,34,30,.08);
+}
+.club-tab{
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  min-height: 48px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: 800 13px/1.15 Nunito, system-ui, sans-serif;
+  text-align: center;
+  transition: background .15s ease, color .15s ease;
+}
+.club-tab[aria-selected="true"]{
+  background: var(--felt);
+  color: #FAF7F2;
+  box-shadow: 0 4px 12px rgba(27,59,43,.22);
+}
+.club-tab:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.tab-panel[hidden]{ display: none !important; }
+.tab-panel{ padding-top: 8px; animation: fadeUp .35s ease; }
+#nights, #form, #grnt, #tools{ scroll-margin-top: 76px; }
+.section-title-sm{ font-size: clamp(22px, 4vw, 28px) !important; margin-bottom: 0 !important; }
+.form-compact{
+  padding-top: 18px !important;
+  padding-bottom: 4px !important;
+  margin-bottom: 8px;
+  background: var(--cardstock);
+  border: 1px solid var(--border-warm);
+  border-radius: 16px;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-shadow: var(--shadow);
+}
+.form-head{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 10px;
+}
+.form-note{ margin: 0 !important; max-width: 28ch; font-size: 13px; }
+.bars-compact{ gap: 6px !important; max-height: 280px; overflow: auto; padding-right: 4px; }
+.bars-compact .bar-track{ height: 10px; }
+.legend-compact{ margin-top: 8px !important; margin-bottom: 8px; }
+.tools-placeholder{
+  background: var(--cardstock);
+  border: 1px dashed var(--border-warm);
+  border-radius: 18px;
+  padding: 28px 22px;
+  box-shadow: var(--shadow);
+}
+.tools-placeholder h2{ margin: 0 0 8px; font-family: Fredoka, sans-serif; color: var(--walnut); }
+.tools-placeholder p{ margin: 0; color: var(--ink-soft); font-weight: 600; max-width: 42ch; }
+@media (max-width:640px){
+  .club-tab{ font-size: 12px; min-height: 52px; padding: 12px 6px; }
+  .bars-compact{ max-height: 220px; }
+}
+
 </style>
 </head>
 <body>
@@ -507,7 +588,61 @@ footer a{ color:var(--felt); text-decoration:none; font-weight:800; }
       <div class="career-bar" id="summaryStats" aria-label="Career summary"></div>
     </article>
   </header>
+  <nav class="club-tabs" role="tablist" aria-label="Club sections" id="clubTabs">
+    <button type="button" class="club-tab" role="tab" id="tab-btn-nights" aria-controls="tab-nights" aria-selected="true" data-tab="nights">The Nights</button>
+    <button type="button" class="club-tab" role="tab" id="tab-btn-trophy" aria-controls="tab-trophy" aria-selected="false" data-tab="trophy" tabindex="-1">Trophy Room &amp; Lore</button>
+    <button type="button" class="club-tab" role="tab" id="tab-btn-tools" aria-controls="tab-tools" aria-selected="false" data-tab="tools" tabindex="-1">Table Tools</button>
+  </nav>
 
+  <div class="tab-panel" role="tabpanel" id="tab-nights" aria-labelledby="tab-btn-nights" data-panel="nights">
+  <section id="form" class="form-compact" aria-label="Recent form">
+    <div class="form-head">
+      <div>
+        <p class="section-kicker">Recent form</p>
+        <h2 class="section-title section-title-sm">How hard was he pegging?</h2>
+      </div>
+      <p class="section-note form-note">Wins out of nine. Gold = top two, coral = skunk watch.</p>
+    </div>
+    <div class="bars bars-compact" id="bars"></div>
+    <div class="legend legend-compact">
+      <span class="l-best">Top two</span>
+      <span class="l-mid">Mid pack</span>
+      <span class="l-rough">Bottom third</span>
+    </div>
+  </section>
+  <section id="nights" aria-label="Weekly scores">
+    <p class="section-kicker">Weekly board</p>
+    <h2 class="section-title">Every night, newest first</h2>
+    <p class="section-note table-note desktop-only">Gold rows = top two. Coral rows = bottom third (also known as skunk-adjacent vibes).</p>
+    <p class="section-note mobile-only">Each scorecard shows finish, wins, points, spread, and cash. Skunk sticker means a rough night.</p>
+
+    <div class="night-cards" id="nightCards" aria-label="Night results for phone"></div>
+
+    <div class="table-shell desktop-only" aria-label="Night results table">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Finish</th>
+            <th>Won</th>
+            <th>Pts</th>
+            <th>Spread</th>
+            <th>Skunks</th>
+            <th>Cash</th>
+            <th>Field</th>
+          </tr>
+        </thead>
+        <tbody id="nightRows"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span class="l-best">Top two (flex zone)</span>
+      <span class="l-rough">Bottom third (skunk watch)</span>
+    </div>
+  </section>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="tab-trophy" aria-labelledby="tab-btn-trophy" data-panel="trophy" hidden>
 <section id="grnt" aria-label="Highlights">
     <p class="section-kicker">Board toppers</p>
     <h2 class="section-title">Moments that deserve a standing ovation (or a snack)</h2>
@@ -539,49 +674,17 @@ footer a{ color:var(--felt); text-decoration:none; font-weight:800; }
       </article>
     </div>
   </section>
+  </div>
 
-  <section id="nights" aria-label="Weekly scores">
-    <p class="section-kicker">Weekly board</p>
-    <h2 class="section-title">Every night, newest first</h2>
-    <p class="section-note table-note desktop-only">Gold rows = top two. Coral rows = bottom third (also known as skunk-adjacent vibes).</p>
-    <p class="section-note mobile-only">Each scorecard shows finish, wins, points, spread, and cash. Skunk sticker means a rough night.</p>
-
-    <div class="night-cards" id="nightCards" aria-label="Night results for phone"></div>
-
-    <div class="table-shell desktop-only" aria-label="Night results table">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Finish</th>
-            <th>Won</th>
-            <th>Pts</th>
-            <th>Spread</th>
-            <th>Skunks</th>
-            <th>Cash</th>
-            <th>Field</th>
-          </tr>
-        </thead>
-        <tbody id="nightRows"></tbody>
-      </table>
-    </div>
-    <div class="legend">
-      <span class="l-best">Top two (flex zone)</span>
-      <span class="l-rough">Bottom third (skunk watch)</span>
-    </div>
-  </section>
-
-  <section id="form" aria-label="Recent form">
-    <p class="section-kicker">Form</p>
-    <h2 class="section-title">How hard was he pegging?</h2>
-    <p class="section-note">Bar length is wins out of a typical nine-game Grass Roots night. Color is finish quality, not peg paint.</p>
-    <div class="bars" id="bars"></div>
-    <div class="legend">
-      <span class="l-best">Top two</span>
-      <span class="l-mid">Mid pack</span>
-      <span class="l-rough">Bottom third</span>
-    </div>
-  </section>
+  <div class="tab-panel" role="tabpanel" id="tab-tools" aria-labelledby="tab-btn-tools" data-panel="tools" hidden>
+    <section id="tools" aria-label="Table Tools">
+      <div class="tools-placeholder">
+        <p class="section-kicker">Table Tools</p>
+        <h2>Coming in a later batch</h2>
+        <p>Peg calculators, pairings helpers, and other clubhouse gadgets will live here. Nothing to tap yet.</p>
+      </div>
+    </section>
+  </div>
 
   <footer>
     <div class="row">
@@ -795,12 +898,93 @@ function renderBars(){
   });
 }
 
+
+const TAB_HASH = {
+  nights: "nights",
+  form: "nights",
+  trophy: "trophy",
+  grnt: "trophy",
+  tools: "tools"
+};
+
+function setTab(tabId, opts){
+  const options = opts || {};
+  const tabs = ["nights", "trophy", "tools"];
+  if(tabs.indexOf(tabId) === -1) tabId = "nights";
+  tabs.forEach(id => {
+    const btn = document.getElementById("tab-btn-" + id);
+    const panel = document.getElementById("tab-" + id);
+    const on = id === tabId;
+    if(btn){
+      btn.setAttribute("aria-selected", on ? "true" : "false");
+      btn.tabIndex = on ? 0 : -1;
+    }
+    if(panel){
+      if(on) panel.removeAttribute("hidden");
+      else panel.setAttribute("hidden", "");
+    }
+  });
+  if(options.updateHash){
+    const hash = options.hash || (tabId === "trophy" ? "grnt" : tabId === "tools" ? "tools" : "nights");
+    if(location.hash.replace(/^#/, "") !== hash){
+      history.replaceState(null, "", "#" + hash);
+    }
+  }
+}
+
+function activateFromHash(scroll){
+  const raw = (location.hash || "#nights").replace(/^#/, "") || "nights";
+  const tabId = TAB_HASH[raw] || "nights";
+  setTab(tabId, { updateHash: false });
+  if(scroll){
+    const target = document.getElementById(raw) || document.getElementById("tab-" + tabId);
+    if(target){
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }
+}
+
+function wireTabs(){
+  const nav = document.getElementById("clubTabs");
+  if(!nav) return;
+  nav.addEventListener("click", e => {
+    const btn = e.target.closest(".club-tab");
+    if(!btn) return;
+    const tabId = btn.getAttribute("data-tab");
+    const hash = tabId === "trophy" ? "grnt" : tabId === "tools" ? "tools" : "nights";
+    setTab(tabId, { updateHash: true, hash });
+    const panel = document.getElementById("tab-" + tabId);
+    if(panel) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  nav.addEventListener("keydown", e => {
+    const keys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+    if(keys.indexOf(e.key) === -1) return;
+    const buttons = [...nav.querySelectorAll(".club-tab")];
+    const i = buttons.indexOf(document.activeElement);
+    if(i < 0) return;
+    e.preventDefault();
+    let next = i;
+    if(e.key === "ArrowRight") next = (i + 1) % buttons.length;
+    if(e.key === "ArrowLeft") next = (i - 1 + buttons.length) % buttons.length;
+    if(e.key === "Home") next = 0;
+    if(e.key === "End") next = buttons.length - 1;
+    buttons[next].focus();
+    buttons[next].click();
+  });
+  window.addEventListener("hashchange", () => activateFromHash(true));
+  // Hero CTAs already use #nights / #grnt; honor current hash on load.
+  activateFromHash(!!location.hash);
+}
+
 renderSummary();
 applyMoodRing();
 wireAvatarFallback();
 renderTable();
 renderCards();
 renderBars();
+wireTabs();
 </script>
 </body>
 </html>
