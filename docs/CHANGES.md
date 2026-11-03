@@ -1,3 +1,7 @@
+## 2026-11-03 (115): Grace front step prompt: head and body straight to camera (prompt only, no game change)
+
+- Tom (09:42): front step weird, sizes differ and the head faces different directions; both steps must face directly forward. Size is fixed in the bake (scale each frame to the stand's head size). Head: `grace-step-front.txt` now leads with a dead-straight-on head and square shoulders rule. Step B will be its own edit made FROM the accepted step A (other leg forward), not a mirror, so the head and the keychain stay put.
+
 ## 2026-11-03 (114): Grace walk step frames saved (source pictures only, no game change)
 
 - Tom ran the four `grace-step-*` entries once each (about $0.20); all four passed on the first try (no duplicates, head follows body). Saved as `tools/sprite-bake/src/grace-walk-v3-step-front.png`, `-step-back.png`, `-step-side-a.png`, `-step-side-b.png` (1024 x 1024 on magenta). Side B came back as a shorter stride, not the passing pose; usable. Front and back step B will be mirrors (the keychain swaps hips on the mirrored front step). Waiting for Tom's acceptance before the bake.
