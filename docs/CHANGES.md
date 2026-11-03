@@ -1,3 +1,9 @@
+## 2026-11-03 (120): Grace walk frames COMPLETE, ready to bake (source pictures only, no game change)
+
+- Front step B accepted (other leg forward, face straight, keychain same hip): `tools/sprite-bake/src/grace-walk-v3-step-front-b.png`.
+- FINAL frame map for the bake (all 1024 x 1024 on magenta, key each from its own corner): down_stand = `grace-walk-v3-stand-front-straight.png`, down_step1 = `-step-front-a.png`, down_step2 = `-step-front-b.png`; up_stand = `-stand-back.png`, up_step1 = `-step-back.png`, up_step2 = mirror of `-step-back.png`; left_stand = `-stand-side.png`, left_step1 = `-step-side-a.png`, left_step2 = `-step-side-b.png`. stand2 = stand. Superseded (do not use): `-stand-front.png`, `-stand-front-level.png`, `-step-front.png`, `-step-front-try2.png`.
+- Known: back and side stands are 3x enlargements of 341 px sheet cells (softer, magenta fringe); figure heights differ a few percent; normalise each frame to its stand's head size before grow_head.
+
 ## 2026-11-03 (119): Grace front step A accepted, step B entry added (Art Library entry and source picture only, no game change)
 
 - Front step from the straight stand: face straight on, one foot forward, back heel lifted. Saved as `tools/sprite-bake/src/grace-walk-v3-step-front-a.png` (supersedes `grace-walk-v3-step-front.png` and `-try2`). New entry `grace-step-front-b` ("Grace walk 1b") edits it to the other leg forward, keychain on the same hip, no mirror.
