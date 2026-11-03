@@ -157,7 +157,7 @@ async function generate(id,btn){
     let path='/v1/images/generations';
     if(refPaths.length){
       path='/v1/images/edits';
-      body.images=[]; for(const p of refPaths){ const r=await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error('Could not load reference '+p); body.images.push({type:'image_url',url:await blobToDataUri(await r.blob())}); }
+      body.images=[]; for(const p of refPaths){ const r=await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error('Could not load reference '+p+(p.indexOf('art/raw/')===0?'. That picture does not exist yet: approve the earlier step first (give the site about 2 minutes after approving).':'')); body.images.push({type:'image_url',url:await blobToDataUri(await r.blob())}); }
     }
     let r; try{ r=await fetch(XAI_BASE()+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)}); }
     catch(err){ throw new Error('The browser could not reach the image service. Either the network is down or the service blocks browsers; if it is the second, a relay address is needed (the Relay field at the top).'); }

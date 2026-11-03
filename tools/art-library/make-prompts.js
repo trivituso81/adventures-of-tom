@@ -22,6 +22,7 @@ const ENTRIES = [
   { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];
+ENTRIES.push(...require('./party-prompts.js').entries); // Tom, TNB, Rose, Amy, Justin, Deedee, Boppy (see that file)
 const keep = Object.fromEntries(old.map(e => [e.id, e]));
 const entries = ENTRIES.map(e => ({ status: 'draft', versions: [], rejects: [], ...(keep[e.id] ? { status: keep[e.id].status, versions: keep[e.id].versions || [], rejects: keep[e.id].rejects || [] } : {}), ...e, status: keep[e.id] ? keep[e.id].status : 'draft' }));
 fs.writeFileSync(out, JSON.stringify({ version: 1, entries }, null, 1) + '\n');
