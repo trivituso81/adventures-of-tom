@@ -197,7 +197,7 @@ function renderCard(e){
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
-  '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
+  '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16','2:1'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
   '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
   '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt=""><span>v'+r.n+'</span> <button class="small" data-save="'+esc(r.key)+'">Save</button><div class="acts"><button class="good" data-ok="'+esc(r.key)+'">APPROVE</button><button class="bad" data-no="'+esc(r.key)+'">REJECT</button></div></div>').join('')+'</div>'+

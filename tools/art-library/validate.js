@@ -5,7 +5,7 @@
 // Exit code 1 and a list of problems when anything is wrong. Run from the repo root.
 const fs = require('fs'), path = require('path');
 const TABS = ['Characters', 'NPCs', 'Areas', 'Rooms', 'Props', 'Enemies', 'Battle', 'Title', 'Portraits', 'Flight'];
-const ARS = ['3:4', '2:3', '1:1', '4:3', '3:2', '16:9', '9:16'];
+const ARS = ['3:4', '2:3', '1:1', '4:3', '3:2', '16:9', '9:16', '2:1'];
 // Words that pull the generator toward pixel art. Negations ("NOT pixel art", "not 16-bit") are the approved wording and are allowed.
 const BANNED = /\b(16[- ]bit|32[- ]bit|snes|super nintendo|final fantasy|chrono trigger|pixel[- ]?art|retro|sprites?)\b/gi;
 const NEG = /\b(?:not|no|never|nor)\s+(?:an?\s+)?(?:pixel[- ]?art|16[- ]bit(?:\s+era)?(?:\s+tile\s+art)?|32[- ]bit|retro(?:\s+game\s+art)?|sprites?)\b/gi;

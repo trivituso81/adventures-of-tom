@@ -48,7 +48,7 @@ async def ux_checks(pg, name, d):
     blocked = [e for e in chars if any(r.startswith('art/raw/') for r in e['refs'])]
     ft = (await pg.inner_text('#filters')).replace('\n', ' ')
     ok(('Blocked %d' % len(blocked)) in ft and ('Ready %d' % (len(chars) - len(blocked))) in ft and ('To do %d' % (len(chars) - len(blocked))) in ft, name + ': filter counts match the data (%s)' % ft)
-    ok('0/53' in (await pg.inner_text('#tabs')), name + ': tab shows approved/total')
+    ok(('Characters 0/%d' % len(chars)) in (await pg.inner_text('#tabs')).replace('\n', ' '), name + ': tab shows approved/total')
     await pg.click('[data-grp="Characters|Tom"]')
     ok(await pg.locator('.item').count() == 1, name + ': default view shows only the step Tom can generate now')
     await pg.click('[data-filter="all"]')
