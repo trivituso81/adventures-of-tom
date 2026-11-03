@@ -1,3 +1,9 @@
+## 2026-11-03 (136): Phone voice export `local-clips-export_1_.json` merged (Deedee, chapters 7, 9, 25, 26) (`dclips1`)
+
+- Tom sent the export with no words (403 clips: 360 dialogue, 43 battle). Treated as "merge it" per docs/VOICE_LIBRARY.md. Filtered first: 3 repeats collapsed, 16 dropped because the game has no live line with those words (the `Round {n}.` monster lines, and Michael, TNB and Tom dialogue takes whose words differ from the line), 3 dropped because the spoken words differ from the line (Deedee `nurse`, Deedee `walk`, TNB "Look. The sky is blue again."). 381 kept.
+- Merged with `tools/voice-library/merge-local.js` (silence trim, speaker effects, Boppy deepened). Bytes changed in: `data/voice/deedee.js` (36 battle clips replaced), `dialog-ch9.js`, `dialog-ch26.js`, `dialog-ch25.js`, `dialog-ch7.js`. The rest (Boppy, TNB battle; chapters 1, 2, 4, 6, 22) came out identical to what is already baked. Tag `dclips1` on `deedee.js`; chapter dialogue files carry no tag (the service worker revalidates them).
+- Tests: `unused_voice.py` 0 on all five checks; `tag_check.py` ok; Voice Library index rebuilt (4,140 lines, unchanged count). Smoke not run (audio data only). NOT run: the phone.
+
 ## 2026-11-03 (135): Art Library: Grace big-head TEST 7, grey proportion outline as the body guide (library only, no game change)
 
 - Tom ran TEST 6 (134): "its just not getting the brushed illustrated feel". Saved `tools/sprite-bake/src/grace-stand-front-scene-test6-v1.jpg`. Head grew (about .25) but she is painted smooth, like the big-head picture, and looks pasted onto the scene. Pattern over all runs (fact): every picture with a big head (Run 1, Run 2, TEST 2, TEST 6) is smooth; every brushed one (hero, TEST 5) has a head near .19. The painted big-head picture carried its smooth style along with its proportions.
