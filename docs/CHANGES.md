@@ -1,3 +1,7 @@
+## 2026-11-03 (119): Grace front step A accepted, step B entry added (Art Library entry and source picture only, no game change)
+
+- Front step from the straight stand: face straight on, one foot forward, back heel lifted. Saved as `tools/sprite-bake/src/grace-walk-v3-step-front-a.png` (supersedes `grace-walk-v3-step-front.png` and `-try2`). New entry `grace-step-front-b` ("Grace walk 1b") edits it to the other leg forward, keychain on the same hip, no mirror.
+
 ## 2026-11-03 (118): Memory fix for long sessions on older iPads (`mem1`: voice cache cap, painted sheets on demand)
 
 - Tom (11-03): TNB's roughly five-year-old iPad (Chrome, so WebKit) got hot and slowed down a lot after 30 to 60 minutes, worst in battle. Tom approved both fixes.

@@ -159,6 +159,20 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "grace-step-front-b",
+   "tab": "Characters",
+   "title": "Grace walk 1b: second front step, other leg (edit of front step 1)",
+   "ar": "1:1",
+   "refs": [
+    "tools/sprite-bake/src/grace-walk-v3-step-front-a.png"
+   ],
+   "prompt": "Edit the attached picture. Keep everything about this girl exactly the same: the same face, hair, clothes, keychain (on the same hip), colors, painted brushwork and level of detail, the same size and the same place in the picture, and the same flat magenta background. Her head and body stay facing the viewer dead straight on, exactly as now.\n\nChange ONLY her legs and arms, to the opposite step of the same walk:\n- The leg that is now forward goes back: straight, heel lifted off the ground.\n- The leg that is now back steps forward toward us: knee bent, that shoe a little lower in the picture.\n- The arms swap too: the arm that is now forward swings back behind her hip, and the other arm swings forward in front of her body.\n\nOne girl only, full body, feet on the same ground line as now. Nothing added: no shadow, no motion lines, no text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-step-back",
    "tab": "Characters",
    "title": "Grace walk 2 of 4: back step (edit of her back stand)",

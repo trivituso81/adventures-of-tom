@@ -29,6 +29,8 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-straight.txt', 'utf8').trim() },
   { id: 'grace-step-front', tab: 'Characters', title: 'Grace walk 1 of 4: front step (edit of her straight front stand)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-front-straight.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-step-front.txt', 'utf8').trim() },
+  { id: 'grace-step-front-b', tab: 'Characters', title: 'Grace walk 1b: second front step, other leg (edit of front step 1)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-step-front-a.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-step-front-b.txt', 'utf8').trim() },
   { id: 'grace-step-back', tab: 'Characters', title: 'Grace walk 2 of 4: back step (edit of her back stand)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-back.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-step-back.txt', 'utf8').trim() },
   { id: 'grace-step-side-a', tab: 'Characters', title: 'Grace walk 3 of 4: side step A, heel down (edit of her side stand)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-walk-v3-stand-side.png'],
