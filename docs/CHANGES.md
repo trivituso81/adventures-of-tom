@@ -1,3 +1,9 @@
+## 2026-11-03 (151): Grace's walk is one 3 x 3 sheet again, not 8 single-pose edits (`gsheet1`)
+- Tom (18:28): asked why every walk frame needed its own picture; that was against the agreed method (CHARACTER_PIPELINE 3B: one 3 x 3 walking sheet, one call). The 8 `grace-walk-*` entries (d4eab61) were added without writing the prompt with him and used "change only the pose" edits.
+- Removed the 8 entries; added `grace-walk-sheet` (Characters > Grace, 1:1, one reference: approved step 2 `grace-hero-fresh-style-v4.png`). Prompt written with Tom in chat and approved (18:29): tools/art-library/prompts/grace-walk-sheet.txt. make-prompts.js and data/art-prompts.json both updated by hand (not regenerated, per the step 2 prompt WARNING).
+- The approved single frame art/raw/characters/grace-walk-down-a-v1.png stays on disk, unlisted.
+- Characters now holds 3 entries. tools/art-library/test.py still expects 2 (known stale checks).
+
 ## 2026-11-03 (150): Every decided Art Library row gets a decision time, so no row sticks on "Waiting on me" (`udec2`)
 - Tom (18:24, 18:25): Flight > Los Angeles skyline strip and Flight > plane in 9 poses stuck on "Waiting on me", same cause as 149 (he approved an older result than the newest one on his phone: skyline v5, plane v1). He re-approved them several times trying to clear it, so those entries list the same pick 3 times (harmless copies under art/raw/flight/).
 - Fix: data/art-prompts.json, the latest decision of all 14 decided entries gets `at` = the time of its GitHub commit (from git history). With 149's rule, results made before that time no longer count as waiting.

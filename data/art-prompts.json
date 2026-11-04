@@ -69,130 +69,17 @@
    "group": "Grace"
   },
   {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 1,
-     "file": "art/raw/characters/grace-walk-down-a-v1.png",
-     "date": "2026-11-04",
-     "from": "v2",
-     "at": 1793759171506
-    }
-   ],
-   "rejects": [],
-   "id": "grace-walk-down-a",
-   "tab": "Characters",
-   "title": "Grace walk: Walk down, step 1",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace takes a step toward the viewer, left foot forward, right arm swinging forward and left arm back. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
-   "status": "rejected",
-   "versions": [],
-   "rejects": [
-    {
-     "date": "2026-11-04",
-     "note": "wrong foot stepping forward",
-     "from": "v1",
-     "at": 1793759224956
-    }
-   ],
-   "id": "grace-walk-down-b",
-   "tab": "Characters",
-   "title": "Grace walk: Walk down, step 2",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace takes a step toward the viewer, right foot forward, left arm swinging forward and right arm back. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
    "status": "draft",
    "versions": [],
    "rejects": [],
-   "id": "grace-walk-up-stand",
+   "id": "grace-walk-sheet",
    "tab": "Characters",
-   "title": "Grace walk: Walk up, stand",
-   "ar": "3:4",
+   "title": "Grace walk sheet: all 9 walk frames in one picture (Tom, 11-03)",
+   "ar": "1:1",
    "refs": [
     "art/raw/characters/grace-hero-fresh-style-v4.png"
    ],
-   "prompt": "Change only the pose of this picture: Grace stands still facing away from the viewer, arms relaxed at her sides, showing the back of her hair and sweatshirt. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "grace-walk-up-a",
-   "tab": "Characters",
-   "title": "Grace walk: Walk up, step 1",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace walks away from the viewer, left foot forward, right arm swinging forward and left arm back, showing the back of her hair and sweatshirt. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "grace-walk-up-b",
-   "tab": "Characters",
-   "title": "Grace walk: Walk up, step 2",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace walks away from the viewer, right foot forward, left arm swinging forward and right arm back, showing the back of her hair and sweatshirt. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "grace-walk-side-stand",
-   "tab": "Characters",
-   "title": "Grace walk: Walk side, stand",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace stands still facing left in profile, arms relaxed at her sides. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "grace-walk-side-a",
-   "tab": "Characters",
-   "title": "Grace walk: Walk side, step 1",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace walks to the left in profile, left foot forward, right arm swinging forward and left arm back. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
-   "group": "Grace"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "grace-walk-side-b",
-   "tab": "Characters",
-   "title": "Grace walk: Walk side, step 2",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Change only the pose of this picture: Grace walks to the left in profile, right foot forward, left arm swinging forward and right arm back. Keep her face, hair, outfit, colors, proportions, size and framing exactly the same. Flat solid magenta background.",
+   "prompt": "Make a 3 x 3 walking sheet of the girl in the attached picture. Same face, hair, outfit, colors, proportions and painted style in every frame. Same size in every frame, feet on one line.\nRow 1, facing the viewer: standing, left foot stepping forward, right foot stepping forward.\nRow 2, seen from behind: standing, left foot stepping, right foot stepping.\nRow 3, side view facing left: standing, front leg forward, legs passing mid-stride.\nArms swing opposite to the legs. Flat solid magenta background. Nothing else in the picture: no grid lines, borders or text.",
    "group": "Grace"
   },
   {
