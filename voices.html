@@ -260,7 +260,7 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const retry=async(fn,tries=4)=>{for(let k=0;;k++){try{return await fn();}catch(e){const m=e&&e.message||String(e);if(k<tries-1&&/ 429| 409|too many|concurrent|in progress/i.test(m)){await wait(2500*(k+1));continue;}throw e;}}};
 async function tts(v,text){
   const url='https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(v.voice_id)+'?output_format=mp3_44100_128';
-  const body={text,model_id:v.model||'eleven_v4',voice_settings:{stability:+v.stability,similarity_boost:+v.similarity},seed:Math.floor(Math.random()*4294967295)};
+  const body={text,model_id:v.model||'eleven_v4',voice_settings:{stability:+v.stability,similarity_boost:+v.similarity,...(v.speed!=null?{speed:+v.speed}:{})},seed:Math.floor(Math.random()*4294967295)};
   const send=()=>fetch(url,{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)});
   let r=await send();
   if(!r.ok&&(r.status===400||r.status===422)){const e=await apiErr(r);if(/seed/i.test(e.message)){delete body.seed;r=await send();}else throw e;}

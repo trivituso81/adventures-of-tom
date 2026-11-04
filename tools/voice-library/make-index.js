@@ -90,7 +90,7 @@ const NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy
 const voices={};
 function vset(kind,id,v){ if(!v) return; const st=v.settings||{};
   voices[kind+'|'+id]={voice_id:v.voice_id||'',model:v.model||'eleven_v4',stability:st.stability!=null?st.stability:.5,similarity:st.similarity_boost!=null?st.similarity_boost:.85,direction:v.direction||'',
-    sfx:!!v.sfx,prompt_influence:v.prompt_influence||.5}; }
+    sfx:!!v.sfx,prompt_influence:v.prompt_influence||.5,...(st.speed!=null?{speed:st.speed}:{})}; }
 for(const ch in BC.voices) vset('battle',ch,BC.voices[ch]);
 for(const id in DC.voices) vset('dialog',id,DC.voices[id]);
 // A character with battle lines but no battle voice yet (Justin, 2026-10-31) uses the same voice as his dialogue.
@@ -109,6 +109,7 @@ for(const k of ['battle|deedee','dialog|deedee']){ const v=voices[k]; if(!v) con
 if(!voices['dialog|narrator']&&voices['dialog|washington']) voices['dialog|narrator']=Object.assign({},voices['dialog|washington']);
 // Narrator delivery (Tom, 2026-11-03): theatrical storyteller, lively pace, not slow. Same voice id; only the direction changes.
 if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical storyteller, lively pace';
+if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLabs speaking rate (0.7 to 1.2); Tom: the narrator spoke too slowly in the preview
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
   v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);

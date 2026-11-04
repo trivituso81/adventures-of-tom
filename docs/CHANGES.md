@@ -7,6 +7,13 @@
 - No game files changed, so no `?v=` or stamp bump.
 - New people are added one at a time with Tom in chat (two steps first). Live Grace art is unchanged.
 
+## 2026-11-03 (146): Narrator speaks faster in the Voice Library preview (`narr2`)
+
+- Tom: the narrator's tone is right, but the preview speaks too slowly.
+- Cause: the preview sent only stability and similarity, so pace came from the tags alone.
+- Fix: the Narrator's voice entry carries a speaking rate of 1.15 (`tools/voice-library/make-index.js`, ElevenLabs range 0.7 to 1.2), and `voices.html` passes the rate to the preview and bake requests when a voice has one.
+- Index rebuilt. Not yet heard: Tom listens to the preview to judge the pace.
+
 ## 2026-11-03 (144): Narrator delivery set to a theatrical storyteller (`narr1`)
 
 - Tom: a narrator for all text that no character says, and for Nara's excerpts, cast from an existing older-man voice, sounding like a theatrical storytelling old man who does not talk too slowly.
