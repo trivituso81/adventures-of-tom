@@ -4104,9 +4104,15 @@
    "group": "Flight art"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "no characters should be dsiplayed. only los angeles skyline",
+     "from": "v1"
+    }
+   ],
    "id": "flight-skyline-la",
    "tab": "Flight",
    "ar": "16:9",
