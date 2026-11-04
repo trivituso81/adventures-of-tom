@@ -1,3 +1,8 @@
+## 2026-11-03 (150): Every decided Art Library row gets a decision time, so no row sticks on "Waiting on me" (`udec2`)
+- Tom (18:24, 18:25): Flight > Los Angeles skyline strip and Flight > plane in 9 poses stuck on "Waiting on me", same cause as 149 (he approved an older result than the newest one on his phone: skyline v5, plane v1). He re-approved them several times trying to clear it, so those entries list the same pick 3 times (harmless copies under art/raw/flight/).
+- Fix: data/art-prompts.json, the latest decision of all 14 decided entries gets `at` = the time of its GitHub commit (from git history). With 149's rule, results made before that time no longer count as waiting.
+- His page only uses the new rule once GitHub Pages finishes a deploy, and each approve restarts the deploy. Told Tom to stop approving for about 5 minutes, then reload.
+
 ## 2026-11-03 (149): Art Library row no longer stuck on "Waiting on me" after picking an older result (`udec1`)
 - Tom (18:17): Characters > Grace step 1 had shown "Waiting on me" for 45 minutes. Cause: "Waiting on me" meant "the newest result on this device has a higher number than the last decision". Tom made v6 to v8 on his phone, then approved v5, and 84c48dc/faadf93 trimmed the entry to the v5 version only, so v8 looked undecided forever.
 - Fix in art.html: approve and reject now store `at` (time in ms). A row is "Waiting on me" only when the newest result was made after the last decision. Entries with no `at` keep the old number rule. data/art-prompts.json: grace-hero-fresh's v5 version gets `at` = 2026-11-04 01:58 UTC (Tom's last approve on it).
