@@ -1,4 +1,5 @@
 ## 2026-11-03 (145): Art Library Characters wiped to Grace's two steps (`wipe1`)
+- Tom approved Grace step 1 as v5 (`art/raw/characters/grace-hero-fresh-v5.png`). Step 2 (`grace-hero-fresh-style`) was built from v1, so it is reopened (no status, no approved versions; its v1 result is not kept as approved) and its reference is now v5. Tom regenerates and approves step 2 in the Library. No game file changed.
 
 - Tom: get rid of all the old character prompts. Removed every Art Library Characters entry except Grace's step 1 (`grace-hero-fresh`) and step 2 (`grace-hero-fresh-style`): all Grace tests and old hero, walk and battle entries, plus the hero, walk and battle entries for the other 12 people (`tools/art-library/party-prompts.js` and `party2-prompts.js` now export no entries, but keep `build()` for reuse).
 - Deleted the 22 unused Grace prompt .txt files under `tools/art-library/prompts/`. Kept the two Grace prompts.
