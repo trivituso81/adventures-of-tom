@@ -23,6 +23,12 @@
      "file": "art/raw/characters/grace-hero-fresh-v4.png",
      "date": "2026-11-04",
      "from": "v5"
+    },
+    {
+     "n": 5,
+     "file": "art/raw/characters/grace-hero-fresh-v5.png",
+     "date": "2026-11-04",
+     "from": "v5"
     }
    ],
    "rejects": [],
@@ -36,7 +42,7 @@
     "at": 0
    },
    "refs": [],
-   "prompt": "STYLE: richly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights, saturated jewel-toned colors, crisp clean silhouettes, fine detail, warm golden light from the upper left.\n\nfull body, standing facing straight at the viewer, arms relaxed at her sides, feet a little apart, happy wide toothy smile, on a flat solid magenta background.\n\nPROPORTIONS: a big caricature head. From the top of her hair to her soles she is only about four heads tall. Her head is as wide as her shoulders.\n\nOUTFIT: oversized lavender sweatshirt, baggy heather-gray sweatpants, pink and silver glitter sneakers, a small yellow squishy keychain at her hip.",
+   "prompt": "STYLE: richly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights, saturated jewel-toned colors, crisp clean silhouettes, fine detail, warm golden light from the upper left. \n\nfull body, standing facing straight at the viewer, arms relaxed at her sides, feet a little apart, happy wide toothy smile, on a flat solid magenta background.\n\nPROPORTIONS: a big caricature head. From the top of her hair to her soles she is only about four heads tall. Her head is as wide as her shoulders. \n\nOUTFIT: oversized lavender sweatshirt, baggy heather-gray sweatpants, pink and silver glitter sneakers, a small yellow squishy keychain at her hip.",
    "group": "Grace"
   },
   {
