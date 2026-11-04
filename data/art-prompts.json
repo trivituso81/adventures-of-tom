@@ -4255,6 +4255,11 @@
      "date": "2026-11-04",
      "note": "not 2172 x 391 px. incorrectly includes people",
      "from": "v3"
+    },
+    {
+     "date": "2026-11-04",
+     "note": "should be 2172 x 391 px",
+     "from": "v5"
     }
    ],
    "id": "flight-skyline-la",
