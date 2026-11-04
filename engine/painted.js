@@ -10,7 +10,7 @@
 //
 // Atlas: one image of equally sized frames at K times the rows' resolution (K = 2 in battle, 3 on the overworld).
 // ART_V: cache tag for every painted atlas image (2026-11-01, heads1: all adult battle heads re-baked).
-const ART_V='gwalk1';
+const ART_V='gwalk2';
 const PAINTED={};
 // Cast ids that own painted sheets (paintedOwners, below). Longer prefixes first: tomride before tom.
 const PAINTED_CAST=['tomride','tom','grace','rose','tnb','amy','deedee','boppy','nara','justin','olivia','jojo','michael','ellie'];
