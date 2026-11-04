@@ -1,5 +1,0 @@
-Make a 3 x 3 walking sheet of the girl in the attached picture. Same face, hair, outfit, colors, proportions and painted style in every frame. Same size in every frame, feet on one line.
-Row 1, facing the viewer: standing, left foot stepping forward, right foot stepping forward.
-Row 2, seen from behind: standing, left foot stepping, right foot stepping.
-Row 3, side view facing left: standing, front leg forward, legs passing mid-stride.
-Arms swing opposite to the legs. Flat solid magenta background. Nothing else in the picture: no grid lines, borders or text.

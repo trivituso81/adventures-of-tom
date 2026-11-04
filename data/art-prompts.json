@@ -72,14 +72,42 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
-   "id": "grace-walk-sheet",
+   "id": "grace-walk-front",
    "tab": "Characters",
-   "title": "Grace walk sheet: all 9 walk frames in one picture (Tom, 11-03)",
-   "ar": "1:1",
+   "title": "Grace walk sheet 1 of 3: facing you (Tom, 11-03)",
+   "ar": "16:9",
    "refs": [
     "art/raw/characters/grace-hero-fresh-style-v4.png"
    ],
-   "prompt": "Make a 3 x 3 walking sheet of the girl in the attached picture. Same face, hair, outfit, colors, proportions and painted style in every frame. Same size in every frame, feet on one line.\nRow 1, facing the viewer: standing, left foot stepping forward, right foot stepping forward.\nRow 2, seen from behind: standing, left foot stepping, right foot stepping.\nRow 3, side view facing left: standing, front leg forward, legs passing mid-stride.\nArms swing opposite to the legs. Flat solid magenta background. Nothing else in the picture: no grid lines, borders or text.",
+   "prompt": "Three pictures side by side of the girl in the attached picture, facing the viewer. Richly detailed hand-painted digital illustration, exactly like the attached picture: same face, hair, outfit, colors and proportions.\nLeft: standing still, feet together, arms relaxed at her sides.\nMiddle: walking toward the viewer, her left foot stepping forward, her right arm swinging forward.\nRight: walking toward the viewer, her right foot stepping forward, her left arm swinging forward.\nSame size in all three, feet on one line. Flat solid magenta background. Nothing else: no grid lines, borders or text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-walk-back",
+   "tab": "Characters",
+   "title": "Grace walk sheet 2 of 3: from behind (Tom, 11-03)",
+   "ar": "16:9",
+   "refs": [
+    "art/raw/characters/grace-hero-fresh-style-v4.png"
+   ],
+   "prompt": "Three pictures side by side of the girl in the attached picture, seen from behind, showing the back of her hair and outfit. Richly detailed hand-painted digital illustration, exactly like the attached picture: same hair, outfit, colors and proportions.\nLeft: standing still, feet together, arms relaxed at her sides.\nMiddle: walking away from the viewer, her left foot stepping forward, her right arm swinging forward.\nRight: walking away from the viewer, her right foot stepping forward, her left arm swinging forward.\nSame size in all three, feet on one line. Flat solid magenta background. Nothing else: no grid lines, borders or text.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-walk-side",
+   "tab": "Characters",
+   "title": "Grace walk sheet 3 of 3: side view (Tom, 11-03)",
+   "ar": "16:9",
+   "refs": [
+    "art/raw/characters/grace-hero-fresh-style-v4.png"
+   ],
+   "prompt": "Three pictures side by side of the girl in the attached picture, in side view facing left. Richly detailed hand-painted digital illustration, exactly like the attached picture: same face, hair, outfit, colors and proportions.\nLeft: standing still, feet together, arms relaxed at her sides.\nMiddle: walking left in a long stride, front leg forward with the heel down, back leg behind with the heel lifted, arms swinging opposite to the legs.\nRight: walking left with her legs passing each other, back foot lifted off the ground with the knee bent.\nSame size in all three, feet on one line. Flat solid magenta background. Nothing else: no grid lines, borders or text.",
    "group": "Grace"
   },
   {

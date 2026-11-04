@@ -15,8 +15,12 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-fresh.txt', 'utf8').trim() },
   { id: 'grace-hero-fresh-style', tab: 'Characters', title: 'Grace step 2: change the style of step 1 (approve step 1 first)', ar: '3:4', refs: ['art/raw/characters/grace-hero-fresh-v5.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-fresh-style.txt', 'utf8').trim() },
-  { id: 'grace-walk-sheet', tab: 'Characters', title: 'Grace walk sheet: all 9 walk frames in one picture (Tom, 11-03)', ar: '1:1', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
-    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-sheet.txt', 'utf8').trim() },
+  { id: 'grace-walk-front', tab: 'Characters', title: 'Grace walk sheet 1 of 3: facing you (Tom, 11-03)', ar: '16:9', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-front.txt', 'utf8').trim() },
+  { id: 'grace-walk-back', tab: 'Characters', title: 'Grace walk sheet 2 of 3: from behind (Tom, 11-03)', ar: '16:9', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-back.txt', 'utf8').trim() },
+  { id: 'grace-walk-side', tab: 'Characters', title: 'Grace walk sheet 3 of 3: side view (Tom, 11-03)', ar: '16:9', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-side.txt', 'utf8').trim() },
 ];
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
 for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
