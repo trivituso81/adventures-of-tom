@@ -418,8 +418,15 @@
    "group": "Grace"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/characters/grace-hero-fresh-style-v1.png",
+     "date": "2026-11-04",
+     "from": "v6"
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-04",
@@ -434,7 +441,7 @@
    "refs": [
     "art/raw/characters/grace-hero-fresh-v1.png"
    ],
-   "prompt": "change the style of this image the characters face: richly detailed hand-painted digital illustration. make her keychain a squishy gold dumpling with diamonds",
+   "prompt": "change the style of this image the characters face: richly detailed hand-painted digital illustration. make her keychain a squishy - a gold soup dumpling squishy embedded with diamonds",
    "group": "Grace"
   },
   {
