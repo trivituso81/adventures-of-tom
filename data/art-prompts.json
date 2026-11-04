@@ -69,9 +69,16 @@
    "group": "Grace"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "states 2 and 3 identical. one should have the other foot forward",
+     "from": "v1",
+     "at": 1793761010554
+    }
+   ],
    "id": "grace-walk-front",
    "tab": "Characters",
    "title": "Grace walk sheet 1 of 3: facing you (Tom, 11-03)",
