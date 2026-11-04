@@ -1,3 +1,8 @@
+## 2026-11-03 (140): Art Library: Grace two-step recipe, Tom's prompts (library only, no game change)
+
+- Tom (11-03 16:33 to 16:39) found the method himself: step 1, a FRESH picture from his photo with his own short prompt (style line, pose, four heads tall and head as wide as the shoulders, outfit) gave likeness and proportions; step 2, an edit of that picture with one line, "change the style of this image: richly detailed hand-painted digital illustration.", gave the painted look. One call does one job. Claude's long prompts were confusing the generator (Tom, 16:37).
+- `grace-hero-fresh` (step 1) now carries Tom's prompt word for word, photo only, no style reference. New `grace-hero-fresh-style` (step 2) is chained to the approved step 1 picture with his one line. validate.js minimum prompt length lowered from 300 to 40 characters so one-line edits are allowed. test.py counts and id order updated (Characters 75). No game file changed.
+
 ## 2026-11-03 (140): Phone voice export `ch10.json` merged (chapter 10 dialogue, Deedee battle, chapters 7, 9, 25, 26, 28) (`dclips2`)
 
 - Tom sent the export with no words (499 clips: 497 dialogue, 41 Deedee battle, 1 Boppy, 1 TNB). Treated as "merge it" per docs/VOICE_LIBRARY.md.

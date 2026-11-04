@@ -399,17 +399,29 @@
    "rejects": [],
    "id": "grace-hero-fresh",
    "tab": "Characters",
-   "title": "Grace FRESH big-head stand: your photo plus the school painting for style, nothing else (uses the photo you added)",
+   "title": "Grace step 1: fresh stand from your photo (Tom's prompt, 11-03)",
    "ar": "3:4",
    "own": {
     "slot": "grace-photo",
     "label": "Photo of the real Grace (face clear)",
     "at": 0
    },
+   "refs": [],
+   "prompt": "STYLE: richly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights, saturated jewel-toned colors, crisp clean silhouettes, fine detail, warm golden light from the upper left.\n\nfull body, standing facing straight at the viewer, arms relaxed at her sides, feet a little apart, happy wide toothy smile, on a flat solid magenta background.\n\nPROPORTIONS: a big caricature head. From the top of her hair to her soles she is only about four heads tall. Her head is as wide as her shoulders.\n\nOUTFIT: oversized lavender sweatshirt, baggy heather-gray sweatpants, pink and silver glitter sneakers, a small yellow squishy keychain at her hip.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-hero-fresh-style",
+   "tab": "Characters",
+   "title": "Grace step 2: change the style of step 1 (approve step 1 first)",
+   "ar": "3:4",
    "refs": [
-    "docs/reference/school_style_ref.png"
+    "art/raw/characters/grace-hero-fresh-v1.png"
    ],
-   "prompt": "Paint one girl, Grace, age 9, full body, standing facing straight at the viewer, arms relaxed at her sides, feet a little apart, happy wide toothy smile, on a flat solid magenta background.\n\nSTYLE: the second attached picture is a painting. Paint her exactly the way that painting is painted, as if the same artist painted her: richly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights, saturated jewel-toned colors, crisp clean silhouettes, fine detail, warm golden light from the upper left. Not a photo, not photorealistic, not a 3D render, not pixel art, no thick black outlines.\n\nFACE: her face is the real girl in the first attached picture, a photo: her face shape, eyes, nose, smile, stud earrings, long wavy light brown hair with its parting. Painted, not pasted.\n\nPROPORTIONS: a big caricature head. From the top of her hair to her soles she is only about three heads tall. Her head is as wide as her shoulders. Short neck, small slim body, small hands and feet.\n\nOUTFIT: oversized lavender sweatshirt, baggy heather-gray sweatpants, pink and silver glitter sneakers, a small yellow squishy keychain at her hip.\n\nOne girl only, all of her in frame with margin above and below. No shadow, no text.",
+   "prompt": "change the style of this image: richly detailed hand-painted digital illustration.",
    "group": "Grace"
   },
   {

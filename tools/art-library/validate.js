@@ -21,7 +21,7 @@ function check(entries, known, needGroup) {
     if (!e.title || e.title.length < 5) w('no title');
     if (!ARS.includes(e.ar)) w('bad ar ' + e.ar);
     if (needGroup && (typeof e.group !== 'string' || e.group.length < 3 || e.group.length > 40 || /[—–:|]/.test(e.group))) w('bad or missing group ' + JSON.stringify(e.group));
-    if (!e.prompt || e.prompt.length < 300) w('prompt missing or too short');
+    if (!e.prompt || e.prompt.length < 40) w('prompt missing or too short');
     if (e.prompt && e.prompt.length > 14000) w('prompt very long (' + e.prompt.length + ')');
     if (!Array.isArray(e.refs)) w('refs not a list'); else {
       if (e.refs.length > 5) w('more than 5 refs');
