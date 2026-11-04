@@ -4245,6 +4245,11 @@
      "date": "2026-11-04",
      "note": "no characters should be dsiplayed. only los angeles skyline",
      "from": "v1"
+    },
+    {
+     "date": "2026-11-04",
+     "note": "there are 2 horizon strips stacked on top of each other. there should be only 1 horizon image, as per the spec",
+     "from": "v2"
     }
    ],
    "id": "flight-skyline-la",
