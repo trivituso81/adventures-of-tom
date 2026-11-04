@@ -1,0 +1,86 @@
+{
+ "still": "side.png",
+ "layers": [
+  {
+   "name": "far_thigh",
+   "copy_of": "thigh",
+   "shade": 0.8,
+   "pivot": [
+    530,
+    800
+   ],
+   "z": 0
+  },
+  {
+   "name": "far_shin",
+   "copy_of": "shin",
+   "shade": 0.8,
+   "pivot": [
+    548,
+    1095
+   ],
+   "parent": "far_thigh",
+   "z": 1
+  },
+  {
+   "name": "thigh",
+   "rect": [
+    380,
+    800,
+    700,
+    1115
+   ],
+   "pivot": [
+    530,
+    800
+   ],
+   "z": 2
+  },
+  {
+   "name": "shin",
+   "rect": [
+    340,
+    1075,
+    700,
+    1425
+   ],
+   "pivot": [
+    548,
+    1095
+   ],
+   "parent": "thigh",
+   "z": 3
+  },
+  {
+   "name": "body",
+   "rect": [
+    0,
+    0,
+    1086,
+    835
+   ],
+   "pivot": [
+    530,
+    800
+   ],
+   "z": 4
+  }
+ ],
+ "poses": {
+  "stand": {},
+  "stepA": {
+   "thigh": 17,
+   "shin": 0,
+   "far_thigh": -15,
+   "far_shin": -26,
+   "_dy": 16
+  },
+  "stepB": {
+   "thigh": -15,
+   "shin": -26,
+   "far_thigh": 17,
+   "far_shin": 0,
+   "_dy": 16
+  }
+ }
+}
