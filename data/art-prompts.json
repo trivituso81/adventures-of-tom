@@ -3878,9 +3878,16 @@
    "group": "Title and icon"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "should only include Tom Rose and Grace",
+     "from": "v2",
+     "at": 1793759817829
+    }
+   ],
    "id": "title-app-icon",
    "tab": "Title",
    "title": "App icon (replaces icon-v7.png, shown at 180 x 180)",
@@ -3889,7 +3896,7 @@
     "docs/reference/style_key_v1.png",
     "icon-v7.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe first attached picture is the style key. The second is the current app icon, to keep the idea and improve it.\n\nPaint a square app icon for the family adventure game \"The Adventures of Tom\", 1024 x 1024 px, full bleed to all four edges (the phone rounds the corners). One bold centered subject: a friendly painted portrait of a tall man with a calm dry smile (Tom) with a small girl on his shoulders waving, against a warm golden sunset sky with a few stars. Big simple shapes that still read at 60 px. No text, no letters, no border, no watermark.\n\nSTYLE\nHand-painted storybook style grown up into rich painted detail: dense jewel-toned painted texture, fine brushwork, deep saturated colors, warm golden light from the upper left, soft warm rim light, no thick outlines. NOT pixel art, NOT retro game art.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe first attached picture is the style key. The second is the current app icon, to keep the idea and improve it.\n\nPaint a square app icon for the family adventure game \"The Adventures of Tom\", 1024 x 1024 px, full bleed to all four edges (the phone rounds the corners). Against a warm golden sunset sky with a few stars, one tight centered group of three, painted as a single bold shape that still reads at 60 px:\n\n- Center: a friendly painted portrait of a tall man with a calm dry smile (Tom), shown from the chest up.\n- On his shoulders: a small 6-year-old girl (Rose), giggling and waving one hand high. Her head is the top of the group, near the top of the frame with a little sky above it.\n- At his side, in front of his chest: a 9-year-old girl (Grace), clearly older and taller than Rose, with a bright confident grin, one hand on her hip and the other pointing forward like she's leading the adventure. Her head sits at about Tom's chest height.\n\nThe three faces form a clear triangle and each face is large and easy to see. Keep the girls' heads proportioned as real children of their ages, Rose's head smaller than Grace's. Big simple shapes, strong silhouette, nothing small or busy. No text, no letters, no border, no watermark.\n\nSTYLE\nHand-painted storybook style grown up into rich painted detail: dense jewel-toned painted texture, fine brushwork, deep saturated colors, warm golden light from the upper left, soft warm rim light, no thick outlines. Painted and realistic, not pixel art, not 16-bit.",
    "group": "Title and icon"
   },
   {
