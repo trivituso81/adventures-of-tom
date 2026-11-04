@@ -20,7 +20,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/ellie-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KW = 3                          # painted resolution multiple on the overworld
+KW = int(os.environ.get('OW_K', '3'))                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=int, default=43)       # standing height of the overworld sprite in rows (Tom is 43)
@@ -226,6 +226,7 @@ def fmt_rows(rows, indent='    '):
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
+print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)

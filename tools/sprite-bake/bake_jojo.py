@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/jojo-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KW = 3                          # painted resolution multiple on the overworld
+KW = int(os.environ.get('OW_K', '3'))                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=int, default=42)       # standing height of the overworld sprite in rows (Amy 5'5" 41.7, Tom 5'11" 43; Jojo is 5'6")
@@ -307,6 +307,7 @@ def fmt_rows(rows, indent='    '):
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['down_stand'].height
+print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['down_stand'].height, fo))
 OW_NAMES = [n for n in WALK if not n.startswith('left_')]      # the sheet's right-facing row is the game's 'side'; 'left' is its mirror
 ow_big = {n: scaled_to(poses[n], fo) for n in OW_NAMES}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

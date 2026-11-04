@@ -24,7 +24,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/michael-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KW = 3
+KW = int(os.environ.get('OW_K', '3'))
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=float, default=54)      # Justin 53 to 54 rows (6'4")
@@ -104,7 +104,7 @@ def boxes_for(n):
 
 def solve(n):
     """Growth factors for frame n so each head lands on its target after the whole figure is scaled to ow_h rows."""
-    H = poses[n].height; Hpx = args.ow_h * KW
+    H = poses[n].height; Hpx = args.ow_h * 3   # head targets are set on the k 3 grid; head growth never depends on OW_K
     bx = boxes_for(n)
     (t, c, _, _), tgt, _ = bx['michael']; h = c - t; tgt = tgt * args.adult_share
     r = tgt / Hpx
@@ -114,7 +114,7 @@ def solve(n):
     for who in ('lachlan', 'isla'):
         (t, c, _, _), tg, _ = bx[who]; ks[who] = max(1.0, tg * args.kid_share / ((c - t) * s))
     v = view_of(n); ks = {w: min(KMAX[v], k) for w, k in ks.items()}
-    return ks, s
+    return ks, s * KW / 3.0   # whole-figure scale only: more pixels, same head
 
 def scaled_to(img, f):
     w, h = max(1, round(img.width * f)), max(1, round(img.height * f))

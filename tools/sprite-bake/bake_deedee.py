@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/deedee-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '3'))          # painted resolution multiples: battle, knocked out, overworld
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=99.5)   # idle height in grid rows
@@ -318,6 +318,7 @@ ko_rects = pack(ko_big, os.path.join(ART, 'deedee-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
+print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
