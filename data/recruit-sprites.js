@@ -4,6 +4,14 @@ const OW={tom:prepOW(TOM_OW,TOM_OW.hires?1:1.07),grace:prepOW(GRACE_OW,GRACE_OW.
 OW.amy.k=1;   // painted Amy is baked at Tom's exact height (43 rows) and head ratio, so no extra scaling
 OW.boppy.k=1;   // painted Boppy is baked at Deedee's and Tom's height (41.7 rows) and head ratio
 OW.deedee.k=1;   // painted Deedee is baked at Tom's exact height (41.7 rows) and head ratio, so no extra scaling
+// Real heights (Tom 11-04: "adult and child sizes are not properly applied"). Every sheet is baked to roughly the same height in rows, so each
+// painted set is drawn at its real height next to Tom (5'11 = 71 in): TNB 5'10, Amy and Deedee 5'5, Boppy 5'7, Grace 4'2, Rose 3'4 (Justin 6'4: data/justin-hires-use.js).
+// k = (real inches / 71) x Tom's visible rows / the set's own visible rows, measured on each stand frame.
+if(TOM_OW.hires) OW.tom.k=1;
+if(typeof TNB_OW!=='undefined'&&TNB_OW.hires) OW.tnb.k=.912;
+if(GRACE_OW.hires) OW.grace.k=.771;
+if(ROSE_OW.hires) OW.rose.k=.664;
+OW.amy.k=.915; OW.deedee.k=.915; OW.boppy.k=.943;
 // Recruit battle sprites come from data/recruit-rig.js: left-facing, same outline and shading as Tom, Grace and Rose.
 const RECRUIT_EXPR={amy:'clap',deedee:'spread',boppy:'hip',tnb:'hip'};
 for(const id of ['amy','deedee','boppy','tnb']) {

@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tom-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "8"))   # painted resolution multiples: battle, knocked out, overworld (8 = sharp on phone screens, 11-04)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=100)   # idle height in grid rows
