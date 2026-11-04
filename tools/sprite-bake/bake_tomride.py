@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tomride-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KW = 2, 3          # painted resolution multiples: battle, overworld
+KB, KW = 2, int(os.environ.get("OW_K", "3"))   # painted resolution multiples: battle, overworld (OW_K env raises the overworld one)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=140)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
@@ -211,6 +211,7 @@ print('wrote art/chars/tomride-hero.webp', hero.size)
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / H0w
+print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (H0w, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)

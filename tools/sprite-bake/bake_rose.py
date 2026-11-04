@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/rose-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "3"))   # painted resolution multiples: battle, knocked out, overworld (OW_K env raises the overworld one)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=72)   # idle height in grid rows
@@ -288,6 +288,7 @@ ko_rects = pack(ko_big, os.path.join(ART, 'rose-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
+print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (poses["w_down_stand"].height, fo))
 ow_big = {n[2:]: scaled_to(_kh.grow_head(v, K_OW, S_OW * _STAND_H), fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 rOW = poses['w_down_stand'].height / poses['y_hold'].height          # standing hug on sheet B matches the walk sheet's stand
 for k in ('crouch', 'jump', 'wave', 'hold'):

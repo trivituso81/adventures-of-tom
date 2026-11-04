@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/grace-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "8"))   # painted resolution multiples: battle, knocked out, overworld (8 = sharp on phone screens, 11-04)
+KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "10"))   # painted resolution multiples: battle, knocked out, overworld (8 = sharp on phone screens, 11-04)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=80)   # idle height in grid rows
@@ -311,6 +311,7 @@ for d in ('down', 'up', 'left'):
         print('  %-10s h %4d -> %4d  head share before growth %.3f  head width x%.3f' % (k_[2:], fig_h(fr), fig_h(im2), HEAD_PX / fig_h(im2), f / f_d))
         norm[k_] = _kh.grow_head(im2, K_OW, HEAD_PX)
 fo = args.ow_h * KW / H_CANON                           # body keeps its size; the grown head adds height (same rule as before)
+print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (H_CANON, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in norm.items()}
 ow_big = tighten(place(ow_big, KW, 'head'), KW)
 for n, v in ow_big.items():

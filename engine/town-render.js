@@ -23,7 +23,14 @@ const OW_PLAYABLE_BOOST_INDOOR=1.15*0.75;    // painted interiors (the maps that
 function owMain(a) { return !!(a.isPlayer||a.kid||a.sheet==='michael'); }
 function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap.id]:null; return !!(p&&p.actorScale); }
 function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the size before the 11-01 evening changes
-function owBoost(a) {
+// Tom, Grace and Rose are drawn 60% bigger inside painted houses and rooms (Tom 11-04 13:41), on top of everything below. Their walk sheets are baked
+// at about one source pixel per drawn device pixel (art/chars/*-ow.webp, k 7 to 10), so the larger size stays sharp. Feet stay on the same tile.
+const OW_HOUSE_PARTY=1.6;
+function owHouseParty(set) { return set&&(set===OW.tom||set===OW.grace||set===OW.rose||set===OW.tomRide)&&currentMap&&!currentMap.outside&&owInHouse()?OW_HOUSE_PARTY:1; }
+function owBoost(a,set) {
+  const b=owBoostBase(a); return set?b*owHouseParty(set):b;
+}
+function owBoostBase(a) {
   // 2026-11-01 (Tom): "scale up NPCs so they are the same height as the party". Everyone on the map now gets the party's boost,
   // so a painted NPC and a party member drawn from sheets of the same real height stand at the same height. OW_NPC_INDOOR is retired.
   if(!currentMap) return OW_PLAYABLE_BOOST_OLD;
@@ -36,7 +43,7 @@ function drawSheetActor(a,set) {
   // Rose on his shoulders: one painted figure (OW.tomRide, data/tomride-use.js); falls back to the layered pixel Rose.
   const painted=!!(rider&&OW.tomRide&&(typeof playerMember!=='function'||playerMember().id==='tom'));
   if(painted) set=OW.tomRide;
-  const p=position(a),k=actorK()*(set.k||1)*owBoost(a);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
+  const p=position(a),k=actorK()*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0&&ph<.55?1+(a.stepN%2):0;
@@ -539,7 +546,7 @@ function actorHeadAnchor(a) {
     else if(v) set=villagerSet(v);
   }
   if(!set) return {cx,top:base-32,w:20};   // the layered pixel figure (drawNpc) is 32 px tall
-  const k=ak*(set.k||1)*owBoost(a),frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]),fr=(frames||set.down)[0];
+  const k=ak*(set.k||1)*owBoost(a,set),frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]),fr=(frames||set.down)[0];
   let row=0; while(row<fr.length-1&&typeof fr[row]==='string'&&!/[^. ]/.test(fr[row])) row++;
   return {cx,top:Math.round(base-fr.length*k+row*k),w:fr[0].length*k};
 }
