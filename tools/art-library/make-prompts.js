@@ -57,6 +57,8 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-scene-guide.txt', 'utf8').trim() },
   { id: 'grace-stand-front-scene-guide-cut', tab: 'Characters', title: 'Grace walk 0 TEST 7 step 2: cut her out onto magenta (approve TEST 7 step 1 first)', ar: '4:3', refs: ['art/raw/characters/grace-stand-front-scene-guide-v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
+  { id: 'grace-stand-front-collage', tab: 'Characters', title: 'Grace walk 0 TEST 8: repaint of a paste-up made from her approved painted stand with the head enlarged (one reference, no photo)', ar: '1:1', refs: ['docs/reference/grace_bighead_guide_v1.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-collage.txt', 'utf8').trim() },
   { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];

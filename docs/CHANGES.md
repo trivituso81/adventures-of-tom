@@ -1,3 +1,9 @@
+## 2026-11-03 (138): Art Library: Grace big-head TEST 8, repaint of a paste-up (library only, no game change)
+
+- Tom (11-03 16:05) rejected the "pick (a) or (b)" conclusion and asked for a method that works. Analysis of TESTS 1 to 7: the generator preserves the rendering of whichever picture carries the person. Every big-head picture sent so far was smooth or a photo, so the output was smooth or a photo. No run ever gave it a picture that was brushed AND big-headed.
+- New method (the standard rough-composite then image-to-image cleanup technique): `docs/reference/grace_bighead_guide_v1.png` is a paste-up made in Python from her APPROVED painted stand (`grace-walk-v3-stand-front-straight.png`, brushed, head about .205): head and hair cut out, enlarged 1.6 times about the chin, set back on the untouched body, whole figure fitted onto a 1024 magenta canvas (head measures about .30 of height). It is a generator input only; it never goes in the game and is not a bake (CLAUDE.md "No head resizing" is about live art).
+- New entry `grace-stand-front-collage` (Characters > Grace, "Grace walk 0 TEST 8"): one reference (the paste-up), no photo, no style key; prompt 1,016 characters: keep pose, size, face, clothes and brushwork exactly, fix only the neck seam and the hair ends. test.py counts and id order updated (Characters 73). No game file changed, no tag moved.
+
 ## 2026-11-03 (137): Voice Library: narration boxes get a Narrator voice (`narr1`)
 Tom: lines like "Little silver door" (Ch 9, ch9Luna) showed "no voice yet" and could not be recorded. Those boxes are the story narrating (a place, object or moment as the label), not characters.
 - data/dialog-cast.js: 32 narration labels (The kettle, Old reeds, ... Little silver door, Sunday dinner, Floor 60, Stillness Core) now map to a new `narrator` voice; a new narration label goes in that block. Talking objects that are characters (Whispers, Long coat) are NOT narration and stay uncast.

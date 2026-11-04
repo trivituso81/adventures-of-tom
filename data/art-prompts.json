@@ -383,6 +383,20 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "grace-stand-front-collage",
+   "tab": "Characters",
+   "title": "Grace walk 0 TEST 8: repaint of a paste-up made from her approved painted stand with the head enlarged (one reference, no photo)",
+   "ar": "1:1",
+   "refs": [
+    "docs/reference/grace_bighead_guide_v1.png"
+   ],
+   "prompt": "Repaint the attached picture as one clean, finished painting of the same girl. The picture is a rough paste-up: the head was enlarged and set on the body. Your job is to paint it as if it had always been one picture.\n\nKeep EXACTLY what is there: this pose (standing, facing straight at the viewer, arms at her sides, feet a little apart), this big head on this small body at exactly this size, this face and happy toothy smile, this hair color and length, this purple sweater, grey sweatpants, pink sneakers and yellow keychain, and this painted brushwork: visible soft brush strokes, woven texture on the sweater, warm golden light from the upper left, no thick outlines.\n\nFix only the seams: paint the neck and shoulders so the head sits naturally on the body, and paint the hair ends as clean strands with no pink haze. Full body, all of her in frame with margin above and below. One girl only. Solid flat magenta background. Nothing added: no shadow, no text. NOT pixel art, NOT photorealistic, NOT a 3D render.",
+   "group": "Grace"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-battle",
    "tab": "Characters",
    "title": "Grace: battle sheet 4 x 4 (painted, on magenta)",
