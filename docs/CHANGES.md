@@ -1,3 +1,12 @@
+## 2026-11-03 (145): Art Library Characters wiped to Grace's two steps (`wipe1`)
+
+- Tom: get rid of all the old character prompts. Removed every Art Library Characters entry except Grace's step 1 (`grace-hero-fresh`) and step 2 (`grace-hero-fresh-style`): all Grace tests and old hero, walk and battle entries, plus the hero, walk and battle entries for the other 12 people (`tools/art-library/party-prompts.js` and `party2-prompts.js` now export no entries, but keep `build()` for reuse).
+- Deleted the 22 unused Grace prompt .txt files under `tools/art-library/prompts/`. Kept the two Grace prompts.
+- Characters tab now has 2 entries in one group (Grace), so the page draws no group header for it (single-group tabs are drawn without one).
+- Tests: `tools/art-library/test.py` expectations and the Grace checks updated (Characters 2, Grace group, search for Grace, the untouched-json check now compares against the committed statuses). Blocked-row checks skip when no Characters row is blocked. `validate.js` and `bake_test.py` pass.
+- No game files changed, so no `?v=` or stamp bump.
+- New people are added one at a time with Tom in chat (two steps first). Live Grace art is unchanged.
+
 ## 2026-11-03 (144): Narrator delivery set to a theatrical storyteller (`narr1`)
 
 - Tom: a narrator for all text that no character says, and for Nara's excerpts, cast from an existing older-man voice, sounding like a theatrical storytelling old man who does not talk too slowly.

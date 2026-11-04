@@ -6,9 +6,9 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
-EXPECT = {'Characters': 75, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
+EXPECT = {'Characters': 2, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
 EXPECT_TOTAL = sum(EXPECT.values())
-EXPECT_GROUPS = {'Characters': 13, 'NPCs': 2, 'Areas': 8, 'Rooms': 10, 'Props': 10, 'Enemies': 22, 'Battle': 2, 'Title': 1, 'Portraits': 1, 'Flight': 1}
+EXPECT_GROUPS = {'Characters': 1, 'NPCs': 2, 'Areas': 8, 'Rooms': 10, 'Props': 10, 'Enemies': 22, 'Battle': 2, 'Title': 1, 'Portraits': 1, 'Flight': 1}
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
@@ -21,7 +21,7 @@ def data_checks():
     gs = {}
     for e in d: gs.setdefault(e['tab'], set()).add(e.get('group'))
     ok({k: len(v) for k, v in gs.items()} == EXPECT_GROUPS and all(isinstance(e.get('group'), str) and 3 <= len(e['group']) <= 40 for e in d), 'every entry has a group, groups per tab %s' % {k: len(v) for k, v in gs.items()})
-    ok(sum(1 for e in d if e['tab'] == 'Characters' and e['group'] == 'Tom') == 4 and sum(1 for e in d if e['group'] == 'Test card') == 1, 'Tom has his four steps in one group, the test card sits alone')
+    ok(sum(1 for e in d if e['tab'] == 'Characters' and e['group'] == 'Grace') == 2 and sum(1 for e in d if e['group'] == 'Test card') == 1, 'Grace has her two steps in one group, the test card sits alone')
     ids = [e['id'] for e in d]
     ok(len(ids) == len(set(ids)), 'ids are unique')
     bad = []
@@ -41,31 +41,38 @@ def data_checks():
     ok(not bad, 'every entry has a prompt, ar, <=5 refs that exist or chain to an entry, no banned words or dashes: %s' % bad[:5])
 
 async def ux_checks(pg, name, d):
-    await pg.wait_for_selector('.gh')
-    ok(await pg.locator('.card[data-id]').count() == 0 and await pg.locator('.item').count() == 0, name + ': nothing is open on first view (collapsed groups, no cards)')
-    ok(await pg.locator('.gh').count() == 13, name + ': Characters shows 13 person groups')
+    await pg.wait_for_selector('#tabs')
+    ok(await pg.locator('.card[data-id]').count() == 0 and await pg.locator('.gh').count() == 0, name + ': no header is drawn for the one-group Characters tab and no card is open on first view')
     chars = [e for e in d if e['tab'] == 'Characters']
-    blocked = [e for e in chars if any(r.startswith('art/raw/') for r in e['refs'])]
+    stat = {x['id']: x['status'] for x in d}
+    def target(r): return r.split('/')[-1].rsplit('-v', 1)[0]
+    blocked = [e for e in chars if e['status'] != 'approved' and any(r.startswith('art/raw/') and stat.get(target(r)) != 'approved' for r in e['refs'])]
+    ready = [e for e in chars if e['status'] not in ('approved', 'rejected') and e not in blocked]
+    approved = [e for e in chars if e['status'] == 'approved']
+    rejected = [e for e in chars if e['status'] == 'rejected']
     ft = (await pg.inner_text('#filters')).replace('\n', ' ')
-    ok(('Blocked %d' % len(blocked)) in ft and ('Ready %d' % (len(chars) - len(blocked))) in ft and ('To do %d' % (len(chars) - len(blocked))) in ft, name + ': filter counts match the data (%s)' % ft)
-    ok(('Characters 0/%d' % len(chars)) in (await pg.inner_text('#tabs')).replace('\n', ' '), name + ': tab shows approved/total')
-    await pg.click('[data-grp="Characters|Tom"]')
-    ok(await pg.locator('.item').count() == 1, name + ': default view shows only the step Tom can generate now')
+    ok(('Blocked %d' % len(blocked)) in ft and ('Ready %d' % len(ready)) in ft and ('To do %d' % len(ready)) in ft and ('Approved %d' % len(approved)) in ft and ('Rejected %d' % len(rejected)) in ft, name + ': filter counts match the data (%s)' % ft)
+    ok(('Characters %d/%d' % (len(approved), len(chars))) in (await pg.inner_text('#tabs')).replace('\n', ' '), name + ': tab shows approved/total')
+    ok(await pg.locator('.item').count() == len(ready), name + ': default view shows only the steps that can be generated now')
     await pg.click('[data-filter="all"]')
-    ok(await pg.locator('.item').count() == 4 and await pg.locator('.item.s-blocked').count() == 3, name + ': All shows four steps, three blocked')
-    ok('Approve' in await pg.locator('.item.s-blocked').first.inner_text(), name + ': a blocked row says what to approve first')
-    await pg.locator('.item.s-blocked .ih').first.click()
-    ok(await pg.locator('.item.s-blocked [data-gen]').first.is_disabled() and 'Blocked' in await pg.locator('.blk').first.inner_text(), name + ': a blocked row opens with GENERATE disabled and the reason')
+    ok(await pg.locator('.item').count() == len(chars) and await pg.locator('.item.s-blocked').count() == len(blocked), name + ': All shows every Characters step (%d), %d blocked' % (len(chars), len(blocked)))
+    if blocked:
+        ok('Approve' in await pg.locator('.item.s-blocked').first.inner_text(), name + ': a blocked row says what to approve first')
+        await pg.locator('.item.s-blocked .ih').first.click()
+        ok(await pg.locator('.item.s-blocked [data-gen]').first.is_disabled() and 'Blocked' in await pg.locator('.blk').first.inner_text(), name + ': a blocked row opens with GENERATE disabled and the reason')
+    else:
+        print('SKIP ' + name + ': no blocked Characters row to open (no step is waiting on another step)')
     await pg.screenshot(path=os.path.join(SHOTS, 'art-ux-blocked-%s.png' % name), full_page=False)
-    await pg.locator('.item.s-blocked .ih').first.click()
-    await pg.click('[data-filter="todo"]'); await pg.click('[data-grp="Characters|Tom"]')
+    if blocked:
+        await pg.locator('.item.s-blocked .ih').first.click()
+    await pg.click('[data-filter="todo"]')
     await pg.screenshot(path=os.path.join(SHOTS, 'art-ux-characters-%s.png' % name), full_page=False)
-    await pg.fill('#q', 'ellie')
-    want = sum(1 for e in chars if 'ellie' in (e['title'] + ' ' + e['id'] + ' ' + e['group']).lower())
+    await pg.fill('#q', 'grace')
+    want = sum(1 for e in chars if 'grace' in (e['title'] + ' ' + e['id'] + ' ' + e['group']).lower())
     tt = (await pg.inner_text('#tabs')).replace('\n', ' ')
-    ok(('Characters %d found' % want) in tt and want == 4 and await pg.locator('.item').count() == want, name + ': search finds Aunt Ellie across tabs (%s)' % tt)
+    ok(('Characters %d found' % want) in tt and want == 2 and await pg.locator('.item').count() == want, name + ': search finds Grace across tabs (%s)' % tt)
     await pg.fill('#q', '')
-    await pg.wait_for_selector('.gh')
+    await pg.wait_for_selector('#tabs')
 async def main():
     data_checks()
     DATA = json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json')))['entries']
@@ -133,7 +140,7 @@ async def main():
                     ok('art/raw/enemies/test-mudling-v1.png' in files and 'art/raw/enemies/test-mudling-v2.png' in files, 'both pictures were committed under art/raw/enemies/')
                     ok(en['status'] == 'approved' and len(en['versions']) == 2 and en['versions'][0]['file'].endswith('-v1.png'), 'json: status approved, two versions listed')
                     ok(len(en['rejects']) == 1 and 'pure magenta' in en['rejects'][0]['note'], 'json: the reject note was saved')
-                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:28] == ['grace-hero', 'grace-hero-scene', 'grace-hero-cut', 'grace-walk', 'grace-walk-side', 'grace-walk-front', 'grace-walk-back', 'grace-stand-front-straight', 'grace-step-front', 'grace-step-front-b', 'grace-step-back', 'grace-step-side-a', 'grace-step-side-b', 'grace-stand-front-bighead', 'grace-stand-front-bighead-paint', 'grace-stand-front-bighead-fresh', 'grace-stand-front-bighead-style', 'grace-stand-front-scene', 'grace-stand-front-scene-cut', 'grace-stand-front-scene-big', 'grace-stand-front-scene-big-cut', 'grace-stand-front-scene-guide', 'grace-stand-front-scene-guide-cut', 'grace-stand-front-collage', 'grace-hero-fresh', 'grace-hero-fresh-style', 'grace-battle'] and [e['id'] for e in doc['entries']][28:32] == ['tom-hero-scene', 'tom-hero-cut', 'tom-walk', 'tom-battle'] and len(doc['entries']) == EXPECT_TOTAL and all(e['status'] == 'draft' and not e['versions'] for e in doc['entries'][1:]), 'json otherwise untouched (other entries still draft)')
+                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:3] == ['grace-hero-fresh', 'grace-hero-fresh-style'] and len(doc['entries']) == EXPECT_TOTAL and all((e['status'], len(e['versions'])) == (lambda x: (x['status'], len(x['versions'])))(next(x for x in json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json')))['entries'] if x['id'] == e['id'])) for e in doc['entries'][1:]), 'json otherwise untouched (every other entry keeps its committed status and versions)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
                     ok('aot-art-key' in ls, 'key lives in localStorage only')

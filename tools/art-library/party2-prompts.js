@@ -180,4 +180,4 @@ const CAST2 = [
   { id: 'nara', name: 'NARA', label: 'Nara', he: 'she', him: 'her', his: 'her', who: 'a dog', kind: 'dog', ft: '1 foot 10 inches at the shoulder', hero: S + 'nara-hero.png', title: ' (a dog, about 1 ft 10 at the shoulder)',
     mood: 'warm, loyal and gently goofy', sig: 'x', fns: { scene: dogScene, cut: dogCut, walk: dogWalk, battle: dogBattle } },
 ];
-module.exports = { CAST2, entries: build(CAST2) };
+module.exports = { CAST2, entries: [] };

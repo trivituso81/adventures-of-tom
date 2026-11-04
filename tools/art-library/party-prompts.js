@@ -215,5 +215,6 @@ function build(cast) {
   }
   return out;
 }
-const entries = build(CAST);
+// Wiped 2026-11-03 (Tom): no character entries are listed. Each character is added with Tom in chat, two steps first (see claude/next.md).
+const entries = [];
 module.exports = { CAST, entries, build, scene, cut, walk, battle, ART, STYLE_RULE, ATT, LOOK, CLOSE, WHO, REF_YARD, REF_KEY, REF_CHART, RAW };
