@@ -4350,6 +4350,11 @@
      "date": "2026-11-04",
      "note": "Wrong camera. This is a perspective view down the runway with sky, skyline and palms in it. I need a flat side-on ground strip for a side-scrolling plane: straight horizontal view, ground only (no sky, no skyline, no palms), the runway as a flat band across the strip with grass and apron below it, and the left and right edges matching so it loops.",
      "from": "v1"
+    },
+    {
+     "date": "2026-11-04",
+     "note": "Wrong camera. This is a perspective view down the runway with sky, skyline and palms in it. I need a flat side-on ground strip for a side-scrolling plane: straight horizontal view, ground only (no sky, no skyline, no palms), the runway as a flat band across the strip with grass and apron below it, and the left and right edges matching so it loops.",
+     "from": "v2"
     }
    ],
    "id": "flight-ground-la",
