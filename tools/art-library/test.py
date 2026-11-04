@@ -146,7 +146,7 @@ async def main():
                     ok('aot-art-key' in ls, 'key lives in localStorage only')
                     # --- UX: the page remembers where you were, and folds Setup once both keys are saved
                     await pg.evaluate('scrollTo(0, 250)'); await pg.wait_for_timeout(700)
-                    await pg.reload(); await pg.wait_for_selector('.card[data-id="test-mudling"] [data-gen]'); await pg.wait_for_timeout(300)
+                    await pg.reload(); await pg.wait_for_selector('[data-filter="all"]'); await pg.wait_for_timeout(600)   # the page now reads the prompts live from (mock) GitHub, so after the approve the test card is no longer under "To do" (2026-11-04)
                     ok(await pg.evaluate('scrollY') > 150, 'reload: the scroll position of the tab is restored')
                     ok('Enemies' in await pg.inner_text('.tab.on'), 'reload: the last tab (Enemies) is still selected')
                     ok(await pg.locator('.card[data-id="test-mudling"]').count() == 1, 'reload: the picture that was open is still open')
