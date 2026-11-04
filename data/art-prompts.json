@@ -113,6 +113,12 @@
      "note": "The other leg should be stepping forward",
      "from": "v11",
      "at": 1793775139118
+    },
+    {
+     "date": "2026-11-04",
+     "note": "Everything about the pose is correct except the other leg should step forward",
+     "from": "v12",
+     "at": 1793775215399
     }
    ],
    "id": "grace-walk-front",
