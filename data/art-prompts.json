@@ -4238,8 +4238,15 @@
    "group": "Flight art"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/flight/flight-skyline-la-v1.png",
+     "date": "2026-11-04",
+     "from": "v5"
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-04",
