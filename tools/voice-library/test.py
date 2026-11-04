@@ -114,7 +114,7 @@ async def main():
         # Show: no clip yet.
         await page.click('#clear'); await page.click('.chip[data-g="show"][data-v="none"]')
         nn = await J("__VL.IDX.items.filter(i=>i.f<0&&!__VL.LOCAL.has(['dialog',i.v,'',i.x].join('|'))&&!(i.t==='b'&&i.k.some(k=>__VL.LOCAL.has(['battle',i.v,k,i.x].join('|'))))).length")
-        vn = await J("__VL.visible().length"); ok(vn == nn and vn > 1000, f'No clip yet: {vn} = {nn}')
+        vn = await J("__VL.visible().length"); ok(vn == nn, f'No clip yet: {vn} = {nn}')
         ok(await page.locator('.row .tag.none').count() > 0, 'no-clip rows tagged')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-noclip.png'))
         await page.locator('.row [data-act="open"]').first.click(); await page.wait_for_selector('.row.open')

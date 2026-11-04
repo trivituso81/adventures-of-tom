@@ -1,3 +1,11 @@
+## 2026-11-03 (147): Phone voice export `local-clips-export` merged: every line that had no clip (`clips8`)
+
+- Tom: "all missing voiceclips". Export had 1,976 clips (1,931 dialogue, 45 battle). The index had 1,317 lines with no clip; the export covered all of them. Merged only those (newest take per line). The 640 export clips for lines that already have a clip were left alone so no baked take is overwritten.
+- Dropped 19 after a speech-to-text check (sherpa-onnx whisper base.en) because the audio loops or cuts off: Tom "Excuse me. Who are you?", "You're giving up your retirement.", "You're the Archivist.", "Be good, you two. Back soon.", "It was a tie.", "Please stop.", "You would have been home for the birthday.", "No.", "Thank you. All of you. I will put the rock on the mantel." (cut off); Boppy "Deedee." and "Does it have a recliner?"; Grace "You're being a little dramatic."; Penny "It was a very good drawer."; Big One "You are breathing audibly."; Round lines: Toad "Round 3. Fresh cones." and "Yaaawn. Round two.", Grump "Round 3. Still denying.", Skeeter "Round 3. Still pausing.", Log "BRRRRR. Back on the clock. Round two." These need a re-take in the Library. 16 more export clips had no live line and were skipped.
+- Added: 1,296 dialogue clips (all land in `data/voice/dialog-ch28.js`), Grace 1 battle, Deedee 1 battle ("My favorite son!" greeting). Tags: dialog-ch28.js, grace.js and deedee.js to clips8; dialog-cast.js to clips8 in index.html.
+- Left alone on purpose: recognizer misreads of names (Tata, Deedee, Boppy, Amy, Rose) and "seventeen".
+- `tools/voice-library/test.py`: "No clip yet" check no longer demands more than 1,000 lines.
+- Still no clip: 19 lines (the dropped takes above). Tests: unused_voice 0 on all five, voice index rebuilt, voice-library test ALL PASS, tag_check ok, smoke FAILS: []. Not run on the phone.
 ## 2026-11-03 (145): Art Library Characters wiped to Grace's two steps (`wipe1`)
 - Tom approved Grace step 1 as v5 (`art/raw/characters/grace-hero-fresh-v5.png`). Step 2 (`grace-hero-fresh-style`) was built from v1, so it is reopened (no status, no approved versions; its v1 result is not kept as approved) and its reference is now v5. Tom regenerates and approves step 2 in the Library. No game file changed.
 
