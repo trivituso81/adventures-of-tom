@@ -356,7 +356,11 @@ function ghFail(r,what){
 async function commitJson(mutate,message){
   for(let i=0;i<3;i++){
     const g=await gh('GET',JSON_PATH); if(!g.ok) throw ghFail(g,'reading the prompts file');
-    const doc=JSON.parse(b64ToText(g.json.content)); if(mutate(doc)===false) throw new Error('That picture is not in the game\'s prompts file any more. Reload the page.');
+    // GitHub's contents API sends an empty body for files over 1 MB; the prompts file has grown past that, so read it by blob id instead.
+    let raw=g.json.content||'';
+    if(!raw){ const br=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/git/blobs/'+g.json.sha,{headers:{Authorization:'Bearer '+LS.get('aot-gh-token'),Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}); if(!br.ok) throw ghFail({status:br.status,text:''},'reading the prompts file'); raw=(await br.json()).content||''; }
+    if(!raw) throw new Error('GitHub sent an empty prompts file. Try again in a minute.');
+    const doc=JSON.parse(b64ToText(raw)); if(mutate(doc)===false) throw new Error('That picture is not in the game\'s prompts file any more. Reload the page.');
     const w=await gh('PUT',JSON_PATH,{message,content:textToB64(JSON.stringify(doc,null,1)+'\n'),branch:GH_BRANCH,sha:g.json.sha});
     if(w.ok) return; if(w.status!==409&&w.status!==422) throw ghFail(w,'saving the prompts file');
   }

@@ -1,3 +1,10 @@
+## 2026-11-03 (143): Art Library approve fixed for large prompts file (`artfix1`)
+
+- Tom: tapping TAP AGAIN to approve an image failed with "JSON.parse: unexpected end of data".
+- Cause: `data/art-prompts.json` is 1.6 MB. GitHub's contents API sends an empty body for files over 1 MB, so the approve step parsed an empty string.
+- Fix in `art.html` `commitJson`: when the contents API gives no content, read the file by its blob id (`git/blobs`), which allows up to 100 MB. Stops with a plain message if GitHub still sends nothing.
+- No game file changed; no tag bump needed (`art.html` carries no `?v=`).
+
 ## 2026-11-03 (142): Phone voice export `ch11.json` merged (chapter 11 dialogue, Deedee battle, chapters 2, 9, 10, 25, 26) (`clips7`)
 
 - Tom sent the export with the words "chapter 11 voice clips" (660 clips: 622 dialogue, 36 Deedee battle, 1 Boppy, 1 TNB). Treated as "merge it" per docs/VOICE_LIBRARY.md.
