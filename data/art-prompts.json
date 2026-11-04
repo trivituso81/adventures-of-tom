@@ -4250,6 +4250,11 @@
      "date": "2026-11-04",
      "note": "there are 2 horizon strips stacked on top of each other. there should be only 1 horizon image, as per the spec",
      "from": "v2"
+    },
+    {
+     "date": "2026-11-04",
+     "note": "not 2172 x 391 px. incorrectly includes people",
+     "from": "v3"
     }
    ],
    "id": "flight-skyline-la",
