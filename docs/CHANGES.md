@@ -1,3 +1,10 @@
+## 2026-11-03 (153): Welcome paintings are background only; the game stands the family on top (`wel1`)
+- Tom (18:36): "your welcome painting has got it wrong. i think we should superimpose the standing characters on top of the background image instead of imbedding them into the painting". Matches his v3 reject note on Title > Welcome painting, portrait ("no people").
+- Fact: the live welcome screen already works this way (art/welcome.webp has no people; engine/splash.js `SPLASH_SPOTS` draws the cast over it in portrait). Only the two Library prompts were wrong: they asked the generator to paint the family walking.
+- tools/art-library/title-prompts.js and data/art-prompts.json (both edited, json by hand per the next.md warning): Title > Welcome painting, portrait and landscape now say NO PEOPLE (no animals, silhouettes, statues), copy only the style key's painting style, ignore the current painting's sign and blurred box, and keep an empty flat plaza "stage" where the game draws the family (portrait feet y 62% to 76%; landscape y 58% to 72%). Portrait row reset from rejected to draft so it shows as Ready.
+- At install (when Tom approves): move `SPLASH_SPOTS` feet to the new plaza, add the cast to landscape (today `splashCastDraw` draws nobody in landscape), and put the title logo over the top band (the new paintings have no painted logo; Title > Title logo entry, or keep the old painted sign until then).
+- Nothing in the game changed.
+
 ## 2026-11-03 (152): Art Library Flight tab gets PREVIEW FLIGHT (`fprev1`)
 - Tom (18:27): "i need a way in the art library to preview the flight animation".
 - New page flight-preview.html, opened full screen from a PREVIEW FLIGHT button at the top of the Art Library's Flight tab (art.html; its back link closes it). It runs the game's own painted flight code (engine/flight-art.js) on a phone-sized stage: cabin, takeoff, map, landing, with the game's fades and timings, plus a stand-in box for Tom's line on the map.
