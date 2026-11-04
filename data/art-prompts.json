@@ -3813,9 +3813,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "there are 2 images stacked on top of eachother. this should be one image",
+     "from": "v2",
+     "at": 1793759526693
+    }
+   ],
    "id": "title-welcome-portrait",
    "tab": "Title",
    "title": "Welcome painting, portrait (replaces art/welcome.webp, 941 x 1671)",
