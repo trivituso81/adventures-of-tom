@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bake Tom (v4 walk, 2026-11-04: overworld from the new painted sheet tom-walk-sheet-v1.png, heads untouched; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom (v4 walk, 2026-11-04: overworld from the new painted sheet tom-walk-sheet-v2.png, heads untouched; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
 Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) and tom-walk-v3.png (3 x 3), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
@@ -62,7 +62,10 @@ for i, names in enumerate(XSHEETS, 1):
 # cell 9 as painted (a second contact stride, close to cell 8).
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'step2')]
 from defringe import defringe
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-sheet-v1.png'), [walk_names[0:3], walk_names[3:6], walk_names[6:9]], robust=True).items():
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-sheet-v2.png'), [walk_names[0:3], walk_names[3:6], walk_names[6:9]], robust=True).items():
+    poses['w_' + nm] = defringe(im)
+# Side row (13:08): Tom's separate 3 x 1 side strip tom-walk-side-v2.png (faces LEFT, stand, stride, passing pose) replaces the sheet's row 3.
+for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-side-v2.png'), [['left_stand', 'left_step1', 'left_step2']], robust=True).items():
     poses['w_' + nm] = defringe(im)
 for d in ('down', 'up'):
     poses[f'w_{d}_step2'] = poses[f'w_{d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
