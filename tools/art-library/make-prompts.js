@@ -59,6 +59,8 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-cut.txt', 'utf8').trim() },
   { id: 'grace-stand-front-collage', tab: 'Characters', title: 'Grace walk 0 TEST 8: repaint of a paste-up made from her approved painted stand with the head enlarged (one reference, no photo)', ar: '1:1', refs: ['docs/reference/grace_bighead_guide_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-stand-front-collage.txt', 'utf8').trim() },
+  { id: 'grace-hero-fresh', tab: 'Characters', title: 'Grace FRESH big-head stand: your photo plus the school painting for style, nothing else (uses the photo you added)', ar: '3:4', own: { slot: 'grace-photo', label: 'Photo of the real Grace (face clear)', at: 0 }, refs: ['docs/reference/school_style_ref.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-hero-fresh.txt', 'utf8').trim() },
   { id: 'grace-battle', tab: 'Characters', title: 'Grace: battle sheet 4 x 4 (painted, on magenta)', ar: '1:1', refs: ['tools/sprite-bake/src/grace-hero-cutai-v1.png', 'docs/reference/style_key_v1.png', 'docs/reference/height_chart_v1.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-battle.txt', 'utf8').trim() },
 ];

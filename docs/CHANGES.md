@@ -1,3 +1,8 @@
+## 2026-11-03 (139): Art Library: Grace FRESH big-head stand from photo plus school painting (library only, no game change)
+
+- Tom (11-03 16:16, 16:19, 16:22): no composites ever (TEST 8 is dead; `docs/reference/grace_bighead_guide_v1.png` is history); none of Grace's existing pictures has the paint look he wants, only the school yard painting does; editing a painted picture to change proportions, likeness or style is the wrong tool and is not tried again. Canon: claude/canon-addendum.md 16:16 and 16:19.
+- New entry `grace-hero-fresh` (Characters > Grace, "Grace FRESH big-head stand"): a fresh picture from two inputs only, his photo of Grace (face) and `docs/reference/school_style_ref.png` (style), no painted Grace picture in the call. Prompt `tools/art-library/prompts/grace-hero-fresh.txt` (1,244 chars): the school prompt's own style wording, face from the photo, head about three heads tall and as wide as the shoulders, outfit in words, flat magenta background so no cut step. 3:4. test.py counts and id order updated (Characters 74).
+
 ## 2026-11-03 (138): Art Library: Grace big-head TEST 8, repaint of a paste-up (library only, no game change)
 
 - Tom (11-03 16:05) rejected the "pick (a) or (b)" conclusion and asked for a method that works. Analysis of TESTS 1 to 7: the generator preserves the rendering of whichever picture carries the person. Every big-head picture sent so far was smooth or a photo, so the output was smooth or a photo. No run ever gave it a picture that was brushed AND big-headed.
