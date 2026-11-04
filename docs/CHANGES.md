@@ -1,4 +1,4 @@
-## 2026-11-03 (152): Grace's walk split into 3 sheets of 3 frames (`gsheet2`)
+## 2026-11-03 (154): Grace's walk split into 3 sheets of 3 frames (`gsheet2`)
 - Tom (18:40): the single 3 x 3 sheet lost the painted style and look, and the poses were wrong; "lets separate into 3 sheets". Prompts written with him in chat and approved (18:41).
 - `grace-walk-sheet` replaced by `grace-walk-front`, `grace-walk-back`, `grace-walk-side` (Characters > Grace, 16:9, one reference: step 2 `grace-hero-fresh-style-v4.png`). Each opens with Tom's style line ("Richly detailed hand-painted digital illustration, exactly like the attached picture") and spells out 3 poses (stand, step, step; side: stand, stride, passing). Files in tools/art-library/prompts/.
 - make-prompts.js and data/art-prompts.json both updated by hand (not regenerated).
