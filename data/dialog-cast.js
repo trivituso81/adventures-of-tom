@@ -79,7 +79,46 @@ const DIALOG_CAST={
     'The Unclaimed':'mudling',
     'The Armrest Hog':'grump',
     'Carry-On':'toad',
-    'Jet Lag':'skeeter'
+    'Jet Lag':'skeeter',
+    // Narration boxes (Tom, 2026-11-03): a scene box labeled with a place, an object or a moment ('Little silver door',
+    // 'Sunday dinner') is the story narrating, not a character. All of them are read by the Narrator voice. A new narration
+    // label goes here; a talking object that is a real character (a monster, 'Whispers', 'Long coat') gets a character voice.
+    'The kettle':'narrator',
+    'Old reeds':'narrator',
+    'The sundial':'narrator',
+    'The spillway':'narrator',
+    'Deep Pool':'narrator',
+    'Soundstage 7':'narrator',
+    'Stage set':'narrator',
+    'School bell':'narrator',
+    'Podium':'narrator',
+    'Conference night':'narrator',
+    'Little door':'narrator',
+    'Corkboard':'narrator',
+    'Inside the Old Oak':'narrator',
+    'The hoard':'narrator',
+    'Reading Room doors':'narrator',
+    'The Reading Room':'narrator',
+    'Turntable motor':'narrator',
+    'Turntable':'narrator',
+    'The Boiler Room':'narrator',
+    'Little silver door':'narrator',
+    'Ballroom':'narrator',
+    'Dome doors':'narrator',
+    'The Dome':'narrator',
+    'Photo booth':'narrator',
+    'Gate clock':'narrator',
+    'Gate Zero':'narrator',
+    'Sunday dinner':'narrator',
+    'Lost and Found':'narrator',
+    'Floor 60':'narrator',
+    'Dead-Letter Office':'narrator',
+    'Floor 59':'narrator',
+    'Stillness Core':'narrator',
+    // Follower and recruit barks pass the character id, not the name.
+    justin:'justin',olivia:'olivia',
+    // Boppy under Vance's gold plate (chapters 13 and 14) is still Boppy.
+    'Warden Boppy':'boppy'
   },
   // Effects per speaker, applied when clips are merged (claude/voice-merge-dialog.js FX). They win over the voice's own fx, so a
   // shared voice sounds like a different person or creature.
@@ -255,7 +294,14 @@ const DIALOG_CAST={
       sample:'Nine scoops. Nine candles. Nine years. All of it melts. Not in here. Nothing melts in here. Nothing changes. Nobody came to my birthday. So nobody gets one. Is there cake? I will bring the ice. I am mostly ice.'},
     bigone:{name:'The Big One',type:'Monster boss: giant pond fish',stability:0,fx:'bigone',
       desc:'An enormous ancient cartoon pond fish, huge slow booming bass voice with gurgling bubbles, pompous and boastful but childlike and easily delighted underneath. Animated character voice.',
-      sample:'Glub. So you are the ones Boppy keeps talking about. I have been in this pond since nineteen ninety four. I have never been caught. I will never be caught. Is that a pie? For me? It fits. I am a king now. Glub.'}
+      sample:'Glub. So you are the ones Boppy keeps talking about. I have been in this pond since nineteen ninety four. I have never been caught. I will never be caught. Is that a pie? For me? It fits. I am a king now. Glub.'},
+    // ---- Narration (Tom, 2026-11-03) ----
+    // No new ElevenLabs voice (the account is at its 30-voice limit): tools/voice-library/make-index.js gives the Narrator
+    // Mr. Washington's voice id, the porch storyteller. To give the Narrator its own voice later, design it from desc and
+    // sample, delete an unused voice first, and set the new id in that override.
+    narrator:{name:'Narrator',type:'Story: reads the narration boxes (places, objects, moments)',stability:.5,
+      desc:'A warm, unhurried storybook narrator, an older man with a deep, kind voice, reading a bedtime story aloud. Gentle, a little wry, never theatrical. Clean studio recording.',
+      sample:'Tom holds up the invitation. The brass moon on the little door clicks, and the door swings open by itself. Inside, it is very quiet, and it smells like old paper and somebody else\'s birthday cake.'}
   }
 };
 const DIALOG_CLIPS={clips:{},voices:{}};

@@ -158,7 +158,7 @@ let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}
 const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null?HIST[lk(it)]:(isDog(it)?it.p:it.s));
 const hasWritten=it=>HIST[lk(it)]!=null||!it.auto;
 const voiceOf=it=>IDX.voices[(it.t==='b'?'battle|':'dialog|')+it.v];
-const whoName=it=>it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;
+const whoName=it=>it.v==='narrator'&&it.sp?'Narrator ('+it.sp+')':it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;   // narration boxes: the Narrator voice reads them (data/dialog-cast.js)
 function finalText(it){
   const v=voiceOf(it)||{}, d=(v.direction||'').trim().replace(/^\[|\]$/g,'');
   const sc=scriptOf(it).trim().replace(/’/g,"'"), m=sc.match(/^\[([^\]]*)\]/), have=m?m[1]:'';

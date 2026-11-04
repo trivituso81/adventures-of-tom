@@ -1,3 +1,13 @@
+## 2026-11-03 (137): Voice Library: narration boxes get a Narrator voice (`narr1`)
+Tom: lines like "Little silver door" (Ch 9, ch9Luna) showed "no voice yet" and could not be recorded. Those boxes are the story narrating (a place, object or moment as the label), not characters.
+- data/dialog-cast.js: 32 narration labels (The kettle, Old reeds, ... Little silver door, Sunday dinner, Floor 60, Stillness Core) now map to a new `narrator` voice; a new narration label goes in that block. Talking objects that are characters (Whispers, Long coat) are NOT narration and stay uncast.
+- Narrator uses Mr. Washington's ElevenLabs voice id (override in tools/voice-library/make-index.js); no new voice slot (account at 30). The `narrator` entry carries a desc and sample for a real voice later.
+- Fixed: follower and recruit barks pass the id (`justin`, `olivia`), so 26 of their lines showed as uncast and would never play in game even with a clip. Added lowercase keys. `Warden Boppy` maps to Boppy.
+- make-index.js keeps a script written under the old uncast key (`?<speaker>` or empty voice), so the Little silver door direction survived.
+- voices.html: narration rows read "Narrator (<label>)".
+- Uncast lines: 444 to 326. Left: Part 2 villains and monsters (Vance, Julian Vance, Marlowe, HUSH-9, Archivist, Curator, Oblivion Censor, Forever Engine, chapter 11 to 20 monsters), plus Whispers and Long coat.
+- Tests: voice-library test.py ALL PASS, unused_voice 0 on all five, tag_check ok, smoke.
+
 ## 2026-11-03 (136): Phone voice export `local-clips-export_1_.json` merged (Deedee, chapters 7, 9, 25, 26) (`dclips1`)
 
 - Tom sent the export with no words (403 clips: 360 dialogue, 43 battle). Treated as "merge it" per docs/VOICE_LIBRARY.md. Filtered first: 3 repeats collapsed, 16 dropped because the game has no live line with those words (the `Round {n}.` monster lines, and Michael, TNB and Tom dialogue takes whose words differ from the line), 3 dropped because the spoken words differ from the line (Deedee `nurse`, Deedee `walk`, TNB "Look. The sky is blue again."). 381 kept.

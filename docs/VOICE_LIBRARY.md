@@ -24,6 +24,9 @@ Title screen > ADMIN > VOICE LIBRARY opens `voices.html` inside the app.
 | Takes | IndexedDB `aot-voice-library` | Every take (line key `b|voice|text` or `d|voice|text`). |
 | Script edits | localStorage `aot-vl-scripts` | Per line. Filters: `aot-vl-filters`. Key: `aot-el-key`. |
 
+## Narration boxes (2026-11-03, `narr1`)
+A scene box labeled with a place, object or moment ("Little silver door", "Sunday dinner") is narration. Map the label to `narrator` in `DIALOG_CAST.speakers`. The Narrator uses Mr. Washington's voice id (override in make-index.js) until it gets its own voice. Characters (monsters, Whispers, Long coat) get a character voice instead.
+
 ## Rebuild the index (Claude)
 
 Whenever clips are merged, lines change or scripts are added: `python3 tools/voice-library/battle-scripts.py && python3 tools/voice-library/harvest.py && node tools/voice-library/make-index.js`, bump nothing else (the page fetches the index with no cache), commit.
