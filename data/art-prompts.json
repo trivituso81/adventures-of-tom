@@ -4105,9 +4105,15 @@
    "group": "Flight art"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "looks like 2 of the same image side by side",
+     "from": "v1"
+    }
+   ],
    "id": "flight-skyline-le",
    "tab": "Flight",
    "ar": "16:9",
