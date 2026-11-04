@@ -1,3 +1,9 @@
+## 2026-11-03 (148): Art Library APPROVE/REJECT no longer fails with "The prompts file kept changing under us" (`artsave1`)
+- Tom: 8 times out of 10, APPROVE then TAP AGAIN showed that error. Cause: the page read data/art-prompts.json from the GitHub API and the browser handed back its saved copy (GitHub marks those reads cacheable for 60 s). After any recent approval the copy was out of date, GitHub refused the save (409), and the page retried 3 times instantly with the same stale copy.
+- Fix in art.html: every GitHub read uses `cache:'no-store'` plus a time stamp; commitJson tries 6 times with growing waits (1.5 s, 3 s, ...) because GitHub can lag on its own latest write; the final error now includes what GitHub said.
+- Note: on the old failures the picture file had already been saved under art/raw/ but the prompts file did not record it. Those orphan files are harmless.
+- tools/art-library/test.py: 5 checks were already failing on main before this change (they expect 2 Characters entries; the 8 grace-walk entries made it 10). Not fixed here.
+
 ## 2026-11-03 (147): Phone voice export `local-clips-export` merged: every line that had no clip (`clips8`)
 - Grace walk frames added to the Art Library (8 entries, `grace-walk-*`): each one is a pose edit of the approved step 2 picture (`grace-hero-fresh-style-v4.png`), one pose per call. Tom generates and approves each one in the Library. Step 2 kept at its approved reference (step 1 v5). No game file changed.
 

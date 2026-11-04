@@ -342,7 +342,7 @@ const textToB64=s=>{ const u=new TextEncoder().encode(s); let b=''; for(let i=0;
 const b64ToText=c=>{ const bin=atob(String(c).replace(/\s/g,'')), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new TextDecoder().decode(u); };
 async function gh(method,path,body){
   const tok=LS.get('aot-gh-token'); if(!tok) throw new Error('Paste the GitHub token at the top first.');
-  let r; try{ r=await fetch(ghUrl(path)+(method==='GET'?'?ref='+GH_BRANCH:''),{method,headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}); }
+  let r; try{ r=await fetch(ghUrl(path)+(method==='GET'?'?ref='+GH_BRANCH+'&t='+Date.now():''),{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}); }
   catch(err){ throw new Error('The browser could not reach GitHub. Check the network and try again.'); }
   const txt=await r.text(); let j=null; try{j=JSON.parse(txt);}catch(x){}
   return {status:r.status,ok:r.ok,json:j,text:txt.split(tok).join('[token]').slice(0,300)};
@@ -353,18 +353,21 @@ function ghFail(r,what){
   return new Error('GitHub said '+r.status+' while '+what+': '+r.text);
 }
 // Read data/art-prompts.json, let mutate(doc) change it (return false if the picture is not there), write it back. Retries if someone else changed it first.
+// The read never uses the browser's saved copy (cache no-store): a copy up to 60 s old made every save after a recent approval fail. Waits longer between tries because GitHub can take a few seconds to show its own latest write.
 async function commitJson(mutate,message){
-  for(let i=0;i<3;i++){
+  let last='';
+  for(let i=0;i<6;i++){
+    if(i) await new Promise(res=>setTimeout(res,1500*i));
     const g=await gh('GET',JSON_PATH); if(!g.ok) throw ghFail(g,'reading the prompts file');
     // GitHub's contents API sends an empty body for files over 1 MB; the prompts file has grown past that, so read it by blob id instead.
     let raw=g.json.content||'';
-    if(!raw){ const br=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/git/blobs/'+g.json.sha,{headers:{Authorization:'Bearer '+LS.get('aot-gh-token'),Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}); if(!br.ok) throw ghFail({status:br.status,text:''},'reading the prompts file'); raw=(await br.json()).content||''; }
+    if(!raw){ const br=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/git/blobs/'+g.json.sha,{cache:'no-store',headers:{Authorization:'Bearer '+LS.get('aot-gh-token'),Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}); if(!br.ok) throw ghFail({status:br.status,text:''},'reading the prompts file'); raw=(await br.json()).content||''; }
     if(!raw) throw new Error('GitHub sent an empty prompts file. Try again in a minute.');
     const doc=JSON.parse(b64ToText(raw)); if(mutate(doc)===false) throw new Error('That picture is not in the game\'s prompts file any more. Reload the page.');
     const w=await gh('PUT',JSON_PATH,{message,content:textToB64(JSON.stringify(doc,null,1)+'\n'),branch:GH_BRANCH,sha:g.json.sha});
-    if(w.ok) return; if(w.status!==409&&w.status!==422) throw ghFail(w,'saving the prompts file');
+    if(w.ok) return; if(w.status!==409&&w.status!==422) throw ghFail(w,'saving the prompts file'); last=w.status+': '+w.text;
   }
-  throw new Error('The prompts file kept changing under us. Try again in a minute.');
+  throw new Error('The prompts file kept changing under us. Try again in a minute. (GitHub said '+last.slice(0,160)+')');
 }
 async function decide(kind,resKey,btn){
   const r=await tx('readonly',s=>s.get(resKey)); if(!r) return;
