@@ -1,0 +1,42 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER WALK SHEET. Return exactly one image, nothing else.
+
+ATTACH: the hero pose picture of Grace (the reference).
+
+WHAT THIS IS
+Walking frames for "The Adventures of Tom", a family role-playing game. The character is Grace, a bright, bossy nine-year-old niece. The attached hero pose is the reference for Grace. Draw her EXACTLY like the reference in every frame: same face, hair, clothes, colors, proportions, art style, level of detail. Keep the face as faithful to the reference as it is in the hero pose, in every frame, including from the side and from behind where hair and ears show.
+
+GRACE'S LOOK (same as the reference)
+Long straight honey-brown hair with golden highlights, falling past her shoulders. Warm brown eyes, a big happy smile, small teal stud earrings. Oversized lavender crew-neck sweatshirt with long sleeves (plain on the back), baggy heather-gray sweatpants, pink and silver glitter sneakers with white soles. A small gold soup dumpling squishy studded with diamonds hangs from a short chain at her left hip. Hands empty.
+
+ART STYLE
+- A richly detailed hand-painted digital illustration of a real child, exactly like the attached picture, shown full body. Smooth blended brushwork, glossy highlights on skin and hair, finely painted hair strands. Clothing and fabric are drawn in fine detail.
+- Caricature proportions: a big head, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The head is exactly the size it is in the reference. The face keeps a clear likeness of the reference.
+- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, saturated jewel-toned colors.
+- Crisp clean silhouettes. No thick or black outlines.
+- Painted, realistic. NOT pixel art, NOT 16-bit. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.
+
+THE SHEET (strict)
+- A grid of 3 columns by 3 rows of equal square cells, 256 x 256 pixels each, so the full image is 768 x 768. If your tool offers a different size, keep exactly 3 columns and 3 rows of equal square cells.
+- Exactly 9 frames, one per cell, filled left to right, top to bottom, in the numbered order below.
+- Camera: a character turnaround at about chest height, full body, straight on for the front and back rows and a true side profile for the third row. No top-down angle.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere in the character. No magenta glow, spill, tint or fringe on the character's edges, hair strands or flyaway hairs. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Feet on the ground rest on one horizontal line about 24 pixels above the cell bottom.
+- Draw ONLY Grace. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.
+- Same head size, same hair volume and same outfit in every frame. The head is never redrawn smaller or larger from frame to frame.
+- Arms swing opposite to the legs. The two STEP frames of a row mirror each other. STAND frames are neutral.
+
+THE 9 FRAMES (each clearly different from the others)
+1. DOWN STAND: facing the viewer, feet together, arms at her sides, a happy wide smile.
+2. DOWN STEP A: facing the viewer, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.
+3. DOWN STEP B: mirror of 2.
+4. UP STAND: seen from behind, feet together, arms at her sides. Shows the back of her head, her long hair and the plain lavender back of the sweatshirt.
+5. UP STEP A: seen from behind, the foot on the viewer's left steps away from us, the arm on the viewer's right swings forward.
+6. UP STEP B: mirror of 5.
+7. SIDE STAND: true profile facing LEFT, feet together, arms at her sides.
+8. SIDE STEP A: profile facing left, front leg forward with the heel down, back leg trailing with the heel lifted, near arm back, far arm forward.
+9. SIDE STEP B: profile facing left, the passing moment of the stride, back foot lifted with a bent knee, body slightly higher.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Grace in the pose described.

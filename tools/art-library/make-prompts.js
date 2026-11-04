@@ -21,6 +21,8 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-back.txt', 'utf8').trim() },
   { id: 'grace-walk-side', tab: 'Characters', title: 'Grace walk sheet 3 of 3: side view (Tom, 11-03)', ar: '16:9', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-side.txt', 'utf8').trim() },
+  { id: 'grace-walk-sheet-test', tab: 'Characters', title: 'Grace walk TEST: one 3 x 3 sheet, built like Tom\'s walk sheet (11-04)', ar: '1:1', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
+    prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-sheet-test.txt', 'utf8').trim() },
 ];
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
 for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
