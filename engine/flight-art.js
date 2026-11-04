@@ -28,14 +28,34 @@ const fsEase=u=>{ u=Math.max(0,Math.min(1,u)); return u*u*(3-2*u); };
 function fsSmooth(on) { const was=[gfx.imageSmoothingEnabled,gfx.imageSmoothingQuality]; gfx.imageSmoothingEnabled=on; if(on) gfx.imageSmoothingQuality='high'; return was; }
 function fsRestore(was) { gfx.imageSmoothingEnabled=was[0]; gfx.imageSmoothingQuality=was[1]; }
 
-// A strip at height h, tiled sideways. Tile n covers world x [n*dw, (n+1)*dw]; odd tiles are mirrored. off = world x at the screen's left edge.
-function fsStrip(img,y,h,off) {
-  const dw=img.naturalWidth*h/img.naturalHeight; if(dw<8) return;
+// A strip at height h, tiled sideways. Tile n covers world x [n*dw, (n+1)*dw]. off = world x at the screen's left edge.
+// Skyline and foreground strips repeat un-flipped (157: flipped copies showed mirrored trees and backwards lettering) with the
+// join melted by fsSeamless; ground strips keep the mirrored repeat, because their runway runs on a slant and only a mirror joins it.
+function fsSeamless(img) {
+  let c=FLIGHT_ART.cache.get(img);
+  if(c) return c;
+  const w=img.naturalWidth,h=img.naturalHeight,ov=Math.round(w*.16),nw=w-ov;
+  c=document.createElement('canvas'); c.width=nw; c.height=h; const g=c.getContext('2d');
+  // The tail of the picture fades out while its head fades in over the same columns, so the end flows into the start.
+  const layer=(sx,fromOpaque)=>{
+    const t=document.createElement('canvas'); t.width=ov; t.height=h; const q=t.getContext('2d');
+    q.drawImage(img,sx,0,ov,h,0,0,ov,h); q.globalCompositeOperation='destination-in';
+    const gr=q.createLinearGradient(0,0,ov,0); gr.addColorStop(0,fromOpaque?'#000':'rgba(0,0,0,0)'); gr.addColorStop(1,fromOpaque?'rgba(0,0,0,0)':'#000');
+    q.fillStyle=gr; q.fillRect(0,0,ov,h); return t;
+  };
+  g.drawImage(img,ov,0,nw-ov,h,ov,0,nw-ov,h);
+  g.drawImage(layer(nw,true),0,0);
+  g.globalCompositeOperation='lighter'; g.drawImage(layer(0,false),0,0);
+  FLIGHT_ART.cache.set(img,c); return c;
+}
+function fsStrip(img,y,h,off,mirror) {
+  const src=mirror?img:fsSeamless(img),sw=mirror?img.naturalWidth:src.width,sh=mirror?img.naturalHeight:src.height;
+  const dw=sw*h/sh; if(dw<8) return;
   for(let n=Math.floor(off/dw);;n++) {
     const X=Math.floor(n*dw-off); if(X>=W) break;
     const w=Math.ceil(dw)+1;
-    if(((n%2)+2)%2) { gfx.save(); gfx.translate(X+w,0); gfx.scale(-1,1); gfx.drawImage(img,0,y,w,h); gfx.restore(); }
-    else gfx.drawImage(img,X,y,w,h);
+    if(mirror&&((n%2)+2)%2) { gfx.save(); gfx.translate(X+w,0); gfx.scale(-1,1); gfx.drawImage(src,0,y,w,h); gfx.restore(); }
+    else gfx.drawImage(src,X,y,w,h);
   }
 }
 // A sky square covering the top region [0,regionH]: the sun is moved to targetY, as far as the picture's edges allow.
@@ -101,6 +121,11 @@ function fsPlane(i,px,py,s,facing,ang) {
   gfx.drawImage(FLIGHT_ART.imgs.plane,P.x,P.y,P.w,P.h,-P.ax,-P.ay,P.w,P.h);
   gfx.restore();
 }
+// Each pose has its own wheel-bottom height, so a plain swap of poses made the plane hop. The height eases from pose to pose instead.
+function fsBot(F,target,dtf) {
+  if(F.botS==null||F.t<.05) return target;
+  return F.botS+(target-F.botS)*(1-Math.pow(.88,dtf));
+}
 function flightPaintedSide(F,time) {
   if(!flightArtReady()) return false;
   const M=FLIGHT_ART_META,I=FLIGHT_ART.imgs;
@@ -114,7 +139,8 @@ function flightPaintedSide(F,time) {
   // Speed: the scenery slides under the plane while it rolls, then slows as it climbs away (the old scroll rule, in screen units).
   const speed=land?(t<2.6?60:Math.max(0,60*(1-(t-2.6)/1.4))):Math.min(70,t*40);
   const S=Math.max(2,Math.min(5,Math.round(W/140)));
-  const scroll=(F.scroll=(F.scroll||0)+speed*.016*(F.last!=null?Math.min(3,(time-F.last)*60):1)); F.last=time;
+  const dtf=F.last!=null?Math.min(3,(time-F.last)*60):1;
+  const scroll=(F.scroll=(F.scroll||0)+speed*.016*dtf); F.last=time;
   const drift=-facing*scroll*S;                   // world x at the screen's left edge is -drift (times the layer's speed)
   // Sky, with the sun put just above the skyline (LA, a low sunset) or high (Long Island).
   fsSky(I['sky'+K],M.sun[inLA?'la':'le'],gy+8,inLA?gy*.78:gy*.4);
@@ -122,17 +148,17 @@ function flightPaintedSide(F,time) {
   const skImg=I['skyline'+K],skH=Math.round(Math.max(H*(inLA?.31:.27),W*.17*(inLA?1.25:1)));
   fsStrip(skImg,gy-skH+4,skH,-drift*.3);
   // Ground, then the plane's shadow and the plane.
-  fsStrip(I['ground'+K],gy,gh,-drift);
+  fsStrip(I['ground'+K],gy,gh,-drift,true);
   const L=Math.min(W*.6,H*.8,560),s=L/M.plane[0].w;
   let px=W/2,py,frame,alt;
   if(!land) {
     const lift=t<1.7?0:Math.pow((t-1.7)/2.3,1.4); alt=lift;
     frame=t<1.45?0:t<1.95?1:t<2.75?2:3;
-    py=yr-M.plane[0].bot*s-lift*H*.34; px+=facing*lift*W*.10;
+    F.botS=fsBot(F,M.plane[frame].bot,dtf); py=yr-F.botS*s-lift*H*.34; px+=facing*lift*W*.10;
   } else {
     const k=Math.min(1,t/2.6),e=1-Math.pow(1-k,2); alt=1-e;
     frame=t<.8?5:t<1.7?6:t<2.6?7:8;
-    py=yr-M.plane[8].bot*s-(1-e)*H*.30; px-=facing*(1-e)*W*.14;
+    F.botS=fsBot(F,M.plane[frame].bot,dtf); py=yr-F.botS*s-(1-e)*H*.30; px-=facing*(1-e)*W*.14;
   }
   gfx.globalAlpha=.3; ellipse(px,yr+s*4,L*.46*(1-.35*Math.min(1,alt)),L*.035,'#0a0a14'); gfx.globalAlpha=1;
   fsPlane(frame,px,py,s,facing,0);
@@ -159,7 +185,7 @@ function fsCurve(a,b,u,lift) {
 function flightPaintedMap(F,time) {
   if(!flightArtReady()) return false;
   const M=FLIGHT_ART_META,I=FLIGHT_ART.imgs,mp=M.map,MW=mp.w,MH=mp.h;
-  const reserve=(layout.landscape?162:300)/scale,top=safeTop+4,availH=Math.max(60,H-top-reserve);
+  const reserve=(layout.landscape?162:200)/scale,top=safeTop+4,availH=Math.max(60,H-top-reserve);
   const sc=Math.min(W/MW,availH/MH),dw=Math.round(MW*sc),dh=Math.round(MH*sc);
   const ox=Math.round((W-dw)/2),oy=Math.round(top+(availH-dh)/2);
   const was=fsSmooth(true);

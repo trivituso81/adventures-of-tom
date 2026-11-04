@@ -56,7 +56,7 @@ function rect(x,y,w,h,color){ gfx.fillStyle=color; gfx.fillRect(Math.round(x),Ma
 function ellipse(x,y,rx,ry,color){ gfx.fillStyle=color; gfx.beginPath(); gfx.ellipse(x,y,rx,ry,0,0,Math.PI*2); gfx.fill(); }
 </script>
 <script src="data/font.js"></script>
-<script src="engine/flight-art.js?v=fl2"></script>
+<script src="engine/flight-art.js?v=flight3"></script>
 <script>
 'use strict';
 FLIGHT_ART.loading=true;   // stop the game's own loader (it would read art/flight/ on a timer); this page loads the art itself
@@ -173,10 +173,28 @@ function packAtlas(parts,width){ let x=2,y=2,rowH=0; const pos=[]; for(const p o
   const c=document.createElement('canvas'); c.width=width; c.height=y+rowH+2; const g=c.getContext('2d'); parts.forEach((p,i)=>g.drawImage(p,pos[i][0],pos[i][1])); return {c,pos}; }
 // The engine draws the plane sheet nose-left and mirrors it to fly left to right; the Library sheet paints the nose right (156 flight2).
 function mirrorX(c){ const o=document.createElement('canvas'); o.width=c.width; o.height=c.height; const g=o.getContext('2d'); g.translate(c.width,0); g.scale(-1,1); g.drawImage(c,0,0); return o; }
+// One plane pose, cleaned (CHANGES 157): the plane has no green paint, so any green left on a keyed edge is pulled back to the
+// larger of red and blue; and the lawn patch the generator painted under the wheels (a wide run of rows at the very bottom,
+// with the narrow gear rows right above it) is cut off, so the wheels end the picture. Nothing is moved, scaled or redrawn.
+function cleanPlane(c){
+  const w=c.width,h=c.height,g=c.getContext('2d',{willReadFrequently:true}),id=g.getImageData(0,0,w,h),d=id.data;
+  for(let i=0;i<d.length;i+=4){ if(d[i+3]){ const m=Math.max(d[i],d[i+2]); if(d[i+1]>m) d[i+1]=m; } }
+  const cnt=y=>{ let n=0; for(let x=0;x<w;x++) if(d[(y*w+x)*4+3]>20) n++; return n; };
+  let b=h; while(b>0&&cnt(b-1)<w*.4) b--;           // bottom of the wide band at the very bottom
+  let t=b; while(t>0&&cnt(t-1)>=w*.4) t--;           // its top
+  if(b-t>=5&&b-t<h*.2&&t>9&&cnt(t-8)<w*.3){          // short, with narrow gear rows above it: a lawn patch, not a belly
+    for(let y=t;y<h;y++) for(let x=0;x<w;x++){ const i=(y*w+x)*4; if(d[i+3]&&!((d[i]+d[i+1]+d[i+2])/3<100&&d[i]-d[i+2]<=45)) d[i+3]=0; }   // clear the patch's paint, keep the dark wheels
+    g.putImageData(id,0,0);
+    let e=h; while(e>t&&cnt(e-1)<3) e--;
+    return cropRows(c,0,e);
+  }
+  g.putImageData(id,0,0);
+  return c;
+}
 function prepPlane(im){
   const {c,id}=keySheet(im),w=c.width,h=c.height,parts=[],info=[];
   for(let i=0;i<9;i++){ const r=(i/3)|0,cc=i%3,x0=Math.round(cc*w/3),y0=Math.round(r*h/3),x1=Math.round((cc+1)*w/3),y1=Math.round((r+1)*h/3);
-    const b=shapes(id,w,h,x0,y0,x1,y1,2)[0]||{x:x0,y:y0,w:x1-x0,h:y1-y0}; const p=mirrorX(cropRect(c,b.x,b.y,b.w,b.h)); parts.push(p);
+    const b=shapes(id,w,h,x0,y0,x1,y1,2)[0]||{x:x0,y:y0,w:x1-x0,h:y1-y0}; const p=mirrorX(cleanPlane(cropRect(c,b.x,b.y,b.w,b.h))); parts.push(p);
     // Anchor: the middle of the plane sideways; up and down, the middle of its painted body (centre of the opaque pixels).
     const pd=px(p).data; let sy=0,n=0; for(let y=0;y<p.height;y++) for(let x=0;x<p.width;x+=2) if(pd[(y*p.width+x)*4+3]>200){ sy+=y; n++; }
     const ay=n?sy/n:p.height/2; info.push({ax:p.width/2,ay,sl:p.width,w:p.width,h:p.height,bot:p.height-ay}); }
