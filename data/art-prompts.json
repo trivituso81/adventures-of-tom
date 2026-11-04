@@ -238,7 +238,7 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe attached picture is Tom, the reference. Paint the SAME man, in exactly the same hand-painted style, the same proportions, the same head size, the same clothes and colors, seen from directly behind.\n\nFull body, standing straight, feet together, arms relaxed at his sides, hands empty, on one flat solid magenta #FF00FF background. Nothing else in the picture.\n\nFrom behind we see: the back of his head covered in very short dark brown hair with gray at the sides, all the way to the crown; the plain navy back of the t-shirt with no print; washed gray slim jeans; white low-top sneakers with a black swoosh on the outer side of each shoe; the backs of his arms.\n\nRichly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights on skin and hair, finely painted hair strands, warm golden light from the upper left, saturated jewel-toned colors, crisp clean silhouettes, no thick or black outlines. Painted, realistic. NOT pixel art, NOT 16-bit, no anime style.\n\nNo magenta on the character, no glow or fringe, no shadow on the ground, no text, no border."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 1,
@@ -253,11 +253,16 @@
      "date": "2026-11-04",
      "note": "Tom: many issues. Seen: hands in pockets, controller print painted on the side of the shirt, shirt bunched. Face profile from the photo looks right. Made in the Grace step 1 row with Tom's profile photo and the short photo-to-painting prompt.",
      "from": "v1"
+    },
+    {
+     "date": "2026-11-04",
+     "note": "Tom on v1: style does not match, not hand-painted, glossy; face looks different; hands in pockets. Cause: v1 was made from the photo alone with a prompt that said glossy highlights. v2 prompt: hero attached, matte painted look, arms at sides.",
+     "from": "v1"
     }
    ],
    "id": "tom-side-view",
    "tab": "Characters",
-   "title": "Tom step 4: side view (v1 saved as the base for step 5; re-run only with a new profile photo)",
+   "title": "Tom step 4: side view (attach a photo of your real profile; the hero is attached for you)",
    "ar": "3:4",
    "own": {
     "slot": "tom-profile-photo",
@@ -268,15 +273,15 @@
     "art/raw/characters/tom-hero-fresh-v1.png"
    ],
    "group": "Tom",
-   "prompt": "STYLE: richly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights, saturated jewel-toned colors, crisp clean silhouettes, fine detail, warm golden light from the upper left.\n\nTwo pictures are attached. The photo is the real man: keep the exact profile of his face from it (nose, chin, forehead, beard line, ear, hairline). The painted picture is the same man from the front: copy its painting style, head size and clothes.\n\nPaint him full body in a true side profile facing LEFT, standing straight, feet together, arms relaxed at his sides, hands empty and out of his pockets, a small wry smile, on a flat solid magenta background.\n\nPROPORTIONS: a big caricature head, the same size as in the painted picture. From the top of his head to his soles he is only about four heads tall.\n\nLOOK: very short dark brown hair with gray at the sides, full short salt and pepper beard, warm brown eye. Plain navy crew-neck t-shirt hanging straight (the chest print does not show from the side), washed gray slim jeans, white low-top sneakers with a black swoosh. No watch, no jewelry.\n\nPainted, realistic. NOT pixel art, NOT 16-bit, no anime style. No text, no border, no shadow on the ground."
+   "prompt": "Two pictures are attached. The painted picture is Tom: copy its painting style exactly (the same hand-painted, illustrated, matte brushwork, the same soft shading, the same colors), its big-head proportions, its head size and its clothes. The photo is the real Tom's face in profile: take the exact shape of his face from it (nose, chin, forehead, beard line, ear, hairline).\n\nPaint the same man as the painted picture, full body, in a true side profile facing LEFT, standing straight, feet together, arms hanging relaxed at his sides, hands empty and open, nothing in his pockets, a small wry smile, on a flat solid magenta background. Nothing else in the picture.\n\nThe head is the same size as in the painted picture. Very short dark brown hair with gray at the sides, full short salt and pepper beard. Plain navy crew-neck t-shirt hanging straight (the chest print does not show from the side), washed gray slim jeans, white low-top sneakers with a black swoosh. No watch, no jewelry.\n\nHand-painted and illustrated, not glossy, not plastic, not a 3D render, not a photo. NOT pixel art, NOT 16-bit, no anime style. No text, no border, no shadow on the ground."
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
    "rejects": [],
    "id": "tom-side-view-fix",
    "tab": "Characters",
-   "title": "Tom step 5: fix the side view (edit of step 4, one line; add to the prompt if more is wrong)",
+   "title": "Tom step 5 (retired: v1 of the side view is not kept)",
    "ar": "3:4",
    "refs": [
     "art/raw/characters/tom-side-view-v1.png",
