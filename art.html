@@ -83,6 +83,8 @@ textarea{min-height:230px;font-size:15px}
 #big{cursor:zoom-out}
 .item .row select{width:auto;min-width:110px}
 }
+.fprev{display:flex;gap:12px;align-items:center}.fprev .hint{flex:1}
+#fpov{position:fixed;inset:0;z-index:50;background:#14122b}#fpov iframe{border:0;width:100%;height:100%;display:block}
 </style>
 </head>
 <body>
@@ -250,6 +252,7 @@ function paintList(fromProbe){
   const groups=groupsOf(UI.tab), single=groups.size===1; let html='';
   for(const [g,items] of groups) html+=renderGroup(UI.tab,g,items,single);
   if(!html) html='<div class="card hint">'+(!groups.size?'Nothing here yet. Claude adds pictures to this tab.':qNow()?'Nothing found for “'+esc(UI.q.trim())+'” in this tab. Other tabs show how many they found.':'Nothing in this view. Tap All above to see every picture in this tab.')+'</div>';
+  if(UI.tab==='Flight'&&!qNow()) html='<div class="card fprev"><button class="gold" data-fprev="1">PREVIEW FLIGHT</button><span class="hint">Plays the game\'s real flight with the approved pictures, the newest ones on this device, or the live game art.</span></div>'+html;   // flight-preview.html (fprev1)
   const y=window.scrollY; $('list').innerHTML=html; if(fromProbe) window.scrollTo(0,y);
   if(!fromProbe) probe();
 }
@@ -427,6 +430,10 @@ $('exp').onclick=async()=>{
   files.push({name:'art-prompts-edited.json',blob:new Blob([JSON.stringify(prompts,null,1)],{type:'application/json'})});
   download(await makeZip(files),'art-library-export.zip'); toast('Exported '+all.length+' pictures.');
 };
+// --- flight preview (fprev1): flight-preview.html in a full-screen frame; its back link closes it
+document.addEventListener('click',e=>{ if(!e.target.closest('[data-fprev]')) return; if($('fpov')) return;
+  const d=document.createElement('div'); d.id='fpov'; d.innerHTML='<iframe src="flight-preview.html?embed=1" title="Flight preview"></iframe>'; document.body.appendChild(d); document.body.style.overflow='hidden'; });
+addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov')){ $('fpov').remove(); document.body.style.overflow=''; } });
 // --- start
 (async function(){
   paintKeys();

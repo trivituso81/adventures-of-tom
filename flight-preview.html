@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14122b">
+<title>Flight Preview</title>
+<!-- flight-preview.html (CHANGES 151, fprev1): plays the game's real painted flight (engine/flight-art.js, the same drawing code the
+     game runs) with either the live game art, the Art Library's approved Flight pictures, or the newest Flight pictures on this
+     device (results not yet approved). Opened from the Art Library's Flight tab. Approved and device pictures are prepared here in the
+     browser (background keyed out, strips cropped, sheets cut into poses) by a quick automatic cut, not the real bake
+     (tools/sprite-bake/bake_flight.py), so small edges can differ from the installed result. Nothing here changes the game. -->
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#14122b;color:#f4f1ff;font:15px/1.35 -apple-system,system-ui,"Segoe UI",sans-serif;height:100%}
+body{display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid #2c2852}
+header h1{font-size:18px;margin:0;flex:1}
+a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:8px 2px}
+.bar{display:flex;gap:6px;overflow-x:auto;padding:6px 14px 0;scrollbar-width:none;align-items:center}
+.bar .bar{padding:0;flex:1}
+.bar b{flex:none;font-size:12px;color:#b9b3e6;font-weight:500;min-width:58px}
+.tab{flex:none;font:inherit;border-radius:16px;border:1px solid #3a3566;background:#0f0d24;color:#d9d4ff;padding:5px 12px;min-height:34px;font-size:14px;cursor:pointer}
+.tab.on{background:#7b6cff;border-color:#a89dff;color:#fff}
+#stagewrap{flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:10px 14px;position:relative}
+#phone{position:relative;background:#000;border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px #2c2852}
+#world{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+#talk{position:absolute;left:4%;right:4%;bottom:3%;background:rgba(16,14,34,.9);border:2px solid #fff1cb;border-radius:10px;padding:8px 10px;font-size:12px;color:#fff1cb;display:none}
+#talk i{display:block;font-style:normal;font-weight:700;color:#ffd968;font-size:11px;margin-bottom:2px}
+#info{padding:0 14px 10px;font-size:12px;color:#b9b3e6;max-height:30vh;overflow:auto}
+#info summary{cursor:pointer}
+#info .err{color:#ff8b97}
+#clock{flex:none;margin-left:auto;font-size:12px;color:#b9b3e6;padding-left:8px}
+</style>
+</head>
+<body>
+<header><a class="back" id="back" href="art.html">&lsaquo; Art Library</a><h1>Flight preview</h1></header>
+<div class="bar"><b>Pictures</b><span class="bar" id="b-art"></span></div>
+<div class="bar"><b>Route</b><span class="bar" id="b-dir"></span></div>
+<div class="bar"><b>Play</b><span class="bar" id="b-ph"></span></div>
+<div class="bar"><b>Screen</b><span class="bar" id="b-scr"></span><span id="clock"></span></div>
+<div id="stagewrap"><div id="phone"><canvas id="world"></canvas><div id="talk"><i>TOM</i><span></span></div></div></div>
+<div id="info"></div>
+
+<script>
+'use strict';
+// The globals engine/flight-art.js and data/font.js expect from the game (engine/world.js, engine/overworld.js), kept to the same rules.
+let W=197,H=426,scale=2,safeTop=41,safeBottom=85;
+const layout={landscape:false};
+const canvas=document.getElementById('world'),gfx=canvas.getContext('2d');
+var FLIGHT_ART_META=null;   // set by this page (the game's data/flight-art.js is read as text so this stays replaceable)
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const hash=(x,y)=>{ let n=Math.imul(x+71,374761393)^Math.imul(y+137,668265263); n=Math.imul(n^(n>>>13),1274126177); return (n^(n>>>16))>>>0; };
+function rect(x,y,w,h,color){ gfx.fillStyle=color; gfx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h)); }
+function ellipse(x,y,rx,ry,color){ gfx.fillStyle=color; gfx.beginPath(); gfx.ellipse(x,y,rx,ry,0,0,Math.PI*2); gfx.fill(); }
+</script>
+<script src="data/font.js"></script>
+<script src="engine/flight-art.js?v=fl2"></script>
+<script>
+'use strict';
+FLIGHT_ART.loading=true;   // stop the game's own loader (it would read art/flight/ on a timer); this page loads the art itself
+const $=id=>document.getElementById(id);
+const EMBED=/[?&]embed=1/.test(location.search);
+if(EMBED) $('back').onclick=e=>{ e.preventDefault(); parent.postMessage('aot-flight-preview-close','*'); };
+const LS={get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }};
+let UI={art:'approved',dir:'west',ph:'all',scr:'portrait',play:true};
+try{ Object.assign(UI,JSON.parse(LS.get('aot-flight-preview')||'{}')); }catch(e){}
+const saveUI=()=>LS.set('aot-flight-preview',JSON.stringify(UI));
+
+// ---------- What each painted layer is called in the Art Library (data/art-prompts.json ids) ----------
+const LAYERS=[['cabin','flight-cabin','Cabin'],['skyLe','flight-sky-le','Sky, Long Island'],['skyLa','flight-sky-la','Sky, LA'],
+  ['skylineLe','flight-skyline-le','Skyline, Long Island'],['skylineLa','flight-skyline-la','Skyline, LA'],['foreLe','flight-fore-le','Foreground, Long Island'],
+  ['foreLa','flight-fore-la','Foreground, LA'],['groundLe','flight-ground-le','Ground, Long Island'],['groundLa','flight-ground-la','Ground, LA'],
+  ['plane','flight-plane','Plane poses'],['props','flight-mapprops','Map props'],['map','flight-usmap','US map']];
+// Where Long Island and LA sit on a map painting (fractions of its size), read off the painting by eye. A new map version uses the
+// last line until someone measures it.
+const MAP_SPOTS={'flight-usmap-v1.png':{le:[.913,.403],la:[.076,.565]},'*':{le:[.94,.343],la:[.125,.653]}};
+
+// ---------- Loading ----------
+const loadImg=src=>new Promise((res,rej)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>rej(new Error('could not load '+src)); im.src=src; });
+function canvasOf(im,w,h){ const c=document.createElement('canvas'); c.width=w||im.naturalWidth||im.width; c.height=h||im.naturalHeight||im.height; const g=c.getContext('2d',{willReadFrequently:true}); g.drawImage(im,0,0,c.width,c.height); return c; }
+const asImg=c=>{ c.naturalWidth=c.width; c.naturalHeight=c.height; return c; };   // the engine reads naturalWidth / naturalHeight
+let DATA=null;
+async function prompts(){ if(!DATA){ const r=await fetch('data/art-prompts.json',{cache:'no-store'}); DATA=await r.json(); } return DATA; }
+function approvedFile(e){ const v=(e&&e.versions)||[]; if(!v.length) return null; let best=v[v.length-1]; for(const x of v) if((+x.at||0)>(+best.at||0)) best=x; return best.file; }
+// Results made in the Art Library stay on this device (IndexedDB 'aot-art-library', same site) until they are approved.
+function deviceResults(){ return new Promise(res=>{ let q; try{ q=indexedDB.open('aot-art-library',1); }catch(e){ return res([]); }
+  q.onupgradeneeded=()=>q.result.createObjectStore('results',{keyPath:'key'});
+  q.onerror=()=>res([]);
+  q.onsuccess=()=>{ try{ const r=q.result.transaction('results','readonly').objectStore('results').getAll(); r.onsuccess=()=>res(r.result||[]); r.onerror=()=>res([]); }catch(e){ res([]); } }; }); }
+
+async function loadLive(){
+  const txt=await (await fetch('data/flight-art.js',{cache:'no-store'})).text();
+  const M=JSON.parse(txt.slice(txt.indexOf('{'),txt.lastIndexOf('}')+1)),imgs={};
+  await Promise.all(Object.keys(M.files).map(async k=>{ imgs[k]=await loadImg('art/flight/'+M.files[k]+'?v='+M.v); }));
+  return {M,imgs,used:LAYERS.map(l=>[l[2],'live game art/flight/'+M.files[l[0]]])};
+}
+async function loadLibrary(useDevice){
+  const D=await prompts(),E={}; for(const e of D.entries) E[e.id]=e;
+  const dev={}; if(useDevice) for(const r of await deviceResults()){ if(!r||!r.blob||!E[r.id]||E[r.id].tab!=='Flight') continue; if(!dev[r.id]||(r.t||0)>(dev[r.id].t||0)) dev[r.id]=r; }
+  const src={},used=[],missing=[];
+  for(const [k,id,name] of LAYERS){
+    const r=dev[id],f=approvedFile(E[id]);
+    if(r){ src[k]={url:URL.createObjectURL(r.blob),file:id+'-v'+r.n+'.png'}; used.push([name,'v'+r.n+' on this device']); }
+    else if(f){ src[k]={url:f,file:f.split('/').pop()}; used.push([name,f.split('/').pop().replace(/^flight-/,'').replace(/\.png$/,'')+' approved']); }
+    else missing.push(name);
+  }
+  if(missing.length) throw new Error('Not approved yet: '+missing.join(', ')+'. Approve them first, or pick Live game.');
+  const raw={}; await Promise.all(Object.keys(src).map(async k=>{ raw[k]=await loadImg(src[k].url); }));
+  return Object.assign(prepare(raw,src),{used});
+}
+
+// ---------- Preparing approved pictures (a quick automatic cut; the real install uses tools/sprite-bake) ----------
+const px=c=>c.getContext('2d',{willReadFrequently:true}).getImageData(0,0,c.width,c.height);
+function rowMean(d,w,y){ let r=0,g=0,b=0; for(let x=0;x<w;x++){ const i=(y*w+x)*4; r+=d[i]; g+=d[i+1]; b+=d[i+2]; } return [r/w,g/w,b/w]; }
+function rowSpread(d,w,y,m){ let s=0; for(let x=0;x<w;x++){ const i=(y*w+x)*4; s+=Math.abs(d[i]-m[0])+Math.abs(d[i+1]-m[1])+Math.abs(d[i+2]-m[2]); } return s/w/3; }
+function rowDiff(d,w,y,ref){ let s=0; for(let x=0;x<w;x++){ const i=(y*w+x)*4,j=(ref*w+x)*4; s+=Math.abs(d[i]-d[j])+Math.abs(d[i+1]-d[j+1])+Math.abs(d[i+2]-d[j+2]); } return s/w/3; }
+function cropRows(c,y0,y1){ const o=document.createElement('canvas'); o.width=c.width; o.height=Math.max(1,y1-y0); o.getContext('2d').drawImage(c,0,y0,c.width,o.height,0,0,c.width,o.height); return o; }
+function cropRect(c,x,y,w,h){ const o=document.createElement('canvas'); o.width=w; o.height=h; o.getContext('2d').drawImage(c,x,y,w,h,0,0,w,h); return o; }
+// Plain padding the generator left above and below a strip: rows that match the first (or last) row.
+function padRows(id,w,h){ const d=id.data; let t=0,b=h; while(t<h-8&&rowDiff(d,w,t,0)<14) t++; while(b>t+8&&rowDiff(d,w,b-1,h-1)<14) b--; return [t,b]; }
+// Clear a plain background that touches an edge (magic wand: neighbour steps under 9, colour within 80 of the edge row).
+function floodClear(id,w,h,fromTop){
+  const d=id.data,y0=fromTop?0:h-1,ref=rowMean(d,w,y0); if(rowSpread(d,w,y0,ref)>9) return 0;
+  const seen=new Uint8Array(w*h),st=[]; for(let x=0;x<w;x++){ st.push(y0*w+x); seen[y0*w+x]=1; }
+  let n=0;
+  while(st.length){ const p=st.pop(),i=p*4; d[i+3]=0; n++; const x=p%w,y=(p/w)|0;
+    for(const q of [x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1]){ if(q<0||seen[q]) continue; const j=q*4;
+      if(Math.abs(d[j]-d[i])+Math.abs(d[j+1]-d[i+1])+Math.abs(d[j+2]-d[i+2])<9*3&&Math.abs(d[j]-ref[0])+Math.abs(d[j+1]-ref[1])+Math.abs(d[j+2]-ref[2])<80*3){ seen[q]=1; st.push(q); } } }
+  return n;
+}
+function prepStrip(im,key){
+  const c=canvasOf(im),w=c.width,h=c.height,id=px(c);
+  if(key){ floodClear(id,w,h,true); floodClear(id,w,h,false); }
+  c.getContext('2d').putImageData(id,0,0);
+  const d=id.data; let t=0,b=h; const op=y=>{ for(let x=0;x<w;x+=2) if(d[(y*w+x)*4+3]>16) return true; return false; };
+  while(t<h-1&&!op(t)) t++; while(b>t+1&&!op(b-1)) b--;
+  let [pt,pb]=padRows(id,w,h); if(pt>=pb) pt=0,pb=h;
+  return cropRows(c,Math.max(t,pt),Math.min(b,pb));
+}
+// The runway band in a ground strip: the longest run of grey rows (low colour, mid brightness). Fractions of the strip height.
+function findRunway(c){
+  const id=px(c),d=id.data,w=c.width,h=c.height,grey=[];
+  for(let y=0;y<h;y++){ let s=0,l=0; for(let x=0;x<w;x+=3){ const i=(y*w+x)*4,mx=Math.max(d[i],d[i+1],d[i+2]),mn=Math.min(d[i],d[i+1],d[i+2]); s+=mx?(mx-mn)/mx:0; l+=mx; } const n=Math.ceil(w/3); grey.push(s/n<.2&&l/n>55&&l/n<215); }
+  let best=[0,0],y=0; while(y<h){ if(!grey[y]){ y++; continue; } let e=y; while(e<h&&grey[e]) e++; if(e-y>best[1]-best[0]) best=[y,e]; y=e; }
+  return best[1]-best[0]>=h*.04?[+(best[0]/h).toFixed(3),+(best[1]/h).toFixed(3)]:[.45,.6];
+}
+// Key out the flat sheet background (the colour around the border), pull the background tint out of soft edges.
+function keySheet(im){
+  const c=canvasOf(im),w=c.width,h=c.height,id=px(c),d=id.data,ring=[];
+  for(let x=0;x<w;x+=4){ ring.push((0*w+x)*4,((h-1)*w+x)*4); } for(let y=0;y<h;y+=4){ ring.push((y*w)*4,(y*w+w-1)*4); }
+  const med=k=>{ const v=ring.map(i=>d[i+k]).sort((a,b)=>a-b); return v[v.length>>1]; },bg=[med(0),med(1),med(2)];
+  for(let i=0;i<d.length;i+=4){ const dist=Math.hypot(d[i]-bg[0],d[i+1]-bg[1],d[i+2]-bg[2]),a=clamp((dist-55)/60,0,1);
+    if(a<=0){ d[i+3]=0; continue; } if(a<1) for(let k=0;k<3;k++) d[i+k]=clamp((d[i+k]-bg[k]*(1-a))/a,0,255); d[i+3]=Math.round(a*255); }
+  c.getContext('2d').putImageData(id,0,0); return {c,id};
+}
+// Connected shapes on a 4x smaller grid (pixels within about 8 px count as joined). Returns boxes in full-size pixels.
+function shapes(id,w,h,x0,y0,x1,y1,join){
+  const S=4,gw=Math.ceil((x1-x0)/S),gh=Math.ceil((y1-y0)/S),m=new Uint8Array(gw*gh),d=id.data;
+  for(let y=y0;y<y1;y++) for(let x=x0;x<x1;x++) if(d[(y*w+x)*4+3]>60) m[((y-y0)/S|0)*gw+((x-x0)/S|0)]=1;
+  const J=join==null?2:join,lab=new Int32Array(gw*gh),out=[]; let n=0;
+  for(let s=0;s<gw*gh;s++){ if(!m[s]||lab[s]) continue; n++; const st=[s]; lab[s]=n; let bx0=1e9,by0=1e9,bx1=-1,by1=-1,cnt=0;
+    while(st.length){ const p=st.pop(),x=p%gw,y=(p/gw)|0; cnt++; bx0=Math.min(bx0,x); by0=Math.min(by0,y); bx1=Math.max(bx1,x); by1=Math.max(by1,y);
+      for(let dy=-J;dy<=J;dy++) for(let dx=-J;dx<=J;dx++){ const X=x+dx,Y=y+dy; if(X<0||Y<0||X>=gw||Y>=gh) continue; const q=Y*gw+X; if(m[q]&&!lab[q]){ lab[q]=n; st.push(q); } } }
+    out.push({x:x0+bx0*S,y:y0+by0*S,w:Math.min(x1,x0+(bx1+1)*S)-(x0+bx0*S),h:Math.min(y1,y0+(by1+1)*S)-(y0+by0*S),n:cnt}); }
+  return out.sort((a,b)=>b.n-a.n);
+}
+function meanColour(id,w,b){ const d=id.data; let r=0,g=0,bl=0,n=0; for(let y=b.y;y<b.y+b.h;y+=2) for(let x=b.x;x<b.x+b.w;x+=2){ const i=(y*w+x)*4; if(d[i+3]>200){ r+=d[i]; g+=d[i+1]; bl+=d[i+2]; n++; } } return n?[r/n,g/n,bl/n]:[0,0,0]; }
+function packAtlas(parts,width){ let x=2,y=2,rowH=0; const pos=[]; for(const p of parts){ if(x+p.width+2>width){ x=2; y+=rowH+2; rowH=0; } pos.push([x,y,p.width,p.height]); x+=p.width+2; rowH=Math.max(rowH,p.height); }
+  const c=document.createElement('canvas'); c.width=width; c.height=y+rowH+2; const g=c.getContext('2d'); parts.forEach((p,i)=>g.drawImage(p,pos[i][0],pos[i][1])); return {c,pos}; }
+function prepPlane(im){
+  const {c,id}=keySheet(im),w=c.width,h=c.height,parts=[],info=[];
+  for(let i=0;i<9;i++){ const r=(i/3)|0,cc=i%3,x0=Math.round(cc*w/3),y0=Math.round(r*h/3),x1=Math.round((cc+1)*w/3),y1=Math.round((r+1)*h/3);
+    const b=shapes(id,w,h,x0,y0,x1,y1,2)[0]||{x:x0,y:y0,w:x1-x0,h:y1-y0}; const p=cropRect(c,b.x,b.y,b.w,b.h); parts.push(p);
+    // Anchor: the middle of the plane sideways; up and down, the middle of its painted body (centre of the opaque pixels).
+    const pd=px(p).data; let sy=0,n=0; for(let y=0;y<p.height;y++) for(let x=0;x<p.width;x+=2) if(pd[(y*p.width+x)*4+3]>200){ sy+=y; n++; }
+    const ay=n?sy/n:p.height/2; info.push({ax:p.width/2,ay,sl:p.width,w:p.width,h:p.height,bot:p.height-ay}); }
+  const A=packAtlas(parts,Math.max(...parts.map(p=>p.width))*3+8); info.forEach((d,i)=>{ d.x=A.pos[i][0]; d.y=A.pos[i][1]; });
+  // Every pose is drawn at the size that makes pose 1 fill its slot, so they line up when they are about the same width.
+  return {img:asImg(A.c),meta:info};
+}
+function prepProps(im){
+  const {c,id}=keySheet(im),w=c.width,h=c.height,all=shapes(id,w,h,0,0,w,h,2),big=all[0]?all[0].n:1;
+  const S=all.filter(b=>b.n>big*.02).map(b=>Object.assign(b,{col:meanColour(id,w,b),cx:b.x+b.w/2,cy:b.y+b.h/2}));
+  const isRed=b=>b.col[0]>140&&b.col[1]<100&&b.col[2]<110,isBlue=b=>b.col[2]>130&&b.col[0]<110,isGold=b=>b.col[0]>170&&b.col[1]>120&&b.col[2]<110;
+  const named={},take=(nm,b)=>{ if(b&&!named[nm]){ named[nm]=b; b.used=1; } };
+  take('pinHome',S.filter(isRed).sort((a,b)=>b.n-a.n)[0]); take('pinAway',S.filter(isBlue).sort((a,b)=>b.n-a.n)[0]);
+  const gold=S.filter(b=>!b.used&&isGold(b)).sort((a,b)=>a.n-b.n); take('dot',gold[0]); take('star',gold[gold.length-1]);
+  // The rest are white: the first three in reading order are the planes (level, banking, banking), as the prompt lays them out.
+  const rowH=Math.max(...S.map(b=>b.h))*.6,white=S.filter(b=>!b.used).sort((a,b)=>Math.abs(a.cy-b.cy)<rowH?a.cx-b.cx:a.cy-b.cy);
+  take('planeLvl',white[0]); take('planeB1',white[1]); take('planeB2',white[2]);
+  let rest=white.slice(3); const smoke=rest.filter(b=>b.w/b.h>1.9).sort((a,b)=>b.w/b.h-a.w/b.h)[0]; take('smoke',smoke); rest=rest.filter(b=>!b.used);
+  rest.sort((a,b)=>a.n-b.n); if(rest.length>6) take('puff',rest.shift()); rest.sort((a,b)=>b.n-a.n);
+  ['cloudA','cloudB','cloudC','cloudD','cloudE','cloudF'].forEach((nm,i)=>{ if(rest.length) named[nm]=rest[i%rest.length]; });
+  if(!named.puff) named.puff=rest[rest.length-1]||named.smoke; if(!named.smoke) named.smoke=named.puff;
+  const names=Object.keys(named).filter(k=>named[k]),parts=names.map(k=>{ const b=named[k]; return cropRect(c,b.x,b.y,b.w,b.h); });
+  const A=packAtlas(parts,1100),props={}; names.forEach((k,i)=>props[k]=A.pos[i]);
+  return {img:asImg(A.c),props};
+}
+function oceanOf(im){ const c=canvasOf(im),w=c.width,h=c.height,d=px(c).data; let r=0,g=0,b=0,n=0; const add=(x,y)=>{ const i=(y*w+x)*4; r+=d[i]; g+=d[i+1]; b+=d[i+2]; n++; };
+  for(let x=0;x<w;x+=3) for(let y of [2,6,10,h-3,h-7,h-11]) add(x,y); r/=n; g/=n; b/=n; const hx=v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0');
+  return ['#'+hx(r)+hx(g)+hx(b),'#'+hx(r*1.22+14)+hx(g*1.22+14)+hx(b*1.22+14)]; }
+function prepare(raw,src){
+  const imgs={},M={v:'preview',files:{},size:{},sun:{le:[.504,.305],la:[.506,.766]}};
+  for(const k of ['cabin','skyLe','skyLa']) imgs[k]=asImg(canvasOf(raw[k]));
+  for(const k of ['skylineLe','skylineLa','foreLe','foreLa']) imgs[k]=asImg(prepStrip(raw[k],true));
+  for(const k of ['groundLe','groundLa']) imgs[k]=asImg(prepStrip(raw[k],false));
+  M.runway={le:findRunway(imgs.groundLe),la:findRunway(imgs.groundLa)};
+  const P=prepPlane(raw.plane); imgs.plane=P.img; M.plane=P.meta;
+  const Q=prepProps(raw.props); imgs.props=Q.img; M.props=Q.props;
+  imgs.map=raw.map; const mw=raw.map.naturalWidth,mh=raw.map.naturalHeight,sp=MAP_SPOTS[src.map.file]||MAP_SPOTS['*'],oc=oceanOf(raw.map);
+  M.map={w:mw,h:mh,le:[Math.round(sp.le[0]*mw),Math.round(sp.le[1]*mh)],la:[Math.round(sp.la[0]*mw),Math.round(sp.la[1]*mh)],ocean:oc[0],wave:oc[1]};
+  return {M,imgs};
+}
+
+// ---------- Playing ----------
+const PHASES=[['cabin',2.6],['takeoff',4],['map',8],['landing',4.2]];
+const LINES={west:'Delta One. Lie flat. Six whole hours where nobody asks me for a piggyback.',east:'Six hours. Then two small people will jump on me at full speed.'};
+let F=null,pi=0,last=0,ready=false,loadNo=0;
+function phaseList(){ return UI.ph==='all'?PHASES:PHASES.filter(p=>p[0]===UI.ph); }
+function restart(){ pi=0; F={dir:UI.dir,mode:phaseList()[0][0],t:0}; }
+function sizeStage(){
+  const land=UI.scr==='landscape',cw=land?852:393,ch=land?393:852;   // an iPhone 15 screen, in CSS pixels
+  layout.landscape=land; scale=2; W=Math.ceil(cw/scale); H=Math.ceil(ch/scale); safeTop=(land?57:82)/scale; safeBottom=(land?106:170)/scale;
+  canvas.width=W; canvas.height=H; FLIGHT_ART.cache.clear();
+  const wrap=$('stagewrap'),aw=wrap.clientWidth-28,ah=wrap.clientHeight-20,k=Math.min(aw/cw,ah/ch);
+  $('phone').style.width=Math.floor(cw*k)+'px'; $('phone').style.height=Math.floor(ch*k)+'px';
+  $('talk').style.fontSize=Math.max(9,Math.round(13*k*1.6))+'px';
+}
+function frame(now){
+  requestAnimationFrame(frame);
+  const time=now/1000,dt=Math.min(.05,last?time-last:0); last=time;
+  if(!ready||!F) return;
+  const list=phaseList(),[mode,dur]=list[pi%list.length];
+  if(UI.play){ F.t+=dt; if(F.t>=dur){ pi=(pi+1)%list.length; if(pi===0&&UI.ph==='all') F={dir:UI.dir,mode:list[0][0],t:0}; F.mode=list[pi][0]; F.t=0; } }
+  F.mode=list[pi%list.length][0];
+  gfx.setTransform(1,0,0,1,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=false;
+  rect(0,0,W,H,'#141c1a');
+  try{
+    if(F.mode==='cabin') flightPaintedCabin(F,time); else if(F.mode==='map') flightPaintedMap(F,time); else flightPaintedSide(F,time);
+  }catch(err){ showErr('The drawing stopped: '+err.message); ready=false; return; }
+  // The game's fade in and out of each phase (engine/travel.js drawFlight).
+  const d=PHASES.find(p=>p[0]===F.mode)[1],a=Math.max(0,1-F.t/.45,(F.t-(d-.45))/.45);
+  if(a>0){ gfx.globalAlpha=Math.min(1,a); rect(0,0,W,H,'#141c1a'); gfx.globalAlpha=1; }
+  // Tom's line, which the game shows in its dialogue box during the map (a stand-in box here, so the map's layout reads right).
+  const talk=F.mode==='map'&&F.t>1.6&&F.t<d-.3; $('talk').style.display=talk?'block':'none';
+  $('clock').textContent=F.mode.toUpperCase()+' '+F.t.toFixed(1)+' / '+d+' s';
+}
+function showErr(t){ $('info').innerHTML='<span class="err">'+t.replace(/</g,'&lt;')+'</span>'; }
+async function load(){
+  const my=++loadNo; ready=false; $('info').textContent='Loading pictures...';
+  try{
+    const r=UI.art==='live'?await loadLive():await loadLibrary(UI.art==='device');
+    if(my!==loadNo) return;
+    FLIGHT_ART_META=r.M; for(const k in FLIGHT_ART.imgs) delete FLIGHT_ART.imgs[k]; Object.assign(FLIGHT_ART.imgs,r.imgs);
+    FLIGHT_ART.cache.clear(); FLIGHT_ART.ready=true; FLIGHT_ART.failed=false;
+    const nDev=r.used.filter(u=>/on this device/.test(u[1])).length;
+    const head=UI.art==='live'?'What the game shows today.':(UI.art==='device'?(nDev?nDev+' picture'+(nDev>1?'s':'')+' from this device, the rest approved.':'No Flight results on this device, so these are the approved pictures.'):'The approved pictures.')+
+      (UI.art==='live'?'':' Cut automatically for this preview; the real install bakes them, so edges can differ.');
+    $('info').innerHTML='<details><summary>'+head+' Which pictures</summary>'+r.used.map(u=>'<b>'+u[0]+'</b> '+u[1]).join(' &middot; ')+'</details>';
+    sizeStage();
+    restart(); ready=true;
+  }catch(err){ if(my===loadNo) showErr(err.message||String(err)); }
+}
+
+// ---------- Buttons ----------
+const BARS={art:[['approved','Approved'],['device','This device'],['live','Live game']],dir:[['west','Long Island to LA'],['east','LA to Long Island']],
+  ph:[['all','Whole flight'],['cabin','Cabin'],['takeoff','Takeoff'],['map','Map'],['landing','Landing'],['pause','Pause']],scr:[['portrait','Portrait'],['landscape','Landscape']]};
+function paintBars(){
+  for(const k in BARS) $('b-'+k).innerHTML=BARS[k].map(([v,t])=>{ const on=v==='pause'?!UI.play:UI[k]===v;
+    return '<button class="tab'+(on?' on':'')+'" data-k="'+k+'" data-v="'+v+'">'+(v==='pause'&&!UI.play?'Paused':t)+'</button>'; }).join('');
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-k]'); if(!b) return; const k=b.dataset.k,v=b.dataset.v;
+  if(v==='pause'){ UI.play=!UI.play; }
+  else { UI[k]=v; if(k==='ph') UI.play=true; }
+  saveUI(); paintBars();
+  if(k==='art') load(); else if(k==='scr'){ sizeStage(); restart(); } else if(v!=='pause') restart();
+  $('talk').querySelector('span').textContent=LINES[UI.dir];
+});
+addEventListener('resize',()=>sizeStage());
+if(window.ResizeObserver) new ResizeObserver(()=>sizeStage()).observe($('stagewrap'));
+paintBars(); sizeStage(); $('talk').querySelector('span').textContent=LINES[UI.dir];
+load(); requestAnimationFrame(frame);
+window.__FP={UI,load,restart,get F(){ return F; },get ready(){ return ready; }};
+</script>
+</body>
+</html>

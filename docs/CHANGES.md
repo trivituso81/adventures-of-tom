@@ -1,3 +1,11 @@
+## 2026-11-03 (152): Art Library Flight tab gets PREVIEW FLIGHT (`fprev1`)
+- Tom (18:27): "i need a way in the art library to preview the flight animation".
+- New page flight-preview.html, opened full screen from a PREVIEW FLIGHT button at the top of the Art Library's Flight tab (art.html; its back link closes it). It runs the game's own painted flight code (engine/flight-art.js) on a phone-sized stage: cabin, takeoff, map, landing, with the game's fades and timings, plus a stand-in box for Tom's line on the map.
+- Pictures: Approved (newest approved version of each Flight entry), This device (newest Library result on this phone for each entry, approved or not, so a new result can be watched before APPROVE; falls back to approved), Live game (art/flight/ as installed). Route both ways, any single phase or the whole flight, pause, portrait or landscape.
+- Approved and device pictures are cut in the browser (sheet background keyed from the border colour, plain padding flooded off strips, plane and props sheets split into shapes, runway found as the grey band). This is not the install bake (tools/sprite-bake/bake_flight.py, which still expects the old red-stripe plane and transparent strips); edges can differ. Map pins for usmap-v1 measured by eye in MAP_SPOTS; a new map version needs a line there.
+- What the preview shows with today's approved art (fact): Los Angeles skyline strip (v5) has a painted sky, so it covers the sky layer at landing; LA ground (v2) is a perspective view, not a side-on runway.
+- Nothing in the game changed.
+
 ## 2026-11-03 (151): Grace's walk is one 3 x 3 sheet again, not 8 single-pose edits (`gsheet1`)
 - Tom (18:28): asked why every walk frame needed its own picture; that was against the agreed method (CHARACTER_PIPELINE 3B: one 3 x 3 walking sheet, one call). The 8 `grace-walk-*` entries (d4eab61) were added without writing the prompt with him and used "change only the pose" edits.
 - Removed the 8 entries; added `grace-walk-sheet` (Characters > Grace, 1:1, one reference: approved step 2 `grace-hero-fresh-style-v4.png`). Prompt written with Tom in chat and approved (18:29): tools/art-library/prompts/grace-walk-sheet.txt. make-prompts.js and data/art-prompts.json both updated by hand (not regenerated, per the step 2 prompt WARNING).
