@@ -80,6 +80,18 @@ const DIALOG_CAST={
     'The Armrest Hog':'grump',
     'Carry-On':'toad',
     'Jet Lag':'skeeter',
+    // Part 2 story people and monsters (Tom, 2026-11-03: cast every speaker that had no voice). No new ElevenLabs voices (the account
+    // is full at 30), so each one reuses a voice of the same type, told apart by speakerFx where it matters.
+    'Vance':'michael','Julian Vance':'michael','Long coat':'michael',          // calm, low, dry and tired: a polite man who is very sure
+    'Marlowe':'kit',                                                           // chipper, brisk, every line a note
+    'Archivist':'page','Whispers':'page','The Archivist’s Twin Lenses':'page', // precise, hushed, dry
+    'Curator':'dot','Forever Engine':'narrator',                               // Curator: crisp and exact. Engine boxes narrate
+    'Standby Sprite':'skeeter','Pause Sprite':'skeeter','Hushling':'skeeter',
+    'Gridlock Prime':'grump','Turnstile Grump':'grump','Rubber Stamp':'grump','Signal Fault':'grump',
+    'Lost Luggage':'mudling','Dead Letter':'mudling','Grey Note':'mudling','Paperweight':'mudling',
+    'Red-Eye':'toad','Drill Worm':'log','Dual-Coast Drill Worm':'log',
+    'FINAL CALL':'bigone','HUSH-9':'bigone','HUSH-9 Final Form':'bigone','The Chronos-Leviathan':'bigone',
+    'Oblivion Censor':'bigone','The Oblivion Censor':'bigone',
     // Narration boxes (Tom, 2026-11-03): a scene box labeled with a place, an object or a moment ('Little silver door',
     // 'Sunday dinner') is the story narrating, not a character. All of them are read by the Narrator voice. A new narration
     // label goes here; a talking object that is a real character (a monster, 'Whispers', 'Long coat') gets a character voice.
@@ -122,7 +134,7 @@ const DIALOG_CAST={
   },
   // Effects per speaker, applied when clips are merged (claude/voice-merge-dialog.js FX). They win over the voice's own fx, so a
   // shared voice sounds like a different person or creature.
-  speakerFx:{'Ray':'lower',
+  speakerFx:{'Vance':'older','Julian Vance':'older','Long coat':'older','FINAL CALL':'pa2','HUSH-9':'pa','Ray':'lower',
     'Kiki':'higher',
     'Toni':'older',
     'Cue Card Crab':'crab',

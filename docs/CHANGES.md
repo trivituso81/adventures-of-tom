@@ -1,3 +1,9 @@
+## 2026-11-03 (141): Voices cast for every speaker that had none (`cast1`)
+
+- Tom (11-03 16:35): "cast voices for all voice clips where a voice is not chosen". 29 speakers (323 lines, Part 2 story people and monsters) had no entry in `DIALOG_CAST.speakers`, so the Voice Library listed them as not castable.
+- No new ElevenLabs voices (account is full at 30). Each speaker reuses a voice of the same type: Vance, Julian Vance and Long coat use Michael's voice with the `older` effect; Marlowe uses Kit; the Archivist, its Twin Lenses and Whispers use Page; the Curator uses Dot; Forever Engine boxes use the Narrator (they narrate). Monsters share the pond voices by type (small sprites Skeeter, grumpy objects Pond Grump, forgotten things Mudling, Red-Eye Bog Toad, drill worms Log Lump, bosses The Big One; FINAL CALL gets `pa2`, HUSH-9 gets `pa`).
+- Files: `data/dialog-cast.js` (speakers and speakerFx, tag `cast1`), `data/voice-index.json` rebuilt: 0 lines with no voice. New lines show "plain direction" until scripts are written.
+- Tests: unused_voice 0 on all five, voice index rebuilt, tag_check.
 ## 2026-11-03 (140): Art Library: Grace two-step recipe, Tom's prompts (library only, no game change)
 
 - Tom (11-03 16:33 to 16:39) found the method himself: step 1, a FRESH picture from his photo with his own short prompt (style line, pose, four heads tall and head as wide as the shoulders, outfit) gave likeness and proportions; step 2, an edit of that picture with one line, "change the style of this image: richly detailed hand-painted digital illustration.", gave the painted look. One call does one job. Claude's long prompts were confusing the generator (Tom, 16:37).
