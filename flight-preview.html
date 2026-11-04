@@ -24,7 +24,8 @@ a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:8px 2px}
 .tab.on{background:#7b6cff;border-color:#a89dff;color:#fff}
 #stagewrap{flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:10px 14px;position:relative}
 #phone{position:relative;background:#000;border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px #2c2852}
-#world{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+#world{display:block;width:100%;height:100%}
+#badge{position:absolute;left:8px;top:8px;z-index:2;background:rgba(16,14,34,.85);color:#ffd968;font-size:11px;font-weight:700;border-radius:8px;padding:3px 8px;pointer-events:none}
 #talk{position:absolute;left:4%;right:4%;bottom:3%;background:rgba(16,14,34,.9);border:2px solid #fff1cb;border-radius:10px;padding:8px 10px;font-size:12px;color:#fff1cb;display:none}
 #talk i{display:block;font-style:normal;font-weight:700;color:#ffd968;font-size:11px;margin-bottom:2px}
 #info{padding:0 14px 10px;font-size:12px;color:#b9b3e6;max-height:30vh;overflow:auto}
@@ -39,13 +40,13 @@ a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:8px 2px}
 <div class="bar"><b>Route</b><span class="bar" id="b-dir"></span></div>
 <div class="bar"><b>Play</b><span class="bar" id="b-ph"></span></div>
 <div class="bar"><b>Screen</b><span class="bar" id="b-scr"></span><span id="clock"></span></div>
-<div id="stagewrap"><div id="phone"><canvas id="world"></canvas><div id="talk"><i>TOM</i><span></span></div></div></div>
+<div id="stagewrap"><div id="phone"><canvas id="world"></canvas><div id="badge"></div><div id="talk"><i>TOM</i><span></span></div></div></div>
 <div id="info"></div>
 
 <script>
 'use strict';
 // The globals engine/flight-art.js and data/font.js expect from the game (engine/world.js, engine/overworld.js), kept to the same rules.
-let W=197,H=426,scale=2,safeTop=41,safeBottom=85;
+let W=384,H=832,scale=1.024,PK=1,safeTop=41,safeBottom=85;
 const layout={landscape:false};
 const canvas=document.getElementById('world'),gfx=canvas.getContext('2d');
 var FLIGHT_ART_META=null;   // set by this page (the game's data/flight-art.js is read as text so this stays replaceable)
@@ -65,6 +66,7 @@ if(EMBED) $('back').onclick=e=>{ e.preventDefault(); parent.postMessage('aot-fli
 const LS={get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }};
 let UI={art:'approved',dir:'west',ph:'all',scr:'portrait',play:true};
 try{ Object.assign(UI,JSON.parse(LS.get('aot-flight-preview')||'{}')); }catch(e){}
+UI.art='approved'; UI.play=true;   // every open starts on the approved pictures (fprev2: Tom saw the old art)
 const saveUI=()=>LS.set('aot-flight-preview',JSON.stringify(UI));
 
 // ---------- What each painted layer is called in the Art Library (data/art-prompts.json ids) ----------
@@ -121,7 +123,8 @@ function cropRect(c,x,y,w,h){ const o=document.createElement('canvas'); o.width=
 function padRows(id,w,h){ const d=id.data; let t=0,b=h; while(t<h-8&&rowDiff(d,w,t,0)<14) t++; while(b>t+8&&rowDiff(d,w,b-1,h-1)<14) b--; return [t,b]; }
 // Clear a plain background that touches an edge (magic wand: neighbour steps under 9, colour within 80 of the edge row).
 function floodClear(id,w,h,fromTop){
-  const d=id.data,y0=fromTop?0:h-1,ref=rowMean(d,w,y0); if(rowSpread(d,w,y0,ref)>9) return 0;
+  const d=id.data,y0=fromTop?0:h-1,ref=rowMean(d,w,y0); if(rowSpread(d,w,y0,ref)>6) return 0;
+  for(let y=1;y<Math.round(h*.08);y++) if(rowDiff(d,w,fromTop?y:h-1-y,y0)>10) return 0;   // only a real plain pad (fprev2: the LA sky got holes)
   const seen=new Uint8Array(w*h),st=[]; for(let x=0;x<w;x++){ st.push(y0*w+x); seen[y0*w+x]=1; }
   let n=0;
   while(st.length){ const p=st.pop(),i=p*4; d[i+3]=0; n++; const x=p%w,y=(p/w)|0;
@@ -221,8 +224,8 @@ function phaseList(){ return UI.ph==='all'?PHASES:PHASES.filter(p=>p[0]===UI.ph)
 function restart(){ pi=0; F={dir:UI.dir,mode:phaseList()[0][0],t:0}; }
 function sizeStage(){
   const land=UI.scr==='landscape',cw=land?852:393,ch=land?393:852;   // an iPhone 15 screen, in CSS pixels
-  layout.landscape=land; scale=2; W=Math.ceil(cw/scale); H=Math.ceil(ch/scale); safeTop=(land?57:82)/scale; safeBottom=(land?106:170)/scale;
-  canvas.width=W; canvas.height=H; FLIGHT_ART.cache.clear();
+  layout.landscape=land; scale=land?1:1.024; W=Math.ceil(cw/scale-1e-6); H=Math.ceil(ch/scale-1e-6);   // a painted outdoor map's zoom (engine/overworld.js outdoorCover, the town on a 393 x 852 phone) safeTop=(land?57:82)/scale; safeBottom=(land?106:170)/scale;
+  PK=Math.min(4,Math.max(1,Math.ceil((window.devicePixelRatio||1)*Math.max(1,scale)))); canvas.width=W*PK; canvas.height=H*PK; FLIGHT_ART.cache.clear();   // the game draws painted scenes at this sharpness (engine/draw.js plateSetK)
   const wrap=$('stagewrap'),aw=wrap.clientWidth-28,ah=wrap.clientHeight-20,k=Math.min(aw/cw,ah/ch);
   $('phone').style.width=Math.floor(cw*k)+'px'; $('phone').style.height=Math.floor(ch*k)+'px';
   $('talk').style.fontSize=Math.max(9,Math.round(13*k*1.6))+'px';
@@ -234,7 +237,7 @@ function frame(now){
   const list=phaseList(),[mode,dur]=list[pi%list.length];
   if(UI.play){ F.t+=dt; if(F.t>=dur){ pi=(pi+1)%list.length; if(pi===0&&UI.ph==='all') F={dir:UI.dir,mode:list[0][0],t:0}; F.mode=list[pi][0]; F.t=0; } }
   F.mode=list[pi%list.length][0];
-  gfx.setTransform(1,0,0,1,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=false;
+  gfx.setTransform(PK,0,0,PK,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=false;
   rect(0,0,W,H,'#141c1a');
   try{
     if(F.mode==='cabin') flightPaintedCabin(F,time); else if(F.mode==='map') flightPaintedMap(F,time); else flightPaintedSide(F,time);
@@ -248,7 +251,7 @@ function frame(now){
 }
 function showErr(t){ $('info').innerHTML='<span class="err">'+t.replace(/</g,'&lt;')+'</span>'; }
 async function load(){
-  const my=++loadNo; ready=false; $('info').textContent='Loading pictures...';
+  const my=++loadNo; ready=false; $('info').textContent='Loading pictures...'; $('badge').textContent='LOADING';
   try{
     const r=UI.art==='live'?await loadLive():await loadLibrary(UI.art==='device');
     if(my!==loadNo) return;
@@ -258,13 +261,14 @@ async function load(){
     const head=UI.art==='live'?'What the game shows today.':(UI.art==='device'?(nDev?nDev+' picture'+(nDev>1?'s':'')+' from this device, the rest approved.':'No Flight results on this device, so these are the approved pictures.'):'The approved pictures.')+
       (UI.art==='live'?'':' Cut automatically for this preview; the real install bakes them, so edges can differ.');
     $('info').innerHTML='<details><summary>'+head+' Which pictures</summary>'+r.used.map(u=>'<b>'+u[0]+'</b> '+u[1]).join(' &middot; ')+'</details>';
+    $('badge').textContent=UI.art==='live'?'OLD: LIVE GAME ART':UI.art==='device'?'THIS DEVICE'+(nDev?'':' (none, approved)'):'APPROVED PICTURES';
     sizeStage();
     restart(); ready=true;
-  }catch(err){ if(my===loadNo) showErr(err.message||String(err)); }
+  }catch(err){ if(my===loadNo){ showErr(err.message||String(err)); $('badge').textContent='COULD NOT LOAD'; } }
 }
 
 // ---------- Buttons ----------
-const BARS={art:[['approved','Approved'],['device','This device'],['live','Live game']],dir:[['west','Long Island to LA'],['east','LA to Long Island']],
+const BARS={art:[['approved','Approved'],['device','This device'],['live','Old (live game)']],dir:[['west','Long Island to LA'],['east','LA to Long Island']],
   ph:[['all','Whole flight'],['cabin','Cabin'],['takeoff','Takeoff'],['map','Map'],['landing','Landing'],['pause','Pause']],scr:[['portrait','Portrait'],['landscape','Landscape']]};
 function paintBars(){
   for(const k in BARS) $('b-'+k).innerHTML=BARS[k].map(([v,t])=>{ const on=v==='pause'?!UI.play:UI[k]===v;

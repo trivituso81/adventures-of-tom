@@ -1,3 +1,9 @@
+## 2026-11-03 (155): Flight preview always opens on the approved pictures, drawn sharp (`fprev2`)
+- Tom (18:44): "its using all the old graphics".
+- flight-preview.html: every open now starts on Approved (the art choice is no longer remembered), a badge on the screen says which set is showing (APPROVED PICTURES / THIS DEVICE / OLD: LIVE GAME ART), and the Live button is renamed "Old (live game)".
+- It drew at half the game's resolution with blocky pixels (scale 2, no supersampling), so even the new paintings looked like the old pixel art. Now it uses the game's own zoom for a painted map (about 1.02) and the game's sharpness rule (engine/draw.js: up to 4 canvas pixels per point, ceil(devicePixelRatio x zoom)), smooth.
+- The LA skyline's painted sky was being partly cut away as if it were plain padding (blocky holes). The plain-pad cut now needs a truly flat top 8% of the picture.
+
 ## 2026-11-03 (154): Grace's walk split into 3 sheets of 3 frames (`gsheet2`)
 - Tom (18:40): the single 3 x 3 sheet lost the painted style and look, and the poses were wrong; "lets separate into 3 sheets". Prompts written with him in chat and approved (18:41).
 - `grace-walk-sheet` replaced by `grace-walk-front`, `grace-walk-back`, `grace-walk-side` (Characters > Grace, 16:9, one reference: step 2 `grace-hero-fresh-style-v4.png`). Each opens with Tom's style line ("Richly detailed hand-painted digital illustration, exactly like the attached picture") and spells out 3 poses (stand, step, step; side: stand, stride, passing). Files in tools/art-library/prompts/.
