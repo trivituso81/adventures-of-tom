@@ -19,20 +19,8 @@
    "status": "approved",
    "versions": [
     {
-     "n": 4,
-     "file": "art/raw/characters/grace-hero-fresh-v4.png",
-     "date": "2026-11-04",
-     "from": "v5"
-    },
-    {
      "n": 5,
      "file": "art/raw/characters/grace-hero-fresh-v5.png",
-     "date": "2026-11-04",
-     "from": "v5"
-    },
-    {
-     "n": 8,
-     "file": "art/raw/characters/grace-hero-fresh-v8.png",
      "date": "2026-11-04",
      "from": "v5"
     }
