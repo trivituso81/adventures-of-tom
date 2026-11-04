@@ -4,17 +4,21 @@
   {
    "name": "far_thigh",
    "copy_of": "thigh",
-   "shade": 0.8,
+   "shade": 0.66,
    "pivot": [
     530,
     800
    ],
-   "z": 0
+   "z": 0,
+   "offset": [
+    26,
+    0
+   ]
   },
   {
    "name": "far_shin",
    "copy_of": "shin",
-   "shade": 0.8,
+   "shade": 0.66,
    "pivot": [
     548,
     1095
@@ -67,18 +71,21 @@
   }
  ],
  "poses": {
-  "stand": {},
+  "stand": {
+   "far_thigh": -3,
+   "far_shin": 0
+  },
   "stepA": {
-   "thigh": 17,
+   "thigh": 19,
    "shin": 0,
-   "far_thigh": -15,
-   "far_shin": -26,
+   "far_thigh": -17,
+   "far_shin": -30,
    "_dy": 16
   },
   "stepB": {
    "thigh": -15,
    "shin": -26,
-   "far_thigh": 17,
+   "far_thigh": 19,
    "far_shin": 0,
    "_dy": 16
   }

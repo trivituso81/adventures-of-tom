@@ -91,6 +91,9 @@ class Rig:
         """Forward affine for a layer: its own rotation about its own joint, then carried by its parent's transform."""
         L = self.layers[name]
         M = _rot(tuple(L['pivot']), pose.get(name, 0))
+        if L.get('offset'):                                  # a constant shift for the whole layer (the far leg sits behind)
+            ox, oy = L['offset']
+            M = np.array([[1, 0, ox], [0, 1, oy], [0, 0, 1.0]]) @ M
         if L.get('parent'):
             M = self._matrix(L['parent'], pose) @ M
         return M
