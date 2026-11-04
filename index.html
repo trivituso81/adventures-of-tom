@@ -8,8 +8,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="The Adventures of Tom">
-<link rel="apple-touch-icon" sizes="180x180" href="icon-v7.png">
-<link rel="icon" type="image/png" href="icon-v7.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-v8.png">
+<link rel="icon" type="image/png" href="icon-v8.png">
 <script>/* After the welcome-screen RELOAD (address carries ?r=...), point the icon links at a fresh address too, so Add to Home Screen cannot reuse a stale icon. */
 (function(){try{var r=new URLSearchParams(location.search).get('r');if(!r)return;document.querySelectorAll('link[rel~="icon"],link[rel~="apple-touch-icon"]').forEach(function(l){l.href=l.getAttribute('href').split('?')[0]+'?r='+r;});}catch(e){}})();
 </script>
@@ -497,11 +497,11 @@ html.landscape #splash-panel{border-radius:8px 8px 0 0}
 .sp-choice.admin.sel{background:#ffffff14;border-color:#ffffff55;color:var(--ink-dim)}
 .sp-soon{background:#ffffff1f;color:var(--ink-dim)}
 
-/* Welcome art (Tom, 2026-10-29): painted title scene (art/welcome.webp) behind a navy and gold menu panel. */
+/* Welcome art (Tom, 2026-10-29; title1 2026-11-03): painted plaza (art/welcome.webp portrait, art/welcome-land.webp landscape) with no people, the title logo (art/title-logo.webp) on top and the family drawn by engine/splash.js, behind a navy and gold menu panel. */
 #splash{background:#0b0f1a}
 #splash::before{content:'';position:absolute;inset:-24px;background:url(art/welcome.webp) center/cover no-repeat;filter:blur(18px) brightness(.55);z-index:0}
-#splash-art{display:block;z-index:1;background:linear-gradient(to bottom,#0a0e1800 80%,#0a0e18b8 91%,#0a0e18ee 100%),url(art/welcome.webp) center top/cover no-repeat}
-html.landscape #splash-art{background:linear-gradient(to bottom,#0a0e1800 58%,#0a0e18c8 82%,#0a0e18f0 100%),url(art/welcome.webp) 50% 12%/auto 255% no-repeat;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
+#splash-art{display:block;z-index:1;background:url(art/title-logo.webp?v=title1) center 58px/84% auto no-repeat,linear-gradient(to bottom,#0a0e1800 80%,#0a0e18b8 91%,#0a0e18ee 100%),url(art/welcome.webp) center top/cover no-repeat}
+html.landscape #splash-art{background:url(art/title-logo.webp?v=title1) center 8px/auto 35% no-repeat,linear-gradient(to bottom,#0a0e1800 66%,#0a0e18c8 84%,#0a0e18f0 100%),url(art/welcome-land.webp?v=title1) 50% 40%/cover no-repeat}
 #splash-rotate,#splash-panel{z-index:3}
 #splash #splash-rotate{border:1px solid #b8914a;background:#141a26d9;color:#f3dfa8}
 #splash #splash-panel{left:4%;right:4%;bottom:calc(14px + env(safe-area-inset-bottom));padding:26px 12px 12px;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18,inset 0 0 0 2px #0a0e18,inset 0 0 0 3px #6d5629,0 10px 26px #000a;font-family:Georgia,'Palatino Linotype',Palatino,serif}
@@ -1518,7 +1518,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/plate.js?v=row3"></script>
 <script src="engine/draw.js?v=scroll1"></script>
 <script src="engine/intro.js?v=size3"></script>
-<script src="data/flight-art.js?v=fl2"></script>
+<script src="data/flight-art.js?v=flight2"></script>
 <script src="engine/flight-art.js?v=fl2"></script>
 <script src="engine/travel.js?v=travel1"></script>
 <script src="engine/nara.js?v=freeze1"></script>
@@ -1553,7 +1553,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=music1"></script>
+<script src="engine/splash.js?v=title1"></script>
 <script src="engine/cloud-save.js"></script>
 <script src="engine/skip.js"></script>
 <script src="engine/chapter-select.js?v=rose1"></script>

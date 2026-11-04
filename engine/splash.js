@@ -536,10 +536,10 @@ function splashScene(W,H,panelH,time) {
 }
 // Painted welcome art (Tom, 2026-10-29): the family stands where the shadows fall on the plaza in art/welcome.webp.
 // Positions are in the picture's own pixels (941 x 1671) and are mapped through the same "cover, top" fit the CSS uses.
-// h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape shows the title only.
+// h = sprite height in picture pixels (Rose rides on Tom, so Tom's includes her). Landscape maps these spots through SPLASH_LAND.
 const SPLASH_IMG={w:941,h:1671};
 const SPLASH_ALL=0.93;   // Tom 2026-11-01: everyone stands back a bit further (was 1.1 since 2026-10-29), see SPLASH_BACK; Tom 14:15 'just a little bit further': 1.0 to 0.93 and lift 35 to 60
-const SPLASH_BACK=60;   // Tom 2026-11-01: feet lifted this many picture pixels so the family stands further back on the plaza
+const SPLASH_BACK=-15;   // title1 2026-11-03: new background-only plaza (art/welcome.webp 720 x 1280, same shape as the old 941 x 1671, so these design pixels still map), family stands 75 px lower on its empty stage (feet 62% to 76%). Was 60: Tom 2026-11-01: feet lifted this many picture pixels so the family stands further back on the plaza
 // Tom 2026-11-01: the title uses the new painted standing Tom. Set TITLE_TOM_RIDE=true to bring back the old painted Tom carrying Rose (needs a new ride sheet to match).
 const TITLE_TOM_RIDE=true,TITLE_TOM_H=308;   // TITLE_TOM_H: standing Tom's height in picture pixels. Tom 2026-11-01: adults at real height, Justin 6'4" = 330 (Tom 5'11" 308, TNB 5'10" 304, Boppy 5'7" 291, Amy and Deedee 5'5" 282); kids unchanged
 const SPLASH_SPOTS=[
@@ -587,30 +587,38 @@ function splashRideBig(rows) {
   rideBigCache={cv:out,fw:c.width,fh:c.height};
   return rideBigCache;
 }
+// title1 2026-11-03: landscape shows the family too, on art/welcome-land.webp (1280 x 720, drawn "cover" at 40% down, see index.html).
+// Each portrait spot is mapped onto the landscape plaza's stage (feet y about 60% to 74%): sideways spread sx around cx, feet squeezed by fy, sizes by k.
+const SPLASH_LAND={img:{w:1280,h:720},posY:.4,cx:640,sx:.85,feet0:434,fy:.42,k:.47};
+function splashLandSpot(m) {
+  const L=SPLASH_LAND;
+  return {x:L.cx+(m.x-470)*L.sx,feet:L.feet0+(m.feet-1020)*L.fy,h:m.h*L.k};
+}
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
   const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
   if(c.width!==w||c.height!==h) { c.width=w; c.height=h; }
   const g=splash.g; g.clearRect(0,0,w,h);
-  if(w>h) return;
-  const s=Math.max(w/SPLASH_IMG.w,h/SPLASH_IMG.h),ox=(w-SPLASH_IMG.w*s)/2;
+  const land=w>h,IM=land?SPLASH_LAND.img:SPLASH_IMG;
+  const s=Math.max(w/IM.w,h/IM.h),ox=(w-IM.w*s)/2,oy=land?(h-IM.h*s)*SPLASH_LAND.posY:0;
   const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
   try {
     for(const m of SPLASH_SPOTS) {
       if(m.solo&&TITLE_TOM_RIDE) continue;
       const set=m.id==='tom'&&OW.tomRide&&TITLE_TOM_RIDE?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
-      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=(m.id==='tom'&&!TITLE_TOM_RIDE?TITLE_TOM_H:m.h)*SPLASH_ALL*s/fh;
+      const P=land?splashLandSpot(m):{x:m.x,feet:m.feet-SPLASH_BACK,h:m.h},hh=m.id==='tom'&&!TITLE_TOM_RIDE?TITLE_TOM_H*(land?SPLASH_LAND.k:1):P.h;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=hh*SPLASH_ALL*s/fh;
       const bob=Math.floor((time*1.6+SPLASH_SPOTS.indexOf(m)*.37)%2)*Math.max(1,Math.round(s*2));
       if(m.id==='tom'&&TITLE_TOM_RIDE&&set===OW.tomRide) {   // bigger heads (see RIDE_HEADS)
         const big=splashRideBig(fr);
         if(big) {
-          const kp=m.h*SPLASH_ALL*s/big.fh,Q=RIDE_Q,bottom=Math.round((m.feet-SPLASH_BACK)*s-bob);
+          const kp=P.h*SPLASH_ALL*s/big.fh,Q=RIDE_Q,bottom=Math.round(oy+P.feet*s-bob);
           g.imageSmoothingEnabled=true; g.imageSmoothingQuality='high';
-          g.drawImage(big.cv,Math.round(ox+m.x*s-(RIDE_PAD_X+big.fw/2)*kp),Math.round(bottom-(RIDE_PAD_TOP+big.fh)*kp),Math.round(big.cv.width/Q*kp),Math.round(big.cv.height/Q*kp));
+          g.drawImage(big.cv,Math.round(ox+P.x*s-(RIDE_PAD_X+big.fw/2)*kp),Math.round(bottom-(RIDE_PAD_TOP+big.fh)*kp),Math.round(big.cv.width/Q*kp),Math.round(big.cv.height/Q*kp));
           g.imageSmoothingEnabled=false; continue;
         }
       }
-      drawSprite(fr,set.pal,Math.round(ox+m.x*s-fw*k/2),Math.round((m.feet-SPLASH_BACK)*s-fh*k-bob),k);
+      drawSprite(fr,set.pal,Math.round(ox+P.x*s-fw*k/2),Math.round(oy+P.feet*s-fh*k-bob),k);
     }
   } finally { gfx=prev; }
 }
