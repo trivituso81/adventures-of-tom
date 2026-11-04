@@ -182,6 +182,40 @@
    "group": "Grace"
   },
   {
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/characters/tom-hero-fresh-v1.png",
+     "date": "2026-11-04",
+     "from": "v1",
+     "at": 1793818142438
+    }
+   ],
+   "rejects": [],
+   "id": "tom-hero-fresh",
+   "tab": "Characters",
+   "title": "Tom hero (approved 11-04): the reference for every Tom sheet",
+   "ar": "3:4",
+   "refs": [],
+   "group": "Tom",
+   "prompt": "Already painted and approved. This entry holds the reference picture; do not regenerate it. Tom's walk sheet attaches it."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-walk-sheet",
+   "tab": "Characters",
+   "title": "Tom walk: one 3 x 3 sheet, built like Grace's (11-04)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/characters/tom-hero-fresh-v1.png"
+   ],
+   "group": "Tom",
+   "prompt": "IMAGE REQUEST: ONE SINGLE CHARACTER WALK SHEET. Return exactly one image, nothing else.\n\nATTACH: the hero pose picture of Tom (the reference).\n\nWHAT THIS IS\nWalking frames for \"The Adventures of Tom\", a family role-playing game. The character is Tom, a calm, dry-humored uncle. The attached hero pose is the reference for Tom. Draw him EXACTLY like the reference in every frame: same face, hair, beard, clothes, shirt print, colors, proportions, art style, level of detail. Keep the face as faithful to the reference as it is in the hero pose, in every frame, including from the side and from behind where hair, ears and the back of the head show.\n\nTOM'S LOOK (same as the reference)\nVery short dark brown hair with gray at the sides, receding at the temples, thin at the crown. Full short salt and pepper beard. Warm brown eyes, a small wry smile. Navy blue crew-neck t-shirt, untucked, with one classic rectangular gray game controller printed on the chest, with a black cross pad on its left, two red round buttons on its right and a gray cord curving up from it (the back of the shirt is plain navy). Washed gray slim jeans. White low-top sneakers with a black swoosh on the side. No watch, no jewelry. Hands empty and out of his pockets in every frame.\n\nART STYLE\n- A richly detailed hand-painted digital illustration of a real man, exactly like the attached picture, shown full body. Smooth blended brushwork, glossy highlights on skin and hair, finely painted hair and beard strands. Clothing, fabric and the shirt print are drawn in fine detail so the controller is readable.\n- Caricature proportions: a big head, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The head is exactly the size it is in the reference. The face keeps a clear likeness of the reference.\n- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, saturated jewel-toned colors.\n- Crisp clean silhouettes. No thick or black outlines.\n- Painted, realistic. NOT pixel art, NOT 16-bit. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.\n\nTHE SHEET (strict)\n- A grid of 3 columns by 3 rows of equal square cells, 256 x 256 pixels each, so the full image is 768 x 768. If your tool offers a different size, keep exactly 3 columns and 3 rows of equal square cells.\n- Exactly 9 frames, one per cell, filled left to right, top to bottom, in the numbered order below.\n- Camera: a character turnaround at about chest height, full body, straight on for the front and back rows and a true side profile for the third row. No top-down angle.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere in the character. No magenta glow, spill, tint or fringe on the character's edges, hair or beard strands. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.\n- Same scale in every cell. Feet on the ground rest on one horizontal line about 24 pixels above the cell bottom.\n- Draw ONLY Tom. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.\n- Same head size, same hair volume and same outfit in every frame. The head is never redrawn smaller or larger from frame to frame.\n- Arms swing opposite to the legs. The two STEP frames of a row mirror each other. STAND frames are neutral.\n\nTHE 9 FRAMES (each clearly different from the others)\n1. DOWN STAND: facing the viewer, feet together, arms at his sides, a small wry smile.\n2. DOWN STEP A: facing the viewer, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.\n3. DOWN STEP B: mirror of 2.\n4. UP STAND: seen from behind, feet together, arms at his sides. Shows the back of his head, the thin crown, and the plain navy back of the shirt.\n5. UP STEP A: seen from behind, the foot on the viewer's left steps away from us, the arm on the viewer's right swings forward.\n6. UP STEP B: mirror of 5.\n7. SIDE STAND: true profile facing LEFT, feet together, arms at his sides.\n8. SIDE STEP A: profile facing left, front leg forward with the heel down, back leg trailing with the heel lifted, near arm back, far arm forward.\n9. SIDE STEP B: profile facing left, the passing moment of the stride, back foot lifted with a bent knee, body slightly higher.\n\nFamily friendly for ages 6 and up.\n\nNEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Tom in the pose described.\n"
+  },
+  {
    "status": "draft",
    "versions": [],
    "rejects": [],
