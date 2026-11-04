@@ -1,3 +1,9 @@
+## 2026-11-03 (149): Art Library row no longer stuck on "Waiting on me" after picking an older result (`udec1`)
+- Tom (18:17): Characters > Grace step 1 had shown "Waiting on me" for 45 minutes. Cause: "Waiting on me" meant "the newest result on this device has a higher number than the last decision". Tom made v6 to v8 on his phone, then approved v5, and 84c48dc/faadf93 trimmed the entry to the v5 version only, so v8 looked undecided forever.
+- Fix in art.html: approve and reject now store `at` (time in ms). A row is "Waiting on me" only when the newest result was made after the last decision. Entries with no `at` keep the old number rule. data/art-prompts.json: grace-hero-fresh's v5 version gets `at` = 2026-11-04 01:58 UTC (Tom's last approve on it).
+- Also seen: Tom's page showed Characters 2 and Flight 7/12, a 18:07 copy of the data. GitHub Pages cancels a deploy whenever a newer push lands, and each approve is 2 pushes, so during a run of approvals only 1 deploy finished in 20 minutes. Not a page bug; the page catches up 2 to 8 minutes after the approvals stop.
+- tools/art-library/test.py: approve and reject checks pass; the same 5 known failures as 148.
+
 ## 2026-11-03 (148): Art Library APPROVE/REJECT no longer fails with "The prompts file kept changing under us" (`artsave1`)
 - Tom: 8 times out of 10, APPROVE then TAP AGAIN showed that error. Cause: the page read data/art-prompts.json from the GitHub API and the browser handed back its saved copy (GitHub marks those reads cacheable for 60 s). After any recent approval the copy was out of date, GitHub refused the save (409), and the page retried 3 times instantly with the same stale copy.
 - Fix in art.html: every GitHub read uses `cache:'no-store'` plus a time stamp; commitJson tries 6 times with growing waits (1.5 s, 3 s, ...) because GitHub can lag on its own latest write; the final error now includes what GitHub said.
