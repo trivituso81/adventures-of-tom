@@ -3877,8 +3877,16 @@
    "group": "Title and icon"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/title/title-welcome-landscape-v1.png",
+     "date": "2026-11-04",
+     "from": "v2",
+     "at": 1793760644029
+    }
+   ],
    "rejects": [],
    "id": "title-welcome-landscape",
    "tab": "Title",
