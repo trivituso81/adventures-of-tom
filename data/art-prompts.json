@@ -3841,8 +3841,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/title/title-welcome-portrait-v1.png",
+     "date": "2026-11-04",
+     "from": "v5",
+     "at": 1793760534872
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-04",
