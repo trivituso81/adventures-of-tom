@@ -25,7 +25,7 @@ Title screen > ADMIN > VOICE LIBRARY opens `voices.html` inside the app.
 | Script edits | localStorage `aot-vl-scripts` | Per line. Filters: `aot-vl-filters`. Key: `aot-el-key`. |
 
 ## Narration boxes (2026-11-03, `narr1`)
-A scene box labeled with a place, object or moment ("Little silver door", "Sunday dinner") is narration. Map the label to `narrator` in `DIALOG_CAST.speakers`. The Narrator uses Mr. Washington's voice id (override in make-index.js) until it gets its own voice. Characters (monsters, Whispers, Long coat) get a character voice instead.
+A scene box labeled with a place, object or moment ("Little silver door", "Sunday dinner") is narration. Map the label to `narrator` in `DIALOG_CAST.speakers`. The Narrator uses Mr. Washington's voice id (override in make-index.js) and the delivery direction "theatrical storyteller, lively pace" (narr1). Its description in data/dialog-cast.js says the same. Characters (monsters, Whispers, Long coat) get a character voice instead.
 
 ## Rebuild the index (Claude)
 

@@ -107,6 +107,8 @@ for(const k of ['battle|deedee','dialog|deedee']){ const v=voices[k]; if(!v) con
   v.voice_id='nh4f8rul91SCFqbXpyM0'; v.direction=''; }
 // Narrator (Tom, 2026-11-03): narration boxes use Mr. Washington's ElevenLabs voice (no free voice slot), until a baked file carries its own.
 if(!voices['dialog|narrator']&&voices['dialog|washington']) voices['dialog|narrator']=Object.assign({},voices['dialog|washington']);
+// Narrator delivery (Tom, 2026-11-03): theatrical storyteller, lively pace, not slow. Same voice id; only the direction changes.
+if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical storyteller, lively pace';
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
   v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);

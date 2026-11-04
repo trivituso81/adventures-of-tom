@@ -1,3 +1,11 @@
+## 2026-11-03 (144): Narrator delivery set to a theatrical storyteller (`narr1`)
+
+- Tom: a narrator for all text that no character says, and for Nara's excerpts, cast from an existing older-man voice, sounding like a theatrical storytelling old man who does not talk too slowly.
+- Cast already in place: the Narrator uses Mr. Washington's ElevenLabs voice (no new slot). This change keeps that voice and changes only the delivery direction to "theatrical storyteller, lively pace" (`tools/voice-library/make-index.js`), and rewrites the Narrator's description in `data/dialog-cast.js` to match. Narration lines are read on the Narrator in the Voice Library.
+- Not yet heard: a baked narrator clip still sounds like the old porch voice until Tom bakes the narration lines in the Library with the new direction.
+- Open: no Nara excerpt text exists in the repo yet, so Nara's excerpts are not routed to the Narrator. Waiting on Tom to say where those lines live.
+- Index rebuilt (4124 lines, 51 voices). Cache tag for `data/dialog-cast.js` bumped to `narr1`.
+
 ## 2026-11-03 (143): Art Library approve fixed for large prompts file (`artfix1`)
 
 - Tom: tapping TAP AGAIN to approve an image failed with "JSON.parse: unexpected end of data".

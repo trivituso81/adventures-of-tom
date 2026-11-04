@@ -312,7 +312,7 @@ const DIALOG_CAST={
     // Mr. Washington's voice id, the porch storyteller. To give the Narrator its own voice later, design it from desc and
     // sample, delete an unused voice first, and set the new id in that override.
     narrator:{name:'Narrator',type:'Story: reads the narration boxes (places, objects, moments)',stability:.5,
-      desc:'A warm, unhurried storybook narrator, an older man with a deep, kind voice, reading a bedtime story aloud. Gentle, a little wry, never theatrical. Clean studio recording.',
+      desc:'A theatrical storytelling old man with a rich, resonant, dramatic voice, playing every scene like a stage narrator. Lively and brisk, never slow, with a warm, wry twinkle. Clean studio recording.',
       sample:'Tom holds up the invitation. The brass moon on the little door clicks, and the door swings open by itself. Inside, it is very quiet, and it smells like old paper and somebody else\'s birthday cake.'}
   }
 };
