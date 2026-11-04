@@ -4236,9 +4236,15 @@
    "group": "Flight art"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "should be: A sheet of separate painted map decorations on a plain flat magenta background (#FF00FF), each well apart: a small white jet seen level from above, two banking versions, a puff of smoke, six fluffy white clouds of different sizes and shapes, a red HOME map pin, a blue AWAY map pin (both with a small shine), a small round dot, a gold five-point star, and a grey smoke trail. Each item is clean and crisp and centered in its own space with plenty of margin. No text. instead there are characters in this",
+     "from": "v1"
+    }
+   ],
    "id": "flight-mapprops",
    "tab": "Flight",
    "ar": "4:3",
