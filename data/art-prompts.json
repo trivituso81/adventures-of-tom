@@ -418,9 +418,15 @@
    "group": "Grace"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-04",
+     "note": "distorted",
+     "from": "v3"
+    }
+   ],
    "id": "grace-hero-fresh-style",
    "tab": "Characters",
    "title": "Grace step 2: change the style of step 1 (approve step 1 first)",
@@ -428,7 +434,7 @@
    "refs": [
     "art/raw/characters/grace-hero-fresh-v1.png"
    ],
-   "prompt": "change the style of this image: richly detailed hand-painted digital illustration.",
+   "prompt": "change the style of this image the characters face: richly detailed hand-painted digital illustration. make her keychain a squishy gold dumpling with diamonds",
    "group": "Grace"
   },
   {
