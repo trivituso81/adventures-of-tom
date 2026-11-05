@@ -1,3 +1,10 @@
+## 2026-11-05 (217): Flight landing and takeoff screens read as one scene: LA skyline cleaned, foreground strips off (`flight9`)
+- Tom (13:48, two preview screenshots): "there is some strange dissonance between the stacked clips" on the Long Island and Los Angeles takeoff and landing screens.
+- Fact (cause): (1) the LA skyline picture is a whole panorama, and the strip cleanup only cleared sky within a fixed colour distance of the top row, so the sunset gradient stayed opaque (a second sky with a hard seam under the real sky layer) and the strip kept its own grass and runway at the bottom (a second runway above the real one); (2) the foreground strips are framed mini-pictures: LA has its own sky, hangars and a third runway, Long Island is a top-down view of rooftops.
+- Fix: flight-preview.html `prepStrip` (used by the preview and by `bake_flight_lib.py`) takes options. For the LA skyline only: `floodGradient` follows the smooth sky down from the top row until a real edge (step under 9 per channel, no colour limit) and `groundCutRow` cuts below the skyline's base (the biggest brightness jump in the lower half). art/flight/skyline-la.webp is now 1280 x 160 (was 616 tall, opaque). engine/flight-art.js: the LA skyline is sized so one tile is about 2.4 screens wide (the downtown shows); `FLIGHT_FOREGROUND=false` turns the foreground strips off for both places (the pictures stay in art/flight, unused). Distant hills in the LA skyline picture were cleared with the sky.
+- Not changed: the approved pictures, the other layers, the map, the plane. New foreground strips must be sparse, side-on plants on a clear background; set `FLIGHT_FOREGROUND=true` only then.
+- Looked at: the Art Library preview (headless Chromium) and the game's own flight frames, portrait and landscape, takeoff and landing both directions; flight_test both ALL OK. Not watched on the phone.
+
 ## 2026-11-05 (216): Tom's redrawn profile head installed on every side frame, joined to his neck (`walk13`)
 - Tom (13:12 to 13:51): redrew the profile head (art/raw/characters/tom-head-side-v2.png, the picture with its neck) and asked for it to be used and to join the neck seamlessly. Placed once in tools/sprite-bake/tom_walk_frames.py `_side_frame`: one uniform scale, hair top to chin = the front head's height (402 frame px), the picture's neck is cut where it is as wide as Tom's headless side body neck (row 1262) and fades into the body's own neck skin over 14 rows. Used on side stand, both strides and the passing pose. Depth over height is .95 as drawn.
 - Known: the side figure is 44.7 rows, the front is 42.0 (the picture's neck is long and the head is large); side strides 44.6, pass 44.1. Back 41.9. Not equalised; Tom to say if he wants it brought to 42.
@@ -10,6 +17,7 @@
 ## 2026-11-05 (214): NPC chain follows the approved takes (Pip, Moss, Dot)
 - Tom approved scene v3 and cut v2 for Pip, Moss and Dot. The cut entry now chains off scene v3, and the three walk entries chain off cut v2 (they said v1). `APPROVED_TAKE` in `tools/art-library/npc-prompts.js` holds the pick per group (default v1); the walk prompts read it.
 - No prompt text changed. 389 entries, validate.js OK, JS output matches the json for every NPC entry. No game files or `?v=` tags touched.
+
 
 ## 2026-11-05 (213): Juice bar, boards, Tom's house, Tom's suite, Casa, Creole, Pupuseria, Jordan and Sam, Dakota walk maps from Tom's Area Builder exports (`rmmask6`)
 - Tom (13:32) sent exports for juicebar, boards, tomhouse, tomsuite, casa, creole, pupuseria, jordansam and dakota (chapter 20 view, all Los Angeles rooms). Only `data/maps-la.js` changed (plateMask lines).

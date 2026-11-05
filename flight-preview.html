@@ -56,7 +56,7 @@ function rect(x,y,w,h,color){ gfx.fillStyle=color; gfx.fillRect(Math.round(x),Ma
 function ellipse(x,y,rx,ry,color){ gfx.fillStyle=color; gfx.beginPath(); gfx.ellipse(x,y,rx,ry,0,0,Math.PI*2); gfx.fill(); }
 </script>
 <script src="data/font.js"></script>
-<script src="engine/flight-art.js?v=flight7"></script>
+<script src="engine/flight-art.js?v=flight9"></script>
 <script>
 'use strict';
 FLIGHT_ART.loading=true;   // stop the game's own loader (it would read art/flight/ on a timer); this page loads the art itself
@@ -132,9 +132,25 @@ function floodClear(id,w,h,fromTop){
       if(Math.abs(d[j]-d[i])+Math.abs(d[j+1]-d[i+1])+Math.abs(d[j+2]-d[i+2])<9*3&&Math.abs(d[j]-ref[0])+Math.abs(d[j+1]-ref[1])+Math.abs(d[j+2]-ref[2])<80*3){ seen[q]=1; st.push(q); } } }
   return n;
 }
-function prepStrip(im,key){
-  const c=canvasOf(im),w=c.width,h=c.height,id=px(c);
-  if(key){ floodClear(id,w,h,true); floodClear(id,w,h,false); }
+// A skyline strip the generator painted as a whole panorama (its own sky above, its own grass and runway below): follow the smooth
+// sky gradient down from the top row until a real edge (neighbour step under 9 per channel, no colour limit, so a sunset gradient
+// clears completely), then cut off everything below the skyline's base (the biggest brightness jump in the lower half). 212+1: flight7.
+function floodGradient(id,w,h){
+  const d=id.data,seen=new Uint8Array(w*h),st=[]; for(let x=0;x<w;x++){ st.push(x); seen[x]=1; }
+  while(st.length){ const p=st.pop(),i=p*4; d[i+3]=0; const x=p%w,y=(p/w)|0;
+    for(const q of [x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1]){ if(q<0||seen[q]) continue; const j=q*4;
+      if(Math.abs(d[j]-d[i])+Math.abs(d[j+1]-d[i+1])+Math.abs(d[j+2]-d[i+2])<27){ seen[q]=1; st.push(q); } } }
+}
+function groundCutRow(id,w,h){
+  const d=id.data,y0=Math.round(h*.5); let prev=null,best=0,by=h;
+  for(let y=0;y<h;y++){ let s=0,n=0; for(let x=0;x<w;x+=2){ const i=(y*w+x)*4; s+=d[i]+d[i+1]+d[i+2]; n++; }
+    const m=s/(3*n); if(y>=y0&&prev!=null&&Math.abs(m-prev)>best){ best=Math.abs(m-prev); by=y; } prev=m; }
+  return best>50?by:h;
+}
+function prepStrip(im,key,opts){
+  let c=canvasOf(im),w=c.width,h=c.height,id=px(c);
+  if(opts&&opts.cutGround){ const cy=groundCutRow(id,w,h); if(cy<h){ c=cropRows(c,0,cy); h=c.height; id=px(c); } }
+  if(key){ if(opts&&opts.gradient) floodGradient(id,w,h); else { floodClear(id,w,h,true); floodClear(id,w,h,false); } }
   c.getContext('2d').putImageData(id,0,0);
   const d=id.data; let t=0,b=h; const op=y=>{ for(let x=0;x<w;x+=2) if(d[(y*w+x)*4+3]>16) return true; return false; };
   while(t<h-1&&!op(t)) t++; while(b>t+1&&!op(b-1)) b--;
@@ -226,7 +242,7 @@ function oceanOf(im){ const c=canvasOf(im),w=c.width,h=c.height,d=px(c).data; le
 function prepare(raw,src){
   const imgs={},M={v:'preview',files:{},size:{},sun:{le:[.504,.305],la:[.506,.766]}};
   for(const k of ['cabin','skyLe','skyLa']) imgs[k]=asImg(canvasOf(raw[k]));
-  for(const k of ['skylineLe','skylineLa','foreLe','foreLa']) imgs[k]=asImg(prepStrip(raw[k],true));
+  for(const k of ['skylineLe','skylineLa','foreLe','foreLa']) imgs[k]=asImg(prepStrip(raw[k],true,k==='skylineLa'?{gradient:true,cutGround:true}:null));
   for(const k of ['groundLe','groundLa']) imgs[k]=asImg(prepStrip(raw[k],false));
   M.runway={le:findRunway(imgs.groundLe),la:findRunway(imgs.groundLa)};
   const P=prepPlane(raw.plane); imgs.plane=P.img; M.plane=P.meta;

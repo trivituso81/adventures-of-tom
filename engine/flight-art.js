@@ -126,6 +126,7 @@ function fsBot(F,target,dtf) {
   if(F.botS==null||F.t<.05) return target;
   return F.botS+(target-F.botS)*(1-Math.pow(.88,dtf));
 }
+const FLIGHT_FOREGROUND=false;
 function flightPaintedSide(F,time) {
   if(!flightArtReady()) return false;
   const M=FLIGHT_ART_META,I=FLIGHT_ART.imgs;
@@ -145,7 +146,7 @@ function flightPaintedSide(F,time) {
   // Sky, with the sun put just above the skyline (LA, a low sunset) or high (Long Island).
   fsSky(I['sky'+K],M.sun[inLA?'la':'le'],gy+8,inLA?gy*.78:gy*.4);
   // Skyline stands on the ground's top edge.
-  const skImg=I['skyline'+K],skH=Math.round(Math.max(H*(inLA?.31:.27),W*.17*(inLA?1.25:1)));
+  const skImg=I['skyline'+K],skH=inLA?Math.round(Math.max(H*.12,W*2.4*skImg.naturalHeight/skImg.naturalWidth)):Math.round(Math.max(H*.27,W*.17));   // LA: the strip is a thin skyline, sized so one tile is about 2.4 screens wide (the whole downtown shows)
   fsStrip(skImg,gy-skH+4,skH,-drift*.3);
   // Ground, then the plane's shadow and the plane.
   fsStrip(I['ground'+K],gy,gh,-drift,true);
@@ -165,8 +166,8 @@ function flightPaintedSide(F,time) {
   // Tire smoke at touchdown.
   if(land&&t>2.55&&t<3.5) { const q=(t-2.55)/.95; fsProp('smoke',px-facing*(.02+.35*q)*L,yr-s*6,s*(.35+.5*q),(1-q)*.8,{bottom:true}); }
   // Foreground plants, the fastest layer, in front of everything.
-  const fgImg=I['fore'+K],fgH=Math.round(H*.2);
-  fsStrip(fgImg,H-fgH,fgH,-drift*1.6);
+  // OFF (Tom 13:48, the stacked strips clashed): the painted foreground strips are framed mini-pictures with their own sky, hangars and runway (LA) or a top-down view of rooftops (Long Island). Turn this on only for sparse, side-on foreground plants on a clear background.
+  if(FLIGHT_FOREGROUND) { const fgImg=I['fore'+K],fgH=Math.round(H*.2); fsStrip(fgImg,H-fgH,fgH,-drift*1.6); }
   fsRestore(was);
   // Caption.
   const cap=land?(inLA?'LOS ANGELES':'LONG ISLAND'):(inLA?'LEAVING LOS ANGELES':'LEAVING LONG ISLAND');
