@@ -1,3 +1,9 @@
+## 2026-11-05 (225): Long Island flight ground is a plain field and road, one town band only (`flight13`)
+- Tom (14:44, screenshot): two layers both showed half-cut houses, sliding in different directions and speeds. Cause (fact): the new skyline had the town, and the Long Island ground picture also carried its own row of hangars, sheds and trees along its top edge, which the mirrored tiling doubled.
+- Fix: flight-preview.html `prepStrip` takes `cropTop`; the Long Island ground drops its top 14 percent (the painted hangar row), so art/flight/ground-le.webp (now 1280x602) is only grass and the runway, like LA. LE runway band set by hand to `[.279,.49]` (the warm road is not grey, so `findRunway` falls back to its default); data/flight-art.js regenerated (`20261105d`).
+- Looked at: takeoff and landing, both directions, portrait and landscape; flight_test both ALL OK.
+- Tags: `flight13` (flight-preview.html by hand).
+
 ## 2026-11-05 (224): Mudling test card for a new enemy method, 2 x 2 grid over a soft underpainting (Art Library only, no game files, no tag)
 - Tom (14:35): the generator returns the sample as it was, or the result is not specific enough; he is happy with the enemy designs as they are, they just do not look handbrushed, are too pixelated and not high enough resolution.
 - Fact (looked at the approved pictures enemy-mudling v1 and enemy-grump v1, both 1280 x 720): the generator did not copy the old pixel sheet, it redesigned the creature (Mudling came out tall and upright instead of the squat mound, the Grump changed too) and painted it smooth. A 16:9 picture holding a row of 4 cells gives each pose only about 290 px of height. The same generator painted the single Mudling (test-mudling, 1024 x 1024, about 450 px tall) much richer, so the one-row layout is part of the resolution problem.
