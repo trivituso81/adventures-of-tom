@@ -32,7 +32,7 @@ BODIES = {
     # passing poses (arms hanging, between strides). The side picture faces right like his side stand, so it is mirrored to face left like the strides.
     'w_down_pass': 'tom-body-front-pass.png', 'w_up_pass': 'tom-body-back-pass.png', 'w_left_pass': ('tom-body-side-pass.png', 'mirror')}
 FRONT_HEAD = 'tom-head-front-v2.png'
-FRONT_CHIN = 365      # hair top to chin of the front head in frame px = the old front head's (measured 11-05), so the face stays the same size as the cast's
+FRONT_CHIN = 402      # hair top to chin of the front head in frame px (2026-11-05 13:45, Tom: use the picture he gave, no stretching): his picture scaled uniformly so the head is .242 of the front stand's height, the hero picture's share
 FRONT_COLLAR = 12     # the collar lands this far below the chin; the neck stump of the headless body is tucked behind the chin
 OW_REF_H = 1669       # front stand height with the old head: the bake's one size factor for ALL frames stays what it was, so back and side do not change
 JOIN = 6          # body row (from the top of the neck stump) where the head's cut row lands

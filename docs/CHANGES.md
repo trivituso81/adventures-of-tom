@@ -1,3 +1,7 @@
+## 2026-11-05 (215): Tom's front head is exactly his picture, uniformly scaled (`walk12`)
+- Tom (13:45): "use the picture i gave you" and "size it as per our head to body ratio rules". Fact: 204 stretched the front head by a separate width and height factor on top of the picture; now `tom-head-front-v2.png` is placed once, one uniform scale, with hair top to chin at exactly .242 of the front stand's height (`FRONT_CHIN` 402 of 1661 frame px in tools/sprite-bake/tom_walk_frames.py). No warp on the front any more.
+- Back head: uniform scale to the same ear-to-ear width as the front (x .929). Side head: uniform scale to the same hair-top-to-chin height (x .980). Front, side and back figures are 42.0, 43.0 and 41.9 rows; front chin lands on the .242 line in a guide-line render.
+- The redrawn profile head Tom made (13:12 to 13:32, depth .95 of height) is NOT installed; he has not said yes. A preview was shown (13:36).
 ## 2026-11-05 (214): NPC chain follows the approved takes (Pip, Moss, Dot)
 - Tom approved scene v3 and cut v2 for Pip, Moss and Dot. The cut entry now chains off scene v3, and the three walk entries chain off cut v2 (they said v1). `APPROVED_TAKE` in `tools/art-library/npc-prompts.js` holds the pick per group (default v1); the walk prompts read it.
 - No prompt text changed. 389 entries, validate.js OK, JS output matches the json for every NPC entry. No game files or `?v=` tags touched.

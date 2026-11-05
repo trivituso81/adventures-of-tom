@@ -227,20 +227,22 @@ def _walk_head(img, chin, ky, kx, taper, side, pad=160):
 # top-of-hair-to-chin height as the front; both scale uniformly (no reshaping). Cut rows and ear widths are measured on the stand frames at
 # the walk frames' painted scale (tom_walk_frames.build): front chin 358 of 1624, back nape 380, side chin 410; ear widths front 261, back 308.
 CUT_PX = {'down': 358, 'up': 380, 'left': 410}
-EAR_PX = {'down': 261, 'up': 308}
-if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 brings back the frames exactly as painted
-    _stf = poses['w_down_stand']; _stf = _stf.crop(_stf.getbbox()); _s = CUT_PX['down'] / float(_stf.height)
-    _kyf = HERO_T * (1 - _s) / ((1 - HERO_T) * _s); _kxf = _kyf * HERO_WK
-    _HEAD_T = CUT_PX['down'] * _kyf; _EAR_T = EAR_PX['down'] * _kxf
-    KX_KY = {'down': (_kyf, _kxf), 'up': (_EAR_T / EAR_PX['up'],) * 2, 'left': (_HEAD_T / CUT_PX['left'],) * 2}
-    for _v in ('down', 'up', 'left'):
+EAR_PX = {'up': 308}
+FRONT_EAR_OVER_H = 676 / 950.0      # ear to ear over hair top to chin of Tom's front head picture (measured on the picture)
+if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 skips the back and side matching below
+    # FRONT: Tom's front head picture (tom-head-front-v2.png) is placed in tom_walk_frames at FRONT_CHIN frame px, one uniform scale, no stretching.
+    # BACK and SIDE are scaled uniformly to match it: back = same ear-to-ear width, side = same hair-top-to-chin height.
+    from tom_walk_frames import FRONT_CHIN
+    _HEAD_T = float(FRONT_CHIN); _EAR_T = FRONT_CHIN * FRONT_EAR_OVER_H
+    KX_KY = {'up': (_EAR_T / EAR_PX['up'],) * 2, 'left': (_HEAD_T / CUT_PX['left'],) * 2}
+    for _v in ('up', 'left'):
         _st = poses[f'w_{_v}_stand']; _st = _st.crop(_st.getbbox()); _Hs = _st.height
         _ky, _kx = KX_KY[_v]; _chin = CUT_PX[_v]; _taper = int(round(.025 * _Hs))
         for _n in ('stand', 'step1', 'step2'):
-            if _v != 'left' and _n == 'step2': continue          # front and back step2 are the flipped step1 (below)
+            if _v != 'left' and _n == 'step2': continue          # back step2 is the flipped step1 (below)
             poses[f'w_{_v}_{_n}'] = _walk_head(poses[f'w_{_v}_{_n}'], _chin, _ky, _kx, _taper, _v == 'left')
-        print('walk head', _v, 'ky %.3f kx %.3f' % (_ky, _kx), 'head px %.0f ear px %.0f' % (_chin * _ky, (EAR_PX.get(_v) or 0) * _kx))
-    for _d in ('down', 'up'):
+        print('walk head', _v, 'ky %.3f kx %.3f' % (_ky, _kx), 'head px %.0f' % (_chin * _ky))
+    for _d in ('up',):
         poses[f'w_{_d}_step2'] = poses[f'w_{_d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
 
 # ---------------------------------------------------------------- helpers
