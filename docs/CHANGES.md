@@ -1,3 +1,9 @@
+## 2026-11-05 (213): Juice bar, boards, Tom's house, Tom's suite, Casa, Creole, Pupuseria, Jordan and Sam, Dakota walk maps from Tom's Area Builder exports (`rmmask6`)
+- Tom (13:32) sent exports for juicebar, boards, tomhouse, tomsuite, casa, creole, pupuseria, jordansam and dakota (chapter 20 view, all Los Angeles rooms). Only `data/maps-la.js` changed (plateMask lines).
+- Tiles changed / skipped because an object footprint already blocks them (furniture stays solid): juicebar 24/11, boards 0/6, tomhouse 4/7, tomsuite 5/6, casa 14/9, creole 0/24, pupuseria 7/9, jordansam 2/11, dakota 11/9. Boards and Creole already matched Tom's marks where furniture allows.
+- No object edits this time.
+- Checks: reach_test on all nine (0 fails; tomhouse still prints its 5 NPC chokepoint warnings, identical before this change), rooms_test on all nine (only `tomsuite: door leads out` fails, the same failure as before this change, see 2224), overlays looked at.
+
 ## 2026-11-05 (212): The map plane faces its direction of travel at takeoff and landing too (`flight7`)
 - Tom (13:33, screenshot near the LA pin): "take off and landing are still wrong in the map view". Fact: the first and last 8 percent of the map route drew the banking sprites (`planeB1`, `planeB2`), and the painted banking sprites are diagonal planes with the nose up and to the right, so the heading turn left the nose about 45 degrees off the path (the level sprite was already fixed in 208).
 - Fix (engine/flight-art.js): the map always draws the level sprite `planeLvl`. The banking sprites stay in the sheet, unused. Preview page tag moved to `flight7` as well.
