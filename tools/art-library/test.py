@@ -45,8 +45,9 @@ async def ux_checks(pg, name, d):
     ok(await pg.locator('.card[data-id]').count() == 0 and await pg.locator('.gh').count() == 0, name + ': no header is drawn for the one-group Characters tab and no card is open on first view')
     chars = [e for e in d if e['tab'] == 'Characters']
     stat = {x['id']: x['status'] for x in d}
+    vers = {x['id']: len(x.get('versions') or []) for x in d}
     def target(r): return r.split('/')[-1].rsplit('-v', 1)[0]
-    blocked = [e for e in chars if e['status'] != 'approved' and any(r.startswith('art/raw/') and stat.get(target(r)) != 'approved' for r in e['refs'])]
+    blocked = [e for e in chars if e['status'] != 'approved' and any(r.startswith('art/raw/') and not vers.get(target(r)) for r in e['refs'])]
     ready = [e for e in chars if e['status'] not in ('approved', 'rejected') and e not in blocked]
     approved = [e for e in chars if e['status'] == 'approved']
     rejected = [e for e in chars if e['status'] == 'rejected']

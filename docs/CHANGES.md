@@ -3,7 +3,7 @@
 - Cause (fact): each stencil stores a fixed path to its painting, always `...-v1.png`. Approving a new painting saves `-v2`, `-v3`, but the stencil kept pointing at `-v1`. The Square had v2 approved while its four stencils still pointed at v1.
 - Fix: `rp()` in art.html maps any reference to another entry's approved picture to that entry's newest approved version. Used for the thumbnail, the file name shown, the "not published yet" check, and the picture actually sent on GENERATE. Prompts file unchanged. Checked in the page: area-square-cut1 now resolves to area-square-v2.png.
 - Not fixed on purpose: stencils already generated from v1 are not redone; decide per area whether to regenerate. art.html has no tag.
-- `tools/art-library/test.py` could not finish here: it waits for a Blocked row that no longer exists in the live data (it was already listed as out of date).
+- `tools/art-library/test.py`: its Blocked rule now matches the page (blocked means the earlier step has no approved version), so it runs to the end. Its remaining failures are old hardcoded counts (entries per tab, group counts, Grace card), not caused by this change.
 
 ## 2026-11-04 (170): Area Builder admin page (`areas1`)
 - Tom asked for it 11-03 18:06. New `areas.html` (ADMIN > AREA BUILDER on the title screen, a tag bump on engine/splash.js only): pick any map, see the plate with the 32 px grid, tiles coloured Walkable, Blocked, Door, Exit from the real engine's built map. Paint, undo, reset, move a portal, Check (reach), Export JSON, view toggles (objects, walk-behind, spawn, NPCs, monsters, edits only), chapter field (recorded in the export; it does not change the map, since collision is the same in every chapter).
