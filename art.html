@@ -169,6 +169,8 @@ const STATE_NAME={ready:'Ready',wait:'Waiting on me',rejected:'Rejected',approve
 // ready = can be generated now; wait = a picture is generated and not yet approved or rejected; blocked = a reference picture is not made yet
 let RES={}, ENTRY={}, ST={}, EXISTS={};
 const CHAIN=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d+\.png$/;
+// A reference to another entry's approved picture always means that entry's NEWEST approved version, even if the stored path says -v1 (a stencil made before the painting was re-approved).
+function rp(p){ const m=CHAIN.exec(p); if(!m) return p; const dep=ENTRY[m[2]]; const vs=dep&&dep.versions; if(!vs||!vs.length) return p; let b=vs[0]; for(const v of vs) if((v.n||0)>(b.n||0)) b=v; return b.file||p; }
 const WORKFLOW=/\s*\((?:needs step \d+ approved|same chat[^)]*|fresh generator chat[^)]*)\)/gi;
 const baseTitle=t=>String(t).replace(WORKFLOW,'').trim();
 const shortTitle=t=>baseTitle(t).replace(/\s*\([^)]*\)\s*$/,'');
@@ -187,7 +189,7 @@ function blockInfo(e){
     const m=CHAIN.exec(rf[i]); if(!m) continue;
     const dep=ENTRY[m[2]]; if(!dep) continue;
     if(!(dep.versions||[]).length) return {why:'Approve “'+shortTitle(dep.title)+'” first.'};
-    const x=EXISTS[rf[i]]; if(x&&!x.ok) return {why:'“'+shortTitle(dep.title)+'” is approved but the site has not published it yet. Give it about 2 minutes.'};
+    const x=EXISTS[rp(rf[i])]; if(x&&!x.ok) return {why:'“'+shortTitle(dep.title)+'” is approved but the site has not published it yet. Give it about 2 minutes.'};
   }
   return null;
 }
@@ -196,10 +198,10 @@ function computeStates(){ ST={}; for(const e of DATA.entries) ST[e.id]=stateOf(e
 async function probe(){
   const need=[], seen=new Set();
   for(const e of DATA.entries) for(const p of e.refs||[]){
-    const m=CHAIN.exec(p); if(!m||seen.has(p)) continue; seen.add(p);
+    const m=CHAIN.exec(p); if(!m) continue; const q=rp(p); if(seen.has(q)) continue; seen.add(q);
     const dep=ENTRY[m[2]]; if(!dep||!(dep.versions||[]).length) continue;
-    const x=EXISTS[p]; if(x&&(x.ok||Date.now()-x.t<15000)) continue;
-    need.push(p);
+    const x=EXISTS[q]; if(x&&(x.ok||Date.now()-x.t<15000)) continue;
+    need.push(q);
   }
   let changed=false;
   await Promise.all(need.map(async p=>{ let ok=null; try{ ok=(await fetch(p,{method:'HEAD',cache:'no-store'})).ok; }catch(err){} if(ok===null) return; const was=EXISTS[p]; EXISTS[p]={ok,t:Date.now()}; if(!was||was.ok!==ok) changed=true; }));
@@ -224,7 +226,7 @@ function paintFilters(){
 }
 function renderCard(e){
   const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e);
-  const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(p)+'" data-path="'+esc(p)+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(p.split('/').pop())+'</label>').join('');
+  const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rp(p))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
   return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
@@ -309,7 +311,7 @@ async function generate(id,btn){
   if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
   const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
-  const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false);
+  const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false).map(rp);
   const own=ownOf(e); if(e.own&&!own) return setMsg(id,'Add the picture first: '+e.own.label+'.',true);
   const nRef=refPaths.length+(own?1:0);
   if(nRef>5) return setMsg(id,'At most 5 reference pictures. Untick '+(nRef-5)+'.',true);
