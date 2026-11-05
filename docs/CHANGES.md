@@ -5,6 +5,10 @@
 - Looked at: takeoff and landing, both directions, portrait and landscape; flight_test both ALL OK.
 - Tags: `flight12` (flight-preview.html by hand).
 
+## 2026-11-05 (224): Tom's new standing profile body, long-neck head for stand and pass, clean keying (`walk17`)
+- Tom (14:24, 14:25): use the head with the long neck (tom-head-side-v2.png) for the profile stand and pass frames only, and use the new stand body (art/raw/characters/tom-body-side-stand-v2.png). Strides keep the trimmed v3 head. The stand and pass heads sit 75 px forward (strides 40), so the standing head is the most forward.
+- The two new bodies have a crimson background that is the same red as the controller buttons, so `_keyed_flood` in tools/sprite-bake/tom_walk_frames.py removes only background connected to the picture border (soft edge, no holes in the controller print). Known leftover: a small skin ledge behind the neck in the pass frame, from the shelf in Tom's long-neck head drawing.
+
 ## 2026-11-05 (222): Tom's new body for the profile passing pose (`walk16`)
 - Tom (14:18): "use this body for pass". art/raw/characters/tom-body-side-pass-v2.png (headless profile, faces right, mirrored like the others) replaces `tom-body-side-pass.png` for `w_left_pass` in tools/sprite-bake/tom_walk_frames.py. It goes through the same profile placement as the stand (collar bottom at the front's collar height, same head, 85 px forward, neck sloping into the collar), so the pass frame is 1661 frame px (42.0 rows) like the stand. The old pass body file is no longer used.
 
