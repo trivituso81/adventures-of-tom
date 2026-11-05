@@ -1,3 +1,7 @@
+## 2026-11-05 (214): NPC chain follows the approved takes (Pip, Moss, Dot)
+- Tom approved scene v3 and cut v2 for Pip, Moss and Dot. The cut entry now chains off scene v3, and the three walk entries chain off cut v2 (they said v1). `APPROVED_TAKE` in `tools/art-library/npc-prompts.js` holds the pick per group (default v1); the walk prompts read it.
+- No prompt text changed. 389 entries, validate.js OK, JS output matches the json for every NPC entry. No game files or `?v=` tags touched.
+
 ## 2026-11-05 (213): Juice bar, boards, Tom's house, Tom's suite, Casa, Creole, Pupuseria, Jordan and Sam, Dakota walk maps from Tom's Area Builder exports (`rmmask6`)
 - Tom (13:32) sent exports for juicebar, boards, tomhouse, tomsuite, casa, creole, pupuseria, jordansam and dakota (chapter 20 view, all Los Angeles rooms). Only `data/maps-la.js` changed (plateMask lines).
 - Tiles changed / skipped because an object footprint already blocks them (furniture stays solid): juicebar 24/11, boards 0/6, tomhouse 4/7, tomsuite 5/6, casa 14/9, creole 0/24, pupuseria 7/9, jordansam 2/11, dakota 11/9. Boards and Creole already matched Tom's marks where furniture allows.

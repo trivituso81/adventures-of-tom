@@ -360,7 +360,7 @@
    "title": "Pip, Moss, Dot: step 2, cut out on magenta (needs step 1 approved)",
    "ar": "4:3",
    "refs": [
-    "art/raw/npcs/npc-scene-pip-moss-dot-v1.png"
+    "art/raw/npcs/npc-scene-pip-moss-dot-v3.png"
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE EDIT. Return exactly one image, nothing else.\n\nThe attached picture is a finished painting of three people standing in a school yard. Keep the three people EXACTLY as painted: do not redraw, repaint, restyle, sharpen or smooth anything about them. Keep every face, hair strand, piece of clothing, pair of shoes, pose, size, position, color, the lighting and the visible painted brushwork and texture exactly as they are, pixel for pixel in feel.\n\nChange ONLY the background: replace everything that is not one of the three people (the school, the paving, the sky, the lamps, the planters, every shadow on the ground) with one flat solid pure magenta #FF00FF filling the whole rest of the image. No ground, no shadow, no gradient, no border, no text, no labels.\n\nNo magenta on the people. No magenta glow, spill, tint or fringe on the edges or hair strands. Keep the edges clean and crisp. Draw nothing new and no one else."
   },
@@ -1004,7 +1004,7 @@
    "title": "Pip: walk sheet 3 x 3, 4'1\" (needs Pip, Moss, Dot step 2 approved)",
    "ar": "1:1",
    "refs": [
-    "art/raw/npcs/npc-cut-pip-moss-dot-v1.png",
+    "art/raw/npcs/npc-cut-pip-moss-dot-v2.png",
     "docs/reference/style_key_v1.png",
     "docs/reference/height_chart_v1.png"
    ],
@@ -1020,7 +1020,7 @@
    "title": "Moss: walk sheet 3 x 3, 4'3\" (needs Pip, Moss, Dot step 2 approved)",
    "ar": "1:1",
    "refs": [
-    "art/raw/npcs/npc-cut-pip-moss-dot-v1.png",
+    "art/raw/npcs/npc-cut-pip-moss-dot-v2.png",
     "docs/reference/style_key_v1.png",
     "docs/reference/height_chart_v1.png"
    ],
@@ -1036,7 +1036,7 @@
    "title": "Dot: walk sheet 3 x 3, 4'0\" (needs Pip, Moss, Dot step 2 approved)",
    "ar": "1:1",
    "refs": [
-    "art/raw/npcs/npc-cut-pip-moss-dot-v1.png",
+    "art/raw/npcs/npc-cut-pip-moss-dot-v2.png",
     "docs/reference/style_key_v1.png",
     "docs/reference/height_chart_v1.png"
    ],

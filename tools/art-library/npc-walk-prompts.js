@@ -79,7 +79,7 @@ for (const g of GROUPS) {
     entries.push({
       id: 'npc-walk-' + k, tab: 'NPCs', group: grp,
       title: `${c.name}: walk sheet 3 x 3, ${c.ft} (needs ${g.keys.map(x => N[x].name).join(', ')} step 2 approved)`,
-      ar: '1:1', refs: [`art/raw/npcs/${g.cutId}-v1.png`, REF_KEY, REF_CHART], prompt: walk(k, g, i + 1),
+      ar: '1:1', refs: [`art/raw/npcs/${g.cutId}-v${((require('./npc-prompts.js').APPROVED_TAKE)[g.id]||{}).cut||1}.png`, REF_KEY, REF_CHART], prompt: walk(k, g, i + 1),
     });
   });
 }

@@ -14,6 +14,8 @@ else PAL = JSON.parse(fs.readFileSync(SNAP, 'utf8'));
 
 const REF_KEY = 'docs/reference/style_key_v1.png';
 const REF_CHART = 'docs/reference/height_chart_v1.png';
+// Approved take per group (Tom's pick), used when a later step chains off it. Default is v1.
+const APPROVED_TAKE = { 'pip-moss-dot': { scene: 3, cut: 2 } };
 const REF_YARD = 'docs/reference/school_style_ref.png';
 
 // ---- color words from hex ----
@@ -179,6 +181,6 @@ for (const g of GROUPS) {
   const grp = g.la ? 'Los Angeles people' : 'Long Island people', nm = names(g).join(', ');
   g.sceneId = 'npc-scene-' + g.id; g.cutId = 'npc-cut-' + g.id;
   entries.push({ id: g.sceneId, tab: 'NPCs', group: grp, title: `${nm}: step 1, painted in the school yard (${g.batch})`, ar: '4:3', refs: [REF_YARD, REF_KEY, REF_CHART], prompt: scene(g) });
-  entries.push({ id: g.cutId, tab: 'NPCs', group: grp, title: `${nm}: step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [`art/raw/npcs/${g.sceneId}-v1.png`], prompt: cut(g) });
+  entries.push({ id: g.cutId, tab: 'NPCs', group: grp, title: `${nm}: step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [`art/raw/npcs/${g.sceneId}-v${(APPROVED_TAKE[g.id]||{}).scene||1}.png`], prompt: cut(g) });
 }
-module.exports = { entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART, STYLE_RULE, lookOf, ordinal };
+module.exports = { APPROVED_TAKE, entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART, STYLE_RULE, lookOf, ordinal };
