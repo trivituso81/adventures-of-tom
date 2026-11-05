@@ -112,6 +112,23 @@ with sync_playwright() as pw:
     touch('touchStart',[(pos[0],pos[1])]); touch('touchEnd',[]); tp.wait_for_timeout(150)
     ck('one-finger tap still paints after zooming',tp.evaluate("__areas.ed.tiles[%d+','+%d]==='W'"%tuple(wt2)),wt2)
     tp.screenshot(path='tools/shots/areas-zoom-touch.png'); ck('no page errors on touch page',not terrs,terrs); tctx.close()
+    # exit flow: prominent Exit button, dialog with Save and exit / Exit without saving / Keep editing
+    def fresh():
+        c=br.new_context(viewport={'width':393,'height':852},device_scale_factor=2); p=c.new_page(); p.goto(f'http://127.0.0.1:{port}/areas.html'); p.wait_for_selector('html[data-ready]',timeout=90000); p.select_option('#mapsel','town'); p.wait_for_timeout(500); return c,p
+    c1,p1=fresh(); ck('Exit button is visible in the header',p1.is_visible('#exitbtn'))
+    p1.click('#exitbtn'); ck('exit dialog opens',p1.is_visible('#exitbox')); ck('no changes: both exits still shown',p1.is_visible('#exSave') and p1.is_visible('#exDiscard'))
+    p1.click('#exStay'); ck('Keep editing closes the dialog',not p1.is_visible('#exitbox'))
+    p1.click('button[data-t=B]'); click_tile(p1,*wt); p1.wait_for_timeout(100)
+    ck('header shows the edit count',p1.inner_text('#dirty').startswith('Edited'),p1.inner_text('#dirty'))
+    p1.click('#exitbtn'); ck('changes: both exits shown',p1.is_visible('#exSave') and p1.is_visible('#exDiscard'))
+    p1.click('#exDiscard'); p1.wait_for_url('**/index.html*',timeout=20000)
+    ck('Exit without saving leaves for the game and drops the edit',p1.evaluate("localStorage.getItem('aot-areas-edit-town')")is None)
+    c1.close()
+    c2,p2=fresh(); p2.click('button[data-t=B]'); click_tile(p2,*wt); p2.wait_for_timeout(100); p2.click('#exitbtn'); p2.click('#exSave'); p2.wait_for_url('**/index.html*',timeout=20000)
+    ck('Save and exit leaves for the game and keeps the edit',p2.evaluate("(localStorage.getItem('aot-areas-edit-town')||'').length")>10)
+    p2.goto(f'http://127.0.0.1:{port}/areas.html'); p2.wait_for_selector('html[data-ready]',timeout=90000); p2.select_option('#mapsel','town'); p2.wait_for_timeout(500)
+    ck('saved edit is back on return',p2.evaluate("Object.keys(__areas.ed.tiles).length")==1)
+    p2.click('#exitbtn'); p2.screenshot(path='tools/shots/areas-exit-dialog.png'); c2.close()
     # landscape
     pg.set_viewport_size({'width':852,'height':393}); pg.wait_for_timeout(500); pg.screenshot(path='tools/shots/areas-landscape.png'); pg.click('#export'); pg.screenshot(path='tools/shots/areas-landscape-export.png'); pg.click('#exportClose')
     ck('no page errors',not errs,errs)

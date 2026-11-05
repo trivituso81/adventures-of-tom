@@ -1,3 +1,9 @@
+## 2026-11-05 (181): Area Builder: clear Exit with Save and exit or Exit without saving
+- Tom (07:50): "It's very confusing how to exit both with or without saving make this flow more explicit and prominent." Read as the Area Builder (my assumption, it was the only page with an unclear exit: just a small Game link that never said whether edits were kept).
+- Now: a yellow Exit button top left opens a dialog with three big buttons. Save and exit (green): keeps the edits on this device, copies this map's export, goes to the game. Exit without saving (red): throws away everything changed since the page opened (all maps), goes to the game. Keep editing. A header chip shows "Edited: N maps" once something changed. Esc or tapping outside also means Keep editing.
+- Decision: paint still autosaves in the browser as you go (so a crash loses nothing); "this visit" is what Exit without saving undoes.
+- Files: areas.html, tools/areas_test.py (8 new exit checks, 0 fails). Untagged page.
+
 ## 2026-11-05 (180): Tom's walking head matched to his hero painting (`herohead1`)
 - Tom (07:35): "Match the hero across all characters, but only where I've provided separate head images; for now that's Tom." And: tell me if any rule narrows his body.
 - Fact: the hero Tom sent (docs/reference/tom_hero_ref_20261105.png) has its head, hair top to chin, at .242 of full height and .173 wide at the ears. The painted walk frames were .208 to .215 tall and .157 wide.

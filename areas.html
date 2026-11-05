@@ -15,7 +15,16 @@ html,body{margin:0;background:#14122b;color:#f4f1ff;font:14px/1.35 -apple-system
 body{display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 header{display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid #2c2852;flex:none}
 header h1{font-size:17px;margin:0;flex:1;letter-spacing:.5px}
-a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:8px 2px}
+#exitbtn{background:#ffd34d;border-color:#ffd34d;color:#1a1737;font-weight:700;min-height:40px;padding:6px 14px}
+#dirty{font-size:12px;color:#ffd968;white-space:nowrap}
+#exitov{display:none;position:fixed;inset:0;z-index:20;background:rgba(8,6,24,.82);align-items:center;justify-content:center;padding:16px}
+#exitbox{background:#1f1b40;border:2px solid #7b6cff;border-radius:14px;max-width:420px;width:100%;padding:18px;display:flex;flex-direction:column;gap:10px}
+#exitbox h2{margin:0;font-size:18px}
+#exitbox p{margin:0;font-size:13px;color:#cfc9ff}
+#exitbox button{min-height:52px;font-size:15px;font-weight:700;text-align:left;padding:8px 14px;line-height:1.25}
+#exitbox button small{display:block;font-weight:400;font-size:12px;opacity:.9}
+#exSave{background:#1f8f45;border-color:#46d37a;color:#fff}
+#exDiscard{background:#8f1f2e;border-color:#ff6b7d;color:#fff}
 #top{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:6px 12px;border-bottom:1px solid #2c2852;flex:none;font-size:12px;color:#b9b3e6}
 select,input,button{font:inherit;color:#f4f1ff}
 select,input[type=number],input[type=text]{background:#0f0d24;border:1px solid #3a3566;border-radius:8px;padding:5px 8px;min-height:34px}
@@ -49,7 +58,7 @@ label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
 </style>
 </head>
 <body>
-<header><a class="back" href="index.html">&lsaquo; Game</a><h1>AREA BUILDER</h1><span id="tip">paint tiles, then Check and Export</span></header>
+<header><button id="exitbtn">&lsaquo; Exit</button><h1>AREA BUILDER</h1><span id="dirty"></span><span id="tip">paint tiles, then Check and Export</span></header>
 <div id="top">
   <select id="mapsel" aria-label="Map"></select>
   <label class="t">Chapter <input id="chap" type="number" min="1" max="20" value="20" style="width:62px"></label>
@@ -75,12 +84,39 @@ label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
     <button id="undo">Undo</button><button id="check">Check</button><button id="export">Export</button><button id="clear">Clear all edits</button>
   </div>
 </div>
+<div id="exitov"><div id="exitbox" role="dialog" aria-modal="true" aria-labelledby="exH">
+  <h2 id="exH">Leave the Area Builder?</h2><p id="exInfo"></p>
+  <button id="exSave">Save and exit<small id="exSaveS"></small></button>
+  <button id="exDiscard">Exit without saving<small id="exDiscS"></small></button>
+  <button id="exStay">Keep editing</button>
+</div></div>
 <div id="notebar"><span id="notelab">Where does it go?</span><input type="text" id="noteTxt" placeholder="to Aunt Ellie's house"><button id="noteOk">Save</button><button id="noteNo">Skip</button></div>
 <div id="exportbar"><textarea id="exportTxt" readonly></textarea><button id="exportClose">Close</button> <span id="exportMsg" style="font-size:12px;color:#ffd968"></span></div>
 <iframe id="frame" src="index.html" title="engine" aria-hidden="true"></iframe>
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
+// ---- exit flow: edits autosave in this browser as you paint; "this visit" = everything changed since the page opened
+const EK='aot-areas-edit-';
+const lsEdits=()=>{ const o={}; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.startsWith(EK)) o[k]=localStorage.getItem(k); } }catch(e){} return o; };
+const baseEdits=lsEdits();
+const nTiles=v=>{ try{ const j=JSON.parse(v); return Object.keys(j.tiles||{}).length; }catch(e){ return 0; } };
+function visitChanges(){ const now=lsEdits(), keys=new Set([...Object.keys(now),...Object.keys(baseEdits)]); const maps=[]; let tiles=0;
+  for(const k of keys) if(now[k]!==baseEdits[k]){ maps.push(k.slice(EK.length)); tiles+=Math.abs(nTiles(now[k]||'')-nTiles(baseEdits[k]||''))||1; } return {maps,tiles}; }
+function updDirty(){ const c=visitChanges(); $('dirty').textContent=c.maps.length?('Edited: '+c.maps.length+' map'+(c.maps.length>1?'s':'')):''; }
+function leave(){ location.href='index.html'; }
+function openExit(){ const c=visitChanges(), has=c.maps.length>0;
+  $('exInfo').textContent=has?('This visit you changed '+c.maps.length+' map'+(c.maps.length>1?'s':'')+' ('+c.maps.join(', ')+'). Your paint is saved on this device as you go.'):'You have not changed anything this visit.';
+  $('exSaveS').textContent=has?'Keeps your edits on this device and copies this map\'s export so you can paste it to Claude.':'Nothing to save. Goes back to the game.';
+  $('exDiscS').textContent=has?'Throws away everything you changed this visit, then goes back to the game.':'Nothing was changed this visit. Goes back to the game.';
+  $('exitov').style.display='flex'; }
+function closeExit(){ $('exitov').style.display='none'; }
+$('exitbtn').onclick=openExit; $('exStay').onclick=closeExit;
+$('exitov').addEventListener('click',e=>{ if(e.target===$('exitov')) closeExit(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&$('exitov').style.display==='flex') closeExit(); });
+$('exDiscard').onclick=()=>{ const now=lsEdits(); try{ for(const k of Object.keys(now)) if(!(k in baseEdits)) localStorage.removeItem(k); for(const k of Object.keys(baseEdits)) localStorage.setItem(k,baseEdits[k]); }catch(e){} leave(); };
+$('exSave').onclick=()=>{ let done=false; const go=()=>{ if(!done){ done=true; leave(); } };
+  try{ saveEd(); if(M&&(Object.keys(ed.tiles).length||Object.keys(ed.notes).length)) navigator.clipboard.writeText(exportJSON()).then(go,go); else go(); }catch(e){ go(); } setTimeout(go,1200); };
 const DEF_COL={W:'#2fd25a',B:'#e63946',D:'#ffd34d',E:'#3d8bff'};
 const NAMES={W:'Walkable',B:'Blocked',D:'Door',E:'Exit'};
 let UI={map:'town',zoom:0,op:45,cols:{...DEF_COL},ctx:{spn:true},chap:20};
@@ -138,7 +174,7 @@ function loadMap(id){
   fit(); draw();
   status(M.name+': '+M.w+' x '+M.h+' tiles. '+(PL?'Painted plate.':'No painted plate (tile render).'));
 }
-function saveEd(){ try{ if(!Object.keys(ed.tiles).length&&!Object.keys(ed.notes).length) localStorage.removeItem('aot-areas-edit-'+UI.map); else localStorage.setItem('aot-areas-edit-'+UI.map,JSON.stringify({w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes})); }catch(e){} }
+function saveEd(){ setTimeout(()=>{ try{ updDirty(); }catch(e){} },0); try{ if(!Object.keys(ed.tiles).length&&!Object.keys(ed.notes).length) localStorage.removeItem('aot-areas-edit-'+UI.map); else localStorage.setItem('aot-areas-edit-'+UI.map,JSON.stringify({w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes})); }catch(e){} }
 const eff=(x,y)=>ed.tiles[keyOf(x,y)]||sys[y*M.w+x];
 const isPortal=(x,y)=>M.portals.has(keyOf(x,y));
 
