@@ -2034,6 +2034,13 @@
      "date": "2026-11-05",
      "from": "v2",
      "at": 1793843350968
+    },
+    {
+     "n": 2,
+     "file": "art/raw/areas/area-row-cut3-v2.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793893090813
     }
    ],
    "rejects": [],
@@ -2044,7 +2051,7 @@
    "refs": [
     "art/raw/areas/area-row-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Rivituso Row painting.\n\nCopy out only the roof of each of the three houses with its dormers, iron railing, chimneys and smoke, the eaves, the porch roofs with their posts, the bay window roof, the iron balcony with its flower boxes and the hat and scarf on it, and the striped awning, cut straight across just below the eaves, porch roof and awning. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. The attached picture is the approved Rivituso Row painting; if this is the same chat that painted it, you may work from your own painting.\n\nMake a cutout mask of the lane painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.\nKEEP ONLY the upper part of each of the three houses: the whole roof with its shingles, ridges, dormers and iron roof railing, chimneys and smoke, the eaves, the porch roofs with their posts, the bay window roof on the red-trimmed house, the iron balcony with its flower boxes, hat and scarf on the purple townhouse, and its striped awning. Cut each house straight across just below its eaves, porch roof and awning.\nEVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: lower walls, doors, windows, steps, the wooden deck, paths, lawns, trees, fences, garden beds, benches, lamps, signs, flowers, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.",
    "group": "Rivituso Row"
   },
   {
