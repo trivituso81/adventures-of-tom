@@ -27,7 +27,12 @@ const CUSTOM = {
  'fore-la': { refs: [REF_LE_GROUND], prompt: head + STYLE_ONLY
   + 'Paint one picture: the Los Angeles foreground layer for the flight scene of the family adventure game "The Adventures of Tom". 16:9, painted full to all four edges.\n\n'
   + CAM + '\n\n'
-  + 'LAYOUT: ONE thin band across the middle of the picture, about one quarter of the picture height. In the band: palm tree tops, low rooftops and the edge of a freeway overpass, seen close to the camera, bold simple shapes, dark and rich in warm sunset shadow with a thin gold rim light on their upper edges. Above and below the band the picture is perfectly plain flat very dark plum (#1A1424), completely empty, with no gradient, no texture and nothing in it. Do not paint a skyline, a sky, a sun or any ground.' + tail2 }
+  + 'LAYOUT: ONE thin band across the middle of the picture, about one quarter of the picture height. In the band: palm tree tops, low rooftops and the edge of a freeway overpass, seen close to the camera, bold simple shapes, dark and rich in warm sunset shadow with a thin gold rim light on their upper edges. Above and below the band the picture is perfectly plain flat very dark plum (#1A1424), completely empty, with no gradient, no texture and nothing in it. Do not paint a skyline, a sky, a sun or any ground.' + tail2 },
+ 'skyline-le': { refs: [REF_LE_GROUND], prompt: head + STYLE_ONLY
+  + 'Paint one picture: the Long Island skyline layer for the flight scene of the family adventure game "The Adventures of Tom". 16:9, painted full to all four edges.\n\n'
+  + CAM + ' Everything is seen from the side at ground level, never from above: no aerial view, no rooftops seen from the top, no hazy distance.\n\n'
+  + 'LAYOUT: ONE horizon band only, in the bottom quarter of the picture, sitting on a perfectly flat straight bottom edge. In the band, as clear separate silhouettes with sky showing between them: a row of tall green oak trees, a few clapboard houses with pitched roofs, a white church steeple, a rust-brown water tower on legs, and a low line of marsh grass and a sliver of calm blue bay at one side. Do not paint a full panorama: the town is a thin band and the rest of the picture is plain sky.\n\n'
+  + 'THE SKY: everything above the band is ONE smooth empty midday gradient, soft blue at the top easing to pale warm cream just above the trees, with nothing in it: no clouds, no sun, no birds, no haze bank, no second horizon, no distant hills.' + tail2 },
 };// [id, file, title, ar, size text, body, refs?]
 const F = [
  ['cabin', 'cabin', 'Cabin: seat 1A before takeoff (1024 x 1024)', '1:1', 'SQUARE, 1024 x 1024 px',

@@ -1,3 +1,10 @@
+## 2026-11-05 (220): Plane sits higher on the runway; new Long Island skyline prompt in the Art Library (`flight10`)
+- Tom (14:05): the plane is fine but must sit a little higher on the runway road at takeoff and landing; the LA backdrop is good; the Long Island backdrop is not and needs at least one new image.
+- Plane: `engine/flight-art.js` wheel line moved from 55 percent to 25 percent down the runway band (about 18 px up on a phone), so the wheels run on the middle of the road in both towns. Looked at the takeoff and landing frames, both towns, portrait.
+- Long Island backdrop (fact): the skyline picture is an aerial view of rooftops and trees, cropped and enlarged, so it reads as a blurry green band that does not match the side-on ground. New Art Library entry text for `flight-skyline-le` (Flight tab) copies the LA method: side-on thin band, flat bottom, clear silhouettes (oaks, clapboard houses, steeple, water tower, bay sliver), empty gradient sky. Art not generated yet; no art changed.
+- Install plan once Tom approves the new picture: in flight-preview.html `prepare()` give `skylineLe` the same options as `skylineLa` (`gradient:true,cutGround:true`), rebake with `tools/sprite-bake/bake_flight.py`, size the LE strip like the LA one in `flightPaintedSide`.
+- Tags: `flight10` (flight-preview.html bumped by hand).
+
 ## 2026-11-05 (219): Enemy sheet prompts carry the area painting and handbrushed language (Art Library prompts only, no game files, no tag)
 - Tom (14:02): the enemy image prompt has no reference to the area pictures and no language that makes sure the result looks handbrushed and painted.
 - Fact (cause): each enemy prompt attached only the style key (and the old pixel likeness for 80 of 86), and named the area in one phrase of words. Nothing told the generator what the creature's own world is painted like, and the style words were one sentence plus a rule.
@@ -7,10 +14,12 @@
 - Looked at: `node tools/art-library/validate.js` (389 entries OK), the module check, and the full text of the Mudling, Leviathan and Slushie Slug prompts. No picture has been generated from the new text yet.
 - Lever if the first new sheets still come out smooth (STOP-LOSS applies after two): the NPC lesson (CHANGES 206), paint the enemy inside the area picture first, then cut it out on magenta.
 
+
 ## 2026-11-05 (218): Tom's profile collar at the front's height, head more forward, neck sloping into the collar (`walk14`)
 - Tom (14:00): "the bottom of the collar on the front view should be the same height as the bottom of the collar on the profile view", the profile head shifted more forward, the neck to slope together seamlessly.
 - Fact: the side body was painted at a different scale and the head sat on the old neck stump, so the profile figure was 44.7 rows against the front's 42.0. Now (tools/sprite-bake/tom_walk_frames.py `_side_frame`): each side body is scaled uniformly so collar bottom to feet equals the front's (1228 frame px), the collar bottom sits at the front's collar height (433), the profile head (his picture, hair top to chin 402 as before) sits 40 frame px more forward (`SIDE_FWD`), the neck is sheared so it leans with the head and ends in the collar, the shirt is drawn over the neck and the body's own neck skin above the collar is removed. Result: front, side stand, both strides and the passing pose are all 1661 frame px (42.0 rows), back is 41.9.
 - The picture's flat skin shelf behind the neck is left as drawn.
+
 
 ## 2026-11-05 (217): Flight landing and takeoff screens read as one scene: LA skyline cleaned, foreground strips off (`flight9`)
 - Tom (13:48, two preview screenshots): "there is some strange dissonance between the stacked clips" on the Long Island and Los Angeles takeoff and landing screens.

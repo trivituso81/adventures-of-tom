@@ -136,7 +136,7 @@ function flightPaintedSide(F,time) {
   const was=fsSmooth(true);
   // Layout: the ground takes the lower half; the skyline stands on its top edge.
   const gy=Math.round(H*.5),gh=H-gy;
-  const rw=M.runway[inLA?'la':'le'],yr=gy+gh*(rw[0]+(rw[1]-rw[0])*.55);   // the line the wheels run on
+  const rw=M.runway[inLA?'la':'le'],yr=gy+gh*(rw[0]+(rw[1]-rw[0])*.25);   // the line the wheels run on
   // Speed: the scenery slides under the plane while it rolls, then slows as it climbs away (the old scroll rule, in screen units).
   const speed=land?(t<2.6?60:Math.max(0,60*(1-(t-2.6)/1.4))):Math.min(70,t*40);
   const S=Math.max(2,Math.min(5,Math.round(W/140)));
