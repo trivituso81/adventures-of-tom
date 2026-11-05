@@ -163,6 +163,35 @@ def _side_head():
     out[:, :, 3] = np.where(top, na, np.where(xs > line, 0, out[:, :, 3]))              # above row 1000 the v3 outline (trimmed nape); below it the v2 neck in front of the nape line
     im = Image.fromarray(out, 'RGBA'); return im.crop(im.getbbox())
 
+NAPE_KEEP = float(os.environ.get('NAPE_KEEP', '0.35'))   # fraction of the hollow behind the neck that stays (0 = filled flat, 1 = no filler)
+def _fill_nape(im, ch):
+    """2026-11-05 15:28 (Tom: "still more gaps and filler needed" on the side-view neck): the profile neck left a hollow between the back of the head and the shoulder (about 25 px deep in the
+    strides, 12 in stand and pass, frame px). Build the neck out behind the nape toward the shoulder: the new back edge follows the straight line from the hair's back extreme to the shoulder
+    minus a small dip (NAPE_KEEP of the old depth), filled with the colour of the neighbouring pixels of the same rows (skin, hair at the top, shirt at the bottom)."""
+    a = np.array(im); op = a[..., 3] > 40; H, W = op.shape
+    xb = np.array([np.where(op[r])[0].max() if op[r].any() else -1 for r in range(H)])
+    r_lo, r_hi, r_max = int(ch * 0.35), int(ch * 0.78), min(H - 1, int(ch * 1.9))
+    rh = r_lo + int(np.argmax(xb[r_lo:r_hi])); Xh = xb[rh]
+    rmin = rh + int(np.argmin(xb[rh:r_max])); after = np.where(xb[rmin:r_max] >= Xh - 2)[0]
+    if len(after) == 0 or xb[rmin] >= Xh - 6: return im
+    rs = rmin + int(after[0]); Xs = xb[rs]
+    u = (np.arange(rh, rs + 1) - rh) / float(max(1, rs - rh)); L = Xh + (Xs - Xh) * u
+    md = max(0.0, float((L - xb[rh:rs + 1]).max())); tgt = L - NAPE_KEEP * md * np.sin(np.pi * u)
+    rows_ = list(range(rh, rs + 1)); cols = np.zeros((len(rows_), 3)); ok = np.zeros(len(rows_), bool)
+    for idx, r in enumerate(rows_):
+        x0 = int(xb[r]); patch = a[max(0, r - 3):r + 4, max(0, x0 - 14):max(1, x0 - 5)]; m = patch[..., 3] > 250
+        if m.any(): cols[idx] = np.median(patch[m][:, :3], axis=0); ok[idx] = True
+    if not ok.any(): return im
+    for c in range(3): cols[~ok, c] = np.interp(np.where(~ok)[0], np.where(ok)[0], cols[ok, c])
+    k = np.ones(11) / 11.0; pad = np.pad(cols, ((5, 5), (0, 0)), mode='edge')
+    sm = np.stack([np.convolve(pad[:, c], k, mode='valid') for c in range(3)], 1)       # one colour per row, smoothed down the rows: no stripes
+    for idx, r in enumerate(rows_):
+        t = int(round(tgt[idx])); x0 = int(xb[r])
+        if t <= x0: continue
+        for x in range(max(0, x0 - 3), min(W, t + 1)):       # start 3 px inside the old edge so its pale halo does not stay as a line in the filler
+            a[r, x, :3] = np.clip(sm[idx], 0, 255); a[r, x, 3] = 255 if x <= x0 else int(255 * min(1.0, (t - x + 1) / 2.0))
+    return Image.fromarray(a, 'RGBA')
+
 def _side_frame(body, fwd=None, neck_head=False):
     fwd = SIDE_FWD if fwd is None else fwd
     # Tom (14:00): the bottom of the collar is at the same height above the ground in the front and the profile; the profile head sits more forward and the neck slopes into the collar.
@@ -205,6 +234,7 @@ def _side_frame(body, fwd=None, neck_head=False):
     ox = int(hl - cx_front); oy = int(ycol - rc)
     W = max(h.width, ox + body.width) + 4; x0 = min(0, ox); H = max(H0, oy + body.height)
     im = Image.new('RGBA', (W - x0, H), (0, 0, 0, 0)); im.alpha_composite(h, (-x0, 0)); im.alpha_composite(body, (ox - x0, oy))
+    im = _fill_nape(im, ch)                       # the hollow behind the neck (before the crop: rows are still counted from the top of the head)
     im = im.crop(im.getbbox())
     if E > 0:      # back to the standing height the profile had before the longer neck (one uniform scale)
         sc = (im.height - E) / float(im.height); im = im.resize((max(1, round(im.width * sc)), max(1, round(im.height * sc))), Image.LANCZOS)

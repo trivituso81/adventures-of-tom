@@ -1,3 +1,8 @@
+## 2026-11-05 (234): Tom's side-view neck: the hollow behind it is filled (`walk20`)
+- Tom (15:28): after the longer neck, "there's still more gaps and filler needed".
+- Fact (measured on the profile frames): the back edge of the neck sat 25 px (strides) and 12 px (stand, pass) in from the back of the head, then jumped out to the shoulder, so background showed in a hollow behind the nape.
+- Change: `_fill_nape` in `tools/sprite-bake/tom_walk_frames.py`, called in `_side_frame` before the crop. The new back edge follows a straight line from the hair's back extreme to the shoulder minus a small dip (`NAPE_KEEP` 0.35 of the old depth stays, 0 = flat, 1 = off), filled with one colour per row taken from the neighbouring pixels (smoothed down the rows so no stripes, and painted from 3 px inside the old edge so its pale halo does not stay as a line). Applies to all four profile frames; front and back untouched. The walk19 neck length and the walk18 bob are unchanged.
+- Looked at: before and after strip on the normal background for stand, both strides and pass.
 ## 2026-11-05 (233): Plane cabin is now a premium Delta One suite (`flight14`)
 - Tom approved `cabin-v2` in the Art Library (his save worked on retry). Baked with `bake_flight_lib.py` (`20261105e`); only art/flight/cabin.webp and data/flight-art.js changed. Looked at the cabin phase, portrait and landscape, start and end of the pan; flight_test both ALL OK.
 - Tags: `flight14` (flight-preview.html by hand).
