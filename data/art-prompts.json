@@ -2292,9 +2292,16 @@
    "group": "Los Angeles paintings"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "remove griffith park sign. move tar site in front of tar pit and name it Tar Pit",
+     "from": "v2",
+     "at": 1793842937850
+    }
+   ],
    "id": "area-griffith",
    "tab": "Areas",
    "title": "Griffith Park: painting, painted redo (1536 x 1408; attach the listed pictures)",
