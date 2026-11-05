@@ -1,3 +1,7 @@
+## 2026-11-05 (201): Tom's side head no longer clipped at the nose (`walk10`)
+- Tom (12:39): "his nose is cut off in 9 and 11" (side stand and side passing pose). Fact: the side head was placed 18 px past the left edge of its canvas on those two narrow bodies, so the nose tip was clipped flat. The side stand had this since the 191 rebuild; the passing pose inherited it. Side step 2 had a 1 px sliver clipped too.
+- Fix in tools/sprite-bake/tom_walk_frames.py: the canvas grows so no head or body pixel is cut. Only left stand, left passing and left step 2 change (5, 5 and 1 px wider); the other nine frames draw identically (checked pixel for pixel).
+
 ## 2026-11-05 (200): Tom's side strides taller, same height as his side stand (`walk9`)
 - Tom (12:34): "10 and 12 are noticeably shorter and it's because the body proportions are not consistent, make them taller." Fact: the two side stride pictures are drawn about 7% shorter than his side stand picture (legs spread, smaller generator scale) while the head is one size on every frame, so the body read small under it.
 - Each side stride body is scaled by one uniform factor to the side stand body's height (same method as the passing poses in 199). Side stand, step 1, step 2 and passing pose now all stand 387 px (4 px apart at most). Their torsos come out about 6% larger than the stand's torso, which is what the picture scale difference is.

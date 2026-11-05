@@ -75,6 +75,9 @@ def build():
         NF = 6
         body = body.crop((0, best, body.width, body.height)); top = h.height - NF
         W = int(max(body.width, h.width) + 80); ox = int(round(W / 2 - bcx)); hx = int(round(W / 2 - hcx))
+        # 2026-11-05 12:39 (Tom: "his nose is cut off in 9 and 11"): on a narrow body (side stand, side passing) the head sat 18 px past the left edge of the canvas and
+        # its nose tip was clipped. Grow the canvas so no pixel of the head or the body is cut; the frame is cropped to its bounding box afterwards, so nothing else moves.
+        _sh = -min(0, ox, hx); W += _sh; ox += _sh; hx += _sh; W = max(W, ox + body.width, hx + h.width)
         im = Image.new('RGBA', (W, top + body.height), (0, 0, 0, 0))
         im.alpha_composite(body, (ox, top))
         arr = np.array(h).astype(float)
