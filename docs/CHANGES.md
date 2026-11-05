@@ -1,4 +1,4 @@
-## 2026-11-05 (207): Area Builder Exit goes back to the edit screen, then to the Welcome admin list (`admin1`)
+## 2026-11-05 (207): Area Builder Exit goes back to the edit screen, then to the Welcome admin list (`admin2`)
 - Tom (13:02): inside a map (Area Maps or Building Interiors), Exit with Save and exit or Exit without saving now returns to "What do you want to edit?" instead of leaving for the game. The dialog text says so. The changed-this-visit count restarts there.
 - Tom (13:02): Exit pressed on "What do you want to edit?" (or the section lists) now opens the Welcome screen on the ADMIN list with AREA BUILDER highlighted (`index.html?admin=1`, read once in `startSplash`, then removed from the address so a reload shows the normal Welcome screen).
 - Files: areas.html, engine/splash.js, tools/areas_test.py (exit checks updated and extended). areas_test FAILS 0, smoke FAILS [].
