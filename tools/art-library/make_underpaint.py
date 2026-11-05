@@ -2,10 +2,13 @@
 """Soft color underpainting of an old enemy sheet, used as the Art Library reference instead of the pixel sheet.
 The generator copies a sharp pixel reference back; a de-pixelated, softened one carries only shape, pose, color and face, so it has to paint the brushwork itself.
 Usage: python3 tools/art-library/make_underpaint.py [--grid] <id> [<id> ...]   (reads tools/sprite-bake/src/foe-<id>-v1.png, writes docs/reference/underpaint/<id>.png)
+--single <id> <k> makes a 1024 x 1024 underpainting of ONE frame (k = 1 for the first), filling about 85 percent of the picture, for one-pose-per-picture cards.
 --grid re-lays the frames out as a 2 x 2 grid (4 frames, 1024 x 1024) or 3 x 2 grid (6 frames, 1536 x 1024) of equal cells, each frame filling its cell, so the generator makes bigger pictures of each pose."""
 import sys, numpy as np, cv2
 from PIL import Image
 OUT_W = 1600
+# sheets whose lone second-row stance sits too close to find automatically (the same numbers bake_foe.py --cut-y used)
+CUT_Y = {'redeye': 385, 'gridlockprime': 385, 'drillworm': 370, 'marlowe16': 356, 'hush9final': 386, 'twinlens': 350, 'pausesprite': 375, 'paperweight': 389, 'curator': 383, 'vance': 416, 'slushslug': 390, 'conehead': 390, 'brainfreeze': 430, 'leviathan': 374, 'greynote': 380}
 def block_size(rgb, a):
     # typical run length of identical colour along rows inside the figure = size of one old pixel
     runs = []
@@ -46,7 +49,8 @@ def make(id):
 
 
 def frames_of(a, n):
-    cols = (a > 40).sum(0) > 0
+    colsum = (a > 40).sum(0)
+    cols = colsum > 0
     runs, start = [], None
     for x, c in enumerate(cols):
         if c and start is None: start = x
@@ -56,24 +60,45 @@ def frames_of(a, n):
     for r in runs:
         if merged and r[0] - merged[-1][1] < 14: merged[-1][1] = r[1]
         else: merged.append(r)
-    # keep the n widest runs, in order (drops stray specks)
     keep = sorted(sorted(merged, key=lambda r: r[1] - r[0], reverse=True)[:n])
+    # frames that touch share one run: split the widest run at its emptiest column (middle half) until there are n
+    while len(keep) < n:
+        w = max(range(len(keep)), key=lambda i: keep[i][1] - keep[i][0])
+        x0, x1 = keep[w]; lo, hi = x0 + (x1 - x0) // 4, x1 - (x1 - x0) // 4
+        cut = lo + int(np.argmin(colsum[lo:hi]))
+        keep[w:w + 1] = [[x0, cut], [cut, x1]]
     return keep
+
+def first_row(im, cut_y=0):
+    """Rows of the sheet's first row. A lone extra stance on a second row is dropped: cut at the first empty band
+    (4 rows or more) below 40 percent of the figure height, or at cut_y when given (same idea as bake_foe.py --cut-y)."""
+    a = im[..., 3]
+    ys = np.flatnonzero((a > 40).sum(1) > 0)
+    top, bot = ys[0], ys[-1] + 1
+    if cut_y: return im[top:cut_y]
+    present = (a > 40).sum(1) > 0
+    start = top + int(0.4 * (bot - top)); y = start
+    while y < bot:
+        if not present[y]:
+            e = y
+            while e < bot and not present[e]: e += 1
+            if e - y >= 4 and e < bot: return im[top:y]
+            y = e
+        else: y += 1
+    return im[top:bot]
+
+def frame_count(id):
+    import json
+    m = json.load(open('tools/art-library/prompts/enemy-moves.json'))[id]
+    return 6 if m.get('rank') == 'BOSS' else 4
 
 def make_grid(id):
     im = np.array(Image.open(f'tools/sprite-bake/src/foe-{id}-v1.png').convert('RGBA'))
-    a = im[..., 3]
-    ys = np.flatnonzero((a > 40).sum(1) > 0)
-    # a lone second-row stance (some sheets carry one) is ignored: keep the tallest block of rows
-    gaps = np.flatnonzero(np.diff(ys) > 20)
-    if len(gaps): ys = ys[:gaps[0] + 1] if (gaps[0] + 1) > len(ys) / 2 else ys[gaps[0] + 1:]
-    y0, y1 = ys[0], ys[-1] + 1
-    im = im[y0:y1]; a = im[..., 3]
+    im = first_row(im, CUT_Y.get(id, 0)); a = im[..., 3]
+    y0, y1 = 0, im.shape[0]
     boss = None
-    runs = frames_of(a, 6)
-    n = 6 if len(runs) >= 6 and (runs[-1][1] - runs[0][0]) / (y1 - y0) > 3.2 else 4
+    n = frame_count(id)
     runs = frames_of(a, n)
-    if len(runs) != n: raise SystemExit(f'{id}: found {len(runs)} frames, wanted {n}')
     cols, rows = (3, 2) if n == 6 else (2, 2)
     cell = 512
     Wc, Hc = cols * cell, rows * cell
@@ -104,9 +129,42 @@ def make_grid(id):
     Image.fromarray(canvas).save(f'docs/reference/underpaint/{id}-grid.png', optimize=True)
     return n, cols, rows
 
+def make_single(id, k):
+    im = np.array(Image.open(f'tools/sprite-bake/src/foe-{id}-v1.png').convert('RGBA'))
+    im = first_row(im, CUT_Y.get(id, 0)); a = im[..., 3]
+    y0, y1 = 0, im.shape[0]
+    n = frame_count(id)
+    runs = frames_of(a, n)
+    x0, x1 = runs[k - 1]
+    fr = im[:, x0:x1]
+    # trim to the figure's own box
+    ay = np.flatnonzero((fr[..., 3] > 40).sum(1) > 0); fr = fr[ay[0]:ay[-1] + 1]
+    cell = 1024
+    sc = 0.85 * cell / max(fr.shape[0], fr.shape[1])
+    fw, fh = max(1, int(round(fr.shape[1] * sc))), max(1, int(round(fr.shape[0] * sc)))
+    rgb = fr[..., :3].astype(np.float32) * (fr[..., 3:4] / 255.0)
+    gw, gh = max(1, fr.shape[1] // 4), max(1, fr.shape[0] // 4)
+    pmg = cv2.resize(rgb, (gw, gh), interpolation=cv2.INTER_AREA)
+    ag = cv2.resize(fr[..., 3].astype(np.float32), (gw, gh), interpolation=cv2.INTER_AREA)
+    pmu = cv2.resize(pmg, (fw, fh), interpolation=cv2.INTER_CUBIC)
+    au = cv2.GaussianBlur(cv2.resize(ag, (fw, fh), interpolation=cv2.INTER_CUBIC), (0, 0), 2.4)
+    col = np.clip(pmu / np.maximum(au[..., None] / 255.0, 1e-3), 0, 255).astype(np.uint8)
+    sig = max(2.5, 4 * sc * 0.55)
+    col = cv2.GaussianBlur(cv2.bilateralFilter(col, 0, 28, sig), (0, 0), sig * 0.45)
+    al = np.clip((au - 110) * 2.2, 0, 255) / 255.0
+    canvas = np.zeros((cell, cell, 3), np.uint8); canvas[:] = (255, 0, 255)
+    ox = (cell - fw) // 2; oy = int(cell * 0.92) - fh
+    oy = max(8, oy); h2 = min(fh, cell - oy); w2 = min(fw, cell - ox)
+    reg = canvas[oy:oy + h2, ox:ox + w2].astype(np.float32)
+    canvas[oy:oy + h2, ox:ox + w2] = (col[:h2, :w2] * al[:h2, :w2, None] + reg * (1 - al[:h2, :w2, None])).astype(np.uint8)
+    Image.fromarray(canvas).save(f'docs/reference/underpaint/{id}-f{k}.png', optimize=True)
+    return n
+
 if __name__ == '__main__':
     args = sys.argv[1:]
-    if args and args[0] == '--grid':
+    if args and args[0] == '--single':
+        print(args[1], 'single', args[2], 'of', make_single(args[1], int(args[2])))
+    elif args and args[0] == '--grid':
         for i in args[1:]: print(i, 'grid', make_grid(i))
     else:
         for i in args: print(i, 'old pixel size', make(i))

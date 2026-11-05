@@ -38,7 +38,7 @@ function groupOf(e) {
     }
     case 'Rooms': return ROOM_OF[e.id] || fail('room not in ROOM_GROUPS');
     case 'Props': { const g = PROP_OWNERS[e.id.split('-')[1]]; return g || fail('unknown owner'); }
-    case 'Enemies': { if (e.id === 'test-mudling' || e.id.startsWith('test-grid-')) return 'Test card'; const a = FOE_TABLE[e.id]; return FOE_AREAS[a] || fail('area ' + a); }
+    case 'Enemies': { if (e.id === 'test-mudling' || e.id.startsWith('test-grid-') || e.id.startsWith('test-one-')) return 'Test card'; const a = FOE_TABLE[e.id]; return FOE_AREAS[a] || fail('area ' + a); }
     case 'Battle': return /\(NEW\b/.test(e.title) ? 'New backgrounds' : 'Repaints of live backgrounds';
     case 'Title': return 'Title and icon';
     case 'Portraits': return 'Menu portraits';

@@ -24,7 +24,8 @@ const ENTRIES = [
   { id: 'grace-walk-sheet-test', tab: 'Characters', title: 'Grace walk TEST: one 3 x 3 sheet, built like Tom\'s walk sheet (11-04)', ar: '1:1', refs: ['art/raw/characters/grace-hero-fresh-style-v4.png'],
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-sheet-test.txt', 'utf8').trim() },
 ];
-ENTRIES.push(require('./enemy-prompts.js').gridTest('mudling'));   // test card: 2 x 2 grid over a soft underpainting (11-05 14:50)
+ENTRIES.push(require('./enemy-prompts.js').gridTest('mudling'));
+ENTRIES.push(...[['mudling', 1], ['grump', 1], ['bigshake', 1]].map(([i, k]) => require('./enemy-prompts.js').buildOne(i, k)), require('./enemy-prompts.js').buildOne('mudling', 4, 'art/raw/enemies/test-one-mudling-stance-v1.png'));   // one pose per picture tests (11-05 14:55)   // test card: 2 x 2 grid over a soft underpainting (11-05 14:50)
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
 for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'npc-walk-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
   if (fs.existsSync(__dirname + '/' + m + '.js')) ENTRIES.push(...require('./' + m + '.js').entries);

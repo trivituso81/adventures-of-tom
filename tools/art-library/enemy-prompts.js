@@ -86,4 +86,58 @@ Family friendly for ages 6 and up. Keep the flinch frame comic, never grim.
 NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw ${m.name.toUpperCase()} in the pose described, facing right, with the shape and colors of the likeness${hasLike ? ' in attachment ' + likeNo : ' described above'}.`;
   return { id: (grid ? 'test-grid-' : 'enemy-') + t.id, tab: 'Enemies', title: grid ? `Library test: ${realName} as a ${cols} x ${rows} grid, repainted over a soft underpainting` : `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: grid ? (boss ? '3:2' : '1:1') : '16:9', refs, prompt: text };
 }
-module.exports = { entries: TABLE.map(t => build(t)), gridTest: id => build(TABLE.find(t => t.id === id), true) };
+
+// ONE pose per picture (11-05 14:55, Tom: more handbrushed, matte not glossy, resolution high enough for an iPad in landscape).
+// The generator caps a picture at about one megapixel, so only one creature per picture lets it fill the frame (about 850 px tall).
+// Reference = soft underpainting of that single frame (docs/reference/underpaint/<id>-f<k>.png, tools/art-library/make_underpaint.py --single).
+const MATTE = `SURFACE AND BRUSHWORK (the most important instruction)
+Every surface is matte, like dry oil paint or gouache on canvas. Light is shown by broad, soft highlights built from visible brush strokes with dry-brush texture along their edges. Brush strokes are clearly visible everywhere and vary in size: broad strokes for the large forms, short flicks for texture, thick ridges of paint on the lit side of every form. Color is built in layers, so warm and cool tones show through each other. Edges are painted crisp with a small brush. A fine canvas weave grain lies over the whole picture. NOT glossy, NOT wet-looking, NOT plastic, NOT airbrushed, NOT a 3D render.`;
+function buildOne(id, k, chain) {
+  const t = TABLE.find(x => x.id === id); if (!t) throw new Error('no enemy ' + id);
+  const m0 = MOVES[id]; const m = { ...m0, name: m0.name.replace(/sprite/i, 'Imp') };
+  const boss = m.rank === 'BOSS', n = boss ? 6 : 4;
+  const sig = m.acts.length ? m.acts[m.acts.length - 1] : 'its attack';
+  const frames = boss
+    ? ['STANCE: battle stance, idle and ready, weight settled.', 'FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.', `ATTACK 1: the wind-up for its signature attack, ${sig}.`, 'ATTACK 2: the attack building, bigger and more intense.', 'ATTACK 3: the attack landing at full force.', 'ATTACK 4: the follow-through, settling back.']
+    : ['STANCE: battle stance, idle and ready, weight settled.', 'FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.', `ATTACK A: the wind-up for its signature attack, ${sig}.`, 'ATTACK B: the attack landing.'];
+  const pose = frames[k - 1];
+  const under = 'docs/reference/underpaint/' + id + '-f' + k + '.png';
+  if (!fs.existsSync(under)) throw new Error('missing ' + under);
+  const areaRef = AREA_PAINTING[t.area];
+  const refs = [KEY].concat(areaRef ? [areaRef] : [], [under], chain ? [chain] : []);
+  let no = 1;
+  const att = [`${no++}. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.`];
+  if (areaRef) att.push(`${no++}. The AREA PAINTING of ${AREAS[t.area]}: the place ${m.name} lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint ${m.name} as a resident of this same picture, by the same hand. Do not copy this painting's layout, buildings or props.`);
+  att.push(`${no++}. A soft COLOR UNDERPAINTING of this one pose of ${m.name}, blurred on purpose, like a painter's first block-in of color. It fixes the pose, the shape, the proportions, the colors, the face and the expression, and nothing else. Paint the finished picture over it: the same creature in the same pose, with the same placement, enlarged to fill the picture, with all the fine detail and brushwork the underpainting does not have. Nothing from the underpainting is kept as it is: every edge, texture and highlight is freshly painted, sharp and clear.`);
+  if (chain) att.push(`${no++}. The FINISHED picture of the same creature in its stance. Use it for the exact colors, the painted textures, the brush style and the details of ${m.name}, so this pose is clearly the same creature painted by the same hand. Only the pose is different.`);
+  const text = `IMAGE REQUEST: ONE SINGLE ENEMY PICTURE. Return exactly one image, nothing else.
+
+WHAT THIS IS
+One pose of the enemy ${m.name.toUpperCase()} (${boss ? 'a BOSS' : 'a regular enemy'}, level ${m.level}) for "The Adventures of Tom", a family role-playing game. The game shows it large, in front of a painted background of ${AREAS[t.area]}, on phones and on tablets held sideways, so it must be sharp, detailed and clear at full size.
+
+ATTACHED IMAGES (in this order)
+${att.join('\n')}
+
+${MATTE}
+
+${style(!!areaRef)}
+
+THE CREATURE
+${m.name.toUpperCase()}: ${t.look}.${boss ? ' It is a boss, so it is large, imposing and extra detailed, but still funny and friendly-scary.' : ''}
+
+THE POSE
+${pose}
+
+THE PICTURE (strict)
+- One square image, 1024 x 1024 pixels. If your tool cannot make that exact size, keep it square and make it as large as it allows.
+- ${m.name.toUpperCase()} FACES RIGHT, seen from the side or three quarters, slightly from above, exactly as in the underpainting.
+- The creature is as large as it can be: it fills about 85 percent of the picture height or width, whichever is larger, with an empty margin of at least 6 percent on every side. Its base or feet rest on one horizontal line about 8 percent above the bottom edge, with a small soft contact shadow directly under it.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature, no magenta glow, spill, tint or fringe on its edges.
+- Draw ONLY ${m.name.toUpperCase()}, with nothing else in the picture.
+- Every detail is painted at full resolution: crisp edges, fine texture, small details in the eyes, mouth and surfaces.
+
+Family friendly for ages 6 and up. Keep the flinch comic, never grim.`;
+  return { id: 'test-one-' + id + '-' + (k === 1 ? 'stance' : 'pose' + k), tab: 'Enemies', title: `Library test: ${m0.name}, ${pose.split(':')[0].toLowerCase()} pose alone, matte and handbrushed${chain ? ' (approve the stance test first)' : ''}`, ar: '1:1', refs, prompt: text };
+}
+
+module.exports = { buildOne, entries: TABLE.map(t => build(t)), gridTest: id => build(TABLE.find(t => t.id === id), true) };
