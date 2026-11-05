@@ -321,8 +321,16 @@
    "group": "Long Island"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-batch-02-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793899957538
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-05",
