@@ -16,7 +16,7 @@ let TOM_STRETCH=null;
   const tag=(rows,a,f,flip)=>paintRows(rows,a,f,flip);
   // Overworld: same shape as the old TOM_OW (pal, down/up/side with [stand, step, step]); recruit-sprites.js preps it at scale 1.
   // The sheet draws Tom facing LEFT; the game's 'side' set faces RIGHT (its 'left' is the mirror), so side = flipped left frames.
-  const O=TOM_HIRES.ow,mk=(d,flip)=>['stand','step1','step2'].map(n=>{
+  const O=TOM_HIRES.ow,mk=(d,flip)=>['stand','step1','step2','pass'].map(n=>{
     const rows=O[d+'_'+n]; return tag(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'tomOw',d+'_'+n,flip); });
   TOM_OW.hires=true; TOM_OW.pal=O.pal; TOM_OW.down=mk('down'); TOM_OW.up=mk('up'); TOM_OW.side=mk('left',true);
   // Arrival stretch (engine/intro.js): painted front-facing poses, in the order tired, start, full, side, crack, neck, exhale, fresh.

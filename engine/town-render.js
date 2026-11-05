@@ -10,7 +10,7 @@ function kissLean(a) {
 }
 // Walk cycle synced to steps: each tile shows a stride for the first half, then the standing frame; strides alternate legs.
 // Walk cycle (Tom 11-04 22:02: slower animation, same walking speed; 11-05 07:01: size4 had dropped the standing frame so the arms stopped swinging).
-const OW_WALK_CYCLE_TOM=[1,2,1,2],OW_WALK_CYCLE=[1,0,2,0], OW_WALK_CYCLE_PIXEL=[1,0,3,0];
+const OW_WALK_CYCLE_TOM=[1,3,2,3],OW_WALK_CYCLE=[1,0,2,0], OW_WALK_CYCLE_PIXEL=[1,0,3,0];
 function walkPhase(a) {
   if(!a.move) return -1;
   if(a.move!==a._stepMove) { a._stepMove=a.move; a.stepN=(a.stepN||0)+1; }

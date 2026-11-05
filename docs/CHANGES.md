@@ -1,3 +1,10 @@
+## 2026-11-05 (199): Tom's walk gets passing poses and his new front head (`walk8`)
+- Tom (12:24): new front head on the front frames, front step 2 head centred on the neck like step 1, and three arms-down passing bodies (front, back, side) for between the strides. Pictures: art/raw/characters/tom-head-front-v2.png, tom-body-front-pass.png, tom-body-back-pass.png, tom-body-side-pass.png.
+- Walk cycle for Tom is now stride A, passing pose, stride B, passing pose (`OW_WALK_CYCLE_TOM=[1,3,2,3]`, frames now stand, step1, step2, pass). The hands-in-pockets stand frame is used only when he is not walking.
+- Front: his head at the old head's hair-to-chin size (365 frame px), neck stump tucked behind the chin, head centred on the neck of each body (the mirrored step 2 body is asymmetric at the shoulders, which had pushed its head right). Front view is about 2.7% shorter than before (the old head had a longer neck painted in). One size factor for every frame is kept at its old value, so back and side frames are pixel-identical to before (checked).
+- Passing pictures were drawn 13 to 17% smaller than his stand pictures (same upright pose), so each is scaled by one uniform factor to its view's stand body height. The side passing picture faces right like his side stand, so it is mirrored to face left like the strides; the game then flips for right as before.
+- Arrival stretch art pinned (HEAD_KW 1.626) so it does not change. Atlas art/chars/tom-ow.webp now 12 frames. Not pushed until Tom saw the numbered sheet.
+
 ## 2026-11-05 (198): Tom's new front head stored (not installed, no tag)
 - Tom (11:18): "use this head". Saved as art/raw/characters/tom-head-front-v2.png (front-facing, hair to chin, magenta background). Nothing in the game uses it yet.
 - Tried offline: front walk frames with this head at the old head's hair-to-chin size, neck stump tucked behind the chin. Front view comes out about 2.7% shorter. Shown to Tom as a numbered old-versus-new sheet; install waits for his yes. No-change rebake of bake_tom_walk_v4.py reproduced the repo files exactly.

@@ -177,6 +177,7 @@ for _ in range(14):
     if _ratio_w(_m) < _rw * FACE_GROW_W: _lo = _m
     else: _hi = _m
 HEAD_KW = round((_lo + _hi) / 2, 3)
+HEAD_KW = 1.626   # pinned 2026-11-05 12:24: it used to be solved from the old front stand; the new front head would move it and change the arrival stretch art, which must not change
 print('head factor solved: walk', HEAD_KW)
 for _n in list(poses):
     if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames keep the head as painted
@@ -253,7 +254,8 @@ def hard(img, thr=0.5):
     a[:, :, 3] = np.where(a[:, :, 3] >= 255 * thr, 255, 0)
     return Image.fromarray(a, 'RGBA')
 
-OW_STAND_H = poses['w_down_stand'].height      # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
+from tom_walk_frames import OW_REF_H
+OW_STAND_H = OW_REF_H      # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
@@ -481,7 +483,7 @@ js.append("  stretch:{" + ",".join(f"{k}:" + fmt_rows(st_rows[k]) for k in STRET
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):
-    for n in ('stand', 'step1', 'step2'):
+    for n in ('stand', 'step1', 'step2', 'pass'):
         js.append(f"    {d}_{n}:" + fmt_rows(ow_rows[f'{d}_{n}']) + ",")
 js.append("  }")
 js.append("};")
