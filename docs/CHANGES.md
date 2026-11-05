@@ -1,3 +1,10 @@
+## 2026-11-05 (174): Walk frames restored, separate overworld size, 10 percent smaller again (`size5`)
+- Tom (07:01): "You lost one of the walking frames, the arms are not moving for Tom and Grace. And the overworld should have its own height and they still need to be 10% smaller."
+- Cause (fact): size4 dropped the standing frame, so every tile held one stride pose and the arms never swung inside a tile.
+- Animation (decision): the cycle is stride A, stand, stride B, stand, each pose lasting one tile (half the old pace, all frames back). Painted sheets use `OW_WALK_CYCLE` [1,0,2,0]; the older pixel NPCs `OW_WALK_CYCLE_PIXEL` [1,0,3,0]. Walking speed untouched.
+- Size (decision): two settings in engine/town-render.js. `OW_STREET_PARTY` 1.296 (the overworld: streets and every map that is not a painted house; 10 percent below size4's 1.44). `OW_HOUSE_PARTY` back to 1.6 inside painted houses: size4 had cut it to 1.44 without being asked, and Tom never complained about rooms. Tom, Grace, Rose and Tom carrying Rose only.
+- Looked at: Tom and Grace walking left across the Square (tools/shots/ow-size5-walk.png, not committed): strides and stands alternate. Tag `town-render.js?v=size5`.
+
 ## 2026-11-04 (173): Main characters 10 percent smaller, slower walk animation (`size4`)
 - Tom (22:02): "we went too far. Make them 10% smaller", and the walk animation looks too fast in the overworld; slow the animation, not the walking speed.
 - Size (decision): the Tom, Grace, Rose and Tom+Rose multiplier `OW_HOUSE_PARTY` goes from 1.6 to 1.44 (10 percent smaller), for houses and outdoors alike, since size3 applied it everywhere.
