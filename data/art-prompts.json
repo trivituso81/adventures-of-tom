@@ -2264,6 +2264,12 @@
      "note": "doesn't look enough like Downtown LA - research this",
      "from": "v1",
      "at": 1793842666938
+    },
+    {
+     "date": "2026-11-05",
+     "note": "should look exactly like DTLA - skyscrapers, busy city dense etc",
+     "from": "v2",
+     "at": 1793843418540
     }
    ],
    "id": "area-blvd",
