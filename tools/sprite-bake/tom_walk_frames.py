@@ -26,7 +26,7 @@ HEADS = {'down': ('tom-hero-fresh-v1.png', 350, 54), 'up': ('tom-back-view-v1.pn
 BODIES = {
     'w_down_stand': 'tom-body-front-stand.png', 'w_down_step1': 'tom-body-front-walk.png', 'w_down_step2': ('tom-body-front-walk.png', 'mirror'),
     'w_up_stand': 'tom-body-back-stand.png', 'w_up_step1': 'tom-body-back-walk.png', 'w_up_step2': ('tom-body-back-walk.png', 'mirror'),
-    'w_left_stand': 'tom-body-side-stand.png', 'w_left_step1': 'tom-body-side-walk-a.png', 'w_left_step2': 'tom-body-side-walk-b.png'}
+    'w_left_stand': ('tom-body-side-stand.png', 'mirror'), 'w_left_step1': 'tom-body-side-walk-a.png', 'w_left_step2': 'tom-body-side-walk-b.png'}
 JOIN = 6          # body row (from the top of the neck stump) where the head's cut row lands
 
 def _span(im, y):
@@ -38,7 +38,7 @@ def build():
     out = {}
     scale = {}
     for v, (f, cut, jr0) in HEADS.items():
-        sb = _keyed(BODIES[f'w_{v}_stand'])
+        _b = BODIES[f'w_{v}_stand']; sb = _keyed(_b[0] if isinstance(_b, tuple) else _b)
         # ONE scale per view: his painting's body below the collar and his headless body below the same row are the same body, so the head keeps
         # exactly the head-to-body proportion of his own standing painting
         scale[v] = (sb.height - jr0) / float(heads[v].height - cut)

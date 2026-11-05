@@ -1,3 +1,6 @@
+## 2026-11-05 (193): Tom's side stand body faced right while his head faced left; the body is mirrored (`walk6`)
+Tom (09:22): "in 7 it looks like either the head or body are backwards". Fact: the side stand body he supplied (tom-body-side-stand.png) has the controller print on the right of the chest, so it faces right; his side head and both side walk bodies face left. `tools/sprite-bake/tom_walk_frames.py` now mirrors that one body (frame 7, left stand). Rebaked art/chars/tom-ow.webp, data/tom-hires.js. Nothing else changed.
+
 ## 2026-11-05 (192): Grump Hollow installed: Tom's approved painting, hand-cut layer, new walk map (`hollow4`)
 - Tom (09:10): "yes" to installing the Hollow on its own, because the game still showed the old painting. He asked the Hollow alone, so this is the first area installed ahead of "install these areas" (Row and Square stay as they are).
 - Art: tools/make_hollow_fg.py crops art/raw/areas/area-hollow-v1.png 42 px off the top and 43 off the bottom (1:1 to 12:11), scales to 1536 x 1408 (art/hollow.webp, 0.5 MB) and merges the four hand-cut layers of CHANGES 187 the same way into art/hollow-fg.webp (0.4 MB). 31 walk-behind zones (PLATE_BEHIND.hollow in engine/plate.js, base = where each piece stands) so the party walks behind trees, the exit board, benches, boulders and logs. PLATE_SIGNS.hollow is empty: the board is painted.
