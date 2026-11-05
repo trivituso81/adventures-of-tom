@@ -39,6 +39,8 @@ function startSplash() {
   el.hidden=false; el.classList.remove('out');
   splashMark();
   splashSetMode('launch');
+  // index.html?admin=1 (the Area Builder's Exit from its first screen) opens the Welcome screen on the ADMIN list with AREA BUILDER highlighted.
+  try{ if(new URLSearchParams(location.search).get('admin')) { splashSetMode('admin',4); history.replaceState(null,'',location.pathname); } }catch(e){}
   if(!splash.wired) {
     splash.wired=true;
     const box=el.querySelector('.sp-choices');

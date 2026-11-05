@@ -139,23 +139,26 @@ const $=id=>document.getElementById(id);
 // ---- exit flow: edits autosave in this browser as you paint; "this visit" = everything changed since the page opened
 const EK='aot-areas-edit-';
 const lsEdits=()=>{ const o={}; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.startsWith(EK)) o[k]=localStorage.getItem(k); } }catch(e){} return o; };
-const baseEdits=lsEdits();
+let baseEdits=lsEdits();
 const nTiles=v=>{ try{ const j=JSON.parse(v); return Object.keys(j.tiles||{}).length; }catch(e){ return 0; } };
 function visitChanges(){ const now=lsEdits(), keys=new Set([...Object.keys(now),...Object.keys(baseEdits)]); const maps=[]; let tiles=0;
   for(const k of keys) if(now[k]!==baseEdits[k]){ maps.push(k.slice(EK.length)); tiles+=Math.abs(nTiles(now[k]||'')-nTiles(baseEdits[k]||''))||1; } return {maps,tiles}; }
 function updDirty(){ const c=visitChanges(); $('dirty').textContent=c.maps.length?('Edited: '+c.maps.length+' map'+(c.maps.length>1?'s':'')):''; }
-function leave(){ location.href='index.html'; }
-function openExit(){ const c=visitChanges(), has=c.maps.length>0;
+function leave(){ location.href='index.html?admin=1'; }
+// Leaving a map (Save and exit, or Exit without saving) goes back to the "What do you want to edit?" screen, not the game.
+// The changed-this-visit count restarts from here. Exit pressed on that screen itself (no map open) still goes to the game.
+function toEditScreen(){ baseEdits=lsEdits(); closeExit(); hideNote(); $('exportbar').style.display='none'; updDirty(); showHome(); }
+function openExit(){ if(!$('picker').hidden){ leave(); return; } const c=visitChanges(), has=c.maps.length>0;
   $('exInfo').textContent=has?('This visit you changed '+c.maps.length+' map'+(c.maps.length>1?'s':'')+' ('+c.maps.join(', ')+'). Your paint is saved on this device as you go.'):'You have not changed anything this visit.';
-  $('exSaveS').textContent=has?'Keeps your edits on this device and copies this map\'s export so you can paste it to Claude.':'Nothing to save. Goes back to the game.';
-  $('exDiscS').textContent=has?'Throws away everything you changed this visit, then goes back to the game.':'Nothing was changed this visit. Goes back to the game.';
+  $('exSaveS').textContent=has?'Keeps your edits on this device, copies this map\'s export so you can paste it to Claude, then goes back to the edit screen.':'Nothing to save. Goes back to the edit screen.';
+  $('exDiscS').textContent=has?'Throws away everything you changed this visit, then goes back to the edit screen.':'Nothing was changed this visit. Goes back to the edit screen.';
   $('exitov').style.display='flex'; }
 function closeExit(){ $('exitov').style.display='none'; }
 $('exitbtn').onclick=openExit; $('exStay').onclick=closeExit;
 $('exitov').addEventListener('click',e=>{ if(e.target===$('exitov')) closeExit(); });
 addEventListener('keydown',e=>{ if(e.key==='Escape'&&$('exitov').style.display==='flex') closeExit(); });
-$('exDiscard').onclick=()=>{ const now=lsEdits(); try{ for(const k of Object.keys(now)) if(!(k in baseEdits)) localStorage.removeItem(k); for(const k of Object.keys(baseEdits)) localStorage.setItem(k,baseEdits[k]); }catch(e){} leave(); };
-$('exSave').onclick=()=>{ let done=false; const go=()=>{ if(!done){ done=true; leave(); } };
+$('exDiscard').onclick=()=>{ const now=lsEdits(); try{ for(const k of Object.keys(now)) if(!(k in baseEdits)) localStorage.removeItem(k); for(const k of Object.keys(baseEdits)) localStorage.setItem(k,baseEdits[k]); }catch(e){} toEditScreen(); };
+$('exSave').onclick=()=>{ let done=false; const go=()=>{ if(!done){ done=true; toEditScreen(); } };
   try{ saveEd(); if(M&&(Object.keys(ed.tiles).length||Object.keys(ed.notes).length)) navigator.clipboard.writeText(exportJSON()).then(go,go); else go(); }catch(e){ go(); } setTimeout(go,1200); };
 const DEF_COL={W:'#2fd25a',B:'#e63946',D:'#ffd34d',E:'#3d8bff'};
 const NAMES={W:'Walkable',B:'Blocked',D:'Door',E:'Exit'};
