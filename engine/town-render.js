@@ -10,7 +10,7 @@ function kissLean(a) {
 }
 // Walk cycle synced to steps: each tile shows a stride for the first half, then the standing frame; strides alternate legs.
 // Walk cycle (Tom 11-04 22:02: slower animation, same walking speed; 11-05 07:01: size4 had dropped the standing frame so the arms stopped swinging).
-const OW_WALK_CYCLE=[1,0,2,0], OW_WALK_CYCLE_PIXEL=[1,0,3,0];
+const OW_WALK_CYCLE_TOM=[1,2,1,2],OW_WALK_CYCLE=[1,0,2,0], OW_WALK_CYCLE_PIXEL=[1,0,3,0];
 function walkPhase(a) {
   if(!a.move) return -1;
   if(a.move!==a._stepMove) { a._stepMove=a.move; a.stepN=(a.stepN||0)+1; }
@@ -52,7 +52,7 @@ function drawSheetActor(a,set) {
   const p=position(a),k=actorK()*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
-  const ph=walkPhase(a),fi=ph>=0?OW_WALK_CYCLE[a.stepN%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
+  const ph=walkPhase(a),fi=ph>=0?(set===OW.tom?OW_WALK_CYCLE_TOM:OW_WALK_CYCLE)[a.stepN%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
   const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
   const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;

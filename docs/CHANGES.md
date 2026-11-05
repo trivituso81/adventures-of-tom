@@ -1,3 +1,6 @@
+## 2026-11-05 (195): Tom's walk no longer shows the stand frame between strides (`walk7`)
+Tom (10:17): "im seeing stand frames in the walking animation". Fact: the overworld cycle was stride A, stand, stride B, stand. With his new bodies the stand has hands in pockets, so it read as a pause. Tom's walk now alternates his two step frames only (`OW_WALK_CYCLE_TOM=[1,2,1,2]` in engine/town-render.js). The stand frame still shows when he is idle. Not changed: Grace, Rose, other party members and NPCs keep the old cycle.
+
 ## 2026-11-05 (194): Los Angeles flight pictures installed: ground v3, skyline v6, foreground v2 (`flight4`)
 - Tom approved the three new LA pictures at 09:13 to 09:21 (the redo prompts of 169). `python3 tools/sprite-bake/bake_flight_lib.py 20261105` re-cut all 12 flight files; only art/flight/ground-la.webp (1280 x 653), skyline-la.webp (1280 x 616) and fore-la.webp (1280 x 146) and data/flight-art.js changed. Tag `flight4`.
 - Looked at (flight_test both, portrait and landscape): the plane now takes off and lands ON the LA runway (the old ground was a perspective picture and the plane landed beside it). Flight test ALL OK both directions.
