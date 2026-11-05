@@ -19,7 +19,7 @@ def _keyed(f, body=False):
     im = defringe(slice_sheet(os.path.join(RAW, f), [['x']], robust=True, rim_only=3 if body else 0)['x'])
     if body:       # the magenta floor shadow painted under the feet is background, not body (pink shoes are far from it)
         a = np.array(im); r, g, b = (a[:, :, i].astype(int) for i in range(3))
-        sh = (np.minimum(r, b) - g > 110) & (b > 120) & (a[:, :, 3] > 0); sh[: int(a.shape[0] * 0.88)] = False
+        sh = ((np.minimum(r, b) - g > 110) & (b > 120) | (g < 50) & (r > 90) & (b > 90) & (abs(r - b) < 45)) & (a[:, :, 3] > 0); sh[: int(a.shape[0] * 0.88)] = False
         a[sh, 3] = 0; im = Image.fromarray(a, 'RGBA')
     return im.crop(im.getbbox())
 
@@ -28,7 +28,7 @@ def _keyed(f, body=False):
 # the back head has no chin: it takes the front's chin row (same head height) and its own centre.
 HEADS = {'down': 'grace-head-forward-v1.png', 'up': 'grace-head-back-v1.png', 'left': 'grace-head-side-v1.png'}
 CHIN = {'down': 925 - 15, 'up': 925 - 15, 'left': 830 - 16}
-NECK_X = {'down': 620 - 81, 'up': None, 'left': 420 - 166}       # None = centre of the head picture
+NECK_X = {'down': 620 - 81, 'up': None, 'left': 424}       # None = centre of the head picture. Side: the neck axis sits about 25 body px (62 head px) in front of the ear (ear at x 486 in the keyed side head), so the head is over the torso (Tom 11:00: side head was too far back)
 BODIES = {
     'w_down_stand': 'grace-body-stand-forward-v1.png', 'w_down_step1': 'grace-body-walk-forward-v1.png', 'w_down_step2': ('grace-body-walk-forward-v1.png', 'mirror'),
     'w_up_stand': 'grace-body-stand-back-v1.png', 'w_up_step1': 'grace-body-walk-back-v1.png', 'w_up_step2': ('grace-body-walk-back-v1.png', 'mirror'),

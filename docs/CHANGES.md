@@ -1,3 +1,8 @@
+## 2026-11-05 (197): Grace's side head set over her torso, floor shadow removed (`gwalk4`)
+- Tom (11:00, from his phone screenshot): "her head is not on correctly in the side view". Fact: in the three side frames the head was placed too far back (her ear sat about 30 game px behind the middle of her torso, so the hair hung far past her back and the face sat above the front of the sweater). Cause: the neck position in the side head picture was a guess (x 254). Fix: the neck axis is now 25 body px in front of the ear (x 424 in the keyed side head, `NECK_X['left']` in tools/sprite-bake/grace_walk_frames.py). Front and back heads unchanged.
+- Also removed the dark magenta floor shadow still showing under her shoes in the step frames (colour rule in `_keyed`).
+- Looked at: all nine frames numbered (stand, steps, side frames enlarged). Only art/chars/grace-ow.webp and data/grace-hires.js changed.
+
 ## 2026-11-05 (196): Grace's overworld walk frames rebuilt from the ten pictures Tom supplied (`gwalk3`)
 - Tom (10:14) sent three headless standing bodies (front, back, side), a front walk, a back walk, two side walks, and three heads (front, back, side). Method is Tom's walk (191): tools/sprite-bake/grace_walk_frames.py builds nine frames; bake_grace_walk_v4.py no longer reads grace-walk-sheet-v1.png. Pictures are kept in art/raw/characters/grace-body-*.png and grace-head-*.png.
 - Frames: 1 front stand, 2 front step 1 (step down), 3 front step 2 (mirrored body of 2), 4 back stand, 5 back step 1 (step up), 6 back step 2 (mirrored body of 5), 7 side stand, 8 side step 1, 9 side step 2 (all bodies face left as supplied). Heads are never mirrored. The mirrored front step puts the star bag on the other hip.
