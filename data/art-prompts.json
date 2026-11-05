@@ -1802,7 +1802,7 @@
    "group": "The Square"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -1812,7 +1812,14 @@
      "at": 1793842190238
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "does not map to the reference image",
+     "from": "v5",
+     "at": 1793848195647
+    }
+   ],
    "id": "area-square-cut1",
    "tab": "Areas",
    "title": "The Square: stencil 1 of 4, trees (same chat, send after the painting is approved)",
