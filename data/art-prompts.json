@@ -72,8 +72,16 @@
    "group": "Test card"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/enemies/test-one-grump-stance-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793919531932
+    }
+   ],
    "rejects": [],
    "id": "test-one-grump-stance",
    "tab": "Enemies",
