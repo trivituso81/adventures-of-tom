@@ -1838,7 +1838,7 @@
    "group": "The Square"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -1848,7 +1848,14 @@
      "at": 1793842295516
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "Cut out instructions were not followed",
+     "from": "v2",
+     "at": 1793891335251
+    }
+   ],
    "id": "area-square-cut2",
    "tab": "Areas",
    "title": "The Square: stencil 2 of 4, posts, lamps and signs (same chat, send after the painting is approved)",
