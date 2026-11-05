@@ -4099,7 +4099,7 @@
    "group": "Sundial Hollow"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -4109,7 +4109,14 @@
      "at": 1793921592484
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "does not line up to the reference picture AT ALL",
+     "from": "v2",
+     "at": 1793921679100
+    }
+   ],
    "id": "area-sundial-cut1",
    "tab": "Areas",
    "title": "Sundial Hollow: stencil 1 of 3, trees and tall plants (same chat, send after the painting is approved)",
