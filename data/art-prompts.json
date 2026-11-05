@@ -1778,6 +1778,12 @@
      "note": "wider path between kettle cottage and moon club",
      "from": "v9",
      "at": 1793846830299
+    },
+    {
+     "date": "2026-11-05",
+     "note": "keep everything the same but move the taxi cab all the way to the right of the building halfway out of view",
+     "from": "v12",
+     "at": 1793847057836
     }
    ],
    "id": "area-square",
