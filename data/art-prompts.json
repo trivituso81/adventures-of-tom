@@ -1879,6 +1879,12 @@
      "note": "No buildings!",
      "from": "v5",
      "at": 1793892616252
+    },
+    {
+     "date": "2026-11-05",
+     "note": "You incorrectly cut out the shops yet again",
+     "from": "v7",
+     "at": 1793892770410
     }
    ],
    "id": "area-square-cut2",
@@ -1888,7 +1894,7 @@
    "refs": [
     "art/raw/areas/area-square-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Square painting.\n\nCopy out only its street lamps, its three green exit boards with their posts, its hanging shop signs with their iron brackets, and the small lanterns by the doors. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Square painting.\n\nCopy out only its street lamps, its three green exit boards with their posts, its hanging signs with their iron brackets, and the small lanterns by the doors. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.\n\nDO NOT CUT OUT ANY SHOPS NOR BUILDINGS\n",
    "group": "The Square"
   },
   {
