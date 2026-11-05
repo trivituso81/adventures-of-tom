@@ -1,5 +1,4 @@
-"""*** NO HEAD RESIZING (Tom, 2026-11-03, CLAUDE.md). Do not call grow_head for new art or new characters; it exists only to reproduce OLD art bakes. ***
-Head growth for Grace and Rose (2026-11-01, Tom: "check the head to body ratio for Tom and TNB and apply that to Grace and Rose,
+"""Head growth for Grace and Rose (2026-11-01, Tom: "check the head to body ratio for Tom and TNB and apply that to Grace and Rose,
 increase the size of their heads not bodies"). Head share = top of head to chin over total height. Tom/TNB average: battle .43, walk .373.
 Grace now battle .34, walk .36; Rose battle .31, walk .343. Factor k = T(1-s)/((1-T)s) so the body (chin to feet) keeps its size and the
 figure gets taller by the head growth. Callers scale frames with factors computed from the UNWARPED reference heights."""
@@ -11,9 +10,6 @@ T_BATTLE, T_WALK = 0.43, 0.373
 def factor(target, share): return target * (1 - share) / ((1 - target) * share)
 
 def grow_head(img, k, head_px, taper=12, pad=120):
-    if k != 1 and not getattr(grow_head, '_warned', False):
-        grow_head._warned = True
-        import sys; print('WARNING: grow_head resizes a head. Tom\'s standing rule (2026-11-03): never resize heads. Only OK to reproduce an OLD art bake.', file=sys.stderr)
     """Rows from the top of the figure down to top+head_px (the chin) are enlarged by k about the chin; the body is untouched."""
     if k == 1 or head_px <= 4: return img
     a = np.array(img)

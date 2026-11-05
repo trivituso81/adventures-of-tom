@@ -182,7 +182,7 @@ for _ in range(14):
 HEAD_KW = round((_lo + _hi) / 2, 3)
 print('head factor solved: walk', HEAD_KW)
 for _n in list(poses):
-    if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames are never resized (no head resizing rule, 11-03)
+    if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames keep the head as painted
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):

@@ -1,3 +1,8 @@
+## 2026-11-05 (176): No head resizing rule lifted (docs and tool comments only, no art changed)
+- Tom (07:18): "Let's undo the no head resizing rule. Don't we have another rule for head to body character ratios depending on age?" Yes: `docs/CHARACTER_PIPELINE.md` section 7 (adults about .21 to .22, Grace about .25 per the style key, older kid art .373 walking and .43 battle). It is in force again.
+- Removed: the "No head resizing" section in CLAUDE.md (replaced by a short "Head sizes" note), the override banner at the top of section 7 and the "NEVER resize the head" words in step 4 of the pipeline doc, the warning and docstring banner in tools/sprite-bake/kidhead.py (`grow_head` works silently again), and a comment in bake_tom_walk_v4.py.
+- Nothing was re-baked and no art, script or tag changed. Measured before the change (11-05): Tom's walk head is .208 to .215 of his height in all nine frames; Grace's walk head is about .20 against the style key's .25.
+
 ## 2026-11-05 (175): Area Builder: zoom and pan
 - Tom (06:58): "Area builder needs zoom and pan controls." Before, only fixed 1x, 2x, 3x buttons and two-finger scrolling.
 - Phone: pinch with two fingers to zoom (the spot between the fingers stays put) and drag with two fingers to pan, both at once. New Hand (pan) tool: one finger drags the map and paints nothing. One finger still paints with Walk, Block, Door and Exit.
