@@ -30,7 +30,7 @@ const style = hasArea => `ART STYLE
 const artNote = hasArea => `STYLE RULE (the most important instruction)
 Every frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. ${hasArea ? 'The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.' : 'The creature is painted by the same hand as the style key, so it could sit inside that picture without looking like a different artist made it.'}`;
 
-function build(t, grid, brushRef) {
+function build(t, grid, brushRef, real) {
   const m0 = MOVES[t.id]; if (!m0) throw new Error('no moves for ' + t.id);
   const m = { ...m0, name: m0.name.replace(/sprite/i, 'Imp') }; // the word sprite pulls the generator toward pixel art
   const realName = m0.name;
@@ -43,8 +43,8 @@ function build(t, grid, brushRef) {
   if (areaRef && !fs.existsSync(areaRef)) throw new Error('missing area painting ' + areaRef);
   const refs = [KEY].concat(areaRef ? [areaRef] : [], hasLike ? [likeRef] : [], brushRef ? [brushRef] : []);
   const likeNo = areaRef ? 3 : 2;
-  const brushNo = likeNo + 1;
-  const brushAtt = brushRef ? `${brushNo}. A FINISHED picture of a different creature, painted in exactly the surface finish wanted for this sheet: matte, with visible brush strokes, ridges of paint, layered color and a canvas grain. Use it ONLY for how the paint looks (the matte finish, the brushwork, the sharpness of the edges). Do not copy its creature, pose or layout: the creature, poses and layout come only from attachment ${likeNo}.` : '';
+  const brushNo = likeNo + (hasLike ? 1 : 0);
+  const brushAtt = brushRef ? `${brushNo}. A FINISHED picture of a different creature, painted in exactly the surface finish wanted for this sheet: matte, with visible brush strokes, ridges of paint, layered color and a canvas grain. Use it ONLY for how the paint looks (the matte finish, the brushwork, the sharpness of the edges). Do not copy its creature, pose or layout: the creature, poses and layout come only from ${hasLike ? 'attachment ' + likeNo : 'the description below'}.` : '';
   const sig = m.acts.length ? m.acts[m.acts.length - 1] : 'its attack';
   const n = boss ? 6 : 4, cols = grid ? (boss ? 3 : 2) : n, rows = grid ? 2 : 1;
   const cell = grid ? 512 : (boss ? 384 : 256);
@@ -59,7 +59,7 @@ function build(t, grid, brushRef) {
   const text = `IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else.
 
 WHAT THIS IS
-The battle sheet of the enemy ${m.name.toUpperCase()} (${boss ? 'a BOSS' : 'a regular enemy'}, level ${m.level}) for "The Adventures of Tom", a family role-playing game: ${n} poses of the same character in a single row. The game puts it in front of a painted background of ${AREAS[t.area]}, so its colors and handbrushed painted texture should feel at home there${areaRef ? ', painted in the same way as the area painting' : ''}, but it must still stand out clearly against it.
+The battle sheet of the enemy ${m.name.toUpperCase()} (${boss ? 'a BOSS' : 'a regular enemy'}, level ${m.level}) for "The Adventures of Tom", a family role-playing game: ${n} poses of the same character in ${grid ? 'a grid' : 'a single row'}. The game puts it in front of a painted background of ${AREAS[t.area]}, so its colors and handbrushed painted texture should feel at home there${areaRef ? ', painted in the same way as the area painting' : ''}, but it must still stand out clearly against it.
 
 ATTACHED IMAGES (in this order)
 ${att}
@@ -72,11 +72,11 @@ THE CREATURE
 ${m.name.toUpperCase()}: ${t.look}. It is about ${t.inches} inches tall (${(t.inches / 12).toFixed(1).replace('.0', '')} feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.${boss ? ' It is a boss, so it is large, imposing and extra detailed, but still funny and friendly-scary.' : ''}
 
 THE SHEET (strict)
-- ${grid ? `A single image holding a grid of ${n} equal square cells, ${cols} columns by ${rows} rows, each cell ${cell} x ${cell} pixels, so the full image is ${cell * cols} x ${cell * rows} pixels. The layout is exactly the layout of the underpainting. If your tool cannot make that exact size, keep the same ${cols} by ${rows} grid and make the image as large as it allows.` : `A single horizontal row of ${n} equal square cells, ${cell} x ${cell} pixels each, so the full image is ${cell * n} x ${cell} pixels. If your tool cannot make that exact shape, keep exactly ${n} cells in one row and make the image as wide as it allows.`}
+- ${grid ? `A single image holding a grid of ${n} equal square cells, ${cols} columns by ${rows} rows, each cell ${cell} x ${cell} pixels, so the full image is ${cell * cols} x ${cell * rows} pixels. ${hasUnder ? 'The layout is exactly the layout of the underpainting.' : 'The cells are filled in reading order.'} If your tool cannot make that exact size, keep the same ${cols} by ${rows} grid and make the image as large as it allows.` : `A single horizontal row of ${n} equal square cells, ${cell} x ${cell} pixels each, so the full image is ${cell * n} x ${cell} pixels. If your tool cannot make that exact shape, keep exactly ${n} cells in one row and make the image as wide as it allows.`}
 - Exactly ${n} frames, one per cell, ${grid ? 'in reading order (left to right along the top row, then left to right along the bottom row)' : 'from left to right'}, in the numbered order below.
 - ${m.name.toUpperCase()} FACES RIGHT in every frame (toward the right side of the image), as if facing the family on the right of a battle screen. Seen from the side or three quarters, slightly from above.
 - Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature. No magenta glow, spill, tint or fringe on its edges. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
-- ${grid ? `Same scale in every cell, exactly the scale and position of the figures in the underpainting, which already fills each cell as much as its widest pose allows. In every cell the feet or base rest on the same horizontal line as in the underpainting, with a small soft contact shadow directly under it. Nothing touches a cell edge or overlaps a neighbour.` : `Same scale in every cell: the standing creature is about ${px} pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.`}
+- ${grid ? `${hasUnder ? 'Same scale in every cell, exactly the scale and position of the figures in the underpainting, which already fills each cell as much as its widest pose allows. In every cell the feet or base rest on the same horizontal line as in the underpainting' : `Same scale in every cell: the standing creature fills about 80 percent of the cell height, and stays that size in every frame. In every cell the feet or base rest on one horizontal line about 8 percent above the cell bottom`}, with a small soft contact shadow directly under it. Nothing touches a cell edge or overlaps a neighbour.` : `Same scale in every cell: the standing creature is about ${px} pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.`}
 - Draw ONLY ${m.name.toUpperCase()}. No effects, motion lines, sparkles, other characters, props that are not part of it, text or word balloons.
 - The same colors, details and level of painted detail in every frame.
 
@@ -86,7 +86,7 @@ ${frames.map((f, i) => `${i + 1}. ${f}`).join('\n')}
 Family friendly for ages 6 and up. Keep the flinch frame comic, never grim.
 
 NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw ${m.name.toUpperCase()} in the pose described, facing right, with the shape and colors of the likeness${hasLike ? ' in attachment ' + likeNo : ' described above'}.`;
-  return { id: (grid ? 'test-grid-' : 'enemy-') + t.id + (brushRef ? '-matte' : ''), tab: 'Enemies', title: grid ? `Library test: ${realName} as a ${cols} x ${rows} grid, ${brushRef ? 'matte and handbrushed finish copied from an approved picture' : 'repainted over a soft underpainting'}` : `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: grid ? (boss ? '3:2' : '1:1') : '16:9', refs, prompt: text };
+  return { id: real ? 'enemy-' + t.id : (grid ? 'test-grid-' : 'enemy-') + t.id + (brushRef ? '-matte' : ''), tab: 'Enemies', title: grid && !real ? `Library test: ${realName} as a ${cols} x ${rows} grid, ${brushRef ? 'matte and handbrushed finish copied from an approved picture' : 'repainted over a soft underpainting'}` : `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: grid ? (boss ? '3:2' : '1:1') : '16:9', refs, prompt: text };
 }
 
 // ONE pose per picture (11-05 14:55, Tom: more handbrushed, matte not glossy, resolution high enough for an iPad in landscape).
@@ -94,6 +94,7 @@ NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If
 // Reference = soft underpainting of that single frame (docs/reference/underpaint/<id>-f<k>.png, tools/art-library/make_underpaint.py --single).
 const MATTE = `SURFACE AND BRUSHWORK (the most important instruction)
 Every surface is matte, like dry oil paint or gouache on canvas. Light is shown by broad, soft highlights built from visible brush strokes with dry-brush texture along their edges. Brush strokes are clearly visible everywhere and vary in size: broad strokes for the large forms, short flicks for texture, thick ridges of paint on the lit side of every form. Color is built in layers, so warm and cool tones show through each other. Edges are painted crisp with a small brush. A fine canvas weave grain lies over the whole picture. NOT glossy, NOT wet-looking, NOT plastic, NOT airbrushed, NOT a 3D render.`;
+const BRUSH_REF = 'art/raw/enemies/test-one-mudling-stance-v1.png';   // approved finish reference (Tom 11-05 15:14)
 function buildOne(id, k, chain) {
   const t = TABLE.find(x => x.id === id); if (!t) throw new Error('no enemy ' + id);
   const m0 = MOVES[id]; const m = { ...m0, name: m0.name.replace(/sprite/i, 'Imp') };
@@ -142,4 +143,4 @@ Family friendly for ages 6 and up. Keep the flinch comic, never grim.`;
   return { id: 'test-one-' + id + '-' + (k === 1 ? 'stance' : 'pose' + k), tab: 'Enemies', title: `Library test: ${m0.name}, ${pose.split(':')[0].toLowerCase()} pose alone, matte and handbrushed${chain ? ' (approve the stance test first)' : ''}`, ar: '1:1', refs, prompt: text };
 }
 
-module.exports = { buildOne, entries: TABLE.map(t => build(t)), gridTest: (id, brushRef) => build(TABLE.find(t => t.id === id), true, brushRef) };
+module.exports = { buildOne, entries: TABLE.map(t => build(t, true, BRUSH_REF, true)), gridTest: (id, brushRef) => build(TABLE.find(t => t.id === id), true, brushRef) };
