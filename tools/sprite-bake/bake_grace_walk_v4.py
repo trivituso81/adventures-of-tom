@@ -26,7 +26,7 @@ KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "10"))   # painted resolution mul
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=80)   # idle height in grid rows
-ap.add_argument('--ow-h', type=int, default=38)        # standing height of the overworld sprite in rows
+ap.add_argument('--ow-h', type=int, default=39)        # standing height of the overworld sprite in rows (CHARACTER_PIPELINE section 7 table: Grace 39, Tom 43, Rose 37)
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)

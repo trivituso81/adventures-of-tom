@@ -1,7 +1,7 @@
 """Grace's nine overworld walk frames, built ONLY from the pictures Tom supplied (2026-11-05 10:14):
   bodies (headless, art/raw/characters/grace-body-*.png: three stands, back and front walk, two side walks) and
   heads (art/raw/characters/grace-head-{forward,back,side}-v1.png).
-Nothing is redrawn. Bodies are used exactly as painted. A head is scaled by ONE factor for all three views (so every direction has the same head)
+Nothing is redrawn. Bodies are used as painted, scaled only so every upright frame is the same height (Tom 10:23: Grace was sized wrong next to Tom). A head is scaled by ONE factor for all three views (so every direction has the same head)
 and set on each body with its chin on the neck stump, drawn over the body so the hair falls over the collar. The only alteration Tom allowed:
 step up and step down (back and front step 2) are the MIRRORED body of step 1 (the head is never mirrored).
 Returns ({'w_down_stand': RGBA, ...}, info)."""
@@ -46,15 +46,26 @@ def _neck_cx(body, y0=8, y1=28):
 def build():
     heads = {v: _keyed(f) for v, f in HEADS.items()}
     stand = _keyed(BODIES['w_down_stand'], True)
-    # ONE scale: the front stand's body below the chin line is 3 times the head (hair top to chin), i.e. head share .25
+    # Hair top to chin is HEAD_SHARE of the front stand's total height in every frame (.25); the front head sets it, the back head matches, the side head is scaled to the same chin height
     s = (stand.height - OV) * HEAD_SHARE / (1 - HEAD_SHARE) / CHIN['down']
-    out = {}
+    H = stand.height - OV + CHIN['down'] * s              # total height every upright frame is brought to (the front stand's)
+    out = {}; info = {'scale': s, 'share': HEAD_SHARE, 'H': H, 'body': {}}
+    bscale = {}
     for name, src in BODIES.items():
         v = name.split('_')[1]; mir = isinstance(src, tuple)
         body = _keyed(src[0] if mir else src, True)
         if mir: body = body.transpose(Image.FLIP_LEFT_RIGHT)
-        h = heads[v]; hs = h.resize((round(h.width * s), round(h.height * s)), Image.LANCZOS)
-        chin = round(CHIN[v] * s); nx = (hs.width / 2.0 if NECK_X[v] is None else NECK_X[v] * s)
+        sv = CHIN['down'] * s / CHIN[v]                    # per view: hair top to chin is the same pixels in every view (the side head picture is a shorter face)
+        head_px = CHIN[v] * sv
+        if name.endswith('_stand') or name.endswith('step1') and v != 'left' or name.endswith('step2') and v != 'left':
+            b = (H - head_px) / float(body.height - OV)      # the body is scaled so the whole figure is H tall: the generator painted the walking bodies at other sizes
+            bscale[name] = b
+        else:
+            b = bscale['w_left_stand']                        # side strides keep the side stand's body scale (a stride is naturally a little lower)
+        info['body'][name] = round(b, 4)
+        if abs(b - 1) > 1e-3: body = body.resize((round(body.width * b), round(body.height * b)), Image.LANCZOS)
+        h = heads[v]; hs = h.resize((round(h.width * sv), round(h.height * sv)), Image.LANCZOS)
+        chin = round(CHIN[v] * sv); nx = (hs.width / 2.0 if NECK_X[v] is None else NECK_X[v] * sv)
         bx = _neck_cx(body)
         top = chin - OV                                   # body row 0 sits this far below the head's top row
         hx_off = bx - nx                                  # head x offset on the body's frame
@@ -63,7 +74,7 @@ def build():
         im.alpha_composite(body, (-x0, top))
         im.alpha_composite(hs, (int(round(hx_off)) - x0, 0))
         out[name] = im.crop(im.getbbox())
-    return out, {'scale': s, 'share': HEAD_SHARE}
+    return out, info
 
 if __name__ == '__main__':
     fr, info = build(); print(info)
