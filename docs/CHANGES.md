@@ -1,3 +1,9 @@
+## 2026-11-05 (236): Short-prompt A/B test card for the enemy sheet (Art Library only, no game files, no tag)
+- Tom (15:44): the new enemy pictures look too pixelated like the reference, and my long prompts may misdirect the generator.
+- Fact: the only enemy picture saved since the rollout is `enemy-grump` v2 (approved 15:42), made from the OLD Grump entry I left untouched (its reference is the raw pixel sheet `tools/sprite-bake/src/foe-grump-v1.png`, not the soft underpainting). Rejected pictures are not saved, so I cannot see the others.
+- New card `test-grid-grump-short` (Test card, 396 entries): same three references as `test-grid-grump-matte` (style key, Grump grid underpainting, approved Mudling stance as finish) with a 438 character prompt instead of about 7,300. `gridShort` in tools/art-library/enemy-prompts.js, mirrored in make-prompts.js. Compare with the approved `test-grid-grump-matte-v1.png`.
+- Not changed: the 84 sheet entries (231).
+
 ## 2026-11-05 (235): Tom's side-view neck: a slight indent stays behind the neck (`walk21`)
 - Tom (15:38): "you've gone too far, there should still be a slight indent in the back of the neck".
 - Change: `NAPE_KEEP` in `tools/sprite-bake/tom_walk_frames.py` 0.35 to 0.7 (fraction of the original hollow that stays). `NAPE_KEEP=1` would undo the fill. Rebaked tom-ow.webp and data/tom-hires.js. Looked at: before and after strip at 9x for stand, both strides and pass.

@@ -143,4 +143,14 @@ Family friendly for ages 6 and up. Keep the flinch comic, never grim.`;
   return { id: 'test-one-' + id + '-' + (k === 1 ? 'stance' : 'pose' + k), tab: 'Enemies', title: `Library test: ${m0.name}, ${pose.split(':')[0].toLowerCase()} pose alone, matte and handbrushed${chain ? ' (approve the stance test first)' : ''}`, ar: '1:1', refs, prompt: text };
 }
 
-module.exports = { buildOne, entries: TABLE.map(t => build(t, true, BRUSH_REF, true)), gridTest: (id, brushRef) => build(TABLE.find(t => t.id === id), true, brushRef) };
+// Short A/B test (Tom 11-05 15:44: long prompts may misdirect the generator). Same references as the matte card, about a tenth of the words.
+function gridShort(id, brushRef) {
+  const t = TABLE.find(x => x.id === id); const m0 = MOVES[id]; const boss = m0.rank === 'BOSS';
+  const n = boss ? 6 : 4, cols = boss ? 3 : 2;
+  const areaRef = AREA_PAINTING[t.area];
+  const refs = [KEY, 'docs/reference/underpaint/' + id + '-grid.png', brushRef];
+  const text = `Repaint attachment 2 as a finished oil painting. Keep the same ${n} poses in the same ${cols} by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.`;
+  return { id: 'test-grid-' + id + '-short', tab: 'Enemies', title: `Library test: ${m0.name} as a grid, short prompt`, ar: boss ? '3:2' : '1:1', refs, prompt: text };
+}
+module.exports = { buildOne, entries: TABLE.map(t => build(t, true, BRUSH_REF, true)), gridShort,
+  gridTest: (id, brushRef) => build(TABLE.find(t => t.id === id), true, brushRef) };
