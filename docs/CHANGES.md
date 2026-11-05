@@ -1,3 +1,11 @@
+## 2026-11-05 (237): Grace's walk head is bigger, .28 of her height (`gwalk5`)
+- Tom (15:27, after the proposal; 15:36 "ok push"): children's heads are a bigger share of height than adults', so Grace goes from .25 to .28 (order: Tom .242, Grace .28, Rose about .295, Rose untouched).
+- Change: one number, `HEAD_SHARE` in tools/sprite-bake/grace_walk_frames.py (default .28, env `GRACE_HEAD_SHARE=0.25` reproduces the old art). The front head is the master, the back and side heads are scaled to the same hair top to chin height, the bodies are refit so every upright frame is the same height, and bake_grace_walk_v4.py draws the figure at 39 rows as before (her body is about 7 percent smaller).
+- Baseline: a rebake with no change reproduced the repo files byte for byte. After: only art/chars/grace-ow.webp and data/grace-hires.js changed (battle and KO identical).
+- Measured (alpha rows of the baked atlas, before and after): stands 39.0 and 39.0, front and back steps 38.9 to 39.0 both times, side strides 37.4 and 37.5 before, 37.5 and 37.6 after. Her natural bob is unchanged because every frame gets the same scale.
+- Looked at: figure line-up (Grace before and after, Rose, Tom, TNB), zoomed head row, all nine frames before and after. No neck seam, hair covers the collar in every view. Tom saw all three pictures before approving.
+- Not changed: Rose, Tom, Grace's battle art, the walk cycle `[1,0,2,0]`.
+- Tags: `gwalk5` (ART_V in engine/painted.js, grace-hires.js and painted.js in index.html, build stamp).
 ## 2026-11-05 (236): Short-prompt A/B test card for the enemy sheet (Art Library only, no game files, no tag)
 - Tom (15:44): the new enemy pictures look too pixelated like the reference, and my long prompts may misdirect the generator.
 - Fact: the only enemy picture saved since the rollout is `enemy-grump` v2 (approved 15:42), made from the OLD Grump entry I left untouched (its reference is the raw pixel sheet `tools/sprite-bake/src/foe-grump-v1.png`, not the soft underpainting). Rejected pictures are not saved, so I cannot see the others.

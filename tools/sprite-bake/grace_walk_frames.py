@@ -34,7 +34,7 @@ BODIES = {
     'w_up_stand': 'grace-body-stand-back-v1.png', 'w_up_step1': 'grace-body-walk-back-v1.png', 'w_up_step2': ('grace-body-walk-back-v1.png', 'mirror'),
     'w_left_stand': 'grace-body-stand-side-v1.png', 'w_left_step1': 'grace-body-walk-side1-v1.png', 'w_left_step2': 'grace-body-walk-side2-v1.png'}
 OV = 20            # the chin lands this many rows below the top of the neck stump
-HEAD_SHARE = float(os.environ.get('GRACE_HEAD_SHARE', '0.25'))   # hair top to chin over full height, Grace's target in CHARACTER_PIPELINE section 7
+HEAD_SHARE = float(os.environ.get('GRACE_HEAD_SHARE', '0.28'))   # hair top to chin over full height. Tom 2026-11-05 15:36: .28 (real children have a bigger head share than adults; order Tom .242, Grace .28, Rose about .295). Was .25 (CHARACTER_PIPELINE section 7). GRACE_HEAD_SHARE=0.25 reproduces walk art before this change.
 
 def _neck_cx(body, y0=8, y1=28):
     a = np.array(body)[:, :, 3] > 40; cs = []
@@ -46,7 +46,7 @@ def _neck_cx(body, y0=8, y1=28):
 def build():
     heads = {v: _keyed(f) for v, f in HEADS.items()}
     stand = _keyed(BODIES['w_down_stand'], True)
-    # Hair top to chin is HEAD_SHARE of the front stand's total height in every frame (.25); the front head sets it, the back head matches, the side head is scaled to the same chin height
+    # Hair top to chin is HEAD_SHARE of the front stand's total height in every frame (.28); the front head sets it, the back head matches, the side head is scaled to the same chin height
     s = (stand.height - OV) * HEAD_SHARE / (1 - HEAD_SHARE) / CHIN['down']
     H = stand.height - OV + CHIN['down'] * s              # total height every upright frame is brought to (the front stand's)
     out = {}; info = {'scale': s, 'share': HEAD_SHARE, 'H': H, 'body': {}}
