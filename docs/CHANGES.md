@@ -1,3 +1,8 @@
+## 2026-11-05 (228): New plane cabin prompt in the Art Library, premium Delta One suite
+- Tom (15:16): the cabin picture looks like an old economy seat from the 80s; it should look like a premium Delta One cabin.
+- Art Library Flight tab, entry `flight-cabin`: prompt rewritten (tools/art-library/flight-prompts.js, data/art-prompts.json): lie-flat suite in charcoal quilted leather with duvet and pillow, white shell and sliding door, switched-off swing-arm screen, walnut side table with a warm lamp, cove lighting, one oval window; explicit bans on cloth seat backs, blue pattern fabric, tray tables, rows of seats. No reference picture attached (the style key has people; the old cabin would pull the old seat back). No text or logos asked for. Art not generated yet; no art or script changed.
+- Install when approved: bake with `python3 tools/sprite-bake/bake_flight_lib.py <ver>` (the cabin is a plain square pad, slow pan in `engine/flight-art.js`), bump tags and the preview tag, look at the cabin phase in portrait and landscape.
+
 ## 2026-11-05 (227): Tom's overworld walk bobs like Grace and Rose (`walk18`)
 - Tom (14:38): his walk felt flat; Grace's and Rose's heads bob because their painted frames keep slightly different heights.
 - Fact (measured on the baked atlases, alpha height in rows of the frame): Grace front and back frames differ by 0.1 row, her profile strides are 1.5 rows lower than her stand; Rose differs by 0.1 to 0.6 row. Tom (walk17) was 42.0 in every profile frame, and his front strides were 0.4 row TALLER and his back strides 0.3 row shorter than his stand (the wrong direction).
