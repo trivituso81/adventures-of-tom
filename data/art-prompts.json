@@ -306,9 +306,16 @@
    "group": "Long Island"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "proportions don't look correct",
+     "from": "v1",
+     "at": 1793899562590
+    }
+   ],
    "id": "npc-batch-02",
    "tab": "NPCs",
    "title": "Long Island Elementary people: Principal Pruitt, Mr. Delgado, Mrs. Kowalski, Grandpa Ike, Mr. Halverson (ages and heights assumed)",
