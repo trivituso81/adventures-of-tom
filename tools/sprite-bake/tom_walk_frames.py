@@ -163,7 +163,7 @@ def _side_head():
     out[:, :, 3] = np.where(top, na, np.where(xs > line, 0, out[:, :, 3]))              # above row 1000 the v3 outline (trimmed nape); below it the v2 neck in front of the nape line
     im = Image.fromarray(out, 'RGBA'); return im.crop(im.getbbox())
 
-NAPE_KEEP = float(os.environ.get('NAPE_KEEP', '0.35'))   # fraction of the hollow behind the neck that stays (0 = filled flat, 1 = no filler)
+NAPE_KEEP = float(os.environ.get('NAPE_KEEP', '0.7'))   # fraction of the hollow behind the neck that stays (0 = filled flat, 1 = no filler)
 def _fill_nape(im, ch):
     """2026-11-05 15:28 (Tom: "still more gaps and filler needed" on the side-view neck): the profile neck left a hollow between the back of the head and the shoulder (about 25 px deep in the
     strides, 12 in stand and pass, frame px). Build the neck out behind the nape toward the shoulder: the new back edge follows the straight line from the hair's back extreme to the shoulder

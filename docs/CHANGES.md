@@ -1,3 +1,7 @@
+## 2026-11-05 (235): Tom's side-view neck: a slight indent stays behind the neck (`walk21`)
+- Tom (15:38): "you've gone too far, there should still be a slight indent in the back of the neck".
+- Change: `NAPE_KEEP` in `tools/sprite-bake/tom_walk_frames.py` 0.35 to 0.7 (fraction of the original hollow that stays). `NAPE_KEEP=1` would undo the fill. Rebaked tom-ow.webp and data/tom-hires.js. Looked at: before and after strip at 9x for stand, both strides and pass.
+- Tags: `walk21`.
 ## 2026-11-05 (234): Tom's side-view neck: the hollow behind it is filled (`walk20`)
 - Tom (15:28): after the longer neck, "there's still more gaps and filler needed".
 - Fact (measured on the profile frames): the back edge of the neck sat 25 px (strides) and 12 px (stand, pass) in from the back of the head, then jumped out to the shoulder, so background showed in a hollow behind the nape.
