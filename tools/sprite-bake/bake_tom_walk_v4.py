@@ -234,8 +234,8 @@ if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 skips the back and
     # BACK and SIDE are scaled uniformly to match it: back = same ear-to-ear width, side = same hair-top-to-chin height.
     from tom_walk_frames import FRONT_CHIN
     _HEAD_T = float(FRONT_CHIN); _EAR_T = FRONT_CHIN * FRONT_EAR_OVER_H
-    KX_KY = {'up': (_EAR_T / EAR_PX['up'],) * 2, 'left': (_HEAD_T / CUT_PX['left'],) * 2}
-    for _v in ('up', 'left'):
+    KX_KY = {'up': (_EAR_T / EAR_PX['up'],) * 2}
+    for _v in ('up',):      # the side head is Tom's redrawn picture, placed in tom_walk_frames._side_frame at the front head's height
         _st = poses[f'w_{_v}_stand']; _st = _st.crop(_st.getbbox()); _Hs = _st.height
         _ky, _kx = KX_KY[_v]; _chin = CUT_PX[_v]; _taper = int(round(.025 * _Hs))
         for _n in ('stand', 'step1', 'step2'):

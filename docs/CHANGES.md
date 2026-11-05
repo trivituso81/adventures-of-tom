@@ -1,3 +1,8 @@
+## 2026-11-05 (216): Tom's redrawn profile head installed on every side frame, joined to his neck (`walk13`)
+- Tom (13:12 to 13:51): redrew the profile head (art/raw/characters/tom-head-side-v2.png, the picture with its neck) and asked for it to be used and to join the neck seamlessly. Placed once in tools/sprite-bake/tom_walk_frames.py `_side_frame`: one uniform scale, hair top to chin = the front head's height (402 frame px), the picture's neck is cut where it is as wide as Tom's headless side body neck (row 1262) and fades into the body's own neck skin over 14 rows. Used on side stand, both strides and the passing pose. Depth over height is .95 as drawn.
+- Known: the side figure is 44.7 rows, the front is 42.0 (the picture's neck is long and the head is large); side strides 44.6, pass 44.1. Back 41.9. Not equalised; Tom to say if he wants it brought to 42.
+- Back head unchanged from 215. The old side head is no longer used by the walk frames.
+
 ## 2026-11-05 (215): Tom's front head is exactly his picture, uniformly scaled (`walk12`)
 - Tom (13:45): "use the picture i gave you" and "size it as per our head to body ratio rules". Fact: 204 stretched the front head by a separate width and height factor on top of the picture; now `tom-head-front-v2.png` is placed once, one uniform scale, with hair top to chin at exactly .242 of the front stand's height (`FRONT_CHIN` 402 of 1661 frame px in tools/sprite-bake/tom_walk_frames.py). No warp on the front any more.
 - Back head: uniform scale to the same ear-to-ear width as the front (x .929). Side head: uniform scale to the same hair-top-to-chin height (x .980). Front, side and back figures are 42.0, 43.0 and 41.9 rows; front chin lands on the .242 line in a guide-line render.

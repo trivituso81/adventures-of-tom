@@ -33,6 +33,8 @@ BODIES = {
     'w_down_pass': 'tom-body-front-pass.png', 'w_up_pass': 'tom-body-back-pass.png', 'w_left_pass': ('tom-body-side-pass.png', 'mirror')}
 FRONT_HEAD = 'tom-head-front-v2.png'
 FRONT_CHIN = 402      # hair top to chin of the front head in frame px (2026-11-05 13:45, Tom: use the picture he gave, no stretching): his picture scaled uniformly so the head is .242 of the front stand's height, the hero picture's share
+SIDE_HEAD = 'tom-head-side-v2.png'   # Tom's redrawn profile head WITH its neck (13:12 picture); the head is the 13:32 picture exactly (same pixels above the jaw)
+SIDE_TOP, SIDE_CHIN_Y, SIDE_CUT_Y = 118, 1150, 1262   # rows of the 1425 px picture: top of hair, bottom of beard, the neck row where it is as narrow as Tom's headless side body neck
 FRONT_COLLAR = 12     # the collar lands this far below the chin; the neck stump of the headless body is tucked behind the chin
 OW_REF_H = 1669       # front stand height with the old head: the bake's one size factor for ALL frames stays what it was, so back and side do not change
 JOIN = 6          # body row (from the top of the neck stump) where the head's cut row lands
@@ -66,6 +68,8 @@ def build():
         f, cut, jr0 = HEADS[v]; s = scale[v]
         if v == 'down':
             out[name] = _front_frame(body, heads['down'], cut, jr0, s); continue
+        if v == 'left':
+            out[name] = _side_frame(body); continue
         h = heads[v].crop((0, 0, heads[v].width, cut)); h = h.resize((max(1, round(h.width * s)), max(1, round(h.height * s))), Image.LANCZOS)
         ha, hb = _span(h, h.height - 2); hw = hb - ha + 1
         # the body row whose width best matches the head piece's cut (search around the standing row)
@@ -85,6 +89,25 @@ def build():
         im.alpha_composite(Image.fromarray(arr.astype(np.uint8), 'RGBA'), (hx, 0))
         out[name] = im.crop(im.getbbox())
     return out, scale
+
+def _side_frame(body):
+    # Tom (13:51): use his redrawn profile head and join it to the neck seamlessly. One uniform scale: hair top to chin = FRONT_CHIN (the front head's height).
+    sh = _keyed(SIDE_HEAD); k = FRONT_CHIN / float(SIDE_CHIN_Y - SIDE_TOP)
+    cut = SIDE_CUT_Y - SIDE_TOP
+    h = sh.crop((0, 0, sh.width, cut)); h = h.resize((max(1, round(h.width * k)), max(1, round(h.height * k))), Image.LANCZOS)
+    ha, hb = _span(h, h.height - 2); hw = hb - ha + 1
+    # the headless body's neck row whose width best matches the neck at the cut, and the neck centre line there
+    best = min(range(0, 70), key=lambda r: abs((_span(body, r)[1] - _span(body, r)[0] + 1) - hw))
+    ba, bb = _span(body, best); bcx, hcx = (ba + bb) / 2.0, (ha + hb) / 2.0
+    NF = 14                                   # the seam: the last NF rows of the head piece fade into the body's own neck skin
+    body = body.crop((0, best, body.width, body.height)); top = h.height - NF
+    W = int(max(body.width, h.width) + 80); ox = int(round(W / 2 - bcx)); hx = int(round(W / 2 - hcx))
+    _sh = -min(0, ox, hx); W += _sh; ox += _sh; hx += _sh; W = max(W, ox + body.width, hx + h.width)
+    im = Image.new('RGBA', (W, top + body.height), (0, 0, 0, 0)); im.alpha_composite(body, (ox, top))
+    arr = np.array(h).astype(float)
+    for i in range(NF): arr[-1 - i, :, 3] *= (i + 1) / (NF + 1.0)
+    im.alpha_composite(Image.fromarray(arr.astype(np.uint8), 'RGBA'), (hx, 0))
+    return im.crop(im.getbbox())
 
 def _front_frame(body, hero, cut, jr0, s):
     nh = _keyed(FRONT_HEAD); k = FRONT_CHIN / float(nh.height)
