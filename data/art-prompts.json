@@ -3926,9 +3926,16 @@
    "group": "Cattail Pier"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "not handbrushed painted enough",
+     "from": "v1",
+     "at": 1793921473560
+    }
+   ],
    "id": "area-reeds",
    "tab": "Areas",
    "title": "Whispering Marsh: painting (fresh generator chat, nothing attached) (the game draws the reeds that block the top left path until the story opens it)",
