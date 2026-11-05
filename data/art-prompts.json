@@ -1975,7 +1975,7 @@
    "group": "Rivituso Row"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -1985,7 +1985,14 @@
      "at": 1793842462440
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "Nothing was cut out",
+     "from": "v1",
+     "at": 1793893028127
+    }
+   ],
    "id": "area-row-cut1",
    "tab": "Areas",
    "title": "Rivituso Row: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
@@ -1993,7 +2000,7 @@
    "refs": [
     "art/raw/areas/area-row-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Rivituso Row painting.\n\nCopy out only its trees, tall bushes, hedges, cypresses and climbing roses, the flowering lilac tree, and the tall sunflowers, each with its full leaf canopy or flowers and its trunk or stem down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. The attached picture is the approved Rivituso Row painting; if this is the same chat that painted it, you may work from your own painting.\n\nMake a cutout mask of the lane painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.\nKEEP ONLY: every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground; every bush, hedge, cypress or climbing rose taller than a person; the flowering lilac tree right of the purple townhouse; the tall sunflowers in the garden.\nEVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: houses, roofs, paths, lawns, fences, garden beds, low flowers, benches, lamps, signs, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Where a canopy overlaps something else, keep the full canopy. Add nothing, no text or border. Deliver the image itself.",
    "group": "Rivituso Row"
   },
   {
