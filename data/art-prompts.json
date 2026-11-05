@@ -3987,8 +3987,16 @@
    "group": "Whispering Marsh"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-sundial-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793921487264
+    }
+   ],
    "rejects": [],
    "id": "area-sundial",
    "tab": "Areas",
