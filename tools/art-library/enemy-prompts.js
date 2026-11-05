@@ -30,25 +30,29 @@ const style = hasArea => `ART STYLE
 const artNote = hasArea => `STYLE RULE (the most important instruction)
 Every frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. ${hasArea ? 'The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.' : 'The creature is painted by the same hand as the style key, so it could sit inside that picture without looking like a different artist made it.'}`;
 
-function build(t) {
+function build(t, grid) {
   const m0 = MOVES[t.id]; if (!m0) throw new Error('no moves for ' + t.id);
   const m = { ...m0, name: m0.name.replace(/sprite/i, 'Imp') }; // the word sprite pulls the generator toward pixel art
   const realName = m0.name;
   const boss = m.rank === 'BOSS';
-  const likeRef = 'tools/sprite-bake/src/foe-' + t.id + '-v1.png';
+  const underRef = 'docs/reference/underpaint/' + t.id + (grid ? '-grid' : '') + '.png';   // soft de-pixelated copy of the old sheet (tools/art-library/make_underpaint.py); preferred, because the generator copies a sharp pixel sheet back
+  const hasUnder = fs.existsSync(underRef);
+  const likeRef = hasUnder ? underRef : 'tools/sprite-bake/src/foe-' + t.id + '-v1.png';
   const hasLike = fs.existsSync(likeRef);
   const areaRef = AREA_PAINTING[t.area];
   if (areaRef && !fs.existsSync(areaRef)) throw new Error('missing area painting ' + areaRef);
   const refs = [KEY].concat(areaRef ? [areaRef] : [], hasLike ? [likeRef] : []);
   const likeNo = areaRef ? 3 : 2;
   const sig = m.acts.length ? m.acts[m.acts.length - 1] : 'its attack';
-  const cell = boss ? 384 : 256, n = boss ? 6 : 4;
-  const px = Math.round(t.inches * 5);
+  const n = boss ? 6 : 4, cols = grid ? (boss ? 3 : 2) : n, rows = grid ? 2 : 1;
+  const cell = grid ? 512 : (boss ? 384 : 256);
+  const px = grid ? Math.round(cell * 0.8) : Math.round(t.inches * 5);
   const frames = boss
     ? ['STANCE: battle stance, idle and ready, weight settled.', 'FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.', `ATTACK 1: the wind-up for its signature attack, ${sig}.`, 'ATTACK 2: the attack building, bigger and more intense.', 'ATTACK 3: the attack landing at full force.', 'ATTACK 4: the follow-through, settling back.']
     : ['STANCE: battle stance, idle and ready, weight settled.', 'FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.', `ATTACK A: the wind-up for its signature attack, ${sig}.`, 'ATTACK B: the attack landing.'];
   const areaAtt = areaRef ? `2. The AREA PAINTING of ${AREAS[t.area]}: the place ${m.name} lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint ${m.name} as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.` : '';
-  const likeAtt = hasLike ? `${likeNo}. A LIKENESS picture of ${m.name} drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw ${m.name} from scratch, handbrushed and painted, keeping the same character.` : '';
+  const underAtt = `${likeNo}. A soft COLOR UNDERPAINTING of this whole sheet: the same ${n} poses of ${m.name}, in the same order and in the same positions, blurred on purpose, like a painter's first block-in of color. It fixes each pose's shape, position, size, colors, face and expression, and nothing else. Paint the finished picture over it: repaint every pose in place, with the same layout, the same poses and the same character, and add the fine detail and brushwork the underpainting does not have, such as individual brush strokes, painted texture, highlights, crisp painterly edges and small painted details in the face and surfaces. The finished sheet is sharp, high resolution and richly detailed. Nothing from the underpainting is kept as it is: every edge, texture and highlight is freshly painted.`;
+  const likeAtt = hasUnder ? underAtt : hasLike ? `${likeNo}. A LIKENESS picture of ${m.name} drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw ${m.name} from scratch, handbrushed and painted, keeping the same character.` : '';
   const att = [`1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.`, areaAtt, likeAtt].filter(Boolean).join('\n');
   const text = `IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else.
 
@@ -66,11 +70,11 @@ THE CREATURE
 ${m.name.toUpperCase()}: ${t.look}. It is about ${t.inches} inches tall (${(t.inches / 12).toFixed(1).replace('.0', '')} feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.${boss ? ' It is a boss, so it is large, imposing and extra detailed, but still funny and friendly-scary.' : ''}
 
 THE SHEET (strict)
-- A single horizontal row of ${n} equal square cells, ${cell} x ${cell} pixels each, so the full image is ${cell * n} x ${cell} pixels. If your tool cannot make that exact shape, keep exactly ${n} cells in one row and make the image as wide as it allows.
-- Exactly ${n} frames, one per cell, from left to right, in the numbered order below.
+- ${grid ? `A single image holding a grid of ${n} equal square cells, ${cols} columns by ${rows} rows, each cell ${cell} x ${cell} pixels, so the full image is ${cell * cols} x ${cell * rows} pixels. The layout is exactly the layout of the underpainting. If your tool cannot make that exact size, keep the same ${cols} by ${rows} grid and make the image as large as it allows.` : `A single horizontal row of ${n} equal square cells, ${cell} x ${cell} pixels each, so the full image is ${cell * n} x ${cell} pixels. If your tool cannot make that exact size, keep exactly ${n} cells in one row and make the image as wide as it allows.`}
+- Exactly ${n} frames, one per cell, ${grid ? 'in reading order (left to right along the top row, then left to right along the bottom row)' : 'from left to right'}, in the numbered order below.
 - ${m.name.toUpperCase()} FACES RIGHT in every frame (toward the right side of the image), as if facing the family on the right of a battle screen. Seen from the side or three quarters, slightly from above.
 - Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature. No magenta glow, spill, tint or fringe on its edges. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
-- Same scale in every cell: the standing creature is about ${px} pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.
+- ${grid ? `Same scale in every cell, exactly the scale and position of the figures in the underpainting, which already fills each cell as much as its widest pose allows. In every cell the feet or base rest on the same horizontal line as in the underpainting, with a small soft contact shadow directly under it. Nothing touches a cell edge or overlaps a neighbour.` : `Same scale in every cell: the standing creature is about ${px} pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.`}
 - Draw ONLY ${m.name.toUpperCase()}. No effects, motion lines, sparkles, other characters, props that are not part of it, text or word balloons.
 - The same colors, details and level of painted detail in every frame.
 
@@ -80,6 +84,6 @@ ${frames.map((f, i) => `${i + 1}. ${f}`).join('\n')}
 Family friendly for ages 6 and up. Keep the flinch frame comic, never grim.
 
 NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw ${m.name.toUpperCase()} in the pose described, facing right, with the shape and colors of the likeness${hasLike ? ' in attachment ' + likeNo : ' described above'}.`;
-  return { id: 'enemy-' + t.id, tab: 'Enemies', title: `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: '16:9', refs, prompt: text };
+  return { id: (grid ? 'test-grid-' : 'enemy-') + t.id, tab: 'Enemies', title: grid ? `Library test: ${realName} as a ${cols} x ${rows} grid, repainted over a soft underpainting` : `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: grid ? (boss ? '3:2' : '1:1') : '16:9', refs, prompt: text };
 }
-module.exports = { entries: TABLE.map(build) };
+module.exports = { entries: TABLE.map(t => build(t)), gridTest: id => build(TABLE.find(t => t.id === id), true) };
