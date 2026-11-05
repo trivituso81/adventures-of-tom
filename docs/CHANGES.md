@@ -1,3 +1,10 @@
+## 2026-11-05 (196): Grace's overworld walk frames rebuilt from the ten pictures Tom supplied (`gwalk3`)
+- Tom (10:14) sent three headless standing bodies (front, back, side), a front walk, a back walk, two side walks, and three heads (front, back, side). Method is Tom's walk (191): tools/sprite-bake/grace_walk_frames.py builds nine frames; bake_grace_walk_v4.py no longer reads grace-walk-sheet-v1.png. Pictures are kept in art/raw/characters/grace-body-*.png and grace-head-*.png.
+- Frames: 1 front stand, 2 front step 1 (step down), 3 front step 2 (mirrored body of 2), 4 back stand, 5 back step 1 (step up), 6 back step 2 (mirrored body of 5), 7 side stand, 8 side step 1, 9 side step 2. All bodies face left in the side views as supplied, nothing flipped there. Heads are never mirrored.
+- Head: ONE scale for all three heads, set so hair top to chin is .25 of her height (CHARACTER_PIPELINE section 7, Grace). Chin sits 20 px below the top of the neck stump; the head is drawn over the body so hair falls over the collar. Bodies are keyed with the gentle rim key (the old wide key blotched the lilac sweater on the back frames).
+- Before the change an unchanged rebake reproduced the repo files byte for byte. After: only art/chars/grace-ow.webp and data/grace-hires.js changed (battle and KO files are identical). One size factor for all nine (stand stays 38 rows tall), so the front step frames, painted larger by Tom's generator, are about 9 percent taller than the stand.
+- Not changed: Grace's battle art, Rose's and Tom's walks.
+
 ## 2026-11-05 (195): Tom's walk no longer shows the stand frame between strides (`walk7`)
 Tom (10:17): "im seeing stand frames in the walking animation". Fact: the overworld cycle was stride A, stand, stride B, stand. With his new bodies the stand has hands in pockets, so it read as a pause. Tom's walk now alternates his two step frames only (`OW_WALK_CYCLE_TOM=[1,2,1,2]` in engine/town-render.js). The stand frame still shows when he is idle. Not changed: Grace, Rose, other party members and NPCs keep the old cycle.
 

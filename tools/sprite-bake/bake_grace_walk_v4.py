@@ -65,8 +65,11 @@ def cut_walk_sheet(path):
         print('  cut %-11s split row %d' % (nm, split))
     return out
 
-for nm, im in cut_walk_sheet(os.path.join(SRC, 'grace-walk-sheet-v1.png')).items():
-    poses['w_' + nm] = im
+# 2026-11-05 10:14 (Tom: Grace's new walking and standing frames): the nine overworld frames are built ONLY from the ten pictures Tom supplied
+# (seven headless bodies and three heads, tools/sprite-bake/grace_walk_frames.py). The old 3 x 3 walk sheet is no longer read. Only alteration:
+# step up and step down (back and front step 2) are the mirrored body of step 1.
+from grace_walk_frames import build as _build_walk
+poses.update(_build_walk()[0])
 
 # ---------------------------------------------------------------- paint-in (the image AI refuses injury wording, so the bake adds it)
 from PIL import ImageDraw, ImageFilter
@@ -290,32 +293,14 @@ def head_w(im):
     cols = np.where(al[top: top + max(8, int(h * 0.12))].any(0))[0]
     return float(np.percentile(cols, 98) - np.percentile(cols, 2))
 
-H_CANON = fig_h(poses['w_down_stand'])                 # all directions are brought to the front stand's figure height
-HEAD_PX = round(HEAD_SHARE_NOW * H_CANON)              # chin row below the top of hair, in canonical px
-print('ow: canonical height %d, head %d px (share %.3f -> %.3f, k %.3f)' % (H_CANON, HEAD_PX, HEAD_SHARE_NOW, HEAD_SHARE_TARGET, K_OW))
-norm = {}
-for d in ('down', 'up', 'left'):
-    st = poses['w_%s_stand' % d]
-    f_d = H_CANON / fig_h(st)
-    hw_st = head_w(st) * f_d
-    for n in ('stand', 'step1', 'step2'):
-        k_ = 'w_%s_%s' % (d, n)
-        if k_ not in poses: continue
-        fr = poses[k_]
-        f = f_d
-        if n != 'stand':                                 # a step is scaled so its head is as wide as its stand's head
-            r = hw_st / (head_w(fr) * f_d)
-            r = min(1.03, max(0.97, r))      # head width is noisy on the side frames: at most 3 percent either way
-            f = f_d * r
-        im2 = scaled_to(fr, f)
-        print('  %-10s h %4d -> %4d  head share before growth %.3f  head width x%.3f' % (k_[2:], fig_h(fr), fig_h(im2), HEAD_PX / fig_h(im2), f / f_d))
-        norm[k_] = _kh.grow_head(im2, K_OW, HEAD_PX)
-fo = args.ow_h * KW / H_CANON                           # body keeps its size; the grown head adds height (same rule as before)
-print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (H_CANON, fo))
-ow_big = {n[2:]: scaled_to(v, fo) for n, v in norm.items()}
+# Tom's method (bake_tom_walk_v4.py): every frame keeps the scale it was painted at; ONE size factor for all nine, from the front stand.
+OW_STAND_H = poses['w_down_stand'].height
+fo = args.ow_h * KW / OW_STAND_H
+print("ow: source stand height %d px, drawn at %.3fx" % (OW_STAND_H, fo))
+ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_')}
 ow_big = tighten(place(ow_big, KW, 'head'), KW)
 for n, v in ow_big.items():
-    print('  baked %-10s %s head share after growth %.3f' % (n, v.size, (HEAD_PX * K_OW * fo) / max(1, fig_h(v))))
+    print('  baked %-10s %s' % (n, v.size))
 ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
 ow_rects = pack(ow_big, os.path.join(ART, 'grace-ow.webp'))
 
