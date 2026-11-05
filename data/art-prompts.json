@@ -2272,8 +2272,16 @@
    "group": "Long Island Elementary (schoolyard)"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-blvd-v1.png",
+     "date": "2026-11-05",
+     "from": "v3",
+     "at": 1793843636102
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-05",
