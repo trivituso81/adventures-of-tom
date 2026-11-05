@@ -291,9 +291,16 @@
    "prompt": "change this image (the first picture): take his hands out of his pockets and hang his arms relaxed at his sides with empty hands; remove the game controller print from the side of the shirt so the shirt is plain navy from this angle; smooth the shirt so it hangs straight. Keep everything else exactly as it is: the face profile, the head size, the hair, the beard, the jeans, the sneakers, the painting style, the magenta background. The second picture shows the same man from the front for his shirt and head size."
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "poses are incorrect",
+     "from": "v2",
+     "at": 1793899592894
+    }
+   ],
    "id": "npc-batch-01",
    "tab": "NPCs",
    "title": "Square and Pier wanderers: Pip, Moss, Dot, Gus, Bean, Reel (Pip, Moss, Dot are children; Pip and Moss boys, Dot a girl (genders and exact heights assumed))",
