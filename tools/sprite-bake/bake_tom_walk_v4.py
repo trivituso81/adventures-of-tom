@@ -184,6 +184,58 @@ print('head factor solved: walk', HEAD_KW)
 for _n in list(poses):
     if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames keep the head as painted
 
+# ---------------------------------------------------------------- walk head matched to the hero (Tom, 2026-11-05)
+# Tom (11-05 07:35): "Match the hero across all characters" (Tom only for now: he supplied the head). The hero painting Tom sent
+# (docs/reference/tom_hero_ref_20261105.png, 1086 x 1448) has its head, top of hair to chin, at .242 of full height and its widest
+# point (ears) at .173 of full height. The painted walk frames were .211 and .157 (side .213). Each view gets one factor for every frame
+# of that view (the head never changes size between frames): height ky so the head share becomes HERO_T, width kx = ky x HERO_WK so the
+# head also keeps the hero's shape (a uniform scale would make it .187 wide, 8 percent wider than the hero). The head grows UP from the
+# chin; the figure is then refitted to the same standing height below (`fo`), so Tom's real height (5'11") is unchanged and his body and
+# width are scaled by about .96 with it. The body itself is NOT widened or narrowed here (BODY_W is not applied to the walk frames).
+HERO_T = 0.242
+HERO_WK = 0.958          # (.1731 / .1573 width) / (.242 / .2107 height), front view; side uses the same ratio
+WALK_CHIN = {'down': .2107, 'up': .2107, 'left': .2129}   # chin row over full height of the painted stand frame (read by eye, 11-05)
+from headwarp import _neck_x
+def _warp_xy(arr, x0, x1, y0, ay, ax, ky, kx, taper):
+    """_warp_head with a separate x amplitude: rows y0..ay grow by ky (the last `taper` rows blend back to 1), their width by kx."""
+    from scipy import ndimage as ndi
+    H = ay - y0; u = np.arange(H); dist = ay - (y0 + u)
+    s = np.where(dist >= taper, ky, 1.0 + (ky - 1.0) * (dist / float(taper)))
+    order = np.argsort(dist); cum = np.zeros(H + 1); cum[1:] = np.cumsum(s[order])
+    Hd = int(np.ceil(cum[-1])); r = Hd - (np.arange(Hd) + .5)
+    idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)
+    sr = ay - dist[order][idx] + .0; sc = s[order][idx]
+    sx = 1.0 + (kx - 1.0) * (sc - 1.0) / (ky - 1.0)
+    Wd = int(np.ceil((x1 - x0) * kx)) + 2; xd = np.arange(Wd) + .0; xc = (ax - x0) * kx
+    pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
+    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / sx[:, None]
+    out = np.zeros((Hd, Wd, 4))
+    for c in range(4): out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
+    al = out[:, :, 3:4]; out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
+    return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
+def _walk_head(img, chin, ky, kx, taper, side, pad=160):
+    img = img.crop(img.getbbox()); W, H = img.size
+    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
+    arr = np.array(big); al = arr[:, :, 3] > 40
+    cols = np.where(al[pad:pad + chin].any(0))[0]; x0, x1 = int(cols.min()) - 3, int(cols.max()) + 4
+    ax = _neck_x(big, chin + pad, x0, x1) if side else (x0 + x1) / 2.0
+    Y0, AY = pad, chin + pad + taper
+    out, dx, dy = _warp_xy(arr, x0, x1, Y0, AY, ax, ky, kx, taper)
+    arr[Y0:AY, x0:x1, 3] = 0
+    big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
+    return big.crop(big.getbbox())
+if not os.environ.get('NO_HERO_HEAD'):
+    for _v in ('down', 'up', 'left'):
+        _st = poses[f'w_{_v}_stand']; _st = _st.crop(_st.getbbox()); _Hs = _st.height
+        _s = WALK_CHIN[_v]; _ky = HERO_T * (1 - _s) / ((1 - HERO_T) * _s); _kx = _ky * HERO_WK
+        _chin = int(round(_s * _Hs)); _taper = int(round(.025 * _Hs))
+        for _n in ('stand', 'step1', 'step2'):
+            if _v != 'left' and _n == 'step2': continue          # front and back step2 are the flipped step1 (below)
+            poses[f'w_{_v}_{_n}'] = _walk_head(poses[f'w_{_v}_{_n}'], _chin, _ky, _kx, _taper, _v == 'left')
+        print('walk head', _v, 'ky %.3f kx %.3f' % (_ky, _kx))
+    for _d in ('down', 'up'):
+        poses[f'w_{_d}_step2'] = poses[f'w_{_d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
+
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k
