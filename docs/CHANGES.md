@@ -1,3 +1,9 @@
+## 2026-11-04 (173): Main characters 10 percent smaller, slower walk animation (`size4`)
+- Tom (22:02): "we went too far. Make them 10% smaller", and the walk animation looks too fast in the overworld; slow the animation, not the walking speed.
+- Size (decision): the Tom, Grace, Rose and Tom+Rose multiplier `OW_HOUSE_PARTY` goes from 1.6 to 1.44 (10 percent smaller), for houses and outdoors alike, since size3 applied it everywhere.
+- Animation (decision): before, each tile showed a stride pose for the first 55 percent and the standing pose for the rest (two changes per tile). Now each tile holds one stride pose and the leg alternates every tile, so the cycle is half as fast. Applies to painted sheets and the older pixel NPCs. Step duration is untouched.
+- Tag `town-render.js?v=size4`.
+
 ## 2026-11-04 (172): Tom, Grace and Rose 60 percent bigger outdoors too (`size3`)
 - Tom (20:28): "make the main characters 60% bigger in the over world." Reading (decision): houses already had 1.6x since `house1` (167), so this extends the same 1.6x to every outdoor map. Tom, Grace, Rose and Tom carrying Rose only; NPCs and the other party members stay as they are.
 - Change: `owHouseParty` in engine/town-render.js no longer requires being inside a painted house. Feet stay on the same tile; shadow, lean and lift scale with the figure. Tag `town-render.js?v=size3`.

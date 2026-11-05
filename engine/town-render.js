@@ -25,7 +25,7 @@ function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap
 function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the size before the 11-01 evening changes
 // Tom, Grace and Rose are drawn 60% bigger inside painted houses and rooms (Tom 11-04 13:41), on top of everything below. Their walk sheets are baked
 // at about one source pixel per drawn device pixel (art/chars/*-ow.webp, k 7 to 10), so the larger size stays sharp. Feet stay on the same tile.
-const OW_HOUSE_PARTY=1.6;
+const OW_HOUSE_PARTY=1.44;   // 1.6 until 2026-11-04 22:02, then 10% smaller (Tom: it went too far); indoors and outdoors
 // 2026-11-04 20:28 (Tom): "make the main characters 60% bigger in the over world": the same 1.6 now applies outdoors too, on every map.
 function owHouseParty(set) { return set&&(set===OW.tom||set===OW.grace||set===OW.rose||set===OW.tomRide)?OW_HOUSE_PARTY:1; }
 function owBoost(a,set) {
@@ -47,7 +47,7 @@ function drawSheetActor(a,set) {
   const p=position(a),k=actorK()*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
-  const ph=walkPhase(a),fi=ph>=0&&ph<.55?1+(a.stepN%2):0;
+  const ph=walkPhase(a),fi=ph>=0?1+(a.stepN%2):0;   // 2026-11-04 22:02 (Tom): legs change once per tile (not twice), so the walk cycle looks slower; walking speed is unchanged
   const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
   const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
@@ -499,7 +499,7 @@ function drawObject(o,time) {
 function drawNpc(a) {
   const p=position(a),c=a.palette;
   const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
-  const ph=walkPhase(a),frame=ph>=0&&ph<.55?(a.stepN%2?1:3):0;
+  const ph=walkPhase(a),frame=ph>=0?(a.stepN%2?1:3):0;   // one leg change per tile, same as painted sheets
   const bob=a.move&&(frame===1||frame===3)?1:0;
   const head=base-30-bob;
   const skinS=shadeHex(c.skin,-18),shirtS=shadeHex(c.shirt,-24),pantsS=shadeHex(c.pants,-22),hairH=shadeHex(c.hair,22);
