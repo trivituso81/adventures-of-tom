@@ -263,13 +263,43 @@ def hard(img, thr=0.5):
 
 # (Tom's standing paintings go in here, after scaled_to exists; see STAND_SRC above)
 OW_STAND_H = poses['w_down_stand'].height      # the sheet stand's height, kept for the size factor below so every other frame stays at the size it was
+_GR = {}; _SI = {}
 if not os.environ.get('SHEET_STANDS'):
     for _v, _f in STAND_SRC.items():
         _h = poses[f'w_{_v}_stand'].crop(poses[f'w_{_v}_stand'].getbbox()).height
         _im = defringe(slice_sheet(os.path.join(ROOT, 'art/raw/characters', _f), [['stand']], robust=True)['stand'])
         _im = _im.crop(_im.getbbox()); _im = scaled_to(_im, _h / _im.height)
         poses[f'w_{_v}_stand'] = _im
-        print('stand painting', _v, _f, _im.size)
+        print('stand painting', _v, _f, _im.size); _SI[_v] = (_im, _h)
+    # The step frames wear the SAME head painting as the stand (Tom 2026-11-05 08:23: "You're using a literally different head image for walking from
+    # standing"). Not a resize: the stand painting's head and neck (down to just above the collar) replace the sheet's head on each step; the body
+    # stays exactly as painted. Cut rows were read off the finished frames (final px, from the top of the figure), as a fraction of the stand's height.
+    # GRAFT_HEAD=0 keeps the sheet's own step heads.
+    if os.environ.get('GRAFT_HEAD', '1') != '0':
+        CUT = {'down': ((103 - 11) / 376., (91 - 8) / 376.), 'up': ((94 - 10) / 377., (88 - 7) / 377.), 'left': ((111 - 29) / 358., (103 - 29) / 358.)}
+        def _ncx(im, y0, y1):
+            a = np.array(im)[y0:y1, :, 3] > 40; xs = np.where(a.any(0))[0]; return (xs.min() + xs.max()) / 2.0
+        def _graft(step, stand, cs, ct, hh, side=False):
+            st = stand.crop(stand.getbbox()); bd = step.crop(step.getbbox())
+            ys, yt = int(round(cs * hh)), int(round(ct * hh))
+            head = st.crop((0, 0, st.width, ys)); body = bd.crop((0, yt, bd.width, bd.height))
+            hx = _ncx(head, ys - 3, ys); bx = _ncx(body, 0, 3)
+            if side:      # side view: line the back of the neck up (the beard makes the row's centre sit too far forward)
+                _r = lambda im, a, b: np.where((np.array(im)[a:b, :, 3] > 40).any(0))[0].max()
+                hx = _r(head, ys - 3, ys); bx = _r(body, 0, 3)
+            ox = int(round(hx - bx)); x0 = min(0, ox); W = max(head.width, ox + body.width) - x0
+            out = Image.new('RGBA', (W, ys - 3 + body.height), (0, 0, 0, 0)); out.alpha_composite(head, (-x0, 0))
+            arr = np.array(body).astype(float)
+            for i in range(3): arr[i, :, 3] *= (i + 1) / 4.0                 # feather the join over three rows
+            out.alpha_composite(Image.fromarray(arr.astype(np.uint8), 'RGBA'), (ox - x0, ys - 3))   # the body overlaps the head by three rows, so no seam shows
+            return out
+        for _v2, (_i2, _h2) in _SI.items(): _GR[_v2] = (_i2, _h2, CUT[_v2])
+for _v, (_si, _hh, (_cs, _ct)) in _GR.items():
+    for _n in ('step1', 'step2'):
+        poses[f'w_{_v}_{_n}'] = _graft(poses[f'w_{_v}_{_n}'], _si, _cs, _ct, _hh, _v == 'left')
+    print('head grafted', _v)
+if os.environ.get('GRAFT_HEAD', '1') != '0':
+    poses['w_up_step2'] = poses['w_up_step1'].transpose(Image.FLIP_LEFT_RIGHT)
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
