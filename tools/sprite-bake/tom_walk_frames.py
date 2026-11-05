@@ -58,8 +58,9 @@ def build():
         v = name.split('_')[1]; mir = isinstance(src, tuple)
         body = _keyed(src[0] if mir else src)
         if mir: body = body.transpose(Image.FLIP_LEFT_RIGHT)
-        if name.endswith('_pass'):
-            # his passing pictures were drawn about 13 to 17% smaller than his stand pictures (same upright pose, different generator scale): match the stand body's height, one uniform factor, no other change
+        if name.endswith('_pass') or name in ('w_left_step1', 'w_left_step2'):
+            # his passing pictures were drawn about 13 to 17% smaller than his stand pictures (same upright pose, different generator scale): match the stand body's height, one uniform factor, no other change.
+            # 2026-11-05 12:34 (Tom: side strides noticeably shorter, "body proportions not consistent, make them taller"): the two side stride pictures (about 7% shorter than the side stand) get the same treatment
             _b = BODIES['w_%s_stand' % v]; _sh = _keyed(_b[0] if isinstance(_b, tuple) else _b).height
             _f = _sh / float(body.height); body = body.resize((round(body.width * _f), round(body.height * _f)), Image.LANCZOS)
         f, cut, jr0 = HEADS[v]; s = scale[v]

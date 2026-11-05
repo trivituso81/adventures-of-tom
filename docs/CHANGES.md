@@ -1,3 +1,8 @@
+## 2026-11-05 (200): Tom's side strides taller, same height as his side stand (`walk9`)
+- Tom (12:34): "10 and 12 are noticeably shorter and it's because the body proportions are not consistent, make them taller." Fact: the two side stride pictures are drawn about 7% shorter than his side stand picture (legs spread, smaller generator scale) while the head is one size on every frame, so the body read small under it.
+- Each side stride body is scaled by one uniform factor to the side stand body's height (same method as the passing poses in 199). Side stand, step 1, step 2 and passing pose now all stand 387 px (4 px apart at most). Their torsos come out about 6% larger than the stand's torso, which is what the picture scale difference is.
+- Atlas cell grew from 216 x 387 to 234 x 396 to fit the larger strides. The other ten frames draw identically (checked pixel for pixel on their visible content, same bottom edge and centring), so nothing else changes size on screen.
+
 ## 2026-11-05 (199): Tom's walk gets passing poses and his new front head (`walk8`)
 - Tom (12:24): new front head on the front frames, front step 2 head centred on the neck like step 1, and three arms-down passing bodies (front, back, side) for between the strides. Pictures: art/raw/characters/tom-head-front-v2.png, tom-body-front-pass.png, tom-body-back-pass.png, tom-body-side-pass.png.
 - Walk cycle for Tom is now stride A, passing pose, stride B, passing pose (`OW_WALK_CYCLE_TOM=[1,3,2,3]`, frames now stand, step1, step2, pass). The hands-in-pockets stand frame is used only when he is not walking.
