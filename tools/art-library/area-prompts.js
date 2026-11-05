@@ -4,13 +4,9 @@ const fs = require('fs');
 const P = n => fs.readFileSync(__dirname + '/prompts/areas/' + n + '.txt', 'utf8').trim();
 const entries = [];
 
-// ---- stencil template (same wording as the Project stencil packs) ----
-const LAY = 'Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.';
-const FLAT = 'No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo.';
-function stencil(noun, s) {
-  return 'Make a cutout mask of the ' + noun + ' painting you just made. ' + LAY + '\nKEEP ONLY' + s.keep +
-    '\nEVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF' + (s.rest ? ': ' + s.rest : '') + '. ' + FLAT +
-    (s.canopy ? ' Where a canopy overlaps something else, keep the full canopy.' : '') + ' Add nothing, no text or border. Deliver the image itself.';
+// ---- stencil template (Tom 11-05: name only what to keep; never list what to remove) ----
+function stencil(name, s) {
+  return 'IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached ' + name.replace(/ \(.*\)/, '') + ' painting.\n\nCopy out only ' + s.only + ' Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.';
 }
 function area(id, name, file, ar, refs, noun, stencils, paintNote) {
   entries.push({ id: 'area-' + id, tab: 'Areas', title: name + ': painting (fresh generator chat' + (refs.length ? ', attach the listed pictures' : ', nothing attached') + ')' + (paintNote || ''), ar, refs, prompt: P(file) });
@@ -18,55 +14,55 @@ function area(id, name, file, ar, refs, noun, stencils, paintNote) {
     id: 'area-' + id + '-cut' + (i + 1), tab: 'Areas',
     title: name + ': stencil ' + (i + 1) + ' of ' + stencils.length + ', ' + s.name + ' (same chat, send after the painting is approved)',
     ar, refs: ['art/raw/areas/area-' + id + '-v1.png'],
-    prompt: s.prompt || 'IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. The attached picture is the approved ' + name + ' painting; if this is the same chat that painted it, you may work from your own painting.\n\n' + stencil(noun, s)
+    prompt: stencil(name, s)
   }));
 }
 
-area('square', 'The Square', 'square', '1:1', [], 'town square', [
-  { name: 'trees', keep: ': every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground, plus every bush or hedge taller than a person. This includes all trees along the four edges and the tree behind the taxi garage.', rest: 'buildings, roofs, paving, grass, fences, fountain, benches, lamps, signs, flowers, props', canopy: true },
-  { name: 'posts, lamps and signs', prompt: 'IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Square painting.\n\nCopy out only its street lamps, its three green exit boards with their posts, its hanging shop signs with their iron brackets, and the small lanterns by the doors. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.', keep: ': every iron street lamp from its lantern down to its base; the three green exit boards (GRUMP / HOLLOW, SCHOOL, RIVITUSO / ROW) with both posts down to the ground; the eight building signs (CRUMB / BAKERY, HUSH / LIBRARY, SPROUT / HOUSE, PENNY\'S / POCKETS, SNAIL / MAIL, KETTLE / COTTAGE, MOON / CLUB, TAXI / CO.) each with its iron bracket or mount; the wall lanterns beside each door.', rest: 'buildings, walls, roofs, paving, grass, trees, fences, fountain, benches, flowers, props' },
-  { name: 'roofs, eaves and awnings', keep: ' the upper part of each of the eight buildings: the whole roof with its tiles, ridges, dormers and domes, chimneys and steam, every roof decoration (the bread loaf top, the owl, the greenhouse dome, the snail weathervane and turret, the teapot spout, the observatory dome and telescope, the crescent moon, the taxi sign box), the eaves, and every awning or canopy over a door or window. Cut each building straight across just below its eaves and awnings.', rest: 'lower walls, doors, windows, steps, paving, grass, trees, fences, fountain, benches, lamps, exit boards, flowers, props' },
-  { name: 'tall props', keep: ' these props, each whole from top to where it touches the ground: the yellow taxi; the tire stack; the brass globe and the telescope on its tripod at the Moon Club; the velvet rope posts; the cafe table and chairs at Kettle Cottage; the red mailbox, blue drop box and parcel stack at Snail Mail; the bread rack and flour sacks at Crumb Bakery; the reading bench at Hush Library; the wheelbarrow, watering can and plant shelf at Sprout House; the barrel of walking sticks and the flower barrel at Penny\'s Pockets; the two plaza benches with their flower barrels; the fountain\'s upper tiers and spout (not its low basin rim).', rest: 'buildings, roofs, paving, grass, trees, fences, lamps, signs, exit boards' }
+area('square', 'The Square', 'square', '1:1', [], '', [
+  { name: 'trees', only: 'its trees and its tall bushes and hedges, each with its full leaf canopy, branches and trunk down to where the trunk meets the ground, including the trees along all four edges.' },
+  { name: 'posts, lamps and signs', only: 'its street lamps, its three green exit boards with their posts, its hanging shop signs with their iron brackets, and the small lanterns by the doors.' },
+  { name: 'roofs, eaves and awnings', only: 'the roof of each of the eight shops, from the very top (with its chimney, steam and every roof decoration such as the owl, the dome, the weathervane, the teapot, the telescope and the roof sign) down to just below the eaves, together with every awning or canopy over a door or window.' },
+  { name: 'tall props', only: 'its taxi, tire stack, brass globe, telescope on its tripod, velvet rope posts, cafe table and chairs, mailbox, drop box and parcel stack, bread rack and flour sacks, reading bench, wheelbarrow and plant shelf, barrels, the two plaza benches with their flower barrels, and the upper tiers and spout of the fountain, each whole down to where it touches the ground.' }
 ], ' (redo of the live plate, 1920 x 1664)');
 
-area('row', 'Rivituso Row', 'row', '1:1', [], 'lane', [
-  { name: 'trees and tall plants', keep: ': every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground; every bush, hedge, cypress or climbing rose taller than a person; the flowering lilac tree right of the purple townhouse; the tall sunflowers in the garden.', rest: 'houses, roofs, paths, lawns, fences, garden beds, low flowers, benches, lamps, signs, props', canopy: true },
-  { name: 'lamps, boards, signs and garden posts', keep: ': every iron street lamp from its lantern down to its base; the two green exit boards (LONG ISLAND / SQUARE and CATTAIL / PIER) with both posts and their stone bases down to the ground; the three house signs (GREGORI, RIVITUSO, AUNT ELLIE) with their mounts; the scarecrow; the tomato trellis.', rest: 'houses, walls, roofs, paths, lawns, trees, fences, garden beds, benches, flowers, props' },
-  { name: 'roofs, porch roofs, balcony and awning', keep: ' the upper part of each of the three houses: the whole roof with its shingles, ridges, dormers and iron roof railing, chimneys and smoke, the eaves, the porch roofs with their posts, the bay window roof on the red-trimmed house, the iron balcony with its flower boxes, hat and scarf on the purple townhouse, and its striped awning. Cut each house straight across just below its eaves, porch roof and awning.', rest: 'lower walls, doors, windows, steps, the wooden deck, paths, lawns, trees, fences, garden beds, benches, lamps, signs, flowers, props' },
-  { name: 'tall props', keep: ' these props, each whole from top to where it touches the ground: the two bikes and the scooter, the sports net, the shoe rack and the porch bench with the violin case, the balance beam (not the flat mat); the two rocking chairs and the porch railing, the fishing rods and tackle box; the little cafe table and chair, the two stone flower urns by the purple door; the two wooden benches beside the lane; the potted plants on porch steps.', rest: 'houses, roofs, paths, lawns, trees, fences, garden beds, lamps, signs, flowers on the ground' }
+area('row', 'Rivituso Row', 'row', '1:1', [], '', [
+  { name: 'trees and tall plants', only: 'its trees, tall bushes, hedges, cypresses and climbing roses, the flowering lilac tree, and the tall sunflowers, each with its full leaf canopy or flowers and its trunk or stem down to where it meets the ground.' },
+  { name: 'lamps, boards, signs and garden posts', only: 'its street lamps from lantern to base, its two green exit boards with both posts and their stone bases, the three house signs with their mounts, the scarecrow and the tomato trellis.' },
+  { name: 'roofs, porch roofs, balcony and awning', only: 'the roof of each of the three houses with its dormers, iron railing, chimneys and smoke, the eaves, the porch roofs with their posts, the bay window roof, the iron balcony with its flower boxes and the hat and scarf on it, and the striped awning, cut straight across just below the eaves, porch roof and awning.' },
+  { name: 'tall props', only: 'its two bikes and scooter, sports net, shoe rack, porch bench with the violin case, balance beam, two rocking chairs, porch railing, fishing rods and tackle box, little cafe table and chair, two stone flower urns, two wooden benches, and the potted plants on the porch steps, each whole down to where it touches the ground.' }
 ], ' (v3 spelling and sign words, 1536 x 1408)');
 
-area('hollow', 'Grump Hollow', 'hollow', '1:1', [], 'woodland', [
-  { name: 'trees and tall plants', keep: ': every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground; every bush, bramble or fern clump taller than a person; the tall cattails and reeds at the pond edge.', rest: 'trail, mud, grass, pond water, lily pads, logs on the ground, rocks, benches, the exit board, props', canopy: true },
-  { name: 'exit board and posts', keep: ': the green exit board (LONG ISLAND / SQUARE) with both of its posts down to the ground, and the fence posts on either side of the entrance trail.', rest: '' },
-  { name: 'boulders, stumps and standing logs', keep: ': every mossy boulder taller than a person\'s knee, every tree stump, and any log that stands upright or leans upward. Each whole, from its top to where it touches the ground.', rest: 'trees, trail, mud, grass, pond, lily pads, flat logs lying on the ground, benches, the exit board, props' },
-  { name: 'tall props', keep: ' these props, each whole from top to where it touches the ground: the soggy wooden bench on the left; Boppy\'s small bench on the pond shore with the thermos, the bucket and the leaning fishing rod; any tall mushroom clump.', rest: '' }
+area('hollow', 'Grump Hollow', 'hollow', '1:1', [], '', [
+  { name: 'trees and tall plants', only: 'its trees, tall bushes, brambles and fern clumps, and the tall cattails and reeds at the pond edge, each down to where it meets the ground.' },
+  { name: 'exit board and posts', only: 'its green exit board with both posts down to the ground, and the fence posts beside the entrance trail.' },
+  { name: 'boulders, stumps and standing logs', only: 'its mossy boulders, tree stumps, and upright or leaning logs, each whole down to where it touches the ground.' },
+  { name: 'tall props', only: 'its soggy wooden bench, Boppy\'s small bench on the pond shore with the thermos, bucket and leaning fishing rod, and any tall mushroom clump, each whole down to where it touches the ground.' }
 ]);
 
-area('pier', 'Cattail Pier', 'pier', '1:1', [], 'pier', [
-  { name: 'trees and tall plants', keep: ': every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground; every bush taller than a person; the tall cattails and beach grass clumps that rise above a person\'s waist.', rest: 'sand, road, boardwalk, water, the shack, rocks, fences, posts, boards, props', canopy: true },
-  { name: 'posts, boards and signs', keep: ': the two green exit boards (RIVITUSO / ROW and WHISPERING / MARSH) with both posts down to the ground; the fish-shaped REEL\'S / BAIT sign; every tall pier railing post and mooring post with its rope, down to where it meets the deck or the water.', rest: '' },
-  { name: 'shack roof, eaves and awning', keep: ' the upper part of the bait shack: the whole roof with its shingles and moss, the fish weathervane, any chimney, the eaves, the striped awning, and the nets and buoys hanging from the eaves. Cut the shack straight across just below its eaves and awning.', rest: 'lower walls, door, counter, ground, boardwalk, water, trees, posts, boards, props' },
-  { name: 'tall props', keep: ' these props, each whole from top to where it touches the ground or deck: Boppy\'s bench with the thermos; the barrels, the worm barrel and the minnow tank; the stacked crates and the lobster trap; the folding stool, bucket and tackle box on the platform; any tall rock taller than a person\'s knee.', rest: '' }
+area('pier', 'Cattail Pier', 'pier', '1:1', [], '', [
+  { name: 'trees and tall plants', only: 'its trees, tall bushes, and the tall cattails and beach grass clumps, each down to where it meets the ground.' },
+  { name: 'posts, boards and signs', only: 'its two green exit boards with both posts, the fish-shaped bait sign, and every tall railing post and mooring post with its rope, down to the deck or water.' },
+  { name: 'shack roof, eaves and awning', only: 'the roof of the bait shack with its shingles, moss, fish weathervane and chimney, the eaves, the striped awning, and the nets and buoys hanging from the eaves, cut straight across just below the eaves and awning.' },
+  { name: 'tall props', only: 'Boppy\'s bench with the thermos, the barrels and minnow tank, the stacked crates and lobster trap, the folding stool, bucket and tackle box, and any tall rock, each whole down to where it touches the ground or deck.' }
 ]);
 
-area('reeds', 'Whispering Marsh', 'reeds', '1:1', [], 'marsh', [
-  { name: 'reeds, cattails and trees', keep: ': every clump of tall reeds or cattails that rises above a person\'s waist, the two very tall old reed clumps at the top left path, every tree and the twisted dead tree, each down to where it meets the water or ground.', rest: 'water, lily pads, boardwalks, grass, low plants, posts, boards, stumps, the rowboat' },
-  { name: 'posts and exit boards', keep: ': the two green exit boards (CATTAIL / PIER and SUNDIAL / HOLLOW) with both posts down to the ground; every boardwalk post and mooring post that rises above the planks, with its rope, down to where it meets the planks or water.', rest: '' },
-  { name: 'stumps and tall props', keep: ': every mossy stump taller than a person\'s knee, the half-sunken rowboat, and any rock taller than a person\'s knee, each whole down to where it meets the water or ground.', rest: '' }
+area('reeds', 'Whispering Marsh', 'reeds', '1:1', [], '', [
+  { name: 'reeds, cattails and trees', only: 'its tall reed and cattail clumps, the two very tall old reed clumps at the top left path, every tree and the twisted dead tree, each down to where it meets the water or ground.' },
+  { name: 'posts and exit boards', only: 'its two green exit boards with both posts, and every boardwalk post and mooring post with its rope, down to the planks or water.' },
+  { name: 'stumps and tall props', only: 'its mossy stumps, the half-sunken rowboat, and its tall rocks, each whole down to where it meets the water or ground.' }
 ], ' (the game draws the reeds that block the top left path until the story opens it)');
 
-area('sundial', 'Sundial Hollow', 'sundial', '1:1', [], 'clearing', [
-  { name: 'trees and tall plants', keep: ': every tree, with its full leaf canopy, branches, trunk and big roots down to where they meet the ground; every bush or fern clump taller than a person; the tall cattails around the pool.', rest: 'path, moss, clearing, channel, pool, boulders, standing stones, sundial, bench, the exit board', canopy: true },
-  { name: 'sundial, standing stones and boulders', keep: ': the sundial with its pointer and the upper step of its base (not the lowest flat step), every standing stone, and every mossy boulder taller than a person\'s knee, each whole down to where it meets the ground.', rest: '' },
-  { name: 'exit board and bench', keep: ': the green exit board (WHISPERING / MARSH) with both posts down to the ground, the stone bench, and any tall glowing mushroom clump.', rest: '' }
+area('sundial', 'Sundial Hollow', 'sundial', '1:1', [], '', [
+  { name: 'trees and tall plants', only: 'its trees with their full canopies, trunks and big roots, its tall bushes and fern clumps, and the tall cattails around the pool.' },
+  { name: 'sundial, standing stones and boulders', only: 'its sundial with its pointer and upper base step, every standing stone, and every mossy boulder, each whole down to where it meets the ground.' },
+  { name: 'exit board and bench', only: 'its green exit board with both posts, the stone bench, and any tall glowing mushroom clump.' }
 ], ' (the stone channel is painted dry on purpose; the game draws the water)');
 
-area('schoolyard', 'Long Island Elementary (schoolyard)', 'schoolyard', '4:3', [], 'school', [
-  { name: 'trees and tall plants', keep: ': every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground, and every hedge or bush taller than a person.', rest: 'the school, paving, asphalt, grass, wood chips, low flower beds, fences, lamps, cars, playground, signs, props', canopy: true },
-  { name: 'lamps, flagpole and exit board', keep: ': every lamp post from its lantern down to its base, the flagpole with its flag and rope down to its base, and the green exit board (LONG ISLAND / SQUARE) with both posts down to the ground.', rest: '' },
-  { name: 'school roof, cupola and portico', keep: ' the upper part of the school: the whole roof and its edge, the cupola with its bell and clock, roof vents and chimneys, the eaves, and the entrance portico roof with its columns and the LONG ISLAND / ELEMENTARY letters. Cut the building straight across just below the eaves, keeping the portico columns whole down to the ground.', rest: 'lower walls, windows, doors, paving, grass, trees, lamps, cars, playground, props' },
-  { name: 'cars, playground and tall props', keep: ' these, each whole from top to where it touches the ground: the three parked cars; the swing set, the slide with its tower, the tetherball pole; the bike rack with the old bike; the pickup bench and the playground bench; the playground fence and its gate posts.', rest: '' }
+area('schoolyard', 'Long Island Elementary (schoolyard)', 'schoolyard', '4:3', [], '', [
+  { name: 'trees and tall plants', only: 'its trees with their full canopies and trunks, and its tall hedges and bushes, each down to where it meets the ground.' },
+  { name: 'lamps, flagpole and exit board', only: 'its lamp posts from lantern to base, the flagpole with its flag and rope, and the green exit board with both posts.' },
+  { name: 'school roof, cupola and portico', only: 'the roof of the school with its edge, cupola, bell and clock, roof vents and chimneys, the eaves, and the entrance portico roof with its columns and lettering, cut straight across just below the eaves, with the portico columns whole down to the ground.' },
+  { name: 'cars, playground and tall props', only: 'its three parked cars, swing set, slide with its tower, tetherball pole, bike rack with the old bike, pickup bench, playground bench, and the playground fence and gate posts, each whole down to where it touches the ground.' }
 ]);
 
 // ---- Los Angeles areas: built from one template. Layout reference = the installed plate (layout only). ----
