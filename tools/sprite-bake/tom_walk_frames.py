@@ -67,7 +67,8 @@ def build():
             _f = _sh / float(body.height); body = body.resize((round(body.width * _f), round(body.height * _f)), Image.LANCZOS)
         f, cut, jr0 = HEADS[v]; s = scale[v]
         if v == 'down':
-            out[name] = _front_frame(body, heads['down'], cut, jr0, s); continue
+            out[name] = _front_frame(body, heads['down'], cut, jr0, s)
+            continue
         if v == 'left':
             out[name] = _side_frame(body); continue
         h = heads[v].crop((0, 0, heads[v].width, cut)); h = h.resize((max(1, round(h.width * s)), max(1, round(h.height * s))), Image.LANCZOS)
@@ -90,23 +91,54 @@ def build():
         out[name] = im.crop(im.getbbox())
     return out, scale
 
+SIDE_FWD = float(os.environ.get('SIDE_FWD', '40'))              # how far forward the profile head sits (frame px); the neck leans with it
+_FRONT_REF = {}
+
+def _blue(a):
+    return (a[:, :, 3] > 40) & (a[:, :, 2] > a[:, :, 0] + 15) & (a[:, :, 0] < 110)
+
+def _collar_row_front(body):
+    a = np.array(body).astype(int); cx = int(_neck_cx(body)); bl = _blue(a)
+    return next(r for r in range(0, 200) if bl[r, cx - 3:cx + 4].any())
+
+def _collar_row_side(body):
+    a = np.array(body).astype(int); bl = _blue(a)
+    for r in range(0, 200):
+        xs = np.where(a[r, :, 3] > 40)[0]; bx = np.where(bl[r])[0]
+        if len(bx) and bx.min() <= xs.min() + 2: return r
+    return 70
+
 def _side_frame(body):
-    # Tom (13:51): use his redrawn profile head and join it to the neck seamlessly. One uniform scale: hair top to chin = FRONT_CHIN (the front head's height).
+    # Tom (14:00): the bottom of the collar is at the same height above the ground in the front and the profile; the profile head sits more forward and the neck slopes into the collar.
+    # One uniform scale of the side body so collar-bottom-to-feet equals the front's; the head is Tom's profile picture at the front head's height; the neck is sheared so
+    # the head sits SIDE_FWD forward while the neck still ends in the collar; the shirt is drawn over the neck, the body's own neck skin above the collar is removed.
+    ycf, F = _FRONT_REF['collar_y'], _FRONT_REF['collar_to_feet']
+    rc = _collar_row_side(body); f = F / float(body.height - rc)
+    body = body.resize((round(body.width * f), round(body.height * f)), Image.LANCZOS); rc = int(round(rc * f))
+    ba = np.array(body); bl = _blue(ba.astype(int)); cx_front = int(np.where(ba[rc, :, 3] > 40)[0].min())
+    # drop the body's neck skin above and at the collar line (everything that is not shirt in the rows above the collar bottom, left of the shirt back)
+    for r in range(0, rc + 1):
+        skin = (ba[r, :, 3] > 40) & ~bl[r]
+        if bl[r].any(): skin &= (np.arange(ba.shape[1]) < np.where(bl[r])[0].min() + 0)
+        ba[r, skin, 3] = 0
+    body = Image.fromarray(ba, 'RGBA')
     sh = _keyed(SIDE_HEAD); k = FRONT_CHIN / float(SIDE_CHIN_Y - SIDE_TOP)
     cut = SIDE_CUT_Y - SIDE_TOP
     h = sh.crop((0, 0, sh.width, cut)); h = h.resize((max(1, round(h.width * k)), max(1, round(h.height * k))), Image.LANCZOS)
-    ha, hb = _span(h, h.height - 2); hw = hb - ha + 1
-    # the headless body's neck row whose width best matches the neck at the cut, and the neck centre line there
-    best = min(range(0, 70), key=lambda r: abs((_span(body, r)[1] - _span(body, r)[0] + 1) - hw))
-    ba, bb = _span(body, best); bcx, hcx = (ba + bb) / 2.0, (ha + hb) / 2.0
-    NF = 14                                   # the seam: the last NF rows of the head piece fade into the body's own neck skin
-    body = body.crop((0, best, body.width, body.height)); top = h.height - NF
-    W = int(max(body.width, h.width) + 80); ox = int(round(W / 2 - bcx)); hx = int(round(W / 2 - hcx))
-    _sh = -min(0, ox, hx); W += _sh; ox += _sh; hx += _sh; W = max(W, ox + body.width, hx + h.width)
-    im = Image.new('RGBA', (W, top + body.height), (0, 0, 0, 0)); im.alpha_composite(body, (ox, top))
-    arr = np.array(h).astype(float)
-    for i in range(NF): arr[-1 - i, :, 3] *= (i + 1) / (NF + 1.0)
-    im.alpha_composite(Image.fromarray(arr.astype(np.uint8), 'RGBA'), (hx, 0))
+    H0, W0 = h.height, h.width; ch = FRONT_CHIN
+    # shear: rows above the chin move forward (left) by SIDE_FWD; rows below ease back to 0 at the bottom of the piece
+    arr = np.array(h); out = np.zeros((H0, W0 + int(SIDE_FWD) + 4, 4), np.uint8)
+    for y in range(H0):
+        u = 0.0 if y <= ch else min(1.0, (y - ch) / float(max(1, H0 - 1 - ch))); ss = u * u * (3 - 2 * u)
+        d = int(round(SIDE_FWD * (1 - ss)))
+        out[y, int(SIDE_FWD) - d: int(SIDE_FWD) - d + W0] = arr[y]
+    h = Image.fromarray(out, 'RGBA')
+    # place: the neck front edge at the collar row meets the shirt's front point at the collar bottom
+    ycol = ycf                                   # the collar bottom is at the same height as the front's
+    hl = np.where(np.array(h)[int(ycol), :, 3] > 40)[0].min()
+    ox = int(hl - cx_front); oy = int(ycol - rc)
+    W = max(h.width, ox + body.width) + 4; x0 = min(0, ox); H = max(H0, oy + body.height)
+    im = Image.new('RGBA', (W - x0, H), (0, 0, 0, 0)); im.alpha_composite(h, (-x0, 0)); im.alpha_composite(body, (ox - x0, oy))
     return im.crop(im.getbbox())
 
 def _front_frame(body, hero, cut, jr0, s):
@@ -120,7 +152,10 @@ def _front_frame(body, hero, cut, jr0, s):
     W = int(max(body.width, nh.width) + 80); ox = int(round(W / 2 - ncx)); hx = int(round(W / 2 - nh.width / 2.0))
     im = Image.new('RGBA', (W, y_body + body.height), (0, 0, 0, 0))
     im.alpha_composite(body, (ox, y_body)); im.alpha_composite(nh, (hx, 0))
-    return im.crop(im.getbbox())
+    im = im.crop(im.getbbox())
+    if 'collar_y' not in _FRONT_REF:          # the bottom of the collar (centre front dip) of the standing front frame, and how far it is above the feet
+        _FRONT_REF['collar_y'] = y_body + _collar_row_front(body); _FRONT_REF['collar_to_feet'] = im.height - _FRONT_REF['collar_y']
+    return im
 
 if __name__ == '__main__':
     fr, sc = build(); print(sc)
