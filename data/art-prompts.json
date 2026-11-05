@@ -2063,6 +2063,13 @@
      "date": "2026-11-05",
      "from": "v1",
      "at": 1793843541704
+    },
+    {
+     "n": 2,
+     "file": "art/raw/areas/area-row-cut4-v2.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793893101719
     }
    ],
    "rejects": [],
@@ -2073,7 +2080,7 @@
    "refs": [
     "art/raw/areas/area-row-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Rivituso Row painting.\n\nCopy out only its two bikes and scooter, sports net, shoe rack, porch bench with the violin case, balance beam, two rocking chairs, porch railing, fishing rods and tackle box, little cafe table and chair, two stone flower urns, two wooden benches, and the potted plants on the porch steps, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. The attached picture is the approved Rivituso Row painting; if this is the same chat that painted it, you may work from your own painting.\n\nMake a cutout mask of the lane painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.\nKEEP ONLY these props, each whole from top to where it touches the ground: the two bikes and the scooter, the sports net, the shoe rack and the porch bench with the violin case, the balance beam (not the flat mat); the two rocking chairs and the porch railing, the fishing rods and tackle box; the little cafe table and chair, the two stone flower urns by the purple door; the two wooden benches beside the lane; the potted plants on porch steps.\nEVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: houses, roofs, paths, lawns, trees, fences, garden beds, lamps, signs, flowers on the ground. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.",
    "group": "Rivituso Row"
   },
   {
