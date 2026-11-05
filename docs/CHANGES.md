@@ -1,13 +1,8 @@
-## 2026-11-05 (232): Plane cabin is now a premium Delta One suite (`flight14`)
+## 2026-11-05 (233): Plane cabin is now a premium Delta One suite (`flight14`)
 - Tom approved `cabin-v2` in the Art Library (his save worked on retry). Baked with `bake_flight_lib.py` (`20261105e`); only art/flight/cabin.webp and data/flight-art.js changed. Looked at the cabin phase, portrait and landscape, start and end of the pan; flight_test both ALL OK.
 - Tags: `flight14` (flight-preview.html by hand).
 
-## 2026-11-05 (233): Art Library approve survives GitHub 500s and very large pictures
-- Tom (15:22 and 15:24): approving the new cabin picture failed twice with "GitHub said 500 while saving the picture". Checked (fact): nothing had been saved (repo and prompts file unchanged); GitHub reads worked from here; earlier approvals up to 2.7 MB had worked. Cause not proven; the picture size is the likeliest suspect (very large uploads are what the contents API answers with a 500).
-- art.html `decide` (approve): a picture over 3.5 MB is redrawn to at most 2048 px (new `shrinkBig`) before upload; a 5xx answer waits (2.5 s, 5 s, 7.5 s, 10 s) and retries the same file name instead of failing; 409 and 422 still move to the next version number. Tested `shrinkBig` in headless Chromium (3000 px noise picture to 2048 px; small picture untouched). `tools/art-library/test.py` was already failing before this change (waits for the removed `test-mudling` entry), so it was not usable here.
-- No game file changed.
-
-## 2026-11-05 (234): Art Library approve survives GitHub 500s and very large pictures
+## 2026-11-05 (232): Art Library approve survives GitHub 500s and very large pictures
 - Tom (15:22 and 15:24): approving the new cabin picture failed twice with "GitHub said 500 while saving the picture". Checked (fact): nothing had been saved (repo and prompts file unchanged); GitHub reads worked from here; earlier approvals up to 2.7 MB had worked. Cause not proven; the picture size is the likeliest suspect (very large uploads are what the contents API answers with a 500).
 - art.html `decide` (approve): a picture over 3.5 MB is redrawn to at most 2048 px (new `shrinkBig`) before upload; a 5xx answer waits (2.5 s, 5 s, 7.5 s, 10 s) and retries the same file name instead of failing; 409 and 422 still move to the next version number. Tested `shrinkBig` in headless Chromium (3000 px noise picture to 2048 px; small picture untouched). `tools/art-library/test.py` was already failing before this change (waits for the removed `test-mudling` entry), so it was not usable here.
 - No game file changed.
