@@ -83,7 +83,7 @@ startSplash();
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
-  d.textContent='build walk5';
+  d.textContent='build hollow4';
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
 })();

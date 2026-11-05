@@ -8,7 +8,7 @@ Tom is redoing every Long Island outdoor area as a new painting, one area at a t
 |---|---|---|---|---|
 | town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved v4 painting (2026-11-02, `square4`), lettered by the generator, own cutout layer art/town-fg.webp |
 | row | Rivituso Row | 24 x 22 | 1536 x 1408 | Tom's v2 painting, boards repainted in code, game-drawn lettering (disliked) |
-| hollow | Grump Hollow | 24 x 22 | 1536 x 1408 | Tom's v2 painting, game-drawn lettering (disliked) |
+| hollow | Grump Hollow | 24 x 22 | 1536 x 1408 | Tom's approved 11-05 painting (area-hollow-v1, cropped 85 px to 12:11), painted board LONG ISLAND / SQUARE, own cutout layer art/hollow-fg.webp (`hollow4`, tools/make_hollow_fg.py) |
 | pier | Cattail Pier | 24 x 22 | 1536 x 1408 | original painting, not redone yet |
 | reeds | Whispering Marsh | 26 x 23 | 1664 x 1472 | original painting, not redone yet |
 | sundial | Sundial Hollow | 22 x 20 | 1408 x 1280 | original painting, not redone yet |
@@ -33,7 +33,7 @@ Identify each uploaded picture by what it shows (shops around a fountain = town;
 |---|---|
 | town | CRUMB / BAKERY, HUSH / LIBRARY, SPROUT / HOUSE, PENNY'S / POCKETS, SNAIL / MAIL, KETTLE / COTTAGE, MOON / CLUB, TAXI / CO. (shops); exits GRUMP / HOLLOW (north), RIVITUSO / ROW (south), SCHOOL (east, one line) |
 | row | GREGORI / HOUSE, RIVITUSO / HOUSE, AUNT ELLIE / HOUSE (houses); exits THE SQUARE / SHOPS (north), CATTAIL / PIER (south, closed until chapter 3) |
-| hollow | GRUMP / HOLLOW, NO / SWIMMING, NOT A / FROG (wooden signs); exit THE SQUARE / SHOPS (south) |
+| hollow | exit board LONG ISLAND / SQUARE (south, painted); no other signs (the old GRUMP HOLLOW, NO SWIMMING and NOT A FROG tap signs were removed 11-05, CHANGES 188) |
 | pier | REEL'S / BAIT (shack), CATTAIL / PIER (sign); exits RIVITUSO / ROW (north), WHISPERING / MARSH (west) |
 | reeds, sundial, schoolyard | not decided yet: read the map spec, list its signs and exits, and use short names (two lines, 12 letters or fewer per line) |
 

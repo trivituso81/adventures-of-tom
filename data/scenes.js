@@ -157,13 +157,13 @@ const CH1_AFTER=(lost,lines)=>[
 ];
 SCENES.ch1Mudling=[
   {flag:'ch1-t1'},
-  {walk:'tom',to:[[9,19]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[10,19],dir:'up'}, {place:'rose',at:[10,20],dir:'up'}, {place:'deedee',at:[9,20],dir:'up'},
+  {walk:'tom',to:[[10,19]],speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[11,19],dir:'up'}, {place:'rose',at:[11,20],dir:'up'}, {place:'deedee',at:[10,20],dir:'up'},
   {talk:'Deedee',lines:['Crumbs! Rhubarb crumbs. That little thief went right through here.']},
-  {place:'Mudling',at:[9,16]},
+  {place:'Mudling',at:[11,16]},
   {talk:'Rose',lines:['Tata. The mud is MOVING.']},
   {sfx:'look'},
-  {walk:'Mudling',to:[[10,16],[10,17],[9,17]],speed:.35},
+  {walk:'Mudling',to:[[12,16],[12,17],[11,17]],speed:.35},
   {talk:'Mudling',lines:['Blub. The pie went that way. You can\'t have it. Blub.']},
   {talk:'Grace',lines:['Okay, everybody. Tata is in front. I\'m in charge of choreography. FIGHT!']},
   {battle:'mudling',tut:'basics'},
@@ -203,9 +203,9 @@ SCENES.ch1Pond=[
   {flag:'ch1-pond'}, {call:()=>storyWorld()},
   {hide:'The Big One'},
   // The painted heist frames (mh_*) face LEFT, toward the party, and already hold the tin, so no separate tin prop here.
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[21,15],dir:'left'}},
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[19,12],dir:'left'}},
   {pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'left'},
-  {walk:'Big Mudling',to:[[21,14],[20,14],[20,13],[19,13],[19,12]],speed:.3,onStep:()=>sfx.splat()},
+  {walk:'Big Mudling',to:[[18,12],[17,12]],speed:.3,onStep:()=>sfx.splat()},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Grace',lines:['THERE! The thief! He still has the tin!']},
   {face:'Big Mudling',dir:'left'},
@@ -216,7 +216,7 @@ SCENES.ch1Pond=[
   {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry=null; setFlag('ch1-crown'); sfx.pickup(); }},
   {pose:'Big Mudling',f:null},
   {face:'Big Mudling',dir:'right'},
-  {walk:'Big Mudling',to:[[20,12]],speed:.3},
+  {walk:'Big Mudling',to:[[18,12]],speed:.3},
   {call:()=>sfx.splat()}, {despawn:'Big Mudling'},
   {face:'The Big One',dir:'down'},
   {talk:'The Big One',lines:['It fits. I\'m a king now. GLUB.']},
@@ -244,9 +244,9 @@ SCENES.ch1AfterBoss=[
 // 6. Home: half a crisp, Boppy's lure, chapter complete.
 SCENES.ch1End=()=>[
   {flag:'ch1-done',value:'pending'},
-  {place:'Boppy',at:[10,8],dir:'down'},
-  {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'}, {place:'deedee',at:[7,9],dir:'right'},
+  {place:'Boppy',at:[16,11],dir:'down'},
+  {walk:'tom',to:[[14,11]],speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[15,12],dir:'up'}, {place:'rose',at:[13,12],dir:'up'}, {place:'deedee',at:[13,11],dir:'right'},
   {talk:'Boppy',lines:['You found the Big One? I TOLD everybody. Twenty years.']},
   ...(bag.includes('lure')?[
     {talk:'Tom',lines:['It had this stuck in its lip.']},
