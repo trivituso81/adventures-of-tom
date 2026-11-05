@@ -2292,8 +2292,16 @@
    "group": "Los Angeles paintings"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-griffith-v1.png",
+     "date": "2026-11-05",
+     "from": "v3",
+     "at": 1793843302681
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-05",
