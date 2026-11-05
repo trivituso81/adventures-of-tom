@@ -222,15 +222,24 @@ def _walk_head(img, chin, ky, kx, taper, side, pad=160):
     arr[Y0:AY, x0:x1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
     return big.crop(big.getbbox())
-if os.environ.get('HERO_HEAD'):     # OFF by default since 2026-11-05 12:xx (Tom: his painted frames must not be resized); HERO_HEAD=1 brings it back
+# FRONT HEAD IS THE MASTER (Tom 2026-11-05 12:52). The front head is sized to the hero picture (head share HERO_T, ear width x HERO_WK).
+# The back and side heads are then sized to be exactly the same size as the front: back = same ear-to-ear width as the front, side = same
+# top-of-hair-to-chin height as the front; both scale uniformly (no reshaping). Cut rows and ear widths are measured on the stand frames at
+# the walk frames' painted scale (tom_walk_frames.build): front chin 358 of 1624, back nape 380, side chin 410; ear widths front 261, back 308.
+CUT_PX = {'down': 358, 'up': 380, 'left': 410}
+EAR_PX = {'down': 261, 'up': 308}
+if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 brings back the frames exactly as painted
+    _stf = poses['w_down_stand']; _stf = _stf.crop(_stf.getbbox()); _s = CUT_PX['down'] / float(_stf.height)
+    _kyf = HERO_T * (1 - _s) / ((1 - HERO_T) * _s); _kxf = _kyf * HERO_WK
+    _HEAD_T = CUT_PX['down'] * _kyf; _EAR_T = EAR_PX['down'] * _kxf
+    KX_KY = {'down': (_kyf, _kxf), 'up': (_EAR_T / EAR_PX['up'],) * 2, 'left': (_HEAD_T / CUT_PX['left'],) * 2}
     for _v in ('down', 'up', 'left'):
         _st = poses[f'w_{_v}_stand']; _st = _st.crop(_st.getbbox()); _Hs = _st.height
-        _s = WALK_CHIN[_v]; _ky = HERO_T * (1 - _s) / ((1 - HERO_T) * _s); _kx = _ky * HERO_WK
-        _chin = int(round(_s * _Hs)); _taper = int(round(.025 * _Hs))
+        _ky, _kx = KX_KY[_v]; _chin = CUT_PX[_v]; _taper = int(round(.025 * _Hs))
         for _n in ('stand', 'step1', 'step2'):
             if _v != 'left' and _n == 'step2': continue          # front and back step2 are the flipped step1 (below)
             poses[f'w_{_v}_{_n}'] = _walk_head(poses[f'w_{_v}_{_n}'], _chin, _ky, _kx, _taper, _v == 'left')
-        print('walk head', _v, 'ky %.3f kx %.3f' % (_ky, _kx))
+        print('walk head', _v, 'ky %.3f kx %.3f' % (_ky, _kx), 'head px %.0f ear px %.0f' % (_chin * _ky, (EAR_PX.get(_v) or 0) * _kx))
     for _d in ('down', 'up'):
         poses[f'w_{_d}_step2'] = poses[f'w_{_d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
 
@@ -255,7 +264,7 @@ def hard(img, thr=0.5):
     return Image.fromarray(a, 'RGBA')
 
 from tom_walk_frames import OW_REF_H
-OW_STAND_H = OW_REF_H      # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
+OW_STAND_H = OW_REF_H if os.environ.get('HERO_HEAD', '1') == '0' else poses['w_down_stand'].crop(poses['w_down_stand'].getbbox()).height   # grown front stand: keeps Tom's real height # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
