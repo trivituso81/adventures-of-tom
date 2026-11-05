@@ -995,8 +995,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE EDIT. Return exactly one image, nothing else.\n\nThe attached picture is a finished painting of two people standing in a school yard. Keep the two people EXACTLY as painted: do not redraw, repaint, restyle, sharpen or smooth anything about them. Keep every face, hair strand, piece of clothing, pair of shoes, pose, size, position, color, the lighting and the visible painted brushwork and texture exactly as they are, pixel for pixel in feel.\n\nChange ONLY the background: replace everything that is not one of the two people (the school, the paving, the sky, the lamps, the planters, every shadow on the ground) with one flat solid pure magenta #FF00FF filling the whole rest of the image. No ground, no shadow, no gradient, no border, no text, no labels.\n\nNo magenta on the people. No magenta glow, spill, tint or fringe on the edges or hair strands. Keep the edges clean and crisp. Draw nothing new and no one else."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-walk-pip-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793915478552
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-pip",
    "tab": "NPCs",
