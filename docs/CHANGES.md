@@ -1,3 +1,9 @@
+## 2026-11-05 (212): The map plane faces its direction of travel at takeoff and landing too (`flight7`)
+- Tom (13:33, screenshot near the LA pin): "take off and landing are still wrong in the map view". Fact: the first and last 8 percent of the map route drew the banking sprites (`planeB1`, `planeB2`), and the painted banking sprites are diagonal planes with the nose up and to the right, so the heading turn left the nose about 45 degrees off the path (the level sprite was already fixed in 208).
+- Fix (engine/flight-art.js): the map always draws the level sprite `planeLvl`. The banking sprites stay in the sheet, unused. Preview page tag moved to `flight7` as well.
+- Looked at (Art Library preview driven in headless Chromium, portrait, zoomed on the plane): map start and end, both directions; nose along the path in all four. flight_test both ALL OK.
+- Not watched on the phone.
+
 ## 2026-11-05 (211): The Art Library flight preview showed the plane backwards because it loaded the old engine (`flight6`)
 - Tom (13:28, screenshot of PREVIEW FLIGHT, Long Island to LA): the plane still faced right. Fact: flight-preview.html loads engine/flight-art.js with its own hard-coded tag (`?v=flight3`); the plane fix of 208 moved the tag in index.html but not in this page, so the phone kept the old engine in the preview. tools/tag_check.py does not check this page.
 - Fix: flight-preview.html now loads engine/flight-art.js?v=flight6.

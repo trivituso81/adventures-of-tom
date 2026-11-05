@@ -222,9 +222,8 @@ function flightPaintedMap(F,time) {
   const pls=Math.max(sc*.62,46/280);
   for(let j=7;j>=1;j--) { const q=e-j*.012; if(q<=0) continue; const cc=fsCurve(a,b,q,lift),[qx,qy]=P([cc.x,cc.y]); fsProp('puff',qx,qy,pls*.2*(1+j*.14),.7*(1-j/8)); }
   // Keep the light on the upper left: the sprite is never turned upside down.
-  const left=c.dx<0,turn=fsCurve(a,b,Math.min(1,e+.02),lift).ang-fsCurve(a,b,Math.max(0,e-.02),lift).ang;
-  const tn=Math.abs(turn)>1e-4?(left?-turn:turn):0;
-  const name=(e<.08||e>.92)?(tn>0?'planeB2':'planeB1'):'planeLvl';
+  // Always the level sprite: the two banking sprites (planeB1, planeB2) are painted as diagonal planes with the nose up and to the right, so turning them by the heading left the nose about 45 degrees off the path at takeoff and landing.
+  const left=c.dx<0,name='planeLvl';
   gfx.save(); gfx.translate(px,py);
   // The baked props sheet paints the top-view plane nose-LEFT: heading left it only needs the turn, heading right it is mirrored (nose ends up along the heading both ways).
   if(left) gfx.rotate(Math.atan2(-c.dy,-c.dx)); else { gfx.rotate(c.ang); gfx.scale(-1,1); }
