@@ -67,8 +67,13 @@ for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-sheet-v2.png'), [walk_name
 # Side row (13:08): Tom's separate 3 x 1 side strip tom-walk-side-v2.png (faces LEFT, stand, stride, passing pose) replaces the sheet's row 3.
 for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-side-v2.png'), [['left_stand', 'left_step1', 'left_step2']], robust=True).items():
     poses['w_' + nm] = defringe(im)
-for d in ('down', 'up'):
-    poses[f'w_{d}_step2'] = poses[f'w_{d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
+# 2026-11-05 (Tom: use my painted frames): the FRONT step2 is the painted cell 3 of the sheet (other leg forward, shirt print the right
+# way round). The BACK step2 stays the flipped step1: the sheet's back cells 5 and 6 are the same stride (the one cell that fails every
+# time), and the back of the shirt is plain so a flip shows nothing wrong.
+poses['w_up_step2'] = poses['w_up_step1'].transpose(Image.FLIP_LEFT_RIGHT)
+# Tom's own standing paintings are the three stand frames (hero front, back view, side view; hands in pockets in front and side). Each is
+# keyed, defringed and scaled to the same standing height as the walk sheet's stand (so his real 5'11" is unchanged). Not resized or retouched.
+STAND_SRC = {'down': 'tom-hero-fresh-v1.png', 'up': 'tom-back-view-v1.png', 'left': 'tom-side-view-v1.png'}
 
 # ---------------------------------------------------------------- head size (2026-11-01, Tom's call)
 # Every adult's face (hairline to chin) is Justin's 49 battle px, and Tom stands 5'11" = 143 px next to Justin's 6'4" = 153 px (BATTLE_SIZE.tom 1.43).
@@ -224,7 +229,7 @@ def _walk_head(img, chin, ky, kx, taper, side, pad=160):
     arr[Y0:AY, x0:x1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
     return big.crop(big.getbbox())
-if not os.environ.get('NO_HERO_HEAD'):
+if os.environ.get('HERO_HEAD'):     # OFF by default since 2026-11-05 12:xx (Tom: his painted frames must not be resized); HERO_HEAD=1 brings it back
     for _v in ('down', 'up', 'left'):
         _st = poses[f'w_{_v}_stand']; _st = _st.crop(_st.getbbox()); _Hs = _st.height
         _s = WALK_CHIN[_v]; _ky = HERO_T * (1 - _s) / ((1 - HERO_T) * _s); _kx = _ky * HERO_WK
@@ -255,6 +260,16 @@ def hard(img, thr=0.5):
     a = np.array(img)
     a[:, :, 3] = np.where(a[:, :, 3] >= 255 * thr, 255, 0)
     return Image.fromarray(a, 'RGBA')
+
+# (Tom's standing paintings go in here, after scaled_to exists; see STAND_SRC above)
+OW_STAND_H = poses['w_down_stand'].height      # the sheet stand's height, kept for the size factor below so every other frame stays at the size it was
+if not os.environ.get('SHEET_STANDS'):
+    for _v, _f in STAND_SRC.items():
+        _h = poses[f'w_{_v}_stand'].crop(poses[f'w_{_v}_stand'].getbbox()).height
+        _im = defringe(slice_sheet(os.path.join(ROOT, 'art/raw/characters', _f), [['stand']], robust=True)['stand'])
+        _im = _im.crop(_im.getbbox()); _im = scaled_to(_im, _h / _im.height)
+        poses[f'w_{_v}_stand'] = _im
+        print('stand painting', _v, _f, _im.size)
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
@@ -399,12 +414,12 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'tom-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = args.ow_h * KW / OW_STAND_H
 print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (poses["w_down_stand"].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
 # arrival stretch (town view, facing the camera): scaled so the relaxed standing pose matches the walk sprite's standing height
-fs = fo * poses['w_down_stand'].height / poses['s_fresh'].height
+fs = fo * OW_STAND_H / poses['s_fresh'].height
 st_big = tighten(place({c: scaled_to(poses['s_' + c], fs) for c in STRETCH}, KW, 'center'), KW)
 ow_pal, all_ow_rows = rows_of({**ow_big, **st_big}, KW, args.colors)
 ow_rows = {k: all_ow_rows[k] for k in ow_big}

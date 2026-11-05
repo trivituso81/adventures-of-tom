@@ -37,6 +37,10 @@ Tom (11-02, and again 11-03 14:49 with "ALWAYS"): he creates images only in the 
 
 Tom (11-05): "Let's undo the no head resizing rule." `docs/CHARACTER_PIPELINE.md` section 7 (heads, heights, widths by age) is in force again, including the head row and the head tools (`kidhead.py` `grow_head`, `headwarp.py`). Head share is top of hair to chin over full height: about .21 to .22 for adults, about .25 for Grace and the style key's kids (Rose follows her ratio to Grace), and the older baked kid art uses .373 walking and .43 battle until a character is regenerated. Still true: a head row is shown to Tom before and after, the body keeps its size, and nothing is re-baked unless Tom asks for that character in that conversation (lifting the rule changed no art).
 
+## Tom's painted frames are used as painted (standing rule, 2026-11-05)
+
+Tom (11-05 08:13): "Remember these rules going forward because in the next build instructions I will provide Grace's new walking and standing frames." When Tom supplies painted walking or standing frames for a character, the bake uses them exactly as painted: no head or body resizing, no flipping or substituting a frame, his own standing paintings are the stand frames, and his painted second steps are used. A frame that cannot be used as painted (a repeated cell, a wrong direction) is named to Tom in plain words, with the reason, before or when it is changed. This overrides the head share targets in `docs/CHARACTER_PIPELINE.md` section 7 for any frame Tom painted or supplied. Before changing any bake, rebake once with no change and confirm it reproduces the repo files byte for byte. Show Tom the frames (stand next to steps, and a head row) before pushing. Tom's walk is the model: `tools/sprite-bake/bake_tom_walk_v4.py`, CHANGES 183.
+
 ## Enemy sprite sheets (standing rule, 2026-10-29)
 
 Tom may drop a PNG enemy sprite sheet into any conversation, often with no words. That means "install this enemy". Follow `docs/ENEMY_SHEETS.md`: identify the enemy id, bake the sheet (tools/sprite-bake), wire the painted frames, test a fight against it, push, and log it in that doc's table.
