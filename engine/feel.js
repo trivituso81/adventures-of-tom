@@ -461,8 +461,8 @@ function b7RenderOptions(body) {
   body.appendChild(c4);
 }
 
-// ---------- Battle settings: gear button, MUSIC and VOICE volume (also in the Battle Lab) ----------
-// The gear sits in the top-right tool bar. It opens a small panel over the fight; the fight keeps running underneath.
+// ---------- Battle settings: music note button, MUSIC and VOICE volume (also in the Battle Lab) ----------
+// The music note sits in the top-right tool bar. It opens a small panel over the fight; the fight keeps running underneath.
 // Keys: O or Select opens; Up/Down pick a row, Left/Right change it, Enter, Esc or B close. Taps work on the buttons and pips.
 const B7S={open:false,row:0,sample:0};
 const B7S_ROWS=[['music','MUSIC','Background music.'],['voice','VOICE','Battle shouts and story voices.']];
@@ -519,7 +519,7 @@ function b7SetKey(code) {
   const st=document.querySelector('#battle .battle-stage'),cv=$('battle-canvas'),B=$('battle');
   if(!st||!cv||!B) return;
   const tools=document.createElement('div'); tools.id='b7-tools'; tools.className='b7-tools'; tools.hidden=true;
-  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-set-btn" class="gear" aria-label="Sound settings: music and voice volume"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M9.4 1h-2.8l-.4 1.9a5.6 5.6 0 0 0-1.4.8L3 3.1 1.6 5.5l1.5 1.3a5.600 5.600 0 0 0 0 1.4L1.600 9.500 3 11.900l1.800-.600c.4.300.9.600 1.400.800L6.600 14h2.800l.4-1.900c.5-.2 1-.5 1.400-.8l1.800.6 1.400-2.400-1.500-1.300a5.600 5.600 0 0 0 0-1.400l1.500-1.300L13 3.100l-1.800.6a5.600 5.600 0 0 0-1.400-.8zM8 5.500a2.500 2.500 0 1 1 0 5 2.500 2.500 0 0 1 0-5z"/></svg></button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
+  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-set-btn" class="gear" aria-label="Sound settings: music and voice volume"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M5.5 2.6 13 1v9.2a2.3 2.3 0 1 1-1.5-2.1V4.1L7 5.1v7.1a2.3 2.3 0 1 1-1.5-2.1z"/></svg></button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
   st.appendChild(tools);
   $('b7-exit').addEventListener('click',e=>{ e.stopPropagation(); if(typeof b2LabExit==='function') b2LabExit(); });   // Battle Lab only
   $('b7-set-btn').addEventListener('click',e=>{ e.stopPropagation(); b7SetToggle(); });

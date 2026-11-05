@@ -1,3 +1,11 @@
+## 2026-11-05 (184): Quest tracker collapsed to an icon beside the menu icon; battle sound button is a music note (`qicon1`)
+
+- Tom (08:08, 08:11, 08:15). The quest box at the top left is now a "!" icon button, the same size as the menu icon (38 px portrait, 34 px landscape), sitting directly left of it. Tap opens the quest log (current step, checklist, completed list) as a panel under the buttons; tap again closes it (it also closes itself after 15 seconds).
+- A new quest step makes the icon pulse with a gold glow while collapsed. The pulse stays until the first tap, which opens the log and stops it; it does not come back on the second tap. Finished-step flash shows as a green border. Chapter complete turns the "!" green.
+- Battle: the sound settings button (top right, next to 1x and AUTO) shows a music note instead of a gear. Same panel, same tap.
+- Files: index.html (markup moved into the button row, CSS at the end of the last style block), engine/feel.js, engine/main.js tag.
+- Tested: tools/quest_test.py (same 2 checks fail as before this change: completed list newest first, then the new step pulsing; the pulse itself was checked by hand: pulse on, tap opens and stops it, tap closes), IDS=tom,grace,rose smoke FAILS: [], portrait and landscape looked at.
+
 ## 2026-11-05 (183): Tom's own painted frames are used as painted: no head resizing, painted front step2, his standing paintings (`walk3`)
 - Tom (07:55 to 08:13): "Tom's walking poses do not match the uploaded pictures I provided", then "I created body frames for standing poses - those are not used at all. I also created side walk poses 1 and 2 but it seems they were altered", then "Do all 3 right now". Fact: his hero, back view and side view paintings were never read by the bake, and herohead1 (180) had enlarged the head in every walk frame, including his side strip.
 - Change 1: the head step in tools/sprite-bake/bake_tom_walk_v4.py is now OFF (`HERO_HEAD=1` turns it back on). With it off the bake reproduced the pre-180 art/chars/tom-ow.webp and data/tom-hires.js byte for byte before the other changes.
