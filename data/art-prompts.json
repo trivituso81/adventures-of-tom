@@ -1760,6 +1760,12 @@
      "note": "Taxi Co needs a door for the characters to enter in",
      "from": "v1",
      "at": 1793844304988
+    },
+    {
+     "date": "2026-11-05",
+     "note": "Taxi Co should have a normal door not a garage door - a noraml human entryway door. and The Moon club has a a rope blocking the exit - remove it.",
+     "from": "v2",
+     "at": 1793844441535
     }
    ],
    "id": "area-square",
