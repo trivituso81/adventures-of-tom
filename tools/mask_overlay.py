@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Draw a map's plateMask over its painting so a new painting can be checked against the walk map.
 
-Usage: python3 tools/mask_overlay.py <mapId> [painting.(webp|png)]
+Usage: python3 tools/mask_overlay.py <mapId> [painting.(webp|png)]     (area maps and building interiors alike)
 Writes tools/shots/mask-<mapId>.png: the painting at half size, solid tiles tinted red, walkable tiles left clear,
 tile grid every 64 art px (tile numbers on the top and left). Exits and doors are not drawn; read them from the map spec.
 """
@@ -9,10 +9,12 @@ import re, sys
 from PIL import Image, ImageDraw
 mid = sys.argv[1]
 src = open('data/maps-le.js').read() + open('data/maps-la.js').read()
-m = re.search(r"\{id:'%s',name:" % mid, src)
+m = re.search(r"\{id:'%s',(?:name|w):" % mid, src)   # areas start {id:'x',name:  rooms (building interiors) start {id:'x',w:
 if not m: sys.exit('map not found: ' + mid)
 blk = src[m.start():]
+nxt = re.search(r"\n  \{id:'", blk[5:])   # the next map's spec: this map's plateMask must come before it
 pm = re.search(r"plateMask:\[(.*?)\]", blk, re.S)
+if not pm or (nxt and pm.start() > nxt.start() + 5): sys.exit(mid + ' has no plateMask')
 rows = re.findall(r"'([#.]+)'", pm.group(1))
 path = sys.argv[2] if len(sys.argv) > 2 else 'art/%s.webp' % mid
 im = Image.open(path).convert('RGB')

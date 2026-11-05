@@ -53,3 +53,7 @@ Rooms whose art has not arrived keep their current plates and must keep working.
 | rooms6.zip | creole, pupuseria, jordansam, dakota | 2026-10-30 |
 
 Test with `python3 tools/rooms_test.py <ids>` (shots in `tools/shots/room-*`). Template for a 16 x 16 room: copy a spec from `data/maps-le.js` (bakery), set `door:[8,15],door2:[7,15],doors:[[6,15],[9,15]]` when the painting has the usual gate gap, and draw `plateMask` from a grid overlay of the painting (tile = image width / 16).
+
+## Editing a room's walk map (Area Builder, CHANGES 189)
+
+Title screen > ADMIN > AREA BUILDER > BUILDING INTERIORS. Tom paints Walk and Block on the square plate with the same grid tools as the outdoor areas and exports; `python3 tools/apply_walkmap.py <export.json> --dry-run` rewrites that room's `plateMask` (rooms are found by `{id:'<id>',w:`). Door tiles stay portals; the outdoor side of a door is edited in the area. Check with `tools/mask_overlay.py <id>` and `tools/reach_test.py <id>`.

@@ -45,8 +45,37 @@ button:disabled{opacity:.4}
 label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
 #frame{position:absolute;left:0;top:0;width:430px;height:860px;opacity:0;pointer-events:none;border:0;z-index:-1}
 #tip{font-size:11px;color:#8e88c4}
+/* First screen (two sections) and the map lists. A fixed layer under the header; the editor stays in the page behind it. */
+[hidden]{display:none!important}
+#backbtn{min-height:40px;padding:6px 12px;font-weight:700}
+#picker{position:fixed;left:0;right:0;bottom:0;top:48px;z-index:8;background:#14122b;overflow:auto;padding:14px 12px calc(16px + env(safe-area-inset-bottom))}
+#pkHome{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+#pkHome h2,#pkBar h2{margin:0;font-size:18px}
+#pkHome p{margin:0;font-size:13px;color:#b9b3e6}
+.bigs{display:flex;flex-direction:column;gap:12px}
+.big{position:relative;min-height:150px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;text-align:left;padding:16px 18px;border-radius:16px;border:2px solid #3a3566;background:#1f1b40;font-size:14px;line-height:1.3}
+.big b{font-size:21px;letter-spacing:.6px}
+.big small{font-size:12.5px;color:#cfc9ff}
+.big .cnt{font-size:13px;color:#ffd968}
+.big.last{border-color:#7b6cff;background:#2a2459}
+.big .lastTag{position:absolute;top:10px;right:12px;font-size:11px;background:#7b6cff;color:#fff;border-radius:999px;padding:2px 9px}
+#pkList{max-width:1100px;margin:0 auto}
+#pkBar{display:flex;align-items:center;gap:10px;position:sticky;top:-14px;z-index:2;background:#14122b;padding:6px 0 10px}
+#pkBar button{min-height:44px;font-weight:700}
+.grp h3{margin:14px 0 6px;font-size:13px;letter-spacing:.5px;color:#ffd968;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{position:relative;padding:0;overflow:hidden;text-align:left;border-radius:12px;background:#1f1b40;border:1px solid #3a3566;min-height:0;display:flex;flex-direction:column}
+.card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#0b0a1c}
+.card.sq img{aspect-ratio:1/1}
+.card .nm{padding:6px 8px 7px;font-size:13px;font-weight:600;line-height:1.2}
+.card .nm small{display:block;font-weight:400;font-size:11px;color:#9b95d0;margin-top:1px}
+.card .nothumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8e88c4;background:#0b0a1c}
+.card.ed::after{content:"edited";position:absolute;top:6px;right:6px;background:#ffd34d;color:#1a1737;font-size:10px;font-weight:700;border-radius:999px;padding:1px 7px}
+@media(orientation:landscape) and (max-width:999px){#pkHome .bigs{flex-direction:row}.big{min-height:120px}#picker{top:44px;padding-top:8px}.grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}}
+@media(max-height:500px){#picker{top:40px}}
 @media(max-height:500px){header h1,#tip{display:none}header{padding:0 12px}#top{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;padding:3px 12px}#top select{max-width:40vw}#vw{padding:0 12px}#vw summary{padding:2px 0}#status{padding-bottom:1px}#exportbar textarea{height:60px}}
-@media(max-width:700px){#tip{display:none}header{padding:2px 12px}#top{padding:4px 12px}#tools button{min-height:34px;padding:4px 9px}}
+header h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+@media(max-width:700px){header h1{font-size:15px;letter-spacing:.2px}#dirty{font-size:11px}#tip{display:none}header{padding:2px 12px}#top{padding:4px 12px}#tools button{min-height:34px;padding:4px 9px}}
 @media(min-width:1000px){
   #main{flex-direction:row}
   #tools{flex-direction:column;flex-wrap:nowrap;align-items:stretch;width:210px;border-top:0;border-left:1px solid #2c2852;overflow:auto}
@@ -58,7 +87,7 @@ label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
 </style>
 </head>
 <body>
-<header><button id="exitbtn">&lsaquo; Exit</button><h1>AREA BUILDER</h1><span id="dirty"></span><span id="tip">paint tiles, then Check and Export</span></header>
+<header><button id="exitbtn">&lsaquo; Exit</button><button id="backbtn" hidden>&lsaquo; Maps</button><h1>AREA BUILDER</h1><span id="dirty"></span><span id="tip">paint tiles, then Check and Export</span></header>
 <div id="top">
   <select id="mapsel" aria-label="Map"></select>
   <label class="t">Chapter <input id="chap" type="number" min="1" max="20" value="20" style="width:62px"></label>
@@ -92,6 +121,17 @@ label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
 </div></div>
 <div id="notebar"><span id="notelab">Where does it go?</span><input type="text" id="noteTxt" placeholder="to Aunt Ellie's house"><button id="noteOk">Save</button><button id="noteNo">Skip</button></div>
 <div id="exportbar"><textarea id="exportTxt" readonly></textarea><button id="exportClose">Close</button> <span id="exportMsg" style="font-size:12px;color:#ffd968"></span></div>
+<div id="picker" hidden>
+  <div id="pkHome">
+    <h2>What do you want to edit?</h2>
+    <p>Both use the same grid editor: paint walkable and blocked tiles, move doors and exits, then Check and Export.</p>
+    <div class="bigs">
+      <button class="big" id="secAreas" data-sec="areas"><b>AREA MAPS</b><span class="cnt" id="secAreasN"></span><small>Outdoor areas: Long Island (the Square, Rivituso Row, Grump Hollow and the rest) and Los Angeles.</small></button>
+      <button class="big" id="secInt" data-sec="interiors"><b>BUILDING INTERIORS</b><span class="cnt" id="secIntN"></span><small>Every house and shop interior, one square painting each, grouped by the area it sits in.</small></button>
+    </div>
+  </div>
+  <div id="pkList" hidden><div id="pkBar"><button id="pkBack">&lsaquo; Sections</button><h2 id="pkTitle"></h2></div><div id="pkBody"></div></div>
+</div>
 <iframe id="frame" src="index.html" title="engine" aria-hidden="true"></iframe>
 <script>
 (()=>{
@@ -138,18 +178,70 @@ function waitEngine(){
     else if(++n>240){ clearInterval(iv); status('The game engine did not load. Reload this page.'); }
   },250);
 }
-function mapGroups(){
-  const W=cw.eval('worlds'), P=cw.eval('PLATES'), out={Outdoor:[],'Rooms with a painting':[],'Rooms without a painting':[]};
-  for(const id of Object.keys(W)){ const m=W[id];
-    (m.outside?out.Outdoor:(P[id]?out['Rooms with a painting']:out['Rooms without a painting'])).push({id,name:m.name||id}); }
-  return out;
+// ---- the two sections. A map is a BUILDING INTERIOR when the engine builds it as a room (map.outside false: every house and shop
+// interior, one square painting each). Everything the engine builds as outdoor ground (the Long Island and Los Angeles areas and their
+// story maps) is an AREA MAP. The export carries this as `kind`.
+const isInterior=m=>!m.outside;
+const kindOf=m=>isInterior(m)?'interior':'area';
+const REG={le:'Long Island',la:'Los Angeles'};
+// The area an interior sits in: follow its door back outside (a suite or a loft goes through its parent room first).
+function areaOf(W,id,seen){
+  const m=W[id]; if(!m) return null; seen=seen||new Set([id]);
+  for(const p of m.portals.values()) if(p.kind==='exit'&&p.house&&p.house.area) return p.house.area;
+  for(const p of m.portals.values()) if(p.kind==='edge'&&p.to&&W[p.to]&&!seen.has(p.to)){ seen.add(p.to); const a=areaOf(W,p.to,seen); if(a) return a; }
+  return null;
+}
+let CAT=null;
+// CAT = {areas:[{label,items:[{id,name,m}]}], interiors:[...same], all:{id:{sec,...}}}
+function catalogue(){
+  if(CAT) return CAT;
+  const W=cw.eval('worlds'), P=cw.eval('PLATES'), A=new Map(), I=new Map(), all={};
+  const put=(map,key,label,item)=>{ if(!map.has(key)) map.set(key,{label,items:[]}); map.get(key).items.push(item); };
+  for(const id of Object.keys(W)){ const m=W[id], item={id,name:m.name||id,m,plate:!!P[id]};
+    if(isInterior(m)){ const a=areaOf(W,id), am=a&&W[a], reg=m.region==='la'?'la':'le';
+      item.area=a; put(I,a||'?',(REG[reg]||'')+' · '+(am?am.name:'Other'),item); all[id]='interiors'; }
+    else{ const reg=m.region==='la'?'la':'le'; put(A,reg,REG[reg],item); all[id]='areas'; } }
+  const ord=(m,first)=>[...m.entries()].sort((a,b)=>(a[0]===first?-1:b[0]===first?1:0)).map(e=>e[1]);
+  CAT={areas:ord(A,'le'),interiors:[...I.values()],all};
+  return CAT;
 }
 function buildList(){
-  const g=mapGroups(), sel=$('mapsel'); sel.innerHTML='';
-  for(const k in g){ if(!g[k].length) continue; const og=document.createElement('optgroup'); og.label=k;
-    for(const m of g[k]){ const o=document.createElement('option'); o.value=m.id; o.textContent=m.name+' ('+m.id+')'; og.appendChild(o); }
-    sel.appendChild(og); }
+  const c=catalogue(), sel=$('mapsel'); sel.innerHTML='';
+  const add=(prefix,groups)=>{ for(const g of groups){ const og=document.createElement('optgroup'); og.label=prefix+g.label;
+    for(const m of g.items){ const o=document.createElement('option'); o.value=m.id; o.textContent=m.name+' ('+m.id+')'; og.appendChild(o); } sel.appendChild(og); } };
+  add('Area maps: ',c.areas); add('Interiors: ',c.interiors);
 }
+// ---- first screen and lists
+const SECN={areas:'AREA MAPS',interiors:'BUILDING INTERIORS'};
+const count=sec=>catalogue()[sec].reduce((n,g)=>n+g.items.length,0);
+const editedIn=sec=>catalogue()[sec].reduce((n,g)=>n+g.items.filter(i=>{ try{ return !!localStorage.getItem(EK+i.id); }catch(e){ return false; } }).length,0);
+function placePicker(){ const h=document.querySelector('header'); $('picker').style.top=Math.round(h.getBoundingClientRect().bottom)+'px'; }
+function showHome(){
+  placePicker(); $('picker').hidden=false; $('pkHome').hidden=false; $('pkList').hidden=true; $('backbtn').hidden=true;
+  for(const sec of ['areas','interiors']){ const b=sec==='areas'?$('secAreas'):$('secInt'), n=sec==='areas'?$('secAreasN'):$('secIntN'), e=editedIn(sec);
+    n.textContent=count(sec)+' maps'+(e?' · '+e+' edited on this device':''); b.classList.toggle('last',UI.section===sec);
+    const t=b.querySelector('.lastTag'); if(t) t.remove();
+    if(UI.section===sec){ const s=document.createElement('span'); s.className='lastTag'; s.textContent='Last used'; b.appendChild(s); } }
+  $('picker').scrollTop=0; status('');
+}
+function openList(sec){
+  UI.section=sec; saveUI(); placePicker(); const c=catalogue();
+  $('picker').hidden=false; $('pkHome').hidden=true; $('pkList').hidden=false; $('backbtn').hidden=true;
+  $('pkTitle').textContent=SECN[sec]+' ('+count(sec)+')';
+  const body=$('pkBody'); body.innerHTML='';
+  for(const g of c[sec]){ const grp=document.createElement('div'); grp.className='grp'; const h=document.createElement('h3'); h.textContent=g.label+' ('+g.items.length+')'; grp.appendChild(h);
+    const grid=document.createElement('div'); grid.className='grid';
+    for(const it of g.items){ const b=document.createElement('button'); b.className='card'+(sec==='interiors'?' sq':'')+(localStorage.getItem(EK+it.id)?' ed':''); b.dataset.map=it.id;
+      const P=cw.eval('PLATES')[it.id];
+      if(P){ const im=document.createElement('img'); im.loading='lazy'; im.decoding='async'; im.alt=''; im.src=P.src; b.appendChild(im); }
+      else{ const d=document.createElement('div'); d.className='nothumb'; d.textContent='tile render'; b.appendChild(d); }
+      const nm=document.createElement('div'); nm.className='nm'; nm.textContent=it.name; const sm=document.createElement('small'); sm.textContent=it.id+' · '+it.m.w+' x '+it.m.h; nm.appendChild(sm); b.appendChild(nm);
+      b.onclick=()=>loadMap(it.id); grid.appendChild(b); }
+    grp.appendChild(grid); body.appendChild(grp); }
+  $('picker').scrollTop=0; status('');
+}
+$('secAreas').onclick=()=>openList('areas'); $('secInt').onclick=()=>openList('interiors');
+$('pkBack').onclick=showHome; $('backbtn').onclick=()=>openList(UI.section||'areas');
 // Per tile: E / D / W / B from the engine's built map (spec section 5).
 function classify(m){
   const out=new Array(m.w*m.h);
@@ -164,15 +256,16 @@ function classify(m){
 function hashOf(s){ let a=0x811c9dc5,b=0x12345678; const str=s.join(''); for(let i=0;i<str.length;i++){ const c=str.charCodeAt(i); a=Math.imul(a^c,16777619)>>>0; b=Math.imul(b+c,2246822519)>>>0; b^=b>>>13; } return a.toString(16).padStart(8,'0')+b.toString(16).padStart(8,'0'); }
 
 // ---- load a map
-function loadMap(id){
+function loadMap(id,quiet){
   M=cw.eval('worlds')[id]; if(!M){ status('No such map: '+id); return; }
-  UI.map=id; saveUI(); $('mapsel').value=id;
+  UI.map=id; UI.section=isInterior(M)?'interiors':'areas'; saveUI(); $('mapsel').value=id;
+  if(!quiet){ $('picker').hidden=true; $('backbtn').hidden=false; }
   PL=cw.eval('PLATES')[id]||null; sys=classify(M); undo=[]; bad=new Set(); moveFrom=null; hideNote();
   try{ const j=JSON.parse(localStorage.getItem('aot-areas-edit-'+id)||'null'); ed=(j&&j.w===M.w&&j.h===M.h)?{tiles:j.tiles||{},notes:j.notes||{}}:{tiles:{},notes:{}}; if(j&&j.chapter) $('chap').value=j.chapter; }catch(e){ ed={tiles:{},notes:{}}; }
   img=null;
   if(PL){ const src=PL.src; const im=new Image(); im.onload=()=>{ img=im; draw(); }; im.src=src; }
   fit(); draw();
-  status(M.name+': '+M.w+' x '+M.h+' tiles. '+(PL?'Painted plate.':'No painted plate (tile render).'));
+  status((isInterior(M)?'Building interior: ':'Area map: ')+M.name+', '+M.w+' x '+M.h+' tiles. '+(PL?(isInterior(M)?'One square painting for portrait and landscape.':'Painted plate.'):'No painted plate (tile render).'));
 }
 function saveEd(){ setTimeout(()=>{ try{ updDirty(); }catch(e){} },0); try{ if(!Object.keys(ed.tiles).length&&!Object.keys(ed.notes).length) localStorage.removeItem('aot-areas-edit-'+UI.map); else localStorage.setItem('aot-areas-edit-'+UI.map,JSON.stringify({w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes})); }catch(e){} }
 const eff=(x,y)=>ed.tiles[keyOf(x,y)]||sys[y*M.w+x];
@@ -339,7 +432,7 @@ $('check').onclick=check;
 
 // ---- export
 function exportJSON(){
-  const o={map:M.id,w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes,system_hash:hashOf(sys)};
+  const o={map:M.id,kind:kindOf(M),w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes,system_hash:hashOf(sys)};
   return JSON.stringify(o);
 }
 $('export').onclick=()=>{ const s=exportJSON(); $('exportTxt').value=s; $('exportbar').style.display='block'; $('exportMsg').textContent='';
@@ -352,11 +445,12 @@ function start(){
   for(const id of ['c-obj','c-beh','c-spn','c-npc','c-mon','c-diff']) if(UI.ctx&&UI.ctx[id]!==undefined) $(id).checked=UI.ctx[id];
   $('chap').value=UI.chap||20;
   const q=new URLSearchParams(location.search).get('map'); const W=cw.eval('worlds');
-  loadMap(W[q]?q:(W[UI.map]?UI.map:'town'));
-  window.__areas={loadMap,check,exportJSON,get M(){return M;},get sys(){return sys;},get ed(){return ed;},classify,hashOf,zoomAt,zoomFit,get zoom(){return Tpx/32;}};
+  // ?map=<id> (used by tools/apply_walkmap.py and the tests) opens that map's editor directly; otherwise the first screen with the two sections.
+  if(W[q]) loadMap(q); else{ loadMap(W[UI.map]?UI.map:'town',true); showHome(); }
+  window.__areas={loadMap,showHome,openList,catalogue,kindOf,isInterior,check,exportJSON,get section(){return UI.section;},get M(){return M;},get sys(){return sys;},get ed(){return ed;},classify,hashOf,zoomAt,zoomFit,get zoom(){return Tpx/32;}};
   document.documentElement.dataset.ready='1';
 }
-addEventListener('resize',()=>{ if(M){ fit(); draw(); } });
+addEventListener('resize',()=>{ placePicker(); if(M){ fit(); draw(); } });
 $('wrap').addEventListener('scroll',()=>{ if(M) requestAnimationFrame(draw); },{passive:true});
 waitEngine();
 })();

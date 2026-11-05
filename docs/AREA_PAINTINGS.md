@@ -59,7 +59,9 @@ Project docs: `claude/square-redo.md`, `claude/square-lettering.md` (Square v2 p
 - Square: the east SCHOOL board looked like it pointed north or west because a cobbled street runs north beside it (the walk map allows walking up it, rows 1 to 7, x 27 to 28); a path leads off the west edge (blocked in the mask but painted open). Shop boards sit 10 to 15 px above door tops, some touch awnings. The RIVITUSO ROW board sits at the foot of short posts. All to be fixed by the new painting plus mask changes.
 - Row: the house boards almost touch the doors (about 6 to 10 px); the lettering font does not fit the look and feel.
 
-## Area Builder (areas.html, CHANGES 170)
+## Area Builder (areas.html, CHANGES 170, two sections in 189)
+
+First screen (CHANGES 189): AREA MAPS (outdoor maps, Long Island then Los Angeles) and BUILDING INTERIORS (every house and shop room, grouped by the area it sits in). A map is an interior when the engine builds it as a room (`map.outside` false). Both sections open the same editor. Export JSON carries `kind` ("area" or "interior"); `apply_walkmap.py` and `mask_overlay.py` take either. `areas.html?map=<id>` opens a map's editor directly.
 
 Zoom and pan (CHANGES 175): pinch to zoom, two fingers to pan, Hand (pan) tool for one-finger pan, minus, plus and Fit buttons. Ctrl or Cmd plus wheel zooms; middle-drag or Space plus drag pans.
 Admin page (title screen > ADMIN > AREA BUILDER) that shows any map's painted plate with the 32 px grid and colours every tile Walkable (green), Blocked (red), Door (yellow) or Exit (blue) from what the running engine builds (`map.solid`, portals). It loads the real game in a hidden frame, so no collision logic is copied. Spec: claude/area-builder.md.
