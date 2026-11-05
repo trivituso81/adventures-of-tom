@@ -14,13 +14,21 @@ const AREAS = {
   square: 'a village square under a black eclipse with an amber ring', tower: 'a cold glass office tower with grey shelves and pale amber light', loom: 'a vast dark glass chamber around a loom of glowing gold threads',
   deadletter: 'an underground mail sorting hall with conveyor belts and wooden pigeonholes', core: 'a clockwork heart of gold gears and stopped clocks', scoops: 'a cheerful pastel ice cream parlor'
 };
-const STYLE = `ART STYLE
-- A whimsical storybook illustration of a creature, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, exactly like the illustrated school-yard painting the style key lives in. Gently simplified shapes. Friendly-scary, funny and full of personality, never grim. This is a game for a family with a 6 and a 9 year old.
+// The painting of each area (installed plate), attached to the enemy sheet so the creature is painted into the same world: palette, light and handbrushed texture.
+// scoops has no area painting yet, so those four sheets carry the style key only.
+const AREA_PAINTING = {
+  hollow: 'art/hollow.webp', marsh: 'art/reeds.webp', griffith: 'art/griffith.webp', backlot: 'art/backlot.webp', school: 'art/school.webp', oak: 'art/oak.webp',
+  library: 'art/library.webp', barn: 'art/carbarn.webp', club: 'art/moonclub.webp', terminal: 'art/terminal.webp', infinity: 'art/concourse.webp', blvd: 'art/blvd.webp',
+  subrail: 'art/subtunnel.webp', row: 'art/row.webp', dinner: 'art/grands.webp', square: 'art/town.webp', tower: 'art/tower.webp', loom: 'art/towervault.webp',
+  deadletter: 'art/deadletter.webp', core: 'art/stillcore.webp'
+};
+const style = hasArea => `ART STYLE
+- A whimsical storybook illustration of a creature, painted by hand with real brushes in a rich, dense, jewel-toned style, exactly like the illustrated school-yard painting of the style key${hasArea ? ' and the area painting' : ''}. Up close it looks like an oil or gouache painting on canvas: visible individual brush strokes that follow the shape of every form, layered paint, fine painted texture, small hand-made variations of color from one stroke to the next, and a faint canvas grain. Gently simplified shapes. Friendly-scary, funny and full of personality, never grim. This is a game for a family with a 6 and a 9 year old.
 - Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.
-- Clean, crisp edges with fine detail. No thick or black outlines.
+- Clean, crisp, painterly edges with fine detail, formed where one brush stroke meets the next. No thick or black outlines.
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.`;
-const ART_NOTE = `STYLE RULE (the most important instruction)
-Every frame must look painted by the same hand as attachment 1: dense painted texture, fine visible brushwork, deep saturated colors, crisp detail. No airbrushed smooth gradients, no glossy plastic look, no 3D render look.`;
+const artNote = hasArea => `STYLE RULE (the most important instruction)
+Every frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. ${hasArea ? 'The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.' : 'The creature is painted by the same hand as the style key, so it could sit inside that picture without looking like a different artist made it.'}`;
 
 function build(t) {
   const m0 = MOVES[t.id]; if (!m0) throw new Error('no moves for ' + t.id);
@@ -29,28 +37,30 @@ function build(t) {
   const boss = m.rank === 'BOSS';
   const likeRef = 'tools/sprite-bake/src/foe-' + t.id + '-v1.png';
   const hasLike = fs.existsSync(likeRef);
-  const refs = hasLike ? [KEY, likeRef] : [KEY];
+  const areaRef = AREA_PAINTING[t.area];
+  if (areaRef && !fs.existsSync(areaRef)) throw new Error('missing area painting ' + areaRef);
+  const refs = [KEY].concat(areaRef ? [areaRef] : [], hasLike ? [likeRef] : []);
+  const likeNo = areaRef ? 3 : 2;
   const sig = m.acts.length ? m.acts[m.acts.length - 1] : 'its attack';
   const cell = boss ? 384 : 256, n = boss ? 6 : 4;
   const px = Math.round(t.inches * 5);
   const frames = boss
     ? ['STANCE: battle stance, idle and ready, weight settled.', 'FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.', `ATTACK 1: the wind-up for its signature attack, ${sig}.`, 'ATTACK 2: the attack building, bigger and more intense.', 'ATTACK 3: the attack landing at full force.', 'ATTACK 4: the follow-through, settling back.']
     : ['STANCE: battle stance, idle and ready, weight settled.', 'FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.', `ATTACK A: the wind-up for its signature attack, ${sig}.`, 'ATTACK B: the attack landing.'];
-  const att = hasLike
-    ? `1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.
-2. A LIKENESS picture of ${m.name} drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw ${m.name} from scratch, painted, keeping the same character.`
-    : `1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.`;
+  const areaAtt = areaRef ? `2. The AREA PAINTING of ${AREAS[t.area]}: the place ${m.name} lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint ${m.name} as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.` : '';
+  const likeAtt = hasLike ? `${likeNo}. A LIKENESS picture of ${m.name} drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw ${m.name} from scratch, handbrushed and painted, keeping the same character.` : '';
+  const att = [`1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.`, areaAtt, likeAtt].filter(Boolean).join('\n');
   const text = `IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else.
 
 WHAT THIS IS
-The battle sheet of the enemy ${m.name.toUpperCase()} (${boss ? 'a BOSS' : 'a regular enemy'}, level ${m.level}) for "The Adventures of Tom", a family role-playing game: ${n} poses of the same character in a single row. The game puts it in front of a painted background of ${AREAS[t.area]}, so its colors should feel at home there but still stand out clearly against it.
+The battle sheet of the enemy ${m.name.toUpperCase()} (${boss ? 'a BOSS' : 'a regular enemy'}, level ${m.level}) for "The Adventures of Tom", a family role-playing game: ${n} poses of the same character in a single row. The game puts it in front of a painted background of ${AREAS[t.area]}, so its colors and handbrushed painted texture should feel at home there${areaRef ? ', painted in the same way as the area painting' : ''}, but it must still stand out clearly against it.
 
 ATTACHED IMAGES (in this order)
 ${att}
 
-${ART_NOTE}
+${artNote(!!areaRef)}
 
-${STYLE}
+${style(!!areaRef)}
 
 THE CREATURE
 ${m.name.toUpperCase()}: ${t.look}. It is about ${t.inches} inches tall (${(t.inches / 12).toFixed(1).replace('.0', '')} feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.${boss ? ' It is a boss, so it is large, imposing and extra detailed, but still funny and friendly-scary.' : ''}
@@ -69,7 +79,7 @@ ${frames.map((f, i) => `${i + 1}. ${f}`).join('\n')}
 
 Family friendly for ages 6 and up. Keep the flinch frame comic, never grim.
 
-NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw ${m.name.toUpperCase()} in the pose described, facing right, with the shape and colors of the likeness${hasLike ? ' in attachment 2' : ' described above'}.`;
+NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw ${m.name.toUpperCase()} in the pose described, facing right, with the shape and colors of the likeness${hasLike ? ' in attachment ' + likeNo : ' described above'}.`;
   return { id: 'enemy-' + t.id, tab: 'Enemies', title: `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: '16:9', refs, prompt: text };
 }
 module.exports = { entries: TABLE.map(build) };
