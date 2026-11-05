@@ -1,3 +1,7 @@
+## 2026-11-05 (198): Tom's new front head stored (not installed, no tag)
+- Tom (11:18): "use this head". Saved as art/raw/characters/tom-head-front-v2.png (front-facing, hair to chin, magenta background). Nothing in the game uses it yet.
+- Tried offline: front walk frames with this head at the old head's hair-to-chin size, neck stump tucked behind the chin. Front view comes out about 2.7% shorter. Shown to Tom as a numbered old-versus-new sheet; install waits for his yes. No-change rebake of bake_tom_walk_v4.py reproduced the repo files exactly.
+
 ## 2026-11-05 (197): Grace's side head set over her torso, floor shadow removed (`gwalk4`)
 - Tom (11:00, from his phone screenshot): "her head is not on correctly in the side view". Fact: in the three side frames the head was placed too far back (her ear sat about 30 game px behind the middle of her torso, so the hair hung far past her back and the face sat above the front of the sweater). Cause: the neck position in the side head picture was a guess (x 254). Fix: the neck axis is now 25 body px in front of the ear (x 424 in the keyed side head, `NECK_X['left']` in tools/sprite-bake/grace_walk_frames.py). Front and back heads unchanged.
 - Also removed the dark magenta floor shadow still showing under her shoes in the step frames (colour rule in `_keyed`).
