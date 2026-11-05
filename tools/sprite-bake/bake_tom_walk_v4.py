@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Bake Tom (v4 walk, 2026-11-04: overworld from the new painted sheet tom-walk-sheet-v2.png, heads untouched; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom (v5 walk, 2026-11-05: overworld walk frames built only from the headless body pictures Tom supplied, see tools/sprite-bake/tom_walk_frames.py; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) and tom-walk-v3.png (3 x 3), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) (the old walk sheets are deleted), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
         data/tom-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -60,20 +60,12 @@ for i, names in enumerate(XSHEETS, 1):
 # never delivers the third cell of a row (step B as a mirror, the passing pose): cells 3 and 6 are ignored and the engine's
 # step2 for down and up is the WHOLE step1 frame flipped left to right (no cutting, no scaling, no head change). Side step2 is
 # cell 9 as painted (a second contact stride, close to cell 8).
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'step2')]
+# 2026-11-05 09:02 (Tom: "purge all existing Tom body walking frames and use only the ones I just provided"): the nine overworld walk frames are
+# built ONLY from his seven headless body pictures and the heads of his three standing paintings (tools/sprite-bake/tom_walk_frames.py).
+# The old walk sheet and side strip are gone. The only alteration is the mirror for front and back step 2.
 from defringe import defringe
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-sheet-v2.png'), [walk_names[0:3], walk_names[3:6], walk_names[6:9]], robust=True).items():
-    poses['w_' + nm] = defringe(im)
-# Side row (13:08): Tom's separate 3 x 1 side strip tom-walk-side-v2.png (faces LEFT, stand, stride, passing pose) replaces the sheet's row 3.
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-walk-side-v2.png'), [['left_stand', 'left_step1', 'left_step2']], robust=True).items():
-    poses['w_' + nm] = defringe(im)
-# 2026-11-05 (Tom: use my painted frames): the FRONT step2 is the painted cell 3 of the sheet (other leg forward, shirt print the right
-# way round). The BACK step2 stays the flipped step1: the sheet's back cells 5 and 6 are the same stride (the one cell that fails every
-# time), and the back of the shirt is plain so a flip shows nothing wrong.
-poses['w_up_step2'] = poses['w_up_step1'].transpose(Image.FLIP_LEFT_RIGHT)
-# Tom's own standing paintings are the three stand frames (hero front, back view, side view; hands in pockets in front and side). Each is
-# keyed, defringed and scaled to the same standing height as the walk sheet's stand (so his real 5'11" is unchanged). Not resized or retouched.
-STAND_SRC = {'down': 'tom-hero-fresh-v1.png', 'up': 'tom-back-view-v1.png', 'left': 'tom-side-view-v1.png'}
+from tom_walk_frames import build as _build_walk
+poses.update(_build_walk()[0])
 
 # ---------------------------------------------------------------- head size (2026-11-01, Tom's call)
 # Every adult's face (hairline to chin) is Justin's 49 battle px, and Tom stands 5'11" = 143 px next to Justin's 6'4" = 153 px (BATTLE_SIZE.tom 1.43).
@@ -261,45 +253,7 @@ def hard(img, thr=0.5):
     a[:, :, 3] = np.where(a[:, :, 3] >= 255 * thr, 255, 0)
     return Image.fromarray(a, 'RGBA')
 
-# (Tom's standing paintings go in here, after scaled_to exists; see STAND_SRC above)
-OW_STAND_H = poses['w_down_stand'].height      # the sheet stand's height, kept for the size factor below so every other frame stays at the size it was
-_GR = {}; _SI = {}
-if not os.environ.get('SHEET_STANDS'):
-    for _v, _f in STAND_SRC.items():
-        _h = poses[f'w_{_v}_stand'].crop(poses[f'w_{_v}_stand'].getbbox()).height
-        _im = defringe(slice_sheet(os.path.join(ROOT, 'art/raw/characters', _f), [['stand']], robust=True)['stand'])
-        _im = _im.crop(_im.getbbox()); _im = scaled_to(_im, _h / _im.height)
-        poses[f'w_{_v}_stand'] = _im
-        print('stand painting', _v, _f, _im.size); _SI[_v] = (_im, _h)
-    # The step frames wear the SAME head painting as the stand (Tom 2026-11-05 08:23: "You're using a literally different head image for walking from
-    # standing"). Not a resize: the stand painting's head and neck (down to just above the collar) replace the sheet's head on each step; the body
-    # stays exactly as painted. Cut rows were read off the finished frames (final px, from the top of the figure), as a fraction of the stand's height.
-    # GRAFT_HEAD=0 keeps the sheet's own step heads.
-    if os.environ.get('GRAFT_HEAD', '1') != '0':
-        CUT = {'down': ((103 - 11) / 376., (91 - 8) / 376.), 'up': ((94 - 10) / 377., (88 - 7) / 377.), 'left': ((111 - 29) / 358., (103 - 29) / 358.)}
-        def _ncx(im, y0, y1):
-            a = np.array(im)[y0:y1, :, 3] > 40; xs = np.where(a.any(0))[0]; return (xs.min() + xs.max()) / 2.0
-        def _graft(step, stand, cs, ct, hh, side=False):
-            st = stand.crop(stand.getbbox()); bd = step.crop(step.getbbox())
-            ys, yt = int(round(cs * hh)), int(round(ct * hh))
-            head = st.crop((0, 0, st.width, ys)); body = bd.crop((0, yt, bd.width, bd.height))
-            hx = _ncx(head, ys - 3, ys); bx = _ncx(body, 0, 3)
-            if side:      # side view: line the back of the neck up (the beard makes the row's centre sit too far forward)
-                _r = lambda im, a, b: np.where((np.array(im)[a:b, :, 3] > 40).any(0))[0].max()
-                hx = _r(head, ys - 3, ys); bx = _r(body, 0, 3)
-            ox = int(round(hx - bx)); x0 = min(0, ox); W = max(head.width, ox + body.width) - x0
-            out = Image.new('RGBA', (W, ys - 3 + body.height), (0, 0, 0, 0)); out.alpha_composite(head, (-x0, 0))
-            arr = np.array(body).astype(float)
-            for i in range(3): arr[i, :, 3] *= (i + 1) / 4.0                 # feather the join over three rows
-            out.alpha_composite(Image.fromarray(arr.astype(np.uint8), 'RGBA'), (ox - x0, ys - 3))   # the body overlaps the head by three rows, so no seam shows
-            return out
-        for _v2, (_i2, _h2) in _SI.items(): _GR[_v2] = (_i2, _h2, CUT[_v2])
-for _v, (_si, _hh, (_cs, _ct)) in _GR.items():
-    for _n in ('step1', 'step2'):
-        poses[f'w_{_v}_{_n}'] = _graft(poses[f'w_{_v}_{_n}'], _si, _cs, _ct, _hh, _v == 'left')
-    print('head grafted', _v)
-if os.environ.get('GRAFT_HEAD', '1') != '0':
-    poses['w_up_step2'] = poses['w_up_step1'].transpose(Image.FLIP_LEFT_RIGHT)
+OW_STAND_H = poses['w_down_stand'].height      # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
