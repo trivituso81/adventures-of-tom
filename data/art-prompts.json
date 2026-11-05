@@ -3851,9 +3851,16 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "not handbrushed painted enough",
+     "from": "v1",
+     "at": 1793921462779
+    }
+   ],
    "id": "area-pier",
    "tab": "Areas",
    "title": "Cattail Pier: painting (fresh generator chat, nothing attached)",
