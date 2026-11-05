@@ -134,6 +134,7 @@ def apply_bob(out):
             res[key] = im.resize((max(1, round(im.width * f)), max(1, round(im.height * f))), Image.LANCZOS)
     return res
 
+SIDE_NECK_EXTRA = float(os.environ.get('SIDE_NECK_EXTRA', '60'))   # extra neck length in the profile frames (frame px; about 1.5 rows of the 42 row figure)
 SIDE_FWD = float(os.environ.get('SIDE_FWD', '40'))              # how far forward the profile head sits in the strides (frame px); the neck leans with it
 SIDE_FWD_STAND = float(os.environ.get('SIDE_FWD_STAND', '75'))   # the standing and passing profile: torso upright, so the head sits further forward (Tom 14:08)
 _FRONT_REF = {}
@@ -181,6 +182,15 @@ def _side_frame(body, fwd=None, neck_head=False):
     sh = _keyed(SIDE_NECK) if neck_head else _side_head(); k = FRONT_CHIN / float(SIDE_CHIN_Y - SIDE_TOP)
     cut = (SIDE_NECK_CUT_Y if neck_head else SIDE_CUT_Y) - SIDE_TOP
     h = sh.crop((0, 0, sh.width, cut)); h = h.resize((max(1, round(h.width * k)), max(1, round(h.height * k))), Image.LANCZOS)
+    # 2026-11-05 15:19 (Tom: "in side views Tom's neck needs to be longer"): lengthen the visible neck by SIDE_NECK_EXTRA frame px. The extra rows are added to the smooth middle of the neck
+    # just under the chin (a vertical stretch of that strip only, 30 px of painted neck), the body then sits that much lower, and the whole profile frame is scaled back uniformly at the end so
+    # Tom's standing height stays what it was (the head and body shrink together by about 3 percent). Front and back are untouched. SIDE_NECK_EXTRA=0 gives the walk18 profile.
+    E = int(SIDE_NECK_EXTRA)
+    if E > 0:
+        r0 = FRONT_CHIN + 10; m = 30
+        top_, mid_, bot_ = h.crop((0, 0, h.width, r0)), h.crop((0, r0, h.width, r0 + m)), h.crop((0, r0 + m, h.width, h.height))
+        mid_ = mid_.resize((h.width, m + E), Image.LANCZOS)
+        nh_ = Image.new('RGBA', (h.width, h.height + E), (0, 0, 0, 0)); nh_.alpha_composite(top_, (0, 0)); nh_.alpha_composite(mid_, (0, r0)); nh_.alpha_composite(bot_, (0, r0 + m + E)); h = nh_
     H0, W0 = h.height, h.width; ch = FRONT_CHIN
     # shear: rows above the chin move forward (left) by SIDE_FWD; rows below ease back to 0 at the bottom of the piece
     arr = np.array(h); out = np.zeros((H0, W0 + int(fwd) + 4, 4), np.uint8)
@@ -190,12 +200,15 @@ def _side_frame(body, fwd=None, neck_head=False):
         out[y, int(fwd) - d: int(fwd) - d + W0] = arr[y]
     h = Image.fromarray(out, 'RGBA')
     # place: the neck front edge at the collar row meets the shirt's front point at the collar bottom
-    ycol = ycf                                   # the collar bottom is at the same height as the front's
+    ycol = ycf + E                               # the collar bottom is at the front's height plus the extra neck (E = 0: the same height as the front's)
     hl = np.where(np.array(h)[int(ycol), :, 3] > 40)[0].min()
     ox = int(hl - cx_front); oy = int(ycol - rc)
     W = max(h.width, ox + body.width) + 4; x0 = min(0, ox); H = max(H0, oy + body.height)
     im = Image.new('RGBA', (W - x0, H), (0, 0, 0, 0)); im.alpha_composite(h, (-x0, 0)); im.alpha_composite(body, (ox - x0, oy))
-    return im.crop(im.getbbox())
+    im = im.crop(im.getbbox())
+    if E > 0:      # back to the standing height the profile had before the longer neck (one uniform scale)
+        sc = (im.height - E) / float(im.height); im = im.resize((max(1, round(im.width * sc)), max(1, round(im.height * sc))), Image.LANCZOS)
+    return im
 
 def _front_frame(body, hero, cut, jr0, s):
     nh = _keyed(FRONT_HEAD); k = FRONT_CHIN / float(nh.height)
