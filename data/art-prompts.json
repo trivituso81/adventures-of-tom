@@ -4133,8 +4133,16 @@
    "group": "Sundial Hollow"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-schoolyard-v1.png",
+     "date": "2026-11-05",
+     "from": "v2",
+     "at": 1793921507607
+    }
+   ],
    "rejects": [],
    "id": "area-schoolyard",
    "tab": "Areas",
