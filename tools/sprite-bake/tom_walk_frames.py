@@ -113,7 +113,26 @@ def build():
         for i in range(NF): arr[-1 - i, :, 3] *= (i + 1) / (NF + 1.0)
         im.alpha_composite(Image.fromarray(arr.astype(np.uint8), 'RGBA'), (hx, 0))
         out[name] = im.crop(im.getbbox())
-    return out, scale
+    return out, scale      # the bob (below) is applied by the bake AFTER the back head is matched, so it sees the final frame heights
+
+# 2026-11-05 (Tom 14:38): Tom's head stayed at one height in every frame, so his walk did not bounce the way Grace's and Rose's do. Their frames keep
+# their natural height differences (Grace: profile strides 1.5 rows lower than her stand; Rose: about 0.5 row), and the head rides with the body.
+# Here each STRIDE frame gets a slightly smaller target height than the stand of its view; stand and pass keep the stand height (the high points of the step).
+# The frame is scaled by ONE uniform factor (head and body together, nothing redrawn or stretched) and stays on the same feet line (the bake puts every frame on the bottom row).
+# Stand frames are not touched, so the front-stand to profile-stand collar match is unchanged. Amounts are rows of the 42 row figure (1 row = 1/42 of a standing Tom).
+BOB_ROWS = {'down': 1.0, 'up': 1.0, 'left': 1.5}     # how much lower a stride frame is than the stand of its view
+BOB_FIGURE_ROWS = 42.0
+def apply_bob(out):
+    """out: dict name -> RGBA with the w_<view>_<stand|step1|step2|pass> frames. Returns a dict with the stride frames rescaled."""
+    res = dict(out)
+    for v in ('down', 'up', 'left'):
+        hs = out['w_%s_stand' % v].crop(out['w_%s_stand' % v].getbbox()).height
+        for n in ('step1', 'step2', 'pass'):
+            key = 'w_%s_%s' % (v, n); im = out[key].crop(out[key].getbbox())
+            target = hs * (1.0 - (BOB_ROWS[v] / BOB_FIGURE_ROWS if n != 'pass' else 0.0))
+            f = target / float(im.height)
+            res[key] = im.resize((max(1, round(im.width * f)), max(1, round(im.height * f))), Image.LANCZOS)
+    return res
 
 SIDE_FWD = float(os.environ.get('SIDE_FWD', '40'))              # how far forward the profile head sits in the strides (frame px); the neck leans with it
 SIDE_FWD_STAND = float(os.environ.get('SIDE_FWD_STAND', '75'))   # the standing and passing profile: torso upright, so the head sits further forward (Tom 14:08)

@@ -245,6 +245,11 @@ if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 skips the back and
     for _d in ('up',):
         poses[f'w_{_d}_step2'] = poses[f'w_{_d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
 
+# 2026-11-05 (Tom 14:38): stride frames a little lower than the stand and pass frames, so the head bobs like Grace's and Rose's (tools/sprite-bake/tom_walk_frames.py apply_bob).
+# Runs after the head matching above so it sees the final frame heights; one uniform scale per frame, stands untouched, feet stay on the bottom row (place() below).
+if os.environ.get('TOM_BOB', '1') != '0':
+    from tom_walk_frames import apply_bob as _apply_bob
+    poses.update(_apply_bob({n: v for n, v in poses.items() if n.startswith('w_') and n[2:].split('_')[0] in ('down', 'up', 'left') and n.split('_')[-1] in ('stand', 'step1', 'step2', 'pass')}))
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k
