@@ -1,3 +1,7 @@
+## 2026-11-05 (202): Bakery and library walk maps from Tom's Area Builder exports (`rmmask1`)
+- Tom (12:41 and 12:43) sent two interior exports (chapter 20 view). Bakery: one tile opened (13,7). The four bakery door tiles (6 to 9, row 14) are the gap between the gate posts; the exit doors already sit on row 15, so nothing was rewired. Library: four tiles opened (3,11), (4,11), (11,11), (12,11) in front of the half wall. Skipped in both: tiles an object footprint already blocks (6 in the bakery, 10 in the library), so the painted furniture stays blocking.
+- Checks: tools/reach_test.py bakery and library (0 fails), tools/rooms_test.py bakery library (FAILS []), mask overlays looked at. Tom taps Clear all edits on both maps so his saved edits do not override the file.
+
 ## 2026-11-05 (201): Tom's side head no longer clipped at the nose (`walk10`)
 - Tom (12:39): "his nose is cut off in 9 and 11" (side stand and side passing pose). Fact: the side head was placed 18 px past the left edge of its canvas on those two narrow bodies, so the nose tip was clipped flat. The side stand had this since the 191 rebuild; the passing pose inherited it. Side step 2 had a 1 px sliver clipped too.
 - Fix in tools/sprite-bake/tom_walk_frames.py: the canvas grows so no head or body pixel is cut. Only left stand, left passing and left step 2 change (5, 5 and 1 px wider); the other nine frames draw identically (checked pixel for pixel).
