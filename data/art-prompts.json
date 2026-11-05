@@ -2012,6 +2012,13 @@
      "date": "2026-11-05",
      "from": "v1",
      "at": 1793842881905
+    },
+    {
+     "n": 2,
+     "file": "art/raw/areas/area-row-cut2-v2.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793893140102
     }
    ],
    "rejects": [],
@@ -2022,7 +2029,7 @@
    "refs": [
     "art/raw/areas/area-row-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Rivituso Row painting.\n\nCopy out only its street lamps from lantern to base, its two green exit boards with both posts and their stone bases, the three house signs with their mounts, the scarecrow and the tomato trellis. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. The attached picture is the approved Rivituso Row painting; if this is the same chat that painted it, you may work from your own painting.\n\nMake a cutout mask of the lane painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.\nKEEP ONLY: every iron street lamp from its lantern down to its base; the two green exit boards (LONG ISLAND / SQUARE and CATTAIL / PIER) with both posts and their stone bases down to the ground; the three house signs (GREGORI, RIVITUSO, AUNT ELLIE) with their mounts; the scarecrow; the tomato trellis.\nEVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: houses, walls, roofs, paths, lawns, trees, fences, garden beds, benches, flowers, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.",
    "group": "Rivituso Row"
   },
   {
