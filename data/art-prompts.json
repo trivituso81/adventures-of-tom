@@ -1947,8 +1947,16 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/enemies/enemy-grump-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793918055482
+    }
+   ],
    "rejects": [],
    "id": "enemy-grump",
    "tab": "Enemies",
