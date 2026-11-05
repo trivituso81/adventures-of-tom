@@ -1,3 +1,7 @@
+## 2026-11-05 (176): Square stencil 2 prompt rewritten to name only what to keep (prompts only)
+- Tom (07:17): stencil 2 came back the same (whole town kept) and "if you mention something in the prompt it's bound to be in the image". Accepted as his verdict.
+- Change (decision, one lever): the `area-square-cut2` prompt no longer lists what becomes magenta (buildings, fountain, benches, props...) or the sign words. It names only the lamps, the three exit boards with posts, the shop signs with brackets and the door lanterns, on a plain flat #FF00FF background. Reference picture left as it was.
+- Files: data/art-prompts.json (hand patch, 300 entries before and after, every other entry identical), tools/art-library/area-prompts.js (`prompt` override on that stencil). No game files, no tag bump.
 ## 2026-11-05 (176): No head resizing rule lifted (docs and tool comments only, no art changed)
 - Tom (07:18): "Let's undo the no head resizing rule. Don't we have another rule for head to body character ratios depending on age?" Yes: `docs/CHARACTER_PIPELINE.md` section 7 (adults about .21 to .22, Grace about .25 per the style key, older kid art .373 walking and .43 battle). It is in force again.
 - Removed: the "No head resizing" section in CLAUDE.md (replaced by a short "Head sizes" note), the override banner at the top of section 7 and the "NEVER resize the head" words in step 4 of the pipeline doc, the warning and docstring banner in tools/sprite-bake/kidhead.py (`grow_head` works silently again), and a comment in bake_tom_walk_v4.py.
