@@ -53,7 +53,7 @@ label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
 <div id="top">
   <select id="mapsel" aria-label="Map"></select>
   <label class="t">Chapter <input id="chap" type="number" min="1" max="20" value="20" style="width:62px"></label>
-  <span id="zoomb"><button data-z="1">1x</button> <button data-z="2">2x</button> <button data-z="3">3x</button></span>
+  <span id="zoomb"><button id="zout" aria-label="Zoom out">&minus;</button> <span id="zlab" style="display:inline-block;min-width:42px;text-align:center">100%</span> <button id="zin" aria-label="Zoom in">+</button> <button id="zfit">Fit</button></span>
   <label class="t">Opacity <input id="op" type="range" min="10" max="90" value="45"></label>
   <span id="legend"></span>
   <a href="#" id="rc" style="color:#ffd34d">Reset colors</a>
@@ -70,7 +70,7 @@ label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
 <div id="main">
   <div id="wrap"><canvas id="cv"></canvas></div>
   <div id="tools">
-    <button data-t="W" class="on">Walk</button><button data-t="B">Block</button><button data-t="D">Door</button><button data-t="E">Exit</button>
+    <button data-t="H">Hand (pan)</button><button data-t="W" class="on">Walk</button><button data-t="B">Block</button><button data-t="D">Door</button><button data-t="E">Exit</button>
     <button data-t="R">Reset tile</button><button data-t="M">Move portal</button>
     <button id="undo">Undo</button><button id="check">Check</button><button id="export">Export</button><button id="clear">Clear all edits</button>
   </div>
@@ -143,11 +143,28 @@ const eff=(x,y)=>ed.tiles[keyOf(x,y)]||sys[y*M.w+x];
 const isPortal=(x,y)=>M.portals.has(keyOf(x,y));
 
 // ---- layout and draw
+// Zoom is a free number (1 = 32 css px per tile). Canvas memory is capped (iPhone Safari refuses canvases over about 16M pixels), so the top zoom depends on the map size.
+const ZMIN=0.2, PIXCAP=16e6;
+function zmax(){ if(!M) return 4; let z=4; while(z>1&&(M.w*32*z+G)*(M.h*32*z+G)>PIXCAP) z-=.05; return z; }
+const clampZ=z=>Math.max(ZMIN,Math.min(zmax(),z));
 function fit(){
-  const z=UI.zoom||(matchMedia('(max-width:700px)').matches?2:1);
-  Tpx=32*z; const cssW=M.w*Tpx+G, cssH=M.h*Tpx+G, dpr=Math.min(3,window.devicePixelRatio||1);
+  const z=clampZ(UI.zoom||(matchMedia('(max-width:700px)').matches?2:1));
+  Tpx=32*z; const cssW=Math.round(M.w*Tpx+G), cssH=Math.round(M.h*Tpx+G);
+  let dpr=Math.min(3,window.devicePixelRatio||1); while(dpr>1&&cssW*cssH*dpr*dpr>PIXCAP) dpr=Math.max(1,dpr-.25);
   cv.style.width=cssW+'px'; cv.style.height=cssH+'px'; cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr); cv.dpr=dpr;
-  for(const b of document.querySelectorAll('#zoomb button')) b.classList.toggle('on',+b.dataset.z===z);
+  $('zlab').textContent=Math.round(z*100)+'%';
+}
+// Zoom about a screen point (default: the middle of the view) so the spot under the fingers stays put.
+function zoomAt(z,cx,cy){
+  z=clampZ(z); if(!M||Math.abs(z-Tpx/32)<.002) return;
+  const wr=$('wrap'), r=wr.getBoundingClientRect(), ox=cx==null?wr.clientWidth/2:cx-r.left, oy=cy==null?wr.clientHeight/2:cy-r.top;
+  const ux=(wr.scrollLeft+ox-G)/Tpx, uy=(wr.scrollTop+oy-G)/Tpx;
+  UI.zoom=z; saveUI(); fit();
+  wr.scrollLeft=G+ux*Tpx-ox; wr.scrollTop=G+uy*Tpx-oy; draw();
+}
+function zoomFit(){
+  if(!M) return; const wr=$('wrap');
+  UI.zoom=clampZ(Math.min((wr.clientWidth-G)/(M.w*32),(wr.clientHeight-G)/(M.h*32))); saveUI(); fit(); wr.scrollLeft=0; wr.scrollTop=0; draw();
 }
 function hex2rgba(h,a){ const n=parseInt(h.slice(1),16); return 'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
 function draw(){
@@ -205,7 +222,8 @@ function draw(){
 const snap=()=>JSON.stringify({t:ed.tiles,n:ed.notes});
 function restore(s){ const o=JSON.parse(s); ed.tiles=o.t; ed.notes=o.n; }
 function tileAt(ev){ const r=cv.getBoundingClientRect(); const x=Math.floor((ev.clientX-r.left-G)/Tpx), y=Math.floor((ev.clientY-r.top-G)/Tpx); return (x>=0&&y>=0&&x<M.w&&y<M.h)?{x,y}:null; }
-let stroke=null, ptrs=new Map(), panLast=null;
+let stroke=null, ptrs=new Map(), pinch=null, panOne=null, spaceDown=false;
+const pinchState=()=>{ const [a,b]=[...ptrs.values()]; return {d:Math.hypot(a.x-b.x,a.y-b.y)||1,x:(a.x+b.x)/2,y:(a.y+b.y)/2}; };
 function apply(x,y){
   const k=keyOf(x,y);
   if(tool==='R'){ delete ed.tiles[k]; delete ed.notes[k]; return; }
@@ -215,22 +233,25 @@ function apply(x,y){
 }
 cv.addEventListener('pointerdown',e=>{
   if(!M) return; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
-  if(ptrs.size>1){ if(stroke){ restore(stroke.before); stroke=null; draw(); } panLast=null; return; }
+  if(ptrs.size>1){ if(stroke){ restore(stroke.before); stroke=null; draw(); } panOne=null; pinch=pinchState(); return; }
   cv.setPointerCapture(e.pointerId);
+  if(tool==='H'||e.button===1||spaceDown){ e.preventDefault(); panOne={x:e.clientX,y:e.clientY}; return; }
   const t=tileAt(e); if(!t) return;
   if(tool==='M'){ doMove(t); return; }
   stroke={before:snap(),newPortals:[]}; apply(t.x,t.y); draw();
 });
 cv.addEventListener('pointermove',e=>{
   if(!ptrs.has(e.pointerId)) return;
-  if(ptrs.size>1){ // two fingers pan the page's scroll area
-    const p=ptrs.get(e.pointerId); const o=[...ptrs.entries()].find(([id])=>id!==e.pointerId)[1];
-    const nx=(e.clientX+o.x)/2, ny=(e.clientY+o.y)/2; if(panLast){ $('wrap').scrollLeft-=nx-panLast.x; $('wrap').scrollTop-=ny-panLast.y; } panLast={x:nx,y:ny}; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); return; }
   ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size>1){ // two fingers: pinch to zoom and drag to pan, both at once
+    const n=pinchState(), wr=$('wrap');
+    if(pinch){ wr.scrollLeft-=n.x-pinch.x; wr.scrollTop-=n.y-pinch.y; zoomAt((Tpx/32)*n.d/pinch.d,n.x,n.y); }
+    pinch=n; return; }
+  if(panOne){ const wr=$('wrap'); wr.scrollLeft-=e.clientX-panOne.x; wr.scrollTop-=e.clientY-panOne.y; panOne={x:e.clientX,y:e.clientY}; return; }
   if(!stroke) return; const t=tileAt(e); if(t){ apply(t.x,t.y); draw(); }
 });
 function endPtr(e){
-  ptrs.delete(e.pointerId); if(ptrs.size<2) panLast=null;
+  ptrs.delete(e.pointerId); if(ptrs.size<2) pinch=null; if(!ptrs.size) panOne=null;
   if(stroke){ const s=stroke; stroke=null; if(snap()!==s.before){ undo.push(s.before); saveEd(); bad=new Set(); if(s.newPortals.length) askNote(s.newPortals); } draw(); }
 }
 cv.addEventListener('pointerup',endPtr); cv.addEventListener('pointercancel',endPtr);
@@ -250,7 +271,13 @@ $('noteNo').onclick=()=>{ hideNote(); draw(); };
 for(const b of document.querySelectorAll('#tools button[data-t]')) b.onclick=()=>{ tool=b.dataset.t; moveFrom=null; for(const x of document.querySelectorAll('#tools button[data-t]')) x.classList.toggle('on',x===b); status(tool==='M'?'Move portal: tap the door or exit, then its new tile.':''); draw(); };
 $('undo').onclick=()=>{ if(!undo.length) return; restore(undo.pop()); saveEd(); bad=new Set(); draw(); };
 $('clear').onclick=()=>{ if(!Object.keys(ed.tiles).length&&!Object.keys(ed.notes).length) return; undo.push(snap()); ed.tiles={}; ed.notes={}; saveEd(); bad=new Set(); draw(); status('All edits for this map cleared.'); };
-for(const b of document.querySelectorAll('#zoomb button')) b.onclick=()=>{ UI.zoom=+b.dataset.z; saveUI(); fit(); draw(); };
+$('zin').onclick=()=>zoomAt((Tpx/32)*1.25); $('zout').onclick=()=>zoomAt((Tpx/32)/1.25); $('zfit').onclick=zoomFit;
+// Mouse and keyboard: Ctrl or Cmd + wheel zooms at the pointer (a plain wheel still scrolls), middle-drag or Space + drag pans, + / - / 0 zoom.
+$('wrap').addEventListener('wheel',e=>{ if(!(e.ctrlKey||e.metaKey)||!M) return; e.preventDefault(); zoomAt((Tpx/32)*Math.exp(-e.deltaY*.0025),e.clientX,e.clientY); },{passive:false});
+addEventListener('keydown',e=>{ if(/INPUT|TEXTAREA|SELECT/.test((e.target.tagName||''))) return;
+  if(e.code==='Space'){ spaceDown=true; e.preventDefault(); }
+  else if(e.key==='+'||e.key==='=') zoomAt((Tpx/32)*1.25); else if(e.key==='-') zoomAt((Tpx/32)/1.25); else if(e.key==='0') zoomFit(); });
+addEventListener('keyup',e=>{ if(e.code==='Space') spaceDown=false; });
 $('op').oninput=()=>{ UI.op=+$('op').value; saveUI(); draw(); };
 for(const id of ['c-obj','c-beh','c-spn','c-npc','c-mon','c-diff']) $(id).onchange=()=>{ UI.ctx=UI.ctx||{}; UI.ctx[id]=$(id).checked; saveUI(); draw(); };
 $('chap').onchange=()=>{ UI.chap=+$('chap').value; saveUI(); saveEd(); };
@@ -290,7 +317,7 @@ function start(){
   $('chap').value=UI.chap||20;
   const q=new URLSearchParams(location.search).get('map'); const W=cw.eval('worlds');
   loadMap(W[q]?q:(W[UI.map]?UI.map:'town'));
-  window.__areas={loadMap,check,exportJSON,get M(){return M;},get sys(){return sys;},get ed(){return ed;},classify,hashOf};
+  window.__areas={loadMap,check,exportJSON,get M(){return M;},get sys(){return sys;},get ed(){return ed;},classify,hashOf,zoomAt,zoomFit,get zoom(){return Tpx/32;}};
   document.documentElement.dataset.ready='1';
 }
 addEventListener('resize',()=>{ if(M){ fit(); draw(); } });

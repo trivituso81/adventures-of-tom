@@ -60,6 +60,8 @@ Project docs: `claude/square-redo.md`, `claude/square-lettering.md` (Square v2 p
 - Row: the house boards almost touch the doors (about 6 to 10 px); the lettering font does not fit the look and feel.
 
 ## Area Builder (areas.html, CHANGES 170)
+
+Zoom and pan (CHANGES 175): pinch to zoom, two fingers to pan, Hand (pan) tool for one-finger pan, minus, plus and Fit buttons. Ctrl or Cmd plus wheel zooms; middle-drag or Space plus drag pans.
 Admin page (title screen > ADMIN > AREA BUILDER) that shows any map's painted plate with the 32 px grid and colours every tile Walkable (green), Blocked (red), Door (yellow) or Exit (blue) from what the running engine builds (`map.solid`, portals). It loads the real game in a hidden frame, so no collision logic is copied. Spec: claude/area-builder.md.
 - Tom paints over tiles (Walk, Block, Door, Exit, Reset tile, Move portal, Undo), runs Check (same rule as `tools/reach_test.py`: flood from the spawn; red X on unreachable tiles) and Exports JSON. Edits live only in his browser (`aot-areas-edit-<mapid>`); the game never reads them.
 - Install: `python3 tools/apply_walkmap.py export.json` (`--dry-run` first). It rewrites that map's `plateMask` rows (`.` walk, `#` block), skips a Walk edit on a tile an object footprint blocks (the object must move), lists every Door or Exit edit with its note (`NEEDS WIRING` if the tile is not a portal today). Portal wiring (exits, `border.open`, doors, arrival tiles, scene coordinates) stays manual. Rooms with no `plateMask` are only reported.

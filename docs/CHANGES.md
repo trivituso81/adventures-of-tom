@@ -1,3 +1,9 @@
+## 2026-11-05 (175): Area Builder: zoom and pan
+- Tom (06:58): "Area builder needs zoom and pan controls." Before, only fixed 1x, 2x, 3x buttons and two-finger scrolling.
+- Phone: pinch with two fingers to zoom (the spot between the fingers stays put) and drag with two fingers to pan, both at once. New Hand (pan) tool: one finger drags the map and paints nothing. One finger still paints with Walk, Block, Door and Exit.
+- Buttons: minus, a percent readout, plus, and Fit (whole map in view). Mouse and keyboard: Ctrl or Cmd plus wheel zooms at the pointer, middle-drag or Space plus drag pans, keys + - 0. A plain wheel still scrolls.
+- Zoom is any value from 20 percent up to 400 percent. Decision: the top zoom is capped so the canvas stays under 16 million pixels (iPhone Safari refuses bigger), and the sharpness drops a little before that cap on the biggest maps rather than failing.
+- Files: areas.html only (untagged page, no tag bump). tools/areas_test.py gained 13 zoom and pan checks (buttons, Fit, anchor stays fixed, Ctrl+wheel, Hand drag, real two-finger pinch and pan through touch events, tap still paints). 0 fails.
 ## 2026-11-05 (174): Walk frames restored, separate overworld size, 10 percent smaller again (`size5`)
 - Tom (07:01): "You lost one of the walking frames, the arms are not moving for Tom and Grace. And the overworld should have its own height and they still need to be 10% smaller."
 - Cause (fact): size4 dropped the standing frame, so every tile held one stride pose and the arms never swung inside a tile.
