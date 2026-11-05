@@ -1802,7 +1802,7 @@
    "group": "The Square"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 1,
@@ -1810,6 +1810,13 @@
      "date": "2026-11-05",
      "from": "v1",
      "at": 1793842190238
+    },
+    {
+     "n": 2,
+     "file": "art/raw/areas/area-square-cut1-v2.png",
+     "date": "2026-11-05",
+     "from": "v6",
+     "at": 1793848282864
     }
    ],
    "rejects": [
