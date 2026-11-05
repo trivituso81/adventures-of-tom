@@ -1,5 +1,8 @@
-// NPC lineup-sheet prompts for the Art Library (tab NPCs). Required by make-prompts.js.
-// One entry = one 3 x 2 lineup sheet of 4 to 6 non-party NPCs who share a place or story. Looks come from the live game palettes
+// NPC prompts for the Art Library (tab NPCs). Required by make-prompts.js.
+// Two-step method (the one that worked for Grace, CHANGES 99 to 104; replaces the 3 x 2 lineups of 11-05, which came out smooth and cartoon, not in the style key): per group of 2 to 3 NPCs,
+//   npc-scene-<keys>  step 1, the group painted INSIDE the school yard painting (gets the dense brushwork), 4:3
+//   npc-cut-<keys>    step 2, the same picture with everything but the people replaced by flat magenta, 4:3
+// then npc-walk-prompts.js builds one walk sheet per person from the cut. Looks come from the live game palettes
 // (scratchpad dump of LE_PALETTES / LA_PALETTES); roles, ages and heights are written below. Assumptions are flagged in the title where they matter.
 const fs = require('fs');
 const path = require('path');
@@ -11,6 +14,7 @@ else PAL = JSON.parse(fs.readFileSync(SNAP, 'utf8'));
 
 const REF_KEY = 'docs/reference/style_key_v1.png';
 const REF_CHART = 'docs/reference/height_chart_v1.png';
+const REF_YARD = 'docs/reference/school_style_ref.png';
 
 // ---- color words from hex ----
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -94,66 +98,87 @@ const BATCHES = [
   { title: 'Jordan and Sam, Dakota and Ryan', keys: ['jordan', 'sam', 'dakota', 'ryan'], note: 'ages and heights assumed' },
 ];
 
-const ART = `ART STYLE
-- Illustrated whimsical realism: every person is a full-body storybook caricature of a real-looking person, painted by hand in the style of attachment 1, with dense painted texture, fine visible brushwork, deep saturated jewel colors and crisp detail on hair strands, fabric folds and shoe edges.
-- Oversized head with a warm, expressive, slightly exaggerated face, a slim body, small hands and small feet. Realistic body proportions below the head: this is NOT chibi, NOT cartoonish, no tiny stubby body.
-- Warm golden light from the upper left, a soft warm rim light, a gentle soft shadow only. Clean, crisp edges. No thick or black outlines.
-- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.`;
 
-const PEOPLE = `PROPORTIONS (strict)
-- All adult faces on the sheet are the same size: the head of every adult is about one fifth of that person's full body height, painted at the same scale as the adults in the style key.
-- Children's heads follow Grace and Rose in the style key: an oversized head a little over one quarter of the child's body height, a small body, small hands and small feet.
-- Relative heights follow the real heights given below and the height chart: a 5'11" person stands visibly taller than a 5'2" person, a child stands clearly shorter than the adults. Keep one shared scale for the whole sheet. Heights are measured from the soles of the shoes to the top of the head.`;
+// Groups of 2 to 3 people from each batch (a batch of 6 is 3+3, 5 is 3+2, 4 is 2+2), so every person gets a big cell and one shared scale.
+const GROUPS = [];
+BATCHES.forEach((b, bi) => {
+  const n = b.keys.length, sizes = n === 6 ? [3, 3] : n === 5 ? [3, 2] : [2, 2];
+  let at = 0;
+  for (const sz of sizes) { const keys = b.keys.slice(at, at + sz); at += sz; GROUPS.push({ keys, batch: b.title, la: bi + 1 >= 5, id: keys.join('-') }); }
+});
 
-function cell(i, k) {
-  const c = N[k];
+const STYLE_RULE = `STYLE RULE (the most important instruction)
+Every person looks painted by the same hand as attachments 1 and 2: dense painted texture, fine visible brushwork, deep saturated colors, crisp detail on hair strands, fabric folds and shoe edges. Skin, hair and fabric are matte and textured like paint on canvas, and fabric keeps the woven texture of attachment 1. Faces are realistic caricature faces like the faces in attachment 2, with real skin texture and individual character.`;
+
+function proportions(g) {
+  const kids = g.keys.some(k => N[k].kind === 'child'), adults = g.keys.some(k => N[k].kind !== 'child');
+  const lines = ['PROPORTIONS (strict)'];
+  if (adults) lines.push('- Every adult has an oversized head about one fifth of the full body height, as large relative to the body as the adults in attachment 2, a slim, full-length body with realistic proportions below the head, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. All adults have the SAME head size relative to their bodies.');
+  if (kids) lines.push('- Every child has an oversized head a little over one quarter of the full body height, a small body, small hands and small feet, exactly as the child is drawn in attachment 2.');
+  lines.push('- The head size in attachment 2 wins over any number in this section.');
+  lines.push('- Heights follow the real heights below and the height chart: a taller person stands visibly taller than a shorter one and a child stands clearly shorter than the adults. Heights are measured from the soles of the shoes to the top of the head.');
+  return lines.join('\n');
+}
+
+function lookOf(c) {
   const p = { ...PAL[c.look], ...(c.over || {}) };
-  const sx = c.sex === 'f' ? ['woman', 'her', 'She'] : ['man', 'his', 'He'];
-  const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : sx[0];
-  const him = c.sex === 'f' ? 'her' : 'his';
+  const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : (c.sex === 'f' ? 'woman' : 'man');
   const hair = p.hair ? `${cw(p.hair, HAIR)} hair` : 'no hair visible';
   const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
-  const old = c.age >= 60 ? ' Older: softer, more lined face, a slightly shorter, gentler posture.' : '';
+  const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
+  const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
   const glasses = c.glasses ? ' Round glasses.' : ' No glasses.';
-  const pants = p.pants === p.shirt ? `matching trousers in the same color` : `trousers in ${cw(p.pants, CLOTH)}`;
-  return `${i}. ${c.name.toUpperCase()}: a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}. Skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, plain simple shoes; ${hat}.${glasses}${old} Pose and accessory: ${acc(c)}.`;
+  return `${c.name.toUpperCase()}: a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}. Skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, plain simple shoes; ${hat}.${glasses}${old}`;
 }
-const acc = c => c.acc;
 
-function sheet(keys) {
-  const n = keys.length;
-  const cells = keys.map((k, i) => cell(i + 1, k)).join('\n');
-  const empty = n < 6 ? ` Cells ${n + 1} to 6 stay empty: flat magenta only, nothing drawn.` : '';
-  return `IMAGE REQUEST: ONE SINGLE LINEUP SHEET. Return exactly one image, nothing else.
+const names = g => g.keys.map(k => N[k].name);
+const ordinal = ['first', 'second', 'third'];
+
+function scene(g) {
+  const n = g.keys.length, word = n === 2 ? 'two' : 'three';
+  const list = g.keys.map((k, i) => `${i + 1}. ${lookOf(N[k])}`).join('\n');
+  const heights = g.keys.map(k => `${N[k].name} is ${N[k].ft}`).join(', ');
+  return `IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.
 
 WHAT THIS IS
-A lineup sheet of ${n} townsfolk of "The Adventures of Tom", a family role-playing game: each person is painted standing alone, full body, as a character reference. Each person is a distinct individual with their own face, build and style.
+A painting of ${word} townsfolk standing together in the school yard, for "The Adventures of Tom", a family role-playing game. They are painted INSIDE the school yard scene, in the same sitting by the same artist, so that they have exactly the same painted texture as the scene around them. Each is a distinct individual with their own face, build and style.
 
 ATTACHED IMAGES (in this order)
-1. The STYLE KEY, a finished painting of the family in a school yard. This is THE look to match: how it paints people, their faces, hair, clothes, shoes, and the size of the heads. Do not copy any of its people, only its painting style and head size.
-2. A HEIGHT CHART of grey shapes. It shows SIZE ONLY. Do not copy the grey shapes, the grid or the text. Use it only to judge relative heights. An adult shopkeeper in the style key is 5'8".
+1. The school yard painting. This is the BACKGROUND and the STYLE TO MATCH. Keep the school building, paths, signs, lamps, parking area and playground exactly as painted, same framing, nothing removed. Match its dense, jewel-toned painted texture, its fine visible brushwork, its deep saturated colors, its warm lamplight and its level of detail in the people.
+2. The STYLE KEY, a finished painting of the family in this same school yard. Match how it paints people, their faces, hair, clothes and shoes, and the head size and body proportions of its adults and its child. Do not copy any of its people.
+3. A HEIGHT CHART of grey shapes. It shows SIZE ONLY. Do not copy the grey shapes, the grid or the text.
 
-${ART}
+${STYLE_RULE}
 
-${PEOPLE}
+${proportions(g)}
 
-THE SHEET (strict)
-- A grid of 3 columns by 2 rows of equal cells, 512 x 512 pixels each, so the full image is 1536 x 1024. If your tool offers a larger size, keep exactly 3 columns and 2 rows and the 3:2 shape.
-- Exactly ${n} people, one per cell, filled left to right, then top to bottom, in the numbered order below.${empty}
-- Each person stands alone and full body, from the top of the head to the soles of the shoes, facing the viewer in a relaxed three-quarter pose, feet flat on one shared invisible ground line near the bottom of the cell, with a clear margin of at least 8 percent on every side. Nobody touches a cell edge or overlaps a neighbour.
-- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on any person. No magenta glow, spill, tint or fringe on edges or hair strands. No ground, no floor, no cast shadows, no grid lines, borders or cell backgrounds.
-- NO TEXT AT ALL: no names, no captions, no numbers, no labels, no titles, no lettering on clothes.
-- Hands hold only the accessory named for that person. No other props, no animals, no effects.
+THE SCENE
+Use the school yard painting as the whole background. The ${word} people below are the only people in the picture. They stand side by side in one straight row across the wide paved walkway in the middle of the picture, in the numbered order below from left to right, all at the same distance from the camera, with their feet on one line on the paving, evenly spaced with clear space between them. Nobody overlaps a neighbour. Each is large in the frame, full body from the top of the hair to the soles of the shoes, so that the face, hair, fabric weave and shoes can be seen in fine detail, while the school yard stays recognizable behind them. Each stands neutral and relaxed, body turned a little (three quarter) toward the viewer, a warm natural smile, face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible. Each casts a soft shadow on the paving. They are lit by the SAME light as the background: warm orange lamplight from the nearby lamp posts and the school windows, cool blue-violet dusk sky light as fill, with warm rim light on hair and shoulders.
+Heights: ${heights}.
 
-THE ${n} PEOPLE (cell number: name, who, look)
-${cells}
+THE ${n} PEOPLE (left to right)
+${list}
+Keep the outfit exactly as given: every color. Never invent a new accessory, hairstyle or color.
 
-NEVER substitute. Draw exactly these ${n} people, one per cell, in this order, with exactly the colors and heights given. Do not add extra people, do not swap faces between cells, do not invent other clothes. If anything is unclear, draw the person standing relaxed and smiling as described. Family friendly for ages 6 and up.`;
+NEVER substitute. Draw exactly these ${word} people, in this order, with exactly the colors and heights given. Do not add other people, do not swap faces, do not invent other clothes. No text, no labels, no captions, no speech balloons. Family friendly for ages 6 and up. If anything is unclear, draw each person standing relaxed and smiling in the school yard as described.`;
 }
 
-const entries = BATCHES.map((b, i) => ({
-  id: 'npc-batch-' + String(i + 1).padStart(2, '0'), tab: 'NPCs',
-  title: `${b.title}: ${b.keys.map(k => N[k].name).join(', ')} (${b.note})`,
-  ar: '3:2', refs: [REF_KEY, REF_CHART], prompt: sheet(b.keys),
-}));
-module.exports = { entries, N, BATCHES, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART };
+function cut(g) {
+  const n = g.keys.length, word = n === 2 ? 'two' : 'three';
+  return `IMAGE REQUEST: ONE SINGLE EDIT. Return exactly one image, nothing else.
+
+The attached picture is a finished painting of ${word} people standing in a school yard. Keep the ${word} people EXACTLY as painted: do not redraw, repaint, restyle, sharpen or smooth anything about them. Keep every face, hair strand, piece of clothing, pair of shoes, pose, size, position, color, the lighting and the visible painted brushwork and texture exactly as they are, pixel for pixel in feel.
+
+Change ONLY the background: replace everything that is not one of the ${word} people (the school, the paving, the sky, the lamps, the planters, every shadow on the ground) with one flat solid pure magenta #FF00FF filling the whole rest of the image. No ground, no shadow, no gradient, no border, no text, no labels.
+
+No magenta on the people. No magenta glow, spill, tint or fringe on the edges or hair strands. Keep the edges clean and crisp. Draw nothing new and no one else.`;
+}
+
+const entries = [];
+for (const g of GROUPS) {
+  const grp = g.la ? 'Los Angeles people' : 'Long Island people', nm = names(g).join(', ');
+  g.sceneId = 'npc-scene-' + g.id; g.cutId = 'npc-cut-' + g.id;
+  entries.push({ id: g.sceneId, tab: 'NPCs', group: grp, title: `${nm}: step 1, painted in the school yard (${g.batch})`, ar: '4:3', refs: [REF_YARD, REF_KEY, REF_CHART], prompt: scene(g) });
+  entries.push({ id: g.cutId, tab: 'NPCs', group: grp, title: `${nm}: step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [`art/raw/npcs/${g.sceneId}-v1.png`], prompt: cut(g) });
+}
+module.exports = { entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART, STYLE_RULE, lookOf, ordinal };
