@@ -1,3 +1,12 @@
+## 2026-11-05 (185): The Square walk map from Tom's Area Builder export (`sqmask1`)
+- Tom (08:12) sent an Area Builder export for The Square (town): 41 edited tiles, 4 notes. Applied with tools/apply_walkmap.py (system_hash matched, so the map was unchanged since he opened it): 25 plateMask tiles changed.
+- Lanes opened: x 8 and x 20 between the south shops (rows 15 to 20), the gaps at 13,15 15,15 22,15, 17,11, 25,8, 1,14, 11 and 12 on the south street, and the left and right edges (0,9 to 13, 0,21 to 23, 29,12 to 15).
+- North exit to Grump Hollow moved down two rows: now (7..8, 2..3), the Fallen branch gate moved with it. South exit to Rivituso Row moved up one row: now (13..16, 24). A third School exit at (29,12) was added and put under the same locked School gate (chapter 5), so the new tile cannot skip the lock.
+- Neighbours' arrival tiles moved so nobody lands on an exit: Row to Square now (14..16, 23); Grump Hollow to Square now (7,4) and (8,4). Checked: every exit's arrival tile is walkable and not itself an exit.
+- Penny's Pockets: the painted door is two tiles wide, so (23,7) and (24,7) both enter the shop (house spec `doorX:23, door2:true`; engine/world.js reads `doorX`).
+- Decisions: edge tiles Tom painted Walk were opened in `border.open` (the invisible tree wall blocked them); the Important bench object shrank from (4,11) 2 wide to (5,11) 1 wide so (4,11) walks. Not applied: Block on (6,20), Snail Mail's door (left alone; a door cannot be blocked without removing the shop entrance).
+- Tags: data/maps-le.js, engine/world.js, engine/main.js moved to `sqmask1`. Tested: reach_test town, row, hollow all FAILS 0; mask_overlay looked at; smoke FAILS []; camera_clamp FAILS []; Square loads in portrait and landscape with no page errors (tools/shots/sqmask-*.png). tap_test timed out and was not run.
+
 ## 2026-11-05 (184): Quest tracker collapsed to an icon beside the menu icon; battle sound button is a music note (`qicon1`)
 
 - Tom (08:08, 08:11, 08:15). The quest box at the top left is now a "!" icon button, the same size as the menu icon (38 px portrait, 34 px landscape), sitting directly left of it. Tap opens the quest log (current step, checklist, completed list) as a panel under the buttons; tap again closes it (it also closes itself after 15 seconds).

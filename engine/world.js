@@ -105,7 +105,7 @@ function border(map,openings,kind='tree') {
   for(let y=1;y<map.h-1;y++) for(const x of [0,map.w-1]) if(!open.has(key(x,y))) object(map,kind,x,y);
 }
 function placeHouse(map,h,pathEnd) {
-  h.door={x:h.x+Math.floor(h.w/2),y:h.y+h.h-1};
+  h.door={x:(h.doorX!=null?h.doorX:h.x+Math.floor(h.w/2)),y:h.y+h.h-1};   // doorX: the painted door is not in the middle (Penny's Pockets)
   h.area=map.id;
   for(let y=h.y;y<h.y+h.h;y++) for(let x=h.x;x<h.x+h.w;x++) tile(map,x,y,'building',true);
   tile(map,h.door.x,h.door.y,'door');
