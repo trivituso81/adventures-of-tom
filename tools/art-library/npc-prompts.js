@@ -156,4 +156,4 @@ const entries = BATCHES.map((b, i) => ({
   title: `${b.title}: ${b.keys.map(k => N[k].name).join(', ')} (${b.note})`,
   ar: '3:2', refs: [REF_KEY, REF_CHART], prompt: sheet(b.keys),
 }));
-module.exports = { entries };
+module.exports = { entries, N, BATCHES, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART };

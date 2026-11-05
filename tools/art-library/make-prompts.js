@@ -25,7 +25,7 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-sheet-test.txt', 'utf8').trim() },
 ];
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
-for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
+for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'npc-walk-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
   if (fs.existsSync(__dirname + '/' + m + '.js')) ENTRIES.push(...require('./' + m + '.js').entries);
 }
 // Every entry gets a `group` (the collapsible section inside its tab in art.html), derived by groups.js from its id and title. An entry that sets its own `group` keeps it.
