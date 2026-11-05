@@ -1,3 +1,8 @@
+## 2026-11-04 (172): Tom, Grace and Rose 60 percent bigger outdoors too (`size3`)
+- Tom (20:28): "make the main characters 60% bigger in the over world." Reading (decision): houses already had 1.6x since `house1` (167), so this extends the same 1.6x to every outdoor map. Tom, Grace, Rose and Tom carrying Rose only; NPCs and the other party members stay as they are.
+- Change: `owHouseParty` in engine/town-render.js no longer requires being inside a painted house. Feet stay on the same tile; shadow, lean and lift scale with the figure. Tag `town-render.js?v=size3`.
+- Not changed: walk atlases (outdoor k is lower than indoor, so the art is sharper than in rooms), collision, camera.
+
 ## 2026-11-04 (171): Art Library: a stencil's reference picture now follows the newest approved painting
 - Tom: after an area image is rejected and a new one approved, the cutout (stencil) entry still showed the old picture as its reference.
 - Cause (fact): each stencil stores a fixed path to its painting, always `...-v1.png`. Approving a new painting saves `-v2`, `-v3`, but the stencil kept pointing at `-v1`. The Square had v2 approved while its four stencils still pointed at v1.

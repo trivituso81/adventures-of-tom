@@ -26,7 +26,8 @@ function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the si
 // Tom, Grace and Rose are drawn 60% bigger inside painted houses and rooms (Tom 11-04 13:41), on top of everything below. Their walk sheets are baked
 // at about one source pixel per drawn device pixel (art/chars/*-ow.webp, k 7 to 10), so the larger size stays sharp. Feet stay on the same tile.
 const OW_HOUSE_PARTY=1.6;
-function owHouseParty(set) { return set&&(set===OW.tom||set===OW.grace||set===OW.rose||set===OW.tomRide)&&currentMap&&!currentMap.outside&&owInHouse()?OW_HOUSE_PARTY:1; }
+// 2026-11-04 20:28 (Tom): "make the main characters 60% bigger in the over world": the same 1.6 now applies outdoors too, on every map.
+function owHouseParty(set) { return set&&(set===OW.tom||set===OW.grace||set===OW.rose||set===OW.tomRide)?OW_HOUSE_PARTY:1; }
 function owBoost(a,set) {
   const b=owBoostBase(a); return set?b*owHouseParty(set):b;
 }
