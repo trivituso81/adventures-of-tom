@@ -1800,8 +1800,16 @@
    "group": "The Square"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-square-cut3-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793842228864
+    }
+   ],
    "rejects": [],
    "id": "area-square-cut3",
    "tab": "Areas",
