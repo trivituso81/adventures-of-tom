@@ -4099,8 +4099,16 @@
    "group": "Sundial Hollow"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-sundial-cut1-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793921592484
+    }
+   ],
    "rejects": [],
    "id": "area-sundial-cut1",
    "tab": "Areas",
