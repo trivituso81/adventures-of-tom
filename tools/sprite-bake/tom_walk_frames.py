@@ -30,7 +30,7 @@ BODIES = {
     'w_up_stand': 'tom-body-back-stand.png', 'w_up_step1': 'tom-body-back-walk.png', 'w_up_step2': ('tom-body-back-walk.png', 'mirror'),
     'w_left_stand': ('tom-body-side-stand.png', 'mirror'), 'w_left_step1': 'tom-body-side-walk-a.png', 'w_left_step2': 'tom-body-side-walk-b.png',
     # passing poses (arms hanging, between strides). The side picture faces right like his side stand, so it is mirrored to face left like the strides.
-    'w_down_pass': 'tom-body-front-pass.png', 'w_up_pass': 'tom-body-back-pass.png', 'w_left_pass': ('tom-body-side-pass.png', 'mirror')}
+    'w_down_pass': 'tom-body-front-pass.png', 'w_up_pass': 'tom-body-back-pass.png', 'w_left_pass': ('tom-body-side-pass-v2.png', 'mirror')}
 FRONT_HEAD = 'tom-head-front-v2.png'
 FRONT_CHIN = 402      # hair top to chin of the front head in frame px (2026-11-05 13:45, Tom: use the picture he gave, no stretching): his picture scaled uniformly so the head is .242 of the front stand's height, the hero picture's share
 SIDE_HEAD = 'tom-head-side-v3.png'   # Tom's 14:08 head, no neck, nape trimmed on a slant
