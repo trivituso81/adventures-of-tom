@@ -4,7 +4,31 @@ const head = 'IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, 
 const REFS = ['docs/reference/style_key_v1.png'];
 const tail = '\n\nSTYLE\n' + ST + ' No people, no text, no letters, no logo, no watermark, no border.';
 const STRIP = 'It is a horizontal strip that the game repeats side by side with every second copy mirrored, so the left edge and the right edge must show the same content at the same height. ';
-// [id, file, title, ar, size text, body, refs?]
+
+// 2026-11-04 Flight art redo (LA ground, skyline, foreground): full custom prompts, no pixel sizes, no edge-match sentence (the engine blends seams),
+// camera written as parallel projection (as claude/battle-background-prompts.txt CAMERA), reference = the approved people-free ground-le-v4 instead of the style key (four people).
+const REF_LE_GROUND = 'art/raw/flight/flight-ground-le-v4.png';
+const CAM = 'CAMERA (the most important rule): one fixed camera, flat and straight-on, like one layer of a side-scrolling game. PARALLEL projection: every horizontal edge perfectly horizontal, no vanishing point, no perspective, no wide-angle, no tilt, no rotation, no diagonal composition.';
+const tail2 = '\n\nSTYLE\n' + ST + ' No people, no text, no letters, no signs, no logo, no watermark, no border.';
+const STYLE_ONLY = 'The attached picture shows only the painting style and the warm light of this game. Copy nothing from its content: no grass, no runway, no hangars, no trees, no buildings.\n\n';
+const CUSTOM = {
+ 'ground-la': { refs: [REF_LE_GROUND], prompt: head
+  + 'The attached picture is an approved ground layer from the same game. Copy its camera and layout exactly: flat, straight-on, one runway band across the middle, open ground above and below it. Paint the Los Angeles version.\n\n'
+  + 'Paint one picture: the Los Angeles ground layer for the flight scene of the family adventure game "The Adventures of Tom". 16:9, painted full to all four edges.\n\n'
+  + CAM + ' The runway is ONE flat horizontal band running straight from the left edge to the right edge, the same thickness everywhere, nothing converging.\n\n'
+  + 'GROUND ONLY: no sky, no skyline, no palm trees, no buildings, no hangars, no poles, no vehicles, no signs, no lettering. Nothing rises above the ground.\n\n'
+  + 'LAYOUT FROM TOP TO BOTTOM: dry sandy-gold grass from the top edge down to the runway; then the runway band, about one fifth of the picture height, in neutral grey asphalt with very little color (not orange, not brown), a faint dashed white center line and thin white edge lines; then a strip of pale concrete apron with faint expansion joints; then dry sandy-gold grass down to the bottom edge.\n\n'
+  + 'LIGHT: warm golden sunset light from the upper left with soft shadows. The grass glows gold while the asphalt stays grey.' + tail2 },
+ 'skyline-la': { refs: [REF_LE_GROUND], prompt: head + STYLE_ONLY
+  + 'Paint one picture: the Los Angeles skyline layer for the flight scene of the family adventure game "The Adventures of Tom". 16:9, painted full to all four edges.\n\n'
+  + CAM + '\n\n'
+  + 'LAYOUT: ONE horizon band only, in the bottom quarter of the picture, sitting on a perfectly flat straight bottom edge. In the band: the downtown towers in the middle, a few palm trees, the Griffith Observatory domes on a low hill at one side, soft foothill silhouettes behind, a few lit windows just beginning to glow. Do not paint a full panorama: the city is a thin band and the rest of the picture is plain sky.\n\n'
+  + 'THE SKY: everything above the band is ONE smooth empty sunset gradient, deep violet at the top through rose to gold just above the city, with nothing in it: no clouds, no sun, no stars, no birds, no second skyline, no mountains in the sky.' + tail2 },
+ 'fore-la': { refs: [REF_LE_GROUND], prompt: head + STYLE_ONLY
+  + 'Paint one picture: the Los Angeles foreground layer for the flight scene of the family adventure game "The Adventures of Tom". 16:9, painted full to all four edges.\n\n'
+  + CAM + '\n\n'
+  + 'LAYOUT: ONE thin band across the middle of the picture, about one quarter of the picture height. In the band: palm tree tops, low rooftops and the edge of a freeway overpass, seen close to the camera, bold simple shapes, dark and rich in warm sunset shadow with a thin gold rim light on their upper edges. Above and below the band the picture is perfectly plain flat very dark plum (#1A1424), completely empty, with no gradient, no texture and nothing in it. Do not paint a skyline, a sky, a sun or any ground.' + tail2 }
+};// [id, file, title, ar, size text, body, refs?]
 const F = [
  ['cabin', 'cabin', 'Cabin: seat 1A before takeoff (1024 x 1024)', '1:1', 'SQUARE, 1024 x 1024 px',
   'The inside of a passenger airplane cabin seen from seat 1A: a window seat by an oval window with bright morning sky and clouds, a blue-grey seat back in front, a small tray table, the overhead bin above, a cozy and calm mood. Eye level of a seated passenger, a little looking toward the window. The game slowly pans over it on a tall phone, so fill the whole square with interesting but calm detail.'],
@@ -32,7 +56,7 @@ const F = [
   'A painted map of the contiguous United States as an old storybook map, soft parchment-green land with gentle shaded states and tiny trees and mountains, surrounded by plain deep blue ocean (#0152b2) with small lighter wave marks. No state names, no labels, no pins, no text, no compass, no border.']
 ];
 const entries = F.map(([id, file, title, ar, size, body]) => ({
-  id: 'flight-' + id, tab: 'Flight', ar, title: title + ' (replaces art/flight/' + file + '.webp)', refs: REFS,
-  prompt: head + 'The attached picture is the style key: paint in exactly its painting style.\n\nPaint one picture for the flight scene of the family adventure game "The Adventures of Tom". Shape: ' + size + '. Every coordinate scales with the size.\n\n' + body + tail
+  id: 'flight-' + id, tab: 'Flight', ar, title: title + ' (replaces art/flight/' + file + '.webp)', refs: CUSTOM[id] ? CUSTOM[id].refs : REFS,
+  prompt: CUSTOM[id] ? CUSTOM[id].prompt : head + 'The attached picture is the style key: paint in exactly its painting style.\n\nPaint one picture for the flight scene of the family adventure game "The Adventures of Tom". Shape: ' + size + '. Every coordinate scales with the size.\n\n' + body + tail
 }));
 module.exports = { entries };
