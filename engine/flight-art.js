@@ -117,7 +117,7 @@ function flightPaintedCabin(F) {
 // 6 approach, 7 flare, 8 landing roll. Each has an anchor (middle of the body) and 'bot' (wheel bottom below the anchor).
 function fsPlane(i,px,py,s,facing,ang) {
   const P=FLIGHT_ART_META.plane[i];
-  gfx.save(); gfx.translate(px,py); if(ang) gfx.rotate(ang); gfx.scale(facing*s,s);
+  gfx.save(); gfx.translate(px,py); if(ang) gfx.rotate(ang); gfx.scale(-facing*s,s);   // the baked sheet is nose-LEFT (flight-preview.html mirrorX): east (facing 1) flips it to nose-right
   gfx.drawImage(FLIGHT_ART.imgs.plane,P.x,P.y,P.w,P.h,-P.ax,-P.ay,P.w,P.h);
   gfx.restore();
 }
@@ -221,12 +221,13 @@ function flightPaintedMap(F,time) {
   const c=fsCurve(a,b,e,lift),[px,py]=P([c.x,c.y]);
   const pls=Math.max(sc*.62,46/280);
   for(let j=7;j>=1;j--) { const q=e-j*.012; if(q<=0) continue; const cc=fsCurve(a,b,q,lift),[qx,qy]=P([cc.x,cc.y]); fsProp('puff',qx,qy,pls*.2*(1+j*.14),.7*(1-j/8)); }
-  // Heading left: draw the mirrored sprite so the light stays on the upper left. (rotate then mirror: the nose ends up along the heading)
+  // Keep the light on the upper left: the sprite is never turned upside down.
   const left=c.dx<0,turn=fsCurve(a,b,Math.min(1,e+.02),lift).ang-fsCurve(a,b,Math.max(0,e-.02),lift).ang;
   const tn=Math.abs(turn)>1e-4?(left?-turn:turn):0;
   const name=(e<.08||e>.92)?(tn>0?'planeB2':'planeB1'):'planeLvl';
   gfx.save(); gfx.translate(px,py);
-  if(left) { gfx.rotate(Math.atan2(-c.dy,-c.dx)); gfx.scale(-1,1); } else gfx.rotate(c.ang);
+  // The baked props sheet paints the top-view plane nose-LEFT: heading left it only needs the turn, heading right it is mirrored (nose ends up along the heading both ways).
+  if(left) gfx.rotate(Math.atan2(-c.dy,-c.dx)); else { gfx.rotate(c.ang); gfx.scale(-1,1); }
   fsProp(name,0,0,pls,1,{shadow:.28,sx:5*pls,sy:12*pls});
   gfx.restore();
   fsRestore(was);

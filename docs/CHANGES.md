@@ -1,3 +1,9 @@
+## 2026-11-05 (208): The plane flies nose first in every flight view (`flight5`)
+- Tom (13:04): "almost all of the plane animations have the plane facing backwards". Fact: the approved plane sheet paints the nose on the right and the install mirrors every pose to nose-left (flight-preview.html `mirrorX`, 156), but `fsPlane` in engine/flight-art.js still drew facing 1 (east) un-flipped, so the plane flew tail first in every takeoff and landing, both directions. The top-view plane on the map had the same fault (the props sheet is nose-left, the engine assumed nose-right).
+- Fix (engine/flight-art.js only, no picture changed): `fsPlane` uses `scale(-facing*s,s)`; the map plane is turned only when heading left and mirrored when heading right. Smoke and the sprite sheets are untouched.
+- Looked at (flight_test both, portrait and landscape): takeoff, climb, landing in both directions and the map at three moments, nose along the heading every time. I looked at these frames in the earlier install (194) and missed the backwards plane; the flight test only checks that phases play, not which way the plane faces.
+- Not watched on the phone.
+
 ## 2026-11-05 (207): Area Builder Exit goes back to the edit screen, then to the Welcome admin list (`admin2`)
 - Tom (13:02): inside a map (Area Maps or Building Interiors), Exit with Save and exit or Exit without saving now returns to "What do you want to edit?" instead of leaving for the game. The dialog text says so. The changed-this-visit count restarts there.
 - Tom (13:02): Exit pressed on "What do you want to edit?" (or the section lists) now opens the Welcome screen on the ADMIN list with AREA BUILDER highlighted (`index.html?admin=1`, read once in `startSplash`, then removed from the address so a reload shows the normal Welcome screen).
