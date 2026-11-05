@@ -1,3 +1,7 @@
+## 2026-11-05 (203): Six more interior walk maps from Tom's Area Builder exports (`rmmask2`)
+- Tom (12:51) sent exports for greenhouse, post, tea, observatory, shop and taxi (chapter 20 view). Opened (W): greenhouse 11 tiles, post (1,10) and (1,11), tea (1,10) and (1,11), observatory 5 tiles, shop (2,6) and (13,11). Blocked (B): post (12,4), tea (5,11) and (10,11), shop (5,11) and (10,11), taxi (5,11) and (10,11). Skipped (an object footprint already blocks the tile, so the furniture stays solid): greenhouse 1, post 5, tea 7, observatory 7, shop 4, taxi 11. No door edits in any of the six.
+- Checks: reach_test on all six (0 fails), rooms_test greenhouse post tea observatory shop taxi (FAILS []), numbered mask overlays looked at, smoke. Tom taps Clear all edits on these six maps.
+
 ## 2026-11-05 (202): Bakery and library walk maps from Tom's Area Builder exports (`rmmask1`)
 - Tom (12:41 and 12:43) sent two interior exports (chapter 20 view). Bakery: one tile opened (13,7). The four bakery door tiles (6 to 9, row 14) are the gap between the gate posts; the exit doors already sit on row 15, so nothing was rewired. Library: four tiles opened (3,11), (4,11), (11,11), (12,11) in front of the half wall. Skipped in both: tiles an object footprint already blocks (6 in the bakery, 10 in the library), so the painted furniture stays blocking.
 - Checks: tools/reach_test.py bakery and library (0 fails), tools/rooms_test.py bakery library (FAILS []), mask overlays looked at. Tom taps Clear all edits on both maps so his saved edits do not override the file.
