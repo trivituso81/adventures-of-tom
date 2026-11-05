@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14122b">
+<title>Area Builder</title>
+<!-- areas.html: the Area Builder (admin page, spec claude/area-builder.md). Shows any map's painted plate with the 32 px logic grid and colours
+     every tile Walkable / Blocked / Door / Exit from what the running engine does (map.solid, portals), not from the ASCII file. The engine is
+     the real game, loaded in a hidden frame (index.html) so this page never copies collision logic. Tom's paint-over edits live only in this
+     browser (localStorage aot-areas-edit-<mapid>); the game never reads them. Export gives JSON that tools/apply_walkmap.py installs. -->
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#14122b;color:#f4f1ff;font:14px/1.35 -apple-system,system-ui,"Segoe UI",sans-serif;height:100%}
+body{display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid #2c2852;flex:none}
+header h1{font-size:17px;margin:0;flex:1;letter-spacing:.5px}
+a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:8px 2px}
+#top{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:6px 12px;border-bottom:1px solid #2c2852;flex:none;font-size:12px;color:#b9b3e6}
+select,input,button{font:inherit;color:#f4f1ff}
+select,input[type=number],input[type=text]{background:#0f0d24;border:1px solid #3a3566;border-radius:8px;padding:5px 8px;min-height:34px}
+select{max-width:60vw}
+button{background:#0f0d24;border:1px solid #3a3566;border-radius:8px;padding:5px 11px;min-height:36px;cursor:pointer}
+button.on{background:#7b6cff;border-color:#a89dff;color:#fff}
+button:disabled{opacity:.4}
+#main{flex:1;min-height:0;display:flex;flex-direction:column}
+#wrap{flex:1;min-height:0;overflow:auto;position:relative;background:#0b0a1c}
+#cv{display:block;touch-action:none}
+#tools{flex:none;display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;border-top:1px solid #2c2852;background:#1a1737;align-items:center}
+.sw{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#d9d4ff}
+.sw input[type=color]{width:26px;height:26px;padding:0;border:1px solid #fff5;border-radius:6px;background:none;min-height:0}
+#status{font-size:12px;color:#ffd968;min-height:16px;padding:0 12px 4px;flex:none}
+#notebar,#exportbar{display:none;padding:8px 12px;border-top:2px solid #7b6cff;background:#221e46;gap:6px;align-items:center;flex-wrap:wrap;position:fixed;left:0;right:0;bottom:0;z-index:5;max-height:60vh;overflow:auto}
+#notebar input{flex:1;min-width:140px}
+#exportbar textarea{width:100%;height:110px;background:#0f0d24;color:#d9d4ff;border:1px solid #3a3566;border-radius:8px;font:11px/1.3 ui-monospace,monospace}
+label.t{display:inline-flex;align-items:center;gap:4px;font-size:12px}
+#frame{position:absolute;left:0;top:0;width:430px;height:860px;opacity:0;pointer-events:none;border:0;z-index:-1}
+#tip{font-size:11px;color:#8e88c4}
+@media(max-height:500px){header h1,#tip{display:none}header{padding:0 12px}#top{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;padding:3px 12px}#top select{max-width:40vw}#vw{padding:0 12px}#vw summary{padding:2px 0}#status{padding-bottom:1px}#exportbar textarea{height:60px}}
+@media(max-width:700px){#tip{display:none}header{padding:2px 12px}#top{padding:4px 12px}#tools button{min-height:34px;padding:4px 9px}}
+@media(min-width:1000px){
+  #main{flex-direction:row}
+  #tools{flex-direction:column;flex-wrap:nowrap;align-items:stretch;width:210px;border-top:0;border-left:1px solid #2c2852;overflow:auto}
+}
+@media(orientation:landscape) and (max-width:999px){
+  #main{flex-direction:row}
+  #tools{flex-direction:column;flex-wrap:nowrap;align-items:stretch;width:150px;border-top:0;border-left:1px solid #2c2852;overflow:auto}
+}
+</style>
+</head>
+<body>
+<header><a class="back" href="index.html">&lsaquo; Game</a><h1>AREA BUILDER</h1><span id="tip">paint tiles, then Check and Export</span></header>
+<div id="top">
+  <select id="mapsel" aria-label="Map"></select>
+  <label class="t">Chapter <input id="chap" type="number" min="1" max="20" value="20" style="width:62px"></label>
+  <span id="zoomb"><button data-z="1">1x</button> <button data-z="2">2x</button> <button data-z="3">3x</button></span>
+  <label class="t">Opacity <input id="op" type="range" min="10" max="90" value="45"></label>
+  <span id="legend"></span>
+  <a href="#" id="rc" style="color:#ffd34d">Reset colors</a>
+</div>
+<details id="vw" style="border-bottom:1px solid #2c2852;flex:none;font-size:12px;padding:2px 12px"><summary style="cursor:pointer;color:#b9b3e6;padding:4px 0">View options (objects, walk-behind, spawn, NPCs, monsters, edits only)</summary><div id="top2" style="display:flex;flex-wrap:wrap;gap:4px 12px;padding:4px 0">
+  <label class="t"><input type="checkbox" id="c-obj"> Objects</label>
+  <label class="t"><input type="checkbox" id="c-beh"> Walk-behind</label>
+  <label class="t"><input type="checkbox" id="c-spn" checked> Spawn</label>
+  <label class="t"><input type="checkbox" id="c-npc"> NPCs</label>
+  <label class="t"><input type="checkbox" id="c-mon"> Monsters</label>
+  <label class="t"><input type="checkbox" id="c-diff"> Show edits only</label>
+</div></details>
+<div id="status">Loading the game engine...</div>
+<div id="main">
+  <div id="wrap"><canvas id="cv"></canvas></div>
+  <div id="tools">
+    <button data-t="W" class="on">Walk</button><button data-t="B">Block</button><button data-t="D">Door</button><button data-t="E">Exit</button>
+    <button data-t="R">Reset tile</button><button data-t="M">Move portal</button>
+    <button id="undo">Undo</button><button id="check">Check</button><button id="export">Export</button><button id="clear">Clear all edits</button>
+  </div>
+</div>
+<div id="notebar"><span id="notelab">Where does it go?</span><input type="text" id="noteTxt" placeholder="to Aunt Ellie's house"><button id="noteOk">Save</button><button id="noteNo">Skip</button></div>
+<div id="exportbar"><textarea id="exportTxt" readonly></textarea><button id="exportClose">Close</button> <span id="exportMsg" style="font-size:12px;color:#ffd968"></span></div>
+<iframe id="frame" src="index.html" title="engine" aria-hidden="true"></iframe>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const DEF_COL={W:'#2fd25a',B:'#e63946',D:'#ffd34d',E:'#3d8bff'};
+const NAMES={W:'Walkable',B:'Blocked',D:'Door',E:'Exit'};
+let UI={map:'town',zoom:0,op:45,cols:{...DEF_COL},ctx:{spn:true},chap:20};
+try{ Object.assign(UI,JSON.parse(localStorage.getItem('aot-areas-ui')||'{}')); UI.cols={...DEF_COL,...(UI.cols||{})}; }catch(e){}
+const saveUI=()=>{ try{ localStorage.setItem('aot-areas-ui',JSON.stringify(UI)); }catch(e){} };
+let cw=null, M=null, PL=null, img=null, sys=null, ed={tiles:{},notes:{}}, tool='W', Tpx=32, G=26, undo=[], bad=new Set(), moveFrom=null, pendNote=null;
+const G_COLS=n=>{ let s=''; n++; while(n>0){ const r=(n-1)%26; s=String.fromCharCode(65+r)+s; n=Math.floor((n-1)/26); } return s; };
+const keyOf=(x,y)=>x+','+y;
+const status=t=>{ $('status').textContent=t||''; };
+const cv=$('cv'), ctx=cv.getContext('2d');
+
+// ---- engine access
+function engineReady(){ try{ return cw && cw.eval("typeof worlds==='object'&&typeof PLATES==='object'&&Object.keys(worlds).length>5"); }catch(e){ return false; } }
+function waitEngine(){
+  const f=$('frame'); let n=0;
+  const iv=setInterval(()=>{
+    cw=f.contentWindow;
+    if(engineReady()){ clearInterval(iv); start(); }
+    else if(++n>240){ clearInterval(iv); status('The game engine did not load. Reload this page.'); }
+  },250);
+}
+function mapGroups(){
+  const W=cw.eval('worlds'), P=cw.eval('PLATES'), out={Outdoor:[],'Rooms with a painting':[],'Rooms without a painting':[]};
+  for(const id of Object.keys(W)){ const m=W[id];
+    (m.outside?out.Outdoor:(P[id]?out['Rooms with a painting']:out['Rooms without a painting'])).push({id,name:m.name||id}); }
+  return out;
+}
+function buildList(){
+  const g=mapGroups(), sel=$('mapsel'); sel.innerHTML='';
+  for(const k in g){ if(!g[k].length) continue; const og=document.createElement('optgroup'); og.label=k;
+    for(const m of g[k]){ const o=document.createElement('option'); o.value=m.id; o.textContent=m.name+' ('+m.id+')'; og.appendChild(o); }
+    sel.appendChild(og); }
+}
+// Per tile: E / D / W / B from the engine's built map (spec section 5).
+function classify(m){
+  const out=new Array(m.w*m.h);
+  for(let y=0;y<m.h;y++) for(let x=0;x<m.w;x++){
+    const p=m.portals.get(keyOf(x,y)); let c;
+    if(p){ c=(p.kind==='edge'&&m.outside)?'E':'D'; }
+    else c=m.solid[y*m.w+x]===0?'W':'B';
+    out[y*m.w+x]=c;
+  }
+  return out;
+}
+function hashOf(s){ let a=0x811c9dc5,b=0x12345678; const str=s.join(''); for(let i=0;i<str.length;i++){ const c=str.charCodeAt(i); a=Math.imul(a^c,16777619)>>>0; b=Math.imul(b+c,2246822519)>>>0; b^=b>>>13; } return a.toString(16).padStart(8,'0')+b.toString(16).padStart(8,'0'); }
+
+// ---- load a map
+function loadMap(id){
+  M=cw.eval('worlds')[id]; if(!M){ status('No such map: '+id); return; }
+  UI.map=id; saveUI(); $('mapsel').value=id;
+  PL=cw.eval('PLATES')[id]||null; sys=classify(M); undo=[]; bad=new Set(); moveFrom=null; hideNote();
+  try{ const j=JSON.parse(localStorage.getItem('aot-areas-edit-'+id)||'null'); ed=(j&&j.w===M.w&&j.h===M.h)?{tiles:j.tiles||{},notes:j.notes||{}}:{tiles:{},notes:{}}; if(j&&j.chapter) $('chap').value=j.chapter; }catch(e){ ed={tiles:{},notes:{}}; }
+  img=null;
+  if(PL){ const src=PL.src; const im=new Image(); im.onload=()=>{ img=im; draw(); }; im.src=src; }
+  fit(); draw();
+  status(M.name+': '+M.w+' x '+M.h+' tiles. '+(PL?'Painted plate.':'No painted plate (tile render).'));
+}
+function saveEd(){ try{ if(!Object.keys(ed.tiles).length&&!Object.keys(ed.notes).length) localStorage.removeItem('aot-areas-edit-'+UI.map); else localStorage.setItem('aot-areas-edit-'+UI.map,JSON.stringify({w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes})); }catch(e){} }
+const eff=(x,y)=>ed.tiles[keyOf(x,y)]||sys[y*M.w+x];
+const isPortal=(x,y)=>M.portals.has(keyOf(x,y));
+
+// ---- layout and draw
+function fit(){
+  const z=UI.zoom||(matchMedia('(max-width:700px)').matches?2:1);
+  Tpx=32*z; const cssW=M.w*Tpx+G, cssH=M.h*Tpx+G, dpr=Math.min(3,window.devicePixelRatio||1);
+  cv.style.width=cssW+'px'; cv.style.height=cssH+'px'; cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr); cv.dpr=dpr;
+  for(const b of document.querySelectorAll('#zoomb button')) b.classList.toggle('on',+b.dataset.z===z);
+}
+function hex2rgba(h,a){ const n=parseInt(h.slice(1),16); return 'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
+function draw(){
+  if(!M) return; const d=cv.dpr||1; ctx.setTransform(d,0,0,d,0,0); ctx.clearRect(0,0,cv.width,cv.height);
+  const w=M.w,h=M.h,T=Tpx; ctx.fillStyle='#14122b'; ctx.fillRect(0,0,w*T+G,h*T+G);
+  ctx.save(); ctx.translate(G,G);
+  const diff=$('c-diff').checked;
+  if(img) ctx.drawImage(img,0,0,w*T,h*T);
+  else{ const tcol={path:'#8ca974',door:'#a98b5a',exit:'#a98b5a',grass:'#527657',building:'#5a4a40'};
+    for(let y=0;y<h;y++) for(let x=0;x<w;x++){ ctx.fillStyle=tcol[M.tiles[y][x]]||'#3b3b52'; ctx.fillRect(x*T,y*T,T,T); } }
+  const a=UI.op/100;
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+    const k=keyOf(x,y), o=ed.tiles[k], c=o||sys[y*w+x];
+    if(diff&&!o) continue;
+    const walk=(c==='D'||c==='E')?'W':c;
+    ctx.fillStyle=hex2rgba(UI.cols[walk],a); ctx.fillRect(x*T,y*T,T,T);
+    if(c==='D'||c==='E'){ ctx.fillStyle=hex2rgba(UI.cols[c],Math.min(1,a+.25)); ctx.fillRect(x*T+T*.18,y*T+T*.18,T*.64,T*.64); }
+    if(o){ ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.strokeRect(x*T+2.5,y*T+2.5,T-5,T-5); }
+    if((o==='D'||o==='E')&&!isPortal(x,y)&&!(ed.notes[k])){ ctx.setLineDash([4,3]); ctx.strokeStyle='#000'; ctx.lineWidth=2; ctx.strokeRect(x*T+1,y*T+1,T-2,T-2); ctx.setLineDash([]); }
+    else if((o==='D'||o==='E')&&!isPortal(x,y)){ ctx.setLineDash([4,3]); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.strokeRect(x*T+1,y*T+1,T-2,T-2); ctx.setLineDash([]); }
+  }
+  // grid
+  ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1; ctx.beginPath();
+  for(let x=0;x<=w;x++){ ctx.moveTo(x*T+.5,0); ctx.lineTo(x*T+.5,h*T); }
+  for(let y=0;y<=h;y++){ ctx.moveTo(0,y*T+.5); ctx.lineTo(w*T,y*T+.5); }
+  ctx.stroke();
+  // context layers
+  if($('c-obj').checked&&M.objects){ ctx.save(); ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1;
+    for(const o of M.objects){ const x0=o.x*T,y0=o.y*T,ww=(o.w||1)*T,hh=(o.h||1)*T; ctx.strokeRect(x0+.5,y0+.5,ww-1,hh-1);
+      ctx.save(); ctx.beginPath(); ctx.rect(x0,y0,ww,hh); ctx.clip(); ctx.beginPath(); for(let i=-hh;i<ww;i+=7){ ctx.moveTo(x0+i,y0+hh); ctx.lineTo(x0+i+hh,y0); } ctx.stroke(); ctx.restore(); } ctx.restore(); }
+  if($('c-beh').checked){ let pb=null; try{ pb=cw.eval("typeof PLATE_BEHIND!=='undefined'?PLATE_BEHIND:null"); }catch(e){} const zs=pb&&pb[M.id]; const s=(PL?PL.px:64);
+    if(zs){ ctx.save(); ctx.strokeStyle='#ff9bf0'; ctx.lineWidth=2; const f=T/(s/2);   // art px to css px: a tile is s art px
+      const k=T/(PL&&PL.px||64);
+      for(const z of zs){ if(z.pts){ ctx.beginPath(); z.pts.forEach(([px,py],i)=>i?ctx.lineTo(px*k,py*k):ctx.moveTo(px*k,py*k)); ctx.closePath(); ctx.stroke(); }
+        else if(z.rx!=null){ ctx.beginPath(); ctx.ellipse(z.cx*k,z.cy*k,z.rx*k,z.ry*k,0,0,7); ctx.stroke(); }
+        else ctx.strokeRect(z.x*k,z.y*k,z.w*k,z.h*k); } ctx.restore(); } }
+  const dot=(x,y,col,r)=>{ ctx.fillStyle=col; ctx.beginPath(); ctx.arc((x+.5)*T,(y+.5)*T,r||T*.18,0,7); ctx.fill(); ctx.strokeStyle='#000'; ctx.lineWidth=1; ctx.stroke(); };
+  if($('c-npc').checked) for(const n of M.npcs) if(!n.monster) dot(n.x,n.y,'#aaa');
+  if($('c-mon').checked) for(const n of M.npcs) if(n.monster) dot(n.x,n.y,'#a64dff');
+  if($('c-spn').checked&&M.spawn) dot(M.spawn.x,M.spawn.y,'#fff',T*.22);
+  // bad tiles from Check
+  for(const k of bad){ const [x,y]=k.split(',').map(Number); ctx.strokeStyle='#ff1030'; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(x*T+4,y*T+4); ctx.lineTo(x*T+T-4,y*T+T-4); ctx.moveTo(x*T+T-4,y*T+4); ctx.lineTo(x*T+4,y*T+T-4); ctx.stroke(); }
+  if(moveFrom){ ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.strokeRect(moveFrom.x*T+1,moveFrom.y*T+1,T-2,T-2); }
+  ctx.restore();
+  // labels: sticky, so A1-style coordinates stay visible while the map is scrolled
+  const wr=$('wrap'), sx=wr.scrollLeft, sy=wr.scrollTop;
+  ctx.fillStyle='#14122b'; ctx.fillRect(sx,0,w*T+G,G); ctx.fillRect(0,sy,G,h*T+G);   // note: top band at canvas y 0..G, left band at x 0..G, redrawn at the scroll offset below
+  ctx.fillRect(sx,sy,w*T+G,G); ctx.fillRect(sx,sy,G,h*T+G);
+  ctx.fillStyle='#ffd968'; ctx.font='bold '+Math.min(11,T*.4)+'px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  for(let x=0;x<w;x++) ctx.fillText(G_COLS(x),G+x*T+T/2,sy+G/2);
+  for(let y=0;y<h;y++) ctx.fillText(String(y+1),sx+G/2,G+y*T+T/2);
+}
+
+// ---- painting
+const snap=()=>JSON.stringify({t:ed.tiles,n:ed.notes});
+function restore(s){ const o=JSON.parse(s); ed.tiles=o.t; ed.notes=o.n; }
+function tileAt(ev){ const r=cv.getBoundingClientRect(); const x=Math.floor((ev.clientX-r.left-G)/Tpx), y=Math.floor((ev.clientY-r.top-G)/Tpx); return (x>=0&&y>=0&&x<M.w&&y<M.h)?{x,y}:null; }
+let stroke=null, ptrs=new Map(), panLast=null;
+function apply(x,y){
+  const k=keyOf(x,y);
+  if(tool==='R'){ delete ed.tiles[k]; delete ed.notes[k]; return; }
+  if(tool==='M') return;
+  const sysv=sys[y*M.w+x]; if(tool===sysv){ delete ed.tiles[k]; } else ed.tiles[k]=tool;
+  if((tool==='D'||tool==='E')&&!isPortal(x,y)) stroke.newPortals.push(k);
+}
+cv.addEventListener('pointerdown',e=>{
+  if(!M) return; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size>1){ if(stroke){ restore(stroke.before); stroke=null; draw(); } panLast=null; return; }
+  cv.setPointerCapture(e.pointerId);
+  const t=tileAt(e); if(!t) return;
+  if(tool==='M'){ doMove(t); return; }
+  stroke={before:snap(),newPortals:[]}; apply(t.x,t.y); draw();
+});
+cv.addEventListener('pointermove',e=>{
+  if(!ptrs.has(e.pointerId)) return;
+  if(ptrs.size>1){ // two fingers pan the page's scroll area
+    const p=ptrs.get(e.pointerId); const o=[...ptrs.entries()].find(([id])=>id!==e.pointerId)[1];
+    const nx=(e.clientX+o.x)/2, ny=(e.clientY+o.y)/2; if(panLast){ $('wrap').scrollLeft-=nx-panLast.x; $('wrap').scrollTop-=ny-panLast.y; } panLast={x:nx,y:ny}; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); return; }
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(!stroke) return; const t=tileAt(e); if(t){ apply(t.x,t.y); draw(); }
+});
+function endPtr(e){
+  ptrs.delete(e.pointerId); if(ptrs.size<2) panLast=null;
+  if(stroke){ const s=stroke; stroke=null; if(snap()!==s.before){ undo.push(s.before); saveEd(); bad=new Set(); if(s.newPortals.length) askNote(s.newPortals); } draw(); }
+}
+cv.addEventListener('pointerup',endPtr); cv.addEventListener('pointercancel',endPtr);
+function doMove(t){
+  const k=keyOf(t.x,t.y);
+  if(!moveFrom){ if(!isPortal(t.x,t.y)){ status('Tap an existing door or exit first.'); return; } moveFrom=t; status('Now tap the tile it should move to.'); draw(); return; }
+  const before=snap(), from=moveFrom, fk=keyOf(from.x,from.y), kind=sys[from.y*M.w+from.x];
+  if(k!==fk){ ed.tiles[k]=kind; ed.notes[k]='move from '+fk; ed.tiles[fk]='B'; ed.notes[fk]='moved to '+k; undo.push(before); saveEd(); }
+  moveFrom=null; status('Moved '+fk+' to '+k+'. Claude rewires the real target at install.'); draw();
+}
+function askNote(keys){ pendNote=keys; $('notelab').textContent='Where does '+keys.map(k=>{ const [x,y]=k.split(',').map(Number); return G_COLS(x)+(y+1); }).slice(0,4).join(', ')+(keys.length>4?'...':'')+' go?'; $('noteTxt').value=''; $('notebar').style.display='flex'; }
+function hideNote(){ pendNote=null; $('notebar').style.display='none'; }
+$('noteOk').onclick=()=>{ const t=$('noteTxt').value.trim(); if(t&&pendNote){ for(const k of pendNote) ed.notes[k]=t; saveEd(); } hideNote(); draw(); };
+$('noteNo').onclick=()=>{ hideNote(); draw(); };
+
+// ---- toolbar
+for(const b of document.querySelectorAll('#tools button[data-t]')) b.onclick=()=>{ tool=b.dataset.t; moveFrom=null; for(const x of document.querySelectorAll('#tools button[data-t]')) x.classList.toggle('on',x===b); status(tool==='M'?'Move portal: tap the door or exit, then its new tile.':''); draw(); };
+$('undo').onclick=()=>{ if(!undo.length) return; restore(undo.pop()); saveEd(); bad=new Set(); draw(); };
+$('clear').onclick=()=>{ if(!Object.keys(ed.tiles).length&&!Object.keys(ed.notes).length) return; undo.push(snap()); ed.tiles={}; ed.notes={}; saveEd(); bad=new Set(); draw(); status('All edits for this map cleared.'); };
+for(const b of document.querySelectorAll('#zoomb button')) b.onclick=()=>{ UI.zoom=+b.dataset.z; saveUI(); fit(); draw(); };
+$('op').oninput=()=>{ UI.op=+$('op').value; saveUI(); draw(); };
+for(const id of ['c-obj','c-beh','c-spn','c-npc','c-mon','c-diff']) $(id).onchange=()=>{ UI.ctx=UI.ctx||{}; UI.ctx[id]=$(id).checked; saveUI(); draw(); };
+$('chap').onchange=()=>{ UI.chap=+$('chap').value; saveUI(); saveEd(); };
+$('mapsel').onchange=()=>loadMap($('mapsel').value);
+function legend(){ const L=$('legend'); L.innerHTML='';
+  for(const k of 'WBDE'){ const s=document.createElement('span'); s.className='sw'; const i=document.createElement('input'); i.type='color'; i.value=UI.cols[k]; i.oninput=()=>{ UI.cols[k]=i.value; saveUI(); draw(); }; s.appendChild(i); s.appendChild(document.createTextNode(NAMES[k])); L.appendChild(s); } }
+$('rc').onclick=e=>{ e.preventDefault(); UI.cols={...DEF_COL}; saveUI(); legend(); draw(); };
+
+// ---- check (same rule as tools/reach_test.py: flood from spawn; a door or exit counts as reached if it or a neighbour is)
+function reachSet(){
+  const w=M.w,h=M.h, ok=(x,y)=>x>=0&&y>=0&&x<w&&y<h&&eff(x,y)!=='B';
+  const seen=new Set([keyOf(M.spawn.x,M.spawn.y)]), q=[[M.spawn.x,M.spawn.y]];
+  while(q.length){ const [x,y]=q.shift(); for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){ const nx=x+dx,ny=y+dy,k=keyOf(nx,ny); if(!seen.has(k)&&ok(nx,ny)){ seen.add(k); q.push([nx,ny]); } } }
+  return seen;
+}
+function check(){
+  const seen=reachSet(); bad=new Set(); let walk=0, cutPortals=0;
+  for(let y=0;y<M.h;y++) for(let x=0;x<M.w;x++){ const c=eff(x,y); if(c==='B') continue; walk++; if(!seen.has(keyOf(x,y))){ bad.add(keyOf(x,y)); if(c==='D'||c==='E') cutPortals++; } }
+  draw(); status(bad.size?('CHECK: '+bad.size+' walkable tiles cannot be reached from the spawn ('+cutPortals+' of them doors or exits). Red X marks them.'):'CHECK: every walkable tile, door and exit is reachable from the spawn ('+walk+' walkable).');
+  return bad.size;
+}
+$('check').onclick=check;
+
+// ---- export
+function exportJSON(){
+  const o={map:M.id,w:M.w,h:M.h,chapter:+$('chap').value||20,tiles:ed.tiles,notes:ed.notes,system_hash:hashOf(sys)};
+  return JSON.stringify(o);
+}
+$('export').onclick=()=>{ const s=exportJSON(); $('exportTxt').value=s; $('exportbar').style.display='block'; $('exportMsg').textContent='';
+  try{ navigator.clipboard.writeText(s).then(()=>{ $('exportMsg').textContent='Copied to the clipboard.'; },()=>{ $('exportMsg').textContent='Select the text and copy it.'; }); }catch(e){ $('exportMsg').textContent='Select the text and copy it.'; }
+  $('exportTxt').select(); };
+$('exportClose').onclick=()=>{ $('exportbar').style.display='none'; };
+
+function start(){
+  buildList(); legend(); $('op').value=UI.op;
+  for(const id of ['c-obj','c-beh','c-spn','c-npc','c-mon','c-diff']) if(UI.ctx&&UI.ctx[id]!==undefined) $(id).checked=UI.ctx[id];
+  $('chap').value=UI.chap||20;
+  const q=new URLSearchParams(location.search).get('map'); const W=cw.eval('worlds');
+  loadMap(W[q]?q:(W[UI.map]?UI.map:'town'));
+  window.__areas={loadMap,check,exportJSON,get M(){return M;},get sys(){return sys;},get ed(){return ed;},classify,hashOf};
+  document.documentElement.dataset.ready='1';
+}
+addEventListener('resize',()=>{ if(M){ fit(); draw(); } });
+$('wrap').addEventListener('scroll',()=>{ if(M) requestAnimationFrame(draw); },{passive:true});
+waitEngine();
+})();
+</script>
+</body>
+</html>

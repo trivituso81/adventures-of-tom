@@ -1,3 +1,10 @@
+## 2026-11-04 (170): Area Builder admin page (`areas1`)
+- Tom asked for it 11-03 18:06. New `areas.html` (ADMIN > AREA BUILDER on the title screen, a tag bump on engine/splash.js only): pick any map, see the plate with the 32 px grid, tiles coloured Walkable, Blocked, Door, Exit from the real engine's built map. Paint, undo, reset, move a portal, Check (reach), Export JSON, view toggles (objects, walk-behind, spawn, NPCs, monsters, edits only), chapter field (recorded in the export; it does not change the map, since collision is the same in every chapter).
+- Fact: every tile matched `plateMask` for town and row; the only differences are tiles an object footprint blocks (applyPlateMask leaves those solid). No game code reads the edits.
+- `tools/apply_walkmap.py <export.json> [--dry-run]` installs an export into plateMask (an export with no edits changes nothing). `tools/areas_test.py` passes (0 fails). Docs: AREA_PAINTINGS.md "Area Builder".
+- Deviation from the spec (decision): Check floods from the spawn only (reach_test's rule, which the spec names as the truth), not from the spawn plus every door. The mask character is `.` for walk, not a space.
+- Not done on purpose: the chapter dropdown does not re-build the map; portal target wiring in the page.
+
 ## 2026-11-04 (169): Flight art redo, new prompts for LA ground, LA skyline and LA foreground (prompts only, no art changed)
 - Tom (07:47): the LA Flight pictures are still wrong (LA ground v2 was a perspective view with sky, skyline, palms and a hangar sign; LA skyline v5 a full panorama with its own sky; LA foreground a second skyline panorama). Long Island ground v4 is the model that works (flat straight-on band, ground only).
 - Why they missed (fact, from the files): (1) every Flight prompt attached docs/reference/style_key_v1.png (four people, a school, a plaza, a sunset) and the generator copied its content; (2) the camera words ("seen from the side and above at an angle") asked for perspective; (3) pixel sizes the generator cannot deliver (every result is 1280 x 720); (4) "left and right edges must match" cannot be met, the engine blends seams itself.

@@ -58,3 +58,10 @@ Project docs: `claude/square-redo.md`, `claude/square-lettering.md` (Square v2 p
 ## Tom's feedback on the current game (for the install to fix)
 - Square: the east SCHOOL board looked like it pointed north or west because a cobbled street runs north beside it (the walk map allows walking up it, rows 1 to 7, x 27 to 28); a path leads off the west edge (blocked in the mask but painted open). Shop boards sit 10 to 15 px above door tops, some touch awnings. The RIVITUSO ROW board sits at the foot of short posts. All to be fixed by the new painting plus mask changes.
 - Row: the house boards almost touch the doors (about 6 to 10 px); the lettering font does not fit the look and feel.
+
+## Area Builder (areas.html, CHANGES 170)
+Admin page (title screen > ADMIN > AREA BUILDER) that shows any map's painted plate with the 32 px grid and colours every tile Walkable (green), Blocked (red), Door (yellow) or Exit (blue) from what the running engine builds (`map.solid`, portals). It loads the real game in a hidden frame, so no collision logic is copied. Spec: claude/area-builder.md.
+- Tom paints over tiles (Walk, Block, Door, Exit, Reset tile, Move portal, Undo), runs Check (same rule as `tools/reach_test.py`: flood from the spawn; red X on unreachable tiles) and Exports JSON. Edits live only in his browser (`aot-areas-edit-<mapid>`); the game never reads them.
+- Install: `python3 tools/apply_walkmap.py export.json` (`--dry-run` first). It rewrites that map's `plateMask` rows (`.` walk, `#` block), skips a Walk edit on a tile an object footprint blocks (the object must move), lists every Door or Exit edit with its note (`NEEDS WIRING` if the tile is not a portal today). Portal wiring (exits, `border.open`, doors, arrival tiles, scene coordinates) stays manual. Rooms with no `plateMask` are only reported.
+- After installing: `reach_test.py <map>`, smoke, camera_clamp, tap_test, bump the `?v=` on the data file, CHANGES entry, push, then tell Tom to tap Clear all edits for that map.
+- Test: `python3 tools/areas_test.py` (paint, undo, door note, persistence, Check, Export, apply_walkmap dry run, portrait and landscape shots in tools/shots/areas-*.png).
