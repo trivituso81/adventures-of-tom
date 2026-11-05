@@ -1,3 +1,9 @@
+## 2026-11-05 (194): Los Angeles flight pictures installed: ground v3, skyline v6, foreground v2 (`flight4`)
+- Tom approved the three new LA pictures at 09:13 to 09:21 (the redo prompts of 169). `python3 tools/sprite-bake/bake_flight_lib.py 20261105` re-cut all 12 flight files; only art/flight/ground-la.webp (1280 x 653), skyline-la.webp (1280 x 616) and fore-la.webp (1280 x 146) and data/flight-art.js changed. Tag `flight4`.
+- Looked at (flight_test both, portrait and landscape): the plane now takes off and lands ON the LA runway (the old ground was a perspective picture and the plane landed beside it). Flight test ALL OK both directions.
+- Rough spots (fact, from the frames): the skyline strip keeps its own grass and a thin second runway under the skyline, and the foreground strip is a miniature panorama (sky, hangars, palms and a third runway band), so three runway bands show on LA frames. In landscape the Observatory repeats where the skyline tiles. The foreground sits at the bottom and does not cover the plane.
+- Not changed: the other nine flight pictures, engine/flight-art.js, art-prompts.json.
+
 ## 2026-11-05 (193): Tom's side stand body faced right while his head faced left; the body is mirrored (`walk6`)
 Tom (09:22): "in 7 it looks like either the head or body are backwards". Fact: the side stand body he supplied (tom-body-side-stand.png) has the controller print on the right of the chest, so it faces right; his side head and both side walk bodies face left. `tools/sprite-bake/tom_walk_frames.py` now mirrors that one body (frame 7, left stand). Rebaked art/chars/tom-ow.webp, data/tom-hires.js. Nothing else changed.
 
