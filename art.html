@@ -387,6 +387,16 @@ async function commitJson(mutate,message){
   }
   throw new Error('The prompts file kept changing under us. Try again in a minute. (GitHub said '+last.slice(0,160)+')');
 }
+// A picture over 3.5 MB is re-drawn smaller (longest side 2048 px, PNG) before it goes to GitHub: very large uploads are what GitHub answers with a 500. The game bakes every Library picture far below that size.
+async function shrinkBig(b){
+  if(b.size<=3500000) return b;
+  try{
+    const im=await createImageBitmap(b), sc=Math.min(1,2048/Math.max(im.width,im.height)), c=document.createElement('canvas'); c.width=Math.round(im.width*sc); c.height=Math.round(im.height*sc);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    const o=await new Promise(res=>c.toBlob(res,'image/png'));
+    return o&&o.size<b.size?o:b;
+  }catch(x){ return b; }
+}
 async function decide(kind,resKey,btn){
   const r=await tx('readonly',s=>s.get(resKey)); if(!r) return;
   const id=r.id, e=DATA.entries.find(x=>x.id===id); if(!e) return;
@@ -400,11 +410,14 @@ async function decide(kind,resKey,btn){
     const today=new Date().toISOString().slice(0,10), NOWMS=Date.now();
     if(kind==='ok'){
       setMsg(id,'Saving the picture to the game files...');
-      const slug=(e.tab||'misc').toLowerCase(); let k=Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', b64=await blobToB64(r.blob), done=false;
-      for(let tries=0;tries<6&&!done;tries++,k++){
+      const slug=(e.tab||'misc').toLowerCase(); let k=Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', b64=await blobToB64(await shrinkBig(r.blob)), done=false, srv=0;
+      for(let tries=0;tries<9&&!done;tries++){
         path='art/raw/'+slug+'/'+id+'-v'+k+'.png';
         const w=await gh('PUT',path,{message:'Art Library: approve '+id+' v'+k,content:b64,branch:GH_BRANCH});
-        if(w.ok) done=true; else if(w.status!==409&&w.status!==422) throw ghFail(w,'saving the picture');
+        if(w.ok) done=true;
+        else if(w.status===409||w.status===422) k++;
+        else if(w.status>=500&&++srv<=4){ setMsg(id,'GitHub had a hiccup ('+w.status+'). Trying again...'); await new Promise(res=>setTimeout(res,2500*srv)); }   // GitHub 5xx: wait and retry the same file name (2026-11-05)
+        else throw ghFail(w,'saving the picture');
       }
       if(!done) throw new Error('Could not find a free version number for the picture.');
       k--;
