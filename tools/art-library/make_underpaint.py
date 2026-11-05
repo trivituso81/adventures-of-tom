@@ -103,8 +103,9 @@ def make_grid(id):
     cell = 512
     Wc, Hc = cols * cell, rows * cell
     # one scale for all frames so the figure keeps its size from pose to pose
-    maxw = max(r[1] - r[0] for r in runs); maxh = y1 - y0
-    sc = 0.86 * cell / max(maxw, maxh)
+    maxw = max(r[1] - r[0] for r in runs)
+    rows_on = np.where((a > 40).any(axis=1))[0]; maxh = int(rows_on.max() - rows_on.min() + 1)   # the figure's own height, not the sheet row's (11-05: poses filled only 68 percent of the cell)
+    sc = 0.90 * cell / max(maxw, maxh)
     canvas = np.zeros((Hc, Wc, 3), np.uint8); canvas[:] = (255, 0, 255)
     for i, (x0, x1) in enumerate(runs):
         fr = im[:, x0:x1]

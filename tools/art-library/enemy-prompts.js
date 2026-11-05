@@ -30,7 +30,7 @@ const style = hasArea => `ART STYLE
 const artNote = hasArea => `STYLE RULE (the most important instruction)
 Every frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. ${hasArea ? 'The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.' : 'The creature is painted by the same hand as the style key, so it could sit inside that picture without looking like a different artist made it.'}`;
 
-function build(t, grid) {
+function build(t, grid, brushRef) {
   const m0 = MOVES[t.id]; if (!m0) throw new Error('no moves for ' + t.id);
   const m = { ...m0, name: m0.name.replace(/sprite/i, 'Imp') }; // the word sprite pulls the generator toward pixel art
   const realName = m0.name;
@@ -41,8 +41,10 @@ function build(t, grid) {
   const hasLike = fs.existsSync(likeRef);
   const areaRef = AREA_PAINTING[t.area];
   if (areaRef && !fs.existsSync(areaRef)) throw new Error('missing area painting ' + areaRef);
-  const refs = [KEY].concat(areaRef ? [areaRef] : [], hasLike ? [likeRef] : []);
+  const refs = [KEY].concat(areaRef ? [areaRef] : [], hasLike ? [likeRef] : [], brushRef ? [brushRef] : []);
   const likeNo = areaRef ? 3 : 2;
+  const brushNo = likeNo + 1;
+  const brushAtt = brushRef ? `${brushNo}. A FINISHED picture of a different creature, painted in exactly the surface finish wanted for this sheet: matte, with visible brush strokes, ridges of paint, layered color and a canvas grain. Use it ONLY for how the paint looks (the matte finish, the brushwork, the sharpness of the edges). Do not copy its creature, pose or layout: the creature, poses and layout come only from attachment ${likeNo}.` : '';
   const sig = m.acts.length ? m.acts[m.acts.length - 1] : 'its attack';
   const n = boss ? 6 : 4, cols = grid ? (boss ? 3 : 2) : n, rows = grid ? 2 : 1;
   const cell = grid ? 512 : (boss ? 384 : 256);
@@ -53,7 +55,7 @@ function build(t, grid) {
   const areaAtt = areaRef ? `2. The AREA PAINTING of ${AREAS[t.area]}: the place ${m.name} lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint ${m.name} as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.` : '';
   const underAtt = `${likeNo}. A soft COLOR UNDERPAINTING of this whole sheet: the same ${n} poses of ${m.name}, in the same order and in the same positions, blurred on purpose, like a painter's first block-in of color. It fixes each pose's shape, position, size, colors, face and expression, and nothing else. Paint the finished picture over it: repaint every pose in place, with the same layout, the same poses and the same character, and add the fine detail and brushwork the underpainting does not have, such as individual brush strokes, painted texture, highlights, crisp painterly edges and small painted details in the face and surfaces. The finished sheet is sharp, high resolution and richly detailed. Nothing from the underpainting is kept as it is: every edge, texture and highlight is freshly painted.`;
   const likeAtt = hasUnder ? underAtt : hasLike ? `${likeNo}. A LIKENESS picture of ${m.name} drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw ${m.name} from scratch, handbrushed and painted, keeping the same character.` : '';
-  const att = [`1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.`, areaAtt, likeAtt].filter(Boolean).join('\n');
+  const att = [`1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.`, areaAtt, likeAtt, brushAtt].filter(Boolean).join('\n');
   const text = `IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else.
 
 WHAT THIS IS
@@ -64,7 +66,7 @@ ${att}
 
 ${artNote(!!areaRef)}
 
-${style(!!areaRef)}
+${brushRef ? MATTE + '\n\n' : ''}${style(!!areaRef)}
 
 THE CREATURE
 ${m.name.toUpperCase()}: ${t.look}. It is about ${t.inches} inches tall (${(t.inches / 12).toFixed(1).replace('.0', '')} feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.${boss ? ' It is a boss, so it is large, imposing and extra detailed, but still funny and friendly-scary.' : ''}
@@ -84,7 +86,7 @@ ${frames.map((f, i) => `${i + 1}. ${f}`).join('\n')}
 Family friendly for ages 6 and up. Keep the flinch frame comic, never grim.
 
 NEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw ${m.name.toUpperCase()} in the pose described, facing right, with the shape and colors of the likeness${hasLike ? ' in attachment ' + likeNo : ' described above'}.`;
-  return { id: (grid ? 'test-grid-' : 'enemy-') + t.id, tab: 'Enemies', title: grid ? `Library test: ${realName} as a ${cols} x ${rows} grid, repainted over a soft underpainting` : `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: grid ? (boss ? '3:2' : '1:1') : '16:9', refs, prompt: text };
+  return { id: (grid ? 'test-grid-' : 'enemy-') + t.id + (brushRef ? '-matte' : ''), tab: 'Enemies', title: grid ? `Library test: ${realName} as a ${cols} x ${rows} grid, ${brushRef ? 'matte and handbrushed finish copied from an approved picture' : 'repainted over a soft underpainting'}` : `${realName}: ${boss ? 'boss ' : ''}sheet, ${n} frames facing right${hasLike ? '' : ' (no old likeness picture, built from the description)'}`, ar: grid ? (boss ? '3:2' : '1:1') : '16:9', refs, prompt: text };
 }
 
 // ONE pose per picture (11-05 14:55, Tom: more handbrushed, matte not glossy, resolution high enough for an iPad in landscape).
@@ -140,4 +142,4 @@ Family friendly for ages 6 and up. Keep the flinch comic, never grim.`;
   return { id: 'test-one-' + id + '-' + (k === 1 ? 'stance' : 'pose' + k), tab: 'Enemies', title: `Library test: ${m0.name}, ${pose.split(':')[0].toLowerCase()} pose alone, matte and handbrushed${chain ? ' (approve the stance test first)' : ''}`, ar: '1:1', refs, prompt: text };
 }
 
-module.exports = { buildOne, entries: TABLE.map(t => build(t)), gridTest: id => build(TABLE.find(t => t.id === id), true) };
+module.exports = { buildOne, entries: TABLE.map(t => build(t)), gridTest: (id, brushRef) => build(TABLE.find(t => t.id === id), true, brushRef) };

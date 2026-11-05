@@ -25,6 +25,7 @@ const ENTRIES = [
     prompt: fs.readFileSync('tools/art-library/prompts/grace-walk-sheet-test.txt', 'utf8').trim() },
 ];
 ENTRIES.push(require('./enemy-prompts.js').gridTest('mudling'));
+ENTRIES.push(require('./enemy-prompts.js').gridTest('grump', 'art/raw/enemies/test-one-mudling-stance-v1.png'));   // one sheet, matte finish copied from an approved picture (11-05 15:30)
 ENTRIES.push(...[['mudling', 1], ['grump', 1], ['bigshake', 1]].map(([i, k]) => require('./enemy-prompts.js').buildOne(i, k)), require('./enemy-prompts.js').buildOne('mudling', 4, 'art/raw/enemies/test-one-mudling-stance-v1.png'));   // one pose per picture tests (11-05 14:55)   // test card: 2 x 2 grid over a soft underpainting (11-05 14:50)
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
 for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'npc-walk-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'prop-prompts', 'battle-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts']) {
