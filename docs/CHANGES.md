@@ -1,5 +1,13 @@
+## 2026-11-05 (223): New Long Island skyline installed, side-on town band (`flight12`)
+- Tom approved `skyline-le-v5` in the Art Library (side-on band: oaks, clapboard houses, steeple, water tower, bay sliver, empty sky).
+- Baked with the same sky cleanup as LA: `skylineLe` now uses `{gradient:true,cutGround:true}` in flight-preview.html `prepare()`; art/flight/skyline-le.webp is a 1280x168 transparent cutout (was an aerial rooftop band); data/flight-art.js regenerated (`20261105c`). Only skyline-le changed among the 12 files.
+- engine/flight-art.js: LE skyline height from its own aspect (one tile about 2.2 screens wide), capped at 30 percent of the screen height so landscape does not push it off the top.
+- Looked at: takeoff and landing, both directions, portrait and landscape; flight_test both ALL OK.
+- Tags: `flight12` (flight-preview.html by hand).
+
 ## 2026-11-05 (222): Tom's new body for the profile passing pose (`walk16`)
 - Tom (14:18): "use this body for pass". art/raw/characters/tom-body-side-pass-v2.png (headless profile, faces right, mirrored like the others) replaces `tom-body-side-pass.png` for `w_left_pass` in tools/sprite-bake/tom_walk_frames.py. It goes through the same profile placement as the stand (collar bottom at the front's collar height, same head, 85 px forward, neck sloping into the collar), so the pass frame is 1661 frame px (42.0 rows) like the stand. The old pass body file is no longer used.
+
 
 ## 2026-11-05 (221): Tom's new profile head (nape trimmed) and a more forward head in the standing profile (`walk15`)
 - Tom (14:08): the head position is right in the strides; in the standing profile the head should sit more forward; use his new head picture (art/raw/characters/tom-head-side-v3.png, no neck, nape trimmed on a slant).

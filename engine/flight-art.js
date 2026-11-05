@@ -146,7 +146,7 @@ function flightPaintedSide(F,time) {
   // Sky, with the sun put just above the skyline (LA, a low sunset) or high (Long Island).
   fsSky(I['sky'+K],M.sun[inLA?'la':'le'],gy+8,inLA?gy*.78:gy*.4);
   // Skyline stands on the ground's top edge.
-  const skImg=I['skyline'+K],skH=inLA?Math.round(Math.max(H*.12,W*2.4*skImg.naturalHeight/skImg.naturalWidth)):Math.round(Math.max(H*.27,W*.17));   // LA: the strip is a thin skyline, sized so one tile is about 2.4 screens wide (the whole downtown shows)
+  const skImg=I['skyline'+K],skH=inLA?Math.round(Math.max(H*.12,W*2.4*skImg.naturalHeight/skImg.naturalWidth)):Math.round(Math.min(H*.3,Math.max(H*.1,W*2.2*skImg.naturalHeight/skImg.naturalWidth)));   // LE (side-on skyline cutout, 2026-11-05): one tile is about 2.2 screens wide. LA: the strip is a thin skyline, sized so one tile is about 2.4 screens wide (the whole downtown shows)
   fsStrip(skImg,gy-skH+4,skH,-drift*.3);
   // Ground, then the plane's shadow and the plane.
   fsStrip(I['ground'+K],gy,gh,-drift,true);
