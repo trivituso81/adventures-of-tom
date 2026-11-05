@@ -1744,8 +1744,16 @@
    "group": "Nine Scoops"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-square-v1.png",
+     "date": "2026-11-05",
+     "from": "v1",
+     "at": 1793842144487
+    }
+   ],
    "rejects": [],
    "id": "area-square",
    "tab": "Areas",
