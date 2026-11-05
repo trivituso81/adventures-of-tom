@@ -2262,9 +2262,16 @@
    "group": "Los Angeles paintings"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-05",
+     "note": "there should be numbers on the houses but rather the last name of the resident",
+     "from": "v2",
+     "at": 1793842765277
+    }
+   ],
    "id": "area-jpark",
    "tab": "Areas",
    "title": "Jefferson Park: painting, painted redo (1920 x 1536; attach the listed pictures)",
