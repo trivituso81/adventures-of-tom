@@ -33,7 +33,9 @@ BODIES = {
     'w_down_pass': 'tom-body-front-pass.png', 'w_up_pass': 'tom-body-back-pass.png', 'w_left_pass': ('tom-body-side-pass.png', 'mirror')}
 FRONT_HEAD = 'tom-head-front-v2.png'
 FRONT_CHIN = 402      # hair top to chin of the front head in frame px (2026-11-05 13:45, Tom: use the picture he gave, no stretching): his picture scaled uniformly so the head is .242 of the front stand's height, the hero picture's share
-SIDE_HEAD = 'tom-head-side-v2.png'   # Tom's redrawn profile head WITH its neck (13:12 picture); the head is the 13:32 picture exactly (same pixels above the jaw)
+SIDE_HEAD = 'tom-head-side-v3.png'   # Tom's 14:08 head, no neck, nape trimmed on a slant
+SIDE_NECK = 'tom-head-side-v2.png'   # the same head painted with its neck: only its neck (below the jaw) is used, behind the v3 head
+_UNUSED = 'tom-head-side-v2.png'   # Tom's redrawn profile head WITH its neck (13:12 picture); the head is the 13:32 picture exactly (same pixels above the jaw)
 SIDE_TOP, SIDE_CHIN_Y, SIDE_CUT_Y = 118, 1150, 1262   # rows of the 1425 px picture: top of hair, bottom of beard, the neck row where it is as narrow as Tom's headless side body neck
 FRONT_COLLAR = 12     # the collar lands this far below the chin; the neck stump of the headless body is tucked behind the chin
 OW_REF_H = 1669       # front stand height with the old head: the bake's one size factor for ALL frames stays what it was, so back and side do not change
@@ -70,7 +72,7 @@ def build():
             out[name] = _front_frame(body, heads['down'], cut, jr0, s)
             continue
         if v == 'left':
-            out[name] = _side_frame(body); continue
+            out[name] = _side_frame(body, SIDE_FWD_STAND if name in ('w_left_stand', 'w_left_pass') else SIDE_FWD); continue
         h = heads[v].crop((0, 0, heads[v].width, cut)); h = h.resize((max(1, round(h.width * s)), max(1, round(h.height * s))), Image.LANCZOS)
         ha, hb = _span(h, h.height - 2); hw = hb - ha + 1
         # the body row whose width best matches the head piece's cut (search around the standing row)
@@ -91,7 +93,8 @@ def build():
         out[name] = im.crop(im.getbbox())
     return out, scale
 
-SIDE_FWD = float(os.environ.get('SIDE_FWD', '40'))              # how far forward the profile head sits (frame px); the neck leans with it
+SIDE_FWD = float(os.environ.get('SIDE_FWD', '40'))              # how far forward the profile head sits in the strides (frame px); the neck leans with it
+SIDE_FWD_STAND = float(os.environ.get('SIDE_FWD_STAND', '85'))   # the standing and passing profile: torso upright, so the head sits further forward (Tom 14:08)
 _FRONT_REF = {}
 
 def _blue(a):
@@ -108,7 +111,18 @@ def _collar_row_side(body):
         if len(bx) and bx.min() <= xs.min() + 2: return r
     return 70
 
-def _side_frame(body):
+def _side_head():
+    # v3 head as drawn (rows 0 to its bottom) plus the neck of the v2 picture below it; the neck's back edge continues the v3 nape line so it slopes straight down
+    n = np.array(_keyed(SIDE_HEAD)); o = np.array(_keyed(SIDE_NECK)); H = o.shape[0]; W = max(n.shape[1], o.shape[1])
+    out = np.zeros((H, W, 4), np.uint8); out[:o.shape[0], :o.shape[1]] = o                # the v2 picture is the same painting, pixel for pixel, plus the neck
+    ys, xs = np.mgrid[0:H, 0:W]; line = 722 - 1.0 * (ys - 1000)                           # nape line of the v3 picture (x about 722 at row 1000), continued down
+    nh, nw = n.shape[:2]; na = np.zeros((H, W), np.uint8); na[:nh, :nw] = n[:, :, 3]
+    top = ys < 1000
+    out[:, :, 3] = np.where(top, na, np.where(xs > line, 0, out[:, :, 3]))              # above row 1000 the v3 outline (trimmed nape); below it the v2 neck in front of the nape line
+    im = Image.fromarray(out, 'RGBA'); return im.crop(im.getbbox())
+
+def _side_frame(body, fwd=None):
+    fwd = SIDE_FWD if fwd is None else fwd
     # Tom (14:00): the bottom of the collar is at the same height above the ground in the front and the profile; the profile head sits more forward and the neck slopes into the collar.
     # One uniform scale of the side body so collar-bottom-to-feet equals the front's; the head is Tom's profile picture at the front head's height; the neck is sheared so
     # the head sits SIDE_FWD forward while the neck still ends in the collar; the shirt is drawn over the neck, the body's own neck skin above the collar is removed.
@@ -122,16 +136,16 @@ def _side_frame(body):
         if bl[r].any(): skin &= (np.arange(ba.shape[1]) < np.where(bl[r])[0].min() + 0)
         ba[r, skin, 3] = 0
     body = Image.fromarray(ba, 'RGBA')
-    sh = _keyed(SIDE_HEAD); k = FRONT_CHIN / float(SIDE_CHIN_Y - SIDE_TOP)
+    sh = _side_head(); k = FRONT_CHIN / float(SIDE_CHIN_Y - SIDE_TOP)
     cut = SIDE_CUT_Y - SIDE_TOP
     h = sh.crop((0, 0, sh.width, cut)); h = h.resize((max(1, round(h.width * k)), max(1, round(h.height * k))), Image.LANCZOS)
     H0, W0 = h.height, h.width; ch = FRONT_CHIN
     # shear: rows above the chin move forward (left) by SIDE_FWD; rows below ease back to 0 at the bottom of the piece
-    arr = np.array(h); out = np.zeros((H0, W0 + int(SIDE_FWD) + 4, 4), np.uint8)
+    arr = np.array(h); out = np.zeros((H0, W0 + int(fwd) + 4, 4), np.uint8)
     for y in range(H0):
         u = 0.0 if y <= ch else min(1.0, (y - ch) / float(max(1, H0 - 1 - ch))); ss = u * u * (3 - 2 * u)
-        d = int(round(SIDE_FWD * (1 - ss)))
-        out[y, int(SIDE_FWD) - d: int(SIDE_FWD) - d + W0] = arr[y]
+        d = int(round(fwd * (1 - ss)))
+        out[y, int(fwd) - d: int(fwd) - d + W0] = arr[y]
     h = Image.fromarray(out, 'RGBA')
     # place: the neck front edge at the collar row meets the shirt's front point at the collar bottom
     ycol = ycf                                   # the collar bottom is at the same height as the front's
