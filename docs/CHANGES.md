@@ -1,3 +1,8 @@
+## 2026-11-06 (337): Emotions batch 1: chapters 2 to 4 show mood faces and poses (`emo8`)
+- Tom (07:12): trusts the mood calls, go ahead and implement; no verdict needed between batches. `python3 tools/emotion-apply.py 1 2 3 4` found 56 of 56, 95 of 95 and 62 of 62 lines (chapter 1 still 57 of 57); `EMO_CHAPTERS` now 1 to 4; `data/emotion-moods.js` regenerated (264 keys).
+- Tested: all 270 tagged lines in chapters 1 to 4 resolve to the mood in the tsv at runtime (0 mismatches), every face file exists, dialogue portraits checked in portrait and landscape, smoke FAILS: [], unused_voice 0.
+- Tags: `emo8` (data/emotion-moods.js).
+
 ## 2026-11-06 (336): Grace and Rose walking heads 15 percent bigger (`walkhead3`)
 - Tom (02:45): "Make Grace and rose head 15% bigger each". Applies to the walking poses (the conversation was about walking heads); battle art and portraits not touched.
 - `HEAD_FIX` in `tools/sprite-bake/walk_sheet_frames.py`: grace (93 px head, x1.15), rose (90 px head, x1.15), grown about the chin in all nine frames; bodies keep their painted size (`bake_grace_walk_v4.py` and `bake_rose.py` scale from `UNWARPED_H`, and Rose's overworld hug/jump frames use the unwarped stand height too), so each figure is about 3.5 percent taller.
