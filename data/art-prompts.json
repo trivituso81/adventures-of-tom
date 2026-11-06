@@ -3529,7 +3529,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "olivia-ab-livnews-live",
    "tab": "Characters",
    "group": "Olivia",
@@ -3541,7 +3541,16 @@
     "art/raw/characters/olivia-battle-sheet-1-v1.png",
     "art/raw/characters/olivia-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: LivNews Live.\n\nRow 1:\n1. Holding her phone up at face height in a selfie pose, fixing her hair with the other hand.\n2. Smiling brightly at the phone, a polished anchor smile, one eyebrow lifted.\n3. Swinging the phone around to point it ahead, an eager reporter look.\n\nRow 2:\n4. Speaking to the phone with one hand gesturing, mouth open, animated.\n5. Wincing at the phone screen, one eye squeezed shut, reading something rude.\n6. Giving a big beaming smile to the phone, a thumbs up, thrilled."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: LivNews Live.\n\nRow 1:\n1. Holding her phone up at face height in a selfie pose, fixing her hair with the other hand.\n2. Smiling brightly at the phone, a polished anchor smile, one eyebrow lifted.\n3. Swinging the phone around to point it ahead, an eager reporter look.\n\nRow 2:\n4. Speaking to the phone with one hand gesturing, mouth open, animated.\n5. Wincing at the phone screen, one eye squeezed shut, reading something rude.\n6. Giving a big beaming smile to the phone, a thumbs up, thrilled.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-ab-livnews-live-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793995072175
+    }
+   ]
   },
   {
    "status": "draft",
