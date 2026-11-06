@@ -83,7 +83,15 @@ startSplash();
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
-  d.textContent='build wheelboop1';
+<<<<<<< HEAD
+  d.textContent='build towncut1';
+=======
+<<<<<<< Updated upstream
+  d.textContent='build tx1';
+=======
+  d.textContent='build towncut1';
+>>>>>>> Stashed changes
+>>>>>>> 278be29 (Square: cut out Snail Mail sign and Kettle teapot, raise overhang cutoffs so walkers pass behind them (towncut1))
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
 })();

@@ -32,6 +32,23 @@ KEEP_SIGNS = [(269, 3, 427, 288), (1221, 276, 1347, 517), (521, 887, 732, 1167),
 POSTBAND = {'signs': [(380, 165, 425, 245)]}
 MINAREA = {'trees': 1500, 'roofs': 3000, 'signs': 1500, 'props': 1500}   # wall lanterns in the signs mask are small and not painted: area filter drops them
 CLASSES = ['trees', 'roofs', 'signs', 'props']
+# Overhangs (Tom 2026-11-06, `town` walk-behind fix): the Snail Mail sign and the Kettle Cottage teapot hang out over the lane, so anyone walking up the lane
+# (tiles x 6-7 and x 13-15) has a head that reaches into them. The masks never had them, so they are cut here from the plate itself (polygon plus
+# GrabCut, art px). env = the sign board, region = board plus bracket (generous); base = feet line of the lane tile just below the door row.
+SIGN_CUTS = [
+    {'name': 'snailmail', 'base': 1350,
+     'env': [(299, 1109), (437, 1084), (446, 1184), (308, 1204)],
+     'region': [(283, 1040), (447, 1040), (447, 1090), (300, 1093), (283, 1080)]},
+    {'name': 'kettle', 'base': 1350,
+     'env': [(807, 1078), (820, 1073), (835, 1075), (843, 1090), (853, 1096), (873, 1101), (890, 1097), (903, 1097), (913, 1103), (912, 1111), (900, 1118), (890, 1127),
+             (883, 1150), (873, 1173), (860, 1186), (845, 1193), (845, 1201), (779, 1201), (777, 1194), (761, 1185), (755, 1174), (742, 1167), (727, 1157), (717, 1137),
+             (715, 1115), (723, 1107), (738, 1108), (753, 1117), (767, 1108), (787, 1097), (801, 1090)],
+     'region': [(700, 1040), (860, 1040), (860, 1090), (800, 1092), (700, 1082)]},
+]
+# Zones whose base (feet line) was too high for what hangs over the lane: the walker's head is under the overhang but the feet are a row south of the base.
+# Matched by (x, y) of the zone box. 590 = feet of row 8 (stairs under the bakery awning), 1350 = feet of row 20 (the lane under both roofs), 1672 = a hair below the
+# arch posts so anyone standing beside a post on the bottom row is not drawn over it.
+BASE_FIX = {(63, 0): 590, (0, 813): 1350, (469, 874): 1350, (749, 1270): 1672}
 def keyed(img):
     d = np.abs(img.astype(int) - KEY).sum(2)
     return d > 90
@@ -96,6 +113,34 @@ def fit(p, win=26):
     p['pcol'] = pcol
     return rms, float(s), float(dx), float(dy), placed
 DBG = np.zeros((H, W), np.uint8)
+def sign_cut(plate, sc):
+    """Alpha (plate size, uint8) of a hanging sign: the board polygon is sure foreground, gold bracket pixels near it are probable foreground, GrabCut decides the rim."""
+    def poly(pts):
+        m = np.zeros((PH, PW), np.uint8); cv2.fillPoly(m, [np.array(pts, np.int32)], 1); return m.astype(bool)
+    env, reg = poly(sc['env']), poly(sc['region'])
+    both = env | reg
+    ys, xs = np.where(both); x0, x1, y0, y1 = max(0, xs.min() - 14), min(PW, xs.max() + 15), max(0, ys.min() - 14), min(PH, ys.max() + 15)
+    img = plate[y0:y1, x0:x1].copy(); e, r = env[y0:y1, x0:x1], reg[y0:y1, x0:x1]
+    hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    gold = (hsv[..., 0] >= 8) & (hsv[..., 0] <= 30) & (hsv[..., 1] > 110) & (hsv[..., 2] > 70) & (hsv[..., 2] < 235)
+    dil = ndi.binary_dilation(e | r, iterations=7)
+    gm = np.full(e.shape, cv2.GC_BGD, np.uint8)
+    gm[dil] = cv2.GC_PR_BGD
+    gm[r & gold] = cv2.GC_PR_FGD
+    gm[e] = cv2.GC_PR_FGD
+    gm[ndi.binary_erosion(e, iterations=4)] = cv2.GC_FGD
+    bgd, fgd = np.zeros((1, 65)), np.zeros((1, 65))
+    cv2.grabCut(cv2.cvtColor(img, cv2.COLOR_RGB2BGR), gm, None, bgd, fgd, 6, cv2.GC_INIT_WITH_MASK)
+    a = (gm == cv2.GC_FGD) | (gm == cv2.GC_PR_FGD)
+    a = ndi.binary_opening(a, iterations=1) | ndi.binary_erosion(e, iterations=1)
+    lab, n = ndi.label(a)
+    if n > 1:
+        sizes = ndi.sum(a, lab, range(1, n + 1)); a = np.isin(lab, [i + 1 for i, v in enumerate(sizes) if v >= 40])
+    a = ndi.binary_fill_holes(a)
+    a = ndi.binary_erosion(a, iterations=1)
+    af = np.clip(cv2.GaussianBlur(a.astype(np.float32), (0, 0), 0.8), 0, 1)
+    out = np.zeros((PH, PW), np.uint8); out[y0:y1, x0:x1] = (af * 255).astype(np.uint8)
+    return out
 def build():
     pcs = []
     for cls in CLASSES:
@@ -152,6 +197,15 @@ def main():
         p['alpha'] = al
         zones.append((p['cls'], p['zone']))
         rows.append((k, p['cls'], p['bb'], round(p['rms'], 1), round(p['s'], 2), round(p['dx'], 1), round(p['dy'], 1), p['zone'], p.get('removed')))
+    for sc in SIGN_CUTS:
+        al = sign_cut(plate, sc)
+        fg[..., 3] = np.maximum(fg[..., 3], al)
+        ys, xs = np.where(al > 40)
+        x0, x1, y0, y1 = int(xs.min()), int(xs.max()) + 1, int(ys.min()), int(ys.max()) + 1
+        zones.append(('signcut', {'x': x0, 'y': y0, 'w': x1 - x0, 'h': y1 - y0, 'base': sc['base']}))
+        rows.append((len(rows), 'signcut', (0, 0, 0, 0), 0.0, 1.0, 0.0, 0.0, zones[-1][1], sc['name']))
+    for _, z in zones:
+        if (z['x'], z['y']) in BASE_FIX: z['base'] = BASE_FIX[(z['x'], z['y'])]
     fg[..., :3] = plate
     if '--no-save' not in sys.argv and '--zones-only' not in sys.argv:
         Image.fromarray(plate).save(ROOT + '/art/town.webp', quality=88, method=6)
