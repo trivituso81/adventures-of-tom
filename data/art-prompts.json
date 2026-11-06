@@ -145,279 +145,59 @@
    "group": "Test card"
   },
   {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 5,
-     "file": "art/raw/characters/grace-hero-fresh-v5.png",
-     "date": "2026-11-04",
-     "from": "v5",
-     "at": 1793757504000
-    }
-   ],
+   "status": "draft",
+   "versions": [],
    "rejects": [],
-   "id": "grace-hero-fresh",
+   "id": "tom-hero",
    "tab": "Characters",
-   "title": "Grace step 1: fresh stand from your photo (Tom's prompt, 11-03)",
+   "title": "Tom step 1: hero picture from your photo (waiting for your prompt)",
    "ar": "3:4",
    "own": {
-    "slot": "grace-photo",
-    "label": "Photo of the real Grace (face clear)",
+    "slot": "tom-photo",
+    "label": "Photo of the real Tom (face clear)",
     "at": 0
    },
    "refs": [],
-   "prompt": "STYLE: richly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights, saturated jewel-toned colors, crisp clean silhouettes, fine detail, warm golden light from the upper left. \n\nfull body, standing facing straight at the viewer, arms relaxed at her sides, feet a little apart, happy wide toothy smile, on a flat solid magenta background.\n\nPROPORTIONS: a big caricature head. From the top of her hair to her soles she is only about four heads tall. Her head is as wide as her shoulders. \n\nOUTFIT: oversized lavender sweatshirt, baggy heather-gray sweatpants, pink and silver glitter sneakers, a small yellow squishy keychain at her hip.",
-   "group": "Grace"
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 4,
-     "file": "art/raw/characters/grace-hero-fresh-style-v4.png",
-     "date": "2026-11-04",
-     "from": "v6",
-     "at": 1793756551000
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-04",
-     "note": "distorted",
-     "from": "v3"
-    }
-   ],
-   "id": "grace-hero-fresh-style",
-   "tab": "Characters",
-   "title": "Grace step 2: change the style of step 1 (approve step 1 first)",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-v5.png"
-   ],
-   "prompt": "change the style of this image the characters face: richly detailed hand-painted digital illustration. make her keychain a squishy - a gold soup dumpling squishy embedded with diamonds",
-   "group": "Grace"
-  },
-  {
-   "status": "rejected",
-   "versions": [],
-   "rejects": [
-    {
-     "date": "2026-11-04",
-     "note": "states 2 and 3 identical. one should have the other foot forward",
-     "from": "v1",
-     "at": 1793761010554
-    },
-    {
-     "date": "2026-11-04",
-     "note": "The instructions were not followed:Middle: walking toward the viewer, her left foot stepping forward, her right arm swinging forward. Right: walking toward the viewer, her right foot stepping forward, her left arm swinging forward.",
-     "from": "v1",
-     "at": 1793766670086
-    },
-    {
-     "date": "2026-11-04",
-     "note": "Instructions not followed: Middle: her left foot stepping forwars . Right: walking toward the viewer, her right foot stepping forward,",
-     "from": "v2",
-     "at": 1793766825490
-    },
-    {
-     "date": "2026-11-04",
-     "note": "Legs in second frame should be reversed",
-     "from": "v3",
-     "at": 1793766880443
-    },
-    {
-     "date": "2026-11-04",
-     "note": "Wrong leg",
-     "from": "v8",
-     "at": 1793774981146
-    },
-    {
-     "date": "2026-11-04",
-     "note": "Wrong leg is stepping forward",
-     "from": "v9",
-     "at": 1793775011456
-    },
-    {
-     "date": "2026-11-04",
-     "note": "The other leg should be stepping forward",
-     "from": "v11",
-     "at": 1793775139118
-    },
-    {
-     "date": "2026-11-04",
-     "note": "Everything about the pose is correct except the other leg should step forward",
-     "from": "v12",
-     "at": 1793775215399
-    }
-   ],
-   "id": "grace-walk-front",
-   "tab": "Characters",
-   "title": "Grace walk sheet 1 of 3: facing you (Tom, 11-03)",
-   "ar": "16:9",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "One picture of the girl in the attached picture, facing the viewer. Richly detailed hand-painted digital illustration, exactly like the attached picture: same face, hair, outfit, colors and proportions.\nShe must be walking toward the viewer, her left foot stepping forward, her right arm swinging forward.\n",
-   "group": "Grace"
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 1,
-     "file": "art/raw/characters/grace-walk-back-v1.png",
-     "date": "2026-11-04",
-     "from": "v1",
-     "at": 1793775774322
-    }
-   ],
-   "rejects": [],
-   "id": "grace-walk-back",
-   "tab": "Characters",
-   "title": "Grace walk sheet 2 of 3: from behind (Tom, 11-03)",
-   "ar": "16:9",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Three pictures side by side of the girl in the attached picture, seen from behind, showing the back of her hair and outfit. Richly detailed hand-painted digital illustration, exactly like the attached picture: same hair, outfit, colors and proportions.\nLeft: standing still, feet together, arms relaxed at her sides.\nMiddle: walking away from the viewer, her left foot stepping forward, her right arm swinging forward.\nRight: walking away from the viewer, her right foot stepping forward, her left arm swinging forward.\nSame size in all three, feet on one line. Flat solid magenta background. Nothing else: no grid lines, borders or text.",
-   "group": "Grace"
+   "group": "Tom",
+   "prompt": "WAITING FOR TOM'S PROMPT. Do not generate yet: Claude puts Tom's photo prompt here."
   },
   {
    "status": "draft",
    "versions": [],
    "rejects": [],
-   "id": "grace-walk-side",
+   "id": "tom-walk",
    "tab": "Characters",
-   "title": "Grace walk sheet 3 of 3: side view (Tom, 11-03)",
-   "ar": "16:9",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "Three pictures side by side of the girl in the attached picture, in side view facing left. Richly detailed hand-painted digital illustration, exactly like the attached picture: same face, hair, outfit, colors and proportions.\nLeft: standing still, feet together, arms relaxed at her sides.\nMiddle: walking left in a long stride, front leg forward with the heel down, back leg behind with the heel lifted, arms swinging opposite to the legs.\nRight: walking left with her legs passing each other, back foot lifted off the ground with the knee bent.\nSame size in all three, feet on one line. Flat solid magenta background. Nothing else: no grid lines, borders or text.",
-   "group": "Grace"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "grace-walk-sheet-test",
-   "tab": "Characters",
-   "title": "Grace walk TEST: one 3 x 3 sheet, built like Tom's walk sheet (11-04)",
+   "title": "Tom step 2: walk sheet, 9 frames (needs step 1 approved)",
    "ar": "1:1",
-   "refs": [
-    "art/raw/characters/grace-hero-fresh-style-v4.png"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE CHARACTER WALK SHEET. Return exactly one image, nothing else.\n\nATTACH: the hero pose picture of Grace (the reference).\n\nWHAT THIS IS\nWalking frames for \"The Adventures of Tom\", a family role-playing game. The character is Grace, a bright, bossy nine-year-old niece. The attached hero pose is the reference for Grace. Draw her EXACTLY like the reference in every frame: same face, hair, clothes, colors, proportions, art style, level of detail. Keep the face as faithful to the reference as it is in the hero pose, in every frame, including from the side and from behind where hair and ears show.\n\nGRACE'S LOOK (same as the reference)\nLong straight honey-brown hair with golden highlights, falling past her shoulders. Warm brown eyes, a big happy smile, small teal stud earrings. Oversized lavender crew-neck sweatshirt with long sleeves (plain on the back), baggy heather-gray sweatpants, pink and silver glitter sneakers with white soles. A small gold soup dumpling squishy studded with diamonds hangs from a short chain at her left hip. Hands empty.\n\nART STYLE\n- A richly detailed hand-painted digital illustration of a real child, exactly like the attached picture, shown full body. Smooth blended brushwork, glossy highlights on skin and hair, finely painted hair strands. Clothing and fabric are drawn in fine detail.\n- Caricature proportions: a big head, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The head is exactly the size it is in the reference. The face keeps a clear likeness of the reference.\n- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, saturated jewel-toned colors.\n- Crisp clean silhouettes. No thick or black outlines.\n- Painted, realistic. NOT pixel art, NOT 16-bit. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.\n\nTHE SHEET (strict)\n- A grid of 3 columns by 3 rows of equal square cells, 256 x 256 pixels each, so the full image is 768 x 768. If your tool offers a different size, keep exactly 3 columns and 3 rows of equal square cells.\n- Exactly 9 frames, one per cell, filled left to right, top to bottom, in the numbered order below.\n- Camera: a character turnaround at about chest height, full body, straight on for the front and back rows and a true side profile for the third row. No top-down angle.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere in the character. No magenta glow, spill, tint or fringe on the character's edges, hair strands or flyaway hairs. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.\n- Same scale in every cell. Feet on the ground rest on one horizontal line about 24 pixels above the cell bottom.\n- Draw ONLY Grace. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.\n- Same head size, same hair volume and same outfit in every frame. The head is never redrawn smaller or larger from frame to frame.\n- Arms swing opposite to the legs. The two STEP frames of a row mirror each other. STAND frames are neutral.\n\nTHE 9 FRAMES (each clearly different from the others)\n1. DOWN STAND: facing the viewer, feet together, arms at her sides, a happy wide smile.\n2. DOWN STEP A: facing the viewer, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.\n3. DOWN STEP B: mirror of 2.\n4. UP STAND: seen from behind, feet together, arms at her sides. Shows the back of her head, her long hair and the plain lavender back of the sweatshirt.\n5. UP STEP A: seen from behind, the foot on the viewer's left steps away from us, the arm on the viewer's right swings forward.\n6. UP STEP B: mirror of 5.\n7. SIDE STAND: true profile facing LEFT, feet together, arms at her sides.\n8. SIDE STEP A: profile facing left, front leg forward with the heel down, back leg trailing with the heel lifted, near arm back, far arm forward.\n9. SIDE STEP B: profile facing left, the passing moment of the stride, back foot lifted with a bent knee, body slightly higher.\n\nFamily friendly for ages 6 and up.\n\nNEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Grace in the pose described.",
-   "group": "Grace"
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 1,
-     "file": "art/raw/characters/tom-hero-fresh-v1.png",
-     "date": "2026-11-04",
-     "from": "v1",
-     "at": 1793818142438
-    }
-   ],
-   "rejects": [],
-   "id": "tom-hero-fresh",
-   "tab": "Characters",
-   "title": "Tom hero (approved 11-04): the reference for every Tom sheet",
-   "ar": "3:4",
-   "refs": [],
-   "group": "Tom",
-   "prompt": "Already painted and approved. This entry holds the reference picture; do not regenerate it. Tom's walk sheet attaches it."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "tom-walk-sheet",
-   "tab": "Characters",
-   "title": "Tom walk: one 3 x 3 sheet, built like Grace's (11-04)",
-   "ar": "1:1",
-   "refs": [
-    "art/raw/characters/tom-hero-fresh-v1.png"
-   ],
-   "group": "Tom",
-   "prompt": "IMAGE REQUEST: ONE SINGLE CHARACTER WALK SHEET. Return exactly one image, nothing else.\n\nATTACH: the hero pose picture of Tom (the reference).\n\nWHAT THIS IS\nWalking frames for \"The Adventures of Tom\", a family role-playing game. The character is Tom, a calm, dry-humored uncle. The attached hero pose is the reference for Tom. Draw him EXACTLY like the reference in every frame: same face, hair, beard, clothes, shirt print, colors, proportions, art style, level of detail. Keep the face as faithful to the reference as it is in the hero pose, in every frame, including from the side and from behind where hair, ears and the back of the head show.\n\nTOM'S LOOK (same as the reference)\nVery short dark brown hair with gray at the sides, receding at the temples, thin at the crown. Full short salt and pepper beard. Warm brown eyes, a small wry smile. Navy blue crew-neck t-shirt, untucked, with one classic rectangular gray game controller printed on the chest, with a black cross pad on its left, two red round buttons on its right and a gray cord curving up from it (the back of the shirt is plain navy). Washed gray slim jeans. White low-top sneakers with a black swoosh on the side. No watch, no jewelry. Hands empty and out of his pockets in every frame.\n\nART STYLE\n- A richly detailed hand-painted digital illustration of a real man, exactly like the attached picture, shown full body. Smooth blended brushwork, glossy highlights on skin and hair, finely painted hair and beard strands. Clothing, fabric and the shirt print are drawn in fine detail so the controller is readable.\n- Caricature proportions: a big head, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The head is exactly the size it is in the reference. The face keeps a clear likeness of the reference.\n- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, saturated jewel-toned colors.\n- Crisp clean silhouettes. No thick or black outlines.\n- Painted, realistic. NOT pixel art, NOT 16-bit. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.\n\nTHE SHEET (strict)\n- A grid of 3 columns by 3 rows of equal square cells, 256 x 256 pixels each, so the full image is 768 x 768. If your tool offers a different size, keep exactly 3 columns and 3 rows of equal square cells.\n- Exactly 9 frames, one per cell, filled left to right, top to bottom, in the numbered order below.\n- Camera: a character turnaround at about chest height, full body, straight on for the front and back rows and a true side profile for the third row. No top-down angle.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere in the character. No magenta glow, spill, tint or fringe on the character's edges, hair or beard strands. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.\n- Same scale in every cell. Feet on the ground rest on one horizontal line about 24 pixels above the cell bottom.\n- Draw ONLY Tom. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.\n- Same head size, same hair volume and same outfit in every frame. The head is never redrawn smaller or larger from frame to frame.\n- Arms swing opposite to the legs. The two STEP frames of a row mirror each other. STAND frames are neutral.\n\nTHE 9 FRAMES (each clearly different from the others)\n1. DOWN STAND: facing the viewer, feet together, arms at his sides, a small wry smile.\n2. DOWN STEP A: facing the viewer, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.\n3. DOWN STEP B: mirror of 2.\n4. UP STAND: seen from behind, feet together, arms at his sides. Shows the back of his head, the thin crown, and the plain navy back of the shirt.\n5. UP STEP A: seen from behind, the foot on the viewer's left steps away from us, the arm on the viewer's right swings forward.\n6. UP STEP B: mirror of 5.\n7. SIDE STAND: true profile facing LEFT, feet together, arms at his sides.\n8. SIDE STEP A: profile facing left, front leg forward with the heel down, back leg trailing with the heel lifted, near arm back, far arm forward.\n9. SIDE STEP B: profile facing left, the passing moment of the stride, back foot lifted with a bent knee, body slightly higher.\n\nFamily friendly for ages 6 and up.\n\nNEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Tom in the pose described.\n"
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 1,
-     "file": "art/raw/characters/tom-back-view-v1.png",
-     "date": "2026-11-04",
-     "from": "v1",
-     "at": 1793820028326
-    }
-   ],
-   "rejects": [],
-   "id": "tom-back-view",
-   "tab": "Characters",
-   "title": "Tom step 3: back view (approved 11-04)",
-   "ar": "3:4",
-   "refs": [
-    "art/raw/characters/tom-hero-fresh-v1.png"
-   ],
-   "group": "Tom",
-   "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe attached picture is Tom, the reference. Paint the SAME man, in exactly the same hand-painted style, the same proportions, the same head size, the same clothes and colors, seen from directly behind.\n\nFull body, standing straight, feet together, arms relaxed at his sides, hands empty, on one flat solid magenta #FF00FF background. Nothing else in the picture.\n\nFrom behind we see: the back of his head covered in very short dark brown hair with gray at the sides, all the way to the crown; the plain navy back of the t-shirt with no print; washed gray slim jeans; white low-top sneakers with a black swoosh on the outer side of each shoe; the backs of his arms.\n\nRichly detailed hand-painted digital illustration, smooth blended brushwork, glossy highlights on skin and hair, finely painted hair strands, warm golden light from the upper left, saturated jewel-toned colors, crisp clean silhouettes, no thick or black outlines. Painted, realistic. NOT pixel art, NOT 16-bit, no anime style.\n\nNo magenta on the character, no glow or fringe, no shadow on the ground, no text, no border."
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 1,
-     "file": "art/raw/characters/tom-side-view-v1.png",
-     "date": "2026-11-04",
-     "from": "v1",
-     "at": 1793820028326
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-04",
-     "note": "Tom: many issues. Seen: hands in pockets, controller print painted on the side of the shirt, shirt bunched. Face profile from the photo looks right. Made in the Grace step 1 row with Tom's profile photo and the short photo-to-painting prompt.",
-     "from": "v1"
-    },
-    {
-     "date": "2026-11-04",
-     "note": "Tom on v1: style does not match, not hand-painted, glossy; face looks different; hands in pockets. Cause: v1 was made from the photo alone with a prompt that said glossy highlights. v2 prompt: hero attached, matte painted look, arms at sides.",
-     "from": "v1"
-    }
-   ],
-   "id": "tom-side-view",
-   "tab": "Characters",
-   "title": "Tom step 4: side view (attach a photo of your real profile; the hero is attached for you)",
-   "ar": "3:4",
    "own": {
-    "slot": "tom-profile-photo",
-    "label": "Photo of the real Tom in side profile (face clear, facing left if you can)",
-    "at": 0
+    "slot": "tom-photo",
+    "label": "Photo of the real Tom (face clear)",
+    "at": 1
    },
    "refs": [
-    "art/raw/characters/tom-hero-fresh-v1.png"
+    "art/raw/characters/tom-hero-v1.png"
    ],
    "group": "Tom",
-   "prompt": "Two pictures are attached. The painted picture is Tom: copy its painting style exactly (the same hand-painted, illustrated, matte brushwork, the same soft shading, the same colors), its big-head proportions, its head size and its clothes. The photo is the real Tom's face in profile: take the exact shape of his face from it (nose, chin, forehead, beard line, ear, hairline).\n\nPaint the same man as the painted picture, full body, in a true side profile facing LEFT, standing straight, feet together, arms hanging relaxed at his sides, hands empty and open, nothing in his pockets, a small wry smile, on a flat solid magenta background. Nothing else in the picture.\n\nThe head is the same size as in the painted picture. Very short dark brown hair with gray at the sides, full short salt and pepper beard. Plain navy crew-neck t-shirt hanging straight (the chest print does not show from the side), washed gray slim jeans, white low-top sneakers with a black swoosh. No watch, no jewelry.\n\nHand-painted and illustrated, not glossy, not plastic, not a 3D render, not a photo. NOT pixel art, NOT 16-bit, no anime style. No text, no border, no shadow on the ground."
+   "prompt": "IMAGE REQUEST: ONE WALK SHEET. Return exactly one image.\n\nATTACHED: picture 1 is the approved full body picture of this character (the reference). Picture 2 is a photo of the real person.\n\nLIKENESS AND STYLE\n- Draw this character EXACTLY like picture 1 in every frame: same face, hair, clothes, prints, colors, shoes, proportions and head size, in the same painting style and level of detail.\n- Keep the face as faithful to picture 2 as picture 1 is, in every frame, including from the side and from behind where hair and ears show.\n- Painted and realistic, like picture 1. Not pixel art, not 16-bit, not a cartoon, not a 3D render.\n\nTHE SHEET\n- 3 columns by 3 rows of equal square cells (about 768 x 768 in all), filled left to right, top to bottom, in the order below. Exactly 9 frames, one per cell.\n- Background: one flat solid pure magenta #FF00FF over the whole image. No magenta in the character and no magenta glow or fringe on hair or edges. No grid lines, borders, numbers, labels or text.\n- Each figure sits fully inside its cell with at least 10 percent margin; nothing touches a cell edge or a neighbour.\n- Same scale in every cell. Feet rest on one horizontal line near the bottom of each cell. The head is the same size in every frame.\n- Camera at chest height, full body: straight on for rows 1 and 2, a true side profile for row 3. No top-down angle.\n- Only the character. Hands empty. No shadows, effects, motion lines, props or other people.\n- Arms swing opposite to the legs. The two step frames of a row mirror each other.\n\nTHE 9 FRAMES\n1. FRONT STAND: facing the viewer, feet together, arms relaxed at the sides.\n2. FRONT STEP A: facing the viewer, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.\n3. FRONT STEP B: the mirror of 2.\n4. BACK STAND: seen from behind, feet together, arms at the sides. Shows the back of the head and the back of the outfit.\n5. BACK STEP A: seen from behind, the foot on the viewer's left steps away from us, the arm on the viewer's right swings forward.\n6. BACK STEP B: the mirror of 5.\n7. SIDE STAND: true profile facing LEFT, feet together, arms at the sides.\n8. SIDE STEP A: profile facing left, front leg forward with the heel down, back leg trailing with the heel lifted, near arm back, far arm forward.\n9. SIDE STEP B: profile facing left, the passing moment of the stride, back foot lifted with a bent knee, body slightly higher.\n\nFamily friendly. NEVER substitute: no extra frames, no merged frames, no repeated pose, no invented props."
   },
   {
-   "status": "rejected",
+   "status": "draft",
    "versions": [],
    "rejects": [],
-   "id": "tom-side-view-fix",
+   "id": "tom-battle",
    "tab": "Characters",
-   "title": "Tom step 5 (retired: v1 of the side view is not kept)",
-   "ar": "3:4",
+   "title": "Tom step 3: battle stance sheet, 12 frames (needs step 1 approved)",
+   "ar": "4:3",
+   "own": {
+    "slot": "tom-photo",
+    "label": "Photo of the real Tom (face clear)",
+    "at": 1
+   },
    "refs": [
-    "art/raw/characters/tom-side-view-v1.png",
-    "art/raw/characters/tom-hero-fresh-v1.png"
+    "art/raw/characters/tom-hero-v1.png"
    ],
    "group": "Tom",
-   "prompt": "change this image (the first picture): take his hands out of his pockets and hang his arms relaxed at his sides with empty hands; remove the game controller print from the side of the shirt so the shirt is plain navy from this angle; smooth the shirt so it hangs straight. Keep everything else exactly as it is: the face profile, the head size, the hair, the beard, the jeans, the sneakers, the painting style, the magenta background. The second picture shows the same man from the front for his shirt and head size."
+   "prompt": "IMAGE REQUEST: ONE BATTLE STANCE SHEET. Return exactly one image.\n\nATTACHED: picture 1 is the approved full body picture of this character (the reference). Picture 2 is a photo of the real person.\n\nLIKENESS AND STYLE\n- Draw this character EXACTLY like picture 1 in every frame: same face, hair, clothes, prints, colors, shoes, proportions and head size, in the same painting style and level of detail.\n- Keep the face as faithful to picture 2 as picture 1 is, in every frame.\n- Painted and realistic, like picture 1. Not pixel art, not 16-bit, not a cartoon, not a 3D render.\n\nTHE SHEET\n- 4 columns by 3 rows of equal square cells (about 1024 x 768 in all), filled left to right, top to bottom, in the order below. Exactly 12 frames, one per cell.\n- Background: one flat solid pure magenta #FF00FF over the whole image. No magenta in the character and no magenta glow or fringe on hair or edges. No grid lines, borders, numbers, labels or text.\n- Each figure sits fully inside its cell with at least 10 percent margin; nothing touches a cell edge or a neighbour.\n- Same scale in every cell. Feet on the ground rest on one horizontal line near the bottom of each cell. The head is the same size in every frame.\n- The character FACES LEFT in every frame, toward an opponent off to the left: a three-quarter view from the side, camera at chest height, full body.\n- Only the character. Hands empty. No shadows, effects, sparkles, motion lines, props or other people (the game adds effects).\n\nTHE 12 FRAMES\n1. READY: battle stance, feet shoulder width apart, knees slightly bent, hands loose, calm and alert.\n2. RUN A: running to the left, near leg forward, opposite arm swinging forward.\n3. RUN B: running to the left, the opposite step.\n4. ACT: one arm thrust straight out to the left, hand in a fist, front foot forward, a determined look.\n5. WIND UP: body twisted away from the left, one arm drawn back, weight on the back leg, eyes narrowed.\n6. LEAP: jumping up and to the left, both feet off the ground, knees tucked, arms up.\n7. CAST: both hands raised in front of the chest, palms open toward the left, focused, sending out a special move.\n8. DEFEND: braced stance, one arm raised in front with the palm out in a calm \"stop\" gesture, the other arm close to the body, firm face.\n9. FLINCH: rocked back and leaning right, eyes squeezed shut, a wince, one foot lifted.\n10. TIRED: down on one knee, one hand on the raised knee, head low, out of breath.\n11. NAP: sitting slumped on the ground, legs folded, head drooping, eyes closed, dizzy.\n12. CHEER: victory, one fist raised high, the other hand on the hip, a big grin.\n\nFamily friendly. NEVER substitute: no extra frames, no merged frames, no repeated pose, no invented props."
   },
   {
    "status": "approved",
@@ -4246,7 +4026,7 @@
    "title": "Julian Vance: ONE hero pose, caricature proportions (method change, 11-05)",
    "ar": "3:4",
    "refs": [
-    "art/raw/characters/tom-hero-fresh-v1.png",
+    "docs/reference/proportions_ref_v1.png",
     "art/raw/enemies/enemy-ironbelly-v2.png"
    ],
    "prompt": "Paint one full-length standing portrait of a different man, JULIAN VANCE, as a hand-painted oil painting, and give him exactly the same body proportions as the man in attachment 1: a huge realistic head, wider than half of his shoulder span and taller than his torso from chin to belt, on a slim neck, with narrow sloping shoulders, a slim torso, long thin legs and small hands and feet, so the whole figure is only about three heads tall. Use attachment 1 ONLY for those proportions and for its thick painted brush strokes. Do not copy its face, hair, shirt, jeans or shoes. Attachment 2 is a finished handbrushed painting of a boss creature, shown ONLY so you copy its thick brushwork; paint nothing of the creature.\n\nJulian is 70 inches tall, with a pale, lined, tired face, deep-set sad eyes and a gentle softened expression, long wavy gray hair falling past his collar under a black wide-brimmed hat. He wears a long black wool coat with a standing collar and gold buttons down to his knees, a black waistcoat, a white shirt, a red tie and black boots, with a gold pocket watch on a chain, and holds a brass ray gun with a glass barrel loosely at his side. Standing relaxed and tired, facing the viewer, whole body visible from hat to boots with a margin all round. Warm golden light from the upper left. Thick visible brush strokes on every surface, matte, canvas grain, no outlines, not a smooth digital render, not pixel art. Background: one flat, solid, even magenta #FF00FF with no texture, no gradient, nothing else in the picture, no text.",

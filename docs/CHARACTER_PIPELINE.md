@@ -117,6 +117,8 @@ Walk rules: arms swing opposite to the legs; the two STEP frames of a row mirror
 
 ### 3C. Standard battle sheet: 4 x 4
 
+UPDATE 2026-11-05 (CHANGES 286): the Characters tab restarted. New characters get a hero from Tom's photo and his prompt, then the shared prompts tools/art-library/prompts/char-walk-sheet.txt (3 x 3, frames as 3B) and char-battle-sheet.txt (4 x 3, 12 frames = the engine's base battle keys idle, run1, run2, act, windup, leap, cast, defend, hurt, kneel, ko, celeb). The 16 frame list below is the older recipe.
+
 1 cell = 256 px, sheet 1024 x 1024. Character FACES LEFT in every frame (side or three-quarter view from slightly above, a party member facing an enemy on the left). Frame order (keys in brackets):
 
 1. IDLE A [bt_idleA]: battle stance, feet shoulder width apart, knees slightly bent, hands loose, the character's default expression aimed at the enemy.

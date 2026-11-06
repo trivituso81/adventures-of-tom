@@ -1,0 +1,30 @@
+IMAGE REQUEST: ONE WALK SHEET. Return exactly one image.
+
+ATTACHED: picture 1 is the approved full body picture of this character (the reference). Picture 2 is a photo of the real person.
+
+LIKENESS AND STYLE
+- Draw this character EXACTLY like picture 1 in every frame: same face, hair, clothes, prints, colors, shoes, proportions and head size, in the same painting style and level of detail.
+- Keep the face as faithful to picture 2 as picture 1 is, in every frame, including from the side and from behind where hair and ears show.
+- Painted and realistic, like picture 1. Not pixel art, not 16-bit, not a cartoon, not a 3D render.
+
+THE SHEET
+- 3 columns by 3 rows of equal square cells (about 768 x 768 in all), filled left to right, top to bottom, in the order below. Exactly 9 frames, one per cell.
+- Background: one flat solid pure magenta #FF00FF over the whole image. No magenta in the character and no magenta glow or fringe on hair or edges. No grid lines, borders, numbers, labels or text.
+- Each figure sits fully inside its cell with at least 10 percent margin; nothing touches a cell edge or a neighbour.
+- Same scale in every cell. Feet rest on one horizontal line near the bottom of each cell. The head is the same size in every frame.
+- Camera at chest height, full body: straight on for rows 1 and 2, a true side profile for row 3. No top-down angle.
+- Only the character. Hands empty. No shadows, effects, motion lines, props or other people.
+- Arms swing opposite to the legs. The two step frames of a row mirror each other.
+
+THE 9 FRAMES
+1. FRONT STAND: facing the viewer, feet together, arms relaxed at the sides.
+2. FRONT STEP A: facing the viewer, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.
+3. FRONT STEP B: the mirror of 2.
+4. BACK STAND: seen from behind, feet together, arms at the sides. Shows the back of the head and the back of the outfit.
+5. BACK STEP A: seen from behind, the foot on the viewer's left steps away from us, the arm on the viewer's right swings forward.
+6. BACK STEP B: the mirror of 5.
+7. SIDE STAND: true profile facing LEFT, feet together, arms at the sides.
+8. SIDE STEP A: profile facing left, front leg forward with the heel down, back leg trailing with the heel lifted, near arm back, far arm forward.
+9. SIDE STEP B: profile facing left, the passing moment of the stride, back foot lifted with a bent knee, body slightly higher.
+
+Family friendly. NEVER substitute: no extra frames, no merged frames, no repeated pose, no invented props.
