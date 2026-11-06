@@ -1,4 +1,4 @@
-## 2026-11-06 (382): The Square v3 painting is installed with a walk-behind layer (`square6`)
+## 2026-11-06 (385): The Square v3 painting is installed with a walk-behind layer (`square6`)
 
 - New painting `art/town.webp` (1920 x 1664) and `art/town-fg.webp`: Tom walks behind trees, roofs, the three exit boards, four lamps and large props. Cut from the painting itself; Tom's generator masks were used only as masks (`tools/make_town_fg.py`, sources in `art/raw/areas/town-v3/`). Dropped props not in the painting: cafe set, rope posts, stick barrel, flour sacks. Hanging shop signs are not cut.
 - Layout changed: doors now at bakery (3,8), library (12,8), Sprout House (17,8), Penny's (24,8), Snail Mail (3,21), Kettle Cottage (10,21), Moon Club (18-19,21), Taxi (24,21). North exit is the stairs at x 8 (to Grump Hollow), south lane x 12-15, east exit is the school lane at (28-29, 5-6). Fountain moved to tiles 7-14 x 11-13, benches, taxi and signs re-placed, Moss moved. Arrivals fixed in hollow, row, schoolyard and terminal; Nine Scoops gates and fountain scene area and the chapter 5 night glow follow the new tiles.
