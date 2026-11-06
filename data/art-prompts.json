@@ -6716,8 +6716,16 @@
    "group": "Justin"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-01-pond-town-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793931908878
+    }
+   ],
    "rejects": [],
    "id": "bg-01-pond-town",
    "tab": "Battle",
