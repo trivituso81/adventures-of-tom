@@ -1,3 +1,10 @@
+## 2026-11-06 (370): LACHLAN, NO! draws Lachlan (Art Library only)
+
+- Fact (Tom 12:00): Lachlan was never drawn in Olivia's move. Added `art/raw/characters/lachlan-ref-v1.png`, a crop of Lachlan from Tom's Michael painting (`michael-hero-ref-v1.png`), as the fifth reference of `olivia-ab-lachlan-no`. The prompt now describes him (same face, hair, Turtles tee, navy shorts, white sneakers; waist high on Olivia) and the ignore-the-man's-arm note for the crop.
+- Frames 1 to 3 stay Olivia alone. Frame 4 leap: Lachlan just ahead holding a short stick, about to be caught. Frame 5 skid: she scoops him up, he giggles, stick in hand. Frame 6: he sits on her hip waving the stick, looking at the viewer. 1 Generate press; draft stays unapproved. `olivia-fx-lachlan-no` unchanged (its stick item matches).
+- Edited `data/art-prompts.json` directly (664 entries, the other 663 asserted unchanged) and mirrored in `tools/art-library/char-prompts.js` (override block after the ability loop). validate.js OK.
+- Not installed. Install after Tom approves the sheet: `O.lachlan_no` in engine/olivia-moves.js still has 5 frames and says Lachlan is off screen; at install replace frame keys and the messages ("He was holding a stick") to match the six painted frames, same recipe as claude/next-addendum-ability-rest.md.
+
 ## 2026-11-06 (369): Young Boppy in the Art Library: hero, walk, two battle sheets (Art Library only)
 
 - Fact (Tom 11:51): the Van Cortlandt Park '70 flashback needs its own character. Canon: October 1970, about 20, clean-shaven, full dark black hair, Italian American looking, skimpy vintage track uniform (tank top, short shorts, socks, shoes), no cap, 5'7, no photo (aged down from `boppy-hero-ref-v1.png`).
