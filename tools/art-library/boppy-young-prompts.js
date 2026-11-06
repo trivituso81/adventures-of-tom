@@ -1,23 +1,8 @@
 // Young Boppy (Tom 2026-11-06 11:51): the Van Cortlandt Park '70 flashback needs its own character, not old Boppy.
 // Canon: October 1970, about 20, college freshman, clean-shaven, full dark black hair, Italian American looking, skimpy vintage track
 // uniform (tank top, short running shorts, socks, shoes), no cap, 5'7". No photo exists: aged down from the adult Boppy hero.
-// Hero first; walk and battle sheets follow the approved-hero method (no left/right words). Not a recruit: flashback move only.
+// Hero: Tom painted it himself (art/raw/characters/boppy-young-hero-ref-v1.png), so there is no hero entry. Walk and battle sheets follow the approved-hero method (no left/right words). Not a recruit: flashback move only.
 const R = 'art/raw/characters/';
-const heroPrompt = `Paint one hero picture of a young man for a role-playing game. He is the same man as the older man in picture 1, shown as a college freshman about 45 years younger.
-
-Picture 1 is a finished painting of the older man. Keep the family resemblance: the same face shape, jawline, long nose, brown eyes, eyebrow shape, ears and warm wry smile, the same slim build and the same head size compared to the body, the same painting style and level of detail. Make him a fit, lean twenty-year-old: smooth youthful skin without deep lines, a full thick head of dark black hair, clean-shaven with no mustache, no beard and no sideburns. He looks Italian American. Do not copy the older man's gray hair, white mustache, weathered skin or clothes.
-
-OUTFIT: a skimpy vintage cross country track uniform from the early 1970s: a thin sleeveless tank top in a plain team color with a plain white stripe, very short running shorts with side slits, low white crew socks and old-fashioned flat running shoes. No cap, no hat, no number, no logo, no lettering.
-
-ART STYLE
-- A whimsical storybook illustration of a person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like picture 1. Gently simplified shapes.
-- Adult caricature proportions with the head the same size compared to the body as the man in picture 1, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated, cocky and cheerful expression.
-- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.
-- Clean, crisp edges. No thick or black outlines.
-- Painted and realistic, not pixel art, not photorealistic, not a 3D render, not anime, not flat cartoon shading.
-
-ONE single image, one character, no grid, portrait orientation. Full body from head to feet, standing relaxed, body turned a little toward the viewer, a confident grin, face clear and readable, hands empty and relaxed at his sides, both feet flat and visible. A flat solid magenta #FF00FF background filling the whole image. No magenta anywhere on him, no glow or fringe in magenta. No text, no shadows on the ground, no props. Family friendly.`;
-
 const walkPrompt = `Paint a walking sheet of one young man for a role-playing game.
 
 Picture 1 is the finished painting of the character. Copy it as exactly as possible in every frame: the same person, face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style, level of detail, head size compared to the body and figure size. Picture 2 is the walking sheet of another character: copy only its layout, its figure size and its way of drawing walking steps, never the person.
@@ -74,12 +59,10 @@ One image, a grid of 3 columns by 2 rows of equal square cells (6 frames, number
 Do not add frames, merge frames, repeat a pose or invent props. Family friendly.`;
 
 module.exports = { entries: [
-  { id: 'boppy-young-hero', tab: 'Characters', group: 'Boppy', title: 'Young Boppy hero pose (1970, about 20, 5\'7"; aged down from the Boppy hero; flashback only)', ar: '3:4',
-    refs: [R + 'boppy-hero-ref-v1.png'], prompt: heroPrompt },
-  { id: 'boppy-young-walk-sheet', tab: 'Characters', group: 'Boppy', title: 'Young Boppy walking sheet 3 x 3 (copies his approved hero; needs the hero approved)', ar: '1:1',
-    refs: [R + 'boppy-young-hero-v1.png', R + 'boppy-walk-sheet-v1.png'], prompt: walkPrompt },
-  { id: 'boppy-young-battle-sheet-1', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 1, 8 frames 4 x 2 (needs his hero and walk approved)', ar: '2:1',
-    refs: [R + 'boppy-young-hero-v1.png', R + 'boppy-young-walk-sheet-v1.png', R + 'boppy-battle-sheet-1-v1.png'], prompt: battle1Prompt },
+  { id: 'boppy-young-walk-sheet', tab: 'Characters', group: 'Boppy', title: 'Young Boppy walking sheet 3 x 3 (copies Tom\'s painted hero)', ar: '1:1',
+    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-walk-sheet-v1.png'], prompt: walkPrompt },
+  { id: 'boppy-young-battle-sheet-1', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 1, 8 frames 4 x 2 (needs his walk sheet approved)', ar: '2:1',
+    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-walk-sheet-v1.png', R + 'boppy-battle-sheet-1-v1.png'], prompt: battle1Prompt },
   { id: 'boppy-young-battle-sheet-2', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 2, 6 frames 3 x 2 (needs battle sheet 1 approved)', ar: '3:2',
-    refs: [R + 'boppy-young-hero-v1.png', R + 'boppy-young-battle-sheet-1-v1.png'], prompt: battle2Prompt },
+    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-battle-sheet-1-v1.png'], prompt: battle2Prompt },
 ] };

@@ -1,3 +1,9 @@
+## 2026-11-06 (375): Young Boppy hero painting from Tom; hero entry removed (Art Library only)
+
+- Fact (Tom 12:38): he supplied the Young Boppy hero. Saved as `art/raw/characters/boppy-young-hero-ref-v1.png` (1024 x 1536).
+- Removed the `boppy-young-hero` Library entry and its prompt (saves a Generate press, now 3 for the young set). `boppy-young-walk-sheet`, `-battle-sheet-1` and `-battle-sheet-2` now attach this painting as picture 1 (titles updated). Entries 691 to 690.
+- Not installed. `boppy-ab-xc-ult` unchanged (repoint after the young sheets are approved). No game files, no tag.
+
 ## 2026-11-06 (374): Warden Boppy boss sheet uses the new painted Boppy hero (Art Library only)
 
 - Fact (Tom 12:36): `enemy-warden` still used the old photo-style `tools/sprite-bake/src/boppy-hero.png` and a face crop from it. Refs are now: style key, guide, finish, `docs/reference/boppy-face-v2.png` (new 768 px face crop from Tom's painted hero), `art/raw/characters/boppy-hero-ref-v1.png` (the full painted hero).
