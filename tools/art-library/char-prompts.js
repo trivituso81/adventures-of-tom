@@ -790,13 +790,78 @@ const ABILITIES = {
       'Skidding to a stop with both arms wrapped around a small boy, relieved.',
       'Standing calmly, brushing off her dress, a casual innocent smile.']],
   ],
+  justin: [
+    ['loose_wire', 'Loose Wire', [
+      'Standing with his head tilted, squinting at something ahead, a puzzled handyman look.',
+      'Reaching forward with one hand and pinching a loose wire, eyes narrowed.',
+      'Yanking the wire back toward himself with a strong pull, teeth gritted.'], [
+      'Holding a long wire with a bare copper tip, jabbing the tip forward, a fierce look.',
+      'Flinching with a zap, hair standing up a little, eyes wide, small sparks at his fingers.',
+      'Shaking his stinging hand out, wincing, then a sheepish grin.']],
+    ['drywall', 'DRYWALL', [
+      'Carrying a big flat sheet of drywall under one arm, a steady work face.',
+      'Standing the sheet upright in front of himself with both hands, bracing it.',
+      'Holding the sheet steady with one hand and a cordless screw gun in the other, lining it up.'], [
+      'Driving a screw into the sheet with the screw gun, leaning into it, focused.',
+      'Pressing his shoulder against the sheet, squinting along its edge to check it is straight.',
+      'Stepping back with his hands on his hips, a proud nod at the finished wall.']],
+    ['wire_nuts', 'Wire Nuts', [
+      'Reaching into a jacket pocket, a quick sideways glance.',
+      'Pulling out a fistful of bright colored wire nuts, a cheerful grin.',
+      'Winding up underhand with one fist full of wire nuts, knees bent.'], [
+      'Flinging the wire nuts forward underhand, arm swinging low.',
+      'Raising his arm high with another fistful, an overhand throw ready.',
+      'Throwing overhand with his whole body, a loud grunt, colored nuts flying.']],
+    ['bad_call', 'Bad Call', [
+      'Sitting back on a couch holding a remote, relaxed, eyes on a screen.',
+      'Leaning forward on the couch, brow furrowed, a suspicious squint.',
+      'Springing up off the couch, mouth open, one arm starting to rise.'], [
+      'Standing and pointing one arm straight ahead like a referee, a stern look.',
+      'Making a sharp slicing wave with both arms, shouting, face red.',
+      'Standing with arms folded, a smug satisfied nod, chin up.']],
+    ['fresh_fit', 'Fresh Fit', [
+      'Strolling forward with a confident runway walk, one foot crossing in front of the other, chin up.',
+      'Adjusting his collar with both hands, a cool half smile.',
+      'Turning on one heel in a spin, jacket flaring, a sharp look.'], [
+      'Holding a pair of dark sunglasses in one hand, lifting them toward his face.',
+      'Sliding the sunglasses on, a slow cool grin, head tilted.',
+      'Striking a model pose, one hand in a pocket, shoulders squared, sparkles of light around him.']],
+    ['demo_day', 'Demo Day', [
+      'Standing with a big sledgehammer resting on his shoulder, studying a wall ahead.',
+      'Hoisting the sledgehammer high overhead with both hands, boots planted wide.',
+      'Swinging the hammer down hard, body bent forward, mouth open in a shout.'], [
+      'Dropping the hammer low against a wall, bits of plaster flying, a fierce grin.',
+      'Raising the hammer overhead again for the second swing, a roar.',
+      'Slamming the second swing, dust bursting, face squinted against the dust.']],
+    ['breaker_flip', 'Breaker Flip', [
+      'Standing in front of a gray electrical panel with a flashlight in his hand, scanning it.',
+      'Raising one finger to a breaker switch, lips pursed, thinking hard.',
+      'Flipping a breaker switch down with a firm push, eyes wide, a held breath.'], [
+      'Holding up three fingers and counting down with his mouth open, eyes on the panel.',
+      'Holding up one finger, tense, leaning back from the panel.',
+      'Slamming the breaker switch up, hair lifting, eyes wide, bright blue light on his face.']],
+    ['giant_sneeze', 'Giant Sneeze', [
+      'Standing in his nice sneakers with a calm face, hands at his sides.',
+      'Nose scrunching, eyes starting to squeeze, mouth opening a little.',
+      'Head tilted back, eyes shut tight, mouth wide open, about to sneeze.'], [
+      'Doubled forward in a huge sneeze, eyes squeezed shut, mouth wide open, arms flung back.',
+      'Staying bent forward, hair blown forward and hands out to steady himself.',
+      'Standing up straight and wiping his nose with the back of his hand, a sheepish look.']],
+    ['foot_tap', 'Foot Tap', [
+      'Standing in a crisp pair of white designer sneakers, looking pleased with them.',
+      'Looking down at his sneaker with a worried frown, a small child\'s shoe tip just touching the top of it.',
+      'Eyes bulging, mouth open, freezing in place, a silent shock.'], [
+      'Hopping on one foot, holding the other foot with both hands, mouth wide open in a scream.',
+      'Head thrown back, an enormous scream, hair blown back, fists clenched.',
+      'Sitting on the ground hugging his sneaker, a dramatic tearful face.']],
+  ],
 };
 
 // Pronoun in the shared header's last line (Tom's entries keep "he").
 const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she', nara: 'she', olivia: 'she' };
 // Nara is a dog: no hands, no clothes (appended to her sheets only).
 const DOGNOTE = { nara: 'The character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.' };
-const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara', boppy: 'Boppy', olivia: 'Olivia' };
+const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara', boppy: 'Boppy', olivia: 'Olivia', justin: 'Justin' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
@@ -1712,6 +1777,81 @@ const FX = {
       'A small wooden stick.',
       'A small plump heart, golden.',
       'A burst of impact stars.'],
+  },
+  justin: {
+    loose_wire: [
+      'A long loose electrical wire with a bare copper tip, curling (wide).',
+      'A bundle of colored wires hanging out of a hole, red, blue and yellow.',
+      'A jagged yellow electric zap, a crackling bolt.',
+      'A small burst of blue and white sparks.',
+      'A white impact star.',
+      'A small curl of grey smoke.'],
+    drywall: [
+      'A big flat sheet of white drywall, seen from the front, with taped edges (tall).',
+      'The same sheet with a row of screws along its edge.',
+      'A cordless screw gun, seen from the side.',
+      'A handful of drywall screws.',
+      'A cloud of fine white drywall dust (wide).',
+      'A soft pale blue shield glow, a rounded panel of light (wide).'],
+    wire_nuts: [
+      'A single orange wire nut, seen from the side.',
+      'A single yellow wire nut.',
+      'A single blue wire nut.',
+      'A fistful of mixed colored wire nuts, spilling from a hand-shaped cluster.',
+      'A curved white throw streak (wide).',
+      'A small burst of impact stars.',
+      'A scatter of colored wire nuts bouncing.'],
+    bad_call: [
+      'A TV remote control, seen from the front.',
+      'A bright yellow penalty flag, flying.',
+      'A silver referee whistle on a cord.',
+      'A big red X mark, painted like marker.',
+      'A jagged shouting speech bubble, empty inside.',
+      'A small burst of angry steam puffs.',
+      'A white impact star.'],
+    fresh_fit: [
+      'A pair of dark sunglasses, seen from the front.',
+      'A sparkling white four point star glint.',
+      'A burst of golden sparkles (wide).',
+      'A soft pink and gold shimmer glow, a round halo.',
+      'A row of small camera flash bursts (wide).',
+      'A small floating golden heart.',
+      'A cluster of tiny twinkling stars.'],
+    demo_day: [
+      'A big sledgehammer with a wooden handle and a steel head, seen from the side (tall).',
+      'A big chunk of broken brick wall, rough and jagged.',
+      'A cluster of falling rubble chunks of different sizes (wide).',
+      'A thick cloud of grey dust (wide).',
+      'A jagged crack line, as if through a wall (tall).',
+      'A big crashing impact burst, yellow and white.',
+      'A small scatter of plaster crumbs.',
+      'A cracked and broken round shield, in shards.'],
+    breaker_flip: [
+      'A gray electrical panel with rows of small breaker switches, open door, seen from the front.',
+      'A single breaker switch in the down position.',
+      'A single breaker switch in the up position.',
+      'A jagged forked blue and white lightning bolt (tall).',
+      'A bright crackling ring of electric light (wide).',
+      'A small burst of blue sparks.',
+      'A big white flash burst.',
+      'A flashlight beam, a soft cone of pale light (wide).'],
+    giant_sneeze: [
+      'A big spray of tiny water droplets, a wide fan shape (wide).',
+      'A big cloud of soft white puff air, a wide gust (wide).',
+      'The word AH in blocky cream letters with a dark outline.',
+      'The word CHOOO in huge blocky cream letters with a dark outline (wide).',
+      'A ring of curved wind lines (wide).',
+      'A small grey dust puff.',
+      'A white tissue, crumpled.'],
+    foot_tap: [
+      'A crisp white designer sneaker with colored soles, seen from the side.',
+      'A small child\'s sneaker tip, seen from the side.',
+      'A tiny white impact spark.',
+      'A huge jagged scream burst, red and yellow, a spiky shape (wide).',
+      'A set of curved sound wave arcs, loud and wide (wide).',
+      'A ring of cracked shockwave lines (wide).',
+      'A small bandage.',
+      'A cluster of three dizzy golden stars.'],
   },
 };
 for (const id of Object.keys(FX)) {

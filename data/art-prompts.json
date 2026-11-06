@@ -3239,6 +3239,141 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: LACHLAN, NO!.\n\nRow 1:\n1. Standing with her head turned, eyes wide, spotting something ahead, one hand reaching out.\n2. Crouching low in a sprinter's start, a fierce mom look.\n3. Sprinting flat out, arms pumping, hair streaming back, mouth open in a shout.\n\nRow 2:\n4. Leaping forward with both arms stretched out to grab something, determined.\n5. Skidding to a stop with both arms wrapped around a small boy, relieved.\n6. Standing calmly, brushing off her dress, a casual innocent smile."
   },
   {
+   "status": "draft",
+   "id": "justin-ab-loose-wire",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Loose Wire (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Loose Wire.\n\nRow 1:\n1. Standing with his head tilted, squinting at something ahead, a puzzled handyman look.\n2. Reaching forward with one hand and pinching a loose wire, eyes narrowed.\n3. Yanking the wire back toward himself with a strong pull, teeth gritted.\n\nRow 2:\n4. Holding a long wire with a bare copper tip, jabbing the tip forward, a fierce look.\n5. Flinching with a zap, hair standing up a little, eyes wide, small sparks at his fingers.\n6. Shaking his stinging hand out, wincing, then a sheepish grin."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-drywall",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: DRYWALL (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: DRYWALL.\n\nRow 1:\n1. Carrying a big flat sheet of drywall under one arm, a steady work face.\n2. Standing the sheet upright in front of himself with both hands, bracing it.\n3. Holding the sheet steady with one hand and a cordless screw gun in the other, lining it up.\n\nRow 2:\n4. Driving a screw into the sheet with the screw gun, leaning into it, focused.\n5. Pressing his shoulder against the sheet, squinting along its edge to check it is straight.\n6. Stepping back with his hands on his hips, a proud nod at the finished wall."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-wire-nuts",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Wire Nuts (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Wire Nuts.\n\nRow 1:\n1. Reaching into a jacket pocket, a quick sideways glance.\n2. Pulling out a fistful of bright colored wire nuts, a cheerful grin.\n3. Winding up underhand with one fist full of wire nuts, knees bent.\n\nRow 2:\n4. Flinging the wire nuts forward underhand, arm swinging low.\n5. Raising his arm high with another fistful, an overhand throw ready.\n6. Throwing overhand with his whole body, a loud grunt, colored nuts flying."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-bad-call",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Bad Call (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Bad Call.\n\nRow 1:\n1. Sitting back on a couch holding a remote, relaxed, eyes on a screen.\n2. Leaning forward on the couch, brow furrowed, a suspicious squint.\n3. Springing up off the couch, mouth open, one arm starting to rise.\n\nRow 2:\n4. Standing and pointing one arm straight ahead like a referee, a stern look.\n5. Making a sharp slicing wave with both arms, shouting, face red.\n6. Standing with arms folded, a smug satisfied nod, chin up."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-fresh-fit",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Fresh Fit (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Fresh Fit.\n\nRow 1:\n1. Strolling forward with a confident runway walk, one foot crossing in front of the other, chin up.\n2. Adjusting his collar with both hands, a cool half smile.\n3. Turning on one heel in a spin, jacket flaring, a sharp look.\n\nRow 2:\n4. Holding a pair of dark sunglasses in one hand, lifting them toward his face.\n5. Sliding the sunglasses on, a slow cool grin, head tilted.\n6. Striking a model pose, one hand in a pocket, shoulders squared, sparkles of light around him."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-demo-day",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Demo Day (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Demo Day.\n\nRow 1:\n1. Standing with a big sledgehammer resting on his shoulder, studying a wall ahead.\n2. Hoisting the sledgehammer high overhead with both hands, boots planted wide.\n3. Swinging the hammer down hard, body bent forward, mouth open in a shout.\n\nRow 2:\n4. Dropping the hammer low against a wall, bits of plaster flying, a fierce grin.\n5. Raising the hammer overhead again for the second swing, a roar.\n6. Slamming the second swing, dust bursting, face squinted against the dust."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-breaker-flip",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Breaker Flip (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Breaker Flip.\n\nRow 1:\n1. Standing in front of a gray electrical panel with a flashlight in his hand, scanning it.\n2. Raising one finger to a breaker switch, lips pursed, thinking hard.\n3. Flipping a breaker switch down with a firm push, eyes wide, a held breath.\n\nRow 2:\n4. Holding up three fingers and counting down with his mouth open, eyes on the panel.\n5. Holding up one finger, tense, leaning back from the panel.\n6. Slamming the breaker switch up, hair lifting, eyes wide, bright blue light on his face."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-giant-sneeze",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Giant Sneeze (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Giant Sneeze.\n\nRow 1:\n1. Standing in his nice sneakers with a calm face, hands at his sides.\n2. Nose scrunching, eyes starting to squeeze, mouth opening a little.\n3. Head tilted back, eyes shut tight, mouth wide open, about to sneeze.\n\nRow 2:\n4. Doubled forward in a huge sneeze, eyes squeezed shut, mouth wide open, arms flung back.\n5. Staying bent forward, hair blown forward and hands out to steady himself.\n6. Standing up straight and wiping his nose with the back of his hand, a sheepish look."
+  },
+  {
+   "status": "draft",
+   "id": "justin-ab-foot-tap",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin ability: Foot Tap (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png",
+    "art/raw/characters/justin-battle-sheet-1-v1.png",
+    "art/raw/characters/justin-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Foot Tap.\n\nRow 1:\n1. Standing in a crisp pair of white designer sneakers, looking pleased with them.\n2. Looking down at his sneaker with a worried frown, a small child's shoe tip just touching the top of it.\n3. Eyes bulging, mouth open, freezing in place, a silent shock.\n\nRow 2:\n4. Hopping on one foot, holding the other foot with both hands, mouth wide open in a scream.\n5. Head thrown back, an enormous scream, hair blown back, fists clenched.\n6. Sitting on the ground hugging his sneaker, a dramatic tearful face."
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -4181,6 +4316,114 @@
     "art/raw/characters/olivia-ab-lachlan-no-v1.png"
    ],
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: LACHLAN, NO!.\n\nItems:\n1. A long white speed streak, a mom sprint trail (wide).\n2. A cloud of grey dust kicked up at the feet.\n3. A big crashing impact burst, yellow and white.\n4. A big red exclamation mark.\n5. A small wooden stick.\n6. A small plump heart, golden.\n7. A burst of impact stars."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-loose-wire",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Loose Wire (6 items; attaches the approved Loose Wire sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-loose-wire-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Loose Wire.\n\nItems:\n1. A long loose electrical wire with a bare copper tip, curling (wide).\n2. A bundle of colored wires hanging out of a hole, red, blue and yellow.\n3. A jagged yellow electric zap, a crackling bolt.\n4. A small burst of blue and white sparks.\n5. A white impact star.\n6. A small curl of grey smoke."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-drywall",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: DRYWALL (6 items; attaches the approved DRYWALL sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-drywall-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: DRYWALL.\n\nItems:\n1. A big flat sheet of white drywall, seen from the front, with taped edges (tall).\n2. The same sheet with a row of screws along its edge.\n3. A cordless screw gun, seen from the side.\n4. A handful of drywall screws.\n5. A cloud of fine white drywall dust (wide).\n6. A soft pale blue shield glow, a rounded panel of light (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-wire-nuts",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Wire Nuts (7 items; attaches the approved Wire Nuts sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-wire-nuts-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Wire Nuts.\n\nItems:\n1. A single orange wire nut, seen from the side.\n2. A single yellow wire nut.\n3. A single blue wire nut.\n4. A fistful of mixed colored wire nuts, spilling from a hand-shaped cluster.\n5. A curved white throw streak (wide).\n6. A small burst of impact stars.\n7. A scatter of colored wire nuts bouncing."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-bad-call",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Bad Call (7 items; attaches the approved Bad Call sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-bad-call-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Bad Call.\n\nItems:\n1. A TV remote control, seen from the front.\n2. A bright yellow penalty flag, flying.\n3. A silver referee whistle on a cord.\n4. A big red X mark, painted like marker.\n5. A jagged shouting speech bubble, empty inside.\n6. A small burst of angry steam puffs.\n7. A white impact star."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-fresh-fit",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Fresh Fit (7 items; attaches the approved Fresh Fit sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-fresh-fit-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Fresh Fit.\n\nItems:\n1. A pair of dark sunglasses, seen from the front.\n2. A sparkling white four point star glint.\n3. A burst of golden sparkles (wide).\n4. A soft pink and gold shimmer glow, a round halo.\n5. A row of small camera flash bursts (wide).\n6. A small floating golden heart.\n7. A cluster of tiny twinkling stars."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-demo-day",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Demo Day (8 items; attaches the approved Demo Day sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-demo-day-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Demo Day.\n\nItems:\n1. A big sledgehammer with a wooden handle and a steel head, seen from the side (tall).\n2. A big chunk of broken brick wall, rough and jagged.\n3. A cluster of falling rubble chunks of different sizes (wide).\n4. A thick cloud of grey dust (wide).\n5. A jagged crack line, as if through a wall (tall).\n6. A big crashing impact burst, yellow and white.\n7. A small scatter of plaster crumbs.\n8. A cracked and broken round shield, in shards."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-breaker-flip",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Breaker Flip (8 items; attaches the approved Breaker Flip sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-breaker-flip-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Breaker Flip.\n\nItems:\n1. A gray electrical panel with rows of small breaker switches, open door, seen from the front.\n2. A single breaker switch in the down position.\n3. A single breaker switch in the up position.\n4. A jagged forked blue and white lightning bolt (tall).\n5. A bright crackling ring of electric light (wide).\n6. A small burst of blue sparks.\n7. A big white flash burst.\n8. A flashlight beam, a soft cone of pale light (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-giant-sneeze",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Giant Sneeze (7 items; attaches the approved Giant Sneeze sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-giant-sneeze-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Giant Sneeze.\n\nItems:\n1. A big spray of tiny water droplets, a wide fan shape (wide).\n2. A big cloud of soft white puff air, a wide gust (wide).\n3. The word AH in blocky cream letters with a dark outline.\n4. The word CHOOO in huge blocky cream letters with a dark outline (wide).\n5. A ring of curved wind lines (wide).\n6. A small grey dust puff.\n7. A white tissue, crumpled."
+  },
+  {
+   "status": "draft",
+   "id": "justin-fx-foot-tap",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin objects and effects: Foot Tap (8 items; attaches the approved Foot Tap sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/justin-ab-foot-tap-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Foot Tap.\n\nItems:\n1. A crisp white designer sneaker with colored soles, seen from the side.\n2. A small child's sneaker tip, seen from the side.\n3. A tiny white impact spark.\n4. A huge jagged scream burst, red and yellow, a spiky shape (wide).\n5. A set of curved sound wave arcs, loud and wide (wide).\n6. A ring of cracked shockwave lines (wide).\n7. A small bandage.\n8. A cluster of three dizzy golden stars."
   },
   {
    "status": "approved",
