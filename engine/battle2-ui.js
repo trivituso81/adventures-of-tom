@@ -127,7 +127,7 @@ function b2DrawEnemies(t) {
     const lq=f.lunge>0?Math.sin(Math.PI*(1-f.lunge/.55)):0;
     const tq=B2.foeTarget&&f.lunge>0?BATTLE_POS[B2.foeTarget.idx]:null;
     const lungeX=tq?(tq.x*3-60-f.px)*.55:70;
-    const bob=dying?0:Math.round(Math.sin(t*3+f.idx*1.7)*2);
+    const bob=dying?0:-Math.round((Math.sin(t*1.8+f.idx*1.7)+1)/2);   // idle: 0 to 1 px up, feet never below the fixed shadow
     const spawn=f.spawnT!=null&&f.spawnT<.6?f.spawnT/.6:1;
     let sx=0,sy=0;
     if(aimed) {

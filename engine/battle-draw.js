@@ -83,7 +83,7 @@ function drawBattle() {
     const m=party[i],sp=BATTLE_SPRITES[m.id],pos=BATTLE_POS[i],fx=battle.fx[i];
     activeTint=garmentTint('bt',m.id,memberTopColor(m));
     const lunge=fx.lunge>0?Math.sin(Math.PI*(1-fx.lunge/.6)):0;
-    const breathe=alive(m)?Math.floor(t*1.6+i)%2:0;
+    const breathe=alive(m)?Math.floor(t*.9+i*.5)%2:0;   // idle: lifts 1 px off the ground line, never sinks below it; the shadow stays put
     const hurt=alive(m)&&m.hp/m.maxHp<=.25;
     const punching=lunge>.35||fx.punch>0;
     const twirling=fx.twirl>0,spinFrame=Math.floor(t*10)%2===1;
@@ -130,7 +130,7 @@ function drawBattle() {
     let appr=0;
     if(fx.appr>0) { const e=fx.apprDur-fx.appr; appr=e<.7?Math.min(1,e/.7):(fx.appr<.35?fx.appr/.35:1); }
     let cx=pos.x*3-Math.round(lunge*(pos.x*3-250))-Math.round(appr*(pos.x*3-(m.id==='rose'?236:262)))+(fx.shake>0?rand(-5,5):0)+(fx.tongue>0?Math.round(Math.sin(t*22)*2):0)+(dancing?Math.round(Math.sin(t*4.5)*16):0);
-    let base=pos.base*3+breathe-Math.round(lunge*12)-hop;
+    let base=pos.base*3-breathe-Math.round(lunge*12)-hop;
     base+=koSink;
     if(m.id==='tom'&&battle.block) {
       // Slide to a spot just in front of the shielded girl, hold, then slide back.
@@ -202,7 +202,7 @@ function drawBattle() {
     if(B2.aim&&i===battle.actor) { const wp=b2WarpPt(cx,base); cx=Math.round(wp[0]); base=Math.round(wp[1]); }
     const x=cx-w/2-(punching&&!sp.noShift?sp.scale*3:0),y=base-h;
     battle.drawnAt[i]={cx,base,h,x,w};
-    if(!noShadow) ellipse(cx,base+3,w*.55*pathSc,6*pathSc,'rgba(47,73,54,.3)');
+    if(!noShadow) ellipse(cx,base+3+breathe,w*.55*pathSc,6*pathSc,'rgba(47,73,54,.3)');
     if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
     else if(rot!==0||pathSc!==1||gwPose||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
       const fr2=gwPose?gwPose.fr:(frameOverride||sp.idle),w2=fr2[0].length*sp.scale,h2=fr2.length*sp.scale;

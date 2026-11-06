@@ -1,3 +1,7 @@
+## 2026-11-05 (273): Battle idle: shadows stay fixed on the ground, bounce much subtler (`idle1`)
+- Tom: shadows bounced with the characters while waiting for their turn. Party idle in `engine/battle-draw.js`: the 1 px breathe now lifts the figure off the ground line instead of sinking it, runs slower (about every 1.1 s), and the shadow is drawn at the fixed ground line. Enemies in `engine/battle2-ui.js`: idle bob was plus or minus 2 px at a fast rate, now 0 to 1 px up at a slower rate, feet never below the fixed shadow.
+- Moves, hops and lunges are unchanged. Tags: `idle1` (battle-draw.js, battle2-ui.js, main.js). Looked at a Tom, Grace, Rose vs two Mudlings fight in portrait and landscape: no errors.
+
 ## 2026-11-05 (272): Enemy hit flash much quicker (`flash1`)
 
 - Tom (19:14): enemy flash on hit should be much quicker. The white flash (f.flash .3 s, battle.flashEnemy .2 to .3 s) now drains 3.5 times faster (`FOE_FLASH_FAST` in engine/battle2-ui.js, used in engine/battle.js), so it lasts about .06 to .09 s. Hurt frame hold and shake are unchanged. Tag `battle2-ui.js?v=flash1`.
