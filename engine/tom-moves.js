@@ -584,7 +584,7 @@ Tm.delta_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(
 // whole stage tilts 30 degrees: every monster flips onto its head in a sparkle burst, then the stage rights itself.
 const RAINBOW=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff'];
 let tiltBuf=null;
-const grab=()=>{ const c=document.createElement('canvas'); c.width=576; c.height=324; c.getContext('2d').drawImage(gfx.canvas,0,0); return c; };
+const grab=()=>{ const c=document.createElement('canvas'); c.width=576*BS; c.height=324*BS; c.getContext('2d').drawImage(gfx.canvas,0,0); return c; };
 const rotPt=(x,y,px,py,a)=>{ const c=Math.cos(a),s=Math.sin(a),dx=x-px,dy=y-py; return {x:px+dx*c-dy*s,y:py+dx*s+dy*c}; };
 const gripHand=(x,y,dir)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(dir,1);
   RO(-58,-34,40,74,SKIN); R(-58,-34,8,74,'#d9a77a'); for(let k=0;k<4;k++) { RO(-22,-28+k*17,26,12,SKIN); R(0,-28+k*17,4,12,'#e8b88a'); } RO(-30,40,18,22,SKIN); gfx.restore(); };
@@ -592,7 +592,7 @@ SC.tm_cart=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(!s.img) s.img=grab();
   const q=ez(ms/600),blow=ms>P.blow&&ms<P.ins?(ms-P.blow)/(P.ins-P.blow):0,ins=ez((ms-P.ins)/(P.chunk-P.ins));
   const tip=blow>0?Math.sin(Math.min(1,blow*3)*Math.PI/2)*(blow>.85?1-(blow-.85)/.15:1):0;
   const cx=288+(blow>0?Math.sin(s.t*50)*2:0),cy=lerp(160,236,ins)-tip*20,sc=lerp(1,.86,tip*.4)*(ms>P.chunk&&ms<P.chunk+120?.97:1);
-  gfx.save(); gfx.setTransform(1,0,0,1,0,0);
+  gfx.save(); gfx.setTransform(BS,0,0,BS,0,0);
   gfx.globalAlpha=q; R(0,0,576,324,'#0b0d12');
   // The console the cartridge goes back into.
   if(ms>P.ins-200) { const k=ez((ms-P.ins+200)/300);
@@ -603,8 +603,8 @@ SC.tm_cart=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(!s.img) s.img=grab();
     PROPART.draw('tom/game_cartridge',0,0,{w:250}); const kk=250/160,pt=(u,v)=>({x:(u-80)*kk,y:(v-67)*kk}),TL=pt(42,15),TR=pt(116,27),BL=pt(38,58);
     const W=gfx.getTransform().multiply(new DOMMatrix([(TR.x-TL.x)/576,(TR.y-TL.y)/576,(BL.x-TL.x)/324,(BL.y-TL.y)/324,TL.x,TL.y]));
     gfx.save(); gfx.setTransform(1,0,0,1,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=true; gfx.beginPath();
-    [[0,0],[576,0],[576,324],[0,324]].forEach(([x,y],i)=>{ const ax=lerp(x,W.a*x+W.c*y+W.e,q),ay=lerp(y,W.b*x+W.d*y+W.f,q); i?gfx.lineTo(ax,ay):gfx.moveTo(ax,ay); }); gfx.closePath(); gfx.clip();
-    gfx.setTransform(lerp(1,W.a,q),lerp(0,W.b,q),lerp(0,W.c,q),lerp(1,W.d,q),lerp(0,W.e,q),lerp(0,W.f,q)); gfx.drawImage(s.img,0,0);
+    [[0,0],[576,0],[576,324],[0,324]].forEach(([x,y],i)=>{ const ax=lerp(x*BS,W.a*x+W.c*y+W.e,q),ay=lerp(y*BS,W.b*x+W.d*y+W.f,q); i?gfx.lineTo(ax,ay):gfx.moveTo(ax,ay); }); gfx.closePath(); gfx.clip();
+    gfx.setTransform(lerp(BS,W.a,q),lerp(0,W.b,q),lerp(0,W.c,q),lerp(BS,W.d,q),lerp(0,W.e,q),lerp(0,W.f,q)); gfx.drawImage(s.img,0,0,576,324);
     R(0,0,576,58,NAVY); label('THE ADVENTURES',288,8,CREAM,3); label('OF TOM',288,32,GOLD,3);
     if(blow>0) for(let k=0;k<5;k++) { const yy=((k*23+s.t*260)%96+2)*3.27; gfx.globalAlpha=q*.7; R(0,yy,576,(4+(k%2)*3)*3.27,RAINBOW[(k+Math.floor(s.t*12))%6]); }
     gfx.restore(); }
@@ -615,7 +615,7 @@ SC.tm_cart=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(!s.img) s.img=grab();
   R(-92,-72,184,110,OUT);
   // The live battle, shrinking into the label window.
   const lx=-88,ly=-50,lw=176,lh=99;
-  gfx.save(); gfx.setTransform(1,0,0,1,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=true;
+  gfx.save(); gfx.setTransform(BS,0,0,BS,0,0); gfx.globalAlpha=1; gfx.imageSmoothingEnabled=true;
   const tx=cx+lx*sc,ty=cy+ly*sc*(1-tip*.12),tw=lw*sc,th=lh*sc*(1-tip*.12);
   gfx.drawImage(s.img,lerp(0,tx,q),lerp(0,ty,q),lerp(576,tw,q),lerp(324,th,q)); gfx.restore();
   R(-88,-68,176,18,NAVY); label('THE ADVENTURES',0,-66,CREAM,1); label('OF TOM',0,-59,GOLD,1);
@@ -635,10 +635,10 @@ SC.tm_tilt=(s,u)=>{ const ms=s.t*1000,P=s.plan,a=P.a;
   const now=performance.now();
   for(const f of P.list) { if(!f||f.dead) continue; const k=ms<P.f0?0:ms<P.f1?ez((ms-P.f0)/(P.f1-P.f0)):ms<P.t2?1:1+ez((ms-P.t2)/(P.t3-P.t2));
     f.spin=k*Math.PI; f.oy=-Math.abs(Math.sin(k*Math.PI))*26; f.ox=-Math.sin(k/2*Math.PI)*22; f.spinAt=now; }
-  if(!tiltBuf) { tiltBuf=document.createElement('canvas'); tiltBuf.width=576; tiltBuf.height=324; }
-  const b=tiltBuf.getContext('2d'); b.clearRect(0,0,576,324); b.drawImage(gfx.canvas,0,0);
-  gfx.save(); gfx.setTransform(1,0,0,1,0,0); gfx.globalAlpha=1; R(0,0,576,324,'#0b0d12');
-  gfx.translate(P.px,P.py); gfx.rotate(ang); gfx.drawImage(tiltBuf,-P.px,-P.py); gfx.restore();
+  if(!tiltBuf) { tiltBuf=document.createElement('canvas'); tiltBuf.width=576*BS; tiltBuf.height=324*BS; }
+  const b=tiltBuf.getContext('2d'); b.clearRect(0,0,tiltBuf.width,tiltBuf.height); b.drawImage(gfx.canvas,0,0);
+  gfx.save(); gfx.setTransform(BS,0,0,BS,0,0); gfx.globalAlpha=1; R(0,0,576,324,'#0b0d12');
+  gfx.translate(P.px,P.py); gfx.rotate(ang); gfx.drawImage(tiltBuf,-P.px,-P.py,576,324); gfx.restore();
   bars(u>.85?(1-u)/.15:1);
   if(ms<P.f0+500) { const ff=ms<120?1-ms/120:0; if(ff>0) { gfx.globalAlpha=ff*.7; R(0,0,576,324,'#ffffff'); gfx.globalAlpha=1; } } };
 const star=(x,y,r,c)=>{ gfx.beginPath(); for(let k=0;k<10;k++) { const a=k*Math.PI/5-Math.PI/2,rr=k%2?r*.45:r; gfx.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr); } gfx.closePath(); gfx.fillStyle=OUT; gfx.fill(); gfx.save(); gfx.translate(x,y); gfx.scale(.75,.75); gfx.translate(-x,-y); gfx.fillStyle=c; gfx.fill(); gfx.restore(); };

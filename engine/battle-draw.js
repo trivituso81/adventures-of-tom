@@ -2,11 +2,11 @@
 // engine/battle-draw.js — Drawing the battle scene, animations and effects.
 
 // ---------- Battle backdrops ----------
-// The painted battle backgrounds live in bgs/ (576x324 WebP, one per place; repainted 2026-11-01 to the layout in
+// The painted battle backgrounds live in bgs/ (1152x648 WebP, one per place; repainted 2026-11-01 to the layout in
 // claude/battle-background-spec.md: the floor starts about 65% down and is flat, matte and empty so characters stand ON it).
 // battleBgKey picks the picture from the map's ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not
 // loaded yet a plain dark fill shows. BG_V is the cache tag: bump it whenever a picture in bgs/ changes, or phones keep the old one.
-const BG_V='bgs3';
+const BG_V='bgs4';
 const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-school-classroom',cafe:'04-school-cafetorium',
   stacks:'05-library-stacks',readroom:'06-library-reading-room',club:'07-moon-club',dome:'08-moon-club-dome',barn:'09-car-barn',
   boiler:'10-boiler-room',term:'11-terminal-zero',gate:'12-gate-zero',lot:'13-studio-backlot',stage:'14-soundstage',
@@ -56,12 +56,12 @@ function battleBgKey() {
 function drawBattleBackdrop(t) {
   // Every place has a painted picture; the old code-drawn backdrops were removed (bgs3).
   const im=BG_IMG[battleBgKey()];
-  if(im&&im.complete&&im.naturalWidth) { gfx.imageSmoothingEnabled=false; gfx.drawImage(im,0,0,192,108); return; }
+  if(im&&im.complete&&im.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.imageSmoothingQuality='high'; gfx.drawImage(im,0,0,192,108); gfx.imageSmoothingEnabled=sm; return; }
   rect(0,0,192,108,'#14141c');   // the picture is still loading
 }
 
 function drawBattle() {
-  gfx=fightCtx;
+  gfx=fightCtx; gfx.setTransform(BS,0,0,BS,0,0);
   const party=battlePartyList();   // the new battle (engine/battle2.js) draws its own party units here
   const t=battle.time;
   gfx.save();

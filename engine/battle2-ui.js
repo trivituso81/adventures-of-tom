@@ -728,7 +728,7 @@ function b2CanvasPt(cx,cy) {
   const r=cv.getBoundingClientRect(); if(!r.width||!r.height) return null;
   const rot=typeof layout!=='undefined'&&layout.rotated;
   const u=rot?(cy-r.top)/r.height:(cx-r.left)/r.width,v=rot?(r.right-cx)/r.width:(cy-r.top)/r.height;
-  return {x:u*cv.width,y:v*cv.height,inside:u>=0&&u<=1&&v>=0&&v<=1};
+  return {x:u*576,y:v*324,inside:u>=0&&u<=1&&v>=0&&v<=1};
 }
 // The living enemy under a canvas point: its sprite plus a little slack, and the HP bars under its feet.
 function b2FoeAt(x,y) {

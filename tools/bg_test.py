@@ -26,7 +26,7 @@ with sync_playwright() as pw:
         if not ok: fails.append(f'{mid}: no such map'); continue
         pg.evaluate("(party)=>{ window.__LE.b2Start({party:party,level:12,foes:[['mudling','front']],bag:[],heart:0}); }",party)
         pg.wait_for_timeout(900)
-        got=pg.evaluate("()=>{ const k=battleBgKey(); const im=BG_IMG[k]; return [k, !!(im&&im.complete&&im.naturalWidth===576&&im.naturalHeight===324)]; }")
+        got=pg.evaluate("()=>{ const k=battleBgKey(); const im=BG_IMG[k]; return [k, !!(im&&im.complete&&im.naturalWidth===1152&&im.naturalHeight===648)]; }")
         if got[0]!=want or not got[1]: fails.append(f'{mid}: wanted {want}, got {got}')
         open(os.path.join(SHOTS,f'bg-{mid}.png'),'wb').write(base64.b64decode(pg.evaluate("()=>document.getElementById('battle-canvas').toDataURL()").split(',')[1]))
         pg.evaluate("()=>{ const L=window.__LE; if(L.B2.active&&L.B2.end) L.B2.end(); }")

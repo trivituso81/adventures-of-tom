@@ -3,6 +3,9 @@
 // ---------- Battle ----------
 const bcanvas=$('battle-canvas'),fightCtx=bcanvas.getContext('2d');
 fightCtx.imageSmoothingEnabled=false;
+// The battle canvas has 2 device pixels per game pixel (1152 x 648) so the painted pictures stay sharp; all drawing code still uses the 576 x 324 game coordinates (BS maps them).
+const BS=bcanvas.width/576;
+fightCtx.setTransform(BS,0,0,BS,0,0);
 const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 const battle={
   active:false,monster:null,enemy:null,
