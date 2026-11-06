@@ -2783,7 +2783,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-ab-jump-up",
    "tab": "Characters",
    "group": "Nara",
@@ -2795,7 +2795,16 @@
     "art/raw/characters/nara-battle-sheet-1-v1.png",
     "art/raw/characters/nara-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Jump Up.\n\nRow 1:\n1. Standing on four paws, ears perked, tail up, staring ahead with wide happy eyes.\n2. Rearing up on her hind legs, both front paws lifted forward, mouth open in a big grin.\n3. At the top of the jump, front paws reaching out, ears flying, tongue out.\n\nRow 2:\n4. Dropping back down, front paws about to touch the ground, ears bouncing.\n5. Standing on four paws, tail wagging hard, an innocent head tilt.\n6. Sitting with her tongue out and her tail swept behind her, not sorry at all."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Jump Up.\n\nRow 1:\n1. Standing on four paws, ears perked, tail up, staring ahead with wide happy eyes.\n2. Rearing up on her hind legs, both front paws lifted forward, mouth open in a big grin.\n3. At the top of the jump, front paws reaching out, ears flying, tongue out.\n\nRow 2:\n4. Dropping back down, front paws about to touch the ground, ears bouncing.\n5. Standing on four paws, tail wagging hard, an innocent head tilt.\n6. Sitting with her tongue out and her tail swept behind her, not sorry at all.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-ab-jump-up-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793988932471
+    }
+   ]
   },
   {
    "status": "draft",
