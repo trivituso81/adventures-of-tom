@@ -3003,7 +3003,7 @@
    "group": "Old Oak"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -3020,7 +3020,14 @@
      "at": 1793926634077
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "acrons in attack moves should show motion",
+     "from": "v4",
+     "at": 1793927163938
+    }
+   ],
    "id": "enemy-chairman",
    "tab": "Enemies",
    "title": "Chairman Cheeks: boss sheet, 6 frames facing right",
