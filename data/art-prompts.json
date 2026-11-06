@@ -2741,8 +2741,16 @@
    "group": "School"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-dodgeball-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793925312586
+    }
+   ],
    "rejects": [],
    "id": "enemy-dodgeball",
    "tab": "Enemies",
