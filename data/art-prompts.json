@@ -4163,9 +4163,16 @@
    "group": "Dead-Letter Office"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "doesnt look handbrush painted enough",
+     "from": "v1",
+     "at": 1793927528054
+    }
+   ],
    "id": "enemy-leviathan",
    "tab": "Enemies",
    "title": "The Chronos-Leviathan: boss sheet, 6 frames facing right",
