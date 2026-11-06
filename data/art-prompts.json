@@ -3427,8 +3427,16 @@
    "group": "Terminal Zero"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-jetlag-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793926285892
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-06",
