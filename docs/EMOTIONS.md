@@ -2,7 +2,7 @@
 
 Tom: "we need emotions character sheets for each character so they can later be programmed to respond to situations in the story. create a set of 8 core emotions that comprehensively cover the emotions found throughout the entire game and design a generic character sheet that can be used for any character."
 
-Status (2026-11-06 00:03): 9 sheets painted by Tom and indexed (below). Amy done 00:09; Nara still to paint; Michael and Jojo need a hero picture first. NOT built: the game does not show emotion art yet; no story moment is chosen yet (Tom: "dont yet determine those moments yet, just index them").
+Status (2026-11-06 00:03): 9 sheets painted by Tom and indexed (below). Amy done 00:09, Nara 00:19: all 11 characters with a hero painting are indexed; Michael and Jojo need a hero picture first. NOT built: the game does not show emotion art yet; no story moment is chosen yet (Tom: "dont yet determine those moments yet, just index them").
 
 ## The 8 core emotions (frame order = sheet order)
 
@@ -45,8 +45,8 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 | Boppy | boppy-emotions-v1.png | 268 x 426 |
 | Aunt Ellie | ellie-emotions-v1.png | 254 x 426 |
 | Olivia | olivia-emotions-v1.png | 244 x 425 |
-| Amy | amy-emotions-v1.png | (see data/emotions.js) |
-| Nara | not painted yet (own prompt: tools/art-library/prompts/dog-emotion-sheet.txt) | |
+| Amy | amy-emotions-v1.png | 263 x 426 |
+| Nara | nara-emotions-v1.png (dog prompt; frames are wider, she sits and lies down) | 413 x 414 |
 | Michael, Jojo | need a hero picture first | |
 
 - Adding a character later: save the sheet as art/raw/characters/<id>-emotions-v1.png, run the cutter with that id (it merges into the index), approve the Library entry.

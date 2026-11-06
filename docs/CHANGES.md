@@ -1,3 +1,6 @@
+## 2026-11-06 (302): Nara's emotion sheet indexed; all 11 done (`emo5`)
+- Tom (00:19): Nara's painted emotion sheet (dog prompt). Saved art/raw/characters/nara-emotions-v1.png, cut into art/emotions/nara.webp (frames 413 x 414: she sits and lies down), added to data/emotions.js, Library entry approved. All 11 characters with a hero painting are indexed; Michael and Jojo wait for a hero picture.
+- Seen: her coat paints dark brown here; the hero is near black. Used as painted.
 ## 2026-11-06 (301): Deedee: 35 more of her 80 old-voice lines now in her new voice (`deedee2`)
 
 - Tom's export of 11-06 00:08 (2010 phone clips) merged for Deedee only: 38 clips newer than the last merge or in the old-voice list (37 dialogue in dialog-ch1, ch25, ch28; 1 battle). Other voices untouched (verified key by key).
