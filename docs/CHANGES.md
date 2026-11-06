@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## 2026-11-05 (294): Portraits from the hero paintings (`heroport1`)
 - Tom (23:37): "use the characters hero images for their portraits".
 - New `tools/sprite-bake/bake_portraits.py`: square head-and-shoulders crop of art/raw/characters/<id>-hero-ref-v1.png, painted paper kept, 256 x 256 (was 128) into portraits/<id>.png. Chin lines set by eye per character (`CHIN`), Nara framed wider. Every adult face is framed by head height, so faces read the same size.
@@ -7,6 +8,15 @@
 - Tags: PORTRAITS entries and engine/menu.js to `heroport1`. Tests: tag_check ok, smoke FAILS []; screenshots of dialogue, menu and battle in portrait and landscape.
 ## 2026-11-05 (292): Aunt Ellie drawn at 5'2 (`ellie-height`)
 - Tom (23:44): "aunt ellie should be shorter than olivia" (Olivia 5'5). Call made: 5'2. `set.k=.853` in data/ellie-hires-use.js (62/71 x 42.0/43.0). She was drawn at about Tom's height before. Overworld only.
+=======
+## 2026-11-05 (292): Emotion sheets: 8 core emotions and one generic sheet per character (`emo1`)
+- Tom (23:43): "we need emotions character sheets for each character so they can later be programmed to respond to situations in the story. create a set of 8 core emotions ... and design a generic character sheet that can be used for any character".
+- The 8 (docs/EMOTIONS.md, with what each covers and why): happy, loving, sad, angry, scared, surprised, proud, unimpressed.
+- Generic prompt tools/art-library/prompts/char-emotion-sheet.txt: 4 x 2 square cells, ar 2:1, magenta, hips up facing the viewer, same head size in every cell, one animal sentence for Nara. Ref: hero picture only.
+- Art Library, Characters tab: 11 draft entries `<id>-emotions` for tom, tnb, grace, rose, amy, justin, deedee, boppy, ellie, olivia, nara (new groups for all but Tom). Spliced into data/art-prompts.json directly (415 entries, the other 404 unchanged); mirrored in tools/art-library/char-prompts.js. Michael and Jojo wait for a hero picture.
+- No game file changed. Not built: emotion art in the game and `mood:` on dialogue lines.
+- Tests: validate.js OK, tag_check ok, Art Library page checked (Grace card Ready with her hero attached). tools/art-library/test.py times out on main before this change too.
+>>>>>>> e0a9e69 (Emotion sheets: 8 core emotions and a generic emotion sheet per character in the Art Library (emo1))
 ## 2026-11-05 (291): New walking animations for Amy, Justin, Olivia, TNB and Nara; cleaner cut for all eleven; Boppy at Deedee's height (`walksheet3`)
 - Tom (23:23 to 23:28): walk sheets and hero pictures for Amy, Justin, Olivia, TNB, Nara, plus hero pictures for Deedee and Boppy.
 - Same method as 288: the nine figures are the overworld frames as painted. The walk no longer goes through head warps (Amy, Justin, Olivia, TNB) or TNB's body widening; those stay on battle and extra poses only. Nara's overworld is baked at K 9 (was 3) so the painted detail survives.

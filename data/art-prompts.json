@@ -293,6 +293,160 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Cartridge Tilt.\n\nRow 1:\n1. Looking straight out at the viewer, a flat unimpressed face, head tilted, mid head shake.\n2. Reaching straight up high with both arms, fingers spread, up on his toes.\n3. A large grey game cartridge held in both hands in front of his face, blowing into its bottom edge, cheeks puffed.\n\nRow 2:\n4. Pushing the cartridge down with both hands, leaning into it hard, teeth gritted.\n5. The whole body leaning hard to one side, both arms pushing, tilting something huge.\n6. Landing on both feet from a small hop, brushing one palm against the other, a dry satisfied look."
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-emotions",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/tom-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tnb-emotions",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-emotions",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-emotions",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-emotions",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "justin-emotions",
+   "tab": "Characters",
+   "group": "Justin",
+   "title": "Justin emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-emotions",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "boppy-emotions",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ellie-emotions",
+   "tab": "Characters",
+   "group": "Aunt Ellie",
+   "title": "Aunt Ellie emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/ellie-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "olivia-emotions",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "nara-emotions",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png"
+   ],
+   "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nThe attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.\n\nIf the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.\n\nRow 1:\n1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.\n2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.\n3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.\n4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.\n\nRow 2:\n5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.\n6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.\n7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.\n8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose."
+  },
+  {
    "status": "approved",
    "versions": [
     {

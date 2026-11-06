@@ -1,0 +1,19 @@
+Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.
+
+The attached picture is the character. Copy it as exactly as possible in every frame: the same person, face, age, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the face, the head and the arms change.
+
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the character is shown from the hips up, facing the viewer in a slight three-quarter view, the head the same size and at the same height in every cell, the hair and hands well inside the cell. Empty hands. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling is shown only by the face, the head and the arms, big and clear enough to read at a small size.
+
+If the character is an animal, show each feeling with the eyes, ears, mouth, head tilt and tail instead of the hands.
+
+Row 1:
+1. Happy. Eyes crinkled, cheeks raised, a big open-mouth smile showing the top teeth. Head tilted slightly. Both hands loosely clasped at chest height.
+2. Loving. Soft half-closed eyes, eyebrows raised gently in the middle, a warm closed-mouth smile. Head tilted to one side. Both hands pressed flat over the heart.
+3. Sad. Eyebrows pulled up in the middle, eyes looking down, the corners of the mouth turned down, bottom lip pushed out a little. Shoulders dropped, head lowered. Hands holding each other in front of the waist.
+4. Angry. Eyebrows pulled down hard and together, eyes narrowed, nostrils flared, mouth a tight frown, jaw clenched. Chin down. Arms crossed tight over the chest.
+
+Row 2:
+5. Scared. Eyebrows raised and pulled together, eyes wide open, mouth open and stretched wide at the corners. Shoulders hunched up, head pulled back. Both fists held up under the chin.
+6. Surprised. Eyebrows raised high, eyes wide and round, mouth dropped open in a tall O. Head pulled back slightly. Both hands open beside the face, palms forward.
+7. Proud. Chin raised, eyes confident, a closed-mouth one-sided smile. Chest out, shoulders back. Both fists on the hips.
+8. Unimpressed. Eyelids half lowered, one eyebrow raised, mouth a flat straight line pulled to one side. Head tilted. One hand on the hip, the other arm hanging loose.

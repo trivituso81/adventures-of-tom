@@ -123,4 +123,10 @@ for (const id of Object.keys(ABILITIES)) {
       prompt: P('char-ability-sheet.txt') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
   }
 }
+// Emotion sheets (Tom 2026-11-05 23:43, docs/EMOTIONS.md): one 4 x 2 sheet per character with a hero picture,
+// the 8 core emotions in order happy, loving, sad, angry, scared, surprised, proud, unimpressed. Ref: hero only.
+const EMOTION_CAST = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', ellie: 'Aunt Ellie', olivia: 'Olivia', nara: 'Nara' };
+for (const [id, who] of Object.entries(EMOTION_CAST)) {
+  entries.push({ id: id + '-emotions', tab: 'Characters', group: who, title: who + ' emotion sheet: 8 feelings (happy, loving, sad, angry, scared, surprised, proud, unimpressed)', ar: '2:1', refs: [R + id + '-hero-ref-v1.png'], prompt: P('char-emotion-sheet.txt') });
+}
 module.exports = { entries };
