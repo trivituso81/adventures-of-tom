@@ -1,3 +1,8 @@
+## 2026-11-06 (307): Portraits tight on the head, equal zoom (`heroport2`)
+- Tom (00:24): "all portraits should be tightly cropped to the head, zoomed equally".
+- tools/sprite-bake/bake_portraits.py rewritten: each face measured on its hero painting (both pupils and the chin, `FACE`); face size = mean of eye-to-chin and pupil spacing; square = `SIDE` (410 px) x face size, eye line at 52% down. Hair and hats no longer change the zoom (big hair and the top of Boppy's cap are cropped). Nara framed on her eye and snout (`NARA`).
+- 11 portraits rebaked (Tom, TNB, Grace, Rose, Amy, Justin, Olivia, Deedee, Boppy, Ellie, Nara). Boomie unchanged (no hero painting).
+- Tags: PORTRAITS and engine/menu.js to `heroport2`.
 ## 2026-11-06 (306): Chapter 1 opening plays Tom's painted stretch and Grace's painted squishy poses (`storypose1`)
 - Tom (00:04): "chapter 1 intro animations - you can figure out where they belong or how many of them you wish to use". Two 4 x 2 sheets: Tom stretching (8), Grace with the gold dumpling squishy (8). All 16 used, as painted.
 - Sources: art/raw/characters/tom-stretch-intro-sheet-v1.png, grace-squishy-intro-sheet-v1.png. New baker tools/sprite-bake/bake_story_poses.py (cut with the new `walk_sheet_frames.grid(path, cols, rows)`; `build` now calls it, walk output unchanged). One size per sheet: the reference standing frame equals the walk stand (Tom 42 rows at K 9 from st_fresh, Grace 39 rows at K 10 from sq_squeeze). Output art/chars/tom-story.webp, grace-story.webp, data/story-poses.js; registered by data/story-poses-use.js as STORY_POSES.

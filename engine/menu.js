@@ -10,7 +10,7 @@ const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear'
 const PER_CHAR_TABS=['status','gear','stamps'];
 // Character portraits (menu roster, dialogue box, battle panels, chapter select): head crops of each hero painting,
 // baked by tools/sprite-bake/bake_portraits.py (256 x 256). Boomie has no hero painting yet. Empty shows a placeholder.
-const PORTRAITS={tom:'portraits/tom.png?v=heroport1',ellie:'portraits/ellie.png?v=heroport1',amy:'portraits/amy.png?v=heroport1',justin:'portraits/justin.png?v=heroport1',olivia:'portraits/olivia.png?v=heroport1',grace:'portraits/grace.png?v=heroport1',deedee:'portraits/deedee.png?v=heroport1',boppy:'portraits/boppy.png?v=heroport1',nara:'portraits/nara.png?v=heroport1',boomie:'portraits/boomie.png?v=1',tnb:'portraits/tnb.png?v=heroport1',rose:'portraits/rose.png?v=heroport1'};
+const PORTRAITS={tom:'portraits/tom.png?v=heroport2',ellie:'portraits/ellie.png?v=heroport2',amy:'portraits/amy.png?v=heroport2',justin:'portraits/justin.png?v=heroport2',olivia:'portraits/olivia.png?v=heroport2',grace:'portraits/grace.png?v=heroport2',deedee:'portraits/deedee.png?v=heroport2',boppy:'portraits/boppy.png?v=heroport2',nara:'portraits/nara.png?v=heroport2',boomie:'portraits/boomie.png?v=1',tnb:'portraits/tnb.png?v=heroport2',rose:'portraits/rose.png?v=heroport2'};
 let playTime=0;
 // Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
 const GEAR_KEYS=STAT_NAMES;
