@@ -286,7 +286,7 @@ const SCENE_OPS={
   // {zoom:1.6,time:.8}: eases the outdoor camera in (above 1) or back out ({zoom:1}) while the scene plays; the camera stays on Tom or the {cam} tile.
   zoom:o=>({t:0,start(){ this.t=0; this.a=sceneZoom; },
     update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||.8)); setSceneZoom(this.a+(o.zoom-this.a)*ease(u)); return u>=1; }}),
-  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f) a.scenePose={f:o.f,dir:o.dir||'left',fps:o.fps}; else { a.scenePose=null; a.lift=0; } }),
+  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f) { a.scenePose={f:o.f,dir:o.dir||'left',fps:o.fps,mid:o.mid}; if(o.mid&&typeof storyPosesLoad==='function') storyPosesLoad(o.mid); } else { a.scenePose=null; a.lift=0; } }),   // mid: the story sheet owner for an NPC with no member (a painted em_ pose on Deedee)
   // {knock:'tom',to:[x,y],delay,fly,arc,dir}: thrown to a spot (hurt frame in the air), lands with a bounce, then lies there (KO frame) until a getup.
   knock:o=>lazy(()=>{ const a=sceneActor(o.knock),to=scenePos(o.to),fly=o.fly||.42,dl=o.delay||0,arc=o.arc||22; let t=0,from=null,dir='left';
     return {start(){ t=0; storyHold(a); const p=position(a); from=[p.x,p.y]; dir=o.dir||(to[0]<from[0]?'left':'right'); a.move=null; a.scr={x:from[0],y:from[1]}; },

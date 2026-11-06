@@ -1,3 +1,10 @@
+## 2026-11-06 (362): Deedee looks surprised when the Big Mudling grabs her pie (`deedeesurp1`)
+- Tom (08:14): Deedee did not look surprised at the pie steal. Fact: moods fire only on spoken lines and she has none between the blob's reach and her angry "That's my GOOD tin!".
+- Fix: data/scenes.js SCENES.ch1Theft holds her in `em_surprised` from landing at her spot through the reach, grab, Rose's line and the glance, then clears it before the blob scurries off so her angry line gets its normal mood. Her sheet is preloaded at the door sound (no low-res flash).
+- Engine: the `pose` step in engine/story.js takes an optional `mid` (story sheet owner) so an NPC with no party member (Deedee) can show a painted em_ pose.
+- No line text, voice or emotion-moods change; unused_voice untouched. Tested: scene frames portrait and landscape, smoke FAILS: [], tag_check ok.
+- Other silent reaction beats noticed, not changed: Boppy standing silent through the shove.
+
 ## 2026-11-06 (360): Michael: Tom's own hero painting is the reference for his walk and ability sheets (`michael3`)
 - Tom (10:29): the generator's hero did not look right, so he made one himself and asked for it as the reference for all of Michael's sheets.
 - Fact: his picture is saved as art/raw/characters/michael-hero-ref-v1.png (1024 x 1536, cream background; Michael in a navy cap with a badge, beard, grey tee, jeans, watch; Isla in orange; Lachlan in a Ninja Turtles tee). Replaced and purged: the draft entry `michael-hero-ref` and the three photo slots (`own`) on `michael-walk-sheet` and `michael-ab-answers-the-call`. Both entries now attach the painting (the walk sheet also Justin's walk sheet for layout only; the ability sheet also Michael's walk sheet) and their prompts name the clothes from it. json 657 entries, Characters 250 (test.py EXPECT). Cost to Tom: 2 Generate presses (walk, then ability), no photos needed. The multi-photo `own` support in art.html (359) stays; nothing uses it now.

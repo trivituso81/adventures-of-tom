@@ -107,7 +107,7 @@ SCENES.ch1Theft=[
   {talk:'Deedee',lines:['And I eat it anyway. That\'s love, Tommy.']},
   {flag:'tombo:deedee1'},
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
-  {sfx:'doorIn'},
+  {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
   {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,12],dir:'up'}},
   // The painted heist frames (mh_*, data/mudling-heist.js) give the blob its acting: ooze in, spot the pie, wind up, charge, shove, squeeze through,
   // wobble, reach, grab, hug, side-eye, scurry out, giggle, sneak out. The frames already hold the tin, so the game's own tin prop is not used.
@@ -135,12 +135,14 @@ SCENES.ch1Theft=[
     {seq:[{wait:.5},{face:'Deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[8,7],time:.35,arc:14}]}
   ]},
   {place:'Deedee',at:[8,7],dir:'down'},
+  {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'},
   {wait:.3},
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
   {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Rose',lines:['Deedee! A mud blob is taking your PIE!']},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
+  {pose:'Deedee'},
   // The blob scurries back down the middle (mirrored, it travels right), giggles once it is past the corridor mouth, and sneaks out the door;
   // then the three scramble up (kneel, then stand) and Deedee hops back to her counter.
   {all:[
