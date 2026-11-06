@@ -127,7 +127,7 @@ function b2DrawEnemies(t) {
     const lq=f.lunge>0?Math.sin(Math.PI*(1-f.lunge/.55)):0;
     const tq=B2.foeTarget&&f.lunge>0?BATTLE_POS[B2.foeTarget.idx]:null;
     const lungeX=tq?(tq.x*3-60-f.px)*.55:70;
-    const bob=dying?0:-Math.round((Math.sin(t*1.8+f.idx*1.7)+1)/2);   // idle: 0 to 1 px up, feet never below the fixed shadow
+    const bob=0,breath=dying?0:(.5+.5*Math.sin(t*1.7+f.idx*1.7))*.008;   // idle: a slight stretch anchored at the feet (never lifts off the ground)
     const spawn=f.spawnT!=null&&f.spawnT<.6?f.spawnT/.6:1;
     let sx=0,sy=0;
     if(aimed) {
@@ -138,7 +138,7 @@ function b2DrawEnemies(t) {
     }
     const hq=f.hold>0&&!dying?Math.sin(Math.PI/2*Math.min(1,(performance.now()-(f.holdT0||0))/(B2_WINDUP/b7Speed()))):0;   // wind-up: lean back 8 px (away from the party) and settle 3 px
     const x=Math.round(f.px-w/2+lq*lungeX+hq*8+(f.shake>0?rand(-4,4):0)+sx),y=Math.round(f.py-h+bob-lq*10+hq*3-q*30+sy+(1-spawn)*40);
-    if(!dying) ellipse(f.px,f.py+2,sw*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
+    if(!dying) ellipse(f.px,f.py-1,sw*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
     const flash=f.flash>0||(dying&&q>.1)||(aimed&&battle.flashEnemy>0);
     const sway=(f.st.goofed||f.st.staggered)&&!dying?Math.sin(t*5+f.idx)*.14:0;
     // A set piece can spin a monster about its middle and shift it (f.spin, f.ox, f.oy). They count only while the
@@ -146,6 +146,7 @@ function b2DrawEnemies(t) {
     const spun=f.spinAt&&performance.now()-f.spinAt<150&&!dying;
     if(spun) { gfx.save(); gfx.translate(x+w/2+(f.ox||0),y+h/2+(f.oy||0)); gfx.rotate((f.spin||0)+sway); if(f.fsc) gfx.scale(f.fsc,f.fsc); drawSprite(R,P,-w/2,-h/2,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
     else if(sway) { gfx.save(); gfx.translate(x+w/2,y+h); gfx.rotate(sway); drawSprite(R,P,-w/2,-h,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
+    else if(breath&&!f.hold&&!f.lunge&&!f.shake&&!aimed) { gfx.save(); gfx.translate(f.px,f.py); gfx.scale(1,1+breath); gfx.translate(-f.px,-f.py); drawSprite(R,P,x,y,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
     else drawSprite(R,P,x,y,sc,{flash,alpha:(1-q)*spawn});
     if(dying) continue;
     const top=y+(f.def._top||0)*sc;

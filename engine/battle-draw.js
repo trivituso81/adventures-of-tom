@@ -17,6 +17,18 @@ const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-sc
 const BG_IMG={};
 const bgSrc=name=>'bgs/'+name+'.webp?v='+BG_V;
 for(const k in BG_FILES) { const im=new Image(); im.src=bgSrc(BG_FILES[k]); BG_IMG[k]=im; }
+// Where a frame's feet are: sideways offset of the feet from the frame centre and their width, in sprite rows (cached on the rows array). The shadow sits under the feet, not under the frame middle.
+function feetOf(rows) {
+  if(!rows) return {dx:0,w:0};
+  if(rows._ft) return rows._ft;
+  let last=rows.length-1; while(last>0&&!/[^.]/.test(rows[last])) last--;
+  const top=Math.max(0,last-Math.max(3,Math.round(rows.length*.07)));
+  let lo=1e9,hi=-1;
+  for(let r=top;r<=last;r++) { const row=rows[r]; for(let c=0;c<row.length;c++) if(row[c]!=='.') { if(c<lo) lo=c; if(c>hi) hi=c; } }
+  const W=rows[0].length;
+  return rows._ft=hi<0?{dx:0,w:W*.5}:{dx:(lo+hi)/2-W/2,w:hi-lo+1};
+}
+
 function battleBgKey() {
   const g=currentMap&&currentMap.style&&currentMap.style.ground,L=B2.active?B2:{};
   // Story places that used to be code-drawn only (no picture): the Glass Tower, the Forever Engine, the sorting hall, the
@@ -83,7 +95,7 @@ function drawBattle() {
     const m=party[i],sp=BATTLE_SPRITES[m.id],pos=BATTLE_POS[i],fx=battle.fx[i];
     activeTint=garmentTint('bt',m.id,memberTopColor(m));
     const lunge=fx.lunge>0?Math.sin(Math.PI*(1-fx.lunge/.6)):0;
-    const breathe=alive(m)?Math.floor(t*.9+i*.5)%2:0;   // idle: lifts 1 px off the ground line, never sinks below it; the shadow stays put
+    const breathe=0,breath=alive(m)?(.5+.5*Math.sin(t*1.7+i*1.3))*.008:0;   // idle: a slight stretch anchored at the feet (never lifts off the ground); the shadow stays put
     const hurt=alive(m)&&m.hp/m.maxHp<=.25;
     const punching=lunge>.35||fx.punch>0;
     const twirling=fx.twirl>0,spinFrame=Math.floor(t*10)%2===1;
@@ -130,7 +142,7 @@ function drawBattle() {
     let appr=0;
     if(fx.appr>0) { const e=fx.apprDur-fx.appr; appr=e<.7?Math.min(1,e/.7):(fx.appr<.35?fx.appr/.35:1); }
     let cx=pos.x*3-Math.round(lunge*(pos.x*3-250))-Math.round(appr*(pos.x*3-(m.id==='rose'?236:262)))+(fx.shake>0?rand(-5,5):0)+(fx.tongue>0?Math.round(Math.sin(t*22)*2):0)+(dancing?Math.round(Math.sin(t*4.5)*16):0);
-    let base=pos.base*3-breathe-Math.round(lunge*12)-hop;
+    let base=pos.base*3-Math.round(lunge*12)-hop;
     base+=koSink;
     if(m.id==='tom'&&battle.block) {
       // Slide to a spot just in front of the shielded girl, hold, then slide back.
@@ -202,7 +214,7 @@ function drawBattle() {
     if(B2.aim&&i===battle.actor) { const wp=b2WarpPt(cx,base); cx=Math.round(wp[0]); base=Math.round(wp[1]); }
     const x=cx-w/2-(punching&&!sp.noShift?sp.scale*3:0),y=base-h;
     battle.drawnAt[i]={cx,base,h,x,w};
-    if(!noShadow) ellipse(cx,base+3+breathe,w*.55*pathSc,6*pathSc,'rgba(47,73,54,.3)');
+    if(!noShadow) { const ft=feetOf(frameOverride||frame); ellipse(cx+ft.dx*sp.scale*pathSc,base-1,Math.max(ft.w*sp.scale*.62,w*.3)*pathSc,5*pathSc,'rgba(47,73,54,.34)'); };
     if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
     else if(rot!==0||pathSc!==1||gwPose||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
       const fr2=gwPose?gwPose.fr:(frameOverride||sp.idle),w2=fr2[0].length*sp.scale,h2=fr2.length*sp.scale;
@@ -230,7 +242,10 @@ function drawBattle() {
       const wig=fx.tickle>0?Math.round(Math.sin(t*30)*3):0;
       const fr3=running&&frameOverride?frameOverride:(poking?sp.expr:frame);
       activeKneelCut=fr3===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
+      const stretch=breath&&fr3===sp.idle&&!lunge&&!hop&&!poking&&!guarding&&!wig&&!fx.shake;
+      if(stretch) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); }
       rideBodyDraw(m,fr3,sp.pal,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0),sp.scale,{flash:fx.flash>0,alpha:1,lean:guarding?-7:0});
+      if(stretch) gfx.restore();
       activeKneelCut=0;
       if(sp.handAt) RFX.postParty(i,sp,fr3,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0));
     }

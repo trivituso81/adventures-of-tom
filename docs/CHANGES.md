@@ -1,3 +1,8 @@
+## 2026-11-05 (274): Battle idle: feet stay on the ground, shadow under the feet, breath is a tiny stretch (`idle2`)
+- Tom (19:24, desktop): `idle1` made characters look like they float above their shadows and the bounce was still too much. Cause: `idle1` lifted the figure 1 canvas unit (2 px or more on screen) off a fixed shadow, and the shadow was centred on the frame middle, 3 units below the feet.
+- Party (`engine/battle-draw.js`) and enemies (`engine/battle2-ui.js`): no vertical movement at idle. The idle breath is now a 0.8 percent height stretch anchored at the feet (about 1 px of height change at the head), slow. New `feetOf(rows)` finds where a frame's feet are so the shadow sits under them (shifted and sized to the feet, 1 unit up into the feet). Moves, hops and lunges unchanged.
+- Looked at a 4 person party vs Grump and Mudling at 1211 x 744: no errors, shadows under the feet.
+
 ## 2026-11-05 (273): Battle idle: shadows stay fixed on the ground, bounce much subtler (`idle1`)
 - Tom: shadows bounced with the characters while waiting for their turn. Party idle in `engine/battle-draw.js`: the 1 px breathe now lifts the figure off the ground line instead of sinking it, runs slower (about every 1.1 s), and the shadow is drawn at the fixed ground line. Enemies in `engine/battle2-ui.js`: idle bob was plus or minus 2 px at a fast rate, now 0 to 1 px up at a slower rate, feet never below the fixed shadow.
 - Moves, hops and lunges are unchanged. Tags: `idle1` (battle-draw.js, battle2-ui.js, main.js). Looked at a Tom, Grace, Rose vs two Mudlings fight in portrait and landscape: no errors.
