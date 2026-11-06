@@ -546,83 +546,40 @@ function splashScene(W,H,panelH,time) {
 // Painted welcome art (Tom, 2026-10-29): the family stands on the plaza in art/welcome.webp (portrait) and art/welcome-land.webp (landscape).
 // Welcome cast layout (Tom 2026-11-06): the family is laid out in screen space, not picture space, so every figure keeps its real
 // proportion to the others and the group fills the screen the same way on an iPad in landscape and an iPhone in portrait.
-// Spots below are design units (h = sprite height, Rose rides on Tom so his includes her). SPLASH_FIT.sx pulls them together sideways,
-// sy squeezes the depth rows. The group is scaled to SPLASH_FIT.fracW of the screen width, but never taller than fracH of the height.
-const SPLASH_FIT={cx:470,feet0:1222,sx:.6,sy:.5,span:530,tall:405,
-  port:{fracW:.96,fracH:.36,feetY:.70},land:{fracW:.60,fracH:.44,feetY:.82}};
+// Spots below are design units (h = sprite height). SPLASH_FIT sx (per orientation) pulls them together sideways,
+// sy squeezes the depth rows. The group is scaled to fracW of the screen width, but never taller than fracH of the height.
+const SPLASH_FIT={cx:520,feet0:1222,sy:.7,tall:331,
+  port:{sx:.82,span:760,fracW:.96,fracH:.30,feetY:.66},land:{sx:.92,span:860,fracW:.70,fracH:.42,feetY:.79}};
 const SPLASH_BREATH=.012;   // same slow breath as the battle idle (engine/battle2-ui.js), a touch larger because the figures are drawn smaller here
-// Tom 2026-11-01: the title uses the new painted standing Tom. Set TITLE_TOM_RIDE=true to bring back the old painted Tom carrying Rose (needs a new ride sheet to match).
-const TITLE_TOM_RIDE=true,TITLE_TOM_H=308;   // TITLE_TOM_H: standing Tom's height in picture pixels. Tom 2026-11-01: adults at real height, Justin 6'4" = 330 (Tom 5'11" 308, TNB 5'10" 304, Boppy 5'7" 291, Amy and Deedee 5'5" 282); kids unchanged
+// Heights are in design units: real heights, Justin 6'4" = 330 (Tom 5'11" 308, TNB 5'10" 304, Boppy 5'7" 291, Amy and Deedee 5'5" 282), kids follow Grace and Rose.
+// Tom 2026-11-06: Tom and Rose each stand on their own (no Rose on the shoulders here). Nara is a 40 lb labradoodle: drawn at her overworld size next to the kids
+// (stand rows Nara 31, Rose 35, Grace 39), so about .73 of Rose (overworld sizing .89 read too big here). Later in the list draws on top.
 const SPLASH_SPOTS=[
-  {id:'justin',x:630,feet:1150,h:330},   // Tom 2026-10-30: Justin (6'4", tallest) stands just behind Amy and Deedee, listed early so they draw over him
-  {id:'grace',x:425,feet:1175,h:230},   // 2026-11-01: 225 to 230, her walk head grew (kidhead.py), body stays the same size   // Tom 2026-10-30: Grace and Tom swapped places (Grace middle-back, Tom front-left); Grace listed before Tom so Tom draws over her
-  {id:'tom',x:292,feet:1222,h:405},   // with the old carry-Rose art (TITLE_TOM_RIDE); h includes Rose. Tom 2026-11-01 19:43: combined figure bigger, 335 to 405
-  {id:'rose',x:372,feet:1204,h:205,solo:true},   // 2026-11-01: 196 to 205, head grew, body same   // Tom 2026-11-01: Tom is now the new painted standing Tom, so Rose stands beside him (no ride sheet of the new Tom yet)
-  {id:'tnb',x:170,feet:1198,h:331},   // Tom 2026-11-01 (h 309 to 331 in tnbhead1: head grew 20%, body kept): body (chin to feet) follows real height; his big hair sits on top, so the top of his hair reaches Justin's
-  {id:'boppy',x:768,feet:1222,h:284},
-  {id:'amy',x:566,feet:1222,h:282},
-  {id:'deedee',x:672,feet:1258,h:278},
-  {id:'nara',x:345,feet:1262,h:104}   // Tom 2026-11-06: family stands close together, so Nara sits in front between Tom and Grace (last in the list so she draws on top)
+  {id:'justin',x:740,feet:1150,h:330},   // stands just behind Amy and Deedee
+  {id:'tnb',x:150,feet:1198,h:331},   // h 331: his big hair sits on top, the top of his hair reaches Justin's
+  {id:'boppy',x:890,feet:1222,h:284},
+  {id:'grace',x:510,feet:1215,h:230},
+  {id:'tom',x:290,feet:1222,h:308},
+  {id:'rose',x:400,feet:1204,h:205},
+  {id:'amy',x:680,feet:1222,h:282},
+  {id:'deedee',x:790,feet:1258,h:278},
+  {id:'nara',x:595,feet:1262,h:150}   // front, between Grace and Amy
 ];
-// Tom 2026-11-01 19:43: on the welcome page Tom carrying Rose needs bigger heads (both) and a bigger combined figure.
-// The ride art has small heads, so the welcome page enlarges each head (about its neck) on a padded copy of the standing frame.
-// Numbers are in the standing frame's own pixels (78 x 171): c = head centre, r = half width/height of the head patch (hair included),
-// a = neck anchor the head grows from, s = head growth. Rose first, then Tom, so Tom's head draws over her legs.
-// Tom 2026-11-01 20:37: Rose's hair was cut off (her curls spread wider and hang lower than the oval), so her patch is now a union of soft ovals,
-// `m` = [cx,cy,rx,ry] list (the head plus a curl area on each side); the growth (s) and neck anchor (ax,ay) are unchanged, so her face is the same size.
-const RIDE_HEADS=[{cx:38,cy:15,rx:21,ry:18,ax:38,ay:31,s:1.3,m:[[38,17,25,21],[20,33,9,13],[56,33,9,13]]},{cx:39,cy:55,rx:17,ry:22,ax:39,ay:75,s:1.25}];
-const RIDE_PAD_X=14,RIDE_PAD_TOP=20,RIDE_Q=2;
-let rideBigCache=null;
-function splashRideBig(rows) {
-  if(rideBigCache) return rideBigCache;
-  const c=paintedCanvas(rows); if(!c) return null;
-  const Q=RIDE_Q,W=(c.width+RIDE_PAD_X*2)*Q,H=(c.height+RIDE_PAD_TOP)*Q;
-  const out=document.createElement('canvas'); out.width=W; out.height=H;
-  const g=out.getContext('2d'); g.imageSmoothingEnabled=true; g.imageSmoothingQuality='high';
-  g.drawImage(c,RIDE_PAD_X*Q,RIDE_PAD_TOP*Q,c.width*Q,c.height*Q);
-  for(const h of RIDE_HEADS) {
-    const t=document.createElement('canvas'); t.width=W; t.height=H;
-    const tg=t.getContext('2d'); tg.imageSmoothingEnabled=true; tg.imageSmoothingQuality='high';
-    tg.drawImage(c,(RIDE_PAD_X+h.ax-h.ax*h.s)*Q,(RIDE_PAD_TOP+h.ay-h.ay*h.s)*Q,c.width*h.s*Q,c.height*h.s*Q);
-    // soft oval mask around the grown head so only the head (not the body under it) is replaced
-    const mk=document.createElement('canvas'); mk.width=W; mk.height=H; const mg=mk.getContext('2d');
-    for(const [ocx,ocy,orx,ory] of (h.m||[[h.cx,h.cy,h.rx,h.ry]])) {
-      const mx=(RIDE_PAD_X+h.ax+(ocx-h.ax)*h.s)*Q,my=(RIDE_PAD_TOP+h.ay+(ocy-h.ay)*h.s)*Q,rx=orx*h.s*Q;
-      mg.save(); mg.translate(mx,my); mg.scale(1,ory/orx);
-      const gr=mg.createRadialGradient(0,0,rx*.78,0,0,rx); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(1,'rgba(0,0,0,0)');
-      mg.fillStyle=gr; mg.fillRect(-rx*2,-rx*2,rx*4,rx*4); mg.restore();
-    }
-    tg.globalCompositeOperation='destination-in'; tg.drawImage(mk,0,0);
-    g.drawImage(t,0,0);
-  }
-  rideBigCache={cv:out,fw:c.width,fh:c.height};
-  return rideBigCache;
-}
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
   const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
   if(c.width!==w||c.height!==h) { c.width=w; c.height=h; }
   const g=splash.g; g.clearRect(0,0,w,h);
   const F=SPLASH_FIT,L=w>h?F.land:F.port;
-  const sc=Math.min(w*L.fracW/F.span,h*L.fracH/F.tall),baseY=h*L.feetY;
+  const sc=Math.min(w*L.fracW/L.span,h*L.fracH/F.tall),baseY=h*L.feetY;
   const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
   try {
     for(const m of SPLASH_SPOTS) {
-      if(m.solo&&TITLE_TOM_RIDE) continue;
-      const set=m.id==='tom'&&OW.tomRide&&TITLE_TOM_RIDE?OW.tomRide:OW[m.id]; if(!set||!set.down) continue;
-      const cx=w/2+(m.x-F.cx)*F.sx*sc,feet=baseY+(m.feet-F.feet0)*F.sy*sc,hh=m.id==='tom'&&!TITLE_TOM_RIDE?TITLE_TOM_H:m.h;
-      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=hh*sc/fh;
+      const set=OW[m.id]; if(!set||!set.down) continue;
+      const cx=w/2+(m.x-F.cx)*L.sx*sc,feet=baseY+(m.feet-F.feet0)*F.sy*sc;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*sc/fh;
       const br=1+(.5+.5*Math.sin(time*1.7+SPLASH_SPOTS.indexOf(m)*1.7))*SPLASH_BREATH;   // slow breath from the feet, like the battle idle
       g.save(); g.translate(cx,feet); g.scale(1,br); g.translate(-cx,-feet);
-      if(m.id==='tom'&&TITLE_TOM_RIDE&&set===OW.tomRide) {   // bigger heads (see RIDE_HEADS)
-        const big=splashRideBig(fr);
-        if(big) {
-          const kp=hh*sc/big.fh,Q=RIDE_Q,bottom=Math.round(feet);
-          g.imageSmoothingEnabled=true; g.imageSmoothingQuality='high';
-          g.drawImage(big.cv,Math.round(cx-(RIDE_PAD_X+big.fw/2)*kp),Math.round(bottom-(RIDE_PAD_TOP+big.fh)*kp),Math.round(big.cv.width/Q*kp),Math.round(big.cv.height/Q*kp));
-          g.imageSmoothingEnabled=false; g.restore(); continue;
-        }
-      }
       drawSprite(fr,set.pal,Math.round(cx-fw*k/2),Math.round(feet-fh*k),k);
       g.restore();
     }

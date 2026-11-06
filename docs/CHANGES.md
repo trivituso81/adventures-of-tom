@@ -1,3 +1,9 @@
+## 2026-11-06 (315): Welcome screen: Tom and Rose stand separately, looser spacing, bigger Nara (`welcome3`)
+- Tom (00:55): "youve smooshed them too close together. dont use rose on toms shoulders but rather the tom and rose hero images individually. Nara is sized too small - she's a 40 lb labradoodle so figure her size relative to the other characters".
+- Spacing loosened (sideways pull .92 on iPad, .82 on iPhone, depth .7), figures re-spread in a line so nobody hides anybody. Tom and Rose are each drawn from their own painted standing frame (OW.tom, OW.rose). Nara 104 to 150 (about .73 of Rose).
+- Purged: Rose-on-shoulders welcome art (TITLE_TOM_RIDE, RIDE_HEADS, splashRideBig and its cache), 0 references in splash.js; the ride frames themselves stay for chapter 1 and battle (NEXT TASK RIDE).
+- Tested: shots 393x852, 1180x820, 1090x890; smoke below.
+
 ## 2026-11-06 (314): Deedee's battle sheets saved (`deedeesheets1`)
 - Tom (01:00) sent Deedee's two battle sheets (8 frames, 6 frames). They are byte for byte the pictures saved earlier as amy-battle-sheet-1/2-v1.png, so those two files are renamed art/raw/characters/deedee-battle-sheet-1-v1.png and -2-v1.png (nothing referenced the amy names). Matches her hero painting (short bob, rust tank, tan capris, gold hoops).
 - Her 14 ability sheets unblock in the Art Library by themselves. Not installed in the game yet. Amy has NO battle sheets of her own now: still waiting on Tom.
