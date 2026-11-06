@@ -28,7 +28,7 @@ _src = open(os.path.join(ROOT, 'tools/sprite-bake/bake_foe.py')).read()
 MARK = ast.literal_eval(re.search(r'^MARK = (\{.*?^\})', _src, re.S | re.M).group(1))
 BOSS = ast.literal_eval(re.search(r'^BOSS = (\{.*?\})', _src, re.M).group(1))
 MARK_NEW = {   # ids that had no old painted sheet: set by hand from the approved picture
-    'julian': {'eyes': [(.34, .18), (.46, .18)], 'mouth': (.41, .25)},
+    'julian': {'eyes': [(.53, .16), (.61, .16)], 'mouth': (.57, .215)},
     'deadletter': {'eyes': [(.50, .35), (.66, .35)], 'mouth': (.58, .48)},
 }
 BOSS = set(BOSS) | {'julian'}   # chapter 20 Julian Vance: a 3 x 2 sheet like vance
