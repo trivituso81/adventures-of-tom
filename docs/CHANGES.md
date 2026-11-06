@@ -1,3 +1,7 @@
+## 2026-11-05 (251): Chairman: the throne stays in every pose (Art Library only, no game files, no tag)
+
+Tom: in the bottom poses the bottom of the throne disappears. In the approved sheet pose 6 had the squirrel leap off with no throne. POSES.chairman now says the whole throne is in all six poses on the same ground line and the squirrel never leaves it; pose 6 leans far forward while still seated.
+
 ## 2026-11-05 (250): Red Pen hit pose made dramatic (Art Library only, no game files, no tag)
 
 Tom: the damage pose is not dramatic enough. In the approved sheet pose 2 only tilted and kept its angry face. POSES.redpen pose 2 now: slammed backward, body bent in a hard curve, eyes shut, mouth wide in a shout, bent nib, cape blown over the head, big ink burst from the barrel. Other poses unchanged.
