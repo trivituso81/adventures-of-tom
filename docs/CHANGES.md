@@ -1,3 +1,9 @@
+## 2026-11-06 (377): Young Boppy walk sheet from Tom; walk entry removed (Art Library only)
+
+- Fact (Tom 12:49): he made the Young Boppy walk sheet himself. Saved as `art/raw/characters/boppy-young-walk-sheet-ref-v1.png` (1247 x 1261, 3 x 3 on magenta).
+- Removed the `boppy-young-walk-sheet` Library entry and its prompt (saves a Generate press, now 2 for the young set). `boppy-young-battle-sheet-1` now attaches the hero ref and this walk sheet. Entries 690 to 689. `boppy-young-battle-sheet-2` unchanged (refs hero ref, battle 1).
+- Not installed. `boppy-ab-xc-ult` unchanged. No game files, no tag.
+
 ## 2026-11-06 (376): Warden Boppy boss installed from the new approved Library sheet (`warden2`)
 
 - Fact (Tom 12:40: new `enemy-warden` sheet generated and approved, v2, painted-Boppy refs): `bake_foe_sheets.py warden` rebaked `art/foes/warden.webp` (6 frames, atlas 1993 x 408, stance 306 x 386) and `data/foes/warden-hires.js` (rows 42 x 53). Same grid and frame order, so engine and wiring unchanged.

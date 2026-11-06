@@ -1,31 +1,8 @@
 // Young Boppy (Tom 2026-11-06 11:51): the Van Cortlandt Park '70 flashback needs its own character, not old Boppy.
 // Canon: October 1970, about 20, college freshman, clean-shaven, full dark black hair, Italian American looking, skimpy vintage track
 // uniform (tank top, short running shorts, socks, shoes), no cap, 5'7". No photo exists: aged down from the adult Boppy hero.
-// Hero: Tom painted it himself (art/raw/characters/boppy-young-hero-ref-v1.png), so there is no hero entry. Walk and battle sheets follow the approved-hero method (no left/right words). Not a recruit: flashback move only.
+// Hero: Tom painted it himself (art/raw/characters/boppy-young-hero-ref-v1.png), so there is no hero entry. Walk sheet: Tom made it too (boppy-young-walk-sheet-ref-v1.png), so no walk entry. Battle sheets follow the approved-hero method (no left/right words). Not a recruit: flashback move only.
 const R = 'art/raw/characters/';
-const walkPrompt = `Paint a walking sheet of one young man for a role-playing game.
-
-Picture 1 is the finished painting of the character. Copy it as exactly as possible in every frame: the same person, face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style, level of detail, head size compared to the body and figure size. Picture 2 is the walking sheet of another character: copy only its layout, its figure size and its way of drawing walking steps, never the person.
-
-One image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.
-
-Row 1, facing the viewer:
-1. Standing, feet together, arms at his sides, a confident easy grin.
-2. A walking step, one foot forward, the opposite arm swinging forward.
-3. The opposite step, the opposite arm swinging forward.
-
-Row 2, seen from behind, walking away from the viewer, showing his full black hair and the back of his tank top:
-4. Standing, feet together.
-5. A walking step, one foot forward, the opposite arm swinging forward.
-6. The opposite step.
-
-Row 3, in profile, facing the same way as the profile row of picture 2:
-7. Standing, feet together.
-8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.
-9. The passing step, back foot lifted with a bent knee, body a little higher.
-
-He walks with a light, springy runner's step: relaxed, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.`;
-
 const battle1Prompt = `Draw one battle sheet of the character in the attached pictures, for a family role-playing game.
 
 Picture 1 is the character. Picture 2 is his walk sheet. Picture 3 is a battle sheet of a different character: copy only its grid layout, its viewing angle (a three-quarter view from slightly above, facing an opponent), its figure size and its feet on one ground line, never the person. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style, level of detail and head size compared to the body.
@@ -59,10 +36,8 @@ One image, a grid of 3 columns by 2 rows of equal square cells (6 frames, number
 Do not add frames, merge frames, repeat a pose or invent props. Family friendly.`;
 
 module.exports = { entries: [
-  { id: 'boppy-young-walk-sheet', tab: 'Characters', group: 'Boppy', title: 'Young Boppy walking sheet 3 x 3 (copies Tom\'s painted hero)', ar: '1:1',
-    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-walk-sheet-v1.png'], prompt: walkPrompt },
-  { id: 'boppy-young-battle-sheet-1', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 1, 8 frames 4 x 2 (needs his walk sheet approved)', ar: '2:1',
-    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-walk-sheet-v1.png', R + 'boppy-battle-sheet-1-v1.png'], prompt: battle1Prompt },
+  { id: 'boppy-young-battle-sheet-1', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 1, 8 frames 4 x 2 (copies Tom\'s painted hero and walk sheet)', ar: '2:1',
+    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-walk-sheet-ref-v1.png', R + 'boppy-battle-sheet-1-v1.png'], prompt: battle1Prompt },
   { id: 'boppy-young-battle-sheet-2', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 2, 6 frames 3 x 2 (needs battle sheet 1 approved)', ar: '3:2',
     refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-battle-sheet-1-v1.png'], prompt: battle2Prompt },
 ] };

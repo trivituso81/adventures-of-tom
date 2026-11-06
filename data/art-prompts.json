@@ -14114,40 +14114,17 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is her walk sheet. Picture 3 is a battle move sheet of another character, TNB, throwing a flying disc to her. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, glasses, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail and figure size. From picture 3 copy only the viewing angle, the figure size and the feet on one ground line, never the person.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell. A held flying disc is painted in the same style as the character, white with a thin colored rim. Draw only her, no other people.\n\nIn every frame she faces the same way as TNB does in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Frisbee Golf. She is in no hurry, ever.\n\nRow 1:\n1. Standing, turning toward someone off to the side, one hand lifted in a small easy wave, relaxed.\n2. Jogging backwards with long easy steps, eyes up on something flying toward her, both hands rising to catch.\n3. Leaping off the ground, one arm stretched up high with the fingers open, eyes on the disc, mouth open.\n\nRow 2:\n4. Landing, the disc caught in one hand held close to her face, a big surprised grin.\n5. Hopping with joy, the disc held high in one raised hand, the other fist pumped, a big laugh.\n6. Standing relaxed, the disc tucked under one arm, the other hand giving a calm thumbs up, a small satisfied smile."
   },
   {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/characters/boppy-young-walk-sheet-v1.png",
-     "date": "2026-11-06",
-     "from": "v1",
-     "at": 1793997977325
-    }
-   ],
-   "rejects": [],
-   "id": "boppy-young-walk-sheet",
-   "tab": "Characters",
-   "group": "Boppy",
-   "title": "Young Boppy walking sheet 3 x 3 (copies Tom's painted hero)",
-   "ar": "1:1",
-   "refs": [
-    "art/raw/characters/boppy-young-hero-ref-v1.png",
-    "art/raw/characters/boppy-walk-sheet-v1.png"
-   ],
-   "prompt": "Paint a walking sheet of one young man for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it as exactly as possible in every frame: the same person, face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style, level of detail, head size compared to the body and figure size. Picture 2 is the walking sheet of another character: copy only its layout, its figure size and its way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at his sides, a confident easy grin.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing his full black hair and the back of his tank top:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nHe walks with a light, springy runner's step: relaxed, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly."
-  },
-  {
    "status": "draft",
    "versions": [],
    "rejects": [],
    "id": "boppy-young-battle-sheet-1",
    "tab": "Characters",
    "group": "Boppy",
-   "title": "Young Boppy battle sheet 1, 8 frames 4 x 2 (needs his walk sheet approved)",
+   "title": "Young Boppy battle sheet 1, 8 frames 4 x 2 (copies Tom's painted hero and walk sheet)",
    "ar": "2:1",
    "refs": [
     "art/raw/characters/boppy-young-hero-ref-v1.png",
-    "art/raw/characters/boppy-young-walk-sheet-v1.png",
+    "art/raw/characters/boppy-young-walk-sheet-ref-v1.png",
     "art/raw/characters/boppy-battle-sheet-1-v1.png"
    ],
    "prompt": "Draw one battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character. Picture 2 is his walk sheet. Picture 3 is a battle sheet of a different character: copy only its grid layout, its viewing angle (a three-quarter view from slightly above, facing an opponent), its figure size and its feet on one ground line, never the person. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style, level of detail and head size compared to the body.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells (8 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line, each figure well inside its cell with clear magenta margin. In every frame he faces the same way as the character in picture 3. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Ready stance, feet shoulder width apart, knees slightly bent, hands loose, a cocky friendly look.\n2. The same stance a moment later, chest risen with a breath, shoulders a little higher, one hand relaxed open.\n3. Standing tall, both hands on his hips, chin lifted, a playful unimpressed look.\n4. One arm stretched toward the opponent, palm up, presenting something, a small proud smile.\n5. Body twisted away from the opponent, arm pulled back, weight on the back leg, eyes narrowed, about to spring.\n6. Lunging far forward toward the opponent, arm at full reach, front knee bent, mouth open in a shout.\n7. Feet planted, both arms flung wide, chest out, chin up, announcing something big.\n8. Crouched low, forearms crossed in front of the chest and face, chin tucked, determined.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly."
