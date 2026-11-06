@@ -3926,7 +3926,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "justin-ab-giant-sneeze",
    "tab": "Characters",
    "group": "Justin",
@@ -3938,7 +3938,16 @@
     "art/raw/characters/justin-battle-sheet-1-v1.png",
     "art/raw/characters/justin-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Giant Sneeze.\n\nRow 1:\n1. Standing in his nice sneakers with a calm face, hands at his sides.\n2. Nose scrunching, eyes starting to squeeze, mouth opening a little.\n3. Head tilted back, eyes shut tight, mouth wide open, about to sneeze.\n\nRow 2:\n4. Doubled forward in a huge sneeze, eyes squeezed shut, mouth wide open, arms flung back.\n5. Staying bent forward, hair blown forward and hands out to steady himself.\n6. Standing up straight and wiping his nose with the back of his hand, a sheepish look."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image with EXACTLY 6 figures in a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. Two rows only, never three. Do not copy the grid layout of the attached pictures, they have more cells than this sheet. Do not add extra poses. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell, full body from head to shoes. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Giant Sneeze. It is a big, silly, cartoon-style sneeze, played for laughs, with exaggerated faces and bodies. Any air or wind is shown only as painted white swoosh lines and puffs, with nothing gross.\n\nRow 1:\n1. Standing in his nice sneakers with a calm face, hands at his sides.\n2. Nose twitching and scrunched up, watery eyes squeezing, one finger raised under his nose, mouth starting to open, a comic worried look.\n3. Rising onto his toes with his head thrown far back, chest puffed out, both arms lifting, eyes squeezed shut, mouth stretched wide open, about to sneeze.\n\nRow 2:\n4. The big sneeze: his whole body whipped forward in a deep bow, eyes squeezed shut, mouth gaping, cheeks bulging, both arms flung out behind him, a big burst of white air swoosh lines blasting out in front of his face, his hair and clothes pushed backward.\n5. Wobbling after the sneeze, still bent forward, one foot sliding back, arms windmilling to keep his balance, hair sticking up wildly, dizzy wide eyes.\n6. Standing up straight, wiping his nose with the back of his hand, one shoulder shrugged, a sheepish embarrassed grin, hair still messy.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/justin-ab-giant-sneeze-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793996111217
+    }
+   ]
   },
   {
    "status": "rejected",
