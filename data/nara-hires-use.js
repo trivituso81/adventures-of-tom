@@ -34,6 +34,11 @@ const NARA_SIZE=1.15;   // Tom, 2026-10-29: Nara 15 percent larger everywhere (b
     castPose:cast,aim:cast,hip,kneel,sit:kneel,expr:defend});
   sp.run=[P('run1'),P('run2')];
   sp.flip=mir(idle); sp.celebFlip=mir(celeb); sp.runFlip=sp.run.map(mir);
+  // Ability frames (tools/sprite-bake/bake_nara_ab.py, data/nara-ab.js): f:'ab_jump_1' etc. in a move's keys; a trailing 'F' is the same frame facing right. Mouth point = nose tip.
+  if(typeof NARA_AB!=='undefined') { const A=NARA_AB; paintedAtlas('naraAb',A.atlas.src,A.atlas.rects,A.atlas.k);
+    for(const k in A.ab) { const m=A.marks[k],r=paintRows(rk(A.ab[k]),'naraAb',k,false);
+      if(sp.eyeAt) sp.eyeAt.set(r,{col:m.eye[0],row:m.eye[1]}); if(sp.handAt) sp.handAt.set(r,{n:[m.mouth[0],m.mouth[1]],f:[m.mouth[0]+1,m.mouth[1]]});
+      sp[k]=r; sp[k+'F']=mir(r); } }
   // Knocked out: Nara's KO sprite is stored facing LEFT (engine/battle-draw.js mirrors every other character's, not hers), as the sheet draws her.
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.nara={scale:NARA_SIZE,pal:NARA_HIRES.ko.pal,rows:paintRows(NARA_HIRES.ko.rows.slice(),'naraKo','ko',false)};
 })();

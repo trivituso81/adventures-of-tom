@@ -1,3 +1,11 @@
+## 2026-11-06 (364): Nara install: 14 painted ability sheets, 5 painted props (`narainst1`)
+
+- Fact: Tom approved all 14 `nara-ab-*` and 14 `nara-fx-*` sheets. All 14 Nara moves now play painted frames (`art/chars/nara-ab.webp`, `data/nara-ab.js`, 83 frames, only frames the moves use). Same sizing rule as TNB (median body size matched to her battle frames).
+- Tools: `tools/sprite-bake/ability_frames_nara.py` (cut), `bake_nara_ab.py` (bake), `bake_nara_fx.py` (props, `--check` contact sheet). `data/nara-hires-use.js` registers the atlas and mouth and eye points; `engine/nara.js` moves use `ab_<key>_N` frames.
+- Painted props replace the drawn ones: tennis ball, park bench, happy puddle, fancy and homemade covered dishes (old drawn versions and the puddle and blanket code removed). Pack Ult sheet came back with a baked checkerboard, so its props stay drawn. Counter Surfer's snack still uses the drawn cake.
+- No line text changed. Tests: kit_test for all 14 `FAILS: []`, smoke FAILS: [], tag_check ok, unused_voice 0. TNB re-cut check: every approved tnb ab/fx version (incl. Kiln Door Policy v2) is already the one baked.
+- Likeliest regenerates: Squirrel Ult (CHAIRMAN CHEEKS tree frame unused), Doodle Fluff silhouette, Don't Leave Me, Happy Puddle size, Shake It Off.
+
 ## 2026-11-06 (363): Boppy's new emotion sheet is installed (`emo8`)
 
 - Fact: Tom approved `boppy-emotions` v2 (4 x 2, all 8 moods, `art/raw/characters/boppy-emotions-v2.png`, 1408 x 704). Boppy's full-body emotion frames (`art/emotions/boppy.webp`, 210 x 338 per frame), his 8 dialogue faces (`portraits/emo/boppy-*.webp`) and his `boppyemo` story poses now come from it. v1 stays in `art/raw` as an approved source only.

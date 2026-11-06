@@ -450,7 +450,7 @@ SC.nv_closeup=(s,u)=>{ const op=ez(u/.12)*(1-ez((u-.88)/.12)),H=170*op,cy=150; i
   gfx.restore();
   gfx.globalAlpha=op; R(0,cy-H/2-3,576,3,OUT); R(0,cy+H/2,576,3,OUT); };
 N.puppyEyesShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=t?ST.unit(t):{x:168,top:180,base:260,h:80,w:60,mid:220},sx=410,sy=Math.min(312,BATTLE_POS[m.idx].base*3-6);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:sx,y:sy,f:'sit'},{t:2800,f:'sit',rot:-.12},{t:3400,f:'sit',rot:u=>-.12+Math.sin(u*Math.PI*4)*.05},{t:3900,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:sx,y:sy,f:'ab_eyes_1'},{t:1300,f:'ab_eyes_2'},{t:2200,f:'ab_eyes_3'},{t:2900,f:'ab_eyes_4'},{t:3400,f:'ab_eyes_5'},{t:3800,f:'ab_eyes_6'},{t:4100,f:'runR'},{t:4600,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Nara trots to the middle of the room and sits.'); say(m.id,'puppy_eyes'); sfx.whine(); }],
     [850,()=>{ scene('nv_closeup',1.8,{}); sfx.charge(); setMessage('She looks up. Those aren\'t dog eyes. Those are PEOPLE eyes.'); }],
@@ -492,10 +492,10 @@ N.dont_leave_me=E2=>{ const {m,fx}=E2,M=B2.move,W=(M&&M.waves||[]).map(w=>w[0]&&
   const L=tomU()||b2LiveParty().find(p=>p!==m),LU=L&&ST.unit(L),away=LU?Math.max(0,Math.min(120,560-LU.x-LU.w*.3)):0,H0=homeOf(m);
   if(L) battle.fx[L.idx].path={t:0,dur:4.0,fn:(q,c)=>{ const ms=q*4000,dx=ms<300?0:(ms<1000?ez((ms-300)/700)*away:(ms<3300?away:away*(1-ez((ms-3300)/400)))); return {cx:c.origX+dx,base:c.origBase,frame:ms>300&&ms<3300?(c.sp.flip||c.sp.idle):null}; }};
   const pts=[0,1,2,3].map(k=>{ const f=T[k%T.length],U=ST.unit(f); return {x:Math.max(20,Math.min(556,U.x+(k%2?-1:1)*(U.w*.5+6))),y:Math.min(316,U.base+4),f}; });
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:700,f:'idle',rot:-.1},{t:1000,f:'sit',rot:u=>ez(u/.3)*.35},{t:1800,f:'run'}];
-  pts.forEach((p,k)=>K.push({t:2100+k*380,x:p.x,y:p.y-(k%2?18:0),f:k%2?'runR':'run',ns:true}));
+  const K=[{t:0,x:'home',y:'home',f:'ab_leave_1'},{t:700,f:'ab_leave_2'},{t:1800,f:'ab_leave_3'}];
+  pts.forEach((p,k)=>K.push({t:2100+k*380,x:p.x,y:p.y-(k%2?18:0),f:['ab_leave_3','ab_leave_3F','ab_leave_5','ab_leave_5F'][k],ns:true}));
   const back=LU?{x:Math.min(556,LU.x-34),y:Math.min(316,LU.base+3)}:{x:H0.x,y:H0.y};
-  K.push({t:3900,x:back.x,y:back.y,f:'celeb',hop:16,hn:3,rot:wag},{t:4500,f:'runR'},{t:5000,x:'home',y:'home',f:'idle'});
+  K.push({t:3500,f:'ab_leave_4'},{t:3900,x:back.x,y:back.y,f:'ab_leave_6',hop:16,hn:3,rot:wag},{t:4500,f:'ab_leave_6F'},{t:5000,x:'home',y:'home',f:'idle'});
   ST.keys(fx,K);
   const words=['CRASH','BONK','OOF','CRASH'];
   const steps=[[0,()=>{ setMessage(L?L.name+' takes ONE step away. To get a snack.':'The room gets very quiet. Too quiet.'); say(m.id,'dont_leave_me'); }],
@@ -564,7 +564,7 @@ SC.nv_bark=(s,u)=>{ const q=ez(u); gfx.globalAlpha=1-u; for(let k=0;k<3;k++) { c
 SC.nv_freeze=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); for(const F of s.list) { gfx.strokeStyle=ICE; gfx.lineWidth=3; gfx.setLineDash([6,4]); gfx.strokeRect(F.x-F.w*.5-6,F.top-6,F.w+12,F.h+10); gfx.setLineDash([]);
     for(let k=0;k<4;k++) { const sx=F.x-F.w*.5+k*F.w/3; gfx.beginPath(); gfx.moveTo(sx-5,F.base+4); gfx.lineTo(sx,F.base-12); gfx.lineTo(sx+5,F.base+4); gfx.closePath(); gfx.fillStyle=ICE; gfx.fill(); gfx.lineWidth=2; gfx.strokeStyle=OUT; gfx.stroke(); } } };
 N.stranger_alert=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),H0=homeOf(m),wy=H0.y-NH()-18,nh=NH();
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'sit'},{t:1400,f:'sit',rot:.05},{t:1850,f:'act',rot:u=>Math.sin(u*Math.PI*6)*.08,dy:u=>-Math.abs(Math.sin(u*Math.PI*3))*8},{t:3000,f:'sit'},{t:3450,f:'act',dy:u=>-Math.abs(Math.sin(u*Math.PI*2))*7},{t:3900,f:'sit'},{t:4300,f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_alert_1'},{t:1400,f:'ab_alert_2'},{t:1850,f:'ab_alert_3'},{t:2250,f:'ab_alert_4'},{t:2600,f:'ab_alert_5'},{t:3000,f:'ab_alert_6'},{t:3450,f:'ab_alert_3',dy:u=>-Math.abs(Math.sin(u*Math.PI*2))*7},{t:3900,f:'ab_alert_6'},{t:4300,f:'idle'}]);
   const hitB=(k,amt)=>()=>{ barks(1); scene('nv_bark',.6,{x:H0.x-40,y:H0.y-nh*.6,r:H0.x-G.x0}); scene('nv_big',.8,{x:G.x+(k-1)*70,y:G.top-60-k*14,txt:'BARK!',c:k%2?CREAM:GOLD,sc:3+(k===2?1:0)}); for(const f of list) ST.jolt(f,.4); landHit(amt); };
   ST.play(E2,[
     [0,()=>{ setMessage('Nara sits at the window. Very still. Ears up.'); say(m.id,'stranger_alert'); scene('nv_window',4.4,{x:H0.x,y:wy,w:Math.max(96,BATTLE_SPRITES.nara.idle[0].length*2+20),h:nh+24}); }],
@@ -581,21 +581,17 @@ N.stranger_alert=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),H0=homeOf(
 // She shakes out her big curly coat into a huge cloud, then flops on the friend like a warm curly blanket.
 SC.nv_fluff=(s,u)=>{ const q=ez(u/.5); gfx.globalAlpha=fade(u,.6); for(let k=0;k<26;k++) { const a=k/26*Math.PI*2+s.seed,d=q*(30+(k%5)*14),r=(8+(k%3)*4)*(.5+q*.8),x=s.x+Math.cos(a)*d*1.3,y=s.y+Math.sin(a)*d*.8;
     E(x,y,r+2,r+2,OUT); E(x,y,r,r,k%2?FUR2:FUR3); E(x-r*.3,y-r*.3,r*.3,r*.3,'#6a5a5a'); } };
-SC.nv_blanket=(s,u)=>{ const F=s.F,w=F.w*.75+18,cx=F.x,cy=F.base-F.h*.38,dr=ez(u/.15),b=Math.sin(s.t*3)*1.5; gfx.globalAlpha=fade(u,.9);
-  gfx.save(); gfx.translate(cx,cy-(1-dr)*30+b); E(0,0,w*.5+3,F.h*.3+3,OUT); E(0,0,w*.5,F.h*.3,FUR);
-  for(let k=0;k<16;k++) { const x=-w*.45+(k%8)*w*.13,y=-F.h*.16+Math.floor(k/8)*F.h*.2,r=7+(k%3)*2; E(x,y,r,r*.85,k%2?FUR2:FUR3); }
-  const hx=-w*.5-6,hy=-F.h*.12; E(hx,hy,15,13,OUT); E(hx,hy,13,11,FUR2); E(hx-10,hy+2,4,3,'#0b0909'); E(hx-3,hy-3,2,2,'#fff'); E(hx+4,hy-3,2,2,'#fff'); E(hx-6,hy+9,4,5,'#ee95aa');
-  E(w*.5+2,-F.h*.2,6,6,FUR3); gfx.restore(); if(u>.3&&u<.85) label('COZY',cx,cy-F.h*.3-26,GOLD,2); };
 N.doodle_fluff=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,U=ST.unit(t),sp=spotFor(m,t),self=sp.self,foe=t.side==='foe';
   const fl=self?{x:U.x,y:U.base}:{x:U.x,y:U.base};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:sp.x,y:sp.y,f:'idle'},{t:1000,f:'idle',rot:(u,tt)=>Math.sin(tt*45)*.3,dx:(u,tt)=>Math.sin(tt*45)*4},{t:2000,f:'celeb',hop:22},{t:2300,x:fl.x,y:fl.y,f:'idle',hide:true},
-    {t:3900,x:Math.min(560,U.x+U.w*.5+20),y:Math.min(316,U.base+3),f:'celeb',hop:10},{t:4200,f:self?'idle':'runR'},{t:4800,x:'home',y:'home',f:'idle'}]);
+  const lie=Math.round(U.h*.2);   // she flops on top of the friend: the painted lying frames sit this high on them
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:sp.x,y:sp.y,f:'ab_fluff_3'},{t:1000,f:'ab_fluff_1',dx:(u,tt)=>Math.sin(tt*45)*4},{t:1500,f:'ab_fluff_2'},{t:2000,f:'ab_fluff_3',hop:22},{t:2300,x:fl.x,y:fl.y-lie,f:'ab_fluff_4'},{t:2650,f:'ab_fluff_5'},{t:3500,f:'ab_fluff_6'},
+    {t:3900,x:Math.min(560,U.x+U.w*.5+20),y:Math.min(316,U.base+3),f:'ab_fluff_3',hop:10},{t:4200,f:self?'idle':'runR'},{t:4800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Nara walks over to '+(self?'a nice spot':t.name)+' and shakes out her big curly coat.'); say(m.id,'doodle_fluff'); }],
     [1000,()=>{ const s0=sp.self?homeOf(m):sp; scene('nv_fluff',1.4,{x:s0.x,y:s0.y-NH()*.5}); sfxs('spray'); }],
     [1150,()=>{ const s0=sp.self?homeOf(m):sp; scene('nv_big',1.2,{x:s0.x-20,y:s0.y-NH()-40,txt:'FLOOF!',c:CREAM,sc:4}); }],
     [2000,()=>{ setMessage('Then she flops on '+(self?'the floor':t.name)+' like a warm curly blanket.'); sfx.boing(); }],
-    [2300,()=>{ scene('nv_blanket',1.6,{F:U}); sfx.thud(); }],
+    [2300,()=>{ sfx.thud(); scene('nv_text',1.3,{x:U.x,y:U.top-20,txt:'COZY',c:GOLD,sc:2}); }],
     ['hf',2600],
     [2600,()=>{ E2.apply(); sfx.heal(); scene('nv_glow',1,{x:U.x,y:U.mid,c:'#ffb45a'}); scene('nv_hearts',1.3,{x:U.x,y:U.top}); if(foe) ST.jolt(t,.15); }],
     [4900,'end',kindLine(t,'Forty pounds of warm curly blanket. Every worry, gone.')]]); };
@@ -605,7 +601,7 @@ N.doodle_fluff=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,U=ST.unit(t),sp=spotFor(
 SC.nv_bigspray=(s,u)=>{ for(let k=0;k<70;k++) { const a=(k*137.5%360)/180*Math.PI,sp=.5+((k*31)%50)/50,d=ez(u)*700*sp,x=s.x+Math.cos(a)*d,y=s.y+Math.sin(a)*d*.6+u*u*60; if(x<-10||x>590||y<-10||y>334) continue; gfx.globalAlpha=1-cl((u-.6)/.4); E(x,y,3+(k%3),4+(k%3),k%3?WATER:'#e6f7ff'); } };
 N.shake_everyone=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });
   const cx=kind?ST.unit(tg[0]).x+ST.unit(tg[0]).w*.5+40:420,cy=kind?ST.unit(tg[0]).base+3:Math.min(318,BATTLE_POS[m.idx].base*3+2);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:cx,y:cy,f:'idle'},{t:1000,f:'idle',rot:u=>u>.3&&u<.5?.08:0},{t:1500,f:'idle',rot:(u,tt)=>Math.sin(tt*45)*.28,dx:(u,tt)=>Math.sin(tt*45)*4},{t:2400,f:'celeb',hop:10,hn:2},{t:3000,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:cx,y:cy,f:'ab_shake_1'},{t:1000,f:'ab_shake_2'},{t:1500,f:'ab_shake_3'},{t:1680,f:'ab_shake_4'},{t:1860,f:'ab_shake_3'},{t:2040,f:'ab_shake_4'},{t:2200,f:'ab_shake_5',dx:(u,tt)=>Math.sin(tt*45)*3},{t:2500,f:'ab_shake_6'},{t:3000,f:'runR'},{t:3600,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Nara walks into the middle of everyone, slightly wet.'); say(m.id,'shake_everyone'); }],
     [1100,()=>{ scene('nv_text',.5,{x:cx,y:cy-NH()-20,txt:'!',c:CREAM,sc:3}); setMessage('One warning shoulder twitch. Nobody notices in time.'); }],
@@ -690,8 +686,8 @@ SC.np_streaks=(s,u)=>{ const p=ST.cur; if(!p||p.x==null) return; gfx.globalAlpha
 // ---------- Jump Up: a bigger rear-up, big paws, a held pose for Tom's line ----------
 SC.nv_paws=(s,u)=>{ const p=ez(u/.1); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(p,p); for(const [dx,dy] of [[-24,10],[24,-8]]) { if(PROPART.draw('nara/muddy_paw_print',dx,dy,{h:50,rot:dx<0?-.25:.25})) continue; paw(dx,dy,22,OUT); paw(dx,dy,18,'#5a3a24'); E(dx,dy+6,7,5,'#7a5038'); } gfx.restore(); };
 N.jump_up=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.min(556,F.x+F.w*.5+30),py=Math.min(316,F.base+3),tom=tomU(),T=tom&&ST.unit(tom);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'celeb',rot:wag,hop:8,hn:3},{t:500,f:'run'},{t:1100,x:px+18,y:py,f:'wind',rot:(u,tt)=>Math.sin(tt*40)*.04},{t:1350,x:px,f:'act',rot:u=>ez(u/.6)*.8,dy:u=>-ez(u/.6)*30},
-    {t:1700,f:'act',rot:.8,dy:-30},{t:3200,f:'act',rot:(u,tt)=>.8+Math.sin(tt*18)*.05,dy:(u,tt)=>-30+Math.sin(tt*18)*2},{t:3450,f:'idle',rot:u=>.8*(1-ez(u)),dy:u=>-30*(1-ez(u))},{t:3750,f:'celeb',rot:wag,hop:5,hn:2},{t:4150,f:'runR'},{t:4750,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_jump_1',rot:wag,hop:8,hn:3},{t:500,f:'run'},{t:1100,x:px+18,y:py,f:'ab_jump_1',rot:(u,tt)=>Math.sin(tt*40)*.04},{t:1350,x:px,f:'ab_jump_2'},
+    {t:1550,f:'ab_jump_3',dy:u=>-ez(u/.5)*18},{t:3200,f:'ab_jump_3',dy:(u,tt)=>-18+Math.sin(tt*18)*2},{t:3450,f:'ab_jump_4',dy:u=>-18*(1-ez(u))},{t:3750,f:'ab_jump_5',rot:wag,hop:5,hn:2},{t:4150,f:'ab_jump_6'},{t:4400,f:'runR'},{t:4950,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Nara spots '+f.name+'. A new friend! A NEW FRIEND!'); say(m.id,'jump_up'); barks(2); }],
     [1350,()=>{ setMessage('Up she goes. Both front paws, right on it.'); sfx.whoosh(); }],
@@ -706,9 +702,8 @@ N.jump_up=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),px=Math.min(556,F.x+
 // ---------- Tennis Ball Fetch: a bigger ball, speed lines, a big FETCH ----------
 SC.nv_speed=(s,u)=>SC.np_streaks(Object.assign(s,{dir:1}),u);
 N.tennis_ball_fetch=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),H0=homeOf(m),lx=Math.max(30,F.x-F.w*.5-50),ly=Math.min(316,F.base+4),tom=tomU(),T=tom&&ST.unit(tom);
-  let hold=false,drop=null;
   const ex=lx+30,cross=F.x+F.w*.2; let uu=.5; for(let k=0;k<30;k++) { const x=lerp(H0.x,ex,ez(uu)); uu+=(x>cross?1:-1)*.5/Math.pow(2,k+1); } const hit=Math.round(700+uu*800);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'wind',rot:(u,tt)=>Math.sin(tt*30)*.05},{t:700,f:'run',ns:true},{t:1500,x:ex,y:ly,f:'celeb',hop:10},{t:1900,f:'runR'},{t:3000,x:'home',y:'home',f:'sit'},{t:3800,f:'sit',rot:-.12}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_fetch_1'},{t:350,f:'ab_fetch_2',rot:(u,tt)=>Math.sin(tt*30)*.03},{t:700,f:'ab_fetch_3',ns:true},{t:1500,x:ex,y:ly,f:'ab_fetch_4',hop:10},{t:1900,f:'ab_fetch_5F'},{t:3000,x:'home',y:'home',f:'ab_fetch_6'},{t:3800,f:'ab_fetch_6'}]);
   ST.play(E2,[
     [0,()=>{ setMessage(T?'Tom holds up the tennis ball. Nara stops breathing.':'Nara noses her tennis ball into the air.'); say(m.id,'tennis_ball_fetch'); }],
     [300,()=>{ const a=T?{x:T.x-10,y:T.top+16}:mouth(); ST.fly((x,y,u)=>{ gfx.globalAlpha=.35; ball(x+18,y+6,16); gfx.globalAlpha=1; ball(x,y,20); },a.x,a.y,lx,ly-20,.9,150); sfx.whoosh(); if(T) hopOf(tom); setMessage('The ball flies. She\'s GONE.'); }],
@@ -716,9 +711,9 @@ N.tennis_ball_fetch=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),H0=homeOf(
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('nv_dust',.7,{x:F.x,y:F.base,r:56}); scene('nv_flash',.25,{a:.3}); scene('nv_big',1.2,{x:F.x,y:F.top-74,txt:'FETCH!',c:BALL,sc:5}); }],
     [1200,()=>{ ST.fly((x,y)=>ball(x,y,20),lx,ly-20,lx,ly-20,.3,16,0,{ease:'lin'}); sfxs('squeak'); }],
-    [1500,()=>{ hold=true; ST.draw(()=>{ if(hold) { const p=mouth(); ball(p.x-8,p.y+4,15); } else if(drop) ball(drop.x,drop.y,15); },2.4); barks(1); setMessage('Got it. Very proud. Very slobbery.'); }],
+    [1500,()=>{ barks(1); setMessage('Got it. Very proud. Very slobbery.'); }],
     [1900,()=>{ scene('np_streaks',1.0,{dir:-1}); }],
-    [3000,()=>{ hold=false; const p=mouth(); drop={x:p.x-30,y:Math.min(316,BATTLE_POS[m.idx].base*3-12)}; sfxs('squeak'); scene('nv_text',1.1,{x:H0.x,y:H0.y-NH()-24,txt:'AGAIN?',c:GOLD,sc:3}); }],
+    [3000,()=>{ sfxs('squeak'); scene('nv_text',1.1,{x:H0.x,y:H0.y-NH()-24,txt:'AGAIN?',c:GOLD,sc:3}); }],
     [3900,'end',res(E2)+'She\'ll do that forty more times if anyone lets her.']]); };
 
 // ---------- Just One Bite?: a bigger sandwich and a long drool drip ----------
@@ -737,7 +732,7 @@ SC.np_drool=(s,u)=>{ const p=mouth(),ms=s.t*1000,per=900,q=(ms%per)/per,n=Math.f
   const pud=cl((n+(q>.95?1:0))/3); if(pud>0||n>0) { gfx.globalAlpha=fade(u,.9)*.85; E(x,floor,8+pud*14,3+pud*3,'#cfeeff'); E(x-3,floor-1,4+pud*5,1.2,'#ffffff'); } };
 N.just_one_bite=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,foe=t.side==='foe',H0=homeOf(m);
   const ny=foe?Math.min(316,H.base+4):Math.min(320,(self?H0.y:H.base)+24),nx=foe?Math.min(560,H.x+H.w*.5+76):Math.min(556,(self?H0.x:H.x)+14),pl={x:nx-80,y:ny};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:nx,y:ny,f:'sit'},{t:1900,f:'sit',rot:u=>-.2*ez(u/.3)},{t:2300,f:'act',rot:-.2,dx:u=>-Math.abs(Math.sin(u*Math.PI*2))*8},{t:2700,f:'sit',rot:-.2},{t:3300,f:'celeb',hop:8,hn:2,rot:wag},{t:3800,f:self?'idle':'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'run'},{t:800,x:nx,y:ny,f:'ab_bite_1'},{t:1150,f:'ab_bite_2'},{t:1900,f:'ab_bite_3'},{t:2300,f:'ab_bite_4'},{t:2700,f:'ab_bite_5'},{t:3300,f:'ab_bite_6',rot:wag},{t:3800,f:self?'idle':'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
   scene('np_plate',4.4,{x:pl.x,y:pl.y,biteAt:3050});
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Nara finds a sandwich. She waits for permission anyway.':'There\'s a sandwich by '+t.name+'. Nara sits next to it. Very politely.'); say(m.id,'just_one_bite'); }],
@@ -758,10 +753,10 @@ SC.np_counter=(s,u)=>{ const x=s.x,y=s.y,w=128; gfx.globalAlpha=fin(u,.08)*fade(
   if(!s.gone||s.t*1000<s.gone) { const cx=x-12,cy=y-8,g=.5+.5*Math.sin(s.t*6); gfx.globalAlpha=a0*(.25+g*.2); E(cx,cy-22,44,34,GOLD); gfx.globalAlpha=a0; cake(cx,cy,2.4);
     bigWord('SNACK',cx,cy-78,CREAM,2); label('^',cx+44,cy-50+Math.sin(s.t*8)*3,GOLD,3); }
   else if(s.t*1000<s.gone+500) { gfx.globalAlpha=a0*(1-(s.t*1000-s.gone)/500); bigWord('GONE',x-12,y-34,RED,3); } };
-SC.np_snack=(s,u)=>{ if(!s.on()) return; const p=mouth(); cake(p.x-14,p.y+10,1.6); gfx.globalAlpha=.9; label('^',p.x+18,p.y-34+Math.sin(s.t*8)*3,GOLD,3); };
+SC.np_snack=(s,u)=>{ if(!s.on()) return; const p=mouth(); gfx.globalAlpha=.9; label('^',p.x+18,p.y-34+Math.sin(s.t*8)*3,GOLD,3); };
 N.counter_surfer=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),cx=Math.min(488,F.x+F.w*.5+66),cy=Math.max(120,F.base-72),nx=Math.min(556,cx+58),ny=Math.min(316,F.base+8);
   let has=false;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'walk',dy:(u,tt)=>Math.abs(Math.sin(tt*9))*-2},{t:1700,x:nx,y:ny,f:'idle',rot:-.05},{t:1850,f:'act',rot:u=>ez(u/.5)*.6,dy:u=>-ez(u/.5)*22},{t:2250,f:'runR'},{t:2900,x:640,y:ny-6,f:'runR'},{t:3400,x:640,f:'run'},{t:4000,x:'home',y:'home',f:'idle',rot:wag}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_surf_1'},{t:500,f:'ab_surf_2',dy:(u,tt)=>Math.abs(Math.sin(tt*9))*-2},{t:1700,x:nx,y:ny,f:'ab_surf_1'},{t:1850,f:'ab_surf_3'},{t:2050,f:'ab_surf_4'},{t:2150,f:'ab_surf_5'},{t:2250,f:'ab_surf_6F'},{t:2900,x:640,y:ny-6,f:'ab_surf_6F'},{t:3400,x:640,f:'ab_surf_6'},{t:4000,x:'home',y:'home',f:'idle',rot:wag}]);
   ST.play(E2,[
     [0,()=>{ setMessage('A kitchen counter. On it: '+f.name+'’s snack. Unguarded.'); say(m.id,'counter_surfer'); scene('np_counter',4.5,{x:cx,y:cy,gone:2150}); }],
     [600,()=>{ setMessage('Nara tiptoes. Nara has never tiptoed in her life. She tiptoes now.'); scene('nv_text',1.1,{x:nx+10,y:ny-NH()-30,txt:'TIPTOE',c:CREAM,sc:2}); }],
@@ -785,7 +780,7 @@ SC.np_beat=(s,u)=>{ const beat=Math.abs(Math.sin(s.t*7)),on=u>s.at; gfx.globalAl
 SC.np_bigheart=(s,u)=>{ const p=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.15)),r=26*p; gfx.globalAlpha=fade(u,.75); heartO(s.x,s.y-ez(u)*26,r,'#ff6b9a'); heart(s.x-r*.35,s.y-ez(u)*26-r*.35,r*.25,'#ffc0d4');
   for(let k=0;k<6;k++) { const a=k/6*Math.PI*2+u*2,d=r+ez(u)*30; star(s.x+Math.cos(a)*d,s.y-ez(u)*26+Math.sin(a)*d*.8,4,k%2?GOLD:PINK,u*4+k); } };
 N.not_leaving=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t),sp=spotFor(m,t);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'act'},{t:1200,f:'idle',dx:u=>-Math.abs(Math.sin(u*Math.PI*2))*12},{t:1600,dx:-14,f:'idle',rot:-.2},{t:2600,f:'idle',dx:u=>-14-Math.sin(u*Math.PI)*24,rot:u=>-.2-ez(u/.3)*.22},{t:3300,f:'celeb',rot:wag},{t:3700,f:'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_stay_1'},{t:800,x:sp.x,y:sp.y,f:'ab_stay_2'},{t:1200,f:'ab_stay_3',dx:u=>-Math.abs(Math.sin(u*Math.PI*2))*12},{t:1600,dx:-14,f:'ab_stay_4'},{t:2400,f:'ab_stay_5',dx:u=>-14-Math.sin(u*Math.PI)*10},{t:3300,f:'ab_stay_6',dx:-14},{t:3700,f:'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage(down?'Nara runs to '+t.name+' and plants both front paws.':'Nara runs to '+t.name+'. Just checking.'); sfx.whine(); }],
     [1200,()=>{ setMessage('She nudges a limp hand. Once. Twice.'); scene('nv_text',.9,{x:H.x,y:H.top-20,txt:'NUDGE',c:CREAM,sc:2}); }],
@@ -797,11 +792,11 @@ N.not_leaving=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,down=t.hp<=0,H=ST.unit(t)
 
 // ---------- Happy Puddle: a bigger puddle and a cartoon slip ----------
 SC.nv_puddle=(s,u)=>{ const a=fin(u,.05)*fade(u,.92)*.92; s.spots.forEach((p,k)=>{ const g=ez((u-k*.06)/.25); if(g<=0) return; const x=lerp(s.sx,p.x,g),rx=lerp(8,p.w*.5+42,g),ry=16*g;
-  gfx.globalAlpha=a; if(PROPART.ready('nara/happy_puddle')) { const w=rx*2.1; PROPART.draw('nara/happy_puddle',x,p.y,{w,sy:cl(2*ry/(w/1.8),.3,1)}); } else { E(x,p.y,rx+3,ry+3,'#b8ac38'); E(x,p.y,rx,ry,PEE); E(x-rx*.3,p.y-ry*.3,rx*.45,ry*.32,'#f6f0b0'); E(x+rx*.35,p.y+ry*.2,rx*.15,ry*.15,'#f6f0b0'); }
+  gfx.globalAlpha=a; if(PROPART.ready('nara/happy_puddle')) { const w=rx*2.1; PROPART.draw('nara/happy_puddle',x,p.y,{w,sy:cl(2*ry/(w/2.08),.3,1)}); } else { E(x,p.y,rx+3,ry+3,'#b8ac38'); E(x,p.y,rx,ry,PEE); E(x-rx*.3,p.y-ry*.3,rx*.45,ry*.32,'#f6f0b0'); E(x+rx*.35,p.y+ry*.2,rx*.15,ry*.15,'#f6f0b0'); }
   for(let j=0;j<2;j++) { const q=(s.t*.9+j*.5+k*.2)%1; gfx.globalAlpha=(1-q)*a*.8; ring(x,p.y,rx*(.3+q*.6),ry*(.3+q*.6),2,'#fffbd0'); } }); };
 SC.np_dizzy=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.75); for(let k=0;k<3;k++) { const a=s.t*7+k*2.09; star(s.x+Math.cos(a)*22,s.y+Math.sin(a)*7,6,k%2?GOLD:CREAM,s.t*5); } };
 N.happy_puddle=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),px=Math.min(530,G.x1+44),py=Math.min(316,G.base+6),Ps=list.map(f=>ST.unit(f));
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:px,y:py,f:'celeb',hop:18,hn:4,rot:wag},{t:1700,f:'idle',rot:wag},{t:2000,f:'runR'},{t:2400,x:Math.min(556,px+60),y:py,f:'sit'},{t:3300,f:'sit',rot:-.14},{t:3900,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:px,y:py,f:'ab_puddle_1',hop:6,hn:3,rot:wag},{t:1000,f:'ab_puddle_2',hop:8,hn:2},{t:1250,f:'ab_puddle_3'},{t:1480,f:'ab_puddle_4'},{t:1950,f:'ab_puddle_5'},{t:2000,f:'ab_puddle_5F'},{t:2400,x:Math.min(556,px+60),y:py,f:'ab_puddle_6'},{t:3300,f:'ab_puddle_6'},{t:3900,f:'runR'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Nara sees the whole front row. She\'s SO excited.'); say(m.id,'happy_puddle'); barks(3,.12); }],
     [800,()=>{ scene('nv_text',.9,{x:px,y:py-NH()-24,txt:'WIGGLE WIGGLE',c:GOLD,sc:2}); }],
@@ -830,7 +825,7 @@ SC.np_dishes=(s,u)=>{ const ms=s.t*1000,lid=ez((ms-s.openAt)/300),rej=ez((ms-s.r
     if(ms<s.stampAt+1300) { gfx.globalAlpha=a0; gfx.save(); gfx.translate(s.x1,s.y-104); gfx.rotate(-.14); RO(-62,-16,124,32,'#fff6ee'); gfx.strokeStyle=RED; gfx.lineWidth=4; gfx.strokeRect(-58,-12,116,24); label('APPROVED',0,-7,RED,3); gfx.restore(); } } };
 N.food_inspector=E2=>{ const {m,fx}=E2,tg=E2.targets||[],kind=tg.length===1&&tg[0].side==='foe',to=tg.map(t=>{ const U=ST.unit(t); return {x:U.x,y:U.mid,u:t}; });
   const base=kind?ST.unit(tg[0]):null,y=kind?base.base+4:Math.min(292,BATTLE_POS[m.idx].base*3-20),x1=kind?Math.min(470,base.x+base.w*.5+60):400,x0=x1-120;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:600,x:x0+50,y:y,f:'idle'},{t:800,dx:u=>-Math.abs(Math.sin(u*Math.PI*3))*8,f:'idle'},{t:1500,f:'flip',rot:-.15},{t:1800,f:'runR'},{t:2100,x:x1+50,f:'act',hop:8},{t:2500,f:'idle'},{t:3200,f:'sit'},{t:3700,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:600,x:x0+50,y:y,f:'ab_inspect_1'},{t:1000,f:'ab_inspect_2'},{t:1500,f:'ab_inspect_3'},{t:1800,f:'ab_inspect_1F'},{t:2100,x:x1+50,f:'ab_inspect_4'},{t:2300,f:'ab_inspect_5'},{t:3200,f:'ab_inspect_6'},{t:3700,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Two covered dishes. One is fancy. One says HOMEMADE.'); say(m.id,'food_inspector'); scene('np_dishes',3.9,{x0,x1,y,rejectAt:1500,stampAt:2150,openAt:2450}); }],
     [850,()=>{ scene('nv_text',.8,{x:x0,y:y-96,txt:'SNIFF SNIFF',c:CREAM,sc:2}); }],
@@ -958,9 +953,9 @@ N.squirrel_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.uni
   const dir=q=>{ const z=cl(q)*PASSES,j=Math.min(PASSES-1,Math.floor(z)); return j%2?1:-1; };
   const P={peek:600,run:2500,climb:4700,tx:Math.max(22,Math.round(Gp.x0-30)),ground:Math.min(296,yB),treeTop:BAR+70,branch:BAR+92,peekF,chase,dir};
   const C0=chase(0),C1=chase(1),RUN=P.run,END=P.climb;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:1200,f:'idle2',hop:8},{t:1500,f:'idle2',dx:(u,tt)=>Math.sin(tt*50)*1.2},{t:1700,f:'act',hop:6,hn:4},
-    {t:2300,f:'run'},{t:RUN,x:C0.x,y:C0.y,f:u=>dir(u)<0?'run':'runR',ease:'lin',dx:u=>chase(u).x-lerp(C0.x,C1.x,u),dy:u=>chase(u).y-lerp(C0.y,C1.y,u)},
-    {t:END,x:C1.x,y:C1.y,f:'celeb',hop:22,hn:4},{t:5900,f:'celeb',hop:10,hn:2},{t:6100,f:'runR'},{t:6800,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_squirrel_1'},{t:1200,f:'ab_squirrel_2',hop:8},{t:1500,f:'ab_squirrel_2',dx:(u,tt)=>Math.sin(tt*50)*1.2},{t:1700,f:'ab_squirrel_3',hop:6,hn:4},
+    {t:2300,f:'ab_squirrel_4'},{t:RUN,x:C0.x,y:C0.y,f:u=>{ const z=cl(u)*PASSES,j=Math.min(PASSES-1,Math.floor(z)); return 'ab_squirrel_'+(z-j>.82?5:4)+(j%2?'F':''); },ease:'lin',dx:u=>chase(u).x-lerp(C0.x,C1.x,u),dy:u=>chase(u).y-lerp(C0.y,C1.y,u)},
+    {t:END,x:C1.x,y:C1.y,f:'ab_squirrel_9',hop:10,hn:4},{t:5900,f:'ab_squirrel_9',hop:6,hn:2},{t:6100,f:'ab_squirrel_4F'},{t:6800,x:'home',y:'home',f:'idle'}]);
   const passT=k=>RUN+(k+.5)*(END-RUN)/PASSES;
   const spins=list.map((f,k)=>({f,k,t:END+40+k*60}));
   ST.play(E2,[
@@ -1046,10 +1041,10 @@ N.pack_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m)
   const pathP=ms=>ms<=R1?pC*(ms-R0)/(R1-R0):pC+(1-pC)*(ms-R1)/(R2-R1);
   const cross=foeSorted.map(f=>({f,t:Math.round(timeAt(pAt({x:ST.foe(f).x,y:Math.min(300,ST.foe(f).base-4)})))}));
   const share=Math.floor(60/Math.max(1,cross.length)),rest=100-share*cross.length;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:700,x:Sx,y:Sy,f:'sit',dy:2},{t:1500,f:'idle2',dy:(u,tt)=>Math.sin(tt*30)*1.5},{t:2300,f:'act',hop:8,hn:2},
-    {t:2700,f:'run'},{t:R0,x:pts[0].x,y:pts[0].y,f:'run',ease:'lin',dx:u=>T.at(pC*u).x-lerp(pts[0].x,Cx,u),dy:u=>T.at(pC*u).y-lerp(pts[0].y,Cy,u)},
-    {t:R1,x:Cx,y:Cy,f:'runR',ease:'lin',dx:u=>T.at(pC+(1-pC)*u).x-lerp(Cx,land.x,u),dy:u=>T.at(pC+(1-pC)*u).y-lerp(Cy,land.y,u)},
-    {t:R2,x:land.x,y:land.y,f:'celeb',rot:-.15,dx:(u,tt)=>Math.sin(tt*20)*1.5},{t:5300,x:land.x+(tomU?6:0),y:tomU?tomU.base+3:land.y,f:'sit'},{t:6000,f:'runR'},{t:6800,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:700,x:Sx,y:Sy,f:'ab_pack_1'},{t:1100,f:'ab_pack_2'},{t:1500,f:'ab_pack_3'},{t:2300,f:'ab_pack_4',hop:8,hn:2},
+    {t:2700,f:'ab_pack_5'},{t:R0,x:pts[0].x,y:pts[0].y,f:'ab_pack_5',ease:'lin',dx:u=>T.at(pC*u).x-lerp(pts[0].x,Cx,u),dy:u=>T.at(pC*u).y-lerp(pts[0].y,Cy,u)},
+    {t:R1,x:Cx,y:Cy,f:'ab_pack_5F',ease:'lin',dx:u=>T.at(pC+(1-pC)*u).x-lerp(Cx,land.x,u),dy:u=>T.at(pC+(1-pC)*u).y-lerp(Cy,land.y,u)},
+    {t:R2,x:land.x,y:land.y,f:'ab_pack_6',dx:(u,tt)=>Math.sin(tt*20)*1.5},{t:5300,x:land.x+(tomU?6:0),y:tomU?tomU.base+3:land.y,f:'ab_pack_4'},{t:6000,f:'ab_pack_5F'},{t:6800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ scene('nu_bars',7.15,{}); scene('nu_grey',2.6,{plan:P}); S('whine',.5); setMessage('Everything goes grey and quiet. Nara is all alone. Ears down.'); }],
     [900,()=>{ scene('nu_crumb',1.6,{x:Sx-40,y:Sy-44}); S('ting'); setMessage('One golden crumb floats down. Sourdough.'); }],
