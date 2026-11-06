@@ -1286,8 +1286,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Boop.\n\nRow 1:\n1. Walking forward with little bouncy steps, one pointer finger already sticking out, a mischievous grin.\n2. Leaning in, poking forward with one pointer finger at arm's length, eyes wide, lips pressed together, \"booping\" them\n3. Poking again with the same finger, up on tiptoe, giggling.\n\nRow 2:\n4. Up on tiptoe, the whole arm stretched forward, one finger jabbing out in a big BOOP, mouth open wide.\n5. Pulling the finger back to her chest, both shoulders scrunched up, laughing with her eyes squeezed shut.\n6. Standing with both hands on her hips, chin up, a proud cheeky smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/rose-ab-silly-v1.png",
+     "date": "2026-11-06",
+     "from": "v4",
+     "at": 1793954816924
+    }
+   ],
    "rejects": [],
    "id": "rose-ab-silly",
    "tab": "Characters",
@@ -1300,7 +1308,7 @@
     "art/raw/characters/rose-battle-sheet-1-v1.png",
     "art/raw/characters/rose-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: RASPBERRY.\n\nRow 1:\n1. Standing very still, taking a huge breath, cheeks puffing up round, eyes wide and serious.\n2. Leaning forward from the waist, cheeks puffed out as far as they go, hands balled into fists at her sides.\n3. Blowing a raspberry, tongue stuck out between flapping lips, eyes squeezed shut, head shaking.\n\nRow 2:\n4. Still blowing the raspberry, both hands waving beside her ears with fingers spread, tongue out.\n5. Doubled over laughing, both hands over her mouth.\n6. Standing up straight, wiping her mouth with the back of one hand, a very pleased grin."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: RASPBERRY.\n\nRow 1:\n1. Standing very still, taking a huge breath, cheeks puffing up round, eyes wide and serious.\n2. Leaning forward from the waist, cheeks puffed out as far as they go, hands balled into fists at her sides.\n3. Tongue stuck out between flapping lips, eyes squeezed shut, head shaking.\n\nRow 2:\n4. Still blowing with tongue stuck out, both hands waving beside her ears with fingers spread, tongue out.\n5. Doubled over laughing, both hands over her mouth.\n6. Standing up straight, wiping her mouth with the back of one hand, a very pleased grin."
   },
   {
    "status": "approved",
