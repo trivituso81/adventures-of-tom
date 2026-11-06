@@ -4088,7 +4088,7 @@
     "docs/reference/underpaint/vance-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a long black coat with gold buttons in rich folds, a wide-brimmed hat shadowing a pale grim face, a gold pocket watch and brass ray gun, cold moonlight with a sharp rim light. Top row: 1 standing tall. 2 stumbling back from a hit, the hat tilting. 3 raising the ray gun. Bottom row: 4 attack wind-up, aiming, the gun glowing. 5 the attack, firing a bright ray. 6 the follow-through, lowering the gun, smoke curling, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: long wavy gray hair falling past the collar under the hat, a gaunt lined face, a long black coat with gold buttons in rich folds, a wide-brimmed hat shadowing a pale grim face, a gold pocket watch and brass ray gun, cold moonlight with a sharp rim light. Top row: 1 standing tall. 2 stumbling back from a hit, the hat tilting. 3 raising the ray gun. Bottom row: 4 attack wind-up, aiming, the gun glowing. 5 the attack, firing a bright ray. 6 the follow-through, lowering the gun, smoke curling, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Chronos Loom"
   },
   {
@@ -4192,13 +4192,14 @@
    "rejects": [],
    "id": "enemy-julian",
    "tab": "Enemies",
-   "title": "Julian Vance: boss sheet, 6 frames facing right (no old likeness picture, built from the description)",
+   "title": "Julian Vance, second fight: boss sheet, 6 frames facing right (same man as Vance)",
    "ar": "3:2",
    "refs": [
     "docs/reference/style_key_v1.png",
+    "art/raw/enemies/enemy-vance-v1.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Paint Julian Vance, a tall man in a long black coat and black hat with a pale softened face, a red tie and a gold pocket watch, holding a brass ray gun loosely at his side, softer in the shoulders, lit by warm gold light, as a handbrushed painting, grander and more dramatic, with more detail painted in the shapes: a long black coat in soft folds, a hat, a gentle softened face, warm golden light, a gold pocket watch, a brass ray gun held loosely, in a 3 by 2 grid of 6 poses facing right. Top row: 1 standing, the gun at his side, tired and soft. 2 flinching back, the hat tilting. 3 looking down at the pocket watch. Bottom row: 4 attack wind-up, slowly raising the ray gun, hesitating. 5 the attack, a warm burst of amber glass from the ray gun. 6 the follow-through, lowering the gun, looking away, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 2: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Attachment 2 shows Julian Vance in six poses. Paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Top row: 1 standing, the gun at his side, tired and soft. 2 flinching back, the hat tilting. 3 looking down at the pocket watch. Bottom row: 4 attack wind-up, slowly raising the ray gun, hesitating. 5 the attack, a warm burst of amber glass from the ray gun. 6 the follow-through, lowering the gun, looking away, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Stillness Core"
   },
   {

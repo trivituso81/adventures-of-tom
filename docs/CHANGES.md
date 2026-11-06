@@ -1,3 +1,7 @@
+## 2026-11-05 (253): Julian Vance: second fight derived from the first fight picture; Vance gets his old long gray hair (Art Library only, no game files, no tag)
+
+Tom: there are three different Vances. Facts: old in-game sheet (long wavy gray hair, gold watch, glowing clock attacks), new `enemy-vance-v1` (gaunt, dark hair, full figure), new `enemy-julian-v1` (young round-faced man, cut off at the waist, no boots), plus the gray-suit overworld walker `vance-walk-v1`. Fix: `enemy-julian` now takes the approved Vance picture as attachment 2 ("same man, only softer"), full figure required; `enemy-vance` flair adds long wavy gray hair and a gaunt lined face. Julian still points at enemy-vance-v1: after Vance is regenerated and approved, repoint it to the new version.
+
 ## 2026-11-05 (252): Warden Boppy: closer likeness with a face close-up reference (Art Library only, no game files, no tag)
 
 Tom: the Warden does not replicate Boppy's face closely enough. Refs now: style key, guide, finish, `docs/reference/boppy-face.png` (new 768 px close-up cropped from boppy-hero.png), boppy-hero.png (five, the maximum). Prompt lists his real features and says the helmet is open-faced so the whole face shows. Fact: at 3 x 2 each pose is about 300 px, so the face is only about 50 px wide; a closer likeness may need one larger picture of the Warden.
