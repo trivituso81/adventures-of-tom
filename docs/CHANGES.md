@@ -1,3 +1,12 @@
+## 2026-11-06 (372): Justin ability install: 9 painted Art Library sheets, old move sheets purged (`justinab1`)
+
+- Fact (Tom 12:19: install the approved abilities): all 9 `justin-ab-*` sheets are approved but his moves still played the older 4 x 4 sheets. All 9 moves now play the approved frames: 58 painted frames in `art/chars/justin-ab.webp` (`data/justin-ab.js`, keys `ab_<short>_<n>` plus `R` mirrors). Cutter `tools/sprite-bake/ability_frames_justin.py`, baker `bake_justin_ab.py`. Cache tag `jab1` on `data/justin-ab.js`; the rest moved to `justinab1`.
+- Props from the approved objects sheets (`bake_justin_fx.py`): wire nuts (orange, yellow, blue), standing drywall sheet, brick chunk, rubble, dust puff. The Foot Tap objects sheet is still a draft (effects stay drawn by the game).
+- Props now carried by the frames are no longer drawn: wire, nuts in hand, sunglasses, sledgehammer and wall rubble, breaker panel, drill, the sofa (Bad Call sits on the painted couch; the TV stays a prop). Fresh Fit plays his everyday idle and run until the flash, then the suit frames.
+- Purged: the nine `art/chars/justin-<move>.webp` atlases, their nine source sheets in `tools/sprite-bake/src`, the `sets` block and move-sheet code of `bake_justin_battle.py` and `data/justin-battle-hires.js`, props `couch`, `wall_intact`, `wire_nut_red/pink/green`, `drywall_chunk`, `plaster_chunk`, `splintered_stud` (and the `jv_couch`, `jv_wall` scenes). `bake_justin_battle.py` no longer reproduces the repo's core files (the battle sheets were rescaled after its last bake), so the core atlas is untouched.
+- Timing and lines are unchanged (each move keeps its hit beat); no new voice. Tested: kit_test all 9 `FAILS: []`, smoke `FAILS: []`, tag_check ok, unused_voice 0. Desktop only.
+- Likeliest regenerates: Fresh Fit frames 5 to 8 (painted smaller, bigger head than frames 1 to 4), Breaker Flip (frames painted at mixed sizes, floor frame wide), Bad Call couch frames (small head next to the standing ones), Foot Tap frame 7 only briefly shown.
+
 ## 2026-11-06 (371): Amy's 14 ability sheets and 14 object sheets in the Art Library (Art Library only)
 
 - Fact (Tom 12:19): Amy had only `amy-emotions`. She already has a painted hero (`amy-hero-ref-v1.png`) and walk sheet (`amy-walk-sheet-v1.png`), so the earlier note that she had no hero was out of date. She has no battle sheets of her own.

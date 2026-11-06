@@ -1,10 +1,10 @@
 'use strict';
 // data/justin-battle-use.js: Justin's painted battle sprite (data/justin-battle-hires.js JUSTIN_BT, art/chars/justin-*.webp).
-// Builds BATTLE_SPRITES.justin from nothing (he has no pixel rig), his KO pose and his ability frames. Loads after data/battle-size.js
+// Builds BATTLE_SPRITES.justin from nothing (he has no pixel rig), his KO pose and his ability frames (data/justin-ab.js). Loads after data/battle-size.js
 // and data/boppy-hires-battle.js. Set JUSTIN_BT_OFF=true (before this file) to leave him out of battle sprites.
 //
-// Stock stances (idle, hip, spread, point, act, celeb, run...) come from JUSTIN_BT.core (the figures of his two painted battle sheets). Every ability frame is also a sprite key, named as in the sheet
-// ('lw_jab', 'wn_throwA', 'dw_set', ...), plus a mirrored copy with an R suffix ('lw_jabR') for moves that face the other way.
+// Stock stances (idle, hip, spread, point, act, celeb, run...) come from JUSTIN_BT.core (the figures of his two painted battle sheets). Every ability frame is also a sprite key,
+// 'ab_<short>_<n>' ('ab_wire_4', 'ab_demo_6', ...), plus a mirrored copy with an R suffix ('ab_wire_4R') for moves that face the other way.
 // engine/justin-moves.js drives them through RFX.ST.keys. All frames face left.
 (function() {
   if(typeof JUSTIN_BT==='undefined'||(typeof JUSTIN_BT_OFF!=='undefined'&&JUSTIN_BT_OFF)) return;
@@ -40,13 +40,14 @@
   sp.eye=sp.eyeAt.get(sp.idle);
 
   // ---- ability frames ----
-  for(const sk in BT.sets) {
-    const S=BT.sets[sk],A=AT[sk]; paintedAtlas('justin_'+sk,A.src,A.rects,A.k);
-    const m=addPal(S.pal);
-    for(const nm in S.rows) { const r=sp[nm]=mk(S.rows[nm],m,'justin_'+sk,nm); sp[nm+'R']=mir(r); }
+  // data/justin-ab.js (tools/sprite-bake/bake_justin_ab.py): 'ab_<short>_<n>' per painted cell of his nine approved Art Library sheets, plus an R copy facing right.
+  if(typeof JUSTIN_AB!=='undefined') {
+    const A=JUSTIN_AB; paintedAtlas('justin_ab',A.atlas.src,A.atlas.rects,A.atlas.k);
+    const m=addPal(A.pal);
+    for(const nm in A.ab) { const r=sp[nm]=mk(A.ab[nm],m,'justin_ab',nm); sp[nm+'R']=mir(r); }
   }
   // stock stances that borrow an ability frame
-  sp.aim=sp.bc_point; sp.spread=C('spread'); sp.clap=sp.wn_nod; sp.sit=sp.bc_sit;
+  sp.aim=sp.ab_call_4; sp.spread=C('spread'); sp.clap=sp.celeb; sp.sit=sp.ab_call_1;
 
   BATTLE_SPRITES.justin=sp;
 

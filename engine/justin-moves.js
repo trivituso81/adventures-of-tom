@@ -1,6 +1,6 @@
 'use strict';
-// engine/justin-moves.js: Justin's nine moves as set pieces on engine/stage.js. He is painted (data/justin-battle-use.js):
-// every ability frame is a sprite key named as in the sheet ('lw_jab', 'wn_throwA'...), plus an R copy facing right.
+// engine/justin-moves.js: Justin's nine moves as set pieces on engine/stage.js. His ability frames are painted (Art Library sheets, data/justin-ab.js, art/chars/justin-ab.webp):
+// every frame is a sprite key 'ab_<short>_<n>' (n counts the sheet's cells row by row from 1), plus an R copy facing right; stock stances (idle, run) come from data/justin-battle-use.js.
 // Timelines are absolute ms at 1x (RFX.ST.play); ['hf',ms] marks the impact. Scene prefix jv_ (drawn without the aim warp).
 // Loaded after engine/amy-moves.js.
 (function(){
@@ -22,11 +22,11 @@ const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.w
 const waveFoe=k=>{ const M=B2.move,w=M&&M.waves[Math.min(k,M.waves.length-1)]; return (w&&w[0]&&w[0].t)||null; };
 const front=(F,gap=40)=>({x:Math.min(552,F.x+F.w*.5+gap),y:Math.min(316,F.base+4)});
 const jitter=f=>ST.jolt(f,.45);
-// a run of frames: seq([['lw_grab',300],...],t0) -> keys at x,y
+// a run of frames: seq([['ab_wire_2',300],...],t0) -> keys at x,y
 const seq=(list,t0,x,y,extra={})=>{ const out=[]; let t=t0; for(const [f,d,o] of list) { out.push(Object.assign({t,x,y,f},extra,o||{})); t+=d; } return out; };
 const wob=(a,b)=>u=>Math.sin(u*Math.PI*2*(b||1))*a;
-// wire nuts are painted (art/props/justin/wire_nut_*); the drawn hexagon is only the fallback until the image loads
-const NUT_ART={'#e84a3a':'red','#f0c030':'yellow','#3a8ae8':'blue','#e86aa8':'pink','#50c868':'green'};
+// wire nuts are painted (art/props/justin/wire_nut_*, from the approved wire-nuts objects sheet); the drawn hexagon is only the fallback until the image loads
+const NUT_ART={'#f06a1a':'orange','#f0c030':'yellow','#3a8ae8':'blue'};
 const hexNut=(x,y,r,c)=>{ if(NUT_ART[c]&&PROPART.draw('justin/wire_nut_'+NUT_ART[c],x,y,{h:r*3.4})) return; gfx.beginPath(); for(let k=0;k<6;k++) { const a=k*Math.PI/3; gfx[k?'lineTo':'moveTo'](x+Math.cos(a)*r,y+Math.sin(a)*r); } gfx.closePath(); gfx.fillStyle='#17110d'; gfx.fill(); gfx.beginPath(); for(let k=0;k<6;k++) { const a=k*Math.PI/3; gfx[k?'lineTo':'moveTo'](x+Math.cos(a)*(r-2),y+Math.sin(a)*(r-2)); } gfx.closePath(); gfx.fillStyle=c; gfx.fill(); };
 
 // ---------- shared scenes ----------
@@ -54,8 +54,8 @@ SC.jv_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.4); R(0,0,576,324,s.c||'#dff3f
 SC.jv_crackle=(s,u)=>{ const fl=Math.floor(u*22); gfx.lineCap='round'; for(let k=0;k<7;k++) { const a=k*0.9+fl*1.7,d=10+((k*7+fl*3)%5)*5,x0=s.x+Math.cos(a)*d*.6,y0=s.y+Math.sin(a)*d*.9,x1=s.x+Math.cos(a+.5)*(d+12),y1=s.y+Math.sin(a+.5)*(d+12)*1.1; gfx.globalAlpha=fade(u,.6); gfx.strokeStyle=k%2?SPARK:BLUE; gfx.lineWidth=2; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo((x0+x1)/2+(k%2?4:-4),(y0+y1)/2-3); gfx.lineTo(x1,y1); gfx.stroke(); } };
 J.loose_wire=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=ST.unit(m);
   // trimmed (Tom, 17:25): three painted poses, pull / jab / zap
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:300,f:'run',ease:'in'},{t:800,x:p.x,y:p.y,f:'lw_pull'}];
-  K.push(...seq([['lw_pull',450],['lw_jab',350],['lw_zap',650]],800,p.x,p.y));
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:300,f:'run',ease:'in'},{t:800,x:p.x,y:p.y,f:'ab_wire_1'}];
+  K.push(...seq([['ab_wire_1',150],['ab_wire_2',150],['ab_wire_3',200],['ab_wire_4',350],['ab_wire_5',400],['ab_wire_6',200]],800,p.x,p.y));
   K.push({t:2250,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:2850,x:'home',y:'home',f:'idle'},{t:3050,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
@@ -72,10 +72,10 @@ J.loose_wire=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,84),me=
 // ---------- Wire Nuts (three quick throws) ----------
 J.wire_nuts=E2=>{ const {m,fx}=E2,me=ST.unit(m),f0=waveFoe(0)||firstFoe(E2),f1=waveFoe(1)||f0,f2=waveFoe(2)||f0;
   const K=[{t:0,x:'home',y:'home',f:'idle'}];
-  K.push(...seq([['wn_show',450],['wn_wind',300],['wn_throwA',300],['wn_throwD',350],['wn_throwE',550]],0,'home','home'));   // trimmed (Tom, 17:25)
+  K.push(...seq([['ab_nuts_1',200],['ab_nuts_2',250],['ab_nuts_3',250],['ab_nuts_4',300],['ab_nuts_5',300],['ab_nuts_6',650]],0,'home','home'));
   K.push({t:1950,x:'home',y:'home',f:'idle'},{t:2250,f:'idle'});
   ST.keys(fx,K);
-  const cols=['#e84a3a','#f0c030','#3a8ae8','#e86aa8','#50c868'];
+  const cols=['#f06a1a','#f0c030','#3a8ae8'];
   const toss=(f,t0,dur,hit,pct,n)=>{ const F=ST.unit(f); for(let k=0;k<n;k++) { const c=cols[(k+n)%cols.length]; ST.fly((x,y)=>hexNut(x,y,5,c),me.x-30,me.base-me.h*.55,F.x+(k-1)*8,F.mid+(k-1)*6,.38,36+k*8,k*.05,{spin:2+k}); }
     return [[t0+dur*1000-380+380,()=>{ sfx.bonk&&sfx.bonk(); jitter(f); landHit(pct); scene('jv_sparks',.4,{x:F.x,y:F.mid,n:5,r:16,c:'#f0c030'}); }]]; };
   ST.play(E2,[
@@ -93,23 +93,21 @@ J.wire_nuts=E2=>{ const {m,fx}=E2,me=ST.unit(m),f0=waveFoe(0)||firstFoe(E2),f1=w
 
 // ---------- Bad Call ----------
 J.bad_call=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'bc_watch'}];
+  const K=[{t:0,x:'home',y:'home',f:'ab_call_1'}];
   // Tom (18:18): he sits on the couch and watches (watch, then leans in) for a good while BEFORE he gets frustrated
-  K.push(...seq([['bc_watch',1100],['bc_lean',500],['bc_rise',380],['bc_point',420],['bc_armsOut',480],['bc_stomp',420]],0,'home','home'));
+  K.push(...seq([['ab_call_1',1100],['ab_call_2',500],['ab_call_3',380],['ab_call_4',420],['ab_call_5',480],['ab_call_6',420]],0,'home','home'));
   K.push({t:3300,x:'home',y:'home',f:'idle'},{t:3560,f:'idle'});
   ST.keys(fx,K);
   SC.jv_callwave=SC.jv_callwave||((s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.4-k*.1); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; const x=lerp(s.x0,s.x1,q); gfx.strokeStyle='#ffd27a'; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(x,s.y,4+q*10,10+q*24,0,0,Math.PI*2); gfx.stroke(); } });
-  // The couch and the wide TV are painted props in the back layer (behind him). The TV shows football until he rises; then the
-  // play is replaced by a yellow flag on the field (drawn here, so it lines up with the painted screen).
-  SC.jv_couch=SC.jv_couch||((s,u)=>{ gfx.globalAlpha=fin(u,.05)*fade(u,.94); const w=s.w,h=w*78/160;
-    if(!PROPART.draw('justin/couch',s.x,s.base-h/2,{w})) { R(s.x-w/2,s.base-h*.75,w,h*.75,'#e6d8bd'); R(s.x-w/2,s.base-h*.4,w,h*.4,'#d4c4a4'); R(s.x-w/2,s.base-h*.75,10,h*.75,'#c8b894'); R(s.x+w/2-10,s.base-h*.75,10,h*.75,'#c8b894'); } });
+  // The couch is painted into his sitting frames (ab_call_1 to 3). The wide TV is a painted prop in the back layer (behind him); it shows football until he rises,
+  // then the play is replaced by a yellow flag on the field (drawn here, so it lines up with the painted screen).
   SC.jv_tv=SC.jv_tv||((s,u,t)=>{ gfx.globalAlpha=fin(u,.05)*fade(u,.94); const w=s.w,h=w*123/160,cy=s.base-h/2;
     const ok=PROPART.draw('justin/tv_football',s.x,cy,{w}),x0=s.x-w/2+w*.056,y0=cy-h/2+h*.065,sw=w*.88,sh=h*.715;   // the screen inside the bezel
     if(!ok) { R(s.x-w/2,cy-h/2,w,h*.86,'#1a1a22'); R(x0,y0,sw,sh,'#3f8a3a'); }
     if(t>=s.flag) { R(x0,y0,sw,sh,'#3f8a3a'); for(let k=1;k<4;k++) R(x0+sw*k/4-1,y0,2,sh,'#e8f0e0'); const a=x0+sw*.5,b=y0+sh*.55;
       R(a-9,b-6,18,12,'#ffe14a'); R(a-9,b-6,18,3,'#fff7b0'); R(a-9,b+3,18,3,'#e0b020'); R(a+9,b-1,5,4,'#e0b020'); R(a+13,b+1,3,3,'#b88810'); R(a-12,b+4,4,3,'#e0b020'); } });
   ST.play(E2,[
-    [0,()=>{ setMessage('Justin is on the couch. The game is on.'); scene('jv_couch',5.8,{back:true,x:Math.min(me.x,576-79-3),base:me.base-2,w:158}); scene('jv_tv',5.8,{back:true,x:Math.max(70,me.x-175),base:me.base-26,w:104,flag:2.7}); }],
+    [0,()=>{ setMessage('Justin is on the couch. The game is on.'); scene('jv_tv',5.8,{back:true,x:Math.max(70,me.x-175),base:me.base-26,w:104,flag:2.7}); }],
     [250,()=>say(m.id,'bad_call_couch')],
     [1150,()=>setMessage('Something is not right with that play.')],
     [1620,()=>{ setMessage('He is up. He is pointing.'); sfx.whoosh&&sfx.whoosh(); }],
@@ -123,10 +121,9 @@ J.bad_call=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
 SC.jv_dazzle=(s,u)=>{ gfx.globalAlpha=fade(u,.3)*.8; R(0,0,576,324,'#ffffff'); gfx.globalAlpha=fade(u,.7); for(let k=0;k<12;k++) { const a=k*Math.PI/6+u,d=ez(u)*(24+k%3*14); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,5+k%3*3,k%2?'#fff3a0':'#ffd6f0',u*5); } for(let k=0;k<8;k++) { const a=k*Math.PI/4; Ln(s.x,s.y,s.x+Math.cos(a)*(30+u*40),s.y+Math.sin(a)*(30+u*40),3,'#fff8c0'); } };
 J.fresh_fit=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),mid={x:Math.max(me.x-130,F.x+F.w*.5+90),y:me.base};
   // sheet 04 redo (lwire1 session): frames 1 to 5 everyday clothes, 6 the swap spin, 7 to 16 the green suit
-  const walk=(u,t)=>Math.floor(t*7)%2?'ff_walkA':'ff_walkB';
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:300,f:walk,ease:'lin'},{t:1000,x:mid.x,y:mid.y,f:'ff_stop'}];
-  K.push(...seq([['ff_stop',300],['ff_swap',400],['ff_reveal',400],['ff_hip',400],['ff_shadesOff',450],['ff_strut',400]],1000,mid.x,mid.y));   // trimmed (Tom, 17:25)
-  K.push({t:3350,x:mid.x,y:mid.y,f:'ff_strutR',ease:'lin'},{t:4100,x:'home',y:'home',f:'ff_strutR'},{t:4350,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:300,f:'run',ease:'lin'},{t:1000,x:mid.x,y:mid.y,f:'idle'}];
+  K.push(...seq([['idle',300],['ab_fit_1',300],['ab_fit_2',300],['ab_fit_3',250],['ab_fit_4',250],['ab_fit_5',150],['ab_fit_6',150],['ab_fit_7',450],['ab_fit_8',200]],1000,mid.x,mid.y));   // everyday clothes until the flash, then the suit
+  K.push({t:3350,x:mid.x,y:mid.y,f:'ab_fit_1R',ease:'lin'},{t:4100,x:'home',y:'home',f:'ab_fit_1R'},{t:4350,f:'idle'});
   ST.keys(fx,K);
   const body={x:mid.x,y:mid.y-me.h*.5};
   ST.play(E2,[
@@ -141,22 +138,16 @@ J.fresh_fit=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),mid=
     [4350,'end',res(E2)+'It cost more than the pond.']]); };
 
 // ---------- Demo Day ----------
-SC.jv_wall=(s,u)=>{ const x=s.x,y0=s.top-18,w=s.w+30,h=s.h+30,a=fin(u,.12)*(u>.86?(1-u)/.14:1);
-  gfx.globalAlpha=a*.92; if(!PROPART.draw('justin/wall_intact',x,y0+h/2,{w,h})) { R(x-w/2,y0,w,h,'#c9bfb0'); R(x-w/2,y0,w,5,'#e6dccd'); for(let r=0;r<4;r++) R(x-w/2+6,y0+14+r*(h/4),w-12,2,'#a89d8c'); }   // painted wall; the cracks below stay drawn
-  const c=cl((u-s.t1)/.06); if(c>0) { gfx.strokeStyle='#4a4238'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(x-6,y0+4); gfx.lineTo(x+8,y0+h*.3); gfx.lineTo(x-10,y0+h*.55); gfx.lineTo(x+6,y0+h*.8); gfx.stroke(); }
-  const c2=cl((u-s.t2)/.06); if(c2>0) { gfx.strokeStyle='#4a4238'; gfx.beginPath(); gfx.moveTo(x-w*.4,y0+h*.35); gfx.lineTo(x,y0+h*.4); gfx.lineTo(x+w*.4,y0+h*.3); gfx.moveTo(x-w*.3,y0+h*.7); gfx.lineTo(x+w*.3,y0+h*.65); gfx.stroke(); } };
-SC.jv_chunks=(s,u)=>{ for(let k=0;k<12;k++) { const q=cl(u*1.25-k*.03); if(q<=0||q>=1) continue; const x=s.x+(k-6)*(s.w/12),y=s.top+q*q*(s.h+30)-12; gfx.globalAlpha=1-q*.5; gfx.save(); gfx.translate(x,y); gfx.rotate(q*5+k); if(!PROPART.draw(['justin/drywall_chunk','justin/plaster_chunk','justin/splintered_stud'][k%3],0,0,{h:9+(k%3)*3,flip:k%2===0})) R(-5,-4,10,8,k%2?'#c9bfb0':'#a89d8c'); gfx.restore(); } };
+SC.jv_chunks=(s,u)=>{ for(let k=0;k<12;k++) { const q=cl(u*1.25-k*.03); if(q<=0||q>=1) continue; const x=s.x+(k-6)*(s.w/12),y=s.top+q*q*(s.h+30)-12; gfx.globalAlpha=1-q*.5; gfx.save(); gfx.translate(x,y); gfx.rotate(q*5+k); if(!PROPART.draw(['justin/brick_chunk','justin/rubble'][k%2],0,0,{h:9+(k%3)*3,flip:k%2===0})) R(-5,-4,10,8,k%2?'#c9bfb0':'#a89d8c'); gfx.restore(); } };
 SC.jv_dust=(s,u)=>{ const q=ez(u/.8); gfx.globalAlpha=fade(u,.35)*.9; if(!PROPART.draw('justin/dust_puff',s.x,s.y-q*8,{w:(s.r||30)*2*(.5+q*.7)})) SC.jv_poof(s,u); };
 J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST.unit(m);
-  const walk=(u,t)=>Math.floor(t*7)%2?'dd_walkA':'dd_walkB';
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:250,f:walk,ease:'lin'},{t:800,x:p.x,y:p.y,f:'dd_shoulder'}];
-  K.push(...seq([['dd_shoulder',300],['dd_windB',300],['dd_swingB',150],['dd_impact',350],['dd_swingC',200],['dd_impactB',400]],800,p.x,p.y));   // trimmed (Tom, 17:25)
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:250,f:'run',ease:'lin'},{t:800,x:p.x,y:p.y,f:'ab_demo_1'}];
+  K.push(...seq([['ab_demo_1',300],['ab_demo_2',300],['ab_demo_3',150],['ab_demo_4',350],['ab_demo_5',200],['ab_demo_6',400]],800,p.x,p.y));
   K.push({t:2500,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:3100,x:'home',y:'home',f:'idle'},{t:3300,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin spots a basement wall that has to go.'); say(m.id,'demo_day'); }],
     [250,()=>sfx.step&&sfx.step()],
-    [800,()=>scene('jv_wall',3.9,{x:F.x,top:F.top,w:F.w,h:F.h,t1:.31,t2:.54})],
     [850,()=>setMessage('He hoists the sledgehammer.')],
     ['hf',1550],
     [1550,()=>{ sfx.thud&&sfx.thud(); sfx.bonk&&sfx.bonk(); ST.jolt(f,.4); landHit(45); scene('jv_dust',.5,{x:F.x,y:F.top+10,r:30}); }],
@@ -169,10 +160,9 @@ J.demo_day=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,38),me=ST
 // ---------- Breaker Flip ----------
 SC.jv_bolt=(s,u)=>{ const q=cl(u/.55); gfx.globalAlpha=fade(u,.5); const seg=8; let px=s.x,py=-4; for(let k=1;k<=seg;k++) { const nx=s.x+(k%2?-1:1)*(10-k)*(1+(k*7%3)),ny=lerp(-4,s.y,k/seg); if(k/seg<=q+.12) { Ln(px,py,nx,ny,8,'#9fd8ff'); Ln(px,py,nx,ny,3,'#ffffff'); } px=nx; py=ny; } };
 J.breaker_flip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
-  const walk=(u,t)=>Math.floor(t*7)%2?'bf_walkA':'bf_walkB';
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:150,x:'home',y:'home',f:'bf_open'}];
-  K.push(...seq([['bf_open',500],['bf_flipOff',400],['bf_count',800],['bf_flipOn',400],['bf_flash',600]],150,'home','home'));   // trimmed (Tom, 17:25)
-  K.push({t:2850,x:'home',y:'home',f:'idle'},{t:3150,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:150,x:'home',y:'home',f:'ab_breaker_1'}];
+  K.push(...seq([['ab_breaker_1',350],['ab_breaker_2',150],['ab_breaker_8',400],['ab_breaker_5',800],['ab_breaker_6',400],['ab_breaker_7',350],['ab_breaker_9',600]],150,'home','home'));
+  K.push({t:3200,x:'home',y:'home',f:'idle'},{t:3500,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>setMessage('Justin finds the panel. Which breaker is it.')],
@@ -189,8 +179,8 @@ J.breaker_flip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
 // ---------- Giant Sneeze ----------
 // Quick build, then the sneeze frames are held long (Tom, 13:51); everything around them is fast. Already timed: not scaled below.
 J.giant_sneeze=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'gs_twitch'}];
-  K.push(...seq([['gs_twitch',300],['gs_buildB',450],['gs_peak',350],['gs_sneezeB',800],['gs_recoil',400]],0,'home','home'));   // trimmed (Tom, 17:25); the sneeze keeps its long hold
+  const K=[{t:0,x:'home',y:'home',f:'ab_sneeze_1'}];
+  K.push(...seq([['ab_sneeze_1',350],['ab_sneeze_2',400],['ab_sneeze_3',350],['ab_sneeze_4',800],['ab_sneeze_5',200],['ab_sneeze_6',200]],0,'home','home'));   // the sneeze keeps its long hold
   K.push({t:2300,x:'home',y:'home',f:'idle'},{t:2600,f:'idle'});
   ST.keys(fx,K);
   const x0=f.px,slideMax=Math.min(90,Math.max(30,x0-F.w*.5-12));
@@ -215,8 +205,8 @@ J.foot_tap=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const tp=alive('rose')||alive('grace')||B2.party.find(p=>p!==m&&p.hp>0&&!p.dead&&!p.calm)||null,tn=tp?tp.name:'Rose';
   if(tp) { const T=ST.unit(tp),spot={x:me.x-58,y:me.base+2},tfx=battle.fx[tp.idx],go=T.x<spot.x?'runR':'run',bk=T.x<spot.x?'run':'runR';
     ST.keys(tfx,[{t:0,x:'home',y:'home',f:'idle'},{t:150,x:'home',y:'home',f:'idle'},{t:750,x:spot.x,y:spot.y,f:go,ease:'lin'},{t:850,x:spot.x,y:spot.y,f:'flip'},{t:1050,x:spot.x,y:spot.y,f:'kneel'},{t:1300,x:spot.x,y:spot.y,f:'flip'},{t:1700,x:spot.x,y:spot.y,f:'flip'},{t:2250,x:'home',y:'home',f:bk,ease:'lin'},{t:2400,x:'home',y:'home',f:'idle'},{t:3740,f:'idle'}]); }
-  const K=[{t:0,x:'home',y:'home',f:'ft_idle'}];
-  K.push(...seq([['ft_idle',1190],['ft_tapped',350],['ft_screamA',1100],['ft_hop',250],['ft_clutch',550]],0,'home','home'));   // trimmed (Tom, 17:25); the scream keeps its long hold
+  const K=[{t:0,x:'home',y:'home',f:'ab_foot_1'}];
+  K.push(...seq([['ab_foot_1',1190],['ab_foot_2',350],['ab_foot_3',1100],['ab_foot_4',150],['ab_foot_5',150],['ab_foot_6',300],['ab_foot_7',200]],0,'home','home'));   // the scream keeps its long hold
   K.push({t:3440,x:'home',y:'home',f:'idle'},{t:3740,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
@@ -242,19 +232,19 @@ SC.jv_sheet=(s,u)=>{ const x=s.x,base=s.base,h=s.h,w=s.w,q=1,a=fin(u,.06)*(u>.9?
 J.drywall=E2=>{ const {m,fx}=E2,me=ST.unit(m);
   const live=B2.party.filter(p=>p.hp>0&&!p.dead),xs=live.map(p=>ST.unit(p).x),xmax=Math.max(...xs,me.x),xmin=Math.min(...xs,me.x),by=Math.max(...live.map(p=>ST.unit(p).base),me.base);
   const sx=xmin-52,sw=Math.max(40,Math.min(58,(xmax-xmin)*.18+30)),sh=Math.min(170,me.h+6),px=sx+sw+12;
-  const walk=(u,t)=>Math.floor(t*7)%2?'dw_carryA':'dw_carryB';   // he walks in carrying the sheet
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:150,x:'home',y:'home',f:walk,ease:'lin'},{t:900,x:px,y:by+2,f:'dw_set'}];
-  K.push(...seq([['dw_set',450],['dw_driverB',600],['dw_thumbs',600]],900,px,by+2));   // trimmed (Tom, 17:25)
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:150,x:'home',y:'home',f:'ab_dry_1',ease:'lin'},{t:900,x:px,y:by+2,f:'ab_dry_1'}];   // he carries the sheet in (it is painted in his hands)
+  K.push(...seq([['ab_dry_2',250],['ab_dry_3',250],['ab_dry_4',500],['ab_dry_5',300],['ab_dry_6',350]],900,px,by+2));
   K.push({t:2550,x:px,y:by+2,f:'runR',ease:'lin'},{t:3100,x:'home',y:'home',f:'idle'},{t:3250,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Justin has a sheet of drywall under his arm.'); say(m.id,'drywall_sheet'); }],
     [150,()=>sfx.whoosh&&sfx.whoosh()],
-    [950,()=>{ sfx.thud&&sfx.thud(); scene('jv_sheet',4.1,{x:sx,base:by+2,h:sh,w:sw}); setMessage('He stands it in front of everyone.'); say(m.id,'drywall'); }],
+    [950,()=>{ sfx.thud&&sfx.thud(); setMessage('He stands it in front of everyone.'); say(m.id,'drywall'); }],
+    [2200,()=>{ sfx.thud&&sfx.thud(); scene('jv_sheet',2.2,{x:sx,base:by+2,h:sh,w:sw}); }],   // the sheet he screwed up (painted in his frames) stays standing in front of the party
     [1400,()=>{ sfx.drill&&sfx.drill(); }],
     ['hf',1600],
     [1600,()=>{ sfx.drill&&sfx.drill(); }],
-    [1900,()=>{ sfx.ding&&sfx.ding(); scene('jv_sparks',.7,{x:sx,y:by-sh*.5,n:9,r:34,c:'#ebe4d6'}); scene('jv_text',1.1,{x:sx+20,y:by-sh-8,txt:'HALF DAMAGE',c:'#ebe4d6',sc:2}); }],
+    [2250,()=>{ sfx.ding&&sfx.ding(); scene('jv_sparks',.7,{x:sx,y:by-sh*.5,n:9,r:34,c:'#ebe4d6'}); scene('jv_text',1.1,{x:sx+20,y:by-sh-8,txt:'HALF DAMAGE',c:'#ebe4d6',sc:2}); }],
     [3250,'end',res(E2)+'Let it dry.']]); };
 
 // Tom (13:51): his moves should be faster. Every move except the two hand-timed ones above plays at about 1.5x.
