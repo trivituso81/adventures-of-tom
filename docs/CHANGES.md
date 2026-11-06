@@ -1,3 +1,6 @@
+## 2026-11-06 (395): Grace's cartwheel really rotates; Rose runs to the monster before pointing (`wheelboop1`)
+Fact: Grace's six painted wheel frames were fine. `G.cartwheelShow` only alternated two handstand frames with no rotation; each of the two wheels is now one full turn (upright star, handstands through the middle, body turned about its centre), dust and gold bursts re-timed to the touchdowns. Rose's Boop walked over in her finger-out frame; she now runs over and points on arrival (message moved with it).
+
 ## 2026-11-06 (394): Tom stops one tile higher when he steps out of the taxi (`tx1`)
 
 - Tom (15:35): the girls were hidden behind the tree when they ran up. Tom now stops one tile above his old spot, so Grace and Rose meet him in the clear (the tree still covers things as cut out). Changed in all three taxi exits: the chapter 1 opening (`SCENES.opening`), the Long Island arrival for chapters 3, 5, 7 and 9 (`arriveHome`, engine/travel.js) and the Nine Scoops opening (`SCENES.nsOpening`). Rose's shoulder hop and the party spots after the scene move up with him. Chapter 10 does not use the taxi exit.

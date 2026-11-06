@@ -587,16 +587,24 @@ G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   // Her ability sheet (ab_wheel_1 to 6): lunge, two cartwheels (hand planted, then upside down), the landing star, the kick, TA-DA.
   const KX=Math.min(me.x-60,F.x+F.w*.5+34),GY=Math.min(314,F.base+3),HX=me.x,HY=me.base;
   // No run-up: she lunges in place on her line spot, then two cartwheels (hand planted, then upside down, twice) carry her to the foe.
-  const D=HX-(KX+14),hopW=u=>-Math.sin(u*Math.PI)*16;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_wheel_1'},{t:250,x:HX-D*.04,y:GY,f:'ab_wheel_2',dy:hopW},{t:550,x:HX-D*.30,f:'ab_wheel_3',dy:hopW},{t:850,x:HX-D*.58,f:'ab_wheel_2',dy:hopW},{t:1150,x:HX-D*.84,f:'ab_wheel_3',dy:hopW},
-    {t:1450,x:KX+14,f:'ab_wheel_5'},{t:1650,x:KX,f:'ab_wheel_4',dx:u=>-ez(u)*6},{t:2000,f:'ab_wheel_6'},{t:2450,f:'ab_wheel_5',hop:14},{t:2900,f:'runR'},{t:3600,x:HX,y:HY,f:'idle'}]);
+  const D=HX-(KX+14);
+  // Each wheel is one full turn (Tom 11-06: she did not rotate). Her painted frames are used as painted: the upright star (5) at the ends, the two
+  // handstands (2 side, 3 front, already upside down) through the middle. The body turns about its centre; an upside-down frame carries 180 degrees of the turn itself.
+  const DEG=Math.PI/180,W0=250,WT=600,xAt=t=>HX-D*(.04+.96*(t-W0)/(2*WT));
+  const legs=[[0,60,'ab_wheel_5',0],[60,130,'ab_wheel_2',180],[130,230,'ab_wheel_3',180],[230,300,'ab_wheel_2',180],[300,360,'ab_wheel_5',360]];
+  const K=[{t:0,x:'home',y:'home',f:'ab_wheel_1'}];
+  for(let w=0;w<2;w++) for(const [a0,a1,fr,off] of legs) K.push({t:Math.round(W0+w*WT+a0/360*WT),x:xAt(W0+w*WT+a0/360*WT),y:GY,f:fr,ease:'lin',rot:u=>-((a0+(a1-a0)*u)-off)*DEG});
+  K.push({t:1450,x:KX+14,y:GY,f:'ab_wheel_5'},{t:1650,x:KX,f:'ab_wheel_4',dx:u=>-ez(u)*6},{t:2000,f:'ab_wheel_6'},{t:2450,f:'ab_wheel_5',hop:14},{t:2900,f:'runR'},{t:3600,x:HX,y:HY,f:'idle'});
+  const st=ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Grace cartwheels in. Twice. Showing off the whole way.'); say(m.id,'cartwheel'); }],
     [250,()=>{ sfx.whoosh(); }],
-    [600,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
-    [700,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); }],
-    [900,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
-    [1000,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }],
+    [430,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
+    [550,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); }],
+    [670,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
+    [1030,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
+    [1150,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }],
+    [1270,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
     [1450,()=>{ scene('gv_dust',.32,{x:KX+10,y:GY}); scene('gv_dust',.32,{x:KX+30,y:GY}); sfx.bump(); }],
     ['hf',1800],
     [1800,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gv_big',.3,{x:F.x,y:F.top-74,txt:'HI-YAH!',c:PINK,sc:4}); scene('gv_burst',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:40}); }],

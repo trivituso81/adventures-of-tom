@@ -1067,13 +1067,13 @@ sfx.poke=()=>{ tone({type:'sine',f0:900,f1:600,dur:.06,vol:.18}); noise({dur:.04
 // ---------- Boop (basic): a real one-finger poke ----------
 Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500,jx=Math.min(548,n.x+30),jy=cl(n.y+54,p.y-12,p.y+4);   // jab frames (rebaked 2026-11-01 `rosefix1`): jab1 fingertip is 38 px left of her centre and 54 px above her feet
   const pokes=[HIT];   // ONE jab (Tom, 2026-10-27). Damage, sound, flash, BOOP! word and her spoken "Boop!" all land on HIT.
-  // Her six painted Boop frames (tools/sprite-bake/ability_frames_rose.py): finger out, lean in, poke on tiptoe, the BOOP, scrunched laugh, proud hands on hips.
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_boop_1',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'ab_boop_2'},{t:1250,f:'ab_boop_2',dx:u=>ez(u)*3},
+  // She runs over with no finger out (Tom 11-06), then her six painted Boop frames (tools/sprite-bake/ability_frames_rose.py): finger out, lean in, poke on tiptoe, the BOOP, scrunched laugh, proud hands on hips.
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'ab_boop_1'},{t:1200,f:'ab_boop_2'},{t:1250,f:'ab_boop_2',dx:u=>ez(u)*3},
     {t:HIT-260,x:jx,y:jy,f:'ab_boop_3'},{t:HIT-110,f:'ab_boop_4'},{t:HIT+250,f:'ab_boop_4'},{t:HIT+450,x:p.x,y:p.y,f:'ab_boop_5'},
     {t:2200,f:'ab_boop_5',hop:16},{t:2650,f:'ab_boop_6',hop:9,hn:2},{t:3050,f:'runR'},{t:3750,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); warmClip('rose','Boop!'); }],   // decode the clip now so it plays instantly later
-    [1150,()=>{ setMessage('Pointer finger out.'); }],
+    [1000,()=>{ setMessage('Pointer finger out.'); }],
     // The baked "Boop!" clip is 2.08 s long and the word itself sits at 1.42 to 1.60 s, so play only that slice (1.39 to 1.75 s).
     // Voice and sound start a little before contact to cover phone audio output delay (about 60 to 100 ms).
     [HIT-80,()=>{ say(m.id,'boop',0,null,{text:'Boop!',len:45756,from:1.39,to:1.75}); }],
