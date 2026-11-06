@@ -344,7 +344,7 @@ const SCENE_POSE_RATIO={};
 function scenePoseDraw(a,set,k) {
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member,P=a.scenePose; if(!m||!P) return null;
   // A painted story pose (data/story-poses-use.js): already at the overworld row scale, facing the camera as painted, no outfit tint.
-  const st=typeof STORY_POSES!=='undefined'&&STORY_POSES[m.id]; if(st&&st[P.f]) return {rows:st[P.f],k,pal:st.pal,story:true};
+  const st=typeof STORY_POSES!=='undefined'&&STORY_POSES[m.id]; if(st&&st[P.f]) return {rows:st[P.f],k,pal:st.pals[P.f],story:true};
   const sp=BATTLE_SPRITES[m.id]; if(!sp) return null;
   let rows,native='left',pal=sp.pal,rel=1;
   if(P.f==='ko') { const ko=typeof KO_SPRITES!=='undefined'&&KO_SPRITES[m.id]; if(!ko) return null; rows=ko.rows; native='right'; pal=ko.pal||pal; rel=(ko.scale||sp.scale)/sp.scale; }

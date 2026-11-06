@@ -16,6 +16,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from walk_sheet_frames import grid
+from battle_sheet_frames import _cut
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters')
@@ -30,6 +31,11 @@ SETS = {
             'names': ['st_stiff', 'st_rise', 'st_reach', 'st_bendl', 'st_bendr', 'st_push', 'st_exhale', 'st_fresh']},
     'grace': {'sheet': 'grace-squishy-intro-sheet-v1.png', 'k': 10, 'h': 39, 'ref': 'sq_squeeze',
               'names': ['sq_hide', 'sq_reveal', 'sq_raise', 'sq_show', 'sq_hug', 'sq_squeeze', 'sq_careful', 'sq_wave']},
+    # Tom carrying Rose (2026-11-06, ride1): 4 x 3 cells; the first 6 are used here (cells 7 to 12 are battle frames, bake_tomride.py). Stored under
+    # member 'tom'. Cut with _cut (a piece detached from its figure, Rose jumping in cell 5, stays with its cell). Tom's body is 42 rows
+    # (his overworld stand), so the whole figure with Rose is 53.5 rows (466 px of the sit cell, of which Tom's body is 366).
+    'tomride': {'member': 'tom', 'sheet': 'tomride-poses-v2.png', 'cut': (4, 3), 'k': 9, 'h': 53.5, 'ref': 'tr_sit',
+                'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
 }
 
 
@@ -119,13 +125,14 @@ js = ["'use strict';",
       "// rows = small quantized copy of each painted frame at the overworld row scale; atlas = where the painted frame lives (engine/painted.js).",
       "const STORY_POSES_SRC={"]
 for cid, S in SETS.items():
-    figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
+    if 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
+    else: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'])
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}
     pal, rows = quantize(small, COLORS)
     rects = pack(big, os.path.join(ART, f'{cid}-story.webp'))
-    js.append(f"  {cid}:{{atlas:{json.dumps({'src': f'art/chars/{cid}-story.webp', 'k': S['k'], 'rects': rects})},pal:{json.dumps(pal)},frames:{{")
+    js.append(f"  {cid}:{{member:{json.dumps(S.get('member', cid))},atlas:{json.dumps({'src': f'art/chars/{cid}-story.webp', 'k': S['k'], 'rects': rects})},pal:{json.dumps(pal)},frames:{{")
     js.append(',\n'.join(f"    {n}:" + fmt_rows(rows[n]) for n in S['names']))
     js.append("  }},")
     print(cid, 'scale %.3f' % f, 'frame', len(rows[S['names'][0]][0]), 'x', len(rows[S['names'][0]]), 'rows')

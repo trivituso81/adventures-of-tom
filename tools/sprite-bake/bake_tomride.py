@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Bake Tom carrying Rose on his shoulders (seven painted pose sheets) into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tomride-s1..s7-*-v3.png (seven sheets, flat magenta background, see README.md; 2026-11-01)
+Input : art/raw/characters/tomride-poses-v2.png (4 x 3 painted cells, Tom's new outfit, 2026-11-06): idle, walk, run, hurt, kneel, defend, proud, celeb, leap
+        tools/sprite-bake/src/tomride-s3..s7-*-v3.png (flat magenta background, see README.md; 2026-11-01): hold, annoyed, toss and combo skins, walk, hero
 Output: art/chars/tomride-battle.webp, tomride-rose.webp (Rose alone, after the toss), tomride-ow.webp, tomride-hero.webp (title)
         data/tomride-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -16,6 +17,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sheet import slice_sheet
+from battle_sheet_frames import _cut
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
@@ -36,8 +38,9 @@ os.makedirs(ART, exist_ok=True)
 poses = {}
 def _load(fn, rows, pre):
     for nm, im in slice_sheet(os.path.join(SRC, fn), rows).items(): poses[pre + nm] = im
-_load('tomride-s1-battle-v3.png', [['idle', 'run1', 'run2', 'hurt', 'kneel']], 'b_')
-_load('tomride-s2-defend-v3.png', [['defend', 'proud', 'win', 'leap']], 'b_')
+# The 12 painted cells of the new ride sheet, in reading order (kneel and lift are used by the chapter 1 story poses, bake_story_poses.py).
+NEW_NAMES = ['kneel', 'lift', 'cheer', 'laugh', 'hopoff', 'sit', 'wobble', 'tired', 'walk', 'run', 'defend', 'proud']
+for nm, im in _cut(os.path.join(ROOT, 'art/raw/characters/tomride-poses-v2.png'), 4, 3, NEW_NAMES).items(): poses['n_' + nm[2:]] = im
 _load('tomride-s3-start-v3.png', [['hold', 'annoyed', 'tw_windup', 'tw_follow']], 'b_')
 _load('tomride-s4-toss-v3.png', [['grab', 'rlift', 'toss', 'roseair', 'roseland']], 'b_')
 _load('tomride-s5-combo-v3.png', [['hoist', 'biplane', 'biplane2', 'boop'], ['cloud', 'phones', 'night']], 'c_')
@@ -45,7 +48,9 @@ walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'ste
 _load('tomride-s6-walk-v3.png', [walk_names[0:4], walk_names[4:8], walk_names[8:12]], 'w_')
 poses['hero'] = Image.open(os.path.join(SRC, 'tomride-s7-hero-v3.png')).convert('RGBA')
 # The new art already faces left (Rose looks toward the enemy), so no mirroring is needed (the old ROSE_FLIP table is gone).
-H0b, H0w = poses['b_idle'].height, poses['w_down_stand'].height
+H0b, H0w = 689, poses['w_down_stand'].height   # 689 = the old idle frame's height in px: the kept old frames (hold, toss, combo skins) are scaled from it
+# One scale for the new cells: Tom's body (top of head to soles) is about 366 px in them and 100 rows in battle, as for his own sheet.
+NEW_F = 100 * 2 / 366.0
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -185,16 +190,15 @@ def fmt_rows(rows, indent='    '):
 # ---------------------------------------------------------------- battle set (painted at KB x)
 # Sheets 2 and 3 were drawn about 9 percent larger than sheet 1 (compared on the standing pose), and sheet 5 (combos) 32 percent
 # smaller, so each sheet is brought to sheet 1's size before the common scale.
-SHEET_K = {'b_defend': 689 / 755., 'b_proud': 689 / 755., 'b_win': 689 / 755., 'b_leap': 689 / 755.,
-           'b_hold': 689 / 754., 'b_annoyed': 689 / 754., 'b_tw_windup': 689 / 754., 'b_tw_follow': 689 / 754.}
+SHEET_K = {'b_hold': 689 / 754., 'b_annoyed': 689 / 754., 'b_tw_windup': 689 / 754., 'b_tw_follow': 689 / 754.}
 fb = args.battle_h * KB / H0b
-fc = fb * poses['b_idle'].height / poses['c_night'].height * COMBO_K
-battle_names = {'idle': 'b_idle', 'run1': 'b_run1', 'run2': 'b_run2', 'hurt': 'b_hurt', 'kneel': 'b_kneel', 'defend': 'b_defend',
-                'proud': 'b_proud', 'celeb': 'b_win', 'leap': 'b_leap', 'hold': 'b_hold', 'annoyed': 'b_annoyed',
+fc = fb * H0b / poses['c_night'].height * COMBO_K
+battle_names = {'idle': 'n_sit', 'run1': 'n_walk', 'run2': 'n_run', 'hurt': 'n_wobble', 'kneel': 'n_tired', 'defend': 'n_defend',
+                'proud': 'n_proud', 'celeb': 'n_cheer', 'leap': 'n_hopoff', 'hold': 'b_hold', 'annoyed': 'b_annoyed',
                 'tw_windup': 'b_tw_windup', 'tw_follow': 'b_tw_follow', 'grab': 'b_grab', 'rlift': 'b_rlift', 'toss': 'b_toss',
                 'hoist': 'c_hoist', 'biplane': 'c_biplane', 'biplane2': 'c_biplane2', 'boop': 'c_boop', 'cloud': 'c_cloud',
                 'phones': 'c_phones', 'night': 'c_night'}
-bt_big = {k: scaled_to(poses[v], fc if v.startswith('c_') else fb * SHEET_K.get(v, 1.0)) for k, v in battle_names.items()}
+bt_big = {k: scaled_to(poses[v], fc if v.startswith('c_') else NEW_F if v.startswith('n_') else fb * SHEET_K.get(v, 1.0)) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'tomride-battle.webp'))

@@ -35,8 +35,11 @@ SCENES.opening=()=>{
     {call:()=>{ const r=sceneActor('rose'); snd.whee(); snd.oof(.38); r.depthBias=-.05; r.facing='left'; }},
     {hop:'rose',from:[dx-1,row+1],to:[dx,row],time:.5,arc:22,lift:[0,SHOULDER]},
     {call:()=>{ const r=sceneActor('rose'); r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; sfx.giggle(); }},
+    // Tom carrying Rose, painted (data/story-poses.js, ride1): he kneels to take her, stands up with her, she cheers from the top.
+    {pose:'tom',f:'tr_kneel'}, {wait:.5}, {pose:'tom',f:'tr_lift'}, {wait:.5}, {pose:'tom',f:'tr_cheer'},
     {trace:'rose-shoulders'}, {flag:'tombo:rose1'},   // Double-Decker Airplane unlocks here (chapter 1)
     {talk:'Rose',lines:['I\'m the tallest! Giddyup, Tata!'],voice:[['rose','intro3']]},
+    {pose:'tom',f:'tr_sit'},
     {talk:'Tom',lines:['Hello, Rose. Please keep your arms and legs inside the uncle at all times.'],voice:[['tom','intro2']]},
     // Grace's painted squishy poses (data/story-poses.js, storypose1): hide it, reveal, hold it up high, then the close-up.
     {pose:'grace',f:'sq_hide'}, {wait:.55},
@@ -52,10 +55,13 @@ SCENES.opening=()=>{
     {pose:'grace',f:'sq_hug'},
     {talk:'Tom',lines:['That\'s the shiniest dumpling I\'ve ever seen. And I\'ve seen a LOT of dumplings.'],voice:[['tom','intro3']]},
     {pose:'grace',f:'sq_wave'},
+    {pose:'tom',f:'tr_laugh'},
     {talk:'Rose',lines:["Come on, Tata! Let's go!"],voice:[['rose','intro4']]},
     {pose:'grace'},
-    {call:()=>{ snd.whee(true); const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
-    {hop:'rose',from:[dx,row],to:[dx-1,row+1],time:.45,arc:14,lift:[SHOULDER,0]},
+    {call:()=>snd.whee(true)}, {pose:'tom',f:'tr_hopoff'}, {wait:.4},   // she springs off his shoulders (painted), then lands beside him
+    {pose:'tom'},
+    {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
+    {hop:'rose',from:[dx-1,row],to:[dx-1,row+1],time:.2,arc:5,lift:[10,0]},
     {flag:'opening-done'},
     {call:finishOpening}
   ];
