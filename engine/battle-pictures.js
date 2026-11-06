@@ -58,9 +58,14 @@ function bpBtn(i,sel,no,basic,ic,word) {
   return '<button type="button" class="b2-btn bp-btn'+(basic?' b2-basic':'')+(sel?' sel':'')+(no?' no':'')+'" data-i="'+i+'">'+
     '<span class="bp-ic">'+ic+'</span><span class="bp-w">'+b2Esc(word)+'</span></button>';
 }
+// Tombo button badge: the faces of the team-up (the one acting, then the partners) in a pink ring along the bottom of the picture.
+function bpPair(u,r) {
+  const f=p=>{ const im=b2Portrait(p.id); return im?'<img alt="" src="'+im+'">':'<b class="b2-ph">'+b2Esc((p.name||'?')[0])+'</b>'; };
+  return '<span class="bp-pair">'+[u].concat(r.with||[]).map(f).join('')+'</span>';
+}
 function bpSkills(u) {
   return '<div class="b2-grid bp-grid">'+b2SkillRows(u).map((s,i)=>{
-    if(s.T) return bpBtn(i,i===B2.sel,!!s.why,false,bpIcon(s.T.id,96,'',!!s.why)||bpIcon('x_warmth',96),bpWord(s.T.name));
+    if(s.T) return bpBtn(i,i===B2.sel,!!s.why,false,(bpIcon(s.T.id,96,'',!!s.why)||bpIcon('x_warmth',96))+bpPair(u,s),bpWord(s.T.name));
     const lock=u.vp<b2Cost(u,s)||b2Shushed(u,s);
     return bpBtn(i,i===B2.sel,lock,s===u.kit.basic,bpMoveIcon(u,s,96,lock),bpWord(s.name)); }).join('')+bpBack()+'</div>';
 }

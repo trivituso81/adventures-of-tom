@@ -1,3 +1,7 @@
+## 2026-11-05 (281): Rose Mode Tombo buttons show the team-up faces (`tombopair1`)
+
+- Tom (19:54): in Rose Mode the Tombos need a visual annotation. Each Tombo button in a list now carries a pink-ringed row of faces along the bottom of its picture: the character acting, then the partner or partners (`bpPair` in engine/battle-pictures.js, `.bp-pair` in index.html). Text mode already showed the partner faces. Looked at in portrait and landscape (tools/shots/rose-pair-p.png, rose-pair-l.png); smoke and cross_test FAILS: [].
+
 ## 2026-11-05 (280): Tom's whole-figure walk KEPT, old Tom walk builder purged (no art change)
 - Tom (19:47): "keep" the whole-figure test of CHANGES 278. Purged in the same change: `tools/sprite-bake/tom_walk_frames.py` (head placement, neck and nape fixes, `apply_bob`); in `bake_tom_walk_v4.py` the head matching (`HERO_HEAD`, `CUT_PX`, `EAR_PX`, `_warp_xy`, `_walk_head`), the bob (`TOM_BOB`), the old walk-head solver (`FACE_GROW_W`, `OW_REF_H`) and their comments; the 12 headless body pictures `art/raw/characters/tom-body-*.png` and the 3 head pictures `tom-head-*.png`.
 - Kept: `tom-hero-fresh-v1`, `tom-back-view-v1`, `tom-side-view-v1` (Art Library entries read them) and `tom-whole-*.png` (the new sources).
