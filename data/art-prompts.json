@@ -14298,8 +14298,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair,  workout black tank and workout shorts, colorful sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Hill Repeats.\n\nRow 1:\n1. Standing at the bottom of a slope leaning forward, hands loose, determined.\n2. Sprinting uphill leaning far forward, arms pumping, mouth set.\n3. Reaching the top of the hill with one fist raised high, taking a quick breath.\n\nRow 2:\n4. Turning around at the top, bouncing on her toes, eyes sharp.\n5. Sprinting back down with long strides, arms out for balance, hair streaming back.\n6. Standing bent over with her hands on her knees, panting, a grin on her face."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-hill-repeats-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000613869
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-hill-repeats",
    "tab": "Characters",
