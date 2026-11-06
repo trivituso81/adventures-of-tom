@@ -851,8 +851,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Like and Subscribe.\n\nRow 1:\n1. Marching forward, arms swinging, chin up, a determined grin.\n2. Pointing straight up at the sky with one finger, the other hand on her hip, mouth open.\n3. Looking up, both hands cupped by her mouth, shouting, eyes wide.\n\nRow 2:\n4. Jumping up with both fists in the air, a huge excited grin.\n5. Pointing straight at the viewer with one finger, a cheeky smile, looking at the viewer.\n6. A small hop with both thumbs up, a big grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-dumpling-drop-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954041503
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-dumpling-drop",
    "tab": "Characters",
