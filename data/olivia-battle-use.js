@@ -33,7 +33,7 @@
   sp.idle=C('idle'); sp.idle2=C('idle2'); sp.act=C('act'); sp.windup=C('windup'); sp.celeb=C('celeb'); sp.leap=C('leap');
   sp.hurtPose=C('hurt'); sp.defend=C('defend'); sp.castPose=C('cast'); sp.kneel=C('kneel');
   const run=[C('run1'),C('run2')];
-  sp.hip=C('hip'); sp.sig=C('sig');
+  sp.hip=C('hip'); sp.spread=C('spread'); sp.point=C('point');
   sp.wind=sp.windup; sp.throw=sp.act; sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=run;
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.cheer=[sp.celeb,sp.celebFlip]; sp.runFlip=run.map(mir);
   sp.eye=sp.eyeAt.get(sp.idle);

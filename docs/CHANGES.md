@@ -1,3 +1,9 @@
+## 2026-11-06 (316): Olivia fights with her two painted battle sheets (`battlesheet6`)
+- Tom (11-05 23:40): Olivia's battle sheets (art/raw/characters/olivia-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head growth on them). NEW slots: spread, point added in data/olivia-battle-use.js (idle2 = breath, hip painted); KO = dizzy sit. Idle keeps its old visible height (105 rows). The unused `sig` frame slot is gone.
+- Her 11 ability sheets keep their pinned scale, head growth and face match (old idle 287 px, ref face 109.5) and came back pixel for pixel. Atlases at 1.5 through hires.py.
+- Note for Tom: the ability sheets are still painted in the older fruit-print dress and brunette look, so her moves do not match her new battle sheets until those are redone.
+- Purged: src/olivia-battle-v1.png and the old battle-sheet head growth in bake_olivia_battle.py.
+- Tests: kit_test olivia FAILS [], fight shots checked.
 ## 2026-11-06 (315): Welcome screen: Tom and Rose stand separately, looser spacing, bigger Nara (`welcome3`)
 - Tom (00:55): "youve smooshed them too close together. dont use rose on toms shoulders but rather the tom and rose hero images individually. Nara is sized too small - she's a 40 lb labradoodle so figure her size relative to the other characters".
 - Spacing loosened (sideways pull .92 on iPad, .82 on iPhone, depth .7), figures re-spread in a line so nobody hides anybody. Tom and Rose are each drawn from their own painted standing frame (OW.tom, OW.rose). Nara 104 to 150 (about .73 of Rose).
