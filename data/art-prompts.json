@@ -13816,6 +13816,13 @@
      "date": "2026-11-06",
      "from": "v2",
      "at": 1793999694810
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/amy-ab-kettlebell-swing-v3.png",
+     "date": "2026-11-06",
+     "from": "v4",
+     "at": 1794000276028
     }
    ],
    "rejects": [],
@@ -13830,7 +13837,7 @@
     "art/raw/characters/amy-battle-sheet-1-v1.png",
     "art/raw/characters/amy-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Kettlebell Swing.\n\nRow 1:\n1. Standing with her feet wide apart, both hands holding a big cast-iron kettlebell low between her knees, a focused stare.\n2. Swinging the kettlebell forward and up, both arms straight, leaning back a little, jaw set.\n3. The kettlebell at the top of its swing at shoulder height, both arms straight out, a fierce competitive grin.\n\nRow 2:\n4. Letting the kettlebell drop back between her legs, hips pushed back, eyes straight ahead.\n5. Heaving the kettlebell forward with a strong step, mouth open in a short shout, eyes narrowed.\n6. Standing tall with the kettlebell hanging from one hand, a satisfied smirk."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet. only 6 frames are needed\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, workout blank tank and workout shorts, colorful sneakers, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Kettlebell Swing.\n\nRow 1:\n1. Standing with her feet wide apart, both hands holding a big cast-iron kettlebell low between her knees, a focused stare.\n2. Swinging the kettlebell forward and up, both arms straight, leaning back a little, jaw set.\n3. The kettlebell at the top of its swing at shoulder height, both arms straight out, a fierce competitive grin.\n\nRow 2:\n4. Letting the kettlebell drop back between her legs, hips pushed back, eyes straight ahead.\n5. Heaving the kettlebell forward with a strong step, mouth open in a short shout, eyes narrowed.\n6. Standing tall with the kettlebell hanging from one hand, a satisfied smirk."
   },
   {
    "status": "approved",
