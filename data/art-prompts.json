@@ -3743,7 +3743,7 @@
    ]
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "id": "olivia-ab-lachlan-no",
    "tab": "Characters",
    "group": "Olivia",
@@ -3764,6 +3764,14 @@
      "date": "2026-11-06",
      "from": "v2",
      "at": 1793996533073
+    }
+   ],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "lachlan should be smaller (he's 4 years old)",
+     "from": "v2",
+     "at": 1793996554418
     }
    ]
   },
