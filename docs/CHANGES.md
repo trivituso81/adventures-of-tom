@@ -1,3 +1,9 @@
+## 2026-11-06 (338): Welcome screen on iPhone: back row centred (`welcome6`)
+- Tom (07:13): "enter [centre] the second row on iPhone portrait because right now they're kind of shifted over to the right".
+- The back row is now laid out side by side (slight overlap) and centred on the front row, in the order Deedee, Boppy, Amy, Justin (engine/splash.js `splashPortLayout`, `SPLASH_PORT.backGap`). It no longer hangs on the gaps of the front row, so Deedee and Boppy stand over TNB and Tom's left side and Amy and Justin over Tom, Rose and Grace.
+- Figure widths (`SPLASH_W`) re-measured after walkhead3 (bigger kid heads); group width .94 of the screen.
+- Tested: shot 393x852; smoke below.
+
 ## 2026-11-06 (337): Emotions batch 1: chapters 2 to 4 show mood faces and poses (`emo8`)
 - Tom (07:12): trusts the mood calls, go ahead and implement; no verdict needed between batches. `python3 tools/emotion-apply.py 1 2 3 4` found 56 of 56, 95 of 95 and 62 of 62 lines (chapter 1 still 57 of 57); `EMO_CHAPTERS` now 1 to 4; `data/emotion-moods.js` regenerated (264 keys).
 - Tested: all 270 tagged lines in chapters 1 to 4 resolve to the mood in the tsv at runtime (0 mismatches), every face file exists, dialogue portraits checked in portrait and landscape, smoke FAILS: [], unused_voice 0.

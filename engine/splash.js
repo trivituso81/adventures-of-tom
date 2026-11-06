@@ -556,19 +556,20 @@ const SPLASH_SPOTS=[
   {id:'justin',x:740,feet:1150},{id:'tnb',x:150,feet:1198},{id:'boppy',x:890,feet:1222},{id:'grace',x:510,feet:1215},
   {id:'tom',x:290,feet:1222},{id:'rose',x:400,feet:1204},{id:'amy',x:680,feet:1222},{id:'deedee',x:790,feet:1258},{id:'nara',x:595,feet:1262}
 ];
-// Portrait (iPhone tuning, Tom 2026-11-06): two rows. Front, left to right: Nara, TNB, Tom, Rose, Grace. Back row stands in the gaps behind them:
-// Deedee between TNB and Tom, Boppy between Tom and Rose (so Tom is flanked by his parents), Amy between Rose and Grace, Justin just past Grace.
+// Portrait (iPhone tuning, Tom 2026-11-06): two rows. Front, left to right: Nara, TNB, Tom, Rose, Grace.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
-const SPLASH_W={tom:.33,tnb:.37,justin:.37,boppy:.37,amy:.33,deedee:.33,grace:.40,rose:.36,nara:.56};
-const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,depth:90,fracW:.97,fracH:.40,feetY:.72};
+const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599};
+const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,backGap:.9,depth:90,fracW:.94,fracH:.40,feetY:.72};
 function splashPortLayout(w,h) {
   const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
   let x=0,pw=0;
   const front=P.front.map((id,i)=>{ const ww=wid(id); if(i) x+=(pw/2+ww/2)*P.gap; pw=ww; return {id,x,ww}; });
-  const at=i=>front[i].x,mid=(i,j)=>(at(i)+at(j))/2,last=front[front.length-1];
-  const bx=[mid(1,2),mid(2,3),mid(3,4),last.x+(last.ww/2+wid(P.back[3])/2)*.3];
-  const back=P.back.map((id,i)=>({id,x:bx[i],ww:wid(id)}));
+  let bx=0,bw=0;   // back row: side by side with a slight overlap, centred on the front row (Tom 2026-11-06 07:13: it sat too far right)
+  const back=P.back.map((id,i)=>{ const ww=wid(id); if(i) bx+=(bw/2+ww/2)*P.backGap; bw=ww; return {id,x:bx,ww}; });
+  const blo=Math.min(...back.map(f=>f.x-f.ww/2)),bhi=Math.max(...back.map(f=>f.x+f.ww/2));
+  const flo=Math.min(...front.map(f=>f.x-f.ww/2)),fhi=Math.max(...front.map(f=>f.x+f.ww/2)),shift=(flo+fhi)/2-(blo+bhi)/2;
+  for(const b of back) b.x+=shift;
   const all=front.concat(back),lo=Math.min(...all.map(f=>f.x-f.ww/2)),hi=Math.max(...all.map(f=>f.x+f.ww/2));
   const tall=Math.max(...P.front.concat(P.back).map(i=>SPLASH_H[i]));
   const sc=Math.min(w*P.fracW/(hi-lo),h*P.fracH/(tall+P.depth)),mc=(lo+hi)/2,feet=h*P.feetY;
