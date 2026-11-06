@@ -3490,8 +3490,16 @@
    "group": "Terminal Zero"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-armresthog-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793926264429
+    }
+   ],
    "rejects": [],
    "id": "enemy-armresthog",
    "tab": "Enemies",
