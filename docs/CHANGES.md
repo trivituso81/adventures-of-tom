@@ -1,3 +1,8 @@
+## 2026-11-06 (324): Nara smaller on the map, portrait shows her whole head (`nara2`)
+- Tom (01:51, 01:54): "Nara is too big in the overworld", "Nara's portrait is cropped too close". Fact: her map size shared one number with battle and splash (`NARA_SIZE` 1.15). Now the map has its own `NARA_OW_SIZE` 0.9 in `data/nara-hires-use.js`; battle, knocked out and splash stay 1.15.
+- Portrait: `NARA` square in `tools/sprite-bake/bake_portraits.py` widened from 500 to 880 source pixels, so the whole head with ears fits; `portraits/nara.png` rebaked.
+- Tags: `nara2` (portrait, build stamp).
+
 ## 2026-11-06 (323): Deedee's 14 painted effect sheets replace her drawn effects and objects (`dfx1`)
 
 Tom approved Deedee's abilities and objects. Fact: all 14 fx sheets (`art/raw/characters/deedee-fx-<move>-v1.png`) are cut into painted props in `art/props/deedee/` by the new `tools/sprite-bake/bake_deedee_fx.py` (80 props), and every Deedee move now draws them through the new `engine/deedee-fx.js` (`DFX`): Dish-Towel Flick, MOON & BACK, Registered Nut, Corner-Piece, Wet Floor, Wine, Oven Mitt Ultimatum, Brisk Means Brisk, Garden Shower, Rise and Shine, Beanie Master, Grandma Squeeze, Sunday Roast Spread, To the Moon and Back. Drawn shapes stay only as the load-time fallback inside each move. Every move ran in `kit_test` with no errors.

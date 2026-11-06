@@ -32,7 +32,7 @@ FACE = {
     'olivia': (437, 542, 265, 385), 'deedee': (442, 557, 280, 410), 'boppy': (422, 572, 345, 515),
     'ellie': (452, 562, 263, 415),
 }
-NARA = (420, 410, 500)   # centre x, centre y, side
+NARA = (500, 440, 880)   # centre x, centre y, side (whole head with ears; 11-06 Tom: was cropped too close)
 
 
 def box(pid):

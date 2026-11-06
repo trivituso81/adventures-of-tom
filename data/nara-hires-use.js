@@ -2,6 +2,7 @@
 // data/nara-hires-use.js — The painted Nara (data/nara-hires.js, art/chars/nara-*.webp). Loaded right after data/nara.js, which builds her old pixel sprites;
 // this file swaps in the painted frames (overworld, battle, knocked out). Set NARA_HIRES_OFF=true (before this file) to fall back to the pixel Nara.
 // Her mouth point (HAND) is where she carries a ball, rope or jerky; both are set by hand in tools/sprite-bake/bake_nara.py (MARK).
+const NARA_OW_SIZE=0.9;   // Tom, 2026-11-06: Nara is too big in the overworld. Map size only (was NARA_SIZE 1.15).
 const NARA_SIZE=1.15;   // Tom, 2026-10-29: Nara 15 percent larger everywhere (battle, knocked out, overworld, splash). One number.
 (function() {
   if(typeof NARA_HIRES==='undefined'||(typeof NARA_HIRES_OFF!=='undefined'&&NARA_HIRES_OFF)) return;
@@ -13,7 +14,7 @@ const NARA_SIZE=1.15;   // Tom, 2026-10-29: Nara 15 percent larger everywhere (b
   const O=NARA_HIRES.ow,mk=(d,flip)=>['stand','step1','step2'].map(n=>{
     const rows=O[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'naraOw',d+'_'+n,flip); });
   NARA_OW.hires=true; NARA_OW.pal=O.pal; NARA_OW.down=mk('down'); NARA_OW.up=mk('up'); NARA_OW.side=mk('left',true);
-  Object.assign(OW.nara,prepOW(NARA_OW,1)); OW.nara.k=NARA_SIZE;   // overworld: engine/town-render.js multiplies by set.k
+  Object.assign(OW.nara,prepOW(NARA_OW,1)); OW.nara.k=NARA_OW_SIZE;   // overworld: engine/town-render.js multiplies by set.k
   // Battle
   const sp=BATTLE_SPRITES.nara; if(!sp) return;
   const B=NARA_HIRES.bt,MK=NARA_HIRES.meta.bt.marks;
