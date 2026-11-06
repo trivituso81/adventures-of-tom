@@ -1028,6 +1028,13 @@ html:not(.landscape) #dialog.has-portrait #dialog-text,html:not(.landscape) #dia
 html:not(.landscape) #dialog .dialog-footer{margin-top:0;min-height:24px}
 html:not(.landscape) #dialog #dialog-auto{min-height:24px;min-width:70px;padding:3px 8px;font-size:9px}
 html:not(.landscape) #dialog-choices{margin-top:6px}
+/* Portrait fills the full height of the dialogue box, square, flush to the box's left, top and bottom edges.
+   --dp-w (the box's inner height) is set by fitDialogPortrait in engine/overworld.js; the text column makes room with padding. */
+#dialog.has-portrait{padding-left:calc(var(--dp-w,56px) + 12px + env(safe-area-inset-left,0px))!important}
+#dialog.has-portrait #dialog-text,#dialog.has-portrait #dialog-choices,#dialog.has-portrait .dialog-footer{margin-left:0!important}
+#dialog.has-portrait #dialog-portrait{left:env(safe-area-inset-left,0px)!important;top:0!important;bottom:0!important;width:var(--dp-w,56px)!important;height:auto!important;border:none;border-right:2px solid var(--edge);border-radius:6px 0 0 0;box-shadow:none}
+#dialog-portrait img{object-fit:cover}
+#dialog.has-portrait #speaker{top:-22px;left:calc(var(--dp-w,56px) + 14px + env(safe-area-inset-left,0px));z-index:1}
 html.landscape #dialog .dialog-footer{margin-top:2px;padding-top:0}
 main:has(#dialog:not([hidden])) #controls{visibility:hidden}
 
@@ -1366,7 +1373,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/battle-icons.js?v=warmth1"></script>
 <script src="data/battle-emoji.js?v=warmth1"></script>
 <script src="engine/battle-pictures.js?v=tombopair2"></script>
-<script src="engine/overworld.js?v=ellie1"></script>
+<script src="engine/overworld.js?v=dlgport1"></script>
 <script src="data/font.js"></script>
 <script src="data/overworld-sprites.js"></script>
 <script src="engine/tiles.js?v=tom4"></script>
@@ -1582,7 +1589,11 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/local-clips.js?v=nobake1"></script>
 <script src="engine/dialog-auto.js"></script>
 <script src="engine/tapwalk.js?v=wind1"></script><!-- tap to walk -->
+<<<<<<< Updated upstream
 <script src="engine/main.js?v=storypose3"></script>
+=======
+<script src="engine/main.js?v=dlgport1"></script>
+>>>>>>> Stashed changes
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music1"></script>

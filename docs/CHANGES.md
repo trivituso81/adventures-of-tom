@@ -1,3 +1,8 @@
+## 2026-11-06 (308): Dialogue portrait fills the box height (`dlgport1`)
+- Tom (00:24): "the portrait should fill the entire vertical area of the space, expanding proportionately".
+- The face is now square, flush to the dialogue box's left, top and bottom edges, so its size follows the box height (portrait 85 px, landscape 100 px on the test phone). The text column and the speaker tab move right to make room. `fitDialogPortrait` in engine/overworld.js sets `--dp-w` (capped at 38% of the box width); CSS at the end of the dialogue block in index.html.
+- Tests: smoke FAILS [], screenshots portrait and landscape looked at.
+
 ## 2026-11-06 (307): Portraits tight on the head, equal zoom (`heroport2`)
 - Tom (00:24): "all portraits should be tightly cropped to the head, zoomed equally".
 - tools/sprite-bake/bake_portraits.py rewritten: each face measured on its hero painting (both pupils and the chin, `FACE`); face size = mean of eye-to-chin and pupil spacing; square = `SIDE` (410 px) x face size, eye line at 52% down. Hair and hats no longer change the zoom (big hair and the top of Boppy's cap are cropped). Nara framed on her eye and snout (`NARA`).

@@ -23,7 +23,19 @@ function setDialogPortrait(name) {
   if(src) { if(img.getAttribute('src')!==src) img.src=src; img.alt=''; }
   box.hidden=!src;
   $('dialog').classList.toggle('has-portrait',!!src);
+  fitDialogPortrait();
 }
+// The portrait is as tall as the dialogue box and square, so its width equals the box's inner height. The text column
+// gets narrower as the portrait widens, which can make the box taller, so settle in a few passes (capped at 38% of the box width).
+function fitDialogPortrait() {
+  const d=$('dialog'); if(!d||!d.classList.contains('has-portrait')) return;
+  for(let i=0;i<4;i++) {
+    const h=d.clientHeight, w=Math.max(40,Math.min(h,Math.round(d.clientWidth*.38)));
+    if(Math.abs(w-(parseFloat(d.style.getPropertyValue('--dp-w'))||0))<1) break;
+    d.style.setProperty('--dp-w',w+'px');
+  }
+}
+if(window.ResizeObserver) new ResizeObserver(()=>fitDialogPortrait()).observe($('dialog'));
 
 function openDialog(name,lines,npc=null) {
   dialog.active=true;
