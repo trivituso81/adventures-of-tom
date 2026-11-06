@@ -1,10 +1,14 @@
 Create the actual environment painting for Area 04, Cattail Pier, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
 
+ATTACHED IMAGE (style reference only)
+Attached is the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.
+
 OUTPUT
 One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
 
 STYLE AND CAMERA
-A richly detailed, polished hand-painted digital illustration of a small fishing pier on a bay, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on the sparkling water, wet wood, buoys and the shack roof, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the yard, the shack, the pier and the water together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+A hand-painted, hand-brushed painting of a small fishing pier on a bay, in exactly the style of the attached painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.
+Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the yard, the shack, the pier and the water together. Same camera across the whole uninterrupted scene.
 
 SCALE AND CAMERA DISTANCE (important)
 This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire pier, yard and shack fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
@@ -14,7 +18,7 @@ This is a whole game map seen from high above and far away, at the same distance
 - The bait shack is about one fifth of the picture width; the bench is about one twelfth of the picture width; the rowboat about one eighth.
 
 SETTING
-A sunny Long Island bay with a little wooden fishing pier, on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, sparkles on calm blue-green water. Sandy dirt yard, beach grass, cattails, rocks, weathered wood, rope and fishing gear. Peaceful, salty and cozy.
+A sunny Long Island bay with a little wooden fishing pier, on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, soft dabs of pale paint on calm blue-green water. Sandy dirt yard, beach grass, cattails, rocks, weathered wood, rope and fishing gear. Peaceful, salty and cozy.
 
 THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
 A character must be able to walk from either entrance to the shack door, the bench and the end of the pier. No fence, crate, rock or prop may wall off a route. Every path is at least two character-widths wide.
@@ -43,7 +47,7 @@ EXIT BOARDS: two matching green boards with carved cream-gold letters, both the 
 These three signs are the only words in the image. No other signs, notices, chalkboards or price tags.
 
 LAYERING (the game cuts trees, posts, boards, the shack roof and tall props out as separate layers)
-Sand, grass and boardwalk continue unbroken under and behind every tree, post, barrel, crate and the shack eaves. Every tall object has a clear visible base with ground or deck showing behind it. Crisp clean silhouettes on tree canopies, posts, boards and the roof edge. Nothing floats.
+Sand, grass and boardwalk continue unbroken under and behind every tree, post, barrel, crate and the shack eaves. Every tall object has a clear visible base with ground or deck showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, posts, boards and the roof edge. Nothing floats.
 
 LIGHT AND COLORS
 Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, warm sand #E3C99A, weathered wood #9C7A55, bay water #3F8E96, leafy sage #608775, light green grass #B4C395, warm shadows #716351. Clear darker contact shadow under the shack, posts and props, an open sunlit yard and pier.

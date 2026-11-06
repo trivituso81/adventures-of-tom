@@ -1,10 +1,14 @@
 Create the actual environment painting for Area 06, Sundial Hollow, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
 
+ATTACHED IMAGE (style reference only)
+Attached is the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.
+
 OUTPUT
 One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1408 x 1280 pixels (11:10). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
 
 STYLE AND CAMERA
-A richly detailed, polished hand-painted digital illustration of a hidden mossy forest clearing, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on the deep pool, wet stone, moss and leaves, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the path, the clearing, the stone channel and the pool together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+A hand-painted, hand-brushed painting of a hidden mossy forest clearing, in exactly the style of the attached painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.
+Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the path, the clearing, the stone channel and the pool together. Same camera across the whole uninterrupted scene.
 
 SCALE AND CAMERA DISTANCE (important)
 This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire hollow, channel and pool fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
@@ -37,7 +41,7 @@ SIGNS: DESIGN AND LETTER IT YOURSELF
 ONE exit board only: a green board with carved cream-gold letters, two centered lines, ALL CAPITALS, large and easy to read, spelled exactly as written letter by letter: WHISPERING / MARSH (W-H-I-S-P-E-R-I-N-G; M-A-R-S-H). It hangs HIGH between two tall wooden posts like an archway over the entrance path, the board's bottom edge well above head height. Place it NOT at the bottom edge: over the path about four fifths of the way down the picture, with the path continuing below it to the bottom edge. This is the only word in the image. No pool markers, name signs or notices. The sundial numerals are simple carved marks, not letters or digits.
 
 LAYERING (the game cuts trees, standing stones, the sundial, the board and tall props out as separate layers)
-Moss, ground and stone continue unbroken under and behind every tree, standing stone, the sundial, the bench and the board posts. Every tall object has a clear visible base with ground showing behind it. Crisp clean silhouettes. Nothing floats.
+Moss, ground and stone continue unbroken under and behind every tree, standing stone, the sundial, the bench and the board posts. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes. Nothing floats.
 
 LIGHT AND COLORS
 Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, deep pool blue-green #2F6E78, mossy green #6E8F4E, old stone grey #9A9585, warm earth path #A8865A, warm shadows #716351. Clear darker contact shadow under trees, stones and the sundial, a sunlit clearing.

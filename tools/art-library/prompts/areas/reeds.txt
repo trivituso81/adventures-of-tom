@@ -1,10 +1,14 @@
 Create the actual environment painting for Area 05, Whispering Marsh, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
 
+ATTACHED IMAGE (style reference only)
+Attached is the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.
+
 OUTPUT
 One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1664 x 1472 pixels (26:23). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
 
 STYLE AND CAMERA
-A richly detailed, polished hand-painted digital illustration of a reedy salt marsh crossed by wooden boardwalks, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on the shallow water, wet planks, lily pads and reed tips, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the boardwalks, the water and the reed beds together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+A hand-painted, hand-brushed painting of a reedy salt marsh crossed by wooden boardwalks, in exactly the style of the attached painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.
+Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the boardwalks, the water and the reed beds together. Same camera across the whole uninterrupted scene.
 
 SCALE AND CAMERA DISTANCE (important)
 This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire marsh and its whole boardwalk route fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
@@ -14,7 +18,7 @@ This is a whole game map seen from high above and far away, at the same distance
 - Reed clumps and trees are small islands seen from above; the whole zigzag route is visible from end to end.
 
 SETTING
-A wide Long Island salt marsh on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, a thin glowing mist far away. Shallow teal water, lily pads, tall feathery reeds and cattails that seem to lean and whisper, small grassy islands, mossy old stumps and leaning posts. Mysterious but friendly: a place where small marsh creatures might live.
+A wide Long Island salt marsh on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, a thin pale mist far away. Shallow teal water, lily pads, tall feathery reeds and cattails that seem to lean and whisper, small grassy islands, mossy old stumps and leaning posts. Mysterious but friendly: a place where small marsh creatures might live.
 
 THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
 This marsh is ONE long connected route on wooden boardwalks and solid ground. A character must be able to walk from the east entrance all the way to the top left exit without ever stepping into water. Every boardwalk is wide enough for two people side by side, with continuous planks: no gaps, no missing or broken planks, no steps down into the water along the route.
@@ -40,7 +44,7 @@ EXIT BOARDS only: two matching green boards with carved cream-gold letters, two 
 These two boards are the only words in the image. No other signs, signposts or notices.
 
 LAYERING (the game cuts reeds, trees, posts and boards out as separate layers)
-Planks, ground and water continue unbroken under and behind every reed clump, post, stump and board. Every tall object has a clear visible base. Crisp clean silhouettes on reed clumps, trees, posts and boards. Nothing floats.
+Planks, ground and water continue unbroken under and behind every reed clump, post, stump and board. Every tall object has a clear visible base. Clearly separated, small-brush painted silhouettes on reed clumps, trees, posts and boards. Nothing floats.
 
 LIGHT AND COLORS
 Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, marsh water teal #4F9A93, weathered planks #A7835A, reed gold #D8B66A, leafy sage #608775, light green grass #B4C395, warm shadows #716351. Clear darker contact shadow under posts and boardwalks, a sunlit open route.

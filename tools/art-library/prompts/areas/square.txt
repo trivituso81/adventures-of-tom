@@ -1,10 +1,14 @@
 Create the actual environment painting for Area 01, The Square, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
 
+ATTACHED IMAGE (style reference only)
+Attached is the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.
+
 OUTPUT
 One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1920 x 1664 pixels (15:13). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
 
 STYLE AND CAMERA
-A richly detailed, polished hand-painted digital illustration of a small town square, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on roof tiles, lanterns and water, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing building fronts, roofs and walkable paving together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+A hand-painted, hand-brushed painting of a small town square, in exactly the style of the attached painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.
+Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing building fronts, roofs and walkable paving together. Same camera across the whole uninterrupted scene.
 
 SETTING
 A friendly small Long Island town square on a clear warm afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade. Honey-cream cobblestone paving, mature leafy trees, low wooden fences, flower barrels and planters. Small-town coziness, not a palace or a city.
@@ -26,10 +30,10 @@ Four buildings along the NORTH side, left to right, doors facing the plaza below
 4. Penny's Pockets (coral-red roof, butter walls): an adventurer's outfitter and snack shop, backpacks, satchels, lanterns, rope and walking sticks hanging on the outside wall, a scalloped awning shaped like rows of pockets, a deep bay window of snack crates and candy jars, copper penny studs on the door, a pot of marigolds.
 Four buildings along the SOUTH side, left to right, doors facing the lower lane in front of them:
 5. Snail Mail (slate-blue roof, parchment walls): a post office with a curled snail-shell spiral built into its front, a round spiral window, a short spiral turret with a metal snail weathervane, rows of brass letter slots, parcels and mail sacks by the door, a red mailbox and a blue drop box.
-6. Kettle Cottage (amber-brown roof, blush pink walls): a round cozy tea cottage, a chimney shaped like a teapot spout pouring soft steam, scalloped lace trim like a tea cozy, teacups on a window shelf, a little cafe table with a teapot.
-7. Moon Club (silver dome, night-blue walls): a faded, once-glamorous 1930s observatory lounge, a small silver observatory dome on the roof with a telescope poking out, walls painted with tiny gold stars, gold art-deco trim, a round porthole window, a short velvet rope by the door, a brass globe and a telescope outside.
-8. Long Island Taxi Co. (yellow-ochre roof, ivory walls): a little dispatch garage, a black-and-yellow checkered band around the walls, a roll-up garage door beside a dispatch window with a radio, a clock over the window, a tire stack at the side, ONE small yellow taxi parked at the right of its door.
-No ninth building, no clock tower, hall, gazebo or mansion.
+6. Kettle Cottage (amber-brown roof, blush pink walls): a round cozy tea cottage, a chimney shaped like a teapot spout pouring soft steam, scalloped lace trim like a tea cozy, teacups on a window shelf, and acute pink door that stays in theme.
+7. Moon Club (silver dome, night-blue walls): a faded, once-glamorous 1930s observatory lounge, a small silver observatory dome on the roof with a telescope poking out, walls painted with tiny gold stars, gold art-deco trim, a round porthole window, , a brass globe and a telescope outside.
+8. Long Island Taxi Co. (yellow-ochre roof, ivory walls): a little dispatch garage, a black-and-yellow checkered band around the walls, a door for customers to enter, a clock over the window, a tire stack at the side.
+No ninth building, no clock tower, hall, gazebo or mansion. there must be a clear path between Kettle Cottage and the Moon Club leading to the fountain.
 
 SIGNS: DESIGN AND LETTER EACH ONE YOURSELF
 Each building has one sign, a unique object designed in that building's own theme, shape and materials, never a plain plaque, with lettering designed to match. ALL CAPITALS, two lines unless noted, spelled exactly as written, letter by letter, large and easy to read. Signs never cover a door, awning or lamp.
@@ -48,7 +52,7 @@ PLAZA
 A wide paved plaza between the two rows. A LARGE round stone fountain, about one fifth of the image width, with a lower basin, a tiered spout and flowers around it, sits just left of the center with open paving all around it. Two wooden benches with flower barrels, one left and one right of the fountain. Iron street lamps along the plaza. Dense summer trees and wooden fences around the outer edges, leaving the three exits open.
 
 LAYERING (the game cuts trees, lamps, signs and roofs out as separate layers)
-Paving and grass continue unbroken under and behind every tree, lamp, bench, sign post and roof eave. Every tall object has a clear visible base with ground showing behind it. Crisp clean silhouettes on tree canopies, lamps, signs and roof edges. Nothing floats.
+Paving and grass continue unbroken under and behind every tree, lamp, bench, sign post and roof eave. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, lamps, signs and roof edges. Nothing floats.
 
 LIGHT AND COLORS
 Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, cream paving #EED8B5, leafy sage #608775, light green grass #B4C395, terracotta #CF7954, warm shadows #716351. Clear darker contact shadow under buildings and props, open sunlit plaza.
