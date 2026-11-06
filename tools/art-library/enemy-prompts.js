@@ -152,7 +152,7 @@ const LEAD = {
   ironbelly: `Repaint attachment 2 as a grand, richly detailed handbrushed boss painting. Keep the same creature, a cast-iron pot-bellied stove with a glowing grate mouth, round gauge eyes, stubby legs and a smoking chimney, but make it far more detailed, beautiful and dramatic: heavy riveted iron plates, embossed scrollwork, deep rust and soot, glowing cracks, a roaring fire behind a menacing grate mouth, bright firelight playing on the iron.`
 };
 const FLAIR = {
-  bigone: `glistening scales and fins with soft wet highlights, a shiny dented pie tin with crumbs of crust, huge luminous startled eyes, dripping water, rich blue and teal light`,
+  bigone: `glistening scales and fins with soft wet highlights, a small shiny dented pie tin, only one sixth of its height, with crumbs of crust, huge luminous startled eyes, dripping water, rich blue and teal light`,
   bigshake: `layered cracked stone with glowing orange fissures, mossy crags, orbiting rocks trailing sparks, dust and heat shimmer, dramatic rim light`,
   irongill: `rusty riveted iron plates in deep detail, long whiskers like bronze cables, wet gleaming skin, small glowing gold eyes, murky water with mist and dramatic marsh light`,
   directorscut: `polished golden brass with deep reflections and dents, a carved wooden tripod, a furious expressive face in the bell, film-set spotlights and light beams`,

@@ -3,7 +3,7 @@ skeeter|hollow|20|a ragged swarm of a dozen red-eyed mosquitoes with pale blue w
 grump|hollow|24|a fat round-shouldered mossy olive-green toad lump with a pale sagging belly, pondweed hanging like wet hair and a permanent scowl
 toad|hollow|34|a tall yellow-green bog toad on long legs, mouth wide open mid-croak, a big lily pad on its head like a sun hat
 log|hollow|22|a short fat fallen log with two sleepy half-closed eyes, moss, mushrooms and seedlings along its top
-bigone|hollow|60|a bathtub-sized pale blue fish-blob sitting upright on its flat tail, huge white startled eyes, a small round mouth, a pie tin on its head
+bigone|hollow|60|a bathtub-sized pale blue fish-blob sitting upright on its flat tail, huge white startled eyes, a small round mouth, a small pie tin perched on its head like a tiny hat
 smoglet|griffith|18|a puffy pumpkin-sized cloud of brown-grey exhaust with two angry slanted eyes and dirty wisps trailing off
 tickets|griffith|24|a whirl of cream and yellow parking tickets around a scrunched paper face with narrowed eyes
 coyote|griffith|26|a lean tan and cream canyon coyote crouched low with a bushy tail curled up, a sly grin and ears pricked

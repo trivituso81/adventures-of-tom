@@ -1,3 +1,7 @@
+## 2026-11-05 (246): Old Big One prompt: real size and a small pie tin (Art Library only, no game files, no tag)
+
+Tom: the Big One is very large in battle, so the pie tin must be small next to him. Facts in the prompt: 60 in tall (Tom 71 in, Mudling 16 in, Grace 50 in), real pie tin 9 in across, so the tin is about 15 percent of body height and a quarter of body width. Only the creature paragraph of Tom's edited prompt changed.
+
 ## 2026-11-05 (245): All remaining boss prompts: far more detailed, beautiful and dramatic, six distinct poses (Art Library only, no game files, no tag)
 
 Tom: "revise all the other bosses accordingly". 19 boss prompts (Old Big One kept as Tom edited it) now carry a richer look line (FLAIR in tools/art-library/enemy-prompts.js) and six custom poses with a real attack and a follow-through unlike pose 1. Julian and Dead Letter have no guide picture, so Julian uses the description version with the same text. Soft word "knocked" avoided.
