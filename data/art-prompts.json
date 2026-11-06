@@ -14486,8 +14486,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair,  workout black tank and workout shorts, colorful sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Boston Qualifier.\n\nRow 1:\n1. Standing with a paper race bib pinned to the front of her dress, both hands on her thighs, a hard focused look.\n2. Running steadily with arms pumping, eyes on something far ahead.\n3. Running while reaching one arm back with an open hand and looking back over her shoulder, calling someone on.\n\nRow 2:\n4. Running with a big yell, one fist raised, hair streaming back.\n5. Breaking through a finish tape with her chest out and both arms thrown wide, mouth open in joy.\n6. Standing with a silver foil blanket over her shoulders and a gold medal on a ribbon around her neck, a tired happy smile, giving a thumbs up."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-marathon-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000625612
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-marathon-ult",
    "tab": "Characters",
