@@ -1,3 +1,8 @@
+## 2026-11-06 (304): Objects and effects sheets for Tom's 14 abilities (`abilfx1`)
+- Tom (00:17): "add sheets for objects and effects needed for tom's abilities. attach whichever reference to corresponding abilities".
+- 14 new Art Library entries `tom-fx-<move>` (Characters > Tom, right after the ability sheets), 4 x 3 grid on magenta, ar 4:3, 6 to 12 items each. Each attaches only that ability's newest approved sheet (overpriced-gadget v2, kanji-strike v2, the rest v1), so every held object is copied from it.
+- Items come from the scenes each move draws in engine/tom-moves.js (held objects, set pieces like the privacy door, GATE 0 door, jet, floor controller, console, and effects like the starter wave, red noise wave, 火 strokes, flames, stamps, sparkles, dust). Shared text: tools/art-library/prompts/char-ability-fx.txt; lists: FX in tools/art-library/char-prompts.js; spliced into data/art-prompts.json directly (427 entries, others unchanged).
+- Not wired into the game yet: when Tom approves sheets, cut them (bake_prop_sheets.py method) and swap them into the PROPART hooks, purging the old pixel-era tom props they replace.
 ## 2026-11-06 (303): Art Library ability sheets for Grace, Rose and Deedee (`abil3`)
 - Tom (00:11): "populate Grace, Rose and Deedee abilities image generators in the Characters Art Library".
 - 42 new Characters entries `<id>-ab-<move>` (14 each, Primary kit from data/abilities.js), same shape as Tom's: 3 x 2, 6 frames, 3:2, refs hero, walk, battle sheet 1, battle sheet 2. Frames follow each move's current animation in engine/<id>-moves.js; held props only, no other characters (Rose's shoulder moves and Ms. Cathy show only Rose).

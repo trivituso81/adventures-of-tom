@@ -425,6 +425,160 @@ for (const id of Object.keys(ABILITIES)) {
       prompt: P('char-ability-sheet.txt').replace('unless a frame says he looks', 'unless a frame says ' + (PRONOUN[id] || 'he') + ' looks') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
   }
 }
+// Objects and effects sheets (Tom 2026-11-06 00:17): one 4 x 3 sheet per ability with every object and effect the move needs,
+// painted to match. Ref: that ability's newest approved sheet (art/raw/characters/<id>-ab-<move>-vN.png), so held objects
+// are copied from it. Shared text: prompts/char-ability-fx.txt. Items follow the scenes the move draws in engine/<id>-moves.js.
+const FX = {
+  tom: {
+    button_mash: [
+      'The game controller from the picture, front view.',
+      'The same controller tilted at an angle, as if spinning through the air.',
+      'A small no-signal badge: four rising signal bars with a red cross over them.',
+      'A curved white motion swoosh, the path of a thrown object (wide).',
+      'A big jagged impact burst, yellow and white.',
+      'Three plump golden stars in a small ring, for dizziness.',
+      'A small puff of grey dust.'],
+    defend: [
+      'A big glowing open hand, palm forward, made of pale blue light: a magic stop sign.',
+      'A small wooden placard on a short stake, reading NO TOUCHING in neat hand-painted letters.',
+      'A curved pale blue shield arc, like the edge of a glassy dome.',
+      'Three short pale blue speed lines.',
+      'A small white flash where something bounces off.',
+      'A tiny gold twinkle star.'],
+    starter_splash: [
+      'The glass starter jar from the picture, lid on, full of bubbly cream starter.',
+      'The same jar with the lid off, starter foaming up over the rim.',
+      'The jar\'s lid alone.',
+      'A wide rolling wave of thick bubbly cream sourdough starter, cresting high at one end, glossy, full of bubble holes (wide).',
+      'A big crashing splash of the same starter, blobs flying up.',
+      'A flat sticky puddle of starter with a few bubbles (wide).',
+      'A cluster of five round starter bubbles of different sizes.',
+      'One large glossy starter bubble.',
+      'A few small flying blobs and drops of starter.'],
+    sourdough_snob: [
+      'The round sourdough loaf from the picture, whole, with its scored ear on top.',
+      'The same loaf torn in half, the soft open crumb showing.',
+      'A thick slice of the same bread.',
+      'The thin wooden pointer from the picture (tall).',
+      'A big flip chart on a wooden easel, like the chart board in the picture, with a simple hand-drawn rising line and bars, no words (tall).',
+      'A soft curl of warm white steam.',
+      'Three small red hearts.',
+      'A cluster of golden sparkles.',
+      'A small scatter of bread crumbs.'],
+    overpriced_gadget: [
+      'The matte-black box from the picture, closed.',
+      'The box\'s lid alone.',
+      'The open box with warm golden light beaming up out of it.',
+      'The silver gadget from the picture, with its big camera bump.',
+      'A white paper price tag on a string, reading $1499.',
+      'The long paper receipt from the picture, unrolling in a loose curl (tall).',
+      'A pile of crumpled receipt paper.',
+      'A burst of warm golden light rays.',
+      'Three small red hearts.'],
+    noise_canceling: [
+      'The black over-ear headphones from the picture, open.',
+      'The same headphones from the side, ear cups turned flat.',
+      'A big jagged red sound wave, a zigzag band of noise (wide).',
+      'The same red wave cut off cleanly at one end, as if sliced (wide).',
+      'A calm pale blue ripple of rings, a soft wave of quiet.',
+      'A spiky shouting speech bubble, empty inside.',
+      'Small broken shards of the red zigzag, flying apart.',
+      'A small glowing blue power button light.'],
+    seat_1a: [
+      'The boarding pass from the picture.',
+      'The small remote from the picture.',
+      'A hanging airport sign reading BOARDING GROUP 5 (wide).',
+      'A tall sliding cabin door in deep navy with a brass handle and a small red light (tall).',
+      'An airplane window with its pale grey shade pulled all the way down.',
+      'The plush white duvet from the picture, spread loose (wide).',
+      'A plush white pillow.',
+      'A dark navy sleep mask.',
+      'A small glowing red light panel reading DO NOT DISTURB.'],
+    delta_ult: [
+      'The phone from the picture, a boarding pass on its screen.',
+      'An airport gate scanner on a short stand, a green light glowing.',
+      'A long red carpet runner, rolled out flat (wide).',
+      'A tall glowing gate door with a sign reading GATE 0 above it (tall).',
+      'A sleek lie-flat airline seat pod, fully reclined, deep navy and cream (wide).',
+      'The sleep mask from the picture.',
+      'A sleek white passenger jet seen from the side (wide).',
+      'The rolled white towel from the picture, steaming.',
+      'The silver tongs from the picture.',
+      'A long white contrail streak with speed lines (wide).',
+      'A soft warm golden glow burst.'],
+    flashcard_flurry: [
+      'The deck of white flashcards from the picture, squared.',
+      'One blank flashcard from the deck.',
+      'One flashcard tilted, spinning through the air, a small motion trail.',
+      'One flashcard with the kanji 日 in bold black brush strokes.',
+      'One flashcard with the kanji 月 in bold black brush strokes.',
+      'One flashcard with the kanji 火 in bold black brush strokes.',
+      'One flashcard with the kanji 水 in bold black brush strokes.',
+      'One flashcard with the kanji 木 in bold black brush strokes.',
+      'One flashcard with the kanji 山 in bold black brush strokes.',
+      'A shiny gold star sticker.',
+      'A square tile with a big question mark.',
+      'A small white impact pop.'],
+    konami_code: [
+      'A huge game controller lying flat on the floor like a mat, the same design as the controller printed on his shirt in the picture, seen from above at an angle (wide).',
+      'A giant chunky yellow arrow pointing up.',
+      'A giant round red button, like the buttons on that controller.',
+      'A giant cross-shaped direction pad, like the one on that controller.',
+      'A big white starburst flash.',
+      'A small green badge reading 1UP.',
+      'A small dust puff from a stomp.',
+      'A cluster of gold sparkles.'],
+    skincare_10: [
+      'The tray of skincare bottles and jars from the picture.',
+      'One tall pump bottle from the tray (tall).',
+      'One small round jar of cream, lid off.',
+      'One dropper bottle.',
+      'The white face mask from the picture, lights off.',
+      'The same mask with its little lights glowing bright red.',
+      'A soft round red-light glow.',
+      'A cluster of clean white and gold sparkles.',
+      'A big white pause symbol: two thick rounded bars.',
+      'A small round countdown timer.'],
+    kanji_strike: [
+      'The giant calligraphy brush from the picture (tall).',
+      'A big kanji 火 written in thick black brush ink, glowing warm orange at the edges, filling the cell.',
+      'The first stroke of 火 alone, in the same glowing ink.',
+      'The second stroke of 火 alone, in the same glowing ink.',
+      'The third stroke of 火 alone, in the same glowing ink.',
+      'The fourth stroke of 火 alone, in the same glowing ink.',
+      'A splash of black ink drops flying off a brush.',
+      'A big burst of orange and yellow flames.',
+      'One small flame.',
+      'A ring of glowing embers.'],
+    know_it_all: [
+      'The red rubber stamp from the picture.',
+      'A red ink stamp mark: a rough rectangle with the word FALSE and a big X.',
+      'A big red X in rough stamp ink.',
+      'An empty round white speech bubble.',
+      'Two soft red blush ovals, for embarrassed cheeks.',
+      'A small white impact burst.',
+      'A small gold ding sparkle.'],
+    cart_ult: [
+      'The big grey game cartridge from the picture, front view, with a colorful label reading THE ADVENTURES OF TOM.',
+      'The same cartridge seen from its bottom edge, the gold contact pins showing.',
+      'A boxy cream and grey home game console with a cartridge slot on top.',
+      'A puff of grey dust blown out in a cone.',
+      'A strip of rainbow glitch bars, flat horizontal color stripes (wide).',
+      'A big jagged impact burst, white and yellow.',
+      'A ring of gold and white sparkles.',
+      'A few small grey dust specks.'],
+  },
+};
+for (const id of Object.keys(FX)) {
+  const who = GROUP[id];
+  for (const [key, name] of ABILITIES[id].map(a => [a[0], a[1]])) {
+    const items = FX[id][key]; if (!items) continue;
+    const slug = id + '-ab-' + key.replace(/_/g, '-');
+    let v = 1; while (fs.existsSync(__dirname + '/../../' + R + slug + '-v' + (v + 1) + '.png')) v++;
+    entries.push({ id: id + '-fx-' + key.replace(/_/g, '-'), tab: 'Characters', group: who, title: who + ' objects and effects: ' + name + ' (' + items.length + ' items; attaches the approved ' + name + ' sheet)', ar: '4:3', refs: [R + slug + '-v' + v + '.png'],
+      prompt: P('char-ability-fx.txt') + '\n\nThe move: ' + name + '.\n\nItems:\n' + items.map((t, i) => (i + 1) + '. ' + t).join('\n') });
+  }
+}
 // Emotion sheets (Tom 2026-11-05 23:43, docs/EMOTIONS.md): one 4 x 2 full-body sheet per character with a hero picture,
 // the 8 core emotions in order happy, loving, sad, angry, scared, surprised, proud, unimpressed. Ref: hero only.
 const EMOTION_CAST = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', ellie: 'Aunt Ellie', olivia: 'Olivia', nara: 'Nara' };

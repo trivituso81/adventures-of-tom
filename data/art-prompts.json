@@ -384,6 +384,202 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "tom-fx-button-mash",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Disconnected Controller (7 items; attaches the approved Disconnected Controller sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-button-mash-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Disconnected Controller.\n\nItems:\n1. The game controller from the picture, front view.\n2. The same controller tilted at an angle, as if spinning through the air.\n3. A small no-signal badge: four rising signal bars with a red cross over them.\n4. A curved white motion swoosh, the path of a thrown object (wide).\n5. A big jagged impact burst, yellow and white.\n6. Three plump golden stars in a small ring, for dizziness.\n7. A small puff of grey dust."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-defend",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: DEFEND (6 items; attaches the approved DEFEND sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-defend-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: DEFEND.\n\nItems:\n1. A big glowing open hand, palm forward, made of pale blue light: a magic stop sign.\n2. A small wooden placard on a short stake, reading NO TOUCHING in neat hand-painted letters.\n3. A curved pale blue shield arc, like the edge of a glassy dome.\n4. Three short pale blue speed lines.\n5. A small white flash where something bounces off.\n6. A tiny gold twinkle star."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-starter-splash",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Starter Splash (9 items; attaches the approved Starter Splash sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-starter-splash-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Starter Splash.\n\nItems:\n1. The glass starter jar from the picture, lid on, full of bubbly cream starter.\n2. The same jar with the lid off, starter foaming up over the rim.\n3. The jar's lid alone.\n4. A wide rolling wave of thick bubbly cream sourdough starter, cresting high at one end, glossy, full of bubble holes (wide).\n5. A big crashing splash of the same starter, blobs flying up.\n6. A flat sticky puddle of starter with a few bubbles (wide).\n7. A cluster of five round starter bubbles of different sizes.\n8. One large glossy starter bubble.\n9. A few small flying blobs and drops of starter."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-sourdough-snob",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Sourdough Snob (9 items; attaches the approved Sourdough Snob sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-sourdough-snob-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Sourdough Snob.\n\nItems:\n1. The round sourdough loaf from the picture, whole, with its scored ear on top.\n2. The same loaf torn in half, the soft open crumb showing.\n3. A thick slice of the same bread.\n4. The thin wooden pointer from the picture (tall).\n5. A big flip chart on a wooden easel, like the chart board in the picture, with a simple hand-drawn rising line and bars, no words (tall).\n6. A soft curl of warm white steam.\n7. Three small red hearts.\n8. A cluster of golden sparkles.\n9. A small scatter of bread crumbs."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-overpriced-gadget",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Retail Therapy (9 items; attaches the approved Retail Therapy sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-overpriced-gadget-v2.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Retail Therapy.\n\nItems:\n1. The matte-black box from the picture, closed.\n2. The box's lid alone.\n3. The open box with warm golden light beaming up out of it.\n4. The silver gadget from the picture, with its big camera bump.\n5. A white paper price tag on a string, reading $1499.\n6. The long paper receipt from the picture, unrolling in a loose curl (tall).\n7. A pile of crumpled receipt paper.\n8. A burst of warm golden light rays.\n9. Three small red hearts."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-noise-canceling",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Noise-Canceling (8 items; attaches the approved Noise-Canceling sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-noise-canceling-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Noise-Canceling.\n\nItems:\n1. The black over-ear headphones from the picture, open.\n2. The same headphones from the side, ear cups turned flat.\n3. A big jagged red sound wave, a zigzag band of noise (wide).\n4. The same red wave cut off cleanly at one end, as if sliced (wide).\n5. A calm pale blue ripple of rings, a soft wave of quiet.\n6. A spiky shouting speech bubble, empty inside.\n7. Small broken shards of the red zigzag, flying apart.\n8. A small glowing blue power button light."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-seat-1a",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Seat 1A, Peasants (9 items; attaches the approved Seat 1A, Peasants sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-seat-1a-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Seat 1A, Peasants.\n\nItems:\n1. The boarding pass from the picture.\n2. The small remote from the picture.\n3. A hanging airport sign reading BOARDING GROUP 5 (wide).\n4. A tall sliding cabin door in deep navy with a brass handle and a small red light (tall).\n5. An airplane window with its pale grey shade pulled all the way down.\n6. The plush white duvet from the picture, spread loose (wide).\n7. A plush white pillow.\n8. A dark navy sleep mask.\n9. A small glowing red light panel reading DO NOT DISTURB."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-delta-ult",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Boarding Group Zero (11 items; attaches the approved Boarding Group Zero sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-delta-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Boarding Group Zero.\n\nItems:\n1. The phone from the picture, a boarding pass on its screen.\n2. An airport gate scanner on a short stand, a green light glowing.\n3. A long red carpet runner, rolled out flat (wide).\n4. A tall glowing gate door with a sign reading GATE 0 above it (tall).\n5. A sleek lie-flat airline seat pod, fully reclined, deep navy and cream (wide).\n6. The sleep mask from the picture.\n7. A sleek white passenger jet seen from the side (wide).\n8. The rolled white towel from the picture, steaming.\n9. The silver tongs from the picture.\n10. A long white contrail streak with speed lines (wide).\n11. A soft warm golden glow burst."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-flashcard-flurry",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Flashcard Flurry (12 items; attaches the approved Flashcard Flurry sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-flashcard-flurry-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Flashcard Flurry.\n\nItems:\n1. The deck of white flashcards from the picture, squared.\n2. One blank flashcard from the deck.\n3. One flashcard tilted, spinning through the air, a small motion trail.\n4. One flashcard with the kanji 日 in bold black brush strokes.\n5. One flashcard with the kanji 月 in bold black brush strokes.\n6. One flashcard with the kanji 火 in bold black brush strokes.\n7. One flashcard with the kanji 水 in bold black brush strokes.\n8. One flashcard with the kanji 木 in bold black brush strokes.\n9. One flashcard with the kanji 山 in bold black brush strokes.\n10. A shiny gold star sticker.\n11. A square tile with a big question mark.\n12. A small white impact pop."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-konami-code",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Konami Code (8 items; attaches the approved Konami Code sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-konami-code-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Konami Code.\n\nItems:\n1. A huge game controller lying flat on the floor like a mat, the same design as the controller printed on his shirt in the picture, seen from above at an angle (wide).\n2. A giant chunky yellow arrow pointing up.\n3. A giant round red button, like the buttons on that controller.\n4. A giant cross-shaped direction pad, like the one on that controller.\n5. A big white starburst flash.\n6. A small green badge reading 1UP.\n7. A small dust puff from a stomp.\n8. A cluster of gold sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-skincare-10",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: 10-Step Skincare (10 items; attaches the approved 10-Step Skincare sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-skincare-10-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: 10-Step Skincare.\n\nItems:\n1. The tray of skincare bottles and jars from the picture.\n2. One tall pump bottle from the tray (tall).\n3. One small round jar of cream, lid off.\n4. One dropper bottle.\n5. The white face mask from the picture, lights off.\n6. The same mask with its little lights glowing bright red.\n7. A soft round red-light glow.\n8. A cluster of clean white and gold sparkles.\n9. A big white pause symbol: two thick rounded bars.\n10. A small round countdown timer."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-kanji-strike",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Kanji Strike (10 items; attaches the approved Kanji Strike sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-kanji-strike-v2.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Kanji Strike.\n\nItems:\n1. The giant calligraphy brush from the picture (tall).\n2. A big kanji 火 written in thick black brush ink, glowing warm orange at the edges, filling the cell.\n3. The first stroke of 火 alone, in the same glowing ink.\n4. The second stroke of 火 alone, in the same glowing ink.\n5. The third stroke of 火 alone, in the same glowing ink.\n6. The fourth stroke of 火 alone, in the same glowing ink.\n7. A splash of black ink drops flying off a brush.\n8. A big burst of orange and yellow flames.\n9. One small flame.\n10. A ring of glowing embers."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-know-it-all",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Know-It-All (7 items; attaches the approved Know-It-All sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-know-it-all-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Know-It-All.\n\nItems:\n1. The red rubber stamp from the picture.\n2. A red ink stamp mark: a rough rectangle with the word FALSE and a big X.\n3. A big red X in rough stamp ink.\n4. An empty round white speech bubble.\n5. Two soft red blush ovals, for embarrassed cheeks.\n6. A small white impact burst.\n7. A small gold ding sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-fx-cart-ult",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom objects and effects: Cartridge Tilt (8 items; attaches the approved Cartridge Tilt sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tom-ab-cart-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Cartridge Tilt.\n\nItems:\n1. The big grey game cartridge from the picture, front view, with a colorful label reading THE ADVENTURES OF TOM.\n2. The same cartridge seen from its bottom edge, the gold contact pins showing.\n3. A boxy cream and grey home game console with a cartridge slot on top.\n4. A puff of grey dust blown out in a cone.\n5. A strip of rainbow glitch bars, flat horizontal color stripes (wide).\n6. A big jagged impact burst, white and yellow.\n7. A ring of gold and white sparkles.\n8. A few small grey dust specks."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "grace-ab-cartwheel",
    "tab": "Characters",
    "group": "Grace",
