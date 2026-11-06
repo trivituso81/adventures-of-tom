@@ -7123,8 +7123,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-21-glass-tower-vault-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932138899
+    }
+   ],
    "rejects": [],
    "id": "bg-21-glass-tower-vault",
    "tab": "Battle",
