@@ -2510,8 +2510,16 @@
    "group": "Whispering Marsh"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-extra-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793924204047
+    }
+   ],
    "rejects": [],
    "id": "enemy-extra",
    "tab": "Enemies",
