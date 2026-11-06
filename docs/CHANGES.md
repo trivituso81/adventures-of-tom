@@ -1,3 +1,7 @@
+## 2026-11-05 (241): Art Library approve and reject buttons no longer stay locked after a decision (Art Library only, no game files, no tag)
+- Tom (16:26): after approving a picture, the Approve and Reject buttons on the other cards stayed disabled until he reloaded the page.
+- Cause (fact): `decide()` in art.html disables every `[data-ok],[data-no]` button on the page while it saves, but on success it redrew only the decided row; only the error path unlocked the rest. Fix: the unlock now runs in a `finally`, so it happens on success and on error.
+
 ## 2026-11-05 (240): Custom pose prompt for Old Iron-Gill (Art Library only, no game files, no tag)
 - Tom (16:14): the Iron-Gill sheet needs its own prompt; his reject note: the last image repeated the first, it should be a variation on an attack like the fourth and fifth.
 - Cause (fact): the old sheet's 6th frame is a low settled crouch that looks like the stance, so the generic prompt gave pose 6 = pose 1. `POSES.irongill` in tools/art-library/enemy-prompts.js spells out all six poses (6 = follow-through leaning low after the spit, mouth open and dripping). `enemy-irongill` prompt updated in the json; status and rejects kept.
