@@ -3698,7 +3698,7 @@ SCENES.ch10AfterBoss=()=>[
   {hearts:'tom'},
   {talk:'Amy',lines:['Okay. It\'s twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab.']},
   {fade:'out',time:.8},
-  {call:()=>{ beginTransition({kind:'edge',to:'row',spawn:{x:14,y:10},facing:'up'}); }},
+  {call:()=>{ beginTransition({kind:'edge',to:'row',spawn:{x:14,y:14},facing:'up'}); }},
   {wait:.5}, {fade:'in',time:.6},
   {toast:'Goal: Deedee and Boppy’s house (RIVITUSO) for Sunday dinner. Everyone is waiting.',time:4.5}
 ];

@@ -64,9 +64,9 @@ const LE_HOUSES=[
   {id:'observatory',area:'town',door2:true,doorX:18,name:'Moon Club',label:'MOON',x:15,y:17,w:5,h:4,roof:'#657898',light:'#8b9cba',wall:'#d6d9d4'},
   {id:'taxi',area:'town',doorX:24,name:'Long Island Taxi Co.',label:'TAXI',x:22,y:17,w:5,h:5,roof:'#d9a43a',light:'#f2c75a',wall:'#efe4cb',taxi:true},
   {id:'shop',area:'town',doorX:24,name:"Penny's Pockets",label:'SHOP',x:22,y:4,w:5,h:5,roof:'#b9483f',light:'#d9675b',wall:'#f3e3bf',shop:true},
-  {id:'amyhouse',area:'row',x:7,y:1,name:"Amy's House",label:'GREGORI',w:5,h:5,roof:'#c0707e',light:'#dc9aa5',wall:'#f0e2d6'},
-  {id:'grands',area:'row',x:12,y:4,door2:true,name:"Deedee and Boppy's House",label:'RIVITUSO',w:5,h:5,roof:'#8d7b63',light:'#b59e82',wall:'#ead9b8'},
-  {id:'elliehouse',area:'row',x:5,y:13,door2:true,name:"Aunt Ellie's House",label:'ELLIE',w:5,h:5,roof:'#6e4a7e',light:'#9a76a8',wall:'#eadcea'}
+  {id:'amyhouse',area:'row',x:4,y:2,name:"Amy's House",label:'GREGORI',w:5,h:5,roof:'#c0707e',light:'#dc9aa5',wall:'#f0e2d6'},
+  {id:'grands',area:'row',x:15,y:5,name:"Deedee and Boppy's House",label:'RIVITUSO',w:5,h:5,roof:'#8d7b63',light:'#b59e82',wall:'#ead9b8'},
+  {id:'elliehouse',area:'row',x:4,y:13,door2:true,name:"Aunt Ellie's House",label:'ELLIE',w:5,h:5,roof:'#6e4a7e',light:'#9a76a8',wall:'#eadcea'}
 ];
 
 // Areas drawn as an ASCII plan (chapter 3 on): one character per tile, turned into pools, tiles, patches and objects.
@@ -138,7 +138,7 @@ const LE_AREAS=[
     // so nobody can plug a door or an exit (tools/reach_test.py town checks this).
     noGo:[...Array.from({length:8},(_,i)=>[8,1+i]),...Array.from({length:7},(_,i)=>[7,2+i]),...Array.from({length:4},(_,i)=>[12+i,24]),[13,25],[14,25],...Array.from({length:4},(_,i)=>[27+(i>>1),5+(i&1)]),[13,14],[14,14],[13,15],[14,15],[27,7],[27,8],[8,9],...Array.from({length:4},(_,i)=>[22,13+i]),[20,21],[21,21],[4,22]],
     border:{kind:'tree',open:[[8,0],[13,25],[14,25],[29,5],[29,6],[0,13],[0,14],[0,15],[0,23],[29,12],[29,13],[29,14],[29,15],[29,16]]},
-    exits:[[7,2,'hollow',6,20,'up'],[7,3,'hollow',7,20,'up'],[8,2,'hollow',6,20,'up'],[8,3,'hollow',7,20,'up'],[13,25,'row',14,2,'down'],[14,25,'row',15,2,'down'],
+    exits:[[7,2,'hollow',6,20,'up'],[7,3,'hollow',7,20,'up'],[8,2,'hollow',6,20,'up'],[8,3,'hollow',7,20,'up'],[13,25,'row',13,2,'down'],[14,25,'row',14,2,'down'],
       [29,5,'schoolyard',1,8,'right'],[29,6,'schoolyard',1,9,'right'],[28,5,'schoolyard',1,8,'right'],[28,6,'schoolyard',1,9,'right']],
     // Chapter 1: a fallen branch closes the way north until Deedee's crisp is stolen (engine/story.js storyGate).
     gates:[{at:[[7,2],[7,3],[7,4],[8,2],[8,3],[8,4]],cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
@@ -178,57 +178,59 @@ const LE_AREAS=[
     tag:"Three houses. One family. Cookies at Deedee's. Opinions at Ellie's.",
     eyebrow:'LONG ISLAND / RIVITUSO ROW',
     hint:'Home. Knock on any door. Someone will feed you.',
-    spawn:{x:14,y:3},
+    spawn:{x:13,y:3},
     // Painted plate (art/row.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
     plateMask:[
       '########################',
-      '#############...########',
-      '#############.........##',
-      '#############..........#',
-      '#.##########...#######.#',
-      '#.#######.##..########.#',
-      '#.#######..#.###########',
-      '#.....##.....###########',
-      '#.#..........#..########',
-      '###..#####...#..######.#',
-      '#...######......######.#',
-      '#...#######....#######.#',
-      '...########.....######.#',
-      '...########.......####.#',
-      '...#########............',
-      '...###########..........',
-      '...#########............',
-      '...####..#..............',
-      '#....................##.',
-      '##...................###',
+      '############...#########',
+      '############...#########',
+      '############...#########',
+      '############...#########',
+      '.##########...##########',
+      '.##########..###########',
+      '.###....###..###########',
+      '.....##.....############',
+      '....######..############',
+      '##..######..#####.######',
+      '##.#######..#####.######',
+      '##.#######..#####.######',
+      '...#######......#.######',
+      '..########...........###',
+      '#.########........######',
+      '#.########........######',
+      '#.########..........####',
+      '#................#######',
+      '##########......########',
       '############...#########',
       '############...#########'],
-    // Walk map reviewed by Tom (2026-11-02, claude/row-v3-plan.md): doors Gregori (9,5), Rivituso (14,8) and (15,8), Aunt Ellie (7,17) and (8,17); exits north (13..15,1) and south (12..14,21).
-    // Lanes NPCs never wander onto, so nobody can plug a chokepoint (tools/reach_test.py checks this): the path from the north exit, the Gregori lane, the two door fronts.
-    noGo:[[14,2],[14,3],[14,4],[9,6],[10,6],[9,7],[10,7],[14,9],[15,9],[14,10],[15,10],[7,18],[8,18],[13,19],[12,19],[14,19]],
+    // Walk map for the storybook painting (`row4`, 2026-11-06, tools/make_row_fg.py): doors Gregori (6,6), Rivituso (17,9) up the porch steps through the gap
+    // between the open garden gates, Aunt Ellie (6,17) and (7,17); exits north up the steps (12..14,1) and south under CATTAIL / PIER (12..14,20). The left path runs
+    // down the map edge (x0) and around Aunt Ellie's house; tiles behind roofs, posts and trees walk and the cutouts (PLATE_BEHIND.row) draw over the player.
+    // Lanes NPCs never wander onto, so nobody can plug a chokepoint (tools/reach_test.py checks this): the steps, the door fronts, the left path, the south path.
+    noGo:[[13,2],[13,3],[13,4],[12,5],[11,7],[11,8],[17,14],[6,7],[7,7],[17,10],[17,11],[17,12],[17,13],[6,18],[7,18],[2,10],[2,11],[2,12],[2,13],[12,19],[13,19],[14,19]],
     houseRoad:8,
-    border:{kind:'tree',open:[[13,1],[14,1],[15,1],[12,21],[13,21],[14,21],[23,5],[23,6],[23,7],[23,8],[23,9],[23,10],[23,11],[23,12],[23,13]]},
-    exits:[[13,1,'town',12,24,'up'],[14,1,'town',13,24,'up'],[15,1,'town',14,24,'up'],[12,20,'pier',11,1,'down'],[13,20,'pier',12,1,'down'],[14,20,'pier',12,1,'down']],
+    border:{kind:'tree',open:[[12,1],[13,1],[14,1],[12,21],[13,21],[14,21],[0,5],[0,6],[0,7],[0,8],[0,9],[0,13],[0,14]]},
+    exits:[[12,1,'town',12,24,'up'],[13,1,'town',13,24,'up'],[14,1,'town',14,24,'up'],[12,20,'pier',11,1,'down'],[13,20,'pier',12,1,'down'],[14,20,'pier',12,1,'down']],
     // The path south to Cattail Pier (chapter 3) stays closed until Boppy takes everyone fishing.
     gates:[{at:[[12,20],[13,20],[14,20]],cond:{test:S=>S.chapter<3||(S.chapter===3&&!S.flags['ch3-boppy'])},name:'Pier path',
       lines:['A sign on the fallen branch: CATTAIL PIER. CLOSED FOR THE SEASON. The fish need a break.'],
       when:[{chapter:3,lines:['The path south goes to Cattail Pier.','Going fishing without Boppy? He\'d never, ever let you hear the end of it.']}]}],
     objects:[
-      ['sign',12,3,1,1,'Row signpost',"THE SQUARE, back that way. Shops, fountain, Pip's rock."],
+      ['sign',11,4,1,1,'Row signpost',"THE SQUARE, back that way. Shops, fountain, Pip's rock."],
       ['sign',11,20,1,1,'Pier signpost','CATTAIL PIER, south. Catch and release. Mostly release.'],
-      ['sign',7,9,2,1,'Family notice',"Rivituso Row. Cookies at Deedee's. Juice at Amy's. Opinions at Ellie's. Peace and quiet at nobody's."],
-      ['sign',11,8,1,1,'Chalk drawings',"Grace and Rose's chalk drawings cover the path. Step around the sunshine. Step carefully. Step colorfully."],
-      ['bench',2,9,1,1,'The other bench','Boppy sat here once in 2019. It\'s still his.'],
-      ['planter',17,12,1,1,"Deedee's tomatoes",'Forty tomatoes. You\'ll be sent home with all of them.'],
+      ['sign',2,7,2,1,'Family notice',"Rivituso Row. Cookies at Deedee's. Juice at Amy's. Opinions at Ellie's. Peace and quiet at nobody's."],
+      ['sign',9,7,1,1,'Chalk drawings',"Grace and Rose's chalk drawings cover the path. Step around the sunshine. Step carefully. Step colorfully."],
+      ['bench',1,12,1,1,'The other bench','Boppy sat here once in 2019. It\'s still his.'],
+      ['planter',18,11,1,1,"Deedee's tomatoes",'Forty tomatoes. You\'ll be sent home with all of them.'],
       ['planter',19,13,1,1,"Boppy's peppers",'A pepper so hot the garden hose flinched. Boppy is proud.'],
-      ['planter',3,12,1,1,"Deedee's herb bed","Basil, mint and rosemary. Deedee says the rosemary is for Boppy's stomach. Boppy disagrees."],
-      ['planter',21,13,1,1,'Community garden',"Squash, beans, a sunflower Grace planted, a rock Rose planted, and a scarecrow wearing Boppy's old cap. The scarecrow walks too fast, apparently."]],
+      ['planter',14,11,1,1,"Deedee's herb bed","Basil, mint and rosemary. Deedee says the rosemary is for Boppy's stomach. Boppy disagrees."],
+      ['planter',20,13,1,1,'Community garden',"Squash, beans, a sunflower Grace planted, a rock Rose planted, and a scarecrow wearing Boppy's old cap. The scarecrow walks too fast, apparently."]],
     npcs:[
-      {name:'Gus',x:4,y:9,look:'gus',lines:[
+      {name:'Gus',x:16,y:15,look:'gus',lines:[
         "I'm training for the annual sit-down.",
         'My coach is a bench.',
         'We have a very supportive relationship.']},
-      {name:'Bean',x:13,y:19,look:'bean',lines:[
+      {name:'Bean',x:12,y:16,look:'bean',lines:[
         "I'm not lost. I'm collecting wrong turns.",
         'That pond up north owes me an apology.',
         'Long story. Short socks.'],

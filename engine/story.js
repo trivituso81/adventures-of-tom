@@ -119,7 +119,7 @@ const CHAPTERS=[
     party:{lock:['tom','amy','tnb','nara'],allow:['amy','justin','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',justin:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch13-done')?{lines:['Chapter 14 is coming. Boppy is at the gate, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. The way in is under the world. Take the Metro stairs on the boulevard.']}},
-  {n:14,title:'The Rikers Wall of Rivituso Row',start:{map:'row',x:18,y:9},
+  {n:14,title:'The Rikers Wall of Rivituso Row',start:{map:'row',x:17,y:13},
     party:{lock:['tom','amy','grace','rose'],allow:['amy','justin'],bar:['tnb','nara','deedee','boppy'],homes:{amy:'any',justin:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch14-done')?{lines:['Chapter 15 is coming. The dinner table is set for eight, and the cab stand has coffee.']}
       :{lines:['Airport? Tom. Your father is standing in the gate in a bucket. Go and see him first.']}},

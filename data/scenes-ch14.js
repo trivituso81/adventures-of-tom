@@ -25,7 +25,7 @@ SCENES.ch14Open=[
   {flag:'ch14-open',value:'pending'},
   {fade:'out',time:.8},
   {card:14,time:3.2},
-  {call:()=>{ setFlag('ch14-open','pending'); sfx.travel&&sfx.travel(); ch14Place(14,12,'up'); }},
+  {call:()=>{ setFlag('ch14-open','pending'); sfx.travel&&sfx.travel(); ch14Place(17,12,'up'); }},
   {fade:'in',time:.7},
   {talk:'Tom',lines:['Dad. It’s Tom. I’m right in front of you.']},
   {talk:'Boppy',lines:['Halt.']},
@@ -38,22 +38,22 @@ SCENES.ch14Open=[
   {talk:'TNB',lines:['I used to carry coffee through a film set at five in the morning. I can handle an Auditor.']},
   {talk:'Amy',lines:['Take the thermos. They hate a thermos.']},
   {talk:'TNB',lines:['I never leave without it. Go fix the door, Tom. I’ll fix the tunnel.']},
-  {walk:'tnb',to:[[13,11]],speed:.3},
+  {walk:'tnb',to:[[16,14]],speed:.3},
   {face:'tom',dir:'left'},
   {hearts:'tom'},{hearts:'tnb'},
   {talk:'Tom',lines:['Be careful. Please. I mean that in a very specific, very annoying way.']},
   {talk:'TNB',lines:['I know. I’ll be careful in the exact way you’re being annoying about right now.']},
   {all:[
-    {seq:[{walk:'tnb',to:[[12,11],[11,11],[11,10],[11,9],[11,8],[9,8],[6,8]],speed:.34}]},
-    {seq:[{walk:'nara',to:[[12,11],[11,11],[11,10],[11,9],[11,8],[9,8],[6,8]],speed:.36}]}]},
+    {seq:[{walk:'tnb',to:[[15,14],[14,14],[13,14],[12,14],[11,14],[11,13],[11,12],[11,11],[11,10],[11,9],[11,8],[9,8],[7,8]],speed:.34}]},
+    {seq:[{walk:'nara',to:[[15,14],[14,14],[13,14],[12,14],[11,14],[11,13],[11,12],[11,11],[11,10],[11,9],[11,8],[9,8],[7,8]],speed:.36}]}]},
   {leave:'tnb',quiet:true},{leave:'nara',quiet:true},{call:()=>{ setChapter(14); placeFollowers(); }},
   {face:'tom',dir:'up'},
   {call:()=>sfx.honk&&sfx.honk()},
   {join:'grace',quiet:true},{join:'rose',quiet:true},{call:()=>placeFollowers()},
   {place:'grace',at:[10,8],dir:'right'},{place:'rose',at:[9,8],dir:'right'},
   {all:[
-    {seq:[{walk:'grace',to:[[11,8],[11,9],[11,10],[11,11],[12,11],[12,12],[13,12]],speed:.4}]},
-    {seq:[{walk:'rose',to:[[10,8],[11,8],[11,9],[11,10],[11,11],[12,11],[12,12]],speed:.4}]}]},
+    {seq:[{walk:'grace',to:[[11,8],[11,9],[11,10],[11,11],[11,12],[11,13],[12,13],[13,13],[14,13],[15,13],[15,14],[16,14]],speed:.4}]},
+    {seq:[{walk:'rose',to:[[10,8],[11,8],[11,9],[11,10],[11,11],[11,12],[11,13],[12,13],[13,13],[14,13],[14,14],[15,14]],speed:.4}]}]},
   {talk:'Grace',lines:['MOMMY. We took a handcar. It has a HORN.']},
   {talk:'Rose',lines:['I honked it at the tunnel and the tunnel honked BACK. I said it was rude. It said honk.']},
   {talk:'Amy',lines:['Sol was supposed to keep you.']},
@@ -92,7 +92,7 @@ SCENES.ch14Deedee=[
   {talk:'Rose',lines:['Maybe nobody ate it.']},
   {talk:'Grace',lines:['Rose. That is the smartest thing you have said all week.']},
   {talk:'Rose',lines:['I say smart things every day. They just come out as noise.']},
-  {walk:'rose',to:[[13,10]],speed:.3}, {face:'rose',dir:'right'},
+  {walk:'rose',to:[[15,13],[15,12],[16,12],[16,11]],speed:.3}, {face:'rose',dir:'up'},
   {talk:'Rose',lines:['Deedee. I’m going to eat the crisp now. Okay? Okay.']},
   {call:()=>sfx.pickup&&sfx.pickup()},
   {wait:1.4},
@@ -197,8 +197,8 @@ SCENES.ch14After=()=>[
   {talk:'Tom',lines:['Nobody gets past us.']},
   {toast:'New Tombo: Nobody Gets Past Us (Tom and Boppy). Boppy is back inside with Deedee.',time:8},
   {trace:'ch14-wrap'},{hearts:'tom'},{hearts:'amy'},
-  {walk:'Boppy',to:[[15,8]],speed:.26},
-  {walk:'Deedee',to:[[14,8]],speed:.26},
+  {walk:'Deedee',to:[[17,10],[17,9]],speed:.26},
+  {walk:'Boppy',to:[[17,10],[17,9]],speed:.26},
   {call:()=>{ for(const nm of ['Boppy','Deedee']) { const n=currentMap.npcs.find(m=>m.scripted&&m.name===nm); if(n) n.hidden=true; } sfx.doorIn&&sfx.doorIn(); }},
   {despawn:'Boppy'},{despawn:'Deedee'},
   {flag:'ch14-after'},
@@ -220,7 +220,7 @@ STORY_WORLD.push(()=>{
   const row=worlds.row; if(!row) return;
   const live=STORY.chapter===14&&flag('ch14-open')&&!flag('ch14-after');
   if(live&&!intro.active&&!row.npcs.some(n=>n.porch)) {
-    const d=actor('Deedee',14,9,'pip',flag('ch14-deedee')?CH14_DEEDEE_FREE_LINES:CH14_DEEDEE_LINES);
+    const d=actor('Deedee',16,10,'pip',flag('ch14-deedee')?CH14_DEEDEE_FREE_LINES:CH14_DEEDEE_LINES);
     Object.assign(d,{sheet:'deedee',duration:.84,scripted:true,porch:true,amber:true,tier:0,maxHp:1,defeatedUntil:0,roam:0,facing:'down',monster:null});
     row.npcs.push(d);
   }
@@ -242,7 +242,8 @@ const LE_pressAction_ch14=pressAction;
 pressAction=function() {
   if(!transition&&!intro.active&&!dialog.active&&!player.move&&STORY.mode==='full'&&STORY.chapter===14&&flag('ch14-open')&&!flag('ch14-after')&&currentMap.id==='row') {
     const t=facingTarget(),n=t&&t.kind==='npc'?t.value:null;
-    if(n&&n.porch&&!flag('ch14-deedee')) { playScene('ch14Deedee'); return; }
+    // `row4`: Deedee stands on the porch edge beside the steps, behind Boppy (he guards the gap between the garden gates), so Tom talks to her over his shoulder.
+    if(n&&(n.porch||(n.scripted&&n.name==='Boppy'&&n.armor))&&!flag('ch14-deedee')) { playScene('ch14Deedee'); return; }
     if(n&&n.scripted&&n.name==='Boppy'&&n.armor&&flag('ch14-deedee')&&flag('battle:warden')!=='win') { playScene('ch14Gate'); return; }
   }
   return LE_pressAction_ch14();
