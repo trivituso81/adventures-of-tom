@@ -2694,8 +2694,16 @@
    "group": "School"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-redpen-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793924718055
+    }
+   ],
    "rejects": [],
    "id": "enemy-redpen",
    "tab": "Enemies",
