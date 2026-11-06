@@ -752,8 +752,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change. She is wearing a typical girls sequined dance costume\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: DANCE.\n\nRow 1:\n1. Snapping her fingers with both hands up by her shoulders, counting in, a big smile.\n2. A step-touch: one foot stepping out, the other toe tapping beside it, arms swinging.\n3. A grapevine step, feet crossed, hips swaying, one hand on her hip.\n\nRow 2:\n4. A hip sway to one side, both arms pumping, eyes closed, singing along.\n5. Spinning on one foot, the other knee lifted, arms wrapped in, hair flying out.\n6. The final pose: one hand on her hip, the other arm pointing up high, a confident grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-squishy-squeeze-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793954278727
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-squishy-squeeze",
    "tab": "Characters",
@@ -766,7 +774,7 @@
     "art/raw/characters/grace-battle-sheet-1-v1.png",
     "art/raw/characters/grace-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Squishy Squeeze.\n\nRow 1:\n1. Walking quickly, a round gold dumpling squishy hugged in both hands against her chest, proud.\n2. Holding the gold dumpling squishy out in both hands at arm's length, offering it, a kind smile.\n3. Squeezing the squishy flat between both palms to show how, cheeks puffed, eyes squeezed shut.\n\nRow 2:\n4. Holding the squishy out again on one flat palm, the other hand giving a thumbs up.\n5. Hugging the squishy to one cheek, eyes closed, a soft happy smile.\n6. Tucking the squishy under one arm, the other hand waving, a cheerful grin."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change. the squishy should have a face like the typical squishy soup dumplings that everyone wants\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Squishy Squeeze.\n\nRow 1:\n1. Walking quickly, a round gold dumpling squishy hugged in both hands against her chest, proud.\n2. Holding the gold dumpling squishy out in both hands at arm's length, offering it, a kind smile.\n3. Squeezing the squishy flat between both palms to show how, cheeks puffed, eyes squeezed shut.\n\nRow 2:\n4. Holding the squishy out again on one flat palm, the other hand giving a thumbs up.\n5. Hugging the squishy to one cheek, eyes closed, a soft happy smile.\n6. Tucking the squishy under one arm, the other hand waving, a cheerful grin."
   },
   {
    "status": "approved",
