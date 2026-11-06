@@ -1,3 +1,8 @@
+## 2026-11-06 (341): Emotions batch 3: chapters 8 to 10 show mood faces and poses (`emo10`)
+- `python3 tools/emotion-apply.py 1 2 3 4 5 6 7 8 9 10`: chapter 8 found 71 of 71, chapter 9 87 of 87, chapter 10 77 of 77; `EMO_CHAPTERS` now 1 to 10, `data/emotion-moods.js` 727 keys. Aunt Ellie's faces (ellie-*.webp) are used in these chapters.
+- Tested: all 737 tagged lines in chapters 1 to 10 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
+- Tags: `emo10` (data/emotion-moods.js).
+
 ## 2026-11-06 (340): Battle: no walking to or from an ability; frozen stance, quick slide (`noWalk1`)
 - Tom (07:18): characters must not play walk frames when they step up for an ability or step back. They hold their stance, shift forward without changing frames, and shift back still facing the enemies (never turn around). The shift is quick.
 - `engine/battle-draw.js`: the approach slide (`fx.appr`) draws the stance or ability pose, never the run cycle, and the slide takes .18 s each way (`APPR_SLIDE`, was .7 and .35). Any scripted path (`fx.path`) that asks for a run or run-flipped frame now draws the stance instead (covers staged Tombos and keyframed moves). Shuttle runs (`fx.run`, Amy's running moves) are unchanged.
