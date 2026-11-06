@@ -103,7 +103,7 @@ python3 tools/sprite-bake/hires_install.py /tmp/hires 1.5 amy-battle amy-ko
 | bake_deedee.py, bake_deedee_extra.py, bake_deedee_ab.py | 1.5 | deedee-battle, deedee-ko, deedee-extra, deedee-ab |
 | bake_tnb.py | 1.5 | tnb-battle, tnb-ab, tnb-poses, tnb-ko |
 | bake_nara.py | 1.5 | nara-battle, nara-ko |
-| bake_olivia_battle.py | 1.5 | olivia-battle, olivia-ko and the 12 move sheets |
+| bake_olivia_battle.py (core only; does not reproduce repo files), bake_olivia_ab.py (abilities, ability_frames_olivia.py), bake_olivia_fx.py (props) | 1.5 | olivia-battle, olivia-ko, olivia-ab, art/props/olivia |
 | bake_tomride.py | 1.5 | tomride-battle, tomride-rose |
 | bake_boppy.py, bake_boppy_extra.py | 1.3333333333333333 (boppy-ko: 1.5) | boppy-battle, boppy-extra, boppy-fish, boppy-stock, boppy-young, boppy-pepper, boppy-ko |
 | bake_justin_battle.py (core only), bake_justin_ab.py (abilities, ability_frames_justin.py), bake_justin_fx.py (props), bake_jojo.py, bake_kids.py | 1 (sharpen only) | justin-*, jojo-bt; copy kids.webp by hand (its data file has its own format) |

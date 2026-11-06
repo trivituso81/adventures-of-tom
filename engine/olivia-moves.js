@@ -1,7 +1,7 @@
 'use strict';
-// engine/olivia-moves.js: Olivia's eleven moves as set pieces on engine/stage.js. She is painted (data/olivia-battle-use.js):
-// every ability frame is a sprite key named as in the sheet ('fc_jab', 'du_jump_a', 'mi_yell_2'...), plus an R copy facing the other way.
-// Frames face left (toward the enemies) except mi_yell_1 to mi_thanks, which face right (she calls toward the right edge of the screen).
+// engine/olivia-moves.js: Olivia's eleven moves as set pieces on engine/stage.js. She is painted (data/olivia-battle-use.js, data/olivia-ab.js):
+// every ability frame is a sprite key 'ab_<move>_<n>' ('ab_fc_4', 'ab_du_5'...), n counting cells of her approved Art Library sheet row by row, plus an R copy facing the other way.
+// Frames face the way the sheet painted them (toward the enemies, or at the viewer).
 // Timelines are absolute ms at 1x (RFX.ST.play); ['hf',ms] marks the impact. Scene prefix ov_ (drawn without the aim warp).
 // The wrapper at the bottom stretches every move by 1.6 like Justin's, so the painted frames are held long enough to read.
 // Loaded after engine/justin-moves.js.
@@ -57,47 +57,47 @@ SC.ov_banner=(s,u)=>{ const q=ez(u/.12); gfx.globalAlpha=fin(u,.08)*fade(u,.85);
 // ---------- Fact Check (basic, 4.0 s) ----------
 // notebook opens, squint, the pen jabbed like a microphone, smug
 O.fact_check=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,80),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'fc_open'}];
-  K.push(...seq([['fc_open',300],['fc_squint',300],['fc_jab',450],['fc_smug',300]],600,p.x,p.y));
-  K.push({t:1950,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:2400,x:'home',y:'home',f:'idle'},{t:2500,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'ab_fc_1'}];
+  K.push(...seq([['ab_fc_1',250],['ab_fc_2',300],['ab_fc_3',300],['ab_fc_4',450],['ab_fc_5',300],['ab_fc_6',300]],600,p.x,p.y));
+  K.push({t:2500,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:2950,x:'home',y:'home',f:'idle'},{t:3050,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>setMessage('Olivia flips open her notebook.')],
     [200,()=>sfxp('whoosh')],
     [650,()=>{ say(m.id,'fact_check_open'); sfxp('step'); }],
-    [950,()=>setMessage('She squints. One eyebrow goes up.')],
-    ['hf',1300],
-    [1200,()=>{ say(m.id,'fact_check'); sfxp('bump'); }],
-    [1300,()=>{ setMessage('She jabs the pen at it like a microphone.'); sfxp('bonk'); jitter(f); landHit(100); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:40,c:BLUE}); scene('ov_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:30,c:BLUE}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SOURCE?',c:'#ffe08a',sc:3}); }],
-    [2500,'end',res(E2)+'No comment.']]); };
+    [1150,()=>setMessage('She squints. One eyebrow goes up.')],
+    ['hf',1500],
+    [1450,()=>{ say(m.id,'fact_check'); sfxp('bump'); }],
+    [1500,()=>{ setMessage('She jabs the pen at it like a microphone.'); sfxp('bonk'); jitter(f); landHit(100); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:40,c:BLUE}); scene('ov_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:30,c:BLUE}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SOURCE?',c:'#ffe08a',sc:3}); }],
+    [3050,'end',res(E2)+'No comment.']]); };
 
 // ---------- SNACK BAG (signature, 4.5 s) ----------
 // dig in the tote, hold up the pouch, toss one to every friend, finger up: one each
-const pouch=(x,y)=>{ R(x-6,y-5,12,10,PINK); R(x-6,y-5,12,3,'#ffd0e8'); R(x-4,y-1,8,3,'#fff4fa'); R(x-7,y-6,2,12,'#e85a98'); R(x+5,y-6,2,12,'#e85a98'); };
+const pouch=(x,y)=>{ if(PROPART.draw('olivia/snack_pouch',x,y,{h:20})) return; R(x-6,y-5,12,10,PINK); R(x-6,y-5,12,3,'#ffd0e8'); R(x-4,y-1,8,3,'#fff4fa'); R(x-7,y-6,2,12,'#e85a98'); R(x+5,y-6,2,12,'#e85a98'); };
 O.snack_bag=E2=>{ const {m,fx}=E2,me=ST.unit(m);
   const live=B2.party.filter(p=>p.hp>0&&!p.dead&&p!==m);
-  const K=[{t:0,x:'home',y:'home',f:'sb_dig'}];
-  K.push(...seq([['sb_dig',550],['sb_found',450],['sb_toss_wind',300],['sb_toss',550],['sb_one_each',650]],0,'home','home'));
-  K.push({t:2500,x:'home',y:'home',f:'idle'},{t:2800,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'ab_sb_1'}];
+  K.push(...seq([['ab_sb_1',400],['ab_sb_2',500],['ab_sb_3',450],['ab_sb_4',300],['ab_sb_5',500],['ab_sb_6',650]],0,'home','home'));
+  K.push({t:2800,x:'home',y:'home',f:'idle'},{t:3100,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Olivia digs through her tote.'); say(m.id,'snack_bag_dig'); }],
-    [550,()=>{ setMessage('Found one. Under the wipes.'); sfxp('ding'); scene('ov_sparks',.5,{x:me.x-8,y:me.base-me.h*.95,n:7,r:20,c:PINK}); }],
-    [1300,()=>{ setMessage('She tosses one to everybody.'); sfxp('whoosh'); E2.apply();
+    [400,()=>{ setMessage('Olivia digs through her tote.'); say(m.id,'snack_bag_dig'); }],
+    [900,()=>{ setMessage('Found one. Under the wipes.'); sfxp('ding'); scene('ov_sparks',.5,{x:me.x-8,y:me.base-me.h*.95,n:7,r:20,c:PINK}); }],
+    [1650,()=>{ setMessage('She tosses one to everybody.'); sfxp('whoosh'); E2.apply();
       live.forEach((p,k)=>{ const U=ST.unit(p); ST.fly(pouch,me.x-20,me.base-me.h*.45,U.x,U.base-U.h*.6,.45,40+k*6,k*.12,{spin:3}); }); }],
-    [1750,()=>{ for(const p of live) { const U=ST.unit(p); sfxp('ding'); scene('ov_sparks',.7,{x:U.x,y:U.base-U.h*.55,n:9,r:28,c:'#9fe6a8'}); scene('ov_ring',.5,{x:U.x,y:U.base-U.h*.55,r:26,c:'#9fe6a8'}); scene('ov_text',1,{x:U.x,y:U.base-U.h-6,txt:'+HP',c:'#9fe6a8',sc:2}); } }],
-    [1750,()=>say(m.id,'snack_bag')],
-    ['hf',1850],
-    [2800,'end',res(E2)+'One each.']]); };
+    [2100,()=>{ for(const p of live) { const U=ST.unit(p); sfxp('ding'); scene('ov_sparks',.7,{x:U.x,y:U.base-U.h*.55,n:9,r:28,c:'#9fe6a8'}); scene('ov_ring',.5,{x:U.x,y:U.base-U.h*.55,r:26,c:'#9fe6a8'}); scene('ov_text',1,{x:U.x,y:U.base-U.h-6,txt:'+HP',c:'#9fe6a8',sc:2}); } }],
+    [2100,()=>say(m.id,'snack_bag')],
+    ['hf',2200],
+    [3100,'end',res(E2)+'One each.']]); };
 
 // ---------- LivNews Live (5.0 s) ----------
 // selfie, swing the phone round, report live, tap tap tap as the notifications roll in. A wave of pings hits every enemy and the view count climbs.
-const ping=(x,y)=>{ R(x-6,y-6,12,12,CORAL); R(x-6,y-6,12,3,'#ffb3a8'); R(x-1,y-3,2,4,'#ffffff'); R(x-1,y+2,2,2,'#ffffff'); };
+const ping=(x,y)=>{ if(PROPART.draw('olivia/chat_bubbles',x,y,{h:18})) return; R(x-6,y-6,12,12,CORAL); R(x-6,y-6,12,3,'#ffb3a8'); R(x-1,y-3,2,4,'#ffffff'); R(x-1,y+2,2,2,'#ffffff'); };
 SC.ov_live=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.85); R(s.x-24,s.y-8,48,16,'#d42a2a'); R(s.x-24,s.y-8,48,3,'#ff6a6a'); E(s.x-15,s.y,3,3,'#ffffff'); label('LIVE',s.x+6,s.y,'#ffffff',1); };
 O.livnews_live=E2=>{ const {m,fx}=E2,me=ST.unit(m),fam=B2.party.filter(p=>p.hp>0&&!p.dead);
-  const K=[{t:0,x:'home',y:'home',f:'ln_selfie'}];
-  K.push(...seq([['ln_selfie',600],['ln_turn',400],['ln_live',800],['ln_tapping',600],['ln_check',450]],0,'home','home'));
-  K.push({t:2850,x:'home',y:'home',f:'idle'},{t:3100,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'ab_ln_1'}];
+  K.push(...seq([['ab_ln_1',600],['ab_ln_4',400],['ab_ln_5',800],['ab_ln_6',600],['ab_ln_7',450],['ab_ln_8',450]],0,'home','home'));
+  K.push({t:3300,x:'home',y:'home',f:'idle'},{t:3500,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>setMessage('Olivia holds up her phone and fixes her hair.')],
@@ -108,8 +108,8 @@ O.livnews_live=E2=>{ const {m,fx}=E2,me=ST.unit(m),fam=B2.party.filter(p=>p.hp>0
     [1800,()=>{ sfxp('ding'); landHit(100); for(const p of fam) { const U=ST.unit(p); scene('ov_sparks',.5,{x:U.x,y:U.base-U.h*.6,n:7,r:22,c:CORAL}); scene('ov_ring',.5,{x:U.x,y:U.base-U.h*.6,r:30,c:CORAL}); } }],
     [2000,()=>say(m.id,'livnews_live_chat')],
     [2450,()=>setMessage('Chat is not kind. Chat is loud.')],
-    [2850,()=>setMessage('One of the viewers is Michael.')],
-    [3100,'end',res(E2)+'It is trending. The family is hyped.']]); };
+    [3300,()=>setMessage('One of the viewers is Michael.')],
+    [3500,'end',res(E2)+'It is trending. The family is hyped.']]); };
 
 // ---------- Is This Real? (5.5 s) ----------
 // scans the enemy with her phone, squints, gasps, announces it is fake. The enemy glitches and a red FAKE stamp lands on it.
@@ -117,19 +117,19 @@ SC.ov_scan=(s,u)=>{ const a=fin(u,.1)*fade(u,.85)*.55; const sweep=Math.sin(u*Ma
   gfx.beginPath(); gfx.moveTo(s.x0,s.y0); gfx.lineTo(s.x1,s.y1-s.hh*.5+sweep); gfx.lineTo(s.x1,s.y1+s.hh*.5+sweep); gfx.closePath(); gfx.fillStyle='#9fe6ff'; gfx.fill(); };
 SC.ov_stamp=(s,u)=>{ const q=cl(u/.15),sc=2.4-1.4*q; gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.25); gfx.strokeStyle='#e03a3a'; gfx.lineWidth=3; gfx.strokeRect(-34*sc/2.4*1.2,-12*sc/2.4*1.2,68*sc/2.4*1.2,24*sc/2.4*1.2); gfx.restore(); label('FAKE',s.x,s.y,'#ff4a4a',2.5); };
 O.is_this_real=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'ir_scan'}];
-  K.push(...seq([['ir_scan',700],['ir_squint',550],['ir_gasp',500],['ir_fake',900],['ir_sigh',550]],0,'home','home'));
-  K.push({t:3200,x:'home',y:'home',f:'idle'},{t:3450,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'ab_ir_1'}];
+  K.push(...seq([['ab_ir_1',650],['ab_ir_2',500],['ab_ir_3',450],['ab_ir_4',500],['ab_ir_8',700],['ab_ir_6',500]],0,'home','home'));
+  K.push({t:3300,x:'home',y:'home',f:'idle'},{t:3550,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Olivia scans it with her phone.'); say(m.id,'is_this_real_hold'); scene('ov_scan',1.6,{x0:me.x-44,y0:me.base-me.h*.62,x1:F.x+F.w*.45,y1:F.mid,hh:F.h*.7,sw:F.h*.18}); sfxp('whoosh'); }],
-    [700,()=>{ setMessage('She squints.'); scene('ov_text',1,{x:me.x-10,y:me.base-me.h-10,txt:'ANALYZING...',c:'#9fe6ff',sc:1}); }],
-    [1250,()=>{ setMessage('Wait.'); scene('ov_glitch',1,{x:F.x+F.w*.35,y0:F.top+4,h:F.h*.8}); scene('ov_text',.9,{x:me.x-10,y:me.base-me.h-10,txt:'7 FINGERS',c:'#ff8a8a',sc:1}); }],
-    [1750,()=>{ say(m.id,'is_this_real'); setMessage('Too many fingers. Fake.'); }],
-    ['hf',1900],
-    [1900,()=>{ sfxp('bonk'); jitter(f); landHit(100); scene('ov_stamp',1.3,{x:F.x+F.w*.35,y:F.mid}); scene('ov_ring',.6,{x:F.x+F.w*.35,y:F.mid,r:44,c:'#ff6a6a'}); scene('ov_sparks',.6,{x:F.x+F.w*.35,y:F.mid,n:9,r:28,c:'#ff6a6a'}); }],
+    [650,()=>{ setMessage('She squints.'); scene('ov_text',1,{x:me.x-10,y:me.base-me.h-10,txt:'ANALYZING...',c:'#9fe6ff',sc:1}); }],
+    [1100,()=>{ setMessage('Wait.'); scene('ov_glitch',1,{x:F.x+F.w*.35,y0:F.top+4,h:F.h*.8}); scene('ov_text',.9,{x:me.x-10,y:me.base-me.h-10,txt:'7 FINGERS',c:'#ff8a8a',sc:1}); }],
+    [1700,()=>{ say(m.id,'is_this_real'); setMessage('Too many fingers. Fake.'); }],
+    ['hf',1950],
+    [1950,()=>{ sfxp('bonk'); jitter(f); landHit(100); scene('ov_stamp',1.3,{x:F.x+F.w*.35,y:F.mid}); scene('ov_ring',.6,{x:F.x+F.w*.35,y:F.mid,r:44,c:'#ff6a6a'}); scene('ov_sparks',.6,{x:F.x+F.w*.35,y:F.mid,n:9,r:28,c:'#ff6a6a'}); }],
     [2700,()=>setMessage('It is trying to count its own fingers.')],
-    [3450,'end',res(E2)+'It has no idea what it is any more.']]); };
+    [3550,'end',res(E2)+'It has no idea what it is any more.']]); };
 
 // ---------- Inverted Pyramid (6.0 s) ----------
 // lecture, trace the wide top edge, slope down to the point, then slam the point onto the enemy
@@ -142,51 +142,51 @@ SC.ov_pyramid=(s,u)=>{ const a=fin(u,.08)*fade(u,.9); gfx.globalAlpha=a; const w
 SC.ov_pyfall=(s,u)=>{ const q=ez(cl(u/.6)); const y=lerp(s.y0,s.y1,q); gfx.globalAlpha=fade(u,.75); const w=s.w,h=s.h;
   gfx.beginPath(); gfx.moveTo(s.x-w/2,y-h); gfx.lineTo(s.x+w/2,y-h); gfx.lineTo(s.x,y); gfx.closePath(); gfx.fillStyle='#ffd24a'; gfx.fill(); gfx.strokeStyle='#fff3a0'; gfx.lineWidth=3; gfx.stroke(); };
 O.inverted_pyramid=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,90),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'ip_lecture'}];
-  K.push(...seq([['ip_lecture',500],['ip_top_edge',400],['ip_slope',400],['ip_point',350],['ip_slam',600],['ip_nod',400]],600,p.x,p.y));
-  K.push({t:3250,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:3650,x:'home',y:'home',f:'idle'},{t:3750,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'ab_ip_1'}];
+  K.push(...seq([['ab_ip_1',450],['ab_ip_2',500],['ab_ip_3',400],['ab_ip_4',400],['ab_ip_5',600],['ab_ip_6',450]],600,p.x,p.y));
+  K.push({t:3400,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:3800,x:'home',y:'home',f:'idle'},{t:3900,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>setMessage('Olivia puts on her professor face.')],
     [200,()=>sfxp('whoosh')],
     [650,()=>{ say(m.id,'inverted_pyramid_lecture'); sfxp('step'); setMessage('Her students are not here. She lectures anyway.'); }],
-    [1100,()=>{ setMessage('She draws the inverted pyramid in the air.'); scene('ov_pyramid',1.6,{x:p.x-64,y:p.y-me.h*.8,w:96,h:60}); sfxp('whoosh'); }],
-    [2250,()=>{ setMessage('The point comes down.'); sfxp('whoosh'); scene('ov_pyfall',.8,{x:F.x+F.w*.3,y0:F.top-80,y1:F.mid+10,w:84,h:70}); }],
-    ['hf',2600],
-    [2350,()=>say(m.id,'inverted_pyramid')],
-    [2600,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.2,{a:.4,c:'#fff3a0'}); scene('ov_ring',.7,{x:F.x+F.w*.3,y:F.base-4,r:60,c:GOLD}); scene('ov_poof',.7,{x:F.x+F.w*.3,y:F.base,n:9,r:34,c:'#fff3c0'}); scene('ov_dust',1,{x:F.x-F.w*.4,y:F.base}); scene('ov_sparks',.7,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:GOLD}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THE LEDE',c:GOLD,sc:3}); }],
-    [3000,()=>setMessage('Who, what, when, where, WHAM.')],
-    [3750,'end',res(E2)+'Buried.']]); };
+    [1550,()=>{ setMessage('She draws the inverted pyramid in the air.'); scene('ov_pyramid',1.6,{x:p.x-64,y:p.y-me.h*.8,w:96,h:60}); sfxp('whoosh'); }],
+    [2350,()=>{ setMessage('The point comes down.'); sfxp('whoosh'); scene('ov_pyfall',.8,{x:F.x+F.w*.3,y0:F.top-80,y1:F.mid+10,w:84,h:70}); }],
+    ['hf',2700],
+    [2450,()=>say(m.id,'inverted_pyramid')],
+    [2700,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.2,{a:.4,c:'#fff3a0'}); scene('ov_ring',.7,{x:F.x+F.w*.3,y:F.base-4,r:60,c:GOLD}); scene('ov_poof',.7,{x:F.x+F.w*.3,y:F.base,n:9,r:34,c:'#fff3c0'}); scene('ov_dust',1,{x:F.x-F.w*.4,y:F.base}); scene('ov_sparks',.7,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:GOLD}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THE LEDE',c:GOLD,sc:3}); }],
+    [3100,()=>setMessage('Who, what, when, where, WHAM.')],
+    [3900,'end',res(E2)+'Buried.']]); };
 
 // ---------- Marine Layer (6.5 s) ----------
 // shivers in her dress, pulls the hoodie on, hood up and miserable, then declares a crisis as gray fog rolls over every enemy
 SC.ov_fog=(s,u)=>{ const a=fin(u,.2)*fade(u,.75)*.8; for(let k=0;k<22;k++) { const x=lerp(s.x1+60,s.x0-40,cl(u*1.15))+((k*37)%110)-55,y=s.y+(((k*53)%100)-50)*s.sp/50+Math.sin(u*5+k)*4; gfx.globalAlpha=a*(.3+(k%3)*.18); E(x,y,36+(k%4)*9,15+(k%3)*5,GRAY); } };
 SC.ov_drizzle=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.8)*.5; for(let k=0;k<26;k++) { const x=10+((k*83)%556),y=((u*1.6+(k%9)*.11)%1)*330; Ln(x,y,x-2,y+9,1,'#dfe6ea'); } };
 O.marine_layer=E2=>{ const {m,fx}=E2,me=ST.unit(m),foes=foesOf(E2),G=ST.group(foes);
-  const K=[{t:0,x:'home',y:'home',f:'ml_shiver'}];
-  K.push(...seq([['ml_shiver',600],['ml_hoodie',600],['ml_hood_up',650],['ml_crisis',950],['ml_sulk',700]],0,'home','home'));
-  K.push({t:3500,x:'home',y:'home',f:'idle'},{t:4050,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'ab_ml_1'}];
+  K.push(...seq([['ab_ml_1',550],['ab_ml_2',550],['ab_ml_3',600],['ab_ml_4',800],['ab_ml_5',600],['ab_ml_6',700]],0,'home','home'));
+  K.push({t:3800,x:'home',y:'home',f:'idle'},{t:4300,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('It is a little chilly in Los Angeles.'); sfxp('whoosh'); scene('ov_text',.9,{x:me.x,y:me.base-me.h-8,txt:'BRRR',c:'#cfe0ea',sc:2}); }],
-    [600,()=>setMessage('Hoodie on. Over the dress.')],
-    [1200,()=>{ say(m.id,'marine_layer'); setMessage('"It\'s sixty-two degrees."'); scene('ov_dim',3.4,{a:.32,c:'#566878'}); scene('ov_text',1.4,{x:me.x,y:me.base-me.h-8,txt:'62 DEGREES',c:'#cfe0ea',sc:2}); }],
+    [550,()=>setMessage('Hoodie on. Over the dress.')],
+    [1150,()=>{ say(m.id,'marine_layer'); setMessage('"It\'s sixty-two degrees."'); scene('ov_dim',3.4,{a:.32,c:'#566878'}); scene('ov_text',1.4,{x:me.x,y:me.base-me.h-8,txt:'62 DEGREES',c:'#cfe0ea',sc:2}); }],
     [1500,()=>{ scene('ov_fog',3.2,{x0:G.x0-20,x1:576,y:G.top+Math.max(20,(G.base-G.top)*.5),sp:Math.max(40,G.base-G.top)}); scene('ov_drizzle',3,{}); scene('ov_streaks',1.2,{x0:G.x0-20,x1:560,y:G.top+20}); }],
-    [1900,()=>say(m.id,'marine_layer_crisis')],
-    ['hf',2050],
-    [2050,()=>{ setMessage('This is a crisis.'); sfxp('ding'); landHit(100); for(const f of foes) { const F=ST.unit(f); jitter(f); scene('ov_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:24,c:GRAY}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:36,c:'#dfe6ea'}); } battle.shake=Math.max(battle.shake||0,.25); scene('ov_text',1.2,{x:me.x,y:me.base-me.h-8,txt:'CRISIS',c:'#cfd8de',sc:3}); }],
-    [2900,()=>setMessage('Everyone is cold now. Spiritually.')],
-    [3500,()=>setMessage('She is from New York. She knows what cold is. This is worse.')],
-    [4050,'end',res(E2)+'The marine layer wins again.']]); };
+    [1800,()=>say(m.id,'marine_layer_crisis')],
+    ['hf',1950],
+    [1950,()=>{ setMessage('This is a crisis.'); sfxp('ding'); landHit(100); for(const f of foes) { const F=ST.unit(f); jitter(f); scene('ov_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:24,c:GRAY}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:36,c:'#dfe6ea'}); } battle.shake=Math.max(battle.shake||0,.25); scene('ov_text',1.2,{x:me.x,y:me.base-me.h-8,txt:'CRISIS',c:'#cfd8de',sc:3}); }],
+    [2500,()=>setMessage('Everyone is cold now. Spiritually.')],
+    [3100,()=>setMessage('She is from New York. She knows what cold is. This is worse.')],
+    [4300,'end',res(E2)+'The marine layer wins again.']]); };
 
 // ---------- Double Under (7.0 s) ----------
 // rope out, a rusty first jump that trips her (does nothing), then two big double-unders and a whip
 SC.ov_ropering=(s,u)=>{ gfx.globalAlpha=fade(u,.5); gfx.strokeStyle='#c43a3a'; gfx.lineWidth=3; const q=ez(u/.5);
   gfx.beginPath(); gfx.ellipse(s.x,s.y,10+q*(s.r||36),(10+q*(s.r||36))*.55,0,0,Math.PI*2); gfx.stroke(); };
 O.double_under=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'du_ready'}];
-  K.push(...seq([['du_ready',500],['du_trip',450],['du_laugh',500],['du_focus',450],['du_jump_a',400],['du_jump_b',400],['du_whip',700]],600,p.x,p.y));
-  K.push({t:4000,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:4350,x:'home',y:'home',f:'idle'},{t:4400,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'ab_du_1'}];
+  K.push(...seq([['ab_du_1',500],['ab_du_2',500],['ab_du_3',450],['ab_du_4',400],['ab_du_5',400],['ab_du_6',700]],600,p.x,p.y));
+  K.push({t:3550,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:3950,x:'home',y:'home',f:'idle'},{t:4050,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>setMessage('Olivia pulls out a jump rope.')],
@@ -194,57 +194,57 @@ O.double_under=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),
     [650,()=>{ say(m.id,'double_under_ready'); }],
     [1100,()=>{ setMessage('She trips on the first jump.'); sfxp('thud'); say(m.id,'double_under_trip'); scene('ov_poof',.5,{x:p.x,y:p.y,r:20}); scene('ov_text',.8,{x:p.x,y:p.y-me.h-6,txt:'OOF',c:'#ffd6c0',sc:2}); }],
     [1650,()=>setMessage('Shoes stay on. This is serious.')],
-    [2050,()=>{ setMessage('The champion is back.'); scene('ov_sparks',.6,{x:p.x,y:p.y-me.h*.7,n:8,r:26,c:GOLD}); }],
-    [2500,()=>{ sfxp('whoosh'); scene('ov_ropering',.5,{x:p.x,y:p.y-2,r:46}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2',c:'#ff9a8a',sc:2}); }],
-    [2900,()=>{ sfxp('whoosh'); scene('ov_ropering',.5,{x:p.x,y:p.y-2,r:46}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2 AGAIN',c:'#ff9a8a',sc:2}); }],
-    [3250,()=>{ sfxp('bonk'); jitter(f); landHit(50); scene('ov_ropering',.6,{x:F.x+F.w*.3,y:F.base-4,r:F.w*.5}); scene('ov_sparks',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:26,c:'#ff9a8a'}); }],
-    ['hf',3450],
-    [3400,()=>say(m.id,'double_under')],
-    [3450,()=>{ setMessage('Double under. Whip.'); sfxp('bonk'); sfxp('ding'); jitter(f); landHit(50); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.15,{a:.3,c:'#ffd6c0'}); scene('ov_crack',.5,{x:F.x+F.w*.3,y:F.mid+10}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:50,c:'#ff6a5a'}); scene('ov_sparks',.7,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ff6a5a'}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THERE IT IS',c:'#ffd6c0',sc:3}); }],
-    [3800,()=>setMessage('Nobody in this family beat her at this. Nobody.')],
-    [4400,'end',res(E2)+'Still got it.']]); };
+    [1950,()=>{ setMessage('The champion is back.'); scene('ov_sparks',.6,{x:p.x,y:p.y-me.h*.7,n:8,r:26,c:GOLD}); }],
+    [2050,()=>{ sfxp('whoosh'); scene('ov_ropering',.5,{x:p.x,y:p.y-2,r:46}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2',c:'#ff9a8a',sc:2}); }],
+    [2450,()=>{ sfxp('whoosh'); scene('ov_ropering',.5,{x:p.x,y:p.y-2,r:46}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2 AGAIN',c:'#ff9a8a',sc:2}); }],
+    [2850,()=>{ sfxp('bonk'); jitter(f); landHit(50); scene('ov_ropering',.6,{x:F.x+F.w*.3,y:F.base-4,r:F.w*.5}); scene('ov_sparks',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:26,c:'#ff9a8a'}); }],
+    ['hf',3050],
+    [3000,()=>say(m.id,'double_under')],
+    [3050,()=>{ setMessage('Double under. Whip.'); sfxp('bonk'); sfxp('ding'); jitter(f); landHit(50); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.15,{a:.3,c:'#ffd6c0'}); scene('ov_crack',.5,{x:F.x+F.w*.3,y:F.mid+10}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:50,c:'#ff6a5a'}); scene('ov_sparks',.7,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ff6a5a'}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THERE IT IS',c:'#ffd6c0',sc:3}); }],
+    [3450,()=>setMessage('Nobody in this family beat her at this. Nobody.')],
+    [4050,'end',res(E2)+'Still got it.']]); };
 
 // ---------- Story Time (7.5 s) ----------
 // sits down cross-legged, shows the book, reads, shhh, closes it. Night falls, a moon comes out, the enemy nods off.
 SC.ov_zzz=(s,u)=>{ for(let k=0;k<4;k++) { const q=cl(u*1.3-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; label('Z',s.x+k*10+Math.sin(q*6+k)*4,s.y-q*44-k*8,'#cfd8ff',2+(k%2)); } };
 O.story_time=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,110),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'st_sit'}];
-  K.push(...seq([['st_sit',600],['st_show',500],['st_read',1300],['st_shhh',600],['st_close',600]],600,p.x,p.y));
-  K.push({t:4200,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:4600,x:'home',y:'home',f:'idle'},{t:4700,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:200,f:'run',ease:'in'},{t:600,x:p.x,y:p.y,f:'ab_st_1'}];
+  K.push(...seq([['ab_st_1',500],['ab_st_2',500],['ab_st_3',500],['ab_st_4',900],['ab_st_5',600],['ab_st_6',700]],600,p.x,p.y));
+  K.push({t:4300,x:p.x,y:p.y,f:'runR',ease:'lin'},{t:4700,x:'home',y:'home',f:'idle'},{t:4800,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>setMessage('Olivia sits down cross-legged.')],
     [200,()=>sfxp('whoosh')],
     [700,()=>{ scene('ov_dim',5.4,{a:.42,c:'#0c1240'}); scene('ov_night',5.2,{x:500,y:46}); scene('ov_spot',5,{x:p.x,y:p.y,r:70}); scene('ov_fireflies',5,{}); setMessage('She opens her own children\'s book.'); }],
-    [1200,()=>{ setMessage('She holds up the first page.'); scene('ov_sparks',.8,{x:p.x-10,y:p.y-me.h*.6,n:8,r:22,c:'#cfd8ff'}); }],
-    [1700,()=>{ say(m.id,'story_time'); setMessage('"Once upon a time, in a very quiet house..."'); scene('ov_notes',2.4,{x:p.x-20,y:p.y-me.h*.8}); }],
-    ['hf',2000],
-    [2100,()=>{ sfxp('ding'); landHit(100); scene('ov_zzz',2.8,{x:F.x+F.w*.35,y:F.top+10}); scene('ov_sparks',.9,{x:F.x+F.w*.35,y:F.top+20,n:9,r:26,c:'#cfd8ff'}); scene('ov_ring',.8,{x:F.x+F.w*.35,y:F.mid,r:40,c:'#8fa0ff'}); }],
-    [2550,()=>setMessage('She does the voices.')],
-    [2900,()=>{ setMessage(f.name+' is nodding off.'); }],
-    [3450,()=>{ say(m.id,'story_time_end'); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SHHH',c:'#cfd8ff',sc:2}); }],
+    [1600,()=>{ setMessage('She holds up the first page.'); scene('ov_sparks',.8,{x:p.x-10,y:p.y-me.h*.6,n:8,r:22,c:'#cfd8ff'}); }],
+    [2100,()=>{ say(m.id,'story_time'); setMessage('"Once upon a time, in a very quiet house..."'); scene('ov_notes',2.4,{x:p.x-20,y:p.y-me.h*.8}); }],
+    ['hf',2400],
+    [2500,()=>{ sfxp('ding'); landHit(100); scene('ov_zzz',2.8,{x:F.x+F.w*.35,y:F.top+10}); scene('ov_sparks',.9,{x:F.x+F.w*.35,y:F.top+20,n:9,r:26,c:'#cfd8ff'}); scene('ov_ring',.8,{x:F.x+F.w*.35,y:F.mid,r:40,c:'#8fa0ff'}); }],
+    [2800,()=>setMessage('She does the voices.')],
+    [3000,()=>{ setMessage(f.name+' is nodding off.'); }],
+    [3350,()=>{ say(m.id,'story_time_end'); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SHHH',c:'#cfd8ff',sc:2}); }],
     [3900,()=>setMessage('Page two is never needed.')],
-    [4350,()=>setMessage('She wrote it. She will tell you she wrote it.')],
-    [4700,'end',res(E2)+'And everybody went to sleep.']]); };
+    [4300,()=>setMessage('She wrote it. She will tell you she wrote it.')],
+    [4800,'end',res(E2)+'And everybody went to sleep.']]); };
 
 // ---------- MICHAEL! (9.0 s) ----------
-// breath, yell, a long wait, yell louder. A faint WHAT? from somewhere, then a diaper bag flies in from off screen and flattens the enemy. Michael is never drawn.
-const bag=(x,y,rot)=>{ gfx.save(); gfx.translate(x,y); R(-11,-8,22,16,'#6aa0d8'); R(-11,-8,22,4,'#9fc8ee'); R(-11,0,22,3,'#ffffff'); R(-5,-12,10,4,'#4a78ac'); R(-3,-14,6,3,'#cfd8e6'); gfx.restore(); };
+// tired stare, breath, yell, a long wait, yell louder, point. A faint WHAT? from somewhere, then a diaper bag flies in from off screen and flattens the enemy. Michael is never drawn (his own sheet is still a draft).
+const bag=(x,y,rot)=>{ if(PROPART.draw('olivia/diaper_bag',x,y,{h:30})) return; gfx.save(); gfx.translate(x,y); R(-11,-8,22,16,'#6aa0d8'); R(-11,-8,22,4,'#9fc8ee'); R(-11,0,22,3,'#ffffff'); R(-5,-12,10,4,'#4a78ac'); R(-3,-14,6,3,'#cfd8e6'); gfx.restore(); };
 O.michael=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'mi_breath'}];
-  K.push(...seq([['mi_breath',600],['mi_yell_1',700],['mi_wait',1300],['mi_yell_2',1000],['mi_thanks',1100]],0,'home','home'));
+  const K=[{t:0,x:'home',y:'home',f:'ab_mi_1'}];
+  K.push(...seq([['ab_mi_1',400],['ab_mi_2',400],['ab_mi_3',600],['ab_mi_4',1100],['ab_mi_5',800],['ab_mi_6',1400]],0,'home','home'));
   K.push({t:4700,x:'home',y:'home',f:'idle'},{t:5600,f:'idle'});
   ST.keys(fx,K);
   const hitT=3350;
   ST.play(E2,[
     [0,()=>setMessage('Olivia takes a huge breath.')],
-    [600,()=>{ say(m.id,'michael_1'); setMessage('MICHAEL!'); battle.shake=Math.max(battle.shake||0,.15); scene('ov_text',1,{x:me.x+24,y:me.base-me.h-4,txt:'MICHAEL!',c:'#ffd27a',sc:3}); }],
-    [1300,()=>{ setMessage('Nothing.'); scene('ov_text',.9,{x:me.x+30,y:me.base-me.h-4,txt:'...',c:'#cfd8e6',sc:3}); }],
+    [800,()=>{ say(m.id,'michael_1'); setMessage('MICHAEL!'); battle.shake=Math.max(battle.shake||0,.15); scene('ov_text',1,{x:me.x+24,y:me.base-me.h-4,txt:'MICHAEL!',c:'#ffd27a',sc:3}); }],
+    [1500,()=>{ setMessage('Nothing.'); scene('ov_text',.9,{x:me.x+30,y:me.base-me.h-4,txt:'...',c:'#cfd8e6',sc:3}); }],
     [1900,()=>setMessage('Crickets.')],
-    [2300,()=>setMessage('A bird. Somewhere, a bird.')],
-    [2600,()=>{ say(m.id,'michael'); setMessage('MICHAEL, HANDLE THIS!'); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.15,{a:.25,c:'#ffd27a'}); scene('ov_skysplit',.6,{x:me.x+40,y:me.base-me.h-10}); scene('ov_text',1.1,{x:me.x+30,y:me.base-me.h-4,txt:'HANDLE THIS!',c:'#ff9a7a',sc:3}); }],
-    [2850,()=>{ setMessage('A faint voice from somewhere.'); scene('ov_text',.9,{x:548,y:120,txt:'WHAT?',c:'#cfd8e6',sc:1}); }],
-    [3000,()=>{ sfxp('whoosh'); ST.fly(bag,640,me.base-me.h*1.3,F.x+F.w*.35,F.mid-4,.55,70,0,{spin:4}); }],
+    [2200,()=>setMessage('A bird. Somewhere, a bird.')],
+    [2500,()=>{ say(m.id,'michael'); setMessage('MICHAEL, HANDLE THIS!'); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.15,{a:.25,c:'#ffd27a'}); scene('ov_skysplit',.6,{x:me.x+40,y:me.base-me.h-10}); scene('ov_text',1.1,{x:me.x+30,y:me.base-me.h-4,txt:'HANDLE THIS!',c:'#ff9a7a',sc:3}); }],
+    [2750,()=>{ setMessage('A faint voice from somewhere.'); scene('ov_text',.9,{x:548,y:120,txt:'WHAT?',c:'#cfd8e6',sc:1}); }],
+    [2950,()=>{ sfxp('whoosh'); ST.fly(bag,640,me.base-me.h*1.3,F.x+F.w*.35,F.mid-4,.55,70,0,{spin:4}); }],
     ['hf',hitT],
     [hitT,()=>{ sfxp('thud'); sfxp('bonk'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.6); scene('ov_flash',.25,{a:.45}); scene('ov_ring',.8,{x:F.x+F.w*.35,y:F.base-4,r:70,c:'#dfe9f6'}); scene('ov_poof',.8,{x:F.x+F.w*.35,y:F.base,n:12,r:44}); scene('ov_dust',1,{x:F.x-F.w*.5,y:F.base}); scene('ov_sparks',.8,{x:F.x+F.w*.35,y:F.mid,n:14,r:40,c:'#9fc8ee'}); scene('ov_text',1.1,{x:F.x+F.w*.35,y:F.top-30,txt:'WHAM',c:'#ffe08a',sc:4}); }],
     [3800,()=>say(m.id,'michael_thanks')],
@@ -253,11 +253,12 @@ O.michael=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     [5600,'end',res(E2)+'He handled it.']]); };
 
 // ---------- LACHLAN, NO! (8.0 s) ----------
-// she spots Lachlan (off screen, never drawn), sprints straight through the enemy with speed lines, skids to a stop with her arms out, sighs with relief
+// she spots Lachlan, drops into a sprinter's start, runs straight through the enemy with speed lines, and reaches Lachlan: he is painted in the last four frames
+// (a leap to grab him, scooping him up, a hug, him on her hip with the stick)
 O.lachlan_no=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const homeX=me.x,homeY=me.base,endX=Math.max(40,F.x-F.w*.5-46),by=Math.min(316,F.base+4);
-  const K=[{t:0,x:'home',y:'home',f:'lk_gasp'},{t:750,x:'home',y:'home',f:'lk_sprint_wind'},{t:1150,x:'home',y:'home',f:'lk_sprint',ease:'in'},{t:1850,x:endX,y:by,f:'lk_skid'}];
-  K.push({t:2500,x:endX,y:by,f:'lk_relief'},{t:3900,x:endX,y:by,f:'run',ease:'lin'},{t:4500,x:'home',y:'home',f:'idle'},{t:5000,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'ab_lk_1'},{t:750,x:'home',y:'home',f:'ab_lk_2'},{t:1150,x:'home',y:'home',f:'run',ease:'in'},{t:1850,x:endX,y:by,f:'ab_lk_3'}];
+  K.push({t:2300,x:endX,y:by,f:'ab_lk_4'},{t:2800,x:endX,y:by,f:'ab_lk_5'},{t:3350,x:endX,y:by,f:'ab_lk_6'},{t:4100,x:endX,y:by,f:'runR',ease:'lin'},{t:4700,x:'home',y:'home',f:'idle'},{t:5000,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
     [0,()=>{ setMessage('Olivia spots Lachlan about to climb something.'); say(m.id,'lachlan_no'); scene('ov_flash',.2,{a:.25,c:'#ff8a7a'}); scene('ov_text',1.1,{x:me.x,y:me.base-me.h-6,txt:'LACHLAN, NO!',c:'#ff8a7a',sc:3}); }],
@@ -266,21 +267,21 @@ O.lachlan_no=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
     ['hf',1550],
     [1550,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.6); scene('ov_flash',.25,{a:.4}); scene('ov_ring',.8,{x:F.x+F.w*.3,y:F.base-4,r:76,c:'#ffd27a'}); scene('ov_poof',.9,{x:F.x+F.w*.3,y:F.base,n:12,r:46}); scene('ov_sparks',.8,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ffd27a'}); scene('ov_text',1,{x:F.x+F.w*.3,y:F.top-30,txt:'THROUGH',c:'#ffe08a',sc:3}); }],
     [1850,()=>{ sfxp('thud'); scene('ov_poof',.7,{x:endX,y:by,n:9,r:30}); scene('ov_dust',.8,{x:endX-40,y:by}); }],
-    [2550,()=>{ say(m.id,'lachlan_no_got'); setMessage('Got him. Got him. We\'re fine.'); }],
-    [3200,()=>{ setMessage('He was holding a stick. Just a stick.'); scene('ov_text',1,{x:endX+10,y:by-me.h-6,txt:'...',c:'#cfd8e6',sc:3}); }],
+    [2350,()=>{ say(m.id,'lachlan_no_got'); setMessage('Got him. Got him. We\'re fine.'); }],
+    [3350,()=>{ setMessage('He was holding a stick. Just a stick.'); scene('ov_text',1,{x:endX+10,y:by-me.h-6,txt:'...',c:'#cfd8e6',sc:3}); }],
     [3900,()=>setMessage('Michael did not notice. Michael is on a call.')],
-    [4500,()=>setMessage('She walks back like nothing happened.')],
+    [4300,()=>setMessage('She walks back like nothing happened.')],
     [5000,'end',res(E2)+'He was fine. He was always fine.']]); };
 
 // ---------- Better Than Bobby (ultimate, 10.6 s) ----------
 // the lights go down, a spotlight. She counts on her fingers, every count a bigger hit on a different enemy, then the mic drop and the confetti.
-const mic=(x,y)=>{ R(x-2,y-2,4,12,'#1a1a22'); E(x,y-5,5,5,'#2a2a34'); R(x-5,y-8,10,2,'#46464f'); };
+const mic=(x,y)=>{ if(PROPART.draw('olivia/mic',x,y+2,{h:24})) return; R(x-2,y-2,4,12,'#1a1a22'); E(x,y-5,5,5,'#2a2a34'); R(x-5,y-8,10,2,'#46464f'); };
 O.better_than_bobby=E2=>{ const {m,fx}=E2,me=ST.unit(m);
-  const K=[{t:0,x:'home',y:'home',f:'bb_one'}];
-  K.push(...seq([['bb_one',700],['bb_two',700],['bb_three',700],['bb_four_and_five',1100],['bb_crossed',700],['bb_mic',800],['bb_drop',1000]],0,'home','home'));
-  K.push({t:5700,x:'home',y:'home',f:'idle'},{t:6600,f:'idle'});
+  const K=[{t:0,x:'home',y:'home',f:'ab_bb_1'}];
+  K.push(...seq([['ab_bb_1',400],['ab_bb_2',700],['ab_bb_3',1000],['ab_bb_4',1200],['ab_bb_5',800],['ab_bb_6',1000]],0,'home','home'));
+  K.push({t:5100,x:'home',y:'home',f:'idle'},{t:6000,f:'idle'});
   ST.keys(fx,K);
-  const words=['JUMP ROPE','GRADES','PARKING','COOKING','MARIO KART'],times=[350,1050,1750,2450,2950];
+  const words=['JUMP ROPE','GRADES','PARKING','COOKING','MARIO KART'],times=[500,1200,1800,2300,2900];
   const hit=k=>()=>{ const f=waveFoe(k),F=ST.unit(f); sfxp(k===4?'ding':'bonk'); jitter(f); landHit(20); battle.shake=Math.max(battle.shake||0,.1+k*.08);
     scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:26+k*8,c:k%2?GOLD:BLUE}); scene('ov_sparks',.6+k*.05,{x:F.x+F.w*.3,y:F.mid,n:8+k*3,r:24+k*7,c:k%2?GOLD:BLUE,seed:k});
     scene('ov_text',1,{x:F.x+F.w*.3,y:F.top-4-k*2,txt:words[k],c:k===4?'#ffe08a':CREAM,sc:k===4?3:2}); scene('ov_text',.8,{x:me.x-24,y:me.base-me.h-4,txt:String(k+1),c:'#ffd6f0',sc:3+(k===4?1:0)}); if(k===4) scene('ov_flash',.2,{a:.3,c:'#fff3a0'}); };
@@ -288,14 +289,14 @@ O.better_than_bobby=E2=>{ const {m,fx}=E2,me=ST.unit(m);
     [0,()=>{ setMessage('Olivia has a list. About her brother Bobby.'); say(m.id,'better_than_bobby_a'); scene('ov_dim',6.2,{a:.5,c:'#0a0820'}); scene('ov_spot',6,{x:me.x,y:me.base,r:64}); }],
     ...times.map((t,k)=>[t,hit(k)]),
     [2100,()=>say(m.id,'better_than_bobby_b')],
-    ['hf',2950],
-    [3250,()=>{ setMessage('Arms crossed. Chin up.'); scene('ov_text',1.2,{x:me.x,y:me.base-me.h-10,txt:'FIVE FOR FIVE',c:GOLD,sc:2}); }],
-    [3950,()=>{ setMessage('She holds out the mic.'); sfxp('whoosh'); scene('ov_sparks',.9,{x:me.x-60,y:me.base-me.h*.5,n:10,r:26,c:GOLD}); }],
-    [4700,()=>{ say(m.id,'better_than_bobby'); setMessage('Sorry, Bobby.'); ST.fly(mic,me.x-60,me.base-me.h*.5,me.x-84,me.base+2,.4,24,0,{spin:2}); }],
-    [4950,()=>{ sfxp('thud'); sfxp('ding'); battle.shake=Math.max(battle.shake||0,.7); scene('ov_flash',.35,{a:.5,c:'#fff3a0'}); scene('ov_ring',.9,{x:me.x-84,y:me.base+2,r:120,c:'#ffffff'}); scene('ov_confetti',2.4,{}); scene('ov_banner',2.2,{y:40,txt:'BETTER THAN BOBBY'}); }],
-    [5500,()=>{ setMessage('A voice from somewhere: I LET YOU WIN.'); scene('ov_text',1,{x:548,y:120,txt:'I LET YOU WIN',c:'#cfd8e6',sc:1}); }],
-    [6100,()=>setMessage('He did not. Bobby was not asked for comment.')],
-    [6600,'end',res(E2)+'Mic dropped.']]); };
+    ['hf',2900],
+    [3300,()=>{ setMessage('Arms crossed. Chin up.'); scene('ov_text',1.2,{x:me.x,y:me.base-me.h-10,txt:'FIVE FOR FIVE',c:GOLD,sc:2}); }],
+    [3500,()=>{ setMessage('She holds out the mic.'); sfxp('whoosh'); scene('ov_sparks',.9,{x:me.x-60,y:me.base-me.h*.5,n:10,r:26,c:GOLD}); }],
+    [4300,()=>{ say(m.id,'better_than_bobby'); setMessage('Sorry, Bobby.'); ST.fly(mic,me.x-60,me.base-me.h*.5,me.x-84,me.base+2,.4,24,0,{spin:2}); }],
+    [4550,()=>{ sfxp('thud'); sfxp('ding'); battle.shake=Math.max(battle.shake||0,.7); scene('ov_flash',.35,{a:.5,c:'#fff3a0'}); scene('ov_ring',.9,{x:me.x-84,y:me.base+2,r:120,c:'#ffffff'}); scene('ov_confetti',2.4,{}); scene('ov_banner',2.2,{y:40,txt:'BETTER THAN BOBBY'}); }],
+    [5100,()=>{ setMessage('A voice from somewhere: I LET YOU WIN.'); scene('ov_text',1,{x:548,y:120,txt:'I LET YOU WIN',c:'#cfd8e6',sc:1}); }],
+    [5600,()=>setMessage('He did not. Bobby was not asked for comment.')],
+    [6000,'end',res(E2)+'Mic dropped.']]); };
 
 // Same stretch as Justin's moves: the painted frames are held long enough to read.
 (function(){ const S0=1.6;

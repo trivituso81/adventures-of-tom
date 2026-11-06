@@ -2,8 +2,8 @@
 // data/olivia-battle-use.js: Olivia's painted battle sprite (data/olivia-battle-hires.js OLIVIA_BT, art/chars/olivia-*.webp).
 // Builds BATTLE_SPRITES.olivia and KO_SPRITES.olivia the way data/justin-battle-use.js does. Loads after data/battle-size.js.
 // Set OLIVIA_BT_OFF=true (before this file) to leave her out of battle sprites.
-// Every ability frame is also a sprite key, named as in the sheet ('fc_jab', 'du_jump_a', 'mi_yell_2', ...), plus a mirrored copy with an R suffix
-// ('fc_jabR'). All frames face left except mi_yell_1 to mi_thanks (they face right, calling toward the right edge). engine/olivia-moves.js drives them.
+// Every ability frame is also a sprite key, 'ab_<move>_<n>' ('ab_fc_4', 'ab_du_5', ...), plus a mirrored copy with an R suffix ('ab_fc_4R'),
+// loaded from data/olivia-ab.js. engine/olivia-moves.js drives them.
 (function() {
   if(typeof OLIVIA_BT==='undefined'||(typeof OLIVIA_BT_OFF!=='undefined'&&OLIVIA_BT_OFF)) return;
   const BT=OLIVIA_BT;
@@ -39,10 +39,11 @@
   sp.eye=sp.eyeAt.get(sp.idle);
 
   // ---- ability frames ----
-  for(const sk in (BT.sets||{})) {
-    const S=BT.sets[sk],A=AT[sk]; paintedAtlas('olivia_'+sk,A.src,A.rects,A.k);
-    const m=addPal(S.pal);
-    for(const nm in S.rows) { const r=sp[nm]=mk(S.rows[nm],m,'olivia_'+sk,nm); sp[nm+'R']=mir(r); }
+  // data/olivia-ab.js (tools/sprite-bake/bake_olivia_ab.py): 'ab_<move>_<n>' per painted cell of her eleven approved Art Library sheets, plus an R copy facing the other way.
+  if(typeof OLIVIA_AB!=='undefined') {
+    const A=OLIVIA_AB; paintedAtlas('olivia_ab',A.atlas.src,A.atlas.rects,A.atlas.k);
+    const m=addPal(A.pal);
+    for(const nm in A.ab) { const r=sp[nm]=mk(A.ab[nm],m,'olivia_ab',nm); sp[nm+'R']=mir(r); }
   }
 
   BATTLE_SPRITES.olivia=sp;

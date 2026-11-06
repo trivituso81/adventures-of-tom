@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
-"""Bake Olivia's painted 4 x 4 battle sheet and her 11 ability sheets into the game.
+"""Bake Olivia's painted battle stances (her two battle sheets) into the game. Her ability frames are baked by bake_olivia_ab.py.
+NOTE: this baker no longer reproduces the repo files (the battle sheets were rescaled after its last bake); bake_olivia_ab.py does not touch the core stances.
 
 Input : art/raw/characters/olivia-battle-sheet-1-v1.png and -2-v1.png (her two painted battle sheets, Tom 2026-11-05 23:40): the core stances, as painted
-        tools/sprite-bake/src/olivia-<sheet>-v1.png (the 11 ability sheets, flat magenta background)
 Output: art/chars/olivia-battle.webp, olivia-ko.webp   (painted frames, K x the size of the rows)
         data/olivia-battle-hires.js                     (OLIVIA_BT: rows, palettes, atlas rects; do not hand-edit)
         tools/shots/olivia-bake.png                     (contact sheet, grey background)
 
-Ability frames are cut by the gaps between figures (sheet.py), never by fixed positions. The core stances are the 14 figures of her two battle sheets as painted
-(no head growing); the ability sheets keep the scale and head growth they were tuned with. Feet sit on the centre column, soles on the bottom row.
+The core stances are the 14 figures of her two battle sheets as painted (no head growing). Feet sit on the centre column, soles on the bottom row.
 
-Usage : python3 tools/sprite-bake/bake_olivia_battle.py [--battle-h 97] [--colors 46]
+Usage : python3 tools/sprite-bake/bake_olivia_battle.py [--colors 46]
 """
 import argparse, json, os, sys
 import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
@@ -28,7 +26,6 @@ KB, KO_ = 2, 2
 AV = ''   # was '?v=olivia5'; engine/painted.js adds ?v=ART_V to atlases without a tag (2026-11-01).  Old note: cache string: bump with the ?v= tag in index.html whenever frame sizes change
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--battle-h', type=float, default=97)   # idle height in grid rows
 ap.add_argument('--colors', type=int, default=46)
 ap.add_argument('--contact', default=os.path.join(ROOT, 'tools/shots/olivia-bake.png'))
 args = ap.parse_args()
@@ -39,8 +36,7 @@ from battle_sheet_frames import build as _build_battle, SLOTS
 _bf = _build_battle('olivia')
 core_src = {slot: _bf['b_' + src] for slot, src in SLOTS.items()}
 ko_src = _bf['b_dizzy']
-OLD_IDLE_SRC_H = 287    # the old battle idle (deleted 2026-11-05) was 287 px tall; the ability sheets were scaled and head-grown against it, so it is pinned
-OLD_IDLE_ROWS = 105     # and its visible height in battle rows: the new idle keeps it, so her size in a fight does not move
+OLD_IDLE_ROWS = 105     # visible height of the old battle idle in battle rows: the new idle keeps it, so her size in a fight does not move
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -121,12 +117,6 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- core battle set
-FB = args.battle_h * KB / OLD_IDLE_SRC_H                  # ability sheets: one scale for every frame (pinned to the old idle)
-# Head (2026-11-01, Tom: same head rule as the other adults): ability frames get the head x HEAD_K grown about the chin, body unchanged.
-# Chin sits at CHIN_SHARE of the old idle height on the old battle sheet.
-import kidhead as _kh
-HEAD_K, CHIN_SHARE = 1.25, 0.385
-_HEAD_PX = CHIN_SHARE * OLD_IDLE_SRC_H
 FP = OLD_IDLE_ROWS * KB / core_src['idle'].height          # painted pixels per source pixel for the battle sheets
 core_big = tighten(place_feet({k: scaled_to(v, FP) for k, v in core_src.items()}, KB), KB)
 core_pal, core_rows = rows_of(core_big, KB, args.colors)
@@ -140,95 +130,9 @@ ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rects = pack(ko_big, os.path.join(ART, 'olivia-ko.webp'))
 
 
-# ---------------------------------------------------------------- ability sheets
-# key -> (file, row layout, frame names). Figures are found by blob detection and assigned to rows by vertical centre (by_position).
-SHEETS = {
-    'fc': ('factcheck', [4], 'open squint jab smug'),
-    'sb': ('snackbag', [4, 1], 'dig found toss_wind toss one_each'),
-    'ln': ('livnews', [4, 1], 'selfie turn live tapping check'),
-    'ip': ('pyramid', [4, 2], 'lecture top_edge slope point slam nod'),
-    'du': ('doubleunder', [4, 3], 'ready trip laugh focus jump_a jump_b whip'),
-    'st': ('storytime', [3, 2], 'sit show read shhh close'),
-    'mi': ('michael', [4, 1], 'breath yell_1 wait yell_2 thanks'),
-    'bb': ('bobby', [4, 3], 'one two three four_and_five crossed mic drop'),
-    'ir': ('isreal', [4, 1], 'scan squint gasp fake sigh'),
-    'ml': ('marine', [4, 1], 'shiver hoodie hood_up crisis sulk'),
-    'lk': ('lachlan', [3, 2], 'gasp sprint_wind sprint skid relief'),
-}
-
-def despill_pink(img):
-    a = np.array(img).astype(float); R, G, B = a[:, :, 0], a[:, :, 1], a[:, :, 2]
-    m = (R > G + 60) & (B > G * 0.95) & (a[:, :, 3] > 0)
-    a[:, :, 2] = np.where(m, np.minimum(B, G * 0.62), B); a[:, :, 0] = np.where(m, np.minimum(R, G * 1.75 + 10), R)
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-
-def face_h(im):
-    """Height of the face (largest skin patch in the top 40 percent after an opening that drops arms and fingers). Head size is constant inside a
-    sheet, so the top two readings (upright frames) give the factor that matches a sheet to the battle sheet."""
-    from scipy import ndimage
-    a = np.array(im); al = a[:, :, 3] > 40; ys, xs = np.where(al)
-    if not len(ys): return 1.0
-    top, bot = ys.min(), ys.max(); H = bot - top + 1
-    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
-    skin = al & (r > 170) & (r > g + 14) & (g > b + 8) & (r - b > 40); skin[top + int(H * .40):] = False
-    op = ndimage.binary_opening(skin, iterations=max(3, int(H * .03)))
-    lab, n = ndimage.label(op)
-    if not n: return 1.0
-    sizes = ndimage.sum(op, lab, range(1, n + 1)); cy, cx = np.where(lab == int(np.argmax(sizes)) + 1)
-    return float(cy.max() - cy.min() + 1)
-
-def face_ref(frames):
-    v = sorted((face_h(f) for f in frames), reverse=True)[:2]
-    return float(np.mean(v))
-
-ref_face = 109.5     # face height (top two upright frames) of the old battle sheet after its head growth, pinned (the ability sheets are matched to it)
-
-def cut_set(sk):
-    fname, layout, nm = SHEETS[sk]
-    names = [f'{sk}_{n}' for n in nm.split()]; rows, i = [], 0
-    for c in layout: rows.append(names[i:i + c]); i += c
-    p = os.path.join(SRC, f'olivia-{sk}-v1.png')
-    if not os.path.exists(p): print('MISSING sheet', p); return None
-    got = slice_sheet(p, rows, by_position=True)
-    pos = dict(slice_sheet.pos)
-    # lift: how far each frame's lowest pixel sits above the row's ground (jumps, sprint), in sheet pixels
-    lift = {}
-    for r in rows:
-        bots = {n: pos[n][1] + got[n].height for n in r}; g = max(bots.values())
-        for n in r: lift[n] = g - bots[n]
-    got = {n: despill_pink(v) for n, v in got.items()}
-    fw = face_ref(list(got.values()))
-    f = ref_face / fw                       # source pixels of this sheet -> source pixels of the battle sheet
-    print('%s: %d frames, face h %.0f px -> scale %.3f, lifts %s' % (sk, len(got), fw, f, {n[3:]: round(l * f * FB) for n, l in lift.items() if l > 6}))
-    return names, got, lift, f
-
-def place_feet_lift(frames, lifts, k):
-    axs = {n: feet_cx(im) for n, im in frames.items()}
-    left = max(axs.values()); right = max(im.width - axs[n] for n, im in frames.items())
-    half = up(int(np.ceil(max(left, right))) + 1, k)
-    Hc = up(max(im.height + int(round(lifts[n])) for n, im in frames.items()), k)
-    out = {}
-    for n, im in frames.items():
-        c = Image.new('RGBA', (half * 2, Hc), (0, 0, 0, 0)); c.alpha_composite(im, (int(round(half - axs[n])), Hc - im.height - int(round(lifts[n])))); out[n] = c
-    return out
-
-NO_GROW_SETS = set()   # ability frames left as painted (head not on top, or a prop above the head)
-sets = {}
-for sk, (fname, layout, nm) in SHEETS.items():
-    r = cut_set(sk)
-    if r is None: continue
-    names, got, lift, f = r
-    fr = {n: scaled_to(_kh.grow_head(got[n], HEAD_K, _HEAD_PX / f) if n not in NO_GROW_SETS else got[n], FB * f) for n in names}
-    lf = {n: lift[n] * f * FB for n in names}
-    big = tighten(place_feet_lift(fr, lf, KB), KB)
-    pal, rows = rows_of(big, KB, args.colors)
-    rects = pack(big, os.path.join(ART, f'olivia-{fname}.webp'), lossy=True)
-    sets[sk] = {'file': fname, 'pal': pal, 'rows': rows, 'rects': rects, 'big': big, 'h': len(next(iter(rows.values()))), 'w': len(next(iter(rows.values()))[0])}
-
 # ---------------------------------------------------------------- contact sheet
 def contact(path):
     items = [(k, v) for k, v in core_big.items()] + [('ko', ko_big['ko'])]
-    for sk, st in sets.items(): items += list(st['big'].items())
     cw = max(i.width for _, i in items) // 2 + 4; ch = max(i.height for _, i in items) // 2 + 14
     per = 12; rws = -(-len(items) // per)
     sh = Image.new('RGBA', (per * cw, rws * ch), (128, 128, 128, 255)); d = ImageDraw.Draw(sh)
@@ -243,17 +147,11 @@ contact(args.contact)
 # ---------------------------------------------------------------- data file
 atlas = {'bt': {'src': 'art/chars/olivia-battle.webp' + AV, 'k': KB, 'rects': core_rects},
          'ko': {'src': 'art/chars/olivia-ko.webp' + AV, 'k': KO_, 'rects': ko_rects}}
-for sk, st in sets.items(): atlas[sk] = {'src': f'art/chars/olivia-{st["file"]}.webp' + AV, 'k': KB, 'rects': st['rects']}
 js = ["'use strict';",
       "// data/olivia-battle-hires.js: Olivia's painted battle stances from her 4 x 4 battle sheet (Nov 2026). GENERATED by tools/sprite-bake/bake_olivia_battle.py; do not hand-edit.",
       "// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js). Used by data/olivia-battle-use.js.",
       "const OLIVIA_BT={", "  atlas:" + json.dumps(atlas) + ",", "  core:{pal:" + json.dumps(core_pal) + ","]
 for k in SLOTS: js.append(f"    {k}:" + fmt_rows(core_rows[k]) + ",")
-js += ["  },", "  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows([r[::-1] for r in ko_rows['ko']]) + "},", "  sets:{"]
-for sk, st in sets.items():
-    js.append(f"  {sk}:{{pal:" + json.dumps(st['pal']) + ",rows:{")
-    for n, r in st['rows'].items(): js.append(f"    {n}:" + fmt_rows(r) + ",")
-    js.append("  }},")
-js += ["  }", "};"]
+js += ["  },", "  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows([r[::-1] for r in ko_rows['ko']]) + "}", "};"]
 open(OUT, 'w').write('\n'.join(js) + '\n')
 print('wrote', os.path.relpath(OUT, ROOT), os.path.getsize(OUT) // 1024, 'KB', '| idle rows', len(core_rows['idle']), 'x', len(core_rows['idle'][0]))
