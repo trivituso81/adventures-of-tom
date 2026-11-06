@@ -1791,7 +1791,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Loving | And Moo-rielle. Go. Love you. Don't tip your sister. |
 | Grace | Proud | Up, up. It's still my birthday. We go AGAIN. |
 | Grace | Angry | It's STILL my birthday. And you have my COW. |
-| Grace | Proud | It only does nines today. |
+| Grace | Happy | It only does nines today. |
 | Rose | Proud | I have a pepper in my pocket and I'm not afraid to use it. |
 | Tom | Unimpressed | Nobody's afraid of the pepper, Rose. Everybody ready? Warm things out. |
 | Grace | Scared | Tata, nothing WORKS. |

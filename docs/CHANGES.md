@@ -1,3 +1,9 @@
+## 2026-11-06 (347): Emotions batch 7: Nine Scoops shows mood faces and poses, all chapters done (`emo14`)
+- Nine Scoops is `STORY.chapter` 21 (`NS` in data/bonus-nine-scoops.js), so `tools/emotion-apply.py` now writes its keys as chapter 21 (it wrote `ns` before, which the engine would never match). Run it with `python3 tools/emotion-apply.py 1 ... 21`: chapter 21 found 150 of 150; `EMO_CHAPTERS` 1 to 21, `data/emotion-moods.js` 1687 keys.
+- One line, "It only does nines today." (Grace), appears twice in Nine Scoops with two moods (happy at line 620, proud at line 889) and keys cannot tell them apart: set both to happy in docs/emotion-index-lines.tsv and docs/EMOTION_INDEX.md.
+- Tested: all 1713 tagged lines in chapters 1 to 21 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
+- Tags: `emo14` (data/emotion-moods.js).
+
 ## 2026-11-06 (346): Walking heads: every adult's head height matches Tom's (`walkhead4`)
 - Head height (top of hair, cap or spike to chin) is now Tom's 11.17 on-screen rows for TNB, Justin, Boppy, Deedee, Amy, Olivia and Ellie. Each head is scaled uniformly (width follows height), so painted width-to-height proportions are unchanged. Body keeps the real total height, so bodies changed: Boppy +17%, Justin +10%, TNB +5%, Amy and Olivia about -5%. Grace and Rose keep walkhead3 (+15%), now with their true chin rows; `SPLASH_H` rose 185.
 - This corrects the chin px used in walkhead1 to 3 (partial-head warp). New `WALK_MATCH`/`GROW` in `tools/sprite-bake/walk_sheet_frames.py`; new `tools/sprite-bake/walk_splice.py` rebakes only the walk atlas and splices it into `data/<id>-hires.js` so battle art is untouched.
