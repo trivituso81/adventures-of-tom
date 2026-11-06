@@ -336,13 +336,15 @@ const SCENE_OPS={
   seq:o=>S.seq(...compileScene(o.seq)),
   if:o=>lazy(()=>{ const ok=typeof o.if==='function'?o.if():!!flag(o.if); return S.seq(...compileScene((ok?o.then:o.else)||[])); })
 };
-// A battle pose borrowed for a cutscene: a.scenePose={f:'hurtPose'|'kneel'|'ko'|...,dir:'left'|'right'} (set by the pose, knock and getup steps above).
+// A battle pose borrowed for a cutscene: a.scenePose={f:'hurtPose'|'kneel'|'ko'|...,dir:'left'|'right'}, or a painted story pose f:'st_reach' etc. (STORY_POSES) (set by the pose, knock and getup steps above).
 // Called by drawSheetActor (engine/town-render.js) with the overworld set and its scale k. Returns {rows,k,pal}, or null to draw the normal overworld frame.
 // Battle frames are about twice the overworld figure's height in rows, so they are drawn at k * (overworld rows / battle idle rows) to match Tom's size.
 // Battle frames face left; the KO frame faces right. A frame facing the wrong way is mirrored (cached on the rows).
 const SCENE_POSE_RATIO={};
 function scenePoseDraw(a,set,k) {
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member,P=a.scenePose; if(!m||!P) return null;
+  // A painted story pose (data/story-poses-use.js): already at the overworld row scale, facing the camera as painted, no outfit tint.
+  const st=typeof STORY_POSES!=='undefined'&&STORY_POSES[m.id]; if(st&&st[P.f]) return {rows:st[P.f],k,pal:st.pal,story:true};
   const sp=BATTLE_SPRITES[m.id]; if(!sp) return null;
   let rows,native='left',pal=sp.pal,rel=1;
   if(P.f==='ko') { const ko=typeof KO_SPRITES!=='undefined'&&KO_SPRITES[m.id]; if(!ko) return null; rows=ko.rows; native='right'; pal=ko.pal||pal; rel=(ko.scale||sp.scale)/sp.scale; }

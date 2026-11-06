@@ -69,11 +69,11 @@ function loadMenu() {
 }
 function endIntro() {
   intro.active=false; intro.phase=''; intro.steps=[]; intro.cur=null;
-  intro.bubble=null; intro.squishy=null; intro.showcase=null; intro.stretch=null; intro.hearts=[];
+  intro.bubble=null; intro.squishy=null; intro.showcase=null; intro.hearts=[];
   for(const k of intro.noGo) { if(typeof k==='string') town.npcNoGo.delete(k); else k.map.npcNoGo.delete(k.k); }
   intro.noGo=[]; intro.fadeLock=false; intro.card=null;
-  player.hidden=false; player.scr=null; player.lift=0;
-  for(const f of followers) { f.hidden=false; f.scr=null; f.lift=0; f.depthBias=0; f.noShadow=false; f.seat=false; }
+  player.hidden=false; player.scr=null; player.lift=0; player.scenePose=null;
+  for(const f of followers) { f.hidden=false; f.scr=null; f.lift=0; f.depthBias=0; f.noShadow=false; f.seat=false; f.scenePose=null; }
 }
 
 // ---------- Step helpers ----------
@@ -121,13 +121,15 @@ function hugStep() {
     }};
 }
 
-// Tom stretches after six hours in the cab line: arms up over his head, up on his toes, a long exhale.
-const STRETCH_DUR=2.4; // seconds for the painted stretch (was 5.2, too long)
+// Tom stretches after six hours in the cab line: his eight painted stretch poses (data/story-poses.js, storypose1) in order, facing the camera.
+const STRETCH_DUR=2.4; // seconds for the whole stretch
+const STRETCH_SEQ=[['st_stiff',0],['st_rise',.1],['st_reach',.22],['st_bendl',.42],['st_bendr',.54],['st_push',.66],['st_exhale',.76],['st_fresh',.88]];
 function stretchStep() {
-  return {t:0,start(){ this.t=0; this.s2=false; player.facing='down'; intro.stretch={t:0}; snd.stretch(); },
-    update(dt){ this.t+=dt; if(TOM_STRETCH&&!this.s2&&this.t>STRETCH_DUR*.75) { this.s2=true; snd.stretch(); } const u=Math.min(1,this.t/(TOM_STRETCH?STRETCH_DUR:1.6));
-      intro.stretch.t=this.t;
-      if(u>=1) { intro.stretch=null; player.hidden=false; return true; } return false; }};
+  return {t:0,start(){ this.t=0; this.s2=false; player.facing='down'; player.scenePose={f:'st_stiff'}; snd.stretch(); },
+    update(dt){ this.t+=dt; if(!this.s2&&this.t>STRETCH_DUR*.75) { this.s2=true; snd.stretch(); }
+      const u=Math.min(1,this.t/STRETCH_DUR); let f='st_stiff'; for(const [n,at] of STRETCH_SEQ) if(u>=at) f=n;
+      player.scenePose={f};
+      if(u>=1) { player.scenePose=null; return true; } return false; }};
 }
 // Little character sounds for the opening, built on the game's synth (tone and noise).
 const snd={
@@ -140,61 +142,12 @@ const snd={
   sparkle(){ [1568,2093,2637,3136,2637,3136].forEach((f,i)=>tone({type:'triangle',f0:f,dur:.12,vol:.07,delay:i*.07})); noise({dur:.5,vol:.04,f0:6000,f1:8000,delay:.1}); },
   stretch(){ tone({type:'sine',f0:300,f1:520,dur:.6,vol:.1,sweep:'linear'}); tone({type:'sine',f0:520,f1:220,dur:.7,vol:.09,delay:.75,sweep:'linear'}); noise({dur:.5,vol:.04,f0:900,f1:300,type:'lowpass',delay:.8}); }
 };
-// Tom's stretch pose, built from his front overworld frame: the hanging arms are erased and redrawn raised over his head.
-// pose 1 = arms halfway up (hands by his ears), 2 = full stretch (hands together above his head).
-const STRETCH_PAD=10,stretchFrames={};
-function stretchFrame(pose) {
-  if(stretchFrames[pose]) return stretchFrames[pose];
-  const src=OW.tom.down[0],w=src[0].length,h=src.length,P=STRETCH_PAD;
-  const g=[]; for(let y=0;y<h+P;y++) g.push(new Array(w).fill('.'));
-  for(let y=0;y<h;y++) for(let x=0;x<w;x++) g[y+P][x]=src[y][x];
-  // Erase the hanging arms (left columns 0-5 and right columns 21+, rows 26-35 of the sheet).
-  for(let y=26;y<=35;y++) for(let x=0;x<w;x++) if(x<=5||x>=21) g[y+P][x]='.';
-  const put=(x,y,c)=>{ x=Math.round(x); y=Math.round(y)+P; if(y>=0&&y<g.length&&x>=0&&x<w) g[y][x]=c; };
-  const stroke=(pts,r,c)=>{ for(let i=0;i<pts.length-1;i++) { const [x0,y0]=pts[i],[x1,y1]=pts[i+1],n=Math.ceil(Math.hypot(x1-x0,y1-y0)*3);
-    for(let k=0;k<=n;k++) { const cx=x0+(x1-x0)*k/n,cy=y0+(y1-y0)*k/n; for(let dy=-r;dy<=r;dy++) for(let dx=-r;dx<=r;dx++) if(dx*dx+dy*dy<=r*r+.5) put(cx+dx,cy+dy,c); } } };
-  const L=pose===2?[[4,24],[2,12],[5,1],[10,-6]]:[[4,24],[1,16],[2,6]];
-  const R=L.map(([x,y])=>[w-1-x,y]);
-  for(const arm of [L,R]) {
-    stroke(arm,2,'a');
-    stroke(arm.slice(0,2),1,'d');                 // sleeve
-    stroke(arm.slice(1),1,'w');                   // forearm
-    const [hx,hy]=arm[arm.length-1]; stroke([[hx,hy],[hx,hy]],1,'w'); put(hx,hy,'u');
-  }
-  return (stretchFrames[pose]={rows:g.map(r=>r.join('')),pad:P});
-}
-function stretchPose(u) { return u<.12||u>.92?0:(u<.26||u>.8?1:2); }
-// Painted Tom (data/tom-hires-use.js): tired, start, full, side, crack, neck, exhale, fresh over STRETCH_DUR seconds.
-const STRETCH_SEQ=[['tired',0],['start',.1],['full',.22],['side',.42],['crack',.54],['neck',.66],['exhale',.76],['fresh',.88]];
-function drawStretchPainted(time) {
-  const u=Math.min(1,intro.stretch.t/STRETCH_DUR);
-  let name='tired'; for(const [n,a] of STRETCH_SEQ) if(u>=a) name=n;
-  player.hidden=true;
-  // Same scale as his walk sprite (actorK: 1.2 on outdoor maps), or he shrinks when the stretch starts.
-  const rows=TOM_STRETCH[name],p=position(player),w=rows[0].length,h=rows.length,ak=actorK()*(OW.tom.k||1)*owBoost(player),wk=w*ak,hk=h*ak;
-  const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),bob=name==='exhale'?Math.round(Math.sin(intro.stretch.t*5)*ak):0;
-  ellipse(cx,base+1,Math.round(wk*.4),Math.round(4*ak),'#2f493640');
-  drawSprite(rows,OW.tom.pal,cx-Math.floor(wk/2),Math.round(base-hk+bob),ak);
-  if(name==='full') { const k=(u-.22)/.2; gfx.globalAlpha=Math.max(0,1-Math.abs(k-.5)*2); label('~',cx+Math.round(22*ak),base-Math.round(hk)+Math.round(16*ak)-Math.round(k*10),'#fff1cb',2); label('~',cx-Math.round(23*ak),base-Math.round(hk)+Math.round(22*ak)-Math.round(k*10),'#fff1cb',2); gfx.globalAlpha=1; }
-  if(name==='fresh'&&u>=.97) player.hidden=false;
-}
-function drawStretch(time) {
-  if(TOM_STRETCH) return drawStretchPainted(time);
-  const u=Math.min(1,intro.stretch.t/1.6),pose=stretchPose(u);
-  if(!pose) { player.hidden=false; return; }
-  player.hidden=true;
-  const p=position(player),f=stretchFrame(pose),ak=actorK()*(OW.tom.k||1),w=f.rows[0].length*ak,h=f.rows.length*ak;
-  const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2),lift=pose===2?2:0;
-  ellipse(cx,base+1,Math.round(w*.45),Math.round(4*ak),'#2f493640');
-  drawSprite(f.rows,OW.tom.pal,cx-Math.floor(w/2),Math.round(base-h-lift*ak),ak);
-  if(pose===2) { const k=(u-.26)/.54; gfx.globalAlpha=Math.max(0,1-Math.abs(k-.5)*2); label('~',cx+20,base-h+10-Math.round(k*10),'#fff1cb',2); label('~',cx-21,base-h+16-Math.round(k*10),'#fff1cb',2); gfx.globalAlpha=1; }
-}
-
 // ---------- The opening scene ----------
 const SHOULDER=28; // px: Rose's feet sit at Tom's shoulders
 // The script lives in data/scenes.js (SCENES.opening) and runs on the story engine's scene format (engine/story.js).
 function beginOpening() {
   intro.phase='scene';
+  if(typeof storyPosesLoad==='function') { storyPosesLoad('tom'); storyPosesLoad('grace'); }   // Tom's stretch and Grace's squishy poses
   playScene('opening',{fade:.7});
 }
 function finishOpening() {
@@ -230,10 +183,9 @@ function updateIntro(dt) {
   }
 }
 
-// World-space extras: the shout bubble, hearts, and the squishy over Grace's head.
+// World-space extras: the shout bubble, hearts, and a scene's prop over a girl's head.
 function drawIntroWorld(time) {
   const {g,r}=IA();
-  if(intro.stretch) drawStretch(time);
   if(intro.bubble) {
     const sc=2,txt=intro.bubble.text,w=txt.length*4*sc+12;
     // Shouted from off to the left: pin it to the left edge of the screen until the girls are in view.
@@ -247,13 +199,13 @@ function drawIntroWorld(time) {
     drawHeart(Math.round(hh.x*T),Math.round(hh.y*T-hh.t*30-14-44*(actorK()-1)),1+Math.max(0,1-hh.t/.3)*.6);   // pops in above his head (same lift as the kiss hearts), then settles
     gfx.globalAlpha=1;
   }
-  // The squishy over a girl's head: Grace's dumpling by default; a scene may pass its own {sprite, pal, who:'rose'} (Nine Scoops).
+  // A held prop over a girl's head: a scene passes its own {sprite, pal, who:'rose'} (Nine Scoops). Grace holds her dumpling in her painted poses in the opening (storypose1).
   const sqA=intro.squishy&&intro.squishy.who==='rose'?r:g;
-  if(intro.squishy&&sqA&&!sqA.hidden) {
-    const p=position(sqA),u=Math.min(1,intro.squishy.t/.35),SQ=intro.squishy.sprite||SQUISHY,SP=intro.squishy.pal||SQUISHY_PAL;
+  if(intro.squishy&&intro.squishy.sprite&&sqA&&!sqA.hidden) {
+    const p=position(sqA),u=Math.min(1,intro.squishy.t/.35),SQ=intro.squishy.sprite,SP=intro.squishy.pal;
     const fr=OW[sqA===r?'rose':'grace'].down[0],gh=fr.length;
     const cx=Math.round((p.x+.5)*T),top=Math.round((p.y+1)*T-2-gh-6-u*8+Math.sin(time*4)*1.5);
-    if(intro.squishy.sprite||typeof PROPART==='undefined'||!PROPART.draw(SQUISHY_HERO,cx,top-12,{h:26})) drawSprite(SQ,SP,cx-Math.round(SQ[0].length/2),top-SQ.length,1);   // painted unless the scene brings its own pixel prop
+    drawSprite(SQ,SP,cx-Math.round(SQ[0].length/2),top-SQ.length,1);
     if(!intro.squishy.plain) sparkles(cx,top-7,14,time,1);
   }
 }

@@ -62,9 +62,10 @@ function drawSheetActor(a,set) {
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
   if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round(wk*.45),Math.round(4*k),'#2f493640');
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
-  activeTint=painted?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
+  const noTint=painted||!!(bp&&bp.story);   // story poses are drawn as painted
+  activeTint=noTint?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,true,k);
-  activeTint=painted?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
+  activeTint=noTint?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
   drawSprite(fr,bp?bp.pal:set.pal,cx-Math.floor(wk/2),Math.round(base-hk),kd);
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,false,k);
   activeTint=null;

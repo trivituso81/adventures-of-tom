@@ -53,24 +53,33 @@ def _key(rgb):
     col[:, :, 1] = np.where(near, np.minimum(col[:, :, 1], np.maximum(gmax, F[:, :, 1])), col[:, :, 1])
     return np.dstack([np.clip(col, 0, 255), al * 255]).astype(np.uint8)
 
-def build(cid):
-    path = os.path.join(RAW, f'{cid}-walk-sheet-v1.png')
+def grid(path, ncols, nrows):
+    """Cut the ncols x nrows figures of one magenta pose sheet. Returns RGBA crops in reading order (row by row, left to right)."""
     rgba = _key(np.array(Image.open(path).convert('RGB')))
     A = rgba[:, :, 3] > 20
     lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
     objs = [s for s in ndi.find_objects(lab)]
     sizes = ndi.sum(A, lab, range(1, n + 1))
-    big = sorted([i for i in range(n) if sizes[i] > 3000], key=lambda i: sizes[i])[-9:]
-    assert len(big) == 9, (cid, len(big))
+    N = ncols * nrows
+    big = sorted([i for i in range(n) if sizes[i] > 3000], key=lambda i: sizes[i])[-N:]
+    assert len(big) == N, (path, len(big))
     boxes = [(objs[i], i + 1) for i in big]
     boxes.sort(key=lambda b: (b[0][0].start + b[0][0].stop) / 2)
-    rows = [sorted(boxes[r * 3:r * 3 + 3], key=lambda b: b[0][1].start) for r in range(3)]
+    rows = [sorted(boxes[r * ncols:r * ncols + ncols], key=lambda b: b[0][1].start) for r in range(nrows)]
+    out = []
+    for r in range(nrows):
+        for c in range(ncols):
+            (sy, sx), li = rows[r][c]
+            cut = rgba[sy, sx].copy(); cut[lab[sy, sx] != li, 3] = 0
+            im = Image.fromarray(cut, 'RGBA'); out.append(im.crop(im.getbbox()))
+    return out
+
+def build(cid):
+    figs = grid(os.path.join(RAW, f'{cid}-walk-sheet-v1.png'), 3, 3)
     out = {}
     for r in range(3):
         for c in range(3):
-            (sy, sx), li = rows[r][c]
-            cut = rgba[sy, sx].copy(); cut[lab[sy, sx] != li, 3] = 0
-            im = Image.fromarray(cut, 'RGBA'); out['w_' + NAMES[r][c]] = im.crop(im.getbbox())
+            out['w_' + NAMES[r][c]] = figs[r * 3 + c]
     out['w_down_pass'], out['w_up_pass'], out['w_left_pass'] = out['w_down_stand'], out['w_up_stand'], out['w_left_stand']
     return out
 

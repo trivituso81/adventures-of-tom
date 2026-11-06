@@ -4,7 +4,7 @@
 const SCENES={};
 
 // The opening (START NEW): Tom steps out of Long Island Taxi Co. alone, Grace and Rose shout TATA!!! and run in from the west,
-// jump on him for a hug, Rose climbs onto his shoulders, Grace shows off her squishy, then both join the party.
+// jump on him for a hug, Rose climbs onto his shoulders, Grace shows off her squishy (painted poses), then both join the party.
 SCENES.opening=()=>{
   const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
   const gTiles=[],rTiles=[];
@@ -38,15 +38,23 @@ SCENES.opening=()=>{
     {trace:'rose-shoulders'}, {flag:'tombo:rose1'},   // Double-Decker Airplane unlocks here (chapter 1)
     {talk:'Rose',lines:['I\'m the tallest! Giddyup, Tata!'],voice:[['rose','intro3']]},
     {talk:'Tom',lines:['Hello, Rose. Please keep your arms and legs inside the uncle at all times.'],voice:[['tom','intro2']]},
-    {face:'grace',dir:'right'}, {call:()=>{ intro.squishy={t:0}; snd.squeak(); }},
-    {wait:.7},
-    {call:()=>{ intro.showcase={t:0}; snd.sparkle(); }},
-    {talk:'Grace',lines:["Tata, LOOK. A sparkling diamond gold dumpling squishy!","It's limited edition. There are only two in the whole world. You can squeeze it!"],voice:[['grace','intro3'],['grace','intro4']]},
-    {call:()=>{ intro.showcase=null; snd.squeak(); }},
+    // Grace's painted squishy poses (data/story-poses.js, storypose1): hide it, reveal, hold it up high, then the close-up.
+    {pose:'grace',f:'sq_hide'}, {wait:.55},
+    {pose:'grace',f:'sq_reveal'}, {call:()=>snd.squeak()}, {wait:.45},
+    {pose:'grace',f:'sq_raise'}, {call:()=>snd.gasp()}, {wait:.6},
+    {pose:'grace',f:'sq_show'}, {call:()=>{ intro.showcase={t:0}; snd.sparkle(); }},
+    {talk:'Grace',lines:["Tata, LOOK. A sparkling diamond gold dumpling squishy!"],voice:[['grace','intro3']]},
+    {pose:'grace',f:'sq_careful'},
+    {talk:'Grace',lines:["It's limited edition. There are only two in the whole world. You can squeeze it!"],voice:[['grace','intro4']]},
+    {call:()=>{ intro.showcase=null; }},
+    {pose:'grace',f:'sq_squeeze'}, {call:()=>{ snd.squeak(); setTimeout(()=>snd.squeak(),380); }}, {wait:.8},
     {flag:'saw-squishy'}, {flag:'tombo:grace1'},      // Squishy Delivery unlocks here (chapter 1)
+    {pose:'grace',f:'sq_hug'},
     {talk:'Tom',lines:['That\'s the shiniest dumpling I\'ve ever seen. And I\'ve seen a LOT of dumplings.'],voice:[['tom','intro3']]},
+    {pose:'grace',f:'sq_wave'},
     {talk:'Rose',lines:["Come on, Tata! Let's go!"],voice:[['rose','intro4']]},
-    {call:()=>{ intro.squishy=null; snd.whee(true); const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
+    {pose:'grace'},
+    {call:()=>{ snd.whee(true); const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
     {hop:'rose',from:[dx,row],to:[dx-1,row+1],time:.45,arc:14,lift:[SHOULDER,0]},
     {flag:'opening-done'},
     {call:finishOpening}

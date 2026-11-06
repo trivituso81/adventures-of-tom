@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Bake Tom (overworld walk frames are the nine figures of Tom's painted 3 x 3 walk sheet as painted, see tools/sprite-bake/walk_sheet_frames.py; battle from the two painted battle sheets, custom and stretch as before). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom (overworld walk frames are the nine figures of Tom's painted 3 x 3 walk sheet as painted, see tools/sprite-bake/walk_sheet_frames.py; battle from the two painted battle sheets, custom as before; the arrival stretch is tools/sprite-bake/bake_story_poses.py since storypose1). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : art/raw/characters/tom-battle-sheet-1-v1.png and tom-battle-sheet-2-v1.png (battle, as painted, 2026-11-05); older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
+Input : art/raw/characters/tom-battle-sheet-1-v1.png and tom-battle-sheet-2-v1.png (battle, as painted, 2026-11-05); older extra pose sheets (tom-xposes-1 to 8) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
         data/tom-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -38,9 +38,8 @@ from battle_sheet_frames import build as _build_battle, SLOTS
 _bf = _build_battle('tom')
 for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
 poses['b_dizzy'] = _bf['b_dizzy']
-# Extra poses and the arrival stretch: nine 5-frame sheets (Nov 2026, painted, same character as the battle sheet), tom-xposes-N-v1.png.
-# Prefix c = custom battle pose (f:'<name>' in a move's keys), s = arrival stretch frame.
-STRETCH = ['tired', 'start', 'full', 'side', 'crack', 'neck', 'exhale', 'fresh']
+# Extra poses: eight 5-frame sheets (Nov 2026, painted, same character as the battle sheet), tom-xposes-N-v1.png.
+# Prefix c = custom battle pose (f:'<name>' in a move's keys). The last three cells of sheet 8 were the old arrival stretch (unused since storypose1).
 XSHEETS = [
     ['c:hold', 'c:annoyed', 'c:tw_windup', 'c:tw_follow', 'c:limit'],
     ['c:carry', 'c:raise', 'c:lidpop', 'c:splash', 'c:goo'],
@@ -49,12 +48,12 @@ XSHEETS = [
     ['c:bowlsit', 'c:spook', 'c:scream', 'c:cower', 'c:frozen'],
     ['c:bowlthrow', 'c:startled', 'c:direct', 'c:floorsit', 'c:lying'],
     ['c:cartwheel', 'c:facedown', 'c:rope', 'c:stirrup', 'c:strain'],
-    ['c:toast', 'c:plates', 's:tired', 's:start', 's:full'],
-    ['s:side', 's:crack', 's:neck', 's:exhale', 's:fresh'],
+    ['c:toast', 'c:plates', 'x:a', 'x:b', 'x:c'],
 ]
 for i, names in enumerate(XSHEETS, 1):
     for nm, im in slice_sheet(os.path.join(SRC, f'tom-xposes-{i}-v1.png'), [[n.split(':')[1] for n in names]]).items():
-        poses[next(n for n in names if n.split(':')[1] == nm).replace(':', '_')] = im
+        full = next(n for n in names if n.split(':')[1] == nm)
+        if full[0] == 'c': poses[full.replace(':', '_')] = im
 # Walk: Tom's overworld frames are the nine figures of his 3 x 3 walk sheet (art/raw/characters/tom-walk-sheet-v1.png, Tom 2026-11-05 22:56), as painted.
 from defringe import defringe
 from walk_sheet_frames import build as _build_walk
@@ -78,7 +77,7 @@ def _auto_head(img):
     chin = lo + int(np.argmin(ws[lo:hi]))
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, max(0, int(xs.min()) - 6), int(xs.max()) + 6
-HEAD_BOX = {'s_full': (55, 185, 122, 232), 's_side': (85, 225, 70, 205), 's_neck': (15, 178, 35, 190), 's_crack': (5, 160, 140, 282)}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
+HEAD_BOX = {}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
 SIDE = {}
 # Heads that are not on top (lying, face down, cartwheel, all fours, hands over the face): the region (x0, y0, x1, y1) is scaled by k about the
 # neck point (ax, ay), chosen so the head grows away from the floor and the body. Source px, read off rulers.
@@ -150,10 +149,6 @@ if os.environ.get('RULER'):               # RULER=name,name DIR=...: source pose
     sys.exit(0)
 for _n in list(poses):
     if _n[:2] == 'c_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
-# Arrival stretch head factor (the overworld walk is the walk sheet as painted).
-HEAD_KW = 1.626   # pinned: the arrival stretch art must not change
-for _n in list(poses):
-    if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames keep the head as painted
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -323,13 +318,7 @@ fo = args.ow_h * KW / OW_STAND_H
 print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (poses["w_down_stand"].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
-# arrival stretch (town view, facing the camera): scaled so the relaxed standing pose matches the walk sprite's standing height
-fs = fo * OW_STAND_H / poses['s_fresh'].height
-st_big = tighten(place({c: scaled_to(poses['s_' + c], fs) for c in STRETCH}, KW, 'center'), KW)
-ow_pal, all_ow_rows = rows_of({**ow_big, **st_big}, KW, args.colors)
-ow_rows = {k: all_ow_rows[k] for k in ow_big}
-st_rows = {k: all_ow_rows[k] for k in st_big}
-st_rects = pack(st_big, os.path.join(ART, 'tom-stretch.webp'))
+ow_pal, ow_rows = rows_of(ow_big, KW, args.colors)
 ow_rects = pack(ow_big, os.path.join(ART, 'tom-ow.webp'))
 
 def mirror(rows):
@@ -366,7 +355,6 @@ meta = {
 }
 atlas = {'bt': {'src': 'art/chars/tom-battle.webp', 'k': KB, 'rects': bt_rects},
          'pose': {'src': 'art/chars/tom-poses.webp', 'k': KB, 'rects': cu_rects},
-         'stretch': {'src': 'art/chars/tom-stretch.webp', 'k': KW, 'rects': st_rects},
          'ko': {'src': 'art/chars/tom-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/tom-ow.webp', 'k': KW, 'rects': ow_rects}}
 print(json.dumps(meta))
@@ -383,7 +371,6 @@ for k in SLOTS:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  pose:{" + ",".join(f"{k}:" + fmt_rows(cu_rows[k]) for k in CUSTOM) + "},")
-js.append("  stretch:{" + ",".join(f"{k}:" + fmt_rows(st_rows[k]) for k in STRETCH) + "},")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):
