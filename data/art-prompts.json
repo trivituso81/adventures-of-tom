@@ -3765,7 +3765,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Loose Wire.\n\nRow 1:\n1. Standing with his head tilted, squinting at something ahead, a puzzled handyman look.\n2. Reaching forward with one hand and pinching a loose wire, eyes narrowed.\n3. Yanking the wire back toward himself with a strong pull, teeth gritted.\n\nRow 2:\n4. Holding a long wire with a bare copper tip, jabbing the tip forward, a fierce look.\n5. Flinching with a zap, hair standing up a little, eyes wide, small sparks at his fingers.\n6. Shaking his stinging hand out, wincing, then a sheepish grin."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "justin-ab-drywall",
    "tab": "Characters",
    "group": "Justin",
@@ -3777,7 +3777,16 @@
     "art/raw/characters/justin-battle-sheet-1-v1.png",
     "art/raw/characters/justin-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: DRYWALL.\n\nRow 1:\n1. Carrying a big flat sheet of drywall under one arm, a steady work face.\n2. Standing the sheet upright in front of himself with both hands, bracing it.\n3. Holding the sheet steady with one hand and a cordless screw gun in the other, lining it up.\n\nRow 2:\n4. Driving a screw into the sheet with the screw gun, leaning into it, focused.\n5. Pressing his shoulder against the sheet, squinting along its edge to check it is straight.\n6. Stepping back with his hands on his hips, a proud nod at the finished wall."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: DRYWALL.\n\nRow 1:\n1. Carrying a big flat sheet of drywall under one arm, a steady work face.\n2. Standing the sheet upright in front of himself with both hands, bracing it.\n3. Holding the sheet steady with one hand and a cordless screw gun in the other, lining it up.\n\nRow 2:\n4. Driving a screw into the sheet with the screw gun, leaning into it, focused.\n5. Pressing his shoulder against the sheet, squinting along its edge to check it is straight.\n6. Stepping back with his hands on his hips, a proud nod at the finished wall.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/justin-ab-drywall-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793995656085
+    }
+   ]
   },
   {
    "status": "draft",
