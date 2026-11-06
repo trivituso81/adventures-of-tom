@@ -567,12 +567,19 @@ function drawActor(a) {
   if(a.monster) {
     const p=position(a);
     const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
-    const bob=Math.round(Math.sin(elapsedTime*3))*1;
     if(a.scenePose&&typeof mudlingHeistDraw==='function'&&mudlingHeistDraw(a,cx,base)) return;   // painted heist frames (engine/story.js)
     const d=monsterDef(a),s=a.mscale||1,w=d.sprite[0].length*s,h=d.sprite.length*s;   // mscale: drawn bigger (a story monster)
-    ellipse(cx,base+1,Math.round(w*.47),5*s,'#2f493640');
-    drawSprite(d.sprite,d.pal,cx-Math.round(w/2),base-h+bob,s);
-    if(typeof drawActorExtra==='function') drawActorExtra(a,cx,base-h+bob,w,h);   // engine/story.js: a carried pie tin, a pie-tin crown
+    // Same rule as battle (Tom, 2026-11-05): grounded monsters never leave the ground (a tiny stretch anchored at the feet, shadow under the
+    // feet); flyers (B2_FLYERS, engine/battle2-ui.js) hover off the ground and bob at the original pace, their shadow stays down.
+    const fly=typeof B2_FLYERS!=='undefined'&&B2_FLYERS.has(a.monster);
+    const hover=fly?Math.round(h*.1)-Math.round(Math.sin(elapsedTime*3)):0;
+    const breath=fly?0:(.5+.5*Math.sin(elapsedTime*1.7+(a.x||0)+(a.y||0)))*.008;
+    const ft=feetOf(d.sprite);
+    ellipse(cx+Math.round(ft.dx*s),base-1,Math.round(Math.max(ft.w*s*.62,w*.3)*(fly?.8:1)),5*s,fly?'#2f493630':'#2f493648');
+    if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); }
+    drawSprite(d.sprite,d.pal,cx-Math.round(w/2),base-h-hover,s);
+    if(breath) gfx.restore();
+    if(typeof drawActorExtra==='function') drawActorExtra(a,cx,base-h-hover,w,h);   // engine/story.js: a carried pie tin, a pie-tin crown
     return;
   }
   if(a.isPlayer) { drawSheetActor(a,OW[typeof playerSkinId==='function'?playerSkinId():'tom']); return; }   // TNB while Tom is gone (engine/tom-gone.js)
