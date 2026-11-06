@@ -2055,7 +2055,7 @@
     "docs/reference/underpaint/mudling-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else. make sure it has a handbrushed painted look and feel\n\nWHAT THIS IS\nThe battle sheet of the enemy MUDLING (a regular enemy, level 1) for \"The Adventures of Tom\", a family role-playing game: 4 poses of the same character in a single row. The game puts it in front of a painted background of a sunlit pond ringed by reeds with big leafy trees, so its colors and handbrushed painted texture should feel at home there, painted in the same way as the area painting, but it must still stand out clearly against it.\n\nATTACHED IMAGES (in this order)\n1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.\n2. The AREA PAINTING of a sunlit pond ringed by reeds with big leafy trees: the place Mudling lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint Mudling as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.\n3. A LIKENESS picture of Mudling drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw Mudling from scratch, handbrushed and painted, keeping the same character.\n\nSTYLE RULE (the most important instruction)\nEvery frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.\n\nART STYLE\n- A whimsical storybook illustration of a creature, painted by hand with real brushes in a rich, dense, jewel-toned style, exactly like the illustrated school-yard painting of the style key and the area painting. Up close it looks like an oil or gouache painting on canvas: visible individual brush strokes that follow the shape of every form, layered paint, fine painted texture, small hand-made variations of color from one stroke to the next, and a faint canvas grain. Gently simplified shapes. Friendly-scary, funny and full of personality, never grim. This is a game for a family with a 6 and a 9 year old.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp, painterly edges with fine detail, formed where one brush stroke meets the next. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nTHE CREATURE\nMUDLING: a squat dome of wet brown mud with one green sprout on its crown, two small bright eyes, a tiny open mouth and stubby dripping mud arms. It is about 16 inches tall (1.3 feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.\n\nTHE SHEET (strict)\n- A single horizontal row of 4 equal square cells, 256 x 256 pixels each, so the full image is 1024 x 256 pixels. If your tool cannot make that exact shape, keep exactly 4 cells in one row and make the image as wide as it allows.\n- Exactly 4 frames, one per cell, from left to right, in the numbered order below.\n- MUDLING FACES RIGHT in every frame (toward the right side of the image), as if facing the family on the right of a battle screen. Seen from the side or three quarters, slightly from above.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature. No magenta glow, spill, tint or fringe on its edges. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Same scale in every cell: the standing creature is about 80 pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.\n- Draw ONLY MUDLING. No effects, motion lines, sparkles, other characters, props that are not part of it, text or word balloons.\n- The same colors, details and level of painted detail in every frame.\n\nTHE 4 FRAMES\n1. STANCE: battle stance, idle and ready, weight settled.\n2. FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.\n3. ATTACK A: the wind-up for its signature attack, Mud Pie.\n4. ATTACK B: the attack landing.\n\nFamily friendly for ages 6 and up. Keep the flinch frame comic, never grim.\n\nNEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw MUDLING in the pose described, facing right, with the shape and colors of the likeness in attachment 3.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else. make sure it has a handbrushed painted look and feel\n\nWHAT THIS IS\nThe battle sheet of the enemy MUDLING (a regular enemy, level 1) for \"The Adventures of Tom\", a family role-playing game: 4 poses of the same character in a single row. The game puts it in front of a painted background of a sunlit pond ringed by reeds with big leafy trees, so its colors and handbrushed painted texture should feel at home there, painted in the same way as the area painting, but it must still stand out clearly against it.\n\nATTACHED IMAGES (in this order)\n1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.\n2. The AREA PAINTING of a sunlit pond ringed by reeds with big leafy trees: the place Mudling lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint Mudling as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.\n3. A LIKENESS picture of Mudling drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw Mudling from scratch, handbrushed and painted, keeping the same character.\n\nSTYLE RULE (the most important instruction)\nEvery frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.\n\nART STYLE\n- A whimsical storybook illustration of a creature, painted by hand with real brushes in a rich, dense, jewel-toned style, exactly like the illustrated school-yard painting of the style key and the area painting. Up close it looks like an oil or gouache painting on canvas: visible individual brush strokes that follow the shape of every form, layered paint, fine painted texture, small hand-made variations of color from one stroke to the next, and a faint canvas grain. Gently simplified shapes. Friendly-scary, funny and full of personality, never grim. This is a game for a family with a 6 and a 9 year old.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp, painterly edges with fine detail, formed where one brush stroke meets the next. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nTHE CREATURE\nMUDLING: a squat dome of wet brown mud with one green sprout on its crown, two small bright eyes, a tiny open mouth and stubby dripping mud arms. It is about 16 inches tall (1.3 feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.\n\nTHE SHEET (strict)\n- A single horizontal row of 4 equal square cells, 256 x 256 pixels each, so the full image is 1024 x 256 pixels. If your tool cannot make that exact shape, keep exactly 4 cells in one row and make the image as wide as it allows.\n- Exactly 4 frames, one per cell, from left to right, in the numbered order below.\n- MUDLING FACES RIGHT in every frame (toward the right side of the image), as if facing the family on the right of a battle screen. Seen from the side or three quarters, slightly from above.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature. No magenta glow, spill, tint or fringe on its edges. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Same scale in every cell: the standing creature is about 80 pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.\n- Draw ONLY MUDLING. No effects, motion lines, sparkles, other characters, props that are not part of it, text or word balloons.\n- The same colors, details and level of painted detail in every frame.\n\nTHE 4 FRAMES\n1. STANCE: battle stance, idle and ready, weight settled.\n2. FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.\n3. ATTACK A: the wind-up for its signature attack, Mud Pie.\n4. ATTACK B: the attack landing.\n\nFamily friendly for ages 6 and up. Keep the flinch frame comic, never grim.\n\nNEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw MUDLING in the pose described, facing right, with the shape and colors of the likeness in attachment 3.\nBackground: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient.",
    "group": "Grump Hollow"
   },
   {
@@ -2079,7 +2079,7 @@
     "docs/reference/underpaint/skeeter-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else. make sure it has a handbrushed painted look and feel\n\nWHAT THIS IS\nThe battle sheet of the enemy SKEETER SWARM (a regular enemy, level 2) for \"The Adventures of Tom\", a family role-playing game: 4 poses of the same character in a single row. The game puts it in front of a painted background of a sunlit pond ringed by reeds with big leafy trees, so its colors and handbrushed painted texture should feel at home there, painted in the same way as the area painting, but it must still stand out clearly against it.\n\nATTACHED IMAGES (in this order)\n1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.\n2. The AREA PAINTING of a sunlit pond ringed by reeds with big leafy trees: the place Skeeter Swarm lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint Skeeter Swarm as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.\n3. A LIKENESS picture of Skeeter Swarm drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw Skeeter Swarm from scratch, handbrushed and painted, keeping the same character.\n\nSTYLE RULE (the most important instruction)\nEvery frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.\n\nART STYLE\n- A whimsical storybook illustration of a creature, painted by hand with real brushes in a rich, dense, jewel-toned style, exactly like the illustrated school-yard painting of the style key and the area painting. Up close it looks like an oil or gouache painting on canvas: visible individual brush strokes that follow the shape of every form, layered paint, fine painted texture, small hand-made variations of color from one stroke to the next, and a faint canvas grain. Gently simplified shapes. Friendly-scary, funny and full of personality, never grim. This is a game for a family with a 6 and a 9 year old.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp, painterly edges with fine detail, formed where one brush stroke meets the next. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nTHE CREATURE\nSKEETER SWARM: a ragged swarm of a dozen red-eyed mosquitoes with pale blue wings around one bigger skeeter in the middle. It is about 20 inches tall (1.7 feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.\n\nTHE SHEET (strict)\n- A single horizontal row of 4 equal square cells, 256 x 256 pixels each, so the full image is 1024 x 256 pixels. If your tool cannot make that exact shape, keep exactly 4 cells in one row and make the image as wide as it allows.\n- Exactly 4 frames, one per cell, from left to right, in the numbered order below.\n- SKEETER SWARM FACES RIGHT in every frame (toward the right side of the image), as if facing the family on the right of a battle screen. Seen from the side or three quarters, slightly from above.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature. No magenta glow, spill, tint or fringe on its edges. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Same scale in every cell: the standing creature is about 100 pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.\n- Draw ONLY SKEETER SWARM. No effects, motion lines, sparkles, other characters, props that are not part of it, text or word balloons.\n- The same colors, details and level of painted detail in every frame.\n\nTHE 4 FRAMES\n1. STANCE: battle stance, idle and ready, weight settled.\n2. FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.\n3. ATTACK A: the wind-up for its signature attack, Whine.\n4. ATTACK B: the attack landing.\n\nFamily friendly for ages 6 and up. Keep the flinch frame comic, never grim.\n\nNEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw SKEETER SWARM in the pose described, facing right, with the shape and colors of the likeness in attachment 3.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE ENEMY SHEET. Return exactly one image, nothing else. make sure it has a handbrushed painted look and feel\n\nWHAT THIS IS\nThe battle sheet of the enemy SKEETER SWARM (a regular enemy, level 2) for \"The Adventures of Tom\", a family role-playing game: 4 poses of the same character in a single row. The game puts it in front of a painted background of a sunlit pond ringed by reeds with big leafy trees, so its colors and handbrushed painted texture should feel at home there, painted in the same way as the area painting, but it must still stand out clearly against it.\n\nATTACHED IMAGES (in this order)\n1. The STYLE KEY, a finished painting of the family in a school yard. This is the painting style to match exactly: dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors, warm light.\n2. The AREA PAINTING of a sunlit pond ringed by reeds with big leafy trees: the place Skeeter Swarm lives and fights. Use it for the creature's world: its color palette, the color of its light and shadows, the dense handbrushed paint texture and the mood. Paint Skeeter Swarm as a resident of this same picture, by the same hand: the warm key light stays at the upper left as described below, tinted by the area's light on its lit side, with the area's shadow colors in its shaded side, and its materials (moss, wood, brick, brass, glass, mud, cloth) painted brush stroke by brush stroke the way this painting paints them. Do not copy this painting's layout, buildings or props into the sheet.\n3. A LIKENESS picture of Skeeter Swarm drawn in an older style. Use it for the creature's SHAPE, face, expression, colors and details ONLY. Do not copy how it is rendered: it is blocky and flat, and the new sheet must not be. Redraw Skeeter Swarm from scratch, handbrushed and painted, keeping the same character.\n\nSTYLE RULE (the most important instruction)\nEvery frame must look handbrushed and painted by the same hand as the attached paintings: dense painted texture, visible brush strokes that follow the form, layered paint, fine detail, deep saturated colors, crisp painterly edges. Every surface of the creature (skin, fur, moss, wood, metal, cloth, glass) is painted with brush strokes, never airbrushed smooth, never glossy plastic, never a 3D render. The creature is painted into the same world as the area painting, by the same hand, so a viewer cannot tell the creature and the area were painted by different artists.\n\nART STYLE\n- A whimsical storybook illustration of a creature, painted by hand with real brushes in a rich, dense, jewel-toned style, exactly like the illustrated school-yard painting of the style key and the area painting. Up close it looks like an oil or gouache painting on canvas: visible individual brush strokes that follow the shape of every form, layered paint, fine painted texture, small hand-made variations of color from one stroke to the next, and a faint canvas grain. Gently simplified shapes. Friendly-scary, funny and full of personality, never grim. This is a game for a family with a 6 and a 9 year old.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp, painterly edges with fine detail, formed where one brush stroke meets the next. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nTHE CREATURE\nSKEETER SWARM: a ragged swarm of a dozen red-eyed mosquitoes with pale blue wings around one bigger skeeter in the middle. It is about 20 inches tall (1.7 feet), measured from its base or feet to the top of its highest point. For comparison, the smallest enemy in the game, the Mudling, is 16 inches tall.\n\nTHE SHEET (strict)\n- A single horizontal row of 4 equal square cells, 256 x 256 pixels each, so the full image is 1024 x 256 pixels. If your tool cannot make that exact shape, keep exactly 4 cells in one row and make the image as wide as it allows.\n- Exactly 4 frames, one per cell, from left to right, in the numbered order below.\n- SKEETER SWARM FACES RIGHT in every frame (toward the right side of the image), as if facing the family on the right of a battle screen. Seen from the side or three quarters, slightly from above.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the creature. No magenta glow, spill, tint or fringe on its edges. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.\n- Same scale in every cell: the standing creature is about 100 pixels tall in its cell, and stays that size in every frame (a crouched or stretched pose may vary its height by at most 15 percent). Its base or feet rest on one horizontal line about 16 pixels above the cell bottom, with a small soft contact shadow directly under it. Center each pose in its cell with at least 10 percent margin; nothing touches a cell edge or overlaps a neighbour.\n- Draw ONLY SKEETER SWARM. No effects, motion lines, sparkles, other characters, props that are not part of it, text or word balloons.\n- The same colors, details and level of painted detail in every frame.\n\nTHE 4 FRAMES\n1. STANCE: battle stance, idle and ready, weight settled.\n2. FLINCH: startled by a hit, recoiling a little, eyes shut or squinting.\n3. ATTACK A: the wind-up for its signature attack, Whine.\n4. ATTACK B: the attack landing.\n\nFamily friendly for ages 6 and up. Keep the flinch frame comic, never grim.\n\nNEVER substitute. Do not add extra frames, merge two frames or repeat a pose. If anything is unclear, draw SKEETER SWARM in the pose described, facing right, with the shape and colors of the likeness in attachment 3.\nBackground: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient.",
    "group": "Grump Hollow"
   },
   {
@@ -2117,7 +2117,7 @@
     "docs/reference/underpaint/grump-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Grump Hollow"
   },
   {
@@ -2148,7 +2148,7 @@
     "docs/reference/underpaint/toad-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Grump Hollow"
   },
   {
@@ -2179,7 +2179,7 @@
     "docs/reference/underpaint/log-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Grump Hollow"
   },
   {
@@ -2217,7 +2217,7 @@
     "docs/reference/underpaint/bigone-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: scales and fins painted in rich blue and teal, wet dripping water, huge luminous startled eyes, and a TINY pie tin, only one sixth of its height and much smaller than in attachment 2, perched on the crown like a little hat. It is a giant, nearly as tall as a grown man, and it fills most of each cell. Top row: 1 sitting upright on its flat tail, huge startled eyes, big and imposing. 2 rocked back from a hit, eyes squeezed shut, water spraying. 3 puffing itself up even bigger, eyes bulging. Bottom row: 4 attack wind-up for Big Glare, leaning in with a furious stare. 5 the attack, the biggest glare, brows low, glowing eyes, mouth set, water streaming off it. 6 the follow-through, slumping forward with a heavy sigh, the tail sweeping low, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: scales and fins painted in rich blue and teal, wet dripping water, huge luminous startled eyes, and a TINY pie tin, only one sixth of its height and much smaller than in attachment 2, perched on the crown like a little hat. It is a giant, nearly as tall as a grown man, and it fills most of each cell. Top row: 1 sitting upright on its flat tail, huge startled eyes, big and imposing. 2 rocked back from a hit, eyes squeezed shut, water spraying. 3 puffing itself up even bigger, eyes bulging. Bottom row: 4 attack wind-up for Big Glare, leaning in with a furious stare. 5 the attack, the biggest glare, brows low, glowing eyes, mouth set, water streaming off it. 6 the follow-through, slumping forward with a heavy sigh, the tail sweeping low, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Grump Hollow"
   },
   {
@@ -2262,7 +2262,7 @@
     "docs/reference/underpaint/smoglet-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and gray colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and gray colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
@@ -2286,7 +2286,7 @@
     "docs/reference/underpaint/tickets-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
@@ -2310,7 +2310,7 @@
     "docs/reference/underpaint/coyote-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
@@ -2334,7 +2334,7 @@
     "docs/reference/underpaint/gridlock-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
@@ -2358,7 +2358,7 @@
     "docs/reference/underpaint/tarblob-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
@@ -2396,7 +2396,7 @@
     "docs/reference/underpaint/bigshake-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: layered cracked stone with glowing orange fissures, mossy crags, orbiting rocks trailing sparks, dust and heat shimmer, dramatic rim light. Top row: 1 looming, small rocks orbiting. 2 recoiling from a hit, stone chips flying. 3 rumbling and shaking, the cracks glowing brighter. Bottom row: 4 attack wind-up, lifting off the ground, rocks gathering above. 5 the attack, boulders crashing down in a huge burst of dust. 6 the follow-through, settling heavily, dust clouds billowing and rocks tumbling away, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: layered cracked stone with glowing orange fissures, mossy crags, orbiting rocks trailing sparks, dust and heat shimmer, dramatic rim light. Top row: 1 looming, small rocks orbiting. 2 recoiling from a hit, stone chips flying. 3 rumbling and shaking, the cracks glowing brighter. Bottom row: 4 attack wind-up, lifting off the ground, rocks gathering above. 5 the attack, boulders crashing down in a huge burst of dust. 6 the follow-through, settling heavily, dust clouds billowing and rocks tumbling away, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
@@ -2439,7 +2439,7 @@
     "docs/reference/underpaint/soggysock-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Top left: standing, drooping and weary, the top of the sock hanging over, mouth open. Top right: reeling from a hit, the whole sock bent far back and sideways, eyes squeezed shut, water flying off. Bottom left: attack wind-up, the sock stretched tall and twisted, the top raised high above its head, angry face, water dripping off. Bottom right: the attack, the top of the sock whipping forward and down in a big slap, angry face, water splashing out in front. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Top left: standing, drooping and weary, the top of the sock hanging over, mouth open. Top right: reeling from a hit, the whole sock bent far back and sideways, eyes squeezed shut, water flying off. Bottom left: attack wind-up, the sock stretched tall and twisted, the top raised high above its head, angry face, water dripping off. Bottom right: the attack, the top of the sock whipping forward and down in a big slap, angry face, water splashing out in front. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {
@@ -2463,7 +2463,7 @@
     "docs/reference/underpaint/bobber-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {
@@ -2487,7 +2487,7 @@
     "docs/reference/underpaint/tangle-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {
@@ -2511,7 +2511,7 @@
     "docs/reference/underpaint/snag-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {
@@ -2556,7 +2556,7 @@
     "docs/reference/underpaint/irongill-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: rusty riveted iron plates in deep detail, long whiskers like bronze cables, wet skin, small glowing gold eyes, murky water with mist and dramatic marsh light. Top row: 1 standing heavy in the shallows, grim, whiskers drooping. 2 flinching, mouth open wide, whiskers flung back, water splashing up. 3 rearing up tall out of the water, head raised, one whisker lifted high. Bottom row: 4 attack wind-up, mouth open, whiskers lashing wildly around the head, a ball of water forming at the mouth. 5 the attack, a big jet of water spraying from the open mouth. 6 the follow-through, leaning low and forward after the spit, head tilted down, mouth still open and dripping, whiskers swinging, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: rusty riveted iron plates in deep detail, long whiskers like bronze cables, wet skin, small glowing gold eyes, murky water with mist and dramatic marsh light. Top row: 1 standing heavy in the shallows, grim, whiskers drooping. 2 flinching, mouth open wide, whiskers flung back, water splashing up. 3 rearing up tall out of the water, head raised, one whisker lifted high. Bottom row: 4 attack wind-up, mouth open, whiskers lashing wildly around the head, a ball of water forming at the mouth. 5 the attack, a big jet of water spraying from the open mouth. 6 the follow-through, leaning low and forward after the spit, head tilted down, mouth still open and dripping, whiskers swinging, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {
@@ -2580,7 +2580,7 @@
     "docs/reference/underpaint/extra-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
@@ -2604,7 +2604,7 @@
     "docs/reference/underpaint/boommoth-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
@@ -2628,7 +2628,7 @@
     "docs/reference/underpaint/clapper-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
@@ -2652,7 +2652,7 @@
     "docs/reference/underpaint/fogwisp-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
@@ -2676,7 +2676,7 @@
     "docs/reference/underpaint/cuecrab-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
@@ -2721,7 +2721,7 @@
     "docs/reference/underpaint/directorscut-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: golden brass with dents, a carved wooden tripod, a furious expressive face in the bell, film-set spotlights and light beams. Top row: 1 standing on the tripod, shouting. 2 thrown back, the tripod wobbling. 3 pointing a stubby finger furiously. Bottom row: 4 attack wind-up, leaning back with the bell drawn wide. 5 the attack, a megaphone blast with rings of shockwave. 6 the follow-through, leaning far forward, the bell smoking, the tripod skidding, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: golden brass with dents, a carved wooden tripod, a furious expressive face in the bell, film-set spotlights and light beams. Top row: 1 standing on the tripod, shouting. 2 thrown back, the tripod wobbling. 3 pointing a stubby finger furiously. Bottom row: 4 attack wind-up, leaning back with the bell drawn wide. 5 the attack, a megaphone blast with rings of shockwave. 6 the follow-through, leaning far forward, the bell smoking, the tripod skidding, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
@@ -2745,7 +2745,7 @@
     "docs/reference/underpaint/popquiz-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "School"
   },
   {
@@ -2769,7 +2769,7 @@
     "docs/reference/underpaint/tardybell-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "School"
   },
   {
@@ -2793,7 +2793,7 @@
     "docs/reference/underpaint/glitterglue-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "School"
   },
   {
@@ -2817,7 +2817,7 @@
     "docs/reference/underpaint/dodgeball-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "School"
   },
   {
@@ -2855,7 +2855,7 @@
     "docs/reference/underpaint/redpen-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a red barrel and gold nib, a long red cape in flowing folds, a pool of ink with splashes, dramatic red light. Top row: 1 standing tall, the cape billowing. 2 the hit: slammed backward, the whole pen bent hard into a curve, eyes squeezed shut, mouth wide in a shout of pain, the nib bent, the cape blown up over its head, a huge burst of red ink spraying out of the barrel. 3 pointing the nib like a sword. Bottom row: 4 attack wind-up, the nib drawn back, the cape wrapped around. 5 the attack, a slashing strike leaving a big red ink streak. 6 the follow-through, crouched low after the slash, ink dripping from the nib, the cape settling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a red barrel and gold nib, a long red cape in flowing folds, a pool of ink with splashes, dramatic red light. Top row: 1 standing tall, the cape billowing. 2 the hit: slammed backward, the whole pen bent hard into a curve, eyes squeezed shut, mouth wide in a shout of pain, the nib bent, the cape blown up over its head, a huge burst of red ink spraying out of the barrel. 3 pointing the nib like a sword. Bottom row: 4 attack wind-up, the nib drawn back, the cape wrapped around. 5 the attack, a slashing strike leaving a big red ink streak. 6 the follow-through, crouched low after the slash, ink dripping from the nib, the cape settling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "School"
   },
   {
@@ -2879,7 +2879,7 @@
     "docs/reference/underpaint/acornagent-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -2903,7 +2903,7 @@
     "docs/reference/underpaint/stickysap-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -2927,7 +2927,7 @@
     "docs/reference/underpaint/peanutgallery-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -2951,7 +2951,7 @@
     "docs/reference/underpaint/twigspy-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -2975,7 +2975,7 @@
     "docs/reference/underpaint/cheekstuffer-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -2999,7 +2999,7 @@
     "docs/reference/underpaint/acorncache-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Top left: sitting half buried in the leaves, shy, peeking out from under its cap. Top right: flinching, eyes squeezed shut, leaves and bits of acorn flying off. Bottom left: attack wind-up, squashed down low into the leaves, cap pressed down, cheeks puffed, determined face. Bottom right: the attack, the whole acorn leaping out of the leaves toward the right, high in the air, cap tilted back, fierce face, leaves and acorns scattering below it. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Top left: sitting half buried in the leaves, shy, peeking out from under its cap. Top right: flinching, eyes squeezed shut, leaves and bits of acorn flying off. Bottom left: attack wind-up, squashed down low into the leaves, cap pressed down, cheeks puffed, determined face. Bottom right: the attack, the whole acorn leaping out of the leaves toward the right, high in the air, cap tilted back, fierce face, leaves and acorns scattering below it. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -3044,7 +3044,7 @@
     "docs/reference/underpaint/chairman-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a luxurious red velvet throne with carved gold, a fur-trimmed robe, a monocle, an individually painted bushy tail, warm candlelight. The whole throne is in every one of the six poses, the same size, on the same ground line, with its carved gold feet resting on the ground, and the squirrel never leaves it. Top row: 1 seated smugly on the throne. 2 thrown back in the throne, the robe flying. 3 rising from the throne, one paw raised in a grand speech. Bottom row: 4 attack wind-up, cheeks puffed out huge. 5 the attack, hurling a volley of acorns. 6 the follow-through, still seated in the throne but leaning far forward over its arm, the tail swept up behind the throne, acorns scattering, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a luxurious red velvet throne with carved gold, a fur-trimmed robe, a monocle, an individually painted bushy tail, warm candlelight. The whole throne is in every one of the six poses, the same size, on the same ground line, with its carved gold feet resting on the ground, and the squirrel never leaves it. Top row: 1 seated smugly on the throne. 2 thrown back in the throne, the robe flying. 3 rising from the throne, one paw raised in a grand speech. Bottom row: 4 attack wind-up, cheeks puffed out huge. 5 the attack, hurling a volley of acorns. 6 the follow-through, still seated in the throne but leaning far forward over its arm, the tail swept up behind the throne, acorns scattering, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
@@ -3068,7 +3068,7 @@
     "docs/reference/underpaint/shusher-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Hush Library"
   },
   {
@@ -3092,7 +3092,7 @@
     "docs/reference/underpaint/dogear-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Hush Library"
   },
   {
@@ -3116,7 +3116,7 @@
     "docs/reference/underpaint/cliffhanger-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Hush Library"
   },
   {
@@ -3140,7 +3140,7 @@
     "docs/reference/underpaint/knowitall-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Hush Library"
   },
   {
@@ -3171,7 +3171,7 @@
     "docs/reference/underpaint/popup-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Hush Library"
   },
   {
@@ -3202,7 +3202,7 @@
     "docs/reference/underpaint/unread-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: an ancient cracked leather cover with brass corners and embossed runes, yellowed torn pages curling like tentacles, drifting dust motes, ghostly purple light. Top row: 1 hovering open, the face glaring from the page. 2 reeling from a hit, pages scattering. 3 the pages rearing up like tentacles. Bottom row: 4 attack wind-up, the cover opening wide, pages rising. 5 the attack, the cover slamming shut in a burst of dust. 6 the follow-through, pages trailing, a finger pressed to lips in a shush, dust drifting, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: an ancient cracked leather cover with brass corners and embossed runes, yellowed torn pages curling like tentacles, drifting dust motes, ghostly purple light. Top row: 1 hovering open, the face glaring from the page. 2 reeling from a hit, pages scattering. 3 the pages rearing up like tentacles. Bottom row: 4 attack wind-up, the cover opening wide, pages rising. 5 the attack, the cover slamming shut in a burst of dust. 6 the follow-through, pages trailing, a finger pressed to lips in a shush, dust drifting, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Hush Library"
   },
   {
@@ -3226,7 +3226,7 @@
     "docs/reference/underpaint/lukewarm-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Car Barn"
   },
   {
@@ -3250,7 +3250,7 @@
     "docs/reference/underpaint/leftover-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Car Barn"
   },
   {
@@ -3274,7 +3274,7 @@
     "docs/reference/underpaint/wetblanket-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Car Barn"
   },
   {
@@ -3298,7 +3298,7 @@
     "docs/reference/underpaint/thedraft-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Car Barn"
   },
   {
@@ -3322,7 +3322,7 @@
     "docs/reference/underpaint/pickyeater-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Car Barn"
   },
   {
@@ -3353,7 +3353,7 @@
     "docs/reference/underpaint/ironbelly-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: heavy riveted iron plates, embossed scrollwork, deep rust and soot, cracks glowing orange, a roaring fire behind a menacing grate mouth. Top row: 1 standing tall and imposing, flames flickering in the grate, smoke rising. 2 rocked back from a hit, chimney bent, eyes shut, sparks and soot flying. 3 rearing up, belly glowing red hot, glaring, smoke venting from the chimney. Bottom row: 4 attack wind-up, hunched, steam and soot bursting from its sides, belly white hot. 5 the attack, a huge blast of fire roaring from the mouth. 6 the follow-through, leaning forward and heaving, embers and smoke trailing, grate mouth glowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: heavy riveted iron plates, embossed scrollwork, deep rust and soot, cracks glowing orange, a roaring fire behind a menacing grate mouth. Top row: 1 standing tall and imposing, flames flickering in the grate, smoke rising. 2 rocked back from a hit, chimney bent, eyes shut, sparks and soot flying. 3 rearing up, belly glowing red hot, glaring, smoke venting from the chimney. Bottom row: 4 attack wind-up, hunched, steam and soot bursting from its sides, belly white hot. 5 the attack, a huge blast of fire roaring from the mouth. 6 the follow-through, leaning forward and heaving, embers and smoke trailing, grate mouth glowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Car Barn"
   },
   {
@@ -3377,7 +3377,7 @@
     "docs/reference/underpaint/velvetrope-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Moon Club"
   },
   {
@@ -3401,7 +3401,7 @@
     "docs/reference/underpaint/stuffedshirt-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Moon Club"
   },
   {
@@ -3425,7 +3425,7 @@
     "docs/reference/underpaint/coathanger-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Moon Club"
   },
   {
@@ -3449,7 +3449,7 @@
     "docs/reference/underpaint/soreloser-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Moon Club"
   },
   {
@@ -3473,7 +3473,7 @@
     "docs/reference/underpaint/wallflower-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Moon Club"
   },
   {
@@ -3511,7 +3511,7 @@
     "docs/reference/underpaint/mirrorball-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: hundreds of small mirror facets built from dabs of silver and lilac, layered feathers painted stroke by stroke, beaded jewels, a regal diva presence, colored stage light. Top row: 1 hanging proud and glamorous, shawl swirling, a sly grin. 2 rocked back from a hit, one eye squeezed shut, feathers and sparkles flying. 3 striking a diva pose, one arm of feathers flung high, chin raised. Bottom row: 4 attack wind-up, spinning on its chain, the shawl whirling around it in a swirling ribbon. 5 the attack, a bright burst of light beams and mirror shards blasting out of its facets. 6 the follow-through, swinging low on the chain with arms spread wide, shimmering trails behind it, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: hundreds of small mirror facets built from dabs of silver and lilac, layered feathers painted stroke by stroke, beaded jewels, a regal diva presence, colored stage light. Top row: 1 hanging proud and glamorous, shawl swirling, a sly grin. 2 rocked back from a hit, one eye squeezed shut, feathers and sparkles flying. 3 striking a diva pose, one arm of feathers flung high, chin raised. Bottom row: 4 attack wind-up, spinning on its chain, the shawl whirling around it in a swirling ribbon. 5 the attack, a bright burst of light beams and mirror shards blasting out of its facets. 6 the follow-through, swinging low on the chain with arms spread wide, shimmering trails behind it, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Moon Club"
   },
   {
@@ -3535,7 +3535,7 @@
     "docs/reference/underpaint/carryon-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Zero"
   },
   {
@@ -3566,7 +3566,7 @@
     "docs/reference/underpaint/jetlag-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Zero"
   },
   {
@@ -3590,7 +3590,7 @@
     "docs/reference/underpaint/longline-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Zero"
   },
   {
@@ -3614,7 +3614,7 @@
     "docs/reference/underpaint/unclaimed-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Zero"
   },
   {
@@ -3638,7 +3638,7 @@
     "docs/reference/underpaint/armresthog-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Zero"
   },
   {
@@ -3662,7 +3662,7 @@
     "docs/reference/underpaint/lastcall-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: hundreds of individually painted split-flap tiles with tiny letters, rusty brass spider legs, glowing amber light from the board, steam and sparks, grimy industrial detail. Top row: 1 standing on its spider legs, eyes squinting. 2 recoiling from a hit, flaps flying loose. 3 rearing up, showing its teeth. Bottom row: 4 attack wind-up, legs crouched, flaps rippling. 5 the attack, lunging forward, flaps whipping out. 6 the follow-through, skidding forward, flaps clattering, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: hundreds of individually painted split-flap tiles with tiny letters, rusty brass spider legs, glowing amber light from the board, steam and sparks, grimy industrial detail. Top row: 1 standing on its spider legs, eyes squinting. 2 recoiling from a hit, flaps flying loose. 3 rearing up, showing its teeth. Bottom row: 4 attack wind-up, legs crouched, flaps rippling. 5 the attack, lunging forward, flaps whipping out. 6 the follow-through, skidding forward, flaps clattering, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Zero"
   },
   {
@@ -3686,7 +3686,7 @@
     "docs/reference/underpaint/finalcall-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: navy enamel with gold trim, a glowing screen of rows of yellow flap text, chunky riveted robot legs, a glowing red antenna, crisp rim light. Top row: 1 standing on its robot legs, the screen calm. 2 rocked back from a hit, the screen flickering. 3 the screen glaring, the antenna sparking. Bottom row: 4 attack wind-up, leaning back, the flaps rattling. 5 the attack, a flurry of flaps whipping out. 6 the follow-through, stomping forward, the screen flashing DELAYED, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: navy enamel with gold trim, a glowing screen of rows of yellow flap text, chunky riveted robot legs, a glowing red antenna, crisp rim light. Top row: 1 standing on its robot legs, the screen calm. 2 rocked back from a hit, the screen flickering. 3 the screen glaring, the antenna sparking. Bottom row: 4 attack wind-up, leaning back, the flaps rattling. 5 the attack, a flurry of flaps whipping out. 6 the follow-through, stomping forward, the screen flashing DELAYED, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Infinity"
   },
   {
@@ -3710,7 +3710,7 @@
     "docs/reference/underpaint/lostluggage-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Infinity"
   },
   {
@@ -3734,7 +3734,7 @@
     "docs/reference/underpaint/redeye-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Infinity"
   },
   {
@@ -3758,7 +3758,7 @@
     "docs/reference/underpaint/standbysprite-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Terminal Infinity"
   },
   {
@@ -3782,7 +3782,7 @@
     "docs/reference/underpaint/gridlockprime-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: red metal with chrome trim, glowing yellow lights, steam from the grille, a flowering traffic-light post, strong headlight beams. Top row: 1 parked and idling, steam from the grille. 2 reeling from a hit, dented, the bumper rattling. 3 revving, wheels smoking. Bottom row: 4 attack wind-up, backing up low, lights flashing. 5 the attack, charging forward with a honk shockwave. 6 the follow-through, skidding sideways, smoke and skid marks, lights blazing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: red metal with chrome trim, glowing yellow lights, steam from the grille, a flowering traffic-light post, strong headlight beams. Top row: 1 parked and idling, steam from the grille. 2 reeling from a hit, dented, the bumper rattling. 3 revving, wheels smoking. Bottom row: 4 attack wind-up, backing up low, lights flashing. 5 the attack, charging forward with a honk shockwave. 6 the follow-through, skidding sideways, smoke and skid marks, lights blazing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Downtown boulevard"
   },
   {
@@ -3806,7 +3806,7 @@
     "docs/reference/underpaint/drillworm-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: wet rubbery skin, a spinning two-tone drill bit, flying rock and gravel, a gritty pit glowing with orange and green minerals, a scuffed yellow hard hat. Top row: 1 rising from the pit. 2 recoiling from a hit, the hard hat flung loose, gravel flying. 3 rearing up high, the drill spinning. Bottom row: 4 attack wind-up, coiling down into the pit, the drill whirring. 5 the attack, bursting up with the drill spraying gravel. 6 the follow-through, leaning out over the rim, gravel raining, the drill slowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: wet rubbery skin, a spinning two-tone drill bit, flying rock and gravel, a gritty pit glowing with orange and green minerals, a scuffed yellow hard hat. Top row: 1 rising from the pit. 2 recoiling from a hit, the hard hat flung loose, gravel flying. 3 rearing up high, the drill spinning. Bottom row: 4 attack wind-up, coiling down into the pit, the drill whirring. 5 the attack, bursting up with the drill spraying gravel. 6 the follow-through, leaning out over the rim, gravel raining, the drill slowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Sub-Rail"
   },
   {
@@ -3830,7 +3830,7 @@
     "docs/reference/underpaint/hushling-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Sub-Rail"
   },
   {
@@ -3854,7 +3854,7 @@
     "docs/reference/underpaint/signalfault-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Sub-Rail"
   },
   {
@@ -3878,7 +3878,7 @@
     "docs/reference/underpaint/turnstile-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Sub-Rail"
   },
   {
@@ -3904,7 +3904,7 @@
     "docs/reference/boppy-face.png",
     "tools/sprite-bake/src/boppy-hero.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting making it look EXACTLY like boppy-face.png. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Paint Boppy's real face exactly as in attachment 4, a close-up of his face (and attachment 5, the full figure): the same weathered tan skin with deep smile lines and crow's feet, brown eyes, thick white-gray bushy mustache, white eyebrows, gray sideburns, long nose, warm closed-mouth smile. The helmet is open-faced with nothing covering his face, so his whole face shows clearly, large, at the same likeness and detail as attachment 4. Make the forms grander and more dramatic, with more detail painted in the shapes: golden plate armor with engraved filigree and a warm glow, a raised visor showing his face, a long halberd with a bright blade, dramatic backlight. Top row: 1 standing square and heavy, the halberd planted. 2 rocked back from a hit, the armor ringing. 3 raising the halberd high. Bottom row: 4 attack wind-up, the shoulder lowered for a charge. 5 the attack, a shoulder check slamming forward with a golden shockwave. 6 the follow-through, planting the halberd, standing firm and glowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting making it look EXACTLY like boppy-face.png. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Paint Boppy's real face exactly as in attachment 4, a close-up of his face (and attachment 5, the full figure): the same weathered tan skin with deep smile lines and crow's feet, brown eyes, thick white-gray bushy mustache, white eyebrows, gray sideburns, long nose, warm closed-mouth smile. The helmet is open-faced with nothing covering his face, so his whole face shows clearly, large, at the same likeness and detail as attachment 4. Make the forms grander and more dramatic, with more detail painted in the shapes: golden plate armor with engraved filigree and a warm glow, a raised visor showing his face, a long halberd with a bright blade, dramatic backlight. Top row: 1 standing square and heavy, the halberd planted. 2 rocked back from a hit, the armor ringing. 3 raising the halberd high. Bottom row: 4 attack wind-up, the shoulder lowered for a charge. 5 the attack, a shoulder check slamming forward with a golden shockwave. 6 the follow-through, planting the halberd, standing firm and glowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Rivituso Row"
   },
   {
@@ -3928,7 +3928,7 @@
     "docs/reference/underpaint/hush9final-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: silver metal with rivets and glowing cyan lines, a red light and a bright yellow siren, glowing cyan eyes, a speaker grille mouth, streaks of light and steam. Top row: 1 standing, a white glove raised in a shush. 2 reeling from a hit, sparks flying. 3 the siren flaring, eyes glowing. Bottom row: 4 attack wind-up, leaning back, the speaker grille glowing. 5 the attack, rings of silence blasting from the grille. 6 the follow-through, rolling forward on its legs, light trails behind, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: silver metal with rivets and glowing cyan lines, a red light and a bright yellow siren, glowing cyan eyes, a speaker grille mouth, streaks of light and steam. Top row: 1 standing, a white glove raised in a shush. 2 reeling from a hit, sparks flying. 3 the siren flaring, eyes glowing. Bottom row: 4 attack wind-up, leaning back, the speaker grille glowing. 5 the attack, rings of silence blasting from the grille. 6 the follow-through, rolling forward on its legs, light trails behind, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Dinner Table"
   },
   {
@@ -3952,7 +3952,7 @@
     "docs/reference/underpaint/marlowe16-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a finely tailored grey suit, a glowing amber glass fist with cracks of light running up the suit, cold grey light against warm amber glow, a stern expressive face. Top row: 1 standing with the clipboard, scowling. 2 reeling from a hit, amber cracks flaring. 3 raising the amber fist. Bottom row: 4 attack wind-up, drawing the fist back, the amber glow growing. 5 the attack, slamming the amber fist forward, amber light bursting and color draining away. 6 the follow-through, leaning forward, the fist smoking, cracked amber trails, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a finely tailored grey suit, a glowing amber glass fist with cracks of light running up the suit, cold grey light against warm amber glow, a stern expressive face. Top row: 1 standing with the clipboard, scowling. 2 reeling from a hit, amber cracks flaring. 3 raising the amber fist. Bottom row: 4 attack wind-up, drawing the fist back, the amber glow growing. 5 the attack, slamming the amber fist forward, amber light bursting and color draining away. 6 the follow-through, leaning forward, the fist smoking, cracked amber trails, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "The Square"
   },
   {
@@ -3976,7 +3976,7 @@
     "docs/reference/underpaint/greynote-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "The Square"
   },
   {
@@ -4000,7 +4000,7 @@
     "docs/reference/underpaint/twinlens-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a brass gantry with intricate gear rings, two huge glowing lens-eyes, one ice blue and one amber, with glass reflections, a red gem, dust motes and crossing light beams. Top row: 1 standing, both lenses calm. 2 recoiling from a hit, the lenses flickering. 3 both lenses locking on. Bottom row: 4 attack wind-up, the gear rings spinning, the lenses glowing brighter. 5 the attack, twin beams of blue and amber blasting. 6 the follow-through, the gears slowing, the light fading, the lenses refocusing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a brass gantry with intricate gear rings, two huge glowing lens-eyes, one ice blue and one amber, with glass reflections, a red gem, dust motes and crossing light beams. Top row: 1 standing, both lenses calm. 2 recoiling from a hit, the lenses flickering. 3 both lenses locking on. Bottom row: 4 attack wind-up, the gear rings spinning, the lenses glowing brighter. 5 the attack, twin beams of blue and amber blasting. 6 the follow-through, the gears slowing, the light fading, the lenses refocusing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Glass Tower"
   },
   {
@@ -4024,7 +4024,7 @@
     "docs/reference/underpaint/pausesprite-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Glass Tower"
   },
   {
@@ -4048,7 +4048,7 @@
     "docs/reference/underpaint/paperweight-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Glass Tower"
   },
   {
@@ -4072,7 +4072,7 @@
     "docs/reference/underpaint/curator-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Glass Tower"
   },
   {
@@ -4110,7 +4110,7 @@
     "docs/reference/underpaint/vance-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a long black coat with gold buttons in rich folds, a wide-brimmed hat shadowing a pale grim face, a gold pocket watch and brass ray gun, cold moonlight with a sharp rim light. Top row: 1 standing tall. 2 stumbling back from a hit, the hat tilting. 3 raising the ray gun. Bottom row: 4 attack wind-up, aiming, the gun glowing. 5 the attack, firing a bright ray. 6 the follow-through, lowering the gun, smoke curling, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a long black coat with gold buttons in rich folds, a wide-brimmed hat shadowing a pale grim face, a gold pocket watch and brass ray gun, cold moonlight with a sharp rim light. Top row: 1 standing tall. 2 stumbling back from a hit, the hat tilting. 3 raising the ray gun. Bottom row: 4 attack wind-up, aiming, the gun glowing. 5 the attack, firing a bright ray. 6 the follow-through, lowering the gun, smoke curling, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Chronos Loom"
   },
   {
@@ -4134,7 +4134,7 @@
     "docs/reference/underpaint/censor-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a long black suit with razor creases, a black redaction bar for a face with two glowing white eyes, a striped collar, a fat dripping black marker, flying stamped envelopes, noir light. Top row: 1 standing very tall, the marker raised. 2 reeling from a hit, the redaction bar glitching. 3 stamping a returned envelope. Bottom row: 4 attack wind-up, the marker sweeping back. 5 the attack, a huge black bar slashing across the air. 6 the follow-through, envelopes flying back, bowing low, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a long black suit with razor creases, a black redaction bar for a face with two glowing white eyes, a striped collar, a fat dripping black marker, flying stamped envelopes, noir light. Top row: 1 standing very tall, the marker raised. 2 reeling from a hit, the redaction bar glitching. 3 stamping a returned envelope. Bottom row: 4 attack wind-up, the marker sweeping back. 5 the attack, a huge black bar slashing across the air. 6 the follow-through, envelopes flying back, bowing low, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Dead-Letter Office"
   },
   {
@@ -4157,7 +4157,7 @@
     "docs/reference/style_key_v1.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Paint Dead Letter, a cream envelope with a smiling face, rosy cheeks, closed happy eyes, a red wax seal and scribbled address lines, as a handbrushed painting in a 2 by 2 grid of 4 poses facing right: stance, flinch, attack wind-up, attack landing. Paint it like attachment 1 and finish it like attachment 2: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Paint Dead Letter, a cream envelope with a smiling face, rosy cheeks, closed happy eyes, a red wax seal and scribbled address lines, as a handbrushed painting in a 2 by 2 grid of 4 poses facing right: stance, flinch, attack wind-up, attack landing. Paint it like attachment 1 and finish it like attachment 2: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Dead-Letter Office"
   },
   {
@@ -4181,7 +4181,7 @@
     "docs/reference/underpaint/rubberstamp-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Dead-Letter Office"
   },
   {
@@ -4212,7 +4212,7 @@
     "docs/reference/underpaint/leviathan-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: gold clockwork scales built from chunky dabs of ochre, yellow and brown paint with thick impasto and visible stroke direction on every scale, gear teeth and a large clock face painted in bold brush strokes, big gold gears with rough painted edges, a dark painted void behind the coils, warm golden light. Top row: 1 coiled, the head raised. 2 recoiling from a hit, gears sparking. 3 the head rearing high. Bottom row: 4 attack wind-up, coiling back, the gears spinning faster. 5 the attack, the tail sweeping and the jaws biting forward. 6 the follow-through, uncoiling low, the gears slowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: gold clockwork scales built from chunky dabs of ochre, yellow and brown paint with thick impasto and visible stroke direction on every scale, gear teeth and a large clock face painted in bold brush strokes, big gold gears with rough painted edges, a dark painted void behind the coils, warm golden light. Top row: 1 coiled, the head raised. 2 recoiling from a hit, gears sparking. 3 the head rearing high. Bottom row: 4 attack wind-up, coiling back, the gears spinning faster. 5 the attack, the tail sweeping and the jaws biting forward. 6 the follow-through, uncoiling low, the gears slowing, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Stillness Core"
   },
   {
@@ -4236,7 +4236,7 @@
     "art/raw/enemies/enemy-vance-v1.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. It shows Julian Vance in six poses; paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Attachment 2 is a smooth picture, so paint every edge, coat fold and face with thick visible brush strokes, never smooth. Top row: 1 standing, the gun at his side, tired and soft. 2 flinching back, the hat tilting. 3 looking down at the pocket watch. Bottom row: 4 attack wind-up, slowly raising the ray gun, hesitating. 5 the attack, a warm burst of amber glass from the ray gun. 6 the follow-through, lowering the gun, looking away, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. It shows Julian Vance in six poses; paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Attachment 2 is a smooth picture, so paint every edge, coat fold and face with thick visible brush strokes, never smooth. Top row: 1 standing, the gun at his side, tired and soft. 2 flinching back, the hat tilting. 3 looking down at the pocket watch. Bottom row: 4 attack wind-up, slowly raising the ray gun, hesitating. 5 the attack, a warm burst of amber glass from the ray gun. 6 the follow-through, lowering the gun, looking away, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Stillness Core"
   },
   {
@@ -4260,7 +4260,7 @@
     "docs/reference/underpaint/gremlin-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Nine Scoops"
   },
   {
@@ -4284,7 +4284,7 @@
     "docs/reference/underpaint/slushslug-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Nine Scoops"
   },
   {
@@ -4308,7 +4308,7 @@
     "docs/reference/underpaint/conehead-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Nine Scoops"
   },
   {
@@ -4339,7 +4339,7 @@
     "docs/reference/underpaint/brainfreeze-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: translucent frosted ice with deep blue refractions, a skirt of icicles, crystal fists, swirling frost mist, a blue latch, cold sparkles, dramatic cold light. Top row: 1 standing, furious. 2 reeling from a hit, ice chips flying. 3 raising the crystal fists. Bottom row: 4 attack wind-up, inhaling, frost gathering at the lid. 5 the attack, a blast of frost breath. 6 the follow-through, slamming an icy fist down, frost spreading, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: translucent frosted ice with deep blue refractions, a skirt of icicles, crystal fists, swirling frost mist, a blue latch, cold sparkles, dramatic cold light. Top row: 1 standing, furious. 2 reeling from a hit, ice chips flying. 3 raising the crystal fists. Bottom row: 4 attack wind-up, inhaling, frost gathering at the lid. 5 the attack, a blast of frost breath. 6 the follow-through, slamming an icy fist down, frost spreading, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Nine Scoops"
   },
   {

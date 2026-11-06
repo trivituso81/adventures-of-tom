@@ -1,3 +1,7 @@
+## 2026-11-05 (256): All enemy prompts: one flat solid magenta background, no brush texture in the background (Art Library only, no game files, no tag)
+
+Tom: make sure all prompts say solid magenta background. Fact: my 17:00 wording asked for brush strokes "including the background", so pictures came back with a textured magenta that is hard to key out. All 86 enemy-* entries now say "Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient" and brush strokes apply "on the creature". TAIL in tools/art-library/enemy-prompts.js updated. Test cards untouched.
+
 ## 2026-11-05 (255): Julian Vance prompt: repaint as handbrushed, not a smooth copy (Art Library only, no game files, no tag)
 
 Tom: Julian is not handpainted enough. Fact: his approved v1 (17:11) was made before the Vance-reference rewire, with the smooth description prompt. Newer Ironbelly v2 and Mirrorball v4 (after the 17:00 fix) show real brush texture and a painted background, so the boss fix works. The rewired Julian prompt now opens with "Repaint attachment 2 as a handbrushed painting" and warns that the reference is smooth.
