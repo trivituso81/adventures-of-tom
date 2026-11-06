@@ -7283,8 +7283,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-28-flight-zero-cabin-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793932235415
+    }
+   ],
    "rejects": [],
    "id": "bg-28-flight-zero-cabin",
    "tab": "Battle",
