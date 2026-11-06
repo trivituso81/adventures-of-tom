@@ -1,3 +1,11 @@
+## 2026-11-06 (384): Tom ability rebake, three Art Library sheets reopened with new prompts
+
+- From the QC in `claude/next-addendum-tom-rebake.md`. `tom-ab-button-mash`, `tom-ab-skincare-10`, `tom-ab-flashcard-flurry` are back to draft (earlier versions stay in their lists, nothing installed or changed in the game). 3 Generate presses, one per entry.
+- Button Mash: full body with both shoes in every frame; from frame 2 the controller print is still gone (the controller pops off) but the two sets of orange and yellow stripes stay. Skincare: full body at battle scale (no waist-up busts), no painted glow or sparkle, tray frame cleaned, mask has plain red dots. Flashcard: cards only while held (frames 3 to 5 have none in the air), shirt print intact.
+- Json edited directly; `char-prompts.js` mirrors it (a block at the end; prompts and titles identical, checked). Validator OK.
+- Not reopened (fix in the cutter or regenerate if cheap): Kanji Strike (frame 6 ink splash, frame 3 forehead sparkle), Know-It-All (frame 6 puffs), Defend (frame 1 blob).
+- Next, after Tom approves each sheet: show it to Tom, then `ability_frames.py` re-cut and `bake_tom_walk_v4.py` rebake, tag bump.
+
 ## 2026-11-06 (383): NPC prompts attach painted party sheets instead of the old style key
 
 - Tom (11-06 11:16): keep the height chart and the real-height requirement, replace the style key with painted sheets of party characters in the NPC's age band. Done for the 78 NPC entries that attached `style_key_v1.png` (22 scene groups, 56 walk sheets). The 22 cut entries (one ref) are unchanged.
