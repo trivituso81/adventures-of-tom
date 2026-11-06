@@ -1249,8 +1249,16 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Ten Million Subscribers.\n\nItems:\n1. The purple hairbrush from the picture.\n2. The homemade tinfoil plaque from the picture, with its glitter-glue diamond, hanging on a string.\n3. A red badge reading LIVE.\n4. A fan of rainbow light spreading out from a small glass prism (wide).\n5. A shower of falling gold sparkles.\n6. A red heart with a white thumbs up inside.\n7. A blown-kiss heart with a tiny sparkle trail.\n8. A big starburst flash.\n9. A burst of glitter.\n10. A swirling storm of red hearts and gold stars (wide)."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-fx-dance-battle-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793955100666
+    }
+   ],
    "rejects": [],
    "id": "grace-fx-dance-battle",
    "tab": "Characters",
