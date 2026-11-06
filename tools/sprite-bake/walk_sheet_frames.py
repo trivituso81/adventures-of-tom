@@ -20,11 +20,13 @@ def _key(rgb):
     r, g, b = a[:, :, 0], a[:, :, 1], a[:, :, 2]
     m = np.minimum(r, b) - g
     hue = (r - g > 70) & (b - g > 70) & (np.abs(r - b) < 70)
-    lab, n = ndi.label(hue & (m > 80))
+    dark = (g < 0.45 * np.minimum(r, b)) & (np.minimum(r, b) > 40) & (np.abs(r - b) < 0.5 * np.maximum(r, b))   # shadowed magenta seen through gaps in hair
+    lab, n = ndi.label(hue & (m > 80) | dark)
     border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
     idx = range(1, n + 1)
     sizes = ndi.sum(np.ones_like(lab), lab, idx); mean_m = ndi.mean(m, lab, idx); mean_g = ndi.mean(g, lab, idx)
-    keep = border | {i + 1 for i in range(n) if sizes[i] >= 3 and mean_m[i] > 95 and mean_g[i] < 80}
+    mean_q = ndi.mean(g / np.maximum(np.minimum(r, b), 1), lab, idx)
+    keep = border | {i + 1 for i in range(n) if sizes[i] >= 3 and (mean_m[i] > 95 and mean_g[i] < 80 or mean_q[i] < 0.4)}
     bg = np.isin(lab, list(keep))
     near = ndi.binary_dilation(bg, iterations=5) & ~bg
     solid = ~bg & ~near & (m < 60)
@@ -41,6 +43,12 @@ def _key(rgb):
     sp = np.minimum(col[:, :, 0], col[:, :, 2]) - col[:, :, 1] - np.maximum(np.minimum(F[:, :, 0], F[:, :, 2]) - F[:, :, 1], 0) - 20
     sp = np.where(near, np.clip(sp, 0, None), 0)
     col[:, :, 0] -= sp; col[:, :, 2] -= sp
+    # magenta showing through gaps in hair deeper than the rim (warm areas only: the nearest solid colour is red-dominant like hair and skin, so purple and lilac cloth are left alone)
+    zone = ndi.binary_dilation(bg, iterations=25) & ~bg
+    warm = F[:, :, 2] < F[:, :, 0] - 25
+    ex = np.minimum(col[:, :, 0], col[:, :, 2]) - col[:, :, 1]
+    wt = np.where(zone & warm, np.clip((ex - 25) / 70.0, 0, 1), 0)[..., None]
+    col = col * (1 - wt) + F * wt
     gmax = np.maximum(col[:, :, 0], col[:, :, 2])                  # unmixing a dark outline can leave a green tint: G never above both R and B on the rim
     col[:, :, 1] = np.where(near, np.minimum(col[:, :, 1], np.maximum(gmax, F[:, :, 1])), col[:, :, 1])
     return np.dstack([np.clip(col, 0, 255), al * 255]).astype(np.uint8)

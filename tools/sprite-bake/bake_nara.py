@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Nara's two painted pose sheets (a black Labradoodle) into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/nara-battle-v2.png and nara-walk-v2.png (flat magenta background, see README.md; she faces LEFT)
+Input : tools/sprite-bake/src/nara-battle-v2.png (flat magenta background, see README.md; she faces LEFT) and art/raw/characters/nara-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/nara-battle.webp, nara-ko.webp, nara-ow.webp   (painted frames, K x the size of the rows)
         data/nara-hires.js                                       (rows, palettes, mouth and eye points, atlas rects; do not hand-edit)
 
@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/nara-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, 3          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '9'))   # painted resolution multiples: battle, knocked out, overworld (9 since walksheet3: the painted walk sheet holds the detail)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=84)    # idle height in grid rows (tail up included)
@@ -35,9 +35,9 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'nara-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'nara-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Nara (Tom 2026-11-05 23:27), used as painted (no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('nara').items() if not k.endswith('_pass')})
 
 # Hand-set points in the cut-out pose (x, y from its top-left): the nose/mouth (what she carries) and the near eye.
 MARK = {

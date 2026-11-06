@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Olivia's painted walk sheet into the game (overworld only; battle sheet comes later).
 
-Input : tools/sprite-bake/src/olivia-walk-v1.png (3 rows of 3: down, up, left; each stand, stepA, stepB; flat magenta)
+Input : art/raw/characters/olivia-walk-sheet-v1.png (3 x 3: front, back, side; each stand, step A, step B; flat magenta), used as painted
         tools/sprite-bake/src/olivia-hero-v1.png (the hero pose; the menu portrait is cut from its head)
 Output: art/chars/olivia-ow.webp   (painted frames, 3x the size of the rows)
         data/olivia-hires.js        (rows, palette, atlas rects; do not hand-edit)
@@ -14,14 +14,13 @@ import argparse, json, os, sys
 import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/olivia-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KW = int(os.environ.get('OW_K', '3'))
+KW = int(os.environ.get('OW_K', '9'))
 AV = ''   # unused since 2026-11-01 (engine/painted.js adds ?v=ART_V). Old note: atlas cache string: bump with the ?v= tag in index.html whenever frame sizes change
 
 ap = argparse.ArgumentParser()
@@ -110,15 +109,11 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'step2')]
-poses = slice_sheet(os.path.join(SRC, 'olivia-walk-v1.png'), [names[0:3], names[3:6], names[6:9]])
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Olivia (Tom 2026-11-05 23:25), used as painted (no head growth, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses = {k[2:]: v for k, v in _build_walk('olivia').items() if not k.endswith('_pass')}
 fo = args.ow_h * KW / poses['down_stand'].height
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['down_stand'].height, fo))
-# Head (2026-11-01, Tom: same head rule as the other adults): walk face about 16% smaller than Amy's; head x 1.18 about the chin,
-# body unchanged (fo comes from the unwarped stand, so she stands a little taller, like the other adults' hair). Chin at .344 of the stand.
-import kidhead as _kh
-WALK_HEAD_K, WALK_CHIN = 1.18, 0.344
-_hp = WALK_CHIN * poses['down_stand'].height
-poses = {n: _kh.grow_head(v, WALK_HEAD_K, _hp) for n, v in poses.items()}
 big = tighten(place({n: scaled_to(v, fo) for n, v in poses.items()}, KW), KW)
 pal, rows = quantize({n: hard(scaled_to(v, 1.0 / KW)) for n, v in big.items()}, args.colors)
 rects = pack(big, os.path.join(ART, 'olivia-ow.webp'))

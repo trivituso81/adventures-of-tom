@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Amy's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/amy-battle-v2.png and amy-walk-v2.png (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/amy-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/amy-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/amy-battle.webp, amy-ko.webp, amy-ow.webp  (painted frames, K x the size of the rows)
         data/amy-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/amy-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '3'))          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '9'))          # painted resolution multiples: battle, knocked out, overworld (repo art: overworld 9)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=float, default=99.5)   # idle figure height in grid rows (Tom's measured on his baked idle: 99.5)
@@ -35,9 +35,6 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'amy-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'amy-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
 
 
 # ---------------------------------------------------------------- paint-in (the sheets avoid injury wording)
@@ -68,14 +65,14 @@ poses['b_ko'] = swirl_eye(poses['b_ko'], 82, 33, 5)
 # ---------------------------------------------------------------- head size (match Tom's caricature proportions)
 # Tom's head (hair to chin) is about 45 percent of his height; the painted Amy's is about 28 percent. Each frame's head is cut out,
 # scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
-HEAD_KB, HEAD_KW = 1.8, 1.45     # Amy's painted head is about 25 percent of battle height (28 for Deedee), so battle needs a bit more than Deedee's 1.45; goal is about 37 percent like Deedee and TNB
+HEAD_KB = 1.8     # Amy's painted head is about 25 percent of battle height (28 for Deedee), so battle needs a bit more than Deedee's 1.45; goal is about 37 percent like Deedee and TNB
 TAPER = 55                       # rows BELOW the chin over which the scale eases back to 1 (the face itself stays uniformly scaled, so the jaw is not squashed)
 HEAD_K = HEAD_KB
 def _auto_head(img, name=''):
     """Walk frames: top = first row, chin from CHIN_W by direction, x range = every column with figure pixels in those rows."""
     a = np.array(img)[:, :, 3] > 40
     top = int(np.where(a.any(1))[0].min())
-    chin = 100 if name.startswith('w_left') else 96
+    chin = 96
     xs = np.where(a[top:chin].any(0))[0]
     return top, chin, int(xs.min()), int(xs.max())
 # hand-set head boxes (top, chin, x0, x1) in pose pixels, read off zoomed rulers
@@ -122,7 +119,7 @@ def _warp_head(arr, x0, x1, y0, ay, ax, k, taper, flat_x=False):
     return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
 
 def bigger_head(img, name, k=None, pad=420, taper=TAPER):
-    if k is None: k = HEAD_KB if name.startswith('b_') else HEAD_KW
+    if k is None: k = HEAD_KB
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
@@ -147,7 +144,7 @@ def bigger_head(img, name, k=None, pad=420, taper=TAPER):
             keep = [i for i, o in enumerate(ndi.find_objects(lab), 1) if o[1].start < 40 or o[1].stop > 185]   # arm pieces only; teeth and eyes split the face into bits
             WIN_ARMS = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & (A > 20)
             arr[pad:pad + H, pad:pad + W, 3] = np.where(WIN_ARMS, 0, arr[pad:pad + H, pad:pad + W, 3])
-        ax = _neck_x(img, chin, x0, x1) if not name.startswith(('w_down', 'w_up')) else (x0 + x1) / 2.0
+        ax = _neck_x(img, chin, x0, x1)
         if name != 'b_win': x1 = max(x1, _hair_right(img, top, chin) + 3)       # hair keeps widening below the chin; take it all into the warp or it tears at the box edge
         X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
         # Two layers: hair and skin are enlarged (and blended back to scale 1 below the chin); the shirt, sleeves and lanyard are only stretched
@@ -158,7 +155,7 @@ def bigger_head(img, name, k=None, pad=420, taper=TAPER):
         body = ndi.binary_opening(body, iterations=2)                    # drop stray specks inside the face
         body = ndi.binary_dilation(body, iterations=2) & (q[:, :, 3] > 20)
         body[:max(0, chin + pad - 12)] = False                          # shirt layer only from just above the chin down
-        if name in ('b_leap', 'b_defend', 'b_hurt', 'b_win', 'b_kneel') or name.startswith('w_left'): body[:] = False   # arms and sleeves beside the head: single-layer warp (the split mangles them)
+        if name in ('b_leap', 'b_defend', 'b_hurt', 'b_win', 'b_kneel'): body[:] = False   # arms and sleeves beside the head: single-layer warp (the split mangles them)
         arrH = arr.copy(); arrH[body, 3] = 0
         arrB = arr.copy(); arrB[~body, 3] = 0
         outH, dx, dy = _warp_head(arrH, X0, X1, Y0, AY, ax + pad, k, taper)
@@ -175,7 +172,6 @@ def bigger_head(img, name, k=None, pad=420, taper=TAPER):
 TOM_HEAD_RATIO = 0.40
 # Battle only (walk keeps 0.40): face (hairline to chin) = Justin's 49 battle px, Tom's call 2026-11-01. Final head rows = ratio x battle_h, so ratio = 0.40 x 49/44 x 1.3/1.322 (old face px, old/new battle scale).
 # Walk (front face on the welcome screen, drawn at real height with Justin 6'4" = 330 picture px): face = Justin's share x 330 / own height (2026-11-01, Tom).
-WALK_HEAD_RATIO = 0.383   # x .92 (2026-11-01 11:59, Tom: faces still uneven, Amy looks biggest; head x .92, welcome height lowered so the body keeps its size); before that .416 # x .946 (2026-11-01, Tom: body chin-to-feet follows real height, hair or cap counted on top; welcome height went up, so head share goes down by old/new height and the head stays the same size); before that .44 # was .376; x 1.17 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
 BATTLE_HEAD_RATIO = 0.438
 def _head_ratio(name, k):
     top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name], name)
@@ -187,10 +183,13 @@ def _solve(name, ratio=TOM_HEAD_RATIO):
         if _head_ratio(name, mid) < ratio: lo = mid
         else: hi = mid
     return round((lo + hi) / 2, 3)
-HEAD_KB, HEAD_KW = _solve('b_idle', BATTLE_HEAD_RATIO), _solve('w_down_stand', WALK_HEAD_RATIO)
-print('head factors solved: battle', HEAD_KB, 'walk', HEAD_KW)
+HEAD_KB = _solve('b_idle', BATTLE_HEAD_RATIO)
+print('head factor solved: battle', HEAD_KB)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Amy (Tom 2026-11-05 23:23), used as painted (no head warp, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('amy').items() if not k.endswith('_pass')})
 if os.environ.get('DUMP'):
     for _n, _im in poses.items(): _im.save(os.path.join(os.environ['DUMP'], 'amy_pose_' + _n + '.png'))
 

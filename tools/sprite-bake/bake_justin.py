@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Bake Justin's painted walk sheet into the game (overworld only; no battle sheet yet). Head sized to TNB and Boppy, body drawn taller than the rest of the family (he is 6'5").
+"""Bake Justin's painted walk sheet into the game (overworld only; no battle sheet yet). He is 6'4" (tallest of the family).
 
-Input : tools/sprite-bake/src/justin-walk-v1.png (3 rows of 4: down, up, left; each stand, step, stand, step; flat magenta)
+Input : art/raw/characters/justin-walk-sheet-v1.png (3 x 3: front, back, side; each stand, step A, step B; flat magenta), used as painted
 Output: art/chars/justin-ow.webp   (painted frames, 3x the size of the rows)
         data/justin-hires.js        (rows, palette, atlas rects; do not hand-edit)
-Head: the sheet's head is 26 percent of his height; per view (down, up, left) the head factor is solved so hair-to-chin is TARGET of the figure height (TNB 0.433 front, Boppy 0.40), tapered at the neck.
 
 Usage : python3 tools/sprite-bake/bake_justin.py [--ow-h 43] [--colors 46] [--contact PATH]
 """
@@ -13,102 +12,24 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/justin-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KW = int(os.environ.get('OW_K', '3'))                          # painted resolution multiple on the overworld
+KW = int(os.environ.get('OW_K', '8'))                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=int, default=53)       # standing height of the overworld sprite in rows (Tom 43, Michael 50: Justin is the tallest)
 ap.add_argument('--colors', type=int, default=46)
-ap.add_argument('--ratio', type=float, default=0.35)   # was .33; x 1.06 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
-#   # hair-to-chin over figure height, front and back (Tom .38; Justin is smaller than that on purpose, 2026-10-30: head about 17 rows vs Tom 16 on a 53 row body)
-ap.add_argument('--ratio-side', type=float, default=0.334)   # was .315; x 1.06, as --ratio
 ap.add_argument('--contact', default=None)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'justin-walk-v1.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
-
-def despill_pink(img):
-    """Hot-pink specks on the hair tips (magenta backdrop bleed): red well above green AND blue about equal to green. Skin, shirt and jeans never have both."""
-    a = np.array(img).astype(float); R, G, B = a[:, :, 0], a[:, :, 1], a[:, :, 2]
-    m = (R > G + 60) & (B > G * 0.95) & (a[:, :, 3] > 0)
-    a[:, :, 2] = np.where(m, np.minimum(B, G * 0.62), B); a[:, :, 0] = np.where(m, np.minimum(R, G * 1.75 + 10), R)
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-for _n in list(poses):
-    poses[_n] = despill_pink(poses[_n])
-
-def _auto_head(img):
-    a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
-    top = int(np.where(a.any(1))[0].min())
-    ws = np.convolve(a.sum(1).astype(float), np.ones(7) / 7, 'same')
-    lo, hi = int(top + .18 * (H - top)), int(top + .40 * (H - top))
-    chin = lo + int(np.argmin(ws[lo:hi]))
-    cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
-    return top, chin, int(xs.min()), int(xs.max())
-# hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
-HEAD_BOX = {}
-CHIN_FIX = {'w_left_stand2': 107}   # auto chin landed on the shirt collar
-def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
-    """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
-    neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
-    from scipy import ndimage as ndi
-    H = ay - y0                                                      # source rows y0..ay-1
-    u = np.arange(H)                                                 # source row index
-    dist = ay - (y0 + u)                                             # rows above the anchor (1..H)
-    s = np.where(dist >= taper, k, 1.0 + (k - 1.0) * (dist / float(taper)))
-    # dest distance above the anchor of the top edge of each source row (cumulative from the anchor upward)
-    order = np.argsort(dist); cum = np.zeros(H + 1); cum[1:] = np.cumsum(s[order])
-    Hd = int(np.ceil(cum[-1]))
-    r = Hd - (np.arange(Hd) + .5)                                           # dest row centres, measured upward from the anchor
-    idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)             # which source row (by sorted order) covers each dest row
-    srcdist = dist[order][idx]; sr = ay - srcdist + .0               # source row (y) for each dest row
-    sc = s[order][idx]
-    Wd = int(np.ceil((x1 - x0) * k)) + 2
-    xd = np.arange(Wd) + .0
-    xc = (ax - x0) * k                                               # dest x of the anchor column
-    out = np.zeros((Hd, Wd, 4))
-    pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
-    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / sc[:, None]
-    for c in range(4):
-        out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
-    al = out[:, :, 3:4]
-    out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
-    return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
-
-def bigger_head(img, name, k, pad=160, taper=22, margin=8):
-    W, H = img.size
-    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
-    arr = np.array(big)
-    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
-    chin = CHIN_FIX.get(name, chin)
-    x0, x1 = max(0, x0 - margin), min(W, x1 + margin)            # keep ears and hair edges inside the box
-    ax = (x0 + x1) / 2.0
-    # the taper back to scale 1 happens BELOW the chin (in the neck), so the whole face, jaw included, keeps the full enlargement
-    X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + taper + pad
-    out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
-    arr[Y0:AY, X0:X1, 3] = 0
-    big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
-    return big.crop(big.getbbox())
-def _solve_k(name, ratio):
-    t, c = (HEAD_BOX.get(name) or _auto_head(poses[name]))[:2]; c = CHIN_FIX.get(name, c); lo, hi = 1.0, 3.5
-    for _ in range(14):
-        k = (lo + hi) / 2
-        if k * (c - t) / bigger_head(poses[name], name, k).height < ratio: lo = k
-        else: hi = k
-    return (lo + hi) / 2
-KV = {'down': _solve_k('w_down_stand', args.ratio), 'up': _solve_k('w_up_stand', args.ratio), 'left': _solve_k('w_left_stand', args.ratio_side)}
-print('head factors', {k: round(v, 3) for k, v in KV.items()})
-for _n in list(poses):
-    poses[_n] = bigger_head(poses[_n], _n, KV[_n.split('_')[1]])
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Justin (Tom 2026-11-05 23:23), used as painted (no head warp, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('justin').items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):

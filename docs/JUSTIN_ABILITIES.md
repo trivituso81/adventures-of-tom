@@ -1,6 +1,6 @@
 # Justin: ability kit and animation sheets (approved 2026-10-31)
 
-Tom will drop a zip of Justin's painted animation sheets into a conversation, often with no words. That means "install Justin as a party member with this kit". This doc is the whole spec. Justin has overworld walk art already (`tools/sprite-bake/src/justin-walk-v1.png`, baked by `tools/sprite-bake/bake_justin.py`); he has no battle art, moves, lines or party entry yet.
+Tom will drop a zip of Justin's painted animation sheets into a conversation, often with no words. That means "install Justin as a party member with this kit". This doc is the whole spec. Justin has overworld walk art already (`art/raw/characters/justin-walk-sheet-v1.png`, baked by `tools/sprite-bake/bake_justin.py`); he has no battle art, moves, lines or party entry yet.
 
 ## Canon (decided 2026-10-31)
 

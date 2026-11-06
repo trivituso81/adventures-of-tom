@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake TNB's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tnb-battle-v2.png and tnb-walk-v2.png (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/tnb-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/tnb-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/tnb-battle.webp, tnb-ko.webp, tnb-ow.webp  (painted frames, K x the size of the rows)
         data/tnb-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -22,11 +22,11 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tnb-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '3'))          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '9'))          # painted resolution multiples: battle, knocked out, overworld (repo art: overworld 9)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=100)   # idle height in grid rows
-ap.add_argument('--ow-h', type=int, default=45)        # standing height of the overworld sprite in rows (was 42 before G_WALK 1.20: +3 rows of head, body unchanged)
+ap.add_argument('--ow-h', type=int, default=45)        # standing height of the overworld sprite in rows (OW.tnb.k .920 draws him at 5'10 next to Tom)
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -35,9 +35,6 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'tnb-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'tnb-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
 # extra poses (2026-10-29): battle actions (c_) and story / overworld scenes (s_), both drawn at battle size
 EX_A = [['pull', 'tw_wind', 'tw_rel', 'point', 'present', 'shrug'], ['hips', 'clap', 'carry', 'heave', 'crouch', 'dodge']]
 EX_B = [['toast', 'hug', 'whisper', 'wave'], ['sit', 'sittoast', 'talk', 'crouchlook'], ['sitR', 'sittoastR', 'talkR', 'laugh']]
@@ -112,10 +109,7 @@ HEAD_BOX = {   # (hair top, chin = bottom of the beard, left, right, anchor colu
                # the anchor column (where the head grows from) is the old face/neck centre.
     'b_idle': (3, 106, 22, 166, 91), 'b_windup': (3, 110, 3, 160, 73), 'b_strike': (3, 108, 98, 252, 172), 'b_run1': (3, 101, 3, 142, 74),
     'b_run2': (3, 100, 18, 162, 89), 'b_leap': (26, 110, 105, 218, 151), 'b_hurt': (3, 110, 95, 243, 164), 'b_kneel': (3, 114, 3, 158, 77),
-    'b_win': (20, 118, 60, 180, 121), 'b_defend': (3, 108, 40, 182, 108), 'b_cast': (6, 110, 84, 214, 146),
-    'w_down_stand': (0, 135, 10, 174, 88), 'w_down_step1': (3, 135, 7, 166, 83), 'w_down_stand2': (0, 135, 8, 168, 84), 'w_down_step2': (3, 135, 7, 164, 80),
-    'w_up_stand': (0, 133, 9, 148, 80), 'w_up_step1': (1, 133, 5, 142, 77), 'w_up_stand2': (0, 133, 7, 144, 76), 'w_up_step2': (1, 133, 4, 140, 73),
-    'w_left_stand': (1, 121, 7, 159, 78), 'w_left_step1': (2, 121, 17, 165, 89), 'w_left_stand2': (1, 121, 15, 163, 87), 'w_left_step2': (1, 121, 25, 174, 97)}
+    'b_win': (20, 118, 60, 180, 121), 'b_defend': (3, 108, 40, 182, 108), 'b_cast': (6, 110, 84, 214, 146)}
 EX_BOX = {
     'c_pull': (2, 122, 33, 187, 90), 'c_tw_wind': (2, 113, 62, 225, 137), 'c_tw_rel': (3, 115, 50, 232, 124), 'c_point': (3, 113, 65, 225, 135),
     'c_present': (2, 108, 82, 234, 146), 'c_shrug': (2, 105, 52, 206, 113), 'c_hips': (2, 108, 35, 180, 95), 'c_clap': (2, 98, 38, 180, 105),
@@ -202,14 +196,7 @@ def bigger_head(img, name, k=HEAD_K, pad=160, taper=TAPER):
 # The figure height after the warp is what the bake later refits to 100 (battle) or 42 (overworld) rows, so the head factor is solved on the
 # idle / down-stand frame (bisection on the real warp) and every other frame gets the factor that gives the same head height in rows.
 # TARGET_BT was 0.445; face (hairline to chin) = Justin's 49 battle px (Tom's call 2026-11-01): 0.445 x 49/47 x 1.3/1.409 (old face px, old/new battle scale)
-# TARGET_OW / TARGET_OWL x .97 (2026-11-01): walk face = Justin's when drawn at real height on the welcome screen
-# Walk head growth (Tom 2026-11-01 20:48, `tnbhead1`): on the overworld Tom's head still read much bigger than TNB's (measured hair to chin on the baked walk frames: Tom 16.0 rows front,
-# 14.6 side; TNB 15.0 and 13.8; cheek-to-cheek face width Tom 9.7, TNB 7.5). G_WALK grows ONLY TNB's walk head (absolute size), body chin-to-feet unchanged: the head share is re-solved for the
-# taller figure and --ow-h goes 42 to 45 rows so the body keeps its 27.5 rows. Knob: G_WALK (1.0 = the old size). Battle is untouched.
-_R0W, _R0L, G_WALK = 18.2 / 42 * .97 * .921 * .89, 17.5 / 42 * .97 * .921 * .89, 1.20
-def _grown_share(r0, g, rows=42.0):
-    h0 = r0 * rows; return g * h0 / ((rows - h0) + g * h0)
-TARGET_BT, TARGET_OW, TARGET_OWL = 0.428, _grown_share(_R0W, G_WALK), _grown_share(_R0L, G_WALK)   # old walk shares: _R0W (front/back) and _R0L (side); walk x .921 and x .89 history in docs/CHANGES.md (heads5, heads6, body1)
+TARGET_BT = 0.428
 def head_cc(img, name):
     if name == 'b_ko': return 0, 105
     return tuple((HEAD_BOX.get(name) or _auto_head(img))[:2])
@@ -222,8 +209,7 @@ def solve_k(img, name, ratio):
     k = (lo + hi) / 2
     return k, bigger_head(img, name, k=k).height
 _kb, _Hb = solve_k(poses['b_idle'], 'b_idle', TARGET_BT)
-_kw, _Hw = solve_k(poses['w_down_stand'], 'w_down_stand', TARGET_OW)
-print('head factor: battle idle %.3f, overworld down %.3f' % (_kb, _kw))
+print('head factor: battle idle %.3f' % _kb)
 def scaled_to(img, f):
     """Resize with premultiplied alpha so the painted soft edge stays clean (no threshold)."""
     w, h = max(1, round(img.width * f)), max(1, round(img.height * f))
@@ -244,8 +230,8 @@ for _pre, _refs in (('c_', ['c_pull', 'c_point', 'c_present', 'c_shrug', 'c_hips
 # Body build (2026-10-29, Tom: "TNB body proportions still don't seem to match Tom"). Head and height already equal Tom's, but the painted TNB is a
 # slim figure and Tom is stocky: Tom's torso (shoulders, arms, trunk) is about 0.50 of his height wide, TNB's about 0.39. Below the chin every row is
 # stretched sideways about the body's centre line (blending in over BODY_BLEND rows so the neck and hair do not shear); height is untouched, so size
-# and head ratio stay exactly Tom's. BODY_KX front/back and battle, BODY_KXL side view (depth). Env vars BODY_KX / BODY_KXL override.
-BODY_KX = float(os.environ.get('BODY_KX', 1.26)); BODY_KXL = float(os.environ.get('BODY_KXL', 1.16)); BODY_BLEND = 22
+# and head ratio stay exactly Tom's. BODY_KX battle and extra poses (env var BODY_KX overrides). The walk is used as painted.
+BODY_KX = float(os.environ.get('BODY_KX', 1.26)); BODY_BLEND = 22
 BODY_KD = float(os.environ.get('BODY_KD', 1.26))   # longboard poses (the board is stretched with the body, measured 2026-10-29: unwidened, the painted riding body was as slim as the old TNB; 1.0 turns it off)
 def _bulk_rows(img, chin, kx, blend):
     from scipy import ndimage as ndi
@@ -275,11 +261,14 @@ for _n in [n for n in poses if n.startswith('d_')]:
     poses[_n] = scaled_to(poses[_n], _fd); _v = [int(round(v * _fd)) for v in DB_BOX[_n]]; _v[3] = min(_v[3], poses[_n].width); HEAD_BOX[_n] = tuple(_v)
 for _n in list(poses):
     _t, _c = head_cc(poses[_n], _n)
-    _k = (TARGET_BT * _Hb if _n.startswith(('b_', 'c_', 's_', 'd_')) else (TARGET_OWL if 'left' in _n else TARGET_OW) * _Hw) / (_c - _t)
+    _k = TARGET_BT * _Hb / (_c - _t)
     poses[_n] = bigger_head(poses[_n], _n, k=_k)
-    _kx = BODY_KD if _n.startswith('d_') else (BODY_KXL if 'left' in _n else BODY_KX)
+    _kx = BODY_KD if _n.startswith('d_') else BODY_KX
     if _kx != 1.0: poses[_n] = bulk_body(poses[_n], _n, int(round((_c - _t) * _k)), _kx)
     if _n != 'b_ko': poses[_n], _ = body_width(poses[_n], int(round((_c - _t) * _k)), BODY_W, fade=BODY_FADE)
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for TNB (Tom 2026-11-05 23:25), used as painted (no head warp, no body widening, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('tnb').items() if not k.endswith('_pass')})
 if os.environ.get('HEADSHEET'):                      # debug: all head-warped frames on grey
     _it = list(poses.items()); _cw = max(i.width for _, i in _it) + 10; _ch = max(i.height for _, i in _it) + 10
     _sh = Image.new('RGBA', (_cw * 6, _ch * -(-len(_it) // 6)), (128, 128, 128, 255))

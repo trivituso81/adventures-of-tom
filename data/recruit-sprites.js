@@ -12,7 +12,7 @@ if(TOM_OW.hires) OW.tom.k=1;
 if(typeof TNB_OW!=='undefined'&&TNB_OW.hires) OW.tnb.k=.920;
 if(GRACE_OW.hires) OW.grace.k=.758;
 if(ROSE_OW.hires) OW.rose.k=.676;
-OW.amy.k=.925; OW.deedee.k=.922; OW.boppy.k=.950;
+OW.amy.k=.925; OW.deedee.k=.922; OW.boppy.k=.922;   // Boppy same height as Deedee (Tom 11-05 23:39), was .950 for 5'7
 // Recruit battle sprites come from data/recruit-rig.js: left-facing, same outline and shading as Tom, Grace and Rose.
 const RECRUIT_EXPR={amy:'clap',deedee:'spread',boppy:'hip',tnb:'hip'};
 for(const id of ['amy','deedee','boppy','tnb']) {
