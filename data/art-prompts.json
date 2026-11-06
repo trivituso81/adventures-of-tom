@@ -3616,7 +3616,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Story Time.\n\nRow 1:\n1. Sitting down cross legged on the floor, a calm warm smile.\n2. Opening a children's picture book on her lap, eyes bright.\n3. Holding the book up to show the first page, one eyebrow raised, proud.\n\nRow 2:\n4. Reading aloud with her mouth open, doing a silly voice, eyes wide.\n5. Reading in a hushed soft voice, head tilted, eyes half closed.\n6. Closing the book softly against her chest with a tender smile, finger to her lips."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "olivia-ab-michael",
    "tab": "Characters",
    "group": "Olivia",
@@ -3628,7 +3628,16 @@
     "art/raw/characters/olivia-battle-sheet-1-v1.png",
     "art/raw/characters/olivia-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: MICHAEL!.\n\nRow 1:\n1. Standing with her hands on her hips, a tired stare ahead.\n2. Taking a huge breath, chest rising, shoulders up.\n3. Shouting with both hands cupped around her mouth, head thrown back.\n\nRow 2:\n4. Standing still with her head tilted, listening, a flat unamused face.\n5. Shouting again, even louder, fists clenched at her sides, face red.\n6. Pointing sharply forward with one arm, mouth open in a command, fierce."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: MICHAEL!.\n\nRow 1:\n1. Standing with her hands on her hips, a tired stare ahead.\n2. Taking a huge breath, chest rising, shoulders up.\n3. Shouting with both hands cupped around her mouth, head thrown back.\n\nRow 2:\n4. Standing still with her head tilted, listening, a flat unamused face.\n5. Shouting again, even louder, fists clenched at her sides, face red.\n6. Pointing sharply forward with one arm, mouth open in a command, fierce.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-ab-michael-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793995125065
+    }
+   ]
   },
   {
    "status": "draft",
