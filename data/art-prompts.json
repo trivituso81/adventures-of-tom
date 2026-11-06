@@ -3691,6 +3691,12 @@
      "note": "all frames need to be full body",
      "from": "v3",
      "at": 1793995332023
+    },
+    {
+     "date": "2026-11-06",
+     "note": "you keep making 9 frames but there are only 6. and all 6 need to be full body poses",
+     "from": "v5",
+     "at": 1793995496255
     }
    ]
   },
