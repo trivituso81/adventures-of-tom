@@ -1,3 +1,7 @@
+## 2026-11-05 (268): The 7 Long Island area prompts also attach the installed plate as the layout and details reference (Art Library only, no game files, no tag)
+
+Tom (19:01): the generator struggles with details, so it needs the existing layout. Each Long Island base area entry now attaches two pictures: 1) the installed plate (Square `art/town.webp`, Row, Hollow, Pier, Marsh `art/reeds.webp`, Sundial, schoolyard) as LAYOUT AND DETAILS (same placement, size, building shapes and themes; details painted cleanly from the text), 2) the house painting `art/grands.webp` as style only. Same two-picture shape the six Los Angeles entries already had. Style block says "attachment 2". Sources mirrored (area-prompts.js, prompts/areas/*.txt); 397 entries, validate.js OK, every other entry unchanged.
+
 ## 2026-11-05 (269): Battle picture scaled smoothly instead of as blocky pixels (`index.html` CSS only)
 
 Tom saw a pixelated look on the new backgrounds. Cause (fact): the battle canvas is 576 x 324 and CSS `image-rendering: pixelated; crisp-edges` stretched it to the phone screen (about 2x on an iPhone), so every painted picture, characters included, showed blocky pixels. `#battle-canvas` now uses `image-rendering:auto` (smooth scaling). Limit: the canvas itself is still 576 x 324 (hard-coded in about 10 places); a true sharp fix is a 1152 x 648 canvas or a separate high-resolution background layer, not done.
