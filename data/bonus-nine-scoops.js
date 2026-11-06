@@ -1054,7 +1054,7 @@ SCENES.nsInvDot=[
 TRIGGERS.push(
   {id:'ns-goal',map:'town',when:{...NSC,flag:'ns-open',notFlag:'ns-goal'},scene:'nsGoal'},
   {id:'ns-creamery',map:'bakery',when:{...NSC,flag:'ns-goal',notFlag:'ns-creamery'},scene:'nsCreamery'},
-  {id:'ns-fountain',map:'town',at:[10,8,17,15],when:{...NSC,flag:'ns-creamery',notFlag:'ns-fountain'},scene:'nsFountain'},
+  {id:'ns-fountain',map:'town',at:[6,8,15,15],when:{...NSC,flag:'ns-creamery',notFlag:'ns-fountain'},scene:'nsFountain'},
   {id:'ns-invite',map:'town',when:{...NSC,flag:'ns-fountain',notFlag:'ns-invite'},scene:'nsInvite'},
   {id:'ns-trail',map:'hollow',at:[4,13,11,20],when:{...NSC,flag:'ns-invites',notFlag:'ns-trail'},scene:'nsTrail'},
   {id:'ns-pond',map:'hollow',at:[13,1,22,15],when:{...NSC,flag:'ns-trail',notFlag:'ns-pond'},scene:'nsPond'},
@@ -1093,9 +1093,9 @@ STORY_WORLD.push(()=>{
 });
 HOLD_RULES.push(n=>inBonus()&&!n.scripted);
 if(worlds.bakery) for(const n of worlds.bakery.npcs) if(n.name==='Bun') { n.away=(n.away||[]).concat([{chapter:NS}]); AWAY_NPCS.push({map:worlds.bakery,n}); }
-for(const [id,at,name,lines,cond] of [['town',[[28,14],[28,15],[29,14]],'School gate',['The gate to Long Island Elementary is locked. It\'s Saturday. It\'s a BIRTHDAY.']],['row',[[12,21],[13,21],[14,21]],'Pier path',['A sign on the branch: CATTAIL PIER. CLOSED. THE FISH ARE AT A PARTY.']],
-  ['town',[[13,2],[14,2]],'Grace','Grace plants her feet. "Invitations FIRST, Tata. It\'s a party. Parties have RULES."',{test:S=>S.flags['ns-invite']&&!S.flags['ns-invites']}],
-  ['town',[[13,2],[14,2]],'The path north',['Frost on the path. Brain Freeze is humming up there, and the family isn\'t ready. Not yet.','Rose, Boppy\'s peppers, Mr. Pistachio, your sister. In that order.'],{test:S=>S.flags['ns-fled']&&!S.flags['ns-ready']}]]) {
+for(const [id,at,name,lines,cond] of [['town',[[28,5],[28,6],[29,5],[29,6]],'School gate',['The gate to Long Island Elementary is locked. It\'s Saturday. It\'s a BIRTHDAY.']],['row',[[12,21],[13,21],[14,21]],'Pier path',['A sign on the branch: CATTAIL PIER. CLOSED. THE FISH ARE AT A PARTY.']],
+  ['town',[[8,2],[8,3]],'Grace','Grace plants her feet. "Invitations FIRST, Tata. It\'s a party. Parties have RULES."',{test:S=>S.flags['ns-invite']&&!S.flags['ns-invites']}],
+  ['town',[[8,2],[8,3]],'The path north',['Frost on the path. Brain Freeze is humming up there, and the family isn\'t ready. Not yet.','Rose, Boppy\'s peppers, Mr. Pistachio, your sister. In that order.'],{test:S=>S.flags['ns-fled']&&!S.flags['ns-ready']}]]) {
   const M=worlds[id]; if(M&&M.spec) (M.spec.gates=M.spec.gates||[]).unshift({at,cond:Object.assign({chapter:NS},cond||{}),name,lines});
 }
 // Grace's friends leave the Square for the party once the scoops are won (they are spawned at Amy's house by nsEnd).

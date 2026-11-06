@@ -6,7 +6,7 @@ Tom is redoing every Long Island outdoor area as a new painting, one area at a t
 
 | Map id | Name | Tiles | Plate size (art px, 64 per tile) | Painting now in the game |
 |---|---|---|---|---|
-| town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved Library painting area-square v3 (2026-11-05, `square5`, 4:3 trimmed to 15:13), lettered by the generator. No walk-behind layer yet |
+| town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved Library painting area-square v3 (2026-11-05, `square5`, 4:3 trimmed to 15:13), lettered by the generator. LIVE as `square6` (2026-11-06) with a walk-behind layer `art/town-fg.webp` (37 pieces: trees, roofs, 3 exit boards, 4 lamps, props), cut by `tools/make_town_fg.py` from `art/raw/areas/town-v3/`; walk map first pass by `tools/make_town_mask.py` plus `tools/town_mask_hand.json`. Hanging shop signs are not cut (feet are always south of them) |
 | row | Rivituso Row | 24 x 22 | 1536 x 1408 | Tom's v2 painting, boards repainted in code, game-drawn lettering (disliked) |
 | hollow | Grump Hollow | 24 x 22 | 1536 x 1408 | Tom's approved 11-05 painting (area-hollow-v1, cropped 85 px to 12:11), painted board LONG ISLAND / SQUARE, own cutout layer art/hollow-fg.webp (`hollow4`, tools/make_hollow_fg.py) |
 | pier | Cattail Pier | 24 x 22 | 1536 x 1408 | original painting, not redone yet |

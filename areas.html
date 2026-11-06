@@ -256,7 +256,7 @@ function classify(m){
   }
   return out;
 }
-function hashOf(s){ let a=0x811c9dc5,b=0x12345678; const str=s.join(''); for(let i=0;i<str.length;i++){ const c=str.charCodeAt(i); a=Math.imul(a^c,16777619)>>>0; b=Math.imul(b+c,2246822519)>>>0; b^=b>>>13; } return a.toString(16).padStart(8,'0')+b.toString(16).padStart(8,'0'); }
+function hashOf(s){ let a=0x811c9dc5,b=0x12345678; const str=s.join(''); for(let i=0;i<str.length;i++){ const c=str.charCodeAt(i); a=Math.imul(a^c,16777619)>>>0; b=Math.imul(b+c,2246822519)>>>0; b=(b^(b>>>13))>>>0; } return a.toString(16).padStart(8,'0')+b.toString(16).padStart(8,'0'); }
 
 // ---- load a map
 function loadMap(id,quiet){

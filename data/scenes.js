@@ -1776,7 +1776,7 @@ STORY_MAPFX.push(time=>{
   const glow=(x,y,r,a)=>{ const g=c.createRadialGradient(x,y,2,x,y,r); g.addColorStop(0,'rgba(255,214,140,'+a+')'); g.addColorStop(1,'rgba(255,214,140,0)'); c.fillStyle=g; c.fillRect(x-r,y-r,r*2,r*2); };
   c.globalCompositeOperation='lighter';
   for(const h of M.houses||[]) if(h.door) glow((h.door.x+.5)*T,(h.door.y+.6)*T,T*2.2,.28);
-  if(M.id==='town') glow(13.5*T,12.5*T,T*2.5,.18);
+  if(M.id==='town') glow(10.9*T,12.5*T,T*2.5,.18);
   if(M.id==='schoolyard') { glow(12*T,3.5*T,T*3.2,.3); glow(3.5*T,11.5*T,T*2,.1); }
   const p=position(player); glow((p.x+.5)*T,(p.y+.5)*T,T*2.6,.14);
   c.globalCompositeOperation='source-over';
