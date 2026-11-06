@@ -1,3 +1,8 @@
+## 2026-11-06 (317): Grace's approved object sheets installed (`gab1` props)
+- Tom: "her objects are approved too". 13 grace-fx sheets cut by `tools/sprite-bake/bake_grace_fx.py` (magenta keyed, 4 x 3 cells). 18 objects replace the older prop of the same name, so every hook in `engine/grace-moves.js` stays: subscribe button, bell, like coin, green arrow, glitter nail, spring mat, score card 10, screech wave, sour note, wobbly notes, cracked note, gem spray, sharp gem, portrait page, scribble, sketch star, eraser crumbs, play plaque. `bake_prop_sheets.py` skips those slugs so a rerun cannot bring the old ones back.
+- Purged: hairbrush_microphone, pink_nail_polish_bottle, gold_trophy_cup (unused since 316), their preload and props.json entries. 0 references. PROPART tag `gab1`.
+- Not yet swapped (no clear counterpart or still drawn in the poses): gems blue, pink, gold, hopper, cluster, sparkle star, ear rings, snapped string, blank page, pencil shavings, plush squishies, dumpling hero; the sheets also hold spotlight cones, trophy, LIVE badge, REC, hearts and backpacks that no move uses yet.
+- Tested: kit_test on 9 moves, tag_check, unused_voice 0, smoke.
 ## 2026-11-06 (306): Tom's 14 objects-and-effects sheets installed; Flashcard Flurry no longer walks (`ab2`)
 - Tom: "incorporate objects too - they should all be approved" and "tom doesnt need to walk forward for flashcard fury". Flashcard Flurry now plays where Tom stands: no walk out, no walk back.
 - New cutter tools/sprite-bake/bake_tom_fx.py cuts the 14 sheets (tom-fx-<move>, 4 x 3 on magenta) into 123 painted props, art/props/tom/<move>_<slug>.webp (items assigned to cells by connectivity because they drift over cell lines; grid lines and the magenta shadow tint removed).

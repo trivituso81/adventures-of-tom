@@ -26,6 +26,7 @@ REPLACED = {'sleep_mask', 'lie_flat_pod', 'airliner', 'giant_floor_controller', 
 GRID = {(1484, 1060): (7, 5), (1254, 1254): (4, 4), (1774, 887): (2, 1)}
 
 # (sheet file, character, [(cell index 1-based, item number)])
+GRACE_FX_SLUGS = {'subscribe_button','notification_bell','like_thumbs_up','green_up_arrow','giant_glitter_nail','spring_floor_mat','scorecards','screech_burst','sour_note','wobbly_notes','cracked_note','gem_spray','gem_sharp','portrait_page','scribble_cloud','sketch_burst','eraser_crumbs','play_button_plaque'}   # keep in step with MAP in bake_grace_fx.py
 def rng(a, b, start=1):  # item numbers a..b land in cells start.. in order
     return [(start + i, a + i) for i in range(b - a + 1)]
 SHEETS = [
@@ -199,6 +200,7 @@ def main():
             if im is None:
                 report.append(f'{c}#{n}: empty cell {cell} in {fn}'); continue
             slug = names[c][n][0]
+            if c == 'grace' and slug in GRACE_FX_SLUGS: continue   # replaced by bake_grace_fx.py (Tom 2026-11-06)
             if fn == 'tnb-sheet2-custom.png': im = drop_specks(im)
             s = MAXSIDE_BY.get(slug, MAXSIDE) / max(im.size)
             if s < 1:
