@@ -2380,6 +2380,12 @@
      "note": "the second image he should be reeling from taking damage. the third and fourth images should be different attack poses",
      "from": "v1",
      "at": 1793923708752
+    },
+    {
+     "date": "2026-11-06",
+     "note": "second image he should be pushed backwards taking damage",
+     "from": "v2",
+     "at": 1793923792461
     }
    ],
    "id": "enemy-soggysock",
