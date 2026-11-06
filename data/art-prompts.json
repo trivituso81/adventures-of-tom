@@ -4397,7 +4397,7 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Stranger Alert.\n\nItems:\n1. A window with a pale curtain and a pale blue sky (wide).\n2. A big jagged bark burst, white and yellow.\n3. A set of curved bark sound arcs (wide).\n4. A small exclamation mark, red.\n5. A small alarm star burst.\n6. A soft pale blue shield glow."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-fx-squirrel-ult",
    "tab": "Characters",
    "group": "Nara",
@@ -4406,7 +4406,16 @@
    "refs": [
     "art/raw/characters/nara-ab-squirrel-ult-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: CHAIRMAN CHEEKS!.\n\nItems:\n1. A tiny top hat, black with a red band.\n2. A tiny round gold monocle on a chain.\n3. A small plump grey squirrel in the air, in a top hat and a monocle, tail curled, grinning.\n4. A big old oak tree trunk with a branch on one side (tall).\n5. A pile of autumn leaves and acorns.\n6. A yellow tennis ball.\n7. A small wooden park bench (wide).\n8. A big dust cloud, solid and puffy (wide).\n9. A big jagged bark burst, yellow and white.\n10. Cream colored speed streaks (wide)."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: CHAIRMAN CHEEKS!.\n\nItems:\n1. A tiny top hat, black with a red band.\n2. A tiny round gold monocle on a chain.\n3. A small plump grey squirrel in the air, in a top hat and a monocle, tail curled, grinning.\n4. A big old oak tree trunk with a branch on one side (tall).\n5. A pile of autumn leaves and acorns.\n6. A yellow tennis ball.\n7. A small wooden park bench (wide).\n8. A big dust cloud, solid and puffy (wide).\n9. A big jagged bark burst, yellow and white.\n10. Cream colored speed streaks (wide).",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-fx-squirrel-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793989331429
+    }
+   ]
   },
   {
    "status": "draft",
