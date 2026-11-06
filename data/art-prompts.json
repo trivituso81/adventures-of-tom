@@ -2370,6 +2370,13 @@
      "date": "2026-11-06",
      "from": "v2",
      "at": 1793926535525
+    },
+    {
+     "n": 2,
+     "file": "art/raw/enemies/enemy-bigshake-v3.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793926877425
     }
    ],
    "rejects": [],
