@@ -2965,7 +2965,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-ab-squirrel-ult",
    "tab": "Characters",
    "group": "Nara",
@@ -2977,7 +2977,16 @@
     "art/raw/characters/nara-battle-sheet-1-v1.png",
     "art/raw/characters/nara-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: CHAIRMAN CHEEKS!.\n\nRow 1:\n1. Standing on patrol, head high, ears relaxed, sniffing the air calmly.\n2. Ears snapping up, eyes narrowed in outrage, a deep frown, nose pointed ahead.\n3. Crouched low, every muscle tense, eyes burning, lips curled in a determined scowl.\n\nRow 2:\n4. Launching forward at full speed, ears flat back, mouth open.\n5. Skidding around a turn at full speed, ears flying, eyes fixed ahead.\n6. Standing at the foot of a tree, both front paws up on the trunk, head thrown back, barking up."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: CHAIRMAN CHEEKS!.\n\nRow 1:\n1. Standing on patrol, head high, ears relaxed, sniffing the air calmly.\n2. Ears snapping up, eyes narrowed in outrage, a deep frown, nose pointed ahead.\n3. Crouched low, every muscle tense, eyes burning, lips curled in a determined scowl.\n\nRow 2:\n4. Launching forward at full speed, ears flat back, mouth open.\n5. Skidding around a turn at full speed, ears flying, eyes fixed ahead.\n6. Standing at the foot of a tree, both front paws up on the trunk, head thrown back, barking up.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-ab-squirrel-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793989151734
+    }
+   ]
   },
   {
    "status": "approved",
