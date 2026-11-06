@@ -2552,7 +2552,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Slasher Jump Scare.\n\nRow 1:\n1. Reaching up to flip a light switch, a mischievous look.\n2. Holding a flashlight under his chin, wide eyes, an eerie grin.\n3. Pointing the flashlight beam straight ahead, eyebrows raised, whispering, delighted.\n\nRow 2:\n4. Both hands thrown up, mouth wide open in a big dramatic scream.\n5. Clutching his own chest, doubled over laughing.\n6. A proud little bow, the flashlight under one arm, a gleeful grin."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tnb-ab-scope-creep",
    "tab": "Characters",
    "group": "TNB",
@@ -2564,7 +2564,16 @@
     "art/raw/characters/tnb-battle-sheet-1-v1.png",
     "art/raw/characters/tnb-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Scope Creep.\n\nRow 1:\n1. Standing holding an open laptop in one arm, the other hand on the keys, a tidy professional smile.\n2. Pushing his glasses up with one finger, the laptop held up, saying \"just a tiny change\", innocent face.\n3. One finger raised, \"one more thing\", the laptop on his forearm, eyebrows high.\n\nRow 2:\n4. Both hands out, wincing apologetically, the laptop under one arm, a pained smile.\n5. Holding the laptop at arm's length like it is heavy, eyes wide, mouth open.\n6. Shrugging with both palms up, the laptop snapped shut under his arm, a sheepish grin."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Scope Creep.\n\nRow 1:\n1. Standing holding an open laptop in one arm, the other hand on the keys, a tidy professional smile.\n2. Pushing his glasses up with one finger, the laptop held up, saying \"just a tiny change\", innocent face.\n3. One finger raised, \"one more thing\", the laptop on his forearm, eyebrows high.\n\nRow 2:\n4. Both hands out, wincing apologetically, the laptop under one arm, a pained smile.\n5. Holding the laptop at arm's length like it is heavy, eyes wide, mouth open.\n6. Shrugging with both palms up, the laptop snapped shut under his arm, a sheepish grin.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-ab-scope-creep-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793981245793
+    }
+   ]
   },
   {
    "status": "draft",
