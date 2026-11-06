@@ -25,7 +25,7 @@ const Tm=RECRUIT_MOVES.tom;
 
 // ================= Props =================
 PROP2.abtn=(q,u)=>{ E(0,0,11,11,OUT); E(0,0,9,9,'#e0402e'); E(-3,-3,4,3,'#ff8a7a'); label('A',0,-2,'#fff8e8',1); };
-PROP2.jar=(q,u)=>{ if(PROPART.draw('tom/sourdough_starter_jar',0,-2,{h:42})) return; R(-14,-16,28,34,OUT); R(-12,-14,24,30,'#cfe6ee'); R(-12,-14,24,8,'#9fc8d8'); R(-14,-22,28,8,OUT); R(-12,-20,24,5,'#c9a03e'); R(-12,-2,24,18,'#efe3c8'); for(let k=0;k<5;k++) { const a=((k*37)%20)-10,b=((u*90+k*13)%16); E(a,12-b,2,2,'#fff8e8'); } R(-10,-8,3,20,'rgba(255,255,255,.5)'); };
+PROP2.jar=(q,u)=>{ if(PROPART.draw('tom/splash_jar',0,-2,{h:42})) return; R(-14,-16,28,34,OUT); R(-12,-14,24,30,'#cfe6ee'); R(-12,-14,24,8,'#9fc8d8'); R(-14,-22,28,8,OUT); R(-12,-20,24,5,'#c9a03e'); R(-12,-2,24,18,'#efe3c8'); for(let k=0;k<5;k++) { const a=((k*37)%20)-10,b=((u*90+k*13)%16); E(a,12-b,2,2,'#fff8e8'); } R(-10,-8,3,20,'rgba(255,255,255,.5)'); };
 PROP2.card=(q,u)=>{ R(-17,-22,34,44,OUT); R(-15,-20,30,40,'#fff8e8'); R(-15,-20,30,5,'#e0402e'); kanji(q.ch,0,3,24,'#2b2a26'); };
 PROP2.tag=(q,u)=>{ poly([[-22,-8],[14,-8],[22,0],[14,8],[-22,8]],'#f1d58c',true); E(16,0,2.5,2.5,OUT); label('$$$',-5,-2,'#7a1a14',1); };
 PROP2.pass=(q,u)=>{ R(-30,-13,60,26,OUT); R(-28,-11,56,22,'#fff8e8'); R(-28,-11,56,6,'#1d3a8a'); R(-28,-5,16,16,'#c9ccd4'); label('SEAT 38E',12,-2,'#2b2a26',1); label('BASIC',12,5,'#e0402e',1); };
@@ -90,7 +90,7 @@ SC.seat=(s,u)=>{
   // A lie-flat pod slides in behind Tom: long bed, headrest at the far end, a little tray with a glass.
   const p=tomPos(),b=p.base,slide=ez(u/.16),fade=u>.9?(1-u)/.1:1; gfx.globalAlpha=fade;
   const x=p.cx+(1-slide)*260,w=150;
-  if(!PROPART.draw('tom/lie_flat_pod',x+w/2-4,b-46,{h:96})) {
+  if(!PROPART.draw('tom/delta_pod',x+w/2-4,b-46,{h:96})) {
   R(x-40,b-30,w+8,30,OUT); R(x-38,b-28,w+4,26,'#1d3a8a'); R(x-38,b-28,w+4,6,'#3458b0'); R(x-34,b-10,w-4,4,'#142a66');
   R(x+w-54,b-74,44,50,OUT); R(x+w-52,b-72,40,46,'#1d3a8a'); R(x+w-50,b-70,36,14,'#c9ccd4'); R(x+w-52,b-44,40,4,'#3458b0');
   R(x+w-70,b-42,30,8,OUT); R(x+w-68,b-40,26,4,'#e8e8f0'); R(x+w-62,b-56,8,16,OUT); R(x+w-60,b-54,4,12,'#ffd166'); E(x+w-58,b-56,5,3,OUT); E(x+w-58,b-56,3.4,1.6,'#fff8e8');
@@ -102,7 +102,7 @@ SC.plane=(s,u)=>{
   const t=ez(u),x=lerp(640,-200,t),dip=Math.sin(t*Math.PI),y=60+dip*70,sc=1+dip*.5; gfx.globalAlpha=u>.92?(1-u)/.08:1;
   for(let k=0;k<2;k++) { gfx.strokeStyle='rgba(255,255,255,'+(.35-k*.1)+')'; gfx.lineWidth=7-k*2; gfx.beginPath(); gfx.moveTo(x+40*sc,y-6+k*14); gfx.quadraticCurveTo(x+200,y-10+k*14-dip*20,x+420,y-50*(1-t)+k*14); gfx.stroke(); }
   gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); gfx.rotate(-.12+dip*.1);
-  if(!PROPART.draw('tom/airliner',0,0,{w:130})) {
+  if(!PROPART.draw('tom/delta_jet',0,0,{w:130})) {
   poly([[-60,-4],[-50,-12],[40,-12],[62,-2],[40,8],[-50,8]],'#e8e8f0',true); poly([[-60,-4],[-50,8],[40,8],[62,-2]],'#c9ccd4'); poly([[-54,-12],[-40,-36],[-30,-36],[-36,-12]],'#1d3a8a',true);
   poly([[-10,-6],[6,-28],[24,-28],[12,-6]],'#1d3a8a',true); poly([[-20,2],[-2,26],[18,26],[6,2]],'#c9ccd4',true);
   for(let k=0;k<7;k++) R(-36+k*11,-7,6,4,'#5c8fe0'); R(44,-9,10,5,'#5c8fe0'); poly([[-18,2],[-6,2],[-4,12],[-18,12]],'#8a8f96',true); poly([[-50,-12],[-56,-20],[-46,-20],[-42,-12]],'#e0402e');
@@ -368,7 +368,7 @@ SC.tm_stophand=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const grow=ez
   for(let k=0;k<3;k++) { const q=cl(u*1.6-k*.18); gfx.globalAlpha=(1-q)*fade(u,.75); R(x-6+k*5,y-26+k*22-q*8,3,3,CREAM); }
   gfx.restore(); };
 SC.tm_placard=(s,u)=>{ const d=ez(u/.2),bob=u<.2?0:Math.sin(cl((u-.2)/.12)*Math.PI)*3,x=s.x,y=s.y-14*(1-d)-bob; gfx.globalAlpha=fade(u,.85)*d;
-  if(PROPART.draw('tom/no_touching_sign_l',x,y-8,{h:56})) return;   // painted sign on its post; the drawn placard is the fallback
+  if(PROPART.draw('tom/defend_placard',x,y-8,{h:56})) return;   // painted sign on its post; the drawn placard is the fallback
   R(x-2,y-6,4,18,OUT); R(x-1,y-5,2,16,WOOD); R(x-30,y-28,60,24,OUT); R(x-28,y-26,56,20,CREAM); R(x-28,y-26,56,4,RED); label('NO',x,y-20,'#7a1a14',1); label('TOUCHING',x,y-12,'#7a1a14',1); };
 SC.tm_sleeve=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const x=st.x-18,y=st.y-TH()*.5; gfx.globalAlpha=fade(u,.5); label('*',x-4,y-u*10,GOLD,2); Ln(x,y,x+12,y,2,CREAM); };
 Tm.defendShow=(u,t,resolve)=>{ const fx=battle.fx[u.idx],self=t===u,H=ST.unit(t),me=ST.unit(u);
@@ -504,29 +504,29 @@ SC.tm_puffs=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+
 // Gate scanner beeps PRIORITY BOARDING, a red carpet rolls to a glowing door, Tom lies flat in a pod with a sleep mask,
 // the jet rolls in (his window says Zzz), streaks through the enemy line, hot towels fall on the party, Tom wakes rested.
 SC.tm_scan=(s,u)=>{ const ms=s.t*1000,ok=ms>s.beep,x=s.x,y=s.y,k=ez(ms/300); gfx.globalAlpha=fade(u,.92);
-  const top=y-64*k; if(!PROPART.draw('tom/gate_scanner',x,y-39*k,{h:Math.max(4,78*k)})) { RO(x-5,top+14,10,y-top-14,'#6a6f7a'); RO(x-13,top,26,16,'#2b2f38'); R(x-10,top+3,20,10,ok?'#3fe07a':'#4a5060'); }
+  const top=y-64*k; if(!PROPART.draw('tom/delta_scanner',x,y-39*k,{h:Math.max(4,78*k)})) { RO(x-5,top+14,10,y-top-14,'#6a6f7a'); RO(x-13,top,26,16,'#2b2f38'); R(x-10,top+3,20,10,ok?'#3fe07a':'#4a5060'); }
   if(ok&&ms<s.beep+1300) { label('PRIORITY',x,top-34,GREEN,2); label('BOARDING',x,top-20,GREEN,2); } };
 SC.tm_carpet=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez((ms-P.r0)/(P.r1-P.r0)); if(ms<P.r0) return; const xe=lerp(P.x0,P.x1,k); gfx.globalAlpha=fade(u,.93);
   const a=Math.min(P.x0,xe),b=Math.max(P.x0,xe); R(a,P.y-5,b-a,12,OUT); R(a,P.y-3,b-a,8,'#c8283a'); R(a,P.y-3,b-a,2,'#e8c84a'); R(a,P.y+3,b-a,2,'#e8c84a');
   if(k<1) { EO(xe,P.y-2,6,8,'#a81e30'); R(xe-1,P.y-8,2,12,'#e8c84a'); } };
 SC.tm_door=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez((ms-P.d0)/300),x=P.x,y=P.y; if(ms<P.d0) return; gfx.globalAlpha=fade(u,.9);
   const h=96*k,w=48,glow=ms>P.in&&ms<P.in+500?1-(ms-P.in)/500:0;
-  const pdr=h>3&&PROPART.draw('tom/gate_0_door',x,y-h/2-6,{w:78*(.4+.6*k),h:h+12});
+  const pdr=h>3&&PROPART.draw('tom/delta_gate0_door',x,y-h/2-6,{w:78*(.4+.6*k),h:h+12});
   if(!pdr) {   R(x-w/2-4,y-h-4,w+8,h+4,OUT); R(x-w/2-2,y-h-2,w+4,h+2,'#8a8f9a'); R(x-w/2,y-h,w,h,'#fff0b4'); gfx.globalAlpha*=.5; R(x-w/2+4,y-h+4,w-8,h-4,'#ffffff'); gfx.globalAlpha=fade(u,.9); }
   if(glow>0) { gfx.globalAlpha=glow*.6; E(x,y-h/2,w*1.4,h*.8,'#fff6cc'); gfx.globalAlpha=fade(u,.9); }
   if(k>.9&&!pdr) { RO(x-26,y-h-24,52,14,NAVY); label('GATE 0',x,y-h-20,CREAM,1); } };
 // The lie-flat pod. Tom's body is drawn by the path (rotated); the duvet and mask go over him.
 SC.tm_pod=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; gfx.globalAlpha=fin(u,.08)*fade(u,.88);
-  if(!s.front) { if(PROPART.draw('tom/lie_flat_pod',x-4,y-34,{w:128})) return; RO(x-54,y-14,108,12,NAVY); R(x-52,y-2,104,10,'#14204a'); R(x-50,y-12,100,4,'#3a5aa8'); RO(x+40,y-40,12,28,NAVY); RO(x-58,y-34,12,22,'#c9ccd4'); R(x-60,y-36,16,3,OUT); RO(x-56,y-44,4,8,'#cfe6ee'); return; }
+  if(!s.front) { if(PROPART.draw('tom/delta_pod',x-4,y-34,{w:128})) return; RO(x-54,y-14,108,12,NAVY); R(x-52,y-2,104,10,'#14204a'); R(x-50,y-12,100,4,'#3a5aa8'); RO(x+40,y-40,12,28,NAVY); RO(x-58,y-34,12,22,'#c9ccd4'); R(x-60,y-36,16,3,OUT); RO(x-56,y-44,4,8,'#cfe6ee'); return; }
   const lay=ms>P.lay; if(!lay) return;
-  const pp=PROPART.ready('tom/lie_flat_pod');
+  const pp=PROPART.ready('tom/delta_pod');
   if(!pp) { RO(x-52,y-50,70,36,'#eef2f6'); R(x-52,y-50,70,4,'#c9d2e0'); for(let k=0;k<3;k++) R(x-44+k*20,y-30,8,2,'#c9d2e0');
   R(x-52,y-18,104,16,NAVY); R(x-52,y-6,104,4,'#3a5aa8'); }   // pod rim in front of the body
-  if(!PROPART.draw('tom/sleep_mask',x+26,y-28,{w:20})) RO(x+18,y-31,16,6,NAVY);   // sleep mask over the eyes
+  if(!PROPART.draw('tom/delta_sleep_mask',x+26,y-28,{w:20})) RO(x+18,y-31,16,6,NAVY);   // sleep mask over the eyes
   RO(x-22,y-58,14,7,CREAM);   // a warm towel on the chest
   for(let k=0;k<3;k++) { const q=((s.t*.8+k/3)%1); gfx.globalAlpha=(1-q)*fade(u,.88); label('Z',x+30+q*24+k*2,y-56-q*30,CREAM,1+(k===2?1:0)); } };
 const jet=(k,t,zz,thrust)=>{ gfx.save(); gfx.scale(k,k);
-  const pa=PROPART.draw('tom/airliner',136,-4,{w:210}); if(!pa) {
+  const pa=PROPART.draw('tom/delta_jet',136,-4,{w:210}); if(!pa) {
   PO([[160,4],[214,4],[246,46],[224,46]],'#c9ccd4');   // far wing
   PO([[206,-12],[236,-52],[254,-52],[248,-12]],NAVY);   // tail fin
   R(0,-16,250,32,OUT); E(4,0,18,18,OUT); PO([[244,-16],[272,-8],[272,6],[244,16]],OUT,0);
@@ -551,7 +551,7 @@ SC.tm_jet=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,th=.4;
   if(ms>P.park&&ms<P.go) { label('COZY',x+120,y-46,WARM,2); label('KINETIC',x+170,y+72,'#ffb04a',2); } };
 SC.tm_passes=(s,u)=>{ for(let k=0;k<10;k++) { const a=s.seed+k*.63,d=ez(u)*(30+k%3*12),x=s.x+Math.cos(a)*d,y=s.y-Math.abs(Math.sin(a))*d*.8+u*u*60;
   gfx.save(); gfx.translate(x,y); gfx.rotate(a+u*6); gfx.globalAlpha=1-u*u; R(-7,-4,14,8,OUT); R(-6,-3,12,6,'#ffffff'); R(-6,-3,3,6,NAVY); gfx.restore(); } };
-const towel=(x,y,uu)=>{ if(PROPART.draw('tom/hot_towel',0,0,{w:26})) return; R(-9,-5,18,10,OUT); R(-8,-4,16,8,CREAM); R(-4,-4,1,8,'#e6dccb'); R(2,-4,1,8,'#e6dccb'); gfx.globalAlpha=.6; for(let k=0;k<2;k++) E(-4+k*8,-10-((uu*30+k*7)%10),2,3,'#ffffff'); gfx.globalAlpha=1; };
+const towel=(x,y,uu)=>{ if(PROPART.draw('tom/delta_towel',0,0,{w:26})) return; R(-9,-5,18,10,OUT); R(-8,-4,16,8,CREAM); R(-4,-4,1,8,'#e6dccb'); R(2,-4,1,8,'#e6dccb'); gfx.globalAlpha=.6; for(let k=0;k<2;k++) E(-4+k*8,-10-((uu*30+k*7)%10),2,3,'#ffffff'); gfx.globalAlpha=1; };
 Tm.delta_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),party=b2LiveParty();
   const doorX=Math.round(Math.max(Gp.x1+70,me.x-80)),floor=Math.min(312,me.base+4),pod={x:doorX,y:floor};
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_delta_1'},{t:700,f:'ab_delta_2'},{t:1300,f:'walk'},{t:2050,x:doorX+6,y:floor,f:'walk'},{t:2100,hide:true},
@@ -779,7 +779,7 @@ Tm.starter_splash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m
 // Tom kneels by the friend with a cutting board and a warm boule. He saws it open; steam pours out of the crumb and
 // curls over them (the heal). Then he holds up his phone for the crumb shot. Flash.
 const boule=(x,y,sc,cut,open)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
-  if(!cut&&PROPART.draw('tom/sourdough_boule',0,-12,{w:46})) { gfx.restore(); return; }   // painted whole loaf; the cut loaf stays drawn
+  if(!cut&&PROPART.draw('tom/snob_loaf',0,-12,{w:46})) { gfx.restore(); return; }   // painted whole loaf; the cut loaf stays drawn
   if(!cut) { EO(0,-10,22,14,CRUST); E(-4,-16,12,5,'#e0a868'); LnO(-10,-18,8,-14,2,'#f1d9a8'); }
   else { const o=open*10; gfx.save(); gfx.translate(-o,0); EO(-2,-10,13,14,CRUST); E(-4,-14,6,4,'#e0a868'); gfx.restore();
     gfx.save(); gfx.translate(6+o,-2); gfx.rotate(open*.5); EO(0,-8,13,14,CRUMB); for(const [hx,hy,r] of [[-4,-12,2.5],[3,-6,2],[-2,-3,1.6],[5,-14,1.6],[-6,-6,1.4]]) E(hx,hy,r,r*1.2,'#d8b888'); ring(0,-8,13,14,3,CRUST); gfx.restore(); }
@@ -825,7 +825,7 @@ SC.tv_tag=(s,u)=>{ const d=ez(u/.2),sw=Math.sin(s.t*5)*.12*(1-u); gfx.globalAlph
 // ---------- Flashcard Flurry (B1) ----------
 // POP QUIZ. Tom flicks flashcards from a deck at every monster, one after another; they bonk and stick. Over the target,
 // the ? flips to ! (its weakness). On a kind cast it gets a gold-star sticker instead.
-SC.tv_q=(s,u)=>{ const ms=s.t*1000,done=ms>s.flip,x=s.x,y=s.y,sq=done&&ms<s.flip+200?Math.abs(Math.cos((ms-s.flip)/200*Math.PI)):1; gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(x,y); gfx.scale(sq,1); if(!done&&PROPART.draw('tom/question_tile',0,0,{h:36})) { gfx.restore(); return; }   // painted ? tile until it flips to the gold !
+SC.tv_q=(s,u)=>{ const ms=s.t*1000,done=ms>s.flip,x=s.x,y=s.y,sq=done&&ms<s.flip+200?Math.abs(Math.cos((ms-s.flip)/200*Math.PI)):1; gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(x,y); gfx.scale(sq,1); if(!done&&PROPART.draw('tom/cards_question_tile',0,0,{h:36})) { gfx.restore(); return; }   // painted ? tile until it flips to the gold !
   EO(0,0,17,17,done?(s.kf?GOLD2:GOLD):'#cfd8d6'); if(s.kf&&done) star(0,0,11,CREAM); else bigWord(done?'!':'?',1,-5,done?'#7a1a14':'#2b2a26',3); gfx.restore(); };
 
 // ---------- Konami Code (B2) ----------
@@ -838,7 +838,7 @@ const GLY={U:[0,0],B:[53,0],A:[107,0]};   // thirds of the painted glyph_tiles s
 const glyph=(x,y,sc,k)=>{ const g=GLY[k]||GLY.U; if(PROPART.draw('tom/glyph_tiles',x,y,{h:27*sc,rot:{R:Math.PI/2,D:Math.PI,L:-Math.PI/2}[k]||0,src:[g[0],0,g[0]===107?53:54,92]})) return;
   if(k==='A'||k==='B') { EO(x,y,9*sc,9*sc,k==='A'?RED:'#f0c040'); bigWord(k,x+sc,y-3*sc,CREAM,Math.max(1,Math.round(sc*1.4))); } else arrow(x,y,sc,k,SKY); };
 SC.tv_konmat=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y; gfx.globalAlpha=fin(u,.06)*fade(u,.93); const k=P.times.findIndex((tt,i)=>ms>=tt&&ms<tt+180),lit=k>=0?KSEQ[k]:null;
-  if(PROPART.ready('tom/giant_floor_controller')) { PROPART.draw('tom/giant_floor_controller',x,y,{w:172,sy:.5});   // painted floor pad, squashed flat; lit buttons glow gold on top of it
+  if(PROPART.ready('tom/konami_floor_controller')) { PROPART.draw('tom/konami_floor_controller',x,y,{w:172,sy:.5});   // painted floor pad, squashed flat; lit buttons glow gold on top of it
     const dp0=P.dpad; if(lit&&lit!=='A'&&lit!=='B') { const o={U:[0,-8],D:[0,8],L:[-14,0],R:[14,0]}[lit]; gfx.globalAlpha*=.6; E(dp0+o[0],y+o[1]*.6,8,5,GOLD); } else if(lit) { gfx.globalAlpha*=.6; E(lit==='B'?P.bx:P.ax,y+(lit==='B'?2:-2),11,7,GOLD); } return; }
   poly([[x-84,y+14],[x+84,y+14],[x+70,y-14],[x-70,y-14]],GREY); poly([[x-74,y+8],[x+74,y+8],[x+64,y-10],[x-64,y-10]],GREY2);
   const dp=P.dpad; for(const [k2,dx,dy] of [['U',0,-8],['D',0,8],['L',-14,0],['R',14,0]]) { gfx.save(); gfx.translate(dp+dx,y+dy); gfx.scale(1,.55); RO(-7,-7,14,14,lit===k2?GOLD:INK); gfx.restore(); }
@@ -968,7 +968,7 @@ SC.t3_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.7); R(0,0,576,324,s.c||'#fffff
 SC.t3_hearts=(s,u)=>{ for(let k=0;k<5;k++) { const q=cl(u*1.4-k*.08); if(q<=0) continue; gfx.globalAlpha=1-q; heart(s.x-20+k*10+Math.sin(q*6+k)*5,s.y-q*44,5+(k%2)*2,k%2?PINK:'#ff6b9a'); } };
 SC.t3_spark=(s,u)=>{ for(let k=0;k<(s.n||6);k++) { const q=((u*(s.sp||2))+k/(s.n||6))%1,a=k*2.4; gfx.globalAlpha=Math.sin(q*Math.PI)*fade(u,.8); star(s.x+Math.cos(a)*(s.r||30)*(.5+q*.5),s.y+Math.sin(a)*(s.r||30)*.6-q*10,3+Math.sin(q*Math.PI)*4,k%2?'#ffffff':GOLD,q*3); } };
 
-const slice=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tom/bread_slice',0,-1,{w:24})) { gfx.restore(); return; }   // painted slice (steam wisps included)
+const slice=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tom/snob_slice',0,-1,{w:24})) { gfx.restore(); return; }   // painted slice (steam wisps included)
   EO(0,0,10,9,CRUMB); ring(0,0,10,9,3,CRUST); for(const [hx,hy,r] of [[-3,-3,2],[3,1,1.6],[-1,3,1.3],[4,-4,1.2]]) E(hx,hy,r,r*1.2,'#d8b888'); gfx.restore(); };
 
 // ---------- Sourdough Snob (A2) ----------
@@ -1031,12 +1031,12 @@ Tm.overpriced_gadget=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2L
 // door slides across the row and SLAMS shut (the hit), DO NOT DISTURB light on. The motorized shade whirs down behind
 // it. The door slides back on dazed monsters. He tucks the most hurt friend under a plush duvet and a pillow (Guarded),
 // then lies flat himself for a second, eye mask on.
-SC.t3_group5=(s,u)=>{ const a=fin(u,.08)*fade(u,.85),x=s.x,y=s.y; gfx.globalAlpha=a; gfx.save(); gfx.translate(x,y+Math.sin(s.t*4)*2); if(!PROPART.draw('tom/boarding_group_5_sign',0,22,{h:92})) { RO(-74,-18,148,36,'#2050a0'); label('BOARDING',0,-13,CREAM,2); label('GROUP 5',0,1,GOLD,2); } gfx.restore(); };
+SC.t3_group5=(s,u)=>{ const a=fin(u,.08)*fade(u,.85),x=s.x,y=s.y; gfx.globalAlpha=a; gfx.save(); gfx.translate(x,y+Math.sin(s.t*4)*2); if(!PROPART.draw('tom/seat_group5_sign',0,22,{h:92})) { RO(-74,-18,148,36,'#2050a0'); label('BOARDING',0,-13,CREAM,2); label('GROUP 5',0,1,GOLD,2); } gfx.restore(); };
 SC.t3_suite=(s,u)=>{ const ms=s.t*1000,P=s.plan,x0=P.x0,x1=P.x1,top=P.top+44,bot=P.bot,W=x1-x0;
   const show=ez(ms/250)*(ms>P.gone?1-ez((ms-P.gone)/300):1); if(show<=0) return; gfx.globalAlpha=show;
   // The privacy door slides in from the right edge of the row.
   let c; if(ms<P.d0) c=0; else if(ms<P.slam) c=ez((ms-P.d0)/(P.slam-P.d0)); else if(ms<P.open) c=1; else c=1-ez((ms-P.open)/400);
-  let pd=false; if(c>0.02) { const dw0=W*c; gfx.save(); gfx.beginPath(); gfx.rect(x1-dw0,top-2,dw0,bot-top+4); gfx.clip(); pd=PROPART.draw('tom/airline_suite_door',x1-W/2,(top+bot)/2,{w:W,h:bot-top}); gfx.restore(); }
+  let pd=false; if(c>0.02) { const dw0=W*c; gfx.save(); gfx.beginPath(); gfx.rect(x1-dw0,top-2,dw0,bot-top+4); gfx.clip(); pd=PROPART.draw('tom/seat_cabin_door',x1-W/2,(top+bot)/2,{w:W,h:bot-top}); gfx.restore(); }
   if(c>0&&!pd) { const dw=W*c,dx=x1-dw; RO(dx,top,dw,bot-top,NAVY); for(let k=0;k<5;k++) { const yy=top+64+k*((bot-top-70)/5); if(dw>16) R(dx+6,yy,dw-12,3,NAVY2); }
     if(dw>60) { RO(dx+10,top+8,36,20,'#c9a23a'); label('1A',dx+28,top+13,INK,2); E(dx+dw-14,top+16,5,5,ms>P.slam&&Math.floor(ms/250)%2?RED:'#5a1a14'); RO(dx+dw-14,(top+bot)/2,6,26,GREY2);
       // The window in the door, and its motorized shade.
@@ -1045,10 +1045,10 @@ SC.t3_suite=(s,u)=>{ const ms=s.t*1000,P=s.plan,x0=P.x0,x1=P.x1,top=P.top+44,bot
         if(ms>P.shade&&ms<P.shade+800) bigWord('WHIRRR',wx,wy+26,CREAM,2); } } }
   if(ms>P.d0&&ms<P.slam) bigWord('BZZZ',Math.min(560,x1+20),top+40,CREAM,2); };
 SC.t3_duvet=(s,u)=>{ const ms=s.t*1000,H=s.H,a=ez(ms/350); gfx.globalAlpha=fade(u,.9); const w=H.w+18,full=s.lie?H.h:H.h*.62,h=full*a,x=H.x-w/2+(s.dx||0),y=H.base+2-h;
-  if(h<3||!PROPART.draw('tom/duvet',x+w/2,y+h/2,{w:w,h:h})) {
+  if(h<3||!PROPART.draw('tom/seat_duvet',x+w/2,y+h/2,{w:w,h:h})) {
   rrO(x,y,w,h,8,'#6c8ae0'); for(let k=1;k<4;k++) R(x+4,y+k*h/4,w-8,2,'#5a76c8'); for(let k=1;k<3;k++) R(x+k*w/3,y+4,2,Math.max(0,h-8),'#5a76c8'); R(x,y,w,Math.min(9,h),'#f4f0ff'); for(let k=0;k<3;k++) star(x+10+k*(w-20)/2,y+h*.55,3,'#ffffff'); };
   }
-SC.t3_mask=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=fade(u,.85); const p={x:st.x+(s.lie?TH()*.36:-4),y:s.lie?st.y-18:head(st).y-2}; if(!PROPART.draw('tom/sleep_mask',p.x,p.y,{w:30})) { RO(p.x-12,p.y-4,24,8,'#3a2a5a'); R(p.x-10,p.y-2,8,4,'#5a4a8a'); R(p.x+2,p.y-2,8,4,'#5a4a8a'); }
+SC.t3_mask=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; gfx.globalAlpha=fade(u,.85); const p={x:st.x+(s.lie?TH()*.36:-4),y:s.lie?st.y-18:head(st).y-2}; if(!PROPART.draw('tom/delta_sleep_mask',p.x,p.y,{w:30})) { RO(p.x-12,p.y-4,24,8,'#3a2a5a'); R(p.x-10,p.y-2,8,4,'#5a4a8a'); R(p.x+2,p.y-2,8,4,'#5a4a8a'); }
   for(let k=0;k<3;k++) { const q=((s.t*.8)+k/3)%1; gfx.globalAlpha=Math.sin(q*Math.PI); label('Z',p.x+12+q*16+k*4,p.y-14-q*26,CREAM,2+(k%2)); } };
 Tm.seat_1a=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,64);
   const L=lowest(),LU=L?ST.unit(L):null,selfL=L===m,d0=1250,slam=1950,shade=2050,open=3000,gone=3500;
@@ -1088,7 +1088,7 @@ SC.t3_led=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.mask||ms>P.off+300) retur
   gfx.globalAlpha=(1-off); const pulse=.5+Math.sin(ms*.012)*.2; gfx.globalAlpha=(1-off)*pulse*.5; E(x,y,46,46,'#ff3a3a'); gfx.globalAlpha=(1-off)*pulse*.35; E(x,y,72,66,'#ff6a5a');
   gfx.globalAlpha=1-off; gfx.save(); gfx.translate(x,y-(1-on)*30);
   if(P.self) { gfx.globalAlpha*=.25+.2*Math.sin(ms*.02); E(-6,-2,18,22,'#ff2a2a'); }   // Tom's own frames wear the mask; only the glow and timer are drawn
-  else if(PROPART.draw('tom/led_face_mask',3,0,{h:50})) { gfx.globalAlpha*=.25+.2*Math.sin(ms*.02); E(-6,-2,18,22,'#ff2a2a'); }   // painted mask (strap and 10 timer included); a soft pulse sits on it
+  else if(PROPART.draw('tom/skin_mask_lit',3,0,{h:50})) { gfx.globalAlpha*=.25+.2*Math.sin(ms*.02); E(-6,-2,18,22,'#ff2a2a'); }   // painted mask (strap and 10 timer included); a soft pulse sits on it
   else { rrO(-17,-20,34,40,10,'#f4f4f6'); R(-11,-8,8,4,INK); R(3,-8,8,4,INK);
   for(let r=0;r<5;r++) for(let c=0;c<4;c++) { if(r===1) continue; const lx=-10+c*6.7,ly=-15+r*7; E(lx,ly,1.8,1.8,Math.sin(ms*.02+r+c)>-.3?'#ff2a2a':'#a01a1a'); } } gfx.restore();
   if(ms>P.t0&&ms<P.off) { const secs=Math.max(0,Math.round(1200*(1-cl((ms-P.t0)/(P.off-P.t0-150))))),mm=Math.floor(secs/60),ss=secs%60; bigWord(mm+':'+(ss<10?'0':'')+ss,x,y-72,ms>P.off-200?'#7dff8a':CREAM,3); } };
@@ -1119,7 +1119,7 @@ const CLAIMS=['BREAD IS EASY','PLANES ARE SLOW','I AM SCARY','1+1=3','KANJI IS E
 SC.t3_claim=(s,u)=>{ const ms=s.t*1000,a=fin(u,.06)*(ms>s.gone?1-ez((ms-s.gone)/200):1); if(a<=0) return; const w=(s.txt.length*4-1)*2+20,x=cl(s.x,w/2+6,570-w/2),y=Math.max(30,s.y);
   gfx.globalAlpha=a; rrO(x-w/2,y-16,w,24,8,'#ffffff'); poly([[x-6,y+8],[x+6,y+8],[x,y+18]],'#ffffff'); label(s.txt,x,y-9,INK,2); };
 SC.t3_stamp=(s,u)=>{ const q=u<.12?ez(u/.12):1,sc=lerp(1.8,.82,q),a=fade(u,.75); gfx.globalAlpha=a; gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.18); gfx.scale(sc,sc);
-  if(PROPART.draw('tom/false_stamp',0,-6,{w:124})) { label('FACT CHECK',-6,-52,RED,2); gfx.restore(); return; }   // painted stamp, pad and FALSE imprint; the drawn plate is the fallback
+  if(PROPART.draw('tom/know_false_mark',0,-6,{w:124})) { label('FACT CHECK',-6,-52,RED,2); gfx.restore(); return; }   // painted stamp, pad and FALSE imprint; the drawn plate is the fallback
   gfx.globalAlpha=a*.55; R(-60,-28,120,56,'#ffffff'); gfx.globalAlpha=a; gfx.strokeStyle=OUT; gfx.lineWidth=9; gfx.strokeRect(-60,-28,120,56); gfx.strokeStyle=RED; gfx.lineWidth=5; gfx.strokeRect(-60,-28,120,56); label('FACT CHECK',0,-21,RED,2); R(-50,-7,100,3,RED); label('FALSE',0,0,RED,4); gfx.restore(); };
 SC.t3_blush=(s,u)=>{ gfx.globalAlpha=fin(u,.15)*fade(u,.75); for(const F of s.list) { E(F.x-F.w*.22,F.top+F.h*.42,8,4,'#ff6a7a'); E(F.x+F.w*.12,F.top+F.h*.42,8,4,'#ff6a7a'); EO(F.x+F.w*.36,F.top+10-ez(u)*6,4,6,'#9fe8ff'); } };
 Tm.know_it_all=E2=>{ const {m,fx}=E2,list=foes(E2).length?foes(E2):b2LiveFoes(),Gp=ST.group(list),me=ST.unit(m),p=rowSpot(Gp,72),n=list.length;
@@ -1199,22 +1199,15 @@ Tm.noise_canceling=E2=>{ const {m,fx}=E2,f=(E2.targets||[]).find(t=>t.side==='fo
 
 // ---------- Flashcard Flurry: small cards, one real kanji each (sun, moon, fire, water, tree, mountain) ----------
 // Strokes are drawn by hand (no font needed) in a -.5 to .5 box; the meaning pops up when a card sticks.
-const KANA=[['SUN',[[[-.3,-.5],[.3,-.5],[.3,.5],[-.3,.5],[-.3,-.5]],[[-.3,0],[.3,0]]]],
-  ['MOON',[[[-.3,-.5],[-.3,.45],[-.42,.55]],[[-.3,-.5],[.3,-.5],[.3,.42],[.2,.54]],[[-.3,-.1],[.3,-.1]],[[-.3,.2],[.3,.2]]]],
-  ['FIRE',[[[-.2,-.28],[-.38,.02]],[[.2,-.28],[.38,.02]],[[.02,-.52],[-.12,.0],[-.46,.5]],[[-.04,-.05],[.22,.2],[.5,.5]]]],
-  ['WATER',[[[0,-.55],[0,.5],[-.12,.56]],[[-.46,-.1],[-.1,-.1],[-.44,.42]],[[.32,-.3],[.1,-.05]],[[.1,.05],[.5,.45]]]],
-  ['TREE',[[[-.5,-.2],[.5,-.2]],[[0,-.55],[0,.5]],[[-.1,-.05],[-.45,.45]],[[.1,-.05],[.45,.45]]]],
-  ['MOUNTAIN',[[[-.45,.45],[.45,.45]],[[-.45,-.1],[-.45,.45]],[[0,-.52],[0,.45]],[[.45,-.1],[.45,.45]]]]];
-const card=(x,y,sc,k,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc); RO(-13,-17,26,34,CREAM); R(-13,11,26,6,'#d8e8ff');
-  gfx.strokeStyle=INK; gfx.lineWidth=2.3; gfx.lineCap='round'; gfx.lineJoin='round'; for(const pts of KANA[k%6][1]) { gfx.beginPath(); pts.forEach(([a,b],i)=>{ const px=a*20,py=b*20-3; i?gfx.lineTo(px,py):gfx.moveTo(px,py); }); gfx.stroke(); }
-  gfx.restore(); };
-SC.tp_stuck=(s,u)=>{ gfx.globalAlpha=fade(u,.7); card(s.x,s.y,1.3,s.k,s.rot); if(u<.55) { gfx.globalAlpha=1-u/.55; bigWord(KANA[s.k%6][0],s.x,s.y-34,CREAM,2); } };
+const KANA=['SUN','MOON','FIRE','WATER','TREE','MOUNTAIN'];   // the cards are painted (art/props/tom/cards_card_*.webp), each with its kanji
+const card=(x,y,sc,k,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc); PROPART.draw('tom/cards_card_'+KANA[k%6].toLowerCase().replace('mountain','mountain'),0,0,{h:36}); gfx.restore(); };
+SC.tp_stuck=(s,u)=>{ gfx.globalAlpha=fade(u,.7); card(s.x,s.y,1.3,s.k,s.rot); if(u<.55) { gfx.globalAlpha=1-u/.55; bigWord(KANA[s.k%6],s.x,s.y-34,CREAM,2); } };
 Tm.flashcard_flurry=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),me=ST.unit(m),all=b2LiveFoes(),Gp=ST.group(all),kind=!!(B2.move&&B2.move.kindOnFoe);
-  const sx=Math.max(Gp.x1+70,Math.min(me.x-40,Gp.x1+150)),sy=Math.min(316,me.base+6),n=6,c0=1150,step=190;
+  const n=6,c0=1150,step=190;
   const order=[]; for(let k=0;k<n-1;k++) order.push(all[k%all.length]); order.push(t);
-  const K=[{t:0,x:'home',y:'home',f:go(sx,me)},{t:800,x:sx,y:sy,f:'ab_cards_1'},{t:950,f:'ab_cards_2'}];
+  const K=[{t:0,x:'home',y:'home',f:'ab_cards_1'},{t:800,f:'ab_cards_1'},{t:950,f:'ab_cards_2'}];   // Tom stays where he stands: no walk out, no walk back
   for(let k=0;k<n;k++) K.push({t:c0+k*step-40,f:k===n-1?'ab_cards_5':(k%2?'ab_cards_4':'ab_cards_3'),dx:u=>-Math.sin(u*Math.PI)*8});
-  K.push({t:c0+n*step,f:'ab_cards_6'},{t:3300,f:'idle'},{t:3400,f:back(sx,me)},{t:4100,x:'home',y:'home',f:'idle'});
+  K.push({t:c0+n*step,f:'ab_cards_6'},{t:3300,f:'idle'},{t:4100,f:'idle'});
   ST.keys(fx,K); const reveal=c0+n*step+350;
   const throws=order.map((o,k)=>[c0+k*step,()=>{ const O=ST.unit(o),h=hand(),rot=(k%2?-.25:.25),ox=((k*17)%28)-14,oy=((k*11)%18)-9; S('whoosh'); ST.fly((x,y,uu)=>card(0,0,1.3,k,uu*9),h.x-10,h.y-14,O.x+ox,O.mid+oy,.26,30);
     b7Later(()=>{ S('select'); ST.jolt(o,.18); scene('tp_stuck',1.3,{x:O.x+ox,y:O.mid+oy,k,rot}); },260); }]);
@@ -1233,7 +1226,7 @@ const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.w
 // Painted controller (art/chars/prop-controller.webp, tools/sprite-bake/bake_props.py); the drawn one below is the fallback until it loads.
 const CTL_IMG=new Image(); CTL_IMG.src='art/chars/prop-controller.webp?v=tom4';
 const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot||0); gfx.scale(sc,sc);
-  if(PROPART.draw('tom/wireless_game_controller',0,0,{w:44})) { if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.restore(); return; }   // painted; the older painted controller and the drawn one are fallbacks
+  if(PROPART.draw('tom/mash_controller',0,0,{w:44})) { if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.restore(); return; }   // painted; the older painted controller and the drawn one are fallbacks
   if(CTL_IMG.complete&&CTL_IMG.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.drawImage(CTL_IMG,-21,-14,42,Math.round(42*CTL_IMG.naturalHeight/CTL_IMG.naturalWidth));
     if(lit) { gfx.globalAlpha*=.5; E(11,-2,3,3,GOLD); gfx.globalAlpha=1; } gfx.imageSmoothingEnabled=sm; gfx.restore(); return; }
   RO(-5,-12,10,5,'#3a3f46'); R(-3,-11,6,2,GREY2);
@@ -1243,12 +1236,10 @@ const ctl=(x,y,sc,rot,lit,led)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot
 SC.tp_ctl=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms>P.thr) return; gfx.globalAlpha=1; const h=hand();
   const wind=ms>P.wind?ez((ms-P.wind)/(P.thr-P.wind)):0,shake=ms>P.ugh&&ms<P.wind?Math.sin(ms*.09)*2:0;
   const x=h.x-8+shake-wind*10,y=h.y-4-wind*16;
-  // The signal icon over the controller: three arcs, a red cross once the presses fail.
-  if(ms>P.presses[0]+100&&ms<P.wind) { const sx=x+4,sy=y-26,a=Math.min(1,(ms-P.presses[0]-100)/150); gfx.globalAlpha=a;
-    gfx.strokeStyle=CREAM; gfx.lineCap='round'; gfx.lineWidth=2.5; for(let k=1;k<=3;k++) { gfx.beginPath(); gfx.arc(sx,sy+8,k*5,Math.PI*1.2,Math.PI*1.8); gfx.stroke(); } E(sx,sy+8,1.8,1.8,CREAM);
-    if(ms>P.presses[1]) { Ln(sx-9,sy-6,sx+9,sy+10,3.5,OUT); Ln(sx+9,sy-6,sx-9,sy+10,3.5,OUT); Ln(sx-9,sy-6,sx+9,sy+10,2,RED); Ln(sx+9,sy-6,sx-9,sy+10,2,RED); } } };
+  // The painted no-signal badge over the controller once the presses fail.
+  if(ms>P.presses[1]&&ms<P.wind) { gfx.globalAlpha=Math.min(1,(ms-P.presses[1])/150); PROPART.draw('tom/mash_no_signal',x+4,y-14,{h:26}); } };
 // After the BONK the struck enemy sees stars: three stars circle its head, and it wobbles once more as they fade.
-SC.tp_dizzy=(s,u)=>{ gfx.globalAlpha=fade(u,.8); for(let k=0;k<3;k++) { const a=s.t*7+k*Math.PI*2/3; star(s.x+Math.cos(a)*18,s.y+Math.sin(a)*5,5,GOLD,a); } };
+SC.tp_dizzy=(s,u)=>{ gfx.globalAlpha=fade(u,.8); PROPART.draw('tom/mash_dizzy_stars',s.x,s.y,{w:46,rot:Math.sin(s.t*6)*.25}); };
 SC.tp_cdown=(s,u)=>{ const q=ez(u/.35); gfx.globalAlpha=fade(u,.7); ctl(s.x+q*s.dx,s.y+Math.abs(Math.sin(q*Math.PI*2))*-8*(1-q)+q*s.dy,1.25,.5+q*1.4,false,false); };
 Tm.button_mash=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const presses=[500,900,1300],ugh=1650,wind=2250,thr=2650,fly=360,hit=thr+fly;

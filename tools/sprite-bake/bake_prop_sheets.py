@@ -21,6 +21,8 @@ MAXSIDE = 160
 MAXSIDE_BY = {'face_eyes_open': 560, 'face_eyes_closed': 560}   # full-screen close-up, not a small prop
 ALPHA_CUT = 128          # below this a pixel is halo, not object
 MIN_SPECK = 14           # smaller loose bits are noise
+# Tom's props replaced by his objects-and-effects sheets (bake_tom_fx.py, 2026-11-06): not written any more.
+REPLACED = {'sleep_mask', 'lie_flat_pod', 'airliner', 'giant_floor_controller', 'wireless_game_controller', 'question_tile', 'no_touching_sign_l', 'no_touching_sign', 'led_face_mask', 'hot_towel', 'gate_scanner', 'gate_0_door', 'false_stamp', 'duvet', 'bread_slice', 'boarding_group_5_sign', 'airline_suite_door', 'skincare_bottles', 'calligraphy_brush', 'kanji_flashcards', 'easel_chart', 'max_gadget_box', 'gadget', 'receipt_roll', 'phone_and_boarding_passes'}
 GRID = {(1484, 1060): (7, 5), (1254, 1254): (4, 4), (1774, 887): (2, 1)}
 
 # (sheet file, character, [(cell index 1-based, item number)])
@@ -203,7 +205,7 @@ def main():
                 im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
             os.makedirs(os.path.join(OUT, c), exist_ok=True)
             p = os.path.join(OUT, c, slug + '.webp')
-            im.save(p, 'WEBP', lossless=True, quality=100, method=4)
+            if not (c == 'tom' and slug in REPLACED): im.save(p, 'WEBP', lossless=True, quality=100, method=4)
             done[(c, slug)] = im
     for (sc, ss), (dc, ds) in COPIES:
         os.makedirs(os.path.join(OUT, dc), exist_ok=True)
