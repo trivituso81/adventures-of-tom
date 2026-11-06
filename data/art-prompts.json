@@ -7056,8 +7056,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-18-dinner-table-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793932118515
+    }
+   ],
    "rejects": [],
    "id": "bg-18-dinner-table",
    "tab": "Battle",
