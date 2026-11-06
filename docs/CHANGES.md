@@ -1,3 +1,6 @@
+## 2026-11-06 (380): Michael walk sheet reopened to redo row 3 only (Art Library)
+- Tom: redo. `michael-walk-sheet` is back to draft (v1 stays in its versions). Prompt now attaches the approved v1 as picture 3 (rows 1 and 2 repeat exactly) and rewrites row 3: both children visible in profile (Isla's dress and bow showing), no raised fist, cell 9 is a calm walking step, not a skip. 1 Generate press. Nothing installed; install steps in claude/next-addendum-michael-walk-status.md.
+
 ## 2026-11-06 (379): Boppy's 12 approved ability sheets are live as painted frames
 
 - Installed (push tag `boppyab4`): Cap Check, GRUMBLE, Patient Angler, Recliner Reservation, Headcount Again, Lockdown, Everybody Waits, Pepper Breath, Seeds of Trouble, Mild for Company, Nineteen Seventy, Five-Alarm Jar, and The One That Got Away (fish ult). Each plays its sheet's frames (`f:'ab_<sheet>_<n>'`, 75 of the 81 cut frames). Timing, spoken lines, messages, hit frames and effects are unchanged. `xc_ult` stays on its current frames until the Young Boppy sheets are approved.
