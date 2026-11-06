@@ -504,8 +504,16 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Noise-Canceling.\n\nItems:\n1. The black over-ear headphones from the picture, open.\n2. The same headphones from the side, ear cups turned flat.\n3. A big jagged red sound wave, a zigzag band of noise (wide).\n4. The same red wave cut off cleanly at one end, as if sliced (wide).\n5. A calm pale blue ripple of rings, a soft wave of quiet.\n6. A spiky shouting speech bubble, empty inside.\n7. Small broken shards of the red zigzag, flying apart.\n8. A small glowing blue power button light."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-fx-seat-1a-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793953780603
+    }
+   ],
    "rejects": [],
    "id": "tom-fx-seat-1a",
    "tab": "Characters",
