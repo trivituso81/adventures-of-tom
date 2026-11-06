@@ -21,6 +21,7 @@
     d.eyes=H.eyes.map(e=>e.slice()); d.mouth=H.mouth.slice();
     d.frames={hurt:P('hurt'),attack:H.frames.filter(n=>/^attack/.test(n)).map(P)};
     d.painted=true;
+    if(d.flipBattle) { d.flipBattle0=d.flipBattle; d.flipBattle=false; }   // the old pixel Brain Freeze faced left and was mirrored in battle; the painted sheets all face right
     if(id==='bigone') d.tinY=.1;   // the painted Big One already wears a rusty tin; Deedee's shiny one sits on it, not above it
   }
 })();

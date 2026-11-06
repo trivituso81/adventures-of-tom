@@ -146,3 +146,7 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 Note (2026-10-30): enemies defined in `data/bonus-nine-scoops.js` (slushslug, conehead, brainfreeze, sprinklegremlin) are created after the first `data/foes/use.js` runs, so `index.html` loads `use.js` a second time right after that file. `use.js` skips any enemy already painted, so running twice is safe. Any future enemy defined in a late-loading file needs the same second pass or an earlier load order.
 
 Note (2026-10-30): sheets pasted as chat images arrive with no file name; match them by looking at them against the enemy's description in `data/*-monsters.js` and say which one was matched to which id. As of this date every enemy has a painted sheet except `deadletter` (Dead Letter, chapter 19).
+
+## Art Library sheets (2026-11-05, `foepaint1`)
+
+Tom approves one sheet per enemy in the Art Library (2 x 2 grid regular, 3 x 2 bosses, matte handbrushed, flat magenta ground). Install them all with `python3 tools/sprite-bake/bake_foe_sheets.py --all` (or one id). It reads the newest approved version from data/art-prompts.json, writes the same files as `bake_foe.py`, and prints split pieces and failures. After a bake: look at tools/shots/foe-<id>-bake.png, check the aim points (MARK in bake_foe.py, MARK_NEW in the new script), bump `ART_V` with `tools/art-library/bump_tags.py <TAG>`, run tag_check and smoke, add a CHANGES entry. All 86 enemies are installed this way (CHANGES 261); the older one-row sheets in tools/sprite-bake/src stay as history.
