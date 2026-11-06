@@ -4178,8 +4178,16 @@
    "group": "Dead-Letter Office"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-leviathan-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793927830750
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-06",
