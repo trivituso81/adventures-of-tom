@@ -1,3 +1,8 @@
+## 2026-11-06 (319): Deedee fights with her two painted battle sheets (`battlesheet7`)
+- Tom (01:06, "they're not showing in battle"): her sheets (art/raw/characters/deedee-battle-sheet-1/2-v1.png) are now what she fights with. The 15 frames are used as painted (no head warp, no body change); the ready pose keeps the old idle's visible height (99.5 rows). NEW slots: idle2 breath, hip, spread, power point (data/deedee-hires-battle.js). KO is the painted dizzy sit. Run frames are her walk sheet's side steps.
+- Her extra sheets (attack, story, flick, nurse, brisk) are pinned to the old idle (HEAD_KB 2.356, OLD_IDLE_H 539) and came back pixel for pixel. Battle atlas and KO baked at 1.5 through hires.py with sharpen 80.
+- Purged: src/deedee-battle-v2.png, the black eye and swirl paint-ins, the b_ head boxes, the lying-KO and raised-fist head code in bake_deedee.py.
+- Tests: kit_test deedee all moves FAILS [], fight and KO shots checked in portrait and landscape.
 ## 2026-11-06 (318): Nara fights with her two painted battle sheets (`battlesheet7`)
 - Tom (11-05 23:40): Nara's battle sheets (art/raw/characters/nara-battle-sheet-1/2-v1.png), 15 slots through battle_sheet_frames.py. NEW own frames: idle2, hip, spread, point (they used to alias idle or cast). KO = the dizzy frame mirrored, so her KO table still faces left. Idle keeps its old visible height (84 rows); NARA_SIZE unchanged.
 - Mouth and eye points re-set by hand on gridded crops for every frame (cast, act, spread, kneel, point and KO had landed on paws or the tail when auto-detected). Atlases at 1.5 through hires.py.
