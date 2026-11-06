@@ -1,3 +1,8 @@
+## 2026-11-06 (350): Welcome screen on iPhone: back row stands as two pairs (`welcome8`)
+- Tom (07:49): "Shift Boppy just slightly to the left and Amy just slightly towards the right, closer to their partners but shifted away from the center".
+- `SPLASH_PORT.backGap` is now a list per neighbour pair, [.78, 1.25, .78]: Deedee and Boppy stand closer, Amy and Justin stand closer, the gap between the pairs is wider. Row still centred on the front row.
+- Tested: shot 393x852; smoke below.
+
 ## 2026-11-06 (349): Art Library: TNB ability and effects sheets (`tnbab1`)
 - 14 ability sheets (`tnb-ab-<move>`, 3 x 2, refs his hero, walk and two battle sheets) and 14 objects and effects sheets (`tnb-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Draft only, nothing installed or wired. json 530 to 558 entries (Characters 123 to 151); every existing entry unchanged; test.py Characters EXPECT set to 151. Cost to Tom: 28 Generate presses.
 - Next in order: Nara, Boppy, Olivia, Justin.

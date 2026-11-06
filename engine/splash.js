@@ -560,13 +560,14 @@ const SPLASH_SPOTS=[
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
 const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599};
-const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,backGap:.9,depth:125,fracW:.94,fracH:.43,feetY:.74};
+const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,backGap:[.78,1.25,.78],   // Deedee+Boppy and Amy+Justin stand as pairs, the gap between the pairs is wider (Tom 07:49)
+  depth:125,fracW:.94,fracH:.43,feetY:.74};
 function splashPortLayout(w,h) {
   const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
   let x=0,pw=0;
   const front=P.front.map((id,i)=>{ const ww=wid(id); if(i) x+=(pw/2+ww/2)*P.gap; pw=ww; return {id,x,ww}; });
   let bx=0,bw=0;   // back row: side by side with a slight overlap, centred on the front row (Tom 2026-11-06 07:13: it sat too far right)
-  const back=P.back.map((id,i)=>{ const ww=wid(id); if(i) bx+=(bw/2+ww/2)*P.backGap; bw=ww; return {id,x:bx,ww}; });
+  const back=P.back.map((id,i)=>{ const ww=wid(id); if(i) bx+=(bw/2+ww/2)*P.backGap[i-1]; bw=ww; return {id,x:bx,ww}; });
   const blo=Math.min(...back.map(f=>f.x-f.ww/2)),bhi=Math.max(...back.map(f=>f.x+f.ww/2));
   const flo=Math.min(...front.map(f=>f.x-f.ww/2)),fhi=Math.max(...front.map(f=>f.x+f.ww/2)),shift=(flo+fhi)/2-(blo+bhi)/2;
   for(const b of back) b.x+=shift;
