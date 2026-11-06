@@ -2988,7 +2988,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-ab-shake-everyone",
    "tab": "Characters",
    "group": "Nara",
@@ -3000,7 +3000,16 @@
     "art/raw/characters/nara-battle-sheet-1-v1.png",
     "art/raw/characters/nara-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Shake It Off, Everyone.\n\nRow 1:\n1. Standing with her coat damp and slightly flat, a cheerful look, tail low.\n2. Standing, one shoulder twitching, her head turned a little as if about to shake.\n3. Standing, her whole body twisted hard to one side, ears flying out.\n\nRow 2:\n4. Standing, her whole body twisted hard the other way, ears flying out, eyes squeezed shut.\n5. Her coat fluffed out wide and blurred with motion, mouth open.\n6. Standing still after the shake, her coat puffed up wild, a very pleased face."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Shake It Off, Everyone.\n\nRow 1:\n1. Standing with her coat damp and slightly flat, a cheerful look, tail low.\n2. Standing, one shoulder twitching, her head turned a little as if about to shake.\n3. Standing, her whole body twisted hard to one side, ears flying out.\n\nRow 2:\n4. Standing, her whole body twisted hard the other way, ears flying out, eyes squeezed shut.\n5. Her coat fluffed out wide and blurred with motion, mouth open.\n6. Standing still after the shake, her coat puffed up wild, a very pleased face.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-ab-shake-everyone-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793989089041
+    }
+   ]
   },
   {
    "status": "draft",
