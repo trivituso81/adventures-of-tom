@@ -2909,8 +2909,16 @@
    "group": "Old Oak"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-acorncache-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793925859071
+    }
+   ],
    "rejects": [],
    "id": "enemy-acorncache",
    "tab": "Enemies",
