@@ -2831,7 +2831,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-ab-tennis-ball-fetch",
    "tab": "Characters",
    "group": "Nara",
@@ -2843,7 +2843,16 @@
     "art/raw/characters/nara-battle-sheet-1-v1.png",
     "art/raw/characters/nara-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Tennis Ball Fetch.\n\nRow 1:\n1. Sitting very still, eyes locked on something up high, ears perked, mouth closed.\n2. Crouched low on her front legs with her rear in the air, eyes wide, ready to spring.\n3. Running flat out, ears streaming back, all four paws off the ground.\n\nRow 2:\n4. Leaping and catching a yellow tennis ball in her mouth, eyes bright.\n5. Trotting proudly with the tennis ball held in her mouth, head high.\n6. Sitting with the tennis ball in her mouth, tail wagging, very proud."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Tennis Ball Fetch.\n\nRow 1:\n1. Sitting very still, eyes locked on something up high, ears perked, mouth closed.\n2. Crouched low on her front legs with her rear in the air, eyes wide, ready to spring.\n3. Running flat out, ears streaming back, all four paws off the ground.\n\nRow 2:\n4. Leaping and catching a yellow tennis ball in her mouth, eyes bright.\n5. Trotting proudly with the tennis ball held in her mouth, head high.\n6. Sitting with the tennis ball in her mouth, tail wagging, very proud.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-ab-tennis-ball-fetch-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793988945304
+    }
+   ]
   },
   {
    "status": "draft",
