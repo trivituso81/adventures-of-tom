@@ -1,3 +1,10 @@
+## 2026-11-06 (305): Welcome screen cast resized, closer together, slow breath (`welcome2`)
+- Tom (00:20): "fix the welcome screen layout to make sure everyone is sized up proportionally the same amount to fill out the screen on landscape iPad but also sized to fit for iPhone portrait. have them also standing closer together. they should be bouncing more subtly like they do in battle".
+- The family is now laid out in screen space (engine/splash.js `SPLASH_FIT`), not through the picture's cover fit, so every figure keeps its real height ratio and the group scales as one: iPhone portrait fills 96% of the width, iPad landscape is capped by height (44% of the screen) so it never reaches the logo or menu. Sideways spread pulled in to 60%, depth rows squeezed to 50%. Nara now stands in front between Tom and Grace (she was hidden behind Tom).
+- Bounce: the two-step hop is replaced by the battle idle's slow breath (a 1.2% vertical stretch from the feet, own phase per person).
+- Purged: SPLASH_IMG, SPLASH_ALL, SPLASH_BACK, SPLASH_LAND, splashLandSpot (0 references).
+- Tested: shots at 393x852, 1180x820 and 1090x890; tag_check ok.
+
 ## 2026-11-06 (304): Objects and effects sheets for Tom's 14 abilities (`abilfx1`)
 - Tom (00:17): "add sheets for objects and effects needed for tom's abilities. attach whichever reference to corresponding abilities".
 - 14 new Art Library entries `tom-fx-<move>` (Characters > Tom, right after the ability sheets), 4 x 3 grid on magenta, ar 4:3, 6 to 12 items each. Each attaches only that ability's newest approved sheet (overpriced-gadget v2, kanji-strike v2, the rest v1), so every held object is copied from it.
