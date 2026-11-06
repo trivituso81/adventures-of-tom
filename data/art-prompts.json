@@ -2717,8 +2717,16 @@
    "group": "School"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-glitterglue-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793925298288
+    }
+   ],
    "rejects": [],
    "id": "enemy-glitterglue",
    "tab": "Enemies",
