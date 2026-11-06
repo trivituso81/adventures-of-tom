@@ -1,3 +1,9 @@
+## 2026-11-06 (350): Opening zoom now starts right after the title card (`introzoom2`)
+- Tom (10:05): the zoom should happen right after the chapter 1 title screen, before Tom steps out of the taxi company and stretches.
+- `SCENES.opening`: the zoom-in step moved from the girls' arrival to the first step (before Tom appears); zoom-out before the party-join is unchanged. Girls still run in from the left edge of the zoomed view.
+- Tested: opening frames in portrait (zoomed from the first frame), smoke FAILS: [], tag_check ok.
+- Tags: `introzoom2`.
+
 ## 2026-11-06 (360): Olivia no longer wanders Jefferson Park as a duplicate while she is in the party (`oliviadup1`)
 - Tom (09:56): when Olivia is in the party she should not also walk around Jefferson Park; when she leaves the party she goes back to wandering.
 - Fact (cause): `syncAwayNpcs` in data/scenes.js re-added any map NPC with an `away` rule whenever its conditions were not active. Olivia joins from that NPC (recruitJoin takes it off the map), so from chapter 6 on the next sync put a second Olivia back on 2nd Ave. After she left, `recruitLeave` added the home NPC a second time (two copies).

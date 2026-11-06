@@ -12,6 +12,7 @@ SCENES.opening=()=>{
   for(let x=rStart+1;x<=dx-1;x++) rTiles.push([x,row+1]);
   return [
     {noGo:[9,dy+1,27,dy+3]},                       // keep villagers from wandering through the scene
+    {zoom:2,time:.9},                                // camera pushes in right after the title card, before Tom steps out; back out at the end
     {wait:.7},
     {call:()=>sfx.doorOut()}, {show:'tom'}, {place:'tom',at:[dx,dy],dir:'down'},
     {wait:.35},
@@ -29,7 +30,6 @@ SCENES.opening=()=>{
       {seq:[{wait:.25},{walk:'rose',to:rTiles,speed:.11,onStep:i=>{ if(i%2===0) snd.patter(1); }}]}
     ]},
     {call:()=>{ intro.bubble=null; }}, {face:'grace',dir:'right'}, {face:'rose',dir:'up'},
-    {zoom:2,time:.9}  ,                              // camera pushes in on Tom and the girls for the greeting; back out below
     {step:hugStep()},
     {talk:'Grace',lines:["TATA! You're BACK!",'We waited for you for a hundred years.'],voice:[['grace','intro1'],['grace','intro2']]},
     {talk:'Rose',lines:['A hundred MILLION years!','Tata, up! Up up up!'],voice:[['rose','intro1'],['rose','intro2']]},
