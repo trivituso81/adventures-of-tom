@@ -560,7 +560,7 @@ const SPLASH_SPOTS=[
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
 const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599};
-const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,backGap:.9,depth:90,fracW:.94,fracH:.40,feetY:.72};
+const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,backGap:.9,depth:125,fracW:.94,fracH:.43,feetY:.74};
 function splashPortLayout(w,h) {
   const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
   let x=0,pw=0;

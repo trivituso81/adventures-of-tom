@@ -1,3 +1,8 @@
+## 2026-11-06 (344): Welcome screen on iPhone: back row a step further back (`welcome7`)
+- Tom (07:25): "The second row just needs to be moved back like a step backwards".
+- `SPLASH_PORT.depth` 90 to 125 design units (back row feet sit higher on the plaza, feet fully visible behind the front row), whole group nudged down (`feetY` .74) so Justin's hair stays clear of the logo. Heights unchanged.
+- Tested: shot 393x852; smoke below.
+
 ## 2026-11-06 (343): Emotions batch 5: chapters 14 to 17 show mood faces and poses (`emo12`)
 - `python3 tools/emotion-apply.py 1 ... 17`: chapter 14 found 102 of 102, chapter 15 70 of 70, chapter 16 62 of 62, chapter 17 53 of 53; `EMO_CHAPTERS` now 1 to 17, `data/emotion-moods.js` 1325 keys.
 - Tested: all 1338 tagged lines in chapters 1 to 17 resolve to their tsv mood at runtime (0 mismatches), every face file exists, the chapter 16 `ch16Say` step shows the mood face (Tom scared), smoke FAILS: [], unused_voice 0.
