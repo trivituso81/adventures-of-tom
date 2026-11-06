@@ -141,8 +141,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Retail Therapy.\n\nRow 1:\n1. Kneeling on one knee, both hands resting on top of a large matte-black box on the ground in front of him, excited eyes.\n2. Still kneeling, lifting the lid off the box slowly with both hands, mouth open in awe.\n3. Standing, holding a small sleek silver gadget up high in both hands, a big joyful grin.\n\nRow 2:\n4. Holding a very long paper receipt in both hands, the paper hanging to the floor and piled at his feet, reading it.\n5. The same receipt held up close to his eyes, eyebrows raised, lips pressed together.\n6. The receipt folded under one arm, eyes closed, a slow calm nod."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-ab-noise-canceling-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793952917869
+    }
+   ],
    "rejects": [],
    "id": "tom-ab-noise-canceling",
    "tab": "Characters",
