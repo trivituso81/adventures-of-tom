@@ -5,7 +5,7 @@
 function updateBattle(dt) {
   battle.time+=dt;
   battle.shakeEnemy=Math.max(0,battle.shakeEnemy-dt);
-  battle.flashEnemy=Math.max(0,battle.flashEnemy-dt);
+  battle.flashEnemy=Math.max(0,battle.flashEnemy-dt*FOE_FLASH_FAST);
   battle.enemyLunge=Math.max(0,battle.enemyLunge-dt);
   battle.slash=Math.max(0,battle.slash-dt);
   for(const f of battle.fx) { for(const k of ['shake','flash','lunge','twirl','tongue','appr','controller','cartwheel','kick','poke','combo','handspring','dismount','p10','pogo','flop','roundoff','rebound','flip','punch','cheer','tickle','run','burpee','coach','hug','grumble','hop','toss','aim','cast','pose']) f[k]=Math.max(0,f[k]-dt); }

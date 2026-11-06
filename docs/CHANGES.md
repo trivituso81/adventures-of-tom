@@ -1,3 +1,7 @@
+## 2026-11-05 (272): Enemy hit flash much quicker (`flash1`)
+
+- Tom (19:14): enemy flash on hit should be much quicker. The white flash (f.flash .3 s, battle.flashEnemy .2 to .3 s) now drains 3.5 times faster (`FOE_FLASH_FAST` in engine/battle2-ui.js, used in engine/battle.js), so it lasts about .06 to .09 s. Hurt frame hold and shake are unchanged. Tag `battle2-ui.js?v=flash1`.
+
 ## 2026-11-05 (271): The Square: Tom's approved Library painting v3 installed (`square5`)
 
 - Tom (18:48): approved area-square v3 (generator shape 4:3, 1152 x 864) and said replace and purge the old one. Plate: v3 trimmed to 15:13 (88 px off the left, 12 off the right, so the SCHOOL board stays whole) and scaled to 1920 x 1664, so the map stays 30 x 26 tiles and no other area changes. Trimming also squeezes the picture about 5 percent sideways. Original stays in art/raw/areas/area-square-v3.png.

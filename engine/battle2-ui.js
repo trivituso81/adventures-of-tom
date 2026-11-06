@@ -1,4 +1,6 @@
 'use strict';
+// Enemy hit flash drains this many times faster than the clock, so the white flash is a quick blink (about .08 s) (Tom, 2026-11-05).
+const FOE_FLASH_FAST=3.5;
 // engine/battle2-ui.js — The new battle's screen (F3): turn ribbon, party cards with HP and VP, the one-thumb
 // command cross (Up skills with the free basic move first, Right the signature move, Left Tombo, Down bag), skill grid
 // with role tags (DAMAGE, HEAL, BUFF, DEBUFF) and element tags, targeting, keyboard and
@@ -277,7 +279,7 @@ function b2Update(dt) {
     if(f.warmFlash>0) f.warmFlash-=dt;
     if(f.calm&&!f.dead) { f.calmT+=dt; if(f.calmT>=1.9) f.dead=true; }
     if(f.spawnT!=null&&f.spawnT<1) f.spawnT+=dt;
-    f.shake=Math.max(0,f.shake-dt); f.flash=Math.max(0,f.flash-dt); f.lunge=Math.max(0,f.lunge-dt); f.hold=Math.max(0,(f.hold||0)-dt);
+    f.shake=Math.max(0,f.shake-dt); f.flash=Math.max(0,f.flash-dt*FOE_FLASH_FAST); f.lunge=Math.max(0,f.lunge-dt); f.hold=Math.max(0,(f.hold||0)-dt);
     if(f.dying>=0&&!f.dead) {
       f.dying+=dt;
       for(const p of f.parts) { if(p.d>0) { p.d-=dt; continue; } p.x+=p.vx*dt; p.y+=p.vy*dt; p.vy-=20*dt; }
