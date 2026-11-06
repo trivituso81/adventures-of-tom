@@ -2207,7 +2207,7 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -2224,7 +2224,14 @@
      "at": 1793923576770
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "wrong color",
+     "from": "v1",
+     "at": 1793923590152
+    }
+   ],
    "id": "enemy-smoglet",
    "tab": "Enemies",
    "title": "Smoglet: sheet, 4 frames facing right",
