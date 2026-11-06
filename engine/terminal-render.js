@@ -5,9 +5,9 @@
 // (ground 'gate': 'gatecarpet', the big 'gatewindow' onto the night tarmac; the plane is drawn by data/scenes.js).
 // Props: gatedoors, gateclock, xray, scanner, stanchion, bins, carousel, bagcart, lostfound, fids, termplant, termbench,
 // loungechair, loungebar, amenity, checkin, termsign, photobooth, gatepodium, jetdoor, gateseats.
-// Also the minimap and the battle backdrops (wraps drawLEBattleBg). Wraps drawOutdoorTile, drawObject and
+// Also the minimap. Wraps drawOutdoorTile, drawObject and
 // buildMiniBase. Loaded after engine/club-render.js.
-const LE_drawOutdoorTile_term=drawOutdoorTile,LE_drawObject_term=drawObject,LE_buildMiniBase_term=buildMiniBase,LE_drawLEBattleBg_term=drawLEBattleBg;
+const LE_drawOutdoorTile_term=drawOutdoorTile,LE_drawObject_term=drawObject,LE_buildMiniBase_term=buildMiniBase;
 const TERM_GROUNDS=['term','gate'];
 const termGround=map=>{ const g=map&&map.style&&map.style.ground; return TERM_GROUNDS.includes(g)?g:null; };
 const termTile=(x,y)=>within(currentMap,x,y)?currentMap.tiles[y][x]:'termvoid';
@@ -181,27 +181,3 @@ buildMiniBase=function(map) {
 // ---------- Battle backdrops ----------
 // Terminal Zero: tall windows onto the night tarmac, a departure board, a row of seats, the busy carpet. Gate Zero: one
 // huge window with Flight 0 parked at the jet bridge (gone once it has left), and the split-flap board.
-drawLEBattleBg=function(t) {
-  const g=termGround(currentMap),lab=B2.active&&B2.labTerm;
-  if(!g&&!lab) return LE_drawLEBattleBg_term(t);
-  const gate=g==='gate'||(lab&&B2.labGate),go=termClockGo();
-  rect(0,0,192,108,'#e0d8c4');
-  rect(0,4,192,54,go?'#1a2848':'#121a34');
-  for(let k=0;k<24;k++) { const n=hash(k,13); rect(n%192,4+(n>>>8)%30,1,1,'#fff1cb'); }
-  rect(0,46,192,12,'#2a2a36'); for(let k=0;k<12;k++) if((Math.floor(t*2)+k)%3===0) ellipse(8+k*16,52,1.5,1.5,k%2?'#e85a4a':'#f2c75a');
-  if(gate) {
-    if(!go||!termFull()||!flag('ch10-gone')) {   // Flight 0 at the jet bridge
-      rect(30,26,120,14,'#e8eaf4'); ellipse(150,33,10,7,'#e8eaf4'); polygon([[40,26],[30,10],[44,10],[56,26]],'#2f5fb0');
-      rect(60,38,60,4,'#c9ccd4'); polygon([[70,40],[110,40],[96,48],[80,48]],'#c9ccd4');
-      for(let k=0;k<9;k++) rect(62+k*9,30,4,4,'#f2c75a'); rect(30,36,120,2,'#2f5fb0'); label('0',38,14,'#f2c75a',1);
-      rect(150,30,42,10,'#5a5a68');
-    }
-  } else { for(let k=0;k<6;k++) { const bx=10+k*32; rect(bx,4,2,54,'#c9ccd4'); } }
-  for(let i=0;i<192;i+=32) rect(i,4,2,54,'#c9ccd4'); rect(0,0,192,4,'#a8a090'); rect(0,56,192,2,'#2f5fb0');
-  if(!gate) { rect(130,10,50,22,OUT); rect(131,11,48,20,'#14141c'); for(let r=0;r<3;r++) rect(134,14+r*6,42,3,r?'#d8d2c2':'#f2c75a'); }
-  rect(0,58,192,8,'#cfc8b8');
-  for(let k=0;k<8;k++) { const sx=6+k*24; rect(sx,56,18,8,'#2f5fb0'); rect(sx,54,18,3,'#4a7ad0'); }
-  rect(0,66,192,42,gate?'#2a4a78':'#2a5a78'); rect(0,66,192,2,'#f2c75a');
-  for(let k=0;k<40;k++) { const n=hash(k,31); rect(n%190,68+(n>>>8)%38,3,2,['#e8743b','#f2c75a','#6ab0e8','#c96aa8'][k%4]); }
-  return true;
-};

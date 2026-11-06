@@ -5,8 +5,7 @@
 // The painted battle backgrounds live in bgs/ (576x324 WebP, one per place; repainted 2026-11-01 to the layout in
 // claude/battle-background-spec.md: the floor starts about 65% down and is flat, matte and empty so characters stand ON it).
 // battleBgKey picks the picture from the map's ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not
-// loaded yet, the older code-drawn backdrops in the render files (engine/*-render.js, drawLABattleBg / drawLEBattleBg) and
-// the pond code below are used. BG_V is the cache tag: bump it whenever a picture in bgs/ changes, or phones keep the old one.
+// loaded yet a plain dark fill shows. BG_V is the cache tag: bump it whenever a picture in bgs/ changes, or phones keep the old one.
 const BG_V='bgs3';
 const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-school-classroom',cafe:'04-school-cafetorium',
   stacks:'05-library-stacks',readroom:'06-library-reading-room',club:'07-moon-club',dome:'08-moon-club-dome',barn:'09-car-barn',
@@ -55,29 +54,10 @@ function battleBgKey() {
   return 'pond';
 }
 function drawBattleBackdrop(t) {
-  // Every place now has a painted picture (the Glass Tower and the other story places were code-drawn until 2026-11-01);
-  // the code-drawn backdrops below only show while a picture is still loading.
+  // Every place has a painted picture; the old code-drawn backdrops were removed (bgs3).
   const im=BG_IMG[battleBgKey()];
   if(im&&im.complete&&im.naturalWidth) { gfx.imageSmoothingEnabled=false; gfx.drawImage(im,0,0,192,108); return; }
-  // Fallback while a picture loads: the code-drawn backdrops.
-  if((B2.active&&B2.labLA)||regionOf(currentMap)==='la') drawLABattleBg(t);
-  else if(typeof drawLEBattleBg==='function'&&drawLEBattleBg(t)) {}   // engine/school-render.js: Long Island Elementary
-  else {
-  rect(0,0,192,108,'#2d5a4c');
-  for(let i=0;i<6;i++) rect(0,i*11,192,11,['#3a6f5c','#3f7762','#467f68','#4c876d','#528f72','#589677'][i]);
-  rect(0,66,192,42,'#8fb07a');
-  rect(0,66,192,2,'#a7c58c');
-  for(let i=0;i<40;i++) { const n=hash(i,7); rect((n%192),70+(n>>>8)%34,1,2,'#789b64'); }
-  ellipse(44,92,34,9,'#729b9a');
-  ellipse(44,91,30,7,'#83b4b2');
-  rect(20+((Math.floor(t*2))%4),89,6,1,'#bbd9c9');
-  rect(52-((Math.floor(t*2))%4),94,5,1,'#69a09e');
-  for(const [x,y] of [[8,56],[176,52],[150,58]]) {
-    rect(x-2,y+4,4,10,'#807354');
-    rect(x-8,y-10,16,16,'#547f58');
-    rect(x-10,y-5,20,10,'#648c5e');
-  }
-  }
+  rect(0,0,192,108,'#14141c');   // the picture is still loading
 }
 
 function drawBattle() {

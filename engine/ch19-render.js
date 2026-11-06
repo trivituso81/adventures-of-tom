@@ -6,8 +6,8 @@
 //   kiln, wheel, shelf, clay, tools), dlmem (a memory fragment: a floating page, dim once read), dlkeep (a keepsake pedestal), dlaltar (the Claim Desk), dlmail (Tom's mailbox
 //   on Second Avenue, the way down).
 // Story state read here: flags mem-<id> (fragment read), ks-<who> (keepsake placed), ch19-open (the mailbox has opened).
-// Wraps drawOutdoorTile, drawObject, buildMiniBase, drawLEBattleBg, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch18-render.js.
-const LE_drawOutdoorTile_ch19=drawOutdoorTile,LE_drawObject_ch19=drawObject,LE_buildMiniBase_ch19=buildMiniBase,LE_drawLEBattleBg_ch19=drawLEBattleBg,LE_b7DrawMapFx_ch19=b7DrawMapFx;
+// Wraps drawOutdoorTile, drawObject, buildMiniBase, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch18-render.js.
+const LE_drawOutdoorTile_ch19=drawOutdoorTile,LE_drawObject_ch19=drawObject,LE_buildMiniBase_ch19=buildMiniBase,LE_b7DrawMapFx_ch19=b7DrawMapFx;
 let LE_mcAreaTrack_ch19=null;
 const dlGround=map=>!!(map&&map.style&&map.style.ground==='dead');
 const dlTile=(x,y)=>within(currentMap,x,y)?currentMap.tiles[y][x]:'dlvoid';
@@ -291,22 +291,6 @@ buildMiniBase=function(map) {
   for(let y=0;y<map.h;y++) for(let x=0;x<map.w;x++) { b.fillStyle=col[map.tiles[y][x]]||'#6a6a80'; b.fillRect(x*2,y*2,2,2); }
   for(const o of map.objects) if(o.kind==='dlkeep'||o.kind==='dlaltar') { b.fillStyle='#f2c75a'; b.fillRect(o.x*2,o.y*2,2,2); }
   return c;
-};
-
-// ---------- Battle backdrop: the sorting hall, with the Claim Desk lamp on ----------
-drawLEBattleBg=function(t) {
-  if(!dlGround(currentMap)) return LE_drawLEBattleBg_ch19(t);
-  rect(0,0,192,108,'#0c1216');
-  for(let r=0;r<4;r++) for(let c=0;c<24;c++) {   // the pigeonhole wall
-    const px=c*8,py=r*9+2; rect(px+1,py,6,7,'#05080a'); const m=hash(c,r+7);
-    if(m%3!==0) { rect(px+1,py+2+(m%2),6,4,DL_ENV[m%4]); if(m%7===0) rect(px+4,py+3,2,2,'#d9503f'); }
-  }
-  rect(0,40,192,4,'#1c2428');
-  rect(0,44,192,64,'#2e3c44'); for(let k=0;k<9;k++) rect(0,46+k*7,192,1,'#243036'); for(let k=0;k<13;k++) rect(k*15+((k%2)*7),44,1,64,'#243036');
-  const now=typeof elapsedTime==='number'?elapsedTime:t||0;
-  for(let k=0;k<5;k++) { const ex=((k*40+now*10)%200)-8; rect(ex,52,8,6,DL_ENV[k%4]); rect(ex,52,8,1,'#fff8e0'); }   // an envelope belt along the back
-  for(const lx of [30,96,160]) { gfx.globalAlpha=.16+.06*Math.sin(now*2+lx); ellipse(lx,70,34,26,'#ffe9a0'); gfx.globalAlpha=1; rect(lx-5,30,10,4,'#3a7a4a'); rect(lx,0,1,30,'#2a2e34'); }
-  gfx.globalAlpha=.1; rect(0,0,192,108,'#0a0810'); gfx.globalAlpha=1;
 };
 
 // ---------- Map effect: drifting paper dust, and a little warmth where Tom is being remembered ----------

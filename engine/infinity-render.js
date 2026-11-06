@@ -5,10 +5,10 @@
 // 'infwalk'). Terminal Infinity is Terminal Zero's big sister: always dusk, the departures board never changes.
 // Props: cabinseat, cabinblanket, cabindoor, cabincart, infpodium, inffids, infseats, infplant, infgatesign, boardbench,
 // infjet, infbigdoor, infdoor, infrope, infdesk, infcart.
-// Also the minimap and the battle backdrops (wraps drawLEBattleBg). Wraps drawOutdoorTile, drawObject and buildMiniBase.
+// Also the minimap. Wraps drawOutdoorTile, drawObject and buildMiniBase.
 // Story state read here: flags ch11-boo (Rose is out from under the blanket), ch11-tear (the sky is tearing), ch11-closed
 // (Long Island's dome has gone amber; C11b). Loaded after engine/terminal-render.js.
-const LE_drawOutdoorTile_inf=drawOutdoorTile,LE_drawObject_inf=drawObject,LE_buildMiniBase_inf=buildMiniBase,LE_drawLEBattleBg_inf=drawLEBattleBg;
+const LE_drawOutdoorTile_inf=drawOutdoorTile,LE_drawObject_inf=drawObject,LE_buildMiniBase_inf=buildMiniBase;
 const INF_GROUNDS=['inf','cabin'];
 const infGround=map=>{ const g=map&&map.style&&map.style.ground; return INF_GROUNDS.includes(g)?g:null; };
 const infTile=(x,y)=>within(currentMap,x,y)?currentMap.tiles[y][x]:'infvoid';
@@ -184,26 +184,3 @@ buildMiniBase=function(map) {
 // ---------- Battle backdrops ----------
 // Terminal Infinity: a long dusk window with paused towns, glass domes, the plum carpet and gold stripe. Flight Zero's
 // cabin: the beige wall, oval windows, the blue-gray floor.
-drawLEBattleBg=function(t) {
-  const g=infGround(currentMap);
-  if(!g) return LE_drawLEBattleBg_inf(t);
-  if(g==='cabin') {
-    rect(0,0,192,108,'#d9d1c0'); rect(0,0,192,6,'#b8b0a0');
-    for(let k=0;k<4;k++) { const wx=14+k*46; rect(wx,14,30,22,'#2a2a38'); rect(wx+2,16,26,18,'#7ab0e0'); rect(wx+4,22,12,3,'#f4f8ff'); }
-    rect(0,48,192,6,'#a8a090'); rect(0,54,192,54,'#3c4a6a');
-    for(let k=0;k<5;k++) { const sx=8+k*38; rect(sx,40,26,22,'#5a6a8a'); rect(sx+3,43,20,10,'#8a9ab8'); }
-    for(let k=0;k<30;k++) { const n=hash(k,41); rect(n%190,58+(n>>>8)%48,3,2,'#4a5a82'); }
-    return true;
-  }
-  const bh=Math.ceil(46/INF_SKY.length);
-  for(let k=0;k<INF_SKY.length;k++) rect(0,4+k*bh,192,bh+1,INF_SKY[k]);
-  for(let k=0;k<26;k++) { const n=hash(k,13); rect(n%192,6+(n>>>8)%22,1,1,'#fff1cb'); }
-  const tones=['#c09a7a','#8aa0c0','#c08aa0','#9ac09a'];
-  for(let k=0;k<5;k++) { const cx=14+k*40+(hash(k,2)%12),r=10+hash(k,3)%8; for(let i=-r;i<=r;i++) { const hh=Math.sqrt(r*r-i*i)*.8; rect(cx+i,50-hh,1,hh,tones[k%4]); rect(cx+i,50-hh,1,1,'#fff1cb'); } }
-  rect(0,46,192,12,'#241a38'); rect(0,56,192,2,'#f2c75a');
-  for(let i=0;i<192;i+=32) rect(i,4,2,54,'#46345e'); rect(0,0,192,4,'#241a38');
-  rect(0,58,192,8,'#3a2a50'); for(let k=0;k<8;k++) { const sx=6+k*24; rect(sx,56,18,8,'#d8a43a'); rect(sx,54,18,3,'#f2c75a'); }
-  rect(0,66,192,42,'#3a2a5a'); rect(0,66,192,2,'#f2c75a');
-  for(let k=0;k<40;k++) { const n=hash(k,31); rect(n%190,68+(n>>>8)%38,3,2,['#4e3a78','#f2c75a40','#6a4a9a','#2c1f48'][k%4]); }
-  return true;
-};

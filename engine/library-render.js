@@ -4,9 +4,9 @@
 // boards, 'picrug' and the 'storyrug' in Picture Books, 'stairsup' back to the library) and the Reading Room (ground
 // 'readroom': 'readwood' parquet, the red 'dais'). Props: bookcase, readdoors, stackglobe, bookcart, lamptable, stacksign,
 // ladder, lowshelf, beanbag, storychair, puppettheater, lectern, and the stacksdoor in the library room. Also the minimap
-// and the battle backdrops (wraps drawLEBattleBg from engine/school-render.js). Wraps drawOutdoorTile, drawObject and
+// Wraps drawOutdoorTile, drawObject and
 // buildMiniBase. Loaded after engine/oak-render.js.
-const LE_drawOutdoorTile_lib=drawOutdoorTile,LE_drawObject_lib=drawObject,LE_buildMiniBase_lib=buildMiniBase,LE_drawLEBattleBg_lib=drawLEBattleBg;
+const LE_drawOutdoorTile_lib=drawOutdoorTile,LE_drawObject_lib=drawObject,LE_buildMiniBase_lib=buildMiniBase;
 const LIB_GROUNDS=['stacks','readroom'];
 const libGround=map=>{ const g=map&&map.style&&map.style.ground; return LIB_GROUNDS.includes(g)?g:null; };
 const libTile=(x,y)=>within(currentMap,x,y)?currentMap.tiles[y][x]:'bkvoid';
@@ -167,25 +167,3 @@ buildMiniBase=function(map) {
 
 // ---------- Battle backdrops ----------
 // The Stacks (tall bookcases, green lamps, boards) or the Reading Room (an arched window, the red dais).
-drawLEBattleBg=function(t) {
-  const g=libGround(currentMap),lab=B2.active&&B2.labStacks;
-  if(!g&&!lab) return LE_drawLEBattleBg_lib(t);
-  const read=g==='readroom'||(lab&&B2.labRead);
-  rect(0,0,192,108,read?'#1e1418':'#1e120c');
-  if(read) {
-    for(let i=0;i<192;i+=24) { rect(i,0,22,66,'#3a2418'); for(let r=0;r<5;r++) { rect(i+1,4+r*12,20,10,'#140c08'); libSpines(i+2,4+r*12,19,10,hash(i,r)); } }
-    rect(76,4,40,50,'#140c10'); ellipse(96,18,20,16,'#140c10'); rect(78,10,36,44,'#2a3a6a'); ellipse(96,18,18,14,'#2a3a6a');
-    rect(95,4,2,50,'#140c10'); rect(78,30,36,2,'#140c10');
-    for(let k=0;k<6;k++) rect(82+((k*17)%30),14+((k*11)%30),1,1,'#fff1cb');
-    rect(0,66,192,42,'#8a2a3a'); rect(0,66,192,3,'#c9a23a'); for(let i=72;i<108;i+=6) rect(0,i,192,1,'#7a2232');
-  } else {
-    for(let i=0;i<192;i+=32) { rect(i,0,30,66,'#3a2418'); rect(i,0,30,3,'#5a3a24'); for(let r=0;r<5;r++) { rect(i+2,5+r*12,26,10,'#140c08'); libSpines(i+3,5+r*12,25,10,hash(i+7,r)); rect(i,15+r*12,30,1,'#6a4a2e'); } }
-    rect(0,66,192,42,'#8a6440'); for(let i=70;i<108;i+=6) rect(0,i,192,1,'#6a4a2e'); rect(0,66,192,2,'#a88058');
-  }
-  for(const lx of [30,162]) { const yy=read?62:60; rect(lx-14,yy+2,28,4,'#5a3a24'); const f=.16+.05*Math.sin(t*3+lx); gfx.globalAlpha=f; ellipse(lx,yy+4,22,8,'#fff1a8'); gfx.globalAlpha=1;
-    polygon([[lx-7,yy-2],[lx+7,yy-2],[lx+5,yy-7],[lx-5,yy-7]],'#2f8a5a'); rect(lx-1,yy-2,2,4,'#c9a23a'); }
-  // drifting whispers
-  for(let k=0;k<5;k++) { const p=(t*.15+k*.2)%1; gfx.globalAlpha=Math.sin(p*Math.PI)*.5; label(k%2?'SHH':'PSST',20+((k*41)%150),56-p*40,'#c9b3e6',1); }
-  gfx.globalAlpha=1;
-  return true;
-};

@@ -4,8 +4,8 @@
 // trailer, crafty, golfcart, dirchair, cstand, applebox, facade, western, trough, hitch, cactus, nywall, hydrant,
 // dumpster, newsstand, propcar, greenscreen, flat, tapemark, sewing, mirror, fogmachine, lightrig, jbox, roadcase,
 // setwall, couch, setlamp, camera. Also the minimap colors and the battle backdrops for these maps.
-// Wraps drawOutdoorTile, drawObject, buildMiniBase and drawLABattleBg. Loaded after engine/marsh-render.js.
-const LE_drawOutdoorTile_lot=drawOutdoorTile,LE_drawObject_lot=drawObject,LE_buildMiniBase_lot=buildMiniBase,LE_drawLABattleBg_lot=drawLABattleBg;
+// Wraps drawOutdoorTile, drawObject, buildMiniBase. Loaded after engine/marsh-render.js.
+const LE_drawOutdoorTile_lot=drawOutdoorTile,LE_drawObject_lot=drawObject,LE_buildMiniBase_lot=buildMiniBase;
 const STUDIO_GROUNDS=['lot','backlot','stage'];
 const studioGround=map=>{ const g=map&&map.style&&map.style.ground; return STUDIO_GROUNDS.includes(g)?g:null; };
 const tileIs=(x,y,t)=>within(currentMap,x,y)&&currentMap.tiles[y][x]===t;
@@ -330,30 +330,3 @@ buildMiniBase=function(map) {
   return c;
 };
 
-// ---------- Battle backdrops ----------
-// The lot and the Backlot: a hot blue sky over soundstage roofs and a painted New York. Inside: a dark stage under lights.
-function drawStudioBattleBg(t,inside) {
-  if(inside) {
-    rect(0,0,192,108,'#14151a');
-    for(let i=0;i<5;i++) { const lx=20+i*38; rect(lx-5,4,10,6,'#2c2c33'); gfx.globalAlpha=.14+.04*Math.sin(t*1.5+i); polygon([[lx-4,10],[lx+4,10],[lx+22,70],[lx-22,70]],'#fff1cb'); gfx.globalAlpha=1; rect(lx-3,8,6,2,['#4a78c2','#e8a43a','#d94a3a','#fff1cb','#9be39a'][i]); }
-    rect(0,2,192,2,'#4a4f58');
-    rect(0,66,192,42,'#3a3b42'); rect(0,66,192,2,'#5a5b62');
-    for(let i=0;i<8;i++) { const n=hash(i,41); rect(n%180,72+(n>>>8)%30,10,2,'#e8c84a'); }
-    rect(150,40,30,26,'#2a2b31'); rect(152,42,26,22,'#c9b48a'); rect(160,46,10,8,'#f2a05a');   // a flat from the set
-    gfx.globalAlpha=.18; for(let i=0;i<4;i++) ellipse((t*12+i*60)%240-24,74+i*6,30,6,'#eef2f6'); gfx.globalAlpha=1;
-    return;
-  }
-  const sky=['#6fb4e8','#7bbcea','#88c4ec','#96ccee','#a6d4f0','#b6dcf2'];
-  for(let i=0;i<6;i++) rect(0,i*11,192,11,sky[i]);
-  ellipse(30,16,9,9,'#fff6c0');
-  for(const [x,w,hh] of [[0,46,30],[48,40,24],[150,42,32]]) { rect(x,66-hh,w,hh,'#e0d2b4'); rect(x,66-hh,w,3,'#f2e8d2'); label(String(3+x%7),x+w/2,66-hh+8,'#b8a98a',2); }
-  for(let x=92;x<148;x+=9) { const hh=14+hash(x,3)%20; rect(x,66-hh,8,hh,'#8a5a4a'); rect(x+2,66-hh+4,2,2,'#f6d27a'); }
-  rect(0,66,192,42,'#d2b88a'); rect(0,66,192,2,'#e8cfa2');
-  for(let i=0;i<30;i++) { const n=hash(i,13); rect(n%192,70+(n>>>8)%34,3,1,'#b89a6a'); }
-  rect(20,84,12,2,'#e8584a'); rect(25,80,2,10,'#e8584a');
-}
-drawLABattleBg=function(t) {
-  const g=studioGround(currentMap),lab=B2.active&&B2.labStudio;
-  if(!g&&!lab) return LE_drawLABattleBg_lot(t);
-  drawStudioBattleBg(t,g==='stage');
-};

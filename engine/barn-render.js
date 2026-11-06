@@ -4,9 +4,9 @@
 // 'lunchfloor', the turntable 'ttpit' and its 'ttbridge') and the Boiler Room (ground 'boiler': 'boilerfloor',
 // 'hearth'). Props: streetcar, paintcans, sawhorse, paintrack, workbench, toolboard, bogie, lathe, oilcans, timeclock,
 // dispatch, barnbench, lockers, menuboard, vending, lunchtable, ttmotor, ttlever, tracksign, coalcart, lunchpail,
-// boilertank, coalpile, breadrack, ashbin, peelrack. Also the minimap and the battle backdrops (wraps drawLABattleBg).
+// boilertank, coalpile, breadrack, ashbin, peelrack. Also the minimap.
 // Wraps drawOutdoorTile, drawObject and buildMiniBase. Loaded after engine/library-render.js.
-const LE_drawOutdoorTile_barn=drawOutdoorTile,LE_drawObject_barn=drawObject,LE_buildMiniBase_barn=buildMiniBase,LE_drawLABattleBg_barn=drawLABattleBg;
+const LE_drawOutdoorTile_barn=drawOutdoorTile,LE_drawObject_barn=drawObject,LE_buildMiniBase_barn=buildMiniBase;
 const BARN_GROUNDS=['barn','boiler'];
 const barnGround=map=>{ const g=map&&map.style&&map.style.ground; return BARN_GROUNDS.includes(g)?g:null; };
 const barnTile=(x,y)=>within(currentMap,x,y)?currentMap.tiles[y][x]:'brickwall';
@@ -286,31 +286,3 @@ buildMiniBase=function(map) {
   return c;
 };
 
-// ---------- Battle backdrops ----------
-// The Car Barn: brick, tall arched windows, a yellow streetcar on the rails. The Boiler Room: dark brick, pipes, glow.
-function drawBarnBattleBg(t,g) {
-  const warm=barnWarm();
-  if(g==='boiler') {
-    rect(0,0,192,108,'#24120c');
-    for(let r=0;r<11;r++) { rect(0,r*6,192,1,'#3a1a12'); for(let k=(r%2)*8;k<192;k+=16) rect(k,r*6,1,6,'#3a1a12'); }
-    for(const px of [20,60,140,176]) { rect(px,0,6,66,'#4a4440'); rect(px,0,2,66,'#6a6460'); }
-    rect(0,14,192,5,'#4a4440'); rect(0,14,192,1,'#6a6460');
-    const f=.18+.08*Math.sin(t*4); gfx.globalAlpha=f; ellipse(96,60,70,30,'#ff8a3a'); gfx.globalAlpha=1;
-    rect(0,66,192,42,'#5a2a1e'); for(let i=70;i<108;i+=6) rect(0,i,192,1,'#3a1a12'); rect(0,66,192,2,'#c9a23a');
-    for(let k=0;k<6;k++) { const p=(t*.3+k*.17)%1; gfx.globalAlpha=1-p; rect(30+((k*37)%140),64-p*50,2,2,'#ffb04a'); } gfx.globalAlpha=1;
-    return;
-  }
-  rect(0,0,192,108,'#5a2a1e');
-  for(let r=0;r<11;r++) { rect(0,r*6,192,1,'#7a3a2a'); for(let k=(r%2)*8;k<192;k+=16) rect(k,r*6,1,6,'#7a3a2a'); }
-  for(const wx of [14,62,110,158]) { rect(wx,8,22,40,'#2a1a14'); ellipse(wx+11,10,11,8,'#2a1a14'); rect(wx+2,10,18,36,warm?'#e8c088':'#6a8aa8'); ellipse(wx+11,11,9,6,warm?'#e8c088':'#6a8aa8');
-    rect(wx+10,8,2,40,'#2a1a14'); rect(wx,26,22,2,'#2a1a14'); }
-  rect(118,42,64,24,OUT); rect(120,44,60,20,'#e8b830'); rect(120,44,60,3,'#3f7a4a'); for(let k=0;k<4;k++) rect(124+k*14,48,10,8,'#2a3440');
-  rect(0,66,192,42,'#86837c'); rect(0,66,192,2,'#a8a49c');
-  for(let k=0;k<192;k+=8) rect(k,82,3,14,'#5a4632'); rect(0,84,192,2,'#c9ccd4'); rect(0,93,192,2,'#c9ccd4');
-  if(!warm) { gfx.globalAlpha=.16; rect(0,0,192,108,'#9fd8ff'); gfx.globalAlpha=1; }
-}
-drawLABattleBg=function(t) {
-  const g=barnGround(currentMap),lab=B2.active&&B2.labBarn;
-  if(!g&&!lab) return LE_drawLABattleBg_barn(t);
-  drawBarnBattleBg(t,g||(B2.labBoiler?'boiler':'barn'));
-};

@@ -6,7 +6,7 @@
 // tetherball, car, hallclock, cafdoors, bulletin, trophycase, waterfountain, signtable, lostfound, easel, arttable,
 // dryrack, piano, drums, xylophone, musicstand, bleachers, hoop, gymmats, ballcart, climbrope, stafffridge,
 // staffcounter, copier, stafftable, staffcouch, podium, lunchtable, milkcooler. Also the minimap and the battle
-// backdrops (drawLEBattleBg, called by engine/battle-draw.js). Wraps drawOutdoorTile, drawObject and buildMiniBase.
+// and the minimap. Wraps drawOutdoorTile, drawObject and buildMiniBase.
 // Loaded after engine/backlot-render.js.
 const LE_drawOutdoorTile_school=drawOutdoorTile,LE_drawObject_school=drawObject,LE_buildMiniBase_school=buildMiniBase;
 const SCHOOL_GROUNDS=['schoolyard','school','cafe'];
@@ -342,24 +342,3 @@ buildMiniBase=function(map) {
 
 // ---------- Battle backdrops ----------
 // A classroom at night (chalkboard, clock, little desks), or the Cafetorium stage (curtains, lights).
-function drawLEBattleBg(t) {
-  const g=schoolGround(currentMap),lab=B2.active&&B2.labSchool;
-  if(!g&&!lab) return false;
-  if(g==='cafe'||(lab&&B2.labCafe)) {
-    rect(0,0,192,108,'#2a1418');
-    for(let i=0;i<192;i+=8) { rect(i,0,5,66,'#8a2a32'); rect(i+5,0,3,66,'#6a1a22'); }
-    rect(0,0,192,6,'#c9a23a'); rect(0,6,192,2,'#8a6a1a');
-    for(let i=0;i<4;i++) { const lx=30+i*44; gfx.globalAlpha=.12+.04*Math.sin(t*1.4+i); polygon([[lx-3,8],[lx+3,8],[lx+20,70],[lx-20,70]],'#fff1cb'); gfx.globalAlpha=1; }
-    rect(0,66,192,42,'#a8743a'); rect(0,66,192,3,'#c9a23a'); for(let i=70;i<108;i+=6) rect(0,i,192,1,'#8a5a2a');
-    return true;
-  }
-  rect(0,0,192,108,'#9fb0c0'); rect(0,0,192,4,'#6a7a8a');
-  rect(18,10,100,40,'#5a3a22'); rect(20,12,96,36,'#2f4a3a');
-  label('A B C 1 2 3',52,18,'#e8e2d0',1); label('SEE ME',88,30,'#ff8a8a',1); for(let i=0;i<5;i++) rect(26+i*16,40,10,1,'#c9d6c0');
-  ellipse(150,24,10,10,'#2b2a26'); ellipse(150,24,9,9,'#f4f0e6'); const a=t*6; rect(150,24,Math.round(Math.cos(a)*6),1,'#d94a3a'); rect(150,18,1,6,'#2b2a26');
-  rect(128,10,40,4,'#d94a3a'); for(let i=0;i<5;i++) rect(130+i*8,6,6,6,['#ffe27a','#9fd8ff','#ffb0d0','#9be39a','#ffb070'][i]);
-  rect(0,56,192,10,'#6a7a8a');
-  rect(0,66,192,42,'#c9c2ae'); for(let i=0;i<192;i+=16) rect(i,66,1,42,'#b4ad99'); rect(0,66,192,2,'#e8e2d0');
-  for(const [dx,dy] of [[8,72],[160,74],[22,92],[172,94]]) { rect(dx,dy,18,6,'#c98a4a'); rect(dx+2,dy+6,2,8,'#5a5a60'); rect(dx+14,dy+6,2,8,'#5a5a60'); }
-  return true;
-}

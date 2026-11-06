@@ -5,8 +5,8 @@
 //   Props: gldesk, gldir, glframes, glclock, glvend, glplant, glbench, glelev, glsign, glsealdoor, glhatch, towershelf (smashable: flag shelf-0..5),
 //   glcase, glplinth (the snow globe), and towerfront (the tower seen from the boulevard, on the Downtown map).
 // Story state read here: flags ch17-smashed (how many shelves are broken), ch17-locks (all six: the seal is open), shelf-0 to shelf-5.
-// Wraps drawOutdoorTile, drawObject, buildMiniBase, drawLEBattleBg, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch13-render.js.
-const LE_drawOutdoorTile_ch17=drawOutdoorTile,LE_drawObject_ch17=drawObject,LE_buildMiniBase_ch17=buildMiniBase,LE_drawLEBattleBg_ch17=drawLEBattleBg,
+// Wraps drawOutdoorTile, drawObject, buildMiniBase, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch13-render.js.
+const LE_drawOutdoorTile_ch17=drawOutdoorTile,LE_drawObject_ch17=drawObject,LE_buildMiniBase_ch17=buildMiniBase,
   LE_b7DrawMapFx_ch17=b7DrawMapFx;
 let LE_mcAreaTrack_ch17=null;
 const glGround=map=>!!(map&&map.style&&map.style.ground==='glass');
@@ -200,21 +200,6 @@ buildMiniBase=function(map) {
 
 // ---------- Battle backdrops ----------
 // The tower: a glass wall with the golden afternoon behind it, polished floor with reflections. The vault: the same wall with a dark ceiling and the plinth.
-drawLEBattleBg=function(t) {
-  if(!glGround(currentMap)) return LE_drawLEBattleBg_ch17(t);
-  const vault=currentMap.id==='towervault',arch=currentMap.id==='towershelves';
-  rect(0,0,192,108,'#1a2338');
-  for(let k=0;k<4;k++) rect(0,4+k*11,192,11,GL_SKY[k]);
-  for(let k=0;k<22;k++) { const n=hash(k,53),hh=8+(n%24); rect(k*9,48-hh,8,hh,k%2?'#6a4658':'#7a5468'); if(n%3===0) rect(k*9+2,48-hh+3,2,2,'#ffe9a0'); }
-  for(let k=0;k<192;k+=24) rect(k,0,2,50,'#0e1424'); rect(0,0,192,3,'#0e1424'); rect(0,48,192,4,'#0e1424');
-  gfx.globalAlpha=.16; rect(30,0,26,50,'#ffffff'); rect(110,0,14,50,'#ffffff'); gfx.globalAlpha=1;
-  if(arch) { rect(0,52,192,56,'#26224a'); for(let k=0;k<192;k+=24) for(let j=0;j<3;j++) { rect(k+10,58+j*16,4,4,'#b8963a'); rect(k+8,60+j*16,8,1,'#b8963a'); } rect(0,52,192,2,'#1c1838'); return true; }
-  rect(0,52,192,56,'#c6d2e2'); for(let k=0;k<192;k+=24) rect(k,52,1,56,'#a4b2c8'); for(let k=52;k<108;k+=14) rect(0,k,192,1,'#a4b2c8');
-  gfx.globalAlpha=.3; rect(20,56,60,5,'#ffffff'); rect(120,70,40,4,'#ffffff'); gfx.globalAlpha=1;
-  if(vault) { gfx.globalAlpha=.6; rect(0,0,192,16,'#0c0e18'); gfx.globalAlpha=1; rect(160,52,16,22,'#9cc4e0'); ellipse(168,48,9,9,'#1b2a38'); ellipse(168,48,8,8,'#2d4258'); }
-  return true;
-};
-
 // ---------- Map effects ----------
 // Shelf release: when a shelf breaks, a column of gold light rises from it for a moment (ch17Smash sets CH17_GLOW).
 const CH17_GLOW={};

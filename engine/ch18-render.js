@@ -3,8 +3,8 @@
 //   Prop: glloom (the Chronos Loom: a tall gold-and-dark-wood frame, hundreds of humming threads rising into the ceiling, and a cloth woven from tiny paused afternoons).
 //   Battle backdrop: the tower's glass wall and floor (engine/ch17-render.js) with the Loom's gold threads hanging in front of the sky.
 //   Map effect: CH18FX.light (data/scenes-ch18.js), a column of light rising from the tile where Tom stood.
-// Reads the glass helpers from engine/ch17-render.js. Wraps drawObject, drawLEBattleBg and mcAreaTrack. Loaded after engine/ch17-render.js.
-const LE_drawObject_ch18=drawObject,LE_drawLEBattleBg_ch18=drawLEBattleBg,LE_b7DrawMapFx_ch18=b7DrawMapFx;
+// Reads the glass helpers from engine/ch17-render.js. Wraps drawObject and mcAreaTrack. Loaded after engine/ch17-render.js.
+const LE_drawObject_ch18=drawObject,LE_b7DrawMapFx_ch18=b7DrawMapFx;
 let LE_mcAreaTrack_ch18=null;
 addEventListener('DOMContentLoaded',()=>{
   if(typeof mcAreaTrack!=='function'||LE_mcAreaTrack_ch18) return;
@@ -43,15 +43,6 @@ function glLoom(o,time) {
 drawObject=function(o,time) {
   if(o.kind==='glloom'&&glGround(currentMap)) return glLoom(o,time);
   return LE_drawObject_ch18(o,time);
-};
-drawLEBattleBg=function(t) {
-  const r=LE_drawLEBattleBg_ch18(t);
-  if(!glGround(currentMap)||currentMap.id!=='towerpinnacle') return r;
-  // the Loom's gold threads hang in front of the glass, and the whole room is a little warmer
-  const now=typeof elapsedTime==='number'?elapsedTime:0;
-  for(let k=0;k<64;k++) { const tx=4+k*3,s=.5+.5*Math.sin(now*2+k*.6); gfx.globalAlpha=.18+.3*s; rect(tx,0,1,50+(hash(k,9)%10),k%6===0?'#fff6c8':'#e8b84a'); }
-  gfx.globalAlpha=.1; rect(0,0,192,108,'#ffd36a'); gfx.globalAlpha=1;
-  return r;
 };
 // The column of light where Tom stood: it climbs for a few seconds and thins out, with glints leaving it.
 b7DrawMapFx=function(time) {

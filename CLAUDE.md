@@ -33,6 +33,10 @@ Tom is a product director. He designs and directs; he does **not** code and does
 
 Tom (11-02, and again 11-03 14:49 with "ALWAYS"): he creates images only in the Art Library (he presses Generate, then Approve or Reject). Never plan on, suggest or write prompts for him to run in any outside image AI, not even as a fallback after repeated misses. When the Library keeps missing, the options are a different Library method (a reference picture, a different entry shape) or an input he supplies into the Library. Older notes that mention his outside AI are history.
 
+## Purge replaced files completely (standing rule, Tom 2026-11-05)
+
+Tom (11-05 18:40): "remember from now on to purge old files completely after replacing them." When a new picture, sheet, sound, script or data file replaces an old one, remove everything the old one left behind in the same change: the old files, the code that drew or loaded the old thing (fallbacks, wrappers, helper functions, constants), stale comments, tag or cache entries, and Project or doc notes that describe it. Then grep for the old names and ids and confirm zero references. Git history keeps the old copy, so deleting is safe. Do not keep an old version "as a fallback" unless Tom asks. Frozen `demo/` is the one exception (never edited). Approved sources in `art/raw/` stay: the Art Library reads them.
+
 ## Head sizes (Tom, 2026-11-05: the no head resizing rule of 2026-11-03 is LIFTED)
 
 Tom (11-05): "Let's undo the no head resizing rule." `docs/CHARACTER_PIPELINE.md` section 7 (heads, heights, widths by age) is in force again, including the head row and the head tools (`kidhead.py` `grow_head`, `headwarp.py`). Head share is top of hair to chin over full height: about .21 to .22 for adults, about .25 for Grace and the style key's kids (Rose follows her ratio to Grace), and the older baked kid art uses .373 walking and .43 battle until a character is regenerated. Still true: a head row is shown to Tom before and after, the body keeps its size, and nothing is re-baked unless Tom asks for that character in that conversation (lifting the rule changed no art).

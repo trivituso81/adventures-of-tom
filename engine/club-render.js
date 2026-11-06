@@ -5,9 +5,9 @@
 // 'domefloor' under the stars, the 'bandstand'). Props: clubdoors, mirrorstand, clubplaque, ropepost, clubpalm,
 // coatcounter, coatrack, clubchair, cardtable, clubbar, jukebox, clubpiano, mirrorframe, bandchairs, domescope, and the
 // little silver clubdoor in Luna's observatory. The moonbeam (clubBeam) is traced here and drawn by data/scenes.js.
-// Also the minimap and the battle backdrops (wraps drawLEBattleBg). Wraps drawOutdoorTile, drawObject and
+// Also the minimap. Wraps drawOutdoorTile, drawObject and
 // buildMiniBase. Loaded after engine/barn-render.js.
-const LE_drawOutdoorTile_club=drawOutdoorTile,LE_drawObject_club=drawObject,LE_buildMiniBase_club=buildMiniBase,LE_drawLEBattleBg_club=drawLEBattleBg;
+const LE_drawOutdoorTile_club=drawOutdoorTile,LE_drawObject_club=drawObject,LE_buildMiniBase_club=buildMiniBase;
 const CLUB_GROUNDS=['club','dome'];
 const clubGround=map=>{ const g=map&&map.style&&map.style.ground; return CLUB_GROUNDS.includes(g)?g:null; };
 const clubTile=(x,y)=>within(currentMap,x,y)?currentMap.tiles[y][x]:'clubvoid';
@@ -177,25 +177,3 @@ buildMiniBase=function(map) {
 // ---------- Battle backdrops ----------
 // The Moon Club: navy panels, gold sconces, a velvet rope, parquet. The Dome: a glass dome full of stars, the bandstand,
 // light spots off the Mirrorball (and the moon, once she lets it go).
-drawLEBattleBg=function(t) {
-  const g=clubGround(currentMap),lab=B2.active&&B2.labClub;
-  if(!g&&!lab) return LE_drawLEBattleBg_club(t);
-  const dome=g==='dome'||(lab&&B2.labDome);
-  if(dome) {
-    rect(0,0,192,108,'#0c1024'); ellipse(96,70,120,90,'#141a38');
-    for(let k=1;k<6;k++) { gfx.strokeStyle='#2a3260'; gfx.lineWidth=1; gfx.beginPath(); gfx.ellipse(96,70,k*22,k*16,0,Math.PI,0); gfx.stroke(); }
-    for(let k=0;k<30;k++) { const n=hash(k,9); rect(n%192,(n>>>8)%60,1,1,(k+Math.floor(t*2))%9?'#fff1cb':'#9fd8ff'); }
-    if(clubMoonBack()) { ellipse(150,18,10,10,'#fff8d8'); ellipse(147,16,3,3,'#e8e0c0'); }
-    rect(0,66,192,42,'#6a2438'); rect(0,66,192,3,'#c9a23a'); for(let i=72;i<108;i+=6) rect(0,i,192,1,'#5a1c2e');
-    for(let k=0;k<10;k++) { const a=t*.8+k*.63; gfx.globalAlpha=.35; ellipse(96+Math.cos(a)*80,50+Math.sin(a*1.3)*30,3,2,'#dfe6f2'); } gfx.globalAlpha=1;
-    return true;
-  }
-  rect(0,0,192,108,'#24284a');
-  for(let i=0;i<192;i+=24) { rect(i+3,6,18,52,'#2e3460'); rect(i+3,6,18,1,'#3e4678'); }
-  rect(0,58,192,3,'#c9a23a');
-  for(const sx of [36,96,156]) { rect(sx-2,20,4,8,'#c9a23a'); const f=.2+.05*Math.sin(t*3+sx); gfx.globalAlpha=f; ellipse(sx,22,14,10,'#fff1a8'); gfx.globalAlpha=1; ellipse(sx,19,3,3,'#fff1a8'); }
-  for(const px of [20,172]) { rect(px-2,40,4,26,'#c9a23a'); ellipse(px,40,4,4,'#f0d27a'); }
-  gfx.strokeStyle='#a8203a'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(22,44); gfx.quadraticCurveTo(96,62,170,44); gfx.stroke();
-  rect(0,66,192,42,'#9a6a3a'); for(let i=70;i<108;i+=6) rect(0,i,192,1,'#7a4a24'); rect(0,66,192,2,'#c9a23a');
-  return true;
-};

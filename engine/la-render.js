@@ -795,20 +795,3 @@ buildMiniBase=function(map) {
 };
 
 // ---------- Battle backdrop for Griffith Park ----------
-function drawLABattleBg(t) {
-  const sky=['#e98a5a','#ef9c62','#f2ae6c','#f4c07a','#f6d08a','#f8dc98'];
-  for(let i=0;i<6;i++) rect(0,i*11,192,11,sky[i]);
-  ellipse(150,58,14,14,'#fbe6a8'); ellipse(150,58,11,11,'#fff2c4');
-  // Hills, with the observatory on the far ridge.
-  polygon([[0,66],[0,48],[30,40],[60,46],[96,34],[130,44],[160,38],[192,46],[192,66]],'#8a5a6a');
-  polygon([[0,66],[0,56],[40,50],[80,58],[120,50],[160,56],[192,52],[192,66]],'#a8706a');
-  ellipse(98,33,6,5,'#f2f0ea'); rect(92,33,12,3,'#e8e4dc'); rect(97,27,2,4,'#5a6070');
-  rect(0,66,192,42,'#c9b27a'); rect(0,66,192,2,'#e2cf98');
-  for(let i=0;i<40;i++) { const n=hash(i,9); rect(n%192,70+(n>>>8)%34,1,2,'#a8915c'); }
-  ellipse(44,92,30,8,'#231e29'); ellipse(44,91,26,6,'#2d2734');
-  const ph=(t*.8)%1; gfx.globalAlpha=1-ph; ellipse(36+ph*2,90,2+ph*3,1+ph*2,'#5b5268'); gfx.globalAlpha=1;
-  for(const [x,y] of [[10,48],[176,44],[160,52]]) {
-    rect(x-1,y,3,18,'#6a4a3a');
-    for(const [dx,dy] of [[-7,1],[7,1],[-5,-2],[5,-2],[0,-4]]) { rect(x+dx-2,y+dy,5,3,'#3f6a45'); rect(x+Math.round(dx/2)-1,y+Math.round(dy/2),3,2,'#3f6a45'); }
-  }
-}

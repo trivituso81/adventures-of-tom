@@ -8,8 +8,8 @@
 //   glass for about three seconds); HUSH-9 (an NPC with `hush`) gives off pale rings and a SHH; Warden Boppy (an NPC with `armor`) wears gold plate
 //   and a slow aura. Also the minimap, the battle backdrops, and the baked-music mapping for the three new maps.
 // Story state read here: flags ch13-melt (the plate is melting), ch13-melted (the doorway is open), ch13-worm (the Worm is up).
-// Wraps drawOutdoorTile, drawObject, buildMiniBase, drawLEBattleBg, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch12-render.js.
-const LE_drawOutdoorTile_ch13=drawOutdoorTile,LE_drawObject_ch13=drawObject,LE_buildMiniBase_ch13=buildMiniBase,LE_drawLEBattleBg_ch13=drawLEBattleBg,
+// Wraps drawOutdoorTile, drawObject, buildMiniBase, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch12-render.js.
+const LE_drawOutdoorTile_ch13=drawOutdoorTile,LE_drawObject_ch13=drawObject,LE_buildMiniBase_ch13=buildMiniBase,
   LE_b7DrawMapFx_ch13=b7DrawMapFx;
 let LE_mcAreaTrack_ch13=null;   // engine/music-clips.js loads later; wrapped on DOMContentLoaded
 const subGround=map=>!!(map&&map.style&&map.style.ground==='sub');
@@ -156,31 +156,6 @@ buildMiniBase=function(map) {
 
 // ---------- Battle backdrops ----------
 // The tunnel: a tiled wall, a work light, the platform and two rails running away. The chamber: raw rock, a wall of amber glowing on the right.
-drawLEBattleBg=function(t) {
-  if(!subGround(currentMap)) return LE_drawLEBattleBg_ch13(t);
-  const cave=currentMap.id==='subchamber';
-  if(cave) {
-    rect(0,0,192,108,'#2a211c'); rect(0,0,192,40,'#3a2f28');
-    for(let k=0;k<40;k++) { const n=hash(k,23); rect(n%190,2+(n>>>8)%42,6,3,['#4a3e36','#5a4c42','#34291f'][k%3]); }
-    rect(150,6,38,60,'#c27a1c'); rect(152,6,34,60,'#f2a92e'); rect(158,6,8,60,'#ffcf6a'); rect(150,6,38,2,'#7a4a12'); rect(150,64,38,2,'#7a4a12');
-    for(let k=0;k<6;k++) { const n=hash(k,29); rect(154+n%28,10+(n>>>6)%50,2,2,'#ffe9a0'); }
-    gfx.globalAlpha=.1+.06*Math.sin(t*1.6); rect(130,0,62,70,'#ffcf6a'); gfx.globalAlpha=1;
-    rect(0,66,192,42,'#6a5848'); rect(0,66,192,2,'#564636');
-    for(let k=0;k<36;k++) { const n=hash(k,31); rect(n%190,68+(n>>>8)%38,4,2,['#7e6a58','#564636','#8a7664'][k%3]); }
-    for(const y of [74,92]) { rect(0,y,150,3,'#2a2d36'); rect(0,y,150,1,'#c8d0dc'); } for(let k=0;k<150;k+=14) rect(k,72,6,34,'#5a3f2a');
-    return true;
-  }
-  rect(0,0,192,108,'#3a3d48'); rect(0,0,192,6,'#262833');
-  rect(0,10,192,38,'#cfc8b0'); for(let k=0;k<192;k+=12) rect(k,10,1,38,'#a8a28c'); rect(0,24,192,1,'#a8a28c'); rect(0,36,192,1,'#a8a28c'); rect(0,10,192,2,'#e8e2cc');
-  rect(0,48,192,5,'#e8c040'); rect(0,53,192,6,'#262833');
-  for(let k=0;k<4;k++) { const lx=14+k*50; rect(lx,2,22,8,'#262833'); rect(lx+2,4,18,4,Math.floor(t*6+k)%13?'#ffe9a0':'#d8c080'); gfx.globalAlpha=.08; rect(lx-8,10,38,40,'#ffe9a0'); gfx.globalAlpha=1; }
-  rect(0,59,192,49,'#8a8d96'); rect(0,59,192,3,'#e8c040');
-  for(let k=0;k<30;k++) { const n=hash(k,37); rect(n%190,64+(n>>>8)%42,3,2,'#9a9da6'); }
-  for(const y of [74,92]) { rect(0,y,192,4,'#2a2d36'); rect(0,y,192,1,'#c8d0dc'); }
-  for(let k=0;k<192;k+=16) rect(k,70,7,30,'#5a3f2a');
-  return true;
-};
-
 // ---------- Map effects ----------
 // The amber plate and its pocket (chamber), HUSH-9's rings (an NPC with `hush`), Boppy's gold plate (an NPC with `armor`).
 let ch13MeltT=-1,ch13MeltSeen=false,ch13Last=0;

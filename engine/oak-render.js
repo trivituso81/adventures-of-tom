@@ -3,9 +3,9 @@
 // of the Old Oak ('oak', with 'branch' and 'pit' tiles) and its crown ('canopy'). Props: bigoak, oakdoor, slide, swings,
 // climber, mound, gardenbed, scarecrow, picnic, grill, trashcan, dogbench, dogbowl, hoop, watchboard, drinkfountain,
 // barkwall, warboard, nutshelf, mushroom, bucket, acornpile, firefly, leafwall, hoard, lookout. Also the minimap colors
-// and the battle backdrops for these maps. Wraps drawOutdoorTile, drawObject, buildMiniBase and drawLABattleBg.
+// and the battle backdrops for these maps. Wraps drawOutdoorTile, drawObject, buildMiniBase.
 // Loaded after engine/school-render.js.
-const LE_drawOutdoorTile_oak=drawOutdoorTile,LE_drawObject_oak=drawObject,LE_buildMiniBase_oak=buildMiniBase,LE_drawLABattleBg_oak=drawLABattleBg;
+const LE_drawOutdoorTile_oak=drawOutdoorTile,LE_drawObject_oak=drawObject,LE_buildMiniBase_oak=buildMiniBase;
 const OAK_GROUNDS=['park','oak','canopy'];
 const oakGround=map=>{ const g=map&&map.style&&map.style.ground; return OAK_GROUNDS.includes(g)?g:null; };
 const oakTile=(x,y,t)=>within(currentMap,x,y)&&currentMap.tiles[y][x]===t;
@@ -336,37 +336,3 @@ buildMiniBase=function(map) {
   return c;
 };
 
-// ---------- Battle backdrops ----------
-// The park: a blue afternoon over the lawn and the oak. Inside the Oak: dark bark and fireflies. The crown: open sky.
-function drawOakBattleBg(t,g) {
-  if(g==='oak') {
-    rect(0,0,192,108,'#24170c');
-    for(let i=0;i<12;i++) rect(i*16+(i%3),0,3,66,'#3a2616');
-    for(let i=0;i<10;i++) { const n=hash(i,61); gfx.globalAlpha=.5+.5*Math.sin(t*2+i); rect(n%192,(n>>>8)%60,1,1,'#ffe86a'); }
-    gfx.globalAlpha=1;
-    rect(0,66,192,42,'#a8784a'); rect(0,66,192,2,'#c9a06a');
-    for(let i=0;i<6;i++) { gfx.strokeStyle='#8a5e38'; gfx.lineWidth=1; gfx.beginPath(); gfx.ellipse(96,92,30+i*18,8+i*4,0,0,Math.PI*2); gfx.stroke(); }
-    return;
-  }
-  if(g==='canopy') {
-    const sky=['#6fb4e8','#7bbcea','#88c4ec','#96ccee','#a6d4f0','#b6dcf2'];
-    for(let i=0;i<6;i++) rect(0,i*11,192,11,sky[i]);
-    ellipse(160,14,8,8,'#fff6c0');
-    for(const [x,y,r] of [[10,20,22],[180,30,26],[40,60,30],[150,62,30],[96,70,40]]) { ellipse(x,y,r,r*.6,'#4f7d3a'); ellipse(x-4,y-4,r*.6,r*.4,'#6aa35a'); }
-    rect(0,70,192,38,'#8a6440'); for(let k=0;k<5;k++) rect(0,74+k*7,192,2,'#6a4a2a');
-    return;
-  }
-  const sky=['#7bbcea','#88c4ec','#96ccee','#a6d4f0','#b6dcf2','#c4e2f2'];
-  for(let i=0;i<6;i++) rect(0,i*11,192,11,sky[i]);
-  rect(122,20,22,46,'#5a3e26'); ellipse(133,18,44,22,'#4f7d3a'); ellipse(118,24,20,12,'#5f9048'); ellipse(150,22,20,12,'#3f6a30');
-  for(const x of [10,40,176]) { rect(x-1,46,3,20,'#7d6552'); ellipse(x,42,10,9,x===40?'#8a6ac4':'#7d8a5a'); }
-  rect(60,56,30,10,'#e8584a'); rect(62,50,4,6,'#c9ccd4'); rect(66,46,20,4,'#e8c84a');   // the playground
-  rect(0,66,192,42,'#8fb862'); rect(0,66,192,2,'#b4d488');
-  for(let i=0;i<36;i++) { const n=hash(i,17); rect(n%192,70+(n>>>8)%34,1,2,'#6f9a48'); }
-  for(let i=0;i<6;i++) { const n=hash(i,23); ellipse(n%192,76+(n>>>8)%28,2,2,'#c98a4a'); }
-}
-drawLABattleBg=function(t) {
-  const g=oakGround(currentMap),lab=B2.active&&B2.labOak;
-  if(!g&&!lab) return LE_drawLABattleBg_oak(t);
-  drawOakBattleBg(t,g||(B2.labCrown?'canopy':'park'));
-};

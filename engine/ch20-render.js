@@ -6,8 +6,8 @@
 //     cegear   a big gear on the wall, turning (it pauses for a beat on the minute)
 //     ceengine the Forever Engine: a tower of meshing gears with a brass hand that points at 4:59; it runs warm once Julian is calm (flag ch20-calm)
 //   Also: the battle backdrop for the Engine room, the Resentment Barrier ring and the four Relay set pieces (B2.relayFx, drawn over the enemies in battle),
-//   and a little drifting dust on the Core maps. Wraps drawObject, drawLEBattleBg, b7DrawMapFx and b2DrawEnemies. Loaded after engine/ch19-render.js.
-const LE_drawObject_ch20=drawObject,LE_drawLEBattleBg_ch20=drawLEBattleBg,LE_b7DrawMapFx_ch20=b7DrawMapFx,LE_b2DrawEnemies_ch20=typeof b2DrawEnemies==='function'?b2DrawEnemies:null;
+//   and a little drifting dust on the Core maps. Wraps drawObject, b7DrawMapFx and b2DrawEnemies. Loaded after engine/ch19-render.js.
+const LE_drawObject_ch20=drawObject,LE_b7DrawMapFx_ch20=b7DrawMapFx,LE_b2DrawEnemies_ch20=typeof b2DrawEnemies==='function'?b2DrawEnemies:null;
 const ceMap=m=>!!(m&&(m.id==='stillcore'||m.id==='foreverheart'));
 const ceFlag=k=>typeof STORY!=='undefined'&&STORY.mode==='full'&&flag(k);
 const CE_COL={tom:'#7ab0ff',grace:'#7ad0e8',rose:'#f4a0c0',amy:'#ffb347',deedee:'#9be8a0',boppy:'#e07a50',tnb:'#e0a070',nara:'#e8d8a8'};
@@ -84,18 +84,6 @@ drawObject=function(o,time) {
   return LE_drawObject_ch20(o,time);
 };
 
-// ---------- Battle backdrop: the Forever Engine's gear hall, amber behind the barrier ----------
-drawLEBattleBg=function(t) {
-  if(!ceMap(currentMap)) return LE_drawLEBattleBg_ch20(t);
-  const now=typeof elapsedTime==='number'?elapsedTime:t||0,calm=ceFlag('ch20-julian');
-  rect(0,0,192,108,calm?'#1c1824':'#120e18');
-  gfx.globalAlpha=.3; ellipse(96,50,92,52,calm?'#ffd8a0':'#b8742a'); gfx.globalAlpha=1;
-  for(const [gx,gy,gr,s] of [[20,26,18,1],[168,30,20,-1],[52,60,12,-1],[142,64,14,1],[96,16,14,1]]) { gfx.save(); gfx.globalAlpha=.8; ceGear(gx,gy,gr/2+3,10,now*.3*s,'#6a4a1a','#120e18'); gfx.restore(); }
-  rect(0,66,192,42,'#2a2230'); for(let k=0;k<7;k++) rect(0,68+k*6,192,1,'#1c1824'); for(let k=0;k<14;k++) rect(k*14+((k%2)*7),66,1,42,'#1c1824');
-  if(calm) { rect(60,56,72,3,'#6a4a2a'); rect(76,40,40,18,'#4a3626'); rect(80,36,32,6,'#6a4a3a'); ellipse(96,34,10,6,'#ffe9a0'); }   // a lamp and an armchair, in glass
-  for(let k=0;k<14;k++) { const px=(k*37+now*(5+k%4))%192,py=(k*53+now*(3+k%3)*2)%108; gfx.globalAlpha=.3+.2*Math.sin(now+k); rect(px,py,2,2,'#f2d27a'); gfx.globalAlpha=1; }
-  return true;
-};
 b7DrawMapFx=function(time) {
   LE_b7DrawMapFx_ch20(time);
   if(!ceMap(currentMap)) return;

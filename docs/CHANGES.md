@@ -1,3 +1,7 @@
+## 2026-11-05 (266): Old code-drawn battle backdrops removed (`bgpurge1`)
+
+After the painted backgrounds (265), the old code-drawn backdrops were still in the app. Removed `drawLEBattleBg` and `drawLABattleBg` and every wrapper of them in 14 engine/*-render.js files, plus the helper functions `drawStudioBattleBg`, `drawBarnBattleBg`, `drawOakBattleBg`, and the pond fallback in `drawBattleBackdrop` (it now fills dark until the picture loads). New standing rule in CLAUDE.md: purge replaced files completely. Tests: node --check on every engine file, tag_check, bg_test (24 battle maps) and a story-place check (tower x3, engine, subway chamber) pass, smoke run.
+
 ## 2026-11-05 (265): All 29 approved battle backgrounds installed (`bgs3`)
 
 Tom approved every battle background in the Art Library. Each newest approved picture (art/raw/battle/bg-*-v<n>.png, 1280 x 720) is shrunk with Lanczos to 576 x 324 and saved over bgs/<name>.webp (19 glass tower uses v2). Same file names, so no code wiring changed. `BG_V` moved `bgs2` to `bgs3` (battle-draw.js and main.js tags). Tests: tag_check ok, tools/bg_test.py FAILS: [] (24 battle maps), smoke run. Story places (tower, engine, sorting hall, subway, infinity, cabin) and the dinner table use the same files.
