@@ -729,7 +729,11 @@ function drawSprite(rows,pal,x,y,scale,opts={}) {
   const {flash=false,alpha=1,lean=0}=opts;
   if(alpha<=0) return;
   if(rows._pal) pal=rows._pal;   // frames built for an older palette (Grace's cartwheel poses) keep it
-  if(rows._paint&&!lean&&drawPainted(rows,x,y,scale,flash,alpha)) return;
+  if(rows._paint) {
+    const pa=rows._paint.a,pid=typeof pa==='string'?pa:(pa&&pa.id)||'';
+    if(/^foe_/.test(pid)) { drawPainted(rows,x,y,scale,flash,alpha); return; }   // enemies: the painted frame or nothing, never pixel rows (Tom, 2026-11-05)
+    if(!lean&&drawPainted(rows,x,y,scale,flash,alpha)) return;
+  }
   if(rows.length>=60&&!lean) {
     const prevA=gfx.globalAlpha; gfx.globalAlpha=alpha;
     gfx.drawImage(bigSpriteCanvas(rows,pal,scale,flash),Math.round(x),Math.round(y));

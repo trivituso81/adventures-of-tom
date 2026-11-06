@@ -10,7 +10,7 @@ Output: same files as bake_foe.py (art/foes/<id>.webp, data/foes/<id>-hires.js, 
 Method: key the magenta (and its darker ground shadow) with a soft edge and despill, label the ink, give each piece of ink to the
 grid cell holding most of it (a piece that really spans two cells is cut at the cell line), crop each frame to its alpha, keep ONE
 pixel density for all frames (native sheet resolution, never upscaled), bottom-align on one baseline, write the atlas and the
-small quantized row copy the engine aims at. Eye and mouth points come from the MARK table in bake_foe.py (fractions of the
+small quantized row copy the engine aims at. Eye and mouth points come from the MARK table below (fractions of the
 stance box); ids missing there are listed in MARK_NEW below.
 
 Usage : python3 tools/sprite-bake/bake_foe_sheets.py [id ...] [--all] [--colors 24]
@@ -24,9 +24,95 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 SHOTS = os.path.join(ROOT, 'tools/shots')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-_src = open(os.path.join(ROOT, 'tools/sprite-bake/bake_foe.py')).read()
-MARK = ast.literal_eval(re.search(r'^MARK = (\{.*?^\})', _src, re.S | re.M).group(1))
-BOSS = ast.literal_eval(re.search(r'^BOSS = (\{.*?\})', _src, re.M).group(1))
+# Hand-set points in the STANCE frame, as fractions (x, y) of the stance's cropped box: both eyes (left to right) and the mouth.
+# Moves that aim at eyes or mouth (Boop, Flashcard Flurry, the pie tin, the lock reticle) read these.
+MARK = {
+    'mudling': {'eyes': [(.55, .62), (.735, .58)],  'mouth': (.70, .71)},
+    'skeeter': {'eyes': [(.66, .57), (.75, .58)],   'mouth': (.80, .77)},
+    'grump':   {'eyes': [(.69, .33), (.82, .32)],   'mouth': (.78, .45)},
+    'toad':    {'eyes': [(.64, .25), (.80, .25)],   'mouth': (.78, .40)},
+    'log':     {'eyes': [(.62, .68), (.82, .72)],   'mouth': (.71, .80)},
+    'bigone':  {'eyes': [(.66, .27), (.84, .26)],   'mouth': (.835, .355)},
+    'bigshake': {'eyes': [(.58, .53), (.77, .53)], 'mouth': (.65, .68)},
+    'tarblob': {'eyes': [(.53, .65), (.67, .66)], 'mouth': (.60, .76)},
+    'gridlock': {'eyes': [(.68, .46), (.80, .45)], 'mouth': (.77, .60)},
+    'coyote':  {'eyes': [(.82, .45), (.91, .44)], 'mouth': (.90, .64)},
+    'tickets': {'eyes': [(.60, .52), (.77, .53)], 'mouth': (.70, .62)},
+    'smoglet': {'eyes': [(.70, .54), (.88, .55)], 'mouth': (.79, .62)},
+    'soggysock': {'eyes': [(.42, .38), (.61, .36)], 'mouth': (.42, .50)},
+    'bobber':  {'eyes': [(.61, .32), (.73, .33)], 'mouth': (.60, .53)},
+    'tangle':  {'eyes': [(.62, .41), (.71, .41)], 'mouth': (.64, .59)},
+    'snag':    {'eyes': [(.59, .67), (.71, .67)], 'mouth': (.65, .74)},
+    'irongill': {'eyes': [(.70, .59), (.89, .61)], 'mouth': (.80, .72)},
+    'boommoth': {'eyes': [(.66, .51), (.75, .56)], 'mouth': (.72, .61)},
+    'clapper': {'eyes': [(.52, .48), (.67, .49)], 'mouth': (.50, .64)},
+    'cuecrab': {'eyes': [(.53, .49), (.62, .48)], 'mouth': (.53, .62)},
+    'fogwisp': {'eyes': [(.82, .39), (.91, .39)], 'mouth': (.87, .51)},
+    'directorscut': {'eyes': [(.70, .33), (.76, .32)], 'mouth': (.67, .49)},
+    'popquiz': {'eyes': [(.49, .47), (.63, .48)], 'mouth': (.51, .62)},
+    'tardybell': {'eyes': [(.48, .43), (.62, .44)], 'mouth': (.52, .58)},
+    'glitterglue': {'eyes': [(.58, .61), (.70, .61)], 'mouth': (.64, .72)},
+    'dodgeball': {'eyes': [(.59, .35), (.72, .39)], 'mouth': (.53, .57)},
+    'redpen': {'eyes': [(.49, .27), (.58, .27)], 'mouth': (.53, .33)},
+    'chairman': {'eyes': [(.57, .50), (.70, .50)], 'mouth': (.65, .57)},
+    'peanutgallery': {'eyes': [(.48, .32), (.59, .34)], 'mouth': (.50, .50)},
+    'shusher': {'eyes': [(.80, .41), (.90, .41)], 'mouth': (.88, .55)},
+    'stickysap': {'eyes': [(.56, .47), (.66, .47)], 'mouth': (.62, .59)},
+    'twigspy': {'eyes': [(.63, .43), (.70, .45)], 'mouth': (.66, .52)},
+    'cliffhanger': {'eyes': [(.68, .60), (.73, .60)], 'mouth': (.65, .75)},
+    'popup': {'eyes': [(.56, .27), (.74, .28)], 'mouth': (.69, .40)},
+    'unread': {'eyes': [(.64, .46), (.74, .46)], 'mouth': (.69, .60)},
+    'thedraft': {'eyes': [(.67, .31), (.72, .31)], 'mouth': (.70, .40)},
+    'pickyeater': {'eyes': [(.55, .63), (.68, .64)], 'mouth': (.65, .74)},
+    'wetblanket': {'eyes': [(.575, .58), (.67, .58)], 'mouth': (.625, .66)},
+    'ironbelly': {'eyes': [(.55, .64), (.83, .64)], 'mouth': (.66, .77)},
+    'velvetrope': {'eyes': [(.52, .20), (.62, .20)], 'mouth': (.60, .27)},
+    'stuffedshirt': {'eyes': [(.58, .21), (.62, .20)], 'mouth': (.62, .31)},
+    'coathanger': {'eyes': [(.50, .27), (.56, .27)], 'mouth': (.53, .31)},
+    'soreloser': {'eyes': [(.56, .35), (.70, .36)], 'mouth': (.64, .45)},
+    'mirrorball': {'eyes': [(.73, .46), (.88, .46)], 'mouth': (.81, .56)},
+    'carryon': {'eyes': [(.62, .38), (.82, .37)], 'mouth': (.76, .52)},
+    'jetlag': {'eyes': [(.62, .52)], 'mouth': (.68, .62)},
+    'unclaimed': {'eyes': [(.63, .50), (.76, .50)], 'mouth': (.69, .62)},
+    'armresthog': {'eyes': [(.62, .33), (.70, .33)], 'mouth': (.76, .45)},
+    'lastcall': {'eyes': [(.59, .50), (.78, .50)], 'mouth': (.68, .66)},
+    'finalcall': {'eyes': [(.69, .38), (.82, .38)], 'mouth': (.72, .55)},
+    'gridlockprime': {'eyes': [(.69, .38), (.80, .37)], 'mouth': (.76, .55)},
+    'hushling': {'eyes': [(.59, .53), (.82, .49)], 'mouth': (.77, .64)},
+    'turnstile': {'eyes': [(.54, .25), (.63, .26)], 'mouth': (.57, .35)},
+    'drillworm': {'eyes': [(.58, .25), (.69, .24)], 'mouth': (.60, .53)},
+    'warden': {'eyes': [(.57, .41), (.68, .41)], 'mouth': (.62, .50)},
+    'hush9final': {'eyes': [(.70, .40), (.84, .40)], 'mouth': (.72, .60)},
+    'marlowe16': {'eyes': [(.74, .37), (.84, .36)], 'mouth': (.81, .42)},
+    'greynote': {'eyes': [(.30, .41), (.63, .42)], 'mouth': (.46, .52)},
+    'twinlens': {'eyes': [(.38, .39), (.83, .39)], 'mouth': (.61, .59)},
+    'pausesprite': {'eyes': [(.55, .48), (.84, .48)], 'mouth': (.70, .62)},
+    'paperweight': {'eyes': [(.47, .75), (.75, .75)], 'mouth': (.61, .83)},
+    'curator': {'eyes': [(.46, .29), (.53, .29)], 'mouth': (.51, .38)},
+    'vance': {'eyes': [(.58, .24), (.68, .24)], 'mouth': (.61, .28)},
+    'slushslug': {'eyes': [(.74, .07), (.86, .46)], 'mouth': (.78, .54)},
+    'conehead': {'eyes': [(.34, .33), (.44, .33)], 'mouth': (.39, .41)},
+    'brainfreeze': {'eyes': [(.52, .45), (.70, .45)], 'mouth': (.60, .61)},
+    'leviathan': {'eyes': [(.66, .19), (.71, .20)], 'mouth': (.76, .32)},
+    'gremlin': {'eyes': [(.52, .43), (.73, .42)], 'mouth': (.65, .54)},
+    'censor': {'eyes': [(.42, .17), (.51, .17)], 'mouth': (.50, .27)},
+    'rubberstamp': {'eyes': [(.52, .22), (.69, .22)], 'mouth': (.62, .32)},
+    'signalfault': {'eyes': [(.39, .20), (.49, .20)], 'mouth': (.44, .27)},
+    'longline': {'eyes': [(.46, .29), (.60, .29)], 'mouth': (.53, .34)},
+    'wallflower': {'eyes': [(.51, .33), (.61, .33)], 'mouth': (.57, .41)},
+    'leftover': {'eyes': [(.43, .54), (.64, .52)], 'mouth': (.54, .65)},
+    'lukewarm': {'eyes': [(.45, .66), (.58, .66)], 'mouth': (.51, .72)},
+    'knowitall': {'eyes': [(.55, .47), (.71, .45)], 'mouth': (.62, .56)},
+    'dogear': {'eyes': [(.74, .36), (.82, .37)], 'mouth': (.84, .52)},
+    'acorncache': {'eyes': [(.64, .48), (.77, .48)], 'mouth': (.70, .58)},
+    'cheekstuffer': {'eyes': [(.59, .27), (.66, .26)], 'mouth': (.67, .33)},
+    'acornagent': {'eyes': [(.52, .48), (.71, .48)], 'mouth': (.63, .59)},
+    'extra': {'eyes': [(.55, .30), (.69, .29)], 'mouth': (.61, .39)},
+    'lostluggage': {'eyes': [(.62, .38), (.78, .37)], 'mouth': (.62, .56)},
+    'redeye': {'eyes': [(.70, .35), (.80, .37)], 'mouth': (.86, .55)},
+    'standbysprite': {'eyes': [(.44, .38), (.62, .36)], 'mouth': (.52, .56)},
+}
+BOSS = {'bigone', 'bigshake', 'irongill', 'directorscut', 'redpen', 'chairman', 'unread', 'ironbelly', 'mirrorball', 'lastcall', 'finalcall', 'gridlockprime', 'drillworm', 'warden', 'hush9final', 'marlowe16', 'twinlens', 'vance', 'brainfreeze', 'leviathan', 'censor'}
 MARK_NEW = {   # ids that had no old painted sheet: set by hand from the approved picture
     'julian': {'eyes': [(.53, .16), (.61, .16)], 'mouth': (.57, .215)},
     'deadletter': {'eyes': [(.50, .35), (.66, .35)], 'mouth': (.58, .48)},
@@ -44,8 +130,26 @@ def newest_files():
     out = {}
     for e in d['entries']:
         if e['id'].startswith('enemy-') and e.get('status') == 'approved' and e.get('versions'):
-            out[e['id'][6:]] = e['versions'][-1]['file']
+            if e['id'][6:] in MARK: out[e['id'][6:]] = e['versions'][-1]['file']   # entries like enemy-julian-hero are reference pictures, not enemies
     return out
+
+
+def key_by_ground(rgb, bg):
+    """For a sheet whose ground is not magenta (julian v3 is crimson): key pixels whose colour direction matches the ground's,
+    at any brightness (so the darker shadow goes too). Near-black ink is content."""
+    c = rgb.astype(np.float32)
+    mx = np.maximum(c.max(-1), 1)
+    u = c / mx[..., None]
+    ub = bg / bg.max()
+    d = np.abs(u - ub).max(-1)
+    a = np.where(mx > 40, np.clip((d - 0.10) / 0.15, 0, 1), 1.0)
+    hard = a > 0.5
+    hard = ndi.binary_opening(hard, structure=np.ones((3, 3)))
+    hard = ndi.binary_erosion(hard, iterations=1)
+    a = np.where(hard, 1.0, 0.0)
+    rim = ndi.binary_dilation(hard, iterations=1) & ~hard
+    a = np.where(rim, 0.5, a)
+    return np.dstack([c, a * 255])
 
 
 def key_magenta(rgb):
@@ -111,7 +215,10 @@ def bake(ID, src_path, colors=24):
     frames = ['stance', 'hurt', 'attack1', 'attack2'] + (['attack3', 'attack4'] if boss else [])
     ncol, nrow = (3, 2) if boss else (2, 2)
     im = Image.open(os.path.join(ROOT, src_path)).convert('RGB')
-    A = key_magenta(np.array(im))
+    arr = np.array(im)
+    edge = np.concatenate([arr[:4].reshape(-1, 3), arr[-4:].reshape(-1, 3), arr[:, :4].reshape(-1, 3), arr[:, -4:].reshape(-1, 3)])
+    bgc = np.median(edge, 0).astype(np.float32)
+    A = key_magenta(arr) if (bgc[0] > 150 and bgc[2] > 150 and bgc[1] < 40) else key_by_ground(arr, bgc)
     cells, notes = split_cells(A, ncol, nrow)
     crops = {}
     for nm, sub in zip(frames, cells):
@@ -146,6 +253,9 @@ def bake(ID, src_path, colors=24):
     # one density for all frames: native resolution (never upscaled), stance width in atlas px
     AW = crops['stance'].size[0]
     CELLS = 42 if boss else 44
+    MAXROWS = 66                                   # a tall narrow figure (Julian, Vance) must not grow taller than the old sprites: fewer cells across
+    if crops['stance'].size[1] / (AW / CELLS) > MAXROWS:
+        CELLS = max(12, round(AW * MAXROWS / crops['stance'].size[1]))
     rowpx = AW / CELLS
     out = crops
     PAD = 2
