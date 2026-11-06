@@ -3340,8 +3340,16 @@
    "group": "Moon Club"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-wallflower-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793925988116
+    }
+   ],
    "rejects": [],
    "id": "enemy-wallflower",
    "tab": "Enemies",
