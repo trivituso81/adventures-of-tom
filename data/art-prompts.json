@@ -4518,8 +4518,16 @@
    "group": "The Square"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/areas/area-square-fix-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793936446620
+    }
+   ],
    "rejects": [],
    "id": "area-square-fix",
    "tab": "Areas",
