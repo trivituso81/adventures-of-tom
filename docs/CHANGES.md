@@ -1,3 +1,8 @@
+## 2026-11-06 (342): Emotions batch 4: chapters 11 to 13 show mood faces and poses (`emo11`)
+- `python3 tools/emotion-apply.py 1 ... 13`: chapter 11 found 99 of 99, chapter 12 114 of 114, chapter 13 101 of 101; `EMO_CHAPTERS` now 1 to 13, `data/emotion-moods.js` 1041 keys.
+- Tested: all 1051 tagged lines in chapters 1 to 13 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
+- Tags: `emo11` (data/emotion-moods.js).
+
 ## 2026-11-06 (341): Emotions batch 3: chapters 8 to 10 show mood faces and poses (`emo10`)
 - `python3 tools/emotion-apply.py 1 2 3 4 5 6 7 8 9 10`: chapter 8 found 71 of 71, chapter 9 87 of 87, chapter 10 77 of 77; `EMO_CHAPTERS` now 1 to 10, `data/emotion-moods.js` 727 keys. Aunt Ellie's faces (ellie-*.webp) are used in these chapters.
 - Tested: all 737 tagged lines in chapters 1 to 10 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
