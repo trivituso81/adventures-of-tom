@@ -4029,8 +4029,16 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-curator-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927244835
+    }
+   ],
    "rejects": [],
    "id": "enemy-curator",
    "tab": "Enemies",
