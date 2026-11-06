@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Boppy extra battle poses (Sheet A: cap swat, fishing, pepper, seed, jar). Reuses bake_boppy.py's head warp and helpers.
-Input : src/boppy-attack-v1.png  (2 rows; see ROWS)   Output: art/chars/boppy-extra.webp, data/boppy-extra.js
+"""Boppy extra battle poses: the stock stances (aim, throw, spread...) and the young runner. (The cap, fishing, pepper, seed and jar poses were retired in Nov 2026 when his ability sheets went in: bake_boppy_ab.py.) Reuses bake_boppy.py's head warp and helpers.
+Input : src/boppy-stock-v1.png, src/boppy-young-v1.png   Output: art/chars/boppy-stock.webp, boppy-young.webp, data/boppy-extra.js
 Usage : python3 tools/sprite-bake/bake_boppy_extra.py [SHEET=<png> for a grey contact sheet]"""
 import os, sys, json
 here = os.path.dirname(os.path.abspath(__file__))
@@ -11,25 +11,11 @@ sys.argv = sys.argv[:1]
 g = {'__name__': 'bake_boppy_base', '__file__': os.path.join(here, 'bake_boppy.py')}
 exec(src[:cut1], g)
 from sheet import slice_sheet
-ROWS = [['capoff', 'swat', 'follow', 'castb', 'castf', 'reel'], ['pepper', 'fire', 'seed', 'jar', 'marks', 'sprint']]
-ex = slice_sheet(os.path.join(g['SRC'], 'boppy-attack-v1.png'), ROWS, cut_rects=[(1664, 0, 1676, 95)])
-# (top, chin, x0, x1) hand-set where known; others use the detector
-g['HEAD_BOX'].update({'x_swat': (3, 126, 140, 272), 'x_follow': (3, 128, 8, 150), 'x_castb': (75, 190, 0, 142)})
-exC = slice_sheet(os.path.join(g['SRC'], 'boppy-extra-v1.png'),
-    [['fish1', 'fish2', 'fish3', 'fish4'], ['sit1', 'sit2', 'sleep', 'wake'], ['hips', 'stretch', 'scratch', 'shout']])
-FISH = ['fish1', 'fish2', 'fish3', 'fish4', 'sit1', 'sit2']
-g['HEAD_BOX'].update({'f_fish1': (3, 118, 150, 292), 'f_fish2': (12, 125, 75, 212), 'f_fish3': (22, 132, 235, 392), 'f_fish4': (28, 130, 238, 340),
-                      'f_sit1': (3, 108, 128, 262), 'f_sit2': (3, 112, 118, 255)})
 STOCK = ['aim', 'throw', 'spread', 'toast', 'point', 'clap', 'shrug', 'sitc']
 exS = slice_sheet(os.path.join(g['SRC'], 'boppy-stock-v1.png'), [STOCK[:4], STOCK[4:]])
 exY = slice_sheet(os.path.join(g['SRC'], 'boppy-young-v1.png'), [['ready', 'run1', 'run2'], ['wind', 'strike', 'celebr']])
-PB = ['walkA', 'walkB', 'present', 'admire', 'raise', 'crunch', 'chew', 'burn', 'fan', 'inhale', 'breathA', 'breathB', 'breathC', 'gasp', 'grumble', 'smug']
-exP = slice_sheet(os.path.join(g['SRC'], 'boppy-pepper-v1.png'), [PB[0:4], PB[4:8], PB[8:12], PB[12:16]])     # Pepper Breath, 4 x 4 (Oct 30)
 g['HEAD_BOX'].update({'s_aim': (2, 150, 120, 305), 's_throw': (3, 148, 45, 230), 's_spread': (5, 175, 155, 310), 's_toast': (3, 152, 98, 270),
                       's_point': (3, 152, 82, 272), 's_clap': (6, 150, 26, 205), 's_shrug': (3, 152, 132, 335)})
-ex.pop('capoff')                                  # two caps in the picture
-for k, v in ex.items(): g['poses']['x_' + k] = v
-for k in FISH: g['poses']['f_' + k] = exC[k]
 for k in STOCK:
     if k != 'sitc': g['poses']['s_' + k] = exS[k]
 exec(src[cut1:cut2], g)
@@ -63,14 +49,6 @@ def emit(var, big, outname, extra=''):
     o = [f"const {var}={{atlas:" + json.dumps({'src': 'art/chars/' + outname, 'k': KB, 'rects': rects}) + ",pal:" + json.dumps(pal) + extra + ",rows:{"]
     for k, r in rows.items(): o.append(f"  {k}:" + g['fmt_rows'](r) + ",")
     o.append("}};"); return o, rows
-if 'x_castb' in poses: poses['x_castb'] = poses['x_castb'].transpose(Image.FLIP_LEFT_RIGHT)   # drawn facing right
-names = [n for n in poses if n.startswith('x_')]
-bigA = tighten(place({n[2:]: scaled_to(poses[n], fb) for n in names}, KB, 'head'), KB)
-outA, rowsA = emit('BOPPY_EXTRA', bigA, 'boppy-extra.webp')
-bigF = {n[2:]: scaled_to(poses[n], fb) for n in poses if n.startswith('f_')}
-bigF = tighten(place_feet(bigF, KB), KB)
-tips = {k: tip_of(v, 'top' if k == 'fish2' else 'left', KB) for k, v in bigF.items()}
-outF, rowsF = emit('BOPPY_FISH', bigF, 'boppy-fish.webp', ',tip:' + json.dumps(tips))
 bigS = {n[2:]: scaled_to(poses[n], fb) for n in poses if n.startswith('s_')}
 bigS = tighten(place_feet(bigS, KB), KB)
 tipsS = {k: tip_of(v, 'left', KB) for k, v in bigS.items()}
@@ -79,56 +57,12 @@ fy = 76 * KB / poses['y_celebr'].height                       # young runner: ta
 bigY = {n[2:]: scaled_to(poses[n], fy) for n in poses if n.startswith('y_')}
 bigY = tighten(place_feet(bigY, KB), KB)
 outY, rowsY = emit('BOPPY_YOUNG', bigY, 'boppy-young.webp')
-# Pepper sheet head (2026-11-01): his core head grew so the face is Justin's 49 battle px; grow these heads to match. Face rows must grow by
-# (49/33 face px) / (2.014/1.94 battle scale) at the same 75-row smug height; the factor is solved on the upright smug frame and used for all 16.
-PEP_GROW = (49 / 33) / (2.014 / 1.94) * .87 * .85   # x .87 cap correction, x .85 battle perceived-size check (2026-11-01), as bake_boppy.py
-_t, _c, _, _ = g['_auto_head'](exP['smug']); _r0 = (_c - _t) / exP['smug'].height
-def _pr(k): return (_c - _t) * k / g['bigger_head'](exP['smug'], 'p_smug', k=k).height
-_lo, _hi = 1.0, 4.0
-for _ in range(14):
-    _m = (_lo + _hi) / 2
-    if _pr(_m) < _r0 * PEP_GROW: _lo = _m
-    else: _hi = _m
-PEP_K = round((_lo + _hi) / 2, 3); print('pepper head factor', PEP_K)
-exP_src = dict(exP)
-exP = {n: g['bigger_head'](v, 'p_' + n, k=PEP_K) for n, v in exP.items()}
-fP = 75 * KB / exP['smug'].height                              # upright smug frame = 75 rows (idle 66.7, young runner 76)
-bigP = {n: scaled_to(v, fP) for n, v in exP.items()}
-bigP = tighten(place_feet(bigP, KB), KB)
-MOUTH = json.load(open(os.path.join(here, 'boppy_pepper_mouth.json'))) if os.path.exists(os.path.join(here, 'boppy_pepper_mouth.json')) else {}
-# The mouth points were set by eye on the pre-2026-11-01 frames (no head warp). Carry each one through the warp: map it back to the source frame
-# (old pipeline = scale fP0 + a shift found from the alpha bounding boxes), paint a green marker there, run the new pipeline on the marked copy, find the marker.
-if MOUTH:
-    fP0 = 75 * KB / exP_src['smug'].height
-    old_sc = {n: scaled_to(v, fP0) for n, v in exP_src.items()}
-    old_big = tighten(place_feet(dict(old_sc), KB), KB)
-    marked = {}
-    for n, v in exP_src.items():
-        if n not in MOUTH: continue
-        bo = old_big[n].getbbox(); bs = old_sc[n].getbbox()
-        sx = ((MOUTH[n][0] + .5) * KB - (bo[0] - bs[0])) / fP0; sy = ((MOUTH[n][1] + .5) * KB - (bo[1] - bs[1])) / fP0
-        a = np.array(v).copy(); r = 5; y0, x0 = int(round(sy)), int(round(sx))
-        blk = a[max(0, y0 - r):y0 + r + 1, max(0, x0 - r):x0 + r + 1]; blk[:, :, :3] = (0, 255, 0); blk[:, :, 3] = np.maximum(blk[:, :, 3], 255)
-        marked[n] = g['bigger_head'](Image.fromarray(a, 'RGBA'), 'p_' + n, k=PEP_K)
-    mk_big = tighten(place_feet({n: scaled_to(marked.get(n, v), fP) for n, v in exP.items()}, KB), KB)
-    for n in marked:
-        q = np.array(mk_big[n]).astype(int); m = (q[:, :, 1] > 170) & (q[:, :, 0] < 110) & (q[:, :, 2] < 110) & (q[:, :, 3] > 100)
-        ys, xs = np.where(m)
-        if len(xs): MOUTH[n] = [int(xs.mean() // KB), int(ys.mean() // KB)]
-        else: print('mouth marker lost for', n)
-    print('mouth points now', MOUTH)
-outP, rowsP = emit('BOPPY_PEPPER', bigP, 'boppy-pepper.webp', ',mouth:' + json.dumps(MOUTH))
-if os.environ.get('SHEETP'):
-    W = sum(v.width for v in bigP.values()); H = max(v.height for v in bigP.values())
-    sh = Image.new('RGBA', (W, H), (128, 128, 128, 255)); x = 0
-    for v in bigP.values(): sh.alpha_composite(v, (x, 0)); x += v.width
-    sh.save(os.environ['SHEETP'])
 if os.environ.get('SHEET'):
-    for nm, bg_ in (('A', bigA), ('F', bigF), ('S', bigS), ('Y', bigY)):
+    for nm, bg_ in (('S', bigS), ('Y', bigY)):
         W = sum(v.width for v in bg_.values()); H = max(v.height for v in bg_.values())
         sh = Image.new('RGBA', (W, H), (128, 128, 128, 255)); x = 0
         for v in bg_.values(): sh.alpha_composite(v, (x, 0)); x += v.width
         sh.save(os.environ['SHEET'].replace('.png', nm + '.png'))
-js = ["'use strict';", "// data/boppy-extra.js GENERATED by tools/sprite-bake/bake_boppy_extra.py; do not hand-edit."] + outA + outF + outS + outY + outP
+js = ["'use strict';", "// data/boppy-extra.js GENERATED by tools/sprite-bake/bake_boppy_extra.py; do not hand-edit."] + outS + outY
 open(os.path.join(g['ROOT'], 'data/boppy-extra.js'), 'w').write('\n'.join(js) + '\n')
-print('A', list(rowsA), 'F', {k: (len(r), len(r[0])) for k, r in rowsF.items()}, 'tips', tips)
+print('S', list(rowsS), 'Y', list(rowsY))

@@ -1,3 +1,37 @@
+## 2026-11-06 (379): Boppy's 12 approved ability sheets are live as painted frames
+
+- Installed (push tag `boppyab4`): Cap Check, GRUMBLE, Patient Angler, Recliner Reservation, Headcount Again, Lockdown, Everybody Waits, Pepper Breath, Seeds of Trouble, Mild for Company, Nineteen Seventy, Five-Alarm Jar, and The One That Got Away (fish ult). Each plays its sheet's frames (`f:'ab_<sheet>_<n>'`, 75 of the 81 cut frames). Timing, spoken lines, messages, hit frames and effects are unchanged. `xc_ult` stays on its current frames until the Young Boppy sheets are approved.
+- New: `tools/sprite-bake/ability_frames_boppy.py` (cutter), `bake_boppy_ab.py` (baker), `data/boppy-ab.js`, `art/chars/boppy-ab.webp`; registered in `data/boppy-hires-battle.js` (mouth point under the eye for the fire cone, rod tip for the fishing line).
+- Props now painted in his hands (cap, ticket dispenser, key ring, seed packet, pepper, jar, rod and reel, stool, pot and broth bowl) are no longer drawn. Mild for Company now holds the sheet's jar of hot pepper jelly, so its messages say jelly, not broth.
+- Purged (grep 0): `engine/boppy-moves.js` rewritten to one set of `ba_` scenes (four layered generations and the old cap, rod, key ring, packet, pot, jar and pepper drawing code are gone); the old painted poses `x_*`, `x_fish*`, `x_sit*`, `pb_*` and `bare_*` (BOPPY_EXTRA, BOPPY_FISH, BOPPY_PEPPER, `boppy-extra.webp`, `boppy-fish.webp`, `boppy-pepper.webp`, `boppy_pepper_mouth.json`); nine prop webps (`baseball_cap`, `bowl_of_broth`, `ghost_pepper`, `hot_mild_sign`, `jar_of_ghost_peppers`, `pot_of_broth`, `seed_packet`, `stool`, `ticket_dispenser`) and their preload entries. `bake_boppy_extra.py` now bakes only the stock stances and the young runner (the data for those two was kept as is; the script does not reproduce them byte for byte, same as before).
+- Left: the approved `boppy-fx-*` sheets are not baked yet. The separate objects (pond, recliner, ticket, 1970 cards, chairs, cell bars, fire alarm, stop sign) still use the existing painted props. `tools/sprite-bake/src/props/props.json` still lists the nine purged props (positional manifest of the source sheet).
+- Tests: `kit_test` boppy (all 13 moves, FAILS: []), smoke, tag_check, `unused_voice.py` 0.
+
+## 2026-11-06 (379): Young Boppy walk sheet from Tom; walk entry removed (Art Library only)
+
+- Fact (Tom 12:49): he made the Young Boppy walk sheet himself. Saved as `art/raw/characters/boppy-young-walk-sheet-ref-v1.png` (1247 x 1261, 3 x 3 on magenta).
+- Removed the `boppy-young-walk-sheet` Library entry and its prompt (saves a Generate press, now 2 for the young set). `boppy-young-battle-sheet-1` now attaches the hero ref and this walk sheet. Entries 690 to 689. `boppy-young-battle-sheet-2` unchanged (refs hero ref, battle 1).
+- Not installed. `boppy-ab-xc-ult` unchanged. No game files, no tag.
+
+## 2026-11-06 (379): Warden Boppy boss installed from the new approved Library sheet (`warden2`)
+
+- Fact (Tom 12:40: new `enemy-warden` sheet generated and approved, v2, painted-Boppy refs): `bake_foe_sheets.py warden` rebaked `art/foes/warden.webp` (6 frames, atlas 1993 x 408, stance 306 x 386) and `data/foes/warden-hires.js` (rows 42 x 53). Same grid and frame order, so engine and wiring unchanged.
+- Aim points re-measured for the new stance (`MARK.warden` in `bake_foe_sheets.py`: eyes (.34,.385) and (.48,.385), mouth (.45,.445)); checked on the contact sheet.
+- Tested: test fight Warden vs Tom, Grace, Rose at 393 x 852 and 852 x 393 (`tools/shots/warden-fight-*.png`), smoke `FAILS: []`, tag_check ok. `ART_V` and build stamp moved to `warden2`. The Warden speaks no dialogue box lines, so no portrait.
+- Likeliest phone notes: faint pink flecks in the glow of the swing frames; hurt and swing frames sit slightly higher than the stance (feet aligned by alpha bottom).
+
+## 2026-11-06 (379): Young Boppy hero painting from Tom; hero entry removed (Art Library only)
+
+- Fact (Tom 12:38): he supplied the Young Boppy hero. Saved as `art/raw/characters/boppy-young-hero-ref-v1.png` (1024 x 1536).
+- Removed the `boppy-young-hero` Library entry and its prompt (saves a Generate press, now 3 for the young set). `boppy-young-walk-sheet`, `-battle-sheet-1` and `-battle-sheet-2` now attach this painting as picture 1 (titles updated). Entries 691 to 690.
+- Not installed. `boppy-ab-xc-ult` unchanged (repoint after the young sheets are approved). No game files, no tag.
+
+## 2026-11-06 (379): Warden Boppy boss sheet uses the new painted Boppy hero (Art Library only)
+
+- Fact (Tom 12:36): `enemy-warden` still used the old photo-style `tools/sprite-bake/src/boppy-hero.png` and a face crop from it. Refs are now: style key, guide, finish, `docs/reference/boppy-face-v2.png` (new 768 px face crop from Tom's painted hero), `art/raw/characters/boppy-hero-ref-v1.png` (the full painted hero).
+- Prompt face wording matches the painted hero (big round brown eyes, white hair tufts at temples and ears, wide smile with teeth); the rest of the prompt is unchanged. Mirrored in `tools/art-library/enemy-prompts.js` (`LIKENESS`). Approved v1 stays in versions; Tom presses Generate once to get a new sheet.
+- Purged `docs/reference/boppy-face.png` (grep 0 outside history). Only `enemy-warden` changed in the json; validate.js OK. No game files, no tag.
+
 ## 2026-11-06 (378): Olivia ability install: 11 painted Art Library sheets, old move atlases purged (`oliviaab1`)
 Olivia's moves now play the approved Art Library ability sheets (66 frames in `art/chars/olivia-ab.webp`, `data/olivia-ab.js`, cut by `ability_frames_olivia.py`, baked by `bake_olivia_ab.py`). Painted props (snack pouch, chat bubbles, diaper bag, mic) come from the approved fx sheets (`bake_olivia_fx.py`). Lachlan, No! now draws Lachlan. Michael's move keeps its staging. Removed: 11 old per-move atlases and their 11 sources, the old sets loader and baker code. Tests: kit_test for all 11 moves, smoke, tag_check, unused_voice 0.
 

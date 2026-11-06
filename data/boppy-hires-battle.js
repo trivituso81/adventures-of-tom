@@ -34,21 +34,6 @@
   sp.idle2=P('idle2'); sp.hip=P('hip'); sp.wind=sp.windup;   // breathing in and hands on hips: painted battle sheet 1 (aim, throw, spread, point come from his stock sheet below)
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.cheer=[sp.celeb,sp.celebFlip]; sp.runFlip=sp.run.map(mir);
-  // Extra attack poses (Sheet A, data/boppy-extra.js): x_swat, x_follow (cap in hand), x_castb (faces right), x_castf, x_reel, x_pepper, x_fire, x_seed, x_jar, x_marks, x_sprint
-  if(typeof BOPPY_EXTRA!=='undefined') {
-    const EX=BOPPY_EXTRA; paintedAtlas('boppyExtra',EX.atlas.src,EX.atlas.rects,EX.atlas.k);
-    const m2={}; let n2=0; for(const k in EX.pal) { const c=String.fromCharCode(0x0400+n2++); m2[k]=c; pal[c]=EX.pal[k]; }
-    m2['.']='.';
-    for(const k in EX.rows) sp['x_'+k]=reg(paintRows(EX.rows[k].map(r=>{ let q=''; for(const ch of r) q+=m2[ch]; return q; }),'boppyExtra',k,false));
-  }
-  // Fishing poses (Sheet C, data/boppy-extra.js): x_fish1..4, x_sit1, x_sit2. Their hand point is the rod tip, where the code draws the line.
-  if(typeof BOPPY_FISH!=='undefined') {
-    const FX=BOPPY_FISH; paintedAtlas('boppyFish',FX.atlas.src,FX.atlas.rects,FX.atlas.k);
-    const m3={}; let n3=0; for(const k in FX.pal) { const c=String.fromCharCode(0x0500+n3++); m3[k]=c; pal[c]=FX.pal[k]; }
-    m3['.']='.';
-    for(const k in FX.rows) { const r=paintRows(FX.rows[k].map(q=>{ let o=''; for(const ch of q) o+=m3[ch]; return o; }),'boppyFish',k,false); reg(r);
-      if(sp.handAt) sp.handAt.set(r,{n:FX.tip[k].slice(),f:FX.tip[k].slice()}); sp['x_'+k]=r; }
-  }
   // Stock poses (Sheet B): aim, throw, spread, toast, point, clap, shrug replace his pixel stances. (sitc, the armchair pose, is not used: moves draw their own chair.)
   if(typeof BOPPY_STOCK!=='undefined') {
     const SX=BOPPY_STOCK; paintedAtlas('boppyStock',SX.atlas.src,SX.atlas.rects,SX.atlas.k);
@@ -64,18 +49,14 @@
     for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,m5,.40);
     sp.yg_run1R=mir(sp.yg_run1); sp.yg_run2R=mir(sp.yg_run2);
   }
-  // Pepper Breath (data/boppy-extra.js BOPPY_PEPPER): pb_walkA, pb_walkB, pb_present, pb_admire, pb_raise, pb_crunch, pb_chew, pb_burn, pb_fan, pb_inhale, pb_breathA..C, pb_gasp, pb_grumble, pb_smug
-  // (+ pb_walkAR, pb_walkBR mirrored). sp.mouthAt maps each frame's rows to its painted mouth point, where the fire cone and the red-face glow are drawn.
-  if(typeof BOPPY_PEPPER!=='undefined') {
-    const PX=BOPPY_PEPPER; paintedAtlas('boppyPepper',PX.atlas.src,PX.atlas.rects,PX.atlas.k);
-    const m6={}; let n6=0; for(const k in PX.pal) { const c=String.fromCharCode(0x0800+n6++); m6[k]=c; pal[c]=PX.pal[k]; }
-    m6['.']='.'; sp.mouthAt=new Map();
-    for(const k in PX.rows) { const r=sp['pb_'+k]=P2(PX.rows[k],'boppyPepper',k,m6); const q=PX.mouth[k]; if(q) sp.mouthAt.set(r,{col:q[0],row:q[1]}); }
-    for(const k of ['walkA','walkB']) { const o=sp['pb_'+k],r=sp['pb_'+k+'R']=mir(o),q=sp.mouthAt.get(o); if(q) sp.mouthAt.set(r,{col:o[0].length-1-q.col,row:q.row}); }
-  }
-  // Ability frames (tools/sprite-bake/bake_boppy_ab.py, data/boppy-ab.js): f:'ab_cap_1' etc. in a move's keys; a trailing 'F' is the same frame facing right. Eye and hand points are found as for the poses above.
+  // Ability frames (tools/sprite-bake/bake_boppy_ab.py, data/boppy-ab.js): f:'ab_cap_2' etc. in a move's keys; a trailing 'F' is the same frame facing right.
+  // Eye and hand points are found as for the poses above. sp.mouthAt (a little below the eye, where the fire cone and the red-face glow are drawn) and
+  // sp.tipAt (the fishing rod tip, where the line starts) are looked up by frame rows.
   if(typeof BOPPY_AB!=='undefined') { const A=BOPPY_AB; paintedAtlas('boppyAb',A.atlas.src,A.atlas.rects,A.atlas.k);
-    for(const k in A.ab) { const r=P2(A.ab[k],'boppyAb',k,map); sp[k]=r; sp[k+'F']=mir(r); } }
+    sp.mouthAt=new Map(); sp.tipAt=new Map();
+    for(const k in A.ab) { const r=P2(A.ab[k],'boppyAb',k,map),W=r[0].length,e=sp.eyeAt&&sp.eyeAt.get(r); sp[k]=r; const q=sp[k+'F']=mir(r);
+      if(e) { sp.mouthAt.set(r,{col:e.col-1,row:e.row+Math.round(r.length*.085)}); sp.mouthAt.set(q,{col:W-1-(e.col-1),row:e.row+Math.round(r.length*.085)}); }
+      const t=A.tip&&A.tip[k]; if(t) { sp.tipAt.set(r,{col:t[0],row:t[1]}); sp.tipAt.set(q,{col:W-1-t[0],row:t[1]}); } } }
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.boppy={scale:.8*2*SZ,pal:BOPPY_HIRES.ko.pal,rows:paintRows(BOPPY_HIRES.ko.rows.slice(),'boppyKo','ko',true)};
   // His cardigan is not a dark tee, so outfit recolouring does not apply to the painted Boppy.
