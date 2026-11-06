@@ -3228,8 +3228,16 @@
    "group": "Car Barn"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-ironbelly-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793926157948
+    }
+   ],
    "rejects": [],
    "id": "enemy-ironbelly",
    "tab": "Enemies",
