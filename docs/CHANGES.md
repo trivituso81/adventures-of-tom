@@ -1,3 +1,9 @@
+## 2026-11-06 (327): Welcome screen: slow rise and fall instead of a stretch pulse (`welcome5`)
+- Tom (02:13): "Characters are pulsing way too rapidly".
+- The welcome figures were stretched 1.2% from the feet every frame, which shimmered on the painted pixels and read as fast pulsing. Replaced by a slow lift of a few whole pixels (about 1.1% of the figure's height, period about 6 s, each figure on its own timing). `SPLASH_BREATH` in engine/splash.js is now {amp, speed}; no scaling.
+- Tom (02:14): "Why is TNB taller than tom? The heights don't seem to be working right". Cause: TNB was sized with his hair on top of 5'10" (331), and every figure was sized by its whole frame, whose empty margins differ (Amy none, Nara 6%, Rose 3%). Now `SPLASH_H` is the visible figure including hair (TNB 304, Tom 308), and each figure is sized and stood on by its first and last painted row (`splashRows`).
+- Tested: shots 393x852 and 1180x820 render; smoke below.
+
 ## 2026-11-06 (326): Portrait dialogue box keeps one fixed height (`dlgfit1`)
 - Tom (01:58): on iPhone portrait the dialogue box kept resizing; give it a max height and fit the text. Fact: the box grew line by line as text typed out, and the face widened with it.
 - Portrait text area is now a fixed 5 lines tall (16px, line-height 1.4). `fitDialogText` in `engine/overworld.js` measures the full line before it types and shrinks the font in half-pixel steps down to 11px if it would not fit. Landscape unchanged. Choice pages still add their buttons below.

@@ -546,10 +546,10 @@ function splashScene(W,H,panelH,time) {
 // Painted welcome art (Tom, 2026-10-29): the family stands on the plaza in art/welcome.webp (portrait) and art/welcome-land.webp (landscape).
 // Welcome cast layout (Tom 2026-11-06): the family is laid out in screen space, not picture space, so every figure keeps its real
 // proportion to the others and the group fills the screen the same way on an iPad in landscape and an iPhone in portrait.
-const SPLASH_BREATH=.012;   // same slow breath as the battle idle (engine/battle2-ui.js), a touch larger because the figures are drawn smaller here
+const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as a share of the figure's height, speed = radians per second (period about 6 s). Whole pixels only, no scaling: stretching every frame shimmered and read as rapid pulsing (Tom 2026-11-06 02:13)
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
-// Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130). TNB 331: his big hair sits on top, reaching Justin's.
-const SPLASH_H={tom:308,tnb:331,justin:330,boppy:291,amy:282,deedee:282,grace:222,rose:178,nara:130};
+// Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
+const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:222,rose:178,nara:130};
 // Landscape (iPad): one spread-out line in design units (x, feet). Later in the list draws on top.
 const SPLASH_LAND={cx:520,feet0:1222,sx:.92,sy:.7,span:860,tall:331,fracW:.70,fracH:.42,feetY:.79};
 const SPLASH_SPOTS=[
@@ -579,6 +579,13 @@ function splashLandLayout(w,h) {
   const L=SPLASH_LAND,sc=Math.min(w*L.fracW/L.span,h*L.fracH/L.tall),baseY=h*L.feetY;
   return SPLASH_SPOTS.map(m=>({id:m.id,cx:w/2+(m.x-L.cx)*L.sx*sc,feet:baseY+(m.feet-L.feet0)*L.sy*sc,hh:SPLASH_H[m.id]*sc}));
 }
+// Visible rows of a frame (first and last row with any paint): the painted frames carry different empty margins, so sizing by the whole frame made some people 2% to 6% off.
+const splashRowsCache={};
+function splashRows(id,fr) {
+  if(splashRowsCache[id]) return splashRowsCache[id];
+  let y0=0,y1=fr.length-1; while(y0<y1&&/^\.*$/.test(fr[y0])) y0++; while(y1>y0&&/^\.*$/.test(fr[y1])) y1--;
+  return (splashRowsCache[id]={y0,y1});
+}
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
   const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
@@ -589,11 +596,9 @@ function splashCastDraw(time) {
   try {
     items.forEach((m,i)=>{
       const set=OW[m.id]; if(!set||!set.down) return;
-      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.hh/fh,cx=m.cx,feet=m.feet;
-      const br=1+(.5+.5*Math.sin(time*1.7+i*1.7))*SPLASH_BREATH;   // slow breath from the feet, like the battle idle
-      g.save(); g.translate(cx,feet); g.scale(1,br); g.translate(-cx,-feet);
-      drawSprite(fr,set.pal,Math.round(cx-fw*k/2),Math.round(feet-fh*k),k);
-      g.restore();
+      const fr=set.down[0],fw=fr[0].length,R=splashRows(m.id,fr),k=m.hh/(R.y1-R.y0+1),cx=m.cx,feet=m.feet;
+      const lift=Math.round((.5+.5*Math.sin(time*SPLASH_BREATH.speed+i*1.7))*SPLASH_BREATH.amp*m.hh);   // slow rise and fall, a few whole pixels
+      drawSprite(fr,set.pal,Math.round(cx-fw*k/2),Math.round(feet-(R.y1+1)*k)-lift,k);
     });
   } finally { gfx=prev; }
 }
