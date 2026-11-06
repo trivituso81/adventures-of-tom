@@ -968,8 +968,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Handstand Contest.\n\nRow 1:\n1. One arm raised high, calling out, a bossy confident grin.\n2. A lunge forward, both arms reaching down toward the floor, focused.\n3. A perfect handstand, hands planted, legs straight up together, hair hanging down, steady.\n\nRow 2:\n4. In the handstand, legs opened in a wide straddle, toes pointed.\n5. Landed standing tall, arms up high in a gymnast salute, chest out.\n6. Holding a small gold trophy up in both hands, a huge proud grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-portrait-mode-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954131518
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-portrait-mode",
    "tab": "Characters",
