@@ -110,9 +110,311 @@ const ABILITIES = {
       'The whole body leaning hard to one side, both arms pushing, tilting something huge.',
       'Landing on both feet from a small hop, brushing one palm against the other, a dry satisfied look.']],
   ],
+  grace: [
+    ['cartwheel', 'Cartwheel', [
+      'A lunge with the front knee bent and both arms stretched straight up, eager face.',
+      'Mid cartwheel, one hand planted on the ground, body upside down in a wide star, legs straight.',
+      'Mid cartwheel, both hands on the ground, legs split wide overhead, hair hanging down.'], [
+      'Landed standing tall, one leg kicking high forward, arms out for balance, determined.',
+      'Both arms flung up high in a gymnast salute, chest out, a big proud grin.',
+      'A small hop on both feet, arms swinging, a happy grin.']],
+    ['dance', 'DANCE', [
+      'Snapping her fingers with both hands up by her shoulders, counting in, a big smile.',
+      'A step-touch: one foot stepping out, the other toe tapping beside it, arms swinging.',
+      'A grapevine step, feet crossed, hips swaying, one hand on her hip.'], [
+      'A hip sway to one side, both arms pumping, eyes closed, singing along.',
+      'Spinning on one foot, the other knee lifted, arms wrapped in, hair flying out.',
+      'The final pose: one hand on her hip, the other arm pointing up high, a confident grin.']],
+    ['squishy_squeeze', 'Squishy Squeeze', [
+      'Walking quickly, a round gold dumpling squishy hugged in both hands against her chest, proud.',
+      'Holding the gold dumpling squishy out in both hands at arm\'s length, offering it, a kind smile.',
+      'Squeezing the squishy flat between both palms to show how, cheeks puffed, eyes squeezed shut.'], [
+      'Holding the squishy out again on one flat palm, the other hand giving a thumbs up.',
+      'Hugging the squishy to one cheek, eyes closed, a soft happy smile.',
+      'Tucking the squishy under one arm, the other hand waving, a cheerful grin.']],
+    ['glitter_nails', 'Glitter Nails', [
+      'Walking, a big sparkly bottle of glitter nail polish held up in one hand, excited.',
+      'Twisting the cap off the bottle with the other hand, the tiny brush lifting out, tongue poking out in focus.',
+      'Bent forward, painting with the tiny brush held delicately, the bottle in the other hand, very focused.'], [
+      'Holding her own hand up fingers spread, admiring glittery nails, mouth open in delight.',
+      'Blowing on her fingertips, cheeks puffed, the bottle in the other hand.',
+      'Wiggling all her glittery fingers up beside her face, a sparkly grin.']],
+    ['welcome_back', 'Welcome Back to My Channel', [
+      'Holding a purple hairbrush up to her mouth like a microphone, waving at the viewer with the other hand, looking at the viewer, a big vlogger smile.',
+      'Talking into the hairbrush microphone, one hand flung out wide, eyebrows up, very dramatic.',
+      'Holding the hairbrush microphone out at arm\'s length, offering it forward for an interview, eager face.'], [
+      'Nodding seriously, the hairbrush still held out, the other hand on her chin, listening.',
+      'The hairbrush back at her mouth, one hand on her heart, a sweet caring face.',
+      'Blowing a kiss to the viewer with one hand, the hairbrush held up in the other, looking at the viewer.']],
+    ['like_subscribe', 'Like and Subscribe', [
+      'Marching forward, arms swinging, chin up, a determined grin.',
+      'Pointing straight up at the sky with one finger, the other hand on her hip, mouth open.',
+      'Looking up, both hands cupped by her mouth, shouting, eyes wide.'], [
+      'Jumping up with both fists in the air, a huge excited grin.',
+      'Pointing straight at the viewer with one finger, a cheeky smile, looking at the viewer.',
+      'A small hop with both thumbs up, a big grin.']],
+    ['dumpling_drop', 'Dumpling Drop', [
+      'Running, a stuffed backpack bouncing on her back, both arms pumping, excited.',
+      'Holding the open backpack upside down over her head in both hands, a grin.',
+      'Bouncing on her toes, both hands cupped by her mouth, shouting "incoming!"'], [
+      'Hands pressed to her cheeks, eyes wide, mouth open in an excited gasp.',
+      'Hopping with both arms up, cheering, eyes squeezed shut.',
+      'Hugging the empty backpack, a sheepish worried look.']],
+    ['viral_ult', 'Ten Million Subscribers', [
+      'Holding the purple hairbrush microphone to her mouth, waving with the other hand, looking at the viewer, a sunny vlogger smile.',
+      'Staring at the hairbrush microphone, eyebrows raised, mouth in a small surprised O.',
+      'Both hands pressed to her cheeks, jaw dropped, eyes huge, overjoyed.'], [
+      'Holding up a homemade square plaque wrapped in tinfoil with a glitter-glue diamond, both arms raised high, a proud grin.',
+      'The tinfoil plaque held out in front of her in both hands, tilted forward, a determined shout.',
+      'Hugging the tinfoil plaque to her chest, eyes closed, a happy, teary smile.']],
+    ['dance_battle', 'Dance Battle', [
+      'Strutting forward, shoulders back, one hand on her hip, a sassy smirk.',
+      'Pointing forward with one finger, the other hand beckoning "come on", eyebrows raised.',
+      'A shimmy, shoulders shaking, both arms bent, a cheeky grin.'], [
+      'A hip pop to one side, both hands on her hips, chin up.',
+      'A vogue pose: one hand framing her face, the other arm angled up, a cool look.',
+      'A hair flip, head tossed back, one hand pushing her hair, a winning grin.']],
+    ['open_strings', 'Open Strings', [
+      'Marching proudly, a small violin tucked under one arm and the bow in the other hand.',
+      'The violin tucked under her chin, the bow resting on the strings, eyes closed, serious.',
+      'Sawing the bow hard across the strings, elbow high, teeth gritted, eyes squeezed shut.'], [
+      'Staring at the violin held out in front of her, mouth open, eyebrows up, startled.',
+      'Shrugging with the violin in one hand and the bow in the other, a sheepish grin.',
+      'A recital bow, bent forward at the waist, the violin and bow held at her sides, proud.']],
+    ['handstand_contest', 'Handstand Contest', [
+      'One arm raised high, calling out, a bossy confident grin.',
+      'A lunge forward, both arms reaching down toward the floor, focused.',
+      'A perfect handstand, hands planted, legs straight up together, hair hanging down, steady.'], [
+      'In the handstand, legs opened in a wide straddle, toes pointed.',
+      'Landed standing tall, arms up high in a gymnast salute, chest out.',
+      'Holding a small gold trophy up in both hands, a huge proud grin.']],
+    ['portrait_mode', 'Portrait Mode', [
+      'Holding a spiral sketchbook against her chest in one arm, a pencil held up in the other hand, measuring with one eye closed.',
+      'Pointing the pencil forward sternly, eyebrows down, mouth open, ordering "hold still."',
+      'Drawing fast in the sketchbook, pencil scribbling, tongue poking out, very focused.'], [
+      'Jabbing the pencil forward at arm\'s length like a tiny fencer, front knee bent, determined.',
+      'Holding a torn-out drawing page up in both hands, admiring it, a proud smile.',
+      'Holding the drawing page up in front of her like a shield, both arms out, brave face.']],
+    ['bedazzle_blast', 'Bedazzle Blast', [
+      'Holding a pink rhinestone gun in both hands, pointed up, a mischievous grin.',
+      'Aiming the rhinestone gun forward with both hands, one eye closed, focused.',
+      'Sweeping the rhinestone gun across, leaning forward, mouth open in a shout.'], [
+      'Blowing on the tip of the rhinestone gun held up beside her face, a cool look.',
+      'Inspecting forward with the rhinestone gun lowered, head tilted, a thinking face.',
+      'A pose with the rhinestone gun on her shoulder and the other hand on her hip, a sparkly grin.']],
+    ['olympic_ult', 'Diamond Leotard Finale', [
+      'A gymnast salute, one arm straight up, chin high, serious and ready.',
+      'Sprinting forward, arms pumping, hair streaming back, determined.',
+      'A round-off, both hands on the ground, legs swinging over together.'], [
+      'High in a twist, arms tucked tight to her chest, legs straight together, eyes shut.',
+      'Landing with both knees bent and arms out, sticking it, fierce face.',
+      'Arms up high in a final salute, chest out, a huge proud grin.']],
+  ],
+  rose: [
+    ['boop', 'Boop', [
+      'Walking forward with little bouncy steps, one pointer finger already sticking out, a mischievous grin.',
+      'Leaning in, poking forward with one pointer finger at arm\'s length, eyes wide, lips pressed together.',
+      'Poking again with the same finger, up on tiptoe, giggling.'], [
+      'Up on tiptoe, the whole arm stretched forward, one finger jabbing out in a big BOOP, mouth open wide.',
+      'Pulling the finger back to her chest, both shoulders scrunched up, laughing with her eyes squeezed shut.',
+      'Standing with both hands on her hips, chin up, a proud cheeky smile.']],
+    ['silly', 'RASPBERRY', [
+      'Standing very still, taking a huge breath, cheeks puffing up round, eyes wide and serious.',
+      'Leaning forward from the waist, cheeks puffed out as far as they go, hands balled into fists at her sides.',
+      'Blowing a raspberry, tongue stuck out between flapping lips, eyes squeezed shut, head shaking.'], [
+      'Still blowing the raspberry, both hands waving beside her ears with fingers spread, tongue out.',
+      'Doubled over laughing, both hands over her mouth.',
+      'Standing up straight, wiping her mouth with the back of one hand, a very pleased grin.']],
+    ['boo', 'Boo!!', [
+      'Covering her eyes with both hands, knees bent, sinking down, giggling behind her hands.',
+      'Crouched low in a little ball, both hands over her mouth, eyes peeking, trying not to laugh.',
+      'Tiptoeing, knees high, both hands held up by her chest like little paws, sneaky face.'], [
+      'Jumping up out of a crouch, arms flung up high with fingers spread like claws, mouth wide open yelling BOO.',
+      'Landing on both feet, arms still up in claws, a big scary-silly face with her tongue out.',
+      'Rolling back on her heels laughing, both hands on her tummy.']],
+    ['dress_up_tiara', 'Rainbow Unicorn Cut-Out', [
+      'Kneeling on the ground, a crayon in one hand drawing on a sheet of white paper held flat on her knees, tongue poking out in concentration.',
+      'Still kneeling, holding up the paper with a rainbow and a unicorn drawn on it, beaming.',
+      'Kneeling, cutting around the drawing with small round-tipped safety scissors, very careful face.'], [
+      'Standing, holding the cut-out rainbow unicorn up high in both hands, mouth open in delight.',
+      'Running forward, the cut-out held out in front of her at arm\'s length, ready to stick it on something.',
+      'Pressing the cut-out forward with one flat palm as if sticking it on, the other hand on her hip, proud.']],
+    ['giggle_storm', 'Tickle Storm', [
+      'Creeping on tiptoe, knees bent, both hands up with wiggling fingers, a sneaky grin.',
+      'Crouching low, ready to pounce, eyes narrowed, fingers wiggling.',
+      'Leaping forward through the air, both arms reaching out, fingers spread, laughing.'], [
+      'Landing, both hands a blur of tickling fingers held out in front, giggling hard.',
+      'Swishing a big fluffy feather in one hand in a wide sweep, the other hand up, laughing.',
+      'Twirling the feather above her head, standing on one foot, eyes closed, giggling.']],
+    ['lamby_hug', 'Lamby Hug', [
+      'Walking, Lamby in one hand and Backup Lamby in the other, both small plush lambs held up by her shoulders, a sweet smile.',
+      'Standing, holding the two plush lambs out in front of her side by side, kissing one on the head.',
+      'Squeezing both plush lambs together against her cheek, eyes closed, a big happy smile.'], [
+      'Arms out wide, one plush lamb in each hand, about to give a big hug, mouth open.',
+      'Pushing both plush lambs forward in a squishy hug, one in each hand, leaning in, eyes squeezed shut.',
+      'Hugging both plush lambs tight to her chest, swaying, a dreamy smile.']],
+    ['floor_is_lava', 'Floor Is Lava!', [
+      'Pointing at the ground with one finger, the other hand cupped at her mouth, yelling, eyes huge.',
+      'Holding a puffy square couch seat cushion over her head in both hands, about to throw it down.',
+      'Jumping onto a puffy couch seat cushion on the ground, both knees tucked, arms up.'], [
+      'Standing on the couch seat cushion, wobbling on one foot, arms out wide for balance, laughing.',
+      'Hopping on the cushion with both feet, pointing ahead with one finger, mouth open in a shout.',
+      'Standing safe on the cushion, both fists raised, a triumphant grin.']],
+    ['teaparty_ult', 'Tea Party with Lamby', [
+      'Walking proudly, a big pink plastic toy teapot held in both hands in front of her, a sweet smile.',
+      'Pouring from the toy teapot held in one hand, tilted forward, the other hand holding a tiny pink toy teacup.',
+      'Holding the tiny toy teacup up by its handle with her pinky finger sticking out, eyes closed, very fancy face.'], [
+      'Clapping her hands together over her head, the teapot on the ground by her feet, mouth open yelling DRINK UP.',
+      'Pretending to sip from the tiny toy teacup, pinky out, cheeks round, eyes looking up sideways.',
+      'Holding the teacup and the teapot up high, one in each hand, jumping with both feet off the ground, laughing.']],
+    ['lookout_lamby', 'Lamby Boomerang', [
+      'Standing, Lamby and Backup Lamby each dangling from a pink hair ribbon, one ribbon in each hand, a determined grin.',
+      'Whirling both plush lambs around on their ribbons over her head, both arms up, mouth open in a whoop.',
+      'Letting go, both arms flung forward, front foot stepping out, eyes wide.'], [
+      'Shading her eyes with one flat hand, watching far away, up on tiptoe.',
+      'Catching a plush lamb in each hand, arms out, both knees bent, laughing.',
+      'Hugging both plush lambs to her chest, bouncing on her toes, a proud smile.']],
+    ['piggyback_pounce', 'Piggyback Pounce', [
+      'Running forward fast, both arms pumping, a wild excited grin.',
+      'Crouching low, ready to jump, both arms swung back, eyes on something high up.',
+      'Springing high into the air, arms stretched up, legs kicked back, mouth open in a whoop.'], [
+      'Tucked into a ball in midair, knees to her chest, eyes squeezed shut, giggling.',
+      'Dropping down feet first, both knees bent, both arms up, mouth open yelling.',
+      'Landing on both feet with arms flung out wide like a gymnast, a huge proud grin.']],
+    ['bedtime_story', 'Bedtime Story', [
+      'Walking, a big picture book hugged against her chest in both arms, Lamby tucked under one arm, a sleepy smile.',
+      'Sitting cross-legged on the ground, the big picture book open on her lap, Lamby sitting beside her.',
+      'Sitting, holding the open book up and turned outward to show the pictures, mouth open, reading aloud.'], [
+      'Sitting, turning a page with one hand, eyes wide, a "what happens next" face.',
+      'Sitting, the book on her lap, a big yawn, one hand over her mouth, eyes closing.',
+      'Holding the book closed against her chest, eyes shut, a soft smile, saying THE END.']],
+    ['lamby_boomerang', 'Ms. Cathy\'s Snack Attack', [
+      'Cupping both hands around her mouth, leaning forward, yelling as loud as she can, eyes squeezed shut.',
+      'Waving one arm high over her head, up on tiptoe, a huge excited grin.',
+      'Bouncing up and down, both fists by her chin, eyes sparkling.'], [
+      'Throwing a big round chocolate chip cookie overhand with one arm, front foot forward, mouth open.',
+      'Taking a big bite of a cookie held in both hands, cheeks full, eyes closed, very happy.',
+      'Jumping straight up with both arms raised, crumbs on her chin, a sugar rush grin.']],
+    ['pillow_fort', 'Pillow Fort', [
+      'Running in, a big puffy couch cushion hugged in both arms, laughing.',
+      'Heaving the couch cushion up over her head with both arms, tongue out with effort.',
+      'Dragging a big soft blanket behind her by one corner in one hand, leaning forward, determined.'], [
+      'Holding a small square throw pillow up in both hands, about to toss it, giggling.',
+      'Peeking out over the top of a big couch cushion she holds in front of her, only her eyes and the top of her head showing, grinning.',
+      'Sitting cross-legged, the blanket wrapped around her shoulders like a cape, Lamby in her lap, cozy smile.']],
+    ['mecha_ult', 'Operation Shoulder Mecha', [
+      'Standing, a taped-up cardboard box held up in both hands, crayon scribbles on it, a huge excited grin.',
+      'Pulling the cardboard box down over her head like a helmet, a square eyehole cut in the front, her eyes peeking out.',
+      'Wearing the box helmet, both arms out stiff like a robot, one foot stomping, serious face in the eyehole.'], [
+      'Wearing the box helmet, pulling back on two paper towel tubes held one in each hand like levers, leaning back.',
+      'Wearing the box helmet, one arm punched straight forward with a small cardboard box on the fist, mouth open yelling.',
+      'The box helmet pushed up on top of her head, both arms raised high, jumping, a triumphant grin.']],
+  ],
+  deedee: [
+    ['dish_towel_flick', 'Dish-Towel Flick', [
+      'Power-walking forward, arms pumping, a folded white dish towel in one hand, eyes narrowed at a spot.',
+      'Stopped, leaning in, pointing with one finger, the towel held ready in the other hand, a stern squint.',
+      'Wind-up: the dish towel twisted tight between both hands, pulled back over one shoulder, lips pressed together.'], [
+      'Flick: the arm snapped forward, the towel cracking out straight from the hand, front knee bent.',
+      'Folding the towel into a neat square against her stomach, satisfied.',
+      'One hand on her hip, the folded towel over the other forearm, a proud little nod.']],
+    ['moon_back', 'MOON & BACK', [
+      'Walking forward, both arms opening wide, a warm loving smile.',
+      'Arms spread wide for a big group hug, up on her toes, eyes bright.',
+      'Pointing up high with one hand, the other hand on her heart, mouth open saying "to the moon and back".'], [
+      'Arms wrapped around the air in a big squeezy hug, eyes closed, cheek tilted, smiling.',
+      'Both hands pressed over her heart, eyes shining, a tender smile.',
+      'Blowing a kiss from her open palm, puckered lips, eyes twinkling.']],
+    ['registered_nut', 'Registered Nut, Reporting', [
+      'Hurrying forward, an old white nurse cap on her head, a big stethoscope around her neck, eager.',
+      'Leaning in, the stethoscope ear pieces in, holding the chest piece out at arm\'s length, eyebrows raised, listening.',
+      'Holding up one finger, eyes on a wristwatch, counting, very focused.'], [
+      'Peeling a big bandage open with both hands, tongue poking out in concentration.',
+      'Pressing the bandage forward with one flat palm, a bright energetic grin.',
+      'A quick salute at the brim of the nurse cap, the stethoscope bouncing, a cheeky smile.']],
+    ['corner_piece', 'Corner-Piece Privilege', [
+      'Walking briskly, a large glass baking dish of steaming rhubarb crisp held in two oven mitts, proud.',
+      'Tipping the dish forward to show one golden corner, eyebrows raised, a knowing smile.',
+      'Holding a small plate with one square of crisp on it out on one mitt, offering it forward, warm.'], [
+      'Scooping the corner piece with a big serving spoon, the dish balanced on one mitt, concentrating.',
+      'One mitt on her hip, the dish tucked against her side, a satisfied grin.',
+      'A happy little hop, the dish raised in both mitts, eyes closed, beaming.']],
+    ['wet_floor', 'Wet Floor!', [
+      'Walking quickly, a mop held upright in one hand, a bucket in the other, determined.',
+      'Mopping in big swirls, both hands on the mop handle, the mop head on the floor, leaning into it.',
+      'Mopping fast, body turned, the mop swept wide, a focused frown.'], [
+      'Setting down a big yellow wet floor sign with both hands, bent at the waist.',
+      'One hand on her hip, the mop upright in the other hand, admiring the floor, pleased.',
+      'Both hands over her mouth, eyes wide, mid "oh!", the mop leaning on her shoulder.']],
+    ['wine', 'Wine O\'Clock', [
+      'Walking forward, a wine glass held up in one hand and a small spoon in the other, chin up, ready to announce.',
+      'Tapping the glass gently with the spoon, eyes on it, eyebrows raised.',
+      'Tapping the glass harder with the spoon, glass raised higher, mouth open for attention.'], [
+      'Raising the glass high in a toast, the spoon in the other hand, a bright smile.',
+      'Taking a sip, the glass tipped to her lips, eyes closed.',
+      'The glass held low, one hand on her chest, a contented "ahh" face, eyes half closed.']],
+    ['oven_mitt_ultimatum', 'Oven Mitt Ultimatum', [
+      'Walking forward, a pair of huge fluffy oven mitts held in one hand, a no-nonsense look.',
+      'Pulling one big fluffy oven mitt onto a hand, the other already on, slow and deliberate.',
+      'Both oven mitts on, held up in front of her chest, palms out, eyebrows raised, stern.'], [
+      'Clapping the two oven mitts together hard, arms forward, mouth open, firm.',
+      'Hands on her hips in the oven mitts, chin up, an "I mean it" face.',
+      'Arms spread wide in the oven mitts, a satisfied little smile.']],
+    ['sunday_ult', 'Sunday Roast Spread', [
+      'Ringing a brass dinner bell high in one hand, the other hand cupped by her mouth, calling everyone in.',
+      'Tying an apron behind her back with both hands, a determined smile.',
+      'Stirring fast with a big wooden spoon in one hand, a pot lid in the other, cooking at top speed.'], [
+      'Spinning on one foot, a rolling pin in one hand and a colander in the other, a joyful busy grin.',
+      'Carrying a big roast turkey on a platter in both hands, proud and beaming.',
+      'Standing with arms spread wide over an imagined table, mouth open saying "dinner\'s ready", radiant.']],
+    ['brisk_means_brisk', 'Brisk Walk', [
+      'Picking up two small pink hand weights, one in each hand, perfect upright posture.',
+      'Power-walking, one arm pumping forward with a weight, the opposite knee high, chin up.',
+      'Power-walking, the other arm pumping forward, the back foot pushing off, focused.'], [
+      'Mid stride, both arms pumping, elbows bent, a determined set mouth.',
+      'Stopped, the weights held at her shoulders, slightly out of breath, cheeks rosy.',
+      'One weight raised high in a small victory pump, the other at her side, a proud smile.']],
+    ['garden_shower', 'Garden Shower', [
+      'Walking over with a garden hose with a spray nozzle in both hands, cheerful.',
+      'Holding the nozzle up close to her face, reading it, eyebrows raised.',
+      'Aiming the nozzle forward in both hands, squeezing the trigger, leaning back a little.'], [
+      'Sweeping the hose wide across, body turned, both hands on the nozzle, delighted.',
+      'Checking the nozzle again up close, lips pursed, puzzled.',
+      'The hose lowered, one hand on her hip, a sheepish smile.']],
+    ['rise_and_shine', 'Rise and Shine', [
+      'Walking forward, arms swinging, a disapproving look.',
+      'Reaching up high with one hand, gripping a window shade cord, the other hand on her hip.',
+      'Yanking the cord down hard with both hands, knees bent, mouth open.'], [
+      'Throwing both arms up high, a big bright morning smile.',
+      'One hand shading her eyes, squinting happily, the other hand on her hip.',
+      'Clapping her hands once, mouth open in a cheery "up and at \'em".']],
+    ['beanie_master', 'Beanie Master', [
+      'Walking forward, a hand on her stomach, a puzzled frown.',
+      'Stopped, both hands on her stomach, eyes wide, lips pressed tight.',
+      'Turned away, glancing back over her shoulder, eyebrows raised, a guilty look.'], [
+      'Both hands clapped over her mouth, eyes wide, mid "oh my!"',
+      'Waving one hand in front of her face, the other hand over her mouth, an embarrassed giggle.',
+      'Hands clasped at her chest, cheeks pink, a sheepish grin, shoulders raised.']],
+    ['grandma_squeeze', 'Grandma Squeeze', [
+      'Arms flung open wide from far away, up on her toes, an "oh come here" face.',
+      'Hurrying forward with arms still wide open, a huge loving smile.',
+      'Arms wrapped tight around the air in a big squeezy hug, eyes shut, rocking side to side.'], [
+      'Still hugging the air, cheek tilted, a squeezed happy face.',
+      'Leaning in with puckered lips for a kiss on the cheek, eyes closed.',
+      'Standing back, both hands clasped at her chest, a bright red lipstick smile, beaming.']],
+    ['moon_ult', 'To the Moon and Back', [
+      'Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.',
+      'Arms spread wide, gathering everyone in for a group hug, a warm smile.',
+      'Both hands cupped together held up high above her head, offering something up, eyes shining.'], [
+      'Watching upward, both hands pressed over her heart, mouth open in awe.',
+      'Arms wrapped around herself, eyes closed, smiling softly.',
+      'Blowing a kiss forward from her open palm, puckered lips, eyes twinkling.']],
+  ],
 };
 
-const GROUP = { tom: 'Tom' };
+// Pronoun in the shared header's last line (Tom's entries keep "he").
+const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she' };
+const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
@@ -120,7 +422,7 @@ for (const id of Object.keys(ABILITIES)) {
   for (const [key, name, r1, r2] of ABILITIES[id]) {
     const n = (a, o) => a.map((t, i) => (i + 1 + o) + '. ' + t).join('\n');
     entries.push({ id: id + '-ab-' + key.replace(/_/g, '-'), tab: 'Characters', group: who, title: who + ' ability: ' + name + ' (6 frames; needs your two battle sheets)', ar: '3:2', refs: [hero, walk, b1, b2],
-      prompt: P('char-ability-sheet.txt') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
+      prompt: P('char-ability-sheet.txt').replace('unless a frame says he looks', 'unless a frame says ' + (PRONOUN[id] || 'he') + ' looks') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
   }
 }
 // Emotion sheets (Tom 2026-11-05 23:43, docs/EMOTIONS.md): one 4 x 2 full-body sheet per character with a hero picture,

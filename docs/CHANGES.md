@@ -1,3 +1,11 @@
+## 2026-11-06 (303): Art Library ability sheets for Grace, Rose and Deedee (`abil3`)
+- Tom (00:11): "populate Grace, Rose and Deedee abilities image generators in the Characters Art Library".
+- 42 new Characters entries `<id>-ab-<move>` (14 each, Primary kit from data/abilities.js), same shape as Tom's: 3 x 2, 6 frames, 3:2, refs hero, walk, battle sheet 1, battle sheet 2. Frames follow each move's current animation in engine/<id>-moves.js; held props only, no other characters (Rose's shoulder moves and Ms. Cathy show only Rose).
+- Shared header now says "she looks at the viewer" for the three (PRONOUN in tools/art-library/char-prompts.js); Tom's entries unchanged.
+- Grace and Rose: Ready (their battle sheets are saved). Deedee: Blocked until Tom sends deedee-battle-sheet-1/2.
+- Spliced into data/art-prompts.json directly (455 entries; every existing entry byte for byte unchanged). test.py EXPECT Characters 67.
+- Tests: validate.js OK, bake_test FAILS [], art.html checked in the browser (Grace 14 ready, Rose 14 ready, Deedee 14 blocked with the reason). No game file changed.
+
 ## 2026-11-06 (302): Nara's emotion sheet indexed; all 11 done (`emo5`)
 - Tom (00:19): Nara's painted emotion sheet (dog prompt). Saved art/raw/characters/nara-emotions-v1.png, cut into art/emotions/nara.webp (frames 413 x 414: she sits and lies down), added to data/emotions.js, Library entry approved. All 11 characters with a hero painting are indexed; Michael and Jojo wait for a hero picture.
 - Seen: her coat paints dark brown here; the hero is near black. Used as painted.

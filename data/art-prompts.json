@@ -381,6 +381,720 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Cartridge Tilt.\n\nRow 1:\n1. Looking straight out at the viewer, a flat unimpressed face, head tilted, mid head shake.\n2. Reaching straight up high with both arms, fingers spread, up on his toes.\n3. A large grey game cartridge held in both hands in front of his face, blowing into its bottom edge, cheeks puffed.\n\nRow 2:\n4. Pushing the cartridge down with both hands, leaning into it hard, teeth gritted.\n5. The whole body leaning hard to one side, both arms pushing, tilting something huge.\n6. Landing on both feet from a small hop, brushing one palm against the other, a dry satisfied look."
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-cartwheel",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Cartwheel (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Cartwheel.\n\nRow 1:\n1. A lunge with the front knee bent and both arms stretched straight up, eager face.\n2. Mid cartwheel, one hand planted on the ground, body upside down in a wide star, legs straight.\n3. Mid cartwheel, both hands on the ground, legs split wide overhead, hair hanging down.\n\nRow 2:\n4. Landed standing tall, one leg kicking high forward, arms out for balance, determined.\n5. Both arms flung up high in a gymnast salute, chest out, a big proud grin.\n6. A small hop on both feet, arms swinging, a happy grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-dance",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: DANCE (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: DANCE.\n\nRow 1:\n1. Snapping her fingers with both hands up by her shoulders, counting in, a big smile.\n2. A step-touch: one foot stepping out, the other toe tapping beside it, arms swinging.\n3. A grapevine step, feet crossed, hips swaying, one hand on her hip.\n\nRow 2:\n4. A hip sway to one side, both arms pumping, eyes closed, singing along.\n5. Spinning on one foot, the other knee lifted, arms wrapped in, hair flying out.\n6. The final pose: one hand on her hip, the other arm pointing up high, a confident grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-squishy-squeeze",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Squishy Squeeze (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Squishy Squeeze.\n\nRow 1:\n1. Walking quickly, a round gold dumpling squishy hugged in both hands against her chest, proud.\n2. Holding the gold dumpling squishy out in both hands at arm's length, offering it, a kind smile.\n3. Squeezing the squishy flat between both palms to show how, cheeks puffed, eyes squeezed shut.\n\nRow 2:\n4. Holding the squishy out again on one flat palm, the other hand giving a thumbs up.\n5. Hugging the squishy to one cheek, eyes closed, a soft happy smile.\n6. Tucking the squishy under one arm, the other hand waving, a cheerful grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-glitter-nails",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Glitter Nails (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Glitter Nails.\n\nRow 1:\n1. Walking, a big sparkly bottle of glitter nail polish held up in one hand, excited.\n2. Twisting the cap off the bottle with the other hand, the tiny brush lifting out, tongue poking out in focus.\n3. Bent forward, painting with the tiny brush held delicately, the bottle in the other hand, very focused.\n\nRow 2:\n4. Holding her own hand up fingers spread, admiring glittery nails, mouth open in delight.\n5. Blowing on her fingertips, cheeks puffed, the bottle in the other hand.\n6. Wiggling all her glittery fingers up beside her face, a sparkly grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-welcome-back",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Welcome Back to My Channel (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Welcome Back to My Channel.\n\nRow 1:\n1. Holding a purple hairbrush up to her mouth like a microphone, waving at the viewer with the other hand, looking at the viewer, a big vlogger smile.\n2. Talking into the hairbrush microphone, one hand flung out wide, eyebrows up, very dramatic.\n3. Holding the hairbrush microphone out at arm's length, offering it forward for an interview, eager face.\n\nRow 2:\n4. Nodding seriously, the hairbrush still held out, the other hand on her chin, listening.\n5. The hairbrush back at her mouth, one hand on her heart, a sweet caring face.\n6. Blowing a kiss to the viewer with one hand, the hairbrush held up in the other, looking at the viewer."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-like-subscribe",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Like and Subscribe (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Like and Subscribe.\n\nRow 1:\n1. Marching forward, arms swinging, chin up, a determined grin.\n2. Pointing straight up at the sky with one finger, the other hand on her hip, mouth open.\n3. Looking up, both hands cupped by her mouth, shouting, eyes wide.\n\nRow 2:\n4. Jumping up with both fists in the air, a huge excited grin.\n5. Pointing straight at the viewer with one finger, a cheeky smile, looking at the viewer.\n6. A small hop with both thumbs up, a big grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-dumpling-drop",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Dumpling Drop (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Dumpling Drop.\n\nRow 1:\n1. Running, a stuffed backpack bouncing on her back, both arms pumping, excited.\n2. Holding the open backpack upside down over her head in both hands, a grin.\n3. Bouncing on her toes, both hands cupped by her mouth, shouting \"incoming!\"\n\nRow 2:\n4. Hands pressed to her cheeks, eyes wide, mouth open in an excited gasp.\n5. Hopping with both arms up, cheering, eyes squeezed shut.\n6. Hugging the empty backpack, a sheepish worried look."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-viral-ult",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Ten Million Subscribers (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Ten Million Subscribers.\n\nRow 1:\n1. Holding the purple hairbrush microphone to her mouth, waving with the other hand, looking at the viewer, a sunny vlogger smile.\n2. Staring at the hairbrush microphone, eyebrows raised, mouth in a small surprised O.\n3. Both hands pressed to her cheeks, jaw dropped, eyes huge, overjoyed.\n\nRow 2:\n4. Holding up a homemade square plaque wrapped in tinfoil with a glitter-glue diamond, both arms raised high, a proud grin.\n5. The tinfoil plaque held out in front of her in both hands, tilted forward, a determined shout.\n6. Hugging the tinfoil plaque to her chest, eyes closed, a happy, teary smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-dance-battle",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Dance Battle (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Dance Battle.\n\nRow 1:\n1. Strutting forward, shoulders back, one hand on her hip, a sassy smirk.\n2. Pointing forward with one finger, the other hand beckoning \"come on\", eyebrows raised.\n3. A shimmy, shoulders shaking, both arms bent, a cheeky grin.\n\nRow 2:\n4. A hip pop to one side, both hands on her hips, chin up.\n5. A vogue pose: one hand framing her face, the other arm angled up, a cool look.\n6. A hair flip, head tossed back, one hand pushing her hair, a winning grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-open-strings",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Open Strings (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Open Strings.\n\nRow 1:\n1. Marching proudly, a small violin tucked under one arm and the bow in the other hand.\n2. The violin tucked under her chin, the bow resting on the strings, eyes closed, serious.\n3. Sawing the bow hard across the strings, elbow high, teeth gritted, eyes squeezed shut.\n\nRow 2:\n4. Staring at the violin held out in front of her, mouth open, eyebrows up, startled.\n5. Shrugging with the violin in one hand and the bow in the other, a sheepish grin.\n6. A recital bow, bent forward at the waist, the violin and bow held at her sides, proud."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-handstand-contest",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Handstand Contest (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Handstand Contest.\n\nRow 1:\n1. One arm raised high, calling out, a bossy confident grin.\n2. A lunge forward, both arms reaching down toward the floor, focused.\n3. A perfect handstand, hands planted, legs straight up together, hair hanging down, steady.\n\nRow 2:\n4. In the handstand, legs opened in a wide straddle, toes pointed.\n5. Landed standing tall, arms up high in a gymnast salute, chest out.\n6. Holding a small gold trophy up in both hands, a huge proud grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-portrait-mode",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Portrait Mode (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Portrait Mode.\n\nRow 1:\n1. Holding a spiral sketchbook against her chest in one arm, a pencil held up in the other hand, measuring with one eye closed.\n2. Pointing the pencil forward sternly, eyebrows down, mouth open, ordering \"hold still.\"\n3. Drawing fast in the sketchbook, pencil scribbling, tongue poking out, very focused.\n\nRow 2:\n4. Jabbing the pencil forward at arm's length like a tiny fencer, front knee bent, determined.\n5. Holding a torn-out drawing page up in both hands, admiring it, a proud smile.\n6. Holding the drawing page up in front of her like a shield, both arms out, brave face."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-bedazzle-blast",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Bedazzle Blast (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Bedazzle Blast.\n\nRow 1:\n1. Holding a pink rhinestone gun in both hands, pointed up, a mischievous grin.\n2. Aiming the rhinestone gun forward with both hands, one eye closed, focused.\n3. Sweeping the rhinestone gun across, leaning forward, mouth open in a shout.\n\nRow 2:\n4. Blowing on the tip of the rhinestone gun held up beside her face, a cool look.\n5. Inspecting forward with the rhinestone gun lowered, head tilted, a thinking face.\n6. A pose with the rhinestone gun on her shoulder and the other hand on her hip, a sparkly grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-ab-olympic-ult",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace ability: Diamond Leotard Finale (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-walk-sheet-v1.png",
+    "art/raw/characters/grace-battle-sheet-1-v1.png",
+    "art/raw/characters/grace-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Diamond Leotard Finale.\n\nRow 1:\n1. A gymnast salute, one arm straight up, chin high, serious and ready.\n2. Sprinting forward, arms pumping, hair streaming back, determined.\n3. A round-off, both hands on the ground, legs swinging over together.\n\nRow 2:\n4. High in a twist, arms tucked tight to her chest, legs straight together, eyes shut.\n5. Landing with both knees bent and arms out, sticking it, fierce face.\n6. Arms up high in a final salute, chest out, a huge proud grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-boop",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Boop (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Boop.\n\nRow 1:\n1. Walking forward with little bouncy steps, one pointer finger already sticking out, a mischievous grin.\n2. Leaning in, poking forward with one pointer finger at arm's length, eyes wide, lips pressed together.\n3. Poking again with the same finger, up on tiptoe, giggling.\n\nRow 2:\n4. Up on tiptoe, the whole arm stretched forward, one finger jabbing out in a big BOOP, mouth open wide.\n5. Pulling the finger back to her chest, both shoulders scrunched up, laughing with her eyes squeezed shut.\n6. Standing with both hands on her hips, chin up, a proud cheeky smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-silly",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: RASPBERRY (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: RASPBERRY.\n\nRow 1:\n1. Standing very still, taking a huge breath, cheeks puffing up round, eyes wide and serious.\n2. Leaning forward from the waist, cheeks puffed out as far as they go, hands balled into fists at her sides.\n3. Blowing a raspberry, tongue stuck out between flapping lips, eyes squeezed shut, head shaking.\n\nRow 2:\n4. Still blowing the raspberry, both hands waving beside her ears with fingers spread, tongue out.\n5. Doubled over laughing, both hands over her mouth.\n6. Standing up straight, wiping her mouth with the back of one hand, a very pleased grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-boo",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Boo!! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Boo!!.\n\nRow 1:\n1. Covering her eyes with both hands, knees bent, sinking down, giggling behind her hands.\n2. Crouched low in a little ball, both hands over her mouth, eyes peeking, trying not to laugh.\n3. Tiptoeing, knees high, both hands held up by her chest like little paws, sneaky face.\n\nRow 2:\n4. Jumping up out of a crouch, arms flung up high with fingers spread like claws, mouth wide open yelling BOO.\n5. Landing on both feet, arms still up in claws, a big scary-silly face with her tongue out.\n6. Rolling back on her heels laughing, both hands on her tummy."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-dress-up-tiara",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Rainbow Unicorn Cut-Out (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Rainbow Unicorn Cut-Out.\n\nRow 1:\n1. Kneeling on the ground, a crayon in one hand drawing on a sheet of white paper held flat on her knees, tongue poking out in concentration.\n2. Still kneeling, holding up the paper with a rainbow and a unicorn drawn on it, beaming.\n3. Kneeling, cutting around the drawing with small round-tipped safety scissors, very careful face.\n\nRow 2:\n4. Standing, holding the cut-out rainbow unicorn up high in both hands, mouth open in delight.\n5. Running forward, the cut-out held out in front of her at arm's length, ready to stick it on something.\n6. Pressing the cut-out forward with one flat palm as if sticking it on, the other hand on her hip, proud."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-giggle-storm",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Tickle Storm (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Tickle Storm.\n\nRow 1:\n1. Creeping on tiptoe, knees bent, both hands up with wiggling fingers, a sneaky grin.\n2. Crouching low, ready to pounce, eyes narrowed, fingers wiggling.\n3. Leaping forward through the air, both arms reaching out, fingers spread, laughing.\n\nRow 2:\n4. Landing, both hands a blur of tickling fingers held out in front, giggling hard.\n5. Swishing a big fluffy feather in one hand in a wide sweep, the other hand up, laughing.\n6. Twirling the feather above her head, standing on one foot, eyes closed, giggling."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-lamby-hug",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Lamby Hug (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Lamby Hug.\n\nRow 1:\n1. Walking, Lamby in one hand and Backup Lamby in the other, both small plush lambs held up by her shoulders, a sweet smile.\n2. Standing, holding the two plush lambs out in front of her side by side, kissing one on the head.\n3. Squeezing both plush lambs together against her cheek, eyes closed, a big happy smile.\n\nRow 2:\n4. Arms out wide, one plush lamb in each hand, about to give a big hug, mouth open.\n5. Pushing both plush lambs forward in a squishy hug, one in each hand, leaning in, eyes squeezed shut.\n6. Hugging both plush lambs tight to her chest, swaying, a dreamy smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-floor-is-lava",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Floor Is Lava! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Floor Is Lava!.\n\nRow 1:\n1. Pointing at the ground with one finger, the other hand cupped at her mouth, yelling, eyes huge.\n2. Holding a puffy square couch seat cushion over her head in both hands, about to throw it down.\n3. Jumping onto a puffy couch seat cushion on the ground, both knees tucked, arms up.\n\nRow 2:\n4. Standing on the couch seat cushion, wobbling on one foot, arms out wide for balance, laughing.\n5. Hopping on the cushion with both feet, pointing ahead with one finger, mouth open in a shout.\n6. Standing safe on the cushion, both fists raised, a triumphant grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-teaparty-ult",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Tea Party with Lamby (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Tea Party with Lamby.\n\nRow 1:\n1. Walking proudly, a big pink plastic toy teapot held in both hands in front of her, a sweet smile.\n2. Pouring from the toy teapot held in one hand, tilted forward, the other hand holding a tiny pink toy teacup.\n3. Holding the tiny toy teacup up by its handle with her pinky finger sticking out, eyes closed, very fancy face.\n\nRow 2:\n4. Clapping her hands together over her head, the teapot on the ground by her feet, mouth open yelling DRINK UP.\n5. Pretending to sip from the tiny toy teacup, pinky out, cheeks round, eyes looking up sideways.\n6. Holding the teacup and the teapot up high, one in each hand, jumping with both feet off the ground, laughing."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-lookout-lamby",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Lamby Boomerang (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Lamby Boomerang.\n\nRow 1:\n1. Standing, Lamby and Backup Lamby each dangling from a pink hair ribbon, one ribbon in each hand, a determined grin.\n2. Whirling both plush lambs around on their ribbons over her head, both arms up, mouth open in a whoop.\n3. Letting go, both arms flung forward, front foot stepping out, eyes wide.\n\nRow 2:\n4. Shading her eyes with one flat hand, watching far away, up on tiptoe.\n5. Catching a plush lamb in each hand, arms out, both knees bent, laughing.\n6. Hugging both plush lambs to her chest, bouncing on her toes, a proud smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-piggyback-pounce",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Piggyback Pounce (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Piggyback Pounce.\n\nRow 1:\n1. Running forward fast, both arms pumping, a wild excited grin.\n2. Crouching low, ready to jump, both arms swung back, eyes on something high up.\n3. Springing high into the air, arms stretched up, legs kicked back, mouth open in a whoop.\n\nRow 2:\n4. Tucked into a ball in midair, knees to her chest, eyes squeezed shut, giggling.\n5. Dropping down feet first, both knees bent, both arms up, mouth open yelling.\n6. Landing on both feet with arms flung out wide like a gymnast, a huge proud grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-bedtime-story",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Bedtime Story (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Bedtime Story.\n\nRow 1:\n1. Walking, a big picture book hugged against her chest in both arms, Lamby tucked under one arm, a sleepy smile.\n2. Sitting cross-legged on the ground, the big picture book open on her lap, Lamby sitting beside her.\n3. Sitting, holding the open book up and turned outward to show the pictures, mouth open, reading aloud.\n\nRow 2:\n4. Sitting, turning a page with one hand, eyes wide, a \"what happens next\" face.\n5. Sitting, the book on her lap, a big yawn, one hand over her mouth, eyes closing.\n6. Holding the book closed against her chest, eyes shut, a soft smile, saying THE END."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-lamby-boomerang",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Ms. Cathy's Snack Attack (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Ms. Cathy's Snack Attack.\n\nRow 1:\n1. Cupping both hands around her mouth, leaning forward, yelling as loud as she can, eyes squeezed shut.\n2. Waving one arm high over her head, up on tiptoe, a huge excited grin.\n3. Bouncing up and down, both fists by her chin, eyes sparkling.\n\nRow 2:\n4. Throwing a big round chocolate chip cookie overhand with one arm, front foot forward, mouth open.\n5. Taking a big bite of a cookie held in both hands, cheeks full, eyes closed, very happy.\n6. Jumping straight up with both arms raised, crumbs on her chin, a sugar rush grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-pillow-fort",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Pillow Fort (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Pillow Fort.\n\nRow 1:\n1. Running in, a big puffy couch cushion hugged in both arms, laughing.\n2. Heaving the couch cushion up over her head with both arms, tongue out with effort.\n3. Dragging a big soft blanket behind her by one corner in one hand, leaning forward, determined.\n\nRow 2:\n4. Holding a small square throw pillow up in both hands, about to toss it, giggling.\n5. Peeking out over the top of a big couch cushion she holds in front of her, only her eyes and the top of her head showing, grinning.\n6. Sitting cross-legged, the blanket wrapped around her shoulders like a cape, Lamby in her lap, cozy smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-ab-mecha-ult",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose ability: Operation Shoulder Mecha (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-walk-sheet-v1.png",
+    "art/raw/characters/rose-battle-sheet-1-v1.png",
+    "art/raw/characters/rose-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Operation Shoulder Mecha.\n\nRow 1:\n1. Standing, a taped-up cardboard box held up in both hands, crayon scribbles on it, a huge excited grin.\n2. Pulling the cardboard box down over her head like a helmet, a square eyehole cut in the front, her eyes peeking out.\n3. Wearing the box helmet, both arms out stiff like a robot, one foot stomping, serious face in the eyehole.\n\nRow 2:\n4. Wearing the box helmet, pulling back on two paper towel tubes held one in each hand like levers, leaning back.\n5. Wearing the box helmet, one arm punched straight forward with a small cardboard box on the fist, mouth open yelling.\n6. The box helmet pushed up on top of her head, both arms raised high, jumping, a triumphant grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-dish-towel-flick",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Dish-Towel Flick (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Dish-Towel Flick.\n\nRow 1:\n1. Power-walking forward, arms pumping, a folded white dish towel in one hand, eyes narrowed at a spot.\n2. Stopped, leaning in, pointing with one finger, the towel held ready in the other hand, a stern squint.\n3. Wind-up: the dish towel twisted tight between both hands, pulled back over one shoulder, lips pressed together.\n\nRow 2:\n4. Flick: the arm snapped forward, the towel cracking out straight from the hand, front knee bent.\n5. Folding the towel into a neat square against her stomach, satisfied.\n6. One hand on her hip, the folded towel over the other forearm, a proud little nod."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-moon-back",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: MOON & BACK (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: MOON & BACK.\n\nRow 1:\n1. Walking forward, both arms opening wide, a warm loving smile.\n2. Arms spread wide for a big group hug, up on her toes, eyes bright.\n3. Pointing up high with one hand, the other hand on her heart, mouth open saying \"to the moon and back\".\n\nRow 2:\n4. Arms wrapped around the air in a big squeezy hug, eyes closed, cheek tilted, smiling.\n5. Both hands pressed over her heart, eyes shining, a tender smile.\n6. Blowing a kiss from her open palm, puckered lips, eyes twinkling."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-registered-nut",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Registered Nut, Reporting (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Registered Nut, Reporting.\n\nRow 1:\n1. Hurrying forward, an old white nurse cap on her head, a big stethoscope around her neck, eager.\n2. Leaning in, the stethoscope ear pieces in, holding the chest piece out at arm's length, eyebrows raised, listening.\n3. Holding up one finger, eyes on a wristwatch, counting, very focused.\n\nRow 2:\n4. Peeling a big bandage open with both hands, tongue poking out in concentration.\n5. Pressing the bandage forward with one flat palm, a bright energetic grin.\n6. A quick salute at the brim of the nurse cap, the stethoscope bouncing, a cheeky smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-corner-piece",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Corner-Piece Privilege (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Corner-Piece Privilege.\n\nRow 1:\n1. Walking briskly, a large glass baking dish of steaming rhubarb crisp held in two oven mitts, proud.\n2. Tipping the dish forward to show one golden corner, eyebrows raised, a knowing smile.\n3. Holding a small plate with one square of crisp on it out on one mitt, offering it forward, warm.\n\nRow 2:\n4. Scooping the corner piece with a big serving spoon, the dish balanced on one mitt, concentrating.\n5. One mitt on her hip, the dish tucked against her side, a satisfied grin.\n6. A happy little hop, the dish raised in both mitts, eyes closed, beaming."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-wet-floor",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Wet Floor! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Wet Floor!.\n\nRow 1:\n1. Walking quickly, a mop held upright in one hand, a bucket in the other, determined.\n2. Mopping in big swirls, both hands on the mop handle, the mop head on the floor, leaning into it.\n3. Mopping fast, body turned, the mop swept wide, a focused frown.\n\nRow 2:\n4. Setting down a big yellow wet floor sign with both hands, bent at the waist.\n5. One hand on her hip, the mop upright in the other hand, admiring the floor, pleased.\n6. Both hands over her mouth, eyes wide, mid \"oh!\", the mop leaning on her shoulder."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-wine",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Wine O'Clock (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Wine O'Clock.\n\nRow 1:\n1. Walking forward, a wine glass held up in one hand and a small spoon in the other, chin up, ready to announce.\n2. Tapping the glass gently with the spoon, eyes on it, eyebrows raised.\n3. Tapping the glass harder with the spoon, glass raised higher, mouth open for attention.\n\nRow 2:\n4. Raising the glass high in a toast, the spoon in the other hand, a bright smile.\n5. Taking a sip, the glass tipped to her lips, eyes closed.\n6. The glass held low, one hand on her chest, a contented \"ahh\" face, eyes half closed."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-oven-mitt-ultimatum",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Oven Mitt Ultimatum (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Oven Mitt Ultimatum.\n\nRow 1:\n1. Walking forward, a pair of huge fluffy oven mitts held in one hand, a no-nonsense look.\n2. Pulling one big fluffy oven mitt onto a hand, the other already on, slow and deliberate.\n3. Both oven mitts on, held up in front of her chest, palms out, eyebrows raised, stern.\n\nRow 2:\n4. Clapping the two oven mitts together hard, arms forward, mouth open, firm.\n5. Hands on her hips in the oven mitts, chin up, an \"I mean it\" face.\n6. Arms spread wide in the oven mitts, a satisfied little smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-sunday-ult",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Sunday Roast Spread (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Sunday Roast Spread.\n\nRow 1:\n1. Ringing a brass dinner bell high in one hand, the other hand cupped by her mouth, calling everyone in.\n2. Tying an apron behind her back with both hands, a determined smile.\n3. Stirring fast with a big wooden spoon in one hand, a pot lid in the other, cooking at top speed.\n\nRow 2:\n4. Spinning on one foot, a rolling pin in one hand and a colander in the other, a joyful busy grin.\n5. Carrying a big roast turkey on a platter in both hands, proud and beaming.\n6. Standing with arms spread wide over an imagined table, mouth open saying \"dinner's ready\", radiant."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-brisk-means-brisk",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Brisk Walk (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Brisk Walk.\n\nRow 1:\n1. Picking up two small pink hand weights, one in each hand, perfect upright posture.\n2. Power-walking, one arm pumping forward with a weight, the opposite knee high, chin up.\n3. Power-walking, the other arm pumping forward, the back foot pushing off, focused.\n\nRow 2:\n4. Mid stride, both arms pumping, elbows bent, a determined set mouth.\n5. Stopped, the weights held at her shoulders, slightly out of breath, cheeks rosy.\n6. One weight raised high in a small victory pump, the other at her side, a proud smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-garden-shower",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Garden Shower (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Garden Shower.\n\nRow 1:\n1. Walking over with a garden hose with a spray nozzle in both hands, cheerful.\n2. Holding the nozzle up close to her face, reading it, eyebrows raised.\n3. Aiming the nozzle forward in both hands, squeezing the trigger, leaning back a little.\n\nRow 2:\n4. Sweeping the hose wide across, body turned, both hands on the nozzle, delighted.\n5. Checking the nozzle again up close, lips pursed, puzzled.\n6. The hose lowered, one hand on her hip, a sheepish smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-rise-and-shine",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Rise and Shine (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Rise and Shine.\n\nRow 1:\n1. Walking forward, arms swinging, a disapproving look.\n2. Reaching up high with one hand, gripping a window shade cord, the other hand on her hip.\n3. Yanking the cord down hard with both hands, knees bent, mouth open.\n\nRow 2:\n4. Throwing both arms up high, a big bright morning smile.\n5. One hand shading her eyes, squinting happily, the other hand on her hip.\n6. Clapping her hands once, mouth open in a cheery \"up and at 'em\"."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-beanie-master",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Beanie Master (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Beanie Master.\n\nRow 1:\n1. Walking forward, a hand on her stomach, a puzzled frown.\n2. Stopped, both hands on her stomach, eyes wide, lips pressed tight.\n3. Turned away, glancing back over her shoulder, eyebrows raised, a guilty look.\n\nRow 2:\n4. Both hands clapped over her mouth, eyes wide, mid \"oh my!\"\n5. Waving one hand in front of her face, the other hand over her mouth, an embarrassed giggle.\n6. Hands clasped at her chest, cheeks pink, a sheepish grin, shoulders raised."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-grandma-squeeze",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: Grandma Squeeze (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Grandma Squeeze.\n\nRow 1:\n1. Arms flung open wide from far away, up on her toes, an \"oh come here\" face.\n2. Hurrying forward with arms still wide open, a huge loving smile.\n3. Arms wrapped tight around the air in a big squeezy hug, eyes shut, rocking side to side.\n\nRow 2:\n4. Still hugging the air, cheek tilted, a squeezed happy face.\n5. Leaning in with puckered lips for a kiss on the cheek, eyes closed.\n6. Standing back, both hands clasped at her chest, a bright red lipstick smile, beaming."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-ab-moon-ult",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee ability: To the Moon and Back (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png",
+    "art/raw/characters/deedee-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: To the Moon and Back.\n\nRow 1:\n1. Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.\n2. Arms spread wide, gathering everyone in for a group hug, a warm smile.\n3. Both hands cupped together held up high above her head, offering something up, eyes shining.\n\nRow 2:\n4. Watching upward, both hands pressed over her heart, mouth open in awe.\n5. Arms wrapped around herself, eyes closed, smiling softly.\n6. Blowing a kiss forward from her open palm, puckered lips, eyes twinkling."
+  },
+  {
    "status": "approved",
    "versions": [
     {
