@@ -1,3 +1,7 @@
+## 2026-11-05 (252): Warden Boppy: closer likeness with a face close-up reference (Art Library only, no game files, no tag)
+
+Tom: the Warden does not replicate Boppy's face closely enough. Refs now: style key, guide, finish, `docs/reference/boppy-face.png` (new 768 px close-up cropped from boppy-hero.png), boppy-hero.png (five, the maximum). Prompt lists his real features and says the helmet is open-faced so the whole face shows. Fact: at 3 x 2 each pose is about 300 px, so the face is only about 50 px wide; a closer likeness may need one larger picture of the Warden.
+
 ## 2026-11-05 (251): Chairman: the throne stays in every pose (Art Library only, no game files, no tag)
 
 Tom: in the bottom poses the bottom of the throne disappears. In the approved sheet pose 6 had the squirrel leap off with no throne. POSES.chairman now says the whole throne is in all six poses on the same ground line and the squirrel never leaves it; pose 6 leans far forward while still seated.
