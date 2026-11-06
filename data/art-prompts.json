@@ -397,7 +397,7 @@
    "title": "Tom objects and effects: Disconnected Controller (7 items; attaches the approved Disconnected Controller sheet)",
    "ar": "4:3",
    "refs": [
-    "art/raw/characters/tom-ab-button-mash-v1.png"
+    "art/raw/characters/tom-ab-button-mash-v2.png"
    ],
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Disconnected Controller.\n\nItems:\n1. The game controller from the picture, front view.\n2. The same controller tilted at an angle, as if spinning through the air.\n3. A small no-signal badge: four rising signal bars with a red cross over them.\n4. A curved white motion swoosh, the path of a thrown object (wide).\n5. A big jagged impact burst, yellow and white.\n6. Three plump golden stars in a small ring, for dizziness.\n7. A small puff of grey dust."
   },
@@ -1069,6 +1069,202 @@
     }
    ],
    "rejects": [],
+   "id": "grace-fx-cartwheel",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Cartwheel (6 items; attaches the approved Cartwheel sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-cartwheel-v2.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Cartwheel.\n\nItems:\n1. A curved trail of gold and white sparkles, the arc of a cartwheel (wide).\n2. A big four-point gold twinkle star.\n3. A cluster of small gold and white sparkles.\n4. A big jagged impact burst, yellow and white.\n5. Three plump golden stars in a small ring, for dizziness.\n6. A small puff of dust."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-dance",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: DANCE (7 items; attaches the approved DANCE sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-dance-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: DANCE.\n\nItems:\n1. A round glowing gold dance-step spot on the floor, seen from above at an angle.\n2. A pair of glowing gold footprints.\n3. A glowing heart-shaped floor spot, warm red and gold.\n4. A burst of colorful paper confetti.\n5. Three musical notes, purple and gold.\n6. A soft warm golden glow ring.\n7. A cluster of small sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-squishy-squeeze",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Squishy Squeeze (6 items; attaches the approved Squishy Squeeze sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-squishy-squeeze-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Squishy Squeeze.\n\nItems:\n1. The gold dumpling squishy from the picture.\n2. The same squishy squeezed flat, as if pressed between two palms.\n3. A puff of gold glitter.\n4. A soft warm golden glow.\n5. Three small red hearts.\n6. A small soft round squish burst."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-glitter-nails",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Glitter Nails (6 items; attaches the approved Glitter Nails sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-glitter-nails-v2.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Glitter Nails.\n\nItems:\n1. The sparkly glitter nail polish bottle from the picture, cap on.\n2. The bottle's cap with its tiny brush, glitter polish on the bristles.\n3. One giant glittery painted fingernail, shiny and sparkling.\n4. A cloud of fine glitter.\n5. A cluster of sparkles.\n6. One glossy drop of glitter polish."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-welcome-back",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Welcome Back to My Channel (6 items; attaches the approved Welcome Back to My Channel sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-welcome-back-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Welcome Back to My Channel.\n\nItems:\n1. The purple hairbrush from the picture.\n2. A small recording badge: a glowing red dot and the letters REC.\n3. An empty rounded white speech bubble.\n4. Three small red hearts.\n5. A soft warm golden glow.\n6. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-like-subscribe",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Like and Subscribe (6 items; attaches the approved Like and Subscribe sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-like-subscribe-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Like and Subscribe.\n\nItems:\n1. A huge rounded red button reading SUBSCRIBE in white letters (wide).\n2. A golden notification bell, ringing, with little ring lines.\n3. A big round thumbs-up badge.\n4. A big jagged impact burst.\n5. A burst of colorful confetti.\n6. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-dumpling-drop",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Dumpling Drop (10 items; attaches the approved Dumpling Drop sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-dumpling-drop-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Dumpling Drop.\n\nItems:\n1. The stuffed backpack from the picture, open, squishies peeking out.\n2. The same backpack empty and floppy.\n3. A round gold dumpling squishy.\n4. A strawberry squishy.\n5. A white cat-face bun squishy.\n6. A panda bun squishy.\n7. A peach squishy.\n8. A slice of toast squishy with a smiley face.\n9. Three plump golden stars in a small ring, for dizziness.\n10. A small puff of dust from a bounce."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-viral-ult",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Ten Million Subscribers (10 items; attaches the approved Ten Million Subscribers sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-viral-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Ten Million Subscribers.\n\nItems:\n1. The purple hairbrush from the picture.\n2. The homemade tinfoil plaque from the picture, with its glitter-glue diamond, hanging on a string.\n3. A red badge reading LIVE.\n4. A fan of rainbow light spreading out from a small glass prism (wide).\n5. A shower of falling gold sparkles.\n6. A red heart with a white thumbs up inside.\n7. A blown-kiss heart with a tiny sparkle trail.\n8. A big starburst flash.\n9. A burst of glitter.\n10. A swirling storm of red hearts and gold stars (wide)."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-dance-battle",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Dance Battle (8 items; attaches the approved Dance Battle sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-dance-battle-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Dance Battle.\n\nItems:\n1. A tall cone of white spotlight from above (tall).\n2. A round spot of light on the floor (wide).\n3. A green up arrow.\n4. Three sweat drops.\n5. A small gold trophy cup.\n6. A burst of colorful confetti.\n7. A small puff of dust.\n8. A big starburst."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-open-strings",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Open Strings (7 items; attaches the approved Open Strings sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-open-strings-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Open Strings.\n\nItems:\n1. The small violin from the picture.\n2. The violin bow from the picture (wide).\n3. One wobbly crooked music note, sour green.\n4. A cluster of three crooked sour music notes, green and purple.\n5. A jagged screeching sound wave, zigzag lines (wide).\n6. A music note cracking in two.\n7. A small gold sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-handstand-contest",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Handstand Contest (6 items; attaches the approved Handstand Contest sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-handstand-contest-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Handstand Contest.\n\nItems:\n1. The small gold trophy from the picture.\n2. A rectangular blue gymnastics floor mat, seen from above at an angle (wide).\n3. A soft warm golden glow ring.\n4. A small puff of dust.\n5. A big starburst.\n6. A cluster of gold sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-portrait-mode",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Portrait Mode (7 items; attaches the approved Portrait Mode sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-portrait-mode-v2.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Portrait Mode.\n\nItems:\n1. The spiral sketchbook from the picture, closed.\n2. The pencil from the picture.\n3. The torn-out drawing page from the picture, with a quick pencil sketch of a funny round monster on it.\n4. A small rubber eraser.\n5. A puff of eraser crumbs.\n6. A swirl of grey pencil scribble lines.\n7. A small pencil-sketch star."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-bedazzle-blast",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Bedazzle Blast (6 items; attaches the approved Bedazzle Blast sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-bedazzle-blast-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Bedazzle Blast.\n\nItems:\n1. The rhinestone gun from the picture.\n2. One big faceted rhinestone gem, clear and sparkling.\n3. A spray of many small colorful rhinestones flying (wide).\n4. One sharp pointed crystal gem.\n5. A cluster of sparkles.\n6. A ring of gem glints."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-fx-olympic-ult",
+   "tab": "Characters",
+   "group": "Grace",
+   "title": "Grace objects and effects: Diamond Leotard Finale (8 items; attaches the approved Diamond Leotard Finale sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/grace-ab-olympic-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Diamond Leotard Finale.\n\nItems:\n1. A wide royal-blue gymnastics spring floor with a white boundary line, seen from above at an angle (wide).\n2. A white judge's score card reading 10.\n3. A cluster of sequin glints, silver and gold.\n4. A blazing meteor streak, gold and white, with a long trail (wide).\n5. A swirling vortex of gold stars.\n6. A round puff cloud.\n7. A big white shock ring on the floor (wide).\n8. A big starburst flash."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "rose-ab-boop",
    "tab": "Characters",
    "group": "Rose",
@@ -1339,6 +1535,202 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "rose-fx-boop",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Boop (5 items; attaches the approved Boop sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-boop-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Boop.\n\nItems:\n1. A small round poke ripple, white rings.\n2. A big round soft impact pop, yellow and white.\n3. A small plump cartoon star.\n4. Three small red hearts.\n5. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-silly",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: RASPBERRY (6 items; attaches the approved RASPBERRY sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-silly-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: RASPBERRY.\n\nItems:\n1. A wide wobbly comic spray of tiny droplets, like a raspberry blown across the room (wide).\n2. A wobbly tongue-shaped sound ring.\n3. A puff of air with little motion lines.\n4. A round poof cloud with a few stars.\n5. Wobbly comic sound lines.\n6. A small swirl of dizzy stars."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-boo",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Boo!! (6 items; attaches the approved Boo!! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-boo-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Boo!!.\n\nItems:\n1. A big round poof cloud.\n2. A few small stars flying out of a poof.\n3. A big jagged scare burst, white and yellow.\n4. A red exclamation mark.\n5. Three small sweat drops.\n6. A flash of white light."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-dress-up-tiara",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Rainbow Unicorn Cut-Out (7 items; attaches the approved Rainbow Unicorn Cut-Out sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-dress-up-tiara-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Rainbow Unicorn Cut-Out.\n\nItems:\n1. The crayon from the picture.\n2. The round-tipped safety scissors from the picture.\n3. A blank sheet of white paper.\n4. The sheet of paper with the rainbow and unicorn drawing from the picture.\n5. The cut-out rainbow unicorn from the picture.\n6. A few curly paper scraps.\n7. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-giggle-storm",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Tickle Storm (6 items; attaches the approved Tickle Storm sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-giggle-storm-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Tickle Storm.\n\nItems:\n1. The fluffy feather from the picture.\n2. A swirl of many small rainbow feathers (wide).\n3. Three single small feathers in different colors.\n4. Wiggly tickle motion lines.\n5. A few small happy tear drops.\n6. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-lamby-hug",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Lamby Hug (6 items; attaches the approved Lamby Hug sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-lamby-hug-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Lamby Hug.\n\nItems:\n1. Lamby, the small plush lamb from the picture.\n2. Backup Lamby, the second plush lamb from the picture.\n3. Lamby flying through the air, tilted.\n4. A big soft red heart.\n5. Three small red hearts.\n6. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-floor-is-lava",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Floor Is Lava! (7 items; attaches the approved Floor Is Lava! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-floor-is-lava-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Floor Is Lava!.\n\nItems:\n1. The puffy couch seat cushion from the picture.\n2. A tall stack of three couch cushions (tall).\n3. A wide pool of bright orange cartoon lava, glowing (wide).\n4. A few round lava bubbles popping.\n5. A curl of hot steam.\n6. One small flame.\n7. A few small orange sparks."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-teaparty-ult",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Tea Party with Lamby (10 items; attaches the approved Tea Party with Lamby sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-teaparty-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Tea Party with Lamby.\n\nItems:\n1. The toy teapot from the picture.\n2. The tiny toy teacup from the picture.\n3. A little round kids table with a lacy white tablecloth.\n4. A tiny chair to match the table.\n5. Lamby, the plush lamb, wearing a small bow tie.\n6. A thin trickle of sparkles, like pouring invisible tea.\n7. A tall column of rainbow sparkle fireworks with hearts (tall).\n8. A burst of heart confetti.\n9. A big starburst flash.\n10. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-lookout-lamby",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Lamby Boomerang (6 items; attaches the approved Lamby Boomerang sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-lookout-lamby-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Lamby Boomerang.\n\nItems:\n1. Lamby dangling from a hair ribbon, as in the picture.\n2. Backup Lamby dangling from a hair ribbon, as in the picture.\n3. Lamby flying and spinning, the ribbon trailing.\n4. A curved swoosh trail, the path of a thrown toy curving back (wide).\n5. A big soft impact burst.\n6. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-piggyback-pounce",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Piggyback Pounce (6 items; attaches the approved Piggyback Pounce sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-piggyback-pounce-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Piggyback Pounce.\n\nItems:\n1. A tall wobbly tower of couch cushions (tall).\n2. A big white shock ring on the floor (wide).\n3. A big jagged impact burst.\n4. A curved white motion trail of a flip.\n5. Three plump golden stars in a small ring, for dizziness.\n6. A small puff of dust."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-bedtime-story",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Bedtime Story (8 items; attaches the approved Bedtime Story sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-bedtime-story-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Bedtime Story.\n\nItems:\n1. The big picture book from the picture, closed.\n2. The same book open, colorful pictures on both pages.\n3. Lamby, the plush lamb from the picture.\n4. A small glowing crescent moon.\n5. A scatter of twinkling stars.\n6. Big soft letters Zzz.\n7. A few soft dream sparkles drifting.\n8. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-lamby-boomerang",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Ms. Cathy's Snack Attack (7 items; attaches the approved Ms. Cathy's Snack Attack sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-lamby-boomerang-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Ms. Cathy's Snack Attack.\n\nItems:\n1. The chocolate chip cookie from the picture.\n2. The same cookie with a bite taken out.\n3. A big tray of treats: cookies, apple slices and juice boxes (wide).\n4. One juice box.\n5. A small scatter of cookie crumbs.\n6. A big starburst.\n7. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-pillow-fort",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Pillow Fort (6 items; attaches the approved Pillow Fort sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-pillow-fort-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Pillow Fort.\n\nItems:\n1. The big puffy couch cushion from the picture.\n2. The small square throw pillow from the picture.\n3. The big soft blanket from the picture, spread loose (wide).\n4. A finished pillow fort: cushions stacked into walls with the blanket over the top (wide).\n5. A small red heart.\n6. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-fx-mecha-ult",
+   "tab": "Characters",
+   "group": "Rose",
+   "title": "Rose objects and effects: Operation Shoulder Mecha (12 items; attaches the approved Operation Shoulder Mecha sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/rose-ab-mecha-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Operation Shoulder Mecha.\n\nItems:\n1. The cardboard box helmet from the picture, eyehole in front.\n2. The two paper towel tube levers from the picture.\n3. A cardboard chest plate with a crayon heart emblem.\n4. The small cardboard box rocket fist from the picture, with a little crayon flame.\n5. A visor cut from a cereal box.\n6. A scribbly red crayon target circle.\n7. A wide beam of rainbow bands with glitter (wide).\n8. Rainbow rings shrinking inward.\n9. Diagonal speed lines.\n10. A big starburst flash.\n11. A cluster of gold stars.\n12. A roll of tape."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "deedee-ab-dish-towel-flick",
    "tab": "Characters",
    "group": "Deedee",
@@ -1572,6 +1964,202 @@
     "art/raw/characters/deedee-battle-sheet-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: To the Moon and Back.\n\nRow 1:\n1. Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.\n2. Arms spread wide, gathering everyone in for a group hug, a warm smile.\n3. Both hands cupped together held up high above her head, offering something up, eyes shining.\n\nRow 2:\n4. Watching upward, both hands pressed over her heart, mouth open in awe.\n5. Arms wrapped around herself, eyes closed, smiling softly.\n6. Blowing a kiss forward from her open palm, puckered lips, eyes twinkling."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-dish-towel-flick",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Dish-Towel Flick (6 items; attaches the approved Dish-Towel Flick sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-dish-towel-flick-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Dish-Towel Flick.\n\nItems:\n1. The white dish towel from the picture, folded into a neat square.\n2. The same towel twisted tight like a rope.\n3. The towel snapped out straight, cracking at the tip (wide).\n4. A small smudge of dirt.\n5. A sharp white crack burst.\n6. Small shock lines."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-moon-back",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: MOON & BACK (6 items; attaches the approved MOON & BACK sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-moon-back-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: MOON & BACK.\n\nItems:\n1. A soft glowing crescent moon with a sleepy smile.\n2. A soft pale moonbeam (tall).\n3. A big warm red heart.\n4. A few drifting golden motes.\n5. A cluster of sparkles.\n6. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-registered-nut",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Registered Nut, Reporting (7 items; attaches the approved Registered Nut, Reporting sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-registered-nut-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Registered Nut, Reporting.\n\nItems:\n1. The white nurse cap from the picture.\n2. The stethoscope from the picture.\n3. The big bandage from the picture, opened.\n4. A small name badge reading RN.\n5. A red heartbeat line (wide).\n6. A soft warm golden glow.\n7. A small red heart."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-corner-piece",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Corner-Piece Privilege (7 items; attaches the approved Corner-Piece Privilege sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-corner-piece-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Corner-Piece Privilege.\n\nItems:\n1. The glass baking dish of rhubarb crisp from the picture.\n2. The same dish with one corner piece missing.\n3. The small plate with one square of crisp from the picture.\n4. The big serving spoon from the picture.\n5. The oven mitts from the picture.\n6. A curl of warm steam.\n7. A cluster of golden sparkles."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-wet-floor",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Wet Floor! (7 items; attaches the approved Wet Floor! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-wet-floor-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Wet Floor!.\n\nItems:\n1. The mop from the picture (tall).\n2. The bucket from the picture.\n3. The yellow wet floor sign from the picture.\n4. A wide shiny wet puddle with a gleam (wide).\n5. A few water drops.\n6. A sticky amber blob.\n7. A clean white sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-wine",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Wine O'Clock (7 items; attaches the approved Wine O'Clock sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-wine-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Wine O'Clock.\n\nItems:\n1. The wine glass from the picture.\n2. The small spoon from the picture.\n3. A bottle of red wine with its cork in.\n4. The cork alone.\n5. A small pop burst.\n6. Three small red hearts.\n7. A small clink sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-oven-mitt-ultimatum",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Oven Mitt Ultimatum (7 items; attaches the approved Oven Mitt Ultimatum sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-oven-mitt-ultimatum-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Oven Mitt Ultimatum.\n\nItems:\n1. The pair of huge oven mitts from the picture.\n2. One oven mitt alone.\n3. A wooden rail with hooks (wide).\n4. The two mitts hanging, a little scorched.\n5. A wave of shimmering heat (wide).\n6. A clap burst.\n7. A white shock ring."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-sunday-ult",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Sunday Roast Spread (12 items; attaches the approved Sunday Roast Spread sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-sunday-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Sunday Roast Spread.\n\nItems:\n1. The brass dinner bell from the picture.\n2. The apron from the picture.\n3. The big wooden spoon from the picture.\n4. The pot lid from the picture.\n5. The rolling pin from the picture.\n6. The colander from the picture.\n7. The roast turkey on its platter from the picture.\n8. An enamel kitchen stove with four burners (wide).\n9. A ring of burner flame, blue and orange.\n10. A whirlwind cyclone with flour and steam (tall).\n11. A curl of steam.\n12. A long dinner table covered with food (wide)."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-brisk-means-brisk",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Brisk Walk (6 items; attaches the approved Brisk Walk sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-brisk-means-brisk-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Brisk Walk.\n\nItems:\n1. The pair of small hand weights from the picture.\n2. One hand weight.\n3. A small sign on a stick reading SIGHTSEEING.\n4. Speed lines (wide).\n5. A small puff of dust.\n6. A thump impact burst."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-garden-shower",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Garden Shower (6 items; attaches the approved Garden Shower sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-garden-shower-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Garden Shower.\n\nItems:\n1. The garden hose nozzle from the picture.\n2. A coil of green garden hose.\n3. A big arc of water spray (wide).\n4. A spray of water drops.\n5. A small splash.\n6. A small rainbow in a mist of water."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-rise-and-shine",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Rise and Shine (6 items; attaches the approved Rise and Shine sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-rise-and-shine-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Rise and Shine.\n\nItems:\n1. A window with its shade pulled down and a cord hanging.\n2. The same window with the shade rolled up, bright light pouring in.\n3. A wide beam of bright morning sunlight (wide).\n4. A bright sun glare burst.\n5. A few floating dust motes in the light.\n6. Three short wavy glare lines."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-beanie-master",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Beanie Master (6 items; attaches the approved Beanie Master sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-beanie-master-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Beanie Master.\n\nItems:\n1. A big soft green cloud of mist, wispy, no outline (wide).\n2. A small green puff with a thin ring around it.\n3. A few curling green wisps.\n4. A small bowl of baked beans.\n5. A soft golden glow with fine twinkles.\n6. Short speed lines."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-grandma-squeeze",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: Grandma Squeeze (5 items; attaches the approved Grandma Squeeze sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-grandma-squeeze-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Grandma Squeeze.\n\nItems:\n1. A bright red lipstick kiss mark.\n2. A big warm red heart.\n3. Three small red hearts.\n4. Squeeze motion lines.\n5. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-fx-moon-ult",
+   "tab": "Characters",
+   "group": "Deedee",
+   "title": "Deedee objects and effects: To the Moon and Back (9 items; attaches the approved To the Moon and Back sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/deedee-ab-moon-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: To the Moon and Back.\n\nItems:\n1. A big golden full moon with a sleepy smile.\n2. A wide dark blue night sky with twinkling stars (wide).\n3. A wide shimmering moonbeam (tall).\n4. A golden heart with a sparkly trail.\n5. A patchwork quilt of 3 by 3 stitched patches with a scalloped hem (wide).\n6. A red lipstick kiss mark.\n7. A shower of falling starlight.\n8. Three big soft red hearts.\n9. A big starburst flash."
   },
   {
    "status": "approved",

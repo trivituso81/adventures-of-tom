@@ -1,3 +1,10 @@
+## 2026-11-06 (311): Objects and effects sheets for Grace, Rose and Deedee's abilities (`abilfx2`)
+- Tom (00:34): "add sheets for objects and effects needed for grace, rose, and deedee's abilities. attach whichever reference to corresponding abilities".
+- 42 new Art Library entries `<id>-fx-<move>` (Characters > Grace / Rose / Deedee, right after each one's ability sheets), same shape as Tom's (`abilfx1`): 4 x 3 on magenta, ar 4:3, 5 to 12 items. Each attaches only that move's newest approved ability sheet (`-v1` if none is approved yet, so it unblocks by itself when Tom approves that ability).
+- Items from the scenes each move draws in engine/grace-moves.js, rose-moves.js, deedee-moves.js (held objects copied from the sheet, set pieces like the spring floor, lacy tea table, pillow fort, stove, night sky and moon, and effects like sparkle trails, sour notes, rhinestone spray, lava, rainbow laser, green mist, moonbeam). Header says "she" for the three (PRONOUN map).
+- Status now: Grace 6 Ready, 8 Blocked until those ability sheets are approved; Rose 14 Blocked (no ability sheet approved yet); Deedee 14 Blocked (her battle sheets, then her ability sheets, come first).
+- tom-fx-button-mash now attaches tom-ab-button-mash-v2 (Tom approved v2 after `abilfx1`; that entry is still draft).
+- Not wired into the game.
 ## 2026-11-06 (310): Justin fights with his two painted battle sheets (`battlesheet3`)
 - Tom (11-05 23:40): Justin's battle sheets (art/raw/characters/justin-battle-sheet-1/2-v1.png). Core stances are now the 14 figures as painted (no head enlarging on them; the nine ability sheets keep their head growth and scale, and came back byte for byte). Slots as for Tom, Grace and Rose; NEW: hip, spread, point (data/justin-battle-use.js), idle2 = breath, KO = dizzy sit. Run = walk sheet side steps. Idle keeps its old visible height (93 rows).
 - Purged: tools/sprite-bake/src/justin-idle-v1.png and the stance fit, bruise and swirl paint-in code in bake_justin_battle.py. Cache tag on his atlases is now ?v=bsheet3.
