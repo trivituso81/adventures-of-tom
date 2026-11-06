@@ -21,7 +21,7 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 
 ## The sheet (one per character)
 
-- Art Library, Characters tab, entry `<id>-emotions`: 4 x 2 grid of square cells, ar 2:1, magenta background, the character from the hips up facing the viewer in a slight three-quarter view, same head size and height in every cell. Row 1: happy, loving, sad, angry. Row 2: scared, surprised, proud, unimpressed.
+- Art Library, Characters tab, entry `<id>-emotions`: 4 x 2 grid of square cells, ar 2:1, magenta background, the whole character head to feet, standing, facing the viewer in a slight three-quarter view, same figure size and ground line in every cell. Full body (Tom 23:57: the first hips-up version cut characters off at the waist, useless on the map). The feeling reads from the body on the map and in scenes; the face is cropped from the same painting for the dialogue box (as bake_portraits.py does from the hero). Row 1: happy, loving, sad, angry. Row 2: scared, surprised, proud, unimpressed.
 - Reference: the character's hero picture only (art/raw/characters/<id>-hero-ref-v1.png).
 - Prompt: tools/art-library/prompts/char-emotion-sheet.txt (generic, same text for every character; Nara uses the animal sentence).
 - Entries exist for every character with a hero picture: Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Aunt Ellie, Olivia, Nara (11). Michael and Jojo need a hero picture first.
@@ -29,4 +29,4 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 
 ## Plan for programming (not built)
 
-A dialogue line gets an optional `mood:'<key>'` (one of the 8 keys). The dialogue box shows that speaker's bust for the mood; no mood means no bust change. A scene step could set a resting mood per character. Write this against the first approved sheet.
+A dialogue line gets an optional `mood:'<key>'` (one of the 8 keys). The speaker on the map switches to that full-body pose and the dialogue box shows the face cropped from it; no mood means no bust change. A scene step could set a resting mood per character. Write this against the first approved sheet.

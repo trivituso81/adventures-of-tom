@@ -1,3 +1,6 @@
+## 2026-11-06 (296): Emotion sheets are full body (`emo2`)
+- Tom (23:57): "these cut the character off at the waist - how are we supposed to use these in the game?" Call made: the sheet is now full body, head to feet, same figure size and ground line in every cell, with body language per feeling (feet, posture) as well as the face. One sheet serves the map and scenes (whole pose) and the dialogue box (face cropped from it, as bake_portraits.py does).
+- Changed: tools/art-library/prompts/char-emotion-sheet.txt, the 11 `<id>-emotions` prompts and titles in data/art-prompts.json (none had versions), char-prompts.js titles, docs/EMOTIONS.md. Validate OK.
 ## 2026-11-05 (295): Emotion sheets: 8 core emotions and one generic sheet per character (`emo1`)
 - Tom (23:43): "we need emotions character sheets for each character so they can later be programmed to respond to situations in the story. create a set of 8 core emotions ... and design a generic character sheet that can be used for any character".
 - The 8 (docs/EMOTIONS.md, with what each covers and why): happy, loving, sad, angry, scared, surprised, proud, unimpressed.
