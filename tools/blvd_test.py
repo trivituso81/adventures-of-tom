@@ -47,15 +47,15 @@ with sync_playwright() as pw:
     r=pg.evaluate(REACH); print(r)
     check('every object touchable',not r['badObjects']); check('every NPC on reachable floor',not r['npcBad']); check('story arrival tiles walkable',not r['arrivals'])
     # shots of the painted street
-    for n,(x,y,d) in {'spawn':(15,11,'up'),'coffee':(5,10,'up'),'ramen':(11,10,'up'),'starlite':(18,9,'up'),'cabs':(24,9,'up'),'studio':(28,8,'up'),
-                      'wardrobe':(4,21,'up'),'lofts':(9,21,'up'),'tower':(18,21,'up'),'nickels':(27,21,'up'),'metro':(28,21,'down'),'west':(2,5,'up'),
-                      'south':(14,24,'down'),'alleyA':(14,16,'down'),'alleyB':(22,16,'down'),'behindGrand':(16,11,'up'),'roofrow':(5,13,'down')}.items():
+    for n,(x,y,d) in {'spawn':(15,11,'up'),'coffee':(5,10,'up'),'ramen':(11,10,'up'),'starlite':(18,9,'up'),'cabs':(24,10,'up'),'studio':(28,8,'up'),
+                      'wardrobe':(4,21,'up'),'lofts':(9,21,'up'),'tower':(18,21,'up'),'nickels':(27,21,'up'),'metro':(28,21,'up'),'west':(2,5,'up'),
+                      'south':(14,23,'down'),'alleyA':(14,16,'down'),'alleyB':(22,16,'down'),'behindGrand':(16,11,'up'),'roofrow':(5,13,'down')}.items():
         stand(pg,x,y,d); shot(pg,n)
     pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,18,9,'up'); shot(pg,'landscape')
     stand(pg,14,21,'down'); shot(pg,'landscape-south')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
     # every door: walk up from the pad, land in the right building, walk back out
-    pads={'coffee':(5,10),'ramen':(11,10),'cinema':(18,9),'nickels':(27,21),'wardrobe':(4,21),'lofts':(9,21),'tower':(18,21),'lacab':(24,9)}
+    pads={'coffee':(6,10),'ramen':(12,10),'cinema':(17,9),'nickels':(26,21),'wardrobe':(3,21),'lofts':(10,21),'tower':(18,21),'lacab':(24,10)}
     for hid,(px,py) in pads.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
         stand(pg,px,py,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(700); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(1600); skip_intro(pg)
@@ -67,7 +67,7 @@ with sync_playwright() as pw:
             if hid in ('lofts','lacab'): shot(pg,'out-'+hid)
     # exits
     pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
-    stand(pg,14,24,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(2000); skip_intro(pg)
+    stand(pg,14,23,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('south crosswalk leads to Jefferson Park',pg.evaluate("()=>currentMap.id==='jpark'"))
     pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
     stand(pg,2,3,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000); skip_intro(pg)
@@ -80,7 +80,7 @@ with sync_playwright() as pw:
     print('after studio exit:',pg.evaluate("()=>[currentMap.id,player.x,player.y,worlds.blvd.solid[player.y*worlds.blvd.w+player.x]]"))
     check('studio brings Tom back under the STUDIO arch',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=27&&player.y<=9&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     # A on a prop opens its text
-    for nm,(x,y,d) in {'Ramen window':(12,10,'up'),'Metro stairs':(28,21,'down'),'Newspaper boxes':(25,11,'down'),'Bench':(6,11,'down'),'Shop sign':(26,21,'up'),'Griffith Park arch':(3,4,'right'),'Jefferson Park arch':(13,24,'left')}.items():
+    for nm,(x,y,d) in {'Ramen window':(13,9,'up'),'Metro stairs':(28,21,'up'),'Newspaper boxes':(25,11,'down'),'Bench':(6,11,'down'),'Shop sign':(25,21,'up'),'Griffith Park arch':(3,4,'right'),'Jefferson Park arch':(13,23,'left')}.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(700); skip_intro(pg)
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
         got=pg.evaluate("()=>dialog.active||(typeof choice!=='undefined'&&!!choice&&choice.active)||!!document.querySelector('#toast:not([hidden])')")
