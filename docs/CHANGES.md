@@ -1,3 +1,6 @@
+## 2026-11-05 (276): Art Library: Square fix card also raises the exit boards (`sqfix2`)
+- Tom 19:38: "now we just have to get the signs higher". `area-square-fix` prompt gets a third edit: the three green exit boards go higher on longer posts, bottom edge about at the shops' eaves.
+
 ## 2026-11-05 (276): Flying enemies hover and bob at the original pace (`idle3`)
 - Tom (19:33): flying enemies are the exception to the grounded idle: they stay raised off the ground and bob at the old pace. `B2_FLYERS` in `engine/battle2-ui.js`: skeeter, tickets, boommoth, fogwisp, hushling, pausesprite, greynote, jetlag, redeye (my call on which enemies fly; add an id to the set to make another hover). They hover 14 units (`B2_HOVER`) and bob plus or minus 2 at 3 rad/s (the pre-`idle1` pace); their shadow stays on the ground, a little smaller and lighter. Everyone else keeps `idle2` (no movement, tiny stretch). Party unchanged.
 - Looked at a skeeter, a Mudling and a Pause Sprite against Tom, Grace, Rose: no errors.

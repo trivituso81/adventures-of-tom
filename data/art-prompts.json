@@ -4523,13 +4523,13 @@
    "rejects": [],
    "id": "area-square-fix",
    "tab": "Areas",
-   "title": "The Square: fix v7 (library door, one Kettle sign). Attaches approved v7.",
+   "title": "The Square: fix v7 (library door, one Kettle sign, higher exit boards). Attaches approved v7.",
    "ar": "4:3",
    "refs": [
     "art/raw/areas/area-square-v7.png"
    ],
    "group": "The Square",
-   "prompt": "Edit the attached painting. Return one image: the whole painting, same size and framing.\n\nKeep everything exactly the same: camera, buildings, roofs, signs and their lettering, exit boards, paths, fountain, benches, trees, fences, colors and light.\n\nMake only these two changes:\n1. Hush Library (the lavender building shaped like book spines, top row, second from left): add a tall arched wooden front door at the center of its ground floor, between the two arched windows, facing the plaza, with two small stone steps down to the paving. Slide the reading bench to the side so it does not block the door.\n2. Kettle Cottage (the pink cottage with the teapot on its roof, bottom row, second from left): it must have exactly one sign. Keep the hanging teapot-shaped KETTLE COTTAGE sign on the iron bracket at its right side. Remove the oval KETTLE COTTAGE plaque on the front wall under the roof and paint plain pink wall and lace trim where it was.\n\nNo other changes. No people, no new words."
+   "prompt": "Edit the attached painting. Return one image: the whole painting, same size and framing.\n\nKeep everything exactly the same: camera, buildings, roofs, signs and their lettering, exit boards, paths, fountain, benches, trees, fences, colors and light.\n\nMake only these three changes:\n1. Hush Library (the lavender building shaped like book spines, top row, second from left): add a tall arched wooden front door at the center of its ground floor, between the two arched windows, facing the plaza, with two small stone steps down to the paving. Slide the reading bench to the side so it does not block the door.\n2. Kettle Cottage (the pink cottage with the teapot on its roof, bottom row, second from left): it must have exactly one sign. Keep the hanging teapot-shaped KETTLE COTTAGE sign on the iron bracket at its right side. Remove the oval KETTLE COTTAGE plaque on the front wall under the roof and paint plain pink wall and lace trim where it was.\n3. The three green exit boards (GRUMP HOLLOW at the top, SCHOOL at the right, RIVITUSO ROW at the bottom): raise each board much higher on longer iron posts, so the bottom edge of every board sits well above head height, about as high as the roof eaves of the nearby shops. Same boards, same lettering, same spots beside their lanes.\n\nNo other changes. No people, no new words."
   },
   {
    "status": "approved",
