@@ -74,7 +74,7 @@ const B2_STATUS={
   powdown: {name:'POW Down',short:'POW-',color:'#f3a08c',debuff:true,mod:{pow:-.25}},
   pinned:  {name:'Hooked',short:'HOOKED',color:'#9fd8ff',debuff:true},
   stunned: {name:'Seeing Stars',short:'STUN',color:'#ffe08a',debuff:true,skip:true},
-  // Chapter 4 (Backlot Bedlam). Silenced: no ▶ Skills. Fogged In: their own attacks can miss. Cut: loses the next turn
+  // Chapter 4 (Backlot Bedlam). Silenced: no skills. Fogged In: their own attacks can miss. Cut: loses the next turn
   // (the Director's Cut's CUT!; Wardrobe Fresh blocks it like any debuff).
   silenced:{name:'Silenced',short:'MUTED',color:'#9aa3c8',debuff:true,mental:true},
   fogged:  {name:'Fogged In',short:'FOGGED',color:'#cfd8d6',debuff:true,miss:.3},
@@ -1116,7 +1116,7 @@ const B2_HEART={cap:100,basic:5,care:15,weak:15,hurt:10,calm:20,boss:25};
 // Fields like a skill (elem, stat, mult, target, fx) plus partner, tier, cost, kindV (Warmth to the enemies it targets
 // or, for party Tombos, to every enemy), and the animation in B2_TOMBO_ANIM (engine/battle2-kind.js).
 const B2_TOMBOS=[
-  {id:'grace1',partner:'grace',tier:1,cost:25,flag:'tombo:grace1',name:'Squishy Delivery',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
+  {id:'grace1',partner:'grace',tier:1,cost:25,flag:'tombo:grace1',cat:'heal',name:'Squishy Delivery',elem:['sparkle'],target:'party',weight:'standard',kindV:250,
     fx:[['heal',.35,0,'party'],['cure','debuff','party']],
     desc:'Grace begs for a new squishy and Tom sighs and says fine. A gift box floats down from the sky and a big pink sparkly dice squishy tumbles onto the front monster. The party heals 35% and loses its debuffs, and every enemy warms up.'},
   // Director's Cuts (dc: the Primary they belong to). Same HEART cost; numbers from the designed Director's Cut row (revamp

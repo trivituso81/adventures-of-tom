@@ -43,30 +43,26 @@ function bpFace(f) { const im=f.side==='foe'?b2Thumb(f.id):b2Portrait(f.id); ret
 function bpHp(f) { const r=Math.max(0,f.hp)/f.maxHp; return '<span class="bp-hp"><i class="'+(r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></span>'; }
 
 function bpCross(u,cmdOn,off) {
-  const pu=u&&u.side==='party'?u:B2.party[0],k=pu.kit,sp=k.special;
-  const hr=b2TabRows(pu,'heal'),spOff=hr.length&&!(cmdOn&&hr.every(s=>pu.vp<b2Cost(pu,s)))?off:' off';
-  // One big picture per button and one small word under it. No counts, no markers.
-  return '<div class="b2-cross bp-cross">'+
-    '<button type="button" class="b2-x up'+off+'" data-d="up">'+bpIcon('x_moves',64)+'<small>ATTACK</small></button>'+
-    '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left">'+bpIcon('x_tombo',64)+'<small>TOMBO</small></button>'+
+  const pu=u&&u.side==='party'?u:B2.party[0];
+  // One big picture per button and one small word under it. No counts, no markers. HEAL and WARMTH show the picture of their first move.
+  const tabBtn=(tab,d)=>{ const f=b2TabRows(pu,tab)[0],on=tab==='attack'?off:(cmdOn&&b2TabOn(pu,tab)?'':' off');
+    const ic=tab==='attack'?bpIcon('x_moves',64):tab==='warmth'?(f&&!f.T?bpIcon(pu.id+'.'+f.key,64):'')||bpIcon('x_warmth',64):f?(f.T?bpIcon(f.T.id,64):bpIcon(pu.id+'.'+f.key,64))||bpIcon('x_moves',64):'';
+    return '<button type="button" class="b2-x '+d+on+'" data-d="'+d+'">'+ic+'<small>'+B2_TAB_NAME[tab]+'</small></button>'; };
+  return '<div class="b2-cross bp-cross">'+tabBtn('attack','up')+tabBtn('warmth','left')+
     '<button type="button" class="b2-mid bp-mid'+off+'" data-insp="1" aria-label="Look">'+bpIcon('m_magnify',64)+'<small>LOOK</small></button>'+
-    '<button type="button" class="b2-x right'+spOff+'" data-d="right">'+(sp?bpIcon(pu.id+'.'+sp.key,64)||bpIcon('x_moves',64):'')+'<small>HEAL</small></button>'+
+    tabBtn('heal','right')+
     '<button type="button" class="b2-x down'+off+'" data-d="down">'+bpIcon('x_bag',64)+'<small>BAG</small></button></div>';
 }
-// Move, Tombo and bag buttons: the picture fills the box, a small caption sits under it.
+// Move and bag buttons: the picture fills the box, a small caption sits under it.
 function bpBtn(i,sel,no,basic,ic,word) {
   return '<button type="button" class="b2-btn bp-btn'+(basic?' b2-basic':'')+(sel?' sel':'')+(no?' no':'')+'" data-i="'+i+'">'+
     '<span class="bp-ic">'+ic+'</span><span class="bp-w">'+b2Esc(word)+'</span></button>';
 }
 function bpSkills(u) {
   return '<div class="b2-grid bp-grid">'+b2SkillRows(u).map((s,i)=>{
+    if(s.T) return bpBtn(i,i===B2.sel,!!s.why,false,bpIcon(s.T.id,96,'',!!s.why)||bpIcon('x_warmth',96),bpWord(s.T.name));
     const lock=u.vp<b2Cost(u,s)||b2Shushed(u,s);
     return bpBtn(i,i===B2.sel,lock,s===u.kit.basic,bpMoveIcon(u,s,96,lock),bpWord(s.name)); }).join('')+bpBack()+'</div>';
-}
-function bpTombo(u) {
-  const rows=b2TomboRows(u);
-  return '<div class="b2-grid bp-grid">'+(rows.length?rows.map((r,i)=>
-    bpBtn(i,i===B2.sel,!!r.why,false,bpIcon(r.T.id,96,'',!!r.why)||bpIcon('x_tombo',96),bpWord(r.T.name))).join(''):'<p class="bp-empty">'+bpIcon('x_tombo',64,'',true)+'</p>')+bpBack()+'</div>';
 }
 function bpBag(u) {
   const rows=b2BagList(u);
@@ -94,5 +90,5 @@ b2RenderCmd=function() {
   const cmdOn=battle.state==='command';
   box.classList.add('bp');
   if(!cmdOn||B2.ui==='cross'||B2.ui==='busy'||!u||u.side!=='party') { box.innerHTML=bpCross(u,cmdOn,!cmdOn?' off':''); return; }
-  box.innerHTML=B2.ui==='skills'?bpSkills(u):B2.ui==='bag'?bpBag(u):B2.ui==='tombo'?bpTombo(u):B2.ui==='inspect'?bpInspect():B2.ui==='target'?bpTarget():'';
+  box.innerHTML=B2.ui==='skills'?bpSkills(u):B2.ui==='bag'?bpBag(u):B2.ui==='inspect'?bpInspect():B2.ui==='target'?bpTarget():'';
 };

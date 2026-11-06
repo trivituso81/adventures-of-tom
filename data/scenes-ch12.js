@@ -295,7 +295,7 @@ HOLD_RULES.push(n=>!!n.amber||n.monster==='gridlockprime');
 TUTORIALS.ch12={tips:[
   {id:'rush',who:'*',text:'Every third turn it floors RUSH HOUR on everyone. It shows on the turn ribbon first, so heal up after.'},
   {id:'red',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'TOTAL GRIDLOCK on everyone next turn! Break its red light: 2 Kinetic or Splash hits, or any Tombo.'},
-  {id:'ff2',who:['amy','grace','rose'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'◀ TOMBO, Run With Us, Mommy! (Amy, Grace and Rose) smashes its red light in one go.'},
+  {id:'ff2',who:['amy','grace','rose'],tombo:true,when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'▲ ATTACK, TOMBO: Run With Us, Mommy! (Amy, Grace and Rose) smashes its red light in one go.'},
   {id:'green',who:'*',dir:'down',care:1,text:'It has been red since the greying. ▼ Bag, GIVE IT A GREEN LIGHT. Three times and it lets everyone through.'}]};
 
 // ---------- LA couches and benches swap who is out front (chapter 12 on; same menu as the Boarding Gate benches) ----------

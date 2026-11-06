@@ -638,7 +638,7 @@ SCENES.nsGoal=[
   {talk:'Tom',lines:['Nine dairy-free scoops. One per year. Black and white cookie on top. I ordered it in July.']},
   {talk:'Rose',lines:['Is the present a puppy?'],voice:[['rose','puppy']]},
   {talk:'Tom',lines:['It\'s not a puppy.','Presents are after cake. That\'s the rule. I didn\'t make the rule.'],voice:[['tom','not_puppy'],['tom','present_rule']]},
-  {toast:'Tombos ready: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, ◀ TOMBO.',time:4},
+  {toast:'Tombos ready: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
   {toast:'Goal: Sprinkle Street Creamery, the shop with the SCOOPS sign at the top of the Square.',time:4.5}
 ];
 // Sprinkle Street Creamery: frozen solid. Mr. Pistachio in an ice cube, three gremlins, the story of the thief.
@@ -1136,12 +1136,12 @@ STORY_PROPS.nscow=()=>{}; STORY_PROPS.nsphoto=()=>{};
 Object.assign(TUTORIALS,{
   nsGremlin:{tips:[
     {id:'row',who:'grace',dir:'up',text:'Three gremlins. Grace’s Runway Walk and Tom’s wide moves hit a whole row at once. ▲ Skills.'},
-    {id:'tombo',who:'rose',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ◀ TOMBO: Double-Decker Airplane.'}]},
+    {id:'tombo',who:'rose',tombo:true,when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ▲ ATTACK, TOMBO: Double-Decker Airplane.'}]},
   nsSlug:{
     setup() { const s=B2.foes[0]; if(s) { s.st.goofed={turns:1}; B2.heart=Math.max(B2.heart,30); } b2Render(); },
     tips:[
       {id:'free',who:'*',text:'The slug is Goofed from Rose’s BOO: a free round. Every third turn it melts and skips anyway. Cozy and Sparkle moves melt it faster.'},
-      {id:'tombo',who:'tom',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ◀ TOMBO: Squishy Delivery heals everyone and warms the slug up.'}]},
+      {id:'tombo',who:'tom',tombo:true,when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ▶︎ HEAL, TOMBO: Squishy Delivery heals everyone and warms the slug up.'}]},
   nsCone:{tips:[
     {id:'pass',who:'*',text:'Every third turn a cone passes a scoop to its friend: a heal. Knock one cone out first and the pass has nowhere to go.'},
     {id:'inspect',who:'grace',text:'B, or tapping the portrait in the middle, Inspects a cone: Cozy and Chatter are its weak spots. Rose’s RASPBERRY is Chatter.'}]},
@@ -1152,11 +1152,11 @@ Object.assign(TUTORIALS,{
     {id:'warn',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'),text:'A Brain Freeze is coming (!! on the turn ribbon). It hits everyone. Hot Cocoa from Mr. Pistachio refills VP.'}]},
   nsBoss1:{tips:[
     {id:'warn',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.intent&&f.intent.kind==='all'),text:'A Brain Freeze is coming (!! on the turn ribbon). It hits everyone. Heal up after!'},
-    {id:'tombo',who:'tom',dir:'left',when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. ◀ TOMBO: Double-Decker Airplane stuns; Squishy Delivery heals.'}]},
+    {id:'tombo',who:'tom',tombo:true,when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. TOMBOs: ▲ ATTACK has Double-Decker Airplane (stuns); ▶︎ HEAL has Squishy Delivery (heals).'}]},
   nsBoss2:{
     setup() { const f=B2.foes.find(x=>x.boss); if(f) { f.hp=Math.round(f.maxHp*.6); f.phase=2; f.step='A'; f.phaseNew=true; } B2.heart=Math.max(B2.heart,75); b2Render(); },
     tips:[
-      {id:'wish',who:['tom','grace','rose'],dir:'left',when:u=>b2TomboRows(u).some(r=>r.T.id==='wish'&&!r.why),text:'◀ TOMBO: BIRTHDAY WISH. All three of you. Nine candles and a wish on every enemy. It breaks the ICE SHELL too.'},
+      {id:'wish',who:['tom','grace','rose'],tombo:'wish',when:u=>b2TomboRows(u).some(r=>r.T.id==='wish'&&!r.why),text:'▲ ATTACK, TOMBO: BIRTHDAY WISH. All three of you. Nine candles and a wish on every enemy. It breaks the ICE SHELL too.'},
       {id:'shell',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'ICE SHELL! 2 Cozy or Sparkle hits crack it before the Deep Freeze. Boppy’s Pepper (▼ Bag) counts. Any Tombo breaks it at once.'},
       {id:'instax',who:'grace',dir:'up',text:'Grace’s new INSTAX (▲ Skills): a flash that Goofs every enemy and warms them up.'}]}
 });

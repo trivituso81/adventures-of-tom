@@ -307,7 +307,7 @@ TUTORIALS.finalcall={tips:[
   {id:'escort',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.call&&b2Alive(f.call)&&f.call.id!=='tom'&&f.call.st.boarding&&!f.call.st.guarded),
     text:'Called someone slow? ▶ DEFEND, then pick them: Tom walks them onto the plane.'},
   {id:'bench',who:'*',dir:'down',care:1,when:()=>b2BenchReady&&b2BenchReady(),text:'▼ Bag, BENCH CALL: the fourth member sits out and a friend from the bench hops in. Costs a turn.'},
-  {id:'final',who:['tom','grace','rose','amy','tnb','nara'],dir:'left',when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'CANCELLED is coming. Any ◀ TOMBO (try Sleepover at Tom’s) smashes its guard in one go.'},
+  {id:'final',who:['tom','grace','rose','amy','tnb','nara'],tombo:true,when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'CANCELLED is coming. Any TOMBO (try Sleepover at Tom’s, in ▲ ATTACK) smashes its guard in one go.'},
   {id:'final2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'CANCELLED on everyone next turn! Break its guard: 2 Kinetic or Sparkle hits, or any Tombo.'},
   {id:'fly',who:'*',dir:'down',care:1,text:'It has never once got to fly. ▼ Bag, LET IT FLY. Three times and it comes along, happy.'}]};
 

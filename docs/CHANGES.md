@@ -1,3 +1,13 @@
+## 2026-11-05 (277): Command cross is now Attack, Heal, Warmth, Bag; Tombos live inside those three lists (`warmth1`)
+
+- Tom (19:20): the cross categories become Attack, Heal and Warmth (the HEART combos stay), Tombos are redistributed into those three, and moves like RASPBERRY leave Heal for Warmth. Layout: Up ATTACK, Right HEAL, Left WARMTH (was TOMBO), Down BAG. The separate Tombo list is gone (purged: `ui==='tombo'`, `bpTombo`, `b2TomboEmpty`, `b2IsHeal`, the old special-always-in-Heal rule).
+- Rule (`b2MoveCat`, `b2TomboCat` in engine/battle2-ui.js; `cat` on a move or Tombo forces a list): ATTACK = the free basic move and anything that hurts a monster. WARMTH = a kind move (B2_KIND or `kindFoe`) with no damage and no healing. HEAL = everything else aimed at friends. Tombo: damage means ATTACK, else `kindV` means WARMTH, else HEAL; Squishy Delivery is forced to HEAL (`cat:'heal'`).
+- Result: Warmth holds RASPBERRY and Boo!! (Rose), PEP TALK and Inside Voices! (Amy), GRUMBLE, Headcount Again, Everybody Waits, In Nineteen Seventy (Boppy), PUPPY DOG EYES (Nara), Flashcard Flurry (Tom), Story Time (Olivia); 12 Tombos (the no-damage Director's Cuts). Heal keeps 4 Tombos, Attack 35. Grace, Deedee, TNB and Justin have no Warmth moves, so their WARMTH button is greyed unless a Tombo is ready.
+- A Tombo shows as a pink row (faces of the team, HEART price) after the moves in its list, greyed with the reason until HEART and the team are ready. Rose Mode's recommendation and the tutorial glow find the right list (`b7RecMap`, `b2TipAim`; tips use `tombo:true` or `tombo:'<id>'` instead of `dir:'left'`).
+- Text: about 45 tutorial tips, toasts and hints rewritten (no more "◀ TOMBO"; RASPBERRY, PEP TALK now point at WARMTH); stale "SILLY" names in hints fixed. Icon `x_tombo` renamed `x_warmth`.
+- New `tools/cross_test.py [--shots]`: prints every move and Tombo by list, checks one list each, fires a Warmth move and a Tombo through the menu. Tags: `warmth1` (battle2-ui, feel, story, battle-pictures, battle-icons, battle-emoji, battle2-data, scenes, scenes-ch12, scenes-ch14, bonus-nine-scoops, ch20-battle), stamp `build warmth1`. Tested: smoke FAILS [], cross_test FAILS [], portrait and landscape shots looked at.
+
+
 ## 2026-11-05 (276): Art Library: Square fix card also raises the exit boards (`sqfix2`)
 - Tom 19:38: "now we just have to get the signs higher". `area-square-fix` prompt gets a third edit: the three green exit boards go higher on longer posts, bottom edge about at the shops' eaves.
 

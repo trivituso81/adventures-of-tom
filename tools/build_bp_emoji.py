@@ -7,7 +7,7 @@ import sys, os, base64, json
 SVG=sys.argv[1] if len(sys.argv)>1 else 'node_modules/@twemoji/svg'
 MAP={
 # menu
-'x_moves':'👊','x_tombo':'💕','m_magnify':'🔍','x_bag':'🎒','x_back':'⬅️','x_run':'🏃','x_praise':'👏','x_crust':'🥖','x_bench':'🔄',
+'x_moves':'👊','x_warmth':'💕','m_magnify':'🔍','x_bag':'🎒','x_back':'⬅️','x_run':'🏃','x_praise':'👏','x_crust':'🥖','x_bench':'🔄',
 # specials (command cross, right button)
 'tom.defend':'🛡️','grace.dance':'💃','rose.silly':'😝','amy.pep':'📣','amy.pep_talk':'📣','deedee.hug':'🤗','deedee.moon_back':'🤗','boppy.grumble':'😤','tnb.wardrobe':'👗','nara.puppy':'🥹','nara.puppy_eyes':'🥹',
 # Tom

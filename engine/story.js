@@ -653,7 +653,8 @@ b2End=function(result) {
 };
 
 // Story fights with tips (TUTORIALS in data/scenes.js). A tip: {id, who (member id, a list, or '*'), when(unit) optional, dir ('up',
-// 'right','down','left': the command it points at; ▲ Attack, ▶ Heal, ◀ Tombo, ▼ Bag), care (1: light the Bag's
+// 'right','left','down': the command it points at; ▲ Attack, ▶ Heal, ◀ Warmth, ▼ Bag), keys (move keys to light inside that list),
+// tombo (true or a Tombo id: point at the list and row of that ready Tombo instead of dir), care (1: light the Bag's
 // COMPLIMENT-style row), text}. One tip per turn, each once;
 // it shows in the message line with the same gold glow Rose Mode uses. A tutorial's setup() runs when the fight starts.
 const LE_b2Start_story=b2Start;
@@ -672,16 +673,27 @@ function b2TutTip() {
   T0.cur={tip,round:B2.round};
   return tip;
 }
+// Where a tip points: the button, and the row inside its list. A Tombo tip finds the list that holds the ready Tombo.
+function b2TipAim(tip,u) {
+  if(tip.tombo) {
+    const r=b2TomboRows(u).find(x=>!x.why&&(tip.tombo===true||x.T.id===tip.tombo)); if(!r) return null;
+    const tab=b2TomboCat(r.T);
+    return {dir:B2_TAB_DIR[tab],i:Math.max(0,b2TabRows(u,tab).findIndex(x=>x.T&&x.T.id===r.T.id))};
+  }
+  if(!tip.dir) return null;
+  const tab=B2_DIR_TAB[tip.dir];
+  return {dir:tip.dir,i:tab&&tip.keys?Math.max(0,b2TabRows(u,tab).findIndex(s=>tip.keys.includes(s.key))):0};
+}
 const LE_b7AfterRender_story=b7AfterRender;
 b7AfterRender=function() {
   LE_b7AfterRender_story();
   const tip=b2TutTip(); if(!tip) return;
   const box=$('b2-cmd'); if(!box) return;
   const glow=sel=>{ box.querySelectorAll('.rec').forEach(e=>e.classList.remove('rec')); const b=box.querySelector(sel); if(b) b.classList.add('rec'); };
-  if(B2.ui==='cross') { b2Msg('★ '+tip.text); if(tip.dir) glow('.b2-x[data-d="'+tip.dir+'"]'); }
+  const aim=b2TipAim(tip,B2.actor);
+  if(B2.ui==='cross') { b2Msg('★ '+tip.text); if(aim) glow('.b2-x[data-d="'+aim.dir+'"]'); }
   else if(B2.ui==='bag'&&tip.dir==='down'&&tip.care!=null) { const k=b2BagList(B2.actor).findIndex(r=>r.praise); if(k>=0) glow('.b2-btn[data-i="'+k+'"]'); }
-  else if(B2.ui==='tombo'&&tip.dir==='left') glow('.b2-btn[data-i="0"]');
-  else if(B2.ui==='skills'&&B2.tab==='heal'&&tip.dir==='right') { const k=tip.keys?b2SkillRows(B2.actor).findIndex(s=>tip.keys.includes(s.key)):0; glow('.b2-btn[data-i="'+Math.max(0,k)+'"]'); }
+  else if(B2.ui==='skills'&&aim&&aim.dir!=='down'&&B2_DIR_TAB[aim.dir]===B2.tab) glow('.b2-btn[data-i="'+aim.i+'"]');
 };
 
 // Debug handle for tests.

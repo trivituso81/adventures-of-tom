@@ -89,7 +89,7 @@ Object.assign(MONSTERS,{
     again:['Paused. Round two.','Round {n}. Still pausing.'],
     drop:{id:'coldbrew',chance:.4,msg:'The Pause Sprite turned into a triangle and dropped a cold brew. It had been saving it for when things started again.'},
     vapor:['#5a74a8','#8aa4d8','#f4f0e6','#161a26'],
-    hint:'A pause button with a face. Every third turn it freezes one person (Slow). Kinetic and Chatter work; it loves Rose’s SILLY and Grace’s DANCE.'},
+    hint:'A pause button with a face. Every third turn it freezes one person (Slow). Kinetic and Chatter work; it loves Rose’s RASPBERRY and Grace’s DANCE.'},
   paperweight:{id:'paperweight',coins:34,coinStep:4,name:'Paperweight',the:'the Paperweight',short:'Paperweight',sprite:PAPERWEIGHT_SPRITE,pal:PAPERWEIGHT_PAL,scale:3,eyes:[[16,38],[30,38]],mouth:[23,41],
     hp:52,hpStep:6,atk:4,xp:34,xpStep:4,level:23,rank:'TOUGH',
     intro:'A glass dome the size of a beach ball rolls out of the dark on a wooden base. Inside it, a tiny house sits in a snowstorm that has not settled in years.',
@@ -113,7 +113,7 @@ Object.assign(MONSTERS,{
     again:['Do not touch. Round two.','Round {n}. Still cataloguing.'],
     drop:{id:'prioritytag',chance:.4,msg:'The Curator peeled off one label and handed it over. It said PRIORITY. He had never given anybody anything before.'},
     vapor:['#8e8e9a','#f4f0e6','#d9503f','#2c2c36'],
-    hint:'A museum guard with a label gun. Every third turn he labels one person NOT FOR SALE (PEP down). Kinetic and Chatter work; he loves Tom’s starter and Rose’s SILLY.'}
+    hint:'A museum guard with a label gun. Every third turn he labels one person NOT FOR SALE (PEP down). Kinetic and Chatter work; he loves Tom’s starter and Rose’s RASPBERRY.'}
 });
 // Map spots: the lower stairwell (floors 2 to 30) and the shelf hall (floors 30 to 36). The boss waits in the vault (data/scenes-ch17.js, ch17Vault).
 const CH17_STAIR_SPOTS=[['pausesprite',10,39],['paperweight',9,34],['curator',9,29],['pausesprite',10,23],['paperweight',7,19],['curator',6,13],['pausesprite',6,8]];

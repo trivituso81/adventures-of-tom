@@ -32,5 +32,5 @@ Object.assign(MONSTERS,{
     talk:['I stand here and the glass stays up. That’s the deal.','Nobody gets hurt. Nobody gets old. Nobody gets left.'],
     again:['Halt. Round two.','Round {n}. I’m still standing. I’ve been standing for hours.'],
     vapor:['#e8b030','#ffe27a','#fff0a0','#f4f0e6'],
-    hint:'You cannot beat him: every hit only makes the armor hum brighter. DEFEND, Amy’s PEP TALK, Grace’s DANCE and Rose’s SILLY warm him up. Make him laugh (▼ Bag, three times). Deedee will call from the porch when he is ready.'}
+    hint:'You cannot beat him: every hit only makes the armor hum brighter. DEFEND, Amy’s PEP TALK, Grace’s DANCE and Rose’s RASPBERRY warm him up. Make him laugh (▼ Bag, three times). Deedee will call from the porch when he is ready.'}
 });

@@ -140,7 +140,7 @@ SCENES.ch14Gate=()=>[
     {talk:'Boppy',lines:['...Last warning.']},
     {talk:'Tom',lines:['Noted.']},
     {trace:'ch14-gate'},
-    {toast:'Tip: hitting him heals his armor. DEFEND (Tom), Amy’s PEP TALK, Grace’s DANCE, Rose’s SILLY and ▼ Bag, MAKE HIM LAUGH, are the way through.',time:7}]),
+    {toast:'Tip: hitting him heals his armor. DEFEND (Tom), Amy’s PEP TALK, Grace’s DANCE, Rose’s RASPBERRY and ▼ Bag, MAKE HIM LAUGH, are the way through.',time:7}]),
   {flag:'ch14-gate'},
   {battle:()=>{ const b=ch14Boppy(); if(b) Object.assign(b,{monster:'warden',tier:0}); return b; },tut:'ch14'},
   {call:()=>{ const b=ch14Boppy(); if(b) b.monster=null; }},
@@ -235,7 +235,7 @@ HOLD_RULES.push(n=>n.monster==='warden'||!!n.porch);
   {id:'nohit',who:'*',text:'You cannot beat him by hitting. Every hit makes the armor hum brighter. Be kind: DEFEND, cheer him up, make him laugh.'},
   {id:'guard',who:['tom'],dir:'down',care:1,text:'▼ DEFEND somebody. He cannot stand watching someone guard someone, and it takes the sting out of GATE SLAM.'},
   {id:'laugh',who:'*',dir:'down',care:1,text:'▼ Bag, MAKE HIM LAUGH. Three jokes. He laughs when he is scared.'},
-  {id:'fav',who:['amy','grace','rose'],dir:'left',text:'PEP TALK, DANCE and SILLY are favorites: warm moves warm him fastest.'}]}; }
+  {id:'fav',who:['amy','grace','rose'],text:'PEP TALK, DANCE and RASPBERRY are favorites: warm moves warm him fastest.'}]}; }
 
 // ---------- Talking to Deedee on the porch and to Warden Boppy ----------
 const LE_pressAction_ch14=pressAction;

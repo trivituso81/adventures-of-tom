@@ -44,7 +44,7 @@ Object.assign(MONSTERS,{
     talk:['Eternal Silence. Please. Just let it be quiet.','I never learned how to say it.'],
     again:['Quiet. Please.','Round {n}. Quiet.'],
     vapor:['#ffd36a','#f4f0e6','#7ad0e8','#262432'],
-    hint:'His grief has turned your ATTACK to stone. Nothing you hit him with does anything. Care for him: DANCE, SILLY, PEP TALK, MOON & BACK, GRUMBLE, WARDROBE and PUPPY EYES each warm him once. Use ▼ Bag, BENCH CALL, to bring them in (it is almost free). When all seven have, Tom has one thing left to do.'}
+    hint:'His grief has turned your ATTACK to stone. Nothing you hit him with does anything. Care for him: DANCE, RASPBERRY, PEP TALK, MOON & BACK, GRUMBLE, WARDROBE and PUPPY EYES each warm him once. Use ▼ Bag, BENCH CALL, to bring them in (it is almost free). When all seven have, Tom has one thing left to do.'}
 });
 const CH20_HEART_SPOTS=[['leviathan',11,5]];
 const CH20_JULIAN_SPOTS=[['julian',11,6]];

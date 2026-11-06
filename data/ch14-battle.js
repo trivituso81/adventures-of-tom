@@ -3,7 +3,7 @@
 // How the fight works (everything here is a thin layer over the Un-Grump / Warmth system in engine/battle2-kind.js):
 //   - Hitting him is pointless: his GRIT and COOL are sky high (every hit does 1) and every damaging hit makes the armor hum brighter: it heals
 //     him and takes some Warmth away (ARMOR UP).
-//   - Warmth is the whole fight: DEFEND (Tom), PEP TALK (Amy), DANCE (Grace), SILLY (Rose) and the Tombo ff2 are favorites; ▼ Bag, MAKE HIM LAUGH,
+//   - Warmth is the whole fight: DEFEND (Tom), PEP TALK (Amy), DANCE (Grace), RASPBERRY (Rose) and the Tombo ff2 are favorites; ▼ Bag, MAKE HIM LAUGH,
 //     is the Un-Grump route (3 jokes). DEFEND also warms him on its own (he cannot stand watching somebody guard somebody).
 //   - Deedee is on the porch (chapter 14 scenes free her first). On his next turn after Warmth reaches half, or after the third joke lands, or on his
 //     fourth turn at the latest, she calls out: MOON & BACK heals the whole party and the last of the armor falls (b2WardenTurn).

@@ -312,9 +312,8 @@ function b2Portrait(id) { return (typeof PORTRAITS!=='undefined'&&PORTRAITS[id])
 // The weight to preview on the ribbon for what the cursor is on right now.
 function b2PreviewWeight() {
   const u=B2.actor; if(!u||battle.state!=='command') return null;
-  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; return s?(b2Diamond(u,s)?'instant':s.weight||'standard'):null; }
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; return s?(s.T?s.T.weight:b2Diamond(u,s)?'instant':s.weight||'standard'):null; }
   if(B2.ui==='target') return B2.pending?(b2Diamond(u,B2.pending)?'instant':B2.pending.weight||'standard'):null;
-  if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; return r?r.T.weight:'standard'; }
   return 'standard';
 }
 function b2RenderRibbon() {
@@ -491,44 +490,60 @@ function b2BriefLine(name,cost,a) {
   const roles=b2Roles(a).map(k=>B2_ROLES[k].tag).join(' + '),B=b2Brief(a);
   return [b2Title(name),cost,roles,B.scope,B.tags.join(', ')].filter(Boolean).join(' · ');
 }
-// The command cross has two move lists. ▲ ATTACK: the free basic move, then every skill that aims at enemies. ▶ HEAL: the
-// character's special first, then every skill that aims at friends (heals, buffs, party boosts). B2.tab says which one is open.
+// The command cross: ▲ ATTACK, ▶ HEAL, ◀ WARMTH, ▼ BAG. Every move and every Tombo sits in exactly one of the first three lists
+// (B2.tab says which is open). ATTACK: the free basic move, then everything that hurts. HEAL: heals, cures, revives and party
+// buffs. WARMTH: kind moves that cheer a monster up (they fill its Warmth bar, B2_KIND) and do no damage and no healing.
+// A Tombo (two or more friends, paid in HEART) goes in the list that matches what it does: damage, else kindness, else healing
+// (b2TomboCat). A move or Tombo can force its list with a `cat` field.
+const B2_TAB_NAME={attack:'ATTACK',heal:'HEAL',warmth:'WARMTH'};
 const b2Title=s=>{ s=String(s); return /[a-z]/.test(s)?s:s.toLowerCase().replace(/(^|[\s(\/-])([a-z])/g,(m,a,b)=>a+b.toUpperCase()); };
-function b2IsHeal(u,s) { return !!s&&(s===u.kit.special||(s!==u.kit.basic&&!!s.target&&!B2_FOE_TGT.includes(s.target))); }
-function b2TabRows(u,tab) {
-  if(!u||!u.kit) return [];
-  const k=u.kit;
-  return (tab==='heal'?[k.special,...k.skills.filter(s=>b2IsHeal(u,s))]:[k.basic,...k.skills.filter(s=>!b2IsHeal(u,s))]).filter(Boolean);
+const B2_TAB_DIR={attack:'up',heal:'right',warmth:'left'},B2_DIR_TAB={up:'attack',right:'heal',left:'warmth'};
+const b2KindKey=(u,s)=>{ const k=u.id+'.'+s.key; return B8_SIG_LEGACY[k]||k; };
+function b2MoveCat(u,s) {
+  if(!s) return null;
+  if(s.cat) return s.cat;
+  if(s===u.kit.basic) return 'attack';
+  const roles=b2Roles(s),kind=!!B2_KIND[b2KindKey(u,s)]||!!s.kindFoe;
+  if(B2_FOE_TGT.includes(s.target)) return kind&&!roles.includes('dmg')?'warmth':'attack';
+  return kind&&!roles.includes('heal')?'warmth':'heal';
 }
-function b2SkillRows(u) { return b2TabRows(u,B2.tab||'attack'); }
+const b2TomboCat=T=>T.cat||((T.stat&&T.mult)?'attack':T.kindV?'warmth':'heal');
+const b2TabMoves=(u,tab)=>(u&&u.kit?[u.kit.basic,u.kit.special,...u.kit.skills]:[]).filter(s=>s&&b2MoveCat(u,s)===tab);
+const b2TabTombos=(u,tab)=>u&&u.kit?b2TomboRows(u,true).filter(r=>b2TomboCat(r.T)===tab):[];
+// A row is a move, or a Tombo row ({T,with,label,why}); Tombos come after the moves.
+const b2TabRows=(u,tab)=>[...b2TabMoves(u,tab),...b2TabTombos(u,tab)];
+const b2SkillRows=u=>b2TabRows(u,B2.tab||'attack');
+const b2RowOk=(u,x)=>x.T?!x.why:u.vp>=b2Cost(u,x)&&!b2Shushed(u,x);
+const b2TabOn=(u,tab)=>tab==='attack'||b2TabRows(u,tab).some(x=>b2RowOk(u,x));
+const b2RowName=x=>x.T?x.T.name:x.name;
 function b2CostTag(u,s) { if(s===u.kit.basic) return '<b class="b2-gain">+1 VP</b>'; return b2Diamond(u,s)?'<b class="b2-free">FREE</b>':b2Cost(u,s)+' VP'; }
 function b2RenderCmd() {
   const box=$('b2-cmd'),low=$('b2-low'),u=B2.actor; if(!box) return;
   const cmdOn=battle.state==='command';
   if(!cmdOn||B2.ui==='cross'||B2.ui==='busy'||!u||u.side!=='party') {
-    const pu=u&&u.side==='party'?u:B2.party[0],k=pu.kit,off=!cmdOn?' off':'';
-    const img=b2Portrait(pu.id),sp=k.special,hr=b2TabRows(pu,'heal');
-    const healOn=hr.length&&!(cmdOn&&hr.every(s=>pu.vp<b2Cost(pu,s)));
-    box.innerHTML='<div class="b2-cross">'+
-      '<button type="button" class="b2-x up'+off+'" data-d="up"><span class="ar"></span>ATTACK<small>'+pu.vp+' VP</small></button>'+
-      '<button type="button" class="b2-x left'+(cmdOn&&b2TomboReady(pu)?'':' off')+'" data-d="left"><span class="ar"></span>TOMBO<small>'+(b2TomboRows(pu,true).length?Math.floor(B2.heart)+'% HEART':'NONE YET')+'</small></button>'+
+    const pu=u&&u.side==='party'?u:B2.party[0],off=!cmdOn?' off':'';
+    const img=b2Portrait(pu.id);
+    // One button per list. The small word is the first move in it (or NONE); ATTACK shows VP.
+    const tabBtn=(tab,d)=>{ const f=b2TabRows(pu,tab)[0],nm=f?b2Esc(b2Title(b2RowName(f))):'NONE';
+      return '<button type="button" class="b2-x '+d+(tab==='attack'?off:(cmdOn&&b2TabOn(pu,tab)?'':' off'))+'" data-d="'+d+'"><span class="ar"></span>'+B2_TAB_NAME[tab]+'<small'+(tab!=='attack'&&f&&b2RowName(f).length>11?' class="long"':'')+'>'+(tab==='attack'?pu.vp+' VP':nm)+'</small></button>'; };
+    box.innerHTML='<div class="b2-cross">'+tabBtn('attack','up')+tabBtn('warmth','left')+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
-      '<button type="button" class="b2-x right'+(healOn?off:' off')+'" data-d="right"><span class="ar"></span>HEAL<small'+(sp&&sp.name.length>11?' class="long"':'')+'>'+(sp?b2Esc(b2Title(sp.name)):'NONE')+'</small></button>'+
+      tabBtn('heal','right')+
       '<button type="button" class="b2-x down'+off+'" data-d="down"><span class="ar"></span>BAG<small>'+B2.bag.length+' items'+(B2.cfg&&B2.cfg.lab&&!B2.cfg.solo?' · EXIT':'')+'</small></button></div>';
     return;
   }
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>Back</span><em>B / Esc</em></button>';
   if(B2.ui==='skills') {
-    box.innerHTML='<div class="b2-grid">'+b2SkillRows(u).map((s,i)=>{ const c=b2Cost(u,s);
-      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(b2Title(s.name))+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join('')+back+'</div>';
+    // A Tombo row shows the faces of who the actor teams up with and its HEART price; greyed until the meter and the team are ready.
+    const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
+    const rows=b2SkillRows(u);
+    box.innerHTML='<div class="b2-grid">'+(rows.length?rows.map((s,i)=>{
+      if(s.T) return '<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(s.why?' no':'')+'" data-i="'+i+'">'+faces(s)+'<div class="b2-tbt"><span class="b2-sn">'+b2Esc(b2Title(s.T.name))+b2RoleIcons(s.T)+'</span><em>'+b2Esc(s.label)+' · '+s.T.cost+'% HEART'+((s.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(s.T.elem)+'</span>':'')+'</em></div></button>';
+      const c=b2Cost(u,s);
+      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(b2Title(s.name))+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join(''):'<p class="b2-empty">Nothing here yet.</p>')+back+'</div>';
   } else if(B2.ui==='bag') {
     const rows=b2BagList(u);
     box.innerHTML='<div class="b2-grid">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.name)+'</span><em>'+(r.role?'<span class="b2-role" style="background:'+B2_ROLES[r.role].color+'">'+B2_ROLES[r.role].tag+'</span>':'')+b2Esc(r.sub)+'</em></button>').join('')+back+'</div>';
-  } else if(B2.ui==='tombo') {
-    // Only Tombos the HEART meter can pay for; each shows the face of who the actor teams up with.
-    const rows=b2TomboRows(u);
-    const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
-    box.innerHTML='<div class="b2-list">'+(rows.length?rows.map((r,i)=>'<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(r.why?' no':'')+'" data-i="'+i+'">'+faces(r)+'<div class="b2-tbt"><span class="b2-sn">'+b2Esc(b2Title(r.T.name))+b2RoleIcons(r.T)+'</span><em>'+b2Esc(r.label)+' · '+r.T.cost+'% HEART'+((r.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(r.T.elem)+'</span>':'')+'</em></div></button>').join(''):'<p class="b2-empty">'+b2TomboEmpty(u)+'</p>')+back+'</div>';
   } else if(B2.ui==='inspect') {
     box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='target') {
@@ -537,7 +552,6 @@ function b2RenderCmd() {
       return '<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+sub+'</em></button>'; }).join('')+back+'</div>';
   }
 }
-function b2TomboEmpty(u) { return b2TomboRows(u,true).length?'Not enough HEART for a Tombo yet. The meter is at '+Math.floor(B2.heart)+'%.':'No Tombos yet. They unlock as the story goes.'; }
 // The ▼ Bag: the kind word a monster wants (COMPLIMENT, GREAT TAKE!...), Deedee's Warm Crust, every pocket item, then RUN.
 function b2BagList(u) {
   const rows=[];
@@ -571,10 +585,9 @@ function b2Render() {
 function b2Info() {
   if(battle.state!=='command'||!B2.actor) return;
   const u=B2.actor;
-  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; if(s) b2Msg(b2BriefLine(s.name,s===u.kit.basic?'+1 VP':b2Diamond(u,s)?'FREE (Diamond)':b2Cost(u,s)+' VP',s)); }
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[B2.sel]; if(s&&s.T) b2Msg(s.why?s.T.name+' · '+s.T.cost+'% HEART · '+s.why:'TOMBO · '+b2BriefLine(s.T.name,s.T.cost+'% HEART',s.T)); else if(s) b2Msg(b2BriefLine(s.name,s===u.kit.basic?'+1 VP':b2Diamond(u,s)?'FREE (Diamond)':b2Cost(u,s)+' VP',s)); else b2Msg('Nothing here yet.'); }
   else if(B2.ui==='bag') { const r=b2BagList(u)[B2.sel]; if(r&&r.item) b2Msg(r.lock||r.item.it.name+'. '+r.item.it.desc); else if(r&&r.crust) b2Msg(u.id==='nara'?'Warm Crust. Homemade, so Nara will eat it: heals 40% and POW +30%. Free; her turn goes on.':'Warm Crust from Deedee’s tray. Heals 20%. Free; the turn goes on. One per turn.'); else if(r&&r.praise) { const f=b2LiveFoes().find(x=>x.D.praise); b2Msg(f&&f.D.praise.need?r.name+' Free. Tell '+f.def.the+' what it never hears. '+(f.takes||0)+' of '+f.D.praise.need+' so far.':r.name+' Free. Say something nice. It counts as a favorite kind move.'); } else if(r) b2Msg('Leave this fight.'); }
   else if(B2.ui==='target') b2Msg((B2.pending&&B2.pending.name?B2.pending.name+': ':'')+'pick a target. Tap an enemy or a name, A to confirm, B to go back.');
-  else if(B2.ui==='tombo') { const r=b2TomboRows(u)[B2.sel]; if(r) b2Msg(r.why?r.T.name+' · '+r.T.cost+'% HEART · '+r.why:b2BriefLine(r.T.name,r.T.cost+'% HEART',r.T)); else b2Msg(b2TomboRows(u,true).length?b2TomboEmpty(u):'Tombos are Tom plus one partner. They unlock as the story goes.'); }
   else if(B2.ui==='inspect') { const f=b2LiveFoes()[B2.sel]; if(f) b2Msg(b2InspectText(f)); }
   else if(B2.ui==='cross') {
     // A boss winding up gets top billing, so the hint is there when it matters.
@@ -590,7 +603,7 @@ function b2Info() {
     else if(boss) b2Msg(cap(boss.def.the)+' will hit everyone next.'+(boss.shield?' Break its guard: '+(boss.shield.need-boss.shield.hits)+' more '+boss.shield.elems.map(e=>B2_ELEMS[e].name).join(' or ')+' hits.':' Heal up or GRUMBLE.'));
     else if(b2LiveFoes().some(f=>f.call&&b2Alive(f.call)&&f.call.st.boarding)) { const c=b2LiveFoes().find(f=>f.call).call; b2Msg('NOW BOARDING: '+c.name+'. '+(c===u?'You are called: anything you do now boards you (+2 VP).':c.name+' must act before the Last Call’s next turn, or the gate closes on them.'+(u.id==='tom'?' DEFEND them to walk them on.':''))); }
     else if(b2LiveFoes().some(f=>f.mirror)) { const m=b2LiveFoes().find(f=>f.mirror); b2Msg(u.name+'’s turn. MIRROR SIDE: '+B2_ELEMS[m.mirror].name.toUpperCase()+'. Those hits bounce back; anything else gets through.'); }
-    else b2Msg(u.name+'’s turn. Attack, Heal, Tombo or Bag. B to Inspect.'+b2TraitHint(u));
+    else b2Msg(u.name+'’s turn. Attack, Heal, Warmth or Bag. Tombos are inside them, paid in HEART. B to Inspect.'+b2TraitHint(u));
   }
 }
 
@@ -598,7 +611,7 @@ function b2Info() {
 function b2Choose(act) {
   const u=B2.actor;
   if(b2Cost(u,act)>u.vp) { sfx.nope(); b2Msg('Not enough VP. '+act.name+' costs '+act.vp+'; '+u.name+' has '+u.vp+'.'); return; }
-  if(b2Shushed(u,act)) { sfx.nope(); b2Msg(u.st.silenced&&u.kit.skills.includes(act)?u.name+' is Silenced: no skills for now. Only the free basic move works under Attack; the special under Heal and the Bag still work.':u.name+' is Shushed and cannot use Chatter moves right now.'); return; }
+  if(b2Shushed(u,act)) { sfx.nope(); b2Msg(u.st.silenced&&u.kit.skills.includes(act)?u.name+' is Silenced: no skills for now. Only the free basic move works under Attack; the special, Tombos and the Bag still work.':u.name+' is Shushed and cannot use Chatter moves right now.'); return; }
   const opts=b2TargetOptions(act,u);
   if(!opts.length) { sfx.nope(); b2Msg('Nobody to use that on.'); return; }
   sfx.select();
@@ -610,14 +623,14 @@ function b2Choose(act) {
 }
 function b2Cross(d) {
   const u=B2.actor;
-  if(d==='up') { sfx.select(); B2.tab='attack'; b2Open('skills'); }
-  else if(d==='right') { if(!b2TabRows(u,'heal').length) { sfx.nope(); return; } sfx.select(); B2.tab='heal'; b2Open('skills'); }
-  else if(d==='left') { sfx.select(); b2Open('tombo'); }
-  else if(d==='down') { sfx.select(); b2Open('bag'); }
+  if(d==='down') { sfx.select(); b2Open('bag'); return; }
+  const tab=B2_DIR_TAB[d]; if(!tab) return;
+  if(!b2TabRows(u,tab).length) { sfx.nope(); b2Msg('Nothing under '+B2_TAB_NAME[tab]+' for '+u.name+' yet.'); return; }
+  sfx.select(); B2.tab=tab; b2Open('skills');
 }
 function b2Pick(i) {
   const u=B2.actor;
-  if(B2.ui==='skills') { const s=b2SkillRows(u)[i]; if(s) { B2.sel=i; b2Choose(s); } }
+  if(B2.ui==='skills') { const s=b2SkillRows(u)[i]; if(s) { B2.sel=i; if(s.T) b2PickTombo(u,s); else b2Choose(s); } }
   else if(B2.ui==='bag') {
     const r=b2BagList(u)[i]; if(!r) return;
     B2.sel=i;
@@ -631,8 +644,6 @@ function b2Pick(i) {
     }
     else if(r.run) { sfx.select(); b2Do({run:true,weight:'standard'},null); }
     else if(r.item) { if(r.lock) { sfx.nope(); b2Msg(r.lock); return; } b2UseItem(r.item,i); }
-  } else if(B2.ui==='tombo') {
-    b2PickTombo(u,i);
   } else if(B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
   else if(B2.ui==='target') { const o=B2.opts[i]; if(o) { sfx.select(); b2Do(B2.pending,o); } }
 }
@@ -651,19 +662,15 @@ function b2UseItem(r,i) {
     b2Open('target',0);
   }
 }
-function b2PickTombo(u,i) {
-  {
-    const r=b2TomboRows(u)[i]; if(!r) return;
-    B2.sel=i;
-    if(r.why) { sfx.nope(); b2Msg(r.T.name+': '+r.why); return; }
-    const opts=b2TargetOptions(r.T,u);
-    if(!opts.length) { sfx.nope(); b2Msg('Nobody to use that on.'); return; }
-    sfx.select();
-    if(opts.length===1) { b2Do(r.T,opts[0]); return; }
-    B2.pending=r.T; B2.opts=opts; B2.prevUi='tombo'; B2.prevSel=i;
-    let s=0; if(B2.lastTarget) { const k=opts.findIndex(o=>o.targets.includes(B2.lastTarget)); if(k>=0) s=k; }
-    b2Open('target',s);
-  }
+function b2PickTombo(u,r) {
+  if(r.why) { sfx.nope(); b2Msg(r.T.name+': '+r.why); return; }
+  const opts=b2TargetOptions(r.T,u);
+  if(!opts.length) { sfx.nope(); b2Msg('Nobody to use that on.'); return; }
+  sfx.select();
+  if(opts.length===1) { b2Do(r.T,opts[0]); return; }
+  B2.pending=r.T; B2.opts=opts; B2.prevUi='skills'; B2.prevSel=B2.sel;
+  let s=0; if(B2.lastTarget) { const k=opts.findIndex(o=>o.targets.includes(B2.lastTarget)); if(k>=0) s=k; }
+  b2Open('target',s);
 }
 // Inspect (B on the command cross, or tap the portrait in the middle): what makes each enemy grumpy and how to cheer it up.
 function b2Inspect() {
@@ -673,12 +680,12 @@ function b2Inspect() {
 function b2Back() {
   if(battle.state!=='command') { b7Tap(true); return; }
   if(B2.ui==='cross') { b2Inspect(); }
-  else if(B2.ui==='skills'||B2.ui==='bag'||B2.ui==='tombo'||B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
+  else if(B2.ui==='skills'||B2.ui==='bag'||B2.ui==='inspect') { sfx.move(); b2Open('cross'); }
   else if(B2.ui==='target') { sfx.move(); const p=B2.prevUi||'cross'; B2.pending=null; b2Open(p,B2.prevSel||0); }
 }
 function b2Move(d) {
   const n=B2.ui==='skills'?b2SkillRows(B2.actor).length:B2.ui==='bag'?b2BagList(B2.actor).length:
-    B2.ui==='tombo'?b2TomboRows(B2.actor).length:B2.ui==='inspect'?b2LiveFoes().length:B2.opts.length;
+    B2.ui==='inspect'?b2LiveFoes().length:B2.opts.length;
   if(!n) return;
   const grid=B2.ui==='skills'||B2.ui==='bag';
   let s=B2.sel;
@@ -696,7 +703,7 @@ function b2Hover(i) {
 
 // Touch preview: on a phone the first tap on a row only highlights it and shows what it does; a tap on the
 // highlighted row uses it. (D-pad, keys, gamepad and mouse hover already preview by moving the cursor.)
-const B2_PREVIEW_LISTS=['skills','bag','tombo'];
+const B2_PREVIEW_LISTS=['skills','bag'];
 function b2Preview(i) {
   sfx.move(); b2Hover(i);
 }

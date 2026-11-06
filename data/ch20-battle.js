@@ -98,7 +98,7 @@ b2BossOpen=function(e) {
     e.count=0; e.acts7=[]; e.tomDone=false; e.tomDue=false; B2.benchFree=true; B2.stoneNote=false;
     return [()=>{ b2Msg('The Leviathan is gone. Inside it, in a glass replica of a living room, is a man in a long coat, sitting very small in an armchair.'); e.shake=.4; sfx.thud&&sfx.thud(); },2800,
       ()=>b2Msg('Julian: “Eternal Silence. Please. Please just let it be quiet.” Every ATTACK you have turns to grey stone.'),2800,
-      ()=>b2Msg('Nobody can hurt him, and nobody needs to. Care for him: DANCE, SILLY, PEP TALK, MOON & BACK, GRUMBLE, WARDROBE, PUPPY DOG EYES. BENCH CALL is almost free now.'),3000];
+      ()=>b2Msg('Nobody can hurt him, and nobody needs to. Care for him: DANCE, RASPBERRY, PEP TALK, MOON & BACK, GRUMBLE, WARDROBE, PUPPY DOG EYES. BENCH CALL is almost free now.'),3000];
   }
   return LE_b2BossOpen_ch20(e);
 };
@@ -228,7 +228,7 @@ function b2JulianTom(e) {
 
 TUTORIALS.ch20={tips:[
   {id:'barrier',who:'*',when:()=>B2.foes.some(f=>f.boss==='leviathan'),text:'Hit the Leviathan until a barrier locks. Then ▼ Bag, FAMILY RELAY breaks it. There are four. Every third turn it calls TIME WARP on everyone: heal after.'},
-  {id:'stone',who:'*',when:()=>B2.foes.some(f=>f.boss==='julian'),text:'Your attacks are stone. Use the care moves: DANCE, RASPBERRY, PEP TALK, MOON & BACK, GRUMBLE, WARDROBE, PUPPY DOG EYES. ▼ Bag, BENCH CALL, brings the rest in almost free.'}]};
+  {id:'stone',who:'*',when:()=>B2.foes.some(f=>f.boss==='julian'),text:'Your attacks are stone. Use the care moves, under ▶︎ HEAL and ◀︎ WARMTH: DANCE, RASPBERRY, PEP TALK, MOON & BACK, GRUMBLE, WARDROBE, PUPPY DOG EYES. ▼ Bag, BENCH CALL, brings the rest in almost free.'}]};
 
 // benchFree lasts one battle.
 const LE_b2Start_ch20=b2Start;

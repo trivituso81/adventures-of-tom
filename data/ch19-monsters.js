@@ -76,7 +76,7 @@ Object.assign(MONSTERS,{
     again:['Undeliverable. Round two.','Round {n}. Still returned.'],
     drop:{id:'pretzels',chance:.4,msg:'A pretzel slid out of the Dead Letter, a little bit squished. It had been mailed to somebody who was never home.'},
     vapor:['#e8dcb4','#c4b48a','#d9503f','#f4f0e6'],
-    hint:'An envelope with a face. Every third turn it stamps RETURN on one person and shoves them to the back. Kinetic and Chatter work; it loves Rose’s SILLY and Amy’s PEP TALK.'},
+    hint:'An envelope with a face. Every third turn it stamps RETURN on one person and shoves them to the back. Kinetic and Chatter work; it loves Rose’s RASPBERRY and Amy’s PEP TALK.'},
   rubberstamp:{id:'rubberstamp',coins:42,coinStep:5,name:'Rubber Stamp',the:'the Rubber Stamp',short:'Rubber Stamp',sprite:RUBBERSTAMP_SPRITE,pal:RUBBERSTAMP_PAL,scale:3,eyes:[[15,26],[25,26]],mouth:[20,34],
     hp:66,hpStep:7,atk:4,xp:44,xpStep:4,level:25,rank:'TOUGH',
     intro:'A wooden rubber stamp on two tiny feet marches down the aisle between the belts. Its ink pad says NO. It has said NO to everything it ever touched. It would like very much to say something else.',
