@@ -1,3 +1,8 @@
+## 2026-11-06 (356): Portrait dialogue box sized for 4 lines (`dlg4`)
+- Tom (08:14): the box had become too tall. Portrait `#dialog-text` fixed height goes from 5 lines to 4 (16px at 1.4 = 89.6px), so the box is 112px (was 134px, 13.1% of an 852px screen). Landscape unchanged.
+- Measured: 130 of 137 dialogue lines over 70 characters fit in 4 lines at 16px; 7 (mostly tutorial and help panels, 5 to 6 lines) now shrink their font via `fitDialogText`. index.html only (inline CSS, untagged).
+- Tested: portrait shot 393x852 (4 lines, portrait and name tag intact), smoke below.
+
 ## 2026-11-06 (355): Grace Cartwheel starts from her line, two full cartwheels (`gab2`)
 - Tom (08:02): no step forward; she stays in line, does two cartwheels to reach the monster, attacks, then shifts back as normal.
 - engine/grace-moves.js `G.cartwheelShow`: run-up removed. Lunge in place, then two cartwheels (ab_wheel_2 then ab_wheel_3, twice) travel from her spot to the foe, then the same landing, HI-YAH! kick, TA-DA! and hop home. Dust and sparkle beats moved to each touchdown. Line, damage, message unchanged. Tag `grace-moves.js?v=gab2`.
