@@ -2506,7 +2506,7 @@
     "docs/reference/underpaint/irongill-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Top row: 1 standing heavy in the shallows, grim, whiskers drooping. 2 flinching, mouth open wide, whiskers flung back, water splashing up. 3 rearing up tall out of the water, head raised, one whisker lifted high. Bottom row: 4 attack wind-up, mouth open, whiskers lashing wildly around the head, a ball of water forming at the mouth. 5 the attack, a big jet of water spraying from the open mouth. 6 the follow-through, leaning low and forward after the spit, head tilted down, mouth still open and dripping, whiskers swinging, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {

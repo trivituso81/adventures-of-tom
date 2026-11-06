@@ -147,6 +147,7 @@ Family friendly for ages 6 and up. Keep the flinch comic, never grim.`;
 const TAIL = `Flat solid magenta #FF00FF background, nothing else in the picture, no text.`;
 // Custom pose text for enemies whose four poses must be spelled out (Tom 11-05 16:10: the Soggy Sock came back with four near-identical poses).
 const POSES = {
+  irongill: `Top row: 1 standing heavy in the shallows, grim, whiskers drooping. 2 flinching, mouth open wide, whiskers flung back, water splashing up. 3 rearing up tall out of the water, head raised, one whisker lifted high. Bottom row: 4 attack wind-up, mouth open, whiskers lashing wildly around the head, a ball of water forming at the mouth. 5 the attack, a big jet of water spraying from the open mouth. 6 the follow-through, leaning low and forward after the spit, head tilted down, mouth still open and dripping, whiskers swinging, clearly different from pose 1.`,
   soggysock: `Top left: standing, drooping and weary, the top of the sock hanging over, mouth open. Top right: reeling from a hit, the whole sock bent far back and sideways, eyes squeezed shut, water flying off. Bottom left: attack wind-up, the sock stretched tall and twisted, the top raised high above its head, angry face, water dripping off. Bottom right: the attack, the top of the sock whipping forward and down in a big slap, angry face, water splashing out in front.`
 };
 function sheetShort(t, brushRef, id) {

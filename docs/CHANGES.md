@@ -1,3 +1,7 @@
+## 2026-11-05 (240): Custom pose prompt for Old Iron-Gill (Art Library only, no game files, no tag)
+- Tom (16:14): the Iron-Gill sheet needs its own prompt; his reject note: the last image repeated the first, it should be a variation on an attack like the fourth and fifth.
+- Cause (fact): the old sheet's 6th frame is a low settled crouch that looks like the stance, so the generic prompt gave pose 6 = pose 1. `POSES.irongill` in tools/art-library/enemy-prompts.js spells out all six poses (6 = follow-through leaning low after the spit, mouth open and dripping). `enemy-irongill` prompt updated in the json; status and rejects kept.
+
 ## 2026-11-05 (239): Enemy guide pictures now use the game's own frame cuts; custom pose prompt for the Soggy Sock (Art Library only, no game files, no tag)
 - Tom (16:10): the Soggy Sock sheet came back with four near-identical poses (he rejected it twice: the second should be reeling from the damage, the third and fourth different attack poses), and asked for a custom prompt.
 - Cause (fact): the old Soggy Sock sheet has 5 cells (the 5th is a spare stance) and the frames touch, so my gap-based cut made a wrong guide picture (two poses squeezed into one cell, a stance in the last). The generator followed the guide.
