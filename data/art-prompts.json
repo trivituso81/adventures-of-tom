@@ -943,8 +943,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Open Strings.\n\nRow 1:\n1. Marching proudly, a small violin tucked under one arm and the bow in the other hand.\n2. The violin tucked under her chin, the bow resting on the strings, eyes closed, serious.\n3. Sawing the bow hard across the strings, elbow high, teeth gritted, eyes squeezed shut.\n\nRow 2:\n4. Staring at the violin held out in front of her, mouth open, eyebrows up, startled.\n5. Shrugging with the violin in one hand and the bow in the other, a sheepish grin.\n6. A recital bow, bent forward at the waist, the violin and bow held at her sides, proud."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-handstand-contest-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954125157
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-handstand-contest",
    "tab": "Characters",
