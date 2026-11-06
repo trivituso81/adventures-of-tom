@@ -4927,7 +4927,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "boppy-fx-five-alarm-jar",
    "tab": "Characters",
    "group": "Boppy",
@@ -4936,7 +4936,16 @@
    "refs": [
     "art/raw/characters/boppy-ab-five-alarm-jar-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Five-Alarm Jar.\n\nItems:\n1. A large glass jar of dark pickled ghost peppers with a metal lid.\n2. A jar lid, seen from the front, metal.\n3. A small ghostly pale green wisp shaped like a floating ghost.\n4. A big round red alarm bell, ringing.\n5. Three curved red lines of sound (wide).\n6. A big burst of fire with a bright core.\n7. A ring of fire (wide).\n8. A small gray puff of smoke."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Five-Alarm Jar.\n\nItems:\n1. A large glass jar of dark pickled ghost peppers with a metal lid.\n2. A jar lid, seen from the front, metal.\n3. A small ghostly pale green wisp shaped like a floating ghost.\n4. A big round red alarm bell, ringing.\n5. Three curved red lines of sound (wide).\n6. A big burst of fire with a bright core.\n7. A ring of fire (wide).\n8. A small gray puff of smoke.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-fx-five-alarm-jar-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793994878680
+    }
+   ]
   },
   {
    "status": "draft",
