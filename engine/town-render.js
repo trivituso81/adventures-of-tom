@@ -27,12 +27,16 @@ function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap
 function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the size before the 11-01 evening changes
 // Tom, Grace and Rose are drawn 60% bigger inside painted houses and rooms (Tom 11-04 13:41), on top of everything below. Their walk sheets are baked
 // at about one source pixel per drawn device pixel (art/chars/*-ow.webp, k 7 to 10), so the larger size stays sharp. Feet stay on the same tile.
-// Two separate sizes for Tom, Grace, Rose and Tom carrying Rose (Tom 11-05 07:01: "the overworld should have its own height"):
+// Two separate sizes for the named cast (Tom, Grace, Rose, Tom carrying Rose, and since 11-05 every adult with a real height; OW_CAST_SIZED below) (Tom 11-05 07:01: "the overworld should have its own height"):
 //   OW_HOUSE_PARTY: inside painted houses and rooms. 1.6 (Tom's 11-04 13:41 decision, house1). size4 had cut it to 1.44 without being asked; restored.
 //   OW_STREET_PARTY: the overworld (streets and every map that is not a painted house). 1.6 (size3) then 1.44 (size4), now 10 percent smaller again.
 const OW_HOUSE_PARTY=1.6;
 const OW_STREET_PARTY=1.296;
-function owHouseParty(set) { return set&&(set===OW.tom||set===OW.grace||set===OW.rose||set===OW.tomRide)?(currentMap&&!currentMap.outside&&owInHouse()?OW_HOUSE_PARTY:OW_STREET_PARTY):1; }
+// 2026-11-05 (Tom: "using Tom as a baseline given each character's height, increase the other characters"): the named cast gets the same street and
+// house size as Tom, so each is drawn at real height next to him (each set's k in data/recruit-sprites.js and the *-hires-use.js files holds the height).
+const OW_CAST_SIZED=['tom','grace','rose','tomRide','tnb','amy','deedee','boppy','justin','jojo','olivia','michael','ellie','nara'];
+function owCastSet(set) { return OW_CAST_SIZED.some(id=>OW[id]===set); }
+function owHouseParty(set) { return set&&owCastSet(set)?(currentMap&&!currentMap.outside&&owInHouse()?OW_HOUSE_PARTY:OW_STREET_PARTY):1; }
 function owBoost(a,set) {
   const b=owBoostBase(a); return set?b*owHouseParty(set):b;
 }

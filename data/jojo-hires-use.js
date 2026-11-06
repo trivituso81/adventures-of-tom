@@ -9,6 +9,7 @@
   const O=JOJO_HIRES.ow,mk=d=>['stand','step1','step2'].map(n=>paintRows(O[d+'_'+n].slice(),'jojoOw',d+'_'+n,false));
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('right')};
   set.left=set.side.map(mirrorRows);
+  set.k=.930;   // real height 5'6 next to Tom 5'11 (42.0 visible rows); the sheet's stand is 42.0 rows (11-05)
   OW.jojo=set;
   // Battle frames (art/chars/jojo-bt.webp, K=2): feet on the bottom row, horizontally centred on the feet. The sheet draws the throw poses (x-step, reach,
   // release, follow) and the high-five facing RIGHT, run and the cheers facing LEFT; FACES says which way each one looks as drawn.

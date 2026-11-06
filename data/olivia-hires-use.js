@@ -11,5 +11,6 @@
     const rows=O[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'oliviaOw',d+'_'+n,flip); });
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('left',true)};
   set.left=set.side.map(mirrorRows);
+  set.k=.867;   // 5'5 (assumed, not given yet) next to Tom 5'11 (42.0 visible rows); the sheet's stand is 44.3 rows (11-05)
   OW.olivia=set;
 })();
