@@ -1,3 +1,10 @@
+## 2026-11-06 (396): Battle stance sheets for every character added to the Art Library (no game change)
+
+- Tom (15:47): add battle stance sheets for all characters so any of them can be replaced easily. 24 new Art Library entries in the Characters tab, at the top of each character's group: `<id>-battle-stance-1` (8 frames, 4 x 2) and `<id>-battle-stance-2` (6 frames, 3 x 2) for Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Olivia, Nara (dog, own poses) plus Michael and Jojo (new: they have no battle sheets yet, so their sheet 2 waits for their sheet 1). Same pose lists and method as the Young Boppy sheets and the sheets Tom painted.
+- Each entry attaches the hero and walk sheet (sheet 1 also another character's current sheet 1 for grid, angle and figure size only). Sheet 2 attaches the current sheet 1, so if Tom replaces sheet 1 he should replace sheet 2 too. 1 Generate press each.
+- Ids say "battle-stance", not "battle-sheet", on purpose: an approved picture is saved as `<id>-v<n>.png` and would overwrite Tom's painted `<id>-battle-sheet-1-v1.png`. Nothing here replaces anything in the game; installing an approved replacement is a rebake from the approved file when Tom asks.
+- Source `tools/art-library/battle-stance-prompts.js` (required from `char-prompts.js`); `data/art-prompts.json` got the 24 entries by direct insert (no other entry changed). Tests: `validate.js` OK (675 entries), art.html opens, Tom's and Michael's groups show the entries Ready / Blocked as intended, tag_check ok.
+
 ## 2026-11-06 (395): Grace's cartwheel really rotates; Rose runs to the monster before pointing (`wheelboop1`)
 Fact: Grace's six painted wheel frames were fine. `G.cartwheelShow` only alternated two handstand frames with no rotation; each of the two wheels is now one full turn (upright star, handstands through the middle, body turned about its centre), dust and gold bursts re-timed to the touchdowns. Rose's Boop walked over in her finger-out frame; she now runs over and points on arrival (message moved with it).
 
