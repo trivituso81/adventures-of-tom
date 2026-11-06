@@ -1,3 +1,7 @@
+## 2026-11-05 (263): Vance, Julian and the Julian hero card use finished boss paintings as style references, not the school key or the Mudling (Art Library only, no game files, no tag)
+
+Tom: remove the school picture and the Mudling, give it a few approved bosses that have the painted style. Vance refs: his guide plus Ironbelly v2, Leviathan v1, Red Pen v3 (attachments 2 to 4). Julian sheet refs: those three bosses only (the room painting is dropped). Julian hero refs: Tom hero (proportions) plus Ironbelly v2 (brushwork). Prompts renumbered. Other bosses keep style key plus finish picture (they worked).
+
 ## 2026-11-05 (262): Julian Vance: new hero-pose card, because text proportions were ignored twice (Art Library only, no game files, no tag)
 
 Tom: head still not bigger (prompt asked 25 percent, then 35 percent; the generator ignored both; the pictures show heads about 17 percent and smaller). STOP-LOSS applied: no third wording. Method change = the character pipeline: ONE hero pose first. New entry `enemy-julian-hero` (3:4, ref = Tom's approved hero `art/raw/characters/tom-hero-fresh-v1.png` for proportions and brushwork only, different man) in group Stillness Core. After Tom approves it, rewire `enemy-julian` refs to the approved hero (+ art/grands.webp for brushwork) and change its text to "same man and proportions as attachment 1". Facts: Julian v2 and Vance v3 came out thick-bodied and small-headed; Vance v4 came out realistic and thin on a hot pink background.
