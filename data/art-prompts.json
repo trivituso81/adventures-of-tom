@@ -2471,9 +2471,16 @@
    "group": "Whispering Marsh"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "last image is identical to first, whereas it should be a variation on an attach as in the foruth and fifth",
+     "from": "v1",
+     "at": 1793923927264
+    }
+   ],
    "id": "enemy-irongill",
    "tab": "Enemies",
    "title": "Old Iron-Gill: boss sheet, 6 frames facing right",
