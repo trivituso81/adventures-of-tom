@@ -7163,8 +7163,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-23a-forever-engine-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932164262
+    }
+   ],
    "rejects": [],
    "id": "bg-23a-forever-engine",
    "tab": "Battle",
