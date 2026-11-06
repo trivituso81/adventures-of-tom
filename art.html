@@ -116,8 +116,9 @@ const Q=new URLSearchParams(location.search);
 const MODEL='grok-imagine-image-2.0', KEEP=5;
 // Pictures Tom adds from his phone (for example a real photo). Kept in this browser only, never committed to the public repo. Entry field own:{slot,label}; the picture is sent FIRST.
 let OWN={};
-const ownOf=e=>e.own&&OWN[e.own.slot]||null;
+const ownSpecs=e=>!e.own?[]:(Array.isArray(e.own)?e.own:[e.own]); // one or several photo slots per entry, sent in the order listed (field `at` = position among the pictures)
 const ownUrl=r=>{ const k='own|'+r.slot+'@'+r.t; if(!URLS.has(k)) URLS.set(k,URL.createObjectURL(r.blob)); return URLS.get(k); };
+const ownHtml=(e,id)=>ownSpecs(e).map(o=>{ const r=OWN[o.slot]; return '<label>'+esc(o.label)+' (stays on this device, sent as picture '+((o.at||0)+1)+')</label><div class="refs">'+(r?'<div class="ref"><img src="'+ownUrl(r)+'" alt=""><button class="small" data-ownrm="'+esc(o.slot)+'" data-id="'+id+'">Remove</button></div>':'<div class="hint">Not added yet.</div>')+'</div><label class="ownadd"><input type="file" accept="image/*" data-ownadd="'+esc(o.slot)+'" data-id="'+id+'" style="display:none">'+(r?'Replace photo':'Add photo from this device')+'</label>'; }).join('');
 const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},set(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}},del(k){try{localStorage.removeItem(k);}catch(e){}}};
 const XAI_BASE=()=> (Q.get('xai')||LS.get('aot-art-relay')||'https://api.x.ai').replace(/\/+$/,'');
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
@@ -231,7 +232,7 @@ function renderCard(e){
   return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   '<label>Prompt (edit here, it is sent as written)'+(EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt?' <button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'')+'</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
-  (e.own?'<label>'+esc(e.own.label)+' (stays on this device, sent as picture '+((e.own.at||0)+1)+')</label><div class="refs">'+(ownOf(e)?'<div class="ref"><img src="'+ownUrl(ownOf(e))+'" alt=""><button class="small" data-ownrm="'+esc(e.own.slot)+'" data-id="'+id+'">Remove</button></div>':'<div class="hint">Not added yet.</div>')+'</div><label class="ownadd"><input type="file" accept="image/*" data-ownadd="'+esc(e.own.slot)+'" data-id="'+id+'" style="display:none">'+(ownOf(e)?'Replace photo':'Add photo from this device')+'</label>':'')+
+  ownHtml(e,id)+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
   '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16','2:1'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
   '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button></div>'+
@@ -314,8 +315,8 @@ async function generate(id,btn){
   const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
   const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false).map(rp);
-  const own=ownOf(e); if(e.own&&!own) return setMsg(id,'Add the picture first: '+e.own.label+'.',true);
-  const nRef=refPaths.length+(own?1:0);
+  const ownS=ownSpecs(e), ownR=ownS.map(o=>OWN[o.slot]||null); const miss=ownS.find((o,i)=>!ownR[i]); if(miss) return setMsg(id,'Add the picture first: '+miss.label+'.',true);
+  const nRef=refPaths.length+ownS.length;
   if(nRef>5) return setMsg(id,'At most 5 reference pictures. Untick '+(nRef-5)+'.',true);
   { const o=spendGet(); if(o.total+SPEND_PER+SPEND_REF*nRef>o.cap) return setMsg(id,'Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.',true); }
   btn.disabled=true; setMsg(id,'Working... this takes up to a minute.');
@@ -325,7 +326,7 @@ async function generate(id,btn){
     if(nRef){
       path='/v1/images/edits';
       body.images=[]; for(const p of refPaths){ let r=await fetch(p,{cache:'no-store'}), bl=null; if(r.ok) bl=await r.blob(); else if(LS.get('aot-gh-token')){ try{ bl=await ghFile(p); }catch(x){} } if(!bl) throw new Error('Could not load reference '+p+(p.indexOf('art/raw/')===0?'. That picture does not exist yet: approve the earlier step first.':'')); body.images.push({type:'image_url',url:await blobToDataUri(bl)}); }
-      if(own) body.images.splice(Math.min(e.own.at||0,body.images.length),0,{type:'image_url',url:await blobToDataUri(own.blob)});
+      for(let i=0;i<ownS.length;i++) body.images.splice(Math.min(ownS[i].at||0,body.images.length),0,{type:'image_url',url:await blobToDataUri(ownR[i].blob)});
     }
     let r; try{ r=await fetch(XAI_BASE()+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)}); }
     catch(err){ throw new Error('The browser could not reach the image service. Either the network is down or the service blocks browsers; if it is the second, a relay address is needed (the Relay field at the top).'); }
@@ -337,7 +338,7 @@ async function generate(id,btn){
     else if(d.url){ const ir=await fetch(d.url); if(!ir.ok) throw new Error('Could not download the picture.'); blob=await ir.blob(); }
     else throw new Error('The image service sent an unknown picture format.');
     { const o=spendGet(); o.total+=SPEND_PER+SPEND_REF*nRef; o.count+=1; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); }
-    const sentRefs=refPaths.slice(); if(own) sentRefs.splice(Math.min(e.own.at||0,sentRefs.length),0,'(own picture: '+e.own.slot+')');
+    const sentRefs=refPaths.slice(); ownS.forEach(o=>sentRefs.splice(Math.min(o.at||0,sentRefs.length),0,'(own picture: '+o.slot+')'));
     const n=await addResult(id,blob,prompt,sentRefs); RES[id]=await results(id);
     e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; refreshItem(id);
   }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; }
