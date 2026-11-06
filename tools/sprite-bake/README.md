@@ -108,3 +108,7 @@ python3 tools/sprite-bake/hires_install.py /tmp/hires 1.5 amy-battle amy-ko
 | bake_justin_battle.py, bake_jojo.py, bake_kids.py | 1 (sharpen only) | justin-*, jojo-bt; copy kids.webp by hand (its data file has its own format) |
 
 hires.py prints, per sheet, how much it had to copy back from the small sheet (edits painted after scaling). "NOT tracked" means it found no larger source and skipped the sheet. Then bump `ART_V` (`python3 tools/art-library/bump_tags.py <TAG>`), smoke, and look at a fight.
+
+## Walk sheets (`walksheet1`, 2026-11-05)
+
+Tom, Grace and Rose walk and stand with the nine figures of one painted 3 x 3 sheet each: `art/raw/characters/<id>-walk-sheet-v1.png` (rows front, back, side facing screen-left; columns stand, step A, step B; flat magenta). `tools/sprite-bake/walk_sheet_frames.py <id>` cuts them (magenta unmixed on the rim only, enclosed holes cleared) and writes a check strip to /tmp/w/. Used as painted: no head or body resizing, no mirroring; the pass frame is the stand. Bakes: `bake_tom_walk_v4.py`, `bake_grace_walk_v4.py`, `bake_rose.py` (OW_K 9). Because these scripts also write battle sheets at K 2, run them through hires.py and hires_install.py (table above) and confirm every battle sheet comes back byte for byte unchanged. The next character's sheet works the same way: save the sheet under that name and call `build('<id>')` from its bake.

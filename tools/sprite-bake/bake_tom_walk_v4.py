@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bake Tom (overworld walk frames are Tom's whole painted figures, see tools/sprite-bake/tom_whole_frames.py; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom (overworld walk frames are the nine figures of Tom's painted 3 x 3 walk sheet as painted, see tools/sprite-bake/walk_sheet_frames.py; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
 Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) (the old walk sheets are deleted), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
@@ -56,10 +56,10 @@ XSHEETS = [
 for i, names in enumerate(XSHEETS, 1):
     for nm, im in slice_sheet(os.path.join(SRC, f'tom-xposes-{i}-v1.png'), [[n.split(':')[1] for n in names]]).items():
         poses[next(n for n in names if n.split(':')[1] == nm).replace(':', '_')] = im
-# Walk: Tom's overworld frames are his ten whole painted figures as painted (tools/sprite-bake/tom_whole_frames.py), no head or body resizing.
+# Walk: Tom's overworld frames are the nine figures of his 3 x 3 walk sheet (art/raw/characters/tom-walk-sheet-v1.png, Tom 2026-11-05 22:56), as painted.
 from defringe import defringe
-from tom_whole_frames import build as _build_walk
-poses.update(_build_walk()[0])
+from walk_sheet_frames import build as _build_walk
+poses.update(_build_walk('tom'))
 
 # ---------------------------------------------------------------- head size (2026-11-01, Tom's call)
 # Every adult's face (hairline to chin) is Justin's 49 battle px, and Tom stands 5'11" = 143 px next to Justin's 6'4" = 153 px (BATTLE_SIZE.tom 1.43).
@@ -160,7 +160,7 @@ if os.environ.get('RULER'):               # RULER=name,name DIR=...: source pose
     sys.exit(0)
 for _n in list(poses):
     if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
-# Arrival stretch head factor (the overworld walk is unscaled whole paintings).
+# Arrival stretch head factor (the overworld walk is the walk sheet as painted).
 HEAD_KW = 1.626   # pinned: the arrival stretch art must not change
 for _n in list(poses):
     if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames keep the head as painted

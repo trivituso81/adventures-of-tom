@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Rose's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/rose-battle-v2.png and rose-walk-v2.png (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/rose-battle-v2.png and art/raw/characters/rose-walk-sheet-v1.png (flat magenta background, see README.md)
 Output: art/chars/rose-battle.webp, rose-ko.webp, rose-ow.webp  (painted frames, K x the size of the rows)
         data/rose-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/rose-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "3"))   # painted resolution multiples: battle, knocked out, overworld (OW_K env raises the overworld one)
+KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "9"))   # painted resolution multiples: battle, knocked out, overworld (the repo art is baked at 9)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=72)   # idle height in grid rows
@@ -35,9 +35,9 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'rose-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'rose-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Rose (Tom 2026-11-05 22:56), used as painted (no head growth, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('rose').items() if not k.endswith('_pass')})
 # Extra sheets (Oct 29): A = 12 battle poses, B = 4 shoulder-ride views and 4 overworld extras.
 A_NAMES = ['boop', 'boopBack', 'raspberry', 'boo', 'tiara', 'hug', 'balance', 'lookout', 'throwWind', 'throwRel', 'sitStory', 'sitTea']
 B_NAMES = ['ride_front', 'ride_back', 'ride_side', 'ride_cheer', 'crouch', 'jump', 'wave', 'hold']
@@ -289,7 +289,7 @@ ko_rects = pack(ko_big, os.path.join(ART, 'rose-ko.webp'))
 # ---------------------------------------------------------------- overworld set (painted at KW x)
 fo = args.ow_h * KW / poses['w_down_stand'].height
 print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (poses["w_down_stand"].height, fo))
-ow_big = {n[2:]: scaled_to(_kh.grow_head(v, K_OW, S_OW * _STAND_H), fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
+ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_')}     # walk sheet frames as painted
 rOW = poses['w_down_stand'].height / poses['y_hold'].height          # standing hug on sheet B matches the walk sheet's stand
 for k in ('crouch', 'jump', 'wave', 'hold'):
     ow_big['e_' + k] = scaled_to(_kh.grow_head(poses['y_' + k], K_OW, S_OW * _STAND_H / rOW), fo * rOW)
@@ -328,7 +328,7 @@ def mirror(rows):
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
 bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], _kh.body_frac(.41, K_BT, S_BT), _kh.body_frac(.68, K_BT, S_BT))
-ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], _kh.body_frac(.33, K_OW, S_OW), _kh.body_frac(.64, K_OW, S_OW))
+ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .33, .64)   # walk sheet frames as painted (no head growth)
 
 # ---------------------------------------------------------------- eyes (for the low-health bruise and KO overlays)
 def find_eye(rows, pal):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Bake Grace (v4 walk, 2026-11-04: all nine overworld frames from ONE 3 x 3 sheet, grace-walk-sheet-v1.png). Previous header: Bake Grace (v3 walk, 2026-11-03): battle exactly as bake_grace.py, overworld from the nine single walk frames (CHANGES 120). Original text: Bake Grace's two painted pose sheets into the game (robust magenta cut: her violet leotard is close to the background colour): painted atlases (webp) plus small quantized row strings.
+"""Bake Grace (walk 2026-11-05 22:56: all nine overworld frames from Tom's painted 3 x 3 sheet art/raw/characters/grace-walk-sheet-v1.png, as painted, tools/sprite-bake/walk_sheet_frames.py). Previous header: Bake Grace (v3 walk, 2026-11-03): battle exactly as bake_grace.py, overworld from the nine single walk frames (CHANGES 120). Original text: Bake Grace's two painted pose sheets into the game (robust magenta cut: her violet leotard is close to the background colour): painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/grace-battle-v2.png and grace-walk-v2.png (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/grace-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/grace-walk-sheet-v1.png
 Output: art/chars/grace-battle.webp, grace-ko.webp, grace-ow.webp  (painted frames, K x the size of the rows)
         data/grace-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -35,41 +35,10 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'grace-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']], robust=True).items():
     poses['b_' + nm] = im
-from defringe import defringe
-import numpy as _np
-from scipy import ndimage as _ndi
 
-def _lilac_start(im):
-    """First row where the lilac sweater shows (blue above red, red above green, at least 20 px of it)."""
-    a = _np.array(im).astype(int)
-    m = (a[:, :, 3] > 200) & (a[:, :, 2] > a[:, :, 1] + 35) & (a[:, :, 0] > a[:, :, 1] + 35) & (a[:, :, 0] < a[:, :, 1] + 85) & (abs(a[:, :, 2] - a[:, :, 0]) < 30)
-    cnt = _ndi.uniform_filter1d(m.sum(1).astype(float), 5)      # smoothed so stray purple fringe pixels in the hair do not count
-    rows = _np.where(cnt >= 40)[0]
-    return int(rows[0]) if len(rows) else 0
-
-def cut_walk_sheet(path):
-    """One 3 x 3 walk sheet (grace-walk-sheet-v1.png, 2026-11-04) cut by magenta gaps.
-    Two keyings of the same pixels: the wide one (original robust key) gives the cleanest hair edge but its pink hunt eats
-    lilac sweater highlights; the narrow one (rim_only=3) keeps the sweater intact. Head and hair rows (above the sweater, minus a
-    margin) come from the wide one, everything below from the narrow one, with a short blend. No painted part is moved or scaled."""
-    names = [['down_stand', 'down_step1', 'down_step2'], ['up_stand', 'up_step1', 'up_step2'], ['left_stand', 'left_step1', 'left_step2']]
-    wide = slice_sheet(path, names, robust=True)
-    narrow = slice_sheet(path, names, robust=True, rim_only=3)
-    out = {}
-    for nm in wide:
-        w, n = _np.array(wide[nm]).astype(float), _np.array(narrow[nm]).astype(float)
-        assert w.shape == n.shape, nm
-        split = max(8, _lilac_start(narrow[nm]) - 6)
-        t = _np.clip((_np.arange(w.shape[0]) - split) / 8.0, 0, 1)[:, None, None]
-        out[nm] = defringe(Image.fromarray((w * (1 - t) + n * t).clip(0, 255).astype(_np.uint8), 'RGBA'))
-        print('  cut %-11s split row %d' % (nm, split))
-    return out
-
-# 2026-11-05 10:14 (Tom: Grace's new walking and standing frames): the nine overworld frames are built ONLY from the ten pictures Tom supplied
-# (seven headless bodies and three heads, tools/sprite-bake/grace_walk_frames.py). The old 3 x 3 walk sheet is no longer read. Only alteration:
-# step up and step down (back and front step 2) are the mirrored body of step 1.
-from grace_walk_frames import build as _build_walk
-poses.update(_build_walk()[0])
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Grace (Tom 2026-11-05 22:56), used as painted: no head or body resizing, no mirroring.
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('grace').items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- paint-in (the image AI refuses injury wording, so the bake adds it)
 from PIL import ImageDraw, ImageFilter

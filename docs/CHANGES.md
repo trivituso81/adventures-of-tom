@@ -1,3 +1,12 @@
+## 2026-11-05 (288): New walking animations for Tom, Grace and Rose (`walksheet1`)
+- Tom (22:56): "new walking animations for Tom, Grace, Rose" with one painted 3 x 3 walk sheet each (rows front, back, side; columns stand, step A, step B) and a hero picture each.
+- All nine figures of each sheet are the overworld stand and walk frames, used as painted: no head or body resizing, no mirroring, every frame at the sheet's own scale. Pass frame = stand; walking right = the engine's mirror of walking left. Cutter: `tools/sprite-bake/walk_sheet_frames.py` (magenta unmixed on the outline only, magenta holes between legs and fingers cleared). Called by bake_tom_walk_v4.py, bake_grace_walk_v4.py, bake_rose.py.
+- Sizes (game rows, standing): Tom 42.0, Grace 39.0 (both unchanged), Rose 35.0 (was 35.2, so `OW.rose.k` .672 to .676 in data/recruit-sprites.js). Every one still at real height next to Tom.
+- Battle sheets untouched: rebaked through hires.py and hires_install.py and every battle sheet came back byte for byte the same. Arrival stretch, Tom carrying Rose and Rose's extra overworld poses unchanged.
+- Sources: art/raw/characters/<id>-walk-sheet-v1.png; heroes saved as <id>-hero-ref-v1.png (not Art Library entries).
+- Purged (replaced walks): tom_whole_frames.py, grace_walk_frames.py, bake_grace_walk_v3.py, art/raw/characters/tom-whole-*.png, grace-body-*.png, grace-head-*.png, src/grace-walk-sheet-v1.png, src/grace-walk-v3-*.png, src/rose-walk-v2.png. Grep: 0 references outside this history.
+- Known: outfit recolouring finds no shirt colour on the new Tom and Rose walk frames (Grace already had none), so an outfit colour change does not tint them on the map.
+- Tests: tag_check ok, `IDS=tom,grace,rose` smoke FAILS [], Square portrait and landscape screenshots. Not seen on a real phone.
 ## 2026-11-05 (287): Battle meters repainted to match the painted look (`meter1`)
 - Tom (21:14): "redo the meters in battle so they blend more with the painted aesthetic and color pallete and design elements."
 - Before: flat pixel blocks with black borders (enemy HP and Warmth on the stage, party HP, VP pips, HEART hearts, crust tokens, Rose Mode HP).

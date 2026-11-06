@@ -7,11 +7,11 @@ OW.deedee.k=1;   // painted Deedee is baked at Tom's exact height (41.7 rows) an
 // Real heights (Tom 11-04: "adult and child sizes are not properly applied"). Every sheet is baked to roughly the same height in rows, so each
 // painted set is drawn at its real height next to Tom (5'11 = 71 in): TNB 5'10, Amy and Deedee 5'5, Boppy 5'7, Grace 4'2, Rose 3'4 (Justin 6'4: data/justin-hires-use.js).
 // k = (real inches / 71) x Tom's visible rows / the set's own visible rows, measured on each stand frame.
-// 2026-11-05 (Tom: "using Tom as a baseline given each character's height"): re-measured against Tom's whole-figure walk (42.0 visible rows, tomwhole1).
+// 2026-11-05 (Tom: "using Tom as a baseline given each character's height"): re-measured against Tom's walk (42.0 visible rows). 2026-11-05 22:56 new walk sheets for Tom, Grace, Rose (walksheet1): Tom 42.0, Grace 39.0 unchanged, Rose 35.0 (k .672 to .676).
 if(TOM_OW.hires) OW.tom.k=1;
 if(typeof TNB_OW!=='undefined'&&TNB_OW.hires) OW.tnb.k=.920;
 if(GRACE_OW.hires) OW.grace.k=.758;
-if(ROSE_OW.hires) OW.rose.k=.672;
+if(ROSE_OW.hires) OW.rose.k=.676;
 OW.amy.k=.925; OW.deedee.k=.922; OW.boppy.k=.950;
 // Recruit battle sprites come from data/recruit-rig.js: left-facing, same outline and shading as Tom, Grace and Rose.
 const RECRUIT_EXPR={amy:'clap',deedee:'spread',boppy:'hip',tnb:'hip'};
