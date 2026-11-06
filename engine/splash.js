@@ -550,11 +550,13 @@ const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
 // Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
 const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130};
-// Landscape (iPad): one spread-out line in design units (x, feet). Later in the list draws on top.
-const SPLASH_LAND={cx:520,feet0:1222,sx:.92,sy:.7,span:860,tall:331,fracW:.70,fracH:.42,feetY:.79};
+// Landscape and any wide window (Tom 2026-11-06 11:43): Tom stands dead centre under the logo (x 520 = the screen centre). To his left: TNB, then Nara.
+// To his right, front row: Rose, Grace, Deedee, Boppy. Amy and Justin stand behind Rose and Grace. Design units (x = centre, feet = baseline); later in the list draws on top.
+const SPLASH_LAND={cx:520,feet0:1222,sx:1,sy:.7,span:890,tall:331,fracW:.74,fracH:.42,feetY:.79};
 const SPLASH_SPOTS=[
-  {id:'justin',x:740,feet:1150},{id:'tnb',x:150,feet:1198},{id:'boppy',x:890,feet:1222},{id:'grace',x:510,feet:1215},
-  {id:'tom',x:290,feet:1222},{id:'rose',x:400,feet:1204},{id:'amy',x:680,feet:1222},{id:'deedee',x:790,feet:1258},{id:'nara',x:595,feet:1262}
+  {id:'justin',x:705,feet:1150},{id:'amy',x:605,feet:1150},
+  {id:'nara',x:304,feet:1250},{id:'tnb',x:405,feet:1222},{id:'tom',x:520,feet:1222},
+  {id:'rose',x:612,feet:1222},{id:'grace',x:695,feet:1222},{id:'deedee',x:791,feet:1222},{id:'boppy',x:904,feet:1222}
 ];
 // Portrait (iPhone tuning, Tom 2026-11-06): two rows. Front, left to right: Nara, TNB, Tom, Rose, Grace.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further

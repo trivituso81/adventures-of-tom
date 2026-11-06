@@ -1,3 +1,8 @@
+## 2026-11-06 (367): Welcome screen, wide layout: Tom centred under the logo (`welcomecast1`)
+
+- Fact (Tom 11:43): on larger windows (wider than tall) Tom stands dead centre below the logo. Left of him: TNB, then Nara. Right of him, front row: Rose, Grace, Deedee, Boppy. Amy and Justin stand behind Rose and Grace.
+- Changed `SPLASH_SPOTS` and `SPLASH_LAND` in `engine/splash.js` (spacing now 1:1, group scaled a little larger). Portrait phone layout untouched.
+
 ## 2026-11-06 (366): Deedee ability install: 14 painted sheets, old frames purged (`deedeeinst1`)
 
 - Fact (Tom 10:54): Dish-Towel Flick and Garden Shower still showed her old frames. Cause: her 14 approved `deedee-ab-*` sheets were never installed (same gap TNB and Nara had). All 14 moves now play painted frames from `art/chars/deedee-ab.webp` (`data/deedee-ab.js`, 84 frames, only the ones the moves use, mirrored `F`). Each sheet is sized to her battle frames (median body size).
