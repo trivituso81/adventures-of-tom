@@ -74,8 +74,19 @@ def grid(path, ncols, nrows):
             im = Image.fromarray(cut, 'RGBA'); out.append(im.crop(im.getbbox()))
     return out
 
-def build(cid):
+# Overworld head match (Tom 2026-11-06 02:14: "all adult heads should be the same size"). cid: (head px = top of hair or cap to chin in the painted
+# sheet, factor). Only the head rows are shrunk about the chin (kidhead.grow_head); the body keeps its painted size, so the bake must scale from
+# UNWARPED_H (the sheet's own stand height), never from the shortened figure. Target head about 10.8 game rows for every adult.
+HEAD_FIX = {'justin': (116, 0.68), 'tnb': (115, 0.81), 'boppy': (118, 0.86)}
+UNWARPED_H = {}
+
+def build(cid, fix=False):
     figs = grid(os.path.join(RAW, f'{cid}-walk-sheet-v1.png'), 3, 3)
+    UNWARPED_H[cid] = figs[0].height
+    if fix and cid in HEAD_FIX:
+        from kidhead import grow_head
+        px, k = HEAD_FIX[cid]
+        figs = [grow_head(f, k, px) for f in figs]
     out = {}
     for r in range(3):
         for c in range(3):

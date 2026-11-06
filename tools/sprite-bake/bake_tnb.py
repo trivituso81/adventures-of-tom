@@ -206,8 +206,8 @@ for _n in list(poses):
     if _kx != 1.0: poses[_n] = bulk_body(poses[_n], _n, int(round((_c - _t) * _k)), _kx)
     poses[_n], _ = body_width(poses[_n], int(round((_c - _t) * _k)), BODY_W, fade=BODY_FADE)
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for TNB (Tom 2026-11-05 23:25), used as painted (no head warp, no body widening, no mirroring).
-from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('tnb').items() if not k.endswith('_pass')})
+from walk_sheet_frames import build as _build_walk, UNWARPED_H
+poses.update({k: v for k, v in _build_walk('tnb', fix=True).items() if not k.endswith('_pass')})
 # Battle: TNB's two painted battle sheets (art/raw/characters/tnb-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-05 23:40), used as painted
 # (no head warp, no body widening). battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
 from battle_sheet_frames import build as _build_battle, SLOTS
@@ -380,7 +380,7 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'tnb-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = args.ow_h * KW / UNWARPED_H['tnb']
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

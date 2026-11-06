@@ -28,8 +28,8 @@ os.makedirs(ART, exist_ok=True)
 
 poses = {}
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Justin (Tom 2026-11-05 23:23), used as painted (no head warp, no mirroring).
-from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('justin').items() if not k.endswith('_pass')})
+from walk_sheet_frames import build as _build_walk, UNWARPED_H
+poses.update({k: v for k, v in _build_walk('justin', fix=True).items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -167,7 +167,7 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = args.ow_h * KW / UNWARPED_H['justin']
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)
