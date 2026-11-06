@@ -3586,8 +3586,16 @@
    "group": "Terminal Infinity"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-redeye-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793926350564
+    }
+   ],
    "rejects": [],
    "id": "enemy-redeye",
    "tab": "Enemies",
