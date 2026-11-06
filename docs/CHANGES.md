@@ -1,3 +1,8 @@
+## 2026-11-06 (345): Emotions batch 6: chapters 18 to 20 show mood faces and poses (`emo13`)
+- `python3 tools/emotion-apply.py 1 ... 20`: chapter 18 found 40 of 40, chapter 19 99 of 99, chapter 20 86 of 86; `EMO_CHAPTERS` now 1 to 20, `data/emotion-moods.js` 1547 keys. The `CH19_MEM`, `CH19_KEEP` and `CH20_DOORS` tables play through `{talk:...}` steps (S.talk), so they reach the mood system.
+- Tested: all 1563 tagged lines in chapters 1 to 20 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
+- Tags: `emo13` (data/emotion-moods.js).
+
 ## 2026-11-06 (344): Welcome screen on iPhone: back row a step further back (`welcome7`)
 - Tom (07:25): "The second row just needs to be moved back like a step backwards".
 - `SPLASH_PORT.depth` 90 to 125 design units (back row feet sit higher on the plaza, feet fully visible behind the front row), whole group nudged down (`feetY` .74) so Justin's hair stays clear of the logo. Heights unchanged.
