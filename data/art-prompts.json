@@ -3202,7 +3202,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "boppy-ab-patient-angler",
    "tab": "Characters",
    "group": "Boppy",
@@ -3214,7 +3214,16 @@
     "art/raw/characters/boppy-battle-sheet-1-v1.png",
     "art/raw/characters/boppy-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Patient Angler.\n\nRow 1:\n1. Sitting on a folding stool holding a fishing rod across his knees, calm and relaxed.\n2. Sitting with the rod held out in front of him, eyes on the line, perfectly still.\n3. Leaning forward a little, eyes sharp, both hands tightening on the rod.\n\nRow 2:\n4. Yanking the rod back hard with both hands, mouth open, eyes wide.\n5. Standing and leaning far back with the rod bent, boots planted wide, a huge grin.\n6. Reeling in steadily with one hand on the reel, a proud easy smile."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Patient Angler.\n\nRow 1:\n1. Sitting on a folding stool holding a fishing rod across his knees, calm and relaxed.\n2. Sitting with the rod held out in front of him, eyes on the line, perfectly still.\n3. Leaning forward a little, eyes sharp, both hands tightening on the rod.\n\nRow 2:\n4. Yanking the rod back hard with both hands, mouth open, eyes wide.\n5. Standing and leaning far back with the rod bent, boots planted wide, a huge grin.\n6. Reeling in steadily with one hand on the reel, a proud easy smile.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-ab-patient-angler-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793994434876
+    }
+   ]
   },
   {
    "status": "draft",
