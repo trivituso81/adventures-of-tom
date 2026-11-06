@@ -2329,8 +2329,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Rise and Shine.\n\nRow 1:\n1. Walking forward, arms swinging, a disapproving look.\n2. Reaching up high with one hand, gripping a window shade cord, the other hand on her hip.\n3. Yanking the cord down hard with both hands, knees bent, mouth open.\n\nRow 2:\n4. Throwing both arms up high, a big bright morning smile.\n5. One hand shading her eyes, squinting happily, the other hand on her hip.\n6. Clapping her hands once, mouth open in a cheery \"up and at 'em\"."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/deedee-ab-beanie-master-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793956284095
+    }
+   ],
    "rejects": [],
    "id": "deedee-ab-beanie-master",
    "tab": "Characters",
@@ -2343,7 +2351,7 @@
     "art/raw/characters/deedee-battle-sheet-1-v1.png",
     "art/raw/characters/deedee-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Beanie Master.\n\nRow 1:\n1. Walking forward, a hand on her stomach, a puzzled frown.\n2. Stopped, both hands on her stomach, eyes wide, lips pressed tight.\n3. Turned away, glancing back over her shoulder, eyebrows raised, a guilty look.\n\nRow 2:\n4. Both hands clapped over her mouth, eyes wide, mid \"oh my!\"\n5. Waving one hand in front of her face, the other hand over her mouth, an embarrassed giggle.\n6. Hands clasped at her chest, cheeks pink, a sheepish grin, shoulders raised."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose, the expression and the stink cloud change, as each frame says.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. The stink cloud is painted in the same style as the character and stays inside its own cell.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she turns away or looks back.\n\nThe move: Beanie Master. She calls a very stinky fart a \"beanie\". It is a silly, harmless family joke: a funny cartoon stink cloud, a sickly green-yellow with soft swirls and a few wavy stink lines, painted solid and opaque so it never blends into the magenta background. No people or objects are damaged. The joke is in her face and body, not the cloud. The cloud is new in frame 3 and grows from there. It is small in frame 3 and fills the space behind her by frame 6. It is never pink, purple or magenta.\n\nRow 1:\n1. Walking forward, a hand on her stomach, a puzzled frown. No cloud yet.\n2. Stopped, both hands on her stomach, eyes wide, lips pressed tight. No cloud yet.\n3. Turned away, glancing back over her shoulder, eyebrows raised, a guilty look. A small green-yellow stink puff has just appeared behind her.\n\nRow 2:\n4. Both hands clapped over her mouth, eyes wide, mid \"oh my!\" A bigger swirling stink cloud billows behind her.\n5. Waving one hand in front of her face, the other hand over her mouth, an embarrassed giggle. The big cloud drifts around her with wavy stink lines.\n6. Hands clasped at her chest, cheeks pink, a sheepish grin, shoulders raised. The cloud is large, soft and starting to thin out behind her."
   },
   {
    "status": "approved",
