@@ -2386,8 +2386,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Grandma Squeeze.\n\nRow 1:\n1. Arms flung open wide from far away, up on her toes, an \"oh come here\" face.\n2. Hurrying forward with arms still wide open, a huge loving smile.\n3. Arms wrapped tight around the air in a big squeezy hug, eyes shut, rocking side to side.\n\nRow 2:\n4. Still hugging the air, cheek tilted, a squeezed happy face.\n5. Leaning in with puckered lips for a kiss on the cheek, eyes closed.\n6. Standing back, both hands clasped at her chest, a bright red lipstick smile, beaming."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/deedee-ab-moon-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793956366360
+    }
+   ],
    "rejects": [],
    "id": "deedee-ab-moon-ult",
    "tab": "Characters",
@@ -2400,7 +2408,7 @@
     "art/raw/characters/deedee-battle-sheet-1-v1.png",
     "art/raw/characters/deedee-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: To the Moon and Back.\n\nRow 1:\n1. Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.\n2. Arms spread wide, gathering everyone in for a group hug, a warm smile.\n3. Both hands cupped together held up high above her head, offering something up, eyes shining.\n\nRow 2:\n4. Watching upward, both hands pressed over her heart, mouth open in awe.\n5. Arms wrapped around herself, eyes closed, smiling softly.\n6. Blowing a kiss forward from her open palm, puckered lips, eyes twinkling."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: To the Moon and Back.\n\nRow 1:\n1. Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.\n2. Arms spread wide for a group hug, a warm smile.\n3. Both hands cupped together held up high above her head, offering something up, eyes shining.\n\nRow 2:\n4. Watching upward, both hands pressed over her heart, mouth open in awe.\n5. Arms wrapped around herself, eyes closed, smiling softly.\n6. Blowing a kiss forward from her open palm, puckered lips, eyes twinkling."
   },
   {
    "status": "draft",
