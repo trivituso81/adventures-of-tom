@@ -436,7 +436,6 @@ const box=list=>{ const P=list.map(f=>b2FoeCanvasPos(f)); if(!P.length) return {
 const steam=(x,y,u,n=4,c='#fff6dc')=>{ if(DFX.steam(x,y,u,Math.min(n,3),34)) return; for(let k=0;k<n;k++) { const q=(u*1.3+k*.23)%1; gfx.globalAlpha*=1-q; E(x-12+k*8+Math.sin(q*6+k)*4,y-q*34,4+q*3,4+q*3,c); gfx.globalAlpha/= (1-q)||1; } };
 const CREAM='#fff8e8',GOLD='#ffe08a',ROSE='#ff9ac0',APRON='#f6e6c4',WOOD='#b88848',TEAL='#7fcfc0',BLUE='#9fc4f0',CRUST='#d9a05a',RED='#e0402e';
 const D=RECRUIT_MOVES.deedee;
-const IMPACT=550;   // ms after beat 2 starts (beat 1 is 500)
 const UI=1.05/1.8;  // where the impact sits in a 1.8 s scene started on beat 1
 const NW_LIST=[];
 const nowarp=(...k)=>NW_LIST.push(...k);
@@ -484,7 +483,6 @@ SC.d_mittwave=(s,u)=>{ const B=box(s.foes||[]),q=ez(u/.5),cx=(B.x0+B.x1)/2,cy=(B
   gfx.strokeStyle='rgba(255,180,90,.9)'; gfx.lineWidth=6; gfx.strokeRect(cx-w,cy-h,w*2,h*2); gfx.globalAlpha*=.3; R(cx-w,cy-h,w*2,h*2,'#ffb45a'); if(u>.2&&u<.7) { gfx.globalAlpha=fade(u,.6); label('ENOUGH',cx,B.y0-26,GOLD,2); } };
 
 // Brisk Means Brisk: a perfectly respectable walking posture, an air-thump through the enemy, a tiny SIGHTSEEING sign spinning in her wake.
-SC.d_airthump=(s,u)=>{ const x=GX,y=GY-20,q=ez(u/.4); gfx.globalAlpha=fade(u,.7)*(1-q*.5); for(let k=0;k<3;k++) ring(x-10+k*6,y,8+q*22+k*4,14+q*26+k*4,2,CREAM); if(u>.3) label('WHUMP',x,y-50,CREAM,2); };
 SC.d_sightsee=(s,u)=>{ const p=gpos(),x=p.cx+34,y=p.base-14,g=ez(u/.2),rot=u*7; gfx.globalAlpha=fade(u,.85); RO(x-1,y-6,2,22,WOOD); gfx.save(); gfx.translate(x,y-10); gfx.scale(Math.cos(rot)*g,g); RO(-30,-8,60,16,CREAM); if(Math.abs(Math.cos(rot))>.4) label('SIGHTSEEING',0,-2,'#2b2a26',1); gfx.restore(); };
 
 // Garden Shower: a nozzle labeled GENTLE checked twice; a wide dotted shower sweeps once across the row, tipping the targets like stems.
@@ -515,36 +513,6 @@ SC.d_breathring=(s,u)=>{ const x=s.x+(s.foe?44:-44),y=s.y-s.h*.6,ph=u<UI?ez(u/UI
   if(u>.78) heart(s.x,s.y-s.h-10,5,'#ff6b9a'); };
 
 // ---------- Moves ----------
-D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Deedee straightens her badge. The sticker says NUT.'); say('deedee','registered_nut'); scene('d_badge',1.0,{}); pose(fx,'expr',.9); },
-    500,()=>{ scene('d_pulse',1.4,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); sfx.beep&&sfx.beep(); },
-    IMPACT,()=>{ E2.apply(); sfx.heal(); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
-    300,kindLine(t,'The bedside manner is brisk and affectionate.'),()=>checkEnemy()); };
-D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
-  enqueue(()=>{ setMessage('Deedee angles the pan. One corner is clearly the best corner.'); say('deedee','corner_piece'); scene('d_cornerpan',1.9,{}); pose(fx,'expr',1.0); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ scene('d_dishout',1.1,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); E2.apply(); sfx.heal(); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
-    300,kindLine(t,'Somehow everybody is her favorite.'),()=>checkEnemy()); };
-D.oven_mitt_ultimatum=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Deedee puts on the serious mitts. Slowly.'); say('deedee','oven_mitt_ultimatum'); scene('d_mitts',1.9,{}); pose(fx,'expr',.6); },
-    500,()=>{ sfx.charge(); },
-    IMPACT,()=>{ scene('d_mittwave',.8,{foes:foesOf(E2)}); sfx.thud(); sfx.bonk(); battle.flashEnemy=.3; battle.shakeEnemy=.5; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); },
-    300,res(E2)+'Deedee has used the serious mitts.',()=>checkEnemy()); };
-D.brisk_means_brisk=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Deedee sets off. Respectable posture. Arms moving.'); say('deedee','brisk_means_brisk'); pose(fx,'act',.5); fx.appr=1.0; fx.apprDur=1.0; sfx.run&&sfx.run(); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ scene('d_airthump',.8,{}); sfx.bonk(); battle.shakeEnemy=.35; battle.enemyKnock=.2; hit(E2); },
-    400,()=>{ scene('d_sightsee',1.1,{}); pose(fx,'celeb',.5); sfx.select(); },
-    400,res(E2)+'The stroll has become an event.',()=>checkEnemy()); };
-D.garden_shower=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Deedee checks the nozzle. GENTLE. Good.'); say('deedee','garden_shower'); scene('d_nozzle',1.9,{}); pose(fx,'expr',.6); },
-    500,()=>{ scene('d_shower',1.2,{foes:foesOf(E2)}); sfx.spray?sfx.spray():sfx.vapor(); },
-    IMPACT,()=>{ sfx.splat(); battle.shakeEnemy=.3; battle.enemyWobble=.4; hit(E2); },
-    500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
-    300,res(E2)+'The watering schedule was ambitious.',()=>checkEnemy()); };
 // Every move registers the unwarped scenes first (see NW above).
 for(const k of ['registered_nut','corner_piece','oven_mitt_ultimatum',
   'brisk_means_brisk','garden_shower']) { const f=D[k]; D[k]=E2=>{ NW(); return f(E2); }; }
@@ -600,41 +568,10 @@ SC.dd_spot=(s,u)=>{ const ms=s.t*1000; if(ms>s.gone) return; gfx.globalAlpha=1; 
 // ---------- MOON & BACK ----------
 
 // ---------- Registered Nut, Reporting ----------
-SC.dd_badge=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,x=st.x+4,y=st.y-DH()*.40,tilt=lerp(.35,0,ez((ms-s.fix)/300)); gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(.8,.8);
-  if(PROPART.draw('deedee/rn_badge',0,-4,{h:44})) { gfx.restore(); return; }   // painted RN REGISTERED NUT badge
-  RO(-20,-10,40,20,CREAM); R(-20,-10,40,5,BLUE); label('RN',-8,-1,'#2b2a26',1); R(-2,-4,20,10,GOLD); label('NUT',8,-1,'#7a1a14',1); gfx.restore(); };
-SC.dd_pulse=(s,u)=>{ const ms=s.t*1000,x=s.x,y=s.y,w=56,fix=cl((ms-s.fixAt)/300); gfx.globalAlpha=fade(u,.9); RO(x-w/2,y-16,w,32,'#1b2a2e');
-  gfx.strokeStyle=GREEN; gfx.lineWidth=2; gfx.beginPath(); for(let k=0;k<=28;k++) { const q=k/28,px=x-w/2+4+q*(w-8),ph=(q*4+s.t*1.5)%1; let py; if(fix<1) py=y+Math.sin(q*40+s.t*20)*lerp(10,0,fix)*(k%3?1:.3); else py=y-(ph<.1?ph*120:ph<.2?(.2-ph)*120:0)*.7; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.stroke();
-  if(fix>.95) label('OK',x+w/2-10,y-26,GREEN,2); };
-D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:600,f:'aim'},{t:1900,f:'act'},{t:2400,f:'throw'},{t:2800,f:'celeb',hop:8},{t:3200,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1100,f:'aim',dx:u=>-ez(u)*6},{t:1900,f:'act',dx:-6},{t:2400,f:'throw'},{t:2800,f:'celeb',hop:8},{t:3100,f:back(sp.x,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}];
-  const st=ST.keys(fx,K),end=self?3300:4100;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); scene('dd_badge',(end-200)/1000,{st,fix:self?300:900}); }],
-    [self?600:1100,()=>{ setMessage('She takes a wrist and checks the pulse. The badge sticker says NUT.'); scene('dd_pulse',1.9,{x:H.x+(self?-60:-50),y:H.top-12,fixAt:self?1300:800}); sfx.beep&&sfx.beep(); }],
-    ['hf',1900],
-    [1900,()=>{ E2.apply(); sfx.heal(); scene('dd_glow',.9,{x:H.x,y:H.mid,c:GREEN}); hopOf(t!==m?t:null); }],
-    [2400,()=>{ const h=hand(); ST.fly((x,y,uu)=>{ gfx.rotate(uu*5); RO(-8,-6,16,12,'#9aa3c8'); Ln(-4,0,4,0,2,'#2b2a26'); },H.x,H.top+14,h.x+120,h.y-60,.6,40); sfx.whoosh(); setMessage('She peels the unhelpful sticker off and pats a hand.'); }],
-    [end,'end',kindLine(t,'The bedside manner is brisk and affectionate.')]]); };
 
 // ---------- Corner-Piece Privilege ----------
 const pan=(x,y,lift,regrow,rot=-.12)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); RO(-30,-12,60,24,'#c9c2b8'); R(-27,-9,54,18,CRUST); for(let k=0;k<6;k++) R(-24+k*9,-6+(k%2)*8,5,4,'#b0683a');
   const cw=14*(1-lift)+14*regrow; R(13,-9,cw,cw,'#f0b860'); gfx.restore(); };
-SC.dd_pan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),lift=ez((ms-P.lift)/250),regrow=ez((ms-P.regrow)/400); gfx.globalAlpha=fade(u,.96); pan(h.x-18,h.y+4,lift,regrow,ms>P.angle&&ms<P.lift?-.5:-.12);
-  if(ms>P.angle&&ms<P.lift) label('CORNER',h.x-6,h.y-26,GOLD,1); if(regrow>.9) label('AGAIN',h.x-6,h.y-26,GOLD,1); };
-SC.dd_dish=(s,u)=>{ const g=ez(u/.2); gfx.globalAlpha=fade(u,.85); EO(s.x,s.y+6,16*g,6*g,CREAM); R(s.x-7*g,s.y-4,14*g,10,CRUST); R(s.x-7*g,s.y-6,14*g,4,'#f0b860'); steam(s.x,s.y-6,s.t,3); if(u>.4) heart(s.x,s.y-26,4,'#ff6b9a'); };
-D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,26),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'aim'},{t:900,f:'act'},{t:1500,f:'throw'},{t:1900,f:'hip'},{t:2600,f:'celeb',hop:8},{t:3100,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'aim'},{t:1300,f:'act',dx:u=>-ez(u)*8},{t:1800,f:'throw',dx:-8},{t:2200,f:'hip'},{t:2700,f:'celeb',hop:8},{t:3000,f:back(sp.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}];
-  ST.keys(fx,K); const lift=self?1000:1500,end=self?3200:4000;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee angles the crisp pan. One corner is clearly the best corner.':'Deedee carries the rhubarb crisp over to '+t.name+'.'); say(m.id,'corner_piece'); scene('dd_pan',(end-300)/1000,{plan:{angle:self?200:950,lift,regrow:lift+500}}); }],
-    [lift,()=>{ sfx.whoosh(); setMessage('She lifts the golden corner onto a dish.'); const h=hand(); ST.fly((x,y)=>{ R(x-7,y-6,14,12,'#f0b860'); },h.x-4,h.y-4,H.x+(self?-26:6),H.mid,.35,30); }],
-    ['hf',lift+400],
-    [lift+400,()=>{ E2.apply(); sfx.heal(); scene('dd_dish',1.3,{x:H.x+(self?-26:6),y:H.mid}); hopOf(t!==m?t:null); }],
-    [lift+600,()=>{ setMessage('The empty corner folds into a fresh golden one. Again.'); const h=hand(); ST.fly((x,y)=>{ R(x-2,y-2,4,4,CRUST); },h.x,h.y,h.x+30,h.y-60,.5,20); }],
-    [end,'end',kindLine(t,'Somehow everybody is her favorite.')]]); };
 
 // ---------- Pepper-Free Plate ----------
 SC.dd_nottoday=(s,u)=>{ const ms=s.t*1000,x=s.x,y=s.y,slide=ez((ms-s.at)/300); gfx.globalAlpha=fin(u,.05)*fade(u,.9); RO(x-7+slide*12,y-14,14,22,'#e86040'); R(x-5+slide*12,y-16,10,4,'#2b2a26'); for(let k=0;k<3;k++) R(x-4+slide*12+k*3,y-8+k*4,2,2,'#f6c060');
@@ -650,56 +587,15 @@ SC.dd_wind=(s,u)=>{ const ms=s.t*1000,P=s.plan,x=P.x,y=P.y,flat=cl((ms-P.hit+80)
 SC.dd_pin=(s,u)=>{ const ms=s.t*1000,h=hand(); if(ms>s.put) return; gfx.globalAlpha=1; gfx.save(); gfx.translate(h.x-6,h.y-4); gfx.rotate(ms>s.roll0&&ms<s.roll1?(ms-s.roll0)/60:0); RO(-20,-6,40,12,WOOD); RO(-30,-3,10,6,'#8a5a30'); RO(20,-3,10,6,'#8a5a30'); gfx.restore(); };
 
 // ---------- Oven Mitt Ultimatum ----------
-SC.dd_mitts=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),on=ez((ms-P.on)/600),clap=ms>P.clap-80&&ms<P.clap+160?Math.sin(cl((ms-P.clap+80)/240)*Math.PI):0,hang=ez((ms-P.hang)/350);
-  if(ms<P.on) return; gfx.globalAlpha=fade(u,.96);
-  const mitt=(x,y,f)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(f*on,on); EO(0,0,15,19,'#f0a0a0'); EO(-12,-8,6,8,'#f0a0a0'); R(-10,10,20,6,CREAM); for(let k=0;k<4;k++) E(-9+k*6,-2,2,2,'#ffd0d0'); gfx.restore(); };
-  const gap=lerp(24,3,clap),x=h.x+hang*40,y=h.y-12-hang*30; mitt(x-gap,y,1); mitt(x+gap,y,-1); if(hang>.9) Ln(x-30,y-24,x+30,y-24,2,WOOD); if(ms<P.on+700) label('FLUFFY',h.x,h.y-46,CREAM,1); };
 SC.dd_wave=(s,u)=>{ const B=s.G,q=ez(u/.5),w=(B.x1-B.x0)/2+16*q,h=(B.base-B.top)/2+10*q,cx=(B.x0+B.x1)/2,cy=(B.top+B.base)/2; gfx.globalAlpha=fade(u,.6)*(1-q*.6);
   gfx.strokeStyle='rgba(255,180,90,.9)'; gfx.lineWidth=6; gfx.strokeRect(cx-w,cy-h,w*2,h*2); gfx.globalAlpha*=.3; R(cx-w,cy-h,w*2,h*2,'#ffb45a'); if(u>.2&&u<.7) { gfx.globalAlpha=fade(u,.6); label('ENOUGH',cx,B.top-26,GOLD,2); } };
-D.oven_mitt_ultimatum=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,60),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'kneel'},{t:1000,f:'act',dx:(u,tt)=>Math.sin(tt*6)*2},{t:1700,f:'celeb'},{t:2150,f:'clap'},{t:2500,f:'hip'},{t:2900,f:'spread'},{t:3250,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const plan={on:1000,clap:2150,hang:2900};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks up to them and slowly puts on two very fluffy oven mitts.'); say(m.id,'oven_mitt_ultimatum'); scene('dd_mitts',3.4,{plan}); }],
-    [1700,()=>{ sfx.charge(); setMessage('The fluffy mitts go up.'); }],
-    ['hf',2150],
-    [2150,()=>{ sfx.thud(); sfx.bonk(); scene('dd_wave',.9,{G:Gp}); all(list); landHit(100); }],
-    [2900,()=>{ sfx.select(); setMessage('She hangs the mitts up neatly. The enemies look chastened.'); }],
-    [4200,'end',res(E2)+'Deedee has used the serious mitts.']]); };
 
 // ---------- Brisk Means Brisk ----------
 SC.dd_thump=(s,u)=>{ if(DFX.burst('thump_burst',s.x,s.y,84,u)) { if(u>.25) label('WHUMP',s.x,s.y-56,CREAM,2); return; } const q=ez(u/.4); gfx.globalAlpha=fade(u,.7)*(1-q*.5); for(let k=0;k<3;k++) ring(s.x-10+k*6,s.y,8+q*22+k*4,14+q*26+k*4,2,CREAM); if(u>.25) label('WHUMP',s.x,s.y-50,CREAM,2); };
 SC.dd_sign=(s,u)=>{ const g=ez(u/.15),rot=s.t*7; gfx.globalAlpha=fade(u,.85); const y=s.y-Math.sin(u*Math.PI)*20; if(PROPART.ready&&PROPART.ready('deedee/sightseeing_sign')) { gfx.save(); gfx.translate(s.x,y); gfx.scale(Math.cos(rot)*g,g); PROPART.draw('deedee/sightseeing_sign',0,-18,{h:52}); gfx.restore(); return; }   // painted SIGHTSEEING sign on its post, spinning
   RO(s.x-1,y-6,2,22,WOOD); gfx.save(); gfx.translate(s.x,y-10); gfx.scale(Math.cos(rot)*g,g); RO(-30,-8,60,16,CREAM); if(Math.abs(Math.cos(rot))>.4) label('SIGHTSEEING',0,-2,'#2b2a26',1); gfx.restore(); };
-SC.dd_speed=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; if(ms<s.from||ms>s.to) return; gfx.globalAlpha=.6; const dir=s.dir(ms); for(let k=0;k<4;k++) R(st.x+dir*(26+k*9),st.y-DH()*.6+k*9,12-k*2,2,'rgba(255,246,220,.7)'); };
-D.brisk_means_brisk=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),far=Math.max(24,F.x-F.w*.5-36),fy=Math.min(316,F.base+4),ret=Math.min(316,F.base+18);
-  const passAt=Math.round(1400*(me.x-F.x)/(me.x-far));
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:250,f:brisk,ease:'lin'},{t:1650,x:far,y:fy,f:'flip'},{t:1900,f:(u,tt)=>Math.sin(tt*14)>0?'runR':'walkR',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3500,x:'home',y:'home',f:'idle'},{t:3700,f:'hip'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee sets off. Perfectly respectable posture. Arms moving.'); say(m.id,'brisk_means_brisk'); scene('dd_speed',3.6,{st,from:250,to:3500,dir:ms=>ms<1650?1:-1}); }],
-    [250,()=>{ sfx.run&&sfx.run(); }],
-    ['hf',250+passAt],
-    [250+passAt,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); scene('dd_thump',.8,{x:F.x,y:F.mid}); }],
-    [500+passAt,()=>{ scene('dd_sign',1.4,{x:F.x+14,y:F.base}); setMessage('Straight through. A tiny SIGHTSEEING sign spins in her wake.'); sfx.select(); }],
-    [1650,()=>{ setMessage('She turns at the far end and keeps walking. Brisk means brisk.'); }],
-    [3900,'end',res(E2)+'The stroll has become an event.']]); };
 
 // ---------- Garden Shower ----------
-SC.dd_nozzle=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-6,y=h.y-2; gfx.globalAlpha=fade(u,.94); RO(x-8,y-6,22,12,'#5fa05a'); RO(x+14,y-4,8,8,'#9aa3c8'); R(x-14,y-2,6,4,'#5fa05a');
-  if(ms<s.spray0||ms>s.spray1) { RO(x-24,y-30,48,14,CREAM); label('GENTLE',x,y-26,'#2f6b3a',1); if(ms>s.spray1) label('GOOD',x,y-42,CREAM,1); } };
-SC.dd_spray=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); if(ms<P.s0||ms>P.s1) return; const q=(ms-P.s0)/(P.s1-P.s0),tx=lerp(P.x1+10,P.x0-10,q); gfx.globalAlpha=.9;
-  for(let k=0;k<26;k++) { const f=k/26,x=lerp(h.x-14,tx+Math.sin(f*9+s.t*20)*10,f),y=lerp(h.y-4,P.y0-10+f*30,f)-Math.sin(f*Math.PI)*40+((f*7+s.t*3)%1)*12; E(x,y,3,4,BLUE); }
-  for(const p of P.list) if(Math.abs(p.x-tx)<p.w*.6) { gfx.globalAlpha=.6; E(p.x,p.base,p.w*.45,5,'#6aa8e0'); } };
-D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,70),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim'},{t:1500,f:'aim',dx:u=>-Math.sin(u*Math.PI)*14,dy:u=>Math.sin(u*Math.PI*2)*3},{t:2700,f:'hip'},{t:3150,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const plan={s0:1500,s1:2700,x0:Gp.x0,x1:Gp.x1,y0:Gp.top,list:list.map(f=>ST.foe(f))},hit=2100;
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks over with the garden hose. She checks the nozzle. GENTLE. Good.'); say(m.id,'garden_shower'); scene('dd_nozzle',3.2,{spray0:1500,spray1:2700}); scene('dd_spray',3.0,{plan}); }],
-    [1500,()=>{ sfx.spray?sfx.spray():sfx.vapor&&sfx.vapor(); b7Later(()=>sfx.spray&&sfx.spray(),400); b7Later(()=>sfx.spray&&sfx.spray(),800); setMessage('One wide, thorough sweep.'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.splat(); all(list); landHit(100); }],
-    [2700,()=>{ setMessage('She checks the nozzle again. Very gentle.'); }],
-    [4200,'end',res(E2)+'The watering schedule was ambitious.']]); };
 
 // ---------- Windows Open ----------
 SC.dd_window=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x=P.x,y=P.y,carry=ms<P.set; if(carry) { const h=hand(); x=h.x-20; y=h.y-30; }
@@ -778,7 +674,6 @@ SC.dv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.
 SC.dv_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; if(!s.c&&DFX.glow(s.x,s.y,s.rx||40,s.ry||56,1.6)) return; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); };
 SC.dv_hearts=(s,u)=>{ for(let k=0;k<(s.n||5);k++) { const q=cl(u*1.4-k*.08); if(q<=0) continue; gfx.globalAlpha=1-q; heart(s.x-20+k*10+Math.sin(q*6+k)*5,s.y-q*44,6+(k%2)*2,k%2?ROSE:'#ff6b9a'); } };
 SC.dv_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.6); R(0,0,576,324,s.c||'#ffffff'); };
-SC.dv_rings=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.3-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; ring(s.x,s.y,6+q*(s.r||40),4+q*(s.r||40)*.7,3,s.c||CREAM); } };
 SC.dv_drops=(s,u)=>{ if(s.img&&DFX.burst(s.img,s.x,s.y-10,s.r*1.5,u)) return; for(let k=0;k<(s.n||10);k++) { const a=Math.PI*(1.1+k/((s.n||10)-1)*.8),d=ez(u)*(s.r||36),x=s.x+Math.cos(a)*d,y=s.y+Math.sin(a)*d+u*u*30; gfx.globalAlpha=1-u; E(x,y,3,4,s.c||WATER); } };
 if(!sfx.ting) sfx.ting=(d=0)=>{ tone({type:'sine',f0:2637,dur:.6,vol:.16,delay:d}); tone({type:'triangle',f0:5274,dur:.35,vol:.05,delay:d}); };
 if(!sfx.heartbeat) sfx.heartbeat=(d=0)=>{ tone({type:'sine',f0:70,f1:50,dur:.12,vol:.35,delay:d}); tone({type:'sine',f0:62,f1:45,dur:.14,vol:.3,delay:d+.17}); };
@@ -797,43 +692,18 @@ sfx.toot=(d=0)=>{
 // ---------- Dish-Towel Flick (basic, kept: only the towel is bigger) ----------
 
 // ---------- Registered Nut, Reporting (A1, kept: big stethoscope and a bandage pop) ----------
-SC.dv_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,P=s.P,hd=head(st),own={x:st.x-6,y:st.y-DH()*.40},go=ez((ms-P.on)/300);
-  const cx=lerp(own.x,P.x,go),cy=lerp(own.y,P.y,go),jx=hd.x-2,jy=hd.y+22; gfx.globalAlpha=fade(u,.95);
-  for(const ex of [-11,11]) { LnO(hd.x+ex,hd.y+8,jx,jy+4,3,'#3a3f46'); EO(hd.x+ex,hd.y+8,3,3,SILVER); }
-  gfx.lineCap='round'; for(const [w,c] of [[9,OUT],[5,'#3a3f46']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(jx,jy); gfx.quadraticCurveTo((jx+cx)/2,Math.max(jy,cy)+40,cx,cy); gfx.stroke(); }
-  EO(cx,cy,14,14,SILVER); E(cx,cy,9,9,'#9aa6b2'); E(cx-4,cy-4,4,4,'#ffffff');
-  if(ms>P.b0&&ms<P.b1) { const ph=((ms-P.b0)%520)/520,beat=ph<.15?ph/.15:ph<.3?1-(ph-.15)/.15*.5:.5*(1-(ph-.3)/.7),hx=P.x+(P.foe?0:-6),hy=P.y-44;
-    heartO(hx,hy,10+beat*9,'#ff4a6a'); if(ph<.5) bigWord('BA-DUMP',hx,hy-40,CREAM,2); } };
 SC.dv_bandage=(s,u)=>{ const pop=u<.1?ez(u/.1)*1.35:lerp(1.35,1,cl((u-.1)/.1)); gfx.globalAlpha=fade(u,.88); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(pop,pop);
   if(PROPART.draw('deedee/bandage',0,0,{w:60,rot:-.5})) { PROPART.draw('deedee/bandage',0,0,{w:60,rot:.5}); gfx.restore(); return; }   // painted heart bandage, crossed twice like the drawn pair
   for(const a of [-.6,.6]) { gfx.save(); gfx.rotate(a); RO(-26,-8,52,16,'#f0c890'); RO(-8,-6,16,12,'#fff0d8'); for(const dx of [-20,-14,14,20]) for(const dy of [-3,3]) R(dx-1,dy-1,2,2,'#c99a62'); gfx.restore(); }
   gfx.restore(); };
-D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m),foe=t.side==='foe';
-  const K=self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:DD_XF('nurse','aim')},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:DD_XF('nurse','aim'),dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
-  const st=ST.keys(fx,K),end=self?3200:3900,hit=self?1900:2050;
-  const P={on:self?400:850,x:self?me.x-6:(foe?H.x+H.w*.2:H.x-H.w*.05),y:self?me.base-DH()*.40:H.mid+(foe?0:H.h*.06),b0:self?700:1150,b1:hit-80,foe};
-  const bx=foe?H.x:H.x-H.w*.08,by=foe?H.mid:H.mid-H.h*.12;
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); scene('dd_badge',(end-200)/1000,{st,fix:self?300:900}); scene('dv_steth',(hit+500)/1000,{st,P}); }],
-    [P.b0,()=>{ setMessage('Out comes the big stethoscope. Ba-dump. Ba-dump.'); for(let k=0;k<3;k++) sfx.heartbeat(k*.52); }],
-    ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); sfx.boing(); scene('dv_bandage',(end-hit)/1000,{x:self?me.x-14:bx,y:self?me.base-DH()*.5:by}); scene('dv_big',1.1,{x:self?me.x:H.x,y:(self?me.top:H.top)-40,txt:'POP!',c:CREAM,sc:4}); scene('dv_glow',.9,{x:H.x,y:H.mid,c:GREEN}); hopOf(t!==m?t:null); setMessage('A bandage. A big one. Right where it counts.'); }],
-    [end,'end',kindLine(t,'Vitals: excellent. Bandage: enormous.')]]); };
 
 // ---------- Corner-Piece Privilege (A2, kept: a big steaming pan) ----------
 const bigSteam=(x,y,t,n,c,h=70)=>{ if(DFX.steam(x,y,t,Math.min(n,3),h,'steam_curl_gold')) return; const a0=gfx.globalAlpha; for(let k=0;k<n;k++) { const q=(t*.9+k*.19)%1; gfx.globalAlpha=a0*(1-q)*.9; E(x-(n-1)*9+k*18+Math.sin(q*6+k)*8,y-q*h,7+q*8,7+q*8,c); } gfx.globalAlpha=a0; };
-const bigPan=(x,y,lift,regrow,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); RO(-62,-6,12,8,'#9a948a'); RO(50,-6,12,8,'#9a948a'); RO(-52,-20,104,40,'#c9c2b8'); R(-47,-15,94,30,CRUST);
-  for(let k=0;k<14;k++) R(-42+(k%7)*13,-11+Math.floor(k/7)*12+(k%2)*3,7,5,'#b0483a'); for(let k=0;k<8;k++) R(-40+k*12,-14,6,3,'#f0c070');
-  const cw=26*(1-lift)+26*regrow; if(cw>.5) { R(21+(26-cw),-15,cw,cw*.9,'#f0b860'); R(21+(26-cw),-15,cw,3,'#ffd890'); } gfx.restore(); };
-SC.dv_pan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),lift=ez((ms-P.lift)/250),regrow=ez((ms-P.regrow)/400),cx=h.x-30,cy=h.y-14; gfx.globalAlpha=fade(u,.96);
-  gfx.save(); gfx.translate(cx,cy); gfx.scale(.85,.85); bigPan(0,0,lift,regrow,ms>P.angle&&ms<P.lift?-.28:-.08); gfx.restore(); bigSteam(cx,cy-20,s.t,5,'#fff6dc');
-  if(ms<P.angle) bigWord('HOT!',cx-30,cy-70+Math.sin(s.t*10)*2,'#ffb070',2); if(ms>P.angle&&ms<P.lift) bigWord('CORNER',cx+20,cy-70,GOLD,2); if(regrow>.9) bigWord('AGAIN',cx+20,cy-70,GOLD,2); };
 SC.dv_dish=(s,u)=>{ const g=ez(u/.2); gfx.globalAlpha=fade(u,.85); if(PROPART.draw('deedee/plate_with_corner_piece',s.x,s.y,{w:62*g})) { bigSteam(s.x,s.y-14,s.t,3,'#fff6dc',44); if(u>.35) heartO(s.x,s.y-50,7,'#ff6b9a'); return; }   // painted plate with the corner piece (ice cream on top)
   EO(s.x,s.y+10,28*g,9*g,CREAM); R(s.x-13*g,s.y-8,26*g,18,CRUST); R(s.x-13*g,s.y-10,26*g,6,'#f0b860'); for(let k=0;k<3;k++) R(s.x-9*g+k*8*g,s.y-2,4,3,'#b0483a'); bigSteam(s.x,s.y-10,s.t,3,'#fff6dc',44); if(u>.35) heartO(s.x,s.y-50,7,'#ff6b9a'); };
 D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,52),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'aim'},{t:900,f:'act'},{t:1500,f:'throw'},{t:1900,f:'hip'},{t:2600,f:'celeb',hop:8},{t:3100,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'aim'},{t:1300,f:'act',dx:u=>-ez(u)*8},{t:1800,f:'throw',dx:-8},{t:2200,f:'hip'},{t:2700,f:'celeb',hop:8},{t:3000,f:back(sp.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'ab_corner_2'},{t:900,f:'ab_corner_3'},{t:1500,f:'ab_corner_4'},{t:1900,f:'ab_corner_5'},{t:2600,f:'ab_corner_6',hop:8},{t:3100,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'ab_corner_1',hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'ab_corner_2'},{t:1300,f:'ab_corner_3',dx:u=>-ez(u)*8},{t:1800,f:'ab_corner_4',dx:-8},{t:2200,f:'ab_corner_5'},{t:2700,f:'ab_corner_6',hop:8},{t:3000,f:back(sp.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}];
   ST.keys(fx,K); const lift=self?1000:1500,end=self?3200:4000,dx=self?me.x-60:Math.max(24,H.x-H.w*.5-14),dy=self?me.mid:H.mid+6;
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Deedee pulls a whole steaming pan of rhubarb crisp out of the oven. One corner is clearly the best corner.':'Deedee marches a whole steaming pan of rhubarb crisp over to '+t.name+'.'); say(m.id,'corner_piece'); scene('dv_pan',(end-300)/1000,{plan:{angle:self?200:950,lift,regrow:lift+500}}); }],
@@ -868,7 +738,7 @@ D.wet_floor=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foeT=t.side===
   const lf=liveFoes(),sl=foeT?t:lf.slice().sort((a,b)=>ST.unit(b).x-ST.unit(a).x)[0],SF=sl?ST.unit(sl):null;
   const bop=!foeT&&B2.party.find(p=>p.id==='boppy'&&b2Alive(p)&&p!==t),BU=bop?ST.unit(bop):null;
   const fy=sp.y,mx=self?me.x:sp.x,signX=foeT?Math.min(556,sp.x+40):Math.max(30,H.x-H.w*.5-24);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':brisk,hop:3,hn:6},{t:900,x:mx,y:fy,f:DD_XF('mop','aim')},{t:1000,f:DD_XF('mop','aim'),dx:(u,tt)=>Math.sin(tt*14)*10},{t:2300,f:'hip'},{t:2500,f:'throw'},{t:2700,f:'hip'},{t:3100,f:'expr'},{t:3700,f:self?'idle':'walkR',hop:3,hn:6},{t:4500,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'idle':'ab_wet_1',hop:3,hn:6},{t:900,x:mx,y:fy,f:'ab_wet_2'},{t:1000,f:'ab_wet_2',dx:(u,tt)=>Math.sin(tt*14)*10},{t:2300,f:'ab_wet_5'},{t:2500,f:'ab_wet_4'},{t:2700,f:'ab_wet_5'},{t:3100,f:'ab_wet_6'},{t:3700,f:self?'idle':'walkR',hop:3,hn:6},{t:4500,x:'home',y:'home',f:'idle'}]);
   const P={g0:1000,g1:2600,x1:mx+10,y1:fy,x0:SF?SF.x:mx-160,y0:SF?SF.base+2:fy};
   const blobs=foeT?[]:[[-18,2],[4,6],[20,0],[-4,-3]].map(([dx,dy])=>({x:H.x+dx,y:H.base+dy}));
   const end=4700;
@@ -895,63 +765,12 @@ const glass=(x,y,fill=1,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc
   gfx.beginPath(); gfx.moveTo(-13,-22); gfx.quadraticCurveTo(-15,4,0,7); gfx.quadraticCurveTo(15,4,13,-22); gfx.closePath(); gfx.fillStyle='rgba(232,244,255,.55)'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
   if(fill>0) { gfx.save(); gfx.clip(); R(-16,-10+(1-fill)*14,32,20,'#f3df7a'); R(-16,-10+(1-fill)*14,32,3,'#fff1a8'); gfx.restore(); }
   Ln(-8,-18,-9,-4,3,'rgba(255,255,255,.85)'); gfx.restore(); };
-SC.dv_glass=(s,u)=>{ const ms=s.t*1000,hs=hands(),P=s.P; gfx.globalAlpha=fade(u,.96); const fill=ms<P.sip?1:lerp(1,.45,ez((ms-P.sip)/500));
-  glass(hs.n.x-4,hs.n.y-14,fill,1.15);
-  if(ms<P.sip) { const sx=hs.f.x,sy=hs.f.y; gfx.save(); gfx.translate(sx,sy); gfx.rotate(-.9); LnO(0,0,0,-24,2,SILVER); EO(0,-28,4,6,SILVER); gfx.restore(); } };
-SC.dv_freeze=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.85); for(const f of s.list) { const F=ST.unit(f); bigWord('!',F.x+F.w*.3,F.top-12,GOLD,3); } if(u>.2&&u<.8) { gfx.globalAlpha=1; const G=ST.group(s.list); bigWord('LISTENING...',G.x,G.top-48,CREAM,2); } };
 D.wine=(old=>E2=>(E2.act&&E2.act.o3&&D.wineShow)?D.wineShow(E2):old(E2))(D.wine);
-D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST.unit(m),list=liveFoes();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:back(p.x,me)==='walkR'?'walkR':'walk',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:DD_XF('toast','aim')},{t:1250,f:'clap'},{t:1400,f:DD_XF('toast','aim')},{t:1650,f:'clap'},{t:1800,f:DD_XF('toast','aim')},{t:2050,f:'clap'},{t:2300,f:'celeb',hop:6},{t:2900,f:'expr'},{t:3500,f:'hip'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
-  const P={sip:2950};
-  const ting=(k)=>()=>{ const hs=hands(); sfx.ting(); scene('dv_rings',.7,{x:hs.n.x,y:hs.n.y-20,c:GOLD,r:30+k*20}); scene('dv_text',.8,{x:hs.n.x-20-k*30,y:hs.n.y-60-k*16,txt:'TING',c:GOLD,sc:2+(k===2?1:0)}); };
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks up with a glass of wine and a spoon. She has an announcement.'); say(m.id,'wine'); scene('dv_glass',4.0,{P}); }],
-    [1250,ting(0)],
-    [1350,()=>{ setMessage('Ting, ting, ting. A toast! Every monster freezes mid wind-up to listen.'); scene('dv_freeze',2.2,{list}); ST.draw(()=>{ list.forEach((g,k)=>lift(g,-4,(k%2?1:-1)*.14,0)); },2.1); }],
-    [1650,ting(1)],
-    ['hf',2050],
-    [2050,()=>{ ting(2)(); const hs=hands(); ST.fly((x,y,uu)=>{ gfx.globalAlpha=1-uu*.5; ring(x,y,10+uu*14,8+uu*10,4,GOLD); },hs.n.x,hs.n.y-20,F.x,F.mid,.25,0,0,{ease:'lin'}); }],
-    [2300,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('dv_big',1.2,{x:F.x,y:F.top-74,txt:'TING!',c:GOLD,sc:4}); scene('dv_text',1.1,{st,txt:'CHEERS!',c:CREAM,sc:3}); setMessage('Cheers! The last TING rings right through it.'); }],
-    [2950,()=>{ setMessage('She sips.'); sfx.vapor&&sfx.vapor(); }],
-    [3450,()=>{ scene('dv_text',1.2,{st,txt:'AHH.',c:GOLD,sc:3}); sfx.ding(); setMessage('Ahh. Everyone may now resume.'); }],
-    [4900,'end',res(E2)+'It\'s five o’clock somewhere. Its wind-up is cancelled.']]); };
 
 // ---------- Brisk Means Brisk (B1, kept: hand weights and swinging arms) ----------
 const dumbbell=(x,y,rot,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); RO(-11,-2,22,4,'#9aa3b0'); for(const sd of [-1,1]) { RO(sd*11-5,-9,10,18,'#ff7aa8'); R(sd*11-3,-7,3,14,'#ffb0cc'); } gfx.restore(); };
-SC.dv_weights=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; gfx.globalAlpha=fade(u,.97); const hs=hands(),on=ms>s.from&&ms<s.to,sw=on?Math.sin(s.t*14):0;
-  dumbbell(hs.f.x,hs.f.y-sw*10,.3+sw*.6,1); dumbbell(hs.n.x,hs.n.y+sw*10,-.3-sw*.6,1); if(on) { for(const [h,d] of [[hs.n,1],[hs.f,-1]]) { gfx.globalAlpha=.5; gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(h.x,h.y+sw*10*d,18,-.6+d*sw*.4,.6+d*sw*.4); gfx.stroke(); } }
-  if(ms<s.from+600&&ms>200) { gfx.globalAlpha=1; bigWord('1 LB',hs.n.x,hs.n.y-30,'#ff7aa8',1); } };
-D.brisk_means_brisk=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),far=Math.max(24,F.x-F.w*.5-36),fy=Math.min(316,F.base+4);
-  const passAt=Math.round(1400*(me.x-F.x)/(me.x-far));
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'clap'},{t:450,f:brisk,ease:'lin'},{t:1850,x:far,y:fy,f:'flip'},{t:2100,f:(u,tt)=>Math.sin(tt*14)>0?'runR':'walkR',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'idle'},{t:3900,f:'hip'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee picks up her pink hand weights. Perfectly respectable posture.'); say(m.id,'brisk_means_brisk'); scene('dv_weights',4.0,{st,from:450,to:3700}); scene('dd_speed',3.8,{st,from:450,to:3700,dir:ms=>ms<1850?1:-1}); sfx.ding(); }],
-    [450,()=>{ sfx.run&&sfx.run(); setMessage('Arms swinging. Weights pumping. She sets off.'); }],
-    ['hf',450+passAt],
-    [450+passAt,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('dd_thump',.8,{x:F.x,y:F.mid}); scene('dv_big',1.1,{x:F.x,y:F.top-74,txt:'BRISK!',c:'#ff7aa8',sc:4}); }],
-    [700+passAt,()=>{ scene('dd_sign',1.4,{x:F.x+14,y:F.base}); setMessage('Straight through. A tiny SIGHTSEEING sign spins in her wake.'); sfx.select(); }],
-    [1850,()=>{ setMessage('She turns at the far end and keeps walking. Brisk means brisk.'); }],
-    [4100,'end',res(E2)+'The stroll has become an event.']]); };
 
 // ---------- Garden Shower (B2, kept: one big hose arc across the row) ----------
-SC.dv_hose=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-8,y=h.y-2,P=s.P; gfx.globalAlpha=fade(u,.96);
-  gfx.lineCap='round'; for(const [w,c] of [[9,OUT],[5,'#4f9a4a']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(x+10,y+2); gfx.quadraticCurveTo(x+60,P.fl+30,600,P.fl-10); gfx.stroke(); }
-  RO(x-12,y-8,26,14,'#5fa05a'); RO(x-26,y-5,14,8,'#9aa3c8');
-  if(ms>P.s0&&ms<P.s1) { const q=(ms-P.s0)/(P.s1-P.s0),tx=lerp(P.x1+20,P.x0-20,q),ty=P.yl,sx=x-28,sy=y-2,mx=sx-(sx-tx)*.45,my=Math.min(sy,ty)-80;
-    for(const [w,c,a] of [[18,OUT,.9],[13,WATER,.95],[5,'#e6f7ff',.9]]) { gfx.globalAlpha=a; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(sx,sy); gfx.quadraticCurveTo(mx,my,tx,ty); gfx.stroke(); }
-    gfx.globalAlpha=.9; for(let k=0;k<12;k++) { const q2=((s.t*3+k/12)%1),a=Math.PI*(1.15+(k%6)/5*.7),d=q2*36; E(tx+Math.cos(a)*d,ty+Math.sin(a)*d+q2*q2*30,3,4,k%2?WATER:'#e6f7ff'); }
-    for(const p of P.list) if(Math.abs(p.x-tx)<p.w*.7) { gfx.globalAlpha=.55; E(p.x,p.base+2,p.w*.55,7,'#6aa8e0'); } }
-  if(ms<P.s0) { gfx.globalAlpha=1; bigWord('GENTLE',x-6,y-30,'#8ef0a0',1); } };
-D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,150),me=ST.unit(m);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'aim'},{t:1500,f:'aim',dx:u=>-Math.sin(u*Math.PI)*14,dy:u=>Math.sin(u*Math.PI*2)*3},{t:2900,f:'hip'},{t:3300,f:'walkR',hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
-  const P={s0:1500,s1:2900,x0:Gp.x0,x1:Gp.x1,yl:Gp.top+Math.max(10,(Gp.base-Gp.top)*.3),fl:p.y,list:list.map(f=>ST.foe(f))},hit=2200;
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks over with the garden hose. She checks the nozzle. GENTLE. Good.'); say(m.id,'garden_shower'); scene('dv_hose',3.6,{P}); }],
-    [1500,()=>{ for(let k=0;k<5;k++) b7Later(()=>sfx.spray&&sfx.spray(),k*260); setMessage('One big arc. Right across the whole row.'); }],
-    ['hf',hit],
-    [hit,()=>{ sfx.splat(); for(const f of list) ST.jolt(f,.4); landHit(100); scene('dv_big',1.2,{x:Gp.x,y:Gp.top-74,txt:'SPLOOSH!',c:WATER,sc:4}); for(const f of list) { const U=ST.unit(f); scene('dv_drops',.8,{x:U.x,y:U.top+6,r:40}); } }],
-    [2900,()=>{ setMessage('She checks the nozzle again. Still says gentle.'); }],
-    [4300,'end',res(E2)+'The watering schedule was ambitious.']]); };
 
 // ---------- Rise and Shine (B3; key rise_and_shine; same numbers as Windows Open) ----------
 // The room is dark. Deedee walks to the window and yanks the shade cord: ZIP. Blinding light floods in. The monsters
@@ -977,7 +796,7 @@ SC.dv_light=(s,u)=>{ const q=u,flash=Math.max(0,1-q*3); gfx.globalAlpha=flash*.8
 SC.dv_squint=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); for(const f of s.list) { const F=ST.unit(f); const ex=F.x,ey=F.top+F.h*.33; bigWord('>',ex-10,ey-6,CREAM,2); bigWord('<',ex+10,ey-6,CREAM,2); bigWord('SQUINT',F.x,F.top-16,'#fff27a',1); DFX.P('glare_lines',F.x,F.top+F.h*.15,{h:36}); } };
 D.rise_and_shine=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m),fl=liveFoes(),party=who.filter(u=>u.side==='party');
   const wx=foe?Math.min(470,ST.unit(foe).x+150):310,wy=66,sx=wx+50,sy=foe?Math.min(316,ST.unit(foe).base+6):Math.min(316,me.base+4);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:3,hn:6},{t:1000,x:sx,y:sy,f:'aim'},{t:1550,f:'wind'},{t:1700,f:'throw',dy:6},{t:1850,f:'celeb',hop:10},{t:2800,f:'hip'},{t:3100,f:back(sx,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_rise_1',hop:3,hn:6},{t:1000,x:sx,y:sy,f:'ab_rise_5'},{t:1550,f:'ab_rise_4'},{t:1700,f:'ab_rise_4',dy:6},{t:1850,f:'ab_rise_6',hop:10},{t:2800,f:'ab_rise_5'},{t:3100,f:back(sx,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
   const P={x:wx,y:wy,grab:1000,open:1700};
   ST.play(E2,[
     [0,()=>{ setMessage('The shades are drawn. It\'s very dark in here. Deedee doesn\'t approve.'); say(m.id,'rise_and_shine'); scene('dv_dim',2.0,{open:1700}); scene('dv_shade',4.1,{P,st}); }],
@@ -1020,7 +839,7 @@ SC.dv_buff=(s,u)=>{ const st=s.st,ms=s.t*1000; let x=s.fx,y=s.fy; if(ms>s.go&&st
   if(landed) bigWord('MINE NOW',x,y-26,GOLD,1); gfx.globalAlpha=1; };
 SC.dv_beans=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.8); DFX.P('bowl_of_beans',h.x-8,h.y-12-Math.sin(s.t*8)*2,{w:34}); };
 D.beanie_master=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'idle'},{t:1300,f:'flip'},{t:1900,f:'flip',hop:7,dx:(u,tt)=>Math.sin(tt*50)*2*(1-u)},{t:4200,f:'expr'},{t:5000,f:'hip'},{t:5300,f:back(p.x,me),hop:3,hn:6},{t:6200,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_beanie_1',hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'ab_beanie_2'},{t:1300,f:'ab_beanie_3'},{t:1900,f:'ab_beanie_4',hop:7,dx:(u,tt)=>Math.sin(tt*50)*2*(1-u)},{t:3200,f:'ab_beanie_6'},{t:4200,f:'ab_beanie_5'},{t:5000,f:'ab_beanie_2'},{t:5300,f:back(p.x,me),hop:3,hn:6},{t:6200,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks up to have a word with '+f.name+'.'); }],
     [900,()=>{ setMessage('She stops. She turns around. Uh oh. There were beans at lunch.'); scene('dv_text',.9,{st,txt:'...',c:CREAM,sc:3}); scene('dv_beans',1.0,{}); }],
@@ -1037,18 +856,6 @@ const lips=(x,y,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); gfx.r
   gfx.beginPath(); gfx.moveTo(-14,0); gfx.quadraticCurveTo(-8,-10,-2,-4); gfx.quadraticCurveTo(0,-6,2,-4); gfx.quadraticCurveTo(8,-10,14,0); gfx.quadraticCurveTo(0,-2,-14,0); gfx.closePath(); gfx.fillStyle=LIP; gfx.fill();
   gfx.beginPath(); gfx.moveTo(-14,1); gfx.quadraticCurveTo(0,4,14,1); gfx.quadraticCurveTo(8,12,0,12); gfx.quadraticCurveTo(-8,12,-14,1); gfx.closePath(); gfx.fill();
   Ln(-11,1,11,1,1.5,'#8a1020'); gfx.restore(); };
-SC.dv_kiss=(s,u)=>{ const pop=u<.08?ez(u/.08)*1.4:lerp(1.4,1,cl((u-.08)/.08)); gfx.globalAlpha=fade(u,.9); const c=s.u?cheek(s.u):{x:s.x,y:s.y}; lips(c.x,c.y,pop*.8); };
-D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,me=ST.unit(m),foe=t.side==='foe';
-  const sp=self?{x:me.x,y:me.base}:{x:Math.min(560,H.x+H.w*.5+(foe?14:4)),y:Math.min(316,H.base+3)};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'spread':'run'},{t:self?300:800,x:sp.x,y:sp.y,f:'spread'},{t:self?500:950,f:'clap',dx:(u,tt)=>Math.sin(tt*22)*3,rot:(u,tt)=>Math.sin(tt*9)*.06},{t:2200,f:'act',dx:-8},{t:2700,f:'celeb',hop:8},{t:3100,f:self?'idle':back(sp.x,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
-  if(!self&&!foe) battle.fx[t.idx].path={t:0,dur:2.4,fn:(q,c)=>{ const ms=q*2400; if(ms<950||ms>2200) return {}; const w=Math.sin(ms/45); return {cx:c.origX+w*2,base:c.origBase,rot:Math.sin(ms/110)*.07,sc:1-.06*Math.abs(w)}; }};
-  ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee gives herself a big squeeze. She deserves one.':'Deedee spots '+t.name+' from across the room. Arms out. No escape.'); say(m.id,'grandma_squeeze'); }],
-    [950,()=>{ scene('dv_big',1.3,{x:H.x,y:H.top-40,txt:'SQUEEZE!',c:ROSE,sc:4}); scene('dv_hearts',1.4,{x:H.x,y:H.top,n:7}); sfx.squeak&&sfx.squeak(); b7Later(()=>sfx.squeak&&sfx.squeak(),300); setMessage('One big squeezy Deedee hug.'); if(foe) ST.draw((s,u)=>lift(t,Math.abs(Math.sin(u*20))*-4,Math.sin(u*24)*.06,0),1.25); }],
-    ['hf',1500],
-    [1500,()=>{ E2.apply(); sfx.heal(); scene('dv_glow',1,{x:H.x,y:H.mid,c:ROSE}); }],
-    [2300,()=>{ sfx.kiss?sfx.kiss():sfx.select(); scene('dv_kiss',(4100-2300)/1000,{u:t}); const c=cheek(t); scene('dv_text',1.1,{x:c.x-30,y:c.y-30,txt:'MWAH!',c:LIP,sc:3}); setMessage('And a lipstick kiss on the cheek. That won\'t come off for days.'); }],
-    [4100,'end',kindLine(t,'Squeezed, kissed, and feeling much better.')]]); };
 })();
 
 // ================= Polish pass (2026-10-24, claude/move-review.md) =================
@@ -1097,38 +904,26 @@ const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of 
 // ---------- Corner-Piece Privilege: bigger pan, glowing golden corner ----------
 const PS=1.35;
 const bigSteam=(x,y,t,n,c,h=110)=>{ if(DFX.steam(x,y,t,Math.min(n,3),h,'steam_curl_gold')) return; const a0=gfx.globalAlpha; for(let k=0;k<n;k++) { const q=(t*.8+k*.17)%1; gfx.globalAlpha=a0*(1-q)*.85; E(x-(n-1)*12+k*24+Math.sin(q*6+k)*10,y-q*h,9+q*12,9+q*12,c); } gfx.globalAlpha=a0; };
-const bigPan=(lift,regrow,rot)=>{ gfx.rotate(rot); if(PROPART.draw('deedee/'+(lift<.5||regrow>.5?'crisp_dish_full':'crisp_pan'),0,-4,{w:132})) return;   // painted dish: whole, then with the corner piece gone, whole again   // painted pan (its cut corner is painted in); the drawn one with the growing corner is the fallback
-  RO(-62,-6,12,8,'#9a948a'); RO(50,-6,12,8,'#9a948a'); RO(-52,-20,104,40,'#c9c2b8'); R(-47,-15,94,30,CRUST);
-  for(let k=0;k<14;k++) R(-42+(k%7)*13,-11+Math.floor(k/7)*12+(k%2)*3,7,5,'#b0483a'); for(let k=0;k<8;k++) R(-40+k*12,-14,6,3,'#f0c070');
-  const cw=26*(1-lift)+26*regrow; if(cw>.5) { R(21+(26-cw),-15,cw,cw*.9,'#f0b860'); R(21+(26-cw),-15,cw,3,'#ffd890'); } };
-SC.dv_pan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),lift=ez((ms-P.lift)/250),regrow=ez((ms-P.regrow)/400),cx=h.x-44,cy=h.y-20,rot=ms>P.angle&&ms<P.lift?-.28:-.08; gfx.globalAlpha=fade(u,.96);
+SC.dv_pan=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),lift=ez((ms-P.lift)/250),regrow=ez((ms-P.regrow)/400),cx=h.x-44,cy=h.y-20; gfx.globalAlpha=fade(u,.96);
   const a0=gfx.globalAlpha; bigSteam(cx,cy-24,s.t,6,'#fff6dc'); gfx.globalAlpha=a0;
-  gfx.save(); gfx.translate(cx,cy); gfx.scale(PS,PS); bigPan(lift,regrow,rot);
+  gfx.save(); gfx.translate(cx,cy); gfx.scale(PS,PS);   // the pan is in the painted frames
   const glow=(1-lift)+regrow; if(glow>.05) { const pl=.5+.5*Math.sin(s.t*8); gfx.globalAlpha=a0*glow; if(!DFX.P('sparkles_gold',34,-6,{h:54+pl*10})) { gfx.globalAlpha=a0*glow*(.35+pl*.3); E(34,-6,22+pl*6,18+pl*5,'#ffd84a'); gfx.globalAlpha=a0*glow; ring(34,-6,18+pl*4,15+pl*3,2,'#fff1a8');
     for(let k=0;k<4;k++) { const a=s.t*3+k*Math.PI/2; star(34+Math.cos(a)*26,-6+Math.sin(a)*20,3+pl*2,k%2?GOLD:CREAM,s.t*4+k); } } }
   gfx.restore(); gfx.globalAlpha=a0;
   if(ms<P.angle) bigWord('HOT!',cx-40,cy-84+Math.sin(s.t*10)*2,'#ffb070',3); if(ms>P.angle&&ms<P.lift) bigWord('THE CORNER',cx+16,cy-84,GOLD,3); if(regrow>.9) bigWord('AGAIN!',cx+20,cy-84,GOLD,3); };
 
 // ---------- Wine O'Clock: bigger glass, big sound rings ----------
-const glass=(x,y,fill=1,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
-  EO(0,22,10,3,'#e8f4ff'); LnO(0,6,0,22,2,'#e8f4ff');
-  gfx.beginPath(); gfx.moveTo(-13,-22); gfx.quadraticCurveTo(-15,4,0,7); gfx.quadraticCurveTo(15,4,13,-22); gfx.closePath(); gfx.fillStyle='rgba(232,244,255,.55)'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
-  if(fill>0) { gfx.save(); gfx.clip(); R(-16,-10+(1-fill)*14,32,20,'#f3df7a'); R(-16,-10+(1-fill)*14,32,3,'#fff1a8'); gfx.restore(); }
-  Ln(-8,-18,-9,-4,3,'rgba(255,255,255,.85)'); gfx.restore(); };
-const GS=2,gpos=()=>{ const hs=hands(); return {x:hs.n.x-30,y:hs.n.y-12,f:hs.f}; };
-SC.dv_glass=(s,u)=>{ const ms=s.t*1000,g=gpos(),P=s.P; gfx.globalAlpha=fade(u,.96); const fill=ms<P.sip?1:lerp(1,.45,ez((ms-P.sip)/500));
-  if(!DFX.P('wine_glass',g.x,g.y-16,{h:64})) glass(g.x,g.y,fill,GS);   // painted glass with its red wine
+const gpos=()=>{ const hs=hands(); return {x:hs.n.x-30,y:hs.n.y-12,f:hs.f}; };
+SC.dv_glass=(s,u)=>{ const ms=s.t*1000,g=gpos(),P=s.P; gfx.globalAlpha=fade(u,.96);   // the glass of wine is in the painted frames; this draws only the spoon
   if(ms<P.sip) { const sx=lerp(g.f.x,g.x+20,.5),sy=g.f.y-14; gfx.save(); gfx.translate(sx,sy); gfx.rotate(-1.1); if(!PROPART.draw('deedee/spoon',0,-22,{h:48})) { LnO(0,0,0,-34,3,SILVER); EO(0,-40,5,8,SILVER); } gfx.restore(); } };
 SC.dp_rings=(s,u)=>{ if(s.clink) DFX.burst('clink_sparkle',s.x,s.y,s.r*.9,u,.2); for(let k=0;k<4;k++) { const q=cl(u*1.3-k*.12); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.95; ring(s.x,s.y,10+q*s.r,8+q*s.r*.75,(k%2?4:7)*(1-q)+1,k%2?CREAM:(s.c||GOLD)); }
   gfx.globalAlpha=fade(u,.5); for(let k=0;k<8;k++) { const a=k/8*Math.PI*2+.2,d=14+ez(u)*s.r*.55; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,s.x+Math.cos(a)*(d+10),s.y+Math.sin(a)*(d+10)*.75,3,GOLD); } };
-// bottle in her hand while she walks up, the cork pops out of it, and the pop burst marks the shot
-SC.dp_bottle=(s,u)=>{ const ms=s.t*1000,h=hand(); if(ms<650) { gfx.globalAlpha=1; DFX.P('wine_bottle',h.x-14,h.y-18,{h:52,rot:-.25}); return; }
-  if(ms<760) DFX.burst('pop_burst',h.x-6,h.y-52,46,(ms-650)/110);
-  if(ms<1250) { const q=cl((ms-650)/600); gfx.globalAlpha=1-q*q; DFX.P('wine_bottle',h.x-14,h.y-18,{h:52,rot:-.25*(1-q)}); DFX.P('cork',h.x-6+q*38,h.y-52-Math.sin(q*Math.PI)*46+q*q*40,{h:14,rot:q*9}); } };
+// the cork pops as she walks up: the pop burst marks the shot
+SC.dp_bottle=(s,u)=>{ const ms=s.t*1000,h=hand(); if(ms>650&&ms<760) DFX.burst('pop_burst',h.x-6,h.y-52,46,(ms-650)/110); };
 SC.dp_pop=(s,u)=>{ DFX.burst('pop_burst',s.x,s.y,s.h,u,.1); };
 SC.dp_freeze=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.85); for(const f of s.list) { const F=ST.unit(f); bigWord('!',F.x+F.w*.3,F.top-12,GOLD,4); } if(u>.2&&u<.8) { gfx.globalAlpha=1; const G=ST.group(s.list); bigWord('LISTENING...',G.x,G.top-52,CREAM,2); } };
 D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST.unit(m),list=liveFoes();
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:back(p.x,me)==='walkR'?'walkR':'walk',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:DD_XF('toast','aim')},{t:1250,f:'clap'},{t:1400,f:DD_XF('toast','aim')},{t:1650,f:'clap'},{t:1800,f:DD_XF('toast','aim')},{t:2050,f:'clap'},{t:2300,f:'celeb',hop:6},{t:2900,f:'expr'},{t:3500,f:'hip'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_wine_1',hop:3,hn:6},{t:900,x:p.x,y:p.y,f:'ab_wine_3'},{t:1250,f:'ab_wine_4'},{t:1400,f:'ab_wine_3'},{t:1650,f:'ab_wine_4'},{t:1800,f:'ab_wine_3'},{t:2050,f:'ab_wine_4'},{t:2300,f:'ab_wine_4',hop:6},{t:2900,f:'ab_wine_5'},{t:3500,f:'ab_wine_6'},{t:3900,f:back(p.x,me),hop:3,hn:6},{t:4800,x:'home',y:'home',f:'idle'}]);
   const P={sip:2950};
   const ting=(k)=>()=>{ const g=gpos(); sfx.ting(); scene('dp_rings',.8,{x:g.x,y:g.y-18,r:60+k*45,clink:1}); scene('dv_text',.8,{x:g.x-30-k*34,y:g.y-70-k*14,txt:'TING',c:GOLD,sc:3+(k===2?1:0)}); };
   ST.play(E2,[
@@ -1144,33 +939,11 @@ D.wineShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,62),me=ST
     [4900,'end',res(E2)+'It\'s five o’clock somewhere. Its wind-up is cancelled.']]); };
 
 // ---------- Oven Mitt Ultimatum: huge mitts, a big clap shockwave ----------
-const MS=2.0;
-SC.dd_mitts=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),on=ez((ms-P.on)/600),clap=ms>P.clap-80&&ms<P.clap+160?Math.sin(cl((ms-P.clap+80)/240)*Math.PI):0,hang=ez((ms-P.hang)/350);
-  if(ms<P.on) return; gfx.globalAlpha=fade(u,.96);
-  const mitt=(x,y,f)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(f*on*MS,on*MS); EO(0,0,15,19,'#f0a0a0'); EO(-12,-8,6,8,'#f0a0a0'); for(let k=0;k<5;k++) E(-11+k*5.5,-14+Math.sin(k)*2,3,3,'#ffc8c8'); R(-10,10,20,6,CREAM); for(let k=0;k<5;k++) E(-9+k*4.5,13,2.5,2.5,'#ffffff'); for(let k=0;k<4;k++) E(-9+k*6,-2,2,2,'#ffd0d0'); gfx.restore(); };
-  const gap=lerp(24,3,clap)*MS*.85,x=h.x-20+hang*40,y=h.y-40-hang*30; mitt(x-gap,y,1); mitt(x+gap,y,-1); if(hang>.9) Ln(x-60,y-50,x+60,y-50,3,WOOD);
-  if(ms<P.on+800) bigWord('FLUFFY',h.x-10,h.y-110,CREAM,2); };
 SC.dp_shock=(s,u)=>{ if(DFX.burst('shock_ring',s.x,s.y,s.r*.5,u)) return; const q=ez(u); for(let k=0;k<3;k++) { const qq=cl(u*1.4-k*.14); if(qq<=0||qq>=1) continue; gfx.globalAlpha=(1-qq)*.9; ring(s.x,s.y,20+qq*s.r,14+qq*s.r*.55,10*(1-qq)+2,k%2?CREAM:'#ffb45a'); }
   gfx.globalAlpha=fade(u,.4)*.8; for(let k=0;k<12;k++) { const a=k/12*Math.PI*2,d=24+q*s.r*.8; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.55,s.x+Math.cos(a)*(d+26),s.y+Math.sin(a)*(d+26)*.55,4,CREAM); } };
-D.oven_mitt_ultimatum=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,60),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'kneel'},{t:1000,f:'act',dx:(u,tt)=>Math.sin(tt*6)*2},{t:1700,f:'celeb'},{t:2150,f:'clap'},{t:2500,f:'hip'},{t:2900,f:'spread'},{t:3250,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const plan={on:1000,clap:2150,hang:2900};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks up to them and slowly puts on two enormous, very fluffy oven mitts.'); say(m.id,'oven_mitt_ultimatum'); scene('dd_mitts',3.4,{plan}); }],
-    [1700,()=>{ sfx.charge(); setMessage('The fluffy mitts go up.'); }],
-    ['hf',2150],
-    [2150,()=>{ sfx.thud(); sfx.bonk(); sfx.thud(); const h=hand(); scene('dv_flash',.2,{a:.5,c:'#fff1d8'}); scene('dp_shock',.8,{x:h.x-20,y:h.y-40,r:Math.max(220,h.x-Gp.x0+40)}); scene('dd_wave',.9,{G:Gp});
-      scene('dv_big',1.2,{x:(Gp.x+p.x)/2,y:Gp.top-74,txt:'CLAP!',c:'#ffb45a',sc:5}); all(list); landHit(100); }],
-    [2900,()=>{ sfx.select(); setMessage('She hangs the mitts up neatly. The enemies look chastened.'); }],
-    [4200,'end',res(E2)+'Deedee has used the serious mitts.']]); };
 
 // ---------- Brisk Means Brisk: speed lines, big pumping arms ----------
 const dumbbell=(x,y,rot,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); RO(-11,-2,22,4,'#9aa3b0'); for(const sd of [-1,1]) { RO(sd*11-5,-9,10,18,'#ff7aa8'); R(sd*11-3,-7,3,14,'#ffb0cc'); } gfx.restore(); };
-SC.dv_weights=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; gfx.globalAlpha=fade(u,.97); const hs=hands(),on=ms>s.from&&ms<s.to,sw=on?Math.sin(s.t*14):0,A=16;
-  dumbbell(hs.f.x,hs.f.y-sw*A,.3+sw*.8,1.3); dumbbell(hs.n.x,hs.n.y+sw*A,-.3-sw*.8,1.3);
-  if(on) for(const [h,d] of [[hs.n,1],[hs.f,-1]]) { gfx.globalAlpha=.65; gfx.strokeStyle=CREAM; gfx.lineWidth=3; gfx.beginPath(); gfx.arc(h.x,h.y,28,-.9,.9); gfx.stroke(); gfx.globalAlpha=.4; gfx.beginPath(); gfx.arc(h.x,h.y,36,-.7,.7); gfx.stroke(); }
-  if(ms<s.from+700&&ms>200) { gfx.globalAlpha=1; bigWord('1 LB',hs.n.x,hs.n.y-40,'#ff7aa8',2); }
-  if(on&&Math.floor(s.t*4)%2) { gfx.globalAlpha=.9; bigWord(Math.floor(s.t*2)%2?'HUP':'TWO',st.x,st.y-DH()-20,CREAM,2); } };
 SC.dd_speed=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000; if(ms<s.from||ms>s.to) return; const dir=s.dir(ms);
   { const g0=gfx.globalAlpha,pu=.75+.25*Math.sin(ms/70); gfx.globalAlpha=g0*pu; const ok=DFX.P('speed_lines',st.x+dir*92,st.y-DH()*.5,{w:150,flip:dir<0}); gfx.globalAlpha=g0; if(ok) { const q=((ms/300))%1; gfx.globalAlpha=g0*(1-q)*.8; DFX.P('dust_puff',st.x+dir*(16+q*26),st.y-8-q*8,{w:20+q*18}); gfx.globalAlpha=g0; return; } }
   for(let k=0;k<9;k++) { const q=((ms/220)+k*.23)%1,y=st.y-DH()*.95+k*(DH()*.9/8),x=st.x+dir*(30+q*120),L=26+(k%3)*16; gfx.globalAlpha=(1-q)*.85; Ln(x,y,x+dir*L,y,k%2?3:4,k%3?CREAM:'#ffd0e0'); }
@@ -1188,7 +961,7 @@ SC.dp_hug=(s,u)=>{ { const g0=gfx.globalAlpha; gfx.globalAlpha=g0*fade(u,.8)*(.7
   for(let k=0;k<9;k++) { const q=((s.t/1.1)+k/9)%1,a=-Math.PI/2+(k-4)*.32; gfx.globalAlpha=Math.sin(q*Math.PI)*fade(u,.8); const x=s.x+Math.cos(a)*(20+q*50),y=s.y+Math.sin(a)*(20+q*46)-q*20,r=5+Math.sin(q*Math.PI)*5; DFX.heart(x,y,r*1.2); } gfx.globalAlpha=1; };
 D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,me=ST.unit(m),foe=t.side==='foe';
   const sp=self?{x:me.x,y:me.base}:{x:Math.min(560,H.x+H.w*.5+(foe?14:4)),y:Math.min(316,H.base+3)};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'spread':'run'},{t:self?300:800,x:sp.x,y:sp.y,f:'spread'},{t:self?500:950,f:'clap',dx:(u,tt)=>Math.sin(tt*22)*5,rot:(u,tt)=>Math.sin(tt*9)*.1,sc:(u,tt)=>1+Math.abs(Math.sin(tt*11))*.06},{t:2200,f:'act',dx:-8},{t:2700,f:'celeb',hop:8},{t:3100,f:self?'idle':back(sp.x,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:self?'ab_squeeze_1':'ab_squeeze_2'},{t:self?300:800,x:sp.x,y:sp.y,f:'ab_squeeze_1'},{t:self?500:950,f:'ab_squeeze_3',dx:(u,tt)=>Math.sin(tt*22)*5,rot:(u,tt)=>Math.sin(tt*9)*.1,sc:(u,tt)=>1+Math.abs(Math.sin(tt*11))*.06},{t:2200,f:'ab_squeeze_4',dx:-8},{t:2700,f:'ab_squeeze_6',hop:8},{t:3100,f:self?'idle':back(sp.x,me),hop:3,hn:6},{t:4000,x:'home',y:'home',f:'idle'}]);
   if(!self&&!foe) battle.fx[t.idx].path={t:0,dur:2.4,fn:(q,c)=>{ const ms=q*2400; if(ms<950||ms>2200) return {}; const w=Math.sin(ms/55); return {cx:c.origX+w*4,base:c.origBase,rot:Math.sin(ms/110)*.12,sc:1-.18*Math.abs(w)}; }};
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Deedee gives herself a big squeeze. She deserves one.':'Deedee spots '+t.name+' from across the room. Arms out. No escape.'); say(m.id,'grandma_squeeze'); }],
@@ -1328,9 +1101,9 @@ D.sunday_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2Liv
   // seats: Deedee at the head (the last place), everyone else at every other place from the left
   const seatOf=new Map(); seatOf.set(m,7); others.forEach((p,k)=>seatOf.set(p,[1,3,5,6,4,2,0][k]));
   const seatX=p=>seat0+seatOf.get(p)*seatW;
-  const cookF=(u,tt)=>['act','throw','wind','celeb'][Math.floor(tt*8)%4];
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:cook.x<me.x?'walk':'walkR'},{t:700,x:cook.x,y:cook.y,f:DD_XF('bell','hip')},{t:950,f:'aim'},{t:P.cook0,f:cookF,dx:(u,tt)=>Math.sin(tt*20)*3,hop:5,hn:6},
-    {t:P.go,f:'throw',hop:8},{t:3350,f:seatX(m)<cook.x?'walk':'walkR'},{t:3900,x:seatX(m),y:seatY,f:'spread'},{t:4550,f:'celeb',hop:10,hn:2},{t:5300,f:'clap'},
+  const cookF=(u,tt)=>['ab_sunday_3','ab_sunday_4'][Math.floor(tt*6)%2];
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:cook.x<me.x?'walk':'walkR'},{t:700,x:cook.x,y:cook.y,f:'ab_sunday_1'},{t:950,f:'ab_sunday_2'},{t:P.cook0,f:cookF,dx:(u,tt)=>Math.sin(tt*20)*3,hop:5,hn:6},
+    {t:P.go,f:'ab_sunday_5',hop:8},{t:3350,f:seatX(m)<cook.x?'walk':'walkR'},{t:3900,x:seatX(m),y:seatY,f:'ab_sunday_6'},{t:4550,f:'ab_sunday_6',hop:10,hn:2},{t:5300,f:'ab_sunday_1'},
     {t:5600,f:me.x<seatX(m)?'walk':'walkR'},{t:6300,x:'home',y:'home',f:'idle'}]);
   for(const p of others) { const U=ST.unit(p),dx=seatX(p)-U.x,dy=seatY-U.base,k=p.idx; jog(p,6300,(ms,tt)=>{
     if(ms<3350) return {};
@@ -1414,7 +1187,7 @@ D.moon_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2LiveP
   const chest={x:me.x-6,y:me.base-DH()*.42};
   const P={t0:0,moon,h0:1600,h1:2400,h2:3150,h3:3700,hx:chest.x,hy:chest.y,gx:Gp.x,gy:Math.round((Gp.top+Gp.base)/2),bx0:Math.max(0,Gp.x0-26),bx1:Math.min(576,Gp.x1+26),by:Gp.base+10,top:moon.y+moon.r};
   const hugX=me.x-12,hugY=me.base;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:800,f:'spread'},{t:1500,f:'clap'},{t:1600,f:DD_XF('launch','celeb2')},{t:2400,f:'spread'},{t:3550,f:'aim'},{t:4300,f:'celeb',hop:8},{t:4900,f:'throw'},{t:5600,f:'idle'},{t:6400,f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:800,f:'ab_mult_2'},{t:1500,f:'ab_mult_5'},{t:1600,f:'ab_mult_1'},{t:2400,f:'ab_mult_2'},{t:3550,f:'ab_mult_3'},{t:4300,f:'ab_mult_4',hop:8},{t:4900,f:'ab_mult_6'},{t:5600,f:'idle'},{t:6400,f:'idle'}]);
   for(const p of others) { const U=ST.unit(p),dx=(hugX-U.x)*.55,dy=(hugY-U.base)*.55,k=p.idx; jog(p,6400,(ms,tt)=>{
     if(ms<800) return {};
     if(ms<1400) { const q=ez((ms-800)/600); return {frame:dx>0?'runR':'run',dx:dx*q,dy:dy*q}; }
@@ -1488,39 +1261,24 @@ const brisk=(u,tt)=>Math.sin(tt*14)>0?'run':'walk';
 const liveFoes=()=>(B2.foes||[]).filter(f=>!f.dead&&f.hp>0);
 
 // ---------- Dish-Towel Flick: a whiplash flick with a properly detailed dish towel ----------
-// The flying towel is one painted picture (towel_snap, hand end on its left) turned and stretched from her hand to the tip; towel_twist while it is wound up.
-const drawTowel=(x,y,th,L,w,bend,alpha=1)=>{ const dx=Math.cos(th),dy=Math.sin(th),wound=L<=82&&alpha===1&&w===13;
-  gfx.save(); gfx.globalAlpha*=alpha; if(wound) DFX.P('towel_twist',x+dx*L*.5,y+dy*L*.5,{h:Math.max(52,L*.95),rot:th+1.1}); else DFX.P('towel_snap',x+dx*L*.5,y+dy*L*.5,{w:L+8,h:Math.max(26,L*.38),rot:th}); gfx.restore();
+// The flying towel is one painted picture (towel_snap, hand end on its left) turned and stretched from her hand to the tip.
+const drawTowel=(x,y,th,L,w,bend,alpha=1)=>{ const dx=Math.cos(th),dy=Math.sin(th);
+  gfx.save(); gfx.globalAlpha*=alpha; DFX.P('towel_snap',x+dx*L*.5,y+dy*L*.5,{w:L+8,h:Math.max(26,L*.38),rot:th}); gfx.restore();
   return [x+dx*L,y+dy*L]; };
-const foldedTowel=(x,y,f)=>{ DFX.P('towel_folded',x,y,{w:lerp(66,42,f)}); };
 SC.df_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y-4; gfx.globalAlpha=fade(u,.96);
-  if(P.painted) { // the painted frames already carry the towel: draw only the whoosh arc, the crack burst and the word
-    const S=P.snap,tip=[Math.max(s.tx,x-120),y];
-    if(ms>=S-130&&ms<S+140) { const q=cl((ms-(S-130))/130),L=lerp(60,Math.max(90,x-s.tx+14),q*q*(3-2*q*.55)),th=lerp(-.9,-3.1,q); drawTowel(x,y,th,L,13,null); }   // the painted towel whips out to the spot
-    if(ms>=S-130&&ms<S) { gfx.globalAlpha=.6; for(const [r,w,c] of [[70,10,'#ffffff'],[70,4,'#bfe0ff'],[44,5,'#ffffff']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(x-40,y,r,-.9,-3.1,true); gfx.stroke(); } gfx.globalAlpha=1; }
-    if(ms>=S&&ms<S+260) { const q=(ms-S)/260; if(DFX.burst('crack_burst',tip[0],tip[1],70,q,.1)) gfx.globalAlpha=1; else { gfx.globalAlpha=1-q; for(let k=0;k<10;k++) { const a=k/10*Math.PI*2; Ln(tip[0]+Math.cos(a)*(8+q*10),tip[1]+Math.sin(a)*(8+q*10),tip[0]+Math.cos(a)*(18+q*26),tip[1]+Math.sin(a)*(18+q*26),k%2?3:2,k%2?'#ffffff':GOLD); } twk(tip[0],tip[1],20*(1-q)+8,'#ffffff'); gfx.globalAlpha=1; } if(q<.8) bigWord('CRACK!',tip[0]+6,tip[1]-46,GOLD,3); }
-    return; }
-  if(ms>P.fold) { const f=ez((ms-P.fold)/350); foldedTowel(x-10,y+2,f); if(f>.9) bigWord('SQUARE',x-10,y-40,CREAM,2); return; }
-  const S=P.snap,reach=Math.max(90,x-s.tx+14); let th,L,lag,wv=0,ghost=0;
-  if(ms<P.wind-420) { th=1.78+Math.sin(ms/260)*.08; L=64; lag=-4; }
-  else if(ms<P.wind) { const q=ez((ms-(P.wind-420))/420); th=lerp(1.78,-.62,q); L=lerp(64,76,q); lag=lerp(-4,16,Math.sin(q*Math.PI)); }
-  else if(ms<S-130) { th=-.62+Math.sin(ms/38)*.05; L=78+Math.sin(ms/30)*2; lag=2; }
-  else if(ms<S) { const q=(ms-(S-130))/130,e=q*q*(3-2*q*.55); th=lerp(-.62,-3.1,e); L=lerp(78,reach,e); lag=(1-e)*46; ghost=1; }
-  else { const q=cl((ms-S)/320),r=ez(cl((ms-S-120)/300)); th=lerp(-3.1,-2.5,r); L=lerp(reach,64,r); lag=0; wv=(1-q)*20; }
-  const bend=sc=>lag*sc*sc+wv*Math.sin(sc*9-(ms-S)/20)*sc;
-  if(ghost) { // motion streak: a fan of ghost towels and a swoosh arc behind the snap
-    const q=(ms-(S-130))/130; for(let g=4;g>=1;g--) { const e2=Math.max(0,q-g*.1),th2=lerp(-.62,-3.1,e2*e2*(3-2*e2*.55)),L2=lerp(78,reach,e2); drawTowel(x,y,th2,L2,12,s2=>lag*.4*s2*s2,.1+.07*(5-g)); }
-    gfx.globalAlpha=.6; for(const [r,w,c] of [[L*.92,10,'#ffffff'],[L*.92,4,'#bfe0ff'],[L*.6,5,'#ffffff']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(x,y,r,-.62-.2,th+.08,true); gfx.stroke(); } gfx.globalAlpha=1; }
-  const tip=drawTowel(x,y,th,L,13,bend);
+  // the painted frames carry the towel: draw only the whip out to the spot, the whoosh arc and the crack burst
+  const S=P.snap,tip=[Math.max(s.tx,x-120),y];
+  if(ms>=S-130&&ms<S+140) { const q=cl((ms-(S-130))/130),L=lerp(60,Math.max(90,x-s.tx+14),q*q*(3-2*q*.55)),th=lerp(-.9,-3.1,q); drawTowel(x,y,th,L,13,null); }   // the painted towel whips out to the spot
+  if(ms>=S-130&&ms<S) { gfx.globalAlpha=.6; for(const [r,w,c] of [[70,10,'#ffffff'],[70,4,'#bfe0ff'],[44,5,'#ffffff']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(x-40,y,r,-.9,-3.1,true); gfx.stroke(); } gfx.globalAlpha=1; }
   if(ms>=S&&ms<S+260) { const q=(ms-S)/260; if(DFX.burst('crack_burst',tip[0],tip[1],70,q,.1)) gfx.globalAlpha=1; else { gfx.globalAlpha=1-q; for(let k=0;k<10;k++) { const a=k/10*Math.PI*2; Ln(tip[0]+Math.cos(a)*(8+q*10),tip[1]+Math.sin(a)*(8+q*10),tip[0]+Math.cos(a)*(18+q*26),tip[1]+Math.sin(a)*(18+q*26),k%2?3:2,k%2?'#ffffff':GOLD); } twk(tip[0],tip[1],20*(1-q)+8,'#ffffff'); gfx.globalAlpha=1; } if(q<.8) bigWord('CRACK!',tip[0]+6,tip[1]-46,GOLD,3); }
   };
 SC.df_shock=(s,u)=>{ if(DFX.burst('shock_lines',s.x,s.y,(s.r||44)*2.4,u)) return; for(let k=0;k<3;k++) { const q=cl(u*1.5-k*.12); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.9; ring(s.x,s.y,6+q*(s.r||44),4+q*(s.r||44)*.8,(5-q*4)+k*.4,k%2?'#ffffff':'#bfe0ff'); }
   gfx.globalAlpha=(1-u)*.9; for(let k=0;k<8;k++) { const a=k/8*Math.PI*2+.2,d=10+ez(u)*32; Ln(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,s.x+Math.cos(a)*(d+12),s.y+Math.sin(a)*(d+12),3,'#ffffff'); } gfx.globalAlpha=1; };
-D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m),PT=!!(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee.x_fsnap);
-  if(PT) ST.keys(fx,[{t:0,x:'home',y:'home',f:(u,tt)=>Math.sin(tt*10)>0?'x_fwalk':'x_fspot',hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'x_fspot'},{t:1250,f:'x_ftaut'},{t:1420,f:'x_fshake'},{t:1520,f:'x_fwind1'},{t:1740,f:'x_fwind2',dx:u=>-ez(u)*3},{t:1850,f:'x_fsnap',dx:-10},{t:2000,f:'x_ffollow'},{t:2150,f:'x_frecoil'},{t:2450,f:'x_ffold'},{t:2800,f:'x_ftuck'},{t:3150,f:'x_fdone'},{t:3500,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
-  else ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'wind',dx:u=>-ez(u)*3},{t:1850,f:'throw',dx:-10},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
+D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
+  // painted frames: towel sheet 1 stance, 2 spots the spot, 3 towel taut, 4 whip out, 5 folds it, 6 done (art/chars/deedee-ab.webp)
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_towel_1',hop:3,hn:8},{t:200,f:brisk},{t:1000,x:p.x,y:p.y,f:'ab_towel_2'},{t:1250,f:'ab_towel_3'},{t:1500,f:'ab_towel_3',dx:u=>-Math.sin(u*Math.PI)*3},{t:1850,f:'ab_towel_4',dx:-10},{t:2150,f:'ab_towel_4'},{t:2450,f:'ab_towel_5'},{t:3150,f:'ab_towel_6'},{t:3500,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('df_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150,painted:PT}}); }],
+    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('df_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150}}); }],
     [1150,()=>{ setMessage('She snaps her dish towel out and cocks her arm back.'); sfx.whoosh(); }],
     [1500,()=>{ sfx.charge&&sfx.charge(); setMessage('The towel goes taut. Oh no. She\'s lined it up.'); }],
     [1730,()=>{ sfx.whoosh(); }],
@@ -1560,10 +1318,10 @@ SC.df_tuck=(s,u)=>{ const t=s.t,q=s; gfx.globalAlpha=fade(u,.7)*fin(u,.1); DFX.P
   for(let k=0;k<7;k++) { const a=t*2.4+k*.9,ph=(t*1.1+k/7)%1; twk(q.x+Math.cos(a)*(q.w*.42+6),q.y+q.h*.3-ph*q.h*.9,3+2*Math.sin(ph*Math.PI),k%2?'#ffffff':'#c8e0ff'); } gfx.globalAlpha=1; };
 D.hugShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
   const cx=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length),cy=Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length),px=cx-20,py=Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+18);
-  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:DD_XF('hug','spread')},{t:900,f:'celeb'},{t:1700,f:DD_XF('hug','spread')}];
+  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:'ab_moon_1'},{t:900,f:'ab_moon_2'},{t:1700,f:'ab_moon_3'}];
   let t=1800; const visits=[];
-  for(const o of others) { const q=ST.unit(o),x=Math.min(560,q.x+q.w*.5+18),y=Math.min(316,q.base+3); K.push({t,f:'run'}); t+=380; K.push({t,x,y,f:'spread',dx:(u,tt)=>Math.sin(tt*20)*1.5}); visits.push([t,o]); t+=260; }
-  const heartAt=t; K.push({t,f:'celeb',hop:10},{t:t+400,f:'walk'},{t:t+1000,x:'home',y:'home',f:'idle'});
+  for(const o of others) { const q=ST.unit(o),x=Math.min(560,q.x+q.w*.5+18),y=Math.min(316,q.base+3); K.push({t,f:'run'}); t+=380; K.push({t,x,y,f:'ab_moon_2',dx:(u,tt)=>Math.sin(tt*20)*1.5}); visits.push([t,o]); t+=260; }
+  const heartAt=t; K.push({t,f:'ab_moon_4',hop:10},{t:t+400,f:'ab_moon_5'},{t:t+700,f:'walk'},{t:t+1000,x:'home',y:'home',f:'idle'});
   ST.keys(fx,K);
   const plan={go:900,top:1600,heart:heartAt-500,cx,cy,r:Math.max(70,(Math.max(...U.map(q=>q.x))-Math.min(...U.map(q=>q.x)))*.7+30),x0:px-20,y0:py-DH()*.8,mem:U.map(q=>({x:q.x,w:q.w,mid:q.mid,base:q.base,top:q.top}))};
   ST.play(E2,[
@@ -1578,41 +1336,21 @@ D.moon_back=E2=>D.hugShow(E2);
 
 // ---------- Registered Nut, Reporting: stethoscope round her neck, chest piece on the patient's chest ----------
 const CHEST={tom:.47,grace:.45,rose:.43,amy:.56,boppy:.56,tnb:.58,nara:.4,deedee:.56};
-SC.df_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,P=s.P,k=st.sc||1; gfx.globalAlpha=fade(u,.95); DFX.P('nurse_cap',st.x+3*k,st.y-DH()*(st.sc||1)*.76,{w:26*k});
-  const nx=st.x+2*k,ny=st.y-52*k,yx=nx+1*k,yy=ny+17*k,hs=hands(),go=ez((ms-P.on)/320);
-  const TUBE='#2c3037',ME='#c9d0d8';
-  if(P.painted) { // the painted frames carry the stethoscope; add only the glint where the chest piece touches and the heartbeat
-    if(ms>P.b0-150&&ms<P.b1+150) ring(hs.n.x,hs.n.y,11+Math.sin(ms/90)*2,11+Math.sin(ms/90)*2,1.5,'#ffffff');
-    if(ms>P.b0&&ms<P.b1) { const ph=((ms-P.b0)%520)/520,beat=ph<.15?ph/.15:ph<.3?1-(ph-.15)/.15*.5:.5*(1-(ph-.3)/.7),bx=P.x+(P.foe?0:-6),by=P.y-44;
-      gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(bx,by); const r=10+beat*9; (DFX.heart(0,0,r*1.1)||paintHeart(0,r*.15,r*1.1,'#ff4a6a')); if(ph<.75) DFX.P('heartbeat_line',0,r+16,{w:60}); gfx.restore(); if(ph<.5) bigWord('BA-DUMP',bx,by-40,CREAM,2); }
-    return; }
-  // the tubes: round the back of the neck, then down in a V over the chest to the Y junction
-  if(!PROPART.draw('deedee/stethoscope',nx,ny+9*k,{h:26*k})) {   // painted stethoscope round her neck, else the drawn tubes
-  for(const [w,c] of [[6.5,OUT],[3.6,TUBE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.lineJoin='round';
-    gfx.beginPath(); gfx.moveTo(nx-9*k,ny-4*k); gfx.quadraticCurveTo(nx-10*k,ny+9*k,yx,yy); gfx.stroke();
-    gfx.beginPath(); gfx.moveTo(nx+10*k,ny-4*k); gfx.quadraticCurveTo(nx+11*k,ny+9*k,yx,yy); gfx.stroke(); }
-  Ln(nx-8*k,ny-3*k,nx-6*k,ny+6*k,1.2,'#8a929e'); EO(nx-9*k,ny-4*k,2.4,2.4,ME); EO(nx+10*k,ny-4*k,2.4,2.4,ME); }   // earpieces rest on the collar
-  EO(yx,yy,2.6,2.6,ME);
-  // the chest piece: out of the Y junction, into her hand, onto the patient
-  const sx=P.self?yx-2*k:hs.n.x,sy=P.self?yy+8*k:hs.n.y;   // the hand that holds it
-  const tx=P.x,ty=P.y,cx=lerp(sx,tx,go),cy=lerp(sy,ty,go)-Math.sin(go*Math.PI)*8,slack=ms<P.on?0:1;
-  const hx=ms<P.on?yx+4*k:cx,hy=ms<P.on?yy+16*k:cy;
-  for(const [w,c] of [[6.5,OUT],[3.6,TUBE]]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath(); gfx.moveTo(yx,yy); gfx.quadraticCurveTo((yx+hx)/2+(P.foe?0:4),Math.max(yy,hy)+14,hx,hy); gfx.stroke(); }
-  EO(hx,hy,8,8,ME); E(hx,hy,5,5,'#7e8a97'); E(hx-2,hy-2,2,2,'#ffffff'); if(ms>P.on+260) { ring(hx,hy,11,11,1.5,'#ffffff'); }
+SC.df_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.95); const hs=hands();
+  // the painted frames carry the cap and the stethoscope: add only the glint where the chest piece touches and the heartbeat
+  if(ms>P.b0-150&&ms<P.b1+150) ring(hs.n.x,hs.n.y,11+Math.sin(ms/90)*2,11+Math.sin(ms/90)*2,1.5,'#ffffff');
   if(ms>P.b0&&ms<P.b1) { const ph=((ms-P.b0)%520)/520,beat=ph<.15?ph/.15:ph<.3?1-(ph-.15)/.15*.5:.5*(1-(ph-.3)/.7),bx=P.x+(P.foe?0:-6),by=P.y-44;
     gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(bx,by); const r=10+beat*9; (DFX.heart(0,0,r*1.1)||paintHeart(0,r*.15,r*1.1,'#ff4a6a')); if(ph<.75) DFX.P('heartbeat_line',0,r+16,{w:60}); gfx.restore(); if(ph<.5) bigWord('BA-DUMP',bx,by-40,CREAM,2); } };
 D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,22),self=t===m,me=ST.unit(m),foe=t.side==='foe';
-  const PT=!!(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee.x_nlis1);
-  const K=PT?(self?[{t:0,x:'home',y:'home',f:'x_nclip'},{t:300,f:'x_nput'},{t:500,f:'x_nout'},{t:700,f:'x_nlean'},{t:900,f:'x_nlis1'},{t:1200,f:'x_nlis2'},{t:1550,f:'x_naha'},{t:1900,f:'x_nverdict'},{t:2300,f:'x_nwrite'},{t:2650,f:'x_nclear'},{t:3000,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'x_nwalk',hop:3,hn:6},{t:800,x:sp.x,y:sp.y,f:'x_nsalute'},{t:1000,f:'x_nclip'},{t:1150,f:'x_nput'},{t:1300,f:'x_nout'},{t:1450,f:'x_nlean'},{t:1550,f:'x_nlis1'},{t:1750,f:'x_nlis2'},{t:1900,f:'x_naha'},{t:2050,f:'x_nverdict'},{t:2400,f:'x_nwrite'},{t:2800,f:'x_nclear'},{t:3250,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}])
-    :self?[{t:0,x:'home',y:'home',f:'hip'},{t:500,f:DD_XF('nurse','aim')},{t:1900,f:'clap'},{t:2300,f:'celeb',hop:8},{t:2800,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'hip'},{t:1050,f:DD_XF('nurse','aim'),dx:u=>-ez(u)*6},{t:2000,f:'clap',dx:-6},{t:2350,f:'celeb',hop:8},{t:2900,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
+  // painted frames: 1 runs in, 7 salutes, 3 reads the chart, 2 listens with the stethoscope, 4 takes a pulse, 8 aha, 5 and 6 the bandage
+  const K=self?[{t:0,x:'home',y:'home',f:'ab_nut_3'},{t:300,f:'ab_nut_2'},{t:900,f:'ab_nut_2'},{t:1200,f:'ab_nut_4'},{t:1550,f:'ab_nut_8'},{t:1900,f:'ab_nut_5'},{t:2300,f:'ab_nut_5'},{t:2650,f:'ab_nut_6'},{t:3000,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'ab_nut_1',hop:3,hn:6},{t:800,x:sp.x,y:sp.y,f:'ab_nut_7'},{t:1000,f:'ab_nut_3'},{t:1150,f:'ab_nut_2'},{t:1550,f:'ab_nut_2'},{t:1750,f:'ab_nut_4'},{t:1900,f:'ab_nut_8'},{t:2050,f:'ab_nut_8'},{t:2400,f:'ab_nut_5'},{t:2800,f:'ab_nut_6'},{t:3250,f:back(sp.x,me),hop:3,hn:6},{t:3800,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),end=self?3200:3900,hit=self?1900:2050;
   const ch=foe?.5:(CHEST[t.id]||.56);   // chest height as a share of the patient's height, so it sits at Grace's chest for her pose
-  const P={on:self?400:850,self,foe,x:self?me.x-6:(foe?H.x+H.w*.12:H.x-H.w*.12),y:self?me.base-DH()*.36:H.base-H.h*ch,b0:PT?(self?900:1550):(self?700:1150),b1:hit-80,painted:PT};
+  const P={on:self?400:850,self,foe,x:self?me.x-6:(foe?H.x+H.w*.12:H.x-H.w*.12),y:self?me.base-DH()*.36:H.base-H.h*ch,b0:self?900:1550,b1:hit-80};
   const bx=foe?H.x:H.x-H.w*.08,by=foe?H.mid:H.mid-H.h*.12;
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); if(!PT) scene('dd_badge',(end-200)/1000,{st,fix:self?300:900}); scene('df_steth',(hit+500)/1000,{st,P}); }],
+    [0,()=>{ setMessage(self?'Deedee checks herself. Registered nut, reporting.':'Deedee hurries over to '+t.name+'. Registered nut, reporting.'); say(m.id,'registered_nut'); scene('df_steth',(hit+500)/1000,{st,P}); }],
     [P.b0,()=>{ setMessage('Off her neck comes the big stethoscope. Ba-dump. Ba-dump.'); for(let k=0;k<3;k++) sfx.heartbeat(k*.52); }],
     ['hf',hit],
     [hit,()=>{ E2.apply(); sfx.heal(); sfx.boing(); scene('dv_bandage',(end-hit)/1000,{x:self?me.x-14:bx,y:self?me.base-DH()*.5:by}); scene('dv_big',1.1,{x:self?me.x:H.x,y:(self?me.top:H.top)-40,txt:'POP!',c:CREAM,sc:4}); scene('dv_glow',.9,{x:H.x,y:H.mid}); hopOf(t!==m?t:null); setMessage('A bandage. A big one. Right where it counts.'); }],
@@ -1635,19 +1373,17 @@ const mitt=(x,y,sc,rot,flip,scorch,wave)=>{ gfx.save(); gfx.translate(x,y); gfx.
   gfx.restore(); };
 SC.df_mitts=(s,u)=>{ const ms=s.t*1000,P=s.plan; if(ms<P.on) return; gfx.globalAlpha=fade(u,.96); const hs=hands(),h=hand();
   const on=ez((ms-P.on)/520),clap=ms>P.clap-80&&ms<P.clap+160?Math.sin(cl((ms-P.clap+80)/240)*Math.PI):0,hang=ez((ms-P.hang)/350),burn=ez((ms-P.clap)/600);
-  const sc=.95*on,wig=ms<P.on+520?Math.sin(ms/40)*.12*(1-on):0;
   let nx=hs.n.x,ny=hs.n.y-8,fx=hs.f.x,fy=hs.f.y-8; const st=s.st; if(st&&st.x!=null&&hs.n.y<st.y-70) { nx-=10; fx+=10; ny-=10; fy-=10; }   // raised arms: keep the mitts clear of her face
   if(ms>P.clap-80&&ms<P.hang) { const cx=(nx+fx)/2; nx=lerp(nx,cx-7,clap*.4+.2); fx=lerp(fx,cx+7,clap*.4+.2); }
-  const rot=ms>P.hang?0:(ms<P.clap-400?-.35:0);
-  if(hang<=0) { mitt(nx,ny,sc,rot+wig,1,burn,0); mitt(fx,fy,sc,-rot-wig,-1,burn,0); }
-  else { const rx=h.x-30,ry=h.y-86; gfx.globalAlpha=fade(u,.96); if(!PROPART.draw('deedee/hanging_rail',rx,ry-4,{w:96})) { Ln(rx-44,ry,rx+44,ry,4,OUT); Ln(rx-44,ry,rx+44,ry,2,WOOD); } /* painted wall rail with hooks */ for(const [sx0,sd] of [[-22,1],[22,-1]]) { const x2=lerp(sd>0?nx:fx,rx+sx0,hang),y2=lerp(sd>0?ny:fy,ry+36,hang); mitt(x2,y2,.95,hang*Math.PI*(sd>0?1:-1),sd>0?1:-1,burn,0); } }
+  // the mitts are in the painted frames: only the hang beat draws them, flying to the rail
+  if(hang>0) { const rx=h.x-30,ry=h.y-86; gfx.globalAlpha=fade(u,.96); if(!PROPART.draw('deedee/hanging_rail',rx,ry-4,{w:96})) { Ln(rx-44,ry,rx+44,ry,4,OUT); Ln(rx-44,ry,rx+44,ry,2,WOOD); } /* painted wall rail with hooks */ for(const [sx0,sd] of [[-22,1],[22,-1]]) { const x2=lerp(sd>0?nx:fx,rx+sx0,hang),y2=lerp(sd>0?ny:fy,ry+36,hang); mitt(x2,y2,.95,hang*Math.PI*(sd>0?1:-1),sd>0?1:-1,burn,0); } }
   // steam and scorch smoke off the mitts after the clap
   if(ms>P.clap-40&&ms<P.hang+800) { gfx.globalAlpha=fade(u,.9); for(const [px,py] of [[nx,ny-26],[fx,fy-26]]) { if(!DFX.steam(px,py,s.t,2,40)) for(let k=0;k<5;k++) { const q=((s.t*.9+k*.21)%1); gfx.globalAlpha=(1-q)*.8*fade(u,.9); E(px+Math.sin(q*6+k)*6+(k-2)*3,py-q*38,5+q*7,5+q*7,k%2?'#f6f2ea':'#d9d4ca'); } } }
   if(ms>P.clap&&ms<P.clap+400) { const q=(ms-P.clap)/400; if(!DFX.burst('clap_burst',(nx+fx)/2,ny-24,82,q)) { gfx.globalAlpha=1-q; for(let k=0;k<8;k++) { const a=-Math.PI/2+(k-3.5)*.4; Ln((nx+fx)/2+Math.cos(a)*10,ny-20+Math.sin(a)*10,(nx+fx)/2+Math.cos(a)*(22+q*22),ny-20+Math.sin(a)*(22+q*22),2.5,k%2?'#ffd078':'#ff9a4a'); } } }
   if(ms>P.clap+120&&ms<P.clap+900) DFX.burst('heat_wave',(nx+fx)/2,ny-30,64,(ms-P.clap-120)/780);   // heat rolls off the scorched mitts
   if(ms<P.on+900) { gfx.globalAlpha=fin(u,.05); bigWord('OVEN MITTS',h.x-10,h.y-112,CREAM,2); } gfx.globalAlpha=1; };
 D.oven_mitt_ultimatum=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,60),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'kneel'},{t:1000,f:'act',dx:(u,tt)=>Math.sin(tt*6)*2},{t:1700,f:'celeb'},{t:2150,f:'clap'},{t:2500,f:'hip'},{t:2900,f:'spread'},{t:3250,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_mitt_1',hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'ab_mitt_2'},{t:1000,f:'ab_mitt_3',dx:(u,tt)=>Math.sin(tt*6)*2},{t:1700,f:'ab_mitt_3'},{t:2150,f:'ab_mitt_8'},{t:2500,f:'ab_mitt_5'},{t:2900,f:'ab_mitt_9'},{t:3250,f:'walkR',hop:3,hn:6},{t:4100,x:'home',y:'home',f:'idle'}]);
   const plan={on:1000,clap:2150,hang:2900};
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks up to them and slowly puts on two enormous, very quilted oven mitts.'); say(m.id,'oven_mitt_ultimatum'); scene('df_mitts',3.4,{plan,st}); }],
@@ -1659,24 +1395,13 @@ D.oven_mitt_ultimatum=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=ro
     [4200,'end',res(E2)+'Deedee has used the serious mitts.']]); };
 
 // ---------- Brisk Walk (key brisk_means_brisk): hand weights gripped in both hands in every frame ----------
-const bell=(x,y,rot,sc,fist)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc);
-  if(PROPART.draw('deedee/hand_weights',0,0,{w:36})) { EO(0,0,6.5,6.5,fist); for(const dx of [-3,0,3]) Ln(dx,-5,dx,5,1,'#c8855f'); gfx.restore(); return; }   // painted pink 3 LB weight, fist on top
-  RO(-15,-2.5,30,5,'#9aa3b0');
-  for(const sd of [-1,1]) { RO(sd*15-(sd>0?0:8),-10,8,20,'#ff7aa8'); R(sd*15-(sd>0?0:8)+1,-8,3,16,'#ffb8d2'); R(sd*15-(sd>0?0:8)+5,-8,2,16,'#d85088'); }
-  EO(0,0,6.5,6.5,fist); for(const dx of [-3,0,3]) Ln(dx,-5,dx,5,1,'#c8855f'); gfx.restore(); };
-SC.df_weights=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,on=ms>s.from&&ms<s.to,sw=on?Math.sin(s.t*14):0,pop=ez(ms/180); gfx.globalAlpha=fade(u,.985); const hs=hands(),SK='#f2b48a';
-  for(const [h,d] of [[hs.f,1],[hs.n,-1]]) bell(h.x,h.y+sw*3*d,(.5+sw*.28)*d,1.3*pop,SK);
-  if(on) for(const [h,d] of [[hs.n,1],[hs.f,-1]]) { gfx.globalAlpha=.6; gfx.strokeStyle=CREAM; gfx.lineWidth=3; gfx.beginPath(); gfx.arc(h.x,h.y,30,-.9,.9); gfx.stroke(); gfx.globalAlpha=.4; gfx.beginPath(); gfx.arc(h.x,h.y,38,-.7,.7); gfx.stroke(); }
-  if(ms<s.from+700&&ms>150) { gfx.globalAlpha=1; bigWord('1 LB',hs.n.x,hs.n.y-44,'#ff7aa8',2); }
-  if(on&&Math.floor(s.t*4)%2) { gfx.globalAlpha=.9; bigWord(Math.floor(s.t*2)%2?'HUP':'TWO',st.x,st.y-DH()-20,CREAM,2); } gfx.globalAlpha=1; };
 D.brisk_means_brisk=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),far=Math.max(24,F.x-F.w*.5-36),fy=Math.min(316,F.base+4);
   const passAt=Math.round(1400*(me.x-F.x)/(me.x-far));
-  const PT=!!(BATTLE_SPRITES.deedee&&BATTLE_SPRITES.deedee.x_bpw1);   // painted tracksuit set (weights are painted in)
-  const LOOP=['x_bpw1','x_bpw2','x_bsp1','x_bsp2','x_bfull'];
-  const st=PT?ST.keys(fx,[{t:0,x:'home',y:'home',f:'x_bready'},{t:450,f:(u,tt)=>Math.abs(tt*1000-(450+passAt))<130?'x_bpass':LOOP[Math.floor(tt*9)%LOOP.length],ease:'lin'},{t:1850,x:far,y:fy,f:'x_bturn'},{t:2100,f:(u,tt)=>'x_bback',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'x_bcool'},{t:3950,f:'x_bwin'}])
-    :ST.keys(fx,[{t:0,x:'home',y:'home',f:'clap'},{t:450,f:brisk,ease:'lin'},{t:1850,x:far,y:fy,f:'flip'},{t:2100,f:(u,tt)=>Math.sin(tt*14)>0?'runR':'walkR',dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'idle'},{t:3900,f:'hip'}]);
+  // painted frames (tracksuit, hand weights painted in): 1 ready, 2 3 5 6 7 the walk, 4 the pass, 11 the turn, 6F the way back, 9 cool down, 10 cheer
+  const LOOP=['ab_brisk_2','ab_brisk_3','ab_brisk_5','ab_brisk_6','ab_brisk_7'];
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_brisk_1'},{t:450,f:(u,tt)=>Math.abs(tt*1000-(450+passAt))<130?'ab_brisk_4':LOOP[Math.floor(tt*9)%LOOP.length],ease:'lin'},{t:1850,x:far,y:fy,f:'ab_brisk_11'},{t:2100,f:(u,tt)=>(Math.floor(tt*9)%2?'ab_brisk_6F':'ab_brisk_7F'),dy:u=>Math.sin(u*Math.PI)*16,ease:'lin'},{t:3700,x:'home',y:'home',f:'ab_brisk_9'},{t:3950,f:'ab_brisk_10'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage(PT?'Deedee changes into her tracksuit and grabs her orange hand weights. Perfectly respectable posture.':'Deedee picks up her pink hand weights. Perfectly respectable posture.'); say(m.id,'brisk_means_brisk'); if(!PT) scene('df_weights',4.35,{st,from:450,to:3700}); scene('dd_speed',3.8,{st,from:450,to:3700,dir:ms=>ms<1850?1:-1}); sfx.ding(); }],
+    [0,()=>{ setMessage('Deedee changes into her tracksuit and grabs her orange hand weights. Perfectly respectable posture.'); say(m.id,'brisk_means_brisk'); scene('dd_speed',3.8,{st,from:450,to:3700,dir:ms=>ms<1850?1:-1}); sfx.ding(); }],
     [450,()=>{ sfx.run&&sfx.run(); setMessage('Arms swinging. Weights pumping. She sets off.'); }],
     ['hf',450+passAt],
     [450+passAt,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('dd_thump',.8,{x:F.x,y:F.mid}); scene('dv_big',1.1,{x:F.x,y:F.top-74,txt:'BRISK!',c:'#ff7aa8',sc:4}); }],
@@ -1687,7 +1412,6 @@ D.brisk_means_brisk=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit
 // ---------- Garden Shower: a real water spray (fan of droplets, arcing streams, splashes, mist, rainbow glints) ----------
 const RB=['#ff6a6a','#ffb04a','#ffe85a','#7ae07a','#5ac8ff','#7a7aff','#c07aff'];
 SC.df_hose=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-8,y=h.y-2,P=s.P,t=s.t; gfx.globalAlpha=fade(u,.96);
-  DFX.P('garden_hose',x+44,P.fl-4,{w:58}); DFX.P('hose_nozzle',x-12,y+2,{h:34,flip:true});   // painted coil on the floor, painted nozzle in her hand
   if(ms>P.s0&&ms<P.s1) { const q=(ms-P.s0)/(P.s1-P.s0),tx=lerp(P.x1+20,P.x0-20,q),ty=P.yl,sx=x-28,sy=y-2,env=Math.min(1,(ms-P.s0)/90,(P.s1-ms)/160),dx=tx-sx,len=Math.max(50,Math.abs(dx));
     // painted jet: one water arc from the nozzle to the spot being sprayed, swept across the row, with a painted splash at the hit
     gfx.globalAlpha=env; DFX.P('spray_arc',(sx+tx)/2,(sy+ty)/2-8,{w:len*1.2,h:len*.55,flip:dx<0});
@@ -1696,8 +1420,8 @@ SC.df_hose=(s,u)=>{ const ms=s.t*1000,h=hand(),x=h.x-8,y=h.y-2,P=s.P,t=s.t; gfx.
   if(ms<P.s0) { gfx.globalAlpha=1; bigWord('GENTLE',x-6,y-30,'#8ef0a0',1); } gfx.globalAlpha=1; };
 SC.dv_rainbow=(s,u)=>{ DFX.burst('rainbow_mist',s.x,s.y,s.w*.5,u); };
 D.garden_shower=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,150),me=ST.unit(m);
-  const AIM=DD_XF('flick','aim');   // painted arm-out pose for aiming the hose; the old pixel 'aim' frame only if the painted set is missing
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:AIM},{t:1500,f:AIM,dx:u=>-Math.sin(u*Math.PI)*14,dy:u=>Math.sin(u*Math.PI*2)*3},{t:2900,f:'hip'},{t:3300,f:'walkR',hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
+  // painted frames (hose and nozzle are in them): 1 carries the hose over, 2 checks the nozzle, 3 and 4 spray toward the row, 5 checks the nozzle again, 6 done
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:7},{t:900,x:p.x,y:p.y,f:'ab_garden_2'},{t:1500,f:'ab_garden_3F',dx:u=>-Math.sin(u*Math.PI)*14},{t:2200,f:'ab_garden_4',dy:u=>Math.sin(u*Math.PI*2)*3},{t:2900,f:'ab_garden_5'},{t:3300,f:'ab_garden_6'},{t:3500,f:'walkR',hop:3,hn:6},{t:4200,x:'home',y:'home',f:'idle'}]);
   const P={s0:1500,s1:2900,x0:Gp.x0,x1:Gp.x1,yl:Gp.top+Math.max(10,(Gp.base-Gp.top)*.3),fl:p.y,list:list.map(f=>ST.foe(f))},hit=2200;
   ST.play(E2,[
     [0,()=>{ setMessage('Deedee walks over with the garden hose. She checks the nozzle. GENTLE. Good.'); say(m.id,'garden_shower'); scene('df_hose',3.6,{P}); }],

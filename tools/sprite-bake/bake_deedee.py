@@ -47,7 +47,7 @@ def _auto_head(img):
 # hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
 KOV = {}    # pose name -> head factor override (default HEAD_K)
 KEEP = {}   # pose name -> [(x0, y0, x1, y1)] regions of the ORIGINAL pose pasted back over the bigger head (hands raised above the head)
-HEAD_BOX = {}   # the extra sheets' boxes are added by bake_deedee_extra.py and bake_deedee_brisk.py
+HEAD_BOX = {}   # the extra sheets' boxes are added by bake_deedee_extra.py
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""

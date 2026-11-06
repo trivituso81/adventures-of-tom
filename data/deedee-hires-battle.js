@@ -45,13 +45,9 @@
     sp.sit=sp.toast=sp.x_sitL; sp.sitR=sp.x_sitR; sp.whisper=sp.x_whisper;
     sp.carry=sp.x_carry; sp.hug=sp.x_open; sp.shrug=sp.x_shrug; sp.clap=sp.x_clap;
   }
-  // Brisk Walk set (tracksuit, separate palette), baked by tools/sprite-bake/bake_deedee_brisk.py
-  if(typeof DEEDEE_BRISK!=='undefined') {
-    const BR=DEEDEE_BRISK; paintedAtlas('deedeeBrisk',BR.atlas.src,BR.atlas.rects,BR.atlas.k);
-    const m3={}; let n3=0; for(const k in BR.pal) { const c=String.fromCharCode(0x0500+n3++); m3[k]=c; pal[c]=BR.pal[k]; } m3['.']='.';
-    for(const k in BR.rows) { const rows=paintRows(BR.rows[k].map(r=>{ let q=''; for(const ch of r) q+=m3[ch]; return q; }),'deedeeBrisk',k,false); reg(rows);
-      const h=BR.hands[k]; if(h&&sp.handAt) { const cur=sp.handAt.get(rows)||{}; sp.handAt.set(rows,{n:h.n||cur.n,f:h.f||cur.f}); } sp['x_'+k]=rows; }
-  }
+  // Ability frames (tools/sprite-bake/bake_deedee_ab.py, data/deedee-ab.js): f:'ab_towel_1' etc. in a move's keys; a trailing 'F' is the same frame facing right. Eye and hand points are found as for the poses above.
+  if(typeof DEEDEE_AB!=='undefined') { const A=DEEDEE_AB; paintedAtlas('deedeeAb',A.atlas.src,A.atlas.rects,A.atlas.k);
+    for(const k in A.ab) { const r=reg(paintRows(rk(A.ab[k]),'deedeeAb',k,false)); sp[k]=r; sp[k+'F']=mir(r); } }
   // Her cardigan is not a dark tee, so outfit recolouring does not apply to the painted Deedee.
   if(typeof GARMENT!=='undefined') { delete GARMENT.bt.deedee; delete GARMENT.ow.deedee; }
 })();

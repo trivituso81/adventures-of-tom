@@ -71,9 +71,7 @@ TNB body build (2026-10-29, Tom: body proportions still did not match Tom): head
 Boppy Sheet B and young runner (2026-10-29): `bake_boppy_extra.py` also bakes `src/boppy-stock-v1.png` (aim, throw, spread, toast, point, clap, shrug; sitc is baked but unused because moves draw their own chair) into `art/chars/boppy-stock.webp` (BOPPY_STOCK) and `src/boppy-young-v1.png` (ready, run1, run2, wind, strike, celebr; no head warp, tallest frame 76 rows) into `art/chars/boppy-young.webp` (BOPPY_YOUNG). Wiring in data/boppy-hires-battle.js: stock poses replace sp.aim/throw/spread/toast/point/clap/shrug; young frames are sp.yg_*; youngOn() in engine/boppy-moves.js maps wind=yg_ready, spread=yg_wind, hip=yg_celebr, run=yg_run1/2. Head factor for f_ and s_ poses now uses the battle factor (was the walk factor). Still pixel: `sit` (Grumble, Nineteen Seventy, Recliner Reservation self): needs a chairless seated pose.
 
 TNB ability frames (2026-11-06): `ability_frames_tnb.py` cuts the 14 approved `art/raw/characters/tnb-ab-<move>-v*.png` sheets (sized so the median upright figure equals the ready pose) and `bake_tnb.py` bakes them into `art/chars/tnb-ab.webp` (`TNB_HIRES.ab`, frames `ab_<short>_<n>`). Objects and effects sheets (`tnb-fx-*`) are cut by `bake_tnb_fx.py` into `art/props/tnb/`.
-Deedee Flick sheet (src/deedee-flick-v1.png, frames x_fwalk..x_fdone, towel painted into the hand) is baked by bake_deedee_extra.py; Dish-Towel Flick plays it and df_towel draws only the whoosh and crack.
-Deedee nurse sheet (src/deedee-nurse-v1.png, frames x_nwalk..x_nclear) baked by bake_deedee_extra.py; Registered Nut plays it, df_steth draws only the glint and heartbeat.
-Deedee Brisk Walk tracksuit set: bake_deedee_brisk.py (src/deedee-brisk-v1.png, own palette, hand weights lifted out of the head warp via KEEPIMG) -> art/chars/deedee-brisk.webp + data/deedee-brisk.js; frames x_bwarm..x_bwin; Brisk Walk plays them and skips the drawn weights.
+Deedee ability frames: ability_frames_deedee.py (the 14 approved Art Library sheets, grid cut per sheet) and bake_deedee_ab.py -> art/chars/deedee-ab.webp + data/deedee-ab.js; engine/deedee-moves.js plays f:'ab_<move>_<n>' (trailing F = facing right). Her old towel, nurse and brisk-walk frames were purged by purge_deedee_extra.py (Nov 2026).
 
 
 ## Justin (2026-10-29)
@@ -102,7 +100,7 @@ python3 tools/sprite-bake/hires_install.py /tmp/hires 1.5 amy-battle amy-ko
 | bake_grace_ab.py | 1.5 | grace-ab (her 14 ability sheets, 93 frames; cut by grace_ability_frames.py) |
 | bake_rose.py | 1.5 | rose-battle, rose-battle-x, rose-battle-tk, rose-battle-bm, rose-ko, rose-ride-bt |
 | bake_amy.py, bake_amy_extra.py | 1.5 | amy-battle, amy-ko, amy-ba, amy-bs, amy-bp, amy-mk |
-| bake_deedee.py, bake_deedee_extra.py, bake_deedee_brisk.py | 1.5 | deedee-battle, deedee-ko, deedee-extra, deedee-brisk |
+| bake_deedee.py, bake_deedee_extra.py, bake_deedee_ab.py | 1.5 | deedee-battle, deedee-ko, deedee-extra, deedee-ab |
 | bake_tnb.py | 1.5 | tnb-battle, tnb-ab, tnb-poses, tnb-ko |
 | bake_nara.py | 1.5 | nara-battle, nara-ko |
 | bake_olivia_battle.py | 1.5 | olivia-battle, olivia-ko and the 12 move sheets |

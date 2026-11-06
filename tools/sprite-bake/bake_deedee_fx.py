@@ -11,16 +11,16 @@ RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/pr
 MAXSIDE = 220
 # sheet -> slugs in cell order (reading order, 4 columns). None = not used by the game.
 SHEETS = {
- 'dish-towel-flick': ['towel_folded', 'towel_twist', 'towel_snap', 'dirt_smudge', 'crack_burst', 'shock_lines'],
+ 'dish-towel-flick': [None, None, 'towel_snap', 'dirt_smudge', 'crack_burst', 'shock_lines'],
  'moon-back': ['moon_crescent', 'moonbeam_soft', 'heart_big', 'gold_motes', 'sparkle_cluster', 'warm_glow'],
- 'registered-nut': ['nurse_cap', 'stethoscope', 'bandage', 'rn_badge', 'heartbeat_line', None, None],
- 'corner-piece': ['crisp_dish_full', 'crisp_pan', 'plate_with_corner_piece', None, None, 'steam_curl_gold', 'sparkles_gold'],
+ 'registered-nut': ['nurse_cap', None, 'bandage', None, 'heartbeat_line', None, None],
+ 'corner-piece': [None, 'crisp_pan', 'plate_with_corner_piece', None, None, 'steam_curl_gold', 'sparkles_gold'],
  'wet-floor': ['mop', 'mop_bucket', 'wet_floor_sign', 'puddle', 'water_drops', 'amber_blob', 'sparkle_white'],
- 'wine': ['wine_glass', 'spoon', 'wine_bottle', 'cork', 'pop_burst', None, 'clink_sparkle'],
+ 'wine': ['wine_glass', 'spoon', None, None, 'pop_burst', None, 'clink_sparkle'],
  'oven-mitt-ultimatum': [None, 'oven_mitt', 'hanging_rail', None, 'heat_wave', 'clap_burst', 'shock_ring'],
  'sunday-ult': ['dinner_bell', 'apron', 'wooden_spoon', 'pot_lid', 'rolling_pin', 'colander', None, 'stove', 'burner_ring', 'cyclone', 'steam_curl', 'dining_table'],
- 'brisk-means-brisk': ['hand_weights', None, 'sightseeing_sign', 'speed_lines', 'dust_puff', 'thump_burst'],
- 'garden-shower': ['hose_nozzle', 'garden_hose', 'spray_arc', 'spray_drops', 'splash', 'rainbow_mist'],
+ 'brisk-means-brisk': [None, None, 'sightseeing_sign', 'speed_lines', 'dust_puff', 'thump_burst'],
+ 'garden-shower': [None, None, 'spray_arc', 'spray_drops', 'splash', 'rainbow_mist'],
  'rise-and-shine': ['window_shade_down', 'window_shade_up', 'sun_beam', 'sun_glare', 'dust_motes', 'glare_lines'],
  'beanie-master': ['mist_cloud', 'mist_puff_ring', 'mist_wisps', 'bowl_of_beans', 'golden_glow_twinkle', 'speed_lines_short'],
  'grandma-squeeze': ['kiss_mark', 'heart_big', None, 'squeeze_lines', 'warm_glow'],
