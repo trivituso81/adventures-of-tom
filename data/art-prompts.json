@@ -909,8 +909,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Ten Million Subscribers.\n\nRow 1:\n1. Holding the purple hairbrush microphone to her mouth, waving with the other hand, looking at the viewer, a sunny vlogger smile.\n2. Staring at the hairbrush microphone, eyebrows raised, mouth in a small surprised O.\n3. Both hands pressed to her cheeks, jaw dropped, eyes huge, overjoyed.\n\nRow 2:\n4. Holding up a homemade square plaque wrapped in tinfoil with a glitter-glue diamond, both arms raised high, a proud grin.\n5. The tinfoil plaque held out in front of her in both hands, tilted forward, a determined shout.\n6. Hugging the tinfoil plaque to her chest, eyes closed, a happy, teary smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-dance-battle-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954317506
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-dance-battle",
    "tab": "Characters",
