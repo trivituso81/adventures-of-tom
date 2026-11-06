@@ -2695,6 +2695,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793926561924
+    },
+    {
+     "n": 3,
+     "file": "art/raw/enemies/enemy-directorscut-v4.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793926897230
     }
    ],
    "rejects": [],
