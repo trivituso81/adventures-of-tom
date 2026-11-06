@@ -1,15 +1,16 @@
-"""Tom's overworld walk and stand frames as WHOLE painted figures (TEST, Tom 2026-11-05 19:29).
+"""Tom's overworld walk and stand frames as WHOLE painted figures (Tom 2026-11-05 19:29, kept 19:47).
 
 Tom: "as a test, just with Tom, throw away rules you have about separate heads and resizing heads and bodies and just use these
 for Tom's walking and standing animations." Each frame is one of his ten full-figure paintings, cut off the crimson background and
 used as painted: no head swap, no head or body resize. The only scaling is ONE uniform factor per picture so the figure's size matches
 his standing painting of the same view (the two-frame walking pictures were painted smaller on a wider canvas).
-Returns ({'w_down_stand': RGBA, ...}, info) with the same keys as tom_walk_frames.build()."""
+Returns ({'w_down_stand': RGBA, ...}, info) with the keys w_<down|up|left>_<stand|step1|step2|pass>."""
 import os, sys
 import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from tom_walk_frames import RAW   # the folder art/raw/characters
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+RAW = os.path.join(ROOT, 'art/raw/characters')
 from scipy import ndimage as ndi
 
 def _key(im):

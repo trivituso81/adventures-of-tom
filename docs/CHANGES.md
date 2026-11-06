@@ -1,3 +1,8 @@
+## 2026-11-05 (280): Tom's whole-figure walk KEPT, old Tom walk builder purged (no art change)
+- Tom (19:47): "keep" the whole-figure test of CHANGES 278. Purged in the same change: `tools/sprite-bake/tom_walk_frames.py` (head placement, neck and nape fixes, `apply_bob`); in `bake_tom_walk_v4.py` the head matching (`HERO_HEAD`, `CUT_PX`, `EAR_PX`, `_warp_xy`, `_walk_head`), the bob (`TOM_BOB`), the old walk-head solver (`FACE_GROW_W`, `OW_REF_H`) and their comments; the 12 headless body pictures `art/raw/characters/tom-body-*.png` and the 3 head pictures `tom-head-*.png`.
+- Kept: `tom-hero-fresh-v1`, `tom-back-view-v1`, `tom-side-view-v1` (Art Library entries read them) and `tom-whole-*.png` (the new sources).
+- Proof: rebake after the purge reproduces `art/chars/tom-ow.webp`, `tom-stretch.webp` and `data/tom-hires.js` byte for byte, so no tag moves. Grep for every old name: 0 references outside this history file.
+
 ## 2026-11-05 (278): Art Library: Square fix 3 card, exit boards become tall archways (`sqfix4`)
 - Tom approved `area-square-fix` v2 (made from the first fix card, not fix 2): boards still the same height. Second miss on board height by edits. Stop-loss: the generator does not resize existing objects; pixel-raising is blocked (Grump Hollow board touches the top edge, School post stands on the Taxi Co. roof).
 - `area-square-fix2` (never generated) replaced by `area-square-fix3`: attaches fix v1 (two library doors, lettered Kettle sign), deletes the extra top SCHOOL board, replaces each exit board with a tall iron archway over its lane, board at the top. Replacing an object works better in edits than resizing it.

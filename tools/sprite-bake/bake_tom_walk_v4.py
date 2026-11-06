@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bake Tom (v5 walk, 2026-11-05: overworld walk frames built only from the headless body pictures Tom supplied, see tools/sprite-bake/tom_walk_frames.py; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom (overworld walk frames are Tom's whole painted figures, see tools/sprite-bake/tom_whole_frames.py; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
 Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) (the old walk sheets are deleted), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
@@ -56,15 +56,8 @@ XSHEETS = [
 for i, names in enumerate(XSHEETS, 1):
     for nm, im in slice_sheet(os.path.join(SRC, f'tom-xposes-{i}-v1.png'), [[n.split(':')[1] for n in names]]).items():
         poses[next(n for n in names if n.split(':')[1] == nm).replace(':', '_')] = im
-# Walk (v4, 2026-11-04): the new painted hero-style 3 x 3 sheet (tom-walk-sheet-v1.png, Library entry tom-walk-sheet). The generator
-# never delivers the third cell of a row (step B as a mirror, the passing pose): cells 3 and 6 are ignored and the engine's
-# step2 for down and up is the WHOLE step1 frame flipped left to right (no cutting, no scaling, no head change). Side step2 is
-# cell 9 as painted (a second contact stride, close to cell 8).
-# 2026-11-05 09:02 (Tom: "purge all existing Tom body walking frames and use only the ones I just provided"): the nine overworld walk frames are
-# built ONLY from his seven headless body pictures and the heads of his three standing paintings (tools/sprite-bake/tom_walk_frames.py).
-# The old walk sheet and side strip are gone. The only alteration is the mirror for front and back step 2.
+# Walk: Tom's overworld frames are his ten whole painted figures as painted (tools/sprite-bake/tom_whole_frames.py), no head or body resizing.
 from defringe import defringe
-# 2026-11-05 19:29 (Tom, TEST): the nine overworld frames plus the passing frames are Tom's ten WHOLE full-figure paintings, used as painted (tools/sprite-bake/tom_whole_frames.py): no separate head, no head or body resizing, no bob.
 from tom_whole_frames import build as _build_walk
 poses.update(_build_walk()[0])
 
@@ -167,90 +160,11 @@ if os.environ.get('RULER'):               # RULER=name,name DIR=...: source pose
     sys.exit(0)
 for _n in list(poses):
     if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
-# Walk and arrival stretch (2026-11-01): the welcome screen draws the front walk frame at real height (Tom 5'11" = 308 picture px next to
-# Justin 6'4" = 330). Tom's walk face was .168 of his height, Justin's .270; to match Justin's face it must be .270 x 330 / 308 = .289, so x 1.72.
-FACE_GROW_W = 1.72 * .85 * .94 * HEAD_UP   # x .94 (2026-11-01, Tom: still looked bigger than Justin; his bald scalp reads as face, so his visible face was 13% taller at equal head outline); x .85 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average)
-_tw, _cw, _, _ = head_box(poses['w_down_stand'], 'w_down_stand'); _rw = (_cw - _tw) / poses['w_down_stand'].height
-def _ratio_w(k): return (_cw - _tw) * k / bigger_head(poses['w_down_stand'], 'w_down_stand', k).height
-_lo, _hi = 1.0, 4.0
-for _ in range(14):
-    _m = (_lo + _hi) / 2
-    if _ratio_w(_m) < _rw * FACE_GROW_W: _lo = _m
-    else: _hi = _m
-HEAD_KW = round((_lo + _hi) / 2, 3)
-HEAD_KW = 1.626   # pinned 2026-11-05 12:24: it used to be solved from the old front stand; the new front head would move it and change the arrival stretch art, which must not change
-print('head factor solved: walk', HEAD_KW)
+# Arrival stretch head factor (the overworld walk is unscaled whole paintings).
+HEAD_KW = 1.626   # pinned: the arrival stretch art must not change
 for _n in list(poses):
     if _n[:2] == 's_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KW)   # old stretch art only; the v4 walk frames keep the head as painted
 
-# ---------------------------------------------------------------- walk head matched to the hero (Tom, 2026-11-05)
-# Tom (11-05 07:35): "Match the hero across all characters" (Tom only for now: he supplied the head). The hero painting Tom sent
-# (docs/reference/tom_hero_ref_20261105.png, 1086 x 1448) has its head, top of hair to chin, at .242 of full height and its widest
-# point (ears) at .173 of full height. The painted walk frames were .211 and .157 (side .213). Each view gets one factor for every frame
-# of that view (the head never changes size between frames): height ky so the head share becomes HERO_T, width kx = ky x HERO_WK so the
-# head also keeps the hero's shape (a uniform scale would make it .187 wide, 8 percent wider than the hero). The head grows UP from the
-# chin; the figure is then refitted to the same standing height below (`fo`), so Tom's real height (5'11") is unchanged and his body and
-# width are scaled by about .96 with it. The body itself is NOT widened or narrowed here (BODY_W is not applied to the walk frames).
-HERO_T = 0.242
-HERO_WK = 0.958          # (.1731 / .1573 width) / (.242 / .2107 height), front view; side uses the same ratio
-WALK_CHIN = {'down': .2107, 'up': .2107, 'left': .2129}   # chin row over full height of the painted stand frame (read by eye, 11-05)
-from headwarp import _neck_x
-def _warp_xy(arr, x0, x1, y0, ay, ax, ky, kx, taper):
-    """_warp_head with a separate x amplitude: rows y0..ay grow by ky (the last `taper` rows blend back to 1), their width by kx."""
-    from scipy import ndimage as ndi
-    H = ay - y0; u = np.arange(H); dist = ay - (y0 + u)
-    s = np.where(dist >= taper, ky, 1.0 + (ky - 1.0) * (dist / float(taper)))
-    order = np.argsort(dist); cum = np.zeros(H + 1); cum[1:] = np.cumsum(s[order])
-    Hd = int(np.ceil(cum[-1])); r = Hd - (np.arange(Hd) + .5)
-    idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)
-    sr = ay - dist[order][idx] + .0; sc = s[order][idx]
-    sx = 1.0 + (kx - 1.0) * (sc - 1.0) / (ky - 1.0)
-    Wd = int(np.ceil((x1 - x0) * kx)) + 2; xd = np.arange(Wd) + .0; xc = (ax - x0) * kx
-    pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
-    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / sx[:, None]
-    out = np.zeros((Hd, Wd, 4))
-    for c in range(4): out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
-    al = out[:, :, 3:4]; out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
-    return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
-def _walk_head(img, chin, ky, kx, taper, side, pad=160):
-    img = img.crop(img.getbbox()); W, H = img.size
-    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
-    arr = np.array(big); al = arr[:, :, 3] > 40
-    cols = np.where(al[pad:pad + chin].any(0))[0]; x0, x1 = int(cols.min()) - 3, int(cols.max()) + 4
-    ax = _neck_x(big, chin + pad, x0, x1) if side else (x0 + x1) / 2.0
-    Y0, AY = pad, chin + pad + taper
-    out, dx, dy = _warp_xy(arr, x0, x1, Y0, AY, ax, ky, kx, taper)
-    arr[Y0:AY, x0:x1, 3] = 0
-    big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
-    return big.crop(big.getbbox())
-# FRONT HEAD IS THE MASTER (Tom 2026-11-05 12:52). The front head is sized to the hero picture (head share HERO_T, ear width x HERO_WK).
-# The back and side heads are then sized to be exactly the same size as the front: back = same ear-to-ear width as the front, side = same
-# top-of-hair-to-chin height as the front; both scale uniformly (no reshaping). Cut rows and ear widths are measured on the stand frames at
-# the walk frames' painted scale (tom_walk_frames.build): front chin 358 of 1624, back nape 380, side chin 410; ear widths front 261, back 308.
-CUT_PX = {'down': 358, 'up': 380, 'left': 410}
-EAR_PX = {'up': 308}
-FRONT_EAR_OVER_H = 676 / 950.0      # ear to ear over hair top to chin of Tom's front head picture (measured on the picture)
-if os.environ.get('HERO_HEAD', '0') != '0':     # off for whole painted frames (default 0); skips the back and side matching below
-    # FRONT: Tom's front head picture (tom-head-front-v2.png) is placed in tom_walk_frames at FRONT_CHIN frame px, one uniform scale, no stretching.
-    # BACK and SIDE are scaled uniformly to match it: back = same ear-to-ear width, side = same hair-top-to-chin height.
-    from tom_walk_frames import FRONT_CHIN
-    _HEAD_T = float(FRONT_CHIN); _EAR_T = FRONT_CHIN * FRONT_EAR_OVER_H
-    KX_KY = {'up': (_EAR_T / EAR_PX['up'],) * 2}
-    for _v in ('up',):      # the side head is Tom's redrawn picture, placed in tom_walk_frames._side_frame at the front head's height
-        _st = poses[f'w_{_v}_stand']; _st = _st.crop(_st.getbbox()); _Hs = _st.height
-        _ky, _kx = KX_KY[_v]; _chin = CUT_PX[_v]; _taper = int(round(.025 * _Hs))
-        for _n in ('stand', 'step1', 'step2'):
-            if _v != 'left' and _n == 'step2': continue          # back step2 is the flipped step1 (below)
-            poses[f'w_{_v}_{_n}'] = _walk_head(poses[f'w_{_v}_{_n}'], _chin, _ky, _kx, _taper, _v == 'left')
-        print('walk head', _v, 'ky %.3f kx %.3f' % (_ky, _kx), 'head px %.0f' % (_chin * _ky))
-    for _d in ('up',):
-        poses[f'w_{_d}_step2'] = poses[f'w_{_d}_step1'].transpose(Image.FLIP_LEFT_RIGHT)
-
-# 2026-11-05 (Tom 14:38): stride frames a little lower than the stand and pass frames, so the head bobs like Grace's and Rose's (tools/sprite-bake/tom_walk_frames.py apply_bob).
-# Runs after the head matching above so it sees the final frame heights; one uniform scale per frame, stands untouched, feet stay on the bottom row (place() below).
-if os.environ.get('TOM_BOB', '0') != '0':
-    from tom_walk_frames import apply_bob as _apply_bob
-    poses.update(_apply_bob({n: v for n, v in poses.items() if n.startswith('w_') and n[2:].split('_')[0] in ('down', 'up', 'left') and n.split('_')[-1] in ('stand', 'step1', 'step2', 'pass')}))
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k
@@ -271,8 +185,7 @@ def hard(img, thr=0.5):
     a[:, :, 3] = np.where(a[:, :, 3] >= 255 * thr, 255, 0)
     return Image.fromarray(a, 'RGBA')
 
-from tom_walk_frames import OW_REF_H
-OW_STAND_H = poses['w_down_stand'].crop(poses['w_down_stand'].getbbox()).height   # grown front stand: keeps Tom's real height # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
+OW_STAND_H = poses['w_down_stand'].crop(poses['w_down_stand'].getbbox()).height   # the standing frame's height: one size factor below keeps every frame at the scale it was painted at (Tom 5'11")
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
