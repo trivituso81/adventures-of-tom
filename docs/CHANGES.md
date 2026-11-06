@@ -1,3 +1,8 @@
+## 2026-11-06 (334): Boppy and Deedee walking heads shrunk again (`walkhead2`)
+- Tom (02:37): "Boppy and Deedee's heads are too big size them down to match the other adults". Fact: after `walkhead1` Boppy's head was 10.8 game rows and Deedee's 11.2, against about 9.9 for Tom, Amy and Olivia.
+- `HEAD_FIX` in `tools/sprite-bake/walk_sheet_frames.py`: Boppy x0.86 to x0.79, Deedee added at x0.88 (head 105 px in the painted sheet); both now about 10 rows. `bake_deedee.py` scales from `UNWARPED_H` like the other three, so her body keeps its painted size (figure 43 to 41 rows). Only the walk atlases (`boppy-ow.webp`, `deedee-ow.webp`) and the `ow` section of `data/boppy-hires.js` and `data/deedee-hires.js` changed; battle art untouched.
+- Tags: `walkhead2`.
+
 ## 2026-11-06 (333): New hero painting for Tom (`tomhero2`)
 
 - Tom sent a new full-body hero painting (hairy forearms, smaller head share, same shirt, jeans and shoes). Saved over `art/raw/characters/tom-hero-ref-v1.png` (old picture purged; git history keeps it). The Art Library entries that attach Tom's hero pick it up with no change.
