@@ -7036,8 +7036,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-17-oak-crown-canopy-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932082414
+    }
+   ],
    "rejects": [],
    "id": "bg-17-oak-crown-canopy",
    "tab": "Battle",
