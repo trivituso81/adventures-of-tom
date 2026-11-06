@@ -14087,8 +14087,16 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Inside Voices!.\n\nItems:\n1. A white wall light switch plate with the switch up.\n2. The same white light switch plate with the switch down.\n3. A wide ring of pale blue shock lines (wide).\n4. A small white clap burst, crisp rays.\n5. A big round hush ring of soft blue light (wide).\n6. A small gold twinkle star."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-ab-pop-quiz-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1794000065147
+    }
+   ],
    "rejects": [],
    "id": "amy-ab-pop-quiz",
    "tab": "Characters",
