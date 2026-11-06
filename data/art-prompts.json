@@ -2255,8 +2255,16 @@
    "group": "Griffith Park"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-coyote-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793923557365
+    }
+   ],
    "rejects": [],
    "id": "enemy-coyote",
    "tab": "Enemies",
