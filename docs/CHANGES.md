@@ -1,3 +1,7 @@
+## 2026-11-06 (329): Dish-Towel Flick uses the painted towel in flight (`dfx2`)
+
+Tom: the towel move still showed old graphics. Fact: the towel whipping out to the spot was still drawn by code, and the spot marker was tiny. Now the painted towel (`towel_snap`, `towel_twist`) whips from her hand to the spot, the spot smudge is bigger, and the coded towel and its folded-towel fallback are removed. Tags: `prop-art.js` `pa6`, `deedee-moves.js` `dfx2`.
+
 ## 2026-11-06 (328): Emotions wired, batch 0: engine and chapter 1 (`emo7`)
 - Tom (11-06 00:44): wire the emotion sheets into the story in batches. Fact: while a story talk line shows, its mood now swaps the dialogue portrait to that character's face in that mood and draws the speaker on the map in the full-body mood pose, as painted. Only chapter 1 is on (57 lines); every other chapter behaves as before.
 - Moods live in one generated file `data/emotion-moods.js` (`'<Speaker>|<exact text>' -> mood`, chapter switch `EMO_CHAPTERS`), built by `tools/emotion-apply.py 1` from `docs/emotion-index-lines.tsv` (found 57 of 57). Scene files and spoken text are untouched, so voice clips still match. Corrections: edit the row's mood in the tsv, rerun the tool.

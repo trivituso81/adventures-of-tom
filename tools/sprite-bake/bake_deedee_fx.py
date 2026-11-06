@@ -11,7 +11,7 @@ RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/pr
 MAXSIDE = 220
 # sheet -> slugs in cell order (reading order, 4 columns). None = not used by the game.
 SHEETS = {
- 'dish-towel-flick': ['towel_folded', None, None, 'dirt_smudge', 'crack_burst', 'shock_lines'],
+ 'dish-towel-flick': ['towel_folded', 'towel_twist', 'towel_snap', 'dirt_smudge', 'crack_burst', 'shock_lines'],
  'moon-back': ['moon_crescent', 'moonbeam_soft', 'heart_big', 'gold_motes', 'sparkle_cluster', 'warm_glow'],
  'registered-nut': ['nurse_cap', 'stethoscope', 'bandage', 'rn_badge', 'heartbeat_line', None, None],
  'corner-piece': ['crisp_dish_full', 'crisp_pan', 'plate_with_corner_piece', None, None, 'steam_curl_gold', 'sparkles_gold'],

@@ -622,7 +622,7 @@ SC.dd_flakes=(s,u)=>{ for(let k=0;k<8;k++) { const q=cl(u*1.3-k*.04),x=s.x-18+k*
 SC.dd_poof=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+s.seed,d=ez(u)*(s.r||26); gfx.globalAlpha=1-u; E(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.6,4*(1-u)+1,4*(1-u)+1,s.c||CREAM); } };
 
 // ---------- Dish-Towel Flick ----------
-SC.dd_spot=(s,u)=>{ const ms=s.t*1000; if(ms>s.gone) return; gfx.globalAlpha=1; if(!DFX.P('dirt_smudge',s.x,s.y,{w:22})) R(s.x-3,s.y-3,6,6,'#2b2a26'); if(ms>s.seen) { ring(s.x,s.y,10+Math.sin(s.t*8)*2,10+Math.sin(s.t*8)*2,2,CREAM); label('SPOT',s.x,s.y-20,CREAM,1); } };
+SC.dd_spot=(s,u)=>{ const ms=s.t*1000; if(ms>s.gone) return; gfx.globalAlpha=1; if(!DFX.P('dirt_smudge',s.x,s.y,{w:34})) R(s.x-3,s.y-3,6,6,'#2b2a26'); if(ms>s.seen) { ring(s.x,s.y,10+Math.sin(s.t*8)*2,10+Math.sin(s.t*8)*2,2,CREAM); label('SPOT',s.x,s.y-20,CREAM,1); } };
 SC.dd_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.globalAlpha=fade(u,.96);
   if(ms>P.fold) { const f=ez((ms-P.fold)/350),w=26-f*12; RO(x-w/2,y-6,w,12,CREAM); R(x-w/2+3,y-3,w-6,2,BLUE); R(x-w/2+3,y+1,w-6,2,BLUE); if(f>.9) label('SQUARE',x,y-22,CREAM,1); return; }
   const snap=ms<P.snap-100?0:Math.sin(cl((ms-P.snap+100)/350)*Math.PI),len=lerp(28,110,snap),ang=lerp(.9,-.05,snap); gfx.save(); gfx.translate(x,y); gfx.rotate(Math.PI-ang);
@@ -1572,32 +1572,15 @@ const brisk=(u,tt)=>Math.sin(tt*14)>0?'run':'walk';
 const liveFoes=()=>(B2.foes||[]).filter(f=>!f.dead&&f.hp>0);
 
 // ---------- Dish-Towel Flick: a whiplash flick with a properly detailed dish towel ----------
-const TWL='#fbf6e6',TWB='#5f93d6',TWB2='#a9c5ea',TWH='#cdbf94';
-// spine(s) -> point; a checked towel ribbon with stripes, a stitched hem, fringe at the tip and a hanging loop at the base
-const drawTowel=(x,y,th,L,w,bend,alpha=1)=>{ const N=20,sp=[],dx=Math.cos(th),dy=Math.sin(th),px=-dy,py=dx;
-  for(let i=0;i<=N;i++) { const s=i/N,b=bend(s); sp.push([x+dx*L*s+px*b,y+dy*L*s+py*b]); }
-  const nm=sp.map((p,i)=>{ const a=sp[Math.max(0,i-1)],c=sp[Math.min(N,i+1)]; let tx=c[0]-a[0],ty=c[1]-a[1]; const l=Math.hypot(tx,ty)||1; tx/=l; ty/=l; return [-ty,tx]; });
-  const hw=i=>w*(.85+.15*i/N);
-  const edge=(k)=>sp.map((p,i)=>[p[0]+nm[i][0]*hw(i)*k,p[1]+nm[i][1]*hw(i)*k]);
-  const top=edge(1),bot=edge(-1); gfx.save(); const a0=gfx.globalAlpha*alpha; gfx.globalAlpha=a0; gfx.lineJoin='round';
-  gfx.beginPath(); top.forEach((p,i)=>i?gfx.lineTo(p[0],p[1]):gfx.moveTo(p[0],p[1])); for(let i=N;i>=0;i--) gfx.lineTo(bot[i][0],bot[i][1]); gfx.closePath();
-  gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=TWL; gfx.fill();
-  // red and blue checks: cross bands every third step and two long stripes
-  for(let i=0;i<N;i++) { const band=i%3===0,thin=i%3===1; if(!band&&!thin) continue; gfx.beginPath(); gfx.moveTo(top[i][0],top[i][1]); gfx.lineTo(top[i+1][0],top[i+1][1]); gfx.lineTo(bot[i+1][0],bot[i+1][1]); gfx.lineTo(bot[i][0],bot[i][1]); gfx.closePath(); gfx.fillStyle=band?TWB:TWB2; gfx.globalAlpha=a0*(band?.9:.7); gfx.fill(); gfx.globalAlpha=a0; }
-  gfx.globalAlpha=a0; for(const k of [.5,-.5]) { const e=edge(k); gfx.beginPath(); e.forEach((p,i)=>i?gfx.lineTo(p[0],p[1]):gfx.moveTo(p[0],p[1])); gfx.strokeStyle='#d8584a'; gfx.lineWidth=2; gfx.stroke(); }
-  // stitched hem near both long edges
-  gfx.setLineDash([3,3]); for(const k of [.86,-.86]) { const e=edge(k); gfx.beginPath(); e.forEach((p,i)=>i?gfx.lineTo(p[0],p[1]):gfx.moveTo(p[0],p[1])); gfx.strokeStyle=TWH; gfx.lineWidth=1.3; gfx.stroke(); } gfx.setLineDash([]);
-  // fringe at the tip
-  const tp=sp[N],tn=nm[N],tt=[tn[1],-tn[0]]; for(let j=-3;j<=3;j++) { const bx=tp[0]+tn[0]*hw(N)*j/3.2,by=tp[1]+tn[1]*hw(N)*j/3.2; Ln(bx,by,bx+tt[0]*8+tn[0]*j*.4,by+tt[1]*8+tn[1]*j*.4,2.2,'#e8dcb4'); }
-  // hanging loop at the base corner
-  const b0=sp[0],bn=nm[0]; ring(b0[0]+bn[0]*hw(0)-dx*4,b0[1]+bn[1]*hw(0)-dy*4,5,6,4.5,OUT); ring(b0[0]+bn[0]*hw(0)-dx*4,b0[1]+bn[1]*hw(0)-dy*4,5,6,2,'#d8584a');
-  gfx.restore(); return sp[N]; };
-const foldedTowel=(x,y,f)=>{ if(DFX.P('towel_folded',x,y,{w:lerp(66,42,f)})) return; const w=lerp(58,36,f); RO(x-w/2,y-18,w,36,TWL); for(let k=0;k<4;k++) R(x-w/2+3+k*(w-6)/4,y-16,(w-6)/8,32,k%2?TWB2:TWB);
-  for(const dy of [-7,0,7]) R(x-w/2+1,y+dy-1,w-2,2,'#d8584a'); gfx.setLineDash([3,3]); gfx.strokeStyle=TWH; gfx.lineWidth=1.3; gfx.strokeRect(x-w/2+3,y-14,w-6,28); gfx.setLineDash([]);
-  ring(x+w/2-6,y-18,4,5,3.5,OUT); ring(x+w/2-6,y-18,4,5,1.8,'#d8584a'); for(let j=0;j<5;j++) Ln(x-w/2-1,y-12+j*6,x-w/2-6,y-12+j*6,2,'#e8dcb4'); };
+// The flying towel is one painted picture (towel_snap, hand end on its left) turned and stretched from her hand to the tip; towel_twist while it is wound up.
+const drawTowel=(x,y,th,L,w,bend,alpha=1)=>{ const dx=Math.cos(th),dy=Math.sin(th),wound=L<=82&&alpha===1&&w===13;
+  gfx.save(); gfx.globalAlpha*=alpha; if(wound) DFX.P('towel_twist',x+dx*L*.5,y+dy*L*.5,{h:Math.max(52,L*.95),rot:th+1.1}); else DFX.P('towel_snap',x+dx*L*.5,y+dy*L*.5,{w:L+8,h:Math.max(26,L*.38),rot:th}); gfx.restore();
+  return [x+dx*L,y+dy*L]; };
+const foldedTowel=(x,y,f)=>{ DFX.P('towel_folded',x,y,{w:lerp(66,42,f)}); };
 SC.df_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y-4; gfx.globalAlpha=fade(u,.96);
   if(P.painted) { // the painted frames already carry the towel: draw only the whoosh arc, the crack burst and the word
     const S=P.snap,tip=[Math.max(s.tx,x-120),y];
+    if(ms>=S-130&&ms<S+140) { const q=cl((ms-(S-130))/130),L=lerp(60,Math.max(90,x-s.tx+14),q*q*(3-2*q*.55)),th=lerp(-.9,-3.1,q); drawTowel(x,y,th,L,13,null); }   // the painted towel whips out to the spot
     if(ms>=S-130&&ms<S) { gfx.globalAlpha=.6; for(const [r,w,c] of [[70,10,'#ffffff'],[70,4,'#bfe0ff'],[44,5,'#ffffff']]) { gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.arc(x-40,y,r,-.9,-3.1,true); gfx.stroke(); } gfx.globalAlpha=1; }
     if(ms>=S&&ms<S+260) { const q=(ms-S)/260; if(DFX.burst('crack_burst',tip[0],tip[1],70,q,.1)) gfx.globalAlpha=1; else { gfx.globalAlpha=1-q; for(let k=0;k<10;k++) { const a=k/10*Math.PI*2; Ln(tip[0]+Math.cos(a)*(8+q*10),tip[1]+Math.sin(a)*(8+q*10),tip[0]+Math.cos(a)*(18+q*26),tip[1]+Math.sin(a)*(18+q*26),k%2?3:2,k%2?'#ffffff':GOLD); } twk(tip[0],tip[1],20*(1-q)+8,'#ffffff'); gfx.globalAlpha=1; } if(q<.8) bigWord('CRACK!',tip[0]+6,tip[1]-46,GOLD,3); }
     return; }
