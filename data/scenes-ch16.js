@@ -44,7 +44,7 @@ drawIntroScreen=function(time) { LE_drawIntroScreen_ch16(time); ch16DrawFx(time)
 
 // ---------- Staging ----------
 // [x, y, facing] in the Square: the plaza around the fountain. The camera stands on the sidewalk at (10,8), Marlowe at (12,8), the library door's approach tile (11,8) stays free; the family faces up.
-const CH16_SPOTS={tom:[11,11,'up'],grace:[10,10,'up'],rose:[11,10,'up'],amy:[10,11,'up'],tnb:[9,11,'up'],nara:[8,11,'up']};
+const CH16_SPOTS={tom:[13,18,'up'],grace:[12,17,'up'],rose:[13,17,'up'],amy:[12,18,'up'],tnb:[14,17,'up'],nara:[14,18,'up']};
 const ch16Marlowe=()=>{ const t=worlds.town; return t&&t.npcs.find(n=>n.name==='Marlowe'&&n.scripted); };
 function ch16Add(kind,x,y,w,name,text) {
   const t=worlds.town; if(!t||t.objects.some(o=>o.ch16===kind)) return;
@@ -136,8 +136,8 @@ SCENES.ch16Open=()=>[
   {talk:'Deedee',lines:['Robert.']},
   {talk:'Boppy',lines:['I know.']},
   {all:[
-    {walk:'Deedee',to:[[9,9],[10,9]],speed:.24},
-    {walk:'Boppy',to:[[12,9],[11,9]],speed:.22}]},
+    {walk:'Deedee',to:[[12,16],[12,15]],speed:.24},
+    {walk:'Boppy',to:[[14,16],[13,15]],speed:.22}]},
   {face:'Deedee',dir:'up'},{face:'Boppy',dir:'up'},
   {talk:'Deedee',lines:['Girls. Close your eyes. Moon and back.']},
   {talk:'Boppy',lines:['Nobody gets past us.']},
@@ -167,8 +167,8 @@ SCENES.ch16Open=()=>[
   {talk:'Rose',lines:['But Boppy...']},
   {talk:'Grace',lines:['I KNOW. RUN.']},
   {all:[
-    {walk:'grace',to:()=>ch16Run([[10,10],[15,10],[15,20],[25,20]]),speed:.16},
-    {walk:'rose',to:()=>ch16Run([[11,10],[15,10],[15,20],[25,20]]),speed:.16}]},
+    {walk:'grace',to:()=>ch16Run([[12,17],[13,22],[20,22]]),speed:.16},
+    {walk:'rose',to:()=>ch16Run([[13,17],[13,22],[20,22]]),speed:.16}]},
   {party:null},
   {call:()=>{ for(const id of ['tnb','nara']) { const m=MEMBERS()[id]; if(m&&typeof onBench==='function'&&onBench(m)) benchToParty(m); } placeFollowers(); }},
   {talk:'Amy',lines:['Tom. Whatever this is, it is between them and the road.']},
@@ -214,7 +214,7 @@ SCENES.ch16After=()=>[
   {talk:'Amy',lines:['Look at them. LOOK.']},
   {talk:'Marlowe',lines:['I didn’t want it like this.']},
   {talk:'Tom',lines:['Nobody does. That is what he counts on.']},
-  {walk:'tom',to:[[11,10]],speed:.4},{face:'tom',dir:'up'},
+  {walk:'tom',to:[[13,18]],speed:.4},{face:'tom',dir:'up'},
   {wait:1.2},
   {talk:'Tom',lines:['Mom. Dad.']},
   {talk:'Tom',lines:['It’s warm. Amy. It’s still a little warm.']},
@@ -273,9 +273,9 @@ let CH16_STASH=[];
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const stone=STORY.chapter>=16&&flag('ch16-stone');
-  if(stone) ch16Add('statue',10,9,2,'Deedee and Boppy','Two stone figures, arms locked in front of the girls. Their joined hands are still a little warm.'); else ch16Remove('statue');
+  if(stone) ch16Add('statue',12,15,2,'Deedee and Boppy','Two stone figures, arms locked in front of the girls. Their joined hands are still a little warm.'); else ch16Remove('statue');
   const live=STORY.chapter===16&&flag('ch16-open')&&!flag('ch16-after');
-  if(live) ch16Add('tripod',10,8,1,'The camera','A very big camera on a tripod. The lens glows like a low sun.'); else ch16Remove('tripod');
+  if(live) ch16Add('tripod',14,15,1,'The camera','A very big camera on a tripod. The lens glows like a low sun.'); else ch16Remove('tripod');
   const g=worlds.grands; if(!g) return;
   if(stone) { for(const n of g.npcs.filter(n=>!n.scripted&&(n.name==='Deedee'||n.name==='Boppy'))) { CH16_STASH.push({n,map:g}); g.npcs.splice(g.npcs.indexOf(n),1); } }
   else if(CH16_STASH.length) { for(const s of CH16_STASH) s.map.npcs.push(s.n); CH16_STASH=[]; }

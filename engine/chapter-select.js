@@ -145,7 +145,7 @@ function chselSixteen() {
   for(const m of extras()) recruitLeave(m,true);
   forceJoin(amy,true);
   for(const m of [tnb,nara]) if(typeof benchAdd==='function') benchAdd(m);
-  currentMap=worlds.town; player.x=14; player.y=22; player.facing='up'; player.move=null; player.hidden=false;
+  currentMap=worlds.town; player.x=13; player.y=23; player.facing='up'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 // Chapter 20 test start: chapter 19 is done. All eight are together in the Vault facing the Pinnacle lift (Tom, Grace, Rose, Amy out front; the rest on the bench).

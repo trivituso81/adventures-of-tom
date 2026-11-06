@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds art/row.webp (Rivituso Row painting) and art/row-fg.webp (the walk-behind cutout layer), and prints the PLATE_BEHIND.row zones.
 
-Method (Tom, 2026-11-02, docs/CHANGES.md `row3`): same as the Square (`square3`, tools/make_town_fg.py). The image generator returned four mask pictures of the
+Method (Tom, 2026-11-02, docs/CHANGES.md `row3`): same as the Square at the time (`square3`). The image generator returned four mask pictures of the
 approved painting (trees, posts and lamps and signs, roofs and awnings, tall props; docs/reference/row_v3_masks/*.webp, kept objects on flat magenta).
 They are used ONLY as masks: each object is aligned to the painting (windowed template match, then an ECC affine refinement, because the generator
 redraws a few pixels off and scales roofs about .9), snapped to the real edge with GrabCut inside a narrow band, and used as the alpha of the ORIGINAL

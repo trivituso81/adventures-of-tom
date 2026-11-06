@@ -6,7 +6,7 @@ Tom is redoing every Long Island outdoor area as a new painting, one area at a t
 
 | Map id | Name | Tiles | Plate size (art px, 64 per tile) | Painting now in the game |
 |---|---|---|---|---|
-| town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved v4 painting (2026-11-02, `square4`), lettered by the generator, own cutout layer art/town-fg.webp |
+| town | The Square | 30 x 26 | 1920 x 1664 | Tom's approved Library painting area-square v3 (2026-11-05, `square5`, 4:3 trimmed to 15:13), lettered by the generator. No walk-behind layer yet |
 | row | Rivituso Row | 24 x 22 | 1536 x 1408 | Tom's v2 painting, boards repainted in code, game-drawn lettering (disliked) |
 | hollow | Grump Hollow | 24 x 22 | 1536 x 1408 | Tom's approved 11-05 painting (area-hollow-v1, cropped 85 px to 12:11), painted board LONG ISLAND / SQUARE, own cutout layer art/hollow-fg.webp (`hollow4`, tools/make_hollow_fg.py) |
 | pier | Cattail Pier | 24 x 22 | 1536 x 1408 | original painting, not redone yet |
@@ -42,7 +42,7 @@ The final Square from Tom may use dark brown boards with cream lettering (the ge
 ## Install procedure (per area)
 
 1. Read the map spec in `data/maps-le.js` (search the id: `plateMask`, `exits`, `border.open`, `gates`, `objects`, `npcs`, `spawn`). View the old painting and the new one side by side at half size.
-2. Scale and save the plate (see above). Template scripts: `tools/hollow_signs.py` (plain scale), `tools/row_signs.py` and `tools/town_signs.py` (also repaint boards, only needed for unlettered paintings). Keep the uploaded original in `docs/reference/<id>_<version>_from_tom.png`.
+2. Scale and save the plate (see above). Template scripts: `tools/hollow_signs.py` (plain scale), `tools/row_signs.py` (also repaints boards, only needed for unlettered paintings). Keep the uploaded original in `docs/reference/<id>_<version>_from_tom.png`.
 3. Overlay the walk map on the new painting: `python3 tools/mask_overlay.py <id>` writes `tools/shots/mask-<id>.png` (red = blocked). Fix `plateMask` rows wherever the painting changed: closed dead ends become `#`, a moved exit road moves with its tiles. Update `exits`, `border.open` and `gates` to match. Run `python3 tools/reach_test.py <id>`; it must report 0 fails.
 4. Objects (signposts, benches, signs the player taps) must sit at their painted things. Painted signs that were removed take their tap target to the nearest new board. NPCs and monsters must start on reachable floor.
 5. Scenes: grep `'<id>'` in `data/scenes*.js`, `data/bonus-*.js`, `engine/story.js` for actors, starts and arrivals on tiles that are now blocked or moved (chapter starts, `ch17Place`, door arrivals from neighbouring maps such as `pier` (11,1) from the Row). Gates that the story draws (fallen branch, school gate) must still line up with the openings.
