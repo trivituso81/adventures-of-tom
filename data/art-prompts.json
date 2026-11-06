@@ -3916,8 +3916,16 @@
    "group": "Dinner Table"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-marlowe16-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927212628
+    }
+   ],
    "rejects": [],
    "id": "enemy-marlowe16",
    "tab": "Enemies",
