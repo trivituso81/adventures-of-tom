@@ -209,8 +209,21 @@ function sheetShort(t, brushRef, id) {
   const LIKENESS = { warden: [['docs/reference/boppy-face.png', 'tools/sprite-bake/src/boppy-hero.png'], "Paint Boppy's real face exactly as in attachment 4, a close-up of his face (and attachment 5, the full figure): the same weathered tan skin with deep smile lines and crow's feet, brown eyes, thick white-gray bushy mustache, white eyebrows, gray sideburns, long nose, warm closed-mouth smile. The helmet is open-faced with nothing covering his face, so his whole face shows clearly, large, at the same likeness and detail as attachment 4"] };
   if (LIKENESS[t.id]) refs.push(...LIKENESS[t.id][0]);
   if (t.id === 'julian') {
-    const R = [KEY, 'art/raw/enemies/enemy-vance-v2.png', brushRef];
-    const tx = `Keep attachment 2 as a handbrushed painting, same brush strokes. It shows Julian Vance in six poses; paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Attachment 2 is already a handbrushed painting: keep exactly its thick visible brush strokes and painted texture on the coat, hair, face and gun, never smoother. ${POSES.julian} Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. ${TAIL}`;
+    const R = ['art/grands.webp'];
+    const tx = `Paint one picture: a sheet of six full-figure poses of the same man, JULIAN VANCE, in a 3 by 2 grid (top row poses 1 to 3, bottom row poses 4 to 6), each pose facing right, as a hand-painted oil painting. Attachment 1 is a finished handbrushed painting of a room, shown ONLY so you copy its brushwork: thick visible brush strokes, layered paint, canvas grain, warm golden light, matte, crisp painted edges. Do not paint any room, floor, furniture or props from it.
+
+THE MAN AND HIS PROPORTIONS (a painted caricature): a tall, thin man, 70 inches tall. Realistic face and realistic clothes, but an oversized head, about one quarter of his total height from the top of the hair to the chin, set on a slim neck, narrow sloping shoulders, a slim torso, long thin legs, small hands and small feet. Like a caricature portrait of a real person: a big expressive realistic head on a slim body, never a big-eyed cartoon, never pixel art.
+HIS FACE AND LOOK: a pale, lined, tired face with deep-set sad eyes and a gentle softened expression, long wavy gray hair falling past his collar under a black wide-brimmed hat that is never off. A long black wool coat with a standing collar and gold buttons falling to his knees, black waistcoat, white shirt, a red tie, a gold pocket watch on a chain, black boots. A brass ray gun with a glass barrel, held loosely. Warm gold light from the upper left, a soft gold rim light.
+
+THE SIX POSES (same man, same scale, the same ground line under his boots in every pose, the whole figure from hat to boots visible and centered in its cell with a wide margin, nothing touching a cell edge):
+1 STANCE: standing relaxed and tired, weight on one leg, the gun hanging at his right side, the other hand at his waist, head tipped slightly down, a sad half smile.
+2 FLINCH: thrown back from a hit, the whole body leaning away, the hat tilting off his head, coat flaring, eyes squeezed shut, mouth open, the gun arm flung out.
+3 LOOKING AT THE WATCH: standing still, holding the gold pocket watch open in his palm at chest height, head bowed over it, shoulders slumped, the gun hanging low.
+4 WIND-UP: slowly raising the ray gun with both hands, one knee bent, hesitating, brows drawn together, the coat swinging behind him.
+5 THE ATTACK: arm fully extended, firing the ray gun forward, the coat blown back, a warm burst of amber glass spraying from the muzzle, his face pained and reluctant.
+6 FOLLOW-THROUGH: turning half away with the gun lowered to his side, head turned to look away, eyes downcast, the long coat swirling around his legs, clearly different from pose 1.
+
+PAINTING: every surface painted with thick visible brush strokes that follow the form (wool coat, hair, skin, brass, boots), matte, canvas grain, no gloss, not a smooth digital render, not photorealistic, not pixel art, not a 3D render, no outlines. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes, no gradient and no shadow tint, nothing else in the picture, no text, no labels.`;
     return { id, tab: 'Enemies', title: null, ar: '3:2', refs: R, prompt: tx };
   }
   const text = has

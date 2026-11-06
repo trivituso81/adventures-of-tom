@@ -1,3 +1,7 @@
+## 2026-11-05 (258): Julian Vance: no likeness references, detailed description with Tom's caricature proportions, one painted room for brushwork (Art Library only, no game files, no tag)
+
+Tom (shown his own hero picture): Julian should have those proportions; remove the reference photos, describe head and body, write a very detailed six-pose prompt, and give one nicely handpainted area as the only picture, like the inside of Deedee and Boppy's house. enemy-julian refs are now only `art/grands.webp` (used for brushwork only). Prompt (3,000 characters, Tom asked for detail here): head about one quarter of height, slim body, long thin legs, small hands and feet, realistic face, long wavy gray hair, six detailed poses. Note: approved enemy-vance-v2 is a realistic-proportion man, so the two fights now differ in proportions; offer to redo Vance the same way if Tom wants.
+
 ## 2026-11-05 (257): Julian Vance reference is now the handbrushed Vance v2 (Art Library only, no game files, no tag)
 
 Tom: Julian is still not handpainted enough; the reference outweighs the prompt, and with no reference he comes out like the Mudling. Cause (finding): attachment 2 was enemy-vance-v1, a smooth picture, so the generator copied its smoothness. Now attachment 2 is enemy-vance-v2 (handbrushed, long gray hair) and the prompt says to keep its brush strokes. Rule: a likeness reference must itself be handbrushed.
