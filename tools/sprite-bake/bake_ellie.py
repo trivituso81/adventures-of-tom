@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Bake Aunt Ellie's painted walk sheet into the game (overworld only; no battle sheet yet).
 
-Input : tools/sprite-bake/src/ellie-walk-v2.png (3 rows of 4: down, up, left; each stand, step, stand, step; flat magenta)
+Input : art/raw/characters/ellie-walk-sheet-v1.png (3 x 3: front, back, side; each stand, step A, step B; flat magenta), used as painted
 Output: art/chars/ellie-ow.webp   (painted frames, 3x the size of the rows)
         data/ellie-hires.js        (rows, palette, atlas rects; do not hand-edit)
-Head: enlarged to Tom's head-to-body ratio the same way as bake_deedee.py (HEAD_K, tapered at the neck).
 
 Usage : python3 tools/sprite-bake/bake_ellie.py [--ow-h 43] [--colors 46] [--contact PATH]
 """
@@ -13,81 +12,24 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/ellie-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KW = int(os.environ.get('OW_K', '3'))                          # painted resolution multiple on the overworld
+KW = int(os.environ.get('OW_K', '9'))                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--ow-h', type=int, default=43)       # standing height of the overworld sprite in rows (Tom is 43)
 ap.add_argument('--colors', type=int, default=46)
-ap.add_argument('--head-k', type=float, default=1.8)
 ap.add_argument('--contact', default=None)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'ellie-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
-
-def _auto_head(img):
-    a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
-    top = int(np.where(a.any(1))[0].min())
-    ws = np.convolve(a.sum(1).astype(float), np.ones(7) / 7, 'same')
-    lo, hi = int(top + .18 * (H - top)), int(top + .40 * (H - top))
-    chin = lo + int(np.argmin(ws[lo:hi]))
-    cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
-    return top, chin, int(xs.min()), int(xs.max())
-# hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
-HEAD_BOX = {'b_strike': (3, 108, 125, 245), 'b_leap': (8, 120, 88, 212), 'b_win': (5, 108, 54, 162), 'b_kneel': (3, 92, 32, 159)}
-def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
-    """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
-    neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
-    from scipy import ndimage as ndi
-    H = ay - y0                                                      # source rows y0..ay-1
-    u = np.arange(H)                                                 # source row index
-    dist = ay - (y0 + u)                                             # rows above the anchor (1..H)
-    s = np.where(dist >= taper, k, 1.0 + (k - 1.0) * (dist / float(taper)))
-    # dest distance above the anchor of the top edge of each source row (cumulative from the anchor upward)
-    order = np.argsort(dist); cum = np.zeros(H + 1); cum[1:] = np.cumsum(s[order])
-    Hd = int(np.ceil(cum[-1]))
-    r = Hd - (np.arange(Hd) + .5)                                           # dest row centres, measured upward from the anchor
-    idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)             # which source row (by sorted order) covers each dest row
-    srcdist = dist[order][idx]; sr = ay - srcdist + .0               # source row (y) for each dest row
-    sc = s[order][idx]
-    Wd = int(np.ceil((x1 - x0) * k)) + 2
-    xd = np.arange(Wd) + .0
-    xc = (ax - x0) * k                                               # dest x of the anchor column
-    out = np.zeros((Hd, Wd, 4))
-    pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
-    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / sc[:, None]
-    for c in range(4):
-        out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
-    al = out[:, :, 3:4]
-    out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
-    return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
-
-def bigger_head(img, name, k, pad=160, taper=16, margin=8):
-    W, H = img.size
-    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
-    arr = np.array(big)
-    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
-    x0, x1 = max(0, x0 - margin), min(W, x1 + margin)            # keep ears and hair edges inside the box
-    ax = (x0 + x1) / 2.0
-    # the taper back to scale 1 happens BELOW the chin (in the neck), so the whole face, jaw included, keeps the full enlargement
-    X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + taper + pad
-    out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
-    arr[Y0:AY, X0:X1, 3] = 0
-    big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
-    return big.crop(big.getbbox())
-HEAD_K = args.head_k
-for _n in list(poses):
-    poses[_n] = bigger_head(poses[_n], _n, HEAD_K)
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for Aunt Ellie (Tom 2026-11-05 23:16), used as painted (no head warp, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('ellie').items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):

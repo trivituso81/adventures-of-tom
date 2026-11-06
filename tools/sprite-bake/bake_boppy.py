@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Boppy's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/boppy-battle-v2.png and boppy-walk-v2.png (flat magenta background, see README.md)
+Input : tools/sprite-bake/src/boppy-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/boppy-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/boppy-battle.webp, boppy-ko.webp, boppy-ow.webp  (painted frames, K x the size of the rows)
         data/boppy-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/boppy-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 3, 2, int(os.environ.get('OW_K', '3'))          # painted resolution multiples: battle, knocked out, overworld
+KB, KO_, KW = 3, 2, int(os.environ.get('OW_K', '7'))         # painted resolution multiples: battle, knocked out, overworld (repo art: overworld 7)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=float, default=66.7)   # idle height in rows of the 1.94-scale rig: 66.7 x 1.94 = Deedee's 99.5 x 1.3 = 129 px
@@ -35,9 +35,6 @@ poses = {}
 for nm, im in slice_sheet(os.path.join(SRC, 'boppy-battle-v2.png'),
         [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
     poses['b_' + nm] = im
-walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in slice_sheet(os.path.join(SRC, 'boppy-walk-v2.png'), [walk_names[0:4], walk_names[4:8], walk_names[8:12]]).items():
-    poses['w_' + nm] = im
 
 
 # ---------------------------------------------------------------- paint-in (the sheets avoid injury wording)
@@ -81,8 +78,7 @@ def _auto_head(img):
 # hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
 HEAD_BOX = {'b_idle': (3, 118, 2, 158), 'b_windup': (3, 118, 2, 157), 'b_strike': (3, 118, 108, 268), 'b_run1': (3, 118, 4, 157),
             'b_run2': (3, 118, 4, 155), 'b_leap': (3, 120, 58, 210), 'b_hurt': (3, 114, 100, 240), 'b_kneel': (3, 132, 4, 172),
-            'b_win': (3, 114, 80, 200), 'b_defend': (3, 118, 76, 204), 'b_cast': (3, 118, 108, 232),
-            'w_left_stand': (0, 110, 2, 158), 'w_left_s1': (0, 110, 2, 158), 'w_left_stand2': (0, 110, 2, 158), 'w_left_s2': (0, 110, 2, 158)}
+            'b_win': (3, 114, 80, 200), 'b_defend': (3, 118, 76, 204), 'b_cast': (3, 118, 108, 232)}
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
@@ -130,7 +126,7 @@ def _drop_slivers(im, er=5, grow=7):
 from headwarp import body_width
 BODY_W = 0.80
 def bigger_head(img, name, k=None, pad=160, taper=TAPER):
-    if k is None: k = HEAD_KB if name[:2] in ('b_', 'x_', 'f_', 's_') else HEAD_KW
+    if k is None: k = HEAD_KB if name[:2] in ('b_', 'x_', 'f_', 's_') else HEAD_KB
     if name != 'b_ko':
         _bx = HEAD_BOX.get(name) or _auto_head(img)
         img, _ = body_width(img, _bx[1], BODY_W)
@@ -148,7 +144,6 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
         big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
     else:
         top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
-        if name.startswith('w_down'): chin = 126       # front view: the detector stops under the nose, which squashed mouth and chin
         ax = (x0 + x1) / 2.0
         X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
         # jacket (navy, below the cap) inside the box stays on the body at scale 1; only head pixels are lifted and enlarged
@@ -169,13 +164,10 @@ def bigger_head(img, name, k=None, pad=160, taper=TAPER):
 # Same proportions as Deedee (and Tom): head (hair to chin) is 0.40 of figure height. The head factor is solved per set (battle idle, walk down).
 TOM_HEAD_RATIO = 0.40
 # Battle only (walk keeps 0.40): face (hairline to chin) = Justin's 49 battle px, Tom's call 2026-11-01. Final head rows = ratio x battle_h, so ratio = 0.40 x 49/33 x 1.94/2.044 (old face px, old/new battle scale).
-# Walk (front face on the welcome screen, drawn at real height with Justin 6'4" = 330 picture px): face = Justin's share x 330 / own height (2026-11-01, Tom).
-WALK_HEAD_RATIO = 0.362   # x .92 (2026-11-01 11:59, Tom: faces still uneven, Amy looks biggest; head x .92, welcome height lowered so the body keeps its size); before that .393 # x .973 (2026-11-01, Tom: body chin-to-feet follows real height, hair or cap counted on top; welcome height went up, so head share goes down by old/new height and the head stays the same size); before that .404 # x .91 (welcome-screen pass, 2026-11-01: faces equalized by perceived size, face height x cheek-to-cheek width, to the adult average); before that .444 # was .51; x .87 (2026-11-01): his cap hides the forehead, so brim-to-chin undercounted his face. Eye-to-chin now matches the other adults
 BATTLE_HEAD_RATIO = 0.417   # x .85 (battle perceived-size check: 46 px vs the group's 39); before that .491 # was .564; x .87, same cap correction as the walk
-HEAD_KB = HEAD_KW = HEAD_K
+HEAD_KB = HEAD_K
 def _head_ratio(name, k):
     top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name])
-    if name.startswith('w_down'): chin = 126
     return (chin - top) * k / bigger_head(poses[name], name, k=k).height
 def _solve(name, ratio=TOM_HEAD_RATIO):
     lo, hi = 1.0, 4.0
@@ -184,10 +176,13 @@ def _solve(name, ratio=TOM_HEAD_RATIO):
         if _head_ratio(name, mid) < ratio: lo = mid
         else: hi = mid
     return round((lo + hi) / 2, 3)
-HEAD_KB, HEAD_KW = _solve('b_idle', BATTLE_HEAD_RATIO), _solve('w_down_stand', WALK_HEAD_RATIO)
-print('head factors solved: battle', HEAD_KB, 'walk', HEAD_KW)
+HEAD_KB = _solve('b_idle', BATTLE_HEAD_RATIO)
+print('head factor solved: battle', HEAD_KB)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
+# Walk: the nine figures of Tom's 3 x 3 walk sheet for this character (Tom 2026-11-05 23:16), used as painted (no head warp, no body narrowing, no mirroring).
+from walk_sheet_frames import build as _build_walk
+poses.update({k: v for k, v in _build_walk('boppy').items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):

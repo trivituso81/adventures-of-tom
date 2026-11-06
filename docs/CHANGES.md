@@ -1,3 +1,10 @@
+## 2026-11-05 (289): New walking animations for Deedee, Boppy and Aunt Ellie (`walksheet2`)
+- Tom (23:16): "deedee and boppy", then "aunt ellie", each with one painted 3 x 3 walk sheet (Ellie also a hero picture).
+- Same method as 288: the nine figures are the overworld stand and walk frames as painted (tools/sprite-bake/walk_sheet_frames.py). The walk no longer goes through the head warp (Deedee, Boppy, Ellie) or Boppy's body narrowing; those stay on battle poses only.
+- Sizes (standing rows): Deedee 41.7, Boppy 41.7, Ellie 43.0, the same as before, so no size setting changed. Ellie's real height is still not on record (she draws at about Tom's height).
+- Battle sheets untouched: rebaked through hires.py and hires_install.py (Boppy 1.333, his KO 1.5) and every battle sheet came back byte for byte the same.
+- Sources: art/raw/characters/{deedee,boppy,ellie}-walk-sheet-v1.png, ellie-hero-ref-v1.png. Purged: src/deedee-walk-v2.png, src/boppy-walk-v2.png, src/ellie-walk-v2.png, the walk head ratios and walk head boxes in bake_deedee.py and bake_boppy.py, Ellie's whole head-warp code and --head-k.
+- Tests: tag_check ok, `IDS=deedee,boppy` smoke FAILS []. Not seen on a real phone.
 ## 2026-11-05 (288): New walking animations for Tom, Grace and Rose (`walksheet1`)
 - Tom (22:56): "new walking animations for Tom, Grace, Rose" with one painted 3 x 3 walk sheet each (rows front, back, side; columns stand, step A, step B) and a hero picture each.
 - All nine figures of each sheet are the overworld stand and walk frames, used as painted: no head or body resizing, no mirroring, every frame at the sheet's own scale. Pass frame = stand; walking right = the engine's mirror of walking left. Cutter: `tools/sprite-bake/walk_sheet_frames.py` (magenta unmixed on the outline only, magenta holes between legs and fingers cleared). Called by bake_tom_walk_v4.py, bake_grace_walk_v4.py, bake_rose.py.
