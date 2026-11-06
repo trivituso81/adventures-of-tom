@@ -15,7 +15,6 @@
   // eye: centroid of dark pixels in the face band; hands: outermost pixels in the arm band (logic reads these)
   // HR = head (cap to chin) share of the idle height set by the bake (was .40; bigger since 2026-11-01). Bands keep their place relative to head and body:
   // eye band .2 to .85 of the head, arm band from just above the chin to just over half the body (both give the old .08-.34 and .35-.72 at HR .40).
-  // The young runner (yg_) keeps realistic proportions, so he passes .40 (the old bands).
   const meta=(rows,HR=0.26)=>{ const EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR); const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
     for(let y=Math.floor(H*EY0);y<Math.floor(H*EY1);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
     const eye=c?{col:Math.round(sx/c),row:Math.round(sy/c)}:{col:Math.round(W*.38),row:Math.round(H*.2)};
@@ -41,13 +40,11 @@
     m4['.']='.';
     for(const k in SX.rows) if(k!=='sitc') sp[k]=P2(SX.rows[k],'boppyStock',k,m4);
   }
-  // Young runner (XC Ult flashback): yg_ready, yg_run1, yg_run2, yg_wind, yg_strike, yg_celebr (+ yg_run1R, yg_run2R mirrored). engine/boppy-moves.js youngOn() swaps them in.
+  // Young runner (XC Ult flashback, data/boppy-young.js from tools/sprite-bake/bake_boppy_young.py): yg_ready, yg_wind, yg_celebr.
+  // Rows share his battle palette (map). engine/boppy-moves.js youngOn() swaps them in.
   if(typeof BOPPY_YOUNG!=='undefined') {
     const YX=BOPPY_YOUNG; paintedAtlas('boppyYoung',YX.atlas.src,YX.atlas.rects,YX.atlas.k);
-    const m5={}; let n5=0; for(const k in YX.pal) { const c=String.fromCharCode(0x0700+n5++); m5[k]=c; pal[c]=YX.pal[k]; }
-    m5['.']='.';
-    for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,m5,.40);
-    sp.yg_run1R=mir(sp.yg_run1); sp.yg_run2R=mir(sp.yg_run2);
+    for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,map);
   }
   // Ability frames (tools/sprite-bake/bake_boppy_ab.py, data/boppy-ab.js): f:'ab_cap_2' etc. in a move's keys; a trailing 'F' is the same frame facing right.
   // Eye and hand points are found as for the poses above. sp.mouthAt (a little below the eye, where the fire cone and the red-face glow are drawn) and
