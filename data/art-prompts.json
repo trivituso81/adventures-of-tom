@@ -191,8 +191,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Seat 1A, Peasants.\n\nRow 1:\n1. Standing tall, a boarding pass held up beside his face, chin raised, smug.\n2. Pressing one button on a small remote held out in one hand, eyebrows raised, unbothered.\n3. One arm raised high with the hand closed, pulling something down, the remote in the other hand.\n\nRow 2:\n4. A thick plush white duvet held spread in both arms, stepping forward.\n5. Leaning forward, smoothing the duvet down with both hands, a gentle caring face.\n6. Standing straight, hands clasped in front, a polite flight attendant smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-ab-delta-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793952938395
+    }
+   ],
    "rejects": [],
    "id": "tom-ab-delta-ult",
    "tab": "Characters",
