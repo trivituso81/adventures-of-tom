@@ -1,3 +1,12 @@
+## 2026-11-06 (387): Grump Hollow v3 storybook painting with a walk-behind layer (`hollow5`)
+
+- Tom (13:41 painting, 13:48 four masks, 14:00 "just install it now"). New plate `art/hollow.webp` (1536 x 1408) from `art/raw/areas/area-hollow-v4.png` (1310 x 1200, added as version 4 of the Art Library entry `area-hollow`). `art/hollow-fg.webp` holds trees, ferns, cattails, the THE SQUARE / SHOPS arch with its fences, 16 boulders, the stump, both benches and the mushrooms, cut from the painting itself; Tom's masks (keyed to 1-bit in `art/raw/areas/hollow-v3-masks/`) only say where to cut. Builder: `tools/make_hollow_fg.py`.
+- Depth: `PLATE_BEHIND.hollow` is now 133 polygon zones. Upright things (boulders, stump, benches, mushrooms, the arch board with both posts) are one zone each with their own base; foliage, cattails and the low fences are 48 px row strips. Tom is hidden behind the board up to his head when he walks under the arch.
+- Layout changed: walk map re-derived (pond upper right, mossy bench left, Boppy's bench on the right shore, stump right, stone path and exit bottom left). Exit tiles (4..8, 21) to the Square; arrivals from the Square land at (6,20) and (7,20); spawn (6,19). Tap objects moved onto the painted benches (Soggy bench 3,7 3x3; Boppy's fishing spot 18,9 4x2). Pond water cells redone.
+- Positions moved off the pond and trees: `MONSTER_SPOTS` (Mudling 7,16; Bog Toad 9,8), ch1Mudling (family, Mudling and its trigger), ch1Pond (Big Mudling row 11), nsTrail (family and both Cone Heads), Brain Freeze (19,11) in nsPond and nsPond2.
+- Purged: `tools/make_hollow_layers_v2.py`, `art/raw/areas/hollow-layers-v2/`, and the four unused Art Library stencil drafts `area-hollow-cut1` to `cut4`.
+- Tests: reach_test hollow 0 fails, tag_check ok, smoke FAILS [], scene frames ch1Mudling, ch1Pond, nsTrail with no errors, in-game shots portrait 393 x 852 and landscape (spawn, under the arch, boulder, stump, benches).
+
 ## 2026-11-06 (386): The Square walk map from Tom's Area Builder export (`square7`)
 
 - Tom's export (83 walk and block edits) applied with `tools/apply_walkmap.py`: open lanes west of the fountain, between Snail Mail and Kettle Cottage, and south of the plaza; the fence row (4-10,24), mailboxes and planters blocked.
