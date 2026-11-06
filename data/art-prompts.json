@@ -2720,7 +2720,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tnb-ab-hillbomb-ult",
    "tab": "Characters",
    "group": "TNB",
@@ -2732,7 +2732,16 @@
     "art/raw/characters/tnb-battle-sheet-1-v1.png",
     "art/raw/characters/tnb-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Baxter Street Bomb.\n\nRow 1:\n1. Standing at the top of a steep street, one foot on a longboard, a hand over his eyes, very relaxed.\n2. Crouched low on a longboard, arms tucked, leaning forward, a fierce grin.\n3. Riding in a deep crouch, one hand trailing out for balance, hair blown back, joyful.\n\nRow 2:\n4. Reaching one hand into a tote bag at his hip while riding, a mischievous smile.\n5. Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.\n6. Standing on the board coasting, both arms stretched wide, an enormous grin."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Baxter Street Bomb.\n\nRow 1:\n1. Standing at the top of a steep street, one foot on a longboard, a hand over his eyes, very relaxed.\n2. Crouched low on a longboard, arms tucked, leaning forward, a fierce grin.\n3. Riding in a deep crouch, one hand trailing out for balance, hair blown back, joyful.\n\nRow 2:\n4. Reaching one hand into a tote bag at his hip while riding, a mischievous smile.\n5. Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.\n6. Standing on the board coasting, both arms stretched wide, an enormous grin.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-ab-hillbomb-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793981300940
+    }
+   ]
   },
   {
    "status": "draft",
