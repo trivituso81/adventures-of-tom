@@ -20,11 +20,12 @@
   const B=GRACE_HIRES.bt,M=GRACE_HIRES.meta.bt,P=(k,n)=>tag(B[k].slice(),'graceBattle',n||k,false);
   const old=BATTLE_SPRITES.grace;
   const sp={idle:P('idle'),act:P('act','act'),celeb:P('celeb','celeb'),pal:B.pal,scale:1,eye:{col:M.eye[0],row:M.eye[1]},
-    windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true};
+    windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true,
+    idle2:P('idle2'),hip:P('hip'),spread:P('spread'),point:P('point')};   // battle sheets of 2026-11-05: breathing in, hands on hips, arms wide, power point
   sp.expr=sp.act; sp.run=[P('run1'),P('run2')];
-  sp.kneel=P('kneel');   // painted kneel (already has the black eye), so battle-draw skips its bruise overlay for hires sprites
+  sp.kneel=P('kneel');   // painted tired kneel (battle sheet 2); battle-draw skips its bruise overlay for hires sprites
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
-  sp.beg=P('beg'); sp.begFlip=mirror(sp.beg);   // Squishy Delivery begging pose: the kneel without the bruise
+  sp.beg=P('beg'); sp.begFlip=mirror(sp.beg);   // Squishy Delivery begging pose: the tired kneel
   // Open Strings (os_*), Portrait Mode (pm_*) and Bedazzle Blast (bz_*) frames, own atlas (data/grace-extra.js, Oct 30). All face left except pm_shield (faces right).
   if(typeof GRACE_EXTRA!=='undefined') { const X=GRACE_EXTRA; paintedAtlas('graceExtra',X.atlas.src,X.atlas.rects,X.atlas.k,violet); for(const k in X.rows) sp[k]=tag(X.rows[k].slice(),'graceExtra',k,false); for(const k of ['os_arrive','pm_leave','bz_arrive']) if(sp[k]) sp[k+'R']=mirror(sp[k]); }   // *R: the walk-in frames facing right, for the walk home
   BATTLE_SPRITES.grace=sp;

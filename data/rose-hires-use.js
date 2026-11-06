@@ -23,9 +23,10 @@ let ROSE_RIDE_PAL=ROSE_OW.pal;
   const B=ROSE_HIRES.bt,M=ROSE_HIRES.meta.bt,P=(k,n)=>tag(B[k].slice(),'roseBattle',n||k,false);
   const sp=BATTLE_SPRITES.rose;
   Object.assign(sp,{idle:P('idle'),act:P('act','act'),celeb:P('celeb','celeb'),pal:B.pal,scale:1,eye:{col:M.eye[0],row:M.eye[1]},
-    windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true,mouth:{col:34,row:20}});
+    windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true,mouth:{col:45,row:26},
+    idle2:P('idle2'),hip:P('hip'),spread:P('spread'),point:P('point')});   // battle sheets of 2026-11-05: breathing in, hands on hips, arms wide, power point; mouth read off the new idle
   sp.expr=sp.act; sp.run=[P('run1'),P('run2')];
-  sp.kneel=P('kneel');   // painted kneel (the black eye is painted in by the baker), so battle-draw skips its bruise overlay
+  sp.kneel=P('kneel');   // painted tired kneel (battle sheet 2); battle-draw skips its bruise overlay for hires sprites
   // Extra battle poses (sheet A), faces left like the rest: boop, boopBack, raspberry, boo, tiara, hug, balance, lookout, throwWind, throwRel, sitStory, sitTea.
   for(const k in ROSE_HIRES.x) sp[k]=tag(ROSE_HIRES.x[k].slice(),'roseBattleX',k,false);
   // Tickle Storm frames (own atlas): tk_ready, tk_creepA, tk_creepB, tk_launch, tk_air, tk_land, tk_tickleA to D, tk_feather_draw, tk_feather_swish, tk_feather_twirl, tk_finale, tk_doubled, tk_proud.

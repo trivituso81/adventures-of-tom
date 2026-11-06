@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Bake Tom (overworld walk frames are the nine figures of Tom's painted 3 x 3 walk sheet as painted, see tools/sprite-bake/walk_sheet_frames.py; battle, custom and stretch exactly as bake_tom.py). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
+"""Bake Tom (overworld walk frames are the nine figures of Tom's painted 3 x 3 walk sheet as painted, see tools/sprite-bake/walk_sheet_frames.py; battle from the two painted battle sheets, custom and stretch as before). Original header: Bake Tom's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/tom-battle-v3.png (4 x 4) (the old walk sheets are deleted), Nov 2026 painted sheets; older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
+Input : art/raw/characters/tom-battle-sheet-1-v1.png and tom-battle-sheet-2-v1.png (battle, as painted, 2026-11-05); older extra pose sheets (poses-v1/v2, stretch-v1) are unchanged (flat magenta background, see README.md)
 Output: art/chars/tom-battle.webp, tom-ko.webp, tom-ow.webp  (painted frames, K x the size of the rows)
         data/tom-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
 The rows are a downscaled, quantized copy of each painted frame. The game's logic (hand points, Rose's seat, outfit keys,
 mirroring) reads the rows; the painted frame is what gets drawn (engine/painted.js). Same frame size either way.
 
-Usage : python3 tools/sprite-bake/bake_tom.py [--battle-h 100] [--ow-h 42] [--colors 46]
+Usage : python3 tools/sprite-bake/bake_tom_walk_v4.py [--battle-h 100] [--ow-h 42] [--colors 46]
 """
 import argparse, json, os, sys
 import numpy as np
@@ -32,13 +32,12 @@ args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-# Battle: the painted 4 x 4 sheet of Nov 2026 (graphic tee, jeans, sneakers). Each new pose fills the old pose slot it corresponds to.
-NB = ['idleA', 'idleB', 'walkA', 'walkB', 'hip', 'act', 'wind', 'swing', 'spread', 'guard', 'hurt', 'low', 'ko', 'cheerA', 'cheerB', 'sig']
-NEW_TO_OLD = {'idleA': 'idle', 'wind': 'windup', 'swing': 'strike', 'walkA': 'run1', 'walkB': 'run2', 'cheerB': 'leap', 'hurt': 'hurt',
-              'low': 'kneel', 'ko': 'ko', 'cheerA': 'win', 'sig': 'defend', 'act': 'cast'}
-for nm, im in slice_sheet(os.path.join(SRC, 'tom-battle-v3.png'), [NB[0:4], NB[4:8], NB[8:12], NB[12:16]]).items():
-    if nm in NEW_TO_OLD:
-        poses['b_' + NEW_TO_OLD[nm]] = im
+# Battle: Tom's two painted battle sheets (art/raw/characters/tom-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-05 23:40), used as painted
+# (no head or body resizing). tools/sprite-bake/battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
+from battle_sheet_frames import build as _build_battle, SLOTS
+_bf = _build_battle('tom')
+for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
+poses['b_dizzy'] = _bf['b_dizzy']
 # Extra poses and the arrival stretch: nine 5-frame sheets (Nov 2026, painted, same character as the battle sheet), tom-xposes-N-v1.png.
 # Prefix c = custom battle pose (f:'<name>' in a move's keys), s = arrival stretch frame.
 STRETCH = ['tired', 'start', 'full', 'side', 'crack', 'neck', 'exhale', 'fresh']
@@ -79,12 +78,11 @@ def _auto_head(img):
     chin = lo + int(np.argmin(ws[lo:hi]))
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, max(0, int(xs.min()) - 6), int(xs.max()) + 6
-HEAD_BOX = {'b_win': (0, 74, 62, 140), 'b_leap': (0, 73, 42, 122), 'b_kneel': (0, 106, 12, 90),
-            's_full': (55, 185, 122, 232), 's_side': (85, 225, 70, 205), 's_neck': (15, 178, 35, 190), 's_crack': (5, 160, 140, 282)}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
+HEAD_BOX = {'s_full': (55, 185, 122, 232), 's_side': (85, 225, 70, 205), 's_neck': (15, 178, 35, 190), 's_crack': (5, 160, 140, 282)}   # (top, chin, x0, x1) source px, read off rulers; fists kept out
 SIDE = {}
 # Heads that are not on top (lying, face down, cartwheel, all fours, hands over the face): the region (x0, y0, x1, y1) is scaled by k about the
 # neck point (ax, ay), chosen so the head grows away from the floor and the body. Source px, read off rulers.
-REGION = {'b_ko': (0, 0, 92, 100, 88, 60), 'c_cower': (0, 0, 150, 185, 110, 185), 'c_lying': (370, 0, 541, 135, 385, 130),
+REGION = {'c_cower': (0, 0, 150, 185, 110, 185), 'c_lying': (370, 0, 541, 135, 385, 130),
           'c_cartwheel': (75, 260, 245, 445, 220, 320), 'c_facedown': (135, 0, 295, 135, 285, 128)}
 def region_head(img, name, k, pad=200):
     x0, y0, x1, y1, ax, ay = REGION[name]
@@ -125,15 +123,7 @@ def _bigger_core(img, name, k, pad=160, taper=TAPER):
     arr[Y0:AY, X0:X1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
     return big.crop(big.getbbox())
-_t, _c, _, _ = head_box(poses['b_idle'], 'b_idle'); _r0 = (_c - _t) / poses['b_idle'].height
-def _ratio(k): return (_c - _t) * k / bigger_head(poses['b_idle'], 'b_idle', k).height
-_lo, _hi = 1.0, 4.0
-for _ in range(14):
-    _m = (_lo + _hi) / 2
-    if _ratio(_m) < _r0 * FACE_GROW: _lo = _m
-    else: _hi = _m
-HEAD_KB = round((_lo + _hi) / 2, 3)
-print('head factor solved: battle', HEAD_KB, '(head share', round(_r0, 3), '->', round(_ratio(HEAD_KB), 3), ')')
+HEAD_KB = 1.549   # pinned (2026-11-05 battlesheet1): the old extra-pose sheets keep the head factor solved on the old battle idle; the new battle frames are not warped
 if os.environ.get('HEADSHEET'):          # contact sheet: each battle/custom source pose with its head box
     from PIL import ImageDraw
     tiles = []
@@ -159,7 +149,7 @@ if os.environ.get('RULER'):               # RULER=name,name DIR=...: source pose
         tl.convert('RGB').save(os.path.join(os.environ['DIR'], 'ruler_' + n + '.png'))
     sys.exit(0)
 for _n in list(poses):
-    if _n[:2] in ('b_', 'c_'): poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
+    if _n[:2] == 'c_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
 # Arrival stretch head factor (the overworld walk is the walk sheet as painted).
 HEAD_KW = 1.626   # pinned: the arrival stretch art must not change
 for _n in list(poses):
@@ -303,28 +293,27 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+battle_names = {k: 'b_' + k for k in SLOTS}
 CUSTOM = ['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling', 'unbox', 'flick', 'brush', 'limit', 'startled', 'direct']
 CUSTOM += ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
 CUSTOM += ['finger', 'headphones', 'mask', 'shade', 'floorsit', 'lying', 'cartwheel', 'facedown', 'rope', 'stirrup', 'strain', 'toast', 'plates']
 fb = args.battle_h * KB / poses['b_idle'].height
+FB_CUSTOM = 0.5934718100890207   # pinned: the old extra-pose sheets keep the size they had next to the old battle idle
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 # custom poses: their own canvas (some are taller than the idle), feet on the bottom row and head on the centre column.
 # The extra sheets draw an upright figure about 632 px tall; the battle sheet's upright 'hip' frame is 292 px, so scale by 292/632
 # (a touch more, 0.476 instead of 0.462, so the heads do not end up smaller than the battle sheet's).
 XS = 0.476
-cu_big = tighten(place({c: scaled_to(poses['c_' + c], fb * XS) for c in CUSTOM} if False else {c: scaled_to(poses['c_' + c], fb * XS) for c in CUSTOM}, KB, 'head'), KB)
+cu_big = tighten(place({c: scaled_to(poses['c_' + c], FB_CUSTOM * XS) for c in CUSTOM}, KB, 'head'), KB)
 bt_pal, all_rows = rows_of({**bt_big, **cu_big}, KB, args.colors)      # one shared palette
 bt_rows = {k: all_rows[k] for k in bt_big}
 cu_rows = {k: all_rows[k] for k in cu_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'tom-battle.webp'))
 cu_rects = pack(cu_big, os.path.join(ART, 'tom-poses.webp'))
 
-# knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
-ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
+# knocked out: the dizzy sit, facing screen-left as painted; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
+ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb * KO_ / KB)}, KO_, 'center'), KO_)   # knocked out = the painted dizzy sit
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'tom-ko.webp'))
@@ -384,13 +373,13 @@ print(json.dumps(meta))
 
 js = []
 js.append("'use strict';")
-js.append("// data/tom-hires.js — Tom, from his two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_tom.py; do not hand-edit.")
+js.append("// data/tom-hires.js — Tom, from his two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_tom_walk_v4.py; do not hand-edit.")
 js.append("// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js).")
 js.append("const TOM_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel') :
+for k in SLOTS:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  pose:{" + ",".join(f"{k}:" + fmt_rows(cu_rows[k]) for k in CUSTOM) + "},")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Rose's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/rose-battle-v2.png and art/raw/characters/rose-walk-sheet-v1.png (flat magenta background, see README.md)
+Input : art/raw/characters/rose-battle-sheet-1-v1.png and rose-battle-sheet-2-v1.png (battle, as painted) and art/raw/characters/rose-walk-sheet-v1.png (flat magenta background, see README.md)
 Output: art/chars/rose-battle.webp, rose-ko.webp, rose-ow.webp  (painted frames, K x the size of the rows)
         data/rose-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -32,9 +32,16 @@ args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'rose-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
-    poses['b_' + nm] = im
+# Battle: Rose's two painted battle sheets (art/raw/characters/rose-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-05 23:40), used as painted
+# (no head or body resizing). tools/sprite-bake/battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
+from battle_sheet_frames import build as _build_battle, SLOTS
+_bf = _build_battle('rose')
+for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
+poses['b_dizzy'] = _bf['b_dizzy']
+BT_IDLE_ROWS = 83                    # the idle's visible height in battle rows, as before this change (her size in a fight does not move)
+# The extra, tickle, boomerang and ride sheets were sized against the old battle sheet (deleted 2026-11-05); its measurements are pinned here
+# so those frames keep their exact size: old idle 366 px and guard 372 px tall, old battle scale 80 rows x 2 / 366.
+OLD_IDLE_H, OLD_DEF_H = 366, 372
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Rose (Tom 2026-11-05 22:56), used as painted (no head growth, no mirroring).
 from walk_sheet_frames import build as _build_walk
 poses.update({k: v for k, v in _build_walk('rose').items() if not k.endswith('_pass')})
@@ -197,16 +204,15 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
-fb = args.battle_h * KB / poses['b_idle'].height
+battle_names = {k: 'b_' + k for k in SLOTS}
+fb = args.battle_h * KB / OLD_IDLE_H                     # extra sheets (pinned scale)
+fb_bt = BT_IDLE_ROWS * KB / poses['b_idle'].height       # the new battle frames, as painted
 import kidhead as _kh   # bigger head, same body (2026-11-01): every scale factor below comes from unwarped reference heights
 S_BT, S_OW = 0.31, 0.343
 HEAD_DOWN = 0.90   # Tom 2026-11-01 15:07: "make Rose's head 10% smaller" (battle and walk; Grace unchanged)
 K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT) * HEAD_DOWN, _kh.factor(_kh.T_WALK, S_OW) * HEAD_DOWN
-_IDLE_H, _STAND_H = poses['b_idle'].height, poses['w_down_stand'].height
-_DEF_H, _HOLD_H, _HUG_H = poses['b_defend'].height, poses['y_hold'].height, poses['x_hug'].height
+_IDLE_H, _STAND_H = OLD_IDLE_H, poses['w_down_stand'].height
+_DEF_H, _HOLD_H, _HUG_H = OLD_DEF_H, poses['y_hold'].height, poses['x_hug'].height
 print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))
 # The extra, jab, tickle and boomerang sheets were painted with the big head already (head about .40 of the figure, the idle sheet is .31),
 # so grow_head must NOT run on them: its fixed head band cuts through the face and stretches any arm held at head height (Tom 2026-11-01,
@@ -214,27 +220,11 @@ print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))
 # and body at the same size as the idle.
 G_BT = 1 + (K_BT - 1) * S_BT
 print('big-head sheet scale gain: %.3f' % G_BT)
-_bt_src = {n: _kh.grow_head(poses[n], K_BT, S_BT * _IDLE_H) for n in poses if n.startswith('b_') and n != 'b_ko'}
-bt_big = {k: scaled_to(_bt_src[v], fb) for k, v in battle_names.items()}
+bt_big = {k: scaled_to(poses[v], fb_bt) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 
-# The sheets avoid injury wording, so the black eye is painted in here: the kneel frame (under 25 percent HP) gets a soft
-# purple bruise round her near eye. Coordinates are in painted pixels of the final battle frame (168 x 146).
-def paint_bruise(img, cx, cy, rx, ry):
-    a = np.array(img).astype(float)
-    h, w = a.shape[:2]
-    yy, xx = np.mgrid[0:h, 0:w]
-    d = np.sqrt(((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2)
-    outer = np.clip(1.0 - d, 0, 1) ** 0.7 * 0.55
-    inner = np.clip(1.0 - d / 0.55, 0, 1) ** 0.8 * 0.5
-    cov = (a[:, :, 3] / 255.0)
-    for wgt, col in ((outer, (118, 70, 150)), (inner, (52, 28, 70))):
-        k = (wgt * cov)[:, :, None]
-        a[:, :, :3] = a[:, :, :3] * (1 - k) + np.array(col, float) * k
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-bt_big['kneel'] = paint_bruise(bt_big['kneel'], 66, 67.5, 7.5, 6)
 # Sheet A poses: scaled so her standing hug matches the guard pose of the main sheet; own canvas (head on the centre column, feet on the bottom row).
-rA = poses['b_defend'].height / poses['x_hug'].height
+rA = OLD_DEF_H / poses['x_hug'].height
 x_big = {k: scaled_to(poses['x_' + k], fb * rA * G_BT) for k in X_NAMES}
 x_big = tighten(place(x_big, KB, 'head'), KB)
 _all = dict(bt_big); _all.update({'x_' + k: v for k, v in x_big.items()})
@@ -249,7 +239,7 @@ x_rects = pack(x_big, os.path.join(ART, 'rose-battle-x.webp'))
 TK_NAMES = ['tk_ready', 'tk_creepA', 'tk_creepB', 'tk_launch', 'tk_air', 'tk_land', 'tk_tickleA', 'tk_tickleB', 'tk_tickleC', 'tk_tickleD',
             'tk_feather_draw', 'tk_feather_swish', 'tk_feather_twirl', 'tk_finale', 'tk_doubled', 'tk_proud']
 _tk = slice_sheet(os.path.join(SRC, 'rose-tickle-v2.png'), [TK_NAMES[0:4], TK_NAMES[4:8], TK_NAMES[8:12], TK_NAMES[12:16]])
-rT = poses['b_idle'].height / _tk['tk_proud'].height
+rT = OLD_IDLE_H / _tk['tk_proud'].height
 tk_big = tighten(place({k: scaled_to(_tk[k], fb * rT * G_BT) for k in TK_NAMES}, KB, 'head'), KB)
 def rows_in_palette(frames, k, palette):
     keys = list(palette); pf = np.array([[int(palette[c][i:i + 2], 16) for i in (1, 3, 5)] for c in keys]).astype(int)
@@ -267,7 +257,7 @@ tk_rects = pack(tk_big, os.path.join(ART, 'rose-battle-tk.webp'))
 BM_NAMES = ['bm_windA', 'bm_windB', 'bm_throw', 'bm_follow', 'bm_watch', 'bm_reach', 'bm_catch', 'bm_cheer']
 LF_NAMES = [f'{w}_{v}' for w in ('lamby', 'backup') for v in ('front', 'side', 'flip', 'squash')]
 _bm = slice_sheet(os.path.join(SRC, 'rose-boomerang-v1.png'), [BM_NAMES[0:4], BM_NAMES[4:8], LF_NAMES[0:4], LF_NAMES[4:8]])
-rBM = poses['b_idle'].height / _bm['bm_watch'].height
+rBM = OLD_IDLE_H / _bm['bm_watch'].height
 bm_big = tighten(place({k: scaled_to(_bm[k], fb * rBM * G_BT) for k in BM_NAMES}, KB, 'torso'), KB)
 bm_rows = rows_in_palette(bm_big, KB, bt_pal)
 bm_rects = pack(bm_big, os.path.join(ART, 'rose-battle-bm.webp'))
@@ -280,8 +270,8 @@ for i, k in enumerate(LF_NAMES):
 _lf_path = os.path.join(ROOT, 'art/props/rose/lamby_fly.webp'); lf_atlas.save(_lf_path, 'WEBP', lossless=True, quality=100, method=6)
 print('wrote', os.path.relpath(_lf_path, ROOT), lf_atlas.size, json.dumps(lf_rects))
 
-# knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
-ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
+# knocked out: the dizzy sit, facing screen-left as painted; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
+ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb_bt * KO_ / KB)}, KO_, 'center'), KO_)   # knocked out = the painted dizzy sit
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'rose-ko.webp'))
@@ -300,7 +290,7 @@ ow_rects = pack(ow_big, os.path.join(ART, 'rose-ow.webp'))
 # ---------------------------------------------------------------- shoulder ride (painted)
 # Each view gives a back layer (the whole figure, drawn behind Tom's head) and a front layer (only the legs from CUT down, drawn
 # after Tom so her shoes sit on his shoulders). Anchor (ax, ay): the seat pixel, in rows, that lands on Tom's anchor point.
-rB = poses['b_defend'].height / poses['y_hold'].height
+rB = OLD_DEF_H / poses['y_hold'].height
 RIDE_CUT = 0.74      # front layer (shins and shoes) starts this far down the figure
 def front_layer(img, k):
     a = np.array(img).copy()
@@ -327,7 +317,7 @@ def mirror(rows):
     return [r[::-1] for r in rows]
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
-bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], _kh.body_frac(.41, K_BT, S_BT), _kh.body_frac(.68, K_BT, S_BT))
+bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], _kh.body_frac(.41, 1.0, S_BT), _kh.body_frac(.68, 1.0, S_BT))
 ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .33, .64)   # walk sheet frames as painted (no head growth)
 
 # ---------------------------------------------------------------- eyes (for the low-health bruise and KO overlays)
@@ -335,7 +325,7 @@ def find_eye(rows, pal):
     """The near eye: darkest small blob with a bright neighbour, in the upper head. Falls back to a guess."""
     n = len(rows)
     best = None
-    for y in range(int(n * _kh.head_frac(.08, K_BT, S_BT)), int(n * _kh.head_frac(.35, K_BT, S_BT))):
+    for y in range(int(n * _kh.head_frac(.08, 1.0, S_BT)), int(n * _kh.head_frac(.35, 1.0, S_BT))):
         row = rows[y]
         for x in range(2, len(row) - 2):
             ch = row[x]
@@ -383,7 +373,7 @@ js.append("const ROSE_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in battle_names:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")

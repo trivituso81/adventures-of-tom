@@ -1,7 +1,7 @@
 """Cut a painted character sheet (flat magenta background) into separate RGBA poses with soft, despilled edges.
 
     from sheet import slice_sheet
-    poses = slice_sheet('src/tom-battle-v2.png', [['ready','windup',...], [...]])   # one name list per row
+    poses = slice_sheet('src/<name>-battle.png', [['ready','windup',...], [...]])   # one name list per row
     (cut_rects=[(x0, y0, x1, y1)] erases a small box first, to separate figures that touch)
 
 Soft alpha keeps the painted look (no hard stair-stepped silhouette); magenta that bled into edge pixels is removed.

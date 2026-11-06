@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Grace (walk 2026-11-05 22:56: all nine overworld frames from Tom's painted 3 x 3 sheet art/raw/characters/grace-walk-sheet-v1.png, as painted, tools/sprite-bake/walk_sheet_frames.py). Previous header: Bake Grace (v3 walk, 2026-11-03): battle exactly as bake_grace.py, overworld from the nine single walk frames (CHANGES 120). Original text: Bake Grace's two painted pose sheets into the game (robust magenta cut: her violet leotard is close to the background colour): painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/grace-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/grace-walk-sheet-v1.png
+Input : art/raw/characters/grace-battle-sheet-1-v1.png and grace-battle-sheet-2-v1.png (battle, as painted, 2026-11-05) and art/raw/characters/grace-walk-sheet-v1.png
 Output: art/chars/grace-battle.webp, grace-ko.webp, grace-ow.webp  (painted frames, K x the size of the rows)
         data/grace-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -32,60 +32,18 @@ args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'grace-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']], robust=True).items():
-    poses['b_' + nm] = im
+# Battle: Grace's two painted battle sheets (art/raw/characters/grace-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-05 23:40), used as painted
+# (no head or body resizing). tools/sprite-bake/battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
+from battle_sheet_frames import build as _build_battle, SLOTS
+_bf = _build_battle('grace')
+for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
+poses['b_dizzy'] = _bf['b_dizzy']
+poses['b_beg'] = _bf['b_tired']      # Squishy Delivery begging pose: the tired kneel
+BT_IDLE_ROWS = 90                    # the idle's visible height in battle rows, as before this change (her size in a fight does not move)
 
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Grace (Tom 2026-11-05 22:56), used as painted: no head or body resizing, no mirroring.
 from walk_sheet_frames import build as _build_walk
 poses.update({k: v for k, v in _build_walk('grace').items() if not k.endswith('_pass')})
-
-# ---------------------------------------------------------------- paint-in (the image AI refuses injury wording, so the bake adds it)
-from PIL import ImageDraw, ImageFilter
-import math
-
-def _layer(img, draw_fn, ss=4, blur=0.0):
-    """Draw on a supersampled L mask the size of img, return it as a float mask 0..1."""
-    m = Image.new('L', (img.width * ss, img.height * ss), 0)
-    draw_fn(ImageDraw.Draw(m), ss)
-    m = m.resize(img.size, Image.LANCZOS)
-    if blur: m = m.filter(ImageFilter.GaussianBlur(blur))
-    return np.array(m).astype(float) / 255.0
-
-def black_eye(img, cx, cy, rx, ry, ang):
-    """Dark plum bruise around the eye (multiplied into the skin so the painted shading stays)."""
-    def d(dr, ss):
-        pts = []
-        for t in np.linspace(0, 2 * math.pi, 60):
-            x, y = rx * math.cos(t), ry * math.sin(t)
-            pts.append(((cx + x * math.cos(ang) - y * math.sin(ang)) * ss, (cy + x * math.sin(ang) + y * math.cos(ang)) * ss))
-        dr.polygon(pts, fill=255)
-    m = _layer(img, d, blur=2.2)
-    a = np.array(img).astype(float)
-    col = np.array([62.0, 26.0, 66.0])
-    k = (m * 0.86 * (a[:, :, 3] > 0))[:, :, None]
-    a[:, :, :3] = a[:, :, :3] * (1 - k) + (a[:, :, :3] * 0.35 + col * 0.65) * k
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-
-def swirl_eye(img, cx, cy, r):
-    """Dizzy spiral over the closed eye, for the knocked-out pose."""
-    def d(dr, ss):
-        pts = []
-        for t in np.linspace(0, 5.2 * math.pi, 140):
-            rr = r * t / (5.2 * math.pi)
-            pts.append(((cx + rr * math.cos(t)) * ss, (cy + rr * math.sin(t)) * ss))
-        dr.line(pts, fill=255, width=int(2.6 * ss), joint='curve')
-    m = _layer(img, d, blur=0.5)
-    a = np.array(img).astype(float)
-    col = np.array([58.0, 30.0, 40.0])
-    k = (m * (a[:, :, 3] > 0))[:, :, None]
-    a[:, :, :3] = a[:, :, :3] * (1 - k) + col * k
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA')
-
-# coordinates are in the sliced pose image (native sheet pixels); found by looking at the frames
-poses['b_beg'] = poses['b_kneel'].copy()      # Squishy Delivery begging pose: the same kneel, no bruise
-poses['b_kneel'] = black_eye(poses['b_kneel'], 97, 80, 19, 12, -0.28)
-poses['b_ko'] = swirl_eye(poses['b_ko'], 85, 47, 10)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -223,23 +181,17 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel', 'beg': 'b_beg'}
-fb = args.battle_h * KB / poses['b_idle'].height
-import kidhead as _kh   # bigger head, same body (2026-11-01): fb above comes from the unwarped idle, so the body keeps its size
-S_BT, S_OW = 0.34, 0.36
-K_BT, K_OW = _kh.factor(_kh.T_BATTLE, S_BT), _kh.factor(_kh.T_WALK, S_OW)
-_hb = S_BT * poses['b_idle'].height
-for _n in [n for n in poses if n.startswith('b_') and n != 'b_ko']: poses[_n] = _kh.grow_head(poses[_n], K_BT, _hb)
-print('head factors: battle %.3f walk %.3f' % (K_BT, K_OW))
+battle_names = {**{k: 'b_' + k for k in SLOTS}, 'beg': 'b_beg'}
+fb = BT_IDLE_ROWS * KB / poses['b_idle'].height
+import kidhead as _kh
+K_BT, S_BT = 1.0, 0.34   # battle frames are not head-grown (as painted)
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'grace-battle.webp'))
 
-# knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
-ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
+# knocked out: the dizzy sit, facing screen-left as painted; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
+ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb * KO_ / KB)}, KO_, 'center'), KO_)   # knocked out = the painted dizzy sit
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'grace-ko.webp'))
@@ -312,13 +264,13 @@ print(json.dumps(meta))
 
 js = []
 js.append("'use strict';")
-js.append("// data/grace-hires.js — Grace, from her two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_grace.py; do not hand-edit.")
+js.append("// data/grace-hires.js — Grace, from her two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_grace_walk_v4.py; do not hand-edit.")
 js.append("// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js).")
 js.append("const GRACE_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel', 'beg'):
+for k in battle_names:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")

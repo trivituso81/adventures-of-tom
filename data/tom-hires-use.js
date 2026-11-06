@@ -24,10 +24,11 @@ let TOM_STRETCH=null;
   // Battle: faces left like the old one. Scale 1 (the old Tom was 40 rows at 2.6; this is 100 rows at 1).
   const B=TOM_HIRES.bt,M=TOM_HIRES.meta.bt,P=(k,n)=>tag(B[k].slice(),'tomBattle',n||k,false);
   const sp={idle:P('idle'),act:P('act','act'),celeb:P('celeb','celeb'),pal:B.pal,scale:1,eye:{col:M.eye[0],row:M.eye[1]},
-    windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true};
+    windup:P('windup'),leap:P('leap'),hurtPose:P('hurt'),defend:P('defend'),castPose:P('cast'),hires:true,
+    idle2:P('idle2'),hip:P('hip'),spread:P('spread'),point:P('point')};   // battle sheets of 2026-11-05: breathing in, hands on hips, arms wide, power point
   for(const k of ['hold','annoyed','tw_windup','tw_follow','lift','fling','unbox','flick','brush','limit','startled','direct','carry','raise','lidpop','splash','goo','proud','bowlsit','spook','scream','bowlthrow','cower','frozen','finger','headphones','mask','shade','floorsit','lying','cartwheel','facedown','rope','stirrup','strain','toast','plates']) sp[k]=tag(TOM_HIRES.pose[k].slice(),'tomPose',k,false);   // custom poses: f:'hold' etc. in a move's keys
   sp.expr=sp.act; sp.run=[P('run1'),P('run2')];
-  sp.kneel=P('kneel');   // painted kneel (already has the black eye), so battle-draw skips its bruise overlay for hires sprites
+  sp.kneel=P('kneel');   // painted tired kneel (battle sheet 2); battle-draw skips its bruise overlay for hires sprites
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
   BATTLE_SPRITES.tom=sp;
   // Knocked out: the family KO table stores sprites facing right (the game mirrors them to face the enemy).
