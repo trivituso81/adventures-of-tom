@@ -3981,8 +3981,16 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-pausesprite-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927229713
+    }
+   ],
    "rejects": [],
    "id": "enemy-pausesprite",
    "tab": "Enemies",
