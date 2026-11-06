@@ -4696,7 +4696,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "boppy-fx-grumble",
    "tab": "Characters",
    "group": "Boppy",
@@ -4705,7 +4705,16 @@
    "refs": [
     "art/raw/characters/boppy-ab-grumble-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: GRUMBLE.\n\nItems:\n1. A small dark storm cloud with a frown.\n2. A jagged crimson burst, an angry scribble (wide).\n3. A ring of soft golden light, a protective shield.\n4. Three short curved wavy lines of sound.\n5. A small steaming puff of air.\n6. The word HMPH in rough blocky cream lettering with a dark outline (wide)."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: GRUMBLE.\n\nItems:\n1. A small dark storm cloud with a frown.\n2. A jagged crimson burst, an angry scribble (wide).\n3. A ring of soft golden light, a protective shield.\n4. Three short curved wavy lines of sound.\n5. A small steaming puff of air.\n6. The word HMPH in rough blocky cream lettering with a dark outline (wide).",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/characters/boppy-fx-grumble-v2.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793994752696
+    }
+   ]
   },
   {
    "status": "draft",
