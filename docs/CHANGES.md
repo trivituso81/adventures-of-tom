@@ -1,3 +1,9 @@
+## 2026-11-06 (374): Warden Boppy boss sheet uses the new painted Boppy hero (Art Library only)
+
+- Fact (Tom 12:36): `enemy-warden` still used the old photo-style `tools/sprite-bake/src/boppy-hero.png` and a face crop from it. Refs are now: style key, guide, finish, `docs/reference/boppy-face-v2.png` (new 768 px face crop from Tom's painted hero), `art/raw/characters/boppy-hero-ref-v1.png` (the full painted hero).
+- Prompt face wording matches the painted hero (big round brown eyes, white hair tufts at temples and ears, wide smile with teeth); the rest of the prompt is unchanged. Mirrored in `tools/art-library/enemy-prompts.js` (`LIKENESS`). Approved v1 stays in versions; Tom presses Generate once to get a new sheet.
+- Purged `docs/reference/boppy-face.png` (grep 0 outside history). Only `enemy-warden` changed in the json; validate.js OK. No game files, no tag.
+
 ## 2026-11-06 (373): Jojo hero painting from Tom; hero entry removed (Art Library only)
 
 - Fact (Tom 12:36): he made Jojo's hero in another generator ("it comes out better"). Saved as `art/raw/characters/jojo-hero-ref-v1.png` (1024 x 1536, same shape as the other hero refs; head size and style checked against Justin, TNB and Boppy). It is the reference for her walk and ability sheets, as Michael's is.

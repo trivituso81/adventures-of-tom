@@ -206,7 +206,7 @@ function sheetShort(t, brushRef, id) {
   const under = 'docs/reference/underpaint/' + t.id + '-grid.png';
   const has = fs.existsSync(under);
   const refs = has ? [KEY, under, brushRef] : [KEY, brushRef];
-  const LIKENESS = { warden: [['docs/reference/boppy-face.png', 'tools/sprite-bake/src/boppy-hero.png'], "Paint Boppy's real face exactly as in attachment 4, a close-up of his face (and attachment 5, the full figure): the same weathered tan skin with deep smile lines and crow's feet, brown eyes, thick white-gray bushy mustache, white eyebrows, gray sideburns, long nose, warm closed-mouth smile. The helmet is open-faced with nothing covering his face, so his whole face shows clearly, large, at the same likeness and detail as attachment 4"] };
+  const LIKENESS = { warden: [['docs/reference/boppy-face-v2.png', 'art/raw/characters/boppy-hero-ref-v1.png'], "Paint Boppy's real face exactly as in attachment 4, a close-up of his face (and attachment 5, the full figure): the same warm weathered tan skin with deep smile lines and crow's feet, big round brown eyes, thick white-gray bushy mustache, white bushy eyebrows, tufts of white hair at his temples and ears, long nose, a wide warm smile showing his teeth. The helmet is open-faced with nothing covering his face, so his whole face shows clearly, large, at the same likeness and detail as attachment 4"] };
   if (LIKENESS[t.id]) refs.push(...LIKENESS[t.id][0]);
   if (t.id === 'julian') {
     const R = ['art/raw/enemies/enemy-julian-hero-v1.png']; // NOTE 11-05: the live Julian and Vance prompts (hero-based) are edited directly in data/art-prompts.json, not generated here
