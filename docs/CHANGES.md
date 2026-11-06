@@ -1,3 +1,7 @@
+## 2026-11-05 (257): Julian Vance reference is now the handbrushed Vance v2 (Art Library only, no game files, no tag)
+
+Tom: Julian is still not handpainted enough; the reference outweighs the prompt, and with no reference he comes out like the Mudling. Cause (finding): attachment 2 was enemy-vance-v1, a smooth picture, so the generator copied its smoothness. Now attachment 2 is enemy-vance-v2 (handbrushed, long gray hair) and the prompt says to keep its brush strokes. Rule: a likeness reference must itself be handbrushed.
+
 ## 2026-11-05 (256): All enemy prompts: one flat solid magenta background, no brush texture in the background (Art Library only, no game files, no tag)
 
 Tom: make sure all prompts say solid magenta background. Fact: my 17:00 wording asked for brush strokes "including the background", so pictures came back with a textured magenta that is hard to key out. All 86 enemy-* entries now say "Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient" and brush strokes apply "on the creature". TAIL in tools/art-library/enemy-prompts.js updated. Test cards untouched.
