@@ -4005,8 +4005,16 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-paperweight-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927235973
+    }
+   ],
    "rejects": [],
    "id": "enemy-paperweight",
    "tab": "Enemies",
