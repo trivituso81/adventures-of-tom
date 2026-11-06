@@ -32,7 +32,7 @@
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.runFlip=sp.run.map(mir);
   // data/deedee-poses.js left a pixel cheer pair and idle2; the victory and level-up cheers (engine/battle-draw.js) play sp.cheer, so point both at the painted frames.
-  sp.cheer=[sp.celeb,sp.celebFlip]; sp.idle2=sp.idle;
+  sp.cheer=[sp.celeb,sp.celebFlip]; sp.idle2=P('idle2'); sp.hip=P('hip'); sp.point=P('point'); sp.spread=P('spread');   // breath, hands on hips, power point, arms wide: her two painted battle sheets
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.deedee={scale:.8,pal:DEEDEE_HIRES.ko.pal,rows:paintRows(DEEDEE_HIRES.ko.rows.slice(),'deedeeKo','ko',true)};
   // Extra painted poses (attack sheet x_* and story sheet), baked by tools/sprite-bake/bake_deedee_extra.py. Hand points come from the bake.
@@ -42,8 +42,8 @@
     const X=k=>{ const rows=paintRows(EX.rows[k].map(r=>{ let q=''; for(const ch of r) q+=m2[ch]; return q; }),'deedeeExtra',k,false); reg(rows);
       const h=EX.hands[k]; if(h&&sp.handAt) { const cur=sp.handAt.get(rows)||{}; sp.handAt.set(rows,{n:h.n||cur.n,f:h.f||cur.f}); } return rows; };
     for(const k in EX.rows) sp['x_'+k]=X(k);
-    sp.sit=sp.toast=sp.x_sitL; sp.sitR=sp.x_sitR; sp.whisper=sp.x_whisper; sp.point=sp.x_point; sp.spread=sp.x_gasp;
-    sp.carry=sp.x_carry; sp.hug=sp.x_open; sp.shrug=sp.x_shrug; sp.hip=sp.x_hips; sp.clap=sp.x_clap;
+    sp.sit=sp.toast=sp.x_sitL; sp.sitR=sp.x_sitR; sp.whisper=sp.x_whisper;
+    sp.carry=sp.x_carry; sp.hug=sp.x_open; sp.shrug=sp.x_shrug; sp.clap=sp.x_clap;
   }
   // Brisk Walk set (tracksuit, separate palette), baked by tools/sprite-bake/bake_deedee_brisk.py
   if(typeof DEEDEE_BRISK!=='undefined') {

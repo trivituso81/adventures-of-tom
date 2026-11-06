@@ -90,7 +90,7 @@ exec(src[cut2:cut3], g)        # helpers
 poses = g['poses']
 place, tighten, scaled_to, rows_of, pack, fmt_rows = g['place'], g['tighten'], g['scaled_to'], g['rows_of'], g['pack'], g['fmt_rows']
 KB = g['KB']
-fb = g['args'].battle_h * KB / poses['b_idle'].height      # the same figure scale as the core battle set
+fb = g['args'].battle_h * KB / g['OLD_IDLE_H']      # the same figure scale as the core battle set
 
 names = [n for n in poses if n.startswith('x_')]
 big = {n[2:]: scaled_to(poses[n], fb) for n in names}
