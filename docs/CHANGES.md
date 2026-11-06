@@ -1,3 +1,6 @@
+## 2026-11-05 (242): Custom pose prompt for Acorn Cache, with a real attack (Art Library only, no game files, no tag)
+- Tom (16:40): the Acorn Cache sheet has no attack motion. Fact: its only move is Sit and the old sheet's attack frames are just face changes. `POSES.acorncache` (tools/art-library/enemy-prompts.js): shy stance, flinch with flying leaves, attack wind-up squashed low, attack leaping out of the leaves toward the right. `enemy-acorncache` prompt updated in the json (draft, nothing else changed).
+
 ## 2026-11-05 (241): Art Library approve and reject buttons no longer stay locked after a decision (Art Library only, no game files, no tag)
 - Tom (16:26): after approving a picture, the Approve and Reject buttons on the other cards stayed disabled until he reloaded the page.
 - Cause (fact): `decide()` in art.html disables every `[data-ok],[data-no]` button on the page while it saves, but on success it redrew only the decided row; only the error path unlocked the rest. Fix: the unlock now runs in a `finally`, so it happens on success and on error.

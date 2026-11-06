@@ -2921,7 +2921,7 @@
     "docs/reference/underpaint/acorncache-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Top left: sitting half buried in the leaves, shy, peeking out from under its cap. Top right: flinching, eyes squeezed shut, leaves and bits of acorn flying off. Bottom left: attack wind-up, squashed down low into the leaves, cap pressed down, cheeks puffed, determined face. Bottom right: the attack, the whole acorn leaping out of the leaves toward the right, high in the air, cap tilted back, fierce face, leaves and acorns scattering below it. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Old Oak"
   },
   {
