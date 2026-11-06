@@ -4172,8 +4172,16 @@
    "group": "Stillness Core"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-julian-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927415972
+    }
+   ],
    "rejects": [],
    "id": "enemy-julian",
    "tab": "Enemies",
