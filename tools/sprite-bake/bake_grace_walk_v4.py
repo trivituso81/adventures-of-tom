@@ -42,8 +42,8 @@ poses['b_beg'] = _bf['b_tired']      # Squishy Delivery begging pose: the tired 
 BT_IDLE_ROWS = 90                    # the idle's visible height in battle rows, as before this change (her size in a fight does not move)
 
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Grace (Tom 2026-11-05 22:56), used as painted: no head or body resizing, no mirroring.
-from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('grace').items() if not k.endswith('_pass')})
+from walk_sheet_frames import build as _build_walk, UNWARPED_H
+poses.update({k: v for k, v in _build_walk('grace', fix=True).items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -215,7 +215,7 @@ def head_w(im):
     return float(np.percentile(cols, 98) - np.percentile(cols, 2))
 
 # Tom's method (bake_tom_walk_v4.py): every frame keeps the scale it was painted at; ONE size factor for all nine, from the front stand.
-OW_STAND_H = poses['w_down_stand'].height
+OW_STAND_H = UNWARPED_H['grace']
 fo = args.ow_h * KW / OW_STAND_H
 print("ow: source stand height %d px, drawn at %.3fx" % (OW_STAND_H, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_')}

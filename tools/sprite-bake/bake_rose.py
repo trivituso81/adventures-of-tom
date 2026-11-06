@@ -43,8 +43,8 @@ BT_IDLE_ROWS = 83                    # the idle's visible height in battle rows,
 # so those frames keep their exact size: old idle 366 px and guard 372 px tall, old battle scale 80 rows x 2 / 366.
 OLD_IDLE_H, OLD_DEF_H = 366, 372
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Rose (Tom 2026-11-05 22:56), used as painted (no head growth, no mirroring).
-from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('rose').items() if not k.endswith('_pass')})
+from walk_sheet_frames import build as _build_walk, UNWARPED_H
+poses.update({k: v for k, v in _build_walk('rose', fix=True).items() if not k.endswith('_pass')})
 # Extra sheets (Oct 29): A = 12 battle poses, B = 4 shoulder-ride views and 4 overworld extras.
 A_NAMES = ['boop', 'boopBack', 'raspberry', 'boo', 'tiara', 'hug', 'balance', 'lookout', 'throwWind', 'throwRel', 'sitStory', 'sitTea']
 B_NAMES = ['ride_front', 'ride_back', 'ride_side', 'ride_cheer', 'crouch', 'jump', 'wave', 'hold']
@@ -293,10 +293,10 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'rose-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = args.ow_h * KW / UNWARPED_H['rose']
 print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (poses["w_down_stand"].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_')}     # walk sheet frames as painted
-rOW = poses['w_down_stand'].height / poses['y_hold'].height          # standing hug on sheet B matches the walk sheet's stand
+rOW = UNWARPED_H['rose'] / poses['y_hold'].height          # standing hug on sheet B matches the walk sheet's stand
 for k in ('crouch', 'jump', 'wave', 'hold'):
     ow_big['e_' + k] = scaled_to(_kh.grow_head(poses['y_' + k], K_OW, S_OW * _STAND_H / rOW), fo * rOW)
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

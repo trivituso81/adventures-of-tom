@@ -1,3 +1,10 @@
+## 2026-11-06 (336): Grace and Rose walking heads 15 percent bigger (`walkhead3`)
+- Tom (02:45): "Make Grace and rose head 15% bigger each". Applies to the walking poses (the conversation was about walking heads); battle art and portraits not touched.
+- `HEAD_FIX` in `tools/sprite-bake/walk_sheet_frames.py`: grace (93 px head, x1.15), rose (90 px head, x1.15), grown about the chin in all nine frames; bodies keep their painted size (`bake_grace_walk_v4.py` and `bake_rose.py` scale from `UNWARPED_H`, and Rose's overworld hug/jump frames use the unwarped stand height too), so each figure is about 3.5 percent taller.
+- `SPLASH_H` in `engine/splash.js`: Grace 222 to 230, Rose 178 to 184, so the welcome screen draws their bodies at the same size as before.
+- Only `grace-ow.webp`, `rose-ow.webp` and the `ow` section of `data/grace-hires.js` and `data/rose-hires.js` changed.
+- Tags: `walkhead3`.
+
 ## 2026-11-06 (335): Dungeon find-it objects: 13 overlay sheets in the Art Library (`dfind1`)
 - Tom: list every object the party has to find in each chapter dungeon, then make art for them so they can be drawn over the dungeons for easier spotting. Fact: 92 objects across chapters 3 to 11, 13, 17, 19, 20 and Nine Scoops; chapters 1, 2, 12, 14, 15, 16 and 18 have none. Table with flags and tiles: `docs/DUNGEON_FINDS.md`.
 - Art Library tab Props, new group "Dungeon finds", 13 draft sheets `prop-find-*` (Props 34 to 47, 13 entries added to data/art-prompts.json). Module `tools/art-library/dungeonfind-prompts.js`, group in `groups.js`, listed in `make-prompts.js`, `test.py` EXPECT Props 47 and 11 groups. Every older entry byte for byte unchanged. Style key only as the reference. Nothing installed or wired in the game.
