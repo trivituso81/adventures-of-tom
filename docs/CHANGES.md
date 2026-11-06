@@ -1,3 +1,7 @@
+## 2026-11-06 (335): Dungeon find-it objects: 13 overlay sheets in the Art Library (`dfind1`)
+- Tom: list every object the party has to find in each chapter dungeon, then make art for them so they can be drawn over the dungeons for easier spotting. Fact: 92 objects across chapters 3 to 11, 13, 17, 19, 20 and Nine Scoops; chapters 1, 2, 12, 14, 15, 16 and 18 have none. Table with flags and tiles: `docs/DUNGEON_FINDS.md`.
+- Art Library tab Props, new group "Dungeon finds", 13 draft sheets `prop-find-*` (Props 34 to 47, 13 entries added to data/art-prompts.json). Module `tools/art-library/dungeonfind-prompts.js`, group in `groups.js`, listed in `make-prompts.js`, `test.py` EXPECT Props 47 and 11 groups. Every older entry byte for byte unchanged. Style key only as the reference. Nothing installed or wired in the game.
+
 ## 2026-11-06 (334): Boppy and Deedee walking heads shrunk again (`walkhead2`)
 - Tom (02:37): "Boppy and Deedee's heads are too big size them down to match the other adults". Fact: after `walkhead1` Boppy's head was 10.8 game rows and Deedee's 11.2, against about 9.9 for Tom, Amy and Olivia.
 - `HEAD_FIX` in `tools/sprite-bake/walk_sheet_frames.py`: Boppy x0.86 to x0.79, Deedee added at x0.88 (head 105 px in the painted sheet); both now about 10 rows. `bake_deedee.py` scales from `UNWARPED_H` like the other three, so her body keeps its painted size (figure 43 to 41 rows). Only the walk atlases (`boppy-ow.webp`, `deedee-ow.webp`) and the `ow` section of `data/boppy-hires.js` and `data/deedee-hires.js` changed; battle art untouched.

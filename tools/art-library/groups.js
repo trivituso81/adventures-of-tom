@@ -4,7 +4,7 @@
 const fs = require('fs');
 
 const PEOPLE = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', olivia: 'Olivia', michael: 'Michael', jojo: 'Jojo', ellie: 'Aunt Ellie', nara: 'Nara' };
-const PROP_OWNERS = { tom: 'Tom', grace: 'Grace', rose: 'Rose', amy: 'Amy', deedee: 'Deedee', boppy: 'Boppy', tnb: 'TNB', tombo: 'Tombo moves', nara: 'Nara', justin: 'Justin' };
+const PROP_OWNERS = { tom: 'Tom', grace: 'Grace', rose: 'Rose', amy: 'Amy', deedee: 'Deedee', boppy: 'Boppy', tnb: 'TNB', tombo: 'Tombo moves', nara: 'Nara', justin: 'Justin', find: 'Dungeon finds' };
 const FOE_AREAS = {
   hollow: 'Grump Hollow', griffith: 'Griffith Park', marsh: 'Whispering Marsh', backlot: 'Studio Backlot', school: 'School', oak: 'Old Oak', library: 'Hush Library',
   barn: 'Car Barn', club: 'Moon Club', terminal: 'Terminal Zero', infinity: 'Terminal Infinity', blvd: 'Downtown boulevard', subrail: 'Sub-Rail', row: 'Rivituso Row',
