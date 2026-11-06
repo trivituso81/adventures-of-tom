@@ -1,3 +1,7 @@
+## 2026-11-05 (259): Art Library: "Use the default prompt" button when a card holds a saved edit (art.html only, no game files)
+
+Tom could not see the new Julian prompt: the Library keeps any prompt text he types in the browser (localStorage `aot-art-edits`) and shows it instead of the pushed prompt until he approves or rejects. A card whose box differs from the pushed prompt now shows a "Use the default prompt" button and a note. Tested headless: edit saved, button shows, click restores the pushed prompt. Lesson: when a pushed prompt "does not show", suspect a saved local edit first.
+
 ## 2026-11-05 (258): Julian Vance: no likeness references, detailed description with Tom's caricature proportions, one painted room for brushwork (Art Library only, no game files, no tag)
 
 Tom (shown his own hero picture): Julian should have those proportions; remove the reference photos, describe head and body, write a very detailed six-pose prompt, and give one nicely handpainted area as the only picture, like the inside of Deedee and Boppy's house. enemy-julian refs are now only `art/grands.webp` (used for brushwork only). Prompt (3,000 characters, Tom asked for detail here): head about one quarter of height, slim body, long thin legs, small hands and feet, realistic face, long wavy gray hair, six detailed poses. Note: approved enemy-vance-v2 is a realistic-proportion man, so the two fights now differ in proportions; offer to redo Vance the same way if Tom wants.

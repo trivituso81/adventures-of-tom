@@ -229,7 +229,7 @@ function renderCard(e){
   const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rp(p))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
   return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
-  '<label>Prompt (edit here, it is sent as written)</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
+  '<label>Prompt (edit here, it is sent as written)'+(EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt?' <button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'')+'</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
   (e.own?'<label>'+esc(e.own.label)+' (stays on this device, sent as picture '+((e.own.at||0)+1)+')</label><div class="refs">'+(ownOf(e)?'<div class="ref"><img src="'+ownUrl(ownOf(e))+'" alt=""><button class="small" data-ownrm="'+esc(e.own.slot)+'" data-id="'+id+'">Remove</button></div>':'<div class="hint">Not added yet.</div>')+'</div><label class="ownadd"><input type="file" accept="image/*" data-ownadd="'+esc(e.own.slot)+'" data-id="'+id+'" style="display:none">'+(ownOf(e)?'Replace photo':'Add photo from this device')+'</label>':'')+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
   '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16','2:1'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
@@ -288,6 +288,7 @@ $('list').addEventListener('click',async e=>{
   const g=t.closest('[data-grp]'); if(g) return toggleGroup(g.dataset.grp);
   const h=t.closest('[data-toggle]'); if(h) return toggleItem(h.dataset.toggle);
   if(t.dataset.ownrm){ await tx('readwrite',s=>s.delete('own|'+t.dataset.ownrm)); delete OWN[t.dataset.ownrm]; return refreshItem(t.dataset.id); }
+  if(t.dataset.revert){ delete EDITS[t.dataset.revert]; saveEdits(); return refreshItem(t.dataset.revert); }
   if(t.dataset.gen) return generate(t.dataset.gen,t);
   if(t.dataset.ok) return decide('ok',t.dataset.ok,t);
   if(t.dataset.no) return decide('no',t.dataset.no,t);
