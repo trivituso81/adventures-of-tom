@@ -1,3 +1,8 @@
+## 2026-11-06 (343): Emotions batch 5: chapters 14 to 17 show mood faces and poses (`emo12`)
+- `python3 tools/emotion-apply.py 1 ... 17`: chapter 14 found 102 of 102, chapter 15 70 of 70, chapter 16 62 of 62, chapter 17 53 of 53; `EMO_CHAPTERS` now 1 to 17, `data/emotion-moods.js` 1325 keys.
+- Tested: all 1338 tagged lines in chapters 1 to 17 resolve to their tsv mood at runtime (0 mismatches), every face file exists, the chapter 16 `ch16Say` step shows the mood face (Tom scared), smoke FAILS: [], unused_voice 0.
+- Tags: `emo12` (data/emotion-moods.js).
+
 ## 2026-11-06 (342): Emotions batch 4: chapters 11 to 13 show mood faces and poses (`emo11`)
 - `python3 tools/emotion-apply.py 1 ... 13`: chapter 11 found 99 of 99, chapter 12 114 of 114, chapter 13 101 of 101; `EMO_CHAPTERS` now 1 to 13, `data/emotion-moods.js` 1041 keys.
 - Tested: all 1051 tagged lines in chapters 1 to 13 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
