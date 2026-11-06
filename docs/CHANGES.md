@@ -1,3 +1,6 @@
+## 2026-11-06 (297): Tom's two battle sheets saved (`tombattle1`)
+- Tom (00:06) sent his painted battle sheets. Saved as art/raw/characters/tom-battle-sheet-1-v1.png (1774 x 887, 4 x 2, 8 frames: ready, ready breathing, hands on hips, offering, wind-up, lunge, arms wide, guard) and tom-battle-sheet-2-v1.png (1254 x 1254, 3 x 2, 6 frames: startled, tired, dizzy, cheer, big cheer, power pose).
+- Effect: Tom's 14 ability sheets in the Art Library are no longer blocked. NOT baked into the game (install only when Tom asks).
 ## 2026-11-06 (296): Emotion sheets are full body (`emo2`)
 - Tom (23:57): "these cut the character off at the waist - how are we supposed to use these in the game?" Call made: the sheet is now full body, head to feet, same figure size and ground line in every cell, with body language per feeling (feet, posture) as well as the face. One sheet serves the map and scenes (whole pose) and the dialogue box (face cropped from it, as bake_portraits.py does).
 - Changed: tools/art-library/prompts/char-emotion-sheet.txt, the 11 `<id>-emotions` prompts and titles in data/art-prompts.json (none had versions), char-prompts.js titles, docs/EMOTIONS.md. Validate OK.
