@@ -6,7 +6,6 @@
 - `engine/emotions.js` (after dialog-auto.js): wraps S.talk, openDialog, loadDialogLine, advanceDialog, endIntro; clears on advance, a line with no mood, scene end and skip. A pose already set by a scene wins; Tom carrying Rose and Rose on the shoulders get the face only. `__LE.EMO`, `__LE.emoMoodOf` for tests.
 - Tags: `emo7` (index.html: story.js, story-poses.js, the three new files).
 - Next: Tom plays chapter 1, then batches 1 to 7 (chapters 2 to 4, 5 to 7, 8 to 10, 11 to 13, 14 to 17, 18 to 20, Nine Scoops).
->>>>>>> 35f496f (Emotions batch 0: mood faces and poses in story dialogue, chapter 1 on (emo7))
 
 ## 2026-11-06 (327): Welcome screen: slow rise and fall instead of a stretch pulse (`welcome5`)
 - Tom (02:13): "Characters are pulsing way too rapidly".
