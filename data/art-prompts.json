@@ -2254,8 +2254,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Sunday Roast Spread.\n\nRow 1:\n1. Ringing a brass dinner bell high in one hand, the other hand cupped by her mouth, calling everyone in.\n2. Tying an apron behind her back with both hands, a determined smile.\n3. Stirring fast with a big wooden spoon in one hand, a pot lid in the other, cooking at top speed.\n\nRow 2:\n4. Spinning on one foot, a rolling pin in one hand and a colander in the other, a joyful busy grin.\n5. Carrying a big roast turkey on a platter in both hands, proud and beaming.\n6. Standing with arms spread wide over an imagined table, mouth open saying \"dinner's ready\", radiant."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/deedee-ab-brisk-means-brisk-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793956188712
+    }
+   ],
    "rejects": [],
    "id": "deedee-ab-brisk-means-brisk",
    "tab": "Characters",
@@ -2268,7 +2276,7 @@
     "art/raw/characters/deedee-battle-sheet-1-v1.png",
     "art/raw/characters/deedee-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Brisk Walk.\n\nRow 1:\n1. Picking up two small pink hand weights, one in each hand, perfect upright posture.\n2. Power-walking, one arm pumping forward with a weight, the opposite knee high, chin up.\n3. Power-walking, the other arm pumping forward, the back foot pushing off, focused.\n\nRow 2:\n4. Mid stride, both arms pumping, elbows bent, a determined set mouth.\n5. Stopped, the weights held at her shoulders, slightly out of breath, cheeks rosy.\n6. One weight raised high in a small victory pump, the other at her side, a proud smile."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair,, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change. she should be dressed in jogging attire and sneakers\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Brisk Walk.\n\nRow 1:\n1. Picking up two small pink hand weights, one in each hand, perfect upright posture.\n2. Power-walking, one arm pumping forward with a weight, the opposite knee high, chin up.\n3. Power-walking, the other arm pumping forward, the back foot pushing off, focused.\n\nRow 2:\n4. Mid stride, both arms pumping, elbows bent, a determined set mouth.\n5. Stopped, the weights held at her shoulders, slightly out of breath, cheeks rosy.\n6. One weight raised high in a small victory pump, the other at her side, a proud smile."
   },
   {
    "status": "approved",
