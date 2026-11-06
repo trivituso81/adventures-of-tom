@@ -4252,8 +4252,16 @@
     "art/raw/enemies/enemy-ironbelly-v2.png"
    ],
    "prompt": "Paint one full-length standing portrait of a different man, JULIAN VANCE, as a hand-painted oil painting, and give him exactly the same body proportions as the man in attachment 1: a huge realistic head, wider than half of his shoulder span and taller than his torso from chin to belt, on a slim neck, with narrow sloping shoulders, a slim torso, long thin legs and small hands and feet, so the whole figure is only about three heads tall. Use attachment 1 ONLY for those proportions and for its thick painted brush strokes. Do not copy its face, hair, shirt, jeans or shoes. Attachment 2 is a finished handbrushed painting of a boss creature, shown ONLY so you copy its thick brushwork; paint nothing of the creature.\n\nJulian is 70 inches tall, with a pale, lined, tired face, deep-set sad eyes and a gentle softened expression, long wavy gray hair falling past his collar under a black wide-brimmed hat. He wears a long black wool coat with a standing collar and gold buttons down to his knees, a black waistcoat, a white shirt, a red tie and black boots, with a gold pocket watch on a chain, and holds a brass ray gun with a glass barrel loosely at his side. Standing relaxed and tired, facing the viewer, whole body visible from hat to boots with a margin all round. Warm golden light from the upper left. Thick visible brush strokes on every surface, matte, canvas grain, no outlines, not a smooth digital render, not pixel art. Background: one flat, solid, even magenta #FF00FF with no texture, no gradient, nothing else in the picture, no text.",
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-julian-hero-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793931434899
+    }
+   ],
    "rejects": [],
    "group": "Stillness Core"
   },
