@@ -1,3 +1,9 @@
+## 2026-11-06 (369): Young Boppy in the Art Library: hero, walk, two battle sheets (Art Library only)
+
+- Fact (Tom 11:51): the Van Cortlandt Park '70 flashback needs its own character. Canon: October 1970, about 20, clean-shaven, full dark black hair, Italian American looking, skimpy vintage track uniform (tank top, short shorts, socks, shoes), no cap, 5'7, no photo (aged down from `boppy-hero-ref-v1.png`).
+- Added four drafts in group Boppy (4 Generate presses): `boppy-young-hero` (3:4, ref the Boppy hero), `boppy-young-walk-sheet` (3 x 3), `boppy-young-battle-sheet-1` (4 x 2, 8 frames), `boppy-young-battle-sheet-2` (3 x 2, 6 frames). Walk and battle entries point at young sheets that do not exist until Tom approves each one in order. Source `tools/art-library/boppy-young-prompts.js`; appended to `data/art-prompts.json` directly (664 entries, the first 660 unchanged).
+- Not done yet: repoint `boppy-ab-xc-ult` refs to the young sheets and change frame 1 to "a running number pinned to his tank top" (fifth press), after the sheets are approved. Nothing installed in the game.
+
 ## 2026-11-06 (368): Jojo in the Art Library: hero, walk sheet, Frisbee Golf frames (Art Library only)
 
 - Fact (Tom 11:19): Jojo had no Characters entries of her own, only TNB's `tnb-ab-round-with-jojo` and `tnb-fx-round-with-jojo`. Added group Jojo with three drafts (3 Generate presses in all): `jojo-hero` (3:4; Tom adds his full body photo and face close-up in the Library via two own-photo slots, which stay on his device; style and head size copied from `justin-hero-ref-v1.png`), `jojo-walk-sheet` (3 x 3, refs her approved hero and Justin's walk sheet for layout), `jojo-ab-round-with-jojo` (3 x 2, six frames matching the beats her move already draws: turn and wave, backwards jog, leap, catch, hop cheer, thumbs up; refs her hero, her walk and TNB's approved sheet for staging).
