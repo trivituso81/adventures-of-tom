@@ -4410,7 +4410,7 @@
    "group": "Nine Scoops"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -4478,6 +4478,12 @@
      "note": "keep everything the same but move the taxi cab all the way to the right of the building halfway out of view",
      "from": "v12",
      "at": 1793847057836
+    },
+    {
+     "date": "2026-11-06",
+     "note": "the signs must be higher",
+     "from": "v21",
+     "at": 1793934704425
     }
    ],
    "id": "area-square",
