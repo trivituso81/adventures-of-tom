@@ -287,12 +287,12 @@ T.wrap=E2=>{ const {i,m,fx}=E2;
 // Rolls out the wardrobe rack and throws a fresh outfit to the chosen member: back up if they were down,
 // otherwise healed and Wardrobe Fresh (E2.apply runs the numbers).
 T.wardrobe=E2=>{ const {i,m,fx}=E2;
-  pose(fx,'hip',1.6); S.roll(.7); say(m.id,'wardrobe');
+  S.roll(.7); say(m.id,'wardrobe');
   const target=E2.targets[0]||m,ti=target.idx,down=!alive(target);
-  scene('rack',3.2,{back:true,x:470});
+  RFX.ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_ward_1'},{t:700,f:'ab_ward_2'},{t:1000,f:'ab_ward_3'},{t:1250,f:'ab_ward_4'},{t:1650,f:'ab_ward_5'},{t:2300,f:'ab_ward_6',hop:6},{t:3300,x:'home',y:'home',f:'idle'}]);   // the rack is in the painted frames
   enqueue(
     ()=>{ setMessage(m.name+' rolls out the wardrobe rack. "Arms up. New look."'); },
-    1000,()=>{ pose(fx,'throw',.4); const tp=BATTLE_POS[ti]; toss('shirt',400,200,tp.x*3,tp.base*3-60,0,.6,70,{c:'#284fb4',c2:'#ffd166'}); sfx.whoosh(); },
+    1000,()=>{ const tp=BATTLE_POS[ti]; toss('shirt',400,200,tp.x*3,tp.base*3-60,0,.6,70,{c:'#284fb4',c2:'#ffd166'}); sfx.whoosh(); },
     650,()=>{
       E2.apply();
       scene('glow',.8,{x:BATTLE_POS[ti].x*3,y:BATTLE_POS[ti].base*3-40,c:'#9be39a',a:.35});
@@ -656,11 +656,8 @@ SC.tv2_pins=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fade(u,.9);
 // ---------- Metro Tap Card (A3; key metro_tap; same numbers as Lost-and-Found Warmth) ----------
 // He taps his card at the reader (BEEP), a light-rail train glides in behind the line and stops with its doors right at
 // the friend; warm air rolls out, they feel better; ding-dong, doors closing, it pulls away.
-const tapCard=(x,y,ang)=>{ if(PROPART.draw('tnb/metro_card',x,y,{w:44,rot:ang})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(ang); RO(-17,-11,34,22,'#2f7fd0'); R(-17,-4,34,4,'#ffd166'); R(-13,4,10,4,'#dfe6ee'); label('TAP',4,4,'#fff6dc',1); gfx.restore(); };
-const reader=(x,y,ok)=>{ if(PROPART.draw('tnb/card_reader',x,y-42,{h:86})) { if(!ok) label('TAP',x,y-102,GOLD,1); return; }   // painted reader (its light is always green)
-  RO(x-6,y-58,12,58,'#5e6670'); RO(x-14,y-80,28,26,'#3a3f46'); R(x-10,y-76,20,14,ok?'#5ad06a':'#2a2f36'); if(ok) { Ln(x-5,y-69,x-1,y-65,2.5,'#fff'); Ln(x-1,y-65,x+6,y-74,2.5,'#fff'); } else label('TAP',x,y-72,GOLD,1); };
-SC.tv2_reader=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fin(u,.08)*fade(u,.9); reader(P.x,P.y,ms>P.beep);
-  if(ms<P.beep+120) { const h=hand(); tapCard(h.x-4,h.y-10,-.2); }
+// The card, the reader and the pole are in his painted frames (ab_metro_*); this only draws the BEEP.
+SC.tv2_reader=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=fin(u,.08)*fade(u,.9);
   if(ms>P.beep&&ms<P.beep+900) bigWord('BEEP!',P.x,P.y-104,'#9be39a',3); };
 const trainCar=(x,y,P,doors)=>{ const L=P.len,Hh=70,top=y-Hh;
   if(PROPART.draw('tnb/light_rail_train',x,y-62,{w:176})) { P.paint=1; return; }   // painted light-rail car (no animated doors; the warm light cone still opens at the friend)
@@ -684,7 +681,7 @@ T.metro_tap=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foe=t.side==='
   const rx=me.x-62,P={x:rx,y:me.y,beep:900};
   const TR={in:1100,stop:2000,open:2150,shut:3050,go:3300,gone:4100,y:Math.max(110,H.base-14),len:260,dx:0,name:nameTxt(t),top:H.top};
   TR.xs=Math.max(40,Math.min(536,H.x)); TR.x0=760+TR.len*.5; TR.x1=-TR.len*.6; const hit=2400;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:600,x:rx+30,f:'aim'},{t:900,f:'celeb',hop:5},{t:1300,f:'idle'},{t:2100,f:'spread'},{t:2900,f:'idle'},{t:3300,f:'walkR'},{t:4000,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_metro_1'},{t:450,f:'ab_metro_2'},{t:800,f:'ab_metro_3'},{t:1500,f:'ab_metro_5'},{t:2100,f:'ab_metro_4'},{t:2900,f:'ab_metro_5'},{t:3300,f:'ab_metro_6'},{t:4000,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls out his Metro card. He knows exactly which pocket.'); say(m.id,'metro_tap'); scene('tv2_reader',2.3,{P}); scene('tv2_train',4.3,{P:TR,back:true}); }],
     [P.beep,()=>{ S('beep'); }],
@@ -716,7 +713,7 @@ SC.tv2_dark=(s,u)=>{ const ms=s.t*1000,P=s.P; let a=0;
   const st=s.st; if(st&&st.x!=null&&ms>P.on+150&&ms<P.up) { const p=head(st,40),r=1+.04*Math.sin(ms/45); gfx.ellipse(p.x-4,p.y,30*r,40*r,0,0,Math.PI*2); }
   gfx.fill('evenodd'); };
 SC.tv2_torch=(s,u)=>{ const ms=s.t*1000,P=s.P,st=s.st; if(!st||st.x==null||ms<P.on||ms>P.up) return; const p=head(st,40); gfx.globalAlpha=.22+.05*Math.sin(ms/50); E(p.x-4,p.y,30,40,'#ffe9a0');
-  gfx.globalAlpha=.95; if(!PROPART.draw('tnb/flashlight',p.x-9.5,p.y+39,{w:24,rot:Math.PI/2})) { RO(p.x-14,p.y+30,9,18,'#5e6670'); E(p.x-9.5,p.y+29,6,3,'#fff6c8'); } if(ms>P.on+300&&ms<P.lunge-200) bigWord('SHHH',p.x,p.y-30,CREAM,2); };
+  gfx.globalAlpha=.95; if(ms>P.on+300&&ms<P.lunge-200) bigWord('SHHH',p.x,p.y-30,CREAM,2); };
 SC.tv2_slasher=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.peek) return; let x,y,sc,a=1,arms=0;
   if(ms<P.lunge) { const q=cl((ms-P.peek)/(P.lunge-P.peek)); x=P.bx+Math.sin(ms/400)*4; y=P.by; sc=.9+q*.15; a=.3+q*.4; }
   else if(ms<P.lunge+220) { const q=ez((ms-P.lunge)/220); x=lerp(P.bx,P.fx,q); y=lerp(P.by,P.fy,q); sc=lerp(.9,2.0,q); arms=q; }
@@ -725,7 +722,7 @@ SC.tv2_slasher=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.peek) return; let x,y,s
   gfx.globalAlpha=a; slasher(x,y,sc,arms); };
 T.slasher_scare=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),hit=2050;
   const P={on:350,flick:1500,lunge:2000,up:2650,peek:1050,wave:3250,gone:3950,bx:F.x-6,by:Math.max(110,F.base-20),fx:Math.min(540,F.x+F.w*.5+30),fy:Math.min(318,F.base+8)};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'aim'},{t:350,f:'hip'},{t:700,f:'act'},{t:1900,f:'dodge'},{t:2650,f:'celeb',hop:6},{t:3100,f:'clap'},{t:3600,f:'idle'},{t:4000,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_scare_1'},{t:350,f:'ab_scare_2'},{t:700,f:'ab_scare_3'},{t:1900,f:'ab_scare_4'},{t:2650,f:'ab_scare_5'},{t:3100,f:'ab_scare_6'},{t:3600,f:'ab_scare_6'},{t:4000,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('TNB reaches for the light switch.'); say(m.id,'slasher_scare'); scene('tv2_dark',3.1,{P,st}); scene('tv2_slasher',4.1,{P}); scene('tv2_torch',2.8,{P,st}); }],
     [P.on,()=>{ S('click'); setMessage('Click. Total darkness. A flashlight clicks on under his chin.'); }],
@@ -770,29 +767,9 @@ SC.tn_platform=(s,u)=>{ const fixed=u>s.fixAt,a=fixed?0:Math.sin(s.t*7)*.08; gfx
 // ---------- Kiln Door Policy (B5, kept name and numbers: the animation is now a big roaring cone six kiln) ----------
 // A full-size brick kiln drops in. He dials it to CONE 6, it rumbles and glows, he swings the door open: FWOOM, the heat
 // rolls over the enemy and melts its shield. He closes the door. Policy.
-// Painted kiln (tnb/brick_kiln, door faces left toward the enemy). Image px 147x160: door x 16..95, y 55..140, chimney top at x 127.
-const paintedKiln=(x,y,P,ms)=>{ const k=118/160,heat=cl((ms-P.dial)/(P.open-P.dial)),sh=ms>P.dial&&ms<P.shut?Math.sin(ms/22)*heat*2:0,X=ix=>x+sh+(ix-73.5)*k,Y=iy=>y-59+(iy-80)*k;
-  gfx.save(); E(x+4,y+1,58,8,'rgba(0,0,0,.3)'); PROPART.draw('tnb/brick_kiln',x+sh,y-59,{h:118});
-  const a0=gfx.globalAlpha; if(heat>0) { gfx.globalAlpha=a0*(.1+heat*.28+.05*Math.sin(ms/60)); E(X(70),Y(95),64,54,'#ffb04a'); gfx.globalAlpha=a0; steam(X(127),Y(2),ms/1000,3,'#d8d0c8',40); }
-  const dO=ms<P.open?0:ms<P.shut?ez((ms-P.open)/140):1-ez((ms-P.shut)/140);
-  if(dO>0) { const dx=X(20),dy=Y(62),dw=70*k,dh=74*k; E(dx+dw*.5,dy+dh*.5,dw*.62,dh*.62,'#ffd27a'); R(dx,dy,dw,dh,'#ffb04a'); for(let q=0;q<5;q++) { const t=(ms/300+q*.2)%1; E(dx+8+q*10,dy+dh-6-t*40,5*(1-t)+2,7*(1-t)+2,q%2?'#fff1b0':'#ff8a2a'); }
-    RO(X(14),dy-2,5,dh+4,'#4a4f58'); }
-  gfx.restore(); };
-const kiln=(x,y,P,ms)=>{ if(PROPART.ready('tnb/brick_kiln')) return paintedKiln(x,y,P,ms); const W=96,Hh=118,top=y-Hh,heat=cl((ms-P.dial)/(P.open-P.dial)),sh=ms>P.dial&&ms<P.shut?Math.sin(ms/22)*heat*2:0; gfx.save(); gfx.translate(sh,0);
-  RO(x-W*.5,top,W,Hh,BRICK); for(let r=0;r<9;r++) { const yy=top+6+r*12; R(x-W*.5,yy,W,2,BRICKD); for(let c=0;c<5;c++) { const xx=x-W*.5+((r%2)?10:0)+c*22; R(xx,yy+2,2,10,BRICKD); } }
-  if(heat>0) { gfx.globalAlpha*=1; const g=.15+heat*.5+.1*Math.sin(ms/60); const a0=gfx.globalAlpha; gfx.globalAlpha=a0*g; for(let r=0;r<9;r++) R(x-W*.5,top+6+r*12,W,2,'#ffb04a'); gfx.globalAlpha=a0; }
-  RO(x-W*.5-6,top-8,W+12,10,'#4a4f58'); RO(x-W*.5-6,y-6,W+12,8,'#4a4f58'); RO(x+W*.5-12,top+6,8,Hh-14,'#4a4f58');
-  for(const k of [-.3,.3]) { RO(x+k*W-4,y,8,8,'#3a3f46'); }
-  RO(x+W*.5-2,top+40,34,10,'#5e6670'); RO(x+W*.5+30,top+14,6,64,'#5e6670'); // vent pipe
-  if(heat>0) steam(x+W*.5+33,top+12,ms/1000,3,'#d8d0c8',40);
-  const dx=x+W*.5-30,dy=top+22; EO(dx,dy,13,13,'#e8e4dc'); const na=lerp(-2.4,.5,ez(cl((ms-P.dial)/500))); LnO(dx,dy,dx+Math.cos(na)*10,dy+Math.sin(na)*10,2,RED); label('6',dx+9,dy+2,OUT,1);
-  const doorOpen=ms<P.open?0:ms<P.shut?ez((ms-P.open)/140):1-ez((ms-P.shut)/140),dw=56,dh=70,dyy=y-dh-14,dxl=x-W*.5-2;
-  if(doorOpen>0) { const g=ms<P.shut?1:1-doorOpen; E(dxl+dw*.5+2,dyy+dh*.5,dw*.55,dh*.55,'#ffd27a'); R(dxl+4,dyy+4,dw-8,dh-8,'#ffb04a'); for(let k=0;k<5;k++) { const q=(ms/300+k*.2)%1; E(dxl+12+k*8,dyy+dh-8-q*40,6*(1-q)+2,8*(1-q)+2,k%2?'#fff1b0':'#ff8a2a'); } }
-  const dwid=dw*(1-doorOpen*1.6); if(dwid>0) { RO(dxl,dyy,dwid,dh,'#6a6e76'); R(dxl+4,dyy+4,Math.max(0,dwid-8),dh-8,'#8a8e96'); if(dwid>20) RO(dxl+dwid-10,dyy+dh*.45,6,10,'#c9ced6'); }
-  else { const ow=-dwid; RO(dxl-ow,dyy,ow,dh,'#6a6e76'); }
-  gfx.restore(); };
-SC.tv2_kiln=(s,u)=>{ const ms=s.t*1000,P=s.P; const drop=ez(cl(ms/350)),lift2=ms>P.leave?ez((ms-P.leave)/400):0,y=lerp(-30,P.y,drop)-lift2*360; gfx.globalAlpha=1;
-  kiln(P.x,y,P,ms); if(ms>P.dial+150&&ms<P.open) bigWord('CONE 6',P.x,y-150,GOLD,3); if(ms>P.shut&&ms<P.shut+900) bigWord('POLICY',P.x,y-150,CREAM,3); };
+// The kiln is in his painted frames (ab_kiln_*); this draws only the words above it.
+SC.tv2_kiln=(s,u)=>{ const ms=s.t*1000,P=s.P; gfx.globalAlpha=1;
+  if(ms>P.dial+150&&ms<P.open) bigWord('CONE 6',P.x,P.y-150,GOLD,3); if(ms>P.shut&&ms<P.shut+900) bigWord('POLICY',P.x,P.y-150,CREAM,3); };
 SC.tv2_blast=(s,u)=>{ const x0=s.x0,y0=s.y0,x1=s.x1,y1=s.y1,L=Math.hypot(x1-x0,y1-y0)+40,a0=Math.atan2(y1-y0,x1-x0),grow=ez(u/.25),shrink=u>.7?(1-u)/.3:1,len=L*grow,spr=.32*shrink+.05;
   const layer=(f,c,o)=>{ const pts=[[x0,y0-20],[x0,y0+20]]; for(let k=8;k>=0;k--) { const q=k/8,a=a0+lerp(spr,-spr,q)*f,r=len*(.9+.1*Math.sin(s.t*40+k*1.7)); pts.push([x0+Math.cos(a)*r,y0+Math.sin(a)*r]); } gfx.globalAlpha=shrink*.95; poly(pts,c,o); };
   layer(1,'#e0402e',3); layer(.7,'#ff8a2a',0); layer(.4,'#ffe070',0);
@@ -804,13 +781,13 @@ SC.tv2_shield=(s,u)=>{ const ms=s.t*1000,P=s.P; if(!P.has) return; const cx=P.x,
 T.kiln_door_policy=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),kx=Math.min(456,F.x+F.w*.5+76),ky=Math.min(314,F.base+4),hit=2150;
   const P={x:kx,y:ky,dial:1000,open:1950,shut:2900,leave:3500};
   const SP={x:F.x,y:F.mid,rx:F.w*.55+8,ry:F.h*.55+8,crack:2250,has:!!(f&&f.shield)};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:800,x:Math.min(556,kx+104),y:ky+2,f:'idle'},{t:950,f:'aim',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:1700,f:'wind'},{t:1950,f:'throw',dx:-8},{t:2500,f:'hip'},{t:2800,f:'act',dx:-6},{t:3200,f:'celeb',hop:6},{t:3600,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:800,x:Math.min(556,kx+104),y:ky+2,f:'ab_kiln_1'},{t:950,f:'ab_kiln_1',dx:(u,tt)=>Math.sin(tt*30)*1.5},{t:1700,f:'ab_kiln_2'},{t:1950,f:'ab_kiln_3',dx:-8},{t:2500,f:'ab_kiln_4'},{t:2800,f:'ab_kiln_5',dx:-6},{t:3200,f:'ab_kiln_6'},{t:3600,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('TNB wheels in his kiln. The big one.'); say(m.id,'kiln_door_policy'); scene('tv2_kiln',3.95,{P,back:true}); scene('tv2_shield',2.9,{P:SP}); }],
+    [0,()=>{ setMessage('TNB wheels in his kiln. The big one.'); say(m.id,'kiln_door_policy'); scene('tv2_kiln',3.95,{P}); scene('tv2_shield',2.9,{P:SP}); }],
     [350,()=>{ sfx.thud(); }],
     [P.dial,()=>{ for(let k=0;k<6;k++) tone({type:'square',f0:1200,dur:.03,vol:.06,delay:k*.08}); setMessage('He dials it all the way to cone six.'); }],
     [1400,()=>{ sfx.rumble(0,.8); setMessage('It rumbles. The bricks start to glow.'); }],
-    [P.open,()=>{ sfx.flame?sfx.flame(0,.9):null; sfx.fireball&&sfx.fireball(); scene('tv2_blast',.95,{x0:kx-50,y0:ky-50,x1:F.x,y1:F.mid}); scene('tv2_flash',.35,{a:.45,c:'#ffb04a'}); setMessage('He swings the door open. FWOOM!'); }],
+    [P.open,()=>{ sfx.flame?sfx.flame(0,.9):null; sfx.fireball&&sfx.fireball(); scene('tv2_blast',.95,{x0:kx+20,y0:ky-50,x1:F.x,y1:F.mid}); scene('tv2_flash',.35,{a:.45,c:'#ffb04a'}); setMessage('He swings the door open. FWOOM!'); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('tv2_big',1.2,{x:F.x,y:F.top-74,txt:'FWOOM!',c:'#ffb040',sc:4}); }],
     [SP.crack,()=>{ S('crunch'); }],
@@ -872,59 +849,27 @@ SC.t3n_lean=(s,u)=>{ const q=u<.2?ez(u/.2):u>.85?1-ez((u-.85)/.15):1; lift(s.f,-
 // ---- Throw Down, take two (Tom's feedback 2026-10-28): he throws a bowl on the wheel, the wheel spins out of control, and the bowl
 // flies off and lands on the enemy's head. "Throwing a bowl. Literally." Numbers unchanged.
 const TW_S=.9;   // Throw Down wheel, clay and bowl scale (was 1.5: the wheel stood as tall as TNB; a real wheel is about waist height)
-const wheelHead=(ang,speed)=>{ // wheel head ellipse at (0,-54): grooves, plus spin marks that smear when fast
-  EO(0,-54,19,5.6,'#9aa3ad'); ring(0,-54,13,3.9,1,'#6e7882'); ring(0,-54,7,2.1,1,'#6e7882');
-  for(let k=0;k<3;k++) { const a=ang+k*2.094,mx=Math.cos(a)*16,my=-54+Math.sin(a)*4.6;
-    if(speed>16) { gfx.globalAlpha*=.5; ring(0,-54,16,4.6,2,'rgba(255,255,255,.6)'); gfx.globalAlpha/=.5; } else E(mx,my,1.6,1,'#ffffff'); } };
-const clayOn=(prog,wob,ms)=>{ { const id=prog<.3?'tnb/clay_lump':prog<.55?'tnb/clay_cylinder':'tnb/clay_bowl';   // painted clay stages (Oct 31)
-    const hh=prog<.3?lerp(9,17,prog/.3):prog<.55?lerp(18,26,(prog-.3)/.25):lerp(26,20,cl((prog-.55)/.45));
-    if(PROPART.ready(id)) { PROPART.draw(id,wob,-54-hh/2,{h:hh}); return; } }
-  // lump -> centered cylinder -> opened bowl, standing on the wheel head (surface at y=-54)
-  const open=ez(cl((prog-.3)/.3)),flare=ez(cl((prog-.55)/.45)),w=lerp(8,15,flare),h=lerp(lerp(8,22,ez(cl(prog/.5))),17,flare);
-  gfx.save(); gfx.translate(wob,-54);
-  poly([[-w*.72,0],[w*.72,0],[w,-h],[-w,-h]],'#d9784a',2);
-  R(-w*.6,-h*.9,1.8,h*.8,'rgba(255,255,255,.4)'); R(w*.45,-h*.9,w*.25,h*.9,'rgba(120,60,30,.25)');
-  for(let k=1;k<4;k++) Ln(-w*.9,-h*k/4,w*.9,-h*k/4,.8,'rgba(150,70,35,.5)');                         // throwing rings
-  E(0,-h,w,Math.max(.6,w*.3*open),'#e89a6a'); if(prog>.32) { E(0,-h,w-2,Math.max(.4,(w-2)*.3*open),'#8a4526'); E(0,-h+.5,w-4,Math.max(.3,(w-4)*.22*open),'#a85a34'); }
-  gfx.restore(); };
 const bowlProp=(x,y,sc,flip=false)=>{ if(PROPART.draw('tnb/clay_bowl',x,y-1*sc,{w:32*sc,rot:flip?Math.PI:0})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,flip?-sc:sc);  // a finished clay bowl, side view
   gfx.fillStyle=OUT; gfx.beginPath(); gfx.moveTo(-14,-9); gfx.quadraticCurveTo(-14,8,0,8); gfx.quadraticCurveTo(14,8,14,-9); gfx.closePath(); gfx.fill();
   gfx.fillStyle='#d9784a'; gfx.beginPath(); gfx.moveTo(-12,-8); gfx.quadraticCurveTo(-12,6,0,6); gfx.quadraticCurveTo(12,6,12,-8); gfx.closePath(); gfx.fill();
   R(-11,-5,22,2.5,'#fff6dc'); R(-9,-2,18,1.2,'#5fae9a'); R(-10,-8,2,9,'rgba(255,255,255,.35)'); R(6,-8,5,12,'rgba(120,60,30,.28)');
   E(0,-8,12.6,3.4,OUT); E(0,-8,11.6,2.8,'#e8b48a'); E(0,-7.8,9.2,1.8,'#8a4526'); R(-5,5.4,10,2.4,'#b8603a'); R(-5,5.4,10,.9,'#e8946a'); gfx.restore(); };
+// The wheel, the clay and the bowl are in his painted frames (ab_throw_*); this draws the spinning spray, the wet ring and FASTER.
 SC.t3n_wheel=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<P.drop) return;
-  const dt=Math.min(.05,s.t-(s.lt==null?s.t:s.lt)); s.lt=s.t;
-  const sp=ms<P.tap?4:ms<P.fast?lerp(4,14,ez((ms-P.tap)/(P.fast-P.tap))):ms<P.launch?lerp(14,38,ez((ms-P.fast)/(P.launch-P.fast))):lerp(38,0,ez((ms-P.launch)/1800));
-  s.ang=(s.ang||0)+sp*dt;
-  const dq=ez((ms-P.drop)/350),by=P.y-(1-dq)*130+(ms>P.drop+350&&ms<P.drop+500?-Math.sin((ms-P.drop-350)/150*Math.PI)*6:0);
-  const shake=ms>P.fast&&ms<P.launch+400?Math.sin(ms/22)*lerp(.5,2.2,cl((ms-P.fast)/(P.launch-P.fast))):0;
-  gfx.globalAlpha=fade(u,.94); gfx.save(); gfx.translate(P.x+shake,by); gfx.scale(TW_S,TW_S);
-  E(0,3,40,7,'rgba(0,0,0,.28)');
-  const wPaint=PROPART.draw('tombo/pottery_wheel',0,-34,{w:70,h:74});   // painted wheel; the drawn electric wheel below is the fallback
-  if(wPaint) { if(sp>16) { gfx.globalAlpha*=.5; ring(0,-54,16,4.6,2,'rgba(255,255,255,.6)'); gfx.globalAlpha=fade(u,.94); } } else {
-  // electric wheel: housing, dial, pedal on a cable
-  RO(-28,-32,56,30,'#59636e'); R(-28,-32,56,4,'#7c8794'); R(-28,-6,56,3,'#3f4852'); for(const bx of [-24,24]) { E(bx,-26,1.2,1.2,'#cfd5dc'); E(bx,-8,1.2,1.2,'#cfd5dc'); }
-  label('POT-5',-18,-20,'#d8dce2',1);
-  const lvl=ms<P.tap?0:ms<P.fast?1:ms<P.launch?2:3,da=-2.2+lvl*.95; EO(14,-18,6,6,'#cfd5dc'); Ln(14,-18,14+Math.cos(da)*5,-18+Math.sin(da)*5,1.6,OUT);
-  const press=ms>P.tap?(ms>P.fast?1:.55):0; gfx.strokeStyle=OUT; gfx.lineWidth=2.4; gfx.beginPath(); gfx.moveTo(28,-14); gfx.quadraticCurveTo(46,-14,50,-4+press*0); gfx.stroke();
-  gfx.save(); gfx.translate(54,0); gfx.rotate(press*.16); poly([[-4,-6],[20,-1],[20,4],[-4,4]],'#aeb3ba',2); for(let k=0;k<4;k++) Ln(0+k*5,-3+k*.9,0+k*5,3,1,'#7d8892'); gfx.restore();
-  // splash pan and the wheel head on its shaft
-  R(-3,-50,6,20,'#59636e'); EO(0,-46,35,9.5,'#aeb3ba'); E(0,-47,30,7.4,'#7d8892'); E(0,-46,27,6,'#b58a64'); E(-8,-48,10,1.6,'rgba(255,255,255,.35)');
-  wheelHead(s.ang,sp);
-  }
-  if(ms>P.clay&&ms<P.launch) { const prog=cl((ms-P.clay)/(P.shape-P.clay)),wob=ms>P.fast?Math.sin(ms/30)*lerp(.4,4,cl((ms-P.fast)/(P.launch-P.fast))):Math.sin(ms/200)*.3; clayOn(prog,wob,ms);
-    if(ms>P.tap&&ms<P.launch) { const n=ms>P.fast?14:6; for(let k=0;k<n;k++) { const q=((ms/(ms>P.fast?260:520))+k/n)%1,a=k/n*Math.PI*2+ms/90,r=14+q*(ms>P.fast?64:30); gfx.globalAlpha=fade(u,.94)*(1-q)*.9;
-        E(Math.cos(a)*r,-66+Math.sin(a)*r*.45-q*8,1.6,1.3,k%2?'#8fd0ff':'#b99a78'); } gfx.globalAlpha=fade(u,.94); } }
-  if(ms>P.launch&&ms<P.launch+900) { gfx.globalAlpha=fade(u,.94)*(1-(ms-P.launch)/900); E(0,-54,12,3.2,'#8a4526'); }   // wet ring left behind
+  const by=P.y,A=fade(u,.94);
+  gfx.save(); gfx.translate(P.x,by); gfx.scale(TW_S,TW_S);
+  if(ms>P.tap&&ms<P.launch) { const n=ms>P.fast?14:6; for(let k=0;k<n;k++) { const q=((ms/(ms>P.fast?260:520))+k/n)%1,a=k/n*Math.PI*2+ms/90,r=14+q*(ms>P.fast?64:30); gfx.globalAlpha=A*(1-q)*.9;
+      E(Math.cos(a)*r,-66+Math.sin(a)*r*.45-q*8,1.6,1.3,k%2?'#8fd0ff':'#b99a78'); } gfx.globalAlpha=A; }
+  if(ms>P.launch&&ms<P.launch+900) { gfx.globalAlpha=A*(1-(ms-P.launch)/900); E(0,-54,12,3.2,'#8a4526'); }   // wet ring left behind
   gfx.restore();
-  if(ms>P.fast&&ms<P.launch) { gfx.globalAlpha=fade(u,.94); label('FASTER',P.x-62,by-52,CREAM,2); } gfx.globalAlpha=1; };
+  if(ms>P.fast&&ms<P.launch) { gfx.globalAlpha=A; label('FASTER',P.x-62,by-52,CREAM,2); } gfx.globalAlpha=1; };
 SC.t3n_hat=(s,u)=>{ const f=u>.7?ez((u-.7)/.3):0,rot=Math.sin(s.t*17)*.3*(1-f*.6); gfx.globalAlpha=fade(u,.9); gfx.save(); gfx.translate(s.x,s.y+f*34); gfx.rotate(rot); bowlProp(0,0,1.9,true); gfx.restore();
   if(u<.75) for(let k=0;k<3;k++) { const q=(s.t*3+k/3)%1; gfx.globalAlpha=(1-q)*.8; E(s.x-14+k*14,s.y-16-q*12,2,1.6,'#8fd0ff'); } gfx.globalAlpha=1; };
 T.throw_down=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.round(Math.min(me.x-60,F.x+F.w*.5+120)),wy=Math.min(316,F.base+4);
   const set=900,pedal=2000,fast=2400,launch=2800,hit=3350,pun=3700,psy=4400,more=5250,home=5850,end=6650;
   const wheelX=wx-36,P={x:wheelX,y:wy+2,drop:200,clay:1000,shape:2000,tap:pedal,fast,launch};
   const hx=wheelX,hy=wy+2-54*TW_S-10,tx=F.x+F.w*.05,ty=F.top+6;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:set,x:wx,y:wy,f:'kneel'},{t:1000,f:'kneel',dy:(u,tt)=>Math.sin(tt*16)*1.2},{t:pedal,f:'aim',dx:-2},{t:fast,f:'wind',dx:u=>ez(u)*10},{t:launch,f:'spread',dx:-4},{t:launch+500,f:'spread',hop:5},{t:hit+300,f:'idle'},{t:pun,f:'aim'},{t:psy,f:'hip'},{t:more,f:'celeb'},{t:home-150,f:'idle'},{t:home,f:'walkR'},{t:home+800,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:set,x:wx,y:wy,f:'ab_throw_1'},{t:1000,f:'ab_throw_2'},{t:pedal,f:'ab_throw_3',dx:-2},{t:fast,f:'ab_throw_4',dx:u=>ez(u)*4},{t:launch,f:'ab_throw_4',dx:-4},{t:hit+300,f:'ab_throw_5'},{t:psy,f:'ab_throw_6'},{t:home-150,f:'ab_throw_6'},{t:home,f:'walkR'},{t:home+800,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('TNB sets up his pottery wheel. A lump of clay, a calm bowl.'); say(m.id,'throw_down'); scene('t3n_wheel',(home+100)/1000,{P}); S('whoosh'); }],
     [P.drop+350,()=>{ S('thud'); scene('tn_poof',.5,{x:wheelX,y:wy+2,c:'#c9a070'}); }],
@@ -1000,19 +945,17 @@ const mug=(x,y,ang,sc)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(ang); gfx.s
   R(-6,9.4,12.8,2.2,'#b8946a'); R(-6,9.4,12.8,.8,'#d8b48a'); gfx.restore(); };
 const spinMug=(x,y,u,turns,sc)=>{ const ang=u*Math.PI*2*turns,a0=gfx.globalAlpha; for(const [d,al] of [[.9,.15],[.55,.3]]) { gfx.globalAlpha=a0*al; mug(x,y,ang-d*Math.sign(turns),sc); } gfx.globalAlpha=a0;
   gfx.strokeStyle='rgba(255,255,255,.75)'; gfx.lineWidth=2.4; gfx.beginPath(); gfx.arc(x,y,16*sc,ang-1.2*Math.sign(turns),ang,turns<0); gfx.stroke(); mug(x,y,ang,sc); };
-const mugPainted=()=>{ const sp=BATTLE_SPRITES.tnb; return !!(sp&&sp.hires&&sp.mugPull); };   // painted Mug Toss poses hold their own mug
-SC.tp2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1; if(!mugPainted()) mug(h.x-24,h.y-26,Math.sin(ms/260)*.08,MS);
+SC.tp2_mugheld=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms>P.throw) return; const h=hand(); gfx.globalAlpha=1;   // the painted frames hold the mug
   if(ms>P.show) { RO(h.x-56,h.y-70,50,16,'#f2c94c'); label('2ND',h.x-31,h.y-66,OUT,2); } };
 SC.tp2_mugrest=(s,u)=>{ gfx.globalAlpha=fade(u,.85); mug(s.x,s.y,0,MS); if(s.t>.25) steam(s.x-3,s.y-30,s.t,3,'#ffffff',28); if(s.t>.35) bigWord('STILL WORKS',s.x,s.y-66,CREAM,2); };
 T.mug_toss=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=homeOf(m),wx=Math.max(F.x+F.w*.5+130,Math.min(me.x-40,F.x+200));
   const P={show:900,throw:1950},hit=2500;
-  const pp=mugPainted();
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:800,x:'home',y:'home',f:pp?'mugPull':'act'},{t:1650,f:pp?'mugWind':'wind',dx:u=>ez(u)*8},{t:1950,f:pp?'mugRel':'throw',dx:-6},{t:2400,f:'aim'},{t:3300,f:'celeb',hop:6},{t:3600,x:'home',y:'home',f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // throws from his place in the line, no step forward (Oct 31)
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_mug_1'},{t:800,x:'home',y:'home',f:'ab_mug_2'},{t:1650,f:'ab_mug_3',dx:u=>ez(u)*8},{t:1950,f:'ab_mug_4',dx:-6},{t:2400,f:'ab_mug_5'},{t:3300,f:'ab_mug_6',hop:6},{t:3600,x:'home',y:'home',f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // throws from his place in the line, no step forward (Oct 31)
   const lx=F.x+F.w*.5+34,ly=F.base-38;
   ST.play(E2,[
     [0,()=>{ setMessage('TNB pulls a slightly crooked mug out of his tote.'); say(m.id,'mug_toss'); scene('tp2_mugheld',2.0,{P}); }],
     [900,()=>{ setMessage('It\'s a second. It even has a sticker that says so.'); S('select'); }],
-    [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-(pp?4:24),h.y-(pp?6:26),F.x+6,F.top+18,.55,90); }],
+    [P.throw,()=>{ const h=hand(); sfx.whoosh(); ST.fly((x,y,u)=>spinMug(0,0,u,1.5,MS),h.x-4,h.y-6,F.x+6,F.top+18,.55,90); }],
     ['hf',hit],
     [hit,()=>{ sfx.bonk(); S('ting'); ST.jolt(f,.55); landHit(100); scene('tp2_burst',.6,{x:F.x+6,y:F.top+18,r:56}); scene('tv2_flash',.25,{a:.3}); scene('tv2_big',1.1,{x:F.x,y:F.top-74,txt:'CLUNK!',c:GOLD,sc:5}); }],
     [2550,()=>{ ST.fly((x,y,u)=>spinMug(0,0,u,-1,MS),F.x+6,F.top+18,lx,ly,.5,60); }],
@@ -1268,14 +1211,9 @@ SC.t5_hill=(s,u)=>{ const P=s.plan,ms=s.t*1000,k=ez(ms/400)*(u>.92?(1-u)/.08:1),
     RO(sx-2,sy-92,4,92,'#8a9098'); RO(sx-40,sy-96,80,18,'#2f7a4a'); label('BAXTER ST',sx,sy-91,'#ffffff',2);
     gfx.save(); gfx.translate(sx,sy-58); gfx.rotate(Math.PI/4); RO(-15,-15,30,30,'#ffd166'); gfx.restore(); label('32%',sx,sy-61,'#2b2a26',1); } }
   gfx.globalAlpha=1; };
-// The board under his feet: tilted down the hill while he bombs it, sideways in the slide. Speed lines and wheel sparks.
-const board=(x,y,tilt,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(sc,sc); for(const wx of [-24,22]) { E(wx,8,6,6,OUT); E(wx,8,4,4,RED); E(wx,8,1.5,1.5,GOLD); }
-  R(-38,-1,76,9,OUT); R(-36,1,72,5,'#c48a4a'); R(-36,1,72,2,'#2b2a26'); gfx.restore(); };
+// Speed lines and wheel sparks along the board in the ride and slide (the board itself is in the painted frames).
 SC.t5_board=(s,u)=>{ const P=s.P,st=s.st,ms=s.t*1000+s.t0; if(!st||st.x==null||ms<P.show) return;
-  const sc=st.sc||1; let tilt=0;
-  if(ms>=P.drop&&ms<P.bottom) tilt=P.ang; else if(ms>=P.bottom&&ms<P.stop) tilt=-.12+Math.sin(ms/40)*.05;
-  if(ms>=P.pop&&ms<P.pop+250) tilt=-.5*Math.sin((ms-P.pop)/250*Math.PI);
-  if(!s.noBoard) board(st.x,st.y+2,tilt,sc);          // the painted frames carry their own board
+  const sc=st.sc||1;   // the painted frames carry their own board; this draws the speed lines and sparks
   if(ms>=P.drop&&ms<P.stop) { const back=ms<P.bottom?{x:Math.cos(P.ang),y:Math.sin(P.ang)}:{x:1,y:0},H=BH()*sc;
     for(let j=0;j<7;j++) { const o=(ms/3+j*37)%90,yy=st.y-12-j*(H/8); gfx.globalAlpha=.6; Ln(st.x+back.x*(30+o),yy+back.y*(30+o),st.x+back.x*(70+o),yy+back.y*(70+o),2,'#fff6dc'); }
     const wx=st.x+(ms<P.bottom?Math.cos(P.ang)*22*sc:24),wy=st.y+(ms<P.bottom?Math.sin(P.ang)*22*sc:0)+8;
@@ -1290,30 +1228,26 @@ SC.t5_shards=(s,u)=>{ for(let j=0;j<9;j++) { const a=j/9*Math.PI*2+.3,d=ez(u)*36
     PO([[-4,-3],[5,-2],[1,4]],j%3?CLAY2:GLZ,1.5); gfx.restore(); } gfx.globalAlpha=1; };
 T.hillbomb_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),tom=b2LiveParty().find(p=>p.id==='tom'&&p!==m);
   const B={x:Math.round(Math.min(360,Math.max(Gp.x1+100,300))),y:Math.round(Math.min(286,Math.max(Gp.base-18,262)))},A={x:540,y:150};
-  const C={x:Math.max((BATTLE_SPRITES.tnb&&BATTLE_SPRITES.tnb.bTuck)?66:26,Math.round(Gp.x0-18)),y:B.y},ang=Math.atan2(B.y-A.y,B.x-A.x)+Math.PI;   // board tilt: lower at the left
+  const C={x:Math.max(66,Math.round(Gp.x0-18)),y:B.y},ang=Math.atan2(B.y-A.y,B.x-A.x)+Math.PI;   // board tilt: lower at the left
   const P={A,B,flatTop:Math.min(...Gp.list.map(p=>p.base))-20,show:1050,pop:1350,drop:1750,bottom:3200,stop:4200,ang};
   const slide=t=>lerp(B.x,C.x,(t-P.bottom)/(P.stop-P.bottom));   // the slide runs at a steady speed
   const tAt=x=>P.bottom+(B.x-x)/(B.x-C.x)*(P.stop-P.bottom);
-  // Painted longboard frames (bTop, bOllie, bTuck, bLob, bSlide, bRide, bPushR; data/tnb-hires-battle.js) carry the board, so every riding key sits
-  // BY lower (the wheels, not the feet, touch the street) and the code-drawn board is off. Old pixel TNB (no bTuck) keeps the old frames and board.
-  const PNT=!!(BATTLE_SPRITES.tnb&&BATTLE_SPRITES.tnb.bTuck),BY=PNT?16:0,F=(a,b)=>PNT?a:b;
+  // The painted ability frames (ab_bomb_*) carry the board, so every riding key sits BY lower (the wheels, not the feet, touch the street).
+  const BY=16;
   const dAt=t=>{ const u=Math.max(0,Math.min(1,(t-P.drop)/(P.bottom-P.drop))),e=u*u; return {x:lerp(A.x-6,B.x,e),y:lerp(A.y+BY,B.y+BY,e)}; };   // where the old drop segment (ease in) puts him at t
   const d1=dAt(2150),d2=dAt(2750),scd=(a,b)=>u=>lerp(a,b,u);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walkR'},{t:500,x:640,y:292,f:'idle',hide:true},{t:P.show,x:A.x,y:A.y+BY,f:F('bTop','idle'),sc:.8},
-    {t:P.pop,f:F('bOllie','aim'),sc:.8,hop:10},{t:1550,f:F('bTop','act'),sc:.8,dx:u=>-ez(u)*6},
-    ...(PNT?[{t:P.drop,x:A.x-6,y:A.y+BY,f:'bTuck',sc:scd(.8,.9),rot:ang,ease:'lin'},
-      {t:2150,x:d1.x,y:d1.y,f:'bLob',sc:scd(.9,.95),rot:ang,ease:'lin'},{t:2750,x:d2.x,y:d2.y,f:'bTuck',sc:scd(.95,1),rot:ang,ease:'lin'},
-      {t:P.bottom,x:B.x,y:B.y+BY,f:'bSlide',rot:(u,tt)=>-.1+Math.sin(tt*30)*.03,dx:(u,tt)=>Math.sin(tt*70)*1.5,ease:'lin'},
-      {t:P.stop,x:C.x,y:C.y+BY,f:'bRide'},{t:4700,f:'bRide'},{t:5250,f:'bPushR',ease:'in'},{t:6300,x:'home',y:'home',f:'idle'}]
-     :[{t:P.drop,x:A.x-6,y:A.y,f:'kneel',sc:u=>lerp(.8,1,u),rot:ang,ease:'in'},
-      {t:P.bottom,x:B.x,y:B.y,f:'kneel',rot:(u,tt)=>-.18+Math.sin(tt*30)*.04,dx:(u,tt)=>Math.sin(tt*70)*1.5,ease:'lin'},
-      {t:P.stop,x:C.x,y:C.y,f:'hip'},{t:4700,f:'hip'},{t:5250,f:'flip',ease:'in'},{t:6300,x:'home',y:'home',f:'idle'}])]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walkR'},{t:500,x:640,y:292,f:'idle',hide:true},{t:P.show,x:A.x,y:A.y+BY,f:'ab_bomb_1',sc:.8},
+    {t:P.pop,f:'ab_bomb_1',sc:.8,hop:10},{t:1550,f:'ab_bomb_1',sc:.8,dx:u=>-ez(u)*6},
+    {t:P.drop,x:A.x-6,y:A.y+BY,f:'ab_bomb_2',sc:scd(.8,.9),rot:ang,ease:'lin'},
+    {t:2150,x:d1.x,y:d1.y,f:'ab_bomb_4',sc:scd(.9,.95),rot:ang,ease:'lin'},{t:2750,x:d2.x,y:d2.y,f:'ab_bomb_3',sc:scd(.95,1),rot:ang,ease:'lin'},
+    {t:P.bottom,x:B.x,y:B.y+BY,f:'ab_bomb_5',rot:(u,tt)=>-.1+Math.sin(tt*30)*.03,dx:(u,tt)=>Math.sin(tt*70)*1.5,ease:'lin'},
+    {t:P.stop,x:C.x,y:C.y+BY,f:'ab_bomb_6'},{t:4700,f:'ab_bomb_6'},{t:5250,f:'ab_bomb_6F',ease:'in'},{t:6300,x:'home',y:'home',f:'idle'}]);
   const spins=list.map((f,k)=>({f,k,t:Math.round(tAt(ST.foe(f).x))}));
   const hitT=Math.round(tAt(Gp.x));
   const mugT=[2300,2450,2600],mugs=mugT.map((t,i)=>({t,f:list[i%list.length]}));
   const tomU=tom?ST.unit(tom):null;
   ST.play(E2,[
-    [0,()=>{ scene('t5_bars',6.6,{}); scene('t5_hill',5.4,{plan:P,back:true}); scene('t5_board',6.3,{st,P,t0:0,noBoard:PNT}); scene('t5_dust2',2.2,{st,start:P.bottom,stop:P.stop,t0:3000,delay:3});
+    [0,()=>{ scene('t5_bars',6.6,{}); scene('t5_hill',5.4,{plan:P,back:true}); scene('t5_board',6.3,{st,P,t0:0}); scene('t5_dust2',2.2,{st,start:P.bottom,stop:P.stop,t0:3000,delay:3});
       say(m.id,'hillbomb_ult'); setMessage('The battlefield tips up into Baxter Street. The steepest street in Echo Park.'); }],
     [P.show,()=>{ S('click'); setMessage('TNB is at the top. Board under one foot. Very chill about it.'); }],
     [P.pop,()=>{ S('click'); S('whoosh'); scene('t5_big',.8,{x:A.x-40,y:A.y-130,txt:'32% GRADE',c:CREAM,sc:3}); }],
@@ -1384,9 +1318,6 @@ SC.t6_dust=(s,u)=>{ for(let k=0;k<(s.n||10);k++) { const a=k/(s.n||10)*Math.PI*2
 // Monsters lifted and spun as something passes: list of {f,t,k}.
 SC.t6_spin=(s,u)=>{ const ms=s.t*1000+s.t0; for(const b of s.list) { if(ms<b.t) continue; const q=(ms-b.t)/600; if(q>=1) { if(!b.done) { b.done=1; lift(b.f,0,0,0); } continue; }
   lift(b.f,-Math.sin(q*Math.PI)*(s.h||20),q*Math.PI*2*(b.k%2?-1:1),-Math.sin(q*Math.PI)*(s.ox||6)); } };
-// A laptop in his hands (open) that follows the actor's hand.
-const laptop=(x,y,open=1)=>{ if(open>.6&&PROPART.draw('tnb/laptop',x,y-17,{h:36})) return; gfx.save(); gfx.translate(x,y); RO(-18,-2,36,5,CHROME); R(-14,0,28,2,INK); const h=4+22*open; RO(-16,-2-h,30,h,CHROME); if(open>.3) { R(-13,-h+1,24,h-6,'#3d6fb5'); R(-11,-h+3,20,2,WHITE); R(-11,-h+7,14,2,'#9bd2ff'); R(-11,-h+11,18,2,'#9bd2ff'); } gfx.restore(); };
-SC.t6_laptop=(s,u)=>{ const ms=s.t*1000; if(s.until&&ms>s.until) return; const h=hand(); gfx.globalAlpha=1; laptop(h.x-4,h.y-6,s.closeAt&&ms>s.closeAt?1-ez((ms-s.closeAt)/250):1); };
 
 // ---------- Foraged at Dawn (A1; key foraged_at_dawn; Quick Change's numbers) ----------
 // He carries a huge plate to the friend, sets it down: one pea. Then the description. Every word pops bigger and the
@@ -1417,8 +1348,7 @@ const plate=(x,y,sc,dish='pea')=>{ if((dish===true||dish==='pea')&&peaPlate(x,y,
   if(courseId[dish]&&PROPART.ready(courseId[dish])) { E(x+2*sc,y+5*sc,34*sc,9*sc,'rgba(0,0,0,.25)'); if(PROPART.draw(courseId[dish],x,y-2*sc,{w:76*sc})) return; } gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   E(2,3,35,12,'rgba(0,0,0,.25)'); EO(0,0,34,12,'#c9a13e'); E(0,0,31,10.6,'#f2d27a'); E(0,-.5,29,9.6,WHITE); ring(0,-.5,22,7.2,1.2,'#d8b14a'); ring(0,-.5,26.5,8.6,.8,'#e6c66a'); E(-16,-5.5,6,1.1,'rgba(255,255,255,.8)');
   if(dish) (DISH[dish===true?'pea':dish]||DISH.pea)(); gfx.restore(); };
-SC.t6_plateheld=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1; plate(h.x+4,h.y-12,1.5,'pea'); };
-SC.t6_plate=(s,u)=>{ gfx.globalAlpha=fin(u,.06)*fade(u,.92); plate(s.x,s.y,1.9,'pea'); if(s.t<1.2) label('ONE PEA',s.x-14,s.y-44,CREAM,1);
+SC.t6_plate=(s,u)=>{ gfx.globalAlpha=fin(u,.06)*fade(u,.92); if(s.t<1.2) label('ONE PEA',s.x-14,s.y-44,CREAM,1);
   const g=Math.max(0,Math.sin(s.t*7)),gx=s.x+34,gy=s.y-12; if(g>.1) { const r=2+g*5; PO([[gx,gy-r*1.8],[gx+r*.5,gy-r*.5],[gx+r*1.8,gy],[gx+r*.5,gy+r*.5],[gx,gy+r*1.8],[gx-r*.5,gy+r*.5],[gx-r*1.8,gy],[gx-r*.5,gy-r*.5]],'#ffffff',0); }
   gfx.globalAlpha=1; };
 const napkin=(x,y,sc,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); PO([[-12,-6],[12,-6],[14,8],[-14,8]],WHITE,2); Ln(-8,-6,-2,8,1.5,'#d9d9d2'); gfx.restore(); };
@@ -1431,9 +1361,9 @@ SC.t6_zzz=(s,u)=>{ gfx.globalAlpha=fade(u,.7); for(let k=0;k<3;k++) { const q=cl
 T.foraged_at_dawn=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m;
   const px=self?H.x-54:Math.max(40,Math.min(540,H.x-(foe?-60:52))),py=Math.min(312,H.base+2),hit=3400;
   const words=[{t:900,w:'FORAGED'},{t:1500,w:'AT DAWN'},{t:2100,w:'A WHISPER'},{t:2600,w:'OF ASH'},{t:3100,w:'INTENTION'}];
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'carry'},{t:650,x:sp.x,y:sp.y,f:'carry'},{t:800,f:'kneel'},{t:1100,f:'spread'},{t:2100,f:'point',dx:(u,tt)=>Math.sin(tt*9)*3},{t:3100,f:'act'},{t:3500,f:'hip'},{t:3900,f:'kneel'},{t:4100,f:self?'idle':'walkR'},{t:4700,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_forage_1'},{t:650,x:sp.x,y:sp.y,f:'ab_forage_1'},{t:800,f:'ab_forage_2'},{t:1100,f:'ab_forage_3'},{t:2100,f:'ab_forage_4',dx:(u,tt)=>Math.sin(tt*9)*3},{t:3500,f:'ab_forage_4'},{t:3900,f:'ab_forage_5'},{t:4050,f:'ab_forage_6'},{t:4350,f:self?'idle':'walkR'},{t:4700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('TNB arrives at '+t.name+'\'s table with a very large plate.'); say(m.id,'foraged_at_dawn'); scene('t6_plateheld',.85,{until:800}); }],
+    [0,()=>{ setMessage('TNB arrives at '+t.name+'\'s table with a very large plate.'); say(m.id,'foraged_at_dawn'); }],
     [800,()=>{ S('ting'); scene('t6_plate',3.3,{x:px,y:py}); scene('t6_bubble',3.1,{x:Math.max(160,px-110),y:Math.max(130,py-70),t0:0,t1:2200,words:words.map(w=>({t:w.t-900,w:w.w})),delay:.1}); setMessage('One pea. He lowers his voice.'); }],
     ...words.map(w=>[w.t,()=>{ S('select'); }]),
     [2600,()=>{ setMessage('The description is longer than the pea.'); }],
@@ -1446,12 +1376,12 @@ T.foraged_at_dawn=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotF
 // ---------- Don't Split Up (A2; key dont_split_up; Continuity Pins' numbers) ----------
 // Lights drop. TNB sprints to the friend, flashlight under his chin: rule one. They stand back to back inside a glowing
 // ring (the guard). A twig snaps offstage; both jump. If the friend is Tom, a quick heart before the lights come up.
-SC.t6_torch=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1; if(!PROPART.draw('tnb/flashlight',h.x,h.y+2,{w:24,rot:Math.PI/2})) RO(h.x-4,h.y-6,8,16,INK);   // painted flashlight, lens up
+SC.t6_torch=(s,u)=>{ const ms=s.t*1000; if(ms>s.until) return; const h=hand(); gfx.globalAlpha=1;   // the flashlight is in his painted hands
   gfx.globalAlpha=.35; PO([[h.x,h.y-6],[h.x-26,h.y-70],[h.x+26,h.y-70]],'#fff2b0',0); gfx.globalAlpha=1; E(h.x,h.y-6,5,3,'#fff2b0'); };
 SC.t6_guardring=(s,u)=>{ const k=fin(u,.15)*fade(u,.85); gfx.globalAlpha=k*.9; ring(s.x,s.y,s.rx+Math.sin(s.t*8)*2,s.ry,4,'#9be39a'); gfx.globalAlpha=k*.25; E(s.x,s.y,s.rx,s.ry,'#9be39a'); gfx.globalAlpha=1; };
 T.dont_split_up=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),tom=B2.party.find(p=>p.id==='tom'&&b2Alive(p)),foe=t.side==='foe',self=t===m,hit=2300;
   const cx=self?H.x:(H.x+(typeof sp.x==='number'?sp.x:H.x))/2;
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:450,x:sp.x,y:sp.y,f:'point'},{t:800,f:'aim'},{t:1600,f:'flip'},{t:2300,f:'spread'},{t:2800,f:'spread',hop:14},{t:3100,f:'flip'},{t:3700,f:self?'idle':'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:450,x:sp.x,y:sp.y,f:'ab_split_1'},{t:800,f:'ab_split_2'},{t:1200,f:'ab_split_3'},{t:1600,f:'ab_split_4'},{t:2800,f:'ab_split_5',hop:14},{t:3100,f:'ab_split_6'},{t:3700,f:self?'idle':'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ scene('t6_dark',3.75,{a:.62}); say(m.id,'dont_split_up'); S('whoosh'); setMessage('Lights out. TNB grabs '+t.name+' by the arm.'); }],
     [800,()=>{ scene('t6_torch',.9,{until:800}); scene('t6_big',.9,{x:cx,y:topY(H),txt:'RULE ONE',c:CREAM,sc:3}); S('click'); setMessage('Flashlight under the chin. Rule one.'); }],
@@ -1476,9 +1406,9 @@ SC.t6_gantt=(s,u)=>{ const ms=s.t*1000,P=s.P; if(ms<400) return; const g=P.steps
 T.scope_creep=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=homeOf(m),hit=2950;
   const wx=Math.max(G.x1+90,Math.min(me.x-30,G.x1+170)),x=Math.max(130,Math.min(300,G.x+10)),gm=(G.top+G.base)*.5;
   const P={x,y:Math.max(60,G.top-24),yb:gm+22,fall:2650,slam:hit,steps:[{t:1000,w0:140,w:200,h0:40,h:52},{t:1600,w0:200,w:270,h0:52,h:76},{t:2200,w0:270,w:360,h0:76,h:104}]};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:500,x:wx,f:'act'},{t:1000,f:'aim',dx:-3},{t:1600,f:'act'},{t:2200,f:'wind',dx:u=>ez(u)*6},{t:2650,f:'throw'},{t:3100,f:'shrug'},{t:3900,f:'walkR'},{t:4500,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:500,x:wx,f:'ab_creep_1'},{t:1000,f:'ab_creep_2',dx:-3},{t:1600,f:'ab_creep_3'},{t:2200,f:'ab_creep_4',dx:u=>ez(u)*6},{t:2650,f:'ab_creep_5'},{t:3100,f:'ab_creep_6'},{t:3900,f:'walkR'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('TNB opens the project plan. One bar. Very tidy.'); say(m.id,'scope_creep'); scene('t6_laptop',3.1,{until:3100}); scene('t6_gantt',3.7,{P}); }],
+    [0,()=>{ setMessage('TNB opens the project plan. One bar. Very tidy.'); say(m.id,'scope_creep'); scene('t6_gantt',3.7,{P}); }],
     [1000,()=>{ S('click'); scene('t6_big',.7,{x,y:P.y-30,txt:'TINY CHANGE',c:CREAM,sc:2}); setMessage('"Tiny change." The bar grows.'); }],
     [1600,()=>{ S('click'); scene('t6_big',.7,{x,y:P.y-30,txt:'ONE MORE THING',c:AMBER,sc:2}); setMessage('"Just one more thing." Sub-bars appear.'); }],
     [2200,()=>{ S('click'); S('creak'); scene('t6_big',.7,{x,y:P.y-30,txt:'AND ONE MORE',c:RED,sc:2}); setMessage('"And one more." The deadline slides off the edge.'); }],
@@ -1519,7 +1449,7 @@ T.tasting_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),party=B2.pa
   const cloths=party.map((p,k)=>{ const U=ST.unit(p); return {t:80*k,x:U.x,y:U.base-2,w:Math.max(U.w+30,84)}; });
   const cl2=party.map((p,k)=>{ const U=ST.unit(p); return {t:0,x:U.x+8,y:U.base-6,beats:beats.map(b=>({drop:b.drop+k*60,land:b.land+k*60,lift:b.lift+k*60,gone:b.gone+k*60})),clear:2650+k*60}; });
   const fx1=Math.max(G.x1+60,Math.min(G.x+40,320)),P={x:G.x+6,w:Math.max(150,G.w+90),h:Math.max(72,Math.min(130,G.base-G.top+26)),yb:G.base+2,in:3050,slam:hit,receipt:3950,feet:list.map(f=>ST.foe(f).x)};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walkR'},{t:450,x:px,y:300,f:'carry'},{t:1300,f:'spread'},{t:1700,f:'act'},{t:2200,f:'act',hop:4,hn:3},{t:2650,f:'carry'},{t:2900,x:fx1,y:300,f:'walk'},{t:3050,f:'wind'},{t:3500,f:'point'},{t:3950,f:'hip'},{t:4400,f:'walkR'},{t:4900,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_tasting_1'},{t:450,x:px,y:300,f:'ab_tasting_2'},{t:1300,f:'ab_tasting_3'},{t:1700,f:'ab_tasting_4'},{t:2200,f:'ab_tasting_4',hop:4,hn:3},{t:2650,f:'ab_tasting_5'},{t:2900,x:fx1,y:300,f:'ab_tasting_2'},{t:3050,f:'ab_tasting_6'},{t:3950,f:'ab_tasting_6'},{t:4400,f:'walkR'},{t:4900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ scene('t6_dark',4.9,{a:.3}); scene('t6_cloths',4.6,{list:cloths}); scene('t6_cloches',2.9,{list:cl2}); say(m.id,'tasting_ult'); S('whoosh'); setMessage('TNB snaps a tablecloth under everyone. Service begins.'); }],
     [750,()=>{ S('ting'); setMessage('Linen, candles, silver cloches. Fourteen courses. He is doing all of them.'); }],
@@ -1585,7 +1515,7 @@ T.around_the_bend=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),foe=t.si
   pts[3][1]=Math.max(96,pts[3][1]); pts[2][1]=Math.max(132,pts[2][1]); pts[1][1]=Math.max(172,pts[1][1]);
   if(PROPART.ready('tnb/hill_backdrop')) { pts[1]=[440,168]; pts[2]=[508,120]; pts[3]=[470,64]; }   // walk the painted switchbacks
   const P={pts,signs:[1100,1700,2300],gold:2800};
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:600,x:bx+34,y:by+4,f:'point'},{t:800,x:bx+34,y:by+4,f:'walk',ease:'lin'},{t:1100,x:pts[1][0],y:pts[1][1]+4,f:'walkR',ease:'lin'},{t:1700,x:pts[2][0],y:pts[2][1]+4,f:'walk',ease:'lin'},{t:2300,x:pts[3][0],y:pts[3][1]+4,f:'walkR',ease:'lin'},{t:2800,f:'cheer',hop:6},{t:3150,f:'throw'},{t:3600,f:'celeb'},{t:3900,x:pts[3][0]+10,y:pts[3][1]+4,f:'idle',rot:.3},{t:4000,x:'home',y:'home',f:'idle',rot:u=>.3*(1-u),ease:'in'},{t:4500,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk'},{t:600,x:bx+34,y:by+4,f:'ab_bend_1'},{t:800,x:bx+34,y:by+4,f:'ab_bend_2',ease:'lin'},{t:1100,x:pts[1][0],y:pts[1][1]+4,f:'ab_bend_2F',ease:'lin'},{t:1500,f:'ab_bend_3'},{t:1700,x:pts[2][0],y:pts[2][1]+4,f:'ab_bend_2',ease:'lin'},{t:2300,x:pts[3][0],y:pts[3][1]+4,f:'ab_bend_2F',ease:'lin'},{t:2650,f:'ab_bend_4'},{t:2800,f:'ab_bend_5',hop:6},{t:3150,f:'ab_bend_5'},{t:3600,f:'ab_bend_6'},{t:3900,x:pts[3][0]+10,y:pts[3][1]+4,f:'idle',rot:.3},{t:4000,x:'home',y:'home',f:'idle',rot:u=>.3*(1-u),ease:'in'},{t:4500,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('TNB points up the trail. "Short one. Promise."'); say(m.id,'around_the_bend'); scene('t6_trail',4.6,{P,back:true}); }],
     [600,()=>{ S('click'); scene('t6_big',.7,{x:H.x,y:H.base-8,txt:'POP',c:CREAM,sc:2}); setMessage(t.name+'\'s stuck boot pops free. Off we go.'); }],
@@ -1650,7 +1580,7 @@ T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=home
   const P={x0:620,xs,y:jy,in:900,go:1000,catch:hit,out:3700,gone:4700,giggle:3300,hs,cx,bump:16};
   const hx=cx+hs*JOJO_HAND.dx,hy=jy-hs*JOJO_HAND.dy;                                                       // where the frisbee has to arrive
   const sorted=list.map(f=>({f,x:ST.foe(f).x})).sort((a,b)=>b.x-a.x),spins=sorted.map((o,k)=>({f:o.f,t:hit+110*k,k}));
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'point'},{t:1500,f:'wind'},{t:1800,f:'throw'},{t:2300,f:'aim'},{t:2900,f:'hip'},{t:3300,f:'clap'},{t:3900,f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // he never leaves the line
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_jojo_1'},{t:1500,f:'ab_jojo_2'},{t:1800,f:'ab_jojo_3'},{t:2300,f:'ab_jojo_4'},{t:2900,f:'ab_jojo_5'},{t:3300,f:'ab_jojo_6'},{t:3900,f:'idle'},{t:4400,x:'home',y:'home',f:'idle'}]);   // he never leaves the line
   ST.play(E2,[
     [0,()=>{ setMessage('Jojo wanders in. She is in no hurry. She has never been in a hurry.'); scene('t6_jojo',4.8,{P}); scene('t6_spin',2.4,{list:spins,t0:2000,delay:2.0,h:22}); }],
     [600,()=>{ say(m.id,'round_with_jojo'); setMessage('TNB stays right where he is. "Hey, Jojo! Catch!"'); }],
@@ -1669,7 +1599,6 @@ T.round_with_jojo=E2=>{ const {m,fx}=E2,list=foesOf(E2),G=ST.group(list),me=home
 // He sprints back with a cardboard tray of cups and hands the friend theirs (their name is spelled wrong). Heal + VP.
 const cup=(x,y,sc,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); if(PROPART.draw('tnb/coffee_mug',0,-9,{h:19})) { gfx.restore(); return; }   // painted coffee mug
   PO([[-6,-13],[6,-13],[4.4,0],[-4.4,0]],WHITE,2); R(-5.2,-9,10.4,5,'#a8743c'); RO(-7,-17,14,5,'#3a2a22'); gfx.restore(); };
-SC.t6_tray=(s,u)=>{ const ms=s.t*1000; if(ms<s.from||ms>s.until) return; const h=hand(); gfx.globalAlpha=1; RO(h.x-16,h.y-3,32,5,'#b89868'); cup(h.x-9,h.y-4,1.1); cup(h.x+1,h.y-4,1.1); if(ms<s.cupGone) cup(h.x+11,h.y-4,1.1); steam(h.x-4,h.y-22,s.t,2,'#ffffff',16); };
 SC.t6_cafe=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.9); const x=s.x,y=s.y;
   RO(x-40,y-70,80,22,CREAM); label('CAFE',x-12,y-63,INK,2); RO(x+34,y-48,6,48,'#8a6436');
   for(let k=0;k<5;k++) { const hx=x-70+k*18; RO(hx-5,y-4,10,18,['#3f4a63','#6d4a5e','#4a6a52','#5a5a6a','#7a5a3a'][k]); EO(hx,y-12,6,6,['#f1c9a4','#d8a47c','#f1c9a4','#c48a60','#e8c4a0'][k]); }
@@ -1678,11 +1607,11 @@ SC.t6_cafe=(s,u)=>{ const ms=s.t*1000; gfx.globalAlpha=fin(u,.08)*fade(u,.9); co
 SC.t6_streak=(s,u)=>{ gfx.globalAlpha=(1-u)*.7; for(let k=0;k<5;k++) Ln(s.x0,s.y+k*7-14,s.x1,s.y+k*7-14,2,CREAM); gfx.globalAlpha=1; };
 T.coffee_run=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m,hit=2800,hm=homeOf(m);
   const cupGone=2500,cafeX=Math.min(200,Math.max(90,H.x-120));
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:420,x:-70,y:hm.y,f:'run',ease:'lin'},{t:1200,f:'carry'},{t:1500,x:sp.x,y:sp.y,f:'run',ease:'lin'},{t:2050,f:'carry'},{t:2450,f:'throw'},{t:2900,f:'hip'},{t:3500,f:self?'idle':'walkR'},{t:4100,x:'home',y:'home',f:'idle'}]);
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_coffee_1'},{t:420,x:-70,y:hm.y,f:'ab_coffee_1',ease:'lin'},{t:1200,f:'ab_coffee_3'},{t:1500,x:sp.x,y:sp.y,f:'ab_coffee_3',ease:'lin'},{t:2050,f:'ab_coffee_5'},{t:2450,f:'ab_coffee_4'},{t:2900,f:'ab_coffee_6'},{t:3500,f:self?'idle':'walkR'},{t:4100,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('"Coffee run." TNB is already gone.'); say(m.id,'coffee_run'); S('whoosh'); scene('t6_streak',.4,{x0:hm.x,x1:0,y:hm.y-40}); }],
     [500,()=>{ scene('t6_cafe',1.0,{x:cafeX,y:300}); setMessage('The line is long. He has done this on a film set at 5 a.m. He is fine.'); }],
-    [1200,()=>{ S('ting'); scene('t6_tray',1.5,{from:1200,until:2450,cupGone:99999}); setMessage('Tray of cups. One of them says '+t.name+', spelled wrong.'); }],
+    [1200,()=>{ S('ting'); setMessage('Tray of cups. One of them says '+t.name+', spelled wrong.'); }],
     [1500,()=>{ S('whoosh'); scene('t6_streak',.5,{x0:0,x1:Math.min(500,sp.x),y:sp.y-40}); }],
     [2000,()=>{ scene('t6_big',.7,{x:H.x,y:topY(H),txt:'COFFEE',c:CREAM,sc:3}); S('click'); }],
     [2450,()=>{ S('whoosh'); const h=hand(); ST.fly(()=>cup(0,0,1.6),h.x,h.y-8,H.x,H.mid,.3,30,0,{spin:.3}); }],

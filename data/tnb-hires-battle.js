@@ -44,14 +44,8 @@
   // Story and overworld-scene poses (battle size)
   sp.sit=Q('sit'); sp.toast=Q('sittoast'); sp.sitR=Q('sitR'); sp.sitToastR=Q('sittoastR'); sp.hug=Q('hug'); sp.whisper=Q('whisper');
   sp.wave=Q('wave'); sp.cheers=Q('toast'); sp.talk=Q('talk'); sp.talkR=Q('talkR'); sp.laugh=Q('laugh'); sp.lookDown=Q('crouchlook');
-  // Longboard poses (art/chars/tnb-board.webp, sheet src/tnb-board-v1.png): he rides, so the painted board is part of each frame and its bottom row is the wheels.
-  // Names: bRide (rolling), bPush, bCarveIn / bCarveOut (S-turn leans), bTuck (low and fast), bTop (one foot on the board at the top of a hill), bOllie, bKick
-  // (board flipping under him), bLob (throwing a mug), bSlide (Bert slide), bWobble, bDrop (holding the board). Each has a mirrored twin ending in R (faces right).
-  if(TNB_HIRES.board) {
-    const Y=TNB_HIRES.board,BQ=(k)=>{ const r=paintRows(rk(Y[k]),'tnbBoard',k,false); if(sp.eyeAt) sp.eyeAt.set(r,meta(r).eye); if(sp.handAt) sp.handAt.set(r,metaX(r)); return r; };
-    const BN={bRide:'ride_idle',bPush:'push',bCarveIn:'carve_in',bCarveOut:'carve_out',bTuck:'tuck',bTop:'top_of_hill',bOllie:'ollie',bKick:'kick',bLob:'lob',bSlide:'bert_slide',bWobble:'wobble',bDrop:'drop_board'};
-    for(const n in BN) { sp[n]=BQ(BN[n]); sp[n+'R']=mir(sp[n]); }
-  }
+  // Ability frames (tools/sprite-bake/ability_frames_tnb.py): f:'ab_mug_1' etc. in a move's keys; 'F' = facing right.
+  { const A=TNB_HIRES.ab; for(const k in A) { const r=paintRows(rk(A[k]),'tnbAb',k,false); if(sp.eyeAt) sp.eyeAt.set(r,sp.eyeAt.get(sp.idle)||{col:M.eye[0],row:M.eye[1]}); if(sp.handAt) sp.handAt.set(r,metaX(r)); sp[k]=r; sp[k+'F']=mir(r); } }
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.tnb={scale:.8*SZ,pal:TNB_HIRES.ko.pal,rows:paintRows(TNB_HIRES.ko.rows.slice(),'tnbKo','ko',true)};
   // His shirt is cream under an apron, not a dark tee, so outfit recolouring does not apply to the painted TNB.

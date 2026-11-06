@@ -7,7 +7,7 @@
   const AT=TNB_HIRES.atlas;
   paintedAtlas('tnbBattle',AT.bt.src,AT.bt.rects,AT.bt.k);
   paintedAtlas('tnbPose',AT.pose.src,AT.pose.rects,AT.pose.k);   // extra battle and story poses (2026-10-29)
-  paintedAtlas('tnbBoard',AT.board.src,AT.board.rects,AT.board.k);   // longboard battle poses (2026-10-29)
+  paintedAtlas('tnbAb',AT.ab.src,AT.ab.rects,AT.ab.k);   // ability frames: f:'ab_mug_1' etc. in a move's keys (tools/sprite-bake/ability_frames_tnb.py)
   paintedAtlas('tnbKo',AT.ko.src,AT.ko.rects,AT.ko.k);
   paintedAtlas('tnbOw',AT.ow.src,AT.ow.rects,AT.ow.k);
   // The sheet draws TNB facing LEFT; the game's 'side' set faces RIGHT (its 'left' is the mirror), so side = flipped left frames.
