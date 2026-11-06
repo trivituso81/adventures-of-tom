@@ -46,7 +46,7 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 | Rose | rose-emotions-v1.png | 235 x 425 |
 | Justin | justin-emotions-v1.png | 273 x 430 |
 | Deedee | deedee-emotions-v1.png | 247 x 432 |
-| Boppy | boppy-emotions-v1.png | 268 x 426 |
+| Boppy | boppy-emotions-v2.png | 210 x 338 |
 | Aunt Ellie | ellie-emotions-v1.png | 254 x 426 |
 | Olivia | olivia-emotions-v1.png | 244 x 425 |
 | Amy | amy-emotions-v1.png | 263 x 426 |

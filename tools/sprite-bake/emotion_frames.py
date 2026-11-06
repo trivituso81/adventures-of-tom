@@ -1,6 +1,6 @@
 """Emotion sheets (Tom 2026-11-06 00:03, docs/EMOTIONS.md): cut each painted 4 x 2 emotion sheet into its 8 full-body figures and
 index them for later use in scenes and dialogue. Used exactly as painted (no resizing, no flipping).
-Source: art/raw/characters/<id>-emotions-v1.png (cells in reading order: happy, loving, sad, angry, scared, surprised, proud, unimpressed).
+Source: newest art/raw/characters/<id>-emotions-v<N>.png (cells in reading order: happy, loving, sad, angry, scared, surprised, proud, unimpressed).
 Writes art/emotions/<id>.webp (one row of 8 equal frames, feet on the bottom edge, figure centered) and data/emotions.js (the index).
 Usage: python3 tools/sprite-bake/emotion_frames.py [ids]   (no ids = every sheet found). CHECK=/tmp/x.png writes a contact sheet."""
 import os, sys, re, glob, json
@@ -12,10 +12,15 @@ from walk_sheet_frames import _key
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions')
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
-TAG = 'emo3'
+TAG = 'emo8'
+
+def src_path(cid):
+    # newest approved sheet for this character (boppy-emotions-v2.png replaces v1 as the source, Tom 2026-11-06)
+    vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-emotions-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
+    return vs[-1]
 
 def cut(cid):
-    rgba = _key(np.array(Image.open(os.path.join(RAW, f'{cid}-emotions-v1.png')).convert('RGB')))
+    rgba = _key(np.array(Image.open(src_path(cid)).convert('RGB')))
     H, W = rgba.shape[:2]; figs = []
     for i in range(8):
         r, c = divmod(i, 4)
@@ -46,7 +51,7 @@ def bake(cid):
     return {'src': f'art/emotions/{cid}.webp?v={TAG}', 'fw': fw, 'fh': fh, 'frames': rects}, figs
 
 if __name__ == '__main__':
-    ids = sys.argv[1:] or sorted(re.sub(r'-emotions-v1\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(RAW, '*-emotions-v1.png')))
+    ids = sys.argv[1:] or sorted(re.sub(r'-emotions-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(RAW, '*-emotions-v*.png')))
     idx_path = os.path.join(ROOT, 'data/emotions.js'); index = {}
     if os.path.exists(idx_path):
         m = re.search(r'EMOTION_ART=(\{.*?\});', open(idx_path).read(), re.S)

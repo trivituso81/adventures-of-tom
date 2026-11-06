@@ -1,3 +1,9 @@
+## 2026-11-06 (363): Boppy's new emotion sheet is installed (`emo8`)
+
+- Fact: Tom approved `boppy-emotions` v2 (4 x 2, all 8 moods, `art/raw/characters/boppy-emotions-v2.png`, 1408 x 704). Boppy's full-body emotion frames (`art/emotions/boppy.webp`, 210 x 338 per frame), his 8 dialogue faces (`portraits/emo/boppy-*.webp`) and his `boppyemo` story poses now come from it. v1 stays in `art/raw` as an approved source only.
+- `tools/sprite-bake/emotion_frames.py` now cuts from the newest `<id>-emotions-v<N>.png` (was fixed to v1). Re-running it with no ids would also re-cut Tom from v2, so pass ids.
+- No mood calls changed. Rebake with no change reproduced the repo files first. Tests: ch1Theft, ch3Snag, ch3Pier in portrait and landscape (no errors), tag_check ok, smoke FAILS: [], unused_voice 0. `EMO_V` and the emotion tags moved to `emo8`.
+
 ## 2026-11-06 (362): Deedee looks surprised when the Big Mudling grabs her pie (`deedeesurp1`)
 - Tom (08:14): Deedee did not look surprised at the pie steal. Fact: moods fire only on spoken lines and she has none between the blob's reach and her angry "That's my GOOD tin!".
 - Fix: data/scenes.js SCENES.ch1Theft holds her in `em_surprised` from landing at her spot through the reach, grab, Rose's line and the glance, then clears it before the blob scurries off so her angry line gets its normal mood. Her sheet is preloaded at the door sound (no low-res flash).
