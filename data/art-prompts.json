@@ -14096,8 +14096,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is her walk sheet. Picture 3 is a battle move sheet of another character, TNB, throwing a flying disc to her. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, glasses, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail and figure size. From picture 3 copy only the viewing angle, the figure size and the feet on one ground line, never the person.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell. A held flying disc is painted in the same style as the character, white with a thin colored rim. Draw only her, no other people.\n\nIn every frame she faces the same way as TNB does in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Frisbee Golf. She is in no hurry, ever.\n\nRow 1:\n1. Standing, turning toward someone off to the side, one hand lifted in a small easy wave, relaxed.\n2. Jogging backwards with long easy steps, eyes up on something flying toward her, both hands rising to catch.\n3. Leaping off the ground, one arm stretched up high with the fingers open, eyes on the disc, mouth open.\n\nRow 2:\n4. Landing, the disc caught in one hand held close to her face, a big surprised grin.\n5. Hopping with joy, the disc held high in one raised hand, the other fist pumped, a big laugh.\n6. Standing relaxed, the disc tucked under one arm, the other hand giving a calm thumbs up, a small satisfied smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-young-walk-sheet-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793997977325
+    }
+   ],
    "rejects": [],
    "id": "boppy-young-walk-sheet",
    "tab": "Characters",
