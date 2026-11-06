@@ -14103,8 +14103,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Inside Voices!.\n\nRow 1:\n1. Standing with one hand reaching up toward a light switch above her head, eyes on the room.\n2. Flicking the switch with one quick finger, a calm teacher face.\n3. Raising one hand high with the palm open, waiting, eyebrows raised.\n\nRow 2:\n4. Clapping her hands together sharply in front of her chest, mouth closed, a stern look.\n5. One finger held to her lips, eyes wide, leaning forward in a shush.\n6. Standing with her hands folded in front of her, serene, one eyebrow raised."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-inside-voices-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000296700
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-inside-voices",
    "tab": "Characters",
