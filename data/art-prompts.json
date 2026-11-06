@@ -1413,8 +1413,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Floor Is Lava!.\n\nRow 1:\n1. Pointing at the ground with one finger, the other hand cupped at her mouth, yelling, eyes huge.\n2. Holding a puffy square couch seat cushion over her head in both hands, about to throw it down.\n3. Jumping onto a puffy couch seat cushion on the ground, both knees tucked, arms up.\n\nRow 2:\n4. Standing on the couch seat cushion, wobbling on one foot, arms out wide for balance, laughing.\n5. Hopping on the cushion with both feet, pointing ahead with one finger, mouth open in a shout.\n6. Standing safe on the cushion, both fists raised, a triumphant grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/rose-ab-teaparty-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954725508
+    }
+   ],
    "rejects": [],
    "id": "rose-ab-teaparty-ult",
    "tab": "Characters",
