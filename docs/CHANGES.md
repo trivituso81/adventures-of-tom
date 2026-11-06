@@ -1,3 +1,7 @@
+## 2026-11-06 (309): Emotion index of every story line (`emo6`)
+- Tom (00:26): "index all chapters where the 8 saved emotions can be used for each character as it corresponds to specific lines of dialogue".
+- docs/EMOTION_INDEX.md: chapters 1 to 20 plus Nine Scoops, every line spoken by a cast member with an emotion sheet (Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Aunt Ellie, Olivia, Nara), tagged happy, loving, sad, angry, scared, surprised, proud or unimpressed. 1,826 lines read, 1,713 listed, 113 plain information lines left out. Michael and Jojo skipped (no sheet). docs/emotion-index-lines.tsv has all 1,826 with file and line.
+- Extracted from data/scenes*.js and bonus-nine-scoops.js (talk blocks plus the [name, line] tables in ch 16, 19, 20). Docs only, no game file changed.
 ## 2026-11-06 (308): Dialogue portrait fills the box height (`dlgport1`)
 - Tom (00:24): "the portrait should fill the entire vertical area of the space, expanding proportionately".
 - The face is now square, flush to the dialogue box's left, top and bottom edges, so its size follows the box height (portrait 85 px, landscape 100 px on the test phone). The text column and the speaker tab move right to make room. `fitDialogPortrait` in engine/overworld.js sets `--dp-w` (capped at 38% of the box width); CSS at the end of the dialogue block in index.html.

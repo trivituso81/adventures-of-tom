@@ -27,6 +27,10 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 - Entries exist for every character with a hero picture: Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Aunt Ellie, Olivia, Nara (11). Michael and Jojo need a hero picture first.
 - Approved sources: art/raw/characters/<id>-emotions-v1.png.
 
+## Dialogue index (fact, `emo6`)
+
+- docs/EMOTION_INDEX.md: every cast line in chapters 1 to 20 and Nine Scoops tagged with one of the 8 moods (1,713 lines; 113 plain information lines left out), by chapter, as Character | Emotion | Dialogue. docs/emotion-index-lines.tsv: the same tags for all 1,826 lines with file and source line, for wiring `mood:` later. First-pass tags; Tom corrects. Nothing in the game reads them yet.
+
 ## Index (fact, `emo3`)
 
 - Cutter: `python3 tools/sprite-bake/emotion_frames.py [ids]` (no ids = every sheet; `CHECK=/tmp/x.png` writes a contact sheet). Figures used as painted, at sheet resolution, no resize or flip. It drops one generator smudge (a pale pink blob on top of Olivia's hair in Happy).
