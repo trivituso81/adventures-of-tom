@@ -3003,7 +3003,7 @@
    "group": "Old Oak"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -3018,6 +3018,13 @@
      "date": "2026-11-06",
      "from": "v2",
      "at": 1793926634077
+    },
+    {
+     "n": 2,
+     "file": "art/raw/enemies/enemy-chairman-v3.png",
+     "date": "2026-11-06",
+     "from": "v5",
+     "at": 1793927471944
     }
    ],
    "rejects": [
