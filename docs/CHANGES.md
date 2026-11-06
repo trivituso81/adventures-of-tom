@@ -1,3 +1,7 @@
+## 2026-11-05 (276): Flying enemies hover and bob at the original pace (`idle3`)
+- Tom (19:33): flying enemies are the exception to the grounded idle: they stay raised off the ground and bob at the old pace. `B2_FLYERS` in `engine/battle2-ui.js`: skeeter, tickets, boommoth, fogwisp, hushling, pausesprite, greynote, jetlag, redeye (my call on which enemies fly; add an id to the set to make another hover). They hover 14 units (`B2_HOVER`) and bob plus or minus 2 at 3 rad/s (the pre-`idle1` pace); their shadow stays on the ground, a little smaller and lighter. Everyone else keeps `idle2` (no movement, tiny stretch). Party unchanged.
+- Looked at a skeeter, a Mudling and a Pause Sprite against Tom, Grace, Rose: no errors.
+
 ## 2026-11-05 (275): Art Library: Square v7 fix card (`sqfix1`)
 - Tom 19:31: approved Square v7 has tall enough exit boards, but Hush Library has no door and Kettle Cottage has two signs (same two flaws as the v6 reject note). Reject notes never reach the generator, and the prompt never asked for a library door.
 - New entry `area-square-fix` (Areas, The Square, 4:3): attaches approved `art/raw/areas/area-square-v7.png` and asks for only two edits (arched front door with steps on Hush Library; remove the oval facade plaque on Kettle Cottage, keep the hanging teapot sign).

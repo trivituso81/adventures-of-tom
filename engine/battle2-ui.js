@@ -104,6 +104,9 @@ function b2FoeFrame(f,R0) {
   if(f._hurtOn||now<(f._hurtUntil||0)) return FR.hurt;
   return R0;
 }
+// Enemies that fly or float (Tom, 2026-11-05): the only ones raised off the ground, bobbing at the old pace. Add an id here to make another enemy hover.
+const B2_FLYERS=new Set(['skeeter','tickets','boommoth','fogwisp','hushling','pausesprite','greynote','jetlag','redeye']);
+const B2_HOVER=14;
 function b2DrawEnemies(t) {
   const list=B2.foes.slice().sort((a,b)=>a.py-b.py);
   const liftY=battle.lift?(()=>{ const q=battle.lift.t/battle.lift.dur; return q<.7?Math.round(Math.sin(q/.7*Math.PI/2)*120):Math.round(120*(1-(q-.7)/.3)); })():0;
@@ -127,7 +130,8 @@ function b2DrawEnemies(t) {
     const lq=f.lunge>0?Math.sin(Math.PI*(1-f.lunge/.55)):0;
     const tq=B2.foeTarget&&f.lunge>0?BATTLE_POS[B2.foeTarget.idx]:null;
     const lungeX=tq?(tq.x*3-60-f.px)*.55:70;
-    const bob=0,breath=dying?0:(.5+.5*Math.sin(t*1.7+f.idx*1.7))*.008;   // idle: a slight stretch anchored at the feet (never lifts off the ground)
+    const fly=B2_FLYERS.has(f.id);   // flyers hover off the ground and bob at the original pace; everyone else stays grounded with a tiny breath
+    const bob=fly&&!dying?Math.round(Math.sin(t*3+f.idx*1.7)*2)-B2_HOVER:0,breath=dying||fly?0:(.5+.5*Math.sin(t*1.7+f.idx*1.7))*.008;
     const spawn=f.spawnT!=null&&f.spawnT<.6?f.spawnT/.6:1;
     let sx=0,sy=0;
     if(aimed) {
@@ -138,7 +142,7 @@ function b2DrawEnemies(t) {
     }
     const hq=f.hold>0&&!dying?Math.sin(Math.PI/2*Math.min(1,(performance.now()-(f.holdT0||0))/(B2_WINDUP/b7Speed()))):0;   // wind-up: lean back 8 px (away from the party) and settle 3 px
     const x=Math.round(f.px-w/2+lq*lungeX+hq*8+(f.shake>0?rand(-4,4):0)+sx),y=Math.round(f.py-h+bob-lq*10+hq*3-q*30+sy+(1-spawn)*40);
-    if(!dying) ellipse(f.px,f.py-1,sw*.48*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),'rgba(30,50,40,.3)');
+    if(!dying) ellipse(f.px,f.py-1,sw*.48*(fly?.8:1)*(aimed&&liftY?Math.max(.3,1-liftY/120):1),Math.max(4,sc*2),fly?'rgba(30,50,40,.22)':'rgba(30,50,40,.3)');
     const flash=f.flash>0||(dying&&q>.1)||(aimed&&battle.flashEnemy>0);
     const sway=(f.st.goofed||f.st.staggered)&&!dying?Math.sin(t*5+f.idx)*.14:0;
     // A set piece can spin a monster about its middle and shift it (f.spin, f.ox, f.oy). They count only while the
