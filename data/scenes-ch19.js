@@ -269,7 +269,7 @@ TRIGGERS.push(
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   // Tom's mailbox on Second Avenue is the way down, from chapter 19 until the feast.
-  if(STORY.chapter===19&&flag('ch18-done')&&!flag('ch19-after')) ch17Add('jpark','dlmail',7,20,1,1,'Tom’s mailbox','A blue mailbox on a post. The slot is glowing a faint gold, and the gold goes down.'); else ch17Remove('jpark','dlmail');
+  if(STORY.chapter===19&&flag('ch18-done')&&!flag('ch19-after')) ch17Add('jpark','dlmail',9,18,1,1,'Tom’s mailbox','A blue mailbox on a post. The slot is glowing a faint gold, and the gold goes down.'); else ch17Remove('jpark','dlmail');
   // The memory rooms are walked alone, as the person whose room it is.
   const room=STORY.chapter===19?CH19_ROOMS.find(r=>r.map===currentMap.id):null;
   SOLO_SKIN=room?room.id:null;

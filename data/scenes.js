@@ -351,9 +351,9 @@ SCENES.ch2Starter=[
 SCENES.ch2Smog=[
   {flag:'ch2-smog'}, {call:()=>{ storyWorld(); sfx.whoosh(); }},
   {wait:.8},
-  {place:'Mr. Washington',at:[7,19],dir:'left'},
-  {walk:'tom',to:routeTo('tom',5,19),speed:.22}, {face:'tom',dir:'right'},
-  {place:'tnb',at:[4,19],dir:'right'}, {place:'nara',at:[5,20],dir:'up'},
+  {place:'Mr. Washington',at:[10,18],dir:'left'},
+  {walk:'tom',to:routeTo('tom',8,18),speed:.22}, {face:'tom',dir:'right'},
+  {place:'tnb',at:[7,18],dir:'right'}, {place:'nara',at:[8,19],dir:'up'},
   {talk:'Tom',lines:['Mr. Washington! Is everything okay?']},
   {talk:'Mr. Washington',lines:['Tom. Back in 1979, this whole block...']},
   {wait:1.2},
@@ -361,9 +361,9 @@ SCENES.ch2Smog=[
   {talk:'TNB',lines:['He\'s been saying that for a while, babe.']},
   {talk:'Mr. Washington',lines:['Such a nice afternoon. It should always be this afternoon.']},
   {talk:'Tom',lines:['Excuse me, smog. That was UNCALLED for.'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
-  {spawn:{name:'Smoglet',monster:'smoglet',at:[12,19],dir:'left'}},
-  {spawn:{name:'Smoglet B',monster:'smoglet',at:[13,20],dir:'left'}},
-  {all:[{walk:'Smoglet',to:[[11,19],[10,19],[9,19],[8,19]],speed:.4},{walk:'Smoglet B',to:[[12,20],[11,20],[10,20],[9,20],[8,20]],speed:.36}]},
+  {spawn:{name:'Smoglet',monster:'smoglet',at:[14,18],dir:'left'}},
+  {spawn:{name:'Smoglet B',monster:'smoglet',at:[14,20],dir:'left'}},
+  {all:[{walk:'Smoglet',to:[[13,18],[12,18],[11,18]],speed:.4},{walk:'Smoglet B',to:[[13,20],[12,20],[11,20],[10,20],[10,19]],speed:.36}]},
   {talk:'Smoglet',lines:['Cough. Nice street. We\'re going to sit on it for a while. Forever, actually.']},
   {talk:'TNB',lines:['Babe. Remember movie night? You threw the whole popcorn bowl.']},
   {talk:'Tom',lines:['I was startled. Briefly. With dignity.']},
@@ -466,9 +466,9 @@ SCENES.ch2AfterBoss=[
 // 11. 2nd Ave: Mr. Washington finishes his sentence. Chapter complete.
 SCENES.ch2End=[
   {flag:'ch2-done',value:'pending'},
-  {place:'Mr. Washington',at:[7,19],dir:'left'},
-  {walk:'tom',to:routeTo('tom',5,19),speed:.22}, {face:'tom',dir:'right'},
-  {place:'tnb',at:[4,19],dir:'right'}, {place:'nara',at:[5,20],dir:'up'},
+  {place:'Mr. Washington',at:[10,18],dir:'left'},
+  {walk:'tom',to:routeTo('tom',8,18),speed:.22}, {face:'tom',dir:'right'},
+  {place:'tnb',at:[7,18],dir:'right'}, {place:'nara',at:[8,19],dir:'up'},
   {talk:'Mr. Washington',lines:['...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.','Where was I? Oh. I was done. That was the whole story.']},
   {talk:'Mr. Washington',lines:['Funny. For a while there I didn\'t want anything to change. Then I remembered the best parts all came from things changing.']},
   {talk:'Tom',lines:['Keep the old windows, though.']},
@@ -2111,7 +2111,7 @@ SCENES.ch6AfterBoss=()=>[
 SCENES.ch6End=[
   {flag:'ch6-done',value:'pending'},
   {walk:'tom',to:routeTo('tom',12,20),speed:.2}, {face:'tom',dir:'up'},
-  {place:'Olivia',at:[11,19],dir:'down'}, {place:'Michael',at:[13,19],dir:'down'},
+  {place:'Olivia',at:[12,19],dir:'down'}, {place:'Michael',at:[13,19],dir:'down'},
   {place:'tnb',at:[11,20],dir:'up'}, {place:'nara',at:[13,20],dir:'up'},
   {spawn:{name:'Bernadette',look:'bernadette',at:[10,19],dir:'right'}},
   {talk:'Olivia',lines:['Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn\'t put it down. He\'s eating cereal with one hand.']},
@@ -2899,10 +2899,10 @@ SCENES.ch8AfterBoss=()=>[
 // 11. Jefferson Boulevard, closed for the 2nd Ave potluck: the feast. Rewards. A letter for Tom. Chapter complete.
 SCENES.ch8End=[
   {flag:'ch8-done',value:'pending'}, {flag:'ch8-feast'},
-  {walk:'tom',to:routeTo('tom',13,11),speed:.2}, {face:'tom',dir:'up'},
-  {place:'tnb',at:[12,11],dir:'up'}, {place:'nara',at:[14,11],dir:'up'},
-  {place:'Olivia',at:[11,8],dir:'down'}, {place:'Michael',at:[12,8],dir:'down'}, {place:'Mr. Washington',at:[16,8],dir:'down'},
-  {spawn:{name:'Bernadette',look:'bernadette',at:[14,8],dir:'down'}},
+  {walk:'tom',to:routeTo('tom',14,10),speed:.2}, {face:'tom',dir:'up'},
+  {place:'tnb',at:[13,10],dir:'up'}, {place:'nara',at:[15,10],dir:'up'},
+  {place:'Olivia',at:[12,7],dir:'down'}, {place:'Michael',at:[13,7],dir:'down'}, {place:'Mr. Washington',at:[16,7],dir:'down'},
+  {spawn:{name:'Bernadette',look:'bernadette',at:[14,7],dir:'down'}},
   {talk:'Bernadette',lines:['Forty loaves. Six o’clock. On the dot. Potluck committee report: we\'re a success.','The gumbo is hot. The casserole is hot. Everything is hot. I\'d like it noted.']},
   {talk:'TNB',lines:['Noted, Bernadette.']},
   {talk:'Olivia',lines:['Tom. TOM. Nara is eating. Look at her. She\'s EATING.']},
@@ -3040,12 +3040,12 @@ STORY_MAPFX.push(time=>{
   if(id==='jpark'&&STORY.mode==='full'&&STORY.chapter===8) {
     if(!flag('ch8-clear')) { c.globalAlpha=.08; rect(0,0,M.w*T,M.h*T,'#9fd8ff'); c.globalAlpha=1; }
     if(flag('ch8-feast')&&flag('ch8-done')!==true) {   // the potluck table down Jefferson Boulevard (drawn only; the scene keeps everyone off it)
-      const x0=10*T-8,x1=18*T+8,y=9*T+12;
+      const x0=12*T-8,x1=18*T+8,y=8*T+12;
       ellipse((x0+x1)/2,y+26,(x1-x0)/2,5,'#00000040');
       rect(x0,y,x1-x0,22,OUT); rect(x0+1,y+1,x1-x0-2,20,'#f4f0e6');
       for(let k=x0+1;k<x1-1;k+=8) rect(k,y+1,4,20,'#d94a3a40');
       for(const lx of [x0+6,x1-10]) rect(lx,y+20,4,10,OUT);
-      for(let k=0;k<9;k++) { const dx=x0+14+k*28; ellipse(dx,y+8,9,5,OUT);
+      for(let k=0;k<9;k++) { const dx=x0+14+k*(x1-x0-28)/8; ellipse(dx,y+8,9,5,OUT);
         ellipse(dx,y+8,8,4,['#c98a4a','#e8c84a','#c8463a','#7a4a22','#c98a4a','#6ac06a','#e86a3a','#c98a4a','#f4f0e6'][k]);
         if(k%3===0) { c.globalAlpha=.5; ellipse(dx+Math.sin(time*2+k)*2,y-4-(time*10+k*5)%10,3,4,'#ffffff'); c.globalAlpha=1; } }
     }

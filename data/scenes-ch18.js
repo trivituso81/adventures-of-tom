@@ -103,7 +103,7 @@ SCENES.ch18After=()=>[
   {talk:'Vance',lines:['You are not leaving. You are being sent. That is a different thing.']},
   {call:()=>{ intro.whiteout=true; }},
   {fade:'out',time:1.6},
-  {call:()=>{ ch18TomGone(); ch17Place('jpark',4,19,'up'); CH18FX.light=null; }},
+  {call:()=>{ ch18TomGone(); ch17Place('jpark',8,19,'up'); CH18FX.light=null; }},
   {wait:.8},
   {fade:'in',time:2.2},
   {call:()=>{ intro.whiteout=false; }},

@@ -29,7 +29,7 @@ with sync_playwright() as pw:
     check('Grace, Rose, Amy, TNB out front; Nara on the bench',pg.evaluate("()=>['grace','rose','amy','tnb'].every(i=>party.some(p=>p.id===i))&&STORY.bench.includes('nara')"))
     check('opening scene finishes',adv(pg,200,"()=>flag('ch19-open')===true&&!intro.active")); pg.wait_for_timeout(600); shot(pg,'mailbox')
     check('mailbox is on the street',pg.evaluate("()=>worlds.jpark.objects.some(o=>o.kind==='dlmail')"))
-    pg.evaluate("()=>{ player.x=7; player.y=19; player.facing='down'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400); shot(pg,'mailbox-prompt')
+    pg.evaluate("()=>{ player.x=9; player.y=17; player.facing='down'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400); shot(pg,'mailbox-prompt')
     pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
     check('ride down: the hub',adv(pg,60,"()=>currentMap.id==='deadletter'")); pg.wait_for_timeout(600)
     check('hub scene plays',adv(pg,200,"()=>flag('ch19-hub')===true&&!intro.active")); pg.wait_for_timeout(500); shot(pg,'hub')

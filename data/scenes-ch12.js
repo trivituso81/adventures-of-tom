@@ -14,7 +14,7 @@ Object.assign(items,{
 
 // Put the party on Jefferson Park, at the street by Tom's house.
 function ch12Place() {
-  currentMap=worlds.jpark; player.x=4; player.y=19; player.facing='up'; player.move=null; player.hidden=false;
+  currentMap=worlds.jpark; player.x=8; player.y=19; player.facing='up'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 SCENES.ch12Open=[

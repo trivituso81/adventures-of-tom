@@ -77,14 +77,14 @@ const LA_HOUSES=[
   {id:'lofts',area:'blvd',name:"TNB's Loft",label:'LOFTS',x:7,y:16,w:5,h:5,style:'loft',floors:3,wall:'#8a5a44',stone:'#d9c0a0',roof:'#4a3a32',awning:'#2c2c33',awning2:'#2c2c33',sign:'#2c2c33',ink:'#f4ecd2',home:true,ghost:'FURNITURE'},
   {id:'tower',area:'blvd',name:'The Grand Tower',label:'GRAND',x:16,y:16,w:5,h:5,door2:true,style:'tower',floors:9,wall:'#6f9fc4',stone:'#c9d6de',roof:'#3f5a74',home:true},
   {id:'lacab',area:'blvd',name:'Angel City Cab Co.',label:'CABS',x:22,y:4,w:5,h:5,style:'deco',floors:1,wall:'#f4e6c8',stone:'#fff4dc',roof:'#d9a43a',awning:'#2c2c33',awning2:'#f2c75a',taxi:true,icon:'cab'},
-  {id:'creole',area:'jpark',name:"Odette's Creole Kitchen",label:'CREOLE',x:3,y:3,w:5,h:4,style:'strip',wall:'#e8c060',roof:'#7a3a5a',awning:'#4a7a3a',awning2:'#f4e6c0',sign:'#4a2a4a',ink:'#ffd968',icon:'pot',mural:true},
-  {id:'pupuseria',area:'jpark',name:'Pupuseria La Ceiba',label:'PUPUSAS',x:8,y:3,w:5,h:4,style:'strip',wall:'#f2e6d0',roof:'#2f6fb3',awning:'#2f6fb3',awning2:'#ffffff',sign:'#2f6fb3',ink:'#ffffff',icon:'leaf',grille:true},
-  {id:'boards',area:'jpark',name:'Board Room',label:'SKATE',x:16,y:3,w:5,h:4,style:'strip',wall:'#d6e6ec',roof:'#2f4e6a',awning:'#e2793a',awning2:'#2c2c33',sign:'#2c2c33',ink:'#f2a05a',icon:'board',mural:true},
-  {id:'juicebar',area:'jpark',name:'Very Green Juice',label:'JUICE',x:23,y:3,w:5,h:4,style:'store',wall:'#f4f6f0',roof:'#4f8a4a',awning:'#6fb35a',awning2:'#f4fbe8',sign:'#f4fbe8',ink:'#3f7a3a',icon:'leaf'},
-  {id:'tomhouse',area:'jpark',name:"Tom's House",label:'3468',x:1,y:13,w:5,h:5,style:'tom',wall:'#cbc2aa',roof:'#4e4e52',trim:'#ece6d6',doorColor:'#c98a44'},
-  {id:'jordansam',area:'jpark',name:"Jordan and Sam's Place",label:'2732',x:9,y:13,w:5,h:5,style:'craftsman',cond:'flip',wall:'#2c2c2e',roof:'#1d1d20',trim:'#f4f4f0',doorColor:'#c9a24a'},
-  {id:'casa',area:'jpark',name:'Casa Alvarez',label:'ALVAREZ',x:16,y:13,w:5,h:5,style:'craftsman',cond:'crowded',wall:'#d9a05a',roof:'#6a4a3a',trim:'#f4e6c8',doorColor:'#2f8a8a'},
-  {id:'dakota',area:'jpark',name:"Dakota and Ryan's Place",label:'2740',x:23,y:13,w:5,h:5,style:'craftsman',cond:'flip',wall:'#f2f2ee',roof:'#4a4f58',trim:'#2c2c2e',doorColor:'#b98a5a'},
+  {id:'creole',area:'jpark',name:"Odette's Creole Kitchen",label:'CREOLE',x:2,y:2,w:7,h:5,doorX:6,style:'strip',wall:'#e8c060',roof:'#7a3a5a',awning:'#4a7a3a',awning2:'#f4e6c0',sign:'#4a2a4a',ink:'#ffd968',icon:'pot',mural:true},
+  {id:'pupuseria',area:'jpark',name:'Pupuseria La Ceiba',label:'PUPUSAS',x:9,y:3,w:4,h:4,doorX:11,style:'strip',wall:'#f2e6d0',roof:'#2f6fb3',awning:'#2f6fb3',awning2:'#ffffff',sign:'#2f6fb3',ink:'#ffffff',icon:'leaf',grille:true},
+  {id:'boards',area:'jpark',name:'Board Room',label:'SKATE',x:18,y:3,w:5,h:4,doorX:20,style:'strip',wall:'#d6e6ec',roof:'#2f4e6a',awning:'#e2793a',awning2:'#2c2c33',sign:'#2c2c33',ink:'#f2a05a',icon:'board',mural:true},
+  {id:'juicebar',area:'jpark',name:'Very Green Juice',label:'JUICE',x:23,y:3,w:4,h:4,doorX:24,style:'store',wall:'#f4f6f0',roof:'#4f8a4a',awning:'#6fb35a',awning2:'#f4fbe8',sign:'#f4fbe8',ink:'#3f7a3a',icon:'leaf'},
+  {id:'tomhouse',area:'jpark',name:"Tom's House",label:'RIVITUSO',x:1,y:12,w:9,h:4,doorX:6,door2:true,style:'tom',wall:'#cbc2aa',roof:'#4e4e52',trim:'#ece6d6',doorColor:'#c98a44'},
+  {id:'jordansam',area:'jpark',name:"Jordan and Sam's Place",label:'NOVAK',x:6,y:7,w:7,h:4,doorX:9,style:'craftsman',cond:'flip',wall:'#2c2c2e',roof:'#1d1d20',trim:'#f4f4f0',doorColor:'#c9a24a'},
+  {id:'casa',area:'jpark',name:'Casa Alvarez',label:'ALVAREZ',x:18,y:8,w:8,h:4,doorX:23,style:'craftsman',cond:'crowded',wall:'#d9a05a',roof:'#6a4a3a',trim:'#f4e6c8',doorColor:'#2f8a8a'},
+  {id:'dakota',area:'jpark',name:"Dakota and Ryan's Place",label:'WESTON',x:21,y:13,w:8,h:3,doorX:24,door2:true,style:'craftsman',cond:'flip',wall:'#f2f2ee',roof:'#4a4f58',trim:'#2c2c2e',doorColor:'#b98a5a'},
 ];
 
 // ---------- Outdoor areas ----------
@@ -143,7 +143,7 @@ const LA_AREAS=[
       [16,10],[16,11],[15,11],[15,12],[14,12],[14,13],[13,13],[20,10],[20,11],[21,11],[21,12],[21,13],[22,13]],
     // Chapter 4: the STUDIO arch leads to the studio lot (Sunset Gold Studios).
     border:{kind:'citywall',open:[[13,25],[14,25],[15,25],[16,25],[29,10],[29,11],[29,12],[29,13]]},
-    exits:[[2,2,'griffith',11,20,'up','path'],[3,2,'griffith',12,20,'up','path'],[13,25,'jpark',14,1,'down'],[14,25,'jpark',15,1,'down'],[15,25,'jpark',16,1,'down'],[16,25,'jpark',17,1,'down'],[27,7,'studio',1,10,'right'],[28,7,'studio',1,11,'right']],
+    exits:[[2,2,'griffith',11,20,'up','path'],[3,2,'griffith',12,20,'up','path'],[13,25,'jpark',13,1,'down'],[14,25,'jpark',14,1,'down'],[15,25,'jpark',15,1,'down'],[16,25,'jpark',16,1,'down'],[27,7,'studio',1,10,'right'],[28,7,'studio',1,11,'right']],
     // Chapter 2: the trail is closed for smog until Tom and TNB work out where it is coming from.
     gates:[{at:[[2,2],[3,2]],look:'barrier',dy:.4,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
       lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','Somebody added in marker: "This means you, Gary."'],
@@ -190,67 +190,65 @@ const LA_AREAS=[
 
   // Jefferson Park: an early streetcar suburb, about 2,500 craftsman bungalows built 1905 to 1920, now a historic
   // preservation zone. Jefferson Boulevard shops up top, a residential street (2nd Ave) below.
-  {id:'jpark',name:'Jefferson Park',w:30,h:24,region:'la',ground:'lawn',
+  {id:'jpark',name:'Jefferson Park',w:30,h:22,region:'la',ground:'lawn',
     tag:'Craftsman bungalows from 1910. Jefferson Boulevard. Jacarandas.',
     eyebrow:'LOS ANGELES / JEFFERSON PARK',
-    hint:"Shops on Jefferson Boulevard. 2nd Ave below. Tom's house is 3468, bottom left.",
+    hint:"Shops on Jefferson Boulevard. 2nd Ave below. Tom's house is RIVITUSO, bottom left.",
     spawn:{x:14,y:2},
-    // Painted plate (art/jpark.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks. Doors, exits and the
-    // N-S street (x14,15) keep their old tiles; street trees, hedges and yards are blocked by the mask, not by objects.
+    // Painted plate v2 (art/jpark.webp 1920 x 1408, `jpark2`; cutouts art/jpark-fg.webp, PLATE_BEHIND.jpark, tools/make_jpark_fg.py).
+    // The mask is the walk map: '#' blocks, '.' walks. Main street x 13 to 16 (rows 0 to 10) and x 11 to 17 (rows 11 to 21); shop
+    // sidewalk row 7; Car Barn road between the arch posts (26 and 29) to the right edge at rows 10 and 11; 2nd Ave sidewalk row 20.
     plateMask:[
-      '##############....############',
-      '##############....############',
-      '##############....############',
-      '##############....############',
-      '##############....############',
-      '##############....############',
-      '###..........................#',
-      '#####........................#',
-      '#####....................##..#',
-      '###..........................#',
-      '##############..#.......####.#',
+      '#############....#############',
+      '#############....#############',
+      '#############....#############',
+      '#############....#############',
       '##############..##############',
-      '##############..##############',
-      '##############..##############',
-      '##############..##############',
-      '###.#######.##..##.######.####',
-      '###.#######.##..##.######.####',
-      '###.#######.##..##.######.####',
-      '###..........................#',
-      '###..........................#',
-      '###..#...............#..#...##',
-      '###.......####..#......#######',
-      '#####....#####..##############',
-      '##############..##############'],
-    paths:[[1,8,28,8],[1,11,28,11],[1,19,28,19],[1,22,28,22]],
-    tiles:[{tile:'road',rects:[[1,9,28,10],[1,20,28,21],[14,0,17,22]]}],
-    houseRoad:[8,19],
-    border:{kind:'jacaranda',open:[[14,0],[15,0],[16,0],[17,0],[14,23],[15,23],[29,9],[29,10]]},
-    exits:[[14,0,'blvd',13,24,'up','road'],[15,0,'blvd',14,24,'up','road'],[16,0,'blvd',15,24,'up','road'],[17,0,'blvd',16,24,'up','road'],[14,23,'oakpark',12,20,'down','road'],[15,23,'oakpark',13,20,'down','road'],
-      [29,9,'carbarn',1,10,'right','road'],[29,10,'carbarn',1,10,'right','road']],
+      '#############....#############',
+      '#############.....############',
+      '##...........................#',
+      '#############.....########...#',
+      '#############.....#########..#',
+      '#############...##########....',
+      '#########.###....###########..',
+      '#########........####....#####',
+      '###########.#.........########',
+      '###########.......############',
+      '###########.......############',
+      '######..###.......######..####',
+      '#######............######.####',
+      '#######..#..........###......#',
+      '#######....#......#####......#',
+      '#............................#',
+      '#############....#############'],
+    noGo:[[13,7],[17,7],[18,7],[19,7],[21,7],[22,7],[23,7],[25,7],[26,7],[10,12],[11,12],[21,12],[22,12],[17,13],[18,13],[19,13],[20,13],[7,17],[25,17],[25,18],[17,20],[18,20],[19,20],[20,20],[21,20],[22,20],[23,20]],   // one-tile walks wandering neighbors must not stand on (reach_test pluggable list)
+    paths:[[2,7,28,7],[1,20,28,20]],
+    tiles:[{tile:'road',rects:[[13,0,16,21]]}],
+    houseRoad:[7,20],
+    border:{kind:'jacaranda',open:[[13,0],[14,0],[15,0],[16,0],[13,21],[14,21],[15,21],[16,21],[29,10],[29,11]]},
+    exits:[[13,0,'blvd',13,24,'up','road'],[14,0,'blvd',14,24,'up','road'],[15,0,'blvd',15,24,'up','road'],[16,0,'blvd',16,24,'up','road'],
+      [13,21,'oakpark',12,20,'down','road'],[14,21,'oakpark',12,20,'down','road'],[15,21,'oakpark',13,20,'down','road'],[16,21,'oakpark',13,20,'down','road'],
+      [29,10,'carbarn',1,10,'right','road'],[29,11,'carbarn',1,10,'right','road']],
     // Chapter 6: Old Oak Park (south end of 2nd Ave) is closed for tree trimming until chapter 6, and until Nara is along.
-    gates:[{at:[[14,23],[15,23]],look:'barrier',dy:-.4,cond:{test:S=>S.chapter<6||(S.chapter===6&&!S.flags['ch6-nara'])},name:'Park barrier',
+    gates:[{at:[[13,21],[14,21],[15,21],[16,21]],look:'barrier',dy:-.4,cond:{test:S=>S.chapter<6||(S.chapter===6&&!S.flags['ch6-nara'])},name:'Park barrier',
       lines:['OLD OAK PARK. CLOSED FOR TREE TRIMMING.','Somebody has drawn a very small squirrel on the sign. It\'s wearing a tie.'],
       when:[{chapter:6,flag:'ch6-tnb',lines:['OLD OAK PARK. CLOSED FOR TREE TRIMMING.','TNB: "Babe, we should get Nara first. Olivia and Michael are on 2nd Ave."']}]},
       // Chapter 8: the old Car Barn at the east end of Jefferson Boulevard stays chained shut until the potluck goes cold.
-      {at:[[29,9],[29,10]],look:'schoolgate',cond:{test:S=>S.chapter<8||(S.chapter===8&&!S.flags['ch8-block'])},name:'Car Barn gate',
+      {at:[[29,10],[29,11]],look:'schoolgate',cond:{test:S=>S.chapter<8||(S.chapter===8&&!S.flags['ch8-block'])},name:'Car Barn gate',
         lines:['DIVISION NINE CAR BARN. Est. 1912. Closed since 1963.','The chain on the gate is cold. Colder than it should be in Los Angeles.']}],
     objects:[
-      // Re-laid onto painted things (the plate hides every object; each is touched from a walkable tile).
-      ['flax',2,15,1,1,'Front garden',FRONT_GARDEN],
-      ['toybox',17,15,1,1,'Front yard','Two trikes, a kiddie pool with no water and one rubber duck, and a stroller parked like a getaway car.'],
-      ['planter',24,15,1,1,'Drought garden','Sage, agave and a sign: NO LAWN, NO PROBLEM. The new neighbors put it in.',{dry:true}],
-      ['sign',16,6,1,1,'Street sign','DOWNTOWN, back that way. Towers, tacos, a lawyer on a bench.'],
-      ['sign',13,18,1,1,'Historic district plaque','JEFFERSON PARK. An early streetcar suburb: craftsman bungalows built 1905 to 1920, many from mail-order kits. A historic preservation zone since 2011.'],
-      ['sign',17,7,1,1,'Jefferson Boulevard','Old-timers still call this stretch Little New Orleans. Creole kitchens, a pupuseria, a skate shop, and as of March, a juice bar.'],
-      ['bench',21,5,2,1,'Bus bench','The 38 bus stops here. The Expo Line is a few blocks south. Tom has opinions about both.'],
-      ['streetsign',2,19,1,1,'2nd Ave','2ND AVE. Craftsman houses from about 1910. Tom lives at 3468, the one with the wood door.'],
-      ['streetsign',28,19,1,1,'2nd Ave','2ND AVE. Jacarandas, a lot of strollers, and the Alvarez clothesline.'],
-      ['bench',3,22,2,1,'Parkway bench','Somebody painted it the colors of three different houses. All three houses approve.']],
+      // Tap spots on painted things (the plate hides every object; each is touched from a walkable tile).
+      ['flax',5,16,1,1,'Front garden',FRONT_GARDEN],
+      ['toybox',19,12,1,1,'Front yard','Two trikes, a kiddie pool with no water and one rubber duck, and a stroller parked like a getaway car.'],
+      ['planter',23,17,1,1,'Drought garden','Sage, agave and a sign: NO LAWN, NO PROBLEM. The new neighbors put it in.',{dry:true}],
+      ['sign',17,5,1,1,'Street sign','DOWNTOWN, back that way. Towers, tacos, a lawyer on a bench.'],
+      ['sign',11,19,1,1,'Historic district plaque','JEFFERSON PARK. An early streetcar suburb: craftsman bungalows built 1905 to 1920, many from mail-order kits. A historic preservation zone since 2011.'],
+      ['sign',12,5,1,1,'Jefferson Boulevard','Old-timers still call this stretch Little New Orleans. Creole kitchens, a pupuseria, a skate shop, and as of March, a juice bar.'],
+      ['bench',1,19,3,1,'Parkway bench','Somebody painted it the colors of three different houses. All three houses approve.']],
     npcs:[
       // Olivia and Michael (and Lachlan, 4, and Isla, 1): Nara's family. Away on their desert trip while Tom has Nara
       // (chapters 2 and 4 until the chapter is done); data/scenes.js AWAY rule.
-      {name:'Olivia',x:11,y:19,look:'marisol',sheet:'olivia',kin:true,cousin:true,trace:'olivia-hello',duration:0.75,away:NARA_TRIP,
+      {name:'Olivia',x:10,y:19,look:'marisol',sheet:'olivia',kin:true,cousin:true,trace:'olivia-hello',duration:0.75,away:NARA_TRIP,
         when:[{test:NARA_BACK,lines:[
           'Tom! You kept Nara alive! Did she eat? She didn\'t eat, did she.',
           'The desert was gorgeous. Lachlan found a rock. Isla ate a rock. Different rock.',
@@ -281,7 +279,7 @@ const LA_AREAS=[
         when:[{...CH2_SMOG,lines:['Back in 1979, this whole block...','...','Such a nice afternoon. It should always be this afternoon. Nobody needs to get any older.']},
               {...CH2_CLEAR,lines:['Where was I? Oh. 1979. This whole block smelled like gumbo on a Saturday night.','That smog had me stuck on one sentence for an hour. At my age I don\'t have hours to spare.','Thank you, Tom. And your young man. And the dog. Especially the dog.']}]},
       {name:'Marisol',x:17,y:8,look:'marisol',when:[{...CH2_SMOG,lines:['I\'m walking my dog. I\'ve always been walking my dog.','I\'ll always be walking my dog. Isn\'t that nice?']}],lines:["I'm walking my dog. He's somewhere.",'My grandparents rented on this block. Now I rent on this block. We\'re a tradition.','There he is. No. That\'s a lemon.']},
-      {name:'Larry',x:8,y:6,look:'larry',when:[{...CH2_SMOG,lines:['I\'m blowing leaves. The same leaf. Over and over.','It never lands. It never has to. Very peaceful.']}],lines:["I'm blowing leaves.",'Onto the next yard.',"Tomorrow, they blow them back. It's a whole system."]}]},
+      {name:'Larry',x:15,y:14,look:'larry',when:[{...CH2_SMOG,lines:['I\'m blowing leaves. The same leaf. Over and over.','It never lands. It never has to. Very peaceful.']}],lines:["I'm blowing leaves.",'Onto the next yard.',"Tomorrow, they blow them back. It's a whole system."]}]},
 
   // Griffith Park: monsters. Same shape as Grump Hollow, with tar pits instead of a pond.
   {id:'griffith',name:'Griffith Park',w:24,h:22,region:'la',ground:'dry',
@@ -585,7 +583,7 @@ LA_AREAS.push(
       '###########....###########'],
     liveKinds:['mound'],
     border:{kind:'hedge',open:[[12,21],[13,21]]},
-    exits:[[12,21,'jpark',14,22,'up'],[13,21,'jpark',15,22,'up'],[12,4,'oak',11,18,'up'],[13,4,'oak',12,18,'up']],
+    exits:[[12,21,'jpark',14,20,'up'],[13,21,'jpark',15,20,'up'],[12,4,'oak',11,18,'up'],[13,4,'oak',12,18,'up']],
     objects:[
       ['bigoak',14,4,2,1,'The Old Oak','A coast live oak, three hundred years old. Older than the city. Older than the streetcar. Something up there\'s chittering.'],
       ['oakdoor',12,4,2,1,'Little door','A little round door in the trunk, with an acorn for a knocker. Locked from inside. Somebody behind it\'s chittering.',{knock:true}],
@@ -753,7 +751,7 @@ LA_AREAS.push(
     hint:'Paint Shop top left, Machine Shop top right, Lunchroom bottom left. The turntable is bottom right.',
     spawn:{x:1,y:10},
     wild:true,
-    exits:[[0,9,'jpark',28,9,'left','barnfloor'],[0,10,'jpark',28,10,'left','barnfloor'],[29,14,'boiler',1,7,'right','barnfloor'],[29,15,'boiler',1,8,'right','barnfloor']],
+    exits:[[0,9,'jpark',28,10,'left','barnfloor'],[0,10,'jpark',28,11,'left','barnfloor'],[29,14,'boiler',1,7,'right','barnfloor'],[29,15,'boiler',1,8,'right','barnfloor']],
     monsters:BARN_MONSTER_SPOTS,
     plateMask:[
       '##############################',

@@ -179,7 +179,7 @@ function chselNineteen() {
   if(typeof benchAdd==='function') benchAdd(nara);
   setFlag('tom-gone'); tomGoneApply();
   if(typeof menuChar!=='undefined') menuChar=0;
-  currentMap=worlds.jpark; player.x=4; player.y=19; player.facing='up'; player.move=null; player.hidden=false;
+  currentMap=worlds.jpark; player.x=8; player.y=19; player.facing='up'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 // Chapter 18 test start: chapter 17 is done. Tom, Grace, Rose and Amy stand in the Vault facing the pinnacle lift; TNB and Nara are on the bench.

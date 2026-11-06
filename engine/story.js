@@ -111,7 +111,7 @@ const CHAPTERS=[
   {n:11,title:'The Layover Between Worlds',start:{map:'grands',x:8,y:10},
     party:{lock:['tom','grace','rose'],allow:['amy','justin','tnb','nara'],homes:{amy:'any',justin:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>({lines:['Airport? Tom. You’re on a layover. I don’t fly layovers. I just wave at them.']})},
-  {n:12,title:'Welcome to Jefferson Park, Girls',start:{map:'jpark',x:4,y:19},
+  {n:12,title:'Welcome to Jefferson Park, Girls',start:{map:'jpark',x:8,y:19},
     party:{lock:['tom','grace','rose'],allow:['amy','justin','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',justin:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch12-done')?{lines:['Sal called from the East Coast. He is working on a way under the dome.','Chapter 13 is coming. Until then, the cab stand has coffee.']}
       :{lines:['Airport? Tom. You just got home. Show the girls the house first.']}},
@@ -147,7 +147,7 @@ const CHAPTERS=[
       :{lines:['Airport? Tom. Not now. Floor sixty.']}},
   // Chapter 19: Tom is gone (flag 'tom-gone') until he bursts back into the Censor fight (data/scenes-ch19.js). Grace, Rose, Amy and TNB fight, Nara is on the bench.
   // Deedee and Boppy are stone until the feast thaws them; the chapter ends with the eight of them in the Vault.
-  {n:19,title:'The Unsent Dead-Letter Office',start:{map:'jpark',x:4,y:19},
+  {n:19,title:'The Unsent Dead-Letter Office',start:{map:'jpark',x:8,y:19},
     party:{lock:['tom','grace','rose'],allow:['amy','justin','tnb','nara'],bar:['deedee','boppy'],homes:{amy:'any',justin:'any',deedee:'any',boppy:'any',tnb:'any',nara:'any'}},
     noFlight:()=>flag('ch19-done')?{lines:['Chapter 20 is coming. The sky has a clock in it now, and the cab stand has coffee.']}
       :{lines:['Airport? Not today. Today you find Tom.']}},
