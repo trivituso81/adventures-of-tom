@@ -5379,7 +5379,7 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Is This Real?.\n\nItems:\n1. A phone seen from the front, its screen showing a blue scanning grid.\n2. A beam of blue scanning light, a thin sweeping band (wide).\n3. A drawn hand with far too many fingers, eight of them, simple and funny.\n4. A big red FAKE stamp, rough painted letters in a rectangle (wide).\n5. A ring of three dizzy golden stars.\n6. A small question mark.\n7. A small burst of impact stars."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "olivia-fx-marine-layer",
    "tab": "Characters",
    "group": "Olivia",
@@ -5388,7 +5388,16 @@
    "refs": [
     "art/raw/characters/olivia-ab-marine-layer-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Marine Layer.\n\nItems:\n1. A big rolling bank of thick grey fog, soft edged (wide).\n2. A smaller puff of grey fog.\n3. A wide thin ribbon of drifting grey mist (wide).\n4. A grey hooded sweatshirt, laid flat and open.\n5. A small thermometer showing a cold blue bulb.\n6. A small grey cloud with a frown.\n7. A cluster of pale blue snowflake sparkles.\n8. A spray of tiny cool water droplets."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Marine Layer.\n\nItems:\n1. A big rolling bank of thick grey fog, soft edged (wide).\n2. A smaller puff of grey fog.\n3. A wide thin ribbon of drifting grey mist (wide).\n4. A grey hooded sweatshirt, laid flat and open.\n5. A small thermometer showing a cold blue bulb.\n6. A small grey cloud with a frown.\n7. A cluster of pale blue snowflake sparkles.\n8. A spray of tiny cool water droplets.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-fx-marine-layer-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793996483625
+    }
+   ]
   },
   {
    "status": "draft",
