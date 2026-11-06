@@ -3427,9 +3427,16 @@
    "group": "Terminal Zero"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "image 2 pushed back eye mask popping off",
+     "from": "v1",
+     "at": 1793926216559
+    }
+   ],
    "id": "enemy-jetlag",
    "tab": "Enemies",
    "title": "Jet Lag: sheet, 4 frames facing right",
