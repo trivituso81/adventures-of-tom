@@ -7243,8 +7243,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-26-subway-chamber-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793932226116
+    }
+   ],
    "rejects": [],
    "id": "bg-26-subway-chamber",
    "tab": "Battle",
