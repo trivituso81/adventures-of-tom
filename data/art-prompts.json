@@ -6996,8 +6996,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-15-oak-park-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932071951
+    }
+   ],
    "rejects": [],
    "id": "bg-15-oak-park",
    "tab": "Battle",
