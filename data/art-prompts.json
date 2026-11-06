@@ -5391,7 +5391,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "justin-fx-drywall",
    "tab": "Characters",
    "group": "Justin",
@@ -5400,7 +5400,16 @@
    "refs": [
     "art/raw/characters/justin-ab-drywall-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: DRYWALL.\n\nItems:\n1. A big flat sheet of white drywall, seen from the front, with taped edges (tall).\n2. The same sheet with a row of screws along its edge.\n3. A cordless screw gun, seen from the side.\n4. A handful of drywall screws.\n5. A cloud of fine white drywall dust (wide).\n6. A soft pale blue shield glow, a rounded panel of light (wide)."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: DRYWALL.\n\nItems:\n1. A big flat sheet of white drywall, seen from the front, with taped edges (tall).\n2. The same sheet with a row of screws along its edge.\n3. A cordless screw gun, seen from the side.\n4. A handful of drywall screws.\n5. A cloud of fine white drywall dust (wide).\n6. A soft pale blue shield glow, a rounded panel of light (wide).",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/justin-fx-drywall-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793996083932
+    }
+   ]
   },
   {
    "status": "draft",
