@@ -14320,8 +14320,16 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Almond Milk, Please.\n\nItems:\n1. A tall clear plastic cup of iced almond milk latte with a green straw and ice, seen from the front (tall).\n2. A closed cardboard pizza box with a red stripe, seen from the front.\n3. A white and blue cardboard milk carton, seen from the front.\n4. A small foil energy gel packet.\n5. A ring of soft green light (wide).\n6. A small golden sparkle."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-ab-false-start-v1.png",
+     "date": "2026-11-06",
+     "from": "v5",
+     "at": 1794000397851
+    }
+   ],
    "rejects": [],
    "id": "amy-ab-false-start",
    "tab": "Characters",
@@ -14334,7 +14342,7 @@
     "art/raw/characters/amy-battle-sheet-1-v1.png",
     "art/raw/characters/amy-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: False Start.\n\nRow 1:\n1. Standing tall with a stopwatch in one hand and a silver whistle in the other, watching something ahead.\n2. Raising the whistle to her lips, eyes narrowing at something ahead.\n3. Blowing the whistle, cheeks puffed, the other hand thrust out with the palm forward in a stop sign.\n\nRow 2:\n4. Stepping forward and pointing straight ahead, one stern raised eyebrow, caught you.\n5. Arms folded across her chest, a smug raised eyebrow, the stopwatch held in one hand.\n6. Clicking the stopwatch with her thumb, a smug small grin."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, workout black tank and workout shorts, colorful sneakers, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: False Start.\n\nRow 1:\n1. Standing tall with a stopwatch in one hand and a silver whistle in the other, watching something ahead.\n2. Raising the whistle to her lips, eyes narrowing at something ahead.\n3. Blowing the whistle, cheeks puffed, the other hand thrust out with the palm forward in a stop sign.\n\nRow 2:\n4. Stepping forward and pointing straight ahead, one stern raised eyebrow, caught you.\n5. Arms folded across her chest, a smug raised eyebrow, the stopwatch held in one hand.\n6. Clicking the stopwatch with her thumb, a smug small grin."
   },
   {
    "status": "draft",
