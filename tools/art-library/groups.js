@@ -4,7 +4,7 @@
 const fs = require('fs');
 
 const PEOPLE = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', olivia: 'Olivia', michael: 'Michael', jojo: 'Jojo', ellie: 'Aunt Ellie', nara: 'Nara' };
-const PROP_OWNERS = { tom: 'Tom', grace: 'Grace', rose: 'Rose', amy: 'Amy', deedee: 'Deedee', boppy: 'Boppy', tnb: 'TNB', tombo: 'Tombo moves', nara: 'Nara', justin: 'Justin', find: 'Dungeon finds' };
+const PROP_GROUPS = { find: 'Dungeon finds', trail: 'Trail clues' };
 const FOE_AREAS = {
   hollow: 'Grump Hollow', griffith: 'Griffith Park', marsh: 'Whispering Marsh', backlot: 'Studio Backlot', school: 'School', oak: 'Old Oak', library: 'Hush Library',
   barn: 'Car Barn', club: 'Moon Club', terminal: 'Terminal Zero', infinity: 'Terminal Infinity', blvd: 'Downtown boulevard', subrail: 'Sub-Rail', row: 'Rivituso Row',
@@ -37,7 +37,7 @@ function groupOf(e) {
       const g = String(e.title).split(':')[0].trim(); return g.length >= 3 && g.length <= 40 ? g : fail('title');
     }
     case 'Rooms': return ROOM_OF[e.id] || fail('room not in ROOM_GROUPS');
-    case 'Props': { const g = PROP_OWNERS[e.id.split('-')[1]]; return g || fail('unknown owner'); }
+    case 'Props': { const g = PROP_GROUPS[e.id.split('-')[1]]; return g || fail('unknown prop group'); }
     case 'Enemies': { if (e.id === 'test-mudling' || e.id.startsWith('test-grid-') || e.id.startsWith('test-one-')) return 'Test card'; const a = FOE_TABLE[e.id]; return FOE_AREAS[a] || fail('area ' + a); }
     case 'Battle': return /\(NEW\b/.test(e.title) ? 'New backgrounds' : 'Repaints of live backgrounds';
     case 'Title': return 'Title and icon';

@@ -1,3 +1,10 @@
+## 2026-11-06 (381): Art Library Props tab keeps only Dungeon finds and Trail clues (34 obsolete sheets removed)
+
+- Tom asked whether the Props tab was obsolete now that props live in Characters (`<id>-fx-<move>`). The 34 character prop sheets (`prop-<owner>-<n>`) were all drafts with 0 versions, so nothing generated or approved was lost. Removed them from `data/art-prompts.json` (689 to 655 entries; json edited directly, `make-prompts.js` not run because it would undo hand edits).
+- Deleted `tools/art-library/prop-prompts.js`; removed it from `make-prompts.js`; `groups.js` now maps Props entries to Dungeon finds (13) and Trail clues (6); `test.py` counts updated (Props 53 to 19, Props groups 12 to 2).
+- Not touched: the in-game prop renderer (`engine/prop-art.js`, `art/props/*`, `tools/sprite-bake/bake_prop_sheets.py`). The game still draws baked props for moves not yet installed with painted frames; retiring them is a later job once every character is installed.
+- Tests: `node tools/art-library/validate.js` OK. Grep for the 34 ids and `prop-prompts`/`PROP_OWNERS`: 0 outside CHANGES history. No Generate cost.
+
 ## 2026-11-06 (380): Michael walk sheet reopened to redo row 3 only (Art Library)
 - Tom: redo. `michael-walk-sheet` is back to draft (v1 stays in its versions). Prompt now attaches the approved v1 as picture 3 (rows 1 and 2 repeat exactly) and rewrites row 3: both children visible in profile (Isla's dress and bow showing), no raised fist, cell 9 is a calm walking step, not a skip. 1 Generate press. Nothing installed; install steps in claude/next-addendum-michael-walk-status.md.
 
