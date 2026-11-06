@@ -1,3 +1,11 @@
+## 2026-11-06 (397): Square overhangs: walkers now pass behind the awning, signs, roofs and arch (`towncut2`)
+- Tom: in a few spots the characters walk over a cutout instead of behind it (Rivituso Row arch, Crumb Bakery awning, Kettle Cottage teapot, Snail Mail sign).
+- Cause (fact): the Snail Mail sign and the Kettle teapot were never cut out of the painting, and the roof, awning and arch zones used their lowest painted pixel as the cutoff, so a walker one row lower under the overhang was drawn on top.
+- Fix: both signs are now cut from the painting (`SIGN_CUTS` in `tools/make_town_fg.py`, polygon plus GrabCut) into `art/town-fg.webp`; cutoffs raised (`BASE_FIX`): bakery awning 453 to 590, Snail Mail roof and Kettle roof to 1350 (the lane between them), both signs 1350, arch 1655 to 1672. `PLATE_BEHIND.town` regenerated (39 zones). `art/town.webp` unchanged.
+- The first push (`towncut1`) left merge-conflict lines in `engine/main.js`; this change restores it from origin and moves its tag.
+- Tests: tag_check ok, smoke FAILS [], reach_test town 0; 12 in-game shots (stairs, both lanes, arch) looked at.
+- Watch on the phone: Penny's, Moon Club and the taxi signs were not touched.
+
 ## 2026-11-06 (396): Battle stance sheets for every character added to the Art Library (no game change)
 
 - Tom (15:47): add battle stance sheets for all characters so any of them can be replaced easily. 24 new Art Library entries in the Characters tab, at the top of each character's group: `<id>-battle-stance-1` (8 frames, 4 x 2) and `<id>-battle-stance-2` (6 frames, 3 x 2) for Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Olivia, Nara (dog, own poses) plus Michael and Jojo (new: they have no battle sheets yet, so their sheet 2 waits for their sheet 1). Same pose lists and method as the Young Boppy sheets and the sheets Tom painted.
