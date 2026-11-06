@@ -47,6 +47,51 @@ for _id, _h in EMO_H.items():
     SETS[_id + 'emo'] = {'member': _id, 'strip': os.path.join('art/emotions', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'em_sad' if _id != 'nara' else 'em_happy',
                          'names': ['em_' + m for m in EMO_MOODS]}
 
+# Emotion frames match the standing frame in size (Tom 2026-11-06: "the emotion frames must be sized just like the standard states, both bodies and
+# heads, so the characters do not appear to enlarge in an emotional state"). The strips are painted with bigger heads and wider poses than the overworld stand
+# frame. Per frame, measured against the character's overworld down_stand frame in game rows (after the one scale factor f):
+#   1. head: width of the hair and forehead band (3 to 11 percent of the height, median row) over the standing one; above 1.06 the head rows (top to chin) shrink
+#      by that ratio about the chin (kidhead.grow_head, the body keeps its size). Chin = the standing chin row (STAND_CHIN) times the ratio.
+#   2. figure: sqrt of the silhouette area over the standing one; above 1.03 the whole frame shrinks by that ratio (floor .9). Area ignores a wide stance's gaps,
+#      so it catches the broad angry, proud and surprised poses. Nara (a dog, sits and lies) is left as painted.
+STAND_CHIN = {'tom': 10.3, 'tnb': 11.5, 'grace': 10.8, 'rose': 10.2, 'justin': 9.8, 'boppy': 10.8, 'deedee': 10.3, 'ellie': 10.5, 'olivia': 10.3, 'amy': 10.5}
+HEAD_OVER, FIG_OVER = 1.06, 1.03
+
+
+def stand_frame(cid):
+    import re
+    s = open(os.path.join(ROOT, 'data', cid + '-hires.js')).read()
+    m = re.search(r'"?ow"?: ?\{"?src"?: ?["\']([^"\']+)["\'], ?"?k"?: ?(\d+), ?"?rects"?: ?(\{.*?\})\}', s)
+    src, k, rects = m.group(1), int(m.group(2)), json.loads(m.group(3))
+    x, y, w, h = rects['down_stand']
+    im = Image.open(os.path.join(ROOT, src)).convert('RGBA').crop((x, y, x + w, y + h))
+    return im.crop(im.getbbox()), k
+
+
+def head_band(im, k):
+    a = np.array(im)[:, :, 3] > 40; H = a.shape[0]
+    return float(np.median(a[int(H * .03):int(H * .11)].sum(1))) / k
+
+
+def area_rows(im, k):
+    return float((np.array(im)[:, :, 3] > 40).sum()) / k / k
+
+
+def match_standing(cid, S, figs, f):
+    if cid[:-3] not in STAND_CHIN: return figs
+    from kidhead import grow_head
+    mid = cid[:-3]; so, sk = stand_frame(mid); sb, sa = head_band(so, sk), area_rows(so, sk); k = S['k']; out = {}
+    for n, im in figs.items():
+        r = head_band(im, k / f) / sb                     # the frame is f x bigger in the atlas, k atlas px per row
+        if r > HEAD_OVER:
+            r = min(r, 1.4); im = grow_head(im, 1.0 / r, STAND_CHIN[mid] * r * k / f, taper=int(k / f * 3))
+        a = (area_rows(im, k / f) / sa) ** .5
+        if a > FIG_OVER:
+            g = max(.9, 1.0 / a); im = im.resize((round(im.width * g), round(im.height * g)), Image.LANCZOS)
+        out[n] = im
+        print('  match', mid, n, 'head x%.2f' % r, 'figure x%.2f' % a)
+    return out
+
 
 def up(n, k):
     return -(-n // k) * k
@@ -143,6 +188,8 @@ for cid, S in SETS.items():
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
     if 'strip' not in S and 'cut' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
+    if S['strip'] if 'strip' in S else False:
+        figs = match_standing(cid, S, figs, f)
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'])
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}
     pal, rows = quantize(small, COLORS)

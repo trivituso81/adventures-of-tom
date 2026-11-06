@@ -1,3 +1,11 @@
+## 2026-11-06 (399): Emotion poses match the standing frame in head and body size (`emo15`)
+
+- Tom (15:43): emotion frames must be sized like the standard states, bodies and heads, so characters do not seem to grow when a mood line starts; not every character or state does it, so each one was checked. The angry states showed the pattern.
+- Fact (measured in game rows against each character's overworld `down_stand`): frame heights already matched, but the painted emotion figures have bigger heads (TNB, Justin, Boppy 20 to 37 percent over; Tom, Deedee, Olivia 5 to 15; Grace, Rose, Ellie, Amy within a few) and angry, proud, surprised and unimpressed are broad poses (wide stance, arms out) that read 5 to 10 percent bigger overall.
+- Change: `bake_story_poses.py` `match_standing` runs on the emotion strips only. Head: when the hair and forehead band is over 1.06 of the standing one, the head rows shrink by that ratio about the chin (`kidhead.grow_head`; the body keeps its size). Figure: when sqrt of silhouette area is over 1.03 of the standing one, the whole frame shrinks by that ratio (floor .9). Nara (dog) left as painted. After: heads 0.89 to 1.11 of standing (most within 5 percent), figure area 0.88 to 1.02; angry heads 0.91 to 1.05, angry figure 1.00 to 1.02.
+- Cost: Justin, TNB and Boppy mood frames are 3 to 9 percent shorter than their standing frame because their emotion heads were that much bigger. If Tom wants taller, the likely fix is regenerating those emotion sheets with a smaller head.
+- Only the 10 `*emo-story.webp` atlases and `data/story-poses.js` changed (other story poses byte-identical). Tests: smoke FAILS [], tag_check ok, ch1Theft scene frames no errors. Tags: `emo15`.
+
 ## 2026-11-06 (398): Jefferson Park v2 painting installed with a walk-behind layer (`jpark2`)
 
 - Tom (14:09 painting, 14:14 five masks, 14:17 "install it now"). New plate `art/jpark.webp` from `art/raw/areas/area-jpark-v2.png` (1448 x 1086, 4:3; version 2 of Art Library entry `area-jpark`): scaled to 1920 x 1440 and cropped 16 px top and bottom to 1920 x 1408. The map is now 30 x 22 tiles (was 30 x 24): cropping the sides would have cut RIVITUSO and the CAR BARN arch.
