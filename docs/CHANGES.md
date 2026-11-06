@@ -1,3 +1,7 @@
+## 2026-11-06 (358): Art Library: draft sheet `tom-grace-rose-greeting-hug` (Tom hears the girls, crouches, both hug him)
+- Fact: one new draft entry in Characters (group Tom, json 655 entries, Characters 248). 4 x 2 grid, refs are the Tom, Grace and Rose hero pictures. Frames: hearing them, delighted, crouching with arms open, girls running in, crash hug, group hug, squeeze, looking up. Art Library only, no code or art changed. Not installed: Tom presses Generate (1 press), then approves.
+- Install (after approval): cut the 8 frames, play the sequence in the Long Island arrival scene (find the scene where Grace and Rose greet Tom), spec in claude/next-addendum-girls-greeting.md.
+
 ## 2026-11-06 (357): Deedee fx rest: old Dish-Towel Flick and Moon & Back code purged (`dfx4`)
 - Fact: the painted towel (towel_snap, towel_twist, towel_folded), moonbeam_soft, moon_crescent and measuring_tape props were already wired by the last `D.dish_towel_flick` and `D.hugShow` in engine/deedee-moves.js (scenes `df_towel`, `df_moon`). Three older generations of the same moves still sat above them.
 - Purged from engine/deedee-moves.js: older `D.dish_towel_flick` x3, `D.hugShow` x2, `D.moon_back` x2, scenes `d_pixel`, `d_towel`, `d_moonline`, `dd_towel`, `dd_moon`, `dv_towel`, the nowarp names and wrapper keys for them. grep 0 references. Behavior unchanged: numbers, lines, VP, timing the same. Tombo props `deedee/dish_towel` and `deedee/moon` are used by other moves and stay.
