@@ -13814,8 +13814,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Green Pen.\n\nRow 1:\n1. Standing with a big green felt-tip pen in one hand and the other hand on her hip, tilting her head, studying something ahead.\n2. Pulling the cap off the green pen with her other hand, eyes narrowed in concentration.\n3. Drawing a big sweeping circle in the air with the pen, arm stretched out wide, focused.\n\nRow 2:\n4. Tapping the pen firmly forward as if marking a page, eyebrows raised, very teacherly.\n5. Pointing the pen forward like a wand, a warm approving smile.\n6. Clicking the cap back on the pen, nodding, pleased."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-red-pen-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793999718080
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-red-pen",
    "tab": "Characters",
