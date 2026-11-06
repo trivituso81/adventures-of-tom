@@ -127,6 +127,7 @@ for (const id of Object.keys(ABILITIES)) {
 // the 8 core emotions in order happy, loving, sad, angry, scared, surprised, proud, unimpressed. Ref: hero only.
 const EMOTION_CAST = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', ellie: 'Aunt Ellie', olivia: 'Olivia', nara: 'Nara' };
 for (const [id, who] of Object.entries(EMOTION_CAST)) {
-  entries.push({ id: id + '-emotions', tab: 'Characters', group: who, title: who + ' emotion sheet: 8 feelings, full body (happy, loving, sad, angry, scared, surprised, proud, unimpressed)', ar: '2:1', refs: [R + id + '-hero-ref-v1.png'], prompt: P('char-emotion-sheet.txt') });
+  const dog = id === 'nara';   // Nara: her own prompt, dog body language (Tom 2026-11-06 00:09)
+  entries.push({ id: id + '-emotions', tab: 'Characters', group: who, title: who + (dog ? ' emotion sheet: 8 feelings, dog body language' : ' emotion sheet: 8 feelings, full body') + ' (happy, loving, sad, angry, scared, surprised, proud, unimpressed)', ar: '2:1', refs: [R + id + '-hero-ref-v1.png'], prompt: P(dog ? 'dog-emotion-sheet.txt' : 'char-emotion-sheet.txt') });
 }
 module.exports = { entries };

@@ -2,7 +2,7 @@
 
 Tom: "we need emotions character sheets for each character so they can later be programmed to respond to situations in the story. create a set of 8 core emotions that comprehensively cover the emotions found throughout the entire game and design a generic character sheet that can be used for any character."
 
-Status (2026-11-06 00:03): 9 sheets painted by Tom and indexed (below). Amy and Nara still to paint; Michael and Jojo need a hero picture first. NOT built: the game does not show emotion art yet; no story moment is chosen yet (Tom: "dont yet determine those moments yet, just index them").
+Status (2026-11-06 00:03): 9 sheets painted by Tom and indexed (below). Amy done 00:09; Nara still to paint; Michael and Jojo need a hero picture first. NOT built: the game does not show emotion art yet; no story moment is chosen yet (Tom: "dont yet determine those moments yet, just index them").
 
 ## The 8 core emotions (frame order = sheet order)
 
@@ -23,7 +23,7 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 
 - Art Library, Characters tab, entry `<id>-emotions`: 4 x 2 grid of square cells, ar 2:1, magenta background, the whole character head to feet, standing, facing the viewer in a slight three-quarter view, same figure size and ground line in every cell. Full body (Tom 23:57: the first hips-up version cut characters off at the waist, useless on the map). The feeling reads from the body on the map and in scenes; the face is cropped from the same painting for the dialogue box (as bake_portraits.py does from the hero). Row 1: happy, loving, sad, angry. Row 2: scared, surprised, proud, unimpressed.
 - Reference: the character's hero picture only (art/raw/characters/<id>-hero-ref-v1.png).
-- Prompt: tools/art-library/prompts/char-emotion-sheet.txt (generic, same text for every character; Nara uses the animal sentence).
+- Prompt: tools/art-library/prompts/char-emotion-sheet.txt (generic, same text for every person). Nara has her own: tools/art-library/prompts/dog-emotion-sheet.txt (ears, tail, posture; sitting and lying poses allowed).
 - Entries exist for every character with a hero picture: Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Aunt Ellie, Olivia, Nara (11). Michael and Jojo need a hero picture first.
 - Approved sources: art/raw/characters/<id>-emotions-v1.png.
 
@@ -45,7 +45,8 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 | Boppy | boppy-emotions-v1.png | 268 x 426 |
 | Aunt Ellie | ellie-emotions-v1.png | 254 x 426 |
 | Olivia | olivia-emotions-v1.png | 244 x 425 |
-| Amy, Nara | not painted yet | |
+| Amy | amy-emotions-v1.png | (see data/emotions.js) |
+| Nara | not painted yet (own prompt: tools/art-library/prompts/dog-emotion-sheet.txt) | |
 | Michael, Jojo | need a hero picture first | |
 
 - Adding a character later: save the sheet as art/raw/characters/<id>-emotions-v1.png, run the cutter with that id (it merges into the index), approve the Library entry.

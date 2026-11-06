@@ -1,3 +1,7 @@
+## 2026-11-06 (300): Amy's emotion sheet indexed; Nara gets her own dog emotion prompt (`emo4`)
+- Tom (00:09): Amy's painted emotion sheet, and "i need a special emotion sheet prompt for nara".
+- Amy: saved art/raw/characters/amy-emotions-v1.png, cut into art/emotions/amy.webp, added to data/emotions.js, Library entry approved. 10 of 11 indexed.
+- Nara: new prompt tools/art-library/prompts/dog-emotion-sheet.txt (ears, eyes, mouth, tail, posture; sits and lies down where the feeling needs it; same scale every cell). `nara-emotions` uses it. The animal sentence is removed from the people prompt.
 ## 2026-11-06 (299): New battle poses for Tom, Grace and Rose (`battlesheet2`)
 - Tom (11-05 23:40): "new battle poses for Tom, Grace, Rose" with battle sheet 1 (4 x 2) and battle sheet 2 (3 x 2) each (plus the walk sheets, unchanged). Saved as art/raw/characters/<id>-battle-sheet-1-v1.png and -2-v1.png (Art Library names; Tom's two are the copies saved in 297).
 - New cutter tools/sprite-bake/battle_sheet_frames.py (same magenta key as walk sheets). Used as painted: the battle head warp and Tom's body widening no longer run on battle frames. Sheet 2 is scaled to sheet 1 (area of cheer vs hands on hips: Tom x.712, Grace x.771, Rose about x.74). Run frames = the walk sheet's two side steps (the battle sheets have none).

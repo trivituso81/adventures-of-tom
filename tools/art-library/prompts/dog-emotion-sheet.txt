@@ -1,0 +1,17 @@
+Draw the dog in the attached picture as an emotion sheet: the same dog showing eight different feelings.
+
+The attached picture is the dog. Copy it as exactly as possible in every frame: the same dog, breed, size, head size compared to the body, curly coat, colors, collar, painting style and level of detail. Only the pose and the face change.
+
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One whole dog per cell, from the ears to the paws and the tail, in a three-quarter view with the face toward the viewer. The dog is the same scale in every cell, paws on the same ground line, each dog well inside its cell. No people, toys, bowls, grid lines, numbers, text, symbols, tears, hearts or effects. Each feeling must read from the ears, eyes, mouth, body and tail, clear enough to read at a small size.
+
+Row 1:
+1. Happy. Standing, bouncing up on the front paws. Ears perked up, eyes bright, mouth wide open with the tongue out. Tail held high, mid wag.
+2. Loving. Sitting, head tilted to one side, one front paw lifted. Eyes soft and half closed, ears relaxed back, a soft closed mouth. Tail curled around the paws.
+3. Sad. Lying down, chin resting flat on the front paws. Eyes looking up, eyebrows raised in the middle, ears drooping. Tail flat on the ground.
+4. Angry. Standing stiff on all four legs, planted wide, head low. Ears forward, eyes narrowed, nose wrinkled in a small growl with the front teeth just showing. Fur raised along the back, tail stiff.
+
+Row 2:
+5. Scared. Crouched low, body pulled back over the back legs. Ears pressed flat back, eyes wide. Tail tucked between the back legs.
+6. Surprised. Sitting up tall, head pulled back. Ears straight up, eyes wide and round, mouth open in a small O.
+7. Proud. Standing tall and square, chest out, head high. Ears up, mouth closed, eyes confident. Tail held high and still.
+8. Unimpressed. Lying down, head up but turned slightly away. Eyelids half lowered, one ear flopped, mouth a flat closed line. Tail still.
