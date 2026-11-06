@@ -1,3 +1,9 @@
+## 2026-11-06 (388): The Square walk map, Tom's second Area Builder export (`square8`)
+
+- 36 more walk tiles from Tom's export: the cobbles east of Moon Club and above the taxi stand (x 20-29, rows 12-16) open, a lane at x 21 down to row 20, and the lane edges (8,16), (12,16), (16,16). East edge (29,12-16) added to `border.open` (no exit there).
+- The sunny bench tile (15,11) walks; the bench object moved to the tile Tom blocked below it (15,12) so A still reads it.
+- Tests: reach_test town 0 unreachable, smoke FAILS [], areas_test 0, camera_clamp 0, door walk test 0 fails, tag_check ok.
+
 ## 2026-11-06 (387): Grump Hollow v3 storybook painting with a walk-behind layer (`hollow5`)
 
 - Tom (13:41 painting, 13:48 four masks, 14:00 "just install it now"). New plate `art/hollow.webp` (1536 x 1408) from `art/raw/areas/area-hollow-v4.png` (1310 x 1200, added as version 4 of the Art Library entry `area-hollow`). `art/hollow-fg.webp` holds trees, ferns, cattails, the THE SQUARE / SHOPS arch with its fences, 16 boulders, the stump, both benches and the mushrooms, cut from the painting itself; Tom's masks (keyed to 1-bit in `art/raw/areas/hollow-v3-masks/`) only say where to cut. Builder: `tools/make_hollow_fg.py`.
