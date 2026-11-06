@@ -7203,8 +7203,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-24-sorting-hall-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932174706
+    }
+   ],
    "rejects": [],
    "id": "bg-24-sorting-hall",
    "tab": "Battle",
