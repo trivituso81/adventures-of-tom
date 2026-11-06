@@ -1,7 +1,7 @@
 Create the actual environment painting for Area 01, The Square, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
 
 ATTACHED IMAGES (in this order)
-1) the current painting of this area: use it for LAYOUT AND DETAILS. Keep the same layout: every path, building, prop, exit and open space stays in the same place and the same size, and each building keeps its shape, roof and theme. Paint every detail described below cleanly and correctly on top of that layout. Do not copy its rendering.
+1) the approved painting of this area: use it for LAYOUT AND DETAILS. Keep the same layout: every path, building, prop, exit and open space stays in the same place and the same size, and each building keeps its shape, roof and theme. Paint every detail described below cleanly and correctly on top of that layout. Do not copy its rendering.
 2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.
 
 OUTPUT

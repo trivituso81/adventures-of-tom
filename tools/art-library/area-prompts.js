@@ -10,7 +10,7 @@ function stencil(name, s) {
   return 'IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached ' + name.replace(/ \(.*\)/, '') + ' painting.\n\nCopy out only ' + s.only + ' Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.';
 }
 function area(id, name, file, ar, refs, noun, stencils, paintNote) {
-  if (refs.length) refs = ['art/' + (id === 'square' ? 'town' : id) + '.webp', HOUSE_REF];   // installed plate = layout and details, house painting = style
+  if (refs.length) refs = [id === 'square' ? 'art/raw/areas/area-square-v4.png' : 'art/' + id + '.webp', HOUSE_REF];   // layout and details (Square: the picture Tom approved 11-05 19:07; others: installed plate), house painting = style
   entries.push({ id: 'area-' + id, tab: 'Areas', title: name + ': painting (' + (refs.length ? 'attach the listed picture' + (refs.length > 1 ? 's' : '') : 'fresh generator chat, nothing attached') + ')' + (paintNote || ''), ar, refs, prompt: P(file) });
   stencils.forEach((s, i) => entries.push({
     id: 'area-' + id + '-cut' + (i + 1), tab: 'Areas',
