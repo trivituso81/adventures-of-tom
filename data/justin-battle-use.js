@@ -3,7 +3,7 @@
 // Builds BATTLE_SPRITES.justin from nothing (he has no pixel rig), his KO pose and his ability frames. Loads after data/battle-size.js
 // and data/boppy-hires-battle.js. Set JUSTIN_BT_OFF=true (before this file) to leave him out of battle sprites.
 //
-// Stock stances (idle, act, celeb, run...) come from JUSTIN_BT.core. Every ability frame is also a sprite key, named as in the sheet
+// Stock stances (idle, hip, spread, point, act, celeb, run...) come from JUSTIN_BT.core (the figures of his two painted battle sheets). Every ability frame is also a sprite key, named as in the sheet
 // ('lw_jab', 'wn_throwA', 'dw_set', ...), plus a mirrored copy with an R suffix ('lw_jabR') for moves that face the other way.
 // engine/justin-moves.js drives them through RFX.ST.keys. All frames face left.
 (function() {
@@ -35,7 +35,7 @@
   sp.idle=C('idle'); sp.idle2=C('idle2'); sp.act=C('act'); sp.windup=C('windup'); sp.celeb=C('celeb'); sp.leap=C('leap');
   sp.hurtPose=C('hurt'); sp.defend=C('defend'); sp.castPose=C('cast'); sp.kneel=C('kneel');
   const run=[C('run1'),C('run2')];
-  sp.hip=sp.idle; sp.wind=sp.windup; sp.throw=sp.act; sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=run;
+  sp.hip=C('hip'); sp.point=C('point'); sp.wind=sp.windup; sp.throw=sp.act; sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=run;
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.cheer=[sp.celeb,sp.celebFlip]; sp.runFlip=run.map(mir);
   sp.eye=sp.eyeAt.get(sp.idle);
 
@@ -46,7 +46,7 @@
     for(const nm in S.rows) { const r=sp[nm]=mk(S.rows[nm],m,'justin_'+sk,nm); sp[nm+'R']=mir(r); }
   }
   // stock stances that borrow an ability frame
-  sp.aim=sp.bc_point; sp.spread=sp.bc_yellB; sp.clap=sp.wn_nod; sp.sit=sp.bc_sit;
+  sp.aim=sp.bc_point; sp.spread=C('spread'); sp.clap=sp.wn_nod; sp.sit=sp.bc_sit;
 
   BATTLE_SPRITES.justin=sp;
 

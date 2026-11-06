@@ -3,21 +3,20 @@
 
 Input : tools/sprite-bake/src/justin-<sheet>-v1.png, flat magenta background, frames left to right, top to bottom:
           loosewire (4x2), wirenuts, badcall, freshfit, demoday, breakerflip, giantsneeze, foottap, drywall (4x4 each)
-        optional justin-battle-v1.png (4x2: ju_idleA ju_idleB ju_walkA ju_walkB ju_hurt ju_low ju_ko ju_win). When it is missing
-        (it was not in the first zip, 2026-10-31) the stance poses are borrowed from the move sheets, see CORE and KO_SRC.
+        art/raw/characters/justin-battle-sheet-1-v1.png and -2-v1.png (his two painted battle sheets, Tom 2026-11-05 23:40): the core stances, as painted
 Output: art/chars/justin-battle.webp, justin-ko.webp, justin-<sheet>.webp   (painted frames, K x the size of the rows)
         data/justin-battle-hires.js  (JUSTIN_BT: rows, palettes, atlas rects; do not hand-edit)
         tools/shots/justin-bake.png  (contact sheet of every frame, grey background)
 
-Frames are cut by the gaps between figures (sheet.py), never by fixed pixel positions. Heads are enlarged 60% (bigger_head, Tom's request, 45% then a bit more) so
-his head matches Tom's. Frames sit on a common canvas per set: feet (the white sneakers) on the centre column,
+Frames are cut by the gaps between figures (sheet.py), never by fixed pixel positions. The move-sheet frames get their heads enlarged 60% (bigger_head, Tom's request) so
+his head matches Tom's; the core stances come from his two painted battle sheets as painted (no head or body resizing). Frames sit on a common canvas per set: feet (the white sneakers) on the centre column,
 soles on the bottom row; all sets share one scale so Justin never changes size between moves.
 
 Usage : python3 tools/sprite-bake/bake_justin_battle.py [--battle-h 72] [--colors 44]
 """
-import argparse, json, math, os, sys
+import argparse, json, os, sys
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sheet import slice_sheet
@@ -51,25 +50,10 @@ SHEETS = {
 SHEET_F = {'lw': 1254.0 / 1774.0}      # the loose wire sheet came out at 1774 px wide; every other sheet is 1254
 FILE = {'lw': 'loosewire', 'wn': 'wirenuts', 'bc': 'badcall', 'ff': 'freshfit', 'dd': 'demoday', 'bf': 'breakerflip', 'gs': 'giantsneeze', 'ft': 'foottap', 'dw': 'drywall'}
 
-# core stance frames (the engine's idle, act, ...) borrowed from the move sheets until a Battle Stances sheet arrives
-CORE = {'idle': 'ft_idle', 'idle2': 'lw_smirk', 'act': 'lw_jab', 'windup': 'lw_pull', 'celeb': 'bc_stomp', 'run1': 'wn_walkA', 'run2': 'wn_walkB',
-        'leap': 'bc_armsOut', 'hurt': 'gs_peak', 'defend': 'ff_stop', 'cast': 'wn_show', 'kneel': 'ft_hopB'}
-KO_SRC = 'ft_freeze'
-BATTLE_SHEET = os.path.join(SRC, 'justin-battle-v1.png')
-if os.path.exists(BATTLE_SHEET):
-    CORE.update({'idle': 'ju_idleA', 'idle2': 'ju_idleB', 'run1': 'ju_walkA', 'run2': 'ju_walkB', 'hurt': 'ju_hurt', 'kneel': 'ju_low', 'celeb': 'ju_win'})
-    KO_SRC = 'ju_ko'
-# single starting-stance painting (Tom, 2026-10-31): src/justin-idle-v1.png, one figure on magenta. It replaces idle/idle2 until the full
-# Battle Stances sheet arrives (then that sheet wins). Body is scaled to the other frames' body, head to their head (see stance_fit).
-STANCE = os.path.join(SRC, 'justin-idle-v1.png')
-SCALE_REF = CORE['idle']                      # sheet-wide scale stays tied to the old idle, so adding the stance never resizes any other frame
-if os.path.exists(STANCE) and not os.path.exists(BATTLE_SHEET):
-    CORE['idle'], CORE['idle2'] = 'ju_stance', 'ju_stanceB'
-
-# bruise and swirl positions as fractions of the frame's own bounding box: (fx, fy, radius as a fraction of the frame width).
-# They are painted onto the stance copies only (kneel, ko), never onto the move-sheet frames.
-BRUISE = {'ft_hopB': (.30, .235, .05), 'ju_low': (.30, .235, .05)}
-SWIRLS = {'ft_freeze': [(.40, .205, .035), (.60, .205, .035)], 'ju_ko': [(.40, .205, .035)]}
+# core stances: the 14 figures of his two painted battle sheets (battle_sheet_frames.py), used as painted. Knocked out = the dizzy sit.
+from battle_sheet_frames import build as _build_battle, SLOTS
+SCALE_REF = 'ft_idle'    # the move sheets keep the scale they were tuned with (the old foot-tap idle), so no ability frame changes size
+OLD_IDLE_ROWS = 93       # the idle's visible height in battle rows before the painted battle sheets, so Justin's size in a fight does not move
 
 poses = {}
 def despill_pink(img):
@@ -103,33 +87,13 @@ for sk, (fname, cols, nm) in SHEETS.items():
         print('MISSING sheet', p); continue
     for k, v in cut_sheet(p, names, cols).items():
         poses[k] = despill_pink(v)
-if os.path.exists(BATTLE_SHEET):
-    for k, v in cut_sheet(BATTLE_SHEET, ['ju_idleA', 'ju_idleB', 'ju_walkA', 'ju_walkB', 'ju_hurt', 'ju_low', 'ju_ko', 'ju_win'], 4).items():
-        poses[k] = despill_pink(v)
-if os.path.exists(STANCE):
-    poses['ju_stance'] = despill_pink(cut_sheet(STANCE, ['ju_stance'], 1)['ju_stance']); poses['ju_stanceB'] = poses['ju_stance'].copy()
-need = set(CORE.values()) | {KO_SRC, SCALE_REF}
+_bf = _build_battle('justin')
+core_src = {slot: _bf['b_' + src] for slot, src in SLOTS.items()}
+ko_src = _bf['b_dizzy']
+need = {SCALE_REF}
 missing = [n for n in need if n not in poses]
 if missing: raise SystemExit('missing frames: ' + ', '.join(missing))
 
-# ---------------------------------------------------------------- paint-in
-def _layer(img, draw_fn, blur):
-    L = Image.new('RGBA', img.size, (0, 0, 0, 0)); draw_fn(ImageDraw.Draw(L))
-    if blur: L = L.filter(ImageFilter.GaussianBlur(blur))
-    a = np.array(L).astype(float); base = np.array(img).astype(float)
-    m = (a[:, :, 3:4] / 255.0) * (base[:, :, 3:4] / 255.0)
-    base[:, :, :3] = base[:, :, :3] * (1 - m) + a[:, :, :3] * m
-    return Image.fromarray(base.clip(0, 255).astype(np.uint8), 'RGBA')
-def black_eye(img, cx, cy, rx, ry):
-    img = _layer(img, lambda d: d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=(86, 44, 72, 175)), 3)
-    return _layer(img, lambda d: d.ellipse([cx - rx * .6, cy - ry * .6, cx + rx * .6, cy + ry * .6], fill=(58, 28, 52, 150)), 2.2)
-def swirl_eye(img, cx, cy, r):
-    skin = tuple(int(v) for v in np.array(img)[int(cy + r * 2.4), int(cx), :3])
-    img = _layer(img, lambda d: d.ellipse([cx - r * 1.1, cy - r * 1.1, cx + r * 1.1, cy + r * 1.1], fill=skin + (235,)), 1.5)
-    def sp(d):
-        pts = [(cx + (r * t / 40.0) * math.cos(t * 0.22), cy + (r * t / 40.0) * math.sin(t * 0.22)) for t in range(0, 41)]
-        d.line(pts, fill=(70, 34, 30, 255), width=max(2, int(r / 4)))
-    return _layer(img, sp, .6)
 # ---------------------------------------------------------------- scale and placement
 ref_h = poses[SCALE_REF].height * SHEET_F.get(SCALE_REF.split('_')[0], 1.0)
 FB = args.battle_h * KB / ref_h                       # painted pixels per source pixel in battle
@@ -155,34 +119,9 @@ def bigger_head(im, k):
     out.alpha_composite(im, (dx, extra))
     px = dx + (x0 + x1) // 2 - nw // 2; py = extra + y1 - nh
     out.alpha_composite(head, (px, py)); return out
-def face_width(im):
-    """Width of the largest skin patch in the top 38% of the figure (ears to ears). Width, not height, because an open collar fools any chin search."""
-    from scipy import ndimage
-    a = np.array(im); al = a[:, :, 3] > 40; ys, xs = np.where(al); top, bot = ys.min(), ys.max(); H = bot - top + 1
-    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
-    skin = al & (r > 150) & (r > g + 22) & (g > b + 12) & (r - b > 55); skin[top + int(H * .38):] = False
-    lab, n = ndimage.label(ndimage.binary_closing(skin, iterations=2)); sizes = ndimage.sum(skin, lab, range(1, n + 1))
-    cy, cx = np.where(lab == int(np.argmax(sizes)) + 1)
-    return cx.max() - cx.min() + 1, H
-STANCE_HEAD_FRAC = 0.33   # the painting's head (hair to chin) is about a third of its height
-FACE_MATCH = 0.88         # measured face width over-reads on this painting (wide smile, ear), eyeballed against the move frames
-def stance_fit(name):
-    rw, rH = face_width(fit('ft_idle')); w0, H0 = face_width(poses[name]); rw *= FACE_MATCH
-    s = rH / H0
-    for _ in range(4):                                   # head grows from the chin, so the figure gets taller: solve for body scale s and head k together
-        k = rw / (w0 * s); s = rH / (H0 * (1 + STANCE_HEAD_FRAC * (k - 1)))
-    print('stance: body scale %.3f, head enlarge %.2f (ref face %d px, ref height %d px)' % (s, k, rw, rH))
-    im = bigger_head(scaled_to(poses[name], s), k)
-    if name.endswith('B'): im = im.resize((im.width, round(im.height * .98)), Image.LANCZOS)   # idle2 is the same pose a touch shorter: a breath
-    return im
-def fit(name, paint=False):
-    if name.startswith('ju_stance'): return stance_fit(name)
+def fit(name):
     im = scaled_to(poses[name], FB * SHEET_F.get(name.split('_')[0], 1.0))
-    im = bigger_head(im, HEAD_K)
-    if paint and name in BRUISE:
-        bb = im.getbbox(); W, H = bb[2] - bb[0], bb[3] - bb[1]; fx, fy, fr = BRUISE[name]
-        im = black_eye(im, bb[0] + fx * W, bb[1] + fy * H, fr * W * 1.2, fr * W * .85)
-    return im
+    return bigger_head(im, HEAD_K)
 
 def feet_cx(img):
     a = np.array(img); al = a[:, :, 3] > 40; ys, xs = np.where(al)
@@ -241,17 +180,13 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- core battle set
-core_big = tighten(place_feet({k: fit(v, True) for k, v in CORE.items()}, KB), KB)
+FP = OLD_IDLE_ROWS * KB / core_src['idle'].height        # painted pixels per source pixel for the painted battle frames
+core_big = tighten(place_feet({k: scaled_to(v, FP) for k, v in core_src.items()}, KB), KB)
 core_pal, core_rows = rows_of(core_big, KB, args.colors)
 core_rects = pack(core_big, os.path.join(ART, 'justin-battle.webp'))
 
-# knocked out: lies flat, head to the LEFT in the picture; the KO table stores it facing RIGHT (rows mirrored, flagged flip)
-# no lying pose painted yet (no Battle Stances sheet): the standing frame is tipped onto its back below
-_k0 = scaled_to(poses[KO_SRC], FB * SHEET_F.get(KO_SRC.split('_')[0], 1.0))
-for (fx, fy, fr) in SWIRLS.get(KO_SRC, []):
-    bb = _k0.getbbox(); W, H = bb[2] - bb[0], bb[3] - bb[1]; _k0 = swirl_eye(_k0, bb[0] + fx * W, bb[1] + fy * H, fr * W)
-_k = _k0 if os.path.exists(BATTLE_SHEET) else _k0.rotate(90, expand=True)
-_k = scaled_to(_k, KO_ / KB); _k = _k.crop(_k.getbbox())
+# knocked out: the painted dizzy sit, facing screen-left; the KO table stores it facing RIGHT (rows mirrored, flagged flip)
+_k = scaled_to(ko_src, FP * KO_ / KB); _k = _k.crop(_k.getbbox())
 _c = Image.new('RGBA', (up(_k.width, KO_), up(_k.height, KO_)), (0, 0, 0, 0)); _c.alpha_composite(_k, (0, _c.height - _k.height))
 ko_big = {'ko': _c}
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
@@ -284,14 +219,14 @@ def contact(path):
 contact(args.contact)
 
 # ---------------------------------------------------------------- data file
-AV = '?v=ffsuit2'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
+AV = '?v=bsheet3'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
 atlas = {'bt': {'src': 'art/chars/justin-battle.webp' + AV, 'k': KB, 'rects': core_rects},
          'ko': {'src': 'art/chars/justin-ko.webp' + AV, 'k': KO_, 'rects': ko_rects}}
 for sk, s in sets.items(): atlas[sk] = {'src': f'art/chars/justin-{s["file"]}.webp' + AV, 'k': KB, 'rects': s['rects']}
 js = ["'use strict';", "// data/justin-battle-hires.js: Justin's painted battle poses and nine ability sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_justin_battle.py; do not hand-edit.",
       "// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js). Used by data/justin-battle-use.js.",
       "const JUSTIN_BT={", "  atlas:" + json.dumps(atlas) + ",", "  core:{pal:" + json.dumps(core_pal) + ","]
-for k in CORE: js.append(f"    {k}:" + fmt_rows(core_rows[k]) + ",")
+for k in SLOTS: js.append(f"    {k}:" + fmt_rows(core_rows[k]) + ",")
 js += ["  },", "  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows([r[::-1] for r in ko_rows['ko']]) + "},", "  sets:{"]
 for sk, s in sets.items():
     js.append(f"  {sk}:{{pal:" + json.dumps(s['pal']) + ",rows:{")

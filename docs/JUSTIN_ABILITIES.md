@@ -32,7 +32,7 @@ Ten PNG sheets, magenta background, square cells of about 256 px, Justin facing 
 
 | Sheet | Grid | Frame keys in order (left to right, top to bottom) |
 |---|---|---|
-| 00 battle stances | 4 x 2 | ju_idleA, ju_idleB, ju_walkA, ju_walkB, ju_hurt, ju_low, ju_ko, ju_win |
+| 00 battle stances | two painted sheets | `art/raw/characters/justin-battle-sheet-1-v1.png` and `-2-v1.png`, 14 figures cut by `battle_sheet_frames.py` (ready, breath, hip, offer, wind, lunge, spread, guard, startled, tired, dizzy, cheer, bigcheer, power; run = walk sheet side steps; KO = dizzy sit) |
 | 01 loose wire | 4 x 2 | lw_spot, lw_grab, lw_pull, lw_present, lw_jab, lw_zap, lw_drop, lw_smirk |
 | 02 wire nuts | 4 x 4 | wn_walkA, wn_walkB, wn_reach, wn_grab, wn_show, wn_wind, wn_throwA, wn_throwB, wn_throwC, wn_reload, wn_windB, wn_throwD, wn_throwE, wn_dust, wn_pocket, wn_nod |
 | 03 bad call | 4 x 4 | bc_watch, bc_lean, bc_shock, bc_rise, bc_point, bc_yellA, bc_yellB, bc_yellC, bc_pace, bc_armsOut, bc_headGrab, bc_stomp, bc_yellD, bc_huff, bc_sit, bc_mutter |
@@ -47,7 +47,7 @@ Props painted into the sheets (do not add PROPART copies for these): wire (01, f
 
 ## Install steps (follow the Boppy pattern; he is the closest kit)
 
-1. Save every sheet as `tools/sprite-bake/src/justin-<sheet>-v1.png` (`justin-battle-v1.png` for 00, then `justin-loosewire-v1.png` and so on). Commit the sources. If a sheet is missing or has the wrong cell count, say so in one line and install the rest.
+1. Save every sheet as `tools/sprite-bake/src/justin-<sheet>-v1.png` (the move sheets: `justin-loosewire-v1.png` and so on; the core stances come from his two battle sheets in art/raw/characters). Commit the sources. If a sheet is missing or has the wrong cell count, say so in one line and install the rest.
 2. Write `tools/sprite-bake/bake_justin_battle.py` by copying `bake_boppy.py` plus `bake_boppy_extra.py` (head warp, black eye on ju_low, KO swirl, magenta fringe removal). Cut every sheet by gaps. Emit `art/chars/justin-battle.webp`, `justin-ko.webp`, one `justin-<move>.webp` per ability sheet, and extend `data/justin-hires.js` (rows, palette, atlas rects for all keys above). Write a contact sheet to `tools/shots/justin-bake.png` and look at it. Head and height: he stays the tallest party member (see the ratios in `bake_justin.py`); keep the battle idle at roughly the same row height as Michael plus a few rows.
 3. Party data: add `justin` to `data/party.js` (stats on Amy's curve, slightly more HP, slightly less speed), `data/abilities.js` (the kit table above, standard cost ladder), `data/progress.js` level unlocks at 2, 3, 4, 5, and `data/lines.js` (move keys plus hurt, low, ko, win, special). Portrait: `portraits/justin.png` cut from ju_idleA like the others.
 4. Moves: new file `engine/justin-moves.js`, loaded right after `engine/boppy-moves.js` in `index.html`. Build every move from the queue primitives in `docs/BATTLE_SYSTEM.md` (`ST.keys` and `ST.play` for frame runs, `battle.fx` for the spark, dazzle flash, lightning, wall chunks and the dark screen, `battle.props` for thrown wire nuts). Giant Sneeze: knockback slide on the enemy sprite plus `enemyStunned = 1` and a new `sfx.sneeze` in `engine/audio.js` (long, loud, pitched down). Foot Tap: move Rose's sprite to his foot with her walk frames, one tiny toe tap, then his frames; fall back to Grace when Rose is KO. DRYWALL: a `battle.guard` style flag halving party damage for one enemy round, the drywall drawn in front of the formation from dw_set's prop rect.

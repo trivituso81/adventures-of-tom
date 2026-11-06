@@ -1,3 +1,8 @@
+## 2026-11-06 (310): Justin fights with his two painted battle sheets (`battlesheet3`)
+- Tom (11-05 23:40): Justin's battle sheets (art/raw/characters/justin-battle-sheet-1/2-v1.png). Core stances are now the 14 figures as painted (no head enlarging on them; the nine ability sheets keep their head growth and scale, and came back byte for byte). Slots as for Tom, Grace and Rose; NEW: hip, spread, point (data/justin-battle-use.js), idle2 = breath, KO = dizzy sit. Run = walk sheet side steps. Idle keeps its old visible height (93 rows).
+- Purged: tools/sprite-bake/src/justin-idle-v1.png and the stance fit, bruise and swirl paint-in code in bake_justin_battle.py. Cache tag on his atlases is now ?v=bsheet3.
+- Amy NOT installed: her battle sheets show a short blond bob and a pink tank, but her hero and walk sheet are a long brunette in a rust dress (wrong person). Waiting on Tom.
+- Tests: kit_test justin all moves FAILS [], fight shot checked.
 ## 2026-11-06 (309): Emotion index of every story line (`emo6`)
 - Tom (00:26): "index all chapters where the 8 saved emotions can be used for each character as it corresponds to specific lines of dialogue".
 - docs/EMOTION_INDEX.md: chapters 1 to 20 plus Nine Scoops, every line spoken by a cast member with an emotion sheet (Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Aunt Ellie, Olivia, Nara), tagged happy, loving, sad, angry, scared, surprised, proud or unimpressed. 1,826 lines read, 1,713 listed, 113 plain information lines left out. Michael and Jojo skipped (no sheet). docs/emotion-index-lines.tsv has all 1,826 with file and line.
