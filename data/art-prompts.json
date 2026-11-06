@@ -2674,6 +2674,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793924865102
+    },
+    {
+     "n": 2,
+     "file": "art/raw/enemies/enemy-directorscut-v3.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793926561924
     }
    ],
    "rejects": [],
@@ -2686,7 +2693,7 @@
     "docs/reference/underpaint/directorscut-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a grand, richly detailed handbrushed boss painting. Keep the same creature, a huge golden brass megaphone on a wooden tripod with a furious face in the bell, a pointing stubby finger, shouting, but make it far more detailed, beautiful and dramatic: polished golden brass with deep reflections and dents, a carved wooden tripod, a furious expressive face in the bell, film-set spotlights and light beams. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Top row: 1 standing on the tripod, shouting. 2 thrown back, the tripod wobbling. 3 pointing a stubby finger furiously. Bottom row: 4 attack wind-up, leaning back with the bell drawn wide. 5 the attack, a megaphone blast with rings of shockwave. 6 the follow-through, leaning far forward, the bell smoking, the tripod skidding, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Studio Backlot"
   },
   {
