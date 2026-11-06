@@ -4109,8 +4109,16 @@
    "group": "Dead-Letter Office"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-deadletter-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927395489
+    }
+   ],
    "rejects": [],
    "id": "enemy-deadletter",
    "tab": "Enemies",
