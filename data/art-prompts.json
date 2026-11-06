@@ -3811,7 +3811,7 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: To the Moon and Back.\n\nItems:\n1. A big golden full moon with a sleepy smile.\n2. A wide dark blue night sky with twinkling stars (wide).\n3. A wide shimmering moonbeam (tall).\n4. A golden heart with a sparkly trail.\n5. A patchwork quilt of 3 by 3 stitched patches with a scalloped hem (wide).\n6. A red lipstick kiss mark.\n7. A shower of falling starlight.\n8. Three big soft red hearts.\n9. A big starburst flash."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tnb-fx-mug-toss",
    "tab": "Characters",
    "group": "TNB",
@@ -3820,7 +3820,16 @@
    "refs": [
     "art/raw/characters/tnb-ab-mug-toss-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Mug Toss.\n\nItems:\n1. The slightly crooked clay mug from the picture, upright, with a small sticker on it.\n2. The same mug tilted, as if tumbling through the air.\n3. A curved white swoosh, the path of a thrown object (wide).\n4. A big jagged impact burst, yellow and white.\n5. A small star burst.\n6. A small sparkle."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Mug Toss.\n\nItems:\n1. The slightly crooked clay mug from the picture, upright, with a small sticker on it.\n2. The same mug tilted, as if tumbling through the air.\n3. A curved white swoosh, the path of a thrown object (wide).\n4. A big jagged impact burst, yellow and white.\n5. A small star burst.\n6. A small sparkle.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-fx-mug-toss-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793981484779
+    }
+   ]
   },
   {
    "status": "draft",
