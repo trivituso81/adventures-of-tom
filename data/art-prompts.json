@@ -4453,6 +4453,13 @@
      "date": "2026-11-06",
      "from": "v22",
      "at": 1793934795562
+    },
+    {
+     "n": 6,
+     "file": "art/raw/areas/area-square-v7.png",
+     "date": "2026-11-06",
+     "from": "v24",
+     "at": 1793935260448
     }
    ],
    "rejects": [
