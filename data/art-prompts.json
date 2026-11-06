@@ -24,8 +24,16 @@
    "group": "Test card"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-ab-button-mash-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793953009826
+    }
+   ],
    "rejects": [],
    "id": "tom-ab-button-mash",
    "tab": "Characters",
@@ -38,7 +46,7 @@
     "art/raw/characters/tom-battle-sheet-1-v1.png",
     "art/raw/characters/tom-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Disconnected Controller.\n\nRow 1:\n1. Holding a black wireless game controller in both hands at chest height, thumbs on the buttons, calm face.\n2. The same, pressing one button hard, staring down at the controller, eyebrows raised, mouth flat.\n3. Holding the controller out at arm's length in one hand, frowning at it, unimpressed.\n\nRow 2:\n4. Wind-up: the controller in one hand pulled back behind the shoulder, weight on the back leg, eyes narrowed.\n5. Throw: the arm swung fully forward, the controller just leaving the open fingers, front knee bent.\n6. Empty hands, brushing one palm against the other, a dry satisfied look."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose, the object in the hands, and the front of the shirt change, as each frame says.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Disconnected Controller. The game controller printed on the front of his shirt pops off and becomes a real object in his hands. The controller he holds looks exactly like the one on his shirt in pictures 1 to 4: same shape, colors and details, now solid and three-dimensional. From frame 2 on, his shirt is plain navy with nothing on the front, and the rest of the shirt is unchanged.\n\nRow 1:\n1. Looking down at the controller on his shirt, tapping it twice with two fingers, calm curious face. The controller is still on the shirt.\n2. The controller pops off the shirt and floats a hand's width in front of his chest. Both hands come up to catch it, eyebrows raised. His shirt is now plain navy.\n3. Holding the controller in both hands at chest height, thumbs on the buttons, pressing one button hard, staring down at it, mouth flat.\n\nRow 2:\n4. Holding the controller out at arm's length in one hand, giving it a small shake, frowning at it, unimpressed.\n5. Wind-up: the controller in one hand pulled back behind the shoulder, weight on the back leg, eyes narrowed.\n6. Throw: the arm swung fully forward, the controller just leaving the open fingers, front knee bent, a dry satisfied look."
   },
   {
    "status": "approved",
