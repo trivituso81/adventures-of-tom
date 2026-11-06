@@ -148,7 +148,7 @@ for(const key of Object.keys(DC.clips)){
   items.push(it);
 }
 // Dialogue the game shows that has no clip yet (tools/voice-library/harvest.json from harvest.py). Speakers with no voice in
-// DIALOG_CAST are listed too (they cannot be voiced until Claude casts one); Nara's dialogue is her bark sound, not a voice.
+// DIALOG_CAST are listed too (they cannot be voiced until Claude casts one); Nara's boxes are narration, read by the Narrator (Tom 11-06; DIALOG_CAST 'Nara':'narrator').
 run('data/contraction-alias.js'); const CO=vm.runInContext('CONTRACT_OLD',ctx);
 const MONCH={'monsters.js':1,'la-monsters.js':2,'marsh-monsters.js':3,'backlot-monsters.js':4,'school-monsters.js':5,'oak-monsters.js':6,'library-monsters.js':7,'barn-monsters.js':8,'club-monsters.js':9,'terminal-monsters.js':10,'p2-monsters.js':11};
 const monCh={};
@@ -159,7 +159,6 @@ const seenKey=new Set(items.map(it=>(it.t==='b'?'b|':'d|')+it.v+'|'+it.x));
 const btext={}; for(const ch in BC.clips){ btext[ch]=new Set(); for(const k in BC.clips[ch]) for(const c of BC.clips[ch][k]||[]) if(c&&c.text) btext[ch].add(c.text); }
 let nNo=0, nNoVoice=0;
 for(const l of H){
-  if(l.speaker==='Nara') continue;
   const v=CAST.speakers[String(l.speaker).trim()]||null, t=l.text;
   if(!t||!t.trim()) continue;
   const key=v?v+'|'+t:'?'+l.speaker+'|'+t;

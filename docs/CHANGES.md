@@ -1,3 +1,8 @@
+## 2026-11-06 (325): Nara's story boxes are read by the Narrator (`nara3`)
+- Tom (01:56): "Nara's line alike this should be voiced by the narrator, and he should speak narratively but also quickly." Fact: Nara never speaks; every box labeled Nara (60 scene blocks, 109 lines) is narration. `data/dialog-cast.js` now casts `'Nara':'narrator'`. The Narrator's delivery stays as set: theatrical storyteller, lively pace, ElevenLabs speed 1.15 (max is 1.2).
+- `tools/voice-library/make-index.js` no longer skips Nara, so her boxes appear in the Voice Library as Narrator lines: 95 new lines to bake (dialogue lines with no clip 19 to 114). Until baked they stay silent, as every new line does. Nothing was reworded.
+- Tags: `nara3` (build stamp, `data/dialog-cast.js`).
+
 ## 2026-11-06 (324): Nara smaller on the map, portrait shows her whole head (`nara2`)
 - Tom (01:51, 01:54): "Nara is too big in the overworld", "Nara's portrait is cropped too close". Fact: her map size shared one number with battle and splash (`NARA_SIZE` 1.15). Now the map has its own `NARA_OW_SIZE` 0.9 in `data/nara-hires-use.js`; battle, knocked out and splash stay 1.15.
 - Portrait: `NARA` square in `tools/sprite-bake/bake_portraits.py` widened from 500 to 880 source pixels, so the whole head with ears fits; `portraits/nara.png` rebaked.
