@@ -1,3 +1,7 @@
+## 2026-11-05 (245): All remaining boss prompts: far more detailed, beautiful and dramatic, six distinct poses (Art Library only, no game files, no tag)
+
+Tom: "revise all the other bosses accordingly". 19 boss prompts (Old Big One kept as Tom edited it) now carry a richer look line (FLAIR in tools/art-library/enemy-prompts.js) and six custom poses with a real attack and a follow-through unlike pose 1. Julian and Dead Letter have no guide picture, so Julian uses the description version with the same text. Soft word "knocked" avoided.
+
 ## 2026-11-05 (244): The Mirrorball boss prompt: much more detailed, beautiful and dramatic (Art Library only, no game files, no tag)
 - Tom (16:46): same feedback as Old Ironbelly. `LEAD.mirrorball` (hundreds of shining facets, layered feathers, jewels and glitter, regal diva presence, colored stage light) and `POSES.mirrorball` (six dramatic poses, 6 a follow-through) in tools/art-library/enemy-prompts.js; `enemy-mirrorball` prompt updated in the json; its approved v1 picture and status kept. Same limit as Ironbelly: about 300 px per pose with six poses in one picture.
 
