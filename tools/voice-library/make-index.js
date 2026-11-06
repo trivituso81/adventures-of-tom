@@ -233,6 +233,16 @@ for(const it of items){ if(it.t!=='b'||it.ty!=='b') continue;
   const mv=[]; for(const k of it.k){ const r=moveOf(it.v,k); if(r){ if(!mv.some(x=>x[0]===r[0]&&x[1]===r[1])) mv.push(r); } else if(!/^(hurt|low|ko|win|attack|flashback|introshout|tombo[23]?|dc[123]|basic)$/.test(k)) unresolved.set(it.v+'.'+k,1); }
   if(mv.length) it.mv=mv; }
 console.log('lines labelled with a move:',items.filter(x=>x.mv).length,'| kinds with no move found:',[...unresolved.keys()].join(' ')||'none');
+// Old voice (tools/voice-library/old-voice.js): a line of a recast voice whose baked clip is still the pre-recast audio gets ov:1.
+// The Library lists it under Show > Old voice until a new take is merged (the hash then no longer matches).
+const OLDV=fs.existsSync('tools/voice-library/old-voice.json')?JSON.parse(fs.readFileSync('tools/voice-library/old-voice.json','utf8')):{};
+const recast={}; for(const v in OLDV) recast[v]=OLDV[v].at;
+{ const sha=s=>require('crypto').createHash('sha1').update(s).digest('hex').slice(0,16);
+  const H={}; for(const v in OLDV) H[v]=new Set(OLDV[v].hashes);
+  for(const it of items){ const h=H[it.v]; if(!h||it.f<0) continue;
+    if(it.t==='d'){ const a=DC.clips[it.v+'|'+it.x]; if(a&&h.has(sha(a))) it.ov=1; }
+    else { const C=BC.clips[it.v]||{}; for(const k in C) if((C[k]||[]).some(c=>c&&c.text===it.x&&c.mp3&&h.has(sha(c.mp3)))){ it.ov=1; break; } } }
+  for(const v in OLDV) console.log('old voice still baked:',v,items.filter(x=>x.v===v&&x.ov).length,'lines'); }
 items.forEach((it,i)=>it.i=i);
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }
@@ -241,7 +251,7 @@ const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vn
 for(const it of items) if(it.s&&(it.v==='boppy'||it.v==='justin')){
   it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>/new york/i.test(t)?m:'[thick New York accent'+(t.trim()?', '+t.trim():'')+']');
   if(!/^\s*\[/.test(it.s)) it.s='[thick New York accent] '+it.s; }
-const out={made:new Date().toISOString().slice(0,10),files,voices,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
+const out={made:new Date().toISOString().slice(0,10),files,voices,recast,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};
 fs.writeFileSync('data/voice-index.json',JSON.stringify(out));
 const nb=items.filter(x=>x.t==='b').length, nd=items.length-nb, auto=items.filter(x=>x.auto).length;

@@ -341,7 +341,10 @@ async function startRec(it){
 function passWho(it,s){ s=s||F.who; return !s.size||s.has(it.v); }
 function passType(it,s){ s=s||F.type; return !s.size||s.has(it.ty); }
 function passCh(it,s){ s=s||F.ch; if(!s.size) return true; return it.c.length?it.c.some(n=>s.has(n)):s.has(0); }
-function passShow(it){ if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); return true; }
+// Old voice: a line of a recast voice (IDX.recast: voice -> recast time) that still plays the pre-recast audio here: the baked
+// clip is old (it.ov) and no take was chosen on this device, or the take chosen here was made before the recast.
+function isOld(it){ const at=IDX.recast&&IDX.recast[it.v]; if(!at) return false; const loc=localFor(it); return loc?(loc.t||0)<at:!!it.ov; }
+function passShow(it){ if(F.show==='old') return isOld(it); if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); return true; }
 // Search forgives spelling: every word typed must appear in the line, its speaker, place, move name or direction, either inside a
 // word or within one typo (two for long words), so "yamamot" finds "Ymamot".
 function lev(a,b){ if(Math.abs(a.length-b.length)>2) return 9; let p=[...Array(b.length+1).keys()];
@@ -364,7 +367,7 @@ function renderFilters(){
   const chs=IDX.chapters.filter(c=>IDX.items.some(it=>it.c.includes(c.n)));
   $('fChap').innerHTML='<span class="lab">Chapter</span>'+chip('ch','*','All',!F.ch.size,vc.length)+chs.map(c=>chip('ch',c.n,(c.n===21?'Bonus':'Ch '+c.n),F.ch.has(c.n),cc[c.n]||0)).join('')+chip('ch','0','No chapter',F.ch.has(0),cc[0]||0);
   const p=IDX.items.filter(it=>localFor(it)).length, nn=IDX.items.filter(it=>it.f<0&&!localFor(it)).length;
-  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin');
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin')+(IDX.recast&&Object.keys(IDX.recast).length?chip('show','old','Old voice',F.show==='old',IDX.items.filter(isOld).length):'');
 }
 function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(F.show!=='all'?1:0)+(F.q.trim()?1:0); }
 function renderSum(){

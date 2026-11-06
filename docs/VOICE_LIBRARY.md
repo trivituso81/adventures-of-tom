@@ -27,6 +27,9 @@ Title screen > ADMIN > VOICE LIBRARY opens `voices.html` inside the app.
 ## Narration boxes (2026-11-03, `narr1`)
 A scene box labeled with a place, object or moment ("Little silver door", "Sunday dinner") is narration. Map the label to `narrator` in `DIALOG_CAST.speakers`. The Narrator uses Mr. Washington's voice id (override in make-index.js) and the delivery direction "theatrical storyteller, lively pace" (narr1). Its description in data/dialog-cast.js says the same. Characters (monsters, Whispers, Long coat) get a character voice instead.
 
+## Old voice (recast leftovers, `oldvoice1`, 2026-11-05)
+Show > Old voice lists lines of a recast voice that still play the pre-recast audio (Deedee: 80 at the start). Data: `tools/voice-library/old-voice.json` from `node tools/voice-library/old-voice.js <voice> <commit before the recast> <recast ISO time>`; `make-index.js` sets `ov:1` and `recast`. Run old-voice.js once for every future recast. A merged new take clears its line on the next index rebuild; a phone take made after the recast clears it on that device at once.
+
 ## Rebuild the index (Claude)
 
 Whenever clips are merged, lines change or scripts are added: `python3 tools/voice-library/battle-scripts.py && python3 tools/voice-library/harvest.py && node tools/voice-library/make-index.js`, bump nothing else (the page fetches the index with no cache), commit.

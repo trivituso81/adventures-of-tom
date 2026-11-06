@@ -1,3 +1,10 @@
+## 2026-11-05 (284): Voice Library "Old voice" filter: Deedee's 80 lines still in her pre-recast voice (`oldvoice1`)
+
+- Tom (20:00 and 20:09): Deedee's old voice still plays after he recorded new ones; "how do I find the ones that are not her new voice and just rebake those".
+- Fact: 80 Deedee lines (6 battle clips, 74 dialogue) are byte for byte the clips from before the recast (main e32e89f, 11-02 12:41). List: Project doc claude/deedee-old-voice-2026-11-05.md. Nothing was archived or deleted.
+- New: `tools/voice-library/old-voice.js <voice> <commit> <recast time>` hashes every clip of a recast voice as it was before the recast into `tools/voice-library/old-voice.json`. `make-index.js` marks a line `ov:1` while its baked clip still has one of those hashes and writes `recast` (voice to recast time) into the index. voices.html Show row has a new chip, Old voice: baked clip still old and no take chosen on this device, or the take chosen here was made before the recast. Merging a new take clears the line by itself.
+- Tested: tools/voice-library/test.py ALL PASS; chip shows 80; a phone take made after the recast drops a line from the list, one made before keeps it; no other index field changed (4124 lines, voices identical).
+- Next: Tom selects all 80 under Old voice, Regenerate, listens, Export phone clips; Claude merges with merge-local.js.
 ## 2026-11-05 (283): Every cast member drawn at real height next to Tom on the overworld (`castsize1`)
 - Tom 19:57: "using Tom as a baseline given each character's height, increase the other characters to match Tom's proportions."
 - Cause: the street size (x1.296) and house size (x1.6) were given only to Tom, Grace, Rose and Tom carrying Rose, so every other adult was drawn 24% (streets) to 38% (houses) shorter than real height next to Tom.
