@@ -98,7 +98,8 @@ python3 tools/sprite-bake/hires_install.py /tmp/hires 1.5 amy-battle amy-ko
 | Script | HIRES | Sheets to install |
 |---|---|---|
 | bake_tom_walk_v4.py | 1.5 | tom-battle, tom-ko, tom-poses |
-| bake_grace_walk_v4.py, bake_grace_extra.py, bake_grace_poses.py | 1.5 | grace-battle, grace-ko, grace-extra, grace-wheel |
+| bake_grace_walk_v4.py, bake_grace_poses.py | 1.5 | grace-battle, grace-ko, grace-wheel |
+| bake_grace_ab.py | 1.5 | grace-ab (her 14 ability sheets, 93 frames; cut by grace_ability_frames.py) |
 | bake_rose.py | 1.5 | rose-battle, rose-battle-x, rose-battle-tk, rose-battle-bm, rose-ko, rose-ride-bt |
 | bake_amy.py, bake_amy_extra.py | 1.5 | amy-battle, amy-ko, amy-ba, amy-bs, amy-bp, amy-mk |
 | bake_deedee.py, bake_deedee_extra.py, bake_deedee_brisk.py | 1.5 | deedee-battle, deedee-ko, deedee-extra, deedee-brisk |

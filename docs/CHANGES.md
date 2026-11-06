@@ -1,3 +1,9 @@
+## 2026-11-06 (316): Grace's 14 approved ability sheets installed (`gab1`)
+- Tom (01:2x): "incorporate Grace's approved ability animations". All 14 moves (cartwheel, dance, squishy squeeze, glitter nails, welcome back, like and subscribe, dumpling drop, viral, dance battle, open strings, handstand contest, portrait mode, bedazzle blast, olympic) now play his painted frames as painted (`tools/sprite-bake/grace_ability_frames.py`, `bake_grace_ab.py` -> `art/chars/grace-ab.webp`, `data/grace-ab.js`). Hit timings and scenes kept.
+- Squishy Squeeze, Welcome Back and Olympic came as 3x3 sheets with smaller figures, so those frames are upscaled more. Squishy frame 3 is cut at the thigh; frames 4 to 6 borrow legs.
+- Purged: bake_grace_extra.py, data/grace-extra.js, art/chars/grace-extra.webp, the old rig pose table, drawn brush, bottle, trophy, notes and footstep helpers, duplicate move definitions, leotard palette swap. 0 references. The three prop files for brush, bottle and trophy go with the objects install. Wheel data stays (Tombos use it).
+- Tested: kit_test on all 14 moves, tag_check, unused_voice 0, smoke FAILS [].
+
 ## 2026-11-06 (319): Deedee fights with her two painted battle sheets (`battlesheet8`)
 - Tom (01:06, "they're not showing in battle"): her sheets (art/raw/characters/deedee-battle-sheet-1/2-v1.png) are now what she fights with. The 15 frames are used as painted (no head warp, no body change); the ready pose keeps the old idle's visible height (99.5 rows). NEW slots: idle2 breath, hip, spread, power point (data/deedee-hires-battle.js). KO is the painted dizzy sit. Run frames are her walk sheet's side steps.
 - Her extra sheets (attack, story, flick, nurse, brisk) are pinned to the old idle (HEAD_KB 2.356, OLD_IDLE_H 539) and came back pixel for pixel. Battle atlas and KO baked at 1.5 through hires.py with sharpen 80.

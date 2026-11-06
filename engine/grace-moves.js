@@ -365,12 +365,6 @@ SC.g_spots=(s,u)=>{ const F=s.foes&&s.foes.length?s.foes:[],p=gpos(); gfx.global
   if(u>UI+.12) label('WRONG MARK',(B.x0+B.x1)/2,B.y0-26,GOLD,1); };
 
 // ---------- Moves ----------
-G.danceShow=E2=>{ const {m,fx}=E2;
-  enqueue(()=>{ setMessage('Grace makes room in the routine.'); say('grace','dance'); scene('g_countmarks',1.9,{}); for(let k=0;k<4;k++) b7Later(()=>sfx.click(),k*110); },
-    500,()=>{ fx.twirl=1.0; sfx.dance(); for(const p of b2LiveParty()) { const h=home(p); scene('g_footstep',.9,{x:h.x,y:h.base,h:h.h}); } },
-    IMPACT,()=>{ E2.apply(); sfx.ding(); bt('DANCE BREAK',96,24,GOLD,3,1.1); },
-    500,()=>{ pose(fx,'expr',.5); for(const p of b2LiveParty()) if(p!==m) battle.fx[p.idx].hop=.3; },
-    300,'Everyone finishes on the count. Even the late one.',()=>checkEnemy()); };
 G.dumpling_consult=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
   enqueue(()=>{ setMessage('Grace seats the gold dumpling on a tiny consultation cushion.'); say('grace','dumpling_consult'); scene('g_consult',1.8,{x:h.x,y:h.base-h.h,foe:t.side==='foe'}); pose(fx,'expr',.9); },
     500,()=>{ sfx.whoosh(); },
@@ -378,7 +372,7 @@ G.dumpling_consult=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
     500,()=>{ pose(fx,'celeb',.5); sfx.ding(); },
     300,kindLine(t,'The consultation is extremely sparkly.'),()=>checkEnemy()); };
 // Every move registers the unwarped scenes first (see NW above).
-for(const k of ['danceShow','dumpling_consult']) { const f=G[k]; G[k]=E2=>{ NW(); return f(E2); }; }
+for(const k of ['dumpling_consult']) { const f=G[k]; G[k]=E2=>{ NW(); return f(E2); }; }
 })();
 
 // ================= Option 3 set pieces (animation quality pass, 2026-10-24) =================
@@ -433,27 +427,6 @@ SC.gr_crowd=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.7); for(let k=0;k<5;k++) 
 SC.gr_heels=(s,u)=>{ const x=s.x,y=s.y; gfx.globalAlpha=1-u; for(let k=0;k<6;k++) { const a=-Math.PI+k*Math.PI/5; Ln(x+Math.cos(a)*(6+u*12),y+Math.sin(a)*(6+u*12),x+Math.cos(a)*(10+u*20),y+Math.sin(a)*(10+u*20),2,GOLD); } if(u<.6) label('CLICK',x,y-22,GOLD,1); };
 SC.gr_shoe=(s,u)=>{ const pop=u<.2?ez(u/.2)*1.3:lerp(1.3,1,cl((u-.2)/.15)); gfx.globalAlpha=fade(u,.7); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.35); gfx.scale(pop,pop);
   E(0,-6,12,16,OUT); E(0,-6,10,14,PINK); R(-7,10,14,10,OUT); R(-5,12,10,6,PINK); E(-3,-10,4,6,PINK2); gfx.restore(); };
-
-// ---------- DANCE ----------
-SC.gr_marks=(s,u)=>{ const ms=s.t*1000,x0=s.x-48,y=s.y+8; gfx.globalAlpha=fade(u,.9);
-  for(let k=0;k<4;k++) { const x=x0+k*32,on=ms>s.c0+k*200,last=k===3&&ms>s.heartAt;
-    if(last) { const b=1+Math.sin(cl((ms-s.heartAt)/250)*Math.PI)*.35; E(x,y+2,13,5,OUT); heart(x,y-6,8*b,'#ff6b9a'); continue; }
-    E(x,y,12,5,OUT); E(x,y,10,4,on?GOLD:'#8a7a90'); if(on&&ms<s.c0+k*200+400) label(''+(k+5),x,y-20,CREAM,2); } };
-SC.gr_footstep=(s,u)=>{ const x=s.x,y=s.y,d=ez(u/.2); gfx.globalAlpha=fade(u,.6); E(x-8,y+2,6,3,OUT); E(x-8,y+2,4.5,2,PINK2); E(x+8,y+2-4*d,6,3,OUT); E(x+8,y+2-4*d,4.5,2,PINK2);
-  ring(x,y-s.h*.45,26+u*22,34+u*26,3,'rgba(255,226,122,'+(.7*(1-u))+')'); };
-G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
-  const px=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length)-30,py=Math.min(312,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+22);
-  const late=party.find(p=>p.id==='rose'&&p!==m)||party.find(p=>p!==m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:px<me.x?'run':'runR'},{t:700,x:px,y:py,f:'idle'},{t:750,f:(u,tt)=>Math.floor(u*8)%2?'celeb':'idle'},
-    {t:1550,f:(u,tt)=>['celeb','flip','celebFlip','idle'][Math.floor(tt*9)%4],dx:u=>Math.sin(u*Math.PI*4)*20,hop:10,hn:4},{t:2450,f:'act'},{t:2950,f:'celeb',hop:16},{t:3300,f:px<me.x?'runR':'run'},{t:4000,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace takes the floor in front of everyone. Dance break.'); say(m.id,'dance'); scene('gr_marks',3.0,{x:px,y:py,c0:750,heartAt:2450}); }],
-    [750,()=>{ for(let k=0;k<4;k++) b7Later(()=>sfx.click(),k*200); setMessage('Five, six, seven, eight.'); }],
-    [1550,()=>{ sfx.dance(); party.forEach((p,k)=>{ const q=ST.unit(p); scene('gr_footstep',.9,{x:q.x,y:q.base,h:q.h,delay:k*.18}); if(p!==m) b7Later(()=>{ battle.fx[p.idx].hop=.3; },k*180); }); }],
-    ['hf',2450],
-    [2450,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gr_text',1.1,{x:px,y:py-110,txt:'DANCE BREAK',c:GOLD}); }],
-    [2500,()=>{ if(late) { const q=ST.unit(late); scene('gr_text',1,{x:q.x,y:q.top-16,txt:'LATE',c:PINK}); battle.fx[late.idx].hop=.4; } }],
-    [4100,'end','Everyone finishes on the count. Even the late one.']]); };
 
 // ---------- Dumpling Consult ----------
 SC.gr_consult=(s,u)=>{ const ms=s.t*1000,P=s.plan; gfx.globalAlpha=1;
@@ -610,81 +583,27 @@ SC.gv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.
 // in a star, easing in on the first wheel and out on the second. She lands facing the monster, kicks (impact 1800),
 // TA-DA! with one hop, and hops home. Poses come from data/grace-wheel.js (hip-centred frames, rotated about the hip).
 SC.gv_dust=(s,u)=>{ gfx.globalAlpha=(1-u)*.9; for(const dx of [-8,0,8]) E(s.x+dx*(1+u*1.5),s.y-2-u*8,3+u*4,2+u*3,'#e8e2d6'); };
-SC.gv_shadow=(s,u)=>{ const st=s.st; if(!st||st.x==null||st.gy==null) return; const lift=Math.max(0,st.gy-st.foot); gfx.globalAlpha=.28*Math.max(.35,1-lift/60); E(st.x,st.gy+4,20-Math.min(10,lift/6),4,'#2f4936'); };
-G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),W=GRACE_WHEEL,P=W.P,S=W.scale,HC=W.C*S;
-  const sp=GSP(),D=Math.PI/180;
-  // Rolling table (sprite pixels): two wheels, hip path and which limb is planted, the planted limb never sliding.
-  const NS=600,WH=2,pose=p=>p<.12?W.blend('lunge','star',p/.12,3):(p>.86?W.blend('star','land',(p-.86)/.14,3):{q:P.star,key:'star'});
-  const TB=[]; { let x=0,c=-1;
-    for(let i=0;i<=NS;i++) { const p=i/NS,b=pose(p),th=(b.q.lean||0)*D-WH*2*Math.PI*p,e=W.tips(b.q,th);
-      if(c>=0) { const pr=TB[i-1]; x=pr.x+pr.e[c][0]-e[c][0]; }
-      let mx=-1e9,mi=0; e.forEach((v,k)=>{ if(v[1]>mx) { mx=v[1]; mi=k; } }); c=mi; TB.push({x,low:W.low(b.q,th),th,b,e,c}); } }
-  // Where she lands: the kick reaches the monster's front edge. The roll is squeezed to fit the gap (it is a little longer
-  // than most gaps), so the planted hand or foot drifts a touch instead of the body overshooting.
-  const kickReach=-Math.min(...W.tips(P.kick,P.kick.lean*D).map(v=>v[0]))*S;
-  const KX=Math.min(me.x-60,F.x+F.w*.5-2+kickReach),LX=KX+10,GY=Math.min(314,F.base+3),HX=me.x,HY=me.base;
-  const DIST=-TB[NS].x*S,K=Math.max(.35,Math.min(1.15,(HX-LX)/DIST));
-  const st={x:null,y:null,frame:null,fx,gy:HY,foot:HY}; ST.cur=st;
-  const puffs=[],bursts=[.25,.75];
-  let lastC=-1,lastP=0,landed=false;
-  const hipFor=(q,th,gy,hop=0)=>gy-W.low(q,th)*S-hop;
-  // Hip position, rotation and frame for any moment of the move (ms at 1x).
-  const at=ms=>{
-    if(ms<250) { const b=W.blend('stand','lunge',ms/250,2),th=b.q.lean*D; return {x:HX,gy:HY,th,fr:W.frame(b.q,b.key),y:hipFor(b.q,th,HY)}; }
-    if(ms<1500) { const u=(ms-250)/1250,p=lerp(u,ez(u),.6),i=Math.round(p*NS),r=TB[i],gy=lerp(HY,GY,ez(p));
-      return {x:HX+r.x*S*K,gy,th:r.th,fr:W.frame(r.b.q,r.b.key),y:gy-r.low*S,p,r}; }
-    if(ms<1650) { const q=P.land; return {x:LX,gy:GY,th:0,fr:W.frame('land'),y:hipFor(q,0,GY)}; }
-    if(ms<1800) { const u=ez((ms-1650)/150),b=u<.5?{q:P.chamber,key:'chamber'}:{q:P.kick,key:'kick'},th=b.q.lean*D*u; return {x:lerp(LX,KX,u),gy:GY,th,fr:W.frame(b.q,b.key),y:hipFor(b.q,th,GY)}; }
-    if(ms<1950) { const th=P.kick.lean*D; return {x:KX,gy:GY,th,fr:W.frame('kick'),y:hipFor(P.kick,th,GY)}; }
-    if(ms<2100) { const u=(ms-1950)/150,b=u<.5?{q:P.chamber,key:'chamber'}:{q:P.sstand,key:'sstand'},th=b.q.lean*D*(1-u); return {x:KX,gy:GY,th,fr:W.frame(b.q,b.key),y:hipFor(b.q,th,GY)}; }
-    if(ms<2900) { const u=(ms-2100)/800,hop=u<.35?Math.sin(u/.35*Math.PI)*14:0; return {x:KX,gy:GY,th:0,fr:sp.celeb,std:1,y:GY-hop}; }
-    const u=cl((ms-2900)/600),hop=Math.abs(Math.sin(u*Math.PI*3))*14,gy=lerp(GY,HY,u); return {x:lerp(KX,HX,u),gy,th:0,fr:sp.flip,std:1,y:gy-hop}; };
-  fx.path={t:0,dur:3.5,st:true,fn:(q,c)=>{ const ms=q*3500,s=at(ms);
-    st.x=s.x; st.gy=s.gy; st.frame=s.fr; st.sp=sp; st.sc=1;
-    if(s.std) { st.y=s.y; st.foot=s.y; const [wx,wy]=ST.unwarp(s.x,s.y); return {cx:wx,base:wy,frame:s.fr,rot:0,noShadow:true}; }
-    st.y=s.y+(s.std?0:0); st.hip=s.y; st.foot=s.y+W.low(P.stand,0)*S;
-    if(s.r) { const r=s.r;   // dust where a new hand or foot touches down, a sparkle burst each time she is upside down
-      if(r.c!==lastC&&lastC!==-1) { const e=W.rot(r.e[r.c],0); puffs.push([s.x+e[0]*S,s.gy]); } lastC=r.c;
-      for(const k of bursts) if(lastP<k&&s.p>=k) { const v=W.rot([0,-W.TL*.6],r.th); scene('gv_burst',.5,{x:s.x+v[0]*S,y:s.y+v[1]*S,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }
-      lastP=s.p; st.foot=s.y+r.low*S; }
-    while(puffs.length) { const [px,py]=puffs.shift(); scene('gv_dust',.32,{x:px,y:py}); sfx.step(); }
-    if(ms>=1500&&!landed) { landed=true; scene('gv_dust',.32,{x:LX-10,y:GY}); scene('gv_dust',.32,{x:LX+10,y:GY}); sfx.bump(); }
-    const [wx,wy]=ST.unwarp(s.x,s.y+HC);
-    return {cx:wx,base:wy,frame:s.fr,rot:s.th,noShadow:true}; }};
-  scene('gv_shadow',3.5,{st});
+G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
+  // Her ability sheet (ab_wheel_1 to 6): lunge, two cartwheels (hand planted, then upside down), the landing star, the kick, TA-DA.
+  const KX=Math.min(me.x-60,F.x+F.w*.5+34),GY=Math.min(314,F.base+3),HX=me.x,HY=me.base;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:KX+90,y:GY,f:'ab_wheel_1'},{t:850,x:KX+70,y:GY,f:'ab_wheel_2',dy:u=>-Math.sin(u*Math.PI)*16},{t:1150,x:KX+40,y:GY,f:'ab_wheel_3',dy:u=>-Math.sin(u*Math.PI)*16},
+    {t:1450,x:KX+14,y:GY,f:'ab_wheel_5'},{t:1650,x:KX,y:GY,f:'ab_wheel_4',dx:u=>-ez(u)*6},{t:2000,f:'ab_wheel_6'},{t:2450,f:'ab_wheel_5',hop:14},{t:2900,f:'runR'},{t:3600,x:HX,y:HY,f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Grace cartwheels in. Twice. Showing off the whole way.'); say(m.id,'cartwheel'); }],
     [250,()=>{ sfx.whoosh(); }],
+    [900,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
+    [1200,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }],
+    [1450,()=>{ scene('gv_dust',.32,{x:KX+10,y:GY}); scene('gv_dust',.32,{x:KX+30,y:GY}); sfx.bump(); }],
     ['hf',1800],
     [1800,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gv_big',.3,{x:F.x,y:F.top-74,txt:'HI-YAH!',c:PINK,sc:4}); scene('gv_burst',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:40}); }],
     [2100,()=>{ scene('gv_big',.8,{st,txt:'TA-DA!',c:PINK2,sc:3}); sfx.ding(); }],
     [3450,'end',res(E2)+'She sticks the landing and takes a bow.']]); };
 { const legacy=G.cartwheel; G.cartwheel=E2=>(E2.act&&E2.act.o3?G.cartwheelShow(E2):legacy(E2)); }
 
-// ---------- DANCE (signature) ----------
-// Grace counts it in, twirls big in the middle, confetti everywhere, and the whole party dances along with her.
-SC.gv_notes=(s,u)=>{ for(let k=0;k<8;k++) { const q=((s.t*.9)+k/8)%1,x=s.x-90+k*24+Math.sin(q*6+k)*8,y=s.y-q*90; gfx.globalAlpha=(1-q)*fade(u,.85);
-  E(x,y,5,4,OUT); E(x,y,3.5,2.6,CONF[k%CONF.length]); Ln(x+4,y,x+4,y-14,2,OUT); } };
-G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
-  const px=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length)-30,py=Math.min(312,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+22);
-  const twirl=(u,tt)=>Math.floor(tt*14)%2?'idle':'flip';
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:px<me.x?'run':'runR'},{t:700,x:px,y:py,f:'idle'},{t:750,f:(u,tt)=>Math.floor(u*8)%2?'celeb':'idle'},
-    {t:1550,f:twirl,sc:u=>1+Math.sin(cl(u/.3)*Math.PI/2)*.22,hop:14,hn:3},{t:2450,f:'celeb',sc:1.22,hop:30},{t:2800,f:(u,tt)=>['celeb','flip','celebFlip','idle'][Math.floor(tt*8)%4],dx:u=>Math.sin(u*Math.PI*4)*16,hop:8,hn:4},
-    {t:3500,f:px<me.x?'runR':'run'},{t:4200,x:'home',y:'home',f:'idle'}]);
-  const others=party.filter(p=>p!==m);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace takes the floor in front of everyone. Dance break.'); say(m.id,'dance'); }],
-    [750,()=>{ for(let k=0;k<4;k++) b7Later(()=>sfx.click(),k*200); setMessage('Five, six, seven, eight.'); }],
-    [1550,()=>{ sfx.dance(); sfx.spin&&sfx.spin(); setMessage('She twirls. Everybody else has to dance too. Those are the rules.'); scene('gv_notes',2.6,{x:px,y:py-70});
-      others.forEach((p,k)=>{ const ph=k*1.3; dance(p,2.3,(q,tt)=>({dx:Math.sin(tt*7+ph)*7,dy:-Math.abs(Math.sin(tt*7+ph))*12,rot:Math.sin(tt*7+ph)*.12,frame:Math.floor(tt*3.5+k)%2?'celeb':'idle'})); }); }],
-    ['hf',2450],
-    [2450,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gv_confetti',1.9,{n:70,seed:3}); scene('gv_big',1.3,{x:px,y:py-158,txt:'DANCE BREAK!',c:GOLD,sc:4});
-      for(const p of party) { const q=ST.unit(p); scene('gv_glitter',.8,{x:q.x,y:q.mid,r:40}); } }],
-    [4300,'end','Everyone dances. Even the ones who said they wouldn\'t.']]); };
-
 // ---------- Squishy Squeeze (A1) ----------
 // Grace carries the gold dumpling squishy over, holds it out, and the friend gives it the biggest squeeze. SQUISH.
 SC.gv_squish=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=.75,sq=0;
+  if(P.self||ms<P.hold||ms>P.back+250) return;   // in her hands it is painted into her frames; only the pass to the friend is drawn
   if(ms<P.hold) { const h=hand(); x=h.x-10; y=h.y-10; }
   else { const q=ez((ms-P.hold)/250); x=lerp(hand().x-10,P.x,q); y=lerp(hand().y-10,P.y,q); sc=lerp(.75,1.35,q);
     if(ms>P.sq&&ms<P.sq+1100) sq=Math.pow(Math.abs(Math.sin(cl((ms-P.sq)/1100)*Math.PI*3)),1.2)*.95; }
@@ -692,10 +611,10 @@ SC.gv_squish=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=.75,sq=0;
   gfx.globalAlpha=1; dumpling(x,y,sq,sc);
   if(sq>.5) { gfx.globalAlpha=.8; for(let k=0;k<6;k++) { const a=k*Math.PI/3; Ln(x+Math.cos(a)*44,y+Math.sin(a)*28,x+Math.cos(a)*58,y+Math.sin(a)*38,3,CREAM); } } };
 G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,goL=sp.x<ST.unit(m).x;   // goL: the ally's spot is left of her home; face the way she walks
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'expr'},{t:1100,f:'act',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2600,f:'celeb',hop:10},{t:3000,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:goL?'walk':'walkR',hop:4,hn:6},{t:1000,x:sp.x,y:sp.y,f:'expr'},{t:1200,f:'act',dx:u=>-ez(u)*6},{t:2600,f:'celeb',hop:10},{t:2900,f:goL?'walkR':'walk',hop:3,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'ab_squish_2'},{t:500,f:'ab_squish_5'},{t:1100,f:'ab_squish_3',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2600,f:'ab_squish_6',hop:10},{t:3000,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:goL?'ab_squish_1':'ab_squish_1R',hop:4,hn:6},{t:1000,x:sp.x,y:sp.y,f:'ab_squish_2'},{t:1200,f:'ab_squish_8',dx:u=>-ez(u)*6},{t:2600,f:'ab_squish_6',hop:10},{t:2900,f:goL?'ab_squish_1R':'ab_squish_1',hop:3,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),hold=self?1100:1200,end=self?3400:4000;
-  const plan={hold,sq:hold+350,back:2600,x:self?H.x-32:H.x+H.w*.25,y:H.mid-4};
+  const plan={hold,sq:hold+350,back:2600,self,x:self?H.x-32:H.x+H.w*.25,y:H.mid-4};
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Grace gives the gold dumpling squishy a squeeze herself.':'Grace carries the gold dumpling squishy over to '+t.name+'. Squeeze it!'); say(m.id,'squishy_squeeze'); scene('gv_squish',end/1000,{plan}); }],
     [plan.sq,()=>{ for(let k=0;k<3;k++) b7Later(()=>sfx.squeak(),k*360); }],
@@ -706,25 +625,21 @@ G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotF
 
 // ---------- Glitter Nails (A2) ----------
 // Grace visits everyone with a big bottle of glitter polish and paints their nails; each gets a giant sparkly nail. Glitter burst.
-const polish=(x,y,a,c)=>{ if(PROPART.draw('grace/pink_nail_polish_bottle',x,y+6,{h:50,rot:a||0})) return;   // painted bottle; drawn one below is the fallback
-  gfx.save(); gfx.translate(x,y); gfx.rotate(a||0); R(-11,-6,22,30,OUT); R(-9,-4,18,26,c||PINK); R(-6,0,4,18,'#ffd0e6'); for(let k=0;k<4;k++) R(-6+k*4,6+(k%2)*8,2,2,CREAM);
-  R(-6,-24,12,20,OUT); R(-4,-22,8,16,'#2b2a26'); gfx.restore(); };
-SC.gv_bottle=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.95); polish(h.x-6,h.y-6,-.3+Math.sin(s.t*12)*.15,PINK); };
 SC.gv_bignail=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.82);
   if(PROPART.draw('grace/giant_glitter_nail',s.x,s.y,{h:50*g})) return;   // painted giant glitter nail (pink); the drawn one below is the fallback
   gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g*1.6,g*1.6);
   R(-11,-4,22,22,OUT); E(0,-6,11,11,OUT); R(-9,-4,18,20,'#f6d4b8'); E(0,-6,9,9,s.c||PINK); R(-9,-6,18,4,s.c||PINK); R(-5,-12,3,8,CREAM); const gl=(s.t*2)%1; star(5,-12+gl*14,1.5+gl*2,CREAM); gfx.restore(); };
 G.glitter_nails=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m);
   const order=foe?[foe]:who.filter(u=>u!==m).sort((a,b)=>(a.id==='rose'?-1:0)-(b.id==='rose'?-1:0));
-  const K=[{t:0,x:'home',y:'home',f:'idle'}],visits=[]; let t=300,cx=me.x;
-  for(const u of order) { const q=ST.unit(u),x=Math.min(560,q.x+q.w*.5+22),y=q.base+3; K.push({t,f:x<cx?'walk':'walkR',hop:3,hn:4}); t+=600; K.push({t,x,y,f:'kneel'}); visits.push([t+250,u]); K.push({t:t+250,f:'act',dx:(uu,tt)=>Math.sin(tt*30)*1.5}); t+=foe?1300:650; cx=x; }
-  if(!foe&&who.includes(m)) { K.push({t,f:me.x<cx?'walk':'walkR',hop:3,hn:4}); t+=600; K.push({t,x:'home',y:'home',f:'kneel'}); visits.push([t+200,m]); t+=550; }
+  const K=[{t:0,x:'home',y:'home',f:'ab_nails_3'}],visits=[]; let t=300,cx=me.x;
+  for(const u of order) { const q=ST.unit(u),x=Math.min(560,q.x+q.w*.5+22),y=q.base+3; K.push({t,f:x<cx?'ab_nails_1':'ab_nails_1R',hop:3,hn:4}); t+=600; K.push({t,x,y,f:'ab_nails_2'}); visits.push([t+250,u]); K.push({t:t+250,f:'ab_nails_5',dx:(uu,tt)=>Math.sin(tt*30)*1.5}); t+=foe?1300:650; cx=x; }
+  if(!foe&&who.includes(m)) { K.push({t,f:me.x<cx?'ab_nails_1':'ab_nails_1R',hop:3,hn:4}); t+=600; K.push({t,x:'home',y:'home',f:'ab_nails_2'}); visits.push([t+200,m]); t+=550; }
   const last=visits.length?visits[visits.length-1][0]:t,fin2=Math.max(t,last+300);
-  K.push({t:fin2,f:'celeb',hop:16},{t:fin2+400,f:'idle'},{t:fin2+700,x:'home',y:'home',f:'idle'});
+  K.push({t:fin2,f:'ab_nails_6',hop:16},{t:fin2+400,f:'ab_nails_4'},{t:fin2+700,x:'home',y:'home',f:'idle'});
   ST.keys(fx,K);
   const C=[PINK,PURP,GOLD,SKYC];
   ST.play(E2,[
-    [0,()=>{ setMessage('Grace shakes a big bottle of glitter polish. Manicures for everyone.'); say(m.id,'glitter_nails'); scene('gv_bottle',(last+250)/1000,{}); }],
+    [0,()=>{ setMessage('Grace shakes a big bottle of glitter polish. Manicures for everyone.'); say(m.id,'glitter_nails'); }],
     ...visits.map(([ms,u],k)=>[ms,()=>{ const q=ST.unit(u); scene('gv_bignail',1.3,{x:q.x+(u.side==='foe'?36:-34),y:q.mid,c:u.id==='rose'?PINK:C[k%4]}); sfx.ding(); if(u!==m) hopOf(u);
       if(u.id==='rose'&&!foe) scene('gv_text',.9,{x:q.x,y:q.top-16,txt:'PINK',c:PINK,sc:2}); }]),
     ['hf',last],
@@ -735,11 +650,6 @@ G.glitter_nails=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LivePa
 // ---------- Welcome Back to My Channel (A3) ----------
 // Grace makes a pretend vlog: her hairbrush is the microphone, a pretend phone frame says REC. HI GUYS! She interviews the friend,
 // who answers into the brush and feels much better.
-const brush=(x,y,a)=>{ if(PROPART.draw('grace/hairbrush_microphone',x,y+3,{h:58,rot:a+.6})) return;   // painted hairbrush mic (already drawn on a slant, so rot is eased by .6); drawn one below is the fallback
-  gfx.save(); gfx.translate(x,y); gfx.rotate(a); RO(-3,0,6,26,PURP); EO(0,-8,11,12,PINK2); for(let k=0;k<4;k++) for(let j=0;j<3;j++) E(-6+k*4,-14+j*5,1.2,1.2,'#7a4a8a'); gfx.restore(); };
-SC.gv_brush=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(); let x=h.x-4,y=h.y-6,a=-.4;
-  if(ms>P.ask&&ms<P.back) { const q=ez((ms-P.ask)/200); x=lerp(h.x-4,P.tx,q); y=lerp(h.y-6,P.ty,q); a=lerp(-.4,-1.1,q); }
-  gfx.globalAlpha=fade(u,.96); brush(x,y,a); };
 SC.gv_rec=(s,u)=>{ const B=s.B,ms=s.t*1000,g=ez(ms/250); gfx.globalAlpha=fade(u,.9); const x0=lerp((B.x0+B.x1)/2,B.x0,g),x1=lerp((B.x0+B.x1)/2,B.x1,g);
   gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.strokeRect(x0,B.y0,x1-x0,B.y1-B.y0); gfx.strokeStyle=CREAM; gfx.lineWidth=3; gfx.setLineDash([8,6]); gfx.strokeRect(x0,B.y0,x1-x0,B.y1-B.y0); gfx.setLineDash([]);
   if(Math.floor(ms/400)%2) E(x0+12,B.y0+12,5,5,RED); label('REC',x0+32,B.y0+8,CREAM,2);
@@ -747,13 +657,13 @@ SC.gv_rec=(s,u)=>{ const B=s.B,ms=s.t*1000,g=ez(ms/250); gfx.globalAlpha=fade(u,
 SC.gv_bubble=(s,u)=>{ const g=ez(u/.15); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g,g); RO(-30,-16,60,26,CREAM);
   gfx.beginPath(); gfx.moveTo(-6,10); gfx.lineTo(-14,20); gfx.lineTo(4,10); gfx.closePath(); gfx.fillStyle=CREAM; gfx.fill(); if(s.heart) heart(0,-4,8,'#ff6b9a'); else label(s.txt,0,-9,'#5a3a8a',2); gfx.restore(); };
 G.welcome_back=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
-  const K=self?[{t:0,x:'home',y:'home',f:'idle'},{t:500,f:'celeb',hop:10},{t:900,f:'act'},{t:1700,f:'expr'},{t:2300,f:'act'},{t:2900,f:'celeb',hop:10},{t:3300,f:'idle'},{t:3600,x:'home',y:'home',f:'idle'}]
-    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'celeb',hop:10},{t:1100,f:'act'},{t:1700,f:'act',dx:u=>-ez(u)*6},{t:2700,f:'celeb',hop:12},{t:3100,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}];
+  const K=self?[{t:0,x:'home',y:'home',f:'ab_back_3'},{t:500,f:'ab_back_1',hop:10},{t:900,f:'ab_back_2'},{t:1700,f:'ab_back_8'},{t:2300,f:'ab_back_5'},{t:2900,f:'ab_back_4',hop:10},{t:3300,f:'idle'},{t:3600,x:'home',y:'home',f:'idle'}]
+    :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'ab_back_1',hop:10},{t:1100,f:'ab_back_2'},{t:1700,f:'ab_back_8',dx:u=>-ez(u)*6},{t:2100,f:'ab_back_5'},{t:2700,f:'ab_back_4',hop:12},{t:3100,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}];
   const st=ST.keys(fx,K),end=self?3700:3900;
   const xs=self?[me]:[H,ST.unit(m)],bx0=Math.max(8,Math.min(H.x-H.w*.5-14,sp.x-40)),bx1=Math.min(568,Math.max(H.x+H.w*.5,sp.x+30)),by0=Math.max(8,H.top-30),by1=Math.min(320,H.base+14);
   const plan={ask:1700,back:2600,tx:self?me.x-14:H.x+H.w*.3,ty:self?me.top+24:H.top+H.h*.35};
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Grace picks up her hairbrush. It\'s a microphone now.':'Grace runs over to '+t.name+' with her hairbrush. It\'s a microphone now.'); say(m.id,'welcome_back'); scene('gv_brush',end/1000,{plan}); }],
+    [0,()=>{ setMessage(self?'Grace picks up her hairbrush. It\'s a microphone now.':'Grace runs over to '+t.name+' with her hairbrush. It\'s a microphone now.'); say(m.id,'welcome_back'); }],
     [self?900:1100,()=>{ scene('gv_rec',(end-1300)/1000,{B:{x0:bx0,x1:bx1,y0:by0,y1:by1}}); scene('gv_big',1.1,{x:(bx0+bx1)/2,y:by0-16,txt:'HI GUYS!',c:PINK,sc:3}); sfx.ding(); }],
     [1700,()=>{ setMessage(self?'Today on the channel: how Grace is feeling. Answer: amazing.':'Today on the channel: '+t.name+'. How are you feeling?'); sfx.select(); }],
     ['hf',2100],
@@ -769,7 +679,7 @@ SC.gv_subbtn=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=ST.unit(s.f); let y,sq=1,done
   label(done?'SUBSCRIBED':'SUBSCRIBE',8,-5,CREAM,2); gfx.beginPath(); gfx.moveTo(-w/2+10,-8); gfx.lineTo(-w/2+10,8); gfx.lineTo(-w/2+22,0); gfx.closePath(); gfx.fillStyle=CREAM; gfx.fill(); gfx.restore();
   if(done) { const r=Math.sin(ms/50)*.4*(1-cl((ms-P.hit-200)/900)),bx=x+w/2+18,by=y-6; gfx.save(); gfx.translate(bx,by); gfx.rotate(r); EO(0,0,9,10,GOLD); R(-11,6,22,4,OUT); R(-10,6,20,3,GOLD); E(0,12,3,3,OUT); gfx.restore(); } };
 G.like_subscribe=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,34);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:5,hn:6},{t:1000,x:p.x,y:p.y,f:'expr'},{t:1200,f:'act',dx:-8},{t:1500,f:'celeb',hop:20},{t:2100,f:'act'},{t:2700,f:'celeb',hop:10,hn:2},{t:3200,f:'runR'},{t:3900,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_sub_1',hop:5,hn:6},{t:1000,x:p.x,y:p.y,f:'ab_sub_2'},{t:1200,f:'ab_sub_3',dx:-8},{t:1500,f:'ab_sub_3',hop:6},{t:2000,f:'ab_sub_5'},{t:2350,f:'ab_sub_4',hop:20},{t:2750,f:'ab_sub_6'},{t:3200,f:'ab_sub_1R',hop:5,hn:4},{t:3900,x:'home',y:'home',f:'idle'}]);
   const plan={hit:900};
   ST.play(E2,[
     [0,()=>{ setMessage('Grace marches up to '+f.name+' and points at the sky.'); say(m.id,'like_subscribe'); }],
@@ -789,7 +699,7 @@ SC.gv_rain=(s,u)=>{ const ms=s.t*1000,L=s.L; for(let k=0;k<s.n;k++) { const f=L[
     if(!C) dumpling(0,0,q>.95&&q<1.15?.7:0,.42); else { const sq=q>.95&&q<1.15?.6:0; EO(0,0,13*(1+sq*.4),11*(1-sq*.4),C); E(-4,-2,1.6,1.6,OUT); E(4,-2,1.6,1.6,OUT); E(0,3,2,1.4,'#ff6b9a'); } gfx.restore(); } };
 SC.gv_dizzy=(s,u)=>{ for(const f of s.L) { const F=ST.unit(f); for(let k=0;k<3;k++) { const a=s.t*6+k*2.1; gfx.globalAlpha=fade(u,.8); star(F.x+Math.cos(a)*24,F.top-6+Math.sin(a)*6,4,k%2?GOLD:PINK2); } } };
 G.dumpling_drop=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,52);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:700,x:p.x,y:p.y,f:'celeb',hop:12},{t:1000,f:'celeb',dy:(u,tt)=>-Math.abs(Math.sin(tt*10))*6},{t:2600,f:'expr'},{t:2900,f:'celeb',hop:12},{t:3300,f:'runR'},{t:4000,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_drop_1',hop:5,hn:6},{t:700,x:p.x,y:p.y,f:'ab_drop_3',hop:12},{t:1000,f:'ab_drop_3',dy:(u,tt)=>-Math.abs(Math.sin(tt*10))*6},{t:1150,f:'ab_drop_2'},{t:2300,f:'ab_drop_4'},{t:2650,f:'ab_drop_5',hop:12},{t:3000,f:'ab_drop_6'},{t:3300,f:'ab_drop_1R',hop:5,hn:4},{t:4000,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Grace runs over with her backpack. It\'s full of squishies. All of them.'); say(m.id,'dumpling_drop'); }],
     [1000,()=>{ scene('gv_big',1.1,{st,txt:'INCOMING!',c:GOLD,sc:3}); sfx.whoosh(); }],
@@ -800,30 +710,6 @@ G.dumpling_drop=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(
     [2500,()=>{ sfx.squeak(); }],
     [4100,'end',res(E2)+'She\'ll want every single one of those back.']]); };
 
-// ---------- Dance Battle (B1) ----------
-// A step-off. Spotlight on Grace: her moves. Spotlight on the monster: it tries. Spotlight on Grace: big finish. She wins its buff.
-const buffIcon=(x,y)=>{ RO(x-9,y-9,18,18,MINT); Ln(x,y+5,x,y-5,3,'#1d4a2a'); Ln(x-4,y-1,x,y-5,3,'#1d4a2a'); Ln(x+4,y-1,x,y-5,3,'#1d4a2a'); };
-SC.gv_spot=(s,u)=>{ const ms=s.t*1000,P=s.plan,who=ms<P.b?'g':(ms<P.c?'f':'g'),x=who==='g'?P.gx:P.fx,y=who==='g'?P.gy:P.fy;
-  gfx.globalAlpha=fin(u,.08)*fade(u,.9)*.45; R(0,0,576,324,'#0a0814'); gfx.globalAlpha=fin(u,.08)*fade(u,.9)*.4; gfx.fillStyle='#fff6c8'; gfx.beginPath(); gfx.moveTo(x-14,0); gfx.lineTo(x+14,0); gfx.lineTo(x+52,y); gfx.lineTo(x-52,y); gfx.closePath(); gfx.fill();
-  gfx.globalAlpha=fade(u,.9); E(x,y,52,10,'rgba(255,246,200,.35)'); if(ms<P.a+700) label('DANCE BATTLE',(P.gx+P.fx)/2,30,GOLD,3);
-  if(ms>P.b&&ms<P.c) lift(s.f,-Math.abs(Math.sin(ms/160))*8,Math.sin(ms/120)*.25);
-  if(ms>P.c+300&&ms<P.c+1300) label('WINNER',P.gx,P.gy-GH()-34,PINK,2); };
-SC.gv_steal=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; let x,y; if(ms<P.hook) { x=P.x; y=P.y+Math.sin(s.t*7)*6; } else { const q=ez((ms-P.hook)/350),p=head(st,-16); x=lerp(P.x,p.x,q); y=lerp(P.y,p.y,q)-Math.sin(q*Math.PI)*34; } gfx.globalAlpha=fade(u,.9); buffIcon(x,y); };
-G.dance_battle=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,56);
-  const moves=(u,tt)=>['celeb','flip','celebFlip','idle'][Math.floor(tt*9)%4];
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:p.x,y:p.y,f:'idle'},{t:700,f:moves,hop:10,hn:5,dx:u=>Math.sin(u*Math.PI*3)*10},{t:1500,f:'expr'},
-    {t:2300,f:'idle',rot:wheelR(1),hop:30,ns:true},{t:2700,f:'celeb',sc:1.1},{t:3000,f:'act',dx:u=>-ez(u)*8},{t:3300,f:'celeb',hop:12},{t:3700,f:'runR'},{t:4400,x:'home',y:'home',f:'idle'}]);
-  const plan={a:650,b:1500,c:2300,gx:p.x,gy:p.y,fx:F.x,fy:F.base+3};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Grace challenges '+f.name+' to a dance battle.'); say(m.id,'dance_battle'); scene('gv_spot',3.4,{plan,f,back:true}); scene('gv_steal',4.0,{st,plan:{x:F.x,y:F.top-22,hook:3000}}); }],
-    [700,()=>{ for(let k=0;k<6;k++) b7Later(()=>sfx.beat(),k*130); }],
-    [1500,()=>{ setMessage('Its turn. It tries. It really tries.'); sfx.boing(); }],
-    [2300,()=>{ sfx.whoosh(); setMessage('Grace. Big finish.'); }],
-    [2700,()=>{ scene('gv_confetti',1,{n:30,seed:9}); sfx.ding(); }],
-    ['hf',3000],
-    [3000,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(100); }],
-    [4500,'end',res(E2)+'The judges were unanimous. The judge was Grace.']]); };
-
 // ---------- Beam Dismount (B2) ----------
 // A balance beam rolls in beside the row. Grace hops up, poses, and flips off it in a double back tuck onto them. A 10.0 card.
 SC.gv_beam=(s,u)=>{ const P=s.plan,ms=s.t*1000,g=ez(ms/350),x=lerp(600,P.x0,g),w=P.w,y=P.y; gfx.globalAlpha=fade(u,.92);
@@ -832,29 +718,6 @@ SC.gv_beam=(s,u)=>{ const P=s.plan,ms=s.t*1000,g=ez(ms/350),x=lerp(600,P.x0,g),w
 SC.gv_card=(s,u)=>{ const g=u<.15?ez(u/.15)*1.3:lerp(1.3,1,cl((u-.15)/.12)); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(.1); gfx.scale(g,g);
   R(-30,-24,60,44,OUT); R(-28,-22,56,40,CREAM); R(-28,-22,56,7,PINK); label('10.0',0,-6,'#2b2a26',3); R(-3,20,6,26,OUT); R(-2,20,4,25,'#8a5a30'); gfx.restore(); };
 
-// ---------- Handstand Contest (B3) ----------
-// Grace calls a handstand contest. Everybody goes upside down. One by one they wobble and fall. Grace stays up. She wins, obviously.
-SC.gv_trophy=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g,g);
-  if(PROPART.draw('grace/gold_trophy_cup',0,-6,{h:48})) { gfx.restore(); return; }   // painted trophy; the drawn one below is the fallback
-  gfx.beginPath(); gfx.moveTo(-16,-18); gfx.lineTo(16,-18); gfx.lineTo(10,4); gfx.lineTo(-10,4); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=GOLD; gfx.fill();
-  ring(-17,-10,6,7,3,GOLD); ring(17,-10,6,7,3,GOLD); RO(-3,4,6,8,GOLD); RO(-11,12,22,6,GOLD); label('1',0,-14,'#7a4a10',2); gfx.restore(); };
-G.handstand_contest=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m);
-  const others=foe?[]:who.filter(u=>u!==m),flip=Math.PI;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'celeb',hop:12},{t:500,f:'expr'},{t:900,f:'idle',rot:u=>ez(u/.4)*flip,dy:u=>-ez(u/.4)*8},{t:3200,f:'idle',rot:flip,dy:-8},
-    {t:3500,f:'celeb',hop:22},{t:3900,f:'idle'},{t:4100,x:'home',y:'home',f:'idle'}]);
-  const falls=others.map((u,k)=>1700+k*450),last=falls.length?falls[falls.length-1]:1700;
-  ST.play(E2,[
-    [0,()=>{ setMessage(foe?'Grace challenges '+foe.name+' to a handstand contest.':'Grace calls a handstand contest. Everybody up!'); say(m.id,'handstand_contest'); }],
-    [500,()=>{ scene('gv_big',1.2,{x:me.x-80,y:Math.max(60,me.top-60),txt:'HANDSTAND CONTEST!',c:PINK,sc:2}); sfx.charge(); }],
-    [900,()=>{ sfx.whoosh(); others.forEach((u,k)=>{ const fall=falls[k]-900; dance(u,(fall+700)/1000,(q,tt)=>{ const ms=q*(fall+700); const up=ms<fall?ez(ms/300):1-ez((ms-fall)/350);
-        return {rot:up*flip+(ms<fall?Math.sin(tt*(6+k*2))*.18*up:0),dy:-up*8,frame:'idle'}; }); });
-      if(foe) scene('gv_flipfoe',2.6,{f:foe}); }],
-    ...others.map((u,k)=>[falls[k],()=>{ sfx.thud(); const q=ST.unit(u); scene('gv_text',.8,{x:q.x,y:q.top-14,txt:'OOF',c:CREAM}); }]),
-    ['hf',last+250],
-    [last+250,()=>{ E2.apply(); sfx.heal(); sfx.ding(); for(const u of who) { const q=ST.unit(u); scene('gr_warmring',1.2,{x:q.x,y:q.base}); } }],
-    [last+500,()=>{ scene('gv_trophy',1.4,{x:me.x,y:me.base+18}); scene('gv_text',1.3,{x:me.x,y:me.base-GH()-60,txt:'GRACE WINS',c:GOLD}); }],
-    [Math.max(4200,last+1500),'end',foe?kindLine(foe):'Grace wins. She was always going to win.']]); };
-SC.gv_flipfoe=(s,u)=>{ const ms=s.t*1000,up=ms<1400?ez(ms/300):1-ez((ms-1400)/400); lift(s.f,-up*10,up*Math.PI+Math.sin(ms/90)*.2*up); };
 
 // ---------- Split Leap (B4) ----------
 // Grace runs and does a huge split leap across the whole row, kicking the target as she sails over. She lands on the far side.
@@ -916,9 +779,6 @@ SC.g5_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.
   const sc=s.sc||2,w=(s.txt.length*4-1)*sc; x=Math.max(w/2+6,Math.min(570-w/2,x)); bigWord(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,sc); };
 
 // ---------- Ten Million Subscribers (A6) ----------
-const brush=(x,y,a)=>{ if(PROPART.draw('grace/hairbrush_microphone',x,y+3,{h:58,rot:a+.6})) return;   // painted hairbrush mic (already drawn on a slant, so rot is eased by .6); drawn one below is the fallback
-  gfx.save(); gfx.translate(x,y); gfx.rotate(a); RO(-3,0,6,26,PURP); EO(0,-8,11,12,PINK2); for(let k=0;k<4;k++) for(let j=0;j<3;j++) E(-6+k*4,-14+j*5,1.2,1.2,'#7a4a8a'); gfx.restore(); };
-SC.g5_brush=(s,u)=>{ const ms=s.t*1000; if(ms>s.to) return; const h=hand(); gfx.globalAlpha=1; brush(h.x-4,h.y-6,-.4); };
 // The pretend livestream: a phone frame round the stage, LIVE, and a viewer count that sits at 3 and then goes up a lot.
 const viewers=(ms,P)=>{ if(ms<P.c0) return 3; if(ms>=P.c1) return 10000000; const q=(ms-P.c0)/(P.c1-P.c0); return Math.round(3*Math.pow(10000000/3,q*q)); };
 SC.g5_live=inBox((s,u)=>{ const ms=s.t*1000,P=s.plan,g=ez(ms/300),off=ms>P.off?ez((ms-P.off)/300):0,k=g*(1-off); if(k<=0) return;
@@ -966,21 +826,21 @@ SC.g5_kiss=(s,u)=>{ gfx.globalAlpha=fade(u,.6); heart(lerp(s.x,s.x-120,ez(u)),s.
 SC.g5_prism=inBox(SC.g5_prism);
 G.viral_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m),party=b2LiveParty();
   const floor=Math.min(272,me.base-6),cx=Math.round(Math.max(Gp.x1+64,Math.min(me.x-110,Gp.x1+84)));
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:cx,y:floor,f:'act'},{t:900,f:'celeb',hop:12,hn:2},{t:1500,f:'act'},
-    {t:2300,f:'expr',dx:u=>Math.sin(u*Math.PI*6)*2*(1-u)},{t:3000,f:'celeb',hop:16},{t:3200,f:'celeb',dy:(u,tt)=>-Math.abs(Math.sin(tt*6))*3},
-    {t:4500,f:'celeb',hop:10,hn:2},{t:5100,f:'act'},{t:5450,f:'runR'},{t:6100,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:cx,y:floor,f:'ab_viral_1'},{t:900,f:'ab_viral_1',hop:12,hn:2},{t:1500,f:'ab_viral_2'},
+    {t:2300,f:'ab_viral_3',dx:u=>Math.sin(u*Math.PI*6)*2*(1-u)},{t:3000,f:'ab_viral_4',hop:8},{t:3300,f:'ab_viral_4',dy:(u,tt)=>-Math.abs(Math.sin(tt*6))*3},
+    {t:3900,f:'ab_viral_5'},{t:4500,f:'ab_viral_6',hop:10,hn:2},{t:5100,f:'ab_viral_1'},{t:5450,f:'runR'},{t:6100,x:'home',y:'home',f:'idle'}]);
   const lp={c0:1300,c1:2250,off:5600};
   const pp={land:550,grab:700,beam0:1000,beam1:2100,hx:cx-6,hy:Math.round(floor-GH()-70)};
   let pl=null;
   ST.play(E2,[
-    [0,()=>{ scene('g5_bars',6.2,{}); setMessage('Grace grabs her hairbrush. It\'s a microphone now. She\'s going LIVE.'); say(m.id,'viral_ult'); scene('g5_brush',6.2,{to:3000}); }],
+    [0,()=>{ scene('g5_bars',6.2,{}); setMessage('Grace grabs her hairbrush. It\'s a microphone now. She\'s going LIVE.'); say(m.id,'viral_ult'); }],
     [650,()=>{ scene('g5_live',6.1,{plan:lp}); sfx.click&&sfx.click(); b7Later(()=>sfx.ding(),150); }],
     [900,()=>{ scene('g5_big',1.1,{x:cx,y:floor-GH()-40,txt:'HI GUYS!',c:PINK,sc:3}); setMessage('Viewers: 3. Her whole family.'); }],
     [1300,()=>{ setMessage('Then the count starts going up. And UP.'); for(let k=0;k<8;k++) b7Later(()=>sfx.click&&sfx.click(),k*110); }],
     [2250,()=>{ sfx.cheer(); sfx.fanfare(); scene('g5_big',1.3,{x:288,y:120,txt:'10 MILLION!',c:GOLD,sc:5}); setMessage('TEN MILLION SUBSCRIBERS!'); }],
-    [2300,()=>{ pl=scene('g5_plaque',2.85,{plan:pp,st}); sfx.whoosh(); }],
+    [2300,()=>{ pl=scene('g5_plaque',.75,{plan:pp,st}); sfx.whoosh(); }],   // the plaque drops in and she catches it: from here the diamond is painted into her frames
     [2900,()=>{ setMessage('A Diamond Play Button drops in on a string. Tinfoil. Glitter glue. Perfect.'); sfx.ding(); }],
-    [3300,()=>{ scene('g5_prism',1.5,{plan:{Gp,src:()=>pl&&pl.x!=null?{x:pl.x,y:pl.y}:null}}); scene('g5_storm',2.4,{}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),200); setMessage('She holds it up. It catches the light.'); }],
+    [3300,()=>{ scene('g5_prism',1.5,{plan:{Gp,src:()=>({x:st.x-6,y:st.y-GH()*1.05})}}); scene('g5_storm',2.4,{}); sfx.whoosh(); b7Later(()=>sfx.whoosh(),200); setMessage('She holds it up. It catches the light.'); }],
     ['hf',3900],
     [3900,()=>{ sfx.bonk(); sfx.ding(); for(const f of list) { const F=ST.foe(f); ST.jolt(f,.5); scene('gv_burst',.7,{x:F.x,y:F.mid,n:10,r:46,c:PINK,c2:SKYC}); } landHit(100); scene('flash',.3,{a:.45});
       scene('g5_big',1.1,{x:Gp.x,y:Gp.top-74,txt:'SPARKLE!',c:SKYC,sc:4}); }],
@@ -1017,22 +877,17 @@ SC.g5_meteor=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const cy=st.y-G
 SC.g5_shock=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.3-k*.15); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; ring(s.x,s.y,10+q*120,4+q*30,4,k%2?GOLD:'#ffffff'); } gfx.globalAlpha=1; };
 SC.g5_score=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.12)); gfx.globalAlpha=fade(u,.82); gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(s.rot||0); gfx.scale(g,g);
   R(-3,16,6,24,OUT); R(-2,16,4,23,'#8a5a30'); R(-28,-20,56,40,OUT); R(-26,-18,52,36,CREAM); R(-26,-18,52,7,s.c||PINK); label('10.0',0,-5,'#2b2a26',3); gfx.restore(); gfx.globalAlpha=1; };
-// The diamond leotard: her lavender top swaps to icy sequin colors for the routine (palette letters of GRACE_BT), then back.
-const LEO={s:'#4fbfee',v:'#8fdcff',x:'#c4efff',y:'#eafcff',n:'#2f96c8',j:'#1f6a9a'};let leoWas=null;
-const leotard=on=>{ const pal=BATTLE_SPRITES.grace&&BATTLE_SPRITES.grace.pal; if(!pal) return;
-  if(on&&!leoWas) { leoWas={}; for(const k in LEO) { leoWas[k]=pal[k]; pal[k]=LEO[k]; } }
-  else if(!on&&leoWas) { for(const k in leoWas) pal[k]=leoWas[k]; leoWas=null; } };
 G.olympic_ult=E2=>{ const {m,fx}=E2,f=foesOf(E2)[0],F=ST.unit(f),me=ST.unit(m),judges=b2LiveFoes().filter(x=>x!==f),party=b2LiveParty(),others=party.filter(p=>p!==m);
   const corner={x:536,y:194},launch={x:Math.min(520,F.x+F.w*.5+120),y:Math.min(312,F.base+6)},land={x:Math.min(548,F.x+F.w*.5+34),y:Math.min(314,F.base+3)};
   const tw=n=>u=>-ez(u)*Math.PI*2*n;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walkR'},{t:650,x:corner.x,y:corner.y,f:'idle'},{t:700,f:(u,tt)=>Math.floor(tt*16)%2?'idle':'flip',sc:u=>1+Math.sin(u*Math.PI)*.15},
-    {t:1150,f:'celeb'},{t:1650,f:'idle',dy:u=>Math.sin(u*Math.PI)*-3},{t:1850,f:'run',ease:'in'},{t:2550,x:launch.x,y:launch.y,f:'kneel'},
-    {t:2700,f:'idle',rot:tw(3),ease:'in',ns:true},{t:3250,x:launch.x-30,y:-90,f:'idle',hide:true,ns:true},
-    {t:3500,x:land.x+60,y:-120,f:'idle',rot:u=>-Math.PI*.15,ease:'in',ns:true},{t:3800,x:land.x,y:land.y,f:'kneel'},{t:4000,f:'celeb',sc:1.12},
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walkR'},{t:650,x:corner.x,y:corner.y,f:'ab_olympic_1'},{t:700,f:(u,tt)=>Math.floor(tt*16)%2?'ab_olympic_1':'ab_olympic_1R',sc:u=>1+Math.sin(u*Math.PI)*.15},
+    {t:1150,f:'ab_olympic_7'},{t:1650,f:'ab_olympic_8',dy:u=>Math.sin(u*Math.PI)*-3},{t:1850,f:'ab_olympic_2',ease:'in'},{t:2550,x:launch.x,y:launch.y,f:'ab_olympic_3'},
+    {t:2700,f:'ab_olympic_5',rot:tw(3),ease:'in',ns:true},{t:3250,x:launch.x-30,y:-90,f:'ab_olympic_5',hide:true,ns:true},
+    {t:3500,x:land.x+60,y:-120,f:'ab_olympic_5',rot:u=>-Math.PI*.15,ease:'in',ns:true},{t:3800,x:land.x,y:land.y,f:'ab_olympic_6'},{t:4000,f:'ab_olympic_9',sc:1.12},
     {t:5100,f:'runR'},{t:5900,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ scene('g5_bars',6.0,{}); scene('g5_floor',5.8,{back:true}); setMessage('The whole floor turns into a championship spring floor.'); say(m.id,'olympic_ult'); sfx.floorMusic(); }],
-    [700,()=>{ scene('g5_poof',.8,{x:corner.x,y:corner.y-GH()*.5}); scene('g5_sequins',5.2,{st}); leotard(true); sfx.spin&&sfx.spin(); setMessage('Grace twirls into her diamond leotard. Sequins. So many sequins.'); }],
+    [700,()=>{ scene('g5_poof',.8,{x:corner.x,y:corner.y-GH()*.5}); scene('g5_sequins',5.2,{st}); sfx.spin&&sfx.spin(); setMessage('Grace twirls into her diamond leotard. Sequins. So many sequins.'); }],
     [1150,()=>{ scene('g5_text',1,{st,txt:'ARMS UP!',c:PINK2}); sfx.ding(); setMessage('Corner of the mat. She salutes the judges.'); }],
     [1300,()=>{ judges.forEach((j,k)=>{ const J=ST.foe(j); b7Later(()=>{ scene('g5_score',2.2,{x:J.x+6,y:J.top-34,rot:(k%2?-.1:.1),c:CONF[k%CONF.length]}); lift(j,-6,0,0); },k*160); }); if(judges.length) setMessage('The other monsters are the judges now. They weren\'t asked.'); }],
     [1650,()=>{ setMessage('Deep breath.'); }],
@@ -1046,14 +901,13 @@ G.olympic_ult=E2=>{ const {m,fx}=E2,f=foesOf(E2)[0],F=ST.unit(f),me=ST.unit(m),j
     [4000,()=>{ sfx.cheer(); sfx.fanfare(); scene('g5_text',1.1,{st,txt:'STUCK IT!',c:PINK2}); }],
     [4300,()=>{ const pts=[F.x-40,F.x+10,F.x+60]; pts.forEach((x,k)=>b7Later(()=>{ scene('g5_score',1.6,{x,y:Math.max(70,F.top-24-(k===1?16:0)),rot:(k-1)*.12,c:CONF[k]}); sfx.ding(); },k*150));
       others.forEach((p,k)=>{ battle.fx[p.idx].hop=.4; const q=ST.unit(p); scene('g5_text',.9,{x:q.x,y:q.top-10,txt:'GO!',c:MINT,sc:2}); }); if(others.length) setMessage('Everyone else rushes to the front of the line.'); }],
-    [5900,()=>leotard(false)],
-    [6000,'end',()=>{ leotard(false); return res(E2)+'Tens across the board. The judges were the monsters. They had no choice.'; }]]); };
+    [6000,'end',()=>res(E2)+'Tens across the board. The judges were the monsters. They had no choice.']]); };
 })();
 
 // ================= Polish pass (2026-10-24, claude/move-review.md) =================
-// Glitter Nails: a big sparkly bottle, and a big glittering hand on each friend. Like and Subscribe: the SUBSCRIBE button
+// Glitter Nails: a big glittering hand on each friend. Like and Subscribe: the SUBSCRIBE button
 // is huge and its shadow grows before it bonks. Dumpling Drop: fewer, bigger squishies that squash and bounce. Split
-// Leap: a slow-motion freeze at the top of the split. Same numbers, same beats. Overrides SC.gv_bottle, SC.gv_bignail,
+// Leap: a slow-motion freeze at the top of the split. Same numbers, same beats. Overrides SC.gv_bignail,
 // SC.gv_subbtn, SC.gv_rain and G.split_leap. Scenes prefix gp_.
 (function(){
 const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
@@ -1080,12 +934,7 @@ const lowest=()=>b2LiveParty().slice().sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0]
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 const S=k=>{ if(sfx[k]) sfx[k](); };
 
-// ---------- Glitter Nails: big bottle, glittering hands ----------
-const bottle=(x,y,a,sc)=>{ if(PROPART.draw('grace/pink_nail_polish_bottle',x,y-1*sc,{h:46*sc,rot:a})) return;   // painted bottle; the drawn one below is the fallback
-  gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(sc,sc); R(-11,-6,22,30,OUT); R(-9,-4,18,26,PINK); R(-6,0,4,18,'#ffd0e6'); for(let k=0;k<6;k++) R(-6+(k%3)*5,4+Math.floor(k/3)*9,2,2,k%2?GOLD:CREAM);
-  R(-6,-24,12,20,OUT); R(-4,-22,8,16,'#2b2a26'); R(-3,-21,2,12,'#5a5a60'); gfx.restore(); };
-SC.gv_bottle=(s,u)=>{ const h=hand(); gfx.globalAlpha=fade(u,.95); const x=h.x-8,y=h.y-14; bottle(x,y,-.3+Math.sin(s.t*12)*.15,2);
-  for(let k=0;k<5;k++) { const a=s.t*4+k*1.26,r=34+Math.sin(s.t*6+k)*4; star(x+Math.cos(a)*r,y-4+Math.sin(a)*r*.7,3+Math.sin(s.t*9+k)*1.5,CONF[k%CONF.length]); } };
+// ---------- Glitter Nails: glittering hands ----------
 const glitterHand=(x,y,sc,c,t)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc);
   EO(0,6,10,9,SKIN); for(const [fx,fy,h] of [[-8,-2,10],[-3,-6,13],[2,-6,14],[7,-4,12]]) { RO(fx-2,fy-h,5,h+6,SKIN); E(fx+.5,fy-h+2,2.6,3,c); E(fx-.4,fy-h+1,.9,1.2,'#ffffff'); }
   RO(9,2,7,5,SKIN); E(14,3,2.4,2.2,c); gfx.restore(); };
@@ -1129,7 +978,7 @@ const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx
 const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t,ez=u=>{ u=cl(u); return u*u*(3-2*u); };
 const fade=(u,a=.85)=>u>a?(1-u)/(1-a):1,fin=(u,a=.12)=>u<a?u/a:1;
 const Ln=(x0,y0,x1,y1,w,c)=>{ gfx.strokeStyle=c; gfx.lineWidth=w; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(x0,y0); gfx.lineTo(x1,y1); gfx.stroke(); };
-const G=RECRUIT_MOVES.grace,star=RFX.gStar,W=GRACE_WHEEL,S=W.scale,HC=W.C*S,D=Math.PI/180;
+const G=RECRUIT_MOVES.grace,star=RFX.gStar;
 const PINK='#ff7fb3',PINK2='#ffc1dc',GOLD='#ffe08a',CREAM='#fff8e8',MINT='#9be39a',SKYC='#9fe8ff',PURP='#b48fe0';
 ST.nw('gf_');
 const S_=n=>{ if(sfx[n]) sfx[n](); };
@@ -1138,53 +987,14 @@ const firstFoe=E2=>(E2.targets||[]).find(t=>t.side==='foe')||(B2.move&&B2.move.w
 const GSP=()=>BATTLE_SPRITES.grace,GH=()=>GSP().idle.length*GSP().scale;
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 SC.gf_word=(s,u)=>{ const pop=u<.12?ez(u/.12)*1.25:lerp(1.25,1,cl((u-.12)/.12)),sc=s.sc||3,w=(s.txt.length*4-1)*sc;
-  let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { x=s.st.x; y=s.st.gy-GH()-30; } x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+30,y);
+  let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { x=s.st.x; y=(s.st.gy!=null?s.st.gy:s.st.y)-GH()-30; } x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+30,y);
   gfx.globalAlpha=fin(u,.05)*fade(u,.75); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5,s.c||PINK,sc); gfx.restore(); };
 SC.gf_dust=(s,u)=>{ gfx.globalAlpha=(1-u)*.85; for(const dx of [-6,0,6]) E(s.x+dx*(1+u*1.4),s.y-2-u*6,2.5+u*3.5,1.8+u*2.5,'#e8e2d6'); };
-SC.gf_shadow=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const lift=Math.max(0,st.lift||0); gfx.globalAlpha=.28*Math.max(.35,1-lift/60); E(st.x,st.gy+4,20-Math.min(10,lift/6),4,'#2f4936'); };
 // Floor tap marks under each step: a little pink ring that fades.
 SC.gf_tap=(s,u)=>{ const g=ez(u/.3); gfx.globalAlpha=fade(u,.3)*.8; gfx.strokeStyle=s.c||PINK2; gfx.lineWidth=2; gfx.beginPath(); gfx.ellipse(s.x,s.y+2,4+g*9,1.5+g*3,0,0,Math.PI*2); gfx.stroke(); };
 SC.gf_notes=(s,u)=>{ for(let k=0;k<6;k++) { const q=((s.t*.8)+k/6)%1,x=s.x-70+k*28+Math.sin(q*6+k)*8,y=s.y-q*80; gfx.globalAlpha=(1-q)*fade(u,.85);
   E(x,y,5,4,OUT); E(x,y,3.5,2.6,[PINK,PURP,GOLD,SKYC,MINT][k%5]); Ln(x+4,y,x+4,y-14,2,OUT); } };
 
-// ---------- Poses (added to the rig's table so blends can be cached) ----------
-Object.assign(W.P,{
-  gf_stand:{lA:-5,lB:5,aA:-14,aB:14},
-  gf_bounce:{lA:-7,lB:7,bA:.3,bB:.3,aA:-30,aB:30,cA:.4,cB:.4,eA:-1,eB:-1},
-  gf_clapR:{lA:-20,lB:3,aA:58,cA:.7,eA:-1,aB:-58,cB:.7,eB:-1},          // step-touch, hands clap at the chest
-  gf_clapL:{lA:-3,lB:20,aA:58,cA:.7,eA:-1,aB:-58,cB:.7,eB:-1},
-  gf_vine1:{lA:-26,lB:12,aA:-85,aB:85},                                    // grapevine: step out, arms wide
-  gf_vine2:{lA:14,lB:-12,aA:-130,aB:55},                                   // cross behind, one arm up
-  gf_swayL:{lA:-8,lB:10,bB:.25,aA:-20,cA:.55,eA:-1,aB:20,cB:.55,eB:-1},    // hands on hips, knee pops
-  gf_swayR:{lA:-10,lB:8,bA:.25,aA:-20,cA:.55,eA:-1,aB:20,cB:.55,eB:-1},
-  gf_spin:{lA:-2,lB:2,aA:-176,aB:176},
-  gf_final:{lA:-30,lB:4,aA:-20,cA:.55,eA:-1,aB:160},                       // hand on hip, arm up, toe pointed
-  gf_point:{lA:-14,lB:8,bB:.15,aA:-90,aB:20,cB:.55,eB:-1},                 // points at the monster
-  gf_beck1:{lA:-14,lB:8,bB:.15,aA:-75,cA:.1,aB:20,cB:.55,eB:-1},          // come on (fingers out) ...
-  gf_beck2:{lA:-14,lB:8,bB:.15,aA:-40,cA:.75,aB:20,cB:.55,eB:-1},         // ... (pulled back in)
-  gf_hip:{lA:-4,lB:18,bB:.35,aA:-20,cA:.55,eA:-1,aB:150},                  // hip pop, one hand up
-  gf_shim1:{lA:-12,lB:12,bA:.2,bB:.2,aA:-100,aB:100},
-  gf_shim2:{lA:-12,lB:12,bA:.2,bB:.2,aA:-80,aB:80},
-  gf_vogue:{lA:-24,lB:6,aA:-150,aB:120,cB:.4},
-  gf_reach:{lA:-3,lB:3,aA:-172,aB:172},                                    // arms up, about to kick over
-  gf_lunge:{lA:-30,lB:10,bA:.3,aA:-172,aB:172},
-  gf_hsup:{lA:-3,lB:3,al:1.55,aA:-168,aB:168},                             // the handstand line (drawn upside down)
-  gf_hs:{lA:-2,lB:2,al:1.55,aA:-168,aB:168,hang:1},
-  gf_hsStrad:{lA:-38,lB:38,al:1.55,aA:-168,aB:168,hang:1},
-  gf_hsStag:{lA:-2,lB:24,bB:.5,al:1.55,aA:-168,aB:168,hang:1},
-  gf_land:{lA:-12,lB:12,aA:-170,aB:170}});
-const PF=(name,mir)=>mir?W.mirror(name,name):W.frame(name);
-const PB=(a,b,t,st=3)=>{ const r=W.blend(a,b,t,st); return {q:r.q,fr:W.frame(r.q,r.key)}; };
-
-// A rig body on Grace's battle.fx: at(ms) returns {x,gy,std:frame} (a normal sprite frame standing on gy, optional hop)
-// or {x,gy,q,fr,th,hop} (a rig frame; the lowest hand or foot sits on gy). Returns the state scenes follow.
-const rigPath=(fx,dur,at)=>{ const st={x:null,gy:null,fx,lift:0}; ST.cur=st;
-  fx.path={t:0,dur:dur/1000,st:true,fn:(q,c)=>{ const ms=q*dur,s=at(ms,c)||{},hop=s.hop||0;
-    st.x=s.x; st.gy=s.gy; st.lift=hop; st.sp=c.sp; st.sc=1;
-    if(s.std) { st.frame=s.std; st.y=s.gy-hop; const [wx,wy]=ST.unwarp(s.x,s.gy-hop); return {cx:wx,base:wy,frame:s.std,rot:s.rot||0,noShadow:true}; }
-    const th=s.th||0,hip=s.gy-W.low(s.q,th)*S-hop; st.frame=s.fr; st.y=hip;
-    const [wx,wy]=ST.unwarp(s.x,hip+HC); return {cx:wx,base:wy,frame:s.fr,rot:th,noShadow:true}; }};
-  scene('gf_shadow',dur/1000,{st}); return st; };
 // A non-actor party member on a simple path (offsets from home).
 const moveU=(u,dur,fn)=>{ if(!u||u.side!=='party') return; const fx=battle.fx[u.idx]; fx.path={t:0,dur,fn:(q,c)=>{ const r=fn(q,c.t,c)||{}; return {cx:c.origX+(r.dx||0),base:c.origBase+(r.dy||0),rot:r.rot||0,frame:r.frame?(c.sp[r.frame]||c.sp.idle):null}; }}; };
 
@@ -1192,30 +1002,17 @@ const moveU=(u,dur,fn)=>{ if(!u||u.side!=='party') return; const fx=battle.fx[u.
 // Walk to the middle, snap the count in, then an eight-count on the beat (300 ms): step-touch right, step-touch left,
 // grapevine out and back, hip sways, a spin, and the final pose. Each step lands with a dust puff and a tap ring under
 // that foot. The party dances along on the same beat. Heal at the final pose.
-G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p)),me=ST.unit(m),sp=GSP();
+G.danceShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
   const px=Math.round(Math.min(...U.map(q=>q.x)))-62,py=Math.min(312,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+22);
   const B0=1500,BT=300,SPIN=B0+8*BT,FIN=SPIN+450,HOME=FIN+700,END=HOME+600;
-  // [pose, x offset, mirrored] for the eight beats.
-  const CH=[['gf_clapR',-8],['gf_clapL',8],['gf_clapR',-8],['gf_clapL',8],['gf_vine1',-14],['gf_vine2',-24],['gf_vine1',-34],['gf_clapR',-34],
-    ['gf_swayL',-26],['gf_swayR',-18]];
-  // Eight counts: 1 step R, 2 touch, 3 step L, 4 touch ... folded into the table above (10 poses over 8 beats, 240 ms each).
-  const BB=8*BT/CH.length;
-  const at=ms=>{
-    if(ms<700) { const u=ez(ms/700); return {x:lerp(me.x,px,u),gy:lerp(me.base,py,u),std:sp.idle,hop:Math.abs(Math.sin(u*Math.PI*3))*10}; }
-    if(ms<B0) { const k=Math.floor((ms-750)/200); if(ms<750) return {x:px,gy:py,q:W.P.gf_stand,fr:PF('gf_stand')};
-      const on=k>=0&&(ms-750)%200<110; const n=on?'gf_bounce':'gf_stand'; return {x:px,gy:py,q:W.P[n],fr:PF(n)}; }
-    if(ms<SPIN) { const i=Math.min(CH.length-1,Math.floor((ms-B0)/BB)),u=((ms-B0)-i*BB)/BB,[n,dx]=CH[i],prev=i?CH[i-1]:['gf_stand',0];
-      const b=u<.35?PB(prev[0],n,u/.35,2):{q:W.P[n],fr:PF(n)};
-      const th=n==='gf_swayL'?-8*D*ez(u/.4):n==='gf_swayR'?8*D*ez(u/.4):0;
-      return {x:px+lerp(prev[1],dx,ez(cl(u/.35))),gy:py,q:b.q,fr:b.fr,th,hop:u<.3?Math.sin(u/.3*Math.PI)*3:0}; }
-    if(ms<FIN) { const u=(ms-SPIN)/450,k=Math.floor(u*8)%4,n=k===1||k===3?'sstand':'gf_spin';
-      return {x:px+lerp(-18,0,ez(u)),gy:py,q:W.P[n],fr:k>=2?PF(n,1):PF(n),hop:Math.sin(u*Math.PI)*16}; }
-    if(ms<HOME) { const u=(ms-FIN)/220; return {x:px,gy:py,q:W.P.gf_final,fr:PF('gf_final'),th:4*D*ez(u),hop:u<1?Math.sin(cl(u)*Math.PI)*6:0}; }
-    const u=cl((ms-HOME)/600); return {x:lerp(px,me.x,ez(u)),gy:lerp(py,me.base,ez(u)),std:sp.flip,hop:Math.abs(Math.sin(u*Math.PI*3))*12}; };
-  const st=rigPath(fx,END,at);
+  // Her ability sheet (ab_dance_1 to 6): the eight counts alternate her step, hip and arms poses; then the twirl and the finger-up finish.
+  const CH=['ab_dance_2','ab_dance_3','ab_dance_2','ab_dance_3','ab_dance_1','ab_dance_4','ab_dance_1','ab_dance_4'];
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:px<me.x?'run':'runR'},{t:700,x:px,y:py,f:'ab_dance_1'},{t:750,f:(u,tt)=>Math.floor(tt*10)%2?'ab_dance_1':'ab_dance_2'},
+    ...CH.map((f,i)=>({t:B0+i*BT,f,hop:4,dx:(i%2?6:-6)})),
+    {t:SPIN,f:(u,tt)=>Math.floor(tt*13)%2?'ab_dance_5':'ab_dance_5R',hop:16,dx:u=>-ez(u)*10},{t:FIN,f:'ab_dance_6',hop:6},{t:HOME,f:px<me.x?'runR':'run'},{t:END,x:'home',y:'home',f:'idle'}]);
   const others=party.filter(p=>p!==m);
   const steps=[];
-  for(let i=0;i<CH.length;i++) steps.push([B0+Math.round(i*BB),()=>{ S_('step'); const foot=st.x+(CH[i][1]<(i?CH[i-1][1]:0)?-8:8);
+  for(let i=0;i<CH.length;i++) steps.push([B0+i*BT,()=>{ S_('step'); const foot=st.x+(i%2?8:-8);
     scene('gf_dust',.3,{x:foot,y:py}); scene('gf_tap',.5,{x:foot,y:py,c:i%2?PINK2:GOLD}); if(i%2===0) S_('beat'); }]);
   ST.play(E2,[
     [0,()=>{ setMessage('Grace takes the floor in front of everyone. Dance break.'); say(m.id,'dance'); }],
@@ -1248,23 +1045,14 @@ SC.gf_sweat=(s,u)=>{ for(let k=0;k<3;k++) { const q=((s.t*1.6)+k/3)%1; gfx.globa
 const buffIcon=(x,y)=>{ if(PROPART.draw('grace/green_up_arrow',x,y,{h:30})) return;   // painted green up arrow
   R(x-11,y-11,22,22,OUT); R(x-9,y-9,18,18,MINT); Ln(x,y+5,x,y-5,3,'#1d4a2a'); Ln(x-4,y-1,x,y-5,3,'#1d4a2a'); Ln(x+4,y-1,x,y-5,3,'#1d4a2a'); };
 SC.gf_steal=(s,u)=>{ const ms=s.t*1000,P=s.plan,st=s.st; let x,y; if(ms<P.hook) { x=P.x; y=P.y+Math.sin(s.t*7)*6; } else { const q=ez((ms-P.hook)/350),tx=st.x,ty=st.gy-GH()-16; x=lerp(P.x,tx,q); y=lerp(P.y,ty,q)-Math.sin(q*Math.PI)*34; } gfx.globalAlpha=fade(u,.9); buffIcon(x,y); };
-G.dance_battle=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),sp=GSP();
+G.dance_battle=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   const gx=Math.min(me.x-40,F.x+F.w*.5+70),gy=Math.min(314,F.base+3),fy=F.base+3;
   const B=2700,C=3900,END=5600;
-  const pose=(n,mir)=>({q:W.P[n],fr:PF(n,mir)});
-  const at=ms=>{
-    if(ms<650) { const u=ez(ms/650); return {x:lerp(me.x,gx,u),gy:lerp(me.base,gy,u),std:Math.floor(ms/110)%2?sp.idle:sp.act,hop:Math.abs(Math.sin(u*Math.PI*4))*7}; }   // strut
-    if(ms<1050) return Object.assign({x:gx,gy},pose('gf_point'));
-    if(ms<1700) { const k=Math.floor((ms-1050)/160)%2; return Object.assign({x:gx,gy,hop:k?0:2},pose(k?'gf_beck2':'gf_beck1')); }
-    if(ms<2050) { const k=Math.floor((ms-1700)/60)%2; return Object.assign({x:gx+(k?3:-3),gy,th:(k?4:-4)*D},pose(k?'gf_shim1':'gf_shim2')); }          // shimmy
-    if(ms<2350) { const u=(ms-2050)/300; return Object.assign({x:gx,gy,th:10*D*ez(u/.3),hop:u<.25?Math.sin(u/.25*Math.PI)*8:0},pose('gf_hip')); }      // hip pop
-    if(ms<B) { const u=(ms-2350)/(B-2350),k=Math.floor(u*8)%4,n=k%2?'sstand':'gf_spin'; if(u>.85) return Object.assign({x:gx,gy},pose('gf_vogue'));
-      return Object.assign({x:gx,gy,hop:Math.sin(u*Math.PI)*14},pose(n,k>=2)); }
-    if(ms<C) { const k=Math.floor((ms-B)/300)%2; return Object.assign({x:gx,gy},pose(k?'gf_swayR':'gf_swayL')); }                               // waits, hands on hips
-    if(ms<C+500) { const u=ez((ms-C)/500); return Object.assign({x:gx-u*18,gy,hop:Math.sin(u*Math.PI)*10},pose('gf_vine1')); }                     // one strut in
-    if(ms<C+1300) { const u=(ms-C-500)/800; return Object.assign({x:gx-18,gy,th:u<.2?-6*D:0},pose(u<.2?'gf_hip':'gf_final')); }                     // hair flip, pose
-    const u=cl((ms-C-1300)/(END-C-1300-100)); return {x:lerp(gx-18,me.x,ez(u)),gy:lerp(gy,me.base,ez(u)),std:sp.flip,hop:Math.abs(Math.sin(u*Math.PI*3))*12}; };
-  const st=rigPath(fx,END,at);
+  // Her ability sheet (ab_battle_1 to 6): smug stand, point, come-on beckon, shimmy and hip pop, spin point, the hair-flip kick.
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:gx,y:gy,f:'ab_battle_1'},{t:1050,f:'ab_battle_2'},{t:1400,f:'ab_battle_3'},
+    {t:1700,f:(u,tt)=>Math.floor(tt*16)%2?'ab_battle_4':'ab_battle_4R',dx:(u,tt)=>Math.sin(tt*40)*3},{t:2050,f:'ab_battle_4',hop:8},
+    {t:2350,f:(u,tt)=>Math.floor(u*6)%2?'ab_battle_5':'ab_battle_5R',hop:14},{t:B,f:'ab_battle_1'},{t:C,f:'ab_battle_2',dx:u=>-ez(u)*18},{t:C+500,f:'ab_battle_5'},
+    {t:C+700,f:'ab_battle_6'},{t:C+1300,f:'ab_battle_1'},{t:C+1500,x:gx-18,y:gy,f:'runR'},{t:END-100,x:'home',y:'home',f:'idle'}]);
   const plan={b:B,c:C,gx,gy,fx:F.x,fy};
   ST.play(E2,[
     [0,()=>{ setMessage('Grace challenges '+f.name+' to a dance battle.'); say(m.id,'dance_battle'); scene('gf_spot',(END-200)/1000,{plan,st,back:true}); scene('gf_steal',(END-300)/1000,{st,plan:{x:F.x,y:F.top-22,hook:C+700}}); }],
@@ -1287,27 +1075,15 @@ G.dance_battle=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),s
 // Everybody up. Grace lunges, kicks over into a real handstand (hands planted, legs straight, hair hanging down) and
 // holds it like a statue. Tom and Rose kick up too (their arms-up frame upside down), wobble harder and harder and
 // topple over one at a time: OOF. Grace adds a straddle for style, comes down to a stick, and the trophy appears.
-SC.gf_trophy=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.15)); gfx.globalAlpha=fade(u,.85); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g,g);
-  if(PROPART.draw('grace/gold_trophy_cup',0,-6,{h:48})) { gfx.restore(); return; }   // painted trophy; the drawn one below is the fallback
-  gfx.beginPath(); gfx.moveTo(-16,-18); gfx.lineTo(16,-18); gfx.lineTo(10,4); gfx.lineTo(-10,4); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=GOLD; gfx.fill();
-  gfx.strokeStyle=GOLD; gfx.lineWidth=3; for(const sx of [-1,1]) { gfx.beginPath(); gfx.ellipse(sx*17,-10,6,7,0,0,Math.PI*2); gfx.stroke(); }
-  R(-5,2,10,12,OUT); R(-3,4,6,8,GOLD); R(-13,10,26,10,OUT); R(-11,12,22,6,GOLD); label('1',0,-14,'#7a4a10',2); gfx.restore(); };
 SC.gf_flipfoe=(s,u)=>{ const f=s.f,ms=s.t*1000,up=ms<s.fall?ez(ms/300):1-ez((ms-s.fall)/400); f.spinAt=performance.now(); f.oy=-up*10; f.ox=0; f.spin=up*Math.PI+Math.sin(ms/90)*.2*up*(1+ms/1500); };
-G.handstand_contest=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m),sp=GSP();
+G.handstand_contest=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveParty()),foe=who.find(u=>u.side==='foe'),me=ST.unit(m);
   const others=foe?[]:who.filter(u=>u!==m&&u.side==='party');
   const UP=900,HOLD=1400,falls=others.map((u,k)=>2000+k*520),last=falls.length?falls[falls.length-1]+350:2400;
   const STRAD=last+200,DOWN=last+800,LAND=DOWN+450,TROPHY=LAND+100,HOME=LAND+1100,END=HOME+600;
   const X=me.x,GY=me.base;
-  const at=ms=>{
-    if(ms<500) return {x:X,gy:GY,std:sp.celeb,hop:Math.sin(ms/500*Math.PI)*12};
-    if(ms<UP) { const u=ms-500<150?PB('gf_reach','gf_lunge',(ms-500)/150,2):{q:W.P.gf_lunge,fr:PF('gf_lunge')}; return {x:X,gy:GY,q:u.q,fr:u.fr,th:-10*D*ez((ms-500)/400)}; }
-    if(ms<HOLD) { const u=ez((ms-UP)/(HOLD-UP)),b=PB('gf_lunge','gf_hsup',u,4),th=lerp(-10*D,-Math.PI,u); return {x:X-u*10,gy:GY,q:b.q,fr:u>.8?PF('gf_hs'):b.fr,th}; }
-    if(ms<STRAD) return {x:X-10,gy:GY,q:W.P.gf_hs,fr:PF('gf_hs'),th:-Math.PI};
-    if(ms<DOWN) { const u=(ms-STRAD)/(DOWN-STRAD),n=u<.2||u>.85?'gf_hs':(u<.55?'gf_hsStrad':'gf_hsStag'); return {x:X-10,gy:GY,q:W.P[n],fr:PF(n),th:-Math.PI}; }
-    if(ms<LAND) { const u=ez((ms-DOWN)/(LAND-DOWN)),b=PB('gf_hsup','gf_land',u,4),th=lerp(-Math.PI,-2*Math.PI,u); return {x:X-10+u*10,gy:GY,q:b.q,fr:u<.15?PF('gf_hs'):b.fr,th}; }
-    if(ms<HOME) { const u=(ms-LAND)/300; return {x:X,gy:GY,q:W.P.gf_land,fr:PF('gf_land'),hop:u<1?Math.sin(cl(u)*Math.PI)*8:0}; }
-    return {x:X,gy:GY,std:sp.celeb,hop:Math.abs(Math.sin(cl((ms-HOME)/600)*Math.PI*2))*8}; };
-  rigPath(fx,END,at);
+  // Her ability sheet (ab_hand_1 to 6): fist-up ready, the lunge, the handstand, the straddle, the stuck landing and the trophy. The trophy is painted in her hand.
+  ST.keys(fx,[{t:0,x:'home',y:'home',f:'celeb',hop:12},{t:500,x:X,y:GY,f:'ab_hand_1'},{t:650,f:'ab_hand_2'},{t:UP+100,f:'ab_hand_3'},{t:STRAD,f:'ab_hand_4'},{t:DOWN,f:'ab_hand_3'},
+    {t:LAND-150,f:'ab_hand_5',hop:8},{t:TROPHY,f:'ab_hand_6'},{t:HOME,f:'ab_hand_5',hop:8,hn:2},{t:END,f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage(foe?'Grace challenges '+foe.name+' to a handstand contest.':'Grace calls a handstand contest. Everybody up!'); say(m.id,'handstand_contest'); }],
     [500,()=>{ scene('gv_big',1.2,{x:me.x-80,y:Math.max(60,me.top-60),txt:'HANDSTAND CONTEST!',c:PINK,sc:2}); sfx.charge(); }],
@@ -1324,7 +1100,7 @@ G.handstand_contest=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2Li
     ['hf',STRAD+300],
     [STRAD+300,()=>{ E2.apply(); sfx.heal(); sfx.ding(); for(const u of who) { const q=ST.unit(u); scene('gr_warmring',1.2,{x:q.x,y:q.base}); } }],
     [LAND,()=>{ sfx.thud(); scene('gf_dust',.35,{x:X-10,y:GY}); scene('gf_dust',.35,{x:X+10,y:GY}); }],
-    [TROPHY,()=>{ scene('gf_trophy',1.4,{x:me.x,y:me.base+18}); scene('gv_text',1.3,{x:me.x,y:me.base-GH()-60,txt:'GRACE WINS',c:GOLD}); sfx.fanfare(); }],
+    [TROPHY,()=>{ scene('gv_text',1.3,{x:me.x,y:me.base-GH()-60,txt:'GRACE WINS',c:GOLD}); sfx.fanfare(); }],
     [END,'end',foe?foe.name+' warms up a little.':'Grace wins. She was always going to win.']]); };
 })();
 
@@ -1334,7 +1110,7 @@ G.handstand_contest=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2Li
 //   open_strings   (was beam_dismount): row hit, foes Hooked (no dodging) 2 turns. A first-year violin screech.
 //   portrait_mode  (was split_leap): one foe hit, its wind-up cancelled, the most hurt friend Guarded. She draws the monster.
 //   bedazzle_blast (was chalk_up): row hit, +25% crit. Rhinestone gun; the foes that crit get the sharp gem.
-// Painted frames os_*, pm_*, bz_* (data/grace-extra.js, art/chars/grace-extra.webp, wired in data/grace-hires-use.js) and
+// Painted ability frames ab_strings_*, ab_portrait_*, ab_bz_* (data/grace-ab.js, art/chars/grace-ab.webp, wired in data/grace-hires-use.js) and
 // props art/props/grace (screech_burst, sour_note, ... gem_hopper). Scenes prefix gx_ (no aim warp).
 (function(){
 const SC=RFX.SC,{scene}=RFX,ST=RFX.ST,G=RECRUIT_MOVES.grace;
@@ -1381,10 +1157,10 @@ SC.gx_screech=(s,u)=>{ const P=s.plan,q=ez(u/.25),a=fade(u,.6); gfx.globalAlpha=
   gfx.globalAlpha=1; };
 G.open_strings=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p={x:Math.max(Gp.x1+60,me.x-64),y:me.base},U=list.map(f=>ST.unit(f));   // a small step forward from her own spot (Tom 10/31), not a walk across the stage
   const T={in:450,tuck:800,breath:1150,stroke:1500,wince:1750,saw1:2000,saw2:2250,saw3:2500,saw4:2750,screech:3000,slip:3500,push:3730,finish:4000,listen:4270,shrug:4570,lessons:4850,bow:5270,proud:5600,back:5870,home:6250};   // after the screech the tail runs quick (Tom 22:35)
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'os_arrive',hop:3,hn:2},{t:T.in,x:p.x,y:p.y,f:'os_tuck'},{t:T.breath,f:'os_breath',sc:1.04},{t:T.stroke,f:'os_stroke'},{t:T.wince,f:'os_wince'},
-    {t:T.saw1,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*2},{t:T.saw2,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*2},{t:T.saw3,f:'os_sawup',dx:u=>Math.sin(u*Math.PI)*3},{t:T.saw4,f:'os_sawdown',dx:u=>-Math.sin(u*Math.PI)*3},
-    {t:T.screech,f:'os_screech',dx:(u,tt)=>Math.sin(tt*60)*2,sc:1.06},{t:T.slip,f:'os_slip'},{t:T.push,f:'os_push',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:T.finish,f:'os_finish',hop:8},{t:T.listen,f:'os_listen'},
-    {t:T.shrug,f:'os_shrug'},{t:T.lessons,f:'os_lessons'},{t:T.bow,f:'os_bow'},{t:T.proud,f:'os_proud'},{t:T.back,f:'os_arriveR',hop:3,hn:2},{t:T.home,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_strings_1',hop:3,hn:2},{t:T.in,x:p.x,y:p.y,f:'ab_strings_6'},{t:T.breath,f:'ab_strings_6',sc:1.04},{t:T.stroke,f:'ab_strings_2'},{t:T.wince,f:'ab_strings_3'},
+    {t:T.saw1,f:'ab_strings_2',dx:u=>Math.sin(u*Math.PI)*2},{t:T.saw2,f:'ab_strings_6',dx:u=>-Math.sin(u*Math.PI)*2},{t:T.saw3,f:'ab_strings_2',dx:u=>Math.sin(u*Math.PI)*3},{t:T.saw4,f:'ab_strings_6',dx:u=>-Math.sin(u*Math.PI)*3},
+    {t:T.screech,f:'ab_strings_3',dx:(u,tt)=>Math.sin(tt*60)*2,sc:1.06},{t:T.slip,f:'ab_strings_4'},{t:T.push,f:'ab_strings_4',dx:(u,tt)=>Math.sin(tt*40)*1.5},{t:T.finish,f:'ab_strings_6',hop:8},{t:T.listen,f:'ab_strings_4'},
+    {t:T.shrug,f:'ab_strings_4'},{t:T.lessons,f:'ab_strings_5'},{t:T.bow,f:'ab_strings_5'},{t:T.proud,f:'ab_strings_5'},{t:T.back,f:'ab_strings_1R',hop:3,hn:2},{t:T.home,x:'home',y:'home',f:'idle'}]);
   const note=(id,k,at,dur=.75)=>{ const tx=Gp.x0+rnd(k,1)*Math.max(40,Gp.w),ty=Gp.top-10+rnd(k,2)*(Gp.base-Gp.top)*.7; fly(id,st,-30,-GH()*.62,tx,ty,dur,{arc:24+rnd(k,3)*30,spin:(rnd(k,4)-.5)*3,h:26+rnd(k,5)*10,rot0:(rnd(k,6)-.5)*.6}); };
   const plan={x:Gp.x1-4,y:Gp.top+(Gp.base-Gp.top)*.45,w:Math.max(80,Math.min(140,Gp.w*.8)),F:U.map((q,k)=>({x:q.x,top:q.top,h:q.h,w:q.w,d:k*70}))};
   ST.play(E2,[
@@ -1421,9 +1197,9 @@ SC.gx_sketchfx=(s,u)=>{ const P=s.plan,ms=u*s.dur*1000; gfx.globalAlpha=1;
   gfx.globalAlpha=1; };
 G.portrait_mode=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),p=front(F,62),L=lowest(),LU=L?ST.unit(L):null,selfL=!L||L===m;
   const T={in:700,open:1000,measure:1350,pose:1750,sketchA:2250,sketchB:2550,compare:2850,sketchC:3100,erase:3450,sign:3800,jab:4150,tear:4600,admire:4950,shield:5550,wink:6250,back:6650,home:7450};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'pm_arrive',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'pm_open'},{t:T.measure,f:'pm_measure'},{t:T.pose,f:'pm_pose'},{t:T.sketchA,f:'pm_sketchA',dx:(u,tt)=>Math.sin(tt*50)*1.2},
-    {t:T.sketchB,f:'pm_sketchB',dx:(u,tt)=>Math.sin(tt*50)*1.2},{t:T.compare,f:'pm_compare'},{t:T.sketchC,f:'pm_sketchC',dx:(u,tt)=>Math.sin(tt*60)*1.5},{t:T.erase,f:'pm_erase',dx:(u,tt)=>Math.sin(tt*40)*2},{t:T.sign,f:'pm_sign'},
-    {t:T.jab,f:'pm_jab',dx:u=>-ez(Math.min(1,u*3))*26*(1-ez((u-.7)/.3)),ease:'out'},{t:T.tear,f:'pm_tear'},{t:T.admire,f:'pm_admire'},{t:T.shield,f:'pm_shield'},{t:T.wink,f:'pm_wink'},{t:T.back,f:'pm_leaveR',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_portrait_1',hop:4,hn:5},{t:T.in,x:p.x,y:p.y,f:'ab_portrait_1'},{t:T.measure,f:'ab_portrait_2'},{t:T.pose,f:'ab_portrait_2'},{t:T.sketchA,f:'ab_portrait_3',dx:(u,tt)=>Math.sin(tt*50)*1.2},
+    {t:T.sketchB,f:'ab_portrait_3',dx:(u,tt)=>Math.sin(tt*50)*1.2},{t:T.compare,f:'ab_portrait_6'},{t:T.sketchC,f:'ab_portrait_3',dx:(u,tt)=>Math.sin(tt*60)*1.5},{t:T.erase,f:'ab_portrait_3',dx:(u,tt)=>Math.sin(tt*40)*2},{t:T.sign,f:'ab_portrait_1'},
+    {t:T.jab,f:'ab_portrait_4',dx:u=>-ez(Math.min(1,u*3))*26*(1-ez((u-.7)/.3)),ease:'out'},{t:T.tear,f:'ab_portrait_5'},{t:T.admire,f:'ab_portrait_5'},{t:T.shield,f:'ab_portrait_5R'},{t:T.wink,f:'ab_portrait_1'},{t:T.back,f:'ab_portrait_1R',hop:4,hn:4},{t:T.home,x:'home',y:'home',f:'idle'}]);
   const gx=Math.min(528,selfL?me.x-44:LU.x-LU.w*.5-18),gy=selfL?me.mid:LU.mid,gh=Math.max(56,Math.min(90,(selfL?me.h:LU.h)*.8));
   const page={show:0,turn:T.shield-T.admire,st,gx,gy,gh};   // times from the scene start (T.admire)
   const bits=[{id:'scribble_cloud',at:T.sketchA,len:650,dx:-34,dy:44,h:40,spin:.4},{id:'pencil_shavings',at:T.sketchA+200,len:700,dx:-16,dy:34,h:22,vx:-.6,g:40,spin:3},{id:'scribble_cloud',at:T.sketchC,len:420,dx:-30,dy:40,h:46,spin:-.5},
@@ -1460,10 +1236,10 @@ SC.gx_gems=(s,u)=>{ const P=s.plan,ms=u*s.dur*1000; const fa=fade(u,.88);
 G.bedazzle_blast=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),me=ST.unit(m),p={x:Math.max(Gp.x1+60,me.x-64),y:me.base},U=list.map(f=>ST.unit(f));   // a small step forward from her own spot (Tom 10/31)
   const waves=(B2.move&&B2.move.waves||[]).flat(),critOf=f=>waves.some(e=>e.t===f&&e.crit);
   const T={in:450,draw:750,load:1050,safety:1400,aim:1700,fireA:2000,low:2300,high:2600,fireB:2900,one:3200,blow:3700,inspect:4100,more:4500,topup:4900,admire:5350,pose:5800,back:6300,home:6700};
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'bz_arrive',hop:3,hn:2},{t:T.in,x:p.x,y:p.y,f:'bz_draw'},{t:T.load,f:'bz_load'},{t:T.safety,f:'bz_safety'},{t:T.aim,f:'bz_aim'},
-    {t:T.fireA,f:'bz_fireA',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.low,f:'bz_sweeplow',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.high,f:'bz_sweephigh',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.fireB,f:'bz_fireB',dx:(u,tt)=>Math.sin(tt*70)*2},
-    {t:T.one,f:'bz_onehand',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.blow,f:'bz_blow'},{t:T.inspect,f:'bz_inspect'},{t:T.more,f:'bz_notenough'},{t:T.topup,f:'bz_topup',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.admire,f:'bz_admire',hop:8},{t:T.pose,f:'bz_pose'},
-    {t:T.back,f:'bz_arriveR',hop:3,hn:2},{t:T.home,x:'home',y:'home',f:'idle'}]);
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_bz_1',hop:3,hn:2},{t:T.in,x:p.x,y:p.y,f:'ab_bz_1'},{t:T.load,f:'ab_bz_5'},{t:T.safety,f:'ab_bz_2'},{t:T.aim,f:'ab_bz_2'},
+    {t:T.fireA,f:'ab_bz_3',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.low,f:'ab_bz_3',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.high,f:'ab_bz_3',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.fireB,f:'ab_bz_3',dx:(u,tt)=>Math.sin(tt*70)*2},
+    {t:T.one,f:'ab_bz_2',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.blow,f:'ab_bz_4'},{t:T.inspect,f:'ab_bz_5'},{t:T.more,f:'ab_bz_5'},{t:T.topup,f:'ab_bz_3',dx:(u,tt)=>Math.sin(tt*70)*2},{t:T.admire,f:'ab_bz_6',hop:8},{t:T.pose,f:'ab_bz_6'},
+    {t:T.back,f:'ab_bz_1R',hop:3,hn:2},{t:T.home,x:'home',y:'home',f:'idle'}]);
   const gems=[]; let gk=0;
   const stick=(at,n,sharp)=>{ U.forEach((q,i)=>{ const crit=critOf(list[i]); for(let j=0;j<n;j++) { const k=gk++; const id=sharp&&crit?'gem_sharp':['gem_pink','gem_blue','gem_gold'][k%3];
     gems.push({id,k,at:at+i*60+j*45,x:q.x-q.w*.35+rnd(k,7)*q.w*.7,y:q.top+q.h*.12+rnd(k,8)*q.h*.7,h:sharp&&crit?Math.max(22,q.h*.26):12+rnd(k,9)*8,rot:(rnd(k,10)-.5)*.8,sharp:sharp&&crit}); } }); };

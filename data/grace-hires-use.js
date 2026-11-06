@@ -26,8 +26,9 @@
   sp.kneel=P('kneel');   // painted tired kneel (battle sheet 2); battle-draw skips its bruise overlay for hires sprites
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
   sp.beg=P('beg'); sp.begFlip=mirror(sp.beg);   // Squishy Delivery begging pose: the tired kneel
-  // Open Strings (os_*), Portrait Mode (pm_*) and Bedazzle Blast (bz_*) frames, own atlas (data/grace-extra.js, Oct 30). All face left except pm_shield (faces right).
-  if(typeof GRACE_EXTRA!=='undefined') { const X=GRACE_EXTRA; paintedAtlas('graceExtra',X.atlas.src,X.atlas.rects,X.atlas.k,violet); for(const k in X.rows) sp[k]=tag(X.rows[k].slice(),'graceExtra',k,false); for(const k of ['os_arrive','pm_leave','bz_arrive']) if(sp[k]) sp[k+'R']=mirror(sp[k]); }   // *R: the walk-in frames facing right, for the walk home
+  // Ability frames (data/grace-ab.js, art/chars/grace-ab.webp, tools/sprite-bake/bake_grace_ab.py): her 14 approved ability sheets, ab_<move>_<n>, all facing left.
+  // ab_*R is the same painted frame flipped when drawn, for walking or facing right (an ally to her right, the walk home).
+  if(typeof GRACE_AB!=='undefined') { const X=GRACE_AB; paintedAtlas('graceAb',X.atlas.src,X.atlas.rects,X.atlas.k,violet); for(const k in X.rows) { sp[k]=tag(X.rows[k].slice(),'graceAb',k,false); sp[k+'R']=mirror(sp[k]); } }
   BATTLE_SPRITES.grace=sp;
   // Knocked out: the family KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.grace={scale:.8,pal:GRACE_HIRES.ko.pal,rows:tag(GRACE_HIRES.ko.rows.slice(),'graceKo','ko',true)};
