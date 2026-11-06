@@ -7068,8 +7068,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-19-glass-tower-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932105791
+    }
+   ],
    "rejects": [],
    "id": "bg-19-glass-tower",
    "tab": "Battle",
