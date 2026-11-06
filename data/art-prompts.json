@@ -4297,9 +4297,16 @@
    "group": "Nine Scoops"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "solid magenta background, same style painting",
+     "from": "v1",
+     "at": 1793927617229
+    }
+   ],
    "id": "enemy-brainfreeze",
    "tab": "Enemies",
    "title": "Brain Freeze: boss sheet, 6 frames facing right",
