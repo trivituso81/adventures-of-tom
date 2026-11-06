@@ -1,3 +1,12 @@
+## 2026-11-06 (386): The Square walk map from Tom's Area Builder export (`square7`)
+
+- Tom's export (83 walk and block edits) applied with `tools/apply_walkmap.py`: open lanes west of the fountain, between Snail Mail and Kettle Cottage, and south of the plaza; the fence row (4-10,24), mailboxes and planters blocked.
+- Doors moved up one row onto the painted doors: Hush Library (11-12,7), Snail Mail (2,20), Kettle Cottage (10-11,20), Moon Club (18-19,20; Tom marked 18, the painted double door also covers 19, kept). Houses are now 4 tiles tall in `LE_HOUSES`.
+- Stairs to Grump Hollow are two tiles wide (x 7 and 8); new exits at (7,2) and (7,3), chapter 1 branch gate and NPC no-go tiles cover both columns.
+- Rivituso Row arch: the post bases (12,25) and (15,25) block; exits are (13,25) and (14,25) only.
+- Objects moved off tiles Tom opened: North signpost to the arch post (9,6), South signpost to the arch post (12,25), fountain now 8-13 x 11-13, benches one tile each at (7,11) and (15,11). West edge (0,13-15) and (0,23) opened in `border.open`.
+- Tests: reach_test town 0 unreachable, smoke FAILS [], areas_test 0, camera_clamp 0, tag_check ok; a door walk test entered every moved door and both stair columns in portrait and landscape and came back out on the door tile (shots `tools/shots/doors-*`).
+
 ## 2026-11-06 (385): The Square v3 painting is installed with a walk-behind layer (`square6`)
 
 - New painting `art/town.webp` (1920 x 1664) and `art/town-fg.webp`: Tom walks behind trees, roofs, the three exit boards, four lamps and large props. Cut from the painting itself; Tom's generator masks were used only as masks (`tools/make_town_fg.py`, sources in `art/raw/areas/town-v3/`). Dropped props not in the painting: cafe set, rope posts, stick barrel, flour sacks. Hanging shop signs are not cut.
