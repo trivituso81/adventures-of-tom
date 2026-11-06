@@ -1,3 +1,9 @@
+## 2026-11-06 (298): Emotion sheets for 9 characters saved and indexed (`emo3`)
+- Tom (00:03): nine painted emotion sheets, "store them in memory in such a way that they can be referenced throughout the game when emotionally appropriate. dont yet determine those moments yet, just index them".
+- Identified against the hero paintings: Tom, TNB, Grace, Rose, Justin, Deedee, Boppy, Aunt Ellie, Olivia. Not in the batch: Amy, Nara.
+- Sources art/raw/characters/<id>-emotions-v1.png; Library entries `<id>-emotions` set approved with v1.
+- New cutter tools/sprite-bake/emotion_frames.py: 8 full-body figures per sheet as painted into art/emotions/<id>.webp (one row, mood order, feet on the bottom edge) and the index data/emotions.js (`EMOTIONS`, `EMOTION_ART[id].frames[mood]`). Drops one generator smudge (pink blob on Olivia's Happy hair). Contact sheet checked, all 72 frames clean.
+- No game file changed: data/emotions.js is not in index.html until a story moment uses it. Docs: docs/EMOTIONS.md "Index".
 ## 2026-11-06 (297): Tom's two battle sheets saved (`tombattle1`)
 - Tom (00:06) sent his painted battle sheets. Saved as art/raw/characters/tom-battle-sheet-1-v1.png (1774 x 887, 4 x 2, 8 frames: ready, ready breathing, hands on hips, offering, wind-up, lunge, arms wide, guard) and tom-battle-sheet-2-v1.png (1254 x 1254, 3 x 2, 6 frames: startled, tired, dizzy, cheer, big cheer, power pose).
 - Effect: Tom's 14 ability sheets in the Art Library are no longer blocked. NOT baked into the game (install only when Tom asks).
