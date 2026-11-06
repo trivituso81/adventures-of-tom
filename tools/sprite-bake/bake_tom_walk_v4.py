@@ -64,7 +64,8 @@ for i, names in enumerate(XSHEETS, 1):
 # built ONLY from his seven headless body pictures and the heads of his three standing paintings (tools/sprite-bake/tom_walk_frames.py).
 # The old walk sheet and side strip are gone. The only alteration is the mirror for front and back step 2.
 from defringe import defringe
-from tom_walk_frames import build as _build_walk
+# 2026-11-05 19:29 (Tom, TEST): the nine overworld frames plus the passing frames are Tom's ten WHOLE full-figure paintings, used as painted (tools/sprite-bake/tom_whole_frames.py): no separate head, no head or body resizing, no bob.
+from tom_whole_frames import build as _build_walk
 poses.update(_build_walk()[0])
 
 # ---------------------------------------------------------------- head size (2026-11-01, Tom's call)
@@ -229,7 +230,7 @@ def _walk_head(img, chin, ky, kx, taper, side, pad=160):
 CUT_PX = {'down': 358, 'up': 380, 'left': 410}
 EAR_PX = {'up': 308}
 FRONT_EAR_OVER_H = 676 / 950.0      # ear to ear over hair top to chin of Tom's front head picture (measured on the picture)
-if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 skips the back and side matching below
+if os.environ.get('HERO_HEAD', '0') != '0':     # off for whole painted frames (default 0); skips the back and side matching below
     # FRONT: Tom's front head picture (tom-head-front-v2.png) is placed in tom_walk_frames at FRONT_CHIN frame px, one uniform scale, no stretching.
     # BACK and SIDE are scaled uniformly to match it: back = same ear-to-ear width, side = same hair-top-to-chin height.
     from tom_walk_frames import FRONT_CHIN
@@ -247,7 +248,7 @@ if os.environ.get('HERO_HEAD', '1') != '0':     # HERO_HEAD=0 skips the back and
 
 # 2026-11-05 (Tom 14:38): stride frames a little lower than the stand and pass frames, so the head bobs like Grace's and Rose's (tools/sprite-bake/tom_walk_frames.py apply_bob).
 # Runs after the head matching above so it sees the final frame heights; one uniform scale per frame, stands untouched, feet stay on the bottom row (place() below).
-if os.environ.get('TOM_BOB', '1') != '0':
+if os.environ.get('TOM_BOB', '0') != '0':
     from tom_walk_frames import apply_bob as _apply_bob
     poses.update(_apply_bob({n: v for n, v in poses.items() if n.startswith('w_') and n[2:].split('_')[0] in ('down', 'up', 'left') and n.split('_')[-1] in ('stand', 'step1', 'step2', 'pass')}))
 # ---------------------------------------------------------------- helpers
@@ -271,7 +272,7 @@ def hard(img, thr=0.5):
     return Image.fromarray(a, 'RGBA')
 
 from tom_walk_frames import OW_REF_H
-OW_STAND_H = OW_REF_H if os.environ.get('HERO_HEAD', '1') == '0' else poses['w_down_stand'].crop(poses['w_down_stand'].getbbox()).height   # grown front stand: keeps Tom's real height # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
+OW_STAND_H = poses['w_down_stand'].crop(poses['w_down_stand'].getbbox()).height   # grown front stand: keeps Tom's real height # the standing frame's height: the size factor below keeps every frame at the scale it was painted at
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
