@@ -6884,8 +6884,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-13-studio-backlot-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793931978030
+    }
+   ],
    "rejects": [],
    "id": "bg-13-studio-backlot",
    "tab": "Battle",
