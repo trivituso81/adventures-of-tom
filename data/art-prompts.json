@@ -2183,7 +2183,7 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -2193,7 +2193,14 @@
      "at": 1793923515579
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "pei tin is too large",
+     "from": "v5",
+     "at": 1793926527138
+    }
+   ],
    "id": "enemy-bigone",
    "tab": "Enemies",
    "title": "The Big One: boss sheet, 6 frames facing right",
