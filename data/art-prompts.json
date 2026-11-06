@@ -166,8 +166,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Noise-Canceling.\n\nRow 1:\n1. Walking forward calmly, large black over-ear headphones held in one hand at his side, flat face.\n2. Standing, holding the headphones open with both hands above his head, about to put them on.\n3. Headphones on his ears, both hands pressing the ear cups, eyes closing.\n\nRow 2:\n4. Headphones on, one finger pressing a button on an ear cup, the other hand raised with the palm out.\n5. Headphones on, arms folded, eyes closed, a peaceful tiny smile, standing perfectly still.\n6. Headphones on, head tilted back slightly, eyes closed, blissful, one hand resting on an ear cup."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-ab-seat-1a-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793952931493
+    }
+   ],
    "rejects": [],
    "id": "tom-ab-seat-1a",
    "tab": "Characters",
