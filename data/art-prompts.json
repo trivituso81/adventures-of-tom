@@ -2489,7 +2489,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tnb-ab-dont-split-up",
    "tab": "Characters",
    "group": "TNB",
@@ -2501,7 +2501,16 @@
     "art/raw/characters/tnb-battle-sheet-1-v1.png",
     "art/raw/characters/tnb-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Don't Split Up.\n\nRow 1:\n1. Reaching one hand out to grab a friend by the arm, eyes wide, alert.\n2. Holding a flashlight pointed up under his chin, wide eyes, a spooky dead-serious face.\n3. Standing tall, the flashlight held out in front, whispering over his shoulder, tense.\n\nRow 2:\n4. Standing with his back turned, the flashlight raised, scanning, tense shoulders.\n5. Flinching and jumping at a noise, the flashlight swinging, mouth open.\n6. Hand pressed to his chest, breathing out, a nervous laugh."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Don't Split Up.\n\nRow 1:\n1. Reaching one hand out to grab a friend by the arm, eyes wide, alert.\n2. Holding a flashlight pointed up under his chin, wide eyes, a spooky dead-serious face.\n3. Standing tall, the flashlight held out in front, whispering over his shoulder, tense.\n\nRow 2:\n4. Standing with his back turned, the flashlight raised, scanning, tense shoulders.\n5. Flinching and jumping at a noise, the flashlight swinging, mouth open.\n6. Hand pressed to his chest, breathing out, a nervous laugh.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-ab-dont-split-up-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793981221138
+    }
+   ]
   },
   {
    "status": "draft",
