@@ -29,6 +29,7 @@ SCENES.opening=()=>{
       {seq:[{wait:.25},{walk:'rose',to:rTiles,speed:.11,onStep:i=>{ if(i%2===0) snd.patter(1); }}]}
     ]},
     {call:()=>{ intro.bubble=null; }}, {face:'grace',dir:'right'}, {face:'rose',dir:'up'},
+    {zoom:2,time:.9}  ,                              // camera pushes in on Tom and the girls for the greeting; back out below
     {step:hugStep()},
     {talk:'Grace',lines:["TATA! You're BACK!",'We waited for you for a hundred years.'],voice:[['grace','intro1'],['grace','intro2']]},
     {talk:'Rose',lines:['A hundred MILLION years!','Tata, up! Up up up!'],voice:[['rose','intro1'],['rose','intro2']]},
@@ -62,6 +63,7 @@ SCENES.opening=()=>{
     {pose:'tom'},
     {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
     {hop:'rose',from:[dx-1,row],to:[dx-1,row+1],time:.2,arc:5,lift:[10,0]},
+    {zoom:1,time:.8},
     {flag:'opening-done'},
     {call:finishOpening}
   ];

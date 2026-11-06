@@ -18,6 +18,12 @@ Art Library: 6 new Props sheets, group "Trail clues" (`prop-trail-a` to `f`, 51 
 - Tested: smoke FAILS: [], tag_check ok, welcome screen portrait looked at.
 - Tags: `walkhead4`.
 
+## 2026-11-06 (346): Opening: camera zooms in on Tom and the girls for the greeting, back out at the end (`introzoom1`)
+- Tom (07:36): zoom in during the intro so Tom and the girls greeting him are easier to see, then back to normal when the intro is done.
+- New scene step `{zoom:z,time:s}` (engine/story.js) eases `sceneZoom` (engine/overworld.js, multiplies the outdoor fit in `resize`); `endIntro` resets it to 1 so skipping also restores the normal view. `SCENES.opening` zooms to 2x when the girls reach Tom and back to 1 just before the party-join.
+- Tested: opening played in portrait (430x860) and landscape (860x400), zoom in and out looked at; smoke FAILS: [], tag_check ok.
+- Tags: `introzoom1`.
+
 ## 2026-11-06 (345): Emotions batch 6: chapters 18 to 20 show mood faces and poses (`emo13`)
 - `python3 tools/emotion-apply.py 1 ... 20`: chapter 18 found 40 of 40, chapter 19 99 of 99, chapter 20 86 of 86; `EMO_CHAPTERS` now 1 to 20, `data/emotion-moods.js` 1547 keys. The `CH19_MEM`, `CH19_KEEP` and `CH20_DOORS` tables play through `{talk:...}` steps (S.talk), so they reach the mood system.
 - Tested: all 1563 tagged lines in chapters 1 to 20 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.

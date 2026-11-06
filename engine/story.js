@@ -283,6 +283,9 @@ const SCENE_OPS={
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
   // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
   cam:o=>S.call(()=>{ sceneCam=o.cam||null; }),
+  // {zoom:1.6,time:.8}: eases the outdoor camera in (above 1) or back out ({zoom:1}) while the scene plays; the camera stays on Tom or the {cam} tile.
+  zoom:o=>({t:0,start(){ this.t=0; this.a=sceneZoom; },
+    update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||.8)); setSceneZoom(this.a+(o.zoom-this.a)*ease(u)); return u>=1; }}),
   pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f) a.scenePose={f:o.f,dir:o.dir||'left',fps:o.fps}; else { a.scenePose=null; a.lift=0; } }),
   // {knock:'tom',to:[x,y],delay,fly,arc,dir}: thrown to a spot (hurt frame in the air), lands with a bounce, then lies there (KO frame) until a getup.
   knock:o=>lazy(()=>{ const a=sceneActor(o.knock),to=scenePos(o.to),fly=o.fly||.42,dl=o.delay||0,arc=o.arc||22; let t=0,from=null,dir='left';
@@ -510,7 +513,7 @@ function storySpawn(o) {
 function storyDespawn(name) { for(const m of Object.values(worlds)) m.npcs=m.npcs.filter(n=>!(n.scripted&&n.name===name)); }
 const LE_endIntro_story=endIntro;
 endIntro=function() {
-  sceneCam=null;
+  sceneCam=null; setSceneZoom(1);
   // Map monsters a scene walked out go back to their spots (so they never block a path afterwards).
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];

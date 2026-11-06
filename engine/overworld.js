@@ -324,9 +324,12 @@ function outdoorCover(map,width,height) {
   if(!map||!map.outside||typeof PLATES==='undefined'||!PLATES[map.id]) return 1;
   return Math.min(OUTDOOR_COVER_CAP,Math.max(1,width/(map.w*T),height/(map.h*T)));
 }
+// A cutscene can push the camera in on outdoor maps ({zoom:1.6,time:.8} in engine/story.js); 1 is the normal fit. endIntro resets it.
+let sceneZoom=1;
+function setSceneZoom(z) { z=Math.max(1,z); if(Math.abs(z-sceneZoom)<1e-4) return; sceneZoom=z; resize(); }
 function resize() {
   const width=game.clientWidth,height=game.clientHeight;
-  scale=currentMap.outside?outdoorCover(currentMap,width,height):!currentMap.outside&&width>=900&&height>=700?2:1;
+  scale=currentMap.outside?outdoorCover(currentMap,width,height)*sceneZoom:!currentMap.outside&&width>=900&&height>=700?2:1;
   // The tiny epsilon keeps a map that fits exactly from rounding up to one pixel more than the map (which would show a sliver).
   W=Math.max(1,Math.ceil(width/scale-1e-6));
   H=Math.max(1,Math.ceil(height/scale-1e-6));
