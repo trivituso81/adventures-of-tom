@@ -4076,7 +4076,7 @@
    "group": "Glass Tower"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -4084,6 +4084,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793927382047
+    },
+    {
+     "n": 1,
+     "file": "art/raw/enemies/enemy-vance-v2.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793927887019
     }
    ],
    "rejects": [
