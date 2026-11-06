@@ -1,3 +1,11 @@
+## 2026-11-06 (361): TNB install: 14 painted ability sheets, 15 painted props, board and drawn props purged (`tnbinst1`)
+- Tom approved TNB's 14 ability sheets and 14 objects and effects sheets in the Art Library. All 14 moves now play the painted frames (`tnb-ab.webp`, 89 frames, `ability_frames_tnb.py` + `bake_tnb.py`); numbers, lines, VP and timing are unchanged. Props that the painted frames already show (rack, kiln, reader, laptop, flashlight, plate, wheel, board) are no longer drawn by code.
+- 15 same-shape props replaced by the painted fx cuts (`bake_tnb_fx.py`): test_mug, wardrobe_rack, slasher_standee, pea_plate, light_rail_train, cloche, course_scallops, tasting_table, trail_sign, flying_disc, disc_golf_basket, coffee_mug, clay_bowl, flashlight, longboard. Effect-only items (bursts, glows, steam, dust) were left to the game.
+- Purged: `tnb-board.webp` and `tnb-board-v1.png` (the board atlas, `TNB_HIRES.board`, `tnbBoard`), the drawn laptop helper, and props `laptop`, `card_reader`, `metro_card`, `clay_lump`, `clay_cylinder`, `clay_wedge`, `receipt`, `gantt_board` with their preload entries. Grep for the old names: 0 references.
+- Tested: `kit_test.py tnb --only=<move> --speed2` for all 14, FAILS: []; looked at portrait frames. `unused_voice.py` 0. Likely to need a regenerate: Kiln Door Policy (blast is still the game's flame, not a painted one) and Baxter Street Bomb (TNB reads small on the board).
+- Left: older dead duplicate definitions of `T.mug_toss` and `T.kiln_door_policy` (overridden by later ones).
+- Tags: `tnbinst1`.
+
 ## 2026-11-06 (zoom): Arrival zoom also in the Nine Scoops opening and chapters 3, 7 and 9 (`introzoom3`)
 - Tom (10:09): do the opening zoom at the start of every chapter where Tom arrives on Long Island and greets the girls.
 - Those are: the Nine Scoops opening (same taxi scene as chapter 1; zoom in after the title card, out before the party-join), and `ch3Arrive`, `ch7Arrive`, `ch9Arrive` (Grace and Rose greet him in the Square; zoom in at the start, out at the end). Chapters 2, 4, 6, 8 are Los Angeles, chapter 5 opens with Amy, chapters 10 on open differently: unchanged.
