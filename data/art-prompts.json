@@ -3869,7 +3869,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Fresh Fit.\n\nRow 1:\n1. Strolling forward with a confident runway walk, one foot crossing in front of the other, chin up.\n2. Adjusting his collar with both hands, a cool half smile.\n3. Turning on one heel in a spin, jacket flaring, a sharp look.\n\nRow 2:\n4. Holding a pair of dark sunglasses in one hand, lifting them toward his face.\n5. Sliding the sunglasses on, a slow cool grin, head tilted.\n6. Striking a model pose, one hand in a pocket, shoulders squared, sparkles of light around him."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "justin-ab-demo-day",
    "tab": "Characters",
    "group": "Justin",
@@ -3881,7 +3881,16 @@
     "art/raw/characters/justin-battle-sheet-1-v1.png",
     "art/raw/characters/justin-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Demo Day.\n\nRow 1:\n1. Standing with a big sledgehammer resting on his shoulder, studying a wall ahead.\n2. Hoisting the sledgehammer high overhead with both hands, boots planted wide.\n3. Swinging the hammer down hard, body bent forward, mouth open in a shout.\n\nRow 2:\n4. Dropping the hammer low against a wall, bits of plaster flying, a fierce grin.\n5. Raising the hammer overhead again for the second swing, a roar.\n6. Slamming the second swing, dust bursting, face squinted against the dust."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Demo Day.\n\nRow 1:\n1. Standing with a big sledgehammer resting on his shoulder, studying a wall ahead.\n2. Hoisting the sledgehammer high overhead with both hands, boots planted wide.\n3. Swinging the hammer down hard, body bent forward, mouth open in a shout.\n\nRow 2:\n4. Dropping the hammer low against a wall, bits of plaster flying, a fierce grin.\n5. Raising the hammer overhead again for the second swing, a roar.\n6. Slamming the second swing, dust bursting, face squinted against the dust.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/justin-ab-demo-day-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793995873375
+    }
+   ]
   },
   {
    "status": "draft",
