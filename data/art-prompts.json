@@ -3854,7 +3854,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "justin-ab-fresh-fit",
    "tab": "Characters",
    "group": "Justin",
@@ -3866,7 +3866,16 @@
     "art/raw/characters/justin-battle-sheet-1-v1.png",
     "art/raw/characters/justin-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Fresh Fit.\n\nRow 1:\n1. Strolling forward with a confident runway walk, one foot crossing in front of the other, chin up.\n2. Adjusting his collar with both hands, a cool half smile.\n3. Turning on one heel in a spin, jacket flaring, a sharp look.\n\nRow 2:\n4. Holding a pair of dark sunglasses in one hand, lifting them toward his face.\n5. Sliding the sunglasses on, a slow cool grin, head tilted.\n6. Striking a model pose, one hand in a pocket, shoulders squared, sparkles of light around him."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose, the object in the hands and the outfit described below change.\n\nOUTFIT FOR THIS MOVE, in every frame, replacing the clothes in the attached pictures: a dapper, well-tailored royal blue designer suit (jacket, matching trousers, crisp white dress shirt, no tie, top button open), and polished dark brown leather dress shoes. No tool belt, no tools, no work shirt, no boots. The suit and shoes are the same in every frame. His sunglasses are dark, stylish and only appear where a frame says so.\n\nOne image with EXACTLY 6 figures in a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. Two rows only, never three. Do not copy the grid layout of the attached pictures, they have more cells than this sheet. Do not add extra poses. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell, full body from head to shoes. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Fresh Fit.\n\nRow 1:\n1. Strolling forward in the royal blue suit with a confident runway walk, one foot crossing in front of the other, chin up, no sunglasses.\n2. Adjusting his collar with both hands, a cool half smile, no sunglasses.\n3. Turning on one heel in a spin, suit jacket flaring, a sharp look, no sunglasses.\n\nRow 2:\n4. Holding a pair of dark sunglasses in one hand, lifting them toward his face.\n5. Sliding the sunglasses on, a slow cool grin, head tilted.\n6. Wearing the sunglasses, striking a model pose, one hand in a trouser pocket, shoulders squared, small sparkles of light around him.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/justin-ab-fresh-fit-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793996039103
+    }
+   ]
   },
   {
    "status": "approved",
