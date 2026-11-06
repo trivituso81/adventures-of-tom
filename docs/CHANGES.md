@@ -1,6 +1,6 @@
 ## 2026-11-05 (263): Vance, Julian and the Julian hero card use finished boss paintings as style references, not the school key or the Mudling (Art Library only, no game files, no tag)
 
-Tom: remove the school picture and the Mudling, give it a few approved bosses that have the painted style. Vance refs: his guide plus Ironbelly v2, Leviathan v1, Red Pen v3 (attachments 2 to 4). Julian sheet refs: those three bosses only (the room painting is dropped). Julian hero refs: Tom hero (proportions) plus Ironbelly v2 (brushwork). Prompts renumbered. Other bosses keep style key plus finish picture (they worked).
+Tom: remove the school picture and the Mudling, give it a few approved bosses that have the painted style. Julian sheet, Vance sheet and Julian hero card now use finished boss paintings as style references: Ironbelly v2, Leviathan v1, Red Pen v3 (Vance and Julian: those three only; hero: Tom hero for proportions plus Ironbelly v2). Finding: Tom had pasted the Julian text into the Vance card and rejected it, so the Vance card held a garbled Julian prompt; Vance is rebuilt from the same template (grim and cold, Unwriting Ray poses, first fight) and Julian keeps the soft second-fight poses. The old Vance guide picture is dropped. Other bosses keep style key plus finish picture (they worked).
 
 ## 2026-11-05 (262): Julian Vance: new hero-pose card, because text proportions were ignored twice (Art Library only, no game files, no tag)
 
