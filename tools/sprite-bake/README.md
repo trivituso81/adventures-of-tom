@@ -125,3 +125,8 @@ Game slots (`SLOTS`): idle ready, idle2 breath, hip, cast offer, windup wind, ac
 ## Story poses (`storypose1`, 2026-11-06)
 
 Painted front-facing cutscene poses on a 4 x 2 magenta sheet (art/raw/characters/<sheet>). `python3 tools/sprite-bake/bake_story_poses.py` cuts every sheet in its SETS table (walk_sheet_frames.grid), sizes each so its reference standing frame equals the walk stand, and writes art/chars/<id>-story.webp and data/story-poses.js. A scene shows a frame with `{pose:'<actor>', f:'<frame>'}` and clears it with `{pose:'<actor>'}`. Add a new sheet by adding a SETS entry (frame names must be unique per character).
+
+## Rose's ability frames and objects (2026-11-06)
+
+Poses: `art/raw/characters/rose-ab-*.png` (14 sheets, magenta, mostly 3 x 2; Bedtime Story and Tea Party 3 x 3) are cut by `ability_frames_rose.py` (same method as Tom's `ability_frames.py`; Tea Party frame 4 clears the painted "DRINK UP" lettering). `bake_rose.py` puts the 90 frames in their own atlas `art/chars/rose-poses.webp` (`ROSE_HIRES.ab`, drawn as `ab_<short>_<n>`; `data/rose-hires-use.js` adds right-facing `ab_<short>_<n>F`). Install: hires.py then `hires_install.py /tmp/hires 1.5 rose-battle rose-battle-x rose-ko rose-ride-bt rose-poses`. Rose's old Tickle Storm and Boomerang pose atlases are gone (the boomerang sheet is still read for the two lambs, `art/props/rose/lamby_fly.webp`).
+Objects: `bake_rose_fx.py` cuts `rose-fx-<move>-vN.png` and writes the approved item over the old prop of the same shape (`INSTALL` table); other items are not installed yet (effects the scenes still draw: hearts, stars, poofs, sparkles, steam, flames, glows, feathers, cookie, juice box, helmet, levers, tape, Lamby variants).
