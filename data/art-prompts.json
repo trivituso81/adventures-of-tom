@@ -388,8 +388,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Cartridge Tilt.\n\nRow 1:\n1. Looking straight out at the viewer, a flat unimpressed face, head tilted, mid head shake.\n2. Reaching straight up high with both arms, fingers spread, up on his toes.\n3. A large grey game cartridge held in both hands in front of his face, blowing into its bottom edge, cheeks puffed.\n\nRow 2:\n4. Pushing the cartridge down with both hands, leaning into it hard, teeth gritted.\n5. The whole body leaning hard to one side, both arms pushing, tilting something huge.\n6. Landing on both feet from a small hop, brushing one palm against the other, a dry satisfied look."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-fx-button-mash-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793955048156
+    }
+   ],
    "rejects": [],
    "id": "tom-fx-button-mash",
    "tab": "Characters",
