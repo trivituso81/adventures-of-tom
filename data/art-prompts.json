@@ -4091,6 +4091,13 @@
      "date": "2026-11-06",
      "from": "v3",
      "at": 1793927887019
+    },
+    {
+     "n": 2,
+     "file": "art/raw/enemies/enemy-vance-v3.png",
+     "date": "2026-11-06",
+     "from": "v13",
+     "at": 1793929449532
     }
    ],
    "rejects": [
@@ -4110,7 +4117,7 @@
     "docs/reference/underpaint/vance-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 6 poses in the same 3 by 2 layout, the same creature, shape and colors. Make the forms grander and more dramatic, with more detail painted in the shapes: a long black coat with gold buttons in rich folds, a wide-brimmed hat shadowing a pale grim face, a gold pocket watch and brass ray gun, cold moonlight with a sharp rim light. Top row: 1 standing tall. 2 stumbling back from a hit, the hat tilting. 3 raising the ray gun. Bottom row: 4 attack wind-up, aiming, the gun glowing. 5 the attack, firing a bright ray. 6 the follow-through, lowering the gun, smoke curling, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
+   "prompt": "VERY HANDPAINTED. VERY HANDBRUSHED. Keep attachment 2 as a handbrushed painting, same brush strokes. It shows Julian Vance in six poses; paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Attachment 2 is already a handbrushed painting: keep exactly its thick visible brush strokes and painted texture on the coat, hair, face and gun, never smoother. Top row: 1 standing, the gun at his side, tired and soft. 2 flinching back, the hat tilting. 3 looking down at the pocket watch. Bottom row: 4 attack wind-up, slowly raising the ray gun, hesitating. 5 the attack, a warm burst of amber glass from the ray gun. 6 the follow-through, lowering the gun, looking away, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta \n#FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
    "group": "Chronos Loom"
   },
   {
