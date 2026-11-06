@@ -1,3 +1,10 @@
+## 2026-11-05 (287): Battle meters repainted to match the painted look (`meter1`)
+- Tom (21:14): "redo the meters in battle so they blend more with the painted aesthetic and color pallete and design elements."
+- Before: flat pixel blocks with black borders (enemy HP and Warmth on the stage, party HP, VP pips, HEART hearts, crust tokens, Rose Mode HP).
+- Now one look everywhere: a rounded well with the window frame's bronze rim, and a fill shaded like the paintings (lit from the top, deeper underneath, a soft sheen). Colors from the painted areas: meadow green, honey, terracotta for HP; rose for Warmth and HEART; lake blue for VP.
+- Stage: `b2Meter`, `b2MeterTag`, palette `B2_METER` in engine/battle2-ui.js. The enemy letter is a bronze-rimmed medallion in the window type (was a pixel letter on a black box). Meters of an enemy at the very bottom stay on the stage.
+- Party window: `.b2-bar`, `.b2-vp`, `.b2-heart` hearts (new painted svg in `b2HeartRow`), `.b2-tray`, `.bp-hp` in index.html. Old flat rules and the old rect drawing removed.
+- No rule, number or layout changed. Tests: smoke, cross_test FAILS [], portrait and landscape screenshots. Not seen on a real phone.
 ## 2026-11-05 (286): Art Library Characters tab restarted from scratch (Tom)
 - Tom (21:25): remove everything in the Characters section and its assets; he will supply photos and his own prompt, starting with Tom; then walk and battle stance prompts per character.
 - Removed: all 11 Characters entries (grace-hero-fresh, grace-hero-fresh-style, grace-walk-front/back/side, grace-walk-sheet-test, tom-hero-fresh, tom-walk-sheet, tom-back-view, tom-side-view, tom-side-view-fix), their approved pictures and every older version under art/raw/characters/ (grace-hero-fresh v1 to v9, grace-hero-fresh-style v1 to v4, grace-walk-back-v1, grace-walk-down-a-v1, tom-hero-fresh-v1, tom-back-view-v1, tom-side-view-v1) and tools/art-library/prompts/grace-*.txt. 391 entries, every other entry byte for byte unchanged except one ref below.

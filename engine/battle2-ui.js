@@ -104,6 +104,43 @@ function b2FoeFrame(f,R0) {
   if(f._hurtOn||now<(f._hurtUntil||0)) return FR.hurt;
   return R0;
 }
+// ---------- Painted meters (Tom, 2026-11-05) ----------
+// One look for every battle meter, on the canvas (enemies) and in the party window (index.html, .b2-bar): a rounded well with the
+// window frame's bronze rim, and a fill shaded like the paintings (lit from the top left, deeper underneath, a soft sheen).
+// Colors are taken from the painted areas: meadow green, honey, terracotta, rose. Each entry is [light, mid, deep].
+const B2_METER={hp:['#cfe89a','#8cc063','#4f8a48'],low:['#ffe6a0','#eeb651','#bd7f2a'],crit:['#ffc0a2','#e57f62','#ad4636'],
+  warm:['#ffd3e0','#f58fb0','#c9537c'],warmFlash:['#ffffff','#ffe3ee','#f7a6c2'],rim:'#b8914a',rimLo:'#6d5629',ink:'#0a0e18',well:['#080a14','#1d2132']};
+function b2MeterPath(x,y,w,h) { const r=h/2; gfx.beginPath(); gfx.moveTo(x+r,y); gfx.lineTo(x+w-r,y); gfx.arc(x+w-r,y+r,r,-Math.PI/2,Math.PI/2); gfx.lineTo(x+r,y+h); gfx.arc(x+r,y+r,r,Math.PI/2,Math.PI*1.5); gfx.closePath(); }
+function b2Meter(x,y,w,h,q,C) {
+  q=Math.max(0,Math.min(1,q)); gfx.save();
+  // Soft shadow on the ground, dark ring, bronze rim, then the well.
+  gfx.globalAlpha*=.35; b2MeterPath(x-1.5,y-.5,w+3,h+3); gfx.fillStyle='#1b140c'; gfx.fill(); gfx.globalAlpha/=.35;
+  b2MeterPath(x-2,y-2,w+4,h+4); gfx.fillStyle=B2_METER.ink; gfx.fill();
+  const rg=gfx.createLinearGradient(0,y-1.2,0,y+h+1.2); rg.addColorStop(0,'#e6c988'); rg.addColorStop(.5,B2_METER.rim); rg.addColorStop(1,B2_METER.rimLo);
+  b2MeterPath(x-1.2,y-1.2,w+2.4,h+2.4); gfx.fillStyle=rg; gfx.fill();
+  const wg=gfx.createLinearGradient(0,y,0,y+h); wg.addColorStop(0,B2_METER.well[0]); wg.addColorStop(1,B2_METER.well[1]);
+  b2MeterPath(x,y,w,h); gfx.fillStyle=wg; gfx.fill();
+  if(q>0) {
+    const fw=Math.max(h,w*q);
+    b2MeterPath(x,y,w,h); gfx.clip();
+    const fg=gfx.createLinearGradient(0,y,0,y+h); fg.addColorStop(0,C[0]); fg.addColorStop(.42,C[1]); fg.addColorStop(1,C[2]);
+    b2MeterPath(x,y,fw,h); gfx.fillStyle=fg; gfx.fill();
+    // Sheen along the top and a lit leading edge.
+    gfx.globalAlpha*=.5; b2MeterPath(x+h*.35,y+h*.14,Math.max(1,fw-h*.7),h*.26); gfx.fillStyle='#fffaf0'; gfx.fill();
+  }
+  gfx.restore();
+}
+// The enemy's letter (A, B, C): a small bronze-rimmed medallion in the window type.
+function b2MeterTag(cx,cy,ch) {
+  gfx.save();
+  gfx.beginPath(); gfx.arc(cx,cy,8.5,0,Math.PI*2); gfx.fillStyle=B2_METER.ink; gfx.fill();
+  const rg=gfx.createLinearGradient(0,cy-7.5,0,cy+7.5); rg.addColorStop(0,'#e6c988'); rg.addColorStop(.5,B2_METER.rim); rg.addColorStop(1,B2_METER.rimLo);
+  gfx.beginPath(); gfx.arc(cx,cy,7.5,0,Math.PI*2); gfx.fillStyle=rg; gfx.fill();
+  const wg=gfx.createLinearGradient(0,cy-6,0,cy+6); wg.addColorStop(0,'#232a3b'); wg.addColorStop(1,'#141924');
+  gfx.beginPath(); gfx.arc(cx,cy,6.2,0,Math.PI*2); gfx.fillStyle=wg; gfx.fill();
+  gfx.font="bold 10px Georgia,'Palatino Linotype',Palatino,serif"; gfx.textAlign='center'; gfx.textBaseline='middle'; gfx.fillStyle='#f2e6cc'; gfx.fillText(ch,cx,cy+.6);
+  gfx.restore();
+}
 // Enemies that fly or float (Tom, 2026-11-05): the only ones raised off the ground, bobbing at the old pace. Add an id here to make another enemy hover.
 const B2_FLYERS=new Set(['skeeter','tickets','boommoth','fogwisp','hushling','pausesprite','greynote','jetlag','redeye']);
 const B2_HOVER=14;
@@ -171,14 +208,12 @@ function b2DrawEnemies(t) {
     }
     // Megaphone wind-up over a boss that is about to hit everyone.
     if(f.intent&&f.intent.kind==='all') { const yy=top-30-Math.round(Math.abs(Math.sin(t*6))*5); label('!!',x+w/2+2,yy+2,'#1b2d27',4); label('!!',x+w/2,yy,'#ff8f80',4); }
-    // HP bar and letter under the feet; status tags over the head.
-    const bw=Math.max(36,Math.min(60,w*.7)),bx=Math.round(f.px-bw/2),byy=f.py+9,r=f.hp/f.maxHp;
-    rect(bx-1,byy-1,bw+2,6,'#0b0d12'); rect(bx,byy,bw,4,'#1a1e26');
-    rect(bx,byy,Math.round(bw*r),4,r<=.25?'#ff8f80':r<=.5?'#f0c060':'#8ad6a2');
-    // The pink Warmth bar (Kindness): fills toward Un-Grumping.
-    const wr=f.warm/f.warmGoal; rect(bx-1,byy+5,bw+2,5,'#0b0d12'); rect(bx,byy+6,bw,3,'#3a2230');
-    if(wr>0) rect(bx,byy+6,Math.max(1,Math.round(bw*wr)),3,f.warmFlash>0&&Math.floor(t*14)%2?'#ffe0ec':'#ff8ab4');
-    if(f.letter) { rect(bx-17,byy-5,13,14,'#0b0d12'); label(f.letter,bx-10,byy-3,'#f1f3f7',2); }
+    // Painted HP and Warmth meters and the letter medallion under the feet (b2Meter); status tags over the head.
+    const bw=Math.max(40,Math.min(64,w*.7)),bx=Math.round(f.px-bw/2),byy=Math.min(f.py+9,324-18),r=f.hp/f.maxHp;   // kept on the stage for an enemy at the very bottom
+    b2Meter(bx,byy,bw,7,r,r<=.25?B2_METER.crit:r<=.5?B2_METER.low:B2_METER.hp);
+    // Warmth (Kindness): fills toward Un-Grumping.
+    b2Meter(bx+3,byy+9,bw-6,5,f.warm/f.warmGoal,f.warmFlash>0&&Math.floor(t*14)%2?B2_METER.warmFlash:B2_METER.warm);
+    if(f.letter) b2MeterTag(bx-10,byy+5,f.letter);
     let syy=top-(f.st.pietin?30:16);
     for(const k in f.st) { const s=B2_STATUS[k]; if(!s||k==='pietin') continue; label(s.short,f.px+1,syy+1,'#0b0d12',2); label(s.short,f.px,syy,s.color,2); syy-=13; }
   }
@@ -352,12 +387,15 @@ function b2RenderParty() {
       '<div class="b2-sub"><span>'+(u.light?'HP \u2726 LIGHT \u2726':u.hp<=0?'KNOCKED OUT':'HP '+Math.max(0,u.hp)+'/'+u.maxHp)+'</span><span class="b2-vp" aria-label="VP '+u.vp+'">'+pips+'</span></div></div></div>';
   }).join('');
 }
-// The shared HEART meter: four hearts of 25%.
+// The shared HEART meter: four painted hearts of 25% (lit from the top left, dark-rose edge, bronze-rimmed when empty).
 function b2HeartRow() {
-  const H=B2.heart||0,P='M7 12.2L1.4 6.6A3.4 3.4 0 0 1 7 2.6A3.4 3.4 0 0 1 12.6 6.6Z';
+  const H=B2.heart||0,P='M8 14.2C3.2 10.6 1.1 8.1 1.1 5.3A3.6 3.6 0 0 1 8 3.9A3.6 3.6 0 0 1 14.9 5.3C14.9 8.1 12.8 10.6 8 14.2Z';
   const hearts=[0,1,2,3].map(k=>{ const f=Math.max(0,Math.min(1,(H-25*k)/25));
-    return '<svg viewBox="0 0 14 13" class="'+(f>=1?'full':'')+'"><defs><clipPath id="b2hc'+k+'"><rect x="0" y="0" width="'+(14*f).toFixed(2)+'" height="13"/></clipPath></defs>'+
-      '<path d="'+P+'" fill="#3a2230" stroke="#0b0d12" stroke-width="1.2"/><path d="'+P+'" fill="#ff7aa8" clip-path="url(#b2hc'+k+')"/></svg>'; }).join('');
+    return '<svg viewBox="0 0 16 15.4" class="'+(f>=1?'full':'')+'"><defs><clipPath id="b2hc'+k+'"><rect x="0" y="0" width="'+(16*f).toFixed(2)+'" height="16"/></clipPath>'+
+      '<radialGradient id="b2hg'+k+'" cx=".32" cy=".26" r=".9"><stop offset="0" stop-color="#ffe1ea"/><stop offset=".4" stop-color="#f58fb0"/><stop offset="1" stop-color="#b8436e"/></radialGradient>'+
+      '<linearGradient id="b2he'+k+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0e18"/><stop offset="1" stop-color="#2a2233"/></linearGradient></defs>'+
+      '<path d="'+P+'" fill="url(#b2he'+k+')" stroke="#6d5629" stroke-width="1"/>'+
+      '<g clip-path="url(#b2hc'+k+')"><path d="'+P+'" fill="url(#b2hg'+k+')" stroke="#6b1f3f" stroke-width="1"/><ellipse cx="5" cy="5" rx="2.1" ry="1.3" transform="rotate(-32 5 5)" fill="#fff" fill-opacity=".55"/></g></svg>'; }).join('');
   // Deedee's Warm Crust Tokens sit on the shared tray (engine/battle2-traits.js).
   const n=B2.crust||0,tray=n||B2.party.some(p=>p.id==='deedee')?'<span class="b2-tray" title="Warm Crust Tokens: eat one from the ▼ Bag, free">'+'<i class="on hot"></i>'.repeat(Math.min(n,B2.hot||0))+'<i class="on"></i>'.repeat(n-Math.min(n,B2.hot||0))+'<i></i>'.repeat(B2_TRAIT.crustMax-n)+'</span>':'';
   return '<div class="b2-heart" aria-label="HEART '+Math.floor(H)+' percent"><span class="lbl">HEART</span><span class="hts">'+hearts+'</span>'+tray+'<b>'+Math.floor(H)+'%</b></div>';
