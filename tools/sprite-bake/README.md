@@ -81,3 +81,30 @@ Overworld only. `src/justin-walk-v1.png` (3x4) -> `python3 tools/sprite-bake/bak
 ## Battle props (2026-10-30)
 
 Single painted props are cut from the AI prop sheets in `src/props/` by `python3 tools/sprite-bake/bake_prop_sheets.py [--check]` into `art/props/<char>/<slug>.webp`. Details, the hook for using them in a move, and what is wired: `docs/PROP_ART.md`.
+
+
+## Sharper battle sheets (`sharp1`, 2026-11-05)
+
+The bake scripts write battle sheets at K 2 (Boppy and Justin K 3). A phone stretches K 2 up to 1.45x, which looked blurry, so the sheets in the repo are a larger, sharpened re-build. After ANY battle rebake of a character, run this again for that character (repo root), or its sheets go back to K 2:
+
+```
+HIRES=1.5 HIRES_SHARP=80 HIRES_OUT=/tmp/hires python3 tools/sprite-bake/hires.py tools/sprite-bake/bake_amy.py
+git checkout art/chars/amy-ow.webp data/amy-hires.js        # hires.py also runs the script's own outputs; keep only what you meant to rebake
+python3 tools/sprite-bake/hires_install.py /tmp/hires 1.5 amy-battle amy-ko
+```
+
+| Script | HIRES | Sheets to install |
+|---|---|---|
+| bake_tom_walk_v4.py | 1.5 | tom-battle, tom-ko, tom-poses |
+| bake_grace_walk_v4.py, bake_grace_extra.py, bake_grace_poses.py | 1.5 | grace-battle, grace-ko, grace-extra, grace-wheel |
+| bake_rose.py | 1.5 | rose-battle, rose-battle-x, rose-battle-tk, rose-battle-bm, rose-ko, rose-ride-bt |
+| bake_amy.py, bake_amy_extra.py | 1.5 | amy-battle, amy-ko, amy-ba, amy-bs, amy-bp, amy-mk |
+| bake_deedee.py, bake_deedee_extra.py, bake_deedee_brisk.py | 1.5 | deedee-battle, deedee-ko, deedee-extra, deedee-brisk |
+| bake_tnb.py | 1.5 | tnb-battle, tnb-board, tnb-poses, tnb-ko |
+| bake_nara.py | 1.5 | nara-battle, nara-ko |
+| bake_olivia_battle.py | 1.5 | olivia-battle, olivia-ko and the 12 move sheets |
+| bake_tomride.py | 1.5 | tomride-battle, tomride-rose |
+| bake_boppy.py, bake_boppy_extra.py | 1.3333333333333333 (boppy-ko: 1.5) | boppy-battle, boppy-extra, boppy-fish, boppy-stock, boppy-young, boppy-pepper, boppy-ko |
+| bake_justin_battle.py, bake_jojo.py, bake_kids.py | 1 (sharpen only) | justin-*, jojo-bt; copy kids.webp by hand (its data file has its own format) |
+
+hires.py prints, per sheet, how much it had to copy back from the small sheet (edits painted after scaling). "NOT tracked" means it found no larger source and skipped the sheet. Then bump `ART_V` (`python3 tools/art-library/bump_tags.py <TAG>`), smoke, and look at a fight.

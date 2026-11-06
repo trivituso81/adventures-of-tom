@@ -73,6 +73,7 @@ function drawBattleBackdrop(t) {
 }
 
 function drawBattle() {
+  battleFit();
   gfx=fightCtx; gfx.setTransform(BS,0,0,BS,0,0);
   const party=battlePartyList();   // the new battle (engine/battle2.js) draws its own party units here
   const t=battle.time;
@@ -752,8 +753,10 @@ function drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx) {
   const sc=sp.scale,n=frame.length,W=frame[0].length,w=W*sc,h=n*sc;
   const settled=frame!==sp.idle;
   const PAD=40,main=gfx,oc=koFrame.canvas||(koFrame.canvas=document.createElement('canvas'));
-  oc.width=Math.ceil(w)+PAD*2; oc.height=Math.ceil(h)+PAD*2;
-  const octx=oc.getContext('2d'); octx.imageSmoothingEnabled=false; gfx=octx;
+  // The side canvas has the battle canvas's pixel density (Q); at 1 pixel per game pixel the kneeling pose was drawn small and stretched (sharp1).
+  const Q=BS,ocW=Math.ceil(w)+PAD*2,ocH=Math.ceil(h)+PAD*2;
+  oc.width=Math.ceil(ocW*Q); oc.height=Math.ceil(ocH*Q);
+  const octx=oc.getContext('2d'); octx.imageSmoothingEnabled=false; octx.setTransform(Q,0,0,Q,0,0); gfx=octx;
   const lx=PAD,ly=PAD,px=c=>lx+c*sc,py=r=>ly+r*sc;
   activeKneelCut=settled&&!sp.noShift?Math.round(sp.idle.length*.62):0;
   drawSprite(frame,sp.pal,lx,ly,sc,{flash:fx.flash>0});
@@ -797,11 +800,12 @@ function drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx) {
   const breath=settled?Math.sin(t*2.6+i)*.03:0;
   const ox=Math.round(cx-w/2),oy=Math.round(base-h);
   // Legs, upright.
-  gfx.drawImage(oc,0,PAD+pcy,oc.width,oc.height-PAD-pcy,ox-PAD,oy+pcy,oc.width,oc.height-PAD-pcy);
+  const sm0=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.imageSmoothingQuality='high';
+  gfx.drawImage(oc,0,(PAD+pcy)*Q,ocW*Q,(ocH-PAD-pcy)*Q,ox-PAD,oy+pcy,ocW,ocH-PAD-pcy);
   // Upper body tipped forward over them.
   gfx.save(); gfx.translate(ox+pcx,oy+pcy+(settled?sc*2:0)); gfx.rotate(ang+breath);
-  gfx.drawImage(oc,0,0,oc.width,PAD+pcy+sc*2,-pcx-PAD,-pcy-PAD,oc.width,PAD+pcy+sc*2);
-  gfx.restore();
+  gfx.drawImage(oc,0,0,ocW*Q,(PAD+pcy+sc*2)*Q,-pcx-PAD,-pcy-PAD,ocW,PAD+pcy+sc*2);
+  gfx.restore(); gfx.imageSmoothingEnabled=sm0;
   koDust(cx,base,koE);
   if(settled) koDizzy(ox+pcx,oy+top*sc+8,koE,t,i);
 }

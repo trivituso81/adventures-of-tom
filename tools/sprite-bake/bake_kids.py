@@ -92,7 +92,7 @@ const KIDS=(function(){{
 const K={K},RECTS={json.dumps(rects)};
 const ALIAS={{tom:{{idle:'ko_sulk',sit:'ko_sulk',run:'ko_sulk',up:'ko_sulk',cry:'ko_shoved',hold:'ym_explain',stir:'ym_stirA',throw:'ym_ketchup',point:'ko_tattle',swing:'ko_cushionSwing',cheer:'ym_proud'}},
   amy:{{idle:'ko_glare',sit:'ko_glare',run:'ko_glare',up:'ko_glare',cry:'ko_shoved',hold:'ym_taste',stir:'ym_stir',throw:'ym_pickle',point:'ko_tattle',swing:'ko_cushionUp',cheer:'ym_delight'}}}};
-const img=new Image(); img.src='art/chars/kids.webp?v=kid2';
+const img=new Image(); img.src='art/chars/kids.webp?v=kid3';
 function rectOf(who,pose){{ const R=RECTS[who]; return R[pose]||R[(ALIAS[who]||{{}})[pose]]||R[(ALIAS[who]||{{}}).idle]; }}
 function draw(x,y,who,pose,t,dir,o){{ const r=rectOf(who,pose); if(!r||!(img.complete&&img.naturalWidth)) return false;
   const [sx,sy,sw,sh,ax,ay]=r,w=sw/K,h=sh/K; o=o||{{}};

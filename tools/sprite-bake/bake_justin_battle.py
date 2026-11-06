@@ -284,7 +284,7 @@ def contact(path):
 contact(args.contact)
 
 # ---------------------------------------------------------------- data file
-AV = '?v=ffsuit1'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
+AV = '?v=ffsuit2'   # cache-buster: bump when the painted frames change size, or a phone mixes an old atlas with new frame rects
 atlas = {'bt': {'src': 'art/chars/justin-battle.webp' + AV, 'k': KB, 'rects': core_rects},
          'ko': {'src': 'art/chars/justin-ko.webp' + AV, 'k': KO_, 'rects': ko_rects}}
 for sk, s in sets.items(): atlas[sk] = {'src': f'art/chars/justin-{s["file"]}.webp' + AV, 'k': KB, 'rects': s['rects']}

@@ -3,9 +3,21 @@
 // ---------- Battle ----------
 const bcanvas=$('battle-canvas'),fightCtx=bcanvas.getContext('2d');
 fightCtx.imageSmoothingEnabled=false;
-// The battle canvas has 2 device pixels per game pixel (1152 x 648) so the painted pictures stay sharp; all drawing code still uses the 576 x 324 game coordinates (BS maps them).
-const BS=bcanvas.width/576;
+// All drawing code uses the 576 x 324 game coordinates; BS maps them to the canvas's own pixels.
+// sharp1 (2026-11-05): the canvas used to be a fixed 1152 x 648, which the browser then stretched to the size on screen (a little in
+// portrait, about 1.5x in landscape and on an iPad), blurring the whole fight. battleFit gives the canvas exactly as many pixels as
+// the screen shows (never fewer than 1152 or more than 1920 wide), so nothing is stretched afterwards. Called from drawBattle.
+let BS=bcanvas.width/576;
 fightCtx.setTransform(BS,0,0,BS,0,0);
+function battleFit() {
+  const now=performance.now(); if(now-(battleFit.at||0)<400) return; battleFit.at=now;
+  const r=bcanvas.getBoundingClientRect(),long=Math.max(r.width,r.height)*(window.devicePixelRatio||1);   // the long side: the forced-landscape layout turns the stage a quarter turn
+  if(!(long>8)) return;
+  const w=Math.min(1920,Math.max(1152,Math.round(long)));
+  if(Math.abs(bcanvas.width-w)<2) return;
+  bcanvas.width=w; bcanvas.height=Math.round(w*324/576); BS=w/576;
+  fightCtx.imageSmoothingEnabled=false; fightCtx.setTransform(BS,0,0,BS,0,0);
+}
 const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 const battle={
   active:false,monster:null,enemy:null,

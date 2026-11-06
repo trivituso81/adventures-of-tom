@@ -635,7 +635,7 @@ SC.tm_tilt=(s,u)=>{ const ms=s.t*1000,P=s.plan,a=P.a;
   const now=performance.now();
   for(const f of P.list) { if(!f||f.dead) continue; const k=ms<P.f0?0:ms<P.f1?ez((ms-P.f0)/(P.f1-P.f0)):ms<P.t2?1:1+ez((ms-P.t2)/(P.t3-P.t2));
     f.spin=k*Math.PI; f.oy=-Math.abs(Math.sin(k*Math.PI))*26; f.ox=-Math.sin(k/2*Math.PI)*22; f.spinAt=now; }
-  if(!tiltBuf) { tiltBuf=document.createElement('canvas'); tiltBuf.width=576*BS; tiltBuf.height=324*BS; }
+  if(!tiltBuf||tiltBuf.width!==gfx.canvas.width) { tiltBuf=document.createElement('canvas'); tiltBuf.width=gfx.canvas.width; tiltBuf.height=gfx.canvas.height; }
   const b=tiltBuf.getContext('2d'); b.clearRect(0,0,tiltBuf.width,tiltBuf.height); b.drawImage(gfx.canvas,0,0);
   gfx.save(); gfx.setTransform(BS,0,0,BS,0,0); gfx.globalAlpha=1; R(0,0,576,324,'#0b0d12');
   gfx.translate(P.px,P.py); gfx.rotate(ang); gfx.drawImage(tiltBuf,-P.px,-P.py,576,324); gfx.restore();

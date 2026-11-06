@@ -8,9 +8,10 @@
 // box. While the atlas is still loading, or if it fails, the rows are drawn as before, so nothing breaks.
 // mirrorRows (engine/tiles.js) keeps the tag and toggles `flip`, so every mirrored frame stays painted.
 //
-// Atlas: one image of equally sized frames at K times the rows' resolution (K = 2 in battle, 3 on the overworld).
+// Atlas: one image of equally sized frames at K times the rows' resolution. Battle sheets are K = 3 (Boppy 4) since sharp1
+// (2026-11-05, Tom: the party looked blurry in battle; K = 2 was stretched up to 1.45x on a phone). See tools/sprite-bake/hires.py.
 // ART_V: cache tag for every painted atlas image (2026-11-01, heads1: all adult battle heads re-baked).
-const ART_V='tomwhole1';
+const ART_V='sharp1';
 const PAINTED={};
 // Cast ids that own painted sheets (paintedOwners, below). Longer prefixes first: tomride before tom.
 const PAINTED_CAST=['tomride','tom','grace','rose','tnb','amy','deedee','boppy','nara','justin','olivia','jojo','michael','ellie'];
@@ -38,8 +39,17 @@ function paintedRelease(a) {
   if(!a.img) return;
   const im=a.img; im.onload=im.onerror=null; a.img=null; a.ready=false;
   try { im.src=''; } catch(e) {}
-  for(const rows of a.users) delete rows._pc;
+  for(const rows of a.users) { if(rows._pc) for(const c of rows._pc.values()) paintedDrop(c); delete rows._pc; }
   a.users.clear();
+}
+// Canvas copies of frames (one per frame, flip, flash and outfit colour) are capped at PAINTED_PX_CAP pixels in total (sharp1):
+// the sharper battle sheets make each copy 2.25x bigger, and iPhone Safari blanks canvases once their total memory runs out.
+// The copy used longest ago goes first; it is simply made again from the atlas if that frame is drawn later.
+const PAINTED_PX_CAP=24e6,PAINTED_LRU=new Map(); let paintedPx=0;
+function paintedDrop(c) { const e=PAINTED_LRU.get(c); if(!e) return; PAINTED_LRU.delete(c); paintedPx-=c.width*c.height; e[0].delete(e[1]); c.width=c.height=0; }
+function paintedKeep(c,cache,key) {
+  PAINTED_LRU.set(c,[cache,key]); paintedPx+=c.width*c.height;
+  for(const old of PAINTED_LRU.keys()) { if(paintedPx<=PAINTED_PX_CAP||old===c) break; paintedDrop(old); }
 }
 function paintRows(rows,atlas,frame,flip) { rows._paint={a:atlas,f:frame,flip:!!flip}; return rows; }
 // Recolour the dark shirt pixels of a painted frame to an outfit colour, keeping the painted shading.
@@ -76,7 +86,7 @@ function paintedCanvas(rows,flash) {
   const t=activeTint;
   const key=(p.flip?'f':'n')+(flash?'F':'')+(t&&!flash?(t.rows.join(',')+t.color):'');
   const cache=rows._pc||(rows._pc=new Map()); A.users.add(rows);
-  let c=cache.get(key); if(c) return c;
+  let c=cache.get(key); if(c) { const e=PAINTED_LRU.get(c); if(e) { PAINTED_LRU.delete(c); PAINTED_LRU.set(c,e); } return c; }
   c=document.createElement('canvas'); c.width=R[2]; c.height=R[3];
   const g=c.getContext('2d');
   if(p.flip) { g.translate(R[2],0); g.scale(-1,1); }
@@ -84,7 +94,7 @@ function paintedCanvas(rows,flash) {
   g.setTransform(1,0,0,1,0,0);
   if(flash) { g.globalCompositeOperation='source-in'; g.fillStyle='#fff8e6'; g.fillRect(0,0,R[2],R[3]); g.globalCompositeOperation='source-over'; }
   else if(t&&t.rows) paintedTintPixels(g,R[2],R[3],A.tintFrac?[A.tintFrac[0]*R[3]/A.k,A.tintFrac[1]*R[3]/A.k]:t.rows,A.k,t.color,A.tintMode,A.tintFn);
-  cache.set(key,c);
+  cache.set(key,c); paintedKeep(c,cache,key);
   return c;
 }
 // Draw painted rows at x,y at the given scale (box = rows size x scale). Returns false if it cannot (caller draws the rows).
