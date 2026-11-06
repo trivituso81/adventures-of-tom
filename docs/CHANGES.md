@@ -1,3 +1,8 @@
+## 2026-11-06 (355): Grace Cartwheel starts from her line, two full cartwheels (`gab2`)
+- Tom (08:02): no step forward; she stays in line, does two cartwheels to reach the monster, attacks, then shifts back as normal.
+- engine/grace-moves.js `G.cartwheelShow`: run-up removed. Lunge in place, then two cartwheels (ab_wheel_2 then ab_wheel_3, twice) travel from her spot to the foe, then the same landing, HI-YAH! kick, TA-DA! and hop home. Dust and sparkle beats moved to each touchdown. Line, damage, message unchanged. Tag `grace-moves.js?v=gab2`.
+- Tested: kit_test grace --only=cartwheel (0 fails), smoke 0 fails, unused_voice 0.
+
 ## 2026-11-06 (354): Art Library: Justin ability and effects sheets (`justinab1`)
 - 9 ability sheets (`justin-ab-<move>`, 3 x 2, refs his hero, walk and two battle sheets) and 9 objects and effects sheets (`justin-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Frames come from the beats in engine/justin-moves.js. Foot Tap shows only a small child's shoe tip, not Rose.
 - data/art-prompts.json 654 entries (Characters 247), edited directly; every old entry unchanged. test.py Characters EXPECT 247. Nothing installed or wired. Tom presses Generate 18 times.

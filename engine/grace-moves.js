@@ -578,7 +578,7 @@ SC.gv_glitter=(s,u)=>{ for(let k=0;k<26;k++) { const a=k*2.4,d=ez(u)*(s.r||70)*(
 SC.gv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 
 // ---------- Cartwheel (basic) ----------
-// Rebuilt 2026-10-25 from docs/reference/cartwheel-preview.html. A lunge with arms straight up, then two real cartwheels:
+// Rebuilt 2026-10-25, reworked 2026-11-06 (Tom: no step forward, two cartwheels straight from the line). A lunge in place, then two real cartwheels:
 // her body rolls over whichever hand or foot is on the floor (left hand, right hand, right foot, left foot), upside down
 // in a star, easing in on the first wheel and out on the second. She lands facing the monster, kicks (impact 1800),
 // TA-DA! with one hop, and hops home. Poses come from data/grace-wheel.js (hip-centred frames, rotated about the hip).
@@ -586,13 +586,17 @@ SC.gv_dust=(s,u)=>{ gfx.globalAlpha=(1-u)*.9; for(const dx of [-8,0,8]) E(s.x+dx
 G.cartwheelShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   // Her ability sheet (ab_wheel_1 to 6): lunge, two cartwheels (hand planted, then upside down), the landing star, the kick, TA-DA.
   const KX=Math.min(me.x-60,F.x+F.w*.5+34),GY=Math.min(314,F.base+3),HX=me.x,HY=me.base;
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run'},{t:650,x:KX+90,y:GY,f:'ab_wheel_1'},{t:850,x:KX+70,y:GY,f:'ab_wheel_2',dy:u=>-Math.sin(u*Math.PI)*16},{t:1150,x:KX+40,y:GY,f:'ab_wheel_3',dy:u=>-Math.sin(u*Math.PI)*16},
-    {t:1450,x:KX+14,y:GY,f:'ab_wheel_5'},{t:1650,x:KX,y:GY,f:'ab_wheel_4',dx:u=>-ez(u)*6},{t:2000,f:'ab_wheel_6'},{t:2450,f:'ab_wheel_5',hop:14},{t:2900,f:'runR'},{t:3600,x:HX,y:HY,f:'idle'}]);
+  // No run-up: she lunges in place on her line spot, then two cartwheels (hand planted, then upside down, twice) carry her to the foe.
+  const D=HX-(KX+14),hopW=u=>-Math.sin(u*Math.PI)*16;
+  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_wheel_1'},{t:250,x:HX-D*.04,y:GY,f:'ab_wheel_2',dy:hopW},{t:550,x:HX-D*.30,f:'ab_wheel_3',dy:hopW},{t:850,x:HX-D*.58,f:'ab_wheel_2',dy:hopW},{t:1150,x:HX-D*.84,f:'ab_wheel_3',dy:hopW},
+    {t:1450,x:KX+14,f:'ab_wheel_5'},{t:1650,x:KX,f:'ab_wheel_4',dx:u=>-ez(u)*6},{t:2000,f:'ab_wheel_6'},{t:2450,f:'ab_wheel_5',hop:14},{t:2900,f:'runR'},{t:3600,x:HX,y:HY,f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Grace cartwheels in. Twice. Showing off the whole way.'); say(m.id,'cartwheel'); }],
     [250,()=>{ sfx.whoosh(); }],
+    [600,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
+    [700,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); }],
     [900,()=>{ scene('gv_dust',.32,{x:st.x,y:GY}); sfx.step(); }],
-    [1200,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }],
+    [1000,()=>{ scene('gv_burst',.5,{x:st.x,y:GY-60,n:8,r:44,sz:7,c:GOLD,c2:CREAM}); sfx.whoosh(); }],
     [1450,()=>{ scene('gv_dust',.32,{x:KX+10,y:GY}); scene('gv_dust',.32,{x:KX+30,y:GY}); sfx.bump(); }],
     ['hf',1800],
     [1800,()=>{ sfx.bonk(); ST.jolt(f,.45); landHit(100); scene('gv_big',.3,{x:F.x,y:F.top-74,txt:'HI-YAH!',c:PINK,sc:4}); scene('gv_burst',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:40}); }],
