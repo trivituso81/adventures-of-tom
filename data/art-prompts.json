@@ -4410,7 +4410,7 @@
    "group": "Nine Scoops"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 1,
@@ -4446,6 +4446,13 @@
      "date": "2026-11-06",
      "from": "v16",
      "at": 1793934595545
+    },
+    {
+     "n": 5,
+     "file": "art/raw/areas/area-square-v6.png",
+     "date": "2026-11-06",
+     "from": "v22",
+     "at": 1793934795562
     }
    ],
    "rejects": [
