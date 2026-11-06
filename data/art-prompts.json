@@ -2372,9 +2372,16 @@
    "group": "Griffith Park"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "the second image he should be reeling from taking damage. the third and fourth images should be different attack poses",
+     "from": "v1",
+     "at": 1793923708752
+    }
+   ],
    "id": "enemy-soggysock",
    "tab": "Enemies",
    "title": "Soggy Sock: sheet, 4 frames facing right",
