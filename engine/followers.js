@@ -99,7 +99,7 @@ function recruitLeave(m,quiet) {
   const i=party.indexOf(m); if(i<0) return;
   party.splice(i,1);
   const fi=followers.findIndex(f=>f.member===m); if(fi>=0) followers.splice(fi,1);
-  if(m.homeNpc&&m.homeMap) { m.homeNpc.x=m.homeNpc.homeX; m.homeNpc.y=m.homeNpc.homeY; m.homeNpc.move=null; m.homeNpc.path=[]; m.homeMap.npcs.push(m.homeNpc); }
+  if(m.homeNpc&&m.homeMap) { m.homeNpc.x=m.homeNpc.homeX; m.homeNpc.y=m.homeNpc.homeY; m.homeNpc.move=null; m.homeNpc.path=[]; if(!m.homeMap.npcs.includes(m.homeNpc)) m.homeMap.npcs.push(m.homeNpc); }
   m.homeNpc=null; m.homeMap=null;
   if(!quiet) showToast(RECRUIT_TALK[m.id].bye,3.2);
   if(menuChar>=party.length) menuChar=0;

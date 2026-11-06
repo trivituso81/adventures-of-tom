@@ -1808,9 +1808,11 @@ function syncAwayNpcs() {
   for(const {map,n} of AWAY_NPCS) {
     const gone=n.away.some(storyMatch),has=map.npcs.includes(n);
     if(gone&&has) { map.npcs.splice(map.npcs.indexOf(n),1); n.move=null; n.path=[]; }
-    else if(!gone&&!has) map.npcs.push(n);
+    else if(!gone&&!has&&!inPartyAsNpc(n)) map.npcs.push(n);   // a member who joined from this NPC stays out of the map until she leaves the party
   }
 }
+// True while the NPC's member is in the party or on the bench (recruitJoin and benchAdd link them with member.homeNpc).
+function inPartyAsNpc(n) { return Object.values(MEMBERS()).some(m=>m.homeNpc===n); }
 STORY_WORLD.push(syncAwayNpcs);
 syncAwayNpcs(); // once at load too, so a visitor's second copy (Aunt Ellie at the Rivituso house) never shows outside the story
 
