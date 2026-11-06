@@ -333,7 +333,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Konami Code.\n\nRow 1:\n1. Rubbing his hands together, eyes wide with excitement, a huge grin.\n2. Hopping forward, the front foot stomping down, knees bent, arms out for balance.\n3. Hopping back, the back foot stomping down, arms swinging.\n\nRow 2:\n4. One foot stomping, the other leg lifted high, both arms up.\n5. Jumping straight up, both knees tucked, both fists raised.\n6. Landing in a crouch with one fist punched up high, mouth open in a triumphant shout."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -341,6 +341,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793952950437
+    },
+    {
+     "n": 1,
+     "file": "art/raw/characters/tom-ab-skincare-10-v2.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1794009276839
     }
    ],
    "rejects": [],
