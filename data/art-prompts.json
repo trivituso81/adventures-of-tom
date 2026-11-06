@@ -801,8 +801,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Glitter Nails.\n\nRow 1:\n1. Walking, a big sparkly bottle of glitter nail polish held up in one hand, excited.\n2. Twisting the cap off the bottle with the other hand, the tiny brush lifting out, tongue poking out in focus.\n3. Bent forward, painting with the tiny brush held delicately, the bottle in the other hand, very focused.\n\nRow 2:\n4. Holding her own hand up fingers spread, admiring glittery nails, mouth open in delight.\n5. Blowing on her fingertips, cheeks puffed, the bottle in the other hand.\n6. Wiggling all her glittery fingers up beside her face, a sparkly grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-welcome-back-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954026161
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-welcome-back",
    "tab": "Characters",
