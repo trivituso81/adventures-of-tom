@@ -3313,7 +3313,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "boppy-ab-fish-ult",
    "tab": "Characters",
    "group": "Boppy",
@@ -3325,7 +3325,16 @@
     "art/raw/characters/boppy-battle-sheet-1-v1.png",
     "art/raw/characters/boppy-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: The One That Got Away.\n\nRow 1:\n1. Standing on a wooden pier holding a fishing rod, a boot planted firm, calm.\n2. Leaning back with both hands gripping the rod, rod bent hard, teeth clenched.\n3. Hauling the rod up high with one huge yank, face red with effort.\n\nRow 2:\n4. Holding a whiskered catfish up in both hands, a proud grin.\n5. Spreading his hands wide apart to show the size, boasting, eyebrows high.\n6. Spreading his arms as far as they go, mouth open in a hearty laugh, head thrown back."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: The One That Got Away.\n\nRow 1:\n1. Standing on a wooden pier holding a fishing rod, a boot planted firm, calm.\n2. Leaning back with both hands gripping the rod, rod bent hard, teeth clenched.\n3. Hauling the rod up high with one huge yank, face red with effort.\n\nRow 2:\n4. Holding a whiskered catfish up in both hands, a proud grin.\n5. Spreading his hands wide apart to show the size, boasting, eyebrows high.\n6. Spreading his arms as far as they go, mouth open in a hearty laugh, head thrown back.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-ab-fish-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793994481145
+    }
+   ]
   },
   {
    "status": "draft",
