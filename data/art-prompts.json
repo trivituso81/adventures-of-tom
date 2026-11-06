@@ -7088,8 +7088,16 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-20-glass-tower-shelves-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932113134
+    }
+   ],
    "rejects": [],
    "id": "bg-20-glass-tower-shelves",
    "tab": "Battle",
