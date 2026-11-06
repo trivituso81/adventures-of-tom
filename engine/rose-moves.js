@@ -1065,7 +1065,7 @@ sfx.poof=()=>{ noise({dur:.35,vol:.22,f0:2200,f1:300,type:'lowpass'}); tone({typ
 sfx.poke=()=>{ tone({type:'sine',f0:900,f1:600,dur:.06,vol:.18}); noise({dur:.04,vol:.08,f0:2000,f1:1200}); };
 
 // ---------- Boop (basic): a real one-finger poke ----------
-Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500,jx=Math.min(548,n.x+30),jy=cl(n.y+54,p.y-12,p.y+4);   // jab frames (rebaked 2026-11-01 `rosefix1`): jab1 fingertip is 38 px left of her centre and 54 px above her feet
+Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),HIT=1500,k=BATTLE_SPRITES.rose.scale/.485,jx=Math.min(548,n.x+30*k),jy=cl(n.y+54*k,p.y-12,p.y+4);   // jab frames (rebaked 2026-11-01 `rosefix1`): at her old scale .485 the jab1 fingertip is 38 px left of her centre and 54 px above her feet; k follows her size (75% of Grace since 11-06)
   const pokes=[HIT];   // ONE jab (Tom, 2026-10-27). Damage, sound, flash, BOOP! word and her spoken "Boop!" all land on HIT.
   // She runs over with no finger out (Tom 11-06), then her six painted Boop frames (tools/sprite-bake/ability_frames_rose.py): finger out, lean in, poke on tiptoe, the BOOP, scrunched laugh, proud hands on hips.
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'run',hop:6,hn:7},{t:1000,x:p.x,y:p.y,f:'ab_boop_1'},{t:1200,f:'ab_boop_2'},{t:1250,f:'ab_boop_2',dx:u=>ez(u)*3},

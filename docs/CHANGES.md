@@ -1,3 +1,8 @@
+## 2026-11-06 (400): Rose is 75% of Grace in battle; battle height audit (`rosesize1`)
+Fact: audit measured the visible top-of-hair-to-feet height of every party member's idle frame and of the frames of one move each (drawn alpha, in battle px). Tom 143, TNB 141, Boppy 134, Amy 131, Deedee 131, Olivia 130, Justin 153, Grace 126 all match the real height x 2.01 rule, and each character's ability frames use the same scale as the idle frame. Only Rose was off: 121 px (96% of Grace). `BATTLE_SIZE.rose` 1.45 to 1.14 gives 94 px (75% of Grace); her poses, KO and ability frames follow. Boop's jab offsets now scale with her size.
+Not measured: Nara (dog), Michael and Jojo (not in battle).
+Watch on the phone: Rose's other moves were tuned at her old size (fixed pixel offsets for hands and props); kit_test passes for all of them, the look is not judged.
+
 ## 2026-11-06 (399): Emotion poses match the standing frame in head and body size (`emo15`)
 
 - Tom (15:43): emotion frames must be sized like the standard states, bodies and heads, so characters do not seem to grow when a mood line starts; not every character or state does it, so each one was checked. The angry states showed the pattern.

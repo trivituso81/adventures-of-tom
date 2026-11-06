@@ -235,7 +235,7 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 | Rule | How |
 |---|---|
 | Head share | Top of head to chin divided by total height = **0.43 in battle, 0.373 walking** (the Tom and TNB average), same as Grace and Rose. Grow the head only with `kidhead.factor(target, current_share)` and `grow_head`; the body keeps its size and the figure grows by the head. |
-| Height | Real height required. Kids are drawn larger than the adult scale on purpose so they read well (Tom approved Grace and Rose as they are). Place a new child between Rose and Grace by real height in battle px and walk rows; outside that range, ask Tom. |
+| Height | Real height required. Kids are drawn larger than the adult scale on purpose so they read well (Tom approved Grace and Rose as they are). Rose is 75% of Grace in battle. Place a new child between Rose and Grace by real height in battle px and walk rows; outside that range, ask Tom. |
 
 ### Carried children (Michael with Lachlan and Isla; Tom, 2026-11-01)
 
@@ -255,7 +255,7 @@ Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in ever
 | Jojo | 5'6" | 133 | 42 | not on it |
 | Michael (carrying Lachlan and Isla) | 6'4" | never in battle | 55 (painted, `michael1`; his cap top; the figure solves to 54 and grows one row from Lachlan's hair) | not on it |
 | Grace | 4'2" | 126 | 39 | 230 |
-| Rose | 3'4" | 126 | 37 | 205 |
+| Rose | 3'4" | 95 (75% of Grace, Tom 11-06) | 37 | 205 |
 
 ### Where the knobs live
 
