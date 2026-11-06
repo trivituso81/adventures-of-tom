@@ -2215,6 +2215,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793923523422
+    },
+    {
+     "n": 1,
+     "file": "art/raw/enemies/enemy-smoglet-v2.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793923576770
     }
    ],
    "rejects": [],
@@ -2227,7 +2234,7 @@
     "docs/reference/underpaint/smoglet-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and gray colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Griffith Park"
   },
   {
