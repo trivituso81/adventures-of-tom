@@ -1,3 +1,7 @@
+## 2026-11-05 (247): Boss prompts: back to the plain handbrushed opening, no gloss words (Art Library only, no game files, no tag)
+
+Tom: bosses did not come out handbrushed like the regular enemies. Compared approved sheets: regular ones (Toad, Soggy Sock, Grump) show thick oil strokes and a textured background; bosses (Ironbelly, Mirrorball) came out as smooth digital renders. Cause: my boss wording ("grand, richly detailed boss painting", gleaming, glossy, polished, glittering) pulled the generator to a polished render and contradicted "matte". Fix: boss prompts open with the exact regular sentence, richness is one separate sentence about painted shapes, gloss words removed, "thick visible brush strokes everywhere including the background, not a smooth digital render" added. LEAD is no longer used.
+
 ## 2026-11-05 (246): Old Big One prompt: real size and a small pie tin (Art Library only, no game files, no tag)
 
 Tom: the Big One is very large in battle, so the pie tin must be small next to him. Facts in the prompt: 60 in tall (Tom 71 in, Mudling 16 in, Grace 50 in), real pie tin 9 in across, so the tin is about 15 percent of body height and a quarter of body width. Only the creature paragraph of Tom's edited prompt changed.
