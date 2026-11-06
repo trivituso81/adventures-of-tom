@@ -3051,7 +3051,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Happy Puddle.\n\nRow 1:\n1. Standing with her whole body wiggling, mouth open in a huge grin, ears bouncing.\n2. Bouncing on her front paws, bottom in the air, tail wagging wildly.\n3. Spinning in a little circle, ears flying, tongue out.\n\nRow 2:\n4. Squatting low, eyes wide and surprised, ears up, a sheepish smile.\n5. Standing and looking down behind her, a puzzled face, one ear flopped.\n6. Sitting up with a happy sheepish grin, tail swishing, head tilted."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-ab-food-inspector",
    "tab": "Characters",
    "group": "Nara",
@@ -3063,7 +3063,16 @@
     "art/raw/characters/nara-battle-sheet-1-v1.png",
     "art/raw/characters/nara-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Family Food Inspector.\n\nRow 1:\n1. Standing and sniffing low, nose pointed down, ears hanging forward.\n2. Sniffing and turning her nose up high, eyes half closed, a snooty look.\n3. Turning her head away from the food, chin high, ears back, unimpressed.\n\nRow 2:\n4. Sniffing low again, a surprised look, eyes wide.\n5. Lifting one front paw and placing it proudly forward, a satisfied nod.\n6. Sitting up with a wide happy open-mouth smile, tail wagging."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Family Food Inspector.\n\nRow 1:\n1. Standing and sniffing low, nose pointed down, ears hanging forward.\n2. Sniffing and turning her nose up high, eyes half closed, a snooty look.\n3. Turning her head away from the food, chin high, ears back, unimpressed.\n\nRow 2:\n4. Sniffing low again, a surprised look, eyes wide.\n5. Lifting one front paw and placing it proudly forward, a satisfied nod.\n6. Sitting up with a wide happy open-mouth smile, tail wagging.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-ab-food-inspector-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793989107735
+    }
+   ]
   },
   {
    "status": "draft",
