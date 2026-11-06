@@ -3601,7 +3601,7 @@
    ]
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "id": "olivia-ab-story-time",
    "tab": "Characters",
    "group": "Olivia",
@@ -3620,6 +3620,15 @@
      "note": "all frames must be full body",
      "from": "v2",
      "at": 1793995263598
+    }
+   ],
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-ab-story-time-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793995512097
     }
    ]
   },
