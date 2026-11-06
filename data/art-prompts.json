@@ -2372,8 +2372,16 @@
    "group": "Griffith Park"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-soggysock-v1.png",
+     "date": "2026-11-06",
+     "from": "v4",
+     "at": 1793923984453
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-06",
