@@ -1,3 +1,7 @@
+## 2026-11-06 (349): Art Library: TNB ability and effects sheets (`tnbab1`)
+- 14 ability sheets (`tnb-ab-<move>`, 3 x 2, refs his hero, walk and two battle sheets) and 14 objects and effects sheets (`tnb-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Draft only, nothing installed or wired. json 530 to 558 entries (Characters 123 to 151); every existing entry unchanged; test.py Characters EXPECT set to 151. Cost to Tom: 28 Generate presses.
+- Next in order: Nara, Boppy, Olivia, Justin.
+
 ## 2026-11-06 (348): Trail clue sheets for hunts with no object (`trail1`)
 
 Art Library: 6 new Props sheets, group "Trail clues" (`prop-trail-a` to `f`, 51 objects, 3 clues per chapter for ch1 to 13, 17, 19, 20 and Nine Scoops). Draft only, nothing installed or wired. See docs/DUNGEON_FINDS.md.

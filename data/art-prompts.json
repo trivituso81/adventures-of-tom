@@ -2418,6 +2418,216 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: To the Moon and Back.\n\nRow 1:\n1. Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.\n2. Arms spread wide for a group hug, a warm smile.\n3. Both hands cupped together held up high above her head, offering something up, eyes shining.\n\nRow 2:\n4. Watching upward, both hands pressed over her heart, mouth open in awe.\n5. Arms wrapped around herself, eyes closed, smiling softly.\n6. Blowing a kiss forward from her open palm, puckered lips, eyes twinkling."
   },
   {
+   "status": "draft",
+   "id": "tnb-ab-mug-toss",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Mug Toss (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Mug Toss.\n\nRow 1:\n1. Standing relaxed, one hand reaching into a canvas tote bag at his side, a calm half smile.\n2. Holding up one slightly crooked clay mug in one hand, studying it, eyebrows raised.\n3. Winding up with the mug held back at shoulder height, relaxed stance, eyes on the target.\n\nRow 2:\n4. Mug thrown: the arm extended forward, the mug leaving his hand, an easy shrug of a face.\n5. Hands in his pockets, watching, a small satisfied nod.\n6. A little fist pump at hip height, a quiet grin."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-wardrobe",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: WARDROBE (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: WARDROBE.\n\nRow 1:\n1. Walking forward pushing a rolling wardrobe rack of costumes with both hands, relaxed.\n2. Stopped beside the rack, one hand on the rail, the other lifting a costume off a hanger, a friendly look.\n3. Holding a costume open with both hands, arms stretched wide, as if helping someone into it, kind smile.\n\nRow 2:\n4. Smoothing a collar flat with both hands, tilting his head, checking the fit.\n5. Stepping back, one hand on his chin, admiring his work, pleased.\n6. Two thumbs up, a warm grin, the rack beside him."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-foraged-at-dawn",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Foraged at Dawn (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Foraged at Dawn.\n\nRow 1:\n1. Walking forward holding a very large white plate in both hands out in front of him, serious waiter face.\n2. Bending slightly, the large plate presented low, one finger of the other hand pointing at the tiny center of it.\n3. Speaking in a low hush, eyebrows raised, the plate held steady, leaning in.\n\nRow 2:\n4. Both arms sweeping slowly in a long explanation, the plate balanced on one palm, eyes closed with feeling.\n5. A small respectful bow, the plate held against his chest.\n6. Straightening up, the plate back in both hands, a satisfied closed-mouth smile."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-dont-split-up",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Don't Split Up (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Don't Split Up.\n\nRow 1:\n1. Reaching one hand out to grab a friend by the arm, eyes wide, alert.\n2. Holding a flashlight pointed up under his chin, wide eyes, a spooky dead-serious face.\n3. Standing tall, the flashlight held out in front, whispering over his shoulder, tense.\n\nRow 2:\n4. Standing with his back turned, the flashlight raised, scanning, tense shoulders.\n5. Flinching and jumping at a noise, the flashlight swinging, mouth open.\n6. Hand pressed to his chest, breathing out, a nervous laugh."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-metro-tap",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Metro Tap Card (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Metro Tap Card.\n\nRow 1:\n1. Patting his jacket pockets one by one, a thoughtful frown.\n2. Pulling a small plastic transit card out of one pocket, pleased, holding it up.\n3. Reaching forward, tapping the card flat against a small card reader, relaxed.\n\nRow 2:\n4. Holding one arm out, palm up, gesturing \"after you\" toward a train door, a polite smile.\n5. Leaning on a pole, one foot crossed over the other, calm commuter face.\n6. A little wave goodbye with two fingers, a mellow smile."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-slasher-scare",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Slasher Jump Scare (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Slasher Jump Scare.\n\nRow 1:\n1. Reaching up to flip a light switch, a mischievous look.\n2. Holding a flashlight under his chin, wide eyes, an eerie grin.\n3. Pointing the flashlight beam straight ahead, eyebrows raised, whispering, delighted.\n\nRow 2:\n4. Both hands thrown up, mouth wide open in a big dramatic scream.\n5. Clutching his own chest, doubled over laughing.\n6. A proud little bow, the flashlight under one arm, a gleeful grin."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-scope-creep",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Scope Creep (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Scope Creep.\n\nRow 1:\n1. Standing holding an open laptop in one arm, the other hand on the keys, a tidy professional smile.\n2. Pushing his glasses up with one finger, the laptop held up, saying \"just a tiny change\", innocent face.\n3. One finger raised, \"one more thing\", the laptop on his forearm, eyebrows high.\n\nRow 2:\n4. Both hands out, wincing apologetically, the laptop under one arm, a pained smile.\n5. Holding the laptop at arm's length like it is heavy, eyes wide, mouth open.\n6. Shrugging with both palms up, the laptop snapped shut under his arm, a sheepish grin."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-tasting-ult",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Tasting Menu (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Tasting Menu.\n\nRow 1:\n1. Snapping a white tablecloth out wide with both hands, arms spread, elegant.\n2. Walking with a silver dish cover held in one hand, a white napkin over the other forearm, a refined smile.\n3. Lifting a silver dish cover with a flourish, the other arm folded behind his back, proud.\n\nRow 2:\n4. Presenting a small plate with one hand, the other behind his back, bowing slightly, calm and gracious.\n5. Stacking empty plates up one arm, quick and tidy, concentrating.\n6. Holding out a small slip of paper, the check, with a polite closed-mouth smile."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-throw-down",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Throw Down (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Throw Down.\n\nRow 1:\n1. Sitting at a pottery wheel, both hands cupped around a lump of wet clay, calm focus.\n2. Both hands pulling the clay walls of a smooth bowl upward, eyes on the clay, serene.\n3. One foot pressing the wheel pedal, a quick glance down, a hint of a smirk.\n\nRow 2:\n4. Leaning back, hands off the clay, eyes wide, spattered with clay flecks.\n5. Lifting a small bowl out in both hands, holding it up, pleased.\n6. Wiping a clay-smudged cheek with the back of a wrist, a sheepish smile."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-around-the-bend",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Just Around the Bend (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Just Around the Bend.\n\nRow 1:\n1. Standing on a hiking trail, pointing ahead up the path, a bright reassuring smile.\n2. Walking uphill in a hiking stride, a daypack on his back, one arm swinging, upbeat.\n3. Pointing ahead again with a pleading smile, a little out of breath, hair damp.\n\nRow 2:\n4. Bent forward with both hands on his knees, breathing hard, still smiling.\n5. Standing tall at the top, arms thrown wide, face lit by golden light, delighted.\n6. Looking away, one hand rubbing the back of his neck, acting like this was the plan."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-round-with-jojo",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Frisbee Golf (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Frisbee Golf.\n\nRow 1:\n1. Standing with a flying disc held in one hand, relaxed, waving an arm toward someone off to the side.\n2. Winding up to throw the disc, one arm back, feet planted, calling out with his mouth open.\n3. Disc thrown: the arm sweeping forward, body twisted, following the throw with his eyes.\n\nRow 2:\n4. Standing with a hand shading his eyes, watching the disc fly, relaxed.\n5. Both hands cupped around his mouth, calling out, a big grin.\n6. Hands on hips, shaking his head with a laugh, affectionate."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-coffee-run",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Coffee Run (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Coffee Run.\n\nRow 1:\n1. Jogging forward at a quick pace, one hand raised, a quick \"see you soon\" over his shoulder, cheerful.\n2. Standing patiently holding a small paper order slip, one foot tapping, calm.\n3. Walking carefully with a cardboard tray of four paper cups held in both hands, eyes on the cups.\n\nRow 2:\n4. Presenting one paper cup held out in one hand, the tray in the other, a warm smile.\n5. Holding the cup up to read the name written on it, one eyebrow raised.\n6. Giving a small satisfied nod, the tray held against his hip, easy confidence."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-kiln-door-policy",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Kiln Door Policy (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Kiln Door Policy.\n\nRow 1:\n1. Standing next to a small brick kiln, one hand turning a round dial on it, a calm look.\n2. Both hands gripping the kiln door handle, leaning back to pull, set jaw.\n3. The door pulled wide open, turning his face away and bracing, one arm raised to shield his eyes.\n\nRow 2:\n4. Arms folded, standing relaxed with the open door beside him, a smug half smile.\n5. Pushing the kiln door closed with one flat palm, eyes calm.\n6. Dusting his hands together, a tiny satisfied smile."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-ab-hillbomb-ult",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB ability: Baxter Street Bomb (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-walk-sheet-v1.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Baxter Street Bomb.\n\nRow 1:\n1. Standing at the top of a steep street, one foot on a longboard, a hand over his eyes, very relaxed.\n2. Crouched low on a longboard, arms tucked, leaning forward, a fierce grin.\n3. Riding in a deep crouch, one hand trailing out for balance, hair blown back, joyful.\n\nRow 2:\n4. Reaching one hand into a tote bag at his hip while riding, a mischievous smile.\n5. Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.\n6. Standing on the board coasting, both arms stretched wide, an enormous grin."
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -2724,6 +2934,174 @@
     "art/raw/characters/deedee-ab-moon-ult-v1.png"
    ],
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: To the Moon and Back.\n\nItems:\n1. A big golden full moon with a sleepy smile.\n2. A wide dark blue night sky with twinkling stars (wide).\n3. A wide shimmering moonbeam (tall).\n4. A golden heart with a sparkly trail.\n5. A patchwork quilt of 3 by 3 stitched patches with a scalloped hem (wide).\n6. A red lipstick kiss mark.\n7. A shower of falling starlight.\n8. Three big soft red hearts.\n9. A big starburst flash."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-mug-toss",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Mug Toss (6 items; attaches the approved Mug Toss sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-mug-toss-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Mug Toss.\n\nItems:\n1. The slightly crooked clay mug from the picture, upright, with a small sticker on it.\n2. The same mug tilted, as if tumbling through the air.\n3. A curved white swoosh, the path of a thrown object (wide).\n4. A big jagged impact burst, yellow and white.\n5. A small star burst.\n6. A small sparkle."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-wardrobe",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: WARDROBE (6 items; attaches the approved WARDROBE sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-wardrobe-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: WARDROBE.\n\nItems:\n1. The rolling wardrobe rack from the picture with costumes on hangers (wide).\n2. The costume from the picture on a wooden hanger.\n3. A burst of colorful confetti.\n4. A soft warm glow.\n5. A cluster of sparkles.\n6. A small steam puff."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-foraged-at-dawn",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Foraged at Dawn (6 items; attaches the approved Foraged at Dawn sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-foraged-at-dawn-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Foraged at Dawn.\n\nItems:\n1. The very large white plate from the picture, with one tiny green pea in the center.\n2. A single green pea.\n3. A round speech bubble, empty.\n4. Three small drifting letters Z for sleep.\n5. A soft pale green glow.\n6. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-dont-split-up",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Don't Split Up (6 items; attaches the approved Don't Split Up sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-dont-split-up-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Don't Split Up.\n\nItems:\n1. The flashlight from the picture.\n2. A wide cone of pale flashlight beam (wide).\n3. A dark vignette frame, black fading to clear in the middle (wide).\n4. A small glowing ring of light.\n5. A small snapped twig.\n6. A few small alarm marks."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-metro-tap",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Metro Tap Card (6 items; attaches the approved Metro Tap Card sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-metro-tap-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Metro Tap Card.\n\nItems:\n1. The small plastic transit card from the picture.\n2. A small card reader with a glowing green light.\n3. A modern light-rail train car, side view (wide).\n4. A soft warm glow.\n5. A cluster of sparkles.\n6. A small curl of warm air."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-slasher-scare",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Slasher Jump Scare (7 items; attaches the approved Slasher Jump Scare sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-slasher-scare-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Slasher Jump Scare.\n\nItems:\n1. The flashlight from the picture.\n2. A wide cone of pale flashlight beam (wide).\n3. A dark vignette frame, black fading to clear in the middle (wide).\n4. A cartoon slasher in a white mask and dark coveralls, arms up, goofy and friendly (tall).\n5. A big white flash burst.\n6. A word balloon reading AAAAH in jagged red letters.\n7. A small clapperboard."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-scope-creep",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Scope Creep (7 items; attaches the approved Scope Creep sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-scope-creep-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Scope Creep.\n\nItems:\n1. The open laptop from the picture, front view.\n2. A project timeline chart with one tidy long bar (wide).\n3. The same timeline with many sub-bars sprouting off it (wide).\n4. A small deadline flag on a pole.\n5. A burst of paper sheets in the air.\n6. A small cloud of grey dust.\n7. A small sticky note reading TINY CHANGE."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-tasting-ult",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Tasting Menu (8 items; attaches the approved Tasting Menu sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-tasting-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Tasting Menu.\n\nItems:\n1. A white tablecloth spread flat with a lit candle on it (wide).\n2. A silver dish cover.\n3. The same silver dish cover with the lid lifted off a small plate.\n4. A small plate with a seared scallop and a saffron drizzle.\n5. A white folded napkin.\n6. A restaurant check on a small tray.\n7. A shower of gold sparkles.\n8. A soft warm golden glow."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-throw-down",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Throw Down (7 items; attaches the approved Throw Down sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-throw-down-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Throw Down.\n\nItems:\n1. A pottery wheel with a lump of wet clay on it.\n2. The same wheel with a smooth finished bowl on it.\n3. A lumpy clay bowl flying apart in pieces.\n4. A few flying drops of muddy water.\n5. A clay-spattered splash burst.\n6. A small mud-colored dust puff.\n7. A small ceramic bowl, finished and glazed."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-around-the-bend",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Just Around the Bend (6 items; attaches the approved Just Around the Bend sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-around-the-bend-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Just Around the Bend.\n\nItems:\n1. A wooden trail sign on a post reading SHORT HIKE.\n2. A winding dirt trail with a bend (wide).\n3. A small wooden sign reading JUST AROUND THE BEND.\n4. A small daypack.\n5. A soft golden sunset glow (wide).\n6. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-round-with-jojo",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Frisbee Golf (6 items; attaches the approved Frisbee Golf sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-round-with-jojo-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Frisbee Golf.\n\nItems:\n1. The flying disc from the picture.\n2. The same disc tilted, seen at an angle in flight.\n3. A curved white swoosh, the path of a thrown disc (wide).\n4. A small puff of dust.\n5. A small cheer burst with little stars.\n6. A basket-shaped disc golf target on a pole (tall)."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-coffee-run",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Coffee Run (7 items; attaches the approved Coffee Run sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-coffee-run-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Coffee Run.\n\nItems:\n1. The cardboard tray holding four paper cups from the picture.\n2. One paper cup with a lid and a name scrawled on it.\n3. A small coffee shop awning with a counter (wide).\n4. A speed streak (wide).\n5. A curl of steam.\n6. A soft warm golden glow.\n7. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-kiln-door-policy",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Kiln Door Policy (7 items; attaches the approved Kiln Door Policy sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-kiln-door-policy-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Kiln Door Policy.\n\nItems:\n1. The small brick kiln from the picture with its door closed.\n2. The same kiln with the door swung open, bright orange glow inside.\n3. A big blast of orange fire and heat (wide).\n4. A wave of shimmering heat (wide).\n5. A big starburst flash, orange and white.\n6. A small curl of smoke.\n7. A small shield of pale blue light."
+  },
+  {
+   "status": "draft",
+   "id": "tnb-fx-hillbomb-ult",
+   "tab": "Characters",
+   "group": "TNB",
+   "title": "TNB objects and effects: Baxter Street Bomb (8 items; attaches the approved Baxter Street Bomb sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/tnb-ab-hillbomb-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Baxter Street Bomb.\n\nItems:\n1. The longboard from the picture, seen from the side (wide).\n2. The same longboard seen from above.\n3. A very steep street with parked cars and a sign reading 32 PERCENT GRADE (wide).\n4. Speed lines (wide).\n5. A trail of dust kicked up behind a skateboard (wide).\n6. A burst of flying clay shards.\n7. A big impact burst, yellow and white.\n8. A small clay mug, crooked, in flight."
   },
   {
    "status": "approved",

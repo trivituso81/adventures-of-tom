@@ -410,11 +410,111 @@ const ABILITIES = {
       'Arms wrapped around herself, eyes closed, smiling softly.',
       'Blowing a kiss forward from her open palm, puckered lips, eyes twinkling.']],
   ],
+  tnb: [
+    ['mug_toss', 'Mug Toss', [
+      'Standing relaxed, one hand reaching into a canvas tote bag at his side, a calm half smile.',
+      'Holding up one slightly crooked clay mug in one hand, studying it, eyebrows raised.',
+      'Winding up with the mug held back at shoulder height, relaxed stance, eyes on the target.'], [
+      'Mug thrown: the arm extended forward, the mug leaving his hand, an easy shrug of a face.',
+      'Hands in his pockets, watching, a small satisfied nod.',
+      'A little fist pump at hip height, a quiet grin.']],
+    ['wardrobe', 'WARDROBE', [
+      'Walking forward pushing a rolling wardrobe rack of costumes with both hands, relaxed.',
+      'Stopped beside the rack, one hand on the rail, the other lifting a costume off a hanger, a friendly look.',
+      'Holding a costume open with both hands, arms stretched wide, as if helping someone into it, kind smile.'], [
+      'Smoothing a collar flat with both hands, tilting his head, checking the fit.',
+      'Stepping back, one hand on his chin, admiring his work, pleased.',
+      'Two thumbs up, a warm grin, the rack beside him.']],
+    ['foraged_at_dawn', 'Foraged at Dawn', [
+      'Walking forward holding a very large white plate in both hands out in front of him, serious waiter face.',
+      'Bending slightly, the large plate presented low, one finger of the other hand pointing at the tiny center of it.',
+      'Speaking in a low hush, eyebrows raised, the plate held steady, leaning in.'], [
+      'Both arms sweeping slowly in a long explanation, the plate balanced on one palm, eyes closed with feeling.',
+      'A small respectful bow, the plate held against his chest.',
+      'Straightening up, the plate back in both hands, a satisfied closed-mouth smile.']],
+    ['dont_split_up', "Don't Split Up", [
+      'Reaching one hand out to grab a friend by the arm, eyes wide, alert.',
+      'Holding a flashlight pointed up under his chin, wide eyes, a spooky dead-serious face.',
+      'Standing tall, the flashlight held out in front, whispering over his shoulder, tense.'], [
+      'Standing with his back turned, the flashlight raised, scanning, tense shoulders.',
+      'Flinching and jumping at a noise, the flashlight swinging, mouth open.',
+      'Hand pressed to his chest, breathing out, a nervous laugh.']],
+    ['metro_tap', 'Metro Tap Card', [
+      'Patting his jacket pockets one by one, a thoughtful frown.',
+      'Pulling a small plastic transit card out of one pocket, pleased, holding it up.',
+      'Reaching forward, tapping the card flat against a small card reader, relaxed.'], [
+      'Holding one arm out, palm up, gesturing "after you" toward a train door, a polite smile.',
+      'Leaning on a pole, one foot crossed over the other, calm commuter face.',
+      'A little wave goodbye with two fingers, a mellow smile.']],
+    ['slasher_scare', 'Slasher Jump Scare', [
+      'Reaching up to flip a light switch, a mischievous look.',
+      'Holding a flashlight under his chin, wide eyes, an eerie grin.',
+      'Pointing the flashlight beam straight ahead, eyebrows raised, whispering, delighted.'], [
+      'Both hands thrown up, mouth wide open in a big dramatic scream.',
+      'Clutching his own chest, doubled over laughing.',
+      'A proud little bow, the flashlight under one arm, a gleeful grin.']],
+    ['scope_creep', 'Scope Creep', [
+      'Standing holding an open laptop in one arm, the other hand on the keys, a tidy professional smile.',
+      'Pushing his glasses up with one finger, the laptop held up, saying "just a tiny change", innocent face.',
+      'One finger raised, "one more thing", the laptop on his forearm, eyebrows high.'], [
+      'Both hands out, wincing apologetically, the laptop under one arm, a pained smile.',
+      'Holding the laptop at arm\'s length like it is heavy, eyes wide, mouth open.',
+      'Shrugging with both palms up, the laptop snapped shut under his arm, a sheepish grin.']],
+    ['tasting_ult', 'Tasting Menu', [
+      'Snapping a white tablecloth out wide with both hands, arms spread, elegant.',
+      'Walking with a silver dish cover held in one hand, a white napkin over the other forearm, a refined smile.',
+      'Lifting a silver dish cover with a flourish, the other arm folded behind his back, proud.'], [
+      'Presenting a small plate with one hand, the other behind his back, bowing slightly, calm and gracious.',
+      'Stacking empty plates up one arm, quick and tidy, concentrating.',
+      'Holding out a small slip of paper, the check, with a polite closed-mouth smile.']],
+    ['throw_down', 'Throw Down', [
+      'Sitting at a pottery wheel, both hands cupped around a lump of wet clay, calm focus.',
+      'Both hands pulling the clay walls of a smooth bowl upward, eyes on the clay, serene.',
+      'One foot pressing the wheel pedal, a quick glance down, a hint of a smirk.'], [
+      'Leaning back, hands off the clay, eyes wide, spattered with clay flecks.',
+      'Lifting a small bowl out in both hands, holding it up, pleased.',
+      'Wiping a clay-smudged cheek with the back of a wrist, a sheepish smile.']],
+    ['around_the_bend', 'Just Around the Bend', [
+      'Standing on a hiking trail, pointing ahead up the path, a bright reassuring smile.',
+      'Walking uphill in a hiking stride, a daypack on his back, one arm swinging, upbeat.',
+      'Pointing ahead again with a pleading smile, a little out of breath, hair damp.'], [
+      'Bent forward with both hands on his knees, breathing hard, still smiling.',
+      'Standing tall at the top, arms thrown wide, face lit by golden light, delighted.',
+      'Looking away, one hand rubbing the back of his neck, acting like this was the plan.']],
+    ['round_with_jojo', 'Frisbee Golf', [
+      'Standing with a flying disc held in one hand, relaxed, waving an arm toward someone off to the side.',
+      'Winding up to throw the disc, one arm back, feet planted, calling out with his mouth open.',
+      'Disc thrown: the arm sweeping forward, body twisted, following the throw with his eyes.'], [
+      'Standing with a hand shading his eyes, watching the disc fly, relaxed.',
+      'Both hands cupped around his mouth, calling out, a big grin.',
+      'Hands on hips, shaking his head with a laugh, affectionate.']],
+    ['coffee_run', 'Coffee Run', [
+      'Jogging forward at a quick pace, one hand raised, a quick "see you soon" over his shoulder, cheerful.',
+      'Standing patiently holding a small paper order slip, one foot tapping, calm.',
+      'Walking carefully with a cardboard tray of four paper cups held in both hands, eyes on the cups.'], [
+      'Presenting one paper cup held out in one hand, the tray in the other, a warm smile.',
+      'Holding the cup up to read the name written on it, one eyebrow raised.',
+      'Giving a small satisfied nod, the tray held against his hip, easy confidence.']],
+    ['kiln_door_policy', 'Kiln Door Policy', [
+      'Standing next to a small brick kiln, one hand turning a round dial on it, a calm look.',
+      'Both hands gripping the kiln door handle, leaning back to pull, set jaw.',
+      'The door pulled wide open, turning his face away and bracing, one arm raised to shield his eyes.'], [
+      'Arms folded, standing relaxed with the open door beside him, a smug half smile.',
+      'Pushing the kiln door closed with one flat palm, eyes calm.',
+      'Dusting his hands together, a tiny satisfied smile.']],
+    ['hillbomb_ult', 'Baxter Street Bomb', [
+      'Standing at the top of a steep street, one foot on a longboard, a hand over his eyes, very relaxed.',
+      'Crouched low on a longboard, arms tucked, leaning forward, a fierce grin.',
+      'Riding in a deep crouch, one hand trailing out for balance, hair blown back, joyful.'], [
+      'Reaching one hand into a tote bag at his hip while riding, a mischievous smile.',
+      'Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.',
+      'Standing on the board coasting, both arms stretched wide, an enormous grin.']],
+  ],
 };
 
 // Pronoun in the shared header's last line (Tom's entries keep "he").
 const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she' };
-const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee' };
+const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
@@ -909,6 +1009,115 @@ const FX = {
       'A shower of falling starlight.',
       'Three big soft red hearts.',
       'A big starburst flash.'],
+  },
+  tnb: {
+    mug_toss: [
+      'The slightly crooked clay mug from the picture, upright, with a small sticker on it.',
+      'The same mug tilted, as if tumbling through the air.',
+      'A curved white swoosh, the path of a thrown object (wide).',
+      'A big jagged impact burst, yellow and white.',
+      'A small star burst.',
+      'A small sparkle.'],
+    wardrobe: [
+      'The rolling wardrobe rack from the picture with costumes on hangers (wide).',
+      'The costume from the picture on a wooden hanger.',
+      'A burst of colorful confetti.',
+      'A soft warm glow.',
+      'A cluster of sparkles.',
+      'A small steam puff.'],
+    foraged_at_dawn: [
+      'The very large white plate from the picture, with one tiny green pea in the center.',
+      'A single green pea.',
+      'A round speech bubble, empty.',
+      'Three small drifting letters Z for sleep.',
+      'A soft pale green glow.',
+      'A cluster of sparkles.'],
+    dont_split_up: [
+      'The flashlight from the picture.',
+      'A wide cone of pale flashlight beam (wide).',
+      'A dark vignette frame, black fading to clear in the middle (wide).',
+      'A small glowing ring of light.',
+      'A small snapped twig.',
+      'A few small alarm marks.'],
+    metro_tap: [
+      'The small plastic transit card from the picture.',
+      'A small card reader with a glowing green light.',
+      'A modern light-rail train car, side view (wide).',
+      'A soft warm glow.',
+      'A cluster of sparkles.',
+      'A small curl of warm air.'],
+    slasher_scare: [
+      'The flashlight from the picture.',
+      'A wide cone of pale flashlight beam (wide).',
+      'A dark vignette frame, black fading to clear in the middle (wide).',
+      'A cartoon slasher in a white mask and dark coveralls, arms up, goofy and friendly (tall).',
+      'A big white flash burst.',
+      'A word balloon reading AAAAH in jagged red letters.',
+      'A small clapperboard.'],
+    scope_creep: [
+      'The open laptop from the picture, front view.',
+      'A project timeline chart with one tidy long bar (wide).',
+      'The same timeline with many sub-bars sprouting off it (wide).',
+      'A small deadline flag on a pole.',
+      'A burst of paper sheets in the air.',
+      'A small cloud of grey dust.',
+      'A small sticky note reading TINY CHANGE.'],
+    tasting_ult: [
+      'A white tablecloth spread flat with a lit candle on it (wide).',
+      'A silver dish cover.',
+      'The same silver dish cover with the lid lifted off a small plate.',
+      'A small plate with a seared scallop and a saffron drizzle.',
+      'A white folded napkin.',
+      'A restaurant check on a small tray.',
+      'A shower of gold sparkles.',
+      'A soft warm golden glow.'],
+    throw_down: [
+      'A pottery wheel with a lump of wet clay on it.',
+      'The same wheel with a smooth finished bowl on it.',
+      'A lumpy clay bowl flying apart in pieces.',
+      'A few flying drops of muddy water.',
+      'A clay-spattered splash burst.',
+      'A small mud-colored dust puff.',
+      'A small ceramic bowl, finished and glazed.'],
+    around_the_bend: [
+      'A wooden trail sign on a post reading SHORT HIKE.',
+      'A winding dirt trail with a bend (wide).',
+      'A small wooden sign reading JUST AROUND THE BEND.',
+      'A small daypack.',
+      'A soft golden sunset glow (wide).',
+      'A cluster of sparkles.'],
+    round_with_jojo: [
+      'The flying disc from the picture.',
+      'The same disc tilted, seen at an angle in flight.',
+      'A curved white swoosh, the path of a thrown disc (wide).',
+      'A small puff of dust.',
+      'A small cheer burst with little stars.',
+      'A basket-shaped disc golf target on a pole (tall).'],
+    coffee_run: [
+      'The cardboard tray holding four paper cups from the picture.',
+      'One paper cup with a lid and a name scrawled on it.',
+      'A small coffee shop awning with a counter (wide).',
+      'A speed streak (wide).',
+      'A curl of steam.',
+      'A soft warm golden glow.',
+      'A cluster of sparkles.'],
+    kiln_door_policy: [
+      'The small brick kiln from the picture with its door closed.',
+      'The same kiln with the door swung open, bright orange glow inside.',
+      'A big blast of orange fire and heat (wide).',
+      'A wave of shimmering heat (wide).',
+      'A big starburst flash, orange and white.',
+      'A small curl of smoke.',
+      'A small shield of pale blue light.'],
+    hillbomb_ult: [
+      'The longboard from the picture, seen from the side (wide).',
+      'The same longboard seen from above.',
+      'A very steep street with parked cars and a sign reading 32 PERCENT GRADE (wide).',
+      'Speed lines (wide).',
+      'A trail of dust kicked up behind a skateboard (wide).',
+      'A burst of flying clay shards.',
+      'A big impact burst, yellow and white.',
+      'A small clay mug, crooked, in flight.'],
   },
 };
 for (const id of Object.keys(FX)) {
