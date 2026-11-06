@@ -2566,8 +2566,16 @@
    "group": "Studio Backlot"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-clapper-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793924765625
+    }
+   ],
    "rejects": [],
    "id": "enemy-clapper",
    "tab": "Enemies",
