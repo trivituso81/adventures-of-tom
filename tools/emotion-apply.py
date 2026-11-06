@@ -28,7 +28,7 @@ def main():
     if not want: sys.exit(__doc__)
     cache, rows = {}, []
     with open(TSV, newline='', encoding='utf-8') as fh:
-        for r in csv.DictReader(fh, delimiter='\t'):
+        for r in csv.DictReader(fh, delimiter='\t', quoting=csv.QUOTE_NONE):
             ch = 'ns' if r['chapter'] == 'Nine Scoops' else r['chapter']
             if ch in want: rows.append((ch, r))
     miss, expected, found, bad = [], {}, {}, []

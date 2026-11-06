@@ -1,3 +1,9 @@
+## 2026-11-06 (339): Emotions batch 2: chapters 5 to 7 show mood faces and poses (`emo9`)
+- `python3 tools/emotion-apply.py 1 2 3 4 5 6 7`: chapter 5 found 70 of 70, chapter 6 96 of 96, chapter 7 66 of 66; `EMO_CHAPTERS` now 1 to 7, `data/emotion-moods.js` 495 keys.
+- Fixed `tools/emotion-apply.py`: the tsv reader treated a line starting with a double quote as a quoted field and lost Amy's text message line in chapter 5; it now reads with `csv.QUOTE_NONE`.
+- Tested: all 502 tagged lines in chapters 1 to 7 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.
+- Tags: `emo9` (data/emotion-moods.js).
+
 ## 2026-11-06 (338): Welcome screen on iPhone: back row centred (`welcome6`)
 - Tom (07:13): "enter [centre] the second row on iPhone portrait because right now they're kind of shifted over to the right".
 - The back row is now laid out side by side (slight overlap) and centred on the front row, in the order Deedee, Boppy, Amy, Justin (engine/splash.js `splashPortLayout`, `SPLASH_PORT.backGap`). It no longer hangs on the gaps of the front row, so Deedee and Boppy stand over TNB and Tom's left side and Amy and Justin over Tom, Rose and Grace.
