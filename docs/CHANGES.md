@@ -1,3 +1,9 @@
+## 2026-11-06 (333): New hero painting for Tom (`tomhero2`)
+
+- Tom sent a new full-body hero painting (hairy forearms, smaller head share, same shirt, jeans and shoes). Saved over `art/raw/characters/tom-hero-ref-v1.png` (old picture purged; git history keeps it). The Art Library entries that attach Tom's hero pick it up with no change.
+- Portrait recut from it: `portraits/tom.png`, Tom's face measured again in `FACE` in `tools/sprite-bake/bake_portraits.py` (455, 589, 286, 467); the face fills the square like the rest of the cast. Tags: `engine/menu.js` and its `PORTRAITS` entry `tomhero2`.
+- NOT changed: Tom's walk sheet, battle sheets, ability sheets and every baked sprite were painted from the old hero and still show the old look until Tom asks for them to be redone.
+
 ## 2026-11-06 (332): The Wallflower waits by the big gold frame in the ballroom (`ballroom1`)
 
 - Tom: the mirror in the ballroom is hard to find. Fact: the Wallflower, who gives the third mirror, stood at the left side of the dance floor (11,17), but her lines say she hides behind "this mirror", and the only mirror in the ballroom is the big gold frame on the right wall (23,15).

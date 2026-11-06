@@ -27,7 +27,7 @@ SIDE = 410       # square side in source pixels for an average face
 EYE_AT = 0.52    # eye line, share of the square from the top
 # id: (left pupil x, right pupil x, eye line y, chin y) in source pixels (chin = bottom of beard).
 FACE = {
-    'tom': (467, 570, 252, 422), 'tnb': (402, 527, 295, 465), 'grace': (442, 560, 290, 405),
+    'tom': (455, 589, 286, 467), 'tnb': (402, 527, 295, 465), 'grace': (442, 560, 290, 405),
     'rose': (472, 584, 278, 403), 'amy': (432, 545, 232, 370), 'justin': (417, 537, 270, 475),
     'olivia': (437, 542, 265, 385), 'deedee': (442, 557, 280, 410), 'boppy': (422, 572, 345, 515),
     'ellie': (452, 562, 263, 415),
