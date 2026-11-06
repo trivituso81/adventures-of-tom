@@ -37,8 +37,8 @@
     return {n:[lx+1,ly],f:[rx-1,ry]}; };
   const X=TNB_HIRES.pose,Q=k=>{ const r=paintRows(rk(X[k]),'tnbPose',k,false); if(sp.eyeAt) sp.eyeAt.set(r,sp.eyeAt.get(sp.idle)||{col:M.eye[0],row:M.eye[1]}); if(sp.handAt) sp.handAt.set(r,metaX(r)); return r; };
   // Move frames
-  sp.idle2=sp.idle; sp.wind=sp.windup; sp.throw=sp.act;
-  sp.point=Q('point'); sp.aim=sp.point; sp.spread=Q('present'); sp.hip=Q('hips'); sp.clap=Q('clap'); sp.carry=Q('carry'); sp.shrug=Q('shrug');
+  sp.idle2=P('idle2'); sp.wind=sp.windup; sp.throw=sp.act;   // breath, power point, arms wide and hands on hips: his two painted battle sheets
+  sp.point=P('point'); sp.aim=sp.point; sp.spread=P('spread'); sp.hip=P('hip'); sp.clap=Q('clap'); sp.carry=Q('carry'); sp.shrug=Q('shrug');
   sp.mugPull=Q('pull'); sp.mugWind=Q('tw_wind'); sp.mugRel=Q('tw_rel');   // Mug Toss: pull from the tote, wind up, release
   sp.heave=Q('heave'); sp.crouch=Q('crouch'); sp.dodge=Q('dodge');
   // Story and overworld-scene poses (battle size)

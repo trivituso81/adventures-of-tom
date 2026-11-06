@@ -1,3 +1,8 @@
+## 2026-11-06 (313): TNB fights with his two painted battle sheets (`battlesheet5`)
+- Tom (11-05 23:40): TNB's battle sheets (art/raw/characters/tnb-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head sizing, no body widening BODY_KX). NEW slots: idle2 breath; hip, spread, point now his painted frames instead of the old extra-sheet poses (data/tnb-hires-battle.js); KO = dizzy sit. Idle keeps its old visible height (100 rows).
+- Extra sheets (tnb-poses, tnb-board) pinned to the old idle (OLD_IDLE_H 469, _Hb 469, _idle_body 260) and came back pixel for pixel. Battle and KO atlases at 1.5 through hires.py.
+- Purged: src/tnb-battle-v2.png, the black eye and swirl paint-ins, the b_ head boxes, solve_k and the lying-KO warps in bake_tnb.py.
+- Tests: kit_test tnb FAILS [], fight shots checked.
 ## 2026-11-06 (312): Boppy fights with his two painted battle sheets (`battlesheet4`)
 - Tom (11-05 23:40): Boppy's battle sheets (art/raw/characters/boppy-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head warp, no body narrowing). NEW slots: idle2 breath, hip (data/boppy-hires-battle.js); KO = dizzy sit. His own stock sheet still supplies aim, throw, spread, point, clap. Idle keeps its old visible height (66.7 rows). Eye and hand bands now use head share .26.
 - Extra sheets (extra, fish, stock, young, pepper) pinned to the old idle (HEAD_KB 1.563, OLD_IDLE_H 431) and came back pixel for pixel. Battle atlases at 1.333, KO at 1.5 through hires.py.
