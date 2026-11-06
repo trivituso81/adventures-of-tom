@@ -1048,8 +1048,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Bedazzle Blast.\n\nRow 1:\n1. Holding a pink rhinestone gun in both hands, pointed up, a mischievous grin.\n2. Aiming the rhinestone gun forward with both hands, one eye closed, focused.\n3. Sweeping the rhinestone gun across, leaning forward, mouth open in a shout.\n\nRow 2:\n4. Blowing on the tip of the rhinestone gun held up beside her face, a cool look.\n5. Inspecting forward with the rhinestone gun lowered, head tilted, a thinking face.\n6. A pose with the rhinestone gun on her shoulder and the other hand on her hip, a sparkly grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-olympic-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793955035097
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-olympic-ult",
    "tab": "Characters",
@@ -1062,7 +1070,7 @@
     "art/raw/characters/grace-battle-sheet-1-v1.png",
     "art/raw/characters/grace-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Diamond Leotard Finale.\n\nRow 1:\n1. A gymnast salute, one arm straight up, chin high, serious and ready.\n2. Sprinting forward, arms pumping, hair streaming back, determined.\n3. A round-off, both hands on the ground, legs swinging over together.\n\nRow 2:\n4. High in a twist, arms tucked tight to her chest, legs straight together, eyes shut.\n5. Landing with both knees bent and arms out, sticking it, fierce face.\n6. Arms up high in a final salute, chest out, a huge proud grin."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change. she is wearing an amazingly bedazzled with diamonds shiny godlike leotard\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Diamond Leotard Finale.\n\nRow 1:\n1. A gymnast salute, one arm straight up, chin high, serious and ready.\n2. Sprinting forward, arms pumping, hair streaming back, determined.\n3. A round-off, both hands on the ground, legs swinging over together.\n\nRow 2:\n4. High in a twist, arms tucked tight to her chest, legs straight together, eyes shut.\n5. Landing with both knees bent and arms out, sticking it, fierce face.\n6. Arms up high in a final salute, chest out, a huge proud grin."
   },
   {
    "status": "approved",
