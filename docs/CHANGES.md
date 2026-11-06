@@ -1,3 +1,10 @@
+## 2026-11-06 (340): Battle: no walking to or from an ability; frozen stance, quick slide (`noWalk1`)
+- Tom (07:18): characters must not play walk frames when they step up for an ability or step back. They hold their stance, shift forward without changing frames, and shift back still facing the enemies (never turn around). The shift is quick.
+- `engine/battle-draw.js`: the approach slide (`fx.appr`) draws the stance or ability pose, never the run cycle, and the slide takes .18 s each way (`APPR_SLIDE`, was .7 and .35). Any scripted path (`fx.path`) that asks for a run or run-flipped frame now draws the stance instead (covers staged Tombos and keyframed moves). Shuttle runs (`fx.run`, Amy's running moves) are unchanged.
+- `engine/battle2-kind.js`: Tombo stage in and out `B2_STAGE.ms` 460 to 200.
+- Tested: smoke FAILS: []; Rose's Boop contact sheet shows her sliding in and out facing the enemies in stance.
+- Tags: `noWalk1` (battle-draw.js, battle2-kind.js).
+
 ## 2026-11-06 (339): Emotions batch 2: chapters 5 to 7 show mood faces and poses (`emo9`)
 - `python3 tools/emotion-apply.py 1 2 3 4 5 6 7`: chapter 5 found 70 of 70, chapter 6 96 of 96, chapter 7 66 of 66; `EMO_CHAPTERS` now 1 to 7, `data/emotion-moods.js` 495 keys.
 - Fixed `tools/emotion-apply.py`: the tsv reader treated a line starting with a double quote as a quoted field and lost Amy's text message line in chapter 5; it now reads with `csv.QUOTE_NONE`.

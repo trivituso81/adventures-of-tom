@@ -1,4 +1,6 @@
 'use strict';
+// Quick shift forward and back (seconds) for an ability's approach: the stance is frozen, no walk frames, never turns around.
+const APPR_SLIDE=.18;
 // engine/battle-draw.js — Drawing the battle scene, animations and effects.
 
 // ---------- Battle backdrops ----------
@@ -114,14 +116,13 @@ function drawBattle() {
     const burpeeFrame=burpee?(Math.floor(t*6)%2?sp.kneel:sp.celeb):null;
     const running=fx.run>0;
     const runFrame=running?(sp.run?sp.run[Math.floor(t*12)%2]:(Math.floor(t*14)%2?sp.expr:sp.idle)):null;
-    const approaching=fx.appr>0&&sp.run&&!punching&&!running;
+    const approaching=fx.appr>0&&!punching&&!running;
     const tossing=fx.toss>0&&sp.wind,aiming=fx.aim>0&&sp.aim;
     let frame=punching?sp.act:(cheering?cheerFrame:(silly?sillyFrame:(dancing?danceFrame:(twirling?(spinFrame?sp.flip:sp.idle):((guarding&&sp.defend)?sp.defend:((hurt||guarding)?sp.kneel:sp.idle))))));
-    if(approaching) { const e=fx.apprDur-fx.appr; frame=(e<.7||fx.appr<.35)?sp.run[Math.floor(t*12)%2]:sp.idle; }
     if(tossing) frame=fx.toss>.45?sp.wind:sp.throw;
     if(aiming&&!approaching) frame=sp.aim;
     if(fx.cast>0&&sp.aim) frame=sp.aim;
-    { const inRun=approaching&&((fx.apprDur-fx.appr)<.7||fx.appr<.35); if(fx.pose>0&&sp[fx.poseK]&&!inRun) frame=sp[fx.poseK]; }
+    if(fx.pose>0&&sp[fx.poseK]&&!(approaching&&((fx.apprDur-fx.appr)<APPR_SLIDE||fx.appr<APPR_SLIDE))) frame=sp[fx.poseK];   // no walk frames: the stance is held while the body slides
     if(coachFrame) frame=coachFrame; else if(hugging) frame=sp.spread||sp.celeb; else if(grumbling) frame=sp.sit||sp.kneel; else if(burpeeFrame) frame=burpeeFrame; else if(runFrame) frame=runFrame;
     // Knocked out (0 HP): crumples to a slumped kneel, bruised and dazed. koE is seconds since they went down.
     const down=!alive(m)&&!fx.path;
@@ -141,7 +142,7 @@ function drawBattle() {
     if(fx.hop>0) hop=Math.round(Math.abs(Math.sin(t*9))*18);
     if(m.id==='tom'&&battle._seat&&battle._seat.hop) hop+=battle._seat.hop;   // Rose bounces on his shoulders: he lifts with her (engine/rose-ride.js)
     let appr=0;
-    if(fx.appr>0) { const e=fx.apprDur-fx.appr; appr=e<.7?Math.min(1,e/.7):(fx.appr<.35?fx.appr/.35:1); }
+    if(fx.appr>0) { const e=fx.apprDur-fx.appr; appr=e<APPR_SLIDE?Math.min(1,e/APPR_SLIDE):(fx.appr<APPR_SLIDE?fx.appr/APPR_SLIDE:1); }
     let cx=pos.x*3-Math.round(lunge*(pos.x*3-250))-Math.round(appr*(pos.x*3-(m.id==='rose'?236:262)))+(fx.shake>0?rand(-5,5):0)+(fx.tongue>0?Math.round(Math.sin(t*22)*2):0)+(dancing?Math.round(Math.sin(t*4.5)*16):0);
     let base=pos.base*3-Math.round(lunge*12)-hop;
     base+=koSink;
@@ -205,7 +206,8 @@ function drawBattle() {
     if(fx.path) {
       const P=fx.path,r=P.fn(Math.min(1,P.t/P.dur),{origX,origBase,sp,t,cx,base})||{};
       if(r.cx!=null) cx=Math.round(r.cx); if(r.base!=null) base=Math.round(r.base); if(r.rot!=null) rot=r.rot;
-      if(r.frame) frameOverride=r.frame; if(r.sc!=null) pathSc=r.sc; if(r.noShadow) noShadow=true; if(r.hide) hidden=true;
+      if(r.frame) frameOverride=(!running&&((sp.run&&sp.run.includes(r.frame))||(sp.runFlip&&sp.runFlip.includes(r.frame))))?sp.idle:r.frame;   // walk and run frames are never drawn on a slide: hold the stance, facing the enemies
+      if(r.sc!=null) pathSc=r.sc; if(r.noShadow) noShadow=true; if(r.hide) hidden=true;
       if(i===battle.actor) battle.actorPos={cx,base,h};
     }
     if(hidden) return;

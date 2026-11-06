@@ -194,7 +194,7 @@ function b2TossSteps(u,act) {
     },620];
 }
 // Tombo staging spots (stage units): Tom on the near side, the partner a step back, side by side with no overlap.
-const B2_STAGE={tom:{x:92,base:86},pt:{x:117,base:100},ms:460};
+const B2_STAGE={tom:{x:92,base:86},pt:{x:117,base:100},ms:200};
 function b2StageOut(tom,pt) {
   if(B2.staged) b2Unstage(true);
   B2.staged=[];
