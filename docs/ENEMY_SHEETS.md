@@ -103,7 +103,7 @@ Match by file name first (`<id>_sheet.png`, `<id>-final.png`, or the enemy name)
 | hushling | foe-hushling-v1.png (4 frames plus a spare stance on the right, `--extra-ok`; white streak and specks between x 1697 and 1797 blanked in the saved source) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | turnstile | foe-turnstile-v1.png (Turnstile Grump, 4 frames, lone stance on row 2) | stance, hurt, attack1, attack2 | 2026-10-30 | no |
 | drillworm | foe-drillworm-v1.png (Dual-Coast Drill Worm, chapter 13 boss, 6 frames, `--cut-y 370 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
-| warden | foe-warden-v1.png (Warden Boppy, chapter 14 boss, 6 frames; frames overlap in x, so cut with `--cuts 340,656,968,1415,1866`; specks under 25 px removed from the saved source) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
+| warden | art/raw/enemies/enemy-warden-v2.png (Warden Boppy, chapter 14 boss, new painted-Boppy sheet, baked with bake_foe_sheets.py) | stance, hurt, attack1 to attack4 | 2026-11-06 | yes (Library approved) |
 | hush9final | foe-hush9final-v1.png (HUSH-9 Final Form, chapter 15 boss, 6 frames, `--cut-y 386 --cuts 318,692,1037,1466,1884 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 | marlowe16 | foe-marlowe16-v1.png (Marlowe Transformed, chapter 16 boss, 6 frames, `--cut-y 356 --cuts 312,645,1002,1399,1870 --trim-edges`) | stance, hurt, attack1 to attack4 | 2026-10-30 | no |
 | greynote | foe-greynote-v1.png (Grey Note, chapter 16, 4 frames, `--cut-y 380`) | stance, hurt, attack1, attack2 | 2026-10-30 | no |

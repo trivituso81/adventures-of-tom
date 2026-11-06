@@ -1,3 +1,10 @@
+## 2026-11-06 (376): Warden Boppy boss installed from the new approved Library sheet (`warden2`)
+
+- Fact (Tom 12:40: new `enemy-warden` sheet generated and approved, v2, painted-Boppy refs): `bake_foe_sheets.py warden` rebaked `art/foes/warden.webp` (6 frames, atlas 1993 x 408, stance 306 x 386) and `data/foes/warden-hires.js` (rows 42 x 53). Same grid and frame order, so engine and wiring unchanged.
+- Aim points re-measured for the new stance (`MARK.warden` in `bake_foe_sheets.py`: eyes (.34,.385) and (.48,.385), mouth (.45,.445)); checked on the contact sheet.
+- Tested: test fight Warden vs Tom, Grace, Rose at 393 x 852 and 852 x 393 (`tools/shots/warden-fight-*.png`), smoke `FAILS: []`, tag_check ok. `ART_V` and build stamp moved to `warden2`. The Warden speaks no dialogue box lines, so no portrait.
+- Likeliest phone notes: faint pink flecks in the glow of the swing frames; hurt and swing frames sit slightly higher than the stance (feet aligned by alpha bottom).
+
 ## 2026-11-06 (375): Young Boppy hero painting from Tom; hero entry removed (Art Library only)
 
 - Fact (Tom 12:38): he supplied the Young Boppy hero. Saved as `art/raw/characters/boppy-young-hero-ref-v1.png` (1024 x 1536).
