@@ -210,7 +210,7 @@ function sheetShort(t, brushRef, id) {
   if (LIKENESS[t.id]) refs.push(...LIKENESS[t.id][0]);
   if (t.id === 'julian') {
     const R = [KEY, 'art/raw/enemies/enemy-vance-v1.png', brushRef];
-    const tx = `Attachment 2 shows Julian Vance in six poses. Paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. ${POSES.julian} Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. ${TAIL}`;
+    const tx = `Repaint attachment 2 as a handbrushed painting. It shows Julian Vance in six poses; paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Attachment 2 is a smooth picture, so paint every edge, coat fold and face with thick visible brush strokes, never smooth. ${POSES.julian} Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. ${TAIL}`;
     return { id, tab: 'Enemies', title: null, ar: '3:2', refs: R, prompt: tx };
   }
   const text = has

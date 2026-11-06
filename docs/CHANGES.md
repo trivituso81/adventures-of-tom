@@ -1,3 +1,7 @@
+## 2026-11-05 (255): Julian Vance prompt: repaint as handbrushed, not a smooth copy (Art Library only, no game files, no tag)
+
+Tom: Julian is not handpainted enough. Fact: his approved v1 (17:11) was made before the Vance-reference rewire, with the smooth description prompt. Newer Ironbelly v2 and Mirrorball v4 (after the 17:00 fix) show real brush texture and a painted background, so the boss fix works. The rewired Julian prompt now opens with "Repaint attachment 2 as a handbrushed painting" and warns that the reference is smooth.
+
 ## 2026-11-05 (254): Chronos Leviathan: painted-metal wording (Art Library only, no game files, no tag)
 
 Tom rejected v1 (not handbrushed enough; picture not saved). Cause (finding): "finely engraved", "glowing", "spinning" and a starry void invite a polished metal render. Flair now describes gold built from thick dabs of paint with visible stroke direction. First miss on this boss with the new boss method; if the next one misses too, STOP-LOSS: gold machines may need the NPC method.
