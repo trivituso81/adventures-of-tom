@@ -1,3 +1,7 @@
+## 2026-11-05 (260): Julian Vance head 40 percent bigger (Art Library only, no game files, no tag)
+
+Tom: head 40 percent bigger. Head share was about .25 of height; now about .35 (1.4 times). Prompt text only.
+
 ## 2026-11-05 (259): Art Library: "Use the default prompt" button when a card holds a saved edit (art.html only, no game files)
 
 Tom could not see the new Julian prompt: the Library keeps any prompt text he types in the browser (localStorage `aot-art-edits`) and shows it instead of the pushed prompt until he approves or rejects. A card whose box differs from the pushed prompt now shows a "Use the default prompt" button and a note. Tested headless: edit saved, button shows, click restores the pushed prompt. Lesson: when a pushed prompt "does not show", suspect a saved local edit first.
