@@ -1,16 +1,15 @@
 // Amy (Tom's sister, 5'5", adult) ability and object sheets. Tom 2026-11-06 12:19: "make all of Amy's ability sheets".
-// She has a painted hero (amy-hero-ref-v1.png) and walk sheet (amy-walk-sheet-v1.png) but no battle sheets of her own, so each
-// ability sheet attaches her hero and walk plus Deedee's battle sheet 1 for viewing angle, figure size and ground line ONLY (never likeness).
+// Her hero, walk sheet and two battle sheets (Tom supplied the battle sheets 2026-11-06 12:31) are the refs of every ability sheet.
 // 14 moves = the p-key of each slot in data/abilities.js amy: block. No left/right words, no hurt wording, no weapons.
 const R = 'art/raw/characters/';
 
 const abilityHead = `Draw the character in the attached pictures as one battle move sheet.
 
-Picture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.
+Picture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.
 
 One image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.
 
-In every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.`;
+In every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.`;
 
 const fxHead = `Paint the objects and effects for one battle move as one sheet.
 
@@ -216,8 +215,8 @@ const MOVES = [
 const entries = [];
 const fmt = (a, o) => a.map((t, i) => (i + 1 + o) + '. ' + t).join('\n');
 for (const [slug, name, r1, r2, fx] of MOVES) {
-  entries.push({ id: 'amy-ab-' + slug, tab: 'Characters', group: 'Amy', title: 'Amy ability: ' + name + ' (6 frames; her hero and walk plus Deedee\'s battle sheet for angle and size only)', ar: '3:2',
-    refs: [R + 'amy-hero-ref-v1.png', R + 'amy-walk-sheet-v1.png', R + 'deedee-battle-sheet-1-v1.png'],
+  entries.push({ id: 'amy-ab-' + slug, tab: 'Characters', group: 'Amy', title: 'Amy ability: ' + name + ' (6 frames; needs your two battle sheets)', ar: '3:2',
+    refs: [R + 'amy-hero-ref-v1.png', R + 'amy-walk-sheet-v1.png', R + 'amy-battle-sheet-1-v1.png', R + 'amy-battle-sheet-2-v1.png'],
     prompt: abilityHead + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + fmt(r1, 0) + '\n\nRow 2:\n' + fmt(r2, 3) });
   entries.push({ id: 'amy-fx-' + slug, tab: 'Characters', group: 'Amy', title: 'Amy objects and effects: ' + name + ' (' + fx.length + ' items; attaches the approved ' + name + ' sheet)', ar: '4:3',
     refs: [R + 'amy-ab-' + slug + '-v1.png'],
