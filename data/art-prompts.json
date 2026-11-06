@@ -1497,8 +1497,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Bedtime Story.\n\nRow 1:\n1. Walking, a big picture book hugged against her chest in both arms, Lamby tucked under one arm, a sleepy smile.\n2. Sitting cross-legged on the ground, the big picture book open on her lap, Lamby sitting beside her.\n3. Sitting, holding the open book up and turned outward to show the pictures, mouth open, reading aloud.\n\nRow 2:\n4. Sitting, turning a page with one hand, eyes wide, a \"what happens next\" face.\n5. Sitting, the book on her lap, a big yawn, one hand over her mouth, eyes closing.\n6. Holding the book closed against her chest, eyes shut, a soft smile, saying THE END."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/rose-ab-lamby-boomerang-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954765954
+    }
+   ],
    "rejects": [],
    "id": "rose-ab-lamby-boomerang",
    "tab": "Characters",
