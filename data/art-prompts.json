@@ -4076,7 +4076,7 @@
    "group": "Glass Tower"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -4106,6 +4106,12 @@
      "note": "s",
      "from": "v1",
      "at": 1793927580563
+    },
+    {
+     "date": "2026-11-06",
+     "note": "meake head 40% bigger",
+     "from": "v16",
+     "at": 1793930138518
     }
    ],
    "id": "enemy-vance",
@@ -4117,7 +4123,7 @@
     "docs/reference/underpaint/vance-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "VERY HANDPAINTED. VERY HANDBRUSHED. Keep attachment 2 as a handbrushed painting, same brush strokes. It shows Julian Vance in six poses; paint the same man, with the same face, long wavy gray hair, hat, long black coat, gold pocket watch, brass ray gun, height and build, in the same 3 by 2 layout, full figure from hat to boots in every pose, as a handbrushed painting. Only change his mood: softer, tired and gentle, lit by warm gold light, the gun held loosely. Attachment 2 is already a handbrushed painting: keep exactly its thick visible brush strokes and painted texture on the coat, hair, face and gun, never smoother. Top row: 1 standing, the gun at his side, tired and soft. 2 flinching back, the hat tilting. 3 looking down at the pocket watch. Bottom row: 4 attack wind-up, slowly raising the ray gun, hesitating. 5 the attack, a warm burst of amber glass from the ray gun. 6 the follow-through, lowering the gun, looking away, the coat swirling, clearly different from pose 1. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta \n#FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.",
+   "prompt": "Paint one picture: a sheet of six full-figure poses of the same man, JULIAN VANCE, in a 3 by 2 grid (top row poses 1 to 3, bottom row poses 4 to 6), each pose facing right, as a hand-painted oil painting. Attachment 1 is a finished handbrushed painting of a room, shown ONLY so you copy its brushwork: thick visible brush strokes, layered paint, canvas grain, warm golden light, matte, crisp painted edges. Do not paint any room, floor, furniture or props from it.\n\nTHE MAN AND HIS PROPORTIONS (a painted caricature): a tall, thin man, 70 inches tall. Realistic face and realistic clothes, but an oversized head, about one quarter of his total height from the top of the hair to the chin, set on a slim neck, narrow sloping shoulders, a slim torso, long thin legs, small hands and small feet. Like a caricature portrait of a real person: a big expressive realistic head on a slim body, never a big-eyed cartoon, never pixel art.\nHIS FACE AND LOOK: a pale, lined, tired face with deep-set sad eyes and a gentle softened expression, long wavy gray hair falling past his collar under a black wide-brimmed hat that is never off. A long black wool coat with a standing collar and gold buttons falling to his knees, black waistcoat, white shirt, a red tie, a gold pocket watch on a chain, black boots. A brass ray gun with a glass barrel, held loosely. Warm gold light from the upper left, a soft gold rim light.\n\nTHE SIX POSES (same man, same scale, the same ground line under his boots in every pose, the whole figure from hat to boots visible and centered in its cell with a wide margin, nothing touching a cell edge):\n1 STANCE: standing relaxed and tired, weight on one leg, the gun hanging at his right side, the other hand at his waist, head tipped slightly down, a sad half smile.\n2 FLINCH: thrown back from a hit, the whole body leaning away, the hat tilting off his head, coat flaring, eyes squeezed shut, mouth open, the gun arm flung out.\n3 LOOKING AT THE WATCH: standing still, holding the gold pocket watch open in his palm at chest height, head bowed over it, shoulders slumped, the gun hanging low.\n4 WIND-UP: slowly raising the ray gun with both hands, one knee bent, hesitating, brows drawn together, the coat swinging behind him.\n5 THE ATTACK: arm fully extended, firing the ray gun forward, the coat blown back, a warm burst of amber glass spraying from the muzzle, his face pained and reluctant.\n6 FOLLOW-THROUGH: turning half away with the gun lowered to his side, head turned to look away, eyes downcast, the long coat swirling around his legs, clearly different from pose 1.\n\nPAINTING: every surface painted with thick visible brush strokes that follow the form (wool coat, hair, skin, brass, boots), matte, canvas grain, no gloss, not a smooth digital render, not photorealistic, not pixel art, not a 3D render, no outlines. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes, no gradient and no shadow tint, nothing else in the picture, no text, no labels.",
    "group": "Chronos Loom"
   },
   {
