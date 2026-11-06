@@ -2105,8 +2105,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Registered Nut, Reporting.\n\nRow 1:\n1. Hurrying forward, an old white nurse cap on her head, a big stethoscope around her neck, eager.\n2. Leaning in, the stethoscope ear pieces in, holding the chest piece out at arm's length, eyebrows raised, listening.\n3. Holding up one finger, eyes on a wristwatch, counting, very focused.\n\nRow 2:\n4. Peeling a big bandage open with both hands, tongue poking out in concentration.\n5. Pressing the bandage forward with one flat palm, a bright energetic grin.\n6. A quick salute at the brim of the nurse cap, the stethoscope bouncing, a cheeky smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/deedee-ab-corner-piece-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793956059953
+    }
+   ],
    "rejects": [],
    "id": "deedee-ab-corner-piece",
    "tab": "Characters",
