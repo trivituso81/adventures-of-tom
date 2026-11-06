@@ -3045,9 +3045,16 @@
    "group": "Hush Library"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-06",
+     "note": "2nd image should be knocked back more",
+     "from": "v1",
+     "at": 1793925743408
+    }
+   ],
    "id": "enemy-popup",
    "tab": "Enemies",
    "title": "Pop-Up Panic: sheet, 4 frames facing right",
