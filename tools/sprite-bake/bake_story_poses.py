@@ -38,6 +38,15 @@ SETS = {
                 'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
 }
 
+# Emotion poses (emo7, 2026-11-06): the 8 full-body emotion frames of each character (art/emotions/<id>.webp strips, cut by emotion_frames.py), drawn on the
+# map while a mood line shows. Same machinery as the story poses (frames em_<mood>, stored under the member). 'h' = the character's overworld stand height in
+# rows, 'ref' = the straight-standing frame that is scaled to it; K is picked so the atlas keeps the painted sharpness (source rows per standing row, up to 10).
+EMO_MOODS = ["happy", "loving", "sad", "angry", "scared", "surprised", "proud", "unimpressed"]
+EMO_H = {'tom': 42, 'grace': 39, 'rose': 35, 'deedee': 41.7, 'boppy': 41.7, 'ellie': 43, 'amy': 41.7, 'justin': 53, 'olivia': 42, 'tnb': 45, 'nara': 31}
+for _id, _h in EMO_H.items():
+    SETS[_id + 'emo'] = {'member': _id, 'strip': os.path.join('art/emotions', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'em_sad' if _id != 'nara' else 'em_happy',
+                         'names': ['em_' + m for m in EMO_MOODS]}
+
 
 def up(n, k):
     return -(-n // k) * k
@@ -125,8 +134,14 @@ js = ["'use strict';",
       "// rows = small quantized copy of each painted frame at the overworld row scale; atlas = where the painted frame lives (engine/painted.js).",
       "const STORY_POSES_SRC={"]
 for cid, S in SETS.items():
-    if 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
-    else: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
+    if 'strip' in S:
+        sh = Image.open(os.path.join(ROOT, S['strip'])).convert('RGBA'); fw = sh.width // 8
+        figs = {}
+        for i, n in enumerate(S['names']):
+            c = sh.crop((i * fw, 0, (i + 1) * fw, sh.height)); figs[n] = c.crop(c.getbbox())
+        if not S['k']: S['k'] = max(5, min(10, int(figs[S['ref']].height / S['h'])))
+    elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
+    if 'strip' not in S and 'cut' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'])
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}

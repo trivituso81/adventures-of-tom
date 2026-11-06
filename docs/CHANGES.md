@@ -1,3 +1,13 @@
+## 2026-11-06 (328): Emotions wired, batch 0: engine and chapter 1 (`emo7`)
+- Tom (11-06 00:44): wire the emotion sheets into the story in batches. Fact: while a story talk line shows, its mood now swaps the dialogue portrait to that character's face in that mood and draws the speaker on the map in the full-body mood pose, as painted. Only chapter 1 is on (57 lines); every other chapter behaves as before.
+- Moods live in one generated file `data/emotion-moods.js` (`'<Speaker>|<exact text>' -> mood`, chapter switch `EMO_CHAPTERS`), built by `tools/emotion-apply.py 1` from `docs/emotion-index-lines.tsv` (found 57 of 57). Scene files and spoken text are untouched, so voice clips still match. Corrections: edit the row's mood in the tsv, rerun the tool.
+- Faces: `tools/sprite-bake/bake_emotion_faces.py` writes `portraits/emo/<id>-<mood>.webp` (88 squares) at the same zoom as the hero portraits (zoom measured on the hero painting; bowed-head moods shifted down; Nara's head squares set by eye). `data/emotion-faces.js` lists the characters.
+- Map poses: `bake_story_poses.py` now also bakes each character's 8 mood frames (sets `<id>emo`, frames `em_<mood>`, `art/chars/<id>emo-story.webp`, stored under the member in STORY_POSES), standing height = the overworld stand rows, feet on the same spot. Existing story art unchanged. `scenePoseDraw` accepts `mid` for actors that are NPCs.
+- `engine/emotions.js` (after dialog-auto.js): wraps S.talk, openDialog, loadDialogLine, advanceDialog, endIntro; clears on advance, a line with no mood, scene end and skip. A pose already set by a scene wins; Tom carrying Rose and Rose on the shoulders get the face only. `__LE.EMO`, `__LE.emoMoodOf` for tests.
+- Tags: `emo7` (index.html: story.js, story-poses.js, the three new files).
+- Next: Tom plays chapter 1, then batches 1 to 7 (chapters 2 to 4, 5 to 7, 8 to 10, 11 to 13, 14 to 17, 18 to 20, Nine Scoops).
+>>>>>>> 35f496f (Emotions batch 0: mood faces and poses in story dialogue, chapter 1 on (emo7))
+
 ## 2026-11-06 (327): Welcome screen: slow rise and fall instead of a stretch pulse (`welcome5`)
 - Tom (02:13): "Characters are pulsing way too rapidly".
 - The welcome figures were stretched 1.2% from the feet every frame, which shimmered on the painted pixels and read as fast pulsing. Replaced by a slow lift of a few whole pixels (about 1.1% of the figure's height, period about 6 s, each figure on its own timing). `SPLASH_BREATH` in engine/splash.js is now {amp, speed}; no scaling.
