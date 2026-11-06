@@ -1,3 +1,8 @@
+## 2026-11-06 (332): The Wallflower waits by the big gold frame in the ballroom (`ballroom1`)
+
+- Tom: the mirror in the ballroom is hard to find. Fact: the Wallflower, who gives the third mirror, stood at the left side of the dance floor (11,17), but her lines say she hides behind "this mirror", and the only mirror in the ballroom is the big gold frame on the right wall (23,15).
+- Fix: her spot moved to (22,16) beside the frame (`CLUB_MONSTER_SPOTS` in data/club-monsters.js); the Moon Club map hint now says she hides by the big gold frame (data/maps-le.js). Tags: `ballroom1` (maps-le.js, club-monsters.js).
+
 ## 2026-11-06 (331): Garden Shower draws only painted hose, nozzle and water (`dfx3`)
 
 Tom: the garden hose still showed old graphics. Fact: the green hose line, the coded water jets, droplets, ring and mist were still drawn by code. Now the painted coil, painted nozzle, one painted water arc to the target and the painted splash are all that is drawn. Tag: `deedee-moves.js` `dfx3`.

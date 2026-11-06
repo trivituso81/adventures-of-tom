@@ -806,7 +806,7 @@ LE_AREAS.push(
   planMerge({id:'moonclub',name:'The Moon Club',w:30,h:22,ground:'club',
     tag:'Up the stairs behind the telescope. Velvet, marble, and a lot of dust since 1971.',
     eyebrow:'LONG ISLAND / THE MOON CLUB',
-    hint:'Coat Check top left, Card Room top right, Ballroom at the bottom. The Dome is at the top.',
+    hint:'Coat Check top left, Card Room top right, Ballroom at the bottom. The Wallflower hides by the big gold frame. The Dome is at the top.',
     spawn:{x:1,y:10},
     wild:true,
     exits:[[0,10,'observatory',12,6,'down','clubstairs'],[14,2,'dome',9,12,'up','marble'],[15,2,'dome',10,12,'up','marble']],
