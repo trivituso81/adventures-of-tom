@@ -2411,7 +2411,7 @@
     "docs/reference/underpaint/soggysock-grid.png",
     "art/raw/enemies/test-one-mudling-stance-v1.png"
    ],
-   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
+   "prompt": "Repaint attachment 2 as a handbrushed painting. Keep the same 4 poses in the same 2 by 2 layout, the same creature, shape and colors. Top left: standing, drooping and weary, the top of the sock hanging over, mouth open. Top right: reeling from a hit, the whole sock bent far back and sideways, eyes squeezed shut, water flying off. Bottom left: attack wind-up, the sock stretched tall and twisted, the top raised high above its head, angry face, water dripping off. Bottom right: the attack, the top of the sock whipping forward and down in a big slap, angry face, water splashing out in front. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. Flat solid magenta #FF00FF background, nothing else in the picture, no text.",
    "group": "Whispering Marsh"
   },
   {

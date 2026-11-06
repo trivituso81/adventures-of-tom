@@ -145,13 +145,17 @@ Family friendly for ages 6 and up. Keep the flinch comic, never grim.`;
 
 // SHORT PROMPT (Tom 11-05 15:49: it worked great after his tweak "handbrushed painting"; applies to every enemy). Long prompts misdirected the generator.
 const TAIL = `Flat solid magenta #FF00FF background, nothing else in the picture, no text.`;
+// Custom pose text for enemies whose four poses must be spelled out (Tom 11-05 16:10: the Soggy Sock came back with four near-identical poses).
+const POSES = {
+  soggysock: `Top left: standing, drooping and weary, the top of the sock hanging over, mouth open. Top right: reeling from a hit, the whole sock bent far back and sideways, eyes squeezed shut, water flying off. Bottom left: attack wind-up, the sock stretched tall and twisted, the top raised high above its head, angry face, water dripping off. Bottom right: the attack, the top of the sock whipping forward and down in a big slap, angry face, water splashing out in front.`
+};
 function sheetShort(t, brushRef, id) {
   const m0 = MOVES[t.id], boss = m0.rank === 'BOSS', n = boss ? 6 : 4, cols = boss ? 3 : 2;
   const under = 'docs/reference/underpaint/' + t.id + '-grid.png';
   const has = fs.existsSync(under);
   const refs = has ? [KEY, under, brushRef] : [KEY, brushRef];
   const text = has
-    ? `Repaint attachment 2 as a handbrushed painting. Keep the same ${n} poses in the same ${cols} by 2 layout, the same creature, shape and colors. Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. ${TAIL}`
+    ? `Repaint attachment 2 as a handbrushed painting. Keep the same ${n} poses in the same ${cols} by 2 layout, the same creature, shape and colors.${POSES[t.id] ? ' ' + POSES[t.id] : ''} Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. ${TAIL}`
     : `Paint ${m0.name}, ${t.look}, as a handbrushed painting in a ${cols} by 2 grid of ${n} poses facing right: stance, flinch, attack wind-up, attack landing${boss ? ', and two more attack frames' : ''}. Paint it like attachment 1 and finish it like attachment 2: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss. ${TAIL}`;
   return { id, tab: 'Enemies', title: null, ar: boss ? '3:2' : '1:1', refs, prompt: text };
 }

@@ -92,32 +92,42 @@ def frame_count(id):
     m = json.load(open('tools/art-library/prompts/enemy-moves.json'))[id]
     return 6 if m.get('rank') == 'BOSS' else 4
 
+def atlas_frames(id):
+    """The frames exactly as the game cut them (data/foes/<id>-hires.js rects on art/foes/<id>.webp): right order, right count, no guessing from gaps.
+    Sheets have 5 or 7 cells (a spare stance) and some frames touch, which broke the old gap-based cutting (Soggy Sock, 11-05 16:10)."""
+    import json, re, os
+    hp = f'data/foes/{id}-hires.js'
+    if not os.path.exists(hp): return None
+    m = re.search(r'FOE_HIRES\.' + re.escape(id) + r'=(\{.*\});', open(hp).read(), re.S)
+    d = json.loads(m.group(1))
+    at = np.array(Image.open(d['src']).convert('RGBA'))
+    return [at[y:y + h, x:x + w] for (x, y, w, h) in (d['rects'][k] for k in d['frames'])]
+
 def make_grid(id):
-    im = np.array(Image.open(f'tools/sprite-bake/src/foe-{id}-v1.png').convert('RGBA'))
-    im = first_row(im, CUT_Y.get(id, 0)); a = im[..., 3]
-    y0, y1 = 0, im.shape[0]
-    boss = None
-    n = frame_count(id)
-    runs = frames_of(a, n)
+    fr_list = atlas_frames(id)
+    if fr_list is None:
+        im = np.array(Image.open(f'tools/sprite-bake/src/foe-{id}-v1.png').convert('RGBA'))
+        im = first_row(im, CUT_Y.get(id, 0)); a = im[..., 3]
+        n = frame_count(id)
+        fr_list = [im[:, x0:x1] for (x0, x1) in frames_of(a, n)]
+    n = len(fr_list)
     cols, rows = (3, 2) if n == 6 else (2, 2)
     cell = 512
     Wc, Hc = cols * cell, rows * cell
     # one scale for all frames so the figure keeps its size from pose to pose
-    maxw = max(r[1] - r[0] for r in runs)
-    rows_on = np.where((a > 40).any(axis=1))[0]; maxh = int(rows_on.max() - rows_on.min() + 1)   # the figure's own height, not the sheet row's (11-05: poses filled only 68 percent of the cell)
+    maxw = max(f.shape[1] for f in fr_list); maxh = max(f.shape[0] for f in fr_list)
     sc = 0.90 * cell / max(maxw, maxh)
     canvas = np.zeros((Hc, Wc, 3), np.uint8); canvas[:] = (255, 0, 255)
-    for i, (x0, x1) in enumerate(runs):
-        fr = im[:, x0:x1]
+    for i, fr in enumerate(fr_list):
         fw, fh = max(1, int(round(fr.shape[1] * sc))), max(1, int(round(fr.shape[0] * sc)))
         rgb = fr[..., :3].astype(np.float32) * (fr[..., 3:4] / 255.0)
-        gw, gh = max(1, fr.shape[1] // 4), max(1, fr.shape[0] // 4)
+        gw, gh = max(1, fr.shape[1] // 7), max(1, fr.shape[0] // 7)
         pmg = cv2.resize(rgb, (gw, gh), interpolation=cv2.INTER_AREA)
         ag = cv2.resize(fr[..., 3].astype(np.float32), (gw, gh), interpolation=cv2.INTER_AREA)
         pmu = cv2.resize(pmg, (fw, fh), interpolation=cv2.INTER_CUBIC)
         au = cv2.GaussianBlur(cv2.resize(ag, (fw, fh), interpolation=cv2.INTER_CUBIC), (0, 0), 1.2)
         col = np.clip(pmu / np.maximum(au[..., None] / 255.0, 1e-3), 0, 255).astype(np.uint8)
-        col = cv2.GaussianBlur(cv2.bilateralFilter(col, 0, 28, 3), (0, 0), 1.2)
+        col = cv2.GaussianBlur(cv2.bilateralFilter(col, 0, 28, 4), (0, 0), 2.2)
         al = np.clip((au - 110) * 2.2, 0, 255) / 255.0
         cx, cy = (i % cols) * cell, (i // cols) * cell
         ox = cx + (cell - fw) // 2
