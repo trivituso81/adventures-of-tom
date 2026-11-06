@@ -1,3 +1,8 @@
+## 2026-11-06 (352): Art Library: Boppy ability and effects sheets (`boppyab1`)
+- 14 ability sheets (`boppy-ab-<move>`, 3 x 2, refs his hero, walk and two battle sheets) and 14 objects and effects sheets (`boppy-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Frames written from the beats in engine/boppy-moves.js and engine/battle2-moves.js (Grumble, Van Cortlandt Park '70 inferred from their messages).
+- data/art-prompts.json 614 entries (Characters 207), edited directly; every old entry unchanged. test.py Characters EXPECT 207. Nothing installed or wired. Tom presses Generate 28 times.
+- Next in order: Olivia, Justin.
+
 ## 2026-11-06 (351): Art Library: Nara ability and effects sheets (`naraab1`)
 - 14 ability sheets (`nara-ab-<move>`, 3 x 2, refs her hero, walk and two battle sheets, plus a dog note: paws not hands, nothing held except in her mouth) and 14 objects and effects sheets (`nara-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Draft only, nothing installed or wired. json 558 to 586 entries (Characters 151 to 179). Frames written from the final `N.<move>` beats in engine/nara.js.
 - Next in order: Boppy, Olivia, Justin.

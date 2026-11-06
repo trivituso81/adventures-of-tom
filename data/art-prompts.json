@@ -2838,6 +2838,216 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: The Unsent Scent.\n\nRow 1:\n1. Standing alone, head low, ears drooping, a lost and quiet look.\n2. Head lifted, eyes wide in surprise, nose high, sniffing the air.\n3. Sniffing the ground with her nose low, ears perked, tail starting to wag.\n\nRow 2:\n4. Lifting her head with sudden joy, eyes bright, tail up high.\n5. Running flat out, ears streaming back, mouth open in a joyful grin.\n6. Leaping with all four paws off the ground, ears flying, mouth open, pure joy."
   },
   {
+   "status": "draft",
+   "id": "boppy-ab-cap-swat",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Cap Swat (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Cap Swat.\n\nRow 1:\n1. Standing with a calm patient face, arms at his sides, looking at something small nearby.\n2. Taking his cap off with one hand, eyes following something small flying past.\n3. Swinging the cap in a wide flat swat, body turning, a determined squint.\n\nRow 2:\n4. Swinging the cap back the other way, another swat, leaning after it, eyes narrowed.\n5. Cap held low, standing with a mild unimpressed frown, watching the air.\n6. Putting the cap back on his head with both hands, a small satisfied nod."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-grumble",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: GRUMBLE (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: GRUMBLE.\n\nRow 1:\n1. Standing with his arms folded, chin tucked, a deep sulky frown.\n2. Shoulders hunched, head lowered, brow heavy, mouth pulled down in a long grumble.\n3. Shaking his head slowly with his eyes shut, lips pressed tight.\n\nRow 2:\n4. One hand pressed to his lower back, wincing a little, scowling at nothing.\n5. Chest puffed up, mouth open in a loud gruff complaint, one finger raised.\n6. Arms folded again, head turned away, a stubborn huff."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-patient-angler",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Patient Angler (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Patient Angler.\n\nRow 1:\n1. Sitting on a folding stool holding a fishing rod across his knees, calm and relaxed.\n2. Sitting with the rod held out in front of him, eyes on the line, perfectly still.\n3. Leaning forward a little, eyes sharp, both hands tightening on the rod.\n\nRow 2:\n4. Yanking the rod back hard with both hands, mouth open, eyes wide.\n5. Standing and leaning far back with the rod bent, boots planted wide, a huge grin.\n6. Reeling in steadily with one hand on the reel, a proud easy smile."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-recliner-reservation",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Recliner Reservation (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Recliner Reservation.\n\nRow 1:\n1. Standing with his hands on his hips, looking down at a patch of floor, deciding.\n2. Pointing downward with one arm straight, a firm nod.\n3. Both hands out wide as if presenting something, proud.\n\nRow 2:\n4. Giving a thumbs up with a warm smile.\n5. Arms folded, standing guard, a stern protective look.\n6. Patting the air gently with one open palm, a soft kind smile."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-headcount-again",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Headcount, Again (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Headcount, Again.\n\nRow 1:\n1. Standing with one finger raised, lips moving, eyes sweeping across the room.\n2. Pointing a finger ahead and counting with his mouth open on a number.\n3. Pointing again with a slightly puzzled frown, head tilted.\n\nRow 2:\n4. Pointing a finger at his own chest, eyes wide, realizing.\n5. Drawing a big cross in the air with one finger, an embarrassed grin.\n6. Giving a friendly nod with a relaxed smile, a satisfied thumb up."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-lockdown",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Lockdown (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Lockdown.\n\nRow 1:\n1. Standing tall in a serious posture, a big ring of keys hanging from his belt, stern.\n2. Pointing one arm straight ahead, a hard deputy stare.\n3. Slamming one fist down in front of him, jaw set.\n\nRow 2:\n4. Holding the big key ring up high in one hand, jangling it, a slow smug look.\n5. Turning a key in front of him with a slow twist of the wrist, eyes narrowed.\n6. Arms folded with the key ring in one hand, a satisfied nod."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-everybody-waits",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Everybody Waits (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Everybody Waits.\n\nRow 1:\n1. Standing and holding a tiny ticket dispenser in one hand, a very serious face.\n2. Pulling a long paper ticket from the dispenser with two fingers, eyes on it.\n3. Holding the ticket high above his head, a long strip of paper hanging from his hand.\n\nRow 2:\n4. Holding one palm out flat like a stop sign, an official stern face.\n5. Sweeping one arm wide as if ushering a crowd behind him, kind eyes.\n6. Standing tall with the ticket in one hand and arms crossed, protective."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-fish-ult",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: The One That Got Away (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: The One That Got Away.\n\nRow 1:\n1. Standing on a wooden pier holding a fishing rod, a boot planted firm, calm.\n2. Leaning back with both hands gripping the rod, rod bent hard, teeth clenched.\n3. Hauling the rod up high with one huge yank, face red with effort.\n\nRow 2:\n4. Holding a whiskered catfish up in both hands, a proud grin.\n5. Spreading his hands wide apart to show the size, boasting, eyebrows high.\n6. Spreading his arms as far as they go, mouth open in a hearty laugh, head thrown back."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-pepper-breath",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Pepper Breath (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Pepper Breath.\n\nRow 1:\n1. Standing and holding up one small red cayenne pepper between two fingers, a proud smile.\n2. Biting the pepper with a loud crunch, chewing, eyes wide.\n3. Face turning bright red, eyes watering, mouth shut tight.\n\nRow 2:\n4. Mouth wide open, head thrown back, face glowing red, a big gasp.\n5. Leaning forward with his mouth open in a roar, a fierce red face.\n6. One hand rubbing his stomach, an oh-no look, face still red."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-seeds-of-trouble",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Seeds of Trouble (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Seeds of Trouble.\n\nRow 1:\n1. Holding up a small paper seed packet with a handwritten label in front of him, a proud grin.\n2. Tapping the packet with one finger, eyes on it, a sly smile.\n3. Shaking the packet hard over his open palm, one eye shut.\n\nRow 2:\n4. Flicking seeds forward with a snap of his wrist, eyes narrowed.\n5. Tipping the packet toward the ground, one last seed falling, a keen look.\n6. Slipping the packet carefully into his shirt pocket, a satisfied nod."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-mild-for-company",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Mild for Company (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Mild for Company.\n\nRow 1:\n1. Holding a steaming pot with both hands, a hopeful smile.\n2. Holding the pot in one hand and turning a handwritten label around with the other, careful and proud.\n3. Holding up a small spoon and peering at it like a safety inspector, one eyebrow raised.\n\nRow 2:\n4. Tasting a small spoonful with his eyes closed, thinking.\n5. Opening his eyes wide with relief, a big warm smile.\n6. Holding the pot out kindly with both hands, a gentle nod."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-nineteen-seventy",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: In Nineteen Seventy (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: In Nineteen Seventy.\n\nRow 1:\n1. Sitting in a comfortable chair with his legs crossed, getting settled, a warm storyteller smile.\n2. Raising one finger, mouth open to begin, eyes lit up.\n3. Raising a second finger, leaning forward, an important face.\n\nRow 2:\n4. Eyes closed, one hand pressed to his chest, remembering fondly.\n5. Gesturing wide with one open hand, mid-story, laughing.\n6. Leaning back, hands folded on his stomach, a content smile."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-five-alarm-jar",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Five-Alarm Jar (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Five-Alarm Jar.\n\nRow 1:\n1. Holding a large glass jar of dark pickled peppers in both hands, proud.\n2. Twisting the lid with all his strength, teeth gritted, face scrunched.\n3. Popping the jar open, head jerking back, eyes wide.\n\nRow 2:\n4. Raising one pepper to his mouth, a brave eager look.\n5. Mouth wide open, eyes bulging, sweat on his forehead, face red.\n6. Bracing with his shoulders up and fists clenched, sweating, eyes squeezed shut."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-ab-xc-ult",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy ability: Van Cortlandt Park '70 (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-walk-sheet-v1.png",
+    "art/raw/characters/boppy-battle-sheet-1-v1.png",
+    "art/raw/characters/boppy-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Van Cortlandt Park '70.\n\nRow 1:\n1. Standing at a starting line in a young runner pose, a running number pinned to his shirt, eyes ahead, focused.\n2. Crouched low at the line, one hand forward, a hungry look.\n3. Sprinting flat out, arms pumping, hair streaming back.\n\nRow 2:\n4. Running hard with his chest forward, mouth open, determined.\n5. Leaping a low hurdle in stride, both arms swinging, a fierce grin.\n6. Breaking through a finish tape with his chest, arms flung wide, head thrown back, joyful."
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -3480,6 +3690,174 @@
     "art/raw/characters/nara-ab-pack-ult-v1.png"
    ],
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: The Unsent Scent.\n\nItems:\n1. A big soft grey vignette frame, grey fading to clear in the middle (wide).\n2. A single golden bread crumb with a small shine.\n3. A curling trail of golden scent, smoke-like but solid (wide).\n4. A small golden round loaf of sourdough with a scored top.\n5. A small plump heart, golden.\n6. A big warm golden glow (wide).\n7. A shower of golden sparkles.\n8. A burst of paw prints running in a line (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-cap-swat",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Cap Swat (5 items; attaches the approved Cap Swat sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-cap-swat-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Cap Swat.\n\nItems:\n1. A small buzzing mosquito, seen from the side.\n2. A curved white swoosh, the path of a cap swat (wide).\n3. A small puff of dust.\n4. A small burst of impact stars.\n5. A tiny white speed streak (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-grumble",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: GRUMBLE (6 items; attaches the approved GRUMBLE sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-grumble-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: GRUMBLE.\n\nItems:\n1. A small dark storm cloud with a frown.\n2. A jagged crimson burst, an angry scribble (wide).\n3. A ring of soft golden light, a protective shield.\n4. Three short curved wavy lines of sound.\n5. A small steaming puff of air.\n6. The word HMPH in rough blocky cream lettering with a dark outline (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-patient-angler",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Patient Angler (6 items; attaches the approved Patient Angler sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-patient-angler-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Patient Angler.\n\nItems:\n1. A red and white fishing float, seen from the front.\n2. A fishing line with a small silver hook, curling (wide).\n3. A big round splash of water, crown shaped.\n4. A ring of ripples on water (wide).\n5. A small silver fish leaping.\n6. A shower of water droplets."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-recliner-reservation",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Recliner Reservation (6 items; attaches the approved Recliner Reservation sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-recliner-reservation-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Recliner Reservation.\n\nItems:\n1. A big plush brown recliner armchair, seen from the front, with a folded blanket on the arm.\n2. A small round striped cushion.\n3. A cloud of cozy dust puffs (wide).\n4. A ring of soft golden light (wide).\n5. A small golden heart.\n6. A burst of warm sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-headcount-again",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Headcount, Again (7 items; attaches the approved Headcount, Again sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-headcount-again-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Headcount, Again.\n\nItems:\n1. A round white number badge showing the number 1.\n2. A round white number badge showing the number 2.\n3. A round white number badge showing the number 3.\n4. A round white number badge showing the number 4.\n5. A big red hand drawn cross, X shaped, painted like marker.\n6. A small checkmark in green marker.\n7. A small burst of tiny stars."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-lockdown",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Lockdown (7 items; attaches the approved Lockdown sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-lockdown-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Lockdown.\n\nItems:\n1. A tall set of black iron cell bars with a crossbar at top and bottom.\n2. A big ring of old iron keys, seen from the front.\n3. A single large iron key, seen from the front.\n4. A burst of gray dust at the base of the bars (wide).\n5. A small burst of metal sparks.\n6. A white impact star.\n7. A small shiny lock, closed."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-everybody-waits",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Everybody Waits (7 items; attaches the approved Everybody Waits sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-everybody-waits-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Everybody Waits.\n\nItems:\n1. A small red ticket dispenser, seen from the front.\n2. A long paper ticket curling down, blank.\n3. A long paper ticket curling, with large lettering reading FAMILY FIRST.\n4. A small ticket stub with a torn edge.\n5. A tall translucent golden shield wall (wide).\n6. A ring of soft golden light (wide).\n7. A burst of warm sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-fish-ult",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: The One That Got Away (8 items; attaches the approved The One That Got Away sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-fish-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: The One That Got Away.\n\nItems:\n1. A whiskered catfish of ordinary size, seen from the side, wide mouth.\n2. The same catfish drawn much bigger, still seen from the side (wide).\n3. The same catfish drawn enormous, seen from below, its belly filling the cell (wide).\n4. A big crown shaped splash of water.\n5. A wide ring of ripples on water (wide).\n6. A shower of water droplets.\n7. A small wooden pier post with rope.\n8. A burst of golden sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-pepper-breath",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Pepper Breath (7 items; attaches the approved Pepper Breath sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-pepper-breath-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Pepper Breath.\n\nItems:\n1. A small red cayenne pepper with a green stem.\n2. A cone of pepper fire shaped like a wide triangle, orange and red (wide).\n3. A puff of white steam, shaped like a cloud.\n4. A small burst of fire sparks.\n5. A small bright flame.\n6. A shower of red embers.\n7. A small gray stomach rumble swirl."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-seeds-of-trouble",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Seeds of Trouble (7 items; attaches the approved Seeds of Trouble sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-seeds-of-trouble-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Seeds of Trouble.\n\nItems:\n1. A small paper seed packet with a handwritten label reading HOT, seen from the front.\n2. A single pepper seed, large and round, pale yellow.\n3. A flying pepper seed with a short orange fire trail (wide).\n4. A small burst of orange sparks.\n5. A small round burst of fire with a bright core.\n6. A small curling puff of smoke.\n7. The word SIZZLE in blocky orange lettering with a dark outline (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-mild-for-company",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Mild for Company (8 items; attaches the approved Mild for Company sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-mild-for-company-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Mild for Company.\n\nItems:\n1. A big round steel cooking pot with two handles, full of broth, seen from the front.\n2. A small handwritten label reading HOT.\n3. A small handwritten label reading MILD.\n4. A small silver spoon.\n5. A rising curl of white steam (wide).\n6. A ring of soft golden light, healing (wide).\n7. A small golden heart.\n8. A burst of warm sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-nineteen-seventy",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: In Nineteen Seventy (7 items; attaches the approved In Nineteen Seventy sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-nineteen-seventy-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: In Nineteen Seventy.\n\nItems:\n1. A black title card with gold border reading IN 1970.\n2. A black title card with gold border reading INTRODUCTION.\n3. A small wooden chair, seen from the front.\n4. A film strip with several frames (wide).\n5. A cloud of warm dust motes (wide).\n6. A ring of soft golden light (wide).\n7. A small burst of tiny stars."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-five-alarm-jar",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Five-Alarm Jar (8 items; attaches the approved Five-Alarm Jar sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-five-alarm-jar-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Five-Alarm Jar.\n\nItems:\n1. A large glass jar of dark pickled ghost peppers with a metal lid.\n2. A jar lid, seen from the front, metal.\n3. A small ghostly pale green wisp shaped like a floating ghost.\n4. A big round red alarm bell, ringing.\n5. Three curved red lines of sound (wide).\n6. A big burst of fire with a bright core.\n7. A ring of fire (wide).\n8. A small gray puff of smoke."
+  },
+  {
+   "status": "draft",
+   "id": "boppy-fx-xc-ult",
+   "tab": "Characters",
+   "group": "Boppy",
+   "title": "Boppy objects and effects: Van Cortlandt Park '70 (8 items; attaches the approved Van Cortlandt Park '70 sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/boppy-ab-xc-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Van Cortlandt Park '70.\n\nItems:\n1. A white finish tape, stretched out (wide).\n2. A white finish tape snapped in two with frayed ends (wide).\n3. A round paper running number with the number 70.\n4. A long white speed streak (wide).\n5. A burst of dust from running feet (wide).\n6. A small film projector, seen from the front.\n7. A wide band of warm tan light, like old film (wide).\n8. A burst of golden confetti."
   },
   {
    "status": "approved",

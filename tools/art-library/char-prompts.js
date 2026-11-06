@@ -610,13 +610,113 @@ const ABILITIES = {
       'Running flat out, ears streaming back, mouth open in a joyful grin.',
       'Leaping with all four paws off the ground, ears flying, mouth open, pure joy.']],
   ],
+  boppy: [
+    ['cap_swat', 'Cap Swat', [
+      'Standing with a calm patient face, arms at his sides, looking at something small nearby.',
+      'Taking his cap off with one hand, eyes following something small flying past.',
+      'Swinging the cap in a wide flat swat, body turning, a determined squint.'], [
+      'Swinging the cap back the other way, another swat, leaning after it, eyes narrowed.',
+      'Cap held low, standing with a mild unimpressed frown, watching the air.',
+      'Putting the cap back on his head with both hands, a small satisfied nod.']],
+    ['grumble', 'GRUMBLE', [
+      'Standing with his arms folded, chin tucked, a deep sulky frown.',
+      'Shoulders hunched, head lowered, brow heavy, mouth pulled down in a long grumble.',
+      'Shaking his head slowly with his eyes shut, lips pressed tight.'], [
+      'One hand pressed to his lower back, wincing a little, scowling at nothing.',
+      'Chest puffed up, mouth open in a loud gruff complaint, one finger raised.',
+      'Arms folded again, head turned away, a stubborn huff.']],
+    ['patient_angler', 'Patient Angler', [
+      'Sitting on a folding stool holding a fishing rod across his knees, calm and relaxed.',
+      'Sitting with the rod held out in front of him, eyes on the line, perfectly still.',
+      'Leaning forward a little, eyes sharp, both hands tightening on the rod.'], [
+      'Yanking the rod back hard with both hands, mouth open, eyes wide.',
+      'Standing and leaning far back with the rod bent, boots planted wide, a huge grin.',
+      'Reeling in steadily with one hand on the reel, a proud easy smile.']],
+    ['recliner_reservation', 'Recliner Reservation', [
+      'Standing with his hands on his hips, looking down at a patch of floor, deciding.',
+      'Pointing downward with one arm straight, a firm nod.',
+      'Both hands out wide as if presenting something, proud.'], [
+      'Giving a thumbs up with a warm smile.',
+      'Arms folded, standing guard, a stern protective look.',
+      'Patting the air gently with one open palm, a soft kind smile.']],
+    ['headcount_again', 'Headcount, Again', [
+      'Standing with one finger raised, lips moving, eyes sweeping across the room.',
+      'Pointing a finger ahead and counting with his mouth open on a number.',
+      'Pointing again with a slightly puzzled frown, head tilted.'], [
+      'Pointing a finger at his own chest, eyes wide, realizing.',
+      'Drawing a big cross in the air with one finger, an embarrassed grin.',
+      'Giving a friendly nod with a relaxed smile, a satisfied thumb up.']],
+    ['lockdown', 'Lockdown', [
+      'Standing tall in a serious posture, a big ring of keys hanging from his belt, stern.',
+      'Pointing one arm straight ahead, a hard deputy stare.',
+      'Slamming one fist down in front of him, jaw set.'], [
+      'Holding the big key ring up high in one hand, jangling it, a slow smug look.',
+      'Turning a key in front of him with a slow twist of the wrist, eyes narrowed.',
+      'Arms folded with the key ring in one hand, a satisfied nod.']],
+    ['everybody_waits', 'Everybody Waits', [
+      'Standing and holding a tiny ticket dispenser in one hand, a very serious face.',
+      'Pulling a long paper ticket from the dispenser with two fingers, eyes on it.',
+      'Holding the ticket high above his head, a long strip of paper hanging from his hand.'], [
+      'Holding one palm out flat like a stop sign, an official stern face.',
+      'Sweeping one arm wide as if ushering a crowd behind him, kind eyes.',
+      'Standing tall with the ticket in one hand and arms crossed, protective.']],
+    ['fish_ult', 'The One That Got Away', [
+      'Standing on a wooden pier holding a fishing rod, a boot planted firm, calm.',
+      'Leaning back with both hands gripping the rod, rod bent hard, teeth clenched.',
+      'Hauling the rod up high with one huge yank, face red with effort.'], [
+      'Holding a whiskered catfish up in both hands, a proud grin.',
+      'Spreading his hands wide apart to show the size, boasting, eyebrows high.',
+      'Spreading his arms as far as they go, mouth open in a hearty laugh, head thrown back.']],
+    ['pepper_breath', 'Pepper Breath', [
+      'Standing and holding up one small red cayenne pepper between two fingers, a proud smile.',
+      'Biting the pepper with a loud crunch, chewing, eyes wide.',
+      'Face turning bright red, eyes watering, mouth shut tight.'], [
+      'Mouth wide open, head thrown back, face glowing red, a big gasp.',
+      'Leaning forward with his mouth open in a roar, a fierce red face.',
+      'One hand rubbing his stomach, an oh-no look, face still red.']],
+    ['seeds_of_trouble', 'Seeds of Trouble', [
+      'Holding up a small paper seed packet with a handwritten label in front of him, a proud grin.',
+      'Tapping the packet with one finger, eyes on it, a sly smile.',
+      'Shaking the packet hard over his open palm, one eye shut.'], [
+      'Flicking seeds forward with a snap of his wrist, eyes narrowed.',
+      'Tipping the packet toward the ground, one last seed falling, a keen look.',
+      'Slipping the packet carefully into his shirt pocket, a satisfied nod.']],
+    ['mild_for_company', 'Mild for Company', [
+      'Holding a steaming pot with both hands, a hopeful smile.',
+      'Holding the pot in one hand and turning a handwritten label around with the other, careful and proud.',
+      'Holding up a small spoon and peering at it like a safety inspector, one eyebrow raised.'], [
+      'Tasting a small spoonful with his eyes closed, thinking.',
+      'Opening his eyes wide with relief, a big warm smile.',
+      'Holding the pot out kindly with both hands, a gentle nod.']],
+    ['nineteen_seventy', 'In Nineteen Seventy', [
+      'Sitting in a comfortable chair with his legs crossed, getting settled, a warm storyteller smile.',
+      'Raising one finger, mouth open to begin, eyes lit up.',
+      'Raising a second finger, leaning forward, an important face.'], [
+      'Eyes closed, one hand pressed to his chest, remembering fondly.',
+      'Gesturing wide with one open hand, mid-story, laughing.',
+      'Leaning back, hands folded on his stomach, a content smile.']],
+    ['five_alarm_jar', 'Five-Alarm Jar', [
+      'Holding a large glass jar of dark pickled peppers in both hands, proud.',
+      'Twisting the lid with all his strength, teeth gritted, face scrunched.',
+      'Popping the jar open, head jerking back, eyes wide.'], [
+      'Raising one pepper to his mouth, a brave eager look.',
+      'Mouth wide open, eyes bulging, sweat on his forehead, face red.',
+      'Bracing with his shoulders up and fists clenched, sweating, eyes squeezed shut.']],
+    ['xc_ult', "Van Cortlandt Park '70", [
+      'Standing at a starting line in a young runner pose, a running number pinned to his shirt, eyes ahead, focused.',
+      'Crouched low at the line, one hand forward, a hungry look.',
+      'Sprinting flat out, arms pumping, hair streaming back.'], [
+      'Running hard with his chest forward, mouth open, determined.',
+      'Leaping a low hurdle in stride, both arms swinging, a fierce grin.',
+      'Breaking through a finish tape with his chest, arms flung wide, head thrown back, joyful.']],
+  ],
 };
 
 // Pronoun in the shared header's last line (Tom's entries keep "he").
 const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she', nara: 'she' };
 // Nara is a dog: no hands, no clothes (appended to her sheets only).
 const DOGNOTE = { nara: 'The character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.' };
-const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara' };
+const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara', boppy: 'Boppy' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
@@ -1329,6 +1429,119 @@ const FX = {
       'A big warm golden glow (wide).',
       'A shower of golden sparkles.',
       'A burst of paw prints running in a line (wide).'],
+  },
+  boppy: {
+    cap_swat: [
+      'A small buzzing mosquito, seen from the side.',
+      'A curved white swoosh, the path of a cap swat (wide).',
+      'A small puff of dust.',
+      'A small burst of impact stars.',
+      'A tiny white speed streak (wide).'],
+    grumble: [
+      'A small dark storm cloud with a frown.',
+      'A jagged crimson burst, an angry scribble (wide).',
+      'A ring of soft golden light, a protective shield.',
+      'Three short curved wavy lines of sound.',
+      'A small steaming puff of air.',
+      'The word HMPH in rough blocky cream lettering with a dark outline (wide).'],
+    patient_angler: [
+      'A red and white fishing float, seen from the front.',
+      'A fishing line with a small silver hook, curling (wide).',
+      'A big round splash of water, crown shaped.',
+      'A ring of ripples on water (wide).',
+      'A small silver fish leaping.',
+      'A shower of water droplets.'],
+    recliner_reservation: [
+      'A big plush brown recliner armchair, seen from the front, with a folded blanket on the arm.',
+      'A small round striped cushion.',
+      'A cloud of cozy dust puffs (wide).',
+      'A ring of soft golden light (wide).',
+      'A small golden heart.',
+      'A burst of warm sparkles.'],
+    headcount_again: [
+      'A round white number badge showing the number 1.',
+      'A round white number badge showing the number 2.',
+      'A round white number badge showing the number 3.',
+      'A round white number badge showing the number 4.',
+      'A big red hand drawn cross, X shaped, painted like marker.',
+      'A small checkmark in green marker.',
+      'A small burst of tiny stars.'],
+    lockdown: [
+      'A tall set of black iron cell bars with a crossbar at top and bottom.',
+      'A big ring of old iron keys, seen from the front.',
+      'A single large iron key, seen from the front.',
+      'A burst of gray dust at the base of the bars (wide).',
+      'A small burst of metal sparks.',
+      'A white impact star.',
+      'A small shiny lock, closed.'],
+    everybody_waits: [
+      'A small red ticket dispenser, seen from the front.',
+      'A long paper ticket curling down, blank.',
+      'A long paper ticket curling, with large lettering reading FAMILY FIRST.',
+      'A small ticket stub with a torn edge.',
+      'A tall translucent golden shield wall (wide).',
+      'A ring of soft golden light (wide).',
+      'A burst of warm sparkles.'],
+    fish_ult: [
+      'A whiskered catfish of ordinary size, seen from the side, wide mouth.',
+      'The same catfish drawn much bigger, still seen from the side (wide).',
+      'The same catfish drawn enormous, seen from below, its belly filling the cell (wide).',
+      'A big crown shaped splash of water.',
+      'A wide ring of ripples on water (wide).',
+      'A shower of water droplets.',
+      'A small wooden pier post with rope.',
+      'A burst of golden sparkles.'],
+    pepper_breath: [
+      'A small red cayenne pepper with a green stem.',
+      'A cone of pepper fire shaped like a wide triangle, orange and red (wide).',
+      'A puff of white steam, shaped like a cloud.',
+      'A small burst of fire sparks.',
+      'A small bright flame.',
+      'A shower of red embers.',
+      'A small gray stomach rumble swirl.'],
+    seeds_of_trouble: [
+      'A small paper seed packet with a handwritten label reading HOT, seen from the front.',
+      'A single pepper seed, large and round, pale yellow.',
+      'A flying pepper seed with a short orange fire trail (wide).',
+      'A small burst of orange sparks.',
+      'A small round burst of fire with a bright core.',
+      'A small curling puff of smoke.',
+      'The word SIZZLE in blocky orange lettering with a dark outline (wide).'],
+    mild_for_company: [
+      'A big round steel cooking pot with two handles, full of broth, seen from the front.',
+      'A small handwritten label reading HOT.',
+      'A small handwritten label reading MILD.',
+      'A small silver spoon.',
+      'A rising curl of white steam (wide).',
+      'A ring of soft golden light, healing (wide).',
+      'A small golden heart.',
+      'A burst of warm sparkles.'],
+    nineteen_seventy: [
+      'A black title card with gold border reading IN 1970.',
+      'A black title card with gold border reading INTRODUCTION.',
+      'A small wooden chair, seen from the front.',
+      'A film strip with several frames (wide).',
+      'A cloud of warm dust motes (wide).',
+      'A ring of soft golden light (wide).',
+      'A small burst of tiny stars.'],
+    five_alarm_jar: [
+      'A large glass jar of dark pickled ghost peppers with a metal lid.',
+      'A jar lid, seen from the front, metal.',
+      'A small ghostly pale green wisp shaped like a floating ghost.',
+      'A big round red alarm bell, ringing.',
+      'Three curved red lines of sound (wide).',
+      'A big burst of fire with a bright core.',
+      'A ring of fire (wide).',
+      'A small gray puff of smoke.'],
+    xc_ult: [
+      'A white finish tape, stretched out (wide).',
+      'A white finish tape snapped in two with frayed ends (wide).',
+      'A round paper running number with the number 70.',
+      'A long white speed streak (wide).',
+      'A burst of dust from running feet (wide).',
+      'A small film projector, seen from the front.',
+      'A wide band of warm tan light, like old film (wide).',
+      'A burst of golden confetti.'],
   },
 };
 for (const id of Object.keys(FX)) {
