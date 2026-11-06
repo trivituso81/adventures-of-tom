@@ -24,7 +24,7 @@
    "group": "Test card"
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -39,6 +39,13 @@
      "date": "2026-11-06",
      "from": "v5",
      "at": 1793953517463
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/tom-ab-button-mash-v3.png",
+     "date": "2026-11-06",
+     "from": "v8",
+     "at": 1794008946310
     }
    ],
    "rejects": [],
