@@ -171,7 +171,7 @@ const FLAIR = {
   twinlens: `a brass gantry with intricate gear rings, two huge glowing lens-eyes, one ice blue and one amber, with glass reflections, a red gem, dust motes and crossing light beams`,
   vance: `long wavy gray hair falling past the collar under the hat, a gaunt lined face, a long black coat with gold buttons in rich folds, a wide-brimmed hat shadowing a pale grim face, a gold pocket watch and brass ray gun, cold moonlight with a sharp rim light`,
   censor: `a long black suit with razor creases, a black redaction bar for a face with two glowing white eyes, a striped collar, a fat dripping black marker, flying stamped envelopes, noir light`,
-  leviathan: `finely engraved gold clockwork scales and gear teeth, a huge glowing clock face in the chest, giant spinning gold gears, a swirling black void with stars, dramatic golden light`,
+  leviathan: `gold clockwork scales built from chunky dabs of ochre, yellow and brown paint with thick impasto and visible stroke direction on every scale, gear teeth and a large clock face painted in bold brush strokes, big gold gears with rough painted edges, a dark painted void behind the coils, warm golden light`,
   julian: `a long black coat in soft folds, a hat, a gentle softened face, warm golden light, a gold pocket watch, a brass ray gun held loosely`,
   brainfreeze: `translucent frosted ice with deep blue refractions, a skirt of icicles, crystal fists, swirling frost mist, a blue latch, cold sparkles, dramatic cold light`,
 };

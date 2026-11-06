@@ -1,3 +1,7 @@
+## 2026-11-05 (254): Chronos Leviathan: painted-metal wording (Art Library only, no game files, no tag)
+
+Tom rejected v1 (not handbrushed enough; picture not saved). Cause (finding): "finely engraved", "glowing", "spinning" and a starry void invite a polished metal render. Flair now describes gold built from thick dabs of paint with visible stroke direction. First miss on this boss with the new boss method; if the next one misses too, STOP-LOSS: gold machines may need the NPC method.
+
 ## 2026-11-05 (253): Julian Vance: second fight derived from the first fight picture; Vance gets his old long gray hair (Art Library only, no game files, no tag)
 
 Tom: there are three different Vances. Facts: old in-game sheet (long wavy gray hair, gold watch, glowing clock attacks), new `enemy-vance-v1` (gaunt, dark hair, full figure), new `enemy-julian-v1` (young round-faced man, cut off at the waist, no boots), plus the gray-suit overworld walker `vance-walk-v1`. Fix: `enemy-julian` now takes the approved Vance picture as attachment 2 ("same man, only softer"), full figure required; `enemy-vance` flair adds long wavy gray hair and a gaunt lined face. Julian still points at enemy-vance-v1: after Vance is regenerated and approved, repoint it to the new version.
