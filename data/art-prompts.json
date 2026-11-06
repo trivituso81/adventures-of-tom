@@ -4243,8 +4243,16 @@
    "group": "Nine Scoops"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-conehead-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793927441557
+    }
+   ],
    "rejects": [],
    "id": "enemy-conehead",
    "tab": "Enemies",
