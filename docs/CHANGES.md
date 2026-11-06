@@ -1,3 +1,9 @@
+## 2026-11-06 (zoom): Arrival zoom also in the Nine Scoops opening and chapters 3, 7 and 9 (`introzoom3`)
+- Tom (10:09): do the opening zoom at the start of every chapter where Tom arrives on Long Island and greets the girls.
+- Those are: the Nine Scoops opening (same taxi scene as chapter 1; zoom in after the title card, out before the party-join), and `ch3Arrive`, `ch7Arrive`, `ch9Arrive` (Grace and Rose greet him in the Square; zoom in at the start, out at the end). Chapters 2, 4, 6, 8 are Los Angeles, chapter 5 opens with Amy, chapters 10 on open differently: unchanged.
+- Tested: ch3Arrive and ch9Arrive played in portrait (zoom in, ch3 zoom out at the end), smoke below.
+- Tags: `introzoom3`.
+
 ## 2026-11-06 (350): Opening zoom now starts right after the title card (`introzoom2`)
 - Tom (10:05): the zoom should happen right after the chapter 1 title screen, before Tom steps out of the taxi company and stretches.
 - `SCENES.opening`: the zoom-in step moved from the girls' arrival to the first step (before Tom appears); zoom-out before the party-join is unchanged. Girls still run in from the left edge of the zoomed view.

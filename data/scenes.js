@@ -701,9 +701,11 @@ const routeBeside=a=>()=>{
 // 1. Home again (after the usual welcome at the cab): Boppy wants to go fishing.
 SCENES.ch3Arrive=[
   {flag:'ch3-goal'},
+  {zoom:2,time:.9},   // camera pushes in on Tom and the girls greeting him; back out at the end
   {talk:'Grace',lines:['Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.']},
   {talk:'Rose',lines:['He said if you were late he\'d catch the fish without you. He catches one every time. It\'s always THIS big.']},
   {talk:'Tom',lines:['Then we\'d better hurry, before it gets any bigger.']},
+  {zoom:1,time:.8},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5}
 ];
 // 2. Deedee and Boppy's house: the Whisker Perch, the pepper jar. Boppy joins; Deedee stays to bake.
@@ -2348,6 +2350,7 @@ const ch7CardSteps=c=>{ const C=CH7_CARDS.find(k=>k.c===c); return [
 // 1. The Square, right after the girls' welcome: Grace's text.
 SCENES.ch7Arrive=[
   {flag:'ch7-goal'},
+  {zoom:2,time:.9},   // camera pushes in on Tom and the girls greeting him; back out at the end
   {talk:'Grace',lines:['Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after.']},
   {talk:'Tom',lines:['I got it. The library is whispering.']},
   {talk:'Grace',lines:['Not a little bit. ALL the books. At the same time. And they\'re saying THINGS.']},
@@ -2356,6 +2359,7 @@ SCENES.ch7Arrive=[
   {talk:'Grace',lines:['A book told everybody I sing in the shower. Which is PRIVATE. Also I\'m very good.',
     'Page says everything is fine. Page has said fine eleven times. I counted. Nobody says fine eleven times if it\'s fine.']},
   {trace:'grace-text'}, {hearts:'grace'},
+  {zoom:1,time:.8},
   {toast:'Goal: The Hush Library (BOOKS), at the top of the Square.',time:4.5}
 ];
 // 2. The Hush Library: Page admits it is not fine. The staff door to the Stacks.
@@ -3099,6 +3103,7 @@ const ch9MirrorSteps=c=>{ const M=CLUB_MIRRORS.find(k=>k.fight==='ch9-'+c); retu
 // 1. The Square, right after the girls' welcome: Deedee has a letter.
 SCENES.ch9Arrive=[
   {flag:'ch9-goal'},
+  {zoom:2,time:.9},   // camera pushes in on Tom and the girls greeting him; back out at the end
   {talk:'Grace',lines:['Tata. TATA. Deedee has a LETTER for you. It\'s GOLD. She won\'t let us open it.','She let us hold it. For one second. Then she took it back and said, careful, that\'s wax.']},
   {talk:'Rose',lines:['It smells like a candle. I licked it a little.']},
   {talk:'Tom',lines:['You licked my mail.']},
@@ -3106,6 +3111,7 @@ SCENES.ch9Arrive=[
   {talk:'Grace',lines:['Also the moon is gone. Look. It\'s supposed to be a full moon. Luna said so. Luna is very upset.']},
   {talk:'Tom',lines:['...There\'s no moon.','There\'s no moon, and I have a gold letter. Okay.']},
   {trace:'girls-letter'}, {hearts:'grace'},
+  {zoom:1,time:.8},
   {toast:'Goal: Deedee and Boppy’s house (RIVITUSO), on Rivituso Row, south of the Square.',time:4.5}
 ];
 // 2. The Rivituso house: the invitation. The party.

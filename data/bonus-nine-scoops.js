@@ -584,6 +584,7 @@ SCENES.nsOpening=()=>{
   for(let x=rStart+1;x<=dx-1;x++) rTiles.push([x,row+1]);
   return [
     {noGo:[9,dy+1,27,dy+3]},
+    {zoom:2,time:.9},                                // camera pushes in right after the title card; back out before the party-join
     {flag:'ns-present'}, {flag:'ns-cow'}, {flag:'ns-duck'},
     {wait:.7},
     {call:()=>sfx.doorOut()}, {show:'tom'}, {place:'tom',at:[dx,dy],dir:'down'},
@@ -627,6 +628,7 @@ SCENES.nsOpening=()=>{
     {talk:'Rose',lines:['ICE CREAM! Come on, Tata! Let’s go!']},
     {call:()=>{ snd.whee(true); const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
     {hop:'rose',from:[dx,row],to:[dx-1,row+1],time:.45,arc:14,lift:[SHOULDER,0]},
+    {zoom:1,time:.8},
     {flag:'opening-done'}, {flag:'ns-open'},
     {call:finishOpening}
   ];
