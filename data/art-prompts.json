@@ -2513,7 +2513,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tnb-ab-metro-tap",
    "tab": "Characters",
    "group": "TNB",
@@ -2525,7 +2525,16 @@
     "art/raw/characters/tnb-battle-sheet-1-v1.png",
     "art/raw/characters/tnb-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Metro Tap Card.\n\nRow 1:\n1. Patting his jacket pockets one by one, a thoughtful frown.\n2. Pulling a small plastic transit card out of one pocket, pleased, holding it up.\n3. Reaching forward, tapping the card flat against a small card reader, relaxed.\n\nRow 2:\n4. Holding one arm out, palm up, gesturing \"after you\" toward a train door, a polite smile.\n5. Leaning on a pole, one foot crossed over the other, calm commuter face.\n6. A little wave goodbye with two fingers, a mellow smile."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Metro Tap Card.\n\nRow 1:\n1. Patting his jacket pockets one by one, a thoughtful frown.\n2. Pulling a small plastic transit card out of one pocket, pleased, holding it up.\n3. Reaching forward, tapping the card flat against a small card reader, relaxed.\n\nRow 2:\n4. Holding one arm out, palm up, gesturing \"after you\" toward a train door, a polite smile.\n5. Leaning on a pole, one foot crossed over the other, calm commuter face.\n6. A little wave goodbye with two fingers, a mellow smile.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-ab-metro-tap-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793981227873
+    }
+   ]
   },
   {
    "status": "draft",
