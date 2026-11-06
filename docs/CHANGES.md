@@ -1,3 +1,6 @@
+## 2026-11-06 (378): Olivia ability install: 11 painted Art Library sheets, old move atlases purged (`oliviaab1`)
+Olivia's moves now play the approved Art Library ability sheets (66 frames in `art/chars/olivia-ab.webp`, `data/olivia-ab.js`, cut by `ability_frames_olivia.py`, baked by `bake_olivia_ab.py`). Painted props (snack pouch, chat bubbles, diaper bag, mic) come from the approved fx sheets (`bake_olivia_fx.py`). Lachlan, No! now draws Lachlan. Michael's move keeps its staging. Removed: 11 old per-move atlases and their 11 sources, the old sets loader and baker code. Tests: kit_test for all 11 moves, smoke, tag_check, unused_voice 0.
+
 ## 2026-11-06 (377): Young Boppy walk sheet from Tom; walk entry removed (Art Library only)
 
 - Fact (Tom 12:49): he made the Young Boppy walk sheet himself. Saved as `art/raw/characters/boppy-young-walk-sheet-ref-v1.png` (1247 x 1261, 3 x 3 on magenta).
