@@ -13794,8 +13794,16 @@
    "prompt": "Draw one battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character. Picture 2 is his walk sheet. Picture 3 is a battle sheet of a different character: copy only its grid layout, its viewing angle (a three-quarter view from slightly above, facing an opponent), its figure size and its feet on one ground line, never the person. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style, level of detail and head size compared to the body.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells (8 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line, each figure well inside its cell with clear magenta margin. In every frame he faces the same way as the character in picture 3. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Ready stance, feet shoulder width apart, knees slightly bent, hands loose, a cocky friendly look.\n2. The same stance a moment later, chest risen with a breath, shoulders a little higher, one hand relaxed open.\n3. Standing tall, both hands on his hips, chin lifted, a playful unimpressed look.\n4. One arm stretched toward the opponent, palm up, presenting something, a small proud smile.\n5. Body twisted away from the opponent, arm pulled back, weight on the back leg, eyes narrowed, about to spring.\n6. Lunging far forward toward the opponent, arm at full reach, front knee bent, mouth open in a shout.\n7. Feet planted, both arms flung wide, chest out, chin up, announcing something big.\n8. Crouched low, forearms crossed in front of the chest and face, chin tucked, determined.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-young-battle-sheet-2-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000691764
+    }
+   ],
    "rejects": [],
    "id": "boppy-young-battle-sheet-2",
    "tab": "Characters",
