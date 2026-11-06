@@ -2386,6 +2386,12 @@
      "note": "second image he should be pushed backwards taking damage",
      "from": "v2",
      "at": 1793923792461
+    },
+    {
+     "date": "2026-11-06",
+     "note": "1, 2, 3 are perfect but 4 needs to be a variation of 3",
+     "from": "v3",
+     "at": 1793923904941
     }
    ],
    "id": "enemy-soggysock",
