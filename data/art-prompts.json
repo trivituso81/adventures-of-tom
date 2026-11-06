@@ -14148,8 +14148,16 @@
    "prompt": "Draw a second battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character. Picture 2 is his first battle sheet: this sheet must look like it was painted at the same time, with the same viewing angle, the same figure size, the same feet ground line and the same head size compared to the body. Copy the person exactly: the same face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style and level of detail.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line (except when he is in the air), each figure well inside its cell with clear magenta margin. In every frame he faces the same way as in picture 2. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Startled flinch: body leaning back, head pulled back, eyes squeezed shut, one foot lifted off the ground.\n2. Tired: down on one knee, one hand resting on the knee, head lowered, out of breath, a weary but determined face.\n3. Napping: sitting slumped on the ground with legs stretched out in front, leaning back on one hand, head tilted, eyes closed, dizzy and sleepy.\n4. Cheering: one fist pumped high, the other hand on the hip, a big grin.\n5. Cheering: both fists overhead, laughing, up on the toes.\n6. Signature pose: arms crossed over his chest, chin up, one foot forward, a cocky champion grin, like a runner who just won.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-ab-kettlebell-swing-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793996881138
+    }
+   ],
    "rejects": [],
    "id": "amy-ab-kettlebell-swing",
    "tab": "Characters",
