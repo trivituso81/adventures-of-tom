@@ -346,21 +346,6 @@ ow_rects = pack(ow_big, os.path.join(ART, 'tom-ow.webp'))
 def mirror(rows):
     return [r[::-1] for r in rows]
 
-# ---------------------------------------------------------------- menu portrait: head of the hero pose
-hero = Image.open(os.path.join(SRC, 'tom-hero-v3.png')).convert('RGB')
-ha = np.array(hero).astype(float)
-fgm = (np.minimum(ha[:, :, 0], ha[:, :, 2]) - ha[:, :, 1]) < 120
-hys, hxs = np.where(fgm)
-htop, hh = hys.min(), hys.max() - hys.min()
-hband = fgm[htop: htop + int(hh * 0.30)]
-hcx = int(np.where(hband)[1].mean()); hs = int(hh * 0.27); hcy = htop + int(hs * 0.52)
-crop = hero.crop((hcx - hs // 2, hcy - hs // 2, hcx + hs // 2, hcy + hs // 2)).resize((128, 128), Image.LANCZOS)
-ca = np.array(crop.convert('RGBA'))
-ca[(np.minimum(ca[:, :, 0], ca[:, :, 2]).astype(int) - ca[:, :, 1]) >= 120, 3] = 0
-if os.environ.get('PORTRAIT'):   # the menu portrait is now a separate painting Tom supplied; only overwrite it when asked
-    Image.fromarray(ca, 'RGBA').save(os.path.join(ROOT, 'portraits/tom.png'))
-    print('wrote portraits/tom.png')
-
 # ---------------------------------------------------------------- garment (outfit recolour) info
 bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .27, .68)
 ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .30, .62)

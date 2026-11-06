@@ -8,8 +8,9 @@
 const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'stamps',label:'Stamps'},{id:'saves',label:'Load'},{id:'options',label:'Options'},{id:'quit',label:'Quit'}];
 // Saving happens from the SAVE button on the map HUD (openSave), which shows just the save popup.
 const PER_CHAR_TABS=['status','gear','stamps'];
-// Character portraits for the roster. Put an image path per id (e.g. tom:'portraits/tom.png?v=4'); empty shows a placeholder.
-const PORTRAITS={tom:'portraits/tom.png?v=15',ellie:'portraits/ellie.png?v=1',amy:'portraits/amy.png?v=12',justin:'portraits/justin.png?v=2',olivia:'portraits/olivia.png?v=2',grace:'portraits/grace.png?v=11',deedee:'portraits/deedee.png?v=12',boppy:'portraits/boppy.png?v=11',nara:'portraits/nara.png?v=3',boomie:'portraits/boomie.png?v=1',tnb:'portraits/tnb.png?v=12',rose:'portraits/rose.png?v=11'};
+// Character portraits (menu roster, dialogue box, battle panels, chapter select): head crops of each hero painting,
+// baked by tools/sprite-bake/bake_portraits.py (256 x 256). Boomie has no hero painting yet. Empty shows a placeholder.
+const PORTRAITS={tom:'portraits/tom.png?v=heroport1',ellie:'portraits/ellie.png?v=heroport1',amy:'portraits/amy.png?v=heroport1',justin:'portraits/justin.png?v=heroport1',olivia:'portraits/olivia.png?v=heroport1',grace:'portraits/grace.png?v=heroport1',deedee:'portraits/deedee.png?v=heroport1',boppy:'portraits/boppy.png?v=heroport1',nara:'portraits/nara.png?v=heroport1',boomie:'portraits/boomie.png?v=1',tnb:'portraits/tnb.png?v=heroport1',rose:'portraits/rose.png?v=heroport1'};
 let playTime=0;
 // Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
 const GEAR_KEYS=STAT_NAMES;

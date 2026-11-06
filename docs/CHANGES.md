@@ -1,3 +1,10 @@
+## 2026-11-05 (294): Portraits from the hero paintings (`heroport1`)
+- Tom (23:37): "use the characters hero images for their portraits".
+- New `tools/sprite-bake/bake_portraits.py`: square head-and-shoulders crop of art/raw/characters/<id>-hero-ref-v1.png, painted paper kept, 256 x 256 (was 128) into portraits/<id>.png. Chin lines set by eye per character (`CHIN`), Nara framed wider. Every adult face is framed by head height, so faces read the same size.
+- Done for Tom, TNB, Grace, Rose, Amy, Justin, Olivia, Deedee, Boppy, Aunt Ellie, Nara. Boomie has no hero painting, so his portrait is unchanged.
+- Portrait pictures no longer use pixelated scaling (menu roster, dialogue box, battle turn bar, party panel, command centre, Tombo faces, chapter select cast), so the paintings shrink smoothly.
+- Purged: the old portrait crop code in bake_tom_walk_v4.py, bake_tom.py and bake_olivia.py (old hero files, could overwrite the new portraits).
+- Tags: PORTRAITS entries and engine/menu.js to `heroport1`. Tests: tag_check ok, smoke FAILS []; screenshots of dialogue, menu and battle in portrait and landscape.
 ## 2026-11-05 (292): Aunt Ellie drawn at 5'2 (`ellie-height`)
 - Tom (23:44): "aunt ellie should be shorter than olivia" (Olivia 5'5). Call made: 5'2. `set.k=.853` in data/ellie-hires-use.js (62/71 x 42.0/43.0). She was drawn at about Tom's height before. Overworld only.
 ## 2026-11-05 (291): New walking animations for Amy, Justin, Olivia, TNB and Nara; cleaner cut for all eleven; Boppy at Deedee's height (`walksheet3`)

@@ -304,7 +304,7 @@ html.landscape .menu-foot{padding:5px 12px 6px;font-size:9px}
 .rrow:last-child{border-bottom:none}
 .rrow.empty{pointer-events:none}
 .pbox{grid-area:pic;align-self:center;position:relative;display:grid;place-items:center;width:var(--pz);height:var(--pz);border:2px solid #fff5dc;border-radius:6px;background:#385540;overflow:hidden;box-shadow:0 0 0 2px #64725a}
-.pbox img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;display:block}
+.pbox img{width:100%;height:100%;object-fit:cover;display:block}
 .pbox.ph{background:repeating-linear-gradient(135deg,#385540 0 8px,#3f5f48 8px 16px);align-content:center;gap:2px}
 .pbox.ph b{font-size:calc(var(--pz) * .38);line-height:1;color:#fff4d3}
 .pbox.ph small{font-size:7px;font-weight:800;letter-spacing:1px;color:#cfe2c3}
@@ -366,7 +366,7 @@ html.landscape .rrow{padding:3px 8px;min-height:calc(var(--pz) + 6px)}
 .sp-choice .sp-ttl{display:block;margin-top:2px;font-size:11px;font-weight:700;letter-spacing:0;line-height:1.25}
 .sp-choice.sel .sp-name .sp-ttl{padding-left:12px}
 .sp-cast{display:flex;gap:3px;margin-top:2px;min-width:0}
-.sp-cast img{flex:0 1 26px;min-width:0;width:26px;height:auto;aspect-ratio:1;border-radius:6px;border:1px solid #64725a;background:#27473d;image-rendering:pixelated;object-fit:cover}
+.sp-cast img{flex:0 1 26px;min-width:0;width:26px;height:auto;aspect-ratio:1;border-radius:6px;border:1px solid #64725a;background:#27473d;object-fit:cover}
 .sp-choice.locked .sp-ttl{font-weight:600}
 /* Landscape has little height: a chapter row becomes one line (CH n, title, portraits at the right). */
 html.landscape .sp-choices.grid .sp-choice:has(.sp-cast),html.landscape .sp-choices.grid .sp-choice:has(.sp-ttl){flex-direction:row;align-items:center;gap:8px;padding:4px 10px}
@@ -651,7 +651,7 @@ html.landscape #splash .sp-text{margin-bottom:6px;font-size:12px;line-height:1.3
 .b2-ribbon{display:flex;gap:4px;align-items:center;justify-content:center;padding:5px 8px;background:var(--w-deep);border-bottom:1px solid var(--line);min-height:44px}
 .b2-rib-lbl{font-size:9px;font-weight:800;letter-spacing:1.2px;color:var(--label);margin-right:3px}
 .b2-tk{position:relative;flex:0 0 auto;width:28px;height:28px;border-radius:4px;background:var(--raise);box-shadow:0 0 0 1px var(--edge-ink),inset 0 0 0 1px var(--edge-hi);overflow:hidden;display:grid;place-items:center;color:var(--ink);font-size:11px;font-weight:800}
-.b2-tk img{width:100%;height:100%;image-rendering:pixelated;display:block;object-fit:contain}
+.b2-tk img{width:100%;height:100%;display:block;object-fit:contain}
 .b2-tk.foe{background:#4a2f2f;box-shadow:0 0 0 1px var(--edge-ink),inset 0 0 0 1px #8a5050}
 .b2-tk.foe img{width:84%;height:84%}
 .b2-tk.now{width:34px;height:34px;box-shadow:0 0 0 2px var(--gold),0 0 0 3px var(--edge-ink)}
@@ -669,7 +669,7 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-low{flex:1;display:flex;flex-direction:column;gap:6px;min-height:0}
 .b2-party{padding:5px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 6px;align-content:start;flex:0 0 auto}
 .b2-pc{display:grid;grid-template-columns:36px minmax(0,1fr);gap:6px;align-items:center;padding:3px 5px;border-radius:4px;border:1px solid transparent}
-.b2-pc img,.b2-ph{width:36px;height:36px;image-rendering:pixelated;border-radius:3px;box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px #f1f3f733;display:grid;place-items:center;background:var(--raise)}
+.b2-pc img,.b2-ph{width:36px;height:36px;border-radius:3px;box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px #f1f3f733;display:grid;place-items:center;background:var(--raise)}
 .b2-pc.act{background:var(--sel);border-color:var(--edge)}
 .b2-pc.tgt{box-shadow:0 0 0 2px var(--good)}
 .b2-pc.ko{opacity:.5}
@@ -697,7 +697,7 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-x.up{grid-area:1/2}.b2-x.left{grid-area:2/1}.b2-x.right{grid-area:2/3}.b2-x.down{grid-area:3/2}
 .b2-x.off{opacity:.38}
 .b2-mid{grid-area:2/2;display:grid;place-items:center}
-.b2-mid img{width:78%;image-rendering:pixelated;border-radius:5px;box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px var(--gold)}
+.b2-mid img{width:78%;border-radius:5px;box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px var(--gold)}
 .b2-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .b2-list{display:grid;gap:5px}
 .b2-btn{min-width:0;border:2px solid #ffffff26;border-radius:5px;background:#ffffff0d;color:var(--ink);font:inherit;text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:7px 9px;touch-action:manipulation}
@@ -707,7 +707,7 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-btn.no{opacity:.42}
 .b2-btn.b2-tb{flex-direction:row;align-items:center;gap:9px}
 .b2-tbp{display:flex;flex:none;font-style:normal}
-.b2-tbp img,.b2-tbp .b2-ph{width:36px;height:36px;image-rendering:pixelated;border-radius:3px;background:var(--raise);box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px #ff9ac0aa}
+.b2-tbp img,.b2-tbp .b2-ph{width:36px;height:36px;border-radius:3px;background:var(--raise);box-shadow:0 0 0 1px var(--edge-ink),0 0 0 2px #ff9ac0aa}
 .b2-tbp>*+*{margin-left:-9px}
 .b2-tbt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
 html.landscape .b2-tbp img,html.landscape .b2-tbp .b2-ph{width:28px;height:28px}html.landscape .b2-btn.b2-tb{gap:7px}
@@ -1001,7 +1001,7 @@ html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-b
 /* Dialogue portraits: party members show their face beside the text (engine/overworld.js setDialogPortrait).
    64px art drawn at 4/3 so each art pixel is exactly 4 screen pixels on a 3x iPhone (3 in landscape). */
 #dialog-portrait{position:absolute;left:22px;top:26px;width:calc(64px * 4 / 3 + 4px);height:calc(64px * 4 / 3 + 4px);border:2px solid var(--edge);border-radius:4px;background:var(--w-deep);box-shadow:0 0 0 2px var(--edge-ink);overflow:hidden;pointer-events:none}
-#dialog-portrait img{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+#dialog-portrait img{display:block;width:100%;height:100%}
 #dialog.has-portrait #dialog-text,#dialog.has-portrait #dialog-choices{margin-left:calc(64px * 4 / 3 + 18px)}
 #dialog.has-portrait #dialog-text{min-height:calc(64px * 4 / 3 + 4px)}
 @media(max-width:600px){#dialog-portrait{left:18px;top:24px}}
@@ -1311,7 +1311,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/maps-la.js?v=rmmask6"></script>
 <script src="data/maps-ch12.js"></script>
 <script src="engine/la.js"></script>
-<script src="engine/menu.js?v=face8"></script>
+<script src="engine/menu.js?v=heroport1"></script>
 <script src="engine/followers.js?v=wind1"></script>
 <script src="engine/shop.js?v=justin2"></script>
 <script src="engine/audio.js?v=tab1"></script>

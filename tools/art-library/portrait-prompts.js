@@ -1,4 +1,4 @@
-// Portraits tab: the 12 menu portraits (portraits/<id>.png, 128 x 128 in the game, shown at 64 px). Each uses the current portrait as the likeness reference.
+// Portraits tab: the 12 menu portraits (portraits/<id>.png, 256 x 256 in the game, shown at 64 px). Each uses the current portrait as the likeness reference.
 const ST = 'Hand-painted storybook style grown up into rich painted detail: dense jewel-toned painted texture, fine brushwork, deep saturated colors, warm golden light from the upper left, soft warm rim light, no thick outlines. NOT pixel art, NOT retro game art.';
 const CAST = [
   ['tom', 'Tom', 'a man (the hero), dry and calm, a small half smile, gaming tee', 'height 5\'11"'],

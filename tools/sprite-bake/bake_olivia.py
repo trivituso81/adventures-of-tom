@@ -2,10 +2,9 @@
 """Bake Olivia's painted walk sheet into the game (overworld only; battle sheet comes later).
 
 Input : art/raw/characters/olivia-walk-sheet-v1.png (3 x 3: front, back, side; each stand, step A, step B; flat magenta), used as painted
-        tools/sprite-bake/src/olivia-hero-v1.png (the hero pose; the menu portrait is cut from its head)
+        tools/sprite-bake/src/olivia-hero-v1.png (the hero pose)
 Output: art/chars/olivia-ow.webp   (painted frames, 3x the size of the rows)
         data/olivia-hires.js        (rows, palette, atlas rects; do not hand-edit)
-        portraits/olivia.png        (128 x 128 head crop of the hero pose)
 Same recipe as bake_townsfolk.py (the sheet's head is already caricature size, so no head enlargement).
 
 Usage : python3 tools/sprite-bake/bake_olivia.py [--ow-h 42] [--colors 46] [--contact PATH]
@@ -123,23 +122,6 @@ if args.contact:
     for i, n in enumerate(names):
         sheet.alpha_composite(big[n], (i * w0, 0))
     sheet.save(args.contact)
-
-# menu portrait: the head of the hero pose, square crop around the face
-hero = Image.open(os.path.join(SRC, 'olivia-hero-v1.png')).convert('RGB')
-ha = np.array(hero).astype(float)
-fg = (np.minimum(ha[:, :, 0], ha[:, :, 2]) - ha[:, :, 1]) < 120
-ys, xs = np.where(fg)
-top, h = ys.min(), ys.max() - ys.min()
-band = fg[top: top + int(h * 0.30)]
-cx = int(np.where(band)[1].mean()); s = int(h * 0.30)
-cy = top + s // 2
-crop = hero.crop((cx - s // 2, cy - s // 2, cx + s // 2, cy + s // 2)).resize((128, 128), Image.LANCZOS)
-ca = np.array(crop.convert('RGBA'))
-mag = (np.minimum(ca[:, :, 0], ca[:, :, 2]).astype(int) - ca[:, :, 1]) >= 120
-ca[mag, 3] = 0
-if os.environ.get('PORTRAIT'):   # the portrait is a separate painting since face8; only overwrite when asked
-    Image.fromarray(ca, 'RGBA').save(os.path.join(ROOT, 'portraits/olivia.png'))
-    print('wrote portraits/olivia.png')
 
 js = ["'use strict';",
       "// data/olivia-hires.js: Olivia from her painted walk sheet (Oct 2026).",
