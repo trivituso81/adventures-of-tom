@@ -1,3 +1,9 @@
+## 2026-11-05 (275): Art Library: Square v7 fix card (`sqfix1`)
+- Tom 19:31: approved Square v7 has tall enough exit boards, but Hush Library has no door and Kettle Cottage has two signs (same two flaws as the v6 reject note). Reject notes never reach the generator, and the prompt never asked for a library door.
+- New entry `area-square-fix` (Areas, The Square, 4:3): attaches approved `art/raw/areas/area-square-v7.png` and asks for only two edits (arched front door with steps on Hush Library; remove the oval facade plaque on Kettle Cottage, keep the hanging teapot sign).
+- `area-square` full prompt: library door added to building 2, Kettle sign line now says exactly one sign and no facade plaque; shape set to 4:3.
+- v7 is NOT installed (live Square is still v3, `square5`). Install the fix after Tom approves it.
+
 ## 2026-11-05 (274): Battle idle: feet stay on the ground, shadow under the feet, breath is a tiny stretch (`idle2`)
 - Tom (19:24, desktop): `idle1` made characters look like they float above their shadows and the bounce was still too much. Cause: `idle1` lifted the figure 1 canvas unit (2 px or more on screen) off a fixed shadow, and the shadow was centred on the frame middle, 3 units below the feet.
 - Party (`engine/battle-draw.js`) and enemies (`engine/battle2-ui.js`): no vertical movement at idle. The idle breath is now a 0.8 percent height stretch anchored at the feet (about 1 px of height change at the head), slow. New `feetOf(rows)` finds where a frame's feet are so the shadow sits under them (shifted and sized to the feet, 1 unit up into the feet). Moves, hops and lunges unchanged.
