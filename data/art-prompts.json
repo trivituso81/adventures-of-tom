@@ -3734,8 +3734,16 @@
    "group": "Terminal Infinity"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-gridlockprime-v1.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793927073901
+    }
+   ],
    "rejects": [],
    "id": "enemy-gridlockprime",
    "tab": "Enemies",
