@@ -14002,8 +14002,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Hot Lunch Tray.\n\nRow 1:\n1. Standing with a blue cafeteria tray held in both hands at waist height, a steaming bowl of soup on it, a careful focused look.\n2. Stepping forward holding the tray perfectly level, eyes on the bowl.\n3. Bending slightly and offering the tray forward with both arms, a gentle smile.\n\nRow 2:\n4. Holding the tray in one hand and straightening the spoon on it with the other, a nurturing look.\n5. Holding the tray out, head tilted, mouth a little open as if saying eat up, kind eyes.\n6. Standing tall with the tray held at her side, a proud warm smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-hot-lunch-tray-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000283149
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-hot-lunch-tray",
    "tab": "Characters",
