@@ -546,43 +546,55 @@ function splashScene(W,H,panelH,time) {
 // Painted welcome art (Tom, 2026-10-29): the family stands on the plaza in art/welcome.webp (portrait) and art/welcome-land.webp (landscape).
 // Welcome cast layout (Tom 2026-11-06): the family is laid out in screen space, not picture space, so every figure keeps its real
 // proportion to the others and the group fills the screen the same way on an iPad in landscape and an iPhone in portrait.
-// Spots below are design units (h = sprite height). SPLASH_FIT sx (per orientation) pulls them together sideways,
-// sy squeezes the depth rows. The group is scaled to fracW of the screen width, but never taller than fracH of the height.
-const SPLASH_FIT={cx:520,feet0:1222,sy:.7,tall:331,
-  port:{sx:.82,span:760,fracW:.96,fracH:.30,feetY:.66},land:{sx:.92,span:860,fracW:.70,fracH:.42,feetY:.79}};
 const SPLASH_BREATH=.012;   // same slow breath as the battle idle (engine/battle2-ui.js), a touch larger because the figures are drawn smaller here
-// Heights are in design units: real heights, Justin 6'4" = 330 (Tom 5'11" 308, TNB 5'10" 304, Boppy 5'7" 291, Amy and Deedee 5'5" 282), kids follow Grace and Rose.
-// Tom 2026-11-06: Tom and Rose each stand on their own (no Rose on the shoulders here). Nara is a 40 lb labradoodle: drawn at her overworld size next to the kids
-// (stand rows Nara 31, Rose 35, Grace 39), so about .73 of Rose (overworld sizing .89 read too big here). Later in the list draws on top.
+// Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
+// Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130). TNB 331: his big hair sits on top, reaching Justin's.
+const SPLASH_H={tom:308,tnb:331,justin:330,boppy:291,amy:282,deedee:282,grace:222,rose:178,nara:130};
+// Landscape (iPad): one spread-out line in design units (x, feet). Later in the list draws on top.
+const SPLASH_LAND={cx:520,feet0:1222,sx:.92,sy:.7,span:860,tall:331,fracW:.70,fracH:.42,feetY:.79};
 const SPLASH_SPOTS=[
-  {id:'justin',x:740,feet:1150,h:330},   // stands just behind Amy and Deedee
-  {id:'tnb',x:150,feet:1198,h:331},   // h 331: his big hair sits on top, the top of his hair reaches Justin's
-  {id:'boppy',x:890,feet:1222,h:284},
-  {id:'grace',x:510,feet:1215,h:230},
-  {id:'tom',x:290,feet:1222,h:308},
-  {id:'rose',x:400,feet:1204,h:205},
-  {id:'amy',x:680,feet:1222,h:282},
-  {id:'deedee',x:790,feet:1258,h:278},
-  {id:'nara',x:595,feet:1262,h:150}   // front, between Grace and Amy
+  {id:'justin',x:740,feet:1150},{id:'tnb',x:150,feet:1198},{id:'boppy',x:890,feet:1222},{id:'grace',x:510,feet:1215},
+  {id:'tom',x:290,feet:1222},{id:'rose',x:400,feet:1204},{id:'amy',x:680,feet:1222},{id:'deedee',x:790,feet:1258},{id:'nara',x:595,feet:1262}
 ];
+// Portrait (iPhone tuning, Tom 2026-11-06): two rows. Front, left to right: Nara, TNB, Tom, Rose, Grace. Back row stands in the gaps behind them:
+// Deedee between TNB and Tom, Boppy between Tom and Rose (so Tom is flanked by his parents), Amy between Rose and Grace, Justin just past Grace.
+// SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
+// back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
+const SPLASH_W={tom:.33,tnb:.37,justin:.37,boppy:.37,amy:.33,deedee:.33,grace:.40,rose:.36,nara:.56};
+const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,depth:90,fracW:.97,fracH:.40,feetY:.72};
+function splashPortLayout(w,h) {
+  const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
+  let x=0,pw=0;
+  const front=P.front.map((id,i)=>{ const ww=wid(id); if(i) x+=(pw/2+ww/2)*P.gap; pw=ww; return {id,x,ww}; });
+  const at=i=>front[i].x,mid=(i,j)=>(at(i)+at(j))/2,last=front[front.length-1];
+  const bx=[mid(1,2),mid(2,3),mid(3,4),last.x+(last.ww/2+wid(P.back[3])/2)*.3];
+  const back=P.back.map((id,i)=>({id,x:bx[i],ww:wid(id)}));
+  const all=front.concat(back),lo=Math.min(...all.map(f=>f.x-f.ww/2)),hi=Math.max(...all.map(f=>f.x+f.ww/2));
+  const tall=Math.max(...P.front.concat(P.back).map(i=>SPLASH_H[i]));
+  const sc=Math.min(w*P.fracW/(hi-lo),h*P.fracH/(tall+P.depth)),mc=(lo+hi)/2,feet=h*P.feetY;
+  const put=(f,fy)=>({id:f.id,cx:w/2+(f.x-mc)*sc,feet:fy,hh:SPLASH_H[f.id]*sc});
+  return back.map(f=>put(f,feet-P.depth*sc)).concat(front.map(f=>put(f,feet)));
+}
+function splashLandLayout(w,h) {
+  const L=SPLASH_LAND,sc=Math.min(w*L.fracW/L.span,h*L.fracH/L.tall),baseY=h*L.feetY;
+  return SPLASH_SPOTS.map(m=>({id:m.id,cx:w/2+(m.x-L.cx)*L.sx*sc,feet:baseY+(m.feet-L.feet0)*L.sy*sc,hh:SPLASH_H[m.id]*sc}));
+}
 function splashCastDraw(time) {
   const c=splash.c,box=$('splash'); if(!c||!box) return;
   const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
   if(c.width!==w||c.height!==h) { c.width=w; c.height=h; }
   const g=splash.g; g.clearRect(0,0,w,h);
-  const F=SPLASH_FIT,L=w>h?F.land:F.port;
-  const sc=Math.min(w*L.fracW/L.span,h*L.fracH/F.tall),baseY=h*L.feetY;
+  const items=w>h?splashLandLayout(w,h):splashPortLayout(w,h);
   const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
   try {
-    for(const m of SPLASH_SPOTS) {
-      const set=OW[m.id]; if(!set||!set.down) continue;
-      const cx=w/2+(m.x-F.cx)*L.sx*sc,feet=baseY+(m.feet-F.feet0)*F.sy*sc;
-      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.h*sc/fh;
-      const br=1+(.5+.5*Math.sin(time*1.7+SPLASH_SPOTS.indexOf(m)*1.7))*SPLASH_BREATH;   // slow breath from the feet, like the battle idle
+    items.forEach((m,i)=>{
+      const set=OW[m.id]; if(!set||!set.down) return;
+      const fr=set.down[0],fh=fr.length,fw=fr[0].length,k=m.hh/fh,cx=m.cx,feet=m.feet;
+      const br=1+(.5+.5*Math.sin(time*1.7+i*1.7))*SPLASH_BREATH;   // slow breath from the feet, like the battle idle
       g.save(); g.translate(cx,feet); g.scale(1,br); g.translate(-cx,-feet);
       drawSprite(fr,set.pal,Math.round(cx-fw*k/2),Math.round(feet-fh*k),k);
       g.restore();
-    }
+    });
   } finally { gfx=prev; }
 }
 
