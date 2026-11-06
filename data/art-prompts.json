@@ -276,7 +276,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Boarding Group Zero.\n\nRow 1:\n1. Tapping a phone held up in one hand, chin raised, proud.\n2. One arm swept out wide and low, palm open, welcoming someone forward, a grand smile.\n3. Standing relaxed, a sleep mask pushed up on his forehead, arms stretched overhead.\n\nRow 2:\n4. Lying back almost flat, propped on one elbow, the sleep mask over his eyes, blissful.\n5. One arm pointing straight forward, the other fist on the hip, a bold look.\n6. Holding out a rolled white towel with silver tongs in one hand, a gracious smile."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -284,6 +284,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793952942675
+    },
+    {
+     "n": 1,
+     "file": "art/raw/characters/tom-ab-flashcard-flurry-v2.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1794009198180
     }
    ],
    "rejects": [],
