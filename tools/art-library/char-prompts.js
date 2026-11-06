@@ -510,11 +510,113 @@ const ABILITIES = {
       'Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.',
       'Standing on the board coasting, both arms stretched wide, an enormous grin.']],
   ],
+  nara: [
+    ['jump_up', 'Jump Up', [
+      'Standing on four paws, ears perked, tail up, staring ahead with wide happy eyes.',
+      'Rearing up on her hind legs, both front paws lifted forward, mouth open in a big grin.',
+      'At the top of the jump, front paws reaching out, ears flying, tongue out.'], [
+      'Dropping back down, front paws about to touch the ground, ears bouncing.',
+      'Standing on four paws, tail wagging hard, an innocent head tilt.',
+      'Sitting with her tongue out and her tail swept behind her, not sorry at all.']],
+    ['puppy_eyes', 'PUPPY DOG EYES', [
+      'Sitting, head tilted to one side, big shining round eyes looking up.',
+      'Sitting, head lowered, eyes looking up, the eyes enormous and watery with light.',
+      'Sitting, one front paw lifted a little, eyes huge and pleading.'], [
+      'Head tilted to the other side, ears drooping, eyes shining.',
+      'Chin resting low, eyes looking up, a tiny whimper face.',
+      'Sitting up tall again, eyes sparkling, ears perked, hopeful.']],
+    ['tennis_ball_fetch', 'Tennis Ball Fetch', [
+      'Sitting very still, eyes locked on something up high, ears perked, mouth closed.',
+      'Crouched low on her front legs with her rear in the air, eyes wide, ready to spring.',
+      'Running flat out, ears streaming back, all four paws off the ground.'], [
+      'Leaping and catching a yellow tennis ball in her mouth, eyes bright.',
+      'Trotting proudly with the tennis ball held in her mouth, head high.',
+      'Sitting with the tennis ball in her mouth, tail wagging, very proud.']],
+    ['dont_leave_me', "Don't Leave Me!", [
+      'Sitting alone, ears up, looking off to the side, a worried little frown.',
+      'Standing frozen with wide eyes, ears pinned back, mouth open in a shocked bark.',
+      'Running in a frantic tight circle, ears flapping, tail up.'], [
+      'Skidding to a stop, front paws braced, mouth open.',
+      'Spinning in place with her head turned back, eyes huge.',
+      'Bounding forward with a huge happy grin, tail a blur, ears flying.']],
+    ['just_one_bite', 'Just One Bite?', [
+      'Sitting very politely, back straight, eyes fixed on something just below the frame.',
+      'Sitting, a little drool hanging from her lip, eyes wide and hopeful.',
+      'Sitting with her head tilted far to one side, eyes soft.'], [
+      'Sitting with one front paw tapping the ground, eyes wide.',
+      'Licking her nose with her tongue, eyes still locked forward.',
+      'Sitting, mouth open in a hopeful smile, tail sweeping the floor.']],
+    ['counter_surfer', 'Counter Surfer', [
+      'Standing and looking up at something high above, ears perked, eyes sneaky.',
+      'Tiptoeing forward with one paw lifted high, head low, a guilty sideways glance.',
+      'Standing on her hind legs with both front paws up on a high ledge, stretching, eyes wide.'], [
+      'Stretched very long, her nose reaching up as far as it can, tongue out.',
+      'Dropping down with a small wrapped sandwich in her mouth, eyes wide.',
+      'Running away fast with the sandwich in her mouth, ears streaming back, tail high.']],
+    ['stranger_alert', 'Stranger Alert', [
+      'Sitting very still, ears fully up, eyes locked straight ahead, serious.',
+      'Standing stiff, hackles raised along her back, ears forward, mouth closed, a low growl face.',
+      'Standing with her chest forward, mouth wide open in a big bark, ears up.'], [
+      'Mid-bark, head thrown forward, front paws planted wide.',
+      'Mid-bark, head thrown back, eyes squeezed, tail stiff.',
+      'Standing proud with her chest out, mouth shut, a satisfied look.']],
+    ['squirrel_ult', 'CHAIRMAN CHEEKS!', [
+      'Standing on patrol, head high, ears relaxed, sniffing the air calmly.',
+      'Ears snapping up, eyes narrowed in outrage, a deep frown, nose pointed ahead.',
+      'Crouched low, every muscle tense, eyes burning, lips curled in a determined scowl.'], [
+      'Launching forward at full speed, ears flat back, mouth open.',
+      'Skidding around a turn at full speed, ears flying, eyes fixed ahead.',
+      'Standing at the foot of a tree, both front paws up on the trunk, head thrown back, barking up.']],
+    ['doodle_fluff', 'Doodle Fluff', [
+      'Standing with her whole curly coat fluffed up, shaking, ears flying out sideways.',
+      'Standing relaxed, the curly coat puffed out into a big cloud shape, a happy look.',
+      'Starting to lower herself, front legs bent, a sleepy smile.'], [
+      'Flopped on her side, legs stretched out, ears spread flat, eyes half closed.',
+      'Lying on her side like a warm blanket, her coat spread out round her, eyes closed.',
+      'Lying curled and relaxed with her chin up, a peaceful smile.']],
+    ['shake_everyone', 'Shake It Off, Everyone', [
+      'Standing with her coat damp and slightly flat, a cheerful look, tail low.',
+      'Standing, one shoulder twitching, her head turned a little as if about to shake.',
+      'Standing, her whole body twisted hard to one side, ears flying out.'], [
+      'Standing, her whole body twisted hard the other way, ears flying out, eyes squeezed shut.',
+      'Her coat fluffed out wide and blurred with motion, mouth open.',
+      'Standing still after the shake, her coat puffed up wild, a very pleased face.']],
+    ['not_leaving', 'Not Leaving', [
+      'Running forward, ears back, a worried but determined face.',
+      'Skidding to a stop with both front paws planted wide, looking down, eyes soft.',
+      'Nudging forward with her nose lowered, a gentle worried look.'], [
+      'Nudging again with her nose lowered, ears drooping.',
+      'Leaning her whole body sideways, eyes closed, ears down.',
+      'Sitting very close, her head lifted, steady loving eyes looking down.']],
+    ['happy_puddle', 'Happy Puddle', [
+      'Standing with her whole body wiggling, mouth open in a huge grin, ears bouncing.',
+      'Bouncing on her front paws, bottom in the air, tail wagging wildly.',
+      'Spinning in a little circle, ears flying, tongue out.'], [
+      'Squatting low, eyes wide and surprised, ears up, a sheepish smile.',
+      'Standing and looking down behind her, a puzzled face, one ear flopped.',
+      'Sitting up with a happy sheepish grin, tail swishing, head tilted.']],
+    ['food_inspector', 'Family Food Inspector', [
+      'Standing and sniffing low, nose pointed down, ears hanging forward.',
+      'Sniffing and turning her nose up high, eyes half closed, a snooty look.',
+      'Turning her head away from the food, chin high, ears back, unimpressed.'], [
+      'Sniffing low again, a surprised look, eyes wide.',
+      'Lifting one front paw and placing it proudly forward, a satisfied nod.',
+      'Sitting up with a wide happy open-mouth smile, tail wagging.']],
+    ['pack_ult', 'The Unsent Scent', [
+      'Standing alone, head low, ears drooping, a lost and quiet look.',
+      'Head lifted, eyes wide in surprise, nose high, sniffing the air.',
+      'Sniffing the ground with her nose low, ears perked, tail starting to wag.'], [
+      'Lifting her head with sudden joy, eyes bright, tail up high.',
+      'Running flat out, ears streaming back, mouth open in a joyful grin.',
+      'Leaping with all four paws off the ground, ears flying, mouth open, pure joy.']],
+  ],
 };
 
 // Pronoun in the shared header's last line (Tom's entries keep "he").
-const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she' };
-const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB' };
+const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she', nara: 'she' };
+// Nara is a dog: no hands, no clothes (appended to her sheets only).
+const DOGNOTE = { nara: 'The character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.' };
+const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
@@ -522,7 +624,7 @@ for (const id of Object.keys(ABILITIES)) {
   for (const [key, name, r1, r2] of ABILITIES[id]) {
     const n = (a, o) => a.map((t, i) => (i + 1 + o) + '. ' + t).join('\n');
     entries.push({ id: id + '-ab-' + key.replace(/_/g, '-'), tab: 'Characters', group: who, title: who + ' ability: ' + name + ' (6 frames; needs your two battle sheets)', ar: '3:2', refs: [hero, walk, b1, b2],
-      prompt: P('char-ability-sheet.txt').replace('unless a frame says he looks', 'unless a frame says ' + (PRONOUN[id] || 'he') + ' looks') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
+      prompt: P('char-ability-sheet.txt').replace('unless a frame says he looks', 'unless a frame says ' + (PRONOUN[id] || 'he') + ' looks') + (DOGNOTE[id] ? '\n\n' + DOGNOTE[id] : '') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
   }
 }
 // Objects and effects sheets (Tom 2026-11-06 00:17; Grace, Rose, Deedee 00:34): one 4 x 3 sheet per ability with every object and effect the move needs,
@@ -1118,6 +1220,115 @@ const FX = {
       'A burst of flying clay shards.',
       'A big impact burst, yellow and white.',
       'A small clay mug, crooked, in flight.'],
+  },
+  nara: {
+    jump_up: [
+      'A small cluster of paw prints.',
+      'A curved white swoosh, the path of a bouncing jump (wide).',
+      'A small burst of happy sparkles.',
+      'A small puff of dust.',
+      'A tiny red heart.'],
+    puppy_eyes: [
+      'A glowing ring of soft golden light.',
+      'A big shining round sparkle, like light in an eye.',
+      'A cluster of five small golden hearts of different sizes.',
+      'A soft warm golden glow (wide).',
+      'A burst of tiny twinkling stars.',
+      'A small teardrop of light.'],
+    tennis_ball_fetch: [
+      'A yellow tennis ball, seen from the front.',
+      'The same tennis ball tilted, as if spinning through the air.',
+      'A curved white swoosh, the path of a thrown ball (wide).',
+      'Cream colored speed streaks (wide).',
+      'A small puff of dust.',
+      'A small starburst of cheer.',
+      'A small drool-wet tennis ball with a shine on it.'],
+    dont_leave_me: [
+      'A small cluster of dark worry lines.',
+      'A small jagged alarm burst, white and yellow.',
+      'A swirl of loose motion circles (wide).',
+      'A scatter of tipped-over soft toys in a small pile (wide).',
+      'A small puff of dust.',
+      'A cluster of small happy hearts.',
+      'A small sparkle burst.'],
+    just_one_bite: [
+      'A plain sandwich on a small plate, with lettuce and tomato showing.',
+      'A single big drop of drool.',
+      'A small drool puddle on the floor (wide).',
+      'A small cluster of floating hearts.',
+      'A small hopeful sparkle.',
+      'A small round speech bubble, empty.'],
+    counter_surfer: [
+      'A wooden kitchen counter edge with a small cutting board on top (wide).',
+      'A wrapped sandwich in white paper.',
+      'The same sandwich wrapper torn open with a bite out of it.',
+      'A speed streak (wide).',
+      'A small puff of dust.',
+      'A few crumbs.',
+      'A small round speech bubble with three dots.'],
+    stranger_alert: [
+      'A window with a pale curtain and a pale blue sky (wide).',
+      'A big jagged bark burst, white and yellow.',
+      'A set of curved bark sound arcs (wide).',
+      'A small exclamation mark, red.',
+      'A small alarm star burst.',
+      'A soft pale blue shield glow.'],
+    squirrel_ult: [
+      'A tiny top hat, black with a red band.',
+      'A tiny round gold monocle on a chain.',
+      'A small plump grey squirrel in the air, in a top hat and a monocle, tail curled, grinning.',
+      'A big old oak tree trunk with a branch on one side (tall).',
+      'A pile of autumn leaves and acorns.',
+      'A yellow tennis ball.',
+      'A small wooden park bench (wide).',
+      'A big dust cloud, solid and puffy (wide).',
+      'A big jagged bark burst, yellow and white.',
+      'Cream colored speed streaks (wide).'],
+    doodle_fluff: [
+      'A big soft puffy cloud shape, curly and cream colored (wide).',
+      'A small cluster of floating curly tufts of fur.',
+      'A soft warm golden glow (wide).',
+      'A cluster of small sparkles.',
+      'A few small Z letters for sleep.',
+      'A big plump heart, soft pink.'],
+    shake_everyone: [
+      'A big spray of water drops flying outward in a wide fan (wide).',
+      'A cluster of large round water drops of different sizes.',
+      'A circle of curved motion lines (wide).',
+      'A small splash puddle (wide).',
+      'A small rainbow arc.',
+      'A small starburst of cheer.'],
+    not_leaving: [
+      'A big soft golden glow (wide).',
+      'A cluster of small golden hearts.',
+      'A warm soft heart ring, golden.',
+      'A small paw print.',
+      'A burst of gentle sparkles.',
+      'A small curl of warm light.'],
+    happy_puddle: [
+      'A flat puddle of water, wide and glossy (wide).',
+      'The same puddle, a little smaller, with a few ripples.',
+      'A few drops of water.',
+      'A small wet paw print.',
+      'A small round speech bubble with a blush mark inside.',
+      'A burst of cheerful sparkles.'],
+    food_inspector: [
+      'A fancy silver dish cover on a round white plate.',
+      'A simple homely covered dish with a checked cloth over it, labeled HOMEMADE in neat hand-painted letters.',
+      'The same homemade dish with the cloth lifted, a warm pie inside.',
+      'A big golden gold-star badge with a ribbon.',
+      'A small wavy line of steam.',
+      'A small round gray frown cloud.',
+      'A cluster of sparkles.'],
+    pack_ult: [
+      'A big soft grey vignette frame, grey fading to clear in the middle (wide).',
+      'A single golden bread crumb with a small shine.',
+      'A curling trail of golden scent, smoke-like but solid (wide).',
+      'A small golden round loaf of sourdough with a scored top.',
+      'A small plump heart, golden.',
+      'A big warm golden glow (wide).',
+      'A shower of golden sparkles.',
+      'A burst of paw prints running in a line (wide).'],
   },
 };
 for (const id of Object.keys(FX)) {

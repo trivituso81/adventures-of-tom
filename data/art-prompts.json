@@ -2628,6 +2628,216 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Baxter Street Bomb.\n\nRow 1:\n1. Standing at the top of a steep street, one foot on a longboard, a hand over his eyes, very relaxed.\n2. Crouched low on a longboard, arms tucked, leaning forward, a fierce grin.\n3. Riding in a deep crouch, one hand trailing out for balance, hair blown back, joyful.\n\nRow 2:\n4. Reaching one hand into a tote bag at his hip while riding, a mischievous smile.\n5. Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.\n6. Standing on the board coasting, both arms stretched wide, an enormous grin."
   },
   {
+   "status": "draft",
+   "id": "nara-ab-jump-up",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Jump Up (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Jump Up.\n\nRow 1:\n1. Standing on four paws, ears perked, tail up, staring ahead with wide happy eyes.\n2. Rearing up on her hind legs, both front paws lifted forward, mouth open in a big grin.\n3. At the top of the jump, front paws reaching out, ears flying, tongue out.\n\nRow 2:\n4. Dropping back down, front paws about to touch the ground, ears bouncing.\n5. Standing on four paws, tail wagging hard, an innocent head tilt.\n6. Sitting with her tongue out and her tail swept behind her, not sorry at all."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-puppy-eyes",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: PUPPY DOG EYES (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: PUPPY DOG EYES.\n\nRow 1:\n1. Sitting, head tilted to one side, big shining round eyes looking up.\n2. Sitting, head lowered, eyes looking up, the eyes enormous and watery with light.\n3. Sitting, one front paw lifted a little, eyes huge and pleading.\n\nRow 2:\n4. Head tilted to the other side, ears drooping, eyes shining.\n5. Chin resting low, eyes looking up, a tiny whimper face.\n6. Sitting up tall again, eyes sparkling, ears perked, hopeful."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-tennis-ball-fetch",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Tennis Ball Fetch (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Tennis Ball Fetch.\n\nRow 1:\n1. Sitting very still, eyes locked on something up high, ears perked, mouth closed.\n2. Crouched low on her front legs with her rear in the air, eyes wide, ready to spring.\n3. Running flat out, ears streaming back, all four paws off the ground.\n\nRow 2:\n4. Leaping and catching a yellow tennis ball in her mouth, eyes bright.\n5. Trotting proudly with the tennis ball held in her mouth, head high.\n6. Sitting with the tennis ball in her mouth, tail wagging, very proud."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-dont-leave-me",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Don't Leave Me! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Don't Leave Me!.\n\nRow 1:\n1. Sitting alone, ears up, looking off to the side, a worried little frown.\n2. Standing frozen with wide eyes, ears pinned back, mouth open in a shocked bark.\n3. Running in a frantic tight circle, ears flapping, tail up.\n\nRow 2:\n4. Skidding to a stop, front paws braced, mouth open.\n5. Spinning in place with her head turned back, eyes huge.\n6. Bounding forward with a huge happy grin, tail a blur, ears flying."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-just-one-bite",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Just One Bite? (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Just One Bite?.\n\nRow 1:\n1. Sitting very politely, back straight, eyes fixed on something just below the frame.\n2. Sitting, a little drool hanging from her lip, eyes wide and hopeful.\n3. Sitting with her head tilted far to one side, eyes soft.\n\nRow 2:\n4. Sitting with one front paw tapping the ground, eyes wide.\n5. Licking her nose with her tongue, eyes still locked forward.\n6. Sitting, mouth open in a hopeful smile, tail sweeping the floor."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-counter-surfer",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Counter Surfer (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Counter Surfer.\n\nRow 1:\n1. Standing and looking up at something high above, ears perked, eyes sneaky.\n2. Tiptoeing forward with one paw lifted high, head low, a guilty sideways glance.\n3. Standing on her hind legs with both front paws up on a high ledge, stretching, eyes wide.\n\nRow 2:\n4. Stretched very long, her nose reaching up as far as it can, tongue out.\n5. Dropping down with a small wrapped sandwich in her mouth, eyes wide.\n6. Running away fast with the sandwich in her mouth, ears streaming back, tail high."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-stranger-alert",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Stranger Alert (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Stranger Alert.\n\nRow 1:\n1. Sitting very still, ears fully up, eyes locked straight ahead, serious.\n2. Standing stiff, hackles raised along her back, ears forward, mouth closed, a low growl face.\n3. Standing with her chest forward, mouth wide open in a big bark, ears up.\n\nRow 2:\n4. Mid-bark, head thrown forward, front paws planted wide.\n5. Mid-bark, head thrown back, eyes squeezed, tail stiff.\n6. Standing proud with her chest out, mouth shut, a satisfied look."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-squirrel-ult",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: CHAIRMAN CHEEKS! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: CHAIRMAN CHEEKS!.\n\nRow 1:\n1. Standing on patrol, head high, ears relaxed, sniffing the air calmly.\n2. Ears snapping up, eyes narrowed in outrage, a deep frown, nose pointed ahead.\n3. Crouched low, every muscle tense, eyes burning, lips curled in a determined scowl.\n\nRow 2:\n4. Launching forward at full speed, ears flat back, mouth open.\n5. Skidding around a turn at full speed, ears flying, eyes fixed ahead.\n6. Standing at the foot of a tree, both front paws up on the trunk, head thrown back, barking up."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-doodle-fluff",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Doodle Fluff (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Doodle Fluff.\n\nRow 1:\n1. Standing with her whole curly coat fluffed up, shaking, ears flying out sideways.\n2. Standing relaxed, the curly coat puffed out into a big cloud shape, a happy look.\n3. Starting to lower herself, front legs bent, a sleepy smile.\n\nRow 2:\n4. Flopped on her side, legs stretched out, ears spread flat, eyes half closed.\n5. Lying on her side like a warm blanket, her coat spread out round her, eyes closed.\n6. Lying curled and relaxed with her chin up, a peaceful smile."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-shake-everyone",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Shake It Off, Everyone (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Shake It Off, Everyone.\n\nRow 1:\n1. Standing with her coat damp and slightly flat, a cheerful look, tail low.\n2. Standing, one shoulder twitching, her head turned a little as if about to shake.\n3. Standing, her whole body twisted hard to one side, ears flying out.\n\nRow 2:\n4. Standing, her whole body twisted hard the other way, ears flying out, eyes squeezed shut.\n5. Her coat fluffed out wide and blurred with motion, mouth open.\n6. Standing still after the shake, her coat puffed up wild, a very pleased face."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-not-leaving",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Not Leaving (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Not Leaving.\n\nRow 1:\n1. Running forward, ears back, a worried but determined face.\n2. Skidding to a stop with both front paws planted wide, looking down, eyes soft.\n3. Nudging forward with her nose lowered, a gentle worried look.\n\nRow 2:\n4. Nudging again with her nose lowered, ears drooping.\n5. Leaning her whole body sideways, eyes closed, ears down.\n6. Sitting very close, her head lifted, steady loving eyes looking down."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-happy-puddle",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Happy Puddle (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Happy Puddle.\n\nRow 1:\n1. Standing with her whole body wiggling, mouth open in a huge grin, ears bouncing.\n2. Bouncing on her front paws, bottom in the air, tail wagging wildly.\n3. Spinning in a little circle, ears flying, tongue out.\n\nRow 2:\n4. Squatting low, eyes wide and surprised, ears up, a sheepish smile.\n5. Standing and looking down behind her, a puzzled face, one ear flopped.\n6. Sitting up with a happy sheepish grin, tail swishing, head tilted."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-food-inspector",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: Family Food Inspector (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: Family Food Inspector.\n\nRow 1:\n1. Standing and sniffing low, nose pointed down, ears hanging forward.\n2. Sniffing and turning her nose up high, eyes half closed, a snooty look.\n3. Turning her head away from the food, chin high, ears back, unimpressed.\n\nRow 2:\n4. Sniffing low again, a surprised look, eyes wide.\n5. Lifting one front paw and placing it proudly forward, a satisfied nod.\n6. Sitting up with a wide happy open-mouth smile, tail wagging."
+  },
+  {
+   "status": "draft",
+   "id": "nara-ab-pack-ult",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara ability: The Unsent Scent (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-ref-v1.png",
+    "art/raw/characters/nara-walk-sheet-v1.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: The Unsent Scent.\n\nRow 1:\n1. Standing alone, head low, ears drooping, a lost and quiet look.\n2. Head lifted, eyes wide in surprise, nose high, sniffing the air.\n3. Sniffing the ground with her nose low, ears perked, tail starting to wag.\n\nRow 2:\n4. Lifting her head with sudden joy, eyes bright, tail up high.\n5. Running flat out, ears streaming back, mouth open in a joyful grin.\n6. Leaping with all four paws off the ground, ears flying, mouth open, pure joy."
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -3102,6 +3312,174 @@
     "art/raw/characters/tnb-ab-hillbomb-ult-v1.png"
    ],
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Baxter Street Bomb.\n\nItems:\n1. The longboard from the picture, seen from the side (wide).\n2. The same longboard seen from above.\n3. A very steep street with parked cars and a sign reading 32 PERCENT GRADE (wide).\n4. Speed lines (wide).\n5. A trail of dust kicked up behind a skateboard (wide).\n6. A burst of flying clay shards.\n7. A big impact burst, yellow and white.\n8. A small clay mug, crooked, in flight."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-jump-up",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Jump Up (5 items; attaches the approved Jump Up sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-jump-up-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Jump Up.\n\nItems:\n1. A small cluster of paw prints.\n2. A curved white swoosh, the path of a bouncing jump (wide).\n3. A small burst of happy sparkles.\n4. A small puff of dust.\n5. A tiny red heart."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-puppy-eyes",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: PUPPY DOG EYES (6 items; attaches the approved PUPPY DOG EYES sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-puppy-eyes-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: PUPPY DOG EYES.\n\nItems:\n1. A glowing ring of soft golden light.\n2. A big shining round sparkle, like light in an eye.\n3. A cluster of five small golden hearts of different sizes.\n4. A soft warm golden glow (wide).\n5. A burst of tiny twinkling stars.\n6. A small teardrop of light."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-tennis-ball-fetch",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Tennis Ball Fetch (7 items; attaches the approved Tennis Ball Fetch sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-tennis-ball-fetch-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Tennis Ball Fetch.\n\nItems:\n1. A yellow tennis ball, seen from the front.\n2. The same tennis ball tilted, as if spinning through the air.\n3. A curved white swoosh, the path of a thrown ball (wide).\n4. Cream colored speed streaks (wide).\n5. A small puff of dust.\n6. A small starburst of cheer.\n7. A small drool-wet tennis ball with a shine on it."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-dont-leave-me",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Don't Leave Me! (7 items; attaches the approved Don't Leave Me! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-dont-leave-me-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Don't Leave Me!.\n\nItems:\n1. A small cluster of dark worry lines.\n2. A small jagged alarm burst, white and yellow.\n3. A swirl of loose motion circles (wide).\n4. A scatter of tipped-over soft toys in a small pile (wide).\n5. A small puff of dust.\n6. A cluster of small happy hearts.\n7. A small sparkle burst."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-just-one-bite",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Just One Bite? (6 items; attaches the approved Just One Bite? sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-just-one-bite-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Just One Bite?.\n\nItems:\n1. A plain sandwich on a small plate, with lettuce and tomato showing.\n2. A single big drop of drool.\n3. A small drool puddle on the floor (wide).\n4. A small cluster of floating hearts.\n5. A small hopeful sparkle.\n6. A small round speech bubble, empty."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-counter-surfer",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Counter Surfer (7 items; attaches the approved Counter Surfer sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-counter-surfer-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Counter Surfer.\n\nItems:\n1. A wooden kitchen counter edge with a small cutting board on top (wide).\n2. A wrapped sandwich in white paper.\n3. The same sandwich wrapper torn open with a bite out of it.\n4. A speed streak (wide).\n5. A small puff of dust.\n6. A few crumbs.\n7. A small round speech bubble with three dots."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-stranger-alert",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Stranger Alert (6 items; attaches the approved Stranger Alert sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-stranger-alert-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Stranger Alert.\n\nItems:\n1. A window with a pale curtain and a pale blue sky (wide).\n2. A big jagged bark burst, white and yellow.\n3. A set of curved bark sound arcs (wide).\n4. A small exclamation mark, red.\n5. A small alarm star burst.\n6. A soft pale blue shield glow."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-squirrel-ult",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: CHAIRMAN CHEEKS! (10 items; attaches the approved CHAIRMAN CHEEKS! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-squirrel-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: CHAIRMAN CHEEKS!.\n\nItems:\n1. A tiny top hat, black with a red band.\n2. A tiny round gold monocle on a chain.\n3. A small plump grey squirrel in the air, in a top hat and a monocle, tail curled, grinning.\n4. A big old oak tree trunk with a branch on one side (tall).\n5. A pile of autumn leaves and acorns.\n6. A yellow tennis ball.\n7. A small wooden park bench (wide).\n8. A big dust cloud, solid and puffy (wide).\n9. A big jagged bark burst, yellow and white.\n10. Cream colored speed streaks (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-doodle-fluff",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Doodle Fluff (6 items; attaches the approved Doodle Fluff sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-doodle-fluff-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Doodle Fluff.\n\nItems:\n1. A big soft puffy cloud shape, curly and cream colored (wide).\n2. A small cluster of floating curly tufts of fur.\n3. A soft warm golden glow (wide).\n4. A cluster of small sparkles.\n5. A few small Z letters for sleep.\n6. A big plump heart, soft pink."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-shake-everyone",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Shake It Off, Everyone (6 items; attaches the approved Shake It Off, Everyone sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-shake-everyone-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Shake It Off, Everyone.\n\nItems:\n1. A big spray of water drops flying outward in a wide fan (wide).\n2. A cluster of large round water drops of different sizes.\n3. A circle of curved motion lines (wide).\n4. A small splash puddle (wide).\n5. A small rainbow arc.\n6. A small starburst of cheer."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-not-leaving",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Not Leaving (6 items; attaches the approved Not Leaving sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-not-leaving-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Not Leaving.\n\nItems:\n1. A big soft golden glow (wide).\n2. A cluster of small golden hearts.\n3. A warm soft heart ring, golden.\n4. A small paw print.\n5. A burst of gentle sparkles.\n6. A small curl of warm light."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-happy-puddle",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Happy Puddle (6 items; attaches the approved Happy Puddle sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-happy-puddle-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Happy Puddle.\n\nItems:\n1. A flat puddle of water, wide and glossy (wide).\n2. The same puddle, a little smaller, with a few ripples.\n3. A few drops of water.\n4. A small wet paw print.\n5. A small round speech bubble with a blush mark inside.\n6. A burst of cheerful sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-food-inspector",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: Family Food Inspector (7 items; attaches the approved Family Food Inspector sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-food-inspector-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Family Food Inspector.\n\nItems:\n1. A fancy silver dish cover on a round white plate.\n2. A simple homely covered dish with a checked cloth over it, labeled HOMEMADE in neat hand-painted letters.\n3. The same homemade dish with the cloth lifted, a warm pie inside.\n4. A big golden gold-star badge with a ribbon.\n5. A small wavy line of steam.\n6. A small round gray frown cloud.\n7. A cluster of sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "nara-fx-pack-ult",
+   "tab": "Characters",
+   "group": "Nara",
+   "title": "Nara objects and effects: The Unsent Scent (8 items; attaches the approved The Unsent Scent sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/nara-ab-pack-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: The Unsent Scent.\n\nItems:\n1. A big soft grey vignette frame, grey fading to clear in the middle (wide).\n2. A single golden bread crumb with a small shine.\n3. A curling trail of golden scent, smoke-like but solid (wide).\n4. A small golden round loaf of sourdough with a scored top.\n5. A small plump heart, golden.\n6. A big warm golden glow (wide).\n7. A shower of golden sparkles.\n8. A burst of paw prints running in a line (wide)."
   },
   {
    "status": "approved",
