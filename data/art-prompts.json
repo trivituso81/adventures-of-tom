@@ -3681,7 +3681,7 @@
    ]
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "id": "olivia-ab-is-this-real",
    "tab": "Characters",
    "group": "Olivia",
@@ -3693,7 +3693,7 @@
     "art/raw/characters/olivia-battle-sheet-1-v1.png",
     "art/raw/characters/olivia-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Is This Real?.\n\nRow 1:\n1. Holding up her phone at arm's length, one eye squinting at the screen.\n2. Leaning in close to the screen, eyes narrowing, a suspicious frown.\n3. Eyes wide, mouth open, pointing at the phone with her free hand.\n\nRow 2:\n4. Counting on her fingers in the air, a puzzled face.\n5. Lowering the phone, a flat unimpressed look, one eyebrow high.\n6. Shaking her head with a smirk, thumb pointed down.",
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nFULL BODY IN EVERY CELL: every figure is shown from the top of her head to the soles of her shoes, standing on the ground line, with her legs, knees and both shoes fully visible. Never crop her at the waist, hips or knees. Never zoom in or make a close-up, even when a frame says she leans in or looks closely. Her figure is the same size in every cell as in pictures 3 and 4, with clear empty magenta space above her head and below her feet.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Is This Real?. The phone is a small modern smartphone painted in the same style as the character.\n\nRow 1:\n1. Holding up her phone at arm's length, one eye squinting at the screen.\n2. Leaning her upper body forward toward the phone in her hand, eyes narrowing, a suspicious frown. Her feet stay planted and her whole body stays in the cell.\n3. Eyes wide, mouth open, pointing at the phone with her free hand.\n\nRow 2:\n4. Counting on her fingers in the air, a puzzled face.\n5. Lowering the phone, a flat unimpressed look, one eyebrow high.\n6. Shaking her head with a smirk, thumb pointed down.",
    "rejects": [
     {
      "date": "2026-11-06",
@@ -3706,6 +3706,15 @@
      "note": "you keep making 9 frames but there are only 6. and all 6 need to be full body poses",
      "from": "v5",
      "at": 1793995496255
+    }
+   ],
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-ab-is-this-real-v1.png",
+     "date": "2026-11-06",
+     "from": "v7",
+     "at": 1793995677008
     }
    ]
   },
