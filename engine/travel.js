@@ -416,7 +416,7 @@ function arriveLA(arr,card=[]) {
 }
 // Back on Long Island: Tom steps out of the taxi depot and the girls come running.
 function arriveHome(arr,card=[]) {
-  const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
+  const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+1,gStart=10,rStart=9;
   const welcome=[];
   let g=null,r=null;
   welcome.push(
@@ -429,7 +429,7 @@ function arriveHome(arr,card=[]) {
     }),
     S.wait(.6),
     S.call(()=>sfx.doorOut()),
-    {start(){ this.s=S.walk(player,[[dx,dy+1],[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
+    {start(){ this.s=S.walk(player,[[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     ...card,
     S.talk('Tom',(arr&&arr.tom)||travelPick('arrHome',TRAVEL_POOLS.arrHome)),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),

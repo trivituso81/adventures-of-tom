@@ -6,7 +6,7 @@ const SCENES={};
 // The opening (START NEW): Tom steps out of Long Island Taxi Co. alone, Grace and Rose shout TATA!!! and run in from the west,
 // jump on him for a hug, Rose climbs onto his shoulders, Grace shows off her squishy (painted poses), then both join the party.
 SCENES.opening=()=>{
-  const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
+  const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+1,gStart=10,rStart=9;
   const gTiles=[],rTiles=[];
   for(let x=gStart+1;x<=dx-1;x++) gTiles.push([x,row]);
   for(let x=rStart+1;x<=dx-1;x++) rTiles.push([x,row+1]);
@@ -16,7 +16,7 @@ SCENES.opening=()=>{
     {wait:.7},
     {call:()=>sfx.doorOut()}, {show:'tom'}, {place:'tom',at:[dx,dy],dir:'down'},
     {wait:.35},
-    {walk:'tom',to:[[dx,dy+1],[dx,row]],speed:.3},
+    {walk:'tom',to:[[dx,row]],speed:.3},
     {wait:.3},
     {step:stretchStep()},
     {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)"],voice:[['tom','intro1']]},

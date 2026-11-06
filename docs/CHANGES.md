@@ -1,3 +1,7 @@
+## 2026-11-06 (394): Tom stops one tile higher when he steps out of the taxi (`tx1`)
+
+- Tom (15:35): the girls were hidden behind the tree when they ran up. Tom now stops one tile above his old spot, so Grace and Rose meet him in the clear (the tree still covers things as cut out). Changed in all three taxi exits: the chapter 1 opening (`SCENES.opening`), the Long Island arrival for chapters 3, 5, 7 and 9 (`arriveHome`, engine/travel.js) and the Nine Scoops opening (`SCENES.nsOpening`). Rose's shoulder hop and the party spots after the scene move up with him. Chapter 10 does not use the taxi exit.
+
 ## 2026-11-06 (393): Downtown LA plaza painting installed with a walk-behind layer (`dtla12`)
 
 - New painting `art/blvd.webp` (1920 x 1664, Tom's DTLA plaza: COFFEE, RAMEN, STARLITE, CABS on top; WARDROBE, LOFTS, GRAND, SHOP below; GRIFFITH PARK, STUDIO and JEFFERSON PARK arches) and `art/blvd-fg.webp`: Tom walks behind 12 palm and tree groups, 7 lamps, the 3 arches, all 8 buildings and the studio sheds, 19 plaza props, and the front bushes and railing. Cut from the painting itself; Tom's 5 generator masks were used only as masks (`tools/make_blvd_fg.py`, rewritten; sources in `art/raw/areas/blvd-v4/`). Dropped: one flower pot the mask invented where the JEFFERSON PARK sign is. The lamp behind the GRAND spire is clipped at the tower.

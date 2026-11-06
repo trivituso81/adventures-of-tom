@@ -578,7 +578,7 @@ const scoopToast=(n,names)=>({toast:'SCOOPS: '+n+' of 9. '+names,time:4});
 const spawnAt=(name,monster,at,extra={})=>({spawn:Object.assign({name,monster,at},extra)});
 // The opening: the Chapter 1 opening, tuned for the birthday (claude/bonus-chapter-nine-scoops.md).
 SCENES.nsOpening=()=>{
-  const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+2,gStart=10,rStart=9;
+  const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+1,gStart=10,rStart=9;
   const gTiles=[],rTiles=[];
   for(let x=gStart+1;x<=dx-1;x++) gTiles.push([x,row]);
   for(let x=rStart+1;x<=dx-1;x++) rTiles.push([x,row+1]);
@@ -589,7 +589,7 @@ SCENES.nsOpening=()=>{
     {wait:.7},
     {call:()=>sfx.doorOut()}, {show:'tom'}, {place:'tom',at:[dx,dy],dir:'down'},
     {wait:.35},
-    {walk:'tom',to:[[dx,dy+1],[dx,row]],speed:.3},
+    {walk:'tom',to:[[dx,row]],speed:.3},
     {wait:.3},
     {step:stretchStep()},
     {talk:'Tom',lines:["Oof, I'm finally here! Six hours on Delta One and I didn't miss the big day."],voice:[['tom','arrive_bday']]},
