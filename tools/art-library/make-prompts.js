@@ -11,13 +11,8 @@ const old = fs.existsSync(out) ? JSON.parse(fs.readFileSync(out, 'utf8')).entrie
 const ENTRIES = [
   { id: 'test-mudling', tab: 'Enemies', title: 'Library test: the Mudling (style key look)', ar: '1:1', refs: ['docs/reference/style_key_v1.png'],
     prompt: 'IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image.\n\nThe attached picture is the style key. Paint one new picture in exactly its painting style: the same dense painted texture, fine brushwork, deep saturated colors, warm lamplight and crisp detail.\n\nA MUDLING, a small friendly mud monster, knee high: a rounded lump of brown mud with a puddle base, two stubby mud arms, big round shiny eyes, a small open mouth, and a little green sprout with two leaves on top of its head. It stands on a plain flat magenta background, full body, facing the viewer, a curious friendly look. No other characters, no text.' },
-  // Characters restarted 2026-11-05 (Tom): one hero from his photo and his prompt, then the shared walk and battle prompts.
-  { id: 'tom-hero', tab: 'Characters', title: 'Tom step 1: hero picture from your photo (waiting for your prompt)', ar: '3:4', own: { slot: 'tom-photo', label: 'Photo of the real Tom (face clear)', at: 0 }, refs: [],
-    prompt: "WAITING FOR TOM'S PROMPT. Do not generate yet: Claude puts Tom's photo prompt here." },
-  { id: 'tom-walk', tab: 'Characters', title: 'Tom step 2: walk sheet, 9 frames (needs step 1 approved)', ar: '1:1', own: { slot: 'tom-photo', label: 'Photo of the real Tom (face clear)', at: 1 }, refs: ['art/raw/characters/tom-hero-v1.png'],
-    prompt: fs.readFileSync('tools/art-library/prompts/char-walk-sheet.txt', 'utf8').trim() },
-  { id: 'tom-battle', tab: 'Characters', title: 'Tom step 3: battle stance sheet, 12 frames (needs step 1 approved)', ar: '4:3', own: { slot: 'tom-photo', label: 'Photo of the real Tom (face clear)', at: 1 }, refs: ['art/raw/characters/tom-hero-v1.png'],
-    prompt: fs.readFileSync('tools/art-library/prompts/char-battle-sheet.txt', 'utf8').trim() },
+  // Characters (Tom 2026-11-05 23:24): battle sheets 1 and 2, then one sheet per ability, from tools/art-library/char-prompts.js.
+  ...require('./char-prompts.js').entries,
 ];
 ENTRIES.push(require('./enemy-prompts.js').gridTest('mudling'));
 ENTRIES.push(require('./enemy-prompts.js').gridTest('grump', 'art/raw/enemies/test-one-mudling-stance-v1.png'));

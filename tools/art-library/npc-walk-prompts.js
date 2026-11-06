@@ -1,5 +1,5 @@
 // NPC walk sheets for the Art Library (tab NPCs). Required by make-prompts.js.
-// One entry per NPC: a 3 x 3 walk sheet (down, up, side; stand and two steps), the same 3 x 3 recipe as the character walk sheet (prompts/char-walk-sheet.txt).
+// One entry per NPC: a 3 x 3 walk sheet (down, up, side; stand and two steps).
 // The reference is the NPC group cut (npc-cut-<keys>, step 2, approve it first); the prompt names the position from the left. Looks, ages and heights come from npc-prompts.js.
 // Proportions follow docs/CHARACTER_PIPELINE.md section 7: adults share one head size (about one fifth of the figure), children follow Grace and Rose (a little over one quarter).
 const { N, GROUPS, STYLE_RULE, lookOf, ordinal, REF_KEY, REF_CHART } = require('./npc-prompts.js');

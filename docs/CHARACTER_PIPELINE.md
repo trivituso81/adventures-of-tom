@@ -117,7 +117,7 @@ Walk rules: arms swing opposite to the legs; the two STEP frames of a row mirror
 
 ### 3C. Standard battle sheet: 4 x 4
 
-UPDATE 2026-11-05 (CHANGES 286): the Characters tab restarted. New characters get a hero from Tom's photo and his prompt, then the shared prompts tools/art-library/prompts/char-walk-sheet.txt (3 x 3, frames as 3B) and char-battle-sheet.txt (4 x 3, 12 frames = the engine's base battle keys idle, run1, run2, act, windup, leap, cast, defend, hurt, kneel, ko, celeb). The 16 frame list below is the older recipe.
+UPDATE 2026-11-05 (CHANGES 290): Art Library Characters per character = battle sheet 1 (4 x 2, 8 frames, prompts/char-battle-sheet-1.txt), battle sheet 2 (3 x 2, 6 frames, char-battle-sheet-2.txt), then one 3 x 2 sheet per ability (char-ability-sheet.txt + frames in tools/art-library/char-prompts.js). Refs: hero picture, walk sheet, both battle sheets. Hero and walk come from Tom (CHANGES 288). The 16 frame list below is the older recipe.
 
 1 cell = 256 px, sheet 1024 x 1024. Character FACES LEFT in every frame (side or three-quarter view from slightly above, a party member facing an enemy on the left). Frame order (keys in brackets):
 

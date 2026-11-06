@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
-EXPECT = {'Characters': 3, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
+EXPECT = {'Characters': 16, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 34, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
 EXPECT_TOTAL = sum(EXPECT.values())
 EXPECT_GROUPS = {'Characters': 1, 'NPCs': 2, 'Areas': 8, 'Rooms': 10, 'Props': 10, 'Enemies': 22, 'Battle': 2, 'Title': 1, 'Portraits': 1, 'Flight': 1}
 def ok(c, m):
@@ -33,7 +33,7 @@ def data_checks():
         if re.search('[\u2014\u2013]', e['prompt'] + e['title']): bad.append(e['id'] + ' dash')
         for r in e['refs']:
             m = re.match(r'art/raw/([a-z]+)/([a-z0-9-]+)-v\d+\.png$', r)
-            if m:
+            if m and (any(x['id'] == m.group(2) for x in d) or not os.path.exists(os.path.join(ROOT, r))):
                 tgt = [x for x in d if x['id'] == m.group(2)]
                 if not tgt or tgt[0]['tab'].lower() != m.group(1): bad.append(e['id'] + ' chain ' + r)
             elif not os.path.exists(os.path.join(ROOT, r)): bad.append(e['id'] + ' missing ' + r)
@@ -47,7 +47,7 @@ async def ux_checks(pg, name, d):
     stat = {x['id']: x['status'] for x in d}
     vers = {x['id']: len(x.get('versions') or []) for x in d}
     def target(r): return r.split('/')[-1].rsplit('-v', 1)[0]
-    blocked = [e for e in chars if e['status'] != 'approved' and any(r.startswith('art/raw/') and not vers.get(target(r)) for r in e['refs'])]
+    blocked = [e for e in chars if e['status'] != 'approved' and any(r.startswith('art/raw/') and target(r) in vers and not vers[target(r)] for r in e['refs'])]
     ready = [e for e in chars if e['status'] not in ('approved', 'rejected') and e not in blocked]
     approved = [e for e in chars if e['status'] == 'approved']
     rejected = [e for e in chars if e['status'] == 'rejected']
@@ -68,10 +68,10 @@ async def ux_checks(pg, name, d):
         await pg.locator('.item.s-blocked .ih').first.click()
     await pg.click('[data-filter="todo"]')
     await pg.screenshot(path=os.path.join(SHOTS, 'art-ux-characters-%s.png' % name), full_page=False)
-    await pg.fill('#q', 'tom step')
-    want = sum(1 for e in chars if 'tom step' in (e['title'] + ' ' + e['id'] + ' ' + e['group']).lower())
+    await pg.fill('#q', 'tom ability')
+    want = sum(1 for e in chars if 'tom ability' in (e['title'] + ' ' + e['id'] + ' ' + e['group']).lower())
     tt = (await pg.inner_text('#tabs')).replace('\n', ' ')
-    ok(('Characters %d found' % want) in tt and want == 3 and await pg.locator('.item').count() == want, name + ': search finds the Tom steps (%s)' % tt)
+    ok(('Characters %d found' % want) in tt and want == 14 and await pg.locator('.item').count() == want, name + ': search finds the 14 Tom abilities (%s)' % tt)
     await pg.fill('#q', '')
     await pg.wait_for_selector('#tabs')
 async def main():
@@ -141,7 +141,7 @@ async def main():
                     ok('art/raw/enemies/test-mudling-v1.png' in files and 'art/raw/enemies/test-mudling-v2.png' in files, 'both pictures were committed under art/raw/enemies/')
                     ok(en['status'] == 'approved' and len(en['versions']) == 2 and en['versions'][0]['file'].endswith('-v1.png'), 'json: status approved, two versions listed')
                     ok(len(en['rejects']) == 1 and 'pure magenta' in en['rejects'][0]['note'], 'json: the reject note was saved')
-                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:3] == ['tom-hero', 'tom-walk'] and len(doc['entries']) == EXPECT_TOTAL and all((e['status'], len(e['versions'])) == (lambda x: (x['status'], len(x['versions'])))(next(x for x in json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json')))['entries'] if x['id'] == e['id'])) for e in doc['entries'][1:]), 'json otherwise untouched (every other entry keeps its committed status and versions)')
+                    ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:3] == ['tom-battle-1', 'tom-battle-2'] and len(doc['entries']) == EXPECT_TOTAL and all((e['status'], len(e['versions'])) == (lambda x: (x['status'], len(x['versions'])))(next(x for x in json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json')))['entries'] if x['id'] == e['id'])) for e in doc['entries'][1:]), 'json otherwise untouched (every other entry keeps its committed status and versions)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
                     ok('aot-art-key' in ls, 'key lives in localStorage only')

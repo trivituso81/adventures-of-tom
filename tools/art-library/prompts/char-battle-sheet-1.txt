@@ -1,0 +1,19 @@
+Draw the character in the attached pictures as a battle sheet.
+
+Picture 1 is the character. Picture 2 is their walk sheet. Copy picture 1 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail. Only the pose changes.
+
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Empty hands.
+
+In every frame the character faces the same way as the side view in the bottom row of picture 2, turned into a three-quarter view: the chest turned partly toward the viewer, both eyes visible.
+
+Row 1:
+1. Ready. Feet apart at shoulder width, knees slightly bent. Arms bent a little, hands open and loose at hip height. Mouth closed in a small smile.
+2. Ready, breathing in. The same as frame 1, with the chest and shoulders raised slightly and the hand nearest the viewer open, palm forward.
+3. Hands on hips. Standing straight, feet apart, both fists on the hips, elbows out. Chin raised, eyebrows raised, mouth flat.
+4. Offering. Feet apart. The arm nearest the viewer stretched straight forward at chest height, palm up. The other arm relaxed at the side. Smiling.
+
+Row 2:
+5. Wind-up. Upper body twisted back, away from the direction he faces. The arm nearest the viewer pulled back behind the body, elbow bent. Weight on the back leg, front knee bent. Eyes narrowed, mouth closed.
+6. Lunge. The front leg stepped far forward with the knee bent deeply, the back leg straight. Body leaning forward. The arm nearest the viewer reaching fully forward at shoulder height. Mouth wide open.
+7. Arms wide. Feet planted wide apart, legs straight. Both arms stretched out to the sides at shoulder height, palms open. Chest forward, chin up, a big open smile.
+8. Guard. Crouched low, both knees bent deeply. Both forearms crossed in an X in front of the chest and face. Chin tucked, eyes looking over the forearms, mouth closed.
