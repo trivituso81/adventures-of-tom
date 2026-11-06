@@ -1,3 +1,7 @@
+## 2026-11-05 (248): Warden Boppy gets Boppy's hero picture as a likeness reference (Art Library only, no game files, no tag)
+
+Tom asked for a Boppy reference. enemy-warden refs now: style key, guide, finish, `tools/sprite-bake/src/boppy-hero.png` (attachment 4); prompt says his face, mustache and smile come from it, visor raised. Mechanism: `LIKENESS` map in sheetShort (tools/art-library/enemy-prompts.js); add an id there for any enemy that is a real family member (Julian has none).
+
 ## 2026-11-05 (247): Boss prompts: back to the plain handbrushed opening, no gloss words (Art Library only, no game files, no tag)
 
 Tom: bosses did not come out handbrushed like the regular enemies. Compared approved sheets: regular ones (Toad, Soggy Sock, Grump) show thick oil strokes and a textured background; bosses (Ironbelly, Mirrorball) came out as smooth digital renders. Cause: my boss wording ("grand, richly detailed boss painting", gleaming, glossy, polished, glittering) pulled the generator to a polished render and contradicted "matte". Fix: boss prompts open with the exact regular sentence, richness is one separate sentence about painted shapes, gloss words removed, "thick visible brush strokes everywhere including the background, not a smooth digital render" added. LEAD is no longer used.

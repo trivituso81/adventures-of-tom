@@ -66,7 +66,7 @@ drillworm|subrail|68|a huge round grey worm head rising from a pit in a yellow h
 hushling|subrail|22|a small grey box-shaped speaker on two little feet with a tiny antenna, a pale face and a finger pressed to its lips in a shush
 signalfault|subrail|42|a tall black railway signal on a grey post with a round red light and a yellow light in its face and a red and white striped stop arm
 turnstile|subrail|40|a grey subway turnstile with a black screen face showing two white eyes and a red mouth, a yellow card slot and three metal bars at its waist
-warden|row|70|Boppy in a suit of glowing gold plate armor with a round golden helmet, a dark visor, big square shoulder plates and a tall halberd, standing square and heavy
+warden|row|70|Boppy in a suit of glowing gold plate armor with a round golden helmet, a raised visor showing his face, big square shoulder plates and a tall halberd, standing square and heavy
 hush9final|dinner|68|a silver railcar standing on two black legs with a red light and a yellow siren dome on its roof, glowing cyan eyes, a cyan stripe and a speaker grille mouth with a white glove raised in a shush
 marlowe16|square|68|a grey-suited man with a sharp side-parted black haircut and a grey scowling face, a clipboard in one hand and a fist of glowing amber glass in the other, amber cracks running up his suit
 greynote|square|18|a small grey square sticky note with a curled corner, two angry little eyes and no limbs

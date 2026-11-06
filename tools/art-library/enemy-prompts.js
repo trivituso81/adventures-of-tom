@@ -165,7 +165,7 @@ const FLAIR = {
   finalcall: `navy enamel with gold trim, a glowing screen of rows of yellow flap text, chunky riveted robot legs, a glowing red antenna, crisp rim light`,
   gridlockprime: `red metal with chrome trim, glowing yellow lights, steam from the grille, a flowering traffic-light post, strong headlight beams`,
   drillworm: `wet rubbery skin, a spinning two-tone drill bit, flying rock and gravel, a gritty pit glowing with orange and green minerals, a scuffed yellow hard hat`,
-  warden: `golden plate armor with engraved filigree and a warm glow, a dark visor, a long halberd with a bright blade, dramatic backlight`,
+  warden: `golden plate armor with engraved filigree and a warm glow, a raised visor showing his face, a long halberd with a bright blade, dramatic backlight`,
   hush9final: `silver metal with rivets and glowing cyan lines, a red light and a bright yellow siren, glowing cyan eyes, a speaker grille mouth, streaks of light and steam`,
   marlowe16: `a finely tailored grey suit, a glowing amber glass fist with cracks of light running up the suit, cold grey light against warm amber glow, a stern expressive face`,
   twinlens: `a brass gantry with intricate gear rings, two huge glowing lens-eyes, one ice blue and one amber, with glass reflections, a red gem, dust motes and crossing light beams`,
@@ -206,8 +206,10 @@ function sheetShort(t, brushRef, id) {
   const under = 'docs/reference/underpaint/' + t.id + '-grid.png';
   const has = fs.existsSync(under);
   const refs = has ? [KEY, under, brushRef] : [KEY, brushRef];
+  const LIKENESS = { warden: ['tools/sprite-bake/src/boppy-hero.png', "Boppy's face, gray mustache, eyes and smile come from attachment 4, shown clearly with the visor raised"] };
+  if (LIKENESS[t.id]) refs.push(LIKENESS[t.id][0]);
   const text = has
-    ? `Repaint attachment 2 as a handbrushed painting. Keep the same ${n} poses in the same ${cols} by 2 layout, the same creature, shape and colors.${FLAIR[t.id] ? ' Make the forms grander and more dramatic, with more detail painted in the shapes: ' + FLAIR[t.id] + '.' : ''}${POSES[t.id] ? ' ' + POSES[t.id] : ''} Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. ${TAIL}`
+    ? `Repaint attachment 2 as a handbrushed painting. Keep the same ${n} poses in the same ${cols} by 2 layout, the same creature, shape and colors.${LIKENESS[t.id] ? ' ' + LIKENESS[t.id][1] + '.' : ''}${FLAIR[t.id] ? ' Make the forms grander and more dramatic, with more detail painted in the shapes: ' + FLAIR[t.id] + '.' : ''}${POSES[t.id] ? ' ' + POSES[t.id] : ''} Paint it like attachment 1 and finish it like attachment 3: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Attachment 2 is only a blurry guide, so paint every edge and texture fresh and sharp. ${TAIL}`
     : `Paint ${m0.name}, ${t.look}, as a handbrushed painting${FLAIR[t.id] ? ', grander and more dramatic, with more detail painted in the shapes: ' + FLAIR[t.id] + ',' : ','} in a ${cols} by 2 grid of ${n} poses facing right.${POSES[t.id] ? ' ' + POSES[t.id] : ' Poses: stance, flinch, attack wind-up, attack landing' + (boss ? ', and two more attack frames' : '') + '.'} Paint it like attachment 1 and finish it like attachment 2: matte, thick visible brush strokes everywhere including the background, canvas grain, crisp painted edges, no gloss, not a smooth digital render. ${TAIL}`;
   return { id, tab: 'Enemies', title: null, ar: boss ? '3:2' : '1:1', refs, prompt: text };
 }
