@@ -29,10 +29,8 @@ let ROSE_RIDE_PAL=ROSE_OW.pal;
   sp.kneel=P('kneel');   // painted tired kneel (battle sheet 2); battle-draw skips its bruise overlay for hires sprites
   // Extra battle poses (sheet A), faces left like the rest: boop, boopBack, raspberry, boo, tiara, hug, balance, lookout, throwWind, throwRel, sitStory, sitTea.
   for(const k in ROSE_HIRES.x) sp[k]=tag(ROSE_HIRES.x[k].slice(),'roseBattleX',k,false);
-  // Tickle Storm frames (own atlas): tk_ready, tk_creepA, tk_creepB, tk_launch, tk_air, tk_land, tk_tickleA to D, tk_feather_draw, tk_feather_swish, tk_feather_twirl, tk_finale, tk_doubled, tk_proud.
-  if(ROSE_HIRES.tk) { paintedAtlas('roseBattleT',AT.btt.src,AT.btt.rects,AT.btt.k).tintMode='coral'; for(const k in ROSE_HIRES.tk) sp[k]=tag(ROSE_HIRES.tk[k].slice(),'roseBattleT',k,false); }
-  // Lamby Boomerang frames (own atlas): bm_windA, bm_windB, bm_throw, bm_follow, bm_watch, bm_reach, bm_catch, bm_cheer (the lamb flight frames are a prop atlas, art/props/rose/lamby_fly.webp).
-  if(ROSE_HIRES.bm) { paintedAtlas('roseBattleB',AT.btb.src,AT.btb.rects,AT.btb.k).tintMode='coral'; for(const k in ROSE_HIRES.bm) sp[k]=tag(ROSE_HIRES.bm[k].slice(),'roseBattleB',k,false); }
+  // Ability frames (tools/sprite-bake/ability_frames_rose.py): f:'ab_boop_1' etc. in a move's keys, own atlas.
+  paintedAtlas('rosePose',AT.btp.src,AT.btp.rects,AT.btp.k).tintMode='coral'; for(const k in ROSE_HIRES.ab) { sp[k]=tag(ROSE_HIRES.ab[k].slice(),'rosePose',k,false); sp[k+'F']=mirror(sp[k]); }   // 'F' = facing right (ab_boo_4F), for a move that must face the other way
   sp.flip=mirror(sp.idle); sp.celebFlip=mirror(sp.celeb); sp.runFlip=sp.run.map(mirror);
   // Right-facing kneel and boo, for Boo!! (she pops out behind the monster and must face it).
   sp.kneelFlip=mirror(sp.kneel); if(sp.boo) sp.booFlip=mirror(sp.boo);

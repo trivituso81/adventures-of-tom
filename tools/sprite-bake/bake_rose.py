@@ -60,6 +60,12 @@ X_NAMES = A_NAMES + J_NAMES
 for nm, im in slice_sheet(os.path.join(SRC, 'rose-extra-ow-v2.png'), [B_NAMES[0:4], B_NAMES[4:8]]).items():
     poses['y_' + nm] = im
 
+# Ability frames: Rose's 14 approved ability sheets (art/raw/characters/rose-ab-*, 2026-11-06), 6 frames each (9 for Bedtime Story and Tea Party), as painted
+# (see ability_frames_rose.py). Frame names ab_<move>_<n>.
+from ability_frames_rose import build as _build_ab
+for _k, _im in _build_ab().items(): poses[_k] = _im
+AB_NAMES = [k for k in poses if k.startswith('ab_')]
+
 # ---------------------------------------------------------------- helpers
 def up(n, k):
     return -(-n // k) * k
@@ -141,6 +147,20 @@ def pack(frames, path):
         x, y = (i % per) * w0, (i // per) * h0
         atlas.paste(frames[n], (x, y))
         rects[n] = [x, y, w0, h0]
+    atlas.save(path, 'WEBP', lossless=True, quality=100, method=6)
+    print('wrote', os.path.relpath(path, ROOT), atlas.size, os.path.getsize(path) // 1024, 'KB')
+    return rects
+
+def pack_shelf(frames, path, maxw=2048):
+    """Frames of different sizes on shelves, at most maxw wide. Returns {name: [x, y, w, h]}."""
+    x = y = rowh = 0; place_at = {}
+    for n, im_ in frames.items():
+        if x + im_.width > maxw: x = 0; y += rowh; rowh = 0
+        place_at[n] = (x, y); x += im_.width; rowh = max(rowh, im_.height)
+    atlas = Image.new('RGBA', (maxw, y + rowh), (0, 0, 0, 0)); rects = {}
+    for n, im_ in frames.items():
+        atlas.paste(im_, place_at[n]); rects[n] = [place_at[n][0], place_at[n][1], im_.width, im_.height]
+    W = max(r[0] + r[2] for r in rects.values()); atlas = atlas.crop((0, 0, W, atlas.height))
     atlas.save(path, 'WEBP', lossless=True, quality=100, method=6)
     print('wrote', os.path.relpath(path, ROOT), atlas.size, os.path.getsize(path) // 1024, 'KB')
     return rects
@@ -234,13 +254,6 @@ x_rows = {k: _rows['x_' + k] for k in x_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'rose-battle.webp'))
 x_rects = pack(x_big, os.path.join(ART, 'rose-battle-x.webp'))
 
-# Tickle Storm sheet (Oct 30, 4 x 4, 16 frames): own canvas and atlas so the other extra poses keep their layout. The rows use
-# the existing battle palette (nearest colour), so no other frame changes. Scaled so her upright 'proud' pose matches the idle pose.
-TK_NAMES = ['tk_ready', 'tk_creepA', 'tk_creepB', 'tk_launch', 'tk_air', 'tk_land', 'tk_tickleA', 'tk_tickleB', 'tk_tickleC', 'tk_tickleD',
-            'tk_feather_draw', 'tk_feather_swish', 'tk_feather_twirl', 'tk_finale', 'tk_doubled', 'tk_proud']
-_tk = slice_sheet(os.path.join(SRC, 'rose-tickle-v2.png'), [TK_NAMES[0:4], TK_NAMES[4:8], TK_NAMES[8:12], TK_NAMES[12:16]])
-rT = OLD_IDLE_H / _tk['tk_proud'].height
-tk_big = tighten(place({k: scaled_to(_tk[k], fb * rT * G_BT) for k in TK_NAMES}, KB, 'head'), KB)
 def rows_in_palette(frames, k, palette):
     keys = list(palette); pf = np.array([[int(palette[c][i:i + 2], 16) for i in (1, 3, 5)] for c in keys]).astype(int)
     out = {}
@@ -249,18 +262,11 @@ def rows_in_palette(frames, k, palette):
         d = ((arr[:, :, :3].astype(int).reshape(-1, 1, 3) - pf[None, :, :]) ** 2).sum(2).argmin(1).reshape(h, w)
         out[nm] = [''.join(keys[d[y, x]] if arr[y, x, 3] > 0 else '.' for x in range(w)) for y in range(h)]
     return out
-tk_rows = rows_in_palette(tk_big, KB, bt_pal)
-tk_rects = pack(tk_big, os.path.join(ART, 'rose-battle-tk.webp'))
 
-# Lamby Boomerang sheet (Oct 30, 4 x 4): Rose in cells 1 to 8 (own atlas, same rules as the tickle group, torso anchor because the lambs
-# go over her head), the two lambs in cells 9 to 16 (a prop atlas art/props/rose/lamby_fly.webp, 4 x 2 cells of 160 px).
+# Lamby Boomerang sheet (Oct 30, 4 x 4): only the two lambs (cells 9 to 16) are used, as a prop atlas art/props/rose/lamby_fly.webp, 4 x 2 cells of 160 px.
 BM_NAMES = ['bm_windA', 'bm_windB', 'bm_throw', 'bm_follow', 'bm_watch', 'bm_reach', 'bm_catch', 'bm_cheer']
 LF_NAMES = [f'{w}_{v}' for w in ('lamby', 'backup') for v in ('front', 'side', 'flip', 'squash')]
 _bm = slice_sheet(os.path.join(SRC, 'rose-boomerang-v1.png'), [BM_NAMES[0:4], BM_NAMES[4:8], LF_NAMES[0:4], LF_NAMES[4:8]])
-rBM = OLD_IDLE_H / _bm['bm_watch'].height
-bm_big = tighten(place({k: scaled_to(_bm[k], fb * rBM * G_BT) for k in BM_NAMES}, KB, 'torso'), KB)
-bm_rows = rows_in_palette(bm_big, KB, bt_pal)
-bm_rects = pack(bm_big, os.path.join(ART, 'rose-battle-bm.webp'))
 LFC = 160                                                          # lamb cell size in px
 _sl = (LFC - 4) / max(max(_bm[k].size) for k in LF_NAMES)          # one scale for all eight, so Lamby and Backup stay in proportion
 lf_atlas = Image.new('RGBA', (LFC * 4, LFC * 2), (0, 0, 0, 0)); lf_rects = {}
@@ -269,6 +275,16 @@ for i, k in enumerate(LF_NAMES):
     lf_atlas.alpha_composite(im_, (cx + (LFC - im_.width) // 2, cy + (LFC - im_.height) // 2)); lf_rects[k] = [cx, cy, LFC, LFC]
 _lf_path = os.path.join(ROOT, 'art/props/rose/lamby_fly.webp'); lf_atlas.save(_lf_path, 'WEBP', lossless=True, quality=100, method=6)
 print('wrote', os.path.relpath(_lf_path, ROOT), lf_atlas.size, json.dumps(lf_rects))
+
+# Ability frames: each on its own tight canvas (feet on the bottom row, head on the centre column), at the battle frames' scale (fb_bt).
+def own_canvas(img, k):
+    ax = head_cx(img); half = up(int(np.ceil(max(ax, img.width - ax))) + 1, k)
+    c = Image.new('RGBA', (half * 2, up(img.height, k)), (0, 0, 0, 0))
+    c.alpha_composite(img, (int(round(half - ax)), c.height - img.height))
+    return c
+ab_big = {n: own_canvas(scaled_to(poses[n], fb_bt), KB) for n in AB_NAMES}
+ab_rows = rows_in_palette(ab_big, KB, bt_pal)
+ab_rects = pack_shelf(ab_big, os.path.join(ART, 'rose-poses.webp'))
 
 # knocked out: the dizzy sit, facing screen-left as painted; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb_bt * KO_ / KB)}, KO_, 'center'), KO_)   # knocked out = the painted dizzy sit
@@ -349,8 +365,7 @@ atlas = {'bt': {'src': 'art/chars/rose-battle.webp', 'k': KB, 'rects': bt_rects}
          'ko': {'src': 'art/chars/rose-ko.webp', 'k': KO_, 'rects': ko_rects},
          'ow': {'src': 'art/chars/rose-ow.webp', 'k': KW, 'rects': ow_rects},
          'btx': {'src': 'art/chars/rose-battle-x.webp', 'k': KB, 'rects': x_rects},
-         'btt': {'src': 'art/chars/rose-battle-tk.webp', 'k': KB, 'rects': tk_rects},
-         'btb': {'src': 'art/chars/rose-battle-bm.webp', 'k': KB, 'rects': bm_rects},
+         'btp': {'src': 'art/chars/rose-poses.webp', 'k': KB, 'rects': ab_rects},
          'rideBt': {'src': 'art/chars/rose-ride-bt.webp', 'k': KB, 'rects': rd_bt_rects},
          'rideOw': {'src': 'art/chars/rose-ride-ow.webp', 'k': KW, 'rects': rd_ow_rects}}
 # ride anchors: tuned values live in tools/sprite-bake/rose-ride-anchors.json (rows); defaults are a guess
@@ -388,13 +403,9 @@ js.append("  x:{")
 for k in X_NAMES:
     js.append(f"    {k}:" + fmt_rows(x_rows[k]) + ",")
 js.append("  },")
-js.append("  tk:{")
-for k in TK_NAMES:
-    js.append(f"    {k}:" + fmt_rows(tk_rows[k]) + ",")
-js.append("  },")
-js.append("  bm:{")
-for k in BM_NAMES:
-    js.append(f"    {k}:" + fmt_rows(bm_rows[k]) + ",")
+js.append("  ab:{")
+for k in AB_NAMES:
+    js.append(f"    {k}:" + fmt_rows(ab_rows[k]) + ",")
 js.append("  },")
 js.append("  ride:{pal:" + json.dumps(ride['pal']) + ",")
 for key in ('bt_idle', 'bt_celeb', 'ow_down', 'ow_up', 'ow_left'):
