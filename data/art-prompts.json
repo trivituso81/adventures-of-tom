@@ -3640,7 +3640,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "olivia-ab-better-than-bobby",
    "tab": "Characters",
    "group": "Olivia",
@@ -3652,7 +3652,16 @@
     "art/raw/characters/olivia-battle-sheet-1-v1.png",
     "art/raw/characters/olivia-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Better Than Bobby.\n\nRow 1:\n1. Standing with her arms crossed and her chin up, a smug look.\n2. Holding up one finger of her raised hand, counting, a smirk.\n3. Holding up three fingers, eyes closed, shaking her head with a smile.\n\nRow 2:\n4. Holding up five fingers, a huge confident grin, eyebrows high.\n5. Holding out a microphone at arm's length, a teasing look.\n6. Opening her hand to drop the microphone, eyes locked ahead, a cool smile."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Better Than Bobby.\n\nRow 1:\n1. Standing with her arms crossed and her chin up, a smug look.\n2. Holding up one finger of her raised hand, counting, a smirk.\n3. Holding up three fingers, eyes closed, shaking her head with a smile.\n\nRow 2:\n4. Holding up five fingers, a huge confident grin, eyebrows high.\n5. Holding out a microphone at arm's length, a teasing look.\n6. Opening her hand to drop the microphone, eyes locked ahead, a cool smile.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-ab-better-than-bobby-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793995134427
+    }
+   ]
   },
   {
    "status": "draft",
