@@ -4526,6 +4526,13 @@
      "date": "2026-11-06",
      "from": "v2",
      "at": 1793936446620
+    },
+    {
+     "n": 1,
+     "file": "art/raw/areas/area-square-fix-v2.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793936559602
     }
    ],
    "rejects": [],
