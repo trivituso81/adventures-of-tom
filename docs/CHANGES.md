@@ -1,3 +1,7 @@
+## 2026-11-05 (277): Art Library: Square fix 2 card, exit boards only (`sqfix3`)
+- Tom approved `area-square-fix` v1 so I could see it (art/raw/areas/area-square-fix-v1.png): library now has doors, Kettle has one sign, but the exit boards barely moved and a second SCHOOL board appeared at the top between Sprout House and Penny's Pockets. Tom: "didnt work".
+- New entry `area-square-fix2` attaches fix v1 and asks for one subject only: delete the extra top SCHOOL board, posts of the three exit boards twice as tall. Not installed; live Square still v3.
+
 ## 2026-11-05 (277): Command cross is now Attack, Heal, Warmth, Bag; Tombos live inside those three lists (`warmth1`)
 
 - Tom (19:20): the cross categories become Attack, Heal and Warmth (the HEART combos stay), Tombos are redistributed into those three, and moves like RASPBERRY leave Heal for Warmth. Layout: Up ATTACK, Right HEAL, Left WARMTH (was TOMBO), Down BAG. The separate Tombo list is gone (purged: `ui==='tombo'`, `bpTombo`, `b2TomboEmpty`, `b2IsHeal`, the old special-always-in-Heal rule).
