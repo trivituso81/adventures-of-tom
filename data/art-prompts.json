@@ -4301,7 +4301,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-fx-tennis-ball-fetch",
    "tab": "Characters",
    "group": "Nara",
@@ -4310,7 +4310,16 @@
    "refs": [
     "art/raw/characters/nara-ab-tennis-ball-fetch-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Tennis Ball Fetch.\n\nItems:\n1. A yellow tennis ball, seen from the front.\n2. The same tennis ball tilted, as if spinning through the air.\n3. A curved white swoosh, the path of a thrown ball (wide).\n4. Cream colored speed streaks (wide).\n5. A small puff of dust.\n6. A small starburst of cheer.\n7. A small drool-wet tennis ball with a shine on it."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Tennis Ball Fetch.\n\nItems:\n1. A yellow tennis ball, seen from the front.\n2. The same tennis ball tilted, as if spinning through the air.\n3. A curved white swoosh, the path of a thrown ball (wide).\n4. Cream colored speed streaks (wide).\n5. A small puff of dust.\n6. A small starburst of cheer.\n7. A small drool-wet tennis ball with a shine on it.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-fx-tennis-ball-fetch-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793989302077
+    }
+   ]
   },
   {
    "status": "draft",
