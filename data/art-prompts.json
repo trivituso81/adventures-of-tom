@@ -3075,7 +3075,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "nara-ab-pack-ult",
    "tab": "Characters",
    "group": "Nara",
@@ -3087,7 +3087,16 @@
     "art/raw/characters/nara-battle-sheet-1-v1.png",
     "art/raw/characters/nara-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: The Unsent Scent.\n\nRow 1:\n1. Standing alone, head low, ears drooping, a lost and quiet look.\n2. Head lifted, eyes wide in surprise, nose high, sniffing the air.\n3. Sniffing the ground with her nose low, ears perked, tail starting to wag.\n\nRow 2:\n4. Lifting her head with sudden joy, eyes bright, tail up high.\n5. Running flat out, ears streaming back, mouth open in a joyful grin.\n6. Leaping with all four paws off the ground, ears flying, mouth open, pure joy."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: The Unsent Scent.\n\nRow 1:\n1. Standing alone, head low, ears drooping, a lost and quiet look.\n2. Head lifted, eyes wide in surprise, nose high, sniffing the air.\n3. Sniffing the ground with her nose low, ears perked, tail starting to wag.\n\nRow 2:\n4. Lifting her head with sudden joy, eyes bright, tail up high.\n5. Running flat out, ears streaming back, mouth open in a joyful grin.\n6. Leaping with all four paws off the ground, ears flying, mouth open, pure joy.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-ab-pack-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793989114517
+    }
+   ]
   },
   {
    "status": "draft",
