@@ -1,3 +1,10 @@
+## 2026-11-06 (305): Welcome screen cast resized, closer together, slow breath (`welcome2`)
+- Tom (00:20): "fix the welcome screen layout to make sure everyone is sized up proportionally the same amount to fill out the screen on landscape iPad but also sized to fit for iPhone portrait. have them also standing closer together. they should be bouncing more subtly like they do in battle".
+- The family is now laid out in screen space (engine/splash.js `SPLASH_FIT`), not through the picture's cover fit, so every figure keeps its real height ratio and the group scales as one: iPhone portrait fills 96% of the width, iPad landscape is capped by height (44% of the screen) so it never reaches the logo or menu. Sideways spread pulled in to 60%, depth rows squeezed to 50%. Nara now stands in front between Tom and Grace (she was hidden behind Tom).
+- Bounce: the two-step hop is replaced by the battle idle's slow breath (a 1.2% vertical stretch from the feet, own phase per person).
+- Purged: the old extra poses the ability frames replace (32 `c_` frames) and their sources tom-xposes-1, 2, 4, 6, 7, 8. Kept and baked as before: `proud`, `bowlsit`, `spook`, `scream`, `cower` (tom-xposes-3 and 5), still played by the horror-movie Tombo in engine/battle2-kind.js. Also removed: the dead earlier definitions of Noise-Canceling, Flashcard Flurry and Disconnected Controller, and the `proud`, `hold`, `tw_*` ride mappings in rose-ride.js.
+- Tested: shots at 393x852, 1180x820 and 1090x890; tag_check ok.
+=======
 ## 2026-11-06 (313): TNB fights with his two painted battle sheets (`battlesheet5`)
 - Tom (11-05 23:40): TNB's battle sheets (art/raw/characters/tnb-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head sizing, no body widening BODY_KX). NEW slots: idle2 breath; hip, spread, point now his painted frames instead of the old extra-sheet poses (data/tnb-hires-battle.js); KO = dizzy sit. Idle keeps its old visible height (100 rows).
 - Extra sheets (tnb-poses, tnb-board) pinned to the old idle (OLD_IDLE_H 469, _Hb 469, _idle_body 260) and came back pixel for pixel. Battle and KO atlases at 1.5 through hires.py.

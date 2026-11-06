@@ -38,22 +38,18 @@ from battle_sheet_frames import build as _build_battle, SLOTS
 _bf = _build_battle('tom')
 for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
 poses['b_dizzy'] = _bf['b_dizzy']
-# Extra poses: eight 5-frame sheets (Nov 2026, painted, same character as the battle sheet), tom-xposes-N-v1.png.
-# Prefix c = custom battle pose (f:'<name>' in a move's keys). The last three cells of sheet 8 were the old arrival stretch (unused since storypose1).
-XSHEETS = [
-    ['c:hold', 'c:annoyed', 'c:tw_windup', 'c:tw_follow', 'c:limit'],
-    ['c:carry', 'c:raise', 'c:lidpop', 'c:splash', 'c:goo'],
-    ['c:proud', 'c:fling', 'c:lift', 'c:finger', 'c:unbox'],
-    ['c:flick', 'c:brush', 'c:headphones', 'c:mask', 'c:shade'],
-    ['c:bowlsit', 'c:spook', 'c:scream', 'c:cower', 'c:frozen'],
-    ['c:bowlthrow', 'c:startled', 'c:direct', 'c:floorsit', 'c:lying'],
-    ['c:cartwheel', 'c:facedown', 'c:rope', 'c:stirrup', 'c:strain'],
-    ['c:toast', 'c:plates', 'x:a', 'x:b', 'x:c'],
-]
-for i, names in enumerate(XSHEETS, 1):
-    for nm, im in slice_sheet(os.path.join(SRC, f'tom-xposes-{i}-v1.png'), [[n.split(':')[1] for n in names]]).items():
-        full = next(n for n in names if n.split(':')[1] == nm)
-        if full[0] == 'c': poses[full.replace(':', '_')] = im
+# Ability frames: Tom's 14 approved ability sheets (art/raw/characters/tom-ab-*, 2026-11-06), 6 frames each, as painted (see ability_frames.py).
+from ability_frames import build as _build_ab, SHEETS as AB_SHEETS
+for _k, _im in _build_ab().items(): poses[_k] = _im
+AB_NAMES = [k for k in poses if k.startswith('ab_')]
+# Five older painted poses are still played by the horror-movie Tombo (engine/battle2-kind.js): proud (tom-xposes-3, 1st cell) and bowlsit, spook,
+# scream, cower (tom-xposes-5, cells 1 to 4), exactly as before (same size, same head factor). Every other old extra pose was replaced by the ability frames and is gone.
+KEEP = {3: ['proud', 'fling', 'lift', 'finger', 'unbox'], 5: ['bowlsit', 'spook', 'scream', 'cower', 'frozen']}
+CUSTOM = ['proud', 'bowlsit', 'spook', 'scream', 'cower']
+for _i, _names in KEEP.items():
+    _cells = slice_sheet(os.path.join(SRC, f'tom-xposes-{_i}-v1.png'), [_names])
+    for _n in _names:
+        if _n in CUSTOM: poses['c_' + _n] = _cells[_n]
 # Walk: Tom's overworld frames are the nine figures of his 3 x 3 walk sheet (art/raw/characters/tom-walk-sheet-v1.png, Tom 2026-11-05 22:56), as painted.
 from defringe import defringe
 from walk_sheet_frames import build as _build_walk
@@ -66,9 +62,11 @@ poses.update(_build_walk('tom'))
 from headwarp import _warp_head, body_width
 # Body width (2026-11-01, Tom: "Tom should be wider to match TNB"): every upright pose's body below the chin x BODY_W before the head warp.
 BODY_W = 1.25   # Tom 11:25: shoulders like Justin's (152 -> 104 welcome px at 1.83). Before that 1.83: was 1.18; Tom 11:12: "half the width of TNB". Chest measured 97 vs TNB 158 welcome px at 1.18, so x 1.55 more
+HEAD_KB = 1.549   # pinned (2026-11-05 battlesheet1): the kept old poses keep the head factor solved on the old battle idle
 HEAD_UP = 1.08   # Tom 2026-11-01 14:57: "head needs to be 8% larger" (battle, custom, walk and stretch)
 FACE_GROW = (49 / 38) / (1.43 / 1.3) * 1.12 * .94 * HEAD_UP   # x .94 bald-scalp nudge, as FACE_GROW_W; x 1.12 in battle: same perceived-size check on the battle idles (Tom read 35 px vs the group's 39)
 TAPER = 16
+BT_PAL = {"a": "#1a1517", "b": "#34211e", "c": "#342e33", "d": "#482f21", "e": "#473138", "f": "#513b2d", "g": "#3f3b44", "h": "#523c43", "i": "#614038", "j": "#4d4449", "k": "#4d4953", "l": "#923d26", "m": "#644f44", "n": "#505265", "o": "#735045", "p": "#995030", "q": "#745c4a", "r": "#745d5c", "s": "#7b675c", "t": "#91634e", "u": "#aa6239", "v": "#c96533", "w": "#92715f", "x": "#997966", "y": "#bc7950", "z": "#dd793e", "A": "#9e8875", "B": "#be8d65", "C": "#e88842", "D": "#e58a54", "E": "#bd9582", "F": "#f4984f", "G": "#e19b6c", "H": "#fa9d60", "I": "#fca85f", "J": "#d0af91", "K": "#fdb164", "L": "#f2b077", "M": "#fcb072", "N": "#fdba75", "O": "#fdc278", "P": "#eac8a4", "Q": "#fdc993", "R": "#fee1b7", "S": "#f5e1c6", "T": "#fef8e7"}
 def _auto_head(img):
     a = np.array(img)[:, :, 3] > 40; H = a.shape[0]
     top = int(np.where(a.any(1))[0].min())
@@ -122,11 +120,10 @@ def _bigger_core(img, name, k, pad=160, taper=TAPER):
     arr[Y0:AY, X0:X1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
     return big.crop(big.getbbox())
-HEAD_KB = 1.549   # pinned (2026-11-05 battlesheet1): the old extra-pose sheets keep the head factor solved on the old battle idle; the new battle frames are not warped
 if os.environ.get('HEADSHEET'):          # contact sheet: each battle/custom source pose with its head box
     from PIL import ImageDraw
     tiles = []
-    for n in [n for n in poses if n[:2] in ('b_', 'c_', 'w_', 's_')]:
+    for n in [n for n in poses if n[:2] in ('b_', 'w_', 's_')]:
         im = poses[n] if n not in SIDE else _rot(poses[n], SIDE[n])
         t0, c0, a0, a1 = head_box(im, n + ('#rot' if n in SIDE else ''))
         tl = Image.new('RGBA', im.size, (90, 90, 100, 255)); tl.alpha_composite(im); d = ImageDraw.Draw(tl)
@@ -147,8 +144,6 @@ if os.environ.get('RULER'):               # RULER=name,name DIR=...: source pose
         for y in range(0, im.height, 100): d.text((2, y + 2), str(y), fill=(255, 255, 0, 255))
         tl.convert('RGB').save(os.path.join(os.environ['DIR'], 'ruler_' + n + '.png'))
     sys.exit(0)
-for _n in list(poses):
-    if _n[:2] == 'c_': poses[_n] = bigger_head(poses[_n], _n, HEAD_KB)
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -209,10 +204,24 @@ def tighten(frames, k):
     top = (rws.min() // k) * k
     return {n: v.crop((W // 2 - half, top, W // 2 + half, v.height)) for n, v in frames.items()}
 
-def rows_of(frames, k, ncolors):
+def rows_of(frames, k, ncolors, pinned=None):
     """Downscale painted frames by k, quantize them together. Returns (palette, rows by name)."""
     small = {n: hard(scaled_to(v, 1.0 / k)) for n, v in frames.items()}
-    return quantize(small, ncolors)
+    return quantize(small, ncolors, pinned)
+
+def pack_shelf(frames, path, maxw=2048):
+    """Frames of different sizes on shelves, at most maxw wide. Returns {name: [x, y, w, h]}."""
+    x = y = rowh = 0; place_at = {}
+    for n, im_ in frames.items():
+        if x + im_.width > maxw: x = 0; y += rowh; rowh = 0
+        place_at[n] = (x, y); x += im_.width; rowh = max(rowh, im_.height)
+    atlas = Image.new('RGBA', (maxw, y + rowh), (0, 0, 0, 0)); rects = {}
+    for n, im_ in frames.items():
+        atlas.paste(im_, place_at[n]); rects[n] = [place_at[n][0], place_at[n][1], im_.width, im_.height]
+    W = max(r[0] + r[2] for r in rects.values()); atlas = atlas.crop((0, 0, W, atlas.height))
+    atlas.save(path, 'WEBP', lossless=True, quality=100, method=6)
+    print('wrote', os.path.relpath(path, ROOT), atlas.size, os.path.getsize(path) // 1024, 'KB')
+    return rects
 
 def pack(frames, path):
     """Write all frames into one webp atlas. Returns {name: [x, y, w, h]}."""
@@ -229,7 +238,7 @@ def pack(frames, path):
     print('wrote', os.path.relpath(path, ROOT), atlas.size, os.path.getsize(path) // 1024, 'KB')
     return rects
 
-def quantize(frames, ncolors):
+def quantize(frames, ncolors, pinned=None):
     """One shared palette for a set of frames. Returns (palette dict key->hex, frames as row strings)."""
     names = list(frames)
     stack = []
@@ -247,8 +256,12 @@ def quantize(frames, ncolors):
     used = len(np.unique(np.array(q)))
     pal = pal[: max(used, 1)] if used < len(pal) else pal
     # order darkest first so 'a' is the outline
-    order = np.argsort(pal.sum(1))
-    pal = pal[order]
+    if not pinned:
+        order = np.argsort(pal.sum(1))
+        pal = pal[order]
+    if pinned:   # a fixed palette: only the mapping below is done (key order is the dict's)
+        pal = np.array([[int(h[i:i + 2], 16) for i in (1, 3, 5)] for h in pinned.values()])
+        assert list(pinned) == list(KEYS[:len(pinned)])
     keymap = {i: KEYS[i] for i in range(len(pal))}
     palette = {KEYS[i]: '#%02x%02x%02x' % tuple(int(v) for v in pal[i]) for i in range(len(pal))}
     out = {}
@@ -289,23 +302,25 @@ def fmt_rows(rows, indent='    '):
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
 battle_names = {k: 'b_' + k for k in SLOTS}
-CUSTOM = ['hold', 'annoyed', 'tw_windup', 'tw_follow', 'lift', 'fling', 'unbox', 'flick', 'brush', 'limit', 'startled', 'direct']
-CUSTOM += ['carry', 'raise', 'lidpop', 'splash', 'goo', 'proud', 'bowlsit', 'spook', 'scream', 'bowlthrow', 'cower', 'frozen']
-CUSTOM += ['finger', 'headphones', 'mask', 'shade', 'floorsit', 'lying', 'cartwheel', 'facedown', 'rope', 'stirrup', 'strain', 'toast', 'plates']
 fb = args.battle_h * KB / poses['b_idle'].height
-FB_CUSTOM = 0.5934718100890207   # pinned: the old extra-pose sheets keep the size they had next to the old battle idle
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
-# custom poses: their own canvas (some are taller than the idle), feet on the bottom row and head on the centre column.
-# The extra sheets draw an upright figure about 632 px tall; the battle sheet's upright 'hip' frame is 292 px, so scale by 292/632
-# (a touch more, 0.476 instead of 0.462, so the heads do not end up smaller than the battle sheet's).
-XS = 0.476
-cu_big = tighten(place({c: scaled_to(poses['c_' + c], FB_CUSTOM * XS) for c in CUSTOM}, KB, 'head'), KB)
-bt_pal, all_rows = rows_of({**bt_big, **cu_big}, KB, args.colors)      # one shared palette
+# ability frames: each on its own tight canvas (feet on the bottom row, head on the centre column), at the battle frames' scale (fb).
+def own_canvas(img, k):
+    ax = head_cx(img); half = up(int(np.ceil(max(ax, img.width - ax))) + 1, k)
+    c = Image.new('RGBA', (half * 2, up(img.height, k)), (0, 0, 0, 0))
+    c.alpha_composite(img, (int(round(half - ax)), c.height - img.height))
+    return c
+cu_big = {n: own_canvas(scaled_to(poses[n], fb), KB) for n in AB_NAMES}
+# the five kept old poses: the head factor and the size they had next to the old battle idle (FB_OLD x XS), on a shared canvas as before
+for _n in CUSTOM: poses['c_' + _n] = bigger_head(poses['c_' + _n], 'c_' + _n, HEAD_KB)
+FB_OLD = 0.5934718100890207; XS = 0.476
+cu_big.update(tighten(place({c: scaled_to(poses['c_' + c], FB_OLD * XS) for c in CUSTOM}, KB, 'head'), KB))
+bt_pal, all_rows = rows_of({**bt_big, **cu_big}, KB, args.colors, pinned=BT_PAL)      # one shared palette: the pinned one of the 2026-11-05 bake (gear.js reads the shirt keys from it), every frame mapped to it
 bt_rows = {k: all_rows[k] for k in bt_big}
 cu_rows = {k: all_rows[k] for k in cu_big}
 bt_rects = pack(bt_big, os.path.join(ART, 'tom-battle.webp'))
-cu_rects = pack(cu_big, os.path.join(ART, 'tom-poses.webp'))
+cu_rects = pack_shelf(cu_big, os.path.join(ART, 'tom-poses.webp'))
 
 # knocked out: the dizzy sit, facing screen-left as painted; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
 ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb * KO_ / KB)}, KO_, 'center'), KO_)   # knocked out = the painted dizzy sit
@@ -370,7 +385,7 @@ js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
 for k in SLOTS:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
-js.append("  pose:{" + ",".join(f"{k}:" + fmt_rows(cu_rows[k]) for k in CUSTOM) + "},")
+js.append("  pose:{" + ",".join(f"{k}:" + fmt_rows(cu_rows[k]) for k in AB_NAMES + CUSTOM) + "},")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
 js.append("  ow:{pal:" + json.dumps(ow_pal) + ",")
 for d in ('down', 'up', 'left'):

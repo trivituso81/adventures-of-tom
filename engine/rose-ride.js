@@ -58,7 +58,7 @@ function rideFrameOf(fr) {
   const T=BATTLE_SPRITES.tom;
   if(!_rideMap||_rideMapFor!==T) {
     _rideMapFor=T; _rideMap=new Map(); const R=TOMRIDE.bt;
-    for(const k of ['idle','act','celeb','windup','leap','hurtPose','defend','castPose','kneel','expr','flip','celebFlip','proud','hold','annoyed','tw_windup','tw_follow']) if(T[k]&&R[k]) _rideMap.set(T[k],R[k]);
+    for(const k of ['idle','act','celeb','windup','leap','hurtPose','defend','castPose','kneel','expr','flip','celebFlip']) if(T[k]&&R[k]) _rideMap.set(T[k],R[k]);
     for(const k of ['run','runFlip']) if(T[k]&&R[k]) T[k].forEach((f,i)=>R[k][i]&&_rideMap.set(f,R[k][i]));
   }
   return _rideMap.get(fr)||null;
