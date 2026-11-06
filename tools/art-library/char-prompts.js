@@ -1,7 +1,9 @@
-// Characters tab (Tom 2026-11-05 23:24): per character, battle sheet 1 (8 frames) and battle sheet 2 (6 frames), then one
-// 3 x 2 sheet per ability. Every ability sheet attaches the hero picture, the walk sheet and both battle sheets.
+// Characters tab (Tom 2026-11-05 23:24 and 23:46): one 3 x 2 sheet per ability. Every ability sheet attaches the hero picture,
+// the walk sheet and both battle sheets. Tom sends all four pictures to Claude (no Library entries make them); Claude saves them as
+// art/raw/characters/<id>-hero-ref-v1.png, <id>-walk-sheet-v1.png, <id>-battle-sheet-1-v1.png, <id>-battle-sheet-2-v1.png.
+// art.html shows an ability blocked until its pictures exist.
 // Ability frames follow the beats of the real animation in engine/<id>-moves.js (Primary kit, data/abilities.js B8_KITS).
-// Shared text: prompts/char-battle-sheet-1.txt, char-battle-sheet-2.txt, char-ability-sheet.txt (no left/right words).
+// Shared text: prompts/char-ability-sheet.txt (no left/right words).
 const fs = require('fs');
 const P = f => fs.readFileSync(__dirname + '/prompts/' + f, 'utf8').trim();
 const R = 'art/raw/characters/';
@@ -114,12 +116,10 @@ const GROUP = { tom: 'Tom' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
-  const b1 = R + id + '-battle-1-v1.png', b2 = R + id + '-battle-2-v1.png';
-  entries.push({ id: id + '-battle-1', tab: 'Characters', group: who, title: who + ' battle sheet 1: 8 frames (ready, act, guard)', ar: '2:1', refs: [hero, walk], prompt: P('char-battle-sheet-1.txt') });
-  entries.push({ id: id + '-battle-2', tab: 'Characters', group: who, title: who + ' battle sheet 2: 6 frames (flinch, tired, cheer; needs sheet 1)', ar: '3:2', refs: [hero, walk, b1], prompt: P('char-battle-sheet-2.txt') });
+  const b1 = R + id + '-battle-sheet-1-v1.png', b2 = R + id + '-battle-sheet-2-v1.png';
   for (const [key, name, r1, r2] of ABILITIES[id]) {
     const n = (a, o) => a.map((t, i) => (i + 1 + o) + '. ' + t).join('\n');
-    entries.push({ id: id + '-ab-' + key.replace(/_/g, '-'), tab: 'Characters', group: who, title: who + ' ability: ' + name + ' (6 frames; needs both battle sheets)', ar: '3:2', refs: [hero, walk, b1, b2],
+    entries.push({ id: id + '-ab-' + key.replace(/_/g, '-'), tab: 'Characters', group: who, title: who + ' ability: ' + name + ' (6 frames; needs your two battle sheets)', ar: '3:2', refs: [hero, walk, b1, b2],
       prompt: P('char-ability-sheet.txt') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
   }
 }

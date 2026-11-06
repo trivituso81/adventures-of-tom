@@ -187,7 +187,8 @@ function blockInfo(e){
   for(let i=0;i<rf.length;i++){
     if(USE[e.id+'|'+i]===false) continue;
     const m=CHAIN.exec(rf[i]); if(!m) continue;
-    const dep=ENTRY[m[2]]; if(!dep) continue;
+    const dep=ENTRY[m[2]];
+    if(!dep){ const x=EXISTS[rf[i]]; if(x&&!x.ok) return {why:'Waiting for a picture you send to Claude: '+m[2].replace(/-/g,' ')+'.'}; continue; }
     if(!(dep.versions||[]).length) return {why:'Approve “'+shortTitle(dep.title)+'” first.'};
     const x=EXISTS[rp(rf[i])]; if(x&&!x.ok) return {why:'“'+shortTitle(dep.title)+'” is approved but the site has not published it yet. Give it about 2 minutes.'};
   }
@@ -199,7 +200,7 @@ async function probe(){
   const need=[], seen=new Set();
   for(const e of DATA.entries) for(const p of e.refs||[]){
     const m=CHAIN.exec(p); if(!m) continue; const q=rp(p); if(seen.has(q)) continue; seen.add(q);
-    const dep=ENTRY[m[2]]; if(!dep||!(dep.versions||[]).length) continue;
+    const dep=ENTRY[m[2]]; if(dep&&!(dep.versions||[]).length) continue;   // no dep = a picture Tom sends to Claude (battle sheets): probe it too
     const x=EXISTS[q]; if(x&&(x.ok||Date.now()-x.t<15000)) continue;
     need.push(q);
   }

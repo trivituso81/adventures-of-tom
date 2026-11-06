@@ -27,6 +27,7 @@ function check(entries, known, needGroup) {
       if (e.refs.length > 5) w('more than 5 refs');
       for (const r of e.refs) {
         const m = /^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d+\.png$/.exec(r);
+        if (m && !produced.has(m[2]) && m[1] === 'characters') continue;   // a picture Tom sends to Claude (hero, walk, battle sheets); art.html shows the entry blocked until it is there
         if (m && (produced.has(m[2]) || !fs.existsSync(r))) { if (!produced.has(m[2])) w('chained ref to unknown entry ' + r); if (m[1] !== (entries.concat([]).find(x => x.id === m[2]) || { tab: '' }).tab.toLowerCase() && entries.find(x => x.id === m[2])) w('chained ref folder does not match tab ' + r); }
         else if (!fs.existsSync(r)) w('missing ref file ' + r);
       }
