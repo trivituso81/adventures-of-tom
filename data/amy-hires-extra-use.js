@@ -6,12 +6,11 @@
   if(typeof AMY_HIRES_X==='undefined'||typeof AMY_HIRES==='undefined'||!AMY_OW.hires) return;
   const sp=BATTLE_SPRITES.amy; if(!sp||!sp.hires) return;
   const AT=AMY_HIRES_X.atlas;
-  paintedAtlas('amyBa',AT.ba.src,AT.ba.rects,AT.ba.k); paintedAtlas('amyBs',AT.bs.src,AT.bs.rects,AT.bs.k);
-  paintedAtlas('amyBp',AT.bp.src,AT.bp.rects,AT.bp.k); paintedAtlas('amyOx',AT.ox.src,AT.ox.rects,AT.ox.k); paintedAtlas('amyMk',AT.mk.src,AT.mk.rects,AT.mk.k);
+  paintedAtlas('amyBa',AT.ba.src,AT.ba.rects,AT.ba.k); paintedAtlas('amyBs',AT.bs.src,AT.bs.rects,AT.bs.k); paintedAtlas('amyOx',AT.ox.src,AT.ox.rects,AT.ox.k);
   // palettes: private code points (U+0400 and up) so they coexist with the pixel and main painted keys
   let n=0; const pal=sp.pal, maps={};
   const lum=c=>{ const h=pal[c]; if(!h) return 0; return parseInt(h.slice(1,3),16)*.3+parseInt(h.slice(3,5),16)*.59+parseInt(h.slice(5,7),16)*.11; };
-  for(const s of ['ba','bs','bp','mk']) { const m=maps[s]={'.':'.'}; for(const k in AMY_HIRES_X[s].pal) { const c=String.fromCharCode(0x0400+n++); m[k]=c; pal[c]=AMY_HIRES_X[s].pal[k]; } }
+  for(const s of ['ba','bs']) { const m=maps[s]={'.':'.'}; for(const k in AMY_HIRES_X[s].pal) { const c=String.fromCharCode(0x0400+n++); m[k]=c; pal[c]=AMY_HIRES_X[s].pal[k]; } }
   const rk=(s,rows)=>rows.map(r=>{ let o=''; for(const ch of r) o+=maps[s][ch]; return o; });
   // eye = centroid of dark pixels in the face band; hands = outermost pixels in the arm band (move logic reads these)
   const meta=rows=>{ const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
@@ -22,20 +21,15 @@
     return {eye,hand:{n:[lx+1,ly],f:[rx-1,ry]}}; };
   const P=(s,id,name)=>{ const rows=paintRows(rk(s,AMY_HIRES_X[s][name]),id,name,false), m=meta(rows);
     if(sp.eyeAt) sp.eyeAt.set(rows,m.eye); if(sp.handAt) sp.handAt.set(rows,m.hand); return rows; };
-  const ba=k=>P('ba','amyBa',k), bs=k=>P('bs','amyBs',k), bp=k=>P('bp','amyBp',k), mk=k=>P('mk','amyMk',k);
+  const ba=k=>P('ba','amyBa',k), bs=k=>P('bs','amyBs',k);
   // name -> painted frame (built once)
+  // Since her painted ability install (Nov 2026) her core stances come from her painted battle sheets (data/amy-hires-battle.js) and her moves from
+  // data/amy-ab.js; only the poses her Tombos (engine/battle2-kind.js amyPoses) still name are left here.
   const F={
-    act:ba('t4_hit'), windup:ba('t3_windup'), sprint:ba('t2_sprint'), start:ba('t1_start'), recover:ba('t5_recover'),   // Sprint Tackle
-    hike:ba('k1_hike'), swingup:ba('k2_swingup'), swingtop:ba('k3_top'), throw:ba('k5_throw'), wind:ba('k1_hike'), pump:ba('k2_swingup'), flex:ba('k2_swingup'),
-    carry:ba('k4_carry'), hold:ba('k2_swingup'), grab:ba('k4_carry'), dazed:ba('k6_dazed'),                                // Kettlebell Swing and others
-    hip:bs('s1_hips'), point:bs('s2_point'), clap:bs('s3_clap'), whistle:bs('s4_whistle'), shh:bs('s5_shh'), shrug:bs('s6_shrug'), spread:bs('s6_shrug'),
-    write:bs('s7_write'), card:bs('s8_card'), pistol:bs('s8_card'), reach:bs('s8_card'), squat:bs('s9_squat'), plant:bs('s9_squat'), bend:bs('s9_squat'), tuck:bs('s9_squat'),
-    jump:bs('s13_bjump'), bjump:null, plank:bp('s10_plank'), plank2:bp('s10_plank'), pushup:bp('s11_pushup'),
-    // Almond Milk, Please kick (amy-milk-v1.png): mk_spot ... mk_wink
-    mk_spot:mk('spot'), mk_glare:mk('glare'), mk_nope:mk('nope'), mk_line:mk('line'), mk_back:mk('back'), mk_windA:mk('windA'), mk_windB:mk('windB'), mk_kick:mk('kick'), mk_follow:mk('follow'), mk_balance:mk('balance'), mk_watch:mk('watch'), mk_goal:mk('goal'), mk_dust:mk('dust'), mk_hair:mk('hair'), mk_laugh:mk('laugh'), mk_wink:mk('wink')
+    carry:ba('k4_carry'), hold:ba('k2_swingup'), grab:ba('k4_carry'),
+    whistle:bs('s4_whistle'), shh:bs('s5_shh'), shrug:bs('s6_shrug'), write:bs('s7_write'), card:bs('s8_card'), reach:bs('s8_card'),
+    plant:bs('s9_squat'), bend:bs('s9_squat'), tuck:bs('s9_squat'), jump:bs('s13_bjump')
   };
-  F.bjump=F.jump;   // Tom: every Amy jump uses the painted arms-up frame (was s12_jump); Burpee Blitz asks for it by the name bjump
-  for(const nm of ['plank','plank2','pushup','squat','plant','tuck','bend']) F[nm].cut=1;   // engine/amy-moves.js burpeeFrames(): "already built", keeps these
   const keepExpr=sp.expr;                                                                    // portraits keep the old strike face
   const apply=()=>{ for(const nm in F) sp[nm]=F[nm]; sp.expr=keepExpr; sp.celeb2=sp.celeb; };
   apply();

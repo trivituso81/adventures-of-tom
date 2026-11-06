@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Amy's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/amy-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/amy-walk-sheet-v1.png (walk, as painted)
+Input : art/raw/characters/amy-battle-sheet-1-v1.png and -2-v1.png (battle, as painted) and art/raw/characters/amy-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/amy-battle.webp, amy-ko.webp, amy-ow.webp  (painted frames, K x the size of the rows)
         data/amy-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -31,161 +31,13 @@ args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'amy-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
-    poses['b_' + nm] = im
-
-
-# ---------------------------------------------------------------- paint-in (the sheets avoid injury wording)
-from PIL import ImageDraw, ImageFilter
-import math
-def _layer(img, draw_fn, blur):
-    L = Image.new('RGBA', img.size, (0, 0, 0, 0)); draw_fn(ImageDraw.Draw(L))
-    if blur: L = L.filter(ImageFilter.GaussianBlur(blur))
-    a = np.array(L).astype(float); base = np.array(img).astype(float)
-    m = (a[:, :, 3:4] / 255.0) * (base[:, :, 3:4] / 255.0)      # only where Amy is
-    base[:, :, :3] = base[:, :, :3] * (1 - m) + a[:, :, :3] * m
-    return Image.fromarray(base.clip(0, 255).astype(np.uint8), 'RGBA')
-def black_eye(img, cx, cy, rx, ry):
-    """Soft bruise around the near eye: purple-brown, darker toward the centre."""
-    img = _layer(img, lambda d: d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=(86, 44, 72, 175)), 3)
-    return _layer(img, lambda d: d.ellipse([cx - rx * .6, cy - ry * .6, cx + rx * .6, cy + ry * .6], fill=(58, 28, 52, 150)), 2.2)
-def swirl_eye(img, cx, cy, r):
-    """Dizzy spiral over a skin patch (hides the closed-eye line)."""
-    skin = tuple(int(v) for v in np.array(img)[int(cy + r * 2.4), int(cx), :3])
-    img = _layer(img, lambda d: d.ellipse([cx - r * 1.1, cy - r * 1.1, cx + r * 1.1, cy + r * 1.1], fill=skin + (235,)), 1.5)
-    def sp(d):
-        pts = [(cx + (r * t / 40.0) * math.cos(t * 0.22), cy + (r * t / 40.0) * math.sin(t * 0.22)) for t in range(0, 41)]
-        d.line(pts, fill=(70, 34, 30, 255), width=max(2, int(r / 4)))
-    return _layer(img, sp, .6)
-poses['b_kneel'] = black_eye(poses['b_kneel'], 70, 77, 8, 5)
-poses['b_ko'] = swirl_eye(poses['b_ko'], 82, 33, 5)
-
-# ---------------------------------------------------------------- head size (match Tom's caricature proportions)
-# Tom's head (hair to chin) is about 45 percent of his height; the painted Amy's is about 28 percent. Each frame's head is cut out,
-# scaled up about the chin, and pasted back (the original head is erased first), then the whole figure is refit to the same height.
-HEAD_KB = 1.8     # Amy's painted head is about 25 percent of battle height (28 for Deedee), so battle needs a bit more than Deedee's 1.45; goal is about 37 percent like Deedee and TNB
-TAPER = 55                       # rows BELOW the chin over which the scale eases back to 1 (the face itself stays uniformly scaled, so the jaw is not squashed)
-HEAD_K = HEAD_KB
-def _auto_head(img, name=''):
-    """Walk frames: top = first row, chin from CHIN_W by direction, x range = every column with figure pixels in those rows."""
-    a = np.array(img)[:, :, 3] > 40
-    top = int(np.where(a.any(1))[0].min())
-    chin = 96
-    xs = np.where(a[top:chin].any(0))[0]
-    return top, chin, int(xs.min()), int(xs.max())
-# hand-set head boxes (top, chin, x0, x1) in pose pixels, read off zoomed rulers
-HEAD_BOX = {'b_idle': (3, 98, 18, 168), 'b_windup': (3, 100, 10, 196), 'b_strike': (3, 96, 92, 300), 'b_run1': (3, 98, 28, 212), 'b_run2': (3, 98, 48, 234),
-            'b_leap': (19, 115, 64, 268), 'b_hurt': (3, 100, 54, 236), 'b_kneel': (3, 115, 8, 205), 'b_win': (17, 100, 26, 204),
-            'b_defend': (2, 106, 72, 240), 'b_cast': (3, 88, 80, 258)}
-def _hair_right(img, y0, y1):
-    """Right-most figure column in rows y0..y1 (the head rows: hair is the widest thing there; light hair tips count)."""
-    al = np.array(img)[:, :, 3] > 12
-    cols = np.where(al[y0:y1 + 1].any(0))[0]
-    return int(cols.max()) if len(cols) else 0
-def _neck_x(img, chin, x0, x1):
-    """Profile heads grow about the neck, not the middle of the hair: x centre of the skin pixels just above the chin line."""
-    a = np.array(img).astype(int); R, G, B, A = a[:, :, 0], a[:, :, 1], a[:, :, 2], a[:, :, 3]
-    skin = (A > 200) & (R > 185) & (B > 85) & (R - B > 40) & (R - G > 25) & (G > B)
-    band = skin[max(0, chin - 18):chin, x0:x1]
-    xs = np.where(band)[1]
-    return float(x0 + xs.mean()) if len(xs) > 30 else (x0 + x1) / 2.0
-def _warp_head(arr, x0, x1, y0, ay, ax, k, taper, flat_x=False):
-    """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
-    neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
-    from scipy import ndimage as ndi
-    H = ay - y0                                                      # source rows y0..ay-1
-    u = np.arange(H)                                                 # source row index
-    dist = ay - (y0 + u)                                             # rows above the anchor (1..H)
-    s = np.where(dist >= taper, k, 1.0 + (k - 1.0) * (dist / float(taper)))
-    # dest distance above the anchor of the top edge of each source row (cumulative from the anchor upward)
-    order = np.argsort(dist); cum = np.zeros(H + 1); cum[1:] = np.cumsum(s[order])
-    Hd = int(np.ceil(cum[-1]))
-    r = Hd - (np.arange(Hd) + .5)                                           # dest row centres, measured upward from the anchor
-    idx = np.clip(np.searchsorted(cum, r) - 1, 0, H - 1)             # which source row (by sorted order) covers each dest row
-    srcdist = dist[order][idx]; sr = ay - srcdist + .0               # source row (y) for each dest row
-    sc = s[order][idx]
-    Wd = int(np.ceil((x1 - x0) * k)) + 2
-    xd = np.arange(Wd) + .0
-    xc = (ax - x0) * k                                               # dest x of the anchor column
-    out = np.zeros((Hd, Wd, 4))
-    pm = arr.astype(float).copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
-    ys = np.repeat(sr[:, None], Wd, 1); xs = ax + (xd[None, :] - xc) / (np.ones_like(sc)[:, None] if flat_x else sc[:, None])
-    for c in range(4):
-        out[:, :, c] = ndi.map_coordinates(pm[:, :, c], [ys, xs], order=1, mode='constant', cval=0.0)
-    al = out[:, :, 3:4]
-    out[:, :, :3] = np.where(al > 1, out[:, :, :3] / np.maximum(al, 1) * 255.0, 0)
-    return out.clip(0, 255).astype(np.uint8), int(round(ax - xc)), int(ay - Hd)
-
-def bigger_head(img, name, k=None, pad=420, taper=TAPER):
-    if k is None: k = HEAD_KB
-    W, H = img.size
-    big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
-    arr = np.array(big)
-    if name == 'b_ko':                                  # lying: head on the left, neck on its right edge. Work on the transposed picture.
-        x0, x1, y0, ay = 70 + pad, 130 + pad, 0 + pad, 112 + pad + taper   # in transposed terms: cross range = original rows, "up" = original left
-        t = np.transpose(arr, (1, 0, 2)).copy()
-        # transposed: rows = original x, cols = original y. Head = rows 0..128, anchor row 128, cross centre = original y 70
-        cx0, cx1 = pad + 0, pad + H
-        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 112 + taper, pad + 60, k, taper)
-        t[pad + 0:pad + 112 + taper, cx0:cx1, 3] = 0                   # erase the original head
-        full = Image.fromarray(t, 'RGBA'); full.alpha_composite(Image.fromarray(out, 'RGBA'), (max(dx, 0), max(dy, 0)))
-        big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
-    else:
-        top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img, name)
-        if name == 'b_win':
-            from scipy import ndimage as ndi
-            q = np.array(img).astype(int); R, G, B, A = q[:, :, 0], q[:, :, 1], q[:, :, 2], q[:, :, 3]
-            skin = (A > 60) & (R > 185) & (B > 70) & (R - B > 35) & (R - G > 20) & (G > B - 5)
-            yel = (A > 60) & (R > 200) & (G > 150) & (B < 120) & (G - B > 60)
-            m = (skin | yel); m[chin + taper + 1:] = False
-            lab, n = ndi.label(m)
-            keep = [i for i, o in enumerate(ndi.find_objects(lab), 1) if o[1].start < 40 or o[1].stop > 185]   # arm pieces only; teeth and eyes split the face into bits
-            WIN_ARMS = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & (A > 20)
-            arr[pad:pad + H, pad:pad + W, 3] = np.where(WIN_ARMS, 0, arr[pad:pad + H, pad:pad + W, 3])
-        ax = _neck_x(img, chin, x0, x1)
-        if name != 'b_win': x1 = max(x1, _hair_right(img, top, chin) + 3)       # hair keeps widening below the chin; take it all into the warp or it tears at the box edge
-        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
-        # Two layers: hair and skin are enlarged (and blended back to scale 1 below the chin); the shirt, sleeves and lanyard are only stretched
-        # vertically, never widened, so the shoulders do not flare into a cape behind the neck. The shirt layer goes on top.
-        q = arr.astype(int); R_, G_, B_ = q[:, :, 0], q[:, :, 1], q[:, :, 2]
-        from scipy import ndimage as ndi
-        body = ((R_ > 215) & (G_ > 175) & (B_ < 100) & (G_ - B_ > 100)) | ((R_ < 110) & (G_ > 120) & (B_ > 150))     # saturated yellow shirt, teal lanyard (skin has G-B of about 60)
-        body = ndi.binary_opening(body, iterations=2)                    # drop stray specks inside the face
-        body = ndi.binary_dilation(body, iterations=2) & (q[:, :, 3] > 20)
-        body[:max(0, chin + pad - 12)] = False                          # shirt layer only from just above the chin down
-        if name in ('b_leap', 'b_defend', 'b_hurt', 'b_win', 'b_kneel'): body[:] = False   # arms and sleeves beside the head: single-layer warp (the split mangles them)
-        arrH = arr.copy(); arrH[body, 3] = 0
-        arrB = arr.copy(); arrB[~body, 3] = 0
-        outH, dx, dy = _warp_head(arrH, X0, X1, Y0, AY, ax + pad, k, taper)
-        outB, dxb, dyb = _warp_head(arrB, X0, X1, Y0, AY, ax + pad, k, taper, flat_x=True)
-        arr[Y0:AY, X0:X1, 3] = 0                                  # erase the original head
-        big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(outH, 'RGBA'), (dx, dy))
-        big.alpha_composite(Image.fromarray(outB, 'RGBA'), (dxb, dyb))
-        if name == 'b_win':                                       # raised arms stay in front of the bigger head, unmoved
-            aa = np.array(img); aa[:, :, 3] = np.where(WIN_ARMS, aa[:, :, 3], 0)
-            big.alpha_composite(Image.fromarray(aa, 'RGBA'), (pad, pad))
-    return big.crop(big.getbbox())
-# Match Tom's head-to-body ratio EXACTLY: his head (hair to chin) is 0.445 of his height in both his battle and his walk frames (measured on his baked
-# frames, 2026-10-29). Solve the head factor for Amy's idle (battle) and down_stand (walk) so hers comes out the same.
-TOM_HEAD_RATIO = 0.40
-# Battle only (walk keeps 0.40): face (hairline to chin) = Justin's 49 battle px, Tom's call 2026-11-01. Final head rows = ratio x battle_h, so ratio = 0.40 x 49/44 x 1.3/1.322 (old face px, old/new battle scale).
-# Walk (front face on the welcome screen, drawn at real height with Justin 6'4" = 330 picture px): face = Justin's share x 330 / own height (2026-11-01, Tom).
-BATTLE_HEAD_RATIO = 0.438
-def _head_ratio(name, k):
-    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name], name)
-    return (chin - top) * k / bigger_head(poses[name], name, k=k).height
-def _solve(name, ratio=TOM_HEAD_RATIO):
-    lo, hi = 1.0, 4.0
-    for _ in range(14):
-        mid = (lo + hi) / 2
-        if _head_ratio(name, mid) < ratio: lo = mid
-        else: hi = mid
-    return round((lo + hi) / 2, 3)
-HEAD_KB = _solve('b_idle', BATTLE_HEAD_RATIO)
-print('head factor solved: battle', HEAD_KB)
-for _n in list(poses):
-    poses[_n] = bigger_head(poses[_n], _n)
+# Battle: Amy's two painted battle sheets (art/raw/characters/amy-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-06), used as painted
+# (no head warp, no body change). battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
+# Knocked out = the painted dizzy sit. The ready pose keeps Deedee's visible height (99.5 rows at the same BATTLE_SIZE): both are 5'5".
+from battle_sheet_frames import build as _build_battle, SLOTS
+_bf = _build_battle('amy')
+for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
+poses['b_dizzy'] = _bf['b_dizzy']
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Amy (Tom 2026-11-05 23:23), used as painted (no head warp, no mirroring).
 from walk_sheet_frames import build as _build_walk, BODY_ROWS_PER_PX
 poses.update({k: v for k, v in _build_walk('amy', fix=True).items() if not k.endswith('_pass')})
@@ -328,9 +180,7 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+battle_names = {k: 'b_' + k for k in SLOTS}
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
@@ -338,7 +188,7 @@ bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'amy-battle.webp'))
 
 # knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
-ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
+ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb * KO_ / KB)}, KO_, 'center'), KO_)
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'amy-ko.webp'))
@@ -390,13 +240,13 @@ print(json.dumps(meta))
 
 js = []
 js.append("'use strict';")
-js.append("// data/amy-hires.js — Amy, from her two painted pose sheets (Oct 2026). GENERATED by tools/sprite-bake/bake_amy.py; do not hand-edit.")
+js.append("// data/amy-hires.js — Amy, from her two painted battle sheets and walk sheet (Nov 2026). GENERATED by tools/sprite-bake/bake_amy.py; do not hand-edit.")
 js.append("// rows = small quantized copy of each painted frame (logic, fallback); atlas = where the painted frame lives (engine/painted.js).")
 js.append("const AMY_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in SLOTS:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")

@@ -1,5 +1,5 @@
 'use strict';
-// data/amy-hires-battle.js — Battle half of the painted Amy. Loaded after data/amy-poses.js (last word on her frames) and after data/battle-size.js (it reads BATTLE_SIZE.amy itself).
+// data/amy-hires-battle.js — Battle half of the painted Amy (her two painted battle sheets, Nov 2026). Loaded after data/amy-poses.js (last word on her frames) and after data/battle-size.js (it reads BATTLE_SIZE.amy itself).
 // Replaces her core frames (idle, strike, wind-up, run, leap, hurt, kneel, celebrate, defend, cast, knocked out) with painted ones.
 // Her story-only poses (sit, toast, hug, point, clap, whisper...) keep their pixel rows. The painted palette is moved to unused keys so both coexist.
 (function() {
@@ -13,9 +13,9 @@
   const rk=rows=>rows.map(r=>{ let s=''; for(const ch of r) s+=map[ch]; return s; });
   const lum=c=>{ const h=pal[c]; if(!h) return 0; return parseInt(h.slice(1,3),16)*.3+parseInt(h.slice(3,5),16)*.59+parseInt(h.slice(5,7),16)*.11; };
   // eye: centroid of dark pixels in the face band; hands: outermost pixels in the arm band (logic reads these)
-  // HR = head (hair to chin) share of the idle height set by the bake (was .40; bigger since 2026-11-01). Bands keep their place relative to head and body:
+  // HR = head (hair to chin) share of the idle height: .29 on her painted battle sheets (Nov 2026; the old warped sheet was .438). Bands keep their place relative to head and body:
   // eye band .2 to .85 of the head, arm band from just above the chin to just over half the body (both give the old .08-.34 and .35-.72 at HR .40).
-  const HR=0.438,EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR);
+  const HR=0.29,EY0=.2*HR,EY1=.85*HR,AR0=HR-.08*(1-HR),AR1=HR+.53*(1-HR);
   const meta=rows=>{ const H=rows.length,W=rows[0].length; let sx=0,sy=0,c=0;
     for(let y=Math.floor(H*EY0);y<Math.floor(H*EY1);y++) for(let x=0;x<W;x++) { const ch=rows[y][x]; if(ch!=='.'&&lum(ch)<70) { sx+=x; sy+=y; c++; } }
     const eye=c?{col:Math.round(sx/c),row:Math.round(sy/c)}:{col:Math.round(W*.38),row:Math.round(H*.2)};
@@ -31,14 +31,15 @@
   sp.idle=P('idle'); sp.act=P('act'); sp.celeb=P('celeb'); sp.windup=P('windup'); sp.leap=P('leap');
   sp.hurtPose=P('hurt'); sp.defend=P('defend'); sp.castPose=P('cast'); sp.kneel=P('kneel');
   sp.expr=sp.act; sp.celeb2=sp.celeb; sp.run=[P('run1'),P('run2')];
-  sp.idle2=sp.idle;   // data/amy-poses.js left a pixel cheer pair and idle2; victory and level-up cheers now use the painted celebrate frames
+  sp.idle2=P('idle2'); sp.hip=P('hip'); sp.point=P('point'); sp.spread=P('spread');   // breath, hands on hips, power point, arms wide: her two painted battle sheets
+  // Stock stance names some moves and Tombos use: point them at the nearest painted pose so the old pixel Amy never pops in.
+  sp.aim=sp.windup; sp.wind=sp.windup; sp.throw=sp.act; sp.clap=sp.celeb; sp.pump=sp.celeb; sp.flex=sp.celeb; sp.wave=sp.castPose;
   sp.flip=mir(sp.idle); sp.celebFlip=mir(sp.celeb); sp.runFlip=sp.run.map(mir); sp.cheer=[sp.celeb,sp.celebFlip];
-  // Her moves (engine/amy-moves.js) name a few stock stances. Point them at the nearest painted pose so the pixel Amy never pops in mid-move.
-  // Story-only poses (sit, toast, sitR, hug, carry, shrug, whisper) and the burpee frames keep their pixel rows.
-  sp.hip=sp.idle; sp.clap=sp.celeb; sp.spread=sp.hurtPose; sp.point=sp.castPose; sp.aim=sp.windup; sp.wind=sp.windup; sp.throw=sp.act;
-  sp.pump=sp.celeb; sp.flex=sp.celeb; sp.wave=sp.castPose;
   // Knocked out: the KO table stores sprites facing right (the game mirrors them to face the enemy).
   if(typeof KO_SPRITES!=='undefined') KO_SPRITES.amy={scale:.8*SZ,pal:AMY_HIRES.ko.pal,rows:paintRows(AMY_HIRES.ko.rows.slice(),'amyKo','ko',true)};
-  // Her yellow top is not a dark tee, so outfit recolouring does not apply to the painted Amy.
+  // Ability frames (tools/sprite-bake/bake_amy_ab.py, data/amy-ab.js): f:'ab_kettle_2' etc. in a move's keys; a trailing 'F' is the same frame facing right. Eye and hand points are found as for the poses above.
+  if(typeof AMY_AB!=='undefined') { const A=AMY_AB; paintedAtlas('amyAb',A.atlas.src,A.atlas.rects,A.atlas.k);
+    for(const k in A.ab) { const r=reg(paintRows(rk(A.ab[k]),'amyAb',k,false)); sp[k]=r; sp[k+'F']=mir(r); } }
+  // Her dress is not a dark tee, so outfit recolouring does not apply to the painted Amy.
   if(typeof GARMENT!=='undefined') { delete GARMENT.bt.amy; delete GARMENT.ow.amy; }
 })();
