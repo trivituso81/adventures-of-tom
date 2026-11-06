@@ -3614,8 +3614,16 @@
    "group": "Terminal Zero"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-lastcall-v1.png",
+     "date": "2026-11-06",
+     "from": "v2",
+     "at": 1793927030654
+    }
+   ],
    "rejects": [],
    "id": "enemy-lastcall",
    "tab": "Enemies",
