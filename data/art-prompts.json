@@ -13836,8 +13836,16 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Green Pen.\n\nItems:\n1. A big green felt-tip pen with the cap off, seen from the side (wide).\n2. The green pen cap, seen from the side.\n3. A big hand-drawn green circle, a thick marker loop (wide).\n4. A bold green check mark.\n5. A shiny gold foil star sticker.\n6. A small splatter of green ink dots."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-ab-hot-lunch-tray-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793999722794
+    }
+   ],
    "rejects": [],
    "id": "amy-ab-hot-lunch-tray",
    "tab": "Characters",
@@ -13850,7 +13858,7 @@
     "art/raw/characters/amy-battle-sheet-1-v1.png",
     "art/raw/characters/amy-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Hot Lunch Tray.\n\nRow 1:\n1. Standing with a blue cafeteria tray held in both hands at waist height, a steaming bowl of soup on it, a careful focused look.\n2. Stepping forward holding the tray perfectly level, eyes on the bowl.\n3. Bending slightly and offering the tray forward with both arms, a gentle smile.\n\nRow 2:\n4. Holding the tray in one hand and straightening the spoon on it with the other, a nurturing look.\n5. Holding the tray out, head tilted, mouth a little open as if saying eat up, kind eyes.\n6. Standing tall with the tray held at her side, a proud warm smile."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Hot Lunch Tray.\n\nRow 1:\n1. Standing with a blue cafeteria tray held in both hands at waist height, a steaming bowl of soup on it, a careful focused look.\n2. Stepping forward holding the tray perfectly level, eyes on the bowl.\n3. Bending slightly and offering the tray forward with both arms, a gentle smile.\n\nRow 2:\n4. Holding the tray in one hand and straightening the spoon on it with the other, a nurturing look.\n5. Holding the tray out, head tilted, mouth a little open as if saying eat up, kind eyes.\n6. Standing tall with the tray held at her side, a proud warm smile."
   },
   {
    "status": "draft",
