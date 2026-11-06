@@ -3292,8 +3292,16 @@
    "group": "Moon Club"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/enemy-coathanger-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793925975792
+    }
+   ],
    "rejects": [],
    "id": "enemy-coathanger",
    "tab": "Enemies",
