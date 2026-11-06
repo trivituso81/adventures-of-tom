@@ -10609,6 +10609,13 @@
      "date": "2026-11-05",
      "from": "v6",
      "at": 1793921737510
+    },
+    {
+     "n": 4,
+     "file": "art/raw/areas/area-hollow-v4.png",
+     "date": "2026-11-06",
+     "from": "tom",
+     "at": 1794003009946
     }
    ],
    "rejects": [],
@@ -10621,62 +10628,6 @@
     "art/grands.webp"
    ],
    "prompt": "Create the actual environment painting for Area 03, Grump Hollow, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this area: use it for LAYOUT AND DETAILS. Keep the same layout: every path, building, prop, exit and open space stays in the same place and the same size, and each building keeps its shape, roof and theme. Paint every detail described below cleanly and correctly on top of that layout. Do not copy its rendering.\n2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting of a shady woodland hollow, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down at about 35 degrees, showing the trail, clearing, pond and trees together. Same camera across the whole uninterrupted scene.\n\nSCALE\nA whole game map seen from high up, like a drone shot of the entire hollow, with a wide margin of forest on every side. Do not zoom in on a corner. Do not crop any landmark at an edge.\n\nA grown-up person on a path is about one fifteenth of the picture height.\nThe stone path is about two people wide.\nThe exit board is about one seventh of the picture width.\nThe muddy clearing is wide and open, about one third of the picture width.\nThe pond fills the upper right and top center, about four tenths of the picture width.\n\nSETTING\nA soggy, slightly spooky but friendly woodland hollow at the edge of a small Long Island town, on a warm afternoon. Soft even daylight through the leafy canopy, with gentle shadows falling straight down under the trees. A big murky green pond with lily pads and cattails, mossy logs, old stumps, mud puddles, ferns, mushrooms and mossy boulders. Cozy and mischievous, never scary.\n\nLAYOUT (this is a walkable game map)\n\nENTRANCE: a stone path with worn steps enters from the BOTTOM edge, a little left of center, between two low wooden fence sections about one person tall.\nThe stone path climbs straight up into a WIDE OPEN MUDDY CLEARING in the middle of the picture.\nFrom the clearing, a branch runs LEFT to a soggy bench nook on the left side, and another branch runs RIGHT to Boppy’s fishing spot on the pond shore.\nTHE POND: no path goes into the water. Its lower and left shores are walkable mud.\nThe left, top and right edges are a solid wall of dense forest: thick trees, boulders, brambles and undergrowth, with no break, no opening and no path reaching any edge except the bottom.\nLogs, stumps, rocks, ferns and cattails sit beside the paths, never across them.\n\nLANDMARKS AND PROPS\n\nSoggy bench nook (left side): an old wooden bench sinking a little into the mud, puddles around its feet, moss on the slats.\nBoppy’s fishing spot (right side, pond shore): a small weathered wooden bench with a thermos, a metal bucket and a fishing rod leaning on it, facing the water.\nAround the pond: lily pads, cattails, a half-sunken mossy log, ripples, a few water lilies.\nMossy boulders, old stumps, clumps of mushrooms, ferns, wildflowers.\n\nTHE EXIT BOARD (the only sign in the image)\nOne exit board, hung high between two tall stout wooden posts on either side of the stone path, like a gate header. Board center about four fifths of the way down the picture, about 340 x 108 px at full size, with a thin carved wooden frame. Face deep forest green (about \n#2F4A35) with a thin gold inner line. Lettering cream-gold (about \n#F2E6B8) with a thin dark green outline, hand-painted signwriter capitals, bold and slightly rounded. Two centered lines, ALL CAPITALS, same letter height, spelled exactly letter by letter:\nTHE SQUARE / SHOPS\nNothing else on the board: no arrows, numbers, icons or flourishes. The stone path and steps stay open and clear under the board, continuing to the bottom edge.\n\nLAYERING\nMud, grass and stone path continue unbroken under and behind every tree, post, bench and boulder. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, the board and posts. Nothing floats.\n\nCOLORS\nSoft golden light \n#FFE1A0, warm brown mud and trail \n#A47B52, mossy green \n#608775, murky pond green \n#4E7A5E, light green grass \n#B4C395, warm shadows \n#716351. Clear darker contact shadow under trees and props.\n\nSTRICT EXCLUSIONS\nNo people, animals, monsters, frogs or fish. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the exit board. No buildings, bridges, boats, gates or locks. No light beams, sun shafts or glowing gaps anywhere. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.\n\nTwo things to check on the result: the top-left corner should be solid forest, and the bottom stone path should be the only opening. If either fails, send me the image and I’ll look at what the generator did before changing anything else.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut1",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/raw/areas/area-hollow-v1.png"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its trees, tall bushes, brambles and fern clumps, and the tall cattails and reeds at the pond edge, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut2",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 2 of 4, exit board and posts (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/raw/areas/area-hollow-v1.png"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its green exit board with both posts down to the ground, and the fence posts beside the entrance trail. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut3",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 3 of 4, boulders, stumps and standing logs (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/raw/areas/area-hollow-v1.png"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its mossy boulders, tree stumps, and upright or leaning logs, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut4",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/raw/areas/area-hollow-v1.png"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its soggy wooden bench, Boppy's small bench on the pond shore with the thermos, bucket and leaning fishing rod, and any tall mushroom clump, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Grump Hollow"
   },
   {

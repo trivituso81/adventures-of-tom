@@ -327,7 +327,7 @@ const MONSTERS={
     hint:'The boss of the Hollow. Heals every turn and belly flops the whole party.'}
 };
 // Where each one stands in Grump Hollow.
-const MONSTER_SPOTS=[['mudling',11,16],['skeeter',13,12],['grump',10,11],['toad',9,5],['log',7,10],['bigone',15,11]];
+const MONSTER_SPOTS=[['mudling',7,16],['skeeter',13,12],['grump',10,11],['toad',9,8],['log',7,10],['bigone',15,11]];   // Grump Hollow v3 walk map (`hollow5`)
 function monsterDef(npc) { return MONSTERS[npc.monster]||MONSTERS.grump; }
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 
