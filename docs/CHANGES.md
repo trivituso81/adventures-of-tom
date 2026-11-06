@@ -1,3 +1,7 @@
+## 2026-11-05 (265): All 29 approved battle backgrounds installed (`bgs3`)
+
+Tom approved every battle background in the Art Library. Each newest approved picture (art/raw/battle/bg-*-v<n>.png, 1280 x 720) is shrunk with Lanczos to 576 x 324 and saved over bgs/<name>.webp (19 glass tower uses v2). Same file names, so no code wiring changed. `BG_V` moved `bgs2` to `bgs3` (battle-draw.js and main.js tags). Tests: tag_check ok, tools/bg_test.py FAILS: [] (24 battle maps), smoke run. Story places (tower, engine, sorting hall, subway, infinity, cabin) and the dinner table use the same files.
+
 ## 2026-11-05 (264): Vance and Julian sheets now use the approved Julian hero as their ONLY reference (Art Library only, no game files, no tag)
 
 Tom approved `enemy-julian-hero-v1` (huge-headed caricature, long gray hair, hat, coat, watch, ray gun) and said that is all the two stances need. `enemy-vance` (first fight, grim, cold, Unwriting Ray poses) and `enemy-julian` (second fight, soft, tired, Amber Glass poses) each have refs = [that hero] and a prompt that says paint exactly this man, same proportions and handbrushed style, six poses, flat magenta (the hero itself sits on crimson, so the prompt says not that pink). Fact for the bake: the hero background is crimson, about #D6005A, not magenta. The in-game Vance (old sheet) and Julian (v2) still differ until both are regenerated and rebaked.

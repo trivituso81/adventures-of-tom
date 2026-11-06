@@ -7,7 +7,7 @@
 // battleBgKey picks the picture from the map's ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not
 // loaded yet, the older code-drawn backdrops in the render files (engine/*-render.js, drawLABattleBg / drawLEBattleBg) and
 // the pond code below are used. BG_V is the cache tag: bump it whenever a picture in bgs/ changes, or phones keep the old one.
-const BG_V='bgs2';
+const BG_V='bgs3';
 const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-school-classroom',cafe:'04-school-cafetorium',
   stacks:'05-library-stacks',readroom:'06-library-reading-room',club:'07-moon-club',dome:'08-moon-club-dome',barn:'09-car-barn',
   boiler:'10-boiler-room',term:'11-terminal-zero',gate:'12-gate-zero',lot:'13-studio-backlot',stage:'14-soundstage',
