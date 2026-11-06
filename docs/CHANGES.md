@@ -1,3 +1,8 @@
+## 2026-11-06 (365): Tom's new take for "Then we had better hurry." (`voice365`)
+
+- Tom's export (11-06 11:25) held 422 clips, all older takes except one. Merged only that one: Tom dialogue "Then we had better hurry. Before somebody licks the rest." replaced the baked clip in `data/voice/dialog-ch1.js`. No line text changed. Tests: unused_voice 0, tag_check ok, smoke FAILS: [].
+- Deedee's 45 old-voice lines are still waiting: this export had none of her new takes.
+
 ## 2026-11-06 (364): Nara install: 14 painted ability sheets, 5 painted props (`narainst1`)
 
 - Fact: Tom approved all 14 `nara-ab-*` and 14 `nara-fx-*` sheets. All 14 Nara moves now play painted frames (`art/chars/nara-ab.webp`, `data/nara-ab.js`, 83 frames, only frames the moves use). Same sizing rule as TNB (median body size matched to her battle frames).
