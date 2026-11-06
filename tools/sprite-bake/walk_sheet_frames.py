@@ -74,19 +74,35 @@ def grid(path, ncols, nrows):
             im = Image.fromarray(cut, 'RGBA'); out.append(im.crop(im.getbbox()))
     return out
 
-# Overworld head match (Tom 2026-11-06 02:14: "all adult heads should be the same size"). cid: (head px = top of hair or cap to chin in the painted
-# sheet, factor). Only the head rows are shrunk about the chin (kidhead.grow_head); the body keeps its painted size, so the bake must scale from
-# UNWARPED_H (the sheet's own stand height), never from the shortened figure. Grace and Rose are GROWN 15 percent (Tom 02:45), body unchanged. Adult target head about 10 game rows for every adult (Justin and TNB 10.8; Boppy and Deedee shrunk again at Tom's 02:37 request).
-HEAD_FIX = {'justin': (116, 0.68), 'tnb': (115, 0.81), 'boppy': (118, 0.79), 'deedee': (105, 0.88), 'grace': (93, 1.15), 'rose': (90, 1.15)}
+# Overworld head sizes (Tom 2026-11-06 07:16: "Tom is the one we want a model everyone else after in terms of the size of their heads ... do it by
+# head height and then scale accordingly").
+# ADULTS (WALK_MATCH): every adult's head HEIGHT (top of hair, cap or skull to chin) is made equal to Tom's on screen, 104 px of his sheet drawn at
+# 42 rows over 391 px = TOM_HEAD_ROWS. The head is scaled uniformly (width follows height, so width to height proportions stay as painted;
+# kidhead.grow_head, about the chin), the body is scaled so the WHOLE figure keeps the on-screen height it had (R = bake rows x the engine's draw
+# scale OW.<id>.k, which is the real height next to Tom: 42 rows = 5'11). cid: (chin px from the top of the painted stand frame, bake rows, draw k).
+# BODY_ROWS_PER_PX[cid] is the bake scale for the body (the bakes use it for fo, never args.ow_h). Olivia's and Ellie's heights were assumed.
+# KIDS (GROW): Tom 02:45, Grace and Rose heads 15 percent bigger, body unchanged (bakes scale from UNWARPED_H).
+TOM_HEAD_ROWS = 104 * 42 / 391.0
+WALK_MATCH = {'tnb': (118, 45, .92), 'justin': (123, 53, .849), 'boppy': (154, 41.7, .922), 'deedee': (114, 41.7, .922),
+              'amy': (95, 41.7, .925), 'olivia': (100, 42, .914), 'ellie': (125, 43, .853)}
+GROW = {'grace': (100, 1.15), 'rose': (102, 1.15)}
 UNWARPED_H = {}
+BODY_ROWS_PER_PX = {}
 
 def build(cid, fix=False):
     figs = grid(os.path.join(RAW, f'{cid}-walk-sheet-v1.png'), 3, 3)
     UNWARPED_H[cid] = figs[0].height
-    if fix and cid in HEAD_FIX:
+    if fix and cid in WALK_MATCH:
         from kidhead import grow_head
-        px, k = HEAD_FIX[cid]
-        figs = [grow_head(f, k, px) for f in figs]
+        chin, rows, k = WALK_MATCH[cid]; H = UNWARPED_H[cid]
+        R = rows * k                                            # on-screen height of the whole figure, unchanged
+        sb = (R - TOM_HEAD_ROWS) / (H - chin)                    # on-screen rows per source px for the body
+        BODY_ROWS_PER_PX[cid] = sb / k                           # bake rows per source px (the engine multiplies by k)
+        figs = [grow_head(f, TOM_HEAD_ROWS / (chin * sb), chin) for f in figs]
+    elif fix and cid in GROW:
+        from kidhead import grow_head
+        chin, kh = GROW[cid]
+        figs = [grow_head(f, kh, chin) for f in figs]
     out = {}
     for r in range(3):
         for c in range(3):

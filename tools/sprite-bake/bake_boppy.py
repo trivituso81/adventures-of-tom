@@ -8,7 +8,7 @@ Output: art/chars/boppy-battle.webp, boppy-ko.webp, boppy-ow.webp  (painted fram
 The rows are a downscaled, quantized copy of each painted frame. The game's logic (hand points, Rose's seat, outfit keys,
 mirroring) reads the rows; the painted frame is what gets drawn (engine/painted.js). Same frame size either way.
 
-Usage : python3 tools/sprite-bake/bake_boppy.py [--battle-h 100] [--ow-h 42] [--colors 46]
+Usage : python3 tools/sprite-bake/bake_boppy.py [--battle-h 100] [--colors 46]
 """
 import argparse, json, os, sys
 import numpy as np
@@ -25,7 +25,6 @@ KB, KO_, KW = 3, 2, int(os.environ.get('OW_K', '7'))         # painted resolutio
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=float, default=66.7)   # idle height in rows of the 1.94-scale rig: 66.7 x 1.94 = Deedee's 99.5 x 1.3 = 129 px
-ap.add_argument('--ow-h', type=float, default=41.7)        # standing height of the overworld sprite in rows
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -122,7 +121,7 @@ OLD_IDLE_H = 431      # that idle's height in px after the warp; the extra sheet
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for this character (Tom 2026-11-05 23:16), used as painted (no head warp, no body narrowing, no mirroring).
-from walk_sheet_frames import build as _build_walk, UNWARPED_H
+from walk_sheet_frames import build as _build_walk, BODY_ROWS_PER_PX
 poses.update({k: v for k, v in _build_walk('boppy', fix=True).items() if not k.endswith('_pass')})
 # Battle: Boppy's two painted battle sheets (art/raw/characters/boppy-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-05 23:40), used as painted
 # (no head warp, no body narrowing). tools/sprite-bake/battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
@@ -281,7 +280,7 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'boppy-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / UNWARPED_H['boppy']
+fo = BODY_ROWS_PER_PX['boppy'] * KW      # body scale from walk_sheet_frames.WALK_MATCH (Tom's head height is the model, whole figure keeps its real height)
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

@@ -5,7 +5,7 @@ Input : art/raw/characters/ellie-walk-sheet-v1.png (3 x 3: front, back, side; ea
 Output: art/chars/ellie-ow.webp   (painted frames, 3x the size of the rows)
         data/ellie-hires.js        (rows, palette, atlas rects; do not hand-edit)
 
-Usage : python3 tools/sprite-bake/bake_ellie.py [--ow-h 43] [--colors 46] [--contact PATH]
+Usage : python3 tools/sprite-bake/bake_ellie.py [--colors 46] [--contact PATH]
 """
 import argparse, json, os, sys
 import numpy as np
@@ -20,7 +20,6 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = int(os.environ.get('OW_K', '9'))                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--ow-h', type=int, default=43)       # standing height of the overworld sprite in rows (Tom is 43)
 ap.add_argument('--colors', type=int, default=46)
 ap.add_argument('--contact', default=None)
 args = ap.parse_args()
@@ -28,8 +27,8 @@ os.makedirs(ART, exist_ok=True)
 
 poses = {}
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Aunt Ellie (Tom 2026-11-05 23:16), used as painted (no head warp, no mirroring).
-from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('ellie').items() if not k.endswith('_pass')})
+from walk_sheet_frames import build as _build_walk, BODY_ROWS_PER_PX
+poses.update({k: v for k, v in _build_walk('ellie', fix=True).items() if not k.endswith('_pass')})
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -167,7 +166,7 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = BODY_ROWS_PER_PX['ellie'] * KW      # body scale from walk_sheet_frames.WALK_MATCH (Tom's head height is the model, whole figure keeps its real height)
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

@@ -549,7 +549,7 @@ function splashScene(W,H,panelH,time) {
 const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as a share of the figure's height, speed = radians per second (period about 6 s). Whole pixels only, no scaling: stretching every frame shimmered and read as rapid pulsing (Tom 2026-11-06 02:13)
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
 // Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
-const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:184,nara:130};
+const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130};
 // Landscape (iPad): one spread-out line in design units (x, feet). Later in the list draws on top.
 const SPLASH_LAND={cx:520,feet0:1222,sx:.92,sy:.7,span:860,tall:331,fracW:.70,fracH:.42,feetY:.79};
 const SPLASH_SPOTS=[

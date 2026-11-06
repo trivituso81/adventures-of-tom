@@ -1,3 +1,9 @@
+## 2026-11-06 (346): Walking heads: every adult's head height matches Tom's (`walkhead4`)
+- Head height (top of hair, cap or spike to chin) is now Tom's 11.17 on-screen rows for TNB, Justin, Boppy, Deedee, Amy, Olivia and Ellie. Each head is scaled uniformly (width follows height), so painted width-to-height proportions are unchanged. Body keeps the real total height, so bodies changed: Boppy +17%, Justin +10%, TNB +5%, Amy and Olivia about -5%. Grace and Rose keep walkhead3 (+15%), now with their true chin rows; `SPLASH_H` rose 185.
+- This corrects the chin px used in walkhead1 to 3 (partial-head warp). New `WALK_MATCH`/`GROW` in `tools/sprite-bake/walk_sheet_frames.py`; new `tools/sprite-bake/walk_splice.py` rebakes only the walk atlas and splices it into `data/<id>-hires.js` so battle art is untouched.
+- Tested: smoke FAILS: [], tag_check ok, welcome screen portrait looked at.
+- Tags: `walkhead4`.
+
 ## 2026-11-06 (345): Emotions batch 6: chapters 18 to 20 show mood faces and poses (`emo13`)
 - `python3 tools/emotion-apply.py 1 ... 20`: chapter 18 found 40 of 40, chapter 19 99 of 99, chapter 20 86 of 86; `EMO_CHAPTERS` now 1 to 20, `data/emotion-moods.js` 1547 keys. The `CH19_MEM`, `CH19_KEEP` and `CH20_DOORS` tables play through `{talk:...}` steps (S.talk), so they reach the mood system.
 - Tested: all 1563 tagged lines in chapters 1 to 20 resolve to their tsv mood at runtime (0 mismatches), every face file exists, smoke FAILS: [], unused_voice 0.

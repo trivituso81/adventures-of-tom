@@ -8,7 +8,7 @@ Output: art/chars/amy-battle.webp, amy-ko.webp, amy-ow.webp  (painted frames, K 
 The rows are a downscaled, quantized copy of each painted frame. The game's logic (hand points, Rose's seat, outfit keys,
 mirroring) reads the rows; the painted frame is what gets drawn (engine/painted.js). Same frame size either way.
 
-Usage : python3 tools/sprite-bake/bake_amy.py [--battle-h 100] [--ow-h 42] [--colors 46]
+Usage : python3 tools/sprite-bake/bake_amy.py [--battle-h 100] [--colors 46]
 """
 import argparse, json, os, sys
 import numpy as np
@@ -26,7 +26,6 @@ KB, KO_, KW = 2, 2, int(os.environ.get('OW_K', '9'))          # painted resoluti
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=float, default=99.5)   # idle figure height in grid rows (Tom's measured on his baked idle: 99.5)
-ap.add_argument('--ow-h', type=float, default=41.7)    # standing figure height in rows (Tom's measured on his baked down_stand: 41.7; his frame is 43 with headroom)
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
@@ -188,8 +187,8 @@ print('head factor solved: battle', HEAD_KB)
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Amy (Tom 2026-11-05 23:23), used as painted (no head warp, no mirroring).
-from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('amy').items() if not k.endswith('_pass')})
+from walk_sheet_frames import build as _build_walk, BODY_ROWS_PER_PX
+poses.update({k: v for k, v in _build_walk('amy', fix=True).items() if not k.endswith('_pass')})
 if os.environ.get('DUMP'):
     for _n, _im in poses.items(): _im.save(os.path.join(os.environ['DUMP'], 'amy_pose_' + _n + '.png'))
 
@@ -345,7 +344,7 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'amy-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+fo = BODY_ROWS_PER_PX['amy'] * KW      # body scale from walk_sheet_frames.WALK_MATCH (Tom's head height is the model, whole figure keeps its real height)
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['w_down_stand'].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

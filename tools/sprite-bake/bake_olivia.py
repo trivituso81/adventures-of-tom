@@ -7,7 +7,7 @@ Output: art/chars/olivia-ow.webp   (painted frames, 3x the size of the rows)
         data/olivia-hires.js        (rows, palette, atlas rects; do not hand-edit)
 Same recipe as bake_townsfolk.py (the sheet's head is already caricature size, so no head enlargement).
 
-Usage : python3 tools/sprite-bake/bake_olivia.py [--ow-h 42] [--colors 46] [--contact PATH]
+Usage : python3 tools/sprite-bake/bake_olivia.py [--colors 46] [--contact PATH]
 """
 import argparse, json, os, sys
 import numpy as np
@@ -23,7 +23,6 @@ KW = int(os.environ.get('OW_K', '9'))
 AV = ''   # unused since 2026-11-01 (engine/painted.js adds ?v=ART_V). Old note: atlas cache string: bump with the ?v= tag in index.html whenever frame sizes change
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--ow-h', type=float, default=42)   # standing height in rows (Tom 42, Amy 41.7, Michael 50)
 ap.add_argument('--colors', type=int, default=46)
 ap.add_argument('--contact', default=None)
 args = ap.parse_args()
@@ -109,9 +108,9 @@ def fmt_rows(rows, indent='    '):
 
 names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'step2')]
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Olivia (Tom 2026-11-05 23:25), used as painted (no head growth, no mirroring).
-from walk_sheet_frames import build as _build_walk
-poses = {k[2:]: v for k, v in _build_walk('olivia').items() if not k.endswith('_pass')}
-fo = args.ow_h * KW / poses['down_stand'].height
+from walk_sheet_frames import build as _build_walk, BODY_ROWS_PER_PX
+poses = {k[2:]: v for k, v in _build_walk('olivia', fix=True).items() if not k.endswith('_pass')}
+fo = BODY_ROWS_PER_PX['olivia'] * KW      # body scale from walk_sheet_frames.WALK_MATCH (Tom's head height is the model, whole figure keeps its real height)
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['down_stand'].height, fo))
 big = tighten(place({n: scaled_to(v, fo) for n, v in poses.items()}, KW), KW)
 pal, rows = quantize({n: hard(scaled_to(v, 1.0 / KW)) for n, v in big.items()}, args.colors)
