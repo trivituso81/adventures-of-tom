@@ -4780,7 +4780,7 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Headcount, Again.\n\nItems:\n1. A round white number badge showing the number 1.\n2. A round white number badge showing the number 2.\n3. A round white number badge showing the number 3.\n4. A round white number badge showing the number 4.\n5. A big red hand drawn cross, X shaped, painted like marker.\n6. A small checkmark in green marker.\n7. A small burst of tiny stars."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "boppy-fx-lockdown",
    "tab": "Characters",
    "group": "Boppy",
@@ -4789,7 +4789,16 @@
    "refs": [
     "art/raw/characters/boppy-ab-lockdown-v1.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Lockdown.\n\nItems:\n1. A tall set of black iron cell bars with a crossbar at top and bottom.\n2. A big ring of old iron keys, seen from the front.\n3. A single large iron key, seen from the front.\n4. A burst of gray dust at the base of the bars (wide).\n5. A small burst of metal sparks.\n6. A white impact star.\n7. A small shiny lock, closed."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Lockdown.\n\nItems:\n1. A tall set of black iron cell bars with a crossbar at top and bottom.\n2. A big ring of old iron keys, seen from the front.\n3. A single large iron key, seen from the front.\n4. A burst of gray dust at the base of the bars (wide).\n5. A small burst of metal sparks.\n6. A white impact star.\n7. A small shiny lock, closed.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-fx-lockdown-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793994808706
+    }
+   ]
   },
   {
    "status": "draft",
