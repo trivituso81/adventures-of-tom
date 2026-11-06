@@ -6820,8 +6820,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-07-moon-club-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793932044002
+    }
+   ],
    "rejects": [],
    "id": "bg-07-moon-club",
    "tab": "Battle",
