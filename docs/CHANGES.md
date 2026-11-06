@@ -1,3 +1,9 @@
+## 2026-11-06 (301): Deedee: 35 more of her 80 old-voice lines now in her new voice (`deedee2`)
+
+- Tom's export of 11-06 00:08 (2010 phone clips) merged for Deedee only: 38 clips newer than the last merge or in the old-voice list (37 dialogue in dialog-ch1, ch25, ch28; 1 battle). Other voices untouched (verified key by key).
+- Old voice count (Voice Library Show > Old voice): 80 to 45. The remaining 45 (5 battle, 40 dialogue; list in Project doc claude/deedee-old-voice-2026-11-05.md) have no new take yet.
+- Tested: unused_voice.py all 0, tag_check ok, smoke FAILS: [], voice-library test ALL PASS.
+
 ## 2026-11-06 (300): Amy's emotion sheet indexed; Nara gets her own dog emotion prompt (`emo4`)
 - Tom (00:09): Amy's painted emotion sheet, and "i need a special emotion sheet prompt for nara".
 - Amy: saved art/raw/characters/amy-emotions-v1.png, cut into art/emotions/amy.webp, added to data/emotions.js, Library entry approved. 10 of 11 indexed.
