@@ -70,13 +70,13 @@ const NICKEL={
 // ---------- Buildings ----------
 const LA_HOUSES=[
   {id:'coffee',area:'blvd',name:'Golden Hour Coffee',label:'COFFEE',x:3,y:5,w:5,h:5,style:'deco',floors:3,wall:'#d9b48a',stone:'#efdcbc',roof:'#8a5a3a',awning:'#e2a24a',awning2:'#fff1d6',sign:'#3d2b26',ink:'#ffd968',icon:'cup',fire:true},
-  {id:'ramen',area:'blvd',name:'Ramen Ramen',label:'RAMEN',x:8,y:5,w:5,h:5,style:'deco',floors:4,wall:'#c98f6a',stone:'#e8c8a8',roof:'#7a3a33',awning:'#b9483f',awning2:'#2c2c33',sign:'#f4ecd2',ink:'#b9483f',icon:'lantern'},
-  {id:'cinema',area:'blvd',name:'The Starlite',label:'STARLITE',x:15,y:5,w:5,h:5,style:'cinema',floors:3,wall:'#e9c9a6',stone:'#f4e2c4',roof:'#a8453a',awning:'#2c2c33',awning2:'#2c2c33',sign:'#2c2c33',ink:'#ffd968',icon:'star'},
-  {id:'nickels',area:'blvd',name:"Nickel's",label:'SHOP',x:23,y:17,w:5,h:5,style:'deco',floors:2,wall:'#b8c4b0',stone:'#e2e8d8',roof:'#2f6f73',awning:'#3a9ca0',awning2:'#fbefd2',shop:true,keeper:'Nickel',icon:'coin',fire:true},
-  {id:'wardrobe',area:'blvd',name:'Backlot Wardrobe',label:'WARDROBE',x:2,y:17,w:5,h:5,style:'loft',floors:3,wall:'#a0523a',stone:'#d9b49a',roof:'#5a3a2a',awning:'#8a6aa0',awning2:'#f3eaf6',sign:'#2c2c33',ink:'#e3c6f0',icon:'hanger',ghost:'GARMENT CO.'},
-  {id:'lofts',area:'blvd',name:"TNB's Loft",label:'LOFTS',x:9,y:17,w:5,h:5,style:'loft',floors:3,wall:'#8a5a44',stone:'#d9c0a0',roof:'#4a3a32',awning:'#2c2c33',awning2:'#2c2c33',sign:'#2c2c33',ink:'#f4ecd2',home:true,ghost:'FURNITURE'},
-  {id:'tower',area:'blvd',name:'The Grand Tower',label:'GRAND',x:16,y:17,w:5,h:5,style:'tower',floors:9,wall:'#6f9fc4',stone:'#c9d6de',roof:'#3f5a74',home:true},
-  {id:'lacab',area:'blvd',name:'Angel City Cab Co.',label:'CABS',x:20,y:5,w:5,h:5,style:'deco',floors:1,wall:'#f4e6c8',stone:'#fff4dc',roof:'#d9a43a',awning:'#2c2c33',awning2:'#f2c75a',taxi:true,icon:'cab'},
+  {id:'ramen',area:'blvd',name:'Ramen Ramen',label:'RAMEN',x:9,y:5,w:5,h:5,style:'deco',floors:4,wall:'#c98f6a',stone:'#e8c8a8',roof:'#7a3a33',awning:'#b9483f',awning2:'#2c2c33',sign:'#f4ecd2',ink:'#b9483f',icon:'lantern'},
+  {id:'cinema',area:'blvd',name:'The Starlite',label:'STARLITE',x:16,y:4,w:5,h:5,style:'cinema',floors:3,wall:'#e9c9a6',stone:'#f4e2c4',roof:'#a8453a',awning:'#2c2c33',awning2:'#2c2c33',sign:'#2c2c33',ink:'#ffd968',icon:'star'},
+  {id:'nickels',area:'blvd',name:"Nickel's",label:'SHOP',x:25,y:16,w:5,h:5,style:'deco',floors:2,wall:'#b8c4b0',stone:'#e2e8d8',roof:'#2f6f73',awning:'#3a9ca0',awning2:'#fbefd2',shop:true,keeper:'Nickel',icon:'coin',fire:true},
+  {id:'wardrobe',area:'blvd',name:'Backlot Wardrobe',label:'WARDROBE',x:2,y:16,w:5,h:5,style:'loft',floors:3,wall:'#a0523a',stone:'#d9b49a',roof:'#5a3a2a',awning:'#8a6aa0',awning2:'#f3eaf6',sign:'#2c2c33',ink:'#e3c6f0',icon:'hanger',ghost:'GARMENT CO.'},
+  {id:'lofts',area:'blvd',name:"TNB's Loft",label:'LOFTS',x:7,y:16,w:5,h:5,style:'loft',floors:3,wall:'#8a5a44',stone:'#d9c0a0',roof:'#4a3a32',awning:'#2c2c33',awning2:'#2c2c33',sign:'#2c2c33',ink:'#f4ecd2',home:true,ghost:'FURNITURE'},
+  {id:'tower',area:'blvd',name:'The Grand Tower',label:'GRAND',x:16,y:16,w:5,h:5,door2:true,style:'tower',floors:9,wall:'#6f9fc4',stone:'#c9d6de',roof:'#3f5a74',home:true},
+  {id:'lacab',area:'blvd',name:'Angel City Cab Co.',label:'CABS',x:22,y:4,w:5,h:5,style:'deco',floors:1,wall:'#f4e6c8',stone:'#fff4dc',roof:'#d9a43a',awning:'#2c2c33',awning2:'#f2c75a',taxi:true,icon:'cab'},
   {id:'creole',area:'jpark',name:"Odette's Creole Kitchen",label:'CREOLE',x:3,y:3,w:5,h:4,style:'strip',wall:'#e8c060',roof:'#7a3a5a',awning:'#4a7a3a',awning2:'#f4e6c0',sign:'#4a2a4a',ink:'#ffd968',icon:'pot',mural:true},
   {id:'pupuseria',area:'jpark',name:'Pupuseria La Ceiba',label:'PUPUSAS',x:8,y:3,w:5,h:4,style:'strip',wall:'#f2e6d0',roof:'#2f6fb3',awning:'#2f6fb3',awning2:'#ffffff',sign:'#2f6fb3',ink:'#ffffff',icon:'leaf',grille:true},
   {id:'boards',area:'jpark',name:'Board Room',label:'SKATE',x:16,y:3,w:5,h:4,style:'strip',wall:'#d6e6ec',roof:'#2f4e6a',awning:'#e2793a',awning2:'#2c2c33',sign:'#2c2c33',ink:'#f2a05a',icon:'board',mural:true},
@@ -97,76 +97,80 @@ const FRONT_GARDEN='Purple flax, red cordyline and a lot of mulch. Drought toler
 const LA_AREAS=[
   // Downtown LA: the historic core and the Arts District in one block. Same street shape as The Square.
   {id:'blvd',name:'Downtown LA',w:30,h:26,region:'la',ground:'city',
-    tag:'Towers, lofts, a movie palace and one taco truck.',
+    tag:'Towers, lofts, a movie palace and a bowl of ramen.',
     eyebrow:'LOS ANGELES / DOWNTOWN',
-    hint:"Shops and apartments. Nickel's sells things. Jefferson Park south. Griffith Park up the steps, northwest. Studio lot east.",
-    spawn:{x:20,y:22},
-    paths:[[0,10,29,12]],
+    hint:"Shops and apartments. Nickel's sells things. Jefferson Park south. Griffith Park up the steps, northwest. Studio lot east, under the arch.",
+    spawn:{x:15,y:11},
     houseRoad:[10,22],
-    // Painted plate (art/blvd.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks. DTLA v3 (2026-10-31): doors at (5,9) (10,9) (17,9) (22,9) and (4,21) (11,21) (18,21) (25,21); three one-tile walkways
-    // (cols 8, 14, 21, rows 15 to 21) join the roof walk (row 14, behind the south row's roofs, `PLATE_BEHIND.blvd` building faces) and the south sidewalk (row 13) to the plaza (row 22); Griffith steps cols 1 and 2; south arch cols 13 to 16.
+    // Painted plate (art/blvd.webp, engine/plate.js), DTLA plaza v4 (2026-11-06). The mask is the walk map: '#' blocks, '.' walks; made by
+    // tools/make_blvd_mask.py. Top row doors (5,9) COFFEE, (11,9) RAMEN, (18,8) STARLITE, (24,8) CABS; bottom row (4,20) WARDROBE, (9,20) LOFTS,
+    // (18-19,20) GRAND, (27,20) SHOP. Griffith steps cols 2 and 3 (exit row 2), STUDIO road cols 27 and 28 (exit row 7), JEFFERSON PARK arch
+    // cols 13 to 16 (exit row 25). Two one-tile alleys (cols 14 and 22, rows 13 to 20) join the top plaza (rows 9 to 13) to the bottom
+    // sidewalk (rows 21 and 22). Walk-behind cutouts: art/blvd-fg.webp, `PLATE_BEHIND.blvd` (tools/make_blvd_fg.py).
     plateMask:[
       '##############################',
       '##############################',
-      '##############################',
-      '##############################',
-      '#..###########################',
-      '#..###########################',
-      '#..###########################',
-      '#..###########################',
-      '#..###########################',
-      '#..##.####.######.####.#######',
-      '##............................',
-      '...........####...............',
-      '..............................',
-      '............##................',
-      '..............................',
-      '########.#####.######.########',
-      '########.#####.######.########',
-      '########.#####.######.########',
-      '########.#####.######.########',
-      '########.#####.######.########',
-      '########.#####.######.########',
-      '####.###.##.##.###.##.###.####',
-      '..............................',
-      '........................###...',
-      '....##.##..##....##.#.#....#..',
-      '.###...##.###....##...#.####.#'],
-    // The painted street has one-tile corridors (the east sidewalk, the west street and the way round to the south sidewalk).
-    // NPCs never wander onto them, so nobody can plug a door or an exit (tools/reach_test.py checks this).
-    noGo:[...[4,5,6,7,8,9].flatMap(y=>[[1,y],[2,y]]),...[13,14,15,16,17,18,19,20,21].flatMap(y=>[[8,y],[14,y],[21,y]]),
-      ...[5,10,17,22].map(x=>[x,10]),...[4,11,18,25].map(x=>[x,22]),...[13,14,15,16].flatMap(x=>[22,23,24,25].map(y=>[x,y])),
-      [27,11],[28,11],[28,12],[27,12],[26,22],[27,22],[28,22],[27,23],[23,22],[24,22],[23,23],[23,24],[3,10],[2,10],...[10,11,12,13,14,15].map(x=>[x,10]),...[5,6,7,8,9,10,11,12,21,22].map(x=>[x,22]),[12,23],[17,22],[17,23]],
-    // Chapter 4: the east end of the boulevard leads to the studio lot (Sunset Gold Studios).
-    border:{kind:'citywall',open:[[13,25],[14,25],[15,25],[16,25],[29,11],[29,12]]},
-    exits:[[1,4,'griffith',11,20,'up','path'],[2,4,'griffith',12,20,'up','path'],[13,25,'jpark',14,1,'down'],[14,25,'jpark',15,1,'down'],[15,25,'jpark',16,1,'down'],[16,25,'jpark',17,1,'down'],[29,11,'studio',1,10,'right'],[29,12,'studio',1,11,'right']],
+      '##..##########################',
+      '##..##########################',
+      '##..##########################',
+      '##..##########################',
+      '##..##########################',
+      '#...#######################..#',
+      '#...#######################..#',
+      '#.###.#####.##.......###.##..#',
+      '#......####..###.###.###......',
+      '#................###..........',
+      '#...####..##....#####....##...',
+      '#..............######.........',
+      '##############.#######.#######',
+      '##############.#######.#######',
+      '##############.#######.#######',
+      '##############.#######.#######',
+      '##############.#######.#######',
+      '##############.#######.#######',
+      '####.####.####.###..##.####.##',
+      '##....###..............##....#',
+      '##................#.........##',
+      '#############...##############',
+      '#############....#############',
+      '#############....#############'],
+    // One-tile corridors (the steps, the two alleys, the studio road, the arch way out, the paving under the wardrobe bench) and the door
+    // pads: NPCs never wander onto them, so nobody can plug a door or an exit (tools/reach_test.py checks this).
+    noGo:[...[2,3,4,5,6,7,8].flatMap(y=>[[2,y],[3,y]]),[1,7],[1,8],[1,9],[1,10],...[13,14,15,16,17,18,19,20,21].flatMap(y=>[[14,y],[22,y]]),
+      ...[7,8,9].flatMap(y=>[[27,y],[28,y]]),...[13,14,15,16].flatMap(x=>[22,23,24,25].map(y=>[x,y])),...[5,6,7,8,9,22,23,24,25].map(x=>[x,22]),[24,10],
+      [5,10],[11,10],[12,10],[18,9],[24,9],[4,21],[9,21],[18,21],[19,21],[27,21],[26,21],[28,21],[21,9],[20,9],
+      // the two ways round the GRAND tower's spire, between the STARLITE steps and the plaza
+      [16,10],[16,11],[15,11],[15,12],[14,12],[14,13],[13,13],[20,10],[20,11],[21,11],[21,12],[21,13],[22,13]],
+    // Chapter 4: the STUDIO arch leads to the studio lot (Sunset Gold Studios).
+    border:{kind:'citywall',open:[[13,25],[14,25],[15,25],[16,25],[29,10],[29,11],[29,12],[29,13]]},
+    exits:[[2,2,'griffith',11,20,'up','path'],[3,2,'griffith',12,20,'up','path'],[13,25,'jpark',14,1,'down'],[14,25,'jpark',15,1,'down'],[15,25,'jpark',16,1,'down'],[16,25,'jpark',17,1,'down'],[27,7,'studio',1,10,'right'],[28,7,'studio',1,11,'right']],
     // Chapter 2: the trail is closed for smog until Tom and TNB work out where it is coming from.
-    gates:[{at:[[1,4],[2,4]],look:'barrier',dy:.4,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
+    gates:[{at:[[2,2],[3,2]],look:'barrier',dy:.4,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
       lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','Somebody added in marker: "This means you, Gary."'],
       when:[{flag:'ch2-smog',lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','The neighbors come first. Check on 2nd Ave and Jefferson Boulevard.']}]},
       // The studio lot is a closed set until chapter 4.
-      {at:[[29,11],[29,12]],look:'barrier',dy:.4,cond:{test:S=>S.chapter<4},name:'Studio gate',
+      {at:[[27,7],[28,7]],look:'barrier',dy:.4,cond:{test:S=>S.chapter<4},name:'Studio gate',
         lines:['SUNSET GOLD STUDIOS. CLOSED SET. Crew and talent only.','A guard waves from the booth. Not a hello wave. A no wave.']}],
     objects:[
-      // Palms, lamps, planters and the parked props are painted; the mask blocks them. Only things you can touch are listed here.
-      ['sign',27,9,1,1,'Downtown notice',"Downtown LA. Eight doors: shops below, people living above. Nickel's sells things, east end. Look for the coin."],
-      ['sign',3,8,1,1,'Trail signpost','GRIFFITH PARK, up the steps. Watch for coyotes. Watch for tar. Watch the ground.'],
-      ['sign',12,22,1,1,'South signpost','JEFFERSON PARK, this way. Craftsman houses from 1910, Jefferson Boulevard, pupusas.'],
-      ['tacotruck',11,11,4,1,'Taco truck','A taco truck called TACOS TACOS. The menu says: TACOS.',{restore:true,
-        restoreText:'Al pastor for everyone. Everybody is completely restored. Tom tips well.'}],
-      ['bench',12,13,2,1,'Bus bench','An ad for a lawyer covers the whole bench. He\'s smiling at you. He\'s always smiling at you.'],
-      ['metro',25,25,1,1,'Metro stairs','Down to the train. TNB knows every line, every stop, and which car has the best seats.'],
-      ['sign',24,21,1,1,'Shop sign',"NICKEL'S. Penny's cousin. Gear, snacks, and things that go POP.",{shopSign:true}],
-      ['lacab',27,22,1,1,'Cab 8','Angel City Cab Co., cab 8. It\'s spotless. Sol details it twice a day. Sol has time.'],
+      // Palms, lamps, pots, benches and the arches are painted; the mask blocks them. Only things you can touch are listed here.
+      ['sign',25,12,2,1,'Newspaper boxes',"The Downtown Daily. EIGHT DOORS, ONE PLAZA. Shops below, people living above. Nickel's sells things, bottom right. Look for the coin."],
+      ['sign',4,4,1,1,'Griffith Park arch','GRIFFITH PARK, up the steps. Watch for coyotes. Watch for tar. Watch the ground.'],
+      ['sign',12,24,1,1,'Jefferson Park arch','JEFFERSON PARK, this way. Craftsman houses from 1910, Jefferson Boulevard, pupusas.'],
+      ['ramenwindow',12,9,1,1,'Ramen window','A takeout window under the red lanterns. The menu says: RAMEN.',{restore:true,
+        restoreText:'Ramen for everyone, extra egg. Everybody is completely restored. Tom tips well.'}],
+      ['bench',6,12,2,1,'Bench','An ad for a lawyer covers the whole bench. He\'s smiling at you. He\'s always smiling at you.'],
+      // No Metro entrance is painted on the plaza: the stairs are a touch spot at the bottom right (chapter 13 goes down from here).
+      ['metro',28,22,1,1,'Metro stairs','Down to the train. TNB knows every line, every stop, and which car has the best seats.'],
+      ['sign',26,20,1,1,'Shop sign',"NICKEL'S. Penny's cousin. Gear, snacks, and things that go POP.",{shopSign:true}],
       ['planter',21,9,1,1,'Bird of paradise','A bird of paradise in a pot. It looks like it wants to leave.',{dry:true}]],
     npcs:[
-      {name:'Skye',x:4,y:10,look:'skye',lines:["I'm filming a day-in-my-life video. I live in the lofts.","This is the day. You're in my life now.",'Say hi to my eleven followers.']},
-      {name:'Chet',x:19,y:23,look:'chet',lines:["I'm an actor. Well. I'm an actor who parks cars at a tower.",'I had a callback last week. For a cereal.','The cereal went with someone else. It happens.']},
-      {name:'Wes',x:9,y:23,look:'wes',lines:["I'm a screenwriter. I live in the lofts, two floors down from your boyfriend.","Draft forty-one. It's about a man who writes screenplays. It's very personal.",'He lends me a mug when I\'m stuck. I\'m stuck a lot. I have nine of his mugs.']},
+      {name:'Skye',x:3,y:11,look:'skye',lines:["I'm filming a day-in-my-life video. I live in the lofts.","This is the day. You're in my life now.",'Say hi to my eleven followers.']},
+      {name:'Chet',x:20,y:22,look:'chet',lines:["I'm an actor. Well. I'm an actor who parks cars at a tower.",'I had a callback last week. For a cereal.','The cereal went with someone else. It happens.']},
+      {name:'Wes',x:11,y:22,look:'wes',lines:["I'm a screenwriter. I live in the lofts, two floors down from your boyfriend.","Draft forty-one. It's about a man who writes screenplays. It's very personal.",'He lends me a mug when I\'m stuck. I\'m stuck a lot. I have nine of his mugs.']},
       // Boomie: Tom's friend, same age, lives downtown. An amazing gospel and soul singer, very kind, about to go on tour.
       // Her talk is the tour (next stops), the Friday home show where Tom has the front row, and songs. No food talk.
       // Voice: warm, young, deeper-voiced Black woman (voice id boomie2 in data/dialog-cast.js).
-      {name:'Boomie',x:16,y:10,look:'skye',sheet:'boomie',kin:true,trace:'boomie-hug',duration:0.8,lines:[
+      {name:'Boomie',x:12,y:11,look:'skye',sheet:'boomie',kin:true,trace:'boomie-hug',duration:0.8,lines:[
         'TOM! Get over here. Hug. Mmm-hmm. There it is.',
         'I leave Tuesday for the tour. Atlanta first, then Chicago, then Nashville. One suitcase. Nine dresses.',
         'Friday is the home show, right here downtown. You\'re in the front row. I wrote your name on the seat.',
@@ -182,7 +186,7 @@ const LA_AREAS=[
           'You text me when you land. I mean it. A song is also fine.',
           'I sang in the shower this morning. The whole building clapped. Thin walls.',
           'Hmm hmm hmmm. Oh, I was humming? I\'m always humming.']},
-      {name:'Bev',x:19,y:10,look:'bev',lines:['I came all the way from Ohio. I rode the tiny orange railway up the hill.','It went one block. It cost a dollar. Best dollar of my life.','Then I ate a pupusa in a market from 1917. I may never go home.']}]},
+      {name:'Bev',x:26,y:11,look:'bev',lines:['I came all the way from Ohio. I rode the tiny orange railway up the hill.','It went one block. It cost a dollar. Best dollar of my life.','Then I ate a pupusa in a market from 1917. I may never go home.']}]},
 
   // Jefferson Park: an early streetcar suburb, about 2,500 craftsman bungalows built 1905 to 1920, now a historic
   // preservation zone. Jefferson Boulevard shops up top, a residential street (2nd Ave) below.
@@ -313,7 +317,7 @@ const LA_AREAS=[
       '##########....##########',
       '##########....##########'],
     border:{kind:'scrub',open:[[10,21],[11,21],[12,21],[13,21]]},
-    exits:[[10,21,'blvd',1,5,'down'],[11,21,'blvd',1,5,'down'],[12,21,'blvd',2,5,'down'],[13,21,'blvd',2,5,'down']],
+    exits:[[10,21,'blvd',2,3,'down'],[11,21,'blvd',2,3,'down'],[12,21,'blvd',3,3,'down'],[13,21,'blvd',3,3,'down']],
     pools:[{tile:'tar',cells:[[19,5],[20,5],[21,5],[22,5],[23,5],[19,6],[20,6],[21,6],[22,6],[23,6],[18,7],[19,7],[20,7],[21,7],[22,7],[23,7],
       [19,8],[20,8],[21,8],[22,8],[23,8],[20,9],[21,9],[22,9]]}],
     objects:[
@@ -368,7 +372,7 @@ LA_AREAS.push(
       '##.............#########',
       '#####...........########'],
     border:{kind:'studiowall',open:[[0,9],[0,10],[0,11],[0,12],[10,0],[11,0]]},
-    exits:[[0,9,'blvd',28,11,'left'],[0,10,'blvd',28,11,'left'],[0,11,'blvd',28,12,'left'],[0,12,'blvd',28,12,'left'],[10,0,'backlot',9,16,'up'],[11,0,'backlot',10,16,'up']],
+    exits:[[0,9,'blvd',27,8,'down'],[0,10,'blvd',27,8,'down'],[0,11,'blvd',28,8,'down'],[0,12,'blvd',28,8,'down'],[10,0,'backlot',9,16,'up'],[11,0,'backlot',10,16,'up']],
     objects:[
       // Only what you can reach and touch is listed; the rest of the painted set dressing is scenery.
       ['booth',5,7,3,3,'Guard booth','A tiny booth, a tiny fan and a tiny TV showing the gate. The gate is on TV. The gate is also right there.'],

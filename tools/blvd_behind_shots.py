@@ -1,5 +1,5 @@
 # Downtown LA plate (art/blvd.webp, map id blvd): every object can be touched from a walkable tile, all eight doors open the right
-# building from the painted pad and bring Tom back out, the three exits (west trail, south Jefferson Park, east studio road) work,
+# building from the painted pad and bring Tom back out, the three exits (Griffith steps, south Jefferson Park arch, STUDIO arch) work,
 # and the story arrivals that land on the boulevard (chapters 4, 13, 17) stand on walkable tiles.
 # Shots: tools/shots/blvd-*.png.
 # Usage: python3 tools/blvd_test.py
@@ -31,10 +31,10 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
     for(let y=o.y-1;y<=o.y+o.h;y++) for(let x=o.x-1;x<=o.x+o.w;x++){ const inside=x>=o.x&&x<o.x+o.w&&y>=o.y&&y<o.y+o.h; const edge=(x>=o.x&&x<o.x+o.w)||(y>=o.y&&y<o.y+o.h); if(!inside&&edge&&seen.has(x+','+y)) ok=true; }
     if(!ok) bad.push(o.name+'@'+o.x+','+o.y); }
   const npcBad=m.npcs.filter(n=>!seen.has(n.x+','+n.y)).map(n=>n.name+'@'+n.x+','+n.y);
-  const arrivals=[[24,22],[14,10],[15,10],[28,11],[28,12],[1,5],[2,5],[20,22],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
+  const arrivals=[[28,21],[23,12],[24,12],[27,8],[28,8],[2,3],[3,3],[15,11],[24,9],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 
-SPOTS={'cabN':(22,10,'up'),'nickS':(25,22,'up'),'lampN':(8,10,'down'),'starlite':(17,9,'up'),'lampS':(7,21,'down'),'arch':(13,23,'down'),'gate':(1,4,'up'),'truck':(12,10,'down'),'roofW':(3,14,'down'),'roofGT':(17,14,'down'),'shelterS':(12,14,'right'),'lane':(12,12,'right')}
+SPOTS={'palmStarlite':(15,9,'down'),'lampN':(4,11,'down'),'starlite':(18,9,'up'),'behindGrand':(16,11,'up'),'grandSpire':(18,9,'down'),'roofW':(4,13,'down'),'roofL':(11,13,'down'),'alleyGrand':(14,18,'down'),'alleyShop':(22,17,'down'),'griffith':(2,4,'up'),'studio':(27,8,'up'),'arch':(14,23,'down'),'bushes':(10,22,'down'),'newsbox':(25,11,'down'),'palmEast':(28,12,'down')}
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']

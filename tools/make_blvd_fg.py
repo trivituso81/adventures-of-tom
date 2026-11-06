@@ -1,110 +1,146 @@
-# Builds art/blvd-fg.webp: the Downtown LA foreground cutouts (foliage by colour, plus hand polygons for tanks, the tower crown and
-# planters) with transparency everywhere else. engine/plate.js (PLATE_BEHIND.blvd, fg:true zones) draws it over anyone standing behind.
-# Usage: python3 tools/make_blvd_fg.py   (re-run after art/blvd.webp changes; writes tools/shots/blvd-fg-preview.png too)
-import os
-import cv2, numpy as np
-from PIL import Image, ImageDraw, ImageFilter, ImageChops
-ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-plate=Image.open(os.path.join(ROOT,'art/blvd.webp')).convert('RGB'); W,H=plate.size
-hsv=plate.convert('HSV'); Hh,Ss,Vv=hsv.split()
-def green_mask(box):
-    # leaf colours: yellow-green to green hue, enough saturation, not black
-    h=Hh.crop(box).point(lambda v:255 if 33<=v<=125 else 0); s=Ss.crop(box).point(lambda v:255 if v>=70 else 0); v=Vv.crop(box).point(lambda v:255 if v>=35 else 0)
-    m=ImageChops.multiply(ImageChops.multiply(h,s),v)
-    m=m.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.MaxFilter(3))   # close pin holes, grow a hair
-    return m
-alpha=Image.new('L',(W,H),0)
-def add_green(box): alpha.paste(ImageChops.lighter(alpha.crop(box),green_mask(box)),box[:2])
-def add_poly(pts):
-    d=ImageDraw.Draw(alpha); d.polygon([tuple(p) for p in pts],fill=255)
-GREEN=[ (0,1462,175,1664), (412,1466,502,1622), (660,1466,780,1562), (632,1562,812,1664), (1128,1466,1220,1562), (1116,1562,1240,1664),
-        (1408,1466,1500,1622), (1768,1462,1920,1664),
-        (330,820,430,912), (635,860,720,912), (735,860,850,912), (1015,850,1080,912), (1590,850,1660,912), (1836,690,1920,1010), (0,840,175,1140) ]
-for b in GREEN: add_green(b)
-POLY=[ [[236,842],[252,832],[300,832],[316,845],[316,900],[300,935],[236,935]],                 # wardrobe water tank
-       [[1160,770],[1195,770],[1200,800],[1215,800],[1218,840],[1238,845],[1245,880],[1262,885],[1270,908],[1090,908],[1100,890],[1112,885],[1118,850],[1135,845],[1140,810],[1158,805]],   # tower crown
-       [[1262,860],[1300,860],[1300,915],[1262,915]],                                           # tower roof pipes
-       [[1664,885],[1690,872],[1752,870],[1772,885],[1776,960],[1664,960]] ]                     # cab water tank
-POLY+=[ [[58,1530],[96,1530],[104,1652],[52,1652]],            # left palm trunk
-        [[1866,1520],[1906,1520],[1912,1664],[1860,1664]],      # bottom-right palm trunk
-        [[438,1560],[470,1560],[474,1600],[434,1600]] ]          # pot palm trunks (the pots are rectangles below)
-POLY+=[ [[1888,840],[1914,840],[1916,1010],[1886,1010]] ]       # right-edge palm trunk
-for p in POLY: add_poly(p)
-for r in [(235,1490,342,1582),(488,1515,588,1610),(1260,1495,1364,1590),(1718,1560,1792,1642),(133,1580,222,1650),(418,1566,498,1622),(1412,1566,1494,1622),
-          (783,780,917,885),            # bus shelter (roof, posts, ad panels)
-          (1520,1488,1692,1600)]:        # Metro canopy and its sign (also planters and pots above)
-    ImageDraw.Draw(alpha).rectangle(r,fill=255)
-# Pass 3 (2026-10-31): hard-edged objects cut out by colour and GrabCut (OpenCV), no generator needed: the 12 lamp posts (head, pole, foot),
-# the taco truck, the Starlite marquee with its sunburst, the Griffith Park gate, the Jefferson Park arch, and the six awnings (hand polygons).
-im=cv2.imread(os.path.join(ROOT,'art/blvd.webp')); hsv=cv2.cvtColor(im,cv2.COLOR_BGR2HSV)
-a3=np.zeros((H,W),np.uint8)
-def _p3(alpha):
-    def grabcut(box,pad=14,iters=6,init_fg=False):
-        x0,y0,x1,y1=box; X0,Y0,X1,Y1=max(0,x0-pad),max(0,y0-pad),min(W,x1+pad),min(H,y1+pad)
-        crop=im[Y0:Y1,X0:X1]; mask=np.zeros(crop.shape[:2],np.uint8)
-        bg=np.zeros((1,65),np.float64); fg=np.zeros((1,65),np.float64)
-        if init_fg:
-            mask[:]=cv2.GC_BGD; mask[y0-Y0:y1-Y0,x0-X0:x1-X0]=cv2.GC_PR_FGD
-            ix=int((x1-x0)*.15); iy=int((y1-y0)*.25); mask[y0-Y0+iy:y1-Y0-iy,x0-X0+ix:x1-X0-ix]=cv2.GC_FGD
-            cv2.grabCut(crop,mask,None,bg,fg,iters,cv2.GC_INIT_WITH_MASK)
-        else: cv2.grabCut(crop,mask,(x0-X0,y0-Y0,x1-x0,y1-y0),bg,fg,iters,cv2.GC_INIT_WITH_RECT)
-        m=np.where((mask==1)|(mask==3),255,0).astype(np.uint8)
-        m=cv2.morphologyEx(m,cv2.MORPH_CLOSE,np.ones((3,3),np.uint8))
-        n,lab,st,_=cv2.connectedComponentsWithStats(m)   # drop specks
-        for i in range(1,n):
-            if st[i,cv2.CC_STAT_AREA]<40: m[lab==i]=0
-        alpha[Y0:Y1,X0:X1]=np.maximum(alpha[Y0:Y1,X0:X1],m)
-        return m.sum()//255
-    def lamp(cx,y0,base,foot=True):
-        # find the pole: the darkest 9 px column between the head and the foot
-        v=hsv[y0+60:base-40,cx-14:cx+14,2]; col=np.convolve((v<95).sum(0),np.ones(9),'same'); cx=cx-14+int(np.argmax(col))
-        x0,x1=cx-34,cx+34; y1=base+12; y0=y0-14
-        c=hsv[y0:y1,x0:x1]; vv=c[...,2]
-        dark=(vv<95).astype(np.uint8)*255
-        bright=(vv>195).astype(np.uint8)*255
-        hb=66; keep=np.zeros_like(dark)
-        # lantern head: dark iron and the lit glass inside it, closed into one blob, largest component only
-        hx0,hy0,hx1,hy1=cx-19,y0+14,cx+19,y0+14+54
-        crop=im[hy0-12:hy1+12,hx0-12:hx1+12]; mask=np.full(crop.shape[:2],cv2.GC_BGD,np.uint8)
-        mask[12:-12,12:-12]=cv2.GC_PR_FGD; mask[22:-22,22:-22]=cv2.GC_FGD
-        bg=np.zeros((1,65),np.float64); fg=np.zeros((1,65),np.float64)
-        cv2.grabCut(crop,mask,None,bg,fg,5,cv2.GC_INIT_WITH_MASK)
-        m=np.where((mask==1)|(mask==3),255,0).astype(np.uint8); m=cv2.morphologyEx(m,cv2.MORPH_CLOSE,np.ones((5,5),np.uint8))
-        n,lab,st,_=cv2.connectedComponentsWithStats(m)
-        if n>1: m[lab!=1+np.argmax(st[1:,cv2.CC_STAT_AREA])]=0
-        keep[hy0-12-y0:hy1+12-y0,hx0-12-x0:hx1+12-x0]=m
-        # pole: dark pixels in a narrow column
-        pole=np.zeros_like(dark); pole[hb:,34-9:34+9]=dark[hb:,34-9:34+9]
-        keep=np.maximum(keep,pole)
-        # foot: dark pixels in the bottom 48 px, closed, largest component
-        if foot:
-            fx0,fy0,fx1,fy1=cx-24,base-44,cx+24,base+2
-            crop=im[fy0-10:fy1+10,fx0-10:fx1+10]; mask=np.full(crop.shape[:2],cv2.GC_BGD,np.uint8)
-            mask[10:-10,10:-10]=cv2.GC_PR_FGD; mask[16:-14,20:-20]=cv2.GC_FGD
-            bg=np.zeros((1,65),np.float64); fg=np.zeros((1,65),np.float64)
-            cv2.grabCut(crop,mask,None,bg,fg,5,cv2.GC_INIT_WITH_MASK)
-            m=np.where((mask==1)|(mask==3),255,0).astype(np.uint8); m=cv2.morphologyEx(m,cv2.MORPH_CLOSE,np.ones((5,5),np.uint8))
-            n,lab,st,_=cv2.connectedComponentsWithStats(m)
-            if n>1: m[lab!=1+np.argmax(st[1:,cv2.CC_STAT_AREA])]=0
-            keep[fy0-10-y0:fy1+10-y0,fx0-10-x0:fx1+10-x0]=np.maximum(keep[fy0-10-y0:fy1+10-y0,fx0-10-x0:fx1+10-x0],m)
-        keep[hb+40:-50,34-3:34+3]=255   # a thin stripe guarantees the pole is continuous
-        keep=cv2.dilate(keep,np.ones((3,3),np.uint8))
-        alpha[y0:y1,x0:x1]=np.maximum(alpha[y0:y1,x0:x1],keep)
-        return cx
-    LAMPS=[(185,478,658),(207,543,716),(525,543,716),(820,548,656),(980,535,716),(1275,550,716),(122,1268,1456),(484,1268,1456),(587,1268,1456),(992,1268,1452),(1365,1278,1452),(1832,1273,1405,False)]
-    for l in LAMPS: lamp(*l)
-    RECT={'truck':(722,655,950,772),
-     'gate_b':(46,248,204,320),'gate_l':(14,238,58,366),'gate_r':(198,222,238,352),'marquee':(923,420,1253,598)}
-    for k,b in RECT.items(): grabcut(b)
-    for k,b in {'arch_l':(766,1402,822,1572),'arch_r':(1078,1402,1134,1572),'arch_b':(812,1420,1086,1510)}.items(): grabcut(b,pad=12,init_fg=True)
-    AWN=[[[250,566],[487,566],[487,603],[250,603]],[[580,535],[805,535],[805,582],[580,582]],[[1343,585],[1630,585],[1630,628],[1343,628]],
-         [[175,1240],[460,1240],[462,1300],[165,1300]],[[612,1238],[895,1238],[895,1300],[612,1300]],[[1488,1240],[1790,1240],[1790,1305],[1488,1305]]]
-    for pts in AWN: cv2.fillPoly(alpha,[np.array(pts,np.int32)],255)
-_p3(a3)
-alpha=ImageChops.lighter(alpha,Image.fromarray(a3))
-alpha=alpha.filter(ImageFilter.GaussianBlur(.7)).point(lambda v:255 if v>140 else int(v*1.4) if v>60 else 0)
-fg=plate.convert('RGBA'); fg.putalpha(alpha)
-fg.save(os.path.join(ROOT,'art/blvd-fg.webp'),lossless=True,method=6)
-prev=Image.new('RGB',(W,H),(255,0,255)); prev.paste(fg,(0,0),fg)
-prev.crop((0,760,1920,1010)).save(os.path.join(ROOT,'tools/shots/blvd-fg-preview-roof.png')); prev.crop((0,1440,1920,1664)).save(os.path.join(ROOT,'tools/shots/blvd-fg-preview-plaza.png'))
-print('wrote art/blvd-fg.webp',os.path.getsize(os.path.join(ROOT,'art/blvd-fg.webp'))//1024,'KB')
+#!/usr/bin/env python3
+"""Downtown LA (blvd) plate and walk-behind layer (Tom's DTLA plaza painting of 2026-11-06, claude/next-addendum-dtla-cutouts.md).
+Inputs in art/raw/areas/blvd-v4/: painting.png (1347 x 1168, the approved painting) and five generator MASKS
+(mask-trees, mask-lamps, mask-buildings, mask-props, mask-front: the painting with everything but one class replaced by flat magenta).
+The masks are used ONLY as masks: every piece is fitted to the painting (scale and shift, the generator drifts a few px),
+and the pixels are cut from the painting itself. No generator pixel reaches the game. Same method as tools/make_town_fg.py (the Square).
+Outputs: art/blvd.webp (the painting scaled to the 1920 x 1664 plate), art/blvd-fg.webp (cut pieces, transparent elsewhere),
+tools/shots/blvd-fg-*.png (layer on green, on a checkerboard, over the painting), and prints PLATE_BEHIND.blvd
+(one zone per piece: art px of the plate, base = lowest painted row of the piece).
+Usage: python3 tools/make_blvd_fg.py [--no-save]"""
+import os, sys, json, numpy as np, cv2
+from scipy import ndimage as ndi
+from PIL import Image
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAW = os.path.join(ROOT, 'art/raw/areas/blvd-v4/')
+SH = os.path.join(ROOT, 'tools/shots/'); os.makedirs(SH, exist_ok=True)
+PW, PH = 1920, 1664
+paint = np.array(Image.open(RAW + 'painting.png').convert('RGB'))
+H, W = paint.shape[:2]
+KEY = np.array([252, 3, 250])
+CLASSES = ['trees', 'lamps', 'buildings', 'props', 'front']
+MINAREA = {'trees': 1500, 'lamps': 900, 'buildings': 3000, 'props': 600, 'front': 1500}
+# Pieces in a mask that are not in the painting: dropped. Boxes in painting px (x0, y0, x1, y1), matched by the piece centre.
+DROP = {'props': [(683, 879, 741, 953)]}   # flower pot drawn where the JEFFERSON PARK sign is (not painted)
+# Classes that repeat what the lamps mask owns (the three exit arches): the lamps mask is subtracted from them before splitting.
+MINUS_LAMPS = ['trees', 'buildings', 'front']
+# The top row of buildings comes back as one blob joined by the string lights: split it at these x lines (painting px) so each
+# building gets its own base. COFFEE | RAMEN | STARLITE | CABS | studio buildings.
+TOPROW_Y, TOPROW_CUTS = 400, [400, 626, 968, 1188]
+# Lamps standing BEHIND a building (the lamp at the top of the GRAND spire): the buildings mask is subtracted from them.
+LAMP_BEHIND = [(700, 410, 780, 600)]
+
+def load(cls):
+    img = Image.open(RAW + 'mask-%s.png' % cls).convert('RGB')
+    if img.size != (W, H): img = img.resize((W, H), Image.LANCZOS)   # masks came back 1346 wide
+    return np.array(img)
+def keyed(img):
+    return np.abs(img.astype(int) - KEY).sum(2) > 90
+MASK = {c: ndi.binary_fill_holes(ndi.binary_opening(keyed(load(c)), iterations=1)) for c in CLASSES}
+IMG = {c: load(c) for c in CLASSES}
+LAMPS_GROWN = ndi.binary_dilation(MASK['lamps'], iterations=3)
+
+def pieces_of(cls):
+    keep = MASK[cls].copy()
+    if cls in MINUS_LAMPS: keep &= ~LAMPS_GROWN
+    if cls == 'buildings':   # split the joined top row
+        for x in TOPROW_CUTS: keep[:TOPROW_Y, x - 1:x + 2] = False
+    keep = ndi.binary_opening(keep, iterations=1)
+    lab, n = ndi.label(keep)
+    out = []
+    for i, s in enumerate(ndi.find_objects(lab), 1):
+        m = lab == i
+        if m.sum() < MINAREA[cls]: continue
+        y0, y1, x0, x1 = s[0].start, s[0].stop, s[1].start, s[1].stop
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        if any(a <= cx <= c and b <= cy <= d for a, b, c, d in DROP.get(cls, [])): continue
+        out.append({'cls': cls, 'm': m, 'img': IMG[cls], 'bb': (x0, y0, x1, y1)})
+    return out
+
+def fit(p, win=30):
+    """Best scale and shift of the piece against the painting: (rms, scale, dx, dy, placed mask)."""
+    x0, y0, x1, y1 = p['bb']; m = p['m']
+    pad = 4
+    ax0, ay0, ax1, ay1 = max(0, x0 - pad), max(0, y0 - pad), min(W, x1 + pad), min(H, y1 + pad)
+    crop = p['img'][ay0:ay1, ax0:ax1].astype(np.float32)
+    mk = ndi.binary_erosion(m[ay0:ay1, ax0:ax1], iterations=3).astype(np.float32)
+    if mk.sum() < 40: mk = m[ay0:ay1, ax0:ax1].astype(np.float32)
+    cx, cy = (ax0 + ax1) / 2, (ay0 + ay1) / 2
+    paintf = paint.astype(np.float32)
+    best = (1e9, 1, 0, 0, (ax0, ay0))
+    for s in np.arange(0.90, 1.101, 0.01):
+        c2 = cv2.resize(crop, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+        m2 = (cv2.resize(mk, (c2.shape[1], c2.shape[0]), interpolation=cv2.INTER_LINEAR) > 0.5).astype(np.float32)
+        if m2.sum() < 30: continue
+        h2, w2 = c2.shape[:2]
+        wx0, wy0 = int(round(cx - w2 / 2 - win)), int(round(cy - h2 / 2 - win))
+        wx1, wy1 = wx0 + w2 + 2 * win, wy0 + h2 + 2 * win
+        sx0, sy0, sx1, sy1 = max(0, wx0), max(0, wy0), min(W, wx1), min(H, wy1)
+        if sx1 - sx0 <= w2 or sy1 - sy0 <= h2: continue
+        r = cv2.matchTemplate(paintf[sy0:sy1, sx0:sx1], c2, cv2.TM_SQDIFF, mask=m2)
+        r = np.nan_to_num(r, nan=1e18, posinf=1e18)
+        loc = cv2.minMaxLoc(r)[2]
+        rms = float(np.sqrt(r[loc[1], loc[0]] / (m2.sum() * 3))) + 30 * abs(s - 1)
+        if rms < best[0]:
+            tlx, tly = sx0 + loc[0], sy0 + loc[1]
+            best = (rms, s, tlx - (cx - w2 / 2), tly - (cy - h2 / 2), (tlx, tly))
+    rms, s, dx, dy, (tlx, tly) = best
+    f2 = cv2.resize(m[ay0:ay1, ax0:ax1].astype(np.float32), None, fx=s, fy=s, interpolation=cv2.INTER_LINEAR)
+    placed = np.zeros((H, W), np.float32)
+    hh, ww = f2.shape
+    sx0, sy0 = max(0, tlx), max(0, tly); ex0, ey0 = sx0 - tlx, sy0 - tly
+    sx1, sy1 = min(W, tlx + ww), min(H, tly + hh)
+    placed[sy0:sy1, sx0:sx1] = f2[ey0:ey0 + (sy1 - sy0), ex0:ex0 + (sx1 - sx0)]
+    return rms, float(s), float(dx), float(dy), placed
+
+def main():
+    pcs = []
+    for cls in CLASSES:
+        for p in pieces_of(cls):
+            p['rms'], p['s'], p['dx'], p['dy'], p['placed'] = fit(p)
+            pcs.append(p)
+    bmask = np.zeros((H, W), bool)
+    for p in pcs:
+        if p['cls'] == 'buildings': bmask |= p['placed'] > 0.5
+    plate = np.array(Image.fromarray(paint).resize((PW, PH), Image.LANCZOS))
+    fg = np.zeros((PH, PW, 4), np.uint8)
+    zones, rows = [], []
+    idx = np.zeros((PH, PW), np.uint8)   # which piece owns each plate pixel (for tools/make_blvd_mask.py)
+    for k, p in enumerate(pcs):
+        a = p['placed'] > 0.5
+        x0, y0, x1, y1 = p['bb']; cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        if p['cls'] == 'lamps' and any(a0 <= cx <= c0 and b0 <= cy <= d0 for a0, b0, c0, d0 in LAMP_BEHIND):
+            a &= ~ndi.binary_dilation(bmask, iterations=1)
+        a = ndi.binary_opening(a, iterations=1)
+        a = ndi.binary_fill_holes(a)
+        cl, cn = ndi.label(a)   # a subtraction can leave crumbs: keep the body
+        if cn > 1:
+            sizes = ndi.sum(a, cl, range(1, cn + 1)); a = np.isin(cl, [i + 1 for i, v in enumerate(sizes) if v >= 0.15 * max(sizes)])
+        a = ndi.binary_erosion(a, iterations=1)
+        af = cv2.GaussianBlur(a.astype(np.float32), (0, 0), 0.8)
+        al = (np.clip(cv2.resize(af, (PW, PH), interpolation=cv2.INTER_CUBIC), 0, 1) * 255).astype(np.uint8)
+        fg[..., 3] = np.maximum(fg[..., 3], al)
+        idx[al > 100] = len(rows) + 1
+        ys, xs = np.where(al > 40)
+        if len(xs) == 0: continue
+        zx0, zx1, zy0, zy1 = int(xs.min()), int(xs.max()) + 1, int(ys.min()), int(ys.max()) + 1
+        z = {'x': zx0, 'y': zy0, 'w': zx1 - zx0, 'h': zy1 - zy0, 'base': min(zy1, PH)}
+        zones.append((p['cls'], z))
+        rows.append((k, p['cls'], p['bb'], round(p['rms'], 1), round(p['s'], 2), round(p['dx'], 1), round(p['dy'], 1), z))
+    fg[..., :3] = plate
+    if '--no-save' not in sys.argv:
+        Image.fromarray(plate).save(ROOT + '/art/blvd.webp', quality=88, method=6)
+        Image.fromarray(fg).save(ROOT + '/art/blvd-fg.webp', quality=90, method=6, exact=True)
+    chk = np.indices((PH, PW)).sum(0) // 16 % 2
+    bgc = np.where(chk[..., None] == 0, 230, 160).astype(np.uint8).repeat(3, 2)
+    al = fg[..., 3:4].astype(np.float32) / 255
+    green = (fg[..., :3] * al + np.array([0, 255, 0]) * (1 - al)).astype(np.uint8)
+    Image.fromarray(green).save(SH + 'blvd-fg-green-full.png')
+    Image.fromarray(green).resize((PW // 2, PH // 2), Image.LANCZOS).save(SH + 'blvd-fg-green.png')
+    Image.fromarray((fg[..., :3] * al + bgc * (1 - al)).astype(np.uint8)).resize((PW // 2, PH // 2), Image.LANCZOS).save(SH + 'blvd-fg-checker.png')
+    Image.fromarray(idx).save(SH + 'blvd-pieces.png')
+    json.dump([{'i': r[0], 'cls': r[1], 'bb': r[2], 'rms': r[3], 's': r[4], 'dx': r[5], 'dy': r[6], 'zone': r[7]} for r in rows], open(SH + 'blvd-pieces.json', 'w'))
+    for r in rows: print(r)
+    print(len(zones), 'zones')
+    print('PLATE_BEHIND.blvd=[' + ','.join('{x:%d,y:%d,w:%d,h:%d,base:%d,fg:true}' % (z['x'], z['y'], z['w'], z['h'], z['base']) for _, z in zones) + '];')
+if __name__ == '__main__': main()

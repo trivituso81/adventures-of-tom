@@ -1,5 +1,5 @@
 # Downtown LA plate (art/blvd.webp, map id blvd): every object can be touched from a walkable tile, all eight doors open the right
-# building from the painted pad and bring Tom back out, the three exits (west trail, south Jefferson Park, east studio road) work,
+# building from the painted pad and bring Tom back out, the three exits (Griffith steps, south Jefferson Park arch, STUDIO arch) work,
 # and the story arrivals that land on the boulevard (chapters 4, 13, 17) stand on walkable tiles.
 # Shots: tools/shots/blvd-*.png.
 # Usage: python3 tools/blvd_test.py
@@ -31,7 +31,7 @@ REACH="""()=>{ const m=worlds.blvd, W=m.w, H=m.h, wk=(x,y)=>x>=0&&y>=0&&x<W&&y<H
     for(let y=o.y-1;y<=o.y+o.h;y++) for(let x=o.x-1;x<=o.x+o.w;x++){ const inside=x>=o.x&&x<o.x+o.w&&y>=o.y&&y<o.y+o.h; const edge=(x>=o.x&&x<o.x+o.w)||(y>=o.y&&y<o.y+o.h); if(!inside&&edge&&seen.has(x+','+y)) ok=true; }
     if(!ok) bad.push(o.name+'@'+o.x+','+o.y); }
   const npcBad=m.npcs.filter(n=>!seen.has(n.x+','+n.y)).map(n=>n.name+'@'+n.x+','+n.y);
-  const arrivals=[[24,22],[14,10],[15,10],[28,11],[28,12],[1,5],[2,5],[20,22],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
+  const arrivals=[[28,21],[23,12],[24,12],[27,8],[28,8],[2,3],[3,3],[15,11],[24,9],[13,24],[16,24]].filter(([x,y])=>!seen.has(x+','+y)).map(c=>c.join(','));
   return {badObjects:bad,npcBad,arrivals,houses:m.houses.map(h=>[h.id,h.door.x,h.door.y])}; }"""
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
@@ -47,13 +47,15 @@ with sync_playwright() as pw:
     r=pg.evaluate(REACH); print(r)
     check('every object touchable',not r['badObjects']); check('every NPC on reachable floor',not r['npcBad']); check('story arrival tiles walkable',not r['arrivals'])
     # shots of the painted street
-    for n,(x,y,d) in {'spawn':(20,22,'up'),'coffee':(5,10,'up'),'starlite':(17,10,'up'),'nickels':(22,10,'up'),'taco':(12,10,'down'),'bus':(15,13,'left'),
-                      'wardrobe':(4,22,'up'),'lofts':(11,22,'up'),'tower':(18,22,'up'),'cab':(25,22,'up'),'metro':(25,24,'down'),'west':(2,6,'up'),'south':(14,24,'down'),'walkA':(8,16,'down'),'walkB':(14,16,'down'),'walkC':(21,16,'down')}.items():
+    for n,(x,y,d) in {'spawn':(15,11,'up'),'coffee':(5,10,'up'),'ramen':(11,10,'up'),'starlite':(18,9,'up'),'cabs':(24,9,'up'),'studio':(28,8,'up'),
+                      'wardrobe':(4,21,'up'),'lofts':(9,21,'up'),'tower':(18,21,'up'),'nickels':(27,21,'up'),'metro':(28,21,'down'),'west':(2,5,'up'),
+                      'south':(14,24,'down'),'alleyA':(14,16,'down'),'alleyB':(22,16,'down'),'behindGrand':(16,11,'up'),'roofrow':(5,13,'down')}.items():
         stand(pg,x,y,d); shot(pg,n)
-    pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,17,10,'up'); shot(pg,'landscape')
+    pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,18,9,'up'); shot(pg,'landscape')
+    stand(pg,14,21,'down'); shot(pg,'landscape-south')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
     # every door: walk up from the pad, land in the right building, walk back out
-    pads={'coffee':(5,10),'ramen':(10,10),'cinema':(17,10),'nickels':(25,22),'wardrobe':(4,22),'lofts':(11,22),'tower':(18,22),'lacab':(22,10)}
+    pads={'coffee':(5,10),'ramen':(11,10),'cinema':(18,9),'nickels':(27,21),'wardrobe':(4,21),'lofts':(9,21),'tower':(18,21),'lacab':(24,9)}
     for hid,(px,py) in pads.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
         stand(pg,px,py,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(700); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(1600); skip_intro(pg)
@@ -68,17 +70,17 @@ with sync_playwright() as pw:
     stand(pg,14,24,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('south crosswalk leads to Jefferson Park',pg.evaluate("()=>currentMap.id==='jpark'"))
     pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(900); skip_intro(pg)
-    stand(pg,1,5,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000); skip_intro(pg)
+    stand(pg,2,3,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('the Griffith arch leads to Griffith Park',pg.evaluate("()=>currentMap.id==='griffith'"))
     stand(pg,10,20,'down'); pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowDown'); pg.wait_for_timeout(2000); skip_intro(pg)
     check('Griffith brings Tom back under the arch',pg.evaluate("()=>currentMap.id==='blvd'&&player.x<=3&&player.y<=9&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
-    stand(pg,28,11,'right'); pg.keyboard.down('ArrowRight'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowRight'); pg.wait_for_timeout(2000); skip_intro(pg)
-    check('east road leads to the studio lot (chapter 5)',pg.evaluate("()=>currentMap.id==='studio'"))
+    stand(pg,27,8,'up'); pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowUp'); pg.wait_for_timeout(2000); skip_intro(pg)
+    check('STUDIO arch leads to the studio lot (chapter 5)',pg.evaluate("()=>currentMap.id==='studio'"))
     stand(pg,1,10,'left'); pg.keyboard.down('ArrowLeft'); pg.wait_for_timeout(900); pg.keyboard.up('ArrowLeft'); pg.wait_for_timeout(2000); skip_intro(pg)
     print('after studio exit:',pg.evaluate("()=>[currentMap.id,player.x,player.y,worlds.blvd.solid[player.y*worlds.blvd.w+player.x]]"))
-    check('studio brings Tom back to the east road',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=24&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
+    check('studio brings Tom back under the STUDIO arch',pg.evaluate("()=>currentMap.id==='blvd'&&player.x>=27&&player.y<=9&&worlds.blvd.solid[player.y*worlds.blvd.w+player.x]===0"))
     # A on a prop opens its text
-    for nm,(x,y,d) in {'Taco truck':(12,10,'down'),'Metro stairs':(25,24,'down'),'Cab 8':(26,22,'right'),'Bus bench':(12,12,'down'),'Shop sign':(24,22,'up')}.items():
+    for nm,(x,y,d) in {'Ramen window':(12,10,'up'),'Metro stairs':(28,21,'down'),'Newspaper boxes':(25,11,'down'),'Bench':(6,11,'down'),'Shop sign':(26,21,'up'),'Griffith Park arch':(3,4,'right'),'Jefferson Park arch':(13,24,'left')}.items():
         pg.evaluate("()=>window.__LE.go('blvd')"); pg.wait_for_timeout(700); skip_intro(pg)
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
         got=pg.evaluate("()=>dialog.active||(typeof choice!=='undefined'&&!!choice&&choice.active)||!!document.querySelector('#toast:not([hidden])')")
