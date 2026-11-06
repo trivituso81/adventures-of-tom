@@ -4484,6 +4484,12 @@
      "note": "the signs must be higher",
      "from": "v21",
      "at": 1793934704425
+    },
+    {
+     "date": "2026-11-06",
+     "note": "hsuh library is missing a door. the signs need to be higher. kettle corner should only have 1 sign not 2",
+     "from": "v22",
+     "at": 1793934790062
     }
    ],
    "id": "area-square",
