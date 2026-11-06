@@ -1,3 +1,9 @@
+## 2026-11-06 (330): Adult heads in the walking poses matched (`walkhead1`)
+- Tom (02:14): "We need to fix character head sizes for the walking poses. All adult heads should be the same size." Fact (head row at game scale, top of hair or cap to chin, in game rows): Justin 16.7, TNB 13.3, Boppy 12.5, Ellie 11.4, Deedee 11.2, Amy 10.1, Tom 9.9, Olivia 9.8. Tom's bald head reads bigger, so he stays as painted.
+- Fix: `HEAD_FIX` in `tools/sprite-bake/walk_sheet_frames.py` shrinks only the head rows (`kidhead.grow_head`, about the chin) in all nine walk frames of Justin (x0.68), TNB (x0.81) and Boppy (x0.86), target about 10.8 rows. Bodies keep their painted size: `bake_justin.py`, `bake_tnb.py` and `bake_boppy.py` scale from `UNWARPED_H` (the sheet's own stand height), so the figures are shorter by the head only (Justin 54 to 48 rows, TNB 46 to 43, Boppy 43 to 41), which is closer to their real heights next to Tom (43). Battle art is untouched (only the walk atlases and the `ow` section of each data file changed).
+- Tom's painted frames are otherwise used as painted; this is his explicit request for these three. Amy, Deedee, Olivia, Ellie and Tom unchanged.
+- Tags: `walkhead1` (`art/chars/justin-ow.webp`, `tnb-ow.webp`, `boppy-ow.webp`, their `data/*-hires.js`, ART_V).
+
 ## 2026-11-06 (329): Dish-Towel Flick uses the painted towel in flight (`dfx2`)
 
 Tom: the towel move still showed old graphics. Fact: the towel whipping out to the spot was still drawn by code, and the spot marker was tiny. Now the painted towel (`towel_snap`, `towel_twist`) whips from her hand to the spot, the spot smudge is bigger, and the coded towel and its folded-towel fallback are removed. Tags: `prop-art.js` `pa6`, `deedee-moves.js` `dfx2`.
