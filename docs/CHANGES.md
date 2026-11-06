@@ -1,3 +1,7 @@
+## 2026-11-05 (250): Red Pen hit pose made dramatic (Art Library only, no game files, no tag)
+
+Tom: the damage pose is not dramatic enough. In the approved sheet pose 2 only tilted and kept its angry face. POSES.redpen pose 2 now: slammed backward, body bent in a hard curve, eyes shut, mouth wide in a shout, bent nib, cape blown over the head, big ink burst from the barrel. Other poses unchanged.
+
 ## 2026-11-05 (249): Old Big One moved to the short boss prompt (3 x 2, real size, tiny pie tin) (Art Library only, no game files, no tag)
 
 Tom looked at the new Big One: painted well, but poses sat in one wide row (about 230 px each on a 1248 wide picture, mostly empty magenta), poses 1 and 6 alike, no real glare attack, tin still big. Cause: his saved long prompt still asked for one row of 6. Entry now uses the same short method as the other bosses (3 x 2 grid, guide picture), a tiny tin (one sixth of height, smaller than the guide), a giant that fills the cell, and six distinct poses with Big Glare. Replaces the long edited prompt (v1 stays in versions).
