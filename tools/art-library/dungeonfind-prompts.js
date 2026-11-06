@@ -174,4 +174,4 @@ const entries = SHEETS.map(s => ({
   ar: '1:1', refs: [REF_KEY],
   prompt: sheet(s.label, s.items),
 }));
-module.exports = { entries, SHEETS };
+module.exports = { entries, SHEETS, sheet };

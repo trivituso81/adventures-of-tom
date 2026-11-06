@@ -26,3 +26,7 @@ Chapters with nothing to find: 1 and 2 (walk-in triggers and a boss), 12, 14, 15
 - Already drawn live over the painting (`liveKinds`): ch4 junction boxes, light rig and spike tape; ch6 dig mounds; ch9 mirror stands; ch10 gate clock; ch19 memory pages and pedestals; ch20 doors and lift. The new art replaces those code drawings when installed (purge the old drawing then). Everything else is baked into the plate today, so the overlay must be placed over a painted-out spot when the plate is next redone.
 - Designed from the object name, not from an existing look: ch20 doors, ch17 shelf towns, ch19 keepsakes, ch11 to 13 doors. Tom's eye decides.
 - Not covered: the seven stamped Chronos coins of ch10 (told in dialogue, no map object); ch9 "split-party puzzle" from the story bible (no such code found).
+
+## Trail clues (Tom, 2026-11-06)
+
+Where the player only has to find an enemy, boss or trigger and no object leads there, a trail of 3 clue objects does. Clue 1 is far from the target (ch1: upper left), clue 2 appears once clue 1 is investigated, clue 3 appears after clue 2 and points at the target. Sheets: `tools/art-library/trail-prompts.js`, ids `prop-trail-a` to `prop-trail-f`, group "Trail clues" (6 sheets, 51 objects). Chapters 14, 15 and 16 and 18 have explicit scripted targets (porch, HUSH-9, etc.) and get no trail. Not built yet: the code that shows the next clue after the previous one (needs a flag per clue, `SCENES` entry, glow).

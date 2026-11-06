@@ -1,3 +1,7 @@
+## 2026-11-06 (348): Trail clue sheets for hunts with no object (`trail1`)
+
+Art Library: 6 new Props sheets, group "Trail clues" (`prop-trail-a` to `f`, 51 objects, 3 clues per chapter for ch1 to 13, 17, 19, 20 and Nine Scoops). Draft only, nothing installed or wired. See docs/DUNGEON_FINDS.md.
+
 ## 2026-11-06 (347): Emotions batch 7: Nine Scoops shows mood faces and poses, all chapters done (`emo14`)
 - Nine Scoops is `STORY.chapter` 21 (`NS` in data/bonus-nine-scoops.js), so `tools/emotion-apply.py` now writes its keys as chapter 21 (it wrote `ns` before, which the engine would never match). Run it with `python3 tools/emotion-apply.py 1 ... 21`: chapter 21 found 150 of 150; `EMO_CHAPTERS` 1 to 21, `data/emotion-moods.js` 1687 keys.
 - One line, "It only does nines today." (Grace), appears twice in Nine Scoops with two moods (happy at line 620, proud at line 889) and keys cannot tell them apart: set both to happy in docs/emotion-index-lines.tsv and docs/EMOTION_INDEX.md.
