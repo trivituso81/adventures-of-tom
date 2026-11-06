@@ -1,6 +1,6 @@
 ## 2026-11-05 (282): Art Library: Square fix 4 card, exit board posts only (`sqfix5`)
 - Tom 20:10: the board wording confused the generator. Faults found: "above rooftops" vs "as high as the eaves" contradict; "higher" plus "same spots" reads as move-up-the-picture vs stay-put; "nearby shops" has no shop near an edge board; it was edit 3 of 3. The clean "posts twice as tall" card (fix2) never ran (blocked, then replaced).
-- `area-square-fix3` (archways, Tom: "made it worse", never approved) replaced by `area-square-fix4`: attaches fix v1, one subject: every post twice as long, boards unchanged, human-scale check (a man walks under without ducking), plus delete the extra top SCHOOL board. Shops named by look, not by name.
+- `area-square-fix3` v1 (archways, approved only so I could see it: two SCHOOL arches in the plaza, right-edge board gone; png deleted per the purge rule, Tom: "made it worse", never approved) replaced by `area-square-fix4`: attaches fix v1, one subject: every post twice as long, boards unchanged, human-scale check (a man walks under without ducking), plus delete the extra top SCHOOL board. Shops named by look, not by name.
 
 ## 2026-11-05 (281): Rose Mode Tombo buttons show the team-up faces (`tombopair1`)
 
