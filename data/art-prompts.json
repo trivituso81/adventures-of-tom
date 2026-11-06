@@ -4286,6 +4286,13 @@
      "date": "2026-11-06",
      "from": "v2",
      "at": 1793929492620
+    },
+    {
+     "n": 2,
+     "file": "art/raw/enemies/enemy-julian-v3.png",
+     "date": "2026-11-06",
+     "from": "v3",
+     "at": 1793932613826
     }
    ],
    "rejects": [],
