@@ -3253,7 +3253,7 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Lockdown.\n\nRow 1:\n1. Standing tall in a serious posture, a big ring of keys hanging from his belt, stern.\n2. Pointing one arm straight ahead, a hard deputy stare.\n3. Slamming one fist down in front of him, jaw set.\n\nRow 2:\n4. Holding the big key ring up high in one hand, jangling it, a slow smug look.\n5. Turning a key in front of him with a slow twist of the wrist, eyes narrowed.\n6. Arms folded with the key ring in one hand, a satisfied nod."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "boppy-ab-everybody-waits",
    "tab": "Characters",
    "group": "Boppy",
@@ -3265,7 +3265,16 @@
     "art/raw/characters/boppy-battle-sheet-1-v1.png",
     "art/raw/characters/boppy-battle-sheet-2-v1.png"
    ],
-   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Everybody Waits.\n\nRow 1:\n1. Standing and holding a tiny ticket dispenser in one hand, a very serious face.\n2. Pulling a long paper ticket from the dispenser with two fingers, eyes on it.\n3. Holding the ticket high above his head, a long strip of paper hanging from his hand.\n\nRow 2:\n4. Holding one palm out flat like a stop sign, an official stern face.\n5. Sweeping one arm wide as if ushering a crowd behind him, kind eyes.\n6. Standing tall with the ticket in one hand and arms crossed, protective."
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Everybody Waits.\n\nRow 1:\n1. Standing and holding a tiny ticket dispenser in one hand, a very serious face.\n2. Pulling a long paper ticket from the dispenser with two fingers, eyes on it.\n3. Holding the ticket high above his head, a long strip of paper hanging from his hand.\n\nRow 2:\n4. Holding one palm out flat like a stop sign, an official stern face.\n5. Sweeping one arm wide as if ushering a crowd behind him, kind eyes.\n6. Standing tall with the ticket in one hand and arms crossed, protective.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-ab-everybody-waits-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793994408512
+    }
+   ]
   },
   {
    "status": "draft",
