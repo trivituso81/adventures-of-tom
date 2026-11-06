@@ -14197,8 +14197,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Nobody Leaves.\n\nRow 1:\n1. Standing with a brass school hand bell held down in one hand, the other hand lifted, calm.\n2. Ringing the hand bell high above her head, one arm stretched up, a serious face.\n3. Pointing one arm straight ahead at the room, the other hand on her hip, a hard teacher stare.\n\nRow 2:\n4. Planted wide with both arms spread out as if blocking a doorway, chin lifted.\n5. Writing on a clipboard held in one hand, head down, eyes looking up at the viewer over it, flat and unimpressed.\n6. Arms folded, one foot tapping, a tight satisfied smile."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-detention-ult-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000406432
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-detention-ult",
    "tab": "Characters",
