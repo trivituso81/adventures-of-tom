@@ -1,3 +1,12 @@
+## 2026-11-06 (366): Deedee ability install: 14 painted sheets, old frames purged (`deedeeinst1`)
+
+- Fact (Tom 10:54): Dish-Towel Flick and Garden Shower still showed her old frames. Cause: her 14 approved `deedee-ab-*` sheets were never installed (same gap TNB and Nara had). All 14 moves now play painted frames from `art/chars/deedee-ab.webp` (`data/deedee-ab.js`, 84 frames, only the ones the moves use, mirrored `F`). Each sheet is sized to her battle frames (median body size).
+- Tools: `tools/sprite-bake/ability_frames_deedee.py` (grid cut per sheet, splits touching rows by the thinnest ink line), `bake_deedee_ab.py` (bake). `data/deedee-hires-battle.js` registers the atlas; eye and hand points are found at load.
+- Props now carried by the frames are no longer drawn on top: towel, hose and nozzle, wine glass and bottle, crisp pan, oven mitts (only the hang beat), nurse cap and stethoscope, hand weights. Kept: whip streak and crack, spray jet, clink rings, chest-piece glint and heartbeat, rail and flying mitts, steam, sparkles.
+- Purged: dead duplicate move and scene definitions in `engine/deedee-moves.js` (garden_shower x3, registered_nut x3, oven_mitt x3, brisk x3, corner_piece x2, wineShow, grandma_squeeze, dv_pan, dv_glass, dd_mitts, dd_speed and more) and helpers nobody calls; the towel (f*) and nurse (n*) frames in `deedee-extra` (`purge_deedee_extra.py`, in place because a rebake does not reproduce the story poses); the brisk tracksuit set (`deedee-brisk.js`, `.webp`, baker, three source sheets); 10 orphaned props (cork, crisp_dish_full, garden_hose, hand_weights, hose_nozzle, rn_badge, stethoscope, towel_folded, towel_twist, wine_bottle).
+- Not touched: her story poses and the legacy Spit Shine frames in `deedee-extra`, her second (r) kit, the old `D.wine` (non-Option-3 path).
+- No line text changed. Tests: kit_test for all 14 `FAILS: []`, tag_check ok, smoke FAILS: [], unused_voice 0.
+
 ## 2026-11-06 (365): Tom's new take for "Then we had better hurry." (`voice365`)
 
 - Tom's export (11-06 11:25) held 422 clips, all older takes except one. Merged only that one: Tom dialogue "Then we had better hurry. Before somebody licks the rest." replaced the baked clip in `data/voice/dialog-ch1.js`. No line text changed. Tests: unused_voice 0, tag_check ok, smoke FAILS: [].
