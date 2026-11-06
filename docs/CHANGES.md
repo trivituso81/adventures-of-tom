@@ -1,3 +1,5 @@
+## 2026-11-05 (292): Aunt Ellie drawn at 5'2 (`ellie-height`)
+- Tom (23:44): "aunt ellie should be shorter than olivia" (Olivia 5'5). Call made: 5'2. `set.k=.853` in data/ellie-hires-use.js (62/71 x 42.0/43.0). She was drawn at about Tom's height before. Overworld only.
 ## 2026-11-05 (291): New walking animations for Amy, Justin, Olivia, TNB and Nara; cleaner cut for all eleven; Boppy at Deedee's height (`walksheet3`)
 - Tom (23:23 to 23:28): walk sheets and hero pictures for Amy, Justin, Olivia, TNB, Nara, plus hero pictures for Deedee and Boppy.
 - Same method as 288: the nine figures are the overworld frames as painted. The walk no longer goes through head warps (Amy, Justin, Olivia, TNB) or TNB's body widening; those stay on battle and extra poses only. Nara's overworld is baked at K 9 (was 3) so the painted detail survives.
