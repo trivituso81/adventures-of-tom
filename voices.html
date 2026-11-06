@@ -110,6 +110,7 @@ header{padding:10px 28px}
     <div class="frow" id="fType"></div>
     <div class="frow" id="fChap"></div>
     <div class="frow" id="fShow"></div>
+    <div class="frow" id="fOrder"></div>
     <div class="sum"><span id="count"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small gold" id="selmode">Select all shown</button></div>
   </div>
   </aside>
@@ -140,9 +141,9 @@ let IDX=null, WHO={}, shown=PAGE, openKey=null, selMode=true, BULK=null, playing
 const SEL=new Set();
 const BUSY={}, ERR={}, REC={};
 // Filters: empty Set = every value. Groups combine with AND, chips in a group with OR.
-const F={who:new Set(),type:new Set(),ch:new Set(),show:'all',q:''};
-try{ const s=JSON.parse(localStorage.getItem('aot-vl-filters')||'null'); if(s){ F.who=new Set(s.who||[]); F.type=new Set(s.type||[]); F.ch=new Set(s.ch||[]); F.show=s.show||'all'; F.q=s.q||''; } }catch(e){}
-function saveF(){ try{ localStorage.setItem('aot-vl-filters',JSON.stringify({who:[...F.who],type:[...F.type],ch:[...F.ch],show:F.show,q:F.q})); }catch(e){} }
+const F={who:new Set(),type:new Set(),ch:new Set(),show:'all',ord:'story',q:''};
+try{ const s=JSON.parse(localStorage.getItem('aot-vl-filters')||'null'); if(s){ F.who=new Set(s.who||[]); F.type=new Set(s.type||[]); F.ch=new Set(s.ch||[]); F.show=s.show||'all'; F.ord=s.ord||'story'; F.q=s.q||''; } }catch(e){}
+function saveF(){ try{ localStorage.setItem('aot-vl-filters',JSON.stringify({who:[...F.who],type:[...F.type],ch:[...F.ch],show:F.show,ord:F.ord,q:F.q})); }catch(e){} }
 let SCRIPTS={}; try{ SCRIPTS=JSON.parse(localStorage.getItem('aot-vl-scripts')||'{}')||{}; }catch(e){}
 const saveScripts=()=>{ try{ localStorage.setItem('aot-vl-scripts',JSON.stringify(SCRIPTS)); }catch(e){} };
 
@@ -356,7 +357,7 @@ let QMEMO={q:null,m:new Map()};
 function passQ(it){ const q=F.q.trim().toLowerCase().replace(/[’']/g,''); if(!q) return true;
   if(QMEMO.q!==q) QMEMO={q,m:new Map()}; if(QMEMO.m.has(it)) return QMEMO.m.get(it); const h=hay(it);
   const r=q.split(/\s+/).every(w=>h.s.includes(w)||(w.length>=4&&h.words.some(x=>lev(w,x)<=(w.length>=7?2:1)))); QMEMO.m.set(it,r); return r; }
-function visible(skip){ return IDX.items.filter(it=>passQ(it)&&passShow(it)&&(skip==='who'||passWho(it))&&(skip==='type'||passType(it))&&(skip==='ch'||passCh(it))); }
+function visible(skip){ return IDX.items.filter(it=>!(F.ord==='story'&&it.dup)&&passQ(it)&&passShow(it)&&(skip==='who'||passWho(it))&&(skip==='type'||passType(it))&&(skip==='ch'||passCh(it))); }
 function chip(g,v,label,on,n){ return '<button class="chip'+(on?' on':'')+(n===0&&!on?' zero':'')+'" data-g="'+g+'" data-v="'+esc(v)+'">'+esc(label)+(n!=null?'<span class="n">'+n+'</span>':'')+'</button>'; }
 function renderFilters(){
   const vw=visible('who'), vt=visible('type'), vc=visible('ch');
@@ -367,6 +368,8 @@ function renderFilters(){
   const chs=IDX.chapters.filter(c=>IDX.items.some(it=>it.c.includes(c.n)));
   $('fChap').innerHTML='<span class="lab">Chapter</span>'+chip('ch','*','All',!F.ch.size,vc.length)+chs.map(c=>chip('ch',c.n,(c.n===21?'Bonus':'Ch '+c.n),F.ch.has(c.n),cc[c.n]||0)).join('')+chip('ch','0','No chapter',F.ch.has(0),cc[0]||0);
   const p=IDX.items.filter(it=>localFor(it)).length, nn=IDX.items.filter(it=>it.f<0&&!localFor(it)).length;
+  const nDup=IDX.items.filter(it=>it.dup).length;
+  $('fOrder').innerHTML='<span class="lab">Order</span>'+chip('ord','story','Story order (repeats listed once)',F.ord==='story',IDX.items.length-nDup)+chip('ord','old','Old order',F.ord==='old',IDX.items.length);
   $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin')+(IDX.recast&&Object.keys(IDX.recast).length?chip('show','old','Old voice',F.show==='old',IDX.items.filter(isOld).length):'');
 }
 function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(F.show!=='all'?1:0)+(F.q.trim()?1:0); }
@@ -378,6 +381,7 @@ function renderSum(){
 }
 function toggle(g,v){
   if(g==='show'){ F.show=v; }
+  else if(g==='ord'){ F.ord=v; }
   else { const s=F[g]; if(v==='*') s.clear(); else { const val=g==='ch'?+v:v; s.has(val)?s.delete(val):s.add(val); } }
   saveF(); shown=PAGE; renderAll();
 }
@@ -424,8 +428,11 @@ function rowHtml(it){
 let CUR=[];
 function renderList(){
   CUR=visible();
+  if(F.ord==='story') CUR.sort((a,b)=>a.o-b.o);   // chapter, then first place in the chapter; lines tied to no chapter last (index made by make-index.js)
   if(!CUR.length){ $('list').innerHTML='<div class="empty">No lines match. Try Clear filters.</div>'; return; }
-  $('list').innerHTML=CUR.slice(0,shown).map(rowHtml).join('')+(CUR.length>shown?'<button class="more" data-act="more">Show more ('+(CUR.length-shown).toLocaleString()+' left)</button>':'');
+  const chHead=it=>{ const n=it.c.length?Math.min(...it.c):0; const t=n?((IDX.chapters.find(c=>c.n===n)||{}).title||''):''; return '<div class="chhead" style="padding:8px 16px;background:#2c2852;color:#ffd34d;font-weight:700;font-size:14px">'+(n===21?'Bonus: ':n?'Chapter '+n+': ':'')+(n?esc(t):'Anywhere (not tied to a chapter)')+'</div>'; };
+  let prevCh=-1; const rows=CUR.slice(0,shown).map(it=>{ if(F.ord!=='story') return rowHtml(it); const n=it.c.length?Math.min(...it.c):0; const h=n!==prevCh?chHead(it):''; prevCh=n; return h+rowHtml(it); });
+  $('list').innerHTML=rows.join('')+(CUR.length>shown?'<button class="more" data-act="more">Show more ('+(CUR.length-shown).toLocaleString()+' left)</button>':'');
   growAll($('list'));
 }
 function itemByKey(k){ return IDX.items.find(it=>lk(it)===k); }

@@ -1,3 +1,11 @@
+## 2026-11-06 (382): Voice Library lists dialogue in story order, repeats once
+
+- Tom: sequence dialogue in the order it appears in the story; duplicates can be excluded. `tools/voice-library/make-index.js` now records where each line first occurs (chapter, then offset inside that chapter's scene source) and writes `o` (story rank) on every item; `data/voice-index.json` otherwise identical (0 other fields changed).
+- A line with the same speaker and words as one earlier in story order gets `dup:1` (6 of 4,219: a battle clip and a dialogue clip with the same words, e.g. Grace "We waited for you for a hundred years."). Nothing deleted from the game, clips or index.
+- `voices.html`: new Order row, Story order (default, repeats hidden, chapter headings, "Anywhere" block last) or Old order (everything, no headings). Lines tied to no chapter: 1,268 (battle barks, map NPC and house talk, scene lines the scan cannot place), listed last in their old order.
+- Limit: map NPC and house dialogue are not placed in a chapter (the index has no map to chapter table), so they sit in Anywhere. Say the word to add one.
+- Tests: `python3 tools/voice-library/test.py` all pass (expectations updated for repeats); `unused_voice.py` 0; tag_check ok.
+
 ## 2026-11-06 (381): Art Library Props tab keeps only Dungeon finds and Trail clues (34 obsolete sheets removed)
 
 - Tom asked whether the Props tab was obsolete now that props live in Characters (`<id>-fx-<move>`). The 34 character prop sheets (`prop-<owner>-<n>`) were all drafts with 0 versions, so nothing generated or approved was lost. Removed them from `data/art-prompts.json` (689 to 655 entries; json edited directly, `make-prompts.js` not run because it would undo hand edits).

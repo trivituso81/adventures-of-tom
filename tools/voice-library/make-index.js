@@ -36,7 +36,11 @@ const norm=s=>String(s).replace(/[’‘]/g,"'").replace(/[“”]/g,'"').replac
 function literals(s){ const out=[]; const re=/'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g; let m;
   while((m=re.exec(s))){ const raw=m[1]!=null?m[1]:m[2]!=null?m[2]:m[3]; out.push(raw.replace(/\\u([0-9a-fA-F]{4})/g,(a,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\(.)/g,'$1')); }
   return out; }
-const segs=[], titles={};
+function litPos(s){ const out=[]; const re=/'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g; let m;
+  while((m=re.exec(s))){ const raw=m[1]!=null?m[1]:m[2]!=null?m[2]:m[3]; out.push({t:raw.replace(/\\u([0-9a-fA-F]{4})/g,(a,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\(.)/g,'$1'),i:m.index}); }
+  return out; }
+const segs=[], titles={}, textPos={};   // textPos: norm(text) -> {n,i} first place in the story (chapter, offset inside that chapter's source)
+const seePos=(k,n,i)=>{ const p=textPos[k]; if(!p||n<p.n||(n===p.n&&i<p.i)) textPos[k]={n,i}; };
 for(const f of fs.readdirSync('data').filter(f=>/^scenes.*\.js$/.test(f)||f==='bonus-nine-scoops.js')){
   const s=fs.readFileSync('data/'+f,'utf8');
   if(f==='scenes.js'){ const heads=[...s.matchAll(/^\/\/ CHAPTER (\d+): ([^\n(.]+)/gm)];
@@ -51,9 +55,9 @@ for(const {n,s} of segs){
   for(const m of s.matchAll(/talk:\s*'([^']+)'\s*,\s*lines:\s*\[/g)){
     let i=m.index+m[0].length, depth=1, q=null; const st=i;
     for(;i<s.length&&depth;i++){ const c=s[i]; if(q){ if(c==='\\') i++; else if(c===q) q=null; } else if(c==='\''||c==='"'||c==='`') q=c; else if(c==='[') depth++; else if(c===']') depth--; }
-    for(const t of literals(s.slice(st,i))){ const k=norm(t); (textCh[k]=textCh[k]||new Set()).add(n); textWho[k]=textWho[k]||m[1]; }
+    for(const {t,i:li} of litPos(s.slice(st,i))){ const k=norm(t); (textCh[k]=textCh[k]||new Set()).add(n); textWho[k]=textWho[k]||m[1]; seePos(k,n,st+li); }
   }
-  for(const t of literals(s)){ const k=norm(t); if(k.length>12&&!textCh[k]) (textCh[k]=new Set()).add(n); }
+  for(const {t,i:li} of litPos(s)){ const k=norm(t); if(k.length>12&&!textCh[k]) (textCh[k]=new Set()).add(n); if(k.length>12) seePos(k,n,li); }
 }
 // Lines spoken by battle code are battle; greet, join, praise and intro lines are dialogue (same rule as the Voice Baker).
 const DIALOG_KIND=/^(greet|join|praise|intro.*|nara_no_jump)$/;
@@ -242,6 +246,15 @@ const recast={}; for(const v in OLDV) recast[v]=OLDV[v].at;
     if(it.t==='d'){ const a=DC.clips[it.v+'|'+it.x]; if(a&&h.has(sha(a))) it.ov=1; }
     else { const C=BC.clips[it.v]||{}; for(const k in C) if((C[k]||[]).some(c=>c&&c.text===it.x&&c.mp3&&h.has(sha(c.mp3)))){ it.ov=1; break; } } }
   for(const v in OLDV) console.log('old voice still baked:',v,items.filter(x=>x.v===v&&x.ov).length,'lines'); }
+// Story order (Tom 2026-11-06): chapter first, then where the line first occurs in that chapter's scene source. Lines tied to no chapter
+// go last, in their old order. A line with the same speaker and words as an earlier one in story order is flagged dup (listed once,
+// at its first appearance); nothing is deleted from the game, the clips or this index.
+{ const keyOf=it=>it.v+'|'+norm(it.x);
+  const rank=it=>{ const c0=it.c.length?Math.min(...it.c):999; const p=textPos[norm(it.x)]; return [c0,p&&p.n===c0?p.i:1e9]; };
+  const order=items.map((it,j)=>({it,j,r:rank(it)})).sort((a,b)=>a.r[0]-b.r[0]||a.r[1]-b.r[1]||a.j-b.j);
+  const seen=new Set(); let nd=0, any=0;
+  order.forEach((o,k)=>{ o.it.o=k; const key=keyOf(o.it); if(seen.has(key)){ o.it.dup=1; nd++; } else seen.add(key); if(o.r[0]===999) any++; });
+  console.log('story order: total',items.length,'| listed after dedup',items.length-nd,'| duplicates dropped',nd,'| no chapter (Anywhere)',any); }
 items.forEach((it,i)=>it.i=i);
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }
