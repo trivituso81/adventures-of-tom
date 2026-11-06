@@ -6736,8 +6736,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-02-griffith-park-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793931963368
+    }
+   ],
    "rejects": [],
    "id": "bg-02-griffith-park",
    "tab": "Battle",
