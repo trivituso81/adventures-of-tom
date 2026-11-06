@@ -1,3 +1,7 @@
+## 2026-11-05 (249): Old Big One moved to the short boss prompt (3 x 2, real size, tiny pie tin) (Art Library only, no game files, no tag)
+
+Tom looked at the new Big One: painted well, but poses sat in one wide row (about 230 px each on a 1248 wide picture, mostly empty magenta), poses 1 and 6 alike, no real glare attack, tin still big. Cause: his saved long prompt still asked for one row of 6. Entry now uses the same short method as the other bosses (3 x 2 grid, guide picture), a tiny tin (one sixth of height, smaller than the guide), a giant that fills the cell, and six distinct poses with Big Glare. Replaces the long edited prompt (v1 stays in versions).
+
 ## 2026-11-05 (248): Warden Boppy gets Boppy's hero picture as a likeness reference (Art Library only, no game files, no tag)
 
 Tom asked for a Boppy reference. enemy-warden refs now: style key, guide, finish, `tools/sprite-bake/src/boppy-hero.png` (attachment 4); prompt says his face, mustache and smile come from it, visor raised. Mechanism: `LIKENESS` map in sheetShort (tools/art-library/enemy-prompts.js); add an id there for any enemy that is a real family member (Julian has none).
