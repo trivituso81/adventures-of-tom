@@ -710,13 +710,93 @@ const ABILITIES = {
       'Leaping a low hurdle in stride, both arms swinging, a fierce grin.',
       'Breaking through a finish tape with his chest, arms flung wide, head thrown back, joyful.']],
   ],
+  olivia: [
+    ['fact_check', 'Fact Check', [
+      'Standing with a reporter\'s notebook in one hand and a pen in the other, a professional look.',
+      'Flipping the notebook open, eyes on it, pen clicked and ready.',
+      'Squinting at something ahead, one eyebrow raised high, pen lifted.'], [
+      'Jabbing the pen forward like a microphone, leaning in, a sharp questioning look.',
+      'Holding the pen out at arm\'s length, mouth open mid-question, notebook held to her chest.',
+      'Clicking the pen with a satisfied smirk, notebook tucked under her arm.']],
+    ['snack_bag', 'SNACK BAG', [
+      'Standing with a big overstuffed canvas tote bag on her shoulder, a motherly smile.',
+      'Bent over with her arm deep inside the tote, digging, a focused frown.',
+      'Pulling out a small snack pouch, a triumphant grin, eyes bright.'], [
+      'Winding up to toss a snack with her arm back, a playful look.',
+      'Tossing the snack forward with a flick, arm extended, laughing.',
+      'Hand back on the tote strap, a warm proud smile.']],
+    ['livnews_live', 'LivNews Live', [
+      'Holding her phone up at face height in a selfie pose, fixing her hair with the other hand.',
+      'Smiling brightly at the phone, a polished anchor smile, one eyebrow lifted.',
+      'Swinging the phone around to point it ahead, an eager reporter look.'], [
+      'Speaking to the phone with one hand gesturing, mouth open, animated.',
+      'Wincing at the phone screen, one eye squeezed shut, reading something rude.',
+      'Giving a big beaming smile to the phone, a thumbs up, thrilled.']],
+    ['inverted_pyramid', 'Inverted Pyramid', [
+      'Standing tall with her chin up, a stern professor face, one finger raised.',
+      'Lecturing with her mouth open, one hand gesturing wide, eyebrows high.',
+      'Tracing a big triangle in the air with her finger, wide at the top and pointing down.'], [
+      'Finishing the triangle with her finger pointed at the bottom tip, eyes sharp.',
+      'Slamming her fist downward through the air with her whole body, a fierce look.',
+      'Standing straight with arms folded, a satisfied nod, chin high.']],
+    ['double_under', 'Double Under', [
+      'Holding a jump rope with a handle in each hand, rope hanging behind her, a determined look.',
+      'Mid hop with the rope caught around her ankles, arms flailing, a startled face.',
+      'Standing flat footed, rope in hand, rolling her shoulders, a fierce comeback grin.'], [
+      'Jumping high with the rope looping fast under her feet, arms tight at her sides, focused.',
+      'At the top of a big jump with knees tucked, the rope a blur below, a confident grin.',
+      'Landing with the rope whipping forward in a long curve, arm extended, triumphant.']],
+    ['story_time', 'Story Time', [
+      'Sitting down cross legged on the floor, a calm warm smile.',
+      'Opening a children\'s picture book on her lap, eyes bright.',
+      'Holding the book up to show the first page, one eyebrow raised, proud.'], [
+      'Reading aloud with her mouth open, doing a silly voice, eyes wide.',
+      'Reading in a hushed soft voice, head tilted, eyes half closed.',
+      'Closing the book softly against her chest with a tender smile, finger to her lips.']],
+    ['michael', 'MICHAEL!', [
+      'Standing with her hands on her hips, a tired stare ahead.',
+      'Taking a huge breath, chest rising, shoulders up.',
+      'Shouting with both hands cupped around her mouth, head thrown back.'], [
+      'Standing still with her head tilted, listening, a flat unamused face.',
+      'Shouting again, even louder, fists clenched at her sides, face red.',
+      'Pointing sharply forward with one arm, mouth open in a command, fierce.']],
+    ['better_than_bobby', 'Better Than Bobby', [
+      'Standing with her arms crossed and her chin up, a smug look.',
+      'Holding up one finger of her raised hand, counting, a smirk.',
+      'Holding up three fingers, eyes closed, shaking her head with a smile.'], [
+      'Holding up five fingers, a huge confident grin, eyebrows high.',
+      'Holding out a microphone at arm\'s length, a teasing look.',
+      'Opening her hand to drop the microphone, eyes locked ahead, a cool smile.']],
+    ['is_this_real', 'Is This Real?', [
+      'Holding up her phone at arm\'s length, one eye squinting at the screen.',
+      'Leaning in close to the screen, eyes narrowing, a suspicious frown.',
+      'Eyes wide, mouth open, pointing at the phone with her free hand.'], [
+      'Counting on her fingers in the air, a puzzled face.',
+      'Lowering the phone, a flat unimpressed look, one eyebrow high.',
+      'Shaking her head with a smirk, thumb pointed down.']],
+    ['marine_layer', 'Marine Layer', [
+      'Standing in a dress, rubbing her arms, shivering a little, a worried look.',
+      'Pulling a grey hoodie on over the dress, head popping through the neck.',
+      'Hood up, arms wrapped around herself, a dramatic horrified face.'], [
+      'Throwing both arms out wide, mouth open in a dramatic declaration.',
+      'Hugging herself tight with her shoulders up, lips pressed, shivering.',
+      'Pointing upward to the sky with one arm, a grim serious face.']],
+    ['lachlan_no', 'LACHLAN, NO!', [
+      'Standing with her head turned, eyes wide, spotting something ahead, one hand reaching out.',
+      'Crouching low in a sprinter\'s start, a fierce mom look.',
+      'Sprinting flat out, arms pumping, hair streaming back, mouth open in a shout.']
+      , [
+      'Leaping forward with both arms stretched out to grab something, determined.',
+      'Skidding to a stop with both arms wrapped around a small boy, relieved.',
+      'Standing calmly, brushing off her dress, a casual innocent smile.']],
+  ],
 };
 
 // Pronoun in the shared header's last line (Tom's entries keep "he").
-const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she', nara: 'she' };
+const PRONOUN = { grace: 'she', rose: 'she', deedee: 'she', nara: 'she', olivia: 'she' };
 // Nara is a dog: no hands, no clothes (appended to her sheets only).
 const DOGNOTE = { nara: 'The character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.' };
-const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara', boppy: 'Boppy' };
+const GROUP = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', tnb: 'TNB', nara: 'Nara', boppy: 'Boppy', olivia: 'Olivia' };
 const entries = [];
 for (const id of Object.keys(ABILITIES)) {
   const who = GROUP[id], hero = R + id + '-hero-ref-v1.png', walk = R + id + '-walk-sheet-v1.png';
@@ -1542,6 +1622,96 @@ const FX = {
       'A small film projector, seen from the front.',
       'A wide band of warm tan light, like old film (wide).',
       'A burst of golden confetti.'],
+  },
+  olivia: {
+    fact_check: [
+      'A small reporter\'s spiral notebook, open, with scribbled lines and no words.',
+      'A black click pen, seen from the side.',
+      'A curved white jab streak, the path of a pen thrust (wide).',
+      'A big red question mark.',
+      'A small burst of impact stars.',
+      'A bold red FALSE stamp mark, rough painted letters in a rectangle (wide).'],
+    snack_bag: [
+      'A big overstuffed canvas tote bag with snacks and baby wipes poking out, seen from the front.',
+      'A small snack pouch.',
+      'A small juice box with a straw.',
+      'A round golden cracker.',
+      'A curved white toss arc (wide).',
+      'A small plump heart, golden.',
+      'A burst of warm golden sparkles.'],
+    livnews_live: [
+      'A phone seen from the front, its screen showing a pink LIVE badge and a tiny chat window with no words.',
+      'A red LIVE badge on its own.',
+      'A cluster of three speech bubbles with dots inside.',
+      'A stream of small red hearts floating upward (tall).',
+      'A cluster of small thumbs up icons.',
+      'A burst of confetti.',
+      'A small angry red face emoji.',
+      'A spiky chat bubble, loud and jagged.'],
+    inverted_pyramid: [
+      'A big glowing triangle pointing down, drawn in a bright golden outline, empty inside.',
+      'The same triangle solid and heavy, like carved golden stone, pointing down.',
+      'Four short bold word labels stacked in a column: WHO, WHAT, WHEN, WHERE, in blocky cream letters (tall).',
+      'A big WHAM impact burst, yellow and white.',
+      'A cloud of grey dust.',
+      'A curved white downward slam streak (tall).'],
+    double_under: [
+      'A jump rope with two wooden handles, a curve of rope, seen from the front (wide).',
+      'The same rope forming a tight loop in a circle shape.',
+      'A long whip crack curve of rope in motion (wide).',
+      'A white blur ring, the spin of the rope (wide).',
+      'A small puff of dust at the ground.',
+      'A burst of impact stars.',
+      'A shower of gold sparks.'],
+    story_time: [
+      'A children\'s picture book, open, with a simple painted moon and stars on one page and soft lines on the other.',
+      'The same book closed, its cover showing a little crescent moon and stars.',
+      'A soft floating row of three Z letters, getting bigger (wide).',
+      'A pale blue night glow, a soft round haze.',
+      'A cluster of tiny twinkling stars.',
+      'A small curling swirl of quiet sleepy dust.'],
+    michael: [
+      'A big shouting speech bubble with jagged edges, empty inside.',
+      'A row of small curved sound lines, loud shout waves (wide).',
+      'A small cricket.',
+      'A little bird, seen from the side.',
+      'A blue diaper bag with a pattern, flying, tilted and spinning.',
+      'A big crashing impact burst, yellow and white.',
+      'A curved white swoosh, the flight path of a thrown bag (wide).',
+      'A cloud of grey dust.'],
+    better_than_bobby: [
+      'A black stage microphone, seen from the side.',
+      'The same microphone tilted, falling.',
+      'A number 1 badge, a number 2 badge, a number 3 badge, a number 4 badge, and a number 5 badge in a row, bold gold (wide).',
+      'A big burst of golden sparkles.',
+      'A big crashing impact burst, yellow and white.',
+      'A glowing star shaped medal.',
+      'A bold word BOOM in blocky cream letters with a dark outline (wide).'],
+    is_this_real: [
+      'A phone seen from the front, its screen showing a blue scanning grid.',
+      'A beam of blue scanning light, a thin sweeping band (wide).',
+      'A drawn hand with far too many fingers, eight of them, simple and funny.',
+      'A big red FAKE stamp, rough painted letters in a rectangle (wide).',
+      'A ring of three dizzy golden stars.',
+      'A small question mark.',
+      'A small burst of impact stars.'],
+    marine_layer: [
+      'A big rolling bank of thick grey fog, soft edged (wide).',
+      'A smaller puff of grey fog.',
+      'A wide thin ribbon of drifting grey mist (wide).',
+      'A grey hooded sweatshirt, laid flat and open.',
+      'A small thermometer showing a cold blue bulb.',
+      'A small grey cloud with a frown.',
+      'A cluster of pale blue snowflake sparkles.',
+      'A spray of tiny cool water droplets.'],
+    lachlan_no: [
+      'A long white speed streak, a mom sprint trail (wide).',
+      'A cloud of grey dust kicked up at the feet.',
+      'A big crashing impact burst, yellow and white.',
+      'A big red exclamation mark.',
+      'A small wooden stick.',
+      'A small plump heart, golden.',
+      'A burst of impact stars.'],
   },
 };
 for (const id of Object.keys(FX)) {

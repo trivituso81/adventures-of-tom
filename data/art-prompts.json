@@ -3048,6 +3048,171 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Van Cortlandt Park '70.\n\nRow 1:\n1. Standing at a starting line in a young runner pose, a running number pinned to his shirt, eyes ahead, focused.\n2. Crouched low at the line, one hand forward, a hungry look.\n3. Sprinting flat out, arms pumping, hair streaming back.\n\nRow 2:\n4. Running hard with his chest forward, mouth open, determined.\n5. Leaping a low hurdle in stride, both arms swinging, a fierce grin.\n6. Breaking through a finish tape with his chest, arms flung wide, head thrown back, joyful."
   },
   {
+   "status": "draft",
+   "id": "olivia-ab-fact-check",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Fact Check (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Fact Check.\n\nRow 1:\n1. Standing with a reporter's notebook in one hand and a pen in the other, a professional look.\n2. Flipping the notebook open, eyes on it, pen clicked and ready.\n3. Squinting at something ahead, one eyebrow raised high, pen lifted.\n\nRow 2:\n4. Jabbing the pen forward like a microphone, leaning in, a sharp questioning look.\n5. Holding the pen out at arm's length, mouth open mid-question, notebook held to her chest.\n6. Clicking the pen with a satisfied smirk, notebook tucked under her arm."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-snack-bag",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: SNACK BAG (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: SNACK BAG.\n\nRow 1:\n1. Standing with a big overstuffed canvas tote bag on her shoulder, a motherly smile.\n2. Bent over with her arm deep inside the tote, digging, a focused frown.\n3. Pulling out a small snack pouch, a triumphant grin, eyes bright.\n\nRow 2:\n4. Winding up to toss a snack with her arm back, a playful look.\n5. Tossing the snack forward with a flick, arm extended, laughing.\n6. Hand back on the tote strap, a warm proud smile."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-livnews-live",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: LivNews Live (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: LivNews Live.\n\nRow 1:\n1. Holding her phone up at face height in a selfie pose, fixing her hair with the other hand.\n2. Smiling brightly at the phone, a polished anchor smile, one eyebrow lifted.\n3. Swinging the phone around to point it ahead, an eager reporter look.\n\nRow 2:\n4. Speaking to the phone with one hand gesturing, mouth open, animated.\n5. Wincing at the phone screen, one eye squeezed shut, reading something rude.\n6. Giving a big beaming smile to the phone, a thumbs up, thrilled."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-inverted-pyramid",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Inverted Pyramid (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Inverted Pyramid.\n\nRow 1:\n1. Standing tall with her chin up, a stern professor face, one finger raised.\n2. Lecturing with her mouth open, one hand gesturing wide, eyebrows high.\n3. Tracing a big triangle in the air with her finger, wide at the top and pointing down.\n\nRow 2:\n4. Finishing the triangle with her finger pointed at the bottom tip, eyes sharp.\n5. Slamming her fist downward through the air with her whole body, a fierce look.\n6. Standing straight with arms folded, a satisfied nod, chin high."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-double-under",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Double Under (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Double Under.\n\nRow 1:\n1. Holding a jump rope with a handle in each hand, rope hanging behind her, a determined look.\n2. Mid hop with the rope caught around her ankles, arms flailing, a startled face.\n3. Standing flat footed, rope in hand, rolling her shoulders, a fierce comeback grin.\n\nRow 2:\n4. Jumping high with the rope looping fast under her feet, arms tight at her sides, focused.\n5. At the top of a big jump with knees tucked, the rope a blur below, a confident grin.\n6. Landing with the rope whipping forward in a long curve, arm extended, triumphant."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-story-time",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Story Time (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Story Time.\n\nRow 1:\n1. Sitting down cross legged on the floor, a calm warm smile.\n2. Opening a children's picture book on her lap, eyes bright.\n3. Holding the book up to show the first page, one eyebrow raised, proud.\n\nRow 2:\n4. Reading aloud with her mouth open, doing a silly voice, eyes wide.\n5. Reading in a hushed soft voice, head tilted, eyes half closed.\n6. Closing the book softly against her chest with a tender smile, finger to her lips."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-michael",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: MICHAEL! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: MICHAEL!.\n\nRow 1:\n1. Standing with her hands on her hips, a tired stare ahead.\n2. Taking a huge breath, chest rising, shoulders up.\n3. Shouting with both hands cupped around her mouth, head thrown back.\n\nRow 2:\n4. Standing still with her head tilted, listening, a flat unamused face.\n5. Shouting again, even louder, fists clenched at her sides, face red.\n6. Pointing sharply forward with one arm, mouth open in a command, fierce."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-better-than-bobby",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Better Than Bobby (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Better Than Bobby.\n\nRow 1:\n1. Standing with her arms crossed and her chin up, a smug look.\n2. Holding up one finger of her raised hand, counting, a smirk.\n3. Holding up three fingers, eyes closed, shaking her head with a smile.\n\nRow 2:\n4. Holding up five fingers, a huge confident grin, eyebrows high.\n5. Holding out a microphone at arm's length, a teasing look.\n6. Opening her hand to drop the microphone, eyes locked ahead, a cool smile."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-is-this-real",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Is This Real? (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Is This Real?.\n\nRow 1:\n1. Holding up her phone at arm's length, one eye squinting at the screen.\n2. Leaning in close to the screen, eyes narrowing, a suspicious frown.\n3. Eyes wide, mouth open, pointing at the phone with her free hand.\n\nRow 2:\n4. Counting on her fingers in the air, a puzzled face.\n5. Lowering the phone, a flat unimpressed look, one eyebrow high.\n6. Shaking her head with a smirk, thumb pointed down."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-marine-layer",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: Marine Layer (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Marine Layer.\n\nRow 1:\n1. Standing in a dress, rubbing her arms, shivering a little, a worried look.\n2. Pulling a grey hoodie on over the dress, head popping through the neck.\n3. Hood up, arms wrapped around herself, a dramatic horrified face.\n\nRow 2:\n4. Throwing both arms out wide, mouth open in a dramatic declaration.\n5. Hugging herself tight with her shoulders up, lips pressed, shivering.\n6. Pointing upward to the sky with one arm, a grim serious face."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-ab-lachlan-no",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia ability: LACHLAN, NO! (6 frames; needs your two battle sheets)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-walk-sheet-v1.png",
+    "art/raw/characters/olivia-battle-sheet-1-v1.png",
+    "art/raw/characters/olivia-battle-sheet-2-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: LACHLAN, NO!.\n\nRow 1:\n1. Standing with her head turned, eyes wide, spotting something ahead, one hand reaching out.\n2. Crouching low in a sprinter's start, a fierce mom look.\n3. Sprinting flat out, arms pumping, hair streaming back, mouth open in a shout.\n\nRow 2:\n4. Leaping forward with both arms stretched out to grab something, determined.\n5. Skidding to a stop with both arms wrapped around a small boy, relieved.\n6. Standing calmly, brushing off her dress, a casual innocent smile."
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -3858,6 +4023,138 @@
     "art/raw/characters/boppy-ab-xc-ult-v1.png"
    ],
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Van Cortlandt Park '70.\n\nItems:\n1. A white finish tape, stretched out (wide).\n2. A white finish tape snapped in two with frayed ends (wide).\n3. A round paper running number with the number 70.\n4. A long white speed streak (wide).\n5. A burst of dust from running feet (wide).\n6. A small film projector, seen from the front.\n7. A wide band of warm tan light, like old film (wide).\n8. A burst of golden confetti."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-fact-check",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Fact Check (6 items; attaches the approved Fact Check sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-fact-check-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Fact Check.\n\nItems:\n1. A small reporter's spiral notebook, open, with scribbled lines and no words.\n2. A black click pen, seen from the side.\n3. A curved white jab streak, the path of a pen thrust (wide).\n4. A big red question mark.\n5. A small burst of impact stars.\n6. A bold red FALSE stamp mark, rough painted letters in a rectangle (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-snack-bag",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: SNACK BAG (7 items; attaches the approved SNACK BAG sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-snack-bag-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: SNACK BAG.\n\nItems:\n1. A big overstuffed canvas tote bag with snacks and baby wipes poking out, seen from the front.\n2. A small snack pouch.\n3. A small juice box with a straw.\n4. A round golden cracker.\n5. A curved white toss arc (wide).\n6. A small plump heart, golden.\n7. A burst of warm golden sparkles."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-livnews-live",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: LivNews Live (8 items; attaches the approved LivNews Live sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-livnews-live-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: LivNews Live.\n\nItems:\n1. A phone seen from the front, its screen showing a pink LIVE badge and a tiny chat window with no words.\n2. A red LIVE badge on its own.\n3. A cluster of three speech bubbles with dots inside.\n4. A stream of small red hearts floating upward (tall).\n5. A cluster of small thumbs up icons.\n6. A burst of confetti.\n7. A small angry red face emoji.\n8. A spiky chat bubble, loud and jagged."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-inverted-pyramid",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Inverted Pyramid (6 items; attaches the approved Inverted Pyramid sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-inverted-pyramid-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Inverted Pyramid.\n\nItems:\n1. A big glowing triangle pointing down, drawn in a bright golden outline, empty inside.\n2. The same triangle solid and heavy, like carved golden stone, pointing down.\n3. Four short bold word labels stacked in a column: WHO, WHAT, WHEN, WHERE, in blocky cream letters (tall).\n4. A big WHAM impact burst, yellow and white.\n5. A cloud of grey dust.\n6. A curved white downward slam streak (tall)."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-double-under",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Double Under (7 items; attaches the approved Double Under sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-double-under-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Double Under.\n\nItems:\n1. A jump rope with two wooden handles, a curve of rope, seen from the front (wide).\n2. The same rope forming a tight loop in a circle shape.\n3. A long whip crack curve of rope in motion (wide).\n4. A white blur ring, the spin of the rope (wide).\n5. A small puff of dust at the ground.\n6. A burst of impact stars.\n7. A shower of gold sparks."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-story-time",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Story Time (6 items; attaches the approved Story Time sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-story-time-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Story Time.\n\nItems:\n1. A children's picture book, open, with a simple painted moon and stars on one page and soft lines on the other.\n2. The same book closed, its cover showing a little crescent moon and stars.\n3. A soft floating row of three Z letters, getting bigger (wide).\n4. A pale blue night glow, a soft round haze.\n5. A cluster of tiny twinkling stars.\n6. A small curling swirl of quiet sleepy dust."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-michael",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: MICHAEL! (8 items; attaches the approved MICHAEL! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-michael-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: MICHAEL!.\n\nItems:\n1. A big shouting speech bubble with jagged edges, empty inside.\n2. A row of small curved sound lines, loud shout waves (wide).\n3. A small cricket.\n4. A little bird, seen from the side.\n5. A blue diaper bag with a pattern, flying, tilted and spinning.\n6. A big crashing impact burst, yellow and white.\n7. A curved white swoosh, the flight path of a thrown bag (wide).\n8. A cloud of grey dust."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-better-than-bobby",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Better Than Bobby (7 items; attaches the approved Better Than Bobby sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-better-than-bobby-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Better Than Bobby.\n\nItems:\n1. A black stage microphone, seen from the side.\n2. The same microphone tilted, falling.\n3. A number 1 badge, a number 2 badge, a number 3 badge, a number 4 badge, and a number 5 badge in a row, bold gold (wide).\n4. A big burst of golden sparkles.\n5. A big crashing impact burst, yellow and white.\n6. A glowing star shaped medal.\n7. A bold word BOOM in blocky cream letters with a dark outline (wide)."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-is-this-real",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Is This Real? (7 items; attaches the approved Is This Real? sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-is-this-real-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Is This Real?.\n\nItems:\n1. A phone seen from the front, its screen showing a blue scanning grid.\n2. A beam of blue scanning light, a thin sweeping band (wide).\n3. A drawn hand with far too many fingers, eight of them, simple and funny.\n4. A big red FAKE stamp, rough painted letters in a rectangle (wide).\n5. A ring of three dizzy golden stars.\n6. A small question mark.\n7. A small burst of impact stars."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-marine-layer",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: Marine Layer (8 items; attaches the approved Marine Layer sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-marine-layer-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Marine Layer.\n\nItems:\n1. A big rolling bank of thick grey fog, soft edged (wide).\n2. A smaller puff of grey fog.\n3. A wide thin ribbon of drifting grey mist (wide).\n4. A grey hooded sweatshirt, laid flat and open.\n5. A small thermometer showing a cold blue bulb.\n6. A small grey cloud with a frown.\n7. A cluster of pale blue snowflake sparkles.\n8. A spray of tiny cool water droplets."
+  },
+  {
+   "status": "draft",
+   "id": "olivia-fx-lachlan-no",
+   "tab": "Characters",
+   "group": "Olivia",
+   "title": "Olivia objects and effects: LACHLAN, NO! (7 items; attaches the approved LACHLAN, NO! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/olivia-ab-lachlan-no-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: LACHLAN, NO!.\n\nItems:\n1. A long white speed streak, a mom sprint trail (wide).\n2. A cloud of grey dust kicked up at the feet.\n3. A big crashing impact burst, yellow and white.\n4. A big red exclamation mark.\n5. A small wooden stick.\n6. A small plump heart, golden.\n7. A burst of impact stars."
   },
   {
    "status": "approved",

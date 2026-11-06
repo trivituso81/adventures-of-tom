@@ -1,3 +1,8 @@
+## 2026-11-06 (353): Art Library: Olivia ability and effects sheets (`oliviaab1`)
+- 11 ability sheets (`olivia-ab-<move>`, 3 x 2, refs her hero, walk and two battle sheets) and 11 objects and effects sheets (`olivia-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Frames come from the final beats in engine/olivia-moves.js. She is "she" in PRONOUN.
+- data/art-prompts.json 636 entries (Characters 229), edited directly; every old entry unchanged. test.py Characters EXPECT 229. Nothing installed or wired. Tom presses Generate 22 times.
+- Next in order: Justin (9 moves).
+
 ## 2026-11-06 (352): Art Library: Boppy ability and effects sheets (`boppyab1`)
 - 14 ability sheets (`boppy-ab-<move>`, 3 x 2, refs his hero, walk and two battle sheets) and 14 objects and effects sheets (`boppy-fx-<move>`, 4 x 3 on magenta, ref = that move's ability sheet) for every Primary-kit move. Frames written from the beats in engine/boppy-moves.js and engine/battle2-moves.js (Grumble, Van Cortlandt Park '70 inferred from their messages).
 - data/art-prompts.json 614 entries (Characters 207), edited directly; every old entry unchanged. test.py Characters EXPECT 207. Nothing installed or wired. Tom presses Generate 28 times.

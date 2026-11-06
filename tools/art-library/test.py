@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
 fails = []
-EXPECT = {'Characters': 207, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 53, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
+EXPECT = {'Characters': 229, 'NPCs': 11, 'Areas': 39, 'Rooms': 61, 'Props': 53, 'Enemies': 87, 'Battle': 29, 'Title': 4, 'Portraits': 12, 'Flight': 12}
 EXPECT_TOTAL = sum(EXPECT.values())
 EXPECT_GROUPS = {'Characters': 1, 'NPCs': 2, 'Areas': 8, 'Rooms': 10, 'Props': 12, 'Enemies': 22, 'Battle': 2, 'Title': 1, 'Portraits': 1, 'Flight': 1}
 def ok(c, m):
