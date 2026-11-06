@@ -14129,6 +14129,426 @@
     "art/raw/characters/boppy-young-battle-sheet-1-v1.png"
    ],
    "prompt": "Draw a second battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character. Picture 2 is his first battle sheet: this sheet must look like it was painted at the same time, with the same viewing angle, the same figure size, the same feet ground line and the same head size compared to the body. Copy the person exactly: the same face, black hair, clean-shaven face, tank top, shorts, socks, shoes, colors, painting style and level of detail.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line (except when he is in the air), each figure well inside its cell with clear magenta margin. In every frame he faces the same way as in picture 2. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Startled flinch: body leaning back, head pulled back, eyes squeezed shut, one foot lifted off the ground.\n2. Tired: down on one knee, one hand resting on the knee, head lowered, out of breath, a weary but determined face.\n3. Napping: sitting slumped on the ground with legs stretched out in front, leaning back on one hand, head tilted, eyes closed, dizzy and sleepy.\n4. Cheering: one fist pumped high, the other hand on the hip, a big grin.\n5. Cheering: both fists overhead, laughing, up on the toes.\n6. Signature pose: arms crossed over his chest, chin up, one foot forward, a cocky champion grin, like a runner who just won.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-kettlebell-swing",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Kettlebell Swing (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Kettlebell Swing.\n\nRow 1:\n1. Standing with her feet wide apart, both hands holding a big cast-iron kettlebell low between her knees, a focused stare.\n2. Swinging the kettlebell forward and up, both arms straight, leaning back a little, jaw set.\n3. The kettlebell at the top of its swing at shoulder height, both arms straight out, a fierce competitive grin.\n\nRow 2:\n4. Letting the kettlebell drop back between her legs, hips pushed back, eyes straight ahead.\n5. Heaving the kettlebell forward with a strong step, mouth open in a short shout, eyes narrowed.\n6. Standing tall with the kettlebell hanging from one hand, a satisfied smirk."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-kettlebell-swing",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Kettlebell Swing (5 items; attaches the approved Kettlebell Swing sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-kettlebell-swing-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Kettlebell Swing.\n\nItems:\n1. A big black cast-iron kettlebell with a thick handle, seen from the front.\n2. The same kettlebell tilted at an angle, as if swinging through the air.\n3. A curved white swoosh, the path of a heavy swing (wide).\n4. A big jagged impact burst, yellow and white.\n5. A small puff of grey dust."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-pep-talk",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: PEP TALK (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: PEP TALK.\n\nRow 1:\n1. Standing and clapping her hands together once in front of her chest, a big encouraging smile.\n2. One fist pumped up beside her shoulder, the other hand open and pointing forward, mouth open in a cheer.\n3. Both arms thrown wide open, chest out, a huge warm grin.\n\nRow 2:\n4. Pointing straight ahead at someone with one arm, a proud determined face.\n5. Giving two thumbs up, one eye closed in a big wink.\n6. Both hands cupped around her mouth, leaning forward, cheering loudly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-pep-talk",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: PEP TALK (5 items; attaches the approved PEP TALK sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-pep-talk-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: PEP TALK.\n\nItems:\n1. A bright golden starburst with soft rays.\n2. A wide ring of warm orange energy (wide).\n3. Three small golden sparkles rising upward (tall).\n4. A bold orange upward arrow, a boost.\n5. A set of curved sound wave arcs, loud and wide (wide)."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-red-pen",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Green Pen (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Green Pen.\n\nRow 1:\n1. Standing with a big green felt-tip pen in one hand and the other hand on her hip, tilting her head, studying something ahead.\n2. Pulling the cap off the green pen with her other hand, eyes narrowed in concentration.\n3. Drawing a big sweeping circle in the air with the pen, arm stretched out wide, focused.\n\nRow 2:\n4. Tapping the pen firmly forward as if marking a page, eyebrows raised, very teacherly.\n5. Pointing the pen forward like a wand, a warm approving smile.\n6. Clicking the cap back on the pen, nodding, pleased."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-red-pen",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Green Pen (6 items; attaches the approved Green Pen sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-red-pen-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Green Pen.\n\nItems:\n1. A big green felt-tip pen with the cap off, seen from the side (wide).\n2. The green pen cap, seen from the side.\n3. A big hand-drawn green circle, a thick marker loop (wide).\n4. A bold green check mark.\n5. A shiny gold foil star sticker.\n6. A small splatter of green ink dots."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-hot-lunch-tray",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Hot Lunch Tray (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Hot Lunch Tray.\n\nRow 1:\n1. Standing with a blue cafeteria tray held in both hands at waist height, a steaming bowl of soup on it, a careful focused look.\n2. Stepping forward holding the tray perfectly level, eyes on the bowl.\n3. Bending slightly and offering the tray forward with both arms, a gentle smile.\n\nRow 2:\n4. Holding the tray in one hand and straightening the spoon on it with the other, a nurturing look.\n5. Holding the tray out, head tilted, mouth a little open as if saying eat up, kind eyes.\n6. Standing tall with the tray held at her side, a proud warm smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-hot-lunch-tray",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Hot Lunch Tray (6 items; attaches the approved Hot Lunch Tray sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-hot-lunch-tray-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Hot Lunch Tray.\n\nItems:\n1. A blue cafeteria tray with a steaming bowl of tomato soup, a spoon and a small roll, seen from the front (wide).\n2. A bowl of steaming tomato soup, seen from the front.\n3. A shiny metal spoon.\n4. A cluster of three curling steam shapes, solid and crisp (tall).\n5. A ring of soft golden light (wide).\n6. A small golden sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-goldstar-recess",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Gold-Star Recess (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Gold-Star Recess.\n\nRow 1:\n1. Standing with a silver whistle on a red cord held up to her lips, cheeks puffed, eyes bright.\n2. One arm flung up high, the whistle dropped on its cord, eyes closed, a big grin.\n3. Both arms opened wide as if letting everyone run free, joyful.\n\nRow 2:\n4. Peeling a gold foil star sticker off a sheet with her fingertips, delighted.\n5. Holding a gold star sticker out in front of her between two fingers, a warm smile.\n6. Holding the sheet of stickers up high with a proud, glowing smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-goldstar-recess",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Gold-Star Recess (7 items; attaches the approved Gold-Star Recess sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-goldstar-recess-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Gold-Star Recess.\n\nItems:\n1. A silver whistle on a red cord.\n2. A big shiny gold foil star sticker.\n3. A sheet of shiny gold foil star stickers, a few peeled off.\n4. A small bouncy red rubber playground ball.\n5. A ring of soft golden light (wide).\n6. A small cluster of golden sparkles.\n7. A set of curved sound wave arcs (wide)."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-inside-voices",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Inside Voices! (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Inside Voices!.\n\nRow 1:\n1. Standing with one hand reaching up toward a light switch above her head, eyes on the room.\n2. Flicking the switch with one quick finger, a calm teacher face.\n3. Raising one hand high with the palm open, waiting, eyebrows raised.\n\nRow 2:\n4. Clapping her hands together sharply in front of her chest, mouth closed, a stern look.\n5. One finger held to her lips, eyes wide, leaning forward in a shush.\n6. Standing with her hands folded in front of her, serene, one eyebrow raised."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-inside-voices",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Inside Voices! (6 items; attaches the approved Inside Voices! sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-inside-voices-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Inside Voices!.\n\nItems:\n1. A white wall light switch plate with the switch up.\n2. The same white light switch plate with the switch down.\n3. A wide ring of pale blue shock lines (wide).\n4. A small white clap burst, crisp rays.\n5. A big round hush ring of soft blue light (wide).\n6. A small gold twinkle star."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-pop-quiz",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Surprise Quiz (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Surprise Quiz.\n\nRow 1:\n1. Standing with a stack of stapled test packets held against her chest, a crisp level stare.\n2. Flicking one packet out of the stack with her fingertips, a small smirk.\n3. Winding up with the packet held high in one hand, one eyebrow arched.\n\nRow 2:\n4. Slamming the packet forward with a decisive swing, body turning, mouth open as if saying pencils up.\n5. Holding a yellow pencil out in one hand and pointing at the packet with the other, stern.\n6. Arms folded with the packet tucked under one arm, a small knowing smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-pop-quiz",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Surprise Quiz (6 items; attaches the approved Surprise Quiz sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-pop-quiz-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Surprise Quiz.\n\nItems:\n1. A stack of stapled white test packets, seen from the front.\n2. A single stapled test packet with a plain white cover, seen from the front.\n3. A yellow pencil with a pink eraser, seen from the side (wide).\n4. A flurry of loose white papers flying (wide).\n5. A white paper with a big A+ circled in green ink.\n6. A big jagged impact burst, yellow and white."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-detention-ult",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Nobody Leaves (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Nobody Leaves.\n\nRow 1:\n1. Standing with a brass school hand bell held down in one hand, the other hand lifted, calm.\n2. Ringing the hand bell high above her head, one arm stretched up, a serious face.\n3. Pointing one arm straight ahead at the room, the other hand on her hip, a hard teacher stare.\n\nRow 2:\n4. Planted wide with both arms spread out as if blocking a doorway, chin lifted.\n5. Writing on a clipboard held in one hand, head down, eyes looking up at the viewer over it, flat and unimpressed.\n6. Arms folded, one foot tapping, a tight satisfied smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-detention-ult",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Nobody Leaves (8 items; attaches the approved Nobody Leaves sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-detention-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Nobody Leaves.\n\nItems:\n1. A brass school hand bell with a wooden handle, seen from the side.\n2. A clipboard with a few papers and a yellow sticky note, seen from the front.\n3. A yellow sticky note with the words SEE ME written in neat black handwriting.\n4. A big closed wooden classroom door with a small window, seen from the front (tall).\n5. A round school wall clock showing a quarter past three.\n6. A wide ring of golden shock lines (wide).\n7. A set of curved sound wave arcs (wide).\n8. A small gold twinkle star."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-burpee-blitz",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Burpee Blitz (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Burpee Blitz.\n\nRow 1:\n1. Standing with her hands on her hips and her shoulders back, a sharp competitor stare.\n2. Crouched down with both palms flat on the ground, knees bent, focused.\n3. In a straight plank with her arms straight and her head up, jaw clenched.\n\nRow 2:\n4. Hopping both feet in toward her hands into a deep squat, eyes forward.\n5. Leaping straight up with both arms stretched overhead, hair flying, a big shout.\n6. Landing with one fist pumped and a competitive grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-burpee-blitz",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Burpee Blitz (5 items; attaches the approved Burpee Blitz sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-burpee-blitz-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Burpee Blitz.\n\nItems:\n1. A wide ring of grey dust puffs (wide).\n2. A big jagged impact burst, yellow and white.\n3. Three short white speed lines (tall).\n4. A small golden spark burst.\n5. A small gust of grey dust."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-hill-repeats",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Hill Repeats (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Hill Repeats.\n\nRow 1:\n1. Standing at the bottom of a slope leaning forward, hands loose, determined.\n2. Sprinting uphill leaning far forward, arms pumping, mouth set.\n3. Reaching the top of the hill with one fist raised high, taking a quick breath.\n\nRow 2:\n4. Turning around at the top, bouncing on her toes, eyes sharp.\n5. Sprinting back down with long strides, arms out for balance, hair streaming back.\n6. Standing bent over with her hands on her knees, panting, a grin on her face."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-hill-repeats",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Hill Repeats (5 items; attaches the approved Hill Repeats sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-hill-repeats-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Hill Repeats.\n\nItems:\n1. A steep grey asphalt hill slope seen from the side, with a white painted centre line (wide).\n2. A yellow diamond road sign with a black steep hill icon on a short post.\n3. A small orange traffic cone.\n4. A wide trail of dust puffs (wide).\n5. A small burst of impact stars."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-oat-milk-please",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Almond Milk, Please (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Almond Milk, Please.\n\nRow 1:\n1. Standing with one palm held up in a polite no-thank-you gesture, eyes on something off to the side, a polite smile.\n2. Shaking her head with a small smile, both hands raised in a polite wave-off.\n3. Pulling an iced latte in a clear plastic cup with a green straw out from behind her back, pleased.\n\nRow 2:\n4. Holding the iced latte out in one hand toward someone, a warm caring smile.\n5. Taking a small sip through the straw, eyes closed, content.\n6. Raising the latte high in a toast, a bright smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-oat-milk-please",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Almond Milk, Please (6 items; attaches the approved Almond Milk, Please sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-oat-milk-please-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Almond Milk, Please.\n\nItems:\n1. A tall clear plastic cup of iced almond milk latte with a green straw and ice, seen from the front (tall).\n2. A closed cardboard pizza box with a red stripe, seen from the front.\n3. A white and blue cardboard milk carton, seen from the front.\n4. A small foil energy gel packet.\n5. A ring of soft green light (wide).\n6. A small golden sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-false-start",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: False Start (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: False Start.\n\nRow 1:\n1. Standing tall with a stopwatch in one hand and a silver whistle in the other, watching something ahead.\n2. Raising the whistle to her lips, eyes narrowing at something ahead.\n3. Blowing the whistle, cheeks puffed, the other hand thrust out with the palm forward in a stop sign.\n\nRow 2:\n4. Stepping forward and pointing straight ahead, one stern raised eyebrow, caught you.\n5. Arms folded across her chest, a smug raised eyebrow, the stopwatch held in one hand.\n6. Clicking the stopwatch with her thumb, a smug small grin."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-false-start",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: False Start (7 items; attaches the approved False Start sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-false-start-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: False Start.\n\nItems:\n1. A round silver stopwatch with a black face and a red button, seen from the front.\n2. A silver whistle on a red cord.\n3. A white painted starting line stripe on a red running track (wide).\n4. A small red flag on a short pole.\n5. A set of curved sound wave arcs (wide).\n6. A big jagged impact burst, yellow and white.\n7. A small puff of grey dust."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-negative-split",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Negative Split (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Negative Split.\n\nRow 1:\n1. Standing in an easy relaxed running pose, calm pace, breathing steady, a small smile.\n2. Jogging with small easy steps, arms swinging evenly, eyes ahead, steady.\n3. Running faster with longer strides, leaning forward.\n\nRow 2:\n4. Running faster still, arms pumping hard, determined.\n5. Sprinting flat out, hair streaming straight back, fierce focus.\n6. Slowing to a stop with both fists raised above her head, a triumphant smile."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-negative-split",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Negative Split (6 items; attaches the approved Negative Split sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-negative-split-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Negative Split.\n\nItems:\n1. A round silver stopwatch with a black face and a red button, seen from the front.\n2. A pale golden speed streak, a long swoosh (wide).\n3. A wide trail of dust puffs (wide).\n4. A short blue arrow and a longer orange arrow side by side, both pointing the same way (wide).\n5. A ring of warm orange glow (wide).\n6. A small golden sparkle."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-ab-marathon-ult",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy ability: Boston Qualifier (6 frames; her hero and walk plus Deedee's battle sheet for angle and size only)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-walk-sheet-v1.png",
+    "art/raw/characters/deedee-battle-sheet-1-v1.png"
+   ],
+   "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Picture 3 is a battle sheet of a different character, Deedee: copy only its viewing angle, its figure size and the feet on one ground line, never the person, her face, her hair or her clothes. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, rust-colored tiered dress, cream sneakers, colors, painting style, level of detail and figure size. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as the character in picture 3, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Boston Qualifier.\n\nRow 1:\n1. Standing with a paper race bib pinned to the front of her dress, both hands on her thighs, a hard focused look.\n2. Running steadily with arms pumping, eyes on something far ahead.\n3. Running while reaching one arm back with an open hand and looking back over her shoulder, calling someone on.\n\nRow 2:\n4. Running with a big yell, one fist raised, hair streaming back.\n5. Breaking through a finish tape with her chest out and both arms thrown wide, mouth open in joy.\n6. Standing with a silver foil blanket over her shoulders and a gold medal on a ribbon around her neck, a tired happy smile, giving a thumbs up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-fx-marathon-ult",
+   "tab": "Characters",
+   "group": "Amy",
+   "title": "Amy objects and effects: Boston Qualifier (8 items; attaches the approved Boston Qualifier sheet)",
+   "ar": "4:3",
+   "refs": [
+    "art/raw/characters/amy-ab-marathon-ult-v1.png"
+   ],
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object she holds in it exactly: the same shape, colors, details, size compared to her hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Boston Qualifier.\n\nItems:\n1. A white finish tape stretched across, with a small pole at each end (wide).\n2. A paper race bib with the number 26.2 in big black numbers.\n3. A big gold medal on a blue ribbon.\n4. A crinkled silver foil blanket.\n5. A big finish line banner arch with the word FINISH in bold letters (wide).\n6. A burst of colorful paper confetti (wide).\n7. A round silver stopwatch with a black face and a red button, seen from the front.\n8. A ring of golden light (wide)."
   }
  ]
 }

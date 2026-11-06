@@ -1,3 +1,10 @@
+## 2026-11-06 (371): Amy's 14 ability sheets and 14 object sheets in the Art Library (Art Library only)
+
+- Fact (Tom 12:19): Amy had only `amy-emotions`. She already has a painted hero (`amy-hero-ref-v1.png`) and walk sheet (`amy-walk-sheet-v1.png`), so the earlier note that she had no hero was out of date. She has no battle sheets of her own.
+- Added 28 drafts in group Amy: `amy-ab-<move>` (3:2, six frames) and `amy-fx-<move>` (4:3, objects and effects) for her 14 moves: Kettlebell Swing, PEP TALK, Green Pen, Hot Lunch Tray, Gold-Star Recess, Inside Voices!, Surprise Quiz, Nobody Leaves, Burpee Blitz, Hill Repeats, Almond Milk Please, False Start, Negative Split, Boston Qualifier. 28 Generate presses in all.
+- Method: each ability sheet attaches her hero, her walk sheet and Deedee's battle sheet 1 for viewing angle, figure size and ground line ONLY (the prompt says never her likeness). No whistle-gun or weapon, no left/right words. Source `tools/art-library/amy-prompts.js`, mirrored in `char-prompts.js`; json edited directly (692 entries, the other 664 asserted unchanged). validate.js OK.
+- Not installed. Install comes only after Tom approves each sheet (Deedee method: bake_amy.py, bake_amy_extra.py).
+
 ## 2026-11-06 (370): LACHLAN, NO! draws Lachlan (Art Library only)
 
 - Fact (Tom 12:00): Lachlan was never drawn in Olivia's move. Added `art/raw/characters/lachlan-ref-v1.png`, a crop of Lachlan from Tom's Michael painting (`michael-hero-ref-v1.png`), as the fifth reference of `olivia-ab-lachlan-no`. The prompt now describes him (same face, hair, Turtles tee, navy shorts, white sneakers; waist high on Olivia) and the ignore-the-man's-arm note for the crop.
