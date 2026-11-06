@@ -1,3 +1,11 @@
+## 2026-11-06 (317): Speaking monsters get dialogue portraits (`foeport1`)
+- Tom (01:05): "add to build instructions that monsters should have portraits for their dialogue, which should be zoomed in crops of the monsters face. obviously this is only needed for the monsters that have dialogue, so first that list must be made. then the portraits created."
+- List made from every `talk:` speaker in data/scenes*.js and bonus-nine-scoops.js matched to a monster id: 51 monsters (40 Part 1, 7 Part 2, 4 Nine Scoops), docs/MONSTER_PORTRAITS.md.
+- Portraits: `tools/sprite-bake/bake_foe_portraits.py` crops the stance frame of each painted enemy sheet around its eyes and mouth (zoom 2.6 x face size, a few per-monster overrides), 256 x 256 webp on a cream backdrop, portraits/foes/<id>.webp (820 KB in all). Wired as PORTRAITS['foe_<id>'] (engine/menu.js) and speaker names in DIALOG_PORTRAIT_IDS (engine/overworld.js); not preloaded at boot.
+- New standing rule in CLAUDE.md and docs/ENEMY_SHEETS.md: any monster that speaks gets a portrait.
+- Not covered on purpose: Marlowe, Vance, Julian Vance and the Archivist (people, not monsters; their face needs its own painting), objects and places that talk (Corkboard, Dome, Turntable...).
+- Tested: dialogue shots portrait and landscape (Old Ironbelly), tag check, smoke below.
+
 ## 2026-11-06 (316): Olivia fights with her two painted battle sheets (`battlesheet6`)
 - Tom (11-05 23:40): Olivia's battle sheets (art/raw/characters/olivia-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head growth on them). NEW slots: spread, point added in data/olivia-battle-use.js (idle2 = breath, hip painted); KO = dizzy sit. Idle keeps its old visible height (105 rows). The unused `sig` frame slot is gone.
 - Her 11 ability sheets keep their pinned scale, head growth and face match (old idle 287 px, ref face 109.5) and came back pixel for pixel. Atlases at 1.5 through hires.py.

@@ -45,6 +45,10 @@ Tom (11-05): "Let's undo the no head resizing rule." `docs/CHARACTER_PIPELINE.md
 
 Tom (11-05 08:13): "Remember these rules going forward because in the next build instructions I will provide Grace's new walking and standing frames." When Tom supplies painted walking or standing frames for a character, the bake uses them exactly as painted: no head or body resizing, no flipping or substituting a frame, his own standing paintings are the stand frames, and his painted second steps are used. A frame that cannot be used as painted (a repeated cell, a wrong direction) is named to Tom in plain words, with the reason, before or when it is changed. This overrides the head share targets in `docs/CHARACTER_PIPELINE.md` section 7 for any frame Tom painted or supplied. Before changing any bake, rebake once with no change and confirm it reproduces the repo files byte for byte. Show Tom the frames (stand next to steps, and a head row) before pushing. Tom's walk is the model: `tools/sprite-bake/bake_tom_walk_v4.py`, CHANGES 183.
 
+## Monster dialogue portraits (standing rule, Tom 2026-11-06)
+
+Every monster that speaks in a dialogue box gets a portrait: a zoomed-in crop of its face, taken from the stance frame of its painted enemy sheet. Monsters that never speak need none. The list of speakers is `docs/MONSTER_PORTRAITS.md`; the baker is `tools/sprite-bake/bake_foe_portraits.py` (add the id to `SPEAKERS`, and to the `foe_` key list in `engine/menu.js` and the speaker name in `DIALOG_PORTRAIT_IDS` in `engine/overworld.js`). When you write a new line for a monster, or install a new monster sheet for a speaker, add its portrait in the same change and look at the contact sheet before pushing. People who are villains (Vance, Marlowe) are not monsters: they need a painted face of their own, not a boss crop.
+
 ## Enemy sprite sheets (standing rule, 2026-10-29)
 
 Tom may drop a PNG enemy sprite sheet into any conversation, often with no words. That means "install this enemy". Follow `docs/ENEMY_SHEETS.md`: identify the enemy id, bake the sheet (tools/sprite-bake), wire the painted frames, test a fight against it, push, and log it in that doc's table.
