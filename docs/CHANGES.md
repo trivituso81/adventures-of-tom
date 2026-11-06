@@ -1,3 +1,7 @@
+## 2026-11-05 (278): Art Library: Square fix 3 card, exit boards become tall archways (`sqfix4`)
+- Tom approved `area-square-fix` v2 (made from the first fix card, not fix 2): boards still the same height. Second miss on board height by edits. Stop-loss: the generator does not resize existing objects; pixel-raising is blocked (Grump Hollow board touches the top edge, School post stands on the Taxi Co. roof).
+- `area-square-fix2` (never generated) replaced by `area-square-fix3`: attaches fix v1 (two library doors, lettered Kettle sign), deletes the extra top SCHOOL board, replaces each exit board with a tall iron archway over its lane, board at the top. Replacing an object works better in edits than resizing it.
+
 ## 2026-11-05 (279): Overworld monsters follow the battle idle rule (`idle4`)
 - Tom (19:41): the battle bounce and standing-on-ground rules apply to monsters on the map too. `drawActor` in `engine/town-render.js`: grounded monsters no longer bob (the old plus or minus 1 px sink put them below the ground); they get the same tiny feet-anchored stretch as battle, and the shadow sits under the feet (`feetOf`, engine/battle-draw.js). Flyers (`B2_FLYERS`, engine/battle2-ui.js) hover about 10 percent of their height off the ground and bob at the original pace (sin 3 rad/s, plus or minus 1 px), shadow stays down, smaller and lighter.
 - Looked at Grump Hollow (Pond Grump, skeeters): no errors. Not watched moving on a phone.

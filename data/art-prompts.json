@@ -4557,15 +4557,15 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
-   "id": "area-square-fix2",
+   "id": "area-square-fix3",
    "tab": "Areas",
-   "title": "The Square: fix 2 (exit boards only). Attaches approved fix v1.",
+   "title": "The Square: fix 3 (exit boards become tall archways). Attaches approved fix v1.",
    "ar": "4:3",
    "refs": [
     "art/raw/areas/area-square-fix-v1.png"
    ],
    "group": "The Square",
-   "prompt": "Edit the attached painting. Return one image: the whole painting, same size and framing. Change ONLY the green exit boards. Every building, door, shop sign, tree, bench, the fountain, paving, colors and light stay exactly as they are.\n\n1. Delete the green SCHOOL board at the TOP of the image, between Sprout House and Penny's Pockets, with both of its posts. Paint roof, trees and paving where it was. There must be only ONE SCHOOL board: the one at the right edge, beside the Taxi Co. building.\n2. The three remaining green boards are GRUMP HOLLOW (top center), SCHOOL (right edge) and RIVITUSO ROW (bottom center). For each one, make its two black iron posts TWICE as tall as they are now and lift the board up with them, so each board sits twice as high above the ground. The feet of the posts stay in the same place on the ground. Same board size, same lettering.\n\nNo other changes. No people, no new words."
+   "prompt": "Edit the attached painting. Return one image: the whole painting, same size and framing. Everything stays exactly as it is (buildings, doors, shop signs, fountain, benches, trees, paving, colors, light) except the green exit boards.\n\n1. Delete the green SCHOOL board at the TOP of the image, between Sprout House and Penny's Pockets, with both of its posts. Paint the roof, chimney, fence and trees where it was.\n2. Replace each of the three remaining green exit boards (GRUMP HOLLOW at the top center, SCHOOL at the right edge, RIVITUSO ROW at the bottom center) with a tall black iron archway standing over its lane: one tall post on each side of the path and a curved iron arch joining them high overhead. Mount the same green board with the same lettering at the very top of each arch. The bottom of every board is far above head height, higher than the tops of the shop doors. The path stays open under each arch.\n\nNo other changes. No people, no new words."
   },
   {
    "status": "approved",
