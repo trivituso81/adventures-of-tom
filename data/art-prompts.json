@@ -826,8 +826,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Welcome Back to My Channel.\n\nRow 1:\n1. Holding a purple hairbrush up to her mouth like a microphone, waving at the viewer with the other hand, looking at the viewer, a big vlogger smile.\n2. Talking into the hairbrush microphone, one hand flung out wide, eyebrows up, very dramatic.\n3. Holding the hairbrush microphone out at arm's length, offering it forward for an interview, eager face.\n\nRow 2:\n4. Nodding seriously, the hairbrush still held out, the other hand on her chin, listening.\n5. The hairbrush back at her mouth, one hand on her heart, a sweet caring face.\n6. Blowing a kiss to the viewer with one hand, the hairbrush held up in the other, looking at the viewer."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-ab-like-subscribe-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954033622
+    }
+   ],
    "rejects": [],
    "id": "grace-ab-like-subscribe",
    "tab": "Characters",
