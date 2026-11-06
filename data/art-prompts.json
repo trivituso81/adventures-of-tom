@@ -6872,8 +6872,16 @@
    "group": "Repaints of live backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-12-gate-zero-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793931984272
+    }
+   ],
    "rejects": [],
    "id": "bg-12-gate-zero",
    "tab": "Battle",
