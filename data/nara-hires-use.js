@@ -28,9 +28,9 @@ const NARA_SIZE=1.15;   // Tom, 2026-10-29: Nara 15 percent larger everywhere (b
   const mir=rows=>{ const r=mirrorRows(rows),W=rows[0].length,e=sp.eyeAt&&sp.eyeAt.get(rows),h=sp.handAt&&sp.handAt.get(rows);
     if(e) sp.eyeAt.set(r,{col:W-1-e.col,row:e.row}); if(h) sp.handAt.set(r,{n:[W-1-h.f[0],h.f[1]],f:[W-1-h.n[0],h.n[1]]}); return r; };
   sp.scale=NARA_SIZE; sp.hires=true; sp.eye={col:Math.round(MK.idle.eye[0]),row:Math.round(MK.idle.eye[1])};
-  const idle=P('idle'),act=P('act'),windup=P('windup'),celeb=P('celeb'),leap=P('leap'),hurt=P('hurt'),defend=P('defend'),cast=P('cast'),kneel=P('kneel');
-  Object.assign(sp,{idle,idle2:idle,act,throw:act,windup,wind:windup,celeb,celeb2:celeb,spread:celeb,clap:celeb,leap,hurtPose:hurt,defend,
-    castPose:cast,aim:cast,hip:cast,kneel,sit:kneel,expr:defend});
+  const idle=P('idle'),act=P('act'),windup=P('windup'),celeb=P('celeb'),leap=P('leap'),hurt=P('hurt'),defend=P('defend'),cast=P('cast'),kneel=P('kneel'),idle2=P('idle2'),hip=P('hip'),spread=P('spread'),point=P('point');
+  Object.assign(sp,{idle,idle2,act,throw:act,windup,wind:windup,celeb,celeb2:celeb,spread,point,clap:celeb,leap,hurtPose:hurt,defend,
+    castPose:cast,aim:cast,hip,kneel,sit:kneel,expr:defend});
   sp.run=[P('run1'),P('run2')];
   sp.flip=mir(idle); sp.celebFlip=mir(celeb); sp.runFlip=sp.run.map(mir);
   // Knocked out: Nara's KO sprite is stored facing LEFT (engine/battle-draw.js mirrors every other character's, not hers), as the sheet draws her.

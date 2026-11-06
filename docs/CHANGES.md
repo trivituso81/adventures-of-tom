@@ -1,3 +1,8 @@
+## 2026-11-06 (318): Nara fights with her two painted battle sheets (`battlesheet7`)
+- Tom (11-05 23:40): Nara's battle sheets (art/raw/characters/nara-battle-sheet-1/2-v1.png), 15 slots through battle_sheet_frames.py. NEW own frames: idle2, hip, spread, point (they used to alias idle or cast). KO = the dizzy frame mirrored, so her KO table still faces left. Idle keeps its old visible height (84 rows); NARA_SIZE unchanged.
+- Mouth and eye points re-set by hand on gridded crops for every frame (cast, act, spread, kneel, point and KO had landed on paws or the tail when auto-detected). Atlases at 1.5 through hires.py.
+- Purged: tools/sprite-bake/src/nara-battle-v2.png and the old slice loader; README updated, 0 references to the old name.
+- Tests: kit_test nara FAILS [], smoke IDS=nara FAILS [], portrait and landscape fight shots checked.
 ## 2026-11-06 (317): Speaking monsters get dialogue portraits (`foeport1`)
 - Tom (01:05): "add to build instructions that monsters should have portraits for their dialogue, which should be zoomed in crops of the monsters face. obviously this is only needed for the monsters that have dialogue, so first that list must be made. then the portraits created."
 - List made from every `talk:` speaker in data/scenes*.js and bonus-nine-scoops.js matched to a monster id: 51 monsters (40 Part 1, 7 Part 2, 4 Nine Scoops), docs/MONSTER_PORTRAITS.md.

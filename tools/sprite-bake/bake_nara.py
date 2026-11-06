@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Nara's two painted pose sheets (a black Labradoodle) into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/nara-battle-v2.png (flat magenta background, see README.md; she faces LEFT) and art/raw/characters/nara-walk-sheet-v1.png (walk, as painted)
+Input : art/raw/characters/nara-battle-sheet-1-v1.png and -2-v1.png (through battle_sheet_frames.py; she faces LEFT) and art/raw/characters/nara-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/nara-battle.webp, nara-ko.webp, nara-ow.webp   (painted frames, K x the size of the rows)
         data/nara-hires.js                                       (rows, palettes, mouth and eye points, atlas rects; do not hand-edit)
 
@@ -15,7 +15,6 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
@@ -31,27 +30,33 @@ ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
+from battle_sheet_frames import build as _build_battle, SLOTS
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'nara-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
-    poses['b_' + nm] = im
+_bf = _build_battle('nara')
+for slot, src in SLOTS.items():
+    poses['b_' + slot] = _bf['b_' + src]
+poses['b_ko'] = _bf['b_dizzy'].transpose(Image.FLIP_LEFT_RIGHT)   # her sheet paints head right; the KO table is stored facing LEFT
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Nara (Tom 2026-11-05 23:27), used as painted (no mirroring).
 from walk_sheet_frames import build as _build_walk
 poses.update({k: v for k, v in _build_walk('nara').items() if not k.endswith('_pass')})
 
 # Hand-set points in the cut-out pose (x, y from its top-left): the nose/mouth (what she carries) and the near eye.
 MARK = {
-    'b_idle':   {'m': (22, 108), 'e': (97, 100)},
-    'b_windup': {'m': (36, 186), 'e': (100, 176)},
-    'b_strike': {'m': (26, 120), 'e': (85, 88)},
-    'b_run1':   {'m': (20, 146), 'e': (75, 128)},
-    'b_run2':   {'m': (20, 122), 'e': (68, 105)},
-    'b_leap':   {'m': (18, 110), 'e': (80, 92)},
-    'b_hurt':   {'m': (32, 130), 'e': (105, 100)},
-    'b_kneel':  {'m': (38, 70),  'e': (75, 62)},
-    'b_win':    {'m': (44, 70),  'e': (85, 52)},
-    'b_defend': {'m': (16, 160), 'e': (70, 140)},
-    'b_cast':   {'m': (40, 214), 'e': (95, 200)},
+    'b_idle':   {'m': (12, 125), 'e': (62, 113)},
+    'b_idle2':  {'m': (12, 92),  'e': (60, 82)},
+    'b_hip':    {'m': (20, 105), 'e': (70, 95)},
+    'b_cast':   {'m': (112, 75), 'e': (190, 75)},
+    'b_windup': {'m': (12, 353), 'e': (62, 343)},
+    'b_act':    {'m': (30, 62),  'e': (92, 52)},
+    'b_spread': {'m': (92, 40),  'e': (158, 42)},
+    'b_defend': {'m': (12, 203), 'e': (62, 190)},
+    'b_hurt':   {'m': (25, 114), 'e': (70, 105)},
+    'b_kneel':  {'m': (38, 158), 'e': (120, 105)},
+    'b_celeb':  {'m': (12, 93),  'e': (60, 82)},
+    'b_leap':   {'m': (12, 83),  'e': (58, 74)},
+    'b_point':  {'m': (128, 210), 'e': (158, 258)},
+    'b_run1':   {'m': (12, 108), 'e': (60, 98)},
+    'b_run2':   {'m': (12, 108), 'e': (60, 98)},
 }
 
 # ---------------------------------------------------------------- helpers
@@ -177,9 +182,7 @@ def mirror(rows):
     return [r[::-1] for r in rows]
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+battle_names = {k: 'b_' + k for k in SLOTS}
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big, bt_off = place(bt_big, KB)
@@ -229,7 +232,7 @@ js.append("const NARA_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in SLOTS:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(ko_rows) + "},")
