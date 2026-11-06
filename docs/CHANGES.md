@@ -1,3 +1,9 @@
+## 2026-11-06 (373): Jojo hero painting from Tom; hero entry removed (Art Library only)
+
+- Fact (Tom 12:36): he made Jojo's hero in another generator ("it comes out better"). Saved as `art/raw/characters/jojo-hero-ref-v1.png` (1024 x 1536, same shape as the other hero refs; head size and style checked against Justin, TNB and Boppy). It is the reference for her walk and ability sheets, as Michael's is.
+- Removed the `jojo-hero` Library entry and its two own-photo slots (saves a Generate press). `jojo-walk-sheet` and `jojo-ab-round-with-jojo` now attach the hero painting (CHANGES 368 added them). 2 Generate presses left for Jojo. Entry count 691.
+- Not installed. No game files changed.
+
 ## 2026-11-06 (372): Justin ability install: 9 painted Art Library sheets, old move sheets purged (`justinab1`)
 
 - Fact (Tom 12:19: install the approved abilities): all 9 `justin-ab-*` sheets are approved but his moves still played the older 4 x 4 sheets. All 9 moves now play the approved frames: 58 painted frames in `art/chars/justin-ab.webp` (`data/justin-ab.js`, keys `ab_<short>_<n>` plus `R` mirrors). Cutter `tools/sprite-bake/ability_frames_justin.py`, baker `bake_justin_ab.py`. Cache tag `jab1` on `data/justin-ab.js`; the rest moved to `justinab1`.
