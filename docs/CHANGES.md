@@ -1,3 +1,7 @@
+## 2026-11-05 (243): Old Ironbelly boss prompt: much more detailed, beautiful and dramatic (Art Library only, no game files, no tag)
+- Tom (16:45): he does not love Old Ironbelly; as a boss he should be much more detailed, beautiful and dramatic. Fact: the generic prompt followed the simple old pixel design faithfully (a stove with a small face), about 300 px per pose.
+- `LEAD.ironbelly` (a richer first sentence: riveted plates, embossed scrollwork, rust and soot, glowing cracks, roaring fire, firelight on the iron) and `POSES.ironbelly` (six dramatic poses, 6 = follow-through not a repeat of 1) in tools/art-library/enemy-prompts.js; `enemy-ironbelly` prompt updated in the json (draft). Detail is still limited by six poses in one picture (about 300 px each); one picture per pose for bosses is the lever for more, only if Tom agrees.
+
 ## 2026-11-05 (242): Custom pose prompt for Acorn Cache, with a real attack (Art Library only, no game files, no tag)
 - Tom (16:40): the Acorn Cache sheet has no attack motion. Fact: its only move is Sit and the old sheet's attack frames are just face changes. `POSES.acorncache` (tools/art-library/enemy-prompts.js): shy stance, flinch with flying leaves, attack wind-up squashed low, attack leaping out of the leaves toward the right. `enemy-acorncache` prompt updated in the json (draft, nothing else changed).
 
