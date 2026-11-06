@@ -2303,8 +2303,16 @@
    "group": "Griffith Park"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/enemies/enemy-tarblob-v2.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793923570007
+    }
+   ],
    "rejects": [],
    "id": "enemy-tarblob",
    "tab": "Enemies",
