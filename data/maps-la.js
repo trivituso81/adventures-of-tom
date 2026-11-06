@@ -139,7 +139,7 @@ const LA_AREAS=[
       [27,11],[28,11],[28,12],[27,12],[26,22],[27,22],[28,22],[27,23],[23,22],[24,22],[23,23],[23,24],[3,10],[2,10],...[10,11,12,13,14,15].map(x=>[x,10]),...[5,6,7,8,9,10,11,12,21,22].map(x=>[x,22]),[12,23],[17,22],[17,23]],
     // Chapter 4: the east end of the boulevard leads to the studio lot (Sunset Gold Studios).
     border:{kind:'citywall',open:[[13,25],[14,25],[15,25],[16,25],[29,11],[29,12]]},
-    exits:[[1,4,'griffith',10,20,'up','path'],[2,4,'griffith',11,20,'up','path'],[13,25,'jpark',14,1,'down'],[14,25,'jpark',15,1,'down'],[15,25,'jpark',16,1,'down'],[16,25,'jpark',17,1,'down'],[29,11,'studio',1,10,'right'],[29,12,'studio',1,11,'right']],
+    exits:[[1,4,'griffith',11,20,'up','path'],[2,4,'griffith',12,20,'up','path'],[13,25,'jpark',14,1,'down'],[14,25,'jpark',15,1,'down'],[15,25,'jpark',16,1,'down'],[16,25,'jpark',17,1,'down'],[29,11,'studio',1,10,'right'],[29,12,'studio',1,11,'right']],
     // Chapter 2: the trail is closed for smog until Tom and TNB work out where it is coming from.
     gates:[{at:[[1,4],[2,4]],look:'barrier',dy:.4,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
       lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','Somebody added in marker: "This means you, Gary."'],
@@ -286,45 +286,44 @@ const LA_AREAS=[
     hint:'Monsters live here. Smoglet is easy. The Big Shake isn\'t.',
     spawn:{x:11,y:19},
     wild:true,
-    // Painted plate (art/griffith.webp, engine/plate.js). The mask is the walk map: '#' blocks, '.' walks.
-    // Trails: the main trail up the middle, a ridge trail to the lookout (top), a west slope to the Observatory hill,
-    // a shore path under the south tar pit, and the east trail along y 11 to 12.
+    // Painted plate (art/griffith.webp + art/griffith-fg.webp, engine/plate.js, `griffith2`). The mask is the walk map: '#' blocks, '.' walks.
+    // Trails: in under the DOWNTOWN arch (x 10 to 13) to the clearing (rows 11 to 15); the switchback trail climbs the west slope to the
+    // Observatory steps (5-6,3); the east trail runs up beside the tar pits to the top of the lookout rock (18-19,3).
     plateMask:[
       '########################',
       '########################',
       '########################',
-      '############.....#######',
-      '##########...###########',
-      '##########..############',
-      '###..#####....##########',
-      '###....#####..##########',
-      '####...#####...#########',
-      '#####...###....#########',
-      '#######......###########',
-      '###########..####.....##',
-      '###########............#',
-      '###########..###########',
-      '##########.....#########',
-      '###########.....########',
-      '############......######',
-      '####.............#######',
-      '###...........##########',
-      '#########.....##########',
-      '#########.....##########',
-      '##########..############'],
-    border:{kind:'scrub',open:[[10,21],[11,21]]},
-    exits:[[10,21,'blvd',1,5,'down'],[11,21,'blvd',2,5,'down']],
-    pools:[{tile:'tar',cells:[[14,5],[15,5],[16,5],[17,5],[18,5],[19,5],[20,5],[21,5],[22,5],[23,5],[15,6],[16,6],[17,6],[18,6],[19,6],[20,6],[21,6],[22,6],[23,6],[14,7],[15,7],[16,7],[17,7],[18,7],[19,7],[20,7],[21,7],[22,7],[23,7],[15,8],[16,8],[17,8],[18,8],[19,8],[20,8],[21,8],[17,9],[18,9],[19,9],[20,9],[21,9],
-      [4,16],[5,16],[6,16],[7,16]]}],
+      '####...###########..####',
+      '###...############.#####',
+      '###....##########..#####',
+      '####....########..######',
+      '###...##########.#######',
+      '##...###########.#######',
+      '####..##########..######',
+      '#####..#########..######',
+      '#####............#######',
+      '######...........#######',
+      '######.##........#######',
+      '##########.......#######',
+      '#########......#########',
+      '##########....##########',
+      '##########....##########',
+      '##########....##########',
+      '##########....##########',
+      '##########....##########',
+      '##########....##########'],
+    border:{kind:'scrub',open:[[10,21],[11,21],[12,21],[13,21]]},
+    exits:[[10,21,'blvd',1,5,'down'],[11,21,'blvd',1,5,'down'],[12,21,'blvd',2,5,'down'],[13,21,'blvd',2,5,'down']],
+    pools:[{tile:'tar',cells:[[19,5],[20,5],[21,5],[22,5],[23,5],[19,6],[20,6],[21,6],[22,6],[23,6],[18,7],[19,7],[20,7],[21,7],[22,7],[23,7],
+      [19,8],[20,8],[21,8],[22,8],[23,8],[20,9],[21,9],[22,9]]}],
     objects:[
-      ['rock',17,3,2,1,'Lookout rock','From up here you can see the Observatory\'s white dome across the ridge. On a clear night you can see three stars. On a normal night, one.'],
-      ['sign',13,13,2,1,'Trailhead sign','GRIFFITH PARK. Stay on the trail. Start with the Smoglet. Save the hill for last.'],
-      ['sign',14,6,1,1,'Tar warning','DO NOT STEP IN THE TAR. It\'s not a puddle. It\'s a commitment.'],
-      ['bench',16,15,2,1,'Lookout bench','You can see the whole city from here. Most of it\'s parking.'],
-      ['rock',13,10,3,1,'Fault marker','EARTHQUAKE COUNTRY. If the ground starts talking, don\'t answer.']],
+      ['rock',20,3,1,1,'Lookout rock','From up here you can see the Observatory\'s white dome across the ridge. On a clear night you can see three stars. On a normal night, one.'],
+      ['sign',7,10,2,1,'Trailhead sign','GRIFFITH PARK. Stay on the trail. Start with the Smoglet. Save the hill for last.'],
+      ['sign',18,9,1,1,'Tar warning','DO NOT STEP IN THE TAR. It\'s not a puddle. It\'s a commitment.'],
+      ['rock',14,10,2,1,'Fault marker','EARTHQUAKE COUNTRY. If the ground starts talking, don\'t answer.']],
     npcs:[],
-    // Spots re-laid onto the painted trails (the Big Shake waits on the west slope below the Observatory).
-    monsters:[['smoglet',9,17],['tickets',20,12],['coyote',13,8],['gridlock',15,3],['tarblob',5,8],['bigshake',3,6]]}
+    // Spots on the painted trails (the Big Shake waits on the switchback trail below the Observatory).
+    monsters:[['smoglet',12,14],['tickets',15,12],['coyote',16,8],['gridlock',19,3],['tarblob',17,5],['bigshake',4,4]]}
 ];
 
 // ---------- Chapter 4 (Backlot Bedlam): Sunset Gold Studios, east of Downtown ----------

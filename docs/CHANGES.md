@@ -1,3 +1,11 @@
+## 2026-11-06 (389): Griffith Park v2 storybook painting with a walk-behind layer (`griffith2`)
+
+- Tom (14:11 approved the painting, 14:17 five masks, 14:21 "install it now"). New plate `art/griffith.webp` (1536 x 1408) from `art/raw/areas/area-griffith-v2.png` (1309 x 1202, added as version 2 of the Art Library entry `area-griffith`; painting prompt in the Project at claude/griffith-park-ffix-prompt.txt). `art/griffith-fg.webp` holds the trees, the DOWNTOWN arch, the GRIFFITH PARK and TAR signs, the Observatory, boulders, the fallen log, the fences and the rocks along the tar, cut from the painting itself; Tom's masks (keyed to 1-bit in `art/raw/areas/griffith-v1-masks/`) only say where to cut. Builder: `tools/make_griffith_fg.py`. The sixth mask (agave, yucca, bushes) never came: those stay flat in the painting.
+- Depth: `PLATE_BEHIND.griffith` is 154 polygon zones (same method as Grump Hollow). The lookout rock is left out on purpose because the party stands on top of it. Under the arch Tom is hidden behind the board, feet showing.
+- Layout changed: walk map re-derived. Entrance under the arch (x 10 to 13, rows 16 to 21) to the clearing (rows 11 to 15); switchback trail up the west slope to the Observatory steps (5-6,3); east trail beside the tar pits to the top of the lookout rock (18-19,3). Exits (10..13,21) to Downtown; arrivals from Downtown land at (11,20) and (12,20). Tar cells redone (the old south pit is gone).
+- Objects moved onto the painting: trailhead sign (7,10), TAR post (18,9), lookout rock (20,3), fault marker on the boulder (14,10). Purged the lookout bench (no bench in the painting). Monster spots on the trails: Smoglet (12,14), Ticket Flurry (15,12), Coyote (16,8), Gridlock (19,3), Tar Blob (17,5), Big Shake (4,4). Chapter 2 Observatory pipes moved beside the two side towers.
+- Tests: reach_test griffith and blvd 0 fails, smoke FAILS [], tag_check ok, scene_frames ch2Boss no errors, in-game shots portrait 393 x 852 and landscape (`tools/shots/griffith-*`).
+
 ## 2026-11-06 (388): The Square walk map, Tom's second Area Builder export (`square8`)
 
 - 36 more walk tiles from Tom's export: the cobbles east of Moon Club and above the taxi stand (x 20-29, rows 12-16) open, a lane at x 21 down to row 20, and the lane edges (8,16), (12,16), (16,16). East edge (29,12-16) added to `border.open` (no exit there).
