@@ -1142,8 +1142,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Rainbow Unicorn Cut-Out.\n\nRow 1:\n1. Kneeling on the ground, a crayon in one hand drawing on a sheet of white paper held flat on her knees, tongue poking out in concentration.\n2. Still kneeling, holding up the paper with a rainbow and a unicorn drawn on it, beaming.\n3. Kneeling, cutting around the drawing with small round-tipped safety scissors, very careful face.\n\nRow 2:\n4. Standing, holding the cut-out rainbow unicorn up high in both hands, mouth open in delight.\n5. Running forward, the cut-out held out in front of her at arm's length, ready to stick it on something.\n6. Pressing the cut-out forward with one flat palm as if sticking it on, the other hand on her hip, proud."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/rose-ab-giggle-storm-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793954491793
+    }
+   ],
    "rejects": [],
    "id": "rose-ab-giggle-storm",
    "tab": "Characters",
