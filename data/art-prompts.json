@@ -590,8 +590,16 @@
    "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: 10-Step Skincare.\n\nItems:\n1. The tray of skincare bottles and jars from the picture.\n2. One tall pump bottle from the tray (tall).\n3. One small round jar of cream, lid off.\n4. One dropper bottle.\n5. The white face mask from the picture, lights off.\n6. The same mask with its little lights glowing bright red.\n7. A soft round red-light glow.\n8. A cluster of clean white and gold sparkles.\n9. A big white pause symbol: two thick rounded bars.\n10. A small round countdown timer."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-fx-kanji-strike-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1793953795748
+    }
+   ],
    "rejects": [],
    "id": "tom-fx-kanji-strike",
    "tab": "Characters",
