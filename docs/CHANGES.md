@@ -1,3 +1,8 @@
+## 2026-11-06 (312): Boppy fights with his two painted battle sheets (`battlesheet4`)
+- Tom (11-05 23:40): Boppy's battle sheets (art/raw/characters/boppy-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head warp, no body narrowing). NEW slots: idle2 breath, hip (data/boppy-hires-battle.js); KO = dizzy sit. His own stock sheet still supplies aim, throw, spread, point, clap. Idle keeps its old visible height (66.7 rows). Eye and hand bands now use head share .26.
+- Extra sheets (extra, fish, stock, young, pepper) pinned to the old idle (HEAD_KB 1.563, OLD_IDLE_H 431) and came back pixel for pixel. Battle atlases at 1.333, KO at 1.5 through hires.py.
+- Purged: src/boppy-battle-v2.png, the black eye and swirl paint-ins, the b_ head boxes and the lying-KO head warp in bake_boppy.py.
+- Tests: kit_test boppy FAILS [], fight and KO shots checked.
 ## 2026-11-06 (311): Objects and effects sheets for Grace, Rose and Deedee's abilities (`abilfx2`)
 - Tom (00:34): "add sheets for objects and effects needed for grace, rose, and deedee's abilities. attach whichever reference to corresponding abilities".
 - 42 new Art Library entries `<id>-fx-<move>` (Characters > Grace / Rose / Deedee, right after each one's ability sheets), same shape as Tom's (`abilfx1`): 4 x 3 on magenta, ar 4:3, 5 to 12 items. Each attaches only that move's newest approved ability sheet (`-v1` if none is approved yet, so it unblocks by itself when Tom approves that ability).

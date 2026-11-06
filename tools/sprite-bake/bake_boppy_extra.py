@@ -38,7 +38,7 @@ poses = g['poses']
 for k, v in exY.items(): poses['y_' + k] = v
 poses['s_sitc'] = exS['sitc']
 place, tighten, scaled_to, rows_of, pack = g['place'], g['tighten'], g['scaled_to'], g['rows_of'], g['pack']
-KB = g['KB']; fb = g['args'].battle_h * KB / poses['b_idle'].height
+KB = g['KB']; fb = g['args'].battle_h * KB / g['OLD_IDLE_H']
 from PIL import Image
 from PIL import Image
 import numpy as np

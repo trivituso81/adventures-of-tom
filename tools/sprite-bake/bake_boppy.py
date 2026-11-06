@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Boppy's two painted pose sheets into the game: painted atlases (webp) plus small quantized row strings.
 
-Input : tools/sprite-bake/src/boppy-battle-v2.png (flat magenta background, see README.md) and art/raw/characters/boppy-walk-sheet-v1.png (walk, as painted)
+Input : art/raw/characters/boppy-battle-sheet-1-v1.png and -2-v1.png (painted battle sheets, as painted) and boppy-walk-sheet-v1.png (walk, as painted)
 Output: art/chars/boppy-battle.webp, boppy-ko.webp, boppy-ow.webp  (painted frames, K x the size of the rows)
         data/boppy-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -15,7 +15,6 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
@@ -32,35 +31,6 @@ args = ap.parse_args()
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
-for nm, im in slice_sheet(os.path.join(SRC, 'boppy-battle-v2.png'),
-        [['idle', 'windup', 'strike', 'run1', 'run2', 'leap'], ['hurt', 'kneel', 'ko', 'win', 'defend', 'cast']]).items():
-    poses['b_' + nm] = im
-
-
-# ---------------------------------------------------------------- paint-in (the sheets avoid injury wording)
-from PIL import ImageDraw, ImageFilter
-import math
-def _layer(img, draw_fn, blur):
-    L = Image.new('RGBA', img.size, (0, 0, 0, 0)); draw_fn(ImageDraw.Draw(L))
-    if blur: L = L.filter(ImageFilter.GaussianBlur(blur))
-    a = np.array(L).astype(float); base = np.array(img).astype(float)
-    m = (a[:, :, 3:4] / 255.0) * (base[:, :, 3:4] / 255.0)      # only where Boppy is
-    base[:, :, :3] = base[:, :, :3] * (1 - m) + a[:, :, :3] * m
-    return Image.fromarray(base.clip(0, 255).astype(np.uint8), 'RGBA')
-def black_eye(img, cx, cy, rx, ry):
-    """Soft bruise around the near eye: purple-brown, darker toward the centre."""
-    img = _layer(img, lambda d: d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=(86, 44, 72, 175)), 3)
-    return _layer(img, lambda d: d.ellipse([cx - rx * .6, cy - ry * .6, cx + rx * .6, cy + ry * .6], fill=(58, 28, 52, 150)), 2.2)
-def swirl_eye(img, cx, cy, r):
-    """Dizzy spiral over a skin patch (hides the closed-eye line)."""
-    skin = tuple(int(v) for v in np.array(img)[int(cy + r * 2.4), int(cx), :3])
-    img = _layer(img, lambda d: d.ellipse([cx - r * 1.1, cy - r * 1.1, cx + r * 1.1, cy + r * 1.1], fill=skin + (235,)), 1.5)
-    def sp(d):
-        pts = [(cx + (r * t / 40.0) * math.cos(t * 0.22), cy + (r * t / 40.0) * math.sin(t * 0.22)) for t in range(0, 41)]
-        d.line(pts, fill=(70, 34, 30, 255), width=max(2, int(r / 4)))
-    return _layer(img, sp, .6)
-poses['b_kneel'] = black_eye(poses['b_kneel'], 67, 80, 9, 6)
-poses['b_ko'] = swirl_eye(poses['b_ko'], 92, 42, 5)
 
 # ---------------------------------------------------------------- head size (match Tom's caricature proportions)
 # Tom's head (hair to chin) is about 45 percent of his height; the painted Boppy's is about 28 percent. Each frame's head is cut out,
@@ -75,10 +45,8 @@ def _auto_head(img):
     chin = lo + int(np.argmin(ws[lo:hi]))
     cols = a[top:chin].sum(0); xs = np.where(cols > cols.max() * .35)[0]
     return top, chin, max(0, int(xs.min()) - 6), int(xs.max()) + 6
-# hand-set head boxes (top, chin, x0, x1) where arms or a lying head confuse the detector
-HEAD_BOX = {'b_idle': (3, 118, 2, 158), 'b_windup': (3, 118, 2, 157), 'b_strike': (3, 118, 108, 268), 'b_run1': (3, 118, 4, 157),
-            'b_run2': (3, 118, 4, 155), 'b_leap': (3, 120, 58, 210), 'b_hurt': (3, 114, 100, 240), 'b_kneel': (3, 132, 4, 172),
-            'b_win': (3, 114, 80, 200), 'b_defend': (3, 118, 76, 204), 'b_cast': (3, 118, 108, 232)}
+# hand-set head boxes (top, chin, x0, x1) where arms confuse the detector
+HEAD_BOX = {}   # the extra pose sheets add their boxes (bake_boppy_extra.py)
 def _warp_head(arr, x0, x1, y0, ay, ax, k, taper):
     """Rows y0..ay of arr (RGBA, y grows down) are enlarged by k about (ax, ay); the last `taper` rows blend back to scale 1 so the
     neck joins the body without a step. Returns (rgba array, dest_left_x, dest_top_y)."""
@@ -121,68 +89,47 @@ def _drop_slivers(im, er=5, grow=7):
             if v < .03 * big_: a[lab == i + 1, 3] = 0
     return Image.fromarray(a, 'RGBA')
 
-# Body width (2026-11-01, Tom: "Boppy should be skinnier"): body below the chin x BODY_W before the head warp, every pose but the lying KO.
+# Body width (2026-11-01, Tom: "Boppy should be skinnier"): body below the chin x BODY_W before the head warp (extra sheets only).
 # Narrowing keeps the canvas, so HEAD_BOX, KEEP and hand coordinates stay valid.
 from headwarp import body_width
 BODY_W = 0.80
 def bigger_head(img, name, k=None, pad=160, taper=TAPER):
-    if k is None: k = HEAD_KB if name[:2] in ('b_', 'x_', 'f_', 's_') else HEAD_KB
-    if name != 'b_ko':
-        _bx = HEAD_BOX.get(name) or _auto_head(img)
-        img, _ = body_width(img, _bx[1], BODY_W)
+    if k is None: k = HEAD_KB
+    _bx = HEAD_BOX.get(name) or _auto_head(img)
+    img, _ = body_width(img, _bx[1], BODY_W)
     W, H = img.size
     big = Image.new('RGBA', (W + 2 * pad, H + 2 * pad), (0, 0, 0, 0)); big.alpha_composite(img, (pad, pad))
     arr = np.array(big)
-    if name == 'b_ko':                                  # lying: head on the left, neck on its right edge. Work on the transposed picture.
-        x0, x1, y0, ay = 70 + pad, 130 + pad, 0 + pad, 125 + pad   # in transposed terms: cross range = original rows, "up" = original left
-        t = np.transpose(arr, (1, 0, 2)).copy()
-        # transposed: rows = original x, cols = original y. Head = rows 0..128, anchor row 128, cross centre = original y 70
-        cx0, cx1 = pad + 0, pad + H
-        out, dx, dy = _warp_head(t, cx0, cx1, pad + 0, pad + 125 + taper, pad + 55, k, taper)
-        t[pad + 0:pad + 125 + taper, cx0:cx1, 3] = 0                   # erase the original head
-        full = Image.fromarray(t, 'RGBA'); full.alpha_composite(Image.fromarray(out, 'RGBA'), (max(dx, 0), max(dy, 0)))
-        big = Image.fromarray(np.transpose(np.array(full), (1, 0, 2)).copy(), 'RGBA')
-    else:
-        top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
-        ax = (x0 + x1) / 2.0
-        X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
-        # jacket (navy, below the cap) inside the box stays on the body at scale 1; only head pixels are lifted and enlarged
-        reg = arr[Y0:AY, X0:X1].astype(int)
-        lum = reg[:, :, 0] * .3 + reg[:, :, 1] * .59 + reg[:, :, 2] * .11
-        jacket = (reg[:, :, 3] > 40) & (reg[:, :, 2] > reg[:, :, 0] + 8) & (reg[:, :, 2] > reg[:, :, 1] - 2) & (lum < 140)
-        jacket[:int((.38 if name == 'b_leap' else .85 if name == 'b_kneel' else .62) * (AY - Y0))] = False
-        src = arr.copy(); src[Y0:AY, X0:X1, 3] = np.where(jacket, 0, src[Y0:AY, X0:X1, 3])
-        out, dx, dy = _warp_head(src, X0, X1, Y0, AY, ax + pad, k, taper)
-        sub = arr[Y0:AY, X0:X1, 3]; arr[Y0:AY, X0:X1, 3] = np.where(jacket, sub, 0)   # erase the head, keep the jacket
-        big = Image.fromarray(arr, 'RGBA')
-        big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
-        if name == 'b_win':                                       # raised fists and arms stay in front of the bigger head, where they were
-            for (a, b, y0) in ((0, 56, 3), (56, 80, 72), (205, W, 3), (200, 205, 72)):
-                big.alpha_composite(img.crop((a, y0, b, 112)), (a + pad, y0 + pad))
-    big = _drop_slivers(big, 0 if name.startswith('f_') else 3 if name == 'b_leap' else 5)
+    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(img)
+    ax = (x0 + x1) / 2.0
+    X0, X1, Y0, AY = x0 + pad, x1 + pad, top + pad, chin + pad + taper
+    # jacket (navy, below the cap) inside the box stays on the body at scale 1; only head pixels are lifted and enlarged
+    reg = arr[Y0:AY, X0:X1].astype(int)
+    lum = reg[:, :, 0] * .3 + reg[:, :, 1] * .59 + reg[:, :, 2] * .11
+    jacket = (reg[:, :, 3] > 40) & (reg[:, :, 2] > reg[:, :, 0] + 8) & (reg[:, :, 2] > reg[:, :, 1] - 2) & (lum < 140)
+    jacket[:int(.62 * (AY - Y0))] = False
+    src = arr.copy(); src[Y0:AY, X0:X1, 3] = np.where(jacket, 0, src[Y0:AY, X0:X1, 3])
+    out, dx, dy = _warp_head(src, X0, X1, Y0, AY, ax + pad, k, taper)
+    sub = arr[Y0:AY, X0:X1, 3]; arr[Y0:AY, X0:X1, 3] = np.where(jacket, sub, 0)   # erase the head, keep the jacket
+    big = Image.fromarray(arr, 'RGBA')
+    big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
+    big = _drop_slivers(big, 0 if name.startswith('f_') else 5)
     return big.crop(big.getbbox())
-# Same proportions as Deedee (and Tom): head (hair to chin) is 0.40 of figure height. The head factor is solved per set (battle idle, walk down).
-TOM_HEAD_RATIO = 0.40
-# Battle only (walk keeps 0.40): face (hairline to chin) = Justin's 49 battle px, Tom's call 2026-11-01. Final head rows = ratio x battle_h, so ratio = 0.40 x 49/33 x 1.94/2.044 (old face px, old/new battle scale).
-BATTLE_HEAD_RATIO = 0.417   # x .85 (battle perceived-size check: 46 px vs the group's 39); before that .491 # was .564; x .87, same cap correction as the walk
-HEAD_KB = HEAD_K
-def _head_ratio(name, k):
-    top, chin, x0, x1 = HEAD_BOX.get(name) or _auto_head(poses[name])
-    return (chin - top) * k / bigger_head(poses[name], name, k=k).height
-def _solve(name, ratio=TOM_HEAD_RATIO):
-    lo, hi = 1.0, 4.0
-    for _ in range(14):
-        mid = (lo + hi) / 2
-        if _head_ratio(name, mid) < ratio: lo = mid
-        else: hi = mid
-    return round((lo + hi) / 2, 3)
-HEAD_KB = _solve('b_idle', BATTLE_HEAD_RATIO)
-print('head factor solved: battle', HEAD_KB)
+# The head warp above now only serves the extra pose sheets (bake_boppy_extra.py runs this file up to the battle set). Its factor and the old idle
+# height were solved on the old battle idle sheet (deleted 2026-11-05); they are pinned here so every extra sheet keeps its exact size.
+HEAD_KB = 1.563       # head factor solved on the old battle idle (battle head ratio .417)
+OLD_IDLE_H = 431      # that idle's height in px after the warp; the extra sheets are scaled by battle_h x KB / OLD_IDLE_H
 for _n in list(poses):
     poses[_n] = bigger_head(poses[_n], _n)
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for this character (Tom 2026-11-05 23:16), used as painted (no head warp, no body narrowing, no mirroring).
 from walk_sheet_frames import build as _build_walk
 poses.update({k: v for k, v in _build_walk('boppy').items() if not k.endswith('_pass')})
+# Battle: Boppy's two painted battle sheets (art/raw/characters/boppy-battle-sheet-1-v1.png and -2-v1.png, Tom 2026-11-05 23:40), used as painted
+# (no head warp, no body narrowing). tools/sprite-bake/battle_sheet_frames.py cuts them and sizes sheet 2 to sheet 1; run frames are the walk sheet's side steps.
+from battle_sheet_frames import build as _build_battle, SLOTS
+_bf = _build_battle('boppy')
+for _slot, _src in SLOTS.items(): poses['b_' + _slot] = _bf['b_' + _src]
+poses['b_dizzy'] = _bf['b_dizzy']
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -320,17 +267,15 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- battle set (painted at KB x)
-battle_names = {'idle': 'b_idle', 'act': 'b_strike', 'windup': 'b_windup', 'celeb': 'b_win',
-                'run1': 'b_run1', 'run2': 'b_run2', 'leap': 'b_leap', 'hurt': 'b_hurt',
-                'defend': 'b_defend', 'cast': 'b_cast', 'kneel': 'b_kneel'}
+battle_names = {k: 'b_' + k for k in SLOTS}
 fb = args.battle_h * KB / poses['b_idle'].height
 bt_big = {k: scaled_to(poses[v], fb) for k, v in battle_names.items()}
 bt_big = tighten(place(bt_big, KB, 'head'), KB)
 bt_pal, bt_rows = rows_of(bt_big, KB, args.colors)
 bt_rects = pack(bt_big, os.path.join(ART, 'boppy-battle.webp'))
 
-# knocked out: lies flat, head to the LEFT in the sheet; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
-ko_big = tighten(place({'ko': scaled_to(poses['b_ko'], fb * KO_ / KB)}, KO_, 'center'), KO_)
+# knocked out: the painted dizzy sit, facing screen-left; the KO table stores it facing RIGHT (so rows are mirrored and flagged flip)
+ko_big = tighten(place({'ko': scaled_to(poses['b_dizzy'], fb * KO_ / KB)}, KO_, 'center'), KO_)
 ko_pal, ko_rows = rows_of(ko_big, KO_, 28)
 ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'boppy-ko.webp'))
@@ -388,7 +333,7 @@ js.append("const BOPPY_HIRES={")
 js.append("  meta:" + json.dumps(meta) + ",")
 js.append("  atlas:" + json.dumps(atlas) + ",")
 js.append("  bt:{pal:" + json.dumps(bt_pal) + ",")
-for k in ('idle', 'act', 'windup', 'celeb', 'run1', 'run2', 'leap', 'hurt', 'defend', 'cast', 'kneel'):
+for k in SLOTS:
     js.append(f"    {k}:" + fmt_rows(bt_rows[k]) + ",")
 js.append("  },")
 js.append("  ko:{pal:" + json.dumps(ko_pal) + ",rows:" + fmt_rows(mirror(ko_rows)) + "},")
