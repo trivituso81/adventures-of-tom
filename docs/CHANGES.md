@@ -1,3 +1,9 @@
+## 2026-11-06 (326): Portrait dialogue box keeps one fixed height (`dlgfit1`)
+- Tom (01:58): on iPhone portrait the dialogue box kept resizing; give it a max height and fit the text. Fact: the box grew line by line as text typed out, and the face widened with it.
+- Portrait text area is now a fixed 5 lines tall (16px, line-height 1.4). `fitDialogText` in `engine/overworld.js` measures the full line before it types and shrinks the font in half-pixel steps down to 11px if it would not fit. Landscape unchanged. Choice pages still add their buttons below.
+- Tom (02:03): AUTO and the page count moved out of the box into the tab row, right of the name box, so the text has the whole box (the fixed height went from 4 to 5 lines for that reason). Both orientations.
+- Tags: `dlgfit1` (engine/overworld.js).
+
 ## 2026-11-06 (325): Nara's story boxes are read by the Narrator (`nara3`)
 - Tom (01:56): "Nara's line alike this should be voiced by the narrator, and he should speak narratively but also quickly." Fact: Nara never speaks; every box labeled Nara (60 scene blocks, 109 lines) is narration. `data/dialog-cast.js` now casts `'Nara':'narrator'`. The Narrator's delivery stays as set: theatrical storyteller, lively pace, ElevenLabs speed 1.15 (max is 1.2).
 - `tools/voice-library/make-index.js` no longer skips Nara, so her boxes appear in the Voice Library as Narrator lines: 95 new lines to bake (dialogue lines with no clip 19 to 114). Until baked they stay silent, as every new line does. Nothing was reworded.

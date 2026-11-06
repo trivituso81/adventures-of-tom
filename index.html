@@ -1023,7 +1023,7 @@ html.landscape .dialog-footer{margin-top:4px;padding-top:3px}
 /* Portrait: the whole box is compact. Small face on the left; text, then AUTO and the page count, stack in the column beside it, so the box is only as tall as the text column. Bottom padding uses half the home-bar inset. */
 html:not(.landscape) #dialog{padding:12px 16px calc(4px + env(safe-area-inset-bottom) * .5)}
 html:not(.landscape) #dialog-portrait{left:16px;top:12px;width:56px;height:56px}
-html:not(.landscape) #dialog-text,html:not(.landscape) #dialog.has-portrait #dialog-text{flex:none;min-height:44px;font-size:16px;line-height:1.4}
+html:not(.landscape) #dialog-text,html:not(.landscape) #dialog.has-portrait #dialog-text{flex:none;min-height:0;height:calc(16px * 1.4 * 5);overflow:hidden;font-size:16px;line-height:1.4}
 html:not(.landscape) #dialog.has-portrait #dialog-text,html:not(.landscape) #dialog.has-portrait #dialog-choices,html:not(.landscape) #dialog.has-portrait .dialog-footer{margin-left:68px}
 html:not(.landscape) #dialog .dialog-footer{margin-top:0;min-height:24px}
 html:not(.landscape) #dialog #dialog-auto{min-height:24px;min-width:70px;padding:3px 8px;font-size:9px}
@@ -1036,6 +1036,10 @@ html:not(.landscape) #dialog-choices{margin-top:6px}
 #dialog-portrait img{object-fit:cover}
 #dialog.has-portrait #speaker{top:-22px;left:calc(var(--dp-w,56px) + 14px + env(safe-area-inset-left,0px));z-index:1}
 html.landscape #dialog .dialog-footer{margin-top:2px;padding-top:0}
+/* AUTO and the page count sit in the tab row above the box, to the right of the name box, so the text gets the whole box (2026-11-06). */
+#dialog#dialog .dialog-footer{position:absolute;right:12px;top:-26px;margin:0!important;padding:0;min-height:0!important;border:none;z-index:1}
+#dialog#dialog .dialog-right{padding:2px 6px 2px 4px;border:2px solid var(--edge);border-radius:5px;background:var(--w-deep);box-shadow:0 0 0 2px var(--edge-ink);font-size:11px;color:var(--ink-dim)}
+html:not(.landscape) #dialog{padding-bottom:calc(8px + env(safe-area-inset-bottom) * .5)}
 main:has(#dialog:not([hidden])) #controls{visibility:hidden}
 
 /* Back frame under the menu commands */
@@ -1374,7 +1378,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/battle-icons.js?v=warmth1"></script>
 <script src="data/battle-emoji.js?v=warmth1"></script>
 <script src="engine/battle-pictures.js?v=tombopair2"></script>
-<script src="engine/overworld.js?v=foeport1"></script>
+<script src="engine/overworld.js?v=dlgfit1"></script>
 <script src="data/font.js"></script>
 <script src="data/overworld-sprites.js"></script>
 <script src="engine/tiles.js?v=tom4"></script>
