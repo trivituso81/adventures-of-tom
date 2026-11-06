@@ -1,3 +1,11 @@
+## 2026-11-06 (383): NPC prompts attach painted party sheets instead of the old style key
+
+- Tom (11-06 11:16): keep the height chart and the real-height requirement, replace the style key with painted sheets of party characters in the NPC's age band. Done for the 78 NPC entries that attached `style_key_v1.png` (22 scene groups, 56 walk sheets). The 22 cut entries (one ref) are unchanged.
+- Bands: children (age under 13 per `kind`): Grace, Rose; adults: Tom or Amy by sex, then TNB, Justin; 60 and up: Deedee or Boppy by sex. Scene groups attach hero poses (`art/raw/characters/<id>-hero-ref-v1.png`), walk sheets attach walk sheets. A mixed-age group takes one sheet per band first (e.g. Pruitt, Delgado, Kowalski: Boppy, Tom, Deedee).
+- Reference cap: 5 per entry (the Art Library validator's limit; I could not test the generator's own limit from here). Scene groups use 5 (yard, up to 3 cast, height chart), children groups 4; walk sheets 4 (cut, 2 cast, height chart).
+- Prompt text updated to match: the "STYLE KEY" attachment is now "PAINTED CAST" / "CAST WALK SHEETS" with the right attachment numbers; every "attachment 2" rule (style, head size, proportions) now points at the cast paintings. Source `tools/art-library/npc-prompts.js` and `npc-walk-prompts.js`; json mirrored (only `refs` and `prompt` of those 78 entries changed, asserted; status, versions and every other entry untouched). Existing approved NPC pictures stay approved; the new prompts apply to the next Generate press.
+- `style_key_v1.png` stays (Enemies, Rooms, Props, Portraits, Flight, Title still attach it). Validator OK. No Generate cost.
+
 ## 2026-11-06 (382): Voice Library lists dialogue in story order, repeats once
 
 - Tom: sequence dialogue in the order it appears in the story; duplicates can be excluded. `tools/voice-library/make-index.js` now records where each line first occurs (chapter, then offset inside that chapter's scene source) and writes `o` (story rank) on every item; `data/voice-index.json` otherwise identical (0 other fields changed).
