@@ -1,3 +1,9 @@
+## 2026-11-06 (321): Chapter 15 family dinner sits in the middle of the room (`ch15seat1`)
+- Tom (01:27): "after you beat the big one and go back to Deedee and Boppy's house, everyone shifts to the right corner of the house, they should be in the center". Fact: the chapter 15 opening (ch15Table in data/scenes-ch15.js) seated all eight behind the sofa in the top-left of the room; with the stage rotated in landscape that corner lands on the right of the screen.
+- Fix: the dinner table now stands on the open floor (x 7 to 10, rows 8 and 9) and the eight seats ring it: Amy, Tom, Grace, Rose along the sofa side, Deedee and Nara on the west end, Boppy and TNB on the east end. Tom sits in the middle of his row so the camera, which follows him, centers the whole family in portrait. Row 10 stays clear for the door lane and HUSH-9.
+- Chapter 10's return to the house was checked and already starts centered; no change.
+- Tested: replayed ch15Open in portrait and landscape, tag_check, grands_walk_test.
+
 ## 2026-11-06 (320): Welcome screen on iPhone: two rows, 40% bigger, heights from real heights (`welcome4`)
 - Tom (01:32): "on iphone portrait layout, there should be two rows, the order should be Nara, TNB, Tom, Rose, Grace, second row behind tom is Deedee and Boppy and behind Grace and Rose is Amy and Justin. Ensure all height proportions across characters are correct. and enlarge everyone by 40%".
 - Portrait (engine/splash.js `SPLASH_PORT`, `splashPortLayout`): front row Nara, TNB, Tom, Rose, Grace; back row stands in the gaps behind them (Deedee, Boppy flank Tom; Amy between Rose and Grace; Justin just past Grace). Group fills the screen width, so everyone is about 40% bigger than before. Landscape (iPad) keeps its single spread line (`SPLASH_LAND`, `SPLASH_SPOTS`).
