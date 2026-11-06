@@ -14368,8 +14368,16 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Amy. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, long brown hair, workout black tank and workout shorts, colorful sneakers, cream sneakers, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except when she is in the air), each figure well inside its cell, nothing touching a cell edge. Held objects are painted in the same style as the character. Draw only her, no other people. The dress and everything held stay clearly away from magenta and pink.\n\nIn every frame she faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: False Start.\n\nRow 1:\n1. Standing tall with a stopwatch in one hand and a silver whistle in the other, watching something ahead.\n2. Raising the whistle to her lips, eyes narrowing at something ahead.\n3. Blowing the whistle, cheeks puffed, the other hand thrust out with the palm forward in a stop sign.\n\nRow 2:\n4. Stepping forward and pointing straight ahead, one stern raised eyebrow, caught you.\n5. Arms folded across her chest, a smug raised eyebrow, the stopwatch held in one hand.\n6. Clicking the stopwatch with her thumb, a smug small grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-fx-false-start-v1.png",
+     "date": "2026-11-06",
+     "from": "v1",
+     "at": 1794000573862
+    }
+   ],
    "rejects": [],
    "id": "amy-fx-false-start",
    "tab": "Characters",
