@@ -441,27 +441,13 @@ const UI=1.05/1.8;  // where the impact sits in a 1.8 s scene started on beat 1
 const NW_LIST=[];
 const nowarp=(...k)=>NW_LIST.push(...k);
 const NW=()=>{ if(typeof B2_NOWARP!=='undefined') for(const x of NW_LIST) B2_NOWARP.add(x); };
-nowarp('d_towel','d_moonline','d_badge','d_pulse','d_cornerpan','d_dishout','d_nottoday','d_bowl','d_mitts','d_mittwave','d_sightsee','d_nozzle','d_shower',
+nowarp('d_badge','d_pulse','d_cornerpan','d_dishout','d_nottoday','d_bowl','d_mitts','d_mittwave','d_sightsee','d_nozzle','d_shower',
   'd_window','d_spoon','d_breathring');
 
 // ---------- Scenes ----------
 // Dish-Towel Flick: a tiny dark pixel on the target, a towel snaps from her hand, then folds into a precise square.
-SC.d_pixel=(s,u)=>{ const x=GX+10,y=GY-30; gfx.globalAlpha=fade(u,.9); if(u<.9) { R(x-3,y-3,6,6,'#2b2a26'); if(u>.3) { ring(x,y,10+Math.sin(s.t*8)*2,10+Math.sin(s.t*8)*2,2,CREAM); label('SPOT',x,y-20,CREAM,1); } } };
-SC.d_towel=(s,u)=>{ const p=hand(),x=p.x,y=p.y-6,snap=u<UI-.04?0:ez((u-UI+.04)/.1),back=u>UI+.1?ez((u-UI+.1)/.2):0,fold=u>.8?ez((u-.8)/.15):0; gfx.globalAlpha=fade(u,.95);
-  if(fold>0) { const w=22-fold*8; RO(x-w/2,y-6,w,12,CREAM); R(x-w/2+3,y-3,w-6,2,BLUE); R(x-w/2+3,y+1,w-6,2,BLUE); if(fold>.9) label('SQUARE',x,y-22,CREAM,1); return; }
-  const len=lerp(28,96,snap)*(1-back*.7),ang=lerp(.6,-.1,snap); gfx.save(); gfx.translate(x,y); gfx.rotate(ang);
-  gfx.beginPath(); gfx.moveTo(0,-7); gfx.quadraticCurveTo(len*.5,-7-Math.sin(snap*Math.PI)*14,len,-4); gfx.lineTo(len,6); gfx.quadraticCurveTo(len*.5,8-Math.sin(snap*Math.PI)*14,0,7); gfx.closePath();
-  gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CREAM; gfx.fill(); for(let k=1;k<4;k++) Ln(len*k/4,-6,len*k/4,6,2,BLUE); gfx.restore();
-  if(snap>.9&&back<.3) label('SNAP',x+len*.9,y-22,GOLD,2); };
 
 // MOON & BACK: a measuring line stretches from her toward a small moon, loops back into a heart around the party, and runs out of numbers.
-SC.d_moonline=(s,u)=>{ const p=gpos(),x0=p.cx-30,y0=p.base-p.h*.6,mx=120,my=70,go=ez(cl(u/(UI-.05))),back=u<UI?0:ez((u-UI)/.25); gfx.globalAlpha=fade(u,.92);
-  EO(mx,my,16,16,'#fff1b0'); E(mx+6,my-2,12,12,'#1b1a2e'); gfx.globalAlpha*=.9; E(mx+6,my-2,12,12,'rgba(27,26,46,0)'); gfx.globalAlpha=fade(u,.92);
-  const ex=lerp(x0,mx+18,go),ey=lerp(y0,my+8,go); Ln(x0,y0,ex,ey,5,OUT); Ln(x0,y0,ex,ey,3,GOLD);
-  const n=Math.floor(go*9); for(let k=1;k<=n;k++) { const q=k/9,lx=lerp(x0,mx+18,q),ly=lerp(y0,my+8,q); Ln(lx,ly-5,lx,ly+5,2,OUT); if(k%3===0) label(''+(k*100000),lx,ly-16,CREAM,1); }
-  if(back>0) { const P=b2LiveParty().map(q=>home(q)),cx=P.reduce((a,b)=>a+b.x,0)/(P.length||1),cy=P.reduce((a,b)=>a+b.base-b.h*.5,0)/(P.length||1),r=lerp(0,70,back);
-    gfx.globalAlpha=fade(u,.92)*.9; gfx.strokeStyle='#7a1d3a'; gfx.lineWidth=7; heartPath(cx,cy,r); gfx.stroke(); gfx.strokeStyle=ROSE; gfx.lineWidth=4; heartPath(cx,cy,r); gfx.stroke(); gfx.strokeStyle='#ffd6e2'; gfx.lineWidth=1.5; heartPath(cx-1,cy-1,r*.97); gfx.stroke(); }
-  if(u>.84) { gfx.globalAlpha=fade(u,.92); label('...AND BACK',mx+60,my-8,GOLD,1); } };
 function heartPath(x,y,r) { gfx.beginPath(); for(let k=0;k<=36;k++) { const a=k/36*Math.PI*2,hx=16*Math.pow(Math.sin(a),3),hy=-(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a)); const px=x+hx*r/16,py=y+hy*r/16; if(k) gfx.lineTo(px,py); else gfx.moveTo(px,py); } gfx.closePath(); }
 
 // Registered Nut, Reporting: a nurse badge with NUT on a sticker by her; a pulse icon by the recipient straightens; a debuff sticker peels away.
@@ -529,18 +515,6 @@ SC.d_breathring=(s,u)=>{ const x=s.x+(s.foe?44:-44),y=s.y-s.h*.6,ph=u<UI?ez(u/UI
   if(u>.78) heart(s.x,s.y-s.h-10,5,'#ff6b9a'); };
 
 // ---------- Moves ----------
-D.dish_towel_flick=E2=>{ const {fx}=E2;
-  enqueue(()=>{ setMessage('Deedee notices a spot. Nobody else noticed a spot.'); say('deedee','dish_towel_flick'); scene('d_pixel',1.0,{}); scene('d_towel',1.9,{}); pose(fx,'expr',.5); },
-    500,()=>{ sfx.whoosh(); },
-    IMPACT,()=>{ pose(fx,'act',.4); sfx.bonk(); battle.shakeEnemy=.3; hit(E2); },
-    350,()=>{ pose(fx,'celeb',.6); sfx.select(); },
-    400,res(E2)+'The spot has been dealt with.',()=>checkEnemy()); };
-D.hugShow=E2=>{ const {m,fx}=E2;
-  enqueue(()=>{ setMessage('Deedee opens her arms. A measuring line heads for the moon.'); say('deedee','moon_back'); scene('d_moonline',1.9,{}); pose(fx,'celeb',1.0); sfx.charge(); },
-    500,()=>{ fx.hug=1.3; const h=home(m); for(const p of b2LiveParty()) { if(p===m) continue; const q=home(p); toss('dheart',h.x-10,h.base-h.h*.7,q.x,q.base-q.h*.6,0,.5,60,{spin:false,r:9}); } sfx.kiss&&sfx.kiss(); },
-    IMPACT,()=>{ E2.apply(); for(const p of b2LiveParty()) scene('glow',.9,{x:home(p).x,y:home(p).base-40,rx:40,ry:56,c:'#ff9ac0',a:.35}); sfx.fountain(); bt('TO THE MOON',96,22,GOLD,2,1.2); },
-    500,()=>{ for(const p of b2LiveParty()) if(p!==m) battle.fx[p.idx].hop=.3; sfx.heal(); },
-    300,'There\'s no shortened version of this love. Everyone is Tucked In.',()=>checkEnemy()); };
 D.registered_nut=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,h=home(t);
   enqueue(()=>{ setMessage('Deedee straightens her badge. The sticker says NUT.'); say('deedee','registered_nut'); scene('d_badge',1.0,{}); pose(fx,'expr',.9); },
     500,()=>{ scene('d_pulse',1.4,{x:h.x,y:h.base,h:h.h,foe:t.side==='foe'}); sfx.beep&&sfx.beep(); },
@@ -571,9 +545,8 @@ D.garden_shower=E2=>{ const {fx}=E2;
     IMPACT,()=>{ sfx.splat(); battle.shakeEnemy=.3; battle.enemyWobble=.4; hit(E2); },
     500,()=>{ pose(fx,'celeb',.5); sfx.select(); },
     300,res(E2)+'The watering schedule was ambitious.',()=>checkEnemy()); };
-D.moon_back=E2=>D.hugShow(E2);   // the Option 3 signature key (data/abilities.js); the legacy key stays 'hug'
 // Every move registers the unwarped scenes first (see NW above).
-for(const k of ['dish_towel_flick','hugShow','moon_back','registered_nut','corner_piece','oven_mitt_ultimatum',
+for(const k of ['registered_nut','corner_piece','oven_mitt_ultimatum',
   'brisk_means_brisk','garden_shower']) { const f=D[k]; D[k]=E2=>{ NW(); return f(E2); }; }
 })();
 
@@ -623,46 +596,8 @@ SC.dd_poof=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+s
 
 // ---------- Dish-Towel Flick ----------
 SC.dd_spot=(s,u)=>{ const ms=s.t*1000; if(ms>s.gone) return; gfx.globalAlpha=1; if(!DFX.P('dirt_smudge',s.x,s.y,{w:34})) R(s.x-3,s.y-3,6,6,'#2b2a26'); if(ms>s.seen) { ring(s.x,s.y,10+Math.sin(s.t*8)*2,10+Math.sin(s.t*8)*2,2,CREAM); label('SPOT',s.x,s.y-20,CREAM,1); } };
-SC.dd_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.globalAlpha=fade(u,.96);
-  if(ms>P.fold) { const f=ez((ms-P.fold)/350),w=26-f*12; RO(x-w/2,y-6,w,12,CREAM); R(x-w/2+3,y-3,w-6,2,BLUE); R(x-w/2+3,y+1,w-6,2,BLUE); if(f>.9) label('SQUARE',x,y-22,CREAM,1); return; }
-  const snap=ms<P.snap-100?0:Math.sin(cl((ms-P.snap+100)/350)*Math.PI),len=lerp(28,110,snap),ang=lerp(.9,-.05,snap); gfx.save(); gfx.translate(x,y); gfx.rotate(Math.PI-ang);
-  gfx.beginPath(); gfx.moveTo(0,-7); gfx.quadraticCurveTo(len*.5,-7-snap*14,len,-4); gfx.lineTo(len,6); gfx.quadraticCurveTo(len*.5,8-snap*14,0,7); gfx.closePath(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CREAM; gfx.fill();
-  for(let k=1;k<4;k++) Ln(len*k/4,-6,len*k/4,6,2,BLUE); gfx.restore(); if(snap>.8) label('SNAP',x-len*.8,y-24,GOLD,2); };
-D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
-  const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'throw',dx:-8},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dd_towel',3.0,{plan:{snap:1850,fold:2150}}); }],
-    [1500,()=>{ sfx.whoosh(); }],
-    ['hf',1850],
-    [1850,()=>{ sfx.bonk(); ST.jolt(f,.35); landHit(100); scene('dd_poof',.5,{x:F.x+8,y:F.mid-8,c:BLUE,n:8}); }],
-    [2150,()=>{ sfx.select(); setMessage('She folds the towel into a precise square.'); }],
-    [4000,'end',res(E2)+'The spot has been dealt with.']]); };
 
 // ---------- MOON & BACK ----------
-SC.dd_moon=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),mx=110,my=60,go=ez((ms-P.go)/(P.top-P.go)),bk=ez((ms-P.top)/(P.heart-P.top)); gfx.globalAlpha=fade(u,.94);
-  EO(mx,my,16,16,'#fff1b0'); E(mx+6,my-2,12,12,'#1b1a2e');
-  const x0=P.x0??h.x,y0=P.y0??h.y; if(ms>P.go&&ms<P.heart+300) { const ex=lerp(x0,mx+18,go),ey=lerp(y0,my+8,go); Ln(x0,y0,ex,ey,5,OUT); Ln(x0,y0,ex,ey,3,GOLD);
-    const n=Math.floor(go*9); for(let k=1;k<=n;k++) { const q=k/9,lx=lerp(x0,mx+18,q),ly=lerp(y0,my+8,q); Ln(lx,ly-5,lx,ly+5,2,OUT); if(k%3===0) label(''+(k*100000),lx,ly-16,CREAM,1); }
-    if(bk>0) { Ln(mx+18,my+8,lerp(mx+18,P.cx,bk),lerp(my+8,P.cy,bk),5,OUT); Ln(mx+18,my+8,lerp(mx+18,P.cx,bk),lerp(my+8,P.cy,bk),3,ROSE); } }
-  if(ms>P.top&&ms<P.top+900) label('TO THE MOON',mx+70,my-6,GOLD,1);
-  if(ms>P.heart) { const r=lerp(0,P.r,ez((ms-P.heart)/350)); for(const [w,c] of [[7,'#7a1d3a'],[4,ROSE],[1.5,'#ffd6e2']]) { gfx.strokeStyle=c; gfx.lineWidth=w; heartPath(P.cx,P.cy,r); gfx.stroke(); } if(ms>P.heart+300) label('...AND BACK',P.cx,P.cy-P.r-20,GOLD,2); } };
-D.hugShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m),U=party.map(p=>ST.unit(p)),me=ST.unit(m);
-  const cx=Math.round(U.reduce((a,q)=>a+q.x,0)/U.length),cy=Math.round(U.reduce((a,q)=>a+q.mid,0)/U.length),px=cx-20,py=Math.min(316,Math.round(U.reduce((a,q)=>a+q.base,0)/U.length)+18);
-  const K=[{t:0,x:'home',y:'home',f:px<me.x?'walk':'walkR',hop:3,hn:5},{t:700,x:px,y:py,f:DD_XF('hug','spread')},{t:900,f:'celeb'},{t:1700,f:DD_XF('hug','spread')}];
-  let t=1800; const visits=[];
-  for(const o of others) { const q=ST.unit(o),x=Math.min(560,q.x+q.w*.5+18),y=Math.min(316,q.base+3); K.push({t,f:'run'}); t+=380; K.push({t,x,y,f:'spread',dx:(u,tt)=>Math.sin(tt*20)*1.5}); visits.push([t,o]); t+=260; }
-  const heartAt=t; K.push({t,f:'celeb',hop:10},{t:t+400,f:'walk'},{t:t+1000,x:'home',y:'home',f:'idle'});
-  ST.keys(fx,K);
-  const plan={go:900,top:1600,heart:heartAt-500,cx,cy,r:Math.max(70,(Math.max(...U.map(q=>q.x))-Math.min(...U.map(q=>q.x)))*.7+30),x0:px-20,y0:py-DH()*.8};
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee walks into the middle of everyone and opens her arms.'); say(m.id,'moon_back'); scene('dd_moon',(heartAt+1200)/1000,{plan}); }],
-    [900,()=>{ sfx.charge(); setMessage('A measuring line heads for the moon. And keeps going.'); }],
-    [1700,()=>{ setMessage('Then it comes all the way back. One hug each.'); }],
-    ...visits.map(([ms,o])=>[ms,()=>{ const q=ST.unit(o); scene('dd_heart',.9,{x:q.x,y:q.top-4}); battle.fx[o.idx].hop=.3; sfx.kiss?sfx.kiss():sfx.select(); }]),
-    ['hf',heartAt],
-    [heartAt,()=>{ E2.apply(); for(const p of party) { const q=ST.unit(p); scene('dd_glow',.9,{x:q.x,y:q.mid,c:ROSE}); } sfx.fountain?sfx.fountain():sfx.heal(); sfx.heal(); }],
-    [heartAt+1100,'end','There\'s no shortened version of this love. Everyone is Tucked In.']]); };
-D.moon_back=E2=>D.hugShow(E2);
 
 // ---------- Registered Nut, Reporting ----------
 SC.dd_badge=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,x=st.x+4,y=st.y-DH()*.40,tilt=lerp(.35,0,ez((ms-s.fix)/300)); gfx.globalAlpha=fade(u,.95); gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); gfx.scale(.8,.8);
@@ -860,25 +795,6 @@ sfx.toot=(d=0)=>{
 };
 
 // ---------- Dish-Towel Flick (basic, kept: only the towel is bigger) ----------
-SC.dv_towel=(s,u)=>{ const ms=s.t*1000,P=s.plan,h=hand(),x=h.x,y=h.y; gfx.globalAlpha=fade(u,.96);
-  if(ms>P.fold) { const f=ez((ms-P.fold)/350),w=58-f*24; RO(x-w/2-10,y-14,w,28,CREAM); for(const dy of [-7,0,7]) R(x-w/2-6,y+dy-1,w-8,3,BLUE); if(f>.9) bigWord('SQUARE',x-10,y-36,CREAM,2); return; }
-  const reach=Math.max(80,x-s.tx+16),snap=ms<P.snap-120?0:Math.sin(cl((ms-P.snap+120)/380)*Math.PI),wob=ms>P.wind&&ms<P.snap-120?Math.sin(ms/45)*.18:0;
-  const len=lerp(60,reach,snap),ang=lerp(1.0,-.05,snap)+wob,th=16;
-  gfx.save(); gfx.translate(x,y); gfx.rotate(Math.PI-ang);
-  gfx.beginPath(); gfx.moveTo(0,-th); gfx.quadraticCurveTo(len*.5,-th-snap*26,len,-th*.6); gfx.lineTo(len+8,th*.8); gfx.quadraticCurveTo(len*.5,th-snap*26,0,th); gfx.closePath();
-  gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle=CREAM; gfx.fill();
-  for(let k=1;k<5;k++) Ln(len*k/5,-th*.8-snap*18*Math.sin(k/5*Math.PI),len*k/5+2,th*.8-snap*18*Math.sin(k/5*Math.PI),4,BLUE);
-  for(let k=0;k<4;k++) Ln(len+8,-th*.4+k*th*.4,len+16,-th*.5+k*th*.4,2,CREAM);
-  gfx.restore(); if(snap>.75) bigWord('SNAP!',x-len*.6,y-44,GOLD,3); };
-D.dish_towel_flick=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,40),me=ST.unit(m);
-  ST.keys(fx,[{t:0,x:'home',y:'home',f:brisk,hop:3,hn:8},{t:1000,x:p.x,y:p.y,f:'aim',dx:u=>-ez(u)*6},{t:1500,f:'wind'},{t:1750,f:'throw',dx:-8},{t:2150,f:'clap'},{t:2600,f:'hip'},{t:2950,f:back(p.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}]);
-  ST.play(E2,[
-    [0,()=>{ setMessage('Deedee power-walks over. She\'s seen a spot. Nobody else has seen a spot.'); say(m.id,'dish_towel_flick'); scene('dd_spot',2.0,{x:F.x+8,y:F.mid-8,seen:1000,gone:1850}); scene('dv_towel',3.0,{tx:F.x+8,plan:{wind:1500,snap:1850,fold:2150}}); }],
-    [1500,()=>{ sfx.whoosh(); setMessage('She twists her big dish towel into a rope.'); }],
-    ['hf',1850],
-    [1850,()=>{ sfx.bonk(); sfx.slash&&sfx.slash(); ST.jolt(f,.45); landHit(100); scene('dv_rings',.5,{x:F.x+8,y:F.mid-8,c:BLUE,r:36}); scene('dv_big',1.1,{x:F.x,y:F.top-74,txt:'FLICK!',c:CREAM,sc:4}); }],
-    [2150,()=>{ sfx.select(); setMessage('She folds the towel into a precise square.'); }],
-    [4000,'end',res(E2)+'The spot has been dealt with.']]); };
 
 // ---------- Registered Nut, Reporting (A1, kept: big stethoscope and a bandage pop) ----------
 SC.dv_steth=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const ms=s.t*1000,P=s.P,hd=head(st),own={x:st.x-6,y:st.y-DH()*.40},go=ez((ms-P.on)/300);

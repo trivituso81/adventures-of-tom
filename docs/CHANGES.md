@@ -1,3 +1,9 @@
+## 2026-11-06 (357): Deedee fx rest: old Dish-Towel Flick and Moon & Back code purged (`dfx4`)
+- Fact: the painted towel (towel_snap, towel_twist, towel_folded), moonbeam_soft, moon_crescent and measuring_tape props were already wired by the last `D.dish_towel_flick` and `D.hugShow` in engine/deedee-moves.js (scenes `df_towel`, `df_moon`). Three older generations of the same moves still sat above them.
+- Purged from engine/deedee-moves.js: older `D.dish_towel_flick` x3, `D.hugShow` x2, `D.moon_back` x2, scenes `d_pixel`, `d_towel`, `d_moonline`, `dd_towel`, `dd_moon`, `dv_towel`, the nowarp names and wrapper keys for them. grep 0 references. Behavior unchanged: numbers, lines, VP, timing the same. Tombo props `deedee/dish_towel` and `deedee/moon` are used by other moves and stay.
+- Tag `deedee-moves.js?v=dfx4`. Tested: kit_test deedee dish_towel_flick and moon_back (0 fails), smoke 0 fails, unused_voice 0.
+- Note: the generated moonbeam_soft art is warm gold, Tom asked for silver-blue.
+
 ## 2026-11-06 (356): Portrait dialogue box sized for 4 lines (`dlg4`)
 - Tom (08:14): the box had become too tall. Portrait `#dialog-text` fixed height goes from 5 lines to 4 (16px at 1.4 = 89.6px), so the box is 112px (was 134px, 13.1% of an 852px screen). Landscape unchanged.
 - Measured: 130 of 137 dialogue lines over 70 characters fit in 4 lines at 16px; 7 (mostly tutorial and help panels, 5 to 6 lines) now shrink their font via `fitDialogText`. index.html only (inline CSS, untagged).
