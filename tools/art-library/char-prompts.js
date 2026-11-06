@@ -1871,4 +1871,5 @@ for (const [id, who] of Object.entries(EMOTION_CAST)) {
   const dog = id === 'nara';   // Nara: her own prompt, dog body language (Tom 2026-11-06 00:09)
   entries.push({ id: id + '-emotions', tab: 'Characters', group: who, title: who + (dog ? ' emotion sheet: 8 feelings, dog body language' : ' emotion sheet: 8 feelings, full body') + ' (happy, loving, sad, angry, scared, surprised, proud, unimpressed)', ar: '2:1', refs: [R + id + '-hero-ref-v1.png'], prompt: P(dog ? 'dog-emotion-sheet.txt' : 'char-emotion-sheet.txt') });
 }
+entries.push(...require('./jojo-prompts.js').entries);   // Jojo hero, walk, Frisbee Golf frames (Tom 2026-11-06 11:19)
 module.exports = { entries };

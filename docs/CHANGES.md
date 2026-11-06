@@ -1,3 +1,9 @@
+## 2026-11-06 (368): Jojo in the Art Library: hero, walk sheet, Frisbee Golf frames (Art Library only)
+
+- Fact (Tom 11:19): Jojo had no Characters entries of her own, only TNB's `tnb-ab-round-with-jojo` and `tnb-fx-round-with-jojo`. Added group Jojo with three drafts (3 Generate presses in all): `jojo-hero` (3:4; Tom adds his full body photo and face close-up in the Library via two own-photo slots, which stay on his device; style and head size copied from `justin-hero-ref-v1.png`), `jojo-walk-sheet` (3 x 3, refs her approved hero and Justin's walk sheet for layout), `jojo-ab-round-with-jojo` (3 x 2, six frames matching the beats her move already draws: turn and wave, backwards jog, leap, catch, hop cheer, thumbs up; refs her hero, her walk and TNB's approved sheet for staging).
+- No fx entry (the disc and basket are in `tnb-fx-round-with-jojo`). No new spoken line. Entries live in `tools/art-library/jojo-prompts.js` (pushed from `char-prompts.js`) and were appended to `data/art-prompts.json` directly (660 entries, the first 657 asserted unchanged; `make-prompts.js` already fails on main with "missing character deedee", not touched).
+- Not installed: the game still has Jojo's older painted overworld and battle frames (`data/jojo-hires*.js`). Install comes only after Tom approves each sheet.
+
 ## 2026-11-06 (367): Welcome screen, wide layout: Tom centred under the logo (`welcomecast1`)
 
 - Fact (Tom 11:43): on larger windows (wider than tall) Tom stands dead centre below the logo. Left of him: TNB, then Nara. Right of him, front row: Rose, Grace, Deedee, Boppy. Amy and Justin stand behind Rose and Grace.
