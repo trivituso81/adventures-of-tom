@@ -15543,6 +15543,12 @@
      "note": "doesnt follow instructions",
      "from": "v3",
      "at": 1794044667772
+    },
+    {
+     "date": "2026-11-07",
+     "note": "duplicate characters, Tom doesnt get scared",
+     "from": "v4",
+     "at": 1794044687138
     }
    ],
    "status": "rejected"
