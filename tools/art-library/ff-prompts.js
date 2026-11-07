@@ -94,7 +94,7 @@ function entry([ff, name, key, who, beat, frames]) {
   return {
     id: ff + '-' + key,
     tab: 'Characters',
-    group: 'Family Finishes, ' + name,
+    group: 'Finish, ' + name,
     title: 'Family Finish: ' + name + ' (' + who + ')',
     ar: '3:2',
     refs: [R + key + '-hero-ref-v1.png', R + key + '-battle-sheet-1-v1.png'],
