@@ -1,0 +1,66 @@
+// Tom + Nara split rows (nara1 to nara3). Beats from the live B2_TOMBO_ANIM.nara1..3 in engine/battle2-kind.js. Nara is a medium dog: no hands.
+// nara3 (Cuddle) draws no standalone object in the live code (only effects), so its objects list is empty.
+module.exports = [
+  { id: 'nara1', name: 'Sit. Paw. Treat.', rides: false,
+    beat: 'Tom asks Nara to sit, then paw, then tosses a treat and gets a lick on the cheek.',
+    tom: [
+      'Tom walks forward with one hand raised high and closed around nothing, a calm dry face.',
+      'Tom stands with one hand raised high and closed around nothing, pointing down with the other forefinger, calm and firm.',
+      'Tom holds out one open hand low in front of him, palm up, with a patient look.',
+      'Tom bends down with one hand held out and gently closed around nothing, a pleased grin.',
+      'Tom tosses one hand up and forward in a high underhand flick, his eyes following it upward.',
+      'Tom crouches low with his eyes squeezed shut and a small warm smile, his cheek turned to one side.',
+    ],
+    partner: [
+      'Nara trots forward with her ears up and her tail high, looking up with bright eyes.',
+      'Nara sits on the ground with her whole body wiggling, her tail sweeping and her tongue out.',
+      'Nara sits and lifts one front paw high with her tongue out and a hopeful face.',
+      'Nara sits tall and proud with one front paw raised, her chest out and her head high.',
+      'Nara leaps up off the ground with her mouth wide open and her ears flying back.',
+      'Nara hops up on her back legs with her front paws raised and her tongue out, tail wagging, happily reaching up.',
+    ],
+    objects: [
+      ['A small bone-shaped dog treat', 'a plump tan biscuit shaped like a bone with rounded ends, a lightly toasted golden brown with a few darker flecks, matte and crunchy looking'],
+      ['A giant soft dog paw', 'a huge round cartoon dog paw pad shown from below, a big dark brown central pad with four smaller toe pads above it, surrounded by short warm tan fur, flat and crisp edged, with no leg and no animal attached'],
+    ] },
+  { id: 'nara2', name: 'Tug of War', rides: false,
+    beat: 'Tom and Nara pull on a knotted rope toy until Nara wins.',
+    tom: [
+      'Tom stands facing forward with both hands open at his sides and a calm face.',
+      'Tom leans back politely with his feet planted and both hands closed around nothing in front of him, a mild face.',
+      'Tom leans far back with both hands gripping nothing and his mouth open in surprise.',
+      'Tom lurches forward off his feet with both hands held out and gripping nothing, his eyes wide.',
+      'Tom tumbles through the air in a rolling somersault with one hand closed around nothing.',
+      'Tom sits dizzy on the ground with his legs out and his head tilted, eyes swirling.',
+    ],
+    partner: [
+      'Nara stands with her head level and her jaws clamped closed, her tail up and her eyes fixed forward.',
+      'Nara growls with her ears flat and shakes her head to one side, jaws clamped closed.',
+      'Nara braces with all four paws planted wide and her body low, pulling back with her jaws clamped closed.',
+      'Nara yanks her head back with a big jerk, her neck stretched and her jaws clamped closed.',
+      'Nara stands steady with her four paws apart, her head level and a satisfied look.',
+      'Nara prances proudly with her head high, her tongue out and her tail wagging.',
+    ],
+    objects: [
+      ['A knotted rope tug toy', 'a thick twisted rope about two arm lengths long with a big round knot at each end and one in the middle, braided in red, white and blue stripes, shown stretched out slightly curved, with soft frayed tips'],
+    ] },
+  { id: 'nara3', name: 'Cuddle', rides: false,
+    beat: 'Tom kneels low and sad until Nara climbs into his lap and he smiles.',
+    tom: [
+      'Tom kneels on one knee with his head down and his shoulders slumped, a sad tired face.',
+      'Tom kneels with his head still down and his hands resting on his knees.',
+      'Tom lifts his head in surprise with his eyebrows raised and his mouth a little open.',
+      'Tom kneels looking down with his knees together, one hand reaching out low, and his first small smile.',
+      'Tom kneels hugging his arms in a circle around nothing against his chest, his eyes closed and a gentle smile.',
+      'Tom stands with a relaxed happy smile and one hand lowered as if patting something at knee height.',
+    ],
+    partner: [
+      'Nara stands with her ears up and her head turned as if looking at someone, her tail low.',
+      'Nara trots forward with her nose low and her tail up.',
+      'Nara runs with her ears back and her tail up, stretched out in a lively gallop.',
+      'Nara climbs up with her front paws raised and her back legs on the ground, looking up and eager.',
+      'Nara sits low and snuggled with her head tucked down and her eyes closed, content.',
+      'Nara hops in the air with her ears flying and her tail wagging, happy.',
+    ],
+    objects: [] },
+];
