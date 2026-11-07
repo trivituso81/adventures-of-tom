@@ -1,3 +1,10 @@
+## 2026-11-07 (419): Tombo sheets, slice 6: the three Tom + TNB Tombos in the Art Library (no game change)
+
+- Slice 6 of the Tombo queue: `tombo-tnb1` (Popcorn Jump), `tombo-tnb2` (Measure Twice), `tombo-tnb3` (Cone Six Across the Miles). Beats from `B2_TOMBO_ANIM.tnb1`, `tnb2`, `tnb3` in engine/battle2-kind.js (each defined once, lines 696, 1137, 2294). All grown-up, no flashbacks. Kisses are written as a kiss on the cheek.
+- Files: `tools/art-library/tombo-prompts.js` (three rows), `data/art-prompts.json` (three entries appended, additions only). Refs per entry: Tom hero, TNB hero, Tom battle sheet 1 (old sheet, same as slices 1 to 5), TNB battle sheet 1.
+- Checks: `node tools/art-library/validate.js` OK (703 entries); tombo module alone OK (18 entries).
+- Not done: no game files, no tag bump, no Generate presses (3 for this slice). Pending: Nara, then Family Finish and Director's Cut entries.
+
 ## 2026-11-07 (418): Tombo sheets, slice 5: the three Tom + Boppy Tombos in the Art Library (no game change)
 
 - Slice 5 of the Tombo queue: `tombo-boppy1` (You Hold the Net), `tombo-boppy2` (Nobody Gets Past Us), `tombo-boppy3` (Garden Lesson). Beats from the last definitions of `B2_TOMBO_ANIM.boppy1`, `boppy2`, `boppy3` in engine/battle2-kind.js (the `// ===== Tom + Boppy` block near line 6100 overrides the earlier ones). No flashbacks: all three are the grown-up pair.

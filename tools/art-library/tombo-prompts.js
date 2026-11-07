@@ -2,7 +2,7 @@
 // Beats come from the LIVE animations in engine/battle2-kind.js (the comment block above each B2_TOMBO_ANIM.<id>), not from claude/battle-design.md,
 // which is out of date (its names and beats differ from the game). Names are the live names in B2_TOMBOS (data/battle2-data.js).
 // Each row: [id, live name, partner key, partner name, what Tom does, what the partner does, six frames].
-// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 5: the three Tom + Boppy Tombos (all grown-up, no flashbacks). Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 9 Tombos are added in the same shape, one partner per push.
+// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 5: the three Tom + Boppy Tombos (all grown-up, no flashbacks). Slice 6: the three Tom + TNB Tombos. Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 9 Tombos are added in the same shape, one partner per push.
 // Entries are copied into data/art-prompts.json by a node one-liner that keeps every other entry untouched (never run make-prompts.js: it rewrites hand edits).
 // Groups use a comma, not a colon, because validate.js bans colons in group names.
 const fs = require('fs');
@@ -174,6 +174,39 @@ const TOMBOS = [
       'Boppy turns Tom\'s seedling upright with both hands and a long-suffering sigh; Tom looks on with sheepish wide eyes.',
       'Tall green tomato vines have shot up out of the raised bed above Tom and Boppy, heavy with huge red tomatoes; both look up with their mouths open.',
       'Boppy stands beside the vines taking a bite of a red pepper with a calm face and a bead of sweat; Tom beside him gives a small thumbs up.',
+    ]],
+  ['tnb1', 'Popcorn Jump', 'tnb', 'TNB',
+    'sits on the couch with a giant bowl of popcorn, jumps out of his seat when the slasher appears, then laughs',
+    'sits beside him with a blanket, jumps too and flings the bowl up, then laughs and kisses Tom on the cheek',
+    [
+      'Tom and TNB sit side by side on a couch under one blanket in a dark living room lit blue by a TV, a giant bowl of popcorn between them; both are relaxed.',
+      'A masked slasher with a plastic knife jumps out on the TV screen; Tom and TNB stare wide-eyed with their mouths open, popcorn mid-air.',
+      'Tom and TNB both leap straight up off the couch with their arms flung out and the blanket flying; the giant popcorn bowl tumbles up above them.',
+      'Popcorn rains down all around them as the giant bowl flips over high above; Tom and TNB cover their heads and squint.',
+      'Tom and TNB stand with popcorn in their hair and on their shoulders, both laughing with their hands on their tummies.',
+      'TNB kisses Tom on the cheek as Tom smiles with his eyes closed; a warm golden glow surrounds them, popcorn scattered at their feet.',
+    ]],
+  ['tnb2', 'Measure Twice', 'tnb', 'TNB',
+    'climbs into the front cab of a silver subway train in conductor sunglasses and blows the horn',
+    'hops up and surfs the roof of the train on his longboard, tossing gold transfer cards to everyone',
+    [
+      'A silver subway train with a red stripe pulls into an underground station with tiled walls and a red METRO sign; Tom and TNB stand on the platform watching it arrive.',
+      'Tom climbs up into the front cab of the train and puts on conductor sunglasses with a calm face; TNB stands beside the train looking up at him.',
+      'TNB hops onto the roof of the train with his longboard under his feet and his arms out for balance; Tom leans out of the cab window with a thumbs up.',
+      'TNB surfs the train roof in a low crouch and tosses a spray of gold transfer cards into the air; Tom grips the controls in the cab.',
+      'Tom pulls the horn cord with a big grin and his sunglasses low; TNB keeps surfing on the roof with a card in each hand.',
+      'The train barrels toward the viewer at full speed with a red headlight glow and motion streaks; Tom drives and TNB surfs, both grinning.',
+    ]],
+  ['tnb3', 'Cone Six Across the Miles', 'tnb', 'TNB',
+    'holds a matching ceramic cup and a coffee on the far side of a cold blue wall, then walks toward TNB and clinks cups',
+    'holds the first cup he ever threw, glowing warm from the kiln, walks toward Tom through a golden thread and clinks cups',
+    [
+      'A cold blue wall splits the picture in two with the words 2475 MILES on it; TNB stands on a sunny California side holding a small glowing handmade ceramic cup, and Tom stands on a snowy New York side holding the matching cup with coffee.',
+      'A thin golden thread stretches between the two cups straight through the blue wall; Tom and TNB each look at their cup with a soft smile.',
+      'Tom and TNB walk toward each other along the golden thread as the picture folds in half like a map, the wall crumpling in the middle.',
+      'The cold blue wall shatters into glittering pieces between them as Tom and TNB reach out with their cups held high.',
+      'Tom and TNB clink their two matching cups together in a burst of warm golden light, both beaming.',
+      'TNB kisses Tom on the cheek as Tom smiles with his eyes closed, both holding their cups; a warm orange kiln glow and golden sparkles surround them.',
     ]],
 ];
 
