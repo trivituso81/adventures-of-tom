@@ -1,3 +1,12 @@
+## 2026-11-07 (425): Director's Cut sheets: 31 Art Library entries (no game change)
+
+- Fact: 21 Tom + partner pair sheets (ids `tombo-<id>-dc`, e.g. `tombo-grace1-dc`, group "Director's Cut, Tom + <name>") and 10 solo Family Finish member sheets (ids `ff1dc-tom`, `ff1dc-tnb`, `ff1dc-grace`, `ff1dc-rose`, `ff2dc-amy`, `ff2dc-grace`, `ff2dc-rose`, `ff3dc-deedee`, `ff3dc-boppy`, `ff3dc-tom`, group "Director's Cut, <finish name>"). ff4 (whole party) has none. Beats from the LAST `B2_TOMBO_ANIM.<id>_dc` definitions in engine/battle2-kind.js and names in `B2_TOMBOS` (the later Amy, Deedee and Boppy rewrites win: Opening Night, Party Decorators, Clean As You Go, Trip to Italy, Quiet on Cattail Pier, Measure Twice, Pepper Contest).
+- Built to the 423 lesson: every beat is a plain pose of the people plus held, worn, sat-on or touched props. No monsters, scenery, glow, text or numbers (Judge Grace's scores are shown with fingers; the Amy2 banner is plain triangles; geysers and sprays are shown only by wet hair and faces). The live name is left out of the prompt body (it stays in the title) because names like Pier, Train and Table cue scenery. Rose rides Tom in rose1, rose2, rose3, so those three take the fifth ref `tomride-poses-v2.png`. Pair header is `char-tombo-sheet.txt`, solo header `char-ff-sheet.txt`.
+- Files: `tools/art-library/dc-prompts.js` (new), `data/art-prompts.json` (31 entries appended, additions only).
+- Checks: `node tools/art-library/validate.js` OK (747 entries), module alone OK (31), no left or right words.
+- Not done: no game files, no tag bump, no Generate presses (Claude never presses). Not tested on the generator: if a pair drifts twice, split into `tombo-<id>-dc-tom` and `tombo-<id>-dc-<partner>`.
+- Pair and solo headers are the current `char-tombo-sheet.txt` (424 wording: full body when seated, nothing touching a cell edge) and `char-ff-sheet.txt`.
+
 ## 2026-11-07 (424): Tombo header rewritten in the wording of the ability sheets (Art Library entries only, no game change)
 
 - Fact: after the plain-pose rewrite (423) Tom pressed tnb1 Popcorn Jump: magenta ground and no extras came out right, but 5 of 6 frames were cropped at the waist or knees because the pair sat on a couch and filled the cell edge to edge. Only the jump frame was full body. The Tombo header lacked the lines that make the ability sheets work.
