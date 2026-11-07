@@ -1,3 +1,10 @@
+## 2026-11-06 (413): Amy's re-recorded dialogue merged (`amyvoice1`)
+
+- Tom sent a Voice Library export (2,045 clips, all voices). Filtered to Amy: 200 dialogue clips, all already in the game. 43 had new audio (ch5 19, ch25 16, ch28 8); the other 157 matched byte for byte and were left alone. No battle clips, nothing added or removed, voice-clips.js unchanged.
+- Words in the recording that differ from the on-screen line (the clip plays by on-screen text, so the game text is unchanged): ch5 text from Justin (cookie vs casserole), "Did we save a cookie for Dad?" (script says casserole for Daddy), "sign-up sheet is in there" (script adds "must be"), "the good uncle" (script says "a good uncle").
+- Checks: unused_voice 0, tag_check ok, smoke FAILS [].
+- Tags: `amyvoice1` (dialog-ch28.js, dialog-cast.js, main.js stamp).
+
 ## 2026-11-06 (412): Every taxi exit: zoom in, then Tom stretches (`taxizoom1`)
 
 - Tom (16:47): when Tom steps out of the taxi stand at the start of every relevant chapter he does his stretch, and the zoom happens right before it (in chapter 3 it only started later). Second note (16:49): the crouch before the hug should face left toward the girls, arms open.
