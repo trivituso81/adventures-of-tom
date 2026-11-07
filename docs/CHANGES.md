@@ -1,3 +1,10 @@
+## 2026-11-07 (417): Tombo sheets, slice 4: the three Tom + Deedee Tombos in the Art Library (no game change)
+
+- Slice 4 of the Tombo queue: `tombo-deedee1` (Wine and Gossip), `tombo-deedee2` (Pick the Rhubarb), `tombo-deedee3` (Tom Cooks for Mom). Beats from the last definitions of `B2_TOMBO_ANIM.deedee1`, `deedee2`, `deedee3` in engine/battle2-kind.js (deedee1 at ~5913 and deedee3 at ~6049 override the earlier ones). No flashbacks: all three are the grown-up pair.
+- Files: `tools/art-library/tombo-prompts.js` (three rows), `data/art-prompts.json` (three entries appended, additions only). Refs per entry: Tom hero, Deedee hero, Tom battle sheet 1 (old sheet, same as slices 1 to 3), Deedee battle sheet 1.
+- Checks: `node tools/art-library/validate.js` OK (697 entries); tombo module alone OK (12 entries).
+- Not done: no game files, no tag bump, no Generate presses (3 for this slice). Pending: Boppy, TNB, Nara, then Family Finish and Director's Cut entries.
+
 ## 2026-11-06 (416): Tombo sheets, slice 3: the three Tom + Amy Tombos in the Art Library (no game change)
 
 - Slice 3 of the Tombo queue: `tombo-amy1` (I Called It!), `tombo-amy2` (Ymamot Creation), `tombo-amy3` (Knock It Off!). Beats from the last definitions of `B2_TOMBO_ANIM.amy1`, `amy2`, `amy3` in engine/battle2-kind.js.

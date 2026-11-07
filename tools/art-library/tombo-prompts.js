@@ -2,7 +2,7 @@
 // Beats come from the LIVE animations in engine/battle2-kind.js (the comment block above each B2_TOMBO_ANIM.<id>), not from claude/battle-design.md,
 // which is out of date (its names and beats differ from the game). Names are the live names in B2_TOMBOS (data/battle2-data.js).
 // Each row: [id, live name, partner key, partner name, what Tom does, what the partner does, six frames].
-// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 12 Tombos are added in the same shape, one partner per push.
+// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 12 Tombos are added in the same shape, one partner per push.
 // Entries are copied into data/art-prompts.json by a node one-liner that keeps every other entry untouched (never run make-prompts.js: it rewrites hand edits).
 // Groups use a comma, not a colon, because validate.js bans colons in group names.
 const fs = require('fs');
@@ -108,6 +108,39 @@ const TOMBOS = [
       'Little Tom swings a pillow with both hands in a big arc; little Amy ducks and the pillow sweeps over her head.',
       'Little Tom and little Amy both swing cushions at the same moment and spin, tumbling off balance with their feet in the air.',
       'Little Tom and little Amy freeze in place, wide-eyed, each holding a cushion mid-swing, looking toward a doorway.',
+    ]],
+  ['deedee1', 'Wine and Gossip', 'deedee', 'Deedee',
+    'sits at a small bistro table with a glass of wine, clinks, leans in to whisper, gasps with a hand on his chest and ends up holding a warm pan of rhubarb crisp',
+    'sits across from him with her own glass, clinks, whispers behind her hand, points, gasps, then brings out a pan of rhubarb crisp with a proud smile',
+    [
+      'Tom and Deedee sit on either side of a small round bistro table, each holding a glass of red wine, both sitting up straight.',
+      'Tom and Deedee clink their wine glasses over the middle of the table, both smiling.',
+      'Tom and Deedee lean in toward each other over the table; Deedee whispers behind her hand and Tom tilts his head to listen.',
+      'Tom and Deedee both turn to look at the same spot off in the distance with slow, wide eyes; Deedee points one finger.',
+      'Tom and Deedee gasp together, each with a hand pressed to the chest and a mouth open in a big O.',
+      'Deedee holds up a golden baking pan of rhubarb crisp with oven mitts, beaming; Tom raises his glass beside her with a pleased grin.',
+    ]],
+  ['deedee2', 'Pick the Rhubarb', 'deedee', 'Deedee',
+    'grabs a giant leafy rhubarb stalk with both hands, pulls until it will not budge, then gets yanked off his feet and lands sitting on the ground',
+    'points at the stalk with hands on her hips, grabs Tom around the waist from behind, heaves with him, lands sitting, then takes the stalk and tosses golden pie tins',
+    [
+      'Deedee stands in a garden bed with her hands on her hips and points at a giant leafy rhubarb stalk with her chin up; Tom stands beside it, looking at the stalk.',
+      'Tom grips the rhubarb stalk with both hands and leans back with his feet planted, straining; Deedee watches with her arms folded.',
+      'Tom stands with the stalk in his hands and a flat, tired look on his face; Deedee steps in behind him and wraps both arms around his waist.',
+      'Tom and Deedee lean far back in a line, both pulling on the stalk with their teeth gritted and their eyes squeezed shut.',
+      'Tom and Deedee sit on the ground in a heap with dirt flying around them; Tom holds the stalk with a mass of dangling roots at its base.',
+      'Deedee stands holding two golden lattice-crust pies in tins and tosses one in the air, grinning; Tom sits on the ground and watches, impressed.',
+    ]],
+  ['deedee3', 'Tom Cooks for Mom', 'deedee', 'Deedee',
+    'lifts a blue cloth off a loaf of sourdough on a white kitchen counter, waves the loaf under her nose, then winces when she says it needs salt',
+    'takes a bite and thinks, says it needs salt, spots the crumbs on the counter, grabs a straw broom and sweeps with big strokes',
+    [
+      'Tom stands behind a white kitchen counter and lifts a blue cloth off a round loaf of sourdough with a proud grin; Deedee stands on the other side with her hands clasped.',
+      'Tom holds the loaf out and waves it under Deedee\'s nose; Deedee leans in and sniffs with her eyes closed.',
+      'Deedee takes a bite of the bread and chews with a thoughtful look, her eyebrows raised; Tom watches with his hands clasped, hopeful.',
+      'Deedee shakes her head and says it needs salt, holding the bread up between two fingers; Tom winces with his shoulders slumped.',
+      'Deedee points at the crumbs on the counter with a stern face; Tom takes one step back with his palms raised.',
+      'Deedee swings a straw broom in a big sweeping stroke with her feet planted; Tom stands behind her with a stunned look.',
     ]],
 ];
 
