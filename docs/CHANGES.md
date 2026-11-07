@@ -1,3 +1,9 @@
+## 2026-11-06 (402): Tom's stretch poses match his standing size (`stretch1`)
+
+- Tom (16:02): his stretching states are also not the same size as his regular body. Compared in the real game (his standing frame, then each `st_*` pose, same spot): the two side bends read about 15 percent bigger in head and torso, Stiff and Rise heads about 5 percent; Reach, Push, Exhale and Fresh matched.
+- `bake_story_poses.py` `STRETCH_FIT`: one uniform scale per frame about the feet (Stiff and Rise .96, both bends .88). Reach (arms overhead, head reads a little smaller) left as painted. Only `art/chars/tom-story.webp` and `data/story-poses.js` changed. Grace's squishy poses were not checked.
+- Tests: in-game captures before and after (standing next to all 8 poses), smoke, tag_check. Tags: `stretch1`.
+
 ## 2026-11-06 (401): Story gate blockers added to the Art Library (no game change)
 Fact: Tom 15:58 asked for an inventory of every area the story blocks and the graphic that blocks it, all to be painted by the generator with the area painting as the reference. Nine Library entries added, tab Props, new group "Story gates": `prop-gate-town-hollow`, `-town-school`, `-row-pier`, `-blvd-trail`, `-blvd-studio`, `-jpark-oak`, `-jpark-barn`, `-backlot-stage7`, `-stage7-catwalk`. Each has one reference (the live area painting `art/<map>.webp`), one transparent object, 1 Generate press. Source `tools/art-library/gate-prompts.js`; json got the entries by direct insert (other entries asserted unchanged); `groups.js` knows the `gate` prop group; `make-prompts.js` loads the module.
 Nothing installed. The game still draws the old code graphics (b7DrawMapFx in engine/story.js: fallen branch, chain-link school gate, sawhorse barrier). Install only after Tom approves a picture: draw it with `PROPART.draw` at the gate tiles instead of the code drawing.

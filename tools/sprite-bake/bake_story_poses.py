@@ -92,6 +92,10 @@ def match_standing(cid, S, figs, f):
         print('  match', mid, n, 'head x%.2f' % r, 'figure x%.2f' % a)
     return out
 
+# Tom's stretch poses (Tom 2026-11-06 16:02: "his stretching states are also not the same size as his regular body"). Compared in the real game against his
+# standing frame (not by bounding box: raised arms and bends change the box): the two side bends read about 15 percent bigger in head and torso, Stiff and Rise
+# heads about 5 percent. Factors are one uniform scale per frame about the feet; Reach (arms overhead, head reads smaller) is left as painted.
+STRETCH_FIT = {'tom': {'st_stiff': .96, 'st_rise': .96, 'st_bendl': .88, 'st_bendr': .88}}
 
 def up(n, k):
     return -(-n // k) * k
@@ -188,8 +192,10 @@ for cid, S in SETS.items():
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
     if 'strip' not in S and 'cut' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
-    if S['strip'] if 'strip' in S else False:
+    if 'strip' in S:
         figs = match_standing(cid, S, figs, f)
+    if cid in STRETCH_FIT:
+        figs = {n: (im.resize((round(im.width * STRETCH_FIT[cid].get(n, 1.0)), round(im.height * STRETCH_FIT[cid].get(n, 1.0))), Image.LANCZOS) if STRETCH_FIT[cid].get(n, 1.0) != 1.0 else im) for n, im in figs.items()}
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'])
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}
     pal, rows = quantize(small, COLORS)
