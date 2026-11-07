@@ -16362,7 +16362,7 @@
    ]
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "id": "tombo-rose3-tom",
    "tab": "Characters",
    "group": "Tombos, Tom + Rose",
@@ -16382,6 +16382,15 @@
      "note": "Tom's head is too small in the last 3. Overall body proportions while rose is on Tom's shoulders is not correct",
      "from": "v1",
      "at": 1794071712900
+    }
+   ],
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-rose3-tom-v1.png",
+     "date": "2026-11-07",
+     "from": "v3",
+     "at": 1794071919504
     }
    ]
   },
