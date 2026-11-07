@@ -1,3 +1,7 @@
+## 2026-11-07 (430): Michael battle stance prompts rewritten so he carries Lachlan and Isla in every frame (Art Library json only, no game change)
+- Cause (Tom 09:00): both Michael battle stance drafts said one figure, hands empty, so he was drawn alone. Both are rewritten as a group of three: both children in his arms in every frame, arms never swing, poses use legs, torso and face only (flinch, tired on one knee, napping seated with kids dozing, cheers, shielding crouch).
+- Entries:  (8 frames, 4 x 2) and  (6 frames, 3 x 2), still drafts; stance 1 now attaches the approved walk v3. Costs 2 Generate presses. Nothing installed; Michael is still not drawn in battle.
+
 ## 2026-11-07 (429): Chapter 9 Ballroom mirror fix (`ch9resume1`)
 - Bug (Tom 08:57, phone): every Moon Club monster beaten, Ballroom box still unchecked, stuck.
 - Cause 1: each room scene sets its flag to 'pending' while it runs and only sets it true after the fight's ending lines. The quiet autosave after every fight stores 'pending'; if the app closed or reloaded before the ending, the room's trigger (notFlag) never fired again. Same hole in the Coat Check and Card Room.
