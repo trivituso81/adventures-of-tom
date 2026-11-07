@@ -1,6 +1,6 @@
 'use strict';
 // data/michael-hires-use.js: painted Michael carrying Lachlan and Isla (data/michael-hires.js, art/chars/michael-ow.webp).
-// Loads right after data/jojo-hires-use.js and replaces OW.michael (the old traced pixel set MICHAEL_OW in data/npc-sprites.js stays as the fallback).
+// Loads right after data/jojo-hires-use.js and sets OW.michael.
 // The sheet draws him facing LEFT; the game's 'side' set faces RIGHT (its 'left' is the mirror), so side = flipped left frames.
 (function() {
   if(typeof MICHAEL_HIRES==='undefined') return;
@@ -10,6 +10,6 @@
     const rows=O[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'michaelOw',d+'_'+n,flip); });
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('left',true)};
   set.left=set.side.map(mirrorRows);
-  set.k=.846;   // real height 6'4 next to Tom 5'11 (42.0 visible rows); the sheet's stand (cap top) is 53.1 rows (11-05)
+  set.k=.8483;   // real height 6'4 next to Tom 5'11 (42.0 visible rows): 53 bake rows (cap top to feet of the painted stand) x .8483 = 44.96 rows (walk sheet v3, 11-06)
   OW.michael=set;
 })();

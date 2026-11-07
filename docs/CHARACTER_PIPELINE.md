@@ -237,9 +237,9 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 | Head share | Top of head to chin divided by total height = **0.43 in battle, 0.373 walking** (the Tom and TNB average), same as Grace and Rose. Grow the head only with `kidhead.factor(target, current_share)` and `grow_head`; the body keeps its size and the figure grows by the head. |
 | Height | Real height required. Kids are drawn larger than the adult scale on purpose so they read well (Tom approved Grace and Rose as they are). Rose is 75% of Grace in battle. Place a new child between Rose and Grace by real height in battle px and walk rows; outside that range, ask Tom. |
 
-### Carried children (Michael with Lachlan and Isla; Tom, 2026-11-01)
+### Carried children (Michael with Lachlan and Isla; Tom, 2026-11-01, reinstalled as painted 2026-11-06)
 
-Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in every frame. Rules: Michael's face matches the other adults (head row); Michael's whole figure follows his real height (walk 53 to 54 rows like Justin, top of cap to feet); **Lachlan's head is Grace's head size and Isla's head is Rose's head size**, measured top of hair to chin at the same scale on the head row (in walk frames about 80% and 75% of Michael's head). Installed 2026-11-01 (`michael1`): `tools/sprite-bake/bake_michael.py` (sheet `src/michael-walk-v1.png` from prompt v4 of claude/michael-walk-sheet-prompt.txt) grows the three heads as separate layers: each head is a hand-set box (`HEADS`) or, in profile where the three overlap, a hand-drawn outline (`POLY`); a head in front owns the overlap, so no neighbour pixels are copied. Factors are solved per view so the heads land on target after the figure scales to 54 rows (front: Michael x1.25, Lachlan x1.44, Isla x1.47; back x1.18 / 1.41 / 1.35); the profile heads are painted small, so growth there is capped at x1.5 (`KMAX`) and they stay a little under target. Output `art/chars/michael-ow.webp`, `data/michael-hires.js`, wired by `data/michael-hires-use.js` (OW.michael; side = mirrored left row). Michael is never drawn in battle (Olivia's MICHAEL! move keeps him off screen). The old traced pixel sprite (`MICHAEL_OW` in data/npc-sprites.js) is now only the fallback while the atlas loads.
+Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in every frame. Rule: his whole figure follows his real height (walk 53 bake rows like Justin, top of cap to feet, drawn at k .8483 = 44.96 rows next to Tom's 42). Since `michaelwalk3` (Tom's approved Art Library sheet `michael-walk-sheet` v3, art/raw/characters/michael-walk-sheet-v3.png) the nine figures are used exactly as painted: `tools/sprite-bake/bake_michael.py` cuts them with walk_sheet_frames.grid, applies one scale to all nine, and writes art/chars/michael-ow.webp and data/michael-hires.js (`OW_K` 7). No head growing, no flipping (the engine mirrors left for side). The 2026-11-01 version grew the three heads as layers (Lachlan to Grace's head, Isla to Rose's); that code and its sheet src/michael-walk-v1.png are gone. Tom's painting has darker outlines than the rest of the cast; they are used as painted.
 
 ### Current reference values (after `olivia8` and `jojoart1`)
 
@@ -253,7 +253,7 @@ Michael (6'4", same as Justin) carries his kids Lachlan (4) and Isla (1) in ever
 | Deedee | 5'5" | 131 | 43 | 278 |
 | Olivia | 5'5" assumed (not given yet) | 130 | 45 | not on it |
 | Jojo | 5'6" | 133 | 42 | not on it |
-| Michael (carrying Lachlan and Isla) | 6'4" | never in battle | 55 (painted, `michael1`; his cap top; the figure solves to 54 and grows one row from Lachlan's hair) | not on it |
+| Michael (carrying Lachlan and Isla) | 6'4" | never in battle | 53 (painted as is, `michaelwalk3`; cap top to feet, drawn at k .8483 = 44.96 rows) | not on it |
 | Grace | 4'2" | 126 | 39 | 230 |
 | Rose | 3'4" | 95 (75% of Grace, Tom 11-06) | 37 | 205 |
 
