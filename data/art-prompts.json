@@ -13952,6 +13952,132 @@
    "group": "Trail clues"
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-town-hollow",
+   "tab": "Props",
+   "title": "Story gate: Grump Hollow stairs, fallen branch (Square, chapter 1)",
+   "ar": "2:1",
+   "refs": [
+    "art/town.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of the Square, from \"The Adventures of Tom\", a family role-playing game. The Square is a cobbled plaza ringed by little shops. The opening to close is the wide stone staircase that climbs behind the green GRUMP HOLLOW signboard, between the bakery and the tall library. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA big fallen tree branch lying across the full width of a stone staircase, thick mossy bark, one snapped splintered end, leafy side twigs with green and yellow leaves and a few tiny wildflowers caught in them. Heavy enough that nobody could climb over it. No sign, no words.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the whole width of the steps, about two people wide, and is about one person tall at the thickest point.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-town-school",
+   "tab": "Props",
+   "title": "Story gate: School gate (Square east lane, chapters 1 to 5)",
+   "ar": "1:1",
+   "refs": [
+    "art/town.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of the Square, from \"The Adventures of Tom\", a family role-playing game. The Square is a cobbled plaza ringed by little shops. The opening to close is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA closed chain link school gate hung between two grey steel posts with a top rail, swung shut across a lane. A thick chain and one big brass padlock hold it shut. A small hand lettered wooden sign hangs on the gate and reads exactly: NO SCHOOL TODAY\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the full width of the lane, about two people wide, and is a little taller than a person.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-row-pier",
+   "tab": "Props",
+   "title": "Story gate: Cattail Pier path, branch and sign (Row, chapters 1 to 3)",
+   "ar": "3:2",
+   "refs": [
+    "art/row.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of Rivituso Row, from \"The Adventures of Tom\", a family role-playing game. Rivituso Row is a garden lane of cottages and cobbled paths. The opening to close is the cobbled path at the very bottom of the picture, between the two black lamp posts under the green CATTAIL PIER board. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA fallen tree branch lying across a cobbled path, mossy bark, leafy twigs, with a hand painted wooden board nailed to it. The board reads exactly: CATTAIL PIER and, in smaller letters underneath, CLOSED FOR THE SEASON\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the full width of the path, about three people wide, and is about one person tall.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-blvd-trail",
+   "tab": "Props",
+   "title": "Story gate: Griffith trail barrier (Downtown, chapter 2)",
+   "ar": "3:2",
+   "refs": [
+    "art/blvd.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of the Downtown plaza, from \"The Adventures of Tom\", a family role-playing game. The Downtown plaza is a sunny city square of shops, palms and lamps. The opening to close is the top of the stone staircase at the far upper corner, under the green GRIFFITH PARK arch. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA road sawhorse barrier: two wooden A frame legs and one long top board painted in bold orange and white diagonal stripes, with a small yellow warning lamp on top. A small sign hangs from the board and reads exactly: TRAIL CLOSED and, in smaller letters underneath, SMOG ADVISORY\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the full width of the stair top, about two people wide, and is about waist high.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-blvd-studio",
+   "tab": "Props",
+   "title": "Story gate: Studio gate arm (Downtown, chapters 1 to 3)",
+   "ar": "3:2",
+   "refs": [
+    "art/blvd.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of the Downtown plaza, from \"The Adventures of Tom\", a family role-playing game. The Downtown plaza is a sunny city square of shops, palms and lamps. The opening to close is the paved road at the far upper corner that passes under the green STUDIO arch, next to the checkered cab building. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA road barrier arm gate lowered across a road: two short striped posts and one long horizontal arm painted in alternating red and white stripes. A rectangular sign on the arm reads exactly: CLOSED SET and, in smaller letters above it, SUNSET GOLD STUDIOS\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the full width of the road gap, about two people wide, and is about waist high.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-jpark-oak",
+   "tab": "Props",
+   "title": "Story gate: Old Oak Park barrier (Jefferson Park, chapters 1 to 6)",
+   "ar": "2:1",
+   "refs": [
+    "art/jpark.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of Jefferson Park, from \"The Adventures of Tom\", a family role-playing game. Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening to close is the whole road at the very bottom of the picture, below the green OLD OAK PARK arch. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nTwo wide wooden sawhorse road barriers standing side by side with orange and white striped boards, an orange traffic cone at each end, and one big sign hung across the middle that reads exactly: OLD OAK PARK and, underneath, CLOSED FOR TREE TRIMMING. On the sign is a tiny doodle of a squirrel wearing a necktie.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. Together they span the full width of the road, about four people wide, and are about waist high.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-jpark-barn",
+   "tab": "Props",
+   "title": "Story gate: Car Barn gate (Jefferson Park east edge, chapters 1 to 8)",
+   "ar": "1:1",
+   "refs": [
+    "art/jpark.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of Jefferson Park, from \"The Adventures of Tom\", a family role-playing game. Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening to close is the side street at the far edge of the picture, beyond the green CAR BARN arch. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA tall old black iron double gate between two weathered stone posts, shut tight. A heavy chain is wrapped across it and held by a big padlock, and a thin layer of frost covers the chain and the gate bars. An old riveted metal plate on the gate reads exactly: DIVISION NINE CAR BARN and, in smaller letters underneath, EST. 1912\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the full width of the side street, about two people wide, and is taller than a person.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-backlot-stage7",
+   "tab": "Props",
+   "title": "Story gate: Stage 7 doors (Backlot, chapter 4)",
+   "ar": "3:2",
+   "refs": [
+    "art/backlot.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of the studio backlot, from \"The Adventures of Tom\", a family role-playing game. The Backlot is a movie studio street of fake western and city sets. The opening to close is the big open hangar doorway at the far end of the street, under the STAGE 7 lettering. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA pair of enormous closed steel soundstage sliding doors, dark grey with riveted panels and yellow and black hazard stripes along the bottom. A round red warning lamp glows above them and a small black sign beside it reads exactly: ROLLING\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It fills the whole hangar doorway, about two people wide, and is about three people tall.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-gate-stage7-catwalk",
+   "tab": "Props",
+   "title": "Story gate: Catwalk to the set (Soundstage 7, chapter 4)",
+   "ar": "3:2",
+   "refs": [
+    "art/stage7.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGE\n1) The current painting of Soundstage 7, from \"The Adventures of Tom\", a family role-playing game. Soundstage 7 is the dark inside of a movie soundstage under rows of stage lights. The opening to close is the short stone staircase at the far end that leads up to the painted set doorway between two tall stone pillars. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n\nPAINT THIS ONE OBJECT\nA steel catwalk bridge section hoisted up on two chains and hanging at a steep angle, with the foot of a metal stair below it ending in an empty dark gap. A yellow and black hazard chain is strung across the gap and a small sign hangs on the chain reading exactly: CATWALK OFFLINE\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It spans the full width of the stairs, about two people wide, and is about two people tall.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "group": "Story gates"
+  },
+  {
    "status": "approved",
    "id": "tom-grace-rose-greeting-hug",
    "tab": "Characters",
