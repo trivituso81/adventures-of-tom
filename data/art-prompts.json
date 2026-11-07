@@ -11586,8 +11586,16 @@
    "group": "Long Island shops and houses"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-observatory-v1.png",
+     "date": "2026-11-07",
+     "from": "v1",
+     "at": 1794044285417
+    }
+   ],
    "rejects": [],
    "id": "room-observatory",
    "tab": "Rooms",
