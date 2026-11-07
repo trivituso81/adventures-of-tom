@@ -40,8 +40,16 @@
    "group": "Tom"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-battle-stance-2-v1.png",
+     "date": "2026-11-07",
+     "from": "v1",
+     "at": 1794011645253
+    }
+   ],
    "rejects": [],
    "id": "tom-battle-stance-2",
    "tab": "Characters",
