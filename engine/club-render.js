@@ -3,7 +3,7 @@
 // shows its face when there is floor below it, dark 'clubvoid', 'coatrug', 'cardrug', black and white 'marble',
 // 'ballwood' parquet, the lit 'dancefloor', 'clubstairs' down to the observatory) and the Dome (ground 'dome':
 // 'domefloor' under the stars, the 'bandstand'). Props: clubdoors, mirrorstand, clubplaque, ropepost, clubpalm,
-// coatcounter, coatrack, clubchair, cardtable, clubbar, jukebox, clubpiano, mirrorframe, domescope, and the
+// coatcounter, coatrack, clubchair, cardtable, clubbar, jukebox, clubpiano, mirrorframe, domescope (the live ones are the painted CLUB_ART images), and the
 // little silver clubdoor in Luna's observatory. The moonbeam (clubBeam) is traced here and drawn by data/scenes.js.
 // Also the minimap. Wraps drawOutdoorTile, drawObject and
 // buildMiniBase. Loaded after engine/barn-render.js.
@@ -78,9 +78,16 @@ function clubBeam(map=worlds.moonclub) {
 }
 
 // ---------- Props ----------
-function clubPalm(cx,b,time) {
-  ellipse(cx,b-3,10,3,'#00000040'); rect(cx-6,b-10,12,8,OUT); rect(cx-5,b-9,10,6,'#c9a23a');
-  for(let k=0;k<5;k++) { const a=-2.6+k*.55+Math.sin(time+k)*.05; polygon([[cx,b-12],[cx+Math.cos(a)*16,b-12+Math.sin(a)*16],[cx+Math.cos(a+.25)*12,b-12+Math.sin(a+.25)*12]],k%2?'#3f8a5a':'#2f6a4a'); }
+// Painted props (art/props/moonclub/<slug>.webp, cut from Tom's object sheet by tools/make_moonclub_props.py). Sized in tile units
+// (T = 32): w or h, dy = how far the image sinks below the footprint's bottom edge (furniture with legs reaches past its tile row).
+const CLUB_ART={mirrorstand:{id:'mirrorstand',h:60,dy:3},coatrack:{id:'coatrail',w:68,dy:0},clubchair:{id:'armchair',h:52,dy:4},clubbench:{id:'bench',w:62,dy:3},
+  cardtable:{id:'cardtable',w:66,dy:2},cardtable3:{id:'cardtable',w:78,dy:2},clubpalm:{id:'palm',h:54,dy:2},ropepost:{id:'ropeposts',w:64,dy:0},jukebox:{id:'jukebox',h:76,dy:2},
+  clubpiano:{id:'piano',w:112,dy:12},mirrorframe:{id:'mirrorframe',h:100,dy:2}};
+setTimeout(()=>PROPART.preload(Object.values(CLUB_ART).map(a=>'moonclub/'+a.id)),600);
+function clubPaint(a,cx,b) {   // true when the painted image is drawn, bottom centre on (cx, b + dy)
+  const id='moonclub/'+a.id; if(!PROPART.ready(id)) return false;
+  const im=PROPART.get(id),h=a.h||a.w*im.naturalHeight/im.naturalWidth;
+  return PROPART.draw(id,cx,b+(a.dy||0)-h/2,{h});
 }
 drawObject=function(o,time) {
   const x=o.x*T,y=o.y*T,w=o.w*T,h=o.h*T,b=y+h,cx=x+w/2,n=hash(o.x,o.y);
@@ -103,54 +110,32 @@ drawObject=function(o,time) {
       rect(x+10,y-30,w-20,8,OUT); rect(x+11,y-29,w-22,6,'#24284a'); label('THE DOME',cx,y-28,'#f0d27a',1);
       return;
     }
-    case 'mirrorstand': {
-      const M=CLUB_MIRRORS.find(m=>m.m===o.mirror),back=M&&clubMirrorBack(M);
-      ellipse(cx,b-3,10,3,'#00000040'); rect(cx-6,b-6,12,4,OUT); rect(cx-5,b-5,10,2,'#c9a23a'); rect(cx-1,y+8,2,h-12,'#c9a23a');
-      if(!back) { ellipse(cx,y+6,8,8,OUT); ellipse(cx,y+6,7,7,'#2a2e50'); label('?',cx,y+3,'#c9a23a',1); return; }
+    case 'mirrorstand': {   // the painted brass stand; the glass shows only once its mirror is back (moonbeam puzzle)
+      const M=CLUB_MIRRORS.find(m=>m.m===o.mirror),back=M&&clubMirrorBack(M),A=CLUB_ART.mirrorstand;
+      if(!clubPaint(A,cx,b)) return;
+      if(!back) return;
       const r=clubRot(M);
-      gfx.save(); gfx.translate(cx,y+8); gfx.rotate(r?Math.PI/4:-Math.PI/4);
-      rect(-13,-3,26,6,OUT); rect(-12,-2,24,4,'#dfe6f2'); rect(-12,-2,24,1,'#ffffff'); gfx.restore();
+      gfx.save(); gfx.translate(cx,b+A.dy-A.h*.75); gfx.rotate(r?Math.PI/4:-Math.PI/4);
+      rect(-12,-3,24,6,OUT); rect(-11,-2,22,4,'#dfe6f2'); rect(-11,-2,22,1,'#ffffff'); gfx.restore();
       return;
     }
     case 'clubplaque': rect(cx-1,y+8,2,20,OUT); rect(x+2,y-4,T-4,14,OUT); rect(x+3,y-3,T-6,12,'#c9a23a'); ellipse(cx,y+3,3,3,'#fff1cb'); return;
-    case 'ropepost': {
-      ellipse(cx,b-3,7,2,'#00000040'); rect(cx-5,b-5,10,3,OUT); rect(cx-1,y+4,3,h-8,'#c9a23a'); ellipse(cx,y+4,4,4,'#f0d27a');
-      const dir=o.y===9?1:-1; rect(cx+2,y+10,4,3,'#a8203a'); return;
-    }
-    case 'clubpalm': clubPalm(cx,b,time); return;
+    case 'ropepost': clubPaint(CLUB_ART.ropepost,cx,b); return;
+    case 'clubpalm': clubPaint(CLUB_ART.clubpalm,cx,b); return;
     case 'coatcounter': {
       ellipse(cx,b-2,w/2,4,'#00000030'); rect(x,y+4,w,22,OUT); rect(x+1,y+5,w-2,20,'#6a3a24'); rect(x+1,y+5,w-2,4,'#c9a23a');
       ellipse(x+12,y+3,4,3,'#c9a23a'); rect(x+w-24,y,14,6,'#f4f0e6'); return;
     }
-    case 'coatrack': {
-      rect(x+2,y-14,2,T+10,'#c9a23a'); rect(x+w-4,y-14,2,T+10,'#c9a23a'); rect(x+2,y-14,w-4,2,'#f0d27a');
-      for(let k=0;k<o.w*2;k++) { const hx=x+8+k*14,sw=Math.round(Math.sin(time*2+k)*1.5);
-        rect(hx+sw,y-12,1,3,'#cfd2d8'); polygon([[hx+sw,y-9],[hx+sw-6,y-4],[hx+sw+6,y-4]],'#cfd2d8'); polygon([[hx+sw,y-8],[hx+sw-4,y-5],[hx+sw+4,y-5]],'#24284a'); }
-      return;
-    }
-    case 'clubchair': ellipse(cx,b-2,10,3,'#00000040'); rect(x+6,y-6,T-12,20,OUT); rect(x+7,y-5,T-14,18,'#6a3a8a'); rect(x+5,y+12,T-10,8,OUT); rect(x+6,y+13,T-12,6,'#8a5aaa'); return;
-    case 'cardtable': {
-      ellipse(cx,b-2,w/2,5,'#00000040'); ellipse(cx,y+12,w/2-2,10,OUT); ellipse(cx,y+12,w/2-3,9,'#2f6a4a'); ellipse(cx,y+12,w/2-6,6,'#3f7a5a');
-      for(let k=0;k<4;k++) rect(cx-14+k*7,y+9+(k%2)*2,5,7,'#f4f0e6'); rect(cx-1,y+21,3,8,OUT); return;
-    }
+    case 'coatrack': clubPaint(CLUB_ART.coatrack,cx,b); return;
+    case 'clubchair': clubPaint(o.w>=2?CLUB_ART.clubbench:CLUB_ART.clubchair,cx,b); return;
+    case 'cardtable': clubPaint(o.w>=3?CLUB_ART.cardtable3:CLUB_ART.cardtable,cx,b); return;
     case 'clubbar': {
       rect(x,y-18,w,12,'#3a2418'); for(let k=0;k<5;k++) rect(x+6+k*18,y-16,4,9,['#6a2438','#3f8a5a','#c9a23a','#2f4a8a','#6a2438'][k]);
       rect(x,y+2,w,24,OUT); rect(x+1,y+3,w-2,22,'#4a2a1a'); rect(x+1,y+3,w-2,3,'#c9a23a'); return;
     }
-    case 'jukebox': {
-      ellipse(cx,b-2,12,3,'#00000040'); rect(x+3,y-14,T-6,T+10,OUT); ellipse(cx,y-12,13,8,OUT);
-      const hue=['#e86aa8','#6ab0e8','#e8c84a','#6ac06a'][Math.floor(time*2)%4];
-      rect(x+4,y-12,T-8,T+7,'#8a3a50'); ellipse(cx,y-12,12,7,hue); rect(x+7,y-2,T-14,10,'#1e1a2e'); for(let k=0;k<3;k++) rect(x+8,y+k*3-1,T-16,1,'#c9a23a');
-      rect(x+6,y+12,T-12,6,hue); return;
-    }
-    case 'clubpiano': {
-      ellipse(cx,b-2,w/2,4,'#00000040'); rect(x+2,y-10,w-4,30,OUT); rect(x+3,y-9,w-6,28,'#f4f0e6'); rect(x+5,y+6,w-10,6,'#ffffff');
-      for(let k=x+6;k<x+w-6;k+=5) rect(k,y+6,2,4,'#2a2834'); rect(x+10,y-7,w-20,10,'#e8e0cc'); return;
-    }
-    case 'mirrorframe': {
-      rect(x,y-22,w,h+18,OUT); rect(x+2,y-20,w-4,h+14,'#c9a23a'); rect(x+6,y-16,w-12,h+6,flag('ch9-ball')?'#24284a':'#3a3e60');
-      if(!flag('ch9-ball')) { gfx.globalAlpha=.4; rect(x+8,y-14,6,h,'#dfe6f2'); gfx.globalAlpha=1; } return;
-    }
+    case 'jukebox': clubPaint(CLUB_ART.jukebox,cx,b); return;
+    case 'clubpiano': clubPaint(CLUB_ART.clubpiano,cx,b); return;
+    case 'mirrorframe': clubPaint(CLUB_ART.mirrorframe,cx,b); return;
     case 'domescope': ellipse(cx,b-2,8,3,'#00000040'); rect(cx-1,y+10,2,18,OUT); polygon([[cx-4,y+12],[cx+10,y-10],[cx+14,y-6],[cx,y+16]],'#c9a23a'); return;
   }
   return LE_drawObject_club(o,time);
