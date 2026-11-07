@@ -2,7 +2,7 @@
 // Beats come from the LIVE animations in engine/battle2-kind.js (the comment block above each B2_TOMBO_ANIM.<id>), not from claude/battle-design.md,
 // which is out of date (its names and beats differ from the game). Names are the live names in B2_TOMBOS (data/battle2-data.js).
 // Each row: [id, live name, partner key, partner name, what Tom does, what the partner does, six frames].
-// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 12 Tombos are added in the same shape, one partner per push.
+// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 5: the three Tom + Boppy Tombos (all grown-up, no flashbacks). Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 9 Tombos are added in the same shape, one partner per push.
 // Entries are copied into data/art-prompts.json by a node one-liner that keeps every other entry untouched (never run make-prompts.js: it rewrites hand edits).
 // Groups use a comma, not a colon, because validate.js bans colons in group names.
 const fs = require('fs');
@@ -141,6 +141,39 @@ const TOMBOS = [
       'Deedee shakes her head and says it needs salt, holding the bread up between two fingers; Tom winces with his shoulders slumped.',
       'Deedee points at the crumbs on the counter with a stern face; Tom takes one step back with his palms raised.',
       'Deedee swings a straw broom in a big sweeping stroke with her feet planted; Tom stands behind her with a stunned look.',
+    ]],
+  ['boppy1', 'You Hold the Net', 'boppy', 'Boppy',
+    'holds a big landing net on a pole and will not keep it still, then runs the net under the catch and heaves it up with Boppy',
+    'casts one huge line, hooks the whole catch, reels hard, then crouches on the pier to inspect the catch, complaining about his knees',
+    [
+      'Tom stands on a wooden pier holding a big landing net on a pole, the net wobbling; Boppy stands beside him holding a fishing rod, looking annoyed.',
+      'Boppy casts the fishing rod in a big overhead throw with the line arcing far out; Tom steadies the wobbling net with both hands.',
+      'Boppy leans back reeling the rod in hard with a tight bent rod and a straining face; Tom stands ready with the net.',
+      'Tom runs forward with the net held low as if scooping something up; Boppy keeps pulling the rod with both hands.',
+      'Tom and Boppy heave together, Tom swinging the net up high and Boppy hauling the rod back, both straining.',
+      'Boppy crouches on the pier, peering down at the catch with a hand on his knee and a grimace; Tom stands over him holding the net and grinning.',
+    ]],
+  ['boppy2', 'Nobody Gets Past Us', 'boppy', 'Boppy',
+    'tosses Boppy a deputy cap and a ring of keys, then stands proud with his arms folded as the cell door comes down',
+    'snaps the deputy cap on, flexes and announces himself as the Dep, points a stern finger, then spins the key ring and locks the cell door with a clack',
+    [
+      'Tom tosses a navy deputy cap and a ring of keys through the air toward Boppy, who stands with both arms spread wide to catch them.',
+      'Boppy snaps the navy deputy cap onto his head with both hands and a proud grin; Tom watches with his eyebrows raised.',
+      'Boppy flexes both arms in a strongman pose wearing the cap and a gold badge, chin up; Tom stands beside him with his arms folded, trying not to laugh.',
+      'Boppy points one stern finger forward with a serious deputy face; a spotlight beam sweeps over them from above.',
+      'A gray iron jail cell door with thick bars stands in front of Tom and Boppy; sparks fly where the bars meet the floor.',
+      'Boppy spins the key ring on one finger beside the locked cell door, the cap tipped back; Tom stands with his arms folded and a satisfied smile.',
+    ]],
+  ['boppy3', 'Garden Lesson', 'boppy', 'Boppy',
+    'plants his seedling upside down with the roots in the air and the leaves in the dirt, gets corrected, then watches the vines shoot up',
+    'teaches the steps of planting a tomato (stake, hole, seedling, water), turns Tom\'s seedling upright, then picks a red pepper off his own vine and eats it',
+    [
+      'Boppy points at a wooden stake standing in a raised garden bed with a teacher\'s stern face; Tom stands beside the bed with his hands clasped, listening.',
+      'Boppy tips a blue watering can over a small seedling in the raised bed, water drops falling; Tom kneels at the bed holding a seedling of his own.',
+      'Tom kneels at the raised bed and plants his seedling upside down with the roots in the air and the leaves in the dirt, pleased with himself; Boppy watches with his head tilted.',
+      'Boppy turns Tom\'s seedling upright with both hands and a long-suffering sigh; Tom looks on with sheepish wide eyes.',
+      'Tall green tomato vines have shot up out of the raised bed above Tom and Boppy, heavy with huge red tomatoes; both look up with their mouths open.',
+      'Boppy stands beside the vines taking a bite of a red pepper with a calm face and a bead of sweat; Tom beside him gives a small thumbs up.',
     ]],
 ];
 
