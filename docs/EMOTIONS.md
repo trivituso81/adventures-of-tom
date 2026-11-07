@@ -40,7 +40,7 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 
 | Character | Sheet | Frame size (px) |
 |---|---|---|
-| Tom | tom-emotions-v1.png | 272 x 418 |
+| Tom | tom-emotions-v4.png (v3 plus the unimpressed cell replaced by Tom's own picture) | 202 x 348 |
 | TNB | tnb-emotions-v1.png | 267 x 423 |
 | Grace | grace-emotions-v1.png | 251 x 432 |
 | Rose | rose-emotions-v1.png | 235 x 425 |

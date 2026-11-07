@@ -12,7 +12,7 @@ from walk_sheet_frames import _key
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions')
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
-TAG = 'emo8'
+TAG = 'tomemo2'
 
 def src_path(cid):
     # newest approved sheet for this character (boppy-emotions-v2.png replaces v1 as the source, Tom 2026-11-06)
