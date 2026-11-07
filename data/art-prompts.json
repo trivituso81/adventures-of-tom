@@ -16450,7 +16450,7 @@
    ]
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "id": "tombo-amy2-tom",
    "tab": "Characters",
    "group": "Tombos, Tom + Amy",
@@ -16469,6 +16469,15 @@
      "note": "Child Tom should not be bald he should have brown hair parted to the left",
      "from": "v1",
      "at": 1794072119716
+    }
+   ],
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-amy2-tom-v1.png",
+     "date": "2026-11-07",
+     "from": "v2",
+     "at": 1794072180714
     }
    ]
   },
