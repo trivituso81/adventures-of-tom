@@ -40,12 +40,6 @@
     m4['.']='.';
     for(const k in SX.rows) if(k!=='sitc') sp[k]=P2(SX.rows[k],'boppyStock',k,m4);
   }
-  // Young runner (XC Ult flashback, data/boppy-young.js from tools/sprite-bake/bake_boppy_young.py): yg_ready, yg_wind, yg_celebr.
-  // Rows share his battle palette (map). engine/boppy-moves.js youngOn() swaps them in.
-  if(typeof BOPPY_YOUNG!=='undefined') {
-    const YX=BOPPY_YOUNG; paintedAtlas('boppyYoung',YX.atlas.src,YX.atlas.rects,YX.atlas.k);
-    for(const k in YX.rows) sp['yg_'+k]=P2(YX.rows[k],'boppyYoung',k,map);
-  }
   // Ability frames (tools/sprite-bake/bake_boppy_ab.py, data/boppy-ab.js): f:'ab_cap_2' etc. in a move's keys; a trailing 'F' is the same frame facing right.
   // Eye and hand points are found as for the poses above. sp.mouthAt (a little below the eye, where the fire cone and the red-face glow are drawn) and
   // sp.tipAt (the fishing rod tip, where the line starts) are looked up by frame rows.

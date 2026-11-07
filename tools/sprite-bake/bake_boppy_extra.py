@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Boppy extra battle poses: the stock stances (aim, throw, spread...). (The young runner moved to bake_boppy_young.py in Nov 2026.) (The cap, fishing, pepper, seed and jar poses were retired in Nov 2026 when his ability sheets went in: bake_boppy_ab.py.) Reuses bake_boppy.py's head warp and helpers.
+"""Boppy extra battle poses: the stock stances (aim, throw, spread...). (The cap, fishing, pepper, seed and jar poses were retired in Nov 2026 when his ability sheets went in: bake_boppy_ab.py.) Reuses bake_boppy.py's head warp and helpers.
 Input : src/boppy-stock-v1.png   Output: art/chars/boppy-stock.webp, data/boppy-extra.js
 Usage : python3 tools/sprite-bake/bake_boppy_extra.py [SHEET=<png> for a grey contact sheet]"""
 import os, sys, json

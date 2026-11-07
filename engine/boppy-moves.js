@@ -392,8 +392,8 @@ B.five_alarm_jar=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,60)
 // (THIS BIG, NO THIS BIG, HONEST TO GOD) until it is the size of a bus and blocks out the lights; it belly-flops on every
 // enemy (water columns, a wave), a pier rail goes up in front of the family (Nobody Gets Past), and then it flips back into the
 // water and gets away. Van Cortlandt Park '70 (B6): the projector clicks on and the whole screen goes sepia film (grain,
-// scratches, sprocket holes) over an autumn park; title card OCTOBER 1970; off comes the cardigan, under it the varsity
-// singlet with bib 70; BANG, he laps every enemy three times in a whirl of autumn leaves (they spin as he passes), breaks the
+// scratches, sprocket holes) over an autumn park; title card OCTOBER 1970; off comes the cardigan, under it a jacket
+// with a race number pinned on; BANG, he laps every enemy three times in a whirl of autumn leaves (they spin as he passes), breaks the
 // finish tape, the color snaps back and present-day Boppy walks home patting his stomach: STILL GOT IT. Scenes prefix b5_
 // (no warp). His complaints stay canon: the stomach and people walking too fast, never joints.
 (function(){
@@ -568,13 +568,6 @@ SC.b5_title=(s,u)=>{ const a=fin(u,.1)*fade(u,.8); gfx.globalAlpha=a*.92; RO(128
   const q=cl(s.t/.5); if(q<1) { ring(288,94,34,34,2,'#f4ead4'); gfx.strokeStyle='#f4ead4'; gfx.lineWidth=3; gfx.beginPath(); gfx.moveTo(288,94); gfx.lineTo(288+Math.cos(q*Math.PI*2-Math.PI/2)*34,94+Math.sin(q*Math.PI*2-Math.PI/2)*34); gfx.stroke(); bigWord(String(3-Math.floor(q*3)),288,86,'#f4ead4',3); }
   else { bigWord('OCTOBER 1970',288,62,'#f4ead4',4); label('VAN CORTLANDT PARK',288,100,'#f4ead4',2); label('CHAMPIONSHIP RACE',288,122,'#c8b090',1); }
   gfx.globalAlpha=1; };
-// The 1970 varsity singlet with bib 70, worn over him while he runs (follows the body, flips with it).
-SC.b5_singlet=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const sc=st.sc||1,H=BH()*sc,sp=BSP(),fl=sp.runFlip&&sp.runFlip.includes(st.frame)||st.frame===sp.flip?-1:1;
-  const x=st.x+3*fl*sc,y0=st.y-H*.42,y1=st.y-H*.25,tw=10*sc,bw=12.5*sc; gfx.globalAlpha=fin(u,.04);
-  PO([[x-tw,y0],[x-tw+4*sc,y0-3*sc],[x+tw-4*sc,y0-3*sc],[x+tw,y0],[x+bw,y1],[x-bw,y1]],'#fbf8f0',2);
-  PO([[x-tw+1,y0+1],[x-tw+5*sc,y0+1],[x+bw-2,y1-1],[x+bw-6*sc,y1-1]],MAROON,0);
-  RO(x-6*sc,y0+5*sc,12*sc,9*sc,'#ffffff'); label('70',x,y0+7*sc,OUT,Math.max(1,Math.round(sc*1.4)));
-  gfx.globalAlpha=1; };
 // The cardigan coming off (and later back on): a grey knit cardigan with buttons.
 const cardigan=(x,y,r)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(r); if(PROPART.draw('boppy/cardigan',0,0,{w:62})) { gfx.restore(); return; } PO([[-14,-12],[14,-12],[16,14],[-16,14]],KNIT,2); PO([[-14,-12],[-28,6],[-22,10],[-12,-2]],KNIT2,2); PO([[14,-12],[28,6],[22,10],[12,-2]],KNIT2,2);
   R(-1,-12,2,26,'#4a494d'); for(let k=0;k<3;k++) EO(3,-6+k*7,1.6,1.6,'#c8b090'); gfx.restore(); };
@@ -609,25 +602,28 @@ SC.b5_pistol=(s,u)=>{ const x=s.x,y=BAR+30,k=u<.15?ez(u/.15):1; gfx.globalAlpha=
 SC.b5_belly=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const H=BH(),x=st.x+2,y=st.y-H*.3; gfx.globalAlpha=fade(u,.7)*(.35+.25*Math.sin(s.t*10)); E(x,y,22,16,'#ff8c3a'); gfx.globalAlpha=1; };
 B.xc_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m);
   const fy=Math.min(312,Gp.base+18),by=Math.max(BAR+120,Gp.base-66),Lx=Math.max(30,Gp.x0-30),Rx=Math.min(me.x-30,Math.max(Lx+120,Gp.x1+46)),S={x:me.x-26,y:me.base};
-  const bx=Math.max(48,Lx-6),endX=Math.max(16,bx-56);
+  const bx=Math.max(48,Lx-6),endX=Math.max(bx,76);   // the painted finish frame is about 115 px wide with its tape: keep it on screen
   const P={go:1350,stop:4450,arch:3700,tape:4300,lane:fy,bx};
   const passes=[[1350,1900,S.x,Lx],[2700,3250,Rx+6,Lx],[4050,4300,Rx+6,bx]];
   const at=(p,x)=>p[0]+cl((p[2]-x)/(p[2]-p[3]))*(p[1]-p[0]);
-  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:600,f:'spread'},{t:1000,f:'walk'},{t:1150,x:S.x,y:S.y,f:'wind'},{t:1350,f:'run',ease:'lin'},
-    {t:1900,x:Lx,y:fy,f:'runR',sc:.82,ease:'lin'},{t:2050,x:Lx-8,y:by,f:'runR',sc:.82,ease:'lin'},{t:2550,x:Rx,y:by,f:'run',ease:'lin'},{t:2700,x:Rx+6,y:fy,f:'run',ease:'lin'},
-    {t:3250,x:Lx,y:fy,f:'runR',sc:.82,ease:'lin'},{t:3400,x:Lx-8,y:by,f:'runR',sc:.82,ease:'lin'},{t:3900,x:Rx,y:by,f:'run',ease:'lin'},{t:4050,x:Rx+6,y:fy,f:'run',ease:'lin'},
-    {t:4400,x:endX,y:fy,f:'run',ease:'out'},{t:4700,x:endX,y:fy,f:'hip'},{t:5000,f:'walkR',hop:2,hn:5},{t:6300,x:'home',y:'home',f:'hip'},{t:6500,f:'idle'}];
-  // the last pass slows from the tape to the stop point, so it runs on to endX after the tape
-  K.splice(K.findIndex(k=>k.t===4400),0,{t:4300,x:bx,y:fy,f:'run',ease:'lin'});
+  // painted sheet boppy-ab-xc-ult (ab_xcult_1..6): 1 stands at the line (bib painted on), 2 crouch, 3 sprint (faces right), 4 run and 5 hurdle (face left), 6 breaks the tape.
+  // Mirrored (F) for the other direction. Lap 2 hops the painted hurdle for a beat. A key without x holds the last x, so the hurdle keys carry their own x on the lap line.
+  const lap2=t=>Rx+6+(Lx-Rx-6)*(t-2700)/550;
+  const K=[{t:0,x:'home',y:'home',f:'idle'},{t:600,f:'spread'},{t:700,f:'ab_xcult_1'},{t:1000,f:'ab_xcult_1'},{t:1150,x:S.x,y:S.y,f:'ab_xcult_2'},{t:1350,f:'ab_xcult_3F',ease:'lin'},
+    {t:1900,x:Lx,y:fy,f:'ab_xcult_4F',sc:.82,ease:'lin'},{t:2050,x:Lx-8,y:by,f:'ab_xcult_3',sc:.82,ease:'lin'},{t:2550,x:Rx,y:by,f:'ab_xcult_4',ease:'lin'},
+    {t:2700,x:Rx+6,y:fy,f:'ab_xcult_4',ease:'lin'},{t:2900,x:lap2(2900),y:fy,f:'ab_xcult_5',ease:'lin'},{t:3050,x:lap2(3050),y:fy,f:'ab_xcult_4',ease:'lin'},
+    {t:3250,x:Lx,y:fy,f:'ab_xcult_4F',sc:.82,ease:'lin'},{t:3400,x:Lx-8,y:by,f:'ab_xcult_3',sc:.82,ease:'lin'},{t:3900,x:Rx,y:by,f:'ab_xcult_4',ease:'lin'},
+    {t:4050,x:Rx+6,y:fy,f:'ab_xcult_3F',ease:'lin'},{t:4300,x:bx,y:fy,f:'ab_xcult_6',ease:'lin'},{t:4400,x:endX,y:fy,f:'ab_xcult_6',ease:'out'},{t:4600,f:'hip'},{t:4700,f:'hip'},
+    {t:5000,f:'walkR',hop:2,hn:5},{t:6300,x:'home',y:'home',f:'hip'},{t:6500,f:'idle'}];
   const st=ST.keys(fx,K);
   const spins=[]; passes.forEach((p,n)=>list.forEach((f,k)=>spins.push({f,k:k+n,t:at(p,ST.foe(f).x)})));
   const hits=[Math.round(at(passes[0],Gp.x)),Math.round(at(passes[1],Gp.x)),P.tape];
   const cx=Math.round((Gp.x+me.x)/2);
   ST.play(E2,[
-    [0,()=>{ scene('b5_bars',6.8,{film:{on:300,off:4600}}); scene('b5_park',4.6,{plan:P,back:true}); scene('b5_finish',1.2,{plan:P,t0:3700,delay:3.7});
-      scene('b5_title',1.05,{delay:.25}); scene('b5_singlet',3.85,{st,delay:.75}); scene('b5_leaves',3.4,{st,P,t0:1150,delay:1.15});
+    [0,()=>{ scene('b5_bars',6.8,{film:{on:300,off:4600}}); scene('b5_park',4.6,{plan:P,back:true}); scene('b5_finish',.6,{plan:P,t0:3700,delay:3.7});
+      scene('b5_title',1.05,{delay:.25}); scene('b5_leaves',3.4,{st,P,t0:1150,delay:1.15});
       scene('b5_sepia',4.35,{delay:.25}); sfx.projector(0,30); say(m.id,'xc_ult'); setMessage('The projector clicks on. Did he ever tell you about 1970?'); }],
-    [700,()=>{ sfx.whoosh(); const c=ST.unit(m); ST.fly((x,y,uu)=>cardigan(x,y,uu*5),c.x,c.mid,c.x+90,BAR+10,.7,40); setMessage('Off comes the cardigan. Under it: the varsity singlet. Number 70.'); }],
+    [700,()=>{ sfx.whoosh(); const c=ST.unit(m); ST.fly((x,y,uu)=>cardigan(x,y,uu*5),c.x,c.mid,c.x+90,BAR+10,.7,40); setMessage('Off comes the cardigan. Under it: a jacket and a race number. Bib 70.'); }],
     [1150,()=>{ scene('b5_big',.5,{x:288,y:BAR+56,txt:'ON YOUR MARKS',c:CREAM,sc:3}); }],
     [1300,()=>{ scene('b5_pistol',.9,{x:Math.min(500,S.x+30)}); sfx.bang(); scene('b5_big',.8,{x:Math.min(480,S.x+10),y:BAR+70,txt:'BANG!',c:CREAM,sc:4}); sfx.crowd(.1); setMessage('BANG! And he\'s off like it is 1970.'); }],
     [P.go,()=>{ scene('b5_spin',3.3,{list:spins,t0:P.go,h:20,ox:8}); }],
@@ -642,36 +638,4 @@ B.xc_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),me=ST.unit(m);
     [5000,()=>{ E2.apply(); sfx.guard(); scene('b5_belly',1.4,{st}); }],
     [5300,()=>{ scene('b5_big',1.2,{st,txt:'STILL GOT IT.',c:GOLD,sc:3}); setMessage('"Still got it," says Boppy. He pats his stomach. "Ooh. My stomach."'); }],
     [6700,'end',()=>res(E2)+'He\'ll tell you about it again at dinner.']]); };
-})();
-
-// ================= Boppy verdict builds (2026-10-27, claude/boppy-moves-feedback.md) =================
-// Cap Swat: a properly drawn baseball cap (crown with panel seams, curved brim, button, sweatband, patch) drawn at its final size, and
-// a bare head under it (round scalp, thinning grey fringe). Van Cortlandt Park '70: young Boppy from the cardigan beat to the finish
-// (dark full hair, clean shaven, maroon running tank, short shorts, bare legs and socks), back to normal at the colour flash.
-// Everybody Waits: line change only (data/lines.js). Numbers, keys and beats unchanged. Frames embedded below. Scenes prefix bf_.
-(function(){
-const SC=RFX.SC,{scene}=RFX,ST=RFX.ST;
-const R=(x,y,w,h,c)=>rect(x,y,w,h,c),E=(x,y,rx,ry,c)=>ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),c);
-const RO=(x,y,w,h,c)=>{ R(x-2,y-2,w+4,h+4,OUT); R(x,y,w,h,c); };
-const B=RECRUIT_MOVES.boppy;
-ST.nw('bf_');
-const hand=(dx=0,dy=0)=>ST.hand(dx,dy);
-const BSP=()=>BATTLE_SPRITES.boppy,BH=()=>BSP().idle.length*BSP().scale;
-const fin=(u,a=.12)=>u<a?u/a:1;
-// young Boppy for the flashback: painted frames sp.yg_* (data/boppy-young.js, registered in data/boppy-hires-battle.js)
-let saved=null;
-// the stage never draws run frames on a keyed slide (it holds sp.idle, engine/battle-draw.js), so the young stance replaces idle while he runs
-const youngOn=()=>{ const sp=BSP(); if(saved||!sp.yg_ready) return; saved={idle:sp.idle,wind:sp.wind,spread:sp.spread,hip:sp.hip};
-  sp.idle=sp.yg_ready; sp.spread=sp.yg_ready; sp.wind=sp.yg_wind; sp.hip=sp.yg_celebr; };
-const youngOff=()=>{ if(!saved) return; const sp=BSP(); Object.assign(sp,saved); saved=null; };
-// ---- Van Cortlandt Park '70: young Boppy during the flashback ----
-// the tank top is painted on the young frames, so this overlay only adds the number bib (on his chest, under the stripe)
-SC.b5_singlet=(s,u)=>{ const st=s.st; if(!st||st.x==null) return; const sc=st.sc||1,H=BH()*sc,sp=BSP(),fl=sp.runFlip&&sp.runFlip.includes(st.frame)||st.frame===sp.flip?-1:1;
-  const x=st.x+3*fl*sc,y0=st.y-H*.53; gfx.globalAlpha=fin(u,.04);
-  if(!PROPART.draw('boppy/race_bib',x,y0+6.5*sc,{w:12*sc})) { RO(x-5*sc,y0+3*sc,10*sc,7*sc,'#ffffff'); label('70',x,y0+4.5*sc,OUT,Math.max(1,Math.round(sc*1.3))); }
-  gfx.globalAlpha=1; };
-const xc=B.xc_ult;
-B.xc_ult=E2=>{ youngOff(); const play=ST.play;
-  ST.play=(e,list)=>{ ST.play=play; return play(e,[...list,[700,youngOn],[4590,youngOff],[6800,youngOff]]); };
-  try { return xc(E2); } finally { ST.play=play; } };
 })();

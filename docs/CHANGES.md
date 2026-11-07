@@ -1,3 +1,11 @@
+## 2026-11-06 (404): Boppy Van Cortlandt Park '70 uses Tom's painted sheet; young Boppy art removed (`xcult3`)
+
+- Fact: `xc_ult` now plays the approved Art Library sheet `boppy-ab-xc-ult` v2 as painted (6 frames, `ab_xcult_1..6`, cut by `ability_frames_boppy.py`, baked by `bake_boppy_ab.py` into `art/chars/boppy-ab.webp` and `data/boppy-ab.js`; the 75 older frames came out byte for byte the same). Frame 1 stands at the line with the painted bib, 2 crouches on ON YOUR MARKS, 3 and 4 are the laps (mirrored for the other direction), 5 hops the painted hurdle for a beat in lap 2, 6 breaks the painted finish tape. The game arch and tape now stop at the break, the painted tape takes over, and he stays on screen for the finish. Colour flash and present-day walk home unchanged.
+- Fact: the sheet draws Boppy as the present-day man (white hair, jacket, boots, Big Fish cap), not as a 20 year old; Tom approved it. The bib on it reads "770".
+- Purged: young Boppy (`bake_boppy_young.py`, `data/boppy-young.js`, `art/chars/boppy-young.webp`, its script tag, `yg_*` rows in `data/boppy-hires-battle.js`, `youngOn`/`youngOff`, the `b5_singlet` bib overlay, README lines). The young Art Library sheets stay in `art/raw`. Message text changed (no spoken line): the cardigan beat now says a jacket and a race number.
+- Tests: kit_test boppy xc_ult FAILS [] (frames looked at: stand, laps, finish, flash), unused_voice 0, tag_check ok. Tags: `xcult3`.
+- Watch on the phone: the hurdle moves with him for its beat; the painted tape pops in where the game tape ends; frames 3 and 4 face different ways when mirrored.
+
 ## 2026-11-06 (403): Walk maps from Tom's Area Builder exports for five areas (`walk1`)
 
 - Applied with `tools/apply_walkmap.py`, then doors, exits, edges and objects wired by hand.

@@ -1,4 +1,4 @@
-"""Boppy's ability frames: the 13 approved Art Library sheets art/raw/characters/boppy-ab-<move>-v<n>.png (flat magenta; Tom 2026-11-06 approved 13 of 14).
+"""Boppy's ability frames: the 14 approved Art Library sheets art/raw/characters/boppy-ab-<move>-v<n>.png (flat magenta; Tom approved all 14).
 Used as painted; every sheet is sized so its median frame matches the typical painted battle frame of his two battle sheets (median sqrt-area).
 Grids differ per sheet (GRID: columns, rows). build() returns {'ab_<short>_<n>': RGBA cropped to the figure}, n counting row by row from 1."""
 import os, sys
@@ -10,14 +10,15 @@ from walk_sheet_frames import _key
 from ability_frames import _rs, RAW
 from battle_sheet_frames import build as _battle
 
-# short key, sheet file (newest approved version in data/art-prompts.json), game move key (RECRUIT_MOVES.boppy). xc_ult is not installed: its sheet is waiting on the Young Boppy sheets.
+# short key, sheet file (newest approved version in data/art-prompts.json), game move key (RECRUIT_MOVES.boppy).
 SHEETS = [('cap', 'boppy-ab-cap-swat-v1.png', 'cap_swat'), ('grumble', 'boppy-ab-grumble-v1.png', 'grumble'),
           ('angler', 'boppy-ab-patient-angler-v1.png', 'patient_angler'), ('recliner', 'boppy-ab-recliner-reservation-v1.png', 'recliner_reservation'),
           ('headcount', 'boppy-ab-headcount-again-v1.png', 'headcount_again'), ('lockdown', 'boppy-ab-lockdown-v1.png', 'lockdown'),
           ('wait', 'boppy-ab-everybody-waits-v1.png', 'everybody_waits'), ('fish', 'boppy-ab-fish-ult-v1.png', 'fish_ult'),
           ('pepper', 'boppy-ab-pepper-breath-v1.png', 'pepper_breath'), ('seeds', 'boppy-ab-seeds-of-trouble-v1.png', 'seeds_of_trouble'),
           ('mild', 'boppy-ab-mild-for-company-v1.png', 'mild_for_company'), ('nineteen', 'boppy-ab-nineteen-seventy-v1.png', 'nineteen_seventy'),
-          ('jar', 'boppy-ab-five-alarm-jar-v1.png', 'five_alarm_jar')]
+          ('jar', 'boppy-ab-five-alarm-jar-v1.png', 'five_alarm_jar'),
+          ('xcult', 'boppy-ab-xc-ult-v2.png', 'xc_ult')]
 GRID = {'cap': (3, 3), 'fish': (3, 3)}   # these two came back as 3 x 3 (frames 7 to 9 are extra poses the moves do not use); every other sheet is 3 x 2
 ONLY_BIG = {}
 RED_CUT = {('headcount', 4)}      # Headcount frame 5 has a painted red X (the game draws its own marks)
