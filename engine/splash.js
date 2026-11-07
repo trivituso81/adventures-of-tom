@@ -147,6 +147,7 @@ const SPLASH_MODES={
     {name:'ART LIBRARY',sub:'Make and approve the game\'s pictures.',act:openArt},
     {name:'MUSIC LIBRARY',sub:'Hear and re-make any track in the game.',act:openMusic},
     {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
+    {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
@@ -295,6 +296,12 @@ function openAreas() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('areas.html',location.href).href; },250);
+}
+// The Portrait Crop Tool (portraits.html): pan and zoom each party member's face crop, save it for the next bake.
+function openPortraits() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('portraits.html',location.href).href; },250);
 }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {

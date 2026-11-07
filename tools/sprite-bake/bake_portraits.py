@@ -16,7 +16,7 @@ hair and hat tops are cropped). Nara is a dog: her square is set directly (NARA)
     python3 tools/sprite-bake/bake_portraits.py tom grace  # some
     CHECK=/tmp/portraits.png python3 tools/sprite-bake/bake_portraits.py   # also writes a contact sheet
 """
-import os, sys
+import os, sys, json
 from PIL import Image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -35,7 +35,28 @@ FACE = {
 NARA = (500, 440, 880)   # centre x, centre y, side (whole head with ears; 11-06 Tom: was cropped too close)
 
 
+# Tom's own crops (portraits.html, saved to data/portrait-crops.json): {id: {x, y, w, h}} in hero-image pixels, w == h. A character
+# with an entry uses it; every other character falls back to FACE / NARA above. Remove FACE and NARA once the json holds all eight.
+CROPS_PATH = os.path.join(ROOT, 'data', 'portrait-crops.json')
+BASE_PATH = os.path.join(ROOT, 'data', 'portrait-crops-base.json')
+
+
+def saved_crops():
+    try:
+        with open(CROPS_PATH) as fh:
+            return json.load(fh)
+    except (IOError, ValueError):
+        return {}
+
+
 def box(pid):
+    c = saved_crops().get(pid)
+    if c:
+        return float(c['x']), float(c['y']), float(c['w'])
+    return default_box(pid)
+
+
+def default_box(pid):
     if pid == 'nara':
         cx, cy, s = NARA
         return cx - s / 2, cy - s / 2, s
@@ -52,7 +73,18 @@ def portrait(pid):
     return crop, round(s), round(y0)
 
 
+def write_base():
+    """data/portrait-crops-base.json: the FACE / NARA squares as portraits.html shows them before Tom saves a crop (generated; do not hand-edit)."""
+    out = {}
+    for pid in list(FACE) + ['nara']:
+        x, y, s = default_box(pid)
+        out[pid] = {'x': round(x), 'y': round(y), 'w': round(s), 'h': round(s)}
+    with open(BASE_PATH, 'w') as fh:
+        fh.write(json.dumps(out, indent=1) + '\n')
+
+
 def main():
+    write_base()
     ids = sys.argv[1:] or list(FACE) + ['nara']
     shots = []
     for pid in ids:
