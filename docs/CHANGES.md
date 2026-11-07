@@ -1,3 +1,10 @@
+## 2026-11-07 (424): Tombo header rewritten in the wording of the ability sheets (Art Library entries only, no game change)
+
+- Fact: after the plain-pose rewrite (423) Tom pressed tnb1 Popcorn Jump: magenta ground and no extras came out right, but 5 of 6 frames were cropped at the waist or knees because the pair sat on a couch and filled the cell edge to edge. Only the jump frame was full body. The Tombo header lacked the lines that make the ability sheets work.
+- Change: `tools/art-library/prompts/char-tombo-sheet.txt` now uses the ability header's lines: the same people, head size, viewing angle and figure size as pictures 3 and 4, one pair per cell, the same size in every cell, feet on one ground line, each pair well inside its cell with margin on all four sides, nothing touching a cell edge, facing as in pictures 3 and 4. It also says sitting, kneeling and crouching people stay full body to the shoes and the seat is drawn small enough to fit. The bans from 423 stay.
+- Json: prompts regenerated for the same 14 unapproved entries as 423 (rose3, amy2, amy3, deedee2, deedee3, boppy1, boppy2, boppy3, tnb1, tnb2, tnb3, nara1, nara2, nara3); nothing else changed. Checks: `node tools/art-library/validate.js` OK (716), module OK.
+- Not done: no presses, not tested on the generator.
+
 ## 2026-11-07 (423): Tombo sheet prompts rewritten as plain poses (Art Library entries only, no game change)
 
 - Fact: three Tombo sheets Tom pressed came back unusable because the six beats under the shared header described staging (monsters leaning in, dizzy stars, a lit stage with a sound ribbon, a PLAY sign, a spotlight, a subway station sign, a 2475 MILES wall, a giant paw from the sky) while the header said two people only, no effects, no text. The generator obeyed the beats: monsters, lettering, per-cell dark backdrops, Rose drawn twice, Tom cropped or missing.
