@@ -1,3 +1,11 @@
+## 2026-11-06 (416): Tombo sheets, slice 3: the three Tom + Amy Tombos in the Art Library (no game change)
+
+- Slice 3 of the Tombo queue: `tombo-amy1` (I Called It!), `tombo-amy2` (Ymamot Creation), `tombo-amy3` (Knock It Off!). Beats from the last definitions of `B2_TOMBO_ANIM.amy1`, `amy2`, `amy3` in engine/battle2-kind.js.
+- amy2 and amy3 are childhood flashbacks in the game, so their prompts draw little Tom (as tall as Grace; yellow striped tee, denim shorts, red sneakers) and little Amy (as tall as Rose; pigtails with bows, teal dress), outfits from the `KIDS` comment in battle2-kind.js. amy1 is the grown-up pair.
+- Files: `tools/art-library/tombo-prompts.js` (three rows), `data/art-prompts.json` (three entries appended, additions only). Refs per entry: Tom hero, Amy hero, Tom battle sheet 1 (old sheet, same as slices 1 and 2), Amy battle sheet 1.
+- Checks: `node tools/art-library/validate.js` OK (694 entries); tombo module alone OK (9 entries). `tools/art-library/test.py` EXPECT counts are stale (known), not touched.
+- Not done: no game files, no tag bump, no Generate presses (3 for this slice). Pending: Tom + Deedee, Boppy, TNB, Nara, then Family Finish and Director's Cut entries.
+
 ## 2026-11-06 (415): Loading screen waits for the welcome art and the family (`bootgate1`)
 
 - Tom (18:44): the welcome background and characters take a second or two to appear after the loading card fades.

@@ -2,7 +2,7 @@
 // Beats come from the LIVE animations in engine/battle2-kind.js (the comment block above each B2_TOMBO_ANIM.<id>), not from claude/battle-design.md,
 // which is out of date (its names and beats differ from the game). Names are the live names in B2_TOMBOS (data/battle2-data.js).
 // Each row: [id, live name, partner key, partner name, what Tom does, what the partner does, six frames].
-// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Rows for the other 15 Tombos are added in the same shape, one partner per push.
+// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 12 Tombos are added in the same shape, one partner per push.
 // Entries are copied into data/art-prompts.json by a node one-liner that keeps every other entry untouched (never run make-prompts.js: it rewrites hand edits).
 // Groups use a comma, not a colon, because validate.js bans colons in group names.
 const fs = require('fs');
@@ -75,6 +75,39 @@ const TOMBOS = [
       'Tom and Rose reach up and press PLAY together; the dark lifts as a gold sound wave sweeps across the stage.',
       'Giant music notes rain down from above; Rose waves both arms and Tom pumps one fist.',
       'Tom and Rose on his shoulders, headphones on, both grinning in the bright light.',
+    ]],
+  ['amy1', 'I Called It!', 'amy', 'Amy',
+    'lunges for the same spot as Amy, bickers nose to nose, loses a rock paper scissors tie, then charges shoulder to shoulder with her and ends tired and amused',
+    'lunges, points at herself, bickers, ties at rock paper scissors, charges, then pumps both fists and declares herself the winner',
+    [
+      'Tom and Amy both lunge toward the same spot with their arms stretched out, scowling at each other.',
+      'Tom and Amy stand nose to nose; Tom points a thumb at his own chest and Amy points a finger at her own chest.',
+      'Tom and Amy face each other, each shaking a fist in the air, ready for rock paper scissors.',
+      'Tom and Amy both hold out a closed fist at the same time and stare at each other with flat, unimpressed faces.',
+      'Tom and Amy sprint forward together, shoulder to shoulder, leaning into the run with their arms pumping.',
+      'Amy pumps both fists in the air with a huge grin; Tom stands beside her with his arms folded and a tired smile.',
+    ]],
+  ['amy2', 'Ymamot Creation', 'amy', 'Amy',
+    'as little Tom, as tall as Grace, with a full head of hair, a yellow striped tee, denim shorts and red sneakers, adds ketchup, cereal and mustard to a mixing bowl, names the mess, then slings it',
+    'as little Amy, as tall as Rose, with pigtails tied with bows and a teal dress, adds pickles, a lemon and a sock to the bowl, announces the name proudly, then slings it',
+    [
+      'A flashback. Little Tom and little Amy stand on either side of a kitchen counter with a big mixing bowl between them, both looking up at it with wide eyes.',
+      'Little Tom tips a bottle of ketchup over the bowl; little Amy drops in a pickle, holding her nose.',
+      'Little Tom pours cereal into the bowl; little Amy squeezes a whole lemon over it, her face scrunched.',
+      'Little Amy drops in one gym sock and stirs with a wooden spoon, proud; little Tom stirs with a second spoon.',
+      'Little Amy points at the bowl with her chin up, announcing its name; little Tom stands with his fists on his hips.',
+      'Little Tom and little Amy hold the bowl together at their shoulders and swing it back, both laughing, ready to sling it.',
+    ]],
+  ['amy3', 'Knock It Off!', 'amy', 'Amy',
+    'as little Tom, as tall as Grace, with a full head of hair, a yellow striped tee, denim shorts and red sneakers, sulks on a purple couch, bickers over the good spot, swings cushions, then freezes at their mother\'s voice',
+    'as little Amy, as tall as Rose, with pigtails tied with bows and a teal dress, glares from the couch, bickers, swings cushions and freezes at their mother\'s voice',
+    [
+      'A flashback. Little Tom and little Amy sit at opposite ends of a purple couch with their arms crossed, each glaring at the other.',
+      'Little Tom points at the middle cushion with a tattling frown; little Amy points at it too, scowling.',
+      'Little Amy raises a cushion high over her head; little Tom ducks, with his arms over his head.',
+      'Little Tom swings a pillow with both hands in a big arc; little Amy ducks and the pillow sweeps over her head.',
+      'Little Tom and little Amy both swing cushions at the same moment and spin, tumbling off balance with their feet in the air.',
+      'Little Tom and little Amy freeze in place, wide-eyed, each holding a cushion mid-swing, looking toward a doorway.',
     ]],
 ];
 
