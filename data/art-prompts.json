@@ -802,8 +802,16 @@
    "group": "Grace"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-battle-stance-2-v1.png",
+     "date": "2026-11-07",
+     "from": "v1",
+     "at": 1794041088153
+    }
+   ],
    "rejects": [],
    "id": "grace-battle-stance-2",
    "tab": "Characters",
