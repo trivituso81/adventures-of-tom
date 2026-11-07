@@ -14254,8 +14254,16 @@
    "group": "Jojo"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/jojo-battle-stance-2-v1.png",
+     "date": "2026-11-07",
+     "from": "v1",
+     "at": 1794041952352
+    }
+   ],
    "rejects": [],
    "id": "jojo-battle-stance-2",
    "tab": "Characters",
