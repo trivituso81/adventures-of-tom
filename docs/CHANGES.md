@@ -1,3 +1,9 @@
+## 2026-11-07 (428): Tombo split sheets, push 2: Director's Cut (Art Library entries only, no game change)
+- Fact: every Director's Cut now has a Tom sheet, a partner sheet and one object sheet (no people). 63 new entries: 21 DC pairs as `tombo-<id>-dc-tom`, `-dc-<partner>`, `-dc-objects` (no object sheet for grace1 and nara2, nothing standalone is drawn), plus `tombo-ff1-dc-objects` and `tombo-ff2-dc-objects` (ff3 has none). The 10 member entries `ff1dc-*`, `ff2dc-*`, `ff3dc-*` were rewritten in place (no objects in a person sheet). The 21 old DC pair entries carry a `note` (superseded).
+- Rows: `tools/art-library/tombo-split/dc-<partner>.js`, `dc-ff.js`; builder `tombo-split-prompts.js` (dc=true leaves the live name out of the prompt body, uses group "Director's Cut, ..." and member ids `ffNdc-<key>`).
+- Also: removed the Final Fantasy references from the `room-moonclub` prompt (json only), so the full validate is clean (860 entries, 0 problems).
+- Rows 3 Rose DCs use `rides:true` (Tom's refs add `tomride-poses-v2`). Beats come from `dc-prompts.js`, not rechecked against `engine/battle2-kind.js`.
+
 ## 2026-11-07 (427): Tombo split sheets, push 1: Primary and Family Finish (Art Library entries only, no game change)
 
 - Fact: every Tombo is now three pictures: a Tom sheet (`tombo-<id>-tom`), a partner sheet (`tombo-<id>-<partner>`) and one object sheet (`tombo-<id>-objects`, 4 x 3 grid, style ref `style_key_v1.png` only). Person sheets hold one person and NO objects (empty hands, low squat when seated); Tom's sheets use the new stance sheets as refs; Rose-rides sheets add `tomride-poses-v2.png` (rose3 Tom sheet). 50 entries added, 10 Family Finish member entries (`ff1-*`, `ff2-*`, `ff3-*`) rewritten in place (prompt, refs, title; ids and groups unchanged), 14 old unapproved pair entries kept with a `note` saying superseded.

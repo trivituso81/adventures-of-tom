@@ -1,0 +1,68 @@
+// Director's Cut rows for Tom + Rose (split sheets; builder adds -dc). Beats from dc-prompts.js and the live B2_TOMBO_ANIM.rose1_dc to rose3_dc.
+module.exports = [
+  { id: 'rose1', name: 'That Cloud Is Lamby', objectsOnly: false, rides: true,
+    beat: 'Tom carries Rose on his shoulders and calls the cloud a loaf of sourdough, Rose says it is Lamby, and the cloud turns into Lamby.',
+    tom: [
+      'Tom stands with his head tipped back, looking up, his hands holding nothing at his sides.',
+      'Tom points up with one finger and a confident calm face.',
+      'Tom looks up with a dry raised eyebrow.',
+      'Tom follows an upward point with his head tipped back.',
+      'Tom stares up with his mouth open in surprise.',
+      'Tom stands with a small smile and one hand raised to hold an ankle.',
+    ],
+    partner: [
+      'Rose sits with her head tipped back, looking up.',
+      'Rose tilts her head, thinking, one finger on her chin.',
+      'Rose shakes her head hard with her little hands up in a no.',
+      'Rose points up with one arm and her mouth wide open saying it is Lamby.',
+      'Rose claps both hands and bounces happily.',
+      'Rose holds both hands up high and grins.',
+    ],
+    objects: [
+      ['A plush lamb named Lamby', 'a small soft cream plush lamb with a round fluffy body, a little pink face, floppy ears and four short stubby legs.'],
+      ['A loaf of sourdough bread', 'a round golden brown sourdough loaf with a crisp scored top and flour dusted on the crust.'],
+    ], reuses: '' },
+  { id: 'rose2', name: 'Princess and Her Bodyguard', objectsOnly: false, rides: true,
+    beat: 'Rose is a princess with her plush lamb and Tom is her bodyguard in sunglasses; he protects her, then lifts her onto his shoulders.',
+    tom: [
+      'Tom stands tall in dark sunglasses with a small earpiece, one hand held to the earpiece and a serious face.',
+      'Tom steps forward and holds one arm out to the side to protect, his chin low.',
+      'Tom walks with his hands clasped in front of him, scanning the area behind dark sunglasses.',
+      'Tom stands with his arms folded, a stern face behind dark sunglasses.',
+      'Tom crouches with both hands out in front and a small smile above his sunglasses.',
+      'Tom stands in sunglasses with one hand raised to hold an ankle, grinning.',
+    ],
+    partner: [
+      'Rose stands in a tiara and sparkly princess dress with one hand raised like holding a scepter.',
+      'Rose peeks to one side giggling, in her tiara.',
+      'Rose walks forward proudly with one arm held up high and her chin lifted.',
+      'Rose taps the air in front of her like knighting someone, with a serious little frown.',
+      'Rose holds both arms up high, reaching up.',
+      'Rose sits up high in her tiara with one arm raised and a big grin.',
+    ],
+    objects: [
+      ['A plush lamb named Lamby', 'a small soft cream plush lamb with a round fluffy body, a little pink face, floppy ears and four short stubby legs.'],
+      ['A long red carpet runner', 'a long narrow plush red carpet runner with a thin gold edge stripe, laid flat.'],
+    ], reuses: '' },
+  { id: 'rose3', name: 'Lamby Night-Light', objectsOnly: false, rides: true,
+    beat: 'Rose huddles with her plush lamb and says Lamby is not scared, then Tom lifts her onto his shoulders to hold Lamby up high.',
+    tom: [
+      'Tom stands with his hands in his pockets, a calm look.',
+      'Tom walks forward with a gentle small smile.',
+      'Tom reaches down with both hands open.',
+      'Tom bends and lifts with both hands raised in front of him, a gentle smile.',
+      'Tom stands looking up proudly with his chin raised.',
+      'Tom stands with his hands raised to hold ankles, a soft smile.',
+    ],
+    partner: [
+      'Rose sits huddled on the ground hugging her knees with big round eyes.',
+      'Rose shakes her head with a brave little frown and one hand raised.',
+      'Rose looks up with her arms held against her chest.',
+      'Rose raises both arms above her head with a tiny gasp.',
+      'Rose sits up high with both hands held up, her face full of wonder.',
+      'Rose sits up high with both hands raised and beams a big happy smile.',
+    ],
+    objects: [
+      ['A plush lamb named Lamby', 'a small soft cream plush lamb with a round fluffy body, a little pink face, floppy ears and four short stubby legs.'],
+    ], reuses: '' },
+];

@@ -1,0 +1,66 @@
+// Director's Cut rows, Tom + TNB (tnb1 to tnb3), for tomboEntries(row, 'tnb', true). Beats from dc-prompts.js and the live B2_TOMBO_ANIM.tnb1_dc to tnb3_dc.
+module.exports = [
+  { id: 'tnb1', name: '2nd Ave Window Wash', objectsOnly: false, rides: false,
+    beat: 'A summer cool-off: Tom holds up a big fan and stands calm while TNB rides circles around him, kisses his cheek on a pass and aims a garden hose away.',
+    tom: [
+      'Tom stands with both hands held out in front of him closed around nothing, a dry calm look.',
+      'Tom holds both hands aimed forward at chest height, his hair blown back.',
+      'Tom stands calmly with both hands held out in front and his eyes following something passing.',
+      'Tom closes his eyes with a small smile, one hand held down at his side closed around nothing.',
+      'Tom holds both hands up high gripping nothing with a proud face.',
+      'Tom stands with one arm held tight under his other arm as if carrying something flat, a bright smile.'],
+    partner: [
+      'TNB stands with one foot forward and one hand held out closed around nothing, a sly grin.',
+      'TNB pushes off with one foot and one hand held out closed around nothing, leaning forward.',
+      'TNB leans into a wide curve, one arm held high gripping nothing, his knees bent.',
+      'TNB leans in with his eyes closed and his lips puckered, one arm out to the side for balance.',
+      'TNB leans into a tilt with one arm stretched out in front, closed around nothing, a bold grin.',
+      'TNB stands with one hand held down closed around nothing and a bright smile.'],
+    objects: [
+      ['A sleek white turbo fan', 'a slim tall white fan with a round cage guard, a glossy white body, a slim stand and a round base, a silver dial on the back.'],
+      ['A longboard', 'a long slim wooden skateboard deck with a gentle curve, warm maple wood with a teal stripe, four chunky cream wheels, shown angled in three-quarter view.'],
+      ['A coiled garden hose', 'a green rubber garden hose coiled in a loose neat spiral, a brass nozzle at the end.'],
+    ] },
+  { id: 'tnb2', name: 'Last Train Home', objectsOnly: false, rides: false,
+    beat: 'A mad dash: Tom and TNB sprint side by side, TNB braces and crouches so Tom can dive over his back, then they wave and Tom makes a heart with his hands.',
+    tom: [
+      'Tom stands with his eyes wide, looking ahead.',
+      'Tom sprints leaning forward with his arms pumping.',
+      'Tom runs in close with his arms pumping, his eyes fixed ahead.',
+      'Tom dives forward with his arms stretched out ahead of him, his body flat in the air.',
+      'Tom stands up straightening his clothes with a relieved smile.',
+      'Tom waves with one hand and forms a heart with his other hand and a thumb, smiling.'],
+    partner: [
+      'TNB stands with one arm held against his side, his eyes wide, looking ahead.',
+      'TNB sprints with his arms pumping, leaning forward.',
+      'TNB stops with both hands held out in front of him, feet planted, braced.',
+      'TNB crouches low with his back flat and his head tucked.',
+      'TNB hops up with one arm held against his side, a pleased grin.',
+      'TNB waves with one hand and blows a kiss with the other.'],
+    objects: [
+      ['A longboard', 'a long slim wooden skateboard deck with a gentle curve, warm maple wood with a teal stripe, four chunky cream wheels, shown angled in three-quarter view.'],
+    ] },
+  { id: 'tnb3', name: 'Golden Repair', objectsOnly: false, rides: false,
+    beat: 'A mended cup: Tom breaks a clay cup and gathers the three pieces, TNB says broken is fine and brushes gold into every crack, then kisses Tom.',
+    tom: [
+      'Tom stands holding both hands cupped in front of him around nothing, a worried face.',
+      'Tom stands with both hands cupped and empty in front of him, his head down and a guilty wince.',
+      'Tom kneels with both hands cupped and empty in front of him, his head down.',
+      'Tom holds both open palms out in front of him, empty, with a sorry face.',
+      'Tom holds both hands steady and cupped around nothing, watching down with soft eyes.',
+      'Tom holds up both hands cupped around nothing with a pleased smile.'],
+    partner: [
+      'TNB stands with one hand reaching out in front of him, a warm smile.',
+      'TNB stands looking down calmly with a gentle expression and one hand at his side.',
+      'TNB kneels with one hand held up closed around nothing and a gentle smile.',
+      'TNB shakes his head with a warm smile, one hand held up closed around nothing.',
+      'TNB leans forward with one hand moving carefully in front of him, careful fingers, focused.',
+      'TNB leans in with his eyes closed, lips puckered to kiss a cheek, both hands at his sides.'],
+    objects: [
+      ['A clay cup', 'one round handleless clay cup in warm terracotta orange, a smooth glaze, whole and unbroken.'],
+      ['Three broken pieces of clay', 'three separate curved terracotta clay shards, jagged edges, laid apart from each other.'],
+      ['A small paintbrush', 'one slim paintbrush with a wooden handle and a soft fine tip.'],
+      ['A small pot of gold paint', 'a small round lidless pot filled with shiny gold paint, a slim gold brush mark on the rim.'],
+      ['A mended clay cup', 'the same round terracotta cup, whole again, with bright golden lines along every seam.'],
+    ] },
+];

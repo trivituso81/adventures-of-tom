@@ -1,0 +1,102 @@
+// Family Finish Director's Cut person sheets (no objects) and object sheets, split rules of 2026-11-07. Beats from the live B2_TOMBO_ANIM.ff1_dc to ff3_dc and dc-prompts.js.
+// Row ids ff1 to ff3; the builder with dc=true makes member ids ffNdc-<key>. Names stay out of prompt bodies via beat text.
+module.exports = [
+  { id: 'ff1', name: 'Pottery Lesson', beat: 'A family clay lesson: TNB teaches, Tom\'s clay gives up, Grace squeezes hers into a squishy and Rose sends hers flying.',
+    members: [
+      { key: 'tom', who: 'Tom', frames: [
+        'Tom walks forward with both hands held together in front of him, closed around nothing, a calm dry face.',
+        'Tom kneels with his hands held out in front of him as if shaping something round, concentrating hard.',
+        'Tom leans in with his hands held close together and his tongue between his lips.',
+        'Tom jolts back with his hands up and his eyes wide, as if something just collapsed in his hands.',
+        'Tom looks down at his hands held out, shoulders slumped, a flat resigned face.',
+        'Tom shrugs with both palms up and a small dry smile.'] },
+      { key: 'tnb', who: 'TNB', frames: [
+        'TNB walks forward with both hands held together in front of him, closed around nothing, a relaxed proud smile.',
+        'TNB stands with one hand held out showing how to cup the hands, patient and warm.',
+        'TNB crouches with both hands held out low as if guiding another person\'s hands, a gentle smile.',
+        'TNB claps his hands together once with a bright grin.',
+        'TNB tips his head to one side and looks down fondly, one hand held out.',
+        'TNB stands with a thumbs up and a warm wide smile.'] },
+      { key: 'grace', who: 'Grace', frames: [
+        'Grace walks forward with both hands held together in front of her, closed around nothing, chin up and bossy.',
+        'Grace kneels with her hands held out in front of her as if shaping something round, concentrating.',
+        'Grace squeezes her hands together in front of her with her mouth open in surprise.',
+        'Grace holds both hands up in front of her as if showing a small round treasure, her eyes shining.',
+        'Grace presses her cupped hands against her cheek and giggles.',
+        'Grace stands with both fists raised high and a huge grin.'] },
+      { key: 'rose', who: 'Rose', frames: [
+        'Rose walks forward with both hands held together in front of her, closed around nothing, a happy giggle.',
+        'Rose kneels with her hands held out in front of her, her tongue poking out, concentrating.',
+        'Rose spreads her hands wide with round eyes and an open mouth in an excited gasp.',
+        'Rose throws both arms up high as if launching something into the air, her mouth in a big O.',
+        'Rose shields her eyes with one hand and looks far off, leaning forward.',
+        'Rose jumps with both arms up, cheering.'] },
+    ],
+    objects: [
+      ['A lump of wet clay', 'a soft rounded lump of grey brown wet clay, slightly shiny, with a few fingerprint dents.'],
+      ['A spinning pottery wheel', 'a low round flat metal wheel head on a short sturdy base with a small foot pedal, empty, shown from a three quarter view.'],
+      ['A low round stool', 'a small round wooden stool with three short splayed legs, natural light wood.'],
+      ['A finished clay vase', 'a smooth rounded vase with a narrow neck, glazed in a soft teal blue with a creamy rim.'],
+      ['A collapsed clay pot', 'a slumped lopsided clay pot with sagging sides, grey brown and wet looking.'],
+      ['A pink squishy', 'a small round soft squishy toy in pale pink with a happy face drawn on it, slightly flattened.'],
+      ['A lump of pink clay', 'a soft rounded lump of pale pink clay with a smooth surface.'],
+    ] },
+  { id: 'ff2', name: 'Breakfast in Bed', beat: 'A family breakfast surprise: Amy wakes to a tall stack of pancakes Grace made and Rose drowns in syrup.',
+    members: [
+      { key: 'amy', who: 'Amy', frames: [
+        'Amy lies on her back with her eyes closed and her hands folded on her stomach, a peaceful smile.',
+        'Amy stirs with one eye half open and a small yawn, one hand raised to her face.',
+        'Amy sits up with her legs stretched out in front of her, her eyes wide and her mouth open in a surprised gasp.',
+        'Amy sits with her legs stretched out and both hands pressed to her heart, a big touched smile.',
+        'Amy sits with one hand raised holding nothing pinched between her fingers and leans forward with a tiny delighted laugh.',
+        'Amy sits with both arms thrown wide in a happy cheer.'] },
+      { key: 'grace', who: 'Grace', frames: [
+        'Grace walks forward with both hands held out in front of her at waist height, closed around nothing, a careful proud face.',
+        'Grace stands with one hand held high and the other held out in front of her, chin up.',
+        'Grace flicks one wrist up in a quick flip with a big grin, the other hand held out below.',
+        'Grace holds both hands out in front of her on tiptoe, her arms steady and her mouth pressed tight.',
+        'Grace pushes both hands forward carefully with her eyes wide, as if something wobbles.',
+        'Grace stands with both fists raised high and a huge grin.'] },
+      { key: 'rose', who: 'Rose', frames: [
+        'Rose walks forward hugging both arms around nothing at her chest, a giggle on her face.',
+        'Rose stretches up on tiptoe with both arms raised and tilted, her tongue poking out.',
+        'Rose holds both hands tilted in front of her with huge eyes and a small guilty grin.',
+        'Rose holds one hand up with a stunned face, a sticky smear on her cheek.',
+        'Rose licks her sticky fingers with a satisfied grin.',
+        'Rose jumps with both arms up, cheering.'] },
+    ],
+    objects: [
+      ['A tall stack of pancakes', 'a tall wobbly stack of golden brown round pancakes on a plain white round plate, eight pancakes high, a small pat of butter on top.'],
+      ['A big bottle of maple syrup', 'a large rounded amber glass bottle with a small cap and a plain cream label with no writing, filled with deep amber syrup.'],
+      ['An empty syrup bottle', 'the same rounded amber glass bottle, empty, upside down, a few sticky drips along its neck.'],
+      ['A breakfast tray', 'a rectangular pale wooden tray with two small handles and a low rim, empty.'],
+      ['A frying pan', 'a round black nonstick frying pan with a long dark handle, empty, shown from a three quarter view.'],
+      ['A spatula', 'a slim flat metal spatula with a wooden handle.'],
+      ['A fork', 'a shiny silver table fork.'],
+    ] },
+  { id: 'ff3', name: 'The Family Walk', beat: 'A slow family stroll: Deedee sets a brisk pace, Boppy grumbles about it and Tom walks in the middle holding both their hands.',
+    members: [
+      { key: 'deedee', who: 'Deedee', frames: [
+        'Deedee walks forward in a brisk confident stride, her arms swinging, a warm smile.',
+        'Deedee strides with her chin up and one hand held out to the side as if holding a hand.',
+        'Deedee looks back over her shoulder with a bright encouraging grin, still walking.',
+        'Deedee points ahead with one arm raised, setting the pace.',
+        'Deedee walks with both hands held out to her sides as if holding two hands, a soft warm smile.',
+        'Deedee stands still with both arms open wide and a joyful face.'] },
+      { key: 'boppy', who: 'Boppy', frames: [
+        'Boppy walks forward with a stiff slow step, one hand on his lower back and a stern squint.',
+        'Boppy shuffles forward with one hand held out to the side, grumbling with his mouth open.',
+        'Boppy stops and rubs his lower back with one hand, wincing.',
+        'Boppy points ahead with one finger and a grumpy frown, his other hand on his hip.',
+        'Boppy stands tall and stretches both arms up, then lets out a big sigh.',
+        'Boppy stands with a small satisfied grin and both hands tucked into his jacket.'] },
+      { key: 'tom', who: 'Tom', frames: [
+        'Tom walks forward with a relaxed easy stride, both hands held out to his sides as if holding two hands.',
+        'Tom looks to one side with a gentle patient smile, still walking, a hand held out.',
+        'Tom looks to the other side with a dry raised eyebrow, still walking, a hand held out.',
+        'Tom walks with his head tipped up, content.',
+        'Tom stops walking and holds both hands out to his sides, squeezing gently, a warm smile.',
+        'Tom stands with both arms stretched out to his sides, hands closed gently, and a happy warm smile.'] },
+    ],
+    objects: [] },
+];

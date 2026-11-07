@@ -18,8 +18,8 @@ const personPrompt = (who, label, beat, frames) => SOLO + '\n\n' + label + '. ' 
 const objPrompt = (objs) => OBJ + '\n\nThe objects, in reading order:\n' + objs.map((o, i) => (i + 1) + '. ' + o[0] + ': ' + o[1]).join('\n') + '\n\nDeliver the image itself.';
 
 function tomboEntries(row, key, dc) {
-  const W = WHO[key], g = 'Tombos, Tom + ' + W, base = 'tombo-' + row.id + (dc ? '-dc' : ''), t = (dc ? 'Director\'s Cut: ' : 'Tombo: ') + row.name;
-  const label = (dc ? 'Director\'s Cut' : 'Tombo') + ': ' + row.name;
+  const W = WHO[key], g = (dc ? 'Director\'s Cut, Tom + ' : 'Tombos, Tom + ') + W, base = 'tombo-' + row.id + (dc ? '-dc' : ''), t = (dc ? 'Director\'s Cut: ' : 'Tombo: ') + row.name;
+  const label = dc ? 'Director\'s Cut' : 'Tombo: ' + row.name; // DC bodies leave out the live name (scenery words, CHANGES 423)
   const people = [
     { id: base + '-tom', tab: 'Characters', group: g, title: t + ' (Tom)', ar: '3:2', refs: personRefs('tom', row.rides), prompt: personPrompt('Tom', label, row.beat, row.tom) },
     { id: base + '-' + key, tab: 'Characters', group: g, title: t + ' (' + W + ')', ar: '3:2', refs: personRefs(key, false), prompt: personPrompt(W, label, row.beat, row.partner) },
@@ -28,9 +28,9 @@ function tomboEntries(row, key, dc) {
   const out = row.objectsOnly ? [people[2]] : people; return out.filter(e => !e.id.endsWith('-objects') || row.objects.length);
 }
 function finishEntries(row, dc) {
-  const g = 'Finish, ' + row.name, out = [];
+  const g = (dc ? 'Director\'s Cut, ' : 'Finish, ') + row.name, out = [];
   const pre = dc ? '-dc' : '';
-  for (const m of row.members) out.push({ id: row.id + pre + '-' + m.key, tab: 'Characters', group: g, title: (dc ? 'Director\'s Cut' : 'Family Finish') + ': ' + row.name + ' (' + m.who + ')', ar: '3:2', refs: personRefs(m.key, false), prompt: personPrompt(m.who, (dc ? 'Director\'s Cut' : 'Family Finish') + ': ' + row.name, row.beat || '', m.frames) });
+  for (const m of row.members) out.push({ id: row.id + (dc ? 'dc' : '') + '-' + m.key, tab: 'Characters', group: g, title: (dc ? 'Director\'s Cut' : 'Family Finish') + ': ' + row.name + ' (' + m.who + ')', ar: '3:2', refs: personRefs(m.key, false), prompt: personPrompt(m.who, dc ? 'Director\'s Cut' : 'Family Finish: ' + row.name, row.beat || '', m.frames) });
   if (row.objects.length) out.push({ id: 'tombo-' + row.id + pre + '-objects', tab: 'Characters', group: g, title: (dc ? 'Director\'s Cut' : 'Family Finish') + ': ' + row.name + ' (objects)', ar: '4:3', refs: [STYLE], prompt: objPrompt(row.objects) });
   return out;
 }
