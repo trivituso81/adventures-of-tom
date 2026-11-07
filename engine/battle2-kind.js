@@ -639,30 +639,6 @@ const popBowl=(x,y,a,full,sc=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a)
 const slasher=(x,y,k)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(k,k);
   E(0,40,46,60,'#06060c'); E(0,-14,26,30,'#06060c'); for(const sx of [-1,1]) { gfx.beginPath(); gfx.moveTo(sx*30,10); gfx.lineTo(sx*58,-40); gfx.lineTo(sx*48,-46); gfx.lineTo(sx*20,0); gfx.closePath(); gfx.fillStyle='#06060c'; gfx.fill(); E(sx*54,-46,8,8,'#06060c'); }
   E(0,-10,15,19,'#e8e4dc'); E(-6,-14,4,5,'#06060c'); E(6,-14,4,5,'#06060c'); E(0,-2,2,4,'#06060c'); for(let j=-2;j<=2;j++) E(j*4,6,1,1,'#7a766c'); gfx.restore(); };
-// Seated poses for the couch, built once from the current sprites (so a new outfit still works).
-// Tom: his idle top half (head, arms, shirt, belt), then knees toward the camera, short shins and shoes.
-// TNB: his side-on sit pose (beer in hand, facing Tom and the screen) with the bar stool cut away.
-const seatCache=new Map();
-const seatTom=()=>{ const sp=BATTLE_SPRITES.tom,src=sp.idle; if(seatCache.has(src)) return seatCache.get(src);
-  let out=src; const W=src[0].length;
-  if(src.length===40&&W===29&&['a','h','f','i','c','d','v','z'].every(k=>k==='a'||sp.pal[k])) {
-    const row=()=>Array(W).fill('.'),put=(a,c,s)=>{ for(let i=0;i<s.length;i++) a[c+i]=s[i]; return a; };
-    const top=src.slice(0,29).map(r=>r.split('')); top[28][9]='a'; top[28][24]='a';
-    const L=[put(row(),9,'ahhhhhhaahhhhhha'),put(row(),9,'afhhhhfaafhhhhfa'),put(row(),9,'aahhhfaaaafhhhaa'),put(put(row(),10,'ahhhfa'),18,'afhhha'),
-      put(put(row(),8,'aciiiddca'),17,'acddiiica'),put(put(row(),8,'avzzzzvva'),17,'avvzzzzva'),put(put(row(),8,'aaaaaaaaa'),17,'aaaaaaaaa')];
-    out=top.concat(L).map(r=>r.join(''));
-    if(sp.eyeAt) sp.eyeAt.set(out,sp.eyeAt.get(src)||sp.eye); }
-  seatCache.set(src,out); return out; };
-const seatTnb=()=>{ const sp=BATTLE_SPRITES.tnb,src=sp.sit; if(!src) return sp.idle; if(seatCache.has(src)) return seatCache.get(src);
-  let out=src;
-  if(src.length>=47&&src[0].length===49) {
-    const g=src.map(r=>Array.from(r));
-    for(let y=34;y<g.length;y++) for(let x=y===34?27:26;x<g[y].length;x++) g[y][x]='.';
-    g[34][27]='!'; for(let y=35;y<44;y++) if(g[y][25]!=='.'&&g[y][25]!=='!') g[y][26]='!';
-    out=g.map(r=>r.join('')); while(out.length&&!/[^.]/.test(out[out.length-1])) out.pop();
-    if(sp.eyeAt) sp.eyeAt.set(out,sp.eyeAt.get(src)||sp.eye);
-    if(sp.handAt&&sp.handAt.get(src)) sp.handAt.set(out,sp.handAt.get(src)); }
-  seatCache.set(src,out); return out; };
 // A rounded box with the dark outline, and a plain rounded fill.
 const cRR=(x,y,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x,y,w,h,r); else gfx.rect(x,y,w,h); gfx.fillStyle=c; gfx.fill(); };
 const cRRO=(x,y,w,h,r,c)=>{ gfx.beginPath(); if(gfx.roundRect) gfx.roundRect(x-2,y-2,w+4,h+4,r+2); else gfx.rect(x-2,y-2,w+4,h+4); gfx.fillStyle=OUT; gfx.fill(); cRR(x,y,w,h,r,c); };
@@ -701,23 +677,23 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const sT={x:T.x,b:T.base,f:null},sN={x:N.x,b:N.base};
   const pbowl=(x,y,a,full,sc=1)=>{ if(!PROPART.draw('tombo/popcorn_bowl',x,y-4*sc,{h:44*sc,rot:a})) popBowl(x,y,a,full,sc); };
   const pcorn=(x,y,r)=>{ if(!PROPART.draw('tombo/popcorn_piece',x,y,{w:r*3.2,rot:x*.07})) popcorn(x,y,r); };
-  // Painted Tom (art/chars/tom-poses.webp): sits holding his own bowl, spooked, screaming mid-jump, cowering, then proud.
-  const TP=BATTLE_SPRITES.tom&&BATTLE_SPRITES.tom.hires&&BATTLE_SPRITES.tom.bowlsit?BATTLE_SPRITES.tom:null;
-  const tSeat=TP?TP.bowlsit:seatTom(),nSeat=seatTnb();
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tsx,y=FL,f=tSeat;
+  // Painted Tombo frames (tools/sprite-bake/tombo_frames.py, tombo-tnb1-tom and -tnb sheets): 1 sit, 2 frozen with a mouthful, 3 jump, 4 cower, 5 laugh, 6 kiss (Tom's frame 6 holds both of them, so TNB's own frame 6 is not drawn).
+  const pose=ms=>ms<P.quiet?1:ms<P.scare?2:ms<P.jumpEnd?3:ms<P.laugh?4:ms<P.kiss0?5:6;
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tsx,y=FL,f=tbf('tnb1','tom',1,sp);
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tsx,k); y=lerp(c.origBase,FL,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.home) { if(ms>P.scare&&ms<P.jumpEnd) { const k=seg(ms,P.scare,P.jumpEnd); y-=Math.sin(k*Math.PI)*84; f=sp.celeb; x+=Math.sin(k*Math.PI)*-6; }
       else if(ms>P.jumpEnd&&ms<P.jumpEnd+120) y+=2;
       else if(ms>P.kiss0&&ms<P.home) x+=ez(seg(ms,P.kiss0,P.kiss))*5*(1-ez(seg(ms,P.kiss+350,P.kiss+700)));
       else if(ms>P.line&&ms<P.scare) x-=ez(seg(ms,P.quiet,P.scare))*4; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tsx,c.origX,k); y=lerp(FL,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
-    if(TP&&c.sp===TP&&ms>=P.walk&&ms<P.home) f=ms<P.quiet?TP.bowlsit:(ms<P.scare?TP.spook:(ms<P.jumpEnd?TP.scream:(ms<P.tline?TP.cower:TP.proud)));
+    if(ms>=P.walk&&ms<P.home) { const n=pose(ms); f=tbf('tnb1','tom',n,sp)||f; if(n===6) x=(tsx+nsx)/2; }
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,noShadow:ms>P.walk&&ms<P.home}; });
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nsx,y=FL,f=nSeat;
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nsx,y=FL,f=tbf('tnb1','p',1,sp);
     if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,nsx,k); y=lerp(c.origBase,FL,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.home) { if(ms>P.laugh&&ms<P.laugh+700) y-=Math.abs(Math.sin(seg(ms,P.laugh,P.laugh+700)*Math.PI*4))*4;
       else if(ms>P.kiss0&&ms<P.home) x-=ez(seg(ms,P.kiss0,P.kiss))*10*(1-ez(seg(ms,P.kiss+350,P.kiss+700))); }
     else { const k=ez(seg(ms,P.home+60,P.home+700)); x=lerp(nsx,c.origX,k); y=lerp(FL,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    if(ms>=P.walk+100&&ms<P.home) { const n=pose(ms); if(n===6) { sN.x=x; sN.b=y; return {cx:x,base:y,frame:f,hide:true}; } if(n===3) y-=Math.sin(seg(ms,P.scare,P.jumpEnd)*Math.PI)*84; f=tbf('tnb1','p',n,sp)||f; }
     sN.x=x; sN.b=y; return {cx:x,base:y,frame:f,noShadow:ms>P.walk&&ms<P.home}; });
   const dimK=ms=>ms<P.walk?ez(seg(ms,0,P.walk)):1-ez(seg(ms,P.home,P.home+600));
   const lap=()=>({x:sT.x+6,y:sT.b-24}),BS=.62;
@@ -734,7 +710,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       R(SX,SY,SW,SH,'#16203a'); gfx.save(); gfx.translate(mx,my); gfx.scale(z,z);
       gfx.beginPath(); gfx.moveTo(-SW,SH/2); gfx.lineTo(-24,24); gfx.lineTo(24,24); gfx.lineTo(SW,SH/2); gfx.closePath(); gfx.fillStyle='#24304e'; gfx.fill();
       R(-22,-40,44,64,'#3a2a22'); const op=seg(ms,1400,P.scare)*16; gfx.globalAlpha=k*fk; R(-22,-40,op,64,'#ffe8a8'); gfx.globalAlpha=k; R(-22+op,-40,44-op,64,'#5a3a2a'); E(14,-6,2,2,'#c9a23a'); gfx.restore(); }
-    else if(ms<P.scare+1100) { const q=seg(ms,P.scare,P.scare+180); R(SX,SY,SW,SH,fl?'#ffffff':'#7a0f1a'); { const sk=lerp(.5,1.7,ez(q))+Math.sin(ms/30)*.02; if(!PROPART.draw('tnb/slasher_standee',mx,my+30,{h:150*sk})) slasher(mx,my+30,sk); } }
+    else if(ms<P.scare+1100) { const q=seg(ms,P.scare,P.scare+180); R(SX,SY,SW,SH,fl?'#ffffff':'#7a0f1a'); { const sk=lerp(.5,1.7,ez(q))+Math.sin(ms/30)*.02; if(!PROPART.draw('tombo/villain_standee',mx,my+30,{h:150*sk})) slasher(mx,my+30,sk); } }
     else { R(SX,SY,SW,SH,'#0c0c14'); gfx.globalAlpha=k*fin(seg(ms,P.scare+1200,P.scare+1600),.5); bigWord('THE END?',mx,my-4,'#cfd8d6',3); gfx.globalAlpha=k; }
     gfx.restore();
     // the light from the screen
@@ -749,7 +725,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   // In front: the couch's rolled arms (over their sides), the bowl, the popcorn, the kiss.
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=dimK(ms);
     // the bowl: in Tom's lap, then thrown and flipped over the monsters, then dropped on the first one like a hat
-    if(ms>P.walk-150&&ms<P.scare) { if(!TP) { const L=lap(); pbowl(L.x,L.y,0,true,BS); } }
+    if(ms>P.walk-150&&ms<P.scare) { const L=lap(); pbowl(L.x,L.y,0,true,BS); }
     else if(ms>=P.scare&&ms<P.over) { const q=seg(ms,P.scare,P.over),L0={x:tsx+6,y:FL-24},x=lerp(L0.x,bowlAt.x,ez(q)),y=lerp(L0.y,bowlAt.y,q)-Math.sin(q*Math.PI)*70; pbowl(x,y,-q*Math.PI,q<.4,lerp(BS,1,ez(q))); }
     else if(ms>=P.over&&ms<P.cap) pbowl(bowlAt.x+Math.sin(ms/30)*3,bowlAt.y,Math.PI,false);
     else if(ms>=P.cap&&ms<P.end-150&&tgt) { const q=ST.foe(tgt),a=seg(ms,P.cap,P.cap+300),hy=q.top+(tgt.def._top||0)*tgt.sc+4;
@@ -757,7 +733,7 @@ B2_TOMBO_ANIM.tnb1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     for(const c of kern) { if(ms<c.d) continue; const q=seg(ms,c.d,c.d+420),x=lerp(c.x0,c.x1,q),y=q<1?lerp(c.y0,c.y1,q*q):Math.min(c.rest,c.y1+(ms-c.d-420)*.25);
       gfx.globalAlpha=ms>P.end-600?Math.max(0,(P.end-150-ms)/450):1; pcorn(x,y,c.r); gfx.globalAlpha=1; }
     if(ms>P.scare+200&&ms<P.kiss0) PROPART.draw('tombo/mustard_throw_pillow',sT.x+8,sT.b-48,{w:28,rot:-.2});
-    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100),hx=(sT.x+sN.x)/2+4,hy=Math.min(sT.b-104,sN.b-104)-q*30;
+    if(ms>P.kiss&&ms<P.kiss+1100) { const q=seg(ms,P.kiss,P.kiss+1100),hx=(sT.x+sN.x)/2+4,hy=Math.min(sT.b-150,sN.b-150)-q*30;
       gfx.globalAlpha=fade(q,.7); heart(hx,hy,lerp(8,20,ez(q*3)),PINK); gfx.globalAlpha=1; }
   }});
   ST.play(E2,[

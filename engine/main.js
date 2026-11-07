@@ -102,7 +102,11 @@ startSplash();
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
+<<<<<<< Updated upstream
   d.textContent='build mirrors1';
+=======
+  d.textContent='build tombo1';
+>>>>>>> Stashed changes
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
 })();

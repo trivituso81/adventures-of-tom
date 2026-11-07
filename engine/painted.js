@@ -19,7 +19,7 @@ const PAINTED_CAST=['tomride','tom','grace','rose','tnb','amy','deedee','boppy',
 // after 30 to 60 minutes because every enemy and battle picture, and a canvas copy of every painted frame ever drawn, stayed
 // in memory. Overworld sheets (ids ending in Ow, townsfolk) still load at boot. The rest are "lazy": paintedTick (below)
 // loads what the party, the current map's monsters and the current fight need, and releases the rest once unused.
-function paintedLazy(id) { return /^foe_/.test(id)||(!/Ow$/.test(id)&&paintedOwners(id).length>0); }
+function paintedLazy(id) { return /^foe_/.test(id)||/^tbo_/.test(id)||(!/Ow$/.test(id)&&paintedOwners(id).length>0); }
 function paintedAtlas(id,src,rects,k,tintFn) {
   const a={id,rects,k,tintFn,img:null,ready:false,failed:false,src:src+(src.includes('?')?'':'?v='+ART_V),users:new Set(),used:0};   // atlases carry no version of their own; bump ART_V whenever a baked .webp changes
   a.lazy=paintedLazy(id);
@@ -112,6 +112,7 @@ function drawPainted(rows,x,y,scale,flash,alpha) {
 // Owner of an atlas id: the party member or foe it belongs to. Tom-with-Rose-on-his-shoulders belongs to both.
 function paintedOwners(id) {
   if(/^foe_/.test(id)) return [id];
+  if(/^tbo_/.test(id)) return ['tbo:'+id.split('_')[1]];   // Tombo frames (engine/tombo-frames.js): wanted while a fight has that partner
   for(const c of PAINTED_CAST) if(id.startsWith(c)) return c==='tomride'?['tom','rose']:[c];
   return [];
 }
@@ -124,7 +125,7 @@ function paintedFormation(mid) {
 function paintedWanted() {
   const want=new Set();
   try { for(const m of party) if(m&&m.id) want.add(m.id); } catch(e) {}
-  try { if(B2.active) { for(const u of B2.party) want.add(u.id); for(const f of B2.foes) want.add('foe_'+f.id); } } catch(e) {}
+  try { if(B2.active) { for(const u of B2.party) { want.add(u.id); want.add('tbo:'+u.id); } for(const f of B2.foes) want.add('foe_'+f.id); } } catch(e) {}
   try { for(const n of (currentMap&&currentMap.npcs)||[]) if(n.monster) for(const id of paintedFormation(n.monster)) want.add('foe_'+id); } catch(e) {}
   return want;
 }
