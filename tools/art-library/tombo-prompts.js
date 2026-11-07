@@ -2,7 +2,7 @@
 // Beats come from the LIVE animations in engine/battle2-kind.js (the comment block above each B2_TOMBO_ANIM.<id>), not from claude/battle-design.md,
 // which is out of date (its names and beats differ from the game). Names are the live names in B2_TOMBOS (data/battle2-data.js).
 // Each row: [id, live name, partner key, partner name, what Tom does, what the partner does, six frames].
-// Slice 1 (this file): the three Tom + Grace Tombos. Rows for the other 18 Tombos are added in the same shape, one partner per push.
+// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Rows for the other 15 Tombos are added in the same shape, one partner per push.
 // Entries are copied into data/art-prompts.json by a node one-liner that keeps every other entry untouched (never run make-prompts.js: it rewrites hand edits).
 // Groups use a comma, not a colon, because validate.js bans colons in group names.
 const fs = require('fs');
@@ -43,6 +43,39 @@ const TOMBOS = [
       'Tom peels himself up off the ground with his arms waving, grinning; Grace laughs with her hands on her tummy.',
       'Tom and Grace in a big group hug; Grace is up on her toes and Tom is bending down, both laughing.',
     ]],
+  ['rose1', 'Double-Decker Airplane', 'rose', 'Rose',
+    'hoists Rose up onto his shoulders, both of them in aviator goggles, then sprints in a wide banking loop with his arms out like wings',
+    'rides on his shoulders with her arms out as the top wing, then leans all the way down to boop a monster\'s nose with one finger',
+    [
+      'Tom crouches low with both hands up; Rose climbs onto his shoulders, both of them wearing aviator goggles, Rose grinning.',
+      'Tom runs forward with his arms spread wide like a biplane wing; Rose on his shoulders spreads her arms out too.',
+      'Tom banks hard through a wide loop with a white contrail streaming behind him; Rose holds on tight with both hands.',
+      'Tom skids to a stop in front of a monster with his arms still spread; Rose is bright with excitement.',
+      'Rose leans far down toward the monster and boops its nose with one finger; Tom holds very still.',
+      'Tom and Rose on his shoulders, both in goggles, pointing up at the sky with one hand each.',
+    ]],
+  ['rose2', 'Seat 1A Stowaway', 'rose', 'Rose',
+    'wheels a blue carry-on suitcase toward the monsters, whistling very casually, then wheels it back home with Rose riding on top',
+    'hides inside the suitcase, pops out with a shout and her plush lamb Lamby held high, then blows a giant raspberry',
+    [
+      'Tom stands holding a blue carry-on suitcase by its handle, whistling with his other hand in his pocket; only Rose\'s pink sneakers stick out of the open end.',
+      'Tom wheels the suitcase toward a group of monsters, very casual; the monsters lean in close to the case.',
+      'The suitcase wiggles with the pink sneakers poking out; Tom glances at it and shrugs.',
+      'Rose pops out of the suitcase high in the air with Lamby held up high, shouting BOO; Tom jumps back with his hands up.',
+      'Rose lands on top of the suitcase and blows a giant raspberry; the monsters are dizzy with little stars around their heads, and Tom grins.',
+      'Tom wheels the suitcase home with Rose riding on top, her arms up and a big grin on her face.',
+    ]],
+  ['rose3', 'Headphones in the Dark', 'rose', 'Rose',
+    'follows a glowing gold sound ribbon through the dark to Rose, lifts her onto his shoulders, then reaches up to press PLAY together',
+    'sits in the dark wearing Tom\'s big silver headphones with little music notes floating out of them, rides on his shoulders, then throws her arms up when the music starts',
+    [
+      'A dark stage lit only by Rose in Tom\'s big silver headphones; little music notes float out of the headphones.',
+      'A gold sound ribbon reaches across the dark from Rose toward Tom; Tom stands in the dark, following it with his eyes.',
+      'Tom walks along the glowing ribbon to Rose and lifts her up onto his shoulders; her headphones are still on.',
+      'Tom and Rose reach up and press PLAY together; the dark lifts as a gold sound wave sweeps across the stage.',
+      'Giant music notes rain down from above; Rose waves both arms and Tom pumps one fist.',
+      'Tom and Rose on his shoulders, headphones on, both grinning in the bright light.',
+    ]],
 ];
 
 function entry([id, name, partner, pname, tomDo, partnerDo, frames]) {
@@ -52,7 +85,9 @@ function entry([id, name, partner, pname, tomDo, partnerDo, frames]) {
     group: 'Tombos, Tom + ' + pname,
     title: 'Tombo: ' + name + ' (Tom + ' + pname + ')',
     ar: '3:2',
-    refs: [R + 'tom-hero-ref-v1.png', R + partner + '-hero-ref-v1.png', R + 'tom-battle-sheet-1-v1.png', R + partner + '-battle-sheet-1-v1.png'],
+    // Rose rides on Tom in rose1 and rose3 (and ff1), so those get the fifth picture: Tom carrying a passenger.
+    refs: [R + 'tom-hero-ref-v1.png', R + partner + '-hero-ref-v1.png', R + 'tom-battle-sheet-1-v1.png', R + partner + '-battle-sheet-1-v1.png',
+      ...(['rose1', 'rose3'].includes(id) ? [R + 'tomride-poses-v2.png'] : [])],
     prompt: HEADER + '\n\nThe Tombo: ' + name + '. Tom ' + tomDo + '. ' + pname + ' ' + partnerDo + '.\n\nSix frames:\n' + frames.map((f, i) => (i + 1) + '. ' + f).join('\n'),
   };
 }

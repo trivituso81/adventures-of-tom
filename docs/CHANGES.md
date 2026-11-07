@@ -1,3 +1,11 @@
+## 2026-11-06 (410): Tombo sheets, slice 2: the three Tom + Rose Tombos in the Art Library (no game change)
+
+- Tom (10:17 queue): slice 2 is Tom + Rose. Entries: `tombo-rose1` (Double-Decker Airplane), `tombo-rose2` (Seat 1A Stowaway), `tombo-rose3` (Headphones in the Dark). Beats from the live comment blocks above `B2_TOMBO_ANIM.rose1`, `rose2`, `rose3` in engine/battle2-kind.js.
+- Files: `tools/art-library/tombo-prompts.js` (three rows; the entry builder adds a fifth picture, `art/raw/characters/tomride-poses-v2.png`, only for rose1 and rose3, where Rose rides on Tom). `data/art-prompts.json`: three entries appended, no existing entry touched (diff is additions only: 53 lines, 0 deletions).
+- Refs: rose1 and rose3 have 5 (Tom hero, Rose hero, Tom battle sheet 1, Rose battle sheet 1, ride picture); rose2 has 4 (Rose hides in the case, so no ride picture).
+- Checks: `node tools/art-library/validate.js` OK (690 entries); the tombo module validates on its own (6 entries).
+- Not done: no game files, no tag bump, no Generate presses (Tom presses; 3 presses for this slice). Pending: Tom + Amy, Deedee, Boppy, TNB, Nara, then the Family Finish and Director's Cut entries.
+
 ## 2026-11-06 (409): Tombo sheets, slice 1: the three Tom + Grace Tombos in the Art Library (no game change)
 
 - Tom (10:17): Tombo sheets go in the Art Library, one 3 x 2 picture per Tombo, both people in the picture. Slice 1 (this push) is Tom + Grace only: `tombo-grace1` (Squishy Delivery), `tombo-grace2` (Uncle Spotter Toss), `tombo-grace3` (The Golden Dumpling Wish). The other 18 Tombos and the 10 Family Finish member entries follow in later pushes.
