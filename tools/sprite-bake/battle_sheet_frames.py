@@ -19,8 +19,43 @@ SLOTS = {'idle': 'ready', 'idle2': 'breath', 'hip': 'hip', 'cast': 'offer', 'win
          'defend': 'guard', 'hurt': 'startled', 'kneel': 'tired', 'celeb': 'cheer', 'leap': 'bigcheer', 'point': 'power',
          'run1': 'run1', 'run2': 'run2'}
 
-def _cut(path, cols, rows, names):
-    rgba = _key(np.array(Image.open(path).convert('RGB')))
+# Tom 2026-11-06 (Tom: "tom's updated battle stances are approved, implement them"): his battle set is cut from the approved Art Library
+# stance sheets (art/raw/characters/tom-battle-stance-1-v2.png, tom-battle-stance-2-v1.png), same grids and pose order as the painted sheets.
+SOURCE_TAGS = {'tom': {'battle-sheet-1': 'battle-stance-1-v2', 'battle-sheet-2': 'battle-stance-2-v1'}}
+
+def key_ground(path, ground):
+    """Key a pose sheet painted on a flat ground that is not magenta (the greeting hug came back crimson). Same recipe as walk_sheet_frames._key:
+    ground = ground-coloured regions touching the border plus big enclosed holes; the 5 px rim is unmixed against the ground colour using the
+    nearest solid figure colour. Returns an RGBA array."""
+    from scipy import ndimage as ndi
+    a = np.array(Image.open(path).convert('RGB')).astype(float); M = np.array(ground, float)
+    dist = np.sqrt(((a - M) ** 2).sum(2))
+    lab, n = ndi.label(dist < 60)
+    border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    idx = range(1, n + 1); sizes = ndi.sum(np.ones_like(lab), lab, idx); md = ndi.mean(dist, lab, idx)
+    keep = border | {i + 1 for i in range(n) if sizes[i] >= 30 and md[i] < 18}
+    bg = np.isin(lab, list(keep))
+    # Shaded ground pockets between the figures (the ground darkened by the soft shadows, e.g. rgb 160 32 70): same hue, blue above green. A hair bow is red with blue at
+    # green's level, so it is not taken.
+    cos = (a @ M) / (np.linalg.norm(a, axis=2) * np.linalg.norm(M) + 1e-9)
+    dk = (cos > 0.985) & (a[:, :, 0] - a[:, :, 1] > 50) & (a[:, :, 2] - a[:, :, 1] > 22)
+    dl, dn = ndi.label(dk); ds = ndi.sum(dk, dl, range(1, dn + 1))
+    dark = np.isin(dl, [i + 1 for i in range(dn) if ds[i] >= 30]); bg = bg | dark
+    near = ndi.binary_dilation(bg, iterations=5) & ~bg
+    solid = ~bg & ~near & (dist > 60) & ~dk
+    _, (iy, ix) = ndi.distance_transform_edt(~solid, return_indices=True)
+    F = a[iy, ix]
+    d = F - M; num = ((a - M) * d).sum(2); den = np.maximum((d * d).sum(2), 1.0)
+    al = np.clip(num / den, 0, 1)
+    al = np.where(bg, 0.0, np.where(near, al, 1.0)); al[al < 0.15] = 0
+    dec = np.clip((a - (1 - al)[..., None] * M) / np.maximum(al, 0.05)[..., None], 0, 255)
+    w = np.clip((al - 0.5) / 0.4, 0, 1)[..., None]
+    col = np.where(near[..., None], dec * w + F * (1 - w), a)
+    return np.dstack([np.clip(col, 0, 255), al * 255]).astype(np.uint8)
+
+
+def _cut(path, cols, rows, names, ground=None):
+    rgba = key_ground(path, ground) if ground else _key(np.array(Image.open(path).convert('RGB')))
     H, W = rgba.shape[:2]
     A = rgba[:, :, 3] > 20
     lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
@@ -44,10 +79,18 @@ def _area(im): return float((np.array(im)[:, :, 3] > 128).sum())
 
 def _rs(im, f): return im.resize((max(1, round(im.width * f)), max(1, round(im.height * f))), Image.LANCZOS)
 
+def _border_ground(path):
+    """The flat ground colour of a sheet, as the median of its border pixels (the approved stance sheets are crimson, not magenta)."""
+    a = np.array(Image.open(path).convert('RGB')).astype(float)
+    edge = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
+    return tuple(int(v) for v in np.median(edge, axis=0))
+
 def build(cid, run_from_walk=True):
     out = {}
     for tag, cols, rows, names in SHEETS:
-        out.update(_cut(os.path.join(RAW, f'{cid}-{tag}-v1.png'), cols, rows, names))
+        src = SOURCE_TAGS.get(cid, {}).get(tag, f'{tag}-v1')
+        path = os.path.join(RAW, f'{cid}-{src}.png')
+        out.update(_cut(path, cols, rows, names, ground=_border_ground(path) if src != f'{tag}-v1' else None))
     # The generator paints sheet 2 at its own size. Its cheer (one fist up, one on the hip) and sheet 1's hands-on-hips pose cover nearly
     # the same area, so sheet 2 is scaled by the square root of their area ratio (checked by eye on a head row, 2026-11-05).
     k2 = (_area(out['b_hip']) / _area(out['b_cheer'])) ** .5

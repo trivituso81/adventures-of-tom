@@ -22,7 +22,7 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tom-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KO_, KW = 2, 2, int(os.environ.get("OW_K", "9"))   # painted resolution multiples: battle, knocked out, overworld (8 = sharp on phone screens, 11-04)
+KB, KO_, KW = 3, 2, int(os.environ.get("OW_K", "9"))   # painted resolution multiples: battle, knocked out, overworld (8 = sharp on phone screens, 11-04)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=100)   # idle height in grid rows
@@ -280,7 +280,7 @@ def quantize(frames, ncolors, pinned=None):
 def hexrgb(h):
     return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 
-def shirt_info(palette, rows, f0, f1):
+def shirt_info(palette, rows, f0, f1, painted_tee=False):
     """Palette keys of the black tee and the grid rows it covers (outfit recolouring).
     Keys: the near-black shades that dominate the torso band. Rows: fixed fractions of the figure height."""
     n = len(rows)
@@ -293,7 +293,9 @@ def shirt_info(palette, rows, f0, f1):
     keys = []
     for k, c in sorted(counts.items(), key=lambda kv: -kv[1]):
         r, g, b = hexrgb(palette[k])
-        if max(r, g, b) <= 150 and b - r >= 12 and b >= g and c >= 4:   # the navy tee (Nov 2026 art)
+        # the navy tee: bluish shades, or (Tom 2026-11-06 stance sheets) the shade the tee quantizes to, within 14 of its painted colour (50, 48, 64); jeans stay out
+        near_tee = painted_tee and (r - 50) ** 2 + (g - 48) ** 2 + (b - 64) ** 2 <= 14 ** 2
+        if max(r, g, b) <= 150 and (b - r >= 12 and b >= g or near_tee) and c >= 4:   # the navy tee (Nov 2026 art)
             keys.append(k)
     return keys, [r0, r1]
 
@@ -340,7 +342,7 @@ def mirror(rows):
     return [r[::-1] for r in rows]
 
 # ---------------------------------------------------------------- garment (outfit recolour) info
-bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .27, .68)
+bt_keys, bt_rg = shirt_info(bt_pal, bt_rows['idle'], .27, .68, painted_tee=True)   # battle only: the overworld keys stay as committed
 ow_keys, ow_rg = shirt_info(ow_pal, ow_rows['down_stand'], .30, .62)
 
 # ---------------------------------------------------------------- eyes (for the low-health bruise and KO overlays)

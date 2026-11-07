@@ -104,8 +104,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose, the object in the hands, and the front of the shirt change, as each frame says.\n\nEvery figure is FULL BODY, from the top of the hair to the soles of both shoes, standing at the same size as in pictures 3 and 4. Both shoes are completely visible and sit well above the bottom edge of the cell, with a clear margin under the feet. Never crop at the waist or the knees.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Disconnected Controller. The game controller printed on the front of his shirt pops off and becomes a real object in his hands. The controller he holds looks exactly like the one on his shirt in pictures 1 to 4: same shape, colors and details, now solid and three-dimensional. From frame 2 on, the controller-shaped print is gone from the front of his shirt (plain navy where it was), but the two sets of orange and yellow stripes above and below that spot stay exactly as in pictures 1 to 4, and the rest of the shirt is unchanged.\n\nRow 1:\n1. Looking down at the controller on his shirt, tapping it twice with two fingers, calm curious face. The controller is still on the shirt.\n2. The controller pops off the shirt and floats a hand's width in front of his chest. Both hands come up to catch it, eyebrows raised. His shirt is now plain navy.\n3. Holding the controller in both hands at chest height, thumbs on the buttons, pressing one button hard, staring down at it, mouth flat.\n\nRow 2:\n4. Holding the controller out at arm's length in one hand, giving it a small shake, frowning at it, unimpressed.\n5. Wind-up: the controller in one hand pulled back behind the shoulder, weight on the back leg, eyes narrowed.\n6. Throw: the arm swung fully forward, the controller just leaving the open fingers, front knee bent, a dry satisfied look."
   },
@@ -129,8 +129,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: DEFEND.\n\nRow 1:\n1. Stepping forward quickly, the front foot landing, one arm rising.\n2. Planted, one arm straight out with the palm flat in a calm stop gesture, the other arm held back sheltering someone behind him, firm calm face.\n3. The same stop gesture, chin up, eyes half closed, mouth slightly open, politely saying \"no touching, please.\"\n\nRow 2:\n4. Braced: knees bent, both forearms raised in front, shoulders squared, eyes squinting.\n5. Rocked back a little, feet still planted, one palm still out, unbothered face.\n6. Standing tall again, straightening the front of his shirt with both hands, a small dry smile."
   },
@@ -154,8 +154,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Starter Splash.\n\nRow 1:\n1. Walking, a big glass jar of bubbly sourdough starter hugged in both arms against his chest, proud.\n2. Standing, holding the jar out at arm's length in both hands, the lid lifting, eyebrows raised in alarm.\n3. Twisting the lid off with one hand, the jar tipped forward in the other, leaning back.\n\nRow 2:\n4. The open jar held out low in both hands and tipped forward, mouth open in a shout.\n5. The jar upright in one hand, the other hand screwing the lid back on, satisfied.\n6. Hugging the closed jar, patting it fondly with one hand, eyes closed, a warm smile."
   },
@@ -179,8 +179,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Sourdough Snob.\n\nRow 1:\n1. Holding a round golden sourdough loaf up in both hands, presenting it proudly.\n2. Tearing the loaf in two with both hands, focused.\n3. Holding out a thick slice of bread on one flat palm, offering it forward, a kind smile.\n\nRow 2:\n4. A long thin pointer in one hand pointing upward, the other hand raised with one finger up, mouth open mid lecture, eyebrows raised.\n5. Tapping the pointer on a small chart board held in the other hand, earnest.\n6. Holding the loaf close to his face, studying the crust with narrowed eyes, very serious."
   },
@@ -211,8 +211,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Retail Therapy.\n\nRow 1:\n1. Kneeling on one knee, both hands resting on top of a large matte-black box on the ground in front of him, excited eyes.\n2. Still kneeling, lifting the lid off the box slowly with both hands, mouth open in awe.\n3. Standing, holding a small sleek silver gadget up high in both hands, a big joyful grin.\n\nRow 2:\n4. Holding a very long paper receipt in both hands, the paper hanging to the floor and piled at his feet, reading it.\n5. The same receipt held up close to his eyes, eyebrows raised, lips pressed together.\n6. The receipt folded under one arm, eyes closed, a slow calm nod."
   },
@@ -236,8 +236,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Noise-Canceling.\n\nRow 1:\n1. Walking forward calmly, large black over-ear headphones held in one hand at his side, flat face.\n2. Standing, holding the headphones open with both hands above his head, about to put them on.\n3. Headphones on his ears, both hands pressing the ear cups, eyes closing.\n\nRow 2:\n4. Headphones on, one finger pressing a button on an ear cup, the other hand raised with the palm out.\n5. Headphones on, arms folded, eyes closed, a peaceful tiny smile, standing perfectly still.\n6. Headphones on, head tilted back slightly, eyes closed, blissful, one hand resting on an ear cup."
   },
@@ -261,8 +261,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Seat 1A, Peasants.\n\nRow 1:\n1. Standing tall, a boarding pass held up beside his face, chin raised, smug.\n2. Pressing one button on a small remote held out in one hand, eyebrows raised, unbothered.\n3. One arm raised high with the hand closed, pulling something down, the remote in the other hand.\n\nRow 2:\n4. A thick plush white duvet held spread in both arms, stepping forward.\n5. Leaning forward, smoothing the duvet down with both hands, a gentle caring face.\n6. Standing straight, hands clasped in front, a polite flight attendant smile."
   },
@@ -286,8 +286,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Boarding Group Zero.\n\nRow 1:\n1. Tapping a phone held up in one hand, chin raised, proud.\n2. One arm swept out wide and low, palm open, welcoming someone forward, a grand smile.\n3. Standing relaxed, a sleep mask pushed up on his forehead, arms stretched overhead.\n\nRow 2:\n4. Lying back almost flat, propped on one elbow, the sleep mask over his eyes, blissful.\n5. One arm pointing straight forward, the other fist on the hip, a bold look.\n6. Holding out a rolled white towel with silver tongs in one hand, a gracious smile."
   },
@@ -318,8 +318,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nEvery figure is FULL BODY, from the top of the hair to the soles of both shoes, standing at the same size as in pictures 3 and 4. Both shoes are completely visible and sit well above the bottom edge of the cell, with a clear margin under the feet. Never crop at the waist or the knees. The shirt front looks exactly like pictures 1 to 4 in every frame: navy, the controller print and the two sets of orange and yellow stripes above and below it, all fully visible and never covered by a hand or a held object (hold objects low or to the side). Flashcards appear only while held in a hand: never any card in the air, falling or flying.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Flashcard Flurry.\n\nRow 1:\n1. A thick deck of white flashcards in one hand, fanning it with the other thumb, focused.\n2. Holding up a single flashcard at arm's length, eyebrows raised, quizzing.\n3. A wrist snap, one card still held between two fingers, the deck in the other hand.\n\nRow 2:\n4. Body turned, the other hand drawn back with one card still held between two fingers, about to throw.\n5. Both arms flung forward, both hands open and empty with fingers spread, as if the cards have just left. No cards are drawn in this frame.\n6. Squaring the deck between both hands, a satisfied teacher look."
   },
@@ -343,8 +343,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Konami Code.\n\nRow 1:\n1. Rubbing his hands together, eyes wide with excitement, a huge grin.\n2. Hopping forward, the front foot stomping down, knees bent, arms out for balance.\n3. Hopping back, the back foot stomping down, arms swinging.\n\nRow 2:\n4. One foot stomping, the other leg lifted high, both arms up.\n5. Jumping straight up, both knees tucked, both fists raised.\n6. Landing in a crouch with one fist punched up high, mouth open in a triumphant shout."
   },
@@ -375,8 +375,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nEvery figure is FULL BODY, from the top of the hair to the soles of both shoes, standing at the same size as in pictures 3 and 4. Both shoes are completely visible and sit well above the bottom edge of the cell, with a clear margin under the feet. Never crop at the waist or the knees. No waist-up busts. The shirt front looks exactly like pictures 1 to 4 in every frame: navy, the controller print and the two sets of orange and yellow stripes above and below it, all fully visible and never covered by a hand or a held object (hold objects low or to the side). No glow, light rays, sparkles or shine anywhere, in the mask or around him; the game adds effects.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: 10-Step Skincare.\n\nRow 1:\n1. One hand raised flat, palm forward, in a pause gesture, serious face.\n2. A small tray of skincare bottles and jars balanced flat on one hand held out to the side, the other hand picking one bottle off the tray. Nothing hangs or floats below the hands.\n3. Patting his cheeks with both hands, eyes closed, calm.\n\nRow 2:\n4. Holding a white face mask dotted with small flat painted red dots (plain paint, not glowing) up to his face with both hands.\n5. Wearing the red-dotted mask over his face, arms folded, standing still and patient.\n6. The mask lifted up onto his forehead, fingertips touching one cheek, a refreshed smile."
   },
@@ -400,8 +400,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Kanji Strike.\n\nRow 1:\n1. Walking, a very large calligraphy brush carried over one shoulder like a pole, calm.\n2. The brush held upright in both hands in front of him, eyes closed, focusing.\n3. Sweeping the brush in a big level stroke, body turned, arms extended.\n\nRow 2:\n4. Bringing the brush down in a big downward stroke, front knee bent, leaning in.\n5. The brush raised high on a diagonal above him for the last stroke, mouth open in a shout.\n6. Flicking the brush to the side with one hand to shake off the ink, the other hand on the hip, cool look."
   },
@@ -425,8 +425,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Know-It-All.\n\nRow 1:\n1. Arms folded, eyebrows raised, a skeptical squint.\n2. One index finger raised high, mouth open, an \"um, actually\" face.\n3. Leaning forward, the raised finger wagging, eyes half closed, smug.\n\nRow 2:\n4. A big red rubber stamp held high in one hand, about to stamp.\n5. Slamming the stamp forward and down at arm's length, front knee bent, determined.\n6. Blowing on the stamp held up beside his face, a satisfied smirk."
   },
@@ -450,8 +450,8 @@
    "refs": [
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/tom-walk-sheet-v1.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
+    "art/raw/characters/tom-battle-stance-1-v2.png",
+    "art/raw/characters/tom-battle-stance-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Cartridge Tilt.\n\nRow 1:\n1. Looking straight out at the viewer, a flat unimpressed face, head tilted, mid head shake.\n2. Reaching straight up high with both arms, fingers spread, up on his toes.\n3. A large grey game cartridge held in both hands in front of his face, blowing into its bottom edge, cheeks puffed.\n\nRow 2:\n4. Pushing the cartridge down with both hands, leaning into it hard, teeth gritted.\n5. The whole body leaning hard to one side, both arms pushing, tilting something huge.\n6. Landing on both feet from a small hop, brushing one palm against the other, a dry satisfied look."
   },

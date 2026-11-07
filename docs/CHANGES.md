@@ -1,3 +1,13 @@
+## 2026-11-06 (411): Tom's approved battle stances installed; his 14 ability refs point at them
+
+- Tom (16:34): "tom's updated battle stances are approved, implement them ... make sure they are the new reference photos for all of tom's abilities."
+- Battle set: cut from `art/raw/characters/tom-battle-stance-1-v2.png` (8 frames) and `tom-battle-stance-2-v1.png` (6 frames), same grids and pose order as the painted sheets. `battle_sheet_frames.py` takes Tom's sources from `SOURCE_TAGS` and keys each sheet against its own crimson ground (`key_ground`, moved here from `bake_story_poses.py`, which now imports it). Sheet 2 is scaled to sheet 1 by the same area rule as before (x0.78).
+- Resolution: `bake_tom_walk_v4.py` battle `KB` is 3 (was 2 in the script), matching the committed `tom-battle.webp` atlas (k 3). Tom's shirt key for the battle set is `c` (the tee quantizes there); the overworld keys are unchanged (`[]`).
+- Outputs rebaked: `tom-battle.webp`, `tom-poses.webp` (includes the 14 ability frames, unchanged source), `tom-ko.webp`, `tom-hires.js`. `tom-ow.webp` (walk) reproduces byte for byte.
+- Known: the rebake is not byte-identical to the committed battle files (the committed build predates the current script). Visually checked: contact sheet of all 14 battle slots; kit test `tom.button_mash` FAILS []; smoke FAILS [].
+- Art Library: the 14 `tom-ab-*` entries now list `tom-battle-stance-1-v2` and `-2-v1` as pictures 3 and 4 (json and `char-prompts.js` mirror). The 14 approved ability sheets were made with the old battle sheets and are not re-pressed.
+- Tags: `tomstance1` (`ART_V` in engine/painted.js, `tom-hires.js?v=`, `engine/main.js?v=`, `engine/painted.js?v=`).
+
 ## 2026-11-06 (410): Tombo sheets, slice 2: the three Tom + Rose Tombos in the Art Library (no game change)
 
 - Tom (10:17 queue): slice 2 is Tom + Rose. Entries: `tombo-rose1` (Double-Decker Airplane), `tombo-rose2` (Seat 1A Stowaway), `tombo-rose3` (Headphones in the Dark). Beats from the live comment blocks above `B2_TOMBO_ANIM.rose1`, `rose2`, `rose3` in engine/battle2-kind.js.

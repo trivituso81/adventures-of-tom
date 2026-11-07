@@ -872,6 +872,12 @@ for (const id of Object.keys(ABILITIES)) {
       prompt: P('char-ability-sheet.txt').replace('unless a frame says he looks', 'unless a frame says ' + (PRONOUN[id] || 'he') + ' looks') + (DOGNOTE[id] ? '\n\n' + DOGNOTE[id] : '') + '\n\nThe move: ' + name + '.\n\nRow 1:\n' + n(r1, 0) + '\n\nRow 2:\n' + n(r2, 3) });
   }
 }
+// Tom's 14 ability sheets take his approved battle stance sheets (Tom 2026-11-06: "make sure they are the new reference photos for all of tom's abilities")
+// as pictures 3 and 4, in place of the painted battle sheets they first used. Mirrors data/art-prompts.json (refs only).
+for (const e of entries) {
+  if (!e.id.startsWith('tom-ab-')) continue;
+  e.refs = e.refs.map(x => x === R + 'tom-battle-sheet-1-v1.png' ? R + 'tom-battle-stance-1-v2.png' : x === R + 'tom-battle-sheet-2-v1.png' ? R + 'tom-battle-stance-2-v1.png' : x);
+}
 // LACHLAN, NO! draws Lachlan (Tom 2026-11-06 12:00): fifth reference is his crop from Michael's hero painting
 // (art/raw/characters/lachlan-ref-v1.png), and frames 4 to 6 show him. Mirrors the hand edit in data/art-prompts.json.
 {

@@ -16,7 +16,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from walk_sheet_frames import grid
-from battle_sheet_frames import _cut
+from battle_sheet_frames import _cut, key_ground
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters')
@@ -104,37 +104,6 @@ def match_standing(cid, S, figs, f):
 # standing frame (not by bounding box: raised arms and bends change the box): the two side bends read about 15 percent bigger in head and torso, Stiff and Rise
 # heads about 5 percent. Factors are one uniform scale per frame about the feet; Reach (arms overhead, head reads smaller) is left as painted.
 STRETCH_FIT = {'tom': {'st_stiff': .96, 'st_rise': .96, 'st_bendl': .88, 'st_bendr': .88}}
-
-def key_ground(path, ground):
-    """Key a pose sheet painted on a flat ground that is not magenta (the greeting hug came back crimson). Same recipe as walk_sheet_frames._key:
-    ground = ground-coloured regions touching the border plus big enclosed holes; the 5 px rim is unmixed against the ground colour using the
-    nearest solid figure colour. Returns an RGBA array."""
-    from scipy import ndimage as ndi
-    a = np.array(Image.open(path).convert('RGB')).astype(float); M = np.array(ground, float)
-    dist = np.sqrt(((a - M) ** 2).sum(2))
-    lab, n = ndi.label(dist < 60)
-    border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
-    idx = range(1, n + 1); sizes = ndi.sum(np.ones_like(lab), lab, idx); md = ndi.mean(dist, lab, idx)
-    keep = border | {i + 1 for i in range(n) if sizes[i] >= 30 and md[i] < 18}
-    bg = np.isin(lab, list(keep))
-    # Shaded ground pockets between the figures (the ground darkened by the soft shadows, e.g. rgb 160 32 70): same hue, blue above green. A hair bow is red with blue at
-    # green's level, so it is not taken.
-    cos = (a @ M) / (np.linalg.norm(a, axis=2) * np.linalg.norm(M) + 1e-9)
-    dk = (cos > 0.985) & (a[:, :, 0] - a[:, :, 1] > 50) & (a[:, :, 2] - a[:, :, 1] > 22)
-    dl, dn = ndi.label(dk); ds = ndi.sum(dk, dl, range(1, dn + 1))
-    dark = np.isin(dl, [i + 1 for i in range(dn) if ds[i] >= 30]); bg = bg | dark
-    near = ndi.binary_dilation(bg, iterations=5) & ~bg
-    solid = ~bg & ~near & (dist > 60) & ~dk
-    _, (iy, ix) = ndi.distance_transform_edt(~solid, return_indices=True)
-    F = a[iy, ix]
-    d = F - M; num = ((a - M) * d).sum(2); den = np.maximum((d * d).sum(2), 1.0)
-    al = np.clip(num / den, 0, 1)
-    al = np.where(bg, 0.0, np.where(near, al, 1.0)); al[al < 0.15] = 0
-    dec = np.clip((a - (1 - al)[..., None] * M) / np.maximum(al, 0.05)[..., None], 0, 255)
-    w = np.clip((al - 0.5) / 0.4, 0, 1)[..., None]
-    col = np.where(near[..., None], dec * w + F * (1 - w), a)
-    return np.dstack([np.clip(col, 0, 255), al * 255]).astype(np.uint8)
-
 
 def cut_cells(rgba, cols, rows, n):
     """Like battle_sheet_frames._cut, on an already keyed array: every piece goes to the grid cell its centre is in. Returns n RGBA crops in reading order."""
