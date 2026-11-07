@@ -15118,8 +15118,16 @@
    "prompt": "Draw one Tombo sheet for a family role-playing game: two people doing one shared action together.\n\nPicture 1 is Tom's hero painting. Picture 2 is his partner's hero painting. Picture 3 is Tom's battle sheet and Picture 4 is his partner's battle sheet. Copy each person exactly in every frame: the same face, age, body, hair, clothes, shoes, colors, painting style, level of detail and head size compared to the body. Show the real heights and the real size gap: Tom is 5 feet 11 inches, TNB 5 feet 10, Boppy 5 feet 7, Amy and Deedee 5 feet 5, Grace 4 feet 2, Rose 3 feet 4. Adults share one head size; children's heads follow Grace and Rose. If the partner is a dog (picture 2), copy her coat, collar and size from pictures 2 and 4, with no hands: her tail and ears carry the feeling.\n\nOnly these two people appear, never anyone else. One image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. Both people are in every frame and both are complete, from the top of the hair to the soles of the shoes, feet on one ground line, with clear magenta margin around the pair. No grid lines, numbers, text, speech bubbles, effects or shadows. Props appear only when a person is holding or touching them. Clothing never uses magenta.\n\nPainted, realistic caricature look: oversized head, slim body, smooth soft shading, warm golden light from above, no thick outlines. Not pixel art, not 16-bit. Show crouches and lifts as big, readable silhouettes. Family friendly.\n\nThe Tombo: Uncle Spotter Toss. Tom claps chalk off his hands, laces his fingers low into a stirrup and heaves Grace straight up, then high-fives her. Grace takes two running steps, lands in his laced hands, flips twice and sticks a landing with arms out.\n\nSix frames:\n1. Tom stands in a coach's stance and claps chalk off his hands; Grace is ready in a running start, eyes forward, a determined grin.\n2. Tom laces his fingers low into a stirrup; Grace takes two running steps toward him.\n3. Grace's foot lands in Tom's laced hands; Tom heaves her straight up with both arms reaching high.\n4. Grace is high in the air, tucked into a flip with her arms and legs spread wide; Tom's arms are still raised.\n5. Grace lands feet first in a stick landing with her arms out; Tom runs up with his palm open for a high five.\n6. Tom and Grace high-five; Grace is grinning and Tom is beaming."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-grace3-v1.png",
+     "date": "2026-11-07",
+     "from": "v2",
+     "at": 1794042110655
+    }
+   ],
    "rejects": [],
    "id": "tombo-grace3",
    "tab": "Characters",
