@@ -1,3 +1,10 @@
+## 2026-11-07 (421): Tombo sheets, slice 7: the three Tom + Nara Tombos in the Art Library (no game change)
+
+- Slice 7 of the Tombo queue: `tombo-nara1` (Sit. Paw. Treat.), `tombo-nara2` (Tug of War), `tombo-nara3` (Cuddle). Beats from `B2_TOMBO_ANIM.nara1`, `nara2`, `nara3` in engine/battle2-kind.js. Nara is a dog, so the partner has no hands; the prompts keep her on four paws.
+- Files: `tools/art-library/tombo-prompts.js` (three rows), `data/art-prompts.json` (three entries appended, additions only). Refs per entry: Tom hero, Nara hero, Tom battle sheet 1 (old sheet, same as slices 1 to 6), Nara battle sheet 1.
+- Checks: `node tools/art-library/validate.js` OK (706 entries); tombo module alone OK (21 entries). No left or right words.
+- Not done: no game files, no tag bump, no Generate presses (3 for this slice). All 21 Tom + partner Tombos now have entries. Pending: Family Finish (10) and Director's Cut (31) entries.
+
 ## 2026-11-07 (420): The Dome, new ballroom painting installed with walk-behind pieces and a new walk map (`dome2`)
 
 - Fact: `art/dome.webp` (1280 x 896, 20 x 14 tiles) is Tom's new Dome ballroom painting (source `art/raw/areas/dome-v1/painting.png`, 1499 x 1049). `art/dome-fg.webp` plus 14 zones in `PLATE_BEHIND.dome` (engine/plate.js) are cut from that painting with Tom's five generator masks used only as masks (`tools/make_dome_fg.py`, masks `mask-palms`, `mask-columns`, `mask-stage`, `mask-furniture`, `mask-telescope`; prompts `claude/dome-v1-cutout-prompts.txt`): 5 palms, both edge columns, both front balustrades, the stage arch with curtains and rails, the sofa, two table sets, the telescope with its platform.

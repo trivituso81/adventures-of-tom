@@ -2,7 +2,7 @@
 // Beats come from the LIVE animations in engine/battle2-kind.js (the comment block above each B2_TOMBO_ANIM.<id>), not from claude/battle-design.md,
 // which is out of date (its names and beats differ from the game). Names are the live names in B2_TOMBOS (data/battle2-data.js).
 // Each row: [id, live name, partner key, partner name, what Tom does, what the partner does, six frames].
-// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 5: the three Tom + Boppy Tombos (all grown-up, no flashbacks). Slice 6: the three Tom + TNB Tombos. Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 9 Tombos are added in the same shape, one partner per push.
+// Slice 1: the three Tom + Grace Tombos. Slice 2: the three Tom + Rose Tombos. Slice 4: the three Tom + Deedee Tombos. Slice 5: the three Tom + Boppy Tombos (all grown-up, no flashbacks). Slice 6: the three Tom + TNB Tombos. Slice 7: the three Tom + Nara Tombos (Nara is a dog). Slice 3: the three Tom + Amy Tombos (amy2 and amy3 are childhood flashbacks, so those sheets draw little Tom and little Amy). Rows for the other 9 Tombos are added in the same shape, one partner per push.
 // Entries are copied into data/art-prompts.json by a node one-liner that keeps every other entry untouched (never run make-prompts.js: it rewrites hand edits).
 // Groups use a comma, not a colon, because validate.js bans colons in group names.
 const fs = require('fs');
@@ -207,6 +207,39 @@ const TOMBOS = [
       'The cold blue wall shatters into glittering pieces between them as Tom and TNB reach out with their cups held high.',
       'Tom and TNB clink their two matching cups together in a burst of warm golden light, both beaming.',
       'TNB kisses Tom on the cheek as Tom smiles with his eyes closed, both holding their cups; a warm orange kiln glow and golden sparkles surround them.',
+    ]],
+  ['nara1', 'Sit. Paw. Treat.', 'nara', 'Nara',
+    'holds a dog treat high, says sit, then paw, then tosses the treat and gets a lick on the cheek',
+    'sits and wiggles all over, gives her paw so hard that a giant furry paw slams down from the sky onto a monster, catches the treat and hops up to lick Tom',
+    [
+      'Tom stands holding a small bone-shaped dog treat high above his head with a calm face; Nara trots up and stops in front of him looking up at the treat.',
+      'Nara sits on the ground with her whole body wiggling and cream-colored motion lines on both sides of her; Tom holds the treat up and points down at her with one finger.',
+      'Nara lifts one front paw toward Tom with her tongue out; Tom holds out his open hand to take it.',
+      'A giant dark furry paw with pink pads comes down from the sky and slams onto a small monster, with a round dust ring and a shadow under it; Tom and Nara watch from the side.',
+      'Tom tosses the treat in a high arc; Nara leaps up with her mouth open to catch it, and little green paw prints glow on the monster behind them.',
+      'Nara hops up with her front paws on Tom and licks his cheek; Tom crouches with his eyes squeezed shut and a small smile, with a pink heart floating above them.',
+    ]],
+  ['nara2', 'Tug of War', 'nara', 'Nara',
+    'grabs the other end of a knotted rope toy, leans back politely, then gets yanked over Nara and flies into a monster still holding the rope',
+    'chomps a red, white and blue striped knotted rope toy, growls and shakes it, then pulls with all her strength and wins, finishing with a victory prance',
+    [
+      'Nara stands on the ground with a thick red, white and blue striped rope toy with big knots clamped in her teeth; Tom stands facing her with both hands open and a calm face.',
+      'Tom holds the other end of the rope and leans back politely with his feet planted; Nara growls with her ears flat and shakes her head, strain lines beside her.',
+      'The rope pulls tight between them; Nara braces with all four paws and her body low, Tom leans far back with his mouth open in surprise.',
+      'Nara yanks her head back with a big jerk; Tom is pulled forward off his feet, still gripping the rope, his eyes wide.',
+      'Tom flies through the air in a spinning arc over Nara with the rope trailing behind him, a streak of cream-colored motion lines following; Nara watches with the rope gone slack.',
+      'Tom lies dizzy on the ground in front of a small startled monster; Nara prances in the air in victory with her tongue out, the rope dropped at her feet.',
+    ]],
+  ['nara3', 'Cuddle', 'nara', 'Nara',
+    'kneels alone in a creeping dark, grey and flickering, then wraps his arms around Nara in his lap as his color and the light come back',
+    'sniffs along a glowing gold scent trail through the dark, finds Tom, climbs into his lap and snuggles in until the dark cracks and shatters into color',
+    [
+      'A dark violet-black void closes in from the edges of the picture; Tom kneels in the middle with his head down, his body grey and flickering, and Nara stands far off in a small circle of light.',
+      'Nara puts her nose to the ground; a glowing gold scent trail snakes across the dark floor from her toward Tom.',
+      'Nara runs along the gold trail with her ears back and her tail up; Tom still kneels grey and alone ahead of her.',
+      'Nara leaps up and climbs into Tom\'s lap; Tom lifts his head in surprise as the first color returns to his face.',
+      'Tom wraps both arms around Nara sitting in his lap with his eyes closed and a gentle smile; a warm golden glow fills the dark around them and gold cracks run outward through the void, small pink hearts rising.',
+      'The dark shatters into colorful glittering pieces all around; Tom and Nara stand side by side in bright warm light, both looking happy, Nara hopping with her tail wagging.',
     ]],
 ];
 
