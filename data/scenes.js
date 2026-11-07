@@ -3448,6 +3448,36 @@ pressAction=function() {
 };
 // Chapter 9 is one long night. Long Island is dark, with stars and no moon until the Mirrorball lets it go. The
 // Moon Club is dim (lamp light round Tom), the moonbeam is drawn from the east window, and the Dome glitters.
+// The moonbeam (Tom 11-07: the old three-line laser looked flat and geometric). Soft light in many faint layers added together
+// (no blur filter, so it stays cheap on the phone), a slow shimmer, dust motes drifting along it, a soft spill where it comes in at
+// the east end of the hall, a flare on each mirror it bounces off, and a bloom on the moon lock once it gets there.
+function clubMoonbeam(c,M,time,glow) {
+  // clubBeam traces tile centres on the floor; the light travels at the height of the mirror glass (about 1.3 tiles up on the 82 px
+  // stand), so lift it there. Once it reaches the Dome doors it ends on their moon lock.
+  const LIFT=1.3*T,B=clubBeam(M),moon=clubMoonBack();
+  const P=B.pts.map(([x,y],i)=>B.hit&&i===B.pts.length-1?[x*T,1.6*T]:[x*T,y*T-LIFT]);
+  const k=(moon?1:.8)*(.88+.12*Math.sin(time*1.7)+.05*Math.sin(time*5.3));
+  c.save(); c.globalCompositeOperation='lighter'; c.lineCap='round'; c.lineJoin='round';
+  const path=()=>{ c.beginPath(); P.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y)); };
+  for(const [lw,col,al] of [[34,'110,130,215',.045],[25,'130,150,230',.06],[17,'160,180,245',.08],[11,'195,210,255',.11],[6.5,'225,235,255',.16],[3.4,'245,248,255',.22],[1.8,'255,255,248',.24]]) {
+    path(); c.strokeStyle='rgba('+col+','+(al*k)+')'; c.lineWidth=lw; c.stroke(); }
+  // dust motes: each rides along the beam at its own speed and drifts a little across it
+  let len=0; const seg=[]; for(let i=1;i<P.length;i++) { const d=Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]); seg.push([len,d]); len+=d; }
+  const at=t=>{ for(let i=0;i<seg.length;i++) if(t<=seg[i][0]+seg[i][1]||i===seg.length-1) { const f=seg[i][1]?(t-seg[i][0])/seg[i][1]:0,a=P[i],b=P[i+1];
+    return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,(b[1]-a[1])/(seg[i][1]||1),-(b[0]-a[0])/(seg[i][1]||1)]; } return [P[0][0],P[0][1],0,0]; };
+  const n=Math.min(60,Math.floor(len/14));
+  for(let i=0;i<n;i++) {
+    const h=hash(i,77),sp=6+(h%9),t=(len-((time*sp+(h%997)*1.7)%len)),[x,y,nx,ny]=at(t);
+    const w=Math.sin(time*(.6+(h%5)*.15)+i)*(2+(h%4)),tw=.5+.5*Math.sin(time*(1.3+(h%7)*.2)+i*1.9);
+    const r=.8+(h%3)*.45; c.fillStyle='rgba(255,252,235,'+(.18+.42*tw)*k+')';
+    c.beginPath(); c.arc(x+nx*w,y+ny*w,r,0,Math.PI*2); c.fill();
+  }
+  c.restore();
+  // soft spill where the moonlight comes in, a flare on every mirror it bounces off, and the lock once it is reached
+  glow(P[0][0]-2,P[0][1],T*1.6,.22*k,'200,215,255');
+  for(let i=1;i<P.length-1;i++) { glow(P[i][0],P[i][1],T*1.1,.32*k,'235,242,255'); glow(P[i][0],P[i][1],T*.35,.45*k,'255,255,245'); }
+  if(B.hit) { glow(14.5*T,1.6*T,T*2.4,.38*k,'255,248,216'); glow(14.5*T,1.6*T,T*.7,.5*k,'255,255,240'); }
+}
 const CH9_NIGHT_MAPS=['town','row'];
 STORY_MAPFX.push(time=>{
   const M=currentMap,id=M.id,c=gfx,night=STORY.mode==='full'&&STORY.chapter===9&&flag('ch9-done')!==true;
@@ -3466,17 +3496,7 @@ STORY_MAPFX.push(time=>{
     const p=position(player),px=(p.x+.5)*T,py=(p.y+.5)*T;
     const g=c.createRadialGradient(px,py,T*3,px,py,T*9); g.addColorStop(0,'rgba(10,10,30,0)'); g.addColorStop(1,'rgba(10,10,30,'+(clubMoonBack()?.25:.5)+')');
     c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
-    // the round window at the east end of the hall
-    const wx=29*T+T/2,wy=11*T+T/2; ellipse(wx,wy-4,12,12,OUT); ellipse(wx,wy-4,10,10,clubMoonBack()?'#fff8d8':'#8a94c8'); rect(wx-1,wy-14,2,20,OUT); rect(wx-10,wy-5,20,2,OUT);
-    if(STORY.mode==='full'&&STORY.chapter>=9&&flag('ch9-club')) {
-      const B=clubBeam(M),a=(clubMoonBack()?.75:.5)+.15*Math.sin(time*4);
-      c.save(); c.lineCap='round';
-      for(const [lw,col,al] of [[10,'#9fb4ff',a*.3],[4,'#e8f0ff',a],[1.5,'#ffffff',a]]) {
-        c.globalAlpha=al; c.strokeStyle=col; c.lineWidth=lw; c.beginPath();
-        B.pts.forEach(([x,y],i)=>i?c.lineTo(x*T,y*T):c.moveTo(x*T,y*T)); c.stroke(); }
-      c.restore(); c.globalAlpha=1;
-      if(B.hit) glow(14.5*T,1.6*T,T*2,.35,'255,248,216');
-    }
+    if(STORY.mode==='full'&&STORY.chapter>=9&&flag('ch9-club')) clubMoonbeam(c,M,time,glow);
   }
   if(id==='dome') {
     const moon=clubMoonBack();

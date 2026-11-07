@@ -80,9 +80,10 @@ function clubBeam(map=worlds.moonclub) {
 // ---------- Props ----------
 // Painted props (art/props/moonclub/<slug>.webp, cut from Tom's object sheet by tools/make_moonclub_props.py). Sized in tile units
 // (T = 32): w or h, dy = how far the image sinks below the footprint's bottom edge (furniture with legs reaches past its tile row).
-const CLUB_ART={mirrorstand:{id:'mirrorstand',h:60,dy:3},coatrack:{id:'coatrail',w:68,dy:0},clubchair:{id:'armchair',h:52,dy:4},clubbench:{id:'bench',w:62,dy:3},
+// The three mirror stands and the Ballroom's gold frame are sized so their mirror ovals match on screen (Tom 11-07: all the same size).
+const CLUB_ART={mirrorstand:{id:'mirrorstand',h:82,dy:3},mirrorglass:{id:'mirrorstand-glass',h:82,dy:3},coatrack:{id:'coatrail',w:68,dy:0},clubchair:{id:'armchair',h:52,dy:4},clubbench:{id:'bench',w:62,dy:3},
   cardtable:{id:'cardtable',w:66,dy:2},cardtable3:{id:'cardtable',w:78,dy:2},clubpalm:{id:'palm',h:54,dy:2},ropepost:{id:'ropeposts',w:64,dy:0},jukebox:{id:'jukebox',h:76,dy:2},
-  clubpiano:{id:'piano',w:112,dy:12},mirrorframe:{id:'mirrorframe',h:100,dy:2}};
+  clubpiano:{id:'piano',w:112,dy:12},mirrorframe:{id:'mirrorframe',h:56,dy:2}};
 setTimeout(()=>PROPART.preload(Object.values(CLUB_ART).map(a=>'moonclub/'+a.id)),600);
 function clubPaint(a,cx,b) {   // true when the painted image is drawn, bottom centre on (cx, b + dy)
   const id='moonclub/'+a.id; if(!PROPART.ready(id)) return false;
@@ -110,13 +111,12 @@ drawObject=function(o,time) {
       rect(x+10,y-30,w-20,8,OUT); rect(x+11,y-29,w-22,6,'#24284a'); label('THE DOME',cx,y-28,'#f0d27a',1);
       return;
     }
-    case 'mirrorstand': {   // the painted brass stand; the glass shows only once its mirror is back (moonbeam puzzle)
-      const M=CLUB_MIRRORS.find(m=>m.m===o.mirror),back=M&&clubMirrorBack(M),A=CLUB_ART.mirrorstand;
-      if(!clubPaint(A,cx,b)) return;
-      if(!back) return;
-      const r=clubRot(M);
-      gfx.save(); gfx.translate(cx,b+A.dy-A.h*.75); gfx.rotate(r?Math.PI/4:-Math.PI/4);
-      rect(-12,-3,24,6,OUT); rect(-11,-2,22,4,'#dfe6f2'); rect(-11,-2,22,1,'#ffffff'); gfx.restore();
+    case 'mirrorstand': {   // the painted brass stand: empty, or with its mirror back (tools/make_moonclub_glass.py). The glass sheen leans
+      // like '/'; mirrored for '\' (clubRot 1), so the stand shows which way it turns the moonbeam.
+      const M=CLUB_MIRRORS.find(m=>m.m===o.mirror),back=M&&clubMirrorBack(M);
+      if(!back) { clubPaint(CLUB_ART.mirrorstand,cx,b); return; }
+      const A=CLUB_ART.mirrorglass,id='moonclub/'+A.id;
+      if(PROPART.ready(id)) PROPART.draw(id,cx,b+A.dy-A.h/2,{h:A.h,flip:clubRot(M)===1}); else clubPaint(CLUB_ART.mirrorstand,cx,b);
       return;
     }
     case 'clubplaque': rect(cx-1,y+8,2,20,OUT); rect(x+2,y-4,T-4,14,OUT); rect(x+3,y-3,T-6,12,'#c9a23a'); ellipse(cx,y+3,3,3,'#fff1cb'); return;

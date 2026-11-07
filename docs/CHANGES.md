@@ -1,3 +1,21 @@
+## 2026-11-07 (433): Moon Club mirrors and moonbeam (`mirrors1`)
+- Tom (09:32, phone): mirror frames different sizes; the mirror-back state looked bad; the light beam looked flat and geometric.
+- Cause of the size mismatch: when anyone stood behind a dividing wall or railing (including the hidden story monsters in the Card Room), plateWalkBehind drew that slice of the painting again over everything, and it cut the stands in front of it in half. Fix in engine/plate.js: hidden actors never pull a slice over, and live props (objects not baked into the painting) standing in front of a redrawn slice are drawn again on top, then anyone standing in front of them. Applies to every painted map; rooms_test and smoke clean.
+- Sizes: the three stands (82 px) and the Ballroom gold frame (56 px) are sized so their mirror ovals match on screen.
+- Mirror back: new painted image `art/props/moonclub/mirrorstand-glass.webp` (tools/make_moonclub_glass.py: Tom's empty stand with moonlit silver glass painted into its oval, one diagonal sheen leaning '/'; mirrored for '\'). Replaces the drawn white bar (removed).
+- Moonbeam: new `clubMoonbeam` in data/scenes.js: soft light in seven faint layers added together (no blur filter, cheap on the phone), slow shimmer, dust motes drifting along it, a flare on each mirror, bloom on the moon lock. Lifted 1.3 tiles so it travels at glass height and visibly hits each mirror. The drawn round window with a cross at the east end is gone (soft spill instead).
+- Tests: moonclub_test 0, dome_test 0, smoke FAILS [], rooms_test FAILS [], tag_check ok, unused_voice 0. Shots looked at: empty, mixed and solved states.
+
+## 2026-11-07 (431): Characters sized per room (`roomscale1`)
+- Tom: "size the characters for each room or area they are in", rooms only, all rooms. Fact: all 29 square room paintings now have their own scale, `ROOM_SCALE` in `engine/plate.js` (two measured points per painting: the front half wall and a back-wall door, counter, table or stools). `actorK(feetY)` draws everyone at real height for the floor under their feet, so characters get smaller toward the back wall. The fixed `actorScale` 1.98 / 1.08, `INTERIOR_ACTOR_SCALE` and `INTERIOR_ACTOR_BOOST` are removed for these rooms (`owInHouse` now checks `roomScale`).
+- Effect: at the front door sizes are about what they were (most rooms 0 to 15% bigger); at the back of most rooms Tom is 30 to 50% smaller (he had stood taller than the back doors). Amy's house, Tom's house and Tom's suite (cut-away floor plans) are now about half their old size, matching their painted doors.
+- Not touched: outdoor areas and the interiors flagged as areas (Moon Club, The Dome, school rooms, dungeon floors).
+- Test: `python3 tools/room_scale_test.py` (new; Tom measured front and back in every room against 5 ft 11, 0 fails), rooms_test (bakery, tomhouse, amyhouse, casa) 0, smoke ok. Desktop only; Tom judges on the phone.
+
+## 2026-11-07 (430): Michael battle stance prompts rewritten so he carries Lachlan and Isla in every frame (Art Library json only, no game change)
+- Cause (Tom 09:00): both Michael battle stance drafts said one figure, hands empty, so he was drawn alone. Both are rewritten as a group of three: both children in his arms in every frame, arms never swing, poses use legs, torso and face only (flinch, tired on one knee, napping seated with kids dozing, cheers, shielding crouch).
+- Entries: `michael-battle-stance-1` (8 frames, 4 x 2) and `michael-battle-stance-2` (6 frames, 3 x 2), still drafts; stance 1 now attaches the approved walk v3. Costs 2 Generate presses. Nothing installed; Michael is still not drawn in battle.
+
 ## 2026-11-07 (432): Tom's approved emotion sheet installed, with his own unimpressed picture (`tomemo2`)
 - Fact: Tom's Art Library entry `tom-emotions` was approved at v3 (`art/raw/characters/tom-emotions-v3.png`) but the game still showed the older cut. Tom (09:16) said to install it and use the picture he sent for unimpressed.
 - Source: `art/raw/characters/tom-emotions-v4.png` = v3 with the unimpressed cell (bottom right) replaced by Tom's picture (keyed off its magenta, scaled to the other figures' height, about 330 px). v1 to v3 stay as approved sources. The cutter reads the newest version.
