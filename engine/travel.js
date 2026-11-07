@@ -433,7 +433,7 @@ function arriveHome(arr,card=[]) {
     ...card,
     S.talk('Tom',(arr&&arr.tom)||travelPick('arrHome',TRAVEL_POOLS.arrHome)),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
-    S.wait(.6),
+    hugHearStep(),
     S.call(()=>{ player.facing='left';
       g.x=gStart; g.y=row; g.facing='right'; g.hidden=false;
       r.x=rStart; r.y=row+1; r.facing='right'; r.hidden=false; }),

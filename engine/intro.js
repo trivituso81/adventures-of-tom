@@ -102,23 +102,29 @@ const S={
     update(dt){ while(this.i<list.length) { const s=list[this.i]; if(!this.started) { s.start(); this.started=true; } if(!s.update(dt)) return false; this.i++; this.started=false; } return true; }})
 };
 
-// Grace and Rose jump on Tom: a quick hop toward him, a squeeze, hearts, and back.
+// The greeting (painted, data/story-poses.js set "hug", CHANGES 407): Tom hears the girls shout (hg_hear), lights up (hg_delight) and crouches with his arms open (hg_crouch)
+// while they run in; then one painted group picture at Tom's tile replaces the three of them (hg_run, hg_crash, then hg_group, held under the greeting lines).
+// hugEndStep() brings the girls and Tom's walking figure back.
+function hugHearStep() {
+  const SEQ=[['hg_hear',0],['hg_delight',.32],['hg_crouch',.68]];
+  return {t:0,start(){ this.t=0; if(typeof storyPosesLoad==='function') storyPosesLoad('tom'); player.scenePose={f:'hg_hear'}; },
+    update(dt){ this.t+=dt; let f='hg_hear'; for(const [n,at] of SEQ) if(this.t>=at) f=n;
+      player.scenePose={f}; return this.t>=.9; }};
+}
 function hugStep() {
-  return {t:0,start(){ this.t=0; snd.oof(0); snd.squeeze(.3); sfx.giggle(); setTimeout(()=>sfx.kiss&&sfx.kiss(),450); },
+  const SEQ=[['hg_run',0],['hg_crash',.28],['hg_group',.58]];
+  return {t:0,start(){ this.t=0; this.f=''; this.kissed=false; const {g,r}=IA(); g.hidden=true; r.hidden=true; g.scr=null; r.scr=null; g.lift=0; r.lift=0; },
     update(dt){
-      const {g,r}=IA(); this.t+=dt; const t=this.t;
-      const lean=(a,dx,dy,delay)=>{
-        const u=Math.max(0,t-delay);
-        const k=u<.3?ease(u/.3):(u<1.1?1:Math.max(0,1-(u-1.1)/.3));
-        a.scr={x:a.x+dx*.32*k,y:a.y+dy*.32*k};
-        a.lift=u<.3?Math.sin(Math.PI*u/.3)*12:(u<1.1?Math.abs(Math.sin((u-.3)*16))*2:0);
-      };
-      lean(g,player.x-g.x,player.y-g.y,0);
-      lean(r,player.x-r.x,player.y-r.y,.15);
-      if(t>.3&&t<1.2&&Math.floor(t*10)!==Math.floor((t-dt)*10)&&Math.floor(t*10)%2===0) intro.hearts.push({x:player.x+.5+(Math.random()-.5)*.8,y:player.y-.6,t:0});
-      if(t>=1.5) { g.scr=null; r.scr=null; g.lift=0; r.lift=0; return true; }
-      return false;
+      this.t+=dt; const t=this.t; let f='hg_run'; for(const [n,at] of SEQ) if(t>=at) f=n;
+      if(f!==this.f) { this.f=f; player.scenePose={f}; if(f==='hg_crash') { snd.oof(0); snd.squeeze(.3); sfx.giggle(); } }
+      if(!this.kissed&&t>=.95) { this.kissed=true; sfx.kiss&&sfx.kiss(); }
+      if(t>.58&&t<1.4&&Math.floor(t*10)!==Math.floor((t-dt)*10)&&Math.floor(t*10)%2===0) intro.hearts.push({x:player.x+.5+(Math.random()-.5)*.8,y:player.y-.6,t:0});
+      return t>=1.5;
     }};
+}
+// After the greeting lines: the girls reappear at their tiles beside Tom and he stands up in his walking figure.
+function hugEndStep() {
+  return {start(){ const {g,r}=IA(); g.hidden=false; r.hidden=false; player.scenePose=null; },update(){ return true; }};
 }
 
 // Tom stretches after six hours in the cab line: his eight painted stretch poses (data/story-poses.js, storypose1) in order, facing the camera.

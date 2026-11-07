@@ -36,6 +36,14 @@ SETS = {
     # (his overworld stand), so the whole figure with Rose is 53.5 rows (466 px of the sit cell, of which Tom's body is 366).
     'tomride': {'member': 'tom', 'sheet': 'tomride-poses-v2.png', 'cut': (4, 3), 'k': 9, 'h': 53.5, 'ref': 'tr_sit',
                 'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
+    # Greeting hug (2026-11-06, Tom: chapter 1 opening and every return to Long Island): 4 x 2 cells, Tom alone in the first three (hear, delight, crouch),
+    # Tom with Grace and Rose in cells 4 to 6 (run in, crash, group hug). Cells 7 and 8 are not used: each shows only ONE girl (Grace lifted in 7, Rose alone in 8),
+    # and a frame that replaces all three actors must hold both. Stored under member 'tom'. The generator painted this one on a
+    # crimson ground, not magenta, so it is keyed against its own ground colour (key_ground). One size factor: Tom's standing figure (cell 1) is his 42 overworld rows.
+    # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured by eye; checked with tools/shots/hug-feet.png), so he stays on one spot from frame 4 to 8.
+    'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v1.png', 'ground': (211, 24, 95), 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
+            'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group'],
+            'feet': {'hg_run': 192, 'hg_crash': 143, 'hg_group': 146}},
 }
 
 # Emotion poses (emo7, 2026-11-06): the 8 full-body emotion frames of each character (art/emotions/<id>.webp strips, cut by emotion_frames.py), drawn on the
@@ -97,6 +105,57 @@ def match_standing(cid, S, figs, f):
 # heads about 5 percent. Factors are one uniform scale per frame about the feet; Reach (arms overhead, head reads smaller) is left as painted.
 STRETCH_FIT = {'tom': {'st_stiff': .96, 'st_rise': .96, 'st_bendl': .88, 'st_bendr': .88}}
 
+def key_ground(path, ground):
+    """Key a pose sheet painted on a flat ground that is not magenta (the greeting hug came back crimson). Same recipe as walk_sheet_frames._key:
+    ground = ground-coloured regions touching the border plus big enclosed holes; the 5 px rim is unmixed against the ground colour using the
+    nearest solid figure colour. Returns an RGBA array."""
+    from scipy import ndimage as ndi
+    a = np.array(Image.open(path).convert('RGB')).astype(float); M = np.array(ground, float)
+    dist = np.sqrt(((a - M) ** 2).sum(2))
+    lab, n = ndi.label(dist < 60)
+    border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    idx = range(1, n + 1); sizes = ndi.sum(np.ones_like(lab), lab, idx); md = ndi.mean(dist, lab, idx)
+    keep = border | {i + 1 for i in range(n) if sizes[i] >= 30 and md[i] < 18}
+    bg = np.isin(lab, list(keep))
+    # Shaded ground pockets between the figures (the ground darkened by the soft shadows, e.g. rgb 160 32 70): same hue, blue above green. A hair bow is red with blue at
+    # green's level, so it is not taken.
+    cos = (a @ M) / (np.linalg.norm(a, axis=2) * np.linalg.norm(M) + 1e-9)
+    dk = (cos > 0.985) & (a[:, :, 0] - a[:, :, 1] > 50) & (a[:, :, 2] - a[:, :, 1] > 22)
+    dl, dn = ndi.label(dk); ds = ndi.sum(dk, dl, range(1, dn + 1))
+    dark = np.isin(dl, [i + 1 for i in range(dn) if ds[i] >= 30]); bg = bg | dark
+    near = ndi.binary_dilation(bg, iterations=5) & ~bg
+    solid = ~bg & ~near & (dist > 60) & ~dk
+    _, (iy, ix) = ndi.distance_transform_edt(~solid, return_indices=True)
+    F = a[iy, ix]
+    d = F - M; num = ((a - M) * d).sum(2); den = np.maximum((d * d).sum(2), 1.0)
+    al = np.clip(num / den, 0, 1)
+    al = np.where(bg, 0.0, np.where(near, al, 1.0)); al[al < 0.15] = 0
+    dec = np.clip((a - (1 - al)[..., None] * M) / np.maximum(al, 0.05)[..., None], 0, 255)
+    w = np.clip((al - 0.5) / 0.4, 0, 1)[..., None]
+    col = np.where(near[..., None], dec * w + F * (1 - w), a)
+    return np.dstack([np.clip(col, 0, 255), al * 255]).astype(np.uint8)
+
+
+def cut_cells(rgba, cols, rows, n):
+    """Like battle_sheet_frames._cut, on an already keyed array: every piece goes to the grid cell its centre is in. Returns n RGBA crops in reading order."""
+    from scipy import ndimage as ndi
+    H, W = rgba.shape[:2]; A = rgba[:, :, 3] > 20
+    lab, cnt = ndi.label(ndi.binary_dilation(A, iterations=6))
+    sizes = ndi.sum(A, lab, range(1, cnt + 1)); objs = ndi.find_objects(lab); cells = {}
+    for i in range(cnt):
+        if sizes[i] < 40: continue
+        sy, sx = objs[i]
+        c = min(cols - 1, int((sx.start + sx.stop) / 2 / W * cols)); r = min(rows - 1, int((sy.start + sy.stop) / 2 / H * rows))
+        cells.setdefault(r * cols + c, []).append(i + 1)
+    assert sorted(cells) == list(range(n)), sorted(cells)
+    out = []
+    for j in range(n):
+        keep = [l for l in cells[j] if sizes[l - 1] > 0.02 * max(sizes[m - 1] for m in cells[j])]
+        m = np.isin(lab, keep); cut = rgba.copy(); cut[~m, 3] = 0
+        im = Image.fromarray(cut, 'RGBA'); out.append(im.crop(im.getbbox()))
+    return out
+
+
 def up(n, k):
     return -(-n // k) * k
 
@@ -121,9 +180,9 @@ def feet_cx(img):
     return float(np.where(band)[1].mean())
 
 
-def place(frames, k):
-    """One common canvas (multiples of k): footing on the centre column, feet on the bottom row, then trimmed."""
-    items = {n: (im, feet_cx(im)) for n, im in frames.items()}
+def place(frames, k, anchors=None):
+    """One common canvas (multiples of k): footing on the centre column, feet on the bottom row, then trimmed. anchors: frame -> x of the footing to use instead."""
+    items = {n: (im, (anchors or {}).get(n) or feet_cx(im)) for n, im in frames.items()}
     half = up(int(np.ceil(max(max(ax, im.width - ax) for im, ax in items.values()))) + 1, k)
     Hc = up(max(im.height for im, _ in items.values()), k)
     out = {}
@@ -189,14 +248,15 @@ for cid, S in SETS.items():
         for i, n in enumerate(S['names']):
             c = sh.crop((i * fw, 0, (i + 1) * fw, sh.height)); figs[n] = c.crop(c.getbbox())
         if not S['k']: S['k'] = max(5, min(10, int(figs[S['ref']].height / S['h'])))
+    elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground']), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1])))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
-    if 'strip' not in S and 'cut' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
+    if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
     if 'strip' in S:
         figs = match_standing(cid, S, figs, f)
     if cid in STRETCH_FIT:
         figs = {n: (im.resize((round(im.width * STRETCH_FIT[cid].get(n, 1.0)), round(im.height * STRETCH_FIT[cid].get(n, 1.0))), Image.LANCZOS) if STRETCH_FIT[cid].get(n, 1.0) != 1.0 else im) for n, im in figs.items()}
-    big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'])
+    big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'], {n: v * f for n, v in S.get('feet', {}).items() if v})
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}
     pal, rows = quantize(small, COLORS)
     rects = pack(big, os.path.join(ART, f'{cid}-story.webp'))

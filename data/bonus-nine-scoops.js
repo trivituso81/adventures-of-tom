@@ -594,7 +594,7 @@ SCENES.nsOpening=()=>{
     {step:stretchStep()},
     {talk:'Tom',lines:["Oof, I'm finally here! Six hours on Delta One and I didn't miss the big day."],voice:[['tom','arrive_bday']]},
     {call:()=>{ intro.bubble={text:'TATA!!!',t:0}; snd.gasp(); }}, {say:['grace','introshout']}, {say:['rose','introshout',.5]},
-    {wait:.6},
+    {step:hugHearStep()},                            // painted: Tom hears them, lights up, crouches with his arms open (data/story-poses.js "hug")
     {face:'tom',dir:'left'},
     {place:'grace',at:[gStart,row],dir:'right'}, {show:'grace'},
     {place:'rose',at:[rStart,row+1],dir:'right'}, {show:'rose'},
@@ -606,6 +606,7 @@ SCENES.nsOpening=()=>{
     {step:hugStep()},
     {talk:'Grace',lines:['TATA! You came for my BIRTHDAY!','I\'ve been nine for SIX hours.'],voice:[['grace','arrive_bday'],['grace','bday_nine']]},
     {talk:'Rose',lines:['I\'ve been six for a hundred MILLION years.','Tata, up! Up up up!'],voice:[['rose','bday_six'],['rose','intro2']]},
+    {step:hugEndStep()},
     {call:()=>{ const r=sceneActor('rose'); snd.whee(); snd.oof(.38); r.depthBias=-.05; r.facing='left'; }},
     {hop:'rose',from:[dx-1,row+1],to:[dx,row],time:.5,arc:22,lift:[0,SHOULDER]},
     {call:()=>{ const r=sceneActor('rose'); r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; sfx.giggle(); sfx.quack(.3); }},
