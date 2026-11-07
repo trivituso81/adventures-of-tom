@@ -15164,8 +15164,16 @@
    "prompt": "Draw one Tombo sheet for a family role-playing game: two people doing one shared action together.\n\nPicture 1 is Tom's hero painting. Picture 2 is his partner's hero painting. Picture 3 is Tom's battle sheet and Picture 4 is his partner's battle sheet. Copy each person exactly in every frame: the same face, age, body, hair, clothes, shoes, colors, painting style, level of detail and head size compared to the body. Show the real heights and the real size gap: Tom is 5 feet 11 inches, TNB 5 feet 10, Boppy 5 feet 7, Amy and Deedee 5 feet 5, Grace 4 feet 2, Rose 3 feet 4. Adults share one head size; children's heads follow Grace and Rose. If the partner is a dog (picture 2), copy her coat, collar and size from pictures 2 and 4, with no hands: her tail and ears carry the feeling.\n\nOnly these two people appear, never anyone else. One image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. Both people are in every frame and both are complete, from the top of the hair to the soles of the shoes, feet on one ground line, with clear magenta margin around the pair. No grid lines, numbers, text, speech bubbles, effects or shadows. Props appear only when a person is holding or touching them. Clothing never uses magenta.\n\nPainted, realistic caricature look: oversized head, slim body, smooth soft shading, warm golden light from above, no thick outlines. Not pixel art, not 16-bit. Show crouches and lifts as big, readable silhouettes. Family friendly.\n\nThe Tombo: Headphones in the Dark. Tom follows a glowing gold sound ribbon through the dark to Rose, lifts her onto his shoulders, then reaches up to press PLAY together. Rose sits in the dark wearing Tom's big silver headphones with little music notes floating out of them, rides on his shoulders, then throws her arms up when the music starts.\n\nSix frames:\n1. A dark stage lit only by Rose in Tom's big silver headphones; little music notes float out of the headphones.\n2. A gold sound ribbon reaches across the dark from Rose toward Tom; Tom stands in the dark, following it with his eyes.\n3. Tom walks along the glowing ribbon to Rose and lifts her up onto his shoulders; her headphones are still on.\n4. Tom and Rose reach up and press PLAY together; the dark lifts as a gold sound wave sweeps across the stage.\n5. Giant music notes rain down from above; Rose waves both arms and Tom pumps one fist.\n6. Tom and Rose on his shoulders, headphones on, both grinning in the bright light."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-greeting-crouch-v1.png",
+     "date": "2026-11-07",
+     "from": "v2",
+     "at": 1794041104901
+    }
+   ],
    "rejects": [],
    "id": "tom-greeting-crouch",
    "tab": "Characters",
