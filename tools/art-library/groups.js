@@ -30,7 +30,11 @@ try { for (const l of fs.readFileSync(__dirname + '/prompts/enemy-table.txt', 'u
 function groupOf(e) {
   const fail = why => { throw new Error('groups.js: no group for ' + e.id + ' (' + why + ')'); };
   switch (e.tab) {
-    case 'Characters': { const g = PEOPLE[e.id.split('-')[0]]; return g || fail('unknown person'); }
+    case 'Characters': {
+      const tm = /^tombo-([a-z]+)\d*(-|$)/.exec(e.id);   // Tombo pairs: tombo-grace1 and so on (Tom + partner); members of Family Finishes: tombo-ff1-<member>
+      if (tm && PEOPLE[tm[1]]) return 'Tombos, Tom + ' + PEOPLE[tm[1]];
+      const g = PEOPLE[e.id.split('-')[0]]; return g || fail('unknown person');
+    }
     case 'NPCs': { const n = +e.id.replace('npc-batch-', ''); return n >= 1 && n <= 4 ? 'Long Island' : n >= 5 ? 'Los Angeles' : fail('batch number'); }
     case 'Areas': {
       if (LA_PLATES.has(e.id)) return 'Los Angeles paintings';

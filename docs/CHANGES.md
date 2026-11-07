@@ -1,3 +1,13 @@
+## 2026-11-06 (409): Tombo sheets, slice 1: the three Tom + Grace Tombos in the Art Library (no game change)
+
+- Tom (10:17): Tombo sheets go in the Art Library, one 3 x 2 picture per Tombo, both people in the picture. Slice 1 (this push) is Tom + Grace only: `tombo-grace1` (Squishy Delivery), `tombo-grace2` (Uncle Spotter Toss), `tombo-grace3` (The Golden Dumpling Wish). The other 18 Tombos and the 10 Family Finish member entries follow in later pushes.
+- Beats come from the LIVE animations (comment blocks above `B2_TOMBO_ANIM.<id>` in engine/battle2-kind.js), not from claude/battle-design.md: that table is out of date (its names and beats differ from the game: the design table calls Tom + Grace 1 "Dumpling Unboxed", the game calls it Squishy Delivery and plays a begging scene).
+- Files: `tools/art-library/tombo-prompts.js` (rows and entries), `tools/art-library/prompts/char-tombo-sheet.txt` (shared header), `tools/art-library/groups.js` (Tombo id rule, group "Tombos, Tom + <partner>"; comma, not colon, because validate.js bans colons in groups). `data/art-prompts.json`: three entries appended, no existing entry touched (diff is additions only).
+- Refs (4 each): Tom hero, partner hero, Tom battle sheet 1, partner battle sheet 1. No Tombo entry uses the Rose-riding picture yet (rose1, rose2, rose3, ff1 get it later).
+- Checks: `node tools/art-library/validate.js` OK (687 entries); the module validates on its own.
+- Not done: no game files, no tag bump, no Generate presses (Tom presses; 3 presses for this slice). Test.py's EXPECT counts were already out of date before this push and were not changed here.
+- Approved is not installed: an approved sheet is installed by a later session (cut frames, replace that Tombo's staging, purge the old drawing code, `tombo_test.py <id>`).
+
 ## 2026-11-06 (408): Deedee voice takes from Tom's export (5 lines re-recorded, no tag)
 
 - Tom sent a Voice Library export (local-clips-export_3_.json, made 2026-11-07 00:08 UTC) with 170 Deedee clips out of 2010. Filtered to Deedee and merged with `tools/voice-library/merge-local.js`.
