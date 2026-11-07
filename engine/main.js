@@ -36,6 +36,25 @@ function pollGamepad() {
   if(A) pressAction();
 }
 
+// Loading screen gate (Tom 2026-11-06): the #boot card stays up until the welcome painting, the title logo and the nine welcome family
+// sheets are downloaded and decoded, so the welcome screen appears whole instead of filling in after the card fades. After 25 s it lets go
+// anyway (a failed file counts as done), so a slow or missing file can never trap the player behind the card.
+let bootDone=false; const bootT0=performance.now(), bootArt=[];
+(function(){
+  const land=document.documentElement.classList.contains('landscape')||innerWidth>innerHeight;
+  for(const u of [land?'art/welcome-land.webp?v=title1':'art/welcome.webp','art/title-logo.webp?v=title1']) {
+    const st={ok:false},im=new Image(); im.src=u;
+    const done=()=>{ st.ok=true; };
+    (im.decode?im.decode():Promise.reject()).then(done,()=>{ im.onload=im.onerror=done; if(im.complete) done(); });
+    bootArt.push(st);
+  }
+})();
+function bootReady() {
+  if(performance.now()-bootT0>25000) return true;
+  if(!bootArt.every(a=>a.ok)) return false;
+  return ['tom','grace','rose','tnb','amy','deedee','boppy','nara','justin'].every(id=>{ const a=PAINTED[id+'Ow']; return !a||a.ready||a.failed; });
+}
+
 function frame(now) {
   const dt=Math.min(.05,Math.max(0,(now-previous)/1000));
   previous=now;
@@ -53,7 +72,7 @@ function frame(now) {
     try { updateUI(now); } catch(err) { gameFault('ui',err); }
   }
   try { refreshCutUI(); } catch(err) { gameFault('cutscene ui',err); }
-  document.documentElement.classList.add('js-running');
+  if(!bootDone&&bootReady()) { bootDone=true; document.documentElement.classList.add('js-running'); }
   requestAnimationFrame(frame);
 }
 
@@ -83,7 +102,7 @@ startSplash();
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
-  d.textContent='build tomface1';
+  d.textContent='build bootgate1';
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
 })();

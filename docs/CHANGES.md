@@ -1,3 +1,12 @@
+## 2026-11-06 (415): Loading screen waits for the welcome art and the family (`bootgate1`)
+
+- Tom (18:44): the welcome background and characters take a second or two to appear after the loading card fades.
+- Cause: `engine/main.js` added `js-running` (hides the #boot card) on the first frame. At that moment `art/welcome.webp`, the logo and the nine welcome sheets (`tomOw` ... `justinOw`) were still downloading, so they popped in after. Measured with a throttled phone profile: all nine sheets reported not ready when the card hid.
+- Change: `bootReady()` in `engine/main.js` holds the card until the welcome painting for the current orientation and the logo are downloaded and decoded (`Image.decode()`) and the nine welcome atlases are ready. A failed file counts as done; after 25 s it lets go anyway.
+- Not changed: total download size (the card now waits for about 1 MB of art that used to arrive after it). Voice-as-mp3, a progress bar and per-character data are still POST-BUILD only.
+- Checks: with the gate, a screenshot taken the moment the card hides shows the full welcome screen; smoke FAILS [], tag_check ok.
+- Tags: `bootgate1`.
+
 ## 2026-11-06 (414): Tom's battle stance faces the monsters (`tomface1`)
 
 - Tom (17:19): in battle his new stance faces the wrong way.
