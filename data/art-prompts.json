@@ -24,8 +24,16 @@
    "group": "Test card"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/characters/tom-battle-stance-1-v2.png",
+     "date": "2026-11-07",
+     "from": "v1",
+     "at": 1794011648793
+    }
+   ],
    "rejects": [],
    "id": "tom-battle-stance-1",
    "tab": "Characters",
