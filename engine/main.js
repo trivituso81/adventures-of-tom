@@ -103,7 +103,7 @@ startSplash();
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
 <<<<<<< Updated upstream
-  d.textContent='build mirrors1';
+  d.textContent='build tombo2';
 =======
   d.textContent='build tombo1';
 >>>>>>> Stashed changes
