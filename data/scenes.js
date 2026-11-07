@@ -3184,12 +3184,16 @@ SCENES.ch9Coat=[
   {talk:'Tom',lines:['And our mirror is hanging off your other shoulder.']},
   {talk:'The Hanger-On',lines:['Nobody gets anything without a ticket.']},
   {battle:'coathanger',tut:'ch9coat'},
+];
+// The end of the Hanger-On fight on its own: it also finishes a save that closed after the fight but before the mirror (see TRIGGERS).
+SCENES.ch9CoatEnd=[
   ...CH9_AFTER(()=>flag('battle:coathanger')!=='win',[
     {flag:'ch9-coat'},
     {talk:'The Hanger-On',lines:['...Okay. Okay. You can take it to her. Tell her I held on the whole time.']},
     {talk:'Deedee',lines:['We\'ll tell her, honey. She\'ll be so pleased. She\'ll pretend not to be. That\'s how you know.']},
     ...ch9MirrorSteps('coat')])
 ];
+SCENES.ch9Coat.push(...SCENES.ch9CoatEnd);
 SCENES.ch9Cards=[
   {flag:'ch9-cards',value:'pending'},
   {walk:'The Sore Loser',to:routeBeside('The Sore Loser'),speed:.25},
@@ -3198,6 +3202,9 @@ SCENES.ch9Cards=[
   {talk:'Deedee',lines:['You ARE a sore loser, honey.']},
   {talk:'Boppy',lines:['I\'m a sore WINNER. Who hasn\'t won yet.']},
   {battle:'soreloser',tut:'ch9cards'},
+];
+// The end of the Sore Loser fight on its own: it also finishes a save that closed after the fight but before the mirror (see TRIGGERS).
+SCENES.ch9CardsEnd=[
   ...CH9_AFTER(()=>flag('battle:soreloser')!=='win',[
     {flag:'ch9-cards'},
     {talk:'The Sore Loser',lines:['...Best two out of three?']},
@@ -3206,6 +3213,7 @@ SCENES.ch9Cards=[
     {trace:'boppy-cards'}, {hearts:'boppy'},
     ...ch9MirrorSteps('cards')])
 ];
+SCENES.ch9Cards.push(...SCENES.ch9CardsEnd);
 SCENES.ch9Ball=[
   {flag:'ch9-ball',value:'pending'},
   {walk:'The Wallflower',to:routeBeside('The Wallflower'),speed:.15},
@@ -3214,6 +3222,9 @@ SCENES.ch9Ball=[
   {talk:'The Wallflower',lines:['Every song, 1924 to 1971. I stood right here. Nobody. Ever.']},
   {talk:'Tom',lines:['Then we\'ll ask. Nicely. After you give us the mirror.']},
   {battle:'wallflower',tut:'ch9ball'},
+];
+// The end of the Wallflower fight on its own: it also finishes a save that closed after the fight but before the mirror (see TRIGGERS).
+SCENES.ch9BallEnd=[
   ...CH9_AFTER(()=>flag('battle:wallflower')!=='win',[
     {flag:'ch9-ball'},
     {talk:'The Wallflower',lines:['...You were very nice about it. For a fight. Here. The mirror. It was the big one, over the bandstand, before she came.']},
@@ -3221,6 +3232,8 @@ SCENES.ch9Ball=[
     {talk:'The Wallflower',lines:['The Mirrorball. Up in the Dome. She hasn\'t stopped spinning in three nights.']},
     ...ch9MirrorSteps('ball')])
 ];
+SCENES.ch9Ball.push(...SCENES.ch9BallEnd);
+for(const N of ['Coat','Cards','Ball']) SCENES['ch9Reset'+N]=[{flag:'ch9-'+({Coat:'coat',Cards:'cards',Ball:'ball'})[N],value:false}];
 // 6. Optional: the jukebox. Which record for Deedee and Boppy? (data in ch9Jukebox below).
 SCENES.ch9Dance=[
   {flag:'ch9-dance'},
@@ -3326,7 +3339,13 @@ TRIGGERS.push(
   {id:'ch9-club',map:'moonclub',when:{...CH9,flag:'ch9-luna',notFlag:'ch9-club'},scene:'ch9Club'},
   {id:'ch9-coat',map:'moonclub',at:[1,1,12,7],when:{...CH9,flag:'ch9-club',notFlag:'ch9-coat'},scene:'ch9Coat'},
   {id:'ch9-cards',map:'moonclub',at:[17,1,28,7],when:{...CH9,flag:'ch9-club',notFlag:'ch9-cards'},scene:'ch9Cards'},
-  {id:'ch9-ball',map:'moonclub',at:[8,13,21,19],when:{...CH9,flag:'ch9-club',notFlag:'ch9-ball'},scene:'ch9Ball'},
+  // The whole Ballroom, side walkways included (the old box stopped at column 21, so Tom could reach the Wallflower from the east walkway without starting her scene).
+  {id:'ch9-ball',map:'moonclub',at:[3,13,28,20],when:{...CH9,flag:'ch9-club',notFlag:'ch9-ball'},scene:'ch9Ball'},
+  // A room scene marks its flag 'pending' while it runs. If the game closed in the middle (the autosave after the fight keeps
+  // 'pending'), the room was stuck forever. Back in the club: a finished fight plays just the ending, an unfinished one resets the room so its scene plays again on the way in.
+  ...[['coat','coathanger','Coat'],['cards','soreloser','Cards'],['ball','wallflower','Ball']].flatMap(([c,foe,N])=>[
+    {id:'ch9-'+c+'-end',map:'moonclub',when:{...CH9,flag:{['ch9-'+c]:'pending'},test:S=>!!S.flags['battle:'+foe]},scene:'ch9'+N+'End'},
+    {id:'ch9-'+c+'-redo',map:'moonclub',when:{...CH9,flag:{['ch9-'+c]:'pending'},test:S=>!S.flags['battle:'+foe]},scene:'ch9Reset'+N}]),
   {id:'ch9-boss',map:'dome',when:{...CH9,flag:'ch9-door',notFlag:'ch9-boss'},scene:'ch9Boss'},
   {id:'ch9-after',map:'dome',when:{...CH9,flag:{'battle:mirrorball':'win'},notFlag:'ch9-clear'},scene:'ch9AfterBoss'},
   {id:'ch9-end',map:'grands',when:{...CH9,flag:'ch9-clear',notFlag:'ch9-done'},scene:'ch9End'}

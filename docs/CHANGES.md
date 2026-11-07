@@ -1,3 +1,10 @@
+## 2026-11-07 (429): Chapter 9 Ballroom mirror fix (`ch9resume1`)
+- Bug (Tom 08:57, phone): every Moon Club monster beaten, Ballroom box still unchecked, stuck.
+- Cause 1: each room scene sets its flag to 'pending' while it runs and only sets it true after the fight's ending lines. The quiet autosave after every fight stores 'pending'; if the app closed or reloaded before the ending, the room's trigger (notFlag) never fired again. Same hole in the Coat Check and Card Room.
+- Cause 2: the Ballroom trigger box stopped at column 21, so the east walkway (columns 22 to 28) reached the Wallflower without starting her scene.
+- Fix (data/scenes.js only): the three room endings are their own scenes (`ch9CoatEnd`, `ch9CardsEnd`, `ch9BallEnd`, appended to the room scenes, so the normal path is unchanged). New triggers anywhere in the Moon Club: 'pending' with the fight's battle flag set plays the ending (mirror back, goal updates); 'pending' with no fight resets the room so its scene plays on the way in. Ballroom box widened to [3,13,28,20]. No lines changed.
+- Tests: ad hoc playwright check (east walkway fires, stuck save finishes to ch9-ball true and ch9-mirrors true with the stand goal, unfinished resets), moonclub_test 0, smoke FAILS [], tag_check ok, unused_voice 0.
+
 ## 2026-11-07 (428): Tombo split sheets, push 2: Director's Cut (Art Library entries only, no game change)
 - Fact: every Director's Cut now has a Tom sheet, a partner sheet and one object sheet (no people). 63 new entries: 21 DC pairs as `tombo-<id>-dc-tom`, `-dc-<partner>`, `-dc-objects` (no object sheet for grace1 and nara2, nothing standalone is drawn), plus `tombo-ff1-dc-objects` and `tombo-ff2-dc-objects` (ff3 has none). The 10 member entries `ff1dc-*`, `ff2dc-*`, `ff3dc-*` were rewritten in place (no objects in a person sheet). The 21 old DC pair entries carry a `note` (superseded).
 - Rows: `tools/art-library/tombo-split/dc-<partner>.js`, `dc-ff.js`; builder `tombo-split-prompts.js` (dc=true leaves the live name out of the prompt body, uses group "Director's Cut, ..." and member ids `ffNdc-<key>`).
