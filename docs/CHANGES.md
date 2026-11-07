@@ -1,3 +1,10 @@
+## 2026-11-07 (422): Family Finish member sheets: ten solo Art Library entries (no game change)
+
+- Fact: one solo 3 x 2 sheet per Family Finish member (ff1 Tom, TNB, Grace, Rose; ff2 Amy, Grace, Rose; ff3 Deedee, Boppy, Tom), ids `ff1-tom` ... `ff3-tom`, group "Family Finishes, <name>". Solo (not group) so no sheet holds three or four faces at once. ff4 (whole party) has no entries. Beats from `B2_TOMBO_ANIM.ff1`, `ff2`, `ff3` in engine/battle2-kind.js; today's Deedee and Boppy only (no young flashbacks). Refs per entry: member hero and battle sheet 1.
+- Files: `tools/art-library/ff-prompts.js`, `tools/art-library/prompts/char-ff-sheet.txt`, `data/art-prompts.json` (ten entries appended, additions only). The ff3 name reads "Fifty-One Years and Counting" in group and title (validate.js bans the ampersand in a group).
+- Checks: `node tools/art-library/validate.js` OK (716 entries). No left or right words.
+- Not done: no game files, no tag bump, no Generate presses (10). Pending: Director's Cut entries (31).
+
 ## 2026-11-07 (421): Tombo sheets, slice 7: the three Tom + Nara Tombos in the Art Library (no game change)
 
 - Slice 7 of the Tombo queue: `tombo-nara1` (Sit. Paw. Treat.), `tombo-nara2` (Tug of War), `tombo-nara3` (Cuddle). Beats from `B2_TOMBO_ANIM.nara1`, `nara2`, `nara3` in engine/battle2-kind.js. Nara is a dog, so the partner has no hands; the prompts keep her on four paws.

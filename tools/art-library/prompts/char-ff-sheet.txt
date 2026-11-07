@@ -1,0 +1,7 @@
+Draw one Family Finish sheet for a family role-playing game: one person doing their part of a big shared moment, shown alone.
+
+Picture 1 is this person's hero painting. Picture 2 is their battle sheet. Copy the person exactly in every frame: the same face, age, body, hair, clothes, shoes, colors, painting style, level of detail and head size compared to the body. Show the real height: Tom is 5 feet 11 inches, TNB 5 feet 10, Boppy 5 feet 7, Amy and Deedee 5 feet 5, Grace 4 feet 2, Rose 3 feet 4. Adults share one head size; children's heads follow Grace and Rose.
+
+Only this one person appears, never anyone else. One image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. The person is complete in every frame, from the top of the hair to the soles of the shoes, feet on one ground line, with clear magenta margin around them. No grid lines, numbers, text, speech bubbles, effects or shadows. Props appear only when the person is holding or touching them. Clothing never uses magenta.
+
+Painted, realistic caricature look: oversized head, slim body, smooth soft shading, warm golden light from above, no thick outlines. Not pixel art, not 16-bit. Show poses as big, readable silhouettes. Family friendly.
