@@ -16518,7 +16518,7 @@
    ]
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "id": "tombo-amy3-tom",
    "tab": "Characters",
    "group": "Tombos, Tom + Amy",
@@ -16537,6 +16537,15 @@
      "note": "Tom has no hair and is massively larger than any",
      "from": "v1",
      "at": 1794072070061
+    }
+   ],
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-amy3-tom-v1.png",
+     "date": "2026-11-07",
+     "from": "v2",
+     "at": 1794072160174
     }
    ]
   },
