@@ -1,3 +1,14 @@
+## 2026-11-06 (408): Deedee voice takes from Tom's export (5 lines re-recorded, no tag)
+
+- Tom sent a Voice Library export (local-clips-export_3_.json, made 2026-11-07 00:08 UTC) with 170 Deedee clips out of 2010. Filtered to Deedee and merged with `tools/voice-library/merge-local.js`.
+- Result: 5 dialogue clips changed audio. `dialog-ch25.js`: "Where are my reading glasses? I had them one second ago. I need to read the timer." / "So they are. Not one word to Boppy." / "A sliver for me. Just a sliver. Sourdough gives me gas." / "And I eat it anyway. That's love, Tommy." `dialog-ch9.js`: "Tommy. Dance with your mother."
+- The other 39 Deedee battle takes and the rest of the dialogue takes are byte-identical to the baked audio, so nothing changed for them. `data/voice/deedee.js` re-serialised with the same clips and was reverted (no audio change).
+- Not in this export: the 45 Deedee lines still in the old voice (`claude/deedee-old-voice-2026-11-05.md`). Show > Old voice still lists 45. Tom needs to re-take those in the Voice Library.
+- `data/voice-index.json` rebuilt (battle-scripts, harvest, make-index).
+- Chapter voice files are untagged (the service worker revalidates them), so no tag bump.
+- Tests: unused_voice 0 (all five checks), tag_check ok, smoke FAILS [].
+- Watch on the phone: the four Ch25 Deedee lines (glasses, sliver, "That's love") and the Ch9 "Dance with your mother" line now sound like the new takes.
+
 ## 2026-11-06 (407): Greeting hug is painted: Tom hears the girls, crouches, and the three hug (`hug1`)
 
 - Tom (15:59, approved the sheet): the girls' greeting at Long Island uses the approved `tom-grace-rose-greeting-hug` v1 instead of the old lean-in. Used in all three places the greeting plays: the opening (`SCENES.opening`), every return home (`arriveHome`, engine/travel.js) and Nine Scoops (`nsOpening`).
