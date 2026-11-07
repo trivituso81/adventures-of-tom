@@ -1,7 +1,7 @@
 'use strict';
 // engine/plate.js — Painted "plate" scenes (32-bit look). A plate replaces the tile/house/object
 // drawing for one map; the tile grid stays as the invisible logic layer (collision, doors, exits, NPCs).
-const PLATES={ town:{src:'art/town.webp?v=square6',fgSrc:'art/town-fg.webp?v=towncut1',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=row4',fgSrc:'art/row-fg.webp?v=row4',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp?v=hollow5',fgSrc:'art/hollow-fg.webp?v=hollow5',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/amyhouse-fg.webp?v=amyhouse3d'}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/grands-fg.webp?v=grands3d'}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp?v=moonclub1',fgSrc:'art/moonclub-fg.webp?v=moonclub1',px:64,img:null,ready:false}, dome:{src:'art/dome.webp?v=dome2',fgSrc:'art/dome-fg.webp?v=dome2',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=jpark2',fgSrc:'art/jpark-fg.webp?v=jpark2',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp?v=griffith2',fgSrc:'art/griffith-fg.webp?v=griffith2',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp?v=dtla12',fgSrc:'art/blvd-fg.webp?v=dtla12',px:64,img:null,ready:false} };
+const PLATES={ town:{src:'art/town.webp?v=square6',fgSrc:'art/town-fg.webp?v=towncut1',px:64,img:null,ready:false}, row:{src:'art/row.webp?v=row4',fgSrc:'art/row-fg.webp?v=row4',px:64,img:null,ready:false}, hollow:{src:'art/hollow.webp?v=hollow5',fgSrc:'art/hollow-fg.webp?v=hollow5',px:64,img:null,ready:false}, reeds:{src:'art/reeds.webp',px:64,img:null,ready:false}, amyhouse:{src:'art/amyhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/amyhouse-fg.webp?v=amyhouse3d'}, grands:{src:'art/grands.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/grands-fg.webp?v=grands3d'}, elliehouse:{src:'art/elliehouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, sundial:{src:'art/sundial.webp',px:64,img:null,ready:false}, school:{src:'art/school.webp',px:64,img:null,ready:false}, cafetorium:{src:'art/cafetorium.webp',px:64,img:null,ready:false}, readroom:{src:'art/readroom.webp',px:64,img:null,ready:false}, stacks:{src:'art/stacks.webp',px:64,img:null,ready:false}, moonclub:{src:'art/moonclub.webp?v=moonclub1',fgSrc:'art/moonclub-fg.webp?v=moonclub1',px:64,img:null,ready:false}, dome:{src:'art/dome.webp?v=dome2',fgSrc:'art/dome-fg.webp?v=dome2',px:64,img:null,ready:false}, gatezero:{src:'art/gatezero.webp',px:64,img:null,ready:false}, library:{src:'art/library.webp?v=20261030',px:78,img:null,ready:false,square:true}, terminal:{src:'art/terminal.webp',px:64,img:null,ready:false}, bakery:{src:'art/bakery.webp?v=20261030',px:78,img:null,ready:false,square:true}, greenhouse:{src:'art/greenhouse.webp?v=20261030',px:78,img:null,ready:false,square:true}, shop:{src:'art/shop.webp?v=20261030',px:78,img:null,ready:false,square:true}, observatory:{src:'art/observatory.webp?v=20261030',px:78,img:null,ready:false,square:true}, post:{src:'art/post.webp?v=20261030',px:78,img:null,ready:false,square:true}, tea:{src:'art/tea.webp?v=20261030',px:78,img:null,ready:false,square:true}, jpark:{src:'art/jpark.webp?v=jpark2',fgSrc:'art/jpark-fg.webp?v=jpark2',px:64,img:null,ready:false}, griffith:{src:'art/griffith.webp?v=griffith2',fgSrc:'art/griffith-fg.webp?v=griffith2',px:64,img:null,ready:false}, taxi:{src:'art/taxi.webp?v=20261030',px:78,img:null,ready:false,square:true}, blvd:{src:'art/blvd.webp?v=dtla12',fgSrc:'art/blvd-fg.webp?v=dtla12',px:64,img:null,ready:false} };
 PLATES.pier={src:'art/pier.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.studio={src:'art/studio.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.backlot={src:'art/backlot.webp?v=20261029',px:64,img:null,ready:false};
@@ -10,31 +10,31 @@ PLATES.oakpark={src:'art/oakpark.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.stage7={src:'art/stage7.webp?v=20261029',px:64,img:null,ready:false};
 PLATES.oak={src:'art/oak.webp?v=20261031',px:64,img:null,ready:false};
 PLATES.crown={src:'art/crown.webp?v=20261029',px:64,img:null,ready:false};
-PLATES.lofts={src:'art/lofts.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.loftlobby={src:'art/loftlobby.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
+PLATES.lofts={src:'art/lofts.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.loftlobby={src:'art/loftlobby.webp?v=20261030',px:78,img:null,ready:false,square:true};
 // Tom's house: two painted rooms, the main floor (16 x 24 tiles) and the primary suite (16 x 15), both 64 art px per tile.
-PLATES.tomhouse={src:'art/tomhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08,fgSrc:'art/tomhouse-fg.webp?v=tomhouse3d'};
+PLATES.tomhouse={src:'art/tomhouse.webp?v=20261030',px:78,img:null,ready:false,square:true,fgSrc:'art/tomhouse-fg.webp?v=tomhouse3d'};
 PLATES.carbarn={src:'art/carbarn.webp?v=20261029',px:64,img:null,ready:false};
-PLATES.coffee={src:'art/coffee.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
+PLATES.coffee={src:'art/coffee.webp?v=20261030',px:78,img:null,ready:false,square:true};
 PLATES.boiler={src:'art/boilerroom.webp?v=20261029',px:64,img:null,ready:false};
-PLATES.ramen={src:'art/ramen.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.tomsuite={src:'art/tomsuite.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.08};
-PLATES.juicebar={src:'art/juicebar.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.cinema={src:'art/starlite.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.boards={src:'art/boards.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.lacab={src:'art/lacab.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.nickels={src:'art/nickels.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.pupuseria={src:'art/pupuseria.webp?v=20261030b',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.wardrobe={src:'art/wardrobe.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.creole={src:'art/creole.webp?v=20261030b',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.casa={src:'art/casa.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.jordansam={src:'art/jordansam.webp?v=20261030b',px:78,img:null,ready:false,square:true,actorScale:1.98};
-PLATES.tower={src:'art/tower.webp?v=20261030',px:78,img:null,ready:false,square:true,actorScale:1.98};
+PLATES.ramen={src:'art/ramen.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.tomsuite={src:'art/tomsuite.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.juicebar={src:'art/juicebar.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.cinema={src:'art/starlite.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.boards={src:'art/boards.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.lacab={src:'art/lacab.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.nickels={src:'art/nickels.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.pupuseria={src:'art/pupuseria.webp?v=20261030b',px:78,img:null,ready:false,square:true};
+PLATES.wardrobe={src:'art/wardrobe.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.creole={src:'art/creole.webp?v=20261030b',px:78,img:null,ready:false,square:true};
+PLATES.casa={src:'art/casa.webp?v=20261030',px:78,img:null,ready:false,square:true};
+PLATES.jordansam={src:'art/jordansam.webp?v=20261030b',px:78,img:null,ready:false,square:true};
+PLATES.tower={src:'art/tower.webp?v=20261030',px:78,img:null,ready:false,square:true};
 PLATES.gate00={src:'art/gate00.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towerlobby={src:'art/towerlobby.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.subtunnel={src:'art/subtunnel.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.subchamber={src:'art/subchamber.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
-PLATES.dakota={src:'art/dakota.webp?v=20261030b',px:78,img:null,ready:false,square:true,actorScale:1.98};
+PLATES.dakota={src:'art/dakota.webp?v=20261030b',px:78,img:null,ready:false,square:true};
 PLATES.concourse={src:'art/concourse.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.flightzero={src:'art/flightzero.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
 PLATES.towerstairs={src:'art/towerstairs.webp?v=20261029',px:64,img:null,ready:false,actorScale:1.98};
@@ -124,20 +124,49 @@ function plateSetK(want) {
 }
 plateSetK.k=1;
 
-// Interiors: the painted rooms are drawn at furniture scale, so the cast is drawn bigger inside them than on the streets
-// (a counter or a sofa should come up to a character's waist, not their knees). Measured from the Taxi desk, Amy's island and sofa,
-// the bakery counter and the dining chairs: adults wanted about 1.8x their street size, then Tom asked for 10% more: 1.98x. Feet stay on the same tile, the sprite grows upward.
-const INTERIOR_ACTOR_SCALE=1.98;
-for(const id of ['bakery','library','greenhouse','shop','observatory','post','tea','taxi','grands','elliehouse','juicebar']) PLATES[id].actorScale=INTERIOR_ACTOR_SCALE;
-// Tom (2026-10-30): after the interiors were enlarged to fill the phone screen, everyone inside is 20% bigger again. One multiplier
-// here covers the family, the followers and every townsperson, since they all draw through actorK().
-const INTERIOR_ACTOR_BOOST=1.2;
+// Painted rooms: each room has its own scale, measured from its painting (Tom 2026-11-07: "size the characters for each room").
+// The room paintings are drawn in perspective, so things near the back wall are painted smaller than things by the front half wall.
+// For each room two reference points were measured on the painting (docs/ROOM_PAINTINGS.md "Character scale"):
+//   front: [floor y in art px, art px per foot] from the low front half wall (taken as 3 ft tall),
+//   back:  the same from a back-wall door (6 ft 8 in), a counter (3 ft), a table (2.5 ft) or bar stools (2.5 ft).
+// A character's feet row picks the scale between the two, so Tom (5 ft 11) is drawn at his real height next to the furniture beside him.
+// Everyone else follows from their own real height (each set's k). Art px are for the 1254 px room paintings (ROOM_SCALE_REF).
+// Rooms painted as a cut-away floor plan (Amy's house, Tom's house and suite) have almost no perspective, so front and back match.
+const ROOM_SCALE_REF=1254;
+const ROOM_SCALE={
+  amyhouse:{front:[1032,17],back:[400,19]},   grands:{front:[1108,65],back:[250,31]},     elliehouse:{front:[1108,61],back:[358,36]},
+  library:{front:[1083,58],back:[350,31]},    bakery:{front:[1150,64],back:[442,46]},     greenhouse:{front:[1150,72],back:[340,38]},
+  shop:{front:[1158,67],back:[550,50]},       observatory:{front:[1150,56],back:[550,34]}, post:{front:[1150,67],back:[420,40]},
+  tea:{front:[1150,64],back:[417,40]},        taxi:{front:[1133,61],back:[420,45]},       lofts:{front:[1100,67],back:[358,47]},
+  loftlobby:{front:[1117,50],back:[400,35]},  tomhouse:{front:[860,19],back:[417,21]},    coffee:{front:[1133,61],back:[400,40]},
+  ramen:{front:[1100,50],back:[430,34]},      tomsuite:{front:[608,23],back:[300,23]},    juicebar:{front:[1083,58],back:[500,41]},
+  cinema:{front:[1083,61],back:[400,30]},     boards:{front:[1083,64],back:[450,35]},     lacab:{front:[1092,61],back:[417,43]},
+  nickels:{front:[1092,53],back:[497,42]},    pupuseria:{front:[1117,61],back:[400,40]},  wardrobe:{front:[1058,58],back:[400,40]},
+  creole:{front:[1092,61],back:[400,41]},     casa:{front:[1092,42],back:[375,28]},       jordansam:{front:[1040,45],back:[408,45]},
+  tower:{front:[1083,58],back:[500,47]},      dakota:{front:[1067,55],back:[317,46]},
+};
+for(const id in ROOM_SCALE) PLATES[id].roomScale=ROOM_SCALE[id];
+// Tom's height in world px at actorK 1 inside a painted room (head to feet, measured 2026-11-07 with tools/room_scale_test.py; it follows
+// OW_PLAYABLE_BOOST_INDOOR and OW_HOUSE_PARTY in engine/town-render.js, so change it with them). Tom is 5 ft 11.
+const OW_TOM_ROOM_WORLD_H=58.1, TOM_FEET=71/12;
+// Art px per foot at a floor y (art px): straight line through the two points, held inside a sensible band past them.
+function roomPxPerFoot(sc,yArt) {
+  const [y0,a]=sc.back,[y1,b]=sc.front, t=(yArt-y0)/(y1-y0);
+  const v=a+(b-a)*t, lo=Math.min(a,b), hi=Math.max(a,b);
+  return Math.max(lo*.8,Math.min(hi*1.08,v));
+}
 // Outdoor maps (the streets, parks and yards): Tom asked for 20% bigger.
 const OUTDOOR_ACTOR_SCALE=1.2;
-function actorK() {
+// feetY: the row (in tiles, can be fractional) where the character's feet touch the floor; defaults to the player's.
+function actorK(feetY) {
   if(!currentMap) return 1;
   const p=PLATES[currentMap.id];
-  if(p&&p.actorScale&&!currentMap.outside) return p.actorScale*INTERIOR_ACTOR_BOOST;
+  if(p&&p.roomScale&&!currentMap.outside) {
+    if(feetY==null) feetY=(typeof player!=='undefined'&&player?position(player).y:currentMap.spawn.y)+1;
+    const artPerWorld=ROOM_SCALE_REF/(currentMap.w*T);
+    const ppf=roomPxPerFoot(p.roomScale,feetY*T*artPerWorld);
+    return TOM_FEET*ppf/(OW_TOM_ROOM_WORLD_H*artPerWorld);
+  }
   return currentMap.outside?OUTDOOR_ACTOR_SCALE:1;
 }
 

@@ -24,7 +24,15 @@ Tom is redoing every building interior so the painting fills the whole iPhone sc
 
 - Portrait: full painting height, middle ~46% of its width. Landscape: full width, middle ~46% of its height. Every current iPhone is 9:19.5, so this fills the screen. The camera follows the player.
 - Rooms get bigger: N x N tiles with N = max(16, max(w, h) + 3), BUT keep N = 16 unless the painting clearly needs more: the painter draws every room at the same scale, so a bigger N makes characters look small (decided 2026-10-30, batch 1 used 16 for all five). Register the plate with `square:true` in `PLATES` (`engine/plate.js`); `resize()` then fills the screen.
-- Code: `resize()` and `updateCamera()` in `engine/overworld.js` (safeTop 82/57, safeBottom 170/106 portrait/landscape); `PLATES` in `engine/plate.js` (px per tile, optional `actorScale` 1.98 for rooms); `makeRoom(spec)` in `engine/world.js` with a `plateMask` ASCII walk map ('#' blocks, '.' walks).
+- Code: `resize()` and `updateCamera()` in `engine/overworld.js` (safeTop 82/57, safeBottom 170/106 portrait/landscape); `PLATES` in `engine/plate.js` (px per tile; each room's character scale is `ROOM_SCALE`, see below); `makeRoom(spec)` in `engine/world.js` with a `plateMask` ASCII walk map ('#' blocks, '.' walks).
+
+## Character scale (per room, CHANGES 431)
+
+Every room has its own character scale, measured from its painting (Tom 2026-11-07). The paintings are drawn in perspective, so the back of a room is painted smaller than the front; characters shrink as they walk toward the back wall.
+- `ROOM_SCALE` in `engine/plate.js`: per room `front:[floor y, art px per foot]` and `back:[floor y, art px per foot]`, in art px of the 1254 px painting. Front comes from the low front half wall (taken as 3 ft); back from a back-wall door (6 ft 8 in), a counter (3 ft), a table or bar stools (2.5 ft). Floor-plan rooms (Amy's house, Tom's house, Tom's suite) use about the same value front and back.
+- `actorK(feetY)` draws Tom at 5 ft 11 at the floor where his feet are; everyone else follows from their real height (each set's `k`). `OW_TOM_ROOM_WORLD_H` (58.1) is Tom's drawn height at actorK 1: re-measure it if `OW_PLAYABLE_BOOST_INDOOR` or `OW_HOUSE_PARTY` in `engine/town-render.js` change.
+- New room: measure the two points on the painting (open it with a 50 px grid), add the row to `ROOM_SCALE`, then run `python3 tools/room_scale_test.py <id>` and look at `tools/shots/rscale-<id>-*.png`.
+- Tom says a room is too big or too small: change that room's numbers only (bigger number = bigger characters; front for the door end, back for the far wall).
 
 ## Routine
 

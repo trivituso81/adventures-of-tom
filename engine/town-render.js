@@ -20,10 +20,10 @@ function walkPhase(a) {
 // 2026-11-01 (Tom): inside the painted houses the main characters are 25% smaller than they were; on the streets 10% bigger.
 const OW_PLAYABLE_BOOST=1.15*1.10;           // outdoor maps
 const OW_PLAYABLE_BOOST_OLD=1.15;
-const OW_PLAYABLE_BOOST_INDOOR=1.15*0.75;    // painted interiors (the maps that use INTERIOR_ACTOR_SCALE in engine/plate.js)
+const OW_PLAYABLE_BOOST_INDOOR=1.15*0.75;    // painted interiors (the maps with a ROOM_SCALE in engine/plate.js; OW_TOM_ROOM_WORLD_H there follows this)
 // OW_NPC_INDOOR retired 2026-11-01: NPCs use the party boost (owBoost).
 function owMain(a) { return !!(a.isPlayer||a.kid||a.sheet==='michael'); }
-function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap.id]:null; return !!(p&&p.actorScale); }
+function owInHouse() { const p=currentMap&&!currentMap.outside?PLATES[currentMap.id]:null; return !!(p&&p.roomScale); }
 function owBoostOld(a) { return owMain(a)?OW_PLAYABLE_BOOST_OLD:1; }   // the size before the 11-01 evening changes
 // Tom, Grace and Rose are drawn 60% bigger inside painted houses and rooms (Tom 11-04 13:41), on top of everything below. Their walk sheets are baked
 // at about one source pixel per drawn device pixel (art/chars/*-ow.webp, k 7 to 10), so the larger size stays sharp. Feet stay on the same tile.
@@ -53,7 +53,7 @@ function drawSheetActor(a,set) {
   // Rose on his shoulders: one painted figure (OW.tomRide, data/tomride-use.js); falls back to the layered pixel Rose.
   const painted=!!(rider&&OW.tomRide&&(typeof playerMember!=='function'||playerMember().id==='tom'));
   if(painted) set=OW.tomRide;
-  const p=position(a),k=actorK()*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
+  const p=position(a),k=actorK(p.y+1)*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0?(set===OW.tom?OW_WALK_CYCLE_TOM:OW_WALK_CYCLE)[a.stepN%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
@@ -547,7 +547,7 @@ function drawNpc(a) {
 // Where an overworld person's head is, in map pixels: {cx, top, w} = centre x, the top of the painted figure (first non-empty
 // sprite row, same scale and set as drawActor picks) and its drawn width. Used by effects that sit over a head (the ch2 trance).
 function actorHeadAnchor(a) {
-  const p=position(a),ak=actorK(),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*ak);
+  const p=position(a),ak=actorK(p.y+1),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*ak);
   let set=null;
   if(a.sheet) set=OW[a.sheet];
   else {
@@ -681,7 +681,7 @@ function drawTarget(target) {
   if(target.kind==='npc') {
     const p=position(target.value);
     x=(p.x+.5)*T;
-    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK()*owBoost(target.value)/owBoostOld(target.value)-1)):52));
+    y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK(p.y+1)*owBoost(target.value)/owBoostOld(target.value)-1)):52));
   } else if(target.kind==='object') {
     x=(target.value.x+target.value.w/2)*T;
     y=target.value.y*T-(target.value.kind==='tree'?70:28);
