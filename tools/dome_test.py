@@ -35,14 +35,14 @@ with sync_playwright() as pw:
     print('plate ready',pg.evaluate("()=>!!plateFor(currentMap)"),'map',pg.evaluate("()=>currentMap.id"))
     def shot(name,x,y,show=False):
         pg.evaluate("([x,y,show])=>{ player.x=x; player.y=y; player.move=null; placeFollowers(); camera.snap=true; const b=findMonster('mirrorball'); if(b&&show){ if(b.sunk){b.x=b.sunk.x;b.y=b.sunk.y;b.sunk=null;} b.hidden=false; } }",[x,y,show]); pg.wait_for_timeout(700); pg.screenshot(path=os.path.join(SH,'dome-'+name+'.png'))
-    shot('p-stairs',9,12); shot('p-floor',9,7,True); shot('p-stage',5,5); shot('p-right',16,5); shot('p-left',6,10)
+    shot('p-stairs',9,12); shot('p-floor',9,7,True); shot('p-stage',9,6); shot('p-right',15,7); shot('p-left',5,9)
     pg.evaluate("()=>{ if(layout!=='landscape') toggleLayout(); }"); pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(500)
     shot('l-floor',9,7,True); shot('l-stairs',9,12)
     pg.evaluate("()=>{ if(layout==='landscape') toggleLayout(); }"); pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(400)
     # real boss scene: it should run on the painting without errors up to the battle
     ok=pg.evaluate("()=>{ try{ storyWorld(); return !!findMonster('mirrorball'); }catch(e){ return String(e); } }"); print('ball exists',ok)
     # every prop answers A from the floor beside it (real key press, dialogue opens with that prop's name)
-    for (x,y,face,kind) in [(17,5,'up','domescope'),(10,5,'up','bandchairs'),(5,5,'up','bandchairs'),(6,10,'down','clubpalm'),(12,10,'down','clubpalm')]:
+    for (x,y,face,kind) in [(15,6,'right','domescope'),(5,6,'up','clubpalm'),(14,6,'up','clubpalm')]:
         pg.evaluate("([x,y,f])=>{ __LE.go('dome'); if(dialog.active) dialog.active=false; player.x=x; player.y=y; player.facing=f; player.move=null; placeFollowers(); camera.snap=true; }",[x,y,face]); pg.wait_for_timeout(250)
         pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
         got=pg.evaluate("()=>dialog.active")

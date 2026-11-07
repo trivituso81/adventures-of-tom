@@ -889,23 +889,24 @@ LE_AREAS.push(
     eyebrow:'LONG ISLAND / THE MOON CLUB / THE DOME',
     hint:'The bandstand is at the top. Something up there\'s very, very bright.',
     spawn:{x:9,y:12},
-    // Painted plate (art/dome.webp, engine/plate.js). '#' blocks, '.' walks. The stage, both side rails, the corner tables and the two
-    // big palms are painted solid; the way in is the carpet (x 9 and 10) up the stairs from the Moon Club.
+    // Painted plate (art/dome.webp, engine/plate.js; the Dome ballroom painting of 2026-11-07, claude/dome-v1-cutout-prompts.txt). '#' blocks,
+    // '.' walks. Rows 0 to 4 are walls; row 5 is the stage deck (x 8 to 12, where the Mirrorball hangs at (9,5)) and solid elsewhere; both edge columns, the sofa, the two corner
+    // table sets, the corner palms, the front balustrades and the telescope platform are painted solid; the way in is the rug (x 7 to 12) from the stairs.
     plateMask:[
       '####################',
       '####################',
       '####################',
       '####################',
       '####################',
+      '########.....#######',
+      '#####...........####',
+      '#####...........####',
       '##.................#',
-      '##.................#',
-      '##.................#',
-      '##.................#',
-      '##................##',
-      '#####..........#####',
-      '########....########',
-      '#########..#########',
-      '#########..#########'],
+      '####............####',
+      '####............####',
+      '####..#......#..####',
+      '#######......#######',
+      '#######......#######'],
     exits:[[9,13,'moonclub',14,3,'down','domefloor'],[10,13,'moonclub',15,3,'down','domefloor']],
     monsters:DOME_MONSTER_SPOTS},
     planClub([
@@ -924,11 +925,9 @@ LE_AREAS.push(
       'WddddddddddddddddddW',
       'WWWWWWWWWddWWWWWWWWW']),
     {objects:[
-      ['bandchairs',4,3,3,2,'Band chairs','Four music stands and four empty chairs. The sheet music is all the same song.'],
-      ['bandchairs',10,3,2,2,'Band chairs','A drum kit with a moon on the bass drum. Boppy taps it once. It\'s very loud.'],
-      ['clubpalm',6,11,2,2,'Potted palm','A silk palm. It has a perfect view of the dance floor and has never once danced.'],
-      ['clubpalm',12,11,2,2,'Potted palm','A silk palm wearing a tiny party hat.'],
-      ['domescope',17,3,2,2,'Old telescope','A brass telescope pointed up through the glass. Through it: the sky, and no moon at all.',
+      ['clubpalm',5,5,2,1,'Potted palm','A silk palm. It has a perfect view of the dance floor and has never once danced.'],
+      ['clubpalm',14,5,2,1,'Potted palm','A silk palm. Best seat in the house. It has never once clapped.'],
+      ['domescope',16,5,3,3,'Old telescope','A brass telescope pointed up through the glass. Through it: the sky, and no moon at all.',
         {when:[{flag:'ch9-clear',text:'A brass telescope pointed up through the glass. Through it: the moon, round and silver and back where it belongs.'}]}]]})
 );
 

@@ -3,7 +3,7 @@
 // shows its face when there is floor below it, dark 'clubvoid', 'coatrug', 'cardrug', black and white 'marble',
 // 'ballwood' parquet, the lit 'dancefloor', 'clubstairs' down to the observatory) and the Dome (ground 'dome':
 // 'domefloor' under the stars, the 'bandstand'). Props: clubdoors, mirrorstand, clubplaque, ropepost, clubpalm,
-// coatcounter, coatrack, clubchair, cardtable, clubbar, jukebox, clubpiano, mirrorframe, bandchairs, domescope, and the
+// coatcounter, coatrack, clubchair, cardtable, clubbar, jukebox, clubpiano, mirrorframe, domescope, and the
 // little silver clubdoor in Luna's observatory. The moonbeam (clubBeam) is traced here and drawn by data/scenes.js.
 // Also the minimap. Wraps drawOutdoorTile, drawObject and
 // buildMiniBase. Loaded after engine/barn-render.js.
@@ -150,10 +150,6 @@ drawObject=function(o,time) {
     case 'mirrorframe': {
       rect(x,y-22,w,h+18,OUT); rect(x+2,y-20,w-4,h+14,'#c9a23a'); rect(x+6,y-16,w-12,h+6,flag('ch9-ball')?'#24284a':'#3a3e60');
       if(!flag('ch9-ball')) { gfx.globalAlpha=.4; rect(x+8,y-14,6,h,'#dfe6f2'); gfx.globalAlpha=1; } return;
-    }
-    case 'bandchairs': {
-      for(let k=0;k<o.w*2;k++) { const bx=x+6+k*14; rect(bx,y+4,10,12,OUT); rect(bx+1,y+5,8,10,'#6a3a24'); rect(bx+3,y-8,2,12,'#8a8a98'); rect(bx-1,y-10,10,4,'#dfe6f2'); }
-      return;
     }
     case 'domescope': ellipse(cx,b-2,8,3,'#00000040'); rect(cx-1,y+10,2,18,OUT); polygon([[cx-4,y+12],[cx+10,y-10],[cx+14,y-6],[cx,y+16]],'#c9a23a'); return;
   }

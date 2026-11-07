@@ -1,3 +1,11 @@
+## 2026-11-07 (420): The Dome, new ballroom painting installed with walk-behind pieces and a new walk map (`dome2`)
+
+- Fact: `art/dome.webp` (1280 x 896, 20 x 14 tiles) is Tom's new Dome ballroom painting (source `art/raw/areas/dome-v1/painting.png`, 1499 x 1049). `art/dome-fg.webp` plus 14 zones in `PLATE_BEHIND.dome` (engine/plate.js) are cut from that painting with Tom's five generator masks used only as masks (`tools/make_dome_fg.py`, masks `mask-palms`, `mask-columns`, `mask-stage`, `mask-furniture`, `mask-telescope`; prompts `claude/dome-v1-cutout-prompts.txt`): 5 palms, both edge columns, both front balustrades, the stage arch with curtains and rails, the sofa, two table sets, the telescope with its platform.
+- Walk map is MINE, built by eye from the painting (not an Area Builder export): rows 0 to 4 walls, row 5 stage deck x 8 to 12 only, floor rows 6 to 11, rug rows 12 to 13 (x 7 to 12), stairs exit unchanged at (9,13) and (10,13). Solid: both edge columns, sofa, both corner table sets, corner palms, front balustrades, telescope platform, both stage-side palm pots. Spawn (9,12). Mirrorball spot (9,5) unchanged. Ch9 boss staging (Tom 9,7, Deedee 8,7, Boppy 10,7) is on floor.
+- Objects: old band chairs and drum kit objects removed (not painted; `bandchairs` draw case purged from engine/club-render.js). Two potted palm touch spots (5,5) and (14,5), telescope touch spot (16,5) 3 x 3.
+- Tests: `tools/dome_test.py` FAILS 0 (updated for the new tiles); tag_check ok; portrait and landscape shots `tools/shots/dome-*.png` looked at.
+- Watch on the phone: Tom behind the stage arch and the palm crowns, the corner pockets at row 11 (x 4 and 5), the narrow rug entrance, the telescope tap from the floor beside it.
+
 ## 2026-11-07 (419): Tombo sheets, slice 6: the three Tom + TNB Tombos in the Art Library (no game change)
 
 - Slice 6 of the Tombo queue: `tombo-tnb1` (Popcorn Jump), `tombo-tnb2` (Measure Twice), `tombo-tnb3` (Cone Six Across the Miles). Beats from `B2_TOMBO_ANIM.tnb1`, `tnb2`, `tnb3` in engine/battle2-kind.js (each defined once, lines 696, 1137, 2294). All grown-up, no flashbacks. Kisses are written as a kiss on the cheek.
