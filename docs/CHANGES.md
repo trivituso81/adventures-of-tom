@@ -1,3 +1,11 @@
+## 2026-11-06 (414): Tom's battle stance faces the monsters (`tomface1`)
+
+- Tom (17:19): in battle his new stance faces the wrong way.
+- Cause: the approved `tom-battle-stance-1-v2` sheet is painted facing screen-right (ready, breath, offer, wind, lunge, guard); battles need screen-left. Sheet 2 is painted facing left already.
+- Change: `MIRROR` in `tools/sprite-bake/battle_sheet_frames.py` mirrors sheet 1 whole for Tom (the one case of a painted frame not used exactly as painted; the reason is the direction). Rebaked `tom-battle.webp`, `tom-poses.webp`, `data/tom-hires.js`. The dizzy KO atlas is unchanged. Hand and watch side swap with the mirror.
+- Checks: contact sheet of all slots faces left, kit_test tom FAILS [], smoke FAILS [], tag_check ok.
+- Tags: `tomface1`.
+
 ## 2026-11-06 (413): Amy's re-recorded dialogue merged (`amyvoice1`)
 
 - Tom sent a Voice Library export (2,045 clips, all voices). Filtered to Amy: 200 dialogue clips, all already in the game. 43 had new audio (ch5 19, ch25 16, ch28 8); the other 157 matched byte for byte and were left alone. No battle clips, nothing added or removed, voice-clips.js unchanged.

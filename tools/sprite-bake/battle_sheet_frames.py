@@ -23,6 +23,10 @@ SLOTS = {'idle': 'ready', 'idle2': 'breath', 'hip': 'hip', 'cast': 'offer', 'win
 # stance sheets (art/raw/characters/tom-battle-stance-1-v2.png, tom-battle-stance-2-v1.png), same grids and pose order as the painted sheets.
 SOURCE_TAGS = {'tom': {'battle-sheet-1': 'battle-stance-1-v2', 'battle-sheet-2': 'battle-stance-2-v1'}}
 
+# Tom 2026-11-06 17:19 ("facing the wrong way"): the approved stance sheet 1 is painted facing screen-RIGHT (ready, breath, offer, wind, lunge, guard),
+# battles need screen-left. Sheet 1 is mirrored whole (the only frames of his set that cannot be used as painted); sheet 2 is painted facing left.
+MIRROR = {'tom': {'battle-sheet-1'}}
+
 def key_ground(path, ground):
     """Key a pose sheet painted on a flat ground that is not magenta (the greeting hug came back crimson). Same recipe as walk_sheet_frames._key:
     ground = ground-coloured regions touching the border plus big enclosed holes; the 5 px rim is unmixed against the ground colour using the
@@ -90,7 +94,9 @@ def build(cid, run_from_walk=True):
     for tag, cols, rows, names in SHEETS:
         src = SOURCE_TAGS.get(cid, {}).get(tag, f'{tag}-v1')
         path = os.path.join(RAW, f'{cid}-{src}.png')
-        out.update(_cut(path, cols, rows, names, ground=_border_ground(path) if src != f'{tag}-v1' else None))
+        cut = _cut(path, cols, rows, names, ground=_border_ground(path) if src != f'{tag}-v1' else None)
+        if tag in MIRROR.get(cid, ()): cut = {k: v.transpose(Image.FLIP_LEFT_RIGHT) for k, v in cut.items()}
+        out.update(cut)
     # The generator paints sheet 2 at its own size. Its cheer (one fist up, one on the hip) and sheet 1's hands-on-hips pose cover nearly
     # the same area, so sheet 2 is scaled by the square root of their area ratio (checked by eye on a head row, 2026-11-05).
     k2 = (_area(out['b_hip']) / _area(out['b_cheer'])) ** .5
