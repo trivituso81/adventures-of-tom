@@ -14230,8 +14230,16 @@
    ]
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/jojo-battle-stance-1-v1.png",
+     "date": "2026-11-07",
+     "from": "v1",
+     "at": 1794041862099
+    }
+   ],
    "rejects": [],
    "id": "jojo-battle-stance-1",
    "tab": "Characters",
