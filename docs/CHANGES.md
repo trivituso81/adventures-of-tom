@@ -1,3 +1,14 @@
+## 2026-11-06 (403): Walk maps from Tom's Area Builder exports for five areas (`walk1`)
+
+- Applied with `tools/apply_walkmap.py`, then doors, exits, edges and objects wired by hand.
+- The Square (third export): 7 tiles open south of Moon Club toward the taxi and at the east edge, (21,12) blocks; (29,17-18) added to `border.open`.
+- Rivituso Row: 83 tiles plus 14 skipped ones; east edge column (23, rows 6-17) open (`border.open`, no exit); Amy's door moved to (7,6) on the painted GREGORI door (`doorX:7`); Row signpost to (11,3), Chalk drawings sign to (9,6) so Tom walks over the hopscotch; (1,9) blocks.
+- Grump Hollow: 33 tiles; Soggy bench 3x3 -> 3x2, Boppy's fishing spot 4x2 -> 4x1 so the tiles in front walk; (23,10) blocks.
+- Downtown (blvd): 134 tiles; doors on Tom's tiles: COFFEE 5-6,9, RAMEN 11-12,9, STARLITE 17-18,8, CABS 24,9 (h 6), WARDROBE 3-4,20, LOFTS 9-10,20, SHOP 26-27,20 (two wide where the painted door straddles both); Jefferson Park exit moved up to (13-16,24), Jefferson Park's arrivals into Downtown now row 23; west x0 and east x29 strips open (no exit); five touch spots moved off opened tiles. `tools/blvd_test.py` updated (also Griffith's new exit row).
+- Griffith Park: 67 tiles; exit moved under the DOWNTOWN arch (10-13,18), rows below it blocked; spawn and Downtown's arrivals now row 17; four objects moved or shrunk; tar cells on row 9 walk because Tom painted them.
+- NOT applied: Tom's Jefferson Park export. It was drawn on the old Jefferson Park map; the v2 painting and walk map (CHANGES 398, `jpark2`) landed before this push, so its tiles no longer line up. Tom redoes Jefferson Park in the Area Builder on the new painting.
+- Tests: reach_test town, row, hollow, blvd, jpark, griffith all 0 fails; smoke FAILS []; areas_test 0; camera_clamp 0; blvd_test FAILS []; door walk tests (Square, Row, pier) 0 fails; tag_check ok.
+
 ## 2026-11-06 (402): Tom's stretch poses match his standing size (`stretch1`)
 
 - Tom (16:02): his stretching states are also not the same size as his regular body. Compared in the real game (his standing frame, then each `st_*` pose, same spot): the two side bends read about 15 percent bigger in head and torso, Stiff and Rise heads about 5 percent; Reach, Push, Exhale and Fresh matched.
