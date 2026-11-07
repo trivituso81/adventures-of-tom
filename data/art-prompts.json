@@ -15531,6 +15531,12 @@
      "note": "comic strip not poses",
      "from": "v1",
      "at": 1794044632177
+    },
+    {
+     "date": "2026-11-07",
+     "note": "not full body",
+     "from": "v2",
+     "at": 1794044648847
     }
    ],
    "status": "rejected"
