@@ -418,7 +418,7 @@ function arriveLA(arr,card=[]) {
 function arriveHome(arr,card=[]) {
   const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+1,gStart=10,rStart=9;
   const welcome=[];
-  let g=null,r=null;
+  let g=null,r=null,keepZoom=false;
   welcome.push(
     S.call(()=>{
       arriveAt(town,'taxi');
@@ -431,6 +431,8 @@ function arriveHome(arr,card=[]) {
     S.call(()=>sfx.doorOut()),
     {start(){ this.s=S.walk(player,[[dx,row]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     ...card,
+    ...compileScene([{zoom:2,time:.9}]),   // camera pushes in right before the stretch (Tom 11-06: every taxi exit, like the opening)
+    stretchStep(),
     S.talk('Tom',(arr&&arr.tom)||travelPick('arrHome',TRAVEL_POOLS.arrHome)),
     S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
     hugHearStep(),
@@ -445,8 +447,12 @@ function arriveHome(arr,card=[]) {
     S.call(()=>{ intro.bubble=null; g.facing='right'; r.facing='up'; }),
     hugStep(),
     ...(arr&&arr.talk?arr.talk:travelPick('welcome',TRAVEL_POOLS.welcome)).map(([who,pages])=>S.talk(who,pages)),
+    // Zoom back out, unless this chapter's own arrival scene (ch3, ch7, ch9: SCENES.chNArrive) is about to play: it keeps the zoom through its lines and zooms out itself.
+    {start(){ const n=STORY.chapter,sc=SCENES['ch'+n+'Arrive']; keepZoom=Array.isArray(sc)&&sc.some(x=>x.zoom>1)&&!STORY.flags['ch'+n+'-goal'];
+        this.z=keepZoom?null:compileScene([{zoom:1,time:.8}])[0]; if(this.z) this.z.start(); },
+      update(dt){ return this.z?this.z.update(dt):true; }},
     S.call(()=>{
-      endIntro();
+      endIntro(); if(keepZoom) setSceneZoom(2);   // endIntro resets the zoom; hand the pushed-in camera on to the chapter's arrival scene
       g.x=dx-1; g.y=row; g.facing='right'; g.move=null;
       r.x=dx-1; r.y=row+1; r.facing='up'; r.move=null;
       const f=followers.find(m=>m!==g&&m!==r); if(f) { f.x=r.x; f.y=r.y; f.move=null; }

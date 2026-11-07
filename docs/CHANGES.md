@@ -1,3 +1,12 @@
+## 2026-11-06 (412): Every taxi exit: zoom in, then Tom stretches (`taxizoom1`)
+
+- Tom (16:47): when Tom steps out of the taxi stand at the start of every relevant chapter he does his stretch, and the zoom happens right before it (in chapter 3 it only started later). Second note (16:49): the crouch before the hug should face left toward the girls, arms open.
+- Cause: only the chapter 1 and Nine Scoops openings had the stretch. Every other arrival (`arriveHome`, engine/travel.js: chapter select and east flights, chapters 3, 5, 7, 9) skipped it, and the zoom lived in `ch3Arrive`/`ch7Arrive`/`ch9Arrive`, which play after the whole welcome.
+- Change: `arriveHome` now walks out, shows the card, zooms in (2x, .9 s), plays `stretchStep()`, then Tom's line, the shout, the hug and the welcome as before. At the end it zooms back out, except when this chapter's own arrival scene (3, 7, 9) is about to play and its goal flag is not set: then the zoom is handed on (no snap) and that scene zooms out at its end. Chapter 5 and mid-chapter return flights zoom out after the welcome.
+- Tested: chapter-select jumps to 3 and 5 played in portrait (zoom 1 to 2 before `st_stiff`, stretch poses in order, hug, chapter 3 holds 2x into the arrival lines then out; chapter 5 out after the hug), no page errors.
+- NOT fixed yet (needs new art): the painted crouch `hg_crouch` faces the camera, so it cannot face left. New Art Library entry `tom-greeting-crouch` (Characters, group Tom, 1 Generate press): Tom alone, side view facing left, arms open. Install after Tom approves it: add it to the `hug` set in `bake_story_poses.py` as the crouch frame, rebake, bump tags.
+- Tags: `taxizoom1` (engine/travel.js).
+
 ## 2026-11-06 (411): Tom's approved battle stances installed; his 14 ability refs point at them
 
 - Tom (16:34): "tom's updated battle stances are approved, implement them ... make sure they are the new reference photos for all of tom's abilities."
