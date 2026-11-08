@@ -17481,7 +17481,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tombo-ff1-objects",
    "tab": "Characters",
    "group": "Finish, Sleepover at Tom's",
@@ -17490,7 +17490,16 @@
    "refs": [
     "docs/reference/style_key_v1.png"
    ],
-   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. Popcorn bag: a small paper snack bag with red and white vertical stripes, fluffy yellow popcorn spilling over the open top, standing upright\n2. Second popcorn bag: the same red and white striped paper bag lying tilted on its side with a few kernels beside it\n3. Flashlight: a chunky dark grey handheld flashlight with a black rubber grip and a round silver lens, lying flat, lens turned toward the viewer\n4. Pillow pile: three plump throw pillows stacked loosely: one rose pink, one golden yellow, one soft green, each with a small stitched edge\n5. Folded quilt: a thick patchwork quilt in warm reds, creams and blues, folded into a neat rounded stack\n6. Blanket fort: a cozy fort made of a draped patchwork quilt over two wooden chairs, with an open arched doorway, standing on its own\n7. Castle fort: the same kind of blanket fort grown tall into a soft castle with a crenellated top and three round turrets topped with small cloth pennants\n8. Warm string lamps: a short loop of warm yellow bulbs on a thin dark cord, laid in a gentle curve\n9. Hand-painted board: a small wooden board on a short stick, blank, painted warm cream with a rough painted border, no letters\n\nDeliver the image itself."
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. Popcorn bag: a small paper snack bag with red and white vertical stripes, fluffy yellow popcorn spilling over the open top, standing upright\n2. Second popcorn bag: the same red and white striped paper bag lying tilted on its side with a few kernels beside it\n3. Flashlight: a chunky dark grey handheld flashlight with a black rubber grip and a round silver lens, lying flat, lens turned toward the viewer\n4. Pillow pile: three plump throw pillows stacked loosely: one rose pink, one golden yellow, one soft green, each with a small stitched edge\n5. Folded quilt: a thick patchwork quilt in warm reds, creams and blues, folded into a neat rounded stack\n6. Blanket fort: a cozy fort made of a draped patchwork quilt over two wooden chairs, with an open arched doorway, standing on its own\n7. Castle fort: the same kind of blanket fort grown tall into a soft castle with a crenellated top and three round turrets topped with small cloth pennants\n8. Warm string lamps: a short loop of warm yellow bulbs on a thin dark cord, laid in a gentle curve\n9. Hand-painted board: a small wooden board on a short stick, blank, painted warm cream with a rough painted border, no letters\n\nDeliver the image itself.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-ff1-objects-v1.png",
+     "date": "2026-11-08",
+     "from": "v1",
+     "at": 1794159103475
+    }
+   ]
   },
   {
    "status": "draft",
