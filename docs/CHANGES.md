@@ -1,3 +1,9 @@
+## 2026-11-07 (435): Painted Tombo frames, Sit. Paw. Treat. (`tombo3`)
+- Installed: nara1 plays Tom's and Nara's painted frames from the approved Art Library sheets (`art/tombo/nara1-tom.webp`, `nara1-p.webp`, `data/tombo-frames.js`). Nara's frames are mirrored with the new `tbfm` helper in `engine/tombo-frames.js` (the sheet faces left). Treat and paw cutouts are the approved `tombo/dog_treat` and `tombo/giant_paw` (same slugs as before, so Nara's other treat moves also show the new bone).
+- Tags: ART_V unchanged (new atlases), prop V and battle2-kind moved to `tombo3`, main.js to `tombo3`.
+- Tests: tombo_test nara1 --speed2 FAILS [], smoke FAILS [], tag_check ok, unused_voice 0 on all five checks. Frames looked at (sit, wiggle, paw, lick).
+- Still to install (next batches): amy2, amy3, boppy1, boppy2, deedee2, deedee3, rose3 (split), grace1, grace2, grace3, rose1, rose2, amy1, deedee1 (pair). Their painted sheets are approved; the animations still draw the old code.
+
 ## 2026-11-07 (434): Painted Tombo frames pipeline, first install Popcorn Jump (`tombo1`)
 - New: `tools/sprite-bake/tombo_frames.py` cuts approved Art Library Tombo sheets into painted frames (one scale factor per sheet so the standing figure equals the character's battle ready pose; crimson grounds are keyed too) and object cutouts into `art/props/tombo/<slug>.webp` (only slugs the game already uses). Output `art/tombo/<id>-<who>.webp`, `data/tombo-frames.js` (generated; only ids in `INSTALLED`), engine helper `tbf(id,who,n,sp)` in `engine/tombo-frames.js`. Atlases are lazy (`tbo_<partner>_<id>_<who>`, loaded while a fight has the partner).
 - Installed: tnb1 Popcorn Jump plays Tom's and TNB's painted frames (sit, frozen mouthful, jump, cower, laugh, kiss). Tom's frame 6 already holds both of them, so TNB's own frame 6 is not drawn. Purged: `seatTom`/`seatTnb` and the old painted-pose lookups; the standee is now `tombo/villain_standee`; heart moved above the kiss.

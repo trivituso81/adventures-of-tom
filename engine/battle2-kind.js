@@ -776,29 +776,32 @@ B2_TOMBO_ANIM.nara1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),N=ST.unit(pt),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt);
   const nx=Math.max(F.x+F.w/2+N.w/2+8,T.x-86),nb=Math.min(318,T.base+24);
   const P={walk:650,hold:500,sit:1150,wig0:1250,paw:2250,shadow:2350,slam:2700,lift:3300,gone:3800,apply:3450,toss:4000,catch:4350,lick0:4600,lick:4800,lick1:5150,home:5250,end:6000};
-  const nsp=BATTLE_SPRITES.nara,tsp=BATTLE_SPRITES.tom,sitR=nsp.sit?mirrorRowsCached(nsp,'sit'):nsp.flip;
+  const nsp=BATTLE_SPRITES.nara,tsp=BATTLE_SPRITES.tom;
   const sT={x:T.x,b:T.base,f:tsp.idle},sN={x:N.x,b:N.base,f:nsp.idle};
-  // Tom: steps a little in, holds the treat up high (celeb), lowers it, takes the lick, steps home.
+  // Tom (painted sheet tombo-nara1-tom): steps a little in, holds the treat up high (frames 2 then 5), lowers it (frame 3), cheers through the lick (frame 5), steps home.
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX-6,y=c.origBase,f=sp.idle;
     if(ms<P.walk) x=lerp(c.origX,c.origX-6,ez(ms/P.walk));
-    if(ms>P.hold&&ms<P.toss) f=sp.celeb;
-    if(ms>P.lick&&ms<P.lick1) { x+=Math.sin(seg(ms,P.lick,P.lick1)*Math.PI)*5; f=sp.celeb; }
+    if(ms>=P.walk&&ms<P.hold) f=tbf('nara1','tom',2,sp)||sp.idle;
+    if(ms>=P.hold&&ms<P.toss) f=tbf('nara1','tom',5,sp)||sp.celeb;
+    if(ms>=P.toss&&ms<P.lick) f=tbf('nara1','tom',3,sp)||sp.idle;
+    if(ms>P.lick&&ms<P.lick1) { x+=Math.sin(seg(ms,P.lick,P.lick1)*Math.PI)*5; f=tbf('nara1','tom',5,sp)||sp.celeb; }
     else if(ms>P.home) { const k=ez(seg(ms,P.home,P.home+500)); x=lerp(c.origX-6,c.origX,k); }
-    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
-  // Nara: trots to her spot facing Tom, sits and wiggles, paw up, waits, catches the treat, hops up for the lick, home.
+    sT.up=ms>=P.walk&&ms<P.toss; sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
+  // Nara (painted sheet tombo-nara1-nara, mirrored to face Tom): trots to her spot, sits (frame 2) and wiggles, paw up (frame 3, frame 4 on the slam),
+  // waits, leaps for the treat (frame 6), flies up for the lick (frame 5), sits again, runs home.
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nx,y=nb,f=sp.flip,rot=0;
     if(ms<P.walk+150) { const k=ez(ms/(P.walk+150)); x=lerp(c.origX,nx,k); y=lerp(c.origBase,nb,k)-Math.abs(Math.sin(c.t*16))*4; f=runFr(sp,c.t,-1); }
-    else if(ms<P.sit) f=sp.flip;
-    else if(ms<P.paw) { f=sitR; if(ms>P.wig0) { const w=Math.sin(ms/45); x+=w*2.5; rot=w*.05; } }
-    else if(ms<P.lift) { f=sp.celebFlip||sp.flip; if(ms>P.slam&&ms<P.slam+200) y-=Math.sin(seg(ms,P.slam,P.slam+200)*Math.PI)*6; }
-    else if(ms<P.catch) f=sitR;
-    else if(ms<P.lick0) { f=sp.celebFlip||sp.flip; y-=Math.sin(seg(ms,P.catch,P.catch+220)*Math.PI)*14; }
-    else if(ms<P.lick1) { const k=Math.sin(seg(ms,P.lick0,P.lick1)*Math.PI); x=lerp(nx,sT.x-42,k); y=nb-k*46; f=sp.celebFlip||sp.flip; rot=-k*.15; }
-    else if(ms<P.home) f=sp.flip;
+    else if(ms<P.sit) f=tbfm('nara1','p',2)||sp.flip;
+    else if(ms<P.paw) { f=tbfm('nara1','p',2)||sp.flip; if(ms>P.wig0) { const w=Math.sin(ms/45); x+=w*2.5; rot=w*.05; } }
+    else if(ms<P.lift) { const hit=ms>P.slam&&ms<P.slam+200; f=tbfm('nara1','p',hit?4:3)||sp.flip; if(hit) y-=Math.sin(seg(ms,P.slam,P.slam+200)*Math.PI)*6; }
+    else if(ms<P.catch) f=tbfm('nara1','p',3)||sp.flip;
+    else if(ms<P.lick0) { f=tbfm('nara1','p',6)||sp.flip; y-=Math.sin(seg(ms,P.catch,P.catch+220)*Math.PI)*14; }
+    else if(ms<P.lick1) { const k=Math.sin(seg(ms,P.lick0,P.lick1)*Math.PI); x=lerp(nx,sT.x-42,k); y=nb-k*46; f=tbfm('nara1','p',5)||sp.flip; rot=-k*.15; }
+    else if(ms<P.home) f=tbfm('nara1','p',2)||sp.flip;
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(nx,c.origX,k); y=lerp(nb,c.origBase,k)-(k<1?Math.abs(Math.sin(c.t*16))*4:0); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.lick0&&ms<P.lick1}; });
   // Where the treat is: up in Tom's hand, then tossed to Nara's mouth.
-  const tomHand=()=>{ const up=sT.f===tsp.celeb; return up?{x:sT.x-20,y:sT.b-tsp.idle.length*tsp.scale-14}:handPt(tsp,sT.f,sT.x,sT.b,-1); };
+  const tomHand=()=>{ const up=sT.up; return up?{x:sT.x-20,y:sT.b-tsp.idle.length*tsp.scale-14}:handPt(tsp,sT.f,sT.x,sT.b,-1); };
   const mouth=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,1); return {x:h.x,y:h.y-2}; };
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
     // the treat

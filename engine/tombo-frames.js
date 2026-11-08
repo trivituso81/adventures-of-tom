@@ -16,4 +16,7 @@
     if(sp&&sp.handAt&&!sp.handAt.has(r)) { const h=sp.handAt.get(sp.idle); if(h) sp.handAt.set(r,h); }
     return r;
   };
+  // tbfm: the same frame turned to face right (the painted sheets face left). Cached per frame.
+  const mir={};
+  window.tbfm=function(tid,who,n) { const r=window.tbf(tid,who,n,null); if(!r) return null; const k=tid+'/'+who+'/'+n; return mir[k]||(mir[k]=mirrorRows(r)); };
 })();
