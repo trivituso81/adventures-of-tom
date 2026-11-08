@@ -114,6 +114,8 @@ if(!voices['dialog|narrator']&&voices['dialog|washington']) voices['dialog|narra
 // Narrator delivery (Tom, 2026-11-03): theatrical storyteller, lively pace, not slow. Same voice id; only the direction changes.
 if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical storyteller, lively pace';
 if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLabs speaking rate (0.7 to 1.2); Tom: the narrator spoke too slowly in the preview
+// The Mirrorball (Tom 11-07, option A): Dolores' ElevenLabs voice, no new voice slot. Only the written annotations make her elegant.
+if(voices['dialog|dolores']) voices['dialog|mirrorball']=Object.assign({},voices['dialog|dolores'],{direction:''});
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
   v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);

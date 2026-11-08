@@ -1,3 +1,12 @@
+## 2026-11-07 (437): The Mirrorball speaks in Dolores' voice with elegant annotations (`mirrorvoice1`)
+- Decided by Tom (11-07, option A): the Mirrorball uses Dolores' ElevenLabs voice, no new voice slot. The elegance comes from the script annotations, not a new voice.
+- Cast: `'The Mirrorball'` is now `mirrorball` in data/dialog-cast.js (the stale `sparkle` entry is removed). A `mirrorball` voice is defined there.
+- Voice Library: make-index.js gives `dialog|mirrorball` Dolores' voice with no direction. The 9 Moon Club Mirrorball lines in directions-20261101.json are re-annotated (same words). tools/voice-library/scripts/mirrorball-elegant.json adds 8 chapter 9 Monster-talk lines and 2 scene lines that were voiced as `bigone`.
+- Not yet baked: the 17 `mirrorball` lines play in the browser's synthesized voice until Tom bakes them in the Voice Library. The old `bigone` clips for these lines stay in data/voice/dialog-ch9.js, dialog-ch26.js, dialog-ch27.js and dialog-ch28.js until the bake; then purge them (`node tools/clip-audit/purge_unused.js`) and record it in docs/PURGED_VOICE.md.
+- Tags: index.html and engine/main.js moved to `mirrorvoice1`.
+- Tests: node --check OK, tag_check ok, smoke FAILS [], unused_voice checks 1 to 5 show 0 or empty. No frames changed (voice only).
+- Watch for Tom: "elegant" may read as too slow or too theatrical; the fix is the annotations in the two JSON files, not the voice.
+
 ## 2026-11-07 (436): Tom's side crouch before the greeting hug (`tomcrouch1`)
 - Fact: Tom's approved Art Library picture `tom-greeting-crouch` (`art/raw/characters/tom-greeting-crouch-v1.png`) now is the `hg_crouch` frame of the greeting hug. He crouches facing the girls with his arms open, then the group picture (`hg_run`) takes over. Used as painted, no flip.
 - Build: `bake_story_poses.py` hug set has a `crouch` entry (own sheet, keyed on its crimson ground, scaled by head height .284 so his head matches the standing frame; feet on the bottom row). Rebuilt `art/chars/hug-story.webp` and `data/story-poses.js`; tags moved to `tomcrouch1`. Nothing else changed.

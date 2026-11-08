@@ -6218,18 +6218,18 @@
 "script": "[dazzled, flustered] Tommy. Over the bandstand. It's so BRIGHT. [helpless, torn] I can't look at it. I'm looking at it."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "Guests! GUESTS! Oh, at last. Welcome to the Moon Club. Nobody has come up those stairs since 1971.",
 "ctx": "The Mirrorball",
-"script": "[overjoyed, gushing] Guests! GUESTS! Oh, at last. [grand, warm] Welcome to the Moon Club. [wistful, quieter] Nobody has come up those stairs since 1971."
+"script": "[breathy, drawn out, haughty] Guests! GUESTS! [languid, poised] Oh, at last. [warm, slow] Welcome to the Moon Club. [sighing, wistful] Nobody has come up those stairs since 1971."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "Every full moon, they danced under me. Then the last dance. The band said see you next moon. Nobody came back.",
 "ctx": "The Mirrorball",
-"script": "[dreamy, lilting] Every full moon, they danced under me. [heavy, hurt] Then the last dance. The band said see you next moon. [small, aching] Nobody came back."
+"script": "[dreamy, slow] Every full moon, they danced under me. [heavy, sighing] Then the last dance. The band said see you next moon. [small, languid] Nobody came back."
 },
 {
 "voice": "tom",
@@ -6239,18 +6239,18 @@
 "script": "[dry, steady] So you took the moon."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "I CAUGHT it. All of it. Every bit of moonlight, right here in me.",
 "ctx": "The Mirrorball",
-"script": "[defiant, fierce] I CAUGHT it. [desperate, proud] All of it. Every bit of moonlight, right here in me."
+"script": "[breathy, haughty] I CAUGHT it. [poised, lingering] All of it. Every bit of moonlight, right here in me."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. And look. Somebody did.",
 "ctx": "The Mirrorball",
-"script": "[desperate, glittering] If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. [hopeful, brightening] And look. [thrilled, cracking] Somebody did."
+"script": "[languid, glittering] If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. [hopeful, drawn out] And look. [wistful, poised] Somebody did."
 },
 {
 "voice": "deedee",
@@ -6260,11 +6260,11 @@
 "script": "[gentle, mildly scolding] Honey, there's a whole town walking into hedges down there."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "Then they can come UP. One more dance. Just one. Everybody, under me, forever.",
 "ctx": "The Mirrorball",
-"script": "[stubborn, pleading] Then they can come UP. One more dance. Just one. [possessive, ominous] Everybody, under me, forever."
+"script": "[haughty, slow] Then they can come UP. One more dance. Just one. [possessive, languid] Everybody, under me, forever."
 },
 {
 "voice": "boppy",
@@ -6295,11 +6295,11 @@
 "script": "[urgent, hushed] Tommy, whatever her shiny side shows bounces right back. Use something else. [soft, tender] And honey, nobody has asked her to dance since 1971. [meaningful, gentle] Three times."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "...Fine. The party is over. It was over in 1971. I just didn't want to be the one to turn off the lights.",
 "ctx": "The Mirrorball",
-"script": "[deflated, quiet] ...Fine. [heavy, hollow] The party is over. It was over in 1971. [aching, small] I just didn't want to be the one to turn off the lights."
+"script": "[deflated, sighing] ...Fine. [heavy, languid] The party is over. It was over in 1971. [aching, soft] I just didn't want to be the one to turn off the lights."
 },
 {
 "voice": "deedee",
@@ -6323,11 +6323,11 @@
 "script": "[soft, awed] The Mirrorball turns once, slowly, and lets go. [hushed, glowing] A great round light rises out of her, up through the glass, and settles in the sky. [warm, satisfied] The moon. Right where it belongs."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "One dance. Before you go. Somebody. Please.",
 "ctx": "The Mirrorball",
-"script": "[shy, small] One dance. Before you go. [trembling, pleading] Somebody. Please."
+"script": "[shy, breathy] One dance. Before you go. [trembling, pleading] Somebody. Please."
 },
 {
 "voice": "deedee",
@@ -6365,11 +6365,11 @@
 "script": "[soft, fond] Tom and Deedee sway under the Mirrorball, and a thousand little moons go round and round the Dome. [amused, affectionate] Boppy keeps time on the bass drum. [wry, warm] Badly. Proudly."
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "Here. One of my little mirrors. For the lady who said she'd come back. So you can carry a bit of the moon home.",
 "ctx": "The Mirrorball",
-"script": "[tender, shy] Here. One of my little mirrors. [soft, grateful] For the lady who said she'd come back. [gentle, hopeful] So you can carry a bit of the moon home."
+"script": "[tender, poised] Here. One of my little mirrors. [soft, grateful] For the lady who said she'd come back. [gentle, slow] So you can carry a bit of the moon home."
 },
 {
 "voice": "boppy",
@@ -21471,11 +21471,11 @@
 "script": "[grand, booming] From the top! [rousing, bright] Round two!"
 },
 {
-"voice": "bigone",
+"voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "Round {n}. The band plays on.",
 "ctx": "Monster talk",
-"script": "[grand, wistful] Round {n}. [bright, brave] The band plays on."
+"script": "[grand, languid] Round {n}. [wistful, poised] The band plays on."
 },
 {
 "voice": "bigone",

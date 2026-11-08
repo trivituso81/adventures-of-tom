@@ -1,0 +1,67 @@
+{
+"tag": "mirrorball-elegant-20261107",
+"lines": [
+{
+"voice": "mirrorball",
+"text": "Every full moon they danced under me. Then the last dance, and the doors closed.",
+"ctx": "Monster talk",
+"script": "[dreamy, slow] Every full moon they danced under me. [heavy, sighing] Then the last dance, and the doors closed."
+},
+{
+"voice": "mirrorball",
+"text": "From the top! Round two!",
+"ctx": "Monster talk",
+"script": "[grand, languid] From the top! [poised, bright] Round two!"
+},
+{
+"voice": "mirrorball",
+"text": "Round 2. The band plays on.",
+"ctx": "Monster talk",
+"script": "[grand, languid] Round 2. [wistful, poised] The band plays on."
+},
+{
+"voice": "mirrorball",
+"text": "Round 3. The band plays on.",
+"ctx": "Monster talk",
+"script": "[grand, languid] Round 3. [wistful, poised] The band plays on."
+},
+{
+"voice": "mirrorball",
+"text": "Round 4. The band plays on.",
+"ctx": "Monster talk",
+"script": "[grand, weary] Round 4. [wistful, languid] The band plays on."
+},
+{
+"voice": "mirrorball",
+"text": "Round 5. The band plays on.",
+"ctx": "Monster talk",
+"script": "[grand, weary] Round 5. [wistful, poised] The band plays on."
+},
+{
+"voice": "mirrorball",
+"text": "...one more song. Just one.",
+"ctx": "Monster talk",
+"script": "[faint, breathy] ...one more song. [hushed, pleading] Just one."
+},
+{
+"voice": "mirrorball",
+"text": "They said see you next moon. 1971.",
+"ctx": "Monster talk",
+"script": "[soft, aching] They said see you next moon. [fading, fond] 1971."
+},
+{
+"voice": "mirrorball",
+"speaker": "The Mirrorball",
+"text": "...You asked me. Three times. Nobody has asked me to dance since 1971.",
+"ctx": "The Mirrorball",
+"script": "[slow, stunned] ...You asked me. [languid, disbelieving] Three times. [aching, soft] Nobody has asked me to dance since 1971."
+},
+{
+"voice": "mirrorball",
+"speaker": "The Mirrorball",
+"text": "I don't need the moon. I just needed somebody to ASK.",
+"ctx": "The Mirrorball",
+"script": "[haughty, quietly broken] I don't need the moon. [tender, lingering] I just needed somebody to ASK."
+}
+]
+}
