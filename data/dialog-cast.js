@@ -305,7 +305,7 @@ const DIALOG_CAST={
       desc:'A cartoon villain who is a walking chest freezer: a flat, cold, humming monotone with a slight metallic buzz, deadpan and sulky, slow and heavy, with a lonely sadness underneath that cracks through when he is surprised. Animated character voice.',
       sample:'Nine scoops. Nine candles. Nine years. All of it melts. Not in here. Nothing melts in here. Nothing changes. Nobody came to my birthday. So nobody gets one. Is there cake? I will bring the ice. I am mostly ice.'},
     mirrorball:{name:'The Mirrorball',type:'Monster boss: disco ball in the Moon Club Dome',stability:.5,
-      desc:'A lonely, elegant old disco ball who once ruled the dance floor: a slow, languid, breathy, theatrical voice, haughty and poised, drawing out each vowel, with a wistful ache underneath. Clean studio recording.',
+      desc:'A fancy, posh, elegant lady who once ruled the dance floor: a refined, polished, cultured voice like a 1970s supper-club grande dame, slow and languid, haughty and poised, always graceful and glamorous, never rough or gruff, with a wistful ache underneath. Clean studio recording.',
       sample:'Guests. At last. Welcome to the Moon Club. Nobody has come up those stairs since nineteen seventy one. Every full moon, they danced under me. Then the last dance. Nobody came back.'},
     bigone:{name:'The Big One',type:'Monster boss: giant pond fish',stability:0,fx:'bigone',
       desc:'An enormous ancient cartoon pond fish, huge slow booming bass voice with gurgling bubbles, pompous and boastful but childlike and easily delighted underneath. Animated character voice.',

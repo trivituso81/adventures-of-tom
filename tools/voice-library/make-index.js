@@ -114,8 +114,15 @@ if(!voices['dialog|narrator']&&voices['dialog|washington']) voices['dialog|narra
 // Narrator delivery (Tom, 2026-11-03): theatrical storyteller, lively pace, not slow. Same voice id; only the direction changes.
 if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical storyteller, lively pace';
 if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLabs speaking rate (0.7 to 1.2); Tom: the narrator spoke too slowly in the preview
-// The Mirrorball (Tom 11-07, option A): Dolores' ElevenLabs voice, no new voice slot. Only the written annotations make her elegant.
-if(voices['dialog|dolores']) voices['dialog|mirrorball']=Object.assign({},voices['dialog|dolores'],{direction:''});
+// The Mirrorball (Tom 11-08): Dolores' voice no longer exists on ElevenLabs (404), so she reuses an existing lady voice (no new
+// slot). fallback_ids: voices.html tries the next id when ElevenLabs answers 404 (voice deleted), so one missing voice never blocks a bake.
+// The direction keeps her a fancy lady on every line (Tom 11-08).
+{ const LADY=['oolong','odette','luna','penny','carmen'].map(k=>voices['dialog|'+k]&&voices['dialog|'+k].voice_id).filter(Boolean);
+  const ids=[...new Set(LADY)];
+  if(ids.length){
+    voices['dialog|mirrorball']=Object.assign({},voices['dialog|oolong']||{},{voice_id:ids[0],fallback_ids:ids.slice(1),direction:'fancy, posh, elegant lady, refined and graceful, never gruff'});
+    if(voices['dialog|dolores']) voices['dialog|dolores'].fallback_ids=ids;   // Dolores' own id is gone too
+  } }
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
   v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
