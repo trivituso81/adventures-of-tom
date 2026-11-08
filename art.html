@@ -56,6 +56,7 @@ input[type=search]{width:100%;padding:12px;border-radius:10px;border:1px solid #
 .s-wait .dot,.c-wait{background:#ffd34d}.s-approved .dot{background:#2f9e63}.s-rejected .dot{background:#b4414f}.s-blocked .dot{background:#6b6790}
 .c-wait{color:#241b00}.c-approved{background:#2f9e63;color:#fff}.c-rejected{background:#b4414f;color:#fff}.c-blocked{background:#2c2852;color:#9a95c8}
 .s-blocked .it{color:#9a95c8}
+.c-ingame{background:#e07b2a;color:#fff}.ingame{color:#ffb27a;font-size:13px;margin:6px 0}  /* in game, not approved (ingame1) */
 .ih .chip{flex:none}
 .item>.card{margin:0;border:0;border-radius:0;border-top:1px solid #2c2852;background:#17152f}
 .blk{background:#3a2a44;border:1px solid #6b4a66;border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:14px}
@@ -165,10 +166,13 @@ $('setuptog').onclick=()=>setupOpen($('setupbody').hidden);
 // --- tabs, filters, groups and one-line rows (UX rebuild, CHANGES 110)
 // Every entry is one collapsed row. Rows sit in groups (the `group` field from make-prompts.js) and groups sit in tabs. Only an open row draws its prompt, references and results.
 const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies','Battle','Title','Portraits','Flight'];
-const FILTERS=[['todo','To do'],['all','All'],['ready','Ready'],['wait','Waiting on me'],['rejected','Rejected'],['approved','Approved'],['blocked','Blocked']];
+const FILTERS=[['todo','To do'],['ingame','In game, not approved'],['all','All'],['ready','Ready'],['wait','Waiting on me'],['rejected','Rejected'],['approved','Approved'],['blocked','Blocked']];
 const STATE_NAME={ready:'Ready',wait:'Waiting on me',rejected:'Rejected',approved:'Approved',blocked:'Blocked'};
 // ready = can be generated now; wait = a picture is generated and not yet approved or rejected; blocked = a reference picture is not made yet
 let RES={}, ENTRY={}, ST={}, EXISTS={};
+// In game, not approved (ingame1): data/art-ingame.json (tools/art-library/in_game.py) lists entries the game already shows a picture for. The flag clears itself on APPROVE.
+let INGAME={};
+const inGame=e=>e.status!=='approved'&&INGAME[e.id]?INGAME[e.id]:'';
 const CHAIN=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d+\.png$/;
 // A reference to another entry's approved picture always means that entry's NEWEST approved version, even if the stored path says -v1 (a stencil made before the painting was re-approved).
 function rp(p){ const m=CHAIN.exec(p); if(!m) return p; const dep=ENTRY[m[2]]; const vs=dep&&dep.versions; if(!vs||!vs.length) return p; let b=vs[0]; for(const v of vs) if((v.n||0)>(b.n||0)) b=v; return b.file||p; }
@@ -211,10 +215,10 @@ async function probe(){
 }
 const matchQ=(e,q)=>(e.title+' '+e.id+' '+(e.group||'')).toLowerCase().indexOf(q)>=0;
 const qNow=()=>UI.q.trim().toLowerCase();
-function visible(e){ const q=qNow(); if(q) return matchQ(e,q); const s=ST[e.id]; if(UI.filter==='all') return true; if(UI.filter==='todo') return s==='ready'||s==='wait'; return s===UI.filter; }
+function visible(e){ const q=qNow(); if(q) return matchQ(e,q); const s=ST[e.id]; if(UI.filter==='all') return true; if(UI.filter==='todo') return s==='ready'||s==='wait'; if(UI.filter==='ingame') return !!inGame(e); return s===UI.filter; }
 function groupsOf(tab){ const m=new Map(); for(const e of DATA.entries){ if(e.tab!==tab) continue; const g=e.group||tab; if(!m.has(g)) m.set(g,[]); m.get(g).push(e); } return m; }
 const gkey=(tab,g)=>tab+'|'+g;
-function groupCount(items){ const done=items.filter(e=>ST[e.id]==='approved').length, wait=items.filter(e=>ST[e.id]==='wait').length; return (wait?wait+' waiting, ':'')+done+' of '+items.length+' approved'; }
+function groupCount(items){ const done=items.filter(e=>ST[e.id]==='approved').length, wait=items.filter(e=>ST[e.id]==='wait').length; const ig=items.filter(inGame).length; return (wait?wait+' waiting, ':'')+done+' of '+items.length+' approved'+(ig?', '+ig+' in game not approved':''); }
 function paintTabs(){
   const q=qNow();
   $('tabs').innerHTML=TABS.map(t=>{ const all=DATA.entries.filter(e=>e.tab===t); const hit=q?all.filter(e=>matchQ(e,q)).length:0;
@@ -222,7 +226,7 @@ function paintTabs(){
 }
 function paintFilters(){
   const list=DATA.entries.filter(e=>e.tab===UI.tab), c={}; for(const e of list) c[ST[e.id]]=(c[ST[e.id]]||0)+1;
-  const n=k=>k==='all'?list.length:k==='todo'?(c.ready||0)+(c.wait||0):(c[k]||0);
+  const n=k=>k==='ingame'?list.filter(inGame).length:k==='all'?list.length:k==='todo'?(c.ready||0)+(c.wait||0):(c[k]||0);
   $('filters').style.display=qNow()?'none':'';
   $('filters').innerHTML=FILTERS.map(f=>'<button class="tab'+(f[0]===UI.filter?' on':'')+'" data-filter="'+f[0]+'">'+f[1]+' '+n(f[0])+'</button>').join('');
 }
@@ -231,6 +235,7 @@ function renderCard(e){
   const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rp(p))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
   return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
+  (inGame(e)?'<div class="ingame">In game, not approved: the game shows '+esc(inGame(e))+' now. That picture was never approved here. Approving this entry clears the flag (Claude then installs the approved picture).</div>':'')+
   '<label>Prompt (edit here, it is sent as written)'+(EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt?' <button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'')+'</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
   ownHtml(e,id)+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
@@ -244,7 +249,7 @@ function renderCard(e){
 }
 function renderItem(e){
   const s=ST[e.id], open=!!UI.open[e.id], blk=s==='blocked'&&!open?blockInfo(e):null;   // an open row shows the reason in its banner instead
-  return '<div class="item s-'+s+'" data-id="'+esc(e.id)+'"><button class="ih" data-toggle="'+esc(e.id)+'" aria-expanded="'+open+'"><span class="dot"></span><span class="it">'+esc(rowLabel(e))+(blk?'<span class="why">'+esc(blk.why)+'</span>':'')+'</span><span class="chip c-'+s+'">'+STATE_NAME[s]+'</span><span class="car"></span></button>'+(open?renderCard(e):'')+'</div>';
+  return '<div class="item s-'+s+'" data-id="'+esc(e.id)+'"><button class="ih" data-toggle="'+esc(e.id)+'" aria-expanded="'+open+'"><span class="dot"></span><span class="it">'+esc(rowLabel(e))+(blk?'<span class="why">'+esc(blk.why)+'</span>':'')+'</span>'+(inGame(e)?'<span class="chip c-ingame">In game</span>':'')+'<span class="chip c-'+s+'">'+STATE_NAME[s]+'</span><span class="car"></span></button>'+(open?renderCard(e):'')+'</div>';
 }
 function renderGroup(tab,g,items,single){
   const shown=items.filter(visible); if(!shown.length) return '';
@@ -473,6 +478,7 @@ addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov'
   if(LS.get('aot-gh-token')){ try{ DATA=JSON.parse(await (await ghFile(JSON_PATH)).text()); live=true; }catch(e){ console.warn('live prompts failed, using the site copy',e); } }
   if(!live){ try{ const r=await fetch('data/art-prompts.json',{cache:'no-store'}); if(r.ok) DATA=await r.json(); }catch(e){} }
   DATA.live=live;
+  { let t=null; if(live){ try{ t=await (await ghFile('data/art-ingame.json')).text(); }catch(e){} } if(t===null){ try{ const r=await fetch('data/art-ingame.json',{cache:'no-store'}); if(r.ok) t=await r.text(); }catch(e){} } try{ if(t) INGAME=JSON.parse(t).items||{}; }catch(e){ console.warn('in-game list not readable',e); } }
   for(const e of DATA.entries){ ENTRY[e.id]=e; if(!e.group) e.group=e.tab; }
   await loadResults();
   const first=TABS.find(t=>DATA.entries.some(e=>e.tab===t)); if(first&&(!TABS.includes(UI.tab)||!DATA.entries.some(e=>e.tab===UI.tab))) UI.tab=first;

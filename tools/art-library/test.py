@@ -24,6 +24,8 @@ def data_checks():
     ok(sum(1 for e in d if e['tab'] == 'Characters' and e['group'] == 'Grace') == 2 and sum(1 for e in d if e['group'] == 'Test card') == 1, 'Grace has her two steps in one group, the test card sits alone')
     ids = [e['id'] for e in d]
     ok(len(ids) == len(set(ids)), 'ids are unique')
+    r = subprocess.run([sys.executable, '-I', os.path.join(ROOT, 'tools', 'art-library', 'in_game.py'), '--check'], capture_output=True, text=True)
+    ok(r.returncode == 0, 'data/art-ingame.json is up to date (%s)' % r.stdout.strip())
     bad = []
     banned = re.compile(r'(?i)\b(16[- ]bit|32[- ]bit|snes|super nintendo|final fantasy|chrono trigger|pixel[- ]?art|retro|sprites?)\b')
     neg = re.compile(r'(?i)\b(?:not|no|never|nor)\s+(?:an?\s+)?(?:pixel[- ]?art|16[- ]bit(?:\s+era)?(?:\s+tile\s+art)?|32[- ]bit|retro(?:\s+game\s+art)?|sprites?)\b')
