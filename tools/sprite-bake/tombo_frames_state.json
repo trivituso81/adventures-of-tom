@@ -1,4 +1,50 @@
 {
+ "amy1": {
+  "kind": "pair",
+  "pair": {
+   "k": 3,
+   "rects": {
+    "1": [
+     0,
+     0,
+     344,
+     281
+    ],
+    "2": [
+     344,
+     0,
+     279,
+     306
+    ],
+    "3": [
+     623,
+     0,
+     319,
+     299
+    ],
+    "4": [
+     942,
+     0,
+     263,
+     309
+    ],
+    "5": [
+     1205,
+     0,
+     353,
+     284
+    ],
+    "6": [
+     1558,
+     0,
+     258,
+     309
+    ]
+   },
+   "src": "art/tombo/amy1-pair.webp"
+  },
+  "partner": "amy"
+ },
  "amy2": {
   "kind": "split",
   "objects": [
@@ -378,6 +424,57 @@
    "src": "art/tombo/boppy2-tom.webp"
   }
  },
+ "deedee1": {
+  "kind": "pair",
+  "objects": [
+   "bistro_table",
+   "wine_glass_of_red_wine",
+   "pan_of_warm_rhubarb_crisp"
+  ],
+  "pair": {
+   "k": 3,
+   "rects": {
+    "1": [
+     0,
+     0,
+     273,
+     304
+    ],
+    "2": [
+     273,
+     0,
+     289,
+     306
+    ],
+    "3": [
+     562,
+     0,
+     278,
+     301
+    ],
+    "4": [
+     840,
+     0,
+     279,
+     305
+    ],
+    "5": [
+     1119,
+     0,
+     279,
+     308
+    ],
+    "6": [
+     1398,
+     0,
+     275,
+     308
+    ]
+   },
+   "src": "art/tombo/deedee1-pair.webp"
+  },
+  "partner": "deedee"
+ },
  "deedee2": {
   "kind": "split",
   "objects": [
@@ -618,6 +715,106 @@
   },
   "partner": "grace"
  },
+ "grace2": {
+  "kind": "pair",
+  "objects": [
+   "blue_gym_mat"
+  ],
+  "pair": {
+   "k": 3,
+   "rects": {
+    "1": [
+     0,
+     0,
+     320,
+     276
+    ],
+    "2": [
+     320,
+     0,
+     327,
+     247
+    ],
+    "3": [
+     647,
+     0,
+     305,
+     287
+    ],
+    "4": [
+     952,
+     0,
+     213,
+     367
+    ],
+    "5": [
+     1165,
+     0,
+     349,
+     312
+    ],
+    "6": [
+     1514,
+     0,
+     309,
+     306
+    ]
+   },
+   "src": "art/tombo/grace2-pair.webp"
+  },
+  "partner": "grace"
+ },
+ "grace3": {
+  "kind": "pair",
+  "objects": [
+   "glittery_squishy_popular_kids_toy_in_the_shape_of_a_golden_sparkling_soup_dumpling_with_a_smiling_face",
+   "small_mini_soup_dumpling",
+   "giant_music_note"
+  ],
+  "pair": {
+   "k": 3,
+   "rects": {
+    "1": [
+     0,
+     0,
+     254,
+     306
+    ],
+    "2": [
+     254,
+     0,
+     286,
+     298
+    ],
+    "3": [
+     540,
+     0,
+     327,
+     292
+    ],
+    "4": [
+     867,
+     0,
+     258,
+     325
+    ],
+    "5": [
+     1125,
+     0,
+     304,
+     280
+    ],
+    "6": [
+     1429,
+     0,
+     243,
+     311
+    ]
+   },
+   "src": "art/tombo/grace3-pair.webp"
+  },
+  "partner": "grace"
+ },
  "nara1": {
   "kind": "split",
   "objects": [
@@ -709,6 +906,82 @@
    },
    "src": "art/tombo/nara1-tom.webp"
   }
+ },
+ "rose1": {
+  "kind": "pair",
+  "objects": [
+   "biplane_wings",
+   "pair_of_aviator_goggles"
+  ],
+  "pair": {
+   "k": 3,
+   "rects": {
+    "1": [
+     0,
+     0,
+     118,
+     306
+    ],
+    "2": [
+     118,
+     0,
+     150,
+     305
+    ],
+    "3": [
+     268,
+     0,
+     122,
+     306
+    ],
+    "4": [
+     390,
+     0,
+     110,
+     306
+    ]
+   },
+   "src": "art/tombo/rose1-pair.webp"
+  },
+  "partner": "rose"
+ },
+ "rose2": {
+  "kind": "pair",
+  "objects": [
+   "blue_carry_on_suitcase",
+   "small_plush_lamb_toy"
+  ],
+  "pair": {
+   "k": 3,
+   "rects": {
+    "1": [
+     0,
+     0,
+     160,
+     306
+    ],
+    "2": [
+     160,
+     0,
+     205,
+     284
+    ],
+    "3": [
+     365,
+     0,
+     183,
+     294
+    ],
+    "4": [
+     548,
+     0,
+     225,
+     373
+    ]
+   },
+   "src": "art/tombo/rose2-pair.webp"
+  },
+  "partner": "rose"
  },
  "rose3": {
   "kind": "split",

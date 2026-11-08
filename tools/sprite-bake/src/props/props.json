@@ -1084,7 +1084,6 @@
   ],
   [
    5,
-   "aviator_goggles",
    "Aviator Goggles"
   ],
   [
@@ -1109,17 +1108,14 @@
   ],
   [
    10,
-   "carry_on_suitcase",
    "Carry-On Suitcase"
   ],
   [
    11,
-   "pink_blanket_lump",
    "Pink Blanket Lump"
   ],
   [
    12,
-   "pink_sneakers",
    "Pink Sneakers"
   ],
   [
@@ -1301,11 +1297,6 @@
    48,
    "concrete_slab_chunk",
    "Concrete Slab Chunk"
-  ],
-  [
-   49,
-   "bistro_table",
-   "Bistro Table"
   ],
   [
    50,

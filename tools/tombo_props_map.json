@@ -19,8 +19,7 @@
  },
  "rose1": {
   "new": [
-   "biplane_wings",
-   "aviator_goggles"
+   "biplane_wings"
   ],
   "reuse": []
  },
@@ -59,11 +58,7 @@
   ]
  },
  "rose2": {
-  "new": [
-   "carry_on_suitcase",
-   "pink_blanket_lump",
-   "pink_sneakers"
-  ],
+  "new": [],
   "reuse": [
    {
     "slug": "lamby",
@@ -167,9 +162,7 @@
   ]
  },
  "deedee1": {
-  "new": [
-   "bistro_table"
-  ],
+  "new": [],
   "reuse": [
    {
     "slug": "wine_glass",

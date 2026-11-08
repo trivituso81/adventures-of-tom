@@ -412,16 +412,12 @@ function mirrorRowsCached(sp,k) { const key=sp[k]; if(!mirCache.has(key)) mirCac
 // sprints a loop through the monsters, banking, contrails streaming; the wings clip the target twice. Then he stops in
 // front of it, Rose leans all the way down and BOOPS its nose. Effects unchanged: big Kinetic hit, it loses its next
 // turn, and Rose stays up on Tom's shoulders (Shoulder Ride).
-const goggles=(x,y,a)=>{ if(PROPART.draw('tombo/aviator_goggles',x,y,{w:34,rot:a})) return; gfx.save(); gfx.translate(x,y); gfx.rotate(a);
-  Ln(-16,0,16,0,4,OUT); Ln(-16,0,16,0,2,'#6a4a2a');
-  for(const dx of [-7,6]) { EO(dx,0,6.5,5.5,'#c9a23a'); E(dx,0,4.6,3.8,'#9fe0ff'); E(dx-1.6,-1.4,1.6,1.2,'#ffffff'); }
-  gfx.restore(); };
-// One biplane wing: a long red plank with cream stripes and round ends.
-const wing=(x,y,w,h)=>{ RO(x-w/2,y-h/2,w,h,RED); for(let j=-2;j<=2;j++) R(x+j*w/5-3,y-h/2,6,h,CREAM); R(x-w/2,y-h/2,w,2,'#ff8a6a');
-  EO(x-w/2,y,h/2,h/2,RED); EO(x+w/2,y,h/2,h/2,RED); };
 B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,TH=tsp.idle.length*tsp.scale,rsp=BATTLE_SPRITES.rose,RH=rsp.idle.length*rsp.scale;
+  // Painted pair (art/tombo/rose1-pair.webp, four cells in one row): Tom and Rose share one cell per frame, so Tom's unit draws the pair and Rose's unit
+  // is hidden for the whole move. Frames: 1 hoist (Rose not up yet), 2 airplane level, 3 banked, 4 the boop (Rose leans out, Tom braces).
+  // The painted goggles are on Rose in frames 2 and 3 only, so the code draws none.
   const yUp=cl(Math.min(...GR.list.map(p=>p.base))-14,200,290),yLo=cl(GR.base+26,yUp+30,318),yMid=(yUp+yLo)/2;
   // The boop: where its nose is, how far Rose must lean, and where Tom stops so her face meets it.
   const nose={x:F.x+F.w*.18,y:F.top+F.h*.45};
@@ -436,45 +432,30 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const S0={x:T.x,y:T.base,rot:0,dir:-1,bank:0,rx:0,rb:0,rrot:0};
   const at=ms=>{ let i=0; while(i<K.length-2&&ms>K[i+1][0]) i++; const a=K[i],b=K[i+1],k=cl((ms-a[0])/Math.max(1,b[0]-a[0])),e=i>=1&&i<=4?k:ez(k);
     return [lerp(a[1],b[1],e),lerp(a[2],b[2],e),i]; };
-  const skinOn=ms=>rideSkin('biplane',null)&&ms>=P.wingIn&&ms<P.arrive;   // the painted pair replaces Tom, Rose and the hand-drawn wings
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp,[x,y,i]=at(ms),[x2]=at(ms+40),dir=x2>x+.3?1:(x2<x-.3?-1:S0.dir);
-    let rot=0,f=sp.idle,bob=0;
-    if(ms<P.go) { f=ms>P.wingIn+100?sp.celeb:sp.idle; bob=ms>P.wingIn?Math.abs(Math.sin(ms/90))*2:0; }
-    else if(ms<P.arrive) { f=runFr(sp,c.t,dir); bob=Math.abs(Math.sin(c.t*14))*5; const [,y2]=at(ms+60); rot=cl((y2-y)*.02,-.18,.18)*(dir>0?-1:1); }
-    else if(ms<P.home0) { const k=Math.sin(seg(ms,P.arrive,P.home0)*Math.PI); rot=lean*ez(seg(ms,P.arrive,P.lean0))*(ms<P.lean1?1:1-ez(seg(ms,P.lean1,P.home0))); f=sp.idle; }
-    else { f=ms<P.end-80?(dir>0?(sp.runFlip?sp.runFlip[Math.floor(c.t*7)%2]:sp.flip):sp.idle):sp.idle; }
+  const pairAt=(ms,bank)=>ms<P.wingIn?1:(ms>=P.lean0&&ms<P.home0)?4:(ms>=P.go&&ms<P.arrive&&Math.abs(bank)>.09?3:2);
+  pathOf(fxT,P.end,(ms,c)=>{ const [x,y]=at(ms),[x2]=at(ms+40),dir=x2>x+.3?1:(x2<x-.3?-1:S0.dir);
+    let rot=0,bob=0;
+    if(ms<P.go) { bob=ms>P.wingIn?Math.abs(Math.sin(ms/90))*2:0; }
+    else if(ms<P.arrive) { bob=Math.abs(Math.sin(c.t*14))*5; const [,y2]=at(ms+60); rot=cl((y2-y)*.02,-.18,.18)*(dir>0?-1:1); }
+    else if(ms<P.home0) { rot=lean*ez(seg(ms,P.arrive,P.lean0))*(ms<P.lean1?1:1-ez(seg(ms,P.lean1,P.home0))); }
     S0.x=x; S0.y=y-bob; S0.rot=rot; S0.dir=dir; S0.bank=ms>P.go&&ms<P.arrive?rot*1.8+Math.sin(ms/240)*.06:0;
-    if(skinOn(ms)) f=rideSkin(ms>P.go&&Math.abs(S0.bank)>.09?'biplane2':'biplane',f);   // painted Tom carrying Rose, arms out as wings
-    return {cx:x,base:y-bob,frame:f,rot,noShadow:false}; });
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
-    if(skinOn(ms)) return {hide:true};
-    if(ms<P.hop) { const k=ez(ms/P.hop),s=seatAt(S0.x,S0.y,S0.rot); return {cx:lerp(c.origX,s.x,k),base:lerp(c.origBase,s.y,k)-Math.sin(k*Math.PI)*90,frame:sp.celeb,noShadow:true}; }
-    const s=seatAt(S0.x,S0.y,S0.rot);
-    let t=S0.rot*.6;
-    if(ms>P.lean0&&ms<P.home0) t=lerp(t,th,ez(seg(ms,P.lean0,P.lean0+380))*(1-ez(seg(ms,P.lean1,P.lean1+260))));
-    const px=s.x+(RH/2)*Math.sin(t),py=s.y-(RH/2)*Math.cos(t);
-    const f=S0.dir>0&&ms>P.go?(sp.celebFlip||sp.flip):(ms>P.wingIn&&ms<P.arrive?sp.celeb:sp.idle);
-    S0.rx=px; S0.rb=py+RH/2; S0.rrot=t; S0.rf=f;
-    return {cx:px,base:py+RH/2,frame:f,rot:t,noShadow:true}; });
-  // Wings, contrails and goggles, drawn over the two of them.
+    // the painted pair leans by itself, so the cell is not rotated
+    return {cx:x,base:y-bob,frame:tbf('rose1','pair',pairAt(ms,S0.bank),tsp)||tsp.idle}; });
+  pathOf(fxP,P.end,()=>({cx:0,base:0,frame:rsp.idle,hide:true}));
+  // Wings and contrails go behind the painted pair (the biplane wing art is a whole plane, so it must not hide the two of them).
   const trail=[];
-  scene('tb_draw',P.end/1000,{draw:(s,u,ms)=>{
+  scene('tb_draw',P.end/1000,{back:true,draw:(s,u,ms)=>{
     const wk=ms<P.wingOut?ez(seg(ms,P.wingIn,P.wingIn+300)):1-ez(seg(ms,P.wingOut,P.wingOut+250));
-    const cx=S0.x,lowY=S0.y-TH*.62,upY=S0.rb-RH*.5,b=S0.bank;
+    const cx=S0.x,lowY=S0.y-TH*.5,upY=S0.y-TH*1.02,b=S0.bank;   // the lower wing at Tom's chest, the top wing just over Rose's head (the painted pair draws both)
     const tip=(dx,dy)=>[cx+dx*Math.cos(b)-dy*Math.sin(b),lowY+dx*Math.sin(b)+dy*Math.cos(b)];
     if(ms>P.go&&ms<P.arrive+400) { if(ms<P.arrive) trail.push({t:ms,pts:[tip(-86,0),tip(86,0),tip(-70,upY-lowY),tip(74,upY-lowY)]});
       while(trail.length&&ms-trail[0].t>650) trail.shift();
       for(let j=0;j<4;j++) for(let i=1;i<trail.length;i++) { const a=trail[i-1],c2=trail[i],q=1-(ms-c2.t)/650; gfx.globalAlpha=Math.max(0,q)*.8; Ln(a.pts[j][0],a.pts[j][1],c2.pts[j][0],c2.pts[j][1],2+q*4,'#ffffff'); }
       gfx.globalAlpha=1; }
-    if(wk>0&&!skinOn(ms)) { gfx.save(); gfx.translate(cx,lowY); gfx.rotate(b); gfx.scale(wk,1);
+    if(wk>0) { gfx.save(); gfx.translate(cx,lowY); gfx.rotate(b); gfx.scale(wk,1);
       const up=upY-lowY;
-      if(!PROPART.draw('tombo/biplane_wings',-4,up/2,{w:176,h:Math.abs(up)+30})) {
-      for(const sx of [-38,38]) { Ln(sx,up,sx,0,6,OUT); Ln(sx,up,sx,0,3,'#8a5a30'); }
-      wing(0,0,160,14); wing(2,up,132,12);
-      if(ms>P.go&&ms<P.arrive) { const pr=Math.floor(ms/40)%2; E(-86,0,3,pr?11:4,'#dddddd'); } }
+      PROPART.draw('tombo/biplane_wings',-4,up/2,{w:150,h:Math.abs(up)+30});
       gfx.restore(); }
-    // goggles on Rose's head, rotating with her
-    if(!skinOn(ms)) { const t=S0.rrot,f=S0.dir>0&&ms>P.go?-1:1,px=S0.rx,py=S0.rb-RH/2; goggles(px-3*f*Math.cos(t)+HD*Math.sin(t),py-3*f*Math.sin(t)-HD*Math.cos(t),t); }
   }});
   const hit=(n,dmg,txt)=>{ S('bonk'); ST.jolt(tgt,.4); battle.shakeEnemy=.35; word(txt,F.x,F.top-14,PINK,3,.7,n?.15:-.15); landHit(dmg); };
   ST.play(E2,[
@@ -494,7 +475,6 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.boop+500,()=>{ E2.apply(); S('stun'); }],
     [P.end,'end',(E2.result||'')+' It sees stars.']]);
 };
-
 // ---------- Shared bits for Wine and Gossip and Popcorn Jump ----------
 // A body's near hand, from the pose its path just returned (Tom has no hand map, so his is estimated).
 const handPt=(sp,fr,x,base,dir)=>{ const sc=sp.scale,w=fr[0].length*sc,H=fr.length*sc,h=sp.handAt&&sp.handAt.get(fr);
@@ -1004,37 +984,44 @@ SC.tb_mat=(s,u)=>{ const ms=s.t*1000,k=ez(ms/450)*(ms>s.off?1-ez((ms-s.off)/300)
 B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  // Tom stays on the left at his staged spot facing right; Grace runs in from the right, so they face each other and never cross.
-  const tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb'),expr:tbMir(tsp,'act')};
+  // Painted pair (art/tombo/grace2-pair.webp, six cells): Tom and Grace share one cell per frame, so Tom's unit draws the pair at the midpoint of
+  // the two spots and Grace's own unit is hidden. Tom's spot is on the left; Grace's run-up, flight and landing are the same positions as before.
+  const tF={idle:tbMir(tsp,'idle'),celeb:tbMir(tsp,'celeb')};
   const sx=cl(F.x+F.w/2+78,170,T.x),sb=cl(Math.max(T.base,F.base)+4,200,312),ux=sx+140;   // Tom's spot, Grace's run-up
   const hands={x:sx+52,y:sb-TH*.34},onTop={x:F.x+4,y:F.top+10},
     meet={x:Math.round(sx+tbSep(tsp,[tF.idle,tF.celeb],gsp,[gsp.celeb,gsp.idle],10)),y:sb};
   const P={walk:650,clap:700,cup:950,go1:1150,go2:1350,step:1550,up:1750,gone:2250,drop:2800,hit:3300,back:3800,five:3850,apply:3950,
     tline:4350,home:5050,end:5750};
   const sT={x:T.x,b:T.base},sG={x:G.x,b:G.base,rot:0,trail:false};
-  // Tom: walks to his spot, claps chalk, makes the stirrup, heaves (arms up), high fives, walks home.
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=sx,y=sb,f=tF.idle;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,sx,k); y=lerp(c.origBase,sb,k); f=Math.abs(sx-c.origX)>4?runFr(sp,c.t,sx>c.origX?1:-1):tF.idle; }
-    else if(ms<P.up) { f=ms>P.clap&&ms<P.clap+160?tF.celeb:(ms>P.cup?tF.act:tF.idle); if(ms>P.step&&ms<P.up) y+=Math.sin(seg(ms,P.step,P.up)*Math.PI)*4; }
-    else if(ms<P.gone+200) { f=tF.celeb; y-=Math.sin(seg(ms,P.up,P.up+260)*Math.PI)*8; }
-    else if(ms<P.home) { f=ms>P.five-80&&ms<P.five+500?tF.celeb:(ms>P.drop-200&&ms<P.hit+200?tF.expr:tF.idle); }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(sx,c.origX,k); y=lerp(sb,c.origBase,k); f=k<1?tF.idle:sp.idle; }
-    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
-  // Grace: run-up spot, two steps, onto the hands, launched, gone, the drop (two flips), the bounce, the high five.
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=ux,y=sb,f=sp.idle,rot=0,hide=false; sG.trail=false;
-    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,ux,k); y=lerp(c.origBase,sb,k); f=runFr(sp,c.t,ux>c.origX?1:-1); }
+  // Grace's spot at time ms (her flight and landing); Tom's own spot is computed in the Tom path below.
+  const gPos=(ms,ox,ob,sp,t)=>{ let x=ux,y=sb,f=sp.idle,rot=0,trail=false;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(ox,ux,k); y=lerp(ob,sb,k); f=runFr(sp,t,ux>ox?1:-1); }
     else if(ms<P.go1) { f=sp.idle; }
     else if(ms<P.step) { const k=seg(ms,P.go1,P.step),n=k<.5?k*2:(k-.5)*2,leg=k<.5?0:1;
       x=lerp(ux,hands.x+30,ez(k)); y=sb-Math.sin(n*Math.PI)*(leg?30:14); f=sp.act; }
     else if(ms<P.up) { const k=ez(seg(ms,P.step,P.step+120)); x=lerp(hands.x+30,hands.x+4,k); y=lerp(sb,hands.y+6,k)-Math.sin(k*Math.PI)*20; f=sp.celeb; }
-    else if(ms<P.gone) { const k=seg(ms,P.up,P.gone),e=1-(1-k)*(1-k); x=lerp(hands.x+4,onTop.x+30,e*e); y=lerp(hands.y+6,-GH-40,e); rot=-k*Math.PI*2; f=sp.celeb; sG.trail=true; }
-    else if(ms<P.drop) { hide=true; x=onTop.x; y=-GH-40; }
-    else if(ms<P.hit) { const k=seg(ms,P.drop,P.hit),e=k*k; x=lerp(onTop.x+18,onTop.x,k); y=lerp(-GH-30,onTop.y,e); rot=-ez(k)*Math.PI*4; f=sp.celeb; sG.trail=true; }
+    else if(ms<P.gone) { const k=seg(ms,P.up,P.gone),e=1-(1-k)*(1-k); x=lerp(hands.x+4,onTop.x+30,e*e); y=lerp(hands.y+6,-GH-40,e); rot=-k*Math.PI*2; f=sp.celeb; trail=true; }
+    else if(ms<P.drop) { x=onTop.x; y=-GH-40; }
+    else if(ms<P.hit) { const k=seg(ms,P.drop,P.hit),e=k*k; x=lerp(onTop.x+18,onTop.x,k); y=lerp(-GH-30,onTop.y,e); rot=-ez(k)*Math.PI*4; f=sp.celeb; trail=true; }
     else if(ms<P.hit+140) { x=onTop.x; y=onTop.y+Math.sin(seg(ms,P.hit,P.hit+140)*Math.PI)*6; f=sp.celeb; }
     else if(ms<P.back) { const k=seg(ms,P.hit+140,P.back); x=lerp(onTop.x,meet.x,ez(k)); y=lerp(onTop.y,meet.y,k)-Math.sin(k*Math.PI)*120; rot=k*Math.PI*2; f=sp.celeb; }
     else if(ms<P.home) { x=meet.x; y=meet.y; f=sp.celeb; if(ms>P.five+400) f=ms>P.tline?sp.idle:sp.celeb; }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(meet.x,c.origX,k); y=lerp(meet.y,c.origBase,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
-    sG.x=x; sG.b=y; sG.rot=rot; return {cx:x,base:y,frame:f,rot,hide,noShadow:ms>P.step&&ms<P.back}; });
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(meet.x,ox,k); y=lerp(meet.y,ob,k); f=k<1?runFr(sp,t,-1):sp.idle; }
+    return {x,y,rot,f,trail}; };
+  // The pair frame follows the beat: 2 Grace runs in, 1 chalk up, 3 the stirrup, 4 the flips over Tom, 5 the landing, 6 the high five and walk home.
+  const pairAt=ms=>ms<P.walk?2:ms<P.go1?1:ms<P.gone?3:ms<P.hit?4:ms<P.five?5:6;
+  // Tom: walks to his spot, claps chalk, makes the stirrup, heaves (arms up), high fives, walks home. He draws the pair (Grace's spot is in gPos).
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=sx,y=sb;
+    if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,sx,k); y=lerp(c.origBase,sb,k); }
+    else if(ms<P.up) { if(ms>P.step&&ms<P.up) y+=Math.sin(seg(ms,P.step,P.up)*Math.PI)*4; }
+    else if(ms<P.gone+200) { y-=Math.sin(seg(ms,P.up,P.up+260)*Math.PI)*8; }
+    else if(ms<P.home) { }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(sx,c.origX,k); y=lerp(sb,c.origBase,k); }
+    sT.x=x; sT.b=y;
+    const g=gPos(ms,G.x,G.base,gsp,c.t); sG.x=g.x; sG.b=g.y; sG.rot=g.rot; sG.trail=g.trail;
+    return {cx:Math.round((x+g.x)/2),base:y,frame:tbf('grace2','pair',pairAt(ms),tsp)||tsp.idle}; });
+  // Grace is drawn inside Tom's pair frame, so her own unit stays hidden.
+  pathOf(fxP,P.end,()=>({cx:0,base:0,frame:gsp.idle,hide:true}));
   scene('tb_mat',P.end/1000,{back:true,x1:sx+150,w:Math.max(200,sx+150-F.x+F.w/2+20),y:sb+4,off:P.home});
   // Front layer: chalk puffs, the stirrup hands, the star trail, the twinkle up high.
   const trail=[];
@@ -1408,25 +1395,7 @@ B2_TOMBO_ANIM.deedee2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // little sneakers sticking out. The monsters lean in. BOO!! Rose pops out with Lamby held high and blows a giant
 // raspberry; every monster jumps out of its skin and goofs. She snatches their buffs, then rides the carry-on home.
 // Effects: a Cozy hit on every enemy; they are Goofed and lose a buff each; Tom and Rose are Evasive for 2 turns.
-const CASE='#2f5a8a',CASE2='#4a7cb0',CASE3='#1f3e64',BLANK='#ff9ac0',BLANK2='#e86a9a',SHOE='#ff6aa0';
-// The carry-on: body bottom-centre at (x,by); the handle runs from its top right corner to (hx,hy). lump: 0..1 blanket
-// and sneakers on top; wig: the lump's wiggle.
-const carryOn=(x,by,hx,hy,lump,wig,t)=>{ const w=64,h=46,b=by-6,top=b-h;
-  const paintedCase=PROPART.draw('tombo/carry_on_suitcase',x,by-30,{w:52,h:62});   // painted case brings its own handle and wheels
-  if(paintedCase) { if(lump<=0) return;
-    gfx.save(); gfx.globalAlpha=lump; const ly=top-2,s=1+Math.sin(wig)*.06;
-    PROPART.draw('tombo/pink_sneakers',x-w/2-4+Math.sin(wig*1.3)*3,ly-4,{w:30});
-    PROPART.draw('tombo/pink_blanket_lump',x,ly-12,{w:w+6,sy:s}); gfx.restore(); return; }
-  if(hx!=null) { Ln(x+w/2-6,top+4,hx,hy,6,OUT); Ln(x+w/2-6,top+4,hx,hy,3,'#9aa1ae'); RO(hx-5,hy-3,10,6,'#3a3e46'); }
-  for(const wx of [x-w/2+10,x+w/2-10]) { const sp=t*14; EO(wx,b+2,5,5,'#2a2c32'); Ln(wx,b+2,wx+Math.cos(sp)*3,b+2+Math.sin(sp)*3,1.5,'#8a8e98'); }
-  RO(x-w/2,top,w,h,CASE); R(x-w/2,top,w,4,CASE2); for(const dx of [-16,0,16]) R(x+dx-1,top+6,2,h-10,CASE3);
-  RO(x-12,top-6,24,5,'#3a3e46'); RO(x+w/2-20,top+12,10,14,'#f4e6c8'); label('1A',x+w/2-15,top+16,'#d8323a',1);
-  if(lump<=0) return;
-  gfx.save(); gfx.globalAlpha=lump; const ly=top-2,s=1+Math.sin(wig)*.06;
-  // two sneakers sticking out of the left end (toward the monsters)
-  for(const [dx,dy] of [[0,-6],[-6,6]]) { const sx=x-w/2-8+dx+Math.sin(wig*1.3)*3,sy=ly-8+dy; EO(sx,sy,10,6,SHOE); R(sx-9,sy+3,18,3,'#ffffff'); E(sx-4,sy-2,3,2,'#ffffff'); }
-  gfx.save(); gfx.translate(x,ly); gfx.scale(1,s); EO(0,-14,w/2+2,18,BLANK); for(let j=-2;j<=2;j++) { R(j*12-1,-30,2,18,BLANK2); }
-  R(-w/2,-6,w+4,4,BLANK2); E(-10,-22,12,5,'#ffc8dc'); gfx.restore(); gfx.restore(); };
+const BLANK='#ff9ac0',BLANK2='#e86a9a';
 B2_TOMBO_ANIM.rose2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),Ro=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,rsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,RH=rsp.idle.length*rsp.scale,RW=rsp.idle[0].length*rsp.scale;
@@ -1435,7 +1404,10 @@ B2_TOMBO_ANIM.rose2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     steal:4500,apply:4850,home0:5100,home1:5900,end:6500};
   const caseAt=ms=>ms<P.roll0?{x:cx0,b:T.base}:(ms<P.roll1?(k=>({x:lerp(cx0,cx,k),b:lerp(T.base,gb,k)}))(ez(seg(ms,P.roll0,P.roll1))):
     (ms<P.home0?{x:cx,b:gb}:(k=>({x:lerp(cx,cx0,k),b:lerp(gb,T.base,k)}))(ez(seg(ms,P.home0,P.home1)))));
-  const rolling=ms=>(ms>P.roll0&&ms<P.roll1)||(ms>P.home0&&ms<P.home1);
+  // Painted pair (art/tombo/rose2-pair.webp, four cells in a row): Tom and Rose share one cell per frame. Tom's unit draws the pair from the run
+  // to the ride home; Rose's own unit is hidden then. Lamby is painted in the frames, so the code draws him only once Rose is up again.
+  const pairOn=ms=>ms>=P.run&&ms<P.home1;
+  const pairAt=ms=>ms<P.roll0?1:ms<P.lean0?2:ms<P.boo?3:ms<P.home0?4:ms<P.home1?2:1;
   const sT={x:T.x,b:T.base},sR={x:Ro.x,b:Ro.base,f:rsp.idle,hide:false};
   // Tom: holds the handle; wheels the case to the monsters (whistling, very casual), and back home with Rose on top.
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp,C=caseAt(ms); let x=C.x+58,y=C.b,f=sp.idle;
@@ -1444,8 +1416,9 @@ B2_TOMBO_ANIM.rose2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     else if(ms<P.home0) f=ms>P.boo&&ms<P.boo+500?sp.expr:(ms>P.land+200?sp.celeb:sp.idle);
     else if(ms<P.home1) { f=runFr(sp,c.t*.7,1); }
     else { x=c.origX; y=c.origBase; }
-    sT.x=x; sT.b=y; return {cx:x,base:y,frame:f}; });
-  const hand=()=>({x:sT.x-TH*.27,y:sT.b-TH*.5});
+    sT.x=x; sT.b=y;
+    if(pairOn(ms)) return {cx:x,base:y,frame:tbf('rose2','pair',pairAt(ms),tsp)||tsp.idle};
+    return {cx:x,base:y,frame:f}; });
   // Rose: runs to the case, dives in (hidden), BOO!! pops out sky-high with Lamby, lands on the case, raspberry, rides home.
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,C=caseAt(ms); let x=C.x,y=top(C.b),f=sp.celeb,hide=false;
     if(ms<P.run) { const k=ez(ms/P.run); x=lerp(c.origX,cx0+30,k); y=lerp(c.origBase,T.base,k); f=runFr(sp,c.t,-1); }
@@ -1455,21 +1428,17 @@ B2_TOMBO_ANIM.rose2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     else if(ms<P.home0) { f=ms>P.rasp&&ms<P.rasp1?(sp.expr||sp.act):(ms>P.steal?sp.celeb:sp.idle); }
     else if(ms<P.home1) { y-=Math.abs(Math.sin(ms/110))*4; f=sp.celebFlip||sp.flip; }
     else { const k=ez(seg(ms,P.home1,P.home1+500)); x=lerp(C.x,c.origX,k); y=lerp(top(C.b),c.origBase,k)-Math.sin(k*Math.PI)*40; f=k<1?sp.celeb:sp.idle; }
-    sR.x=x; sR.b=y; sR.f=f; sR.hide=hide; return {cx:x,base:y,frame:f,hide,noShadow:ms>P.run&&ms<P.home1+400}; });
+    const onPair=pairOn(ms); sR.x=x; sR.b=y; sR.f=f; sR.hide=hide||onPair;
+    return {cx:x,base:y,frame:f,hide:hide||onPair,noShadow:onPair||(ms>P.run&&ms<P.home1+400)}; });
   const mouth=()=>{ const sc=rsp.scale,m=rsp.mouth||{col:9,row:16}; return {x:sR.x-RW/2+m.col*sc,y:sR.b-RH+m.row*sc}; };
   const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
   order.forEach((o,i)=>{ o.t=P.boo+90+i*70; });
-  const caseK=ms=>ez(seg(ms,0,300))*(1-ez(seg(ms,P.home1,P.home1+400)));
-  // The carry-on (behind the bodies, so Rose stands on it) ...
-  scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=caseK(ms); if(k<=0) return; const C=caseAt(ms),h=hand();
-    const lump=ms<P.hop?0:(ms<P.boo?1:0),wig=ms>P.wig&&ms<P.boo?ms/45:(ms>P.lean0?ms/300:0);
-    gfx.globalAlpha=k; carryOn(C.x,C.b,ms>P.roll0-100&&ms<P.home1?h.x:null,h.y,lump,wig,rolling(ms)?ms/1000:0); gfx.globalAlpha=1; }});
-  // ... and in front: Lamby, the raspberry, the leaning and goofing monsters, the dizzy stars.
+  // Lamby, the raspberry, the leaning and goofing monsters, the dizzy stars.
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
     // the hop in: a little puff where she vanished
     if(ms>P.hop&&ms<P.hop+400) { const k=seg(ms,P.hop,P.hop+400); gfx.globalAlpha=1-k; for(let j=0;j<5;j++) { const a=j/5*Math.PI*2; E(cx0+Math.cos(a)*20*k,top(T.base)-14+Math.sin(a)*10*k,6,5,CREAM); } gfx.globalAlpha=1; }
     // Lamby, held high once she pops out
-    if(ms>P.boo&&ms<P.home1+400) { const lx=sR.x-RW*.42,ly=sR.b-RH-6,w=Math.sin(ms/120)*.12;
+    if(ms>P.home0&&ms<P.home1+400) { const lx=sR.x-RW*.42,ly=sR.b-RH-6,w=Math.sin(ms/120)*.12;
       gfx.save(); gfx.translate(lx,ly); gfx.rotate(-.2+w); gfx.scale(.85,.85); PROP2.lamby({flip:false},0); gfx.restore(); }
     // the raspberry: a fat tongue and a spray of pink droplets across to the monsters
     if(ms>P.rasp&&ms<P.rasp1) { const m=mouth(),k=seg(ms,P.rasp,P.rasp1),wob=Math.sin(ms/30)*2;
@@ -1716,7 +1685,7 @@ const memory=(x,y,sc,a,sq=0)=>{ if(a<=0) return; const img=ghostDumpling(),sx=sc
 // one lands in a fallen friend's mouth. Group hug.
 // Effects: Sparkle hit on every enemy (warms them), fallen friends up at 50%, party heals 60% and loses its debuffs, Trending locks for 3 turns.
 B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
-  const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
+  const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
   const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),tx=mx-66,
     tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb')},gA=gsp.act||gsp.idle,gC=gsp.celeb||gsp.idle,
@@ -1727,33 +1696,37 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const B0=4900,BP=300;
   order.forEach((o,i)=>{ o.t=B0+i*BP; });
   const last=order.length?order[order.length-1].t:B0;
-  const P={walk:650,gline:800,rise:1700,wake:2200,gren:2900,tline:3300,squash:3700,flat:4000,burst:4400,apply:last+250,hug:last+600,home:last+1500,end:last+2200};
+  const P={walk:650,gline:800,rise:1700,wake:2200,gren:2900,tline:3300,squash:3700,burst:4400,apply:last+250,hug:last+600,home:last+1500,end:last+2200};
   const sky={x:GR.x,y:Math.max(64,GR.top-60)},hold={x:gx-6,y:by-GH-44};
   const sT={x:T.x,b:T.base,f:tF.idle},sG={x:gx,b:by,f:gsp.idle};
-  const flatK=ms=>ez(seg(ms,P.squash,P.squash+140))*(1-ez(seg(ms,P.flat+500,P.flat+800)));
+  // Painted pair (art/tombo/grace3-pair.webp, six cells): Tom and Grace share one cell per frame. Tom's unit draws the pair at the midpoint
+  // of the two spots until the home walk; Grace's own unit is hidden then. Cells: 1 the sleeping dumpling, 2 the wake, 3 the burst,
+  // 4 the flatten and the dumpling sits on Tom, 5 the bonk on each monster, 6 the group hug. The dumpling overlay is drawn only from rise to squash.
+  const pairOn=ms=>ms<P.home;
+  const pairAt=ms=>ms<P.wake?1:ms<P.burst?(ms<P.squash?2:3):ms<B0?4:ms<last?5:6;
+  const gxAt=(ms,ox)=>{ if(ms<P.walk) return lerp(ox,gx,ez(ms/P.walk)); if(ms<P.hug) return gx; if(ms<P.home) return lerp(gx,gh,ez(seg(ms,P.hug,P.hug+300))); return lerp(gh,ox,ez(seg(ms,P.home,P.home+650))); };
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=tF.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.home) { f=ms>P.tline-100&&ms<P.squash?tF.act:(ms>P.hug?tF.celeb:tF.idle); if(ms>P.hug&&ms<P.hug+500) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+500)*Math.PI*2))*8; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
-    sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f,hide:flatK(ms)>.02}; });
+    sT.x=x; sT.b=y; sT.f=f;
+    if(pairOn(ms)) return {cx:Math.round((x+gxAt(ms,G.x))/2),base:y,frame:tbf('grace3','pair',pairAt(ms),tsp)||tsp.idle};
+    return {cx:x,base:y,frame:f}; });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=gx,y=by,f=sp.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,gx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.hug) { f=ms>P.gline&&ms<P.wake?gA:sp.idle; if(ms>P.burst&&ms<P.burst+900) f=gC; }
     else if(ms<P.home) { const k=ez(seg(ms,P.hug,P.hug+300)); x=lerp(gx,gh,k); f=gC; if(ms<P.hug+600) y-=Math.abs(Math.sin(seg(ms,P.hug,P.hug+600)*Math.PI*2))*10; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(gh,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
-    sG.x=x; sG.b=y; sG.f=f; return {cx:x,base:y,frame:f}; });
+    sG.x=x; sG.b=y; sG.f=f;
+    return pairOn(ms)?{cx:0,base:0,frame:f,hide:true}:{cx:x,base:y,frame:f}; });
   const shade=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=shade(ms); if(k<=0) return; dim(k,'#3a2a10',.35); gfx.globalAlpha=1; }});
   const GEMC=['#ffe27a','#fffbe6','#ffd0ec','#aef0ff','#ffb347'];
   // The dumpling's position, size, squash and whether its face shows.
-  const dumAt=ms=>{ if(ms<P.walk+100||ms>=P.burst) return null;
-    const a=ez(seg(ms,P.walk+100,P.walk+500));
-    if(ms<P.rise) return {x:hold.x,y:hold.y+20-ez(seg(ms,P.walk+100,P.rise))*20,sc:.8,a,sq:0,face:0};
+  const dumAt=ms=>{ if(ms<P.rise||ms>=P.squash) return null;
     if(ms<P.gren) { const k=ez(seg(ms,P.rise,P.wake)); const w=ms>P.wake?Math.sin((ms-P.wake)/70)*(1-seg(ms,P.wake,P.gren)*.5):0;
       return {x:hold.x+w*5,y:lerp(hold.y+8,hold.y-20,k),sc:lerp(.8,1.7,k),a:1,sq:w*.12,face:ms>P.wake?1:0}; }
-    if(ms<P.squash) { const k=seg(ms,P.gren,P.squash); return {x:hold.x,y:hold.y-20-Math.sin(k*Math.PI)*4,sc:1.7+k*.5,a:1,sq:0,face:1,shout:ms>P.tline}; }
-    if(ms<P.flat+300) { const k=ez(seg(ms,P.squash,P.squash+140)); return {x:lerp(hold.x,sT.x,k),y:lerp(hold.y-20,sT.b-TH*.55,k),sc:1.9,a:1,sq:k*.45,face:1,shout:1}; }
-    const k=seg(ms,P.flat+300,P.burst); return {x:sT.x,y:sT.b-TH*.55-ez(k)*(TH*.9),sc:1.9+k*.7,a:1,sq:(1-k)*.45,face:1,shout:1}; };
+    const k=seg(ms,P.gren,P.squash); return {x:hold.x,y:hold.y-20-Math.sin(k*Math.PI)*4,sc:1.7+k*.5,a:1,sq:0,face:1,shout:ms>P.tline}; };
   const dumpling=(d,ms)=>{ const img=ghostDumpling(),sx=d.sc*(1+d.sq*.5),sy=d.sc*(1-d.sq*.45),w=img.width*sx,h=img.height*sy;
     gfx.globalAlpha=d.a*.35; E(d.x,d.y,w*.75,h*.8,GOLD); gfx.globalAlpha=d.a;
     const pnt=PROPART.draw('grace/gold_dumpling_hero',d.x,d.y,{h:img.height*d.sc*1.05,sx:1+d.sq*.5,sy:1-d.sq*.45});   // painted dumpling, its own smiling face
@@ -1769,8 +1742,6 @@ B2_TOMBO_ANIM.grace3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const fallen=B2.party.filter(p=>p.hp<=0);
   const minis=[]; for(let j=0;j<22;j++) { const a=(j*0.618)%1; minis.push({x:lerp(GR.x0-20,tx+40,a),t0:P.burst+((j*37)%10)*40,dur:520+(j%5)*70,sz:2+j%3}); }
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
-    // Tom, flat as a pancake
-    const fk=flatK(ms); if(fk>.02) { gfx.save(); gfx.translate(sT.x,sT.b); gfx.scale(1+fk*.7,1-fk*.82); const w=sT.f[0].length*tsp.scale; drawSprite(sT.f,tsp.pal,-w/2,-sT.f.length*tsp.scale,tsp.scale); gfx.restore(); }
     const d=dumAt(ms); if(d) dumpling(d,ms);
     // genie lines as tiny pixel text next to the dumpling
     if(d&&ms>P.gren-100&&ms<P.tline) { gfx.globalAlpha=ez(seg(ms,P.gren-100,P.gren+100)); star(d.x+30,d.y-30,2,GOLD); gfx.globalAlpha=1; }
@@ -5562,7 +5533,15 @@ B2_TOMBO_ANIM.amy1=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<CALL) { const u=seg(ms,SW,CALL); return stand(st,lerp(GR.x0-10,home.x,ez(u)),home.y-Math.sin(u*Math.PI)*16,runFr(sp,c.t,1)); }
     if(ms<P.end-600) { return stand(st,home.x,home.y,isA?(ms<CALL+1500?sp.celeb:F(sp,'celeb2')):(ms<CALL+1200?sp.flip:sp.idle)); }
     const k=ez(seg(ms,P.end-600,P.end)); return stand(st,lerp(home.x,c.origX,k),lerp(home.y,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); };
-  pathOf(fxT,P.end,(ms,c)=>body('tom',ms,c)); pathOf(fxP,P.end,(ms,c)=>body('amy',ms,c));
+  // Painted pair (art/tombo/amy1-pair.webp): Tom and Amy share one cell per frame. Tom's unit draws the pair at the midpoint of their two
+  // spots from the run to the call; Amy's own unit is hidden then. Cells: 1 to 3 the bicker, 4 the rock-paper-scissors, 5 the shoulder charge,
+  // 6 the call. The RPS hands and the bicker marks are drawn in code over the painted fists.
+  const pairOn=ms=>ms>=P.run&&ms<P.end-600;
+  const pairAt=ms=>ms<P.bick[0]?1:ms<P.rps?1+Math.floor((ms-P.bick[0])/350)%3:ms<CH?4:ms<CALL?5:6;
+  const amyC=c=>({sp:asp,t:c.t,origX:A.x,origBase:A.base});
+  pathOf(fxT,P.end,(ms,c)=>{ const a=body('tom',ms,c); if(!pairOn(ms)) return a;
+    const b=body('amy',ms,amyC(c)); return {cx:Math.round((a.cx+b.cx)/2),base:a.base,frame:tbf('amy1','pair',pairAt(ms),tsp)||tsp.idle,rot:0}; });
+  pathOf(fxP,P.end,(ms,c)=>pairOn(ms)?{cx:0,base:0,frame:asp.idle,hide:true}:body('amy',ms,c));
   const PICK=[[0,0],[1,1],[2,0]];   // rock-rock, paper-paper, scissors beats paper? no: tie, tie, then they quit
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{
     if(ms>P.bick[0]&&ms<P.rps) { const pulse=1+Math.sin(ms/70)*.15; for(const [x,y] of [[sT.x+14,sT.b-TH-6],[sA.x+12,sA.b-AH+10]]) for(const [dx,dy,r] of [[-1,-1,0],[1,-1,1.57],[1,1,3.14],[-1,1,4.71]]) { gfx.save(); gfx.translate(x+dx*6,y+dy*6); gfx.rotate(r); gfx.strokeStyle=OUT; gfx.lineWidth=4; gfx.beginPath(); gfx.arc(-4*pulse,-4*pulse,4*pulse,0,Math.PI/2); gfx.stroke(); gfx.strokeStyle=RED; gfx.lineWidth=2; gfx.stroke(); gfx.restore(); } }
@@ -5846,37 +5825,33 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // ================= Tom + Deedee =================
 const shrinkFoe=(f,s)=>{ const q=ST.foe(f); f.spin=0; f.ox=0; f.fsc=s; f.oy=q.h/2*(1-s)/Math.max(s,.01); f.spinAt=performance.now(); };
 const unshrink=f=>{ f.fsc=0; f.oy=0; };
-const glass=(x,y,fill,tilt=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(tilt); LnO(0,0,0,-14,2,'#e8e4dc'); LnO(-6,0,6,0,2,'#e8e4dc'); PO([[-9,-30],[9,-30],[7,-14],[-7,-14]],'#f4f6ffcc',2); if(fill>0) PO([[-8,-22-fill*6],[8,-22-fill*6],[7,-15],[-7,-15]],'#8a2a4a',0); gfx.restore(); };
 const bubble=(x,y,txt,sc=1,c=CREAM)=>{ const w=(txt.length*4-1)*sc+14; RO(x-w/2,y-8*sc-6,w,10*sc+10,c); label(txt,x,y-7*sc,'#2b2a26',sc); PO([[x-6,y+sc*3+4],[x+6,y+sc*3+4],[x,y+sc*3+12]],c,0); };
-const crisp=(x,y)=>{ RO(x-18,y-6,36,12,'#c8703a'); R(x-16,y-10,32,5,'#e8c06a'); for(let k=0;k<4;k++) R(x-14+k*8,y-12,4,3,'#f0d890'); };
 // ---------- Wine and Gossip (Tom + Deedee, tier 1) ----------
 // A bistro table pops up. They sit, clink, lean in and whisper. Both glance at the monster. Gasp. DID YOU SEE WHAT IT
 // WAS WEARING? Every monster shrinks with embarrassment. Deedee brings out the crisp. Effects unchanged.
+// Painted pair (art/tombo/deedee1-pair.webp, six cells in a 3 x 2 grid): the table, the wine glasses and the crisp are painted,
+// so the code draws none of them. From P.run to P.end-700 Tom's unit draws the pair and Deedee's unit is hidden; before and
+// after, each walks on their own. Cells: 1 sitting, 2 clink, 3 whisper, 4 point and gasp, 5 hands on chests, 6 crisp tray.
 B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),D=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
   const by=Math.min(312,Math.max(T.base,D.base)),tx=cl(GR.x1+120,200,334),lx=tx-44,rx=tx+44;
   const P={run:600,sit:900,clink:1500,lean:2100,look:3200,gasp:3900,shrink:4300,crisp:5300,apply:5700,end:7400};
   const sT={x:T.x,b:T.base,f:tsp.idle},sD={x:D.x,b:D.base,f:dsp.idle};
+  const pairAt=ms=>ms<P.clink?1:ms<P.lean?2:ms<P.look?3:ms<P.gasp?4:ms<P.crisp?5:6;
+  const pairOn=ms=>ms>=P.run&&ms<P.end-700;
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
+    if(pairOn(ms)) return {cx:tx,base:by,frame:tbf('deedee1','pair',pairAt(ms),tsp)||tsp.idle,rot:0};
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sT,lerp(c.origX,rx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.end-700) { const lean=ms>P.lean&&ms<P.look?-4:0,look=ms>P.look&&ms<P.gasp; return stand(sT,rx+lean,by,look?sp.act:(ms>P.gasp&&ms<P.gasp+800?(sp.expr||sp.idle):(ms>P.crisp?sp.celeb:sp.kneel||sp.idle)),ms>P.lean&&ms<P.look?.08:0); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(rx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
+    if(pairOn(ms)) return {cx:tx,base:by,frame:dsp.idle,hide:true,noShadow:true};
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sD,lerp(c.origX,lx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.end-700) { const lean=ms>P.lean&&ms<P.look?4:0,look=ms>P.look&&ms<P.gasp; return stand(sD,lx+lean,by,look?F(sp,'point'):(ms>P.gasp&&ms<P.gasp+800?F(sp,'spread'):(ms>P.crisp?F(sp,'carry'):(ms>P.lean&&ms<P.look&&sp.whisper?sp.whisper:(sp.sitR||F(sp,'sit'))))),ms>P.lean&&ms<P.look?-.08:0); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sD,lerp(lx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
-  scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.sit)); if(g<=0) return;
-    if(PROPART.draw('tombo/bistro_table',tx,by-27,{h:56*Math.max(g,.05),w:58*g+2})) return;
-    RO(tx-26*g,by-34,52*g,6,WOOD2); R(tx-2,by-30,4,30,WOOD3); RO(tx-10,by-2,20,4,WOOD3); if(ms>P.sit) { R(tx-20,by-44,40,10,'#f4f0e6'); R(tx-24,by-38,48,4,'#ffffff'); } }});
-  scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{ if(ms<P.sit) return;
-    const cl1=ms>P.clink&&ms<P.clink+300?ez(seg(ms,P.clink,P.clink+150))*(1-ez(seg(ms,P.clink+150,P.clink+300))):0;
-    const dHeld=sp0=>sp0.sitR&&!((ms>P.lean&&ms<P.gasp+800)||ms>P.crisp);   // Deedee's glass is in her hand while she sits
-    const pglass=(x,y,fill,tilt)=>{ if(!PROPART.draw('deedee/wine_glass',x,y-14,{h:28,rot:tilt})) glass(x,y,fill,tilt); };
-    if(!dHeld(dsp)) pglass(tx-12+cl1*8,by-36,ms<P.crisp?1:.4,cl1*.3); pglass(tx+12-cl1*8,by-36,ms<P.crisp?1:.3,-cl1*.3);
-    if(ms>P.lean&&ms<P.look) { const k=Math.floor(ms/350)%2; bubble(k?sT.x-30:sD.x+30,by-(k?TH:DH)-14,k?'PSST':'NO!',2); }
+  scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{
+    if(ms>P.lean&&ms<P.look) { const k=Math.floor(ms/350)%2; bubble(k?rx-30:lx+30,by-(k?TH:DH)-14,k?'PSST':'NO!',2); }
     if(ms>P.gasp&&ms<P.shrink+1200) for(const f of list) { const q=ST.foe(f); E(q.x-q.w*.2,q.mid,5,3,'#ff6a60'); E(q.x+q.w*.2,q.mid,5,3,'#ff6a60'); if(ms<P.gasp+900) bigWord('!!',q.x,q.top-30,RED,3); }
-    if(ms>P.crisp) { const k=ez(seg(ms,P.crisp,P.crisp+400)); if(!PROPART.draw('deedee/crisp_pan',sD.x-22,sD.b-DH*.55+(1-k)*20-4,{w:44})) crisp(sD.x-22,sD.b-DH*.55+(1-k)*20); if(ms<P.crisp+1500) for(let j=0;j<3;j++) { const q=(s2.t*1.2+j/3)%1; gfx.globalAlpha=1-q; LnO(sD.x-30+j*8,sD.b-DH*.6-q*24,sD.x-28+j*8+Math.sin(q*6)*3,sD.b-DH*.6-q*24-10,2,'#fff'); gfx.globalAlpha=1; } } }});
+    if(ms>P.crisp&&ms<P.crisp+1500) for(let j=0;j<3;j++) { const q=(s2.t*1.2+j/3)%1; gfx.globalAlpha=1-q; LnO(lx-30+j*8,by-DH*.6-q*24,lx-28+j*8+Math.sin(q*6)*3,by-DH*.6-q*24-10,2,'#fff'); gfx.globalAlpha=1; } }});
   const steps=[
     [0,()=>{ setMessage('TOMBO! A bistro table pops up. Tom and Deedee sit down.'); S('whoosh'); }],
     [P.sit,()=>{ S('thud'); }],
@@ -5887,7 +5862,7 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     ['hf',P.shrink],
     [P.shrink,()=>{ S('nope'); for(const f of list) { shrinkFoe(f,.72); ST.jolt(f,.3); } word('SO EMBARRASSED',GR.x,Math.max(50,GR.top-60),CREAM,3,1.1); setMessage('Every monster shrinks a little with embarrassment.'); say('tom','tombodeedee'); }],
     [P.crisp,()=>{ S('ding'); setMessage('Deedee brings out the rhubarb crisp. From nowhere. Still warm.'); }],
-    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('WARM CRISP',sD.x,Math.max(50,by-DH-60),GOLD,3,1.2); }],
+    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('WARM CRISP',lx,Math.max(50,by-DH-60),GOLD,3,1.2); }],
     [P.end,'end',()=>{ for(const f of list) unshrink(f); return 'Wine, gossip and warm crisp. Everyone feels much better.'; }]];
   ST.play(E2,steps); };
 
@@ -6341,3 +6316,4 @@ B2_TOMBO_ANIM.boppy3_dc=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null
     [P.end,'end',()=>(E2.result||'')+' Nobody can feel their face. Boppy wants a rematch.']];
   ST.play(E2,steps); };
 })();
+

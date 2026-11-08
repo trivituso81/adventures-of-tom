@@ -50,9 +50,21 @@ for i, p in [('amy2', 'amy'), ('amy3', 'amy'), ('boppy1', 'boppy'), ('boppy2', '
     SETS[i] = dict(partner=p, kind='split')
 for i, p in [('grace1', 'grace'), ('grace2', 'grace'), ('grace3', 'grace'), ('rose1', 'rose'), ('rose2', 'rose'), ('amy1', 'amy'), ('deedee1', 'deedee')]:
     SETS[i] = dict(partner=p, kind='pair')
-INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'deedee2', 'deedee3', 'rose3', 'grace1']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
+INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'deedee2', 'deedee3', 'rose3', 'grace1', 'grace2', 'grace3', 'rose1', 'rose2', 'amy1', 'deedee1']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
 OBJ_VER = {'grace1': 'v2'}
-OBJ_ALIAS = {'tnb1': {'cardboard_villain_standee': 'villain_standee'}, 'grace1': {'glittery_pink_cube_squishy': 'dice_squishy', 'pair_of_aviator_goggles': 'aviator_goggles'}}   # sheet name -> game slug (tombo/<slug>)
+# rose1 is one row of four approved poses (hoist, level, banked, boop). The figures' arms nearly touch, so the cut uses the gaps between them.
+PAIR_CUTS = {'rose1': [0, 295, 645, 945, 1248]}
+PAIR_GRID = {'rose2': (4, 1)}   # rose2: four approved poses in one row (whistle, wheel, wiggle, pop)
+
+
+def _frames_cut(path, xs):
+    rgba = _key(np.array(Image.open(path).convert('RGB')))
+    out = []
+    for a, b in zip(xs, xs[1:]):
+        cut = rgba.copy(); cut[:, :a, 3] = 0; cut[:, b:, 3] = 0
+        im = Image.fromarray(cut, 'RGBA'); out.append(im.crop(im.getbbox()))
+    return out
+OBJ_ALIAS = {'tnb1': {'cardboard_villain_standee': 'villain_standee'}, 'grace1': {'glittery_pink_cube_squishy': 'dice_squishy',}, 'grace2': {'gymnastics_landing_mat': 'blue_gym_mat'}, 'rose1': {}, 'rose2': {}}   # sheet name -> game slug (tombo/<slug>)
 
 
 def raw(name):
@@ -153,7 +165,9 @@ def run(tid):
             info[who] = {'src': 'art/tombo/%s-%s.webp' % (tid, who), 'k': READY[ch][0], 'rects': rects}
             shots += [('%s%d' % (who, i + 1), im) for i, im in enumerate(fr)]
     else:
-        fr = _frames(raw('tombo-%s-v1.png' % tid), 3, 2)
+        if tid in PAIR_CUTS: fr = _frames_cut(raw('tombo-%s-v1.png' % tid), PAIR_CUTS[tid])
+        elif tid in PAIR_GRID: fr = _frames(raw('tombo-%s-v1.png' % tid), *PAIR_GRID[tid])
+        else: fr = _frames(raw('tombo-%s-v1.png' % tid), 3, 2)
         hs = sorted(im.height for im in fr); ref = hs[len(hs) // 2]
         f = READY['tom'][1] / float(ref); fr = [_rs(im, f) for im in fr]
         print('  pair scale %.3f (median frame height %d)' % (f, ref))
