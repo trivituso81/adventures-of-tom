@@ -18607,7 +18607,17 @@
    "refs": [
     "docs/reference/style_key_v1.png"
    ],
-   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. A sleek white turbo fan: a slim tall white fan with a round cage guard, a glossy white body, a slim stand and a round base, a silver dial on the back.\n2. A longboard: a long slim wooden skateboard deck with a gentle curve, warm maple wood with a teal stripe, four chunky cream wheels, shown angled in three-quarter view.\n3. A coiled garden hose: a green rubber garden hose coiled in a loose neat spiral, a brass nozzle at the end.\n\nDeliver the image itself."
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. A sleek white turbo fan: a slim tall white fan with a round cage guard, a glossy white body, a slim stand and a round base, a silver dial on the back.\n2. A longboard: a long slim wooden skateboard deck with a gentle curve, warm maple wood with a teal stripe, four chunky cream wheels, shown angled in three-quarter view.\n3. A coiled garden hose: a green rubber garden hose coiled in a loose neat spiral, a brass nozzle at the end.\n\nDeliver the image itself.",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-tnb1-dc-objects-v1.png",
+     "date": "2026-11-08",
+     "from": "v1",
+     "at": 1794163765237
+    }
+   ]
   },
   {
    "id": "tombo-tnb2-dc-tom",
