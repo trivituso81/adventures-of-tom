@@ -50,7 +50,7 @@ for i, p in [('amy2', 'amy'), ('amy3', 'amy'), ('boppy1', 'boppy'), ('boppy2', '
     SETS[i] = dict(partner=p, kind='split')
 for i, p in [('grace1', 'grace'), ('grace2', 'grace'), ('grace3', 'grace'), ('rose1', 'rose'), ('rose2', 'rose'), ('amy1', 'amy'), ('deedee1', 'deedee')]:
     SETS[i] = dict(partner=p, kind='pair')
-INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'deedee2', 'deedee3', 'rose3', 'grace1', 'grace2', 'grace3', 'rose1', 'rose2', 'amy1', 'deedee1']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
+INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'amy3', 'boppy2', 'deedee2', 'deedee3', 'rose3', 'grace1', 'grace2', 'grace3', 'rose1', 'rose2', 'amy1', 'deedee1']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
 OBJ_VER = {'grace1': 'v2'}
 # rose1 is one row of four approved poses (hoist, level, banked, boop). The figures' arms nearly touch, so the cut uses the gaps between them.
 PAIR_CUTS = {'rose1': [0, 295, 645, 945, 1248]}

@@ -1,3 +1,12 @@
+## 2026-11-08 (444): amy3 and boppy2 play their approved painted sheets (`tombo9`)
+- Tom: "I thought we had approved tombos to implement." Both were approved in the Art Library and not yet installed; installed under the standing rule.
+- amy3 "Knock It Off!": Tom and Amy use their painted frames from the bicker to the last swing; the couch, lamp, mom placard and cushions are the painted props. Choices: Tom's sit beat is his standing hands-on-head frame (the sheet has no Tom-only sitting frame; frame 1 has Amy in it), so Tom stands by the couch while Amy sits on it. Amy is mirrored to face right. Frames for Tom: 2 point, 3 hands on head, 4 swing, 5 shoved, 6 windup. Frames for Amy: 1 sit, 2 point, 3 arms up, 4 bent over, 5 jump, 6 twist swing.
+- boppy2 "Nobody Gets Past Us": Tom and Boppy use the painted frames for every beat. Frames 3 to 6 of Tom's sheet are close to one pose, so they are held as painted (no new beats). Keys and cell door keep the game's own `boppy/key_ring` and `boppy/jail_cell_door` (the sheet's saved names are not used by the game); the cap is the painted `deputy_cap`.
+- Engine: `B2_TOMBO_ANIM.amy3` and `B2_TOMBO_ANIM.boppy2` (the last definitions in engine/battle2-kind.js) rewritten to use `tbf`/`tbfm`; the posture helpers they replaced (`posT`, `posA`, the `kid()` calls, `F(sp,...)` poses) are no longer called there. The earlier duplicate definitions are unchanged.
+- Baker: `tombo_frames.py` INSTALLED adds amy3 and boppy2; baker rewrote the painted prop files for couch, cushions, slipper, remote, lamp and deputy cap in art/props/tombo.
+- Tests: `tombo_test.py` FAILS [] for amy3 and boppy2; smoke `FAILS: []`; tag_check ok; unused_voice 0 on all four checks.
+- Phone checks for Tom: amy3 Tom standing by the couch on the sit beat; boppy2 keys and cap placement on the lock beat.
+
 ## 2026-11-07 (443): Six more Tombos play their painted pair sheets (`tombo8`)
 - Tom: "implement approved art, don't ask." Each Tombo below now draws the approved painted pair sheet (art/tombo/<id>-pair.webp, one cell per frame with both characters) from `tbf(id,'pair',n)`. Tom's unit draws the pair; the partner's unit is hidden while the pair is on. Timing unchanged.
 - grace2 "Wall Bounce Boost": Tom and Grace share a cell from the walk-in to the high five; Grace's flight and landing are coded from the same spots. Frames: 2 run in, 1 chalk up, 3 step, 4 flip, 5 landing, 6 high five.

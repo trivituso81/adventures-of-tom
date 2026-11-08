@@ -5784,6 +5784,8 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const P={fb:300,sit:1700,bick:[2200,2600,3000],sw0:3600,each:520,mom:0,back:0,end:0};
   P.mom=P.sw0+SWINGS.length*P.each+200; P.back=P.mom+1600; P.end=P.back+1500;
   const hideAt=ms=>ms>P.fb&&ms<P.back;
+  // Painted kids (art/tombo/amy3-*.webp): Tom faces left as painted; Amy is mirrored to face right. Each kid keeps its battle height.
+  const kidP=(x,y,who,n)=>{ const sc=BATTLE_SPRITES[who==='tom'?'tom':'amy'].scale; const rows=who==='tom'?tbf('amy3','tom',n,null):tbfm('amy3','p',n); if(rows) drawSprite(rows,{},x-rows[0].length*sc/2,y-rows.length*sc,sc,{}); };
   pathOf(fxT,P.end,(ms,c)=>({cx:hideAt(ms)?-400:c.origX,base:c.origBase,frame:ms>=P.back?c.sp.celeb:c.sp.idle,hide:hideAt(ms),noShadow:hideAt(ms)}));
   pathOf(fxP,P.end,(ms,c)=>({cx:hideAt(ms)?-400:c.origX,base:c.origBase,frame:ms>=P.back?c.sp.celeb:c.sp.idle,hide:hideAt(ms),noShadow:hideAt(ms)}));
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ if(ms<P.fb||ms>P.back) return; // couch, lamp, TV
@@ -5796,12 +5798,12 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     const bT=ms>P.bick[0]&&ms<P.bick[1],bA=ms>P.bick[1]&&ms<P.bick[2],last=k===SWINGS.length-1&&swinging;
     // the swinger raises the cushion; the other kid is shoved; the last swing is BOTH, so both tumble
     const swT=swinging&&k%2===1,swA=swinging&&k%2===0,sw=Math.min(1,w/260);
-    const posT=ms<P.sit?'ko_sulk':ms<P.sw0?(bT?'ko_tattle':'ko_sulk'):(swinging?(last?'ko_tumble':(swT?(sw<.5?'ko_cushionUp':'ko_cushionSwing'):'ko_shoved')):(ms<P.mom?'ko_shoved':(ms<P.mom+900?'ko_shoved':'ko_flop')));
-    const posA=ms<P.sit?'ko_glare':ms<P.sw0?(bA?'ko_tattle':'ko_glare'):(swinging?(last?'ko_tumble':(swA?'ko_cushionUp':'ko_shoved')):(ms<P.mom?'ko_stomp':(ms<P.mom+900?'ko_shoved':'ko_smug')));
+    const tomN=ms<P.sit?3:ms<P.sw0?(bT?2:3):swinging?(last?5:(swT?(sw<.5?6:4):5)):(ms<P.mom+900?5:3);
+    const amyN=ms<P.sit?1:ms<P.sw0?(bA?2:1):swinging?(last?5:(swA?(sw<.5?3:6):4)):(ms<P.mom+900?4:3);
     const freeze=ms>P.mom; const kx=ms<P.sit?lerp(cx+140,kT.x,ez(seg(ms,P.fb,P.sit))):kT.x,kax=ms<P.sit?lerp(cx-140,kA.x,ez(seg(ms,P.fb,P.sit))):kA.x;
     const air=last?Math.sin(seg(w,0,P.each)*Math.PI)*22:0;
-    kid(kx,by-bob-air,'tom',posT,freeze?0:t,-1,{});
-    kid(kax,by-bob-air,'amy',posA,freeze?0:t,1,{});
+    kidP(kx,by-bob-air,'tom',tomN);
+    kidP(kax,by-bob-air,'amy',amyN);
     // the flying object of this swing: from the swinger's hand, past the sibling, into the monster
     if(swinging&&w>120) { const q=seg(w,120,400),from=k%2?kT:kA,x=lerp(from.x,Q.x+Q.w*.2,ez(q)),y=lerp(by-50,Q.mid,q)-Math.sin(q*Math.PI)*50; if(q<1) SWINGS[k][1](x,y,q*8); }
     if(freeze) { const q=seg(ms,P.mom,P.mom+400); gfx.globalAlpha=1; bigWord('KNOCK IT OFF!',Math.max(120,cx-120),Math.max(118,by-182-q*2),RED,4); } }});
@@ -6124,6 +6126,7 @@ const capDraw=(x,y,a=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); if(PRO
 const keyring=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); if(PROPART.draw('boppy/key_ring',0,6,{h:34})) { gfx.restore(); return; } ring(0,0,8,8,3,'#e0b040'); for(let k=0;k<3;k++) { const b=k*1.1+.5; LnO(Math.cos(b)*8,Math.sin(b)*8,Math.cos(b)*22,Math.sin(b)*22,3,'#c9c2b8'); R(Math.cos(b)*20-2,Math.sin(b)*20-2,5,5,'#c9c2b8'); } gfx.restore(); };
 B2_TOMBO_ANIM.boppy2=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),B=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
+  const TB=(who,n,sp)=>tbf('boppy2',who,n,sp)||sp.idle;   // painted frames (art/tombo/boppy2-*.webp)
   const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale;
   const by=Math.min(312,Math.max(T.base,B.base)),bx=cl(GR.x1+120,210,298),tx=bx+80,gx=cl(GR.x1+40,150,280);   // the door drops at gx
   const BARS=7,P={run:600,toss:900,cap:1300,dep:1700,light:2300,bar0:3200,each:140,keys:0,lock:0,apply:0,end:0};
@@ -6131,17 +6134,17 @@ B2_TOMBO_ANIM.boppy2=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const sT={x:T.x,b:T.base,f:tsp.idle},sB={x:B.x,b:B.base,f:bsp.idle};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sT,lerp(c.origX,tx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.end-700) return stand(sT,tx,by,ms>P.toss&&ms<P.toss+400?sp.throw:(ms>P.dep&&ms<P.dep+600?sp.act:(ms>P.lock?sp.celeb:sp.idle)));
-    const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(tx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
+    if(ms<P.end-700) return stand(sT,tx,by,ms>P.toss&&ms<P.toss+400?TB('tom',1,sp):(ms>P.dep&&ms<P.dep+600?TB('tom',3,sp):(ms>P.lock?TB('tom',4,sp):TB('tom',2,sp))));
+    const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(tx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):TB('tom',2,sp)); });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sB,lerp(c.origX,bx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.cap) return stand(sB,bx,by,ms>P.toss+200?F(sp,'spread'):sp.idle);
-    if(ms<P.dep) return stand(sB,bx,by,F(sp,'wave'));
-    if(ms<P.bar0) return stand(sB,bx,by,ms>P.dep&&ms<P.dep+700?F(sp,'flex'):F(sp,'hip'));
-    if(ms<P.keys) return stand(sB,bx,by,F(sp,'point'));
-    if(ms<P.lock) { const q=seg(ms,P.keys,P.lock); return stand(sB,lerp(bx,gx+40,q),by,q<1?runFr(sp,c.t,-1):F(sp,'keys')); }
-    if(ms<P.end-700) { const k=ez(seg(ms,P.lock+400,P.lock+900)); return stand(sB,lerp(gx+40,bx,k),by,ms<P.lock+400?F(sp,'keys'):(k<1?runFr(sp,c.t,1):F(sp,'flex'))); }
-    const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(bx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
+    if(ms<P.cap) return stand(sB,bx,by,ms>P.toss+200?TB('p',1,sp):TB('p',2,sp));
+    if(ms<P.dep) return stand(sB,bx,by,TB('p',1,sp));
+    if(ms<P.bar0) return stand(sB,bx,by,ms>P.dep&&ms<P.dep+700?TB('p',3,sp):TB('p',2,sp));
+    if(ms<P.keys) return stand(sB,bx,by,TB('p',4,sp));
+    if(ms<P.lock) { const q=seg(ms,P.keys,P.lock); return stand(sB,lerp(bx,gx+40,q),by,q<1?runFr(sp,c.t,-1):TB('p',6,sp)); }
+    if(ms<P.end-700) { const k=ez(seg(ms,P.lock+400,P.lock+900)); return stand(sB,lerp(gx+40,bx,k),by,ms<P.lock+400?TB('p',6,sp):(k<1?runFr(sp,c.t,1):TB('p',3,sp))); }
+    const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(bx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):TB('p',2,sp)); });
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{
     if(ms>P.toss&&ms<P.cap) { const q=ez(seg(ms,P.toss,P.cap)); capDraw(lerp(sT.x-20,sB.x,q),lerp(sT.b-TH*.6,sB.b-BH*.96,q)-Math.sin(q*Math.PI)*50,q*6); keyring(lerp(sT.x-20,sB.x-20,q),lerp(sT.b-TH*.5,sB.b-BH*.5,q)-Math.sin(q*Math.PI)*30,q*8); }
     if(ms>=P.cap) capDraw(sB.x+2,sB.b-BH*.96-2,0);
