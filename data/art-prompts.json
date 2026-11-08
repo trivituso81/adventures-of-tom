@@ -17531,7 +17531,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tombo-ff2-objects",
    "tab": "Characters",
    "group": "Finish, Run With Us, Mommy!",
@@ -17540,7 +17540,16 @@
    "refs": [
     "docs/reference/style_key_v1.png"
    ],
-   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. Stack of papers: a thick untidy stack of white and cream sheets of paper with curled corners, red check marks and scribbles in the margins, no readable words\n2. Pink fabric band: a short soft pink fabric band tied in a small neat bow, with two trailing tails\n3. Plush lamb: a small cuddly white plush lamb with a round fluffy body, floppy ears, short stubby legs and a faint pink nose, sitting upright\n4. Gold sticker: a shiny gold five-pointed sticker with a slightly curled edge, lying flat\n5. Wall of clocks: a tall grey stone wall made of many round clocks of different sizes with cracked faces and brass hands, stacked and fitted together\n6. Iron chains: a heavy coiled length of dark iron chain with chunky oval links, two open ends\n7. Yellow finish tape: a long bright yellow paper tape, stretched in a gentle slack curve, plain with no markings\n\nDeliver the image itself."
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. Stack of papers: a thick untidy stack of white and cream sheets of paper with curled corners, red check marks and scribbles in the margins, no readable words\n2. Pink fabric band: a short soft pink fabric band tied in a small neat bow, with two trailing tails\n3. Plush lamb: a small cuddly white plush lamb with a round fluffy body, floppy ears, short stubby legs and a faint pink nose, sitting upright\n4. Gold sticker: a shiny gold five-pointed sticker with a slightly curled edge, lying flat\n5. Wall of clocks: a tall grey stone wall made of many round clocks of different sizes with cracked faces and brass hands, stacked and fitted together\n6. Iron chains: a heavy coiled length of dark iron chain with chunky oval links, two open ends\n7. Yellow finish tape: a long bright yellow paper tape, stretched in a gentle slack curve, plain with no markings\n\nDeliver the image itself.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-ff2-objects-v1.png",
+     "date": "2026-11-08",
+     "from": "v1",
+     "at": 1794159331176
+    }
+   ]
   },
   {
    "status": "draft",
