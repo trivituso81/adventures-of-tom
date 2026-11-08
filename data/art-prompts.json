@@ -3860,8 +3860,16 @@
    "group": "Olivia"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-battle-stance-2-v1.png",
+     "date": "2026-11-08",
+     "from": "v1",
+     "at": 1794158699935
+    }
+   ],
    "rejects": [],
    "id": "olivia-battle-stance-2",
    "tab": "Characters",
