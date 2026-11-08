@@ -17576,7 +17576,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tombo-ff3-objects",
    "tab": "Characters",
    "group": "Finish, Fifty-One Years and Counting",
@@ -17585,7 +17585,16 @@
    "refs": [
     "docs/reference/style_key_v1.png"
    ],
-   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. Amber hourglass: a tall antique hourglass with dark carved wood ends, thick glass, and warm amber sand, upright\n2. Gold picture frame: an ornate empty rectangular gold picture frame with carved scrolls and aged gold leaf, standing on a small easel foot, the inside completely empty so the magenta shows through\n3. Film reel: a large round vintage film reel in dark metal with six round cutouts, tilted slightly toward the viewer\n4. Nurse cap: a small crisp white folded nurse cap with a faint blue edge band, sitting flat\n5. Gold wedding ring: a thick polished gold wedding band, tilted to show its round shape, with a small shine along the upper edge\n6. Red rose: a single deep red rose flower with a long green stem and two leaves, lying flat\n7. Cayenne pepper jar: a small glass spice jar with a red lid, filled with bright red powder, a plain unlabeled body\n\nDeliver the image itself."
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. Amber hourglass: a tall antique hourglass with dark carved wood ends, thick glass, and warm amber sand, upright\n2. Gold picture frame: an ornate empty rectangular gold picture frame with carved scrolls and aged gold leaf, standing on a small easel foot, the inside completely empty so the magenta shows through\n3. Film reel: a large round vintage film reel in dark metal with six round cutouts, tilted slightly toward the viewer\n4. Nurse cap: a small crisp white folded nurse cap with a faint blue edge band, sitting flat\n5. Gold wedding ring: a thick polished gold wedding band, tilted to show its round shape, with a small shine along the upper edge\n6. Red rose: a single deep red rose flower with a long green stem and two leaves, lying flat\n7. Cayenne pepper jar: a small glass spice jar with a red lid, filled with bright red powder, a plain unlabeled body\n\nDeliver the image itself.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-ff3-objects-v1.png",
+     "date": "2026-11-08",
+     "from": "v1",
+     "at": 1794160060680
+    }
+   ]
   },
   {
    "id": "tombo-grace1-dc-tom",
