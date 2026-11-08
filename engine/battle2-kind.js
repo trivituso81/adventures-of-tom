@@ -1320,16 +1320,6 @@ B2_TOMBO_ANIM.nara2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // into Warm Crusts and two crust tins land on the tray. Effects: a Sparkle hit on every enemy (Shushed 2), the party
 // loses its debuffs and gets COOL +25% for 3 turns, 2 Warm Crusts.
 const LEAF='#4f9a3a',LEAF2='#2f6a2a',STALK='#d8325a',STALK2='#ff7a9a',DIRT='#7a5232',DIRT2='#5a3a22',ROOT='#a8784a',ROOT2='#7a5232';
-// A rhubarb stalk from its base (bx,by) through the hand (hx,hy) to a big leaf past it. s: leaf size.
-const rhubarb=(bx,by,hx,hy,s=1,t=0)=>{ const dx=hx-bx,dy=hy-by,L=Math.hypot(dx,dy)||1,tx=hx+dx/L*30*s,ty=hy+dy/L*30*s;
-  const pth=()=>{ gfx.beginPath(); gfx.moveTo(bx,by); gfx.quadraticCurveTo(hx,hy,tx,ty); };
-  gfx.lineCap='round'; pth(); gfx.lineWidth=13*s; gfx.strokeStyle=OUT; gfx.stroke(); pth(); gfx.lineWidth=9*s; gfx.strokeStyle=STALK; gfx.stroke();
-  gfx.save(); gfx.translate(2*s,-1*s); pth(); gfx.lineWidth=3*s; gfx.strokeStyle=STALK2; gfx.stroke(); gfx.restore();
-  const a=Math.atan2(ty-hy,tx-hx); gfx.save(); gfx.translate(tx,ty); gfx.rotate(a+Math.sin(t*7)*.08);
-  for(const [ox,oy,rx,ry] of [[18,0,26,20],[8,-14,16,12],[8,14,16,12],[34,-8,12,10],[34,8,12,10]]) E(ox*s,oy*s,(rx+2)*s,(ry+2)*s,OUT);
-  for(const [ox,oy,rx,ry] of [[18,0,26,20],[8,-14,16,12],[8,14,16,12],[34,-8,12,10],[34,8,12,10]]) E(ox*s,oy*s,rx*s,ry*s,LEAF);
-  E(14*s,-6*s,12*s,6*s,'#7ac45a'); Ln(0,0,42*s,0,2*s,LEAF2); for(const k of [-1,1]) { Ln(12*s,0,24*s,k*12*s,1.5*s,LEAF2); Ln(26*s,0,36*s,k*10*s,1.5*s,LEAF2); }
-  gfx.restore(); };
 // A few dangling root hairs from (x,y), length l, swaying with t.
 const rootHairs=(x,y,w,l,t)=>{ for(let j=0;j<5;j++) { const ox=x+(j-2)*w*.2,sw=Math.sin(t*8+j)*4,len=l*(.6+(j%3)*.25);
   for(const [c,lw] of [[OUT,5],[ROOT,2.6]]) { gfx.strokeStyle=c; gfx.lineWidth=lw; gfx.lineCap='round'; gfx.beginPath(); gfx.moveTo(ox,y); gfx.quadraticCurveTo(ox+sw+(j-2)*3,y+len*.5,ox+sw*1.6+(j-2)*5,y+len); gfx.stroke(); } } };
@@ -1347,26 +1337,26 @@ B2_TOMBO_ANIM.deedee2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const lean=ms=>ms>P.grab&&ms<P.yank?(ms<P.behind?.1:.16):0;
   const sT={x:T.x,b:T.base,rot:0},sD={x:D.x,b:D.base,f:dsp.idle};
   const prh=(bx,by,hx,hy,sc,t)=>{ const dx=hx-bx,dy=hy-by,L=Math.hypot(dx,dy)||1,tx=hx+dx/L*30*sc,ty=hy+dy/L*30*sc,a=Math.atan2(tx-bx,by-ty),Lt=Math.hypot(tx-bx,ty-by);
-    if(!PROPART.draw('tombo/rhubarb_stalk',(bx+tx)/2,(by+ty)/2,{h:Math.max(60,Lt*1.15),rot:a-.55+Math.sin(t*7)*.04})) rhubarb(bx,by,hx,hy,sc,t); };
-  const ptin=(x,y,sc)=>{ if(!PROPART.draw('tombo/lattice_crust_tin',x,y,{w:34*sc})) crustTin(x,y,sc); };
+    PROPART.draw('tombo/rhubarb_stalk',(bx+tx)/2,(by+ty)/2,{h:Math.max(60,Lt*1.15),rot:a-.55+Math.sin(t*7)*.04}); };
+  const ptin=(x,y,sc)=>{ PROPART.draw('tombo/lattice_crust_tin',x,y,{w:34*sc}); };
   // Tom: walks to the stalk (facing left), grabs it and pulls, Deedee joins, the yank throws him back onto his bottom.
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=gb,f=sp.idle,rot=0;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.yank) { f=ms>P.grab?sp.act:sp.idle; x=tx+tug(ms); rot=lean(ms); if(ms>P.stuck&&ms<P.stuck+300) f=sp.expr; }
-    else if(ms<P.sit) { const k=seg(ms,P.yank,P.sit); x=tx+ez(k)*34; y=gb-Math.sin(k*Math.PI)*22; rot=lerp(.16,.5,k); f=sp.expr; }
-    else if(ms<P.up) { x=tx+34; y=gb+4; rot=ms<P.sit+120?.5*(1-seg(ms,P.sit,P.sit+120)):0; f=sp.kneel||sp.idle; }
-    else if(ms<P.home) { x=tx+34; f=ms>P.tin2&&ms<P.apply+300?sp.celeb:sp.idle; }
+    else if(ms<P.yank) { const n=ms<P.grab?1:(ms>P.stuck&&ms<P.stuck+300?4:2); f=tbf('deedee2','tom',n,sp)||sp.idle; x=tx+tug(ms); rot=lean(ms); }
+    else if(ms<P.sit) { const k=seg(ms,P.yank,P.sit); x=tx+ez(k)*34; y=gb-Math.sin(k*Math.PI)*22; rot=lerp(.16,.5,k); f=tbf('deedee2','tom',5,sp)||sp.expr; }
+    else if(ms<P.up) { x=tx+34; y=gb+4; rot=ms<P.sit+120?.5*(1-seg(ms,P.sit,P.sit+120)):0; f=tbf('deedee2','tom',6,sp)||sp.kneel||sp.idle; }
+    else if(ms<P.home) { x=tx+34; f=tbf('deedee2','tom',6,sp)||sp.idle; }   // seated through the bake: his painted sitting frames only
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx+34,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sT.x=x; sT.b=y; sT.rot=rot; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.yank&&ms<P.sit}; });
   // Deedee: walks in, points at the garden, hands on hips, steps in behind Tom, pulls, lands sitting, bakes, tosses tins.
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dsup,y=gb,f=sp.idle,rot=0;
     if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,dsup,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.step) { f=ms<P.point+500?(sp.spread||sp.idle):(sp.hip||sp.idle); }
+    else if(ms<P.step) { f=ms<P.point+500?(tbf('deedee2','p',1,sp)||sp.spread||sp.idle):(tbf('deedee2','p',4,sp)||sp.hip||sp.idle); }
     else if(ms<P.behind) { const k=ez(seg(ms,P.step,P.behind)); x=lerp(dsup,dx,k); y=gb-Math.sin(k*Math.PI)*6; f=runFr(sp,c.t,-1); }
-    else if(ms<P.yank) { x=dx+tug(ms)*1.1; rot=lean(ms); f=sp.act||sp.idle; }
-    else if(ms<P.sit) { const k=seg(ms,P.yank,P.sit); x=dx+ez(k)*58; y=gb-Math.sin(k*Math.PI)*18; rot=lerp(.16,.4,k); f=sp.act||sp.idle; }
-    else if(ms<P.up) { x=dx+58; y=gb+2; f=sp.sit||sp.kneel||sp.idle; }
-    else if(ms<P.home) { x=dx+58; f=ms<P.bake+250?(sp.celeb||sp.idle):(ms>P.tin1-200&&ms<P.tin2+150?(Math.floor((ms-P.tin1+200)/150)%2?sp.throw:sp.wind)||sp.idle:(ms>P.apply?(sp.celeb||sp.idle):(sp.clap||sp.idle))); }
+    else if(ms<P.yank) { x=dx+tug(ms)*1.1; rot=lean(ms); f=tbf('deedee2','p',3,sp)||sp.act||sp.idle; }
+    else if(ms<P.sit) { const k=seg(ms,P.yank,P.sit); x=dx+ez(k)*58; y=gb-Math.sin(k*Math.PI)*18; rot=lerp(.16,.4,k); f=tbf('deedee2','p',4,sp)||sp.act||sp.idle; }
+    else if(ms<P.up) { x=dx+58; y=gb+2; f=tbf('deedee2','p',5,sp)||sp.sit||sp.kneel||sp.idle; }
+    else if(ms<P.home) { x=dx+58; const pf=n=>tbf('deedee2','p',n,sp); f=ms<P.bake?(pf(5)||sp.sit||sp.idle):ms<P.bake+250?(pf(6)||sp.celeb||sp.idle):(ms>P.tin1-200&&ms<P.tin2+150?(Math.floor((ms-P.tin1+200)/150)%2?(pf(3)||sp.throw):(pf(2)||sp.wind)):(ms>P.apply?(pf(6)||sp.celeb||sp.idle):(pf(2)||sp.clap||sp.idle))); }
     else { const k=ez(seg(ms,P.home+60,P.home+700)); x=lerp(dx+58,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sD.x=x; sD.b=y; sD.f=f; return {cx:x,base:y,frame:f,rot}; });
   const tomHand=()=>{ const r=sT.rot,ddx=-TH*.27,ddy=-TH*.5; return {x:sT.x+ddx*Math.cos(r)-ddy*Math.sin(r),y:sT.b+ddx*Math.sin(r)+ddy*Math.cos(r)}; };
@@ -1387,13 +1377,10 @@ B2_TOMBO_ANIM.deedee2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     // the root: a fat gnarled tuber running from the stalk's hole under every monster, humping up out of the dirt
     if(ms>P.yank-40&&ms<P.up+400) { const kk=ez(seg(ms,P.yank-40,P.yank+260)),hump=kk*(1-ez(seg(ms,P.up,P.up+400))*.8);
       gfx.globalAlpha=k*Math.min(1,kk*3); const cx=(sx+rootX0)/2,cy=rootY+30-hump*86;
-      const pth=()=>{ gfx.beginPath(); gfx.moveTo(sx,gb+2); gfx.quadraticCurveTo(cx,cy,rootX0,rootY+4); };
-      if(PROPART.draw('tombo/giant_rhubarb_root',(sx+rootX0)/2,(gb+2+2*cy+rootY+4)/4-8,{w:Math.max(120,sx-rootX0+40),h:96+hump*30})) { gfx.globalAlpha=k; } else {
-      gfx.lineCap='round'; pth(); gfx.lineWidth=26; gfx.strokeStyle=OUT; gfx.stroke(); pth(); gfx.lineWidth=20; gfx.strokeStyle=ROOT; gfx.stroke();
-      gfx.save(); gfx.translate(0,-5); pth(); gfx.lineWidth=5; gfx.strokeStyle='#c89a62'; gfx.stroke(); gfx.restore();
+      PROPART.draw('tombo/giant_rhubarb_root',(sx+rootX0)/2,(gb+2+2*cy+rootY+4)/4-8,{w:Math.max(120,sx-rootX0+40),h:96+hump*30}); gfx.globalAlpha=k;
       for(let j=1;j<7;j++) { const q=j/7,bx=(1-q)*(1-q)*sx+2*(1-q)*q*cx+q*q*rootX0,by=(1-q)*(1-q)*(gb+2)+2*(1-q)*q*cy+q*q*(rootY+4);
         Ln(bx-4,by-2,bx+4,by+2,2,ROOT2); rootHairs(bx,by+8,20,14+(j%2)*8,ms/1000+j); }
-      gfx.globalAlpha=k; } }
+      gfx.globalAlpha=k; }
     gfx.globalAlpha=1; }});
   // Front layer: the stalk in Tom's hands after the yank (roots dangling), the oven puff, the tray and the tins,
   // the dangling roots under every popped monster.
@@ -1405,9 +1392,8 @@ B2_TOMBO_ANIM.deedee2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>P.bake&&ms<P.bake+700) { const k=seg(ms,P.bake,P.bake+700),bx=sD.x-6,by=sD.b-DH*.9;
       gfx.globalAlpha=1-k; for(let j=0;j<7;j++) { const a=j/7*Math.PI*2; E(bx+Math.cos(a)*30*k,by+Math.sin(a)*18*k-k*16,10+k*8,8+k*6,j%2?'#f4f0e6':'#e8dcc8'); } gfx.globalAlpha=1; }
     const tk=ms<P.home?ez(seg(ms,P.tin1-300,P.tin1)):1-ez(seg(ms,P.home,P.home+400));
-    if(tk>0) { gfx.globalAlpha=tk; const both=ms>P.tin2+450&&PROPART.draw('tombo/silver_serving_tray',tray.x,tray.y-12,{w:80});
-      if(!both) { RO(tray.x-32,tray.y-4,64,8,'#c9ced8'); R(tray.x-30,tray.y-4,60,2,'#eef0f4');
-      if(ms>P.tin1+450) ptin(tray.x-14,tray.y-8,1); if(ms>P.tin2+450) ptin(tray.x+14,tray.y-8,1); }
+    if(tk>0) { gfx.globalAlpha=tk; PROPART.draw('tombo/silver_serving_tray',tray.x,tray.y-12,{w:80});
+      if(ms>P.tin1+450) ptin(tray.x-14,tray.y-8,1); if(ms>P.tin2+450) ptin(tray.x+14,tray.y-8,1);
       if(ms>P.tin2+450) for(let j=0;j<3;j++) { const q=(ms/700+j/3)%1; gfx.globalAlpha=tk*(1-q)*.7; Ln(tray.x-20+j*20,tray.y-18-q*16,tray.x-18+j*20+Math.sin(q*6)*3,tray.y-26-q*16,2,'#ffffff'); }
       gfx.globalAlpha=1; }
   }});
@@ -1872,9 +1858,9 @@ B2_TOMBO_ANIM.rose3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const sT={x:T.x,b:T.base,f:tsp.idle},sR={x:rx,b:rb,f:rsp.idle};
   let skinNow=false;
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
-    if(ms<P.go) { f=ms>P.ribbon+150?sp.expr:sp.idle; }
+    if(ms<P.go) { f=ms>P.ribbon+150?(tbf('rose3','tom',2,sp)||sp.expr):(tbf('rose3','tom',1,sp)||sp.idle); }
     else if(ms<P.arrive) { const k=ez(seg(ms,P.go,P.arrive)); x=lerp(c.origX,tx,k); y=lerp(c.origBase,rb,k); f=k<1?runFr(sp,c.t*.8,-1):sp.idle; }
-    else if(ms<P.home) { x=tx; y=rb; f=ms<P.seat?sp.act:(ms>P.play&&ms<P.play+500?sp.celeb:(ms>P.clear&&ms<P.clear+700?sp.celeb:sp.idle)); }
+    else if(ms<P.home) { x=tx; y=rb; f=ms<P.seat?(tbf('rose3','tom',3,sp)||sp.act):(ms>P.play&&ms<P.play+500?(tbf('rose3','tom',2,sp)||sp.celeb):(ms>P.clear&&ms<P.clear+700?(tbf('rose3','tom',2,sp)||sp.celeb):sp.idle)); }   // seated Tom keeps sp.idle (rideSkin needs it)
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(rb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     skinNow=ms>=P.seat&&ms<P.end-150&&f===sp.idle&&!!rideSkin('phones',null); if(skinNow) f=rideSkin('phones',f);   // Rose in her own headphones, Tom calm
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
@@ -1883,8 +1869,8 @@ B2_TOMBO_ANIM.rose3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const seatPt=()=>{ const d=battle.drawnAt&&battle.drawnAt[tom.idx]; return d?{x:d.cx+2,y:d.base-d.h+20}:{x:sT.x+2,y:sT.b-TH+20}; };
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=rb,f=sp.idle;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,rx,k); y=lerp(c.origBase,rb,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.lift) { f=ms>P.ribbon&&ms<P.arrive?sp.flip:sp.idle; if(ms>P.rline&&ms<P.rline+400) y-=Math.abs(Math.sin(seg(ms,P.rline,P.rline+400)*Math.PI*2))*6; }
-    else if(ms<P.seat) { const k=seg(ms,P.lift,P.seat),s=seatPt(); x=lerp(rx,s.x,ez(k)); y=lerp(rb,s.y,ez(k))-Math.sin(k*Math.PI)*40; f=sp.celeb; }
+    else if(ms<P.lift) { f=ms>P.ribbon&&ms<P.arrive?(tbf('rose3','p',4,sp)||sp.flip):(tbf('rose3','p',5,sp)||sp.idle); if(ms>P.rline&&ms<P.rline+400) y-=Math.abs(Math.sin(seg(ms,P.rline,P.rline+400)*Math.PI*2))*6; }
+    else if(ms<P.seat) { const k=seg(ms,P.lift,P.seat),s=seatPt(); x=lerp(rx,s.x,ez(k)); y=lerp(rb,s.y,ez(k))-Math.sin(k*Math.PI)*40; f=tbf('rose3','p',3,sp)||sp.celeb; }
     else { const s=seatPt(); x=s.x; y=s.y; f=sp.idle; }
     sR.x=x; sR.b=y; sR.f=f; return {cx:x,base:y,frame:f}; });
   const darkK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.play,P.light)));
@@ -6028,7 +6014,6 @@ B2_TOMBO_ANIM.deedee2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // spots the counter, grabs a broom, and sweeps the whole stage with it, monsters included, in one long pass.
 // Effects unchanged: huge Cozy hit on all, party heals 60% and Tucked In, 3 Hot Dishes.
 const loaf=(x,y,sc=1,bite=false)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,22,12,'#c8884a'); E(-4,-4,12,5,'#e0a860'); for(const [a,b] of [[-12,-6],[-2,-8],[8,-6]]) Ln(a,b,a+6,b+4,2,'#8a5a30'); if(bite) { E(16,-4,8,7,'#3a6a4a'); E(16,-4,6,5,'#f0d8a0'); } gfx.restore(); };
-const broom=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); LnO(0,0,0,-70,4,WOOD2); PO([[-12,0],[12,0],[16,22],[-16,22]],'#e0b060'); for(let k=-12;k<=12;k+=4) R(k,2,2,18,'#c89040'); R(-13,0,26,4,RED); gfx.restore(); };
 B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),D=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
@@ -6037,22 +6022,22 @@ B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const sT={x:T.x,b:T.base,f:tsp.idle},sD={x:D.x,b:D.base,f:dsp.idle};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sT,lerp(c.origX,tx,k),lerp(c.origBase,by,k),runFr(sp,c.t,1)); }
-    if(ms<P.end-700) { const wave=ms>P.wave&&ms<P.bite; return stand(sT,tx+(wave?Math.sin(c.t*10)*4:0),by,ms<P.cloth?sp.flip:(wave?mir(sp,'act'):(ms>P.salt&&ms<P.spot?(sp.expr||sp.flip):(ms>P.apply?sp.celeb:sp.flip)))); }
+    if(ms<P.end-700) { const wave=ms>P.wave&&ms<P.bite; const n=ms<P.wave?1:ms<P.bite?2:ms<P.salt?3:ms<P.spot?4:ms>P.apply?1:6; return stand(sT,tx+(wave?Math.sin(c.t*10)*4:0),by,tbf('deedee3','tom',n,sp)||sp.flip); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(tx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sD,lerp(c.origX,dx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.sweep0) return stand(sD,dx,by,ms<P.bite?sp.idle:(ms<P.salt?F(sp,'hold'):(ms<P.spot?F(sp,'point'):(ms<P.broom?F(sp,'act'):F(sp,'carry')))));
+    if(ms<P.sweep0) { const n=ms<P.bite?1:ms<P.salt?3:ms<P.spot?5:ms<P.broom?4:6; return stand(sD,dx,by,tbf('deedee3','p',n,sp)||sp.idle); }
     if(ms<P.sweep1) { const q=seg(ms,P.sweep0,P.sweep1); return stand(sD,lerp(dx,GR.x0-30,q),by+Math.sin(c.t*18)*1.5,runFr(sp,c.t,-1)); }
-    if(ms<P.back) return stand(sD,GR.x0-30,by,F(sp,'hip'));
-    if(ms<P.end-700) { const k=ez(seg(ms,P.back,P.back+600)); return stand(sD,lerp(GR.x0-30,dx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?sp.celeb:F(sp,'spread'))); }
+    if(ms<P.back) return stand(sD,GR.x0-30,by,tbf('deedee3','p',1,sp)||F(sp,'hip'));
+    if(ms<P.end-700) { const k=ez(seg(ms,P.back,P.back+600)); return stand(sD,lerp(GR.x0-30,dx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?(tbf('deedee3','p',2,sp)||sp.celeb):(tbf('deedee3','p',6,sp)||F(sp,'spread')))); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sD,lerp(dx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.run+300)); if(g<=0) return; // counter with crumbs
-    if(!PROPART.draw('tombo/white_kitchen_counter',cx,by-44*g,{w:132*Math.max(g,.05)})) { RO(cx-60,by-36*g,120,10,'#e8e4dc'); R(cx-58,by-35*g,116,3,'#ffffff'); R(cx-54,by-26*g,8,26*g,'#c9c2b8'); R(cx+46,by-26*g,8,26*g,'#c9c2b8'); } if(ms<P.sweep1) for(let k=0;k<8;k++) R(cx-50+k*13,by-30+(k%3)*2,3,2,'#c8884a'); }});
+    PROPART.draw('tombo/white_kitchen_counter',cx,by-44*g,{w:132*Math.max(g,.05)}); if(ms<P.sweep1) for(let k=0;k<8;k++) R(cx-50+k*13,by-30+(k%3)*2,3,2,'#c8884a'); }});
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{
-    if(ms<P.cloth) { if(!PROPART.draw('tombo/blue_kitchen_cloth',cx,by-62,{w:70})) RO(cx-32,by-56,64,20,'#d8e4f0'); } 
+    if(ms<P.cloth) { PROPART.draw('tombo/blue_kitchen_cloth',cx,by-62,{w:70}); } 
     else if(ms<P.sweep0) { const h={x:ms<P.bite?sT.x-20+(ms>P.wave?Math.sin(s2.t*10)*8:0):sD.x-22,y:(ms<P.bite?sT.b-TH*.55:sD.b-DH*.55)}; if(!PROPART.draw('tom/sourdough_boule',h.x,h.y,{w:46})) loaf(h.x,h.y,1.1,ms>P.bite+200);
       if(ms>P.wave&&ms<P.bite) for(let j=0;j<3;j++) { const q=(s2.t*1.3+j/3)%1; gfx.globalAlpha=1-q; LnO(h.x-10+j*10,h.y-12-q*26,h.x-8+j*10+Math.sin(q*6)*3,h.y-24-q*26,2,'#fff'); gfx.globalAlpha=1; } }
-    if(ms>P.broom&&ms<P.back+200) { const sw=ms>P.sweep0?Math.sin(ms/90)*.5:0; { gfx.save(); gfx.translate(sD.x-18,sD.b-10); gfx.rotate(-.5+sw); const pb=PROPART.draw('tombo/straw_broom',0,-24,{h:96}); gfx.restore(); if(!pb) broom(sD.x-18,sD.b-10,-.5+sw); } if(ms>P.sweep0&&ms<P.sweep1) for(let k=0;k<6;k++) { const q=(s2.t*2+k/6)%1; gfx.globalAlpha=(1-q)*.8; E(sD.x-30+k*8,sD.b-4-q*20,5,3,'#e8dcc4'); } gfx.globalAlpha=1; } }});
+    if(ms>P.broom&&ms<P.back+200) { const sw=ms>P.sweep0?Math.sin(ms/90)*.5:0; { gfx.save(); gfx.translate(sD.x-18,sD.b-10); gfx.rotate(-.5+sw); PROPART.draw('tombo/straw_broom',0,-24,{h:96}); gfx.restore(); } if(ms>P.sweep0&&ms<P.sweep1) for(let k=0;k<6;k++) { const q=(s2.t*2+k/6)%1; gfx.globalAlpha=(1-q)*.8; E(sD.x-30+k*8,sD.b-4-q*20,5,3,'#e8dcc4'); } gfx.globalAlpha=1; } }});
   const steps=[
     [0,()=>{ setMessage('TOMBO! For once, Tom cooks for his mom.'); S('whoosh'); }],
     [P.cloth,()=>{ S('whoosh'); say('tom','tombodeedee3'); setMessage('He lifts the cloth. Forty-eight hours of sourdough.'); }],
