@@ -43,7 +43,10 @@ SETS = {
     # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured by eye; checked with tools/shots/hug-feet.png), so he stays on one spot from frame 4 to 8.
     'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v1.png', 'ground': (211, 24, 95), 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
             'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group'],
-            'feet': {'hg_run': 192, 'hg_crash': 143, 'hg_group': 146}},
+            'feet': {'hg_run': 192, 'hg_crash': 143, 'hg_group': 146},
+            # Side crouch (2026-11-07, Tom: the crouch before the hug faces the girls, arms open): the approved painting `tom-greeting-crouch-v1.png` replaces cell 3.
+            # Its own sheet, so its size factor is set by head height: hair top to chin is about 334 px there and about 95 px in this sheet's standing Tom, so .284.
+            'crouch': {'sheet': 'tom-greeting-crouch-v1.png', 'ground': (219, 25, 95), 'scale': .284, 'name': 'hg_crouch'}},
 }
 
 # Emotion poses (emo7, 2026-11-06): the 8 full-body emotion frames of each character (art/emotions/<id>.webp strips, cut by emotion_frames.py), drawn on the
@@ -219,6 +222,9 @@ for cid, S in SETS.items():
         if not S['k']: S['k'] = max(5, min(10, int(figs[S['ref']].height / S['h'])))
     elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground']), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1])))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
+    if S.get('crouch'):
+        C = S['crouch']; one = cut_cells(key_ground(os.path.join(RAW, C['sheet']), C['ground']), 1, 1, 1)[0]
+        figs[C['name']] = one.resize((round(one.width * C['scale']), round(one.height * C['scale'])), Image.LANCZOS)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
     if 'strip' in S:

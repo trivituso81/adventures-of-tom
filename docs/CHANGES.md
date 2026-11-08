@@ -1,3 +1,9 @@
+## 2026-11-07 (436): Tom's side crouch before the greeting hug (`tomcrouch1`)
+- Fact: Tom's approved Art Library picture `tom-greeting-crouch` (`art/raw/characters/tom-greeting-crouch-v1.png`) now is the `hg_crouch` frame of the greeting hug. He crouches facing the girls with his arms open, then the group picture (`hg_run`) takes over. Used as painted, no flip.
+- Build: `bake_story_poses.py` hug set has a `crouch` entry (own sheet, keyed on its crimson ground, scaled by head height .284 so his head matches the standing frame; feet on the bottom row). Rebuilt `art/chars/hug-story.webp` and `data/story-poses.js`; tags moved to `tomcrouch1`. Nothing else changed.
+- Tests: in-game capture of hear, delight, crouch, run in portrait (head sizes match, feet on the same row), smoke FAILS [], tag_check ok, unused_voice 0. Not checked in landscape or on the phone.
+- Watch on the phone: Tom's feet shift a little sideways between the crouch and the group picture; the crouch figure is wider than the standing one.
+
 ## 2026-11-07 (435): Painted Tombo frames, Sit. Paw. Treat. (`tombo3`)
 - Installed: nara1 plays Tom's and Nara's painted frames from the approved Art Library sheets (`art/tombo/nara1-tom.webp`, `nara1-p.webp`, `data/tombo-frames.js`). Nara's frames are mirrored with the new `tbfm` helper in `engine/tombo-frames.js` (the sheet faces left). Treat and paw cutouts are the approved `tombo/dog_treat` and `tombo/giant_paw` (same slugs as before, so Nara's other treat moves also show the new bone).
 - Tags: ART_V unchanged (new atlases), prop V and battle2-kind moved to `tombo3`, main.js to `tombo3`.
