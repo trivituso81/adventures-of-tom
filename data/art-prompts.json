@@ -17174,7 +17174,7 @@
    ]
   },
   {
-   "status": "draft",
+   "status": "approved",
    "id": "tombo-tnb2-objects",
    "tab": "Characters",
    "group": "Tombos, Tom + TNB",
@@ -17183,7 +17183,16 @@
    "refs": [
     "docs/reference/style_key_v1.png"
    ],
-   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. A silver subway car: a long silver metal subway car with a bold red stripe along its side, rounded front, a dark windshield, rectangular windows and a flat roof, shown in three-quarter view with its wheels visible\n2. A longboard: a long slim wooden skateboard deck with a gentle curve, warm maple wood with a teal stripe, four chunky cream wheels, shown angled in three-quarter view\n3. A gold transfer card: a flat rectangular card in shiny gold with rounded corners and a thin black band along one edge, no writing\n4. A second gold transfer card: the same flat gold rectangular card with rounded corners and thin black band, tilted at a slight angle, no writing\n5. A thick braided pull rope: a long thick braided rope in cream and red with a loop at one end and a knot at the other, lying in a gentle curve\n\nDeliver the image itself."
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. A silver subway car: a long silver metal subway car with a bold red stripe along its side, rounded front, a dark windshield, rectangular windows and a flat roof, shown in three-quarter view with its wheels visible\n2. A longboard: a long slim wooden skateboard deck with a gentle curve, warm maple wood with a teal stripe, four chunky cream wheels, shown angled in three-quarter view\n3. A gold transfer card: a flat rectangular card in shiny gold with rounded corners and a thin black band along one edge, no writing\n4. A second gold transfer card: the same flat gold rectangular card with rounded corners and thin black band, tilted at a slight angle, no writing\n5. A thick braided pull rope: a long thick braided rope in cream and red with a loop at one end and a knot at the other, lying in a gentle curve\n\nDeliver the image itself.",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tombo-tnb2-objects-v1.png",
+     "date": "2026-11-08",
+     "from": "v1",
+     "at": 1794158843766
+    }
+   ]
   },
   {
    "status": "draft",
