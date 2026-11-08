@@ -6090,19 +6090,19 @@ B2_TOMBO_ANIM.boppy1=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const sT={x:T.x,b:T.base,f:tsp.idle},sB={x:B.x,b:B.base,f:bsp.idle};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sT,lerp(c.origX,tx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.reel) { const wob=ms>P.wobble&&ms<P.cast?Math.sin(c.t*9)*6:0; return stand(sT,tx+wob,by,sp.aim,wob*.01); }
+    if(ms<P.reel) { const wob=ms>P.wobble&&ms<P.cast?Math.sin(c.t*9)*6:0; return stand(sT,tx+wob,by,tbf('boppy1','tom',ms<P.wobble?1:ms<P.cast?2:3,sp)||sp.aim,wob*.01); }
     if(ms<P.heave) { const q=ez(seg(ms,P.reel,P.reel+500)); return stand(sT,lerp(tx,GR.x0-26,q),by,q<1?runFr(sp,c.t,-1):sp.aim); }
-    if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sT,GR.x0-26+q*26,by-Math.sin(q*Math.PI)*6,sp.wind,-.2*Math.sin(q*Math.PI)); }
-    if(ms<P.end-700) { const k=ez(seg(ms,P.dump,P.dump+500)); return stand(sT,lerp(GR.x0,tx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?sp.celeb:sp.idle)); }
+    if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sT,GR.x0-26+q*26,by-Math.sin(q*Math.PI)*6,tbf('boppy1','tom',4,sp)||sp.wind,-.2*Math.sin(q*Math.PI)); }
+    if(ms<P.end-700) { const k=ez(seg(ms,P.dump,P.dump+500)); return stand(sT,lerp(GR.x0,tx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?tbf('boppy1','tom',5,sp)||sp.celeb:tbf('boppy1','tom',6,sp)||sp.idle)); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(tx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sB,lerp(c.origX,bx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.cast) return stand(sB,bx,by,ms>P.wobble+400?F(sp,'point'):F(sp,'rod'));
-    if(ms<P.land) { const q=seg(ms,P.cast,P.land); return stand(sB,bx-q*8,by,F(sp,'throw'),-.1*Math.sin(q*Math.PI)); }
-    if(ms<P.heave) return stand(sB,bx+(ms>P.reel?Math.sin(c.t*20)*2:0),by,ms>P.reel?F(sp,'heave'):F(sp,'rod'));
-    if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sB,bx+q*10,by,F(sp,'heave'),-.15*Math.sin(q*Math.PI)); }
-    if(ms<P.crouch) return stand(sB,bx,by,F(sp,'hip'));
-    if(ms<P.end-700) { const k=ez(seg(ms,P.crouch,P.crouch+300)); return stand(sB,lerp(bx,GR.x1+40,k),by,k<1?runFr(sp,c.t,-1):(ms>P.apply+800?F(sp,'crouchsit'):F(sp,'crouchnet'))); }
+    if(ms<P.cast) return stand(sB,bx,by,tbf('boppy1','p',ms>P.wobble+400?2:1,sp)||F(sp,'rod'));
+    if(ms<P.land) { const q=seg(ms,P.cast,P.land); return stand(sB,bx-q*8,by,tbf('boppy1','p',4,sp)||F(sp,'throw'),-.1*Math.sin(q*Math.PI)); }
+    if(ms<P.heave) return stand(sB,bx+(ms>P.reel?Math.sin(c.t*20)*2:0),by,tbf('boppy1','p',ms>P.reel?4:3,sp)||F(sp,'heave'));
+    if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sB,bx+q*10,by,tbf('boppy1','p',5,sp)||F(sp,'heave'),-.15*Math.sin(q*Math.PI)); }
+    if(ms<P.crouch) return stand(sB,bx,by,tbf('boppy1','p',5,sp)||F(sp,'hip'));
+    if(ms<P.end-700) { const k=ez(seg(ms,P.crouch,P.crouch+300)); return stand(sB,lerp(bx,GR.x1+40,k),by,k<1?runFr(sp,c.t,-1):tbf('boppy1','p',6,sp)||F(sp,'crouchnet')); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(GR.x1+40,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.run+400)); if(g<=0) return; gfx.globalAlpha=g; pierDraw(Math.max(0,GR.x0-40),576,by+6); reeds(Math.max(10,GR.x0-70),by+2,3); gfx.globalAlpha=1;
     // water under the monsters, splashing when they are hauled

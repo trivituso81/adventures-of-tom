@@ -1,3 +1,12 @@
+## 2026-11-07 (438): Tombo batch 2, boppy1 "You Hold the Net" uses painted frames (`tombo4`)
+- Tom approved the Boppy net sheets in the Art Library and asked for them installed one batch at a time. This is the first of batch 2 (boppy1). Next in order: amy2 (Ymamot Creation, kitchen move), then amy3 and boppy2 once Tom answers their questions.
+- Tom's six painted frames (`art/tombo/boppy1-tom.webp`, `art/tombo/boppy1-p.webp`) are used as painted, one scale factor per person (Tom .801, Boppy .714), no flips. `tools/sprite-bake/tombo_frames.py` `INSTALLED` now includes `boppy1`; `data/tombo-frames.js` gained the boppy1 atlas entry.
+- Animation: `B2_TOMBO_ANIM.boppy1` (the last definition) uses `tbf('boppy1', ...)` for Tom's wobble, hold, lunge, celebrate and Boppy's rod, cast, reel, heave, hip and crouch beats. Run in and run home, timing, lines and effects are unchanged. Frame mapping is my reading of the sheet; Tom should judge it on the phone.
+- Object: `art/props/tombo/landing_net.webp` replaced by the approved net sheet (same slug, live immediately). The rod keeps the existing `boppy/fishing_rod`; the sheet's rod is not saved, which is correct.
+- Tags: battle2-kind.js, main.js, prop-art.js moved to `tombo4` (prop V and battle2-kind `tombo4`).
+- Tests: tombo_test boppy1 --speed2 FAILS [], smoke FAILS [], tag_check ok, unused_voice checks 1 to 5 show 0 or empty, node --check OK. Frames 3 and 5 looked at in tools/shots.
+- Watch for Tom: Boppy's rod is drawn by code, so it can sit a little off his painted hands; Tom's run-under beat (frame 5) is mid-stride and may look unfinished.
+
 ## 2026-11-07 (437): The Mirrorball speaks in Dolores' voice with elegant annotations (`mirrorvoice1`)
 - Decided by Tom (11-07, option A): the Mirrorball uses Dolores' ElevenLabs voice, no new voice slot. The elegance comes from the script annotations, not a new voice.
 - Cast: `'The Mirrorball'` is now `mirrorball` in data/dialog-cast.js (the stale `sparkle` entry is removed). A `mirrorball` voice is defined there.
