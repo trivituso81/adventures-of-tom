@@ -5,7 +5,7 @@
 // Images load the first time they are asked for (or from PROPART.preload); until then draw() returns false so the
 // drawn pixel version shows. Size by h (height) or w (width) in stage units; sx and sy squash or stretch afterwards.
 const PROPART=(()=>{
-  const V='tombo6', imgs={}, hits={};
+  const V='tombo7', imgs={}, hits={};
   const get=id=>{ let im=imgs[id]; if(!im) { im=new Image(); im.src='art/props/'+id+'.webp?v='+V; imgs[id]=im; } return im; };
   const ready=id=>{ const im=get(id); return !!(im.complete&&im.naturalWidth); };
   const draw=(id,x,y,o)=>{

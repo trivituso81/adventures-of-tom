@@ -50,9 +50,9 @@ for i, p in [('amy2', 'amy'), ('amy3', 'amy'), ('boppy1', 'boppy'), ('boppy2', '
     SETS[i] = dict(partner=p, kind='split')
 for i, p in [('grace1', 'grace'), ('grace2', 'grace'), ('grace3', 'grace'), ('rose1', 'rose'), ('rose2', 'rose'), ('amy1', 'amy'), ('deedee1', 'deedee')]:
     SETS[i] = dict(partner=p, kind='pair')
-INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'deedee2', 'deedee3', 'rose3']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
+INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'deedee2', 'deedee3', 'rose3', 'grace1']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
 OBJ_VER = {'grace1': 'v2'}
-OBJ_ALIAS = {'tnb1': {'cardboard_villain_standee': 'villain_standee'}}   # sheet name -> game slug (tombo/<slug>)
+OBJ_ALIAS = {'tnb1': {'cardboard_villain_standee': 'villain_standee'}, 'grace1': {'glittery_pink_cube_squishy': 'dice_squishy', 'pair_of_aviator_goggles': 'aviator_goggles'}}   # sheet name -> game slug (tombo/<slug>)
 
 
 def raw(name):

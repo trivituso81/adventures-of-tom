@@ -336,65 +336,38 @@ SC.tb_rec=(s,u)=>{ const ms=s.t*1000,P=s.plan,k=ez(ms/250)*(ms>P.off?1-ez((ms-P.
   // Thumb over the lens: in at th0, out at th1, a cheeky peek back at pk0..pk1.
   const th=ms<P.th1?ez(seg(ms,P.th0,P.th0+300)):1-ez(seg(ms,P.th1,P.th1+260)),pk=Math.sin(seg(ms,P.pk0,P.pk1)*Math.PI)*.55;
   gfx.globalAlpha=1; thumb(Math.max(th,pk),s.t*5); };
-// Painted Grace pose by name with the drop that puts her feet on the ground (hip-centred frames); null without the painted set.
-const GQ=n=>{ const W=typeof GRACE_WHEEL!=='undefined'&&GRACE_WHEEL,H=typeof GRACE_WHEEL_HIRES!=='undefined'&&GRACE_WHEEL_HIRES,g=BATTLE_SPRITES.grace;
-  if(!W||!W.painted||!H||!H.rects[n]||!g||!g.hires) return null; return {fr:W.painted(n),dy:(H.rows-H.foot[n])*g.scale}; };
 B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),G=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tgt=(E2.targets||[]).find(t=>t.side==='foe')||list.find(f=>f.row==='front')||list[0],F=ST.foe(tgt);
   const tsp=BATTLE_SPRITES.tom,gsp=BATTLE_SPRITES.grace,TH=tsp.idle.length*tsp.scale,GH=gsp.idle.length*gsp.scale;
-  // Tom stays at his staged spot facing right; Grace stands on his right facing left (they face each other), a step lower, spaced from the painted widths.
-  const tF={idle:tbMir(tsp,'idle'),act:tbMir(tsp,'act'),celeb:tbMir(tsp,'celeb')};
-  const gx=Math.round(T.x+tbSep(tsp,[tF.idle,tF.act,tF.celeb],gsp,[gsp.beg,gsp.celeb,gsp.idle],12)),gb=Math.min(316,T.base+22);
-  // Timing is built around the two baked clips, which are not touched: Grace's line runs 4.8 s and starts the moment the scene does;
-  // Tom caves 1.2 s into it (he knows how this ends), so the two overlap about 2 s, no more than before, and his clip (5.6 s) ends
-  // at 6.8 s. The box arrives on his second phrase and the squishy lands as Grace finishes begging; the move ends 0.5 s after the
-  // closing message, so his last word finishes while the pair walk home.
-  const P={plead0:650,plead1:4400,sigh:900,fine:1200,box:3060,rattle:3460,open:3820,out:3920,land:4450,settle:5150,pop:5450,back:5150,end:5550};
+  // Painted pair (art/tombo/grace1-pair.webp, cut by tools/sprite-bake/tombo_frames.py): Tom and Grace share one cell per frame, so Tom's unit
+  // draws the pair at the midpoint of the two stage spots and Grace's own unit is hidden. Her spot (gx, gb) still places the sparkles, tears and words.
+  const gx=Math.round(T.x+tbSep(tsp,[tsp.idle],gsp,[gsp.idle],12)),gb=Math.min(316,T.base+22);
+  const PX=Math.round((T.x+gx)/2),PB=T.base;
+  // Timing is the same as the old animation: Grace's line runs 4.8 s from the start; Tom caves 1.2 s in; the box arrives on his second phrase;
+  // the squishy lands at 4.45 s; the move ends 0.5 s after the closing message, so his last word finishes while the pair walk home.
+  const P={plead0:650,sigh:900,fine:1200,box:3060,rattle:3460,open:3820,out:3920,land:4450,settle:5150,pop:5450,end:5550};
   const D=P.end,sky={x:F.x,y:Math.max(64,F.top-120)};
-  const st={gx:G.x,gb:G.base};
-  // squishy die: pink glittery cube, four pips and a squishy little face in the middle
-  const rrp=(x,y,w,h,r)=>{ gfx.beginPath(); gfx.moveTo(x+r,y); gfx.arcTo(x+w,y,x+w,y+h,r); gfx.arcTo(x+w,y+h,x,y+h,r); gfx.arcTo(x,y+h,x,y,r); gfx.arcTo(x,y,x+w,y,r); gfx.closePath(); };
+  const st={gx,gb};
+  // Pair frame by beat: 1 pleading, 2 kneeling while Tom sighs, 3 Tom shrugs at FINE and Grace hops, 4 gasps at the box, 5 cheers at the landing, 6 holds the squishy.
+  const pairAt=ms=>ms<P.sigh?1:ms<P.fine?2:ms<2800?3:ms<P.land?4:ms<P.land+1200?5:6;
+  // squishy die: the painted pink glittery cube (dice_squishy), four stars of light around it
   const dieSq=(x,y,s,rot,sq,ms)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s*(1+sq*.3),s*(1-sq*.36));
-    const _pd=PROPART.draw('tombo/dice_squishy',0,0,{h:50});
-    if(!_pd) { rrp(-22,-22,44,44,11); gfx.fillStyle='#ff7fb8'; gfx.fill(); gfx.lineWidth=4; gfx.strokeStyle=OUT; gfx.stroke();
-    gfx.save(); rrp(-22,-22,44,44,11); gfx.clip(); gfx.fillStyle='#ffb3d6'; gfx.fillRect(-22,-22,44,14); gfx.fillRect(-22,-22,12,44); gfx.fillStyle='#e0568f'; gfx.fillRect(-22,14,44,8); gfx.fillRect(14,-22,8,44); gfx.restore();
-    for(const [px,py] of [[-11,-11],[11,-11],[-11,11],[11,11]]) { E(px,py,4.8,4.8,'#b8386f'); E(px,py,3.6,3.6,'#fff6fb'); }
-    E(-5,-2,2.2,2.8,OUT); E(5,-2,2.2,2.8,OUT); E(-4.4,-3,.8,.8,'#ffffff'); E(5.6,-3,.8,.8,'#ffffff'); E(-9,4,3,1.8,'#ff4f8f'); E(9,4,3,1.8,'#ff4f8f');
-    gfx.strokeStyle=OUT; gfx.lineWidth=1.6; gfx.beginPath(); gfx.arc(0,3,3.2,.15*Math.PI,.85*Math.PI); gfx.stroke(); }
-    gfx.restore();
+    PROPART.draw('tombo/dice_squishy',0,0,{h:50}); gfx.restore();
     for(let j=0;j<9;j++) { const a=ms/420+j*.7,r=(30+(j%3)*7)*s,tw=(Math.sin(ms/90+j*2.1)+1)/2; gfx.globalAlpha=.35+.65*tw;
       star(x+Math.cos(a)*r,y+Math.sin(a)*r*.8,1.8+tw*2.4,j%3===0?'#aef0ff':(j%3===1?'#fffbe6':'#ffd0ea')); }
     gfx.globalAlpha=1; };
-  const giftBox=(x,y,s,open,wob)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(wob); gfx.scale(s,s);
-    if(PROPART.draw('tombo/gift_box',4,-6,{h:54})) { gfx.restore(); return; }
-    RO(-22,-8,44,30,'#4fc3d8'); R(-4,-8,8,30,'#ffd166'); R(-22,4,44,5,'#3aa0b5');
-    gfx.save(); gfx.translate(open*28,-8-open*36); gfx.rotate(-open*1.1); RO(-26,-12,52,12,'#6fd8ea'); R(-4,-12,8,12,'#ffd166');
-    EO(-8,-17,7,5,'#ffd166'); EO(8,-17,7,5,'#ffd166'); EO(0,-14,4,4,'#ffb43a'); gfx.restore(); gfx.restore(); };
+  const giftBox=(x,y,s,wob)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(wob); gfx.scale(s,s); PROPART.draw('tombo/gift_box',4,-6,{h:54}); gfx.restore(); };
   const rays=(x,y,k)=>{ gfx.globalAlpha=.55*k; for(let j=-3;j<=3;j++) { const a=-Math.PI/2+j*.24; gfx.fillStyle=j%2?'#fff3b0':'#ffe08a'; gfx.beginPath(); gfx.moveTo(x,y);
     gfx.lineTo(x+Math.cos(a-.07)*130,y+Math.sin(a-.07)*130); gfx.lineTo(x+Math.cos(a+.07)*130,y+Math.sin(a+.07)*130); gfx.closePath(); gfx.fill(); } gfx.globalAlpha=1; };
-  const clasp=(x,y)=>{ EO(x-2,y,5.5,4.5,SKIN); EO(x+4,y-1,5,4.2,'#f7caa8'); Ln(x-1,y-3,x+3,y+1,1.2,SKIN2); };
   const puff=(x,y,k)=>{ for(let j=0;j<4;j++) { const q=cl(k*1.2-j*.12); if(q<=0||q>=1) continue; gfx.globalAlpha=(1-q)*.85; E(x-q*34-j*7,y-q*18-j*3,5+q*7,3.5+q*5,'#e8eef5'); } gfx.globalAlpha=1; };
-  // Grace: runs to her mark facing Tom, begs with clasped hands and hops, cheers, then runs home.
-  pathOf(fxP,D,(ms,c)=>{ const sp=c.sp; let x,y,f=sp.flip;
-    if(ms<650) { const k=ez(ms/650); x=lerp(c.origX,gx,k); y=lerp(c.origBase,gb,k); f=runFr(sp,c.t,1); }
-    else if(ms<P.back) { x=gx; y=gb; f=sp.idle;
-      if(ms<P.land&&sp.beg) { f=sp.beg; y+=Math.abs(Math.sin(seg(ms,P.plead0,P.plead1)*Math.PI*6))*-2; }
-      if(ms>P.land&&ms<P.land+1200) { y-=Math.abs(Math.sin(seg(ms,P.land,P.land+1200)*Math.PI*3))*14; f=sp.celeb; }
-      // painted begging sequence (data/grace-wheel-use.js, sheet C): kneel, hop, pout, kneel, gasp at the box, squeal at the landing, happy bounce
-      if(GQ('sq_kneel')) { const nm=ms<P.land?(ms<1500?'sq_kneel':ms<2100?'sq_hop':ms<2800?'sq_pout':ms<P.box?'sq_kneel':'sq_gasp'):(ms<P.land+600?'sq_squeal':'sq_joy');
-        const q=GQ(nm); f=q.fr; y+=q.dy+(nm==='sq_hop'?-Math.abs(Math.sin(ms/110))*10:0)+(nm==='sq_gasp'?-Math.abs(Math.sin(ms/90))*5:0); } }
-    else { const k=ez(seg(ms,P.back,P.back+600)); x=lerp(gx,c.origX,k); y=lerp(gb,c.origBase,k); f=k<1?runFr(sp,c.t,-1):sp.idle; }
-    st.gx=x; st.gb=y; return {cx:x,base:y,frame:f}; });
-  // Tom: stays put, sighs, shrugs and says fine, then celebrates the landing.
-  pathOf(fxT,D,(ms,c)=>{ const sp=c.sp; let y=c.origBase,f=tF.idle;
-    if(ms>P.sigh&&ms<P.fine+800) { f=tF.act; y+=Math.sin(seg(ms,P.sigh,P.sigh+500)*Math.PI)*2; if(ms>P.fine-100&&ms<P.fine+500) y-=Math.sin(seg(ms,P.fine-100,P.fine+500)*Math.PI*2)*4; }
-    if(ms>P.land&&ms<P.land+900) f=tF.celeb;
-    return {cx:c.origX,base:y,frame:f}; });
+  pathOf(fxT,D,ms=>({cx:PX,base:PB,frame:tbf('grace1','pair',pairAt(ms),tsp)||tsp.idle}));
+  pathOf(fxP,D,()=>({cx:gx,base:gb,frame:gsp.idle,hide:true}));
+  // Tom's sigh puff, Grace's begging sparkles and tears, the box, and the squishy: the painted pair is drawn by Tom's unit above.
   scene('tb_draw',D/1000,{back:false,draw:(s,u,ms)=>{
     const gy=st.gb-GH,mx=T.x+26,my=T.base-TH+17*tsp.scale;
     // begging: clasped hands in front of her chest, shiny puppy-eye twinkles and a tear
-    if(ms>P.plead0-100&&ms<P.land-100) { const tw=(Math.sin(ms/110)+1)/2; 
+    if(ms>P.plead0-100&&ms<P.land-100) { const tw=(Math.sin(ms/110)+1)/2;
       gfx.globalAlpha=.5+.5*tw; star(st.gx-9,gy+GH*.2,3+tw*2,'#ffffff'); star(st.gx-20,gy+GH*.2,2.4+(1-tw)*2,'#ffffff'); gfx.globalAlpha=1;
       if(ms>P.plead0+400) E(st.gx-21,gy+GH*.3+((ms/40)%10),1.6,2.4,'#9fd8ff'); }
     // Tom's sigh
@@ -402,7 +375,7 @@ B2_TOMBO_ANIM.grace1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     // the gift box floats down from the sky, rattles, then pops open
     if(ms>P.box&&ms<P.out+500) { const k=ez(seg(ms,P.box,P.box+420)),op=ez(seg(ms,P.open,P.open+260)),wob=ms>P.rattle&&ms<P.open?Math.sin(ms/28)*(.12+seg(ms,P.rattle,P.open)*.1):0,fl=Math.sin(ms/260)*3;
       gfx.globalAlpha=k*(1-ez(seg(ms,P.out+250,P.out+500))); if(op>0) rays(sky.x,sky.y-4,op*(1-seg(ms,P.out+100,P.out+500)));
-      giftBox(sky.x,lerp(sky.y-90,sky.y,k)+fl,lerp(.2,1.4,k),op,wob); gfx.globalAlpha=1; }
+      giftBox(sky.x,lerp(sky.y-90,sky.y,k)+fl,lerp(.2,1.4,k),wob); gfx.globalAlpha=1; }
     // the dice squishy tumbles out and drops onto the front monster
     if(ms>P.out&&ms<P.pop) { let x,y,rot=0,sq=0,sc=1.5;
       if(ms<P.land) { const k=seg(ms,P.out,P.land),e=k*k*(3-2*k),q=ez(k); x=lerp(sky.x,F.x,q)+Math.sin(k*Math.PI*3)*10*(1-k); y=lerp(sky.y,F.top-8,e)-Math.sin(Math.min(1,k*3)*Math.PI)*30; rot=k*Math.PI*4; sc=lerp(.6,1.6,Math.min(1,k*2)); sq=k<.12?-.5:-.15*(1-k); }
