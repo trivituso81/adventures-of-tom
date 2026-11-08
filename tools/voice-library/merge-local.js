@@ -2,7 +2,7 @@
 // Merges a Voice Library export ({clips:[{kind,voice,lineKind,text,mp3,t}]}) into the game. Writes only changed files under <outdir>/data.
 // Battle: a new clip replaces every clip with the same text (any kind), then is added under its lineKind, into data/voice/<id>.js (Nara's stay in voice-clips.js).
 // Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else dialog-ch28.js. Audio: silence trim, speaker/voice fx, Grace shrink, mono 32 kHz 48 kbps.
-// Boppy battle clips are deepened (rubberband pitch 0.9, 128k 44100). If one text appears twice in the export, the newest (t) wins. Needs ffmpeg with rubberband.
+// Boppy battle clips are deepened (rubberband pitch 0.9, 128k 44100). If one text appears twice under the same line kind in the export, the newest (t) wins; the same text under two kinds keeps both. Needs ffmpeg with rubberband.
 const fs=require('fs'),cp=require('child_process'),vm=require('vm');
 const [IN,DATA,OUT]=process.argv.slice(2);
 const FAM=['tom','grace','rose','amy','deedee','boppy','tnb','justin','olivia'];
@@ -23,14 +23,20 @@ const ff=(b64,af,sr,br)=>{fs.writeFileSync(tmp+'/i.mp3',Buffer.from(b64,'base64'
   return fs.readFileSync(tmp+'/o.mp3').toString('base64');};
 const fxFor=(v,sp)=>{const sf=SFX[sp];if(sf)return FX[sf];if(v==='boppy')return FX.boppy;const f=((CAST.voices||{})[v]||{}).fx;return f?FX[f]:null;};
 const J=JSON.parse(fs.readFileSync(IN,'utf8'));
-const best={};for(const c of J.clips){const k=c.kind+'|'+c.voice+'|'+c.text;if(!best[k]||(c.t||0)>(best[k].t||0))best[k]=c;}
+const best={};for(const c of J.clips){const k=c.kind+'|'+c.voice+'|'+(c.kind==='battle'?c.lineKind:'')+'|'+c.text;if(!best[k]||(c.t||0)>(best[k].t||0))best[k]=c;}
 const clips=Object.values(best);console.log('export',J.clips.length,'unique',clips.length);
 fs.mkdirSync(OUT+'/data/voice',{recursive:true});
 const rep={},touched=new Set();
-for(const c of clips.filter(c=>c.kind==='battle')){
-  const ch=c.voice,C=VC.clips[ch]=VC.clips[ch]||{};rep[ch]=rep[ch]||{replaced:0,added:0};
+const battle=clips.filter(c=>c.kind==='battle'),wasIn=new Map();
+// Pass 1: remove every old clip with the same words (any kind). Pass 2: add. Two passes so one text recorded under two kinds (quiz and pop_quiz) keeps both.
+for(const c of battle){
+  const ch=c.voice,C=VC.clips[ch]=VC.clips[ch]||{};
   let removed=0;for(const k in C){const b=C[k].length;C[k]=C[k].filter(x=>!(x&&x.text===c.text));removed+=b-C[k].length;if(!C[k].length)delete C[k];}
-  removed?rep[ch].replaced++:rep[ch].added++;
+  if(removed)wasIn.set(ch+'|'+c.text,true);
+}
+for(const c of battle){
+  const ch=c.voice,C=VC.clips[ch]=VC.clips[ch]||{};rep[ch]=rep[ch]||{replaced:0,added:0};
+  wasIn.get(ch+'|'+c.text)?rep[ch].replaced++:rep[ch].added++;
   (C[c.lineKind]=C[c.lineKind]||[]).push({text:c.text,mp3:ch==='boppy'?ff(c.mp3,'rubberband=pitch=0.9','44100','128k'):c.mp3,model:'eleven_v4'});touched.add(ch);
 }
 const HEAD="'use strict';\n// data/voice-clips.js — Baked ElevenLabs clips: voice settings and Nara's barks. Each character's clips are in data/voice/<id>.js.\n// Regenerate with the Voice Baker and merge (claude/voice-baking.md); do not hand-edit.\n";

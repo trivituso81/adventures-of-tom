@@ -1,3 +1,12 @@
+## 2026-11-07 (440): Voice exports 12 and 13 merged (`gclips13`)
+- Tom: install the two phone exports. Export 13 holds every clip id of export 12 (same words) plus 44 new Deedee lines, and its takes are the later ones, so only 13 was merged (580 clips, 556 before the same-words fix below).
+- Merge result (before the purge): battle takes replaced Amy 37, Boppy 38, Deedee 43, Rose 5, Tom 6, TNB 3, Grace 2, Justin 1; battle takes added Justin 25, Amy 10, Tom 8, Grace 7, TNB 4, Boppy 3, Deedee 3, Rose 2. Dialogue: 41 replaced and 114 added in `dialog-ch28.js` (Deedee, Mirrorball and others); chapters 3, 5, 22, 24, 25, 26, 27 got replaced takes. Olivia and `dialog-ch1.js` matched byte for byte and were not touched. Boppy battle takes were deepened as the tool does (pitch 0.9); dialogue got the trim and speaker effects.
+- Purged: 38 merged battle takes for lines the game no longer plays (24 Justin beats removed earlier in `purge1` and `purge2`, Amy's wrong-words takes hills, hurt, marathon, marathon_ult, tombo2, Grace and Rose Ymamot lines, Tom controller_tap, crumb_shot, window_seat, Grace attack and chalk_up, TNB tombo and round_with_jojo). Listed in docs/PURGED_VOICE.md.
+- Tool fix (`tools/voice-library/merge-local.js`): one text recorded under two line kinds (quiz and pop_quiz, beam and beam_dismount, pepper and pepper_breath, mug_toss and basic) lost one of them. The export dedup now keys on line kind and the battle merge removes old copies first, then adds. Checked: no clip lost against the repo.
+- Deedee: 44 new takes arrived in the same export as the replaced ones. The "45 lines still old voice" note in claude/next.md should be checked against the Voice Library.
+- Tags: the changed voice files and `data/dialog-cast.js` and `engine/main.js` moved to `gclips13`. Voice Library index rebuilt.
+- Tests: unused_voice checks 1 to 5 clean (0), tag_check ok, smoke FAILS [], node --check ok.
+
 ## 2026-11-07 (439): Tombo batch 2, amy2 "Ymamot Creation" uses painted frames (`tombo5`)
 - Tom's approved Ymamot Creation sheets (Tom sheet, Amy sheet, objects sheet) are installed. This is the second of batch 2 (amy2). Next in order: amy3 and boppy2 once Tom answers their questions in claude/next.md.
 - Painted frames are used as painted, one scale factor per sheet (Tom .781, Amy .541), no flips (both sheets face front). `tools/sprite-bake/tombo_frames.py` `INSTALLED` now includes `amy2`; `data/tombo-frames.js` gained the amy2 atlas entry; `art/tombo/amy2-tom.webp` and `art/tombo/amy2-p.webp` are new.

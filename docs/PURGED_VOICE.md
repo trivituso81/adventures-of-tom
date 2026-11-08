@@ -124,3 +124,8 @@ Deedee's greeting and kitchen line were reworded at Tom's request (see CHANGES 7
 | deedee | dialogue (dialog-ch26) | There's my Tommy! And my girls! And my... oh. OH. Why is Rose in an ice cube. |
 
 Audio is in git history (the parent of the `deedee1` commit).
+
+## 2026-11-07 (440): takes dropped from phone export 13
+
+38 battle takes that arrived in the export for lines the game does not play: amy hills, hurt, marathon, marathon_ult, tombo2; grace attack, chalk_up, ymamot; rose ymamot; tom controller_tap, crumb_shot, window_seat; tnb tombo, round_with_jojo; and 24 Justin beats (bad_call, breaker_flip, demo_day, drywall, foot_tap, fresh_fit, giant_sneeze, loose_wire_zap, wire_nuts, and one empty-kind OUCH). They were never merged into a committed file; the audio stays in Tom's export.
+
