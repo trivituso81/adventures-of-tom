@@ -5717,7 +5717,12 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const by=300,cx=cl(GR.x1+110,220,330),kT={x:cx+72,y:by},kA={x:cx-72,y:by};   // the counter sits between the kids
   const AMY_LINE="Ketchup, pickles, cereal, sock. Ymamot Creation!",FLASH='Flashback!';
   // Little Tom is as tall as Grace and little Amy as tall as Rose.
-  const hOf=id=>BATTLE_SPRITES[id].idle.length*BATTLE_SPRITES[id].scale,kh=w=>KIDS.rects[w].ym_ready[3]/2,scT=hOf('grace')/kh('tom'),scA=hOf('rose')/kh('amy');
+  // Painted kids (art/tombo/amy2-*.webp, the Ymamot Creation sheet): one drawing scale per kid, so little Tom stands as tall as Grace and little Amy as tall as Rose.
+  const hOf=id=>BATTLE_SPRITES[id].idle.length*BATTLE_SPRITES[id].scale;
+  const YM_FR={tom:{ym_ready:1,ym_ketchup:2,ym_cereal:3,ym_stirA:4,ym_stirB:4,ym_explain:5,ym_fling:4,ym_proud:1},amy:{ym_ready:1,ym_announce:5,ym_pickle:4,ym_sock:2,ym_stir:4,ym_taste:2,ym_fling:3,ym_delight:6}};
+  const ymRows=(who,n)=>tbf('amy2',who==='tom'?'tom':'p',n,null);
+  const scT=hOf('grace')/ymRows('tom',1).length,scA=hOf('rose')/ymRows('p',1).length;
+  const kidPaint=(x,y,who,pose,sc)=>{ const rows=ymRows(who,YM_FR[who][pose]||1); if(rows) drawSprite(rows,{},x-rows[0].length*sc/2,y-rows.length*sc,sc,{}); };
   // Voices. Little Amy speaks in Grace's voice (LINES.grace.ymamot) and little Tom in Rose's (LINES.rose.ymamot); both grown-ups shout
   // Flashback! together first (amy.flashback, tom.flashback). Each stays silent until its clip is baked (Voice Library).
   // The whole move runs about 6 s. Beats are fixed times; a kid clip that is longer or shorter than the target (Amy 3.0 s) stretches
@@ -5753,8 +5758,7 @@ B2_TOMBO_ANIM.amy2=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     const ik=ING.findIndex((_,k)=>ms>=ING_T[k]&&ms<ING_T[k]+260),stirring=ms>=ING_T[ING.length-1]+260&&ms<P.name,fl=ms>=P.sling-250&&ms<P.hit+150;
     const posT=ms<P.in?'ym_ready':fl?'ym_fling':(ms<P.name?(ik>=0&&!AMY_ING.includes(ik)?(ik===2?'ym_cereal':'ym_ketchup'):(stirring?(Math.floor(t*5)%2?'ym_stirA':'ym_stirB'):'ym_ready')):(ms<P.lift?'ym_proud':(ms<P.sling?'ym_explain':'ym_proud')));
     const posA=ms<P.in?'ym_announce':fl?'ym_fling':(ms<P.name?(ik>=0&&AMY_ING.includes(ik)?(ik===5?'ym_sock':'ym_pickle'):(stirring?'ym_stir':'ym_announce')):(ms<P.lift?'ym_delight':(ms<P.sling?'ym_taste':'ym_delight')));
-    const lift=0;
-    kid(kT.x,by+lift,'tom',posT,t,-1,{sc:scT}); kid(kA.x,by+lift,'amy',posA,t,1,{sc:scA});
+    kidPaint(kT.x,by,'tom',posT,scT); kidPaint(kA.x,by,'amy',posA,scA);
     if(ms>P.name&&ms<P.lift) { gfx.save(); gfx.translate(cx,by-124); gfx.rotate(-.06); if(!PROPART.draw('tombo/ymamot_creation_sign',0,0,{w:112})) { RO(-70,-12,140,24,CREAM); label('YMAMOT CREATION',0,-6,'#2b2a26',2); } gfx.restore(); } }});
   const steps=[
     [0,()=>{ setMessage('TOMBO! Tom and Amy look at each other. They remember something.'); S('harp'); if(typeof warmLine==='function') { if(kidA) warmLine('grace',AMY_LINE); warmLine('amy',FLASH); warmLine('tom',FLASH); } }],   // decode the clips now so they start on cue
