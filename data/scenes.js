@@ -178,6 +178,7 @@ SCENES.ch1Mudling=[
   {flag:'ch1-t1'},
   {walk:'tom',to:[[6,19]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,19],dir:'up'}, {place:'rose',at:[7,20],dir:'up'}, {place:'deedee',at:[6,20],dir:'up'},
+  {flag:'ch1-crumbs-a'},   // crumb pieces 1-2 (plate.js HOLLOW_CRUMBS)
   {talk:'Deedee',lines:['Crumbs! Rhubarb crumbs. That little thief went right through here.']},
   {place:'Mudling',at:[7,16]},
   {talk:'Rose',lines:['Tata. The mud is MOVING.']},
@@ -187,6 +188,7 @@ SCENES.ch1Mudling=[
   {talk:'Grace',lines:['Okay, everybody. Tata is in front. I\'m in charge of choreography. FIGHT!']},
   {battle:'mudling',tut:'basics'},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
+    {flag:'ch1-crumbs-b'},   // crumb pieces 3-5
     {talk:'Deedee',lines:['Good job, girls. The crumbs keep going north.']}])
 ];
 SCENES.ch1Skeeter=[
@@ -211,6 +213,7 @@ SCENES.ch1Grump=[
   ...CH1_AFTER(()=>flag('battle:grump')!=='win',[]),
   {flag:'ch1-tuts'},
   {hearts:'deedee'}, {heal:true},
+  {flag:'ch1-crumbs-c'},   // crumb pieces 6-9, shown with the "around the pond" line
   {talk:'Deedee',lines:['Hugs for everyone. There. All better.','The crumbs go around the pond. Toward Boppy’s fishing spot.']},
   {talk:'Grace',lines:['Boppy says the Big One lives over there.']},
   {talk:'Tom',lines:['Boppy also says the stomach thing is serious. Stay close.']},

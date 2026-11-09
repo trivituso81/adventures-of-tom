@@ -1,3 +1,10 @@
+## 2026-11-09 (crumbs2): Grump Hollow crumb trail placed on the map (tag crumbs2)
+- Art Library sheet `prop-trail-hollow` (approved, `art/raw/props/prop-trail-hollow-v1.png`) cut by `tools/sprite-bake/bake_hollow_crumbs.py` into nine pictures, `art/props/hollow/crumb_1..9.webp`. Cells 10 to 16 are empty and not written.
+- Drawn as plate overlays in `engine/plate.js` (`HOLLOW_CRUMBS`, `drawHollowCrumbs`), at half the cut size, under the party. Preloaded in `engine/prop-art.js`.
+- Reveals: `ch1-crumbs-a` (pieces 1 and 2) before Deedee's first line in `ch1Mudling`; `ch1-crumbs-b` (3 to 5) before "keep going north" in the Mudling after-battle steps; `ch1-crumbs-c` (6 to 9) before Deedee's "go around the pond" talk in `ch1Grump`. All hide when `ch1-tin` is set. No spoken line changed.
+- Placement checked on a gridded preview of the plate and in portrait and landscape screenshots (flags on, and flags off: no crumbs).
+- `tools/smoke.py` FAILS []. `tools/tag_check.py` ok. Tags: `data/scenes.js`, `engine/plate.js`, `engine/prop-art.js` and the build stamp moved to crumbs2.
+
 ## 2026-11-09 (hollowwalk1): Grump Hollow walk map from Tom's Area Builder export (tag hollowwalk1)
 - Tom's export of the hollow map (chapter 20 view, system_hash 97bdfd46): 28 tiles changed, no door or exit edits, no object conflicts. Installed with `tools/apply_walkmap.py`; only the hollow `plateMask` rows in `data/maps-le.js` changed.
 - `tools/reach_test.py hollow`: 0 fails. Mask overlay looked at (`tools/shots/mask-hollow.png`). `tools/smoke.py` FAILS [].

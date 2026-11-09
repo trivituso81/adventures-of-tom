@@ -341,8 +341,25 @@ function drawHomeJar(time) {
   if(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'})) return;
   drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
 }
+// Grump Hollow crumb trail (Art Library prop-trail-hollow, cut by tools/sprite-bake/bake_hollow_crumbs.py). Each entry: piece, the flag that
+// shows it, and its centre in plate art px (64 per tile). Groups are set by ch1Mudling (a, b) and ch1Grump (c); all hide when the tin is back.
+const HOLLOW_CRUMB_SCALE=.5;   // of the cut picture's size
+const HOLLOW_CRUMBS=[[1,'ch1-crumbs-a',445,1140],[2,'ch1-crumbs-a',575,1075],
+  [3,'ch1-crumbs-b',440,880],[4,'ch1-crumbs-b',440,700],[5,'ch1-crumbs-b',420,500],
+  [6,'ch1-crumbs-c',640,750],[7,'ch1-crumbs-c',760,720],[8,'ch1-crumbs-c',880,690],[9,'ch1-crumbs-c',1040,650]];
+function drawHollowCrumbs(time) {
+  if(typeof flag==='function'&&flag('ch1-tin')) return;
+  const s=T/64;
+  for(const [n,f,x,y] of HOLLOW_CRUMBS) {
+    if(!(typeof flag==='function'&&flag(f))) continue;
+    const id='hollow/crumb_'+n;
+    if(!PROPART.ready(id)) continue;
+    PROPART.draw(id,x*s,y*s,{w:PROPART.get(id).naturalWidth*HOLLOW_CRUMB_SCALE*s});
+  }
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
+  if(map&&map.id==='hollow') drawHollowCrumbs(time);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).
