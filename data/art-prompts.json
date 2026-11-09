@@ -14723,7 +14723,7 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -14751,6 +14751,12 @@
      "note": "should be \"Final Fantasy 9\" art inspired",
      "from": "v6",
      "at": 1794248125867
+    },
+    {
+     "date": "2026-11-09",
+     "note": "Doesn't look good at all the old one was higher quality",
+     "from": "v1",
+     "at": 1794266085474
     }
    ],
    "id": "title-welcome-portrait",
