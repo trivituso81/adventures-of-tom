@@ -5988,15 +5988,15 @@ const hookFoes=(list,t0,dur,P,up)=>{ for(const f of list) { const q=ST.foe(f); f
 B2_TOMBO_ANIM.boppy1=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),B=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale;
-  const by=Math.min(312,Math.max(T.base,B.base)),bx=cl(GR.x1+160,230,380),tx=bx-70;
+  const by=Math.min(312,Math.max(T.base,B.base)),bx=cl(GR.x1+160,230,380),tx=bx-100,hx=Math.min(GR.x1+30,tx);   // painted Tom and Boppy are about 105 px wide each: 100 apart, Tom reaches only as far as the right edge of the group (never off screen)
   const P={run:600,wobble:900,cast:1900,land:2400,hook:2900,reel:3300,heave:4200,dump:4800,crouch:5500,apply:6000,end:7800};
   const sT={x:T.x,b:T.base,f:tsp.idle},sB={x:B.x,b:B.base,f:bsp.idle};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sT,lerp(c.origX,tx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
     if(ms<P.reel) { const wob=ms>P.wobble&&ms<P.cast?Math.sin(c.t*9)*6:0; return stand(sT,tx+wob,by,tbf('boppy1','tom',ms<P.wobble?1:ms<P.cast?2:3,sp)||sp.aim,wob*.01); }
-    if(ms<P.heave) { const q=ez(seg(ms,P.reel,P.reel+500)); return stand(sT,lerp(tx,GR.x0-26,q),by,q<1?runFr(sp,c.t,-1):sp.aim); }
-    if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sT,GR.x0-26+q*26,by-Math.sin(q*Math.PI)*6,tbf('boppy1','tom',4,sp)||sp.wind,-.2*Math.sin(q*Math.PI)); }
-    if(ms<P.end-700) { const k=ez(seg(ms,P.dump,P.dump+500)); return stand(sT,lerp(GR.x0,tx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?tbf('boppy1','tom',5,sp)||sp.celeb:tbf('boppy1','tom',6,sp)||sp.idle)); }
+    if(ms<P.heave) { const q=ez(seg(ms,P.reel,P.reel+500)); return stand(sT,lerp(tx,hx,q),by,q<1?runFr(sp,c.t,-1):(tbf('boppy1','tom',3,sp)||sp.aim)); }
+    if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sT,hx+q*8,by-Math.sin(q*Math.PI)*6,tbf('boppy1','tom',4,sp)||sp.wind,-.2*Math.sin(q*Math.PI)); }
+    if(ms<P.end-700) { const k=ez(seg(ms,P.dump,P.dump+500)); return stand(sT,lerp(hx+8,tx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?tbf('boppy1','tom',5,sp)||sp.celeb:tbf('boppy1','tom',6,sp)||sp.idle)); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(tx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sB,lerp(c.origX,bx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
@@ -6005,8 +6005,8 @@ B2_TOMBO_ANIM.boppy1=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<P.heave) return stand(sB,bx+(ms>P.reel?Math.sin(c.t*20)*2:0),by,tbf('boppy1','p',ms>P.reel?4:3,sp)||F(sp,'heave'));
     if(ms<P.dump) { const q=seg(ms,P.heave,P.dump); return stand(sB,bx+q*10,by,tbf('boppy1','p',5,sp)||F(sp,'heave'),-.15*Math.sin(q*Math.PI)); }
     if(ms<P.crouch) return stand(sB,bx,by,tbf('boppy1','p',5,sp)||F(sp,'hip'));
-    if(ms<P.end-700) { const k=ez(seg(ms,P.crouch,P.crouch+300)); return stand(sB,lerp(bx,GR.x1+40,k),by,k<1?runFr(sp,c.t,-1):tbf('boppy1','p',6,sp)||F(sp,'crouchnet')); }
-    const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(GR.x1+40,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
+    if(ms<P.end-700) return stand(sB,bx,by,tbf('boppy1','p',6,sp)||F(sp,'crouchnet'));   // he crouches where he stands: no walking onto the pile or into Tom
+    const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(bx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.run+400)); if(g<=0) return; gfx.globalAlpha=g; pierDraw(Math.max(0,GR.x0-40),576,by+6); reeds(Math.max(10,GR.x0-70),by+2,3); gfx.globalAlpha=1;
     // water under the monsters, splashing when they are hauled
     gfx.globalAlpha=.35*g; E(GR.x,GR.base+6,GR.w*.7+40,14,'#5fa8d8'); gfx.globalAlpha=1; }});
@@ -6030,7 +6030,7 @@ B2_TOMBO_ANIM.boppy1=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.dump,()=>{ S('splash'); S('thud'); S('bonk'); for(const f of list) { f.oy=0; f.spinAt=performance.now(); } hitFoes(tgts,share); battle.shakeEnemy=.5; word('ON THE PIER!',GR.x,Math.max(56,GR.top-80),GOLD,4,1); setMessage('Every one of them lands on the pier. Flopping.'); }],
     [P.crouch,()=>{ setMessage('Boppy crouches to look at the catch. His knees have opinions.'); }],
     [P.apply,()=>{ E2.apply(); S('heal'); say('tom','tombodeedee'); }],
-    [P.apply+900,()=>{ S('creak'); word('OOF. MY KNEES.',GR.x1+40,Math.max(40,by-BH-30),CREAM,3,1); }],
+    [P.apply+900,()=>{ S('creak'); word('OOF. MY KNEES.',bx,Math.max(40,by-BH-30),CREAM,3,1); }],
     [P.end,'end',()=>(E2.result||'')+' Keepers, all of them. Boppy says they all hit softer now.']];
   ST.play(E2,steps); };
 

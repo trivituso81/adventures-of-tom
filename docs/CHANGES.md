@@ -1,3 +1,10 @@
+## 2026-11-09 (boppy1fix): Boppy 1 "You Hold the Net" placement fixed (tag boppy1fix)
+
+- Tom (14:59): saw a bunch of issues in the Tom and Boppy first combo. Fact (frames rendered portrait and landscape): Tom ran to the left edge of the enemy group (`GR.x0-26`) and was cut in half by the screen edge; Boppy crouched at `GR.x1+40`, 50 px from Tom, so the two (frames about 105 px wide each) fused and sat on the pile, and the landing net drew over Boppy's face. Tom also fell back to the old `aim` frame for about 0.4 s while the monsters were hauled.
+- Change (engine/battle2-kind.js, live `B2_TOMBO_ANIM.boppy1` only): Tom and Boppy stand 100 apart (was 70); Tom reaches only to the right edge of the group (`hx`), never off screen; Boppy crouches where he stands instead of walking onto the pile; Tom holds painted frame 3 in the haul instead of the old frame. "OOF. MY KNEES." follows Boppy.
+- Not changed: the stacked GRUMBLED popups at the end are the shared status popup for each monster piled on the pier (not Boppy 1 code). Boppy 1's Director's Cut is still all old frames.
+- Tests: tombo_test boppy1 portrait and landscape looked at, node --check, tag_check.
+
 ## 2026-11-09 (retired1): Voice Library deletes leftover phone clips for purged lines; Olivia's battle lines listed (no tag)
 
 - Tom (14:53): "If the lines are not used they should not be in the voice library." Fact: the library list (`data/voice-index.json`) never held the purged lines, but the phone's saved clips (IndexedDB `aot-local-clips`) still did, and they rode along in exports (local-clips-export_16.json had 73 rows with no listed line).
