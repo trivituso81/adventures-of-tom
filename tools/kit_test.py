@@ -62,6 +62,8 @@ with sync_playwright() as pw:
         if os.environ.get('PARTY'): party=os.environ['PARTY'].split(',')
         pg.evaluate(SETUP,{'party':party,'speed':speed,'preload':[x for x in os.environ.get('PRELOAD','').split(',') if x]})
         pg.wait_for_function(READY,timeout=30000)
+        pre_ids=[x for x in os.environ.get('PRELOAD','').split(',') if x]
+        if pre_ids: pg.wait_for_function("(ids)=>ids.every(i=>PROPART.ready(i))",arg=pre_ids,timeout=60000)   # PRELOAD pictures must finish loading before the move fires
         kit=pg.evaluate(f"()=>window.__LE.B2_SKILLS['{cid}'].o3.map(a=>[a.key,a.target,!!a.kindFoe,!!a.sig])")
         sheet=[]
         for key,target,kind,sig in kit:

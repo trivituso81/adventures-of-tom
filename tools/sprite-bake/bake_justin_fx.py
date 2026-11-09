@@ -16,9 +16,22 @@ SHEETS = {   # per move: sheet, slugs in the prompt's item order ('-' = not used
  'nuts': ('justin-fx-wire-nuts-v1', 'wire_nut_orange wire_nut_yellow wire_nut_blue fist swoosh stars scatter'),
  'dry': ('justin-fx-drywall-v1', 'sheet drywall_sheet drill screws dust glow'),
  'demo': ('justin-fx-demo-day-v1', 'hammer brick_chunk rubble dust_puff crack burst crumbs shield'),
+ 'loose': ('justin-fx-loose-wire-v1', 'wire bundle zap sparks star smoke'),
+ 'bad': ('justin-fx-bad-call-v1', 'remote flag whistle red_x bubble steam star'),
+ 'fit': ('justin-fx-fresh-fit-v1', 'sunglasses glint gold halo flashes heart stars'),
+ 'breaker': ('justin-fx-breaker-flip-v1', 'panel sw_down sw_up bolt ring sparks flash beam'),
+ 'sneeze': ('justin-fx-giant-sneeze-v1', 'spray gust ah choo lines dust tissue'),
+ 'foot': ('justin-fx-foot-tap-v1', 'designer child spark scream waves shock bandage stars'),
 }
 INSTALL = {'wire_nut_orange': ('nuts', 'wire_nut_orange'), 'wire_nut_yellow': ('nuts', 'wire_nut_yellow'), 'wire_nut_blue': ('nuts', 'wire_nut_blue'),
            'drywall_sheet': ('dry', 'drywall_sheet'), 'brick_chunk': ('demo', 'brick_chunk'), 'rubble': ('demo', 'rubble'), 'dust_puff': ('demo', 'dust_puff')}
+# the six move sheets added in jzfx1 (only the pictures the moves draw; names from the sheet order, see SHEETS)
+INSTALL.update({'lw_zap': ('loose', 'zap'), 'lw_sparks': ('loose', 'sparks'), 'lw_star': ('loose', 'star'),
+           'bc_x': ('bad', 'red_x'), 'bc_star': ('bad', 'star'), 'bc_steam': ('bad', 'steam'),
+           'ff_gold': ('fit', 'gold'), 'ff_halo': ('fit', 'halo'), 'ff_flashes': ('fit', 'flashes'),
+           'bf_bolt': ('breaker', 'bolt'), 'bf_ring': ('breaker', 'ring'), 'bf_sparks': ('breaker', 'sparks'), 'bf_flash': ('breaker', 'flash'),
+           'gs_spray': ('sneeze', 'spray'), 'gs_dust': ('sneeze', 'dust'),
+           'ft_spark': ('foot', 'spark'), 'ft_scream': ('foot', 'scream'), 'ft_waves': ('foot', 'waves'), 'ft_shock': ('foot', 'shock'), 'ft_stars': ('foot', 'stars')})
 def cut(path):
     rgb = np.array(Image.open(path).convert('RGB')); rgba = _key(rgb); H = rgba.shape[0]
     a = rgba[:, :, 3] > 40

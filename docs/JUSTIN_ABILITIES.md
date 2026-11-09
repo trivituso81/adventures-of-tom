@@ -42,7 +42,7 @@ His nine moves play the painted Art Library sheets `art/raw/characters/justin-ab
 | Foot Tap | foot | 3 x 3 | 1 to 7 |
 | DRYWALL | dry | 3 x 2 | 1 to 6 (sheet and drill painted; the sheet left standing in front of the party is a prop) |
 
-Props come from the approved `justin-fx-*` sheets (`tools/sprite-bake/bake_justin_fx.py`): wire nuts (orange, yellow, blue), standing drywall sheet, brick chunk, rubble, dust puff. The Foot Tap objects sheet is still a draft; its effects are still drawn by the game. Do not add PROPART copies of anything painted into the frames (wire, nuts in hand, sunglasses, sledgehammer, panel, drill, couch).
+Props come from the approved `justin-fx-*` sheets (`tools/sprite-bake/bake_justin_fx.py`): wire nuts (orange, yellow, blue), standing drywall sheet, brick chunk, rubble, dust puff. The six move sheets (Loose Wire, Bad Call, Fresh Fit, Breaker Flip, Giant Sneeze, Foot Tap) are cut and wired as `lw_`, `bc_`, `ff_`, `bf_`, `gs_`, `ft_` pictures (jzfx1, `jz_art` in engine/justin-moves.js); each drawn effect stays as the fallback. Do not add PROPART copies of anything painted into the frames (wire, nuts in hand, sunglasses, sledgehammer, panel, drill, couch).
 
 ## Install steps (follow the Boppy pattern; he is the closest kit)
 
