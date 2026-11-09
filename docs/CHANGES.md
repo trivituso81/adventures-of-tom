@@ -1,3 +1,8 @@
+## 2026-11-09 (bosspond2): The Big One returns to the shore after the fight, with the frown frame (tag bosspond2)
+- Tom: after beating The Big One and coming back, he stood in the pond where nobody could reach him, with the same shocked face. Cause: the story hides him at (15,7) (open water) until the pond scene, and the monster tick recorded that as his `home`; a beaten monster comes back to `home` the next time the map loads. Fix in `STORY_WORLD` (data/scenes.js): `home` is set to the real shore spot (19,11) when he sinks and when he surfaces. The Big Shake (chapter 2, hidden at 0,0) had the same flaw and got the same fix.
+- Once `battle:bigone` is 'win' his `scenePose` is the painted frown frame (`foe:'attack3'`, mirrored toward the party), so the shocked stance frame no longer shows on the map. The dialogue portrait is unchanged.
+- Test: replayed ch1Pond then ch1AfterBoss, made him fall and return: before the fix he came back at (15,7), after it at (19,11) with the frown frame; screenshot looked at. No calm or happy frame exists on his painted sheet (all six are shocked, angry or crying); a calm one needs a new Art Library sheet.
+
 ## 2026-11-09 (endstage1): chapter 1 ending scene centered in Deedee and Boppy's house (tag endstage1)
 - Tom (screenshot): the party stood at the far right of the room during Grace's "staying the WHOLE week" talk. Cause: `ch1End` in `data/scenes.js` still used the old room layout (Boppy at column 16, outside the 16-wide room; Tom, Deedee, Grace and Rose at columns 13 to 15).
 - Now Boppy (8,8), Tom (8,10), Grace (9,11), Rose (7,11), Deedee (6,9), all on the open floor in the middle. No spoken line changed.

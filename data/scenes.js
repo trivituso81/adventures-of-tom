@@ -519,15 +519,17 @@ const STORY_WORLD=[
   ()=>{
     const b=findMonster('bigone'); if(!b) return;
     const under=STORY.chapter===1&&!flag('ch1-pond');
-    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=15; b.y=7; b.move=null; b.hidden=true; }
-    else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
+    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=15; b.y=7; b.move=null; b.hidden=true; }   // home stays the shore spot: a defeated Big One returns to `home`, and (15,7) is open water
+    else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.home={x:b.sunk.x,y:b.sunk.y}; b.sunk=null; b.hidden=false; }
+    // Once beaten he stays on the shore with the frown frame (the painted stance frame is the shocked one; scenes clear and reset scenePose).
+    if(!under&&flag('battle:bigone')==='win'&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
   },
   // Chapter 2: the Big Shake stays under the hill until the party reaches the Observatory.
   ()=>{
     const b=findMonster('bigshake'); if(!b) return;
     const under=STORY.chapter===2&&!flag('ch2-boss');
-    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
-    else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
+    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+    else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.home={x:b.sunk.x,y:b.sunk.y}; b.sunk=null; b.hidden=false; }
   },
   // Chapter 2: Nara waits on Tom's porch (only once TNB is with Tom); the smog puts neighbors in a trance.
   ()=>{
