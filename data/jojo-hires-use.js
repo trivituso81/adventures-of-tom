@@ -11,14 +11,13 @@
   set.left=set.side.map(mirrorRows);
   set.k=.930;   // real height 5'6 next to Tom 5'11 (42.0 visible rows); the sheet's stand is 42.0 rows (11-05)
   OW.jojo=set;
-  // Battle frames (art/chars/jojo-bt.webp, K=2): feet on the bottom row, horizontally centred on the feet. The sheet draws the throw poses (x-step, reach,
-  // release, follow) and the high-five facing RIGHT, run and the cheers facing LEFT; FACES says which way each one looks as drawn.
+  // Battle frames (art/chars/jojo-bt.webp, K=2, the approved stance sheets, tools/sprite-bake/bake_jojo_stance.py): feet on the bottom row, centred.
+  // The lavender battle look is as painted. FACES says which way a frame looks as drawn (lunge, offer, wind and guard point screen-right).
   // JOJO_BT.draw(name,x,y,hs,faceLeft,alpha): feet at x,y; hs = the standing height in game pixels; mirrors the frame when it does not already face the wanted way.
-  // JOJO_BT.drawOw(name,x,y,hs,faceLeft,alpha) does the same with a walk frame (name like 'right_step1'; the walk row faces right).
   // Both return false until the image has loaded, so the caller can draw its stand-in instead.
   const B=AT.bt,img=new Image(); let ready=false; img.onload=()=>{ ready=true; }; img.src=B.src+'?v='+(typeof ART_V!=='undefined'?ART_V:'');
-  const FACES={b_run:'L',b_xstep:'R',b_reach:'R',b_release:'R',b_follow:'R',b_celeb1:'L',b_celeb2:'L',b_high:'L'};
-  const BT_STAND=(JOJO_HIRES.meta.bt&&JOJO_HIRES.meta.bt.stand)||74, OW_STAND=JOJO_HIRES.meta.ow.h;           // standing heights of the two sets at 1x, in rows or pixels
+  const FACES={b_wind:'R',b_offer:'R',b_lunge:'R',b_guard:'R'};
+  const BT_STAND=(JOJO_HIRES.meta.bt&&JOJO_HIRES.meta.bt.stand)||74;           // standing height of the battle set at 1x, in rows
   const blit=(im,R,k,x,y,sc,flip,alpha)=>{
     const w=R[2]/k*sc,h=R[3]/k*sc,prevA=gfx.globalAlpha,sm=gfx.imageSmoothingEnabled;
     gfx.globalAlpha=alpha; gfx.imageSmoothingEnabled=true;
@@ -27,8 +26,5 @@
     gfx.restore(); gfx.globalAlpha=prevA; gfx.imageSmoothingEnabled=sm; return true; };
   window.JOJO_BT={meta:JOJO_HIRES.meta.bt,ready:()=>ready&&PAINTED.jojoOw&&PAINTED.jojoOw.ready,has:n=>!!B.rects[n],
     draw(name,x,y,hs,faceLeft=true,alpha=1) { const R=B.rects[name]; if(!ready||!R) return false;
-      return blit(img,R,B.k,x,y,hs/BT_STAND,(FACES[name]==='L')!==!!faceLeft,alpha); },
-    drawOw(name,x,y,hs,faceLeft=true,alpha=1) { const W=B.rects['w_'+name]; if(ready&&W) return blit(img,W,B.k,x,y,hs/BT_STAND,!!faceLeft,alpha);   // battle atlas has the walk row with the battle head
-      const A=PAINTED.jojoOw; if(!A||!A.ready||!A.rects[name]) return false;
-      return blit(A.img,A.rects[name],A.k,x,y,hs/OW_STAND,!!faceLeft,alpha); }};
+      return blit(img,R,B.k,x,y,hs/BT_STAND,(FACES[name]==='L')!==!!faceLeft,alpha); }};
 })();

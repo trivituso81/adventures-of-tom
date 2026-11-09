@@ -1548,8 +1548,8 @@ const jojo=(x,y,t,ph)=>{ // stand-in while the painted frames load. ph: 'walk' |
   else { RO(-20,-40,8,14,'#f1c9a4'); RO(12,-40,8,14,'#f1c9a4'); }
   gfx.restore(); };
 const disc=(x,y,sc)=>{ if(PROPART.draw('tnb/flying_disc',x,y,{w:30*sc})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,sc); EO(0,0,14,5,'#ff6a3c'); E(0,-1,9,3,'#ff8a5c'); gfx.restore(); };
-// Where Jojo's reaching hand is in her painted b_release frame (facing right), as fractions of her standing height hs from her feet.
-const JOJO_HAND={dx:.335,dy:.64};
+// Where Jojo's reaching hand is in her painted b_lunge frame (facing right), as fractions of her standing height hs from her feet.
+const JOJO_HAND={dx:.414,dy:.72};
 // Cartoon crash cloud: a small lumpy dust ball with stars that pops out fast and thins away. q is 0 to 1.
 const crashCloud=(x,y,r0,q)=>{ const g=ez(cl(q/.3)),a=q<.55?1:Math.max(0,1-(q-.55)/.45),r=r0*(.55+.55*g),a0=gfx.globalAlpha; gfx.globalAlpha=a;
   const pf=[]; for(let k=0;k<9;k++) { const an=k/9*Math.PI*2+.4+q*.5,d=r*(k%2?.62:.5); pf.push([x+Math.cos(an)*d*1.2,y+Math.sin(an)*d*.85,r*(.36+((k*37)%10)/55),k%3?'#f6f2e8':'#e2ddd0']); }
@@ -1557,19 +1557,19 @@ const crashCloud=(x,y,r0,q)=>{ const g=ez(cl(q/.3)),a=q<.55?1:Math.max(0,1-(q-.5
   for(const [px,py,pr,c] of pf) E(px,py,pr,pr*.9,c); E(x,y,r*.52,r*.46,'#fbf8f0');
   for(let k=0;k<5;k++) { const an=k*1.26+q*4,d=r*(.95+g*.8),sx=x+Math.cos(an)*d*1.2,sy=y+Math.sin(an)*d*.8,R2=5+(k%2)*2; PO([[sx,sy-R2*1.6],[sx+R2*.5,sy-R2*.5],[sx+R2*1.6,sy],[sx+R2*.5,sy+R2*.5],[sx,sy+R2*1.6],[sx-R2*.5,sy+R2*.5],[sx-R2*1.6,sy],[sx-R2*.5,sy-R2*.5]],GOLD,1); }
   gfx.globalAlpha=a0; };
-SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P,hs=P.hs,y=P.y,walk=['right_step1','right_stand','right_step2','right_stand'],stp=walk[Math.floor(s.t*(ms>=P.go&&ms<P.catch?9:5))%4];
+SC.t6_jojo=(s,u)=>{ const ms=s.t*1000,P=s.P,hs=P.hs,y=P.y,walk=['b_breath','b_ready','b_breath','b_ready'],stp=walk[Math.floor(s.t*(ms>=P.go&&ms<P.catch?9:5))%4];
   gfx.globalAlpha=1; let x,dy=0,held=false;
   if(ms>=P.catch&&ms<P.catch+650) crashCloud(P.cx-hs*.18,P.y-hs*.26,hs*.4,(ms-P.catch)/650);   // behind her, over the monster
   const J=typeof JOJO_BT!=='undefined'&&JOJO_BT.ready();
-  if(ms<P.in) { x=lerp(P.x0,P.xs,ez(ms/P.in)); if(J) JOJO_BT.drawOw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,true); else jojo(x,y,s.t,'walk'); }                  // wanders in, facing left
-  else if(ms<P.go) { x=P.xs; if(J) JOJO_BT.drawOw('right_stand',x,y-Math.sin(s.t*1.3)*1.2,hs,false); else jojo(x,y,s.t,'aim'); }                                    // turns to TNB
+  if(ms<P.in) { x=lerp(P.x0,P.xs,ez(ms/P.in)); if(J) JOJO_BT.draw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,true); else jojo(x,y,s.t,'walk'); }                  // wanders in, facing left
+  else if(ms<P.go) { x=P.xs; if(J) JOJO_BT.draw('b_ready',x,y-Math.sin(s.t*1.3)*1.2,hs,false); else jojo(x,y,s.t,'aim'); }                                    // turns to TNB
   else if(ms<P.catch) { const q=(ms-P.go)/(P.catch-P.go); x=lerp(P.xs,P.cx,q); dy=-Math.abs(Math.sin(s.t*9*Math.PI/2))*3;                                         // runs backward: moving left, facing right
-    if(J) { if(ms>=P.catch-260) JOJO_BT.draw('b_release',x,y+dy,hs,false); else JOJO_BT.drawOw(stp,x,y+dy,hs,false); } else jojo(x,y+dy,s.t,'walk'); }
+    if(J) { if(ms>=P.catch-260) JOJO_BT.draw('b_lunge',x,y+dy,hs,false); else JOJO_BT.draw(stp,x,y+dy,hs,false); } else jojo(x,y+dy,s.t,'walk'); }
   else if(ms<P.catch+380) { const q=cl((ms-P.catch)/380); x=P.cx+ez(q)*P.bump; dy=-Math.sin(q*Math.PI)*8; held=true;                                                       // caught it, bumped into the row, stumbles back
-    if(J) JOJO_BT.draw('b_follow',x,y+dy,hs,false); else jojo(x,y+dy,s.t,'thumb'); }
+    if(J) JOJO_BT.draw('b_spread',x,y+dy,hs,false); else jojo(x,y+dy,s.t,'thumb'); }
   else if(ms<P.out) { x=P.cx+P.bump; const hop=ms<P.catch+1100?-Math.abs(Math.sin((ms-P.catch-380)/110))*10:0;                                                       // cheers, then a high-five
-    if(J) JOJO_BT.draw(ms<P.catch+1100?'b_celeb2':'b_high',x,y+hop,hs,true); else jojo(x,y+hop,s.t,'thumb'); }
-  else { x=lerp(P.cx+P.bump,P.x0,ez(cl((ms-P.out)/(P.gone-P.out)))); held=true; if(J) JOJO_BT.drawOw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,false); else jojo(x,y,s.t,'walk'); }   // walks back toward TNB with the frisbee
+    if(J) JOJO_BT.draw(ms<P.catch+1100?'b_cheer':'b_power',x,y+hop,hs,true); else jojo(x,y+hop,s.t,'thumb'); }
+  else { x=lerp(P.cx+P.bump,P.x0,ez(cl((ms-P.out)/(P.gone-P.out)))); held=true; if(J) JOJO_BT.draw(stp,x,y-Math.abs(Math.sin(s.t*10))*2,hs,false); else jojo(x,y,s.t,'walk'); }   // walks back toward TNB with the frisbee
   if(held&&ms<P.catch+380) disc(x+hs*JOJO_HAND.dx,y+dy-hs*JOJO_HAND.dy,1.1);
   else if(held) disc(x+hs*.2,y-hs*.42,1.0);
   if(ms>P.giggle&&ms<P.giggle+600) label('HEH',x+20,y-hs-10,CREAM,1); s.x=x; };
